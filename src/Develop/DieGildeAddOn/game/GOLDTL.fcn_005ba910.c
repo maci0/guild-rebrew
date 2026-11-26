@@ -28,7 +28,7 @@ int __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl fcn_005974e0(int, int);
 int __cdecl fcn_00597940(int, int, int, int, int);
 int __cdecl fcn_00505340(int);
-int __cdecl fcn_005ba020(int, int);
+int __cdecl gm_CanTradeWithObject(int, int);
 void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_00469880(int);
 void __cdecl fcn_0046f280(int);
@@ -43,8 +43,8 @@ int __cdecl fcn_00466330(int, int);
 int __cdecl fcn_0050ddf0(int, int);
 void __cdecl fcn_0051af00(int, int, ...);
 int __cdecl cm_BeginPacketFieldDelta(char*, int);
-int __cdecl fcn_004c4700(int, int, int, void*);
-void __cdecl fcn_004c53a0(void);
+int __cdecl cm_AppendCommandSyncField(int, int, int, void*);
+void __cdecl cm_SendSetAttribute(void);
 void __cdecl fcn_00533a40(int);
 int __cdecl fcn_0046f9b0(int, int);
 int __cdecl fcn_00471af0(int, int);
@@ -67,25 +67,25 @@ void __cdecl io_ClearInputState(void);
 int __cdecl fcn_00526120(int, int);
 int __cdecl gm_CheckInventoryCapacity(char*, int, int);
 int __cdecl gm_AddTime(int, int, int, int);
-int __cdecl fcn_00500d60(int, int);
-int __cdecl fcn_004c5150(int, int, char, int);
-int __cdecl fcn_004c51f0(int, int, int, int, int, int);
-int __cdecl fcn_004c5ba0(int, int, int, int);
-int __cdecl fcn_004c5530(int);
+int __cdecl gm_PackGameTime(int, int);
+int __cdecl cm_RequestMoveCredits(int, int, char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
+int __cdecl cm_RequestChrWalkToDummy(int, int, int, int);
+int __cdecl cm_SendCopyEntityData(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl sb_PlayVoice(int, int, int, int, int, int, int);
 int __cdecl gm_CheckEntityStock(int, int, int);
 int __cdecl fcn_00471e30(int);
 void __cdecl fcn_005c61c0(void);
-int __cdecl fcn_005b9cb0(int, int);
-int __cdecl fcn_005b9df0(int, int, int, int);
-void __cdecl fcn_005b9fb0(int);
+int __cdecl d2_SellObjectsDialog(int, int);
+int __cdecl cm_DispatchCartTransfer(int, int, int, int);
+void __cdecl cm_CompleteAction0x0f(int);
 int __cdecl d2_ShowNewCartDialog(int);
 void __cdecl fcn_005af160(int, float, int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
-int __cdecl fcn_004c52d0(int, int);
+int __cdecl cm_RequestClearLagerslot(int, int);
 int __cdecl fcn_005bdc30(int, int, int, int, int);
 int __cdecl gm_CheckEntityType(int);
 int __cdecl fcn_004c35f0(void);
@@ -563,7 +563,7 @@ l_sel:
 				if (fcn_00505340(buildingArg) == 0) {
 					goto l_next;
 				}
-				if (fcn_005ba020(buildingArg, idx) != 0) {
+				if (gm_CanTradeWithObject(buildingArg, idx) != 0) {
 					goto l_next;
 				}
 			}
@@ -608,7 +608,7 @@ l_next:
 		}
 		d2_SetForm(f.v2c, 2);
 		if (fcn_00505340(buildingArg) != 0) {
-			if (fcn_005ba020(buildingArg, f.v20) == 0) {
+			if (gm_CanTradeWithObject(buildingArg, f.v20) == 0) {
 				goto l_fill_next;
 			}
 		}
@@ -760,8 +760,8 @@ l_slot:
 		    (signed char) (((int) (*(signed char*) (idx + 0x28)) + 1) % 3);
 		((char*) &f.v5c)[3] = *(signed char*) (idx + 0x28);
 		cm_BeginPacketFieldDelta((char*) idx, *(int*) (idx + 2));
-		fcn_004c4700(1, 1, 0x28, (void*) (((char*) &f.v5c) + 3));
-		fcn_004c53a0();
+		cm_AppendCommandSyncField(1, 1, 0x28, (void*) (((char*) &f.v5c) + 3));
+		cm_SendSetAttribute();
 	}
 l_slot_handles:
 	/* 0x5bb937: item handle, selection frame and the list of owned rows */
@@ -1178,7 +1178,7 @@ l_5bc453:
 			if (idx == 0 || j == 0) {
 				continue;
 			}
-			fcn_004c51f0(*(int*) (f.v18 + 2),
+			cm_SendSellObjekt(*(int*) (f.v18 + 2),
 			             *(int*) (*(int*) 0x775318 + 4), slot, j, f.v34,
 			             (int) (*(float*) &f.v8c));
 			fcn_00472380(*(int*) i, 0, 0x64, 0);
@@ -1269,7 +1269,7 @@ l_5bc700:
 		if (j == 0) {
 			continue;
 		}
-		fcn_004c51f0(*(int*) (h + 2),
+		cm_SendSellObjekt(*(int*) (h + 2),
 		             *(int*) (*(int*) 0x775318 + 4), slot, j, f.v34,
 		             (int) (*(float*) &f.v84));
 		fcn_00472380(*(int*) idx, 0, 0x64, 0);
@@ -1321,7 +1321,7 @@ l_5bc8d0:
 		fcn_0057e880(0x26, (char*) f.v14, 0, slot_value);
 	}
 	if (idx > 0) {
-		fcn_004c51f0(*(int*) (f.v18 + 2), *(int*) (f.v98 + 2), slot_value, idx,
+		cm_SendSellObjekt(*(int*) (f.v18 + 2), *(int*) (f.v98 + 2), slot_value, idx,
 		             f.v34, (int) ((float) f.v10 * *(float*) &f.v64));
 	}
 	if (*(float*) &f.v64 != 1.0 && idx > 0) {
@@ -1418,7 +1418,7 @@ l_5bcb82:
 		if (i <= 0) {
 			continue;
 		}
-		fcn_004c51f0(*(int*) (0x7f4ca4
+		cm_SendSellObjekt(*(int*) (0x7f4ca4
 		                      + *(unsigned short*) 0x774970 * 0x21c),
 		             slot_value, *(int*) (h + 2), i, f.v34, 0);
 		fcn_00472380(j, 0, 0x64, 0);
@@ -1497,11 +1497,11 @@ l_5bcd9a:
 			}
 			j = d2_GetControlValue(*(int*) idx);
 			if (j > 0) {
-				fcn_004c51f0(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
+				cm_SendSellObjekt(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
 				             (int) (g_773d75), 0);
 				fcn_00472380(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
 			} else if (j < 0) {
-				fcn_004c52d0(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
+				cm_RequestClearLagerslot(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
 			}
 		}
 		for (idx = 0x778db0; idx < 0x779130; idx += 0x38) {
@@ -1510,11 +1510,11 @@ l_5bcd9a:
 			}
 			j = d2_GetControlValue(*(int*) idx);
 			if (j > 0) {
-				fcn_004c51f0(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
+				cm_SendSellObjekt(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
 				             (int) (g_773d75), 0);
 				fcn_00472380(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
 			} else if (j < 0) {
-				fcn_004c52d0(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
+				cm_RequestClearLagerslot(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
 			}
 		}
 		goto l_5bd632;
@@ -1541,7 +1541,7 @@ l_5bcd9a:
 				if (i <= 0) {
 					continue;
 				}
-				fcn_004c51f0(-1, *(int*) (h + 2), slot_value, i,
+				cm_SendSellObjekt(-1, *(int*) (h + 2), slot_value, i,
 				             (int) (g_773d75), 0);
 				fcn_00472380(j, 0,
 				             ((int*) (f.v15C + 0x64))[f.v24], 0);
@@ -1606,8 +1606,8 @@ l_5bcf9f:
 			}
 			fcn_004c35f0();
 		l_5bd135:
-			fcn_005b9fb0((int) e->f00);
-			f.v10 += fcn_005b9df0((int) (*(unsigned short*) 0x774970),
+			cm_CompleteAction0x0f((int) e->f00);
+			f.v10 += cm_DispatchCartTransfer((int) (*(unsigned short*) 0x774970),
 			                      (int) e->f00, modeFlags, idx);
 		}
 		goto l_5bd240;
@@ -1635,8 +1635,8 @@ l_5bd177:
 			}
 			fcn_004c35f0();
 		l_5bd207:
-			fcn_005b9fb0((int) e->f00);
-			f.v10 += fcn_005b9df0((int) (*(unsigned short*) 0x774970),
+			cm_CompleteAction0x0f((int) e->f00);
+			f.v10 += cm_DispatchCartTransfer((int) (*(unsigned short*) 0x774970),
 			                      (int) e->f00, modeFlags, idx);
 		}
 
@@ -1682,7 +1682,7 @@ l_5bd26b:
 		f.vB8 = *(int*) 0x7f4c00;
 		*(short*) &f.vC4 = *(short*) 0x7f4c0c;
 		gm_AddTime((int) &f.vB8, 0, f.vCC * 4, 0);
-		fcn_00500d60((int) &f.vB8, (int) &f.vC8);
+		gm_PackGameTime((int) &f.vB8, (int) &f.vC8);
 		fcn_0051af00((int) (f.v210 + 0x348), 0xdd, f.v20, f.v24,
 		             (int) ((signed char*) &f.vC8)[0],
 		             (int) ((signed char*) &f.vC8)[1],
@@ -1695,7 +1695,7 @@ l_5bd26b:
 		                f.v20, (int) g_773d75) == 0) {
 			goto l_5bd632;
 		}
-		fcn_004c5150(-1,
+		cm_RequestMoveCredits(-1,
 		             *(int*) (0x7f4ca4
 		                      + *(unsigned short*) 0x774970 * 0x21c),
 		             (char) f.v34, f.v20);
@@ -1721,7 +1721,7 @@ l_5bd26b:
 				*(int*) (f.v210 + 0xd4) = 1;
 				*(int*) (f.v210 + 0xac) =
 					0x64 - *(unsigned char*) (e->f00 + 0x12);
-				fcn_004c5530((int) (f.v210 + 0x50));
+				cm_SendCopyEntityData((int) (f.v210 + 0x50));
 			}
 			e++;
 		} while (--f.v1c != 0);
@@ -1758,7 +1758,7 @@ l_5bd26b:
 				break;
 			}
 		}
-		fcn_005b9cb0(i, (int) (f.v210 + 0x448));
+		d2_SellObjectsDialog(i, (int) (f.v210 + 0x448));
 	}	}
 
 

@@ -16,7 +16,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00423460(int);
+int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 
 void __cdecl fcn_004b5530(int a1, int flags)
@@ -43,6 +43,6 @@ void __cdecl fcn_004b5530(int a1, int flags)
 	}
 	if (h != -1)
 		fcn_00471e30(h);
-	if (fcn_00423460(x) != 0)
+	if (sb_CheckVoicePlaying(x) != 0)
 		sb_StopVoice(x, 0x19);
 }

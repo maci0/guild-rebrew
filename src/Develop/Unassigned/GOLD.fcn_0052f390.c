@@ -4,7 +4,7 @@
 void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
 int __cdecl d3_FindSceneObjectByName(int, int);
-char __cdecl fcn_00442c00(char*, char);
+char __cdecl d3_SetObjectVisible(char*, char);
 char* __cdecl fcn_00446e10(char*, float*, float*, char*);
 void __cdecl fcn_00453270(char*);
 int __cdecl fcn_00474b20(int, int, int);
@@ -36,7 +36,7 @@ char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
         return 0;
     }
     if (parent != 0) {
-        fcn_00442c00(object, 0);
+        d3_SetObjectVisible(object, 0);
         *(char**)(book + 4) = *(char**)book;
         object = *(char**)book;
         *(char**)book = fcn_00446e10(*(char**)(object + 0x1f8), (float*)(object + 0x4c), (float*)(object + 0x84), parent);

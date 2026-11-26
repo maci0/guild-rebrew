@@ -1,5 +1,5 @@
 int __cdecl fcn_004c6ae0(unsigned int, int);
-int __cdecl fcn_004c5530(void *);
+int __cdecl cm_SendCopyEntityData(void *);
 
 /* ADDRESS: GOLDTL 0x00496480 */
 int __cdecl fcn_00496480(int *a, unsigned char *b)
@@ -12,6 +12,6 @@ int __cdecl fcn_00496480(int *a, unsigned char *b)
     t[0x36] = 1;
     t[0x04] = 0x60;
     t[0x5a] = b[4];
-    fcn_004c5530(t);
+    cm_SendCopyEntityData(t);
     return 5;
 }

@@ -2,7 +2,7 @@ extern char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_0050d320(char* entity, char season);
-void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
+void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 void __cdecl he_FreeAction(void* u);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
 
@@ -27,7 +27,7 @@ void __cdecl fcn_0057a180(char* action)
 	if (entity != 0) {
 		count = fcn_0050d320(entity, g_773d75);
 		if (count > *(int*) (action + 0xac)) {
-			fcn_004c5150(-1, *(int*) (entity + 4), g_773d75, *(int*) (action + 0xac));
+			cm_RequestMoveCredits(-1, *(int*) (entity + 4), g_773d75, *(int*) (action + 0xac));
 			he_FreeAction(action);
 			return;
 		}

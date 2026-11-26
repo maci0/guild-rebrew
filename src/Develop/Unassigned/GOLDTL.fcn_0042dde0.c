@@ -24,7 +24,7 @@ extern g_662318_f g_662318;
 void __stdcall fcn_0042dcd0(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long);
 void __cdecl fcn_0064d3eb(unsigned int);
 
-int __cdecl fcn_0042dde0(unsigned int delay, int oneshot)
+int __cdecl tb_StartTimer(unsigned int delay, int oneshot)
 {
 	g_662324(g_1052c48, 8);
 	g_662320(g_1052c48[0] + 5);

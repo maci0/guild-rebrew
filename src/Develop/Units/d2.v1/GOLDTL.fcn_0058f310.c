@@ -37,11 +37,11 @@ typedef struct F8 {
 } F8;
 /* SIZE 0x8 */
 int __cdecl fcn_004a5e60(char*, int, F8, int, float, int*);
-int __cdecl fcn_004c5530(void*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendCopyEntityData(void*);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
 /* ADDRESS: GOLDTL 0x0058f310 */
@@ -139,8 +139,8 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 						    100.0f, &flag);
 						*(int*) (req + 0x58) = flag;
 					}
-					id = fcn_004c5530(req);
-					while (id != -1 && fcn_004c4450(id) == 0) {
+					id = cm_SendCopyEntityData(req);
+					while (id != -1 && cm_GetCommandStatus(id) == 0) {
 						main_RunFrameLoop(0, 0x20007);
 					}
 					main_LoopFlags = 0x677c7;
@@ -153,7 +153,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowHauntingDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 	return fcn_00532ef0();
 }

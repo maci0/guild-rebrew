@@ -34,7 +34,7 @@ struct msg {
 
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 
 void __cdecl he_RestartAction0xa6(void)
 {
@@ -50,5 +50,5 @@ void __cdecl he_RestartAction0xa6(void)
 	req_msg.b36 = 1;
 	req_msg.f8 = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id;
 	req_msg.pos = gm_GameTime;
-	fcn_004c5530(&req_msg);
+	cm_SendCopyEntityData(&req_msg);
 }

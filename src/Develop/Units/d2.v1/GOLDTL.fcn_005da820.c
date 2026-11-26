@@ -37,7 +37,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl fcn_004f61c0(int* ids, int* b, int* c, short kind);
-int __cdecl fcn_005ca560(Row* r);
+int __cdecl d2_BuildPersonStatusDesc(Row* r);
 void __cdecl fcn_005ca740(int, int, int, int, Row*, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_005c9160(char*, int, int, int, int);
@@ -94,7 +94,7 @@ int __cdecl fcn_005da820(char* e, char* request)
 			rows[count].who = who;
 			rows[count].a = c[i];
 			rows[count].b = b[i];
-			fcn_005ca560(&rows[count]);
+			d2_BuildPersonStatusDesc(&rows[count]);
 			rows[count].shown = 1;
 			count++;
 		}

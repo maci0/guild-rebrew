@@ -9,7 +9,7 @@ extern float g_664198;
 int __cdecl gm_GetGuildHall(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int, unsigned char);
-float __cdecl fcn_004fc460(char*);
+float __cdecl gm_GetCityStatsSummary(char*);
 int __cdecl gm_RandomMod(int);
 int __cdecl ai_SelectBestMethod(int, int, int, void*, void*);
 int __cdecl fcn_0050d170(int);
@@ -47,7 +47,7 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 	}
 	r = fcn_00502cd0(*(int*) (r + 0x5d), 2, 6, 0, 0x115);
 	a0 = fcn_0050b810(*(int*) (r + 0x14), g_773d75);
-	fcn_004fc460((char*) buf);
+	gm_GetCityStatsSummary((char*) buf);
 	prot = lpGebaeudePROT;
 	e = lpGebaeudeINST;
 	a2 = 0x100;

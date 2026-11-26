@@ -61,7 +61,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_004c5530(Packet*);
+int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -124,7 +124,7 @@ int __cdecl fcn_005af7f0(int unused, char* str)
 					}
 				}
 				if (n != 0) {
-					fcn_004c5530(&pkt);
+					cm_SendCopyEntityData(&pkt);
 					cm_ExProdObjekt();
 				}
 				g_774654 = 2;

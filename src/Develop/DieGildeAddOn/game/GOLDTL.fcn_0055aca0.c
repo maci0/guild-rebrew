@@ -32,8 +32,8 @@ typedef struct {
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl he_FreeAction(Ent *);
-int __cdecl fcn_004c4450(int);
-int __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+int __cdecl cm_GetCommandResult(int);
 void __cdecl fcn_004e97f0(int, int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP *, int, int, int);
 int __cdecl fcn_004c5620(int, Ent *);
@@ -53,7 +53,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 	if (e->flags & 4) {
 		return;
 	}
-	if (e->wait != -1 && fcn_004c4450(e->wait) == 0) {
+	if (e->wait != -1 && cm_GetCommandStatus(e->wait) == 0) {
 		return;
 	}
 	e->wait = -1;
@@ -88,10 +88,10 @@ void __cdecl fcn_0055aca0(Ent *e)
 	case 1:
 		n = 0;
 		if (e->b4 != -1) {
-			r = fcn_004c4450(e->b4);
+			r = cm_GetCommandStatus(e->b4);
 			if (r == 1) {
 				n++;
-				r = fcn_004c4480(e->b4);
+				r = cm_GetCommandResult(e->b4);
 				fcn_004e97f0(r, e->ac);
 				e->b4 = -1;
 			} else if (r == 2) {
@@ -102,10 +102,10 @@ void __cdecl fcn_0055aca0(Ent *e)
 			n++;
 		}
 		if (e->b8 != -1) {
-			r = fcn_004c4450(e->b8);
+			r = cm_GetCommandStatus(e->b8);
 			if (r == 1) {
 				n++;
-				r = fcn_004c4480(e->b8);
+				r = cm_GetCommandResult(e->b8);
 				fcn_004e97f0(r, e->ac);
 				e->b8 = -1;
 			} else if (r == 2) {

@@ -22,7 +22,7 @@ typedef struct S55cc80Packet {
 #pragma pack(pop)
 #include "client_data.h"
 extern int g_7746d4;
-int __cdecl fcn_00500cb0(char*, char*);
+int __cdecl gm_CompareGameTime(char*, char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl fcn_005101e0(char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
@@ -30,10 +30,10 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c6090(char*, int, int, int);
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 int __cdecl gm_RandomMod(int);
@@ -55,7 +55,7 @@ void __cdecl fcn_0055cc80(char* self)
 	state = *(int*) (self + 0x70);
 	switch (state) {
 	case 1:
-		if (fcn_00500cb0(self + 0x52, (char*) &gm_GameTime) >= 0) {
+		if (gm_CompareGameTime(self + 0x52, (char*) &gm_GameTime) >= 0) {
 			return;
 		}
 		packet = (S55cc80Packet*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10));
@@ -95,10 +95,10 @@ void __cdecl fcn_0055cc80(char* self)
 		*(int*) (self + 0x70) = state;
 		return;
 	case 2:
-		if (fcn_004c4450(*(int*) (self + 0xb8)) == 0) {
+		if (cm_GetCommandStatus(*(int*) (self + 0xb8)) == 0) {
 			return;
 		}
-		answer = (unsigned short*) fcn_004c4480(*(int*) (self + 0xb8));
+		answer = (unsigned short*) cm_GetCommandResult(*(int*) (self + 0xb8));
 		if (answer == 0) {
 			fcn_00545d40(*(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), -1, (char*) 0x6a628c, 0, 0x5f8, 0);
 			he_FreeAction(self);
@@ -112,7 +112,7 @@ void __cdecl fcn_0055cc80(char* self)
 			return;
 		}
 		proto = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[packet->idx0];
-		q = fcn_004c4480(*(int*) (self + 0xb8));
+		q = cm_GetCommandResult(*(int*) (self + 0xb8));
 		job = ((unsigned char*)proto)[0x223 + *(unsigned char*)(self + 0xac)];
 		*(unsigned char*) (q + 0x164) = job;
 		*(unsigned char*) (q + 0x165) = 0;
@@ -127,7 +127,7 @@ void __cdecl fcn_0055cc80(char* self)
 				io_FormatTextBuffer(buf, 0x1bb1, t, (unsigned int)answer[0], (char*) packet);
 				he_MessageBoxQuickjump(*(int*)((unsigned long)&g_7f4ca4+(*(unsigned short*)(self+8)) * 0x21c), packet->handle, buf, 0, 0x5f2, packet->handle, *(int*)(self+0xb4), 0, 0x6a6278);
 			}
-			fcn_004c51a0(*(int*) (answer + 2), *(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(unsigned char*) &g_773d75, t);
+			cm_RequestTransferCurrencyNoKill(*(int*) (answer + 2), *(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), *(unsigned char*) &g_773d75, t);
 			break;
 		}
 		t = *(int*) (self + 0xb4);

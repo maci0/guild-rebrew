@@ -10,7 +10,7 @@ int __cdecl gm_RandomMod(int);
 void __cdecl he_FreeAction(char*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(char, char*);
 
@@ -58,7 +58,7 @@ void __cdecl fcn_0055a920(char* rec)
 		    *(unsigned char*)&((ENTITY_RECORD_VIEW*)slot)->side == *(int*) (rec + 0xb4)) {
 			cm_BeginPacketFieldDelta(slot, *(int*)&((ENTITY_RECORD_VIEW*)slot)->entity_id);
 			cm_AppendPacketFieldDelta(1, 1, 0xc, (char*) &flag);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			cnt++;
 		}
 		si = (unsigned short) ((si + 1) % 0x300);

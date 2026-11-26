@@ -21,7 +21,7 @@ extern __int64 g_666018;
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl gm_ObjSetEntityFlag0x100000(char* e, char* action)
 {
@@ -46,6 +46,6 @@ int __cdecl gm_ObjSetEntityFlag0x100000(char* e, char* action)
 	if (r == 0) {
 		return 0;
 	}
-	fcn_004c5420(*(int*) (r + 4), 0x1cc, 4, 0x100000, 0);
+	cm_RequestChangeBits(*(int*) (r + 4), 0x1cc, 4, 0x100000, 0);
 	return 1;
 }

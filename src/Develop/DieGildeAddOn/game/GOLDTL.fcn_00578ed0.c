@@ -9,7 +9,7 @@ extern int __cdecl fcn_0050b710(int, unsigned char);
 extern int __cdecl gm_RandomMod(int);
 extern void __cdecl he_AcceptDeathPactPayment(char*, char*);
 extern void __cdecl he_DeclineDeathPactPayment(char*, char*);
-extern void __cdecl fcn_004c5530(char*);
+extern void __cdecl cm_SendCopyEntityData(char*);
 extern void __cdecl he_FreeAction(char*);
 extern void __cdecl gm_AddTime(char*, int, int, int);
 
@@ -123,7 +123,7 @@ found_one:
 						msg.f58 = *(int*) (event + 0xc);
 						msg.f5c = *(int*) (event + 0xac);
 						msg.f64 = ref;
-						fcn_004c5530((char*) &msg);
+						cm_SendCopyEntityData((char*) &msg);
 					} else {
 						req.a = *(int*) (event + 0xc);
 						req.b = *(int*) (event + 0xac);

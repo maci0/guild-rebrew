@@ -12,7 +12,7 @@ extern unsigned int g_aed204;
 #include "client_types.h"
 extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
-int __cdecl fcn_004c44c0(void)
+int __cdecl cm_AreQueuedCommandsDone(void)
 {
 	unsigned int i;
 	unsigned int end;

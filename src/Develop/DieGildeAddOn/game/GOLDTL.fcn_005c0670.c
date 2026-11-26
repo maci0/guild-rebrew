@@ -23,7 +23,7 @@ int __cdecl fcn_005cd440(Req*, char*, int, void*);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_005c02a0(void);
 
-void __cdecl fcn_005c0670(void)
+void __cdecl d2_OpenPaymentTargetPicker(void)
 {
 	Req req;
 	char text[0x100];

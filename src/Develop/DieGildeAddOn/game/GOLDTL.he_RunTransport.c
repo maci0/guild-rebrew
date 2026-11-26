@@ -30,15 +30,15 @@ char *__cdecl gm_FindRecordById(int);
 char *__cdecl gm_SearchTable67(int);
 void __cdecl gm_ResolveEntityById(int, void *, int, int);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl fcn_004c5620(int, char *);
 char *__cdecl gm_GetChainNodeAtIndex(int, int);
 int __cdecl fcn_004c0240(void *, char);
 int __cdecl fcn_004c0460(void *, char);
-void __cdecl fcn_004c5790(int, void *);
+void __cdecl cm_RequestSysMessage(int, void *);
 void __cdecl fcn_004c6530(int);
 int __cdecl gm_AddTime(char *, int, int, int);
-int __cdecl fcn_00500cb0(char *, int);
+int __cdecl gm_CompareGameTime(char *, int);
 char *__cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_GetBuildingTechEffect(char *, int, int);
 void __cdecl gm_ChangeObjektZustand(char *, int);
@@ -72,7 +72,7 @@ void __cdecl he_RunTransport(char *e)
 	pos14_7f4c00 stamp;
 
 	if ((*(unsigned char *)(e + 0x78) & 2) && (n = *(int *)(e + 0x84)) != -1) {
-		if (!fcn_004c4450(n)) {
+		if (!cm_GetCommandStatus(n)) {
 			return;
 		}
 		*(int *)(e + 0x84) = -1;
@@ -102,15 +102,15 @@ void __cdecl he_RunTransport(char *e)
 			break;
 		}
 		r = e + 0x52;
-		if (fcn_00500cb0(r, (int) &gm_GameTime) >= 0) {
+		if (gm_CompareGameTime(r, (int) &gm_GameTime) >= 0) {
 			break;
 		}
 		n = *(int *)(e + 0xec);
-		if (n != -1 && !fcn_004c4450(n)) {
+		if (n != -1 && !cm_GetCommandStatus(n)) {
 			break;
 		}
 		n = *(int *)(e + 0xec);
-		if (n != -1 && fcn_004c4450(n) == 2) {
+		if (n != -1 && cm_GetCommandStatus(n) == 2) {
 			goto ret_minus1;
 		}
 		n = *(int *)(e + 0xc8);
@@ -177,14 +177,14 @@ void __cdecl he_RunTransport(char *e)
 			break;
 		}
 		n = *(int *)(e + 0xec);
-		if (n == -1 || fcn_004c4450(n)) {
+		if (n == -1 || cm_GetCommandStatus(n)) {
 			*(int *)(e + 0xec) = -1;
 			gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
 			stamp = gm_GameTime;
 			gm_AddTime((char *)&stamp, 0, 0, 1);
 			r = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
 			v = *(int *)(r + 1);
-			fcn_004c5790(4, &v);
+			cm_RequestSysMessage(4, &v);
 			if (g_7746c4 == r || g_7746c8 == r) {
 				sb_PlayVoice(g_7747cc, g_6a63dc, 1, 0x3f, 0x7f, 0, 0);
 			}

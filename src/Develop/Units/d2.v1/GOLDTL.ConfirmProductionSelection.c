@@ -48,7 +48,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_004c5530(Packet*);
+int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -112,7 +112,7 @@ int __cdecl ConfirmProductionSelection(int unused, char* a)
 					for (; n < 4; n++) {
 						pkt.ids[n] = -1;
 					}
-					fcn_004c5530(&pkt);
+					cm_SendCopyEntityData(&pkt);
 					cm_ExProdObjekt();
 				}
 				sv_ClearObjectSelection();

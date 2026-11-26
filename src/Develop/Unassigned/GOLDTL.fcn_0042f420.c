@@ -15,7 +15,7 @@ typedef struct Node {
 	char flag;
 } Node;
 
-char* __cdecl fcn_0042f420(Node* n, Node* stop, char* out)
+char* __cdecl vfs_BuildDirPath(Node* n, Node* stop, char* out)
 {
 	char tmp[0x100];
 	Node* p;

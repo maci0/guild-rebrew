@@ -29,12 +29,12 @@ void __cdecl fcn_00595e20(void* obj, int packet);
 void __cdecl fcn_005963f0(int dlg, int a, int b, void* obj);
 int __cdecl main_RunFrameLoop(void* fn, int key);
 void __cdecl sv_ClearObjectSelection(void);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl fcn_00471e30(int dlg);
-int __cdecl fcn_004c5530(char* msg);
+int __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl fcn_004c35f0(void);
-int __cdecl fcn_004c4450(int handle);
-void __cdecl fcn_004c4480(int handle);
+int __cdecl cm_GetCommandStatus(int handle);
+void __cdecl cm_GetCommandResult(int handle);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00526120(char* buf, int flag);
 void __cdecl fcn_00532ef0(void);
@@ -191,11 +191,11 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 					if (j != 0) {
 						fcn_004c35f0();
 						sv_ClearObjectSelection();
-						h = fcn_004c5530(pkt);
-						while (fcn_004c4450(h) == 0) {
+						h = cm_SendCopyEntityData(pkt);
+						while (cm_GetCommandStatus(h) == 0) {
 							main_RunFrameLoop(0, 0x20007);
 						}
-						fcn_004c4480(h);
+						cm_GetCommandResult(h);
 					} else {
 						fcn_00526120((char*) *(int*) 0x14ab324, 4);
 					}
@@ -207,7 +207,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 		}
 	}
 	sv_ClearObjectSelection();
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 }

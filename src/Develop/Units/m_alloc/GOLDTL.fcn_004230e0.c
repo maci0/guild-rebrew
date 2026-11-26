@@ -5,7 +5,7 @@ extern char g_14cbae0[];
 extern char g_678f70[]; /* Unloading Samplebank %s ... MemUsed before unloading %d bytes. */
 extern char g_678f28[]; /* Finished unloading Samplebank %s ... MemUsed after unloading %d bytes. */
 
-char* __cdecl fcn_00422760(int, int*);
+char* __cdecl sb_FindVoiceBySample(int, int*);
 void __cdecl sb_StopVoice(char*, int);
 void __cdecl m_FreeTracked(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -59,12 +59,12 @@ found:
 		do {
 			if (*(int*) (*(char**) (bank + 0x138) + i * 0x40 + 0x38) != 0) {
 				*(int*) &a0 = 0;
-				s = fcn_00422760(*(char**) (bank + 0x138) + i * 0x40, (int*) &a0);
+				s = sb_FindVoiceBySample(*(char**) (bank + 0x138) + i * 0x40, (int*) &a0);
 				while (s != 0) {
 					sb_StopVoice(s, 0);
 					*(int*) (s + 4) = 0;
 					(*(int*) &a0)++;
-					s = fcn_00422760(*(char**) (bank + 0x138) + i * 0x40, (int*) &a0);
+					s = sb_FindVoiceBySample(*(char**) (bank + 0x138) + i * 0x40, (int*) &a0);
 				}
 				if (*(char*) (*(char**) (bank + 0x138) + i * 0x40 + 0x36) == 1) {
 					MemUsed += -12 - *(int*) (*(char**) (*(char**) (bank + 0x138) + i * 0x40 + 0x38) + 4);

@@ -5,13 +5,13 @@ extern unsigned short g_7f3ee4;
 extern int g_90d520[];
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 unsigned short __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_00500cb0(char*, int);
+int __cdecl gm_CompareGameTime(char*, int);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_005039e0(int);
+void __cdecl gm_CollectTradeItemsByKind(int);
 void __cdecl io_FormatTextBuffer(char*, int, int, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -40,7 +40,7 @@ void __cdecl fcn_00572a50(char* obj)
 		return;
 	case 1:
 		if (*(int*) (obj + 0x14) != 0 || *(int*) (obj + 0x18) != 0) {
-			if (fcn_00500cb0(obj + 0x52, 0x7f4c00) >= 0) {
+			if (gm_CompareGameTime(obj + 0x52, 0x7f4c00) >= 0) {
 				return;
 			}
 			gm_ResolveEntityById((void**) &ref1, 0, 0, *(int*) (obj + 0xac));
@@ -57,9 +57,9 @@ void __cdecl fcn_00572a50(char* obj)
 				ent = gm_NextEntityQueryMatch();
 			}
 			if (ent != 0) {
-				fcn_004c51f0(*(int*) (ref2 + 2), -1, *(unsigned short*) ent,
+				cm_SendSellObjekt(*(int*) (ref2 + 2), -1, *(unsigned short*) ent,
 					1, g_773d75, 0);
-				fcn_005039e0(ref1);
+				gm_CollectTradeItemsByKind(ref1);
 				for (count = 0; count < (int) g_7f3ee4; count++) {
 					n = g_90d520[count];
 					rec = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[n]);
@@ -72,7 +72,7 @@ void __cdecl fcn_00572a50(char* obj)
 					do {
 						if (off >= 4) {
 							if (more) {
-								fcn_004c51f0(*(int*) (ref2 + 2), -1,
+								cm_SendSellObjekt(*(int*) (ref2 + 2), -1,
 									g_90d520[count], 3, g_773d75, 0);
 							}
 							break;
@@ -92,7 +92,7 @@ void __cdecl fcn_00572a50(char* obj)
 				total = ((unsigned short) gm_RandomMod(((OBJECT_PROTOTYPE *)rec)->value_036 * 0x1e) +
 					((OBJECT_PROTOTYPE *)rec)->value_036 * 0x1e) *
 					(*(int*) (obj + 0x18) + *(int*) (obj + 0x14));
-				fcn_004c51f0(*(int*) (obj + 0xb4), -1, *(unsigned short*) ent,
+				cm_SendSellObjekt(*(int*) (obj + 0xb4), -1, *(unsigned short*) ent,
 					total, g_773d75, 0);
 				io_FormatTextBuffer(msg, 0x1bb8, *(unsigned short*) ent * 2 + 0x9a8,
 					ref1, total);

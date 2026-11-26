@@ -32,7 +32,7 @@ extern int g_99f724;
 void __cdecl fcn_004f4830(int kind, Offer* o);
 char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
-void __cdecl fcn_004c51a0(int a, int b, int c, int d);
+void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
 
 int __cdecl gm_ApplySteuerLaw0aToSlots(unsigned short id, Slots* slots, unsigned char flags)
 {
@@ -65,7 +65,7 @@ int __cdecl gm_ApplySteuerLaw0aToSlots(unsigned short id, Slots* slots, unsigned
 		if (flags & 1) {
 			treasury = gm_GetGuildHall(1);
 			treasury = fcn_00502cd0(*(int*) (treasury + 0x5d), 2, 6, 0, 0x115);
-			fcn_004c51a0(*(int*) (treasury + 2), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), 0, tax_amount);
+			cm_RequestTransferCurrencyNoKill(*(int*) (treasury + 2), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), 0, tax_amount);
 			g_773d48++;
 		}
 		if (flags & 2) {

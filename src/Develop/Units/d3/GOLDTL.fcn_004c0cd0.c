@@ -24,7 +24,7 @@ extern short g_100584c;
 extern unsigned short g_7f4c0c;
 extern int gm_GameTime, g_7f4c04, g_7f4c08;
 float __cdecl fcn_00413d10(float* pos);
-int __cdecl fcn_00500e20(int* p);
+int __cdecl gm_GetSeason(int* p);
 int* __cdecl sb_PlayVoice(char* bank, char* name, int loop, int pan, int vol,
     int a, int b);
 int __cdecl sb_SetVoiceVolume(int* voice, int vol);
@@ -63,7 +63,7 @@ void __cdecl fcn_004c0cd0(void)
     int pick;
 
     if (g_6b8300 != 0 && g_772d10 != 0
-        && g_772d3c == fcn_00500e20((int*) 0x7f4c00)) {
+        && g_772d3c == gm_GetSeason((int*) 0x7f4c00)) {
         scaled = 0;
         d = *(float*) (d3_ActiveCamera + 0x50)
             - fcn_00413d10((float*) (d3_ActiveCamera + 0x4c));
@@ -296,7 +296,7 @@ void __cdecl fcn_004c0cd0(void)
             }
         }
     } else {
-        g_772d3c = fcn_00500e20((int*) 0x7f4c00);
+        g_772d3c = gm_GetSeason((int*) 0x7f4c00);
         if (g_1005884 != 0) {
             sb_StopVoice(g_1005884, 0);
             g_1005884 = 0;

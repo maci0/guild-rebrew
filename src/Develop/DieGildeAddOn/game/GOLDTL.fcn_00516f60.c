@@ -66,7 +66,7 @@ extern int g_6791c8;
 extern float g_67a964;
 extern char g_6b859b;
 
-int __cdecl fcn_00500e20(char*);
+int __cdecl gm_GetSeason(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00438b40(Camera*, char*);
 void __cdecl d3_SetCameraHeightFraction(float);
@@ -90,7 +90,7 @@ void __cdecl fcn_00516f60(void)
 	View* v;
 	int i;
 
-	mode = fcn_00500e20(&(*(char*)&gm_GameTime));
+	mode = gm_GetSeason(&(*(char*)&gm_GameTime));
 	if (d3_CurrentContextIndex != 0) {
 		return;
 	}

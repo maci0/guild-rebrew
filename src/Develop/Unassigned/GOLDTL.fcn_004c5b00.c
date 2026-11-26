@@ -8,16 +8,16 @@ typedef struct
 } ShortChar;
 // SIZE 0x4
 
-int __cdecl fcn_004c4330(void*);
+int __cdecl cm_EnqueueClientPacket(void*);
 
-int __cdecl fcn_004c5b00(int a1, int a2, ShortChar a3)
+int __cdecl cm_RequestAllocThemaPredigt(int ownerId, int topic, ShortChar extra)
 {
 	char buf[0x9c];
 
-	*(int*) (buf + 0x18) = a2;
-	*(short*) (buf + 0x1c) = a3.s;
+	*(int*) (buf + 0x18) = topic;
+	*(short*) (buf + 0x1c) = extra.s;
 	buf[0] = 0x2d;
-	buf[0x1e] = a3.c;
-	*(int*) (buf + 0x14) = a1;
-	return fcn_004c4330(buf);
+	buf[0x1e] = extra.c;
+	*(int*) (buf + 0x14) = ownerId;
+	return cm_EnqueueClientPacket(buf);
 }

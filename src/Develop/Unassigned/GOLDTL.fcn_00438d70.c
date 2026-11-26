@@ -2,7 +2,7 @@
 
 void __cdecl d3_SetObjectRotation(char*, void*);
 
-void __cdecl fcn_00438d70(int object, int x, int y, int z)
+void __cdecl d3_SetObjectEulerRotation(int object, int x, int y, int z)
 {
 	int buf[3];
 

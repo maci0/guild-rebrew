@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 #include "Develop/Units/d3/d3_animation.h"
 
-char* __cdecl fcn_00401040(char* path);
+char* __cdecl StripPathAndExt(char* path);
 
 /* ADDRESS: GOLDTL 0x0040ed40 */
 int __cdecl AttachAnim(char** character, char** animation, int* kind)
@@ -37,7 +37,7 @@ int __cdecl AttachAnim(char** character, char** animation, int* kind)
 		name[i] = copied;
 		i++;
 	} while (copied != 0);
-	fcn_00401040(name);
+	StripPathAndExt(name);
 	if (path[0] != 0 && object != 0 && *(char**) (object + 0x1cc) != 0) {
 		if (d3_FindAnimByName(name) == 0) {
 			d3_LoadAnimStream(path, name, 0);

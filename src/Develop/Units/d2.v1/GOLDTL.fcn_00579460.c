@@ -20,14 +20,14 @@ extern char g_6a7f1c[];
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 void __cdecl he_DeclineDeathPactPayment(char*, struct house*);
 void __cdecl he_AcceptDeathPactPayment(char*, struct house*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_004c30a0(int, int, char*, int, int);
+void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 
 void __cdecl fcn_00579460(char* u)
 {
@@ -59,11 +59,11 @@ void __cdecl fcn_00579460(char* u)
 		d2_SetForm(*(int*) (*(char**) (u + 0x74) + 8), 0);
 		io_AppendText((int) g_6811b0);
 		io_AppendText(0x40fd, *(unsigned short*) h, *(int*) (u + 0xb8));
-		fcn_004c30a0(-7, 0, g_6a7f1c, -1, 0);
+		d3snd_QueueSound(-7, 0, g_6a7f1c, -1, 0);
 		*(int*) (u + 0x70) = 1;
 		break;
 	case 1:
-		if (fcn_00500cb0(&gm_GameTime, u + 0x52) > 0) {
+		if (gm_CompareGameTime(&gm_GameTime, u + 0x52) > 0) {
 			he_DeclineDeathPactPayment(p, &((struct house*)g_7f4ca0)[g_774970]);
 			fcn_00545780(u);
 			he_FreeAction(u);

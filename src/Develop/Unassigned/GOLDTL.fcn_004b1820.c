@@ -13,7 +13,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca4[];
 
 int __cdecl fcn_004ae170(int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 
 int __cdecl hst_CmdSoeldnerMarodieren(void)
 {
@@ -33,7 +33,7 @@ int __cdecl hst_CmdSoeldnerMarodieren(void)
 			*(int*) (m + 0xc) = *(int*) (g_7f4ca4 + i * 0x21c);
 			m[0x36] = 1;
 			*(GAME_TIMESTAMP*) (m + 0x28) = st;
-			fcn_004c5530(m);
+			cm_SendCopyEntityData(m);
 		}
 	}
 	return 1;

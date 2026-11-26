@@ -7,10 +7,10 @@ int __cdecl gm_CheckEntityStock(void* tbl, int a2, char a3);
 int __cdecl fcn_00526120(void* buf, int a2);
 void __cdecl io_FormatTextBuffer(void* buf, int id, ...);
 int __cdecl fcn_004ee220(int a1, int a2);
-int __cdecl fcn_004c4450(int a1);
+int __cdecl cm_GetCommandStatus(int a1);
 int __cdecl main_RunFrameLoop(int a1, int a2);
 void __cdecl fcn_004ee080(int a1);
-void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
+void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00584f00 */
 int __cdecl fcn_00584f00(int a1, char* a2, int cost)
@@ -33,12 +33,12 @@ int __cdecl fcn_00584f00(int a1, char* a2, int cost)
                 if (r != -1) {
                     int q;
 
-                    while ((q = fcn_004c4450(r)) == 0)
+                    while ((q = cm_GetCommandStatus(r)) == 0)
                         main_RunFrameLoop(q, 0x20007);
                 }
-                if (fcn_004c4450(r) == 1) {
+                if (cm_GetCommandStatus(r) == 1) {
                     fcn_004ee080((int) a2);
-                    fcn_004c5150(-1, *(int*) (0x7f4ca4 + 540 * g_774970),
+                    cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4 + 540 * g_774970),
                                  g_773d75, cost);
                     return 1;
                 }

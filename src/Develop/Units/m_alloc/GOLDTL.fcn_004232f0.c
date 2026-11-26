@@ -23,7 +23,7 @@ struct Bank {
 };
 
 void __cdecl m_FreeTracked(int);
-char* __cdecl fcn_00422760(int, int*);
+char* __cdecl sb_FindVoiceBySample(int, int*);
 void __cdecl sb_StopVoice(void*, int);
 
 /* ADDRESS: GOLDTL 0x004232f0 */
@@ -50,12 +50,12 @@ void __cdecl fcn_004232f0(void)
 				smp = &bank->samples[i];
 				if (smp->ptr != 0) {
 					idx = 0;
-					p = fcn_00422760((int) smp, &idx);
+					p = sb_FindVoiceBySample((int) smp, &idx);
 					while (p != 0) {
 						sb_StopVoice(p, 0);
 						idx++;
 						*(int*) (p + 4) = 0;
-						p = fcn_00422760((int) &bank->samples[i], &idx);
+						p = sb_FindVoiceBySample((int) &bank->samples[i], &idx);
 					}
 					if (bank->samples[i].kind == 1) {
 						MemUsed += -12 - *(int*) ((char*) bank->samples[i].ptr + 4);

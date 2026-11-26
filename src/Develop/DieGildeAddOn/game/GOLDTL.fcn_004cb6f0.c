@@ -15,7 +15,7 @@ extern unsigned char* lpGebaeudePROT;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004fac80(int, struct cap_4cb6f0*);
+void __cdecl gm_GetBuildingSlotLimits(int, struct cap_4cb6f0*);
 
 
 /* ADDRESS: GOLDTL 0x004cb6f0 */
@@ -33,7 +33,7 @@ int __cdecl fcn_004cb6f0(char* a1, char* out)
 	if (p == 0 && *(int*) (a1 + 0x14) != -1)
 		return 1;
 	if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[e[0]].category == 1) {
-		fcn_004fac80(e[0], &info);
+		gm_GetBuildingSlotLimits(e[0], &info);
 		if (e[0x65] >= info.cap)
 			return 1;
 		e[0x65]++;

@@ -27,9 +27,9 @@ extern void __cdecl vfs_ToSlashes(char*);
 extern char* __cdecl ch_AdjustHeightToGround(char*);
 extern void __cdecl fcn_00402aa0(char*);
 extern void __cdecl d3snd_PlayObjectSound(char*, char*, int, float);
-extern char* __cdecl fcn_00422460(int, char*);
+extern char* __cdecl sb_PrepareVoice(int, char*);
 extern float __cdecl d3_ComputeYawToTarget(char*, float*);
-extern void __cdecl fcn_00438d70(char*, int, int, int);
+extern void __cdecl d3_SetObjectEulerRotation(char*, int, int, int);
 extern void __cdecl ch_FinishAni(char*);
 extern void __cdecl fcn_0041ddd0(char*);
 
@@ -186,7 +186,7 @@ void __cdecl fcn_0040aa00(char* obj)
 		    d3_GetContextIndex(*(int*) (inst + 0x88)) != 0) {
 			o = *(char**) (inst + 0x88);
 			if (*(int*) (o + 0xac) == 0) {
-				r = fcn_00422460(g_6b5c2c, "normal_s");
+				r = sb_PrepareVoice(g_6b5c2c, "normal_s");
 			} else {
 				strcpy(buf, "Normal_s");
 				switch (state) {
@@ -207,7 +207,7 @@ void __cdecl fcn_0040aa00(char* obj)
 					strcpy(buf, "Pfuetze_s");
 					break;
 				}
-				r = fcn_00422460(g_6b5c2c, buf);
+				r = sb_PrepareVoice(g_6b5c2c, buf);
 			}
 			if (r != 0) {
 				d3snd_PlayObjectSound(r, *(char**) (inst + 0x34), 0x28, 500.0f);
@@ -345,7 +345,7 @@ next:
 			a = d + *(float*) (o + 0x88);
 			*(int*) (obj + 0x108) = 0;
 		}
-		fcn_00438d70(o, *(int*) (o + 0x84), *(int*) &a, *(int*) (o + 0x8c));
+		d3_SetObjectEulerRotation(o, *(int*) (o + 0x84), *(int*) &a, *(int*) (o + 0x8c));
 	} else if (*(float*) (obj + 0x108) > 0.0f) {
 		o = *(char**) (*(int*) (obj + 0x14) + 0x34);
 		d = d3_ComputeYawToTarget(o, (float*) (obj + 0x124));
@@ -380,7 +380,7 @@ next:
 			a = d + *(float*) (o + 0x88);
 			*(int*) (obj + 0x108) = 0;
 		}
-		fcn_00438d70(o, *(int*) (o + 0x84), *(int*) &a, *(int*) (o + 0x8c));
+		d3_SetObjectEulerRotation(o, *(int*) (o + 0x84), *(int*) &a, *(int*) (o + 0x8c));
 	} else {
 		o = *(char**) (*(int*) (obj + 0x14) + 0x34);
 		a = (float) sqrt(

@@ -1,7 +1,7 @@
 extern char* ch_ContextCharacters[32];
 
 char* __cdecl gm_GetEquippedCombatGear(char*);
-int __cdecl fcn_004ce270(char*, unsigned char*);
+int __cdecl gm_EntitiesDifferByOwnerPtr(char*, unsigned char*);
 float __cdecl fcn_004cefb0(char*, int);
 float __cdecl fcn_004ff040(unsigned char*);
 
@@ -20,7 +20,7 @@ unsigned char* __cdecl fcn_004d2f70(char* a1)
 	if (*(int*) (gm_GetEquippedCombatGear(a1) + 0x58) != 2) {
 		for (i = 0; i < 32; i++) {
 			e = ((unsigned char**)ch_ContextCharacters)[i];
-			if (e != 0 && fcn_004ce270(a1, e) != 0 && e[8] != 0) {
+			if (e != 0 && gm_EntitiesDifferByOwnerPtr(a1, e) != 0 && e[8] != 0) {
 				d = fcn_004cefb0(a1, *(int*) (*(char**) (e + 0x184) + 0x34));
 				if (d * fcn_004ff040(e) < best) {
 					best = d;
@@ -31,7 +31,7 @@ unsigned char* __cdecl fcn_004d2f70(char* a1)
 	} else {
 		for (i = 0; i < 32; i++) {
 			e = ((unsigned char**)ch_ContextCharacters)[i];
-			if (e != 0 && fcn_004ce270(a1, e) != 0 && e[8] != 0) {
+			if (e != 0 && gm_EntitiesDifferByOwnerPtr(a1, e) != 0 && e[8] != 0) {
 				d = fcn_004cefb0(a1, *(int*) (*(char**) (e + 0x184) + 0x34));
 				if (d * fcn_004ff040(e) < best) {
 					best = d;

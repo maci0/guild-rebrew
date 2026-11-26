@@ -30,9 +30,9 @@ int __cdecl io_AppendText(int id, ...);
 int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 int __cdecl fcn_005c9220(unsigned int* ids);
 int __cdecl main_RunFrameLoop(void* fn, int key);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c5530(char* msg);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendCopyEntityData(char* msg);
+void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl fcn_00471e30(int dlg);
 
 /* ADDRESS: GOLDTL 0x005bf0d0 */
@@ -122,9 +122,9 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 			ev[0x36] = 1;
 			*(int*) (ev + 0x7c) = value;
 			*(int*) (ev + 0x58) = *(int*) (record + 1);
-			fcn_004c4eb0((char*) 0x67eac4);
-			fcn_004c5530(ev);
-			fcn_004c4ef0((char*) 0x67eac4);
+			cm_SendLogAction((char*) 0x67eac4);
+			cm_SendCopyEntityData(ev);
+			cm_SendTraceEnd((char*) 0x67eac4);
 			io_FormatTextBuffer(text2, 0x1701, *(unsigned short*) (record + 0x25),
 				*(unsigned char*) record * 0xe + 0x48e);
 			fcn_00526120(text2, 0);

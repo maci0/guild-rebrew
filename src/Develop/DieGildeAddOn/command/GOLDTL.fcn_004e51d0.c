@@ -52,14 +52,14 @@ extern char s_68b300[]; /* 0x0068b300 */
 int __cdecl cut_GetRandSeed(void);
 void __cdecl fcn_004e4f10(unsigned char*);
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004c5790(int, void*);
+int __cdecl cm_RequestSysMessage(int, void*);
 void __cdecl cm_WaitNetworkSyncBanner(int);
 int __cdecl fcn_00533a40(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_004c4df0(int, rec35c*);
+int __cdecl cm_StageRawPacketPayload(int, rec35c*);
 int __cdecl cm_RequestSendCutInfo(int, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004e4fc0(unsigned char*);
 void __cdecl d2_AppendPendingPlayerNames(unsigned char*);
@@ -97,7 +97,7 @@ void __cdecl fcn_004e51d0(unsigned char* s, int id)
 			memset(&msg, 0, sizeof(msg));
 			msg.head = *(int*) s;
 			sprintf(msg.text, s_68d580, s[8]);
-			fcn_004c5790(0x11, &msg);
+			cm_RequestSysMessage(0x11, &msg);
 		}
 label_4e526f:
 		if (g_772f3c == 0) {
@@ -148,9 +148,9 @@ label_4e526f:
 						}
 						c1.f8 = 1;
 						c1.fc = 0;
-						fcn_004c4df0(0x35c, &c1);
+						cm_StageRawPacketPayload(0x35c, &c1);
 						h = cm_RequestSendCutInfo(*(int*) (ent + 4), *(int*) s);
-						while (fcn_004c4450(h) == 0) {
+						while (cm_GetCommandStatus(h) == 0) {
 							fcn_00535960();
 						}
 						d2_AppendPendingPlayerNames(s);
@@ -169,9 +169,9 @@ label_4e526f:
 					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
 					c1.f8 = 1;
 					c1.fc = 0;
-					fcn_004c4df0(0x35c, &c1);
+					cm_StageRawPacketPayload(0x35c, &c1);
 					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) s);
-					while (fcn_004c4450(h) == 0) {
+					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
 					break;
@@ -209,9 +209,9 @@ label_4e526f:
 					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
 					c1.f8 = 1;
 					c1.fc = 0;
-					fcn_004c4df0(0x35c, &c1);
+					cm_StageRawPacketPayload(0x35c, &c1);
 					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) s);
-					while (fcn_004c4450(h) == 0) {
+					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
 					d2_AppendPendingPlayerNames(s);
@@ -233,9 +233,9 @@ label_4e526f:
 							}
 							c2.f8 = 1;
 							c2.fc = 0;
-							fcn_004c4df0(0x35c, &c2);
+							cm_StageRawPacketPayload(0x35c, &c2);
 							h = cm_RequestSendCutInfo(*(int*) (ent + 4), *(int*) s);
-							while (fcn_004c4450(h) == 0) {
+							while (cm_GetCommandStatus(h) == 0) {
 								fcn_00535960();
 							}
 							break;

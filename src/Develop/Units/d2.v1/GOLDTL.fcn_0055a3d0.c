@@ -11,7 +11,7 @@ extern int g_100f1dc;
 extern char g_6a5a10[];
 extern char g_6811b0[];
 
-int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 char* __cdecl he_StartHandlungSearch(int, ...);
@@ -41,7 +41,7 @@ void __cdecl fcn_0055a3d0(char* u)
 			*(int*) (u + 0x70) = 1;
 			break;
 		case 1:
-			if (fcn_00500cb0(&gm_GameTime, u + 0x52) > 0) {
+			if (gm_CompareGameTime(&gm_GameTime, u + 0x52) > 0) {
 				fcn_00545780(u);
 				he_FreeAction(u);
 				return;

@@ -22,15 +22,15 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00529160(char*, int, int, int);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
@@ -56,7 +56,7 @@ void __cdecl fcn_00553490(char* self)
 	state = *(int*) (self + 0x70);
 	if (state == -1 || state == -2) {
 		if (p != 0 && (*(unsigned char*) (self + 0x78) & 2)) {
-			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 0x100);
+			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 0x100);
 		}
 		he_FreeAction(self);
 		return;
@@ -65,7 +65,7 @@ void __cdecl fcn_00553490(char* self)
 	if (*(unsigned char*) (self + 0x78) & step) {
 		return;
 	}
-	if (*(int*) (self + 0x84) != -1 && fcn_004c4450(*(int*) (self + 0x84)) == 0) {
+	if (*(int*) (self + 0x84) != -1 && cm_GetCommandStatus(*(int*) (self + 0x84)) == 0) {
 		return;
 	}
 	*(int*) (self + 0x84) = -1;
@@ -79,7 +79,7 @@ void __cdecl fcn_00553490(char* self)
 	switch (*(int*) (self + 0x70)) {
 	case 1:
 		fcn_00529160(p, 0, *(unsigned short*) ent, self);
-		fcn_004c5c80(*(int*) (ent + 4));
+		cm_SendCancelCharacterActions(*(int*) (ent + 4));
 		fcn_004c5da0(*(int*) (ent + 4), *(int*) (p + 1), -1, 0, 1, (char*) 0x6a5c24);
 		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		gm_AddTime((pos14_7f4c00*) (self + 0x52), 0, 10, 0);
@@ -123,7 +123,7 @@ void __cdecl fcn_00553490(char* self)
 		msg.pos = (*(pos14_7f4c00*) &gm_GameTime);
 		msg.type = 0x63;
 		msg.code = 9;
-		fcn_004c5530((char*) &msg);
+		cm_SendCopyEntityData((char*) &msg);
 		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		gm_AddTime((pos14_7f4c00*) (self + 0x52), 3, 0, 0);
 		*(int*) (self + 0x70) = 3;
@@ -132,8 +132,11 @@ void __cdecl fcn_00553490(char* self)
 		return;
 	case 3:
 		if (*(int*) (self + 0xb8) == 1) {
-			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0x100, 0);
-			fcn_004c51a0(*(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (*(unsigned short*) (p + 0x27) * 0x21c + (unsigned long)&g_7f4ca4), 0, *(int*) (self + 0xb4));
+			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0x100, 0);
+			cm_RequestTransferCurrencyNoKill(
+				*(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4),
+				*(int*) (*(unsigned short*) (p + 0x27) * 0x21c + (unsigned long)&g_7f4ca4),
+				0, *(int*) (self + 0xb4));
 			if (*(int*) (self + 0xbc) != -1) {
 				q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0xbc));
 				*(int*) (q + 0x4d) = *(int*) (q + 0x4d) + *(int*) (self + 0xb4);
@@ -176,7 +179,7 @@ void __cdecl fcn_00553490(char* self)
 			fcn_00545d40(i, i, buf, 0, 0x5f3, 0);
 		}
 		fcn_00529160(p, 0, *(unsigned short*) ent, 0);
-		fcn_004c5c80(*(int*) (ent + 4));
+		cm_SendCancelCharacterActions(*(int*) (ent + 4));
 		fcn_004c5da0(*(int*) (ent + 4), *(int*) (self + 0xbc), *(int*) (self + 0xc0), 0, 0, (char*) 0x6a5c24);
 		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		gm_AddTime((pos14_7f4c00*) (self + 0x52), 0, 2, 0);

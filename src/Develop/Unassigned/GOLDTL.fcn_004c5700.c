@@ -3,7 +3,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-int __cdecl fcn_004c4330(void*);
+int __cdecl cm_EnqueueClientPacket(void*);
 
 typedef struct
 {
@@ -14,13 +14,13 @@ typedef struct
 } Quad4;
 // SIZE 0x10
 
-int __cdecl fcn_00500cb0(void*, char*);
+int __cdecl gm_CompareGameTime(void*, char*);
 
-int __cdecl fcn_004c5700(Quad4* stamp)
+int __cdecl cm_RequestUpdateGameTime(Quad4* stamp)
 {
 	char buf[0x9c];
 
-	if (fcn_00500cb0(stamp, ((char*)&gm_GameTime)) == 0) {
+	if (gm_CompareGameTime(stamp, ((char*)&gm_GameTime)) == 0) {
 		return -1;
 	}
 	buf[0] = 0x1e;
@@ -28,5 +28,5 @@ int __cdecl fcn_004c5700(Quad4* stamp)
 	*(int*) (buf + 0x14) = stamp->b;
 	*(int*) (buf + 0x18) = stamp->c;
 	*(short*) (buf + 0x1c) = stamp->d;
-	return fcn_004c4330(buf);
+	return cm_EnqueueClientPacket(buf);
 }

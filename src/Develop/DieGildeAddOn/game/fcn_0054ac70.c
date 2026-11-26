@@ -9,7 +9,7 @@ extern unsigned short g_7f4c0c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca4[];
 
-int __cdecl fcn_004c4450(int id);
+int __cdecl cm_GetCommandStatus(int id);
 int __cdecl fcn_004c5620(int a, char* unit);
 void __cdecl fcn_004c5980(void* msg);
 void __cdecl gm_AddTime(pos14_7f4c00* when, int h, int m, int s);
@@ -39,12 +39,12 @@ void __cdecl fcn_0054ac70(char* e)
 	if (*(unsigned char*) (e + 0x78) & 4)
 		return;
 	w = *(int*) (e + 0x84);
-	if (w != -1 && !fcn_004c4450(w))
+	if (w != -1 && !cm_GetCommandStatus(w))
 		return;
 	*(int*) (e + 0x84) = -1;
 	switch (*(int*) (e + 0x70)) {
 	case 0:
-		kind = (unsigned char) fcn_004c4450(*(int*) (e + 0xd4));
+		kind = (unsigned char) cm_GetCommandStatus(*(int*) (e + 0xd4));
 		if (!kind)
 			return;
 		a = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0xb0));

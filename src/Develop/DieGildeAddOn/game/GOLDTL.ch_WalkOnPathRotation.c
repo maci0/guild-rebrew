@@ -8,7 +8,7 @@ extern int ch_UpdateTime;
 extern unsigned int g_67529c;
 
 float __cdecl d3_ComputeYawToTarget(char* obj, float* pos);
-void __cdecl fcn_00438d70(int a1, int a2, int a3, int a4);
+void __cdecl d3_SetObjectEulerRotation(int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x0040a200 */
 void __cdecl ch_WalkOnPathRotation(char* obj)
@@ -63,7 +63,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 				*(int*) (obj + 0x108) = 0;
 			}
 		}
-		fcn_00438d70((int) o, *(int*) (o + 0x84), *(int*) &angle,
+		d3_SetObjectEulerRotation((int) o, *(int*) (o + 0x84), *(int*) &angle,
 		             *(int*) (o + 0x8c));
 		return;
 	}
@@ -105,7 +105,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 				*(int*) (obj + 0x108) = 0;
 			}
 		}
-		fcn_00438d70((int) o, *(int*) (o + 0x84), *(int*) &angle,
+		d3_SetObjectEulerRotation((int) o, *(int*) (o + 0x84), *(int*) &angle,
 		             *(int*) (o + 0x8c));
 		return;
 	}

@@ -26,7 +26,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int a, unsigned char b);
 int __cdecl fcn_004a4fb0(int* a, int* b, char* q, int c);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
-float __cdecl fcn_004fc460(char* p);
+float __cdecl gm_GetCityStatsSummary(char* p);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_0050d170(int n);
 
@@ -102,7 +102,7 @@ int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, B
 		}
 	}
 	if (!(*(unsigned char*) (q + 0x5a) & 0x41)) {
-		fcn_004fc460((char*) buf);
+		gm_GetCityStatsSummary((char*) buf);
 	if (*(unsigned char*) q == 0x24) {
 		kind = 0x25;
 		if (gm_RandomMod(0x200) + buf[6] < 1250.0f) {

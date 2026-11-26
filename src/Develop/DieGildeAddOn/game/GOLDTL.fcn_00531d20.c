@@ -24,9 +24,9 @@ int __cdecl fcn_00507c30(int a);
 int __cdecl gm_MapEntityStatRange(int a);
 int __cdecl gm_SearchTable67(int a);
 int __cdecl gm_LookupEntityRecordById(int a);
-int __cdecl fcn_00531c40(int a, int b, void* c);
-float __cdecl fcn_004fc460(char* p);
-float __cdecl fcn_004fbd40(void);
+int __cdecl d2_SetHoverTooltip(int a, int b, void* c);
+float __cdecl gm_GetCityStatsSummary(char* p);
+float __cdecl gm_GetBuildingLevelRatio(void);
 
 struct Building_531d20 { unsigned char class_id; char pad1[0x24c]; };
 /* ADDRESS: GOLDTL 0x00531d20 */
@@ -248,14 +248,14 @@ void __cdecl fcn_00531d20(void)
 		if (he_StartHandlungSearch(1, 0, 0x52) != 0)
 			idx = 5;
 	}
-	fcn_004fc460((char*) f);
+	gm_GetCityStatsSummary((char*) f);
 	switch (idx) {
 	case 1:
 		obj = (int) ((f[1] * 5.0) * 3.0 + id);
 		obj += fcn_0042e410(3) & 0xffff;
 		break;
 	case 2:
-		obj = (int) ((fcn_004fbd40() * 5.0) * 3.0 + id);
+		obj = (int) ((gm_GetBuildingLevelRatio() * 5.0) * 3.0 + id);
 		obj += fcn_0042e410(3) & 0xffff;
 		break;
 	case 3:
@@ -282,13 +282,13 @@ void __cdecl fcn_00531d20(void)
 	}
 	if (g_7746b4 != 0) {
 		if (obj != -1) {
-			fcn_00531c40(*(int*) (g_7746b4 + 0x184), obj, 0);
+			d2_SetHoverTooltip(*(int*) (g_7746b4 + 0x184), obj, 0);
 			return;
 		}
 		if (text[0] != 0)
-			fcn_00531c40(*(int*) (g_7746b4 + 0x184), 0, text);
+			d2_SetHoverTooltip(*(int*) (g_7746b4 + 0x184), 0, text);
 		return;
 	}
 	if (g_7746a4 != 0)
-		fcn_00531c40(ch_FindCharacterByKey(g_7746a4), obj, 0);
+		d2_SetHoverTooltip(ch_FindCharacterByKey(g_7746a4), obj, 0);
 }

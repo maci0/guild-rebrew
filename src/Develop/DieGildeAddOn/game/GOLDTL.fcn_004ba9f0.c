@@ -7,7 +7,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_GetBuildingTypeCategory(int);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 
@@ -73,7 +73,7 @@ int __cdecl fcn_004ba9f0(int* noticeRequest)
 			found = ents[gm_RandomMod(k)];
 		if (chosen == 0 || found == 0)
 			return 0x400;
-		fcn_004c51f0(*(int*) (chosen + 1), -1, gm_RandomMod(2) + 0x134, 1,
+		cm_SendSellObjekt(*(int*) (chosen + 1), -1, gm_RandomMod(2) + 0x134, 1,
 		    g_773d75, 0);
 		io_FormatTextBuffer(buf, *(unsigned short*) (noticeRequest + 1) + 0x12e7,
 		    *(unsigned short*) found);

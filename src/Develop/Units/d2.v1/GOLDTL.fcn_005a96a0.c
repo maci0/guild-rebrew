@@ -42,11 +42,11 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl d2_ClearWindowChildren(int, int);
-int __cdecl fcn_005ca560(Item5a96* s);
+int __cdecl d2_BuildPersonStatusDesc(Item5a96* s);
 void __cdecl fcn_005ca740(int, int, int, int, Item5a96*, int);
 void __cdecl fcn_00472640(int i, int flag);
 int __cdecl amt_ApplyForOffice(char*, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_004e6f10(int a);
@@ -125,7 +125,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 						items[i].f30 = 0;
 						items[i].y = i / 2 * 0x41 * 2 + 0x28;
 						items[i].house = houses[i];
-						fcn_005ca560(&items[i]);
+						d2_BuildPersonStatusDesc(&items[i]);
 						fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);
 					}
 				}
@@ -145,13 +145,13 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 				r = amt_ApplyForOffice(who, id);
 				if (r != -1) {
 					do {
-						if (fcn_004c4450(r) != 0) {
+						if (cm_GetCommandStatus(r) != 0) {
 							break;
 						}
 						fcn_00535960();
 					} while (1);
 				}
-				if (fcn_004c4450(r) == 1) {
+				if (cm_GetCommandStatus(r) == 1) {
 					res = 1;
 				}
 				fcn_0057e880(0x2f, 0, 0, id);

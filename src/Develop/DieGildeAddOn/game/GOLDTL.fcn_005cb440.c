@@ -38,7 +38,7 @@ typedef struct Node {
 // SIZE 0xb4
 
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005ca560(Row*);
+void __cdecl d2_BuildPersonStatusDesc(Row*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 Node* __cdecl he_fn_Handlung(void);
 Node* __cdecl he_StartHandlungSearch(int, int, int);
@@ -157,7 +157,7 @@ next:
 	}
 	o = rows;
 	for (i = 0; i < n; i++) {
-		fcn_005ca560(o);
+		d2_BuildPersonStatusDesc(o);
 		o->val = fcn_005cf720(subject->id, o->ent->id, a3, 0);
 		o = (Row*) ((char*) o + 0x38);
 	}

@@ -22,7 +22,7 @@ struct msg {
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl fcn_004c6470(int, int);
 void __cdecl he_FreeAction(char*);
 
@@ -48,7 +48,7 @@ void __cdecl he_RunDelayedEntityDemotion(char* action)
 				msg.owner = *(int*) (action + 0xac);
 				msg.when = gm_GameTime;
 				msg.who = *(int*) (action + 0xac);
-				fcn_004c5530(&msg);
+				cm_SendCopyEntityData(&msg);
 			}
 			fcn_004c6470(*(int*) (entity + 4), *(unsigned char*) (entity + 0x164) - 1);
 			he_FreeAction(action);

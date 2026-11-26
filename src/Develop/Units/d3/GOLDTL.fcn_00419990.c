@@ -61,7 +61,7 @@ char* __cdecl sb_PlayVoice(char* bank, char* name, int loop, int pan, int vol, i
 void __cdecl sb_StopVoice(int* handle, int fade);
 void __cdecl sb_SetVoicePan(int* handle, int value);
 int __cdecl sb_SetVoiceVolume(int* handle, int value);
-void __cdecl fcn_00426170(char* handle, int on);
+void __cdecl d3snd_SetVoiceFlag0x10(char* handle, int on);
 void __cdecl d3snd_PlaySource(char* voice, int a2, int vol, int pan);
 void* __cdecl d3snd_GetObjectVoiceStatus(char* voice);
 
@@ -280,12 +280,12 @@ fill_one:
 stop:
 	if (g_6b5d54 != 0) {
 		sb_StopVoice((int*) g_6b5d54, 0);
-		fcn_00426170((char*) g_6b5d54, 0);
+		d3snd_SetVoiceFlag0x10((char*) g_6b5d54, 0);
 		g_6b5d54 = 0;
 	}
 	if (g_6b5da8 != 0) {
 		sb_StopVoice((int*) g_6b5da8, 0);
-		fcn_00426170((char*) g_6b5da8, 0);
+		d3snd_SetVoiceFlag0x10((char*) g_6b5da8, 0);
 		g_6b5da8 = 0;
 	}
 }

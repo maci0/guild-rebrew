@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00500d60 */
-void __cdecl fcn_00500d60(int* src, char* dst)
+void __cdecl gm_PackGameTime(int* src, char* dst)
 {
 	*(short*) (dst + 2) = (short) *src + 0x578;
 	dst[1] = (char) (*src % 4) * 3 + 1;

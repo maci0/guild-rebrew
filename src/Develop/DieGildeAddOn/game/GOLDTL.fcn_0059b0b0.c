@@ -9,7 +9,7 @@ extern char g_6aa34c[];
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_005cf560(int);
+void __cdecl d2_OpenMeisterbriefDialog(int);
 void __cdecl d2_ShowPersonalbuch(int, char*);
 
 void __cdecl d2_RunWorkshopBookHud(int a)
@@ -23,7 +23,7 @@ void __cdecl d2_RunWorkshopBookHud(int a)
 		y = RegisterStatusText(g_6aa34c, g_14a7b50, 0xc);
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == x) {
-				fcn_005cf560(a);
+				d2_OpenMeisterbriefDialog(a);
 			}
 			else if (g_7746a0 == y) {
 				d2_ShowPersonalbuch(a, g_6aa34c);

@@ -37,7 +37,7 @@ typedef struct {
 extern char g_6b5c60[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_00401040(char*);
+char* __cdecl StripPathAndExt(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl fcn_004712d0(int, char*, char*);
 void __cdecl d2_SetGroupVisibility(int, int);
@@ -66,7 +66,7 @@ int __cdecl fcn_00535270(Book* b, signed char dir)
 	}
 	for (i = 0; i < 3; i++) {
 		strcpy(name, "buch\\Buch_vorblaettern.baf");
-		r = fcn_00401040(name);
+		r = StripPathAndExt(name);
 		pg = &b->model->pages->pages[i];
 		if (pg->name != 0 && _strcmpi(pg->name, r) == 0 && dir > 0) {
 			if (!(pg->flags & 0x20)) {
@@ -75,7 +75,7 @@ int __cdecl fcn_00535270(Book* b, signed char dir)
 			d3_RemoveObjectAnimation(b->model->pages->sounds, b->model->pages->pages[i].name);
 		}
 		strcpy(name, "buch\\Buch_zurueckblaettern.baf");
-		r = fcn_00401040(name);
+		r = StripPathAndExt(name);
 		if (pg->name != 0 && _strcmpi(pg->name, r) == 0) {
 			if (!(pg->flags & 0x20) && dir > 0) {
 				return 0;

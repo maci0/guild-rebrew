@@ -65,22 +65,22 @@ extern unsigned char g_6a3440;
 
 int __cdecl gm_RandomMod(int);
 void __cdecl d3_TransformPoint(char *, char *, char *);
-void __cdecl fcn_004c3ff0(void);
-int __cdecl fcn_004c4450(int);
-int __cdecl fcn_004c4480(int);
+void __cdecl cm_FlushCommandQueue(void);
+int __cdecl cm_GetCommandStatus(int);
+int __cdecl cm_GetCommandResult(int);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
-int __cdecl fcn_004c44c0(void);
+int __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl cm_BeginPacketFieldDelta(char *, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char *);
-void __cdecl fcn_004c4940(void);
+void __cdecl cm_PollCommandQueue(void);
 void __cdecl cm_ExecCommand(void);
-void __cdecl fcn_004c5150(int, int, char, int);
-int __cdecl fcn_004c51f0(int, int, short, int, char, int);
-void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_004c5530(Msg *);
-int __cdecl fcn_004c5f60(int, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+int __cdecl cm_SendSellObjekt(int, int, short, int, char, int);
+void __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_RequestCopyEntityData(int, int, int, int);
+void __cdecl cm_SendCopyEntityData(Msg *);
+int __cdecl cm_SendSetGebBesitzer(int, int, int);
 void __cdecl fcn_004c6000(int, int);
 int __cdecl fcn_004c6090(unsigned char *, int, int, int);
 int __cdecl cm_RequestCreateGeb(int, int, char *, float *);
@@ -165,9 +165,9 @@ void __cdecl fcn_00512ee0(void)
 				for (j = 0; j < 6; j++) {
 					if (o->worker_kind[j] != 0
 							&& o->worker_kind[j] == *(unsigned char *)(e + 0x164)) {
-						h = fcn_004c5f60(p->id, *(int *)(e + 4),
+						h = cm_SendSetGebBesitzer(p->id, *(int *)(e + 4),
 								*(int *)(e + 4));
-						while (fcn_004c4450(h) == 0) {
+						while (cm_GetCommandStatus(h) == 0) {
 							fcn_00535960();
 						}
 						init_SetupBetriebWorkers((unsigned char *)p);
@@ -197,11 +197,11 @@ void __cdecl fcn_00512ee0(void)
 				d3_ComputeObjectYawToTarget(pos3, list[j]);
 				h = cm_RequestCreateGeb(*(int *)(e + 4), kind, path, pos3);
 				if (h != -1) {
-					while (fcn_004c4450(h) == 0) {
+					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
 				}
-				h = fcn_004c4480(h);
+				h = cm_GetCommandResult(h);
 				if (h)
 					init_SetupBetriebWorkers((unsigned char *)h);
 			}
@@ -248,8 +248,8 @@ void __cdecl fcn_00512ee0(void)
 			}
 		}
 		fcn_004c6000(*(int *)(e + 4), *(int *)(q + 1));
-		h = fcn_004c5f60(*(int *)(q + 1), *(int *)(e + 4), *(int *)(e + 4));
-		while (fcn_004c4450(h) == 0) {
+		h = cm_SendSetGebBesitzer(*(int *)(q + 1), *(int *)(e + 4), *(int *)(e + 4));
+		while (cm_GetCommandStatus(h) == 0) {
 			fcn_00535960();
 		}
 	}
@@ -264,14 +264,14 @@ void __cdecl fcn_00512ee0(void)
 		cm_AppendPacketFieldDelta(4, 1, 0x65, (char *)&count);
 		count = count * 2;
 		cm_AppendPacketFieldDelta(4, 1, 0x69, (char *)&count);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char *)e];
-		fcn_004c5f60(*(int *)(e + 1), *(int *)(gm_CityEntity + 4),
+		cm_SendSetGebBesitzer(*(int *)(e + 1), *(int *)(gm_CityEntity + 4),
 				*(int *)(gm_CityEntity + 4));
 		fcn_004c6090((unsigned char *)e, 1, o->role_230, o->worker_kind[0]);
 		fcn_004c6090((unsigned char *)e, 0, o->role_22f, 0);
 		fcn_004c6090((unsigned char *)e, 0, o->role_22f, 0);
-		fcn_004c51f0(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
 		counts[k]++;
 	}
 
@@ -280,14 +280,14 @@ void __cdecl fcn_00512ee0(void)
 	if (e) {
 		o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char *)e];
 		h = fcn_004c6090((unsigned char *)e, 2, o->role_230, 0x2d);
-		while (fcn_004c4450(h) == 0) {
+		while (cm_GetCommandStatus(h) == 0) {
 			fcn_00535960();
 		}
-		h = *(int *)(fcn_004c4480(h) + 4);
-		fcn_004c5f60(*(int *)(e + 1), h, h);
+		h = *(int *)(cm_GetCommandResult(h) + 4);
+		cm_SendSetGebBesitzer(*(int *)(e + 1), h, h);
 		fcn_004c6090((unsigned char *)e, 0, o->role_22f, 0);
 		fcn_004c6090((unsigned char *)e, 0, o->role_230, 0);
-		fcn_004c51f0(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int *)(e + 1), -1, 0x135, 1, g_773d75, 0);
 		counts[0x10]++;
 	}
 
@@ -310,13 +310,13 @@ void __cdecl fcn_00512ee0(void)
 				}
 			}
 			h = fcn_004c6090((unsigned char *)p, 2, o->role_230, slot);
-			while (fcn_004c4450(h) == 0) {
+			while (cm_GetCommandStatus(h) == 0) {
 				fcn_00535960();
 			}
-			q = fcn_004c4480(h);
-			fcn_004c5f60(p->id, *(int *)(q + 4), *(int *)(q + 4));
+			q = cm_GetCommandResult(h);
+			cm_SendSetGebBesitzer(p->id, *(int *)(q + 4), *(int *)(q + 4));
 			count = fcn_0050b750(3000, g_773d75);
-			fcn_004c5150(*(int *)(q + 4), -1, g_773d75, count);
+			cm_RequestMoveCredits(*(int *)(q + 4), -1, g_773d75, count);
 			if (outer <= 0xf) {
 				handles[outer] = q;
 				outer++;
@@ -330,18 +330,18 @@ void __cdecl fcn_00512ee0(void)
 					fcn_004c6090((unsigned char *)p, 0, o->role_230, 0);
 				}
 			}
-			fcn_004c51f0(p->id, -1, 0x135, 1, g_773d75, 0);
+			cm_SendSellObjekt(p->id, -1, 0x135, 1, g_773d75, 0);
 			if (o->category == 5) {
 				count = fcn_0050b750(6000, g_773d75);
-				fcn_004c5150(*(int *)(q + 4), -1, g_773d75, count);
+				cm_RequestMoveCredits(*(int *)(q + 4), -1, g_773d75, count);
 			}
 			init_Betrieb((unsigned char *)p);
 			cm_EndCommandSync();
 			counts[o->category]++;
 		}
-		while (fcn_004c44c0() == 0) {
-			fcn_004c3ff0();
-			fcn_004c4940();
+		while (cm_AreQueuedCommandsDone() == 0) {
+			cm_FlushCommandQueue();
+			cm_PollCommandQueue();
 			cm_ExecCommand();
 		}
 		for (i = 0; i < outer; i++) {
@@ -365,9 +365,9 @@ void __cdecl fcn_00512ee0(void)
 				}
 			}
 			fcn_004c6000(*(int *)(e + 4), *(int *)(q + 1));
-			h = fcn_004c5f60(*(int *)(q + 1), *(int *)(e + 4),
+			h = cm_SendSetGebBesitzer(*(int *)(q + 1), *(int *)(e + 4),
 					*(int *)(e + 4));
-			while (fcn_004c4450(h) == 0) {
+			while (cm_GetCommandStatus(h) == 0) {
 				fcn_00535960();
 			}
 		}
@@ -376,7 +376,7 @@ release_handles:
 		for (; i < outer; i++) {
 			e = (char *)handles[i];
 			if (e) {
-				fcn_004c5150(*(int *)(e + 4), -1, g_773d75,
+				cm_RequestMoveCredits(*(int *)(e + 4), -1, g_773d75,
 						fcn_0050d170(4));
 			}
 		}
@@ -408,7 +408,7 @@ handles_done:
 							}
 						}
 						fcn_004c6090((unsigned char *)p, 1, o->role_230, o->worker_kind[0]);
-						fcn_004c51f0(p->id, -1, 0x135, 1, g_773d75, 0);
+						cm_SendSellObjekt(p->id, -1, 0x135, 1, g_773d75, 0);
 						init_Betrieb((unsigned char *)p);
 					}
 					continue;
@@ -416,13 +416,13 @@ handles_done:
 			}
 		}
 		if (kinds[o->category] == 0 && slot == 0xffff)
-			fcn_004c5f60(p->id, *(int *)(gm_CityEntity + 4),
+			cm_SendSetGebBesitzer(p->id, *(int *)(gm_CityEntity + 4),
 					*(int *)(gm_CityEntity + 4));
 	}
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
-		fcn_004c3ff0();
-		fcn_004c4940();
+	while (cm_AreQueuedCommandsDone() == 0) {
+		cm_FlushCommandQueue();
+		cm_PollCommandQueue();
 		cm_ExecCommand();
 	}
 	fcn_00511c60(0);
@@ -436,9 +436,9 @@ handles_done:
 			msg.b36 = 2;
 			msg.f58 = *(int *)(e + 1);
 			msg.f5c = gm_CalculateGebaeudeValue((unsigned char *)e, (char)e[0x5c]);
-			fcn_004c5f60(*(int *)(e + 1), *(int *)(gm_CityEntity + 4),
+			cm_SendSetGebBesitzer(*(int *)(e + 1), *(int *)(gm_CityEntity + 4),
 					*(int *)(gm_CityEntity + 4));
-			fcn_004c5530(&msg);
+			cm_SendCopyEntityData(&msg);
 		}
 		e = (char *)gm_FindNextFilteredEntity();
 	}
@@ -457,7 +457,7 @@ handles_done:
 		msg.f14 = 0;
 		msg.pos = gm_GameTime;
 		msg.b36 = 1;
-		fcn_004c5530(&msg);
+		cm_SendCopyEntityData(&msg);
 	}
 	fcn_00547010();
 	fcn_005470a0();
@@ -472,13 +472,13 @@ handles_done:
 					if (!(*f == 6 || *f == 7 || *f == 5 || *f == 3 || *f == 4
 								|| *f == 2))
 						continue;
-					fcn_004c54c0(*(int *)(e + 2), *(int *)(f + 2),
+					cm_RequestCopyEntityData(*(int *)(e + 2), *(int *)(f + 2),
 							(int)(gm_RandomMod(0x40) & 0xffff) - 0x20, 0);
-					res = fcn_004c54c0(*(int *)(f + 2), *(int *)(e + 2),
+					res = cm_RequestCopyEntityData(*(int *)(f + 2), *(int *)(e + 2),
 							(int)(gm_RandomMod(0x40) & 0xffff) - 0x20, 0);
 					total += 2;
 					if (res != -1 && total % 10 == 0) {
-						while (fcn_004c4450(res) == 0) {
+						while (cm_GetCommandStatus(res) == 0) {
 							fcn_00535960();
 						}
 					}

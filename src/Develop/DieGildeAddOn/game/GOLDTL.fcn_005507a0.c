@@ -18,11 +18,11 @@ extern char* gm_CityEntity;
 extern float g_6652c8;
 extern char g_6a5a10[];
 
-int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl fcn_0050fe40(unsigned short, int);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
@@ -33,7 +33,7 @@ void __cdecl fcn_005507a0(char* u)
 	int v;
 
 	if (*(int*) (u + 0x70) != -1 && *(int*) (u + 0x70) != -2) {
-		if (fcn_00500cb0(&gm_GameTime, u + 0x44) == -1) {
+		if (gm_CompareGameTime(&gm_GameTime, u + 0x44) == -1) {
 			return;
 		}
 		switch (*(int*) (u + 0x70)) {
@@ -56,7 +56,7 @@ void __cdecl fcn_005507a0(char* u)
 				return;
 			}
 			if (g_100f1dc == 2) {
-				fcn_004c5150(*(int*) (gm_CityEntity + 4), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, g_773d75,
+				cm_RequestMoveCredits(*(int*) (gm_CityEntity + 4), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, g_773d75,
 				    (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8));
 				fcn_0050fe40(*(unsigned short*) (u + 8), 8);
 				fcn_00545780(u);

@@ -31,11 +31,11 @@ extern int g_14ce8e0;
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void __cdecl fcn_004c6ae0(int, int);
-extern int __cdecl fcn_004c5420(int, int, int, int, int);
+extern int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 extern void __cdecl fcn_005099e0(char*, int);
-extern void __cdecl fcn_004c57e0(int, int);
+extern void __cdecl cm_RequestKillSpieler(int, int);
 extern char* __cdecl fcn_005bdc30(int, int*, char*, int, int);
 extern int __cdecl fcn_00470820(int, int, char*);
 extern void __cdecl d2_SetOverlayAnimation(int, int);
@@ -44,7 +44,7 @@ extern void __cdecl d2_SetForm(int, int);
 extern int __cdecl io_AppendText(int, int, int, int);
 extern int __cdecl d2_GetWindowListItem(int, int, int);
 extern int __cdecl d2_CheckActionBlocker(char*, int);
-extern int __cdecl fcn_004c4450(int);
+extern int __cdecl cm_GetCommandStatus(int);
 extern void __cdecl fcn_00535960(void);
 extern void __cdecl fcn_00526120(char*, int);
 extern int __cdecl gm_RandomMod(int);
@@ -92,7 +92,7 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 		if (rec == 0)
 			goto fail60;
 		fcn_004c6ae0(*(int*) (entity + 4), -5);
-		fcn_004c5420(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
+		cm_RequestChangeBits(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
 		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_type == 6 ||
 		    ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)].entity_type == 7) {
 			io_FormatTextBuffer(text, 0x1ddf, *(unsigned short*) entity, rec, *(unsigned short*) ent);
@@ -100,7 +100,7 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 				text, 0, 0x5fb, (char*) 0x6a59fc);
 		}
 		fcn_005099e0(ent, (int) gm_CityEntity);
-		fcn_004c57e0(*(int*) (ent + 4), 1);
+		cm_RequestKillSpieler(*(int*) (ent + 4), 1);
 		return 0x10;
 	}
 	memset(&found, 0, sizeof(found));
@@ -142,8 +142,8 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 			if (d2_CurrentElementId == kid) {
 				if (d2_CheckActionBlocker(entity, 5) != 0) {
 					fcn_004c6ae0(*(int*) (entity + 4), -5);
-					thr = fcn_004c5420(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
-					while (fcn_004c4450(thr) == 0) {
+					thr = cm_RequestChangeBits(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
+					while (cm_GetCommandStatus(thr) == 0) {
 						fcn_00535960();
 					}
 					io_FormatTextBuffer(text, 0x1dde);
@@ -170,7 +170,7 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 								text, 0, 0x5fb, (char*) 0x6a59fc);
 						}
 						fcn_005099e0(ent, (int) gm_CityEntity);
-						fcn_004c57e0(*(int*) (ent + 4), 1);
+						cm_RequestKillSpieler(*(int*) (ent + 4), 1);
 					}
 					ret = 0x81;
 					g_774654 = 1;

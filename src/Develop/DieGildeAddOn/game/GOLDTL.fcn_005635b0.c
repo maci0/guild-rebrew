@@ -53,11 +53,11 @@ extern unsigned char* lpGebaeudePROT;
 
 
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_SendCopyEntityData(void*);
 int __cdecl fcn_004c5620(int, Order_5635b0*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl he_FreeAction(Order_5635b0*);
@@ -76,7 +76,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 	BUILDING_PROTOTYPE* k;
 
 	if ((o->flags & 2) && o->event != -1) {
-		if (fcn_004c4450(o->event) == 0) {
+		if (cm_GetCommandStatus(o->event) == 0) {
 			return;
 		}
 		o->event = -1;
@@ -115,9 +115,9 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 					*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 					*(int*) (m + 0x60) = o->who;
 					*(int*) (m + 0x68) = o->value;
-					fcn_004c5530(m);
+					cm_SendCopyEntityData(m);
 					o->event = fcn_004c5620(-1, o);
-					fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 2);
+					cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 2);
 				}
 			}
 		}
@@ -133,7 +133,7 @@ next:
 			he_FreeAction(o);
 			return;
 		}
-		fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 2);
+		cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 2);
 		he_FreeAction(o);
 		return;
 	}

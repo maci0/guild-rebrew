@@ -1,6 +1,6 @@
 int __cdecl fcn_004c5870(int id, int v);
 char* __cdecl he_StartHandlungSearch(int a1, int a2, int a3);
-int __cdecl fcn_004c4450(int i);
+int __cdecl cm_GetCommandStatus(int i);
 void __cdecl fcn_00535960(void);
 
 /* ADDRESS: GOLDTL 0x004f5830 */
@@ -25,7 +25,7 @@ void __cdecl fcn_004f5830(void)
 		if (count >= 0x20) {
 			if (handle != -1) {
 				while (1) {
-					if (fcn_004c4450(handle) != 0) {
+					if (cm_GetCommandStatus(handle) != 0) {
 						break;
 					}
 					fcn_00535960();

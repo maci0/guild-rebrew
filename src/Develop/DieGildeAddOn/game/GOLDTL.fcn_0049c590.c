@@ -18,8 +18,8 @@ int __cdecl gm_StartFilteredEntitySearch(int a0, int a1, int a2);
 int __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3, int a4);
 void __cdecl cm_BeginPacketFieldDelta(int a0, int a1);
 void __cdecl cm_AppendPacketFieldValue(int a0, int a1, int a2, char* a3);
-int __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c51a0(int a0, int a1, char a2, int a3);
+int __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_RequestTransferCurrencyNoKill(int a0, int a1, char a2, int a3);
 void __cdecl fcn_004f5e20(int a0, int a1);
 void __cdecl he_NotifyAblassPurchase(int a0, char* a1, int a2, int a3, int a4);
 void __cdecl fcn_005100f0(int a0, int a1);
@@ -51,10 +51,10 @@ int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandAr
 		computedAmount = (int) (n / log10((double) n));
 		cm_BeginPacketFieldDelta(entityArg, *(int*) (entityArg + 4));
 		cm_AppendPacketFieldValue(4, 1, 0x1ac, purchaseReq + 0x10);
-		fcn_004c5360();
-		fcn_004c51a0(-1, *(int*) (entityArg + 4), g_773d75,
+		cm_RequestChangeAttribute();
+		cm_RequestTransferCurrencyNoKill(-1, *(int*) (entityArg + 4), g_773d75,
 		    *(int*) (purchaseReq + 0x10));
-		fcn_004c51a0(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]
+		cm_RequestTransferCurrencyNoKill(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]
 			+ 4),
 		    -1, g_773d75, computedAmount);
 		fcn_004f5e20(*(int*) (entityArg + 4), (int) *(float*) (purchaseReq + 0x14));

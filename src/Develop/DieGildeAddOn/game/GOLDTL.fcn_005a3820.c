@@ -10,7 +10,7 @@ char* __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_00597ec0(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
-void __cdecl fcn_005cf560(char*);
+void __cdecl d2_OpenMeisterbriefDialog(char*);
 void __cdecl fcn_005a3680(void);
 
 extern int g_7746d8;
@@ -91,7 +91,7 @@ ready:
 			if (active == second) {
 				d2_ShowLagerOptions(app, *(int*) (app + 0x5d));
 			} else if (active == third) {
-				fcn_005cf560(app);
+				d2_OpenMeisterbriefDialog(app);
 			} else if (active == fourth) {
 				*(int*) (fourth + 0x224) = 0;
 				fcn_005a3680();

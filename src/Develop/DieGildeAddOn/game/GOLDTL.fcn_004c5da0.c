@@ -24,7 +24,7 @@ char* __cdecl gm_SearchTable67(int);
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
-int __cdecl fcn_004c4330(pkt99*);
+int __cdecl cm_EnqueueClientPacket(pkt99*);
 
 
 /* ADDRESS: GOLDTL 0x004c5da0 */
@@ -79,5 +79,5 @@ int __cdecl fcn_004c5da0(int who, int key, int target, char* name, int mode, cha
 		pkt.target = -1;
 	}
 send:
-	return fcn_004c4330(&pkt);
+	return cm_EnqueueClientPacket(&pkt);
 }

@@ -18,15 +18,15 @@ extern s_7e2ac0 g_7e2ac0[48];
 extern float g_696540[];
 extern float g_696550[];
 
-int __cdecl fcn_00500e20(int* stamp);
+int __cdecl gm_GetSeason(int* stamp);
 
-int __cdecl fcn_00530b20(char* ent, int owner, char* out)
+int __cdecl he_FindActionMetaName(char* ent, int owner, char* out)
 {
 	int hour;
 	int i;
 	float t;
 
-	hour = fcn_00500e20(&(*(int*)&gm_GameTime));
+	hour = gm_GetSeason(&(*(int*)&gm_GameTime));
 	for (i = 0; ((Job*)g_7e2ac0)[i].kind != 0; i++) {
 		if (((Job*)g_7e2ac0)[i].kind == *(unsigned char*) (ent + 0x180)) {
 			if ((*(unsigned int*) (ent + 0x1cc) & 0x1000000) != 0) {

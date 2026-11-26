@@ -42,11 +42,11 @@ void __cdecl fcn_00472640(int i, int flag);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00525ef0(void);
 
-int __cdecl fcn_004c4700(int type, int count, int off, char* data);
-int __cdecl fcn_004c53a0(void);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_AppendCommandSyncField(int type, int count, int off, char* data);
+int __cdecl cm_SendSetAttribute(void);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_004c5790(int, void*);
+int __cdecl cm_RequestSysMessage(int, void*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ClearRadioGroup(int i);
 void __cdecl fcn_00471e30(int);
@@ -112,9 +112,9 @@ void __cdecl d2_ChooseWappen(void)
 			district = g_102cbc4[grp].sel + DISTRICT0;
 			found = 0;
 			cm_BeginPacketFieldDelta((char*) me_h, me_h->handle);
-			fcn_004c4700(4, 1, (char*) me_h - g_aed32c + 0x54, (char*) &district);
-			r = fcn_004c53a0();
-			while (fcn_004c4450(r) == 0) {
+			cm_AppendCommandSyncField(4, 1, (char*) me_h - g_aed32c + 0x54, (char*) &district);
+			r = cm_SendSetAttribute();
+			while (cm_GetCommandStatus(r) == 0) {
 				fcn_00535960();
 			}
 			for (i = 8; i != 0; i--) {
@@ -129,7 +129,7 @@ void __cdecl d2_ChooseWappen(void)
 				g_774654 = 1;
 				memset(ev, 0, sizeof(ev));
 				ev[0] = g_774970;
-				fcn_004c5790(0xd, ev);
+				cm_RequestSysMessage(0xd, ev);
 			}
 		}
 	} while (main_RunFrameLoop(d2_ChooseWappen, 0x677c7) != 0);

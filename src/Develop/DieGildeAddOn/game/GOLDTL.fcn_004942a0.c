@@ -15,7 +15,7 @@ typedef struct Share {
 extern char g_868060[];
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
-float __cdecl fcn_00502820(int x0, int y0, int x1, int y1);
+float __cdecl gm_GetTileDistance(int x0, int y0, int x1, int y1);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004942a0 */
@@ -43,7 +43,7 @@ void __cdecl gm_CalcStudiumOffers(unsigned short* e, Share* out)
 	total = (int) (gm_WalkEntityChain(*e) * 0.025f);
 	max = 0;
 	for (i = 0; i < 3; i++) {
-		dist[i] = fcn_00502820(((Player*)g_868060)[0].x, ((Player*)g_868060)[0].y, ((Player*)g_868060)[i + 1].x, ((Player*)g_868060)[i + 1].y);
+		dist[i] = gm_GetTileDistance(((Player*)g_868060)[0].x, ((Player*)g_868060)[0].y, ((Player*)g_868060)[i + 1].x, ((Player*)g_868060)[i + 1].y);
 		if (dist[i] > max) {
 			max = dist[i];
 		}

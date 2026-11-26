@@ -10,7 +10,7 @@ typedef struct
 
 extern char* lpObjektePROT;
 
-int __cdecl fcn_005014d0(int i)
+int __cdecl gm_IsRawItem(int i)
 {
 	OBJECT_PROTOTYPE* e;
 

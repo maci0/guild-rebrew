@@ -41,7 +41,7 @@ void __cdecl fcn_00472640(int a, int b);
 void __cdecl cm_BeginPacketFieldDelta(void* p, unsigned int value);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, unsigned int* value);
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int off, void* value);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 void __cdecl fcn_00471e30(int a);
 
@@ -241,12 +241,12 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 							cm_AppendPacketFieldDelta(4, 1,
 								(int) ((char*) a1 + 0x1b4 - g_aed32c),
 								&cfg.flags);
-							fcn_004c5360();
+							cm_RequestChangeAttribute();
 							cm_BeginPacketFieldDelta(a0, *(unsigned int*) ((char*) a0 + 1));
 							cm_AppendPacketFieldDelta(4, 1,
 								(int) ((char*) a0 + 0x99 - g_aed32c),
 								&cfg.flags);
-							fcn_004c5360();
+							cm_RequestChangeAttribute();
 							fcn_005ce800(v28, &v16, &v15, v14,
 								(unsigned char*) a0, *a1, cfg, &v13, (int) v27);
 							v23 = -1;
@@ -265,12 +265,12 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 			cm_BeginPacketFieldDelta(a0, *(unsigned int*) ((char*) a0 + 1));
 			cm_AppendPacketFieldDelta(4, 1,
 				(int) ((char*) a0 + 0x39 - g_aed32c), &v15);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			v18[0] = v15 - *(int*) ((char*) a0 + 0x39);
 			cm_BeginPacketFieldDelta(a1, *(unsigned int*) ((char*) a1 + 4));
 			cm_AppendPacketFieldValue(4, 1,
 				(int) ((char*) a1 + 0x1b8 - g_aed32c), &v18[0]);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			fcn_00471e30(v28);
 			return;
 		}

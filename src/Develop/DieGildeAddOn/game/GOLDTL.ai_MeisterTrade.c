@@ -124,10 +124,10 @@ void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(char* a, int b);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count,
 	unsigned short off, char* src);
-void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c51f0(int a1, int a2, short a3, int a4, char a5, int a6);
-void __cdecl fcn_004c52d0(int a1, unsigned short a2);
-void __cdecl fcn_004c5530(int a1);
+void __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_SendSellObjekt(int a1, int a2, short a3, int a4, char a5, int a6);
+void __cdecl cm_RequestClearLagerslot(int a1, unsigned short a2);
+void __cdecl cm_SendCopyEntityData(int a1);
 char* __cdecl fcn_00503d10(int who);
 double __cdecl gm_RandomFloat01(void);
 
@@ -329,7 +329,7 @@ dump_stock:
 		cm_AppendPacketFieldDelta(4, 1,
 		    (unsigned short) ((r - *(char**) 0xaed32c) + 0x1c),
 		    (char*) &tmp);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 	}
 
 	tp = *(char**) (o + 0x16c);
@@ -354,7 +354,7 @@ dump_stock:
 			cm_AppendPacketFieldDelta(4, 1,
 			    (unsigned short) ((r - *(char**) 0xaed32c) + 0x1c),
 			    (char*) &tmp);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		}
 	}
 
@@ -387,7 +387,7 @@ next_request:
 		v.m.slots[0] = 5;
 		*(int*) ((char*) &v.m + 0x84) = 0;
 		v.m.f5c = 0x64 - *(unsigned char*) (r + 0x12);
-		fcn_004c5530((int) &v.m);
+		cm_SendCopyEntityData((int) &v.m);
 		goto tail;
 	}
 
@@ -458,7 +458,7 @@ next_request:
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2), id,
 				    tmp, g_773d75, 0);
-				fcn_004c51f0(*(int*) (bld + 2),
+				cm_SendSellObjekt(*(int*) (bld + 2),
 				    *(int*) (q + 2), id, tmp, g_773d75, 0);
 			}
 			v.s2.vals[i] -= tmp;
@@ -487,7 +487,7 @@ next_request:
 			sprintf(v.line, (char*) 0x67e358,
 			    *(int*) (bld + 2), *(int*) (q + 2), id, tmp,
 			    g_773d75, 0);
-			fcn_004c51f0(*(int*) (bld + 2), *(int*) (q + 2), id,
+			cm_SendSellObjekt(*(int*) (bld + 2), *(int*) (q + 2), id,
 			    tmp, g_773d75, 0);
 			v.s2.vals[i] -= tmp;
 			if (v.s2.vals[i] == 0) {
@@ -518,7 +518,7 @@ next_request:
 			    *(int*) (bld + 2), id, v.s1.vals[j],
 			    g_773d75, (double) price);
 			tmp = (int) fcn_0050bb50(id, g_773d75);
-			fcn_004c51f0(-1, *(int*) (bld + 2), id,
+			cm_SendSellObjekt(-1, *(int*) (bld + 2), id,
 			    v.s1.vals[j], g_773d75, tmp);
 			price = (int) fcn_0050bb50(id, g_773d75) +
 			    *(int*) (o + 0x1b8);
@@ -532,7 +532,7 @@ next_request:
 			sprintf(v.line, (char*) 0x67e358,
 			    *(int*) (bld + 2), *(int*) (q + 2), id, tmp,
 			    g_773d75, 0);
-			fcn_004c51f0(*(int*) (bld + 2), *(int*) (q + 2), id,
+			cm_SendSellObjekt(*(int*) (bld + 2), *(int*) (q + 2), id,
 			    tmp, g_773d75, 0);
 			v.s2.vals[i] -= tmp;
 			if (v.s2.vals[i] == 0) {
@@ -553,7 +553,7 @@ no_market:
 			    *(int*) (bld + 2), id, v.s2.vals[i], g_773d75,
 			    (double) price);
 			tmp = (int) fcn_0050bb50(id, g_773d75);
-			fcn_004c51f0(-1, *(int*) (bld + 2), id,
+			cm_SendSellObjekt(-1, *(int*) (bld + 2), id,
 			    v.s2.vals[i], g_773d75, tmp);
 			price = (int) fcn_0050bb50(id, g_773d75) +
 			    *(int*) (o + 0x1b8);
@@ -604,7 +604,7 @@ next_auto:
 			}
 			sprintf(v.line, (char*) 0x67e358, *(int*) (bld + 2),
 			    *(int*) (q + 2), id, tmp, g_773d75, 0);
-			fcn_004c51f0(*(int*) (bld + 2), *(int*) (q + 2), id,
+			cm_SendSellObjekt(*(int*) (bld + 2), *(int*) (q + 2), id,
 			    tmp, g_773d75, 0);
 			v.m.ids[cnt] = id;
 			v.m.slots[cnt] = *(int*) (g_773d78 + 1);
@@ -618,7 +618,7 @@ next_auto:
 		if (v.s1.vals[i] != 0) {
 			continue;
 		}
-		fcn_004c52d0(*(int*) (bld + 2), id);
+		cm_RequestClearLagerslot(*(int*) (bld + 2), id);
 		v.s1.ids[i] = 0;
 	}
 
@@ -664,7 +664,7 @@ next_auto:
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2), id,
 				    tmp, g_773d75, 0);
-				fcn_004c51f0(*(int*) (bld + 2),
+				cm_SendSellObjekt(*(int*) (bld + 2),
 				    *(int*) (q + 2), id, tmp, g_773d75, 0);
 				v.m.ids[cnt] = id;
 				v.m.slots[cnt] = *(int*) (g_773d78 + 1);
@@ -678,7 +678,7 @@ next_auto:
 			if (v.s3.vals[i] != 0) {
 				continue;
 			}
-			fcn_004c52d0(*(int*) (bld + 2), id);
+			cm_RequestClearLagerslot(*(int*) (bld + 2), id);
 			v.s3.ids[i] = 0;
 		}
 	}
@@ -705,7 +705,7 @@ next_auto:
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2),
 				    t->id, tmp, g_773d75, 0);
-				fcn_004c51f0(*(int*) (bld + 2),
+				cm_SendSellObjekt(*(int*) (bld + 2),
 				    *(int*) (q + 2), t->id, tmp, g_773d75, 0);
 				v.m.ids[cnt] = t->id;
 				v.m.slots[cnt] = *(int*) (g_773d78 + 1);
@@ -736,7 +736,7 @@ next_auto:
 				    g_773d75, (double) price);
 				tmp = (int) fcn_0050bb50(pr->id,
 				    g_773d75);
-				fcn_004c51f0(-1, *(int*) (bld + 2),
+				cm_SendSellObjekt(-1, *(int*) (bld + 2),
 				    pr->id, pr->qty18, g_773d75, tmp);
 				pr->qty18 = 0;
 				continue;
@@ -757,7 +757,7 @@ next_auto:
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2),
 				    pr->id, tmp, g_773d75, 0);
-				fcn_004c51f0(*(int*) (bld + 2),
+				cm_SendSellObjekt(*(int*) (bld + 2),
 				    *(int*) (q + 2), pr->id, tmp,
 				    g_773d75, 0);
 				v.m.ids[cnt] = pr->id;
@@ -844,7 +844,7 @@ next_auto:
 			v.m.f5c = s;
 			v.m.f60 = *(int*) (o + 4);
 			if (*(int*) 0x100b0a4 == 0) {
-				fcn_004c5530((int) &v.m);
+				cm_SendCopyEntityData((int) &v.m);
 				g_772620 = g_772620 + 1;
 			}
 		}

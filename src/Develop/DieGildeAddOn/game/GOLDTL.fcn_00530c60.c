@@ -17,9 +17,9 @@ extern int g_6b7fdc;
 extern pos14_7f4c00 gm_GameTime;
 extern s_7e2ac0 g_7e2ac0[48];
 
-int __cdecl fcn_00500e20(int*);
-int __cdecl fcn_00530b20(char*, int, char*);
-int __cdecl fcn_004c4450(unsigned int);
+int __cdecl gm_GetSeason(int*);
+int __cdecl he_FindActionMetaName(char*, int, char*);
+int __cdecl cm_GetCommandStatus(unsigned int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
 char* __cdecl evt_LoadScript(char*);
@@ -71,7 +71,7 @@ void __cdecl fcn_00530c60(unsigned char* building)
 		}
 		g_6a2520 = g_6b7fac;
 	}
-	hour = fcn_00500e20((int*) &gm_GameTime);
+	hour = gm_GetSeason((int*) &gm_GameTime);
 	i = 0;
 	do {
 		ent = ch_ContextCharacters[i];
@@ -81,7 +81,7 @@ void __cdecl fcn_00530c60(unsigned char* building)
 		    && *(int*) (info + 0x88) == g_67a370) {
 			mode = 0;
 			job[0] = 0;
-			r = fcn_00530b20(ent, (int) building, job);
+			r = he_FindActionMetaName(ent, (int) building, job);
 			if (r != 0) {
 				if (type_row->category == 0x0d) {
 					if (g_7746cc != 0) {

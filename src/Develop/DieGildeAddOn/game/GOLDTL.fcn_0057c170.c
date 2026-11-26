@@ -36,7 +36,7 @@ struct house {
 extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 
@@ -68,7 +68,7 @@ void __cdecl he_ApplyZigeunerBetrothal(struct house* a, struct house* b)
 	m.when = gm_GameTime;
 	m.code = 1;
 	m.who = h->owner;
-	fcn_004c5530(&m);
+	cm_SendCopyEntityData(&m);
 	if (b == a) {
 		id = 0x41dd;
 		strcpy(name, "_NACHRICHTEN_ZIGEUNER_02");

@@ -7,7 +7,7 @@ extern int g_aed330;
 extern unsigned short g_aece00;
 extern char g_aece02[];
 
-int __cdecl fcn_004c4df0(unsigned short n, void* src)
+int __cdecl cm_StageRawPacketPayload(unsigned short n, void* src)
 {
 	if (g_aed330 != 0) {
 		return 0;

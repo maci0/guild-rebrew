@@ -36,8 +36,8 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl he_FreeAction(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl gm_CheckMissionCondition(rec24*);
-int __cdecl fcn_004c5790(int, struct req*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_RequestSysMessage(int, struct req*);
+int __cdecl cm_GetCommandStatus(int);
 
 void __cdecl he_RunMissionCheck(char* u)
 {
@@ -72,7 +72,7 @@ void __cdecl he_RunMissionCheck(char* u)
 		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 		if (((rec24*)g_10069a0)[i].f20 == 1 && (unsigned short) gm_GameTime.b < 0x16 && g_6a3760 == -1) {
 			q.who = ((rec24*)g_10069a0)[i].f4;
-			*(int*) (u + 0xac) = fcn_004c5790(8, &q);
+			*(int*) (u + 0xac) = cm_RequestSysMessage(8, &q);
 			*(int*) (u + 0x70) = 2;
 			return;
 		}
@@ -80,7 +80,7 @@ void __cdecl he_RunMissionCheck(char* u)
 		*(int*) (u + 0x70) = 1;
 		return;
 	case 2:
-		r = fcn_004c4450(*(int*) (u + 0xac));
+		r = cm_GetCommandStatus(*(int*) (u + 0xac));
 		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 		if (r == 0) {
 			return;

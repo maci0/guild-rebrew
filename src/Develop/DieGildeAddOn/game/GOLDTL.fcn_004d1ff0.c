@@ -12,16 +12,16 @@ int __cdecl fcn_0045b700(int, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004d1cf0(void);
 void __cdecl cm_BeginCommandSync(void);
-void __cdecl fcn_004c51f0(int, int, int, int, int, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 void __cdecl cm_EndCommandSync(void);
-int __cdecl fcn_004c44c0(void);
+int __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004d1970(int, char *);
 void __cdecl SelectTextureSet(int, int, int, int);
 void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 int __cdecl fcn_00445600(int, int, int, char *);
-void __cdecl fcn_00442c00(int, int);
+void __cdecl d3_SetObjectVisible(int, int);
 void __cdecl gm_ShuffleBytes(int, void *);
 void __cdecl d3_SetSubtreeVisible(int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
@@ -220,10 +220,10 @@ void __cdecl fcn_004d1ff0(void *arg)
 		cm_BeginCommandSync();
 		for (p = (int *) (o + 0x100), i = 3; i != 0; i--, p++) {
 			if (*p != -1)
-				fcn_004c51f0(-2, -1, 0x154, 1, *(unsigned char *) &g_773d75, 0);
+				cm_SendSellObjekt(-2, -1, 0x154, 1, *(unsigned char *) &g_773d75, 0);
 		}
 		cm_EndCommandSync();
-		while (fcn_004c44c0() == 0)
+		while (cm_AreQueuedCommandsDone() == 0)
 			fcn_00535960();
 	}
 	for (p = (int *) (o + 0xc0), i = 0x10; i != 0; i--, p++) {
@@ -263,7 +263,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 		fcn_0064d41a(buf, "WARE_0%i", i);
 		h = fcn_00445600(0, 0x40, 0, buf);
 		if (h != 0)
-			fcn_00442c00(h, 0);
+			d3_SetObjectVisible(h, 0);
 	}
 	i = 0;
 	p = (int *) (o + 0x100);
@@ -315,10 +315,10 @@ void __cdecl fcn_004d1ff0(void *arg)
 						h = fcn_00445600(0, 0xc0, 0, buf);
 						if (h != 0) {
 							if (n - 1 < j)
-								fcn_00442c00(h, 0);
+								d3_SetObjectVisible(h, 0);
 							else {
 								*(int *) (h + 0x204) = slots[j];
-								fcn_00442c00(h, 1);
+								d3_SetObjectVisible(h, 1);
 								*(int *) (h + 0x224) = 1;
 							}
 						}

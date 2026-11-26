@@ -1,8 +1,8 @@
 extern int g_6b7d7c;
 extern char* g_6b7d78;
 
-char* __cdecl fcn_00422760(int key, int* idx);
-int __cdecl fcn_0042aaa0(int a1);
+char* __cdecl sb_FindVoiceBySample(int key, int* idx);
+int __cdecl msx_GetSampleStatus(int a1);
 
 /* ADDRESS: GOLDTL 0x004227c0 */
 char* __cdecl fcn_004227c0(void)
@@ -49,16 +49,16 @@ char* __cdecl fcn_004227c0(void)
 	}
 	if (found != 0) {
 		idx = 0;
-		p = fcn_00422760((int) found, &idx);
+		p = sb_FindVoiceBySample((int) found, &idx);
 		if (p != 0) {
 			do {
-				if (fcn_0042aaa0(*(int*) p) == 4 || (*(int*) (p + 0x14) | 0x10) != 0) {
+				if (msx_GetSampleStatus(*(int*) p) == 4 || (*(int*) (p + 0x14) | 0x10) != 0) {
 					found = 0;
 					break;
 				}
 				idx++;
 				*(int*) (p + 4) = 0;
-				p = fcn_00422760((int) found, &idx);
+				p = sb_FindVoiceBySample((int) found, &idx);
 			} while (p != 0);
 		}
 	}

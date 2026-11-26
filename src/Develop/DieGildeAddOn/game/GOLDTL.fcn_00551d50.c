@@ -15,7 +15,7 @@ void __cdecl he_FreeAction(void* u);
 void __cdecl fcn_004c6ba0(int a1, int a2, int a3);
 void __cdecl io_FormatTextBuffer(char* out, int a2, int a3, int a4);
 void __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
-void __cdecl fcn_004c5530(void* packet);
+void __cdecl cm_SendCopyEntityData(void* packet);
 void __cdecl fcn_004c6330(int id);
 int __cdecl sprintf(char*, const char*, ...);
 
@@ -84,7 +84,7 @@ void __cdecl fcn_00551d50(char* actionRecord)
 				*(char*) (packet + 0x36) = 9;
 				*(char*) (packet + 0x58) = *(unsigned char*) (actionRecord + 0xae);
 				*(int*) (packet + 0x5c) = value;
-				fcn_004c5530(packet);
+				cm_SendCopyEntityData(packet);
 			} else {
 				sprintf(msg, s_6a5b74, byte);
 				io_FormatTextBuffer(buf, 0x67728c, 0x16f2, *(unsigned char*) (actionRecord + 0xae) + 0x16f3);

@@ -54,14 +54,14 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_004f7120(int id, char* rec, int* out1, int* out2, int* idx);
 void __cdecl d2_ClearWindowChildren(int a, int b);
 int __cdecl io_AppendText(int id, ...);
-int __cdecl fcn_005ca560(struct sel* s);
+int __cdecl d2_BuildPersonStatusDesc(struct sel* s);
 void __cdecl fcn_005ca740(int x, int y, int a, int b, struct sel* s, int c);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_005c91c0(char* buf, int x, int y, int a, int b);
 char* __cdecl he_StartHandlungSearch(int a, int b, int c);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl d2_GetWindowListItem(int h, int a, int b);
-void __cdecl fcn_004c5530(Rec* r);
+void __cdecl cm_SendCopyEntityData(Rec* r);
 int __cdecl main_RunFrameLoop(void* fn, int id);
 void __cdecl fcn_00471e30(int h);
 
@@ -134,7 +134,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 				sel[j].x10 = y;
 				sel[j].x14 = line - 0x1e;
 				sel[j].used = (sel[j].who != 0);
-				fcn_005ca560(&sel[j]);
+				d2_BuildPersonStatusDesc(&sel[j]);
 				fcn_005ca740(sel[j].x10, sel[j].x14, d2_CurrentWindowId, 0x54, &sel[j], 1);
 				if (seen[j] == -1) {
 					io_FormatTextBuffer(buf, 0x18a6);
@@ -192,7 +192,7 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 			rec.x34 = g_7f4c0c;
 			rec.x5c = *(int*) (a0 + 1);
 			rec.x60 = *(int*) (a1 + 2);
-			fcn_004c5530(&rec);
+			cm_SendCopyEntityData(&rec);
 			g_774654 = 1;
 		} else if (g_14ce8e0 != 0) {
 			g_774654 = 1;

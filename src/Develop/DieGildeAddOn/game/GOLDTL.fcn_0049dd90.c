@@ -23,7 +23,7 @@ extern int __cdecl fcn_0050b810(int a0, unsigned char a1);
 extern unsigned short __cdecl gm_RandomMod(int a0);
 extern int __cdecl ai_SelectBestMethod(int a0, int a1, int a2, void *a3, void *a4);
 extern int __cdecl fcn_004a4fb0(void *a0, void *a1, char *a2, int a3);
-extern float __cdecl fcn_004fc460(float *a0);
+extern float __cdecl gm_GetCityStatsSummary(float *a0);
 extern int __cdecl fcn_0050d170(int a0);
 
 /* ADDRESS: GOLDTL 0x0049dd90 */
@@ -102,7 +102,7 @@ label_49df97:
     }
     if ((targetEntity[0x5a] & 0x41) == 0)
     {
-        fcn_004fc460(v15);
+        gm_GetCityStatsSummary(v15);
         if (*targetEntity == 0x11)
         {
             v19 = 0x12;

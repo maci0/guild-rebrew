@@ -8,7 +8,7 @@ extern unsigned char g_773d75;
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_004c51a0(int, int, unsigned char, int);
+int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
@@ -31,7 +31,7 @@ int __cdecl gm_ApplyEntityPercentDebit(void* request)
 	amount = (int) (((double) n * pct) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 	    (gm_RandomMod(6) & 0xffff) + 3, amount);
-	fcn_004c51a0(*(int*) request, -1, g_773d75, amount);
+	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, g_773d75, amount);
 	len = strlen(buf);
 	fcn_00545d40(*(int*) ((char*) entity + 4), *(int*) ((char*) entity + 4), buf,
 	    0x100 < len, 0x603, 0);

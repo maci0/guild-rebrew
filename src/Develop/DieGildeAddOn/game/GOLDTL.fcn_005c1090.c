@@ -10,7 +10,7 @@ void __cdecl fcn_00532ef0(void);
 
 
 /* ADDRESS: GOLDTL 0x005c1090 */
-void __cdecl fcn_005c1090(int enabled)
+void __cdecl d2_OpenDuelTargetPicker(int enabled)
 {
 	char buf[0x90];
 

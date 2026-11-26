@@ -16,16 +16,16 @@ extern float g_696444[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004c5480(int, int, float);
+void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl gm_AddTime(void*, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandResult(int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_004c5980(void*);
 
 /* ADDRESS: GOLDTL 0x004ff490 */
@@ -63,7 +63,7 @@ void __cdecl fcn_004ff490(char* entity)
 
 	ent = gm_LookupEntityRecordById(*(unsigned int*) (entity + 0x5c));
 	if (*(float*) (entity + 0x7c) > 1.0f) {
-		fcn_004c5480(*(unsigned int*) (entity + 4), 0x7c, gm_RandomFloat01() * -0.5f - *(float*) (entity + 0x7c));
+		cm_RequestChangeFloat(*(unsigned int*) (entity + 4), 0x7c, gm_RandomFloat01() * -0.5f - *(float*) (entity + 0x7c));
 		g_773d48++;
 		if (ent == 0) {
 			return;
@@ -124,14 +124,14 @@ void __cdecl fcn_004ff490(char* entity)
 			other = entity;
 		}
 
-		id = fcn_004c4fc0(8, *(int*) (ent + 4), *(int*) (entity + 4), 0, id, 0, 0, extra);
-		while (fcn_004c4450(id) == 0) {
+		id = cm_RequestAllocSpieler(8, *(int*) (ent + 4), *(int*) (entity + 4), 0, id, 0, 0, extra);
+		while (cm_GetCommandStatus(id) == 0) {
 			fcn_00535960();
 		}
-		if (fcn_004c4450(id) == 2) {
+		if (cm_GetCommandStatus(id) == 2) {
 			return;
 		}
-		handle = fcn_004c4480(id);
+		handle = cm_GetCommandResult(id);
 		if (other != 0) {
 			int mode;
 
@@ -149,7 +149,7 @@ void __cdecl fcn_004ff490(char* entity)
 			*(int*) (pkt + 0x38) = id;
 			cm_BeginPacketFieldDelta(handle, id);
 			cm_AppendPacketFieldDelta(1, 1, 2, &mode);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			fcn_004c5980(pkt);
 			g_773d48++;
 			return;
@@ -190,7 +190,7 @@ void __cdecl fcn_004ff490(char* entity)
 			}
 		}
 		f = (gm_RandomFloat01() + 1.0f) * g_696444[count];
-		fcn_004c5480(*(unsigned int*) (entity + 4), 0x7c, f);
+		cm_RequestChangeFloat(*(unsigned int*) (entity + 4), 0x7c, f);
 		g_773d48++;
 		return;
 	}

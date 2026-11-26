@@ -36,7 +36,7 @@ extern int __cdecl fcn_004ce260(void);
 extern int __cdecl fcn_004ce2a0(int, char*);
 extern int __cdecl fcn_004ce320(void*);
 extern int __cdecl fcn_004ce380(void*);
-extern int __cdecl fcn_004c4450(int);
+extern int __cdecl cm_GetCommandStatus(int);
 extern int __cdecl fcn_00507400(int, int);
 extern int __cdecl fcn_00507b00(int);
 extern int __cdecl fcn_0051af00(char*, int);
@@ -135,9 +135,9 @@ int __cdecl fcn_005926f0(void)
 	d = fcn_004ce320((void*)0x779c60);
 	if (d == -1)
 		return -1;
-	while (fcn_004c4450(d) == 0)
+	while (cm_GetCommandStatus(d) == 0)
 		fcn_00535960();
-	if (fcn_004c4450(d) == 2) {
+	if (cm_GetCommandStatus(d) == 2) {
 		fcn_0051af00(v11, 0x88);
 		fcn_00526120(v11, 0x100);
 		return -1;
@@ -145,7 +145,7 @@ int __cdecl fcn_005926f0(void)
 	d = fcn_004ce1d0();
 	if (d == -1)
 		return -1;
-	while (fcn_004c4450(d) == 0)
+	while (cm_GetCommandStatus(d) == 0)
 		fcn_00535960();
 	fcn_00469e30(0x7d6);
 	g_779cb8 = (char*)fcn_004ce1a0();
@@ -219,7 +219,7 @@ int __cdecl fcn_005926f0(void)
 			int key = *(int*)0x67d370;
 			if (key == *(int*)0x6a9b98) {
 				d = fcn_004ce260();
-				while (fcn_004c4450(d) == 0)
+				while (cm_GetCommandStatus(d) == 0)
 					fcn_00535960();
 				g_774654 = 1;
 				ret = -1;
@@ -227,7 +227,7 @@ int __cdecl fcn_005926f0(void)
 			}
 			if (key == *(int*)0x6a9b90) {
 				d = fcn_004ce210(*(int*)(g_779cb8 + 4) == 0);
-				while (fcn_004c4450(d) == 0)
+				while (cm_GetCommandStatus(d) == 0)
 					fcn_00535960();
 				*(int*)((char*)g_1015ea0 + *(int*)0x6a9b90 * 0x2f4 + 0x38) = *(int*)(g_779cb8 + 4);
 				if (fcn_004ce090())
@@ -235,7 +235,7 @@ int __cdecl fcn_005926f0(void)
 			} else if (key == *(int*)0x6a9b94) {
 				if (*(int*)(g_779cb8 + 4) != 0) {
 					d = fcn_004ce210(0);
-					while (fcn_004c4450(d) == 0)
+					while (cm_GetCommandStatus(d) == 0)
 						fcn_00535960();
 					*(int*)((char*)g_1015ea0 + *(int*)0x6a9b90 * 0x2f4 + 0x38) = *(int*)(g_779cb8 + 4);
 				}
@@ -246,12 +246,12 @@ int __cdecl fcn_005926f0(void)
 					*(unsigned char*)0x779c70 = *(unsigned char*)0x7e23e8;
 					*(unsigned char*)0x779c71 = *(unsigned char*)0x7e23e9;
 					d = fcn_004ce380((void*)0x779c60);
-					while (fcn_004c4450(d) == 0)
+					while (cm_GetCommandStatus(d) == 0)
 						fcn_00535960();
 					if (d2_ChooseProfession(0x24087)) {
 						*(unsigned char*)0x779c6b = *(unsigned char*)0x7e23e3;
 						d = fcn_004ce380((void*)0x779c60);
-						while (fcn_004c4450(d) == 0)
+						while (cm_GetCommandStatus(d) == 0)
 							fcn_00535960();
 					}
 				}
@@ -286,7 +286,7 @@ int __cdecl fcn_005926f0(void)
 				g_774654 = 1;
 			} else {
 				d = fcn_004ce1d0();
-				while (fcn_004c4450(d) == 0)
+				while (cm_GetCommandStatus(d) == 0)
 					fcn_00535960();
 				g_774a34 = (unsigned*)fcn_004ce180();
 				fcn_00593360();

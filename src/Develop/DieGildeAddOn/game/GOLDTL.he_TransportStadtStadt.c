@@ -12,9 +12,9 @@ extern char __cdecl fcn_0045b990(char *, float *, int *, int *, float *);
 extern void __cdecl d3_SelectSceneContext(int, int);
 extern void __cdecl d3_TransformPoint(char *, char *, float *);
 extern void __cdecl fcn_004c5d20(int, int);
-extern void __cdecl fcn_004c5b50(int, int, int, int);
-extern int __cdecl fcn_004c5290(int, int, int);
-extern void __cdecl fcn_004c5420(int, int, int, int, int);
+extern void __cdecl cm_RequestWalkOnPath(int, int, int, int);
+extern int __cdecl cm_RequestMoveObjekt(int, int, int);
+extern void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 extern int __cdecl fcn_004c5620(int, char *);
 extern int __cdecl CompareVector3WithinTolerance(float *, float *, float);
 extern char *__cdecl fcn_005049a0(unsigned char *);
@@ -84,9 +84,9 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 				}
 				fcn_004c5d20(*(int *)(v6 + 2), 1);
 			}
-			fcn_004c5b50(*(int *)(v6 + 2), l_a, l_b, 0);
+			cm_RequestWalkOnPath(*(int *)(v6 + 2), l_a, l_b, 0);
 			if (!fcn_00505340((unsigned char *)v4))
-				*(int *)(transportEvent + 0xec) = fcn_004c5290(*(int *)(v3 + 1),
+				*(int *)(transportEvent + 0xec) = cm_RequestMoveObjekt(*(int *)(v3 + 1),
 								   *(int *)(transportEvent + 0xb0),
 								   *(int *)(transportEvent + 0xac));
 		} else {
@@ -117,10 +117,10 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 				  300.0f) &&
 		    *(int *)(transportEvent + 0xd4) <= 6)
 			return;
-		fcn_004c5420(*(int *)(v4 + 2), 0x13, 1, 0, 0x40);
+		cm_RequestChangeBits(*(int *)(v4 + 2), 0x13, 1, 0, 0x40);
 		if (!fcn_00505340((unsigned char *)v5)) {
 			fcn_004c5d20(*(int *)(v4 + 2), 0);
-			*(int *)(transportEvent + 0xec) = fcn_004c5290(*(int *)(v5 + 1),
+			*(int *)(transportEvent + 0xec) = cm_RequestMoveObjekt(*(int *)(v5 + 1),
 							   *(int *)(v3 + 1),
 							   *(int *)(transportEvent + 0xac));
 		}

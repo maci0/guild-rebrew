@@ -28,7 +28,7 @@ typedef struct Rec6 {
 extern unsigned char g_773d75;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_0047dd60(unsigned char* p);
+int __cdecl gm_IsNpcEntityState(unsigned char* p);
 void __cdecl gm_CalcStudiumOffers(char* e, Share* out);
 Rec6 __cdecl fcn_00506d50(int idx);
 unsigned short __cdecl gm_RandomMod(int n);
@@ -57,7 +57,7 @@ int __cdecl ai_StartStudium(int a1, char* actor, int a3, Blk24* o1, Blk24* o2)
 			if (p[2] == 5 || p[2] == 6 || p[2] == 7) {
 				return 0;
 			}
-			if (p[9] == 0 && fcn_0047dd60(p) != 0) {
+			if (p[9] == 0 && gm_IsNpcEntityState(p) != 0) {
 				return 0;
 			}
 		}

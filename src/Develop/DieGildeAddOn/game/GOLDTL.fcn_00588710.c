@@ -5,7 +5,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00588200(int, int, int);
 void __cdecl d3_NormalizeVector(float*);
 void __cdecl fcn_00438b40(char*, int*);
-char __cdecl fcn_00442c00(char*, char);
+char __cdecl d3_SetObjectVisible(char*, char);
 
 /* ADDRESS: GOLDTL 0x00588710 */
 void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
@@ -51,9 +51,9 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 		}
 	}
 	for (i = 0; i != 3; i++) {
-		fcn_00442c00((char*) *(int*) (a1 + 0x8c + i * 4), 0);
+		d3_SetObjectVisible((char*) *(int*) (a1 + 0x8c + i * 4), 0);
 	}
-	fcn_00442c00((char*) *(int*) (a1 + 0x8c + selectedIndex * 4), 1);
+	d3_SetObjectVisible((char*) *(int*) (a1 + 0x8c + selectedIndex * 4), 1);
 	*(int*) (a1 + 0xa0) = selectedIndex;
 	start = *(unsigned int*) 0x6b7fac;
 	while (main_RunFrameLoop((void*) fcn_00588710, a4) != 0) {

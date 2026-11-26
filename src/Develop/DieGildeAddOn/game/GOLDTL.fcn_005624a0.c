@@ -21,16 +21,16 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(void*);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 int __cdecl fcn_004c5620(int, void*);
-void __cdecl fcn_004c57e0(int, int);
-void __cdecl fcn_004c5c80(unsigned int);
+void __cdecl cm_RequestKillSpieler(int, int);
+void __cdecl cm_SendCancelCharacterActions(unsigned int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl gm_ResolveEntityById(void**, int, int, int);
-int __cdecl fcn_00500cb0(void*, void*);
+int __cdecl gm_CompareGameTime(void*, void*);
 int __cdecl gm_IsEntityAtBuilding(void*, void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 
@@ -49,8 +49,8 @@ void __cdecl fcn_005624a0(char* ctx)
 		    && *(int*) (ctx + 0xd8) != -1) {
 			ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 			if (ent != 0) {
-				fcn_004c5c80(*(int*) (ent + 4));
-				fcn_004c57e0(*(int*) (ent + 4), 1);
+				cm_SendCancelCharacterActions(*(int*) (ent + 4));
+				cm_RequestKillSpieler(*(int*) (ent + 4), 1);
 			}
 		}
 		he_FreeAction(ctx);
@@ -59,15 +59,15 @@ void __cdecl fcn_005624a0(char* ctx)
 	if (*(unsigned char*) (ctx + 0x78) & 4) {
 		return;
 	}
-	if (*(int*) (ctx + 0x84) != -1 && !fcn_004c4450(*(int*) (ctx + 0x84))) {
+	if (*(int*) (ctx + 0x84) != -1 && !cm_GetCommandStatus(*(int*) (ctx + 0x84))) {
 		return;
 	}
 	switch (*(int*) (ctx + 0x70)) {
 	case 0:
-		if (*(int*) (ctx + 0xd8) != -1 && !fcn_004c4450(*(int*) (ctx + 0xd8))) {
+		if (*(int*) (ctx + 0xd8) != -1 && !cm_GetCommandStatus(*(int*) (ctx + 0xd8))) {
 			return;
 		}
-		ent = fcn_004c4480(*(int*) (ctx + 0xd8));
+		ent = cm_GetCommandResult(*(int*) (ctx + 0xd8));
 		if (ent != 0) {
 			house = gm_GetEntityTableEntry(g_7f4ca0
 			    + *(unsigned short*) (ctx + 8) * 0x21c);
@@ -75,7 +75,7 @@ void __cdecl fcn_005624a0(char* ctx)
 				*(int*) (house + 0x28) += *(int*) (ctx + 0xe4);
 			}
 			*(int*) (ctx + 0xd8) = *(int*) (ent + 4);
-			fcn_004c51a0(-1, *(int*) (g_7f4ca0
+			cm_RequestTransferCurrencyNoKill(-1, *(int*) (g_7f4ca0
 			    + *(unsigned short*) (ctx + 8) * 0x21c + 4), g_773d75, *(int*) (ctx + 0xe4));
 			fcn_00529160(0, 0, *(unsigned short*) ent, ctx);
 			*(pos14_7f4c00*)(ctx + 0x52) = gm_GameTime;
@@ -124,7 +124,7 @@ void __cdecl fcn_005624a0(char* ctx)
 		io_FormatTextBuffer(text, 0x6a6578, hit);
 		ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 		if (ent != 0) {
-			fcn_004c5c80(*(int*) (ent + 4));
+			cm_SendCancelCharacterActions(*(int*) (ent + 4));
 			fcn_004c5da0(*(int*) (ent + 4), *(int*) (hit + 1), -1, 0, 1, s_67ed14);
 			gm_AddTime(ctx + 0x52, 0, 5, 0);
 			*(int*) (ctx + 0xb4) = *(int*) (hit + 1);
@@ -156,8 +156,8 @@ void __cdecl fcn_005624a0(char* ctx)
 		}
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
 		if (hit != 0 && *(unsigned short*) (hit + 0x27) != 0xffff) {
-			if (fcn_00500cb0(ctx + 0xc8, &gm_GameTime) == -1) {
-				fcn_004c5c80(*(int*) (ent + 4));
+			if (gm_CompareGameTime(ctx + 0xc8, &gm_GameTime) == -1) {
+				cm_SendCancelCharacterActions(*(int*) (ent + 4));
 				fcn_004c5da0(*(int*) (ent + 4), *(int*) (hit + 1),
 				    -1, 0, 1, s_67ed14);
 				*(int*) (ctx + 0x84) = fcn_004c5620(3, ctx);

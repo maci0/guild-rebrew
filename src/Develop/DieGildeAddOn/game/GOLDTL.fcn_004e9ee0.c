@@ -4,7 +4,7 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_004e99e0(int, int, OFFICE_SLOT*);
 
@@ -37,12 +37,12 @@ int __cdecl fcn_004e9ee0(void)
 						flags[i] |= 1;
 					} else if (e1 != 0 && *(unsigned char*) (e1 + 8)) {
 						v = amt_SendOfficeCommand(recs[j].id, 0, 0, 4, 0xff);
-						while (v != -1 && !fcn_004c4450(v)) {
+						while (v != -1 && !cm_GetCommandStatus(v)) {
 							fcn_00535960();
 						}
 					} else {
 						v = amt_SendOfficeCommand(recs[j].id, (unsigned char*) e2, 0, 1, 0xff);
-						while (v != -1 && !fcn_004c4450(v)) {
+						while (v != -1 && !cm_GetCommandStatus(v)) {
 							fcn_00535960();
 						}
 					}

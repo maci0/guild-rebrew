@@ -31,7 +31,7 @@ void __cdecl d2_ShowMeisterbriefDialog(unsigned char*);
 void __cdecl fcn_005cea10(unsigned char*);
 void __cdecl fcn_00532ef0(void);
 
-void __cdecl fcn_005cf560(unsigned char* obj)
+void __cdecl d2_OpenMeisterbriefDialog(unsigned char* obj)
 {
 	Player* me;
 	Shop* t;

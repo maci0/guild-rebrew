@@ -26,13 +26,13 @@ extern char g_7f4ca0[];
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int count, ...);
 int __cdecl gm_CheckEntityType(unsigned char* e);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d);
-int __cdecl fcn_004c51f0(int a, int b, int c, int d, char e, int f);
-void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
+int __cdecl cm_SendSellObjekt(int a, int b, int c, int d, char e, int f);
+void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 char* __cdecl fcn_0050dc90(unsigned char* e);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, char* h);
 void __cdecl gm_AddTime(pos14_7f4c00* t, int a, int b, int c);
-int __cdecl fcn_004c5790(int kind, Req* r);
+int __cdecl cm_RequestSysMessage(int kind, Req* r);
 void __cdecl he_FreeAction(char* o);
 
 void __cdecl fcn_00563f60(char* o)
@@ -49,8 +49,8 @@ void __cdecl fcn_00563f60(char* o)
 	case 0:
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac));
 		if (e != 0) {
-			fcn_004c51f0(*(int*) (e + 1), -1, *(unsigned short*) (o + 0xb0), 1, (*(char*)&g_773d75), 0);
-			fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 0, 0x80);
+			cm_SendSellObjekt(*(int*) (e + 1), -1, *(unsigned short*) (o + 0xb0), 1, (*(char*)&g_773d75), 0);
+			cm_RequestChangeBits(*(int*) (e + 1), 0x5a, 2, 0, 0x80);
 		}
 		(*(int*) (o + 0x70))++;
 		break;
@@ -77,7 +77,7 @@ void __cdecl fcn_00563f60(char* o)
 				gm_AddTime((pos14_7f4c00*) &m, 0, 0, 1);
 				m.id = *(int*) (e + 1);
 				m.x4 = *(int*) (p + 2);
-				fcn_004c5790(4, &m);
+				cm_RequestSysMessage(4, &m);
 			}
 		}
 		he_FreeAction(o);
@@ -86,7 +86,7 @@ void __cdecl fcn_00563f60(char* o)
 	case -1:
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac));
 		if (e != 0) {
-			fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 0, 0x80);
+			cm_RequestChangeBits(*(int*) (e + 1), 0x5a, 2, 0, 0x80);
 		}
 		he_FreeAction(o);
 		break;

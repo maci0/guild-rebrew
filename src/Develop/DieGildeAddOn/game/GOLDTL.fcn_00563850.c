@@ -32,7 +32,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl he_FreeAction(struct unit*);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_00563850(struct unit* u)
@@ -46,7 +46,7 @@ void __cdecl fcn_00563850(struct unit* u)
 		return;
 	}
 	u->target = *(int*) (e + 1);
-	fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 4, 0);
+	cm_RequestChangeBits(*(int*) (e + 1), 0x5a, 2, 4, 0);
 	u->p60 = gm_GameTime;
 	u->p52 = gm_GameTime;
 	u->p44 = gm_GameTime;

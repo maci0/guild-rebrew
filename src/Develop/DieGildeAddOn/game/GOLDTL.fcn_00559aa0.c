@@ -26,9 +26,9 @@ extern int __cdecl gm_RandomMod(unsigned short range);
 extern double __cdecl gm_RandomFloat01(void);
 extern void __cdecl gm_ResolveEntityById(void** out, int a, int b, int item);
 extern int __cdecl gm_IsEntityAtBuilding(void* entity, void* record);
-extern int __cdecl fcn_004c5420(unsigned int handle, int a, int b, int c, int d);
+extern int __cdecl cm_RequestChangeBits(unsigned int handle, int a, int b, int c, int d);
 extern void __cdecl fcn_004c6650(unsigned int handle);
-extern void __cdecl fcn_004c5c80(unsigned int handle);
+extern void __cdecl cm_SendCancelCharacterActions(unsigned int handle);
 extern void __cdecl fcn_004c5da0(int house, int item, int a, int b, int c, char* name);
 extern void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 extern void* __cdecl gm_FindNextFilteredEntity(void);
@@ -77,13 +77,13 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 			job->flags |= 0x40;
 			if (job->pada[2] == 0xff) { /* never true (signed char vs 0xff), as in the original; do not "fix" */
 				job->pada[2] = (char) g_7f4c04;
-				fcn_004c5420(*(unsigned int*) (entity + 4), 0x1c8, 4, 0, 0x1000);
+				cm_RequestChangeBits(*(unsigned int*) (entity + 4), 0x1c8, 4, 0, 0x1000);
 				return;
 			}
 			if ((g_7f4c04 & 0xffff) <= (signed char) job->pada[2] + 1)
 				return;
 			job->flags &= 0xbf;
-			fcn_004c5420(*(unsigned int*) (entity + 4), 0x1c8, 4, 0x1000, 0);
+			cm_RequestChangeBits(*(unsigned int*) (entity + 4), 0x1c8, 4, 0x1000, 0);
 			fcn_004c6650(*(unsigned int*) (entity + 4));
 			job->pada[2] = (char) 0xff;
 		}
@@ -103,7 +103,7 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 		}
 	}
 	job->flags &= 0xef;
-	fcn_004c5c80(*(unsigned int*) (entity + 4));
+	cm_SendCancelCharacterActions(*(unsigned int*) (entity + 4));
 	if (!(gm_RandomFloat01() > g_6628cc)) {
 		divisor = (unsigned char) job->pada[0];
 		found = 0x100;

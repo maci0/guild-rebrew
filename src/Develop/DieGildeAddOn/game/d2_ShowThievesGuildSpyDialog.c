@@ -61,7 +61,7 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_SetForm(int h, int stage);
 int __cdecl io_AppendText(int id, int a, void* p);
 int __cdecl d2_GetWindowListItem(int h, int a, int b);
-void __cdecl fcn_004c5530(void* p);
+void __cdecl cm_SendCopyEntityData(void* p);
 void __cdecl fcn_004c35f0(void);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 void __cdecl fcn_00471e30(int h);
@@ -163,7 +163,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 								t = t + 0x21c;
 							} while ((int) t < (int) &g_7f4ca0[768].field4);
 							if (i) {
-								fcn_004c5530(&msg);
+								cm_SendCopyEntityData(&msg);
 								ret = 1;
 								fcn_004c35f0();
 								g_774654 = 1;

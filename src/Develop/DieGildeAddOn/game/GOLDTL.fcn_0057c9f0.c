@@ -9,7 +9,7 @@ unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
 int __cdecl io_FormatTextBuffer(char*, int, int, int, int);
 int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-int __cdecl fcn_004c51a0(int, int, unsigned char, int);
+int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x0057c9f0 */
 void __cdecl fcn_0057c9f0(char* action)
@@ -82,5 +82,5 @@ void __cdecl fcn_0057c9f0(char* action)
 	bonus = found * count;
 	io_FormatTextBuffer(buf, 0x41fa, handle, found, bonus);
 	fcn_00545d40(*(int*) (ent + 2), -1, buf, 1, 0x5fa, 0);
-	fcn_004c51a0(*(int*) (ent + 2), -1, g_773d75, bonus);
+	cm_RequestTransferCurrencyNoKill(*(int*) (ent + 2), -1, g_773d75, bonus);
 }

@@ -7,16 +7,16 @@ void __cdecl fcn_004c0a80(int*, int);
 
 
 /* ADDRESS: GOLDTL 0x004c30a0 */
-int* __cdecl fcn_004c30a0(int a, int b, int c, int d, int e)
+int* __cdecl d3snd_QueueSound(int code, int arg2, int text, int variation, int delay)
 {
 	int* p;
 
 	if (g_774934 == 0)
 		return 0;
-	p = fcn_004c2de0(a, b, c, d);
+	p = fcn_004c2de0(code, arg2, text, variation);
 	if (p != 0) {
 		sb_SetVoiceVolume(p, (int) (g_681750 * 127.0f));
-		fcn_004c0a80(p, e);
+		fcn_004c0a80(p, delay);
 	}
 	return p;
 }

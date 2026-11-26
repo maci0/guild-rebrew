@@ -9,12 +9,12 @@ extern float g_662924;
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
 float __cdecl gm_GetEntitySkill(char*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl amt_AdjustOfficeHoldersFavor(unsigned char*, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_004c5620(int, char*);
 
 /* ADDRESS: GOLDTL 0x0054f4a0 */
@@ -35,8 +35,8 @@ void __cdecl fcn_0054f4a0(char* a0, char* firstEntity, unsigned char* secondEnti
 		}
 		io_FormatTextBuffer(buf, 0x1d81, *(unsigned short*) secondEntity, *(unsigned short*) secondEntity, textId);
 		fcn_00545d40(*(int*) (firstEntity + 4), *(int*) (firstEntity + 4), buf, 0, 0x5fb, 0);
-		fcn_004c5420(*(int*) (firstEntity + 4), 0x1c8, 4, 0, 0x400);
-		fcn_004c5420(*(int*) (secondEntity + 4), 0x1c8, 4, 0, 0x400);
+		cm_RequestChangeBits(*(int*) (firstEntity + 4), 0x1c8, 4, 0, 0x400);
+		cm_RequestChangeBits(*(int*) (secondEntity + 4), 0x1c8, 4, 0, 0x400);
 	}
 	if (secondEntity[0x166] != 0) {
 		if (srv_GetEntityOfficeSlot(secondEntity, &role, &slot) != 0) {
@@ -47,7 +47,7 @@ void __cdecl fcn_0054f4a0(char* a0, char* firstEntity, unsigned char* secondEnti
 		}
 	}
 	amt_AdjustOfficeHoldersFavor(secondEntity, ret, -9 - (int) (gm_GetEntitySkill(firstEntity, 4) * 8.0f) - (gm_RandomMod(8) & 0xffff));
-	fcn_004c54c0(*(int*) (firstEntity + 4), *(int*) (secondEntity + 4), -0x14, 1);
+	cm_RequestCopyEntityData(*(int*) (firstEntity + 4), *(int*) (secondEntity + 4), -0x14, 1);
 	*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 	fcn_004c5620(-1, a0);
 }

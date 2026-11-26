@@ -94,9 +94,9 @@ extern int g_100f1dc;
 extern unsigned char g_14cf950[];
 
 int __cdecl fcn_00509570(void*);
-int __cdecl fcn_00500e20(int*);
+int __cdecl gm_GetSeason(int*);
 int __cdecl fcn_0052a310(pos14_7f4c00*);
-void __cdecl fcn_0052a890(pos14_7f4c00*);
+void __cdecl gm_UpdateDaylightSchedule(pos14_7f4c00*);
 int __cdecl fcn_004ec9e0(void);
 void* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
@@ -107,16 +107,16 @@ void __cdecl sv_WaitForNetworkSync(int);
 void __cdecl fcn_005355f0(void);
 void __cdecl gm_BuildDealSummary(int, void*);
 void __cdecl fcn_004fd400(short*, int*);
-void* __cdecl fcn_004c5790(int, void*);
-int __cdecl fcn_004c4450(void*);
+void* __cdecl cm_RequestSysMessage(int, void*);
+int __cdecl cm_GetCommandStatus(void*);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_0042df30(int, int);
+void __cdecl tb_SetCallbackPaused(int, int);
 int __cdecl he_StartHandlungSearch(int, ...);
-void __cdecl fcn_004c5530(void*);
-void __cdecl fcn_004c4eb0(int);
-void __cdecl fcn_004c4ef0(int);
-void __cdecl fcn_004c5150(int, int, char, int);
-int __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_SendCopyEntityData(void*);
+void __cdecl cm_SendLogAction(int);
+void __cdecl cm_SendTraceEnd(int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_004bbc30(int, int);
 int __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005459a0(int);
@@ -125,7 +125,7 @@ void __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl fcn_00519190(int, ...);
-void __cdecl fcn_004c57e0(int, int);
+void __cdecl cm_RequestKillSpieler(int, int);
 int __cdecl he_SumEventCostsForSubject(int);
 void __cdecl fcn_00516f60(void);
 void __cdecl fcn_005270c0(int);
@@ -142,7 +142,7 @@ int __cdecl fcn_0047d240(void*);
 unsigned short __cdecl fcn_0042e410(int);
 int __cdecl gm_GetEntityMood(void*);
 int __cdecl gm_CalculateGebaeudeValue(void*, int);
-int __cdecl fcn_0047dd60(void*);
+int __cdecl gm_IsNpcEntityState(void*);
 int __cdecl fcn_00567170(void*, int*, int*, int*);
 void* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
@@ -178,7 +178,7 @@ void __cdecl fcn_00540020(void)
 
 	v5 = (unsigned char*) fcn_00509570(SLOTPTR(g_774970 & 0xffff));
 	hp = 0;
-	fcn_00500e20((int*) &gm_GameTime);
+	gm_GetSeason((int*) &gm_GameTime);
 	pos.clock.a = gm_GameTime.a;
 	pos.clock.b = gm_GameTime.b;
 	pos.clock.c = gm_GameTime.c;
@@ -212,17 +212,17 @@ void __cdecl fcn_00540020(void)
 	}
 
 	gm_BuildDealSummary(g_774970 & 0xffff, arr);
-	fcn_0052a890((pos14_7f4c00*) &pos);
+	gm_UpdateDaylightSchedule((pos14_7f4c00*) &pos);
 	g_7e4314 = fcn_0052a310((pos14_7f4c00*) &pos);
 	fcn_004fd400(&pos.out, &i);
 	i = 0;
 	tm.stamp = pos.clock.a;
 	tm.now = (*(int (__stdcall **) (void)) 0x662318) ();
-	wait = fcn_004c5790(0, &tm);
-	while (fcn_004c4450(wait) == 0) {
+	wait = cm_RequestSysMessage(0, &tm);
+	while (cm_GetCommandStatus(wait) == 0) {
 		fcn_00535960();
 	}
-	fcn_0042df30(0x538060, 1);
+	tb_SetCallbackPaused(0x538060, 1);
 
 	if ((g_7747b0 & 0x80) == 0) {
 		if (he_StartHandlungSearch(1, 0, 0x66) == 0) {
@@ -235,7 +235,7 @@ void __cdecl fcn_00540020(void)
 			evs[0].mon = gm_GameTime.b;
 			evs[0].day = gm_GameTime.c;
 			evs[0].wd = gm_GameTime.d;
-			fcn_004c5530(&evs[0]);
+			cm_SendCopyEntityData(&evs[0]);
 		}
 		if (he_StartHandlungSearch(1, 0, 0x70) == 0) {
 			memset(evs, 0, sizeof(evs));
@@ -247,7 +247,7 @@ void __cdecl fcn_00540020(void)
 			evs[0].mon = gm_GameTime.b;
 			evs[0].day = gm_GameTime.c;
 			evs[0].wd = gm_GameTime.d;
-			fcn_004c5530(&evs[0]);
+			cm_SendCopyEntityData(&evs[0]);
 		}
 		if (he_StartHandlungSearch(1, 0, 0x68) == 0) {
 			memset(evs, 0, sizeof(evs));
@@ -259,7 +259,7 @@ void __cdecl fcn_00540020(void)
 			evs[0].mon = gm_GameTime.b;
 			evs[0].day = gm_GameTime.c;
 			evs[0].wd = gm_GameTime.d;
-			fcn_004c5530(&evs[0]);
+			cm_SendCopyEntityData(&evs[0]);
 		}
 	}
 	if (g_7747f0 != 0) {
@@ -273,7 +273,7 @@ void __cdecl fcn_00540020(void)
 			evs[0].mon = gm_GameTime.b;
 			evs[0].day = gm_GameTime.c;
 			evs[0].wd = gm_GameTime.d;
-			fcn_004c5530(&evs[0]);
+			cm_SendCopyEntityData(&evs[0]);
 		}
 	}
 	if (he_StartHandlungSearch(1, 0, 0x7c) == 0) {
@@ -286,7 +286,7 @@ void __cdecl fcn_00540020(void)
 		evs[0].mon = gm_GameTime.b;
 		evs[0].day = gm_GameTime.c;
 		evs[0].wd = gm_GameTime.d;
-		fcn_004c5530(&evs[0]);
+		cm_SendCopyEntityData(&evs[0]);
 	}
 	if (he_StartHandlungSearch(1, 0, 0x93) == 0) {
 		memset(evs, 0, sizeof(evs));
@@ -298,7 +298,7 @@ void __cdecl fcn_00540020(void)
 		evs[0].mon = gm_GameTime.b;
 		evs[0].day = gm_GameTime.c;
 		evs[0].wd = gm_GameTime.d;
-		fcn_004c5530(&evs[0]);
+		cm_SendCopyEntityData(&evs[0]);
 	}
 	if (he_StartHandlungSearch(1, 0, 0x84) == 0 && g_77670b != 0) {
 		memset(evs, 0, sizeof(evs));
@@ -310,7 +310,7 @@ void __cdecl fcn_00540020(void)
 		evs[0].mon = gm_GameTime.b;
 		evs[0].day = gm_GameTime.c;
 		evs[0].wd = gm_GameTime.d;
-		fcn_004c5530(&evs[0]);
+		cm_SendCopyEntityData(&evs[0]);
 	}
 
 	if (g_6a25b8 != -1) {
@@ -378,10 +378,10 @@ void __cdecl fcn_00540020(void)
 		fcn_005355f0();
 		fcn_00469e70();
 	}
-	fcn_004c51a0(-1, SLOT4(g_774970 & 0xffff), g_773d75,
+	cm_RequestTransferCurrencyNoKill(-1, SLOT4(g_774970 & 0xffff), g_773d75,
 		     -he_SumEventCostsForSubject(g_774970 & 0xffff));
 	fcn_004bbc30(3, SLOT4(g_774970 & 0xffff));
-	fcn_004c5790(1, 0);
+	cm_RequestSysMessage(1, 0);
 	if (g_7747b0 & 4) {
 		sv_WaitForNetworkSync(0x24087);
 	}
@@ -414,7 +414,7 @@ void __cdecl fcn_00540020(void)
 			evs[0].day = gm_GameTime.c;
 			evs[0].wd = gm_GameTime.d;
 			evs[0].visible = 1;
-			fcn_004c5530(&evs[0]);
+			cm_SendCopyEntityData(&evs[0]);
 		}
 	}
 
@@ -486,11 +486,11 @@ void __cdecl fcn_00540020(void)
 							evs[0].f5c = 0xa;
 							evs[0].ent = SLOT4(i);
 							evs[0].f58 = *(int*) ((char*) obj + 1);
-							fcn_004c4eb0(0x67e330);
-							fcn_004c5150(-1, SLOT4(i), g_773d75,
+							cm_SendLogAction(0x67e330);
+							cm_RequestMoveCredits(-1, SLOT4(i), g_773d75,
 								     (int) (*(float*) &agebits));
-							fcn_004c5530(&evs[0]);
-							fcn_004c4ef0(0x67e330);
+							cm_SendCopyEntityData(&evs[0]);
+							cm_SendTraceEnd(0x67e330);
 							ent = (int) fcn_00509570(SLOTPTR(i));
 							if (ent != 0) {
 								*(int*) (ent + 0x44) =
@@ -567,7 +567,7 @@ next2:
 			continue;
 		}
 		((int*) (SLOTPTR(i) + 0x1c8))[0] &= 0xffffe7ff;
-		if (fcn_0047dd60(SLOTPTR(i)) != 0) {
+		if (gm_IsNpcEntityState(SLOTPTR(i)) != 0) {
 			*(int*) (SLOTPTR(i) + 0x1b8) = *(int*) (*(int*) (SLOTPTR(i) + 0x16c) + 0x39);
 		}
 	}
@@ -597,7 +597,7 @@ next2:
 		}
 		if ((g_7747b0 & 8) && *(char**) (SLOTPTR(i) + 0x184) != 0
 		    && *(unsigned char*) (SLOTPTR(i) + 2) == 0x0d && *(int*) (SLOTPTR(i) + 0x17c) == 0) {
-			fcn_004c57e0(*(int*) (SLOTPTR(i) + 4), 1);
+			cm_RequestKillSpieler(*(int*) (SLOTPTR(i) + 4), 1);
 		}
 	}
 

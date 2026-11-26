@@ -13,9 +13,9 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004c4df0(int, void*);
+void __cdecl cm_StageRawPacketPayload(int, void*);
 int __cdecl cm_RequestSendCutInfo(int, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 
 void __cdecl fcn_004e5070(unsigned char* s, int id)
@@ -32,9 +32,9 @@ void __cdecl fcn_004e5070(unsigned char* s, int id)
 			copy.f0 = 1;
 			copy.fc = 1;
 			copy.f14 = 0;
-			fcn_004c4df0(0x35c, &copy);
+			cm_StageRawPacketPayload(0x35c, &copy);
 			h = cm_RequestSendCutInfo(id, *(int*) s);
-			while (fcn_004c4450(h) == 0)
+			while (cm_GetCommandStatus(h) == 0)
 				fcn_00535960();
 		}
 	}

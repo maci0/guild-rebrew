@@ -5,7 +5,7 @@
 
 int __cdecl fcn_004f0ed0(void*);
 
-void __cdecl fcn_004cced0(char* a, char* b)
+void __cdecl cm_ChkGraveyardTransfer(char* a, char* b)
 {
 	int r;
 	if (b != 0) {

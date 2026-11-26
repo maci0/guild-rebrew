@@ -13,7 +13,7 @@ extern HEAD_SET g_6918e8[];
 
 void __cdecl fcn_004fdd70(HEAD_SET*);
 
-HEAD_SET* __cdecl fcn_004fd9d0(int which, int key)
+HEAD_SET* __cdecl gm_FindOrAllocHeadSet(int which, int key)
 {
 	HEAD_SET* base;
 	int i;

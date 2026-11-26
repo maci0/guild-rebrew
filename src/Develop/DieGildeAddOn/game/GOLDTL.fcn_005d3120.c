@@ -15,8 +15,8 @@ int __cdecl d2_GetWindowListItem(char*, int, char*);
 int __cdecl fcn_00471e30(int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_RandomMod(unsigned short n);
-void __cdecl fcn_004c5530(char* a);
-void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
+void __cdecl cm_SendCopyEntityData(char* a);
+void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 int __cdecl fcn_004c5620(char a1, unsigned char* e);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
@@ -86,7 +86,7 @@ int __cdecl fcn_005d3120(int entity, int* request)
 		buf[0x04] = 0x41;
 		buf[0x36] = 2;
 		*(int*) (buf + 0x5c) = *(int*) (p + 4);
-		fcn_004c5530(buf);
+		cm_SendCopyEntityData(buf);
 		return 0x10;
 	}
 	if (mode == 1) {
@@ -179,7 +179,7 @@ int __cdecl fcn_005d3120(int entity, int* request)
 					}
 					*(char*) (e + 0xba) = 0;
 					*(int*) (e + 0x84) = fcn_004c5620(0, (unsigned char*) e);
-					fcn_004c5150(-1, *(int*) (entity + 4), g_773d75, q);
+					cm_RequestMoveCredits(-1, *(int*) (entity + 4), g_773d75, q);
 					fcn_00526120(buf2, 0);
 					mode = mode;
 					g_774654 = 1;

@@ -28,7 +28,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_005c9220(int*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl fcn_004c6ae0(int id, int k);
 float __cdecl fcn_00507e70(void*, unsigned short*, int);
 void __cdecl fcn_00471e30(int);
@@ -101,7 +101,7 @@ int __cdecl fcn_005c06e0(unsigned short* entityRecord)
 					ev[0x36] = 2;
 					*(int*) (ev + 0x5c) = me->f4;
 					*(int*) (ev + 0x58) = *(int*) (entityRecord + 2);
-					fcn_004c5530(ev);
+					cm_SendCopyEntityData(ev);
 					io_FormatTextBuffer(text, 0x175b, *entityRecord);
 				} else {
 					io_FormatTextBuffer(text, 0x175c, *entityRecord, *entityRecord);

@@ -7,7 +7,7 @@ void* __cdecl gm_LookupEntityRecordById(int);
 int  __cdecl fcn_005c6270(void*, int);
 int  __cdecl fcn_004a55c0(void*, int, int*, float, float, unsigned short*);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
 
@@ -38,7 +38,7 @@ int __cdecl fcn_004b8410(void* a1)
 		return 0x400;
 	}
 	n = 2 * gm_RandomMod(0xf) + 10;
-	fcn_004c54c0(*(int*) ((char*) p + 4), *(int*) ((char*) e + 4), -n, 1);
+	cm_RequestCopyEntityData(*(int*) ((char*) p + 4), *(int*) ((char*) e + 4), -n, 1);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7,
 	    *(unsigned short*) e);
 	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,

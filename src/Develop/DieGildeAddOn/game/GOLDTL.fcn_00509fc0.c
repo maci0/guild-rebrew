@@ -50,15 +50,15 @@ int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
-void __cdecl fcn_004c4700(int, int, int, char*);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c53a0(void);
-void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c5480(int, int, float);
-int __cdecl fcn_004c5530(Packet*);
-void __cdecl fcn_004c5a60(int, int, int);
-void __cdecl fcn_004c5f60(int, int, int);
+void __cdecl cm_AppendCommandSyncField(int, int, int, char*);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_SendSetAttribute(void);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_RequestChangeFloat(int, int, float);
+int __cdecl cm_SendCopyEntityData(Packet*);
+void __cdecl cm_SendRemoveLinkedObject(int, int, int);
+void __cdecl cm_SendSetGebBesitzer(int, int, int);
 float __cdecl gm_RandomQuadratic(void);
 
 /* ADDRESS: GOLDTL 0x00509fc0 */
@@ -126,14 +126,14 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 			send = 1;
 		}
 		if (send && cur != 0) {
-			fcn_004c5f60(*(int*) (cur + 1), *(int*) (sp + 4), *(int*) (sp + 4));
+			cm_SendSetGebBesitzer(*(int*) (cur + 1), *(int*) (sp + 4), *(int*) (sp + 4));
 			pkt.x58 = *(int*) (cur + 1);
 			pkt.type = 0x1b;
 			pkt.x8 = *(int*) (sp + 4);
 			pkt.xc = -1;
 			pkt.x36 = 2;
 			pkt.x5c = gm_CalculateGebaeudeValue((int) cur, (int) (char) cur[0x5c]);
-			fcn_004c5530(&pkt);
+			cm_SendCopyEntityData(&pkt);
 			q = (char*) g_7f4ca4;
 			do {
 				if (*(unsigned char**) (q + 0x168) == cur && *(int*) q != *(int*) (subjectRecord + 2)) {
@@ -144,7 +144,7 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 					pkt.name = *(pos14_7f4c00*) &gm_GameTime;
 					pkt.x36 = 1;
 					pkt.x58 = *(int*) q;
-					fcn_004c5530(&pkt);
+					cm_SendCopyEntityData(&pkt);
 				}
 				q += 0x21c;
 			} while ((int) q < 0x85a0a4);
@@ -153,13 +153,13 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 		p = gm_FindNextFilteredEntity();
 	}
 	r = gm_SumTreasury(subjectRecord);
-	fcn_004c5150(*(int*) (sp + 4), -1, g_773d75, r);
+	cm_RequestMoveCredits(*(int*) (sp + 4), -1, g_773d75, r);
 	p = (unsigned char*) fcn_00502cd0(*(int*) (subjectRecord + 0xbc), 1, 5);
 	while (p != 0) {
-		fcn_004c5a60(*(int*) (subjectRecord + 2), -1, *(int*) (p + 2));
+		cm_SendRemoveLinkedObject(*(int*) (subjectRecord + 2), -1, *(int*) (p + 2));
 		p = gm_NextEntityQueryMatch();
 	}
-	fcn_004c5150(*(int*) (subjectRecord + 2), -1, g_773d75, fcn_0050b750(0x5dc, g_773d75));
+	cm_RequestMoveCredits(*(int*) (subjectRecord + 2), -1, g_773d75, fcn_0050b750(0x5dc, g_773d75));
 	if (a2 != 0) {
 		i = 100;
 		ui_f08 = 0x10;
@@ -186,8 +186,8 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x1a8 - g_aed32c)), (char*) &ui_f30);
 		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) subjectRecord + (0x1b0 - g_aed32c)), (char*) &ui_b0b);
 		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) subjectRecord + (0x1b1 - g_aed32c)), (char*) &ui_b0a);
-		fcn_004c5420(*(int*) (subjectRecord + 2), 0x1c8, 4, 0x800000, 0);
-		fcn_004c5360();
+		cm_RequestChangeBits(*(int*) (subjectRecord + 2), 0x1c8, 4, 0x800000, 0);
+		cm_RequestChangeAttribute();
 		cm_BeginPacketFieldDelta((char*) subjectRecord, *(int*) (subjectRecord + 2));
 		for (i = 0; i < 8; i++) {
 			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((i * 4 + 0x5c - g_aed32c) + (int) subjectRecord), (char*) &ui_f0c);
@@ -196,19 +196,19 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 		ui_f0c = 0;
 		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x2c - g_aed32c)), (char*) &ui_f0c);
 		cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((int) subjectRecord + (0x28 - g_aed32c)), (char*) &ui_f30);
-		fcn_004c5360();
-		fcn_004c5480(*(int*) (subjectRecord + 2), 0x7c, -*(float*) (subjectRecord + 0x3e));
+		cm_RequestChangeAttribute();
+		cm_RequestChangeFloat(*(int*) (subjectRecord + 2), 0x7c, -*(float*) (subjectRecord + 0x3e));
 		h = gm_RandomQuadratic();
-		fcn_004c5480(*(int*) (subjectRecord + 2), 0x14, (float) h * 7.0f + 30.0f - *(float*) (subjectRecord + 10));
-		fcn_004c5480(*(int*) (subjectRecord + 2), 0x1c, 1000.0f - *(float*) (subjectRecord + 0xe));
-		fcn_004c5480(*(int*) (subjectRecord + 2), 0x18, 1000.0f - *(float*) (subjectRecord + 0xc));
-		fcn_004c5480(*(int*) (subjectRecord + 2), 0x20, 12.0f - *(float*) (subjectRecord + 0x10));
+		cm_RequestChangeFloat(*(int*) (subjectRecord + 2), 0x14, (float) h * 7.0f + 30.0f - *(float*) (subjectRecord + 10));
+		cm_RequestChangeFloat(*(int*) (subjectRecord + 2), 0x1c, 1000.0f - *(float*) (subjectRecord + 0xe));
+		cm_RequestChangeFloat(*(int*) (subjectRecord + 2), 0x18, 1000.0f - *(float*) (subjectRecord + 0xc));
+		cm_RequestChangeFloat(*(int*) (subjectRecord + 2), 0x20, 12.0f - *(float*) (subjectRecord + 0x10));
 		cm_BeginPacketFieldDelta((char*) subjectRecord, *(int*) (subjectRecord + 2));
 		for (i = 0; i < 5; i++) {
 			ui_b34 = 0;
-			fcn_004c4700(1, 1, (i - g_aed32c) + 0x80 + (int) subjectRecord, (char*) &ui_b34);
+			cm_AppendCommandSyncField(1, 1, (i - g_aed32c) + 0x80 + (int) subjectRecord, (char*) &ui_b34);
 		}
-		r = fcn_004c53a0();
+		r = cm_SendSetAttribute();
 	}
 	io_FormatTextBuffer(reportText, 0x1c4f, *subjectRecord, fcn_0050b750(0x5dc, g_773d75));
 	if (prev != 0) {

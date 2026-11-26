@@ -37,8 +37,8 @@ void __cdecl fcn_00516de0(int a, int b);
 void __cdecl fcn_00443230(int a);
 void __cdecl fcn_00473150(int a);
 void __cdecl cm_BeginPacketFieldDelta(int a, int b);
-void __cdecl fcn_004c4700(int a, int b, char* c, int* d);
-void __cdecl fcn_004c53a0(void);
+void __cdecl cm_AppendCommandSyncField(int a, int b, char* c, int* d);
+void __cdecl cm_SendSetAttribute(void);
 
 /* ADDRESS: GOLDTL 0x004e5a00 */
 void __cdecl cut_ExecuteCutscene(int* event)
@@ -308,9 +308,9 @@ post_cleanup:
                 if (record != 0) {
                     id2 = -1;
                     cm_BeginPacketFieldDelta((int) record, record[1]);
-                    fcn_004c4700(4, 1,
+                    cm_AppendCommandSyncField(4, 1,
                         (char*) record + 0x20c - *(int*) 0xaed32c, &id2);
-                    fcn_004c53a0();
+                    cm_SendSetAttribute();
                 }
             }
             unit++;
@@ -322,9 +322,9 @@ post_cleanup:
         if (record != 0) {
             id2 = -1;
             cm_BeginPacketFieldDelta((int) record, record[1]);
-            fcn_004c4700(4, 1, (char*) record + 0x20c - *(int*) 0xaed32c,
+            cm_AppendCommandSyncField(4, 1, (char*) record + 0x20c - *(int*) 0xaed32c,
                 &id2);
-            fcn_004c53a0();
+            cm_SendSetAttribute();
         }
     }
     *(int*) 0x772f40 = 0;

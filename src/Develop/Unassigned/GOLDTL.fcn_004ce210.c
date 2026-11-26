@@ -15,7 +15,7 @@ typedef struct {
 	char pad1c[0x80];
 } msg9c;
 
-int __cdecl fcn_004c4330(msg9c*);
+int __cdecl cm_EnqueueClientPacket(msg9c*);
 
 /* ADDRESS: GOLDTL 0x004ce210 */
 int __cdecl fcn_004ce210(int a1)
@@ -29,5 +29,5 @@ int __cdecl fcn_004ce210(int a1)
 	m.f10 = 1;
 	info.a = a1;
 	m.info = info;
-	return fcn_004c4330(&m);
+	return cm_EnqueueClientPacket(&m);
 }

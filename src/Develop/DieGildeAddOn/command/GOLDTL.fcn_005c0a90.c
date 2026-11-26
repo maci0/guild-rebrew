@@ -31,7 +31,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl fcn_004c6ae0(int id, int k);
 void __cdecl fcn_00471e30(int);
 
@@ -105,7 +105,7 @@ void __cdecl d2_ShowAnschwaerzenDialog(int selected_obj)
 				*(int*) (ev + 0x58) = *(int*) (accused + 2);
 				ev[4] = 0x2f;
 				ev[0x36] = 9;
-				fcn_004c5530(ev);
+				cm_SendCopyEntityData(ev);
 				fcn_004c6ae0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -3);
 				io_FormatTextBuffer(text, 0x1762, *judge);
 				fcn_00526120(text, 0);

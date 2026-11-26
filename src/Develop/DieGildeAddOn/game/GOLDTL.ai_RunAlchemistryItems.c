@@ -15,8 +15,8 @@ char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 float* __cdecl fcn_005c61e0(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
-int __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char k, int n);
-void __cdecl fcn_004c5420(int id, int a2, int a3, int a4, int a5);
+int __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char k, int n);
+void __cdecl cm_RequestChangeBits(int id, int a2, int a3, int a4, int a5);
 
 /* ADDRESS: GOLDTL 0x0048ef30 */
 int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
@@ -28,8 +28,8 @@ int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 
 	if (*p == 2) {
 		if (*(int*) (p + 0x10) == 1) {
-			fcn_004c51f0(*(int*) (e + 4), -1, *(int*) (p + 4), 1, g_773d75, 0);
-			fcn_004c5420(*(int*) (e + 4), 0x1cc, 4, 0x40000000, 0);
+			cm_SendSellObjekt(*(int*) (e + 4), -1, *(int*) (p + 4), 1, g_773d75, 0);
+			cm_RequestChangeBits(*(int*) (e + 4), 0x1cc, 4, 0x40000000, 0);
 			return 0x48;
 		}
 		if (*(int*) (p + 0x10) != 2 || *q != 4) {
@@ -47,7 +47,7 @@ int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 		if (t == 0 || *(int*) (t + 0xe) <= 1) {
 			return 0;
 		}
-		fcn_004c51f0(*(int*) (e + 4), *(int*) (s + 2), *(int*) (p + 4), 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int*) (e + 4), *(int*) (s + 2), *(int*) (p + 4), 1, g_773d75, 0);
 		return 0x48;
 	}
 	if (*p != 1) {

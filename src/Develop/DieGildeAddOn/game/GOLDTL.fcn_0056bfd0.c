@@ -1,7 +1,7 @@
 #include "client_types.h"
 char* __cdecl fcn_00503fe0(int a, int b, int c);
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_004c5c80(int id);
+void __cdecl cm_SendCancelCharacterActions(int id);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* label);
 int __cdecl fcn_00529160(int a, int b, int c, int d);
 int __cdecl gm_AddTime(char* sel, int a, int b, int c);
@@ -13,9 +13,9 @@ int __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 int __cdecl fcn_00545e80(int a, int b, char* s, int c, int d, int e, int f,
     int g, int h);
 int __cdecl fcn_004c5980(void* p);
-void __cdecl fcn_004c5a60(int a, int b, int c);
-int __cdecl fcn_004c4450(int h);
-int* __cdecl fcn_004c4480(int h);
+void __cdecl cm_SendRemoveLinkedObject(int a, int b, int c);
+int __cdecl cm_GetCommandStatus(int h);
+int* __cdecl cm_GetCommandResult(int h);
 char* __cdecl cut_FindCutsceneById(int h);
 char* __cdecl fcn_00504b30(char* p);
 void __cdecl he_FreeAction(char* e);
@@ -52,7 +52,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 				j = *ids;
 				if (j != -1) {
 					slot = (int) gm_LookupEntityRecordById(j);
-					fcn_004c5c80(*ids);
+					cm_SendCancelCharacterActions(*ids);
 					fcn_004c5da0(*ids, *(int*) (e2 + 1),
 					    -1, 0, 0, (char*) 0x6a6aac);
 					fcn_00529160((int) e2, 0,
@@ -221,7 +221,7 @@ tail:
 			if (count != 0) {
 				e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 				if (e2 != 0) {
-					fcn_004c5a60(*(int*) (e2 + 1), -1,
+					cm_SendRemoveLinkedObject(*(int*) (e2 + 1), -1,
 					    *(int*) ((char*) count + 2));
 				}
 			}
@@ -248,10 +248,10 @@ tail:
 		*(int*) (ent + 0x70) = 5;
 		return;
 	case 3:
-		if (fcn_004c4450(*(int*) (ent + 0xb4)) == 0) {
+		if (cm_GetCommandStatus(*(int*) (ent + 0xb4)) == 0) {
 			return;
 		}
-		target = (char*) fcn_004c4480(*(int*) (ent + 0xb4));
+		target = (char*) cm_GetCommandResult(*(int*) (ent + 0xb4));
 		*(int*) (ent + 0xb8) = *(int*) target;
 		*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
@@ -290,7 +290,7 @@ tail:
 			if (j != -1) {
 				target = gm_LookupEntityRecordById(j);
 				if (target != 0) {
-					fcn_004c5c80(*(int*) (target + 4));
+					cm_SendCancelCharacterActions(*(int*) (target + 4));
 					if (e2 != 0) {
 						fcn_004c5da0(
 						    *(int*) (target + 4),

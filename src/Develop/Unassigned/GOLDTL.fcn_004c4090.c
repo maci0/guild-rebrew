@@ -33,7 +33,7 @@ extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 int __cdecl ahm_GetCommandPayloadSize(unsigned char*);
 
 /* ADDRESS: GOLDTL 0x004c4090 */
-int __cdecl fcn_004c4090(void)
+int __cdecl cm_FlushPendingDataPackets(void)
 {
 	CLIENT_QUEUED_PACKET* p;
 	CLIENT_QUEUED_PACKET* last;

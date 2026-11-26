@@ -62,9 +62,9 @@ char __cdecl fcn_0045bad0(int, int, int, int*, int*);
 void __cdecl fcn_00473690(int, int);
 void __cdecl ResetDisplayCounters(void);
 void __cdecl d3snd_PlaySelectedObjectClickSound(void);
-void __cdecl fcn_004c5b50(int, int, int, int);
-void __cdecl fcn_004c5c80(int);
-void __cdecl fcn_004c5f20(int, int, int);
+void __cdecl cm_RequestWalkOnPath(int, int, int, int);
+void __cdecl cm_SendCancelCharacterActions(int);
+void __cdecl cm_RequestUseGate(int, int, int);
 int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl sv_ClearObjectSelection(void);
@@ -217,7 +217,7 @@ L6d3:
 				evt_RequestScriptExit(f);
 			}
 		}
-		fcn_004c5b50(s->handle, ix, iy, d3_CurrentContextIndex);
+		cm_RequestWalkOnPath(s->handle, ix, iy, d3_CurrentContextIndex);
 	}
 	if (g_7746b8 == 0) {
 		goto La50;
@@ -240,7 +240,7 @@ L192f:
 		if (e[0x188] == 0) {
 			continue;
 		}
-		fcn_004c5c80(*(int*) (e + 4));
+		cm_SendCancelCharacterActions(*(int*) (e + 4));
 		if (*(int*) (e + 0x16c) != 0) {
 			fcn_00529160(*(int*) (e + 0x16c), 0, *(unsigned short*) e, 0);
 		}
@@ -264,7 +264,7 @@ L192f:
 		}
 L1a0d:
 		if (ei >= 0) {
-			fcn_004c5f20(*(int*) (e + 4), *(int*) (p + 1), *(int*) ((char*) g_7746b8 + 2));
+			cm_RequestUseGate(*(int*) (e + 4), *(int*) (p + 1), *(int*) ((char*) g_7746b8 + 2));
 		}
 	}
 	sv_ClearObjectSelection();

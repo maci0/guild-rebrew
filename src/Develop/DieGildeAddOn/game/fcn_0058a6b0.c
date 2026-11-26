@@ -44,11 +44,11 @@ int __cdecl gm_CheckEntityStock(Slot58a6 *, int, unsigned char);
 int __cdecl d2_CheckActionBlocker(Slot58a6 *, int);
 int __cdecl fcn_005898f0(char *);
 char *__cdecl gm_GetEntityTableEntry(Slot58a6 *);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004a5e60(Slot58a6 *p, int kind, F8 f, int c, float r, int *out);
-int __cdecl fcn_004c5530(char *);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendCopyEntityData(char *);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void *, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, char *, int);
 void __cdecl fcn_00471e30(int);
@@ -110,7 +110,7 @@ void __cdecl fcn_0058a6b0(char *gebaeude)
                     rec = gm_GetEntityTableEntry(&g_7f4ca0[g_774970]);
                     if (rec != 0)
                         *(int *) (rec + 0x28) += price;
-                    fcn_004c51a0(-1, g_7f4ca0[g_774970].f4, g_773d75, price);
+                    cm_RequestTransferCurrencyNoKill(-1, g_7f4ca0[g_774970].f4, g_773d75, price);
                     fcn_005100f0(g_7f4ca0[g_774970].f4, -0x10);
                     memset(msg, 0, sizeof(msg));
                     msg[4] = (char) 0x99;
@@ -137,8 +137,8 @@ void __cdecl fcn_0058a6b0(char *gebaeude)
                         fcn_004a5e60(&g_7f4ca0[g_774970], 0, f, 0, 100.0f, &tmp);
                         *(int *) (msg + 0x58) = tmp;
                     }
-                    tmp = fcn_004c5530(msg);
-                    while (tmp != -1 && fcn_004c4450(tmp) == 0)
+                    tmp = cm_SendCopyEntityData(msg);
+                    while (tmp != -1 && cm_GetCommandStatus(tmp) == 0)
                         main_RunFrameLoop(0, 0x20007);
                     d3snd_PlaySoundEffect(-7, 0, "KOMMENTARE", -1);
                     g_774654 = 1;

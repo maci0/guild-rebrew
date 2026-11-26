@@ -50,7 +50,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_004c5530(Packet*);
+int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -114,7 +114,7 @@ int __cdecl fcn_005af550(int unused, char* param)
 					pkt.x36 = 2;
 					pkt.x58 = *(int*) (param + 1);
 					pkt.x5c = *(int*) (g_7746c4 + 1);
-					fcn_004c5530(&pkt);
+					cm_SendCopyEntityData(&pkt);
 					cm_ExProdObjekt();
 					flag = 1;
 					for (i = 0; i < 768; i++) {

@@ -24,7 +24,7 @@ typedef struct {
 } Msg5473a0;
 #pragma pack(pop)
 
-void __cdecl fcn_004c5530(Msg5473a0*);
+void __cdecl cm_SendCopyEntityData(Msg5473a0*);
 
 /* ADDRESS: GOLDTL 0x005473a0 */
 void __cdecl fcn_005473a0(void)
@@ -45,7 +45,7 @@ void __cdecl fcn_005473a0(void)
 			msg.id = *(int*) ((char*) h + 1);
 			msg.flag = 2;
 			msg.pos = *(pos14_7f4c00*) &gm_GameTime;
-			fcn_004c5530(&msg);
+			cm_SendCopyEntityData(&msg);
 		}
 		h = gm_FindNextFilteredEntity();
 	} while (h != 0);

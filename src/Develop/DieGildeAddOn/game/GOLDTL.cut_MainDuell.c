@@ -35,7 +35,7 @@ void __cdecl fcn_004e4f10(void* event);
 void __cdecl fcn_004e4730(char* name);
 void __cdecl fcn_004dfef0(int v);
 void __cdecl d3_UpdateSeasonTextures(void);
-int __cdecl fcn_00500e20(int* p);
+int __cdecl gm_GetSeason(int* p);
 int __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3);
 char __cdecl fcn_004463f0(unsigned int a, unsigned int b, float t);
 void __cdecl fcn_004cfe00(void);
@@ -49,14 +49,14 @@ int __cdecl d2_SetForm(int k, int i);
 void __cdecl io_AppendText(int a, ...);
 int __cdecl fcn_0064d41a(char* out, char* fmt, ...);
 int __cdecl fcn_004e4b20(int a, int b, char* c, int d);
-int __cdecl fcn_00423460(int* a);
+int __cdecl sb_CheckVoicePlaying(int* a);
 void __cdecl cut_WaitTicks(int dur);
 char* __cdecl fcn_00445600(int o, int flags, int ptr, char* name);
 void __cdecl ch_QueueWalkToDummy(char* owner, char* text);
 char* __cdecl ch_CreateAction(char* e, int kind, int p);
 char* __cdecl ch_CreateQueuedAction(char* e, int a, int b, int c, int d);
 int __cdecl d3snd_PlaySoundEffect(int a, int b, int c, int d);
-void __cdecl fcn_004c54c0(int a, int b, int c, int d);
+void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 void __cdecl fcn_004e51d0(unsigned int* a0, int a1);
 int __cdecl fcn_004e6a70(int a1);
 int __cdecl fcn_004de610(int v);
@@ -76,7 +76,7 @@ void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004230e0(char* p);
 void __cdecl fcn_004cfe20(void);
 void __cdecl ReportClientMessage(char* msg);
-int __cdecl fcn_004e3640(void);
+int __cdecl msx_RestoreMusicIfAllowed(void);
 
 /* ADDRESS: GOLDTL 0x004e0620 */
 void __cdecl cut_MainDuell(char* a0)
@@ -127,7 +127,7 @@ void __cdecl cut_MainDuell(char* a0)
     fcn_004e4730(scene[lvl]);
     fcn_004dfef0(0xa);
     d3_UpdateSeasonTextures();
-    sel = fcn_00500e20((int*) 0x7f4c00);
+    sel = gm_GetSeason((int*) 0x7f4c00);
     if (sel == 3)
         sel = 0;
     else if (sel == 0 || sel == 2)
@@ -173,7 +173,7 @@ void __cdecl cut_MainDuell(char* a0)
         fcn_0064d41a(buf1, (char*) 0x68cd94, i);
         p = (char*) fcn_004e4b20(-7, 0, buf1, -1);
         if (p != 0) {
-            while (fcn_00423460((int*) p) != 0)
+            while (sb_CheckVoicePlaying((int*) p) != 0)
                 cut_WaitTicks(2);
         }
         i++;
@@ -344,8 +344,8 @@ void __cdecl cut_MainDuell(char* a0)
 
     cut_WaitTicks(5);
     if (*(int*) (0x7f4ca4 + (g_774970 & 0xffff) * 0x21c) == *(int*) (a0 + 0xc)) {
-        fcn_004c54c0(sB.idx, sA.idx, 0xf, 1);
-        fcn_004c54c0(sA.idx, sB.idx, 0xf, 1);
+        cm_RequestCopyEntityData(sB.idx, sA.idx, 0xf, 1);
+        cm_RequestCopyEntityData(sA.idx, sB.idx, 0xf, 1);
     }
     fcn_004e48b0();
     fcn_004e4aa0(sB.entity);
@@ -358,7 +358,7 @@ void __cdecl cut_MainDuell(char* a0)
     fcn_004230e0((char*) bank);
     fcn_004230e0((char*) snd);
     fcn_004cfe20();
-    fcn_004e3640(); return;
+    msx_RestoreMusicIfAllowed(); return;
     }
     ReportClientMessage((char*) 0x68cc70);
 fail:

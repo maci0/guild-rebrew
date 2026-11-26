@@ -1,7 +1,7 @@
 
 
 
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl fcn_005dcd60(char* o)
 {
@@ -38,7 +38,7 @@ int __cdecl fcn_005dcd60(char* o)
 		else if (m & 0x1e000000) {
 			v = 0x6000000;
 		}
-		fcn_004c5420(*(int*) (o + 4), 0x2c, 4, 0, v);
+		cm_RequestChangeBits(*(int*) (o + 4), 0x2c, 4, 0, v);
 	}
 	return 1;
 }

@@ -21,7 +21,7 @@ extern int g_14abcc0;
 int __cdecl fcn_00525fb0(char*);
 void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl fcn_005bdc30(int, Req*, int, void*, int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl ConfirmProductionSelection(int, char*);
 
@@ -41,6 +41,6 @@ void __cdecl d2_ShowProductionSelection(char* a)
 	}
 	fcn_0052a0c0(a, 0);
 	fcn_005bdc30(1, &req, g_14abcc0, (void*) ConfirmProductionSelection, 0);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 }

@@ -37,7 +37,7 @@ int __cdecl io_AppendText();
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00423460(int);
+int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
@@ -100,7 +100,7 @@ int __cdecl fcn_005806d0(void)
 		((struct tutor*)g_665f08)->button = d2_GetWindowListItem(((struct tutor*)g_665f08)->dlg, 2, io_AppendText("$Z%s", 0x7d));
 		if (((struct tutor*)g_665f08)->lesson->steps[((struct tutor*)g_665f08)->index].sound != 0) {
 			if (((struct tutor*)g_665f08)->sound != 0) {
-				if (fcn_00423460(((struct tutor*)g_665f08)->sound) != 0) {
+				if (sb_CheckVoicePlaying(((struct tutor*)g_665f08)->sound) != 0) {
 					sb_StopVoice(((struct tutor*)g_665f08)->sound, 0);
 				}
 				((struct tutor*)g_665f08)->sound = 0;

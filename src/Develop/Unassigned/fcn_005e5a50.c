@@ -48,9 +48,9 @@ int __cdecl d2_GetControlValue(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl io_AppendText(int, ...);
 int __cdecl gm_CheckEntityStock(char*, int, unsigned char);
-void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
+void __cdecl cm_SendCopyEntityData(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -120,9 +120,9 @@ void __cdecl fcn_005e5a50(char* entity)
 			int clicked = *(int*) 0x67d370;
 			if (clicked == ids[0]) {
 				if (gm_CheckEntityStock((char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970], val, g_773d75) != 0) {
-					fcn_004c5420(((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id, 0x1cc, 4, 0x10, 0);
+					cm_RequestChangeBits(((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id, 0x1cc, 4, 0x10, 0);
 					if (g_774970 != *(unsigned short*) (entity + 0x27)) {
-						fcn_004c51a0(-1, ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id,
+						cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id,
 						             g_773d75, (val > 1 ? val : 1) * 32000);
 					}
 					memset(&pkt, 0, sizeof(pkt));
@@ -133,7 +133,7 @@ void __cdecl fcn_005e5a50(char* entity)
 					pkt.f8 = ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id;
 					pkt.pos = gm_GameTime;
 					pkt.target_id = *(int*) (target + 4);
-					fcn_004c5530(&pkt);
+					cm_SendCopyEntityData(&pkt);
 					io_FormatTextBuffer(text, 0x41da, 0x41c1);
 					fcn_0064d41a(buf, (char*) 0x6ad454, val);
 					d3snd_PlaySoundEffect(-7, 0, buf, -1);

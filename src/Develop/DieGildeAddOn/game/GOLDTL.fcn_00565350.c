@@ -7,7 +7,7 @@ extern unsigned char g_774964;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00500cb0(void*, void*);
+int __cdecl gm_CompareGameTime(void*, void*);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_GetOppositeStatIndex(int);
@@ -20,7 +20,7 @@ void __cdecl fcn_004c6470(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl sb_FindBankByName(char*);
-void __cdecl fcn_004c30a0(int, int, char*, int, int);
+void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl fcn_00545780(int);
 
 /* ADDRESS: GOLDTL 0x00565350 */
@@ -45,7 +45,7 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 		return;
 	if (!g_774964)
 		return;
-	if (0 < fcn_00500cb0((void*) (action + 0x44), (void*) 0x7f4c00))
+	if (0 < gm_CompareGameTime((void*) (action + 0x44), (void*) 0x7f4c00))
 		return;
 	if (!*(unsigned char*) (action + 0xb1)) {
 		v = gm_LookupEntityRecordById(*(unsigned int*) (action + 0xac));
@@ -106,19 +106,19 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 			v9 = sb_FindBankByName("BERUFE_VEREINIGUNG_UNTERSCHRIFT");
 		}
 		if (statIndex < 3)
-			fcn_004c30a0(-7, 0, "FanfarePositivKurz", -1, 0);
+			d3snd_QueueSound(-7, 0, "FanfarePositivKurz", -1, 0);
 		else if (statIndex < 5)
-			fcn_004c30a0(-7, 0, "FanfarePositivMittel", -1, 0);
+			d3snd_QueueSound(-7, 0, "FanfarePositivMittel", -1, 0);
 		else
-			fcn_004c30a0(-7, 0, "FanfarePositivLang", -1, 0);
-		fcn_004c30a0(-6, v7, "SELBST", 1, 0);
-		fcn_004c30a0(-8, v, name, statIndex - 2, 0);
-		fcn_004c30a0(-6, v7, "SELBST", 0, 0);
+			d3snd_QueueSound(-7, 0, "FanfarePositivLang", -1, 0);
+		d3snd_QueueSound(-6, v7, "SELBST", 1, 0);
+		d3snd_QueueSound(-8, v, name, statIndex - 2, 0);
+		d3snd_QueueSound(-6, v7, "SELBST", 0, 0);
 		statIndex--;
-		fcn_004c30a0(-8, v8, name, (int) (3.0 - ((double) statIndex + 1.0) * 0.5), 0);
-		fcn_004c30a0(-6, v7, "GEZEICHNET", -1, 0);
-		fcn_004c30a0(-8, v9, "_BERUFE_VEREINIGUNG_UNTERSCHRIFT", x > 12 ? x - 13 : x - 1, 0);
-		fcn_004c30a0(-7, 0, "MausclickLinks_s_01", -1, 0);
+		d3snd_QueueSound(-8, v8, name, (int) (3.0 - ((double) statIndex + 1.0) * 0.5), 0);
+		d3snd_QueueSound(-6, v7, "GEZEICHNET", -1, 0);
+		d3snd_QueueSound(-8, v9, "_BERUFE_VEREINIGUNG_UNTERSCHRIFT", x > 12 ? x - 13 : x - 1, 0);
+		d3snd_QueueSound(-7, 0, "MausclickLinks_s_01", -1, 0);
 		*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 		return;
 	case 2:

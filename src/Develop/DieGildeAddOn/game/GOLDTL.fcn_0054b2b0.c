@@ -4,7 +4,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
@@ -22,7 +22,7 @@ void __cdecl he_HandleAction0x2e(char* u)
 		if (u[0x78] & 4) {
 			return;
 		}
-		if (*(int*) (u + 0x84) != -1 && fcn_004c4450(*(int*) (u + 0x84)) == 0) {
+		if (*(int*) (u + 0x84) != -1 && cm_GetCommandStatus(*(int*) (u + 0x84)) == 0) {
 			return;
 		}
 		*(int*) (u + 0x84) = -1;

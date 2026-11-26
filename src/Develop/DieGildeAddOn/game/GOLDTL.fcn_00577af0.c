@@ -35,7 +35,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 
 int __cdecl he_TryTriggerAction0x9b(int id, ENTITY_RECORD* me)
 {
@@ -75,7 +75,7 @@ refuse:
 				m.who = me->entity_id;
 				m.other = h->entity_id;
 				m.code = 2;
-				fcn_004c5530(&m);
+				cm_SendCopyEntityData(&m);
 				return 1;
 			}
 		}

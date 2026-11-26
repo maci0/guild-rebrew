@@ -12,14 +12,14 @@ extern char* __cdecl gm_ResolveParentEntity(void* record);
 extern int __cdecl gm_RandomMod(int range);
 extern void __cdecl gm_AddTime(void* clock, int arg2, int arg3, int arg4);
 extern float __cdecl eval_ObjektPreis2Credits(int id, int pct);
-extern void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
-extern void __cdecl fcn_004c5530(int block);
+extern void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
+extern void __cdecl cm_SendCopyEntityData(int block);
 extern void* __cdecl gm_GetChainNodeAtIndex(int a, int b);
 extern void* __cdecl gm_SearchTable67(int value);
 extern int __cdecl rt_CountRoutePoints(int a);
 extern void __cdecl cm_BeginPacketFieldDelta(void* record, unsigned int value);
-extern void __cdecl fcn_004c4700(int a, int b, int offset, void* value);
-extern unsigned int __cdecl fcn_004c53a0(void);
+extern void __cdecl cm_AppendCommandSyncField(int a, int b, int offset, void* value);
+extern unsigned int __cdecl cm_SendSetAttribute(void);
 extern void* __cdecl gm_EntityAccumulate(void* record);
 extern int __cdecl ch_IsEntityNearBuildingDoor(void* record, void* entry);
 extern int __cdecl fcn_00505340(void* entry);
@@ -86,8 +86,8 @@ void __cdecl fcn_005705a0(int action, char* rec)
 		job.f5c = 100 - (unsigned char) rec[0x12];
 		price = eval_ObjektPreis2Credits(*(unsigned short*) rec, 100) * g_665ee8;
 		value = (int) (price * (float) (100 - (unsigned char) rec[0x12]));
-		fcn_004c5150(-1, *(unsigned int*) (entity + 4), (char) g_773d75, value);
-		fcn_004c5530((int) &job);
+		cm_RequestMoveCredits(-1, *(unsigned int*) (entity + 4), (char) g_773d75, value);
+		cm_SendCopyEntityData((int) &job);
 		return;
 	}
 	entry = (char*) gm_GetChainNodeAtIndex(*(unsigned int*) (rec + 0x29),
@@ -117,8 +117,8 @@ void __cdecl fcn_005705a0(int action, char* rec)
 			if (next_idx >= next)
 				next_idx = 0;
 			cm_BeginPacketFieldDelta(rec, *(unsigned int*) (rec + 2));
-			fcn_004c4700(4, 1, (int) (rec + 0x2d) - g_aed32c, &next_idx);
-			*(unsigned int*) (action + 0x84) = fcn_004c53a0();
+			cm_AppendCommandSyncField(4, 1, (int) (rec + 0x2d) - g_aed32c, &next_idx);
+			*(unsigned int*) (action + 0x84) = cm_SendSetAttribute();
 			return;
 		}
 		found = (char*) gm_EntityAccumulate(rec);
@@ -136,7 +136,7 @@ void __cdecl fcn_005705a0(int action, char* rec)
 			job.f58 = *(unsigned int*) (rec + 2);
 			job.f5c = *(unsigned int*) (found + 1);
 			job.f60 = *(unsigned int*) (entry + 1);
-			fcn_004c5530((int) &job);
+			cm_SendCopyEntityData((int) &job);
 		}
 	}
 }

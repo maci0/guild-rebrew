@@ -39,7 +39,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_AddObjekt(void);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004a57a0(Ent*, int, int, unsigned short*, int, float, int*);
-void __cdecl fcn_004c5530(Msg*);
+void __cdecl cm_SendCopyEntityData(Msg*);
 
 int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
 {
@@ -120,6 +120,6 @@ int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
 		return 0x40;
 	}
 	msg.who[2] = ((Ent*)g_7f4ca0)[out & 0xffff].handle;
-	fcn_004c5530(&msg);
+	cm_SendCopyEntityData(&msg);
 	return 0x10;
 }

@@ -4,9 +4,9 @@
 #include "Develop/Units/d3/d3_camera.h"
 void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl sb_SetVoiceVolume(char*, int);
-int __cdecl fcn_00423460(char*);
+int __cdecl sb_CheckVoicePlaying(char*);
 void __cdecl sb_StopVoice(char*, int);
-char* __cdecl fcn_00422460(int, char*);
+char* __cdecl sb_PrepareVoice(int, char*);
 void __cdecl sb_SetVoiceLoopCount(char*, int);
 void __cdecl d3snd_PlaySource(char*, int, int, int);
 
@@ -39,7 +39,7 @@ void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
     if (volume > 5) {
         if (source->voice != 0) {
             sb_SetVoiceVolume(source->voice, volume);
-            if (fcn_00423460(source->voice) == 0 && source->playbackControl == 0) {
+            if (sb_CheckVoicePlaying(source->voice) == 0 && source->playbackControl == 0) {
                 source->idleCounter = 0;
                 if (source->replay != 0) {
                     *(int*)(source->voice + 0x14) &= ~8;
@@ -48,9 +48,9 @@ void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
                 }
             }
         } else {
-            source->voice = fcn_00422460(0, (char*)source);
+            source->voice = sb_PrepareVoice(0, (char*)source);
             if (source->voice != 0) {
-                fcn_00426170((int*)source->voice, 1);
+                d3snd_SetVoiceFlag0x10((int*)source->voice, 1);
                 *(int*)(source->voice + 0xc) = source->playbackControl;
                 *(int*)(source->voice + 0x18) = source->replay;
                 sb_SetVoiceVolume(source->voice, volume);
@@ -62,7 +62,7 @@ void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source)
         sb_SetVoiceVolume(source->voice, volume);
         sb_StopVoice(source->voice, 0);
         if (source->keepVoice == 0) {
-            fcn_00426170((int*)source->voice, 0);
+            d3snd_SetVoiceFlag0x10((int*)source->voice, 0);
             source->voice = 0;
         }
     }

@@ -25,13 +25,13 @@ extern struct house g_7f4ca0[];
 extern char g_6b5c60[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl fcn_0050c830(pos14_7f4c00*, pos14_7f4c00*, char*);
 
 void __cdecl cm_AppendPacketFieldValue(int, int, short, unsigned char*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl fcn_0050dc90(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
@@ -54,7 +54,7 @@ void __cdecl fcn_0057a3d0(char* e)
 	case 0:
 		who = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 		if (who != 0 && (unsigned char) who[*(int*) (e + 0xb0) + 0x80] < 252.0f
-		    && fcn_00500cb0(&gm_GameTime, (pos14_7f4c00*) (e + 0xb8)) < 0) {
+		    && gm_CompareGameTime(&gm_GameTime, (pos14_7f4c00*) (e + 0xb8)) < 0) {
 			unsigned char add;
 			float skill;
 			double months;
@@ -72,7 +72,7 @@ void __cdecl fcn_0057a3d0(char* e)
 			}
 			cm_BeginPacketFieldDelta(who, *(int*) (who + 4));
 			cm_AppendPacketFieldValue(1, 1, (short) (who - g_aed32c + *(int*) (e + 0xb0) + 0x80), &add);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(pos14_7f4c00*) (e + 0x60) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0x1e, 0);

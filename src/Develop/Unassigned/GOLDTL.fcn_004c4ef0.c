@@ -1,15 +1,15 @@
 
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
 void __cdecl fcn_0064d530(void*, int, int);
 
-void __cdecl fcn_004c4ef0(int a1)
+void __cdecl cm_SendTraceEnd(int source)
 {
 	char buf[0x9c];
 
 	buf[0] = 6;
-	fcn_0064d530(buf + 0x10, a1, 0x80);
-	fcn_004c4330(buf);
+	fcn_0064d530(buf + 0x10, source, 0x80);
+	cm_EnqueueClientPacket(buf);
 }

@@ -33,13 +33,13 @@ char* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_004c4450(int);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-int __cdecl fcn_004c5530(char*);
+int __cdecl cm_GetCommandStatus(int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
+int __cdecl cm_SendCopyEntityData(char*);
 void __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl fcn_00549330(char*, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
-int __cdecl fcn_005ba020(char*, char*);
+int __cdecl gm_CanTradeWithObject(char*, char*);
 char* __cdecl fcn_00503d10(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0050dfd0(char*, int);
@@ -83,14 +83,14 @@ void __cdecl fcn_00572ff0(char* a)
 		fcn_00549330(a, *(unsigned short*) gm_CityEntity);
 	}
 	if (*(int*) (a + 0xe8) != -1) {
-		if (!fcn_004c4450(*(int*) (a + 0xe8))) {
+		if (!cm_GetCommandStatus(*(int*) (a + 0xe8))) {
 			gm_AddTime(a + 0x52, 0, 1, 0);
 			return;
 		}
 		*(int*) (a + 0xe8) = -1;
 	}
 	if (*(int*) (a + 0xec) != -1) {
-		if (!fcn_004c4450(*(int*) (a + 0xec))) {
+		if (!cm_GetCommandStatus(*(int*) (a + 0xec))) {
 			gm_AddTime(a + 0x52, 0, 1, 0);
 			return;
 		}
@@ -115,8 +115,8 @@ void __cdecl fcn_00572ff0(char* a)
 		}
 		ent = he_fn_Handlung();
 	}
-	if (*(char*) (a + 0xf1) == 0 && fcn_005ba020(pktB, pktA) == 0) {
-		fcn_005ba020(pktB, pktA);
+	if (*(char*) (a + 0xf1) == 0 && gm_CanTradeWithObject(pktB, pktA) == 0) {
+		gm_CanTradeWithObject(pktB, pktA);
 		he_FreeAction(a);
 		return;
 	}
@@ -143,7 +143,7 @@ void __cdecl fcn_00572ff0(char* a)
 		if (e2 != 0) {
 			r = fcn_00502cd0(*(int*) (q + 0x14), 1, 5);
 			while (r != 0) {
-				*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (e2 + 2),
+				*(int*) (a + 0xe8) = cm_SendSellObjekt(*(int*) (e2 + 2),
 				    *(int*) (q + 2), *(unsigned short*) r, *(int*) (r + 0xe),
 				    g_773d75, 0);
 				r = gm_NextEntityQueryMatch();
@@ -153,7 +153,7 @@ void __cdecl fcn_00572ff0(char* a)
 			if (e2 != 0) {
 				r = fcn_00502cd0(*(int*) (q + 0x14), 1, 5);
 				while (r != 0) {
-					*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (e2 + 2),
+					*(int*) (a + 0xe8) = cm_SendSellObjekt(*(int*) (e2 + 2),
 					    *(int*) (q + 2), *(unsigned short*) r, *(int*) (r + 0xe),
 					    g_773d75, 0);
 					r = gm_NextEntityQueryMatch();
@@ -214,7 +214,7 @@ void __cdecl fcn_00572ff0(char* a)
 			if (t < m) {
 				m = t;
 			}
-			fcn_004c51f0(*(int*) (e2 + 2),
+			cm_SendSellObjekt(*(int*) (e2 + 2),
 			    *(int*) (q + 2), *(unsigned short*) r2, m, g_773d75, d);
 			if (itm != 0) {
 				*(int*) (itm + 0x1b8) = *(int*) (itm + 0x1b8) + d * m;
@@ -222,7 +222,7 @@ void __cdecl fcn_00572ff0(char* a)
 			if ((t -= m) != 0) {
 				d = (int) (fcn_0050bb50(*(unsigned short*) r2,
 				    g_773d75) * 0.8);
-				*(int*) (a + 0xe8) = fcn_004c51f0(-1,
+				*(int*) (a + 0xe8) = cm_SendSellObjekt(-1,
 				    *(int*) (q + 2), *(unsigned short*) r2, t,
 				    g_773d75, d);
 			}
@@ -288,7 +288,7 @@ i1next:
 		m = lim < t ? lim : t;
 		m = m < 0 ? 0 : m;
 		if (m != 0) {
-			*(int*) (a + 0xe8) = fcn_004c51f0(*(int*) (q + 2),
+			*(int*) (a + 0xe8) = cm_SendSellObjekt(*(int*) (q + 2),
 			    *(int*) (e2 + 2), *(unsigned short*) r2, m, g_773d75, amt);
 		}
 		if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
@@ -376,6 +376,6 @@ done:
 		gm_AddTime(a + 0x52, 0, 5, 0);
 		return;
 	}
-	*(int*) (a + 0xec) = fcn_004c5530((char*) &msg);
+	*(int*) (a + 0xec) = cm_SendCopyEntityData((char*) &msg);
 	gm_AddTime(a + 0x52, 0, 10, 0);
 }

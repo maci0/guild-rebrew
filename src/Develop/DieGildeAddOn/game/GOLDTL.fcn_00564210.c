@@ -34,7 +34,7 @@ void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_004c5fd0(int);
+void __cdecl cm_RequestDestroyBuilding(int);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_UpdateGebAbreissen(char* e)
@@ -78,7 +78,7 @@ void __cdecl he_UpdateGebAbreissen(char* e)
 					fcn_00545d40(((struct house*)g_7f4ca0)[i].handle, -1, buf, 0, 0x5ed, "_NACHRICHTEN_HS_67");
 				}
 			}
-			fcn_004c5fd0(*(int*) (t + 1));
+			cm_RequestDestroyBuilding(*(int*) (t + 1));
 		}
 		he_FreeAction(e);
 		return;

@@ -48,7 +48,7 @@ void __cdecl d2_SetBildArgument(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00476b60(void);
 void __cdecl d2_SelectControl(int);
-int __cdecl fcn_00517b10(char*, char*);
+int __cdecl txt_GetCitySelectInfo(char*, char*);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00533a60(int, int, int*, int, int, int);
 int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
@@ -95,7 +95,7 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	g_7e23e9 = GetPrivateProfileIntA(s_6a1e4c, s_6a3ff4, 0, g_7e22c0);
 	dlg = fcn_00470820(0, 0, s_6a3fe0);
 	d2_CenterDialogWindows(dlg);
-	fcn_00517b10(g_7e1d00, buf);
+	txt_GetCitySelectInfo(g_7e1d00, buf);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1acf, buf);
 	firstNameField = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1ad0, 0x1ad2));

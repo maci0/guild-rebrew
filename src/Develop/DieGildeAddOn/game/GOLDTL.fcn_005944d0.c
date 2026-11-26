@@ -24,10 +24,10 @@ int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl d2_DispatchTutorialEvent(int, void*, int, unsigned int);
-int __cdecl fcn_004c5530(void*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendCopyEntityData(void*);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandResult(int);
 void __cdecl fcn_004c35f0(void);
 void __cdecl fcn_00529160(void*, int, int, int);
 void __cdecl fcn_00526120(int, int);
@@ -41,7 +41,7 @@ void __cdecl fcn_00595330(int, int, int, int, int);
 void __cdecl fcn_00595e20(void*, int);
 void __cdecl fcn_005963f0(int, int, int, void*);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 
 /* ADDRESS: GOLDTL 0x005944d0 */
 unsigned int __cdecl fcn_005944d0(unsigned char* a0)
@@ -253,13 +253,13 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 										*(int*) (tmpl + 0x5c) = 0xffffffff;
 										*(int*) (tmpl + 0x68) = v34;
 										*(int*) (tmpl + 0x6c) = *(int*) (entry + 2);
-										found = fcn_004c5530(tmpl);
+										found = cm_SendCopyEntityData(tmpl);
 										if (found != -1) {
-											while (!fcn_004c4450(found)) {
+											while (!cm_GetCommandStatus(found)) {
 												main_RunFrameLoop(0, 0x20007);
 											}
 										}
-										found = fcn_004c4480(found);
+										found = cm_GetCommandResult(found);
 										fcn_0057e880(0x20, 0, 0, 0);
 									}
 found_row:
@@ -429,7 +429,7 @@ after_input:
 				                             *(int*) (d2_CurrentWindowId * 0x3cc + 0x1016198)) /
 				                            *(int*) (d2_CurrentWindowId * 0x3cc + 0x10161b4));
 				fcn_00471e30(saved);
-				fcn_0052a2d0();
+				d2_RestoreHudAfterDialog();
 				fcn_0057e880(0x1f, 0, 1, 0);
 				return 0;
 			}

@@ -1,5 +1,5 @@
 extern float fcn_00413d10(float *pos);
-extern int fcn_00500e20(int *p);
+extern int gm_GetSeason(int *p);
 extern int *sb_PlayVoice(char *bank, char *name, int loop, int pan, int vol,
     int a, int b);
 extern void sb_SetVoiceVolume(int *voice, int vol);
@@ -74,8 +74,8 @@ int __cdecl fcn_004c16c0(void)
 		v5 = 0;
 		v2 = (g_6b7fac + g_6b7fac * 2) * 4
 		    + g_6b7fac;
-		if (g_772d4c != fcn_00500e20((int *) 0x7f4c00)) {
-			g_772d4c = fcn_00500e20((int *) 0x7f4c00);
+		if (g_772d4c != gm_GetSeason((int *) 0x7f4c00)) {
+			g_772d4c = gm_GetSeason((int *) 0x7f4c00);
 			if (g_772d48 != 0) {
 				sb_StopVoice(g_772d48, 0);
 				*(int *) ((char *) g_772d48 + 0x18) = 0;
@@ -244,8 +244,8 @@ join:
 	else {
 		v5 = (g_6b7fac + g_6b7fac * 2) * 4
 		    + g_6b7fac;
-		if (g_772d4c != fcn_00500e20((int *) 0x7f4c00)) {
-			g_772d4c = fcn_00500e20((int *) 0x7f4c00);
+		if (g_772d4c != gm_GetSeason((int *) 0x7f4c00)) {
+			g_772d4c = gm_GetSeason((int *) 0x7f4c00);
 		}
 		if (g_772d44 != 0) {
 			fcn_0064d41a(&g_772b10, s_689e68, g_772d44);

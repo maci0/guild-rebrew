@@ -1,9 +1,9 @@
 int __cdecl fcn_004f4830(int, void*);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004c5480(int, int, float);
+void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 
@@ -39,12 +39,12 @@ void __cdecl fcn_004fd780(void)
 					&& kind != 8 && *(unsigned short*) (p + 8) >= 0xc) {
 					if (gm_RandomFloat01() * 0.2f > *(float*) (p + 0x1ce)) {
 						count = (p[0xa] == 0);
-						fcn_004c5480(*(int*) (p + 2), 0x1d0,
+						cm_RequestChangeFloat(*(int*) (p + 2), 0x1d0,
 							gm_RandomFloat01() * 0.5f + 0.25f);
 						g_773d48++;
 						cm_BeginPacketFieldDelta(p - 2, *(int*) (p + 2));
 						cm_AppendPacketFieldDelta(1, 1, 0xc, &count);
-						fcn_004c5360();
+						cm_RequestChangeAttribute();
 						g_773d48++;
 						if (g_773d48 > 0x40) {
 							fcn_00535960();
@@ -74,7 +74,7 @@ void __cdecl fcn_004fd780(void)
 					g_773d48++;
 				}
 				if (*(float*) (p + 0x1ce) > 0.1f) {
-					fcn_004c5480(*(int*) (p + 2), 0x1d0, -0.1f);
+					cm_RequestChangeFloat(*(int*) (p + 2), 0x1d0, -0.1f);
 				}
 				g_773d48++;
 				if (g_773d48 > 0x40) {

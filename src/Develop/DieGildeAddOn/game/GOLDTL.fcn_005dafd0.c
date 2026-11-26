@@ -31,7 +31,7 @@ unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl amt_FindOfficeSlotByType(int, Info*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_005100f0(int, int);
-int __cdecl fcn_004c5420(int, int, int, int, int);
+int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00526120(char*, int);
@@ -43,7 +43,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(unsigned char*, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -80,7 +80,7 @@ int __cdecl gm_HandleVerhoer(unsigned char* e, unsigned char* action)
 		}
 		amt_SendOfficeCommand(info.f0, 0, 0, g_7f4c04 > 0xd ? 0xff : 3, 0xff);
 		fcn_005100f0(*(int*) (e + 4), -8);
-		fcn_004c5420(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
+		cm_RequestChangeBits(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
 		if (o[2] == 6 || o[2] == 7) {
 			io_FormatTextBuffer(text, 0x1e10, *(unsigned short*) e, o[9] == 0 ? 0x253 : o[0x166] + 0x27b);
 			fcn_00545d40(*(int*) (o + 4), -1, text, 0, 0x5fb, s_6ace58);
@@ -116,8 +116,8 @@ int __cdecl gm_HandleVerhoer(unsigned char* e, unsigned char* action)
 			if (d2_CurrentElementId == ok && d2_CheckActionBlocker(e, 8)) {
 				amt_SendOfficeCommand(info.f0, 0, 0, g_7f4c04 > 0xd ? 0xff : 3, 0xff);
 				fcn_005100f0(*(int*) (e + 4), -8);
-				h = fcn_004c5420(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
-				while (h != -1 && fcn_004c4450(h) == 0) {
+				h = cm_RequestChangeBits(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
+				while (h != -1 && cm_GetCommandStatus(h) == 0) {
 					fcn_00535960();
 				}
 				g_774654 = 1;

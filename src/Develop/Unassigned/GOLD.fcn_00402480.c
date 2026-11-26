@@ -1,5 +1,5 @@
 char __cdecl d3_SetSubtreeVisible(int model, unsigned char visible);
-char __cdecl fcn_00442c00(char* model, char visible);
+char __cdecl d3_SetObjectVisible(char* model, char visible);
 void __cdecl fcn_00453270(int model);
 void __cdecl fcn_00402ba0(char* character);
 void __cdecl ReportClientMessage(const char* message);
@@ -13,7 +13,7 @@ void __cdecl fcn_00402480(char* character, int visible)
     }
     d3_SetSubtreeVisible(*(int*) (character + 0x34), visible);
     if (*(char**) (character + 0x64) != 0) {
-        fcn_00442c00(*(char**) (character + 0x64), visible);
+        d3_SetObjectVisible(*(char**) (character + 0x64), visible);
     }
     if (visible != 0) {
         fcn_00453270(*(int*) (character + 0x34));
@@ -25,7 +25,7 @@ void __cdecl fcn_00402480(char* character, int visible)
         }
     }
     if (*(char**) (character + 0x22c) != 0) {
-        fcn_00442c00(*(char**) (character + 0x22c), visible);
+        d3_SetObjectVisible(*(char**) (character + 0x22c), visible);
     }
     if (visible != 0) {
         *(unsigned short*) (character + 0x8c) &= 0xffdf;

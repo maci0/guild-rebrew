@@ -9,7 +9,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int  __cdecl fcn_005c6270(void*, int);
 void __cdecl fcn_004b73a0(void*);
 void __cdecl io_FormatTextBuffer(void*, int, int);
-void __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
 
 int __cdecl gm_HandleEntityMsg0c(void* request)
@@ -36,7 +36,7 @@ int __cdecl gm_HandleEntityMsg0c(void* request)
 	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) p) * d) *
 	    0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
-	fcn_004c51a0(-1, *(int*) request, (*(char*)&g_773d75), n);
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) request, (*(char*)&g_773d75), n);
 	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	return 0;

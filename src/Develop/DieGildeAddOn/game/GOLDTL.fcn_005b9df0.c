@@ -27,13 +27,13 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl d2_DispatchTutorialEvent(int, char*, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl gm_CalcEntityInventoryStats(char*, char*);
 int __cdecl fcn_0050ddf0(int, int);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_0057e880(int, char*, int, int);
 
-int __cdecl fcn_005b9df0(int playerIdx, char* cart, char* origin, char* dest)
+int __cdecl cm_DispatchCartTransfer(int playerIdx, char* cart, char* origin, char* dest)
 {
 	int res;
 	char* e;
@@ -58,11 +58,11 @@ int __cdecl fcn_005b9df0(int playerIdx, char* cart, char* origin, char* dest)
 		*(int*) (msg + 0x60) = *(int*) (dest + 1);
 		*(int*) (msg + 0x78) = cart[0x28];
 		g_77531c = (char) *(int*) (msg + 0x78);
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 		if (cart[0x28] != 0) {
 			gm_CalcEntityInventoryStats(cart, info);
 			res = fcn_0050ddf0(*(int*) (info + 0xb0), cart[0x28]);
-			fcn_004c51a0(-1, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIdx].entity_id, g_773d75, res);
+			cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIdx].entity_id, g_773d75, res);
 		}
 		if (playerIdx == g_774970) {
 			fcn_0057e880(0x24, dest, 0, 0);

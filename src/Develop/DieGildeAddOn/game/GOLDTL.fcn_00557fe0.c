@@ -10,7 +10,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_00557f00(char*);
 char* __cdecl fcn_00557f70(char*);
-int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00452420(char*);
 void __cdecl he_FreeAction(char*);
@@ -37,7 +37,7 @@ void __cdecl he_RunTimedEffectAction(char* action)
 		*(int*) (action + 0x70) = *(char**) (action + 0xb0) != 0 ? 1 : -1;
 		break;
 	case 1:
-		if (fcn_00500cb0(&gm_GameTime, action + 0xb4) == 1) {
+		if (gm_CompareGameTime(&gm_GameTime, action + 0xb4) == 1) {
 			if (*(char**) (action + 0xb0) != 0 && m_is_tracked(*(char**) (action + 0xb0)) != 0) {
 				*(int*) (*(char**) (action + 0xb0) + 0x24) = 0;
 			}

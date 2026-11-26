@@ -4,7 +4,7 @@
 
 #include <string.h>
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
 void __cdecl fcn_004ce260(int a1)
 {
@@ -14,5 +14,5 @@ void __cdecl fcn_004ce260(int a1)
 	buf[0] = 0x5f;
 	*(int*) (buf + 0x10) = 3;
 	*(int*) (buf + 0x14) = g_9badd0;
-	fcn_004c4330(buf);
+	cm_EnqueueClientPacket(buf);
 }

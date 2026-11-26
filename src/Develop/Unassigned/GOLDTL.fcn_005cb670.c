@@ -3,7 +3,7 @@
 extern float g_66291c;
 
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
-void __cdecl fcn_005ca560(void*);
+void __cdecl d2_BuildPersonStatusDesc(void*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
 /* ADDRESS: GOLDTL 0x005cb670 */
@@ -60,7 +60,7 @@ int __cdecl fcn_005cb670(char* sourceRecord, int n, char* results, int a3)
 		count = n;
 	}
 	for (i = 0; i < count; i++) {
-		fcn_005ca560(results + i * 0x38);
+		d2_BuildPersonStatusDesc(results + i * 0x38);
 		*(int*) (results + i * 0x38 + 0x30) = fcn_005cf720(*(unsigned short*) sourceRecord,
 			*(unsigned short*) *(int*) (results + i * 0x38), a3, 0);
 	}

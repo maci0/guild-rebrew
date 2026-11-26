@@ -31,17 +31,17 @@ typedef struct Req55c270 {
 } Req55c270;
 
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern int __cdecl fcn_00500cb0(char*, char*);
+extern int __cdecl gm_CompareGameTime(char*, char*);
 extern unsigned char* __cdecl fcn_00502cd0(int, int, int, int);
-extern int __cdecl fcn_004c51f0(int, int, int, int, char, int);
-extern int __cdecl fcn_004c4450(int);
-extern char* __cdecl fcn_004c4480(int);
+extern int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
+extern int __cdecl cm_GetCommandStatus(int);
+extern char* __cdecl cm_GetCommandResult(int);
 extern void __cdecl fcn_004f2ba0(char*, char*, int);
-extern void __cdecl fcn_004c5530(char*);
+extern void __cdecl cm_SendCopyEntityData(char*);
 extern char* __cdecl fcn_0050dc90(char*);
 extern void __cdecl he_FreeAction(char*);
 extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-extern void __cdecl fcn_004c5790(int, Req55c270*);
+extern void __cdecl cm_RequestSysMessage(int, Req55c270*);
 extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 
@@ -66,22 +66,22 @@ void __cdecl fcn_0055c270(char* o)
 		*(int*) (o + 0x70) = 1;
 		break;
 	case 1:
-		if (fcn_00500cb0(o + 0x52, (char*) 0x7f4c00) < 0) {
+		if (gm_CompareGameTime(o + 0x52, (char*) 0x7f4c00) < 0) {
 			e = (unsigned char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0x10));
 			if (e == 0) {
 				he_FreeAction(o);
 				return;
 			}
 			h = fcn_00502cd0(*(int*) (e + 0x5d), 1, 1, *(int*) (o + 0xb0));
-			*(int*) (o + 0xb4) = fcn_004c51f0(*(int*) (o + 0xb0), -1,
+			*(int*) (o + 0xb4) = cm_SendSellObjekt(*(int*) (o + 0xb0), -1,
 				*(unsigned short*) (o + 0xac), 1, *(char*) &g_773d75, 0);
 			(*(int*) (o + 0x70))++;
 		}
 		break;
 	case 2:
-		if (fcn_004c4450(*(int*) (o + 0xb4)) == 0)
+		if (cm_GetCommandStatus(*(int*) (o + 0xb4)) == 0)
 			break;
-		rec = (unsigned char*) fcn_004c4480(*(int*) (o + 0xb4));
+		rec = (unsigned char*) cm_GetCommandResult(*(int*) (o + 0xb4));
 		e = (unsigned char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0x10));
 		if (e == 0 || rec == 0) {
 			he_FreeAction(o);
@@ -122,7 +122,7 @@ void __cdecl fcn_0055c270(char* o)
 			msg.xc = *(int*) (e + 1);
 			msg.b36 = 2;
 			msg.x58 = *(int*) (e + 1);
-			fcn_004c5530((char*) &msg);
+			cm_SendCopyEntityData((char*) &msg);
 		}
 		if (*(char*) &((ENTITY_RECORD_VIEW*) g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_type == 6) {
 			char tmp[0x80];
@@ -171,7 +171,7 @@ void __cdecl fcn_0055c270(char* o)
 			gm_AddTime((pos14_7f4c00*) &m, 0, 0, 1);
 			m.id = *(int*) (e + 1);
 			m.x4 = *(int*) (h + 2);
-			fcn_004c5790(4, &m);
+			cm_RequestSysMessage(4, &m);
 		}
 		he_FreeAction(o);
 		return;

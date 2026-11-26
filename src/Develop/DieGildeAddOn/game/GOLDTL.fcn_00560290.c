@@ -12,13 +12,13 @@ extern int gm_GameTime;
 extern int g_7f4c04;
 extern unsigned char g_773d75;
 
-int __cdecl fcn_00500e20(int*);
+int __cdecl gm_GetSeason(int*);
 void __cdecl gm_AddTime(int, int, int, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl d3_TransformPoint(int, int, float*);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl gm_IsEntityAtBuilding(int, int);
 void __cdecl fcn_00529160(int, int, int, int);
@@ -27,7 +27,7 @@ int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 char* __cdecl fcn_0050dc90(unsigned char*);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
@@ -48,7 +48,7 @@ void __cdecl fcn_00560290(char* a0)
 	int t;
 	char* e;
 
-	win = fcn_00500e20(&gm_GameTime);
+	win = gm_GetSeason(&gm_GameTime);
 	value = g_7f4c04 & 0xffff;
 	nearest = 0;
 	if ((g_696550[win] <= (float) value || (float) value < g_696540[win]) && *(int*) (a0 + 0x70) != -1 && *(int*) (a0 + 0x70) != -2) {
@@ -96,7 +96,7 @@ void __cdecl fcn_00560290(char* a0)
 			*(int*) (a0 + 0xb4) = *(int*) (nearest + 1);
 			for (i = 0; i < *(unsigned char*) (a0 + 0xac); i++) {
 				if (gm_LookupEntityRecordById(((int*) (a0 + 0x8c))[i])) {
-					fcn_004c5c80(((int*) (a0 + 0x8c))[i]);
+					cm_SendCancelCharacterActions(((int*) (a0 + 0x8c))[i]);
 					fcn_004c5da0(((int*) (a0 + 0x8c))[i], *(int*) (nearest + 1), -1, 0, 0, (char*) 0x6a6508);
 				}
 			}
@@ -135,7 +135,7 @@ void __cdecl fcn_00560290(char* a0)
 			for (i = 0; i < *(unsigned char*) (a0 + 0xac); i++) {
 				if (gm_LookupEntityRecordById(((int*) (a0 + 0x8c))[i])) {
 					found |= 1;
-					fcn_004c5c80(((int*) (a0 + 0x8c))[i]);
+					cm_SendCancelCharacterActions(((int*) (a0 + 0x8c))[i]);
 					fcn_004c5da0(((int*) (a0 + 0x8c))[i], *(int*) (e + 1), *(int*) (a0 + 0xb0), 0, 0, (char*) 0x6a6508);
 				}
 			}
@@ -174,7 +174,7 @@ void __cdecl fcn_00560290(char* a0)
 			if (!q) {
 				break;
 			}
-			win = fcn_00500e20(&gm_GameTime);
+			win = gm_GetSeason(&gm_GameTime);
 			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v9].category == 0x20) {
 				scale = (double) gm_GetBuildingTechEffect(v9, 0x1e, 1) * *(double*) 0x665eb0 + 1.0;
 				t = gm_RandomMod(6) & 0xffff;
@@ -193,7 +193,7 @@ void __cdecl fcn_00560290(char* a0)
 			}
 			id = (unsigned short*) fcn_0050dc90(v9);
 			if (rec) {
-				fcn_004c51f0(*(int*) (q + 2), -1, *(unsigned short*) (a0 + 0xae), rec, g_773d75, 0);
+				cm_SendSellObjekt(*(int*) (q + 2), -1, *(unsigned short*) (a0 + 0xae), rec, g_773d75, 0);
 				io_FormatTextBuffer(text, 0x1802, 0x17fd, v9);
 				io_FormatTextBuffer(name, 0x1803, rec, *(unsigned short*) (a0 + 0xae) * 2 + 0x9a8);
 				strcat(text, name);
@@ -216,7 +216,7 @@ void __cdecl fcn_00560290(char* a0)
 			}
 			for (i = 0; i < *(unsigned char*) (a0 + 0xac); i++) {
 				if (gm_LookupEntityRecordById(((int*) (a0 + 0x8c))[i])) {
-					fcn_004c5c80(((int*) (a0 + 0x8c))[i]);
+					cm_SendCancelCharacterActions(((int*) (a0 + 0x8c))[i]);
 					fcn_004c5da0(((int*) (a0 + 0x8c))[i], *(int*) (e + 1), *(int*) (a0 + 0xb0), 0, 0, (char*) 0x6a6508);
 				}
 			}

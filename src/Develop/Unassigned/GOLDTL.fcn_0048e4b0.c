@@ -13,8 +13,8 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 extern unsigned char g_773d75;
 
-void __cdecl fcn_004c51a0(int, int, char, int);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
+void __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048e4b0 */
@@ -24,7 +24,7 @@ int __cdecl fcn_0048e4b0(char* entity, char* a2, char* a3)
 	char msg[0xf8];
 	F8 filter;
 
-	fcn_004c51a0(-1, *(int*) (entity + 4), (*(char*)&g_773d75), *(int*) (a3 + 8));
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) (entity + 4), (*(char*)&g_773d75), *(int*) (a3 + 8));
 	memset(msg, 0, sizeof(msg));
 	msg[4] = (char) 0x99;
 	*(int*) (msg + 8) = *(int*) (entity + 4);
@@ -44,6 +44,6 @@ int __cdecl fcn_0048e4b0(char* entity, char* a2, char* a3)
 	filter.b = 0;
 	fcn_004a5e60(entity, 0, filter, 0, 100.0f, &found);
 	*(int*) (msg + 0x58) = found;
-	fcn_004c5530(msg);
+	cm_SendCopyEntityData(msg);
 	return 1;
 }

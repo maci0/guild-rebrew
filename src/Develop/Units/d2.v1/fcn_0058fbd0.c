@@ -27,9 +27,9 @@ void __cdecl fcn_005340f0(int a1);
 int __cdecl io_AppendText(int a1, ...);
 int __cdecl d2_GetWindowListItem(int a1, int a2, int a3);
 int __cdecl main_RunFrameLoop(void* a1, int a2);
-void __cdecl fcn_004c5530(struct msg58* m);
+void __cdecl cm_SendCopyEntityData(struct msg58* m);
 void __cdecl fcn_00471e30(int a1);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl fcn_005305a0(void);
 int __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00526120(int a1, int a2);
@@ -88,7 +88,7 @@ found:
 					m.stamp = gm_GameTime;
 					m.f58 = *(int*) (h + 4);
 					m.f38 = *(int*) (h + 4);
-					fcn_004c5530(&m);
+					cm_SendCopyEntityData(&m);
 					g_774654 = 1;
 				} else {
 nofree:
@@ -100,7 +100,7 @@ nofree:
 		}
 	} while (main_RunFrameLoop((void*) fcn_0058fbd0, 0x677c7) != 0);
 	fcn_00471e30(dlg);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	fcn_005305a0();
 	return fcn_00532ef0();
 }

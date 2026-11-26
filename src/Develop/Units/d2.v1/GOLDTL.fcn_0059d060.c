@@ -50,7 +50,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
-int __cdecl fcn_004c5530(Packet*);
+int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl fcn_004c35f0(void);
 int __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
@@ -121,7 +121,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 					}
 					else {
 						flag = 1;
-						fcn_004c5530(&pkt);
+						cm_SendCopyEntityData(&pkt);
 						fcn_004c35f0();
 						count = 0;
 						for (p = (char*) 0x7e4260; (int) p < 0x7e42e0; p += 4) {

@@ -27,7 +27,7 @@ extern IdGroup g_688118[];
 
 int __cdecl msx_FindActiveGroup(void);
 int __cdecl fcn_004c2820(int);
-int __cdecl fcn_00500e20(int*);
+int __cdecl gm_GetSeason(int*);
 void __cdecl fcn_004c2100(void);
 void __cdecl msx_SelectOutdoorTrack(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -58,10 +58,10 @@ void __cdecl fcn_004c2860(void)
 	if (!(g_6819b0 > g_6628a8)) {
 		return;
 	}
-	if (g_772e64 != fcn_00500e20((int*) &gm_GameTime)) {
+	if (g_772e64 != gm_GetSeason((int*) &gm_GameTime)) {
 		if (g_772e64 != 0) {
 			slot = fcn_004c2820(0x2694);
-			g_772e64 = fcn_00500e20((int*) &gm_GameTime);
+			g_772e64 = gm_GetSeason((int*) &gm_GameTime);
 			if (slot < 0) {
 				return;
 			}
@@ -87,7 +87,7 @@ void __cdecl fcn_004c2860(void)
 			}
 			return;
 		}
-		g_772e64 = fcn_00500e20((int*) &gm_GameTime);
+		g_772e64 = gm_GetSeason((int*) &gm_GameTime);
 		return;
 	}
 	if (tp_msx_CurrentTrack != 0) {

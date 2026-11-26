@@ -13,7 +13,7 @@ int __cdecl fcn_0050d200(int a, int b);
 char* __cdecl _strupr(char* s);
 void __cdecl fcn_005986f0(char* a, int b);
 void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj);
-void __cdecl fcn_004c5530(int a1);
+void __cdecl cm_SendCopyEntityData(int a1);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* gm_CityEntity;
@@ -24,7 +24,7 @@ void __cdecl ReportClientMessage(const char*);
 int __cdecl gm_RandomMod(int);
 int __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_TransformPoint(char*, char*, int*);
-void __cdecl fcn_004c5530(int a1);
+void __cdecl cm_SendCopyEntityData(int a1);
 int __cdecl amt_SendOfficeCommand(unsigned char, char*, char*, int, int);
 void __cdecl amt_NotifyOfficeAppointed(void*, unsigned int);
 void __cdecl amt_NotifyOfficeLost(void*, unsigned int);
@@ -107,6 +107,6 @@ int __cdecl amt_ExecGebaeudeBauen(int a0, char* a1, char* a2)
 	*(int*) (event + 0x5c) = v4; *(int*) (event + 0x60) = fcn_0050d200(a0, v4);
 	fcn_005986f0(event + 0x80, v3);
 	d3_ComputeObjectYawToTarget((float*) (event + 0x90), v3);
-	fcn_004c5530((int) event);
+	cm_SendCopyEntityData((int) event);
 	return 1;
 }

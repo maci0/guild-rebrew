@@ -1,4 +1,4 @@
-int __cdecl fcn_004fffb0(unsigned short id);
+int __cdecl gm_CheckEntityAgeLimit(unsigned short id);
 char* __cdecl gm_LookupEntityRecordById(int a1);
 
 /* ADDRESS: GOLDTL 0x00509480 */
@@ -25,7 +25,7 @@ int __cdecl fcn_00509480(char* a, char* b)
 		if (i == 0) {
 			first = 2;
 		} else
-			return fcn_004fffb0(*(unsigned short*) b) == 0;
+			return gm_CheckEntityAgeLimit(*(unsigned short*) b) == 0;
 	}
 	else {
 		if (age_diff != 0 || *(unsigned short*) (a + 0x50) != *(unsigned short*) (b + 0x50)) {
@@ -38,7 +38,7 @@ int __cdecl fcn_00509480(char* a, char* b)
 			continue;
 		}
 		other = (char*) gm_LookupEntityRecordById(*p);
-		if (other != 0 && fcn_004fffb0(*(unsigned short*) other) == 0 && (unsigned char) other[8] > 0) {
+		if (other != 0 && gm_CheckEntityAgeLimit(*(unsigned short*) other) == 0 && (unsigned char) other[8] > 0) {
 			break;
 		}
 	}

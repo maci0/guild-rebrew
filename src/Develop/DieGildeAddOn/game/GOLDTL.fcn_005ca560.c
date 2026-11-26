@@ -31,7 +31,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 float __cdecl fcn_004fef80(char*);
 
-int __cdecl fcn_005ca560(Sel* s)
+int __cdecl d2_BuildPersonStatusDesc(Sel* s)
 {
 	char* e;
 	char* p;

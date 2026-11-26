@@ -18,7 +18,7 @@ extern void (__cdecl* g_7dc440[])(unsigned char*);
 
 void __cdecl d3_PruneEventGfxSlots(void);
 void __cdecl he_CreateEventGfxInfo(HE_ACTION*);
-int __cdecl fcn_00500cb0(char*, char*);
+int __cdecl gm_CompareGameTime(char*, char*);
 void __cdecl fcn_00546be0(HE_ACTION*);
 
 void __cdecl he_RunDueActions(void)
@@ -29,7 +29,7 @@ void __cdecl he_RunDueActions(void)
 	for (i = 0; i <= he_LastEventSlot && i < 1024; i++) {
 		if (g_77e980[i].kind != 0 && (g_77e980[i].flags & 0x18) == 0) {
 			he_CreateEventGfxInfo(&g_77e980[i]);
-			if (fcn_00500cb0(((char*)&gm_GameTime), g_77e980[i].unk_52) > 0 && g_77e980[i].kind < 0xa7) {
+			if (gm_CompareGameTime(((char*)&gm_GameTime), g_77e980[i].unk_52) > 0 && g_77e980[i].kind < 0xa7) {
 				fcn_00546be0(&g_77e980[i]);
 				g_7dc440[g_77e980[i].kind](&g_77e980[i].kind);
 			}

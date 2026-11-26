@@ -14,10 +14,10 @@ int __cdecl io_AppendText(int id, ...);
 void __cdecl fcn_004fcda0(u16 id, int a, void* out);
 int __cdecl gm_RandomMod(int a);
 int __cdecl _ftol(void);
-int __cdecl fcn_004c51a0(int a, int b, int c, int d);
+int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
 void __cdecl fcn_004c6ae0(int a, int b);
-int __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
-int __cdecl fcn_004c4450(int a);
+int __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
+int __cdecl cm_GetCommandStatus(int a);
 void __cdecl fcn_00535960(void);
 void __cdecl io_FormatTextBuffer(char* out, int id, ...);
 int __cdecl fcn_00526120(char* text, int a);
@@ -61,9 +61,9 @@ int __cdecl fcn_005d6c50(int actor, int a1)
     if (((u8*) actor)[2] != 6) {
         if (*(int*) (actor + 0x194) < 4)
             return 0x20;
-        fcn_004c51a0(*(int*) (actor + 4), -1, 0, h2);
+        cm_RequestTransferCurrencyNoKill(*(int*) (actor + 4), -1, 0, h2);
         fcn_004c6ae0(*(int*) (actor + 4), -4);
-        fcn_004c5420(*(int*) (p + 2), 0x1c8, 4, 0x400000, 0);
+        cm_RequestChangeBits(*(int*) (p + 2), 0x1c8, 4, 0x400000, 0);
         return *(int*) (frame + 0);
     }
     dlg = (int) fcn_00470820(0, 0, "privillegien\\unterschlagung");
@@ -77,11 +77,11 @@ int __cdecl fcn_005d6c50(int actor, int a1)
         if (g_100f1dc != -1) {
             if (g_100f1dc == 2) {
                 if (d2_CheckActionBlocker(actor, 4) != 0) {
-                    fcn_004c51a0(*(int*) (actor + 4), -1, 0, h2);
+                    cm_RequestTransferCurrencyNoKill(*(int*) (actor + 4), -1, 0, h2);
                     fcn_004c6ae0(*(int*) (actor + 4), -4);
-                    dlg = fcn_004c5420(*(int*) (p + 2), 0x1c8, 4, 0x400000,
+                    dlg = cm_RequestChangeBits(*(int*) (p + 2), 0x1c8, 4, 0x400000,
                                      0);
-                    while (fcn_004c4450(dlg) == 0)
+                    while (cm_GetCommandStatus(dlg) == 0)
                         fcn_00535960();
                     io_FormatTextBuffer(frame + 0x14, 0x1dc3, h2);
                     fcn_00526120(frame + 0x14, 0);

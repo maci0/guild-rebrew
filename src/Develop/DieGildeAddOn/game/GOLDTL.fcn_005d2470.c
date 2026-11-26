@@ -10,12 +10,12 @@ void __cdecl fcn_00472380(int, int, int, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
-void __cdecl fcn_004c5150(int, int, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
-void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c4ef0(char*);
+void __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_SendLogAction(char*);
+void __cdecl cm_SendTraceEnd(char*);
 int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -102,14 +102,14 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 *(unsigned short*) &g_774970])), uv,
 				*(unsigned char*) &g_773d75) != 0) {
 				flags = *(unsigned int*) ((char*) arg2 + 0x1c8) | 0x20;
-				fcn_004c4eb0((char*) 0x6acba4);
-				fcn_004c5150(*(int*) ((char*) arg3 + 4),
+				cm_SendLogAction((char*) 0x6acba4);
+				cm_RequestMoveCredits(*(int*) ((char*) arg3 + 4),
 				    *(int*) ((char*) arg2 + 4),
 				    *(unsigned char*) &g_773d75, uv);
 				cm_BeginPacketFieldDelta(arg2, *(int*) ((char*) arg2 + 4));
 				cm_AppendPacketFieldDelta(4, 1, 0x1c8, (char*) &flags);
-				fcn_004c5360();
-				fcn_004c4ef0((char*) 0x6acba4);
+				cm_RequestChangeAttribute();
+				cm_SendTraceEnd((char*) 0x6acba4);
 			}
 			r = 1;
 			g_774654 = 1;

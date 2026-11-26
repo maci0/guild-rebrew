@@ -8,7 +8,7 @@ typedef struct
 
 extern struct VFS_DIR* g_6b7fdc;
 
-char* __cdecl fcn_00449ac0(char* s, char* sub);
+char* __cdecl d3_AppendVfsAssetPath(char* s, char* sub);
 char* __cdecl fcn_0064d1a0(char* s, int c);
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl fcn_00401360(void* s, int v);
@@ -28,7 +28,7 @@ void __cdecl fcn_0044b200(char* o)
 	if (o == 0 || *(fcn_0044b200_Tile**) (o + 0x200) == 0 || *(int*) (o + 0x1e4) <= 0 || *(int*) (o + 0x1e8) <= 0) {
 		return;
 	}
-	p = fcn_00449ac0(o, ".BGF");
+	p = d3_AppendVfsAssetPath(o, ".BGF");
 	if (p == 0) {
 		return;
 	}

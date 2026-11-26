@@ -19,7 +19,7 @@ int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0050d320(char*, int);
-int __cdecl fcn_004c51f0(int, int, int, int, int, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004c0240 */
 void __cdecl fcn_004c0240(char* a0, int a1)
@@ -82,7 +82,7 @@ void __cdecl fcn_004c0240(char* a0, int a1)
 						}
 					}
 					if (fcn_0050d320(v4, a1) >= val * c) {
-						fcn_004c51f0(*(int*) (src + 2), *(int*) (stats.obj + 2),
+						cm_SendSellObjekt(*(int*) (src + 2), *(int*) (stats.obj + 2),
 							     *(int*) rec, c, a1, val);
 					}
 				}

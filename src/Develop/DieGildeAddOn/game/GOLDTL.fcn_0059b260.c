@@ -31,7 +31,7 @@ int __cdecl fcn_0046f940(int, char*);
 int __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl fcn_00532ef0(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 void __cdecl fcn_00533f40(int, int, int, int);
@@ -47,9 +47,9 @@ void __cdecl fcn_005963f0(int, int, int, int);
 void __cdecl fcn_004c35f0(void);
 char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_004c5530(char*);
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_SendCopyEntityData(char*);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 
 typedef struct Msg59b {
@@ -192,13 +192,13 @@ int __cdecl d2_ShowProductionDialog(char* building)
 									msg.f58 = *(int*) (building + 1);
 									msg.f5c = *(int*) (p1 + 2);
 									msg.f60 = *(int*) (p3 + 2);
-									k = fcn_004c5530((char*) &msg);
-									e = (char*) fcn_004c4450(k);
+									k = cm_SendCopyEntityData((char*) &msg);
+									e = (char*) cm_GetCommandStatus(k);
 									while (e == 0) {
 										main_RunFrameLoop(0, 0x20007);
-										e = (char*) fcn_004c4450(k);
+										e = (char*) cm_GetCommandStatus(k);
 									}
-									p = fcn_004c4480(k);
+									p = cm_GetCommandResult(k);
 								}
 							}
 							else {
@@ -225,13 +225,13 @@ int __cdecl d2_ShowProductionDialog(char* building)
 									msg.timestamp.d = (unsigned short) g_7f4c0c;
 									msg.f5c = *(int*) (building + 1);
 									msg.f60 = *(int*) (p3 + 2);
-									k = fcn_004c5530((char*) &msg);
-									e = (char*) fcn_004c4450(k);
+									k = cm_SendCopyEntityData((char*) &msg);
+									e = (char*) cm_GetCommandStatus(k);
 									while (e == 0) {
 										main_RunFrameLoop(0, 0x20007);
-										e = (char*) fcn_004c4450(k);
+										e = (char*) cm_GetCommandStatus(k);
 									}
-									p = fcn_004c4480(k);
+									p = cm_GetCommandResult(k);
 								}
 							}
 							if (p != 0) {
@@ -368,6 +368,6 @@ int __cdecl d2_ShowProductionDialog(char* building)
 		fcn_005963f0(h, 1, 0, (int) building);
 	} while (main_RunFrameLoop(fcn_005944d0, 0x677c7) != 0);
 	fcn_00471e30(h);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	return 0;
 }

@@ -26,7 +26,7 @@ typedef struct
 } fcn_00439e70_Obj;
 // SIZE 0x18c
 
-void __cdecl fcn_00438d70(char* o, int a, int b, int c);
+void __cdecl d3_SetObjectEulerRotation(char* o, int a, int b, int c);
 void __cdecl fcn_00438ba0(char* o, int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x00439e70 */
@@ -74,6 +74,6 @@ void __cdecl fcn_00439e70(char* o)
 	*(int*) (o + 0x78) = 0;
 	*(int*) (o + 0x7c) = 0;
 	*(int*) (o + 0x80) = 0;
-	fcn_00438d70(o, 0, 0, 0);
+	d3_SetObjectEulerRotation(o, 0, 0, 0);
 	fcn_00438ba0(o, 0, 0, 0);
 }

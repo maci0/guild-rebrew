@@ -9,10 +9,10 @@ extern int g_6b7d7c;
 extern SOUND_VOICE g_14cbbe0;
 extern char* g_6b7e88;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-int __cdecl fcn_0042aaa0(int h);
+int __cdecl msx_GetSampleStatus(int h);
 void __cdecl fcn_0042a7c0(int h);
 
-Voice* __cdecl fcn_004229b0(void)
+Voice* __cdecl sb_AllocVoice(void)
 {
 	Voice* best;
 	int i;
@@ -23,14 +23,14 @@ Voice* __cdecl fcn_004229b0(void)
 	}
 	if (((Voice*)g_6b7e88) != 0) {
 		for (i = 0; i < g_6b7e8c; i++) {
-			if (fcn_0042aaa0(((Voice*)g_6b7e88)[i].h) != 4 && (((Voice*)g_6b7e88)[i].flags & 0x10) == 0) {
+			if (msx_GetSampleStatus(((Voice*)g_6b7e88)[i].h) != 4 && (((Voice*)g_6b7e88)[i].flags & 0x10) == 0) {
 				best = &((Voice*)g_6b7e88)[i++];
 				break;
 			}
 		}
 		if (best != 0) {
 			for (; i < g_6b7e8c; i++) {
-				if (((Voice*)g_6b7e88)[i].prio < best->prio && fcn_0042aaa0(((Voice*)g_6b7e88)[i].h) != 4 &&
+				if (((Voice*)g_6b7e88)[i].prio < best->prio && msx_GetSampleStatus(((Voice*)g_6b7e88)[i].h) != 4 &&
 				    (((Voice*)g_6b7e88)[i].flags & 0x10) == 0) {
 					best = &((Voice*)g_6b7e88)[i];
 				}

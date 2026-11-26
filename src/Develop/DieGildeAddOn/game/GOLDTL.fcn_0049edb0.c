@@ -22,13 +22,13 @@ extern unsigned char g_773d75;
 extern char g_67eb48[];
 
 
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
-void __cdecl fcn_004c5150(int a, int b, char c, int n);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
+void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
+void __cdecl cm_SendCopyEntityData(char* msg);
 
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 
 int __cdecl ai_RunKreditNehmen(char* actor, char* action, char* terms)
 {
@@ -56,15 +56,15 @@ int __cdecl ai_RunKreditNehmen(char* actor, char* action, char* terms)
 			*(int*) (msg + 0x64) = *(int*) (terms + 8);
 			*(int*) (msg + 0x6c) = *(int*) (terms + 0x10);
 			v = *(int*) (terms + 4);
-			fcn_004c4eb0(g_67eb48);
-			fcn_004c5150(*(int*) (actor + 4), *(int*) (p1 + 1), (*(char*)&g_773d75), *(int*) (terms + 4));
-			fcn_004c5530(msg);
+			cm_SendLogAction(g_67eb48);
+			cm_RequestMoveCredits(*(int*) (actor + 4), *(int*) (p1 + 1), (*(char*)&g_773d75), *(int*) (terms + 4));
+			cm_SendCopyEntityData(msg);
 			if (p2 != 0) {
 				cm_BeginPacketFieldDelta(p2, *(int*) (p2 + 1));
 				cm_AppendPacketFieldValue(4, 1, p2 - g_aed32c + 0x39, &v);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
-			fcn_004c4ef0(g_67eb48);
+			cm_SendTraceEnd(g_67eb48);
 		}
 	}
 	return 0;

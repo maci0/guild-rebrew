@@ -25,7 +25,7 @@ struct msg {
 
 #include <string.h>
 
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
@@ -43,7 +43,7 @@ void __cdecl he_SendZigeunerMsg9f(char* a, char* b)
 	m.fc = -1;
 	m.pos = gm_GameTime;
 	m.b36 = 1;
-	fcn_004c5530(&m);
+	cm_SendCopyEntityData(&m);
 	if (b == a) {
 		id = 0x41dd;
 		memcpy(tag, "_NACHRICHTEN_ZIGEUNER_02", 25);

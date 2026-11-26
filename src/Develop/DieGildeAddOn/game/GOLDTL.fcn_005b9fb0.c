@@ -13,7 +13,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004c5620(int, char*);
 
-void __cdecl fcn_005b9fb0(char* e)
+void __cdecl cm_CompleteAction0x0f(char* e)
 {
 	char* p;
 

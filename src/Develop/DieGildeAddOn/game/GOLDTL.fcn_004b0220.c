@@ -3,7 +3,7 @@
 
 char *__cdecl gm_GetGuildHall(int);
 void *__cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_004c51a0(int, int, unsigned char, int);
+int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 extern char *g_item_def_table;
 unsigned short *__cdecl gm_NextEntityQueryMatch(void);
 
@@ -74,10 +74,10 @@ int __cdecl fcn_004b0220(int a1, int a2, char *a3)
 		}
 		if (dir == -1) {
 			factor = (int) a3 * 0.01f;
-			fcn_004c51a0(-1, *(int *) ((char *) q + 2), 0, (int) (factor * amount));
+			cm_RequestTransferCurrencyNoKill(-1, *(int *) ((char *) q + 2), 0, (int) (factor * amount));
 		} else if (dir == 1) {
 			factor = (int) a3 * 0.01f;
-			fcn_004c51a0(*(int *) ((char *) q + 2), -1, 0, (int) (factor * amount));
+			cm_RequestTransferCurrencyNoKill(*(int *) ((char *) q + 2), -1, 0, (int) (factor * amount));
 		}
 		return 1;
 	}

@@ -4,7 +4,7 @@ extern float g_665bf8; /* 1020.0 */
 extern float g_665bfc; /* 1380.0 */
 extern float g_665c00; /* 360.0 */
 
-int __cdecl fcn_00500cb0(int* a, int* b);
+int __cdecl gm_CompareGameTime(int* a, int* b);
 int __cdecl sim_SetSyncParams(int* a, int mode, int b, int c);
 
 /* ADDRESS: GOLDTL 0x0050cad0 */
@@ -17,7 +17,7 @@ int __cdecl fcn_0050cad0(int* a, int* b)
     int v6;
     int v7;
     float f;
-    if (fcn_00500cb0(a, b) > 0) {
+    if (gm_CompareGameTime(a, b) > 0) {
         return 0;
     }
     cur = *(pos14_7f4c00*) a;

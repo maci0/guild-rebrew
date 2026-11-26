@@ -9,9 +9,9 @@ extern int g_772ed4;
 extern int g_772ed8;
 
 int __cdecl fcn_004cef70(int, char*);
-int __cdecl fcn_004ce270(char*, char*);
+int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 void __cdecl fcn_004d1910(void);
-int* __cdecl fcn_004c30a0(int, int, char*, int, int);
+int* __cdecl d3snd_QueueSound(int, int, char*, int, int);
 
 #ifdef REBREW_GOLD
 #define OBJ_TITLE_OFF 0x200
@@ -43,13 +43,13 @@ void __cdecl fcn_004d0f00(void)
 	if (x != 0 && *(int*) (x + 0x220) == 2) {
 		t = *(char**) (x + OBJ_TITLE_OFF);
 		if ((fcn_004cef70(*me, t) & 0x800) != 0 && g_14cf736 == 0
-		    && (e == 0 || fcn_004ce270(e, t) == 0)) {
+		    && (e == 0 || gm_EntitiesDifferByOwnerPtr(e, t) == 0)) {
 			fcn_004d1910();
 			t[0x188] = 1;
 			if (*(int*) (t + 0x16c) == (*(int*)&g_772e9c))
-				fcn_004c30a0(*(unsigned short*) t, g_772ed4, "_ARBEITER_KOMMENTARE_KLICK", -1, 0);
+				d3snd_QueueSound(*(unsigned short*) t, g_772ed4, "_ARBEITER_KOMMENTARE_KLICK", -1, 0);
 			else
-				fcn_004c30a0(*(unsigned short*) t, g_772ed8, "_ARBEITER_KOMMENTARE_KLICK", -1, 0);
+				d3snd_QueueSound(*(unsigned short*) t, g_772ed8, "_ARBEITER_KOMMENTARE_KLICK", -1, 0);
 			x = g_7746a4;
 		}
 	}

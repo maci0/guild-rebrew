@@ -25,7 +25,7 @@ struct msg {
 
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 
 void __cdecl he_ClearActivePlayerActions(void)
 {
@@ -41,5 +41,5 @@ void __cdecl he_ClearActivePlayerActions(void)
 	m.fc = -1;
 	m.b36 = 1;
 	m.pos = gm_GameTime;
-	fcn_004c5530(&m);
+	cm_SendCopyEntityData(&m);
 }

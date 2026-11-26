@@ -8,8 +8,8 @@ int* __cdecl cut_FindLowestIdFlaggedCutscene(void);
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 #include "Develop/DieGildeAddOn/game/cutscene.h"
 
-int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
-void __cdecl fcn_004c53a0(void);
+int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
+void __cdecl cm_SendSetAttribute(void);
 
 char __cdecl cut_RunPendingCutscenes(int idx)
 {
@@ -31,7 +31,7 @@ char __cdecl cut_RunPendingCutscenes(int idx)
 		p = cut_FindLowestIdFlaggedCutscene();
 	}
 	cm_BeginPacketFieldDelta(g_7f4ca4 + idx * 0x21c - 4, *(int*) (g_7f4ca4 + idx * 0x21c));
-	fcn_004c4700(4, 1, (short) (g_7f4ca4 + idx * 0x21c + 0x208 - g_aed32c), &saved);
-	fcn_004c53a0();
+	cm_AppendCommandSyncField(4, 1, (short) (g_7f4ca4 + idx * 0x21c + 0x208 - g_aed32c), &saved);
+	cm_SendSetAttribute();
 	return ok;
 }

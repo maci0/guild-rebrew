@@ -7,7 +7,7 @@ extern char g_1053000[][0x50], g_1335120[][0x50];
 
 #pragma intrinsic(memset, strlen, strcpy, strcat)
 
-char* __cdecl fcn_0042b790(char* s);
+char* __cdecl txt_SkipLeadingSpaces(char* s);
 void __cdecl txt_TrimTrailingSpaces(char* s);
 char* __cdecl fcn_0064e790(const char* s, int c);
 
@@ -42,7 +42,7 @@ int __cdecl txt_ParseTextVariants(char* text, int index)
 	while (p != 0) {
 		if (count == 0) {
 			strcpy(tokenCopy, p);
-			q = fcn_0042b790(tokenCopy);
+			q = txt_SkipLeadingSpaces(tokenCopy);
 			txt_TrimTrailingSpaces(q);
 			if (strcmpi(q, "(m)") == 0) {
 				kind = 0;
@@ -55,7 +55,7 @@ int __cdecl txt_ParseTextVariants(char* text, int index)
 			}
 		}
 		else {
-			q = fcn_0042b790(p);
+			q = txt_SkipLeadingSpaces(p);
 			if (q != 0) {
 				txt_TrimTrailingSpaces(q);
 				r = fcn_0064e790(q, '[');

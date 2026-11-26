@@ -6,7 +6,7 @@
 
 int __cdecl fcn_004c6db0(int*);
 
-void __cdecl fcn_004eea70(char* a)
+void __cdecl cm_SendSlotAddNCta(char* a)
 {
 	int x[2];
 	x[0] = 0x6154436e;

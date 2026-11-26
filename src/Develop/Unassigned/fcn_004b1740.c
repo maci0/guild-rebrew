@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_timestamp.h"
 void *memset(void *, int, unsigned int);
 int __cdecl fcn_004ae170(int);
-int __cdecl fcn_004c5530(void *);
+int __cdecl cm_SendCopyEntityData(void *);
 
 #include "client_types.h"
 
@@ -42,7 +42,7 @@ int __cdecl fcn_004b1740(void)
 			msg[4] = 0x57;
 			msg[0x36] = 1;
 			*(GAME_TIMESTAMP*) (msg + 0x28) = stamp;
-			fcn_004c5530(msg);
+			cm_SendCopyEntityData(msg);
 		}
 		rec += 0x21c;
 		i++;

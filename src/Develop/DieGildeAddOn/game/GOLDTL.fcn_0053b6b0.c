@@ -16,7 +16,7 @@ void* __cdecl fcn_00445600(void* dev, int flags, void* ptr, char* name);
 void __cdecl d3_TransformPoint(void* dev, void* pos, void* out);
 int __cdecl fcn_00469c30(int x, int y, int a3);
 void __cdecl d2_DestroyElement(int kind);
-int __cdecl fcn_004fdec0(char* name);
+int __cdecl gm_FindHeadIconIndex(char* name);
 int __cdecl gm_MapEntityStatRange(int arg);
 int __cdecl main_RunFrameLoop(int task, int time);
 
@@ -151,7 +151,7 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 			}
 			obj = 0;
 			strcpy((char*) 0x7e2435, name);
-			g_7e2468 = fcn_004fdec0(name) + 0x639;
+			g_7e2468 = gm_FindHeadIconIndex(name) + 0x639;
 			obj = ch_CreateAtPosition(name, pos);
 			ch_SetToDummy(obj, dev);
 			ch_SetVisible(obj, 0);

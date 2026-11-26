@@ -10,7 +10,7 @@ void __cdecl fcn_004e59c0(void)
 {
 	char** p;
 
-	fcn_0042df30(fcn_00538060, 0);
+	tb_SetCallbackPaused(fcn_00538060, 0);
 	for (p = ((char**)ch_CharacterSlots); (int) p < (int) (((char**)ch_CharacterSlots) + 0x300); p++) {
 		if (*p != 0 && (*(unsigned char*) (*p + 0x8c) & 4) != 0) {
 			ch_SetAnimationPaused(*p, 0);

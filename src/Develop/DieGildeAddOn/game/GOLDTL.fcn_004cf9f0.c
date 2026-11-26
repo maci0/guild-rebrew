@@ -22,8 +22,8 @@ char* __cdecl ch_CreateQueuedAction(char*, int (__cdecl*)(void), int, int, int);
 void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 unsigned int __cdecl cut_RandMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_004458a0(char*, char*, char*);
-void __cdecl fcn_00442c00(char*, int);
+void __cdecl d3_ApplyWorldTransformToObject(char*, char*, char*);
+void __cdecl d3_SetObjectVisible(char*, int);
 void __cdecl fcn_00533a40(char*);
 
 
@@ -52,8 +52,8 @@ int __cdecl fcn_004d4790(char* e)
 		}
 		q = *(char**) (e + 0x1ac);
 		if (q != 0) {
-			fcn_004458a0(q, *(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c, *(char**) (*(char**) (e + 0x184) + 0x34) + 0x18c);
-			fcn_00442c00(q, 1);
+			d3_ApplyWorldTransformToObject(q, *(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c, *(char**) (*(char**) (e + 0x184) + 0x34) + 0x18c);
+			d3_SetObjectVisible(q, 1);
 			*(char**) (e + 0x1ac) = 0;
 			*(int*) (fcn_004cf9f0(q) + 0xa) = *g_772e98;
 		}

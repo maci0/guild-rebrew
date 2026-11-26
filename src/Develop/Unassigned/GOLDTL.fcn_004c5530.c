@@ -1,10 +1,10 @@
 
 
 
-void __cdecl fcn_004c4df0(int, int);
-int __cdecl fcn_004c4330(void*);
+void __cdecl cm_StageRawPacketPayload(int, int);
+int __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c5530(int packet)
+void __cdecl cm_SendCopyEntityData(int packet)
 {
 	char buf[0x9c];
 	int i;
@@ -18,6 +18,6 @@ void __cdecl fcn_004c5530(int packet)
 		}
 		cursor++;
 	}
-	fcn_004c4df0(0xf8, packet);
-	fcn_004c4330(buf);
+	cm_StageRawPacketPayload(0xf8, packet);
+	cm_EnqueueClientPacket(buf);
 }

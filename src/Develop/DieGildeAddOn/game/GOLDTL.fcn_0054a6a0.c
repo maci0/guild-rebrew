@@ -19,7 +19,7 @@ extern Rec54a6a0 g_7f4ca0[];
 extern unsigned char g_773d75;
 
 void __cdecl he_FreeAction(int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl gm_ResolveEntityById(int*, int, int, int);
 int __cdecl fcn_004c5620(int, int);
 void __cdecl gm_AddTime(int, int, int, int);
@@ -29,11 +29,11 @@ int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl he_NotifyThemaPredigt(Rec54a6a0*, int, int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_004fd4f0(int, Out54a6a0*);
 int __cdecl io_FormatTextBuffer(char*, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl fcn_00493200(Rec54a6a0*, int);
 
 /* ADDRESS: GOLDTL 0x0054a6a0 */
@@ -57,7 +57,7 @@ void __cdecl fcn_0054a6a0(int a0)
 		return;
 	}
 	v4 = *(int*) (a0 + 0x84);
-	if (v4 != -1 && !fcn_004c4450(v4)) {
+	if (v4 != -1 && !cm_GetCommandStatus(v4)) {
 		return;
 	}
 	*(int*) (v2 + 0x84) = 0xffffffff;
@@ -93,7 +93,7 @@ void __cdecl fcn_0054a6a0(int a0)
 			cm_AppendPacketFieldDelta(1, 1, 0x1c, (int*) &v9);
 			cm_AppendPacketFieldDelta(1, 1, 0x1d, (int*) &v9);
 			cm_AppendPacketFieldDelta(4, 1, 0x1e, (int*) &v10);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			v4 = fcn_004fd4f0(entity, &pair);
 			if (v4) {
 				v1 = g_7f4ca0[*(unsigned short*) (entity + 0x27)].kind;
@@ -102,11 +102,11 @@ void __cdecl fcn_0054a6a0(int a0)
 					fcn_00545d40(g_7f4ca0[*(unsigned short*) (entity + 0x27)].h,
 					             0xffffffff, message, 0, 0x5ff, (char*) 0x6b5c60);
 				}
-				fcn_004c5150(g_7f4ca0[*(unsigned short*) (entity + 0x27)].h,
+				cm_RequestMoveCredits(g_7f4ca0[*(unsigned short*) (entity + 0x27)].h,
 				             0xffffffff, g_773d75, pair.b);
 				cm_BeginPacketFieldDelta(entity, *(int*) (entity + 1));
 				cm_AppendPacketFieldDelta(4, 1, 0x69, &pair.b);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 		}
 		gm_AddTime(v2 + 0x52, 0x18, 0, 0);

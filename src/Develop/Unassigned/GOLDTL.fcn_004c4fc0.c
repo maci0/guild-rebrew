@@ -1,20 +1,20 @@
 
 
 
-int __cdecl fcn_004c4330(char*);
+int __cdecl cm_EnqueueClientPacket(char*);
 
-int __cdecl fcn_004c4fc0(char a, int b, int c, short d, int e, char f, char g, char h)
+int __cdecl cm_RequestAllocSpieler(char type, int motherId, int fatherId, short parentId, int locationId, char statA, char statB, char flags)
 {
 	char buf[0x9c];
 
 	buf[0] = 0xb;
-	buf[0x14] = a;
-	*(int*) (buf + 0x15) = b;
-	*(int*) (buf + 0x19) = c;
-	*(short*) (buf + 0x1d) = d;
-	*(int*) (buf + 0x1f) = e;
-	buf[0x23] = f;
-	buf[0x24] = g;
-	buf[0x25] = h;
-	return fcn_004c4330(buf);
+	buf[0x14] = type;
+	*(int*) (buf + 0x15) = motherId;
+	*(int*) (buf + 0x19) = fatherId;
+	*(short*) (buf + 0x1d) = parentId;
+	*(int*) (buf + 0x1f) = locationId;
+	buf[0x23] = statA;
+	buf[0x24] = statB;
+	buf[0x25] = flags;
+	return cm_EnqueueClientPacket(buf);
 }

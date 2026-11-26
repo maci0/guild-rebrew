@@ -3,7 +3,7 @@
 extern char g_7f4ca0[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_004c5c80(int a1);
+void __cdecl cm_SendCancelCharacterActions(int a1);
 int __cdecl fcn_004c5da0(int who, int key, int target, char* name, int mode, char* text);
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
 int __cdecl fcn_004c5620(char a1, unsigned char* e);
@@ -51,7 +51,7 @@ unsigned int __cdecl fcn_00577e70(char* a0, char* a1, char* a2)
 				} else {
 					if (*(int*) (a2 + 0xb4) != *(int*) (a1 + 0xac)) {
 						*(int*) (a1 + 0xac) = *(int*) (a2 + 0xb4);
-						fcn_004c5c80(*(unsigned int*) (a0 + 4));
+						cm_SendCancelCharacterActions(*(unsigned int*) (a0 + 4));
 						fcn_004c5da0(*(unsigned int*) (a0 + 4), *(unsigned int*) (a2 + 0xb4), -1, 0, 1, (char*) 0x6a7e3c);
 					}
 					return 0;

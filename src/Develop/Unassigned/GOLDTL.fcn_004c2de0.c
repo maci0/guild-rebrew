@@ -26,9 +26,9 @@ extern char g_67728c[]; /* "%s%s" */
 extern char g_68a47c[]; /* "Voicesample not found:\n%s" */
 extern char g_68a498[]; /* "Voicesample not found in variation:\n%s %i" */
 
-int __cdecl fcn_004234a0(int a0, char* text);
-int __cdecl fcn_00422600(int a0, char* text, int n);
-int __cdecl fcn_00422460(int a0, char* text);
+int __cdecl sb_IsSampleType2(int a0, char* text);
+int __cdecl sb_PreparePrioritizedVoice(int a0, char* text, int n);
+int __cdecl sb_PrepareVoice(int a0, char* text);
 
 /* ADDRESS: GOLDTL 0x004c2de0 */
 int __cdecl fcn_004c2de0(int code, int a1, char* text, int a3)
@@ -77,14 +77,14 @@ int __cdecl fcn_004c2de0(int code, int a1, char* text, int a3)
 
 		}
 		sprintf(buf, g_67728c, text, num);
-		res = fcn_004234a0(a1, buf);
+		res = sb_IsSampleType2(a1, buf);
 		if (a3 >= 0 && res == 0) {
 			sprintf(tmp, g_68a4c4, a3);
 			strcat(num, tmp);
 		}
 		sprintf(buf, g_67728c, text, num);
 		if (res != 0 && a3 >= 0) {
-			res = fcn_00422600(a1, buf, a3);
+			res = sb_PreparePrioritizedVoice(a1, buf, a3);
 			if (res == 0) {
 				sprintf(buf, g_68a498, text, a3);
 			}
@@ -93,7 +93,7 @@ int __cdecl fcn_004c2de0(int code, int a1, char* text, int a3)
 	} else {
 		sprintf(buf, text);
 	}
-	res = fcn_00422460(a1, buf);
+	res = sb_PrepareVoice(a1, buf);
 	if (res == 0) {
 		sprintf(buf, g_68a47c, text);
 	}

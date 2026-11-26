@@ -9,9 +9,9 @@ int __cdecl fcn_004f4830(int idx, void* dst);
 int __cdecl fcn_0050b750(int a, unsigned char b);
 void __cdecl fcn_00535960(void);
 int __cdecl gm_AccumulateTyped2(char* rec);
-void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
+void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 float __cdecl fcn_004ff210(int a, int b);
-void __cdecl fcn_004c51a0(int a1, int a2, char a3, int a4);
+void __cdecl cm_RequestTransferCurrencyNoKill(int a1, int a2, char a3, int a4);
 
 /* ADDRESS: GOLDTL 0x004fcc20 */
 void __cdecl fcn_004fcc20(void)
@@ -52,13 +52,13 @@ void __cdecl fcn_004fcc20(void)
 					}
 				}
 				if (obj != 0) {
-					fcn_004c54c0(((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (obj + 0x27)].entity_id,
+					cm_RequestCopyEntityData(((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (obj + 0x27)].entity_id,
 					    *(int*) (rec + 4), -0xa, 1);
 					g_773d48++;
 				}
 			}
 			if (*e == 1) {
-				fcn_004c51a0(*(int*) (handle + 2), *(int*) (rec + 4), 0, n);
+				cm_RequestTransferCurrencyNoKill(*(int*) (handle + 2), *(int*) (rec + 4), 0, n);
 			inc:
 				g_773d48++;
 			}

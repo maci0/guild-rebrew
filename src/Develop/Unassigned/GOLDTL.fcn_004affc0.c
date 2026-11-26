@@ -12,7 +12,7 @@
 extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca4[];
 
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 
 int __cdecl hst_HandleBelagerungStart(void)
 {
@@ -30,7 +30,7 @@ int __cdecl hst_HandleBelagerungStart(void)
 		if (p[-2] == 6 || p[-2] == 7) {
 			*(int*) (m + 8) = *(int*) p;
 			*(int*) (m + 0x58) = *(int*) p;
-			fcn_004c5530(m);
+			cm_SendCopyEntityData(m);
 		}
 	}
 	return 1;

@@ -1,14 +1,14 @@
 
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c57e0(int a1, int a2)
+void __cdecl cm_RequestKillSpieler(int entityId, int flag)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x21;
-	*(int*) (buf + 0x10) = a1;
-	*(int*) (buf + 0x14) = a2;
-	fcn_004c4330(buf);
+	*(int*) (buf + 0x10) = entityId;
+	*(int*) (buf + 0x14) = flag;
+	cm_EnqueueClientPacket(buf);
 }

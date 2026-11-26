@@ -10,7 +10,7 @@ void __cdecl d2_DrawWindow(int, int);
 void __cdecl d2_ClearWindowChildren(int, int);
 void __cdecl fcn_00471490(int);
 void __cdecl d2_SetForm(char*, int, int);
-int __cdecl fcn_00500d60(int, char*);
+int __cdecl gm_PackGameTime(int, char*);
 int __cdecl gm_GetSeasonFromDate(char*, int);
 int __cdecl fcn_0050bc10(int, int, char*);
 int __cdecl fcn_00517c00(int, unsigned char, int, char*);
@@ -667,7 +667,7 @@ fmt:
 	case 'D':
 		v24 = *(int*)ap;
 		ap += 4;
-		fcn_00500d60(v24, dbuf);
+		gm_PackGameTime(v24, dbuf);
 		v08 = gm_GetSeasonFromDate(dbuf, *(short*)(dbuf + 2));
 		v18 = *(int*)(v08 * 4 + 0x14a5450);
 		fcn_0064d41a(S.work, (char*)0x6a2310, (char*)v18);

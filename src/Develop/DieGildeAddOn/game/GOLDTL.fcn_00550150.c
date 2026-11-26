@@ -8,8 +8,8 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -31,8 +31,8 @@ void __cdecl he_RunHireJourneymanAction(char* action)
 	if (*(int*) (action + 0x70) == -2 || target_id == 0) {
 		he_FreeAction(action);
 	}
-	if (*(int*) (action + 0x70) == 0 && fcn_004c4450(*(int*) (action + 0xbc)) != 0) {
-		journeyman = fcn_004c4480(*(int*) (action + 0xbc));
+	if (*(int*) (action + 0x70) == 0 && cm_GetCommandStatus(*(int*) (action + 0xbc)) != 0) {
+		journeyman = cm_GetCommandResult(*(int*) (action + 0xbc));
 		if (journeyman != 0) {
 			role_str = (journeyman[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (journeyman + 0x165);
 			fcn_004c5da0(*(int*) (journeyman + 4), *(int*) (action + 0xb0), *(int*) (action + 0xb4), 0, 0, "RndGeselle");

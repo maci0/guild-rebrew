@@ -52,7 +52,7 @@ unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-void __cdecl fcn_004c5530(Packet*);
+void __cdecl cm_SendCopyEntityData(Packet*);
 
 /* ADDRESS: GOLDTL 0x004ba080 */
 int __cdecl fcn_004ba080(Req* r)
@@ -131,7 +131,7 @@ int __cdecl fcn_004ba080(Req* r)
 		msg.x36 = 1;
 		msg.x34 = g_7f4c0c;
 		msg.x58 = *(int*) (player + 4);
-		fcn_004c5530(&msg);
+		cm_SendCopyEntityData(&msg);
 	}
 	return 0;
 }

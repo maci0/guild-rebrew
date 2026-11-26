@@ -5,7 +5,7 @@ extern unsigned short* g_772f24;
 char* __cdecl gm_FindEntityActiveItem(char* o);
 
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int c, int* d);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_004cf450(char* pos, int a, int b);
 
 /* ADDRESS: GOLDTL 0x004d4e30 */
@@ -22,7 +22,7 @@ void __cdecl fcn_004d4e30(char* e)
 
 			cm_BeginPacketFieldDelta(q, *(int*) (q + 2));
 			cm_AppendPacketFieldValue(4, 1, q - g_aed32c + 0x20, &v);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		}
 	}
 	fcn_004cf450(*(char**) (*(char**) (o + 0x184) + 0x34) + 0x4c, *(int*) (e + 0x180), *(int*) (e + 0x184));

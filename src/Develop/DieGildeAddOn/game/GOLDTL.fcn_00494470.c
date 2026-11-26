@@ -29,8 +29,8 @@ extern unsigned char g_773d75;
 unsigned short __cdecl gm_RandomMod(unsigned short range);
 int __cdecl fcn_00508eb0(unsigned short id, int a2);
 int __cdecl gm_WalkEntityChain(unsigned short id);
-void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
-void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
+void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
+void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00494470 */
 int __cdecl fcn_00494470(Party494470* p, int flag)
@@ -95,13 +95,13 @@ int __cdecl fcn_00494470(Party494470* p, int flag)
 			break;
 		}
 		if (flag) {
-			fcn_004c54c0(p->ent->id, p->members[i].ent->id, x, 1);
+			cm_RequestCopyEntityData(p->ent->id, p->members[i].ent->id, x, 1);
 		}
 	}
 	q = gm_WalkEntityChain(p->ent->slot);
 	p->text = (int) ((float) (10 - p->b - p->a) * q * p->count * 0.001f);
 	if (flag) {
-		fcn_004c5150(-1, p->ent->id, *(char*) &g_773d75, p->text);
+		cm_RequestMoveCredits(-1, p->ent->id, *(char*) &g_773d75, p->text);
 	}
 	return 0;
 }

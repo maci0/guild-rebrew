@@ -52,16 +52,16 @@ void __cdecl fcn_005105a0(void);
 void __cdecl fcn_00510b40(void);
 void __cdecl fcn_00513d40(char*);
 void __cdecl cm_BeginCommandSync(void);
-void __cdecl fcn_004c4f30(int, int, int, int);
-int __cdecl fcn_004c4fc0(int, int, int, short, int, unsigned char, int, int);
+void __cdecl cm_RequestAllocRaum(int, int, int, int);
+int __cdecl cm_RequestAllocSpieler(int, int, int, short, int, unsigned char, int, int);
 void __cdecl cm_EndCommandSync(void);
-int __cdecl fcn_004c44c0(void);
-void __cdecl fcn_004c3ff0(void);
-void __cdecl fcn_004c4940(void);
+int __cdecl cm_AreQueuedCommandsDone(void);
+void __cdecl cm_FlushCommandQueue(void);
+void __cdecl cm_PollCommandQueue(void);
 void __cdecl ls_ID2Ptr(void);
 void* __cdecl gm_FindNextFilteredEntity(void);
-Figure* __cdecl fcn_004c4480(int);
-void __cdecl fcn_004c5150(int, int, char, int);
+Figure* __cdecl cm_GetCommandResult(int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl fcn_00512680(void);
 void __cdecl gm_InitializeShopInventory(void);
 void __cdecl fcn_00535960(void);
@@ -116,35 +116,35 @@ int __cdecl fcn_00514120(char* map)
 	fcn_00513d40("bk_DOMIZIL");
 	fcn_00513d40("bk_STATUEN");
 	cm_BeginCommandSync();
-	fcn_004c4f30(0x44, -1, 0, 0);
-	fcn_004c4f30(0x45, -1, 0, 0);
-	h = fcn_004c4fc0(0xa, -1, -1, 0x12, -1, 0, 0, 1);
+	cm_RequestAllocRaum(0x44, -1, 0, 0);
+	cm_RequestAllocRaum(0x45, -1, 0, 0);
+	h = cm_RequestAllocSpieler(0xa, -1, -1, 0x12, -1, 0, 0, 1);
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
-		fcn_004c3ff0();
-		fcn_004c4940();
+	while (cm_AreQueuedCommandsDone() == 0) {
+		cm_FlushCommandQueue();
+		cm_PollCommandQueue();
 		ls_ID2Ptr();
 	}
 	cm_BeginCommandSync();
-	(*(Figure**)&gm_CityEntity) = fcn_004c4480(h);
+	(*(Figure**)&gm_CityEntity) = cm_GetCommandResult(h);
 	strcpy((*(Figure**)&gm_CityEntity)->name, "STADT");
-	fcn_004c5150((*(Figure**)&gm_CityEntity)->id, -1, (*(char*)&g_773d75), 200000000);
-	while (fcn_004c44c0() == 0) {
-		fcn_004c3ff0();
-		fcn_004c4940();
+	cm_RequestMoveCredits((*(Figure**)&gm_CityEntity)->id, -1, (*(char*)&g_773d75), 200000000);
+	while (cm_AreQueuedCommandsDone() == 0) {
+		cm_FlushCommandQueue();
+		cm_PollCommandQueue();
 		ls_ID2Ptr();
 	}
 	cm_EndCommandSync();
 	for (i = 1; i < 4; i++) {
 		if (((Variant*)g_868060)[i].used != 0) {
-			fcn_004c5150((*(Figure**)&gm_CityEntity)->id, -1, (char) i, 200000000);
+			cm_RequestMoveCredits((*(Figure**)&gm_CityEntity)->id, -1, (char) i, 200000000);
 		}
 	}
 	fcn_00512680();
 	cm_BeginCommandSync();
 	gm_InitializeShopInventory();
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
+	while (cm_AreQueuedCommandsDone() == 0) {
 		fcn_00535960();
 	}
 	for (s = gm_StartFilteredEntitySearch(1, 5, 0x1c); s != 0; s = gm_FindNextFilteredEntity()) {
@@ -160,7 +160,7 @@ int __cdecl fcn_00514120(char* map)
 	cm_BeginCommandSync();
 	fcn_005017a0((unsigned char) (*(char*)&g_773d75));
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
+	while (cm_AreQueuedCommandsDone() == 0) {
 		fcn_00535960();
 	}
 	d3_SelectSceneContext(1, 0);

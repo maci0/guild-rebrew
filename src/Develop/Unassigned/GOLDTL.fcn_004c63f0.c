@@ -1,7 +1,7 @@
 
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
 #pragma pack(push, 1)
 
@@ -15,11 +15,11 @@ typedef struct
 
 #pragma pack(pop)
 
-void __cdecl fcn_004c63f0(Small3* body)
+void __cdecl cm_RequestSetLaw(Small3* body)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x46;
 	*(Small3*) (buf + 0x10) = *body;
-	fcn_004c4330(buf);
+	cm_EnqueueClientPacket(buf);
 }

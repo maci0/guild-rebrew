@@ -18,11 +18,11 @@ int __cdecl fcn_0050f950(int, int);
 void __cdecl fcn_004c6430(int, int, int);
 void __cdecl fcn_004c6650(int);
 
-int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
-void __cdecl fcn_004c53a0(void);
+int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
+void __cdecl cm_SendSetAttribute(void);
 int __cdecl gm_FindFallbackPublicBuilding(char*, int*, int*);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 char* __cdecl fcn_005049a0(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -49,8 +49,8 @@ void __cdecl he_RunWorkerQuitAction(char* u)
 		fcn_004c6430(*(int*) (h + 4), 0, 0);
 		fcn_004c6650(*(int*) (h + 4));
 		cm_BeginPacketFieldDelta(h, *(int*) (h + 4));
-		fcn_004c4700(4, 1, h - g_aed32c + 0x16c, &v);
-		fcn_004c53a0();
+		cm_AppendCommandSyncField(4, 1, h - g_aed32c + 0x16c, &v);
+		cm_SendSetAttribute();
 		if (gm_FindFallbackPublicBuilding(h, &a, &b) != 0) {
 			if (b != -1) {
 				fcn_004c5da0(*(int*) (h + 4), a, b, 0, 0, "Entlassen");
@@ -59,7 +59,7 @@ void __cdecl he_RunWorkerQuitAction(char* u)
 			}
 		}
 		v = -5;
-		fcn_004c54c0(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)])->entity_id, *(int*) (h + 4), v, 1);
+		cm_RequestCopyEntityData(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)])->entity_id, *(int*) (h + 4), v, 1);
 		q = fcn_005049a0(*(char**) (h + 0x16c));
 		io_FormatTextBuffer(text, 0x1bac, *(unsigned short*) h, *(char**) (h + 0x16c));
 		if (q != 0) {

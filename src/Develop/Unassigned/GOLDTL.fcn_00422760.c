@@ -5,7 +5,7 @@ typedef struct {
 	int a;
 	int key;
 	char pad[0x28];
-} T422760;
+} VOICE_ENTRY;
 
 #include "client_types.h"
 extern SOUND_VOICE g_14cbbe0;
@@ -15,26 +15,26 @@ extern char* g_6b7e88;
 
 /* ADDRESS: GOLD 0x004262f0 */
 /* ADDRESS: GOLDTL 0x00422760 */
-T422760* __cdecl fcn_00422760(int key, int* idx)
+VOICE_ENTRY* __cdecl sb_FindVoiceBySample(int key, int* idx)
 {
-	T422760* r = 0;
-	T422760* t;
+	VOICE_ENTRY* result = 0;
+	VOICE_ENTRY* voices;
 	int i;
-	int n;
+	int count;
 
 	if (g_6b7d7c == 0) {
-		return &(*(T422760*)&g_14cbbe0);
+		return &(*(VOICE_ENTRY*)&g_14cbbe0);
 	}
-	t = ((T422760*)g_6b7e88);
-	if (t != 0) {
-		n = g_6b7e8c;
-		for (i = *idx; i < n; i++) {
-			if (t[i].key == key) {
+	voices = ((VOICE_ENTRY*)g_6b7e88);
+	if (voices != 0) {
+		count = g_6b7e8c;
+		for (i = *idx; i < count; i++) {
+			if (voices[i].key == key) {
 				*idx = i;
-				r = &t[i];
+				result = &voices[i];
 				break;
 			}
 		}
 	}
-	return r;
+	return result;
 }

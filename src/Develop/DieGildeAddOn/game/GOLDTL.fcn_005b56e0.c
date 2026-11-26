@@ -8,7 +8,7 @@ extern int g_6ac240;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 
-unsigned short __cdecl fcn_005b56e0(int lo, int hi)
+unsigned short __cdecl gm_PickRandomOfferId(int lo, int hi)
 {
 	int r;
 	int n;

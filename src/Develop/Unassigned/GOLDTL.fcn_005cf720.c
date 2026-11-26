@@ -2,8 +2,8 @@ extern unsigned char g_slot_table[2];
 extern void* gm_CityEntity;
 
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004fffb0(unsigned int);
-int __cdecl fcn_0047dd60(void*);
+int __cdecl gm_CheckEntityAgeLimit(unsigned int);
+int __cdecl gm_IsNpcEntityState(void*);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005cf720 */
@@ -77,9 +77,9 @@ int __cdecl fcn_005cf720(unsigned int self, unsigned int candidate, unsigned cha
 		}
 		if ((flags & 0x100) && g_slot_table[off + 2] != 6 && g_slot_table[off + 2] != 7 && (g_slot_table[off + 2] != 5 && !g_slot_table[off + 0x166]) && !g_slot_table[off + 0x169])
 			return 0;
-		if ((flags & 0x200) && !fcn_004fffb0(candidate))
+		if ((flags & 0x200) && !gm_CheckEntityAgeLimit(candidate))
 			return 0;
-		if ((*(unsigned int*) (p + 4) & 0x400) && fcn_004fffb0(candidate))
+		if ((*(unsigned int*) (p + 4) & 0x400) && gm_CheckEntityAgeLimit(candidate))
 			return 0;
 		flags = *(unsigned int*) (p + 4);
 		if ((flags & 0x2000) && *(int*) (g_slot_table + off + 0x184))
@@ -110,7 +110,7 @@ int __cdecl fcn_005cf720(unsigned int self, unsigned int candidate, unsigned cha
 	if (flags & 0xf00000) {
 		b4 = ((flags & 0x100000) && (g_slot_table[off + 2] == 6 || g_slot_table[off + 2] == 7));
 		b5 = ((flags & 0x200000) && g_slot_table[off + 2] == 5); b4 |= b5;
-		b6 = ((flags & 0x400000) && g_slot_table[off + 2] != 5 && fcn_0047dd60(g_slot_table + off) != 0); b4 |= b6;
+		b6 = ((flags & 0x400000) && g_slot_table[off + 2] != 5 && gm_IsNpcEntityState(g_slot_table + off) != 0); b4 |= b6;
 		b7 = ((*(unsigned int*) (p + 4) & 0x800000) && !g_slot_table[off + 2]);
 		if (!(b4 | b7))
 			return 0;

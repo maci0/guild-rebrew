@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca4[];
 
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 
 void __cdecl fcn_005490e0(void)
 {
@@ -13,5 +13,5 @@ void __cdecl fcn_005490e0(void)
 	*(int*) (msg + 0xc) = -1;
 	msg[0x36] = 1;
 	*(int*) (msg + 8) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
-	fcn_004c5530(msg);
+	cm_SendCopyEntityData(msg);
 }

@@ -41,7 +41,7 @@ struct msg {
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 
 void __cdecl fcn_00547460(void)
 {
@@ -61,6 +61,6 @@ void __cdecl fcn_00547460(void)
 		m.fc = *(int*) (e + 1);
 		m.b36 = 2;
 		m.b58 = 1;
-		fcn_004c5530(&m);
+		cm_SendCopyEntityData(&m);
 	}
 }

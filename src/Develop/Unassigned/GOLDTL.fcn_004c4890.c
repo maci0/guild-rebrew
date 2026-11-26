@@ -2,7 +2,7 @@
 
 
 
-void __cdecl fcn_004c5790(int, void*);
+void __cdecl cm_RequestSysMessage(int, void*);
 
 void __cdecl cm_RequestIncreaseGameSpeed(void)
 {
@@ -10,6 +10,6 @@ void __cdecl cm_RequestIncreaseGameSpeed(void)
 
 	if (*(unsigned*) g_68a9cc < 4) {
 		*(int*) buf = *(unsigned*) g_68a9cc + 1;
-		fcn_004c5790(0x12, buf);
+		cm_RequestSysMessage(0x12, buf);
 	}
 }

@@ -1,7 +1,7 @@
 #include "../../../client_sound.h"
 
 #include "../../../client_lighting.h"
-SOUND_VOICE* __cdecl fcn_00422460(int a, int b);
+SOUND_VOICE* __cdecl sb_PrepareVoice(int a, int b);
 
 void __cdecl PlayEntitySound(char* cmd)
 {
@@ -9,7 +9,7 @@ void __cdecl PlayEntitySound(char* cmd)
     SOUND_VOICE* r;
 
     e = *(char**)(cmd + 0x14);
-    r = fcn_00422460(0, (int)(cmd + 0x130));
+    r = sb_PrepareVoice(0, (int)(cmd + 0x130));
     if (r != 0) {
         if (g_6b8300 != 0) {
             d3snd_PlayObjectSound((char*)r, *(void**)(e + 0x34), 0x7f, 3000.0f);

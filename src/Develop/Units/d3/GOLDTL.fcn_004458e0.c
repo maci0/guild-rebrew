@@ -50,7 +50,7 @@ void __cdecl fcn_004557c0(Ent*, char*, int, Mat*);
 
 void __cdecl fcn_00439aa0(Ent*);
 void __cdecl fcn_00439c00(Ent*, Ent*);
-void __cdecl fcn_004458a0(Ent*, Vec4*, Mat*);
+void __cdecl d3_ApplyWorldTransformToObject(Ent*, Vec4*, Mat*);
 void __cdecl fcn_00445760(Ent*, Vec4*, Mat*, Slot*, char*);
 
 
@@ -97,7 +97,7 @@ char __cdecl d3_ReparentObject(Ent* e, Ent* parent)
 	} else {
 		fcn_00439c00(parent, e);
 	}
-	fcn_004458a0(e, &wpos, &wm);
+	d3_ApplyWorldTransformToObject(e, &wpos, &wm);
 	if (e->kind >= 5 && e->slots != 0) {
 		for (i = 0; i < 7; i++) {
 			fcn_00445760(e, &tmp[i], &mats[i], &e->slots[i], e->slots[i].xc);

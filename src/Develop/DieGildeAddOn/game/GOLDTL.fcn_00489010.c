@@ -5,7 +5,7 @@
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl fcn_004ce590(int);
 int __cdecl fcn_005c7270(int, int);
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 int __cdecl sprintf(char*, char*, ...);
 
 extern unsigned char g_773d75;
@@ -82,7 +82,7 @@ void __cdecl fcn_00489010(char* e, char* a1)
 			        (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(int*) found] + 1);
 			sprintf(buf, (char*) 0x67e358, *(int*) (p + 4),
 			        *(int*) (a1 + 2), *(int*) found, 1, g_773d75, 0);
-			fcn_004c51f0(*(int*) (p + 4), *(int*) (a1 + 2), *(int*) found, 1,
+			cm_SendSellObjekt(*(int*) (p + 4), *(int*) (a1 + 2), *(int*) found, 1,
 			             g_773d75, 0);
 			*(int*) (found + 0x28) = *(int*) (found + 0x28) - 1;
 		}

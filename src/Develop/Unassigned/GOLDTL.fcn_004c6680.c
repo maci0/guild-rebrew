@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-int __cdecl fcn_004c4330(char*);
+int __cdecl cm_EnqueueClientPacket(char*);
 
 int __cdecl fcn_004c6680(char* s1, int a, int b, char* s2)
 {
@@ -17,5 +17,5 @@ int __cdecl fcn_004c6680(char* s1, int a, int b, char* s2)
 		strcpy(buf + 0x30, s2);
 	else
 		buf[0x30] = 0;
-	return fcn_004c4330(buf);
+	return cm_EnqueueClientPacket(buf);
 }

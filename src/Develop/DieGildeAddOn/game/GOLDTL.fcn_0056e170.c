@@ -13,7 +13,7 @@ void __cdecl fcn_00529160(char*, int, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl ch_CreateAction(char*, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_004c57e0(int, int);
+void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_RunDeathAnimation(char* u)
@@ -61,7 +61,7 @@ void __cdecl he_RunDeathAnimation(char* u)
 	case 3:
 		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 		if (h != 0 && (u[0x78] & 2) != 0) {
-			fcn_004c57e0(*(int*) (h + 4), 1);
+			cm_RequestKillSpieler(*(int*) (h + 4), 1);
 		}
 	case -2:
 	case -1:

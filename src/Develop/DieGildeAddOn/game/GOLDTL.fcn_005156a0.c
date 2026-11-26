@@ -12,7 +12,7 @@ extern unsigned char g_773dd4;
 
 extern void* __cdecl fcn_00502cd0(int list, int a, int b, ...);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
-extern int __cdecl fcn_005014d0(int handle);
+extern int __cdecl gm_IsRawItem(int handle);
 extern int __cdecl gm_FindObjektPrototypeByName(char* key);
 extern int __cdecl fcn_00506380(int a, void* table, void* record, int mode);
 extern void __cdecl d3_SetSubtreeVisible(char* record, int mode);
@@ -70,7 +70,7 @@ void __cdecl fcn_005156a0(char* record)
 					*(char**) (record + 0x204) = slot;
 					*(unsigned int*) (record + 0x224) = 0;
 					*(char**) (slot + 0x18) = record;
-					if (fcn_005014d0(*(unsigned short*) slot) != 0) {
+					if (gm_IsRawItem(*(unsigned short*) slot) != 0) {
 						item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *entry);
 						while (item != 0) {
 							unsigned short v1;
@@ -104,7 +104,7 @@ void __cdecl fcn_005156a0(char* record)
 						}
 					}
 					proto = (unsigned char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[*other];
-					if (fcn_005014d0(*(unsigned short*) slot) != 0) {
+					if (gm_IsRawItem(*(unsigned short*) slot) != 0) {
 						item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *proto);
 						while (item != 0) {
 							if (*item > *other)
@@ -121,7 +121,7 @@ void __cdecl fcn_005156a0(char* record)
 				*(char**) (record + 0x204) = slot;
 				*(unsigned int*) (record + 0x224) = 0;
 				*(char**) (slot + 0x18) = record;
-				if (fcn_005014d0(*(unsigned short*) slot) != 0) {
+				if (gm_IsRawItem(*(unsigned short*) slot) != 0) {
 					item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *entry);
 					while (item != 0) {
 						if (*item > *(unsigned short*) slot)
@@ -137,7 +137,7 @@ void __cdecl fcn_005156a0(char* record)
 			if (*proto != 0x1d)
 				*(unsigned int*) (record + 0x224) = 0;
 			*(char**) (slot + 0x18) = record;
-			if (fcn_005014d0(*(unsigned short*) slot) != 0) {
+			if (gm_IsRawItem(*(unsigned short*) slot) != 0) {
 				item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *proto);
 				while (item != 0) {
 					if (*item > *(unsigned short*) slot)

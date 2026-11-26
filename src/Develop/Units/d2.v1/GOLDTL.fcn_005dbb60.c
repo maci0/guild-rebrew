@@ -70,8 +70,8 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_004c5530(struct msg*);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_SendCopyEntityData(struct msg*);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005dbb60(int unused, unsigned short* p)
@@ -126,8 +126,8 @@ int __cdecl fcn_005dbb60(int unused, unsigned short* p)
 						m.b64 = (char) shares[i].kind;
 						m.b65 = (char) shares[i].goal;
 						m.f60 = shares[i].amount;
-						fcn_004c5530(&m);
-						fcn_004c5420(*(int*) (p + 2), 0x1c8, 4, 0x10000, 0);
+						cm_SendCopyEntityData(&m);
+						cm_RequestChangeBits(*(int*) (p + 2), 0x1c8, 4, 0x10000, 0);
 						result = 1;
 						g_774654 = 1;
 						break;

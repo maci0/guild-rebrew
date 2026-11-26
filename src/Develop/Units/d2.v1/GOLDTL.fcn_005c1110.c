@@ -27,7 +27,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl fcn_004c5620(int, char*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00532ef0(void);
@@ -137,10 +137,10 @@ done:;
 						*(pos14_7f4c00*) ((char*) o + 0x52) =
 						    *(pos14_7f4c00*) &gm_GameTime;
 						r = fcn_004c5620(-1, (char*) o);
-						while (r != -1 && fcn_004c4450(r) == 0) {
+						while (r != -1 && cm_GetCommandStatus(r) == 0) {
 							main_RunFrameLoop(0, 0x677c7);
 						}
-						if (fcn_004c4450(r) == 1) {
+						if (cm_GetCommandStatus(r) == 1) {
 							fcn_005100f0(*(int*) ((char*) &g_7f4ca0
 							    + 4 + 0x21c
 							    * (unsigned int) *(unsigned short*) &g_774970), -2);

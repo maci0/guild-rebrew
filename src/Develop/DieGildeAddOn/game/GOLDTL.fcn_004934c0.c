@@ -2,7 +2,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, int* v);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 
 /* ADDRESS: GOLDTL 0x004934c0 */
 char* __cdecl fcn_004934c0(char* e)
@@ -43,7 +43,7 @@ char* __cdecl fcn_004934c0(char* e)
 			if (t != 0) {
 				cm_BeginPacketFieldDelta(t, *(int*) (t + 4));
 				cm_AppendPacketFieldDelta(4, 1, 0x5c, &v);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 			for (i = 0; i < 5; i++) {
 				t = gm_LookupEntityRecordById(((int*) (e + 0x68))[i]);
@@ -57,7 +57,7 @@ char* __cdecl fcn_004934c0(char* e)
 					}
 					cm_BeginPacketFieldDelta(t, *(int*) (t + 4));
 					cm_AppendPacketFieldDelta(4, 1, k * 4 + 0x5c, &v);
-					fcn_004c5360();
+					cm_RequestChangeAttribute();
 				}
 			}
 		}

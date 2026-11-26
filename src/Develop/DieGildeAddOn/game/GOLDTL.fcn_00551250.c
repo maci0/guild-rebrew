@@ -4,7 +4,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern int g_7f4ca4[];
 extern unsigned char g_773d75;
 
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl he_FreeAction(void*);
 
@@ -13,7 +13,7 @@ void __cdecl fcn_00551250(char* u)
 {
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		fcn_004c5150(-1, g_7f4ca4[*(unsigned short*) (u + 8) * 135], g_773d75,
+		cm_RequestMoveCredits(-1, g_7f4ca4[*(unsigned short*) (u + 8) * 135], g_773d75,
 		    *(int*) (u + 0xac));
 		if (--*(int*) (u + 0xb0) == 0) {
 			he_FreeAction(u);

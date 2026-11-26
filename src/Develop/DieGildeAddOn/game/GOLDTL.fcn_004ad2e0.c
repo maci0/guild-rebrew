@@ -10,7 +10,7 @@ typedef struct Hit4ad2e0 {
 void __cdecl amt_SendSpecialOfficeSlot(int a1);
 char* __cdecl amt_GetOfficeHolderRecord(int kind);
 float __cdecl fcn_004ad500(unsigned char* a1, unsigned short* a2, int a3, int a4);
-void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
+void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
@@ -81,7 +81,7 @@ void __cdecl fcn_004ad2e0(void)
 		if (hits[i].p == 0) {
 			return;
 		}
-		fcn_004c5420(hits[i].p->entity_id, 0x1cc, 4, v6, 0);
+		cm_RequestChangeBits(hits[i].p->entity_id, 0x1cc, 4, v6, 0);
 		if ((char) hits[i].p->entity_state == 6 || (char) hits[i].p->entity_state == 7) {
 			io_FormatTextBuffer(text, 0x42b1, (hits[i].p->gender != 0 ? 0x28 : 0) + 0x253 + v4);
 			fcn_00545d40(hits[i].p->entity_id, -1, text, 0, 0x5fd, "_NACHRICHTEN_NEU_14");

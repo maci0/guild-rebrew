@@ -1,14 +1,14 @@
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c5480(int a1, int a2, int a3)
+void __cdecl cm_RequestChangeFloat(int entity_id, int offset, int delta)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x1a;
-	*(int*) (buf + 0x10) = a1;
-	*(int*) (buf + 0x14) = a2;
-	*(int*) (buf + 0x18) = a3;
-	fcn_004c4330(buf);
+	*(int*) (buf + 0x10) = entity_id;
+	*(int*) (buf + 0x14) = offset;
+	*(int*) (buf + 0x18) = delta;
+	cm_EnqueueClientPacket(buf);
 }

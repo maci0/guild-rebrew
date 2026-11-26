@@ -18,7 +18,7 @@ extern CRIME_GRID_CELL g_99ef80[9][8];
 void __cdecl fcn_004f4830(int kind, Offer* o);
 
 unsigned short __cdecl gm_RandomMod(int n);
-void __cdecl fcn_004fa6f0(char* pos, int* x, int* y);
+void __cdecl gm_PosToStatsGrid(char* pos, int* x, int* y);
 
 void __cdecl gm_AddNeighborhoodLawEffect(int key, unsigned char kind, int* ox, int* oy)
 {
@@ -36,7 +36,7 @@ void __cdecl gm_AddNeighborhoodLawEffect(int key, unsigned char kind, int* ox, i
 	x = gm_RandomMod(8);
 	y = gm_RandomMod(8);
 	if (p != 0 && *(char**) (p + 0x61) != 0) {
-		fcn_004fa6f0(*(char**) (p + 0x61) + 0x4c, &x, &y);
+		gm_PosToStatsGrid(*(char**) (p + 0x61) + 0x4c, &x, &y);
 		g_99ef80[x][y].supply += offer.amount;
 		if (x + 1 > 8) {
 			xmax = 8;

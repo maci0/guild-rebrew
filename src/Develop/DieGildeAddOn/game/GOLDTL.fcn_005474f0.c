@@ -15,8 +15,8 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_LookupEntityRecordById(int k);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl fcn_004c6900(Msg* msg);
 
 void __cdecl he_PruneStammtischSeats(void)
@@ -46,9 +46,9 @@ void __cdecl he_PruneStammtischSeats(void)
 				msg.tag = 0x6c656176;
 				msg.who = *(int*) (e + 1);
 				msg.id = ((int*) (w + 0x1c))[i];
-				fcn_004c4eb0(g_6a5894);
+				cm_SendLogAction(g_6a5894);
 				fcn_004c6900(&msg);
-				fcn_004c4ef0(g_6a5894);
+				cm_SendTraceEnd(g_6a5894);
 			}
 		}
 	}

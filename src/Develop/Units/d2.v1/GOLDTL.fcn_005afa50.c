@@ -63,7 +63,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_004c5530(Packet*);
+int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -120,7 +120,7 @@ int __cdecl fcn_005afa50(int unused, char* e)
 				for (i = 0; i < 32; i++) {
 					if (((Player**)ch_ContextCharacters)[i] != 0 && ((Player**)ch_ContextCharacters)[i]->x188 != 0) {
 						pkt.x58 = ((Player**)ch_ContextCharacters)[i]->x4;
-						fcn_004c5530(&pkt);
+						cm_SendCopyEntityData(&pkt);
 						cm_ExProdObjekt();
 						break;
 					}

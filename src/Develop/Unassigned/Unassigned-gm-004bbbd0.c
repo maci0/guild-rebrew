@@ -20,7 +20,7 @@ extern int g_7728e0;
 
 __declspec(dllimport) unsigned long __stdcall GetTickCount(void);
 int __cdecl fcn_004bbce0(int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 
 /* ADDRESS: GOLDTL 0x004bbbd0 */
 int __cdecl gm_DispatchEntityMessage(fcn_004bbbd0_msg* msg)
@@ -58,7 +58,7 @@ int __cdecl fcn_004bbc30(int a1, int a2)
 	for (i = 0; i < count; i++) {
 		*(short*) (packet + 0x5c) = fcn_004bbce0(0x45);
 		*(int*) (packet + 0x58) = a2;
-		fcn_004c5530(packet);
+		cm_SendCopyEntityData(packet);
 	}
 	return count;
 }

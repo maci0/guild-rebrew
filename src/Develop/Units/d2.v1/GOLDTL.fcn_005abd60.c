@@ -38,7 +38,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_0050e670(int*, int*);
 void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_005ca560(Item*);
+void __cdecl d2_BuildPersonStatusDesc(Item*);
 void __cdecl fcn_005caaa0(int, int, int, Item*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005c91c0(char*, int, int, int, int);
@@ -92,7 +92,7 @@ void __cdecl d2_ShowKircheTop5(void)
 				items[i].x14 = i * 0x4c + 0x2c;
 				items[i].x10 = x;
 				items[i].x30 = items[i].x0 != 0;
-				fcn_005ca560(&items[i]);
+				d2_BuildPersonStatusDesc(&items[i]);
 				items[i].x30 = items[i].x0 != 0;
 				fcn_005caaa0(items[i].x10, items[i].x14, d2_CurrentWindowId, &items[i]);
 				if (items[i].x0 != 0) {

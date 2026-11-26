@@ -1,14 +1,14 @@
 
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c52d0(int a1, unsigned short a2)
+void __cdecl cm_RequestClearLagerslot(int entity_id, unsigned short item_id)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x14;
-	*(int*) (buf + 0x10) = a1;
-	*(unsigned short*) (buf + 0x14) = a2;
-	fcn_004c4330(buf);
+	*(int*) (buf + 0x10) = entity_id;
+	*(unsigned short*) (buf + 0x14) = item_id;
+	cm_EnqueueClientPacket(buf);
 }

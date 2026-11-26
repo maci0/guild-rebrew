@@ -15,7 +15,7 @@ int __cdecl fcn_00508220(int k, S0c* s);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, int* v);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl fcn_004ff210(unsigned short id, int v);
 
 float __cdecl gm_ApplyPlagueInfection(char* p)
@@ -39,6 +39,6 @@ float __cdecl gm_ApplyPlagueInfection(char* p)
 	nf = ((r ^ flags) & 0xf) ^ flags;
 	cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &nf);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	return fcn_004ff210(*(unsigned short*) p, -(int) (r * s.b));
 }

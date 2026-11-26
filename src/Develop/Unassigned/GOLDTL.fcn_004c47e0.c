@@ -7,7 +7,7 @@ extern char g_aed2a0[];
 
 #pragma intrinsic(memcpy, memset)
 
-void __cdecl fcn_004c47e0(int* p)
+void __cdecl cm_BeginSecondaryPacketDelta(int* p)
 {
 	int v;
 

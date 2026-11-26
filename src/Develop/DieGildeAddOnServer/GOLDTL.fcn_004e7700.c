@@ -10,7 +10,7 @@
 #include "Develop/DieGildeAddOnServer/server_stats.h"
 void __cdecl fcn_004e7660(unsigned short*, char*);
 
-void __cdecl fcn_004e7700(unsigned short* e)
+void __cdecl srv_FormatStatEntity(unsigned short* e)
 {
 	char buf[0x1fb8];
 

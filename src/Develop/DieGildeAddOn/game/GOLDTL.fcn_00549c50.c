@@ -2,8 +2,8 @@ char *__cdecl gm_LookupEntityRecordById(int); void __cdecl io_FormatTextBuffer(c
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, char *);
 float __cdecl fcn_0050bb50(int, unsigned char);
-void __cdecl fcn_004c51a0(int, int, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 #include "client_data.h"
 extern char g_6b5c60[];
 extern unsigned char g_773d75;
@@ -84,13 +84,13 @@ void __cdecl fcn_00549c50(int cmd, int obj, int arr, int id, int extra)
 				total = step * n;
 				for (i = 0; i < n; i++) {
 					e = found[i];
-					fcn_004c51a0(*(int *) (slot + 4), *(int *) (e + 4), g_773d75, step);
+					cm_RequestTransferCurrencyNoKill(*(int *) (slot + 4), *(int *) (e + 4), g_773d75, step);
 					if (e[2] == 6 || e[2] == 7) {
 						he_MessageBoxQuickjump(*(int *) (e + 4), -1, text1, 0, 0x5ec,
 							*(int *) (obj + 1), -1, 0, g_6b5c60);
 					}
-					fcn_004c54c0(*(int *) (slot + 4), *(int *) (e + 4), 3, 1);
-					fcn_004c54c0(*(int *) (e + 4), *(int *) (slot + 4), 3, 1);
+					cm_RequestCopyEntityData(*(int *) (slot + 4), *(int *) (e + 4), 3, 1);
+					cm_RequestCopyEntityData(*(int *) (e + 4), *(int *) (slot + 4), 3, 1);
 				}
 			}
 			if (slot[2] == 6 || slot[2] == 7) {
@@ -102,8 +102,8 @@ void __cdecl fcn_00549c50(int cmd, int obj, int arr, int id, int extra)
 				for (i = 0; i < n; i++) {
 					for (j = 0; j < n; j++) {
 						if (i != j) {
-							fcn_004c54c0(*(int *) (found[i] + 4), *(int *) (found[j] + 4), 3, 1);
-							fcn_004c54c0(*(int *) (found[j] + 4), *(int *) (found[i] + 4), 3, 1);
+							cm_RequestCopyEntityData(*(int *) (found[i] + 4), *(int *) (found[j] + 4), 3, 1);
+							cm_RequestCopyEntityData(*(int *) (found[j] + 4), *(int *) (found[i] + 4), 3, 1);
 						}
 					}
 				}

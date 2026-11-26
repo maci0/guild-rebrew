@@ -10,6 +10,6 @@ extern unsigned char g_aed340[];
 char* __cdecl cut_AllocCutscene(void* source);
 
 struct pkt99;
-int __cdecl fcn_004c4330(struct pkt99* packet);
+int __cdecl cm_EnqueueClientPacket(struct pkt99* packet);
 
 #endif

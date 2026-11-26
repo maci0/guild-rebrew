@@ -15,7 +15,7 @@ int __cdecl amt_CollectOfficeGroup7(int all, int max, Rec* out);
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl amt_NotifyOfficeLost(Rec* r, int type);
 int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
-int __cdecl fcn_004c4450(int v);
+int __cdecl cm_GetCommandStatus(int v);
 void __cdecl fcn_00535960(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl amt_calc_zuenfte(int n);
@@ -91,7 +91,7 @@ void __cdecl fcn_004eafe0(void)
 		body:
 			amt_NotifyOfficeLost((Rec*) q, tt);
 			v = amt_SendOfficeCommand(out[i].id, 0, 0, 4, 0xff);
-			while (v != -1 && fcn_004c4450(v) == 0) {
+			while (v != -1 && cm_GetCommandStatus(v) == 0) {
 				fcn_00535960();
 			}
 		skip:

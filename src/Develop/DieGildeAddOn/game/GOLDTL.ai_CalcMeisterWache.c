@@ -22,10 +22,10 @@ char *__cdecl ai_CalcAngriff(char *, int);
 unsigned short __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_0064d41a(char *, char *, ...);
-void *__cdecl fcn_004c5530(char *);
+void *__cdecl cm_SendCopyEntityData(char *);
 void *__cdecl gm_StartFilteredEntitySearch(int, int);
 void *__cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_004fa6f0(int, int *, int *);
+int __cdecl gm_PosToStatsGrid(int, int *, int *);
 int __cdecl fcn_0050f950(unsigned short, unsigned short);
 char *__cdecl gm_SetupEntityQuery(char *);
 void *__cdecl gm_SearchTable67(int);
@@ -172,7 +172,7 @@ city:
 	it = gm_StartFilteredEntitySearch(1, 6);
 	while (it != 0) {
 		if ((*(int *) (it + 0x61) != 0)
-			&& (fcn_004fa6f0(*(int *) (it + 0x61) + 0x4c, &idx1, &idx2) != 0)
+			&& (gm_PosToStatsGrid(*(int *) (it + 0x61) + 0x4c, &idx1, &idx2) != 0)
 			&& (cand == (char *) ((idx1 + idx2 * 8) * 0x18 + 0x99ef80))) {
 			if (res == 0) {
 				res = it;
@@ -236,7 +236,7 @@ city:
 	if (*(int *) (msg + 0x70) == -1) {
 		return;
 	}
-	fcn_004c5530(msg);
+	cm_SendCopyEntityData(msg);
 	return;
 check:
 	if (action != 1) {
@@ -268,7 +268,7 @@ check:
 	it = gm_StartFilteredEntitySearch(1, 6);
 	while (it != 0) {
 		if ((*(int *) (it + 0x61) != 0)
-			&& (fcn_004fa6f0(*(int *) (it + 0x61) + 0x4c, &idx1, &idx2) != 0)
+			&& (gm_PosToStatsGrid(*(int *) (it + 0x61) + 0x4c, &idx1, &idx2) != 0)
 			&& (cand == (char *) ((idx1 + idx2 * 8) * 0x18 + 0x99ef80))) {
 			if (res == 0) {
 				res = it;
@@ -329,7 +329,7 @@ check:
 		if (*(int *) (msg + 0x58) == -1) {
 			return;
 		}
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 		return;
 	}
 	goto umland;
@@ -384,6 +384,6 @@ failed:
 		*(int *) (msg + 0x38 + n * 4) = -1;
 	}
 	if (*(int *) (msg + 0x38) != -1 && j > 1) {
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 	}
 }

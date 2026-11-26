@@ -3,17 +3,17 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004c5790(int, void*);
+int __cdecl cm_RequestSysMessage(int, void*);
 
-void __cdecl fcn_004c4860(unsigned int a1)
+void __cdecl cm_SetGameSpeedSetting(unsigned int speed)
 {
 	char buf[0x7c];
 
-	if (a1 >= 4) {
-		a1 = 4;
+	if (speed >= 4) {
+		speed = 4;
 	}
-	if (a1 != (*(unsigned int*)g_68a9cc)) {
-		*(unsigned int*) buf = a1;
-		fcn_004c5790(0x12, buf);
+	if (speed != (*(unsigned int*)g_68a9cc)) {
+		*(unsigned int*) buf = speed;
+		cm_RequestSysMessage(0x12, buf);
 	}
 }

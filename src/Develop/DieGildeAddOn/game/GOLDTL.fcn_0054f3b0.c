@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
@@ -14,8 +14,8 @@ void __cdecl he_AcceptDuell(char* o, char* a, char* b)
 {
 	char buf[0x400];
 
-	fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0x400, 0);
-	fcn_004c5420(*(int*) (b + 4), 0x1c8, 4, 0x400, 0);
+	cm_RequestChangeBits(*(int*) (a + 4), 0x1c8, 4, 0x400, 0);
+	cm_RequestChangeBits(*(int*) (b + 4), 0x1c8, 4, 0x400, 0);
 	if (a[2] == 6 || a[2] == 7) {
 		io_FormatTextBuffer(buf, 0x1d83, *(unsigned short*) b, o + 0x52, *(unsigned short*) b);
 		fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), buf, 0, 0x5fa,

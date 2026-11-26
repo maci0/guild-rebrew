@@ -7,7 +7,7 @@ int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0042e410(int);
 int __cdecl fcn_0050dac0(short);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b6740 */
@@ -29,7 +29,7 @@ int __cdecl fcn_004b6740(int* noticeRequest)
 	w = fcn_0050dac0(*(short*) ent);
 	v = (int) (((double) w * d) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) noticeRequest + 4) + 0x12e7, v);
-	fcn_004c51a0(*noticeRequest, -1, g_773d75, v);
+	cm_RequestTransferCurrencyNoKill(*noticeRequest, -1, g_773d75, v);
 	fcn_00545d40(ent[1], ent[1], buf, 0x100 < strlen(buf), 0x603, 0);
 	return 0;
 }

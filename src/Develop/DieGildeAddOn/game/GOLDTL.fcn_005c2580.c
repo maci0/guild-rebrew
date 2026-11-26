@@ -14,10 +14,10 @@ void __cdecl fcn_00471e30(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c4ef0(char*);
-void __cdecl fcn_004c5150(int, int, char, int);
-int __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_SendTraceEnd(char*);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl gm_SearchTable67(int);
 char* __cdecl gm_FindBuildingTreasury(char*);
 int __cdecl gm_GetEntityTableEntry(char*);
@@ -114,10 +114,10 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 					q = gm_FindBuildingTreasury(e);
 					if (q != 0 && d2_CheckFundsAndNotify(q, *(int*) (q + 0x14), val, (char) g_773d75) != 0) {
 						*(int*) (msg + 0x5c) = dur;
-						fcn_004c4eb0("renovieren");
-						fcn_004c5150(-1, *(int*) (q + 2), (char) g_773d75, val);
-						fcn_004c5530(msg);
-						fcn_004c4ef0("renovieren");
+						cm_SendLogAction("renovieren");
+						cm_RequestMoveCredits(-1, *(int*) (q + 2), (char) g_773d75, val);
+						cm_SendCopyEntityData(msg);
+						cm_SendTraceEnd("renovieren");
 						g_774654 = 1;
 					}
 				} else if (gm_CheckEntityStock((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970], val, (char) g_773d75) != 0) {
@@ -128,10 +128,10 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 						*(int*) (q + 0x44) += val;
 					}
 					*(int*) (msg + 0x5c) = dur;
-					fcn_004c4eb0("renovieren");
-					fcn_004c5150(-1, ((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970].entity_id, (char) g_773d75, val);
-					fcn_004c5530(msg);
-					fcn_004c4ef0("renovieren");
+					cm_SendLogAction("renovieren");
+					cm_RequestMoveCredits(-1, ((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970].entity_id, (char) g_773d75, val);
+					cm_SendCopyEntityData(msg);
+					cm_SendTraceEnd("renovieren");
 					g_774654 = 1;
 				}
 			}

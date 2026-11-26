@@ -37,8 +37,8 @@ typedef struct {
 extern pos14_7f4c00 gm_GameTime;
 
 Entity_54f0c0* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -59,11 +59,11 @@ void __cdecl fcn_0054f0c0(Order_54f0c0* o)
 		if (o->flags & 2) {
 			a = gm_LookupEntityRecordById(o->actor);
 			if (a != 0) {
-				fcn_004c5420(a->id, 0x1c8, 4, 0, 0x100);
+				cm_RequestChangeBits(a->id, 0x1c8, 4, 0, 0x100);
 			}
 			b = gm_LookupEntityRecordById(o->target);
 			if (b != 0) {
-				fcn_004c5420(b->id, 0x1c8, 4, 0, 0x200);
+				cm_RequestChangeBits(b->id, 0x1c8, 4, 0, 0x200);
 			}
 		}
 		he_FreeAction(o);
@@ -72,11 +72,11 @@ void __cdecl fcn_0054f0c0(Order_54f0c0* o)
 		if (o->flags & 2) {
 			a = gm_LookupEntityRecordById(o->actor);
 			if (a != 0) {
-				fcn_004c5420(a->id, 0x1c8, 4, 0, 0x100);
+				cm_RequestChangeBits(a->id, 0x1c8, 4, 0, 0x100);
 			}
 			b = gm_LookupEntityRecordById(o->target);
 			if (b != 0) {
-				fcn_004c5420(b->id, 0x1c8, 4, 0, 0x200);
+				cm_RequestChangeBits(b->id, 0x1c8, 4, 0, 0x200);
 			}
 			if (a != 0 && b != 0) {
 				if (o->mode == 1) {
@@ -90,7 +90,7 @@ void __cdecl fcn_0054f0c0(Order_54f0c0* o)
 						fcn_00545d40(b->id, -1, buf, 0, 0x5fb, 0);
 					}
 				} else {
-					fcn_004c54c0(a->id, b->id, -0x68, 1);
+					cm_RequestCopyEntityData(a->id, b->id, -0x68, 1);
 					if (b->type == 6 || b->type == 7) {
 						io_FormatTextBuffer(buf, 0x1d5d, a->slot);
 						fcn_00545d40(b->id, b->id, buf, 0, 0x5fb, 0);

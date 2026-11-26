@@ -17,7 +17,7 @@ extern int d3_CurrentContextIndex;
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_004bcc50(char*, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004c4450(unsigned int);
+int __cdecl cm_GetCommandStatus(unsigned int);
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char*);
 void __cdecl he_FreeAction(void*);
 void __cdecl fcn_00529160(char*, int, int, int);
@@ -28,8 +28,8 @@ int __cdecl vfs_LookupPath(char*, void*, void**);
 int __cdecl fcn_00428340(char*, int, ...);
 void __cdecl fcn_004c5aa0(int, char, char, short, char, int);
 char* __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_004c51f0(int, int, unsigned int, int, char, int);
-void __cdecl fcn_004c5530(int);
+int __cdecl cm_SendSellObjekt(int, int, unsigned int, int, char, int);
+void __cdecl cm_SendCopyEntityData(int);
 void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl plt_FindPlantInfo(int);
 
@@ -59,7 +59,7 @@ void __cdecl he_UpdateErnten(char* ev)
 					plantInfo = plt_FindPlantInfo(*(unsigned short*) (v5 + 0xa));
 					switch (*(int*) (ev + 0x70)) {
 					case 0:
-						if (!fcn_004c4450(*(int*) (ev + 0xc0))) {
+						if (!cm_GetCommandStatus(*(int*) (ev + 0xc0))) {
 							return;
 						}
 						if (d3_CurrentContextIndex == init_AllocateGebaeudeSceneSlot((unsigned char*) v4)) {
@@ -140,7 +140,7 @@ void __cdecl he_UpdateErnten(char* ev)
 							fcn_004c5aa0(*(int*) (ev + 0xac), *(char*) (v5 + 8), *(char*) (v5 + 9), 0, 0, -1);
 							rec = fcn_00502cd0(*(int*) (v4 + 0x5d), 2, 0, 0x2a, 6);
 							if (rec != 0) {
-								fcn_004c51f0(*(int*) (rec + 2), -1, *(unsigned short*) (v5 + 0xa),
+								cm_SendSellObjekt(*(int*) (rec + 2), -1, *(unsigned short*) (v5 + 0xa),
 								             1 << (*(unsigned char*) (v5 + 0xd) - 1), g_773d75, 0);
 							}
 							k = 0;
@@ -173,7 +173,7 @@ void __cdecl he_UpdateErnten(char* ev)
 											*(int*) (pkt + 0x58) = id;
 											*(int*) (pkt + 0x5c) = *(int*) (ev + 0xb0);
 											*(int*) (pkt + 0x64) = first;
-											fcn_004c5530((int) pkt);
+											cm_SendCopyEntityData((int) pkt);
 										}
 										break;
 									}

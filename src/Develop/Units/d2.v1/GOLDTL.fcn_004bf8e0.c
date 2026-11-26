@@ -43,8 +43,8 @@ Node_4bf8e0* __cdecl fcn_004be1f0(Node_4bf8e0*);
 void __cdecl fcn_004be3d0(int, char*, Node_4bf8e0*, Node_4bf8e0*);
 void __cdecl d2_SelectRadioGroup(int, int);
 
-int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
-void __cdecl fcn_004c53a0(void);
+int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
+void __cdecl cm_SendSetAttribute(void);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl io_ClearInputState(void);
@@ -106,8 +106,8 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 
 			b = *(unsigned char*) (p + 0x33) == 0;
 			cm_BeginPacketFieldDelta(p, *(int*) (p + 2));
-			fcn_004c4700(1, 1, (short) (p + 0x33 - g_aed32c), &b);
-			fcn_004c53a0();
+			cm_AppendCommandSyncField(1, 1, (short) (p + 0x33 - g_aed32c), &b);
+			cm_SendSetAttribute();
 		}
 	}
 	if (d2_GetControlValue(list) != *(unsigned char*) (p + 0x31)) {
@@ -115,8 +115,8 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 
 		b = d2_GetControlValue(list);
 		cm_BeginPacketFieldDelta(p, *(int*) (p + 2));
-		fcn_004c4700(1, 1, (short) (p + 0x31 - g_aed32c), &b);
-		fcn_004c53a0();
+		cm_AppendCommandSyncField(1, 1, (short) (p + 0x31 - g_aed32c), &b);
+		cm_SendSetAttribute();
 	}
 	fcn_00471e30(dlg);
 	io_ClearInputState();

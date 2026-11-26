@@ -12,7 +12,7 @@
 extern pos14_7f4c00 gm_GameTime;
 extern char* gm_CityEntity;
 
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 
 int __cdecl hst_CmdBrand(void)
 {
@@ -27,6 +27,6 @@ int __cdecl hst_CmdBrand(void)
 	*(int*) (m + 0x9c) = 1000;
 	*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 	*(short*) (m + 0x2c) = 7;
-	fcn_004c5530(m);
+	cm_SendCopyEntityData(m);
 	return 1;
 }

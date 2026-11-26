@@ -10,7 +10,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_0052f7b0(void);
 
-void __cdecl fcn_0052a2d0(void)
+void __cdecl d2_RestoreHudAfterDialog(void)
 {
 	fcn_00471e30(g_6a25b4);
 	g_6a25b4 = -1;

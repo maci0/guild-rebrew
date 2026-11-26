@@ -4,14 +4,14 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_HandleAction0x4b(char* u)
 {
-	if (*(int*) (u + 0x84) != -1 && fcn_004c4450(*(int*) (u + 0x84)) == 0) {
+	if (*(int*) (u + 0x84) != -1 && cm_GetCommandStatus(*(int*) (u + 0x84)) == 0) {
 		return;
 	}
 	*(int*) (u + 0x84) = -1;

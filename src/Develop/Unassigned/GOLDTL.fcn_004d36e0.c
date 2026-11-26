@@ -8,7 +8,7 @@ extern double g_6628d0;
 extern double g_664f08;
 
 char __cdecl fcn_004d36b0(char*);
-int __cdecl fcn_004ce270(char*, char*);
+int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 void __cdecl d3_VisitSceneObjects(char*, int, int, char(__cdecl*)(char*), char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
@@ -40,10 +40,10 @@ char* __cdecl fcn_004d36e0(char* e)
         parent = *(char**) (c + 0x204);
         d = sqrt(dz * dz + dy * dy + dx * dx);
         if (parent != 0) {
-            if (fcn_004ce270(e, parent) != 0) {
+            if (gm_EntitiesDifferByOwnerPtr(e, parent) != 0) {
                 d = d * 10.0;
             } else if (parent != 0) {
-                if (fcn_004ce270(e, parent) != 0 || parent == e) {
+                if (gm_EntitiesDifferByOwnerPtr(e, parent) != 0 || parent == e) {
                     if (parent != 0) {
                         d = d * g_664f08;
                     }

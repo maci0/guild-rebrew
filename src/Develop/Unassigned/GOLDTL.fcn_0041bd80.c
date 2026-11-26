@@ -7,14 +7,14 @@ extern char g_6b6208[];
 
 /* ADDRESS: GOLD 0x00420780 */
 /* ADDRESS: GOLDTL 0x0041bd80 */
-void __cdecl d3_CopyOctreePalette(char* p)
+void __cdecl d3_CopyOctreePalette(char* out_palette)
 {
 	int i;
 
 	for (i = 0; i < 0x100; i++) {
-		p[i] = *(char*) ((char*) g_6b6008 + i);
-		p[i + 0x100] = *(char*) (g_6b6108 + i);
-		p[i + 0x200] = *(char*) (g_6b6208 + i);
+		out_palette[i] = *(char*) ((char*) g_6b6008 + i);
+		out_palette[i + 0x100] = *(char*) (g_6b6108 + i);
+		out_palette[i + 0x200] = *(char*) (g_6b6208 + i);
 	}
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)

@@ -6,7 +6,7 @@ extern int g_9a9200[8]; extern char g_77dda0[]; extern char* g_6b8300; extern ch
 void* __cdecl memset(void*, int, unsigned int);
 int __cdecl fcn_004efd30(int);
 int __cdecl fcn_004f08d0(char*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(int, unsigned int);
 void __cdecl gm_SetSlotCallback(int, void*, void*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -26,7 +26,7 @@ int __cdecl fcn_00476970(void*);
 void __cdecl fcn_00473150(char*);
 void __cdecl d2_CreateCannonControls(int, int);
 void __cdecl fcn_00588200(char*, char*, char*);
-char __cdecl fcn_00442c00(char*, char);
+char __cdecl d3_SetObjectVisible(char*, char);
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl he_SetGfxInfoEnabledByKey(int, int);
 void __cdecl fcn_00587f40(char*);
@@ -85,7 +85,7 @@ void __cdecl fcn_00586c10(char* obj)
     if (res == 0) {
         id = fcn_004f08d0(obj);
         if (id != -1) {
-            while ((i = fcn_004c4450(id)) == 0)
+            while ((i = cm_GetCommandStatus(id)) == 0)
                 main_RunFrameLoop(i, 0x20007);
         }
         res = (char*) fcn_004efd30(*(int*) (obj + 1));
@@ -205,8 +205,8 @@ void __cdecl fcn_00586c10(char* obj)
     if (*(int*) ((char*) S + 0xa0) > *(int*) ((char*) S + 0xdc))
         *(int*) ((char*) S + 0xa0) = *(int*) ((char*) S + 0xdc);
     for (i = 0; i < 3; i++)
-        fcn_00442c00(*(char**) ((char*) S + 0x8c + i * 4), 0);
-    fcn_00442c00(*(char**) ((char*) S + 0x8c + *(int*) ((char*) S + 0xa0) * 4), 1);
+        d3_SetObjectVisible(*(char**) ((char*) S + 0x8c + i * 4), 0);
+    d3_SetObjectVisible(*(char**) ((char*) S + 0x8c + *(int*) ((char*) S + 0xa0) * 4), 1);
     d3_SetSubtreeVisible(*(int*) (obj + 0x61), 0);
     he_SetGfxInfoEnabledByKey(*(int*) (obj + 0x61), 0);
     g_100f1dc = -1;

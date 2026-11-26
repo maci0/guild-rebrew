@@ -23,7 +23,7 @@ int __cdecl main_RunFrameLoop(void* a1, int a2);
 void __cdecl fcn_00471e30(int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(void* a1, int a2);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl fcn_004c6ae0(int a1, int a2);
 void __cdecl fcn_004f4f60(int a1, int a2, int a3, int a4, int a5);
 void __cdecl fcn_004c35f0(void);
@@ -96,7 +96,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 					}
 				}
 				if (k != 0) {
-					fcn_004c5530(msg);
+					cm_SendCopyEntityData(msg);
 					fcn_004c6ae0(((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id, -3);
 					fcn_004f4f60(0x1a, 1, ((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id,
 						*(int*) ((char*) a0 + 4), -1);

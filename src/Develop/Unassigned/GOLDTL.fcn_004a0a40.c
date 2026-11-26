@@ -13,7 +13,7 @@ typedef struct Unit {
 } Unit;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_0047dd60(char* e);
+int __cdecl gm_IsNpcEntityState(char* e);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e, int a5, int a6, int a7);
 
@@ -37,7 +37,7 @@ int __cdecl ai_ScoreBerufsausbildung(float* s1, float* s2, int idx, char* actor,
 			if (other[2] == 5) {
 				return 0;
 			}
-			if (other[9] == 0 && fcn_0047dd60(other) != 0) {
+			if (other[9] == 0 && gm_IsNpcEntityState(other) != 0) {
 				return 0;
 			}
 		}

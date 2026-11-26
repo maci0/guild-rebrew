@@ -26,8 +26,8 @@ void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
@@ -116,10 +116,10 @@ void __cdecl fcn_005aaf60(char* gebaeude)
 				d = fcn_0050b750(d, g_773d75);
 				if (gm_CheckEntityStock((char*) (g_774970 * 0x21c + (int) g_7f4ca0), d,
 					g_773d75) != 0) {
-					fcn_004c5150(*(int*) (h + 2), *(int*) (g_774970 * 0x21c + (int) g_7f4ca4),
+					cm_RequestMoveCredits(*(int*) (h + 2), *(int*) (g_774970 * 0x21c + (int) g_7f4ca4),
 						g_773d75, d);
 					frac = (float) (d * 255) / total;
-					fcn_004c54c0(*(int*) (g_774970 * 0x21c + (int) g_7f4ca4),
+					cm_RequestCopyEntityData(*(int*) (g_774970 * 0x21c + (int) g_7f4ca4),
 						*(int*) (*(unsigned short*) (gebaeude + 0x27) * 0x21c + (int) g_7f4ca4), (int) frac, 1);
 					scale = frac * 0.2f;
 					for (i = 0; i < 0x300; i++) {
@@ -139,7 +139,7 @@ void __cdecl fcn_005aaf60(char* gebaeude)
 						if (*(unsigned char*) (g_7f4ca4 + off + 8) != ent[i].f8) {
 							continue;
 						}
-						fcn_004c54c0(*(int*) (g_7f4ca4 + g_774970 * 0x21c), d, (int) scale, 1);
+						cm_RequestCopyEntityData(*(int*) (g_7f4ca4 + g_774970 * 0x21c), d, (int) scale, 1);
 					}
 					io_FormatTextBuffer(buf, g_67728c, 0x1986, 0x198a);
 					fcn_00526120(buf, 0);

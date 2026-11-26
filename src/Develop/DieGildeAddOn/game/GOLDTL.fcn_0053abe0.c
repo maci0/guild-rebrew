@@ -9,11 +9,11 @@ char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, ...);
 void __cdecl gm_AssignBuildingOwner(char* e, int a, int b);
 void __cdecl fcn_005058b0(char* e, char* q, int a);
-int __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char k, int n);
+int __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char k, int n);
 void __cdecl fcn_004c6090(char* e, int a, int b, int c);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
-char* __cdecl fcn_004c44c0(void);
+char* __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl fcn_00535960(void);
 
 /* ADDRESS: GOLDTL 0x0053abe0 */
@@ -31,10 +31,10 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 		if (q != 0) {
 			fcn_005058b0(e, q, ownerSlot);
 		}
-		fcn_004c51f0(*(int*) (e + 1), -1, 0x15, 1, g_773d75, 0);
-		fcn_004c51f0(*(int*) (e + 1), -1, 0x17, 1, g_773d75, 0);
-		fcn_004c51f0(*(int*) (e + 1), -1, 0x18, 1, g_773d75, 0);
-		fcn_004c51f0(*(int*) (e + 1), -1, 0x14, 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int*) (e + 1), -1, 0x15, 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int*) (e + 1), -1, 0x17, 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int*) (e + 1), -1, 0x18, 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int*) (e + 1), -1, 0x14, 1, g_773d75, 0);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x20);
 	if (e != 0) {
@@ -48,9 +48,9 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
 			cm_BeginCommandSync();
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d0, 0x19, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x1d0, 0x19, g_773d75, 0);
 			cm_EndCommandSync();
-			while (!fcn_004c44c0()) {
+			while (!cm_AreQueuedCommandsDone()) {
 				fcn_00535960();
 			}
 		}
@@ -61,12 +61,12 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
 			cm_BeginCommandSync();
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d0, 0x14, g_773d75, 0);
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d7, 0x0f, g_773d75, 0);
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d6, 0x0f, g_773d75, 0);
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x158, 10, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x1d0, 0x14, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x1d7, 0x0f, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x1d6, 0x0f, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x158, 10, g_773d75, 0);
 			cm_EndCommandSync();
-			while (!fcn_004c44c0()) {
+			while (!cm_AreQueuedCommandsDone()) {
 				fcn_00535960();
 			}
 		}
@@ -86,7 +86,7 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 	e = gm_StartFilteredEntitySearch(1, 0, 0x14);
 	if (e != 0) {
 		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
-		fcn_004c51f0(*(int*) (e + 1), -1, 0xf7, 1, g_773d75, 0);
+		cm_SendSellObjekt(*(int*) (e + 1), -1, 0xf7, 1, g_773d75, 0);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x32);
 	if (e != 0) {
@@ -94,11 +94,11 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
 			cm_BeginCommandSync();
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x1cb, 10, g_773d75, 0);
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x1cc, 10, g_773d75, 0);
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d0, 10, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x1cb, 10, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x1cc, 10, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x1d0, 10, g_773d75, 0);
 			cm_EndCommandSync();
-			while (!fcn_004c44c0()) {
+			while (!cm_AreQueuedCommandsDone()) {
 				fcn_00535960();
 			}
 		}
@@ -119,11 +119,11 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
 			cm_BeginCommandSync();
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x1cb, 10, g_773d75, 0);
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x1cc, 10, g_773d75, 0);
-			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d0, 10, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x1cb, 10, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x1cc, 10, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), -1, 0x1d0, 10, g_773d75, 0);
 			cm_EndCommandSync();
-			while (!fcn_004c44c0()) {
+			while (!cm_AreQueuedCommandsDone()) {
 				fcn_00535960();
 			}
 		}

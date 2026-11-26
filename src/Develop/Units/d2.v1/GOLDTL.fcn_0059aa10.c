@@ -52,13 +52,13 @@ int __cdecl d2_CheckFundsAndNotify(char*, int, int, char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526920(char*, int, char*);
 char* __cdecl gm_FindBuildingTreasury(char*);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c4ef0(char*);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_SendTraceEnd(char*);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl fcn_004c6ae0(int, int);
-int __cdecl fcn_004c5530(void*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendCopyEntityData(void*);
+int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
@@ -163,19 +163,19 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 
 							if (ok && fcn_00526120(buf, 1)) {
 								fcn_0057e880(0x2b, (int) a0, 0, sel);
-								fcn_004c4eb0(s_6aa328);
+								cm_SendLogAction(s_6aa328);
 								if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
-									fcn_004c5150(-1, *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x27)] + 4), (char) g_773d75, amount);
+									cm_RequestMoveCredits(-1, *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (a0 + 0x27)] + 4), (char) g_773d75, amount);
 									p = gm_GetEntityTableEntry((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970]);
 									if (p)
 										*(int*) (p + 0x40) += amount;
 								} else {
 									p = gm_FindBuildingTreasury(a0);
 									if (p)
-										fcn_004c51a0(-1, *(int*) (p + 2), (char) g_773d75, amount);
+										cm_RequestTransferCurrencyNoKill(-1, *(int*) (p + 2), (char) g_773d75, amount);
 								}
-								s = fcn_004c5530(msg);
-								fcn_004c4ef0(s_6aa328);
+								s = cm_SendCopyEntityData(msg);
+								cm_SendTraceEnd(s_6aa328);
 								goto wait;
 							}
 						} else {
@@ -185,10 +185,10 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 									io_FormatTextBuffer(buf, 0x74, req);
 									fcn_00526120(buf, 0);
 								} else {
-									fcn_004c4eb0(s_6aa328);
+									cm_SendLogAction(s_6aa328);
 									fcn_004c6ae0(*(int*) (house + 4), -req);
-									s = fcn_004c5530(msg);
-									fcn_004c4ef0(s_6aa328);
+									s = cm_SendCopyEntityData(msg);
+									cm_SendTraceEnd(s_6aa328);
 									goto wait;
 								}
 							}
@@ -213,7 +213,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 wait:
 		if (s != -1) {
 wait_loop:
-			if (fcn_004c4450(s) == 0) {
+			if (cm_GetCommandStatus(s) == 0) {
 				main_RunFrameLoop(0, 0x657c7);
 				goto wait_loop;
 			}

@@ -3,7 +3,7 @@ extern int g_aed32c;
 extern unsigned char g_773d75;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00500cb0(void*, void*);
+int __cdecl gm_CompareGameTime(void*, void*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
@@ -14,8 +14,8 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, in
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_004c6b20(int, int, int);
 int __cdecl fcn_00567170(unsigned short*, int*, int*, int);
@@ -41,7 +41,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 	if (v3 != 0 && v4 != 0) {
 		if (*(char*) ((char*) v3 + 2) != 6 && *(char*) ((char*) v3 + 2) != 7) {
 			if (*(int*) (action + 0x70) == 0 || *(int*) (action + 0x70) == 2) {
-				if (fcn_00500cb0(action + 0x52, (void*) (char*) 0x7f4c00) > 0)
+				if (gm_CompareGameTime(action + 0x52, (void*) (char*) 0x7f4c00) > 0)
 					return;
 				*(int*) (action + 0x70) = 2;
 			}
@@ -69,11 +69,11 @@ void __cdecl gm_HandleLoesegeld(char* action)
 					cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 					cm_AppendPacketFieldDelta(4, 1,
 					    (pkt - g_aed32c) + 0x65, (void*) &v[2]);
-					fcn_004c5360();
+					cm_RequestChangeAttribute();
 				}
 				fcn_004c6b20(*(int*) ((char*) v3 + 4),
 				    -(int) *(unsigned char*) ((char*) v3 + 0x1b1), 0);
-				fcn_004c51a0(*(int*) ((char*) v4 + 4), *(int*) ((char*) v3 + 4),
+				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) v4 + 4), *(int*) ((char*) v3 + 4),
 				    (char) g_773d75, *(int*) (action + 0xb4));
 				if (*(int*) ((char*) v3 + 0x184) != 0
 				    && fcn_00567170(v3, &v[1], &v[0], 0) != 0)
@@ -83,7 +83,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 					entity = gm_GetEntityTableEntry((char*) v4);
 					cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 					cm_AppendPacketFieldValue(4, 1, 0x69, (void*) (action + 0xb4));
-					fcn_004c5360();
+					cm_RequestChangeAttribute();
 					if (entity != 0)
 						*(int*) (entity + 0x20) += *(int*) (action + 0xb4);
 					*(int*) (pkt + 0x4d) += *(int*) (action + 0xb4);
@@ -115,10 +115,10 @@ done_case1:
 				    buf, 0, 0x5fa, 0);
 				cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 				cm_AppendPacketFieldDelta(4, 1, (pkt - g_aed32c) + 0x65, (void*) &v[1]);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 				fcn_004c6b20(*(int*) ((char*) v3 + 4),
 				    -(int) *(unsigned char*) ((char*) v3 + 0x1b1), 0);
-				fcn_004c51a0(*(int*) ((char*) v4 + 4), *(int*) ((char*) v3 + 4),
+				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) v4 + 4), *(int*) ((char*) v3 + 4),
 				    (char) g_773d75, *(int*) (action + 0xb4));
 				if (*(int*) ((char*) v3 + 0x184) != 0
 				    && fcn_00567170(v3, &v[2], &v[0], 0) != 0)
@@ -126,7 +126,7 @@ done_case1:
 					    "L\xf6segeld");
 				cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 				cm_AppendPacketFieldValue(4, 1, 0x69, (void*) (action + 0xb4));
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 				entity = gm_GetEntityTableEntry((char*) v4);
 				if (entity != 0)
 					*(int*) (entity + 0x20) += *(int*) (action + 0xb4);

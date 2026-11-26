@@ -5,7 +5,7 @@
 
 extern char g_6b5c60[];
 
-int __cdecl fcn_005171a0(char*, int*, int);
+int __cdecl io_ParseCsvIntList(char*, int*, int);
 int __cdecl gm_FindObjektPrototypeByName(char*);
 int __cdecl gm_FindGebaeudePrototypeByName(const char*);
 int __cdecl _isctype(int, int);
@@ -32,7 +32,7 @@ int __cdecl fcn_00517250(char* name, int idx)
 	GetPrivateProfileStringA("A - ALLGEMEIN", "Stadtname", "Unknown", buf, 0x100, datei);
 	strcpy((char*) p, buf);
 	GetPrivateProfileStringA("A - ALLGEMEIN", "KartenPosition", "", buf, 0x100, datei);
-	fcn_005171a0(buf, (int*) (p + 0x40), 2);
+	io_ParseCsvIntList(buf, (int*) (p + 0x40), 2);
 	GetPrivateProfileStringA("A - ALLGEMEIN", "Glaube", "0", buf, 0x100, datei);
 	p[0x49] = (unsigned char) atoi(buf);
 	GetPrivateProfileStringA("A - ALLGEMEIN", "HistorieStart", "1400", buf, 0x100, datei);
@@ -46,7 +46,7 @@ int __cdecl fcn_00517250(char* name, int idx)
 	GetPrivateProfileStringA("A - ALLGEMEIN", "Sprache", "0", buf, 0x100, datei);
 	p[0x61] = (unsigned char) atoi(buf);
 	GetPrivateProfileStringA("A - ALLGEMEIN", "KartenOffset", "0, 0", buf, 0x100, datei);
-	fcn_005171a0(buf, (int*) (p + 0x2ec), 2);
+	io_ParseCsvIntList(buf, (int*) (p + 0x2ec), 2);
 	if (idx == 0) {
 		count = 0;
 		GetPrivateProfileStringA("A - ALLGEMEIN", "NachbarStadt", g_6b5c60, buf, 0x100, datei);
@@ -71,25 +71,25 @@ int __cdecl fcn_00517250(char* name, int idx)
 	for (i = 0; i < 0xa; i++) {
 		sprintf(staedte[0], "Einwohner_%i", i);
 		GetPrivateProfileStringA("A - EINWOHNER", staedte[0], "1400,0", buf, 0x100, datei);
-		fcn_005171a0(buf, werte, 2);
+		io_ParseCsvIntList(buf, werte, 2);
 		*(int*) (p + 0x64 + i * 8) = werte[0];
 		*(int*) (p + 0x64 + i * 8 + 4) = werte[1];
 	}
 	for (i = 0; i < 0xa; i++) {
 		sprintf(staedte[0], "Prunk_%i", i);
 		GetPrivateProfileStringA("A - PRUNK", staedte[0], "1400,0", buf, 0x100, datei);
-		fcn_005171a0(buf, werte, 2);
+		io_ParseCsvIntList(buf, werte, 2);
 		*(int*) (p + 0xb4 + i * 8) = werte[0];
 		*(int*) (p + 0xb4 + i * 8 + 4) = werte[1];
 	}
 	GetPrivateProfileStringA("B - WETTER", "Regenwahrscheinlichkeit", "0,0,0,0", buf, 0x100, datei);
-	fcn_005171a0(buf, (int*) (p + 0x108), 4);
+	io_ParseCsvIntList(buf, (int*) (p + 0x108), 4);
 	GetPrivateProfileStringA("B - WETTER", "Schneewahrscheinlichkeit", "0,0,0,0", buf, 0x100, datei);
-	fcn_005171a0(buf, (int*) (p + 0x118), 4);
+	io_ParseCsvIntList(buf, (int*) (p + 0x118), 4);
 	GetPrivateProfileStringA("B - WETTER", "Zufrierenwahrscheinlichkeit", "0", buf, 0x100, datei);
 	*(int*) (p + 0x128) = atoi(buf);
 	GetPrivateProfileStringA("C - PRIVILEGIEN", "Privilegien", "0,0,0,0,0,0,0,0,0,0,0", buf, 0x100, datei);
-	fcn_005171a0(buf, werte, 0xb);
+	io_ParseCsvIntList(buf, werte, 0xb);
 	for (i = 0; i < 0xb; i++) {
 		p[0x12c + i] = (unsigned char) werte[i];
 	}
@@ -118,17 +118,17 @@ int __cdecl fcn_00517250(char* name, int idx)
 		}
 	}
 	GetPrivateProfileStringA("F - GESETZE", "Verfassungsgesetze", "0,0,0,0", buf, 0x100, datei);
-	fcn_005171a0(buf, (int*) (p + 0x1dc), 0xc);
+	io_ParseCsvIntList(buf, (int*) (p + 0x1dc), 0xc);
 	GetPrivateProfileStringA("F - GESETZE", "Finanzgesetze", "0,0,0,0", buf, 0x100, datei);
-	fcn_005171a0(buf, (int*) (p + 0x20c), 0xc);
+	io_ParseCsvIntList(buf, (int*) (p + 0x20c), 0xc);
 	GetPrivateProfileStringA("F - GESETZE", "Strafgesetze", "0,0,0,0", buf, 0x100, datei);
-	fcn_005171a0(buf, (int*) (p + 0x22c), 0xc);
+	io_ParseCsvIntList(buf, (int*) (p + 0x22c), 0xc);
 	GetPrivateProfileStringA("F - GESETZE", "Gildengesetze", "0,0,0,0", buf, 0x100, datei);
-	fcn_005171a0(buf, (int*) (p + 0x25c), 0xc);
+	io_ParseCsvIntList(buf, (int*) (p + 0x25c), 0xc);
 	GetPrivateProfileStringA("F - GESETZE", "Kirchengesetze", "0,0,0,0", buf, 0x100, datei);
-	fcn_005171a0(buf, (int*) (p + 0x274), 0xc);
+	io_ParseCsvIntList(buf, (int*) (p + 0x274), 0xc);
 	GetPrivateProfileStringA("F - GESETZE", "DiebeRaeubergesetze", "0,0,0,0", buf, 0x100, datei);
-	fcn_005171a0(buf, (int*) (p + 0x290), 0xc);
+	io_ParseCsvIntList(buf, (int*) (p + 0x290), 0xc);
 	{
 		char sep[2] = ",";
 

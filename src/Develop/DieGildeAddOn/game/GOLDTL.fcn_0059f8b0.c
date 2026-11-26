@@ -14,8 +14,8 @@ extern char g_6aa728[];
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_005c1090(int);
-void __cdecl fcn_005c0a30(int);
+void __cdecl d2_OpenDuelTargetPicker(int);
+void __cdecl d2_OpenStraftatAccusePicker(int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl d2_RunTalenteDialog(int, int, int);
 
@@ -32,19 +32,19 @@ void __cdecl d2_RunRhetoricActionsHud(int entity, int mode)
 		z = RegisterStatusText(g_6aa728, g_14aadd8, 0xc);
 		if (g_774800 != 0) {
 			if (g_14cf950 == 0x19) {
-				fcn_005c1090(entity);
+				d2_OpenDuelTargetPicker(entity);
 			}
 			if (g_14cf950 == 0x20) {
-				fcn_005c0a30(entity);
+				d2_OpenStraftatAccusePicker(entity);
 			}
 		}
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == x) {
-				fcn_005c0a30(entity);
+				d2_OpenStraftatAccusePicker(entity);
 				fcn_00532ef0();
 			}
 			else if (g_7746a0 == y) {
-				fcn_005c1090(entity);
+				d2_OpenDuelTargetPicker(entity);
 			}
 			else if (g_7746a0 == z) {
 				d2_RunTalenteDialog(entity, mode, 4);

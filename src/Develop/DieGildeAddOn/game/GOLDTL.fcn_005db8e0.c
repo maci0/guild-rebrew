@@ -75,7 +75,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl main_RunFrameLoop(void*, int);
 char __cdecl fcn_00507400(int, int);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005db8e0(Ent* e, Req* p)
@@ -128,7 +128,7 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 					m.fc = -1;
 					m.b5c = fcn_00507400(i + 1, result);
 					m.f60 = n;
-					fcn_004c5530(&m);
+					cm_SendCopyEntityData(&m);
 					g_774654 = result;
 					break;
 				}

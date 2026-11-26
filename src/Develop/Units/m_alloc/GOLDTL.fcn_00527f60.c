@@ -67,7 +67,7 @@ int __cdecl fcn_00469c30(int, int, int);
 int __cdecl fcn_0046fcd0(int, int, char*);
 void __cdecl fcn_005279f0(int);
 char* __cdecl d2_SelectFont(int);
-void __cdecl fcn_00500d60(int*, char*);
+void __cdecl gm_PackGameTime(int*, char*);
 int __cdecl fcn_0051e070(void);
 int __cdecl gm_GetSeasonFromDate(char*, int);
 void __cdecl d2_DrawDefaultFontText(int, int, int, char*, int);
@@ -263,7 +263,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 
 	fcn_005279f0(a1);
 	d2_SelectFont(0x55);
-	fcn_00500d60((int*) 0x7f4c00, (char*) &fr.pos);
+	gm_PackGameTime((int*) 0x7f4c00, (char*) &fr.pos);
 	if (fcn_0051e070() == 2) {
 		sprintf(fr.text, (char*) 0x6a2e5c,
 			*(int*) (0x14a5450

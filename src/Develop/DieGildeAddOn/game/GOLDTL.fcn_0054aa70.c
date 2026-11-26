@@ -8,7 +8,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-int __cdecl fcn_004c6040(int, int, int, int);
+int __cdecl cm_RequestUpdateStraftatState(int, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
 /* ADDRESS: GOLDTL 0x0054aa70 */
@@ -53,6 +53,6 @@ void __cdecl fcn_0054aa70(char* u)
 		*(short*) (u + 0xc9) = 0xa;
 		*(int*) (u + 0xcb) = 0;
 	}
-	*(int*) (u + 0xd4) = fcn_004c6040(*(int*) (u + 0xac), *(int*) (u + 0xb0), *(int*) (u + 4), 1);
+	*(int*) (u + 0xd4) = cm_RequestUpdateStraftatState(*(int*) (u + 0xac), *(int*) (u + 0xb0), *(int*) (u + 4), 1);
 	*(int*) (u + 0x84) = fcn_004c5620(0, u);
 }

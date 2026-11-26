@@ -19,7 +19,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_004c5b00(int, struct target7);
+void __cdecl cm_RequestAllocThemaPredigt(int, struct target7);
 
 void __cdecl he_AllocPredigt(char* u)
 {
@@ -43,7 +43,7 @@ void __cdecl he_AllocPredigt(char* u)
 		t.a = -1;
 		t.b = -1;
 		t.id = -1;
-		fcn_004c5b00(*(int*) (found + 1), t);
+		cm_RequestAllocThemaPredigt(*(int*) (found + 1), t);
 	}
 	*(int*) (u + 0x84) = -1;
 	fcn_004c5620(0, u);

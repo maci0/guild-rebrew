@@ -1,7 +1,7 @@
 extern unsigned char g_773d75;
 
 float __cdecl fcn_0050bb50(int id, unsigned char a);
-int __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
 
 /* ADDRESS: GOLDTL 0x0049c2b0 */
@@ -12,6 +12,6 @@ int __cdecl ai_RunObjektKaufen(int* a, char* e, int* b)
 	if (*e != 2)
 		return 0;
 	n = (int) fcn_0050bb50(*(int*) (e + 4), (*(char*)&g_773d75));
-	fcn_004c51f0(a[1], b[1], *(int*) (e + 4), *(int*) (e + 8), (*(char*)&g_773d75), n);
+	cm_SendSellObjekt(a[1], b[1], *(int*) (e + 4), *(int*) (e + 8), (*(char*)&g_773d75), n);
 	return 0xc;
 }

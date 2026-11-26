@@ -65,7 +65,7 @@ int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
-void __cdecl fcn_004c52d0(int, int);
+void __cdecl cm_RequestClearLagerslot(int, int);
 void __cdecl fcn_00486500(PRODUCTION_GOODS_RECORD*);
 
 /* ADDRESS: GOLDTL 0x004849b0 */
@@ -255,7 +255,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		} else {
 			g_100b0c0[i].stock = gm_GetMsgField(craft, p);
 			if (g_100b0c0[i].stock == 0) {
-				fcn_004c52d0(*(int*) (craft + 2), g_100b0c0[i].goods_id);
+				cm_RequestClearLagerslot(*(int*) (craft + 2), g_100b0c0[i].goods_id);
 			}
 		}
 		g_100b0c0[i].capacity =

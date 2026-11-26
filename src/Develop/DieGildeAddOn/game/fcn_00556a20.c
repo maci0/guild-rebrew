@@ -3,10 +3,10 @@
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c4ef0(char*);
-int __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_SendTraceEnd(char*);
+int __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00556a20 */
 void __cdecl fcn_00556a20(char* p)
@@ -34,10 +34,10 @@ void __cdecl fcn_00556a20(char* p)
 		*(int*) (p + 0x84) = fcn_004c5620(-1, p);
 		return;
 	}
-	fcn_004c4eb0("Alloc_Geliebte");
-	fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0x800000, 0);
-	fcn_004c54c0(*(int*) (b + 4), *(int*) (a + 4), 0x32, 1);
-	fcn_004c4ef0("Alloc_Geliebte AI");
+	cm_SendLogAction("Alloc_Geliebte");
+	cm_RequestChangeBits(*(int*) (a + 4), 0x1c8, 4, 0x800000, 0);
+	cm_RequestCopyEntityData(*(int*) (b + 4), *(int*) (a + 4), 0x32, 1);
+	cm_SendTraceEnd("Alloc_Geliebte AI");
 	*(int*) (p + 0xb4) = 0;
 	*(int*) (p + 0xb8) = 2;
 	*(int*) (p + 0xbc) = -1;

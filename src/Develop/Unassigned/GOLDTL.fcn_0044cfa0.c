@@ -7,7 +7,7 @@ char* __cdecl fcn_0064f026(char*, char*);
 char* __cdecl fcn_0064d1a0(char*, int);
 void __cdecl fcn_0044cbd0(char*, int);
 
-void __cdecl fcn_0044cfa0(int a1, int* o)
+void __cdecl d3_ParseMatBumpMap(int unused, int* o)
 {
 	char* s;
 	char* p;

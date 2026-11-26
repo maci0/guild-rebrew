@@ -31,9 +31,9 @@ char* __cdecl he_fn_Handlung(void);
 
 int __cdecl fcn_004a5e60(House* h, int kind, __int64 f, int c, float r, int* out);
 int __cdecl gm_CheckPrivilege(int k, House* h, Query* q);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
-int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
+int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 int __cdecl fcn_004c5620(int, char*);
 
 /* `close` is set in two if arms: one combined condition keeps it in a
@@ -99,14 +99,14 @@ void __cdecl he_InitSpionage(char* u)
 	} else if (p[2] == 6 || p[2] == 7 || count < 8) {
 		close = 1;
 	}
-	fcn_004c4eb0(g_67ed14);
+	cm_SendLogAction(g_67ed14);
 	if (close != 0) {
-		*(int*) (u + 0xd8) = fcn_004c64b0(0x11, *(int*) (o + 1), -1, 0, 0, 0, g_6a656c);
+		*(int*) (u + 0xd8) = cm_SendAllocCharacter(0x11, *(int*) (o + 1), -1, 0, 0, 0, g_6a656c);
 		r = fcn_004c5620(0, u);
 	} else {
 		*(pos14_7f4c00*) (u + 0x52) = *(pos14_7f4c00*) (u + 0xc8);
 		r = fcn_004c5620(4, u);
 	}
 	*(int*) (u + 0x84) = r;
-	fcn_004c4ef0(g_67ed14);
+	cm_SendTraceEnd(g_67ed14);
 }

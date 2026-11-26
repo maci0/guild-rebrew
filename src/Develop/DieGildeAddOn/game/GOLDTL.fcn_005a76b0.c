@@ -15,7 +15,7 @@ void __cdecl fcn_0043a9c0(int);
 int __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0043aa30(int);
 int __cdecl d3_TraverseSceneObjects(void*, int, int, void*);
-void __cdecl fcn_005166a0(char*);
+void __cdecl ch_PreloadBuildingMotions(char*);
 void __cdecl fcn_005167c0(char*, int);
 void __cdecl d3_SetupInteriorScene(char*, char*);
 void __cdecl fcn_00438b40(void*, void*);
@@ -25,9 +25,9 @@ int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl fcn_0057e880(int, void*, int, int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
-void __cdecl fcn_005312d0(int);
+void __cdecl evt_WaitForScriptExit(int);
 void __cdecl fcn_00516ed0(char*);
-void __cdecl fcn_004c34d0(void);
+void __cdecl d3snd_FreeObjectSoundBanks(void);
 void __cdecl fcn_00516f60(void);
 void __cdecl fcn_00597fd0(void*);
 void __cdecl d2_RunCharacterActionsHud(int, void*);
@@ -142,7 +142,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 d3_SelectSceneContext((int) (signed char) ((u8*) &init_SceneContextIndices)[*(u16*) msg], 0);
                 fcn_0043aa30(3);
                 d3_TraverseSceneObjects((void*) *(int*) &g_67a370, 0, 0xe0, (void*) 0x456df0);
-                fcn_005166a0(o);
+                ch_PreloadBuildingMotions(o);
                 t = *(int*) &g_7746c4;
                 fcn_005167c0((char*) t, (int) *(u16*) (t + 0x29));
                 d3_SetupInteriorScene((char*) *(int*) &g_7746c4, (char*) *(int*) &g_7746cc);
@@ -324,7 +324,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 msg = (char*) evt_FindScriptById(r);
                 if (msg != 0) {
                     evt_RequestScriptExit(msg);
-                    fcn_005312d0(*(int*) (msg + 0x100));
+                    evt_WaitForScriptExit(*(int*) (msg + 0x100));
                 }
             }
             t = *(int*) &g_67a370;
@@ -339,7 +339,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
             }
             i = *(int*) &evt_LastGfxScriptId;
             if (i != -1)
-                fcn_005312d0(i);
+                evt_WaitForScriptExit(i);
             fcn_00516ed0(o);
             g_774670 = 1;
             if (*(int*) &g_7746c4 == 0) {
@@ -352,7 +352,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
     fcn_00530510();
     fcn_005305a0();
     *(int*) &g_7ea360 = 0;
-    fcn_004c34d0();
+    d3snd_FreeObjectSoundBanks();
     d3_SelectSceneContext(x, 0);
     *(int*) &g_6791c8 = 0;
     g_67530c = -1;

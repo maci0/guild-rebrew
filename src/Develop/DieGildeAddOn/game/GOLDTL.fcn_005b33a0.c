@@ -6,7 +6,7 @@ extern char g_6ab558[];
 void __cdecl io_FormatTextBuffer(void*, int, void*, void*, int);
 void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, void*);
 
-void __cdecl fcn_005b33a0(void* entity, void* actor, void* building, int index)
+void __cdecl he_NotifyDomizilSkillGain(void* entity, void* actor, void* building, int index)
 {
 	char t;
 

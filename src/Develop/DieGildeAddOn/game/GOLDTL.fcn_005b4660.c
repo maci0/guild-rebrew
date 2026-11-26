@@ -13,12 +13,12 @@ int __cdecl main_RunFrameLoop(void*, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_00471af0(int, int);
 void* __cdecl fcn_005cd440(void*, char*, int, int);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c4ef0(char*);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_SendTraceEnd(char*);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c4fc0(char, int, int, short, int, char, char, char);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestAllocSpieler(char, int, int, short, int, char, char, char);
 
 /* ADDRESS: GOLDTL 0x005b4660 */
 void __cdecl d2_RunCharacterDebugDialog(char* e)
@@ -66,15 +66,15 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 						0x5409 : 0x540a;
 					p = fcn_005cd440(buf, 0, 0, 0);
 					if (p != 0) {
-						fcn_004c4eb0("marriage");
+						cm_SendLogAction("marriage");
 						cm_BeginPacketFieldDelta(p, *(int*) ((char*) p + 4));
 						cm_AppendPacketFieldDelta(4, 1, 0x5c, e + 4);
-						fcn_004c5360();
+						cm_RequestChangeAttribute();
 						cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 						cm_AppendPacketFieldDelta(4, 1, 0x5c,
 							(char*) p + 4);
-						fcn_004c5360();
-						fcn_004c4ef0("marriage");
+						cm_RequestChangeAttribute();
+						cm_SendTraceEnd("marriage");
 					}
 				}
 				fcn_00471af0(dialog, 1);
@@ -94,7 +94,7 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 							}
 							d = *(int*) (e + 0x170) ?
 								*(int*) (*(int*) (e + 0x170) + 1) : -1;
-							fcn_004c4fc0(8, a, b, 0, d, 0, 0, 2);
+							cm_RequestAllocSpieler(8, a, b, 0, d, 0, 0, 2);
 							break;
 						}
 					}

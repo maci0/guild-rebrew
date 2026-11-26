@@ -24,7 +24,7 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
-void __cdecl fcn_004c5530(Msg*);
+void __cdecl cm_SendCopyEntityData(Msg*);
 
 int __cdecl fcn_005df5a0(char* obj)
 {
@@ -38,6 +38,6 @@ int __cdecl fcn_005df5a0(char* obj)
 	msg.timestamp.c = g_7f4c08;
 	msg.timestamp.d = g_7f4c0c;
 	msg.flag = 1;
-	fcn_004c5530(&msg);
+	cm_SendCopyEntityData(&msg);
 	return 1;
 }

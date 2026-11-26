@@ -16,9 +16,9 @@ extern struct s_7e6060 g_7e6060[64];
 
 #include <string.h>
 
-void __cdecl fcn_00531c00(void);
+void __cdecl d2_ClearHoverTooltipSlot(void);
 
-void __cdecl fcn_00531c40(char* o, int a, char* name)
+void __cdecl d2_SetHoverTooltip(char* o, int a, char* name)
 {
 	int i;
 	int k;
@@ -58,7 +58,7 @@ void __cdecl fcn_00531c40(char* o, int a, char* name)
 	p->t = g_6b7fac;
 	p->o = o;
 	p->a = a;
-	*(void**) (o + 0x228) = (void*) fcn_00531c00;
+	*(void**) (o + 0x228) = (void*) d2_ClearHoverTooltipSlot;
 	if (name != 0) {
 		strcpy(p->name, name);
 	} else {

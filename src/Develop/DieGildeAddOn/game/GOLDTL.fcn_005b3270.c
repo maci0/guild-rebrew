@@ -6,7 +6,7 @@ char g_6ab558[] = "_NACHRICHTEN_DOMIZIL_04";
 void __cdecl io_FormatTextBuffer(void*, int, void*, void*, void*);
 void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, void*);
 
-void __cdecl fcn_005b3270(void* entity, int actor, void* building)
+void __cdecl he_NotifyDomizilAccident(void* entity, int actor, void* building)
 {
 	char kind;
 

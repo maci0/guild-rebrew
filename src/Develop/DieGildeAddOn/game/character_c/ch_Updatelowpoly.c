@@ -42,7 +42,7 @@ extern float g_6628a8;
 #include "../../../Units/d3/d3_camera.h"
 extern char g_10432c0[];
 
-char __cdecl fcn_00442c00(char*, char);
+char __cdecl d3_SetObjectVisible(char*, char);
 
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, float*);
@@ -54,7 +54,7 @@ int __cdecl d3_RemoveObjectAnim(char*);
 
 extern char g_6b5c60[];
 D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
-void __cdecl fcn_00438ac0(char*, int);
+void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
 void __cdecl fcn_00404b60(char*, int, ...);
 
@@ -88,10 +88,10 @@ void __cdecl ch_Updatelowpoly(char* obj)
 		flags = *(unsigned short*) (obj + 0x8c);
 		if ((flags & 0x200) != 0) {
 			if (*(int*) (*(char**) (obj + 0x34) + 0x218) != 1) {
-				fcn_00442c00(*(char**) (obj + 0x34), 0);
+				d3_SetObjectVisible(*(char**) (obj + 0x34), 0);
 			}
 			if (*(int*) (*(char**) (obj + 0x22c) + 0x218) == 1) {
-				fcn_00442c00(*(char**) (obj + 0x22c), 1);
+				d3_SetObjectVisible(*(char**) (obj + 0x22c), 1);
 			}
 			return;
 		}
@@ -109,15 +109,15 @@ void __cdecl ch_Updatelowpoly(char* obj)
 			if (!(dz < 1500.0f)) {
 			lowpoly_model:
 				if (*(int*) (*(char**) (obj + 0x34) + 0x218) != 1) {
-					fcn_00442c00(*(char**) (obj + 0x34), 0);
+					d3_SetObjectVisible(*(char**) (obj + 0x34), 0);
 				}
 				if ((*(int*) (obj + 0x2c) == g_67530c && *(int*) (obj + 0x30) == g_675310) || *(int*) (obj + 0x30) == 0) {
 					if (*(int*) (*(char**) (obj + 0x22c) + 0x218) == 1 && (obj[0x8c] & 0x20) == 0) {
-						fcn_00442c00(*(char**) (obj + 0x22c), 1);
+						d3_SetObjectVisible(*(char**) (obj + 0x22c), 1);
 					}
 				} else {
 					if (*(int*) (*(char**) (obj + 0x22c) + 0x218) != 1) {
-						fcn_00442c00(*(char**) (obj + 0x22c), 0);
+						d3_SetObjectVisible(*(char**) (obj + 0x22c), 0);
 					}
 				}
 				if (*(int*) (*(char**) (obj + 0x22c) + 0x218) != 1
@@ -133,10 +133,10 @@ void __cdecl ch_Updatelowpoly(char* obj)
 				}
 			} else {
 				if (*(int*) (*(char**) (obj + 0x34) + 0x218) == 1 && (flags & 0x20) == 0) {
-					fcn_00442c00(*(char**) (obj + 0x34), 1);
+					d3_SetObjectVisible(*(char**) (obj + 0x34), 1);
 				}
 				if (*(int*) (*(char**) (obj + 0x22c) + 0x218) != 1) {
-					fcn_00442c00(*(char**) (obj + 0x22c), 0);
+					d3_SetObjectVisible(*(char**) (obj + 0x22c), 0);
 				}
 			}
 			if (*(char**) (*(char**) (obj + 0x22c) + 0x1cc) == 0 || (obj[0x8c] & 0x80) != 0) {
@@ -184,19 +184,19 @@ void __cdecl ch_Updatelowpoly(char* obj)
 		}
 		if ((*(int*) (obj + 0x2c) == g_67530c && *(int*) (obj + 0x30) == g_675310) || *(int*) (obj + 0x30) == 0) {
 			if (*(int*) (*(char**) (obj + 0x34) + 0x218) == 1 && (flags & 0x20) == 0) {
-				fcn_00442c00(*(char**) (obj + 0x34), 1);
+				d3_SetObjectVisible(*(char**) (obj + 0x34), 1);
 			}
 		} else {
 			if (*(int*) (*(char**) (obj + 0x34) + 0x218) != 1) {
-				fcn_00442c00(*(char**) (obj + 0x34), 0);
+				d3_SetObjectVisible(*(char**) (obj + 0x34), 0);
 			}
 		}
 	} else {
 		if (*(int*) (*(char**) (obj + 0x34) + 0x218) == 1 && (obj[0x8c] & 0x20) == 0) {
-			fcn_00442c00(*(char**) (obj + 0x34), 1);
+			d3_SetObjectVisible(*(char**) (obj + 0x34), 1);
 		}
 	}
 	if (*(int*) (*(char**) (obj + 0x22c) + 0x218) != 1) {
-		fcn_00442c00(*(char**) (obj + 0x22c), 0);
+		d3_SetObjectVisible(*(char**) (obj + 0x22c), 0);
 	}
 }

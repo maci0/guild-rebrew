@@ -43,12 +43,12 @@ extern short g_7f4c0c;
 extern char g_7f4ca4[];
 
 Entity_54fd60* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl fcn_004c5620(int, Order_54fd60*);
 void __cdecl gm_AddTime(Stamp_54fd60*, int, int, int);
 void __cdecl he_FreeAction(Order_54fd60*);
 int __cdecl fcn_004c5980(void*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 
 /* ADDRESS: GOLDTL 0x0054fd60 */
 void __cdecl fcn_0054fd60(Order_54fd60* o)
@@ -57,7 +57,7 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
     Entity_54fd60* a;
     Entity_54fd60* b;
 
-    if (o->event != -1 && fcn_004c4450(o->event) == 0) {
+    if (o->event != -1 && cm_GetCommandStatus(o->event) == 0) {
         return;
     }
     o->event = -1;
@@ -86,10 +86,10 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
                 gm_AddTime((Stamp_54fd60*) (msg + 0x18), 0, 0x1e, 0);
                 fcn_004c5980(msg);
             }
-            fcn_004c5420(a->id, 0x1c8, 4, 0, 0x400);
+            cm_RequestChangeBits(a->id, 0x1c8, 4, 0, 0x400);
         }
         if (b != 0) {
-            fcn_004c5420(b->id, 0x1c8, 4, 0, 0x400);
+            cm_RequestChangeBits(b->id, 0x1c8, 4, 0, 0x400);
         }
         o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
         gm_AddTime(&o->stamp, 0, 2, 0);
@@ -102,10 +102,10 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
         a = gm_LookupEntityRecordById(o->actor);
         b = gm_LookupEntityRecordById(o->target);
         if (a != 0) {
-            fcn_004c5420(a->id, 0x1c8, 4, 0, 0x400);
+            cm_RequestChangeBits(a->id, 0x1c8, 4, 0, 0x400);
         }
         if (b != 0) {
-            fcn_004c5420(b->id, 0x1c8, 4, 0, 0x400);
+            cm_RequestChangeBits(b->id, 0x1c8, 4, 0, 0x400);
         }
         o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
         gm_AddTime(&o->stamp, 0, 2, 0);
@@ -117,10 +117,10 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
             a = gm_LookupEntityRecordById(o->actor);
             b = gm_LookupEntityRecordById(o->target);
             if (a != 0) {
-                fcn_004c5420(a->id, 0x1c8, 4, 0, 0x400);
+                cm_RequestChangeBits(a->id, 0x1c8, 4, 0, 0x400);
             }
             if (b != 0) {
-                fcn_004c5420(b->id, 0x1c8, 4, 0, 0x400);
+                cm_RequestChangeBits(b->id, 0x1c8, 4, 0, 0x400);
             }
             o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
             gm_AddTime(&o->stamp, 0, 2, 0);

@@ -96,12 +96,12 @@ void __cdecl fcn_00471af0(int a, int b);
 void __cdecl fcn_00471e30(int a);
 int __cdecl d2_GetControlValue(int a);
 void __cdecl cm_BeginPacketFieldDelta(char* ent, int id);
-void __cdecl fcn_004c4700(int a, int b, int c, void* d);
-void __cdecl fcn_004c5150(int a, int b, int c, int d);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c53a0(void);
-void __cdecl fcn_004c5530(void* msg);
-void __cdecl fcn_004c5f60(int a, int b, int c);
+void __cdecl cm_AppendCommandSyncField(int a, int b, int c, void* d);
+void __cdecl cm_RequestMoveCredits(int a, int b, int c, int d);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_SendSetAttribute(void);
+void __cdecl cm_SendCopyEntityData(void* msg);
+void __cdecl cm_SendSetGebBesitzer(int a, int b, int c);
 void __cdecl fcn_004c6000(int a, int b);
 void __cdecl gm_BuyBuilding(int a, int b, int c, int d, int e);
 int __cdecl fcn_0050d2a0(char* a);
@@ -380,7 +380,7 @@ after_build:
 				st.f34 = g_7f4c0c;
 				st.f36 = 1;
 				st.f58 = *(int*) (ent + 1);
-				fcn_004c5530(&st);
+				cm_SendCopyEntityData(&st);
 				g_774654 = 1;
 			}
 			fcn_00471af0(dlg, 1);
@@ -418,7 +418,7 @@ after_build:
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h5c) {
-			fcn_004c5f60(*(int*) (ent + 1),
+			cm_SendSetGebBesitzer(*(int*) (ent + 1),
 			    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
  + 4),
 			    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
@@ -433,16 +433,16 @@ after_build:
 			io_FormatTextBuffer(text3, 0x17e3, (int) ent,
 			    (int) ent, v.len);
 			if (fcn_00526120(text3, 1) != 0) {
-				fcn_004c5150(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
+				cm_RequestMoveCredits(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
 
 					+ 4), -1, g_773d75, v.len);
-				fcn_004c5f60(*(int*) (ent + 1),
+				cm_SendSetGebBesitzer(*(int*) (ent + 1),
 				    *(int*) (gm_CityEntity + 4),
 				    *(int*) (gm_CityEntity + 4));
 				cm_BeginPacketFieldDelta(ent, *(int*) (ent + 1));
-				fcn_004c4700(4, 1,
+				cm_AppendCommandSyncField(4, 1,
 				    (int) ent - g_aed32c + 0x65, &v.len);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 				g_774654 = 1;
 			}
 			fcn_00471af0(dlg, 1);
@@ -470,8 +470,8 @@ loop_test:
 			*d++ = c;
 		} while (c != 0);
 		cm_BeginPacketFieldDelta(ent, *(int*) (ent + 1));
-		fcn_004c4700(1, 0x20, 5, name);
-		fcn_004c53a0();
+		cm_AppendCommandSyncField(1, 0x20, 5, name);
+		cm_SendSetAttribute();
 	}
 	fcn_00471e30(dlg);
 	if (*(unsigned short*) (ent + 0x25) == g_774970)

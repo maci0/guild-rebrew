@@ -40,9 +40,9 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl io_AppendText(int, ...);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c4ef0(char*);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_SendTraceEnd(char*);
+void __cdecl cm_SendCopyEntityData(void*);
 
 /* ADDRESS: GOLDTL 0x005bf580 */
 int __cdecl d2_RunSpionageDialog(char* rec)
@@ -128,10 +128,10 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 					ea = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].ptr_170;
 					*(int*) (pkt + 0x58) = ea != 0 ? *(int*) (ea + 1) : -1;
 					*(int*) (pkt + 0x90) = n;
-					fcn_004c4eb0("spionage");
+					cm_SendLogAction("spionage");
 					*(int*) (pkt + 0x94) = d2_GetControlValue(row2);
-					fcn_004c5530(pkt);
-					fcn_004c4ef0("spionage");
+					cm_SendCopyEntityData(pkt);
+					cm_SendTraceEnd("spionage");
 					io_FormatTextBuffer(buf, 0x42bf, *(unsigned short*) rec);
 					fcn_00526120(buf, 0x100);
 					g_774654 = 1;

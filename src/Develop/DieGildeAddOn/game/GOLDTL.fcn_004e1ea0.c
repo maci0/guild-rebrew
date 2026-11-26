@@ -13,7 +13,7 @@ void* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_SendCmdMessage(void*, void*, char*, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl gm_NotifyHochzeit(char* event)
 {
@@ -45,10 +45,10 @@ int __cdecl gm_NotifyHochzeit(char* event)
 				return 1;
 			}
 		}
-		fcn_004c5420(*(int*) ((char*) e1 + 4), 0x1c8, 4, 0, 0x40000);
+		cm_RequestChangeBits(*(int*) ((char*) e1 + 4), 0x1c8, 4, 0, 0x40000);
 	}
 	if (e2 != 0) {
-		fcn_004c5420(*(int*) ((char*) e2 + 4), 0x1c8, 4, 0, 0x40000);
+		cm_RequestChangeBits(*(int*) ((char*) e2 + 4), 0x1c8, 4, 0, 0x40000);
 	}
 	return 0;
 }

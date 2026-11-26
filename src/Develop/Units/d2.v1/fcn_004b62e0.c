@@ -40,8 +40,8 @@ void __cdecl fcn_004b5630(Spec* s, int flags);
 void __cdecl main_PlayOutroMovie(void);
 int __cdecl fcn_004b43f0(int n);
 int __cdecl fcn_004b3e10(int a1, int a2, int a3);
-int __cdecl fcn_004c5790(int, Req*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_RequestSysMessage(int, Req*);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_004b5b20(int flags);
 
@@ -75,16 +75,16 @@ void __cdecl fcn_004b62e0(int flags)
 		g_6a3440 = -1;
 		m.id = ent->entity_id;
 		m.x10 = 0;
-		h = fcn_004c5790(10, &m);
-		while (fcn_004c4450(h) == 0) {
+		h = cm_RequestSysMessage(10, &m);
+		while (cm_GetCommandStatus(h) == 0) {
 			fcn_00535960();
 		}
 	} else if (r == 0xff) {
 		g_6a3440 = -1;
 		m.id = ent->entity_id;
 		m.x10 = 1;
-		h = fcn_004c5790(10, &m);
-		while (fcn_004c4450(h) == 0) {
+		h = cm_RequestSysMessage(10, &m);
+		while (cm_GetCommandStatus(h) == 0) {
 			fcn_00535960();
 		}
 		fcn_004b5b20(flags);
@@ -92,8 +92,8 @@ void __cdecl fcn_004b62e0(int flags)
 		fcn_004b3e10(ent->entity_id, r, 1);
 		m.id = ent->entity_id;
 		m.x10 = 0;
-		h = fcn_004c5790(10, &m);
-		while (fcn_004c4450(h) == 0) {
+		h = cm_RequestSysMessage(10, &m);
+		while (cm_GetCommandStatus(h) == 0) {
 			fcn_00535960();
 		}
 	}

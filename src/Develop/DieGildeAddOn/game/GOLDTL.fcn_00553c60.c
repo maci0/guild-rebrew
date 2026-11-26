@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 void __cdecl he_AllocBetriebsPruefung(char* e)
 {
@@ -16,6 +16,6 @@ void __cdecl he_AllocBetriebsPruefung(char* e)
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 	if (t != 0) {
-		fcn_004c5420(*(int*) (t + 1), 0x5a, 2, 0x800, 0);
+		cm_RequestChangeBits(*(int*) (t + 1), 0x5a, 2, 0x800, 0);
 	}
 }

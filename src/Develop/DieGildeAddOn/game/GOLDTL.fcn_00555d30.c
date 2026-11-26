@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -18,7 +18,7 @@ void __cdecl fcn_00428340(char*, int, int);
 void __cdecl evt_RequestScriptExit(char*);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl sprintf(char*, const char*, ...);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl fcn_005467e0(int);
 
 #include "client_types.h"
@@ -42,7 +42,7 @@ void __cdecl fcn_00555d30(char* obj)
 		he_FreeAction(obj);
 		return;
 	}
-	if (*(int*) (obj + 0x84) != -1 && fcn_004c4450(*(int*) (obj + 0x84)) == 0) {
+	if (*(int*) (obj + 0x84) != -1 && cm_GetCommandStatus(*(int*) (obj + 0x84)) == 0) {
 		return;
 	}
 	*(int*) (obj + 0x84) = -1;
@@ -125,7 +125,7 @@ void __cdecl fcn_00555d30(char* obj)
 				if ((*(int*) j & 0x20000) == 0) {
 					continue;
 				}
-				fcn_004c5420(*(int*) (j - 0x1c4), 0x1c8, 4, 0, 0x20000);
+				cm_RequestChangeBits(*(int*) (j - 0x1c4), 0x1c8, 4, 0, 0x20000);
 			}
 		}
 		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;

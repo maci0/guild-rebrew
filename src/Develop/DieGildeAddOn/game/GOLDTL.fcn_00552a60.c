@@ -21,13 +21,13 @@ int __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_00529160(int, int, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
-int __cdecl fcn_004c51a0(int, int, unsigned char, int);
+int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 int __cdecl gm_GetEntityTableEntry(int);
 int __cdecl fcn_0050dc90(int);
 int __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl gm_AccumulateTyped2(int);
-int __cdecl fcn_004c5c80(int);
+int __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl he_FreeAction(int);
 
 /* ADDRESS: GOLDTL 0x00552a60 */
@@ -111,7 +111,7 @@ void __cdecl fcn_00552a60(int event)
 								    + v6 * 2) * 2;
 							} while (v7);
 						}
-						fcn_004c5c80(*(int*) (v14 + 2));
+						cm_SendCancelCharacterActions(*(int*) (v14 + 2));
 						fcn_004c5da0(*(int*) (v14 + 2),
 						    *(int*) ((char*) v4 + 1),
 						    *(int*) ((char*) v5 + 2), 0, 0,
@@ -124,7 +124,7 @@ void __cdecl fcn_00552a60(int event)
 				v5 = fcn_0050b750(v15, g_773d75);
 				v6 = gm_GetBuildingTechEffect(v4, 1, 1);
 				v5 = (int) (((float) v6 * 0.01f + 1.0f) * v5);
-				fcn_004c51a0(*(int*) (v18 + 4), -1,
+				cm_RequestTransferCurrencyNoKill(*(int*) (v18 + 4), -1,
 				    g_773d75, v5);
 				*(int*) (v4 + 0x4d) = *(int*) (v4 + 0x4d) + v5;
 				if (*(char*) (v18 + 2) == 6) {
@@ -187,7 +187,7 @@ void __cdecl fcn_00552a60(int event)
 					v1 = *(unsigned char*) (v4 + 0x82);
 					v2 = *(unsigned char*) (v14 + 0x41);
 					if (v1 - v2 <= (gm_RandomMod(0x7e) & 0xffff)) {
-						fcn_004c51a0(-1, *(int*) (v4 + 4),
+						cm_RequestTransferCurrencyNoKill(-1, *(int*) (v4 + 4),
 						    g_773d75, v5);
 						if (*(char*) (v4 + 2) == 6
 						    || *(char*) (v4 + 2) == 7) {
@@ -227,7 +227,7 @@ void __cdecl fcn_00552a60(int event)
 			v9 = gm_StartFilteredEntitySearch(1, 5, 10);
 		}
 		fcn_00529160(v9, 0, *v14, event);
-		fcn_004c5c80(*(int*) (v14 + 2));
+		cm_SendCancelCharacterActions(*(int*) (v14 + 2));
 		fcn_004c5da0(*(int*) (v14 + 2), *(int*) ((char*) v9 + 1),
 		    -1, 0, 1, (char*) 0x6a5bbc);
 		*(int*) (event + 0xac + v17 * 4) = *(int*) ((char*) v9 + 1);

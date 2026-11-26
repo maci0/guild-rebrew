@@ -7,9 +7,9 @@ extern void* __cdecl gm_FindNextFilteredEntity(void);
 unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 extern int __cdecl io_FormatTextBuffer(char*, int, int);
-extern void __cdecl fcn_004c51a0(int, int, char, int);
+extern void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 extern void __cdecl fcn_00545d40(int, int, void*, int, int, int);
-extern void __cdecl fcn_004c54c0(int, int, int, int);
+extern void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* Collects the entity ids in the given building's filter chain, drops repeated
  * ids, emits the remaining ones and announces the building's road segment. */
@@ -63,7 +63,7 @@ int __cdecl fcn_004b7f70(unsigned int* request)
 		id = ids[i];
 		if (id != -1) {
 			r = gm_RandomMod(4) * 2 + 6;
-			fcn_004c54c0(*(int*) ((char*) ent + 4), id, r, 1);
+			cm_RequestCopyEntityData(*(int*) ((char*) ent + 4), id, r, 1);
 		}
 	}
 	v = gm_RandomMod(4);
@@ -73,6 +73,6 @@ int __cdecl fcn_004b7f70(unsigned int* request)
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
 	fcn_00545d40(*(int*) ((char*) ent + 4), *(int*) ((char*) ent + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
-	fcn_004c51a0(-1, *(int*) request, (char) g_773d75, n);
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) request, (char) g_773d75, n);
 	return 0;
 }

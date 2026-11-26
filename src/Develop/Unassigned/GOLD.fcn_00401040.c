@@ -4,7 +4,7 @@
 
 char* __cdecl strchr(const char*, int);
 
-char* __cdecl fcn_00401040(char* path)
+char* __cdecl StripPathAndExt(char* path)
 {
 	char* p;
 	char* q;

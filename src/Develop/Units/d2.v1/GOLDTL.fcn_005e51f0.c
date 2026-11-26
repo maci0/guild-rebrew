@@ -22,7 +22,7 @@ void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl fcn_005944d0(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
-void __cdecl fcn_005cf560(char*);
+void __cdecl d2_OpenMeisterbriefDialog(char*);
 void __cdecl d2_ShowHandelSearch(char*, int);
 void __cdecl fcn_005e5130(char*, int);
 void __cdecl fcn_00597ec0(char*);
@@ -67,7 +67,7 @@ void __cdecl d2_RunSchneiderMenu(char* obj, int arg)
 			} else if (g_7746a0 == title) {
 				d2_ShowPersonalbuch(obj, s_6aa34c);
 			} else if (g_7746a0 == diary) {
-				fcn_005cf560(obj);
+				d2_OpenMeisterbriefDialog(obj);
 			} else if (g_7746a0 == trade) {
 				d2_ShowHandelSearch(obj, arg);
 			} else if (g_7746a0 == build) {

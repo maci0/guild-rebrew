@@ -22,7 +22,7 @@ char* __cdecl fcn_005049a0(char*);
 char* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
@@ -71,7 +71,7 @@ void __cdecl he_RunWorkerStealAction(char* e)
 			sel = list[gm_RandomMod(n)];
 			if (sel != 0) {
 				amt = (int) fcn_0050bb50(*(unsigned short*) sel, g_773d75);
-				fcn_004c51f0(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);
+				cm_SendSellObjekt(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);
 				io_FormatTextBuffer(buf, 0x1bb9, *(int*) (o + 0x16c), *(unsigned short*) sel * 2 + 0x9a8, amt);
 				he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, buf, 0, 0x5f2, *(int*) (p + 1),
 				    *(int*) (q + 2), 0, "_NACHRICHTEN_HS_09");

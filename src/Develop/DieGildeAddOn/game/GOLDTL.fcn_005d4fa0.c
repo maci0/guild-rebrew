@@ -12,9 +12,9 @@ extern char s_679060[];
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004c6ae0(int, int);
-int __cdecl fcn_004c5420(int, int, int, int, int);
+int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c5150(int, int, char, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 int __cdecl gm_CureRandomAffliction(unsigned char*);
 int __cdecl fcn_00470820(int, int, char*);
@@ -26,13 +26,13 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(unsigned char*, int);
 int __cdecl gm_CheckEntityStock(unsigned char*, int, char);
 void __cdecl io_FormatTextBuffer(char*, ...);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005d4fa0(unsigned char* e)
+int __cdecl d2_ShowMedicusDialog(unsigned char* e)
 {
 	int money;
 	int result;
@@ -53,9 +53,9 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 		half = abs(*(int*) (e + 0x24)) / 2;
 		money = (int) (gm_WalkEntityChain(*(unsigned short*) e) * 0.02f);
 		fcn_004c6ae0(*(int*) (e + 4), -2);
-		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x40, 0);
+		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x40, 0);
 		if (gm_RandomMod(2)) {
-			fcn_004c5150(-1, *(int*) (e + 4), g_773d75, money);
+			cm_RequestMoveCredits(-1, *(int*) (e + 4), g_773d75, money);
 			fcn_004ff210(*(unsigned short*) e, half);
 			gm_CureRandomAffliction(e);
 		}
@@ -79,7 +79,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 					if (gm_RandomMod(2)) {
 						io_FormatTextBuffer(tmp, s_679060, 0x1d3d);
 						strcat(text, tmp);
-						fcn_004c5150(-1, *(int*) (e + 4), g_773d75, money);
+						cm_RequestMoveCredits(-1, *(int*) (e + 4), g_773d75, money);
 						gm_CureRandomAffliction(e);
 					} else {
 						io_FormatTextBuffer(tmp, s_679060, 0x1d3e);
@@ -88,8 +88,8 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 					ok = -1;
 					cancel = -1;
 					result = 0x81;
-					h = fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x40, 0);
-					while (fcn_004c4450(h) == 0) {
+					h = cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x40, 0);
+					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
 					fcn_00526120(text, 0);
@@ -102,7 +102,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005d4fa0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowMedicusDialog, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 }

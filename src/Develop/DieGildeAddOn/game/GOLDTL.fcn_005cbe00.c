@@ -1,7 +1,7 @@
 int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl he_fn_Handlung(void);
 int __cdecl he_StartHandlungSearch(int a, ...);
-void __cdecl fcn_005ca560(int *out);
+void __cdecl d2_BuildPersonStatusDesc(int *out);
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005cbe00 */
@@ -82,7 +82,7 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 		if (count > 0) {
 			n = count;
 			do {
-				fcn_005ca560(out);
+				d2_BuildPersonStatusDesc(out);
 				out[0xc] = fcn_005cf720(
 				    *(unsigned short *) src,
 				    *(unsigned short *) out[0], arg3, 0);

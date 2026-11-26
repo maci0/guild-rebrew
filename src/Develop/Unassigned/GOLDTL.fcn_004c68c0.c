@@ -1,7 +1,7 @@
 
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
 typedef struct
 {
@@ -15,5 +15,5 @@ void __cdecl fcn_004c68c0(Body5* body)
 
 	buf[0] = 0x53;
 	*(Body5*) (buf + 0x10) = *body;
-	fcn_004c4330(buf);
+	cm_EnqueueClientPacket(buf);
 }

@@ -1,6 +1,6 @@
 #include "client_packet_builder.h"
-void __cdecl fcn_004c4700(int a, int b, int c, int* d);
-void __cdecl fcn_004c53a0(void);
+void __cdecl cm_AppendCommandSyncField(int a, int b, int c, int* d);
+void __cdecl cm_SendSetAttribute(void);
 
 /* ADDRESS: GOLDTL 0x00507870 */
 int __cdecl fcn_00507870(char* e)
@@ -16,11 +16,11 @@ int __cdecl fcn_00507870(char* e)
 		v = *(unsigned char*) (e + 0x165) - 1;
 	}
 	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
-	fcn_004c4700(1, 1, 0x165, &v);
-	fcn_004c53a0();
+	cm_AppendCommandSyncField(1, 1, 0x165, &v);
+	cm_SendSetAttribute();
 	v = 0;
 	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
-	fcn_004c4700(4, 1, 0x174, &v);
-	fcn_004c53a0();
+	cm_AppendCommandSyncField(4, 1, 0x174, &v);
+	cm_SendSetAttribute();
 	return -1;
 }

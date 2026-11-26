@@ -1,7 +1,7 @@
 extern int g_6b7fdc;
 extern char g_6b85c0[];
 
-char* __cdecl fcn_00449ac0(char*, char*);
+char* __cdecl d3_AppendVfsAssetPath(char*, char*);
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl fcn_004011f0(void*, void*);
 void* __cdecl m_alloc(unsigned int, const char*);
@@ -19,7 +19,7 @@ void __cdecl fcn_0044b340(char* name, char** tex, int* width, int* height)
 
 
 	if (name != 0) {
-		f = fcn_00449ac0(name, ".TXS");
+		f = d3_AppendVfsAssetPath(name, ".TXS");
 		if (f != 0) {
 			f = vfs_Tfopen(f, "rb", g_6b7fdc);
 			if (f != 0) {

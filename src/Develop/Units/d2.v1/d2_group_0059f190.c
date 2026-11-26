@@ -13,7 +13,7 @@ void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_ShowHandelSearch(char*, int);
-void __cdecl fcn_005cf560(char*);
+void __cdecl d2_OpenMeisterbriefDialog(char*);
 extern int g_14ad1f0;
 
 void __cdecl fcn_005338a0(void);
@@ -25,7 +25,7 @@ void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_ShowHandelSearch(char*, int);
-void __cdecl fcn_005cf560(char*);
+void __cdecl d2_OpenMeisterbriefDialog(char*);
 
 /* ADDRESS: GOLD 0x00595fb0 */
 /* ADDRESS: GOLDTL 0x0059f190 */
@@ -69,7 +69,7 @@ void __cdecl fcn_0059f190(char* e, int a2)
 			} else if (g_7746a0 == sammeln) {
 				d2_ShowHandelSearch(e, a2);
 			} else if (g_7746a0 == meister) {
-				fcn_005cf560(e);
+				d2_OpenMeisterbriefDialog(e);
 			}
 		}
 	}
@@ -117,7 +117,7 @@ void __cdecl d2_RunMixingProductionMenu(char* e, int a2)
 			} else if (g_7746a0 == sammeln) {
 				d2_ShowHandelSearch(e, a2);
 			} else if (g_7746a0 == meister) {
-				fcn_005cf560(e);
+				d2_OpenMeisterbriefDialog(e);
 			}
 		}
 	}

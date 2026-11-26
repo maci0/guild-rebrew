@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-int __cdecl fcn_004c4330(char*);
+int __cdecl cm_EnqueueClientPacket(char*);
 
 int __cdecl fcn_004c6700(char* e)
 {
@@ -30,5 +30,5 @@ int __cdecl fcn_004c6700(char* e)
 	*(int*) (buf + 0x2c) = end;
 	*(short*) (buf + 0x30) = *(short*) tmp[0];
 	*(short*) (buf + 0x32) = *(short*) tmp[1];
-	return fcn_004c4330(buf);
+	return cm_EnqueueClientPacket(buf);
 }

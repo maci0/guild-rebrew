@@ -11,7 +11,7 @@ int __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_004c5980(void*);
-int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
+int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x005513d0 */
@@ -60,9 +60,9 @@ void __cdecl fcn_005513d0(char* action)
 			if (*(int*) (entry + 0x170) != 0)
 				v20 = *(int*) (*(int*) (entry + 0x170) + 1);
 			if (entry[9] == 0) {
-				fcn_004c4fc0(8, *(int*) (entry + 4), *(int*) (rec + 4), 0, v20, 0, 0, 2);
+				cm_RequestAllocSpieler(8, *(int*) (entry + 4), *(int*) (rec + 4), 0, v20, 0, 0, 2);
 			} else {
-				fcn_004c4fc0(8, *(int*) (rec + 4), *(int*) (entry + 4), 0, v20, 0, 0, 2);
+				cm_RequestAllocSpieler(8, *(int*) (rec + 4), *(int*) (entry + 4), 0, v20, 0, 0, 2);
 			}
 			*(int*) (action + 0x70) = 0;
 			*(int*) (action + 0x52) += (gm_RandomMod(8) & 0xffff) + 1;

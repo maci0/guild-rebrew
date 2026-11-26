@@ -30,10 +30,10 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckEntityStock(void*, int, char);
-int __cdecl fcn_004c51a0(int, int, int, int);
+int __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
@@ -88,10 +88,10 @@ void __cdecl fcn_005ab810(char* e, int unused)
 				if (d2_CurrentElementId == firstButton) {
 					if (gm_CheckEntityStock(&((struct house*) g_7f4ca0)[g_774970], d, (char) g_773d75) != 0) {
 						x = 1 - p->state;
-						fcn_004c51a0(-1, p->handle, 0, d);
+						cm_RequestTransferCurrencyNoKill(-1, p->handle, 0, d);
 						cm_BeginPacketFieldDelta((char*) p, p->handle);
 						cm_AppendPacketFieldDelta(1, 1, 0xc, &x);
-						fcn_004c5360();
+						cm_RequestChangeAttribute();
 						for (i = 3; i <= 7; i++) {
 							h = (char*) ((struct house*) g_7f4ca0)[g_774970].ref_table[i];
 							if (h != (char*) -1) {
@@ -99,7 +99,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 								if (h != 0) {
 									cm_BeginPacketFieldDelta(h, *(int*) (h + 4));
 									cm_AppendPacketFieldDelta(1, 1, 0xc, &x);
-									fcn_004c5360();
+									cm_RequestChangeAttribute();
 								}
 							}
 						}
@@ -149,10 +149,10 @@ void __cdecl fcn_005ab810(char* e, int unused)
 				if (d2_CurrentElementId == firstButton) {
 					if (gm_CheckEntityStock(&((struct house*) g_7f4ca0)[g_774970], t, (char) g_773d75) != 0) {
 						x = q->state;
-						fcn_004c51a0(q->handle, p->handle, 0, t);
+						cm_RequestTransferCurrencyNoKill(q->handle, p->handle, 0, t);
 						cm_BeginPacketFieldDelta((char*) p, p->handle);
 						cm_AppendPacketFieldDelta(1, 1, 0xc, &x);
-						fcn_004c5360();
+						cm_RequestChangeAttribute();
 						if (q->type == 6 || q->type == 7) {
 							io_FormatTextBuffer(buf, 0x1974, p->id, t);
 							fcn_00545d40(q->handle, -1, buf, 0, 0x5ff, 0);

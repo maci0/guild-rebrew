@@ -47,7 +47,7 @@ unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 float __cdecl gm_RandomFloat01(void);
 float __cdecl fcn_004ff210(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -93,7 +93,7 @@ int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 			return 0;
 		}
 	}
-	fcn_004c54c0(*(unsigned short*) e, ((House*)g_7f4ca0)[q->w27].f4, -20 - gm_RandomMod(0x20), 1);
+	cm_RequestCopyEntityData(*(unsigned short*) e, ((House*)g_7f4ca0)[q->w27].f4, -20 - gm_RandomMod(0x20), 1);
 	for (i = 0; i < 768; i++) {
 		if (((House*)g_7f4ca0)[i].b2 == 0 && ((House*)g_7f4ca0)[i].f16c == q) {
 			fcn_004ff210(i, (int) -((gm_RandomFloat01() * 0.2f + 0.1f) * ((House*)g_7f4ca0)[i].f1c));

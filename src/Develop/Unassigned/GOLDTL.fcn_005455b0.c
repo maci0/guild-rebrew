@@ -3,7 +3,7 @@
 extern pos14_7f4c00 gm_GameTime;
 extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 
-int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 
@@ -22,7 +22,7 @@ unsigned int __cdecl fcn_005455b0(void)
 	foundi = -1;
 	for (i = 0, r = g_77e8c0; (int) r < (int) (g_77e8c0 + 16); r++, i++) {
 		if (r->p != 0 && r->h != -1) {
-			if (fcn_00500cb0((pos14_7f4c00*) (r->p + 0x44), &pos) < 0) {
+			if (gm_CompareGameTime((pos14_7f4c00*) (r->p + 0x44), &pos) < 0) {
 				p = r->p;
 				foundi = i;
 				pos = *(pos14_7f4c00*) (p + 0x44);

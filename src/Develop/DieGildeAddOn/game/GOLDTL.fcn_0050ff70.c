@@ -8,10 +8,10 @@ extern char g_699af0[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int off, char* v);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int h, int a, char* text, int b, int c, char* snd);
-void __cdecl fcn_004c5fd0(int h);
+void __cdecl cm_RequestDestroyBuilding(int h);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta)
 {
@@ -30,7 +30,7 @@ void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta)
 	}
 	cm_BeginPacketFieldDelta(o, *(int*) (o + 1));
 	cm_AppendPacketFieldValue(1, 1, 0x5c, &d);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	if (*o != 0 && d + o[0x5c] <= 0) {
 		rec = (unsigned char*) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[(unsigned char) *o];
 		if (*rec != 0xf && *rec != 0x1c && *rec != 0x1b && *rec != 0xa && *rec != 6 && *rec < 0x17 && *rec != 0x10) {
@@ -45,7 +45,7 @@ void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta)
 					}
 				}
 			}
-			fcn_004c5fd0(*(int*) (o + 1));
+			cm_RequestDestroyBuilding(*(int*) (o + 1));
 		}
 	}
 }

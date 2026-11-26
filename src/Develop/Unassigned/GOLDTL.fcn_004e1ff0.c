@@ -13,7 +13,7 @@ void __cdecl fcn_004e4610(int);
 int __cdecl fcn_004e44b0(char*, char*);
 void __cdecl fcn_004e44f0(int);
 void __cdecl cut_CleanupCutscene(void);
-void __cdecl fcn_004e3640(void);
+void __cdecl msx_RestoreMusicIfAllowed(void);
 
 int __cdecl fcn_004e1ff0(int* x)
 {
@@ -32,7 +32,7 @@ int __cdecl fcn_004e1ff0(int* x)
 	x[1] = -1;
 	g_772f54 = 0;
 	cut_CleanupCutscene();
-	fcn_004e3640();
+	msx_RestoreMusicIfAllowed();
 	d2_SuppressOverlay = 0;
 	return 1;
 }

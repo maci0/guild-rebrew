@@ -42,11 +42,11 @@ extern unsigned char g_773d75;
 Desc* __cdecl fcn_005c61e0(int);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_0057e880(int, int, int, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, void*);
-void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+void __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 char* __cdecl fcn_005c6220(int, int*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -88,7 +88,7 @@ int __cdecl gm_UseSpecialObject(Ent* ent, Cmd* cmd)
 	if (result != 0) {
 		fcn_0057e880(0x2d, 0, 0, *cmd->rec);
 		if (d->flags != 0) {
-			fcn_004c5420(ent->handle, 0x1ec, 4, d->flags, 0);
+			cm_RequestChangeBits(ent->handle, 0x1ec, 4, d->flags, 0);
 		}
 		if (d->value != 0) {
 			vc = d->value;
@@ -102,10 +102,10 @@ int __cdecl gm_UseSpecialObject(Ent* ent, Cmd* cmd)
 			cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x31), &(*(short*)&g_7f4c04));
 			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x33), &g_7f4c06);
 			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x37), &g_7f4c0a);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		}
 		if (d->value == 0) {
-			fcn_004c51f0(-1, ent->handle, *cmd->rec, 1, g_773d75, 0);
+			cm_SendSellObjekt(-1, ent->handle, *cmd->rec, 1, g_773d75, 0);
 		}
 		if (d->action != -1) {
 			if (ent->home) {

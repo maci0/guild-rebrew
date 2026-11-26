@@ -3,11 +3,11 @@
 
 int __cdecl fcn_004e6f10(int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 void __cdecl amt_ApplyOfficeSupportEffect(unsigned short* who, char* e)
 {
@@ -25,7 +25,7 @@ void __cdecl amt_ApplyOfficeSupportEffect(unsigned short* who, char* e)
 			continue;
 		}
 		if (*(int*) (e + 4) == list[i].mplayerid) {
-			fcn_004c54c0(*(int*) (who + 2), list[i].mplayerid, 100, 1);
+			cm_RequestCopyEntityData(*(int*) (who + 2), list[i].mplayerid, 100, 1);
 			if (e[2] == 6 || e[2] == 7) {
 				io_FormatTextBuffer(a, 0x1e0a, *who);
 				fcn_00545d40(*(int*) (e + 4), -1, a, 0, 0x5fb, "_NACHRICHTEN_NEU_05");
@@ -33,7 +33,7 @@ void __cdecl amt_ApplyOfficeSupportEffect(unsigned short* who, char* e)
 		} else {
 			o = gm_LookupEntityRecordById(list[i].mplayerid);
 			if (o != 0) {
-				fcn_004c54c0(*(int*) (who + 2), list[i].mplayerid, -20, 1);
+				cm_RequestCopyEntityData(*(int*) (who + 2), list[i].mplayerid, -20, 1);
 				if (o[2] == 6 || o[2] == 7) {
 					io_FormatTextBuffer(b, 0x1e0b, *who, *(unsigned short*) e, *who);
 					fcn_00545d40(*(int*) (o + 4), -1, b, 0, 0x5fb, "_NACHRICHTEN_NEU_06");
@@ -41,5 +41,5 @@ void __cdecl amt_ApplyOfficeSupportEffect(unsigned short* who, char* e)
 			}
 		}
 	}
-	fcn_004c5420(*(int*) (who + 2), 0x1cc, 4, 0x80000, 0);
+	cm_RequestChangeBits(*(int*) (who + 2), 0x1cc, 4, 0x80000, 0);
 }

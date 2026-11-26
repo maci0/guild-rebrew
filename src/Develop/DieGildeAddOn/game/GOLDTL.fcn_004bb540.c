@@ -6,7 +6,7 @@ extern unsigned char g_773d75;
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_004c51a0(int, int, unsigned char, int);
+int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
@@ -36,6 +36,6 @@ int __cdecl fcn_004bb540(void* record)
 	len = strlen(buf);
 	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    0x100 < len, 0x603, 0);
-	fcn_004c51a0(-1, *(int*) record, g_773d75, r);
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) record, g_773d75, r);
 	return 0;
 }

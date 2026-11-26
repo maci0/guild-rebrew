@@ -42,7 +42,7 @@ extern float g_6628a8;
 #include "../../../Units/d3/d3_camera.h"
 extern char g_10432c0[];
 
-char __cdecl fcn_00442c00(char*, char);
+char __cdecl d3_SetObjectVisible(char*, char);
 
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, float*);
@@ -55,7 +55,7 @@ int __cdecl d3_RemoveObjectAnim(char*);
 
 extern char g_6b5c60[];
 D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
-void __cdecl fcn_00438ac0(char*, int);
+void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
 void __cdecl fcn_00404b60(char*, int, ...);
 
@@ -135,7 +135,7 @@ int __cdecl ch_CreateMesh(char* model, char* resource, float* position)
 #ifdef REBREW_GOLD
     fcn_00453270(*(char**) (model + 0x34));
 #endif
-    fcn_00438ac0(*(char**) (model + 0x34), 1);
+    d3_InvalidateSubTreeFlags(*(char**) (model + 0x34), 1);
     *(int*) (model + 4) = 1;
     if (strstr(model + 8, "RATTE") || strstr(model + 8, "HUND") ||
         strstr(model + 8, "KATZE") || strstr(model + 8, "PFERD")) {

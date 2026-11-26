@@ -18,13 +18,13 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00502cd0(int, ...);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
-int __cdecl fcn_005ca560(void*);
+int __cdecl d2_BuildPersonStatusDesc(void*);
 void __cdecl fcn_005ca740(int, int, int, int, void*, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_004c4eb0(char*);
+void __cdecl cm_SendLogAction(char*);
 int __cdecl fcn_004c6900(int*);
-void __cdecl fcn_004c4ef0(char*);
-int __cdecl fcn_004c4450(int);
+void __cdecl cm_SendTraceEnd(char*);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_00526120(char*, int);
@@ -126,7 +126,7 @@ void __cdecl fcn_005a2080(int building, int table)
 					p[0xc] = 1;
 					p[4] = (i % 2 + 1) * (x0 / 3) + -10 + (x0 % 3) / 2 + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 2);
 					p[5] = (i / 2) * 0x82 + 100;
-					fcn_005ca560(p);
+					d2_BuildPersonStatusDesc(p);
 					fcn_005ca740(p[4], p[5], d2_CurrentWindowId, 0x54, p, 1);
 					p += 0xe;
 				}
@@ -154,13 +154,13 @@ void __cdecl fcn_005a2080(int building, int table)
 				join[0] = 0x6a6f696e;
 				join[2] = *(int*) (building + 1);
 				join[1] = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
-				fcn_004c4eb0("stammtisch join H-Plr");
+				cm_SendLogAction("stammtisch join H-Plr");
 				next = fcn_004c6900(join);
-				fcn_004c4ef0("stammtisch join H-Plr");
-				n = fcn_004c4450(next);
+				cm_SendTraceEnd("stammtisch join H-Plr");
+				n = cm_GetCommandStatus(next);
 				while (n == 0) {
 					main_RunFrameLoop(0, 0x20007);
-					n = fcn_004c4450(next);
+					n = cm_GetCommandStatus(next);
 				}
 				if (n == 1) {
 					io_FormatTextBuffer(buf, 0x189e, building);

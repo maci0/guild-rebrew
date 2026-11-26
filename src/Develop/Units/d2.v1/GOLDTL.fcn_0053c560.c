@@ -61,7 +61,7 @@ char *__cdecl fcn_004730c0(int, int, int, int, char *, int, int);
 int __cdecl ch_DestroyCharacter(char *);
 void *__cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(char *);
-void __cdecl fcn_005312d0(int);
+void __cdecl evt_WaitForScriptExit(int);
 void __cdecl gv_Free3Fields(void *);
 void __cdecl fcn_004e4c00(void);
 void __cdecl fcn_00473150(char *);
@@ -259,7 +259,7 @@ slot_found:
 		found = evt_FindScriptById(oldSound);
 		if (found != 0)
 			evt_RequestScriptExit(found);
-		fcn_005312d0(oldSound);
+		evt_WaitForScriptExit(oldSound);
 	}
 	if (*(int *) (g_67a370 + 0xb0) != 0) {
 		gv_Free3Fields((void *) *(int *) (g_67a370 + 0xb0));

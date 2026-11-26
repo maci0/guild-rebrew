@@ -38,7 +38,7 @@ float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_0050f950(int a, int b);
 void __cdecl fcn_005904a0(char* s, int v);
-void __cdecl fcn_004c5530(Msg5* m);
+void __cdecl cm_SendCopyEntityData(Msg5* m);
 void __cdecl gm_AddTime(GAME_TIMESTAMP* t, int a, int b, int c);
 void __cdecl he_FreeAction(char* e);
 
@@ -92,7 +92,7 @@ void __cdecl fcn_0057b390(char* e)
 								m.at = *(GAME_TIMESTAMP*) &gm_GameTime;
 								m.code = 1;
 								*(int*) &m.who = *(int*) (s + 4);
-								fcn_004c5530(&m);
+								cm_SendCopyEntityData(&m);
 							}
 						}
 					}

@@ -63,7 +63,7 @@ extern float g_6a28f0;
 extern float g_6a28f4;
 extern float g_6a28f8;
 
-void __cdecl fcn_00500d60(int*, char*);
+void __cdecl gm_PackGameTime(int*, char*);
 int __cdecl fcn_0052a310(int*);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl rand(void);
@@ -78,7 +78,7 @@ void __cdecl fcn_00459940(int, int, float);
 void __cdecl fcn_004597f0(int, int);
 void __cdecl gm_InitWeatherWave(int, int, Vec24*, Vec24*);
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_0052a7d0(void);
+void __cdecl d3_ApplySceneLightingPreset(void);
 void __cdecl fcn_0052a960(GAME_TIMESTAMP*);
 int* __cdecl fcn_00415310(int);
 void __cdecl fcn_004154e0(int);
@@ -99,7 +99,7 @@ void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 	int player;
 	Col col;
 
-	fcn_00500d60((int*) now, buf);
+	gm_PackGameTime((int*) now, buf);
 	mode = fcn_0052a310((int*) now);
 	g_7e43a0 = ((int*) ((char*) g_868060 + 0x108))[g_773d75 * 189 + mode];
 	g_7e43a4 = ((int*) ((char*) g_868060 + 0x118))[g_773d75 * 189 + mode];
@@ -198,7 +198,7 @@ void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 	for (i = 0; i < 64; i++) {
 		if (((Slot_52a3a0*) g_1043340)[i].f2c != 0) {
 			d3_SelectSceneContext(i, 1);
-			fcn_0052a7d0();
+			d3_ApplySceneLightingPreset();
 		}
 	}
 	d3_SelectSceneContext(player, 1);

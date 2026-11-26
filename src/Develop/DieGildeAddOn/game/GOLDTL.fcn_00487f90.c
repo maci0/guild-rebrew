@@ -14,7 +14,7 @@ char* __cdecl fcn_004bcc50(char*, int);
 char* __cdecl fcn_005049a0(unsigned char*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl fcn_00529160(int, int, unsigned int, int);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 
 /* Message layout (0xf8 bytes).  The type byte at +4 selects the payload:
    +8/+0xc entity ids, +0x10 selection counter, +0x28..+0x36 stamp, +0x38
@@ -85,7 +85,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 			*(int*) (m + 0x64) = *(int*) free_rec;
 			*(int*) (m + 0x58) = *(int*) (*(int*) (actionCtx[1] + 0x16c) + 1);
 			*(int*) (m + 0x5c) = *(int*) (r + 0x169);
-			fcn_004c5530(m);
+			cm_SendCopyEntityData(m);
 			actionCtx[8] = actionCtx[8] + 1;
 		}
 		actionCtx[7] = actionCtx[7] + 1;
@@ -135,7 +135,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 			actionCtx[7] = actionCtx[7] + 1;
 			return;
 		}
-		fcn_004c5530(m);
+		cm_SendCopyEntityData(m);
 		actionCtx[7] = actionCtx[7] + 1;
 		return;
 	}
@@ -193,7 +193,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 			actionCtx[7] = actionCtx[7] + 1;
 			return;
 		}
-		fcn_004c5530(m);
+		cm_SendCopyEntityData(m);
 		actionCtx[7] = actionCtx[7] + 1;
 		return;
 	}
@@ -239,7 +239,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 			actionCtx[7] = actionCtx[7] + 1;
 			return;
 		}
-		fcn_004c5530(m);
+		cm_SendCopyEntityData(m);
 		actionCtx[7] = actionCtx[7] + 1;
 		return;
 	}
@@ -290,7 +290,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 			*(int*) (m + 0x6c) = *(int*) (actionCtx[3] + 2);
 			*(int*) (m + 0x68) = *(int*) (actionCtx[4] + 2);
 		}
-		fcn_004c5530(m);
+		cm_SendCopyEntityData(m);
 		actionCtx[7] = actionCtx[7] + 1;
 		return;
 	}

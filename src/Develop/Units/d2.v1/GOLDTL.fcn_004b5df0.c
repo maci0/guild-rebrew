@@ -46,8 +46,8 @@ int __cdecl d2_SetForm(int k, int i);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_004c5790(int, Req*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_RequestSysMessage(int, Req*);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_00471e30(int);
 int* __cdecl fcn_004b3d80(int a, int b, int c);
@@ -109,8 +109,8 @@ void __cdecl fcn_004b5df0(int flags)
 				g_6a3440 = -1;
 				m1.id = ent->entity_id;
 				m1.x10 = 0;
-				h = fcn_004c5790(10, &m1);
-				while (fcn_004c4450(h) == 0) {
+				h = cm_RequestSysMessage(10, &m1);
+				while (cm_GetCommandStatus(h) == 0) {
 					fcn_00535960();
 				}
 				g_774654 = 1;
@@ -119,8 +119,8 @@ void __cdecl fcn_004b5df0(int flags)
 				m2.id = ent->entity_id;
 				cancel = 1;
 				m2.x10 = 1;
-				h = fcn_004c5790(10, &m2);
-				while (fcn_004c4450(h) == 0) {
+				h = cm_RequestSysMessage(10, &m2);
+				while (cm_GetCommandStatus(h) == 0) {
 					fcn_00535960();
 				}
 				g_774654 = 1;
@@ -132,8 +132,8 @@ void __cdecl fcn_004b5df0(int flags)
 		p = fcn_004b3d80(ent->entity_id, level, 1);
 		m2.id = ent->entity_id;
 		m2.x10 = 0;
-		h = fcn_004c5790(10, &m2);
-		while (fcn_004c4450(h) == 0) {
+		h = cm_RequestSysMessage(10, &m2);
+		while (cm_GetCommandStatus(h) == 0) {
 			fcn_00535960();
 		}
 		fcn_004b5530(*p, flags);

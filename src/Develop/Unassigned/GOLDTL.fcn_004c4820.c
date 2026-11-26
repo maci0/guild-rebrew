@@ -5,7 +5,7 @@ extern unsigned int g_aed320;
 extern unsigned char g_aed2a4;
 extern unsigned char g_aed2a5[];
 
-int __cdecl fcn_004c4820(unsigned char kind, int value)
+int __cdecl cm_AppendDesireDelta(unsigned char kind, int value)
 {
 	unsigned char* p;
 

@@ -9,7 +9,7 @@ int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005cd440(int*, char*, int, int);
 int __cdecl fcn_005c6270(void*, int);
 unsigned int __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl fcn_005c6220(int, char*);
 void __cdecl fcn_005dbe90(char*);
@@ -94,9 +94,9 @@ unsigned int __cdecl fcn_005dd5a0(ENTITY_RECORD_VIEW* a0, unsigned int* a1)
 		v5 = (v5 + 0xd) % 0x300;
 	}
 	v6 *= -0x14;
-	fcn_004c54c0(v4->entity_id, v12[0]->entity_id, v6, 1);
-	fcn_004c54c0(v4->entity_id, v12[1]->entity_id, v6, 1);
-	fcn_004c54c0(v4->entity_id, v12[2]->entity_id, v6, 1);
+	cm_RequestCopyEntityData(v4->entity_id, v12[0]->entity_id, v6, 1);
+	cm_RequestCopyEntityData(v4->entity_id, v12[1]->entity_id, v6, 1);
+	cm_RequestCopyEntityData(v4->entity_id, v12[2]->entity_id, v6, 1);
 	if (v4->entity_type == 6 || v4->entity_type == 7) {
 		io_FormatTextBuffer(messageText, 0xfec, v12[0]->entity_index,
 		                    v12[1]->entity_index, v12[2]->entity_index);

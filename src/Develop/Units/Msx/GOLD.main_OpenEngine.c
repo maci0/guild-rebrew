@@ -61,7 +61,7 @@ void __cdecl fcn_0042b720(void);
 int __cdecl fcn_00425bc0(int, int, int, int, int);
 void __cdecl fcn_00417650(int);
 void __cdecl fcn_00417ec0(int);
-void __cdecl fcn_004226b0(char*);
+void __cdecl sb_SetSampleBasePath(char*);
 int __cdecl fcn_00426950(char*, int);
 void __cdecl main_PreloadSound(char*);
 void __cdecl fcn_00423830(int, int, int);
@@ -138,7 +138,7 @@ int __cdecl main_OpenEngine(void)
 		fcn_00417650(0x40);
 		fcn_00417ec0(0x30);
 		sprintf(path, "%ssfx\\", g_624698);
-		fcn_004226b0(path);
+		sb_SetSampleBasePath(path);
 		g_6f2400 = fcn_00426950("system.sbf", 0);
 		sprintf(ini, "%s\\include_sfx.ini", g_75e240);
 		main_PreloadSound(ini);

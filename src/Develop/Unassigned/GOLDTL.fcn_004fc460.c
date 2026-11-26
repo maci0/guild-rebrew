@@ -10,7 +10,7 @@ extern char g_99f5e0[];
 
 #pragma intrinsic(memcpy, memset)
 
-float __cdecl fcn_004fc460(char* p)
+float __cdecl gm_GetCityStatsSummary(char* p)
 {
 	float v;
 

@@ -17,7 +17,7 @@ typedef struct Ent {
 extern char g_7f4ca0[];
 
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 char* __cdecl fcn_005c6220(int, int*);
@@ -68,9 +68,9 @@ int __cdecl gm_ObjBefriendThreeRivals(Ent* ent, int* arg)
 		m--;
 		r = (r + 13) % 0x300;
 	}
-	fcn_004c54c0(ent->handle, picks[0]->handle, 0x14, 1);
-	fcn_004c54c0(ent->handle, picks[1]->handle, 0x14, 1);
-	fcn_004c54c0(ent->handle, picks[2]->handle, 0x14, 1);
+	cm_RequestCopyEntityData(ent->handle, picks[0]->handle, 0x14, 1);
+	cm_RequestCopyEntityData(ent->handle, picks[1]->handle, 0x14, 1);
+	cm_RequestCopyEntityData(ent->handle, picks[2]->handle, 0x14, 1);
 	io_FormatTextBuffer(text, 0xfef, ent->id);
 	for (i = 0; i < 3; i++) {
 		if (picks[i]->kind == 6 || picks[i]->kind == 7) {

@@ -26,12 +26,12 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_004c58b0(int, int);
+void __cdecl cm_RequestLinkEvidence(int, int);
 void __cdecl fcn_005782f0(ENTITY_RECORD*, int);
 int __cdecl io_AppendText();
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c30a0(int, int, char*, int, int);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl d3snd_QueueSound(int, int, char*, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl evt_RequestScriptExit(char*);
@@ -67,19 +67,19 @@ void __cdecl d2_RunSeanceDialog(char* e, char* res)
 	t = d3snd_SelectVoiceCode(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	if (b == 0) {
 		for (i = 0; i < cnt; i++) {
-			fcn_004c58b0(list[i], ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
+			cm_RequestLinkEvidence(list[i], ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
 		}
 		fcn_005782f0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1);
 		io_AppendText(0x40ef, 0x40cc, *p);
-		fcn_004c30a0(t, 0, "GEIST_KOMMT", gm_RandomMod(8), 0xfa);
+		d3snd_QueueSound(t, 0, "GEIST_KOMMT", gm_RandomMod(8), 0xfa);
 	} else if (b == 1) {
 		v = (gm_RandomMod(0x200) + 0x200) << 5;
-		fcn_004c5150(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1, g_773d75, v);
+		cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1, g_773d75, v);
 		io_AppendText(0x40f0, 0x40cc, v);
-		fcn_004c30a0(t, 0, "GEIST_KOMMT", gm_RandomMod(8), 0xfa);
+		d3snd_QueueSound(t, 0, "GEIST_KOMMT", gm_RandomMod(8), 0xfa);
 	} else {
 		io_AppendText(0x40d3, 0x40cc);
-		fcn_004c30a0(t, 0, "GEIST_KOMMT_NICHT", gm_RandomMod(8), 0xfa);
+		d3snd_QueueSound(t, 0, "GEIST_KOMMT_NICHT", gm_RandomMod(8), 0xfa);
 	}
 	do {
 		if (g_14ce8e0 != 0) {

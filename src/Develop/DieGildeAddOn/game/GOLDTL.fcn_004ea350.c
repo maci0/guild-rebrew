@@ -6,10 +6,10 @@ extern char g_7f4ca0[];
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl amt_VacateOfficeSlot(unsigned char);
 int __cdecl amt_SendOfficeCommand(unsigned char, char*, char*, int, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_00535960(void);
 
 /* ADDRESS: GOLDTL 0x004ea350 */
@@ -39,12 +39,12 @@ void __cdecl fcn_004ea350(void)
 				v = 0;
 				cm_BeginPacketFieldDelta(e, n);
 				cm_AppendPacketFieldDelta(1, 1, 0x166, &v);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 		}
 		if (res != -1) {
 			while (1) {
-				if (fcn_004c4450(res) != 0) {
+				if (cm_GetCommandStatus(res) != 0) {
 					break;
 				}
 				fcn_00535960();
@@ -56,7 +56,7 @@ void __cdecl fcn_004ea350(void)
 			int v = 0;
 			cm_BeginPacketFieldDelta(p - 0x168, *(int*) (p - 0x164));
 			cm_AppendPacketFieldDelta(1, 1, 0x168, &v);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		}
 	}
 }

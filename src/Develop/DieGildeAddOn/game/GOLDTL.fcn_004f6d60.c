@@ -9,13 +9,13 @@ extern int d3_CurrentContextIndex;
 extern int __cdecl gm_WalkEntityChain(int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
-extern void __cdecl fcn_004c5420(int, int, int, int, int);
+extern void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 extern void __cdecl io_FormatTextBuffer(char*, char*, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 extern void __cdecl cm_BeginPacketFieldDelta(char*, int);
 extern void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, short, void*);
-extern void __cdecl fcn_004c5360(void);
-extern void __cdecl fcn_004c5530(void*);
+extern void __cdecl cm_RequestChangeAttribute(void);
+extern void __cdecl cm_SendCopyEntityData(void*);
 extern unsigned short __cdecl gm_RandomMod(int);
 extern void __cdecl gm_AddTime(void*, int, int, int);
 extern char s_6903e8[];
@@ -67,7 +67,7 @@ void __cdecl fcn_004f6d60(unsigned int entityIndex)
 		if (alloc == 0) {
 			return;
 		}
-		fcn_004c5420(*(int*) (slot + 4), 0x1c8, 4, 0x4000, 0);
+		cm_RequestChangeBits(*(int*) (slot + 4), 0x1c8, 4, 0x4000, 0);
 		if (*(char*) (slot + 2) == 6 || *(char*) (slot + 2) == 7) {
 			io_FormatTextBuffer(text, (char*) 0x161d, *(unsigned short*) slot);
 			he_MessageBoxQuickjump(*(int*) (slot + 4), -1, text, 0, 0x5fd,
@@ -81,7 +81,7 @@ void __cdecl fcn_004f6d60(unsigned int entityIndex)
 		if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
 			cm_BeginPacketFieldDelta(slot, *(int*) (slot + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, ((unsigned char*)&entityIndex + 3));
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		} else {
 			{
 			char* fill_dst;
@@ -118,7 +118,7 @@ void __cdecl fcn_004f6d60(unsigned int entityIndex)
 			*(int*) (msg + 0x2e) = 0;
 			*(char*) (msg + 0x58) = *((unsigned char*)&entityIndex + 3);
 			*(int*) (msg + 0x5c) = *(int*) (slot + 4);
-			fcn_004c5530(msg);
+			cm_SendCopyEntityData(msg);
 		}
 		if (*(char*) (slot + 2) != 5 && *(char*) (slot + 2) != 6
 		    && *(char*) (slot + 2) != 7) {
@@ -170,7 +170,7 @@ void __cdecl fcn_004f6d60(unsigned int entityIndex)
 				}
 				*(char*) (msg + 0x58) = *((unsigned char*)&entityIndex + 3);
 				*(int*) (msg + 0x5c) = *(int*) (slot + 4);
-				fcn_004c5530(msg);
+				cm_SendCopyEntityData(msg);
 				v++;
 			}
 			other += sizeof(ENTITY_RECORD);

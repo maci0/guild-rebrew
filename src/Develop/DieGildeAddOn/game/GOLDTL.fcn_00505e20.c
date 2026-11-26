@@ -58,17 +58,17 @@ extern pos14_7f4c00 gm_GameTime;
 
 Estate* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 Unit* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c4eb0(char*);
+void __cdecl cm_SendLogAction(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_004c51a0(int, int, char, int);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c5f60(int, int, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_SendSetGebBesitzer(int, int, int);
 void __cdecl fcn_004c6000(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, Order*);
-void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c4ef0(char*);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_SendTraceEnd(char*);
 
 void __cdecl gm_BuyBuilding(int search, int buyer, int price, Order* o, int notify)
 {
@@ -80,18 +80,18 @@ void __cdecl gm_BuyBuilding(int search, int buyer, int price, Order* o, int noti
 	s = gm_StartFilteredEntitySearch(1, 1, search);
 	u = gm_LookupEntityRecordById(buyer);
 	office = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[s->office];
-	fcn_004c4eb0("buy_building");
+	cm_SendLogAction("buy_building");
 	if (s->slot != 0xffff) {
 		io_FormatTextBuffer(msg, 0x17e6, s, u->slot, price);
 		he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[s->slot].entity_id, -1, msg, 0, 0x5ff, s->id, -1, 0, "_NACHRICHTEN_HS_30");
-		fcn_004c51a0(((ENTITY_RECORD*)g_7f4ca0)[s->slot].entity_id, buyer, (*(char*)&g_773d75), price);
-		fcn_004c5f60(s->id, u->id, u->id);
+		cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD*)g_7f4ca0)[s->slot].entity_id, buyer, (*(char*)&g_773d75), price);
+		cm_SendSetGebBesitzer(s->id, u->id, u->id);
 		if (notify != 0 && office->category == 2) {
 			fcn_004c6000(u->id, s->id);
 		}
 	} else {
-		fcn_004c5150(-1, buyer, (*(char*)&g_773d75), price);
-		fcn_004c5f60(s->id, u->id, u->id);
+		cm_RequestMoveCredits(-1, buyer, (*(char*)&g_773d75), price);
+		cm_SendSetGebBesitzer(s->id, u->id, u->id);
 		if (notify != 0 && office->category == 2) {
 			fcn_004c6000(u->id, s->id);
 		}
@@ -101,6 +101,6 @@ void __cdecl gm_BuyBuilding(int search, int buyer, int price, Order* o, int noti
 		gm_AddTime(&o->stamp, 0, 0, 1);
 		o->event = fcn_004c5620(-1, o);
 	}
-	fcn_004c5420(s->id, 0x5a, 2, 0, 2);
-	fcn_004c4ef0("buy_building");
+	cm_RequestChangeBits(s->id, 0x5a, 2, 0, 2);
+	cm_SendTraceEnd("buy_building");
 }

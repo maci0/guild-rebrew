@@ -13,11 +13,11 @@ int __cdecl fcn_00545670(char*, short, short, char*, int);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
-int* __cdecl fcn_004c30a0(int, int, char*, int, int);
+int* __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00500cb0(void*, void*);
+int __cdecl gm_CompareGameTime(void*, void*);
 
 /* ADDRESS: GOLDTL 0x0055b020 */
 void __cdecl d2_ShowTitleAward(char* o)
@@ -37,7 +37,7 @@ void __cdecl d2_ShowTitleAward(char* o)
 		return;
 	if (g_774964 == 0)
 		return;
-	if (fcn_00500cb0(o + 0x52, (void*) 0x7f4c00) == 1)
+	if (gm_CompareGameTime(o + 0x52, (void*) 0x7f4c00) == 1)
 		return;
 	g = gm_LookupEntityRecordById(*(int*) (o + 0xbc));
 	state = *(int*) (o + 0x70);
@@ -106,8 +106,8 @@ void __cdecl d2_ShowTitleAward(char* o)
 		}
 		if (*(char*) (g + 9) == 1)
 			code += 1;
-		fcn_004c30a0(-7, 0, "FanfarePositivHeldenhaftLang", 0, 100);
-		fcn_004c30a0(-7, 0, buf, 0, 100);
+		d3snd_QueueSound(-7, 0, "FanfarePositivHeldenhaftLang", 0, 100);
+		d3snd_QueueSound(-7, 0, buf, 0, 100);
 		if (*(int*) (o + 0xc0) == 0x25) {
 			kind = 0x42ab;
 			if (*(char*) (g + 9) == 1)
@@ -127,8 +127,8 @@ void __cdecl d2_ShowTitleAward(char* o)
 			else
 				strcpy(buf, "_VERLEIHUNG_REICHSAMT_MAENNLICH_HS_01");
 		}
-		fcn_004c30a0(-7, 0, buf, 0, 100);
-		fcn_004c30a0(-7, 0, "MausclickLinks_s_01", -1, 0);
+		d3snd_QueueSound(-7, 0, buf, 0, 100);
+		d3snd_QueueSound(-7, 0, "MausclickLinks_s_01", -1, 0);
 		if (*(char*) (g + 9) == 0)
 			end = 0x253;
 		else

@@ -6,7 +6,7 @@
 extern int g_6b719c;
 extern char g_6b6f90[];
 int __cdecl fcn_0042b2e0(void);
-int __cdecl fcn_0042abd0(int* lib, char* path, int* out);
+int __cdecl msx_OpenStream(int* lib, char* path, int* out);
 int __cdecl fcn_0042b080(int h, int* len);
 int __cdecl fcn_0042ae10(int h, int v);
 int __cdecl msx_StartStream(int h);
@@ -75,10 +75,10 @@ int __cdecl msx_StartTrackInternal(Chan_14cc460* c, int restart)
 		strcat(path, c->name);
 		if (c->handle == 0) {
 			if (c->bAmbient != 0) {
-				err = fcn_0042abd0(((int*)msx_AmbientDriver), path, &c->handle);
+				err = msx_OpenStream(((int*)msx_AmbientDriver), path, &c->handle);
 			}
 			else {
-				err = fcn_0042abd0(((int*)msx_TrackDriver), path, &c->handle) == -1;
+				err = msx_OpenStream(((int*)msx_TrackDriver), path, &c->handle) == -1;
 			}
 			if (err != 0) {
 				LeaveCriticalSection(&msx_TrackLock);

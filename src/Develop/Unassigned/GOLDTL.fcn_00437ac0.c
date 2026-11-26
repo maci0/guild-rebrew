@@ -1,7 +1,7 @@
 extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char __cdecl fcn_004378c0(int, unsigned int);
+char __cdecl d3_MatchObjectTypeMask(int, unsigned int);
 
 
 /* Walks a scene subtree and calls cb for every node whose type matches the
@@ -16,7 +16,7 @@ char __cdecl d3_TraverseSceneObjects(char* scene, char* node, unsigned int flags
 	}
 	if (node != 0) {
 		do {
-			if (fcn_004378c0(*(int*) (node + 0x218), flags)) {
+			if (d3_MatchObjectTypeMask(*(int*) (node + 0x218), flags)) {
 				cb(node);
 			}
 			if (*(char**) (node + 0x200) != 0) {

@@ -3,11 +3,11 @@ extern char g_7f4ca4[];
 
 
 
-int __cdecl fcn_004c5790(int, void*);
+int __cdecl cm_RequestSysMessage(int, void*);
 
-void __cdecl fcn_004c3f90(void)
+void __cdecl cm_SendQuitGameCommand(void)
 {
 	char buf[0x7c];
 	*(int*) buf = *(int*) (g_7f4ca4 + (unsigned int) (unsigned short) *(unsigned short*) ((char*)&g_774970) * 135 * 4);
-	fcn_004c5790(0x13, &buf);
+	cm_RequestSysMessage(0x13, &buf);
 }

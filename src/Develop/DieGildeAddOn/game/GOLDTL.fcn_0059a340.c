@@ -37,7 +37,7 @@ extern int g_7e2700;
 extern int g_7e2704;
 extern int g_7e2708;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-int __cdecl fcn_00500e20(char*);
+int __cdecl gm_GetSeason(char*);
 void __cdecl fcn_00516f60(void);
 void __cdecl fcn_0043c2c0(int* a0);
 void __cdecl d2_ChooseWappen(void);
@@ -45,7 +45,7 @@ void* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_0052cf20(int a0);
 void __cdecl fcn_004c39b0(void);
-void __cdecl fcn_0042df30(int a1, int a2);
+void __cdecl tb_SetCallbackPaused(int a1, int a2);
 int __cdecl main_RunFrameLoop(int a1, int a2);
 void __cdecl lc_PlayerInJail(void);
 void __cdecl fcn_0052c9b0(void);
@@ -87,7 +87,7 @@ void __cdecl fcn_0059a340(void)
 	char* v12;
 	char c;
 
-	v7 = fcn_00500e20((char*) &gm_GameTime);
+	v7 = gm_GetSeason((char*) &gm_GameTime);
 	g_677508 = -1;
 	fcn_00516f60();
 	if (g_773ddc) {
@@ -128,7 +128,7 @@ void __cdecl fcn_0059a340(void)
 	}
 	fcn_004c39b0();
 	state = 0;
-	fcn_0042df30(0x538060, 0);
+	tb_SetCallbackPaused(0x538060, 0);
 	v9 = main_RunFrameLoop(0x59a340, 0x67fff);
 	while (v9) {
 		g_774658 = g_774650;

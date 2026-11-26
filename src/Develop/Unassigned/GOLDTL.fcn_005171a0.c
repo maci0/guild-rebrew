@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int __cdecl fcn_005171a0(char* s, int* out, int max)
+int __cdecl io_ParseCsvIntList(char* s, int* out, int max)
 {
 	char buf[256];
 	int done;

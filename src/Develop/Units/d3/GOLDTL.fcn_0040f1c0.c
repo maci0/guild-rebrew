@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "Develop/Units/d3/d3_animation.h"
 
-char* __cdecl fcn_00401040(char* path);
+char* __cdecl StripPathAndExt(char* path);
 
 /* ADDRESS: GOLDTL 0x0040f1c0 */
 char __cdecl d3_AttachMatchingAnimation(char* a0, char* a1)
@@ -32,7 +32,7 @@ char __cdecl d3_AttachMatchingAnimation(char* a0, char* a1)
 		name[i] = copied;
 		i++;
 	} while (copied != 0);
-	short_name = fcn_00401040(name);
+	short_name = StripPathAndExt(name);
 	if (short_name != 0) {
 		strcpy(resolved, short_name);
 	}

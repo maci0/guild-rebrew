@@ -5,7 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl he_fn_Handlung(void);
@@ -37,14 +37,14 @@ void __cdecl fcn_0054c800(char* e)
 
 		cm_BeginPacketFieldDelta(a, *(int*) (a + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x5c, &v);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 	}
 	if (*(int*) (b + 0x5c) != -1) {
 		int v = -1;
 
 		cm_BeginPacketFieldDelta(b, *(int*) (b + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x5c, &v);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 	}
 	f = he_StartHandlungSearch(1, 0, 0x41);
 	for (; f != 0; f = he_fn_Handlung()) {

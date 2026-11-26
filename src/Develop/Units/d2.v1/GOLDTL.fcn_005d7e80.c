@@ -21,7 +21,7 @@ extern int g_100f1dc;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c6ae0(int, int);
-int __cdecl fcn_004c5420(int, int, int, int, int);
+int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00526120(char*, int);
@@ -33,7 +33,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(unsigned char*, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -63,7 +63,7 @@ int __cdecl fcn_005d7e80(unsigned char* e, unsigned char* a2)
 		}
 		fcn_004c6ae0(*(int*) (e + 4), -2);
 		fcn_004c6ae0(*(int*) (o + 4), -3);
-		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x8000, 0);
+		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x8000, 0);
 		if (o[2] == 6 || o[2] == 7) {
 			io_FormatTextBuffer(text, 0x1dda, *(unsigned short*) e, 3);
 			fcn_00545d40(*(int*) (o + 4), *(int*) (o + 4), text, 0, 0x5fb, s_6a59fc);
@@ -99,8 +99,8 @@ int __cdecl fcn_005d7e80(unsigned char* e, unsigned char* a2)
 				if (d2_CheckActionBlocker(e, 2)) {
 					fcn_004c6ae0(*(int*) (e + 4), -2);
 					fcn_004c6ae0(*(int*) (o + 4), -3);
-					h = fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x8000, 0);
-					while (fcn_004c4450(h) == 0) {
+					h = cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x8000, 0);
+					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
 					io_FormatTextBuffer(text, 0x1dd9, *(unsigned short*) o, *(unsigned short*) o, 3,

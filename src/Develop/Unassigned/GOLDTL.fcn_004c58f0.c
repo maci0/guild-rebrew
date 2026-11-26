@@ -1,22 +1,22 @@
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
 typedef struct
 {
 	int a;
 	int b;
 	int c;
-} Triple;
+} EVIDENCE_CLEAR_ARGS;
 // SIZE 0xc
 
-void __cdecl fcn_004c58f0(int a1, int a2, int a3)
+void __cdecl cm_RequestClearEvidenceLink(int key, int owner, int unused)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x25;
-	*(int*) (buf + 0x14) = a2;
-	*(int*) (buf + 0x10) = a1;
-	*(int*) (buf + 0x18) = a3;
-	fcn_004c4330(buf);
+	*(int*) (buf + 0x14) = owner;
+	*(int*) (buf + 0x10) = key;
+	*(int*) (buf + 0x18) = unused;
+	cm_EnqueueClientPacket(buf);
 }

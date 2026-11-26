@@ -67,11 +67,11 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_004c5530(Packet*);
+int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl fcn_00532ef0(void);
 void __cdecl sv_ClearObjectSelection(void);
 
@@ -141,7 +141,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 						}
 						pkt.x5c = ((Player*)g_7f4ca0)[i].x4;
 						pkt.x58 = (char) a2;
-						fcn_004c5530(&pkt);
+						cm_SendCopyEntityData(&pkt);
 						n++;
 					}
 				}
@@ -163,7 +163,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 		}
 	} while (main_RunFrameLoop((void*) fcn_005c6ea0, 0x677c7) != 0);
 	fcn_00471e30(dlg);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	fcn_00532ef0();
 	sv_ClearObjectSelection();
 }

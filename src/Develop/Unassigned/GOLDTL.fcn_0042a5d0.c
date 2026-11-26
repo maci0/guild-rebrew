@@ -8,13 +8,13 @@ extern int g_6b7f90;
 
 int __cdecl msx_FindSampleHandleIndex(int);
 
-int __cdecl msx_SetSampleData(int a1, int a2, int a3, int a4)
+int __cdecl msx_SetSampleData(int sampleHandle, int fileExt, int data, int size)
 {
 	int r = 0;
 
 	if (g_6b7f90 != 0) {
-		if (msx_FindSampleHandleIndex(a1) >= 0) {
-			if (g_662398(a1, a2, a3, a4, 0) == 0) {
+		if (msx_FindSampleHandleIndex(sampleHandle) >= 0) {
+			if (g_662398(sampleHandle, fileExt, data, size, 0) == 0) {
 				r = -1;
 			}
 		} else {

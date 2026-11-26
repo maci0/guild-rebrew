@@ -36,7 +36,7 @@ Obj* __cdecl he_fn_Handlung(void);
 int __cdecl gm_CheckEntityType(char*);
 unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_004c51a0(int, int, unsigned char, int);
+int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
@@ -85,7 +85,7 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 	}
 	f = ((gm_RandomMod(2) & 0xffff) + 1.0f) * 0.01f;
 	amount = (int)(gm_WalkEntityChain(e->id) * f);
-	fcn_004c51a0(-1, cmd->handle, g_773d75, amount);
+	cm_RequestTransferCurrencyNoKill(-1, cmd->handle, g_773d75, amount);
 	k = gm_RandomMod(n) & 0xffff;
 	o = objs[k];
 	house = houses[k];

@@ -13,10 +13,10 @@ typedef struct {
 
 int __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_004e9580(int id, TierInfo* out);
-void __cdecl fcn_004c51a0(int a1, int a2, char a3, int a4);
+void __cdecl cm_RequestTransferCurrencyNoKill(int a1, int a2, char a3, int a4);
 void __cdecl cm_BeginPacketFieldDelta(char* a1, int a2);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl amt_ApplyForOffice(char* a0, int a1);
 
 /* ADDRESS: GOLDTL 0x004e97f0 */
@@ -35,14 +35,14 @@ int __cdecl fcn_004e97f0(unsigned char* a0, int a1)
 		return 0;
 	}
 	lo = info.min_cost;
-	fcn_004c51a0(*(int*) (a0 + 4), -1, g_773d75,
+	cm_RequestTransferCurrencyNoKill(*(int*) (a0 + 4), -1, g_773d75,
 	    (unsigned short) gm_RandomMod((unsigned short) (info.max_cost - lo + 1)) + lo);
 	rnd = (unsigned short) gm_RandomMod((unsigned short) (info.b - info.a + 1)) + info.a;
 	cm_BeginPacketFieldDelta(a0, *(int*) (a0 + 4));
 	cm_AppendPacketFieldDelta(1, 1, 0xd, (char*) &rnd);
 	cm_AppendPacketFieldDelta(1, 1, 2, (char*) &mode);
 	cm_AppendPacketFieldDelta(1, 1, 0x167, (char*) &a1);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	amt_ApplyForOffice(a0, a1);
 	return 1;
 }

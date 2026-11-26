@@ -18,10 +18,10 @@ int __cdecl gm_SumSlotTreasury(int);
 int __cdecl fcn_0050b710(int, char);
 int __cdecl fcn_0050b750(int, char);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_004c4eb0(void*);
-void __cdecl fcn_004c4ef0(void*);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendLogAction(void*);
+void __cdecl cm_SendTraceEnd(void*);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_SendCopyEntityData(void*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
 
@@ -86,12 +86,12 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 			h = *(unsigned char*) &g_773d75;
 			*(int*) (msg.pkt + 0x78) = fcn_0050b750(
 			    d2_GetControlValue(ctl1), h);
-			fcn_004c4eb0((void*) 0x6ab168);
-			fcn_004c5150(*(int*) (obj + 4),
+			cm_SendLogAction((void*) 0x6ab168);
+			cm_RequestMoveCredits(*(int*) (obj + 4),
 			             *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c),
 			             *(char*) &g_773d75, *(int*) (msg.pkt + 0x78));
-			fcn_004c5530(msg.pkt + 0x18);
-			fcn_004c4ef0((void*) 0x6ab168);
+			cm_SendCopyEntityData(msg.pkt + 0x18);
+			cm_SendTraceEnd((void*) 0x6ab168);
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) 0x5ad000, 0x677c7) != 0);

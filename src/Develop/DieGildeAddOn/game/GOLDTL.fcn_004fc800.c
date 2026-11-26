@@ -32,7 +32,7 @@ extern int g_99f768;
 void __cdecl fcn_004f4830(int kind, Offer* o);
 char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
-void __cdecl fcn_004c51a0(int a, int b, char c, int d);
+void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, char c, int d);
 int __cdecl gm_AccumulateTyped2(Obj* o);
 
 int __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, Slots* s, unsigned char flags)
@@ -71,7 +71,7 @@ int __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, Slots* s, unsigned char fla
 			p = gm_GetGuildHall(1);
 			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 			if (gm_AccumulateTyped2(&((Obj*)g_7f4ca0)[id]) >= v) {
-				fcn_004c51a0(*(int*) (p + 2), ((Obj*)g_7f4ca0)[id].owner, (*(char*)&g_773d75), v);
+				cm_RequestTransferCurrencyNoKill(*(int*) (p + 2), ((Obj*)g_7f4ca0)[id].owner, (*(char*)&g_773d75), v);
 			}
 		}
 		if (flags & 2) {

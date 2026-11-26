@@ -60,11 +60,11 @@ void __cdecl fcn_00471e30(int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl fcn_005898f0(void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
-void __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float,
                         int*);
-int __cdecl fcn_004c5530(struct msg*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendCopyEntityData(struct msg*);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl fcn_00532ef0(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -134,7 +134,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 );
 					if (p)
 						*(int*) (p + 0x28) += amt;
-					fcn_004c51a0(
+					cm_RequestTransferCurrencyNoKill(
 					    -1,
 					    ((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id
 
@@ -161,8 +161,8 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 ,
 					    0, 0x7b4c4a0, 0, 0.0f, 100.0f, &act.count);
 					m.f58 = act.count;
-					i = fcn_004c5530(&m);
-					while (i != -1 && !fcn_004c4450(i)) {
+					i = cm_SendCopyEntityData(&m);
+					while (i != -1 && !cm_GetCommandStatus(i)) {
 						main_RunFrameLoop(0, 0x20007);
 					}
 					d3snd_PlaySoundEffect(-7, 0, (char*) 0x6a9508, 0);

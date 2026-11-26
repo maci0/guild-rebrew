@@ -22,7 +22,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 
 void __cdecl gm_RolloverBuilding0x16Stats(void)
 {
@@ -57,7 +57,7 @@ void __cdecl gm_RolloverBuilding0x16Stats(void)
 			cm_AppendPacketFieldDelta(4, 1, e - g_aed32c + 0x65, &zero4);
 			cm_AppendPacketFieldDelta(2, 1, e - g_aed32c + 0x6b, &zero2);
 			cm_AppendPacketFieldDelta(2, 1, e - g_aed32c + 0x69, &zero2);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		}
 		e = gm_FindNextFilteredEntity();
 	}

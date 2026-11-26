@@ -9,7 +9,7 @@ extern float g_99f668[8];
 extern float g_662cf8;
 
 float __cdecl fcn_00505e30(int);
-int __cdecl fcn_004fffb0(int);
+int __cdecl gm_CheckEntityAgeLimit(int);
 float __cdecl fcn_004fef80(void*);
 float __cdecl fcn_004feff0(void*);
 
@@ -34,7 +34,7 @@ void __cdecl fcn_00500a40(void)
 			*(int*) &g_99f620[0] += 1;
 			idx = (int) MAX(MIN(fcn_00505e30(i) * 0.1f, 7.0f), 0.0f);
 			g_99f624[idx] += 1;
-			if (fcn_004fffb0(i) != 0)
+			if (gm_CheckEntityAgeLimit(i) != 0)
 				g_99f644 += 1.0f;
 			g_99f648[idx] += fcn_004fef80(p);
 			g_99f668[idx] += fcn_004feff0(p);

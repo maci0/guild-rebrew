@@ -19,9 +19,9 @@ int __cdecl gm_ResolveEntityById(void**, void**, int, int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c51f0(int, int, int, int, char, int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
+void __cdecl cm_SendCopyEntityData(void*);
 int __cdecl sprintf(char*, char*, ...);
 
 /* Master AI: counts the transports the master already runs, then reports a
@@ -106,7 +106,7 @@ void __cdecl ai_MeisterCollectTrans(char* e)
 						*(int*) (pkt + 0x5c) = *(int*) ((char*) found + 1);
 						*(int*) (pkt + 0x60) = *(int*) (*(char**) (e + 0x16c) + 1);
 						*(int*) (pkt + 0xa0) = -1;
-						fcn_004c5530(pkt);
+						cm_SendCopyEntityData(pkt);
 						sprintf(buf, (char*) 0x67e438, (char*) found + 5, *(char**) (e + 0x16c) + 5);
 					}
 				}
@@ -120,10 +120,10 @@ next:
 		if (row->category == 9) {
 			if (count - n136 == 0) {
 				t = (int) eval_ObjektPreis2Credits(0x134, 100);
-				fcn_004c5150(-1, *(int*) (g_7f4ca4 +
+				cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 +
 				                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
 				             (char) g_773d75, t);
-				fcn_004c51f0(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x134, 1, (char) g_773d75, 0);
+				cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x134, 1, (char) g_773d75, 0);
 				sprintf(buf, (char*) 0x67e3fc, *(char**) (e + 0x16c) + 5);
 				return;
 			}
@@ -142,10 +142,10 @@ next:
 					return;
 				}
 				t = (int) eval_ObjektPreis2Credits(0x136, 100);
-				fcn_004c5150(-1, *(int*) (g_7f4ca4 +
+				cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 +
 				                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
 				             (char) g_773d75, t);
-				fcn_004c51f0(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x136, 1, (char) g_773d75, 0);
+				cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x136, 1, (char) g_773d75, 0);
 				sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
 				        g_7f4c06, *(char**) (e + 0x16c) + 5);
 				*(int*) (e + 0x1c8) |= 8;
@@ -166,10 +166,10 @@ next:
 					return;
 				}
 				t = (int) eval_ObjektPreis2Credits(id, 100);
-				fcn_004c5150(-1, *(int*) (g_7f4ca4 +
+				cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 +
 				                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
 				             (char) g_773d75, t);
-				fcn_004c51f0(*(int*) (*(char**) (e + 0x16c) + 1), -1, id, 1, (char) g_773d75, 0);
+				cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, id, 1, (char) g_773d75, 0);
 				sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
 				        g_7f4c06, *(char**) (e + 0x16c) + 5);
 				*(int*) (e + 0x1c8) |= 8;
@@ -184,10 +184,10 @@ next:
 				}
 			}
 			t = (int) eval_ObjektPreis2Credits(0x134, 100);
-			fcn_004c5150(-1, *(int*) (g_7f4ca4 +
+			cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 +
 			                         *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
 			             (char) g_773d75, t);
-			fcn_004c51f0(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x134, 1, (char) g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x134, 1, (char) g_773d75, 0);
 			sprintf(buf, (char*) 0x67e3fc, *(char**) (e + 0x16c) + 5);
 			return;
 		}
@@ -211,9 +211,9 @@ next:
 			return;
 		}
 		t = (int) eval_ObjektPreis2Credits(0x135, 100);
-		fcn_004c5150(-1, *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
+		cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
 		             (char) g_773d75, t);
-		fcn_004c51f0(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x135, 1, (char) g_773d75, 0);
+		cm_SendSellObjekt(*(int*) (*(char**) (e + 0x16c) + 1), -1, 0x135, 1, (char) g_773d75, 0);
 		sprintf(buf, (char*) 0x67e3a8, *(unsigned short*) &g_7f4c04,
 		        g_7f4c06, *(char**) (e + 0x16c) + 5);
 		*(int*) (e + 0x1c8) |= 8;

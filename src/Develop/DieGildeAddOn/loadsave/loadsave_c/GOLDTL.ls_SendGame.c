@@ -15,7 +15,7 @@ char* __cdecl m_alloc(int, char*);
 #include "Develop/Units/vfs/vfs.h"
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
 void __cdecl m_FreeTracked(char*);
-void __cdecl fcn_004c4e40(int);
+void __cdecl cm_RequestSendGameHeader(int);
 int __cdecl cm_SendLoadChunk(char*);
 void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_00535960(void);
@@ -49,7 +49,7 @@ int __cdecl ls_SendGame(char* path)
 		CloseVfsStream(h);
 		return 0;
 	}
-	fcn_004c4e40(total);
+	cm_RequestSendGameHeader(total);
 	p = buf;
 	sent = 0;
 	while (sent < total) {

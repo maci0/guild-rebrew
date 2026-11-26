@@ -6,7 +6,7 @@ extern int g_774654;
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 extern unsigned char g_773d75;
-int __cdecl fcn_004fd9d0(int, int);
+int __cdecl gm_FindOrAllocHeadSet(int, int);
 void * __cdecl fcn_004ee060(int);
 int __cdecl fcn_004ee0b0(void *);
 void * __cdecl fcn_00470820(int, int, void *);
@@ -58,7 +58,7 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 
 	memset(rec, 0, sizeof(rec));
 	count = 0;
-	pt[0] = (unsigned int)fcn_004fd9d0(0, 0x52);
+	pt[0] = (unsigned int)gm_FindOrAllocHeadSet(0, 0x52);
 	for (i = 0; i < 3; i++) {
 		r = fcn_004ee060(i);
 		if (*(int *)r != 0) {

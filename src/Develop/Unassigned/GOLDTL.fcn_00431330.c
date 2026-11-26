@@ -1,4 +1,4 @@
-struct frame_431330 {
+struct AnimFrame {
 	char pad0[4];
 	int len;
 	char pad8[0x18];
@@ -9,10 +9,10 @@ struct frame_431330 {
 
 void __cdecl fcn_00438b40(char* node, float* v);
 
-#define FRAMES_431330(an) (*(struct frame_431330**) (*(char**) ((an) + 0x68) + 0x15c))
+#define FRAMES_431330(an) (*(struct AnimFrame**) (*(char**) ((an) + 0x68) + 0x15c))
 
 /* ADDRESS: GOLDTL 0x00431330 */
-void __cdecl fcn_00431330(char* node, char* an, int t, int key, int flags)
+void __cdecl d3_AccumulateAnimDelta(char* node, char* an, int t, int key, int flags)
 {
 	int cur;
 	int curt;

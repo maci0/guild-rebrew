@@ -14,8 +14,8 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 #include "d2_gui.h"
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_004c4450(int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+int __cdecl cm_GetCommandStatus(int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl fcn_004c6ae0(int, int);
 int __cdecl fcn_004f4830(int, void*);
 int __cdecl fcn_004f4860(char*, unsigned char, int);
@@ -76,7 +76,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 		}
 		fcn_004f4860(a0, *(unsigned char*) rec, a1[2]);
 		fcn_004c6ae0(*(int*) (a0 + 4), -2);
-		fcn_004c5420(*(int*) (recp + 4), 0x1c8, 4, limit, 0);
+		cm_RequestChangeBits(*(int*) (recp + 4), 0x1c8, 4, limit, 0);
 		if (a0[2] != 6) {
 			return 0;
 		}
@@ -144,11 +144,11 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 					r = 0x80;
 					idx = fcn_004f4860(a0, *(unsigned char*) rec, delta);
 					if (idx != -1) {
-						while (fcn_004c4450(idx) == 0) {
+						while (cm_GetCommandStatus(idx) == 0) {
 							fcn_00535960();
 						}
 						fcn_004c6ae0(*(int*) (a0 + 4), -2);
-						fcn_004c5420(*(int*) (recp + 4), 0x1c8, 4, limit, 0);
+						cm_RequestChangeBits(*(int*) (recp + 4), 0x1c8, 4, limit, 0);
 					}
 					g_774654 = 1;
 				}

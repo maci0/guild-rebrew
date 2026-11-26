@@ -14,9 +14,9 @@ int __cdecl d2_SetSlotVisibility();
 int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
-int __cdecl fcn_004c4450();
-int __cdecl fcn_004c5150();
-int __cdecl fcn_004c5530();
+int __cdecl cm_GetCommandStatus();
+int __cdecl cm_RequestMoveCredits();
+int __cdecl cm_SendCopyEntityData();
 int __cdecl fcn_00502cd0();
 int __cdecl fcn_00509570();
 int __cdecl fcn_0050b810();
@@ -197,13 +197,13 @@ label_5be43c:
         fcn_0050b810(*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4e18),g_773d75);
         if (v9 != 1) { // branch-flip
           if ((v9 == 2) && (v11 = g_773d75, v15 = (unsigned int)g_774970, gm_CheckEntityStock(v15 * 0x21c + 0x7f4ca0,8000,v11))) {
-            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);
-            v12 = fcn_004c4450(v11);
+            v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);
+            v12 = cm_GetCommandStatus(v11);
             while (!v12) {
               fcn_00535960();
-              v12 = fcn_004c4450(v11);
+              v12 = cm_GetCommandStatus(v11);
             }
-            if (fcn_004c4450(v11) == 1) {
+            if (cm_GetCommandStatus(v11) == 1) {
               v12 = fcn_00509570((unsigned int)g_774970 * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 8000;
@@ -238,13 +238,13 @@ label_5be43c:
         else {
           v10 = gm_CheckEntityStock((unsigned int)g_774970 * 0x21c + 0x7f4ca0,8000,g_773d75);
           if (v10) {
-            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);
-            v12 = fcn_004c4450(v11);
+            v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);
+            v12 = cm_GetCommandStatus(v11);
             while (!v12) {
               fcn_00535960();
-              v12 = fcn_004c4450(v11);
+              v12 = cm_GetCommandStatus(v11);
             }
-            if (fcn_004c4450(v11) == 1) {
+            if (cm_GetCommandStatus(v11) == 1) {
               v12 = fcn_00509570((unsigned int)g_774970 * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 8000;
@@ -273,7 +273,7 @@ label_5be43c:
                 v14 = (unsigned int *)(frame + 0x3c);
 label_5be96f:
 label_5be970:
-                fcn_004c5530(v14);
+                cm_SendCopyEntityData(v14);
               }
             }
           }
@@ -284,13 +284,13 @@ label_5be970:
           io_FormatTextBuffer(v26,0x113,0x3200);
           v13 = fcn_00526120(v26,0x101);
           if (v13) {
-            v11 = fcn_004c5150(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,0x3200);
-            v12 = fcn_004c4450(v11);
+            v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,0x3200);
+            v12 = cm_GetCommandStatus(v11);
             while (!v12) {
               fcn_00535960();
-              v12 = fcn_004c4450(v11);
+              v12 = cm_GetCommandStatus(v11);
             }
-            if (fcn_004c4450(v11) == 1) {
+            if (cm_GetCommandStatus(v11) == 1) {
               v12 = fcn_00509570((unsigned int)g_774970 * 0x21c + 0x7f4ca0);
               if (v12)
                 *(int *)(v12 + 0x50) = *(int *)(v12 + 0x50) + 0x3200;

@@ -3,7 +3,7 @@
 extern int d3_CurrentContextIndex;
 extern char g_6b5c60[];
 
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00507870(char*);
@@ -17,7 +17,7 @@ char* __cdecl fcn_004fe2e0(char*, int, float*, float*, int, int);
 void __cdecl ch_SetBodyAttachment(int, int, char*);
 char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(char*, int, ...);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x00566360 */
@@ -38,7 +38,7 @@ void __cdecl fcn_00566360(char* action)
 
 	o = action;
 	if (*(int*) (o + 0x84) != -1) {
-		if (!fcn_004c4450(*(int*) (o + 0x84))) {
+		if (!cm_GetCommandStatus(*(int*) (o + 0x84))) {
 			return;
 		}
 	}
@@ -66,7 +66,7 @@ void __cdecl fcn_00566360(char* action)
 			return;
 		}
 		handle = (char*) *(int*) (o + 0xb0);
-		if (handle != (char*) -1 && !fcn_004c4450((int) handle)) {
+		if (handle != (char*) -1 && !cm_GetCommandStatus((int) handle)) {
 			return;
 		}
 		*(int*) (o + 0xb0) = -1;
@@ -75,7 +75,7 @@ void __cdecl fcn_00566360(char* action)
 	case 2:
 		if (*(int*) (ent + 0x184) == 0) {
 			if ((unsigned char) o[0x78] & 2) {
-				fcn_004c5420(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
+				cm_RequestChangeBits(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
 			}
 			he_FreeAction(o);
 			return;
@@ -93,7 +93,7 @@ void __cdecl fcn_00566360(char* action)
 		}
 		if (v6 == 0) {
 			if ((unsigned char) o[0x78] & 2) {
-				fcn_004c5420(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
+				cm_RequestChangeBits(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
 			}
 			he_FreeAction(o);
 			return;
@@ -138,14 +138,14 @@ void __cdecl fcn_00566360(char* action)
 		d3_SelectSceneContext(v15, 1);
 		o = action;
 		if ((unsigned char) o[0x78] & 2) {
-			fcn_004c5420(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
+			cm_RequestChangeBits(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
 		}
 		he_FreeAction(o);
 		return;
 	case -2:
 	case -1:
 		if ((unsigned char) o[0x78] & 2) {
-			fcn_004c5420(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
+			cm_RequestChangeBits(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);
 		}
 		he_FreeAction(o);
 		return;

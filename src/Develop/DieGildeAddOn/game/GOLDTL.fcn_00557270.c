@@ -16,10 +16,10 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl fcn_00502cd0(int, int, ...);
 
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
-int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
+int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 int __cdecl fcn_004c5620(int, char*);
 
 void __cdecl he_InitDunkleEcke(char* u)
@@ -54,11 +54,11 @@ void __cdecl he_InitDunkleEcke(char* u)
 
 				cm_BeginPacketFieldDelta(q, *(int*) (q + 2));
 				cm_AppendPacketFieldDelta(4, 1, q - g_aed32c + 0x28, &t);
-				fcn_004c5360();
-				fcn_004c4eb0(g_67ec2c);
-				*(int*) (u + 0xac) = fcn_004c64b0(0xe, *(int*) (o + 1), -1, 0, 0, 0, "DunkleEcke");
+				cm_RequestChangeAttribute();
+				cm_SendLogAction(g_67ec2c);
+				*(int*) (u + 0xac) = cm_SendAllocCharacter(0xe, *(int*) (o + 1), -1, 0, 0, 0, "DunkleEcke");
 				*(int*) (u + 0x84) = fcn_004c5620(0, u);
-				fcn_004c4ef0(g_67ec2c);
+				cm_SendTraceEnd(g_67ec2c);
 				return;
 			}
 		}

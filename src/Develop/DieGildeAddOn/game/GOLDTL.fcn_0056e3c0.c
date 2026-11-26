@@ -18,11 +18,11 @@ char* __cdecl fcn_004934c0(char*);
 void __cdecl fcn_005099e0(char*, char*);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_0050a710(char*);
-void __cdecl fcn_004c57e0(int, int);
-int __cdecl fcn_004c4450(int);
-int* __cdecl fcn_004c4480(int);
+void __cdecl cm_RequestKillSpieler(int, int);
+int __cdecl cm_GetCommandStatus(int);
+int* __cdecl cm_GetCommandResult(int);
 int __cdecl fcn_004c5980(int);
 int __cdecl cut_FindCutsceneById(int);
 void __cdecl he_FreeAction(char*);
@@ -140,18 +140,18 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		if ((c == 6 || c == 7 || c == 5) && *(unsigned char*) (s + 0xd) > *(unsigned char*) (p + 0xd)) {
 			cm_BeginPacketFieldDelta((int) p, *(int*) (p + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, (int*) (s + 0xd));
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		}
-		fcn_004c57e0(*(int*) (s + 4), fcn_0050a710(s));
+		cm_RequestKillSpieler(*(int*) (s + 4), fcn_0050a710(s));
 		he_FreeAction(eventState);
 		return;
 	case 5:
 		fcn_005099e0(s, (char*) gm_CityEntity);
-		fcn_004c57e0(*(int*) (s + 4), fcn_0050a710(s));
+		cm_RequestKillSpieler(*(int*) (s + 4), fcn_0050a710(s));
 		he_FreeAction(eventState);
 		return;
 	case 6:
-		v = fcn_004c4450(*(int*) (eventState + 0xb4));
+		v = cm_GetCommandStatus(*(int*) (eventState + 0xb4));
 		if (v == 0) {
 			return;
 		}
@@ -160,7 +160,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 			*(int*) (eventState + 0x70) = 4;
 		} else {
 			*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
-			*(int*) (eventState + 0xb0) = *(int*) fcn_004c4480(*(int*) (eventState + 0xb4));
+			*(int*) (eventState + 0xb0) = *(int*) cm_GetCommandResult(*(int*) (eventState + 0xb4));
 			gm_AddTime((int*) (eventState + 0x52), 2, 0, 0);
 			*(int*) (eventState + 0x70) = 7;
 		}

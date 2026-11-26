@@ -107,7 +107,7 @@ void __cdecl fcn_00487f90(int*);
 void __cdecl ai_MeisterCollectTrans(char*);
 void __cdecl ai_MeisterTrade(char*, char*);
 void __cdecl fcn_0047e220(char*);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl fcn_004c5aa0(int, int, int, int, int, int);
 void* __cdecl gm_eval_SlotVoll(char*, int, int);
@@ -199,7 +199,7 @@ int __cdecl fcn_0047f6b0(char* a)
 				*(int*) (m + 0x58) = *(int*) (h + 1);
 				*(int*) (m + 0x5c) = *(int*) (t1 + 2);
 				*(int*) (m + 0x60) = *(int*) (t3 + 2);
-				fcn_004c5530(m);
+				cm_SendCopyEntityData(m);
 			}
 		}
 		*(int*) (a + 0x1c8) |= 0x10;

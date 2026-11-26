@@ -8,7 +8,7 @@ extern char* txt_TextEntries[];
 int sprintf(char*, const char*, ...);
 int __cdecl txt_FindEntryIndex(char*);
 
-int __cdecl fcn_00517b10(char* key, char* out)
+int __cdecl txt_GetCitySelectInfo(char* key, char* out)
 {
 	char buf[256];
 	int r;

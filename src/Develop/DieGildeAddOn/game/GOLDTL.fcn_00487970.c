@@ -30,10 +30,10 @@ extern char g_67e33c[];
 unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
-void __cdecl fcn_004c5530(char* msg);
-void __cdecl fcn_004c5150(int a, int b, char c, int n);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
+void __cdecl cm_SendCopyEntityData(char* msg);
+void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
 int __cdecl fcn_0051e070(void);
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, int h);
@@ -91,9 +91,9 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	*(int*) (msg + 0x5c) = dx != 0;
 	*(int*) (msg + 0x60) = dy != 0;
 	n = *(int*) (msg + 0x5c) + *(int*) (msg + 0x60);
-	fcn_004c4eb0(g_67e33c);
-	fcn_004c5530(msg);
-	fcn_004c5150(-1, ((Ent*)g_7f4ca0)[*(unsigned short*) (*(char**) (e + 0x16c) + 0x27)].handle, (*(char*)&g_773d75), 0x1f40);
+	cm_SendLogAction(g_67e33c);
+	cm_SendCopyEntityData(msg);
+	cm_RequestMoveCredits(-1, ((Ent*)g_7f4ca0)[*(unsigned short*) (*(char**) (e + 0x16c) + 0x27)].handle, (*(char*)&g_773d75), 0x1f40);
 	switch (fcn_0051e070()) {
 	case 0:
 		if (n == 1) {
@@ -115,6 +115,6 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	h = *(char**) (e + 0x16c);
 	he_MessageBoxQuickjump(((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle, ((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle, buf, 0, 0x60b, *(int*) (h + 1), -1, 0, 0);
 	*(int*) (e + 0x1b8) -= n * 8000;
-	fcn_004c4ef0(g_67e33c);
+	cm_SendTraceEnd(g_67e33c);
 	*(int*) (e + 0x1c8) |= 8;
 }

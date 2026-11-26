@@ -24,7 +24,7 @@ extern int* g_665f08;
 int __cdecl fcn_005800e0(void);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00423460(int);
+int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
@@ -52,7 +52,7 @@ int __cdecl fcn_00580140(void)
 	io_AppendText(((struct fsm*)g_665f08)->page->text + 1);
 	if (((struct fsm*)g_665f08)->page->voice != 0) {
 		if (((struct fsm*)g_665f08)->sound != 0) {
-			if (fcn_00423460(((struct fsm*)g_665f08)->sound) != 0) {
+			if (sb_CheckVoicePlaying(((struct fsm*)g_665f08)->sound) != 0) {
 				sb_StopVoice(((struct fsm*)g_665f08)->sound, 0);
 			}
 			((struct fsm*)g_665f08)->sound = 0;

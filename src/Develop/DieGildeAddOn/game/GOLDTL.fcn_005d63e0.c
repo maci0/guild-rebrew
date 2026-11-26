@@ -33,7 +33,7 @@ extern __int64 g_666018;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c6ae0(int, int);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005cd440(Req*, char*, int, void*);
 void __cdecl d2_ShowIntimidationDialog(void);
@@ -65,7 +65,7 @@ int __cdecl fcn_005d63e0(unsigned char* obj, char* arg)
 			m.b36 = 2;
 			m.f5c = *(int*) (e + 4);
 			m.f58 = *(int*) (obj + 4);
-			fcn_004c5530(&m);
+			cm_SendCopyEntityData(&m);
 			return 0x10;
 		}
 	}

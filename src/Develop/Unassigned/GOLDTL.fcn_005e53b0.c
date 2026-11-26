@@ -42,16 +42,16 @@ void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00533a60(int, int, int *, int, ...);
 int __cdecl gm_CountBuildingExtensions(char *);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_005ca560(ITEM *);
+void __cdecl d2_BuildPersonStatusDesc(ITEM *);
 void __cdecl fcn_005ca740(int, int, int, int, ITEM *, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl amt_GetRoleLevel(int);
 int __cdecl d2_CheckActionBlocker(char *, int);
 int __cdecl io_FormatTextBuffer(char *, int, ...);
 float __cdecl fcn_00507e70(char *, char *, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_ShowZigeunerGroupMessage(unsigned short *, int, char **);
 void __cdecl fcn_00526120(char *, int);
 char *__cdecl fcn_005cd440(REQUEST *, char *, int, int);
@@ -111,7 +111,7 @@ void __cdecl fcn_005e53b0(void *arg)
             cost = 0;
             for (i = 0; i < 5; ++i) {
                 if (i >= count) { items[i].entity = 0; cache[i] = -1; }
-                fcn_005ca560(&items[i]);
+                d2_BuildPersonStatusDesc(&items[i]);
                 fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x54, &items[i], 1);
                 if (i < count) {
                     fcn_00472640(items[i].control, 1);
@@ -140,12 +140,12 @@ void __cdecl fcn_005e53b0(void *arg)
                     for (i = 1; i < 5; ++i) {
                         if (items[i].entity) {
                             j = 50 - (int)(fcn_00507e70((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], items[i].entity, 4) * -50.0f);
-                            fcn_004c54c0(*(unsigned short *)items[0].entity, *(unsigned short *)items[i].entity, -j, 1);
+                            cm_RequestCopyEntityData(*(unsigned short *)items[0].entity, *(unsigned short *)items[i].entity, -j, 1);
                             selected[n++] = items[i].entity;
                         }
                     }
                     fcn_005100f0(*(int *)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4), -cost);
-                    fcn_004c5420(*(int *)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4), 0x1cc, 4, 8, 0);
+                    cm_RequestChangeBits(*(int *)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4), 0x1cc, 4, 8, 0);
                     he_ShowZigeunerGroupMessage((unsigned short *)p, n, selected);
                     io_FormatTextBuffer(text, 0x41b9, 0x41b2);
                     fcn_00526120(text, 0);

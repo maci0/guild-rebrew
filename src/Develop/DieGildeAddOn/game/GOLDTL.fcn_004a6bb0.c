@@ -49,7 +49,7 @@ extern unsigned char g_773d75;
 extern char* g_14a62d8[];
 
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004fdec0(char* name);
+int __cdecl gm_FindHeadIconIndex(char* name);
 int __cdecl fcn_0050b810(int a, unsigned char b);
 int __cdecl fcn_0050b710(int a, unsigned char b);
 int __cdecl fcn_0050b750(int a, unsigned char b);
@@ -96,32 +96,32 @@ int __cdecl fcn_004a6bb0(char* owner, Game* game)
 			strncpy(p->name, g_14a5dbc[gm_RandomMod(0xbf)], 0xf);
 			switch (gm_RandomMod(4)) {
 			case 0:
-				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buerger_MANN") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = gm_FindHeadIconIndex("buerger_MANN") + 0x639;
 				break;
 			case 1:
-				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("Handwerker_MANN") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = gm_FindHeadIconIndex("Handwerker_MANN") + 0x639;
 				break;
 			case 2:
-				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buerger3_DICKER") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = gm_FindHeadIconIndex("buerger3_DICKER") + 0x639;
 				break;
 			case 3:
-				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("schneider1_MANN") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = gm_FindHeadIconIndex("schneider1_MANN") + 0x639;
 				break;
 			}
 		} else {
 			strncpy(p->name, gm_FemaleNames[gm_RandomMod(0x70)], 0xf);
 			switch (gm_RandomMod(4)) {
 			case 0:
-				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buergerin_frau") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = gm_FindHeadIconIndex("buergerin_frau") + 0x639;
 				break;
 			case 1:
-				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("buergerin2_frau") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = gm_FindHeadIconIndex("buergerin2_frau") + 0x639;
 				break;
 			case 2:
-				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("minerin_frau") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = gm_FindHeadIconIndex("minerin_frau") + 0x639;
 				break;
 			case 3:
-				((Game*) g_1007cd4)->seats[i].portrait = fcn_004fdec0("arbeiterin_frau") + 0x639;
+				((Game*) g_1007cd4)->seats[i].portrait = gm_FindHeadIconIndex("arbeiterin_frau") + 0x639;
 				break;
 			}
 		}

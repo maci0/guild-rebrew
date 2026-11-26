@@ -34,9 +34,9 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_004c58b0(int, int);
+void __cdecl cm_RequestLinkEvidence(int, int);
 void __cdecl fcn_004c6ae0(int, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00471e30(int);
@@ -83,11 +83,11 @@ void __cdecl fcn_005e4e50(ENTITY_RECORD* other)
 		if (g_100f1dc != -1 && d2_CurrentElementId == yes) {
 			if (found) {
 				for (i = 0; i < count; i++) {
-					fcn_004c58b0(list[i], ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id);
+					cm_RequestLinkEvidence(list[i], ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id);
 				}
 				fcn_004c6ae0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1);
 				fcn_004c6ae0(other->entity_id, -1);
-				fcn_004c5420(me->entity_id, 0x1cc, 4, 0x20000, 0);
+				cm_RequestChangeBits(me->entity_id, 0x1cc, 4, 0x20000, 0);
 				io_FormatTextBuffer(text, 0x422f, other->entity_index);
 				fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1, text, 0, 0x5ec, 0);
 				if (other->entity_state == 6 || other->entity_state == 7) {

@@ -25,8 +25,8 @@ int __cdecl d2_RunSaveGameDialog(void *);
 int __cdecl d2_ShowNetworkLoadGame(void *);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_005dfe80(char *, int);
-int __cdecl fcn_004c3f90(void);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendQuitGameCommand(void);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_005356b0(int);
 void __cdecl fcn_005e3520(void);
@@ -101,9 +101,9 @@ void __cdecl fcn_005e43f0(void)
                     fcn_00471af0(dialog, 0);
                     io_FormatTextBuffer(message, 0x1ca4);
                     if (fcn_005dfe80(message, 1)) {
-                        handle = fcn_004c3f90();
+                        handle = cm_SendQuitGameCommand();
                         while (handle != -1) {
-                            if (fcn_004c4450(handle)) {
+                            if (cm_GetCommandStatus(handle)) {
                                 break;
                             }
                             fcn_00535960();

@@ -65,7 +65,7 @@ int __cdecl fcn_005e8e80(Particle* o, Vec3* pos, Vec3* dir, float speed,
 	float b, float a);
 int __cdecl d3_PerturbParticleVelocity(float* p, float spread, float* dir, float lift,
 	float* up, float scale);
-int __cdecl fcn_004c4450(int i);
+int __cdecl cm_GetCommandStatus(int i);
 int __cdecl main_RunFrameLoop(int a, int b);
 int __cdecl evt_LoadGfxScript(const char* name);
 int __cdecl fcn_00428340(int h, int a, int b, int c, int d, int e);
@@ -202,7 +202,7 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 		return 0;
 	}
 	if (h != -1) {
-		while (!fcn_004c4450(h)) {
+		while (!cm_GetCommandStatus(h)) {
 			main_RunFrameLoop(0, 0x20007);
 		}
 	}

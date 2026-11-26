@@ -4,7 +4,7 @@
 unsigned short __cdecl gm_RandomMod(int n);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, unsigned int* v);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 
 int __cdecl gm_ConsumeRandomEntitySlotBit(char* o)
 {
@@ -63,6 +63,6 @@ int __cdecl gm_ConsumeRandomEntitySlotBit(char* o)
 	flags = f;
 	cm_BeginPacketFieldDelta(o, *(int*) (o + 4));
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &flags);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	return result;
 }

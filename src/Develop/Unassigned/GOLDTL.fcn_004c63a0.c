@@ -23,5 +23,5 @@ int __cdecl fcn_004c63a0(char* data)
 
 	buf[0] = 0x45;
 	*(Packed15*) (buf + 0x10) = *(Packed15*) data;
-	return fcn_004c4330((struct pkt99*) buf);
+	return cm_EnqueueClientPacket((struct pkt99*) buf);
 }

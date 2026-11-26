@@ -6,7 +6,7 @@ extern char g_7f4ca0[];
 extern char g_6b5c60[];
 extern char g_6a80c0[];
 
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl gm_AddTime(char*, int, int, int);
@@ -33,7 +33,7 @@ void __cdecl fcn_0057cbc0(char* p)
     int r;
     int gfx;
 
-    if (*(int*) (p + 0x84) != -1 && fcn_004c4450(*(int*) (p + 0x84)) == 0)
+    if (*(int*) (p + 0x84) != -1 && cm_GetCommandStatus(*(int*) (p + 0x84)) == 0)
         return;
     if (*(int*) (p + 0x70) == -1 || *(int*) (p + 0x70) == -2) {
         he_FreeAction(p);

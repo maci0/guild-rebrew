@@ -46,14 +46,14 @@ extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 
 
-int __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 int __cdecl fcn_0050b750(int, char);
-void __cdecl fcn_004c5150(int, int, char, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl gv_AssignGraveyardField(Player*);
 int __cdecl fcn_004c6090(Player*, int, int, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
-Handle* __cdecl fcn_004c4480(int);
+Handle* __cdecl cm_GetCommandResult(int);
 int __cdecl gm_CheckEntityType(Player*);
 Site* __cdecl fcn_005049a0(Player*);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
@@ -69,10 +69,10 @@ void __cdecl init_SetupBetriebWorkers(Player* p)
 	gm_GetBuildingTypeCategory(p->office);
 	o = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->office];
 	if (o->category == 9) {
-		fcn_004c51f0(p->id, -1, 0x136, 1, (*(char*)&g_773d75), 0);
-		fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_id, -1, (*(char*)&g_773d75), fcn_0050b750(0x1f4, (*(char*)&g_773d75)));
+		cm_SendSellObjekt(p->id, -1, 0x136, 1, (*(char*)&g_773d75), 0);
+		cm_RequestMoveCredits(((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_id, -1, (*(char*)&g_773d75), fcn_0050b750(0x1f4, (*(char*)&g_773d75)));
 	} else if (o->category != 4 && o->category != 0x10 && o->category != 0x13) {
-		fcn_004c51f0(p->id, -1, 0x134, 1, (*(char*)&g_773d75), 0);
+		cm_SendSellObjekt(p->id, -1, 0x134, 1, (*(char*)&g_773d75), 0);
 	}
 	if (o->category != 9) {
 		if (o->category == 4 || o->category == 0x10 || o->category == 0x13 || o->category == 0x1d) {
@@ -87,10 +87,10 @@ void __cdecl init_SetupBetriebWorkers(Player* p)
 		} else {
 			h = fcn_004c6090(p, 0, o->role_230, 0);
 		}
-		while (fcn_004c4450(h) == 0) {
+		while (cm_GetCommandStatus(h) == 0) {
 			fcn_00535960();
 		}
-		q = fcn_004c4480(h);
+		q = cm_GetCommandResult(h);
 		if (gm_CheckEntityType(p) == 0) {
 			s = fcn_005049a0(p);
 			if (s != 0) {

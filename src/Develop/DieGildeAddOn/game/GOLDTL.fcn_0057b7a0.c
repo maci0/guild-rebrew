@@ -22,7 +22,7 @@ char* __cdecl fcn_005049a0(char*);
 char* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
@@ -71,7 +71,7 @@ void __cdecl he_RunFriedhofStealAction(char* e)
 			sel = list[gm_RandomMod(n)];
 			if (sel != 0) {
 				fcn_0050bb50(*(unsigned short*) sel, g_773d75);
-				fcn_004c51f0(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);
+				cm_SendSellObjekt(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);
 				switch (fcn_0051e070()) {
 				case 0:
 				case 2:

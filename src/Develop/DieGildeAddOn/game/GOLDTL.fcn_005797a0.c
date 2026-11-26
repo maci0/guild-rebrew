@@ -14,7 +14,7 @@ typedef struct BuildingRow5797 {
 } BuildingRow5797;
 extern unsigned char g_773d75;
 
-extern int __cdecl fcn_00500e20(int* p);
+extern int __cdecl gm_GetSeason(int* p);
 extern void __cdecl gm_AddTime(void* clock, int a, int b, int c);
 extern void __cdecl he_FreeAction(char* record);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
@@ -25,7 +25,7 @@ extern int __cdecl gm_GetBuildingTechEffect(void* p, int a, int b);
 extern int __cdecl he_CountActionActors(char* record);
 extern int __cdecl fcn_0050dc90(void* p);
 extern int __cdecl gm_eval_SlotVoll(int a, int b, int c);
-extern void __cdecl fcn_004c51f0(int a, int b, int c, int d, char e, int f);
+extern void __cdecl cm_SendSellObjekt(int a, int b, int c, int d, char e, int f);
 extern void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 extern void __cdecl he_MessageBoxQuickjump(int a, int b, char* c, int d, int e,
 	int f, int g, int h, char* i);
@@ -53,7 +53,7 @@ void __cdecl fcn_005797a0(char* event)
 	float increment;
 	float v23;
 
-	handle = fcn_00500e20(&gm_GameTime);
+	handle = gm_GetSeason(&gm_GameTime);
 	search = 0;
 	row = 0;
 	param = 0;
@@ -136,7 +136,7 @@ void __cdecl fcn_005797a0(char* event)
 		count = fcn_0050dc90(search);
 		valid = gm_eval_SlotVoll((int) param, *(unsigned short*) (event + 0xac), valid);
 		if (valid != 0) {
-			fcn_004c51f0(*(int*) (param + 2), -1, *(unsigned short*) (event + 0xac),
+			cm_SendSellObjekt(*(int*) (param + 2), -1, *(unsigned short*) (event + 0xac),
 				valid, (char) g_773d75, 0);
 			if (((char)((BUILDING_PROTOTYPE*)row)->category) != 0x1f) {
 				io_FormatTextBuffer(text, 0x412c, 0x4128, 0x228, (void*) search);

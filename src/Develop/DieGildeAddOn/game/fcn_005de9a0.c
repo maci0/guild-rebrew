@@ -3,7 +3,7 @@ extern __int64 g_666018;
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void* __cdecl gm_LookupEntityRecordById(int id);
 void* __cdecl fcn_005cd440(void* desc, void* buf, int a, int b);
-void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
+void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl fcn_005dbe90(void* buf);
 
 /* ADDRESS: GOLDTL 0x005de9a0 */
@@ -30,7 +30,7 @@ int __cdecl fcn_005de9a0(char* actor, char* action)
 	if (p == 0) {
 		return 0;
 	}
-	fcn_004c5420(*(int*) ((char*) p + 4), 0x1cc, 4, 0x200000, 0);
+	cm_RequestChangeBits(*(int*) ((char*) p + 4), 0x1cc, 4, 0x200000, 0);
 	*(int*) (action + 0x10) = 1;
 	if (actor[2] == 6) {
 		io_FormatTextBuffer(bufA, 0x10a7, *(unsigned short*) p);

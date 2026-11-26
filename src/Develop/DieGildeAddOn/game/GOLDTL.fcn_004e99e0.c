@@ -9,8 +9,8 @@
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004aacb0(unsigned short*, unsigned short*, unsigned short*, int*);
 int __cdecl fcn_004aae50(unsigned char, unsigned short*, int*, int*);
-int __cdecl fcn_004c4450(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+int __cdecl cm_GetCommandStatus(int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char*, unsigned char*, int, int);
 int __cdecl fcn_004e9180(char*, int);
 void __cdecl fcn_00535960(void);
@@ -78,19 +78,19 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 				if (id != *(int*) (self + 4) && id != -1
 				    && work.score[k] <= 2) {
 					if (work.score[k] == 0) {
-						fcn_004c54c0(id, *(int*) (self + 4), -10, 1);
+						cm_RequestCopyEntityData(id, *(int*) (self + 4), -10, 1);
 					}
 					if (work.score[k] == 1) {
-						fcn_004c54c0(id, *(int*) (self + 4), 10, 1);
+						cm_RequestCopyEntityData(id, *(int*) (self + 4), 10, 1);
 					} else {
-						fcn_004c54c0(id, *(int*) (self + 4), -4, 1);
+						cm_RequestCopyEntityData(id, *(int*) (self + 4), -4, 1);
 					}
 				}
 			}
 			version = amt_SendOfficeCommand(p->id, 0, 0, 3, 0xff);
 			if (version != -1) {
 				do {
-					if (fcn_004c4450(version) != 0) {
+					if (cm_GetCommandStatus(version) != 0) {
 						break;
 					}
 					fcn_00535960();
@@ -102,18 +102,18 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 				if (id != *(int*) (self + 4) && id != -1
 				    && work.score[k] <= 2) {
 					if (work.score[k] == 0) {
-						fcn_004c54c0(id, *(int*) (self + 4), -20, 1);
+						cm_RequestCopyEntityData(id, *(int*) (self + 4), -20, 1);
 					} else if (work.score[k] == 1) {
-						fcn_004c54c0(id, *(int*) (self + 4), 0x14, 1);
+						cm_RequestCopyEntityData(id, *(int*) (self + 4), 0x14, 1);
 					} else {
-						fcn_004c54c0(id, *(int*) (self + 4), 4, 1);
+						cm_RequestCopyEntityData(id, *(int*) (self + 4), 4, 1);
 					}
 				}
 			}
 			version = amt_SendOfficeCommand(p->id, (unsigned char*) self, 0, 1, 0xff);
 			if (version != -1) {
 				do {
-					if (fcn_004c4450(version) != 0) {
+					if (cm_GetCommandStatus(version) != 0) {
 						break;
 					}
 					fcn_00535960();
@@ -164,7 +164,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 			version = amt_SendOfficeCommand(p->id, (unsigned char*) work.recs[0], 0, 1, 0xff);
 			if (version != -1) {
 				do {
-					if (fcn_004c4450(version) != 0) {
+					if (cm_GetCommandStatus(version) != 0) {
 						break;
 					}
 					fcn_00535960();
@@ -215,7 +215,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 				    (unsigned char*) work.recs[pick], 0, 1, 0xff);
 				if (version != -1) {
 					do {
-						if (fcn_004c4450(version) != 0) {
+						if (cm_GetCommandStatus(version) != 0) {
 							break;
 						}
 						fcn_00535960();
@@ -234,7 +234,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 				    (unsigned char*) work.recs[pick], 0, 1, 0xff);
 				if (version != -1) {
 					do {
-						if (fcn_004c4450(version) != 0) {
+						if (cm_GetCommandStatus(version) != 0) {
 							break;
 						}
 						fcn_00535960();

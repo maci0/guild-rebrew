@@ -18,16 +18,16 @@ void __cdecl he_FreeAction(char* e);
 void __cdecl fcn_00545670(char* e, int a, int b, char* tag, int c);
 void __cdecl d2_SetForm(int dlg, int page);
 int __cdecl io_AppendText(int id, ...);
-int __cdecl fcn_00500cb0(int* pos, int base);
+int __cdecl gm_CompareGameTime(int* pos, int base);
 int __cdecl gm_CalculateGebaeudeValue(char* e, int n);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id, int c, int d);
 int __cdecl gm_FindNextFilteredEntity(void);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, int h);
-void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
-void __cdecl fcn_004c51a0(int a, int b, unsigned char k, int n);
-void __cdecl fcn_004c5f60(int a, int b, int c);
+void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
+void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char k, int n);
+void __cdecl cm_SendSetGebBesitzer(int a, int b, int c);
 void __cdecl fcn_00545780(char* e);
 
 /* ADDRESS: GOLDTL 0x00564460 */
@@ -60,7 +60,7 @@ void __cdecl fcn_00564460(char* e)
 			*(int*) (e + 0x70) = *(int*) (e + 0x70) + 1;
 			return;
 		}
-		if (fcn_00500cb0((int*) (e + 0x52), 0x7f4c00) >= 0) {
+		if (gm_CompareGameTime((int*) (e + 0x52), 0x7f4c00) >= 0) {
 			return;
 		}
 		f = 15.0f;
@@ -100,21 +100,21 @@ void __cdecl fcn_00564460(char* e)
 		if ((double)n * ((double)f * (g_662a08 - (double)fcn_0050f980(*q, *(unsigned short*) (p + 0x25), 1) * g_662910)) < (double) *(int*) (e + 0xb0)) {
 			io_FormatTextBuffer(buf, 0x17e9, *(unsigned short*) (p + 0x27), p);
 			he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
-			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 2, 0x200);
-			fcn_004c51a0(*(int*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca4),
+			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 2, 0x200);
+			cm_RequestTransferCurrencyNoKill(*(int*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca4),
 				*(int*) (q + 2), g_773d75, *(int*) (e + 0xb0));
 			if (*(short*) (p + 0x27) == *(short*) (p + 0x25)) {
-				fcn_004c5f60(*(int*) (p + 1), *(int*) (q + 2), *(int*) (q + 2));
+				cm_SendSetGebBesitzer(*(int*) (p + 1), *(int*) (q + 2), *(int*) (q + 2));
 			} else {
-				fcn_004c5f60(*(int*) (p + 1), *(int*) (q + 2), -1);
+				cm_SendSetGebBesitzer(*(int*) (p + 1), *(int*) (q + 2), -1);
 			}
-			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 2);
+			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 2);
 			he_FreeAction(e);
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x17ea, *(unsigned short*) (p + 0x27), p);
 		he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
-		fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 0x200);
+		cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 0x200);
 		fcn_00545780(e);
 		he_FreeAction(e);
 		he_FreeAction(e);
@@ -131,15 +131,15 @@ void __cdecl fcn_00564460(char* e)
 		if (g_100f1dc == 2) {
 			io_FormatTextBuffer(buf, 0x17e9, *(unsigned short*) (p + 0x27), p);
 			he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
-			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 2, 0x200);
-			fcn_004c51a0(*(int*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca4),
+			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 2, 0x200);
+			cm_RequestTransferCurrencyNoKill(*(int*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca4),
 				*(int*) (q + 2), g_773d75, *(int*) (e + 0xb0));
 			if (*(short*) (p + 0x27) == *(short*) (p + 0x25)) {
-				fcn_004c5f60(*(int*) (p + 1), *(int*) (q + 2), *(int*) (q + 2));
+				cm_SendSetGebBesitzer(*(int*) (p + 1), *(int*) (q + 2), *(int*) (q + 2));
 			} else {
-				fcn_004c5f60(*(int*) (p + 1), *(int*) (q + 2), -1);
+				cm_SendSetGebBesitzer(*(int*) (p + 1), *(int*) (q + 2), -1);
 			}
-			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 2);
+			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 2);
 			fcn_00545780(e);
 			he_FreeAction(e);
 			return;
@@ -149,13 +149,13 @@ void __cdecl fcn_00564460(char* e)
 		}
 		io_FormatTextBuffer(buf, 0x17ea, *(unsigned short*) (p + 0x27), p);
 		he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
-		fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 0x200);
+		cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 0x200);
 		break;
 	case -2:
 	case -1:
 		p = (unsigned char*) gm_SearchTable67(*(int*) (e + 0xac));
 		if (p != 0) {
-			fcn_004c5420(*(int*) (p + 1), 0x5a, 2, 0, 0x200);
+			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 0x200);
 		}
 		break;
 	default:

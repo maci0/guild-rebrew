@@ -30,17 +30,17 @@ extern char s_6accdc[];
 int __cdecl fcn_004e8b40(int, Info*);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
-void __cdecl fcn_004c4eb0(char*);
-int __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
-int __cdecl fcn_004c4ef0(char*);
+void __cdecl cm_SendLogAction(char*);
+int __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
+int __cdecl cm_SendTraceEnd(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned short* __cdecl fcn_005cadc0(int, Req*, char*, char*, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_00526120(char*, int);
 
-int __cdecl fcn_005d6950(unsigned char* e, int* o)
+int __cdecl d2_ShowAbsetzenDialog(unsigned char* e, int* o)
 {
 	Info x;
 	Req req;
@@ -78,11 +78,11 @@ int __cdecl fcn_005d6950(unsigned char* e, int* o)
 		if (info.f4 != x.f4) {
 			return 0x60;
 		}
-		fcn_004c4eb0(s_6accdc);
+		cm_SendLogAction(s_6accdc);
 		amt_AssignEntityOfficeDefault(q, t);
-		fcn_004c5420(*(int*) (t + 4), 0x1c8, 4, 0x200000, 0);
-		fcn_004c54c0(*(int*) (e + 4), *(int*) (q + 4), -0x28, 1);
-		fcn_004c4ef0(s_6accdc);
+		cm_RequestChangeBits(*(int*) (t + 4), 0x1c8, 4, 0x200000, 0);
+		cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (q + 4), -0x28, 1);
+		cm_SendTraceEnd(s_6accdc);
 		return 0x10;
 	}
 	memset(&req, 0, sizeof(req));
@@ -105,21 +105,21 @@ int __cdecl fcn_005d6950(unsigned char* e, int* o)
 		if (x.b10 != 1) {
 			goto refused;
 		}
-		fcn_004c4eb0(s_6accdc);
+		cm_SendLogAction(s_6accdc);
 		amt_AssignEntityOfficeDefault((unsigned char*) g, t);
-		h1 = fcn_004c5420(*(int*) (t + 4), 0x1c8, 4, 0x200000, 0);
-		fcn_004c54c0(*(int*) (e + 4), *(int*) (g + 2), -0x14, 1);
-		h = fcn_004c4ef0(s_6accdc);
-		while (fcn_004c4450(h) == 0) {
+		h1 = cm_RequestChangeBits(*(int*) (t + 4), 0x1c8, 4, 0x200000, 0);
+		cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (g + 2), -0x14, 1);
+		h = cm_SendTraceEnd(s_6accdc);
+		while (cm_GetCommandStatus(h) == 0) {
 			fcn_00535960();
 		}
-		if (fcn_004c4450(h) == 2) {
+		if (cm_GetCommandStatus(h) == 2) {
 		refused:
 			io_FormatTextBuffer(text3, 0x1d9a, *g);
 			fcn_00526120(text3, 0);
 			return 0x20;
 		}
-		while (fcn_004c4450(h1) == 0) {
+		while (cm_GetCommandStatus(h1) == 0) {
 			fcn_00535960();
 		}
 		io_FormatTextBuffer(text3, 0x1d9b, *g, *g);

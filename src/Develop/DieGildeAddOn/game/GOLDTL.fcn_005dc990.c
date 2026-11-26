@@ -35,7 +35,7 @@ struct msg {
 extern __int64 g_666018;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, void*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -72,7 +72,7 @@ int __cdecl fcn_005dc990(unsigned char* obj, int* arg)
 			m.b59 = 2;
 			m.f60 = -0.16666667f;
 			m.f64 = 0x18;
-			fcn_004c5530(&m);
+			cm_SendCopyEntityData(&m);
 			if (e[2] == 6 || e[2] == 7) {
 				io_FormatTextBuffer(text2, 0xff8);
 				fcn_00545d40(*(int*) (e + 4), -1, text2, 0, 0x5fb, 0);
@@ -95,7 +95,7 @@ int __cdecl fcn_005dc990(unsigned char* obj, int* arg)
 			m.b59 = 2;
 			m.f60 = -0.16666667f;
 			m.f64 = 0x18;
-			fcn_004c5530(&m);
+			cm_SendCopyEntityData(&m);
 			if (e[2] == 6 || e[2] == 7) {
 				io_FormatTextBuffer(text2, 0xff8);
 				fcn_00545d40(*(int*) (e + 4), -1, text2, 0, 0x5fb, 0);

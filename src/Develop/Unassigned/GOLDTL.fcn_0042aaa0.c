@@ -8,7 +8,7 @@ extern g_662450_f g_662450;
 
 int __cdecl msx_FindSampleHandleIndex(int);
 
-int __cdecl fcn_0042aaa0(int sampleHandle)
+int __cdecl msx_GetSampleStatus(int sampleHandle)
 {
 	int r = -1;
 

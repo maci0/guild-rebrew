@@ -23,10 +23,10 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl he_HasNoActiveAction0x62(char*);
-int __cdecl fcn_004fa6f0(int, int*, int*);
+int __cdecl gm_PosToStatsGrid(int, int*, int*);
 int __cdecl fcn_0050c4e0(unsigned char*);
 int __cdecl fcn_0050d0c0(char*, int);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 
 /* ADDRESS: GOLDTL 0x00480c60 */
 int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
@@ -105,7 +105,7 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 			if (he_HasNoActiveAction0x62(p) == 0) {
 				continue;
 			}
-			if (*(int*) (p + 0x61) != 0 && fcn_004fa6f0(*(int*) (p + 0x61) + 0x4c, &a, &b) != 0) {
+			if (*(int*) (p + 0x61) != 0 && gm_PosToStatsGrid(*(int*) (p + 0x61) + 0x4c, &a, &b) != 0) {
 				r = (b + a * 8) * 0x18;
 				cell = (Cell99ef80*) ((char*) 0x99ef80 + r);
 				w = 1.0f - ((float) cell->demand * *(float*) 0x662a34 + cell->supply) / fmax;
@@ -196,7 +196,7 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 		if (*(int*) (msg + 0x38) == -1) {
 			return 1;
 		}
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 		*(int*) (attackerRec + 0x1c0) = -1;
 		return 1;
 	}
@@ -251,7 +251,7 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 			*(int*) (msg + 0x38 + n * 4) = -1;
 		}
 	}
-	fcn_004c5530(msg);
+	cm_SendCopyEntityData(msg);
 	return 1;
 		}
 	}

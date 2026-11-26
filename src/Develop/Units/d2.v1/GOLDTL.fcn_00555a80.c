@@ -22,14 +22,14 @@ extern char g_7749e8;
 extern int g_7749e4;
 extern int g_100f1dc;
 
-int __cdecl fcn_00500cb0(char* name, char* list);
+int __cdecl gm_CompareGameTime(char* name, char* list);
 void __cdecl fcn_00545780(Panel* p);
 void __cdecl he_FreeAction(Panel* p);
 void __cdecl fcn_00545670(Panel* p, int a1, int a2, char* fmt, int a4);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a1);
 void __cdecl io_AppendText(int a0);
-void __cdecl fcn_004c30a0(int a0, int a1, char* fmt, int a3, int a4);
+void __cdecl d3snd_QueueSound(int a0, int a1, char* fmt, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00555a80 */
 void __cdecl d2_HandleTalentLevelDialog(Panel* p)
@@ -46,7 +46,7 @@ void __cdecl d2_HandleTalentLevelDialog(Panel* p)
 	if (g_774964 == 0) {
 		return;
 	}
-	if (fcn_00500cb0(p->name, (char*) 0x7f4c00) == 1) {
+	if (gm_CompareGameTime(p->name, (char*) 0x7f4c00) == 1) {
 		return;
 	}
 	if (p->state == -2 || p->state == -1) {
@@ -98,16 +98,16 @@ open:
 	io_AppendText(0x16c8);
 	v = p->base + (int) p->kind * 6 + 0x16c9;
 	io_AppendText(v);
-	fcn_004c30a0(-7, 0, (char*) 0x6a5e40, 0, 0x64);
-	fcn_004c30a0(-8, 0, (char*) 0x6a5eb4, p->base + (int) p->kind * 6, 0xfa);
+	d3snd_QueueSound(-7, 0, (char*) 0x6a5e40, 0, 0x64);
+	d3snd_QueueSound(-8, 0, (char*) 0x6a5eb4, p->base + (int) p->kind * 6, 0xfa);
 	if (p->sub < 6) {
 		io_AppendText(p->sub + 0x16e6);
-		fcn_004c30a0(-8, 0, (char*) 0x6a5ea4, p->sub - 1, 0x64);
+		d3snd_QueueSound(-8, 0, (char*) 0x6a5ea4, p->sub - 1, 0x64);
 	} else {
 		io_AppendText((int) p->kind + 0x16ec);
-		fcn_004c30a0(-8, 0, (char*) 0x6a5e98, (int) p->kind, 0x64);
+		d3snd_QueueSound(-8, 0, (char*) 0x6a5e98, (int) p->kind, 0x64);
 	}
-	fcn_004c30a0(-7, 0, (char*) 0x67d908, -1, 0);
+	d3snd_QueueSound(-7, 0, (char*) 0x67d908, -1, 0);
 	d2_SetForm(*(int*) (p->handle + 8), 2);
 	io_AppendText(0x16f1);
 	p->state = 1;

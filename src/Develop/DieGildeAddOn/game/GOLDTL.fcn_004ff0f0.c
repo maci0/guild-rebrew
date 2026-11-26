@@ -19,9 +19,9 @@ typedef struct {
 void __cdecl fcn_00535960(void);
 void __cdecl cm_BeginPacketFieldDelta(char* base, int entity_id);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl fcn_004fe5f0(void*);
-void __cdecl fcn_004c6150(int a1, char* a2);
+void __cdecl cm_SendSwapEntityModel(int a1, char* a2);
 void __cdecl fcn_004ff8f0(void);
 
 /* ADDRESS: GOLDTL 0x004ff0f0 */
@@ -45,7 +45,7 @@ void __cdecl fcn_004ff0f0(void)
 			v = 8;
 			cm_BeginPacketFieldDelta((char*) p - 2, id);
 			cm_AppendPacketFieldDelta(1, 1, 2, (char*) &v);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			++g_773d48;
 		}
 		p++;
@@ -63,10 +63,10 @@ void __cdecl fcn_004ff0f0(void)
 			if ((float) v == p->pos - 1.0f
 			    && p->flag != 0) {
 				if (p->b7 == 0) {
-					fcn_004c6150(p->id, (char*) 0x696514);
+					cm_SendSwapEntityModel(p->id, (char*) 0x696514);
 				}
 				else {
-					fcn_004c6150(p->id, (char*) 0x696508);
+					cm_SendSwapEntityModel(p->id, (char*) 0x696508);
 				}
 				++g_773d48;
 			}

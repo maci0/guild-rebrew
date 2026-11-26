@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004c4330(void* p);
+int __cdecl cm_EnqueueClientPacket(void* p);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int id);
 
 /* ADDRESS: GOLDTL 0x004c6940 */
@@ -36,5 +36,5 @@ int __cdecl fcn_004c6940(void* entity, int kind, void* data)
 			}
 		}
 	}
-	return fcn_004c4330(buf);
+	return cm_EnqueueClientPacket(buf);
 }

@@ -21,8 +21,8 @@ int __cdecl d2_ShowMessageBox(void* buf, int n);
 void __cdecl fcn_005d0660(int a, int b, int c, int d);
 void __cdecl cm_BeginPacketFieldDelta(void* a, int b);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* p);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl fcn_005356b0(int p);
 void __cdecl fcn_00509fc0(void* a, void* b, int c);
 void __cdecl fcn_004e48b0(void);
@@ -128,8 +128,8 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			cm_AppendPacketFieldDelta(4, 1, 0x1c, &f10);
 			cm_AppendPacketFieldDelta(4, 1, 0x24, &alo);
 			*(char*) ((char*) obj + 8) = 100;
-			fcn_004c5360();
-			fcn_004c5420(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
+			cm_RequestChangeAttribute();
+			cm_RequestChangeBits(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
 		}
 	} else {
 		if ((*(int*) ((char*) obj + 0x1cc) & 1) != 0 && (*(int*) ((char*) obj + 0x1cc) & 2) == 0) {
@@ -142,8 +142,8 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			cm_BeginPacketFieldDelta(obj, *(int*) ((char*) obj + 4));
 			cm_AppendPacketFieldDelta(4, 1, 0x1c, &alo);
 			cm_AppendPacketFieldDelta(4, 1, 0x24, &f10);
-			fcn_004c5360();
-			fcn_004c5420(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
+			cm_RequestChangeAttribute();
+			cm_RequestChangeBits(*(int*) ((char*) obj + 4), 0x1cc, 4, 2, 0);
 			*(char*) ((char*) obj + 8) = 100;
 		} else if ((g_7747b0 & 8) != 0) {
 			*(char*) ((char*) obj + 8) = 0;

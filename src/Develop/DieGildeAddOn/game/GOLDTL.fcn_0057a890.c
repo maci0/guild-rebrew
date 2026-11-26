@@ -3,7 +3,7 @@ float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00508220(int type, int* out);
 void __cdecl cm_BeginPacketFieldDelta(char* off, int v);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, int* v);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl fcn_004ff210(unsigned short id, int v);
 
 /* ADDRESS: GOLDTL 0x0057a890 */
@@ -86,7 +86,7 @@ int __cdecl fcn_0057a890(char* off, float chance, int kind, float* out)
 		}
 		cm_BeginPacketFieldDelta(off, *(int*) (off + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x2c, &flags);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		f = fcn_004ff210(*(unsigned short*) off, -d);
 		if (out != 0) {
 			*out = f;

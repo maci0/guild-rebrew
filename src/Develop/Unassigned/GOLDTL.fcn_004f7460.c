@@ -1,7 +1,7 @@
 
 
 
-int  __cdecl fcn_005d4fa0(void*, void*);
+int  __cdecl d2_ShowMedicusDialog(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
@@ -15,7 +15,7 @@ int __cdecl fcn_004f7460(void* entity, void* request)
 			if ((double) *(int*) ((char*) entity + 0x24) < -20.0 ||
 			    (*(int*) ((char*) entity + 0x2c) & 0xfffffff0) != 0) {
 				if (mode == 3) {
-					return fcn_005d4fa0(entity, request);
+					return d2_ShowMedicusDialog(entity, request);
 				}
 				if (mode == 1 && *(char*) ((char*) entity + 2) == 6) {
 					io_FormatTextBuffer((char*) request + 0x14, (int) "%s", 0x1d3a);

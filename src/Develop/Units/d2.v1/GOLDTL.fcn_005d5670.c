@@ -33,13 +33,13 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5530(struct msg*);
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_SendCopyEntityData(struct msg*);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 void __cdecl fcn_00535960(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_004c6ae0(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -86,11 +86,11 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 					m.fc = *(int*) (e + 4);
 					m.f58 = *(int*) (e + 4);
 					m.f5c = *(int*) (o + 4);
-					h = fcn_004c5530(&m);
-					while (h != -1 && fcn_004c4450(h) == 0) {
+					h = cm_SendCopyEntityData(&m);
+					while (h != -1 && cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
-					p = fcn_004c4480(h);
+					p = cm_GetCommandResult(h);
 					while (!(*(int*) (e + 0x1c8) & 0x100) && *(int*) (p + 0x70) != -1) {
 						fcn_00535960();
 					}
@@ -101,7 +101,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 					result = 1;
 					g_774654 = 1;
 				} else {
-					fcn_004c54c0(*(int*) (e + 4), *(int*) (o + 4), -0x1a, 1);
+					cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (o + 4), -0x1a, 1);
 					fcn_004c6ae0(*(int*) (e + 4), -2);
 					io_FormatTextBuffer(text, 0x1d59, *(unsigned short*) o);
 					fcn_00526120(text, 0);

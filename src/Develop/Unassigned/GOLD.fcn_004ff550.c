@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-void __cdecl fcn_00500d60(int*, char*);
+void __cdecl gm_PackGameTime(int*, char*);
 void __cdecl fcn_004fec10(int);
 void __cdecl cm_SendRandomMarktSlotDelta(int);
 int __cdecl fcn_004ff8c0(int, int);
@@ -15,7 +15,7 @@ void __cdecl fcn_004ff550(int city, int* date)
     int year, month, tableOffset, count, index, lo, hi, value, previousYear, i;
     int *p;
     unsigned char kind;
-    fcn_00500d60(date, calendar);
+    gm_PackGameTime(date, calendar);
     year = *(short*) (calendar + 2);
     month = calendar[1];
     tableOffset = city * 0x2f4;

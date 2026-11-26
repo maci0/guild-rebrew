@@ -25,14 +25,14 @@
 extern pos14_7f4c00 gm_GameTime;
 
 
-int __cdecl fcn_004c4450(int id);
+int __cdecl cm_GetCommandStatus(int id);
 void __cdecl he_FreeAction(char* t);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00507130(int k, int* a, int* b);
 #include "client_packet_builder.h"
 int __cdecl gm_RandomMod(int n);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_004c6470(int, int);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004c5620(int a1, char* e);
@@ -57,7 +57,7 @@ void __cdecl fcn_005516e0(char* t)
 	}
 	if (t[0x78] & 4)
 		return;
-	if (*(int*) (t + 0x84) != -1 && fcn_004c4450(*(int*) (t + 0x84)) == 0)
+	if (*(int*) (t + 0x84) != -1 && cm_GetCommandStatus(*(int*) (t + 0x84)) == 0)
 		return;
 	*(int*) (t + 0x84) = -1;
 	switch (*(int*) (t + 0x70)) {
@@ -69,7 +69,7 @@ void __cdecl fcn_005516e0(char* t)
 		cm_AppendPacketFieldValue(1, 1, a + 0x80, &c);
 		c = gm_RandomMod(0x10) + 0x10;
 		cm_AppendPacketFieldValue(1, 1, b + 0x80, &c);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		fcn_004c6470(e->entity_id, *(unsigned char*) (t + 0xb0));
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {

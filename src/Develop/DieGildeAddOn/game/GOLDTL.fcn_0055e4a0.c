@@ -23,11 +23,11 @@ void* __cdecl gm_StartFilteredEntitySearch(int a, ...);
 char* __cdecl gm_FindRecordById(int id);
 int __cdecl d3_SelectSceneContext(int a, int b);
 char __cdecl fcn_0045b990(char* map, float* out, int* x, int* y, float* z);
-int __cdecl fcn_004c5290(int a, int b, int c);
-int __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
-void __cdecl fcn_004c5b50(int who, int x, int y, int id);
+int __cdecl cm_RequestMoveObjekt(int a, int b, int c);
+int __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
+void __cdecl cm_RequestWalkOnPath(int who, int x, int y, int id);
 void __cdecl cm_RequestChrMoveToUniverse(int a, int b, int c, char* name);
-void __cdecl fcn_004c5c80(unsigned int h);
+void __cdecl cm_SendCancelCharacterActions(unsigned int h);
 int __cdecl fcn_004c5da0(int who, int key, int target, int name, int mode, char* text);
 int __cdecl fcn_004c5620(int state, void* ev);
 int __cdecl fcn_00505340(unsigned char* rec);
@@ -69,15 +69,15 @@ void __cdecl fcn_0055e4a0(char* ev)
 	}
 	fcn_0055d6e0(ev, e);
 	if (!*(char*) (ev + 0xd0)) {
-		fcn_004c5c80(*(unsigned int*) (e + 2));
+		cm_SendCancelCharacterActions(*(unsigned int*) (e + 2));
 		fcn_004c5da0(*(unsigned int*) (e + 2), *(unsigned int*) (v8 + 1),
 			0xffffffff, 0, 1, s_6a6310);
-		*(unsigned int*) (ev + 0xec) = fcn_004c5290(*(int*) (v6 + 1),
+		*(unsigned int*) (ev + 0xec) = cm_RequestMoveObjekt(*(int*) (v6 + 1),
 			*(int*) (v7 + 1), *(int*) (e + 2));
 		*(char*) (ev + 0xd0) = 1;
 	}
 	else if (ch_IsEntityNearBuildingDoor(e, v8)) {
-		*(unsigned int*) (ev + 0xec) = fcn_004c5290(*(int*) (v8 + 1),
+		*(unsigned int*) (ev + 0xec) = cm_RequestMoveObjekt(*(int*) (v8 + 1),
 			*(int*) (v6 + 1), *(int*) (e + 2));
 		cm_RequestChrMoveToUniverse(*(int*) (e + 2), *(int*) (v8 + 1), 0xffffffff, s_68b1e0);
 		n7 = init_AllocateGebaeudeSceneSlot(v8);
@@ -85,10 +85,10 @@ void __cdecl fcn_0055e4a0(char* ev)
 		if (fcn_0055d630(0)) {
 			idx = g_1043370[n7 * 247];
 			if (idx != 0 && fcn_0045b990(idx, position, (int*) &cellX, (int*) &cellY, (float*) v10)) {
-				fcn_004c5b50(*(int*) (e + 2), cellX, cellY, n7);
+				cm_RequestWalkOnPath(*(int*) (e + 2), cellX, cellY, n7);
 			}
 		}
-		fcn_004c5420(*(int*) (e + 2), 0x13, 1, 0, 0x40);
+		cm_RequestChangeBits(*(int*) (e + 2), 0x13, 1, 0, 0x40);
 		if (*(char*) v8 == 0x47) {
 			io_FormatTextBuffer(buf, 0x1c3b, 1, 0x1c39,
 				*(int*) (v8 + 0x65) * 0x2f4 + (int) g_868060);

@@ -20,7 +20,7 @@ extern __int64 g_666018;
 void __cdecl fcn_005cd440(Desc*, int, int, void*);
 void __cdecl fcn_005c06e0(void);
 
-void __cdecl fcn_005c0a30(void)
+void __cdecl d2_OpenStraftatAccusePicker(void)
 {
 	Desc d;
 

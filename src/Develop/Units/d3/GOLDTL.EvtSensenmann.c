@@ -40,7 +40,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_00558370(char* e);
 void __cdecl he_FreeAction(char* e);
-void __cdecl fcn_004e3640(void);
+void __cdecl msx_RestoreMusicIfAllowed(void);
 void __cdecl fcn_004e4e90(char* name);
 void __cdecl gm_AddTime(char* t, int a, int b, int c);
 int __cdecl fcn_005589d0(char* e);
@@ -66,7 +66,7 @@ void __cdecl EvtSensenmann(char* e)
 			d3_DestroyObject((D3_OBJECT*) (*(int*) (e + 0xc8)));
 		}
 		if (g_7749ec != 0) {
-			fcn_004e3640();
+			msx_RestoreMusicIfAllowed();
 		}
 		g_7749ec = 0;
 		he_FreeAction(e);
@@ -75,7 +75,7 @@ void __cdecl EvtSensenmann(char* e)
 	if (*(int*) (e + 0xc8) == 0 && fcn_00558370(e) == 0) {
 		he_FreeAction(e);
 		if (g_7749ec != 0) {
-			fcn_004e3640();
+			msx_RestoreMusicIfAllowed();
 		}
 		g_7749ec = 0;
 		return;

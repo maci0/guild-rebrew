@@ -57,14 +57,14 @@ void __cdecl fcn_004888a0(int);
 void __cdecl ai_DispatchWorkerRecovery(int);
 void __cdecl ai_CalcAngriff(int, int);
 int __cdecl gm_SearchTable67(int);
-int __cdecl fcn_004fa6f0(int, int*, int*);
+int __cdecl gm_PosToStatsGrid(int, int*, int*);
 int __cdecl fcn_0050c4e0(unsigned char*);
 int __cdecl fcn_0050d0c0(unsigned char*, int);
 int __cdecl gm_AccumulateTyped2(unsigned char*);
 int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl gm_GetBuildingTypeCategory(unsigned int);
 int __cdecl he_HasNoActiveAction0x62(unsigned char*);
-void __cdecl fcn_004c5530(GOLDTL_Msg481*);
+void __cdecl cm_SendCopyEntityData(GOLDTL_Msg481*);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 unsigned short __cdecl gm_RandomMod(int);
@@ -273,7 +273,7 @@ L176c:
 				    && *bld != '!'
 				    && he_HasNoActiveAction0x62(e) != 0) {
 					int node = *(int*) (e + 0x61);
-					if (node == 0 || fcn_004fa6f0(node + 0x4c, &cx, &cy) == 0) {
+					if (node == 0 || gm_PosToStatsGrid(node + 0x4c, &cx, &cy) == 0) {
 						factor = 0;
 					} else {
 						int off = (cy + cx * 8) * 0x18;
@@ -398,7 +398,7 @@ L1a0c2:
 		}
 	}
 	if (msg.f38[0] != -1) {
-		fcn_004c5530(&msg);
+		cm_SendCopyEntityData(&msg);
 	}
 	*(int*) (rec + 0x1c0) = -1;
 	return;
@@ -476,7 +476,7 @@ Lcae:
 			msg.f38[i] = -1;
 		}
 	}
-	fcn_004c5530(&msg);
+	cm_SendCopyEntityData(&msg);
 	return;
 
 Le3e:
@@ -519,7 +519,7 @@ L1e81:
 				if ((q == 0 || *(unsigned short*) (q + 0x27) != hsel)
 				    && candidate->entity_state < 8) {
 					int node = *(int*) (e + 0x61);
-					if (node == 0 || fcn_004fa6f0(node + 0x4c, &cx, &cy) == 0) {
+					if (node == 0 || gm_PosToStatsGrid(node + 0x4c, &cx, &cy) == 0) {
 						factor = 0;
 					} else {
 						int off = (cy + cx * 8) * 0x18;
@@ -603,7 +603,7 @@ L1a0c:
 		}
 	}
 	if (msg.f38[0] != -1) {
-		fcn_004c5530(&msg);
+		cm_SendCopyEntityData(&msg);
 	}
 	*(int*) (rec + 0x1c0) = -1;
 	return;
@@ -661,7 +661,7 @@ L2267:
 		}
 	}
 	if (msg.f38[0] != -1) {
-		fcn_004c5530(&msg);
+		cm_SendCopyEntityData(&msg);
 	}
 	return;
 }

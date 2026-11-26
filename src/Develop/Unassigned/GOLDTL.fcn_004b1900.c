@@ -3,7 +3,7 @@
 extern char* gm_CityEntity;
 
 int __cdecl atoi(const char* s);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004b1900 */
 int __cdecl fcn_004b1900(int a1, int a2, char* s)
@@ -31,7 +31,7 @@ int __cdecl fcn_004b1900(int a1, int a2, char* s)
 		*(int*) (msg + 0xc) = -1;
 		msg[0x36] = 0x12;
 		msg[0x59] = c;
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 	}
 	return 1;
 }

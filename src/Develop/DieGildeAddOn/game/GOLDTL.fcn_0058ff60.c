@@ -36,7 +36,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_004c5530(Packet*);
+void __cdecl cm_SendCopyEntityData(Packet*);
 
 int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char* building, unsigned short* worker, int level)
 {
@@ -60,7 +60,7 @@ int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char* building, unsigned short* work
 		}
 		pkt.x58 = *(int*) (worker + 2);
 		pkt.x5c = level;
-		fcn_004c5530(&pkt);
+		cm_SendCopyEntityData(&pkt);
 		return 1;
 	}
 	return 0;

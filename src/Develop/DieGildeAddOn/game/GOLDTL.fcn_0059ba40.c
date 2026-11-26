@@ -29,9 +29,9 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004c35f0(void);
-int __cdecl fcn_004c5530(void*);
-int __cdecl fcn_004c4450(int);
-int __cdecl fcn_004c4480(int);
+int __cdecl cm_SendCopyEntityData(void*);
+int __cdecl cm_GetCommandStatus(int);
+int __cdecl cm_GetCommandResult(int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl fcn_00532ef0(void);
@@ -41,7 +41,7 @@ void __cdecl fcn_00595330(int, int, int, int, int);
 void __cdecl fcn_00595e20(char*, int);
 void __cdecl fcn_005963f0(int, int, int, char*);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 char* __cdecl itoa(int, char*, int);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 typedef struct {
@@ -167,10 +167,10 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 							req.f68 = req.f12;
 							req.f70 = *(unsigned int*) (r + 2);
 							req.f6c = *(unsigned int*) (q + 2);
-							m = fcn_004c5530(&req);
-							while (!fcn_004c4450(m))
+							m = cm_SendCopyEntityData(&req);
+							while (!cm_GetCommandStatus(m))
 								main_RunFrameLoop(0, 0x20007);
-							found = fcn_004c4480(m);
+							found = cm_GetCommandResult(m);
 located:
 							p = (int*) 0x7e30d0;
 							do {
@@ -262,6 +262,6 @@ located:
 		fcn_005963f0(h, 1, 0, building);
 	} while (main_RunFrameLoop((int) d2_RunProductionTradeDialog, 0x677c7));
 	fcn_00471e30(h);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	return 0;
 }

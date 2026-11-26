@@ -20,7 +20,7 @@ int __cdecl fcn_004e4b20(int a1, int a2, char* name, int mode);
 int __cdecl msx_StartAmbientTrack(char* snd, int flag);
 int __cdecl cut_RandMod(int n);
 void __cdecl fcn_004e4e90(char* snd);
-int __cdecl fcn_00423460(int a1);
+int __cdecl sb_CheckVoicePlaying(int a1);
 void __cdecl cut_WaitTicks(int dur);
 void __cdecl d2_SetForm(int k, int i);
 int __cdecl fcn_00493dc0(unsigned short* a, unsigned short* b);
@@ -34,8 +34,8 @@ int __cdecl fcn_004e4b40(int a1, int a2, char* s, int a4, int a5);
 int __cdecl gm_CalcTrialTortureFee(int a, int b);
 int __cdecl gm_CalcTrialTortureRounds(void* m);
 void __cdecl fcn_00493920(void* m);
-int __cdecl fcn_004c51a0(int a, int b, unsigned char c, int d);
-void __cdecl fcn_004c54c0(int a, int b, int c, int d);
+int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char c, int d);
+void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 float __cdecl fcn_004ff210(int a, int b);
 int __cdecl fcn_005c6270(int a, int b);
 void __cdecl fcn_004f6810(int a, int b);
@@ -44,7 +44,7 @@ void __cdecl fcn_004f6850(int a, int b, int c, int d, int e);
 int* __cdecl gm_GetEntityTableEntry(int a);
 void __cdecl gm_IncrementMissionActionCount(int a, int b);
 void __cdecl fcn_004e48b0(void);
-void __cdecl fcn_004e3640(void);
+void __cdecl msx_RestoreMusicIfAllowed(void);
 void __cdecl fcn_004c09b0(void);
 void __cdecl msx_StopAmbientTrack(int a);
 void __cdecl d3_SelectSceneContext(int a, int b);
@@ -225,7 +225,7 @@ int __cdecl cut_RunProzess(int a0)
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x1491);
 	hWait = fcn_004e4b20(*(unsigned short*) p3c, h2, "_PROZESS_NEU", 5);
-	while (hWait != 0 && fcn_00423460(hWait) != 0) {
+	while (hWait != 0 && sb_CheckVoicePlaying(hWait) != 0) {
 		cut_WaitTicks(1);
 	}
 	cut_WaitTicks(1);
@@ -240,7 +240,7 @@ int __cdecl cut_RunProzess(int a0)
 	io_AppendText(0x1499, *(unsigned short*) p38);
 	hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_NEU",
 		*(char*) (p38 + 9) == 1);
-	while (hWait != 0 && fcn_00423460(hWait) != 0) {
+	while (hWait != 0 && sb_CheckVoicePlaying(hWait) != 0) {
 		cut_WaitTicks(1);
 	}
 	cut_WaitTicks(1);
@@ -291,7 +291,7 @@ int __cdecl cut_RunProzess(int a0)
 				io_AppendText((int) work);
 				hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_GESETZ",
 					tbl.c[0x1e] & 0xff);
-				while (hWait != 0 && fcn_00423460(hWait) != 0) {
+				while (hWait != 0 && sb_CheckVoicePlaying(hWait) != 0) {
 					cut_WaitTicks(1);
 				}
 				cut_WaitTicks(1);
@@ -310,7 +310,7 @@ int __cdecl cut_RunProzess(int a0)
 		ch = *(char*) (p38 + 9);
 		hWait = fcn_004e4b20(*(unsigned short*) p34, h2, "_PROZESS_NEU", (ch != 0) + 2);
 	}
-	while (hWait != 0 && fcn_00423460(hWait) != 0) {
+	while (hWait != 0 && sb_CheckVoicePlaying(hWait) != 0) {
 		cut_WaitTicks(1);
 	}
 	cut_WaitTicks(1);
@@ -451,11 +451,11 @@ int __cdecl cut_RunProzess(int a0)
 			eIdx = g_774970;
 			if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 				div3 = msg.pad[1] / 3;
-				fcn_004c51a0(*(int*) (p3c + 4), *(int*) (p34 + 4),
+				cm_RequestTransferCurrencyNoKill(*(int*) (p3c + 4), *(int*) (p34 + 4),
 					*(signed char*) 0x773d75, div3);
-				fcn_004c51a0(*(int*) (p40 + 4), *(int*) (p34 + 4),
+				cm_RequestTransferCurrencyNoKill(*(int*) (p40 + 4), *(int*) (p34 + 4),
 					*(signed char*) 0x773d75, div3);
-				fcn_004c51a0(*(int*) (p44 + 4), *(int*) (p34 + 4),
+				cm_RequestTransferCurrencyNoKill(*(int*) (p44 + 4), *(int*) (p34 + 4),
 					*(signed char*) 0x773d75, div3);
 			}
 
@@ -542,7 +542,7 @@ int __cdecl cut_RunProzess(int a0)
 			io_AppendText(0x6811b0);
 			io_AppendText(0x14e4);
 			hWait = fcn_004e4b20(*(unsigned short*) p3c, h2, "_PROZESS_NEU", 4);
-			while (hWait != 0 && fcn_00423460(hWait) != 0) {
+			while (hWait != 0 && sb_CheckVoicePlaying(hWait) != 0) {
 				cut_WaitTicks(1);
 			}
 			cut_WaitTicks(1);
@@ -768,11 +768,11 @@ int __cdecl cut_RunProzess(int a0)
 		eIdx = g_774970;
 		if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 			div3 = msg.pad[0] / 3;
-			fcn_004c51a0(*(int*) (p3c + 4), *(int*) (p38 + 4),
+			cm_RequestTransferCurrencyNoKill(*(int*) (p3c + 4), *(int*) (p38 + 4),
 				*(signed char*) 0x773d75, div3);
-			fcn_004c51a0(*(int*) (p40 + 4), *(int*) (p38 + 4),
+			cm_RequestTransferCurrencyNoKill(*(int*) (p40 + 4), *(int*) (p38 + 4),
 				*(signed char*) 0x773d75, div3);
-			fcn_004c51a0(*(int*) (p44 + 4), *(int*) (p38 + 4),
+			cm_RequestTransferCurrencyNoKill(*(int*) (p44 + 4), *(int*) (p38 + 4),
 				*(signed char*) 0x773d75, div3);
 		}
 		cut_WaitTicks(6);
@@ -798,11 +798,11 @@ int __cdecl cut_RunProzess(int a0)
 		eIdx = g_774970;
 		if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
 			div3 = msg.pad[0] / 3;
-			fcn_004c51a0(*(int*) (p3c + 4), *(int*) (p34 + 4),
+			cm_RequestTransferCurrencyNoKill(*(int*) (p3c + 4), *(int*) (p34 + 4),
 				*(signed char*) 0x773d75, div3);
-			fcn_004c51a0(*(int*) (p40 + 4), *(int*) (p34 + 4),
+			cm_RequestTransferCurrencyNoKill(*(int*) (p40 + 4), *(int*) (p34 + 4),
 				*(signed char*) 0x773d75, div3);
-			fcn_004c51a0(*(int*) (p44 + 4), *(int*) (p34 + 4),
+			cm_RequestTransferCurrencyNoKill(*(int*) (p44 + 4), *(int*) (p34 + 4),
 				*(signed char*) 0x773d75, div3);
 		}
 	}
@@ -813,12 +813,12 @@ int __cdecl cut_RunProzess(int a0)
 			fcn_004ff210(*(unsigned short*) p38, (int) *(float*) &msg.pad[8]);
 		}
 		if (fcn_005c6270((int) p38, 0x22e) != 0) {
-			fcn_004c54c0(*(int*) (p38 + 4), *(int*) (p3c + 4), -0x1a, 1);
-			fcn_004c54c0(*(int*) (p34 + 4), *(int*) (p3c + 4), 0x1a, 1);
-			fcn_004c54c0(*(int*) (p38 + 4), *(int*) (p40 + 4), -0x1a, 1);
-			fcn_004c54c0(*(int*) (p34 + 4), *(int*) (p40 + 4), 0x1a, 1);
-			fcn_004c54c0(*(int*) (p38 + 4), *(int*) (p44 + 4), -0x1a, 1);
-			fcn_004c54c0(*(int*) (p34 + 4), *(int*) (p44 + 4), 0x1a, 1);
+			cm_RequestCopyEntityData(*(int*) (p38 + 4), *(int*) (p3c + 4), -0x1a, 1);
+			cm_RequestCopyEntityData(*(int*) (p34 + 4), *(int*) (p3c + 4), 0x1a, 1);
+			cm_RequestCopyEntityData(*(int*) (p38 + 4), *(int*) (p40 + 4), -0x1a, 1);
+			cm_RequestCopyEntityData(*(int*) (p34 + 4), *(int*) (p40 + 4), 0x1a, 1);
+			cm_RequestCopyEntityData(*(int*) (p38 + 4), *(int*) (p44 + 4), -0x1a, 1);
+			cm_RequestCopyEntityData(*(int*) (p34 + 4), *(int*) (p44 + 4), 0x1a, 1);
 		}
 	}
 	/* 0x4df09b cleanup ladder */
@@ -830,7 +830,7 @@ int __cdecl cut_RunProzess(int a0)
 	if (msg.hnd[7] != 0) {
 		msx_StopAmbientTrack(msg.hnd[7]);
 	}
-	fcn_004e3640();
+	msx_RestoreMusicIfAllowed();
 	fcn_004c09b0();
 	if (h2 != 0) {
 		fcn_004e4b00(h2);

@@ -43,7 +43,7 @@ extern void __cdecl d2_SetForm(int, int);
 extern int __cdecl io_AppendText(int, ...);
 extern int __cdecl d2_GetWindowListItem(int, int, int);
 extern void __cdecl fcn_004c35f0(void);
-extern void __cdecl fcn_004c5530(Msg_59d380*);
+extern void __cdecl cm_SendCopyEntityData(Msg_59d380*);
 extern void __cdecl sv_ClearObjectSelection(void);
 extern int __cdecl main_RunFrameLoop(void*, int);
 extern void __cdecl fcn_00471e30(int);
@@ -134,7 +134,7 @@ int __cdecl fcn_0059d380(int a0, char* object)
 					break;
 				}
 			}
-			fcn_004c5530(&message);
+			cm_SendCopyEntityData(&message);
 			g_774654 = 1;
 			sv_ClearObjectSelection();
 		} else if (d2_CurrentElementId == item2) {

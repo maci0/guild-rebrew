@@ -56,7 +56,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_004c5530(Packet*);
+int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -115,7 +115,7 @@ int __cdecl fcn_0059cde0(char* name)
 							q++;
 						}
 					}
-					fcn_004c5530(&pkt);
+					cm_SendCopyEntityData(&pkt);
 				}
 				sv_ClearObjectSelection();
 				r = 1;

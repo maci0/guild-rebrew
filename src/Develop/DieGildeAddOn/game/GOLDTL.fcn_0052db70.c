@@ -7,7 +7,7 @@ extern unsigned char g_slot_table[2];
 extern float g_696540[];
 extern float g_696550[];
 
-int __cdecl fcn_00500e20(int*);
+int __cdecl gm_GetSeason(int*);
 void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void* __cdecl evt_LoadGfxScript(char*);
@@ -29,7 +29,7 @@ void __cdecl fcn_0052db70(char* buildingRecord)
 	int p;
 	float ft;
 
-	sel = fcn_00500e20(&gm_GameTime);
+	sel = gm_GetSeason(&gm_GameTime);
 
 	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[(unsigned char) *buildingRecord].category == 7 ||
 	    *(int*) (buildingRecord + 0x61) == 0) {

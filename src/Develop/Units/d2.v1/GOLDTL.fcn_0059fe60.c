@@ -34,7 +34,7 @@ void __cdecl fcn_00472640(int, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 unsigned short *__cdecl fcn_005cd440(int *, char *, char *, int);
 int __cdecl fcn_00526120(char *, int);
-void __cdecl fcn_004c5530(char *);
+void __cdecl cm_SendCopyEntityData(char *);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_0059fa80(Slot59fe *, char *, char *);
 int __cdecl main_RunFrameLoop(void *, int);
@@ -142,7 +142,7 @@ void __cdecl fcn_0059fe60(char *a0)
 						*(int *) (msg + 0xc) = *(int *) (a0 + 1);
 						*(int *) (msg + 0x5c) = *(int *) (sel + 2);
 						*(int *) (msg + 0x58) = g_7f4ca0[g_774970].f4;
-						fcn_004c5530(msg);
+						cm_SendCopyEntityData(msg);
 					}
 				}
 			} else {

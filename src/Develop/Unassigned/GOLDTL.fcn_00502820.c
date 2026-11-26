@@ -7,7 +7,7 @@ extern char g_665b88[];
 
 #pragma intrinsic(fabs, sqrt)
 
-double __cdecl fcn_00502820(int x1, int y1, int x2, int y2)
+double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
 {
 	double dx;
 	double dy;

@@ -1732,3 +1732,158 @@ date	module_va	old_name	new_name	basis	confidence	twins	evidence
 2026-11-26	GOLDTL.0x004b4ec0	fcn_004b4ec0	gm_HasMinBuildingOwnershipShare	inferred	high	GOLD.0x004b4d50	Called from gm_CheckMissionCondition case 47; compares building ownership share v[2] against spec+0x14 percent threshold. Renamed a->unused, e->spec.
 2026-11-26	GOLDTL.0x004bc9c0	fcn_004bc9c0	d3_CollectSceneObjectsByName	inferred	high	GOLD.0x004bc4b0	Callback passed from GOLDTL.fcn_004bca30.c; matches scene object name against pickctx.name and collects up to 32 pointers. Multi-file type pickctx out of scope.
 2026-11-26	GOLDTL.0x004c27f0	fcn_004c27f0	msx_FindActiveGroup	inferred	high	GOLD.0x004c1f90	Scans 0x114-byte IdGroup array g_688118 and returns first active slot index (+0x112 != 0). Multi-file type IdGroup out of scope.
+2026-11-26	GOLDTL.0x005b3270	fcn_005b3270	he_NotifyDomizilAccident	inferred	high	GOLD.0x005a9df0	Domizil accident notification (0x407a); a2,a3->actor,building; RELOC(31).
+2026-11-26	GOLDTL.0x005b32d0	fcn_005b32d0	he_NotifyDomizilEvent	inferred	high	GOLD.0x005a9e50	Domizil event notification (0x407b); a3->building; RELOC(28).
+2026-11-26	GOLDTL.0x005b3330	fcn_005b3330	he_NotifyAlchemistDiscovery	inferred	high	GOLD.0x005a9eb0	Alchemist essence discovery notification (0x407c); a1..a4 renamed; RELOC(39).
+2026-11-26	GOLDTL.0x005b33a0	fcn_005b33a0	he_NotifyDomizilSkillGain	inferred	high	GOLD.0x005a9f20	Domizil skill gain notification (0x407f); a2,a3->actor,building; RELOC(31).
+2026-11-26	GOLDTL.0x005b3410	fcn_005b3410	he_NotifyDomizilStatus	inferred	high	GOLD.0x005a9f90	Domizil status notification (_NACHRICHTEN_DOMIZIL_12); 004ef250 verified RELOC(22).
+2026-11-26	GOLDTL.0x005b56e0	fcn_005b56e0	gm_PickRandomOfferId	inferred	high	GOLD.0x005aa060	Picks random offer ID in [lo, hi]; 0057dc30 verified RELOC(42).
+2026-11-26	GOLDTL.0x005b9cb0	fcn_005b9cb0	d2_SellObjectsDialog	inferred	high	GOLD.0x005ae6c0	Quick-sell objects 0.4x confirmation dialog; callers verified RELOC(109).
+2026-11-26	GOLDTL.0x005b9df0	fcn_005b9df0	cm_DispatchCartTransfer	inferred	high	GOLD.0x005ae800	Dispatches cart transfer cmd 0x0f; idx,p,q,r->playerIdx,cart,origin,dest; RELOC(122).
+2026-11-26	GOLDTL.0x005b9fb0	fcn_005b9fb0	cm_CompleteAction0x0f	inferred	high	GOLD.0x005ae9c0	Completes active action 0x0f on cart; callers verified RELOC(31).
+2026-11-26	GOLDTL.0x005ba020	fcn_005ba020	gm_CanTradeWithObject	inferred	high	GOLD.0x005aea30	Checks trade range 1350f or owner chain; a1,a2->building,target; RELOC(78).
+2026-11-26	GOLDTL.0x005ba900	fcn_005ba900	d2_OpenShopTradePanel	inferred	high	GOLD.0x005af310	Opens shop trade panel mode 4; 0059e390 verified RELOC(6).
+2026-11-26	GOLDTL.0x005c0670	fcn_005c0670	d2_OpenPaymentTargetPicker	inferred	high	GOLD.0x005b4d40	Opens action 0x10 payment target picker; 0059f6c0 verified RELOC(25).
+2026-11-26	GOLDTL.0x005c0a30	fcn_005c0a30	d2_OpenStraftatAccusePicker	inferred	high	GOLD.0x005b5100	Opens action 0x2e accusation target picker; 0059f8b0 verified RELOC(22).
+2026-11-26	GOLDTL.0x005c1090	fcn_005c1090	d2_OpenDuelTargetPicker	inferred	high	GOLD.0x005b5760	Opens action 0x35 duel target picker; a1->enabled; RELOC(31).
+2026-11-26	GOLDTL.0x005ca560	fcn_005ca560	d2_BuildPersonStatusDesc	inferred	high	GOLD.0x005be320	Builds Sel person tooltip/status string IDs (0x6c9..0x6d2); 30 files verified RELOC(145).
+2026-11-26	GOLDTL.0x005cf560	fcn_005cf560	d2_OpenMeisterbriefDialog	inferred	high	GOLD.0x005c3350	Opens master craft letter confirm/dialog; 16 files verified RELOC(155).
+2026-11-26	GOLDTL.0x005d4fa0	fcn_005d4fa0	d2_ShowMedicusDialog	inferred	high	GOLD.0x005c8d10	Physician privilege dialog (privillegien\medicus, gm_CureRandomAffliction); RELOC(259).
+2026-11-26	GOLDTL.0x005d6950	fcn_005d6950	d2_ShowAbsetzenDialog	inferred	high	GOLD.0x005ca6b0	Office removal privilege dialog (privillegien\absetzen); 004f8020 verified RELOC(227).
+2026-11-26	GOLDTL.0x004275a0	fcn_004275a0	evt_TrySkipIfFalseBlock	inferred	medium	GOLD.0x00428d10	Skips nested condition/block via evt_SkipBlock when flag byte is zero; client twin GOLD.0x00428d10.
+2026-11-26	GOLDTL.0x004298e0	fcn_004298e0	evt_CloseAllScripts	inferred	medium	GOLD.0x0042b010	Closes active script table entries via fcn_004298b0/fcn_00429000; client twin GOLD.0x0042b010.
+2026-11-26	GOLDTL.0x00429e60	fcn_00429e60	evt_FindCommand	inferred	medium	GOLD.0x0042b540	Looks up registered event command entry by name in g_6b7f7c; client twin GOLD.0x0042b540.
+2026-11-26	GOLDTL.0x0042a070	fcn_0042a070	evt_ResetCurrentContextId	inferred	medium	GOLD.0x0042b710	Resets active script context ID global g_6b7f8c to zero; client twin GOLD.0x0042b710.
+2026-11-26	GOLDTL.0x0042a0e0	fcn_0042a0e0	msx_SetMasterVolume	inferred	medium	GOLD.0x0042b780	Sets AIL digital master volume via g_6623b0 (_AIL_set_digital_master_volume@8); client twin GOLD.0x0042b780.
+2026-11-26	GOLDTL.0x0042a350	fcn_0042a350	msx_CloseAllWaveDrivers	inferred	medium	GOLD.0x0042b9f0	Iterates msx_WaveDrivers array closing each driver handle via fcn_0042a2d0; client twin GOLD.0x0042b9f0.
+2026-11-26	GOLDTL.0x0042a3d0	fcn_0042a3d0	msx_ReleaseAllDrivers	inferred	medium	GOLD.0x0042ba70	Releases digital/wave/timer driver slots on AIL shutdown; client twin GOLD.0x0042ba70.
+2026-11-26	GOLDTL.0x0042a460	fcn_0042a460	msx_ReacquireAllWaveDrivers	inferred	medium	GOLD.0x0042bb00	Iterates msx_WaveDrivers calling msx_ReacquireWaveDriver (renamed params window, message); client twin GOLD.0x0042bb00.
+2026-11-26	GOLDTL.0x0042a5d0	fcn_0042a5d0	msx_SetSampleData	inferred	medium	GOLD.0x0042bbf0	Sets sample data via g_662398 (_AIL_set_named_sample_file@20, renamed params sampleHandle, fileExt, data, size); client twin GOLD.0x0042bbf0.
+2026-11-26	GOLDTL.0x0042aaa0	fcn_0042aaa0	msx_GetSampleStatus	inferred	medium	GOLD.0x0042be80	Validates sample handle index and returns AIL sample status via g_662450 (_AIL_sample_status@4); client twin GOLD.0x0042be80.
+2026-11-26	GOLDTL.0x0042abd0	fcn_0042abd0	msx_OpenStream	inferred	medium	GOLD.0x0042beb0	Opens audio stream via g_662404 (_AIL_open_stream@12, renamed filename/AILOpenStreamFn/AILLastErrorFn); client twin GOLD.0x0042beb0.
+2026-11-26	GOLDTL.0x0042b790	fcn_0042b790	txt_SkipLeadingSpaces	inferred	medium	GOLD.0x0042c430	Advances char pointer past leading ASCII spaces (0x20); client twin GOLD.0x0042c430.
+2026-11-26	GOLDTL.0x0042dde0	fcn_0042dde0	tb_StartTimer	inferred	medium	GOLD.0x0042e8c0	Initializes WinMM multimedia timer using timeGetDevCaps/timeBeginPeriod/timeSetEvent; client twin GOLD.0x0042e8c0.
+2026-11-26	GOLDTL.0x0042df30	fcn_0042df30	tb_SetCallbackPaused	inferred	medium	GOLD.0x0042ea10	Looks up timer slot for callback and sets paused flag under critical section; client twin GOLD.0x0042ea10.
+2026-11-26	GOLDTL.0x0042df70	fcn_0042df70	tb_IsCallbackPaused	inferred	medium	GOLD.0x0042ea50	Queries paused state of registered timer callback slot under critical section; client twin GOLD.0x0042ea50.
+2026-11-26	GOLDTL.0x0042f420	fcn_0042f420	vfs_BuildDirPath	inferred	medium	GOLD.0x0042fbf0	Recursively builds backslash-delimited directory path string up to stop node; client twin GOLD.0x0042fbf0.
+2026-11-26	GOLDTL.0x00431330	fcn_00431330	d3_AccumulateAnimDelta	inferred	medium	GOLD.0x00431750	Interpolates position/rotation keyframes for animation channel (renamed type AnimFrame); client twin GOLD.0x00431750.
+2026-11-26	GOLDTL.0x004378c0	fcn_004378c0	d3_MatchObjectTypeMask	inferred	medium	GOLD.0x00438c60	Matches object type enum (1..9) against 9-bit scene traversal mask; client twin GOLD.0x00438c60.
+2026-11-26	GOLDTL.0x00438ac0	fcn_00438ac0	d3_InvalidateSubTreeFlags	inferred	medium	GOLD.0x0043b6b0	Clears bit flags across object subtree via d3_VisitSceneObjects (renamed params node, clearBit); client twin GOLD.0x0043b6b0.
+2026-11-26	GOLDTL.0x00438d70	fcn_00438d70	d3_SetObjectEulerRotation	inferred	medium	GOLD.0x0043b920	Builds rotation vector around Y/Z/X from scaled integer degrees via d3_SetObjectRotation; client twin GOLD.0x0043b920.
+2026-11-26	GOLDTL.0x00442c00	fcn_00442c00	d3_SetObjectVisible	inferred	medium	GOLD.0x004471b0	Sets/clears visibility flag bit 0x10 on object and propagates visibility to children; client twin GOLD.0x004471b0.
+2026-11-26	GOLDTL.0x00442cb0	fcn_00442cb0	d3_SetSubObjectVisibleCallback	inferred	medium	GOLD.0x00447260	Sets/clears visibility bit 0x10 on object node without subtree recursion; client twin GOLD.0x00447260.
+2026-11-26	GOLDTL.0x004458a0	fcn_004458a0	d3_ApplyWorldTransformToObject	inferred	medium	GOLD.0x00449920	Converts world pos/rot into local space via fcn_00445760 and updates object (renamed params pos, rotMatrix); client twin GOLD.0x00449920.
+2026-11-26	GOLDTL.0x00445d00	fcn_00445d00	d3_ScaleNodeIntensityCallback	inferred	medium	GOLD.0x00449d80	Multiplies node vector components at +0xd8/+0xdc/+0xe0 by RGB scale vector; client twin GOLD.0x00449d80.
+2026-11-26	GOLDTL.0x00449ac0	fcn_00449ac0	d3_AppendVfsAssetPath	inferred	medium	GOLD.0x0044c530	Builds asset path under current VFS working dir or root via vfs_ResolvePath; client twin GOLD.0x0044c530.
+2026-11-26	GOLDTL.0x0044cf30	fcn_0044cf30	d3_ParseMatBaseMap	attested	high	GOLD.0x0044e700	Text material parser handler for BASE_MAP token in 0x67b240 table (renamed param unused); client twin GOLD.0x0044e700.
+2026-11-26	GOLDTL.0x0044cfa0	fcn_0044cfa0	d3_ParseMatBumpMap	attested	high	GOLD.0x0044e770	Text material parser handler for BUMP_MAP token in 0x67b240 table (renamed param unused); client twin GOLD.0x0044e770.
+2026-11-26	GOLDTL.0x0044d580	fcn_0044d580	d3_ParseMeshTimeIndex	attested	high	GOLD.0x0044ecc0	Text mesh parser handler for TIME_INDEX token in 0x67b240 table (renamed param unused); client twin GOLD.0x0044ecc0.
+2026-11-26	GOLDTL.0x0044d640	fcn_0044d640	d3_ParseMeshVertices	attested	high	GOLD.0x0044ed80	Text mesh parser handler for VERTICES token in 0x67b240 table; client twin GOLD.0x0044ed80.
+2026-11-26	GOLDTL.0x0044d960	fcn_0044d960	d3_ReadMatBumpMap	attested	high	GOLD.0x0044f030	Binary .B material reader for bump-map entry ("BUMP_MAP" log string); client twin GOLD.0x0044f030.
+2026-11-26	GOLDTL.0x0044db40	fcn_0044db40	d3_ReadMatFlags	attested	high	GOLD.0x0044f210	Binary .B material reader for material flag bytes; client twin GOLD.0x0044f210.
+2026-11-26	GOLDTL.0x0044ddd0	fcn_0044ddd0	d3_ReadFaceTexCoords	inferred	medium	GOLD.0x0044f4a0	Binary .B reader parsing UV texture coordinates into mesh face buffer; client twin GOLD.0x0044f4a0.
+2026-11-26	GOLDTL.0x0044de50	fcn_0044de50	d3_SkipVector3	inferred	medium	GOLD.0x0044f520	Binary .B reader advancing stream past 3 dummy 4-byte floats; client twin GOLD.0x0044f520.
+2026-11-26	GOLDTL.0x0044e000	fcn_0044e000	d3_ReadMeshVertices	attested	high	GOLD.0x0044f6d0	Binary .B counterpart to d3_ParseMeshVertices reading vertex coordinates from stream; client twin GOLD.0x0044f6d0.
+2026-11-26	GOLDTL.0x00592370	fcn_00592370	ls_LoadSlot779d00	inferred	high	GOLD.0x00589e00	loads Slot_779d00 array from savegame; caller 00521920	GOLDTL.fcn_00592370.c
+2026-11-26	GOLDTL.0x005b1ff0	fcn_005b1ff0	ls_LoadList774a78	inferred	high	GOLD.0x005a8b70	loads list g_774a78 entries from savegame; caller 00521920	GOLDTL.fcn_005b1ff0.c
+2026-11-26	GOLDTL.0x005e8d00	fcn_005e8d00	ls_LoadWeatherState	inferred	high	GOLD.0x005dc210	loads weather state fields from savegame; caller 005255b0	GOLDTL.fcn_005e8d00.c
+2026-11-26	GOLDTL.0x004e7700	fcn_004e7700	srv_FormatStatEntity	inferred	high	GOLD.0x004e5bf0	orchestrates server stat text formatting for entity; caller 00543080	GOLDTL.fcn_004e7700.c
+2026-11-26	GOLD.0x00401040	fcn_00401040	StripPathAndExt	inferred	high	GOLDTL.0x00401040	strips directory path and extension from filename; 8 callers	GOLD.fcn_00401040.c
+2026-11-26	GOLD.0x0040abd0	fcn_0040abd0	ch_DequeueIfIdle	inferred	high	GOLDTL.0x0040ba00	dequeues next action if current state is -1; caller ch_InitActionQueue	GOLD.fcn_0040abd0.c
+2026-11-26	GOLD.0x00426170	fcn_00426170	d3snd_SetVoiceFlag0x10	inferred	high	GOLDTL.0x004225e0	sets or clears flag bit 0x10 on sound voice slot; 10 callers	GOLD.fcn_00426170.c
+2026-11-26	GOLD.0x004273c0	fcn_004273c0	sbs_IsReady	inferred	high	GOLDTL.0x00425970	checks g_0063319c != 0 sound system readiness; callers 004b5630, 0058e220	GOLD.fcn_004273c0.c
+2026-11-26	GOLD.0x0047dd60	fcn_0047dd60	gm_IsNpcEntityState	inferred	high	GOLDTL.0x0047d220	tests entity state byte in {2,3,4,5}; 8 callers	GOLD.fcn_0047dd60.c
+2026-11-26	GOLD.0x004b39f0	fcn_004b3b60	gm_ClearMissionJobs	inferred	high	GOLDTL.0x004b3b60	zeroes g_10069a0 mission Job table; callers 0053fa80, 005435e0	GOLD.fcn_004b39f0.c
+2026-11-26	GOLD.0x004b4590	fcn_004b4590	gm_CheckStatRankThreshold	inferred	high	GOLDTL.0x004b4700	checks player rank byte against threshold; caller 004b5070	GOLD.fcn_004b4590.c
+2026-11-26	GOLD.0x004bd9b0	fcn_004bd9b0	m_UnlinkAndFreeNode	inferred	high	GOLDTL.0x004be250	unlinks doubly-linked list node and frees via m_FreeMemory; caller 004bf1b0	GOLD.fcn_004bd9b0.c
+2026-11-26	GOLD.0x004bf3e0	fcn_004bf3e0	d2_FindRadioSlotByValue	inferred	high	GOLDTL.0x004bfc40	finds D2_RADIO_SLOT matching value; caller 004bf1b0	GOLD.fcn_004bf3e0.c
+2026-11-26	GOLD.0x004c3f90	fcn_004c3f90	cm_SendQuitGameCommand	inferred	high	GOLDTL.0x004c4900	sends quit-game command packet 0x1335; caller 005e43f0	GOLD.fcn_004c3f90.c
+2026-11-26	GOLD.0x004cced0	fcn_004cced0	cm_ChkGraveyardTransfer	inferred	high	GOLDTL.0x004cda50	validates graveyard occupancy/unit count for player	GOLD.fcn_004cced0.c
+2026-11-26	GOLDTL.0x0041bcd0	fcn_0041bcd0	d3_QuantizeImageOctree	inferred	high	GOLD.0x004206d0	Octree color quantizer entrypoint clearing tree, inserting pixels, building palette and remapping indexed surface
+2026-11-26	GOLDTL.0x0041bd80	fcn_0041bd80	d3_CopyOctreePalette	inferred	high	GOLD.0x00420780	Copies 256 RGB palette entries from g_6b6008/g_6b6108/g_6b6208 planar tables into out_palette
+2026-11-26	GOLDTL.0x0041be70	fcn_0041be70	d3_AllocOctreeNodes	inferred	high	GOLD.0x00420870	Allocates 6 levels of COLOR_OCTREE_NODE arrays (1..8^5 nodes) in g_6b6f20
+2026-11-26	GOLDTL.0x0041bf00	fcn_0041bf00	d3_FreeOctreeNodes	inferred	high	GOLD.0x00420900	Frees the 6 COLOR_OCTREE_NODE level arrays in g_6b6f20
+2026-11-26	GOLDTL.0x0041c190	fcn_0041c190	d3_SiftDownOctreeHeap	inferred	high	GOLD.0x00420b90	Restores octree reduction min-heap property on g_6b6f38/g_6b7338 using node pixel counts
+2026-11-26	GOLDTL.0x0041c3b0	fcn_0041c3b0	d3_AssignOctreePalette	inferred	high	GOLD.0x00420db0	Recursively traverses octree assigning palette indices and averaged RGB entries into g_6b6008
+2026-11-26	GOLDTL.0x0041ca10	fcn_0041ca10	d3_FindNearestPaletteColor	inferred	high	GOLD.0x00421410	Scans g_6b6008/g_6b6108/g_6b6208 for nearest RGB color index by squared Euclidean distance
+2026-11-26	GOLDTL.0x0041d350	fcn_0041d350	EmitCrashModuleLine	attested	high	GOLD.0x00421d50	Client twin of Error.c EmitCrashModuleLine logging crashing module and VA line
+2026-11-26	GOLDTL.0x0041d500	fcn_0041d500	check_memory_protection	attested	high	GOLD.0x00421f00	Client twin of Error.c check_memory_protection validating readable/writable page protection
+2026-11-26	GOLDTL.0x0041e530	fcn_0041e530	VideoWindowProc	inferred	high	GOLD.0x00422c90	Window proc handling WM_DESTROY, Escape/Space skip and 0x9021 video completion via PollVideoEvents
+2026-11-26	GOLDTL.0x0041f530	fcn_0041f530	PollVideoEvents	inferred	high	GOLD.0x004234a0	Polls DirectShow IMediaEvent GetEvent/FreeEventParams for video id until completion or abort
+2026-11-26	GOLDTL.0x00422460	fcn_00422460	sb_PrepareVoice	inferred	high	GOLD.0x00426030	Allocates voice via sb_AllocVoice, resolves sample via sb_FindSampleByName, and sets volume/pan/loop
+2026-11-26	GOLDTL.0x00422600	fcn_00422600	sb_PreparePrioritizedVoice	inferred	high	GOLD.0x00426190	Allocates prioritized voice resolving sample by bank/name and configuring pan/loop/volume
+2026-11-26	GOLDTL.0x004226b0	fcn_004226b0	sb_SetSampleBasePath	inferred	high	GOLD.0x00426240	Copies sample base directory path into g_6b7d88 appending trailing backslash if missing
+2026-11-26	GOLDTL.0x00422760	fcn_00422760	sb_FindVoiceBySample	inferred	high	GOLD.0x004262f0	Searches voice table g_6b7e88 from *idx for matching sample key
+2026-11-26	GOLDTL.0x004229b0	fcn_004229b0	sb_AllocVoice	inferred	high	GOLD.0x00426540	Allocates or steals lowest-priority/idle SOUND_VOICE slot from g_6b7e88 and opens MSS sample handle
+2026-11-26	GOLDTL.0x00423460	fcn_00423460	sb_CheckVoicePlaying	inferred	high	GOLD.0x00426f20	Queries msx_GetSampleStatus on *voice handle returning -1 when playing (status == 4)
+2026-11-26	GOLDTL.0x004234a0	fcn_004234a0	sb_IsSampleType2	inferred	high	GOLD.0x00426f60	Looks up sample via sb_FindSampleByName and returns 1 when sample[0x36] == 2 or audio disabled
+2026-11-26	GOLDTL.0x004c2d50	fcn_004c2d50	msx_RestoreMusicVolume	inferred	high	GOLD.0x004c2480	Counterpart of fcn_004c2c50; restores g_772d10=g_772d14, clears g_772d28, fades music volume to 1.0f/3000ms; callers GOLD.fcn_004e3640.c and GOLDTL.fcn_004d2a60.c.
+2026-11-26	GOLDTL.0x004c34d0	fcn_004c34d0	d3snd_FreeObjectSoundBanks	inferred	high	GOLD.0x004c2c00	Frees g_772e6c/70/74/7c object sound banks; callers GOLDTL.fcn_005a76b0.c and GOLDTL.fcn_005a80d0.c.
+2026-11-26	GOLDTL.0x004c4090	fcn_004c4090	cm_FlushPendingDataPackets	inferred	high	GOLD.0x004c3720	Flushes g_aed330 bulk packet queue as type=7 commands before fcn_004c4330 dispatch; caller GOLDTL.fcn_004c4330.c.
+2026-11-26	GOLDTL.0x004c44c0	fcn_004c44c0	cm_AreQueuedCommandsDone	inferred	high	GOLD.0x004c3b50	Polls g_fb5760 status range g_100581c..g_aed204 to report queued command completion; 14 caller files updated and re-verified.
+2026-11-26	GOLDTL.0x004c4860	fcn_004c4860	cm_SetGameSpeedSetting	inferred	high	GOLD.0x004c3ef0	Clamps speed<=4 and sends sysmsg 0x12 on change vs g_68a9cc; caller fcn_005145a0.c; renamed param a1->speed.
+2026-11-26	GOLDTL.0x004c4e40	fcn_004c4e40	cm_RequestSendGameHeader	inferred	high	GOLD.0x004c44d0	Builds command 0x08 packet for cm_ExSendGameHeader from GOLDTL.ls_SendGame.c; renamed param a1->totalBytes.
+2026-11-26	GOLDTL.0x004c4fc0	fcn_004c4fc0	cm_RequestAllocSpieler	inferred	high	GOLD.0x004c4650	Builds command 0x0b packet for cm_ExAllocSpieler (command.c:1638, gm_AllocSpieler); 16 callers verified; renamed params a..h->type/motherId/fatherId/parentId/locationId/statA/statB/flags.
+2026-11-26	GOLDTL.0x004c51a0	fcn_004c51a0	cm_RequestTransferCurrencyNoKill	inferred	high	GOLD.0x004c4830	Builds command 0x10 packet for cm_ExTransferCurrencyNoKill; 108 .c callers verified; renamed params a1..a4->destId/srcId/slotKind/amount.
+2026-11-26	GOLDTL.0x004c5360	fcn_004c5360	cm_RequestChangeAttribute	inferred	high	GOLD.0x004c49a0	Builds command 0x16 packet via g_aed220 for cm_ExChangeAttribute; 110 .c callers verified identical.
+2026-11-26	GOLDTL.0x004c54c0	fcn_004c54c0	cm_RequestCopyEntityData	inferred	high	GOLD.0x004c4b00	Builds command 0x1b packet for cm_ExCopyEntityData; 83 .c callers verified identical; renamed params a1..a4->targetId/sourceId/value/mode.
+2026-11-26	GOLDTL.0x004c57e0	fcn_004c57e0	cm_RequestKillSpieler	inferred	high	GOLD.0x004c4e00	Builds command 0x21 packet for cm_ExKillSpieler; 14 .c files verified identical; renamed params a1/a2->entityId/flag.
+2026-11-26	GOLDTL.0x004c5a20	fcn_004c5a20	cm_RequestRemoveCutsceneParticipant	inferred	high	GOLD.0x004c4fd0	Builds command 0x2a packet for 0x004c9fa0 cut_RemoveParticipant; 3 .c files verified identical; renamed params a1/a2->cutsceneId/participantId.
+2026-11-26	GOLDTL.0x004c5ba0	fcn_004c5ba0	cm_RequestChrWalkToDummy	inferred	high	GOLD.0x004c5150	Builds command 0x2f packet for cm_ExChrWalkToDummy (GOLDTL.0x004ca3d0); 5 .c files verified identical; renamed params a1..a3->charId/gebId/objId.
+
+2026-11-26	GOLDTL.0x004c51f0	fcn_004c51f0	cm_SendSellObjekt	inferred	high	GOLD.0x004c4880	Sends cmd 0x11 sell-object packet (cm_ExSellObjekt 004c7c50); RELOC(19) GOLDTL/GOLD, all 69 caller files non-regressing.
+
+2026-11-26	GOLDTL.0x004c53a0	fcn_004c53a0	cm_SendSetAttribute	inferred	high	GOLD.0x004c49e0	Sends cmd 0x17 attribute packet from g_aed220 (cm_ExSetAttribute 004c8b10) across 23 callers; RELOC(15) GOLDTL/GOLD, all 23 caller files non-regressing.
+
+2026-11-26	GOLDTL.0x004c5530	fcn_004c5530	cm_SendCopyEntityData	inferred	high	GOLD.0x004c4b70	Sends cmd 0x1c 0xf8-byte entity/event payload (cm_ExCopyEntityData 004c9160) across 231 callers; RELOC(20) GOLDTL/GOLD, all 231 caller files unchanged.
+
+2026-11-26	GOLDTL.0x004c5820	fcn_004c5820	cm_SendAddStraftat	inferred	high	GOLD.0x004c4e40	Sends cmd 0x22 0x2d-byte crime record (cm_ExAddStraftat 004c9a10) from 004f4f60; RELOC(22) GOLDTL/GOLD, caller 004f4f60 unchanged.
+
+2026-11-26	GOLDTL.0x004c5a60	fcn_004c5a60	cm_SendRemoveLinkedObject	inferred	high	GOLD.0x004c5010	Sends cmd 0x2b (entityId, slotKind, nodeId) to cm_ExRemoveLinkedObject (004c9ff0); RELOC(13) GOLDTL/GOLD, all 7 caller files unchanged.
+
+2026-11-26	GOLDTL.0x004c5c80	fcn_004c5c80	cm_SendCancelCharacterActions	inferred	high	GOLD.0x004c5230	Sends cmd 0x31 packet with characterId (cm_ExCancelCharacterActions 004ca7c0); RELOC(9) GOLDTL/GOLD, all 28 caller files unchanged.
+
+2026-11-26	GOLDTL.0x004c5f60	fcn_004c5f60	cm_SendSetGebBesitzer	inferred	high	GOLD.0x004c54a0	Sends cmd 0x38 (gebId, eigentuemerId, besitzerId) to cm_ExSetGebBesitzer (004cb650); RELOC(13) GOLDTL/GOLD, all 12 caller files unchanged.
+
+2026-11-26	GOLDTL.0x004c6150	fcn_004c6150	cm_SendSwapEntityModel	inferred	high	GOLD.0x004c5690	Sends cmd 0x3e (entityId, modelName) for mesh-swap handler 004cc030; RELOC(17) GOLDTL/GOLD, caller 004ff0f0 unchanged.
+
+2026-11-26	GOLDTL.0x004c6360	fcn_004c6360	cm_SendAssignOffice	inferred	high	GOLD.0x004c58a0	Sends cmd 0x44 7-byte office assignment payload (cm_ExAssignOffice 004cc410) from 004e7d40; type Small7->ASSIGN_OFFICE_CMD; RELOC(14) GOLDTL/GOLD, caller unchanged.
+
+2026-11-26	GOLDTL.0x004c64b0	fcn_004c64b0	cm_SendAllocCharacter	inferred	high	GOLD.0x004c59f0	Sends cmd 0x49 character spawn packet (cm_ExAllocCharacter 004cc590) across 7 callers; RELOC(27) GOLDTL/GOLD, all 7 caller files unchanged.
+
+2026-11-26	GOLDTL.0x004c67c0	fcn_004c67c0	cm_SendUpdateCutsceneEntitySlot	inferred	high	GOLD.0x004c5c40	Sends cmd 0x50 cutscene entity slot update (cm_ExUpdateCutsceneEntitySlot 004ccd30) across 10 callers; RELOC(25) GOLDTL/GOLD, all 10 caller files unchanged.2026-11-26	GOLDTL.0x004c4330	fcn_004c4330	cm_EnqueueClientPacket	inferred	medium	GOLD.0x004c39c0	Allocates a slot in cm_CommandStatusTable and stamps packet type/seq for cm_Send* senders.
+2026-11-26	GOLDTL.0x004c4700	fcn_004c4700	cm_AppendCommandSyncField	inferred	medium	GOLD.0x004c3950	Appends 32-bit sync fields into command sync buffer during cm_Ex* packet processing.
+2026-11-26	GOLDTL.0x004c48c0	fcn_004c48c0	cm_SendDecreaseGameSpeed	attested	high	GOLD.0x004c3b10	Sends packet type 0x02 matching dispatch 0x68a9e0[2] -> cm_ExDecreaseGameSpeed.
+2026-11-26	GOLDTL.0x004c4eb0	fcn_004c4eb0	cm_SendLogAction	attested	high	GOLD.0x004c40d0	Sends packet type 0x05 matching dispatch 0x68a9e0[5] -> 0x004c75b0 (cm_ChkCommandType).
+2026-11-26	GOLDTL.0x004c50e0	fcn_004c50e0	cm_SendChangePlayerIdentity	attested	high	GOLD.0x004c4300	Sends packet type 0x0d matching dispatch 0x68a9e0[0x0d] -> cm_ExChangePlayerIdentity.
+2026-11-26	GOLDTL.0x004c30a0	fcn_004c30a0	d3snd_QueueSound	inferred	high	GOLD.0x004c27d0	Resolves voice sample via fcn_004c2de0, scales volume by g_681750, queues via fcn_004c0a80; renamed params; verified RELOC 89/89 (33 pairs) both targets + 22 callers
+2026-11-26	GOLDTL.0x004c3fa0	fcn_004c3fa0	cm_RecvSceneInitPacket	inferred	high	GOLD.0x004c3630	Waits for scene-sync command (0xa03ef57c) and calls fcn_004ce100; verified RELOC 71/71 (27 pairs) both targets and caller 004c3d50 (37 pairs)
+2026-11-26	GOLDTL.0x004c4450	fcn_004c4450	cm_GetCommandStatus	inferred	high	GOLD.0x004c3ae0	Reads command slot completion status g_fb5760[i].f0; verified RELOC 34/34 (11 pairs) both targets + 137 callers
+2026-11-26	GOLDTL.0x004c47e0	fcn_004c47e0	cm_BeginSecondaryPacketDelta	inferred	high	GOLD.0x004c3e70	Initializes secondary delta buffer g_aed2a0 from packet p[1]; verified RELOC 55/55 (13 pairs) both targets + callers 004fd0a0/00495690
+2026-11-26	GOLDTL.0x004c4940	fcn_004c4940	cm_PollCommandQueue	inferred	high	GOLD.0x004c3fd0	Polls nt_Recv and enqueues command blocks via cm_EnqueueCommand(&g_1005780); verified RELOC 95/95 (24 pairs) both targets + 11 callers
+2026-11-26	GOLDTL.0x004c4ef0	fcn_004c4ef0	cm_SendTraceEnd	inferred	high	GOLD.0x004c4580	Builds opcode 6 command copying 0x80 bytes via fcn_0064d530 and queues via cm_EnqueueClientPacket; renamed a1->source; verified RELOC 51/51 (13 pairs) both targets + 54 callers
+2026-11-26	GOLDTL.0x004c5120	fcn_004c5120	cm_RequestFreeEntity	inferred	high	GOLD.0x004c47b0	Builds opcode 0xe (cm_ExFree) packet with entityId; renamed a1->entityId; verified RELOC 41/41 (9 pairs) both targets + 2 callers
+2026-11-26	GOLDTL.0x004c5290	fcn_004c5290	cm_RequestMoveObjekt	inferred	high	GOLD.0x004c4920	Builds opcode 0x13 (cm_ExMoveObjekt) packet; renamed a1..a3->srcObjId/dstObjId/count; verified RELOC 61/61 (13 pairs) both targets + 4 callers
+2026-11-26	GOLDTL.0x004c5420	fcn_004c5420	cm_RequestChangeBits	inferred	high	GOLD.0x004c4a60	Builds opcode 0x19 (cm_ExChangeBits) packet; renamed a1..a5->entityId/offset/size/setMask/clearMask; verified RELOC 83/83 (17 pairs) both targets + 105 callers
+2026-11-26	GOLDTL.0x004c5700	fcn_004c5700	cm_RequestUpdateGameTime	inferred	high	GOLD.0x004c4d40	Validates Quad4 stamp and builds opcode 0x1e packet; verified RELOC 98/98 (28 pairs) both targets + 2 callers
+2026-11-26	GOLDTL.0x004c58b0	fcn_004c58b0	cm_RequestLinkEvidence	inferred	high	GOLD.0x004c4ed0	Builds opcode 0x24 (fcn_004c9c70) packet; renamed a1..a2->evidenceKey/ownerId; verified RELOC 50/50 (11 pairs) both targets + 9 callers
+2026-11-26	GOLDTL.0x004c5b00	fcn_004c5b00	cm_RequestAllocThemaPredigt	inferred	high	GOLD.0x004c50b0	Builds opcode 0x2d (cm_ExAllocThemaPredigt) packet; renamed a1..a3->ownerId/topic/extra; verified RELOC 74/74 (15 pairs) both targets + 2 callers
+2026-11-26	GOLDTL.0x004c5d60	fcn_004c5d60	cm_RequestSpawnBuildingCharacter	inferred	high	GOLD.0x004c52a0	Builds opcode 0x34 (init_SpawnBuildingCharacter) packet; renamed a1..a3->id/type/sub; verified RELOC 61/61 (13 pairs) both targets + caller 175->175
+2026-11-26	GOLDTL.0x004c5fd0	fcn_004c5fd0	cm_RequestDestroyBuilding	inferred	high	GOLD.0x004c5510	Builds opcode 0x3b (cm_ExDestroyBuilding) packet; verified RELOC 39/39 (9 pairs) both targets + 3 callers
+2026-11-26	GOLDTL.0x004c62c0	fcn_004c62c0	cm_RequestUpdateEconomyStats	inferred	high	GOLD.0x004c5800	Builds opcode 0x41 (fcn_004cc340) packet copying 0x3a payload bytes; verified RELOC 55/55 (17 pairs) both targets + caller fcn_004fb390
+2026-11-26	GOLDTL.0x004c63f0	fcn_004c63f0	cm_RequestSetLaw	inferred	high	GOLD.0x004c5930	Builds opcode 0x46 (fcn_004cc490) packet with 9-byte law body; verified RELOC 55/55 (14 pairs) both targets + caller 004f4860 (44 pairs)
+2026-11-26	GOLDTL.0x004c6560	fcn_004c6560	cm_RequestSendChat	inferred	high	GOLD.0x004c5aa0	Builds opcode 0x4b (fcn_004cc750) packet copying 0x80 chat bytes; verified RELOC 53/53 (16 pairs) both targets + caller 00536810 (213 pairs)
+2026-11-26	GOLDTL.0x004c6880	fcn_004c6880	cm_RequestReduceLifespan	inferred	high	GOLD.0x004c5d00	Builds opcode 0x52 (cm_ExReduceLifespan) packet; renamed a1..a3->entityId/amount/flag; verified RELOC 61/61 (13 pairs) both targets + 2 callers
+2026-11-26	GOLDTL.0x004c3100	fcn_004c3100	sb_LoadLocalizedSampleBank	inferred	high	GOLD.0x004c2830	Tries localized sample bank path via sb_LoadSampleBank then falls back to unlocalized path. Renamed param x->flags.
+2026-11-26	GOLDTL.0x004c3ff0	fcn_004c3ff0	cm_FlushCommandQueue	inferred	high	GOLD.0x004c3680	Drains pending node99 queue g_1005760 via cm_EnqueueCommand or nt_FlushSend. Multi-file type node99 out of scope.
+2026-11-26	GOLDTL.0x004c4480	fcn_004c4480	cm_GetCommandResult	inferred	high	GOLD.0x004c3b10	Reads result dword (+6) of COMMAND_STATUS_SLOT g_fb5760[slot_idx] when 0 <= slot_idx < 0x8000. Renamed param i->slot_idx.
+2026-11-26	GOLDTL.0x004c4820	fcn_004c4820	cm_AppendDesireDelta	inferred	high	GOLD.0x004c3eb0	Appends 5-byte (kind, value) record to desire/effect staging buffer g_aed2a5 and increments g_aed2a4. Params/locals already clean.
+2026-11-26	GOLDTL.0x004c4df0	fcn_004c4df0	cm_StageRawPacketPayload	inferred	high	GOLD.0x004c4480	Stages length-prefixed payload (<=0x3fe bytes) into g_aece00/g_aece02 and sets g_aed330 = n + 2. Params/locals already clean.
+2026-11-26	GOLDTL.0x004c4f30	fcn_004c4f30	cm_RequestAllocRaum	inferred	high	GOLD.0x004c45c0	Builds command 0xa (cm_ExAllocRaum) with optional 0x30-byte block and calls cm_EnqueueClientPacket. Renamed Blk30->ALLOC_RAUM_BLK and Msg4f30->ALLOC_RAUM_MSG.
+2026-11-26	GOLDTL.0x004c5150	fcn_004c5150	cm_RequestMoveCredits	inferred	high	GOLD.0x004c47e0	Builds command 0xf (cm_ExMoveCredits) packet via cm_EnqueueClientPacket. Renamed params a1..a4->dst_id,src_id,kind,amount.
+GOLDTL.0x004c52d0	cm_RequestClearLagerslot	0	RENAMED+CLEANED	src/Develop/Unassigned/GOLDTL.fcn_004c52d0.c	RELOC(11)->RELOC(11)
+GOLDTL.0x004c5480	cm_RequestChangeFloat	0	RENAMED+CLEANED	src/Develop/Unassigned/GOLDTL.fcn_004c5480.c	RELOC(13)->RELOC(13)
+GOLDTL.0x004c5790	cm_RequestSysMessage	0	RENAMED+CLEANED	src/Develop/Unassigned/GOLDTL.fcn_004c5790.c	RELOC(20)->RELOC(20)
+GOLDTL.0x004c58f0	cm_RequestClearEvidenceLink	0	RENAMED+CLEANED	src/Develop/Unassigned/GOLDTL.fcn_004c58f0.c	RELOC(13)->RELOC(13)
+GOLDTL.0x004c5b50	cm_RequestWalkOnPath	0	RENAMED+CLEANED	src/Develop/Unassigned/GOLDTL.fcn_004c5b50.c	RELOC(15)->RELOC(15)
+GOLDTL.0x004c5ed0	cm_RequestPlayAnimation	0	RENAMED+CLEANED	src/Develop/Unassigned/GOLDTL.fcn_004c5ed0.c	RELOC(17)->RELOC(17)

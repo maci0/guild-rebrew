@@ -29,11 +29,11 @@ extern CLIENT_QUEUED_PACKET g_aed740[0x8000];
 extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
 unsigned short __cdecl ahm_GetCommandPayloadSize(CLIENT_QUEUED_PACKET*);
-int __cdecl fcn_004c4090(void);
+int __cdecl cm_FlushPendingDataPackets(void);
 
 
 /* ADDRESS: GOLDTL 0x004c4330 */
-int __cdecl fcn_004c4330(CLIENT_QUEUED_PACKET* queuedInput)
+int __cdecl cm_EnqueueClientPacket(CLIENT_QUEUED_PACKET* queuedInput)
 {
 	CLIENT_QUEUED_PACKET* p;
 	CLIENT_QUEUED_PACKET* q;
@@ -75,6 +75,6 @@ int __cdecl fcn_004c4330(CLIENT_QUEUED_PACKET* queuedInput)
 	}
 	p->next = 0;
 	if (g_aed330 != 0)
-		p->nextseq = fcn_004c4090();
+		p->nextseq = cm_FlushPendingDataPackets();
 	return seq;
 }

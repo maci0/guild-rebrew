@@ -56,7 +56,7 @@ void __cdecl d2_SetBildArgument(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SelectControl(int);
 char* __cdecl d2_GetControlValue(int);
-void __cdecl fcn_004c6560(Chat*);
+void __cdecl cm_RequestSendChat(Chat*);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl d2_RunChatConsole(void)
@@ -114,7 +114,7 @@ void __cdecl d2_RunChatConsole(void)
 			strcat(chat.text, d2_GetControlValue(edit));
 			strcat(chat.text, "$A");
 			d2_SetElementValue(edit, g_6b5c60);
-			fcn_004c6560(&chat);
+			cm_RequestSendChat(&chat);
 			g_774654 = 1;
 		}
 	}

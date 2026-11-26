@@ -1,24 +1,24 @@
 #include "client_data.h"
-int __cdecl fcn_004c4450(int a0); int __cdecl fcn_004c4480(int a0);
+int __cdecl cm_GetCommandStatus(int a0); int __cdecl cm_GetCommandResult(int a0);
 int __cdecl gm_GetEntityTableEntry(int a0);
-int __cdecl fcn_004c51a0(int a0, int a1, unsigned char a2, int a3);
+int __cdecl cm_RequestTransferCurrencyNoKill(int a0, int a1, unsigned char a2, int a3);
 void __cdecl fcn_00529160(int a0, int a1, int a2, int a3);
 int __cdecl gm_StartFilteredEntitySearch(int a0, int a1, int a2);
 int __cdecl fcn_004c5da0(int a0, int a1, int a2, int a3, int a4, int a5);
 int __cdecl gm_LookupEntityRecordById(int a0);
 void __cdecl gm_AddTime(int* p, int a1, int a2, int a3);
-int __cdecl fcn_00500cb0(int a0, int a1);
+int __cdecl gm_CompareGameTime(int a0, int a1);
 int __cdecl fcn_00494740(int a0, int a1, int a2);
 int __cdecl fcn_005c6270(int a0, int a1);
 void __cdecl fcn_005100f0(int a0, int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int a0, int a1, char* buf, int a3, int a4, char* text);
 int __cdecl fcn_004f4f60(int a0, int a1, int a2, int a3, int a4);
-void __cdecl fcn_004c54c0(int a0, int a1, int a2, int a3);
+void __cdecl cm_RequestCopyEntityData(int a0, int a1, int a2, int a3);
 int __cdecl he_DetectNearbyPatrolAction(int* a0);
 int __cdecl he_StartHandlungSearch(int a0, int a1, int a2);
-int __cdecl fcn_004c58b0(int a0, int a1);
-void __cdecl fcn_004c57e0(int a0, int a1);
+int __cdecl cm_RequestLinkEvidence(int a0, int a1);
+void __cdecl cm_RequestKillSpieler(int a0, int a1);
 void __cdecl he_FreeAction(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00562ba0 */
@@ -44,17 +44,17 @@ void __cdecl fcn_00562ba0(int eventCursor)
 	switch (*(int*) (eventCursor + 0x70)) {
 	case 0:
 		v6 = *(int*) (eventBase + 0xcc);
-		if (v6 != -1 && fcn_004c4450(v6) == 0) {
+		if (v6 != -1 && cm_GetCommandStatus(v6) == 0) {
 			return;
 		}
-		v7 = fcn_004c4480(*(int*) (eventBase + 0xcc));
+		v7 = cm_GetCommandResult(*(int*) (eventBase + 0xcc));
 		if (v7 != 0) {
 			v4 = gm_GetEntityTableEntry(*(unsigned short*) (eventBase + 8) * 0x21c + (int) &g_7f4ca0);
 			if (v4 != 0) {
 				*(int*) (v4 + 0x28) = *(int*) (v4 + 0x28) + *(int*) (eventBase + 0xd8);
 			}
 			*(int*) (eventBase + 0xc8) = *(int*) (v7 + 4);
-			fcn_004c51a0(-1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(unsigned char*) &g_773d75, *(int*) (eventBase + 0xd8));
+			cm_RequestTransferCurrencyNoKill(-1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(unsigned char*) &g_773d75, *(int*) (eventBase + 0xd8));
 			fcn_00529160(0, 0, *(unsigned short*) v7, eventBase);
 			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 			*(int*) (eventBase + 0xcc) = -1;
@@ -109,16 +109,16 @@ label_562e74:
 		return;
 	case 8:
 		v6 = *(int*) (eventBase + 0xcc);
-		if (v6 != -1 && fcn_004c4450(v6) == 0) {
+		if (v6 != -1 && cm_GetCommandStatus(v6) == 0) {
 			return;
 		}
 		v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (eventBase + 0xac));
 		v4 = he_StartHandlungSearch(1, 1, *(int*) (eventBase + 0xd4));
 		if (v6 != 0 && v4 != 0 && *(int*) (v4 + 0xd4) == *(int*) (eventBase + 4) && *(int*) (eventBase + 0xcc) != -1) {
 			v6 = gm_LookupEntityRecordById(*(int*) (eventBase + 0xd4));
-			v7 = fcn_004c4480(*(int*) (eventBase + 0xcc));
+			v7 = cm_GetCommandResult(*(int*) (eventBase + 0xcc));
 			if (v7 != 0 && v6 != 0) {
-				fcn_004c58b0(*(int*) v7, *(int*) (v6 + 4));
+				cm_RequestLinkEvidence(*(int*) v7, *(int*) (v6 + 4));
 			}
 			*(int*) (eventBase + 0x70) = 9;
 			gm_AddTime((int*) (eventBase + 0x52), 0, 10, 0);
@@ -146,7 +146,7 @@ label_562e74:
 		*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 		return;
 	case 4:
-		if (0 <= fcn_00500cb0((int*) (eventBase + 0x52), (int) &gm_GameTime)) {
+		if (0 <= gm_CompareGameTime((int*) (eventBase + 0x52), (int) &gm_GameTime)) {
 			return;
 		}
 		ep = (char*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca0);
@@ -204,7 +204,7 @@ label_562e74:
 			fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (eventBase + 0xb4), *(int*) (eventBase + 0xac));
 			targetType = *(char*) (v7 + 2);
 			if (targetType != 6 && targetType != 7) {
-				fcn_004c54c0(*(int*) (ep + 4), *(int*) (v7 + 4), -0x19, 1);
+				cm_RequestCopyEntityData(*(int*) (ep + 4), *(int*) (v7 + 4), -0x19, 1);
 			}
 		}
 		*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
@@ -225,7 +225,7 @@ label_562e74:
 	case -2:
 	case -1:
 		if (*(int*) (eventBase + 0xc8) != -1) {
-			fcn_004c57e0(*(int*) (eventBase + 0xc8), 1);
+			cm_RequestKillSpieler(*(int*) (eventBase + 0xc8), 1);
 		}
 		he_FreeAction(eventBase);
 		return;

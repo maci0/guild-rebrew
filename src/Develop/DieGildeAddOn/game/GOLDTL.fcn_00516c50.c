@@ -31,18 +31,18 @@ extern int g_6b8300;
 
 void* __cdecl fcn_00502cd0(int, int, int, ...);
 Contact* __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_00442c00(Contact*, int);
+void __cdecl d3_SetObjectVisible(Contact*, int);
 void __cdecl fcn_00515c60(Player*, void*);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl d3snd_PlayNamedSceneSound(void);
 void __cdecl d3snd_PlayBuildingAmbient(Player*);
 int __cdecl gm_CheckEntityType(Player*);
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, Player*);
-void __cdecl fcn_005165f0(void);
+void __cdecl d3_ApplyBuildingTextureSet(void);
 void __cdecl fcn_00516de0(int, char);
 void __cdecl fcn_00516040(void);
 #include "Develop/Units/d3/d3_d3d.h"
-void __cdecl fcn_0052a7d0(void);
+void __cdecl d3_ApplySceneLightingPreset(void);
 
 void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 {
@@ -68,9 +68,9 @@ void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 	}
 	if (c != 0) {
 		if (p->slot == g_774970) {
-			fcn_00442c00(c, 0);
+			d3_SetObjectVisible(c, 0);
 		} else {
-			fcn_00442c00(c, 1);
+			d3_SetObjectVisible(c, 1);
 			fcn_00515c60(p, unit);
 		}
 		c->shown = 1;
@@ -80,10 +80,10 @@ void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 	d3_TraverseSceneObjects(g_67a370, 0, 0x20, d3snd_PlayNamedSceneSound);
 	d3snd_PlayBuildingAmbient(p);
 	if (gm_CheckEntityType(p) == 0) {
-		d3_VisitSceneObjects(g_67a370, 0, 0xc0, fcn_005165f0, p);
+		d3_VisitSceneObjects(g_67a370, 0, 0xc0, d3_ApplyBuildingTextureSet, p);
 	}
 	fcn_00516de0(g_6b8300, 0);
 	fcn_00516040();
 	fcn_00443230(0);
-	fcn_0052a7d0();
+	d3_ApplySceneLightingPreset();
 }

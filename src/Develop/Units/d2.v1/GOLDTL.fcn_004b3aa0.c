@@ -7,7 +7,7 @@ extern int g_1007cd0;
 extern char g_7728d4;
 
 __declspec(dllimport) unsigned long __stdcall GetTickCount(void);
-void __cdecl fcn_004c5790(int, int*);
+void __cdecl cm_RequestSysMessage(int, int*);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_004b3490(void);
 void __cdecl fcn_004b3810(int);
@@ -18,7 +18,7 @@ void __cdecl fcn_004b3aa0(int a1)
 
 	if (((*(unsigned char*)&g_77494c) & 8) != 0 || g_14cbca0 == -1) {
 		buf[0] = GetTickCount();
-		fcn_004c5790(5, buf);
+		cm_RequestSysMessage(5, buf);
 	}
 	while (g_1007cd0 != 0 && g_14cbcb0 == 0)
 		fcn_00535960();

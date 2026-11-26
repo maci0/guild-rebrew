@@ -2,7 +2,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl atoi(char*);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 
 
 /* ADDRESS: GOLDTL 0x004b0a20 */
@@ -21,6 +21,6 @@ int __cdecl fcn_004b0a20(int* a1, int slot, char* arg)
 		return 0;
 	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 	cm_AppendPacketFieldValue(1, 1, 0x1b1, &c);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	return 1;
 }

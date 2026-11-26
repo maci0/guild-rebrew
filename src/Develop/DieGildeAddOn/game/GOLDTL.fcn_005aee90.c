@@ -7,7 +7,7 @@ int __cdecl d2_CheckActionBlocker(char*, int);
 float __cdecl gm_GetEntitySkill(char*, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c6b20(int, int, int);
 int __cdecl fcn_00567170(char*, int*, int*, int*);
@@ -52,7 +52,7 @@ void __cdecl fcn_005aee90(char* rec)
 
 		cm_BeginPacketFieldDelta(rec, *(int*) (rec + 1));
 		cm_AppendPacketFieldDelta(4, 1, (int) (rec - g_aed32c) + 0x65, &flags);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		fcn_004c6b20(*(int*) (ent + 4), -(int) *(unsigned char*) (ent + 0x1b1), 0);
 		if (*(int*) (ent + 0x184) != 0) {
 			if (fcn_00567170(ent, &a, &b, 0) != 0) {

@@ -1,7 +1,7 @@
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void* p, int n);
 char* __cdecl RegisterStatusText(char* name, int id, int len);
-void __cdecl fcn_005cf560(char* obj);
+void __cdecl d2_OpenMeisterbriefDialog(char* obj);
 void __cdecl d2_SelectWealthOverviewTarget(char* obj);
 void __cdecl d2_ShowMoneyExchangeDialog(char* obj);
 void __cdecl d2_ShowLoanDialog(char* obj);
@@ -33,7 +33,7 @@ void __cdecl fcn_005a7200(char* subject)
 		obj = *(char**) 0x7746a0;
 		if (obj) {
 			if (obj == s3) {
-				fcn_005cf560(subject);
+				d2_OpenMeisterbriefDialog(subject);
 				obj = *(char**) 0x7746a0;
 			} else if (obj == s4) {
 				d2_SelectWealthOverviewTarget(subject);

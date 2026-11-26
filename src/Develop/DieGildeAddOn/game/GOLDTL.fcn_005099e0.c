@@ -6,17 +6,17 @@ void __cdecl fcn_004f22e0(void *, void *, int, int);
 void __cdecl fcn_004f2a10(void *, void *, int, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
-void __cdecl fcn_004c5f60(int, int, int);
+void __cdecl cm_SendSetGebBesitzer(int, int, int);
 int __cdecl gm_CalculateGebaeudeValue(void *, int);
-void __cdecl fcn_004c5530(void *);
+void __cdecl cm_SendCopyEntityData(void *);
 void *__cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_SumTreasury(void *);
-void __cdecl fcn_004c5150(int, int, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, int, int);
 int __cdecl gm_WalkEntityChain(int);
 void __cdecl cm_BeginPacketFieldDelta(void *, int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, void *);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, int, int, int, char *);
 
@@ -60,10 +60,10 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 	while (ent != 0) {
 		type = gm_GetBuildingTypeCategory(*(unsigned char *) ent);
 		if (type == 2) {
-			fcn_004c5f60(*(int *) ((char *) ent + 1), *(int *) ((char *) gm_CityEntity + 4),
+			cm_SendSetGebBesitzer(*(int *) ((char *) ent + 1), *(int *) ((char *) gm_CityEntity + 4),
 						 *(int *) ((char *) gm_CityEntity + 4));
 		} else {
-			fcn_004c5f60(*(int *) ((char *) ent + 1), *(int *) ((char *) arg2 + 4),
+			cm_SendSetGebBesitzer(*(int *) ((char *) ent + 1), *(int *) ((char *) arg2 + 4),
 						 *(int *) ((char *) arg2 + 4));
 			flag = 1;
 		}
@@ -74,7 +74,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 			pkt[0x36] = 2;
 			*(int *) (pkt + 0x58) = *(int *) ((char *) ent + 1);
 			*(int *) (pkt + 0x5c) = gm_CalculateGebaeudeValue(ent, *((signed char *) ent + 0x5c));
-			fcn_004c5530(pkt);
+			cm_SendCopyEntityData(pkt);
 			it = (void *) 0x7f4ca4;
 			do {
 				if (*(int *) ((char *) it + 0x168) == (int) ent) {
@@ -90,7 +90,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 						*(int *) (pkt + 0x30) = g_7f4c08;
 						*(unsigned short *) (pkt + 0x34) = g_7f4c0c;
 						*(int *) (pkt + 0x58) = recipient;
-						fcn_004c5530(pkt);
+						cm_SendCopyEntityData(pkt);
 					}
 				}
 				it = (void *) ((char *) it + 0x21c);
@@ -103,7 +103,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 	if (arg2 != (void *) gm_CityEntity) {
 		val = gm_SumTreasury(arg1);
 		i = 4 + (*((unsigned char *) arg1 + 2) == 5);
-		fcn_004c5150(*(int *) ((char *) arg2 + 4), -1, g_773d75, val);
+		cm_RequestMoveCredits(*(int *) ((char *) arg2 + 4), -1, g_773d75, val);
 		type = gm_WalkEntityChain(*(unsigned short *) arg1);
 		cm_BeginPacketFieldDelta(arg2, *(int *) ((char *) arg2 + 4));
 		cm_AppendPacketFieldValue(4, 1, (int) arg2 - g_aed32c + 0x1a8, &type);
@@ -112,7 +112,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 				|| *((unsigned char *) arg2 + 2) == 9)) {
 			cm_AppendPacketFieldDelta(1, 1, (int) arg2 - g_aed32c + 2, &i);
 		}
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 	}
 	if (*((unsigned char *) arg2 + 2) != 6 && *((unsigned char *) arg2 + 2) != 7) {
 		if ((*((unsigned char *) arg1 + 2) == 5 || *((unsigned char *) arg1 + 2) == 6

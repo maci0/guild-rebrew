@@ -21,7 +21,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern Slot7f4ca2 g_7f4ca2[768];
 extern int g_7f4ca4;
 
-int __cdecl fcn_00500cb0(void*, void*);
+int __cdecl gm_CompareGameTime(void*, void*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl he_FreeAction(char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -29,12 +29,12 @@ int __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 void __cdecl fcn_00545c50(int);
-int __cdecl fcn_004c30a0(int, int, char*, int, int);
+int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl sb_StopVoice(void*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl cut_FindCutsceneById(int);
 int __cdecl cut_RemoveParticipant(int, int);
-void __cdecl fcn_004c5a20(int, int);
+void __cdecl cm_RequestRemoveCutsceneParticipant(int, int);
 int __cdecl fcn_00503fe0(int, int, int);
 void __cdecl fcn_00526920(char*, int, char*);
 void __cdecl io_ClearInputState(void);
@@ -127,7 +127,7 @@ done:
             str = *(char**) (e + 0x7c);
             str = str + strlen(str) + 1;
             memcpy(text, str, strlen(str) + 1);
-            *(int*) (e + 0xec) = fcn_004c30a0(-7, 0, text, 0, 0x7d0);
+            *(int*) (e + 0xec) = d3snd_QueueSound(-7, 0, text, 0, 0x7d0);
         }
         *(pos14_7f4c00*) (e + 0x44) = gm_GameTime;
         *(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
@@ -154,7 +154,7 @@ done:
                 *(int*) (e + 0x70) = state;
                 goto tail;
             }
-            if (fcn_00500cb0((void*) &gm_GameTime, rec + 0x18) <= 0)
+            if (gm_CompareGameTime((void*) &gm_GameTime, rec + 0x18) <= 0)
                 goto tail;
             if (*(unsigned char*) (rec + 0x26) & 0x80) {
                 if (!((*(unsigned char*) (e + 0xf0) & 2)
@@ -166,11 +166,11 @@ done:
             if (g_7747b0 & 8) {
                 cut_RemoveParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
             } else if (g_7747b0 & 4) {
-                fcn_004c5a20(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
+                cm_RequestRemoveCutsceneParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
             }
             *(int*) (e + 0x70) = state;
             goto tail;
-        } else if (fcn_00500cb0((void*) &gm_GameTime, e + 0x52) > 0) {
+        } else if (gm_CompareGameTime((void*) &gm_GameTime, e + 0x52) > 0) {
             goto exit_clear;
         }
 tail:
@@ -209,7 +209,7 @@ body1:
                         } else if (g_7747b0 & 8) {
                             cut_RemoveParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
                         } else if (g_7747b0 & 4) {
-                            fcn_004c5a20(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
+                            cm_RequestRemoveCutsceneParticipant(*(int*) (e + 0xb8), *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4));
                         }
                     }
                 }

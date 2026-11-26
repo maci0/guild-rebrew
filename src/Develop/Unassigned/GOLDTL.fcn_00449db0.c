@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00449ac0(char*, char*);
+int __cdecl d3_AppendVfsAssetPath(char*, char*);
 
 /* ADDRESS: GOLDTL 0x00449db0 */
 char __cdecl fcn_00449db0(char* a, int b, int mode, char* key, char* val)
@@ -37,7 +37,7 @@ char __cdecl fcn_00449db0(char* a, int b, int mode, char* key, char* val)
 						strcpy(val, (char*) b);
 					}
 				}
-				if (fcn_00449ac0(key, (char*) 0x67ade8)) {
+				if (d3_AppendVfsAssetPath(key, (char*) 0x67ade8)) {
 					return 1;
 				}
 			} while (--i >= 0);

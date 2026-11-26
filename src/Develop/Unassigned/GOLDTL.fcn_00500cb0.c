@@ -12,7 +12,7 @@ typedef struct
 // SIZE 0xe
 #pragma pack(pop)
 
-int __cdecl fcn_00500cb0(Time* a, Time* b)
+int __cdecl gm_CompareGameTime(Time* a, Time* b)
 {
 	int ta;
 	int tb;

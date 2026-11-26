@@ -12,7 +12,7 @@ int __cdecl main_RunFrameLoop(void* fn, int name);
 int __cdecl d2_GetControlValue(int w);
 void __cdecl cm_BeginPacketFieldDelta(char* o, int v);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* p);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_00471e30(int dlg);
 
 /* ADDRESS: GOLDTL 0x005a6570 */
@@ -46,7 +46,7 @@ void __cdecl fcn_005a6570(char* o)
             cm_BeginPacketFieldDelta(o, *(int*) (o + 1));
             cm_AppendPacketFieldDelta(4, 1, 0x69, &a);
             cm_AppendPacketFieldDelta(4, 1, 0x6d, &b);
-            fcn_004c5360();
+            cm_RequestChangeAttribute();
             g_774654 = 1;
         } else if (g_100f1dc == 1) {
             g_774654 = 1;

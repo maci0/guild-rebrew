@@ -61,13 +61,13 @@ extern double g_665dd0;
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_0050d320(int, unsigned char);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 char* __cdecl fcn_00503d10(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(void*, void*);
 int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 int __cdecl cm_SendMarktSlotDelta(MarktSlot*, unsigned char);
 float __cdecl fcn_005025a0(int, int);
 char* __cdecl gm_FindKind47ByOwner(int);
@@ -123,7 +123,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		return;
 	}
 	if (fcn_0050d320((int) gm_CityEntity, g_773d75) < 0x4e2000) {
-		fcn_004c5150(*(int*) (gm_CityEntity + 4), -1, g_773d75, 0x4e2000);
+		cm_RequestMoveCredits(*(int*) (gm_CityEntity + 4), -1, g_773d75, 0x4e2000);
 	}
 	/* pass 1: refill the player's own stock */
 	for (i = 0; i < 0x55; i++) {
@@ -165,7 +165,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		if (ub.n < rec.f34 * g_662908) {
 			rec.f10 = (int) (rec.f10 + uf.f);
 			if (rec.f20 * g_662908 < rec.f24) {
-				fcn_004c51f0(*(int*) (ent + 2), -1,
+				cm_SendSellObjekt(*(int*) (ent + 2), -1,
 				    rec.id, (int) uf.f, g_773d75, 0);
 				rec.f24 = rec.f34 * 0.0714285746f * d * g_662948 + rec.f24;
 			}
@@ -246,14 +246,14 @@ void __cdecl he_RunMarktSupervisor(char* action)
 				ub.n = 1;
 			}
 			if (g_7747b0 < 0x80) {
-				fcn_004c51f0(-1, *(int*) (ent + 2),
+				cm_SendSellObjekt(-1, *(int*) (ent + 2),
 				    rec.id, ub.n, g_773d75, 0);
 			}
 		} else {
 			rec.f24 = rec.f24 + g * g_662948;
 			if (gm_RandomFloat01() < 0.25) {
 				t = (gm_RandomMod(3) & 0xffff) + 1;
-				fcn_004c51f0(*(int*) (ent + 2), -1,
+				cm_SendSellObjekt(*(int*) (ent + 2), -1,
 				    rec.id, t, g_773d75, 0);
 				rec.f24 = g * g_662d34 + rec.f24;
 			}
@@ -329,7 +329,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 					if (ub.n < 1) {
 						ub.n = 1;
 					}
-					fcn_004c51f0(-1, *(int*) (ent + 2),
+					cm_SendSellObjekt(-1, *(int*) (ent + 2),
 					    rec.id, ub.n, g_773d75, 0);
 				}
 			}
@@ -388,7 +388,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			uf.f = (float) ub.n;
 			ub.n = gm_GetMsgField(ent, q);
 			if (ub.n > ((MarktSlot*) scratch)->f20 * g_662908) {
-				fcn_004c51f0(*(int*) (ent + 2), -1,
+				cm_SendSellObjekt(*(int*) (ent + 2), -1,
 				    ((MarktSlot*) scratch)->id,
 				    (int) uf.f, g_773d75, 0);
 				((MarktSlot*) scratch)->f24 = g * g_662908

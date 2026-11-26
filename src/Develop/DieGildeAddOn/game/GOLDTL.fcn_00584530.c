@@ -28,7 +28,7 @@ extern char g_6a3db4[];
 
 char* __cdecl strcpy(char*, const char*);
 #pragma intrinsic(strcpy)
-int __cdecl fcn_004fdec0(char*);
+int __cdecl gm_FindHeadIconIndex(char*);
 Name6 __cdecl fcn_00506d50(int);
 
 void __cdecl d2_InitDefaultMenueProfile(void)
@@ -42,7 +42,7 @@ void __cdecl d2_InitDefaultMenueProfile(void)
 	g_7e23e4 = 0x59a;
 	(*(unsigned char*)&g_7e23e8) = 0;
 	(*(unsigned char*)&g_7e23e9) = 0;
-	g_7e2468 = fcn_004fdec0(g_6a3db4) + 0x639;
+	g_7e2468 = gm_FindHeadIconIndex(g_6a3db4) + 0x639;
 	strcpy(g_7e23ea, g_14b4fa8);
 	strcpy(g_7e240a, g_14b4fac);
 	r = fcn_00506d50((*(unsigned char*)&g_7e23e3));

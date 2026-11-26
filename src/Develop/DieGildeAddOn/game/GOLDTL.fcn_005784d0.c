@@ -2,7 +2,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_004c5da0(unsigned int, unsigned int, int, int, int, char*);
 void __cdecl gm_AddTime(char*, int, int, int);
@@ -38,14 +38,14 @@ void __cdecl fcn_005784d0(char* obj)
 		return;
 	}
 	h = *(int*) (obj + 0x84);
-	if (h != -1 && fcn_004c4450(h) == 0) {
+	if (h != -1 && cm_GetCommandStatus(h) == 0) {
 		return;
 	}
 	state = *(int*) (obj + 0x70);
 	*(int*) (obj + 0x84) = -1;
 	switch (state) {
 	case 0:
-		if (fcn_004c4450(-1) == 0) {
+		if (cm_GetCommandStatus(-1) == 0) {
 			return;
 		}
 		fcn_00529160(0, 0, *lager, (int) obj);

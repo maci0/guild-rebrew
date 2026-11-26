@@ -1,8 +1,8 @@
 #include <string.h>
 
 int __cdecl rt_CountRoutePoints(char *p);
-int __cdecl fcn_004c4df0(unsigned short n, void *src);
-int __cdecl fcn_004c4330(void *buf);
+int __cdecl cm_StageRawPacketPayload(unsigned short n, void *src);
+int __cdecl cm_EnqueueClientPacket(void *buf);
 
 /* ADDRESS: GOLDTL 0x004c6e20 */
 void __cdecl fcn_004c6e20(char *record, char *head)
@@ -29,6 +29,6 @@ void __cdecl fcn_004c6e20(char *record, char *head)
             dst += 0x40;
         }
     }
-    fcn_004c4df0((unsigned short)(count << 6), items);
-    fcn_004c4330(buf);
+    cm_StageRawPacketPayload((unsigned short)(count << 6), items);
+    cm_EnqueueClientPacket(buf);
 }

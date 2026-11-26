@@ -23,7 +23,7 @@ extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 extern int g_14b556c;
 
-int __cdecl fcn_00500e20(pos14_7f4c00*);
+int __cdecl gm_GetSeason(pos14_7f4c00*);
 int __cdecl fcn_00525fb0(char*);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -42,7 +42,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char*, ENTITY_RECORD*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
 void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
@@ -59,7 +59,7 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 	int k;
 
 	hh = 0;
-	st = fcn_00500e20(&gm_GameTime);
+	st = gm_GetSeason(&gm_GameTime);
 	if (fcn_00525fb0(who) != 0) {
 		return;
 	}
@@ -133,7 +133,7 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 		}
 	}
 	fcn_00471e30(h);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 	fcn_00532ef0();
 }

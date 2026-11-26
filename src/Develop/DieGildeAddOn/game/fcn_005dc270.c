@@ -6,10 +6,10 @@ extern short g_aed32c;
 
 int __cdecl fcn_005bdc30(int a, int* dlg, char* txt, int c, int d);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_BeginPacketFieldDelta(int a, int b);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char a, unsigned char b, unsigned short c, char* d);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_00508280(char* slot, int a, int b);
 int __cdecl fcn_005c6270(char* slot, int mode);
 double __cdecl gm_RandomFloat01(void);
@@ -54,11 +54,11 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		*(int*) (msg + 0xc) = -1;
 		*(short*) (msg + 0x34) = g_7f4c0c;
 		msg[0x36] = 0xa;
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 		cm_BeginPacketFieldDelta(*(int*) arg2, *(int*) (*(int*) arg2 + 2));
 		h = *(short*) arg2;
 		cm_AppendPacketFieldDelta(4, 1, h - g_aed32c + 0x25, esi + 1);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		fcn_00508280(slot, 0, 0);
 		if (((char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c))[2] == 6
@@ -83,11 +83,11 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 	*(int*) (msg + 0xc) = -1;
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	msg[0x36] = 0xa;
-	fcn_004c5530(msg);
+	cm_SendCopyEntityData(msg);
 	cm_BeginPacketFieldDelta(*(int*) arg2, *(int*) (*(int*) arg2 + 2));
 	h = *(short*) arg2;
 	cm_AppendPacketFieldDelta(4, 1, h - g_aed32c + 0x25, esi + 1);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 	if (fcn_005c6270(slot, 0x2c4) == 0 || 0.75f < gm_RandomFloat01()) {
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);

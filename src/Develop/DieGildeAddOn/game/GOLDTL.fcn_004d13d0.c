@@ -22,7 +22,7 @@ void __cdecl gm_GetEquippedCombatGear(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
-int __cdecl fcn_004c67c0(int, ent2c*);
+int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
 int __cdecl he_QueueTradeWareCommand(char* rec, char* e, char* obj)
 {
@@ -47,5 +47,5 @@ int __cdecl he_QueueTradeWareCommand(char* rec, char* e, char* obj)
 	strcpy(l.name, obj);
 	*(char*) &l.f20 = (char) c;
 	*((char*) &l.f20 + 1) = (char) a;
-	return fcn_004c67c0(*(int*) (rec + 0x10), &l);
+	return cm_SendUpdateCutsceneEntitySlot(*(int*) (rec + 0x10), &l);
 }

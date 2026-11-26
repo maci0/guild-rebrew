@@ -17,9 +17,9 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl fcn_00502cd0(int, int, ...);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl gm_GetMsgField(void*, void*);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
-int __cdecl fcn_004c51a0(int, int, unsigned char, int);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
+int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* ADDRESS: GOLDTL 0x005c4ec0 */
@@ -45,7 +45,7 @@ int __cdecl fcn_005c4ec0(int a0, char* ownerEntity, int requestedAmount, char* a
 	remaining = requestedAmount;
 	amount = got < remaining ? got : remaining;
 	if (amount > 0) {
-		fcn_004c5150(a0, *(int*) (ownerEntity + 4), g_773d75, amount);
+		cm_RequestMoveCredits(a0, *(int*) (ownerEntity + 4), g_773d75, amount);
 		remaining -= amount;
 		written = amount;
 	}
@@ -80,7 +80,7 @@ int __cdecl fcn_005c4ec0(int a0, char* ownerEntity, int requestedAmount, char* a
 								if (gm_GetMsgField(obj, sub) <= amount) {
 									amount = gm_GetMsgField(obj, sub);
 								}
-								fcn_004c51f0(-1, *(int*) ((char*) obj + 2), *sub, amount, g_773d75, 0);
+								cm_SendSellObjekt(-1, *(int*) ((char*) obj + 2), *sub, amount, g_773d75, 0);
 								div *= amount;
 								total += div;
 								remaining -= div;
@@ -129,7 +129,7 @@ int __cdecl fcn_005c4ec0(int a0, char* ownerEntity, int requestedAmount, char* a
 								if (gm_GetMsgField(obj, sub) <= amount) {
 									amount = gm_GetMsgField(obj, sub);
 								}
-								fcn_004c51f0(-1, *(int*) ((char*) obj + 2), *sub, amount, g_773d75, 0);
+								cm_SendSellObjekt(-1, *(int*) ((char*) obj + 2), *sub, amount, g_773d75, 0);
 								div *= amount;
 								total += div;
 								remaining -= div;
@@ -150,13 +150,13 @@ int __cdecl fcn_005c4ec0(int a0, char* ownerEntity, int requestedAmount, char* a
 		}
 	}
 	if (total != 0) {
-		fcn_004c5150(a0, -1, g_773d75, total);
+		cm_RequestMoveCredits(a0, -1, g_773d75, total);
 		io_FormatTextBuffer(buf, 0x18eb, total);
 		strcat(a3, buf);
 		return written;
 	}
 	if (remaining > 0) {
-		fcn_004c51a0(a0, *(int*) (ownerEntity + 4), g_773d75, remaining);
+		cm_RequestTransferCurrencyNoKill(a0, *(int*) (ownerEntity + 4), g_773d75, remaining);
 	}
 	return written;
 }

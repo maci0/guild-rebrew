@@ -6,7 +6,7 @@
 int __cdecl fcn_00402480(int, int);
 int __cdecl ch_RemoveQueueEntry(void*);
 
-void __cdecl fcn_0040abd0(char* a)
+void __cdecl ch_DequeueIfIdle(char* a)
 {
 	if (*(int*) (a + 0xc) != 0) {
 		return;

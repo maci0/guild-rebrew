@@ -6,7 +6,7 @@ extern int g_773d48;
 void __cdecl fcn_004fcda0(int, int, int*);
 void __cdecl fcn_00535960(void);
 
-void __cdecl fcn_004fd050(void)
+void __cdecl gm_CollectAllTaxes(void)
 {
 	int buf[4];
 	int i;

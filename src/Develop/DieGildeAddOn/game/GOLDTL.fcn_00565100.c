@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char g_6a5a10[];
 extern char g_6b5c60[];
 
-int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl he_FreeAction(char*);
 void __cdecl fcn_00545780(char*);
@@ -14,7 +14,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetOppositeStatIndex(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl sb_FindBankByName(char*);
-void __cdecl fcn_004c30a0(int, int, char*, int, int);
+void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 int __cdecl io_AppendText(int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_00526920(char*, int, char*);
@@ -28,7 +28,7 @@ void __cdecl fcn_00565100(char* u)
 	int text;
 	char* q;
 
-	if (fcn_00500cb0(&gm_GameTime, u + 0x52) < 0) {
+	if (gm_CompareGameTime(&gm_GameTime, u + 0x52) < 0) {
 		return;
 	}
 	switch (*(int*) (u + 0x70)) {
@@ -46,17 +46,17 @@ void __cdecl fcn_00565100(char* u)
 			if (h[9] == 0) {
 				if (n <= 0xc) {
 					r = sb_FindBankByName("BERUF_TRAINING_SPIELER_MAENNLICH");
-					fcn_004c30a0(-8, r, "BERUF_TRAINING_SPIELER_MAENNLICH", n - 1, 0);
+					d3snd_QueueSound(-8, r, "BERUF_TRAINING_SPIELER_MAENNLICH", n - 1, 0);
 				} else {
 					r = sb_FindBankByName("ADDON_BERUF_TRAINING_SPIELER_MAENNLICH");
-					fcn_004c30a0(-8, r, "BERUF_TRAINING_SPIELER_MAENNLICH", n - 0xd, 0);
+					d3snd_QueueSound(-8, r, "BERUF_TRAINING_SPIELER_MAENNLICH", n - 0xd, 0);
 				}
 			} else if (n <= 0xc) {
 				r = sb_FindBankByName("BERUF_TRAINING_SPIELER_WEIBLICH");
-				fcn_004c30a0(-8, r, "BERUF_TRAINING_SPIELER_WEIBLICH", n - 1, 0);
+				d3snd_QueueSound(-8, r, "BERUF_TRAINING_SPIELER_WEIBLICH", n - 1, 0);
 			} else {
 				r = sb_FindBankByName("ADDON_BERUF_TRAINING_SPIELER_WEIBLICH");
-				fcn_004c30a0(-8, r, "BERUF_TRAINING_SPIELER_WEIBLICH", n - 0xd, 0);
+				d3snd_QueueSound(-8, r, "BERUF_TRAINING_SPIELER_WEIBLICH", n - 0xd, 0);
 			}
 			io_AppendText(0x159a, *(unsigned short*) h, lvl + 0x1556, n + text, 4);
 		}

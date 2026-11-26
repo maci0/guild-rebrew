@@ -32,7 +32,7 @@ extern Chan_14cc460* g_772d24;
 /* Read-only eight-byte scale view; native storage owner is unresolved. */
 extern const double g_662b40;
 
-void __cdecl fcn_00426170(int* voice, int enabled);
+void __cdecl d3snd_SetVoiceFlag0x10(int* voice, int enabled);
 SOUND_SOURCE* __cdecl d3snd_FindFreeSource(void);
 SOUND_SOURCE* __cdecl d3snd_AttachSoundSource(char* voice, char* objekt, int volume, float range);
 void __cdecl fcn_00418d70(SOUND_SOURCE* source);

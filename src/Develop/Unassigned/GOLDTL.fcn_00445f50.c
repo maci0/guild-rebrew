@@ -21,7 +21,7 @@ extern int g_10405e0[];
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, void* cb, void* q);
 void __cdecl UpdateSceneLighting(int a);
 char __cdecl fcn_00445d20(int a, float* v);
-char __cdecl fcn_00445d00(char* p, float* q);
+char __cdecl d3_ScaleNodeIntensityCallback(char* p, float* q);
 
 /* ADDRESS: GOLDTL 0x00445f50 */
 char __cdecl fcn_00445f50(unsigned int slot, float t, float scale, int a3)
@@ -46,7 +46,7 @@ char __cdecl fcn_00445f50(unsigned int slot, float t, float scale, int a3)
 	pos = (float) slot + t;
 	d3_VisitSceneObjects(g_67a370, 0, 0x1e, (void*) fcn_00445d20, &pos);
 	if (scale != g_6628a0)
-		d3_VisitSceneObjects(g_67a370, 0, 8, (void*) fcn_00445d00, &scale);
+		d3_VisitSceneObjects(g_67a370, 0, 8, (void*) d3_ScaleNodeIntensityCallback, &scale);
 	n = (slot + 1) % 7;
 	c[0] = ((D3_SCENE_SLOT*)g_1041d80)[n].a.x - ((D3_SCENE_SLOT*)g_1041d80)[slot].a.x;
 	c[1] = ((D3_SCENE_SLOT*)g_1041d80)[n].a.y - ((D3_SCENE_SLOT*)g_1041d80)[slot].a.y;

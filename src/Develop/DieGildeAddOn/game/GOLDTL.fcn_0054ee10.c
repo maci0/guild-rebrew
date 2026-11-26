@@ -20,12 +20,12 @@ void __cdecl gm_AddTime(pos14_7f4c00* s, int a2, int a3, int a4);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
-void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
+void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 int __cdecl fcn_004f6470(int id, int* out, unsigned short k);
 void __cdecl gm_GenerateShuffledIndices(int n, int* out);
-void __cdecl fcn_004c58f0(int a1, int a2, int a3);
+void __cdecl cm_RequestClearEvidenceLink(int a1, int a2, int a3);
 int __cdecl gm_IncrementMissionActionCount(char* a1, int kind);
-void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
+void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 void __cdecl fcn_004c6ae0(int a1, int a2);
 int __cdecl fcn_004c5620(int a1, char* e);
 
@@ -76,18 +76,18 @@ void __cdecl fcn_0054ee10(char* t)
 		else if (*(char**) (secondEntity + 0x170) != 0)
 			id = *(int*) (*(char**) (secondEntity + 0x170) + 1);
 		fcn_004f4f60(0x16, 1, *(int*) (firstEntity + 4), *(int*) (secondEntity + 4), id);
-		fcn_004c54c0(*(int*) (firstEntity + 4), *(int*) (secondEntity + 4), 0x34, 1);
+		cm_RequestCopyEntityData(*(int*) (firstEntity + 4), *(int*) (secondEntity + 4), 0x34, 1);
 		n = fcn_004f6470(*(int*) (secondEntity + 4), ids, *(unsigned short*) firstEntity);
 		gm_GenerateShuffledIndices(n < 0x10 ? n : 0x10, pick);
 		for (i = 0; i < 3; i++, n--) {
 			if (n == 0)
 				break;
-			fcn_004c58f0(ids[pick[i]], *(int*) (firstEntity + 4), 0);
+			cm_RequestClearEvidenceLink(ids[pick[i]], *(int*) (firstEntity + 4), 0);
 		}
 		if (firstEntity[2] == 6)
 			gm_IncrementMissionActionCount(firstEntity, 0xb);
 	}
-	fcn_004c5420(*(int*) (firstEntity + 4), 0x1c8, 4, 0x100, 0);
-	fcn_004c5420(*(int*) (secondEntity + 4), 0x1c8, 4, 0x200, 0);
+	cm_RequestChangeBits(*(int*) (firstEntity + 4), 0x1c8, 4, 0x100, 0);
+	cm_RequestChangeBits(*(int*) (secondEntity + 4), 0x1c8, 4, 0x200, 0);
 	fcn_004c6ae0(*(int*) (firstEntity + 4), impactValue);
 }

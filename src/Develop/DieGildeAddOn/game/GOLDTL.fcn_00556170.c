@@ -8,18 +8,18 @@ extern char gm_GameTime[];
 void __cdecl he_FreeAction(char*);
 int __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
-float __cdecl fcn_004fc460(char*);
+float __cdecl gm_GetCityStatsSummary(char*);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 void __cdecl fcn_004c6000(int, int);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004fac80(int, int*);
+void __cdecl cm_RequestChangeAttribute(void);
+int __cdecl gm_GetBuildingSlotLimits(int, int*);
 float __cdecl fcn_004ff210(unsigned short, int);
 
 #pragma pack(push, 1)
@@ -70,7 +70,7 @@ void __cdecl fcn_00556170(char* p)
 		*(int*) (p + 0x84) = fcn_004c5620(1, p);
 		return;
 	case 1:
-		fcn_004fc460((char*) ts);
+		gm_GetCityStatsSummary((char*) ts);
 		f = (float) (((int*) ts)[8] - ((int*) ts)[4]) / (float) ((int*) ts)[8];
 		*(float*) (p + 0xb0) = 1.0f - f;
 		*(float*) (p + 0xb4) = f / (float) (*(int*) (p + 0xac) + 2);
@@ -101,7 +101,7 @@ anim7:
 		f = gm_RandomFloat01();
 		if (f > *(float*) (p + 0xb0)) {
 			*(int*) (p + 0xb8) = -1;
-			*(int*) (p + 0xb8) = fcn_004c4fc0(0xff, -1, -1,
+			*(int*) (p + 0xb8) = cm_RequestAllocSpieler(0xff, -1, -1,
 				gm_RandomMod(0xc) + 0xf, -1, 0, 0, 2);
 			COPY_UI(p);
 			gm_AddTime(p + 0x52, 0, 0, 1);
@@ -114,19 +114,19 @@ anim7:
 		*(int*) (p + 0x84) = fcn_004c5620(2, p);
 		return;
 	case 3:
-		if (fcn_004c4450(*(int*) (p + 0xb8)) == 0) {
+		if (cm_GetCommandStatus(*(int*) (p + 0xb8)) == 0) {
 			COPY_UI(p);
 			gm_AddTime(p + 0x52, 0, 0, 1);
 			*(int*) (p + 0x84) = fcn_004c5620(3, p);
 			return;
 		}
-		if (fcn_004c4450(*(int*) (p + 0xb8)) == 2) {
+		if (cm_GetCommandStatus(*(int*) (p + 0xb8)) == 2) {
 			gm_AddTime(p + 0x52, 1, 0, 0);
 			*(int*) (p + 0xb8) = -1;
 			*(int*) (p + 0x84) = fcn_004c5620(6, p);
 			return;
 		}
-		obj = fcn_004c4480(*(int*) (p + 0xb8));
+		obj = cm_GetCommandResult(*(int*) (p + 0xb8));
 		v38 = 0;
 		v34 = gm_RandomMod(2) & 0xffff;
 		if (obj == 0) {
@@ -142,7 +142,7 @@ anim7:
 			ent = (char*) (lpGebaeudeINST + v * 0xa9);
 			type = *(unsigned char*) ent;
 			if ((char)((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type].category == 1 &&
-			    fcn_004fac80(type, limits) != 0 &&
+			    gm_GetBuildingSlotLimits(type, limits) != 0 &&
 			    *(unsigned char*) (ent + 0x65) < (unsigned short) limits[0]) {
 				found = 1;
 			}
@@ -155,11 +155,11 @@ anim7:
 		if (found)
 			fcn_004c6000(*(int*) (obj + 4), *(int*) (ent + 1));
 		i = gm_RandomMod(0x32);
-		fcn_004c51a0(*(int*) (obj + 4), -1, g_773d75, ((i & 0xffff) + 0x33) * 0x20);
+		cm_RequestTransferCurrencyNoKill(*(int*) (obj + 4), -1, g_773d75, ((i & 0xffff) + 0x33) * 0x20);
 		cm_BeginPacketFieldDelta(obj, *(int*) (obj + 4));
 		cm_AppendPacketFieldDelta(1, 1, 2, &v38);
 		cm_AppendPacketFieldDelta(1, 1, 0xc, &v34);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		COPY_UI(p);
 		gm_AddTime(p + 0x52, 1, 0, 0);
 		*(int*) (p + 0xac) += 1;
@@ -216,7 +216,7 @@ anim7:
 					ent = (char*) (lpGebaeudeINST + idx * 0xa9);
 					type = *(unsigned char*) ent;
 					if ((char)((BUILDING_PROTOTYPE*)lpGebaeudePROT)[type].category == 1 &&
-					    fcn_004fac80(type, limits) != 0 &&
+					    gm_GetBuildingSlotLimits(type, limits) != 0 &&
 					    *(unsigned char*) (ent + 0x65) < (unsigned short) limits[0]) {
 						found = 1;
 					}

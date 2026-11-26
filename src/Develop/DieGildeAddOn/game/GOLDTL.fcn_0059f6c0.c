@@ -36,7 +36,7 @@ void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
 int __cdecl fcn_005cd440(Req*, char*, int, void*);
 void __cdecl fcn_00532ef0(void);
 void __cdecl d2_RunTalenteDialog(int, int, int);
-void __cdecl fcn_005c0670(int);
+void __cdecl d2_OpenPaymentTargetPicker(int);
 void __cdecl fcn_005bf0d0(void);
 void __cdecl fcn_005bf9e0(void);
 
@@ -110,7 +110,7 @@ void __cdecl d2_RunSabotageActionsHud(int entity, int mode)
 					d2_RunTalenteDialog(entity, mode, 2);
 				}
 				else if (g_7746a0 == d) {
-					fcn_005c0670(entity);
+					d2_OpenPaymentTargetPicker(entity);
 				}
 			}
 		} while (main_RunFrameLoop((void*) d2_RunSabotageActionsHud, 0x67fff) != 0);

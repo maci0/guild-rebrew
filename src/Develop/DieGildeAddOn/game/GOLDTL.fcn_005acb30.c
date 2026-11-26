@@ -14,7 +14,7 @@ void __cdecl fcn_005944d0(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
-void __cdecl fcn_005cf560(char*);
+void __cdecl d2_OpenMeisterbriefDialog(char*);
 
 void __cdecl d2_RunSchreibstubeMenu(char* e)
 {
@@ -49,7 +49,7 @@ void __cdecl d2_RunSchreibstubeMenu(char* e)
 			} else if (g_7746a0 == transport) {
 				d2_OpenTransportPanel(e);
 			} else if (g_7746a0 == meister) {
-				fcn_005cf560(e);
+				d2_OpenMeisterbriefDialog(e);
 			}
 		}
 	}

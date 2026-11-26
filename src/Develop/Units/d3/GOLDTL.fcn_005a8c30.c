@@ -15,7 +15,7 @@ extern int g_6a256c;
 extern int d3_CameraAnimating;
 extern double g_dbl_665fb8;
 
-void __cdecl fcn_00442c00(char* object, int flag);
+void __cdecl d3_SetObjectVisible(char* object, int flag);
 void __cdecl d3_NormalizeVector(float* vector);
 void __cdecl d3_AnimateObjectTransform(char* camera, float* position, char* view, int limit, int mode);
 int __cdecl main_RunFrameLoop(int a, int b);
@@ -46,7 +46,7 @@ void __cdecl fcn_005a8c30(char* object)
 	v.saveB[0] = d3_CameraTargetRotation;
 	v.saveB[1] = g_7e3a54;
 	v.saveB[2] = g_7e3a58;
-	fcn_00442c00((char*) previous, 0);
+	d3_SetObjectVisible((char*) previous, 0);
 	v.offset[0] = *(float*) (g_7746a0 + 0x4c) - *(float*) (d3_ActiveCamera + 0x4c);
 	v.offset[1] = *(float*) (g_7746a0 + 0x50) - *(float*) (d3_ActiveCamera + 0x50);
 	v.offset[2] = *(float*) (g_7746a0 + 0x54) - *(float*) (d3_ActiveCamera + 0x54);
@@ -80,5 +80,5 @@ void __cdecl fcn_005a8c30(char* object)
 	g_7e3a54 = v.saveB[1];
 	g_7e3a58 = v.saveB[2];
 	d3_AnimateCameraToStoredTransform();
-	fcn_00442c00((char*) previous, 1);
+	d3_SetObjectVisible((char*) previous, 1);
 }

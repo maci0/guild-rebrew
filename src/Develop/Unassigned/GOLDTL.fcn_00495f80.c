@@ -1,5 +1,5 @@
 extern void __cdecl fcn_004c6ae0(int, int);
-extern void __cdecl fcn_004c5530(void *);
+extern void __cdecl cm_SendCopyEntityData(void *);
 
 typedef struct tagS495F80 {
     unsigned char gap_00[4];
@@ -25,6 +25,6 @@ int __cdecl fcn_00495f80(int *p, int *q)
     s.f08 = p[1];
     s.f0c = -1;
     s.f5a = *((unsigned char *)q + 4);
-    fcn_004c5530(&s);
+    cm_SendCopyEntityData(&s);
     return 4;
 }

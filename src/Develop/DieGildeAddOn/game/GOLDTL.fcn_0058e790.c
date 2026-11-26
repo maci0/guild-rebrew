@@ -45,9 +45,9 @@ void __cdecl fcn_005340f0(int);
 void __cdecl fcn_005782f0(struct house*, int);
 int __cdecl io_AppendText();
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004c30a0(int, int, char*, int, int);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
-void __cdecl fcn_004c5530(char* msg);
+int __cdecl d3snd_QueueSound(int, int, char*, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
+void __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl evt_RequestScriptExit(char*);
@@ -76,7 +76,7 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 		char ev[0xf8];
 
 		amt = MIN(MAX((int) (gm_WalkEntityChain(g_774970) * 0.25f), 0x27100), 0xc3500);
-		fcn_004c5150(((struct house*)g_7f4ca0)[g_774970].handle, -1, g_773d75, amt);
+		cm_RequestMoveCredits(((struct house*)g_7f4ca0)[g_774970].handle, -1, g_773d75, amt);
 		memset(ev, 0, sizeof(ev));
 		ev[4] = (char) 0x8e;
 		*(int*) (ev + 8) = ((struct house*)g_7f4ca0)[g_774970].handle;
@@ -87,7 +87,7 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 		*(short*) (ev + 0x34) = g_7f4c0c;
 		ev[0x36] = 1;
 		*(int*) (ev + 0x58) = amt;
-		fcn_004c5530(ev);
+		cm_SendCopyEntityData(ev);
 		fcn_005782f0(&((struct house*)g_7f4ca0)[g_774970], 3);
 	}
 	h = fcn_00470820(0, 0, g_6a96d8);
@@ -98,11 +98,11 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 	g_100f1dc = -1;
 	d2_SetForm(h, 1);
 	if (mode == 0) {
-		fcn_004c30a0(t, 0, g_6a9828, gm_RandomMod(8), 0xfa);
+		d3snd_QueueSound(t, 0, g_6a9828, gm_RandomMod(8), 0xfa);
 		io_AppendText(0x40f1, 0x40cc, amt);
 	}
 	else {
-		fcn_004c30a0(t, 0, g_6a9814, gm_RandomMod(8), 0xfa);
+		d3snd_QueueSound(t, 0, g_6a9814, gm_RandomMod(8), 0xfa);
 		io_AppendText(0x40d3, 0x40cc);
 	}
 	do {

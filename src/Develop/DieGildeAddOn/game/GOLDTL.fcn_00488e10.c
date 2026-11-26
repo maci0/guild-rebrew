@@ -5,7 +5,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 
-void __cdecl fcn_004c5530(int a1);
+void __cdecl cm_SendCopyEntityData(int a1);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00488e10 */
@@ -96,7 +96,7 @@ void __cdecl fcn_00488e10(char* e)
 				*(int*) (s + 0x5c) = 4;
 			}
 		}
-		fcn_004c5530((int) s);
+		cm_SendCopyEntityData((int) s);
 		cnt--;
 		*(int*) (p + 0x1c8) |= 4;
 next:

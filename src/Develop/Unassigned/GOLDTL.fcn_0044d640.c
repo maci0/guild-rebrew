@@ -15,7 +15,7 @@ char* __cdecl vfs_ReadConfigLine(void*);
 char* __cdecl fcn_0064f026(char*, char*);
 double __cdecl fcn_0064d62e(char*);
 
-void __cdecl fcn_0044d640(void* r, char* o)
+void __cdecl d3_ParseMeshVertices(void* r, char* o)
 {
 	int i;
 	char* line;

@@ -24,7 +24,7 @@ extern unsigned char* lpGebaeudePROT;
 void __cdecl ch_CollectContextCharacters(unsigned char* home);
 void __cdecl ch_PreloadCharacterMotions(char* view, int n, ...);
 
-void __cdecl fcn_005166a0(unsigned char* home)
+void __cdecl ch_PreloadBuildingMotions(unsigned char* home)
 {
 	NameSet* s;
 	int k;

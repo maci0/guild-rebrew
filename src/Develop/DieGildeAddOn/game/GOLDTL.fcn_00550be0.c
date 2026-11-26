@@ -5,7 +5,7 @@ extern unsigned char g_773d75;
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl io_FormatTextBuffer(char* dst, int id, ...);
 int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
-void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
+void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 int __cdecl he_FreeAction(char* entity);
 
 /* ADDRESS: GOLDTL 0x00550be0 */
@@ -29,14 +29,14 @@ void __cdecl fcn_00550be0(char* entity)
 		fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             buf, 0, 0x5ff, 0);
-		fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
+		cm_RequestMoveCredits(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             -1, g_773d75, *(unsigned int*) (entity + 0xb0) * 2);
 	} else {		io_FormatTextBuffer(buf, 0x10b6,
 		             (int) (*(unsigned int*) (entity + 0xb0) * 0.5f));
 		fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             buf, 0, 0x5ff, 0);
-		fcn_004c5150(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
+		cm_RequestMoveCredits(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             -1, g_773d75,
 		             (int) (*(unsigned int*) (entity + 0xb0) * 0.5f));
 	}

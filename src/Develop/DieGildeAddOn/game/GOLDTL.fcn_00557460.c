@@ -10,21 +10,21 @@ extern int gm_RandomSearchSteps[];
 extern char* g_aed32c;
 typedef struct BuildingRow557460 { unsigned char kind; char fields[0x24c]; } BuildingRow557460;
 
-int __cdecl fcn_004c4450(int h);
-int* __cdecl fcn_004c4480(int h);
+int __cdecl cm_GetCommandStatus(int h);
+int* __cdecl cm_GetCommandResult(int h);
 int __cdecl fcn_004c5620(int a, char* dlg);
-void __cdecl fcn_004c5c80(int a);
+void __cdecl cm_SendCancelCharacterActions(int a);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* s);
 void __cdecl he_FreeAction(char* dlg);
 void __cdecl fcn_005015e0(int* out, int a, int b, int c);
 int __cdecl gm_IsEntityAtBuilding(char* e, char* h);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
-int __cdecl fcn_00500cb0(char* a, char* b);
+int __cdecl gm_CompareGameTime(char* a, char* b);
 void __cdecl gm_AddTime(int* r, int a, int b, int c);
 float __cdecl gm_GetEntitySkill(char* e, int i);
 float __cdecl fcn_0042e450(void);
 int __cdecl fcn_0042e410(int n);
-void __cdecl fcn_004c58b0(int a, int b);
+void __cdecl cm_RequestLinkEvidence(int a, int b);
 
 /* ADDRESS: GOLDTL 0x00557460 */
 void __cdecl fcn_00557460(char* dlg)
@@ -38,8 +38,8 @@ void __cdecl fcn_00557460(char* dlg)
 
 			e = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
 			if (e != 0) {
-				fcn_004c5c80(*(int*) (e + 4));
-				fcn_004c57e0(*(int*) (e + 4), 1);
+				cm_SendCancelCharacterActions(*(int*) (e + 4));
+				cm_RequestKillSpieler(*(int*) (e + 4), 1);
 			}
 		}
 		he_FreeAction(dlg);
@@ -49,7 +49,7 @@ void __cdecl fcn_00557460(char* dlg)
 		return;
 	}
 	if (*(int*) (dlg + 0x84) != -1) {
-		if (fcn_004c4450(*(int*) (dlg + 0x84)) == 0) {
+		if (cm_GetCommandStatus(*(int*) (dlg + 0x84)) == 0) {
 			return;
 		}
 	}
@@ -58,8 +58,8 @@ void __cdecl fcn_00557460(char* dlg)
 		int* p;
 		int v;
 
-		if (fcn_004c4450(*(int*) (dlg + 0xac)) == 1) {
-			p = fcn_004c4480(*(int*) (dlg + 0xac));
+		if (cm_GetCommandStatus(*(int*) (dlg + 0xac)) == 1) {
+			p = cm_GetCommandResult(*(int*) (dlg + 0xac));
 			v = *(int*) ((char*) p + 4);
 			*(int*) (dlg + 0xac) = v;
 			gm_AddTime((int*) (dlg + 0x52), 0, 1, 0);
@@ -108,7 +108,7 @@ void __cdecl fcn_00557460(char* dlg)
 		io_FormatTextBuffer(text, 0x6a5f7c, (void*) hit);
 		e = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
 		if (e != 0) {
-			fcn_004c5c80(*(int*) (e + 4));
+			cm_SendCancelCharacterActions(*(int*) (e + 4));
 			fcn_004c5da0(*(int*) (e + 4), *(int*) (hit + 1), -1, 0, 1,
 			    "Dunkle Ecke");
 			gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
@@ -165,7 +165,7 @@ void __cdecl fcn_00557460(char* dlg)
 			*(int*) (dlg + 0x84) = fcn_004c5620(1, dlg);
 			return;
 		}
-		fcn_004c5c80(*(int*) (e + 4));
+		cm_SendCancelCharacterActions(*(int*) (e + 4));
 		fcn_004c5da0(*(int*) (e + 4), *(int*) (hit + 1),
 		    *(int*) (dlg + 0xb4), 0, 0, "Dunkle Ecke");
 		*(int*) (dlg + 0x84) = fcn_004c5620(3, dlg);
@@ -224,7 +224,7 @@ void __cdecl fcn_00557460(char* dlg)
 				if (*(int*) rec != -1 && *(int*) (rec + 0x25) == 1
 				    && *(int*) (rec + 0x16) != *(int*) (g_7f4ca0
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4)
-				    && fcn_00500cb0(dlg + 0x44, rec + 4) != 1) {
+				    && gm_CompareGameTime(dlg + 0x44, rec + 4) != 1) {
 					found[i] = *(int*) rec;
 					i++;
 				}
@@ -234,7 +234,7 @@ void __cdecl fcn_00557460(char* dlg)
 			*(int*) (dlg + 0xc0) = i;
 			j = 0;
 			while (j < i) {
-				fcn_004c58b0(found[j], *(int*) (g_7f4ca0
+				cm_RequestLinkEvidence(found[j], *(int*) (g_7f4ca0
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4));
 				j++;
 			}
@@ -247,7 +247,7 @@ void __cdecl fcn_00557460(char* dlg)
 					cm_AppendPacketFieldDelta(4, 1, (int) off, &found[j]);
 					j++;
 				}
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 		}
 		io_FormatTextBuffer(text,
@@ -304,7 +304,7 @@ fail:
 				if (*(int*) rec != -1 && *(int*) (rec + 0x25) == 1
 				    && *(int*) (rec + 0x16) != *(int*) (g_7f4ca0
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4)
-				    && fcn_00500cb0(dlg + 0x44, rec + 4) != 1) {
+				    && gm_CompareGameTime(dlg + 0x44, rec + 4) != 1) {
 					found[i] = *(int*) rec;
 					i++;
 				}
@@ -314,7 +314,7 @@ fail:
 			*(int*) (dlg + 0xc0) = i;
 			j = 0;
 			while (j < i) {
-				fcn_004c58b0(found[j], *(int*) (g_7f4ca0
+				cm_RequestLinkEvidence(found[j], *(int*) (g_7f4ca0
 				    + *(unsigned short*) (hit + 0x27) * 0x21c + 4));
 				j++;
 			}
@@ -327,7 +327,7 @@ fail:
 					    &found[j]);
 					j++;
 				}
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 		}
 		io_FormatTextBuffer(text,

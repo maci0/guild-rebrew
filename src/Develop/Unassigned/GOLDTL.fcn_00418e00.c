@@ -16,10 +16,10 @@ struct snd_418e00 {
 extern char* tp_SoundSources;
 
 void __cdecl sb_StopVoice(char*, int);
-void __cdecl fcn_00426170(char*, int);
+void __cdecl d3snd_SetVoiceFlag0x10(char*, int);
 void __cdecl d3_UpdateSoundSourceVolume(struct snd_418e00*);
 void __cdecl d3_UpdateSoundSourcePan(struct snd_418e00*);
-int __cdecl fcn_00423460(char*);
+int __cdecl sb_CheckVoicePlaying(char*);
 void __cdecl fcn_00418d70(struct snd_418e00*);
 
 /* ADDRESS: GOLD 0x00417840 */
@@ -48,14 +48,14 @@ void __cdecl d3snd_UpdateSoundSources(void)
 			sb_StopVoice(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
 			*(unsigned int*) (((struct snd_418e00*)tp_SoundSources)[i].voice + 0x14) |= 8;
 			if (((struct snd_418e00*)tp_SoundSources)[i].keep == 0) {
-				fcn_00426170(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
+				d3snd_SetVoiceFlag0x10(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
 				((struct snd_418e00*)tp_SoundSources)[i].voice = 0;
 			}
 			continue;
 		}
 		d3_UpdateSoundSourceVolume(&((struct snd_418e00*)tp_SoundSources)[i]);
 		d3_UpdateSoundSourcePan(&((struct snd_418e00*)tp_SoundSources)[i]);
-		if (((struct snd_418e00*)tp_SoundSources)[i].voice == 0 || fcn_00423460(((struct snd_418e00*)tp_SoundSources)[i].voice) != 0) {
+		if (((struct snd_418e00*)tp_SoundSources)[i].voice == 0 || sb_CheckVoicePlaying(((struct snd_418e00*)tp_SoundSources)[i].voice) != 0) {
 			continue;
 		}
 		((struct snd_418e00*)tp_SoundSources)[i].idle++;
@@ -63,7 +63,7 @@ void __cdecl d3snd_UpdateSoundSources(void)
 			if (((struct snd_418e00*)tp_SoundSources)[i].fade != 0) {
 				fcn_00418d70(&((struct snd_418e00*)tp_SoundSources)[i]);
 			} else {
-				fcn_00426170(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
+				d3snd_SetVoiceFlag0x10(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
 				*(unsigned int*) (((struct snd_418e00*)tp_SoundSources)[i].voice + 0x14) |= 8;
 				((struct snd_418e00*)tp_SoundSources)[i].voice = 0;
 			}

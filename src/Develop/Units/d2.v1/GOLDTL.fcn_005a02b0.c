@@ -25,7 +25,7 @@ void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl gm_AddTime(void*, int, int, int);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00532ef0(void);
@@ -111,7 +111,7 @@ int __cdecl fcn_005a02b0(void)
 					*(int*) (msg + 0x58) = *(int*) (slot + 4);
 					*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 					gm_AddTime(msg + 0x28, 2, 0, 0);
-					fcn_004c5530(msg);
+					cm_SendCopyEntityData(msg);
 					g_774654 = 1;
 				}
 			}

@@ -28,8 +28,8 @@ int __cdecl d2_SetOverlayAnimation();
 int __cdecl fcn_00494470();
 int __cdecl cm_BeginPacketFieldDelta();
 int __cdecl cm_AppendPacketFieldDelta();
-int __cdecl fcn_004c5360();
-int __cdecl fcn_004c5530();
+int __cdecl cm_RequestChangeAttribute();
+int __cdecl cm_SendCopyEntityData();
 int __cdecl gm_AddTime();
 int __cdecl fcn_00502850();
 int __cdecl fcn_00502cd0();
@@ -204,7 +204,7 @@ label_5c221e:
           if (d2_CurrentElementId == v17[v18 & 0xff]) {
             cm_BeginPacketFieldDelta(v12,*(unsigned int *)(v12 + 2));
             cm_AppendPacketFieldDelta(1,1,0x2c,&v18);
-            fcn_004c5360();
+            cm_RequestChangeAttribute();
             g_774654 = 1;
             v29 = v18 & 0xff;
             v10 = 1;
@@ -248,7 +248,7 @@ label_5c221e:
               if (d2_CurrentElementId == v17[v18 & 0xff]) {
                 cm_BeginPacketFieldDelta(v10,*(unsigned int *)(v10 + 2));
                 cm_AppendPacketFieldDelta(1,1,0x2d,&v18);
-                fcn_004c5360();
+                cm_RequestChangeAttribute();
                 g_774654 = 1;
                 v30 = v18 & 0xff;
                 v12 = 1;
@@ -265,7 +265,7 @@ label_5c221e:
         v19 = 5;
         cm_BeginPacketFieldDelta(a1,*(unsigned int *)(a1 + 2));
         cm_AppendPacketFieldDelta(1,1,0x2d,&v19);
-        fcn_004c5360();
+        cm_RequestChangeAttribute();
         v12 = v27;
       }
       if (v12) {
@@ -357,14 +357,14 @@ label_5c221e:
                 *(unsigned char*) (message + 0x36) = 2;
                 *(unsigned int*) (message + 8) = *(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4);
                 *(unsigned int*) (message + 0xc) = *(unsigned int *)(a0 + 1);
-                fcn_004c5530(message);
+                cm_SendCopyEntityData(message);
                 v10 = 0;
                 do {
                   v12 = v20[v8];
                   if (v12) {
                     cm_BeginPacketFieldDelta(a1,*(unsigned int *)(a1 + 2));
                     cm_AppendPacketFieldDelta(4,1,v10 * 4 + 0x1c,(unsigned int *)(v12 + 4));
-                    fcn_004c5360();
+                    cm_RequestChangeAttribute();
                     *(unsigned char*) (message + 4) = 0x36;
                     *(unsigned int*) (message + 8) = *(unsigned int *)(v12 + 4);
                     *(unsigned int*) (message + 0x68) = 0;
@@ -375,7 +375,7 @@ label_5c221e:
                     *(unsigned short*) (message + 0x64) = timer.d;
                     if ((*(char *)(v12 + 2) == '\x06') || (*(unsigned char*) (message + 0x36) = 1, *(char *)(v12 + 2) == '\a'))
                       *(unsigned char*) (message + 0x36) = 9;
-                    fcn_004c5530(message);
+                    cm_SendCopyEntityData(message);
                     v10 += 1;
                   }
                   v4 = a1;
@@ -386,7 +386,7 @@ label_5c221e:
                 while (v28 = v9, v36 = v12, v10 <= 3) {
                   cm_BeginPacketFieldDelta(v4,*(unsigned int *)(v4 + 2));
                   cm_AppendPacketFieldDelta(4,1,v10 * 4 + 0x1c,&v27);
-                  fcn_004c5360();
+                  cm_RequestChangeAttribute();
                   v10 += 1;
                   v9 = v28;
                   v12 = v36;

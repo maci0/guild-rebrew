@@ -7,26 +7,26 @@ extern unsigned char* lpGebaeudePROT;
 
 void __cdecl SelectTextureSet(char*, int, int, int);
 
-char __cdecl fcn_005165f0(char* o, unsigned char* e)
+char __cdecl d3_ApplyBuildingTextureSet(char* obj, unsigned char* ent)
 {
-	BUILDING_PROTOTYPE *t;
-	int n;
-	int st;
+	BUILDING_PROTOTYPE *proto;
+	int max_level;
+	int state;
 	int i;
 
-	t = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e];
-	n = t->level - 1;
-	if (t->category == 2) {
-		n++;
+	proto = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*ent];
+	max_level = proto->level - 1;
+	if (proto->category == 2) {
+		max_level++;
 	}
-	st = *(int*) (o + 0x220);
-	if (st == 2 || st == 4 || st == 3) {
+	state = *(int*) (obj + 0x220);
+	if (state == 2 || state == 4 || state == 3) {
 		return 1;
 	}
-	if (strncmp(o, "pfl_", 4) != 0 && strncmp(o, "vg_", 3) != 0 &&
-	    strncmp(o, "!vg_", 4) != 0) {
-		for (i = 0; i <= n; i++) {
-			SelectTextureSet(o, *(int*) (o + 0x1cc), i, 1);
+	if (strncmp(obj, "pfl_", 4) != 0 && strncmp(obj, "vg_", 3) != 0 &&
+	    strncmp(obj, "!vg_", 4) != 0) {
+		for (i = 0; i <= max_level; i++) {
+			SelectTextureSet(obj, *(int*) (obj + 0x1cc), i, 1);
 		}
 	}
 	return 1;

@@ -18,15 +18,15 @@ void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-void __cdecl fcn_004c51a0(int, int, char, int);
-void __cdecl fcn_004c51f0(int, int, int, int, int);
-void __cdecl fcn_004c5a60(int, int, int);
-void __cdecl fcn_004c5c80(int);
-void __cdecl fcn_004c58b0(int, int);
-char* __cdecl fcn_004c4480(int);
-int __cdecl fcn_004c4450(int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, int);
+void __cdecl cm_SendRemoveLinkedObject(int, int, int);
+void __cdecl cm_SendCancelCharacterActions(int);
+void __cdecl cm_RequestLinkEvidence(int, int);
+char* __cdecl cm_GetCommandResult(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
@@ -109,7 +109,7 @@ void __cdecl fcn_00569ff0(char* e)
 					o = (char*) fcn_00508e40(*p);
 					if (o != 0) {
 						fcn_00529160(pa, 0, *(unsigned short*) o, e);
-						fcn_004c5c80(*p);
+						cm_SendCancelCharacterActions(*p);
 						fcn_004c5da0(*p, *(int*) (pa + 1), -1, 0, 1, "Einbruch");
 					}
 				}
@@ -172,7 +172,7 @@ void __cdecl fcn_00569ff0(char* e)
 		gm_AddTime(e + 0x52, 0, 0xf, 0);
 		return;
 	case 3:
-		if (*(int*) (e + 0xb4) != -1 && fcn_004c4450(*(int*) (e + 0xb4)) == 0) {
+		if (*(int*) (e + 0xb4) != -1 && cm_GetCommandStatus(*(int*) (e + 0xb4)) == 0) {
 			return;
 		}
 		pa = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
@@ -187,9 +187,9 @@ void __cdecl fcn_00569ff0(char* e)
 			goto fail;
 		}
 		px = (char*) (0x7f4ca0 + *(unsigned short*) (pb + 8) * 0x21c);
-		q = (char*) fcn_004c4480(*(int*) (e + 0xb4));
+		q = (char*) cm_GetCommandResult(*(int*) (e + 0xb4));
 		if (px != 0 && q != 0) {
-			fcn_004c58b0(*(int*) q, *(int*) (px + 4));
+			cm_RequestLinkEvidence(*(int*) q, *(int*) (px + 4));
 		}
 		*(int*) (e + 0x70) = 4;
 		gm_AddTime(e + 0x52, 0, 0xa, 0);
@@ -220,13 +220,13 @@ void __cdecl fcn_00569ff0(char* e)
 				io_FormatTextBuffer(b200, 0x19eb, pa, num);
 				fcn_00545d40(*(int*) (px + 4), *(int*) (px + 4), b200, 1, 0x5f0,
 				        "_NACHRICHTEN_HS_77");
-				fcn_004c51a0(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
+				cm_RequestTransferCurrencyNoKill(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
 			}
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xbc));
 			if (q != 0) {
 				cm_BeginPacketFieldDelta(q, *(int*) (q + 1));
 				cm_AppendPacketFieldValue(4, 1, 0x65, &num);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 		}
 		{
@@ -254,7 +254,7 @@ void __cdecl fcn_00569ff0(char* e)
 				n = 8;
 				do {
 					if (*p != -1) {
-						fcn_004c5c80(*p);
+						cm_SendCancelCharacterActions(*p);
 						fcn_004c5da0(*p, *(int*) (q + 1), *(int*) (pc + 2), 0,
 						        0, "Entdeckt");
 					}
@@ -290,7 +290,7 @@ void __cdecl fcn_00569ff0(char* e)
 					if (*p != -1) {
 						o = (char*) fcn_00508e40(*p);
 						if (o != 0) {
-							fcn_004c5c80(*p);
+							cm_SendCancelCharacterActions(*p);
 							fcn_004c5da0(*p, *(int*) (pb + 1), *(int*) (q + 2), 0,
 							        0, "Einbruch");
 							hits++;
@@ -352,10 +352,10 @@ void __cdecl fcn_00569ff0(char* e)
 			num = num < 0 ? 0 : num;
 			io_FormatTextBuffer(b400, 0x68bea4, num);
 			strcat(b400, b100);
-			fcn_004c51a0(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
+			cm_RequestTransferCurrencyNoKill(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
 			cm_BeginPacketFieldDelta(pb, *(int*) (pb + 1));
 			cm_AppendPacketFieldValue(4, 1, 0x69, &flag);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		} else {
 			pa = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 			if (pa == 0) {
@@ -396,7 +396,7 @@ void __cdecl fcn_00569ff0(char* e)
 						fcn_0064d41a(b100, "%i %s$A", num,
 						        *(char**) (*(unsigned short*) cnt2 * 8 + 0x14a79c0));
 						strcat(b400, b100);
-						fcn_004c51f0(*(int*) (pb + 2), *(int*) (q + 2),
+						cm_SendSellObjekt(*(int*) (pb + 2), *(int*) (q + 2),
 						        *(unsigned short*) cnt2, *(int*) (cnt2 + 2),
 						        (char) g_773d75);
 						flag = (int) (fcn_0050bb50(*(unsigned short*) cnt2,
@@ -428,7 +428,7 @@ void __cdecl fcn_00569ff0(char* e)
 		if (cnt2 != 0) {
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 			if (q != 0) {
-				fcn_004c5a60(*(int*) (q + 1), -1, *(int*) (cnt2 + 2));
+				cm_SendRemoveLinkedObject(*(int*) (q + 1), -1, *(int*) (cnt2 + 2));
 				he_FreeAction(e);
 				return;
 			}
@@ -450,7 +450,7 @@ void __cdecl fcn_00569ff0(char* e)
 				if (*p != -1) {
 					o = (char*) fcn_00508e40(*p);
 					if (o != 0) {
-						fcn_004c5c80(*p);
+						cm_SendCancelCharacterActions(*p);
 						if (pb != 0 && px != 0) {
 							fcn_004c5da0(*p, *(int*) (pb + 1), *(int*) (px + 2), 0,
 							        0, "Einbruch");

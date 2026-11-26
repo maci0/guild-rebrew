@@ -45,7 +45,7 @@ void __cdecl fcn_00597ec0(char* e);
 void __cdecl d2_ShowWirtshausDialog(char* e);
 void __cdecl fcn_005a2500(char* a, char* b);
 void __cdecl fcn_005a2d60(char* a, char* b);
-void __cdecl fcn_004c5530(Msg5a2db0* m);
+void __cdecl cm_SendCopyEntityData(Msg5a2db0* m);
 
 #pragma optimize("y", off)
 
@@ -107,7 +107,7 @@ void __cdecl fcn_005a2db0(char* a0, char* a1)
 				m.flag = 2;
 				m.target = *(int*) (a0 + 1);
 				m.from = *(int*) (a1 + 2);
-				fcn_004c5530(&m);
+				cm_SendCopyEntityData(&m);
 			} else if (g_14cf950 == 0x17) {
 				fcn_005a2d60(a0, a1);
 			}

@@ -12,7 +12,7 @@ extern char s_675908[];
 extern char s_6a625c[];
 extern char s_6a5b54[];
 
-int __cdecl fcn_00500cb0(void*, void*);
+int __cdecl gm_CompareGameTime(void*, void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
@@ -22,11 +22,11 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(void*);
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 int __cdecl fcn_004c6090(unsigned char*, int, int, int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 char* __cdecl fcn_005049a0(char*);
 int __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_0050dc90(char*);
@@ -53,7 +53,7 @@ void __cdecl fcn_0055c740(char* ctx)
 		*(int*) (ctx + 0x70) = state + 1;
 		return;
 	case 1:
-		if (fcn_00500cb0(ctx + 0x52, &gm_GameTime) >= 0) {
+		if (gm_CompareGameTime(ctx + 0x52, &gm_GameTime) >= 0) {
 			return;
 		}
 		rec = gm_StartFilteredEntitySearch(1, 1, *(int*) (ctx + 0x10));
@@ -90,10 +90,10 @@ void __cdecl fcn_0055c740(char* ctx)
 		if (ver == -1) {
 			return;
 		}
-		if (!fcn_004c4450(ver)) {
+		if (!cm_GetCommandStatus(ver)) {
 			return;
 		}
-		ent = fcn_004c4480(*(int*) (ctx + 0xe4));
+		ent = cm_GetCommandResult(*(int*) (ctx + 0xe4));
 		if (ent == 0) {
 			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)
 			    [*(unsigned short*) (ctx + 8)].entity_id,
@@ -149,7 +149,7 @@ void __cdecl fcn_0055c740(char* ctx)
 					    *(int*) (ctx + 0xe0), 0, s_6a5b54);
 				}
 			}
-			fcn_004c51a0(*(int*) (obj + 2),
+			cm_RequestTransferCurrencyNoKill(*(int*) (obj + 2),
 			    ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)].entity_id, g_773d75, ver);
 			h = gm_GetEntityTableEntry((char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)]));
 			if (h != 0) {

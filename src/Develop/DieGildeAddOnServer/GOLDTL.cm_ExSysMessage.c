@@ -13,8 +13,8 @@ typedef struct {
 extern int g_1007cd0, g_6a3760, g_774954;
 void __cdecl fcn_00538060(void);
 int __cdecl srv_SeedRandom(int seed);
-int __cdecl fcn_0042df70(void* fn);
-int __cdecl fcn_0042df30(void* fn, int flag);
+int __cdecl tb_IsCallbackPaused(void* fn);
+int __cdecl tb_SetCallbackPaused(void* fn, int flag);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_0045b290(int a, int b);
 void __cdecl fcn_004ad2d0(int v);
@@ -62,16 +62,16 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 			g_77494c = (g_77494c & 0xfffffff7) | 0x10;
 		break;
 	case 3:
-		v = fcn_0042df70((void*) fcn_00538060);
+		v = tb_IsCallbackPaused((void*) fcn_00538060);
 		if (v == 0)
-			fcn_0042df30((void*) fcn_00538060, 1);
+			tb_SetCallbackPaused((void*) fcn_00538060, 1);
 		*(int*) 0x7f4c00 = *(int*) (buf + 0x11);
 		*(unsigned short*) 0x7f4c04 = *(unsigned short*) (buf + 0x15);
 		*(int*) 0x7f4c06 = *(int*) (buf + 0x17);
 		*(int*) 0x7f4c0a = *(int*) (buf + 0x1b);
 		*(Stamp*) 0x7e1f70 = *(Stamp*) 0x7f4c00;
 		if (v == 0)
-			fcn_0042df30((void*) fcn_00538060, 0);
+			tb_SetCallbackPaused((void*) fcn_00538060, 0);
 		break;
 	case 4:
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (buf + 0x11));

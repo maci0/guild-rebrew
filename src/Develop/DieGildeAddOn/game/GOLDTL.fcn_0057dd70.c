@@ -6,12 +6,12 @@ extern float g_6628a0;
 
 float __cdecl fcn_0050bb50(int, unsigned char);
 double __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 
 void __cdecl he_GrantScaledGold0a4(char* e)
 {
 	float v;
 
 	v = fcn_0050bb50(0x2b7, (*(char*)&g_773d75));
-	fcn_004c51a0(*(int*) (e + 4), -1, (*(char*)&g_773d75), (int) ((gm_RandomFloat01() * 2.0 + g_6628a0) * v));
+	cm_RequestTransferCurrencyNoKill(*(int*) (e + 4), -1, (*(char*)&g_773d75), (int) ((gm_RandomFloat01() * 2.0 + g_6628a0) * v));
 }

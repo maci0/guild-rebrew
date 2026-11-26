@@ -9,7 +9,7 @@ int __cdecl amt_FindOfficeSlotsByKind(int, int, void*);
 int __cdecl fcn_0042e410(int);
 int __cdecl fcn_0050dac0(short);
 void __cdecl io_FormatTextBuffer(char*, int, int, int, int, int);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b6830 */
@@ -75,7 +75,7 @@ found:
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 	    *(unsigned short*) hit, *(unsigned short*) ent,
 	    *(unsigned char*) (msg + 8 + i * 0x18) + 0x253, v);
-	fcn_004c51a0(*request, *(int*) ((char*) hit + 4), g_773d75, v);
+	cm_RequestTransferCurrencyNoKill(*request, *(int*) ((char*) hit + 4), g_773d75, v);
 	fcn_00545d40(*((int*) ent + 1), *((int*) ent + 1), buf,
 	    0x100 < strlen(buf), 0x603, 0);
 	return 0;

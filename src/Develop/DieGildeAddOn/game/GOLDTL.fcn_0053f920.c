@@ -50,7 +50,7 @@ void __cdecl gm_InitGameSession(void)
 	g_774965 = 0;
 	(*(int*)g_68a9cc) = 2;
 	tb_OpenFunction(fcn_00538060, 0x47);
-	fcn_0042df30(fcn_00538060, 1);
+	tb_SetCallbackPaused(fcn_00538060, 1);
 	fcn_0053f100();
 	cm_InitCrimeRecords();
 	gm_ResetCityStats();

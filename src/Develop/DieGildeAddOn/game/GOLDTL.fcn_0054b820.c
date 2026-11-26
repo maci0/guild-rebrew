@@ -11,7 +11,7 @@ typedef struct
 extern S54b820_Clock gm_GameTime;
 
 void __cdecl gm_AddTime(S54b820_Clock* clock, int arg2, int arg3, int arg4);
-void __cdecl fcn_004c5530(int a1);
+void __cdecl cm_SendCopyEntityData(int a1);
 void __cdecl fcn_004c5620(int a1, char* e);
 char* __cdecl gm_LookupEntityRecordById(int a1);
 
@@ -46,7 +46,7 @@ void __cdecl fcn_0054b820(char* e)
 				else {
 					buf[0x36] = 1;
 				}
-				fcn_004c5530((int) buf);
+				cm_SendCopyEntityData((int) buf);
 			}
 		}
 	}

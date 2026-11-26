@@ -7,7 +7,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 
 void __cdecl fcn_005100f0(int id, int amount);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004abd80 */
 int __cdecl ai_RunTheater(char* actor, char* x)
@@ -25,6 +25,6 @@ int __cdecl ai_RunTheater(char* actor, char* x)
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	msg[0x36] = 2;
 	*(int*) (msg + 0x58) = *(int*) (x + 0xc);
-	fcn_004c5530(msg);
+	cm_SendCopyEntityData(msg);
 	return 0x46;
 }

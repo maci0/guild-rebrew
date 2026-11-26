@@ -20,7 +20,7 @@ typedef struct {
 } PACKED_TIME509050;
 #pragma pack(pop)
 
-void __cdecl fcn_00500d60(int* src, char* dst);
+void __cdecl gm_PackGameTime(int* src, char* dst);
 
 /* ADDRESS: GOLD 0x506000 */
 /* ADDRESS: GOLDTL 0x00509050 */
@@ -40,7 +40,7 @@ void __cdecl fcn_00509050(char* entity, PACKED_TIME509050* out)
 	}
 	year -= *(unsigned short*) (entity + 0xa);
 	time.a = year;
-	fcn_00500d60(&time.a, (char*) &packed);
+	gm_PackGameTime(&time.a, (char*) &packed);
 	seed = *(unsigned int*) (entity + 0x30) ^ packed.year;
 	packed.month = (unsigned char) (((seed >> 3) % 13 + year % 11) % 12 + 1);
 	packed.day = (unsigned char) ((seed >> 5) % 28 + 1);

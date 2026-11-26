@@ -18,7 +18,7 @@ extern int g_7728e4;
 extern AMBIENT_ANIMAL_SLOT* g_7728e8;
 extern int g_7728ec;
 
-int __cdecl fcn_00500e20(char*);
+int __cdecl gm_GetSeason(char*);
 void __cdecl d3_SelectSceneContext(int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
@@ -45,7 +45,7 @@ void __cdecl fcn_004bbd70(void)
 	AMBIENT_ANIMAL_SLOT* s;
 
 	saved = d3_CurrentContextIndex;
-	r = fcn_00500e20(gm_GameTime);
+	r = gm_GetSeason(gm_GameTime);
 	d3_SelectSceneContext(0, 1);
 	if (g_776664 == 0) {
 		lim = 0;

@@ -3,7 +3,7 @@
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004a55c0(int*, int, int*, int, int, int*);
 int __cdecl fcn_0042e410(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
@@ -25,7 +25,7 @@ int __cdecl fcn_004b7c70(int* request)
 		return 0x400;
 	slot = (int*) (0x7f4ca0 + (frame[0] & 0xffff) * 0x21c);
 	code = (fcn_0042e410(4) & 0xffff) * 2 + 4;
-	fcn_004c54c0(ent[1], *(int*) ((char*) slot + 4), code, 1);
+	cm_RequestCopyEntityData(ent[1], *(int*) ((char*) slot + 4), code, 1);
 	id = *(unsigned short*) slot;
 	io_FormatTextBuffer(text, *(unsigned short*) ((char*) request + 4) + 0x12e7, id, id);
 	fcn_00545d40(ent[1], ent[1], text, 0x100 < strlen(text), 0x603, 0);

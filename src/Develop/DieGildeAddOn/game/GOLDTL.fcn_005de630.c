@@ -34,7 +34,7 @@ extern char* g_14a5590;
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -81,7 +81,7 @@ int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
 		start = (start + step) % 0x300;
 	} while (n != 0);
 	for (i = 0; i < 3; i++) {
-		fcn_004c54c0(e->entity_id, picks[i]->entity_id, gm_RandomMod(0x20) + 0x14, 1);
+		cm_RequestCopyEntityData(e->entity_id, picks[i]->entity_id, gm_RandomMod(0x20) + 0x14, 1);
 	}
 	fcn_004ff210(e->entity_index, -0x32 - gm_RandomMod(0x40));
 	if (e->entity_state == 6 || e->entity_state == 7) {

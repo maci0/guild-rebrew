@@ -9,7 +9,7 @@ extern int g_66601c;
 
 int __cdecl gm_LookupEntityRecordById(unsigned int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl io_FormatTextBuffer(char*, int);
 int __cdecl fcn_005cd440(void*, char*, int, void*);
@@ -51,7 +51,7 @@ int __cdecl fcn_005d6030(char* actor, char* a1)
 		*(unsigned short*) (rec + 0x34) = g_7f4c0c;
 		*(unsigned short*) (rec + 0x62) = owner;
 		*(int*) (rec + 0x5c) = *(int*) (found + 4);
-		fcn_004c5530(rec);
+		cm_SendCopyEntityData(rec);
 		fcn_004c6ae0(*(int*) (actor + 4), -2);
 		return 0x10;
 	}

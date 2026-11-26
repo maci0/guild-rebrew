@@ -4,10 +4,10 @@ extern unsigned char g_773d75;
 extern char g_67e330[];
 
 short* __cdecl gm_GetEntityTableEntry(char* entity);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
-void __cdecl fcn_004c5150(int a, int b, char c, int n);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
+void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
+void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004978d0 */
 int __cdecl fcn_004978d0(char* entity, char* a2, char* a3)
@@ -22,11 +22,11 @@ int __cdecl fcn_004978d0(char* entity, char* a2, char* a3)
     msg[0x36] = 1;
     *(int*) (msg + 0x58) = *(int*) (a2 + 4);
     *(int*) (msg + 0x5c) = *(int*) (a2 + 0x10);
-    fcn_004c4eb0(g_67e330);
-    fcn_004c5150(-1, *(int*) (a3 + 4), (char) g_773d75,
+    cm_SendLogAction(g_67e330);
+    cm_RequestMoveCredits(-1, *(int*) (a3 + 4), (char) g_773d75,
         (int) (*(float*) (a2 + 0x14)));
-    fcn_004c5530(msg);
-    fcn_004c4ef0(g_67e330);
+    cm_SendCopyEntityData(msg);
+    cm_SendTraceEnd(g_67e330);
     entry = (char*) gm_GetEntityTableEntry(entity);
     if (entry != 0) {
         *(int*) (entry + 0x44) = *(int*) (entry + 0x44) + *(float*) (a2 + 0x14);

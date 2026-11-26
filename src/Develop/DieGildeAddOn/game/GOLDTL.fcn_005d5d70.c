@@ -45,8 +45,8 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c9220(int*);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004c5530(struct msg*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendCopyEntityData(struct msg*);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_004c6ae0(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -105,8 +105,8 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 					m.f5c = *(int*) (e + 4);
 					m.fc = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 					m.f58 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
-					h = fcn_004c5530(&m);
-					while (fcn_004c4450(h) == 0) {
+					h = cm_SendCopyEntityData(&m);
+					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
 					fcn_004c6ae0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);

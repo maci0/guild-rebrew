@@ -1,15 +1,15 @@
 
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c5f60(int a1, int a2, int a3)
+void __cdecl cm_SendSetGebBesitzer(int gebId, int eigentuemerId, int besitzerId)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x38;
-	*(int*) (buf + 0x10) = a1;
-	*(int*) (buf + 0x14) = a2;
-	*(int*) (buf + 0x18) = a3;
-	fcn_004c4330(buf);
+	*(int*) (buf + 0x10) = gebId;
+	*(int*) (buf + 0x14) = eigentuemerId;
+	*(int*) (buf + 0x18) = besitzerId;
+	cm_EnqueueClientPacket(buf);
 }

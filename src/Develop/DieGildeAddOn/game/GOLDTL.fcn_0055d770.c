@@ -36,13 +36,13 @@ extern unsigned short* g_7746cc;
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_FindRecordById(int);
 void __cdecl fcn_0055d6e0(char* e, char* r);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-int __cdecl fcn_004c5290(int, int, int);
+int __cdecl cm_RequestMoveObjekt(int, int, int);
 #include "client_scene_transform.h"
 int __cdecl fcn_00505340(char*);
 void __cdecl fcn_004c5d20(int, int);
-int __cdecl fcn_004c5420(int, int, int, int, int);
+int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005049a0(char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -76,9 +76,9 @@ void __cdecl fcn_0055d770(char* e)
 	}
 	fcn_0055d6e0(e, r);
 	if (e[0xd0] == 0) {
-		fcn_004c5c80(*(int*) (r + 2));
+		cm_SendCancelCharacterActions(*(int*) (r + 2));
 		fcn_004c5da0(*(int*) (r + 2), *(int*) (c + 1), -1, 0, 1, "Trans");
-		*(int*) (e + 0xec) = fcn_004c5290(*(int*) (s44 + 1), *(int*) (b + 1), *(int*) (r + 2));
+		*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (s44 + 1), *(int*) (b + 1), *(int*) (r + 2));
 		e[0xd0] = 1;
 	} else {
 		o = *(char**) (r + 0x3b);
@@ -86,10 +86,10 @@ void __cdecl fcn_0055d770(char* e)
 		    ((*(int*) (o + 0x88) == 0x10432c0 && CompareVector3WithinTolerance((float*) (*(char**) (o + 0x34) + 0x4c), (float*) (e + 0xd8), 100.0f)) ||
 		     *(int*) (e + 0xd4) > 6)) {
 			if (!fcn_00505340(c)) {
-				*(int*) (e + 0xec) = fcn_004c5290(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
+				*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
 				fcn_004c5d20(*(int*) (r + 2), 0);
 			}
-			fcn_004c5420(*(int*) (r + 2), 0x13, 1, 0, 0x40);
+			cm_RequestChangeBits(*(int*) (r + 2), 0x13, 1, 0, 0x40);
 			if (fcn_00505340(c)) {
 				io_FormatTextBuffer(buf, 0x1c43);
 			} else if (lv->kind != 0x1d && lv->kind != 0x1f) {

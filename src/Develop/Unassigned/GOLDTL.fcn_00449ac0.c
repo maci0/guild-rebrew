@@ -10,7 +10,7 @@ extern char g_6b85c0[];
 
 int __cdecl vfs_ResolvePath(char*, int, int, char*);
 
-void __cdecl fcn_00449ac0(char* a, char* b)
+void __cdecl d3_AppendVfsAssetPath(char* a, char* b)
 {
 	char buf[0x100];
 

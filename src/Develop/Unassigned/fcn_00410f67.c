@@ -1,4 +1,4 @@
-void* __cdecl fcn_00422460(int, int);
+void* __cdecl sb_PrepareVoice(int, int);
 void __cdecl sb_SetVoiceLoopCount(void*, int);
 void __cdecl fcn_00423670(void*, int, int);
 
@@ -7,12 +7,12 @@ void* __cdecl fcn_00410f67(int* a, int* b)
 {
 	void* r;
 
-	r = fcn_00422460(0, *a);
+	r = sb_PrepareVoice(0, *a);
 	if (r != 0) {
 		sb_SetVoiceLoopCount(r, *b);
 		fcn_00423670(r, 0, 0);
 		return r;
 	}
-	fcn_00422460(0, *a);
+	sb_PrepareVoice(0, *a);
 	return r;
 }

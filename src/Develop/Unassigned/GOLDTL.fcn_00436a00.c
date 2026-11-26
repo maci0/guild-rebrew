@@ -34,7 +34,7 @@ int __cdecl fcn_004321a0(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int 
 }
 
 #if !defined(REBREW_GOLD)
-void __cdecl fcn_00438ac0(int a1, int a2);
+void __cdecl d3_InvalidateSubTreeFlags(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00436a00 */
 void __cdecl fcn_00436a00(int arg0, char* p, int index)
@@ -59,7 +59,7 @@ void __cdecl fcn_00436a00(int arg0, char* p, int index)
 		*(int*) p = index;
 		*(int*) (p + 4) = fcn_004321a0(*(D3_ANIMATION_OPTIONS*) (p + 0x6c), index,
 		    *(int*) (owner + 0x150), *(int*) (owner + 0x154), *(int*) (owner + 0x148));
-		fcn_00438ac0(arg0, 1);
+		d3_InvalidateSubTreeFlags(arg0, 1);
 	}
 }
 #endif

@@ -13,14 +13,14 @@ int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl gm_AddTime(char*, int, int, int);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-void __cdecl fcn_004c5ed0(int, char*, int);
+void __cdecl cm_RequestPlayAnimation(int, char*, int);
 void __cdecl fcn_00529160(int, int, int, char*);
 void __cdecl he_FreeAction(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl gm_GetElapsedMinutes(char*, char*);
 int __cdecl sprintf(char*, const char*, ...);
 
@@ -99,7 +99,7 @@ void __cdecl fcn_0054da10(char* a)
 						kind--;
 					}
 					hits++;
-					fcn_004c5c80(*(int*) p);
+					cm_SendCancelCharacterActions(*(int*) p);
 					fcn_004c5da0(*(int*) p, *(int*) (ent + 1), *(int*) (q + 2),
 					    0, 0, (char*) 0x6a5ad0);
 					fcn_00529160(0, 0, *(unsigned short*) e, a);
@@ -118,7 +118,7 @@ void __cdecl fcn_0054da10(char* a)
 			io_FormatTextBuffer(buf, 0x1a6a, dmg);
 			he_MessageBoxQuickjump(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (a + 8) * 0x21c),
 			    -1, buf, 0, 0x5ec, *(int*) (ent + 1), -1, 0, 0);
-			fcn_004c5150(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (a + 8) * 0x21c),
+			cm_RequestMoveCredits(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (a + 8) * 0x21c),
 			    -1, g_773d75, dmg);
 		}
 		*(pos14_7f4c00*) (a + 0x52) = gm_GameTime;
@@ -141,7 +141,7 @@ ent0:
 				e = gm_LookupEntityRecordById(*(int*) p);
 				if (e != 0 && *(int*) (e + 0x184) != 0) {
 					fcn_00529160(0, 0, *(unsigned short*) e, a);
-					fcn_004c5c80(*(int*) p);
+					cm_SendCancelCharacterActions(*(int*) p);
 					fcn_004c5da0(*(int*) p, *(int*) (ent + 1), -1, 0, 1,
 					    (char*) 0x6a5ad0);
 				} else {
@@ -223,10 +223,10 @@ ent0:
 						};
 
 						fcn_00529160(0, 0, *(unsigned short*) e, a);
-						fcn_004c5c80(*(int*) p);
+						cm_SendCancelCharacterActions(*(int*) p);
 						fcn_004c5da0(*(int*) p, *(int*) (ent + 1),
 						    -1, 0, 1, (char*) 0x6a5ad0);
-						fcn_004c5ed0(*(int*) p,
+						cm_RequestPlayAnimation(*(int*) p,
 						    gest[gm_RandomMod(3) & 0xffff],
 						    (gm_RandomMod(2) & 0xffff) + 1);
 					} else {

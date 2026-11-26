@@ -5,8 +5,8 @@
 extern pos14_7f4c00 gm_GameTime;
 extern char* g_14b5304;
 
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 int __cdecl fcn_004c5620(int, char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -17,8 +17,8 @@ int __cdecl gm_ApplyAssassinDamage(char*, char*, int);
 int __cdecl gm_RecordAssassinEvidence(char*, char*, int);
 int __cdecl gm_GetElapsedMinutes(char*, char*);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
-void __cdecl fcn_004c57e0(int, int);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_RequestKillSpieler(int, int);
+void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl he_TryTriggerAction0x9b(int, char*);
 char* __cdecl he_FindNearestAction0x18(char*, char*, int);
 int __cdecl fcn_00577e70(char*, char*, char*);
@@ -43,17 +43,17 @@ void __cdecl fcn_00576c90(char* e)
 	if (*(unsigned char*) (e + 0x78) & 4) {
 		return;
 	}
-	if (*(int*) (e + 0x84) != -1 && fcn_004c4450(*(int*) (e + 0x84)) == 0) {
+	if (*(int*) (e + 0x84) != -1 && cm_GetCommandStatus(*(int*) (e + 0x84)) == 0) {
 		return;
 	}
 	*(int*) (e + 0x84) = -1;
 	h = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)]);
 	switch (*(int*) (e + 0x70)) {
 	case 0:
-		if (fcn_004c4450(*(int*) (e + 0xcc)) != 1) {
+		if (cm_GetCommandStatus(*(int*) (e + 0xcc)) != 1) {
 			goto minus_one;
 		}
-		p = fcn_004c4480(*(int*) (e + 0xcc));
+		p = cm_GetCommandResult(*(int*) (e + 0xcc));
 		if (p == 0) {
 			goto minus_one;
 		}
@@ -175,7 +175,7 @@ void __cdecl fcn_00576c90(char* e)
 		n = c > 5 ? c : 5;
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (e + 0x52), n / 60, n % 60, 0);
-		fcn_004c57e0(*(int*) (e + 0xb8), 1);
+		cm_RequestKillSpieler(*(int*) (e + 0xb8), 1);
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 		goto done;
 	case 6:
@@ -195,7 +195,7 @@ void __cdecl fcn_00576c90(char* e)
 			*(int*) (e + 0xac) = *(int*) (r + 0xb4);
 			*(int*) (e + 0xc4) = *(int*) (r + 4);
 			*(int*) (e + 0xc8) = 1;
-			fcn_004c5c80(*(int*) (q + 4));
+			cm_SendCancelCharacterActions(*(int*) (q + 4));
 			fcn_004c5da0(*(int*) (q + 4), *(int*) (e + 0xac), -1, 0, 1, (char*) 0x6a7e3c);
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
@@ -205,7 +205,7 @@ void __cdecl fcn_00576c90(char* e)
 		fcn_004a5e60((unsigned short*) h, 0, (int) 0xa7f4c7a0, 1, 0.0f, 100.0f, (int*) (e + 0xac));
 		*(int*) (e + 0xc4) = -1;
 		*(int*) (e + 0xc8) = 0;
-		fcn_004c5c80(*(int*) (q + 4));
+		cm_SendCancelCharacterActions(*(int*) (q + 4));
 		fcn_004c5da0(*(int*) (q + 4), *(int*) (e + 0xac), -1, 0, 1, (char*) 0x6a7e3c);
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0xf, 0);
@@ -240,7 +240,7 @@ done:
 state_minus:
 	if (*(unsigned char*) (e + 0x78) & 2) {
 		if (gm_LookupEntityRecordById(*(int*) (e + 0xb8)) != 0) {
-			fcn_004c57e0(*(int*) (e + 0xb8), 1);
+			cm_RequestKillSpieler(*(int*) (e + 0xb8), 1);
 		}
 		if (*(int*) (e + 0x70) == -1) {
 			fcn_00545d40(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, g_14b5304, 1, 0x5fa, (char*) 0x6a7e24);

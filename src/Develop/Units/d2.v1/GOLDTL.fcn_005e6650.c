@@ -51,10 +51,10 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl fcn_00526120(int, int);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00532ef0(void);
 
@@ -103,7 +103,7 @@ void __cdecl d2_OpenBlutracheDialog(char* e)
 					for (i = 0; i < n; i++) {
 						m.ids[i] = ((House*)g_7f4ca0)[list[i]].f4;
 					}
-					fcn_004c5530(&m);
+					cm_SendCopyEntityData(&m);
 					g_774654 = 1;
 				} else {
 					fcn_00526120(g_14b5ac8, 0);
@@ -114,7 +114,7 @@ void __cdecl d2_OpenBlutracheDialog(char* e)
 		}
 	} while (main_RunFrameLoop((void*) d2_OpenBlutracheDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 	fcn_00532ef0();
 }

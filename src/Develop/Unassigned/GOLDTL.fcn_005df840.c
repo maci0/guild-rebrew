@@ -20,7 +20,7 @@ typedef struct {
 	char p68[0x90];
 } Msg;
 
-void __cdecl fcn_004c5530(Msg*);
+void __cdecl cm_SendCopyEntityData(Msg*);
 
 int __cdecl fcn_005df840(char* subject)
 {
@@ -35,7 +35,7 @@ int __cdecl fcn_005df840(char* subject)
 	msg.count = 4;
 	msg.dy = 1.0f / 6.0f;
 	msg.speed = 0x18;
-	fcn_004c5530(&msg);
+	cm_SendCopyEntityData(&msg);
 	msg.kind = 0x82;
 	msg.owner = *(int*) (subject + 4);
 	msg.entity = -1;
@@ -45,6 +45,6 @@ int __cdecl fcn_005df840(char* subject)
 	msg.count = 2;
 	msg.dy = -1.0f / 6.0f;
 	msg.speed = 0x18;
-	fcn_004c5530(&msg);
+	cm_SendCopyEntityData(&msg);
 	return 1;
 }

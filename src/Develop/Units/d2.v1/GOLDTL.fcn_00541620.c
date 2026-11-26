@@ -36,7 +36,7 @@ void __cdecl fcn_00537320(int);
 int __cdecl d2_CreateScrollPerga(void);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00500d60(void*, void*);
+void __cdecl gm_PackGameTime(void*, void*);
 int __cdecl fcn_00503fe0(int, int);
 int __cdecl fcn_00503e80(void);
 int __cdecl fcn_00504bd0(int);
@@ -124,7 +124,7 @@ void __cdecl fcn_00541620(void)
 	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x1e, 10);
 	d2_SetForm(dlg, 2);
 	io_AppendText(0x7d);
-	fcn_00500d60((void*) (char*) gm_GameTime, stamp);
+	gm_PackGameTime((void*) (char*) gm_GameTime, stamp);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x2007);
 	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;

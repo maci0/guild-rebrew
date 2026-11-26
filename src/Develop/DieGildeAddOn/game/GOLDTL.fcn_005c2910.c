@@ -9,7 +9,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(void*);
 void* __cdecl he_fn_Handlung(void);
 void* __cdecl he_StartHandlungSearch(int, ...);
@@ -45,7 +45,7 @@ void __cdecl d2_ShowGebaeudeSaleDialog(char* e)
 		}
 		if (g_100f1dc == 2) {
 			if (d2_CurrentElementId == saved) {
-				fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 0, 2);
+				cm_RequestChangeBits(*(int*) (e + 1), 0x5a, 2, 0, 2);
 				he_FreeAction(u);
 				g_774654 = 1;
 			}

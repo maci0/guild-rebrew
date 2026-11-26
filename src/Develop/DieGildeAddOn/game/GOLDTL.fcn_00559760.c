@@ -33,9 +33,9 @@ int __cdecl fcn_004a55c0(struct house*, int, int*, float, float, unsigned short*
 int __cdecl fcn_004a5e60(struct house*, int, F8, int, float, int*);
 double __cdecl gm_RandomFloat01(void);
 
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004c5d60(int, int, int);
+int __cdecl cm_RequestSpawnBuildingCharacter(int, int, int);
 
 int __cdecl he_TryDispatchNpcAction(char* s, int n, int m)
 {
@@ -82,7 +82,7 @@ int __cdecl he_TryDispatchNpcAction(char* s, int n, int m)
 	gm_ResolveEntityById((void**) (&n), 0, 0, tgt);
 	if (n != 0) {
 		idx = (n - (*(int*)&lpGebaeudeINST)) / 0xa9;
-		fcn_004c5420(h->handle, 0x1c8, 4, 0x40000000, 0);
+		cm_RequestChangeBits(h->handle, 0x1c8, 4, 0x40000000, 0);
 		*(int*) s = h->handle;
 		*(int*) (s + 4) = tgt;
 		s[8] = 1;
@@ -93,7 +93,7 @@ int __cdecl he_TryDispatchNpcAction(char* s, int n, int m)
 		s[0xa] = (char) g_6643d8[gm_RandomMod(0x10)];
 		s[0xb] = (char) idx;
 		s[0xc] = -1;
-		return fcn_004c5d60(h->handle, tgt, -1);
+		return cm_RequestSpawnBuildingCharacter(h->handle, tgt, -1);
 	}
 fail:
 	return -1;

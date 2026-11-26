@@ -50,21 +50,21 @@ extern unsigned char g_773d75;
 extern signed char g_6a3440;
 
 #ifdef REBREW_GOLD
-void __cdecl fcn_004b3b60(void);
+void __cdecl gm_ClearMissionJobs(void);
 #else
 void __cdecl fcn_004b39f0(void);
 #endif
 void __cdecl cm_BeginCommandSync(void);
 int __cdecl cm_SendAllocClientSpieler(int, int, int, unsigned char, int, unsigned char, unsigned char, char*, char*);
 void __cdecl cm_EndCommandSync(void);
-int __cdecl fcn_004c44c0(void);
+int __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl fcn_00535960(void);
-Figure* __cdecl fcn_004c4480(int);
-int __cdecl fcn_004c4fc0(int, int, int, short, int, unsigned char, int, int);
+Figure* __cdecl cm_GetCommandResult(int);
+int __cdecl cm_RequestAllocSpieler(int, int, int, short, int, unsigned char, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004fda30(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_004c5150(int, int, char, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl fcn_004b3e10(int, int, int);
 
 void __cdecl gm_CreateSetupFamily(void)
@@ -76,7 +76,7 @@ void __cdecl gm_CreateSetupFamily(void)
 	int i;
 
 #ifdef REBREW_GOLD
-	fcn_004b3b60();
+	gm_ClearMissionJobs();
 #else
 	fcn_004b39f0();
 #endif
@@ -87,19 +87,19 @@ void __cdecl gm_CreateSetupFamily(void)
 	h = cm_SendAllocClientSpieler(-1, -1, 0x10, (*(Setup*)g_7e23e0).look, (*(Setup*)g_7e23e0).face, (*(Setup*)g_7e23e0).hair, (*(Setup*)g_7e23e0).body,
 		(*(Setup*)g_7e23e0).name, (*(Setup*)g_7e23e0).family);
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
+	while (cm_AreQueuedCommandsDone() == 0) {
 		fcn_00535960();
 	}
-	p = fcn_004c4480(h);
+	p = cm_GetCommandResult(h);
 	cm_BeginCommandSync();
-	h = fcn_004c4fc0(9, -1, -1, gm_RandomMod(4) + 0x20, -1, (*(Setup*)g_7e23e0).child_look, 0, 1);
-	i = fcn_004c4fc0(9, -1, -1, gm_RandomMod(4) + 0x20, -1, (*(Setup*)g_7e23e0).spouse_look, 0, 0);
+	h = cm_RequestAllocSpieler(9, -1, -1, gm_RandomMod(4) + 0x20, -1, (*(Setup*)g_7e23e0).child_look, 0, 1);
+	i = cm_RequestAllocSpieler(9, -1, -1, gm_RandomMod(4) + 0x20, -1, (*(Setup*)g_7e23e0).spouse_look, 0, 0);
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
+	while (cm_AreQueuedCommandsDone() == 0) {
 		fcn_00535960();
 	}
-	child = fcn_004c4480(h);
-	spouse = fcn_004c4480(i);
+	child = cm_GetCommandResult(h);
+	spouse = cm_GetCommandResult(i);
 	strncpy(spouse->family, (*(Setup*)g_7e23e0).family, 0x10);
 	child->look = p->look;
 	child->home = p->home;
@@ -119,14 +119,14 @@ void __cdecl gm_CreateSetupFamily(void)
 	spouse->parent = p->id;
 	strcpy(p->motto, (*(Setup*)g_7e23e0).motto);
 	p->emblem = (*(Setup*)g_7e23e0).emblem;
-	fcn_004c54c0(p->id, spouse->id, 0x7f, 0);
-	fcn_004c54c0(spouse->id, p->id, 0x7f, 0);
-	fcn_004c54c0(p->id, child->id, 0x7f, 0);
-	fcn_004c54c0(child->id, p->id, 0x7f, 0);
-	fcn_004c54c0(spouse->id, child->id, 0x7f, 0);
-	fcn_004c54c0(child->id, spouse->id, 0x7f, 0);
-	fcn_004c5150(spouse->id, -1, (*(char*)&g_773d75), (gm_RandomMod(0x200) + 0x1f4) << 5);
-	fcn_004c5150(child->id, -1, (*(char*)&g_773d75), (gm_RandomMod(0x200) + 0x1f4) << 5);
+	cm_RequestCopyEntityData(p->id, spouse->id, 0x7f, 0);
+	cm_RequestCopyEntityData(spouse->id, p->id, 0x7f, 0);
+	cm_RequestCopyEntityData(p->id, child->id, 0x7f, 0);
+	cm_RequestCopyEntityData(child->id, p->id, 0x7f, 0);
+	cm_RequestCopyEntityData(spouse->id, child->id, 0x7f, 0);
+	cm_RequestCopyEntityData(child->id, spouse->id, 0x7f, 0);
+	cm_RequestMoveCredits(spouse->id, -1, (*(char*)&g_773d75), (gm_RandomMod(0x200) + 0x1f4) << 5);
+	cm_RequestMoveCredits(child->id, -1, (*(char*)&g_773d75), (gm_RandomMod(0x200) + 0x1f4) << 5);
 	if (g_6a3440 > -1) {
 		fcn_004b3e10(p->id, (*(Setup*)g_7e23e0).dynasty, 0);
 	}

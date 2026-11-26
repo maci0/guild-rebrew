@@ -116,11 +116,11 @@ void __cdecl fcn_00535560(char*);
 int __cdecl fcn_005b5750(void);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
-void __cdecl fcn_004c4eb0(int);
-void __cdecl fcn_004c5150(int, int, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_004c4ef0(int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendLogAction(int);
+void __cdecl cm_RequestMoveCredits(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
+void __cdecl cm_SendTraceEnd(int);
+void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_00505d00(unsigned char*, int*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -286,26 +286,26 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 				while (f.pg > 0) {
 					p = (char*) *f.pIt;
 					if (p != 0) {
-						fcn_004c4eb0(0x6ac2bc);
-						fcn_004c5150(
+						cm_SendLogAction(0x6ac2bc);
+						cm_RequestMoveCredits(
 						    *(int*) (p + 4), -1,
 						    g_773d75,
 						    fcn_0050b750(
 						        perRow,
 						        g_773d75));
-						fcn_004c54c0(
+						cm_RequestCopyEntityData(
 						    *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*)
 						                   0x774970
 						
 						] + 4),
 						    *(int*) (p + 4), y, 0);
-						fcn_004c4ef0(0x6ac2bc);
+						cm_SendTraceEnd(0x6ac2bc);
 					}
 					f.pIt = (int*) ((char*) f.pIt + 0x5c);
 					f.pg--;
 				}
 			}
-			fcn_004c5150(
+			cm_RequestMoveCredits(
 			    -1,
 			    *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
 						] + 4),
@@ -528,7 +528,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 				}
 				f.msg.b59 = 0;
 				f.msg.b58 = 0x13;
-				fcn_004c5530(&f.msg);
+				cm_SendCopyEntityData(&f.msg);
 			}
 			f.hA = -1;
 			for (i = 0; i < 3; i++) {
@@ -556,7 +556,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 				f.msg.f30 = *(int*) 0x7f4c08;
 				f.msg.w34 = *(short*) 0x7f4c0c;
 				*(int*) &f.msg.b58 = *(int*) (f.rows[f.hA].obj + 4);
-				fcn_004c5530(&f.msg);
+				cm_SendCopyEntityData(&f.msg);
 				f.hA = -1;
 			}
 			goto L870d;
@@ -579,7 +579,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 				f.msg.f30 = *(int*) 0x7f4c08;
 				f.msg.w34 = *(short*) 0x7f4c0c;
 				*(int*) &f.msg.b58 = *(int*) (p + 4);
-				fcn_004c5530(&f.msg);
+				cm_SendCopyEntityData(&f.msg);
 				f.hA = -1;
 			}
 		}

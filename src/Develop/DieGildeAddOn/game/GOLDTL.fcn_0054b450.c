@@ -11,8 +11,8 @@ void __cdecl io_FormatTextBuffer(int, int, ...);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
-int __cdecl fcn_00500cb0(void*, void*);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
+int __cdecl gm_CompareGameTime(void*, void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 
 extern pos14_7f4c00 gm_GameTime;
@@ -56,7 +56,7 @@ void __cdecl fcn_0054b450(char* a0)
 		(*(int*) (a + 0x70))++;
 		return;
 	case 1:
-		if (fcn_00500cb0((void*) 0x7f4c00, a0 + 0x52) > 0) {
+		if (gm_CompareGameTime((void*) 0x7f4c00, a0 + 0x52) > 0) {
 			fcn_00545780(a);
 			*(int*) (a + 0x70) = 2;
 			return;
@@ -67,13 +67,13 @@ void __cdecl fcn_0054b450(char* a0)
 				io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) entityC,
 				             *(unsigned short*) entityA);
 				fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
-				fcn_004c54c0(*(int*) (entityA + 2), *(int*) (entityC + 2), -0x14, 1);
+				cm_RequestCopyEntityData(*(int*) (entityA + 2), *(int*) (entityC + 2), -0x14, 1);
 			} else if (*(int*) 0x100f1dc == 1) {
 				io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) entityC,
 				             *(unsigned short*) entityA);
 				fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
-				fcn_004c54c0(*(int*) (v4 + 2), *(int*) (entityC + 2), -0xf, 1);
-				fcn_004c54c0(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
+				cm_RequestCopyEntityData(*(int*) (v4 + 2), *(int*) (entityC + 2), -0xf, 1);
+				cm_RequestCopyEntityData(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
 			}
 			fcn_00545780(a);
 			he_FreeAction(a);
@@ -86,12 +86,12 @@ void __cdecl fcn_0054b450(char* a0)
 			io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) entityC, *(unsigned short*) entityA);
 			v4 = (unsigned short*) *(int*) (v4 + 2);
 			fcn_00545d40((int) v4, (int) v4, buf, 0, 0x5fa, 0);
-			fcn_004c54c0(*(int*) (entityA + 2), *(int*) (entityC + 2), -0x14, 1);
+			cm_RequestCopyEntityData(*(int*) (entityA + 2), *(int*) (entityC + 2), -0x14, 1);
 		} else {
 			io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) entityC, *(unsigned short*) entityA);
 			fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
-			fcn_004c54c0(*(int*) (v4 + 2), *(int*) (entityC + 2), -0xf, 1);
-			fcn_004c54c0(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
+			cm_RequestCopyEntityData(*(int*) (v4 + 2), *(int*) (entityC + 2), -0xf, 1);
+			cm_RequestCopyEntityData(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
 		}
 		he_FreeAction(a);
 	}

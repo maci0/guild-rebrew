@@ -6,7 +6,7 @@ extern char g_6b5c60[];
 
 int __cdecl he_GetEntityReturnTarget(char* slot, int* out1, int* out2);
 void __cdecl cm_RequestChrMoveToUniverse(int h, int a, int b, char* tag);
-void __cdecl fcn_004c5ba0(int h, int a, int b, char* tag);
+void __cdecl cm_RequestChrWalkToDummy(int h, int a, int b, char* tag);
 
 /* ADDRESS: GOLDTL 0x0057f9a0 */
 void __cdecl fcn_0057f9a0(int a0)
@@ -41,6 +41,6 @@ void __cdecl fcn_0057f9a0(int a0)
 	}
 	if (he_GetEntityReturnTarget(slot, &v1, &v2)) {
 		cm_RequestChrMoveToUniverse(*(int*) (slot + 4), v1, v2, g_675908);
-		fcn_004c5ba0(*(int*) (slot + 4), v1, v2, g_6b5c60);
+		cm_RequestChrWalkToDummy(*(int*) (slot + 4), v1, v2, g_6b5c60);
 	}
 }

@@ -6,7 +6,7 @@ extern int g_678de8;
 extern int g_678dec;
 extern volatile int g_6b7fac;
 
-extern int __cdecl fcn_0042aaa0(int a0);
+extern int __cdecl msx_GetSampleStatus(int a0);
 extern void __cdecl fcn_0042a920(int a0, int a1);
 extern void __cdecl fcn_0042a880(int a0);
 extern void __cdecl sb_StopVoice(void *a0, int a1);
@@ -57,7 +57,7 @@ void __cdecl fcn_00422150(void)
                     *(int *)(p->ptr04 + 0x3c) = now;
                     p->ptr08 = now;
                 }
-                if (fcn_0042aaa0(p->obj) == 4)
+                if (msx_GetSampleStatus(p->obj) == 4)
                 {
                     if (p->flags14 & 3)
                     {
@@ -119,7 +119,7 @@ void __cdecl fcn_00422150(void)
             do
             {
                 p = (PART *)(g_6b7e88 + i * 0x30);
-                if (p->ptr04 != 0 && fcn_0042aaa0(p->obj) == 4)
+                if (p->ptr04 != 0 && msx_GetSampleStatus(p->obj) == 4)
                 {
                     value = 0;
                     now = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;

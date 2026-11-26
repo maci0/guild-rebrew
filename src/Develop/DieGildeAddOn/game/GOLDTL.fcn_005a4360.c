@@ -8,7 +8,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl gm_CheckEntityStock(void*, int, char);
 int __cdecl fcn_00526120(char*, int);
-void __cdecl fcn_004c5150(int, int, char, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
@@ -33,7 +33,7 @@ void __cdecl d2_AcceptLoanOffer(char* building, char* offer)
 		return;
 	}
 	slot = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (building + 0x27)]);
-	fcn_004c5150(*(int*) (building + 1), *(int*) (offer + 0xb0), (*(char*)&g_773d75), *(int*) (offer + 0xb4));
+	cm_RequestMoveCredits(*(int*) (building + 1), *(int*) (offer + 0xb0), (*(char*)&g_773d75), *(int*) (offer + 0xb4));
 	p = (char*) gm_GetEntityTableEntry((char*) (g));
 	if (p != 0) {
 		*(int*) (p + 0x48) += *(int*) (offer + 0xb4);

@@ -27,10 +27,10 @@ void __cdecl fcn_005c9220(int*);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
-void __cdecl fcn_004c5150(int, int, char, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
 /* The native caller consumes the command queue index returned in EAX. */
-int __cdecl fcn_004c54c0(int, int, int, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_RequestCopyEntityData(int, int, int, int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
@@ -95,14 +95,14 @@ int __cdecl fcn_005c02a0(char* entity)
                     stats = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
                     if (stats != 0)
                         *(int*)((char*)stats + 0x28) += amount;
-                    fcn_004c5150(*(int*)(entity + 4), *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, amount);
+                    cm_RequestMoveCredits(*(int*)(entity + 4), *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, amount);
                     duration = amount * ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].flags_1cc & 0x800)
                         ? g_664164 : g_662ac8) * g_664330;
                     command = gm_WalkEntityChain(g_774970);
                     command += gm_WalkEntityChain(*(unsigned short*)entity);
                     command = (int)(duration / command);
-                    command = fcn_004c54c0(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*)(entity + 4), command, 1);
-                    while (!fcn_004c4450(command))
+                    command = cm_RequestCopyEntityData(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*)(entity + 4), command, 1);
+                    while (!cm_GetCommandStatus(command))
                         fcn_00535960();
                     if (entity[2] == 6 || entity[2] == 7) {
                         io_FormatTextBuffer(text, 0x1751, g_774970, amount);

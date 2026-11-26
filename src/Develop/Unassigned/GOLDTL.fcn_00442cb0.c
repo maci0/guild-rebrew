@@ -5,7 +5,7 @@
 
 #include "client_lighting.h"
 
-char __cdecl fcn_00442cb0(char* o, char on)
+char __cdecl d3_SetSubObjectVisibleCallback(char* o, char on)
 {
 	char buf[0x40];
 

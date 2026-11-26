@@ -5,7 +5,7 @@
 
 int __cdecl gm_GetOppositeStatIndex(int);
 
-int __cdecl fcn_004b4590(char* a, char* b, int u)
+int __cdecl gm_CheckStatRankThreshold(char* a, char* b, int u)
 {
 	(void) u;
 	return gm_GetOppositeStatIndex((unsigned char) a[0x164]) >= *(int*) (b + 0x14);

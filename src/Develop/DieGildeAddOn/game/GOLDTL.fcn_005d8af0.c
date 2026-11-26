@@ -23,12 +23,12 @@ extern char s_6acdcc[];
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_AccumulateTyped2(House*);
-void __cdecl fcn_004c5150(int, int, char, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl fcn_004c6ae0(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, unsigned int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -60,7 +60,7 @@ int __cdecl gm_HandleBekehren(House* e)
 		if (gm_AccumulateTyped2(e) < money) {
 			return 0x20;
 		}
-		fcn_004c5150(-1, e->f4, g_773d75, money);
+		cm_RequestMoveCredits(-1, e->f4, g_773d75, money);
 		fcn_004c6ae0(e->f4, -6);
 		for (i = 0; i < 768; i++) {
 			if (((House*)g_7f4ca0)[i].id != 0xffff && ((House*)g_7f4ca0)[i].b2 < 10 && ((House*)g_7f4ca0)[i].b2 != 6 && ((House*)g_7f4ca0)[i].b2 != 7 &&
@@ -68,7 +68,7 @@ int __cdecl gm_HandleBekehren(House* e)
 				if ((unsigned char) rank > gm_RandomMod(0x7e) + ((House*)g_7f4ca0)[i].b84) {
 					cm_BeginPacketFieldDelta((char*) &((House*)g_7f4ca0)[i], ((House*)g_7f4ca0)[i].f4);
 					cm_AppendPacketFieldDelta(1, 1, 0xc, &who);
-					fcn_004c5360();
+					cm_RequestChangeAttribute();
 				}
 			}
 		}
@@ -103,7 +103,7 @@ int __cdecl gm_HandleBekehren(House* e)
 					rank = e->b84;
 					who = e->bc;
 					if (d2_CheckActionBlocker(e, 6) && gm_CheckEntityStock(e, money, g_773d75)) {
-						fcn_004c5150(-1, e->f4, g_773d75, money);
+						cm_RequestMoveCredits(-1, e->f4, g_773d75, money);
 						fcn_004c6ae0(e->f4, -6);
 						for (i = 0; i < 768; i++) {
 							h = &((House*)g_7f4ca0)[i];
@@ -113,7 +113,7 @@ int __cdecl gm_HandleBekehren(House* e)
 									n++;
 									cm_BeginPacketFieldDelta((char*) h, h->f4);
 									cm_AppendPacketFieldDelta(1, 1, 0xc, &who);
-									fcn_004c5360();
+									cm_RequestChangeAttribute();
 								}
 							}
 						}

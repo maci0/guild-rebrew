@@ -15,7 +15,7 @@ extern char* lpGebaeudePROT;
 extern char g_6b5c60[];
 extern unsigned char g_7747b0;
 
-int __cdecl fcn_00500e20(int*);
+int __cdecl gm_GetSeason(int*);
 void __cdecl he_FreeAction(void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl sim_SetSyncParams(int*, int, int, int);
@@ -27,9 +27,9 @@ int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl ch_CountCharacters(int, int);
 void __cdecl fcn_004c6650(int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
-void __cdecl fcn_004c5ba0(int, int, int, char*);
+void __cdecl cm_RequestChrWalkToDummy(int, int, int, char*);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl gm_RandomMod(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
@@ -61,7 +61,7 @@ void __cdecl fcn_00567590(char* action)
 
 	v18 = 0;
 	found = 0;
-	hour = fcn_00500e20((int*) &gm_GameTime);
+	hour = gm_GetSeason((int*) &gm_GameTime);
 	switch (*(int*) (action + 0x70)) {
 	case 0:
 		idx = 0;
@@ -78,7 +78,7 @@ void __cdecl fcn_00567590(char* action)
 					if (gm_CheckEntityType((char*) v18) != 0 || *(int*) (*(int*) p + 0x61) == 0) {
 						fcn_004c6650(*(int*) (p - 0x168));
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x168), out1, out2, "dummy_EINGANG");
-						fcn_004c5ba0(*(int*) (p - 0x168), out1, out2, g_6b5c60);
+						cm_RequestChrWalkToDummy(*(int*) (p - 0x168), out1, out2, g_6b5c60);
 						*(unsigned int*) (p + 0x5c) |= 0x1000;
 					}
 					else {
@@ -136,7 +136,7 @@ next0:
 				if (out2 != *(int*) (*(int*) (p + 0x20) + 0x2c)) {
 					fcn_004c6650(*(int*) (p - 0x160));
 					cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");
-					fcn_004c5ba0(*(int*) (p - 0x160), out2, out1, g_6b5c60);
+					cm_RequestChrWalkToDummy(*(int*) (p - 0x160), out2, out1, g_6b5c60);
 					*(unsigned int*) (p + 0x64) |= 0x1000;
 				}
 			}
@@ -206,7 +206,7 @@ next0:
 						}
 after1:
 						*(unsigned int*) (p + 0x44) |= 0x800;
-						fcn_004c5420(*(int*) (p - 0x180), 0x1c8, 4, 0x800, 0x1000);
+						cm_RequestChangeBits(*(int*) (p - 0x180), 0x1c8, 4, 0x800, 0x1000);
 						*(int*) (action + 0xac) = idx;
 						found += 1;
 					}
@@ -245,7 +245,7 @@ after1:
 					}
 				}
 				*(unsigned int*) (p + 0x5c) |= 0x800;
-				fcn_004c5420(*(int*) (p - 0x168), 0x1c8, 4, 0x800, 0x1000);
+				cm_RequestChangeBits(*(int*) (p - 0x168), 0x1c8, 4, 0x800, 0x1000);
 				moved += 1;
 				*(int*) (action + 0xac) = idx;
 			}
@@ -277,20 +277,20 @@ after1:
 				if (count != 0 && gm_AccumulateTyped2(p - 0x164) > 0xc80 && gm_RandomMod(2) != 0) {
 					if (he_PickNearestWirtshaus(p - 0x164, count, list, &out2, &out1) != 0) {
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");
-						fcn_004c5ba0(*(int*) (p - 0x160), out2, out1, g_6b5c60);
+						cm_RequestChrWalkToDummy(*(int*) (p - 0x160), out2, out1, g_6b5c60);
 					}
 				}
 				else {
 					if (out1 != -1) {
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");
-						fcn_004c5ba0(*(int*) (p - 0x160), out2, out1, g_6b5c60);
+						cm_RequestChrWalkToDummy(*(int*) (p - 0x160), out2, out1, g_6b5c60);
 					}
 					else {
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, -1, "dummy_TUER");
 					}
 				}
 				*(unsigned int*) (p + 0x64) |= 0x800;
-				fcn_004c5420(*(int*) (p - 0x160), 0x1c8, 4, 0x800, 0x1000);
+				cm_RequestChangeBits(*(int*) (p - 0x160), 0x1c8, 4, 0x800, 0x1000);
 			}
 			p += 0x21c;
 		}

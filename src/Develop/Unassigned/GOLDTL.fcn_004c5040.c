@@ -1,7 +1,7 @@
 
 
 
-int __cdecl fcn_004c4330(char*);
+int __cdecl cm_EnqueueClientPacket(char*);
 char* __cdecl fcn_0064d530(char*, char*, int);
 
 int __cdecl cm_SendAllocClientSpieler(int a, int b, short c, char d, int e, char f, char g, char* s1, char* s2)
@@ -18,5 +18,5 @@ int __cdecl cm_SendAllocClientSpieler(int a, int b, short c, char d, int e, char
 	buf[0x24] = g;
 	fcn_0064d530(buf + 0x25, s1, 0x10);
 	fcn_0064d530(buf + 0x35, s2, 0x10);
-	return fcn_004c4330(buf);
+	return cm_EnqueueClientPacket(buf);
 }

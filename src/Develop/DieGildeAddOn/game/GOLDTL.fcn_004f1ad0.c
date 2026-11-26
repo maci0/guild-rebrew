@@ -9,7 +9,7 @@ extern char* gm_FemaleNames[];
 
 int __cdecl gm_RandomMod(int n);
 char* __cdecl FindSlotEntryFiltered(int a0, void* a1, int a2, void* filter, int a4);
-char* __cdecl fcn_004fd9d0(int a0, int a1);
+char* __cdecl gm_FindOrAllocHeadSet(int a0, int a1);
 
 /* ADDRESS: GOLDTL 0x004f1ad0 */
 int __cdecl fcn_004f1ad0(void* building, int count)
@@ -56,7 +56,7 @@ int __cdecl fcn_004f1ad0(void* building, int count)
 		*(int*) (*(char**) (hit + 0x10) + 0x38) = gm_RandomMod(2) & 0xffff;
 		strncpy(*(char**) (hit + 0x10) + 0x14,
 		    g_14a62d8[gm_RandomMod(0x95) & 0xffff], 0xf);
-		tbl = fcn_004fd9d0(*(int*) (*(char**) (hit + 0x10) + 0x38),
+		tbl = gm_FindOrAllocHeadSet(*(int*) (*(char**) (hit + 0x10) + 0x38),
 		    *(int*) (*(char**) (hit + 0x10) + 0x34));
 		*(int*) (*(char**) (hit + 0x10) + 0x3c) = 0xff;
 		idx = gm_RandomMod(4) & 0xffff;

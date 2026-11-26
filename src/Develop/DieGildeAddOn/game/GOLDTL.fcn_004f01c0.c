@@ -47,13 +47,13 @@ int __cdecl d3_SpawnRockDebrisEffect(int a1, float* pos, int n, float a4, float 
                          float a11, int a12);
 int* __cdecl fcn_00417d00(int a1, float* pos, int n, float a4, float a5,
                           float a6, float a7, int a8);
-int __cdecl fcn_00422460(int a1, char* name);
+int __cdecl sb_PrepareVoice(int a1, char* name);
 void __cdecl d3snd_PlayObjectSound(int a1, int a2, int a3, float a4);
 int __cdecl gm_ResolveEntityById(char** out, int a, int b, int c);
 void __cdecl cm_BeginPacketFieldDelta(char* a1, int a2);
 void __cdecl cm_AppendPacketFieldValue(int a1, int a2, int a3, void* a4);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004f01c0 */
 void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
@@ -222,7 +222,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 		f3 = rr * *(float*) 0x662a3c;
 	}
 	fcn_00417d00(0, &cx, 0x96, f3, f2, f1, 80.0f, 200);
-	p = (char*) fcn_00422460(0, g_677640);
+	p = (char*) sb_PrepareVoice(0, g_677640);
 	if (p != 0) {
 		d3snd_PlayObjectSound((int) p, *(int*) (best + 0x61), 0x6b, 12200.0f);
 	}
@@ -256,12 +256,12 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 				*(int*) (msg + 0x5c) =
 				    (int) out.slot[i].strength;
 				msg[0xb0] = 1;
-				fcn_004c5530(msg);
+				cm_SendCopyEntityData(msg);
 			} else if (out.slot[i].type == 2) {
 				neg = (char) (int) -out.slot[i].strength;
 				cm_BeginPacketFieldDelta(p, *(int*) (p + 1));
 				cm_AppendPacketFieldValue(1, 1, 0x5c, &neg);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 		}
 	}

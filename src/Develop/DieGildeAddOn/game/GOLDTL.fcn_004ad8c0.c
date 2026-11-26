@@ -24,16 +24,16 @@ int __cdecl _ftol(void);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_00507400(int, int);
 int __cdecl gm_IsInRange(int);
-int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 float __cdecl gm_RandomFloat01(void);
-char *__cdecl fcn_004c4480(int);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+char *__cdecl cm_GetCommandResult(int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int *);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x4ad7a0 */
 void __cdecl fcn_004ad8c0(void)
@@ -101,32 +101,32 @@ void __cdecl fcn_004ad8c0(void)
 	for (j = 0, k = 0; j < 3; j++) {
 		for (cnt = (int) score[j]; cnt < 2; cnt++) {
 			x = fcn_00507400(ids[k++], (unsigned short) gm_RandomMod(3) + 4);
-			h = fcn_004c4fc0(3, -1, -1, gm_RandomMod(8) + 0x19, -1, x, 0, gm_IsInRange(x));
+			h = cm_RequestAllocSpieler(3, -1, -1, gm_RandomMod(8) + 0x19, -1, x, 0, gm_IsInRange(x));
 			if (h != -1) {
 				do {
-					if (fcn_004c4450(h) != 0) {
+					if (cm_GetCommandStatus(h) != 0) {
 						break;
 					}
 					fcn_00535960();
 				} while (1);
 			}
-			if (fcn_004c4450(h) != 1) {
+			if (cm_GetCommandStatus(h) != 1) {
 				return;
 			}
 			seven = 7;
 			v = (int) (g_6653bc * ((gm_RandomFloat01() + 1.0f) * 0.5f));
 			kind = kinds[j];
-			o = fcn_004c4480(h);
-			fcn_004c5150(*(int *) (o + 4), -1, g_773d75, v);
+			o = cm_GetCommandResult(h);
+			cm_RequestMoveCredits(*(int *) (o + 4), -1, g_773d75, v);
 			cm_BeginPacketFieldDelta(o, *(int *) (o + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, &seven);
 			cm_AppendPacketFieldDelta(1, 1, 0x167, &kind);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			mask = g_664e1c[j];
 			if (j == 2) {
 				mask |= g_664e1c[(unsigned short) gm_RandomMod(j)];
 			}
-			fcn_004c5420(*(int *) (o + 4), 0x1cc, 4, mask, 0);
+			cm_RequestChangeBits(*(int *) (o + 4), 0x1cc, 4, mask, 0);
 		}
 	}
 }

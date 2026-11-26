@@ -4,9 +4,9 @@ extern unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 extern int __cdecl gm_MapEntityStatRange(int type);
 extern int __cdecl fcn_005c6270(unsigned short* rec, int mode);
 extern int __cdecl gm_RandomMod(int range);
-extern void __cdecl fcn_004c54c0(int a, int b, int c, int d);
+extern void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 extern int __cdecl gm_WalkEntityChain(unsigned short v);
-extern void __cdecl fcn_004c51a0(int a, int b, char c, int d);
+extern void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, char c, int d);
 extern void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c);
 extern void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
 extern double g_6629c8;
@@ -48,14 +48,14 @@ int __cdecl fcn_004b8130(int* arg)
         if (key != gm_MapEntityStatRange(*(unsigned char*) (i + 0x162))) {
             continue;
         }
-        fcn_004c54c0(*(int*) (rec + 4), *(int*) (i + 2),
+        cm_RequestCopyEntityData(*(int*) (rec + 4), *(int*) (i + 2),
                      (gm_RandomMod(8) & 0xffff) + 1, 1);
     }
     t = gm_RandomMod(4) & 0xffff;
     d = (double) t + g_6629c8;
     v = gm_WalkEntityChain(*(unsigned short*) rec);
     r = (int) (0.01 * ((double) v * d));
-    fcn_004c51a0(-1, arg[0], g_773d75, r);
+    cm_RequestTransferCurrencyNoKill(-1, arg[0], g_773d75, r);
     if (rec[0x169] == 0x1e) {
         mode = 0;
     } else if (rec[0x169] == 0x1f) {

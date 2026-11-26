@@ -17,11 +17,11 @@ extern char g_7f4ca4[];
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl fcn_004c6b20(int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_004c5980(void*);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
 int __cdecl amt_SendOfficeCommand(unsigned char, int, int, int, int);
@@ -53,7 +53,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = 3;
 		*(int*) (msg + 0x5c) = 1;
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 		return;
 	case 1:
 		msg[4] = 0x5b;
@@ -67,7 +67,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = (int) ((float) n * g_6652c8);
 		*(int*) (msg + 0x5c) = 1;
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 		return;
 	case 2:
 		msg[4] = 0x5c;
@@ -81,7 +81,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = 3;
 		*(int*) (msg + 0x5c) = 3;
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 		return;
 	case 3:
 		msg[4] = 0x5b;
@@ -95,7 +95,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = (int) ((float) n * g_6652c8);
 		*(int*) (msg + 0x5c) = 4;
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 		return;
 	case 4:
 		fcn_004c6b20(*(int*) (entity + 2), 1, 0);
@@ -110,7 +110,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		level = (char) (((unsigned char*) entity)[0xd] > 2 ? 2 : 1);
 		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 2));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &level);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		return;
 	case 8:
 		fcn_004c6b20(*(int*) (entity + 2), 3, 0);

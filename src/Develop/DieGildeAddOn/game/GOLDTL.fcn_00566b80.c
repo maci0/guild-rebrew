@@ -3,7 +3,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_0050b750(int a, unsigned char k);
-void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
+void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 void __cdecl io_FormatTextBuffer(char* buf, int text, ...);
 void __cdecl he_FreeAction(char* u);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags, int value, int x, int y, char* name, char* text2);
@@ -34,7 +34,7 @@ void __cdecl fcn_00566b80(char* obj)
 			for (i = 0; i < 768; i++) {
 				if (*(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])) != 0xffff && *(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x16c) == e) {
 					id = *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (obj + 8)]) + 4);
-					fcn_004c54c0(id, *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 4), step, 0);
+					cm_RequestCopyEntityData(id, *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 4), step, 0);
 				}
 			}
 			if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) (obj + 8)].entity_state) == 6

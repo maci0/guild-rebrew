@@ -10,7 +10,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 
-void __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 typedef struct {
 	int state;
 	int flag;
@@ -31,13 +31,13 @@ typedef struct {
 extern slot_1007ce8 g_1007ce8[];
 
 short __cdecl fcn_004a82b0(void);
-void __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 
 /* ADDRESS: GOLDTL 0x004a8770 */
 void __cdecl fcn_004a8770(void)
 {
 	((fcn_004a8770_game*)g_1007cd4)->fa0 = ((fcn_004a8770_game*)g_1007cd4)->fac * 3;
-	fcn_004c51a0(-1, ((fcn_004a8770_game*)g_1007cd4)->f4[1], (*(char*)&g_773d75), ((fcn_004a8770_game*)g_1007cd4)->fac);
+	cm_RequestTransferCurrencyNoKill(-1, ((fcn_004a8770_game*)g_1007cd4)->f4[1], (*(char*)&g_773d75), ((fcn_004a8770_game*)g_1007cd4)->fac);
 }
 
 /* ADDRESS: GOLDTL 0x004a87b0 */
@@ -47,7 +47,7 @@ void __cdecl fcn_004a87b0(void)
 
 	((fcn_004a87b0_game*)g_1007cd4)->fb8 = fcn_004a82b0();
 	if (((fcn_004a87b0_game*)g_1007cd4)->fb8 == 0)
-		fcn_004c51a0(((fcn_004a87b0_game*)g_1007cd4)->f4[1], -1, (*(char*)&g_773d75), ((fcn_004a87b0_game*)g_1007cd4)->fa0);
+		cm_RequestTransferCurrencyNoKill(((fcn_004a87b0_game*)g_1007cd4)->f4[1], -1, (*(char*)&g_773d75), ((fcn_004a87b0_game*)g_1007cd4)->fa0);
 	for (i = 0; i < 24; i++) {
 		((fcn_004a87b0_slot*)g_1007ce8)[i].state = 3;
 		((fcn_004a87b0_slot*)g_1007ce8)[i].flag = 0;

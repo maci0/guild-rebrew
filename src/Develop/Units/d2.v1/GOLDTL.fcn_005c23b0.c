@@ -34,7 +34,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
-void __cdecl fcn_004c5530(Msg5c23b0*);
+void __cdecl cm_SendCopyEntityData(Msg5c23b0*);
 int __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00471e30(int);
 
@@ -76,7 +76,7 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 			m.key = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 			m.other = *(int*) (e + 1);
 			m.extra = fcn_0050b750(d2_GetControlValue(h), g_773d75);
-			fcn_004c5530(&m);
+			cm_SendCopyEntityData(&m);
 			fcn_00526120(*(int*) 0x14ab238, 0);
 			g_774654 = 1;
 		}

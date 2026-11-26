@@ -11,18 +11,18 @@ extern double g_6640e8;
 
 char* __cdecl fcn_004ce590(int);
 unsigned int __cdecl cut_RandMod(unsigned int);
-void __cdecl fcn_004c6880(int, int, int);
+void __cdecl cm_RequestReduceLifespan(int, int, int);
 char* __cdecl gm_GetEquippedCombatGear(char*);
 int __cdecl fcn_004cef70(int, char*);
 unsigned char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl d3_ChangeObjectTransparency(char*, char*, OBJECT_COLOR);
-int __cdecl fcn_004ce270(char*, char*);
+int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 float __cdecl fcn_004ce1b0(char*, char*);
 char* __cdecl fcn_004ceb40(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 float __cdecl d3_ComputeYawToTarget(char*, float*);
-void __cdecl fcn_00438d70(char*, int, float, int);
+void __cdecl d3_SetObjectEulerRotation(char*, int, float, int);
 void __cdecl fcn_004cee20(void);
 
 /* ADDRESS: GOLD 0x004cf000 */
@@ -65,7 +65,7 @@ void __cdecl fcn_004cf000(void)
 				d = fcn_004ce590(0x16e);
 				num = cut_RandMod((unsigned int) ((unsigned char) d[6] - (unsigned char) d[5])) + (unsigned char) d[5];
 				t = (int) ((double) num * *(float*) (e + 0x1c) * 0.01);
-				fcn_004c6880(*(int*) (e + 4), t, (int) *(unsigned char*) (e + 8));
+				cm_RequestReduceLifespan(*(int*) (e + 4), t, (int) *(unsigned char*) (e + 8));
 			}
 		}
 	}
@@ -98,7 +98,7 @@ void __cdecl fcn_004cf000(void)
 					if (g == 0) {
 						continue;
 					}
-					if (fcn_004ce270(e, g) == 0) {
+					if (gm_EntitiesDifferByOwnerPtr(e, g) == 0) {
 						continue;
 					}
 					if (*(char*) (g + 8) == 0) {
@@ -148,7 +148,7 @@ void __cdecl fcn_004cf000(void)
 							double d;
 							d = v * 0.25;
 							e34 = *(char**) (o + 0x34);
-							fcn_00438d70(e34, *(int*) (e34 + 0x84), d + *(float*) (e34 + 0x88), *(int*) (e34 + 0x8c));
+							d3_SetObjectEulerRotation(e34, *(int*) (e34 + 0x84), d + *(float*) (e34 + 0x88), *(int*) (e34 + 0x8c));
 						}
 					}
 				}

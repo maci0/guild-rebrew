@@ -1,7 +1,7 @@
 #include <string.h>
 
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
-int __cdecl fcn_005ca560(void*);
+int __cdecl d2_BuildPersonStatusDesc(void*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 
 /* ADDRESS: GOLDTL 0x005cb860 */
@@ -81,7 +81,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int maxCount, int* a2, voi
 	if ((int) keep < 1)
 		return keep;
 	for (i = 0; i < keep; i++) {
-		fcn_005ca560(&a2[i * 14]);
+		d2_BuildPersonStatusDesc(&a2[i * 14]);
 		a2[i * 14 + 12] = fcn_005cf720(*a0, *(short*) *(int*) (&a2[i * 14]), a3, 0);
 	}
 	return keep;

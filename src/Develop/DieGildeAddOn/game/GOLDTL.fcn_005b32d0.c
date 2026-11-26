@@ -6,7 +6,7 @@ extern char g_6ab558[];
 void __cdecl io_FormatTextBuffer(void*, int, void*, void*);
 void __cdecl he_MessageBoxQuickjump(int, int, void*, int, int, int, int, int, void*);
 
-void __cdecl fcn_005b32d0(void* recipient, int subject, void* building)
+void __cdecl he_NotifyDomizilEvent(void* recipient, int subject, void* building)
 {
 	char t;
 

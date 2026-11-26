@@ -7,7 +7,7 @@ int __cdecl amt_FindOfficeSlotByType(int, void*);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int* __cdecl fcn_004ad130(int, int*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
-void __cdecl fcn_004c57e0(int, int);
+void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
@@ -43,7 +43,7 @@ void __cdecl fcn_004acf60(void)
 		r = fcn_004ad130(g_7728c8, &out);
 		if (r != 0 && r[2] <= lim) {
 			amt_SendOfficeCommand(a.kind, 0, 0, 1, 0xff);
-			fcn_004c57e0(a.id, 1);
+			cm_RequestKillSpieler(a.id, 1);
 			if (e1 != 0) {
 				io_FormatTextBuffer(buf, 0x42b2, *e1);
 				for (i = 0; i < 768; i++) {
@@ -57,7 +57,7 @@ void __cdecl fcn_004acf60(void)
 		r = fcn_004ad130(g_7728c0, &out);
 		if (r != 0 && r[2] <= lim) {
 			amt_SendOfficeCommand(b.kind, 0, 0, 1, 0xff);
-			fcn_004c57e0(b.id, 1);
+			cm_RequestKillSpieler(b.id, 1);
 			if (e2 != 0) {
 				io_FormatTextBuffer(buf, 0x42b4, *e2);
 				for (i = 0; i < 768; i++) {

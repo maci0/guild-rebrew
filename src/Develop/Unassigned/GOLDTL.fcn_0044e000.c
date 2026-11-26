@@ -11,7 +11,7 @@ typedef struct Vert {
 
 int __cdecl fcn_004011d0(void* stream, void* dst);
 
-void __cdecl fcn_0044e000(void* r, char* o)
+void __cdecl d3_ReadMeshVertices(void* r, char* o)
 {
 	int i;
 

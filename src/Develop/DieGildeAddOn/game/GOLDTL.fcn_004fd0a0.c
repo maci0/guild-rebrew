@@ -12,11 +12,11 @@ void __cdecl fcn_004fd400(short*, int*);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_004c5480(int, int, float);
-void __cdecl fcn_004c47e0(int*);
-int __cdecl fcn_004c4820(unsigned char, float);
+void __cdecl cm_RequestChangeFloat(int, int, float);
+void __cdecl cm_BeginSecondaryPacketDelta(int*);
+int __cdecl cm_AppendDesireDelta(unsigned char, float);
 void __cdecl fcn_004c53e0(void);
 
 /* ADDRESS: GOLDTL 0x004fd0a0 */
@@ -69,12 +69,12 @@ void __cdecl fcn_004fd0a0(void)
 			*(double*) dmem = 1.0;
 		}
 		inv = 1.0f - (float) r / (float) n;
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		g_773d48++;
-		fcn_004c5480(*(int*) (e + 4), 0x1e4, -(*(float*) (e + 0x1e4) - (*(double*) dmem + inv) * 0.5));
+		cm_RequestChangeFloat(*(int*) (e + 4), 0x1e4, -(*(float*) (e + 0x1e4) - (*(double*) dmem + inv) * 0.5));
 		inv = (float) (-(*(float*) (e + 0xb4) - g_6640f0 * *(float*) (e + 0xb4)));
-		fcn_004c47e0((int*) e);
-		fcn_004c4820(3, inv);
+		cm_BeginSecondaryPacketDelta((int*) e);
+		cm_AppendDesireDelta(3, inv);
 		fcn_004c53e0();
 		g_773d48++;
 	}

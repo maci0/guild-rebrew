@@ -3,7 +3,7 @@ extern float g_6a24e4;
 
 
 /* ADDRESS: GOLDTL 0x00525e90 */
-void __cdecl fcn_00525e90(void)
+void __cdecl main_SampleFrameCounter(void)
 {
 	float f;
 

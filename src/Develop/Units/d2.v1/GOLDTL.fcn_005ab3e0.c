@@ -22,9 +22,9 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckEntityStock(char*, int, int);
 int __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c5150(int, int, int, int);
-int __cdecl fcn_004c4450(int);
+void __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_RequestMoveCredits(int, int, int, int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl he_NotifyAblassPurchase(char*, char*, char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
@@ -93,19 +93,19 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 			rec = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 			cm_BeginPacketFieldDelta(rec, *(int*) (rec + 4));
 			cm_AppendPacketFieldValue(4, 1, 0x1ac, &cost);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			fcn_004f5e20(*(int*) (rec + 4), count);
 			if (*(unsigned short*) (churchBuilding + 0x27) != 0xffff
 				&& *(unsigned short*) (churchBuilding + 0x27) != g_774970) {
 				val = (int) (cost / log10((double) cost));
-				fcn_004c5150(-1, *(int*) (rec + 4), g_773d75, cost);
-				sel = fcn_004c5150(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(churchBuilding + 0x27)] + 4),
+				cm_RequestMoveCredits(-1, *(int*) (rec + 4), g_773d75, cost);
+				sel = cm_RequestMoveCredits(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(churchBuilding + 0x27)] + 4),
 					-1, g_773d75, val);
 				he_NotifyAblassPurchase(rec, (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(churchBuilding + 0x27)], churchBuilding, val, cost);
 			} else {
-				sel = fcn_004c5150(-1, *(int*) (rec + 4), g_773d75, cost);
+				sel = cm_RequestMoveCredits(-1, *(int*) (rec + 4), g_773d75, cost);
 			}
-			while (sel != -1 && fcn_004c4450(sel) == 0)
+			while (sel != -1 && cm_GetCommandStatus(sel) == 0)
 				fcn_00535960();
 			io_FormatTextBuffer(text, 0x1964, *(int*) (rec + 0x1ac), fcn_0050e600(g_774970, 0));
 			fcn_00526120(text, 0x100);

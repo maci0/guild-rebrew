@@ -11,7 +11,7 @@ extern char g_696488[];
 
 int __cdecl _strcmpi(const char* a, const char* b);
 
-int __cdecl fcn_004fdec0(char* name)
+int __cdecl gm_FindHeadIconIndex(char* name)
 {
 	char base[128];
 	char full[128];

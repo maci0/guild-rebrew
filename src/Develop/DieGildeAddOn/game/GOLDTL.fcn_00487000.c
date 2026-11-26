@@ -28,7 +28,7 @@ int __cdecl gm_RandomMod(int);
 int __cdecl gm_CheckEntityType(unsigned char*);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 
 /* Offers a building slot to the local player: counts the records and work
  * slots already bound to the entity's owner, and either reports the pending
@@ -90,7 +90,7 @@ void __cdecl fcn_00487000(char* e)
 		m[0x36] = 2;
 		*(short*) (m + 0x34) = g_7f4c0c;
 		*(int*) (m + 0x58) = *(int*) (rec + 4);
-		fcn_004c5530(m);
+		cm_SendCopyEntityData(m);
 	}
 	n = 0;
 	for (q = 0x7f4e0c; q < 0x85a20c; q += 0x21c) {
@@ -154,6 +154,6 @@ void __cdecl fcn_00487000(char* e)
 	m[0x59] = 1;
 	m[0x58] = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)
 	                             [*(unsigned char*) (*(char**) (e + 0x16c))].role_230;
-	fcn_004c5530(m);
+	cm_SendCopyEntityData(m);
 	*(int*) (e + 0x1b8) -= tick;
 }

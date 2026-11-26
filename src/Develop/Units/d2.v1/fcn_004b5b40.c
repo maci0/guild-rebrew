@@ -14,8 +14,8 @@ void __cdecl d2_SetForm(int a, int b);
 int __cdecl io_AppendText(int a, ...);
 int __cdecl d2_GetWindowListItem(int a, int b, int c);
 int __cdecl fcn_004b3d80(int a, int b, int c);
-int __cdecl fcn_004c5790(int a, void* b);
-int __cdecl fcn_004c4450(int a);
+int __cdecl cm_RequestSysMessage(int a, void* b);
+int __cdecl cm_GetCommandStatus(int a);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void* a, int b);
 void __cdecl fcn_00471e30(int a);
@@ -83,8 +83,8 @@ void __cdecl fcn_004b5b40(int mode)
 				m1.vend = 0;
 				changed = 1;
 				m1.vunk = *obj;
-				q = fcn_004c5790(10, &m1);
-				while (fcn_004c4450(q) == 0) {
+				q = cm_RequestSysMessage(10, &m1);
+				while (cm_GetCommandStatus(q) == 0) {
 					fcn_00535960();
 				}
 				g_774654 = 1;
@@ -94,8 +94,8 @@ void __cdecl fcn_004b5b40(int mode)
 				g_6a3440 = -1;
 				m2.vend = 0;
 				m2.vunk = 0;
-				q = fcn_004c5790(10, &m2);
-				while (fcn_004c4450(q) == 0) {
+				q = cm_RequestSysMessage(10, &m2);
+				while (cm_GetCommandStatus(q) == 0) {
 					fcn_00535960();
 				}
 				g_774654 = 1;
@@ -106,8 +106,8 @@ void __cdecl fcn_004b5b40(int mode)
 				arena_done = 1;
 				m3.vend = 1;
 				m3.vunk = 0;
-				q = fcn_004c5790(10, &m3);
-				while (fcn_004c4450(q) == 0) {
+				q = cm_RequestSysMessage(10, &m3);
+				while (cm_GetCommandStatus(q) == 0) {
 					fcn_00535960();
 				}
 				g_774654 = 1;

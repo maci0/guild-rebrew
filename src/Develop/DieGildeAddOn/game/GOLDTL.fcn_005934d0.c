@@ -4,7 +4,7 @@
 extern int* g_774a34;
 
 int __cdecl fcn_004ce1d0(void);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 int* __cdecl fcn_004ce180(void);
 int __cdecl fcn_004ce3e0(int);
@@ -16,7 +16,7 @@ void __cdecl d3_FlushLoadAndPreloadQueue(void)
 	int i;
 
 	h = fcn_004ce1d0();
-	while (fcn_004c4450(h) == 0) {
+	while (cm_GetCommandStatus(h) == 0) {
 		fcn_00535960();
 	}
 	g_774a34 = fcn_004ce180();
@@ -27,7 +27,7 @@ void __cdecl d3_FlushLoadAndPreloadQueue(void)
 		}
 	}
 	if (r != -1) {
-		while (fcn_004c4450(r) == 0) {
+		while (cm_GetCommandStatus(r) == 0) {
 			fcn_00535960();
 		}
 	}

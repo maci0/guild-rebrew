@@ -47,7 +47,7 @@ int __cdecl fcn_0051e490(void* stream, int flags);
 #include "Develop/Units/vfs/vfs.h"
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 unsigned int __cdecl vfs_CalcCrc32(unsigned char*, unsigned int);
-int __cdecl fcn_004c5790(int, void*);
+int __cdecl cm_RequestSysMessage(int, void*);
 void __cdecl fcn_00535960(void);
 void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl fcn_00533a40(char*);
@@ -93,7 +93,7 @@ void __cdecl ls_SaveNetworkGame(char* name, char* title)
 		memset(&m, 0, sizeof(m));
 		m.handle = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
 		m.crc = crc;
-		fcn_004c5790(0x10, &m);
+		cm_RequestSysMessage(0x10, &m);
 		n = 0;
 		while (n < g_6a375c) {
 			n = 0;

@@ -6,9 +6,9 @@ extern AM_METHOD g_1008540[];
 
 int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_SelectRandomEntityCandidate(int e);
-int __cdecl fcn_004c4eb0(char* name);
-int __cdecl fcn_004c5530(char* msg);
-int __cdecl fcn_004c4ef0(char* name);
+int __cdecl cm_SendLogAction(char* name);
+int __cdecl cm_SendCopyEntityData(char* msg);
+int __cdecl cm_SendTraceEnd(char* name);
 
 /* ADDRESS: GOLDTL 0x00499950 */
 int __cdecl fcn_00499950(int a, char* b)
@@ -40,8 +40,8 @@ int __cdecl fcn_00499950(int a, char* b)
         g_1008540[0x18].effects[2].value * *(float*) (b + 0x14);
     g_1008540[0x18].saved_effects[3].value =
         g_1008540[0x18].effects[3].value * *(float*) (b + 0x14);
-    fcn_004c4eb0("pruegel");
-    fcn_004c5530(buf);
-    fcn_004c4ef0("pruegel");
+    cm_SendLogAction("pruegel");
+    cm_SendCopyEntityData(buf);
+    cm_SendTraceEnd("pruegel");
     return 0x18;
 }

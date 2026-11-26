@@ -9,7 +9,7 @@ void* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl atoi(char*);
 int __cdecl fcn_004ae130(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_004c51a0(int, int, int, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 
 int __cdecl hst_HandleVermoegenSteuer(int sel, int id, char* arg)
 {
@@ -29,7 +29,7 @@ int __cdecl hst_HandleVermoegenSteuer(int sel, int id, char* arg)
 	scale = (float) atoi(arg + 1) * 0.01f;
 	for (i = 0; i < 0x300; i++) {
 		if (fcn_004ae130(i) != 0) {
-			fcn_004c51a0(*(int*) (obj + 2), *(int*) (g_7f4ca4 + i * 0x21c), 0,
+			cm_RequestTransferCurrencyNoKill(*(int*) (obj + 2), *(int*) (g_7f4ca4 + i * 0x21c), 0,
 			    (int) ((float) gm_WalkEntityChain(*(unsigned short*) (g_7f4ca4 + i * 0x21c - 4)) * scale));
 		}
 	}

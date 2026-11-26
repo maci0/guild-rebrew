@@ -13,7 +13,7 @@ typedef struct
 
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 
-void __cdecl fcn_0044db40(void* stream, F4dRec* record)
+void __cdecl d3_ReadMatFlags(void* stream, F4dRec* record)
 {
 	vfs_ReadByte(stream, (char*) &stream);
 	*(unsigned char*) ((char*) record->base + record->idx * 0xe0 + 0xc4) = *(unsigned char*) &stream & 1;

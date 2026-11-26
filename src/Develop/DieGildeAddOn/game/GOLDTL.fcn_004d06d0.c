@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int); int __cdecl fcn_00442c00(int, int);
+int __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int); int __cdecl d3_SetObjectVisible(int, int);
 int __cdecl fcn_0045bad0(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(int, int, int, float*);
 int __cdecl fcn_004cef70(int, int);
@@ -40,7 +40,7 @@ void __cdecl fcn_004d06d0(void)
 
 
 			if (*(int*) 0x772ea0 != 0) {
-				fcn_00442c00(*(int*) 0x772ea0, 0);
+				d3_SetObjectVisible(*(int*) 0x772ea0, 0);
 			}
 		}
 		else if ((fcn_0045bad0(v4, x + 0x1a, y + 0x1a, &x, &y) & 0xff) != 0xffffffff) {

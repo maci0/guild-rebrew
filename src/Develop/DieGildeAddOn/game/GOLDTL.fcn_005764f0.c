@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern float g_696550[];
 extern float g_696540[];
 
-int __cdecl fcn_00500e20(pos14_7f4c00*);
+int __cdecl gm_GetSeason(pos14_7f4c00*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 unsigned short __cdecl gm_RandomMod(int);
@@ -27,7 +27,7 @@ void __cdecl he_RunAhmAction0x98(char* e)
 	int s;
 	float v;
 
-	k = (fcn_00500e20(&gm_GameTime) + 1) % 4;
+	k = (gm_GetSeason(&gm_GameTime) + 1) % 4;
 	o = gm_LookupEntityRecordById(*(int*) (e + 0xc));
 	if (*(int*) (e + 0x70) == -1 || *(int*) (e + 0x70) == -2) {
 		he_FreeAction(e);

@@ -42,11 +42,11 @@ typedef struct {
 
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 float __cdecl fcn_00507540(int, int*);
-void __cdecl fcn_004c5530(Msg*);
+void __cdecl cm_SendCopyEntityData(Msg*);
 void __cdecl fcn_005100f0(int, int);
 
 void __cdecl gm_UpdateEntityAgingAndTraining(int index)
@@ -68,7 +68,7 @@ void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 			|| (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 2 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 4) {
 			cm_BeginPacketFieldDelta((char*) e, e->id);
 			cm_AppendPacketFieldValue(4, 1, 0x174, &one);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		}
 		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].stat_category) != 0) {
 			step = gm_GetOppositeStatIndex((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].stat_category));
@@ -86,7 +86,7 @@ void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 				msg.x36 = 0x11;
 				msg.x60 = 1;
 				msg.x58 = e->id;
-				fcn_004c5530(&msg);
+				cm_SendCopyEntityData(&msg);
 				sprintf(text, "MeisterPr\xfc" "fung started: player_id:%i beruf:%i grad:%i", e->id, e->trade, step + 1);
 				fcn_005100f0(e->id, -4);
 			}
@@ -98,6 +98,6 @@ void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 		flag = 1;
 		cm_BeginPacketFieldDelta((char*) e, e->id);
 		cm_AppendPacketFieldValue(4, 1, 0x174, &flag);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 	}
 }

@@ -19,7 +19,7 @@ extern int gm_CityEntity;
 extern char g_6a5998[];
 
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl gm_ResolveEntityById(char**, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
@@ -27,9 +27,9 @@ char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00549c50(int, char*, char*, int);
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c4eb0(char*);
+void __cdecl cm_SendLogAction(char*);
 void __cdecl fcn_004c6900(int*);
-void __cdecl fcn_004c4ef0(char*);
+void __cdecl cm_SendTraceEnd(char*);
 
 /* ADDRESS: GOLDTL 0x0054a210 */
 void __cdecl fcn_0054a210(char* a0)
@@ -51,7 +51,7 @@ void __cdecl fcn_0054a210(char* a0)
         return;
     }
     ev = *(int*) (o + 0x84);
-    if (ev != none && fcn_004c4450(ev) == 0) {
+    if (ev != none && cm_GetCommandStatus(ev) == 0) {
         return;
     }
     *(int*) (o + 0x84) = none;
@@ -116,9 +116,9 @@ void __cdecl fcn_0054a210(char* a0)
         loc[0] = 0x636c6572;
         loc[1] = none;
         loc[2] = *(int*) (a0 + 1);
-        fcn_004c4eb0(g_6a5998);
+        cm_SendLogAction(g_6a5998);
         fcn_004c6900(loc);
-        fcn_004c4ef0(g_6a5998);
+        cm_SendTraceEnd(g_6a5998);
         *(int*) (o + 0xc0) = *(int*) (o + 0xc0) + 1;
     }
     *(pos14_7f4c00*) (o + 0x52) = gm_GameTime;

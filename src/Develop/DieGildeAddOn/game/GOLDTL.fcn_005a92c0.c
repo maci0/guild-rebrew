@@ -44,9 +44,9 @@ int __cdecl gm_CheckEntityStock(ENTITY_RECORD*, int, unsigned char);
 int __cdecl d2_IsTutorialInactive(void);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_004c5530(char*);
-void __cdecl fcn_004c51a0(int, int, int, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_SendCopyEntityData(char*);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -126,7 +126,7 @@ void __cdecl fcn_005a92c0(char* p)
 				st = *(pos14_7f4c00*) (msg + 0x28);
 				msg[0x58] = 2;
 				*(int*) (msg + 0x5c) = ent->entity_id;
-				fcn_004c5530(msg);
+				cm_SendCopyEntityData(msg);
 				for (i = 0; i < 768 && n < g_6a375c; i++) {
 					if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7) && ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]) != ent) {
 						{
@@ -160,12 +160,12 @@ void __cdecl fcn_005a92c0(char* p)
 						*(pos14_7f4c00*) (msg + 0x28) = st;
 						msg[0x58] = 2;
 						*(int*) (msg + 0x5c) = ent->entity_id;
-						fcn_004c5530(msg);
+						cm_SendCopyEntityData(msg);
 						n++;
 					}
 				}
-				fcn_004c51a0(*(int*) (q + 2), ent->entity_id, 0, 0x3e80);
-				fcn_004c5420(ent->entity_id, 0x1c8, 4, 0, 0x4000);
+				cm_RequestTransferCurrencyNoKill(*(int*) (q + 2), ent->entity_id, 0, 0x3e80);
+				cm_RequestChangeBits(ent->entity_id, 0x1c8, 4, 0, 0x4000);
 				io_FormatTextBuffer(text, 0x19ff);
 				fcn_0057e880(0x2e, 0, 0, 0);
 				ok = 1;

@@ -12,8 +12,8 @@ short* __cdecl gm_ResolveParentEntity(short*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 short* __cdecl gm_GetEntityTableEntry(char*);
 float __cdecl fcn_0050bb50(int, unsigned char);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_004c5150(int, int, char, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
 
 /* ADDRESS: GOLDTL 0x004d52a0 */
 int __cdecl fcn_004d52a0(int* a0, char* a1, int* a2, int a3, float scale)
@@ -45,10 +45,10 @@ int __cdecl fcn_004d52a0(int* a0, char* a1, int* a2, int a3, float scale)
 				}
 				q = (int) v;
 				if (rec != 0) {
-					fcn_004c51f0(*(int*) (rec + 2), *(int*) (ent + 6),
+					cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (ent + 6),
 					    *(unsigned short*) ent, q, g_773d75, 0);
 				} else {
-					fcn_004c51f0(-1, *(int*) (ent + 6),
+					cm_SendSellObjekt(-1, *(int*) (ent + 6),
 					    *(unsigned short*) ent, q, g_773d75, 0);
 				}
 				total = (int) (fcn_0050bb50(*(unsigned short*) ent, g_773d75)
@@ -57,7 +57,7 @@ int __cdecl fcn_004d52a0(int* a0, char* a1, int* a2, int a3, float scale)
 			}
 			if (rec == 0) {
 				total = (int) ((double) total * 0.5);
-				fcn_004c5150(a2[1], -1, g_773d75, total);
+				cm_RequestMoveCredits(a2[1], -1, g_773d75, total);
 			}
 			ent = gm_GetEntityTableEntry(g_772e9c);
 			if (ent != 0) {

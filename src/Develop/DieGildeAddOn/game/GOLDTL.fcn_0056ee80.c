@@ -23,29 +23,29 @@ extern char s_68bea4[];
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, int);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl gm_IsEntityAtBuilding(int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl he_DetectNearbyPatrolAction(int*);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
-void __cdecl fcn_004c5ed0(int, char*, int);
+void __cdecl cm_RequestPlayAnimation(int, char*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl he_StartHandlungSearch(int, int, int);
-int __cdecl fcn_004c4450(int);
-int* __cdecl fcn_004c4480(int);
-void __cdecl fcn_004c58b0(int, int);
+int __cdecl cm_GetCommandStatus(int);
+int* __cdecl cm_GetCommandResult(int);
+void __cdecl cm_RequestLinkEvidence(int, int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_0050b750(int, unsigned char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 float __cdecl fcn_004ff210(int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl gm_GetScaledEntitySkill(char*, int);
 void __cdecl gm_EvalEntityInventoryValue(char*, int*);
 float __cdecl fcn_0050bb50(int, unsigned char);
@@ -55,7 +55,7 @@ int* __cdecl fcn_00502cd0(int, ...);
 int* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl gm_GetMsgField(int, int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
@@ -98,7 +98,7 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 				e = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + cnt * 4));
 				if (e != 0) {
 					fcn_00529160(rec1, 0, *(unsigned short*) e, (int) actionRecord);
-					fcn_004c5c80(*(int*) (actionRecord + 0x8c + cnt * 4));
+					cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + cnt * 4));
 					fcn_004c5da0(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 1, s_6a6dc4);
 				}
 			}
@@ -162,9 +162,9 @@ label_1bc:
 				e = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + cnt * 4));
 				if (e != 0) {
 					fcn_00529160(rec1, 0, *(unsigned short*) e, (int) actionRecord);
-					fcn_004c5c80(*(int*) (actionRecord + 0x8c + cnt * 4));
+					cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + cnt * 4));
 					fcn_004c5da0(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 0, s_6a6dc4);
-					fcn_004c5ed0(*(int*) (actionRecord + 0x8c + cnt * 4), gestik[gm_RandomMod(3)], 1);
+					cm_RequestPlayAnimation(*(int*) (actionRecord + 0x8c + cnt * 4), gestik[gm_RandomMod(3)], 1);
 				}
 			}
 		}
@@ -176,16 +176,16 @@ label_1bc:
 	case 3: {
 		int e;
 
-		if (*(int*) (actionRecord + 0xb4) != -1 && fcn_004c4450(*(int*) (actionRecord + 0xb4)) == 0) {
+		if (*(int*) (actionRecord + 0xb4) != -1 && cm_GetCommandStatus(*(int*) (actionRecord + 0xb4)) == 0) {
 			return;
 		}
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		q = (int) he_StartHandlungSearch(1, 1, *(int*) (actionRecord + 0xb8));
 		if (rec1 != 0 && q != 0 && *(int*) (q + 0xd4) == *(int*) (actionRecord + 4) && *(int*) (actionRecord + 0xb4) != -1) {
 			e = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0xb8));
-			h = (int) fcn_004c4480(*(int*) (actionRecord + 0xb4));
+			h = (int) cm_GetCommandResult(*(int*) (actionRecord + 0xb4));
 			if (e != 0 && h != 0) {
-				fcn_004c58b0(*(int*) h, *(int*) (e + 4));
+				cm_RequestLinkEvidence(*(int*) h, *(int*) (e + 4));
 			}
 			*(int*) (actionRecord + 0x70) = 4;
 			gm_AddTime(actionRecord + 0x52, 0, 10, 0);
@@ -214,13 +214,13 @@ label_1bc:
 				fcn_00545d40(*(int*) (val + 4), *(int*) (val + 4), buf, 1, 0x5f0, s_6a6a60);
 				io_FormatTextBuffer(buf, 0x19eb, rec1, ent);
 				fcn_00545d40(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, (char*) 0x6a6a4c);
-				fcn_004c51a0(*(int*) (row + 4), *(int*) (val + 4), g_773d75, ent);
+				cm_RequestTransferCurrencyNoKill(*(int*) (row + 4), *(int*) (val + 4), g_773d75, ent);
 			}
 			q = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xbc));
 			if (q != 0) {
 				cm_BeginPacketFieldDelta(q, *(int*) (q + 1));
 				cm_AppendPacketFieldValue(4, 1, 0x65, &ent);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 		}
 		for (cnt = 0; cnt < 8; cnt++) {
@@ -238,7 +238,7 @@ label_1bc:
 		q = (int) gm_SetupEntityQuery((char*) rec1);
 		for (i = 0; i < 8; i++) {
 			if (*(int*) (actionRecord + 0x8c + i * 4) != -1) {
-				fcn_004c5c80(*(int*) (actionRecord + 0x8c + i * 4));
+				cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + i * 4));
 				fcn_004c5da0(*(int*) (actionRecord + 0x8c + i * 4), *(int*) (rec1 + 1), *(int*) (q + 2), 0, 0, s_6a6a40);
 			}
 		}
@@ -261,7 +261,7 @@ label_1bc:
 				if (*(int*) (actionRecord + 0x8c + (8 - cnt) * 4) != -1) {
 					val = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4));
 					if (val != 0) {
-						fcn_004c5c80(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4));
+						cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4));
 						fcn_004c5da0(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4), *(int*) (h + 1), *(int*) (q + 2), 0, 0, s_6a6dc4);
 						count++;
 						gm_GetScaledEntitySkill((char*) val, 2);
@@ -288,10 +288,10 @@ label_1bc:
 		val = (int) (*(int*) req * 0.35);
 		io_FormatTextBuffer(str, 0x68bea4, val);
 		strcat(msg, str);
-		fcn_004c5150(*(int*) (ent + 4), *(int*) (row + 4), g_773d75, val);
+		cm_RequestMoveCredits(*(int*) (ent + 4), *(int*) (row + 4), g_773d75, val);
 		cm_BeginPacketFieldDelta(rec1, *(int*) (rec1 + 1));
 		cm_AppendPacketFieldValue(4, 1, 0x69, &val);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		if (h != 0) {
 			if (i != 0) {
 				q = (int) fcn_00502cd0(*(int*) (h + 0x14), 1, 5);
@@ -304,7 +304,7 @@ label_1bc:
 						}
 						fcn_0064d41a(str, s_68be9c, cnt, *(int*) (*(unsigned short*) q * 8 + 0x14a79c0));
 						strcat(msg, str);
-						fcn_004c51f0(*(int*) (i + 2), *(int*) (h + 2), *(unsigned short*) q, cnt, g_773d75, 0);
+						cm_SendSellObjekt(*(int*) (i + 2), *(int*) (h + 2), *(unsigned short*) q, cnt, g_773d75, 0);
 						val = (int) ((double) fcn_0050bb50(*(unsigned short*) q, g_773d75) * cnt + val);
 					}
 					q = (int) gm_NextEntityQueryMatch();
@@ -355,7 +355,7 @@ label_fa92:
 			if (*(int*) (actionRecord + 0x8c + i * 4) != -1) {
 				ent = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + i * 4));
 				if (ent != 0) {
-					fcn_004c5c80(*(int*) (actionRecord + 0x8c + i * 4));
+					cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + i * 4));
 					if (h != 0 && q != 0) {
 						row = *(int*) (q + 2);
 						val = *(int*) (h + 1);

@@ -1,5 +1,5 @@
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00500cb0(void*, int);
+int __cdecl gm_CompareGameTime(void*, int);
 void __cdecl fcn_00545670(int, int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, int, int, int, int);
@@ -9,7 +9,7 @@ void __cdecl io_FormatTextBuffer(char*, int, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_004c6b20(int, int, int);
 int __cdecl fcn_0050e720(int, int, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00566d00 */
 void __cdecl fcn_00566d00(int action)
@@ -30,7 +30,7 @@ void __cdecl fcn_00566d00(int action)
 		return;
 	}
 	if (*(char*) ((char*) b + 2) != 6 && *(char*) ((char*) b + 2) != 7) {
-		if (fcn_00500cb0((char*) action + 0x52, 0x7f4c00) > 0) {
+		if (gm_CompareGameTime((char*) action + 0x52, 0x7f4c00) > 0) {
 			return;
 		}
 		*(int*) (action + 0x70) = 2;
@@ -79,7 +79,7 @@ void __cdecl fcn_00566d00(int action)
 		} else {
 			io_FormatTextBuffer(buf, 0x19b4, *b, *(int*) (action + 0xb4));
 			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
-			fcn_004c54c0(*(int*) (a + 2), *(int*) (b + 2), 10, 1);
+			cm_RequestCopyEntityData(*(int*) (a + 2), *(int*) (b + 2), 10, 1);
 		}
 		he_FreeAction(action);
 		return;

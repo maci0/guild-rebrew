@@ -34,7 +34,7 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
-void __cdecl fcn_004c5530(MsgF8* m);
+void __cdecl cm_SendCopyEntityData(MsgF8* m);
 void __cdecl fcn_005100f0(int id, int v);
 
 #pragma optimize("y", off)
@@ -73,7 +73,7 @@ int __cdecl ai_DispatchDunkleEcke(char* actor, char* target, char* secondary)
 	m.stamp.d = g_7f4c0c;
 	m.to2 = *(int*) (target + 4);
 	m.with = *(int*) (secondary + 4);
-	fcn_004c5530(&m);
+	cm_SendCopyEntityData(&m);
 	fcn_005100f0(*(int*) (actor + 4), -1);
 	return 1;
 }

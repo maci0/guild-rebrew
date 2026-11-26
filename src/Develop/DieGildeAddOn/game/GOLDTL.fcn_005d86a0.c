@@ -20,7 +20,7 @@ extern char s_6acdac[];
 
 unsigned short __cdecl gm_RandomMod(int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
@@ -64,8 +64,8 @@ int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 		if (o2 == 0) {
 			return 0x60;
 		}
-		fcn_004c54c0(*(int*) (o1 + 4), *(int*) (o2 + 4), a, 1);
-		fcn_004c54c0(*(int*) (o2 + 4), *(int*) (o1 + 4), b, 1);
+		cm_RequestCopyEntityData(*(int*) (o1 + 4), *(int*) (o2 + 4), a, 1);
+		cm_RequestCopyEntityData(*(int*) (o2 + 4), *(int*) (o1 + 4), b, 1);
 		fcn_004c6ae0(*(int*) (e + 4), -3);
 		if (o1[2] == 6 || o1[2] == 7) {
 			io_FormatTextBuffer(text, 0x1de8, *(unsigned short*) o2, *(unsigned short*) e);
@@ -106,8 +106,8 @@ int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 				if (d2_CheckActionBlocker(e, 3)) {
 					a = gm_RandomMod(0x28) + 0xf;
 					b = gm_RandomMod(0x28) + 0xf;
-					fcn_004c54c0(*(int*) (o1 + 4), *(int*) (o2 + 4), a, 1);
-					fcn_004c54c0(*(int*) (o2 + 4), *(int*) (o1 + 4), b, 1);
+					cm_RequestCopyEntityData(*(int*) (o1 + 4), *(int*) (o2 + 4), a, 1);
+					cm_RequestCopyEntityData(*(int*) (o2 + 4), *(int*) (o1 + 4), b, 1);
 					fcn_004c6ae0(*(int*) (e + 4), -3);
 					io_FormatTextBuffer(text, 0x1de7, *(unsigned short*) o1, *(unsigned short*) o2);
 					fcn_00526120(text, 0);

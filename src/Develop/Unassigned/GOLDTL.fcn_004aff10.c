@@ -13,7 +13,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char* gm_CityEntity;
 
 int __cdecl atoi(char*);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 
 int __cdecl hst_HandleFest(int sel, int id, char* arg)
 {
@@ -31,7 +31,7 @@ int __cdecl hst_HandleFest(int sel, int id, char* arg)
 		*(pos14_7f4c00*) (m + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 		*(short*) (m + 0x2c) = 0xc;
 		*(int*) (m + 0x2e) = 0;
-		fcn_004c5530(m);
+		cm_SendCopyEntityData(m);
 	}
 	return 1;
 }

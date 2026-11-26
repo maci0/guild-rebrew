@@ -13,7 +13,7 @@ extern int g_14a5538;
 void __cdecl fcn_00592400(void);
 void __cdecl ls_QuickSave(void);
 void __cdecl cm_RequestIncreaseGameSpeed(void);
-void __cdecl fcn_004c48c0(void);
+void __cdecl cm_SendDecreaseGameSpeed(void);
 void __cdecl fcn_005e2510(void);
 void __cdecl fcn_00533a40(int);
 
@@ -41,7 +41,7 @@ void __cdecl fcn_005924d0(void)
 			}
 		}
 		if (g_14cf950 == 0x4a) {
-			fcn_004c48c0();
+			cm_SendDecreaseGameSpeed();
 			if (lvl > 0) {
 				g_7766a8 = (lvl - 1) * 40;
 				fcn_005e2510();
@@ -51,7 +51,7 @@ void __cdecl fcn_005924d0(void)
 		if (g_14cf950 == 0x4e) {
 			cm_RequestIncreaseGameSpeed();
 		} else if (g_14cf950 == 0x4a) {
-			fcn_004c48c0();
+			cm_SendDecreaseGameSpeed();
 		}
 	} else if (g_14cf950 == 0x4e || g_14cf950 == 0x4a) {
 		fcn_00533a40(g_14a5538);

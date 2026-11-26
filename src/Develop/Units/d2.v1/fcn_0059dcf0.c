@@ -23,10 +23,10 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl fcn_00525fb0(void*);
 void __cdecl fcn_0052a0c0(void*, int);
 int __cdecl fcn_00526120(void*, int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl fcn_004c35f0(void);
 void __cdecl fcn_005305a0(void);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 
 extern char g_7746cc[];
 /* ADDRESS: GOLDTL 0x0059dcf0 */
@@ -59,9 +59,9 @@ void __cdecl fcn_0059dcf0(void* entity)
 		selection = *(void**) g_7746cc;
 		message.v58 = *(int*) ((char*) entry + 4);
 		message.v70 = (selection != 0 && *(unsigned short*) selection != 0xfd) ? *(int*) ((char*) selection + 2) : -1;
-		fcn_004c5530(&message);
+		cm_SendCopyEntityData(&message);
 		fcn_004c35f0();
 		fcn_005305a0();
 	}
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 }

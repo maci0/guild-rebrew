@@ -23,7 +23,7 @@ extern char g_9b0e20[];            /* 0x9b0e20, 0x35c-byte player records */
 int __cdecl gm_LookupEntityRecordIn32SlotTable(int search_id);
 void* __cdecl gm_FindOrCreateEntitySlot(void* rec, char* entity);
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
-void __cdecl fcn_004c67c0(int a1, void* a2);
+void __cdecl cm_SendUpdateCutsceneEntitySlot(int a1, void* a2);
 
 /* ADDRESS: GOLDTL 0x004d4f30 */
 char* __cdecl fcn_004d4f30(fcn_004d4f30_World* world)
@@ -116,7 +116,7 @@ char* __cdecl fcn_004d4f30(fcn_004d4f30_World* world)
         slot = *src;
         slot.id = *(int*) (result + 4);
         slot.f4 = 5;
-        fcn_004c67c0(*(int*) (g_9b0e20 + i * 0x35c + 0x10), &slot);
+        cm_SendUpdateCutsceneEntitySlot(*(int*) (g_9b0e20 + i * 0x35c + 0x10), &slot);
     }
     return result;
 }

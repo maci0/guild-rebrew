@@ -26,7 +26,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005ca560(Item5cbb* s);
+int __cdecl d2_BuildPersonStatusDesc(Item5cbb* s);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
 int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, int kind)
@@ -147,7 +147,7 @@ int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, i
 				o->house = ps[i];
 				o->role = role[i];
 				o->task = *(int*) (t + 4);
-				fcn_005ca560(o);
+				d2_BuildPersonStatusDesc(o);
 				o->value = fcn_005cf720(*who, *o->house, kind, 0);
 				k++;
 				o++;

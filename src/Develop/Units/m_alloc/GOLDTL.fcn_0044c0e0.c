@@ -4,7 +4,7 @@ extern char s_67ade8[];
 extern char* g_1042efc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_00449ac0(char* s, char* sub);
+char* __cdecl d3_AppendVfsAssetPath(char* s, char* sub);
 void __cdecl fcn_0044b340(char* name, int* a, int* b, int* c);
 char* __cdecl fcn_0044b480(char* buf, char* name, int a, int b, int c);
 void __cdecl m_FreeTracked(int p);
@@ -24,7 +24,7 @@ char* __cdecl fcn_0044c0e0(char* path, char* name)
 	char buf[0x100];
 
 	r = 0;
-	p = fcn_00449ac0(path, s_67ade8);
+	p = d3_AppendVfsAssetPath(path, s_67ade8);
 	if (p != 0) {
 		b = 0;
 		c = 0;

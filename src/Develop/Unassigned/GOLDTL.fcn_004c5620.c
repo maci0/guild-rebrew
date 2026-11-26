@@ -10,8 +10,8 @@ typedef struct {
 
 extern char g_6a4870[];
 
-int __cdecl fcn_004c4330(char*);
-void __cdecl fcn_004c4df0(int, void*);
+int __cdecl cm_EnqueueClientPacket(char*);
+void __cdecl cm_StageRawPacketPayload(int, void*);
 
 int __cdecl fcn_004c5620(char a1, unsigned char* e)
 {
@@ -24,6 +24,6 @@ int __cdecl fcn_004c5620(char a1, unsigned char* e)
 	*(stamp14*) (buf + 0x30) = *(stamp14*) (e + 0x60);
 	buf[0x3e] = a1;
 	strcpy(buf + 0x3f, g_6a4870 + *e * 0x20);
-	fcn_004c4df0(0xa0, e + 0xac);
-	return fcn_004c4330(buf);
+	cm_StageRawPacketPayload(0xa0, e + 0xac);
+	return cm_EnqueueClientPacket(buf);
 }

@@ -5,7 +5,7 @@ int __cdecl gm_AddTime(char* sel, int a, int b, int c);
 int __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
 float __cdecl fcn_00507e70(char* a, char* b, int c);
 double __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
+int __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 int __cdecl fcn_004c5620(int a, char* e);
 int __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 int __cdecl fcn_00545d40(int a, int b, char* s, int c, int d, int e);
@@ -13,9 +13,9 @@ int __cdecl fcn_004e7b70(char* e, void* a, void* b);
 int __cdecl fcn_0042e410(int code);
 float __cdecl gm_GetEntitySkill(char* e, int a);
 int __cdecl amt_AdjustOfficeHoldersFavor(char* e, int a, int b);
-int __cdecl fcn_004c54c0(int a, int b, int c, int d);
-int __cdecl fcn_00500de0(char* p, int id, int a, int b, int c);
-int __cdecl fcn_004c5530(void* p);
+int __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
+int __cdecl gm_AdvanceGameTime(char* p, int id, int a, int b, int c);
+int __cdecl cm_SendCopyEntityData(void* p);
 
 /* ADDRESS: GOLDTL 0x0054f910 */
 void __cdecl fcn_0054f910(char* ent)
@@ -72,8 +72,8 @@ void __cdecl fcn_0054f910(char* ent)
 	f = fcn_00507e70(e2, e1, 3);
 	f = f + gm_RandomFloat01();
 	if (f >= 1.0f) {
-		fcn_004c5420(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
-		fcn_004c5420(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);
+		cm_RequestChangeBits(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
+		cm_RequestChangeBits(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);
 		*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
@@ -114,7 +114,7 @@ void __cdecl fcn_0054f910(char* ent)
 	dmg = -9 - (int) (gm_GetEntitySkill(e1, 4) * 8.0f);
 	dmg -= fcn_0042e410(8) & 0xffff;
 	amt_AdjustOfficeHoldersFavor(e2, v, dmg);
-	fcn_004c54c0(*(int*) (e2 + 4), *(int*) (e1 + 4), -0x14, 1);
+	cm_RequestCopyEntityData(*(int*) (e2 + 4), *(int*) (e1 + 4), -0x14, 1);
 	*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
@@ -133,8 +133,8 @@ big:
 	*((unsigned char*) &blk[1]) = 0x46;
 	*((unsigned char*) blk + 0x36) = 9;
 	blk[0x16] = *(int*) (ent + 4);
-	fcn_00500de0((char*) &blk[10], *(unsigned short*) (e2), 6, 0, 0);
-	fcn_004c5530(blk);
+	gm_AdvanceGameTime((char*) &blk[10], *(unsigned short*) (e2), 6, 0, 0);
+	cm_SendCopyEntityData(blk);
 	*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
@@ -143,7 +143,7 @@ big:
 	*(short*) (ent + 0x56) = 6;
 	*(int*) (ent + 0x58) = 0x1e;
 	*(int*) (ent + 0x84) = fcn_004c5620(1, ent);
-	fcn_004c5420(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
-	fcn_004c5420(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);
+	cm_RequestChangeBits(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
+	cm_RequestChangeBits(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);
 	}
 }

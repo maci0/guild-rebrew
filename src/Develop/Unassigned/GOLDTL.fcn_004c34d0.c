@@ -8,7 +8,7 @@ extern int g_772e7c;
 
 void __cdecl fcn_004230e0(int);
 
-void __cdecl fcn_004c34d0(void)
+void __cdecl d3snd_FreeObjectSoundBanks(void)
 {
 	if (g_772e6c != 0) {
 		fcn_004230e0(g_772e6c);

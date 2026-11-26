@@ -6,7 +6,7 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x0048fba0 */
 int __cdecl fcn_0048fba0(char* a1, char* a2, int a3, char* p)
@@ -24,6 +24,6 @@ int __cdecl fcn_0048fba0(char* a1, char* a2, int a3, char* p)
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	*(int*) (msg + 0x58) = *(int*) (p + 4);
 	*(int*) (msg + 0x38) = *(int*) (p + 4);
-	fcn_004c5530(msg);
+	cm_SendCopyEntityData(msg);
 	return 0x3d;
 }

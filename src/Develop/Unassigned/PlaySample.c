@@ -1,4 +1,4 @@
-void* __cdecl fcn_00422460(int, int);
+void* __cdecl sb_PrepareVoice(int, int);
 void __cdecl sb_SetVoiceLoopCount(void*, int);
 void __cdecl fcn_00423670(void*, int, int);
 
@@ -9,12 +9,12 @@ void* __cdecl PlaySample(int* sampleId, int* playbackControl)
 
 	if (*(int*) ((char*) *(void**) 0x6b7e98 + 0x104) != *(int*) 0x6791c8)
 		return 0;
-	h = fcn_00422460(0, *sampleId);
+	h = sb_PrepareVoice(0, *sampleId);
 	if (h != 0) {
 		sb_SetVoiceLoopCount(h, *playbackControl);
 		fcn_00423670(h, 0, 0);
 	} else {
-		fcn_00422460(0, *sampleId);
+		sb_PrepareVoice(0, *sampleId);
 	}
 	return h;
 }

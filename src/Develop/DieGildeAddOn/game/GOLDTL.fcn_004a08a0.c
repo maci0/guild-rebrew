@@ -14,11 +14,11 @@ extern float g_66414c;
 extern char g_67eb84[];
 
 
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
 int __cdecl fcn_0050d170(int k);
-void __cdecl fcn_004c5150(int a, int b, char c, int n);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
+void __cdecl cm_SendCopyEntityData(char* msg);
 
 int __cdecl ai_RunUpgradeZunft(char* a1, char* a2, char* a3)
 {
@@ -31,7 +31,7 @@ int __cdecl ai_RunUpgradeZunft(char* a1, char* a2, char* a3)
 		if (resolved == 0) {
 			return 0;
 		}
-		fcn_004c5150(*(int*) (resolved + 2), *(int*) (a1 + 4), (*(char*)&g_773d75), *(int*) (a3 + 8));
+		cm_RequestMoveCredits(*(int*) (resolved + 2), *(int*) (a1 + 4), (*(char*)&g_773d75), *(int*) (a3 + 8));
 		return 0x39;
 	}
 	if (*a2 == 4 && *a3 == 1) {
@@ -53,10 +53,10 @@ int __cdecl ai_RunUpgradeZunft(char* a1, char* a2, char* a3)
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(short*) (msg + 0x34) = g_7f4c0c;
 		*(int*) (msg + 0x58) = *(int*) (a2 + 0xc);
-		fcn_004c4eb0(g_67eb84);
-		fcn_004c5150(-1, *(int*) (resolved + 2), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (a2 + 4)) * 0.3f));
-		fcn_004c5530(msg);
-		fcn_004c4ef0(g_67eb84);
+		cm_SendLogAction(g_67eb84);
+		cm_RequestMoveCredits(-1, *(int*) (resolved + 2), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (a2 + 4)) * 0.3f));
+		cm_SendCopyEntityData(msg);
+		cm_SendTraceEnd(g_67eb84);
 		return 0x39;
 	}
 	return 0;

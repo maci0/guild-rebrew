@@ -19,7 +19,7 @@ extern __int64 g_666018;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
+int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 int __cdecl fcn_004a5e60(ENTITY_RECORD* p, int kind, F8 f, int c, float r, int* out);
 
 void __cdecl he_AllocPruegelAction(char* action)
@@ -37,7 +37,7 @@ void __cdecl he_AllocPruegelAction(char* action)
 		}
 	}
 	*(int*) (action + 0xc8) = -1;
-	*(int*) (action + 0xcc) = fcn_004c64b0(0x11, *(int*) (action + 0x10), -1, 0, 2, 0x154, "PRUEGEL");
+	*(int*) (action + 0xcc) = cm_SendAllocCharacter(0x11, *(int*) (action + 0x10), -1, 0, 2, 0x154, "PRUEGEL");
 	actor = gm_LookupEntityRecordById(*(int*) (action + 0xb4));
 	if (*(char**) (actor + 0x170) != 0) {
 		target = *(char**) (actor + 0x170);

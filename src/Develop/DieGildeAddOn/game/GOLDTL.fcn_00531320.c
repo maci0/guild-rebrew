@@ -20,10 +20,10 @@ typedef struct {
 
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_00529160(char*, int, int, int);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_004c5530(Msg_531320*);
+void __cdecl cm_SendCopyEntityData(Msg_531320*);
 
 /* ADDRESS: GOLDTL 0x00531320 */
 void __cdecl fcn_00531320(void)
@@ -98,7 +98,7 @@ void __cdecl fcn_00531320(void)
 				}
 			}
 			fcn_00529160((char*) g_7e4318, 0, *(unsigned short*) (row - 0x16c), 0);
-			fcn_004c5c80(*(int*) (row - 0x168));
+			cm_SendCancelCharacterActions(*(int*) (row - 0x168));
 			fcn_004c5da0(*(int*) (row - 0x168), *(int*) (g_7e4318 + 1), *(int*) (r + 2), 0, 0, 0);
 			g = g_7e4318;
 		} else {
@@ -129,7 +129,7 @@ void __cdecl fcn_00531320(void)
 				}
 			}
 			fcn_00529160((char*) g_7e4318, 0, *(unsigned short*) (row - 0x16c), 0);
-			fcn_004c5c80(*(int*) (row - 0x168));
+			cm_SendCancelCharacterActions(*(int*) (row - 0x168));
 			fcn_004c5da0(*(int*) (row - 0x168), *(int*) (g_7e4318 + 1), *(int*) (r + 2), 0, 0, 0);
 			g = g_7e4318;
 		}
@@ -140,6 +140,6 @@ void __cdecl fcn_00531320(void)
 		fcn_004c5620(*(int*) (hit + 0x70), hit);
 	}
 	if (msg.kind != 0) {
-		fcn_004c5530(&msg);
+		cm_SendCopyEntityData(&msg);
 	}
 }

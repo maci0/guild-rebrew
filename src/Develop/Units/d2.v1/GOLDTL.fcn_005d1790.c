@@ -31,7 +31,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl gm_HasActiveMission(int);
 void __cdecl d2_ShowMissionForEntity(int);
-void __cdecl fcn_004c50e0(int, int);
+void __cdecl cm_SendChangePlayerIdentity(int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_00505e30(unsigned short);
 void __cdecl fcn_00509050(char *, char *);
@@ -333,7 +333,7 @@ label_2281:
 			if (d2_CurrentElementId == r5) {
 				io_FormatTextBuffer(bufB, 0x1f51, *person, *person);
 				if (fcn_00526120(bufB, 1) != 0) {
-					fcn_004c50e0(*(int *)(g_7f4ca0 + 540 * g_774970 + 4),
+					cm_SendChangePlayerIdentity(*(int *)(g_7f4ca0 + 540 * g_774970 + 4),
 					    *(int *)((char *)person + 4));
 					g_774654 = 2;
 				}

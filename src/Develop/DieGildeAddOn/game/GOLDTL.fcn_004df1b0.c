@@ -14,7 +14,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl gm_GenerateShuffledIndices(unsigned char, int*);
 int __cdecl d2_GetWindowListItem(int, int, int);
 unsigned int __cdecl cut_RandMod(unsigned int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl fcn_00493be0(char*);
 int __cdecl fcn_004f6810(char*, unsigned int);
 void __cdecl fcn_00472640(int, int);
@@ -160,7 +160,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
                     *(int*) (participant + 0x94) = 0;
                 } else if (g_100f1dc == cut_SECOND_CHOICE) {
                     *(int*) (participant + 0x94) = 1;
-                    fcn_004c54c0(*(int*) (own + 4), *(int*) (other + 4), 0x23, 1);
+                    cm_RequestCopyEntityData(*(int*) (own + 4), *(int*) (other + 4), 0x23, 1);
                 }
             }
         }

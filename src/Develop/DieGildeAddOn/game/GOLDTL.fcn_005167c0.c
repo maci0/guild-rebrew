@@ -19,7 +19,7 @@ extern int g_6b86d8;
 extern int g_67a370;
 extern float g_67a964;
 
-int __cdecl fcn_00500e20(char*);
+int __cdecl gm_GetSeason(char*);
 int __cdecl gm_GetBuildingTypeCategory(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl fcn_00516b70(void);
@@ -55,7 +55,7 @@ void __cdecl fcn_005167c0(unsigned char* building, int queryId)
 	unsigned char* obj;
 	unsigned char** p;
 
-	mode = fcn_00500e20(&(*(char*) &gm_GameTime));
+	mode = gm_GetSeason(&(*(char*) &gm_GameTime));
 	gm_GetBuildingTypeCategory(*building);
 	rec = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building];
 	entity = (unsigned char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, queryId);

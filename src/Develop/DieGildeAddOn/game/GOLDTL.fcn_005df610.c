@@ -19,7 +19,7 @@ extern char g_6b5c60[];
 
 char* __cdecl fcn_005bdc30(int, Req*, char*, int, int);
 char* __cdecl gm_SearchTable67(int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl gm_ObjSetBuildingFlag0x1000(char* e, char* context)
 {
@@ -44,6 +44,6 @@ int __cdecl gm_ObjSetBuildingFlag0x1000(char* e, char* context)
 			return 0;
 		}
 	}
-	fcn_004c5420(*(int*) (entry + 1), 0x5a, 2, 0x1000, 0);
+	cm_RequestChangeBits(*(int*) (entry + 1), 0x5a, 2, 0x1000, 0);
 	return 1;
 }

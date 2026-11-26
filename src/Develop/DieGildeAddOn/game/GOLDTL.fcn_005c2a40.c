@@ -43,10 +43,10 @@ void __cdecl fcn_00476b60(void);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00526120(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
-char* __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c4ef0(char*);
-void __cdecl fcn_004c5530(char*);
+char* __cdecl cm_SendLogAction(char*);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_SendTraceEnd(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl gm_GetElapsedMinutes(char*, char*);
@@ -186,13 +186,13 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 						*(short*) (msg + 0x5c) =
 						    (short) slots[sel * 3];
 						*(int*) (msg + 0x58) = *(int*) (productionBuilding + 1);
-						fcn_004c4eb0(g_6ac618);
-						fcn_004c5150(-1,
+						cm_SendLogAction(g_6ac618);
+						cm_RequestMoveCredits(-1,
 						             *(int*) (g_7f4ca4 +
 						                     (int) g_774970 * 0x21c),
 						             (char) g_773d75, val);
-						fcn_004c5530(msg);
-						fcn_004c4ef0(g_6ac618);
+						cm_SendCopyEntityData(msg);
+						cm_SendTraceEnd(g_6ac618);
 					}
 					break;
 				}

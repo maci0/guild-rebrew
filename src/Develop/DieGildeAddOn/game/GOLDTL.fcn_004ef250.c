@@ -22,7 +22,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
-void __cdecl fcn_005b3410(char* e, char* r, int mode);
+void __cdecl he_NotifyDomizilStatus(char* e, char* r, int mode);
 
 int __cdecl gm_NotifyDomizilCallback(Set* p)
 {
@@ -44,7 +44,7 @@ int __cdecl gm_NotifyDomizilCallback(Set* p)
 					}
 				}
 				if ((*(char*)&((ENTITY_RECORD_VIEW*)e)->entity_type) == 6) {
-					fcn_005b3410(e, r, mode);
+					he_NotifyDomizilStatus(e, r, mode);
 				}
 			}
 		}

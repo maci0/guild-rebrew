@@ -19,7 +19,7 @@ char* __cdecl fcn_00502cd0(int a1, int a2, int a3, ...);
 int __cdecl gm_NextEntityQueryMatch(void);
 float __cdecl eval_ObjektPreis2Credits(int id, int a1);
 int __cdecl fcn_0050dfd0(char* a1, int a2);
-int __cdecl fcn_004c51f0(int a1, int a2, int a3, int a4, char a5, int a6);
+int __cdecl cm_SendSellObjekt(int a1, int a2, int a3, int a4, char a5, int a6);
 void __cdecl ReportClientMessage(const char* msg);
 
 /* ADDRESS: GOLDTL 0x00512b40 */
@@ -91,7 +91,7 @@ void __cdecl init_Betrieb(unsigned char* building)
                 } else {
                     limit = fcn_0050dfd0(obj, item->child[i]);
                 }
-                fcn_004c51f0(*(int*)(obj + 2), -1, item->child[i], limit,
+                cm_SendSellObjekt(*(int*)(obj + 2), -1, item->child[i], limit,
                              g_773d75, 0);
             }
             i++;

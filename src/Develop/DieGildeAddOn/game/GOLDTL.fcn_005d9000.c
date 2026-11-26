@@ -16,11 +16,11 @@ int __cdecl fcn_004a5e60(void *, int, F8, float, float, int *); int __cdecl gm_R
 extern char g_868060[];
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl cm_BeginPacketFieldDelta(void *, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, void *);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 unsigned int __cdecl fcn_004a55c0(void *, unsigned int, unsigned int *, float, float, unsigned short *);
 int __cdecl srv_GetEntityOfficeSlot(void *, void *, void *);
 void __cdecl amt_SendOfficeCommand(void *, int, int, int, int);
@@ -60,7 +60,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		v = gm_WalkEntityChain(best->entity_index);
 		r = gm_RandomMod(3) + 2;
 		score = (int) ((double) r * ((double) v * 0.01));
-		fcn_004c51a0(best->entity_id, -1, g_773d75, score);
+		cm_RequestTransferCurrencyNoKill(best->entity_id, -1, g_773d75, score);
 		io_FormatTextBuffer(t1, 0x1df8, best->entity_index, ent, best->entity_index, score,
 					 &g_868060[g_773d75 * 0x2f4 + 0x20]);
 	} else if (mode == 1) {
@@ -80,7 +80,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 						a = abs(best->unk_024 / 2);
 						cm_BeginPacketFieldDelta(best, best->entity_id);
 						cm_AppendPacketFieldDelta(4, 1, 0x24, &a);
-						fcn_004c5360();
+						cm_RequestChangeAttribute();
 						if (best->entity_state == 6 || best->entity_state == 7)
 							fcn_00545d40(best->entity_id, -1, t3, 1, 0x601, 0);
 					} else {
@@ -107,7 +107,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 			return;
 		cm_BeginPacketFieldDelta(ent, *(int *) (ent + 1));
 		cm_AppendPacketFieldDelta(1, 1, 0x5c, &delta);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		io_FormatTextBuffer(t1, 0x1dfc, best->entity_index, ent);
 	} else if (mode == 3) {
 		OfficeRecord role;
@@ -147,7 +147,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 			return;
 		cm_BeginPacketFieldDelta(best, best->entity_id);
 		cm_AppendPacketFieldValue(1, 1, picked + 0x80, &delta);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		io_FormatTextBuffer(t1, 0x1dfe, best->entity_index, best->entity_index, picked + 0x16b7);
 	} else if (mode == 5) {
 		ENTITY_RECORD *slots[8];
@@ -181,7 +181,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		v = gm_RandomMod(5) + 3;
 		score = (int) ((float) v * bv * 0.01f);
 		gm_ResolveEntityById(&ent, 0, 0, id);
-		fcn_004c51a0(best->entity_id, -1, g_773d75, score);
+		cm_RequestTransferCurrencyNoKill(best->entity_id, -1, g_773d75, score);
 		io_FormatTextBuffer(t1, 0x1dff, best->entity_index, ent, best->entity_index, score);
 	} else {
 		return;

@@ -14,7 +14,7 @@ void __cdecl fcn_005944d0(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
-void __cdecl fcn_005cf560(char*);
+void __cdecl d2_OpenMeisterbriefDialog(char*);
 
 void __cdecl d2_RunBrauenMenu(char* e)
 {
@@ -47,7 +47,7 @@ void __cdecl d2_RunBrauenMenu(char* e)
 			} else if (g_7746a0 == lager) {
 				d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
 			} else if (g_7746a0 == meister) {
-				fcn_005cf560(e);
+				d2_OpenMeisterbriefDialog(e);
 			} else if (g_7746a0 == prod) {
 				fcn_005944d0(e);
 			} else if (g_7746a0 == transport) {

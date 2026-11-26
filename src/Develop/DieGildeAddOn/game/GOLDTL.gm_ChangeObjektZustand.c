@@ -7,7 +7,7 @@ unsigned char* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int c, char* v);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 
 void __cdecl gm_ChangeObjektZustand(int id, int delta)
 {
@@ -26,5 +26,5 @@ void __cdecl gm_ChangeObjektZustand(int id, int delta)
 	}
 	cm_BeginPacketFieldDelta((char*) r, id);
 	cm_AppendPacketFieldValue(1, 1, 0x12, &v);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 }

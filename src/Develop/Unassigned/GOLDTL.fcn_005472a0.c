@@ -26,7 +26,7 @@ struct msg {
 #include <string.h>
 
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 
 void __cdecl fcn_005472a0(void)
 {
@@ -39,7 +39,7 @@ void __cdecl fcn_005472a0(void)
 		m.fc = -1;
 		m.b36 = 2;
 		m.pos = gm_GameTime;
-		fcn_004c5530(&m);
+		cm_SendCopyEntityData(&m);
 	}
 	if (he_StartHandlungSearch(1, 0, 0xa2) == 0) {
 		memset(&m, 0, sizeof(m));
@@ -48,6 +48,6 @@ void __cdecl fcn_005472a0(void)
 		m.fc = -1;
 		m.b36 = 2;
 		m.pos = gm_GameTime;
-		fcn_004c5530(&m);
+		cm_SendCopyEntityData(&m);
 	}
 }

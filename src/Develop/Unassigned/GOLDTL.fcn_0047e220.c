@@ -5,7 +5,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
  
 
-void __cdecl fcn_004c52d0(int, int);
+void __cdecl cm_RequestClearLagerslot(int, int);
 
 
 /* ADDRESS: GOLDTL 0x0047e220 */
@@ -15,6 +15,6 @@ void __cdecl fcn_0047e220(char* x)
 
 	for (i = 0; i < g_100b0ac; i++) {
 		if (g_100d0c0[i].unk_3c == 0 && (g_100d0c0[i].flags & 8) == 0)
-			fcn_004c52d0(*(int*) (x + 2), g_100d0c0[i].goods_id);
+			cm_RequestClearLagerslot(*(int*) (x + 2), g_100d0c0[i].goods_id);
 	}
 }

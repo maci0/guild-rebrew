@@ -18,7 +18,7 @@ typedef struct
 
 extern char g_7f4ca0[];
 
-int __cdecl fcn_004ff860(unsigned char* p)
+int __cdecl gm_IsEntityOrphaned(unsigned char* p)
 {
 	int id;
 	int i;

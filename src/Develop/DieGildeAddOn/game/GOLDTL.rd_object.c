@@ -15,7 +15,7 @@ void __cdecl d3_AppendObjectSibling(char* object, char* sibling);
 void __cdecl fcn_00439c00(char* object, char* child);
 void __cdecl fcn_00439fa0(char* object);
 void __cdecl d3_ReadObjectEvents(void* stream, char* object);
-char __cdecl fcn_00442c00(char* object, char on);
+char __cdecl d3_SetObjectVisible(char* object, char on);
 int __cdecl fcn_00446ca0(unsigned int version);
 void __cdecl fcn_00449f90(char* object, void* part, char* name);
 int __cdecl fcn_0044c200(char* a, char* b);
@@ -321,7 +321,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		fcn_00438b40(object, object + 0x4c);
 		object[0x214] = (char) (object[0x214] | 0x80);
 		if (marker != 0) {
-			fcn_00442c00(object, 0);
+			d3_SetObjectVisible(object, 0);
 			if (object[0] != '!') {
 				strcpy(name, object);
 				strcpy(object, "!");

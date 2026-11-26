@@ -36,26 +36,26 @@ void __cdecl fcn_004d5740(char*, int, int);
 int __cdecl fcn_004d5490(int, int, int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl fcn_0050d490(char*);
-void __cdecl fcn_004c51f0(int, int, int, int, int, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl gm_IncrementMissionActionCount(char*, int);
-void __cdecl fcn_004c5f60(int, int, int);
+void __cdecl cm_SendSetGebBesitzer(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl d2_ShowMessageBox(char*, unsigned int);
 void __cdecl fcn_00412830(int);
 int __cdecl fcn_00471e30(int);
 int __cdecl cut_RandMod(int);
 int __cdecl gm_AccumulateTyped2(char*);
-void __cdecl fcn_004c5150(int, int, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, int, int);
 int __cdecl gm_MapEntityStatRange(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
-void __cdecl fcn_004c4700(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_AppendCommandSyncField(int, int, int, int*);
+void __cdecl cm_RequestChangeAttribute(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00507910(int);
 int __cdecl gm_CheckStatLevel(int, int);
@@ -261,7 +261,7 @@ int __cdecl fcn_004d6170(char* ctx)
 				if (*(int*) (cur + 0xa) == *(unsigned short*) g_772e9c && rec != 0) {
 					if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
 						fcn_0050d490(cur);
-						fcn_004c51f0(*(int*) (rec + 2), *(int*) (cur + 6), *(unsigned short*) cur,
+						cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 6), *(unsigned short*) cur,
 							*(int*) (cur + 0xe), g_773d75, 0);
 					}
 					fcn_0050bb50(*(unsigned short*) cur, g_773d75);
@@ -298,7 +298,7 @@ sync:
 			if (kind == 4 || kind == 0x10) {
 				gm_IncrementMissionActionCount(g_772e9c, 0x1c);
 			}
-			fcn_004c5f60(*(int*) (ent + 1), *(int*) (g_772e9c + 4), *(int*) (g_772e9c + 4));
+			cm_SendSetGebBesitzer(*(int*) (ent + 1), *(int*) (g_772e9c + 4), *(int*) (g_772e9c + 4));
 			io_FormatTextBuffer(msg, 0x11a4, *(unsigned short*) g_772e9c, ent);
 			d2_ShowMessageBox(msg, 0);
 		} else if (choice == 2) {
@@ -322,7 +322,7 @@ sync:
 			sum = (int) (((double) qlo * 0.001 + 0.07) * pay);
 			io_FormatTextBuffer(buf, (int) "$Z%T$A", sum);
 			*(int*) &mode = sum;
-			fcn_004c5150(*(int*) (g_772e9c + 4), *(int*) (g_772e98 + 4), g_773d75, sum);
+			cm_RequestMoveCredits(*(int*) (g_772e9c + 4), *(int*) (g_772e98 + 4), g_773d75, sum);
 			if (cur != 0 && rec != 0) {
 				ent = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
 				while (ent != 0) {
@@ -335,7 +335,7 @@ sync:
 					sprintf(small, "%i %s$A", n, g_14a79c0[*(unsigned short*) ent * 2]);
 					strcat(buf, small);
 					if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
-						fcn_004c51f0(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) ent, n, g_773d75, 0);
+						cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) ent, n, g_773d75, 0);
 					}
 					sum = (int) (fcn_0050bb50(*(unsigned short*) ent, g_773d75) * (double) n + (double) sum);
 					ent = gm_NextEntityQueryMatch();
@@ -360,7 +360,7 @@ reduce:
 				}
 				i = gm_MapEntityStatRange(*(unsigned char*) row);
 				if (i == 0xa || i == 0xb || i == 0xc) {
-					fcn_004c54c0(*(int*) (g_772e9c + 4), *(int*) (row - 0x160), 6, 1);
+					cm_RequestCopyEntityData(*(int*) (g_772e9c + 4), *(int*) (row - 0x160), 6, 1);
 				}
 			}
 		}
@@ -387,8 +387,8 @@ reduce:
 				if (side == g_772e9c && cur[8] != 0) {
 					cm_BeginPacketFieldDelta(cur, *(int*) (cur + 4));
 					pay = 0;
-					fcn_004c4700(4, 1, (int) cur - g_aed32c + 0x16c, &pay);
-					fcn_004c5360();
+					cm_AppendCommandSyncField(4, 1, (int) cur - g_aed32c + 0x16c, &pay);
+					cm_RequestChangeAttribute();
 				}
 				io_FormatTextBuffer(small, (int) "%T", bonus);
 				if (bonus != 0) {
@@ -397,7 +397,7 @@ reduce:
 				sum += bonus;
 			}
 			if (sum != 0) {
-				fcn_004c5150(*(int*) (g_772e9c + 4), -1, g_773d75, sum);
+				cm_RequestMoveCredits(*(int*) (g_772e9c + 4), -1, g_773d75, sum);
 			} else if (*(unsigned short*) g_772e9c == g_774970) {
 				io_AppendText(0x11b6);
 			}
@@ -433,7 +433,7 @@ reduce:
 					}
 					sum = (int) (((double) flo * 0.001 + 0.07) * pay);
 					io_FormatTextBuffer(buf, (int) "$Z%T$A", sum);
-					fcn_004c5150(*(int*) (g_772e9c + 4), *(int*) (g_772e98 + 4), g_773d75, sum);
+					cm_RequestMoveCredits(*(int*) (g_772e9c + 4), *(int*) (g_772e98 + 4), g_773d75, sum);
 					if (cur != 0 && rec != 0) {
 						p = fcn_00502cd0(*(int*) (cur + 0x14), 1, 5);
 						while (p != 0) {
@@ -446,7 +446,7 @@ reduce:
 							sprintf(small, "%i %s$A", n, g_14a79c0[*(unsigned short*) p * 2]);
 							strcat(buf, small);
 							if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
-								fcn_004c51f0(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) p, n, g_773d75, 0);
+								cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) p, n, g_773d75, 0);
 							}
 							sum = (int) (fcn_0050bb50(*(unsigned short*) p, g_773d75) * (double) n + (double) sum);
 							p = gm_NextEntityQueryMatch();
@@ -464,7 +464,7 @@ reduce:
 						}
 						i = gm_MapEntityStatRange(*(unsigned char*) row);
 						if (i == 0xa || i == 0xb || i == 0xc) {
-							fcn_004c54c0(*(int*) (g_772e9c + 4), *(int*) (row - 0x160), 6, 1);
+							cm_RequestCopyEntityData(*(int*) (g_772e9c + 4), *(int*) (row - 0x160), 6, 1);
 						}
 					}
 				}

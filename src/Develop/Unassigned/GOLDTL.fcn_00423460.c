@@ -2,18 +2,18 @@ extern int g_6b7d7c;
 
 
 
-int __cdecl fcn_0042aaa0(int);
+int __cdecl msx_GetSampleStatus(int);
 
-int __cdecl fcn_00423460(int* a1)
+int __cdecl sb_CheckVoicePlaying(int* voice)
 {
-	int r;
+	int status;
 
-	r = 0;
+	status = 0;
 	if (g_6b7d7c == 0) {
 		return 1;
 	}
-	if (a1 != 0 && *a1 != 0 && fcn_0042aaa0(*a1) == 4) {
-		r = -1;
+	if (voice != 0 && *voice != 0 && msx_GetSampleStatus(*voice) == 4) {
+		status = -1;
 	}
-	return r;
+	return status;
 }

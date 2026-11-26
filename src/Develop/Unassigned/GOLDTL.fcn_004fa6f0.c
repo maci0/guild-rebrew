@@ -5,7 +5,7 @@ extern char g_1043370[];
 
 char __cdecl fcn_0045b990(char*, int, int*, int*, int*);
 
-int __cdecl fcn_004fa6f0(int position, int* column, int* row)
+int __cdecl gm_PosToStatsGrid(int position, int* column, int* row)
 {
 	char* g;
 	int div;

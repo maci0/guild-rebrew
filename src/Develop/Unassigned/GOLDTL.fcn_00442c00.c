@@ -5,7 +5,7 @@
 
 #include "client_lighting.h"
 
-char __cdecl fcn_00442c00(char* o, char on)
+char __cdecl d3_SetObjectVisible(char* o, char on)
 {
 	char buf[0x40];
 

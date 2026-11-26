@@ -1,7 +1,7 @@
 #include <string.h>
 
 /* ADDRESS: GOLDTL 0x0042b790 */
-char* __cdecl fcn_0042b790(char* s)
+char* __cdecl txt_SkipLeadingSpaces(char* s)
 {
 	unsigned int i;
 

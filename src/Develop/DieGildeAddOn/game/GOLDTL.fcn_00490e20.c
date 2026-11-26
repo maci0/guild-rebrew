@@ -6,7 +6,7 @@ extern double g_664180;
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_004f4830(int, int*);
-float __cdecl fcn_004fbd40(void);
+float __cdecl gm_GetBuildingLevelRatio(void);
 int __cdecl gm_GetGuildHall(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int, char);
@@ -41,7 +41,7 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* outValue)
 		}
 		if (cnt != 0) {
 			fcn_004f4830(10, v5);
-			f = fcn_004fbd40();
+			f = gm_GetBuildingLevelRatio();
 			d = v5[2] - v5[1];
 			if (f < g_664188) {
 				r = (int) ((float) d * g_664160 + v5[1]);

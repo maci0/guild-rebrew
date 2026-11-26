@@ -56,10 +56,10 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 void* __cdecl gm_GetGuildHall(int);
 int __cdecl gm_FindBuildingTreasury(unsigned char*);
 int __cdecl d2_CheckFundsAndNotify(int, int, int, char);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c5530(char*);
-void __cdecl fcn_004c4ef0(char*);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_SendCopyEntityData(char*);
+void __cdecl cm_SendTraceEnd(char*);
 int __cdecl fcn_0065f220(const char*, const char*);
 
 /* ADDRESS: GOLDTL 0x005c30e0 */
@@ -141,11 +141,11 @@ void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 		msg.f30 = gm_GameTime.c;
 		msg.f34 = gm_GameTime.d;
 		msg.f58 = msg.fc;
-		fcn_004c4eb0(g_67e968);
-		fcn_004c5150(-1, ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id,
+		cm_SendLogAction(g_67e968);
+		cm_RequestMoveCredits(-1, ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id,
 		             (char) g_773d75, quotedCost);
-		fcn_004c5530((char*) &msg);
-		fcn_004c4ef0(g_67e968);
+		cm_SendCopyEntityData((char*) &msg);
+		cm_SendTraceEnd(g_67e968);
 		io_FormatTextBuffer(text, 0x17da, *(unsigned char*) buildingEntry * 14 + 0x49c);
 		fcn_00526120(text, 4);
 		return;
@@ -178,8 +178,8 @@ void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 	msg.f30 = gm_GameTime.c;
 	msg.f2c = gm_GameTime.b;
 	msg.f28 = gm_GameTime.a;
-	fcn_004c4eb0(g_67e968);
-	fcn_004c5150(-1, *(int*) (m + 2), (char) g_773d75, quotedCost);
-	fcn_004c5530((char*) &msg);
-	fcn_004c4ef0(g_67e968);
+	cm_SendLogAction(g_67e968);
+	cm_RequestMoveCredits(-1, *(int*) (m + 2), (char) g_773d75, quotedCost);
+	cm_SendCopyEntityData((char*) &msg);
+	cm_SendTraceEnd(g_67e968);
 }

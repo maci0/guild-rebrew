@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
 typedef struct
 {
@@ -22,5 +22,5 @@ void __cdecl fcn_004c5cb0(int a1, Triple3* firstTriple, Triple3* secondTriple)
 	if (secondTriple != 0) {
 		*(Triple3*) (buf + 0x24) = *secondTriple;
 	}
-	fcn_004c4330(buf);
+	cm_EnqueueClientPacket(buf);
 }

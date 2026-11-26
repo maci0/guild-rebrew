@@ -1,7 +1,7 @@
 #include <string.h>
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 #include "Develop/Units/d3/d3_animation.h"
-char* __cdecl fcn_00401040(char* path);
+char* __cdecl StripPathAndExt(char* path);
 void __cdecl evt_LogScriptError(char* script, unsigned int position, const char* message);
 
 /* ADDRESS: GOLDTL 0x0040eff0 */
@@ -43,7 +43,7 @@ int __cdecl AttachAnimLooped(char** character, char** animation, int* kind)
         name[i] = copied;
         i++;
     } while (copied != 0);
-    short_name = fcn_00401040(name);
+    short_name = StripPathAndExt(name);
     if (short_name != 0) {
         strcpy(resolved, short_name);
     }

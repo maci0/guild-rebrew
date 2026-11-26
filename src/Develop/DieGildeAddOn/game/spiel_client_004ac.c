@@ -7,14 +7,14 @@ int __cdecl gm_AccumulateTyped2(unsigned short* e);
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int* __cdecl fcn_004ac1e0(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, short, char*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004ac320 */
 int __cdecl fcn_004ac320(unsigned short* e)
@@ -38,8 +38,8 @@ void __cdecl fcn_004ac410(unsigned char* entity, int a2, int a3)
 	int i;
 	char* rec;
 
-	fcn_004c5150(-1, *(int*) (entity + 4), g_773d75, a2);
-	fcn_004c5420(*(int*) (entity + 4), 0x1c8, 4, 0x20000, 0);
+	cm_RequestMoveCredits(-1, *(int*) (entity + 4), g_773d75, a2);
+	cm_RequestChangeBits(*(int*) (entity + 4), 0x1c8, 4, 0x20000, 0);
 	p = fcn_004ac1e0(a3);
 	if (p == 0)
 		return;
@@ -48,7 +48,7 @@ void __cdecl fcn_004ac410(unsigned char* entity, int a2, int a3)
 		c = (char)(c < 252.0f - entity[*(unsigned short*) (p + 1) + 0x80] ? c : 252.0f - entity[*(unsigned short*) (p + 1) + 0x80]);
 		cm_BeginPacketFieldDelta((char*) entity, *(int*) (entity + 4));
 		cm_AppendPacketFieldValue(1, 1, *(unsigned short*) (p + 1) + 0x80, &c);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		return;
 	}
 	if (p[0] == 1) {
@@ -56,7 +56,7 @@ void __cdecl fcn_004ac410(unsigned char* entity, int a2, int a3)
 			rec = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
 			if (*(int*) (rec + 4) != *(int*) (entity + 4)
 			    && gm_MapEntityStatRange(*(unsigned char*) (rec + 0x164)) == *(unsigned short*) (p + 1))
-				fcn_004c54c0(*(int*) (entity + 4), *(int*) (rec + 4), gm_RandomMod(4) + 3, 0);
+				cm_RequestCopyEntityData(*(int*) (entity + 4), *(int*) (rec + 4), gm_RandomMod(4) + 3, 0);
 		}
 	}
 }

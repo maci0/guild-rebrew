@@ -4,7 +4,7 @@
 extern int g_774654;
 void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
-void __cdecl fcn_004c30a0(int, int, char*, int, int);
+void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005bdc30(int, int*, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -21,7 +21,7 @@ void __cdecl fcn_00468bb0(int, int, int, int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_CheckActionBlocker(int, int);
-void __cdecl fcn_004c5530(int*);
+void __cdecl cm_SendCopyEntityData(int*);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
@@ -49,7 +49,7 @@ void __cdecl fcn_0058dbe0(int a0)
 
 	io_FormatTextBuffer(text, 0x40c8, 0x40b6);
 	if (he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (a0 + 1))) {
-		fcn_004c30a0(0xffffffff, 0, (char*) 0x6a9780, 0, 100);
+		d3snd_QueueSound(0xffffffff, 0, (char*) 0x6a9780, 0, 100);
 		fcn_00526120(text, 0);
 		return;
 	}
@@ -137,7 +137,7 @@ void __cdecl fcn_0058dbe0(int a0)
 					*(int*) ((char*) req + 0x5c) = d2_GetControlValue(firstControl);
 					*(int*) ((char*) req + 0x60) = d2_GetControlValue(secondControl);
 					*(int*) ((char*) req + 0x58) = *(int*) (rec + 1);
-					fcn_004c5530(req);
+					cm_SendCopyEntityData(req);
 				label_58df76:
 					g_774654 = 1;
 				}

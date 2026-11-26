@@ -31,12 +31,12 @@ void __cdecl fcn_00438b40(int h, float* p);
 int __cdecl plt_CheckZoneAvailability(int a, int b, int c, unsigned int d);
 void __cdecl d3_SetSubtreeColor(int a, int b, int c, int d);
 int __cdecl fcn_004c5aa0(int a, int b, int c, int d, int e, int f);
-int __cdecl fcn_004c4450(int a);
+int __cdecl cm_GetCommandStatus(int a);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
-int __cdecl fcn_004c4480(int a);
+int __cdecl cm_GetCommandResult(int a);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 
-void __cdecl fcn_004c5150(int a, int b, unsigned char c, int d);
+void __cdecl cm_RequestMoveCredits(int a, int b, unsigned char c, int d);
 int __cdecl init_SetPflanzenMap(int a, int b);
 void __cdecl d3_AnimateObjectTransform(int a, float* p, int b, int c, int d);
 void __cdecl d2_SelectRadioGroup(int a, int b);
@@ -212,19 +212,19 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 		if (g_14ce8cc && v18 != 0xffffffff && v1) {
 			v20 = fcn_004c5aa0(*(unsigned int*) ((char*) gebaeude + 1),
 				v34, v37, *v26, 0, 0xffffffff);
-			v17 = fcn_004c4450(v20);
+			v17 = cm_GetCommandStatus(v20);
 			while (!v17) {
 				main_RunFrameLoop(0, 0x677c7);
-				v17 = fcn_004c4450(v20);
+				v17 = cm_GetCommandStatus(v20);
 			}
-			v17 = fcn_004c4480(v20);
+			v17 = cm_GetCommandResult(v20);
 			if (v17) {
 				v39 = (int) eval_ObjektPreis2Credits(*v4, 100);
 				v3 = (int) ((int) v39 * 0.5);
 				if (v3 <= 0x400) {
 					v3 = 0x400;
 				}
-				fcn_004c5150(0xffffffff,
+				cm_RequestMoveCredits(0xffffffff,
 					*(unsigned int*) (g_774970 * 0x21c
 						+ 0x7f4ca4), g_773d75, v3);
 				init_SetPflanzenMap(v17, 0);

@@ -30,7 +30,7 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 
 void __cdecl he_EnsureCityBuilding0x2bActions(void)
 {
@@ -55,7 +55,7 @@ void __cdecl he_EnsureCityBuilding0x2bActions(void)
 			m.f8 = *(int*) (gm_CityEntity + 4);
 			m.fc = *(int*) (e + 1);
 			m.b5c = 0;
-			fcn_004c5530(&m);
+			cm_SendCopyEntityData(&m);
 		}
 	}
 }

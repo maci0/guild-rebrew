@@ -7,8 +7,8 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_FindSlotById(int, int);
 int __cdecl CountDisplayCounters(void);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
-void __cdecl fcn_004c4700(int, int, int, void*);
-void __cdecl fcn_004c53a0(void);
+void __cdecl cm_AppendCommandSyncField(int, int, int, void*);
+void __cdecl cm_SendSetAttribute(void);
 int __cdecl d2_GetControlValue(int);
 
 /* Build the message slot table for one packet: widen the four 0x14-byte
@@ -196,8 +196,8 @@ int __cdecl fcn_005974e0(int a0, char* a1)
                     v12 = *(unsigned int*) (v10 + 0x1c) + 1;
                 }
                 cm_BeginPacketFieldDelta((void*) v10, *(unsigned int*) (v10 + 2));
-                fcn_004c4700(4, 1, (v10 - *(int*) 0xaed32c) + 0x1c, &v12);
-                fcn_004c53a0();
+                cm_AppendCommandSyncField(4, 1, (v10 - *(int*) 0xaed32c) + 0x1c, &v12);
+                cm_SendSetAttribute();
                 *(int*) (v10 + 0x1c) = v12;
             }
             v7 = &v7[0xe];

@@ -15,7 +15,7 @@ int __cdecl fcn_0050d200(int a, int b);
 char* __cdecl _strupr(char* s);
 void __cdecl fcn_005986f0(char* a, int b);
 void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj);
-void __cdecl fcn_004c5530(int a1);
+void __cdecl cm_SendCopyEntityData(int a1);
 
 extern int d3_CurrentContextIndex;
 extern char* gm_CityEntity;
@@ -28,7 +28,7 @@ void __cdecl ReportClientMessage(const char*);
 int __cdecl gm_RandomMod(int);
 int __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_TransformPoint(char*, char*, int*);
-void __cdecl fcn_004c5530(int a1);
+void __cdecl cm_SendCopyEntityData(int a1);
 int __cdecl amt_SendOfficeCommand(unsigned char, char*, char*, int, int);
 void __cdecl amt_NotifyOfficeAppointed(void*, unsigned int);
 void __cdecl amt_NotifyOfficeLost(void*, unsigned int);
@@ -189,7 +189,7 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 
 
 				strcpy((char*) (req + 0x9c), buf);
-				fcn_004c5530(req);
+				cm_SendCopyEntityData(req);
 				return;
 			}
 			if ((t[0x5a] & 1) == 0) {

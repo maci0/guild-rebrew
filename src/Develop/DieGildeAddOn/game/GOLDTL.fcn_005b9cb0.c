@@ -19,9 +19,9 @@ int __cdecl fcn_0051e070(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl gm_RemoveClientEntityLink(char*);
-void __cdecl fcn_004c5150(int, int, char, int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
 
-void __cdecl fcn_005b9cb0(int n, char** items)
+void __cdecl d2_SellObjectsDialog(int n, char** items)
 {
 	char buf[0x400];
 	int total;
@@ -58,6 +58,6 @@ void __cdecl fcn_005b9cb0(int n, char** items)
 		for (i = 0; i < n; i++) {
 			gm_RemoveClientEntityLink(items[i]);
 		}
-		fcn_004c5150(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, -1, (*(char*)&g_773d75), price);
+		cm_RequestMoveCredits(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, -1, (*(char*)&g_773d75), price);
 	}
 }

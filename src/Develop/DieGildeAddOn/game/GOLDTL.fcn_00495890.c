@@ -12,7 +12,7 @@
 unsigned short __cdecl gm_RandomMod(int n);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, int* flags);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 
 /* ADDRESS: GOLDTL 0x00495890 */
 void __cdecl fcn_00495890(void)
@@ -31,6 +31,6 @@ void __cdecl fcn_00495890(void)
 		flags |= gm_RandomMod(2) ? 0x10 : 0;
 		cm_BeginPacketFieldDelta((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
 		cm_AppendPacketFieldDelta(4, 1, 0x1e8, &flags);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 	}
 }

@@ -19,7 +19,7 @@ extern signed char g_6a3440;
 Spec* __cdecl gm_LookupMissionSpec(int op);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl ai_ExceedsEntityGoldThreshold(char* t, Spec* s);
-int __cdecl fcn_004b4590(char* t, Spec* s);
+int __cdecl gm_CheckStatRankThreshold(char* t, Spec* s);
 int __cdecl ai_FilterRankCandidateLimit(char* t, Cmd* c, Spec* s);
 int __cdecl gm_HasMinDynastyWealth(char* t, Spec* s);
 int __cdecl gm_HasMinEntityGold(char* t, Spec* s);
@@ -70,7 +70,7 @@ int __cdecl gm_CheckMissionCondition(Cmd* c)
 		return ai_ExceedsEntityGoldThreshold(t, s);
 	case 2:
 	case 7:
-		return fcn_004b4590(t, s);
+		return gm_CheckStatRankThreshold(t, s);
 	case 3:
 	case 10:
 	case 24:

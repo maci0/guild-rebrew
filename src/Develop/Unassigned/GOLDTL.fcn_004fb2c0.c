@@ -19,7 +19,7 @@ extern float g_773d4c, g_773d50, g_773d54, g_99ec14, g_6628cc;
 
 #pragma intrinsic(memcpy)
 
-float __cdecl fcn_004fc460(char* p);
+float __cdecl gm_GetCityStatsSummary(char* p);
 
 /* ADDRESS: GOLDTL 0x004fb2c0 */
 int __cdecl fcn_004fb2c0(void)
@@ -28,7 +28,7 @@ int __cdecl fcn_004fb2c0(void)
 	float v;
 	double d;
 
-	v = fcn_004fc460((char*) buf);
+	v = gm_GetCityStatsSummary((char*) buf);
 	if (g_773d4c == 0.0f) {
 		memcpy(g_99f5e0, buf, 40);
 		d = ((double) v + 1.0) * g_773d54;

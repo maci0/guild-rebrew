@@ -7,7 +7,7 @@ extern char* lpObjekteINST;
 extern char* lpObjektePROT;
 
 int __cdecl vfs_WriteFigure(int a, int b, unsigned int handle);
-int __cdecl fcn_0051fd00(int a);
+int __cdecl ch_GetQueueEntryIndex(int a);
 int __cdecl ch_GetQueueEntryByIndex(int a);
 int __cdecl m_is_tracked(void* object);
 unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, unsigned int handle);
@@ -66,8 +66,8 @@ int __cdecl fcn_0051ffc0(unsigned int handle)
 		src = i + g_6b5c20;
 		if (*(char*) (src + 9) != 0) {
 			*(int*) (src + 0x14) = *(int*) *(int*) (src + 0x14);
-			*(int*) (src + 0x24) = fcn_0051fd00(*(int*) (src + 0x24));
-			*(int*) (src + 0x28) = fcn_0051fd00(*(int*) (src + 0x28));
+			*(int*) (src + 0x24) = ch_GetQueueEntryIndex(*(int*) (src + 0x24));
+			*(int*) (src + 0x28) = ch_GetQueueEntryIndex(*(int*) (src + 0x28));
 		} else {
 			memset(src, 0, 0x194);
 		}

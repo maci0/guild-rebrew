@@ -11,12 +11,12 @@ int __cdecl fcn_00567170(char*, int*, int*, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl he_FreeAction(char*);
 char* __cdecl fcn_0050dc90(int);
 char* __cdecl he_RegisterApEvent(int, char*, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
-void __cdecl fcn_004c5530(int);
+void __cdecl cm_SendCopyEntityData(int);
 
 /* Entity event handler: state 0 builds and posts the event message, state -1
  * clears the entity's event flag and frees its track. */
@@ -70,7 +70,7 @@ void __cdecl fcn_00569760(char* eventTrack)
 				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 1));
 				cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) rec - g_aed32c + 0x65),
 				             (char*) &idx);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 			he_FreeAction(eventTrack);
 			return;
@@ -109,7 +109,7 @@ void __cdecl fcn_00569760(char* eventTrack)
 		*(int*) (b.msg + 0x60) = award;
 		*(int*) (b.msg + 0x5c) = ((ENTITY_RECORD*) g_7f4ca0)[
 		                                  *(unsigned short*) (eventTrack + 8)].entity_id;
-		fcn_004c5530((int) b.msg);
+		cm_SendCopyEntityData((int) b.msg);
 	} else {
 		e = gm_LookupEntityRecordById(*(int*) (eventTrack + 0xac));
 		if (e != 0) {

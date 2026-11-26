@@ -12,7 +12,7 @@ typedef struct
 // SIZE 0x2c
 
 Rec2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
-void __cdecl fcn_004c67c0(int, Rec2c*);
+void __cdecl cm_SendUpdateCutsceneEntitySlot(int, Rec2c*);
 
 void __cdecl fcn_004d1570(char* a1, char* a2)
 {
@@ -24,5 +24,5 @@ void __cdecl fcn_004d1570(char* a1, char* a2)
 	r = *s;
 	r.a = *(int*) (a2 + 4);
 	r.b = 8;
-	fcn_004c67c0(*(int*) (a1 + 0x10), &r);
+	cm_SendUpdateCutsceneEntitySlot(*(int*) (a1 + 0x10), &r);
 }

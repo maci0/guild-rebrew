@@ -1,8 +1,8 @@
 extern char s_67ead8[];
 
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c5530(char* msg);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendCopyEntityData(char* msg);
+void __cdecl cm_SendTraceEnd(char* s);
 
 /* ADDRESS: GOLDTL 0x0049c130 */
 int __cdecl ai_RunSpionage(char* a1, char* x)
@@ -23,8 +23,8 @@ int __cdecl ai_RunSpionage(char* a1, char* x)
 	}
 	*(int*) (msg + 0x70) = *(int*) (x + 4);
 	*(int*) (msg + 0x90) = *(int*) (x + 0x10);
-	fcn_004c4eb0(s_67ead8);
-	fcn_004c5530(msg);
-	fcn_004c4ef0(s_67ead8);
+	cm_SendLogAction(s_67ead8);
+	cm_SendCopyEntityData(msg);
+	cm_SendTraceEnd(s_67ead8);
 	return 0x25;
 }

@@ -18,15 +18,15 @@ void __cdecl gm_ResolveEntityById(void*, void*, int, int);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 double __cdecl fcn_0050fdb0(int, int, char*);
 int __cdecl fcn_0050c830(char*, char*, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-int __cdecl fcn_00500cb0(char*, char*);
+int __cdecl gm_CompareGameTime(char*, char*);
 void __cdecl gm_AddTime(char*, int, int, int);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 
 extern char g_7f4ca0[];
 extern char gm_GameTime[];
@@ -85,7 +85,7 @@ void __cdecl fcn_00571240(char* self)
 				if (((int*) (self + 0x8c))[i] != -1) {
 					n = *(int*) (node + 0x41);
 					if (n != 2)
-						fcn_004c54c0(*(int*) (map + 4), ((int*) (self + 0x8c))[i], 2 - n, 0);
+						cm_RequestCopyEntityData(*(int*) (map + 4), ((int*) (self + 0x8c))[i], 2 - n, 0);
 				}
 			}
 			*(float*) (self + 0xc4) = (float) ((fcn_0050fdb0(*(unsigned short*) map, 8, self + 0x8c)
@@ -97,7 +97,7 @@ skip_map:
 		if (n > 0)
 			*(unsigned char*) (self + 0xc8) += n;
 		total = total + *(float*) (self + 0xc4);
-		if (fcn_00500cb0(self + 0x52, gm_GameTime) >= 0)
+		if (gm_CompareGameTime(self + 0x52, gm_GameTime) >= 0)
 			return;
 		do {
 			entry = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) (self + 0xac)]);
@@ -123,14 +123,14 @@ skip_map:
 				n = ((OBJECT_PROTOTYPE *)entry)->value_036;
 				if (n >= *(int*) (q + 0xe))
 					n = *(int*) (q + 0xe);
-				fcn_004c51f0(*(int*) (self + 0xc0), *(int*) (self + 0xbc), *(unsigned short*) (self + 0xac),
+				cm_SendSellObjekt(*(int*) (self + 0xc0), *(int*) (self + 0xbc), *(unsigned short*) (self + 0xac),
 					n, g_773d75, 0);
 				*(int*) (self + 0xb0) += *(int *)&((OBJECT_PROTOTYPE *)entry)->value_022;
 				*(float*) (self + 0xb4) = (float) *(int*) (self + 0xb0);
 			}
 			*(pos14_7f4c00*) (self + 0x60) = *(pos14_7f4c00*) (self + 0x52);
 			gm_AddTime(self + 0x52, 0, 0, 5);
-		} while (fcn_00500cb0(self + 0x52, gm_GameTime) < 0);
+		} while (gm_CompareGameTime(self + 0x52, gm_GameTime) < 0);
 		return;
 	case 2:
 		if (*(int*) (self + 0x14) > 0 || *(int*) (self + 0x18) > 0) {

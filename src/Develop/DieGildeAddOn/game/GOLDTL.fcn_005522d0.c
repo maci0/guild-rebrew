@@ -10,11 +10,11 @@ extern char* lpGebaeudeINST;
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01Squared(void);
-int __cdecl fcn_004c4450(unsigned int id);
-void* __cdecl fcn_004c4480(unsigned int id);
+int __cdecl cm_GetCommandStatus(unsigned int id);
+void* __cdecl cm_GetCommandResult(unsigned int id);
 unsigned int __cdecl fcn_004c5620(int state, void* ev);
-void __cdecl fcn_004c57e0(unsigned int h, int flag);
-void __cdecl fcn_004c5c80(unsigned int h);
+void __cdecl cm_RequestKillSpieler(unsigned int h, int flag);
+void __cdecl cm_SendCancelCharacterActions(unsigned int h);
 void __cdecl fcn_004c5da0(unsigned int h, unsigned int id, int a3, int a4, int a5, char* tag);
 void __cdecl gm_AddTime(void* q, int a2, int a3, int a4);
 float __cdecl gm_ApplyPlagueInfection(char* entity);
@@ -57,8 +57,8 @@ void __cdecl he_RunPlagueEvent(char* ev)
 			for (i = 0; i < 4; i++) {
 				p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 				if (p) {
-					fcn_004c5c80(*(unsigned int*) ((char*) p + 4));
-					fcn_004c57e0(*(unsigned int*) ((char*) p + 4), 1);
+					cm_SendCancelCharacterActions(*(unsigned int*) ((char*) p + 4));
+					cm_RequestKillSpieler(*(unsigned int*) ((char*) p + 4), 1);
 				}
 			}
 		}
@@ -68,7 +68,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 	if (*(unsigned char*) (ev + 0x78) & 4) {
 		return;
 	}
-	if (*(int*) (ev + 0x84) != -1 && !fcn_004c4450(*(unsigned int*) (ev + 0x84))) {
+	if (*(int*) (ev + 0x84) != -1 && !cm_GetCommandStatus(*(unsigned int*) (ev + 0x84))) {
 		return;
 	}
 	if (*(int*) (ev + 0x70) == 5) {
@@ -78,8 +78,8 @@ void __cdecl he_RunPlagueEvent(char* ev)
 	case 0:
 		for (i = 0; i < 4; i++) {
 			p = 0;
-			if (fcn_004c4450(*(unsigned int*) (ev + 0xbc + i * 4)) == 1) {
-				p = fcn_004c4480(*(unsigned int*) (ev + 0xbc + i * 4));
+			if (cm_GetCommandStatus(*(unsigned int*) (ev + 0xbc + i * 4)) == 1) {
+				p = cm_GetCommandResult(*(unsigned int*) (ev + 0xbc + i * 4));
 			}
 			if (p != 0) {
 				*(unsigned int*) (ev + 0xbc + i * 4) = *(unsigned int*) ((char*) p + 4);
@@ -126,7 +126,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 		for (i = 0; i < 4; i++) {
 			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 			if (p) {
-				fcn_004c5c80(*(unsigned int*) ((char*) p + 4));
+				cm_SendCancelCharacterActions(*(unsigned int*) ((char*) p + 4));
 				fcn_004c5da0(*(unsigned int*) ((char*) p + 4),
 					*(unsigned int*) ((char*) rec + 1), -1, 0, 1, s_6a5b84);
 				count++;
@@ -231,7 +231,7 @@ after_scan:
 		for (i = 0; i < 4; i++) {
 			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 			if (p) {
-				fcn_004c5c80(*(unsigned int*) ((char*) p + 4));
+				cm_SendCancelCharacterActions(*(unsigned int*) ((char*) p + 4));
 				fcn_004c5da0(*(unsigned int*) ((char*) p + 4),
 					*(unsigned int*) ((char*) rec + 1), -1, 0, 1, s_6a5b84);
 				count++;

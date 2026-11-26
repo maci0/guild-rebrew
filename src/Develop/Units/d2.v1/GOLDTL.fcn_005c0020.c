@@ -28,7 +28,7 @@ int __cdecl io_AppendText();
 void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl fcn_004f61c0(int*, int*, int*, unsigned short);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005ca560(Rec38*);
+void __cdecl d2_BuildPersonStatusDesc(Rec38*);
 int __cdecl fcn_005ca740(int, int, int, int, Rec38*, int);
 void __cdecl fcn_005c9160(char*, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -75,7 +75,7 @@ void __cdecl fcn_005c0020(void)
 			recs[count].x0 = (int) p;
 			recs[count].x2c = v10[i];
 			recs[count].x34 = v11[i];
-			fcn_005ca560(&recs[count]);
+			d2_BuildPersonStatusDesc(&recs[count]);
 			recs[count].x30 = 1;
 			count++;
 		}

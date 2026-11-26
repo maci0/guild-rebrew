@@ -6,7 +6,7 @@ extern D2_RADIO_SLOT g_10058a0[8];
 
 /* ADDRESS: GOLD 0x004bf3e0 */
 /* ADDRESS: GOLDTL 0x004bfc40 */
-int __cdecl fcn_004bf3e0(int a)
+int __cdecl d2_FindRadioSlotByValue(int a)
 {
 	int i;
 	for (i = 0; i < 8; i++) {

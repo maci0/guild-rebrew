@@ -5,7 +5,7 @@ extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 extern float g_6628a8;
 
-float __cdecl fcn_004fbd40(void)
+float __cdecl gm_GetBuildingLevelRatio(void)
 {
 	int s1;
 	int s2;

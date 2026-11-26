@@ -31,7 +31,7 @@ extern Item g_10382e0[];
 extern char g_6a3194[];
 
 void __cdecl d3_RemoveObjectAnim(char* o);
-void __cdecl fcn_00442c00(char* o, int v);
+void __cdecl d3_SetObjectVisible(char* o, int v);
 
 void __cdecl fcn_00471340(int h);
 void __cdecl fcn_00471e30(int h);
@@ -49,7 +49,7 @@ void __cdecl fcn_00534f30(Pager* p)
 	if (p != 0) {
 		d3_RemoveObjectAnim(p->obj);
 		if (p->next != 0) {
-			fcn_00442c00(p->next, 1);
+			d3_SetObjectVisible(p->next, 1);
 			for (j = 0; j < *(int*) (*(char**) (*(char**) (p->obj + 0x1cc) + 0x318) + 0x1e4); j++) {
 				for (i = 0; i < p->count; i++) {
 					e = (*(char***) (*(char**) (p->obj + 0x1cc) + 0x31c))[j];

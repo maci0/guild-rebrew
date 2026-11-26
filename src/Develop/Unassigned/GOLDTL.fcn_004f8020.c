@@ -1,7 +1,7 @@
 extern char g_679060[];
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int __cdecl fcn_005d6950(char*, int*);
+int __cdecl d2_ShowAbsetzenDialog(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f8020 */
@@ -22,7 +22,7 @@ int __cdecl fcn_004f8020(char* e, int* s)
 		if (*(int*) (e + 0x1c8) & 0x200000)
 			return 1;
 		if (*s == 3)
-			r = fcn_005d6950(e, s);
+			r = d2_ShowAbsetzenDialog(e, s);
 		return r | 2;
 	}
 	if (*s == 4 || *s == 2) {
@@ -33,7 +33,7 @@ int __cdecl fcn_004f8020(char* e, int* s)
 		if (*(int*) (p + 0x1c8) & 0x200000)
 			return 1;
 		if (*s == 4)
-			r = fcn_005d6950(e, s);
+			r = d2_ShowAbsetzenDialog(e, s);
 		else if (e[2] == 6)
 			io_FormatTextBuffer((char*) s + 0x14, (int) "%s", 0x1d98);
 		return r | 10;

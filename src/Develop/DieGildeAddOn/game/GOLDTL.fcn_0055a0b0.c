@@ -12,7 +12,7 @@ int __cdecl amt_FindOfficeSlotsByKind(int, int, EvRec*);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char*, unsigned char*, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -71,7 +71,7 @@ void __cdecl fcn_0055a0b0(char* action)
 								    && *(unsigned short*) (*(unsigned int*) (p + 0x168) + 0x27) == *(unsigned short*) v3) {
 									++n;
 									b = (unsigned char) tmp[2] * 3;
-									fcn_004c54c0(*(int*) (v3 + 4), *(int*) p,
+									cm_RequestCopyEntityData(*(int*) (v3 + 4), *(int*) p,
 									             -((unsigned short) gm_RandomMod(b) + (tmp[2] & 0xff) * 3), 1);
 								}
 								p += 0x21c;

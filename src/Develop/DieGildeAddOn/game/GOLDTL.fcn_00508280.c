@@ -11,7 +11,7 @@ int __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_00508220(int, S0c*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl fcn_004ff210(unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x00508280 */
@@ -114,7 +114,7 @@ found:
 	v = flags;
 	cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &v);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	f = fcn_004ff210(*(unsigned short*) p, -cost);
 	if (valueOut == 0) {
 		goto fail_1;

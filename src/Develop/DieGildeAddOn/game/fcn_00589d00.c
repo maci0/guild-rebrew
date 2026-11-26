@@ -47,11 +47,11 @@ int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl fcn_005898f0(void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004a5e60(unsigned short*, int, F8_589d00, int, float, int*);
-int __cdecl fcn_004c5530(Msg_589d00*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendCopyEntityData(Msg_589d00*);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl fcn_00532ef0(void);
 
@@ -142,7 +142,7 @@ void __cdecl fcn_00589d00(int a0)
 					                 0x21c));
 					if (p != 0)
 						*(int*) (p + 0x28) += ids[sel];
-					fcn_004c51a0(
+					cm_RequestTransferCurrencyNoKill(
 					    -1,
 					    *(int*) (0x7f4ca4 +
 					             (unsigned int) g_774970 *
@@ -183,10 +183,10 @@ void __cdecl fcn_00589d00(int a0)
 						    0, f, 0, 100.0f, &n);
 						req.f58 = n;
 					}
-					id = fcn_004c5530(&req);
+					id = cm_SendCopyEntityData(&req);
 					if (id != -1) {
 						do {
-							if (fcn_004c4450(id) != 0)
+							if (cm_GetCommandStatus(id) != 0)
 								break;
 							main_RunFrameLoop(0, 0x20007);
 						} while (1);

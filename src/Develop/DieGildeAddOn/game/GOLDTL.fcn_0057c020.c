@@ -25,7 +25,7 @@ typedef struct {
 int __cdecl fcn_004e8b40(int, rec18*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl amt_AdjustOfficeHoldersFavor(ENTITY_RECORD*, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 
@@ -47,7 +47,7 @@ void __cdecl he_ApplyZigeunerFavorPenalty(ENTITY_RECORD* a, ENTITY_RECORD* b)
 		d = -20 - gm_RandomMod(0x10);
 		for (i = 0; i < 768; i++) {
 			if (i != b->entity_index && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 5)) {
-				fcn_004c54c0(b->entity_id, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, d, 1);
+				cm_RequestCopyEntityData(b->entity_id, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, d, 1);
 			}
 		}
 	}

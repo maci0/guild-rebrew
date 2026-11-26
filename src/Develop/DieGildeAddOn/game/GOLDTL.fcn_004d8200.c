@@ -15,7 +15,7 @@ char* __cdecl ch_CreateAction(char*, int, ...);
 int __cdecl ch_QueuePlayAnimation(char*, char*, int);
 void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 unsigned int __cdecl cut_RandMod(unsigned int);
-int __cdecl fcn_004c30a0(int, int, char*, int, int);
+int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl fcn_004c6680(char*, int, int, char*);
 void __cdecl fcn_004d4950(void);
@@ -85,9 +85,9 @@ void __cdecl fcn_004d8200(int* p)
 make_task:
 	if ((unsigned short) gm_RandomMod(10) > 8) {
 		if (*(int*) (save + 4) == *(int*) (g_772e9c + 4)) {
-			fcn_004c30a0(*rec, g_772edc, "_K_C2C_ANGRIFF", -1, 500);
+			d3snd_QueueSound(*rec, g_772edc, "_K_C2C_ANGRIFF", -1, 500);
 		} else {
-			fcn_004c30a0(*rec, g_772ee0, "_K_C2C_ANGRIFF", -1, 500);
+			d3snd_QueueSound(*rec, g_772ee0, "_K_C2C_ANGRIFF", -1, 500);
 		}
 	}
 	i = p[8];

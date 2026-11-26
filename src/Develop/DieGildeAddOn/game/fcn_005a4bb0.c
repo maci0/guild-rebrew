@@ -19,10 +19,10 @@ int __cdecl d2_GetControlValue(int a);
 int __cdecl gm_QueryEntitySum(int a, unsigned char b);
 int __cdecl gm_AccumulateTyped2(int a);
 void __cdecl fcn_00472380(int a, ...);
-void __cdecl fcn_004c5150(int a, int b, char c, int d);
+void __cdecl cm_RequestMoveCredits(int a, int b, char c, int d);
 void __cdecl cm_BeginPacketFieldDelta(void* a, int b);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* d);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_00471e30(int a);
 
 /* ADDRESS: GOLDTL 0x005a4bb0 */
@@ -60,17 +60,17 @@ void __cdecl fcn_005a4bb0(char* o)
             r = fcn_0050b750(d2_GetControlValue(it2), g_773d75);
             if (have < r) {
                 d = r - have;
-                fcn_004c5150(*(int*)(o + 1),
+                cm_RequestMoveCredits(*(int*)(o + 1),
                              *(int*)(0x7f4ca4 + *(u16*)(o + 0x27) * 0x21c), g_773d75, d);
             } else {
                 d = have - r;
-                fcn_004c5150(*(int*)(0x7f4ca4 + *(u16*)(o + 0x27) * 0x21c),
+                cm_RequestMoveCredits(*(int*)(0x7f4ca4 + *(u16*)(o + 0x27) * 0x21c),
                              *(int*)(o + 1), g_773d75, d);
             }
             r = d2_GetControlValue(it1);
             cm_BeginPacketFieldDelta(o, *(int*)(o + 1));
             cm_AppendPacketFieldDelta(4, 1, 0x65, &r);
-            fcn_004c5360();
+            cm_RequestChangeAttribute();
             g_774654 = 1;
         }
     }

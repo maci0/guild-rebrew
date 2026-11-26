@@ -28,7 +28,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl fcn_004c5980(void*);
 void __cdecl cut_ExecuteCutscene(void*);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -209,7 +209,7 @@ void __cdecl fcn_005b3b60(void)
 				} else {
 					gm_AddTime(msg + 0x28, gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 				}
-				fcn_004c5530(msg);
+				cm_SendCopyEntityData(msg);
 			} else if (k == item[3]) {
 				*(char*) (msg + 4) = 0x50;
 				*(int*) (msg + 8) = *(int*) (gm_CityEntity + 4);
@@ -227,7 +227,7 @@ weather_send:
 				} else {
 					gm_AddTime(msg + 0x28, gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 				}
-				fcn_004c5530(msg);
+				cm_SendCopyEntityData(msg);
 			} else if (k == item[5]) {
 				memset(m, 0, sizeof(m));
 				*(char*) (m + 8) = 4;

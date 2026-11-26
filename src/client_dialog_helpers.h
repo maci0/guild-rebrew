@@ -130,9 +130,9 @@ int __cdecl d2_GetControlValue(int handle, int player);
 void __cdecl cm_BeginPacketFieldDelta(char* base, int entity_id);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, void* value);
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int off, void* value);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c54c0(int a, int b, int value, int flag);
-int __cdecl fcn_004c51a0(int a, int b, unsigned char kind, int amount);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestCopyEntityData(int a, int b, int value, int flag);
+int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char kind, int amount);
 
 /* Dialog text output. Variadic at every TL call site; see the conflict
  * note above. */

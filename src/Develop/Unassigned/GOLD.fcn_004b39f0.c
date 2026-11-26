@@ -7,7 +7,7 @@ extern char g_10069a0[];
 
 #include <string.h>
 
-int __cdecl fcn_004b3b60(void)
+int __cdecl gm_ClearMissionJobs(void)
 {
 	memset(g_10069a0, 0, 0x1200);
 	return 1;

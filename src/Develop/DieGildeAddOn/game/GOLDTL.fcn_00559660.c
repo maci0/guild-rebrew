@@ -26,8 +26,8 @@ struct obj* __cdecl gm_LookupEntityRecordById(int);
 
 int __cdecl gm_IsEntityAtBuilding(struct obj*, int);
 void __cdecl fcn_004c6a40(int);
-void __cdecl fcn_004c5c80(int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_SendCancelCharacterActions(int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl he_ReturnPoliticianFromJob(struct slot* s)
 {
@@ -43,7 +43,7 @@ int __cdecl he_ReturnPoliticianFromJob(struct slot* s)
 		if (r == 0) {
 			if (o->shown != 0) {
 				fcn_004c6a40(s->id);
-				fcn_004c5420(o->handle, 0x1c8, 4, 0, 0x40000000);
+				cm_RequestChangeBits(o->handle, 0x1c8, 4, 0, 0x40000000);
 			}
 		clear:
 			s->id = -1;
@@ -58,7 +58,7 @@ int __cdecl he_ReturnPoliticianFromJob(struct slot* s)
 			return 2;
 		}
 		if (o->shown != 0) {
-			fcn_004c5c80(o->handle);
+			cm_SendCancelCharacterActions(o->handle);
 			fcn_004c6a40(s->id);
 		}
 		s->id = -1;
@@ -67,7 +67,7 @@ int __cdecl he_ReturnPoliticianFromJob(struct slot* s)
 		s->f9 = 0;
 		s->fa = 0;
 		s->fb = 0;
-		fcn_004c5420(o->handle, 0x1c8, 4, 0, 0x40000000);
+		cm_RequestChangeBits(o->handle, 0x1c8, 4, 0, 0x40000000);
 	}
 	return 0;
 }

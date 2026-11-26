@@ -40,15 +40,15 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004f6470(int, int*, unsigned short);
 int __cdecl fcn_004f61c0(int*, int*, int*, unsigned short);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5530(Msg_5d5930*);
+int __cdecl cm_SendCopyEntityData(Msg_5d5930*);
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
-void __cdecl fcn_005ca560(Rec_5d5930*);
+void __cdecl d2_BuildPersonStatusDesc(Rec_5d5930*);
 void __cdecl fcn_005ca740(int, int, int, int, Rec_5d5930*, int);
 void __cdecl fcn_005c9160(char*, int, int, int, int);
 int __cdecl fcn_00526120(char*, int);
@@ -103,10 +103,10 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 			m.b36 = 2;
 			m.pos.d = gm_GameTime.d;
 			m.f5c = *(int*) (e + 4);
-			fcn_004c5530(&m);
+			cm_SendCopyEntityData(&m);
 			return 0x10;
 		} else {
-			fcn_004c54c0(*(int*) (p + 4), *(int*) (e + 4), -0x1a, 1);
+			cm_RequestCopyEntityData(*(int*) (p + 4), *(int*) (e + 4), -0x1a, 1);
 			return 0x10;
 		}
 	}
@@ -125,7 +125,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 			recs[cnt].p0 = (int) obj;
 			recs[cnt].x2c = c[i];
 			recs[cnt].x34 = b[i];
-			fcn_005ca560(&recs[cnt]);
+			d2_BuildPersonStatusDesc(&recs[cnt]);
 			recs[cnt].x30 = 1;
 			cnt++;
 		}

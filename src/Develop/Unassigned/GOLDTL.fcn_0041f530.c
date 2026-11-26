@@ -20,21 +20,21 @@ char* __cdecl FindVideoById(int id);
 
 long __cdecl PollVideoEvents(int id, long* p1, long* p2)
 {
-	char* o;
+	char* video;
 	long code;
 	Events* ev;
 
-	o = FindVideoById(id);
+	video = FindVideoById(id);
 	code = 0;
-	if (o != 0) {
-		ev = *(Events**) (o + 0x124);
+	if (video != 0) {
+		ev = *(Events**) (video + 0x124);
 		while (ev->vtbl->GetEvent(ev, &code, p1, p2, 0) >= 0) {
-			ev = *(Events**) (o + 0x124);
+			ev = *(Events**) (video + 0x124);
 			ev->vtbl->FreeEventParams(ev, code, *p1, *p2);
 			if (code == 1 || code == 0xe) {
 				break;
 			}
-			ev = *(Events**) (o + 0x124);
+			ev = *(Events**) (video + 0x124);
 		}
 	}
 	return code;

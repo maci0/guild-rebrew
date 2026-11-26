@@ -17,7 +17,7 @@ extern double g_6629c8;
 extern double g_664e60;
 
 void __cdecl fcn_004fad10(void);
-int __cdecl fcn_004fa6f0(char*, int*, int*);
+int __cdecl gm_PosToStatsGrid(char*, int*, int*);
 float __cdecl gm_GetLiteracyRate(void);
 float __cdecl fcn_004fc3a0(int*);
 double __cdecl gm_CalcLaw00And01Factor(int*);
@@ -85,7 +85,7 @@ void __cdecl fcn_004faed0(float* out)
 			if (pos != 0) {
 				type = proto->category;
 				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
-					if (fcn_004fa6f0(pos + 0x4c, &x, &y) != 0) {
+					if (gm_PosToStatsGrid(pos + 0x4c, &x, &y) != 0) {
 						idx = y + x * 8;
 						g_99ef94[idx * 6] = g_99ef94[idx * 6] + g_6628a0;
 					}
@@ -99,7 +99,7 @@ void __cdecl fcn_004faed0(float* out)
 			if (pos != 0) {
 				type = proto->category;
 				if (!(type >= 0x0b && type <= 0x0d) && type != 0x10) {
-					if (fcn_004fa6f0(pos + 0x4c, &x2, &y2) != 0) {
+					if (gm_PosToStatsGrid(pos + 0x4c, &x2, &y2) != 0) {
 						idx = y2 + x2 * 8;
 						g_99ef94[idx * 6] = g_99ef94[idx * 6] + g_6628a0;
 					}

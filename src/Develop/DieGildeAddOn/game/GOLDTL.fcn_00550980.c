@@ -34,15 +34,15 @@ extern char* gm_CityEntity;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 
 void __cdecl fcn_00550980(char* u)
 {
@@ -57,7 +57,7 @@ void __cdecl fcn_00550980(char* u)
 		he_FreeAction(u);
 		return;
 	}
-	if (fcn_00500cb0(&gm_GameTime, (pos14_7f4c00*) (u + 0x44)) == -1) {
+	if (gm_CompareGameTime(&gm_GameTime, (pos14_7f4c00*) (u + 0x44)) == -1) {
 		return;
 	}
 	switch (*(int*) (u + 0x70)) {
@@ -78,7 +78,7 @@ void __cdecl fcn_00550980(char* u)
 		*(int*) (u + 0x70) = 1;
 		break;
 	case 1:
-		if (fcn_00500cb0(&gm_GameTime, (pos14_7f4c00*) (u + 0x52)) > 0) {
+		if (gm_CompareGameTime(&gm_GameTime, (pos14_7f4c00*) (u + 0x52)) > 0) {
 			fcn_00545780(u);
 			he_FreeAction(u);
 			return;
@@ -93,14 +93,14 @@ void __cdecl fcn_00550980(char* u)
 		if (g_100f1dc == 2) {
 			memset(&m, 0, sizeof(m));
 			v = *(int*) (u + 0xb0);
-			fcn_004c51a0(((ENTITY_RECORD*)gm_CityEntity)->entity_id, ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, g_773d75, v);
+			cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD*)gm_CityEntity)->entity_id, ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, g_773d75, v);
 			m.kind = 0x56;
 			m.target = -1;
 			m.code = 0x11;
 			m.who = 4;
 			m.other = v;
 			m.owner = ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id;
-			fcn_004c5530(&m);
+			cm_SendCopyEntityData(&m);
 			fcn_00545780(u);
 			he_FreeAction(u);
 			return;

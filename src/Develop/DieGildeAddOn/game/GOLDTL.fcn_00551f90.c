@@ -58,8 +58,8 @@ extern unsigned char* lpGebaeudePROT;
 
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5620(int, Order_551f90*);
-void __cdecl fcn_004c5530(void*);
-int __cdecl fcn_004c64b0(int, int, int, int, int, int, const char*);
+void __cdecl cm_SendCopyEntityData(void*);
+int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, const char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl he_BroadcastPlagueOutbreak(void);
 
@@ -115,13 +115,13 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 			for (i = 0; i < 0x300; i++) {
 				if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7) {
 					*(int*) (m + 8) = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id;
-					fcn_004c5530(m);
+					cm_SendCopyEntityData(m);
 				}
 			}
-			o->ev[0] = fcn_004c64b0(0xe, p->id, -1, 0x12, 0, 0, "PEST");
-			o->ev[1] = fcn_004c64b0(0xe, p->id, -1, 0x12, 0, 0, "PEST");
-			o->ev[2] = fcn_004c64b0(0xe, p->id, -1, 0x12, 0, 0, "PEST");
-			o->ev[3] = fcn_004c64b0(0xe, p->id, -1, 0x12, 0, 0, "PEST");
+			o->ev[0] = cm_SendAllocCharacter(0xe, p->id, -1, 0x12, 0, 0, "PEST");
+			o->ev[1] = cm_SendAllocCharacter(0xe, p->id, -1, 0x12, 0, 0, "PEST");
+			o->ev[2] = cm_SendAllocCharacter(0xe, p->id, -1, 0x12, 0, 0, "PEST");
+			o->ev[3] = cm_SendAllocCharacter(0xe, p->id, -1, 0x12, 0, 0, "PEST");
 			o->player = p->id;
 			gm_AddTime(&o->stamp, 0, 1, 0);
 			o->event = fcn_004c5620(0, o);

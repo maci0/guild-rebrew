@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern float g_696550[];
 extern float g_696540[];
 
-int __cdecl fcn_00500e20(pos14_7f4c00*);
+int __cdecl gm_GetSeason(pos14_7f4c00*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 char* __cdecl ahm_FindRecipeSlot(char*, int);
@@ -28,7 +28,7 @@ void __cdecl he_RunAhmRefineRecipe(char* u)
 	int q;
 	int t;
 
-	k = fcn_00500e20(&gm_GameTime);
+	k = gm_GetSeason(&gm_GameTime);
 	s = 0;
 	h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 	if (h == 0 || ahm_CheckFlag(h) == 0 || (s = ahm_FindRecipeSlot(h, *(int*) (u + 0xb0))) == 0) {

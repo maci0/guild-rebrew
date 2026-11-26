@@ -19,7 +19,7 @@ int __cdecl gm_IsInRange(int x);
 char __cdecl gm_RandomStatModifier(char v);
 void __cdecl ahm_ResetEntityState(void* rec);
 void __cdecl fcn_004fdfe0(char* rec);
-int __cdecl fcn_004fdec0(char* name);
+int __cdecl gm_FindHeadIconIndex(char* name);
 char* __cdecl gm_PickUnusedPresetCharacter(void);
 void __cdecl fcn_004adcd0(int type, int a, int b, char* rec);
 
@@ -118,7 +118,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
             strcpy(slot + 0x1f4, ent + 0xd7);
             memcpy(slot + 0x88, ent + 0x2c, 0xa8);
             F(slot, 0x1d0) = (float) gm_RandomFloat01() * 0.5f + 0.25f;
-            D(slot, 0x18c) = fcn_004fdec0(ent + 0xd7) + 0x639;
+            D(slot, 0x18c) = gm_FindHeadIconIndex(ent + 0xd7) + 0x639;
             D(slot, 0x1c) = 0x447a0000;
             W(slot, 0x50) = (unsigned short) g_773d68;
             D(slot, 0x18) = D(slot, 0x1c);

@@ -46,7 +46,7 @@ int __cdecl d2_CheckFundsAndNotify(int, int, int, int);
 int __cdecl lc_GebaeudeAusrichten(int, char*);
 void __cdecl d3_TransformPoint(int a, int b, void* c);
 void __cdecl d3_ComputeObjectYawToTarget(void* a, int b);
-void __cdecl fcn_004c5530(void* a);
+void __cdecl cm_SendCopyEntityData(void* a);
 void __cdecl fcn_0050bc10(int a, unsigned char b, char* c);
 void __cdecl fcn_0046ed00(int a, int b, int c);
 int __cdecl main_RunFrameLoop(int a, int b);
@@ -163,7 +163,7 @@ void __cdecl fcn_00599b00(void)
 							msg.name[k++] = c;
 						} while (c != 0);
 					}
-					fcn_004c5530(&msg);
+					cm_SendCopyEntityData(&msg);
 					g_774654 = 1;
 				} else {
 					fcn_00471af0(dlg, 1);

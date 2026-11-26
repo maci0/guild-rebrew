@@ -15,12 +15,12 @@ extern unsigned char g_773d75;
 extern char g_699874[];
 extern char g_6a6b70[];
 
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 char* __cdecl gm_SearchTable67(int);
-void __cdecl fcn_004c5f60(int, int, int);
+void __cdecl cm_SendSetGebBesitzer(int, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl he_GetEntityReturnTarget(char*, int*, int*);
@@ -38,20 +38,20 @@ void __cdecl he_RunInitBetrieb(char* u)
 
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		if (fcn_004c4450(*(int*) (u + 0xac)) == 0) {
+		if (cm_GetCommandStatus(*(int*) (u + 0xac)) == 0) {
 			break;
 		}
-		p = fcn_004c4480(*(int*) (u + 0xac));
+		p = cm_GetCommandResult(*(int*) (u + 0xac));
 		t = gm_SearchTable67(*(int*) (u + 0xb4));
 		if (p == 0 || t == 0) {
 			goto kill;
 		}
 		if (*(unsigned short*) (t + 0x25) != 0xffff) {
-			fcn_004c5f60(*(int*) (t + 1), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (t + 0x25)].entity_id, *(int*) (p + 4));
+			cm_SendSetGebBesitzer(*(int*) (t + 1), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (t + 0x25)].entity_id, *(int*) (p + 4));
 		} else {
-			fcn_004c5f60(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
+			cm_SendSetGebBesitzer(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
 		}
-		fcn_004c5150(*(int*) (p + 4), -1, g_773d75, fcn_0050b750(0xbb8, g_773d75));
+		cm_RequestMoveCredits(*(int*) (p + 4), -1, g_773d75, fcn_0050b750(0xbb8, g_773d75));
 		if (*(int*) (u + 0xbc) == 0) {
 			goto kill;
 		}
@@ -61,9 +61,9 @@ void __cdecl he_RunInitBetrieb(char* u)
 				io_FormatTextBuffer(text, 0x17e6, t, *(unsigned short*) p, *(int*) (u + 0xbc));
 				he_MessageBoxQuickjump(h->entity_id, -1, text, 0, 0x5ec, *(int*) (t + 1), -1, 0, g_699874);
 			}
-			fcn_004c5150(h->entity_id, -1, g_773d75, *(int*) (u + 0xbc));
+			cm_RequestMoveCredits(h->entity_id, -1, g_773d75, *(int*) (u + 0xbc));
 		}
-		fcn_004c5f60(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
+		cm_SendSetGebBesitzer(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
 		if (he_GetEntityReturnTarget(p, &site, &target) != 0) {
 			fcn_004c5da0(*(int*) (p + 4), site, target, 0, 0, g_6a6b70);
 		}

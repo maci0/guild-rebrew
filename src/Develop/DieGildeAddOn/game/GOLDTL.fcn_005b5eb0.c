@@ -3,7 +3,7 @@ extern char* g_773d78;  /* 0x773d78 */
 extern int g_14abc14;
 extern int d2_CurrentWindowId;    /* 0x772514 */
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_004fdec0(char* name);
+int __cdecl gm_FindHeadIconIndex(char* name);
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 void __cdecl d2_SetElementFont(int i, int v);
@@ -50,10 +50,10 @@ void __cdecl fcn_005b5eb0(int windowContext, char* entityName)
     y = 10;
     i = 0;
     do {
-        workerIcons[0] = fcn_004fdec0("arbeiter_MANN");
-        workerIcons[1] = fcn_004fdec0("handwerker_MANN");
-        workerIcons[2] = fcn_004fdec0("handwerker2_MANN");
-        workerIcons[3] = fcn_004fdec0("handwerker3_MANN");
+        workerIcons[0] = gm_FindHeadIconIndex("arbeiter_MANN");
+        workerIcons[1] = gm_FindHeadIconIndex("handwerker_MANN");
+        workerIcons[2] = gm_FindHeadIconIndex("handwerker2_MANN");
+        workerIcons[3] = gm_FindHeadIconIndex("handwerker3_MANN");
         d2_AddElementToWindow(0xe, y - 2, 0x5db, d2_CurrentWindowId);
         d2_AddElementToWindow(0x10, y,
                      workerIcons[*(int*) (*(int*) (i * 4 + 0x777cc4) + 2) & 3] + 0x639,

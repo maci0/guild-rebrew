@@ -7,28 +7,28 @@ extern COLOR_OCTREE_NODE* g_6b6f20[6];
 extern int g_6b6308;
 extern unsigned char g_6b6008[3][0x100];
 
-void __cdecl d3_AssignOctreePalette(int n, int level)
+void __cdecl d3_AssignOctreePalette(int node_idx, int level)
 {
 	int i;
 	unsigned int cnt;
 	unsigned int gg;
 	unsigned int bb;
-	COLOR_OCTREE_NODE* p;
+	COLOR_OCTREE_NODE* node;
 
-	if (g_6b6f20[level][n].mask != 0) {
+	if (g_6b6f20[level][node_idx].mask != 0) {
 		for (i = 7; i >= 0; i--) {
-			if (g_6b6f20[level][n].mask & (1 << i)) {
-				d3_AssignOctreePalette(n * 8 + i, level + 1);
+			if (g_6b6f20[level][node_idx].mask & (1 << i)) {
+				d3_AssignOctreePalette(node_idx * 8 + i, level + 1);
 			}
 		}
 	}
-	p = &g_6b6f20[level][n];
-	if (p->count != 0) {
-		p->idx = (unsigned char) g_6b6308;
-		cnt = g_6b6f20[level][n].count;
-		gg = g_6b6f20[level][n].g;
-		bb = g_6b6f20[level][n].b;
-		g_6b6008[0][g_6b6308] = (unsigned char) ((g_6b6f20[level][n].r + cnt / 2) / cnt);
+	node = &g_6b6f20[level][node_idx];
+	if (node->count != 0) {
+		node->idx = (unsigned char) g_6b6308;
+		cnt = g_6b6f20[level][node_idx].count;
+		gg = g_6b6f20[level][node_idx].g;
+		bb = g_6b6f20[level][node_idx].b;
+		g_6b6008[0][g_6b6308] = (unsigned char) ((g_6b6f20[level][node_idx].r + cnt / 2) / cnt);
 		g_6b6008[1][g_6b6308] = (unsigned char) ((cnt / 2 + gg) / cnt);
 		g_6b6008[2][g_6b6308++] = (unsigned char) ((cnt / 2 + bb) / cnt);
 	}

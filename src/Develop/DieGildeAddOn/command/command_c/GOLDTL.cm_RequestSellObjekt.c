@@ -31,7 +31,7 @@ char* __cdecl fcn_00502cd0();
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
@@ -84,7 +84,7 @@ void __cdecl cm_RequestSellObjekt(char* e)
 							}
 							fcn_0064d41a(dbg, "cm_RequestSellObjekt(%i, %i, %i, %i, %i, %i)", -1, *(int*) (r + 2),
 							    *(unsigned short*) q, v, g_773d75, 0);
-							fcn_004c51f0(-1, *(int*) (r + 2), *(unsigned short*) q, v, g_773d75, 0);
+							cm_SendSellObjekt(-1, *(int*) (r + 2), *(unsigned short*) q, v, g_773d75, 0);
 							amt = (int) (fcn_0050bb50(*(unsigned short*) q, g_773d75) * v + amt);
 						}
 					}

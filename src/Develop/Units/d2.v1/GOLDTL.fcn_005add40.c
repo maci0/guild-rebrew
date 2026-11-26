@@ -56,7 +56,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_004c5530(Packet*);
+int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00529160(int, int, int, char*);
@@ -121,7 +121,7 @@ int __cdecl fcn_005add40(int unused, char* e)
 					}
 					else {
 						r = 1;
-						fcn_004c5530(&pkt);
+						cm_SendCopyEntityData(&pkt);
 						cm_ExProdObjekt();
 						g_774654 = 2;
 					}

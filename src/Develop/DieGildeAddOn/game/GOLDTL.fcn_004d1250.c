@@ -19,7 +19,7 @@ extern int g_67a370;
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
-int __cdecl fcn_004c67c0(int, ent2c*);
+int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
 int __cdecl gm_IssueEscapeOrder(char* rec, char* e, char* obj)
 {
@@ -46,5 +46,5 @@ int __cdecl gm_IssueEscapeOrder(char* rec, char* e, char* obj)
 	l.f4 = 3;
 	*(int*) l.name = x;
 	*(int*) (l.name + 4) = y;
-	return fcn_004c67c0(*(int*) (rec + 0x10), &l);
+	return cm_SendUpdateCutsceneEntitySlot(*(int*) (rec + 0x10), &l);
 }

@@ -11,7 +11,7 @@ void __cdecl d3_SetObjectRotation(void*, void*);
 void __cdecl fcn_005338a0(void);
 void* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
-void __cdecl fcn_005312d0(int);
+void __cdecl evt_WaitForScriptExit(int);
 void __cdecl fcn_0043a9c0(int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_0058f700(void*);
@@ -140,7 +140,7 @@ void __cdecl fcn_005a86a0(void* a0)
 		t = evt_FindScriptById(sub);
 		if (t != 0) {
 			evt_RequestScriptExit(t);
-			fcn_005312d0(*(int*) ((char*) t + 0x100));
+			evt_WaitForScriptExit(*(int*) ((char*) t + 0x100));
 		}
 	}
 	if (*(void**) &g_67a370 != 0) {
@@ -151,7 +151,7 @@ void __cdecl fcn_005a86a0(void* a0)
 		}
 	}
 	if (*(int*) &evt_LastGfxScriptId != -1) {
-		fcn_005312d0(*(int*) &evt_LastGfxScriptId);
+		evt_WaitForScriptExit(*(int*) &evt_LastGfxScriptId);
 	}
 	fcn_0043a9c0(3);
 	d3_SelectSceneContext(save10, 0);

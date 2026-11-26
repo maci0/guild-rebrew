@@ -12,7 +12,7 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl d2_ClearWindowChildren(int a, int b);
 int __cdecl io_AppendText();
-void __cdecl fcn_005ca560(void* slot);
+void __cdecl d2_BuildPersonStatusDesc(void* slot);
 void __cdecl fcn_005ca740(int x, int y, int a, int b, void* slot, int c);
 int __cdecl main_RunFrameLoop(void (*fn)(void), int code);
 void __cdecl fcn_00471e30(void* dlg);
@@ -72,7 +72,7 @@ void __cdecl d2_RunStammtischDialog(int gebaeude, int* objekt)
 					p[0xc] = 1;
 					p[4] = (i % 2 + 1) * third + remainder_half + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 2) - 10;
 					p[5] = (i / 2) * 0x82 + 100;
-					fcn_005ca560(p);
+					d2_BuildPersonStatusDesc(p);
 					fcn_005ca740(p[4], p[5], d2_CurrentWindowId, 0x54, p, 1);
 					p += 0xe;
 				}

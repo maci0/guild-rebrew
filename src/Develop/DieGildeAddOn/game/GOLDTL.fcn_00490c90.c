@@ -3,7 +3,7 @@ extern char g_773d75;
 
 int __cdecl gm_MapEntityStatRange(int);
 void __cdecl fcn_004f4830(int, int*);
-float __cdecl fcn_004fbd40(void);
+float __cdecl gm_GetBuildingLevelRatio(void);
 int __cdecl gm_GetGuildHall(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int, char);
@@ -26,7 +26,7 @@ int __cdecl fcn_00490c90(char* entity, int a1, int* outResult)
 	mode = gm_MapEntityStatRange(*(unsigned char*) (entity + 0x164));
 	if (gm_GameTime >= 4) {
 		fcn_004f4830(9, v5);
-		f = fcn_004fbd40();
+		f = gm_GetBuildingLevelRatio();
 		d = v5[2] - v5[1];
 		if (f < *(float*) 0x664188) {
 			k = (float) d * *(float*) 0x664160 + v5[1];

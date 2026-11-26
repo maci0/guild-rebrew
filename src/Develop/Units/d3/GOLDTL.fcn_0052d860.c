@@ -2,7 +2,7 @@ int __cdecl _strcmpi(const char*, const char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl fcn_00442910(void*, void*, void*, const char*);
 void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
-void __cdecl fcn_004458a0(void*, void*, void*);
+void __cdecl d3_ApplyWorldTransformToObject(void*, void*, void*);
 char __cdecl SelectTextureSet(void*, int, unsigned char, char);
 int __cdecl d3_ApplyObjectAnimation(void*, const char*, int);
 
@@ -26,7 +26,7 @@ char __cdecl d3_CreatePennantAtFlagDummy(char* e, char* o)
 	rot[1] = 3.14159274f;
 	rot[2] = 0;
 	d3_BuildEulerRotationMatrix(rot, m);
-	fcn_004458a0(obj, name, m);
+	d3_ApplyWorldTransformToObject(obj, name, m);
 	if (*(unsigned short*) (o + 0x27) != 0xffff) {
 		SelectTextureSet(obj, *(int*) ((char*) obj + 0x1cc),
 		    (unsigned char) (*(char*) (*(unsigned short*) (o + 0x27) * 0x21c + 0x7f4cf4) + 0x66), 1);

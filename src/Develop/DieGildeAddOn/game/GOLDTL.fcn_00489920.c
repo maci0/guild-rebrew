@@ -14,7 +14,7 @@ int __cdecl gm_RandomMod(unsigned short n);
 char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl gm_AddTime(SIM_CLOCK_489920* clock, int arg2, int arg3, int arg4);
-void __cdecl fcn_004c5530(int msg);
+void __cdecl cm_SendCopyEntityData(int msg);
 
 /* ADDRESS: GOLDTL 0x00489920 */
 void __cdecl fcn_00489920(char* e)
@@ -51,7 +51,7 @@ void __cdecl fcn_00489920(char* e)
 			*(int*) (s + 0x64) = 5;
 			*(int*) (s + 0x84) = 0;
 			*(int*) (s + 0x5c) = 100 - *(unsigned char*) (q + 0x12);
-			fcn_004c5530((int) s);
+			cm_SendCopyEntityData((int) s);
 		}
 		q = gm_NextEntityQueryMatch();
 	} while (q != 0);

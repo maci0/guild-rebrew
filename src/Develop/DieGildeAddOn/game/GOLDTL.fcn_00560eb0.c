@@ -22,12 +22,12 @@ extern unsigned char* lpGebaeudePROT;
 extern char g_6b5c60[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl fcn_0050c830(pos14_7f4c00*, pos14_7f4c00*, char*);
 void __cdecl cm_AppendPacketFieldValue(int, int, short, unsigned char*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl fcn_0050dc90(unsigned char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
@@ -63,7 +63,7 @@ void __cdecl fcn_00560eb0(char* e)
 			if (q == 0) {
 				break;
 			}
-			if (fcn_00500cb0(&gm_GameTime, (pos14_7f4c00*) (e + 0xb8)) < 0) {
+			if (gm_CompareGameTime(&gm_GameTime, (pos14_7f4c00*) (e + 0xb8)) < 0) {
 				n = fcn_0050c830((pos14_7f4c00*) (e + 0x60), &gm_GameTime, q);
 			} else {
 				n = fcn_0050c830((pos14_7f4c00*) (e + 0x60), (pos14_7f4c00*) (e + 0xb8), q);
@@ -79,7 +79,7 @@ void __cdecl fcn_00560eb0(char* e)
 			}
 			cm_BeginPacketFieldDelta(who, *(int*) (who + 4));
 			cm_AppendPacketFieldValue(1, 1, (short) (who - g_aed32c + ((unsigned char*) e)[0xac] + 0x80), &add);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(pos14_7f4c00*) (e + 0x60) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0x1e, 0);

@@ -5,7 +5,7 @@ int sprintf(char*, const char*, ...);
 char* __cdecl evt_LoadGfxScript(int);
 void __cdecl fcn_00428340(char*, int, char*);
 
-char* __cdecl fcn_00530bf0(char* o, int x)
+char* __cdecl ch_AttachEntityGfxScript(char* o, int x)
 {
 	char buf[0x80];
 	char* p;

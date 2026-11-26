@@ -23,13 +23,13 @@ int __cdecl he_StartHandlungSearch(int, ...);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_00545780(int a);
 void __cdecl he_FreeAction(int a);
-int __cdecl fcn_00500cb0(void* sel, int* out);
+int __cdecl gm_CompareGameTime(void* sel, int* out);
 void __cdecl fcn_00545670(int a, int b, int c, char* caption, int d);
 int __cdecl fcn_0051e070(void);
 int __cdecl gm_AddTime(int* sel, int a, int b, int c);
 void __cdecl fcn_004c5620(int a, int b);
-void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
-void __cdecl fcn_004c30a0(int a, int b, char* name, int c, int d);
+void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
+void __cdecl d3snd_QueueSound(int a, int b, char* name, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00553110 */
 void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
@@ -59,7 +59,7 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 	{
 		Pos14 t;
 
-		n = fcn_00500cb0(&gm_GameTime, (int*) (dlg + 0x52));
+		n = gm_CompareGameTime(&gm_GameTime, (int*) (dlg + 0x52));
 		if (n > 0) {
 			fcn_00545780(dlg);
 			he_FreeAction(dlg);
@@ -79,8 +79,8 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 			*(Pos14*) (actor + 0x52) = t;
 			*(int*) (actor + 0xb8) = 1;
 			fcn_004c5620(3, actor);
-			fcn_004c5420(*(int*) (msg + 1), 0x5a, 2, 0x100, 0);
-			fcn_004c51a0(
+			cm_RequestChangeBits(*(int*) (msg + 1), 0x5a, 2, 0x100, 0);
+			cm_RequestTransferCurrencyNoKill(
 			    *(int*) (*(unsigned short*) (actor + 8) * 0x21c
 			    + 0x7f4ca4),
 			    *(int*) (*(unsigned short*) (msg + 0x27) * 0x21c
@@ -122,6 +122,6 @@ open:
 	*(Pos14*) (dlg + 0x44) = *(Pos14*) &gm_GameTime;
 	*(Pos14*) (dlg + 0x52) = *(Pos14*) &gm_GameTime;
 	gm_AddTime((int*) (dlg + 0x52), 3, 0, 0);
-	fcn_004c30a0(-7, 0, "_NACHRICHTEN_HS_34", 0, 0);
+	d3snd_QueueSound(-7, 0, "_NACHRICHTEN_HS_34", 0, 0);
 	*(int*) (dlg + 0x70) = *(int*) (dlg + 0x70) + 1;
 }

@@ -2,7 +2,7 @@
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl fcn_004c6d70(int*, char*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 
 
@@ -31,7 +31,7 @@ int __cdecl cut_CheckMaster(int* event)
 		if (e != 0 && *(int*) (e + 4) != event[3]) {
 			fcn_0064d41a(buf, "cut_CheckMaster(): new master for id %i => %i", event[0], *(int*) (e + 4));
 			r = fcn_004c6d70(event, e);
-			while (fcn_004c4450(r) == 0)
+			while (cm_GetCommandStatus(r) == 0)
 				fcn_00535960();
 			return 0;
 		}

@@ -8,9 +8,9 @@ extern int g_773d48;
 extern int g_99f7f0;
 
 int __cdecl fcn_004f4830(int k, int* info);
-void __cdecl fcn_004c51a0(int a, int b, int c, int d);
+void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
 
-int __cdecl fcn_004fca70(unsigned short id, unsigned char* s, unsigned char flags)
+int __cdecl gm_ApplyLaw0x0bTaxSlot(unsigned short id, unsigned char* s, unsigned char flags)
 {
 	int info[9];
 	int i;
@@ -38,7 +38,7 @@ int __cdecl fcn_004fca70(unsigned short id, unsigned char* s, unsigned char flag
 		*(int*) (s + 8 + i * 4) = amt;
 		*(int*) (s + 0x20 + i * 4) = info[6];
 		if (flags & 1) {
-			fcn_004c51a0(-1, ((ENTITY_RECORD*) g_7f4ca0)[id].entity_id, 0, amt);
+			cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD*) g_7f4ca0)[id].entity_id, 0, amt);
 			g_773d48++;
 		}
 		if (flags & 2) {

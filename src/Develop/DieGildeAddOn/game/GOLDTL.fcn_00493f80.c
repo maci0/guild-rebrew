@@ -30,7 +30,7 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_MapEntityStatRange(unsigned char);
 int __cdecl gm_WalkEntityChain(unsigned short);
 unsigned char __cdecl fcn_00507400(int, int);
-void __cdecl fcn_004c5530(GOLDTL_Msg493*);
+void __cdecl cm_SendCopyEntityData(GOLDTL_Msg493*);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00493f80 */
@@ -158,7 +158,7 @@ void __cdecl fcn_00493f80(void)
 					msg.f58 = *(int*) (chosen + 4);
 					msg.f5c = fcn_00507400(arg, 1);
 					msg.f60 = stat;
-					fcn_004c5530(&msg);
+					cm_SendCopyEntityData(&msg);
 					rec += 2;
 				}
 				flags[*(unsigned short*) e0] = 1;

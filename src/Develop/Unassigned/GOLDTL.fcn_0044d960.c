@@ -4,7 +4,7 @@
 char* __cdecl vfs_ReadCString(void* stream, char* text);
 char* __cdecl fcn_0064d1a0(char*, int);
 
-void __cdecl fcn_0044d960(void* r, int* o)
+void __cdecl d3_ReadMatBumpMap(void* r, int* o)
 {
 	char buf[0x100];
 	char* p;

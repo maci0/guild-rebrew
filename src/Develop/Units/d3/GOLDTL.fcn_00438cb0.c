@@ -4,7 +4,7 @@
 extern int g_67a370;
 #include "Develop/Units/d3/d3_camera.h"
 
-void __cdecl fcn_00438ac0(char*, int);
+void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl fcn_00438af0(unsigned char);
 void __cdecl d3_BuildEulerRotationMatrix(float*, char*);
 void __cdecl d3_TraverseSceneObjects(int, char*, int, void*);
@@ -15,7 +15,7 @@ void __cdecl d3_SetObjectRotation(char* o, int* v)
 	float n[4];
 	float* p;
 
-	fcn_00438ac0(o, 1);
+	d3_InvalidateSubTreeFlags(o, 1);
 	p = (float*) (o + 0x84);
 	*(int*) p = v[0];
 	*(int*) (o + 0x88) = v[1];

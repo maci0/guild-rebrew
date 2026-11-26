@@ -26,7 +26,7 @@ extern char g_772c10[];
 extern char s_68a14c[];
 extern char s_68a130[];
 
-int __cdecl fcn_00500e20(int*);
+int __cdecl gm_GetSeason(int*);
 int __cdecl msx_FindActiveGroup(void);
 int __cdecl fcn_004c2820(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -58,7 +58,7 @@ void __cdecl fcn_004c2100(void)
 	}
 	j = 0;
 	kind = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category;
-	cls = fcn_00500e20((int*) &gm_GameTime);
+	cls = gm_GetSeason((int*) &gm_GameTime);
 	i = msx_FindActiveGroup();
 	if (i >= 0) {
 		g_688118[i].active = j;

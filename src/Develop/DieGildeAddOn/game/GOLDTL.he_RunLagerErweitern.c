@@ -4,14 +4,14 @@ extern pos14_7f4c00 gm_GameTime;
 extern char* g_aed32c;
 extern char g_7f4ca4[];
 
-int __cdecl fcn_00500cb0(void*, char*);
+int __cdecl gm_CompareGameTime(void*, char*);
 void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl he_FreeAction(char*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendPacketFieldValue(unsigned char, unsigned char, int, void*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_0050dc90(int);
 int __cdecl fcn_005049a0(void*);
@@ -46,14 +46,14 @@ void __cdecl he_RunLagerErweitern(char* action)
 	default:
 		return;
 	}
-	if (fcn_00500cb0(q, (char*) &gm_GameTime) >= 0)
+	if (gm_CompareGameTime(q, (char*) &gm_GameTime) >= 0)
 		return;
 	v5[1] = 1;
 	gm_ResolveEntityById(0, (void**) v5, 0, *(unsigned int*) (action + 0xac));
 	if (v5[0]) {
 		cm_BeginPacketFieldDelta((char*) v5[0], *(int*) ((char*) v5[0] + 2));
 		cm_AppendPacketFieldValue(4, 1, (v5[0] - (int) g_aed32c) + 0xe, &v5[1]);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		if (--*(int*) (action + 0xb0) <= 0) {
 		msg = 0x606;
 		ent = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (action + 0x10));

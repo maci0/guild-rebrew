@@ -36,7 +36,7 @@ void __cdecl d2_CenterDialogWindows(char* dlg);
 void __cdecl d2_SetForm(char* dlg, int page);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl io_AppendText(int id, ...);
-float __cdecl fcn_004fc460(Gfx* g);
+float __cdecl gm_GetCityStatsSummary(Gfx* g);
 void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int rec);
 char* __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
 void __cdecl fcn_0046fac0(int a, int y, char* text, int rec);
@@ -92,7 +92,7 @@ void __cdecl fcn_005d42e0(void)
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1f0e, (int) g_773d75 * 0x2f4 + 0x868080, 0x7f4c00);
-	fcn_004fc460(&gfx);
+	gm_GetCityStatsSummary(&gfx);
 	d2_SetForm(dlg, 2);
 	io_AppendText(0x1f14, (int) g_773d4c);
 	n = (int) ((gfx.f[9] + dbl_1_0) * g_662cc0);

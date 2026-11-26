@@ -5,7 +5,7 @@ extern int g_fb98f4;
 extern int g_fb9598;
 extern int g_fc2700;
 
-char __cdecl fcn_004378c0(int type, unsigned int flags);
+char __cdecl d3_MatchObjectTypeMask(int type, unsigned int flags);
 
 /* ADDRESS: GOLD 0x00438d40 */
 char __cdecl d3_VisitSceneObjectsUntilStopped(char* scene, char* node, unsigned int flags,
@@ -19,7 +19,7 @@ char __cdecl d3_VisitSceneObjectsUntilStopped(char* scene, char* node, unsigned 
 	if (node != 0) {
 		do {
 			result = 1;
-			if (fcn_004378c0(*(int*) (node + 0x218), flags)) {
+			if (d3_MatchObjectTypeMask(*(int*) (node + 0x218), flags)) {
 				result = callback(node, context);
 				if (!result) {
 					return 0;

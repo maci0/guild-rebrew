@@ -6,7 +6,7 @@ extern float g_6628cc;
 extern int g_6b7fdc;
 
 char* __cdecl m_alloc(int, char*);
-void __cdecl fcn_0042f420(int, int, char*);
+void __cdecl vfs_BuildDirPath(int, int, char*);
 unsigned char __cdecl fcn_00401590(char*, int*, int*, int);
 char __cdecl fcn_00401650(char*, unsigned char*, unsigned char*, int);
 void __cdecl d3_LoadFloorTexture(int*, char*, int);
@@ -79,7 +79,7 @@ int* __cdecl fcn_0043fa10(char* floorSpec)
 		v6[4] = (int) dst;
 		copy_43fa10(dst, *(void**) (floorSpec + 0x40), *v6 * *v6);
 	} else {
-		fcn_0042f420(g_1041d08, g_6b7fdc, path);
+		vfs_BuildDirPath(g_1041d08, g_6b7fdc, path);
 		strcat(path, "boden/");
 		{ int j = 0; do { prefix[j] = path[j]; } while (path[j++]); }
 		strcat(path, floorSpec);

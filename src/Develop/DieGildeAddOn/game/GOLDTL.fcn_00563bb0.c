@@ -16,7 +16,7 @@ extern int g_774800;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_StartAction0x1e(char* e)
@@ -48,5 +48,5 @@ void __cdecl he_StartAction0x1e(char* e)
 		return;
 	}
 	*(unsigned short*) (t + 0x5a) |= 0x40;
-	fcn_004c5420(*(int*) (t + 1), 0x5a, 2, 0x40, 0);
+	cm_RequestChangeBits(*(int*) (t + 1), 0x5a, 2, 0x40, 0);
 }

@@ -18,9 +18,9 @@ void __cdecl fcn_005c9220(int*);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl gm_SelectRandomEntityCandidate(unsigned short*);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c4ef0(char*);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_SendTraceEnd(char*);
+void __cdecl cm_SendCopyEntityData(void*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14ce8e0;
 extern int d2_CurrentElementId;
@@ -109,9 +109,9 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 			*(unsigned int*) (evt + 0x84) = timeout;
 			*(unsigned int*) (evt + 0x60) = *(unsigned int*) (entity + 2);
 			*(unsigned int*) (evt + 0x58) = gm_SelectRandomEntityCandidate(entity);
-			fcn_004c4eb0((char*) 0x6ac4c0);
-			fcn_004c5530(evt);
-			fcn_004c4ef0((char*) 0x6ac4c0);
+			cm_SendLogAction((char*) 0x6ac4c0);
+			cm_SendCopyEntityData(evt);
+			cm_SendTraceEnd((char*) 0x6ac4c0);
 			io_FormatTextBuffer(text, 0x1709, *entity);
 			fcn_00526120(text, 0);
 			g_774654 = 1;

@@ -34,7 +34,7 @@ void __cdecl fcn_004c09b0(void);
 void __cdecl d3snd_StopAllObjectSounds(void);
 void __cdecl fcn_004230e0(int p);
 void __cdecl hst_ResetHistoryState(void);
-void __cdecl fcn_004b3b60(void);
+void __cdecl gm_ClearMissionJobs(void);
 void __cdecl he_FreeAllActions(void);
 void __cdecl d2_ClearActionPopupSlots(void);
 void __cdecl fcn_00545550(void);
@@ -93,7 +93,7 @@ void __cdecl fcn_0053fa80(void)
 		}
 	}
 	hst_ResetHistoryState();
-	fcn_004b3b60();
+	gm_ClearMissionJobs();
 	he_FreeAllActions();
 	d2_ClearActionPopupSlots();
 	fcn_00545550();

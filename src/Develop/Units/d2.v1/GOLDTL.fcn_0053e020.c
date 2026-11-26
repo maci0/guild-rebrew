@@ -28,7 +28,7 @@ typedef struct {
 	char b[5];
 } Name5_53e020;
 
-int __cdecl fcn_004fdec0();
+int __cdecl gm_FindHeadIconIndex();
 Name6_53e020 __cdecl fcn_00506d50(int);
 int __cdecl io_AppendText();
 int __cdecl d2_OpenMessageBox();
@@ -131,7 +131,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 					if (d2_ShowChooseProfessionDialog(0xc6) != 0) {
 						v11 = fcn_00506d50((unsigned char) g_7e23e3);
 						*(Name5_53e020*) &g_7e2430 = *(Name5_53e020*) &v11;
-						g_7e2468 = fcn_004fdec0(0x6a3db4) + 0x639;
+						g_7e2468 = gm_FindHeadIconIndex(0x6a3db4) + 0x639;
 					} else {
 						d3_SelectSceneContext(0, 0);
 						v12 = 0;

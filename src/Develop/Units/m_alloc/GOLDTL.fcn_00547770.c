@@ -33,13 +33,13 @@ int __cdecl rand(void);
 
 int __cdecl fcn_0042e410();
 float __cdecl fcn_0042e450();
-int __cdecl fcn_004c4450();
-int __cdecl fcn_004c4480();
+int __cdecl cm_GetCommandStatus();
+int __cdecl cm_GetCommandResult();
 int __cdecl cm_BeginPacketFieldDelta();
 int __cdecl cm_AppendPacketFieldDelta();
-int __cdecl fcn_004c4fc0();
-int __cdecl fcn_004c5150();
-int __cdecl fcn_004c5360();
+int __cdecl cm_RequestAllocSpieler();
+int __cdecl cm_RequestMoveCredits();
+int __cdecl cm_RequestChangeAttribute();
 int __cdecl fcn_00507400();
 int __cdecl gm_CalculateGebaeudeValue();
 int __cdecl fcn_0050d170();
@@ -207,19 +207,19 @@ void __cdecl fcn_00547770(void)
                 e2 = fcn_0050d170(0x27) * 2;
                 lvl = 0x2d;
             }
-            u = fcn_004c4fc0(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0, 0);
+            u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0, 0);
             if (u != -1) {
-                while (fcn_004c4450(u) == 0) {
+                while (cm_GetCommandStatus(u) == 0) {
                     fcn_00535960();
                 }
             }
-            if (fcn_004c4450(u) == 1) {
+            if (cm_GetCommandStatus(u) == 1) {
                 int two = 2;
-                p = (int *)fcn_004c4480(u);
-                fcn_004c5150(p[1], -1, g_773d75, e2);
+                p = (int *)cm_GetCommandResult(u);
+                cm_RequestMoveCredits(p[1], -1, g_773d75, e2);
                 cm_BeginPacketFieldDelta(p, p[1]);
                 cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
-                fcn_004c5360();
+                cm_RequestChangeAttribute();
                 return;
             }
             return;
@@ -340,20 +340,20 @@ void __cdecl fcn_00547770(void)
                     lvl = fcn_00507400(5, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
-            u = fcn_004c4fc0(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
+            u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
                              fcn_0042e410(2));
             if (u != -1) {
-                while (fcn_004c4450(u) == 0) {
+                while (cm_GetCommandStatus(u) == 0) {
                     fcn_00535960();
                 }
             }
-            if (fcn_004c4450(u) == 1) {
+            if (cm_GetCommandStatus(u) == 1) {
                 int two = 2;
-                p = (int *)fcn_004c4480(u);
-                fcn_004c5150(p[1], -1, g_773d75, e2);
+                p = (int *)cm_GetCommandResult(u);
+                cm_RequestMoveCredits(p[1], -1, g_773d75, e2);
                 cm_BeginPacketFieldDelta(p, p[1]);
                 cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
-                fcn_004c5360();
+                cm_RequestChangeAttribute();
             }
         }
         return;
@@ -426,20 +426,20 @@ void __cdecl fcn_00547770(void)
                     lvl = fcn_00507400(4, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
-            u = fcn_004c4fc0(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
+            u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
                              fcn_0042e410(2));
             if (u != -1) {
-                while (fcn_004c4450(u) == 0) {
+                while (cm_GetCommandStatus(u) == 0) {
                     fcn_00535960();
                 }
             }
-            if (fcn_004c4450(u) == 1) {
+            if (cm_GetCommandStatus(u) == 1) {
                 int two = 2;
-                p = (int *)fcn_004c4480(u);
-                fcn_004c5150(p[1], -1, g_773d75, e2);
+                p = (int *)cm_GetCommandResult(u);
+                cm_RequestMoveCredits(p[1], -1, g_773d75, e2);
                 cm_BeginPacketFieldDelta(p, p[1]);
                 cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
-                fcn_004c5360();
+                cm_RequestChangeAttribute();
             }
         }
         return;
@@ -536,21 +536,21 @@ void __cdecl fcn_00547770(void)
                     lvl = fcn_00507400(9, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
-            u = fcn_004c4fc0(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
+            u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0,
                              fcn_0042e410(2));
             if (u != -1) {
-                while (fcn_004c4450(u) == 0) {
+                while (cm_GetCommandStatus(u) == 0) {
                     fcn_00535960();
                 }
             }
-            if (fcn_004c4450(u) == 1) {
+            if (cm_GetCommandStatus(u) == 1) {
                 int two = 2;
-                p = (int *)fcn_004c4480(u);
-                fcn_004c5150(p[1], -1, g_773d75, e2);
+                p = (int *)cm_GetCommandResult(u);
+                cm_RequestMoveCredits(p[1], -1, g_773d75, e2);
                 cm_BeginPacketFieldDelta(p, p[1]);
                 cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
                 cm_AppendPacketFieldDelta(1, 1, 0xc, &v);
-                fcn_004c5360();
+                cm_RequestChangeAttribute();
             }
         }
         return;
@@ -647,19 +647,19 @@ void __cdecl fcn_00547770(void)
                     lvl = fcn_00507400(0xd, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
-            u = fcn_004c4fc0(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0, v);
+            u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0, v);
             if (u != -1) {
-                while (fcn_004c4450(u) == 0) {
+                while (cm_GetCommandStatus(u) == 0) {
                     fcn_00535960();
                 }
             }
-            if (fcn_004c4450(u) == 1) {
+            if (cm_GetCommandStatus(u) == 1) {
                 int two = 2;
-                p = (int *)fcn_004c4480(u);
-                fcn_004c5150(p[1], -1, g_773d75, e2);
+                p = (int *)cm_GetCommandResult(u);
+                cm_RequestMoveCredits(p[1], -1, g_773d75, e2);
                 cm_BeginPacketFieldDelta(p, p[1]);
                 cm_AppendPacketFieldDelta(1, 1, 0xd, &two);
-                fcn_004c5360();
+                cm_RequestChangeAttribute();
             }
         }
         return;

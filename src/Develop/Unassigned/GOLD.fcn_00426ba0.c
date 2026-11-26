@@ -2,7 +2,7 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 extern int g_0063319c;
 extern int* g_6b7d78;
-char* __cdecl fcn_00422760(int, int*);
+char* __cdecl sb_FindVoiceBySample(int, int*);
 void __cdecl sb_StopVoice(void*, int);
 #define I32(p) (*(int*)(p))
 /* ADDRESS: GOLD 0x00426ba0 */
@@ -41,12 +41,12 @@ int __cdecl fcn_00426ba0(char* target)
                 row = *(char**)(bank + 0x138) + i * 0x40;
                 if (*(char**)(row + 0x38)) {
                     cursor = 0;
-                    voice = fcn_00422760((int)row, &cursor);
+                    voice = sb_FindVoiceBySample((int)row, &cursor);
                     while (voice) {
                         sb_StopVoice(voice, 0);
                         I32(voice + 4) = 0;
                         cursor++;
-                        voice = fcn_00422760(I32(bank + 0x138) + i * 0x40, &cursor);
+                        voice = sb_FindVoiceBySample(I32(bank + 0x138) + i * 0x40, &cursor);
                     }
                     row = *(char**)(bank + 0x138) + i * 0x40;
                     if (row[0x36] == 1)

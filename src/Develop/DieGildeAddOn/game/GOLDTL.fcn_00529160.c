@@ -12,17 +12,17 @@ extern char s_6a2e68[];
 extern char s_6a2e70[];
 extern char s_6a2e78[];
 
-extern void __cdecl fcn_00529000(int, char*);
-extern void __cdecl fcn_00529060(int, char*);
+extern void __cdecl he_AddActionActor(int, char*);
+extern void __cdecl he_RemoveActionActor(int, char*);
 extern void __cdecl gm_CountBuildingWorkers(char*);
 extern int __cdecl he_CountActionActors(char*);
 extern void __cdecl he_FreeAction(char*);
 extern int __cdecl fcn_004c5620(char, char*);
 extern void __cdecl cm_BeginPacketFieldDelta(char*, int);
-extern int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
-extern void __cdecl fcn_004c53a0(void);
+extern int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
+extern void __cdecl cm_SendSetAttribute(void);
 extern char* __cdecl ch_CreateAction(char*, int, ...);
-extern int __cdecl fcn_00500e20(int*);
+extern int __cdecl gm_GetSeason(int*);
 extern int __cdecl init_EnsureObjektSceneContext(char*);
 extern int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char*);
 extern void* __cdecl evt_FindScriptById(int);
@@ -88,7 +88,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		} else {
 			contextIdx = init_AllocateGebaeudeSceneSlot(activeRec);
 		}
-		cls = fcn_00500e20((int*) &gm_GameTime);
+		cls = gm_GetSeason((int*) &gm_GameTime);
 		tick = g_7f4c04 & 0xffff;
 		if ((((float) (int) tick < g_696550[cls] && g_696540[cls] <= (float) (int) tick)
 		     || rec->type == 4 || rec->type == 0x13 || rec->type == 0x1d)
@@ -116,7 +116,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		}
 	}
 	if (old != 0) {
-		fcn_00529060(slot->id, (char*) old);
+		he_RemoveActionActor(slot->id, (char*) old);
 		switch (*old) {
 		case 3:
 		case 4:
@@ -169,7 +169,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		}
 	}
 	if (newShown != 0) {
-		fcn_00529000(slot->id, (char*) newShown);
+		he_AddActionActor(slot->id, (char*) newShown);
 		switch (*newShown) {
 		case 3:
 		case 4:
@@ -187,7 +187,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		return;
 	}
 	cm_BeginPacketFieldDelta((char*) slot, slot->handle);
-	fcn_004c4700(1, 1, 0x180, &type);
-	fcn_004c53a0();
+	cm_AppendCommandSyncField(1, 1, 0x180, &type);
+	cm_SendSetAttribute();
 	slot->shown = (char*) newShown;
 }

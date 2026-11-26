@@ -23,7 +23,7 @@ char* __cdecl gm_FindEntityActiveItem(char* a1);
 char* __cdecl gm_FindOrCreateEntitySlot(char* rec, char* e);
 char __cdecl fcn_0045b990(char* map, float* pos, int* col, int* row, float* height);
 void __cdecl fcn_00533a40(char* a);
-int __cdecl fcn_004c67c0(int a1, void* a2);
+int __cdecl cm_SendUpdateCutsceneEntitySlot(int a1, void* a2);
 
 /* ADDRESS: GOLDTL 0x004d1020 */
 int __cdecl fcn_004d1020(char* context, char* e, char* obj, int col, int row)
@@ -97,5 +97,5 @@ fail:
 	if (*(unsigned char*) (e + 0x1c4) == 1 || *(unsigned char*) (e + 0x1c4) == 2 || *(unsigned char*) (e + 0x1c4) == 3) {
 		m.f1c = 1;
 	}
-	return fcn_004c67c0(*(int*) (context + 0x10), &m);
+	return cm_SendUpdateCutsceneEntitySlot(*(int*) (context + 0x10), &m);
 }

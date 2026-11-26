@@ -1,12 +1,12 @@
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c5120(unsigned short a1)
+void __cdecl cm_RequestFreeEntity(unsigned short entityId)
 {
 	char buf[0x9c];
 
 	buf[0] = 0xe;
-	*(unsigned short*) (buf + 0x10) = a1;
-	fcn_004c4330(buf);
+	*(unsigned short*) (buf + 0x10) = entityId;
+	cm_EnqueueClientPacket(buf);
 }

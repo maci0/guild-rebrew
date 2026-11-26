@@ -25,7 +25,7 @@ extern unsigned char g_773d75;
 extern int g_100f884;
 extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-int __cdecl fcn_00500cb0(char*, char*);
+int __cdecl gm_CompareGameTime(char*, char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_00545780(char*);
@@ -34,8 +34,8 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, char*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c30a0(int, int, char*, int, int);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x00554f00 */
@@ -58,7 +58,7 @@ void __cdecl fcn_00554f00(char* obj)
 		return;
 	}
 	name = obj + 0x52;
-	if (fcn_00500cb0(name, gm_GameTime) == 1) {
+	if (gm_CompareGameTime(name, gm_GameTime) == 1) {
 		return;
 	}
 	p = gm_LookupEntityRecordById(*(int*) (obj + 0xb0));
@@ -114,7 +114,7 @@ state_zero:
 	if (*(int*) (obj + 0xb4) == 0) {
 		cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, obj + 0xac);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		*(int*) (obj + 0xb4) = 1;
 	}
 	c = *(unsigned char*) (obj + 0xac);
@@ -131,10 +131,10 @@ state_zero:
 	}
 	c = *(unsigned char*) (obj + 0xac);
 	if (c == 2) {
-		fcn_004c30a0(-7, 0, g_6a5e40, 0, 0x64);
-		fcn_004c30a0(-8, 0, g_6a5e24, 0, 0xfa);
-		fcn_004c30a0(-8, 0, (*(char*) (p + 9) == 0) ? g_6a5e10 : g_6a5e00, (int) c, 0x64);
-		fcn_004c30a0(-7, 0, g_67d908, -1, 0);
+		d3snd_QueueSound(-7, 0, g_6a5e40, 0, 0x64);
+		d3snd_QueueSound(-8, 0, g_6a5e24, 0, 0xfa);
+		d3snd_QueueSound(-8, 0, (*(char*) (p + 9) == 0) ? g_6a5e10 : g_6a5e00, (int) c, 0x64);
+		d3snd_QueueSound(-7, 0, g_67d908, -1, 0);
 		goto tail;
 	}
 	if (c <= 3) {
@@ -144,18 +144,18 @@ state_zero:
 	} else {
 		s = g_6a438c;
 	}
-	fcn_004c30a0(-7, 0, s, 0, 0x64);
+	d3snd_QueueSound(-7, 0, s, 0, 0x64);
 	if (c < 7) {
-		fcn_004c30a0(-8, 0, g_6a5dcc, 0, 0xfa);
-		fcn_004c30a0(-8, 0, (*(char*) (p + 9) == 0) ? g_6a5e10 : g_6a5e00, (int) c, 0x64);
+		d3snd_QueueSound(-8, 0, g_6a5dcc, 0, 0xfa);
+		d3snd_QueueSound(-8, 0, (*(char*) (p + 9) == 0) ? g_6a5e10 : g_6a5e00, (int) c, 0x64);
 	} else if (c == 7) {
-		fcn_004c30a0(-7, 0, g_6a5da8, -1, 0x64);
+		d3snd_QueueSound(-7, 0, g_6a5da8, -1, 0x64);
 	} else if (c == 8) {
-		fcn_004c30a0(-7, 0, (char*) 0x6a5d84, -1, 0x64);
+		d3snd_QueueSound(-7, 0, (char*) 0x6a5d84, -1, 0x64);
 	} else if (c == 9) {
-		fcn_004c30a0(-7, 0, (char*) 0x6a5d60, -1, 0x64);
+		d3snd_QueueSound(-7, 0, (char*) 0x6a5d60, -1, 0x64);
 	}
-	fcn_004c30a0(-7, 0, g_67d908, -1, 0);
+	d3snd_QueueSound(-7, 0, g_67d908, -1, 0);
 	goto tail;
 
 	}
@@ -174,16 +174,16 @@ state_zero:
 	}
 	c = *(unsigned char*) (obj + 0xac);
 	if (c == 2) {
-		fcn_004c30a0(-8, 0, g_6a5d3c, 0, 0x64);
+		d3snd_QueueSound(-8, 0, g_6a5d3c, 0, 0x64);
 	} else if (c < 7) {
-		fcn_004c30a0(-8, 0, g_6a5d20, 0, 0x64);
-		fcn_004c30a0(-8, 0, (*(char*) (p + 9) == 0) ? g_6a5e10 : g_6a5e00, (int) c, 0x64);
+		d3snd_QueueSound(-8, 0, g_6a5d20, 0, 0x64);
+		d3snd_QueueSound(-8, 0, (*(char*) (p + 9) == 0) ? g_6a5e10 : g_6a5e00, (int) c, 0x64);
 	} else if (c == 7) {
-		fcn_004c30a0(-7, 0, g_6a5d04, -1, 0x64);
+		d3snd_QueueSound(-7, 0, g_6a5d04, -1, 0x64);
 	} else if (c == 8) {
-		fcn_004c30a0(-7, 0, g_6a5ce8, -1, 0x64);
+		d3snd_QueueSound(-7, 0, g_6a5ce8, -1, 0x64);
 	} else if (c == 9) {
-		fcn_004c30a0(-7, 0, g_6a5ccc, -1, 0x64);
+		d3snd_QueueSound(-7, 0, g_6a5ccc, -1, 0x64);
 	}
 
 tail:

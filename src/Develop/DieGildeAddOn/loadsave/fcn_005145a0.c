@@ -36,15 +36,15 @@ int __cdecl fcn_00476970(int a0);
 int __cdecl gm_RandomMod(unsigned short a0);
 int __cdecl fcn_00469e30(int a0);
 int __cdecl fcn_0046ac30(void);
-void __cdecl fcn_004c5790(char id, char *args);
+void __cdecl cm_RequestSysMessage(char id, char *args);
 int __cdecl cm_SendAllocClientSpieler(int a0, int a1, short a2, char a3, int a4,
                          char a5, char a6, char *a7, char *a8);
-int __cdecl fcn_004c4450(int i);
-int __cdecl fcn_004c4480(int i);
+int __cdecl cm_GetCommandStatus(int i);
+int __cdecl cm_GetCommandResult(int i);
 int __cdecl fcn_004b3d80(int a0, int a1, int a2);
 int __cdecl d2_ShowMissionForEntity(int a0);
-int __cdecl fcn_004c5150(int a0, int a1, char a2, int a3);
-void __cdecl fcn_004c4860(int a0);
+int __cdecl cm_RequestMoveCredits(int a0, int a1, char a2, int a3);
+void __cdecl cm_SetGameSpeedSetting(int a0);
 
 /* ADDRESS: GOLDTL 0x005145a0 */
 int __cdecl fcn_005145a0(char *path)
@@ -98,7 +98,7 @@ int __cdecl fcn_005145a0(char *path)
     fcn_0046ac30();
     if (*(int *) &g_77494c & 1) {
         msg[0] = *(unsigned char *) &g_6a375c;
-        fcn_004c5790(6, (char *) msg);
+        cm_RequestSysMessage(6, (char *) msg);
     }
     session = cm_SendAllocClientSpieler(0xffff, 0xffff, *(unsigned char *) 0x7e23e2,
                            *(unsigned char *) 0x7e23e3,
@@ -116,18 +116,18 @@ int __cdecl fcn_005145a0(char *path)
                                *(unsigned char *) 0x7e23e9,
                                (char *) 0x7e23ea, (char *) 0x7e240a);
     }
-    while (fcn_004c4450(session) == 0) {
+    while (cm_GetCommandStatus(session) == 0) {
         main_PumpWindowMessages();
         fcn_00535960();
     }
-    handle = fcn_004c4480(session);
+    handle = cm_GetCommandResult(session);
     if (*(int *) &g_77494c & 1) {
         *(unsigned char *) &g_6a3440 = 0xff;
         msg[0] = -1;
         stamp = (int) timeGetTime();
         *(int *) 0x7e1f60 = stamp;
         msg[1] = stamp;
-        fcn_004c5790(9, (char *) msg);
+        cm_RequestSysMessage(9, (char *) msg);
     }
     while (*(unsigned char *) &g_6a3440 == 0xfe) {
         main_PumpWindowMessages();
@@ -140,7 +140,7 @@ int __cdecl fcn_005145a0(char *path)
     }
     result = fcn_0050b750(*(int *) 0x7747fc == 0 ? 2000 : 500000,
                           *(unsigned char *) &g_773d75);
-    fcn_004c5150(*(int *) (handle + 4), -1, *(unsigned char *) &g_773d75,
+    cm_RequestMoveCredits(*(int *) (handle + 4), -1, *(unsigned char *) &g_773d75,
                  result);
     while ((*(int *) &g_77494c & 4) == 0) {
         main_PumpWindowMessages();
@@ -166,7 +166,7 @@ int __cdecl fcn_005145a0(char *path)
             p += 0x2f4;
             i++;
         } while ((int) p < 0x868c30);
-        fcn_004c4860(2);
+        cm_SetGameSpeedSetting(2);
     }
     *(int *) 0x7725c8 = 0;
     if (*(signed char *) &g_6a3440 > -1 && *(signed char *) &g_6a3440 < 6) {

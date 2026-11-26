@@ -11,5 +11,5 @@ int __cdecl fcn_004c5250(int a1, unsigned short a2, int a3)
 	*(int*) (buf + 0x10) = a1;
 	*(unsigned short*) (buf + 0x14) = a2;
 	*(int*) (buf + 0x16) = a3;
-	return fcn_004c4330((struct pkt99*) buf);
+	return cm_EnqueueClientPacket((struct pkt99*) buf);
 }

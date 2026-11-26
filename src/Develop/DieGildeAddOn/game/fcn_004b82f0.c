@@ -9,7 +9,7 @@ char *__cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(char *, int);
 int __cdecl fcn_004a55c0(char *, int, int *, int, float, int *);
 int __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, char *, int, int, int);
 
@@ -42,7 +42,7 @@ int __cdecl fcn_004b82f0(int *obj)
 	t = (char *) (0x7f4ca0 + type * 0x21c);
 	r = gm_RandomMod(5) & 0xffff;
 	neg = r * 2 + 6;
-	fcn_004c54c0(h->f4, *(int *) (t + 4), -neg, 1);
+	cm_RequestCopyEntityData(h->f4, *(int *) (t + 4), -neg, 1);
 	s = buf;
 	io_FormatTextBuffer(s, *(unsigned short *) ((char *) obj + 4) + 0x12e7,
 		*(unsigned short *) t, *(unsigned short *) t, *(unsigned short *) t);

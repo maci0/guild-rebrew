@@ -8,7 +8,7 @@
 
 void __cdecl d3_VisitSceneObjects(int, int, int, int, int);
 
-void __cdecl fcn_00438ac0(int a1, int a2)
+void __cdecl d3_InvalidateSubTreeFlags(int node, int clearBit)
 {
-	d3_VisitSceneObjects(*(int*) CAMERA_HELPER_LIST, a1, 0x1ff, CAMERA_HELPER_CALLBACK, a2 & 0xff);
+	d3_VisitSceneObjects(*(int*) CAMERA_HELPER_LIST, node, 0x1ff, CAMERA_HELPER_CALLBACK, clearBit & 0xff);
 }

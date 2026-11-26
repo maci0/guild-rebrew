@@ -43,14 +43,14 @@ extern unsigned char g_6a375c;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, ...);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
-void __cdecl fcn_004c5530(Msg499a*);
+void __cdecl cm_SendCopyEntityData(Msg499a*);
 
 #pragma optimize("y", off)
 int __cdecl fcn_00499ad0(char* e)
@@ -72,11 +72,11 @@ int __cdecl fcn_00499ad0(char* e)
 	if (r == 0) {
 		return 0;
 	}
-	fcn_004c51a0(*(int*) (r + 2), *(int*) (e + 4), 0, 0x3e80);
+	cm_RequestTransferCurrencyNoKill(*(int*) (r + 2), *(int*) (e + 4), 0, 0x3e80);
 	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 	cm_AppendPacketFieldDelta(1, 1, 0xd, &ret);
-	fcn_004c5360();
-	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0, 0x4000);
+	cm_RequestChangeAttribute();
+	cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0, 0x4000);
 	st = (*(GAME_TIMESTAMP*)&gm_GameTime);
 	gm_AddTime(&st, gm_RandomMod(4) + 1, gm_RandomMod(8) * 7, 0);
 	if (e[2] == 5) {
@@ -117,7 +117,7 @@ int __cdecl fcn_00499ad0(char* e)
 				m.at = st;
 				m.who = 2;
 				m.other = *(int*) (e + 4);
-				fcn_004c5530(&m);
+				cm_SendCopyEntityData(&m);
 				i++;
 			}
 		}

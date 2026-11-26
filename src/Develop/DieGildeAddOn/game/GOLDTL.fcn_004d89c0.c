@@ -27,8 +27,8 @@ extern float g_664144;
 
 int __cdecl gm_RandomMod(int);
 unsigned char __cdecl fcn_0045b990(int, int, int*, int*, int*);
-int __cdecl fcn_004c4450(int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+int __cdecl cm_GetCommandStatus(int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl fcn_004c6680(int, int, int, int);
 int __cdecl fcn_004c6940(int, int, Ev_4d89c0*);
 int __cdecl gm_GetEquippedCombatGear(int);
@@ -112,7 +112,7 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 			}
 		}
 		v8 = gm_FindOrCreateEntitySlot(v9, a2);
-		if (*(int*) (v8 + 8) == -1 || fcn_004c4450(*(int*) (v8 + 8))) {
+		if (*(int*) (v8 + 8) == -1 || cm_GetCommandStatus(*(int*) (v8 + 8))) {
 			*(unsigned int*) (v8 + 8) = 0xffffffff;
 			if (*(int*) (v8 + 4) == 0) {
 				w = gm_FindEntityActiveItem(a2);
@@ -121,7 +121,7 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 			}
 		}
 	}
-	fcn_004c5420(*(unsigned int*) (actor + 4), 0x1c8, 4, 0x20000000, 0);
+	cm_RequestChangeBits(*(unsigned int*) (actor + 4), 0x1c8, 4, 0x20000000, 0);
 	return fcn_004c6940(actor, 2, &ev);
 fail:
 	return 0xffffffff;

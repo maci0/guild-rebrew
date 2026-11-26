@@ -3,9 +3,9 @@
 
 typedef struct { int v[6]; } Blk4e7d40;
 
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
-int __cdecl fcn_004c6360(void* info);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
+int __cdecl cm_SendAssignOffice(void* info);
 
 typedef struct
 {
@@ -63,16 +63,16 @@ int __cdecl amt_ApplyForOffice(char* entityRecord, int officeKind)
 			} else {
 				info.owner = *(int*) (entityRecord + 4);
 				info.sel = amt_OfficeSlots[i].id;
-				fcn_004c4eb0((char*) 0x67eef4);
-				res = fcn_004c6360(&info);
-				fcn_004c4ef0((char*) 0x67eef4);
+				cm_SendLogAction((char*) 0x67eef4);
+				res = cm_SendAssignOffice(&info);
+				cm_SendTraceEnd((char*) 0x67eef4);
 				return res;
 			}
 		}
 		if (flag) {
-			fcn_004c4eb0((char*) 0x67eef4);
-			res = fcn_004c6360(&info);
-			fcn_004c4ef0((char*) 0x67eef4);
+			cm_SendLogAction((char*) 0x67eef4);
+			res = cm_SendAssignOffice(&info);
+			cm_SendTraceEnd((char*) 0x67eef4);
 			return res;
 		}
 	}
@@ -87,8 +87,8 @@ int __cdecl amt_ApplyForOffice(char* entityRecord, int officeKind)
 	}
 	info.sel = amt_OfficeSlots[i].id;
 	info.owner = *(int*) (entityRecord + 4);
-	fcn_004c4eb0((char*) 0x67eef4);
-	res = fcn_004c6360(&info);
-	fcn_004c4ef0((char*) 0x67eef4);
+	cm_SendLogAction((char*) 0x67eef4);
+	res = cm_SendAssignOffice(&info);
+	cm_SendTraceEnd((char*) 0x67eef4);
 	return res;
 }

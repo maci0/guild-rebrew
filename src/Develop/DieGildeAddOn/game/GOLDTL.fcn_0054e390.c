@@ -19,9 +19,9 @@ int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004d5450(char*);
 int __cdecl fcn_004d5110(char*, char*, char*, char*);
-int __cdecl fcn_004c4450(int);
-int __cdecl fcn_004c4480(int);
-void __cdecl fcn_004c5c80(int);
+int __cdecl cm_GetCommandStatus(int);
+int __cdecl cm_GetCommandResult(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 int __cdecl fcn_004c5620(char, char*);
 int __cdecl fcn_004c5980(void*);
@@ -49,7 +49,7 @@ void __cdecl fcn_0054e390(char* e)
 		n = 1;
 		*(int*) (e + 0x70) = 1;
 	}
-	if (*(int*) (e + 0x84) != -1 && !fcn_004c4450(*(int*) (e + 0x84))) {
+	if (*(int*) (e + 0x84) != -1 && !cm_GetCommandStatus(*(int*) (e + 0x84))) {
 		return;
 	}
 	*(int*) (e + 0x84) = -1;
@@ -75,7 +75,7 @@ void __cdecl fcn_0054e390(char* e)
 					u = gm_LookupEntityRecordById(*(int*) p);
 					if (u != 0) {
 						fcn_00529160(own, 0, *(unsigned short*) u, e);
-						fcn_004c5c80(*(int*) p);
+						cm_SendCancelCharacterActions(*(int*) p);
 						fcn_004c5da0(*(int*) p, *(int*) (own + 1), -1, 0, 0,
 						             (char*) 0x6a5ad8);
 					} else {
@@ -112,7 +112,7 @@ void __cdecl fcn_0054e390(char* e)
 				if (*(int*) p != -1) {
 					u = gm_LookupEntityRecordById(*(int*) p);
 					if (u != 0 && *(unsigned char*) (u + 8) > 0) {
-						fcn_004c5c80(*(int*) p);
+						cm_SendCancelCharacterActions(*(int*) p);
 						fcn_004c5da0(*(int*) p, *(int*) (own + 1), *(int*) (slot + 2), 0, 0,
 						             (char*) 0x6a5ad8);
 						fcn_00529160(own, 0, *(unsigned short*) u, e);
@@ -288,8 +288,8 @@ label_54e6a1:
 			return;
 		}
 	case 4:
-		if (fcn_004c4450(*(int*) (e + 0xb4))) {
-			*(int*) (e + 0xb8) = *(int*) fcn_004c4480(*(int*) (e + 0xb4));
+		if (cm_GetCommandStatus(*(int*) (e + 0xb4))) {
+			*(int*) (e + 0xb8) = *(int*) cm_GetCommandResult(*(int*) (e + 0xb4));
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 			*(int*) (e + 0x70) = 5;
@@ -324,7 +324,7 @@ label_54e6a1:
 				if (*(int*) p != -1) {
 					u = gm_LookupEntityRecordById(*(int*) p);
 					if (u != 0) {
-						fcn_004c5c80(*(int*) p);
+						cm_SendCancelCharacterActions(*(int*) p);
 						fcn_004c5da0(*(int*) p, *(int*) (own + 1), *(int*) (slot + 2), 0, 0,
 						             (char*) 0x6a5ad8);
 						fcn_00529160(own, 0, *(unsigned short*) u, 0);

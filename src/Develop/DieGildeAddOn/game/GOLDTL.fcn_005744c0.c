@@ -23,21 +23,21 @@ void __cdecl fcn_004550b0(int, int);
 void __cdecl fcn_004550e0(int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl fcn_004bd4e0(int, int);
-int __cdecl fcn_004c4450(int);
-int __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+int __cdecl cm_GetCommandResult(int);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-int __cdecl fcn_004c4f30(unsigned char, int, int, int);
-int __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c5360();
-void __cdecl fcn_004c5420(int, int, int, int, int);
+int __cdecl cm_RequestAllocRaum(unsigned char, int, int, int);
+int __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_RequestChangeAttribute();
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_004c5790(int, void*);
-void __cdecl fcn_004c5fd0(int);
+void __cdecl cm_RequestSysMessage(int, void*);
+void __cdecl cm_RequestDestroyBuilding(int);
 void __cdecl fcn_005001e0(void*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
-int __cdecl fcn_00500cb0(int*, int*);
-int __cdecl fcn_00500e20(int);
+int __cdecl gm_CompareGameTime(int*, int*);
+int __cdecl gm_GetSeason(int);
 void __cdecl fcn_005015e0(void*, int, int, int);
 int __cdecl fcn_00509570(int);
 int __cdecl fcn_0050cad0(int*, int*);
@@ -86,21 +86,21 @@ void __cdecl gm_HandleHausbau(int a0)
 	buildAction = a0;
 	savedContext = d3_CurrentContextIndex;
 	v15 = 0;
-	if (*(int*) (buildAction + 0x84) != -1 && !fcn_004c4450(*(int*) (buildAction + 0x84))) {
+	if (*(int*) (buildAction + 0x84) != -1 && !cm_GetCommandStatus(*(int*) (buildAction + 0x84))) {
 		return;
 	}
 	*(int*) (buildAction + 0x84) = -1;
 	v8 = *(int*) (buildAction + 0x70) + 2;
 	switch (v8) {
 	case 2:
-		if (fcn_00500cb0((void*) (buildAction + 0x52), (void*) &gm_GameTime) > 0
+		if (gm_CompareGameTime((void*) (buildAction + 0x52), (void*) &gm_GameTime) > 0
 			|| !(*(unsigned char*) (buildAction + 0x78) & 2)) {
 			break;
 		}
 		if (*(int*) (buildAction + 0xac) != *(int*) ((int) gm_CityEntity + 4)) {
 			v8 = fcn_00508e40(*(int*) (buildAction + 0xac));
 			if (v8) {
-				*(int*) (buildAction + 0xcc) = fcn_004c5150(-1, *(int*) (buildAction + 0xac),
+				*(int*) (buildAction + 0xcc) = cm_RequestMoveCredits(-1, *(int*) (buildAction + 0xac),
 					(v8 & 0xffffff00) | g_773d75, *(int*) (buildAction + 0xb4));
 				v8 = fcn_00509570(v8);
 				if (v8) {
@@ -124,10 +124,10 @@ LfailB:
 		if (*(unsigned char*) (buildAction + 0x78) & 4) {
 			break;
 		}
-		if (!fcn_004c4450(*(int*) (buildAction + 0xcc))) {
+		if (!cm_GetCommandStatus(*(int*) (buildAction + 0xcc))) {
 			break;
 		}
-		if (fcn_004c4450(*(int*) (buildAction + 0xcc)) == 2) {
+		if (cm_GetCommandStatus(*(int*) (buildAction + 0xcc)) == 2) {
 			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
 			return;
 		}
@@ -138,7 +138,7 @@ LfailB:
 		if (!(*(unsigned char*) (buildAction + 0x78) & 2)) {
 			break;
 		}
-		v13 = fcn_004c4f30((v8 & 0xffffff00) | *(unsigned char*) (buildAction + 0xb0),
+		v13 = cm_RequestAllocRaum((v8 & 0xffffff00) | *(unsigned char*) (buildAction + 0xb0),
 			*(int*) (buildAction + 0xac), 0, 1);
 		*(int*) (buildAction + 0xcc) = v13;
 		*(int*) (buildAction + 0x84) = fcn_004c5620(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
@@ -149,13 +149,13 @@ LfailB:
 		if (*(unsigned char*) (buildAction + 0x78) & 4) {
 			break;
 		}
-		if (!fcn_004c4450(*(int*) (buildAction + 0xcc))) {
+		if (!cm_GetCommandStatus(*(int*) (buildAction + 0xcc))) {
 			break;
 		}
-		if (fcn_004c4450(*(int*) (buildAction + 0xcc)) == 2) {
+		if (cm_GetCommandStatus(*(int*) (buildAction + 0xcc)) == 2) {
 			goto LfailB;
 		}
-		v15 = (unsigned char*) fcn_004c4480(*(int*) (buildAction + 0xcc));
+		v15 = (unsigned char*) cm_GetCommandResult(*(int*) (buildAction + 0xcc));
 		if (v15) {
 			*(int*) (buildAction + 0xb8) = *(int*) (v15 + 1);
 			*(int*) (buildAction + 0x10) = *(int*) (v15 + 1);
@@ -360,7 +360,7 @@ LfailB:
 				for (v11 = 0; v11 < 31; v11++) {
 					((int*) v19)[v11] = 0;
 				}
-				fcn_004c5790(0xc, v19);
+				cm_RequestSysMessage(0xc, v19);
 			}
 		}
 		if (*(int*) (buildAction + 0xc8) > *(int*) (buildAction + 0xc4)) {
@@ -378,7 +378,7 @@ LfailB:
 			}
 			fcn_00573e10(buildAction);
 			if (*(int*) (v15 + 0x61)) {
-				v8 = fcn_00500e20((int) &gm_GameTime);
+				v8 = gm_GetSeason((int) &gm_GameTime);
 				if (v8 == 1) {
 					g_773dd4 = (char) v8;
 				}
@@ -418,7 +418,7 @@ LfailB:
 			}
 			fcn_004bd4e0(*(int*) (v15 + 0x61), *(unsigned char*) v15);
 			if (*(unsigned char*) (buildAction + 0x78) & 2) {
-				fcn_004c5420(*(int*) (v15 + 1), 0x5a, 2, 0, 1);
+				cm_RequestChangeBits(*(int*) (v15 + 1), 0x5a, 2, 0, 1);
 				if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {
 					*(int*) v20 = gm_GameTime.a;
 					*(int*) (v20 + 4) = gm_GameTime.b;
@@ -426,7 +426,7 @@ LfailB:
 					*(unsigned short*) (v20 + 12) = (unsigned short) gm_GameTime.d;
 					cm_BeginPacketFieldDelta(v15, *(int*) (v15 + 1));
 					cm_AppendPacketFieldDelta(1, 0xe, 0x69, v20);
-					fcn_004c5360();
+					cm_RequestChangeAttribute();
 				}
 				if (g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind == 6) {
 					if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {
@@ -460,7 +460,7 @@ LfailB:
 				for (v11 = 0; v11 < 31; v11++) {
 					((int*) v19)[v11] = 0;
 				}
-				fcn_004c5790(0xc, v19);
+				cm_RequestSysMessage(0xc, v19);
 			}
 			v9 = *(unsigned char*) v15;
 			if (v9 >= 4 && v9 <= 7) {
@@ -493,11 +493,11 @@ LfailB:
 		*(int*) (buildAction + 0xc8) = *(int*) (buildAction + 0xc4) + 1;
 		fcn_00573e10(buildAction);
 		if ((*(unsigned char*) (buildAction + 0x78) & 2) && v15) {
-			fcn_004c5fd0(*(int*) (v15 + 1));
+			cm_RequestDestroyBuilding(*(int*) (v15 + 1));
 			for (v11 = 0; v11 < 31; v11++) {
 				((int*) v19)[v11] = 0;
 			}
-			fcn_004c5790(0xc, v19);
+			cm_RequestSysMessage(0xc, v19);
 		}
 		d3_SelectSceneContext(savedContext, 1);
 		he_FreeAction(buildAction);

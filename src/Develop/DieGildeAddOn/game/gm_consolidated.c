@@ -8,24 +8,24 @@ extern char s_67fb2c[];
 char* __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c5530(char* msg);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendCopyEntityData(char* msg);
+void __cdecl cm_SendTraceEnd(char* s);
 extern char s_67fb40[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl fcn_004c6ae0(int id, int k);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
 extern char s_67fb50[];
 
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl fcn_004c6ae0(int id, int k);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
 
 /* ADDRESS: GOLDTL 0x004aaa60 */
 int __cdecl fcn_004aaa60(char* actor, int a2, char* x)
@@ -51,9 +51,9 @@ int __cdecl fcn_004aaa60(char* actor, int a2, char* x)
 	*(short*) (msg + 0x64) = g_7f4c0c;
 	msg[0x6d] = (char) gm_RandomMod(0x1d);
 	*(int*) (msg + 0x68) = *(int*) (target + 4);
-	fcn_004c4eb0(s_67fb2c);
-	fcn_004c5530(msg);
-	fcn_004c4ef0(s_67fb2c);
+	cm_SendLogAction(s_67fb2c);
+	cm_SendCopyEntityData(msg);
+	cm_SendTraceEnd(s_67fb2c);
 	return 1;
 }
 
@@ -71,7 +71,7 @@ int __cdecl fcn_004aab30(char* actor, int a2, char* x)
 	if (!target) {
 		return 0;
 	}
-	fcn_004c4eb0(s_67fb40);
+	cm_SendLogAction(s_67fb40);
 	f = fcn_00507e70(actor, target, 4);
 	if (gm_RandomFloat01() + f >= 1.0f) {
 		msg[4] = 0x2e;
@@ -80,10 +80,10 @@ int __cdecl fcn_004aab30(char* actor, int a2, char* x)
 		msg[0x36] = 2;
 		*(int*) (msg + 0x5c) = *(int*) (actor + 4);
 		*(int*) (msg + 0x58) = *(int*) (target + 4);
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 	}
 	fcn_004c6ae0(*(int*) (actor + 4), -2);
-	fcn_004c4ef0(s_67fb40);
+	cm_SendTraceEnd(s_67fb40);
 	return 1;
 }
 
@@ -103,9 +103,9 @@ int __cdecl aip_ExecAnschwaerzen(char* actor, int a2, char* x)
 	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x30) = g_7f4c08;
 	*(short*) (msg + 0x34) = g_7f4c0c;
-	fcn_004c4eb0(s_67fb50);
-	fcn_004c5530(msg);
+	cm_SendLogAction(s_67fb50);
+	cm_SendCopyEntityData(msg);
 	fcn_004c6ae0(*(int*) (actor + 4), -3);
-	fcn_004c4ef0(s_67fb50);
+	cm_SendTraceEnd(s_67fb50);
 	return 1;
 }

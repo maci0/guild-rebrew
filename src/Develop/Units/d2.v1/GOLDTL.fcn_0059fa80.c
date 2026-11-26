@@ -27,7 +27,7 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl io_AppendText(const char* text, int value);
 void __cdecl fcn_00533a60(int screen, int a, int* out, int count, int b,
 	int c);
-void __cdecl fcn_005ca560(void* desc);
+void __cdecl d2_BuildPersonStatusDesc(void* desc);
 void __cdecl fcn_005ca740(int x, int y, int screen, int id, void* desc,
 	int flag);
 int __cdecl gm_LookupEntityRecordById(unsigned int id);
@@ -39,8 +39,8 @@ void* __cdecl fcn_005cd440(void* desc, int a, int b, int c);
 int __cdecl d2_CheckActionBlocker(void* p, int flag);
 int __cdecl fcn_004c5620(int mode, int arg);
 void __cdecl fcn_005100f0(int handle, int value);
-void __cdecl fcn_004c54c0(int a, int b, int c, int d);
-int __cdecl fcn_004c4450(int handle);
+void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
+int __cdecl cm_GetCommandStatus(int handle);
 int __cdecl main_RunFrameLoop(int func, int id);
 
 /* ADDRESS: GOLDTL 0x0059fa80 */
@@ -84,7 +84,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	*(int*) (cmd + 0x14) = 0x19;
 	*(unsigned int*) cmd = (unsigned int) v6;
 	*(unsigned int*) (cmd + 0x30) = 0;
-	fcn_005ca560(cmd);
+	d2_BuildPersonStatusDesc(cmd);
 	fcn_005ca740(*(int*) (cmd + 0x10), *(int*) (cmd + 0x14), d2_CurrentWindowId, 0x54, cmd, 1);
 	g_100f1dc = -1;
 	for (;;) {
@@ -109,7 +109,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 
 						*(int*) (v7 + 0xbc) = gm_GameTime.a;
 						v9 = fcn_004c5620(1, v7);
-						while (v9 != -1 && !fcn_004c4450(v9)) {
+						while (v9 != -1 && !cm_GetCommandStatus(v9)) {
 							main_RunFrameLoop(0, 0x20007);
 						}
 						g_774654 = 1;
@@ -133,7 +133,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 							fcn_004c5620(3, v7);
 							fcn_005100f0(*(unsigned int*) (a0 + 4),
 								0xfffffffe);
-							fcn_004c54c0(*(unsigned int*) &v10[2],
+							cm_RequestCopyEntityData(*(unsigned int*) &v10[2],
 								*(unsigned int*) &v6[2], 0xffffffdf, 1);
 							g_774654 = 1;
 						}

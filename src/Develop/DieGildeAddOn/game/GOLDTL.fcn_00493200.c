@@ -9,7 +9,7 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned 
 				  float a3, float a4, unsigned short* a5);
 void __cdecl cm_BeginPacketFieldDelta(char* obj, int id);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x00493200 */
 int __cdecl fcn_00493200(char* actorEntity, char* a2)
@@ -85,7 +85,7 @@ int __cdecl fcn_00493200(char* actorEntity, char* a2)
 		cm_AppendPacketFieldDelta(1, 1, 0x1c, &b);
 		b = (unsigned char) gm_RandomMod(8);
 		cm_AppendPacketFieldDelta(1, 1, 0x1d, &b);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		return 1;
 	}
 
@@ -102,6 +102,6 @@ other:
 	b = 0xff;
 	cm_AppendPacketFieldDelta(1, 1, 0x1c, &b);
 	cm_AppendPacketFieldDelta(1, 1, 0x1d, &b);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	return 1;
 }

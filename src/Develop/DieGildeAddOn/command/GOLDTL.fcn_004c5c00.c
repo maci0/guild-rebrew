@@ -4,7 +4,7 @@ char g_68ae64[] = "cm_RequestChrMoveToUniverse(): dummyname is too long...";
 
 #include <string.h>
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
 #include "Develop/Units/Error/error_message.h"
 
@@ -21,5 +21,5 @@ void __cdecl cm_RequestChrMoveToUniverse(int a1, int a2, int a3, char* dummyName
 	} else {
 		ReportClientMessage(g_68ae64);
 	}
-	fcn_004c4330(buf);
+	cm_EnqueueClientPacket(buf);
 }

@@ -1,6 +1,6 @@
 int __cdecl gm_FindAndReserveEntity(int a, int b, int c);
 void* __cdecl fcn_004ffff0(int a, int b);
-int __cdecl fcn_004c4330(void* req);
+int __cdecl cm_EnqueueClientPacket(void* req);
 
 /* ADDRESS: GOLDTL 0x004c6090 */
 int __cdecl fcn_004c6090(int a0, char a1, int a2, int a3)
@@ -34,5 +34,5 @@ skip:
 	buf[0x18] = a1;
 	buf[0x1d] = (char) a2;
 	buf[0x1e] = (char) a3;
-	return fcn_004c4330(buf);
+	return cm_EnqueueClientPacket(buf);
 }

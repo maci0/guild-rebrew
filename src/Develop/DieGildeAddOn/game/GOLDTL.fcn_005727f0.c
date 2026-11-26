@@ -28,10 +28,10 @@ extern pos14_7f4c00 gm_GameTime;
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
 
-int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00529160(char*, int, int, int);
@@ -53,7 +53,7 @@ void __cdecl he_RunSuchen(char* e)
 		if (*(int*) (e + 0x14) == 0 && *(int*) (e + 0x18) == 0) {
 			break;
 		}
-		if (fcn_00500cb0((pos14_7f4c00*) (e + 0x52), &gm_GameTime) >= 0) {
+		if (gm_CompareGameTime((pos14_7f4c00*) (e + 0x52), &gm_GameTime) >= 0) {
 			return;
 		}
 		gm_ResolveEntityById((void**) (&r), 0, 0, *(int*) (e + 0xb0));
@@ -64,7 +64,7 @@ void __cdecl he_RunSuchen(char* e)
 		p = &((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) (e + 0xac)];
 		amt = (gm_RandomMod((unsigned short) (p->value_036 * 40)) + p->value_036 * 40)
 		    * (*(int*) (e + 0x18) + *(int*) (e + 0x14));
-		fcn_004c51f0(*(int*) (e + 0xb4), -1, *(unsigned short*) (e + 0xac), amt, g_773d75, 0);
+		cm_SendSellObjekt(*(int*) (e + 0xb4), -1, *(unsigned short*) (e + 0xac), amt, g_773d75, 0);
 		io_FormatTextBuffer(buf, 0x1bb8, *(unsigned short*) (e + 0xac) * 2 + 0x9a8, r, amt);
 		he_MessageBoxQuickjump((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (r + 0x27)].entity_id), -1, buf, 0, 0x5f1, *(int*) (r + 1), -1, 0,
 		    "_NACHRICHTEN_HS_08");

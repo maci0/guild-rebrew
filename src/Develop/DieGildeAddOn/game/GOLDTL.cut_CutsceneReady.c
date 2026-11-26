@@ -14,12 +14,12 @@ typedef struct {
 } Msg;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004c5a20(int, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_RequestRemoveCutsceneParticipant(int, int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_004c4eb0(char*);
+void __cdecl cm_SendLogAction(char*);
 int __cdecl fcn_004c6aa0(Msg*);
-void __cdecl fcn_004c4ef0(char*);
+void __cdecl cm_SendTraceEnd(char*);
 
 
 /* ADDRESS: GOLDTL 0x004e64e0 */
@@ -37,12 +37,12 @@ int __cdecl cut_CutsceneReady(int* c)
 			if (c[13 + i] != -1) {
 				o = gm_LookupEntityRecordById(c[13 + i]);
 				if (o == 0 || (*(int*) (o + 0x20c) != -1 && *(int*) (o + 0x20c) != c[0] && (o[2] == 6 || o[2] == 7)))
-					h = fcn_004c5a20(c[0], c[13 + i]);
+					h = cm_RequestRemoveCutsceneParticipant(c[0], c[13 + i]);
 			}
 		}
 		if (h != -1) {
 			do {
-				if (fcn_004c4450(h) != 0)
+				if (cm_GetCommandStatus(h) != 0)
 					break;
 				fcn_00535960();
 			} while (1);
@@ -60,10 +60,10 @@ int __cdecl cut_CutsceneReady(int* c)
 		return -1;
 	m.who = c[0];
 	m.ids = *(Ids*) (c + 13);
-	fcn_004c4eb0("cut_CutsceneReady");
+	cm_SendLogAction("cut_CutsceneReady");
 	h = fcn_004c6aa0(&m);
-	fcn_004c4ef0("cut_CutsceneReady");
-	while (fcn_004c4450(h) == 0)
+	cm_SendTraceEnd("cut_CutsceneReady");
+	while (cm_GetCommandStatus(h) == 0)
 		fcn_00535960();
-	return fcn_004c4450(h) != 2;
+	return cm_GetCommandStatus(h) != 2;
 }

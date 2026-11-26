@@ -37,10 +37,10 @@ extern unsigned char g_773d75;
 
 
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5f60(int, int, int);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_SendSetGebBesitzer(int, int, int);
 int __cdecl fcn_004c6090(Player*, int, int, int);
-int __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
 void __cdecl gm_InitStartingBuildingsAndWorkers(void)
 {
@@ -68,10 +68,10 @@ void __cdecl gm_InitStartingBuildingsAndWorkers(void)
 
 				cm_BeginPacketFieldDelta((char*) inst, inst->id);
 				cm_AppendPacketFieldDelta(4, 1, (char*) inst - g_aed32c + 0x39, &value);
-				fcn_004c5360();
-				fcn_004c5f60(inst->id, ent->entity_id, ent->entity_id);
+				cm_RequestChangeAttribute();
+				cm_SendSetGebBesitzer(inst->id, ent->entity_id, ent->entity_id);
 				fcn_004c6090(inst, 1, 0, ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].worker_kind[0]);
-				fcn_004c51f0(inst->id, -1, 0x135, 1, (*(char*)&g_773d75), 0);
+				cm_SendSellObjekt(inst->id, -1, 0x135, 1, (*(char*)&g_773d75), 0);
 			}
 		}
 	}

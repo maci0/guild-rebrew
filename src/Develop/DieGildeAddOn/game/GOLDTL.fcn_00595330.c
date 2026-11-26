@@ -15,7 +15,7 @@ void __cdecl fcn_0046f9b0(int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00500e20(int*);
+int __cdecl gm_GetSeason(int*);
 int __cdecl fcn_0051e070(void);
 #include <stdlib.h>
 extern const double g_6629c8;
@@ -193,7 +193,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 
 		if (found != 0 && (*(int*) (found + 0x14) || *(int*) (found + 0x18))) {
 			state = 0;
-			idx = fcn_00500e20((int*) 0x7f4c00);
+			idx = gm_GetSeason((int*) 0x7f4c00);
 			key = *(int*) 0x7f4c04 & 0xffff;
 			if ((float) key >= *(float*) (idx * 4 + 0x696540)
 			    && (float) key < *(float*) (idx * 4 + 0x696550)) {

@@ -18,11 +18,11 @@ int __cdecl fcn_00495890();
 int __cdecl fcn_004ad8c0();
 int __cdecl fcn_004b3aa0();
 int __cdecl plt_UpdatePlantStages();
-int __cdecl fcn_004c30a0();
-int __cdecl fcn_004c54c0();
+int __cdecl d3snd_QueueSound();
+int __cdecl cm_RequestCopyEntityData();
 int __cdecl fcn_004e4f10();
 char __cdecl cut_RunPendingCutscenes(int);
-int __cdecl fcn_004e7700();
+int __cdecl srv_FormatStatEntity();
 int __cdecl fcn_004eafe0();
 int __cdecl fcn_004f5830();
 int __cdecl fcn_004f4d10();
@@ -32,10 +32,10 @@ int __cdecl fcn_004fb630();
 void __cdecl fcn_004fb650(int, int, int, float);
 int __cdecl fcn_004fb7a0();
 int __cdecl fcn_004fcc20();
-int __cdecl fcn_004fd050();
+int __cdecl gm_CollectAllTaxes();
 int __cdecl fcn_004fd280();
 int __cdecl fcn_004ff0f0();
-int __cdecl fcn_00500d60();
+int __cdecl gm_PackGameTime();
 int __cdecl fcn_005016c0();
 int __cdecl gm_FindNextFilteredEntity();
 int __cdecl gm_StartFilteredEntitySearch();
@@ -87,7 +87,7 @@ void __cdecl fcn_00543080(void)
 	fcn_004fa750();
 	v11 = 0;
 	do {
-		fcn_004e7700(&((ENTITY_RECORD*) g_7f4ca0)[v11]);
+		srv_FormatStatEntity(&((ENTITY_RECORD*) g_7f4ca0)[v11]);
 		*(unsigned int*) &((ENTITY_RECORD*) g_7f4ca0)[v11].unk_198[0x30] &= 0xe0874703;
 		((ENTITY_RECORD*) g_7f4ca0)[v11].entity_flags &= 0x3d31ffc7;
 		if (((ENTITY_RECORD*) g_7f4ca0)[v11].entity_state == 6) {
@@ -133,7 +133,7 @@ void __cdecl fcn_00543080(void)
 		fcn_00471d80(v2, 3);
 		d2_SetForm(v2, 1);
 		io_AppendText(0x7d);
-		fcn_00500d60(0x7f4c00, v7);
+		gm_PackGameTime(0x7f4c00, v7);
 		d2_SetForm(v2, 0);
 		fcn_00471e30(v2);
 	}
@@ -182,7 +182,7 @@ void __cdecl fcn_00543080(void)
 		fcn_004fcc20();
 		fcn_00535960();
 		Sleep(100);
-		fcn_004fd050();
+		gm_CollectAllTaxes();
 		fcn_004eafe0();
 		fcn_00535960();
 		Sleep(100);
@@ -208,10 +208,10 @@ void __cdecl fcn_00543080(void)
 		Sleep(100);
 		v4 = (unsigned int*) &g_7f4ca4;
 		do {
-			fcn_004c54c0(0xffffffff, *v4, 0, 3);
+			cm_RequestCopyEntityData(0xffffffff, *v4, 0, 3);
 			v4 = &v4[0x87];
 		} while ((int) v4 < 0x85a0a4);
-		fcn_004c54c0(0xffffffff, 0xffffffff, 0, 4);
+		cm_RequestCopyEntityData(0xffffffff, 0xffffffff, 0, 4);
 		fcn_004ad8c0();
 	} else {
 		fcn_004fd280(2);
@@ -228,7 +228,7 @@ void __cdecl fcn_00543080(void)
 			io_AppendText(0x7d);
 			d2_SetForm(v2, 1);
 			io_AppendText(0x1ba0, *(int*) &g_774970 & 0xffff, *(int*) &g_774970 & 0xffff);
-			fcn_004c30a0(0xfffffff9, 0, 0x6a438c, 0xffffffff, 0);
+			d3snd_QueueSound(0xfffffff9, 0, 0x6a438c, 0xffffffff, 0);
 			v5 = main_RunFrameLoop(0x543080, 0x66087);
 			while (v5) {
 				if (*(int*) &g_100f1dc == 2) {

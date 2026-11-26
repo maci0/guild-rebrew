@@ -9,7 +9,7 @@ struct fcn_004c0a10_node {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00426170(int*, int);
+void __cdecl d3snd_SetVoiceFlag0x10(int*, int);
 void __cdecl m_FreeTracked(void*);
 
 
@@ -26,7 +26,7 @@ void __cdecl fcn_004c0a10(int* key)
 				prev->next = p->next;
 			else
 				(*(fcn_004c0a10_node**)&g_772d34) = p->next;
-			fcn_00426170(p->f0, 0);
+			d3snd_SetVoiceFlag0x10(p->f0, 0);
 			m_FreeTracked(p);
 			return;
 		}

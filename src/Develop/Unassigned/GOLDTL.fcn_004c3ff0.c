@@ -24,7 +24,7 @@ extern unsigned char* g_14cbca8;
 int __cdecl cm_EnqueueCommand(node99*);
 void __cdecl nt_FlushSend(void);
 
-int __cdecl fcn_004c3ff0(void)
+int __cdecl cm_FlushCommandQueue(void)
 {
 	if ((*(node99**)&g_1005760) == 0)
 		return 0;

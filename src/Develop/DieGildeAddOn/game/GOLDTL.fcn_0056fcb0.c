@@ -7,7 +7,7 @@ extern unsigned char g_slot_table[2];
 
 void __cdecl he_FreeAction(char* e);
 float __cdecl fcn_00507540(int idx, int* info);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl gm_AddTime(void*, int, int, int);
 
 /* Drives the dozing state of one entity: a negative record flag resets the
@@ -41,7 +41,7 @@ void __cdecl fcn_0056fcb0(char* e)
 			*(int*) (msg + 0x60) = 2;
 			*(int*) (msg + 8) = *(int*) (g_slot_table + (*(unsigned short*) (e + 8)) * 0x21c + 4);
 			*(int*) (msg + 0x58) = *(int*) (g_slot_table + (*(unsigned short*) (e + 8)) * 0x21c + 4);
-			fcn_004c5530(msg);
+			cm_SendCopyEntityData(msg);
 			*(int*) (g_slot_table + (*(unsigned short*) (e + 8)) * 0x21c + 0x1c8) |= 0x80000000;
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			gm_AddTime(e + 0x52, 4, 0, 0);

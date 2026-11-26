@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int __cdecl fcn_00449ac0(char*, char*);
+int __cdecl d3_AppendVfsAssetPath(char*, char*);
 
 /* ADDRESS: GOLD 0x0044c9d0 */
 char __cdecl fcn_0044c9d0(char* a, char* b, int n, char* da, char* db)
@@ -33,7 +33,7 @@ char __cdecl fcn_0044c9d0(char* a, char* b, int n, char* da, char* db)
 						strcpy(db, b);
 					}
 				}
-				if (fcn_00449ac0(da, ".bgf")) {
+				if (d3_AppendVfsAssetPath(da, ".bgf")) {
 					return 1;
 				}
 			}

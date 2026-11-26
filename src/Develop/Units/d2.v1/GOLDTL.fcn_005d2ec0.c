@@ -29,7 +29,7 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005ca560(Item*);
+int __cdecl d2_BuildPersonStatusDesc(Item*);
 int __cdecl fcn_005d2a40(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
@@ -66,7 +66,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 		items[i].y = i / 3 * 0x41 * 2 + 5;
 		items[i].e = gm_LookupEntityRecordById(ids[i]);
 		items[i].flag = 1;
-		fcn_005ca560(&items[i]);
+		d2_BuildPersonStatusDesc(&items[i]);
 		items[i].val = fcn_005d2a40(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, *(int*) (items[i].e + 4));
 		io_FormatTextBuffer(buf, 0x1ce4, items[i].val);
 		fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);

@@ -26,7 +26,7 @@ extern short g_7f4c0c;
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 char* __cdecl fcn_005c6220(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
@@ -66,7 +66,7 @@ int __cdecl gm_ObjSendTargetMsg0xa3(char* e, char* request)
 	*(int*) (msg + 0x30) = g_7f4c08;
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	msg[0x36] = 1;
-	fcn_004c5530(msg);
+	cm_SendCopyEntityData(msg);
 	if (e[2] == 6) {
 		p = fcn_005c6220(**(unsigned short**) request, &out);
 		io_FormatTextBuffer(buf, *(unsigned short*) (p + 0x18) + 1, *(unsigned short*) r);

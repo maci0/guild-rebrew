@@ -13,10 +13,10 @@ float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl fcn_0042e410(unsigned short);
 int __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5530(int);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_SendCopyEntityData(int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 void __cdecl fcn_004c6b20(int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
@@ -92,7 +92,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			if (*(int*) p != -1) {
 				hs = (char*) gm_LookupEntityRecordById(*(int*) p);
 				fcn_00529160(0, 0, *(unsigned short*) hs, (unsigned char*) a1);
-				fcn_004c5c80(*(int*) p);
+				cm_SendCancelCharacterActions(*(int*) p);
 				fcn_004c5da0(*(int*) p, *(int*) (obj + 1), *(int*) (ent + 2), 0, 1,
 				             (char*) 0x6a69bc);
 			}
@@ -147,7 +147,7 @@ void __cdecl fcn_00568ed0(char* a1)
 		p = a1 + 0x8c;
 		do {
 			if (*(int*) p != -1) {
-				fcn_004c5c80(*(int*) p);
+				cm_SendCancelCharacterActions(*(int*) p);
 				fcn_004c5da0(*(int*) p, *(int*) (ent + 1), *(int*) (ent2 + 2), 0, 0,
 				             (char*) 0x6a69bc);
 				cnt++;
@@ -180,7 +180,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			}
 			r = (char*) fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, 0x65);
 			if (*(int*) (obj + 0x184) != 0) {
-				fcn_004c5c80(*(int*) (obj + 4));
+				cm_SendCancelCharacterActions(*(int*) (obj + 4));
 				cm_RequestChrMoveToUniverse(*(int*) (obj + 4), *(int*) (ent + 1), *(int*) (r + 2),
 				             (char*) 0x6a69a8);
 			}
@@ -211,7 +211,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			}
 			cm_BeginPacketFieldDelta(ent, *(int*) (ent + 1));
 			cm_AppendPacketFieldDelta(4, 1, (unsigned short) (ent - g_aed32c + 0x65), obj + 4);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 			fcn_004c6b20(*(int*) (obj + 4), 5, 0);
 			{
 				Msg_568ed0 msg;
@@ -224,7 +224,7 @@ void __cdecl fcn_00568ed0(char* a1)
 				msg.flag = 0x12;
 				msg.ent = *(int*) (obj + 4);
 				msg.house = *(int*) (ent + 1);
-				fcn_004c5530((int) &msg);
+				cm_SendCopyEntityData((int) &msg);
 			}
 		} else {
 			if (*(unsigned char*) (hs + 2) == 6 || *(unsigned char*) (hs + 2) == 7) {
@@ -273,7 +273,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			if (*(int*) p != -1) {
 				hs = (char*) gm_LookupEntityRecordById(*(int*) p);
 				if (hs != 0) {
-					fcn_004c5c80(*(int*) p);
+					cm_SendCancelCharacterActions(*(int*) p);
 					if (obj != 0) {
 						if (i != 0) {
 							fcn_004c5da0(*(int*) p, *(int*) (obj + 1),

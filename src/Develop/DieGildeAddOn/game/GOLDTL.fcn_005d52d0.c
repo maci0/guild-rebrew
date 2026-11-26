@@ -8,13 +8,13 @@ extern double g_664ee8;
 extern double g_6629a0;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
+int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl fcn_004c6ae0(int, int);
-void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c53a0(void);
-int __cdecl fcn_004c5150(int, int, char, int);
-int __cdecl fcn_004c4450(int);
+void __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_SendSetAttribute(void);
+int __cdecl cm_RequestMoveCredits(int, int, char, int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_00471e30(int);
 int __cdecl d2_CenterDialogWindows(int);
@@ -59,15 +59,15 @@ int __cdecl fcn_005d52d0(char* p)
 		obj = gm_LookupEntityRecordById(*(int*) (p + 0x5c));
 		fcn_004c6ae0(*(int*) (p + 4), -8);
 		cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
-		fcn_004c4700(4, 1, 0x5c, &s.sel);
-		fcn_004c5360();
+		cm_AppendCommandSyncField(4, 1, 0x5c, &s.sel);
+		cm_RequestChangeAttribute();
 		cm_BeginPacketFieldDelta(obj, *(int*) (obj + 4));
-		fcn_004c4700(4, 1, 0x5c, &s.sel);
-		fcn_004c4700(2, 1, 0x50, &s.sel);
-		fcn_004c5360();
+		cm_AppendCommandSyncField(4, 1, 0x5c, &s.sel);
+		cm_AppendCommandSyncField(2, 1, 0x50, &s.sel);
+		cm_RequestChangeAttribute();
 		m = (int) (w * g_664ee8);
-		x = fcn_004c5150(*(int*) (obj + 4), *(int*) (p + 4), g_773d75, m);
-		while (fcn_004c4450(x) == 0) {
+		x = cm_RequestMoveCredits(*(int*) (obj + 4), *(int*) (p + 4), g_773d75, m);
+		while (cm_GetCommandStatus(x) == 0) {
 			fcn_00535960();
 		}
 		return 0x11;
@@ -92,20 +92,20 @@ int __cdecl fcn_005d52d0(char* p)
 				}
 				fcn_004c6ae0(*(int*) (p + 4), -8);
 				cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
-				fcn_004c4700(4, 1, 0x5c, &s.sel);
-				x = fcn_004c53a0();
-				while (fcn_004c4450(x) == 0) {
+				cm_AppendCommandSyncField(4, 1, 0x5c, &s.sel);
+				x = cm_SendSetAttribute();
+				while (cm_GetCommandStatus(x) == 0) {
 					fcn_00535960();
 				}
 				cm_BeginPacketFieldDelta(obj, *(int*) (obj + 4));
-				fcn_004c4700(4, 1, 0x5c, &s.sel);
-				fcn_004c4700(2, 1, 0x50, &s.sel);
-				x = fcn_004c53a0();
-				while (fcn_004c4450(x) == 0) {
+				cm_AppendCommandSyncField(4, 1, 0x5c, &s.sel);
+				cm_AppendCommandSyncField(2, 1, 0x50, &s.sel);
+				x = cm_SendSetAttribute();
+				while (cm_GetCommandStatus(x) == 0) {
 					fcn_00535960();
 				}
-				x = fcn_004c5150(*(int*) (obj + 4), *(int*) (p + 4), g_773d75, s.n);
-				while (fcn_004c4450(x) == 0) {
+				x = cm_RequestMoveCredits(*(int*) (obj + 4), *(int*) (p + 4), g_773d75, s.n);
+				while (cm_GetCommandStatus(x) == 0) {
 					fcn_00535960();
 				}
 				io_AppendText((int) g_6811b0);

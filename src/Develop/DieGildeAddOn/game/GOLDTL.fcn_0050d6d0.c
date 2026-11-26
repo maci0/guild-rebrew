@@ -15,7 +15,7 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_0050d640(int, int, int, char*);
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
 int __cdecl gm_CheckPrivilege(int, unsigned short*, unsigned int*);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0050d6d0 */
@@ -57,7 +57,7 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 							offer = 64000.0f;
 						v21 = (int) (have + offer);
 						v8 = (int) offer;
-						fcn_004c5150(*(int*) (a0 + 1), 0xffffffff,
+						cm_RequestMoveCredits(*(int*) (a0 + 1), 0xffffffff,
 						             g_773d75, v8);
 					}
 				}

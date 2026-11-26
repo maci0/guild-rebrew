@@ -35,8 +35,8 @@ extern char s_6a597c[];
 void __cdecl fcn_00529160(int a, int b, int id, int c);
 int __cdecl evt_FindScriptById(int a);
 void __cdecl evt_RequestScriptExit(int a);
-int __cdecl fcn_004c5530(GOLDTL_Msg549* msg);
-void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
+int __cdecl cm_SendCopyEntityData(GOLDTL_Msg549* msg);
+void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 int __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* text);
 float __cdecl fcn_004feff0(unsigned short* e);
 int __cdecl fcn_00567170(unsigned short* e, int* a, int* b, int c);
@@ -79,7 +79,7 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 		msg.f34 = (unsigned short) g_7f4c0c;
 		msg.f36 = 2;
 		msg.f58 = *(int*) (p + 4);
-		fcn_004c5530(&msg);
+		cm_SendCopyEntityData(&msg);
 		if (a2[2] != 6 && a2[2] != 7) {
 			return;
 		}
@@ -105,7 +105,7 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 				if (t != -1) {
 					evt_RequestScriptExit(evt_FindScriptById(t));
 				}
-				fcn_004c5420(*(int*) (p + 4), 0x1c8, 4, 0x800, 0);
+				cm_RequestChangeBits(*(int*) (p + 4), 0x1c8, 4, 0x800, 0);
 				if (v8 == -1) {
 					fcn_004c5da0(*(int*) (p + 4), v9, v8, 0, 1,
 									  s_6a5960);

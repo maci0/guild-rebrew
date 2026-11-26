@@ -28,7 +28,7 @@ int __cdecl fcn_004c5620(int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_0052a0c0(char*, int);
 int __cdecl fcn_005cd440(Req*, char*, int, void*);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00526120(int, int);
 void __cdecl d2_RunEntfuehrungDialog(void);
@@ -69,6 +69,6 @@ void __cdecl d2_StartEntfuehrungDialog(char* building)
 	io_FormatTextBuffer(text, 0x19b8);
 	fcn_0052a0c0(building, 0);
 	fcn_005cd440(&req, text, 0, (void*) d2_RunEntfuehrungDialog);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	fcn_00532ef0();
 }

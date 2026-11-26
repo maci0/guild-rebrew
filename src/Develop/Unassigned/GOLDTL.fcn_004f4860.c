@@ -13,7 +13,7 @@ typedef struct
 #pragma pack(pop)
 
 int __cdecl fcn_004f4830(unsigned char k, int* info);
-int __cdecl fcn_004c63f0(Msg0c* m);
+int __cdecl cm_RequestSetLaw(Msg0c* m);
 
 int __cdecl fcn_004f4860(unsigned short* a, unsigned char k, int v)
 {
@@ -40,5 +40,5 @@ int __cdecl fcn_004f4860(unsigned short* a, unsigned char k, int v)
 	m.id = id;
 	m.k = k;
 	m.v = v;
-	return fcn_004c63f0(&m);
+	return cm_RequestSetLaw(&m);
 }

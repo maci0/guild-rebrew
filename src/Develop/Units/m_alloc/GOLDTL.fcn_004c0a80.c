@@ -6,7 +6,7 @@ extern char s_689d24[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void* __cdecl m_alloc(int, char*);
-void __cdecl fcn_00426170(char*, int);
+void __cdecl d3snd_SetVoiceFlag0x10(char*, int);
 void* __cdecl fcn_004c0a60(void);
 
 /* ADDRESS: GOLDTL 0x004c0a80 */
@@ -45,7 +45,7 @@ int __cdecl fcn_004c0a80(char* a0, int a1)
 			add ecx, ebx
 			rep stosb
 		}
-		fcn_00426170(a0, 1);
+		d3snd_SetVoiceFlag0x10(a0, 1);
 		*(char**) p = a0;
 		*(int*) (p + 4) = a1;
 		q = fcn_004c0a60();

@@ -22,7 +22,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 
-int __cdecl fcn_004c4450(int id);
+int __cdecl cm_GetCommandStatus(int id);
 void __cdecl he_FreeAction(char* t);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004c5620(int a1, char* e);
@@ -45,7 +45,7 @@ void __cdecl fcn_00551a20(char* t)
 	}
 	if (t[0x78] & 4)
 		return;
-	if (*(int*) (t + 0x84) != -1 && fcn_004c4450(*(int*) (t + 0x84)) == 0)
+	if (*(int*) (t + 0x84) != -1 && cm_GetCommandStatus(*(int*) (t + 0x84)) == 0)
 		return;
 	*(int*) (t + 0x84) = -1;
 	switch (*(int*) (t + 0x70)) {

@@ -42,7 +42,7 @@ struct msg_00547130 {
 #include <string.h>
 
 int __cdecl he_StartHandlungSearch(int, int, int);
-void __cdecl fcn_004c5530(struct msg_00547130*);
+void __cdecl cm_SendCopyEntityData(struct msg_00547130*);
 
 void __cdecl fcn_00547130(void)
 {
@@ -55,6 +55,6 @@ void __cdecl fcn_00547130(void)
 		m.b36 = 2;
 		m.f8 = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id;
 		m.pos = (*(pos14_7f4c00*)&gm_GameTime);
-		fcn_004c5530(&m);
+		cm_SendCopyEntityData(&m);
 	}
 }

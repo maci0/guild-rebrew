@@ -1,4 +1,4 @@
-int __cdecl fcn_00423460(int);
+int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl WaitForSample(int* a0);
 
 extern int* g_6b7ebc;
@@ -11,7 +11,7 @@ void __cdecl WaitForSample(int* sample)
 
 	handle = *sample;
 	if (g_6b7ebc != 0 && *(int*) ((char*) g_6b7ebc + 0x44) == (int) WaitForSample) {
-		if (fcn_00423460(handle) != 0) {
+		if (sb_CheckVoicePlaying(handle) != 0) {
 			*(int*) ((char*) evt_CurrentScript + 0xc60) = (int) WaitForSample;
 		}
 	} else if (*(int*) ((char*) evt_CurrentScript + 0xc84) == 1) {

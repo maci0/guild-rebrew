@@ -6,7 +6,7 @@ extern char* g_14a9a28;
 extern char g_6b5c60[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c57e0(int, int);
+void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_SendCmdMessage(char*, char*, char*, char*);
 
@@ -18,7 +18,7 @@ extern int g_7747f0;
 char* __cdecl gm_LookupEntityRecordById(int);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_004e4ae0(char*, int);
 void __cdecl fcn_004e4e90(char*);
 void __cdecl fcn_004e4730(char*);
@@ -43,7 +43,7 @@ void __cdecl fcn_004e44f0(int);
 void __cdecl fcn_004c09b0(void);
 void __cdecl fcn_004e4b00(int);
 void __cdecl cut_CleanupCutscene(void);
-void __cdecl fcn_004e3640(void);
+void __cdecl msx_RestoreMusicIfAllowed(void);
 
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_004fef80(char*);
@@ -63,7 +63,7 @@ int __cdecl fcn_004e27b0(char* x)
 		return 0;
 	c = gm_LookupEntityRecordById(*(int*) (a + 0x5c));
 	if (c == 0 || c[2] == 0xf) {
-		fcn_004c57e0(*(int*) (b + 4), 1);
+		cm_RequestKillSpieler(*(int*) (b + 4), 1);
 		return 0;
 	}
 	if (a[2] == 6 || a[2] == 7) {
@@ -96,7 +96,7 @@ void __cdecl fcn_004e2890(char* m)
 		v = 8;
 		cm_BeginPacketFieldDelta(b, *(int*) (b + 4));
 		cm_AppendPacketFieldDelta(1, 1, 2, &v);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 	}
 	cut_EventLoopFlags = 0x702c6;
 	d2_SuppressOverlay = 1;
@@ -144,7 +144,7 @@ void __cdecl fcn_004e2890(char* m)
 	}
 	cm_BeginPacketFieldDelta(b, *(int*) (b + 4));
 	cm_AppendPacketFieldDelta(1, 0x10, 0x30, buf);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	fcn_00471e30(sc);
 	fcn_004e48b0();
 	fcn_004e4610(esc);
@@ -153,7 +153,7 @@ void __cdecl fcn_004e2890(char* m)
 	fcn_004e4b00(snd);
 	g_772f54 = 0;
 	cut_CleanupCutscene();
-	fcn_004e3640();
+	msx_RestoreMusicIfAllowed();
 	d2_SuppressOverlay = 0;
 }
 

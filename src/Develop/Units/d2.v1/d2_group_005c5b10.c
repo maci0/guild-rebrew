@@ -62,10 +62,10 @@ int __cdecl fcn_0050b710(int, char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, char);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c5150(int, int, char, int);
-int __cdecl fcn_004c5530(Packet*);
-void __cdecl fcn_004c4ef0(char*);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+int __cdecl cm_SendCopyEntityData(Packet*);
+void __cdecl cm_SendTraceEnd(char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00471e30(int);
@@ -215,10 +215,10 @@ void __cdecl fcn_005c5b10(char* a)
 					pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 					pkt.x36 = 1;
 					pkt.x58 = v;
-					fcn_004c4eb0(s_6ac730);
-					fcn_004c5150(-1, ((Player*)g_7f4ca0)[g_774970].x4, g_773d75, v);
-					fcn_004c5530(&pkt);
-					fcn_004c4ef0(s_6ac730);
+					cm_SendLogAction(s_6ac730);
+					cm_RequestMoveCredits(-1, ((Player*)g_7f4ca0)[g_774970].x4, g_773d75, v);
+					cm_SendCopyEntityData(&pkt);
+					cm_SendTraceEnd(s_6ac730);
 					g_774654 = 1;
 				}
 			}

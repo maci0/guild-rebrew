@@ -15,7 +15,7 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_005039e0(int);
+void __cdecl gm_CollectTradeItemsByKind(int);
 int __cdecl fcn_00502cd0(int, int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -95,7 +95,7 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 			e = (char*) gm_NextEntityQueryMatch();
 		} while (e);
 	} else {
-		fcn_005039e0((int) building);
+		gm_CollectTradeItemsByKind((int) building);
 		q = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0xff, 6);
 		n = 0;
 		for (i = 0; i < g_7f3ee4; i++) {

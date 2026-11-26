@@ -11,7 +11,7 @@ char* __cdecl fcn_0050dc90(void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, void*);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x005639a0 */
@@ -63,7 +63,7 @@ void __cdecl fcn_005639a0(int a)
 	}
 	r = gm_StartFilteredEntitySearch(1, 1, *(int*) (a + 0xac));
 	if (r != 0) {
-		fcn_004c5420(*(int*) (r + 1), 0x5a, 2, 0, 4);
+		cm_RequestChangeBits(*(int*) (r + 1), 0x5a, 2, 0, 4);
 	}
 	he_FreeAction((void*) a);
 }

@@ -21,7 +21,7 @@ extern Ent g_7f4ca0[];
 int __cdecl gm_GetOppositeStatIndex(int stat);
 int __cdecl gm_MapEntityStatRange(int stat);
 float __cdecl gm_GetEntitySkill(Ent* e, int k);
-int __cdecl fcn_00500cb0(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
+int __cdecl gm_CompareGameTime(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 void __cdecl gm_AddTime(GAME_TIMESTAMP* t, int a, int b, int c);
 
@@ -77,7 +77,7 @@ float __cdecl fcn_00507540(int idx, GAME_TIMESTAMP* out)
 		h = (unsigned short) gm_GameTime.b;
 		b.unit_0 = d;
 		b.hour = h;
-		if (fcn_00500cb0(&b, &a) < 0) {
+		if (gm_CompareGameTime(&b, &a) < 0) {
 			f = (float) gm_GetElapsedMinutes(&z, &b) / (float) gm_GetElapsedMinutes(&z, &a);
 			gm_AddTime(&a, gm_GameTime.a * 24 + h, 0, 0);
 			gm_AddTime(&a, -h - d * 24, 0, 0);

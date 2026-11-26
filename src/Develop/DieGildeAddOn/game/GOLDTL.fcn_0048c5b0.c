@@ -61,11 +61,11 @@ int __cdecl fcn_0050dfd0(char*, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0047d1b0(void);
 int __cdecl he_CountActiveTradeActions(void);
-int __cdecl fcn_004c5530(void*);
-int __cdecl fcn_004c5150(int, int, char, int);
-int __cdecl fcn_004c4eb0(char*);
-int __cdecl fcn_004c4ef0(char*);
-int __cdecl fcn_004c51f0(int, int, short, int, char, int);
+int __cdecl cm_SendCopyEntityData(void*);
+int __cdecl cm_RequestMoveCredits(int, int, char, int);
+int __cdecl cm_SendLogAction(char*);
+int __cdecl cm_SendTraceEnd(char*);
+int __cdecl cm_SendSellObjekt(int, int, short, int, char, int);
 int __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_QueryEntitySum(int, int);
 
@@ -114,7 +114,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			m.ids[4] = 0;
 			m.ids[5] = 0;
 			m.f5c = 100 - (int) *(unsigned char*) (ent + 0x12);
-			fcn_004c5530(&m);
+			cm_SendCopyEntityData(&m);
 			continue;
 		}
 		memset(&m, 0, 0xf8);
@@ -150,7 +150,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 				tmp = (int) fcn_0050bb50((int) st.x48[i], g_773d75);
 				sprintf(line, (char*) 0x67e358, -1, *(int*) (q + 2),
 				    (int) st.x48[i], st.x68[i], g_773d75, (double) tmp);
-				fcn_004c51f0(-1, *(int*) (q + 2), (short) st.x48[i],
+				cm_SendSellObjekt(-1, *(int*) (q + 2), (short) st.x48[i],
 				    st.x68[i], (char) g_773d75,
 				    (int) fcn_0050bb50((int) st.x48[i], g_773d75));
 				*(int*) (o + 0x1b8) = (int) (fcn_0050bb50((int) st.x48[i],
@@ -212,24 +212,24 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 				    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), currency);
 				if (sums[currency] > tmp) {
 					i = sums[currency] * 9 / 8;
-					fcn_004c4eb0((char*) 0x67e8b0);
-					fcn_004c5150(*(int*) (0x7f4ca4
+					cm_SendLogAction((char*) 0x67e8b0);
+					cm_RequestMoveCredits(*(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
 					    -1, (char) currency, i);
-					fcn_004c5150(-1, *(int*) (0x7f4ca4
+					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
 					    (char) g_773d75, (int) ((double) i * 1.03));
-					fcn_004c4ef0((char*) 0x67e8b0);
+					cm_SendTraceEnd((char*) 0x67e8b0);
 				} else if (sums[currency] * 2 < tmp) {
 					i = tmp - sums[currency] * 9 / 8;
-					fcn_004c4eb0((char*) 0x67e8b0);
-					fcn_004c5150(*(int*) (0x7f4ca4
+					cm_SendLogAction((char*) 0x67e8b0);
+					cm_RequestMoveCredits(*(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
 					    -1, (char) g_773d75, i);
-					fcn_004c5150(-1, *(int*) (0x7f4ca4
+					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4
 					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
 					    (char) currency, (int) ((double) i * 1.03));
-					fcn_004c4ef0((char*) 0x67e8b0);
+					cm_SendTraceEnd((char*) 0x67e8b0);
 				}
 			}
 		}
@@ -260,7 +260,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 					    *(int*) (0x100d0c0 + i * 0x58 + 0x4c) > tmp
 					    ? tmp : *(int*) (0x100d0c0 + i * 0x58 + 0x4c),
 					    g_773d75, 0);
-					fcn_004c51f0(*(int*) (q + 2), *(int*) (req + 2),
+					cm_SendSellObjekt(*(int*) (q + 2), *(int*) (req + 2),
 					    *(short*) (0x100d0c0 + i * 0x58),
 					    *(int*) (0x100d0c0 + i * 0x58 + 0x4c) > tmp
 					    ? tmp : *(int*) (0x100d0c0 + i * 0x58 + 0x4c),
@@ -293,7 +293,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		m.f5c = tmp;
 		m.f60 = *(int*) (o + 4);
 		if (*(int*) 0x100b0a4 == 0) {
-			fcn_004c5530(&m);
+			cm_SendCopyEntityData(&m);
 			g_772620++;
 		}
 	}

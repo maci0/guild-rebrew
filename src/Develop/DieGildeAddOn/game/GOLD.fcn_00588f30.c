@@ -12,7 +12,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
-int __cdecl fcn_005ca560(struct sel*);
+int __cdecl d2_BuildPersonStatusDesc(struct sel*);
 void __cdecl fcn_005caaa0(int, int, int, struct sel*);
 float __cdecl fcn_00505e30(unsigned short);
 int __cdecl gm_GetOppositeStatIndex(int);
@@ -42,7 +42,7 @@ int __cdecl fcn_00588f30(char* w)
 	io_AppendText("$Z$[%1N3$]", *(unsigned short*) w);
 	d2_SetForm(0, 4);
 	info.who = w;
-	if (fcn_005ca560(&info) != 0) {
+	if (d2_BuildPersonStatusDesc(&info) != 0) {
 		fcn_005caaa0(0xa6, 5, d2_CurrentWindowId, &info);
 	}
 	d2_SetForm(0, 2);

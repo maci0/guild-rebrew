@@ -12,7 +12,7 @@
 extern pos14_7f4c00 gm_GameTime;
 extern char* gm_CityEntity;
 
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 
 int __cdecl hst_HandleAufstand(void)
 {
@@ -27,6 +27,6 @@ int __cdecl hst_HandleAufstand(void)
 	*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 	*(short*) (msg + 0x2c) = 8;
 	*(int*) (msg + 0x2e) = 0;
-	fcn_004c5530(msg);
+	cm_SendCopyEntityData(msg);
 	return 1;
 }

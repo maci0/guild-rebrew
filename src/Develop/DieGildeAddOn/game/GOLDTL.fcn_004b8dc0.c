@@ -21,7 +21,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl _ftol(void);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, char *);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, char *, int, int, int);
 
@@ -72,7 +72,7 @@ int __cdecl fcn_004b8dc0(int *msg)
 	val = (char) (*(unsigned char *) (r + 0x12) * ((gm_RandomMod(0x23) + 0x3c) * 0.01f));
 	cm_BeginPacketFieldDelta(r, *(int *) (r + 2));
 	cm_AppendPacketFieldDelta(1, 1, 0x12, &val);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	if (*b == 0x47) {
 		io_FormatTextBuffer(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)g_868060)[*(int *) (b + 0x65)].name, ((Dyn*)g_868060)[0].name);
 	} else {

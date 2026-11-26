@@ -51,9 +51,9 @@ int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_004c51a0(int, int, char, int);
-int __cdecl fcn_004c5530(char* msg);
-int __cdecl fcn_004c4450(int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
+int __cdecl cm_SendCopyEntityData(char* msg);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl d2_SetGroupVisibility(int k, int flag);
 void __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00471e30(int);
@@ -119,9 +119,9 @@ found:
 			*(int*) (ev + 0x60) = list[i].n;
 			*(int*) (ev + 0x64) = list[i].x;
 			*(int*) (ev + 0x6c) = list[i].y;
-			fcn_004c51a0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, *(int*) (p + 1), g_773d75, list[i].n);
-			r = fcn_004c5530(ev);
-			while (fcn_004c4450(r) == 0) {
+			cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, *(int*) (p + 1), g_773d75, list[i].n);
+			r = cm_SendCopyEntityData(ev);
+			while (cm_GetCommandStatus(r) == 0) {
 				main_RunFrameLoop(0, 0x677c7);
 			}
 			d2_SetGroupVisibility(h, 0);

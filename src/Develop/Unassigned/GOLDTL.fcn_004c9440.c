@@ -22,7 +22,7 @@ extern int g_772620;
 extern LightState g_100dc20;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-int __cdecl fcn_00500cb0(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
+int __cdecl gm_CompareGameTime(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
 void __cdecl he_RunDueActions(void);
 void __cdecl fcn_004fc180(void);
 void __cdecl fcn_00500a40(void);
@@ -36,7 +36,7 @@ int __cdecl fcn_004c9440(char* x, char* out)
 {
 	int i;
 
-	if (fcn_00500cb0(&(*(GAME_TIMESTAMP*)&gm_GameTime), (GAME_TIMESTAMP*) (x + 0x10)) < 0) {
+	if (gm_CompareGameTime(&(*(GAME_TIMESTAMP*)&gm_GameTime), (GAME_TIMESTAMP*) (x + 0x10)) < 0) {
 		(*(GAME_TIMESTAMP*)&gm_GameTime) = *(GAME_TIMESTAMP*) (x + 0x10);
 		if (g_6a3438 != 0)
 			he_RunDueActions();

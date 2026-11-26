@@ -3,9 +3,9 @@
 
 /* ADDRESS: GOLD 0x00576750 */
 /* ADDRESS: GOLDTL 0x0057ecf0 */
-int __cdecl d2_IsTutorialStepAllowed(int* a)
+int __cdecl d2_IsTutorialStepAllowed(int* step)
 {
-	if (*a == 0x19 || *a == 0x1b || *a == 0x29) {
+	if (*step == 0x19 || *step == 0x1b || *step == 0x29) {
 		return 0;
 	}
 	return 1;

@@ -14,13 +14,13 @@ extern char g_67e968[];
 
 char* __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl gm_BuyBuilding(int, int, int, char*, int);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
 int __cdecl fcn_0050d170(int k);
-void __cdecl fcn_004c5150(int a, int b, char c, int n);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
+void __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl amt_ExecGebaeudeBauen(char* actor, char* building_spec, char* target_arg);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl ai_RunBetriebBauen(char* actor, char* building_spec, char* target_arg)
 {
@@ -46,14 +46,14 @@ int __cdecl ai_RunBetriebBauen(char* actor, char* building_spec, char* target_ar
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(short*) (msg + 0x34) = g_7f4c0c;
 		*(int*) (msg + 0x58) = *(int*) (target_arg + 4);
-		fcn_004c4eb0(g_67e968);
-		fcn_004c5150(-1, *(int*) (actor + 4), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (building_spec + 4)) * 0.3f));
-		fcn_004c5530(msg);
-		fcn_004c4ef0(g_67e968);
+		cm_SendLogAction(g_67e968);
+		cm_RequestMoveCredits(-1, *(int*) (actor + 4), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (building_spec + 4)) * 0.3f));
+		cm_SendCopyEntityData(msg);
+		cm_SendTraceEnd(g_67e968);
 		return 0x13;
 	}
 	if (amt_ExecGebaeudeBauen(actor, building_spec, target_arg) != 0) {
-		fcn_004c5420(*(int*) (actor + 4), 0x1c8, 4, 0x1000000, 0);
+		cm_RequestChangeBits(*(int*) (actor + 4), 0x1c8, 4, 0x1000000, 0);
 		return 0x13;
 	}
 	return 0;

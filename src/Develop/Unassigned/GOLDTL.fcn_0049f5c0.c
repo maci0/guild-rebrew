@@ -11,10 +11,10 @@ typedef struct Small3i {
 extern char g_67eb6c[];
 extern char g_67eb54[];
 
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl fcn_004c6900(Small3i* a1);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl ai_RunStammtisch(char* a1, char* a2)
 {
@@ -24,24 +24,24 @@ int __cdecl ai_RunStammtisch(char* a1, char* a2)
 		msg.code = *(int*) (a2 + 8);
 		msg.a = *(int*) (a1 + 4);
 		msg.b = *(int*) (a2 + 4);
-		fcn_004c4eb0(g_67eb6c);
+		cm_SendLogAction(g_67eb6c);
 		fcn_004c6900(&msg);
-		fcn_004c5420(*(int*) (a1 + 4), 0x1c8, 4, 0x2000000, 0);
-		fcn_004c4ef0(g_67eb6c);
+		cm_RequestChangeBits(*(int*) (a1 + 4), 0x1c8, 4, 0x2000000, 0);
+		cm_SendTraceEnd(g_67eb6c);
 		return 0x35;
 	}
 	if (*(int*) (a2 + 8) == 0x6c656176) {
 		msg.code = *(int*) (a2 + 8);
 		msg.a = *(int*) (a1 + 4);
 		msg.b = *(int*) (a2 + 4);
-		fcn_004c4eb0(g_67eb54);
+		cm_SendLogAction(g_67eb54);
 		fcn_004c6900(&msg);
-		fcn_004c5420(*(int*) (a1 + 4), 0x1c8, 4, 0x2000000, 0);
-		fcn_004c4ef0(g_67eb54);
+		cm_RequestChangeBits(*(int*) (a1 + 4), 0x1c8, 4, 0x2000000, 0);
+		cm_SendTraceEnd(g_67eb54);
 		return 0x35;
 	}
 	if (*(int*) (a2 + 8) == 0x6e6f6f70) {
-		fcn_004c5420(*(int*) (a1 + 4), 0x1c8, 4, 0x2000000, 0);
+		cm_RequestChangeBits(*(int*) (a1 + 4), 0x1c8, 4, 0x2000000, 0);
 		return 0x35;
 	}
 	return 0;

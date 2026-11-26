@@ -8,7 +8,7 @@ int __cdecl fcn_0065f220(const char* a, const char* b);
 void __cdecl d3_CleanupObjectResources(char* o);
 int __cdecl fcn_0044c200(char* a, char* b);
 void __cdecl fcn_00449f90(char* o, int a, char* name);
-void __cdecl fcn_00438ac0(char* o, int a);
+void __cdecl d3_InvalidateSubTreeFlags(char* o, int a);
 
 /* ADDRESS: GOLDTL 0x0043aad0 */
 char __cdecl fcn_0043aad0(char* o, SCENE_PROGRESS_CONTEXT* cb)
@@ -42,6 +42,6 @@ char __cdecl fcn_0043aad0(char* o, SCENE_PROGRESS_CONTEXT* cb)
 	if (fcn_0044c200(buf, buf)) {
 		fcn_00449f90(o, 0, buf);
 	}
-	fcn_00438ac0(o, 1);
+	d3_InvalidateSubTreeFlags(o, 1);
 	return 1;
 }

@@ -16,37 +16,37 @@ extern char g_6a6538[];
 extern char g_68bef4[];
 extern char g_677640[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-int __cdecl fcn_004c4450(int);
-int __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+int __cdecl cm_GetCommandResult(int);
 void *__cdecl gm_GetEntityTableEntry(void *);
 void __cdecl fcn_00529160(int, int, int, void *);
-void __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, char *);
 void *__cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AddTime(void *, int, int, int);
 int __cdecl he_DetectNearbyPatrolAction(void *);
-void __cdecl fcn_004c5ed0(int, char *, int);
+void __cdecl cm_RequestPlayAnimation(int, char *, int);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
-int __cdecl fcn_00500cb0(void *, int *);
+int __cdecl gm_CompareGameTime(void *, int *);
 float __cdecl fcn_00507e70(void *, void *, int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_005c6270(void *, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, char *);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_00545d40(int, int, char *, int, int, char *);
 void *__cdecl he_StartHandlungSearch(int, int, int);
-void __cdecl fcn_004c58b0(int, int);
-void __cdecl fcn_004c57e0(int, int);
+void __cdecl cm_RequestLinkEvidence(int, int);
+void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl he_FreeAction(void *);
 void __cdecl d3_SelectSceneContext(int, int);
-int __cdecl fcn_00422460(int, char *);
+int __cdecl sb_PrepareVoice(int, char *);
 void __cdecl d3snd_PlayObjectSound(int, int, int, int);
 void *__cdecl fcn_00445600(void *, int, int, char *);
 void __cdecl d3_TransformPoint(char *, char *, float *);
-void __cdecl fcn_004c5530(void *);
+void __cdecl cm_SendCopyEntityData(void *);
 void __cdecl fcn_00418000(int, float *, int, float, float, float, float, float, float, float *, int, int, int);
 void __cdecl d3_SpawnRockDebrisEffect(int, float *, int, float, float, float, float, float, float, float, float, int);
 void __cdecl fcn_00417d00(int, float *, int, float, float, float, float, int);
@@ -70,7 +70,7 @@ void __cdecl fcn_00561380(void *action)
 	float pos[8];
 
 	p = (unsigned char *)action;
-	if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
+	if (*(int *)(p + 0xc8) != -1 && !cm_GetCommandStatus(*(int *)(p + 0xc8)))
 		return;
 	switch (*(int *)(p + 0x70)) {
 	case 0:
@@ -78,16 +78,16 @@ void __cdecl fcn_00561380(void *action)
 			unsigned char *hand;
 			unsigned char *e;
 
-			if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
+			if (*(int *)(p + 0xc8) != -1 && !cm_GetCommandStatus(*(int *)(p + 0xc8)))
 				return;
-			hand = (unsigned char *)fcn_004c4480(*(int *)(p + 0xc8));
+			hand = (unsigned char *)cm_GetCommandResult(*(int *)(p + 0xc8));
 			if (hand != 0) {
 				e = (unsigned char *)gm_GetEntityTableEntry((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)]);
 				if (e != 0)
 					*(int *)(e + 0x28) = *(int *)(e + 0x28) + *(int *)(p + 0xd0);
 				*(int *)(p + 0xc4) = *(int *)(hand + 4);
 				fcn_00529160(0, 0, *(unsigned short *)hand, p);
-				fcn_004c51a0(-1, *(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4), g_773d75, *(int *)(p + 0xd0));
+				cm_RequestTransferCurrencyNoKill(-1, *(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4), g_773d75, *(int *)(p + 0xd0));
 				*(int *)(p + 0xc8) = -1;
 				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 				return;
@@ -150,7 +150,7 @@ void __cdecl fcn_00561380(void *action)
 				*(MSGCOLOR *)q = *(MSGCOLOR *)&gm_GameTime;
 				return;
 			}
-			fcn_004c5ed0(*(int *)(p + 0xc4), g_68bef4, 1);
+			cm_RequestPlayAnimation(*(int *)(p + 0xc4), g_68bef4, 1);
 			fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 			return;
@@ -162,16 +162,16 @@ void __cdecl fcn_00561380(void *action)
 			unsigned char *hand;
 			unsigned char *query;
 
-			if (*(int *)(p + 0xc8) != -1 && !fcn_004c4450(*(int *)(p + 0xc8)))
+			if (*(int *)(p + 0xc8) != -1 && !cm_GetCommandStatus(*(int *)(p + 0xc8)))
 				return;
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
 			e = (unsigned char *)he_StartHandlungSearch(1, 1, *(int *)(p + 0xcc));
 			if (r == 0 || e == 0 || *(int *)(e + 0xd4) != *(int *)(p + 4) || *(int *)(p + 0xc8) == -1)
 				goto label_56148f;
 			query = (unsigned char *)gm_LookupEntityRecordById(*(int *)(p + 0xcc));
-			hand = (unsigned char *)fcn_004c4480(*(int *)(p + 0xc8));
+			hand = (unsigned char *)cm_GetCommandResult(*(int *)(p + 0xc8));
 			if (hand != 0 && query != 0)
-				fcn_004c58b0(*(int *)hand, *(int *)(query + 4));
+				cm_RequestLinkEvidence(*(int *)hand, *(int *)(query + 4));
 			*(int *)(p + 0x70) = 8;
 			gm_AddTime((void *)(p + 0x52), 0, 10, 0);
 			return;
@@ -205,7 +205,7 @@ void __cdecl fcn_00561380(void *action)
 			unsigned char *v22;
 
 			q = (unsigned char *)(p + 0x52);
-			if (fcn_00500cb0(q, &gm_GameTime) >= 0)
+			if (gm_CompareGameTime(q, &gm_GameTime) >= 0)
 				return;
 			*(unsigned char *)(p + 0xc2) = 0;
 			r = (unsigned char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(p + 0xac));
@@ -221,7 +221,7 @@ void __cdecl fcn_00561380(void *action)
 			he_MessageBoxQuickjump(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 			if (*(unsigned short *)(r + 0x27) != 0xffff) {
 				if (*(unsigned char *)(recA + 2) != 6 && *(unsigned char *)(recA + 2) != 7)
-					fcn_004c54c0(*(int *)(recB + 4), *(int *)(recA + 4), -0x19, 1);
+					cm_RequestCopyEntityData(*(int *)(recB + 4), *(int *)(recA + 4), -0x19, 1);
 				else {
 					io_FormatTextBuffer(text, 0x1736, r);
 					he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, g_6a654c);
@@ -307,7 +307,7 @@ void __cdecl fcn_00561380(void *action)
 			if (r == 0)
 				goto label_561d51;
 			if (*(unsigned char *)(p + 0xc2) == 0 && d3_CurrentContextIndex == 0) {
-				n = fcn_00422460(0, g_677640);
+				n = sb_PrepareVoice(0, g_677640);
 				if (n != 0)
 					d3snd_PlayObjectSound(n, *(int *)(r + 0x61), 0x6b, 0x463ea000);
 				v24 = 3.0f;
@@ -336,7 +336,7 @@ void __cdecl fcn_00561380(void *action)
 				*(unsigned char *)(msg + 0xb0) = 0;
 				query = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)r];
 				*(int *)(msg + 0x5c) = (gm_RandomMod(0x10) & 0xffff) - *(unsigned char *)(query + 0x247) * 3 + 0x14;
-				fcn_004c5530(msg);
+				cm_SendCopyEntityData(msg);
 			}
 			if (model == 0 || v10 != 0)
 				goto label_562049;
@@ -382,7 +382,7 @@ void __cdecl fcn_00561380(void *action)
 	case -2:
 	case -1:
 		if (*(int *)(p + 0xc4) != -1)
-			fcn_004c57e0(*(int *)(p + 0xc4), 1);
+			cm_RequestKillSpieler(*(int *)(p + 0xc4), 1);
 		he_FreeAction(p);
 		return;
 	default:

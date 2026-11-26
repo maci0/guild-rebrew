@@ -61,11 +61,11 @@ int __cdecl fcn_0050dfd0(char*, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0047d1b0(void);
 int __cdecl he_CountActiveTradeActions(void);
-int __cdecl fcn_004c5530(void*);
-int __cdecl fcn_004c5150(int, int, char, int);
-int __cdecl fcn_004c4eb0(int);
-int __cdecl fcn_004c4ef0(int);
-int __cdecl fcn_004c51f0(int, int, short, int, char, int);
+int __cdecl cm_SendCopyEntityData(void*);
+int __cdecl cm_RequestMoveCredits(int, int, char, int);
+int __cdecl cm_SendLogAction(int);
+int __cdecl cm_SendTraceEnd(int);
+int __cdecl cm_SendSellObjekt(int, int, short, int, char, int);
 int __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_QueryEntitySum(int, int);
 
@@ -115,7 +115,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			m.ids[4] = 0;
 			m.ids[5] = 0;
 			m.f5c = 100 - (int) *(unsigned char*) (item + 0x12);
-			fcn_004c5530(&m);
+			cm_SendCopyEntityData(&m);
 		}
 		else {
 			memset(&m, 0, sizeof(m));
@@ -143,7 +143,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 						continue;
 					sprintf(line, (char*) 0x67e8c0, *(int*) (o + 0x16c) + 5, st.x68[j], (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[st.x48[j]] + 1);
 					sprintf(line, (char*) 0x67e358, -1, *(int*) (q + 2), (int) st.x48[j], st.x68[j], g_773d75, (double) (int) fcn_0050bb50((int) st.x48[j], g_773d75));
-					fcn_004c51f0(-1, *(int*) (q + 2), (short) st.x48[j], st.x68[j], (char) g_773d75, (int) fcn_0050bb50((int) st.x48[j], g_773d75));
+					cm_SendSellObjekt(-1, *(int*) (q + 2), (short) st.x48[j], st.x68[j], (char) g_773d75, (int) fcn_0050bb50((int) st.x48[j], g_773d75));
 					*(int*) (o + 0x1b8) = (int) (fcn_0050bb50((int) st.x48[j], g_773d75) + *(int*) (o + 0x1b8));
 					st.x48[j] = 0;
 					st.x68[j] = 0;
@@ -156,7 +156,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			sprintf(line, (char*) 0x67e358, *(int*) (q + 2), *(int*) (req + 2), *(int*) 0x100d0c0, lim, g_773d75, 0);
 			if (*(int*) 0x100d10c <= amt)
 				amt = *(int*) 0x100d10c;
-			fcn_004c51f0(*(int*) (q + 2), *(int*) (req + 2), *(short*) 0x100d0c0, amt, (char) g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (q + 2), *(int*) (req + 2), *(short*) 0x100d0c0, amt, (char) g_773d75, 0);
 			m.ids[n] = *(unsigned short*) 0x100d0c0;
 			m.slots[n] = *(int*) (*(int*) 0x100d0d4 + 1);
 			n++;
@@ -182,7 +182,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 								want = *(int*) (e + 0x4c);
 								if (lim < want)
 									want = lim;
-								fcn_004c51f0(*(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, (char) g_773d75, 0);
+								cm_SendSellObjekt(*(int*) (q + 2), *(int*) (req + 2), *(int*) e, want, (char) g_773d75, 0);
 								m.ids[n] = *(unsigned short*) e;
 								m.slots[n] = *(int*) (*(int*) (e + 0x14) + 1);
 								n++;
@@ -228,17 +228,17 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 				want = totals[k];
 				if (want > sum) {
 					want = (want * 9) / 8;
-					fcn_004c4eb0((int) (char*) 0x67e8b0);
-					fcn_004c5150(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) k, want);
-					fcn_004c5150(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) g_773d75, (int) ((double) want * 1.03));
-					fcn_004c4ef0((int) (char*) 0x67e8b0);
+					cm_SendLogAction((int) (char*) 0x67e8b0);
+					cm_RequestMoveCredits(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) k, want);
+					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) g_773d75, (int) ((double) want * 1.03));
+					cm_SendTraceEnd((int) (char*) 0x67e8b0);
 				}
 				else if (want * 2 < sum) {
 					want = sum - (want * 9) / 8;
-					fcn_004c4eb0((int) (char*) 0x67e8b0);
-					fcn_004c5150(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) g_773d75, want);
-					fcn_004c5150(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) k, (int) ((double) want * 1.03));
-					fcn_004c4ef0((int) (char*) 0x67e8b0);
+					cm_SendLogAction((int) (char*) 0x67e8b0);
+					cm_RequestMoveCredits(*(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), -1, (char) g_773d75, want);
+					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4 + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), (char) k, (int) ((double) want * 1.03));
+					cm_SendTraceEnd((int) (char*) 0x67e8b0);
 				}
 			}
 			lim = m.slots[0];
@@ -256,7 +256,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 			m.f5c = lim;
 			m.f60 = *(int*) (o + 4);
 			if (*(int*) 0x100b0a4 == 0) {
-				fcn_004c5530(&m);
+				cm_SendCopyEntityData(&m);
 				*(int*) 0x772620 = *(int*) 0x772620 + 1;
 			}
 		}

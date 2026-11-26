@@ -15,7 +15,7 @@ void __cdecl fcn_0058d5f0(int);
 void __cdecl d2_OpenTransportPanel(int);
 void __cdecl fcn_005944d0(int);
 void __cdecl d2_ShowLagerOptions(int, int);
-void __cdecl fcn_005cf560(int);
+void __cdecl d2_OpenMeisterbriefDialog(int);
 void __cdecl d2_OpenBlutracheDialog(int);
 void __cdecl d2_ShowPersonalbuch(int, char*);
 void __cdecl d3_UpdateBuildingInteriorState(void);
@@ -61,7 +61,7 @@ void __cdecl d2_RunZigeunerInteriorHud(int a)
 				} else if (g_7746a0 == lager) {
 					d2_ShowLagerOptions(a, 0);
 				} else if (g_7746a0 == meister) {
-					fcn_005cf560(a);
+					d2_OpenMeisterbriefDialog(a);
 				} else if (g_7746a0 == betteln) {
 					d2_OpenBlutracheDialog(a);
 				}

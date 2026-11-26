@@ -27,10 +27,10 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_004c6b20(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
@@ -128,7 +128,7 @@ void __cdecl fcn_005aeab0(char* rec)
 				*(int*) (pkt + 0x58) = entityId;
 				*(int*) (pkt + 0x60) = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 				*(int*) (pkt + 0x64) = cnt;
-				fcn_004c5530(pkt);
+				cm_SendCopyEntityData(pkt);
 				io_FormatTextBuffer(note, 0x19c5, cnt, *(unsigned short*) ent);
 				fcn_00526120(note, 0);
 				g_774654 = 1;
@@ -137,7 +137,7 @@ void __cdecl fcn_005aeab0(char* rec)
 				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 1));
 				cm_AppendPacketFieldDelta(4, 1, (int) (rec - g_aed32c) + 0x65,
 				    &flags);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 				fcn_004c6b20(*(int*) (ent + 4),
 				    -(int) *(unsigned char*) (ent + 0x1b1), 0);
 				io_FormatTextBuffer(line, 0x19c6, *(unsigned short*) ent);

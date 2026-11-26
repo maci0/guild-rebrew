@@ -39,10 +39,10 @@ int __cdecl fcn_004f4830(int idx, fcn_004fd4f0_Stat* dst);
 int __cdecl gm_GetBuildingTechEffect(char* a, int b, int c);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_WalkEntityChain(unsigned short id);
-void __cdecl fcn_004c51a0(int, int, char, int);
-void __cdecl fcn_004c5480(int a1, int a2, float a3);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
+void __cdecl cm_RequestChangeFloat(int a1, int a2, float a3);
 float __cdecl fcn_00507e70(fcn_004fd4f0_Ent* a, fcn_004fd4f0_Ent* b, int k);
-void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
+void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x004fd4f0 */
 int __cdecl fcn_004fd4f0(char* building, fcn_004fd4f0_Out* out)
@@ -95,13 +95,13 @@ int __cdecl fcn_004fd4f0(char* building, fcn_004fd4f0_Out* out)
 		fb = (float) base;
 		amt = (int) ((MAX(gm_WalkEntityChain(ent->id) / fb * 160.0f, 0.0f) + 160.0f) * v);
 		total += amt;
-		fcn_004c51a0(-1, ent->h, g_773d75, amt);
+		cm_RequestTransferCurrencyNoKill(-1, ent->h, g_773d75, amt);
 		count++;
 		if (ent->mood < 0.95f && ent->mood > 0.05f)
-			fcn_004c5480(ent->h, 0x1d0, sign);
+			cm_RequestChangeFloat(ent->h, 0x1d0, sign);
 		if (out->who != 0) {
 			n = (int) (fcn_00507e70(me, ent, 4) * 10.0f + 1.0f);
-			fcn_004c54c0(*(int*) (out->who + 4), ent->h, n, 1);
+			cm_RequestCopyEntityData(*(int*) (out->who + 4), ent->h, n, 1);
 		}
 	}
 	out->count = count;

@@ -17,8 +17,8 @@ extern int g_7747b4;
 extern unsigned char g_773d75;
 
 int __cdecl gm_AccumulateTyped2(ENTITY_RECORD*);
-int __cdecl fcn_004c5150(int, int, char, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_RequestMoveCredits(int, int, char, int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 
 void __cdecl gm_ReplenishAiBuildingFunds(void)
@@ -37,20 +37,20 @@ void __cdecl gm_ReplenishAiBuildingFunds(void)
 			if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 5) {
 				funds = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]));
 				if (funds < limit) {
-					cmd_handle = fcn_004c5150(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), limit - funds);
+					cmd_handle = cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), limit - funds);
 					batch_count++;
 				}
 			} else if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 4
 				|| (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 2 && (*(int*)&gm_GameTime) % 4 == (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id & 3))) {
 				funds = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]));
 				if (funds < limit) {
-					cmd_handle = fcn_004c5150(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), limit - funds);
+					cmd_handle = cm_RequestMoveCredits(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, (*(char*)&g_773d75), limit - funds);
 					batch_count++;
 				}
 			}
 			if (batch_count >= 32 && cmd_handle != -1) {
 				do {
-					if (fcn_004c4450(cmd_handle) != 0) {
+					if (cm_GetCommandStatus(cmd_handle) != 0) {
 						break;
 					}
 					fcn_00535960();

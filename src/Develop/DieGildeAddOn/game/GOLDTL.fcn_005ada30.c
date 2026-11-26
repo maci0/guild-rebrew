@@ -36,12 +36,12 @@ unsigned char* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_EvalEntityInventoryValue(unsigned char* o, int* out);
-void __cdecl fcn_004c5120(int);
+void __cdecl cm_RequestFreeEntity(int);
 int __cdecl d2_CreateRadioGroup(int n, ...);
 void __cdecl d2_AddToRadioGroup(int g, int id);
 int __cdecl fcn_0046c690(int a);
-int __cdecl fcn_004c5a60(int a1, int a2, int a3);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendRemoveLinkedObject(int a1, int a2, int a3);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
@@ -122,7 +122,7 @@ void __cdecl fcn_005ada30(char* p)
 						}
 					}
 					else {
-						fcn_004c5120(*(int*) (e + 2));
+						cm_RequestFreeEntity(*(int*) (e + 2));
 					}
 				}
 			}
@@ -131,8 +131,8 @@ void __cdecl fcn_005ada30(char* p)
 		if (g_100f1dc != -1 && d2_CurrentElementId == back && grp != -1) {
 			i = fcn_0046c690(grp);
 			if (i >= 0) {
-				r = fcn_004c5a60(*(int*) (p + 1), -1, *(int*) (carts[i] + 2));
-				while (fcn_004c4450(r) == 0) {
+				r = cm_SendRemoveLinkedObject(*(int*) (p + 1), -1, *(int*) (carts[i] + 2));
+				while (cm_GetCommandStatus(r) == 0) {
 					fcn_00535960();
 				}
 				refresh = 1;

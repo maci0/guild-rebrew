@@ -9,9 +9,9 @@ extern short g_7f4c0c;
 extern unsigned char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl fcn_005100f0(int, int);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendCopyEntityData(char* msg);
 typedef struct F8 {
 	int mask;
 	int b;
@@ -58,6 +58,6 @@ int __cdecl fcn_0048e230(char* entity, char* request, char* a3)
 		fcn_004a5e60(p, 0, f, 0, 100.0f, &found);
 		*(int*) (msg + 0x58) = found;
 	}
-	fcn_004c5530(msg);
+	cm_SendCopyEntityData(msg);
 	return 1;
 }

@@ -52,11 +52,11 @@ int __cdecl main_RunFrameLoop(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_004c35f0(void);
 void __cdecl sv_ClearObjectSelection(void);
-int __cdecl fcn_004c5530(void*);
-int __cdecl fcn_004c4450(int);
-int __cdecl fcn_004c4480(int);
+int __cdecl cm_SendCopyEntityData(void*);
+int __cdecl cm_GetCommandStatus(int);
+int __cdecl cm_GetCommandResult(int);
 void __cdecl fcn_00526120(int, int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
@@ -192,11 +192,11 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 				if (cnt != 0) {
 					fcn_004c35f0();
 					sv_ClearObjectSelection();
-					sel = fcn_004c5530(&req);
-					while (!fcn_004c4450(sel)) {
+					sel = cm_SendCopyEntityData(&req);
+					while (!cm_GetCommandStatus(sel)) {
 						main_RunFrameLoop(0, 0x20007);
 					}
-					fcn_004c4480(sel);
+					cm_GetCommandResult(sel);
 				}
 				else {
 					fcn_00526120(*(int*) 0x14ab324, 4);
@@ -209,7 +209,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 		sel = main_RunFrameLoop(0x59ecc0, 0x677c7);
 	}
 	sv_ClearObjectSelection();
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	fcn_00471e30(total);
 	return fcn_00532ef0();
 }

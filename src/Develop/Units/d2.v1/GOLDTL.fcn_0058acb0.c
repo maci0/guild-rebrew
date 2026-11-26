@@ -29,8 +29,8 @@ int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 void __cdecl fcn_005100f0(int, int);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
-int __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
@@ -69,8 +69,8 @@ void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p)
 					cm_BeginPacketFieldDelta(p, *(int*) (p + 2));
 					cm_AppendPacketFieldDelta(4, 1, 0x1c, &v);
 					cm_AppendPacketFieldDelta(4, 1, 0x20, &v);
-					id = fcn_004c5360();
-					while (id != -1 && fcn_004c4450(id) == 0) {
+					id = cm_RequestChangeAttribute();
+					while (id != -1 && cm_GetCommandStatus(id) == 0) {
 						main_RunFrameLoop(0, 0x20007);
 					}
 					g_774654 = 1;

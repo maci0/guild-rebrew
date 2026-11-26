@@ -41,7 +41,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl fcn_004c6ae0(int, int);
-int __cdecl fcn_004c5530(Packet*);
+int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
@@ -76,7 +76,7 @@ int __cdecl d2_ShowIntimidationDialog(unsigned short* target)
 					pkt.x36 = 2;
 					pkt.x5c = *(int*) (target + 2);
 					pkt.x58 = pkt.x8;
-					fcn_004c5530(&pkt);
+					cm_SendCopyEntityData(&pkt);
 					nm = (*(pos14_7f4c00*)&gm_GameTime);
 					gm_AddTime(&nm, 0x18, 0, 0);
 					io_FormatTextBuffer(buf, 0x1d63, &nm, *target);

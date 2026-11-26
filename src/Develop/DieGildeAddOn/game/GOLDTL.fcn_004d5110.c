@@ -5,8 +5,8 @@ extern double g_6640e8;
 
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_AccumulateTyped2(char* entity);
-int __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
-int __cdecl fcn_004c51f0(int a1, int a2, int a3, int a4, char a5, int a6);
+int __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
+int __cdecl cm_SendSellObjekt(int a1, int a2, int a3, int a4, char a5, int a6);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 unsigned int __cdecl cut_RandMod(unsigned int n);
 int __cdecl _ftol(void);
@@ -30,7 +30,7 @@ int __cdecl fcn_004d5110(char* a1, char* a2, char* entity, char* otherEntity)
 		v = 0x9c400;
 	}
 	v = (int) (((double) cut_RandMod(0x32) * g_662a20 + g_664f18) * v);
-	fcn_004c5150(*(int*) (entity + 4), *(int*) (otherEntity + 4), g_773d75, v);
+	cm_RequestMoveCredits(*(int*) (entity + 4), *(int*) (otherEntity + 4), g_773d75, v);
 	if (p2 != 0 && p1 != 0) {
 		match = fcn_00502cd0(*(int*) (p2 + 0x14), 1, 5);
 		while (match != 0) {
@@ -38,7 +38,7 @@ int __cdecl fcn_004d5110(char* a1, char* a2, char* entity, char* otherEntity)
 			if (delay < 1) {
 				delay = 1;
 			}
-			fcn_004c51f0(*(int*) (p1 + 2), *(int*) (p2 + 2), (unsigned int) (unsigned short) *(short*) match, delay, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (p1 + 2), *(int*) (p2 + 2), (unsigned int) (unsigned short) *(short*) match, delay, g_773d75, 0);
 			v = (int) (fcn_0050bb50(*(unsigned short*) match, g_773d75) * delay + v);
 			match = gm_NextEntityQueryMatch();
 		}

@@ -10,7 +10,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 void __cdecl he_StartBefoerdern(char* o)
 {
@@ -32,6 +32,6 @@ void __cdecl he_StartBefoerdern(char* o)
 		return;
 	}
 	if (o[0x78] & 2) {
-		fcn_004c5420(*(int*) (e + 4), 0x1cc, 4, 0x1000000, 0);
+		cm_RequestChangeBits(*(int*) (e + 4), 0x1cc, 4, 0x1000000, 0);
 	}
 }

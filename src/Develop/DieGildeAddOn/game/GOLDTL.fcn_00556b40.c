@@ -4,11 +4,11 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
 
@@ -32,9 +32,9 @@ void __cdecl fcn_00556b40(char* e)
 			return;
 		}
 		if (a != 0) {
-			fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0, 0x800000);
+			cm_RequestChangeBits(*(int*) (a + 4), 0x1c8, 4, 0, 0x800000);
 			if (b != 0) {
-				fcn_004c54c0(*(int*) (b + 4), *(int*) (a + 4), (-8 - *(int*) (e + 0xb4)) * 5, 1);
+				cm_RequestCopyEntityData(*(int*) (b + 4), *(int*) (a + 4), (-8 - *(int*) (e + 0xb4)) * 5, 1);
 			}
 		}
 		he_FreeAction(e);
@@ -49,7 +49,7 @@ void __cdecl fcn_00556b40(char* e)
 		return;
 	}
 	if (*(int*) (e + 0x70) == 2) {
-		r = fcn_004c4450(*(int*) (e + 0x84));
+		r = cm_GetCommandStatus(*(int*) (e + 0x84));
 		if (r == 0) {
 			return;
 		}
@@ -66,8 +66,8 @@ void __cdecl fcn_00556b40(char* e)
 	}
 	if (b != 0 && b[8] != 0) {
 		if (*(int*) (e + 0x70) == 1) {
-			fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0, 0x800000);
-			fcn_004c54c0(*(int*) (b + 4), *(int*) (a + 4), (-2 - *(int*) (e + 0xb4)) * 5, 1);
+			cm_RequestChangeBits(*(int*) (a + 4), 0x1c8, 4, 0, 0x800000);
+			cm_RequestCopyEntityData(*(int*) (b + 4), *(int*) (a + 4), (-2 - *(int*) (e + 0xb4)) * 5, 1);
 			gm_AddTime(e + 0x52, 0, 2, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 			return;
@@ -88,7 +88,7 @@ void __cdecl fcn_00556b40(char* e)
 		*(int*) (e + 0x84) = fcn_004c5620(0, e);
 		return;
 	}
-	fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0, 0x800000);
+	cm_RequestChangeBits(*(int*) (a + 4), 0x1c8, 4, 0, 0x800000);
 	gm_AddTime(e + 0x52, 0, 2, 0);
 	*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 }

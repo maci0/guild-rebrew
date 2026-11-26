@@ -20,7 +20,7 @@ void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005bdc30(int, Query*, char*, void*, int);
 void __cdecl d2_OpenRaubzugDialog(int, char*);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
 void __cdecl fcn_0059dc50(char* e)
@@ -43,6 +43,6 @@ void __cdecl fcn_0059dc50(char* e)
 	q.xc = 1;
 	io_FormatTextBuffer(buf, 0x1a83);
 	fcn_005bdc30(1, &q, buf, (void*) d2_OpenRaubzugDialog, 0);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 }

@@ -22,7 +22,7 @@ void __cdecl fcn_00514570(char* s);
 void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_00535960(void);
 int __cdecl ls_SendGame(char* s);
-void __cdecl fcn_004c5790(int kind, Msg* m);
+void __cdecl cm_RequestSysMessage(int kind, Msg* m);
 void __cdecl ls_LoadSavegame(char* s, int n);
 void __cdecl sv_WaitForNetworkSync(int v);
 void __cdecl init_LocalData(void);
@@ -50,7 +50,7 @@ int __cdecl ls_LoadNetworkGame(char* name)
 		}
 		if (g_77494c & 1) {
 			msg.who = g_6a375c;
-			fcn_004c5790(6, &msg);
+			cm_RequestSysMessage(6, &msg);
 		}
 	}
 	while (!(g_77494c & 4)) {

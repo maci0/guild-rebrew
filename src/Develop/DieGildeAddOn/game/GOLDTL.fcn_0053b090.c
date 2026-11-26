@@ -31,7 +31,7 @@ void __cdecl fcn_00455140(char*, char*, float*);
 float __cdecl fcn_00451380(char*, float*);
 void __cdecl d3_SetObjectRotation(Model*, float*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
-void __cdecl fcn_00438ac0(Model*, int);
+void __cdecl d3_InvalidateSubTreeFlags(Model*, int);
 void __cdecl ch_PreloadCharacterMotions(Figure*, int, char*);
 void __cdecl RegisterStatusText(Model*, int, int);
 
@@ -59,7 +59,7 @@ Figure* __cdecl ch_CreateCharacterAtSceneObject(char* res, char* kind, int anim)
 		d3_SetObjectRotation(f->model, pos);
 		ch_PlaceOnGround(f, 0);
 		f->model->owner = f;
-		fcn_00438ac0(f->model, 1);
+		d3_InvalidateSubTreeFlags(f->model, 1);
 		ch_PreloadCharacterMotions(f, 1, "bewegung/gehen");
 		f->model->x48 = 0;
 		f->speed = 0.7f;

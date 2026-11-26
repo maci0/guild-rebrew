@@ -1,7 +1,7 @@
 extern char* g_6b8300;
 extern char gm_GameTime[];
 
-int __cdecl fcn_00500e20(char*);
+int __cdecl gm_GetSeason(char*);
 char* __cdecl strstr(char*, char*);
 int __cdecl sprintf(char*, char*, ...);
 int __cdecl fcn_0045be40(char*);
@@ -22,7 +22,7 @@ void __cdecl fcn_00516040(void)
 	unsigned int offset;
 	char byte;
 
-	mode = fcn_00500e20(gm_GameTime);
+	mode = gm_GetSeason(gm_GameTime);
 	if (g_6b8300 == 0) {
 		return;
 	}

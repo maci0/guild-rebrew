@@ -16,13 +16,13 @@ extern pos14_7f4c00 gm_GameTime;
 #include "client_packet_builder.h"
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
+int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 char* __cdecl fcn_0050dc90(unsigned char*);
 char* __cdecl fcn_005049a0(unsigned char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -49,7 +49,7 @@ void __cdecl fcn_0055fd10(char* u)
 		*(int*) (u + 0x70) += 1;
 		return;
 	case 1:
-		if (fcn_00500cb0((pos14_7f4c00*) (u + 0x52), &gm_GameTime) >= 0) {
+		if (gm_CompareGameTime((pos14_7f4c00*) (u + 0x52), &gm_GameTime) >= 0) {
 			return;
 		}
 		gm_ResolveEntityById(0, (void**) (&h), 0, *(int*) (u + 0xac));
@@ -74,7 +74,7 @@ void __cdecl fcn_0055fd10(char* u)
 				cm_BeginPacketFieldDelta(h, *(int*) (h + 2));
 				off = h - g_aed32c + 0x1c;
 				cm_AppendPacketFieldValue(1, 1, off, &v);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 		} else if (*(int*) (u + 0xb4) > 0) {
 			*(int*) (u + 0xb4) -= 1;
@@ -82,7 +82,7 @@ void __cdecl fcn_0055fd10(char* u)
 				cm_BeginPacketFieldDelta(h, *(int*) (h + 2));
 				off = h - g_aed32c + 0x1d;
 				cm_AppendPacketFieldValue(1, 1, off, &v);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 			}
 		}
 		if (*(int*) (u + 0xb4) != 0 || *(int*) (u + 0xb0) != 0) {

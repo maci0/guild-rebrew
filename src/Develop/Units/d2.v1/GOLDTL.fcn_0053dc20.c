@@ -15,7 +15,7 @@ extern void __cdecl fcn_00471af0(int obj, int a);
 extern int __cdecl fcn_004b41b0(void);
 extern int __cdecl fcn_004e4470(const char *name);
 extern void __cdecl fcn_004e44f0(int a);
-extern int __cdecl fcn_004fdec0(const char *name);
+extern int __cdecl gm_FindHeadIconIndex(const char *name);
 extern int __cdecl d2_RunChoosePlayerDialog(int a, int b);
 extern int __cdecl fcn_0053e8a0(int a);
 extern int __cdecl d2_ShowChooseProfessionDialog(int a);
@@ -165,7 +165,7 @@ label_53df85:
 								*(int *) 0x7e2430 = *p;
 								*(char *) 0x7e2434 = (char) *(unsigned short *) &p[1];
 								g_7e2468 =
-								    fcn_004fdec0((const char *) 0x6a3db4) + 0x639;
+								    gm_FindHeadIconIndex((const char *) 0x6a3db4) + 0x639;
 								goto label_53df85;
 							}
 							d3_SelectSceneContext(0, 0);

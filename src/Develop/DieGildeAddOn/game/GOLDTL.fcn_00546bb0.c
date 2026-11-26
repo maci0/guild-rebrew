@@ -5,7 +5,7 @@
 
 extern Rec7dc6e0 g_7dc6e0[64];
 
-void __cdecl fcn_00442c00(int, int);
+void __cdecl d3_SetObjectVisible(int, int);
 
 void __cdecl he_SetGfxInfoEnabledByKey(int k, int v)
 {
@@ -13,7 +13,7 @@ void __cdecl he_SetGfxInfoEnabledByKey(int k, int v)
 
 	for (i = 0; i < 0x40; i++) {
 		if (g_7dc6e0[i].c == k) {
-			fcn_00442c00(g_7dc6e0[i].d, v);
+			d3_SetObjectVisible(g_7dc6e0[i].d, v);
 		}
 	}
 }

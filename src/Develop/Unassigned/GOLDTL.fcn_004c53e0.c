@@ -6,7 +6,7 @@
 #pragma intrinsic(memcpy, memset)
 
 extern char g_aed2a0[];
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
 void __cdecl fcn_004c53e0(void)
 {
@@ -14,5 +14,5 @@ void __cdecl fcn_004c53e0(void)
 
 	buf[0] = 0x18;
 	memcpy(buf + 0x10, g_aed2a0, 0x7c);
-	fcn_004c4330(buf);
+	cm_EnqueueClientPacket(buf);
 }

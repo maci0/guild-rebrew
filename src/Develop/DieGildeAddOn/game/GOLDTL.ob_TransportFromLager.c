@@ -16,7 +16,7 @@ unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
-int __cdecl fcn_004c44c0(void);
+int __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl fcn_00535960(void);
 int __cdecl d2_GetControlValue(int);
 int __cdecl gm_CheckInventoryCapacity(char*, int, int);
@@ -26,7 +26,7 @@ int __cdecl gm_CheckEntityStock(void*, int, int);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_004c51f0(int, int, int, int, int, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00533a40(char*);
@@ -120,7 +120,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 							fcn_0057e880(0x25, (int)a2, 0, *stockSlot);
 						}
 					}
-					fcn_004c51f0(a0, *(int*)(a1 + 2), *stockSlot, count, a6,
+					cm_SendSellObjekt(a0, *(int*)(a1 + 2), *stockSlot, count, a6,
 					             (int)(unitPrice / a5));
 					if (unitPrice != g_6628a8 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
@@ -184,7 +184,7 @@ next:
 							fcn_0057e880(0x25, (int)a2, 0, *stockSlot);
 						}
 					}
-					fcn_004c51f0(a0, *(int*)(a1 + 2), *stockSlot, count, a6,
+					cm_SendSellObjekt(a0, *(int*)(a1 + 2), *stockSlot, count, a6,
 					             (int)(unitPrice / a5));
 					if (unitPrice != g_6628a8 && a5 != dbl_1_0) {
 						io_FormatTextBuffer(buf, 0xec, (int)(prod * a5 - prod));
@@ -201,7 +201,7 @@ next2:
 	} while ((int)stockSlot < 0x779120);
 	}
 	cm_EndCommandSync();
-	while (!fcn_004c44c0()) {
+	while (!cm_AreQueuedCommandsDone()) {
 		fcn_00535960();
 	}
 	return 1;

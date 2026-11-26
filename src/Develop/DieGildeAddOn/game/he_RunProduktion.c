@@ -12,16 +12,16 @@ struct unit;
 void* __cdecl gm_SearchTable67(int id);
 int __cdecl gm_GetMsgField(char* objekt, char* eintrag);
 void __cdecl io_FormatTextBuffer(char* text, int format, ...);
-int __cdecl fcn_004c4450(int id);
+int __cdecl cm_GetCommandStatus(int id);
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 char* __cdecl fcn_005049a0(char* objekt);
 char* __cdecl fcn_0050dc90(int objekt);
 int __cdecl gm_eval_SlotVoll(char* objekt, int ware, int menge);
 void __cdecl gm_AddTime(pos14_7f4c00* zeit, int a, int b, int c);
-int __cdecl fcn_00500cb0(pos14_7f4c00* a, pos14_7f4c00* b);
+int __cdecl gm_CompareGameTime(pos14_7f4c00* a, pos14_7f4c00* b);
 int __cdecl fcn_0050c830(pos14_7f4c00* a, pos14_7f4c00* b, int modus);
 int __cdecl gm_GetBuildingTechEffect(unsigned char* objekt, int art, int modus);
-void __cdecl fcn_004c54c0(int besitzer, int objekt, int menge, int modus);
+void __cdecl cm_RequestCopyEntityData(int besitzer, int objekt, int menge, int modus);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_004ff040(void* objekt);
 float __cdecl ahm_CalcRecipeProductivityBonus(char* objekt, int ware);
@@ -33,7 +33,7 @@ float __cdecl fcn_0050fdb0(int besitzer, int anzahl, int* ids);
 struct unit* __cdecl he_StartHandlungSearch(int anzahl, ...);
 void __cdecl he_FreeAction(struct unit* objekt);
 void __cdecl fcn_005467e0(int* objekt);
-int __cdecl fcn_004c51f0(int a, int b, short ware, int menge, char besitzer, int modus);
+int __cdecl cm_SendSellObjekt(int a, int b, short ware, int menge, char besitzer, int modus);
 int __cdecl fcn_004c5250(int objekt, unsigned short ware, int menge);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text, unsigned char flags,
     int typ, int x, int y, char* name, char* bild);
@@ -83,7 +83,7 @@ void __cdecl he_RunProduktion(char* e)
             return;
         }
         if (*(int*) (e + 0xc4) != -1) {
-            if (!fcn_004c4450(*(int*) (e + 0xc4))) {
+            if (!cm_GetCommandStatus(*(int*) (e + 0xc4))) {
                 return;
             }
             gm_ResolveEntityById((void**) &gebaeude, 0, 0, *(int*) (e + 0xbc));
@@ -92,7 +92,7 @@ void __cdecl he_RunProduktion(char* e)
                 return;
             }
             typ = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)gebaeude];
-            if (fcn_004c4450(*(int*) (e + 0xc4)) == 2) {
+            if (cm_GetCommandStatus(*(int*) (e + 0xc4)) == 2) {
                 haushalt = 0;
                 bild[0] = 0;
                 haus = fcn_0050dc90((int) gebaeude);
@@ -184,7 +184,7 @@ warten:
             for (i = 8; i != 0; --i, ++arbeiter_id) {
                 if (*arbeiter_id != -1) {
                     if (*(int*) (gebaeude + 0x41) != 2) {
-                        fcn_004c54c0(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 4),
+                        cm_RequestCopyEntityData(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 4),
                             *arbeiter_id, 2 - *(int*) (gebaeude + 0x41), 0);
                     }
                     arbeiter = gm_LookupEntityRecordById(*arbeiter_id);
@@ -273,7 +273,7 @@ warten:
                 *letzte_zeit = *(pos14_7f4c00*) (e + 0x52);
             }
             naechste_zeit = (pos14_7f4c00*) (e + 0x52);
-            if (fcn_00500cb0(naechste_zeit, &gm_GameTime) >= 0) {
+            if (gm_CompareGameTime(naechste_zeit, &gm_GameTime) >= 0) {
                 return;
             }
             do {
@@ -294,12 +294,12 @@ warten:
                 }
                 if (*(int*) (e + 0xc4) == -1 &&
                     fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) == 0) {
-                    *(int*) (e + 0xc4) = fcn_004c51f0(*(int*) (lager + 2), -1, *(unsigned short*) (e + 0xac), 0, g_773d75, 0);
+                    *(int*) (e + 0xc4) = cm_SendSellObjekt(*(int*) (lager + 2), -1, *(unsigned short*) (e + 0xac), 0, g_773d75, 0);
                 }
 lager_done:
                 *letzte_zeit = *naechste_zeit;
                 gm_AddTime(naechste_zeit, 0, 1, 0);
-            } while (fcn_00500cb0(naechste_zeit, &gm_GameTime) < 0);
+            } while (gm_CompareGameTime(naechste_zeit, &gm_GameTime) < 0);
             return;
         }
 mangel:

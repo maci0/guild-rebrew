@@ -73,7 +73,7 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 void __cdecl d3_ComputeObjectYawToTarget(float*, int);
 char* __cdecl strncpy(char*, const char*, unsigned int);
 char* __cdecl strcpy(char*, const char*);
-int __cdecl fcn_004c5530(char*);
+int __cdecl cm_SendCopyEntityData(char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -257,7 +257,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 				d3_TransformPoint(obj, (float*) (obj + 0x4c), msg.pos);
 				d3_ComputeObjectYawToTarget(msg.rot, (int) obj);
 				strncpy(msg.name, path, 0x3f);
-				fcn_004c5530((char*) &msg);
+				cm_SendCopyEntityData((char*) &msg);
 				g_774654 = 1;
 			} else {
 				fcn_00471af0(hwnd, 1);

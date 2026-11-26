@@ -26,11 +26,11 @@ unsigned short __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl gm_AccumulateTyped2(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_004fa6f0(int, int*, int*);
+int __cdecl gm_PosToStatsGrid(int, int*, int*);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl gm_CheckEntityType(unsigned char*);
 char* __cdecl gm_SetupEntityQuery(char*);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl ai_CollectGoodsResources(char*, char*);
 void __cdecl fcn_00486c40(char*, char*, int);
 void __cdecl fcn_00489010(char*, char*);
@@ -206,7 +206,7 @@ attack:
 				if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) p].category == 0x21) {
 					continue;
 				}
-				if (*(int*) (p + 0x61) != 0 && fcn_004fa6f0(*(int*) (p + 0x61) + 0x4c, &a, &b) != 0) {
+				if (*(int*) (p + 0x61) != 0 && gm_PosToStatsGrid(*(int*) (p + 0x61) + 0x4c, &a, &b) != 0) {
 					r = (b + a * 8) * 0x18;
 					weight = 1.0f - ((float) (*(unsigned short*) ((char*) 0x99ef80 + r)) * 0.125f + (float) (*(unsigned short*) ((char*) 0x99ef80 + r + 2))) / fmax;
 				} else {
@@ -261,7 +261,7 @@ attack:
 			if (*(int*) (msg + 0x58) == -1) {
 				return;
 			}
-			fcn_004c5530(msg);
+			cm_SendCopyEntityData(msg);
 			return;
 		}
 		if (action < 1) {
@@ -317,7 +317,7 @@ send48:
 		if (scanned < 2) {
 			return;
 		}
-		fcn_004c5530(msg);
+		cm_SendCopyEntityData(msg);
 	} else {
 		*(int*) (meister + 0x1b4) &= ~0x20;
 	}

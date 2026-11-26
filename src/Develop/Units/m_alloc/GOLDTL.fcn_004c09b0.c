@@ -11,7 +11,7 @@ extern int g_772d2c;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
-void __cdecl fcn_00426170(int*, int);
+void __cdecl d3snd_SetVoiceFlag0x10(int*, int);
 void __cdecl m_FreeTracked(void*);
 
 
@@ -26,7 +26,7 @@ void __cdecl fcn_004c09b0(void)
 	}
 	while ((*(fcn_004c09b0_node**)&g_772d34) != 0) {
 		next = (*(fcn_004c09b0_node**)&g_772d34)->next;
-		fcn_00426170((*(fcn_004c09b0_node**)&g_772d34)->f0, 0);
+		d3snd_SetVoiceFlag0x10((*(fcn_004c09b0_node**)&g_772d34)->f0, 0);
 		m_FreeTracked((*(fcn_004c09b0_node**)&g_772d34));
 		(*(fcn_004c09b0_node**)&g_772d34) = next;
 	}

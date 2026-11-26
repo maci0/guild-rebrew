@@ -39,8 +39,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_004c5530(Packet*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendCopyEntityData(Packet*);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -75,8 +75,8 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 				pkt.x36 = 2;
 				pkt.x5c = *(int*) (target + 2);
 				pkt.x58 = pkt.x8;
-				h = fcn_004c5530(&pkt);
-				while (fcn_004c4450(h) == 0) {
+				h = cm_SendCopyEntityData(&pkt);
+				while (cm_GetCommandStatus(h) == 0) {
 					fcn_00535960();
 				}
 				r = 1;

@@ -35,7 +35,7 @@ extern short g_7f4c0c;
 
 int __cdecl fcn_004ecf00(char*, int*, int*, int);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c5530(Msg*);
+void __cdecl cm_SendCopyEntityData(Msg*);
 
 int __cdecl he_SendEvent096(char* e, int* list, int idx)
 {
@@ -58,6 +58,6 @@ int __cdecl he_SendEvent096(char* e, int* list, int idx)
 	msg.v5c = list[idx * 2 + 3];
 	msg.v58 = list[0];
 	msg.v68 = gm_RandomMod(0x5a0) + 1000;
-	fcn_004c5530(&msg);
+	cm_SendCopyEntityData(&msg);
 	return 1;
 }

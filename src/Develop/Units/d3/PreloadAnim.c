@@ -2,7 +2,7 @@
 
 #include "Develop/Units/d3/d3_animation.h"
 
-char* __cdecl fcn_00401040(char* path);
+char* __cdecl StripPathAndExt(char* path);
 char* __cdecl d3_FindAnimByName(const char* name);
 char* __cdecl d3_LoadAnimStream(char* path, char* name, char loop);
 void __cdecl d3_RemoveObjectAnimation(char* a, char* b);
@@ -20,7 +20,7 @@ int __cdecl PreloadAnim(char*** arg1, char** arg2)
 	strcpy(buf1, *arg2);
 	strcat(buf1, ".baf");
 	strcpy(buf2, buf1);
-	anim = fcn_00401040(buf2);
+	anim = StripPathAndExt(buf2);
 	if (buf1[0] != 0 && obj != 0 && *(char**) (obj + 0x1cc) != 0) {
 		if (d3_FindAnimByName(buf2) == 0) {
 			d3_LoadAnimStream(buf1, buf2, 0);

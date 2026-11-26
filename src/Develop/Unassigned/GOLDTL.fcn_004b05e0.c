@@ -5,7 +5,7 @@ extern char g_7f4ca0[];
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl atoi(char*);
 int __cdecl fcn_004ae130(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 
 /* ADDRESS: GOLD 0x004b04a0 */
@@ -43,7 +43,7 @@ int __cdecl hst_HandleAnsehenBeiAmtstraegern(int* record, int index, char* text)
 	for (i = 0; i < 768; i++) {
 		if (fcn_004ae130(i) != 0
 		    && (g_7f4ca0[i * 540 + 0x166] != 0 || g_7f4ca0[i * 540 + 0x169] != 0))
-			fcn_004c54c0(*(int*) (e + 4), *(int*) (g_7f4ca0 + i * 540 + 4), n, 1);
+			cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (g_7f4ca0 + i * 540 + 4), n, 1);
 	}
 	return 1;
 }

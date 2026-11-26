@@ -7,9 +7,9 @@ extern float g_10092c0[16];
 extern char g_67eac4[];
 
 char* __cdecl gm_SearchTable67(int id);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
+void __cdecl cm_SendCopyEntityData(char* msg);
 
 int __cdecl ai_RunSabotieren(char* actor, char* cmd)
 {
@@ -36,9 +36,9 @@ int __cdecl ai_RunSabotieren(char* actor, char* cmd)
 	msg[0x36] = 1;
 	*(int*) (msg + 0x58) = *(int*) (t + 1);
 	*(int*) (msg + 0x7c) = *(int*) (cmd + 0x10);
-	fcn_004c4eb0(g_67eac4);
-	fcn_004c5530(msg);
-	fcn_004c4ef0(g_67eac4);
+	cm_SendLogAction(g_67eac4);
+	cm_SendCopyEntityData(msg);
+	cm_SendTraceEnd(g_67eac4);
 	g_10092c0[8] = g_10092c0[0] * *(float*) (cmd + 0x14);
 	g_10092c0[10] = g_10092c0[2] * *(float*) (cmd + 0x14);
 	g_10092c0[12] = g_10092c0[4] * *(float*) (cmd + 0x14);

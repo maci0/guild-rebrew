@@ -55,11 +55,11 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00526120(int, int);
-int __cdecl fcn_004c5530(struct msg*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendCopyEntityData(struct msg*);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
 int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
@@ -116,8 +116,8 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 					m.who = *(int*) (request + 4);
 					m.slot = request[8];
 					m.field = hh->entity_id;
-					id = fcn_004c5530(&m);
-					while (id != -1 && fcn_004c4450(id) == 0) {
+					id = cm_SendCopyEntityData(&m);
+					while (id != -1 && cm_GetCommandStatus(id) == 0) {
 						main_RunFrameLoop(0, 0x20007);
 					}
 					r = 1;
@@ -129,7 +129,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 		}
 	} while (main_RunFrameLoop(d2_ConfirmGrabpflege, 0x677c7) != 0);
 	fcn_00471e30(h);
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 	return r;
 }

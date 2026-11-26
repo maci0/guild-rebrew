@@ -325,6 +325,7 @@ extern char* g_slot_array;
  * server function calls them, so /OPT:REF discards them; their absolute
  * fixups, where they have any, still count toward LINK's .reloc reservation. */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_CompareGameTime(char* a, char* b)
 {
 	int ta;
@@ -343,6 +344,7 @@ int __cdecl gm_CompareGameTime(char* a, char* b)
 	}
 	return ta > tb;
 }
+#endif
 
 int __cdecl gm_GameTimeMinutesBetween(char* a, char* b)
 {
@@ -350,6 +352,7 @@ int __cdecl gm_GameTimeMinutesBetween(char* a, char* b)
 	       *(int*) (a + 6) + *(int*) (b + 6);
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 void __cdecl gm_PackGameTime(int* src, char* dst)
 {
 	*(short*) (dst + 2) = (short) *src + 0x578;
@@ -359,6 +362,7 @@ void __cdecl gm_PackGameTime(int* src, char* dst)
 	dst[5] = ((char*) src)[6];
 	*(int*) (dst + 6) = *(int*) ((char*) src + 0xa);
 }
+#endif
 
 void __cdecl gm_UnpackGameTime(char* src, char* dst)
 {
@@ -368,6 +372,7 @@ void __cdecl gm_UnpackGameTime(char* src, char* dst)
 	*(int*) (dst + 0xa) = *(int*) (src + 6);
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 void __cdecl gm_AdvanceGameTime(void* clock, int unused, int hours, int minutes, int seconds)
 {
 	void __cdecl sim_AdvanceGameClock(void* clock, int arg2, int arg3, int arg4);
@@ -375,16 +380,19 @@ void __cdecl gm_AdvanceGameTime(void* clock, int unused, int hours, int minutes,
 	(void) unused;
 	sim_AdvanceGameClock(clock, hours, minutes, seconds);
 }
+#endif
 
 int __cdecl gm_GetPackedSeason(char* packed)
 {
 	return *(short*) (packed + 2) % 4;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_GetSeason(int* time)
 {
 	return *time % 4;
 }
+#endif
 
 
 /* Game function - gm_InitObjektHersteller (initialize object manufacturers)
@@ -1272,6 +1280,7 @@ int __cdecl gm_FindItemTypeByName(char* name)
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_FindItemTypeByName(): unknown item", 1);
 	return 0;
 }
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_IsRawItem(int item)
 {
 	char kind;
@@ -1282,6 +1291,7 @@ int __cdecl gm_IsRawItem(int item)
 	}
 	return 0;
 }
+#endif
 
 /* Client-only season-table helpers (TL 0x5016f0, 0x502450; discarded). The 5 x 0x2a90 season tables are
  * the server's g_town_records (0x1009b760, 54480 bytes): the client's at 0x85ab80 sit at the offset
@@ -1464,6 +1474,7 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 	return 0;
 }
 #endif
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only: map distance between two tile positions (discarded). */
 double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
 {
@@ -1481,6 +1492,7 @@ double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
 	}
 	return sqrt(dx * dx + dy * dy) * 2.90816330909729;
 }
+#endif
 #if defined(REBREW_SERVER)
 void* __cdecl gm_NextEntityQueryMatch(void)
 {

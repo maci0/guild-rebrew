@@ -17,8 +17,8 @@ char* __cdecl gm_SearchTable67(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x004973a0 */
 int __cdecl fcn_004973a0(int a1, Msg* m, Msg* ev)
@@ -60,10 +60,10 @@ int __cdecl fcn_004973a0(int a1, Msg* m, Msg* ev)
 		if (home == 0) {
 			return 0;
 		}
-		fcn_004c5150(-1, *(int*) (home + 2), g_773d75, n);
-		fcn_004c51f0(id, -1, m->a, m->b, g_773d75, 0);
+		cm_RequestMoveCredits(-1, *(int*) (home + 2), g_773d75, n);
+		cm_SendSellObjekt(id, -1, m->a, m->b, g_773d75, 0);
 		return 0x39;
 	}
-	fcn_004c51f0(id, -1, m->a, m->b, g_773d75, (int) fcn_0050bb50(m->a, g_773d75));
+	cm_SendSellObjekt(id, -1, m->a, m->b, g_773d75, (int) fcn_0050bb50(m->a, g_773d75));
 	return 0xb;
 }

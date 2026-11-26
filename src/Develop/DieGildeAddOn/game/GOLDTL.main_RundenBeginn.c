@@ -7,7 +7,7 @@ int __cdecl gm_CheckStatLevel(int id, int index);
 int __cdecl gm_GetOppositeStatIndex(int kind);
 int __cdecl he_RegisterApEvent(int id, char* text, int kind, int arg);
 int __cdecl fcn_005c6270(void* slot, int key);
-void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
+void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 void __cdecl gm_BuildDealSummary(int id, char* out);
 int __cdecl gm_GetBuildingTechEffect(int a1, int a2, int a3);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
@@ -93,7 +93,7 @@ void __cdecl main_RundenBeginn(void)
 				if (p)
 					*p -= 1;
 			}
-			fcn_004c5420(*(int*) (slot + 4), 0x1cc, 4, 0, 0x100000);
+			cm_RequestChangeBits(*(int*) (slot + 4), 0x1cc, 4, 0, 0x100000);
 		}
 		if (*(int*) (slot + 0x1cc) & 0x200000) {
 			if (v5 == 0) {
@@ -102,7 +102,7 @@ void __cdecl main_RundenBeginn(void)
 				if (p)
 					*p -= 1;
 			}
-			fcn_004c5420(*(int*) (slot + 4), 0x1cc, 4, 0, 0x200000);
+			cm_RequestChangeBits(*(int*) (slot + 4), 0x1cc, 4, 0, 0x200000);
 		}
 		gm_BuildDealSummary(*(unsigned short*) slot, disp);
 		if (*(int*) (slot + 0x170) != 0) {

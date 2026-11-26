@@ -3,11 +3,11 @@ extern char s_67fb68[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_004c4eb0(char* s);
+void __cdecl cm_SendLogAction(char* s);
 void __cdecl fcn_004c68c0(void* msg);
-void __cdecl fcn_004c58b0(int, int);
-void __cdecl fcn_004c51a0(int, int, int, int);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_RequestLinkEvidence(int, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
+void __cdecl cm_SendTraceEnd(char* s);
 
 struct msg_4ab3e0 {
 	int tag;
@@ -47,11 +47,11 @@ int __cdecl fcn_004ab3e0(char* actor, char* a2, char* a3)
 	msg.who = *(int*) (actor + 4);
 	msg.what = *(int*) (a2 + 4);
 	msg.amount = *(int*) (a2 + 0x10);
-	fcn_004c4eb0(s_67fb68);
+	cm_SendLogAction(s_67fb68);
 	fcn_004c68c0(&msg);
-	fcn_004c58b0(*(int*) (a2 + 4), *(int*) (actor + 4));
-	fcn_004c51a0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (found + 0x27)].entity_id,
+	cm_RequestLinkEvidence(*(int*) (a2 + 4), *(int*) (actor + 4));
+	cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (found + 0x27)].entity_id,
 	    *(int*) (actor + 4), 0, *(int*) (a2 + 0x10));
-	fcn_004c4ef0(s_67fb68);
+	cm_SendTraceEnd(s_67fb68);
 	return 1;
 }

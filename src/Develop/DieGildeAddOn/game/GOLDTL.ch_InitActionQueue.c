@@ -21,7 +21,7 @@ int __cdecl ch_ExecuteTurn90();
 int __cdecl ch_WalkOnPath();
 int __cdecl fcn_0040aa00();
 int __cdecl ch_RunWalkToRandomDummy();
-int __cdecl fcn_0040abd0();
+int __cdecl ch_DequeueIfIdle();
 int __cdecl ch_UpdateFade();
 int __cdecl ch_UpdateWait();
 char* __cdecl m_alloc(int, const char*);
@@ -53,7 +53,7 @@ int __cdecl ch_InitActionQueue(void)
 	ch_DeclareAction(51, ch_Move2Universe, 1, &(*(char*)g_6b5c60), 3);
 	ch_DeclareAction(53, ch_ExecTurnTowards, 1, &(*(char*)g_6b5c60), 1);
 	ch_DeclareAction(54, ch_ExecuteAttachAnimation, 1, &(*(char*)g_6b5c60), 0);
-	ch_DeclareAction(55, fcn_0040abd0, 1, &(*(char*)g_6b5c60), 1);
+	ch_DeclareAction(55, ch_DequeueIfIdle, 1, &(*(char*)g_6b5c60), 1);
 	ch_DeclareAction(56, ch_UpdateFade, 1, &(*(char*)g_6b5c60), 1);
 	ch_DeclareAction(59, ch_UpdateWait, 1, &(*(char*)g_6b5c60), 1);
 	ch_DeclareAction(52, UsingGate, 1, &(*(char*)g_6b5c60), 5);

@@ -3,10 +3,10 @@ extern pos14_7f4c00 gm_GameTime;
 extern double g_6640e8;
 extern double g_6629c8;
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl gm_AddTime(unsigned int*, int, int, int);
-int __cdecl fcn_00500cb0(int, int);
+int __cdecl gm_CompareGameTime(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
@@ -14,7 +14,7 @@ int __cdecl fcn_005049a0(int);
 int __cdecl fcn_0050dc90(int);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
-void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 int __cdecl io_FormatTextBuffer(char*, int, int, int);
 int __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
@@ -43,7 +43,7 @@ void __cdecl fcn_005609c0(char* jobState)
 			while (i < *(unsigned char*) (jobState + 0xac)) {
 				ent = gm_LookupEntityRecordById(*(int*) (jobState + 0x8c + i * 4));
 				if (ent != 0 && *(int*) (ent + 0x16c) != 0) {
-					fcn_004c5c80(*(int*) (jobState + 0x8c + i * 4));
+					cm_SendCancelCharacterActions(*(int*) (jobState + 0x8c + i * 4));
 					fcn_004c5da0(*(int*) (jobState + 0x8c + i * 4),
 						*(int*) (*(int*) (ent + 0x16c) + 1),
 						*(int*) (jobState + 0xb4), 0, 0, (char*) 0x6a6510);
@@ -76,7 +76,7 @@ void __cdecl fcn_005609c0(char* jobState)
 		return;
 	}
 	/* state 1: wait for the delay, then spawn the object */
-	if (fcn_00500cb0((int) (jobState + 0x52), 0x7f4c00) >= 0) {
+	if (gm_CompareGameTime((int) (jobState + 0x52), 0x7f4c00) >= 0) {
 		return;
 	}
 	rec = gm_StartFilteredEntitySearch(1, 1, *(int*) (jobState + 0x10));
@@ -93,7 +93,7 @@ void __cdecl fcn_005609c0(char* jobState)
 		tmp = fcn_0050dc90(rec);
 		f = (double) gm_GetBuildingTechEffect(rec, 0xb, 1) * 0.01 + g_6629c8;
 		len = (int) ((gm_RandomMod(5) + 5) * f);
-		fcn_004c51f0(*(int*) (ent + 2), -1, *(unsigned short*) (jobState + 0xae),
+		cm_SendSellObjekt(*(int*) (ent + 2), -1, *(unsigned short*) (jobState + 0xae),
 			len, *(unsigned char*) 0x773d75, 0);
 		io_FormatTextBuffer(text, 0x1809, 0x1805, rec);
 		io_FormatTextBuffer(name, 0x180a, len,

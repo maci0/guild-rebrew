@@ -12,11 +12,11 @@ extern unsigned char g_773d75;
 extern float g_66414c;
 extern char g_67e968[];
 
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
 int __cdecl fcn_0050d170(int k);
-void __cdecl fcn_004c5150(int a, int b, char c, int n);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
+void __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl amt_ExecGebaeudeBauen(char* a1, char* a2, char* a3);
 
 int __cdecl ai_RunDomizil(char* kontext, char* ziel, char* aktion)
@@ -34,10 +34,10 @@ int __cdecl ai_RunDomizil(char* kontext, char* ziel, char* aktion)
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(short*) (msg + 0x34) = g_7f4c0c;
 		*(int*) (msg + 0x58) = *(int*) (aktion + 4);
-		fcn_004c4eb0(g_67e968);
-		fcn_004c5150(-1, *(int*) (kontext + 4), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (ziel + 4)) * 0.3f));
-		fcn_004c5530(msg);
-		fcn_004c4ef0(g_67e968);
+		cm_SendLogAction(g_67e968);
+		cm_RequestMoveCredits(-1, *(int*) (kontext + 4), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (ziel + 4)) * 0.3f));
+		cm_SendCopyEntityData(msg);
+		cm_SendTraceEnd(g_67e968);
 		return 0x40;
 	}
 	return amt_ExecGebaeudeBauen(kontext, ziel, aktion) ? 0x40 : 0;

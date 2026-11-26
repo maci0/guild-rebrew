@@ -18,7 +18,7 @@ SOUND_SOURCE* __cdecl d3snd_AttachSoundSource(char* voice, char* objekt, int vol
     if (voice != 0 && objekt != 0 && *(SOUND_SOURCE**)(objekt + sound_objekt_link_offset) == 0) {
         source = d3snd_FindFreeSource();
         if (source != 0 && *(char**)(voice + 4) != 0) {
-            fcn_00426170((int*)voice, 1);
+            d3snd_SetVoiceFlag0x10((int*)voice, 1);
             strncpy(source->name, *(char**)(voice + 4) + 4, 50);
             scaled = range * g_662b40;
             source->objekt = objekt;

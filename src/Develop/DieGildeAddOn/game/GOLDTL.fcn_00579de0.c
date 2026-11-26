@@ -33,7 +33,7 @@ extern char g_7f4ca0[];
 extern float g_696540[];
 extern float g_696550[];
 
-int __cdecl fcn_00500e20(int* pos);
+int __cdecl gm_GetSeason(int* pos);
 void __cdecl gm_AddTime(pos14_7f4c00* pos, int a, int b, int c);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int a, int b, int id, int d);
@@ -66,7 +66,7 @@ void __cdecl he_RunGrabpflege(char* a0)
 	int row;
 	float f;
 
-	win = fcn_00500e20((int*) &gm_GameTime);
+	win = gm_GetSeason((int*) &gm_GameTime);
 	value = *(int*) &gm_GameTime.b & 0xffff;
 	if (((float) value >= g_696550[win] || (float) value < g_696540[win])
 		&& ((Place579*) a0)->status != -1

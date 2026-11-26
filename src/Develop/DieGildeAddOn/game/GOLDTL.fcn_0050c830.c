@@ -28,9 +28,9 @@ typedef struct
 #define MINF(a, b) ((a) < (b) ? (a) : (b))
 #define CLAMPF(v, lo, hi) MINF(MAXF((lo), (v)), (hi))
 
-int __cdecl fcn_00500e20(int* p);
+int __cdecl gm_GetSeason(int* p);
 int __cdecl gm_GetElapsedMinutes(TimeKey* a, TimeKey* b);
-int __cdecl fcn_00500cb0(Time* a, Time* b);
+int __cdecl gm_CompareGameTime(Time* a, Time* b);
 void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int field_6, unsigned int field_10);
 
 /* Interpolates the sync time between two dated times: the start record's
@@ -50,7 +50,7 @@ int __cdecl fcn_0050c830(Time* start, Time* end, char* building)
 	int acc;
 	int res1;
 
-	idx = fcn_00500e20((int*) start);
+	idx = gm_GetSeason((int*) start);
 	f1 = g_696540[idx];
 	f2 = g_696550[idx];
 	if ((g_7747b0 & 0x80) != 0) {
@@ -61,7 +61,7 @@ int __cdecl fcn_0050c830(Time* start, Time* end, char* building)
 			return gm_GetElapsedMinutes((TimeKey*) start, (TimeKey*) end);
 		}
 	}
-	if (fcn_00500cb0(start, end) > 0) {
+	if (gm_CompareGameTime(start, end) > 0) {
 		return 0;
 	}
 	t = *start;

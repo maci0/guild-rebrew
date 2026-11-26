@@ -44,7 +44,7 @@ char* __cdecl evt_LoadGfxScript(int);
 void __cdecl fcn_00428340(char*, int, ...);
 void __cdecl fcn_00510820(int, void*, int);
 void __cdecl fcn_0052d9d0(void*);
-int __cdecl fcn_00500e20(char*);
+int __cdecl gm_GetSeason(char*);
 void __cdecl fcn_005165b0(int);
 char __cdecl d3_TraverseSceneObjects(char*, char*, unsigned int, void (__cdecl*)(char*));
 void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
@@ -152,7 +152,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 	h = *(int*) (upgradeBuilding + 0x61);
 	if (h != 0) {
 		float f;
-		res = fcn_00500e20((char*) 0x7f4c00);
+		res = gm_GetSeason((char*) 0x7f4c00);
 		if (res == 1) g_773dd4 = (unsigned char)res;
 		else if (res == 0) g_773dd4 = (unsigned char)res;
 		else if (res == 2) g_773dd4 = (unsigned char)res;

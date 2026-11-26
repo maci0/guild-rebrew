@@ -32,9 +32,9 @@ extern int d3_CurrentContextIndex;
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindRecordById(int);
 void __cdecl fcn_0055d6e0(char*, char*);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-int __cdecl fcn_004c5290(int, int, int);
+int __cdecl cm_RequestMoveObjekt(int, int, int);
 int __cdecl fcn_00505340(char*);
 void __cdecl fcn_004c5d20(int, int);
 int __cdecl ch_IsEntityNearBuildingDoor(char*, char*);
@@ -68,17 +68,17 @@ void __cdecl fcn_0055dab0(char* e)
 	}
 	fcn_0055d6e0(e, r);
 	if (e[0xd0] == 0) {
-		fcn_004c5c80(*(int*) (r + 2));
+		cm_SendCancelCharacterActions(*(int*) (r + 2));
 		if (!fcn_00505340(b)) {
 			fcn_004c5d20(*(int*) (r + 2), 1);
 		}
 		fcn_004c5da0(*(int*) (r + 2), *(int*) (c + 1), -1, 0, 0, "Trans");
 		if (!fcn_00505340(b)) {
-			*(int*) (e + 0xec) = fcn_004c5290(*(int*) (s44 + 1), *(int*) (b + 1), *(int*) (r + 2));
+			*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (s44 + 1), *(int*) (b + 1), *(int*) (r + 2));
 		}
 		e[0xd0] = 1;
 	} else if (ch_IsEntityNearBuildingDoor(r, c)) {
-		*(int*) (e + 0xec) = fcn_004c5290(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
+		*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
 		if (*(unsigned char*) c == 0x47) {
 			io_FormatTextBuffer(msg, 0x1c3b, 1, 0x1c39, g_868060 + *(int*) (c + 0x65) * 0x2f4);
 			if ((g_7e35c0[g_774650][0] != 0x5ba910 || g_7746c8 != c) &&

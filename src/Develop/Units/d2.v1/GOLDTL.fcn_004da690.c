@@ -24,7 +24,7 @@ int __cdecl fcn_0051af00(char *, char *, char *);
 int __cdecl fcn_004e44f0(int);
 int __cdecl amt_IsCandidateInOffice(int, char *);
 int __cdecl fcn_004727a0(int, int);
-int __cdecl fcn_005ca560(void *);
+int __cdecl d2_BuildPersonStatusDesc(void *);
 int __cdecl fcn_005ca740(int, int, int, int, int *, int);
 void __cdecl fcn_004da510(int, int, int);
 int __cdecl fcn_004e4b40(int, ...);
@@ -34,9 +34,9 @@ int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_004e51d0(unsigned int *, void *);
 int __cdecl fcn_004e9180(void *, int);
 int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char *, unsigned char *, int, int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl fcn_00535960(void);
-int __cdecl fcn_004c54c0(int, int, int, int);
+int __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl fcn_004e48b0(void);
 int __cdecl fcn_004e45c0(int);
 void __cdecl cut_CleanupCutscene(void);
@@ -318,7 +318,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 *(int *)((char *)&mid + 0x38) = s10;
                 *(int *)((char *)&mid + 0x4c) = 0;
                 *(int *)((char *)&mid + 0x68) = 0;
-                fcn_005ca560((char *)&mid + 0x38);
+                d2_BuildPersonStatusDesc((char *)&mid + 0x38);
                 fcn_005ca740(0x28, 0, *(int *)0x772514, 0x54,
                              (int *)((char *)&mid + 0x38), 1);
                 fcn_004727a0(s60, 2);
@@ -345,7 +345,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             lane[0] = blkA.s84[n];
                             lane[5] = 0;
                             lane[12] = 0;
-                            fcn_005ca560((char *)lane);
+                            d2_BuildPersonStatusDesc((char *)lane);
                             fcn_005ca740(*(short *)(g_772500 + 0x1ebd8) * i + acc, 0,
                                          *(int *)0x772514, 0x54, lane, 0);
                             acc += s08;
@@ -432,16 +432,16 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         n = s0C;
                         do {
                             if (*(int *)jc != *(int *)(s10 + 4))
-                                fcn_004c54c0(*(int *)jc, *(int *)(s10 + 4),
+                                cm_RequestCopyEntityData(*(int *)jc, *(int *)(s10 + 4),
                                              *(int *)(jc + 0x84) == 0 ? -0x28 :
                                              (*(int *)(jc + 0x84) == 1 ? 0xa : -0x14), 1);
                             jc += 0x35c;
                         } while (--n);
                         s70 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 4), 0, 0, 3, 0xff);
-                        if (fcn_004c4450(s70) == 0) {
+                        if (cm_GetCommandStatus(s70) == 0) {
                             do {
                                 fcn_00535960();
-                            } while (fcn_004c4450(s70) == 0);
+                            } while (cm_GetCommandStatus(s70) == 0);
                         }
                     }
                 } else {
@@ -460,7 +460,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             jc = 0x9b0e30;
                             do {
                                 if (*(int *)jc != *(int *)(s10 + 4))
-                                    fcn_004c54c0(*(int *)jc, *(int *)(s10 + 4),
+                                    cm_RequestCopyEntityData(*(int *)jc, *(int *)(s10 + 4),
                                                  *(int *)(jc + 0x84) == 0 ? -0x28 :
                                                  (*(int *)(jc + 0x84) == 1 ? 0xa : 5), 1);
                                 jc += 0x35c;
@@ -472,10 +472,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                                (unsigned char *)s70, 1, 0xff);
                         else
                             s24 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 4), 0, 0, 4, 0xff);
-                        if (fcn_004c4450(s24) == 0) {
+                        if (cm_GetCommandStatus(s24) == 0) {
                             do {
                                 fcn_00535960();
-                            } while (fcn_004c4450(s24) == 0);
+                            } while (cm_GetCommandStatus(s24) == 0);
                         }
                     }
                 }
@@ -567,7 +567,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         lane[5] = 0;
                         lane[11] = 0;
                         lane[12] = 0;
-                        fcn_005ca560((char *)lane);
+                        d2_BuildPersonStatusDesc((char *)lane);
                         fcn_005ca740((0xa0 - *(short *)(g_772500 + 0x1ebd8)) / 2,
                                      0, *(int *)0x772514, 0x54,
                                      lane, 1);
@@ -616,7 +616,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                     *(int *)((char *)&mid + 0x3a8 + i * 0x38) = blkA.s84[i];
                                     *(int *)((char *)&mid + 0x3bc + i * 0x38) = 0;
                                     *(int *)((char *)&mid + 0x3d8 + i * 0x38) = 0;
-                                    fcn_005ca560((char *)&mid + 0x3a8 + i * 0x38);
+                                    d2_BuildPersonStatusDesc((char *)&mid + 0x3a8 + i * 0x38);
                                     fcn_005ca740(*(short *)(g_772500 + 0x1ebd8) * i + acc,
                                                  0, *(int *)0x772514, 0x54,
                                                  (int *)((char *)&mid + 0x3a8 + i * 0x38), 0);
@@ -638,10 +638,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)g_774970 * 0x21c)) {
                         s5C = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0, (unsigned char *)blkA.sel[0], numSel, 0xff);
-                        if (fcn_004c4450(s5C) == 0) {
+                        if (cm_GetCommandStatus(s5C) == 0) {
                             do {
                                 fcn_00535960();
-                            } while (fcn_004c4450(s5C) == 0);
+                            } while (cm_GetCommandStatus(s5C) == 0);
                         }
                     }
                 } else if (rs20 == 0) {
@@ -661,10 +661,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     if (a0[3] == *(int *)(0x7f4ca4 +
                                           (unsigned int)g_774970 * 0x21c)) {
                         s70 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0, (unsigned char *)s58, 1, 0xff);
-                        if (fcn_004c4450(s70) == 0) {
+                        if (cm_GetCommandStatus(s70) == 0) {
                             do {
                                 fcn_00535960();
-                            } while (fcn_004c4450(s70) == 0);
+                            } while (cm_GetCommandStatus(s70) == 0);
                         }
                     }
                 } else {
@@ -746,10 +746,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                                   (unsigned int)g_774970 * 0x21c)) {
                                 s78 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0,
                                                    (unsigned char *)blkA.sel[s6C], 1, 0xff);
-                                if (fcn_004c4450(s78) == 0) {
+                                if (cm_GetCommandStatus(s78) == 0) {
                                     do {
                                         fcn_00535960();
-                                    } while (fcn_004c4450(s78) == 0);
+                                    } while (cm_GetCommandStatus(s78) == 0);
                                 }
                             }
                         }
@@ -781,10 +781,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                                   (unsigned int)g_774970 * 0x21c)) {
                                 s78 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0,
                                                    (unsigned char *)blkA.sel[s6C], 1, 0xff);
-                                if (fcn_004c4450(s78) == 0) {
+                                if (cm_GetCommandStatus(s78) == 0) {
                                     do {
                                         fcn_00535960();
-                                    } while (fcn_004c4450(s78) == 0);
+                                    } while (cm_GetCommandStatus(s78) == 0);
                                 }
                             }
                         }

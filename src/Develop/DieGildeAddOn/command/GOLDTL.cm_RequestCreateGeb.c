@@ -13,7 +13,7 @@ typedef struct {
 
 extern char g_68ae9c[];
 
-int __cdecl fcn_004c4330(char*);
+int __cdecl cm_EnqueueClientPacket(char*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 int __cdecl cm_RequestCreateGeb(int a, int b, float* v, tri12* w)
@@ -28,5 +28,5 @@ int __cdecl cm_RequestCreateGeb(int a, int b, float* v, tri12* w)
 	*(quad16*) (buf + 0x19) = *(quad16*) v;
 	*(tri12*) (buf + 0x29) = *w;
 	fcn_0064d41a(buf + 0x9c, g_68ae9c, v[0], v[1], v[2]);
-	return fcn_004c4330(buf);
+	return cm_EnqueueClientPacket(buf);
 }

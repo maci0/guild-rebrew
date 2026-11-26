@@ -10,11 +10,11 @@ extern unsigned int g_7f4ca4[];
 
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_005bdc30(int, int*, char*, int, int);
-int __cdecl fcn_004c5530(char*);
+int __cdecl cm_SendCopyEntityData(char*);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 static __inline void fill0_5dc5e0(char* dst, int size)
@@ -81,7 +81,7 @@ int __cdecl fcn_005dc5e0(char* entity, int* target)
 		*(char*) (buf + 0x36) = 0x0a;
 		*(int*) (buf + 0x58) = *(int*) (pkt + 1);
 		*(unsigned short*) (buf + 0x6e) = 0x178;
-		fcn_004c5530(buf); fill0_5dc5e0(buf, 0xf8);
+		cm_SendCopyEntityData(buf); fill0_5dc5e0(buf, 0xf8);
 	} else {
 		pkt = (char*) gm_StartFilteredEntitySearch(1, 1, target[1]);
 		if (pkt == 0) {
@@ -98,7 +98,7 @@ int __cdecl fcn_005dc5e0(char* entity, int* target)
 		*(char*) (buf + 0x36) = 0x0a;
 		*(int*) (buf + 0x58) = *(int*) (pkt + 1);
 		*(unsigned short*) (buf + 0x6e) = 0x178;
-		fcn_004c5530(buf); fill0_5dc5e0(buf, 0xf8);
+		cm_SendCopyEntityData(buf); fill0_5dc5e0(buf, 0xf8);
 	}
 
 	*(int*) (buf + 0x28) = gm_GameTime;
@@ -110,12 +110,12 @@ int __cdecl fcn_005dc5e0(char* entity, int* target)
 	*(unsigned short*) (buf + 0x34) = g_7f4c0c;
 	*(char*) (buf + 0x36) = 1;
 	*(int*) (buf + 0x58) = *(int*) (pkt + 1);
-	fcn_004c5530(buf);
+	cm_SendCopyEntityData(buf);
 
 	cm_BeginPacketFieldDelta((char*) *target, *(int*) (*target + 2));
 	cm_AppendPacketFieldDelta(4, 1, (char*) *target + 0x25 - g_aed32c, pkt + 1);
-	fcn_004c5360();
-	fcn_004c5420(*(int*) (pkt + 1), 0x5a, 2, 0x20, 0);
+	cm_RequestChangeAttribute();
+	cm_RequestChangeBits(*(int*) (pkt + 1), 0x5a, 2, 0x20, 0);
 
 	if (*(unsigned short*) (pkt + 0x27) != 0xffff) {
 		ent = *(unsigned short*) (pkt + 0x27);

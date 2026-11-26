@@ -8,14 +8,14 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_7f4ca4[];
 
-int* __cdecl fcn_004c30a0(int, int, char*, int, int);
+int* __cdecl d3snd_QueueSound(int, int, char*, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl he_StartHandlungSearch(int, ...);
 int __cdecl he_FreeAction(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 
 /* ADDRESS: GOLDTL 0x0056caf0 */
 /* Five-state job machine. State 0 queues the search request, state 1 picks
@@ -41,7 +41,7 @@ void __cdecl he_RunFireEvent(char* a0)
 	best = 1.0e8f;
 	switch (*(int*) (a0 + 0x70)) {
 	case 0:
-		fcn_004c30a0(-8, 0, (char*) 0x6a6ac0, -1, 100);
+		d3snd_QueueSound(-8, 0, (char*) 0x6a6ac0, -1, 100);
 		*(int*) (a0 + 0x70) += 1;
 		return;
 	case 1:
@@ -98,7 +98,7 @@ void __cdecl he_RunFireEvent(char* a0)
 						*(int*) (m + 0x58) = *(int*) (rec + 1);
 						*(short*) (m + 0x34) = g_7f4c0c;
 						*(int*) (m + 0xa4) = *(int*) (a0 + 4);
-						fcn_004c5530(m);
+						cm_SendCopyEntityData(m);
 					}
 					n++;
 					e += 4;
@@ -117,7 +117,7 @@ void __cdecl he_RunFireEvent(char* a0)
 			rec = he_fn_Handlung();
 		}
 		if (rec == 0) {
-			fcn_004c30a0(-8, 0, (char*) 0x6a6ab4, -1, 100);
+			d3snd_QueueSound(-8, 0, (char*) 0x6a6ab4, -1, 100);
 			he_FreeAction(a0);
 			return;
 		}

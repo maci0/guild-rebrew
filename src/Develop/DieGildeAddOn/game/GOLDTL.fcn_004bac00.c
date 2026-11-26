@@ -8,7 +8,7 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 
 
 /* ADDRESS: GOLDTL 0x004bac00 */
@@ -49,7 +49,7 @@ int __cdecl gm_DeductRandomBuildingGood(unsigned short* entity, int* outId, floa
 				v = (int) (k * factor);
 				if (v < 1)
 					v = 1;
-				fcn_004c51f0(-1, *(int*) (q + 2), *(unsigned short*) s, v, g_773d75, 0);
+				cm_SendSellObjekt(-1, *(int*) (q + 2), *(unsigned short*) s, v, g_773d75, 0);
 			}
 		}
 		return 1;

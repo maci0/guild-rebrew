@@ -23,8 +23,8 @@ int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_0050b750(int, char);
 int __cdecl d2_GetControlValue(int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
-void __cdecl fcn_004c5530(void*);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_SendCopyEntityData(void*);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x005c35d0 */
 void __cdecl d2_RunSellGebaeudeDialog(char* e)
@@ -79,8 +79,8 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 				    g_773d75);
 				*(int*) (pkt + 0x60) = *(int*) (g_7f4ca4 +
 				                                g_774970 * 0x21c);
-				fcn_004c5530(pkt);
-				fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 0x200, 0);
+				cm_SendCopyEntityData(pkt);
+				cm_RequestChangeBits(*(int*) (e + 1), 0x5a, 2, 0x200, 0);
 			}
 			g_774654 = 1;
 		} else if (g_100f1dc == 1) {

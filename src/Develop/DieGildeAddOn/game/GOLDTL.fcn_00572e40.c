@@ -5,7 +5,7 @@ char* __cdecl he_fn_Handlung(void);
 void __cdecl he_FreeAction(char*);
 void __cdecl gm_AddTime(char*, int, int, int);
 void* __cdecl gm_FindRecordById(int);
-int __cdecl fcn_004c5530(char*);
+int __cdecl cm_SendCopyEntityData(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 
 /* ADDRESS: GOLDTL 0x00572e40 */
@@ -51,7 +51,7 @@ void __cdecl fcn_00572e40(char* c)
 		if (*(char*) (c + 0xf1)) {
 			gm_AddTime(p52, 1, 0x1e, 0);
 		} else {
-			*(int*) (c + 0xec) = fcn_004c5530(buf);
+			*(int*) (c + 0xec) = cm_SendCopyEntityData(buf);
 		}
 	} else {
 		he_FreeAction(c);

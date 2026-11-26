@@ -29,17 +29,17 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_004f7120(int id, char* record, int* out1, int* out2, int* idx);
 void __cdecl d2_ClearWindowChildren(int a, int b);
 int __cdecl io_AppendText(int id, ...);
-int __cdecl fcn_005ca560(struct sel* s);
+int __cdecl d2_BuildPersonStatusDesc(struct sel* s);
 void __cdecl fcn_005ca740(int x, int y, int a, int b, struct sel* s, int c);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_005c91c0(char* buf, int x, int y, int a, int b);
 void __cdecl fcn_00526120(char* text, int value);
 int __cdecl gm_CheckEntityStock(char* record, unsigned int value, char flag);
-void __cdecl fcn_004c4eb0(char* text);
-void __cdecl fcn_004c4ef0(char* text);
+void __cdecl cm_SendLogAction(char* text);
+void __cdecl cm_SendTraceEnd(char* text);
 void __cdecl fcn_004c68c0(void* msg);
-void __cdecl fcn_004c58b0(int a, unsigned int b);
-void __cdecl fcn_004c51a0(unsigned int a, unsigned int b, int c, unsigned int d);
+void __cdecl cm_RequestLinkEvidence(int a, unsigned int b);
+void __cdecl cm_RequestTransferCurrencyNoKill(unsigned int a, unsigned int b, int c, unsigned int d);
 int __cdecl main_RunFrameLoop(void* fn, int id);
 void __cdecl fcn_00471e30(int handle);
 void __cdecl fcn_005a2580(char* a, char* b, char* c);
@@ -107,7 +107,7 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 				sel[j].x14 = line - 0x1e;
 				sel[j].x10 = (x - height) - 0x28;
 				sel[j].used = (sel[j].who != 0);
-				fcn_005ca560(&sel[j]);
+				d2_BuildPersonStatusDesc(&sel[j]);
 				fcn_005ca740(sel[j].x10, sel[j].x14, d2_CurrentWindowId, 0x54, &sel[j], 1);
 				if (seen[j] != -1)
 					io_FormatTextBuffer(buf, 0x18a5, idx[j] * 5 + 0x13fd, vals[j]);
@@ -133,14 +133,14 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 							out2[3] = *(unsigned int*) (building + 1);
 							out2[4] = seen[j];
 							out2[5] = vals[j];
-							fcn_004c4eb0("buy dunkle ecke");
+							cm_SendLogAction("buy dunkle ecke");
 							fcn_004c68c0(&out2[1]);
-							fcn_004c58b0(seen[j],
+							cm_RequestLinkEvidence(seen[j],
 								*(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4));
-							fcn_004c51a0(
+							cm_RequestTransferCurrencyNoKill(
 								*(unsigned int*) ((*(unsigned short*) (building + 0x27)) * 0x21c + 0x7f4ca4),
 								*(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4), 0, vals[j]);
-							fcn_004c4ef0("buy dunkle ecke");
+							cm_SendTraceEnd("buy dunkle ecke");
 						}
 						break;
 					}

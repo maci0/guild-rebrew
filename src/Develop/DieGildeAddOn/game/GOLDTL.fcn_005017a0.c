@@ -24,14 +24,14 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 void* __cdecl gm_FindKind47ByOwner(int);
 char* __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
-int __cdecl fcn_004c44c0(void);
+int __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
-int __cdecl fcn_004c51f0(int, int, int, int, char, int);
+void __cdecl cm_RequestChangeAttribute(void);
+int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 void __cdecl fcn_004c6190(char*, char);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00535960(void);
@@ -99,25 +99,25 @@ void __cdecl fcn_005017a0(int player)
 			if (ent != 0) {
 				ent2 = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0xff);
 				if (ent2 == 0) {
-					v = fcn_004c51f0(*(int*) (ent + 2), -1, 0xff, 1, (char) g_773d75, 0);
-					while (fcn_004c4450(v) == 0) {
+					v = cm_SendSellObjekt(*(int*) (ent + 2), -1, 0xff, 1, (char) g_773d75, 0);
+					while (cm_GetCommandStatus(v) == 0) {
 						fcn_00535960();
 					}
-					ent2 = fcn_004c4480(v);
+					ent2 = cm_GetCommandResult(v);
 				}
 				if (p->active != 0) {
 					if (fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id) == 0) {
-						v = fcn_004c51f0(*(int*) (ent2 + 2), -1, p->objekt_id, 1, (char) g_773d75, 0);
-						while (fcn_004c4450(v) == 0) {
+						v = cm_SendSellObjekt(*(int*) (ent2 + 2), -1, p->objekt_id, 1, (char) g_773d75, 0);
+						while (cm_GetCommandStatus(v) == 0) {
 							fcn_00535960();
 						}
 					}
 				} else {
 					o = fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id);
 					if (o != 0) {
-						v = fcn_004c51f0(-1, *(int*) (ent2 + 2), p->objekt_id,
+						v = cm_SendSellObjekt(-1, *(int*) (ent2 + 2), p->objekt_id,
 								 *(int*) (o + 0xe), (char) g_773d75, 0);
-						while (fcn_004c4450(v) == 0) {
+						while (cm_GetCommandStatus(v) == 0) {
 							fcn_00535960();
 						}
 					}
@@ -145,7 +145,7 @@ void __cdecl fcn_005017a0(int player)
 						count -= *(unsigned char*) (o + 0x1c);
 						cm_BeginPacketFieldDelta(o, *(int*) (o + 2));
 						cm_AppendPacketFieldValue(1, 1, o - g_aed32c + 0x1c, &count);
-						fcn_004c5360();
+						cm_RequestChangeAttribute();
 					}
 				}
 			}
@@ -185,7 +185,7 @@ void __cdecl fcn_005017a0(int player)
 			p = (MARKET_STOCK_SLOT*) ((char*) p + 0x80);
 		}
 		cm_EndCommandSync();
-		while (fcn_004c44c0() == 0) {
+		while (cm_AreQueuedCommandsDone() == 0) {
 			fcn_00535960();
 		}
 	}

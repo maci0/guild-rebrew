@@ -5,7 +5,7 @@
 
 int __cdecl m_FreeTracked(int);
 
-int __cdecl fcn_004bd9b0(char* a)
+int __cdecl m_UnlinkAndFreeNode(char* a)
 {
 	char* p;
 	char* q;

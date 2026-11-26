@@ -7,8 +7,8 @@ extern char g_6b5c60[];
 float __cdecl gm_RandomFloat01(void);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_005100f0(int id, int amount);
-void __cdecl fcn_004c5420(int handle, int a, int b, int c, int d);
-int __cdecl fcn_004c54c0(int a, int b, int value, int flag);
+void __cdecl cm_RequestChangeBits(int handle, int a, int b, int c, int d);
+int __cdecl cm_RequestCopyEntityData(int a, int b, int value, int flag);
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int id, int arg, char* text1, int flags, int value, char* text2);
@@ -56,7 +56,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 		if (f > 0.3f)
 			amt_SendOfficeCommand(slot[0], 0, 0, 4, 0xff);
 		fcn_005100f0(*(int*) (e + 4), -8);
-		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
+		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
 		if (f > 0.3f) {
 			if (7 == h[2] || 6 == h[2]) {
 				io_FormatTextBuffer(buf, 0x1684);
@@ -108,11 +108,11 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 			for (k = 0; k < n; k++) {
 				id1 = arr[k].mplayerid;
 				if (id1 != *(int*) (e + 4) && id1 != -1)
-					fcn_004c54c0(*(int*) (e + 4), id1, value, 1);
+					cm_RequestCopyEntityData(*(int*) (e + 4), id1, value, 1);
 			}
 		}
 		fcn_005100f0(*(int*) (e + 4), -8);
-		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
+		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
 		if (f > 0.3f) {
 			io_FormatTextBuffer(buf, 0x167a, target[1] + 0x1663);
 			p = g_7f4ca4;
@@ -156,15 +156,15 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 					id2 = arr[k].mplayerid;
 					if (id2 == *(int*) (e + 4) || id2 == -1)
 						continue;
-					fcn_004c54c0(id2, id1, -value, 1);
-					fcn_004c54c0(id1, id2, -value, 1);
+					cm_RequestCopyEntityData(id2, id1, -value, 1);
+					cm_RequestCopyEntityData(id1, id2, -value, 1);
 				}
 			}
 		} else {
 			n = amt_FindOfficeSlotsByKind(target[1], 6, arr);
 		}
 		fcn_005100f0(*(int*) (e + 4), -8);
-		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
+		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
 		if (f > 0.3f) {
 			io_FormatTextBuffer(buf, 0x1672, target[1] + 0x1663);
 			io_FormatTextBuffer(buf2, 0x1670, target[1] + 0x1663);

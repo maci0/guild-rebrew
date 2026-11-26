@@ -108,10 +108,10 @@ extern void fcn_00533090();
 extern void ReportClientMessage();
 extern void fcn_00545aa0();
 extern void fcn_00546d90();
-extern void fcn_004c5700();
+extern void cm_RequestUpdateGameTime();
 extern int cut_UpdateCutscenes();
-extern void fcn_004c3ff0();
-extern void fcn_004c4940();
+extern void cm_FlushCommandQueue();
+extern void cm_PollCommandQueue();
 extern void cm_ExecCommand();
 extern void ProcessActiveContexts();
 extern void fcn_465fe0();
@@ -181,7 +181,7 @@ extern void d2_OpenPlayerStats();
 extern void d2_RunMessageFilterDialog();
 extern void fcn_005d42e0();
 extern void fcn_005d0660();
-extern void fcn_0042df30();
+extern void tb_SetCallbackPaused();
 extern void d2_RunMessageBox();
 extern void fcn_004b6470();
 extern void fcn_64d41a();
@@ -270,7 +270,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		}
 		fcn_00546d90();
 		if (g_14cbca0 == -1 && g_6b7fac > g_aecde4 && g_774964 != 0) {
-			fcn_004c5700(g_7e1f70);
+			cm_RequestUpdateGameTime(g_7e1f70);
 		}
 		if (!(flags & 0x10000) && g_774964 != 0 && g_7e2700 == 0 &&
 			cut_UpdateCutscenes() != 0 && g_774660 != 0) {
@@ -279,8 +279,8 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 	}
 	if (flags & 0x20000) {
 		if (g_6b7fac > g_aecde4) {
-			fcn_004c3ff0();
-			fcn_004c4940();
+			cm_FlushCommandQueue();
+			cm_PollCommandQueue();
 			cm_ExecCommand();
 			g_aecde4 = g_6b7fac + 7;
 		}
@@ -527,7 +527,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 			(g_14cbca0 == -1 && (unsigned short) g_7f4c04 >= 0x17 && g_774960 == 0)) {
 			if (!((g_7747b0 & 0x80))) {
 				g_774960 = 1;
-				fcn_0042df30(g_538060, 1);
+				tb_SetCallbackPaused(g_538060, 1);
 				main_LoopFlags |= 0x100000;
 				d2_RunMessageBox(g_14a5524, 0xc4);
 				fcn_005356b0(g_5438c0);
@@ -540,9 +540,9 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 	}
 	if (i == 0 && g_7747ad == 0 && g_6a3760 != -1 && g_774964 != 0) {
 		g_7747ad = 1;
-		fcn_0042df30(g_538060, 1);
+		tb_SetCallbackPaused(g_538060, 1);
 		fcn_004b6470(0x65fff);
-		fcn_0042df30(g_538060, 0);
+		tb_SetCallbackPaused(g_538060, 0);
 		g_7747ad = 0;
 	}
 	if (g_774988[0] != 0 && !(main_LoopFlags & 0x200000)) {

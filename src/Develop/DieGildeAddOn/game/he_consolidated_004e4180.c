@@ -3,10 +3,10 @@ int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_
 void __cdecl fcn_004e4230(void*, int);
 void __cdecl fcn_004e4730(char*);
 void __cdecl cut_WaitTicks(int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_004e48b0(void);
 void __cdecl cut_CleanupCutscene(void);
-void __cdecl fcn_004e3640(void);
+void __cdecl msx_RestoreMusicIfAllowed(void);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 extern int g_772f3c;
@@ -57,15 +57,15 @@ void __cdecl fcn_004e4180(char* event)
 	cut_WaitTicks(5);
 	for (i = 0; i < 4; i++) {
 		if (m[14 + i] != -1) {
-			fcn_004c54c0(m[13], m[14 + i], 0xa, 1);
-			fcn_004c54c0(m[14 + i], m[13], 0xa, 1);
+			cm_RequestCopyEntityData(m[13], m[14 + i], 0xa, 1);
+			cm_RequestCopyEntityData(m[14 + i], m[13], 0xa, 1);
 		}
 	}
 	if (fallback) {
 		fcn_004e48b0();
 		cut_CleanupCutscene();
 	}
-	fcn_004e3640();
+	msx_RestoreMusicIfAllowed();
 }
 
 /* ADDRESS: GOLDTL 0x004e4230 */

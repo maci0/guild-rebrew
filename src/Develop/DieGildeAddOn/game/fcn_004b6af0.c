@@ -8,7 +8,7 @@ int __cdecl fcn_00507b00(int);
 int __cdecl fcn_0042e410(int);
 int __cdecl fcn_0050dac0(short);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b6af0 */
@@ -30,7 +30,7 @@ int __cdecl fcn_004b6af0(int* request)
 	d = (double) v + 1.0;
 	v = (int) ((double) fcn_0050dac0(*(short*) ent) * d * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, v);
-	fcn_004c51a0(*request, -1, g_773d75, v);
+	cm_RequestTransferCurrencyNoKill(*request, -1, g_773d75, v);
 	fcn_00545d40(1[ent], ent[1], buf, 0x100 < strlen(buf), 0x603, 0);
 	return 0;
 }

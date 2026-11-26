@@ -13,8 +13,8 @@ extern int g_67a370;
 extern char* g_6b8300;
 extern int g_7e2700;
 
-int __cdecl fcn_0042df70(void*);
-int __cdecl fcn_0042df30(void*, int);
+int __cdecl tb_IsCallbackPaused(void*);
+int __cdecl tb_SetCallbackPaused(void*, int);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_00473150(unsigned char*);
 int __cdecl init_GetGebaeudeSceneName(int idx, char* out);
@@ -59,8 +59,8 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 	saved = d3_CurrentContextIndex;
 	progress = 0;
 	restore = 0;
-	if ((g_7747b0 & 8) != 0 && !fcn_0042df70((void*) 0x538060)) {
-		fcn_0042df30((void*) 0x538060, 1);
+	if ((g_7747b0 & 8) != 0 && !tb_IsCallbackPaused((void*) 0x538060)) {
+		tb_SetCallbackPaused((void*) 0x538060, 1);
 		restore = 1;
 	}
 	p = (char*) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[prototypeIndex].category + 0x7f3b00);
@@ -152,6 +152,6 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 	d3_SelectSceneContext(saved, 0);
 done:
 	if ((g_7747b0 & 8) != 0 && restore != 0) {
-		fcn_0042df30((void*) 0x538060, 0);
+		tb_SetCallbackPaused((void*) 0x538060, 0);
 	}
 }

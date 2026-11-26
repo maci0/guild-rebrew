@@ -26,9 +26,9 @@ extern int __cdecl fcn_0051e070(void);
 extern int __cdecl fcn_00526120(char *a0, int a1);
 extern void __cdecl fcn_0046f9b0(int a0, char *a1);
 extern void __cdecl fcn_00469090(int a0);
-extern void __cdecl fcn_004c51a0(int a0, int a1, char a2, int a3);
+extern void __cdecl cm_RequestTransferCurrencyNoKill(int a0, int a1, char a2, int a3);
 extern int __cdecl gm_GetEntityTableEntry(int a0);
-extern void __cdecl fcn_004c51f0(int a0, int a1, int a2, int a3, char a4, int a5);
+extern void __cdecl cm_SendSellObjekt(int a0, int a1, int a2, int a3, char a4, int a5);
 
 /* ADDRESS: GOLDTL 0x005b9980 */
 void __cdecl d2_ShowNewCartDialog(int sourceObj)
@@ -95,12 +95,12 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
                     }
                     if (fcn_00526120(confirmBuf, 0x101))
                     {
-                        fcn_004c51a0(-1, *(int *)(g_774970 * 0x21c + 0x7f4ca4),
+                        cm_RequestTransferCurrencyNoKill(-1, *(int *)(g_774970 * 0x21c + 0x7f4ca4),
                             g_773d75, priceValue);
                         v = gm_GetEntityTableEntry(g_774970 * 0x21c + 0x7f4ca0);
                         if (v != 0)
                             *(int *)(v + 0x50) = *(int *)(v + 0x50) + priceValue;
-                        fcn_004c51f0(*(int *)(sourceObj + 1), -1, choiceIndex + 0x134, 1,
+                        cm_SendSellObjekt(*(int *)(sourceObj + 1), -1, choiceIndex + 0x134, 1,
                             g_773d75, 0);
                         g_774654 = 1;
                     }

@@ -20,8 +20,8 @@ int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl fcn_0058f700(int a0);
 void* __cdecl evt_FindScriptById(int a1);
 void __cdecl evt_RequestScriptExit(void* p);
-void __cdecl fcn_005312d0(int a0);
-void __cdecl fcn_004c34d0(void);
+void __cdecl evt_WaitForScriptExit(int a0);
+void __cdecl d3snd_FreeObjectSoundBanks(void);
 void __cdecl fcn_00516ed0(int a0);
 void __cdecl fcn_0043a9c0(int a0);
 void __cdecl fcn_00516f60(void);
@@ -192,7 +192,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 		p = (unsigned char*) evt_FindScriptById(id);
 		if (p != 0) {
 			evt_RequestScriptExit(p);
-			fcn_005312d0(*(int*) (p + 0x100));
+			evt_WaitForScriptExit(*(int*) (p + 0x100));
 		}
 	}
 	if (*(int*) &g_67a370 != 0) {
@@ -202,9 +202,9 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 		}
 	}
 	if (*(int*) &evt_LastGfxScriptId != -1) {
-		fcn_005312d0(*(int*) &evt_LastGfxScriptId);
+		evt_WaitForScriptExit(*(int*) &evt_LastGfxScriptId);
 	}
-	fcn_004c34d0();
+	d3snd_FreeObjectSoundBanks();
 	fcn_00516ed0(*(int*) &g_7746c8);
 	fcn_0043a9c0(3);
 	d3_SelectSceneContext((int) a0, 0);

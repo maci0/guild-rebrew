@@ -6,7 +6,7 @@ extern char str_6776b8[];
 
 int __cdecl d3snd_GetObjectVoiceStatus(char*);
 void __cdecl fcn_004225e0(int, int);
-int __cdecl fcn_00422460(int, char*);
+int __cdecl sb_PrepareVoice(int, char*);
 char* __cdecl fcn_0064d530(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x00419640 */
@@ -23,7 +23,7 @@ unsigned int __cdecl fcn_00419640(int sampleIndex, int* cacheSlot)
 			if (g_6b5d54 != 0) {
 				fcn_004225e0(g_6b5d54, 0);
 			}
-			g_6b5d54 = fcn_00422460(0, (str_6776b8 + sampleIndex * 0x19));
+			g_6b5d54 = sb_PrepareVoice(0, (str_6776b8 + sampleIndex * 0x19));
 			if (g_6b5d54 == 0 || *(int*) (g_6b5d54 + 4) == 0) {
 				*cacheSlot = 0;
 				goto done;
@@ -52,7 +52,7 @@ unsigned int __cdecl fcn_00419640(int sampleIndex, int* cacheSlot)
 		if (g_6b5da8 != 0) {
 			fcn_004225e0(g_6b5da8, 0);
 		}
-		g_6b5da8 = fcn_00422460(0, (str_6776b8 + sampleIndex * 0x19));
+		g_6b5da8 = sb_PrepareVoice(0, (str_6776b8 + sampleIndex * 0x19));
 		if (g_6b5da8 == 0 || *(int*) (g_6b5da8 + 4) == 0) {
 			goto done;
 		}
@@ -74,7 +74,7 @@ unsigned int __cdecl fcn_00419640(int sampleIndex, int* cacheSlot)
 				if (g_6b5da8 != 0) {
 					fcn_004225e0(g_6b5da8, 0);
 				}
-				g_6b5da8 = fcn_00422460(0, (str_6776b8 + sampleIndex * 0x19));
+				g_6b5da8 = sb_PrepareVoice(0, (str_6776b8 + sampleIndex * 0x19));
 				if (g_6b5da8 == 0 || *(int*) (g_6b5da8 + 4) == 0) {
 					goto done;
 				}
@@ -95,7 +95,7 @@ unsigned int __cdecl fcn_00419640(int sampleIndex, int* cacheSlot)
 		if (g_6b5d54 != 0) {
 			fcn_004225e0(g_6b5d54, 0);
 		}
-		g_6b5d54 = fcn_00422460(0, (str_6776b8 + sampleIndex * 0x19));
+		g_6b5d54 = sb_PrepareVoice(0, (str_6776b8 + sampleIndex * 0x19));
 		if (g_6b5d54 == 0 || *(int*) (g_6b5d54 + 4) == 0) {
 			goto done;
 		}

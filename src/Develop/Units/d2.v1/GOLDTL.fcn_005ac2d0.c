@@ -58,15 +58,15 @@ extern int g_666018;
 extern int g_66601c;
 
 unsigned short* __cdecl fcn_00502cd0(int container, int count, int arg, int arg2);
-char* __cdecl fcn_004c4480(int rc);
-int __cdecl fcn_004c4450(int rc);
-int __cdecl fcn_004c44c0(void);
-int __cdecl fcn_004c3ff0(void);
-int __cdecl fcn_004c4940(void);
+char* __cdecl cm_GetCommandResult(int rc);
+int __cdecl cm_GetCommandStatus(int rc);
+int __cdecl cm_AreQueuedCommandsDone(void);
+int __cdecl cm_FlushCommandQueue(void);
+int __cdecl cm_PollCommandQueue(void);
 void __cdecl cm_ExecCommand(void);
-int __cdecl fcn_004c5b00(int entity_id, tag7 key);
-int __cdecl fcn_004c5530(msg005ac2d0* m);
-int __cdecl fcn_004c5360(void);
+int __cdecl cm_RequestAllocThemaPredigt(int entity_id, tag7 key);
+int __cdecl cm_SendCopyEntityData(msg005ac2d0* m);
+int __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_BeginPacketFieldDelta(char* base, int entity_id);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
 char* __cdecl he_StartHandlungSearch(int kind, int first, int id, int arg, int entity_id);
@@ -84,7 +84,7 @@ int __cdecl io_AppendText(int id, ...);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl d2_CheckActionBlocker(char* house, int mode);
 void __cdecl fcn_005100f0(int id, int amount);
-int __cdecl fcn_005ca560(sel005ac2d0* sel);
+int __cdecl d2_BuildPersonStatusDesc(sel005ac2d0* sel);
 int __cdecl fcn_005ca740(int x, int y, int win, int id, sel005ac2d0* sel, int flag);
 int __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 char* __cdecl fcn_005cd440(void* m, char* text, int a2, int a3);
@@ -136,10 +136,10 @@ void __cdecl fcn_005ac2d0(char* building)
 		t.a = -1;
 		t.b = -1;
 		t.id = -1;
-		obj = fcn_004c4480(fcn_004c5b00(*(int*) (building + 1), t));
-		while (fcn_004c44c0() == 0) {
-			fcn_004c3ff0();
-			fcn_004c4940();
+		obj = cm_GetCommandResult(cm_RequestAllocThemaPredigt(*(int*) (building + 1), t));
+		while (cm_AreQueuedCommandsDone() == 0) {
+			cm_FlushCommandQueue();
+			cm_PollCommandQueue();
 			cm_ExecCommand();
 		}
 	}
@@ -151,11 +151,11 @@ void __cdecl fcn_005ac2d0(char* building)
 		pkt.f8 = *(int*) (gm_CityEntity + 4);
 		pkt.fc = *(int*) (building + 1);
 		pkt.b5c = 0;
-		rc = fcn_004c5530(&pkt);
-		while (rc != -1 && fcn_004c4450(rc) == 0) {
+		rc = cm_SendCopyEntityData(&pkt);
+		while (rc != -1 && cm_GetCommandStatus(rc) == 0) {
 			main_RunFrameLoop((void*) 0, 0x677c7);
 		}
-		unit = fcn_004c4480(rc);
+		unit = cm_GetCommandResult(rc);
 	}
 	info = 0;
 	if (*(char*) (obj + 0x22) == 0) {
@@ -239,7 +239,7 @@ void __cdecl fcn_005ac2d0(char* building)
 			sel.x = *(int*) (g_77255c + 0xc) / 2 - *(short*) (g_772500 + 0x1ebd8) / 2;
 			sel.y = 0xc3;
 			sel.f30 = 1;
-			fcn_005ca560(&sel);
+			d2_BuildPersonStatusDesc(&sel);
 			fcn_005ca740(sel.x, sel.y, d2_CurrentWindowId, 0x54, &sel, 1);
 			d2_SetForm(dlg, 2);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
@@ -264,10 +264,10 @@ void __cdecl fcn_005ac2d0(char* building)
 					fcn_005100f0(((ENTITY_RECORD*)(g_7f4ca4 - 4))[g_774970].entity_id, -1);
 					cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(1, 1, 0x22, &v12);
-					rc = fcn_004c5360();
+					rc = cm_RequestChangeAttribute();
 					flag = 1;
 					state = 1;
-					while (rc != -1 && fcn_004c4450(rc) == 0) {
+					while (rc != -1 && cm_GetCommandStatus(rc) == 0) {
 						main_RunFrameLoop((void*) 0, 0x677c7);
 					}
 				}
@@ -285,16 +285,16 @@ void __cdecl fcn_005ac2d0(char* building)
 					v16 = (char) gm_RandomMod(8);
 					cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(4, 1, 0x1e, info + 4);
-					fcn_004c5360();
+					cm_RequestChangeAttribute();
 					cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(1, 1, 0x1c, &v15);
-					fcn_004c5360();
+					cm_RequestChangeAttribute();
 					cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(1, 1, 0x1d, &v16);
-					rc = fcn_004c5360();
+					rc = cm_RequestChangeAttribute();
 					state = 2;
 					flag = 1;
-					while (rc != -1 && fcn_004c4450(rc) == 0) {
+					while (rc != -1 && cm_GetCommandStatus(rc) == 0) {
 						main_RunFrameLoop((void*) 0, 0x677c7);
 					}
 				}
@@ -306,16 +306,16 @@ void __cdecl fcn_005ac2d0(char* building)
 				id = -1;
 				cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 				cm_AppendPacketFieldDelta(4, 1, 0x1e, (char*) &id);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 				cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 				cm_AppendPacketFieldDelta(1, 1, 0x1c, &v12);
-				fcn_004c5360();
+				cm_RequestChangeAttribute();
 				cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 				cm_AppendPacketFieldDelta(1, 1, 0x1d, &v18);
-				rc = fcn_004c5360();
+				rc = cm_RequestChangeAttribute();
 				flag = 1;
 				state = 1;
-				while (rc != -1 && fcn_004c4450(rc) == 0) {
+				while (rc != -1 && cm_GetCommandStatus(rc) == 0) {
 					main_RunFrameLoop((void*) 0, 0x677c7);
 				}
 			} else if (d2_CurrentElementId == btnCancel) {

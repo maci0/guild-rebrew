@@ -2,7 +2,7 @@
 // fcn_00426170 — if(b) a[5] |= 0x10; else a[5] &= ~0x10.
 
 /* ADDRESS: GOLDTL 0x004225e0 */
-void __cdecl fcn_00426170(int* a, int b)
+void __cdecl d3snd_SetVoiceFlag0x10(int* a, int b)
 {
 	if (b != 0) {
 		a[5] |= 0x10;

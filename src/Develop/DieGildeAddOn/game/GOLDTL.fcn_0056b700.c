@@ -26,11 +26,11 @@ extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl fcn_00529160(int, int, int, char*);
 extern int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 extern int __cdecl fcn_004c5620(int, char*);
-extern int __cdecl fcn_004c4450(int);
-extern char* __cdecl fcn_004c4480(int);
+extern int __cdecl cm_GetCommandStatus(int);
+extern char* __cdecl cm_GetCommandResult(int);
 extern int __cdecl cut_FindCutsceneById(int);
 extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-extern int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
+extern int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 extern void __cdecl he_FreeAction(char*);
 extern void __cdecl d3_SelectSceneContext(int, int);
 extern char* __cdecl fcn_00445600(int, int, int, char*);
@@ -73,7 +73,7 @@ void __cdecl fcn_0056b700(char* obj)
 	unsigned char mode;
 
 	code = *(int*) (obj + 0x84);
-	if (code != -1 && !fcn_004c4450(code))
+	if (code != -1 && !cm_GetCommandStatus(code))
 		return;
 	*(int*) (obj + 0x84) = -1;
 	switch (*(int*) (obj + 0x70)) {
@@ -109,9 +109,9 @@ void __cdecl fcn_0056b700(char* obj)
 	case 1:
 		goto label_56b858;
 	case 2:
-		if (!fcn_004c4450(*(int*) (obj + 0xdc)))
+		if (!cm_GetCommandStatus(*(int*) (obj + 0xdc)))
 			return;
-		cur = fcn_004c4480(*(int*) (obj + 0xdc));
+		cur = cm_GetCommandResult(*(int*) (obj + 0xdc));
 		if (cur != 0) {
 			*(int*) (obj + 0xe0) = *(int*) cur;
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
@@ -299,7 +299,7 @@ label_56b858:
 			return;
 		}
 	}
-	if (fcn_00500cb0((pos14_7f4c00*) &gm_GameTime, (pos14_7f4c00*) (obj + 0xcc)) >= 0) {
+	if (gm_CompareGameTime((pos14_7f4c00*) &gm_GameTime, (pos14_7f4c00*) (obj + 0xcc)) >= 0) {
 		*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
 		return;
 	}

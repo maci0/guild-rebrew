@@ -22,7 +22,7 @@ extern char* g_6b7e88;
 extern int g_6b7e90;
 extern int g_678dec;
 extern volatile int g_6b7fac;
-int __cdecl fcn_0042aaa0(int h);
+int __cdecl msx_GetSampleStatus(int h);
 void __cdecl sb_StopVoice(Voice* v, int a);
 
 void __cdecl fcn_00423010(int fade)
@@ -37,7 +37,7 @@ void __cdecl fcn_00423010(int fade)
 	if (fade == 0) {
 		for (i = 0; i < g_6b7e8c; i++) {
 			v = &((Voice*)g_6b7e88)[i];
-			if (v->sample != 0 && fcn_0042aaa0(v->h) == 4) {
+			if (v->sample != 0 && msx_GetSampleStatus(v->h) == 4) {
 				sb_StopVoice(v, 0);
 			}
 		}
@@ -48,7 +48,7 @@ void __cdecl fcn_00423010(int fade)
 	g_6b7e90 = 1;
 	for (i = 0; i < g_6b7e8c; i++) {
 		v = &((Voice*)g_6b7e88)[i];
-		if (v->sample != 0 && fcn_0042aaa0(v->h) == 4) {
+		if (v->sample != 0 && msx_GetSampleStatus(v->h) == 4) {
 			v->time = t;
 		}
 	}

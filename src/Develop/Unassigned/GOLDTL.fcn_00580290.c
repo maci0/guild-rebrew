@@ -7,7 +7,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
 
-int __cdecl fcn_00423460(int);
+int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 
 int __cdecl fcn_00580290(void)
@@ -27,7 +27,7 @@ int __cdecl fcn_00580290(void)
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == g_665f08[8]) {
 				if (g_665f08[5] != 0) {
-					if (fcn_00423460(g_665f08[5]) != 0) {
+					if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
 						sb_StopVoice(g_665f08[5], 0);
 					}
 					g_665f08[5] = 0;
@@ -37,7 +37,7 @@ int __cdecl fcn_00580290(void)
 		}
 		else if (g_14cf950 == 0x1c) {
 			if (g_665f08[5] != 0) {
-				if (fcn_00423460(g_665f08[5]) != 0) {
+				if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
 					sb_StopVoice(g_665f08[5], 0);
 				}
 				g_665f08[5] = 0;

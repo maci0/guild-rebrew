@@ -10,10 +10,10 @@ extern char g_67e348[];
 unsigned short __cdecl gm_RandomMod(int n);
 struct unit;
 struct unit* __cdecl he_StartHandlungSearch(int n, ...);
-void __cdecl fcn_004c4eb0(int a1);
-void __cdecl fcn_004c5530(int a1);
-void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
-void __cdecl fcn_004c4ef0(int a1);
+void __cdecl cm_SendLogAction(int a1);
+void __cdecl cm_SendCopyEntityData(int a1);
+void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
+void __cdecl cm_SendTraceEnd(int a1);
 
 /* ADDRESS: GOLDTL 0x00487c00 */
 void __cdecl fcn_00487c00(char* a0, char* entity, int chance)
@@ -47,10 +47,10 @@ void __cdecl fcn_00487c00(char* a0, char* entity, int chance)
 	*(int*) (msg + 0x58) = *(int*) (a0 + 2);
 	*(int*) (msg + 0x5c) = 1;
 	*(int*) (msg + 0x64) = 1;
-	fcn_004c4eb0((int) g_67e348);
-	fcn_004c5530((int) msg);
-	fcn_004c5150(-1, *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c), g_773d75, 0x3200);
+	cm_SendLogAction((int) g_67e348);
+	cm_SendCopyEntityData((int) msg);
+	cm_RequestMoveCredits(-1, *(int*) (g_7f4ca4 + *(unsigned short*) (*(char**) (entity + 0x16c) + 0x27) * 0x21c), g_773d75, 0x3200);
 	*(int*) (entity + 0x1b8) += -0x3200;
-	fcn_004c4ef0((int) g_67e348);
+	cm_SendTraceEnd((int) g_67e348);
 	*(unsigned int*) (entity + 0x1c8) |= 8;
 }

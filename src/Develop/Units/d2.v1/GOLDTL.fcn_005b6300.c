@@ -129,15 +129,15 @@ void __cdecl fcn_00534c20(int);
 void __cdecl fcn_00535550(int);
 void __cdecl fcn_00535560(int);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-int __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5530(void*);
-void __cdecl fcn_004c4eb0(int);
-void __cdecl fcn_004c4ef0(int);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+int __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_SendCopyEntityData(void*);
+void __cdecl cm_SendLogAction(int);
+void __cdecl cm_SendTraceEnd(int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl fcn_004727a0(int, int);
 void __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_0051af00(char*, int, ...);
@@ -325,11 +325,11 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 		if (f.v50 != -1) {
 			f.v3c = d2_GetControlValue(f.v50);
 			if (f.v3c != G(a1 + 0x3d)) {
-				if (f.v4c != -1 && fcn_004c4450(f.v4c) == 0)
+				if (f.v4c != -1 && cm_GetCommandStatus(f.v4c) == 0)
 					goto L6901;
 				cm_BeginPacketFieldDelta((int) a1, G(a1 + 1));
 				cm_AppendPacketFieldDelta(4, 1, 0x3d, &f.v3c);
-				f.v4c = fcn_004c5360();
+				f.v4c = cm_RequestChangeAttribute();
 			}
 		}
 L6901:
@@ -405,26 +405,26 @@ L69b6:
 				do {
 					e = *(char**) f.v10;
 					if (e != 0) {
-						fcn_004c4eb0(0x6ac2bc);
-						fcn_004c5150(G(e + 4), -1, *(char*) 0x773d75,
+						cm_SendLogAction(0x6ac2bc);
+						cm_RequestMoveCredits(G(e + 4), -1, *(char*) 0x773d75,
 							fcn_0050b750(y, *(char*) 0x773d75));
 						trec = *(unsigned short*) 0x774970 * 0x21c;
-						fcn_004c54c0(G(0x7f4ca4 + trec), G(e + 4), x, 0);
-						fcn_004c4ef0(0x6ac2bc);
+						cm_RequestCopyEntityData(G(0x7f4ca4 + trec), G(e + 4), x, 0);
+						cm_SendTraceEnd(0x6ac2bc);
 					}
 					f.v10 += 0x5c;
 				} while (--f.v38 != 0);
 			}
 			if (f.sel.a08 != 0) {
-				fcn_004c4eb0(0x6ac2b0);
-				fcn_004c5150(G(f.sel.a08 + 4), -1, *(char*) 0x773d75,
+				cm_SendLogAction(0x6ac2b0);
+				cm_RequestMoveCredits(G(f.sel.a08 + 4), -1, *(char*) 0x773d75,
 					fcn_0050b750(y, *(char*) 0x773d75));
 				trec = *(unsigned short*) 0x774970 * 0x21c;
-				fcn_004c54c0(G(0x7f4ca4 + trec), G(f.sel.a08 + 4), x, 0);
-				fcn_004c4ef0(0x6ac2b0);
+				cm_RequestCopyEntityData(G(0x7f4ca4 + trec), G(f.sel.a08 + 4), x, 0);
+				cm_SendTraceEnd(0x6ac2b0);
 			}
 			trec = *(unsigned short*) 0x774970 * 0x21c;
-			fcn_004c5150(G(0x7f4ca4 + trec), -1, *(char*) 0x773d75, fcn_0050b750((int) e, *(char*) 0x773d75));
+			cm_RequestMoveCredits(G(0x7f4ca4 + trec), -1, *(char*) 0x773d75, fcn_0050b750((int) e, *(char*) 0x773d75));
 		}
 L6cb7:
 		if (g_100f1dc == -1)
@@ -458,7 +458,7 @@ L6cb7:
 			else
 				f.msg.f5c[1] = G(G(0x7746cc) + 8);
 			*(char*) &f.msg.f58 = 0;
-			fcn_004c5530(&f.msg);
+			cm_SendCopyEntityData(&f.msg);
 			fcn_0051af00(f.txt800, 0x1939, f.row[0x223] + 0x130);
 			fcn_00526120(f.txt800, 0);
 L6e44:
@@ -487,7 +487,7 @@ L6e44:
 		f.msg.f30 = G(0x7f4c08);
 		f.msg.w34 = *(short*) 0x7f4c0c;
 		f.msg.f58 = G(f.sel.a08 + 4);
-		fcn_004c5530(&f.msg);
+		cm_SendCopyEntityData(&f.msg);
 		for (i = 0; i < 3; i++) {
 			fcn_004727a0(G(f.book + 0x228 + i * 4), 2);
 			io_AppendText(0x6811b0);
@@ -615,7 +615,7 @@ L6fa2:
 					f.msg.f8c = G(G(0x7746cc) + 8);
 				*((char*) &f.msg.f58 + 1) = 1;
 				*(char*) &f.msg.f58 = f.row[0x230];
-				fcn_004c5530(&f.msg);
+				cm_SendCopyEntityData(&f.msg);
 			}
 			f.v18 = -1;
 			for (i = 0; i < 3; i++) {
@@ -641,7 +641,7 @@ L6fa2:
 			f.msg.f30 = G(0x7f4c08);
 			f.msg.w34 = *(short*) 0x7f4c0c;
 			f.msg.f58 = G(f.rows[f.v18].a08 + 4);
-			fcn_004c5530(&f.msg);
+			cm_SendCopyEntityData(&f.msg);
 			f.v18 = -1;
 		} else if (c == f.v20 && f.v18 != -1) {
 			e = (char*) f.rows[f.v18].a08;
@@ -678,7 +678,7 @@ L6fa2:
 				f.msg.f30 = G(0x7f4c08);
 				f.msg.w34 = *(short*) 0x7f4c0c;
 				f.msg.f58 = G(e + 4);
-				fcn_004c5530(&f.msg);
+				cm_SendCopyEntityData(&f.msg);
 				p = f.book + 0x228;
 				for (i = 0; i < 3; i++) {
 					fcn_004727a0(G(p), 2);
@@ -705,7 +705,7 @@ L77de:
 		f.v3c = d2_GetControlValue(f.v50);
 		cm_AppendPacketFieldDelta(4, 1, 0x3d, &f.v3c);
 	}
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	fcn_0057e880(0x21, 0, 1, 0);
 	fcn_00534f30((int) f.book);
 	return fcn_00532ef0();

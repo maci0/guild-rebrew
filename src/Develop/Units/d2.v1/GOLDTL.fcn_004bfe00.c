@@ -24,8 +24,8 @@ int __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_004c4700(int, int, int, char *);
-void __cdecl fcn_004c53a0(void);
+void __cdecl cm_AppendCommandSyncField(int, int, int, char *);
+void __cdecl cm_SendSetAttribute(void);
 void __cdecl fcn_004c6e20(int, void *);
 void __cdecl fcn_004c6ea0(int);
 int __cdecl gm_SearchTable67(int);
@@ -73,8 +73,8 @@ int __cdecl fcn_004bfe00(char *obj)
 	head = g_772908;
 	if (head == 0) {
 		changed = 1; cm_BeginPacketFieldDelta(obj, *(int *) (obj + 2));
-		fcn_004c4700(1, 1, (int) (obj - g_aed32c) + 0x33, &changed);
-		fcn_004c53a0();
+		cm_AppendCommandSyncField(1, 1, (int) (obj - g_aed32c) + 0x33, &changed);
+		cm_SendSetAttribute();
 		head = (int) fcn_004be1f0(0);
 		g_772908 = head;
 		*(int *) (head + 4) = *(int *) (obj + 0x1c);
@@ -152,8 +152,8 @@ int __cdecl fcn_004bfe00(char *obj)
 	} else {
 		changed = 0; fcn_004c6ea0((int) obj);
 		cm_BeginPacketFieldDelta(obj, *(int *) (obj + 2));
-		fcn_004c4700(1, 1, (int) (obj - g_aed32c) + 0x33, &changed);
-		fcn_004c53a0();
+		cm_AppendCommandSyncField(1, 1, (int) (obj - g_aed32c) + 0x33, &changed);
+		cm_SendSetAttribute();
 	}
 	fcn_005b18c0(town);
 	if (g_6816d8 != -1) {

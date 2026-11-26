@@ -19,7 +19,7 @@ extern int g_67a370;
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 int __cdecl fcn_004d31d0(char*, int, int, int, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
-int __cdecl fcn_004c67c0(int, ent2c*);
+int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
 int __cdecl fcn_004d14b0(char* rec, char* e)
 {
@@ -40,7 +40,7 @@ int __cdecl fcn_004d14b0(char* rec, char* e)
 		l.f4 = 7;
 		*(int*) l.name = c;
 		*(int*) (l.name + 4) = a;
-		return fcn_004c67c0(*(int*) (rec + 0x10), &l);
+		return cm_SendUpdateCutsceneEntitySlot(*(int*) (rec + 0x10), &l);
 	}
 	return -1;
 }

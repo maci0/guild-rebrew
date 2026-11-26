@@ -18,7 +18,7 @@ extern int __cdecl gm_MapEntityStatRange(int age);
 extern void* __cdecl gm_GetEntityTableEntry(void* entity);
 extern int __cdecl gm_CheckStatLevel(int slot, int kind);
 extern int __cdecl gm_GetOppositeStatIndex(int value);
-extern char* __cdecl fcn_004fd9d0(int a, int b);
+extern char* __cdecl gm_FindOrAllocHeadSet(int a, int b);
 extern void __cdecl gm_AddObjekt(int record, int item, int value);
 extern void __cdecl gm_KillSpieler(int slot, int value);
 
@@ -108,7 +108,7 @@ int __cdecl fcn_00509620(int sourceId, int targetId)
 		rec_a.target_id = p->target_id;
 	} else {
 		*((char*) &rec_a + 0x1f4) = 0;
-		item = fcn_004fd9d0(rec_a.gender & 0xff, rec_a.age & 0xff);
+		item = gm_FindOrAllocHeadSet(rec_a.gender & 0xff, rec_a.age & 0xff);
 		if (item != 0) {
 			strcpy((char*) &rec_a + 0x1f4, item + 4);
 			rec_a.target_id = *(int*) (item + 0x34) + 0x639;

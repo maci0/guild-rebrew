@@ -10,21 +10,21 @@ extern char g_7f4ca4[];
 extern char g_6a5a48[];
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl fcn_005d2950(int, int);
 int __cdecl fcn_005d2a40(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(char, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c4ef0(char*);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_SendTraceEnd(char*);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_004c5480(int, int, float);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
+void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl he_FreeAction(char*);
 void __cdecl he_RollTripletEventScores(char*, char*, char*);
 int __cdecl fcn_004c5980(void*);
@@ -63,7 +63,7 @@ void __cdecl fcn_0054ca10(char* e)
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 		return;
 	}
-	if (*(int*) (e + 0x84) != -1 && fcn_004c4450(*(int*) (e + 0x84)) == 0) {
+	if (*(int*) (e + 0x84) != -1 && cm_GetCommandStatus(*(int*) (e + 0x84)) == 0) {
 		return;
 	}
 	*(int*) (e + 0x84) = -1;
@@ -161,17 +161,17 @@ void __cdecl fcn_0054ca10(char* e)
 		fcn_004c5620(0, e);
 		return;
 	case 1:
-		fcn_004c4eb0(g_6a5a48);
+		cm_SendLogAction(g_6a5a48);
 		cm_BeginPacketFieldDelta(b, *(int*) (b + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x5c, a + 4);
 		cm_AppendPacketFieldDelta(2, 1, 0x50, a + 0x50);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		cm_BeginPacketFieldDelta(a, *(int*) (a + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x5c, b + 4);
-		fcn_004c5360();
-		fcn_004c5420(*(int*) (b + 4), 0x1c8, 4, 0x40000, 0);
-		fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0x40000, 0);
-		fcn_004c4ef0(g_6a5a48);
+		cm_RequestChangeAttribute();
+		cm_RequestChangeBits(*(int*) (b + 4), 0x1c8, 4, 0x40000, 0);
+		cm_RequestChangeBits(*(int*) (a + 4), 0x1c8, 4, 0x40000, 0);
+		cm_SendTraceEnd(g_6a5a48);
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 		*(int*) (e + 0x84) = fcn_004c5620(5, e);
@@ -185,8 +185,8 @@ void __cdecl fcn_0054ca10(char* e)
 		return;
 	case 5:
 		if ((*(int*) (a + 0x5c) == *(int*) (b + 4)) & (*(int*) (b + 0x5c) == *(int*) (a + 4))) {
-		fcn_004c54c0(*(int*) (a + 4), *(int*) (b + 4), 0x7f - g_869480[*(unsigned short*) a][*(unsigned short*) b], 1);
-		fcn_004c54c0(*(int*) (b + 4), *(int*) (a + 4), 0x7f - g_869480[*(unsigned short*) b][*(unsigned short*) a], 1);
+		cm_RequestCopyEntityData(*(int*) (a + 4), *(int*) (b + 4), 0x7f - g_869480[*(unsigned short*) a][*(unsigned short*) b], 1);
+		cm_RequestCopyEntityData(*(int*) (b + 4), *(int*) (a + 4), 0x7f - g_869480[*(unsigned short*) b][*(unsigned short*) a], 1);
 		if (a[2] == 6 || a[2] == 5) {
 			pb = a;
 			if (a[9] != 1) {
@@ -194,7 +194,7 @@ void __cdecl fcn_0054ca10(char* e)
 			}
 			io_FormatTextBuffer(buf, 0x1d31, *(unsigned short*) b);
 			fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), buf, 0, 0x5f4, 0);
-			fcn_004c5480(*(int*) (pb + 4), 0x7c, 1.1f - *(float*) (pb + 0x7c));
+			cm_RequestChangeFloat(*(int*) (pb + 4), 0x7c, 1.1f - *(float*) (pb + 0x7c));
 		}
 		if (fcn_004f46e0((int) b, &rec, &hit) != 0) {
 			v = fcn_004f1790(*(int*) (rec + 0x65), hit);
@@ -256,7 +256,7 @@ tail:
 			if (a != 0) {
 				goto tail_locked;
 			}
-			fcn_004c5420(*(int*) (b + 4), 0x1c8, 4, 0, 0x40000);
+			cm_RequestChangeBits(*(int*) (b + 4), 0x1c8, 4, 0, 0x40000);
 			goto tail_done;
 		}
 		if (a == 0) {
@@ -264,7 +264,7 @@ tail:
 		}
 tail_locked:
 		if ((*(int*) (a + 0x1c8) & 0x40000) != 0 && b == 0) {
-			fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0, 0x40000);
+			cm_RequestChangeBits(*(int*) (a + 4), 0x1c8, 4, 0, 0x40000);
 		}
 	}
 tail_done:

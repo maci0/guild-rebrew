@@ -78,8 +78,8 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		fcn_00473150((char*) ch);
 		progress = (int) d2_UpdateProgressOverlay;
 	}
-	if ((g_7747b0 & 8) && !fcn_0042df70((TIMER_CALLBACK) fcn_00538060)) {
-		fcn_0042df30((TIMER_CALLBACK) fcn_00538060, 1);
+	if ((g_7747b0 & 8) && !tb_IsCallbackPaused((TIMER_CALLBACK) fcn_00538060)) {
+		tb_SetCallbackPaused((TIMER_CALLBACK) fcn_00538060, 1);
 		paused = 1;
 	}
 	if (init_SceneContextIndices[objectTypeIndex] == -1) {
@@ -139,6 +139,6 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		}
 	}
 	if ((g_7747b0 & 8) && paused) {
-		fcn_0042df30((TIMER_CALLBACK) fcn_00538060, 0);
+		tb_SetCallbackPaused((TIMER_CALLBACK) fcn_00538060, 0);
 	}
 }

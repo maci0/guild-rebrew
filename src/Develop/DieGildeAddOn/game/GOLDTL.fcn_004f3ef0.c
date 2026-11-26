@@ -24,17 +24,17 @@ extern int __cdecl cm_CountOccupiedBuildingStats(char* record);
 extern void __cdecl fcn_004f2e80(char* record, int value);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern int __cdecl fcn_0050d320(char* slot, char mode);
-extern int __cdecl fcn_004c4450(int handle);
-extern void __cdecl fcn_004c3ff0(void);
-extern void __cdecl fcn_004c4940(void);
+extern int __cdecl cm_GetCommandStatus(int handle);
+extern void __cdecl cm_FlushCommandQueue(void);
+extern void __cdecl cm_PollCommandQueue(void);
 extern void __cdecl cm_ExecCommand(void);
-extern int __cdecl fcn_004c54c0(unsigned int a, unsigned int b, int value, int d);
+extern int __cdecl cm_RequestCopyEntityData(unsigned int a, unsigned int b, int value, int d);
 extern void __cdecl he_NotifyContractBatch(int slot, int record, int count, int total);
 extern void __cdecl he_NotifyContractDefault(int slot, int record);
 
 extern char g_7f4ca0[];
 extern int __cdecl fcn_004f1850();
-extern int __cdecl fcn_004c5530(void* msg);
+extern int __cdecl cm_SendCopyEntityData(void* msg);
 
 /* ADDRESS: GOLDTL 0x004f3ef0 */
 void __cdecl fcn_004f3ef0(char* entity)
@@ -71,10 +71,10 @@ void __cdecl fcn_004f3ef0(char* entity)
 		do {
 			if (n >= 0x40 && handle != -1) {
 				while (1) {
-					if (fcn_004c4450(handle) != 0)
+					if (cm_GetCommandStatus(handle) != 0)
 						break;
-					fcn_004c3ff0();
-					fcn_004c4940();
+					cm_FlushCommandQueue();
+					cm_PollCommandQueue();
 					cm_ExecCommand();
 				}
 				n = 0;
@@ -119,7 +119,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 				continue;
 			if (slot != home && gm_GameTime % 4 == *(unsigned int*) (slot + 4) % 4
 			    && *(unsigned char*) ((char*) entry + 0xc) * g_662c30 < 0.66f) {
-				handle = fcn_004c54c0(*(unsigned int*) (home + 4), *(unsigned int*) (slot + 4),
+				handle = cm_RequestCopyEntityData(*(unsigned int*) (home + 4), *(unsigned int*) (slot + 4),
 					-5 - gm_RandomMod(0x10), 1);
 				n++;
 				hits++;
@@ -157,7 +157,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 				*(char*) ((char*) block + 0x60) = (char) fcn_004f1790((char*) *(int*) (entity + 0x65), entry);
 				*(int*) ((char*) block + 0x64) = result;
 				*(int*) ((char*) block + 0x68) = 10;
-				handle = fcn_004c5530(block);
+				handle = cm_SendCopyEntityData(block);
 			}
 			n++;
 next_entry:

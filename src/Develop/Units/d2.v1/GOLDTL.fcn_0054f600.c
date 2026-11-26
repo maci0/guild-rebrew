@@ -27,7 +27,7 @@ extern char* g_7747b8;
 
 int __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00500cb0(void*, void*);
+int __cdecl gm_CompareGameTime(void*, void*);
 void __cdecl fcn_0054f4a0(char*, char*, unsigned char*);
 void __cdecl he_AcceptDuell(char*, char*, char*);
 void __cdecl fcn_00545780(char*);
@@ -37,7 +37,7 @@ void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl gm_AddTime(char*, int, int, int);
-int __cdecl fcn_005ca560(SEL_54f600*);
+int __cdecl d2_BuildPersonStatusDesc(SEL_54f600*);
 int __cdecl fcn_005caaa0(int, int, int, SEL_54f600*);
 void __cdecl fcn_004c5620(int, void*);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -61,7 +61,7 @@ void __cdecl fcn_0054f600(char* o)
 	if (state != -1 && state != -2 && entity != 0 && v6 != 0 && v4 != 0) {
 		switch (state) {
 		case 1:
-			if (fcn_00500cb0(&gm_GameTime, o + 0x52) > 0) {
+			if (gm_CompareGameTime(&gm_GameTime, o + 0x52) > 0) {
 				fcn_0054f4a0(entity, v4, (unsigned char*) v6);
 				fcn_00545780(o);
 				he_FreeAction(o);
@@ -91,7 +91,7 @@ void __cdecl fcn_0054f600(char* o)
 				io_AppendText(0x1d6c);
 				d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 2);
 				s.e = v4;
-				if (fcn_005ca560(&s) != 0) {
+				if (d2_BuildPersonStatusDesc(&s) != 0) {
 					fcn_005caaa0(*(int*) (g_77255c + 0xc) / 2 - 0x28, 0, d2_CurrentWindowId, &s);
 					((D2_CONTROL_TL*) g_1015ea0)[s.tile].value_05c = 1;
 					((D2_CONTROL_TL*) g_1015ea0)[s.tile].flags_1d0 = 3;

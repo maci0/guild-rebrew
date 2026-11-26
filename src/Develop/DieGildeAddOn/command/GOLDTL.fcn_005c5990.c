@@ -37,7 +37,7 @@ extern char* g_14a5558;
 extern int g_14a79c0[];
 
 char* __cdecl plt_FindRecordByOwner(int, int);
-void __cdecl fcn_004c5530(char*);
+void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00475220(char*);
@@ -71,7 +71,7 @@ void __cdecl d2_HandleErnten(char* building, int plant_table)
 					*(int*) (msg + 0x64) = *(int*) entry;
 					*(int*) (msg + 0x5c) = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
 					*(int*) (msg + 0x58) = *(int*) (building + 1);
-					fcn_004c5530(msg);
+					cm_SendCopyEntityData(msg);
 					cm_ExProdObjekt();
 				}
 			}

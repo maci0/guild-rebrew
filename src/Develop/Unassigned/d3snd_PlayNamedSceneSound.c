@@ -1,6 +1,6 @@
 #include <string.h>
 int __cdecl fcn_0064f170(void*, char*, int);
-void* __cdecl fcn_00422460(int, char*);
+void* __cdecl sb_PrepareVoice(int, char*);
 int __cdecl d3snd_AttachSoundSource(void*, void*, int, float);
 int __cdecl d3snd_PlaySource(int, int, int, int);
 extern int g_774934;
@@ -34,7 +34,7 @@ void __cdecl d3snd_PlayNamedSceneSound(char* p)
 	}
 
 	if (g_774934 != 0) {
-		si = (int) fcn_00422460(0, buf);
+		si = (int) sb_PrepareVoice(0, buf);
 		if (si != 0) {
 			v = (int)(*(float*)(p + 0x68)) + 0x32;
 			r = d3snd_AttachSoundSource((void*) si, p, 0x7f, (float) v);

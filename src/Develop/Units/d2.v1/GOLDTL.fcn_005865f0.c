@@ -51,7 +51,7 @@ void __cdecl fcn_00472640(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 
 int __cdecl fcn_005865f0(char* e, int* who, int kind)
 {
@@ -101,7 +101,7 @@ int __cdecl fcn_005865f0(char* e, int* who, int kind)
 				m.who = *who;
 				m.delay = gm_RandomMod(0x5a0) + 1000;
 				m.other = kind;
-				fcn_004c5530(&m);
+				cm_SendCopyEntityData(&m);
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == no) {
 				g_774654 = 1;

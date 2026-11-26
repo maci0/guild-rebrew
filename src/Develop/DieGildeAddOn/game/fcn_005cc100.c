@@ -1,5 +1,5 @@
 int __cdecl fcn_004e93d0(unsigned char* a1, int max, int* out);
-int __cdecl fcn_005ca560(void* sel);
+int __cdecl d2_BuildPersonStatusDesc(void* sel);
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005cc100 */
@@ -51,7 +51,7 @@ int __cdecl fcn_005cc100(char* a1, unsigned int capacity, char* results, int a4)
 				if (ids[i] == (int) (unsigned char) ent[0x168]) {
 					*(char**) out = ent;
 					*(int*) (out + 0x34) = ids[i];
-					fcn_005ca560(out);
+					d2_BuildPersonStatusDesc(out);
 					*(int*) (out + 0x30) = fcn_005cf720(*(unsigned short*) a1,
 						*(unsigned short*) *(char**) out, a4, 0);
 					count++;

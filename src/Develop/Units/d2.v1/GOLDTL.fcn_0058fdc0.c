@@ -18,7 +18,7 @@ void __cdecl fcn_005944d0(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl fcn_005b88b0(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
-void __cdecl fcn_005cf560(char*);
+void __cdecl d2_OpenMeisterbriefDialog(char*);
 
 /* ADDRESS: GOLDTL 0x0058fdc0 */
 void __cdecl fcn_0058fdc0(char* e)
@@ -51,7 +51,7 @@ void __cdecl fcn_0058fdc0(char* e)
 			} else if (g_7746a0 == r2) {
 				d2_OpenTransportPanel(e);
 			} else if (g_7746a0 == r3) {
-				fcn_005cf560(e);
+				d2_OpenMeisterbriefDialog(e);
 			} else if (g_7746a0 == r4) {
 				fcn_005b88b0(e, g_6a9914);
 			} else if (g_7746a0 == r5) {

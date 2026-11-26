@@ -4,7 +4,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508220(int, int*);
 void __cdecl cm_BeginPacketFieldDelta(unsigned short*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl fcn_004ff210(unsigned short, int);
 int __cdecl _ftol(void);
 
@@ -88,7 +88,7 @@ unsigned int __cdecl fcn_005086f0(unsigned short* objectContext)
 	v = flags;
 	cm_BeginPacketFieldDelta(objectContext, *(int*) ((char*) objectContext + 4));
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &v);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	fcn_004ff210(*objectContext, -n);
 	return id;
 }

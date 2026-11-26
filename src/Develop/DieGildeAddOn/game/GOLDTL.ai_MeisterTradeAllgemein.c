@@ -108,9 +108,9 @@ extern float g_664144;
 double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_0047d1b0(void);
 int __cdecl he_CountActiveTradeActions(void);
-int __cdecl fcn_004c51f0(int, int, int, int, int, int);
-int __cdecl fcn_004c52d0(int, int);
-int __cdecl fcn_004c5530(void*);
+int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
+int __cdecl cm_RequestClearLagerslot(int, int);
+int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -317,7 +317,7 @@ next_request:
 			v.m.slots[0] = 5;
 			*(int*) ((char*) &v.m + 0x84) = 0;
 			v.m.f5c = 0x64 - *(unsigned char*) (r + 0x12);
-			fcn_004c5530(&v.m);
+			cm_SendCopyEntityData(&v.m);
 			goto Tail;
 		}
 		/* 0x572-0x5f0: is the cart already unloaded? */
@@ -397,7 +397,7 @@ next_request:
 					    *(int*) (bld + 2),
 					    *(int*) (q + 2), (int) *ip,
 					    tmp, g_773d75, 0);
-					fcn_004c51f0(*(int*) (bld + 2),
+					cm_SendSellObjekt(*(int*) (bld + 2),
 					    *(int*) (q + 2), (int) *ip,
 					    tmp, g_773d75, 0);
 				}
@@ -425,7 +425,7 @@ next_request:
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2),
 				    (int) *ip, tmp, g_773d75, 0);
-				fcn_004c51f0(*(int*) (bld + 2),
+				cm_SendSellObjekt(*(int*) (bld + 2),
 				    *(int*) (q + 2), (int) *ip, tmp,
 				    g_773d75, 0);
 				*p -= tmp;
@@ -475,7 +475,7 @@ next_request:
 					    g_773d75, (double) price);
 					tmp = (int) fcn_0050bb50(
 					    (int) v.ids[j], g_773d75);
-					fcn_004c51f0(-1,
+					cm_SendSellObjekt(-1,
 					    *(int*) (bld + 2),
 					    (int) v.ids[j], v.a2[j],
 					    g_773d75, tmp);
@@ -492,7 +492,7 @@ next_request:
 					    *(int*) (bld + 2),
 					    *(int*) (q + 2), (int) *ip,
 					    tmp, g_773d75, 0);
-					fcn_004c51f0(*(int*) (bld + 2),
+					cm_SendSellObjekt(*(int*) (bld + 2),
 					    *(int*) (q + 2), (int) *ip,
 					    tmp, g_773d75, 0);
 					*p -= tmp;
@@ -522,7 +522,7 @@ fake_auto:
 				    g_773d75, (double) price);
 				tmp = (int) fcn_0050bb50((int) *ip,
 				    g_773d75);
-				fcn_004c51f0(-1, *(int*) (bld + 2),
+				cm_SendSellObjekt(-1, *(int*) (bld + 2),
 				    (int) *ip, *p, g_773d75, tmp);
 				price = (int) (fcn_0050bb50((int) *ip,
 				    g_773d75) + *(int*) (o + 0x1b8));
@@ -576,7 +576,7 @@ after_auto:
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2),
 				    id, tmp, g_773d75, 0);
-				fcn_004c51f0(*(int*) (bld + 2),
+				cm_SendSellObjekt(*(int*) (bld + 2),
 				    *(int*) (q + 2), id, tmp,
 				    g_773d75, 0);
 				v.m.ids[cnt] = id;
@@ -592,7 +592,7 @@ after_auto:
 				continue;
 			}
 clear_slot:
-			fcn_004c52d0(*(int*) (bld + 2), id);
+			cm_RequestClearLagerslot(*(int*) (bld + 2), id);
 			*ip = 0;
 next_collect:
 			;
@@ -625,7 +625,7 @@ next_collect:
 					    *(int*) (bld + 2),
 					    (int) w->id, tmp,
 					    g_773d75, 0);
-					fcn_004c51f0(*(int*) (q + 2),
+					cm_SendSellObjekt(*(int*) (q + 2),
 					    *(int*) (bld + 2),
 					    (int) w->id, tmp,
 					    g_773d75, 0);
@@ -665,7 +665,7 @@ next_collect:
 					    w->qty18, g_773d75, price);
 					tmp = (int) fcn_0050bb50(w->id,
 					    g_773d75);
-					fcn_004c51f0(-1,
+					cm_SendSellObjekt(-1,
 					    *(int*) (bld + 2), w->id,
 					    w->qty18, g_773d75, tmp);
 					w->qty18 = 0;
@@ -688,7 +688,7 @@ next_collect:
 					    *(int*) (bld + 2),
 					    *(int*) (q + 2), w->id,
 					    tmp, g_773d75, 0);
-					fcn_004c51f0(*(int*) (bld + 2),
+					cm_SendSellObjekt(*(int*) (bld + 2),
 					    *(int*) (q + 2), w->id,
 					    tmp, g_773d75, 0);
 					v.m.ids[cnt] = w->id;
@@ -774,7 +774,7 @@ next_collect:
 				v.m.f5c = x;
 				v.m.f60 = *(int*) (o + 4);
 				if (*(int*) 0x100b0a4 == 0) {
-					fcn_004c5530(&v.m);
+					cm_SendCopyEntityData(&v.m);
 					g_772620++;
 				}
 			}

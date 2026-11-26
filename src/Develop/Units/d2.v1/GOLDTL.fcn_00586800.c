@@ -35,7 +35,7 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_CheckEntityStock(ENTITY_RECORD*, int, unsigned char);
 void __cdecl ahm_SendSetFloatValue(char*, float);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -91,7 +91,7 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 					ahm_SendSetFloatValue(p, (float) c / n * f * 0.75f);
 					r = 1;
 					g_774654 = 1;
-					fcn_004c5150(*(int*) (p + 4), ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, g_773d75, c);
+					cm_RequestMoveCredits(*(int*) (p + 4), ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, g_773d75, c);
 				}
 			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;

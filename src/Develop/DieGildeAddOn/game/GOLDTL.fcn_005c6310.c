@@ -5,9 +5,9 @@ unsigned short* __cdecl fcn_00502cd0(int, int, int);
 int __cdecl fcn_005c61e0(int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl fcn_0047dca0(char*);
-void __cdecl fcn_004c51f0(int, int, int, int, int, int);
+void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
@@ -67,12 +67,12 @@ void __cdecl fcn_005c6310(void)
 								if (*item == 0x178) {
 									obj = gm_StartFilteredEntitySearch(1, 1, *(int*) (rec + 0x25));
 									if (obj != 0) {
-										fcn_004c5420(*(int*) (obj + 1), 0x5a, 2, 0, 0x20);
+										cm_RequestChangeBits(*(int*) (obj + 1), 0x5a, 2, 0, 0x20);
 									}
 								}
 								obj = fcn_0047dca0(g_7f4ca0 + off);
 								if (obj != 0 && *(char*) (g_7f4ca0 + 2 + off) != 7) {
-									fcn_004c51f0(-1, *(int*) (rec + 6), *item, 1,
+									cm_SendSellObjekt(-1, *(int*) (rec + 6), *item, 1,
 										g_773d75, 0);
 								}
 							}

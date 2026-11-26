@@ -26,8 +26,8 @@ void __cdecl gm_AddTime(int*, int, int, int);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 void __cdecl he_FreeAction(char*);
 char* __cdecl he_StartHandlungSearch(int, int, int);
-void __cdecl fcn_004c51a0(int, int, char, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 int __cdecl fcn_0050ddf0(int, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, void*);
@@ -188,7 +188,7 @@ void __cdecl he_AllocTransport(char* action)
 		}
 		*(unsigned char*) (query + 0x13) = *(unsigned char*) (query + 0x13) | 0x40;
 		if ((*(unsigned char*) (action + 0x78) & 2) != 0) {
-			fcn_004c5420(*(int*) (query + 2), 0x13, 1, 0x40, 0);
+			cm_RequestChangeBits(*(int*) (query + 2), 0x13, 1, 0x40, 0);
 		}
 		*(int*) (query + 0x24) = (int) action;
 		*(int*) (action + 0x10) = *(int*) (query + 2);
@@ -206,7 +206,7 @@ void __cdecl he_AllocTransport(char* action)
 				*(char*) (query + 0x28) = *(char*) (action + 0xcc);
 				v = fcn_0050ddf0(stats.total, (int) *(char*) (query + 0x28));
 				if ((*(unsigned char*) (action + 0x78) & 2) != 0) {
-					fcn_004c51a0(-1, *(int*) ((g_770b80 + 4) +
+					cm_RequestTransferCurrencyNoKill(-1, *(int*) ((g_770b80 + 4) +
 					              *(unsigned short*) (action + 8) * 0x21c),
 					             (char) g_773d75, v);
 				}

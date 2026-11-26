@@ -88,7 +88,7 @@ void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl d2_CheckActionBlocker(void*, int);
 void __cdecl fcn_005100f0(int, int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
@@ -188,7 +188,7 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 					msg.fc = *(int*) (participant + 1);
 					msg.pos = gm_GameTime;
 					msg.sel = idx;
-					fcn_004c5530(&msg);
+					cm_SendCopyEntityData(&msg);
 					g_774654 = 1;
 				}
 			}

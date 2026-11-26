@@ -9,7 +9,7 @@ typedef struct {
 	int b;
 } fcn_004fac80_E;
 
-int __cdecl fcn_004fac80(int idx, int* out)
+int __cdecl gm_GetBuildingSlotLimits(int idx, int* out)
 {
 	fcn_004fac80_E* t;
 

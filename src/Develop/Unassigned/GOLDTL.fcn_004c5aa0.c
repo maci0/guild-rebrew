@@ -1,7 +1,7 @@
 
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
 void __cdecl fcn_004c5aa0(int a1, char a2, char a3, short a4, char a5, int a6)
 {
@@ -14,5 +14,5 @@ void __cdecl fcn_004c5aa0(int a1, char a2, char a3, short a4, char a5, int a6)
 	*(short*) (buf + 0x1a) = a4;
 	*(char*) (buf + 0x1c) = a5;
 	*(int*) (buf + 0x1d) = a6;
-	fcn_004c4330(buf);
+	cm_EnqueueClientPacket(buf);
 }

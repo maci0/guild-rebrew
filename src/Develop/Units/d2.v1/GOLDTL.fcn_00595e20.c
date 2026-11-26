@@ -11,8 +11,8 @@ int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl fcn_0050dfd0(char*, int);
 int __cdecl gm_GetMsgField(char*, void*);
 int __cdecl cm_BeginPacketFieldDelta(int, int);
-int __cdecl fcn_004c4700(int, int, int, int*);
-void __cdecl fcn_004c53a0(void);
+int __cdecl cm_AppendCommandSyncField(int, int, int, int*);
+void __cdecl cm_SendSetAttribute(void);
 int __cdecl d2_GetControlValue(int);
 int __cdecl CountDisplayCounters(void);
 
@@ -200,8 +200,8 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 			else
 				cat = *(unsigned int*) (ent + 0xe) + 1;
 			cm_BeginPacketFieldDelta((int) ent, *(int*) (ent + 1));
-			fcn_004c4700(4, 1, (int) ((char*) ent - g_aed32c) + 0x1c, &cat);
-			fcn_004c53a0();
+			cm_AppendCommandSyncField(4, 1, (int) ((char*) ent - g_aed32c) + 0x1c, &cat);
+			cm_SendSetAttribute();
 			*(int*) (ent + 0xe) = cat;
 		}
 		for (p = (unsigned int*) 0x779700; (int) p < 0x7798c0; p += 0xe) {
@@ -215,8 +215,8 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 			else
 				cat = *(unsigned int*) (ent + 0xe) + 1;
 			cm_BeginPacketFieldDelta((int) ent, *(int*) (ent + 1));
-			fcn_004c4700(4, 1, (int) ((char*) ent - g_aed32c) + 0x1c, &cat);
-			fcn_004c53a0();
+			cm_AppendCommandSyncField(4, 1, (int) ((char*) ent - g_aed32c) + 0x1c, &cat);
+			cm_SendSetAttribute();
 			*(int*) (ent + 0xe) = cat;
 		}
 	}

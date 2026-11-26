@@ -3,7 +3,7 @@
 typedef struct { int word[2]; } QUERY_LIMIT;
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_004fac80(int, int*);
+int __cdecl gm_GetBuildingSlotLimits(int, int*);
 void __cdecl d3_TransformPoint(int, int, float*);
 int __cdecl gm_RandomMod(int);
 
@@ -26,12 +26,12 @@ char* __cdecl fcn_004ffff0(int a0, int a1)
 
 	best = 0;
 	bestd = 1e8f;
-	fcn_004fac80(1, selected.word);
+	gm_GetBuildingSlotLimits(1, selected.word);
 	e = gm_StartFilteredEntitySearch(1, 5, 1);
 	if (e != 0) {
 		best_n = selected.word[0];
 		do {
-			fcn_004fac80(*(unsigned char*) e, current.word);
+			gm_GetBuildingSlotLimits(*(unsigned char*) e, current.word);
 			n = current.word[0];
 			if ((unsigned short) *(unsigned char*) (e + 0x65) < (unsigned short) current.word[0]
 			    && (*(unsigned char*) (e + 0x5a) & 1) == 0) {

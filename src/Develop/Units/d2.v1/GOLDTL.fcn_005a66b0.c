@@ -30,8 +30,8 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00508620(int, int);
-int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_004c5530(char*);
+int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
+void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
@@ -61,7 +61,7 @@ int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 					b = fcn_00508620(1, n);
 					fa = (float) b;
 				}
-				fcn_004c51f0(-1, *(int*) (who + 1), n, a, g_773d75, 0);
+				cm_SendSellObjekt(-1, *(int*) (who + 1), n, a, g_773d75, 0);
 				memset(msg, 0, sizeof(msg));
 				msg[4] = 0x27;
 				*(int*) (msg + 0xc) = -1;
@@ -70,7 +70,7 @@ int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 				*(int*) (msg + 0x58) = *(int*) (who + 1);
 				msg[0x5c] = k;
 				*(int*) (msg + 0x60) = (int) (a - fa);
-				fcn_004c5530(msg);
+				cm_SendCopyEntityData(msg);
 				res = 1;
 				g_774654 = 1;
 			} else if (g_100f1dc == 1) {

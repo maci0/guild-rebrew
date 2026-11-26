@@ -11,7 +11,7 @@ extern int g_774650;
 extern int g_774658;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00423460(int);
+int __cdecl sb_CheckVoicePlaying(int);
 int __cdecl sb_StopVoice(int, int);
 void __cdecl fcn_004707d0(int);
 void __cdecl fcn_00472640(int, int);
@@ -249,7 +249,7 @@ label7:
 		fcn_00533a40(*(int *)(*(int *)((int)g_665f08[6] + 0x24) * 4 + 0x14a5320));
 		if (*(int *)((int)g_665f08[6] + 0x28) != 0) {
 			if (g_665f08[5] != 0) {
-				if (fcn_00423460(g_665f08[5]) != 0) {
+				if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
 					sb_StopVoice(g_665f08[5], 0);
 				}
 				g_665f08[5] = 0;
@@ -281,7 +281,7 @@ label7:
 		fcn_00533a40(*(int *)(*(int *)((int)g_665f08[6] + 0x24) * 4 + 0x14a5320));
 		if (*(int *)((int)g_665f08[6] + 0x28) != 0) {
 			if (g_665f08[5] != 0) {
-				if (fcn_00423460(g_665f08[5]) != 0) {
+				if (sb_CheckVoicePlaying(g_665f08[5]) != 0) {
 					sb_StopVoice(g_665f08[5], 0);
 				}
 				g_665f08[5] = 0;

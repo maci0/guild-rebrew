@@ -11,7 +11,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
-void __cdecl fcn_005ba900(int);
+void __cdecl d2_OpenShopTradePanel(int);
 void __cdecl fcn_005ba8f0(int);
 
 void __cdecl d2_RunKontorTradeHud(int a)
@@ -26,7 +26,7 @@ void __cdecl d2_RunKontorTradeHud(int a)
 		d3_UpdateBuildingInteriorState();
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == x) {
-				fcn_005ba900(a);
+				d2_OpenShopTradePanel(a);
 			}
 			else if (g_7746a0 == y) {
 				fcn_005ba8f0(a);

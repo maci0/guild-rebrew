@@ -14,17 +14,17 @@ extern pos14_7f4c00 gm_GameTime;
 
 extern void (__stdcall* g_662068)(unsigned int);
 
-void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_004c4700(int, int, int, void*);
-void __cdecl fcn_004c53a0(void);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl cm_AppendCommandSyncField(int, int, int, void*);
+void __cdecl cm_SendSetAttribute(void);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5120(int);
-void __cdecl fcn_004c5a60(int, int, int);
-void __cdecl fcn_004c5f60(int, int, int);
-void __cdecl fcn_004c5530(void*);
-void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestFreeEntity(int);
+void __cdecl cm_SendRemoveLinkedObject(int, int, int);
+void __cdecl cm_SendSetGebBesitzer(int, int, int);
+void __cdecl cm_SendCopyEntityData(void*);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_004c6090(char*, int, int, int);
 void __cdecl fcn_004f3ef0(char*);
 void __cdecl gm_AdjustGebaeudeCondition(char*, int);
@@ -93,7 +93,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 			*(int*) (rec + 0x51) = 0;
 			*(int*) (rec + 0x55) = 0;
 			if ((*(unsigned short*) (rec + 0x5a) & 0x3800) != 0) {
-				fcn_004c5420(*(int*) (rec + 1), 0x5a, 2, 0, 0x3800);
+				cm_RequestChangeBits(*(int*) (rec + 1), 0x5a, 2, 0, 0x3800);
 				count++;
 			}
 			v = *def;
@@ -102,15 +102,15 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					zero = 0;
 					cm_BeginPacketFieldDelta((char*) rec, *(int*) (rec + 1));
 					for (i = 0; i < 3; i++) {
-						fcn_004c4700(4, 1, (int) (rec - g_aed32c) + 0x71 + i * 12, &zero);
+						cm_AppendCommandSyncField(4, 1, (int) (rec - g_aed32c) + 0x71 + i * 12, &zero);
 					}
-					fcn_004c53a0();
+					cm_SendSetAttribute();
 					count++;
 					off = (arg & 0xffff);
 					v = *(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_state;
 					if (v != 6 && v != 7) {
 						if (gm_AccumulateTyped2((char*)&((ENTITY_RECORD*)g_7f4ca0)[off]) < 160000) {
-							fcn_004c5150(*(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id, -1, (char) g_773d75, *(unsigned char*) (def + 0x247) * 16000);
+							cm_RequestMoveCredits(*(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id, -1, (char) g_773d75, *(unsigned char*) (def + 0x247) * 16000);
 							count++;
 						}
 					}
@@ -129,7 +129,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							buf4[3] = *(int*) (obj + 0x1c0);
 							cm_BeginPacketFieldDelta((char*) obj, *(int*) (obj + 4));
 							cm_AppendPacketFieldDelta(4, 1, (int) (obj - g_aed32c) + 0x1b4, buf4);
-							fcn_004c5360();
+							cm_RequestChangeAttribute();
 						}
 					}
 				}
@@ -142,7 +142,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 				while (obj != 0) {
 					count++;
 					if (*(unsigned char*) (obj + 0x37) <= 5) {
-						fcn_004c5a60(*(int*) (rec + 1), -1, *(int*) (obj + 2));
+						cm_SendRemoveLinkedObject(*(int*) (rec + 1), -1, *(int*) (obj + 2));
 					} else {
 						r = (unsigned char*) gm_SearchTable67(*(int*) (obj + 0x2a));
 						if (r != 0) {
@@ -152,10 +152,10 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							}
 							cm_BeginPacketFieldDelta((char*) obj, *(int*) (obj + 2));
 							cm_AppendPacketFieldDelta(1, 1, (int) (obj - g_aed32c) + 0x37, &cv);
-							fcn_004c5360();
+							cm_RequestChangeAttribute();
 						}
 						else {
-							fcn_004c5120(*(int*) (obj + 2));
+							cm_RequestFreeEntity(*(int*) (obj + 2));
 						}
 					}
 					obj = (unsigned char*) gm_NextEntityQueryMatch();
@@ -173,12 +173,12 @@ void __cdecl fcn_005422c0(unsigned int arg)
 				(msg + 0xf8)[0x36] = 2;
 				*(int*) ((msg + 0xf8) + 0x58) = *(int*) (rec + 1);
 				*(int*) ((msg + 0xf8) + 0x5c) = gm_CalculateGebaeudeValue((char*) rec, *(signed char*) (rec + 0x5c));
-				fcn_004c5530((msg + 0xf8));
+				cm_SendCopyEntityData((msg + 0xf8));
 			}
 			off = (arg & 0xffff);
 			v = *(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_state;
 			if (v == 0xd || v == 0 || *(int*)&((ENTITY_RECORD*)g_7f4ca0)[off].entity_id == -1) {
-				fcn_004c5f60(*(int*) (rec + 1), *(int*) (gm_CityEntity + 2), *(int*) (gm_CityEntity + 2));
+				cm_SendSetGebBesitzer(*(int*) (rec + 1), *(int*) (gm_CityEntity + 2), *(int*) (gm_CityEntity + 2));
 				count++;
 				v = *def;
 				if (v != 0xd && v != 0xc && v != 0xb) {
@@ -188,7 +188,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					msg[0x36] = 2;
 					*(int*) (msg + 0x58) = *(int*) (rec + 1);
 					*(int*) (msg + 0x5c) = gm_CalculateGebaeudeValue((char*) rec, *(signed char*) (rec + 0x5c));
-					fcn_004c5530(msg);
+					cm_SendCopyEntityData(msg);
 					count++;
 					for (i = 0; i < 768; i++) {
 						slot = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]);
@@ -200,7 +200,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
 							msg[0x36] = 1;
 							*(int*) (msg + 0x58) = *(int*) (slot + 4);
-							fcn_004c5530(msg);
+							cm_SendCopyEntityData(msg);
 							count++;
 						}
 					}
@@ -232,7 +232,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 				r = (unsigned char*) fcn_004ec7d0(p);
 				if (r != 0) {
 					v = fcn_004ee160((char*) p);
-					fcn_004c51a0(*(int*) (r + 4), *(int*) (tile + 4), g_773d75, v);
+					cm_RequestTransferCurrencyNoKill(*(int*) (r + 4), *(int*) (tile + 4), g_773d75, v);
 					count++;
 				}
 			else {
@@ -268,7 +268,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 								r[0x8c] &= 0xfb;
 							}
 							if (*(unsigned char*) (tile2 + 2) != 0x14) {
-								fcn_004c51a0(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
+								cm_RequestTransferCurrencyNoKill(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
 							}
 							count++;
 							if (*(int*) (p + 0x3d) < 100 && fcn_0050f950(idx, *(unsigned short*) tile2) > -120) {
@@ -301,11 +301,11 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							}
 							if (delta != 0) {
 								count++;
-								fcn_004c54c0(*(int*) (tile + 4), *(int*) (tile2 + 4), (int) delta, 0);
+								cm_RequestCopyEntityData(*(int*) (tile + 4), *(int*) (tile2 + 4), (int) delta, 0);
 							}
 							cm_BeginPacketFieldDelta((char*) tile2, *(int*) (tile2 + 4));
 							cm_AppendPacketFieldDelta(4, 1, 0x19c, &v);
-							fcn_004c5360();
+							cm_RequestChangeAttribute();
 							count++;
 							b1 = fcn_0050f950(idx, *(unsigned short*) tile2) + delta;
 							if (b1 < -26) {
@@ -319,7 +319,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 										(msg + 0x1f0)[0x36] = 1;
 										*(int*) ((msg + 0x1f0) + 0x58) = *(int*) (tile2 + 4);
 										gm_AddTime((pos14_7f4c00*) ((msg + 0x1f0) + 0x28), (gm_RandomMod(6) & 0xffff) + 4, 0, 0);
-										fcn_004c5530((msg + 0x1f0));
+										cm_SendCopyEntityData((msg + 0x1f0));
 										count++;
 									}
 									else {
@@ -331,7 +331,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 										(msg + 0xf8)[0x36] = 1;
 										*(int*) ((msg + 0xf8) + 0x58) = *(int*) (tile2 + 4);
 										gm_AddTime((pos14_7f4c00*) ((msg + 0xf8) + 0x28), (gm_RandomMod(6) & 0xffff) + 4, 0, 0);
-										fcn_004c5530((msg + 0xf8));
+										cm_SendCopyEntityData((msg + 0xf8));
 										count++;
 									}
 								}
@@ -348,7 +348,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 									if (b1 > 42.0f) {
 										cm_AppendPacketFieldDelta(1, 1, (int) (tile2 - g_aed32c) + 0x83, &cv);
 									}
-									fcn_004c5360();
+									cm_RequestChangeAttribute();
 									count++;
 								}
 							}
@@ -360,10 +360,10 @@ void __cdecl fcn_005422c0(unsigned int arg)
 						id2 = ((int*) msg)[0x19 + j];
 						if (id2 != 0xffff) {
 							tile2 = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[id2]);
-							fcn_004c51a0(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
+							cm_RequestTransferCurrencyNoKill(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
 							cm_BeginPacketFieldDelta((char*) tile2, *(int*) (tile2 + 4));
 							cm_AppendPacketFieldDelta(4, 1, 0x19c, &v);
-							fcn_004c5360();
+							cm_RequestChangeAttribute();
 							count += 2;
 						}
 					}
@@ -388,7 +388,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					v = fcn_0050b810(*(int*) (r + 0x14), (char) g_773d75);
 					if (v > 0) {
 						count++;
-						fcn_004c5150(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) g_773d75, v);
+						cm_RequestMoveCredits(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) g_773d75, v);
 					}
 				}
 			}
@@ -398,7 +398,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					v = fcn_0050b810(*(int*) (r + 0x14), (char) g_773d75);
 					if (v > 0) {
 						count++;
-						fcn_004c5150(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) g_773d75, v);
+						cm_RequestMoveCredits(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) g_773d75, v);
 					}
 				}
 			}

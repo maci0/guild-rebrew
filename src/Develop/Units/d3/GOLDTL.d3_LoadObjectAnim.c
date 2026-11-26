@@ -1,5 +1,5 @@
 void __cdecl fcn_00433780(void*);
-char* __cdecl fcn_00449ac0(char*, char*);
+char* __cdecl d3_AppendVfsAssetPath(char*, char*);
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 int __cdecl fcn_004011f0(void*, void*);
 char* __cdecl m_alloc(int, char*);
@@ -28,7 +28,7 @@ char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop)
 	if (*(char**) (object + 0x1d0)) {
 		fcn_00433780(object);
 	}
-	p = fcn_00449ac0(path, (char*) 0x67b044);
+	p = d3_AppendVfsAssetPath(path, (char*) 0x67b044);
 	if ((p && *(int*) (object + 0x218) == 4) || *(int*) (object + 0x218) == 3) {
 		h = vfs_Tfopen(p, (char*) 0x6750e8, *(void**) 0x6b7fdc);
 		fcn_004011f0(h, &hdr);

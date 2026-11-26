@@ -22,7 +22,7 @@ int __cdecl fcn_005bdc30(int, int*, char*, int, int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 
 int __cdecl gm_ObjHalveWorkerLevel(char* cmd, char* arg)
 {
@@ -60,7 +60,7 @@ int __cdecl gm_ObjHalveWorkerLevel(char* cmd, char* arg)
 			val = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) % 2 + (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) / 2;
 			cm_BeginPacketFieldDelta((char*) ((Ent*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id));
 			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) &(*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) - g_aed32c), &val);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		}
 	}
 end:

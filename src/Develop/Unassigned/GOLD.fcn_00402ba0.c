@@ -12,7 +12,7 @@ typedef struct D3_ANIMATION_OPTIONS {
     unsigned char queue : 1;
     unsigned char pad8[3];
 } D3_ANIMATION_OPTIONS;
-void __cdecl fcn_00442c00(char*, int);
+void __cdecl d3_SetObjectVisible(char*, int);
 void __cdecl fcn_00453270(char*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_00438b40(char*, float*);
@@ -48,10 +48,10 @@ void __cdecl fcn_00402ba0(char* character)
         flags = *(unsigned short*)(character + 0x8c);
         if (flags & 0x200) {
             if (I32(*(char**)(character + 0x34) + 0x218) != 1)
-                fcn_00442c00(*(char**)(character + 0x34), 0);
+                d3_SetObjectVisible(*(char**)(character + 0x34), 0);
             low = *(char**)(character + 0x22c);
             if (I32(low + 0x218) == 1) {
-                fcn_00442c00(low, 1);
+                d3_SetObjectVisible(low, 1);
                 fcn_00453270(*(char**)(character + 0x22c));
             }
             return;
@@ -69,14 +69,14 @@ void __cdecl fcn_00402ba0(char* character)
                 goto highpoly_model;
             lowpoly_model:
             if (I32(*(char**)(character + 0x34) + 0x218) != 1)
-                fcn_00442c00(*(char**)(character + 0x34), 0);
+                d3_SetObjectVisible(*(char**)(character + 0x34), 0);
             if ((I32(character + 0x2c) == I32(0x5f1294) && I32(character + 0x30) == I32(0x5f1298)) || !I32(character + 0x30)) {
                 if (I32(*(char**)(character + 0x22c) + 0x218) == 1 && !(character[0x8c] & 0x20)) {
-                    fcn_00442c00(*(char**)(character + 0x22c), 1);
+                    d3_SetObjectVisible(*(char**)(character + 0x22c), 1);
                     fcn_00453270(*(char**)(character + 0x22c));
                 }
             } else if (I32(*(char**)(character + 0x22c) + 0x218) != 1) {
-                fcn_00442c00(*(char**)(character + 0x22c), 0);
+                d3_SetObjectVisible(*(char**)(character + 0x22c), 0);
             }
             if (I32(*(char**)(character + 0x22c) + 0x218) != 1 && I32(*(char**)(character + 0x22c) + 0x1cc) &&
                 !CompareVector3WithinTolerance((float*)(*(char**)(character + 0x22c) + 0x4c), (float*)(*(char**)(character + 0x34) + 0x4c), 2.0f))
@@ -87,11 +87,11 @@ void __cdecl fcn_00402ba0(char* character)
             if (0) {
             highpoly_model:
                 if (I32(high + 0x218) == 1 && !(flags & 0x20)) {
-                    fcn_00442c00(high, 1);
+                    d3_SetObjectVisible(high, 1);
                     fcn_00453270(*(char**)(character + 0x34));
                 }
                 if (I32(*(char**)(character + 0x22c) + 0x218) != 1)
-                    fcn_00442c00(*(char**)(character + 0x22c), 0);
+                    d3_SetObjectVisible(*(char**)(character + 0x22c), 0);
             }
             animation = *(char**)(*(char**)(character + 0x22c) + 0x1cc);
             if (!animation || (*(signed char*)(character + 0x8c) & 0x80))
@@ -133,20 +133,20 @@ void __cdecl fcn_00402ba0(char* character)
         }
         if ((I32(character + 0x2c) == I32(0x5f1294) && I32(character + 0x30) == I32(0x5f1298)) || !I32(character + 0x30)) {
             if (I32(*(char**)(character + 0x34) + 0x218) == 1 && !(flags & 0x20)) {
-                fcn_00442c00(*(char**)(character + 0x34), 1);
+                d3_SetObjectVisible(*(char**)(character + 0x34), 1);
                 fcn_00453270(*(char**)(character + 0x34));
             }
         } else if (I32(*(char**)(character + 0x34) + 0x218) != 1) {
-            fcn_00442c00(*(char**)(character + 0x34), 0);
+            d3_SetObjectVisible(*(char**)(character + 0x34), 0);
         }
     } else {
         high = *(char**)(character + 0x34);
         if (I32(high + 0x218) == 1 && !(character[0x8c] & 0x20)) {
-            fcn_00442c00(high, 1);
+            d3_SetObjectVisible(high, 1);
             fcn_00453270(*(char**)(character + 0x34));
         }
     }
     low = *(char**)(character + 0x22c);
     if (I32(low + 0x218) != 1)
-        fcn_00442c00(low, 0);
+        d3_SetObjectVisible(low, 0);
 }

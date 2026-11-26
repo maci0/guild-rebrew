@@ -112,35 +112,35 @@ void __cdecl init_LocalData(void);
 void __cdecl fcn_00515340(unsigned char);
 void __cdecl gm_InitStartingBuildingsAndWorkers(void);
 int __cdecl ls_LoadSavegame(void*, int);
-void __cdecl fcn_0052a890(void*);
+void __cdecl gm_UpdateDaylightSchedule(void*);
 int __cdecl fcn_0052a310(void*);
 void __cdecl fcn_0052a3a0(void*, int);
 void __cdecl fcn_00516f60(void);
 void __cdecl fcn_00528fd0(void);
 void __cdecl fcn_00540020(void);
-int __cdecl fcn_004c5790(int, void*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_RequestSysMessage(int, void*);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl sv_WaitForNetworkSync(int);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
-int __cdecl fcn_004c44c0(void);
+int __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl fcn_005490e0(void);
 void __cdecl he_RestartAction03b(void);
 void __cdecl he_RestartAction0xa6(void);
 void __cdecl he_ClearActivePlayerActions(void);
 void __cdecl fcn_005459a0(int);
 void __cdecl fcn_0059a340(void);
-void __cdecl fcn_0042df30(void*, int);
+void __cdecl tb_SetCallbackPaused(void*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl sim_SetSyncParams(void*, int, int, int);
-int __cdecl fcn_004c5700(void*);
+int __cdecl cm_RequestUpdateGameTime(void*);
 void __cdecl fcn_00541620(void);
 int __cdecl fcn_004e9ee0(void);
 void __cdecl fcn_004ea350(void);
 int __cdecl fcn_004c5980(void*);
 void __cdecl fcn_00543080(void);
-void __cdecl fcn_004c5150(int, int, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
 void __cdecl ls_LoadNetworkGame(void*);
 void __cdecl fcn_005145a0(void*);
@@ -166,7 +166,7 @@ int __cdecl gm_FindRecordById(int);
 void __cdecl init_LoadObjektScene(int);
 void __cdecl init_LoadGebaeudeScene(int);
 void __cdecl fcn_00526920(void*, int, void*);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 void* __cdecl d2_GetHudThemeResourceId(void);
 void __cdecl fcn_00526db0(void*);
 void __cdecl d3_SelectSceneContext(int, int);
@@ -361,7 +361,7 @@ void __cdecl fcn_005438c0(int a0)
 			fcn_0053f720();
 			return;
 		}
-		fcn_0052a890(gm_GameTime);
+		gm_UpdateDaylightSchedule(gm_GameTime);
 		g_7e4314 = fcn_0052a310(gm_GameTime);
 	}
 	init_AllocateKind0bSceneSlot();
@@ -369,8 +369,8 @@ void __cdecl fcn_005438c0(int a0)
 		if (!(g_7747b0 & 4)) {
 			r3.x = 0;
 			sim_SetSyncParams(&r3, 6, 0, 0);
-			x = fcn_004c5790(3, &r3);
-			while (fcn_004c4450(x) == 0) {
+			x = cm_RequestSysMessage(3, &r3);
+			while (cm_GetCommandStatus(x) == 0) {
 				fcn_00535960();
 			}
 			if (g_7747fc != 0) {
@@ -383,7 +383,7 @@ void __cdecl fcn_005438c0(int a0)
 				if ((*(char*) (p + 6) != 0) &&
 				    ((*(char*) p == 6) || (*(char*) p == 7))) {
 					c = fcn_0050b750(n, g_773d75);
-					fcn_004c5150(*(int*) (p + 2), -1, g_773d75, c);
+					cm_RequestMoveCredits(*(int*) (p + 2), -1, g_773d75, c);
 				}
 				p += 0x21c;
 			} while (p < 0x85a0a2);
@@ -442,7 +442,7 @@ void __cdecl fcn_005438c0(int a0)
 		buf[0x36] = 9;
 		*(int*) (buf + 8) =
 		    *(int*) ((g_774970 & 0xffff) * 0x21c + 0x7f4ca4);
-		fcn_004c5530(buf);
+		cm_SendCopyEntityData(buf);
 	}
 	for (;;) {
 		if (main_RunFrameLoop((void*) 0x5438c0, 0x20007) == 0) {
@@ -490,8 +490,8 @@ void __cdecl fcn_005438c0(int a0)
 			r3.w = *(int*) 0x7f4c08;
 			r3.h = *(short*) 0x7f4c0c;
 			sim_SetSyncParams(&r3, 6, 0, 0);
-			x = fcn_004c5790(3, &r3);
-			while (fcn_004c4450(x) == 0) {
+			x = cm_RequestSysMessage(3, &r3);
+			while (cm_GetCommandStatus(x) == 0) {
 				fcn_00535960();
 			}
 		}
@@ -501,7 +501,7 @@ void __cdecl fcn_005438c0(int a0)
 			fcn_00516f60();
 			fcn_00528fd0();
 			if (g_7747b0 & 4) {
-				fcn_004c5790(1, 0);
+				cm_RequestSysMessage(1, 0);
 				if (g_7747b0 & 4) {
 					sv_WaitForNetworkSync(0x67fff);
 				}
@@ -517,7 +517,7 @@ void __cdecl fcn_005438c0(int a0)
 			}
 			he_ClearActivePlayerActions();
 			cm_EndCommandSync();
-			while (fcn_004c44c0() == 0) {
+			while (cm_AreQueuedCommandsDone() == 0) {
 				fcn_00535960();
 			}
 		}
@@ -555,8 +555,8 @@ void __cdecl fcn_005438c0(int a0)
 					buf[0] = 0;
 					*(int*) (buf + 8) = *(int*) (g_6a33dc + 4);
 					buf[0xc] = g_6a33dc[8];
-					x = fcn_004c5790(15, buf);
-					while (fcn_004c4450(x) == 0) {
+					x = cm_RequestSysMessage(15, buf);
+					while (cm_GetCommandStatus(x) == 0) {
 						fcn_00535960();
 					}
 				}
@@ -569,7 +569,7 @@ void __cdecl fcn_005438c0(int a0)
 		if (g_774954 != 0) {
 			goto l_inc;
 		}
-		fcn_0042df30((void*) 0x538060, 1);
+		tb_SetCallbackPaused((void*) 0x538060, 1);
 		if (!(g_7747b0 & 8)) {
 			r2.x = *(int*) 0x7f4c00;
 			r2.y = *(int*) 0x7f4c04;
@@ -577,8 +577,8 @@ void __cdecl fcn_005438c0(int a0)
 			r2.h = *(short*) 0x7f4c0c;
 			while ((unsigned short) r2.y < 0x17) {
 				gm_AddTime(&r2, 0, 0x1e, 0);
-				x = fcn_004c5700(&r2);
-				while (fcn_004c4450(x) == 0) {
+				x = cm_RequestUpdateGameTime(&r2);
+				while (cm_GetCommandStatus(x) == 0) {
 					fcn_00535960();
 				}
 			}
@@ -600,22 +600,22 @@ l_gate:
 			goto l_step;
 		}
 		if (g_14cbca0 == -1) {
-			fcn_0042df30((void*) 0x538060, 1);
+			tb_SetCallbackPaused((void*) 0x538060, 1);
 			r1.x = *(int*) 0x7f4c00;
 			r1.y = *(int*) 0x7f4c04;
 			r1.w = *(int*) 0x7f4c08;
 			r1.h = *(short*) 0x7f4c0c;
 			while ((unsigned short) r1.y < 0x17) {
 				gm_AddTime(&r1, 0, 0x1e, 0);
-				x = fcn_004c5700(&r1);
-				while (fcn_004c4450(x) == 0) {
+				x = cm_RequestUpdateGameTime(&r1);
+				while (cm_GetCommandStatus(x) == 0) {
 					fcn_00535960();
 				}
 			}
 			gm_AddTime(&r1, 0x18, 0, 0);
 			sim_SetSyncParams(&r1, 6, 0, 0);
-			fcn_004c5700(&r1);
-			fcn_0042df30((void*) 0x538060, 0);
+			cm_RequestUpdateGameTime(&r1);
+			tb_SetCallbackPaused((void*) 0x538060, 0);
 		}
 		if (((g_77494c & 8) != 0) || (g_14cbca0 == -1)) {
 			if (fcn_004e9ee0() != 0) {
@@ -643,7 +643,7 @@ l_gate:
 				*(int*) (msg + 0x14) = -1;
 				msg[0x26] = 0x61;
 				x = fcn_004c5980(msg);
-				while (fcn_004c4450(x) == 0) {
+				while (cm_GetCommandStatus(x) == 0) {
 					fcn_00535960();
 				}
 			} else {

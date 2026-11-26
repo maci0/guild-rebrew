@@ -2,7 +2,7 @@ extern float g_664150;
 extern unsigned char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_0047dd60(char*);
+int __cdecl gm_IsNpcEntityState(char*);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl fcn_0050d320(char*, char);
@@ -35,7 +35,7 @@ int __cdecl ai_StartBerufsausbildung(int busy, char* ent, int pending, char* out
 				return 0;
 			}
 			if (*(char*) (q + 9) == 0) {
-				if (fcn_0047dd60(q) != 0) {
+				if (gm_IsNpcEntityState(q) != 0) {
 					return 0;
 				}
 			}

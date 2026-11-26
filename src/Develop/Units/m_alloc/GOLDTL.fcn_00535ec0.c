@@ -24,13 +24,13 @@ void __cdecl m_FreeTracked(void*);
 int __cdecl gm_RandomMod(int);
 void __cdecl d3_DestroyObject(int);
 void __cdecl fcn_004b3b30(void);
-void __cdecl fcn_004c5530(void*);
-int __cdecl fcn_004c5790(int, void*);
+void __cdecl cm_SendCopyEntityData(void*);
+int __cdecl cm_RequestSysMessage(int, void*);
 void __cdecl fcn_004c5980(void*);
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 int __cdecl fcn_004c6470(int, int);
-int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
+int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_00535960(void);
 
@@ -119,7 +119,7 @@ void __cdecl fcn_00535ec0(void)
 		*(unsigned short*) (act_buf + 0x60) = 0x1d6d;
 		*(int*) (act_buf + 0x58) = *(int*)
 		    (*(unsigned short*) (g_7e2aa0 + 0x27) * 0x21c + 0x7f4ca4);
-		fcn_004c5530(act_buf);
+		cm_SendCopyEntityData(act_buf);
 		return;
 	}
 	case 0x23: {
@@ -162,14 +162,14 @@ void __cdecl fcn_00535ec0(void)
 		} else if (g_7746c4 != 0) {
 			e = (int) g_7746c4;
 		}
-		n = fcn_004c64b0(0, *(int*) (e + 1), *(int*) (g_7746cc + 2), 0, 4, 0,
+		n = cm_SendAllocCharacter(0, *(int*) (e + 1), *(int*) (g_7746cc + 2), 0, 4, 0,
 		    g_6b5c60);
-		if (fcn_004c4450(n) == 0) {
+		if (cm_GetCommandStatus(n) == 0) {
 			do {
 				fcn_00535960();
-			} while (fcn_004c4450(n) == 0);
+			} while (cm_GetCommandStatus(n) == 0);
 		}
-		p = fcn_004c4480(n);
+		p = cm_GetCommandResult(n);
 		if (*(char**) (p + 0x184) != 0) {
 			char* m = *(char**) (p + 0x184);
 			*(unsigned char*) (m + 0x8d) |= 0x10;
@@ -194,7 +194,7 @@ void __cdecl fcn_00535ec0(void)
 		*(int*) (seat_buf + 8) = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
 		*(pos14_7f4c00*) (seat_buf + 0x28) = gm_GameTime;
 		*(int*) (seat_buf + 0x5c) = *(int*) (g_7ea360 + 4);
-		fcn_004c5530(seat_buf);
+		cm_SendCopyEntityData(seat_buf);
 		return;
 	}
 	case 0x26:
@@ -264,7 +264,7 @@ void __cdecl fcn_00535ec0(void)
 			((int*) seat_buf)[i] = 0;
 		}
 		*(int*) seat_buf = -1;
-		fcn_004c5790(0x11, seat_buf);
+		cm_RequestSysMessage(0x11, seat_buf);
 		return;
 	}
 	default:

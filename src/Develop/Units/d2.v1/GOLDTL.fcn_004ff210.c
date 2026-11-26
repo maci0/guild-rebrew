@@ -39,12 +39,12 @@ extern char g_7f4ca0[];
 extern pos14_7f4c00 gm_GameTime;
 
 
-int __cdecl fcn_004c4700(unsigned char type, unsigned char count, short id, char* data);
-void __cdecl fcn_004c53a0(void);
-void __cdecl fcn_004c5530(char* msg);
+int __cdecl cm_AppendCommandSyncField(unsigned char type, unsigned char count, short id, char* data);
+void __cdecl cm_SendSetAttribute(void);
+void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c5480(int a1, int a2, float a3);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestChangeFloat(int a1, int a2, float a3);
 
 /* ADDRESS: GOLDTL 0x004ff210 */
 float __cdecl fcn_004ff210(unsigned short id, int delta)
@@ -63,8 +63,8 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 		if (res <= 0.0) {
 			dead = 0;
 			cm_BeginPacketFieldDelta((char*) e, e->h);
-			fcn_004c4700(1, 1, (short) ((char*) e - g_aed32c + 8), &dead);
-			fcn_004c53a0();
+			cm_AppendCommandSyncField(1, 1, (short) ((char*) e - g_aed32c + 8), &dead);
+			cm_SendSetAttribute();
 			memset(msg, 0, sizeof(msg));
 			msg[4] = 0x72;
 			*(int*) (msg + 8) = e->h;
@@ -72,12 +72,12 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 			msg[0x36] = 2;
 			*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 			*(int*) (msg + 0x58) = e->h;
-			fcn_004c5530(msg);
+			cm_SendCopyEntityData(msg);
 			return 0.0f;
 		}
 		cm_BeginPacketFieldDelta((char*) e, e->h);
 		cm_AppendPacketFieldValue(4, 1, 0x24, &delta);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		return res;
 	}
 	{
@@ -89,8 +89,8 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 		if (res <= 0.0) {
 			dead = 0;
 			cm_BeginPacketFieldDelta((char*) e, e->h);
-			fcn_004c4700(1, 1, (short) ((char*) e - g_aed32c + 8), &dead);
-			fcn_004c53a0();
+			cm_AppendCommandSyncField(1, 1, (short) ((char*) e - g_aed32c + 8), &dead);
+			cm_SendSetAttribute();
 			memset(msg, 0, sizeof(msg));
 			msg[4] = 0x72;
 			*(int*) (msg + 8) = e->h;
@@ -98,10 +98,10 @@ float __cdecl fcn_004ff210(unsigned short id, int delta)
 			msg[0x36] = 2;
 			*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 			*(int*) (msg + 0x58) = e->h;
-			fcn_004c5530(msg);
+			cm_SendCopyEntityData(msg);
 			return 0.0f;
 		}
-		fcn_004c5480(e->h, 0x1c, d);
+		cm_RequestChangeFloat(e->h, 0x1c, d);
 		return res;
 	}
 }

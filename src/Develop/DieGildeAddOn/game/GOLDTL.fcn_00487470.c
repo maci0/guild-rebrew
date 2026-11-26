@@ -25,10 +25,10 @@ int __cdecl gm_CalculateGebaeudeValue(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 char* __cdecl gm_GetEntityTableEntry(char*);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c4ef0(char*);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_SendTraceEnd(char*);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_SendCopyEntityData(void*);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* Picks a trade partner for the selected market stall and sends the offer.
  * The candidate list of the stall belongs to the entity table row of the
@@ -88,14 +88,14 @@ void __cdecl fcn_00487470(char* actor)
 			*(int*) (pkt1 + 8) = ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (p + 0x27)].entity_id;
 			*(int*) (pkt1 + 0x58) = *(int*) (p + 1);
 			*(int*) (pkt1 + 0x5c) = 100 - *(char*) (p + 0x5c);
-			fcn_004c4eb0(g_67e330);
+			cm_SendLogAction(g_67e330);
 			p = *(char**)(actor + 0x16c);
-			fcn_004c5150(-1,
+			cm_RequestMoveCredits(-1,
 						 ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (p + 0x27)].entity_id,
 						 (char) g_773d75,
 						 (int) amountf);
-			fcn_004c5530(pkt1);
-			fcn_004c4ef0(g_67e330);
+			cm_SendCopyEntityData(pkt1);
+			cm_SendTraceEnd(g_67e330);
 			p = *(char**)(actor + 0x16c);
 			other = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 0x27)]));
 			if (other != 0) {
@@ -184,14 +184,14 @@ have:
 			if (other != 0) {
 				*(int*) (other + 0x40) = *(int*) (other + 0x40) + amount;
 			}
-			fcn_004c4eb0((char*) 0x67e31c);
+			cm_SendLogAction((char*) 0x67e31c);
 			building = *(char**)(actor + 0x16c);
-			fcn_004c5150(-1,
+			cm_RequestMoveCredits(-1,
 						 ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*) (building + 0x25)].entity_id,
 						 (char) g_773d75,
 						 amount);
-			fcn_004c5530(pkt2);
-			fcn_004c4ef0((char*) 0x67e31c);
+			cm_SendCopyEntityData(pkt2);
+			cm_SendTraceEnd((char*) 0x67e31c);
 			*(int*) (actor + 0x1b8) = *(int*) (actor + 0x1b8) - amount;
 		}
 	}

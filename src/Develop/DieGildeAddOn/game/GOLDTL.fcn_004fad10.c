@@ -1,7 +1,7 @@
 #include <string.h>
 #include "game_data.h"
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
-int __cdecl fcn_004fa6f0(char* a1, int* a2, int* a3);
+int __cdecl gm_PosToStatsGrid(char* a1, int* a2, int* a3);
 void __cdecl fcn_004f4830(unsigned char a1, char* a2);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x004fad10 */
@@ -52,7 +52,7 @@ void __cdecl fcn_004fad10(void)
 				if (v8 != 0) {
 					v3 = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) building].category;
 					if ((v3 < 0xb || v3 > 0xd) && v3 != 0x10) {
-						if (fcn_004fa6f0((char*) v8 + 0x4c, &v15, &v14) != 0) {
+						if (gm_PosToStatsGrid((char*) v8 + 0x4c, &v15, &v14) != 0) {
 							fcn_004f4830(record[0x1c], (char*) stats);
 							v8 = v14 + v15 * 8;
 							v20 = (float) *(short*) (record + 0x1a) / (float) stats[4] * (float) stats[3];

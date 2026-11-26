@@ -18,10 +18,10 @@
  */
 extern int g_772ea4;		/* 0x00772ea4 */
 extern int g_67a370, g_68b79c, g_772f24; extern double g_6640e8, g_664128; extern float g_664144;
-void __cdecl fcn_004c5420(int, int, int, int, int);
-int __cdecl fcn_004c4450(int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl fcn_004c6940(void*, int, void*);
-int __cdecl fcn_004c67c0(int, void*);
+int __cdecl cm_SendUpdateCutsceneEntitySlot(int, void*);
 int __cdecl fcn_004cec00(int, int, int*, int*);
 void __cdecl d3_GridPointToWorld(int, int, int, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
@@ -40,7 +40,7 @@ char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
-int __cdecl fcn_004ce270(char*, char*);
+int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 int __cdecl fcn_004c6820(int, void*);
 int __cdecl fcn_004c6680(char*, int, int, char*);
 unsigned int __cdecl fcn_004d89c0(int, unsigned int, int);
@@ -122,16 +122,16 @@ void __cdecl fcn_004d8d00(char* context)
 		}
 		switch (p->state) {
 		case 5:
-			if (p->timer != 1 && !fcn_004c4450(p->timer))
+			if (p->timer != 1 && !cm_GetCommandStatus(p->timer))
 				break;
 			p->timer = -1;
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
 			fcn_004c6940(obj, 7, msg.f);
-			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			break;
 		case 1:
-			if (p->timer != 1 && !fcn_004c4450(p->timer))
+			if (p->timer != 1 && !cm_GetCommandStatus(p->timer))
 				break;
 			p->timer = -1;
 			if (!p->c0c) {
@@ -151,11 +151,11 @@ void __cdecl fcn_004d8d00(char* context)
 				fcn_004c6940(obj, 6, msg.f);
 
 
-				p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+				p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			}
 			break;
 		case 2:
-			if (p->timer != 1 && !fcn_004c4450(p->timer))
+			if (p->timer != 1 && !cm_GetCommandStatus(p->timer))
 				break;
 			p->timer = -1;
 			tgt = gm_LookupEntityRecordIn32SlotTable(p->f10);
@@ -166,7 +166,7 @@ void __cdecl fcn_004d8d00(char* context)
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
 					fcn_004c6940(obj, 6, msg.f);
-					p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+					p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 					break;
 				}
 			}
@@ -176,7 +176,7 @@ void __cdecl fcn_004d8d00(char* context)
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
 					fcn_004c6940(obj, 6, msg.f);
-					p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+					p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 					break;
 				}
 			}
@@ -271,12 +271,12 @@ void __cdecl fcn_004d8d00(char* context)
 							}
 						}
 						e = gm_FindOrCreateEntitySlot((char*)v80, tgt);
-						if (*(int*)(e + 8) == -1 || fcn_004c4450(*(int*)(e + 8))) {
+						if (*(int*)(e + 8) == -1 || cm_GetCommandStatus(*(int*)(e + 8))) {
 							*(int*)(e + 8) = -1;
 							if (*(int*)(e + 4) == 0) {
 								n = (int)gm_FindEntityActiveItem(tgt);
 								if (n && *(int*)(n + 0x20) >= 1) {
-									fcn_004c5420(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
+									cm_RequestChangeBits(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
 									*(int*)(e + 8) = fcn_004d1020((char*)v80, tgt, obj, 0, 0);
 								}
 							}
@@ -331,7 +331,7 @@ lvl3:
 				goto tail1_body;
 			if (*(int*)(ent + 0x58) != 2 || !p->f20)
 				goto tail2;
-			fcn_004c5420(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
+			cm_RequestChangeBits(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
 			fcn_004c6940(obj, 2, p);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
@@ -341,10 +341,10 @@ lvl3:
 			if (fcn_004d31d0(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
 				(unsigned int*)&v10, (unsigned int*)&v14))
 				p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
-			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			goto after2;
 tail2:
-			fcn_004c5420(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
+			cm_RequestChangeBits(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
 			p->timer = fcn_004c6940(obj, 2, p);
 tail1_body:
 			if (*(int*)ent != 0x16e && *(int*)ent != 0x172)
@@ -359,10 +359,10 @@ tail1_body:
 				p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			goto after2;
 		case 3:
-			if (p->timer != 1 && !fcn_004c4450(p->timer))
+			if (p->timer != 1 && !cm_GetCommandStatus(p->timer))
 				break;
 			p->timer = -1;
 			if (!p->c0c) {
@@ -383,17 +383,17 @@ tail1_body:
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
 			fcn_004c6940(obj, 1, msg.f);
-			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			break;
 		case 6:
-			if (p->timer != 1 && !fcn_004c4450(p->timer))
+			if (p->timer != 1 && !cm_GetCommandStatus(p->timer))
 				break;
 			p->timer = -1;
 			if (!fcn_00445600(0, 0x40, 0, (char*)&p->f10)) {
 				fcn_004c6940(obj, 6, msg.f);
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
-				p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+				p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			}
 			if (!*((unsigned char*)p + 0x22)) {
 				if (*(int*)(*(int*)(obj + 0x184) + 0x128) == 0) {
@@ -440,11 +440,11 @@ tail1_body:
 				fcn_004c6940(obj, 5, msg.f);
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
-				p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+				p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			}
 			break;
 		case 4:
-			if (p->timer != 1 && !fcn_004c4450(p->timer))
+			if (p->timer != 1 && !cm_GetCommandStatus(p->timer))
 				break;
 			p->timer = -1;
 			e = fcn_00445600(0, 0x40, 0, (char*)&p->f10);
@@ -453,7 +453,7 @@ tail1_body:
 			v68 = *(int*)(e + 0x204);
 			d3_TransformPoint(e, (float*)(e + 0x4c), vec);
 			if (v68) {
-				if (!fcn_004ce270(obj, (char*)v68))
+				if (!gm_EntitiesDifferByOwnerPtr(obj, (char*)v68))
 					goto case4b;
 				if (*((unsigned char*)v68 + 8) != 0
 				    && CompareVector3WithinTolerance(vec,
@@ -486,11 +486,11 @@ tail1_body:
 			fcn_004c6940(obj, 3, msg.f);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			break;
 case4b:
 			d3_TransformPoint(e, (float*)(e + 0x4c), vec);
-			if (fcn_004ce270(obj, (char*)*(int*)(e + 0x204))) {
+			if (gm_EntitiesDifferByOwnerPtr(obj, (char*)*(int*)(e + 0x204))) {
 				if (*((unsigned char*)v68 + 8) != 0
 				    && CompareVector3WithinTolerance(vec,
 					(float*)(ent34((char*)v68) + 0x4c), 49.5f)) {
@@ -503,10 +503,10 @@ case4b:
 				break;
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			break;
 		case 7:
-			if (p->timer != 1 && !fcn_004c4450(p->timer))
+			if (p->timer != 1 && !cm_GetCommandStatus(p->timer))
 				break;
 			p->timer = -1;
 			if (!p->c0c) {
@@ -524,11 +524,11 @@ case4b:
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
 				fcn_004c6940(obj, 6, msg.f);
-				p->timer = fcn_004c67c0(*(int*)(context + 0x10), msg.f);
+				p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			}
 			break;
 		case 8:
-			if (p->timer != 1 && !fcn_004c4450(p->timer))
+			if (p->timer != 1 && !cm_GetCommandStatus(p->timer))
 				break;
 			p->timer = -1;
 			if (p->c0c)

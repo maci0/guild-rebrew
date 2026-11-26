@@ -1,9 +1,9 @@
 
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c6040(int a1, int a2, int a3, int a4)
+void __cdecl cm_RequestUpdateStraftatState(int a1, int a2, int a3, int a4)
 {
 	char buf[0x9c];
 
@@ -12,5 +12,5 @@ void __cdecl fcn_004c6040(int a1, int a2, int a3, int a4)
 	*(int*) (buf + 0x14) = a2;
 	*(int*) (buf + 0x18) = a3;
 	*(int*) (buf + 0x1c) = a4;
-	fcn_004c4330(buf);
+	cm_EnqueueClientPacket(buf);
 }

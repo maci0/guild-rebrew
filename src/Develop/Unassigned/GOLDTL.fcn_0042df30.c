@@ -1,6 +1,6 @@
 #include "client_timer.h"
 
-int __cdecl fcn_0042df30(TIMER_CALLBACK callback, int paused)
+int __cdecl tb_SetCallbackPaused(TIMER_CALLBACK callback, int paused)
 {
 	int i;
 	TIMER_CALLBACK_SLOT* a;

@@ -12,7 +12,7 @@ typedef struct {
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005ca560(Item5cba60*);
+int __cdecl d2_BuildPersonStatusDesc(Item5cba60*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
 /* ADDRESS: GOLDTL 0x005cba60 */
@@ -37,7 +37,7 @@ int __cdecl fcn_005cba60(unsigned short* who, unsigned int max, Item5cba60* out,
 		memset(out, 0, max * 0x38);
 		for (i = 0; i < (count <= max ? count : max); i++, out++) {
 			out->house = ps[i];
-			fcn_005ca560(out);
+			d2_BuildPersonStatusDesc(out);
 			out->value = fcn_005cf720(*who, *out->house, kind, 0);
 		}
 	}

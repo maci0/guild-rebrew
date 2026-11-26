@@ -38,7 +38,7 @@ void __cdecl fcn_005adfa0(unsigned char*);
 void __cdecl fcn_005ae000(unsigned char*);
 void __cdecl d2_ShowPersonalbuch(unsigned char*, char*);
 void __cdecl fcn_005ada30(unsigned char*);
-void __cdecl fcn_005cf560(unsigned char*);
+void __cdecl d2_OpenMeisterbriefDialog(unsigned char*);
 
 void __cdecl d2_RunRaeuberlagerMenu(unsigned char* building)
 {
@@ -108,7 +108,7 @@ void __cdecl d2_RunRaeuberlagerMenu(unsigned char* building)
 					fcn_005ada30(building);
 				}
 				else if (g_7746a0 == g) {
-					fcn_005cf560(building);
+					d2_OpenMeisterbriefDialog(building);
 				}
 			}
 		} while (main_RunFrameLoop((void*) d2_RunRaeuberlagerMenu, 0x67fff) != 0);

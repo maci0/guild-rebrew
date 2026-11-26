@@ -31,7 +31,7 @@ extern char g_7f4ca4[];
 
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, int);
-void __cdecl fcn_004c5530(Msg *);
+void __cdecl cm_SendCopyEntityData(Msg *);
 float __cdecl fcn_004feff0(char *);
 int __cdecl fcn_00567170(char *, int *, int *, int);
 void __cdecl fcn_00529160(int, int, int, int);
@@ -63,7 +63,7 @@ void __cdecl fcn_005498b0(char *a1, char *entity, char *a3, char *a4, int a5, fl
 		m.t = *(GAME_TIMESTAMP*) &gm_GameTime;
 		m.f36 = 2;
 		m.f58 = *(int *) (entity + 4);
-		fcn_004c5530(&m);
+		cm_SendCopyEntityData(&m);
 	} else {
 		f = fcn_004feff0(entity) * 0.5f;
 		if (value < f && fcn_00567170(entity, &x0, &x4, 0) != 0 && *(char **) (entity + 0x184) != 0) {

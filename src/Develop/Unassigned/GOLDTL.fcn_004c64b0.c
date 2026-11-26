@@ -3,19 +3,19 @@
 
 #include <string.h>
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c64b0(char a1, int a2, int a3, char a4, char a5, char a6, char* text)
+void __cdecl cm_SendAllocCharacter(char entityType, int buildingId, int targetRecordId, char gender, char variant, char itemId, char* name)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x49;
-	*(char*) (buf + 0x14) = a1;
-	*(int*) (buf + 0x17) = a2;
-	*(int*) (buf + 0x1b) = a3;
-	*(char*) (buf + 0x1f) = a4;
-	*(char*) (buf + 0x20) = a5;
-	*(char*) (buf + 0x21) = a6;
-	strcpy(buf + 0x26, text);
-	fcn_004c4330(buf);
+	*(char*) (buf + 0x14) = entityType;
+	*(int*) (buf + 0x17) = buildingId;
+	*(int*) (buf + 0x1b) = targetRecordId;
+	*(char*) (buf + 0x1f) = gender;
+	*(char*) (buf + 0x20) = variant;
+	*(char*) (buf + 0x21) = itemId;
+	strcpy(buf + 0x26, name);
+	cm_EnqueueClientPacket(buf);
 }

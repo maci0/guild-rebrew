@@ -30,7 +30,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(unsigned char*, int);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 int __cdecl gm_ObjGrantAffinity25(unsigned char* obj, int* arg)
@@ -64,7 +64,7 @@ int __cdecl gm_ObjGrantAffinity25(unsigned char* obj, int* arg)
 	}
 	if (result) {
 		k = (fcn_005c6270(obj, 0x2c5) != 0) + 1;
-		fcn_004c54c0(*(int*) (obj + 4), *(int*) (e + 4), k * 25, 1);
+		cm_RequestCopyEntityData(*(int*) (obj + 4), *(int*) (e + 4), k * 25, 1);
 		if (e[2] == 6 || e[2] == 7) {
 			io_FormatTextBuffer(text2, 0xfe9, *(unsigned short*) obj);
 			fcn_00545d40(*(int*) (e + 4), -1, text2, 0, 0x5ec, 0);

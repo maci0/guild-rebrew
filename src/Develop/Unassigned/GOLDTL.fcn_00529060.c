@@ -3,15 +3,15 @@
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-void __cdecl fcn_00529060(int idx, char* o)
+void __cdecl he_RemoveActionActor(int slot_idx, char* action)
 {
-	char* p;
+	char* rec;
 	int i;
 
-	p = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
+	rec = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slot_idx]);
 	for (i = 0; i < 8; i++) {
-		if (*(int*) (o + 0x8c + i * 4) == *(int*) (p + 4)) {
-			*(int*) (o + 0x8c + i * 4) = -1;
+		if (*(int*) (action + 0x8c + i * 4) == *(int*) (rec + 4)) {
+			*(int*) (action + 0x8c + i * 4) = -1;
 			return;
 		}
 	}

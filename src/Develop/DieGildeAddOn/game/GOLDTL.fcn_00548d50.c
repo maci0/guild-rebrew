@@ -38,7 +38,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl fcn_004f4830(int, struct stats*);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 
 void __cdecl he_TriggerAction0x67(void)
 {
@@ -93,5 +93,5 @@ void __cdecl he_TriggerAction0x67(void)
 		m.amount = (int) ((gm_RandomFloat01() + 1.0f) * n);
 	}
 	m.mode = 2;
-	fcn_004c5530(&m);
+	cm_SendCopyEntityData(&m);
 }

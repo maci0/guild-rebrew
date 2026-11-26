@@ -39,9 +39,9 @@ extern unsigned short g_7f4c0c;
 int __cdecl amt_FindOfficeSlotByType(int id, int* out);
 char* __cdecl amt_GetOfficeHolderRecord(int kind);
 float __cdecl fcn_004ad500(unsigned char* a1, unsigned short* a2, int a3, int a4);
-void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
+void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 int __cdecl amt_SendOfficeCommand(unsigned char a1, char* a2, char* a3, int a4, int a5);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl amt_SendSpecialOfficeSlot(int a1);
 
 /* Rates every listed entity against the office record, then hands the highest
@@ -89,7 +89,7 @@ void __cdecl fcn_004ad6a0(void)
 			if (hits[i].p == 0) {
 				goto end;
 			}
-			fcn_004c5420(*(int*) (hits[i].p + 4), 0x1cc, 4, 0, mask);
+			cm_RequestChangeBits(*(int*) (hits[i].p + 4), 0x1cc, 4, 0, mask);
 		}
 		amt_SendSpecialOfficeSlot(-1);
 		return;
@@ -120,12 +120,12 @@ void __cdecl fcn_004ad6a0(void)
 			msg.flag = 1;
 			msg.unk_6c = id;
 			msg.unk_68 = selectedOwnerId;
-			fcn_004c5530((char*) &msg);
+			cm_SendCopyEntityData((char*) &msg);
 			for (rec = g_7f4ca0 + 2; (int) rec < (int) g_7f4ca0 + 0x65402; rec += 0x21c) {
 				if (*(unsigned short*) (rec - 2) != 0xffff && rec - 2 != best &&
 				    (*rec == 6 || *rec == 7)) {
 					msg.id = *(int*) (rec + 2);
-					fcn_004c5530((char*) &msg);
+					cm_SendCopyEntityData((char*) &msg);
 				}
 			}
 		}

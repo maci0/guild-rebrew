@@ -11,13 +11,13 @@ float __cdecl gm_RandomFloat01(void);
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int offset, void* value);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_004eea30(int city, int id, float value);
 void __cdecl fcn_005782f0(int a, unsigned short b);
-void __cdecl fcn_005b3270(char* slot, int a, char* object);
-void __cdecl fcn_005b32d0(char* slot, int a, char* object);
-void __cdecl fcn_005b3330(char* slot, int a, char* object, void* record);
-void __cdecl fcn_005b33a0(char* slot, int a, char* object, int id);
+void __cdecl he_NotifyDomizilAccident(char* slot, int a, char* object);
+void __cdecl he_NotifyDomizilEvent(char* slot, int a, char* object);
+void __cdecl he_NotifyAlchemistDiscovery(char* slot, int a, char* object, void* record);
+void __cdecl he_NotifyDomizilSkillGain(char* slot, int a, char* object, int id);
 
 /* ADDRESS: GOLDTL 0x00576750 */
 void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
@@ -85,8 +85,8 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 				cm_BeginPacketFieldDelta((char*) found[index], *(int*) ((char*) found[index] + 2));
 				cm_AppendPacketFieldDelta(4, 1, 0x1c, &one);
 				cm_AppendPacketFieldDelta(4, 1, 0x20, &amount);
-				fcn_004c5360();
-				fcn_005b3330((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
+				cm_RequestChangeAttribute();
+				he_NotifyAlchemistDiscovery((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 				    city, object, found[index]);
 				break;
 			}
@@ -105,13 +105,13 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 		}
 		cm_BeginPacketFieldDelta(object, *(int*) (object + 1));
 		cm_AppendPacketFieldValue(1, 1, 0x5c, &byte);
-		fcn_004c5360();
-		fcn_005b3270((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
+		cm_RequestChangeAttribute();
+		he_NotifyDomizilAccident((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 		    city, object);
 		break;
 	case 3:
 		fcn_005782f0(city, gm_RandomMod(3) + 1);
-		fcn_005b32d0((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
+		he_NotifyDomizilEvent((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 		    city, object);
 		break;
 	case 4:
@@ -124,7 +124,7 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 				f = *(float*) (vertices + 0x10 + index * 8)
 				    - (gm_RandomFloat01() * 0.1f + g_662b10);
 				fcn_004eea30(city, *(int*) (vertices + 0xc + index * 8), f);
-				fcn_005b33a0((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
+				he_NotifyDomizilSkillGain((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 				    city, object, *(int*) (vertices + 0xc + index * 8));
 				break;
 			}

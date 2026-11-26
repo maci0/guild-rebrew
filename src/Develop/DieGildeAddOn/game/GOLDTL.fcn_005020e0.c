@@ -59,7 +59,7 @@ extern char* lpObjektePROT;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00500d60(char*, Stamp*);
+void __cdecl gm_PackGameTime(char*, Stamp*);
 void __cdecl fcn_005017a0(int);
 void __cdecl cm_SendRandomMarktSlotDelta(int);
 int __cdecl fcn_00502450(int, int);
@@ -77,7 +77,7 @@ void __cdecl fcn_005020e0(int townRow, char* timeSource)
 	int v;
 	char kind;
 
-	fcn_00500d60(timeSource, &stamp);
+	gm_PackGameTime(timeSource, &stamp);
 	year = stamp.year;
 
 	for (n = 0; n < 9; n++) {

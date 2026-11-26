@@ -26,7 +26,7 @@ int __cdecl fcn_00492950();
 int __cdecl fcn_00492d60();
 int __cdecl fcn_00492e50();
 int __cdecl fcn_00493000();
-int __cdecl fcn_004c51a0();
+int __cdecl cm_RequestTransferCurrencyNoKill();
 int __cdecl fcn_00502850();
 int __cdecl fcn_00502cd0();
 int __cdecl fcn_00503fe0();
@@ -341,7 +341,7 @@ label_5a1b81:
                 if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
                   fcn_005a1130(&v14,windowId);
                   if (((v13[1] == 5 && v3 == v13[2]) || (v13[1] == 6 && v3 == v21[0])))
-                    fcn_004c51a0(*(unsigned int *)(v3 + 4),0xffffffff,0,v34);
+                    cm_RequestTransferCurrencyNoKill(*(unsigned int *)(v3 + 4),0xffffffff,0,v34);
                   do {
                     if (g_14ce8e0)
                       g_774654 = 1;

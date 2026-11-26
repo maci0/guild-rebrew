@@ -59,7 +59,7 @@ int __cdecl ls_LoadCharacter(void* stream);
 char* __cdecl gm_LookupEntityRecordById(int handle);
 int __cdecl ls_LoadMissionJobs(void* stream);
 int __cdecl ls_LoadSlot779d00(void* stream);
-int __cdecl fcn_005b1ff0(void* stream);
+int __cdecl ls_LoadList774a78(void* stream);
 int __cdecl ls_LoadAlchemyDrawSlots(void* stream);
 int __cdecl ls_LoadHighOfficeTargets(void* stream, int version);
 int __cdecl fcn_004c0840(int stream);
@@ -221,7 +221,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (ls_SaveVersion >= 0x10047 && fcn_005b1ff0(stream) == 0) {
+	if (ls_SaveVersion >= 0x10047 && ls_LoadList774a78(stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;

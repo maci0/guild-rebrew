@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
+int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 
 void __cdecl he_ScheduleSabotage(char* e)
 {
@@ -21,5 +21,5 @@ void __cdecl he_ScheduleSabotage(char* e)
 		}
 	}
 	*(int*) (e + 0xc4) = -1;
-	*(int*) (e + 0xc8) = fcn_004c64b0(0, *(int*) (e + 0x10), -1, 0, 1, 0x174, "SABOTAGE");
+	*(int*) (e + 0xc8) = cm_SendAllocCharacter(0, *(int*) (e + 0x10), -1, 0, 1, 0x174, "SABOTAGE");
 }

@@ -3,7 +3,7 @@ extern char g_7f4cc0[];
 
 /* ADDRESS: GOLD 0x004fd7e0 */
 /* ADDRESS: GOLDTL 0x004fffb0 */
-int __cdecl fcn_004fffb0(int index)
+int __cdecl gm_CheckEntityAgeLimit(int index)
 {
 	unsigned short w;
 	unsigned int slot;

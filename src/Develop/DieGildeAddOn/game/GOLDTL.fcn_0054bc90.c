@@ -6,9 +6,9 @@ extern int __cdecl fcn_004943e0(unsigned short*, unsigned short*);
 extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl cm_BeginPacketFieldDelta(char*, unsigned int);
 extern int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
-extern void __cdecl fcn_004c5360(void);
+extern void __cdecl cm_RequestChangeAttribute(void);
 extern int __cdecl fcn_004c5620(int, char*);
-extern int __cdecl fcn_00500cb0(char*, char*);
+extern int __cdecl gm_CompareGameTime(char*, char*);
 extern void __cdecl fcn_00545780(char*);
 extern int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 extern int __cdecl fcn_00545670(char*, int, int, char*, int);
@@ -123,7 +123,7 @@ void __cdecl fcn_0054bc90(char* action)
 				if (idx < 4) {
 					cm_BeginPacketFieldDelta(v13, *(unsigned int*) (v13 + 2));
 					cm_AppendPacketFieldDelta(4, 1, idx * 4 + 0x1c, (char*) &v11);
-					fcn_004c5360();
+					cm_RequestChangeAttribute();
 				}
 			} else {
 				for (idx = 0; idx < 4; idx++) {
@@ -145,7 +145,7 @@ void __cdecl fcn_0054bc90(char* action)
 		he_FreeAction(action);
 		return;
 	case 1:
-		if (fcn_00500cb0((char*) &gm_GameTime, action + 0x52) > 0) {
+		if (gm_CompareGameTime((char*) &gm_GameTime, action + 0x52) > 0) {
 			fcn_00545780(action);
 			*(int*) (action + 0x70) = *(int*) (action + 0x70) + 1;
 			return;
@@ -182,7 +182,7 @@ void __cdecl fcn_0054bc90(char* action)
 				if (idx < 4) {
 					cm_BeginPacketFieldDelta(v13, *(unsigned int*) (v13 + 2));
 					cm_AppendPacketFieldDelta(4, 1, idx * 4 + 0x1c, (char*) &v11);
-					fcn_004c5360();
+					cm_RequestChangeAttribute();
 				}
 			} else {
 				for (idx = 0; idx < 4; idx++) {

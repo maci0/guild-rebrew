@@ -5,7 +5,7 @@ extern int main_LoopFlags;
 char* __cdecl evt_FindScriptById(int);
 void __cdecl main_RunFrameLoop(int, unsigned int);
 
-void __cdecl fcn_005312d0(int a)
+void __cdecl evt_WaitForScriptExit(int a)
 {
 	unsigned int fl;
 	char* r;

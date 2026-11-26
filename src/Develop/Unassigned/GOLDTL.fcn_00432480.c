@@ -69,11 +69,11 @@ typedef struct Frame {
 } Frame;
 
 int __cdecl fcn_004321a0(ClampBlk flags, int v, int lo, int hi, int max);
-void __cdecl fcn_00438ac0(char*, int);
+void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl fcn_00438b40(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl d3_ApplyAnimDelta(char*, char*, int, int, int);
-void __cdecl fcn_00431330(char*, char*, int, int, int);
+void __cdecl d3_AccumulateAnimDelta(char*, char*, int, int, int);
 void __cdecl fcn_00431dd0(char*, char*, int, int, float*);
 void __cdecl fcn_00451340(float*, float*, float, float*);
 void __cdecl fcn_00455140(char*, float*, float*);
@@ -171,7 +171,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 				max = SI(owner + 0x148);
 				SB(slot + 0x6d) = (unsigned char) (flags & ~0x20);
 				SI(owner + 0x158) = g_6b8008;
-				fcn_00438ac0(o, 1);
+				d3_InvalidateSubTreeFlags(o, 1);
 
 				/* interval to clock fraction */
 				cur = SI(slot + 0x34);
@@ -342,7 +342,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 
 	post:
 				if (SB(owner + 0x169) == 0) {
-					fcn_00431330(o, slot, SI(slot + 8), SI(slot),
+					d3_AccumulateAnimDelta(o, slot, SI(slot + 8), SI(slot),
 						(SI(slot + 0x70) << 30) >> 30);
 				}
 				if (SI(slot + 0x14) != -1 && SI(slot + 0x18) != -1 &&

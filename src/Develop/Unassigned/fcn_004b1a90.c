@@ -18,7 +18,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern short g_7f4c0c;
 
 int __cdecl fcn_004ae210(int);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 
 /* ADDRESS: GOLDTL 0x004b1a90 */
 int __cdecl fcn_004b1a90(void)
@@ -48,7 +48,7 @@ int __cdecl fcn_004b1a90(void)
 			msg[4] = 0x55;
 			msg[0x36] = 9;
 			*(GAME_TIMESTAMP*) (msg + 0x28) = stamp;
-			fcn_004c5530(msg);
+			cm_SendCopyEntityData(msg);
 			sent++;
 		}
 		n++;

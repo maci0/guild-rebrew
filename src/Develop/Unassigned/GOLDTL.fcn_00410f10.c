@@ -3,7 +3,7 @@
 
 extern char* evt_CurrentScript;
 extern int g_6791c8;
-int __cdecl fcn_00422460(int a, int b);
+int __cdecl sb_PrepareVoice(int a, int b);
 int __cdecl fcn_00423670(int o, int a, int b);
 
 int __cdecl PlaySampleHandle(int* a, int* b)
@@ -13,7 +13,7 @@ int __cdecl PlaySampleHandle(int* a, int* b)
 	if (*(int*) (evt_CurrentScript + 0x104) != g_6791c8) {
 		return 0;
 	}
-	o = fcn_00422460(*a, *b);
+	o = sb_PrepareVoice(*a, *b);
 	if (o == 0) {
 		return o;
 	}

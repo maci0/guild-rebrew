@@ -32,7 +32,7 @@ void __cdecl d2_ClearPaintbox(void);
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 int __cdecl fcn_0046fac0(int, int, char *, int);
 int __cdecl fcn_0046b520(char *, int);
-void __cdecl fcn_00500d60(int *, char *);
+void __cdecl gm_PackGameTime(int *, char *);
 int __cdecl d2_DrawHistoryGraph(Arg, int, int);
 void __cdecl io_FormatTextBuffer(char *, char *, ...);
 
@@ -106,7 +106,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	loc.src[1] = g_7f4c04;
 	loc.src[2] = g_7f4c08;
 	*(short *) ((char *) loc.src + 0xc) = g_7f4c0c;
-	fcn_00500d60(loc.src, loc.out);
+	gm_PackGameTime(loc.src, loc.out);
 	if (loc.out[1] == 1) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = fcn_0046b520(loc.buf, 0x55);
@@ -114,7 +114,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 	}
 	loc.src[0]--;
-	fcn_00500d60(loc.src, loc.out);
+	gm_PackGameTime(loc.src, loc.out);
 	for (i = 0xf; i != 0; i--) {
 		n = step * i + 0x2d;
 		fcn_00472c30(n, h - 0x13, n, h - 0x10, 0x10, 0x10, 0x10);
@@ -126,7 +126,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 			fcn_00472c30(n, h - 0x13, n, h - 0xd, 0x10, 0x10, 0x10);
 		}
 		loc.src[0]--;
-		fcn_00500d60(loc.src, loc.out);
+		gm_PackGameTime(loc.src, loc.out);
 	}
 	if (loc.out[1] == 1) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));

@@ -11,7 +11,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004758e0(int);
-int __cdecl fcn_00423460(int*);
+int __cdecl sb_CheckVoicePlaying(int*);
 void __cdecl sb_StopVoice(int*, int);
 
 /* ADDRESS: GOLD 0x004b5360 */
@@ -39,6 +39,6 @@ void __cdecl fcn_004b5360(int id, int flags)
 	}
 	if (window != -1)
 		fcn_004758e0(window);
-	if (fcn_00423460((int*) sound))
+	if (sb_CheckVoicePlaying((int*) sound))
 		sb_StopVoice((int*) sound, 0x19);
 }

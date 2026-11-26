@@ -22,14 +22,14 @@ char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl he_FreeAction(char* e);
 void __cdecl fcn_00529160(char* e, int a, int id, char* rec);
-void __cdecl fcn_004c5c80(int owner);
+void __cdecl cm_SendCancelCharacterActions(int owner);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* tag);
 void __cdecl gm_AddTime(int* pos, int a, int b, int c);
 int __cdecl gm_GetEntityMood(char* e);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CalculateGebaeudeValue(char* e, int n);
-void __cdecl fcn_004c51a0(int a, int b, int c, int d);
+void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
 void __cdecl fcn_00545d40(int a, int b, char* text, int c, int d, char* tag);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g,
 	char* tag);
@@ -61,7 +61,7 @@ void __cdecl fcn_00553cd0(char* event)
 	switch (state) {
 	case 0:
 		fcn_00529160(e, 0, *record, event);
-		fcn_004c5c80(*(int*) (record + 2));
+		cm_SendCancelCharacterActions(*(int*) (record + 2));
 		fcn_004c5da0(*(int*) (record + 2), *(int*) (e + 1), -1, 0, 1, "BetriebsPr");
 		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 		gm_AddTime((int*) (event + 0x52), 0, 10, 0);
@@ -96,7 +96,7 @@ void __cdecl fcn_00553cd0(char* event)
 			return;
 		}
 		x = (int) (gm_CalculateGebaeudeValue(e, 100) * f * 0.07f);
-		fcn_004c51a0((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id),
+		cm_RequestTransferCurrencyNoKill((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id),
 			(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id), 0, x);
 		type = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_type);
 		if (type == 6 || type == 7) {
@@ -115,7 +115,7 @@ void __cdecl fcn_00553cd0(char* event)
 		return;
 	case 2:
 		fcn_00529160(e, 0, *record, 0);
-		fcn_004c5c80(*(int*) (record + 2));
+		cm_SendCancelCharacterActions(*(int*) (record + 2));
 		fcn_004c5da0(*(int*) (record + 2), *(int*) (event + 0xb4), *(int*) (event + 0xb8), 0,
 			0, "BetriebsPr");
 		he_FreeAction(event);

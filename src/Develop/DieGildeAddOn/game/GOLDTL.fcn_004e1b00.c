@@ -12,7 +12,7 @@ void __cdecl fcn_004e4b60(char*);
 void __cdecl fcn_004e4e90(char*);
 void __cdecl fcn_004e4c40(int);
 int __cdecl fcn_004fda30(int);
-int __cdecl fcn_004fd9d0(int, int);
+int __cdecl gm_FindOrAllocHeadSet(int, int);
 int __cdecl fcn_004e44b0(char*, char*);
 void __cdecl fcn_004e44f0(int);
 int __cdecl gm_RandomMod(unsigned short);
@@ -22,7 +22,7 @@ void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4c60(void);
 void __cdecl fcn_004e4c00(void);
 void __cdecl cut_CleanupCutscene(void);
-void __cdecl fcn_004e3640(void);
+void __cdecl msx_RestoreMusicIfAllowed(void);
 int __cdecl fcn_00445f50(int, float, float, int);
 void __cdecl fcn_004463f0(int, int, float);
 
@@ -74,7 +74,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	if (q != 0) {
 		id = fcn_004fda30(*q);
 	} else {
-		id = fcn_004fd9d0(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
+		id = gm_FindOrAllocHeadSet(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
 	sprintf(buf, (char*) 0x68cad8, id + 4);
 
@@ -85,7 +85,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	if (r != 0) {
 		id = fcn_004fda30(*r);
 	} else {
-		id = fcn_004fd9d0(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
+		id = gm_FindOrAllocHeadSet(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
 	sprintf(r_dst, (char*) 0x68cad8, id + 4);
 
@@ -93,7 +93,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	if (s != 0) {
 		id = fcn_004fda30(*s);
 	} else {
-		id = fcn_004fd9d0(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
+		id = gm_FindOrAllocHeadSet(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
 	sprintf(s_dst, (char*) 0x679060, id + 4);
 	fcn_004e44b0((char*) 0x68cf80, buf);
@@ -126,5 +126,5 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	g_772f54 = 0;
 	cut_CleanupCutscene();
 	d2_SuppressOverlay = 0;
-	fcn_004e3640();
+	msx_RestoreMusicIfAllowed();
 }

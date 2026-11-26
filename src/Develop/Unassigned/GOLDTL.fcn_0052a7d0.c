@@ -21,7 +21,7 @@ extern char g_1041d80[];
 void __cdecl d3_VisitSceneObjects(char*, int, int, void*, void*);
 char __cdecl fcn_0052a320(char*);
 
-void __cdecl fcn_0052a7d0(void)
+void __cdecl d3_ApplySceneLightingPreset(void)
 {
 	float (*src)[4];
 	int i;

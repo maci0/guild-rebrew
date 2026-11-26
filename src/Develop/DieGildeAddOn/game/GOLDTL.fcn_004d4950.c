@@ -9,10 +9,10 @@ float __cdecl fcn_004cefb0(char*, unsigned int);
 unsigned short* __cdecl gm_FindEntityActiveItem(char*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl fcn_004cfc40(char*, int, int);
-int __cdecl fcn_004c30a0(int, int, char*, int, int);
+int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void* __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 int __cdecl fcn_004d4790(char*);
 int* __cdecl fcn_00417b50(int, int, int, int, int, int);
@@ -60,7 +60,7 @@ void __cdecl fcn_004d4950(int a0)
             v11 = -1;
             cm_BeginPacketFieldDelta((char*) v8, *(int*) (v8 + 2));
             cm_AppendPacketFieldValue(4, 1, (v8 - (int)g_aed32c) + 0x20, &v11);
-            fcn_004c5360();
+            cm_RequestChangeAttribute();
         }
     }
     if (v22) {
@@ -72,9 +72,9 @@ void __cdecl fcn_004d4950(int a0)
         }
         if (r > 8) {
             if (*(int*) (a0 + 0x188) != *(int*) ((int)g_772e9c + 4)) {
-                fcn_004c30a0(*v4, *(int*) 0x772ef4, (char*) 0x68be54, -1, 500);
+                d3snd_QueueSound(*v4, *(int*) 0x772ef4, (char*) 0x68be54, -1, 500);
             } else {
-                fcn_004c30a0(*v4, *(int*) 0x772ef8, (char*) 0x68be54, -1, 500);
+                d3snd_QueueSound(*v4, *(int*) 0x772ef8, (char*) 0x68be54, -1, 500);
             }
         } else if (r > 5) {
             sb_PlayVoice((char*) 0, (char*) 0x68bde4, 1, 0x3f, 0x7f, 0, 0);

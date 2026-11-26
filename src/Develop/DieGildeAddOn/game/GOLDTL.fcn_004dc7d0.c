@@ -8,7 +8,7 @@ struct unit* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_SendCmdMessage(int*, char*, char*, char*);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
-void __cdecl fcn_004c6040(int, int, int, int);
+void __cdecl cm_RequestUpdateStraftatState(int, int, int, int);
 extern char g_6b5c60[];
 
 /* Inferred source placement; registration proves the validator slot. */
@@ -208,6 +208,6 @@ int __cdecl fcn_004dc7d0(char* cmd)
         fcn_00545d40(*(int*) (e + 4), -1, text, 0, 0x5f5, 0);
     if (f != 0 && f != bad && (f[2] == 6 || f[2] == 7))
         fcn_00545d40(*(int*) (f + 4), -1, text, 0, 0x5f5, 0);
-    fcn_004c6040(*(int*) (cmd + 0x34), *(int*) (cmd + 0x34), *(int*) (cmd + 0x7c), 0);
+    cm_RequestUpdateStraftatState(*(int*) (cmd + 0x34), *(int*) (cmd + 0x34), *(int*) (cmd + 0x7c), 0);
     return 0;
 }

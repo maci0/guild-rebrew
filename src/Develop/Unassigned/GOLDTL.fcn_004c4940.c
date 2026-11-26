@@ -9,7 +9,7 @@ extern char g_1005780;
 void __cdecl nt_Recv(void);
 int __cdecl cm_EnqueueCommand(char*);
 
-int __cdecl fcn_004c4940(void)
+int __cdecl cm_PollCommandQueue(void)
 {
 	if (g_14cbca0 == -1) {
 		return 0;

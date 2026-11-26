@@ -12,7 +12,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005492e0(char*);
-void __cdecl fcn_004c6040(int, int, int, int);
+void __cdecl cm_RequestUpdateStraftatState(int, int, int, int);
 
 void __cdecl he_ClearEntityActions(char* h)
 {
@@ -58,7 +58,7 @@ void __cdecl he_ClearEntityActions(char* h)
 		if ((((struct bits*) (e + 0x78))->a || ((struct bits*) (e + 0x78))->b)) {
 			if (*(int*) (e + 0xac) == *(int*) (h + 4) || *(int*) (e + 0xb4) == *(int*) (h + 4)
 			    || *(int*) (e + 0xc0) == *(int*) (h + 4)) {
-				fcn_004c6040(*(int*) (e + 0xac), *(int*) (e + 0xb0), *(int*) (e + 4), 0);
+				cm_RequestUpdateStraftatState(*(int*) (e + 0xac), *(int*) (e + 0xb0), *(int*) (e + 4), 0);
 				fcn_005492e0(e);
 			} else if (*(int*) (e + 0xb0) == *(int*) (h + 4)) {
 				fcn_005492e0(e);

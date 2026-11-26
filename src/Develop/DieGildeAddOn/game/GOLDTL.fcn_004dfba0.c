@@ -5,7 +5,7 @@ int __cdecl fcn_00493640(int*);
 int __cdecl IsRandomSecondChoice(int*);
 int __cdecl ai_SelectRandomTorture(int*);
 int __cdecl fcn_00493800(int*);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_00493a30(char*, int*);
 int __cdecl fcn_00493ce0(char*, int*);
@@ -37,7 +37,7 @@ void __cdecl fcn_004dfba0(char* context, int* ev)
 		if (*(int*) (context + 0x10) == ev[10]) {
 			*(int*) (context + 0x94) = fcn_00493800(ev);
 			if (*(int*) (context + 0x94) == 1)
-				fcn_004c54c0(*(int*) (context + 0x10), ev[6], 0x23, 1);
+				cm_RequestCopyEntityData(*(int*) (context + 0x10), ev[6], 0x23, 1);
 		}
 		break;
 	case 6:

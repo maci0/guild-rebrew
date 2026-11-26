@@ -81,7 +81,7 @@ typedef struct WORKER_RECOVERY_RACE {
 extern unsigned char* lpGebaeudePROT;
 
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
-void __cdecl fcn_004c5530(WORKER_RECOVERY_MSG* msg);
+void __cdecl cm_SendCopyEntityData(WORKER_RECOVERY_MSG* msg);
 
 void __cdecl ai_DispatchWorkerRecovery(WORKER_RECOVERY_UNIT* meister)
 {
@@ -137,12 +137,12 @@ void __cdecl ai_DispatchWorkerRecovery(WORKER_RECOVERY_UNIT* meister)
 				if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].b83 < ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].b82) {
 					msg.target = ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].seed;
 					msg.mode = 3;
-					fcn_004c5530(&msg);
+					cm_SendCopyEntityData(&msg);
 					cnt--;
 				} else {
 					msg.target = ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].seed;
 					msg.mode = 2;
-					fcn_004c5530(&msg);
+					cm_SendCopyEntityData(&msg);
 					cnt--;
 				}
 				((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].flags2 |= 4;

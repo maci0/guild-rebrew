@@ -14,10 +14,10 @@ unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl gm_QueryEntitySum(int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
-void __cdecl fcn_004c4eb0(char*);
-void __cdecl fcn_004c5150(int, int, char, int);
-void __cdecl fcn_004c4ef0(char*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_SendLogAction(char*);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+void __cdecl cm_SendTraceEnd(char*);
+void __cdecl cm_RequestChangeAttribute(void);
 
 extern Slot7f4ca2 g_7f4ca2[768];
 extern char g_7f4ca4[];
@@ -90,7 +90,7 @@ void __cdecl fcn_00482b60(char* e)
 	             (unsigned short) (*(unsigned short*) (e + 0x16c) -
 	                               *(unsigned short*) &g_aed32c) + 0x65,
 	             &t);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 stock_done:
 	sum = 0;
 	for (i = 1; i < 4; i++) {
@@ -100,30 +100,30 @@ stock_done:
 		if (r < total * 3 / 0x14) {
 			d = total * 5 / 0x14 - r;
 			sum += d;
-			fcn_004c4eb0("Bankmeister");
+			cm_SendLogAction("Bankmeister");
 			o = *(char**) (e + 0x16c);
-			fcn_004c5150(*(int*) (o + 1), -1, (char) i, d);
+			cm_RequestMoveCredits(*(int*) (o + 1), -1, (char) i, d);
 			t = (int) (d * 1.03);
 			o = *(char**) (e + 0x16c);
-			fcn_004c5150(
+			cm_RequestMoveCredits(
 				-1,
 				*(int*) (g_7f4ca4 +
 				         *(unsigned short*) (o + 0x27) * 0x21c),
 				(char) g_773d75, t);
-			fcn_004c4ef0("Bankmeister");
+			cm_SendTraceEnd("Bankmeister");
 		} else if (r > total * 6 / 0x14) {
 			d = r - total * 4 / 0x14;
 			sum -= d;
-			fcn_004c4eb0("Bankmeister");
+			cm_SendLogAction("Bankmeister");
 			o = *(char**) (e + 0x16c);
-			fcn_004c5150(
+			cm_RequestMoveCredits(
 				*(int*) (g_7f4ca4 +
 				         *(unsigned short*) (o + 0x27) * 0x21c),
 				-1, (char) g_773d75, d);
 			t = (int) (d * 1.03);
 			o = *(char**) (e + 0x16c);
-			fcn_004c5150(-1, *(int*) (o + 1), (char) i, t);
-			fcn_004c4ef0("Bankmeister");
+			cm_RequestMoveCredits(-1, *(int*) (o + 1), (char) i, t);
+			cm_SendTraceEnd("Bankmeister");
 		}
 	}
 	o = *(char**) (e + 0x16c);
@@ -131,7 +131,7 @@ stock_done:
 	total = *(int*) (e + 0x1b8);
 	if ((double) t < 1.5 * (double) total && total - sum > 0) {
 		o = *(char**) (e + 0x16c);
-		fcn_004c5150(
+		cm_RequestMoveCredits(
 			*(int*) (o + 1),
 			*(int*) (g_7f4ca4 + *(unsigned short*) (o + 0x27) * 0x21c),
 			(char) g_773d75, (int) ((total - sum) * 0.8));
@@ -140,7 +140,7 @@ stock_done:
 		if (g_7f4ca2[*(unsigned short*) (o + 0x27)].kind != 6 &&
 		    g_7f4ca2[*(unsigned short*) (o + 0x27)].kind != 7 &&
 		    t > total * 2) {
-			fcn_004c5150(
+			cm_RequestMoveCredits(
 				*(int*) (g_7f4ca4 +
 				         *(unsigned short*) (o + 0x27) * 0x21c),
 				*(int*) (o + 1), (char) g_773d75,

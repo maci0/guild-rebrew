@@ -52,7 +52,7 @@ void __cdecl fcn_004c6ae0(int, int);
 Obj* __cdecl he_StartHandlungSearch(int, int, int);
 Obj* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004c5620(int, Obj*);
-void __cdecl fcn_004c5530(struct msg*);
+void __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -97,7 +97,7 @@ int __cdecl gm_HandleGegenspionage(unsigned char* e)
 				p->posc8 = gm_GameTime;
 				fcn_004c5620(p->f70, p);
 				m.f70 = ((ENTITY_RECORD*)g_7f4ca0)[p->w8].entity_id;
-				fcn_004c5530(&m);
+				cm_SendCopyEntityData(&m);
 			}
 		}
 		return result;
@@ -130,7 +130,7 @@ int __cdecl gm_HandleGegenspionage(unsigned char* e)
 							found |= 1;
 							fcn_004c5620(0, p);
 							m.f70 = ((ENTITY_RECORD*)g_7f4ca0)[p->w8].entity_id;
-							fcn_004c5530(&m);
+							cm_SendCopyEntityData(&m);
 							io_FormatTextBuffer(t, 0x1db9, p->w8);
 							t = text + strlen(text);
 						}

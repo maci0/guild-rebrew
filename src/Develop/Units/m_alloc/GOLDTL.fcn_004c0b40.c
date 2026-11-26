@@ -16,8 +16,8 @@ struct snd_4c0b40 {
 
 void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
 int __cdecl fcn_00423670(char**, int, int);
-int __cdecl fcn_00423460(char**);
-void __cdecl fcn_00426170(char**, int);
+int __cdecl sb_CheckVoicePlaying(char**);
+void __cdecl d3snd_SetVoiceFlag0x10(char**, int);
 void __cdecl m_FreeTracked(struct snd_4c0b40*);
 
 
@@ -55,17 +55,17 @@ void __cdecl fcn_004c0b40(void)
 	}
 	if (cur->started == 0)
 		return;
-	if (fcn_00423460(cur->voice) != 0)
+	if (sb_CheckVoicePlaying(cur->voice) != 0)
 		return;
 	next = (*(struct snd_4c0b40**)&g_772d34)->next;
-	fcn_00426170((*(struct snd_4c0b40**)&g_772d34)->voice, 0);
+	d3snd_SetVoiceFlag0x10((*(struct snd_4c0b40**)&g_772d34)->voice, 0);
 	m_FreeTracked((*(struct snd_4c0b40**)&g_772d34));
 	(*(struct snd_4c0b40**)&g_772d34) = next;
 	g_772d38 = now;
 	if (next != 0 && next->voice != 0 && next->voice[1] != 0 && g_772d2c != 0
 	    && strstr(next->voice[1] + 4, "MausclickLinks") != 0) {
 		next = (*(struct snd_4c0b40**)&g_772d34)->next;
-		fcn_00426170((*(struct snd_4c0b40**)&g_772d34)->voice, 0);
+		d3snd_SetVoiceFlag0x10((*(struct snd_4c0b40**)&g_772d34)->voice, 0);
 		m_FreeTracked((*(struct snd_4c0b40**)&g_772d34));
 		(*(struct snd_4c0b40**)&g_772d34) = next;
 		msx_FadeMasterVolumeIfTrackActive(1.0f, 0x7d0);

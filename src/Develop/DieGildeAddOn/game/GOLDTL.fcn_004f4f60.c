@@ -9,7 +9,7 @@ int __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int a4);
 float __cdecl fcn_004f4ed0(unsigned short* key);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_005c6270(char* a1, int a2);
-int __cdecl fcn_004c5820(void* a1);
+int __cdecl cm_SendAddStraftat(void* a1);
 
 #pragma pack(1)
 typedef struct {
@@ -100,7 +100,7 @@ int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
 	msg.d = *(short*) (rec + 0x10);
 	msg.h = 1;
 	msg.g = a5;
-	return fcn_004c5820(&msg);
+	return cm_SendAddStraftat(&msg);
 fail:
 	return -1;
 }

@@ -30,7 +30,7 @@ typedef struct S143b0Box {
 } S143b0Box;
 
 char __cdecl d3_ReparentObject(char*, int);
-void __cdecl fcn_00438d70(char*, int, int, int);
+void __cdecl d3_SetObjectEulerRotation(char*, int, int, int);
 int __cdecl d3_GetObjectVerticalBounds(char*, float*, float*);
 int __cdecl fcn_00413480(char*, float, float*, float*, float*, float*);
 int __cdecl fcn_00413c40(char*, float*, float*, float*, float*, float*, float*);
@@ -48,7 +48,7 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 	link = *(int*) (self + 0x1fc);
 	if (link != 0) {
 		d3_ReparentObject(self, 0);
-		fcn_00438d70(self, 0, *(int*) (self + 0x88), 0);
+		d3_SetObjectEulerRotation(self, 0, *(int*) (self + 0x88), 0);
 	} else {
 		link = 0;
 	}

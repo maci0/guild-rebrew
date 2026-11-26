@@ -35,7 +35,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 
 int __cdecl fcn_004ecf00(char*, int*, int*, int);
-void __cdecl fcn_004c5530(Msg*);
+void __cdecl cm_SendCopyEntityData(Msg*);
 
 int __cdecl fcn_00585850(char* e, int* list)
 {
@@ -57,6 +57,6 @@ int __cdecl fcn_00585850(char* e, int* list)
 	msg.flag = 1;
 	msg.v58 = *list;
 	msg.v64 = *list;
-	fcn_004c5530(&msg);
+	cm_SendCopyEntityData(&msg);
 	return 1;
 }

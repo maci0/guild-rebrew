@@ -19,8 +19,8 @@ char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl gm_ResolveEntityById(void** out, void** a2, void** a3, int a4);
 void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot57ceb0* slots, Counts57ceb0* cnt);
 int __cdecl io_FormatTextBuffer(char* dst, int id, ...);
-int __cdecl fcn_004c51f0(int a1, int a2, short a3, int a4, char a5, int a6);
-void __cdecl fcn_004c51a0(int a1, int a2, char a3, int a4);
+int __cdecl cm_SendSellObjekt(int a1, int a2, short a3, int a4, char a5, int a6);
+void __cdecl cm_RequestTransferCurrencyNoKill(int a1, int a2, char a3, int a4);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
@@ -70,7 +70,7 @@ void __cdecl fcn_0057ceb0(char* entity)
 				if (item != 0) {
 					if (*(int*) (item + 0xe) < 3) {
 						handles[queued++] = id;
-						fcn_004c51f0(*(int*) (ownerRec + 4), -1, (short) id, 1, g_773d75, 0);
+						cm_SendSellObjekt(*(int*) (ownerRec + 4), -1, (short) id, 1, g_773d75, 0);
 						goto next;
 					}
 					*(int*) (entity + 0xac) += (int) fcn_0050bb50(id, g_773d75);
@@ -79,7 +79,7 @@ void __cdecl fcn_0057ceb0(char* entity)
 				if (counts.total < 6) {
 					counts.total++;
 					handles[queued++] = id;
-					fcn_004c51f0(*(int*) (ownerRec + 4), -1, (short) id, 1, g_773d75, 0);
+					cm_SendSellObjekt(*(int*) (ownerRec + 4), -1, (short) id, 1, g_773d75, 0);
 					goto next;
 				}
 				*(int*) (entity + 0xac) += (int) fcn_0050bb50(id, g_773d75);
@@ -97,7 +97,7 @@ next:
 	else {
 		io_FormatTextBuffer(msg, 0x41f1, *(unsigned int*) (entity + 0xac));
 	}
-	fcn_004c51a0(*(int*) (ownerRec + 4), -1, g_773d75, *(unsigned int*) (entity + 0xac));
+	cm_RequestTransferCurrencyNoKill(*(int*) (ownerRec + 4), -1, g_773d75, *(unsigned int*) (entity + 0xac));
 	io_FormatTextBuffer(buf, 0x41f0, resolvedTarget, msg);
 	fcn_00545d40(*(int*) (ownerRec + 4), -1, buf, 0, 0x5ff, 0);
 }

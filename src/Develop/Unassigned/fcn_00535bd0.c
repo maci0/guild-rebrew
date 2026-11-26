@@ -3,7 +3,7 @@ void __cdecl fcn_005b54b0(char *);
 int __cdecl fcn_004bfe00(char *);
 unsigned short * __cdecl fcn_00502cd0(int, int, ...);
 float __cdecl fcn_004ff210(unsigned short, int);
-void __cdecl fcn_004c5790(char, char *);
+void __cdecl cm_RequestSysMessage(char, char *);
 
 /* ADDRESS: GOLDTL 0x00535bd0 */
 void __cdecl fcn_00535bd0(void)
@@ -63,7 +63,7 @@ void __cdecl fcn_00535bd0(void)
             for (i = 0; i < 31; i++)
                 ((int *)dialog_buf)[i] = 0;
             *(int *)dialog_buf = -1;
-            fcn_004c5790(0x11, dialog_buf);
+            cm_RequestSysMessage(0x11, dialog_buf);
         }
         break;
     case 18:

@@ -12,7 +12,7 @@ char* __cdecl m_alloc(int, char*);
 
 /* The record zero-fill is the original's hand-written block-fill prelude;
  * recorded C memset probes did not emit it (archived docs/codegen-walls.md section 6b). */
-int __cdecl fcn_005b1ff0(void* fh)
+int __cdecl ls_LoadList774a78(void* fh)
 {
 	int count;
 	int i;

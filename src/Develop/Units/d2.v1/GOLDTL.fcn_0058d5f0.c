@@ -32,11 +32,11 @@ void __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int __cdecl fcn_004c5530(void*);
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_SendCopyEntityData(void*);
+int __cdecl cm_GetCommandStatus(int);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00526120(int, int);
-void __cdecl fcn_0052a2d0(void);
+void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
@@ -233,9 +233,9 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 					req.list[i] = 0xffffffff;
 				}
 				if (j) {
-					h = fcn_004c5530(&req);
+					h = cm_SendCopyEntityData(&req);
 					if (h != -1) {
-						while (!fcn_004c4450(h)) {
+						while (!cm_GetCommandStatus(h)) {
 							main_RunFrameLoop(0, 0x20007);
 						}
 					}
@@ -255,7 +255,7 @@ next:
 		menu = ids[3];
 	}
 	sv_ClearObjectSelection();
-	fcn_0052a2d0();
+	d2_RestoreHudAfterDialog();
 	fcn_00471e30(menu);
 	fcn_00532ef0();
 }

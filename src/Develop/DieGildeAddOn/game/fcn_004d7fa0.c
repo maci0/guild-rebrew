@@ -6,7 +6,7 @@ int __cdecl fcn_004d2f70(char* s);
 char* __cdecl fcn_004d34f0(char* s);
 int __cdecl d3_TransformPoint(char* a, char* b, void* c);
 char __cdecl fcn_0045b990(int a, void* b, void* c, void* d, void* e);
-int __cdecl fcn_004c67c0(int a, void* b);
+int __cdecl cm_SendUpdateCutsceneEntitySlot(int a, void* b);
 double __cdecl fcn_004ff040(char* s);
 int __cdecl fcn_0064d228(float v);
 void* __cdecl memcpy(void* dst, const void* src, unsigned int n);
@@ -104,7 +104,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 			*(int*) (tmp + 0) = *(int*) (s + 4);
 			*(int*) (tmp + 1) = 2;
 			*(int*) (tmp + 5) = *(int*) (e2 + 4);
-			fcn_004c67c0(*(int*) (a + 0x10), tmp);
+			cm_SendUpdateCutsceneEntitySlot(*(int*) (a + 0x10), tmp);
 		} else {
 			float height;
 			e2 = (char*) fcn_004d34f0(s);
@@ -119,7 +119,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 			*(int*) (tmp + 1) = 3;
 			*(int*) (tmp + 4) = map_x;
 			*(int*) (tmp + 5) = countC0;
-			fcn_004c67c0(*(int*) (a + 0x10), tmp);
+			cm_SendUpdateCutsceneEntitySlot(*(int*) (a + 0x10), tmp);
 		}
 	}
 	return 0;

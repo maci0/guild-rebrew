@@ -9,11 +9,11 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_FindPublicTreasury(int k);
-void __cdecl fcn_004c4eb0(char* s);
-void __cdecl fcn_004c4ef0(char* s);
+void __cdecl cm_SendLogAction(char* s);
+void __cdecl cm_SendTraceEnd(char* s);
 int __cdecl fcn_0050d170(int k);
-void __cdecl fcn_004c5150(int a, int b, char c, int n);
-void __cdecl fcn_004c5530(char* msg);
+void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
+void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* Client dialog record setup: allocates the dialog object (fcn_00507ab0(1)),
  * accepts only type 0xf records on channel 4, clears a 0x3e-dword stack record,
@@ -46,9 +46,9 @@ int __cdecl ai_RunBuergermeisterRathaus(unsigned char* rec, unsigned char* obj, 
 	*(int*) (msg + 0x30) = g_7f4c08;
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	*(int*) (msg + 0x58) = *(int*) (out + 4);
-	fcn_004c4eb0((char*) 0x67eb10);
-	fcn_004c5150(-1, *(int*) (dialog + 2), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (obj + 4)) * 0.3f));
-	fcn_004c5530(msg);
-	fcn_004c4ef0((char*) 0x67eb10);
+	cm_SendLogAction((char*) 0x67eb10);
+	cm_RequestMoveCredits(-1, *(int*) (dialog + 2), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (obj + 4)) * 0.3f));
+	cm_SendCopyEntityData(msg);
+	cm_SendTraceEnd((char*) 0x67eb10);
 	return 0x31;
 }

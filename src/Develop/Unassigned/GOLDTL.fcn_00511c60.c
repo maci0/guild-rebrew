@@ -1,24 +1,24 @@
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl gm_RandomizeIntArray(unsigned int n, int *arr);
-int __cdecl fcn_0047dd60(void *p);
+int __cdecl gm_IsNpcEntityState(void *p);
 void __cdecl amt_CalcOfficeHolderAges(int n, int *out, unsigned char *src);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
-int __cdecl fcn_004c44c0(void);
-void __cdecl fcn_004c3ff0(void);
-void __cdecl fcn_004c4940(void);
+int __cdecl cm_AreQueuedCommandsDone(void);
+void __cdecl cm_FlushCommandQueue(void);
+void __cdecl cm_PollCommandQueue(void);
 void __cdecl fcn_004c4b00(void);
-char *__cdecl fcn_004c4480(int h);
-int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_004c5150(int, int, int, int);
+char *__cdecl cm_GetCommandResult(int h);
+int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
+void __cdecl cm_RequestMoveCredits(int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(char *p, int h);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *p);
-int __cdecl fcn_004c5420(int, int, int, int, int);
-int __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_004c5360(void);
+int __cdecl cm_RequestChangeBits(int, int, int, int, int);
+int __cdecl cm_RequestCopyEntityData(int, int, int, int);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_004c4450(int h);
+int __cdecl cm_GetCommandStatus(int h);
 int __cdecl amt_FindOfficeSlotByKey(unsigned char c, void *out);
 int __cdecl fcn_004e8b40(int i, void *out);
 int __cdecl amt_FindOfficeSlotByType(int i, void *out);
@@ -105,7 +105,7 @@ int __cdecl fcn_00511c60(void)
 		if (n >= 0xc) {
 			break;
 		}
-		if (fcn_0047dd60(p) != 0) {
+		if (gm_IsNpcEntityState(p) != 0) {
 			if (*(unsigned char *) (p + 2) != 5) {
 				v26[n] = (int) p;
 				n++;
@@ -128,23 +128,23 @@ int __cdecl fcn_00511c60(void)
 		cm_BeginCommandSync();
 		if (m < 3 && i > 0xc) {
 			if ((gm_RandomMod(4) & 0xffff) == 0) {
-				k = fcn_004c4fc0(0x10, -1, -1, 0x10, -1, 0, 0, 0);
+				k = cm_RequestAllocSpieler(0x10, -1, -1, 0x10, -1, 0, 0, 0);
 				m++;
 			} else {
-				k = fcn_004c4fc0(3, -1, -1, 0x10, -1,
+				k = cm_RequestAllocSpieler(3, -1, -1, 0x10, -1,
 						 (unsigned char) v33[i], 0, 2);
 			}
 		} else {
-			k = fcn_004c4fc0(3, -1, -1, 0x10, -1,
+			k = cm_RequestAllocSpieler(3, -1, -1, 0x10, -1,
 					 (unsigned char) v33[i], 0, 2);
 		}
 		cm_EndCommandSync();
-		while (fcn_004c44c0() == 0) {
-			fcn_004c3ff0();
-			fcn_004c4940();
+		while (cm_AreQueuedCommandsDone() == 0) {
+			cm_FlushCommandQueue();
+			cm_PollCommandQueue();
 			fcn_004c4b00();
 		}
-		v26[i] = (int) fcn_004c4480(k);
+		v26[i] = (int) cm_GetCommandResult(k);
 		i++;
 	}
 	v25[30] = 1;
@@ -182,7 +182,7 @@ int __cdecl fcn_00511c60(void)
 						 -0.5f),
 				   *(unsigned char *) 0x773d75);
 		p = (char *) v26[i];
-		fcn_004c5150(*(int *) (p + 4), -1, g_773d75,
+		cm_RequestMoveCredits(*(int *) (p + 4), -1, g_773d75,
 			     v49);
 		cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &v36);
@@ -197,27 +197,27 @@ int __cdecl fcn_00511c60(void)
 				cm_AppendPacketFieldDelta(4, 1, 0x1ac, &v38);
 			}
 		}
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		fcn_004fee50(p, v25[i] & 0xffff);
 		k = amt_AssignOfficeHolder((unsigned char) shuffledIds[i], p, 0xff);
 		if (k != -1) {
-			while (fcn_004c4450(k) == 0) {
+			while (cm_GetCommandStatus(k) == 0) {
 				fcn_00535960();
 			}
 		}
 		if (*(unsigned char *) (p + 0x166) == 0x18 ||
 		    *(unsigned char *) (p + 0x166) == 0x1a ||
 		    *(unsigned char *) (p + 0x166) == 0x1b) {
-			k = fcn_004c5420(*(int *) (p + 4), 0x1cc, 4, 0x80, 0);
+			k = cm_RequestChangeBits(*(int *) (p + 4), 0x1cc, 4, 0x80, 0);
 		} else if (*(unsigned char *) (p + 0x166) == 0x16 ||
 			   *(unsigned char *) (p + 0x166) == 0x17 ||
 			   *(unsigned char *) (p + 0x166) == 0x19) {
-			k = fcn_004c5420(*(int *) (p + 4), 0x1cc, 4, 0x40, 0);
+			k = cm_RequestChangeBits(*(int *) (p + 4), 0x1cc, 4, 0x40, 0);
 		} else {
 			k = -1;
 		}
 		if (k != -1) {
-			while (fcn_004c4450(k) == 0) {
+			while (cm_GetCommandStatus(k) == 0) {
 				fcn_00535960();
 			}
 		}
@@ -261,10 +261,10 @@ int __cdecl fcn_00511c60(void)
 		v36 = n;
 		cm_BeginPacketFieldDelta((char *) m, *(int *) (m + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x5c, (char *) (n + 4));
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		cm_BeginPacketFieldDelta((char *) n, *(int *) (n + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x5c, (char *) (m + 4));
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		if (v42 > 5) {
 			if ((gm_RandomMod(2) & 0xffff) != 0) {
 				k = *(unsigned char *) (m + 0x164);
@@ -273,30 +273,30 @@ int __cdecl fcn_00511c60(void)
 			}
 			k = fcn_00507400(gm_MapEntityStatRange(k), 1);
 			v38 = 2;
-			k = fcn_004c4fc0(8, *(int *) (m + 4), *(int *) (n + 4),
+			k = cm_RequestAllocSpieler(8, *(int *) (m + 4), *(int *) (n + 4),
 					 v42, -1, k, 0, 2);
 			if (k != -1) {
-				while (fcn_004c4450(k) == 0) {
+				while (cm_GetCommandStatus(k) == 0) {
 					fcn_00535960();
 				}
 			}
-			p = fcn_004c4480(k);
+			p = cm_GetCommandResult(k);
 			k = gm_RandomMod(0x400);
-			fcn_004c5150(*(int *) (p + 4), -1,
+			cm_RequestMoveCredits(*(int *) (p + 4), -1,
 				     g_773d75,
 				     ((k & 0xffff) + 0x200) << 5);
 			cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, &v38);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		}
 		k = gm_RandomMod(0x20);
-		fcn_004c54c0(*(int *) (m + 4), *(int *) (n + 4),
+		cm_RequestCopyEntityData(*(int *) (m + 4), *(int *) (n + 4),
 			     (k & 0xffff) + 0x60, 0);
 		k = gm_RandomMod(0x20);
-		k = fcn_004c54c0(*(int *) (n + 4), *(int *) (m + 4),
+		k = cm_RequestCopyEntityData(*(int *) (n + 4), *(int *) (m + 4),
 				 (k & 0xffff) + 0x60, 0);
 		if (k != -1) {
-			while (fcn_004c4450(k) == 0) {
+			while (cm_GetCommandStatus(k) == 0) {
 				fcn_00535960();
 			}
 		}
@@ -307,36 +307,36 @@ int __cdecl fcn_00511c60(void)
 		v42 = (gm_RandomMod(9) & 0xffff) + 1;
 		k = fcn_00507400((gm_RandomMod(2) & 0xffff) + 1,
 				 (gm_RandomMod(0xc) & 0xffff) + 1);
-		k = fcn_004c4fc0(3, -1, -1, gm_RandomMod(4) + 0xf, -1, k, 0, 0);
+		k = cm_RequestAllocSpieler(3, -1, -1, gm_RandomMod(4) + 0xf, -1, k, 0, 0);
 		if (k != -1) {
-			while (fcn_004c4450(k) == 0) {
+			while (cm_GetCommandStatus(k) == 0) {
 				fcn_00535960();
 			}
 		}
-		p = fcn_004c4480(k);
+		p = cm_GetCommandResult(k);
 		k = gm_RandomMod(0x400);
-		fcn_004c5150(*(int *) (p + 4), -1, g_773d75,
+		cm_RequestMoveCredits(*(int *) (p + 4), -1, g_773d75,
 			     ((k & 0xffff) + 0x200) << 5);
 		cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &v36);
 		cm_AppendPacketFieldDelta(1, 1, 0x167, &v42);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		k = fcn_00507400((gm_RandomMod(2) & 0xffff) + 1,
 				 (gm_RandomMod(0xc) & 0xffff) + 1);
-		k = fcn_004c4fc0(3, -1, -1, gm_RandomMod(4) + 0xe, -1, k, 0, 0);
+		k = cm_RequestAllocSpieler(3, -1, -1, gm_RandomMod(4) + 0xe, -1, k, 0, 0);
 		if (k != -1) {
-			while (fcn_004c4450(k) == 0) {
+			while (cm_GetCommandStatus(k) == 0) {
 				fcn_00535960();
 			}
 		}
-		p = fcn_004c4480(k);
+		p = cm_GetCommandResult(k);
 		k = gm_RandomMod(0x400);
-		fcn_004c5150(*(int *) (p + 4), -1, g_773d75,
+		cm_RequestMoveCredits(*(int *) (p + 4), -1, g_773d75,
 			     ((k & 0xffff) + 0x200) << 5);
 		cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &v36);
 		cm_AppendPacketFieldDelta(1, 1, 0x167, &v42);
-		fcn_004c5360();
+		cm_RequestChangeAttribute();
 		i--;
 	} while (i != 0);
 	amt_SpawnHistoricalOfficeHolders();

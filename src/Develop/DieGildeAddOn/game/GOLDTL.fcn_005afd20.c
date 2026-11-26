@@ -22,7 +22,7 @@ void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowProductionSelection(char*);
 void __cdecl fcn_005afa00(char*);
 void __cdecl fcn_005afca0(char*);
-void __cdecl fcn_005cf560(char*);
+void __cdecl d2_OpenMeisterbriefDialog(char*);
 
 void __cdecl d2_RunZollamtMenu(char* building)
 {
@@ -66,7 +66,7 @@ void __cdecl d2_RunZollamtMenu(char* building)
 					fcn_005afca0(building);
 				}
 				else if (g_7746a0 == d) {
-					fcn_005cf560(building);
+					d2_OpenMeisterbriefDialog(building);
 				}
 			}
 		} while (main_RunFrameLoop((void*) d2_RunZollamtMenu, 0x67fff) != 0);

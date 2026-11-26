@@ -2,7 +2,7 @@
 extern float g_773d4c, g_773d50, g_99ec14, g_99f590[];
 extern char g_99f5e0[];
 void __cdecl fcn_004faed0(void*);
-void __cdecl fcn_004c62c0(void*);
+void __cdecl cm_RequestUpdateEconomyStats(void*);
 void* __cdecl memcpy(void* dst, const void* src, unsigned int n);
 
 /* ADDRESS: GOLDTL 0x004fb390 */
@@ -46,5 +46,5 @@ void __cdecl fcn_004fb390(void)
 	*(int*) ((char*) g_99f590 + 4) = gm_GameTime.b;
 	*(int*) ((char*) g_99f590 + 8) = gm_GameTime.c;
 	*(short*) ((char*) g_99f590 + 12) = gm_GameTime.d;
-	fcn_004c62c0((char*) buf + 0x28);
+	cm_RequestUpdateEconomyStats((char*) buf + 0x28);
 }

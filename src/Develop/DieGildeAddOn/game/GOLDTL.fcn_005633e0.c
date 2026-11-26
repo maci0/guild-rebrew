@@ -29,11 +29,11 @@ extern char g_6a65a4[];
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_004c5420(int, int, int, int, int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 int __cdecl fcn_0050d270(int);
-void __cdecl fcn_004c5150(int, int, unsigned char, int);
+void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_StartAction0x1b(char* u)
@@ -52,7 +52,7 @@ void __cdecl he_StartAction0x1b(char* u)
 	if (e != 0) {
 		gd = &((struct BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e];
 		if (gd->category != 0xd && gd->category != 0xc && gd->category != 0xb) {
-			fcn_004c5420(*(int*) (e + 1), 0x5a, 2, 2, 0);
+			cm_RequestChangeBits(*(int*) (e + 1), 0x5a, 2, 2, 0);
 			*(int*) (u + 0xb8) = 0;
 			if (*(unsigned short*) (e + 0x25) != 0xffff) {
 				h = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (e + 0x25)];
@@ -68,7 +68,7 @@ void __cdecl he_StartAction0x1b(char* u)
 			if (gd->category == 5 && h != 0 && h->entity_state != 6 && h->entity_state != 7) {
 				v = fcn_0050d270(*(int*) (e + 0x5d));
 				if (v != 0) {
-					fcn_004c5150(h->entity_id, *(int*) (e + 1), g_773d75, v);
+					cm_RequestMoveCredits(h->entity_id, *(int*) (e + 1), g_773d75, v);
 				}
 			}
 			*(int*) (u + 0x84) = -1;

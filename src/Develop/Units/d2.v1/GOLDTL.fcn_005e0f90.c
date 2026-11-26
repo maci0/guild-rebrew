@@ -81,7 +81,7 @@ int __cdecl fcn_005e0b40(int, int, char*);
 int __cdecl fcn_005dfe80(char*, int);
 int __cdecl fcn_005e4060(void);
 void __cdecl fcn_00533a40(char*);
-int __cdecl fcn_004c5790(int, Msg*);
+int __cdecl cm_RequestSysMessage(int, Msg*);
 void __cdecl fcn_00471e30(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_ShowNetworkLoadGame(void)
@@ -145,7 +145,7 @@ int __cdecl d2_ShowNetworkLoadGame(void)
 						memset(&m, 0, sizeof(m));
 						m.f0 = i;
 						strcpy(m.name, slots[i].rec.text);
-						fcn_004c5790(0xf, &m);
+						cm_RequestSysMessage(0xf, &m);
 					}
 					g_774654 = 1;
 				}

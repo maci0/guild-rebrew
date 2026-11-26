@@ -66,7 +66,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_CheckEntityType(unsigned char*);
-int __cdecl fcn_004c5530(Packet*);
+int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00476b60(void);
 int __cdecl fcn_00526120(char*, int);
@@ -131,7 +131,7 @@ void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 						pkt.x60 = *(int*) (g_7746cc + 2);
 					}
 					pkt.x58 = 0;
-					fcn_004c5530(&pkt);
+					cm_SendCopyEntityData(&pkt);
 					io_FormatTextBuffer(buf, 0x1939, ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[obj[0]].worker_kind[0] + 0x130);
 					fcn_00476b60();
 					fcn_00526120(buf, 0);

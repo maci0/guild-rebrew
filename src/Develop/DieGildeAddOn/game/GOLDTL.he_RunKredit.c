@@ -1,7 +1,7 @@
 /* Run the credit window state machine: validate the open request, refresh the
  * slot message and record the activity time stamp. */
 
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AccumulateTyped2(int);
@@ -12,7 +12,7 @@ int __cdecl fcn_005c4ec0(int, int, int, char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_64d41a(char*, char*, int);
 void __cdecl he_FreeAction(int);
-void __cdecl fcn_004c51a0(int, int, unsigned char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x00564b90 */
 void __cdecl he_RunKredit(int loanEvent)
@@ -26,7 +26,7 @@ void __cdecl he_RunKredit(int loanEvent)
 	int n;
 	int time;
 
-	if (*(int*) (loanEvent + 0x84) != -1 && !fcn_004c4450(*(int*) (loanEvent + 0x84))) {
+	if (*(int*) (loanEvent + 0x84) != -1 && !cm_GetCommandStatus(*(int*) (loanEvent + 0x84))) {
 		return;
 	}
 	n = *(int*) (loanEvent + 0x70);
@@ -63,7 +63,7 @@ void __cdecl he_RunKredit(int loanEvent)
 					fcn_00545d40(*(int*) (loanEvent + 0xb0), -1, msg, 0, 0x5ff, 0);
 				}
 			} else {
-				fcn_004c51a0(*(int*) ((char*) obj + 1), *(int*) (loanEvent + 0xb0),
+				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) obj + 1), *(int*) (loanEvent + 0xb0),
 				           g_773d75, (int) f);
 				*(int*) ((char*) obj + 0x55) = (int) (*(int*) ((char*) obj + 0x55) + f);
 			}

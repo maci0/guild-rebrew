@@ -38,7 +38,7 @@ typedef struct {
 #pragma pack()
 
 slot80* __cdecl gm_FindSlotById(int, int);
-int __cdecl fcn_004c4330(msg9c*);
+int __cdecl cm_EnqueueClientPacket(msg9c*);
 
 int __cdecl cm_SendMarktSlotDelta(slot80* e, unsigned char kind)
 {
@@ -65,5 +65,5 @@ int __cdecl cm_SendMarktSlotDelta(slot80* e, unsigned char kind)
 	m.f23 = l.f24;
 	m.f27 = l.f2c;
 	m.f2b = l.f38;
-	return fcn_004c4330(&m);
+	return cm_EnqueueClientPacket(&m);
 }

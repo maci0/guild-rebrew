@@ -27,18 +27,18 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0050b750(int, char);
 
 void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
+void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_BeginCommandSync(void);
-int __cdecl fcn_004c4fc0(int, int, int, short, int, char, int, int);
+int __cdecl cm_RequestAllocSpieler(int, int, int, short, int, char, int, int);
 void __cdecl cm_EndCommandSync(void);
-int __cdecl fcn_004c44c0(void);
-void __cdecl fcn_004c3ff0(void);
-void __cdecl fcn_004c4940(void);
+int __cdecl cm_AreQueuedCommandsDone(void);
+void __cdecl cm_FlushCommandQueue(void);
+void __cdecl cm_PollCommandQueue(void);
 void __cdecl ls_ID2Ptr(void);
-Figure* __cdecl fcn_004c4480(int);
+Figure* __cdecl cm_GetCommandResult(int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_004c51f0(int, int, int, int, char, int);
+int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
 void __cdecl gm_InitCityOfficialsAndCitizens(void)
 {
@@ -55,50 +55,50 @@ void __cdecl gm_InitCityOfficialsAndCitizens(void)
 			money = fcn_0050b750(gm_RandomMod(0x122) + 10, (*(char*)&g_773d75));
 			cm_BeginPacketFieldDelta((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
 			cm_AppendPacketFieldValue(4, 1, 0x1ac, &money);
-			fcn_004c5360();
+			cm_RequestChangeAttribute();
 		}
 	}
 	cm_BeginCommandSync();
-	catholic_judge_cmd = fcn_004c4fc0(0xc, -1, -1, 0x12, -1, 0, 0, 0);
-	evang_judge_cmd = fcn_004c4fc0(0xc, -1, -1, 0x12, -1, 0, 0, 0);
+	catholic_judge_cmd = cm_RequestAllocSpieler(0xc, -1, -1, 0x12, -1, 0, 0, 0);
+	evang_judge_cmd = cm_RequestAllocSpieler(0xc, -1, -1, 0x12, -1, 0, 0, 0);
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
-		fcn_004c3ff0();
-		fcn_004c4940();
+	while (cm_AreQueuedCommandsDone() == 0) {
+		cm_FlushCommandQueue();
+		cm_PollCommandQueue();
 		ls_ID2Ptr();
 	}
-	gm_RichterKatholisch = (char*) fcn_004c4480(catholic_judge_cmd);
-	gm_RichterEvangelisch = (char*) fcn_004c4480(evang_judge_cmd);
+	gm_RichterKatholisch = (char*) cm_GetCommandResult(catholic_judge_cmd);
+	gm_RichterEvangelisch = (char*) cm_GetCommandResult(evang_judge_cmd);
 	cm_BeginCommandSync();
 	flag = 0;
 	cm_BeginPacketFieldDelta(gm_RichterKatholisch, ((Figure*) gm_RichterKatholisch)->owner);
 	cm_AppendPacketFieldDelta(1, 1, gm_RichterKatholisch - g_aed32c + 0xc, &flag);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	flag = 1;
 	cm_BeginPacketFieldDelta(gm_RichterEvangelisch, ((Figure*) gm_RichterEvangelisch)->owner);
 	cm_AppendPacketFieldDelta(1, 1, gm_RichterEvangelisch - g_aed32c + 0xc, &flag);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
-		fcn_004c3ff0();
-		fcn_004c4940();
+	while (cm_AreQueuedCommandsDone() == 0) {
+		cm_FlushCommandQueue();
+		cm_PollCommandQueue();
 		ls_ID2Ptr();
 	}
 	cm_BeginCommandSync();
 	for (i = 0; i < 8; i++) {
-		figures[i] = fcn_004c4fc0(0, -1, -1, gm_RandomMod(8) + 0x10, -1, (char) (gm_RandomMod(3) + 4), 0, 0);
+		figures[i] = cm_RequestAllocSpieler(0, -1, -1, gm_RandomMod(8) + 0x10, -1, (char) (gm_RandomMod(3) + 4), 0, 0);
 	}
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
+	while (cm_AreQueuedCommandsDone() == 0) {
 		fcn_00535960();
 	}
 	cm_BeginCommandSync();
 	for (i = 0; i < 8; i++) {
-		figures[i] = fcn_004c4fc0(0xb, -1, -1, gm_RandomMod(8) + 0x10, -1, 0, 0x13, 0);
-		fcn_004c51f0(-2, -1, 0x154, 1, (*(char*)&g_773d75), 0);
+		figures[i] = cm_RequestAllocSpieler(0xb, -1, -1, gm_RandomMod(8) + 0x10, -1, 0, 0x13, 0);
+		cm_SendSellObjekt(-2, -1, 0x154, 1, (*(char*)&g_773d75), 0);
 	}
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
+	while (cm_AreQueuedCommandsDone() == 0) {
 		fcn_00535960();
 	}
 }

@@ -5,11 +5,11 @@
 
 extern char g_6b7d88[];
 
-void __cdecl fcn_004226b0(char* s)
+void __cdecl sb_SetSampleBasePath(char* path)
 {
-	if (s != 0) {
-		strcpy(g_6b7d88, s);
-		if (s[strlen(s) - 1] != '\\') {
+	if (path != 0) {
+		strcpy(g_6b7d88, path);
+		if (path[strlen(path) - 1] != '\\') {
 			strcat(g_6b7d88, "\\");
 		}
 	}

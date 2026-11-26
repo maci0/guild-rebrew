@@ -17,17 +17,17 @@ extern int g_7747f8;
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
-int __cdecl fcn_004c44c0(void);
-void __cdecl fcn_004c3ff0(void);
-void __cdecl fcn_004c4940(void);
+int __cdecl cm_AreQueuedCommandsDone(void);
+void __cdecl cm_FlushCommandQueue(void);
+void __cdecl cm_PollCommandQueue(void);
 void __cdecl ls_ID2Ptr(void);
-int __cdecl fcn_004c4fc0(int, int, int, short, int, int, int, int);
+int __cdecl cm_RequestAllocSpieler(int, int, int, short, int, int, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
-void __cdecl fcn_004c5150(int, int, char, int);
-Figure* __cdecl fcn_004c4480(int);
+void __cdecl cm_RequestMoveCredits(int, int, char, int);
+Figure* __cdecl cm_GetCommandResult(int);
 
-int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
-void __cdecl fcn_004c53a0(void);
+int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
+void __cdecl cm_SendSetAttribute(void);
 
 void __cdecl cm_DistributeStartingWares(int count, int size, int* faces)
 {
@@ -69,21 +69,21 @@ void __cdecl cm_DistributeStartingWares(int count, int size, int* faces)
 			k--;
 			start = (step + start) % size;
 		}
-		ids[i] = fcn_004c4fc0(5, -1, -1, 0x10, -1, face, 0, 2);
-		fcn_004c5150(-2, -1, (*(char*)&g_773d75), fcn_0050b750(price[g_7e1fa0[i]], (*(char*)&g_773d75)));
+		ids[i] = cm_RequestAllocSpieler(5, -1, -1, 0x10, -1, face, 0, 2);
+		cm_RequestMoveCredits(-2, -1, (*(char*)&g_773d75), fcn_0050b750(price[g_7e1fa0[i]], (*(char*)&g_773d75)));
 		if (g_7747f8 != 0) {
-			fcn_004c5150(-2, -1, (*(char*)&g_773d75), fcn_0050b750(gm_RandomMod(5000) + 5000, (*(char*)&g_773d75)));
+			cm_RequestMoveCredits(-2, -1, (*(char*)&g_773d75), fcn_0050b750(gm_RandomMod(5000) + 5000, (*(char*)&g_773d75)));
 		}
 	}
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
-		fcn_004c3ff0();
-		fcn_004c4940();
+	while (cm_AreQueuedCommandsDone() == 0) {
+		cm_FlushCommandQueue();
+		cm_PollCommandQueue();
 		ls_ID2Ptr();
 	}
 	cm_BeginCommandSync();
 	for (i = 0; i < count; i++) {
-		p = fcn_004c4480(ids[i]);
+		p = cm_GetCommandResult(ids[i]);
 		if (g_7e1fa0[i] != 2) {
 			cm_BeginPacketFieldDelta((char*) p, p->id);
 			for (j = 0; j < 5; j++) {
@@ -92,15 +92,15 @@ void __cdecl cm_DistributeStartingWares(int count, int size, int* faces)
 				v = (float) (p->skills[j] + bonus[g_7e1fa0[i]]);
 				n = (int) (252.0f < v ? 252.0f : v);
 				b = n < 0 ? 0 : n;
-				fcn_004c4700(1, 1, (short) (&p->skills[j] - g_aed32c), &b);
+				cm_AppendCommandSyncField(1, 1, (short) (&p->skills[j] - g_aed32c), &b);
 			}
-			fcn_004c53a0();
+			cm_SendSetAttribute();
 		}
 	}
 	cm_EndCommandSync();
-	while (fcn_004c44c0() == 0) {
-		fcn_004c3ff0();
-		fcn_004c4940();
+	while (cm_AreQueuedCommandsDone() == 0) {
+		cm_FlushCommandQueue();
+		cm_PollCommandQueue();
 		ls_ID2Ptr();
 	}
 }

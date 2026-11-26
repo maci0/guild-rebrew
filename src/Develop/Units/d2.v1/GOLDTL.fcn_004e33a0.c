@@ -34,7 +34,7 @@ void __cdecl fcn_004e51d0(int arg, int* ids);
 void __cdecl cut_WaitTicks(int a);
 int __cdecl gm_GetGuildHall(int a);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
-void __cdecl fcn_004c5f60(int a, int b, int c);
+void __cdecl cm_SendSetGebBesitzer(int a, int b, int c);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(int a);
 void __cdecl fcn_004e4aa0(int a);
@@ -42,7 +42,7 @@ void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004c09b0(void);
 void __cdecl fcn_004e4b00(int a);
 void __cdecl fcn_004e4eb0(void);
-int __cdecl fcn_004c51a0(int a, int b, unsigned char kind, int amount);
+int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char kind, int amount);
 
 /* ADDRESS: GOLDTL 0x004e33a0 */
 void __cdecl cut_RunAuction(int* arg)
@@ -264,7 +264,7 @@ void __cdecl cut_RunAuction(int* arg)
 		io_AppendText((void*) 0x1aa5, (void*) building);
 		if (arg[3] == *(int*) (&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short)g_774970]
 		    .entity_id)) {
-			fcn_004c5f60(*(int*) ((char*) building + 1),
+			cm_SendSetGebBesitzer(*(int*) ((char*) building + 1),
 			    *(int*) (gm_CityEntity + 4),
 			    *(int*) (gm_CityEntity + 4));
 		}
@@ -288,28 +288,28 @@ void __cdecl cut_RunAuction(int* arg)
 			cm_BeginPacketFieldDelta((char*) building, *(int*) ((char*) building + 1));
 			cm_AppendPacketFieldDelta(4, 1, 0x69, &done);
 			cm_AppendPacketFieldDelta(4, 1, 0x6d, &cur);
-			fcn_004c5360();
-			fcn_004c5f60(*(int*) ((char*) building + 1),
+			cm_RequestChangeAttribute();
+			cm_SendSetGebBesitzer(*(int*) ((char*) building + 1),
 			    *(int*) (gm_CityEntity + 4),
 			    *(int*) ((char*) bidders[besti] + 4));
 			other = (int) gm_GetGuildHall(1);
 			other = fcn_00502cd0(*(int*) ((char*) other + 0x5d), 2, 6, 0, 0x115);
 			if (found == bidders[besti]) {
-				fcn_004c51a0(*(int*) ((char*) other + 2),
+				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) other + 2),
 				    *(int*) ((char*) bidders[besti] + 4), 0,
 				    (int) (states[besti]
 				    * *(float*) 0x664090));
 			} else if (found != 0) {
-				fcn_004c51a0(*(int*) ((char*) other + 2),
+				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) other + 2),
 				    *(int*) ((char*) bidders[besti] + 4), 0,
 				    (int) (states[besti]
 				    * *(float*) 0x664090));
-				fcn_004c51a0(*(int*) (found + 4),
+				cm_RequestTransferCurrencyNoKill(*(int*) (found + 4),
 				    *(int*) ((char*) bidders[besti] + 4), 0,
 				    (int) (states[besti]
 				    * *(float*) 0x662a3c));
 			} else {
-				fcn_004c51a0(*(int*) ((char*) other + 2),
+				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) other + 2),
 				    *(int*) ((char*) bidders[besti] + 4), 0,
 				    states[besti]);
 			}

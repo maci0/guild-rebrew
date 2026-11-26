@@ -37,7 +37,7 @@ extern __int64 g_666018;
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c5530(Msg*);
+void __cdecl cm_SendCopyEntityData(Msg*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 char* __cdecl fcn_005c6220(int, int*);
 void __cdecl fcn_005dbe90(char*);
@@ -54,7 +54,7 @@ static __inline void send_hit(int id)
 	s.f5c = -0.35f;
 	s.x59 = 5;
 	s.i64 = 0x30;
-	fcn_004c5530(&s);
+	cm_SendCopyEntityData(&s);
 }
 
 

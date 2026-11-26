@@ -3,7 +3,7 @@
 #include "client_data.h"
 
 int __cdecl atoi(const char*);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 
 /* ADDRESS: GOLDTL 0x004b1d10 */
 int __cdecl fcn_004b1d10(int a1, int a2, char* s)
@@ -35,6 +35,6 @@ int __cdecl fcn_004b1d10(int a1, int a2, char* s)
 	*(int*) (buf + 0x30) = g_7f4c08;
 	*(unsigned short*) (buf + 0x34) = (unsigned short) g_7f4c0c;
 	*(unsigned short*) (buf + 0x2c) = 0xb;
-	fcn_004c5530(buf);
+	cm_SendCopyEntityData(buf);
 	return 1;
 }

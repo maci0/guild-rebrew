@@ -42,7 +42,7 @@ int __cdecl fcn_004e8b40(int idx, Rec18* out);
 int __cdecl fcn_004f4830(int idx, void* dst);
 char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_004c51a0(int, int, char, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_004c6ae0(int, int);
 
@@ -95,20 +95,20 @@ int __cdecl fcn_004fcda0(unsigned short id, int pay, Income* out)
 				return 0;
 			}
 			if (out->va != 0) {
-				fcn_004c51a0((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, out->va);
+				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, out->va);
 				g_773d48++;
 			}
 			if (out->vb != 0) {
-				fcn_004c51a0((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, out->vb);
+				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, out->vb);
 				g_773d48++;
 			}
 			if (out->vc != 0) {
-				fcn_004c51a0((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, out->vc);
+				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, out->vc);
 				g_773d48++;
 			}
 			if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_type) == 3) {
 				amount = (gm_RandomMod((unsigned short) (q.x8 + 2)) + q.x8) * 6400;
-				fcn_004c51a0((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, amount);
+				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, amount);
 				fcn_004c6ae0((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), q.x8);
 				g_773d48 += 2;
 			}

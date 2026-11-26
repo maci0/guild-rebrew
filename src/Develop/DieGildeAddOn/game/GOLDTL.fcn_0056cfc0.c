@@ -22,11 +22,11 @@ extern char g_6a6b28[];
 extern char g_6a6b38[];
 extern char g_6a6b48[];
 
-int __cdecl fcn_004c4450(int);
+int __cdecl cm_GetCommandStatus(int);
 char *__cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_0050cad0(int *, int *);
 void __cdecl gm_AdjustGebaeudeCondition(char *, int);
-int __cdecl fcn_004c30a0(int, int, char *, int, int);
+int __cdecl d3snd_QueueSound(int, int, char *, int, int);
 void __cdecl gm_AddTime(char *, int, int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
 char *__cdecl fcn_00445600(char *, int, int, char *);
@@ -34,14 +34,14 @@ void __cdecl d3_TransformPoint(char *, char *, float *);
 int __cdecl CompareVector3WithinTolerance(float *, float *, float);
 int __cdecl fcn_004c5da0(int, int, int, char *, int, char *);
 int __cdecl fcn_004c5620(int, char *);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl sprintf(char *, char *, ...);
 int __cdecl evt_FindScriptByName(char *);
 int __cdecl evt_RequestScriptExit(char *);
 void __cdecl fcn_00418f90(int);
 void __cdecl he_FreeAction(char *);
 void __cdecl d3_SelectSceneContext(int, int);
-char *__cdecl fcn_00422460(int, char *);
+char *__cdecl sb_PrepareVoice(int, char *);
 int __cdecl d3snd_AttachSoundSource(int, int, int, float);
 void __cdecl d3snd_PlaySource(int, int, int, int);
 void __cdecl d3snd_PlayObjectSound(int, int, int, float);
@@ -52,7 +52,7 @@ char *__cdecl evt_LoadGfxScript(char *);
 int __cdecl fcn_00428340(int, int, int, int, int);
 char *__cdecl gm_FindNearestBuildingByKind(char *, int);
 void __cdecl fcn_004c6430(int, int, int);
-void __cdecl fcn_004c5ed0(int, char *, int);
+void __cdecl cm_RequestPlayAnimation(int, char *, int);
 
 /* ADDRESS: GOLDTL 0x0056cfc0 */
 void __cdecl fcn_0056cfc0(char *a0)
@@ -70,7 +70,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 
 	if ((*(unsigned char *)(a0 + 0x78) & 2) &&
 	    (n = *(int *)(a0 + 0x84)) != -1) {
-		if (!fcn_004c4450(n))
+		if (!cm_GetCommandStatus(n))
 			return;
 		*(int *)(a0 + 0x84) = -1;
 	}
@@ -93,16 +93,16 @@ void __cdecl fcn_0056cfc0(char *a0)
 				if (*(int *)(e + 0x61) != 0) {
 					d3_SelectSceneContext(0, 1);
 					if (*(char *)(a0 + 0xb4) == 1) {
-						r = fcn_00422460(0, g_6a6b48);
+						r = sb_PrepareVoice(0, g_6a6b48);
 						if (r != 0 &&
 						    (r = (char *)d3snd_AttachSoundSource((int)r, *(int *)(e + 0x61), 0x6b, 2200.0f)) != 0)
 							d3snd_PlaySource((int)r, 0, 0, 0);
 					} else if (*(char *)(a0 + 0xb4) == 0) {
-						r = fcn_00422460(0, g_6a6b38);
+						r = sb_PrepareVoice(0, g_6a6b38);
 						if (r != 0)
 							d3snd_PlayObjectSound((int)r, *(int *)(e + 0x61), 0x6b, 2200.0f);
 						if (*(unsigned short *)(e + 0x27) == g_774970) {
-							fcn_004c30a0(-8, 0, g_6a6b28, 0, 100);
+							d3snd_QueueSound(-8, 0, g_6a6b28, 0, 100);
 							if (*(char *)(a0 + 0x104)) {
 								io_FormatTextBuffer(text, 0x42d6, e);
 								he_MessageBoxQuickjump(
@@ -175,9 +175,9 @@ inc_step:
 						m = (char *)*(int *)(h - 0x180);
 						*q = (int)m;
 						fcn_004c6430((int)m, 0, 0);
-						fcn_004c5c80(*q);
+						cm_SendCancelCharacterActions(*q);
 						fcn_004c5da0(*q, *(int *)(n + 1), -1, 0, 1, g_6a6af4);
-						fcn_004c5ed0(*q, g_6a6ae0,
+						cm_RequestPlayAnimation(*q, g_6a6ae0,
 							     (gm_RandomMod(2) & 0xffff) + 1);
 						i++;
 						q++;
@@ -215,13 +215,13 @@ inc_step:
 				    *(unsigned int *)(a0 + 0xfc) + 0x20d < (unsigned int)g_6b7fb8) {
 					d = *(char *)(e + 0x5c) - n;
 					if (d <= 0) {
-						fcn_004c30a0(-8, 0, g_6a6ad0, 2, 100);
+						d3snd_QueueSound(-8, 0, g_6a6ad0, 2, 100);
 						*(int *)(a0 + 0xfc) = g_6b7fb8;
 					} else if (d <= 0xa) {
-						fcn_004c30a0(-8, 0, g_6a6ad0, 1, 100);
+						d3snd_QueueSound(-8, 0, g_6a6ad0, 1, 100);
 						*(int *)(a0 + 0xfc) = g_6b7fb8;
 					} else if (d <= 0x19) {
-						fcn_004c30a0(-8, 0, g_6a6ad0, 0, 100);
+						d3snd_QueueSound(-8, 0, g_6a6ad0, 0, 100);
 						*(int *)(a0 + 0xfc) = g_6b7fb8;
 					}
 				}
@@ -285,7 +285,7 @@ inc_step:
 			i = 0x10;
 			do {
 				if (*p != -1) {
-					fcn_004c5c80(*p);
+					cm_SendCancelCharacterActions(*p);
 					fcn_004c5da0(*p, *(int *)(e + 1), -1, 0, 0, g_6a6af4);
 				}
 				p++;

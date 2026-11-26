@@ -18,7 +18,7 @@ typedef struct Cmd {
 } Cmd;
 // SIZE 0x14
 
-void __cdecl fcn_004c5480(int, int, float);
+void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005dbe90(char*);
 
@@ -27,7 +27,7 @@ int __cdecl fcn_005dc1f0(Ent* ent, Cmd* cmd)
 	char text[0x800];
 
 	if (cmd->shown == 1) {
-		fcn_004c5480(ent->handle, 0x1c, ent->mood * 0.1f);
+		cm_RequestChangeFloat(ent->handle, 0x1c, ent->mood * 0.1f);
 		return 1;
 	}
 	if (cmd->shown == 0 && ent->kind == 6) {

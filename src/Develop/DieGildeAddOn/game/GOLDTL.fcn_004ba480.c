@@ -27,7 +27,7 @@ unsigned char* __cdecl gm_AddObjekt(void);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 char* __cdecl fcn_005049a0(unsigned char*);
-void __cdecl fcn_004c5530(void*);
+void __cdecl cm_SendCopyEntityData(void*);
 
 
 /* ADDRESS: GOLDTL 0x004ba480 */
@@ -86,7 +86,7 @@ int __cdecl fcn_004ba480(int* a1)
 		*(short*) (message + 0x64) = *(unsigned short*) (a1 + 1) + 0x12e7;
 		*(int*) (message + 0x58) = *(int*) (e + 2);
 		*(int*) (message + 0x60) = *(int*) (p + 2);
-		fcn_004c5530(message);
+		cm_SendCopyEntityData(message);
 		return 0;
 	}
 fail:

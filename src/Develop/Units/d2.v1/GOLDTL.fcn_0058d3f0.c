@@ -31,8 +31,8 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004f3280(int, int, int, int, int);
-int __cdecl fcn_004c4450(int);
-char* __cdecl fcn_004c4480(int);
+int __cdecl cm_GetCommandStatus(int);
+char* __cdecl cm_GetCommandResult(int);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(int, int, char*);
@@ -83,10 +83,10 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 					g_774654 = 1;
 				} else {
 					h = fcn_004f3280(a1, *request->x0, request->x8, request->x10, 0x1c);
-					while (h != -1 && (status = fcn_004c4450(h)) == 0) {
+					while (h != -1 && (status = cm_GetCommandStatus(h)) == 0) {
 						main_RunFrameLoop((void*) status, 0x20007);
 					}
-					p = fcn_004c4480(h);
+					p = cm_GetCommandResult(h);
 					if (p != 0) {
 						sprintf(line, s_6a9748, *(int*) (p + 4));
 						id = evt_LoadGfxScript(s_6a9714);

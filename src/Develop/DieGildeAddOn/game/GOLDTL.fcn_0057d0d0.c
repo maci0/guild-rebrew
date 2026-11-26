@@ -9,9 +9,9 @@ int __cdecl gm_IsEntityAtBuilding(char*, char*);
 void __cdecl he_FreeAction(char* unit);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
-void __cdecl fcn_004c5c80(int);
+void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
-void __cdecl fcn_004c5ed0(int, char*, int);
+void __cdecl cm_RequestPlayAnimation(int, char*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl fcn_0057ceb0(char* entity);
 int __cdecl he_FindNextTargetBuilding0a1(char* e);
@@ -87,7 +87,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 	for (i = 0; i < n; i++) {
 		o = (char*) objs[i];
 		fcn_00529160(0, 0, *(unsigned short*) o, entity);
-		fcn_004c5c80(*(int*) (o + 4));
+		cm_SendCancelCharacterActions(*(int*) (o + 4));
 		fcn_004c5da0(*(int*) (o + 4), *(int*) (found + 1), mode, 0, flag, "Bettler");
 	}
 	*(int*) (entity + 0x70) = 1;
@@ -140,7 +140,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 				if (*(int*) (o + 0x184) != 0) {
 					k = 8;
 					do {
-						fcn_004c5ed0(*(int*) (o + 4),
+						cm_RequestPlayAnimation(*(int*) (o + 4),
 						    anim[gm_RandomMod(10) & 0xffff],
 						    (gm_RandomMod(2) & 0xffff) + 1);
 						k--;
@@ -151,7 +151,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 		}
 		if (*(int*) (entity + 0x70) == 2) {
 			for (i = 0; i < n; i++) {
-				fcn_004c5c80(*(int*) (objs[i] + 4));
+				cm_SendCancelCharacterActions(*(int*) (objs[i] + 4));
 			}
 			he_AccumulateEvent0a1Yield(entity, n);
 			*(int*) (entity + 0xb0) = *(int*) (entity + 0xb0) - 0x78;

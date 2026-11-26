@@ -1,13 +1,13 @@
 
 
 
-void __cdecl fcn_004c4330(void*);
+void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c4e40(int a1)
+void __cdecl cm_RequestSendGameHeader(int totalBytes)
 {
 	char buf[0x9c];
 
 	buf[0] = 8;
-	*(int*) (buf + 0x10) = a1;
-	fcn_004c4330(buf);
+	*(int*) (buf + 0x10) = totalBytes;
+	cm_EnqueueClientPacket(buf);
 }

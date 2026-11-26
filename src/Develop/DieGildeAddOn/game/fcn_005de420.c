@@ -10,7 +10,7 @@ int __cdecl fcn_005bdc30(int a, int* b, void* c, int d, int e);
 int __cdecl fcn_00502cd0(int a, int b, ...);
 int __cdecl fcn_00502850(void);
 float __cdecl fcn_0042e450(void);
-void __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char e, int f);
+void __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char e, int f);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
 void __cdecl fcn_005dbe90(char* buf);
@@ -60,7 +60,7 @@ int __cdecl fcn_005de420(char* a0, char* a1)
 				    * *(int*) ((char*) f + 0xe))) < one) ? one
 				    : (int) ((fcn_0042e450() * g_6629d0 + 0.1f)
 				    * *(int*) ((char*) f + 0xe));
-				fcn_004c51f0(-1, *(int*) ((char*) e + 2),
+				cm_SendSellObjekt(-1, *(int*) ((char*) e + 2),
 				    *(unsigned short*) f, quantity, g_773d75, 0);
 			}
 			f = (int*) fcn_00502850();

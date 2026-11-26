@@ -8,15 +8,15 @@
 extern int g_7747b4;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_0047dd60(void*);
+int __cdecl gm_IsNpcEntityState(void*);
 int __cdecl fcn_00508eb0(int, int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
-void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c54c0(int, int, int, int);
+void __cdecl cm_RequestChangeAttribute(void);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl he_NotifyFeudDeclared(void*, void*);
 void* __cdecl he_NotifyFeudEscalated(void*, void*);
@@ -45,7 +45,7 @@ int __cdecl fcn_0047d2a0(char* e)
 		i = 0;
 		for (h = g_7f4ca0 + 2; (int) h < 0x85a0a2; h += (int)sizeof(ENTITY_RECORD), i++) {
 			if (!((i != (int) *(unsigned short*) e && h[0] == 6) || h[0] == 7)) {
-				if (fcn_0047dd60(h - 2) == 0 || (h[0x164] == 0 && h[0x167] == 0)) {
+				if (gm_IsNpcEntityState(h - 2) == 0 || (h[0x164] == 0 && h[0x167] == 0)) {
 					continue;
 				}
 			}
@@ -81,8 +81,8 @@ int __cdecl fcn_0047d2a0(char* e)
 		h = (char *)&((ENTITY_RECORD*)g_7f4ca0)[best];
 		cm_AppendPacketFieldDelta(4, 1, 0x210, h + 4);
 		cm_AppendPacketFieldDelta(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) e]);
-		fcn_004c5360();
-		fcn_004c54c0(*(int*) (h + 4), *(int*) (e + 4), 0, 2);
+		cm_RequestChangeAttribute();
+		cm_RequestCopyEntityData(*(int*) (h + 4), *(int*) (e + 4), 0, 2);
 		he_NotifyFeudDeclared(e, h);
 		return 0;
 	}
@@ -113,7 +113,7 @@ int __cdecl fcn_0047d2a0(char* e)
 	if ((int) (unsigned char) e[0x215] + b > 3) {
 		cm_AppendPacketFieldDelta(1, 1, 0x218, e + 0x217);
 	}
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	if ((int) (unsigned char) e[0x215] + b <= 3) {
 		return 0;
 	}
@@ -130,12 +130,12 @@ reset:
 	cm_AppendPacketFieldDelta(1, 1, 0x216, &b2);
 	cm_AppendPacketFieldDelta(4, 1, 0x210, &best);
 	cm_AppendPacketFieldDelta(1, 1, 0x214, &v11);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	b = 1;
 	cm_AppendPacketFieldDelta(1, 1, 0x218, &b);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	if (other != 0) {
-		fcn_004c54c0(*(int*) (e + 0x210), *(int*) (e + 4), 0x3c, 2);
+		cm_RequestCopyEntityData(*(int*) (e + 0x210), *(int*) (e + 4), 0x3c, 2);
 		he_NotifyFeudEnded(e, other);
 	}
 	return 0;
@@ -146,7 +146,7 @@ pulse:
 	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
 	cm_AppendPacketFieldValue(1, 1, 0x215, &b);
 	cm_AppendPacketFieldDelta(1, 1, 0x218, &b2);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	return 0;
 
 pulse2:
@@ -155,7 +155,7 @@ pulse2:
 	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
 	cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
 	cm_AppendPacketFieldDelta(1, 1, 0x218, &b2);
-	fcn_004c5360();
+	cm_RequestChangeAttribute();
 	return 0;
 }
 unsigned char _dpad_7747b4[76];
