@@ -21,7 +21,7 @@ extern int g_774654;
 
 void* __cdecl memset(void*, int, unsigned int);
 char* __cdecl itoa(int, char*, int);
-int __cdecl fcn_00525fb0(int);
+int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
@@ -97,7 +97,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 	int v;
 	int prev;
 
-	if (fcn_00525fb0((int) building) != 0) {
+	if (d2_CheckOwnerBlocked((int) building) != 0) {
 		return 0;
 	}
 	h = fcn_00470820(0, 0, (char*) 0x6aa148);

@@ -33,7 +33,7 @@ int __cdecl fcn_00445600(int a1, int a2, int a3, char* name);
 int __cdecl d3_CreateObjectAnimation(char* obj, Flags4cf450 fl, int n, void* ents);
 
 /* ADDRESS: GOLDTL 0x00414d20 */
-int __cdecl fcn_00414d20(int a1, int count, ...)
+int __cdecl d3_StartCameraFlight(int duration, int count, ...)
 {
 	char rec[0x1600];
 	char name[0x60];
@@ -137,7 +137,7 @@ int __cdecl fcn_00414d20(int a1, int count, ...)
 		}
 		va_end(ap);
 	}
-	quot = a1 / n;
+	quot = duration / n;
 	camera = (float*) d3_ActiveCamera;
 	{
 		Ent4cf450* ents;

@@ -5,7 +5,7 @@ extern volatile int g_6b7fac;
 extern int __cdecl gm_ResolveEntityById(void **a0, int a1, int a2, int a3);
 extern void __cdecl d3_SelectSceneContext(int a0, int a1);
 extern void __cdecl d3_TransformPoint(int a0, int a1, float *a2);
-extern float __cdecl fcn_004514d0(float *a0, float *a1);
+extern float __cdecl d3_WrapYawDelta(float *a0, float *a1);
 extern int __cdecl fcn_00442910(int a0, float *a1, float *a2, char *a3);
 extern void __cdecl d3_ApplyObjectAnimation(int a0, char *a1, int a2);
 
@@ -18,7 +18,7 @@ typedef struct
 } VEC;
 
 /* ADDRESS: GOLDTL 0x00558370 */
-int __cdecl fcn_00558370(int a0)
+int __cdecl he_SpawnSensenmann(int action)
 {
     int savedContext;
     int v3;
@@ -33,7 +33,7 @@ int __cdecl fcn_00558370(int a0)
 
     savedContext = d3_CurrentContextIndex;
     d3_SelectSceneContext(0, 1);
-    v3 = a0;
+    v3 = action;
     gm_ResolveEntityById(&out, 0, 0, *(int *)(v3 + 0xb0));
     v5 = (int)out;
     if (v5 == 0)
@@ -68,7 +68,7 @@ int __cdecl fcn_00558370(int a0)
             dir.x = pos.x - cur.x;
             dir.y = pos.y - cur.y;
             dir.z = pos.z - cur.z;
-            rot.y = fcn_004514d0(g_662d40, &dir.x);
+            rot.y = d3_WrapYawDelta(g_662d40, &dir.x);
         }
         else
         {

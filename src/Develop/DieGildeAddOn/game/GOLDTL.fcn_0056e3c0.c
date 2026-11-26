@@ -14,7 +14,7 @@ void __cdecl io_FormatTextBuffer(int*, unsigned int, ...);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, char*, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl ch_CreateAction(int, int, int);
-char* __cdecl fcn_004934c0(char*);
+char* __cdecl gm_SelectEntityHeir(char*);
 void __cdecl fcn_005099e0(char*, char*);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
@@ -130,7 +130,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		*(int*) (eventState + 0x70) = 6;
 		return;
 	case 4:
-		p = fcn_004934c0(s);
+		p = gm_SelectEntityHeir(s);
 		if (p == 0) {
 			*(int*) (eventState + 0x70) = 5;
 			return;

@@ -30,7 +30,7 @@ void __cdecl fcn_00533a40(void* p);
 void __cdecl fcn_0042def0(void* p);
 void __cdecl evt_CloseAllScripts(void);
 void __cdecl fcn_0044c440(int p);
-void __cdecl fcn_004c09b0(void);
+void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl d3snd_StopAllObjectSounds(void);
 void __cdecl fcn_004230e0(int p);
 void __cdecl hst_ResetHistoryState(void);
@@ -75,7 +75,7 @@ void __cdecl fcn_0053fa80(void)
 		fcn_0044c440(g_7749cc);
 	}
 	if (g_774934 != 0) {
-		fcn_004c09b0();
+		d3snd_StopTrackedVoices();
 		d3snd_StopAllObjectSounds();
 		if (g_7747bc != 0) {
 			fcn_004230e0(g_7747bc);

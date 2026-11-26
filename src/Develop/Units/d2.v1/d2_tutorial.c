@@ -7,7 +7,7 @@ void __cdecl fcn_00471e30(int);
 int __cdecl d2_StartTutorial();
 
 /* ADDRESS: GOLDTL 0x005803f0 */
-void __cdecl fcn_005803f0(void)
+void __cdecl d2_HideTutorialHint(void)
 {
 	d2_SetForm(*(int*) (*(int*) 0x665f08 + 0x24), 0);
 	io_AppendText(0x6811b0);
@@ -27,7 +27,7 @@ void __cdecl d2_CloseTutorialProgress(void)
 }
 
 /* ADDRESS: GOLDTL 0x005809d0 */
-void __cdecl fcn_005809d0(void)
+void __cdecl d2_ResetTutorialStep(void)
 {
 	*(int*) (*(int*) 0x665f08 + 0x1c) = 0;
 	*(int*) (*(int*) 0x665f08 + 0x20) = -1;
@@ -40,12 +40,12 @@ int __cdecl d2_IsTutorialInactive(void)
 }
 
 /* ADDRESS: GOLDTL 0x00580a00 */
-int __cdecl fcn_00580a00(int a1, int a2)
+int __cdecl d2_StartTutorialWithPages(int count, int flags)
 {
-	if (a1 != 5) {
+	if (count != 5) {
 		return -2;
 	}
-	*(int*) 0x6a81dc = *(int*) a2;
-	*(char*) 0x6a81e0 = *(char*) (a2 + 4);
+	*(int*) 0x6a81dc = *(int*) flags;
+	*(char*) 0x6a81e0 = *(char*) (flags + 4);
 	return d2_StartTutorial();
 }

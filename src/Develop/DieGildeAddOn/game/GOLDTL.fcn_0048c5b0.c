@@ -51,13 +51,13 @@ extern unsigned char g_773d75;
 extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 extern int g_772620;
 
 int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
-int __cdecl fcn_0050dfd0(char*, int);
+int __cdecl gm_GetStorageSlotCapacity(char*, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0047d1b0(void);
 int __cdecl he_CountActiveTradeActions(void);
@@ -166,7 +166,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		n = 0;
 		i = 0;
 		if (*(int*) 0x100b0c0 != 0) {
-			tmp = fcn_0050dfd0(q, *(int*) 0x100b0c0);
+			tmp = gm_GetStorageSlotCapacity(q, *(int*) 0x100b0c0);
 			m.ids[3] = *(unsigned short*) 0x100b0c0;
 			m.slots[3] = *(int*) (*(int*) 0x100b0c8 + 1);
 			if (tmp > g_100b0f4) {
@@ -186,7 +186,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			if (*(int*) (0x100b0c0 + i * 0x40 + 0x34) == 0) {
 				continue;
 			}
-			tmp = fcn_0050dfd0(q, *(int*) (0x100b0c0 + i * 0x40));
+			tmp = gm_GetStorageSlotCapacity(q, *(int*) (0x100b0c0 + i * 0x40));
 			if (*(int*) (0x100b0c0 + i * 0x40 + 8) == 0) {
 				continue;
 			}
@@ -246,7 +246,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 				if (*(int*) (0x100d0c0 + i * 0x58 + 0x4c) == 0) {
 					continue;
 				}
-				tmp = fcn_0050dfd0(q, *(int*) (0x100d0c0 + i * 0x58));
+				tmp = gm_GetStorageSlotCapacity(q, *(int*) (0x100d0c0 + i * 0x58));
 				k = 0;
 				if (st.x0 <= 0) {
 					continue;

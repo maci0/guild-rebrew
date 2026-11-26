@@ -20,7 +20,7 @@ void __cdecl fcn_004f4830(int a, Stat* st);
 #define MINF(a, b) (((a) < (b)) ? (a) : (b))
 
 /* ADDRESS: GOLDTL 0x004911b0 */
-int __cdecl fcn_004911b0(Ent* e, int a2, int* out)
+int __cdecl ai_EvaluateLaw0x0d(Ent* e, int unused, int* out)
 {
 	Stat st;
 	float v;

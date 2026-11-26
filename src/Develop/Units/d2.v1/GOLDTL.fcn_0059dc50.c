@@ -15,7 +15,7 @@ typedef struct
 } Query;
 // SIZE 0x50
 
-int __cdecl fcn_00525fb0(char*);
+int __cdecl d2_CheckOwnerBlocked(char*);
 void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005bdc30(int, Query*, char*, void*, int);
@@ -28,7 +28,7 @@ void __cdecl fcn_0059dc50(char* e)
 	Query q;
 	char buf[0x400];
 
-	if (fcn_00525fb0(e) != 0) {
+	if (d2_CheckOwnerBlocked(e) != 0) {
 		return;
 	}
 	memset(&q, 0, sizeof(q));

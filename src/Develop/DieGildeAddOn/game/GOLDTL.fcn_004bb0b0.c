@@ -13,7 +13,7 @@ extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_RandomMod(int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
@@ -38,7 +38,7 @@ int __cdecl fcn_004bb0b0(int* request)
 	if (gm_RandomMod(0x100) < p[0x82]) {
 		return 0x400;
 	}
-	if (fcn_005c6270(p, 0x290) != 0) {
+	if (gm_HasActiveSpecialObject(p, 0x290) != 0) {
 		return 0x400;
 	}
 	e = fcn_00502cd0(*(int*) (p + 0x178), 1, 5);

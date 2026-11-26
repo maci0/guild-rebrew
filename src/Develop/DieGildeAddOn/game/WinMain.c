@@ -80,7 +80,7 @@ void __cdecl fcn_00410870(void);
 void __cdecl ch_RegisterScriptCommands(void);
 void __cdecl evt_RegisterSoundCommands(void);
 void __cdecl fcn_0042a020(void);
-void __cdecl fcn_005e2510(void);
+void __cdecl gm_ApplyGameSettings(void);
 int __cdecl main_PumpWindowMessages(void);
 #include <windows.h>
 #include <stdlib.h>

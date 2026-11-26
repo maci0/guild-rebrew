@@ -12,7 +12,7 @@ int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_00510820(int, char*, int);
+void __cdecl d3_BindEntitySceneObject(int, char*, int);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_RunAction0x0c(char* u)
@@ -49,7 +49,7 @@ void __cdecl he_RunAction0x0c(char* u)
 			gm_ResolveEntityById(0, (void**) (&x), 0, *(int*) (u + 0xb8));
 			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 			if (*(int*) (u + 0xc4) > *(int*) (u + 0xc0)) {
-				fcn_00510820(*(int*) (x + 0x18), x, 1);
+				d3_BindEntitySceneObject(*(int*) (x + 0x18), x, 1);
 				he_FreeAction(u);
 				break;
 			}

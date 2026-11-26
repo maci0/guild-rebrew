@@ -29,7 +29,7 @@ extern unsigned char g_773d75;
 extern char g_868060[];
 
 Ent* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(Ent*, int);
+int __cdecl gm_HasActiveSpecialObject(Ent*, int);
 Obj* __cdecl he_StartHandlungSearch(int a, int b, int c);
 Obj* __cdecl he_fn_Handlung(void);
 
@@ -60,7 +60,7 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 	if (e == 0) {
 		return 1;
 	}
-	if (fcn_005c6270(e, 0x290) != 0) {
+	if (gm_HasActiveSpecialObject(e, 0x290) != 0) {
 		return 0x400;
 	}
 	for (o = he_StartHandlungSearch(1, 0, 0xf); o != 0; o = he_fn_Handlung()) {

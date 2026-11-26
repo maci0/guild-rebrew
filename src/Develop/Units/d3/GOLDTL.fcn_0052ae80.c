@@ -19,7 +19,7 @@ extern int d3_ActiveCameraAnimation;
 extern int g_6a256c;
 
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-void __cdecl fcn_00433780(char*);
+void __cdecl d3_FreeObjectAnimation(char*);
 void __cdecl d3_AnimateObjectTransform(char*, int*, int*, int, int);
 
 /* ADDRESS: GOLDTL 0x0052ae80 */
@@ -156,7 +156,7 @@ void __cdecl d3_UpdateCameraAtScreenEdges(void)
 	d3_CameraTargetRotation = next[0];
 	g_7e3a54 = next[1];
 	g_7e3a58 = next[2];
-	fcn_00433780(d3_ActiveCamera);
+	d3_FreeObjectAnimation(d3_ActiveCamera);
 	d3_CameraAnimating = 0;
 	d3_ActiveCameraAnimation = 0;
 	d3_AnimateObjectTransform(d3_ActiveCamera, cur, next, g_6a256c, 8);

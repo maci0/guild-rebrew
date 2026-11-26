@@ -14,7 +14,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004e4640(void);
 void __cdecl fcn_004e4680(void);
 void __cdecl gv_Free3Fields(int);
-void __cdecl fcn_00433780(void*);
+void __cdecl d3_FreeObjectAnimation(void*);
 void __cdecl fcn_00442e30(void);
 
 
@@ -52,7 +52,7 @@ void __cdecl cut_CleanupCutscene(void)
 		gv_Free3Fields(*(int*) (((char*)g_67a370) + 0xb0));
 		*(int*) (((char*)g_67a370) + 0xb0) = 0;
 	}
-	fcn_00433780(d3_ActiveCamera);
+	d3_FreeObjectAnimation(d3_ActiveCamera);
 	d3_ActiveCameraAnimation = 0;
 	d3_CameraAnimating = 0;
 	fcn_00442e30();

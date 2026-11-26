@@ -5,14 +5,14 @@ void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl gm_ResolveEntityById(int*, int, int, int);
 void __cdecl d3_TransformPoint(void*, void*, float*);
 void __cdecl fcn_00455140(void*, void*, float*);
-float __cdecl fcn_004514d0(float*, float*);
+float __cdecl d3_WrapYawDelta(float*, float*);
 void __cdecl d3_AnimateObjectTransform(void*, float*, float*, int, int);
 
 /* Places the camera at the referenced entity's aim point once both the
  * camera chain and the resolved entity expose a view target. The aim vector
  * is rotated by the view direction and sent as a placement message. */
 /* ADDRESS: GOLDTL 0x00558b70 */
-unsigned int __cdecl fcn_00558b70(char* eventRecord)
+unsigned int __cdecl he_PlaceSensenmannCamera(char* eventRecord)
 {
 	float from[4];
 	float to[4];
@@ -65,7 +65,7 @@ unsigned int __cdecl fcn_00558b70(char* eventRecord)
 	delta[1] = from[1] - to[1];
 	delta[2] = from[2] - to[2];
 	fcn_00455140(*(char**) (eventRecord + 0xc8), (char*) 0x662d40, aim);
-	angle = fcn_004514d0(aim, delta);
+	angle = d3_WrapYawDelta(aim, delta);
 	view = *(char**) (eventRecord + 0xc8);
 	if (view == 0) {
 		goto fail;

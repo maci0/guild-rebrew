@@ -1395,10 +1395,10 @@ measured_at = "2026-10-17T12:44:33+00:00"
 file = ""
 name = "cm_LastEntityId"
 kind = "GLOBAL"
-type = "char[]"
+type = "int"
 section = ".data"
 updated_by = "data"
-updated_at = "2026-10-31T09:09:56+00:00"
+updated_at = "2026-11-26T15:31:55+00:00"
 note = "Inferred command reference cell selected by -2; entity setters store an entity ID. Native owner and original spelling unknown."
 
 ["GOLD.0x0060bd68".verification]

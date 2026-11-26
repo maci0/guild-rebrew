@@ -85,7 +85,7 @@ void __cdecl fcn_0040f960(void);
 void __cdecl fcn_0040d270(void);
 void __cdecl evt_RegisterSoundCommands(void);
 void __cdecl fcn_0042b700(void);
-void __cdecl fcn_005e2510(void);
+void __cdecl gm_ApplyGameSettings(void);
 void __cdecl fcn_0052fbb0(void);
 
 int __cdecl main_OpenEngine(void)
@@ -197,7 +197,7 @@ int __cdecl main_OpenEngine(void)
 	evt_RegisterSoundCommands();
 	g_5fb920 = (int) fcn_0042b700;
 	g_5f927c = 0x400000;
-	fcn_005e2510();
+	gm_ApplyGameSettings();
 	fcn_0052fbb0();
 	return 1;
 }

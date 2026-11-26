@@ -14,7 +14,7 @@ extern float g_662b08;
 extern void __cdecl d3_SetObjectRotation(void*, float*);
 extern void __cdecl fcn_00438b40(void*, float*);
 extern void __cdecl d3_NormalizeVector(float*);
-extern float __cdecl fcn_004514d0(int, int);
+extern float __cdecl d3_WrapYawDelta(int, int);
 extern void* __cdecl fcn_005e8850(void);
 extern void __stdcall D3DXMatrixTranspose(float*, float*);
 extern int __cdecl d2_GetControlValue(int);
@@ -57,7 +57,7 @@ void __cdecl fcn_00587a50(char* o)
 	D3DXMatrixTranspose(m, ((struct node98*) *(void**) (o + 0x98))->m);
 	v[2] = 0.0f;
 	v[4] = 0.0f;
-	v[3] = fcn_004514d0((int) g_662d40, (int) c) - g_662b08 -
+	v[3] = d3_WrapYawDelta((int) g_662d40, (int) c) - g_662b08 -
 	       *(float*) (o + 0x14);
 	d3_SetObjectRotation(*(void**) (o + 0x9c), v + 2);
 

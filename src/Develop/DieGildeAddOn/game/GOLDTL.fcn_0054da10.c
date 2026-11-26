@@ -14,7 +14,7 @@ int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl cm_RequestPlayAnimation(int, char*, int);
 void __cdecl fcn_00529160(int, int, int, char*);
 void __cdecl he_FreeAction(char*);
@@ -100,7 +100,7 @@ void __cdecl fcn_0054da10(char* a)
 					}
 					hits++;
 					cm_SendCancelCharacterActions(*(int*) p);
-					fcn_004c5da0(*(int*) p, *(int*) (ent + 1), *(int*) (q + 2),
+					ch_StartMovement(*(int*) p, *(int*) (ent + 1), *(int*) (q + 2),
 					    0, 0, (char*) 0x6a5ad0);
 					fcn_00529160(0, 0, *(unsigned short*) e, a);
 				} else {
@@ -142,7 +142,7 @@ ent0:
 				if (e != 0 && *(int*) (e + 0x184) != 0) {
 					fcn_00529160(0, 0, *(unsigned short*) e, a);
 					cm_SendCancelCharacterActions(*(int*) p);
-					fcn_004c5da0(*(int*) p, *(int*) (ent + 1), -1, 0, 1,
+					ch_StartMovement(*(int*) p, *(int*) (ent + 1), -1, 0, 1,
 					    (char*) 0x6a5ad0);
 				} else {
 					*(int*) p = -1;
@@ -224,7 +224,7 @@ ent0:
 
 						fcn_00529160(0, 0, *(unsigned short*) e, a);
 						cm_SendCancelCharacterActions(*(int*) p);
-						fcn_004c5da0(*(int*) p, *(int*) (ent + 1),
+						ch_StartMovement(*(int*) p, *(int*) (ent + 1),
 						    -1, 0, 1, (char*) 0x6a5ad0);
 						cm_RequestPlayAnimation(*(int*) p,
 						    gest[gm_RandomMod(3) & 0xffff],

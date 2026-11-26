@@ -159,7 +159,7 @@ void __cdecl fcn_005bd820(void);
 void __cdecl d2_InitDefaultBookmarks(void);
 void __cdecl fcn_00514f10(void);
 void __cdecl fcn_00514fc0(void);
-void __cdecl fcn_005e2510(void);
+void __cdecl gm_ApplyGameSettings(void);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);
@@ -404,7 +404,7 @@ void __cdecl fcn_005438c0(int a0)
 		fcn_00514fc0();
 		d2_InitDefaultBookmarks();
 	}
-	fcn_005e2510();
+	gm_ApplyGameSettings();
 	fcn_00438da0((float) (g_6a376c - g_6a3764),
 	    (float) (g_6a3770 - g_6a3768), (float) g_6a3764,
 	    (float) g_6a3768, g_10529c8, g_10421a0, g_10432a4,

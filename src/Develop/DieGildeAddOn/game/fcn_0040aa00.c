@@ -11,7 +11,7 @@ extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 extern unsigned char g_6b5c28;
 extern int g_6b5c2c;
 extern int g_6b5c30;
-extern int g_67529c;
+extern unsigned int g_67529c;
 extern int g_67a370;
 
 extern int __cdecl fcn_00402610(char*);

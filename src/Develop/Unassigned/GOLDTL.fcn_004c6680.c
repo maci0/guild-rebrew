@@ -5,16 +5,16 @@
 
 int __cdecl cm_EnqueueClientPacket(char*);
 
-int __cdecl fcn_004c6680(char* s1, int a, int b, char* s2)
+int __cdecl cm_RequestChTalkAction(char* actorName, int arg1, int arg2, char* targetName)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x4e;
-	strcpy(buf + 0x10, s1);
-	*(int*) (buf + 0x28) = a;
-	*(int*) (buf + 0x2c) = b;
-	if (s2 != 0)
-		strcpy(buf + 0x30, s2);
+	strcpy(buf + 0x10, actorName);
+	*(int*) (buf + 0x28) = arg1;
+	*(int*) (buf + 0x2c) = arg2;
+	if (targetName != 0)
+		strcpy(buf + 0x30, targetName);
 	else
 		buf[0x30] = 0;
 	return cm_EnqueueClientPacket(buf);

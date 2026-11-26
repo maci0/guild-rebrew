@@ -11,7 +11,7 @@ char* __cdecl gm_AddObjekt(void);
 int __cdecl fcn_0050d320(char*, unsigned char);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 
 #define MAXV(a, b) ((a) > (b) ? (a) : (b))
 #define MINV(a, b) ((a) < (b) ? (a) : (b))
@@ -54,7 +54,7 @@ int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char*
 						amt = (int) (v1 * ((200.0f - fcn_0050f980(*(unsigned short*) e,
 							*(unsigned short*) (t + 0x27), 1)) * 0.01f) * f1);
 						amt = (int) MINV(MAXV(amt * 0.01, 3200.0), 320000.0);
-						if (fcn_005c6270(e, 0x2c6) != 0) {
+						if (gm_HasActiveSpecialObject(e, 0x2c6) != 0) {
 							amt /= 2;
 						}
 						if (!(amt > funds * 0.44f)) {

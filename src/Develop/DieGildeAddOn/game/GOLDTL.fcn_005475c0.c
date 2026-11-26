@@ -20,7 +20,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
-void __cdecl fcn_004c68c0(Msg* msg);
+void __cdecl cm_RequestElectionOrTrade(Msg* msg);
 
 void __cdecl he_ClearDunkleEcke(void)
 {
@@ -44,7 +44,7 @@ void __cdecl he_ClearDunkleEcke(void)
 			msg.a = -1;
 			msg.b = -1;
 			cm_SendLogAction(g_6a58ac);
-			fcn_004c68c0(&msg);
+			cm_RequestElectionOrTrade(&msg);
 			cm_SendTraceEnd(g_6a58ac);
 		}
 	}

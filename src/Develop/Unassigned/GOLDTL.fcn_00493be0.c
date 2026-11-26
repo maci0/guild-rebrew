@@ -2,7 +2,7 @@
 
 
 int __cdecl gm_LookupEntityRecordById(int a0);
-int __cdecl fcn_005c6270(int a0, int a1);
+int __cdecl gm_HasActiveSpecialObject(int a0, int a1);
 
 /* ADDRESS: GOLDTL 0x00493be0 */
 int __cdecl fcn_00493be0(void* a0)
@@ -58,7 +58,7 @@ int __cdecl fcn_00493be0(void* a0)
 		k = 7;
 		break;
 	}
-	if (fcn_005c6270(v, 0x22e) != 0) {
+	if (gm_HasActiveSpecialObject(v, 0x22e) != 0) {
 		k--;
 	}
 	return k;

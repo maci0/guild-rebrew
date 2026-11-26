@@ -14,7 +14,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl gm_GetScaledEntitySkill(char*, int);
 void __cdecl fcn_00534160(int, int, int, int);
-float __cdecl fcn_004ff040(char*);
+float __cdecl gm_GetEntityHealthRatio(char*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
 int* __cdecl gm_GetEquippedCombatGear(char*);
@@ -57,7 +57,7 @@ void __cdecl fcn_004d5740(char* ids, int originX, int originY)
 		((D2_CONTROL_TL*) (g_1015ea0))[h].value_06c = 1;
 		((D2_CONTROL_TL*) (g_1015ea0))[h].font = 0x56;
 		io_FormatTextBuffer(buf, "%1N1 %i%", *(unsigned short*) rec,
-			     (int) (fcn_004ff040(rec) * 100.0));
+			     (int) (gm_GetEntityHealthRatio(rec) * 100.0));
 		fcn_0046f940(h, buf);
 		p = gm_GetEquippedCombatGear(rec);
 		if (p != 0 && *p != 0) {

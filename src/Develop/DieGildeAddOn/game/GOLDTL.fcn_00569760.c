@@ -8,7 +8,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 int __cdecl fcn_00567170(char*, int*, int*, int);
-int __cdecl fcn_004c5da0(int, int, int, int, int, int);
+int __cdecl ch_StartMovement(int, int, int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -64,7 +64,7 @@ void __cdecl fcn_00569760(char* eventTrack)
 				fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), b.text, 0, 0x5fb, 0);
 				if (*(int*) (e + 0x184) != 0) {
 					if (fcn_00567170(e, &n, (int*) &f, 0) != 0) {
-						fcn_004c5da0(*(int*) (e + 4), n, *(int*) &f, 0, 0, (int) 0x6a69c8);
+						ch_StartMovement(*(int*) (e + 4), n, *(int*) &f, 0, 0, (int) 0x6a69c8);
 					}
 				}
 				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 1));

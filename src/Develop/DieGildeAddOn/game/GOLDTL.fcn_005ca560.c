@@ -29,7 +29,7 @@ extern float g_6660d4;
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
-float __cdecl fcn_004fef80(char*);
+float __cdecl gm_GetEntityHealth(char*);
 
 int __cdecl d2_BuildPersonStatusDesc(Sel* s)
 {
@@ -72,7 +72,7 @@ int __cdecl d2_BuildPersonStatusDesc(Sel* s)
 		}
 	}
 	if (s->x28 == 0) {
-		v = fcn_004fef80(s->e);
+		v = gm_GetEntityHealth(s->e);
 		if (v < g_662cf8) {
 			s->x28 = 0x6d2;
 			return 1;

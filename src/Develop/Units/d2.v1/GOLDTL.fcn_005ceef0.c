@@ -22,8 +22,8 @@ typedef struct Ce800Config {
 int* __cdecl fcn_005b1b10(int a);
 int* __cdecl fcn_005b1b30(int a);
 void __cdecl fcn_005b1e20(int a);
-void __cdecl fcn_005b1ce0(int a, unsigned int b, unsigned int c);
-void __cdecl fcn_005b1ed0(int a, float v);
+void __cdecl gm_AdjustProductionShare(int a, unsigned int b, unsigned int c);
+void __cdecl hp_SetProdSettingScale(int a, float v);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_SetForm(int a, int b);
 void __cdecl fcn_005340f0(int a);
@@ -118,7 +118,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 						if (v23 < 7 && v12[v23] != -1) {
 							g_100f1dc = -1;
 							v5 = d2_GetControlValue(v12[v23]);
-							fcn_005b1ce0(a0,
+							gm_AdjustProductionShare(a0,
 								*(unsigned int*) ((char*) v27 + v23 * 8),
 								v5);
 							v23 = 0;
@@ -138,7 +138,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 				} while (v23 < 7);
 			} else if (!g_775348 && v13 != -1 && d2_CurrentElementId == v13) {
 				v18[0] = d2_GetControlValue(v13);
-				fcn_005b1ed0(a0, (float) v18[0] * 0.01f);
+				hp_SetProdSettingScale(a0, (float) v18[0] * 0.01f);
 			}
 		}
 		if (g_14ce8d8 && d2_CurrentElementId != -1) {
@@ -172,7 +172,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 						if (v23 == v12[v22]) {
 							if (v22 < 7) {
 								v5 = d2_GetControlValue(v12[v22]);
-								fcn_005b1ce0(a0,
+								gm_AdjustProductionShare(a0,
 									*(unsigned int*) ((char*) v27 + v22 * 8), v5);
 								v23 = 0;
 								v26 = (unsigned char*) v27 + 4;

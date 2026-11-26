@@ -20,7 +20,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_00535960(void);
 int __cdecl cm_GetCommandStatus(int h);
 int __cdecl amt_FindOfficeSlotByKey(unsigned char c, void *out);
-int __cdecl fcn_004e8b40(int i, void *out);
+int __cdecl amt_GetRoleTemplate(int i, void *out);
 int __cdecl amt_FindOfficeSlotByType(int i, void *out);
 int __cdecl amt_AssignOfficeHolder(int a, void *p, int b);
 void __cdecl fcn_004fee50(void *p, int h);
@@ -170,7 +170,7 @@ int __cdecl fcn_00511c60(void)
 	for (i = 0; i < 0x1e; i++) {
 		v36 = 2;
 		amt_FindOfficeSlotByKey(shuffledIds[i], v34);
-		fcn_004e8b40(v34[2] & 0xff, v35);
+		amt_GetRoleTemplate(v34[2] & 0xff, v35);
 		v37 = (char) (int) ((float) gm_RandomMod(0x2a) +
 				    (float) ((v35[2] & 0xff) / 3 + 1) *
 				    21.0f);

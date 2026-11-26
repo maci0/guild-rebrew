@@ -14,7 +14,7 @@ struct house {
 	char pad85[0x197];
 };
 
-void __cdecl fcn_004c6ba0(int, int, int);
+void __cdecl cm_RequestModifyEntityLevel(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 
@@ -47,8 +47,8 @@ void __cdecl he_SwapZigeunerMoods(struct house* a, struct house* b)
 	if (loi == hii || loi <= -1 || hii <= -1) {
 		return;
 	}
-	fcn_004c6ba0(b->owner, loi, hi - lo);
-	fcn_004c6ba0(b->owner, hii, lo - hi);
+	cm_RequestModifyEntityLevel(b->owner, loi, hi - lo);
+	cm_RequestModifyEntityLevel(b->owner, hii, lo - hi);
 	if (b == a) {
 		id = 0x41dd;
 		strcpy(name, "_NACHRICHTEN_ZIGEUNER_02");

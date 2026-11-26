@@ -4,7 +4,7 @@ extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c06;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 extern char g_7f4ca2[];
 extern char g_7f4ca4[];
 extern unsigned char g_773d75;

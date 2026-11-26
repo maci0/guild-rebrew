@@ -13,7 +13,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl gm_CheckPrivilege(int k, char* e, Query* q);
 int __cdecl fcn_00504f30(int k, int id);
-int __cdecl fcn_004a48e0(char* e, int k);
+int __cdecl gm_PickRandomOrNearestBuilding(char* e, int k);
 
 int __cdecl ai_PrepareBuildSite(char* action, char* e, char* mode, char* cmd, char* out, int want)
 {
@@ -64,7 +64,7 @@ int __cdecl ai_PrepareBuildSite(char* action, char* e, char* mode, char* cmd, ch
 	if (want == 0) {
 		return 1;
 	}
-	r = fcn_004a48e0(e, *(int*) (cmd + 4));
+	r = gm_PickRandomOrNearestBuilding(e, *(int*) (cmd + 4));
 	if (r == 0) {
 		return 0;
 	}

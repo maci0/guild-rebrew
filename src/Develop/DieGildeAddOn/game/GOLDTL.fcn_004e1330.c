@@ -29,7 +29,7 @@ extern char* g_14a9a5c;
 extern char g_6b5c60[];
 
 Ent* __cdecl gm_LookupEntityRecordById(int);
-float __cdecl fcn_004ff040(Ent*);
+float __cdecl gm_GetEntityHealthRatio(Ent*);
 void __cdecl he_SendCmdMessage(Ent*, Cmd*, char*, char*);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -61,13 +61,13 @@ int __cdecl fcn_004e1330(char* event)
 		}
 		return 0;
 	}
-	if (fcn_004ff040(a) <= 0.0f) {
+	if (gm_GetEntityHealthRatio(a) <= 0.0f) {
 		if (b->kind == 6 || b->kind == 7) {
 			fcn_00545d40((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[b->id].entity_id), -1, g_14a9a58, 0, 0x5ec, 0);
 		}
 		return 0;
 	}
-	if (fcn_004ff040(b) <= 0.0f) {
+	if (gm_GetEntityHealthRatio(b) <= 0.0f) {
 		if (a->kind == 6 || a->kind == 7) {
 			fcn_00545d40((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[a->id].entity_id), -1, g_14a9a58, 0, 0x5ec, 0);
 		}

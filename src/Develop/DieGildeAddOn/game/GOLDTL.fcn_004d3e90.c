@@ -2,7 +2,7 @@
 char* __cdecl gm_GetEquippedCombatGear(void* obj);
 char* __cdecl gm_FindEntityActiveItem(void* obj);
 float __cdecl fcn_004ce8b0(void* obj);
-float __cdecl fcn_004ff040(void* obj);
+float __cdecl gm_GetEntityHealthRatio(void* obj);
 
 /* ADDRESS: GOLDTL 0x004d3e90 */
 float __cdecl fcn_004d3e90(void* obj, unsigned int mode)
@@ -51,7 +51,7 @@ float __cdecl fcn_004d3e90(void* obj, unsigned int mode)
 		if (*(char*) ((char*) obj + 0x1c4) == 2) {
 			return 0.2f;
 		}
-		return 1.0f / fcn_004ff040(obj);
+		return 1.0f / gm_GetEntityHealthRatio(obj);
 	case 3:
 		r = 1.0f; break;
 	}

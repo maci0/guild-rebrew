@@ -8,7 +8,7 @@ void __cdecl fcn_0044e190(void*, void*);
 void __cdecl CloseVfsStream(void*);
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_0044f8e0(char*);
+void __cdecl d3_ComputeBoundsAndBox(char*);
 void __cdecl d3_CalculateMeshNormals(char*);
 int __cdecl fcn_0044fba0(char*, char*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
@@ -374,7 +374,7 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 	}
 	obj->anzahl_mat = info.anzahl_mat;
 	obj->f1e8 = 0;
-	fcn_0044f8e0((char*) obj);
+	d3_ComputeBoundsAndBox((char*) obj);
 	d3_CalculateMeshNormals((char*) obj);
 	len = vfs_ftell(stream);
 	vfs_fseek(stream, 0, 0);

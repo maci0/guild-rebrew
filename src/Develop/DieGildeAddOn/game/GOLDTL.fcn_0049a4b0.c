@@ -15,7 +15,7 @@ float* __cdecl fcn_005c61e0(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049a4b0 */
-int __cdecl fcn_0049a4b0(char* e, int* p, int* q)
+int __cdecl ai_RunUseObjectAnsehen(char* e, int* p, int* q)
 {
 	float* d;
 	unsigned short* s;

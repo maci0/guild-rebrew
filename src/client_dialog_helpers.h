@@ -107,9 +107,9 @@ extern unsigned char* lpGebaeudeINST;
 void __cdecl fcn_00472c30(int x0, int y0, int x1, int y1, int r, int g, int b);
 
 /* Graph drawers, all matched RELOC. */
-void __cdecl fcn_005d3980(GRAPH_VALUE cur, int w, int h);
+void __cdecl d2_DrawYellowHistoryGraph(GRAPH_VALUE cur, int w, int h);
 void __cdecl fcn_005d3ad0(GRAPH_VALUE cur, int w, int h);
-void __cdecl fcn_005d3c20(GRAPH_VALUE cur, int w, int h);
+void __cdecl d2_DrawRedHistoryGraph(GRAPH_VALUE cur, int w, int h);
 
 /* Panel begin and window selection. */
 void __cdecl d2_ClearPaintbox(void);

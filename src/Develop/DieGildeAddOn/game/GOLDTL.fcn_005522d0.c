@@ -15,7 +15,7 @@ void* __cdecl cm_GetCommandResult(unsigned int id);
 unsigned int __cdecl fcn_004c5620(int state, void* ev);
 void __cdecl cm_RequestKillSpieler(unsigned int h, int flag);
 void __cdecl cm_SendCancelCharacterActions(unsigned int h);
-void __cdecl fcn_004c5da0(unsigned int h, unsigned int id, int a3, int a4, int a5, char* tag);
+void __cdecl ch_StartMovement(unsigned int h, unsigned int id, int a3, int a4, int a5, char* tag);
 void __cdecl gm_AddTime(void* q, int a2, int a3, int a4);
 float __cdecl gm_ApplyPlagueInfection(char* entity);
 void* __cdecl gm_LookupEntityRecordById(unsigned int slot_id);
@@ -24,7 +24,7 @@ void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 int __cdecl gm_IsEntityAtBuilding(char* a, char* b);
 void __cdecl he_FreeAction(void* ev);
 void __cdecl fcn_005498b0(char* a1, char* a2, char* a3, char* a4, int a5, float a6);
-void __cdecl fcn_00551f90(void* ev);
+void __cdecl he_RunPlagueSpread(void* ev);
 void __cdecl he_NotifyPlagueInfection(char* a1, char* a2);
 typedef struct { unsigned char kind; char unknown[0x24c]; } BUILDING_PROT_5522;
 /* ADDRESS: GOLDTL 0x005522d0 */
@@ -72,7 +72,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 		return;
 	}
 	if (*(int*) (ev + 0x70) == 5) {
-		fcn_00551f90(ev);
+		he_RunPlagueSpread(ev);
 	}
 	switch (*(unsigned int*) (ev + 0x70)) {
 	case 0:
@@ -127,7 +127,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 			if (p) {
 				cm_SendCancelCharacterActions(*(unsigned int*) ((char*) p + 4));
-				fcn_004c5da0(*(unsigned int*) ((char*) p + 4),
+				ch_StartMovement(*(unsigned int*) ((char*) p + 4),
 					*(unsigned int*) ((char*) rec + 1), -1, 0, 1, s_6a5b84);
 				count++;
 			}
@@ -232,7 +232,7 @@ after_scan:
 			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 			if (p) {
 				cm_SendCancelCharacterActions(*(unsigned int*) ((char*) p + 4));
-				fcn_004c5da0(*(unsigned int*) ((char*) p + 4),
+				ch_StartMovement(*(unsigned int*) ((char*) p + 4),
 					*(unsigned int*) ((char*) rec + 1), -1, 0, 1, s_6a5b84);
 				count++;
 			}

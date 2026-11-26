@@ -15,7 +15,7 @@ extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
-int __cdecl fcn_0050b810(int a, char b);
+int __cdecl gm_SumQueryEntryValues(int a, char b);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 int __cdecl ai_PrepareSecretRoomAction0(char* actor, char* action_out, char* target_out)
@@ -34,7 +34,7 @@ int __cdecl ai_PrepareSecretRoomAction0(char* actor, char* action_out, char* tar
 		return 0;
 	}
 	t = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);
-	have = (int) (fcn_0050b810(*(int*) (actor + 0x178), (*(char*)&g_773d75)) * 0.25f);
+	have = (int) (gm_SumQueryEntryValues(*(int*) (actor + 0x178), (*(char*)&g_773d75)) * 0.25f);
 	need = gm_WalkEntityChain(*(unsigned short*) actor);
 	need = (int) ((gm_WalkEntityChain(t->entity_index) + need) * 0.02f);
 	if (have < need) {

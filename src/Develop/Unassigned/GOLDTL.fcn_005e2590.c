@@ -11,7 +11,7 @@ extern unsigned char g_7766a4[4];
 extern float g_681750;
 extern float g_6819b0;
 
-void __cdecl fcn_00427370(int);
+void __cdecl sb_SetMasterVolume(int);
 void __cdecl SetMasterVolume(int);
 void __cdecl fcn_004c3140(int);
 
@@ -20,7 +20,7 @@ void __cdecl msx_ApplyAudioSettings(void)
 	float s;
 
 	s = RED((*(unsigned long*)g_7766a0)) * (1.0f / 127.0f);
-	fcn_00427370((int) (GREEN((*(unsigned long*)g_7766a0)) * s));
+	sb_SetMasterVolume((int) (GREEN((*(unsigned long*)g_7766a0)) * s));
 	SetMasterVolume((int) (BLUE((*(unsigned long*)g_7766a0)) * s));
 	fcn_004c3140((int) (GREEN((*(unsigned long*)g_7766a0)) * s));
 	g_681750 = ALPHA((*(unsigned long*)g_7766a0)) * (1.0f / 127.0f);

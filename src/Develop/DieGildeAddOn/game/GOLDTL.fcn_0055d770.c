@@ -37,10 +37,10 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_FindRecordById(int);
 void __cdecl fcn_0055d6e0(char* e, char* r);
 void __cdecl cm_SendCancelCharacterActions(int);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl cm_RequestMoveObjekt(int, int, int);
 #include "client_scene_transform.h"
-int __cdecl fcn_00505340(char*);
+int __cdecl gm_IsWarehouse(char*);
 void __cdecl fcn_004c5d20(int, int);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -77,7 +77,7 @@ void __cdecl fcn_0055d770(char* e)
 	fcn_0055d6e0(e, r);
 	if (e[0xd0] == 0) {
 		cm_SendCancelCharacterActions(*(int*) (r + 2));
-		fcn_004c5da0(*(int*) (r + 2), *(int*) (c + 1), -1, 0, 1, "Trans");
+		ch_StartMovement(*(int*) (r + 2), *(int*) (c + 1), -1, 0, 1, "Trans");
 		*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (s44 + 1), *(int*) (b + 1), *(int*) (r + 2));
 		e[0xd0] = 1;
 	} else {
@@ -85,16 +85,16 @@ void __cdecl fcn_0055d770(char* e)
 		if (o != 0 && *(int*) (o + 0x128) == 0 &&
 		    ((*(int*) (o + 0x88) == 0x10432c0 && CompareVector3WithinTolerance((float*) (*(char**) (o + 0x34) + 0x4c), (float*) (e + 0xd8), 100.0f)) ||
 		     *(int*) (e + 0xd4) > 6)) {
-			if (!fcn_00505340(c)) {
+			if (!gm_IsWarehouse(c)) {
 				*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
 				fcn_004c5d20(*(int*) (r + 2), 0);
 			}
 			cm_RequestChangeBits(*(int*) (r + 2), 0x13, 1, 0, 0x40);
-			if (fcn_00505340(c)) {
+			if (gm_IsWarehouse(c)) {
 				io_FormatTextBuffer(buf, 0x1c43);
 			} else if (lv->kind != 0x1d && lv->kind != 0x1f) {
 				io_FormatTextBuffer(buf, 0x1c41, 1, 0x1c39, b, *(unsigned short*) (c + 0x27), c);
-			} else if (fcn_00505340(c)) {
+			} else if (gm_IsWarehouse(c)) {
 				io_FormatTextBuffer(buf, 0x1c43);
 			} else {
 				io_FormatTextBuffer(buf, 0x1c44, c);
@@ -105,7 +105,7 @@ void __cdecl fcn_0055d770(char* e)
 					if (g_7746c4 == c) {
 						goto done;
 					}
-					if (fcn_00505340(c) && g_7746cc != 0) {
+					if (gm_IsWarehouse(c) && g_7746cc != 0) {
 						w = *g_7746cc;
 						if ((w >= 0x92 && w <= 0x97) || w == 0x2db) {
 							goto done;

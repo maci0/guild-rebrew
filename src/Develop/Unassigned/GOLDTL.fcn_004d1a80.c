@@ -11,7 +11,7 @@ typedef struct
 // SIZE 0x21c
 
 extern int g_67a370;
-extern Ent21c g_9b4a40[32];
+extern int g_9b4a40[];
 extern char* ch_ContextCharacters[32];
 
 void __cdecl fcn_004d1a80(void)
@@ -27,8 +27,8 @@ void __cdecl fcn_004d1a80(void)
 		if (n >= 31) {
 			break;
 		}
-		if (g_9b4a40[i].ref != 0 && *(int*) (g_9b4a40[i].ref + 0x88) == self) {
-			((Ent21c**)ch_ContextCharacters)[n] = &g_9b4a40[i];
+		if (((Ent21c*) g_9b4a40)[i].ref != 0 && *(int*) (((Ent21c*) g_9b4a40)[i].ref + 0x88) == self) {
+			((Ent21c**)ch_ContextCharacters)[n] = &((Ent21c*) g_9b4a40)[i];
 			n++;
 		}
 	}

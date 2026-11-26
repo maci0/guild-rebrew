@@ -19,10 +19,10 @@ int __cdecl cm_RequestMoveCredits();
 int __cdecl cm_SendCopyEntityData();
 int __cdecl fcn_00502cd0();
 int __cdecl fcn_00509570();
-int __cdecl fcn_0050b810();
+int __cdecl gm_SumQueryEntryValues();
 int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
-int __cdecl fcn_00525fb0();
+int __cdecl d2_CheckOwnerBlocked();
 int __cdecl gm_CheckEntityStock();
 int __cdecl fcn_00526120();
 int __cdecl fcn_00532ef0();
@@ -110,7 +110,7 @@ void __cdecl d2_ShowLagerOptions(unsigned char *a0,int a1)
 	int kind;
 	unsigned char frame[0x724];
   v2 = a0;
-  v3 = fcn_00525fb0(a0);
+  v3 = d2_CheckOwnerBlocked(a0);
   if (v3)
     return;
   kind = (unsigned int)*v2;
@@ -194,7 +194,7 @@ label_5be43c:
         if (v6)
           v8 += *(int *)(v6 + 0xb4);
         v9 = fcn_005bdfc0(v4,v2,v15,v8);
-        fcn_0050b810(*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4e18),g_773d75);
+        gm_SumQueryEntryValues(*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4e18),g_773d75);
         if (v9 != 1) { // branch-flip
           if ((v9 == 2) && (v11 = g_773d75, v15 = (unsigned int)g_774970, gm_CheckEntityStock(v15 * 0x21c + 0x7f4ca0,8000,v11))) {
             v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);

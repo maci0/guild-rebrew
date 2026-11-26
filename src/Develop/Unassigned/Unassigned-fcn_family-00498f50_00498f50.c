@@ -5,7 +5,7 @@ int __cdecl gm_CheckPrivilege(int a1, char* a2, int a3);
 int __cdecl gm_CheckPrivilege(int a1, char* a2, int a3);
 
 /* ADDRESS: GOLDTL 0x00498f50 */
-int __cdecl fcn_00498f50(int busy, char* name)
+int __cdecl ai_StartMedicusAufsuchen(int busy, char* name)
 {
 	int buf[0x88];
 
@@ -17,7 +17,7 @@ int __cdecl fcn_00498f50(int busy, char* name)
 }
 
 /* ADDRESS: GOLDTL 0x00498fb0 */
-int __cdecl fcn_00498fb0(char* name)
+int __cdecl ai_RunMedicusAufsuchen(char* name)
 {
 	int buf[0x88];
 

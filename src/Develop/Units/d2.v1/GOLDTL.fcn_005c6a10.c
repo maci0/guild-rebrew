@@ -30,7 +30,7 @@ int __cdecl fcn_0046f100(int, int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_00507c30(int);
 void __cdecl fcn_00473690(int, int);
-float __cdecl fcn_004ff040(int);
+float __cdecl gm_GetEntityHealthRatio(int);
 
 /* ADDRESS: GOLDTL 0x005c6a10 */
 unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int form)
@@ -82,7 +82,7 @@ unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int for
 		}
 		d2_CurrentWindowId = g_7774a0[i].window;
 		io_AppendText(0x6ac790, *(unsigned short*) g_7774a0[i].entity,
-			(int) (fcn_004ff040(g_7774a0[i].entity) * 100.0));
+			(int) (gm_GetEntityHealthRatio(g_7774a0[i].entity) * 100.0));
 		io_AppendText(0x16ac);
 		fcn_00534160(0x50, 0x16, *(unsigned char*) (g_7774a0[i].entity + 0x83), 0x4f1);
 		io_AppendText(0x16ad);

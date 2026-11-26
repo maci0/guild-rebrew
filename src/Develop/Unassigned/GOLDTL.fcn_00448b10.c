@@ -1,6 +1,6 @@
 #include <string.h>
 #include "Develop/Units/d3/d3_camera.h"
-extern char g_14cf950, g_1040600; extern char* d3_ObjectListHead;
+extern char g_14cf950; extern unsigned char g_1040600; extern char* d3_ObjectListHead;
 int __cdecl fcn_00436aa0(void *flags);
 int __cdecl fcn_00436f70(int enable);
 void *__cdecl fcn_00437890(void *node);

@@ -3,7 +3,7 @@ extern int d3_CurrentContextIndex;
 extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 extern float g_6628a0;
 extern float g_664154;
 
@@ -22,7 +22,7 @@ void *__cdecl gm_GetEntityTableEntry(void *);
 void __cdecl fcn_00529160(int, int, int, void *);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_004c5da0(int, int, int, int, int, char *);
+int __cdecl ch_StartMovement(int, int, int, int, int, char *);
 void *__cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AddTime(void *, int, int, int);
 int __cdecl he_DetectNearbyPatrolAction(void *);
@@ -31,7 +31,7 @@ int __cdecl fcn_004f4f60(int, int, int, int, int);
 int __cdecl gm_CompareGameTime(void *, int *);
 float __cdecl fcn_00507e70(void *, void *, int);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_005c6270(void *, int);
+int __cdecl gm_HasActiveSpecialObject(void *, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, char *);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -106,7 +106,7 @@ void __cdecl fcn_00561380(void *action)
 				*(int *)(p + 0x70) = -1;
 				return;
 			}
-			*(int *)(p + 0xc8) = fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(r + 1), -1, 0, 1, g_6a6560);
+			*(int *)(p + 0xc8) = ch_StartMovement(*(int *)(p + 0xc4), *(int *)(r + 1), -1, 0, 1, g_6a6560);
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 			return;
 		}
@@ -151,7 +151,7 @@ void __cdecl fcn_00561380(void *action)
 				return;
 			}
 			cm_RequestPlayAnimation(*(int *)(p + 0xc4), g_68bef4, 1);
-			fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
+			ch_StartMovement(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 			return;
 		}
@@ -189,7 +189,7 @@ void __cdecl fcn_00561380(void *action)
 				gm_AddTime((void *)(p + 0x52), 0, 6, 0);
 				return;
 			}
-			fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
+			ch_StartMovement(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
 			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;
 			gm_AddTime((void *)(p + 0x52), 0, 4, 0);
 			*(int *)(p + 0x70) = 6;
@@ -216,7 +216,7 @@ void __cdecl fcn_00561380(void *action)
 			dist = fcn_00507e70(recB, recA, 2);
 			if (!(gm_RandomFloat01() + dist >= 1.0f))
 				goto label_561a7a;
-			if (fcn_005c6270(recA, 0x2c0) == 0) {
+			if (gm_HasActiveSpecialObject(recA, 0x2c0) == 0) {
 			io_FormatTextBuffer(text, 0x1735, *(unsigned short *)recA, r);
 			he_MessageBoxQuickjump(*(int *)(recB + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
 			if (*(unsigned short *)(r + 0x27) != 0xffff) {
@@ -249,7 +249,7 @@ void __cdecl fcn_00561380(void *action)
 		label_561a7a:
 			recA = (unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)];
 			recB = (unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)];
-			if (fcn_005c6270(recA, 0x2c0)) {
+			if (gm_HasActiveSpecialObject(recA, 0x2c0)) {
 				fcn_005100f0(*(int *)(recB + 4), -1);
 				if (*(unsigned char *)(recB + 2) == 6 || *(unsigned char *)(recB + 2) == 7) {
 					io_FormatTextBuffer(text, 0x1013, *(unsigned short *)recA, r);

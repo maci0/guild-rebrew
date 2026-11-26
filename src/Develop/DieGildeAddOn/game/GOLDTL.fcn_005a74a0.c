@@ -22,7 +22,7 @@ extern int g_7e2700;
 
 
 int __cdecl fcn_00506380(int id, unsigned char* store, int a, int b);
-int __cdecl fcn_005a7400(unsigned char* p, int* lo, int* hi);
+int __cdecl gm_IsGebaeudeOpen(unsigned char* p, int* lo, int* hi);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005263d0(char*, char*, int);
 
@@ -53,7 +53,7 @@ int __cdecl gm_CanEnterGebaeude(unsigned char* p)
 				if ((r & 1) == 0) {
 					return 0;
 				}
-				if (fcn_005a7400(p, (int*) &a, &b) == 0) {
+				if (gm_IsGebaeudeOpen(p, (int*) &a, &b) == 0) {
 					strcpy(title, g_14ad474);
 					x = a;
 					if (((*(int*)&g_7f4c04) & 0xffff) < x) {

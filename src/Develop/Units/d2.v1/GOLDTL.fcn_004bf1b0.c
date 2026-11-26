@@ -32,7 +32,7 @@ void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
-int __cdecl fcn_0050dfd0(int, int);
+int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 void __cdecl d2_SetElementValue(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -97,7 +97,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 	
 	n = counts[*(unsigned short*) rec - 0x134];
 	item = fcn_00502cd0(*(int*) (rec + 0x14), 1, 0, 0x1dd);
-	value = fcn_0050dfd0((int) item, 0);
+	value = gm_GetStorageSlotCapacity((int) item, 0);
 	icons[0] = -1;
 	icons[1] = -1;
 	icons[2] = -1;

@@ -2,7 +2,7 @@
 char* __cdecl fcn_00503fe0(int a, int b, int c);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_SendCancelCharacterActions(int id);
-void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* label);
+void __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* label);
 int __cdecl fcn_00529160(int a, int b, int c, int d);
 int __cdecl gm_AddTime(char* sel, int a, int b, int c);
 int __cdecl gm_GetBuildingTechEffect(char* e, int a, int b);
@@ -20,7 +20,7 @@ char* __cdecl cut_FindCutsceneById(int h);
 char* __cdecl fcn_00504b30(char* p);
 void __cdecl he_FreeAction(char* e);
 int __cdecl fcn_004d5450(char* e);
-int __cdecl fcn_004d5110(char* a, char* b, char* c, char* d);
+int __cdecl gm_TransferAndSellAssets(char* a, char* b, char* c, char* d);
 int __cdecl memset(void* dst, int c, unsigned int n);
 extern pos14_7f4c00 gm_GameTime;
 /* ADDRESS: GOLDTL 0x0056bfd0 */
@@ -53,7 +53,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 				if (j != -1) {
 					slot = (int) gm_LookupEntityRecordById(j);
 					cm_SendCancelCharacterActions(*ids);
-					fcn_004c5da0(*ids, *(int*) (e2 + 1),
+					ch_StartMovement(*ids, *(int*) (e2 + 1),
 					    -1, 0, 0, (char*) 0x6a6aac);
 					fcn_00529160((int) e2, 0,
 					    *(unsigned short*) slot,
@@ -194,7 +194,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 			}
 			e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 			target = fcn_00503fe0(1, 1, *(int*) (ent + 0xac));
-			j = fcn_004d5110(target, e2, (char*) (0x7f4ca0
+			j = gm_TransferAndSellAssets(target, e2, (char*) (0x7f4ca0
 			    + *(unsigned short*) (ent + 8) * 0x21c),
 			    (char*) (0x7f4ca0
 			    + *(unsigned short*) (e2 + 0x27) * 0x21c));
@@ -292,7 +292,7 @@ tail:
 				if (target != 0) {
 					cm_SendCancelCharacterActions(*(int*) (target + 4));
 					if (e2 != 0) {
-						fcn_004c5da0(
+						ch_StartMovement(
 						    *(int*) (target + 4),
 						    *(int*) (e2 + 1),
 						    *(int*) ((char*) slot + 2),

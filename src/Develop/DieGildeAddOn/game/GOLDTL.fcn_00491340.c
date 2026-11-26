@@ -10,7 +10,7 @@ int __cdecl fcn_004f4830(int idx, void* dst);
 float __cdecl gm_GetBuildingLevelRatio(void);
 char* __cdecl gm_GetGuildHall(int k);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0050b810(int a, char b);
+int __cdecl gm_SumQueryEntryValues(int a, char b);
 int __cdecl amt_CalcTotalOfficeSalaries(void);
 
 int __cdecl ai_EvalSteuernLaw0f(char* entity, char* unused, int* out)
@@ -28,7 +28,7 @@ int __cdecl ai_EvalSteuernLaw0f(char* entity, char* unused, int* out)
 	gm_GetBuildingLevelRatio();
 	p = gm_GetGuildHall(1);
 	p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
-	v = fcn_0050b810(*(int*) (p + 0x14), (*(char*)&g_773d75));
+	v = gm_SumQueryEntryValues(*(int*) (p + 0x14), (*(char*)&g_773d75));
 	t = amt_CalcTotalOfficeSalaries();
 	if (v < t * 3) {
 		lvl = 4;

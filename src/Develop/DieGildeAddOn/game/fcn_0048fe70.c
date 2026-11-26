@@ -4,7 +4,7 @@ int __cdecl fcn_0047d220(char* p);
 void* __cdecl fcn_004f18d0(char* a1, char* a2, int a3, int a4, int a5);
 int __cdecl fcn_004f4550(int a, int b, int c, int* out);
 int __cdecl fcn_0050d320(int a, char b);
-int __cdecl fcn_004f4440(char* a1, int a2, int a3, int a4, int* out);
+int __cdecl gm_CalcBribeOrPriceScore(char* a1, int a2, int a3, int a4, int* out);
 int __cdecl fcn_004f1790(int a, int* b);
 int __cdecl fcn_0042e410(int a);
 extern unsigned char* lpGebaeudePROT;
@@ -105,7 +105,7 @@ int __cdecl fcn_0048fe70(int a0, char* actorEntity, int a2, int* a3, int* a4, in
 		v4 = (int*) fcn_004f18d0(0, (char*) v9, 0, 0x4f1840, 0xff);
 		if (v4 != 0) {
 			int t, r;
-			t = fcn_004f4440((int) actorEntity, 0xff, *v4, 1, &r);
+			t = gm_CalcBribeOrPriceScore((int) actorEntity, 0xff, *v4, 1, &r);
 			m = fcn_0050d320((int) actorEntity, g_773d75);
 			if ((int) ((float) m * g_664160) < t) {
 				return 0;

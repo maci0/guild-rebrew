@@ -54,7 +54,7 @@ typedef struct
 
 void* __cdecl fcn_00534c40(unsigned int, int, char, ...);
 void __cdecl fcn_005350d0(char*);
-void __cdecl fcn_00534c20(char*);
+void __cdecl d2_HandleBookPageButton(char*);
 int __cdecl fcn_00517c00(int, int, int, char*);
 char* __cdecl fcn_0050dc90(int);
 void __cdecl d2_SetForm(int, int);
@@ -76,7 +76,7 @@ void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_SendTraceEnd(int);
 void __cdecl d2_UpdateGauge(unsigned char*, Row*, int);
-void __cdecl fcn_005b5c70(Row*);
+void __cdecl d2_ClearGauge(Row*);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00505d00(unsigned char*, int*);
@@ -254,7 +254,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 			*(int*) 0x774654 = 1;
 		}
 		fcn_005350d0(win);
-		fcn_00534c20(win);
+		d2_HandleBookPageButton(win);
 		fcn_005b6130((int) win, building);
 		if (*(unsigned char*) 0x14cf950 == 0xcd) {
 			fcn_00535550(win);
@@ -315,7 +315,7 @@ keep_gage:
 clear_gage:
 		if (gage.x1c != -1) {
 			gage.obj = 0;
-			fcn_005b5c70(&gage);
+			d2_ClearGauge(&gage);
 			hA = -1;
 		}
 after_gage:

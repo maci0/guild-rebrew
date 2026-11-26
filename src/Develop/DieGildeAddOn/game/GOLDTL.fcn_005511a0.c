@@ -8,7 +8,7 @@ extern int __cdecl fcn_004c5620(int a, void* b);
 
 
 /* ADDRESS: GOLDTL 0x005511a0 */
-void __cdecl fcn_005511a0(char* a0)
+void __cdecl he_RunAction0x5a(char* a0)
 {
 	int state;
 

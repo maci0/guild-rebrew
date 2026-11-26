@@ -59,7 +59,7 @@ void __cdecl fcn_004d2a60(ShiftDlg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowMessageBox(char*, unsigned int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
-void __cdecl fcn_004d5110(int, int, int, int);
+void __cdecl gm_TransferAndSellAssets(int, int, int, int);
 void __cdecl fcn_004d52a0(ShiftDlg*, int, int, int, float);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x004d77e0 */
@@ -207,7 +207,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		if (changed == *(int*) &g_772e9c) {
 			v = gm_StartFilteredEntitySearch(1, 1, p->owner);
 			w = gm_StartFilteredEntitySearch(1, 1, p->actor);
-			fcn_004d5110(w, v, *(int*) &g_772e9c, *(int*) 0x772e98);
+			gm_TransferAndSellAssets(w, v, *(int*) &g_772e9c, *(int*) 0x772e98);
 		}
 		return;
 	}

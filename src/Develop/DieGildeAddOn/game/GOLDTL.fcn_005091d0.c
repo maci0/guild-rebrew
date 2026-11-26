@@ -12,7 +12,7 @@ struct StatRow {
 	int points;
 };
 
-int __cdecl fcn_004e8b40(int, int*);
+int __cdecl amt_GetRoleTemplate(int, int*);
 int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl sprintf(char*, const char*, ...);
@@ -66,9 +66,9 @@ void __cdecl fcn_005091d0(int* pn, StatRow* rows)
 		}
 		r->v18 = (float) sum * 0.0007936508f;
 		r->vc = (float) *(unsigned char*) (off + 0x7f4cad) * 0.11111111f;
-		fcn_004e8b40(*(unsigned char*) (off + 0x7f4e06), tmp);
+		amt_GetRoleTemplate(*(unsigned char*) (off + 0x7f4e06), tmp);
 		statValue = (float) (tmp[2] & 0xff);
-		fcn_004e8b40(*(unsigned char*) (r->id * 0x21c + 0x7f4e09), tmp);
+		amt_GetRoleTemplate(*(unsigned char*) (r->id * 0x21c + 0x7f4e09), tmp);
 		r->v10 = ((float) (tmp[2] & 0xff) + statValue) * 0.07692308f;
 		fsum = 0.0f;
 		cnt = 0;

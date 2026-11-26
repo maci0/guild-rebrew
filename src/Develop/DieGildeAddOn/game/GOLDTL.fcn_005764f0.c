@@ -13,7 +13,7 @@ unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl ahm_SendSetFloatValue(char*, float);
 int __cdecl fcn_004c5620(int, char*);
-int __cdecl fcn_004ecf00(char*, int*, int*, int);
+int __cdecl he_GetActionProgress(char*, int*, int*, int);
 void __cdecl sub_00576750(char*, char*, char*, int);
 void __cdecl he_FreeAction(char*);
 
@@ -51,7 +51,7 @@ void __cdecl he_RunAhmAction0x98(char* e)
 		fcn_004c5620(0, e);
 		return;
 	}
-	s = fcn_004ecf00(*(char**) (o + 0x16c), &b, &a, 1);
+	s = he_GetActionProgress(*(char**) (o + 0x16c), &b, &a, 1);
 	if ((gm_RandomFloat01() + 1.0f) * 0.25f > *(float*) (sp + 4)) {
 		sub_00576750(o, e, *(char**) (o + 0x16c), s);
 		fcn_004c5620(0, e);

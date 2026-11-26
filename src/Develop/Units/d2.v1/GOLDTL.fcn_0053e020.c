@@ -1,5 +1,5 @@
 extern int g_7e2468;
-extern int g_7e2430;
+extern char g_7e2430[5];
 extern char g_7e23e3;
 extern int g_14abee0[];
 extern int g_774654;
@@ -130,7 +130,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 				} else if (r == 0) {
 					if (d2_ShowChooseProfessionDialog(0xc6) != 0) {
 						v11 = fcn_00506d50((unsigned char) g_7e23e3);
-						*(Name5_53e020*) &g_7e2430 = *(Name5_53e020*) &v11;
+						*(Name5_53e020*) g_7e2430 = *(Name5_53e020*) &v11;
 						g_7e2468 = gm_FindHeadIconIndex(0x6a3db4) + 0x639;
 					} else {
 						d3_SelectSceneContext(0, 0);

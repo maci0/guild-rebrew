@@ -13,7 +13,7 @@ extern char g_68bd14[];
 extern char g_68bcec[];
 
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c2c50(char*);
+void __cdecl msx_OverrideMusicTrack(char*);
 void __cdecl fcn_00536bb0(void);
 void __cdecl fcn_0052a960(char*);
 char* __cdecl evt_LoadGfxScript(char*);
@@ -29,15 +29,15 @@ void __cdecl cut_RunGfxCutscene(void)
 	if (msx_MusicEnabled != 0) {
 		r = gm_RandomMod(100);
 		if (r < 20)
-			fcn_004c2c50(g_68bd68);
+			msx_OverrideMusicTrack(g_68bd68);
 		else if (r < 40)
-			fcn_004c2c50(g_68bd54);
+			msx_OverrideMusicTrack(g_68bd54);
 		else if (r < 60)
-			fcn_004c2c50(g_68bd44);
+			msx_OverrideMusicTrack(g_68bd44);
 		else if (r < 80)
-			fcn_004c2c50(g_68bd2c);
+			msx_OverrideMusicTrack(g_68bd2c);
 		else
-			fcn_004c2c50(g_68bd14);
+			msx_OverrideMusicTrack(g_68bd14);
 	}
 	main_LoopFlags = 0x7d6c6;
 	fcn_00536bb0();

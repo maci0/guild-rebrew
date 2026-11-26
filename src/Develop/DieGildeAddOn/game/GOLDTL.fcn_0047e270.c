@@ -68,12 +68,12 @@ void __cdecl fcn_00487470(Bld*);
 int __cdecl fcn_00486640(Bld*, PRODUCTION_GOODS_RECORD*, int);
 void __cdecl fcn_004868d0(Bld*, PRODUCTION_GOODS_RECORD*);
 int __cdecl fcn_005b1e40(int);
-int __cdecl fcn_00503d10(int);
+int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0047e220(int);
-void __cdecl fcn_0047e0e0(Bld*, int);
+void __cdecl ai_PlanResourceRestock(Bld*, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl ai_CancelBlockedActions(Bld*, int);
 void __cdecl fcn_00487f90(Req*);
@@ -158,7 +158,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 					break;
 				if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 < (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036)
 					break;
-				n = fcn_00503d10(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id);
+				n = gm_FindCityItemHolder(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id);
 				if (n == 0)
 					break;
 				if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id, 1000000) >=
@@ -203,7 +203,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 			continue;
 		if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
 			continue;
-		n = fcn_00503d10(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id);
+		n = gm_FindCityItemHolder(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id);
 		if (n == 0)
 			continue;
 		if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id, 1000000) <
@@ -228,7 +228,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 			continue;
 		if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_40 < (int) ((OBJECT_PROTOTYPE *)goods)->value_036)
 			continue;
-		n = fcn_00503d10(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id);
+		n = gm_FindCityItemHolder(((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id);
 		if (n == 0)
 			continue;
 		if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id, 1000000) <
@@ -245,7 +245,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 	bld->id = 0;
 done:
 	fcn_0047e220(craft);
-	fcn_0047e0e0(bld, craft);
+	ai_PlanResourceRestock(bld, craft);
 	if (g_100dc20 == bld->x16c) {
 		i = 0;
 		if (g_100dc38 < 4) {

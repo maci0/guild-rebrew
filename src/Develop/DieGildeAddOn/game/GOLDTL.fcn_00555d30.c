@@ -19,14 +19,14 @@ void __cdecl evt_RequestScriptExit(char*);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl sprintf(char*, const char*, ...);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-void __cdecl fcn_005467e0(int);
+void __cdecl d3_FreeEventGfxSlot(int);
 
 #include "client_types.h"
 
 extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x00555d30 */
-void __cdecl fcn_00555d30(char* obj)
+void __cdecl he_RunBardeEvent(char* obj)
 {
 	char buf[0x200];
 	char* p;
@@ -112,7 +112,7 @@ void __cdecl fcn_00555d30(char* obj)
 		*(int*) (obj + 0x70) = 2;
 		if (*(int*) (obj + 0x88) != 0 &&
 		    (*(int*) (g_774970 * 0x21c + 0x7f4e68) & 0x20000) != 0) {
-			fcn_005467e0(*(int*) (obj + 0x88));
+			d3_FreeEventGfxSlot(*(int*) (obj + 0x88));
 			*(int*) (obj + 0x88) = 0;
 		}
 		return;
@@ -134,7 +134,7 @@ void __cdecl fcn_00555d30(char* obj)
 		*(int*) (obj + 0x52) = id;
 		*(int*) (obj + 0x58) = 0;
 		if (*(int*) (obj + 0x88) != 0) {
-			fcn_005467e0(*(int*) (obj + 0x88));
+			d3_FreeEventGfxSlot(*(int*) (obj + 0x88));
 			*(int*) (obj + 0x88) = 0;
 		}
 		if (*(unsigned char*) (obj + 0x78) & 2) {

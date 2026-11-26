@@ -17,7 +17,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_RunDomizilKabinettDialog(char*, char*);
-int __cdecl fcn_004ecf00(char*, int*, int*, int);
+int __cdecl he_GetActionProgress(char*, int*, int*, int);
 void __cdecl fcn_00526120(int, int);
 void __cdecl fcn_005944d0(char*);
 #ifdef REBREW_GOLD
@@ -69,7 +69,7 @@ void __cdecl d2_RunAlchemistMenu(char* a, char* b)
 			} else if (*(int*) (b + 0x1c) != 0) {
 				d2_RunDomizilKabinettDialog(a, b);
 			} else if (g_7746a0 == book) {
-				r = fcn_004ecf00(a, &y, &x, 0);
+				r = he_GetActionProgress(a, &y, &x, 0);
 				if (r != 0) {
 					fcn_00526120(g_14b59d0[r], 0x100);
 				} else {

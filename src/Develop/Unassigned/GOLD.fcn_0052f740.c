@@ -42,7 +42,7 @@ void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl fcn_00474c90(int, char*, char*);
 void __cdecl fcn_004754c0(int, int);
 void __cdecl fcn_00411960(Model*, char*, int);
-void __cdecl fcn_00534c20(Book*);
+void __cdecl d2_HandleBookPageButton(Book*);
 void* __cdecl fcn_00426fa0(char*, const char*, int, int, int, int, int);
 
 int __cdecl fcn_0052f740(Book* b, signed char dir)
@@ -105,7 +105,7 @@ int __cdecl fcn_0052f740(Book* b, signed char dir)
 		fcn_00411960(b->model, "buch\\Buch_zurueckblaettern.baf", 0x12);
 	}
 	b->page += dir;
-	fcn_00534c20(b);
+	d2_HandleBookPageButton(b);
 	fcn_00426fa0(g_6f240c, "Umblaettern_s", 1, 0x3f, 0x7f, 0, 0);
 	return 1;
 }

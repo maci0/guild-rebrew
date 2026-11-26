@@ -23,10 +23,10 @@ extern char g_1043690[];
 
 char* __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3);
 int __cdecl gm_CheckEntityType(void* p);
-int __cdecl fcn_00505340(void* p);
+int __cdecl gm_IsWarehouse(void* p);
 int __cdecl init_EnsureObjektSceneContext(void* p);
 void __cdecl init_LoadObjektScene(int id);
-void __cdecl fcn_005356b0(void* p);
+void __cdecl main_ExitToFrameHandler(void* p);
 
 /* ADDRESS: GOLDTL 0x00526920 */
 void __cdecl fcn_00526920(char* buildingRecord, int a1, char* a2)
@@ -78,7 +78,7 @@ void __cdecl fcn_00526920(char* buildingRecord, int a1, char* a2)
 			*(unsigned short*) (buildingRecord + 0x29) = *(unsigned short*) g_7e2708;
 			old = g_7746cc;
 			saved = g_774670;
-			if (gm_CheckEntityType(buildingRecord) == 0 && fcn_00505340(buildingRecord) == 0) {
+			if (gm_CheckEntityType(buildingRecord) == 0 && gm_IsWarehouse(buildingRecord) == 0) {
 				g_7746cc = g_7e2708;
 				g_7e2700 = 0;
 				g_774670 = 0;
@@ -90,7 +90,7 @@ void __cdecl fcn_00526920(char* buildingRecord, int a1, char* a2)
 				g_7e2700 = 1;
 				g_774670 = saved;
 			}
-			fcn_005356b0((void*) 0x59a340);
+			main_ExitToFrameHandler((void*) 0x59a340);
 			return;
 		}
 		if (g_774650 > g_774658) {
@@ -104,6 +104,6 @@ void __cdecl fcn_00526920(char* buildingRecord, int a1, char* a2)
 		g_7e2700 = 0;
 		return;
 	}
-	fcn_005356b0((void*) 0x59a340);
+	main_ExitToFrameHandler((void*) 0x59a340);
 }
 unsigned char _dpad_7e2708[88];

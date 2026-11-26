@@ -19,7 +19,7 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl cm_RequestPlayAnimation(int, char*, int);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
@@ -72,7 +72,7 @@ int __cdecl he_DetectNearbyPatrolAction(struct search* query)
 			if (*(int*) (guard + 4) == ((int*) (found + 0xc4))[j]) {
 				cm_RequestPlayAnimation(((int*) (found + 0xc4))[j], "gestik/herranwinken", 2);
 			}
-			fcn_004c5da0(((int*) (found + 0xc4))[j], *(int*) (query->who + 1), -1, 0, 1, "Detected");
+			ch_StartMovement(((int*) (found + 0xc4))[j], *(int*) (query->who + 1), -1, 0, 1, "Detected");
 			cm_RequestPlayAnimation(((int*) (found + 0xc4))[j], "gestik/abfaellig", gm_RandomMod(2) + 1);
 		}
 	}

@@ -116,7 +116,7 @@ extern void cm_ExecCommand();
 extern void ProcessActiveContexts();
 extern void fcn_465fe0();
 extern void fcn_0052a960();
-extern void fcn_00454f80();
+extern void d3_UpdateFrustumCellVisibility();
 extern void fcn_00413380();
 extern void fcn_00444190();
 extern void ch_CollectContextCharacters();
@@ -125,7 +125,7 @@ extern void fcn_00529890();
 extern void ch_UpdatePendingPositions();
 extern void ch_Update();
 extern void ch_UpdateCharacterObjectPositions();
-extern void fcn_005e8b10();
+extern void gm_UpdateWeatherWave();
 extern void fcn_004efde0();
 extern void fcn_00536bb0();
 extern void fcn_004c0cd0();
@@ -145,7 +145,7 @@ extern void fcn_00475220();
 extern void d2_SetOverlayAnimation();
 extern void sv_HandleObjects();
 extern void fcn_00531620();
-extern void fcn_00531d20();
+extern void d2_UpdateHoverTooltip();
 extern void fcn_00590670();
 extern void fcn_00527f60();
 extern void fcn_0046a110();
@@ -165,12 +165,12 @@ extern void fcn_00411fe0();
 extern void fcn_00537320();
 extern void fcn_0041bcb0();
 extern void SetMasterVolume();
-extern void fcn_00427370();
+extern void sb_SetMasterVolume();
 extern void fcn_5e43f0();
 extern void fcn_00536b10();
 extern void d2_RunChatConsole();
 extern void main_RunAdvanceGameDialog();
-extern void fcn_005356b0();
+extern void main_ExitToFrameHandler();
 extern void fcn_005e4c50();
 extern void fcn_005924d0();
 extern void main_ProcessGameHotkeys();
@@ -300,7 +300,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 				fcn_0052a960(gm_GameTime);
 			}
 			if (d3_CurrentContextIndex == 0) {
-				fcn_00454f80(g_773dd8, d3_ActiveCamera, g_6b8008);
+				d3_UpdateFrustumCellVisibility(g_773dd8, d3_ActiveCamera, g_6b8008);
 			}
 			fcn_00413380();
 			fcn_00444190();
@@ -327,7 +327,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		ch_UpdateCharacterObjectPositions();
 	}
 	if (g_774964 != 0) {
-		fcn_005e8b10();
+		gm_UpdateWeatherWave();
 		fcn_004efde0();
 	}
 	p = (char *) (flags & 0x4000);
@@ -393,7 +393,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 			}
 			if (flags & 0x20) {
 				fcn_00531620();
-				fcn_00531d20();
+				d2_UpdateHoverTooltip();
 			}
 		}
 	}
@@ -455,11 +455,11 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 	if (g_14cf950 == 1 && (flags & 0x2000)) {
 		t = (float) (g_7766a0 & 0xff) * g_665e44;
 		SetMasterVolume((int) (((float) *((unsigned char *) &g_7766a0 + 2) * t) * 0.33333334f));
-		fcn_00427370((int) (((float) *((unsigned char *) &g_7766a0 + 1) * t) * 0.33333334f));
+		sb_SetMasterVolume((int) (((float) *((unsigned char *) &g_7766a0 + 1) * t) * 0.33333334f));
 		fcn_5e43f0();
 		t = (float) (g_7766a0 & 0xff) * g_665e44;
 		SetMasterVolume((int) ((float) *((unsigned char *) &g_7766a0 + 2) * t));
-		fcn_00427370((int) ((float) *((unsigned char *) &g_7766a0 + 1) * t));
+		sb_SetMasterVolume((int) ((float) *((unsigned char *) &g_7766a0 + 1) * t));
 	}
 	fcn_00536b10();
 	if (g_774964 != 0) {
@@ -473,7 +473,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 						main_RunAdvanceGameDialog();
 					} else {
 						g_774960 = 1;
-						fcn_005356b0(g_5438c0);
+						main_ExitToFrameHandler(g_5438c0);
 					}
 				}
 			}
@@ -530,7 +530,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 				tb_SetCallbackPaused(g_538060, 1);
 				main_LoopFlags |= 0x100000;
 				d2_RunMessageBox(g_14a5524, 0xc4);
-				fcn_005356b0(g_5438c0);
+				main_ExitToFrameHandler(g_5438c0);
 			}
 		}
 	}

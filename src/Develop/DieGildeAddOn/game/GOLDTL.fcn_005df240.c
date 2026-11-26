@@ -22,10 +22,10 @@ extern char g_68ff68[];
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(int*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(char*, int);
+int __cdecl gm_HasActiveSpecialObject(char*, int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-char* __cdecl fcn_005c6220(int, int*);
+char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
 int __cdecl gm_ObjTriggerMultiCrimes(char* ent, int* arg)
@@ -65,7 +65,7 @@ int __cdecl gm_ObjTriggerMultiCrimes(char* ent, int* arg)
 		}
 		ok = 1;
 	}
-	twice = fcn_005c6270(ent, 0x2c5) != 0;
+	twice = gm_HasActiveSpecialObject(ent, 0x2c5) != 0;
 	n = 0;
 	for (i = 0; i < 29; i++) {
 		if (((Cand*)g_68ff68)[i].kind == 2 && ((Cand*)g_68ff68)[i].active && ((Cand*)g_68ff68)[i].ptr) {
@@ -96,7 +96,7 @@ int __cdecl gm_ObjTriggerMultiCrimes(char* ent, int* arg)
 		fcn_00545d40(*(int*) (obj + 4), -1, text, 0, 0x5fb, 0);
 	}
 	if (ent[2] == 6) {
-		rec = fcn_005c6220(**(unsigned short**) arg, &tmp);
+		rec = gm_LookupSpecialObjectRecord(**(unsigned short**) arg, &tmp);
 		arg[4] = 1;
 		io_FormatTextBuffer(text, 0xfe8, *(unsigned short*) (rec + 0x18) + 1, *(unsigned short*) obj);
 		fcn_005dbe90(text);

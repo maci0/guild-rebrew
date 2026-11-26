@@ -3,8 +3,8 @@
 extern unsigned char* g_entity_ptr;
 extern char* g_773d78;
 int __cdecl fcn_00502cd0(int, ...);
-int __cdecl fcn_00503d10(int);
-int __cdecl fcn_0050dfd0(int, int);
+int __cdecl gm_FindCityItemHolder(int);
+int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl gm_GetMsgField(int, int);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 
@@ -41,7 +41,7 @@ int __cdecl fcn_00503a70(int itemId)
 			*(int*) (count + 0x868c48) = 0;
 			*(int*) (count + 0x868c54) = 0;
 			if (p == g_773d78) {
-				v6 = fcn_00503d10(itemId);
+				v6 = gm_FindCityItemHolder(itemId);
 				if (v6) {
 					v7 = fcn_00502cd0(*(int*) (v6 + 0x14), 1, 0, v5);
 					if (v7) {
@@ -51,7 +51,7 @@ int __cdecl fcn_00503a70(int itemId)
 						*(void**) (count + 0x868c48) = (void*) v7;
 						v3 = *(unsigned short*) v7;
 add:
-						v8 = fcn_0050dfd0(v6, v3);
+						v8 = gm_GetStorageSlotCapacity(v6, v3);
 						v9 = gm_GetMsgField(v6, v7);
 						t = *(int*) (v7 + 0x1c);
 						v9 = v9 - ((unsigned int) (v8 * t) >> 2);

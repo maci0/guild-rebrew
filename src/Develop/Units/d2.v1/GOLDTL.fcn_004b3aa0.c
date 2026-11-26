@@ -12,7 +12,7 @@ void __cdecl fcn_00535960(void);
 void __cdecl fcn_004b3490(void);
 void __cdecl fcn_004b3810(int);
 
-void __cdecl fcn_004b3aa0(int a1)
+void __cdecl hst_ShowDueHistoryScroll(int mode)
 {
 	int buf[0x1f];
 
@@ -26,7 +26,7 @@ void __cdecl fcn_004b3aa0(int a1)
 		if (g_7728d4 == 1)
 			fcn_004b3490();
 		else if (g_7728d4 == 2)
-			fcn_004b3810(a1);
+			fcn_004b3810(mode);
 	}
 }
 unsigned char _dpad_1460af0[1712] = {

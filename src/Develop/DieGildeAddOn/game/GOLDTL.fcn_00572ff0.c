@@ -40,9 +40,9 @@ void __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl fcn_00549330(char*, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_CanTradeWithObject(char*, char*);
-char* __cdecl fcn_00503d10(int);
+char* __cdecl gm_FindCityItemHolder(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_0050dfd0(char*, int);
+int __cdecl gm_GetStorageSlotCapacity(char*, int);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl fcn_0050d320(char*, unsigned char);
@@ -196,7 +196,7 @@ void __cdecl fcn_00572ff0(char* a)
 				goto i1next;
 			}
 			if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) pktB].category == '\n') {
-				e2 = fcn_00503d10(ps[0]);
+				e2 = gm_FindCityItemHolder(ps[0]);
 			} else {
 				e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
 				if (e2 == 0) {
@@ -253,7 +253,7 @@ i1next:
 			goto i2advance;
 		}
 		if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) pktB].category == '\n') {
-			e2 = fcn_00503d10(ps[0]);
+			e2 = gm_FindCityItemHolder(ps[0]);
 		} else {
 			e2 = fcn_00502cd0(*(int*) (pktB + 0x5d), 2, 6, 0, 0x2a);
 			if (e2 == 0) {
@@ -276,11 +276,11 @@ i1next:
 			    * 1.1);
 		}
 		lim = pi[6];
-		t = fcn_0050dfd0(e2, *(unsigned short*) r2);
+		t = gm_GetStorageSlotCapacity(e2, *(unsigned short*) r2);
 		cand = (unsigned int) (t * *(int*) (r2 + 0x1c)) >> 2;
 		cand = gm_GetMsgField(e2, r2) - cand;
 		if ((unsigned int) lim >= (unsigned int) cand) {
-			t = fcn_0050dfd0(e2, *(unsigned short*) r2);
+			t = gm_GetStorageSlotCapacity(e2, *(unsigned short*) r2);
 			cand = (unsigned int) (t * *(int*) (r2 + 0x1c)) >> 2;
 			lim = gm_GetMsgField(e2, r2) - cand;
 		}

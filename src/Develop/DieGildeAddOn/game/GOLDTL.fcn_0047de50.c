@@ -48,7 +48,7 @@ typedef struct {
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern Master47de* g_100e748;
+extern char* g_100e748;
 extern char g_7f4ca0[];
 extern char* g_7746c4;
 extern unsigned char* g_7746c8;
@@ -65,7 +65,7 @@ void __cdecl fcn_0047f6b0(Master47de*);
 void __cdecl ai_CalcMeisterWache(Master47de*);
 void __cdecl ai_CalcMeisterDiebe(Master47de*);
 void __cdecl ai_CalcMeisterRaeuber(Master47de*);
-void __cdecl fcn_00482b60(Master47de*);
+void __cdecl ai_CalcMeisterBank(Master47de*);
 void __cdecl fcn_00482f20(Master47de*);
 void __cdecl fcn_00483480(Master47de*);
 void __cdecl fcn_00483f20(Master47de*);
@@ -86,9 +86,9 @@ void __cdecl ai_EvaluateMeister(Master47de* m)
 	if (!(m->flags & 1)) {
 		return;
 	}
-	if (m == g_100e748) {
-		sprintf(buf, "Evaluation von Meister %s in %s beginnt...", g_100e748->name, g_100e748->bld->name);
-		sprintf(buf, "Aktuelles Budget: %li", g_100e748->budget);
+	if (m == (Master47de*)g_100e748) {
+		sprintf(buf, "Evaluation von Meister %s in %s beginnt...", ((Master47de*)g_100e748)->name, ((Master47de*)g_100e748)->bld->name);
+		sprintf(buf, "Aktuelles Budget: %li", ((Master47de*)g_100e748)->budget);
 		sprintf(buf, "Tats\xe4" "chlich verf\xfcgbares Budget: %li", gm_AccumulateTyped2(&((Ent47de*)g_7f4ca0)[m->bld->owner]));
 	}
 	if (m->bld->owner == m->id) {
@@ -122,7 +122,7 @@ void __cdecl ai_EvaluateMeister(Master47de* m)
 		} else if (k == 0x10) {
 			ai_CalcMeisterRaeuber(m);
 		} else if (k == 5) {
-			fcn_00482b60(m);
+			ai_CalcMeisterBank(m);
 		} else if (k == 9) {
 			fcn_00482f20(m);
 		}

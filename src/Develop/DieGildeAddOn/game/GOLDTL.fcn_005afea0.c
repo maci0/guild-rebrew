@@ -22,7 +22,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowLagerOptions(int, int);
 void __cdecl fcn_005c72f0(int);
 void __cdecl fcn_005af770(int);
-void __cdecl fcn_005ad950(int);
+void __cdecl d2_StartThievesGuildSpyPicker(int);
 void __cdecl fcn_005ada30(int);
 void __cdecl d2_OpenTransportPanel(int);
 
@@ -63,7 +63,7 @@ void __cdecl d2_RunRazziaWacheMenu(int building)
 					fcn_005af770(building);
 				}
 				else if (g_7746a0 == d) {
-					fcn_005ad950(building);
+					d2_StartThievesGuildSpyPicker(building);
 				}
 				else if (g_7746a0 == e) {
 					fcn_005ada30(building);

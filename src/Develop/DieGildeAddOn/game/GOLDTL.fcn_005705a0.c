@@ -22,7 +22,7 @@ extern void __cdecl cm_AppendCommandSyncField(int a, int b, int offset, void* va
 extern unsigned int __cdecl cm_SendSetAttribute(void);
 extern void* __cdecl gm_EntityAccumulate(void* record);
 extern int __cdecl ch_IsEntityNearBuildingDoor(void* record, void* entry);
-extern int __cdecl fcn_00505340(void* entry);
+extern int __cdecl gm_IsWarehouse(void* entry);
 
 #pragma pack(push, 1)
 typedef struct {
@@ -109,7 +109,7 @@ void __cdecl fcn_005705a0(int action, char* rec)
 			rec[0x32] = 0;
 		}
 		if (ch_IsEntityNearBuildingDoor(rec, entry) != 0
-			&& (fcn_00505340(entry) == 0
+			&& (gm_IsWarehouse(entry) == 0
 				|| *(int*) (rec + 6) == *(int*) ((char*) *(void**) 0x7749f0 + 1))) {
 			int next_idx;
 			next = rt_CountRoutePoints(*(unsigned int*) (rec + 0x29));

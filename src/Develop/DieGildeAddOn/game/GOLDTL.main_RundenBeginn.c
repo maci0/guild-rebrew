@@ -6,7 +6,7 @@ int __cdecl gm_GetEntityTableEntry(void* slot);
 int __cdecl gm_CheckStatLevel(int id, int index);
 int __cdecl gm_GetOppositeStatIndex(int kind);
 int __cdecl he_RegisterApEvent(int id, char* text, int kind, int arg);
-int __cdecl fcn_005c6270(void* slot, int key);
+int __cdecl gm_HasActiveSpecialObject(void* slot, int key);
 void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 void __cdecl gm_BuildDealSummary(int id, char* out);
 int __cdecl gm_GetBuildingTechEffect(int a1, int a2, int a3);
@@ -73,19 +73,19 @@ void __cdecl main_RundenBeginn(void)
 				n++;
 			} while (n < 0x11);
 		}
-		if (fcn_005c6270(slot, 0x2c1) != 0) {
+		if (gm_HasActiveSpecialObject(slot, 0x2c1) != 0) {
 			io_FormatTextBuffer(bufE, 0x2052, 0xf2a);
 			p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufE, 6, 0);
 			if (p)
 				*p -= 1;
 		}
-		if (fcn_005c6270(slot, 0x15b) != 0) {
+		if (gm_HasActiveSpecialObject(slot, 0x15b) != 0) {
 			io_FormatTextBuffer(bufD, 0x2052, 0xc5e);
 			p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufD, 1, 0);
 			if (p)
 				*p -= 1;
 		}
-		v5 = fcn_005c6270(slot, 0x2c4) != 0;
+		v5 = gm_HasActiveSpecialObject(slot, 0x2c4) != 0;
 		if (*(int*) (slot + 0x1cc) & 0x100000) {
 			if (v5 == 0) {
 				io_FormatTextBuffer(bufC, 0x2054, 0xf18);

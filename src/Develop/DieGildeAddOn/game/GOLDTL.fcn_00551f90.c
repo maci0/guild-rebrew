@@ -65,7 +65,7 @@ void __cdecl he_BroadcastPlagueOutbreak(void);
 
 
 /* ADDRESS: GOLDTL 0x00551f90 */
-void __cdecl fcn_00551f90(Order_551f90* o)
+void __cdecl he_RunPlagueSpread(Order_551f90* o)
 {
 	char m[0xf8];
 	char* fill;

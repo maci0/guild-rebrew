@@ -19,7 +19,7 @@ int __cdecl ai_StartDummyBeruf(void);
 int __cdecl cm_RunDummyBeruf(void);
 int __cdecl fcn_00495a50(void);
 int __cdecl fcn_00495a70(void);
-int __cdecl fcn_00495a80(void);
+int __cdecl ai_StartBildung(void);
 int __cdecl fcn_00495f80(void);
 int __cdecl fcn_00495fe0(void);
 int __cdecl fcn_00496480(void);
@@ -43,14 +43,14 @@ int __cdecl fcn_00497ec0(void);
 int __cdecl ai_RunWohnsitzBauen(void);
 int __cdecl fcn_00498570(void);
 int __cdecl fcn_00498660(void);
-int __cdecl fcn_00498670(void);
+int __cdecl ai_StartBetriebBauen(void);
 int __cdecl ai_RunBetriebBauen(void);
 int __cdecl fcn_00498e00(void);
 int __cdecl fcn_00498e10(void);
 int __cdecl fcn_00498e20(void);
 int __cdecl fcn_00498f40(void);
-int __cdecl fcn_00498f50(void);
-int __cdecl fcn_00498fb0(void);
+int __cdecl ai_StartMedicusAufsuchen(void);
+int __cdecl ai_RunMedicusAufsuchen(void);
 int __cdecl fcn_00499000(void);
 int __cdecl fcn_00499090(void);
 int __cdecl ai_RunSabotieren(void);
@@ -64,7 +64,7 @@ int __cdecl cm_RunApsSparen(void);
 int __cdecl fcn_00499dc0(void);
 int __cdecl fcn_00499fe0(void);
 int __cdecl fcn_0049a0c0(void);
-int __cdecl fcn_0049a4b0(void);
+int __cdecl ai_RunUseObjectAnsehen(void);
 int __cdecl fcn_0049a590(void);
 int __cdecl fcn_0049a7b0(void);
 int __cdecl ai_StartEducationObject(void);
@@ -77,7 +77,7 @@ int __cdecl fcn_0049b1f0(void);
 int __cdecl fcn_0049b680(void);
 int __cdecl fcn_0049b7c0(void);
 int __cdecl ai_RunSecurityObject(void);
-int __cdecl fcn_0049bb00(void);
+int __cdecl ai_ScoreUseParfuem(void);
 int __cdecl ai_StartUseParfuem(void);
 int __cdecl fcn_0049bbc0(void);
 int __cdecl fcn_0049bd50(void);
@@ -282,7 +282,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x4;
 	strcpy(d.name, "Bildung");
 	d.score = fcn_004a4410;
-	d.start = fcn_00495a80;
+	d.start = ai_StartBildung;
 	d.run = fcn_00495f80;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -758,7 +758,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x13;
 	strcpy(d.name, "Betrieb bauen");
 	d.score = fcn_004a4410;
-	d.start = fcn_00498670;
+	d.start = ai_StartBetriebBauen;
 	d.run = ai_RunBetriebBauen;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -860,8 +860,8 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x16;
 	strcpy(d.name, "Medicus ausfsuchen");
 	d.score = fcn_004a4410;
-	d.start = fcn_00498f50;
-	d.run = fcn_00498fb0;
+	d.start = ai_StartMedicusAufsuchen;
+	d.run = ai_RunMedicusAufsuchen;
 	d.flags = 0x3b;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1065,7 +1065,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "UseObject (Ansehen)");
 	d.score = fcn_004a4410;
 	d.start = fcn_0049a0c0;
-	d.run = fcn_0049a4b0;
+	d.run = ai_RunUseObjectAnsehen;
 	d.flags = 0x19;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1301,7 +1301,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x23;
 	strcpy(d.name, "Use Parfuem");
-	d.score = fcn_0049bb00;
+	d.score = ai_ScoreUseParfuem;
 	d.start = ai_StartUseParfuem;
 	d.run = fcn_0049bbc0;
 	d.flags = 0xff;

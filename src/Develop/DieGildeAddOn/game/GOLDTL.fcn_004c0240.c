@@ -13,7 +13,7 @@ char* __cdecl gm_SearchTable67(int);
 int __cdecl gm_CollectBuildingStock(char*, Slots*, int);
 char* __cdecl fcn_0050d490(char*);
 int __cdecl gm_CalcEntityInventoryStats(char*, Slots*);
-char* __cdecl fcn_00503d10(int);
+char* __cdecl gm_FindCityItemHolder(int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
@@ -57,7 +57,7 @@ void __cdecl fcn_004c0240(char* a0, int a1)
 	for (cnt = 3; cnt != 0; cnt--) {
 		if (*(int*) rec != 0) {
 			if (((char)(((BUILDING_PROTOTYPE*)t)->category)) == 0xa) {
-				src = fcn_00503d10(*(int*) rec);
+				src = gm_FindCityItemHolder(*(int*) rec);
 			} else if (((char)(((BUILDING_PROTOTYPE*)t)->category)) == 0x1c) {
 				src = fcn_00502cd0(*(int*) (pkt + 0x5d), 2, 0, 0x1db, 6);
 			} else {

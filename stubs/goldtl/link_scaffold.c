@@ -34,7 +34,6 @@ int __cdecl amt_CountTownHallSeats(void) { return 0; }
 int __cdecl amt_ExecuteOfficeAssignment(void) { return 0; }
 int __cdecl amt_FindEntity26(void) { return 0; }
 int __cdecl amt_FindEntity27(void) { return 0; }
-int __cdecl amt_GetRoleTemplate(void) { return 0; }
 int __cdecl amt_SwapOfficeHolders(void) { return 0; }
 int __cdecl amt_UpdateEntityLinks(void) { return 0; }
 int __cdecl amt_ValidateAndAssignOffice(void) { return 0; }

@@ -27,7 +27,7 @@ extern int g_775334;           /* 0x00775334 */
 extern int main_LoopFlags;           /* 0x007e46ac */
 extern char s_6ac7b0[];        /* 0x006ac7b0 */
 
-int __cdecl fcn_00525fb0(int);
+int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00526120(int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -96,7 +96,7 @@ int __cdecl fcn_005c72f0(int objectArg)
 	v7 = objectArg;
 	v15 = 0;
 	v8 = -1;
-	v15 = fcn_00525fb0(objectArg);
+	v15 = d2_CheckOwnerBlocked(objectArg);
 	if (v15 != 0) {
 		return v15;
 	}

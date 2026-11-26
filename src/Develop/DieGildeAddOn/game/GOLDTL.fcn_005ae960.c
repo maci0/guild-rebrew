@@ -20,7 +20,7 @@ extern __int64 g_666018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_14aba0c;
 
-int __cdecl fcn_00525fb0(char*);
+int __cdecl d2_CheckOwnerBlocked(char*);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -40,7 +40,7 @@ void __cdecl d2_StartEntfuehrungDialog(char* building)
 	char* p;
 	char* q;
 
-	if (fcn_00525fb0(building) != 0) {
+	if (d2_CheckOwnerBlocked(building) != 0) {
 		return;
 	}
 	for (p = he_StartHandlungSearch(1, 0, 0x3c); p != 0; p = he_fn_Handlung()) {

@@ -19,7 +19,7 @@ void __cdecl d3_TransformPoint(int, int, float*);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCancelCharacterActions(int);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl gm_IsEntityAtBuilding(int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
@@ -97,7 +97,7 @@ void __cdecl fcn_00560290(char* a0)
 			for (i = 0; i < *(unsigned char*) (a0 + 0xac); i++) {
 				if (gm_LookupEntityRecordById(((int*) (a0 + 0x8c))[i])) {
 					cm_SendCancelCharacterActions(((int*) (a0 + 0x8c))[i]);
-					fcn_004c5da0(((int*) (a0 + 0x8c))[i], *(int*) (nearest + 1), -1, 0, 0, (char*) 0x6a6508);
+					ch_StartMovement(((int*) (a0 + 0x8c))[i], *(int*) (nearest + 1), -1, 0, 0, (char*) 0x6a6508);
 				}
 			}
 			*(int*) (a0 + 0x70) = *(int*) (a0 + 0x70) + 1;
@@ -136,7 +136,7 @@ void __cdecl fcn_00560290(char* a0)
 				if (gm_LookupEntityRecordById(((int*) (a0 + 0x8c))[i])) {
 					found |= 1;
 					cm_SendCancelCharacterActions(((int*) (a0 + 0x8c))[i]);
-					fcn_004c5da0(((int*) (a0 + 0x8c))[i], *(int*) (e + 1), *(int*) (a0 + 0xb0), 0, 0, (char*) 0x6a6508);
+					ch_StartMovement(((int*) (a0 + 0x8c))[i], *(int*) (e + 1), *(int*) (a0 + 0xb0), 0, 0, (char*) 0x6a6508);
 				}
 			}
 			if (found) {
@@ -217,7 +217,7 @@ void __cdecl fcn_00560290(char* a0)
 			for (i = 0; i < *(unsigned char*) (a0 + 0xac); i++) {
 				if (gm_LookupEntityRecordById(((int*) (a0 + 0x8c))[i])) {
 					cm_SendCancelCharacterActions(((int*) (a0 + 0x8c))[i]);
-					fcn_004c5da0(((int*) (a0 + 0x8c))[i], *(int*) (e + 1), *(int*) (a0 + 0xb0), 0, 0, (char*) 0x6a6508);
+					ch_StartMovement(((int*) (a0 + 0x8c))[i], *(int*) (e + 1), *(int*) (a0 + 0xb0), 0, 0, (char*) 0x6a6508);
 				}
 			}
 			break;

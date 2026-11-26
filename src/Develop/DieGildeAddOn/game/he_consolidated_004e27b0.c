@@ -40,13 +40,13 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(int);
 void __cdecl fcn_004e44f0(int);
-void __cdecl fcn_004c09b0(void);
+void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl fcn_004e4b00(int);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
 
 char* __cdecl gm_LookupEntityRecordById(int);
-float __cdecl fcn_004fef80(char*);
+float __cdecl gm_GetEntityHealth(char*);
 
 /* ADDRESS: GOLD 0x004e0e90 */
 /* ADDRESS: GOLDTL 0x004e27b0 */
@@ -149,7 +149,7 @@ void __cdecl fcn_004e2890(char* m)
 	fcn_004e48b0();
 	fcn_004e4610(esc);
 	fcn_004e44f0(esc);
-	fcn_004c09b0();
+	d3snd_StopTrackedVoices();
 	fcn_004e4b00(snd);
 	g_772f54 = 0;
 	cut_CleanupCutscene();
@@ -160,7 +160,7 @@ void __cdecl fcn_004e2890(char* m)
 /* ADDRESS: GOLDTL 0x004e2b40 */
 int __cdecl fcn_004e2b40(char* m)
 {
-	if (fcn_004fef80(gm_LookupEntityRecordById(*(int*) (m + 0x34))) > 0.0f)
+	if (gm_GetEntityHealth(gm_LookupEntityRecordById(*(int*) (m + 0x34))) > 0.0f)
 		return 0;
 	return 1;
 }

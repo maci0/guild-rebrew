@@ -1,6 +1,6 @@
 #include <stdlib.h>
 extern int g_67a370;
-float __cdecl fcn_004d3070(char* self, int x, int z, float range);
+float __cdecl gm_ScorePositionBalance(char* self, int x, int z, float range);
 
 /* ADDRESS: GOLDTL 0x004d31d0 */
 int __cdecl fcn_004d31d0(char* self, int centerColumn, int centerRow, int searchRadius,
@@ -38,7 +38,7 @@ int __cdecl fcn_004d31d0(char* self, int centerColumn, int centerRow, int search
 					for (c = lo; c <= hi; c++) {
 						int cell = *(int*) (*(char**) (map + 0x24) + (*(int*) (map + 0x20) * r + c) * 0x1c);
 						if (cell != 0 && cell != 0xd) {
-							f = fcn_004d3070(self, c, r,
+							f = gm_ScorePositionBalance(self, c, r,
 								(float) searchRadius * *(float*) (map + 0x10) * 2.0f);
 							if (f < best) {
 								best = f;

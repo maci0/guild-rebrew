@@ -13,7 +13,7 @@ extern int g_772d14;
 
 void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
 
-void __cdecl fcn_004c2c50(char* snd)
+void __cdecl msx_OverrideMusicTrack(char* snd)
 {
 	if (g_772d28 == 0) {
 		g_772d14 = g_772d10 & 0xff;

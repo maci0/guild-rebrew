@@ -20,7 +20,7 @@ typedef struct
 } fcn_004a0020_Rec;
 // SIZE 0x18
 
-int __cdecl fcn_004e8b40(int idx, fcn_004a0020_Rec* out);
+int __cdecl amt_GetRoleTemplate(int idx, fcn_004a0020_Rec* out);
 int __cdecl amt_CollectOfficeSlotsByGroup(int k, int max, fcn_004a0020_Rec* out);
 fcn_004a0020_Ent* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
@@ -55,7 +55,7 @@ int __cdecl fcn_004a0020(fcn_004a0020_Ent* e)
 		j = e->x167;
 	}
 	if (j != 0) {
-		if (fcn_004e8b40(j, &q) == 0) {
+		if (amt_GetRoleTemplate(j, &q) == 0) {
 			return 0;
 		}
 		j = (q.x8 - 1) / 3;

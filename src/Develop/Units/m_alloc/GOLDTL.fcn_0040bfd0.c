@@ -11,7 +11,7 @@ typedef struct {
 } Slot;
 
 extern void* g_6b5c5c;
-unsigned int g_6b5c20 = 0;
+char* g_6b5c20 = 0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_00408240(void* p);
 void __cdecl m_FreeTracked(void* p);

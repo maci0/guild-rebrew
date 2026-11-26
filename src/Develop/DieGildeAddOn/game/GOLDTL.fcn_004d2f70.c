@@ -3,7 +3,7 @@ extern char* ch_ContextCharacters[32];
 char* __cdecl gm_GetEquippedCombatGear(char*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, unsigned char*);
 float __cdecl fcn_004cefb0(char*, int);
-float __cdecl fcn_004ff040(unsigned char*);
+float __cdecl gm_GetEntityHealthRatio(unsigned char*);
 
 
 /* ADDRESS: GOLDTL 0x004d2f70 */
@@ -22,7 +22,7 @@ unsigned char* __cdecl fcn_004d2f70(char* a1)
 			e = ((unsigned char**)ch_ContextCharacters)[i];
 			if (e != 0 && gm_EntitiesDifferByOwnerPtr(a1, e) != 0 && e[8] != 0) {
 				d = fcn_004cefb0(a1, *(int*) (*(char**) (e + 0x184) + 0x34));
-				if (d * fcn_004ff040(e) < best) {
+				if (d * gm_GetEntityHealthRatio(e) < best) {
 					best = d;
 					result = ((unsigned char**)ch_ContextCharacters)[i];
 				}
@@ -33,7 +33,7 @@ unsigned char* __cdecl fcn_004d2f70(char* a1)
 			e = ((unsigned char**)ch_ContextCharacters)[i];
 			if (e != 0 && gm_EntitiesDifferByOwnerPtr(a1, e) != 0 && e[8] != 0) {
 				d = fcn_004cefb0(a1, *(int*) (*(char**) (e + 0x184) + 0x34));
-				if (d * fcn_004ff040(e) < best) {
+				if (d * gm_GetEntityHealthRatio(e) < best) {
 					best = d;
 					result = ((unsigned char**)ch_ContextCharacters)[i];
 				}

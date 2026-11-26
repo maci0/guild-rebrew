@@ -43,7 +43,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl RegisterStatusText(char* name, char* path, int arg);
 void __cdecl fcn_00597ec0(char* e);
 void __cdecl d2_ShowWirtshausDialog(char* e);
-void __cdecl fcn_005a2500(char* a, char* b);
+void __cdecl d2_OpenStammtischDialog(char* a, char* b);
 void __cdecl fcn_005a2d60(char* a, char* b);
 void __cdecl cm_SendCopyEntityData(Msg5a2db0* m);
 
@@ -70,7 +70,7 @@ void __cdecl fcn_005a2db0(char* a0, char* a1)
 			if (g_7746a0 == p1) {
 				d2_ShowWirtshausDialog(a0);
 			} else if (g_7746a0 == p2) {
-				fcn_005a2500(a0, a1);
+				d2_OpenStammtischDialog(a0, a1);
 			} else if (g_7746a0 == p3) {
 				fcn_005a2d60(a0, a1);
 			}

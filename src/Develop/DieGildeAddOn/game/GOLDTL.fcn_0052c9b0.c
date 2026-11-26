@@ -46,7 +46,7 @@ void __cdecl d3_AdjustCameraHeight(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004125c0(int a, int b);
 
-int __cdecl fcn_0052c9b0(void)
+int __cdecl d3_UpdateCameraController(void)
 {
 	char* p;
 

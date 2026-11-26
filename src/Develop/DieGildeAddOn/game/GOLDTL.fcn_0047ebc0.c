@@ -70,11 +70,11 @@ void __cdecl fcn_00487470(Bld*);
 int __cdecl fcn_00486640(Bld*, PRODUCTION_GOODS_RECORD*, int);
 void __cdecl fcn_004868d0(Bld*, PRODUCTION_GOODS_RECORD*);
 int __cdecl fcn_005b1e40(int);
-int __cdecl fcn_00503d10(int);
+int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0047e220(int);
-void __cdecl fcn_0047e0e0(Bld*, int);
+void __cdecl ai_PlanResourceRestock(Bld*, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl ai_CancelBlockedActions(Bld*, int);
 void __cdecl fcn_00487f90(Req*);
@@ -163,7 +163,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 					break;
 				if (rec->unk_40 < (int) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36))
 					break;
-				val = fcn_00503d10(rec->goods_id);
+				val = gm_FindCityItemHolder(rec->goods_id);
 				if (val == 0)
 					break;
 				if ((int) ((unsigned short) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36) + rec->unk_3c) <= gm_eval_SlotVoll(val, rec->goods_id, 1000000)) {
@@ -205,7 +205,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 			continue;
 		if (rec->unk_40 < (int) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36))
 			continue;
-		n = fcn_00503d10(rec->goods_id);
+		n = gm_FindCityItemHolder(rec->goods_id);
 		if (n == 0)
 			continue;
 		if ((int) ((unsigned short) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36) + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
@@ -230,7 +230,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 			continue;
 		if (rec->unk_40 < (int) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36))
 			continue;
-		n = fcn_00503d10(rec->goods_id);
+		n = gm_FindCityItemHolder(rec->goods_id);
 		if (n == 0)
 			continue;
 		if ((int) ((unsigned short) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36) + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
@@ -245,7 +245,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 	bld->id = 0;
 done:
 	fcn_0047e220(craft);
-	fcn_0047e0e0(bld, craft);
+	ai_PlanResourceRestock(bld, craft);
 	if (0 < g_100b0ac) {
 		for (i = 0; i < g_100b0ac; i++) {
 			rec = (PRODUCTION_GOODS_RECORD*) ((char*) g_100d0c0 + i * 0x58);

@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern volatile int g_6b7fac;
 
-extern void __cdecl fcn_004c09b0(void);
+extern void __cdecl d3snd_StopTrackedVoices(void);
 extern void *__cdecl fcn_00470820(int a, int b, const char *name);
 extern void __cdecl d2_CenterDialogWindows(void *obj);
 extern void __cdecl d2_SetForm(void *obj, int a);
@@ -25,7 +25,7 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	unsigned b;
 	unsigned i;
 
-	fcn_004c09b0();
+	d3snd_StopTrackedVoices();
 	obj = fcn_00470820(0, 0, (const char *) 0x681130);
 	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 1);

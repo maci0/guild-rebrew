@@ -13,7 +13,7 @@ void __cdecl fcn_00471af0(int h, int v);
 void __cdecl d2_DestroyElement(int h);
 void __cdecl d2_SetSlotVisibility(int h, int v);
 
-void __cdecl fcn_005272e0(void)
+void __cdecl d2_DestroyHudOverlay(void)
 {
 	if (g_6a25b8 != -1) {
 		fcn_00471af0(g_6a25b8, 0);

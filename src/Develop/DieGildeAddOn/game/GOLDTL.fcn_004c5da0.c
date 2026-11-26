@@ -28,7 +28,7 @@ int __cdecl cm_EnqueueClientPacket(pkt99*);
 
 
 /* ADDRESS: GOLDTL 0x004c5da0 */
-int __cdecl fcn_004c5da0(int who, int key, int target, char* name, int mode, char* text)
+int __cdecl ch_StartMovement(int who, int key, int target, char* name, int mode, char* text)
 {
 	pkt99 pkt;
 	char* e;

@@ -3,12 +3,12 @@
 extern int g_7e35c0[];
 
 /* ADDRESS: GOLDTL 0x005356b0 */
-void __cdecl fcn_005356b0(int v)
+void __cdecl main_ExitToFrameHandler(int handler_fn)
 {
 	int i;
 
 	for (i = g_774650; i >= 0; i--) {
-		if (g_7e35c0[i * 2] == v) {
+		if (g_7e35c0[i * 2] == handler_fn) {
 			g_774654 = g_774650 - i;
 			return;
 		}

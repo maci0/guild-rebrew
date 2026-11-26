@@ -11,7 +11,7 @@ extern char g_6a5a48[];
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_GetCommandStatus(int);
-int __cdecl fcn_005d2950(int, int);
+int __cdecl gm_CanCourtEntity(int, int);
 int __cdecl fcn_005d2a40(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(char, char*);
@@ -35,7 +35,7 @@ unsigned short __cdecl gm_RandomMod(int);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0054ca10 */
-void __cdecl fcn_0054ca10(char* e)
+void __cdecl he_RunCourtship(char* e)
 {
 	unsigned char* a;
 	unsigned char* b;
@@ -69,7 +69,7 @@ void __cdecl fcn_0054ca10(char* e)
 	*(int*) (e + 0x84) = -1;
 	switch (*(int*) (e + 0x70)) {
 	case 0:
-		v = fcn_005d2950(*(int*) (e + 0xac), *(int*) (e + 0xb0));
+		v = gm_CanCourtEntity(*(int*) (e + 0xac), *(int*) (e + 0xb0));
 		if (v == -0x405) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);

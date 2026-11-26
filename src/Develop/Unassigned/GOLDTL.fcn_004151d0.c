@@ -1,5 +1,5 @@
 void __cdecl fcn_00432120(char*, int*, int, float*, float*);
-void __cdecl fcn_00451340(float*, float*, float, float*);
+void __cdecl d3_LerpVec3(float*, float*, float, float*);
 void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
 float* __stdcall fcn_005eb970(float*, const float*, const float*);
 void __cdecl d3_MatrixToEulerAngles(float*, float*);
@@ -31,7 +31,7 @@ int __cdecl fcn_004151d0(char* obj, float* pos, float* rot)
 	blend = (int*) (*(char**) (obj + 0x1ec) + 0x41c);
 	fcn_00432120(obj, blend, blend[0], pos0, rot0);
 	fcn_00432120(obj, blend, blend[1], pos1, rot1);
-	fcn_00451340(pos0, pos1,
+	d3_LerpVec3(pos0, pos1,
 	    (float) blend[2] / *(int*) (*(char**) (blend[0x1a] + 0x15c) + blend[0] * 0xc0 + 4), pos);
 	d3_BuildEulerRotationMatrix(rot0, m0);
 	d3_BuildEulerRotationMatrix(rot1, m1);

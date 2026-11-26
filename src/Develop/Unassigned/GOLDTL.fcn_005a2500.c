@@ -17,17 +17,17 @@ void __cdecl d2_RunStammtischDialog(char*, char*);
 void __cdecl fcn_005a2080(char*, char*);
 void __cdecl fcn_00532ef0(void);
 
-void __cdecl fcn_005a2500(char* a, char* b)
+void __cdecl d2_OpenStammtischDialog(char* building, char* room)
 {
-	char* e;
+	char* table;
 
-	e = fcn_00502cd0(*(int*) (b + 0x14), 1, 0, 0x12d);
-	if (e != 0 && he_StartHandlungSearch(2, 0, 0x2a, 3, *(int*) (a + 1)) != 0) {
-		if (((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_index == *(unsigned short*) (a + 0x27)) {
-			d2_RunStammtischDialog(a, e);
+	table = fcn_00502cd0(*(int*) (room + 0x14), 1, 0, 0x12d);
+	if (table != 0 && he_StartHandlungSearch(2, 0, 0x2a, 3, *(int*) (building + 1)) != 0) {
+		if (((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_index == *(unsigned short*) (building + 0x27)) {
+			d2_RunStammtischDialog(building, table);
 		}
 		else {
-			fcn_005a2080(a, e);
+			fcn_005a2080(building, table);
 		}
 	}
 	fcn_00532ef0();

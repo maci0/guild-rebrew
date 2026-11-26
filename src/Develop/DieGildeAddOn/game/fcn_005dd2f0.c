@@ -3,7 +3,7 @@ extern __int64 g_666018;
 
 unsigned short* __cdecl fcn_005cd440(unsigned int*, char*, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(int, int);
+int __cdecl gm_HasActiveSpecialObject(int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -46,7 +46,7 @@ unsigned int __cdecl fcn_005dd2f0(int actorRec, int eventArgs)
 		}
 	}
 do_apply:
-	effectDelta = ((fcn_005c6270(actorRec, 0x2c5) != 0) + 1) * -0x28;
+	effectDelta = ((gm_HasActiveSpecialObject(actorRec, 0x2c5) != 0) + 1) * -0x28;
 	cm_RequestCopyEntityData(*(unsigned int*) ((char*) firstTarget + 4), *(unsigned int*) ((char*) secondTarget + 4), effectDelta, 1);
 	cm_RequestCopyEntityData(*(unsigned int*) ((char*) secondTarget + 4), *(unsigned int*) ((char*) firstTarget + 4), effectDelta, 1);
 	if (*(char*) ((char*) firstTarget + 2) == 6 || *(char*) ((char*) firstTarget + 2) == 7) {

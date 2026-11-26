@@ -2,7 +2,7 @@ extern char g_7f4ca0[];
 
 /* ADDRESS: GOLD 0x004ae030 */
 /* ADDRESS: GOLDTL 0x004ae170 */
-int __cdecl fcn_004ae170(int slot)
+int __cdecl gm_IsSlotLivingPerson(int slot)
 {
 	unsigned char c;
 	unsigned char f;
@@ -22,7 +22,7 @@ int __cdecl fcn_004ae170(int slot)
 
 /* ADDRESS: GOLD 0x004ae120 */
 /* ADDRESS: GOLDTL 0x004ae260 */
-int __cdecl fcn_004ae260(int slot)
+int __cdecl gm_IsSlotActiveBuilding(int slot)
 {
 	int o;
 

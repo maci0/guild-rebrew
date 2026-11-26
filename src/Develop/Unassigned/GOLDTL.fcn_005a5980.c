@@ -9,7 +9,7 @@ typedef struct {
 	int pad[6];
 } Slot;
 
-int __cdecl fcn_005a5980(Slot* tbl)
+int __cdecl d2_FindSelectedListRow(Slot* tbl)
 {
 	int i;
 

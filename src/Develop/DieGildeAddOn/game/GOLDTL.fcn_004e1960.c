@@ -10,7 +10,7 @@ void __cdecl he_SendCmdMessage(char*, char*, char*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004e1960 */
-int __cdecl fcn_004e1960(char* x)
+int __cdecl cut_NotifyHinrichtung(char* x)
 {
 	char buf[0x200];
 	char* a;

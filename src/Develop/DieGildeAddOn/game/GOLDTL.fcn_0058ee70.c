@@ -39,7 +39,7 @@ int __cdecl fcn_004f1790(int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl d2_CreateRentAGraveDialog(int*, int);
 void __cdecl fcn_00532ef0(void);
-int __cdecl fcn_0058edc0(int, char*, int);
+int __cdecl d2_RunSeanceMenu(int, char*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
@@ -69,7 +69,7 @@ void __cdecl fcn_0058ee70(char* e)
 			fcn_00532ef0();
 			return;
 		}
-		r = fcn_0058edc0((int) e, (char*) &dlg, (int) &result);
+		r = d2_RunSeanceMenu((int) e, (char*) &dlg, (int) &result);
 		fcn_00471e30(dlg.dlg);
 		if (r != 0) {
 			cm_RequestChangeBits(*(int*) (g_slot_table + g_774970 * 0x21c + 4), 0x1cc, 4, 0x800000, 0);

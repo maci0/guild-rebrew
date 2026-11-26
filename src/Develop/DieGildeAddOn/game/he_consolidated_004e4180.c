@@ -33,7 +33,7 @@ int __cdecl fcn_00505370(unsigned char*);
 void __cdecl init_LoadGebaeudeScene(int);
 void __cdecl fcn_00510c90(int);
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_005167c0(unsigned char*, unsigned int);
+void __cdecl d3_UpdateBuildingView(unsigned char*, unsigned int);
 void __cdecl fcn_0043aa30(char);
 
 /* ADDRESS: GOLDTL 0x004e4180 */
@@ -96,7 +96,7 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 						fcn_00510c90(sceneId);
 					}
 					d3_SelectSceneContext(init_SceneContextIndices[sceneId], 0);
-					fcn_005167c0(entity, sceneId);
+					d3_UpdateBuildingView(entity, sceneId);
 				}
 			}
 			else {
@@ -106,7 +106,7 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 						init_LoadGebaeudeScene(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category);
 					}
 					d3_SelectSceneContext(g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category], 0);
-					fcn_005167c0(entity, 0xfd);
+					d3_UpdateBuildingView(entity, 0xfd);
 				}
 			}
 		}

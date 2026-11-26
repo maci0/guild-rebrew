@@ -8,7 +8,7 @@ extern char g_6628c8[];
 extern char g_6628c8[];
 /* ADDRESS: GOLD 0x00453b30 */
 /* ADDRESS: GOLDTL 0x004514d0 */
-float __cdecl fcn_004514d0(int left, int right)
+float __cdecl d3_WrapYawDelta(int left, int right)
 {
 	float value;
 

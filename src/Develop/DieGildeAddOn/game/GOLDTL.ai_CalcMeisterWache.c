@@ -8,7 +8,7 @@ extern int g_7747b4;
 extern pos14_7f4c00 gm_GameTime;
 void *__cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl ai_CollectGoodsResources(char *, char *);
-void __cdecl fcn_00486c40(char *, char *, int);
+void __cdecl ai_PlanMeisterSupplies(char *, char *, int);
 void __cdecl fcn_00489010(char *, char *);
 void __cdecl ai_MeisterCollectTrans(char *);
 void __cdecl ai_MeisterTrade(char *, char *);
@@ -57,7 +57,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 		g_100b0ac = 0;
 		ai_ResourceCount = 0;
 		ai_CollectGoodsResources(meister, res);
-		fcn_00486c40(meister, res, *(int *) (*(int *) (meister + 0x16c) + 0x39));
+		ai_PlanMeisterSupplies(meister, res, *(int *) (*(int *) (meister + 0x16c) + 0x39));
 		fcn_00489010(meister, res);
 		ai_MeisterCollectTrans(meister);
 		ai_MeisterTrade(meister, res);

@@ -15,7 +15,7 @@ void __cdecl d2_DestroyElement(int h);
 void __cdecl fcn_00475f80(int h);
 void __cdecl fcn_0047ac60(int h, int v);
 void __cdecl fcn_004752e0(int h);
-void __cdecl fcn_005272e0(void);
+void __cdecl d2_DestroyHudOverlay(void);
 void __cdecl fcn_0046f280(int h);
 void __cdecl fcn_0052f710(void);
 
@@ -56,7 +56,7 @@ void __cdecl fcn_00527420(void)
 	if (g_6a25a8 != -1) {
 		fcn_004752e0(g_6a25a8);
 	}
-	fcn_005272e0();
+	d2_DestroyHudOverlay();
 	g_6a25ac = -1;
 	if (g_6a2598 != -1) {
 		fcn_0046f280(g_6a2598);

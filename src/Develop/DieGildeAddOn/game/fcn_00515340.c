@@ -1,7 +1,7 @@
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-char* __cdecl fcn_00503d10(int id);
+char* __cdecl gm_FindCityItemHolder(int id);
 double __cdecl fcn_0042e450(char a, int b);
 void __cdecl cm_SendSellObjekt(int a, int b, int c, int d);
 
@@ -17,7 +17,7 @@ void __cdecl fcn_00515340(int idx)
 	i = 0x55;
 	do {
 		p = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) rec]);
-		h = (int) fcn_00503d10(*(unsigned short*) rec);
+		h = (int) gm_FindCityItemHolder(*(unsigned short*) rec);
 		if (h != 0) {
 			if (*(unsigned char*) p == 0x17 || *(unsigned char*) p == 0x25) {
 				cm_SendSellObjekt(*(int*) (h + 2), -1, *(unsigned short*) rec,

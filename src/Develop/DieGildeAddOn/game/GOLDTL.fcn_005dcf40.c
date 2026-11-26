@@ -9,7 +9,7 @@ extern float g_6628a0;
 extern float g_665368;
 
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004c6ba0(int, int, int);
+void __cdecl cm_RequestModifyEntityLevel(int, int, int);
 
 int __cdecl gm_IncreaseEntitySkill(unsigned char* e, int idx)
 {
@@ -32,7 +32,7 @@ int __cdecl gm_IncreaseEntitySkill(unsigned char* e, int idx)
 			add = (unsigned char) (g_66413c - cur);
 		}
 		if (add != 0) {
-			fcn_004c6ba0(*(int*) (e + 4), idx, add);
+			cm_RequestModifyEntityLevel(*(int*) (e + 4), idx, add);
 		}
 	}
 	return 1;

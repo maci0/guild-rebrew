@@ -37,8 +37,8 @@ int __cdecl evt_FindScriptById(int a);
 void __cdecl evt_RequestScriptExit(int a);
 int __cdecl cm_SendCopyEntityData(GOLDTL_Msg549* msg);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
-int __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* text);
-float __cdecl fcn_004feff0(unsigned short* e);
+int __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* text);
+float __cdecl gm_GetEntityMaxHealth(unsigned short* e);
 int __cdecl fcn_00567170(unsigned short* e, int* a, int* b, int c);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 int __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d,
@@ -97,7 +97,7 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 		}
 		return;
 	}
-	if (fcn_004feff0((unsigned short*) p) * g_6628cc > a4) {
+	if (gm_GetEntityMaxHealth((unsigned short*) p) * g_6628cc > a4) {
 		if (fcn_00567170((unsigned short*) p, &v9, &v8, 0)) {
 			if (*(int*) (p + 0x184) != 0) {
 				fcn_00529160(0, 0, *(unsigned short*) p, 0);
@@ -107,10 +107,10 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 				}
 				cm_RequestChangeBits(*(int*) (p + 4), 0x1c8, 4, 0x800, 0);
 				if (v8 == -1) {
-					fcn_004c5da0(*(int*) (p + 4), v9, v8, 0, 1,
+					ch_StartMovement(*(int*) (p + 4), v9, v8, 0, 1,
 									  s_6a5960);
 				} else {
-					fcn_004c5da0(*(int*) (p + 4), v9, v8, 0, 0,
+					ch_StartMovement(*(int*) (p + 4), v9, v8, 0, 0,
 									  s_6a5960);
 				}
 				if (a2[2] != 6 && a2[2] != 7) {

@@ -3,42 +3,42 @@
 
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
-int __cdecl fcn_005dcd60(char* o)
+int __cdecl gm_ObjCureFirstAffliction(char* entity)
 {
-	int m;
-	int v;
+	int afflictions;
+	int clear_mask;
 
-	m = *(int*) (o + 0x2c);
-	if (m != 0) {
-		v = 0;
-		if (m & 0xf) {
-			v = 7;
+	afflictions = *(int*) (entity + 0x2c);
+	if (afflictions != 0) {
+		clear_mask = 0;
+		if (afflictions & 0xf) {
+			clear_mask = 7;
 		}
-		else if (m & 0xf0) {
-			v = 0x30;
+		else if (afflictions & 0xf0) {
+			clear_mask = 0x30;
 		}
-		else if (m & 0xf00) {
-			v = 0x300;
+		else if (afflictions & 0xf00) {
+			clear_mask = 0x300;
 		}
-		else if (m & 0x3000) {
-			v = 0x1000;
+		else if (afflictions & 0x3000) {
+			clear_mask = 0x1000;
 		}
-		else if (m & 0x1c000) {
-			v = 0xc000;
+		else if (afflictions & 0x1c000) {
+			clear_mask = 0xc000;
 		}
-		else if (m & 0xe0000) {
-			v = 0x20000;
+		else if (afflictions & 0xe0000) {
+			clear_mask = 0x20000;
 		}
-		else if (m & 0x700000) {
-			v = 0x100000;
+		else if (afflictions & 0x700000) {
+			clear_mask = 0x100000;
 		}
-		else if (m & 0x1800000) {
-			v = 0x800000;
+		else if (afflictions & 0x1800000) {
+			clear_mask = 0x800000;
 		}
-		else if (m & 0x1e000000) {
-			v = 0x6000000;
+		else if (afflictions & 0x1e000000) {
+			clear_mask = 0x6000000;
 		}
-		cm_RequestChangeBits(*(int*) (o + 4), 0x2c, 4, 0, v);
+		cm_RequestChangeBits(*(int*) (entity + 4), 0x2c, 4, 0, clear_mask);
 	}
 	return 1;
 }

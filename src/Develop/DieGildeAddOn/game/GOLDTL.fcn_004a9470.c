@@ -7,7 +7,7 @@ typedef struct Info {
 
 int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004e8b40(int job, Info* info);
+int __cdecl amt_GetRoleTemplate(int job, Info* info);
 
 /* ADDRESS: GOLDTL 0x004a9470 */
 int __cdecl fcn_004a9470(int a1, char* e, int a3, int a4, char* out)
@@ -32,7 +32,7 @@ int __cdecl fcn_004a9470(int a1, char* e, int a3, int a4, char* out)
 	do {
 		if (d[i] >= 4) {
 			p = gm_LookupEntityRecordById(ids[i]);
-			if (p && !(*(int*) (p + 0x1c8) & 0x200) && fcn_004e8b40(*(unsigned char*) (p + 0x166), &info) && info.level >= 4) {
+			if (p && !(*(int*) (p + 0x1c8) & 0x200) && amt_GetRoleTemplate(*(unsigned char*) (p + 0x166), &info) && info.level >= 4) {
 				out[0] = 7;
 				*(int*) (out + 4) = *(int*) (p + 4);
 				return 1;

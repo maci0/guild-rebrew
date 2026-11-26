@@ -8,7 +8,7 @@ typedef struct Ent {
 extern unsigned char g_773d75;
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_0050b810(int a, unsigned char b);
+int __cdecl gm_SumQueryEntryValues(int a, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x0048df90 */
 int __cdecl fcn_0048df90(Ent* e, char* firstOut, char* secondOut)
@@ -20,7 +20,7 @@ int __cdecl fcn_0048df90(Ent* e, char* firstOut, char* secondOut)
 	int i;
 
 	t = gm_WalkEntityChain(e->id);
-	m = fcn_0050b810(e->stock, g_773d75);
+	m = gm_SumQueryEntryValues(e->stock, g_773d75);
 	v = (int) (m * 0.25f);
 	thr[0] = (int) (t * 0.01f);
 	thr[1] = (int) (t * 0.015f);

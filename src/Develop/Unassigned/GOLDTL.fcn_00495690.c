@@ -7,7 +7,7 @@ void __cdecl cm_BeginSecondaryPacketDelta(void*);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_004c53e0(void);
+void __cdecl cm_SendChangeDesire(void);
 void __cdecl cm_AppendDesireDelta(int, float);
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 
@@ -50,7 +50,7 @@ int __cdecl fcn_00495690(int a0)
 					cm_RequestChangeAttribute();
 				}
 			}
-			fcn_004c53e0();
+			cm_SendChangeDesire();
 			fcn_0064d740(g_1008540[b->unk_132].saved_effects, g_1008540[b->unk_132].effects, 0x20);
 			return 1;
 		}

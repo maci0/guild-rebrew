@@ -24,7 +24,7 @@ int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
 int __cdecl fcn_0048f4f0(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl fcn_0048f710(char* e, char* q, Blk24* b1, Blk24* b2);
-int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2);
+int __cdecl ai_PlanHauchDesVerfalls(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl fcn_0048fb10(char* e, char* q, Blk24* b1, Blk24* b2);
 
 int __cdecl ai_StartGraveyardOwner(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
@@ -65,7 +65,7 @@ int __cdecl ai_StartGraveyardOwner(int a1, char* e, int a3, Blk24* o1, Blk24* o2
 	}
 	res[0] = fcn_0048f4f0(e, target, &b1[0], &b2[0]);
 	res[1] = fcn_0048f710(e, target, &b1[1], &b2[1]);
-	res[2] = fcn_0048f8f0(e, target, &b1[2], &b2[2]);
+	res[2] = ai_PlanHauchDesVerfalls(e, target, &b1[2], &b2[2]);
 	res[3] = fcn_0048fb10(e, target, &b1[3], &b2[3]);
 	k = gm_RandomMod(4);
 	for (n = 4; n != 0;) {

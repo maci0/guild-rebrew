@@ -16,7 +16,7 @@ void __cdecl he_FreeAction(char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int, ...);
-void __cdecl fcn_004c6470(int, int);
+void __cdecl cm_RequestSetEntityLevel(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl sb_FindBankByName(char*);
@@ -70,7 +70,7 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 1);
 		io_AppendText(0x15c3, g_773d75 * 0x2f4 + (int) 0x868080, (int) 0x7f4c00,
 			*(unsigned char*) (action + 0xb1) + y, (int) ((float) ((z - 1) * 0.5) + (3 * x + 0x155a)), x + 0x158a);
-		fcn_004c6470(*(int*) (ent + 4), *(unsigned char*) (action + 0xb1));
+		cm_RequestSetEntityLevel(*(int*) (ent + 4), *(unsigned char*) (action + 0xb1));
 		kind = *(char*) (ent + 2);
 		if (kind == 6 || kind == 7 || kind == 5) {
 			io_FormatTextBuffer(buf, 0x1c1f, *(unsigned short*) ent,

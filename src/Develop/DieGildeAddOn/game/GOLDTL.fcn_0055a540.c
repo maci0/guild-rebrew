@@ -5,7 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 /* ADDRESS: GOLDTL 0x0055a540 */
-void __cdecl fcn_0055a540(char* o)
+void __cdecl he_AllocAction0x7f(char* o)
 {
 	*(int*) (o + 0x70) = 0;
 	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;

@@ -18,7 +18,7 @@ char* __cdecl fcn_005b1a80(int key)
 	return 0;
 }
 
-void __cdecl fcn_005b1980(int a, char* o);
+void __cdecl hp_UpdateProdSetting(int a, char* o);
 
 
 /* ADDRESS: GOLDTL 0x005b1e20 */
@@ -28,7 +28,7 @@ void __cdecl fcn_005b1e20(char* p)
 
 	o = fcn_005b1a80(*(int*) (p + 1));
 	if (o != 0) {
-		fcn_005b1980((int) p, o);
+		hp_UpdateProdSetting((int) p, o);
 	}
 }
 

@@ -9,7 +9,7 @@ void __cdecl cm_RecycleCommandQueueNode(char*);
 int __cdecl cm_IsQueuedCommandComplete(char*);
 void __cdecl cm_ReassembleQueuedCommand(char*);
 int __cdecl ahm_ProcessEntityChain(char*);
-void __cdecl fcn_005356b0(int);
+void __cdecl main_ExitToFrameHandler(int);
 
 /* ADDRESS: GOLDTL 0x004c4b00 */
 int __cdecl cm_ExecCommand(void)
@@ -46,7 +46,7 @@ int __cdecl cm_ExecCommand(void)
 		} while ((int) p < 0x1005760);
 		if (!g_774954) {
 			g_774954 = 1;
-			fcn_005356b0(0x5438c0);
+			main_ExitToFrameHandler(0x5438c0);
 			node = cm_CommandQueueHead;
 		}
 	}

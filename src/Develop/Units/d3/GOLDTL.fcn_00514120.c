@@ -73,7 +73,7 @@ void __cdecl fcn_005016f0(int);
 void __cdecl fcn_005017a0(int);
 int __cdecl fcn_0045b700(Device*, int, int);
 
-int __cdecl fcn_00514120(char* map)
+int __cdecl gm_LoadCityMap(char* map)
 {
 	void* folder;
 	int h;

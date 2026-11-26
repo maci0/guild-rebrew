@@ -28,7 +28,7 @@ extern int g_aed32c;
    entity is drifting to, then rebalances the building's per-kind stock against
    the entity's total. */
 /* ADDRESS: GOLDTL 0x00482b60 */
-void __cdecl fcn_00482b60(char* e)
+void __cdecl ai_CalcMeisterBank(char* e)
 {
 	Stat st;
 	char* o;

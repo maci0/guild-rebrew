@@ -33,7 +33,7 @@ float __cdecl fcn_004cefb0(char*, int);
 float __cdecl gm_GetEntityGridDistance(void*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 unsigned int __cdecl cut_RandMod(int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 char* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl fcn_004d1020(char*, char*, char*, int, int);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
@@ -42,7 +42,7 @@ char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 int __cdecl fcn_004c6820(int, void*);
-int __cdecl fcn_004c6680(char*, int, int, char*);
+int __cdecl cm_RequestChTalkAction(char*, int, int, char*);
 unsigned int __cdecl fcn_004d89c0(int, unsigned int, int);
 int __cdecl sprintf(char*, char*, ...);
 int __cdecl _ftol(void);
@@ -74,7 +74,7 @@ static int ent34(char* e)
 }
 
 /* ADDRESS: GOLDTL 0x004d8d00 */
-void __cdecl fcn_004d8d00(char* context)
+void __cdecl gm_UpdateTaskProgress(char* context)
 {
 	char b118[0x30];
 	char be8[0x30];
@@ -140,7 +140,7 @@ void __cdecl fcn_004d8d00(char* context)
 				sprintf(be8, (char*)0x68b85c, *(int*)(obj + 4));
 				p->c0c = 1;
 				fcn_004c6940(obj, 6, msg.f);
-				p->timer = fcn_004c6680(be8, v10, v14, 0);
+				p->timer = cm_RequestChTalkAction(be8, v10, v14, 0);
 			} else {
 				d3_GridPointToWorld((int)base, p->f10, p->f14, vec);
 				if (!CompareVector3WithinTolerance(vec,
@@ -187,7 +187,7 @@ void __cdecl fcn_004d8d00(char* context)
 					if (fcn_004cec00(p->f14, p->f18, &v10, &v14)) {
 						p->f14 = v10;
 						p->f18 = v14;
-						fcn_004c6680((char*)ent34(obj), v10, v14, 0);
+						cm_RequestChTalkAction((char*)ent34(obj), v10, v14, 0);
 						p->c0c = 1;
 					}
 				} else if (*(int*)(*(int*)(obj + 0x184) + 0x128) == 0
@@ -257,7 +257,7 @@ void __cdecl fcn_004d8d00(char* context)
 					}
 					p->f20 = v24;
 					if (v24 && *(int*)(obj + 0x16c)
-					    && fcn_005c6270((void*)*(int*)(obj + 0x16c), 0x2b9))
+					    && gm_HasActiveSpecialObject((void*)*(int*)(obj + 0x16c), 0x2b9))
 						p->f24 = (int)(p->f24 * g_664144);
 					if (*(int*)(g_772f24 + 4) == g_68b79c
 					    && *(int*)(ent + 0x58) == 0 && tgt) {
@@ -297,7 +297,7 @@ void __cdecl fcn_004d8d00(char* context)
 				p->f14 = v10;
 				p->f18 = v14;
 				sprintf(b88, (char*)0x68b85c, *(int*)(obj + 4));
-				p->timer = fcn_004c6680(b88, v10, v14, (char*)ent34(obj));
+				p->timer = cm_RequestChTalkAction(b88, v10, v14, (char*)ent34(obj));
 				goto after2;
 			}
 			if (*(int*)(ent + 0x58) == 1 || *(int*)ent == 0x176) {
@@ -320,7 +320,7 @@ void __cdecl fcn_004d8d00(char* context)
 					(int)(*(float*)(ent + 0xc)
 					/ *(float*)(base + 0x10)
 					* g_664128), &v10, &v14))
-					p->timer = fcn_004c6680((char*)ent34(obj),
+					p->timer = cm_RequestChTalkAction((char*)ent34(obj),
 					    v10, v14, 0);
 			}
 tail1:
@@ -340,7 +340,7 @@ lvl3:
 				break;
 			if (fcn_004d31d0(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
 				(unsigned int*)&v10, (unsigned int*)&v14))
-				p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
+				p->timer = cm_RequestChTalkAction((char*)ent34(obj), v10, v14, 0);
 			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			goto after2;
 tail2:
@@ -356,7 +356,7 @@ tail1_body:
 				break;
 			if (fcn_004d31d0(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
 				(unsigned int*)&v10, (unsigned int*)&v14))
-				p->timer = fcn_004c6680((char*)ent34(obj), v10, v14, 0);
+				p->timer = cm_RequestChTalkAction((char*)ent34(obj), v10, v14, 0);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
 			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
@@ -372,7 +372,7 @@ tail1_body:
 						sprintf(bb8, (char*)0x68b85c, *(int*)(obj + 4));
 						p->c0c = 1;
 						p->timer = fcn_004c6940(obj, 6, msg.f);
-						p->timer = fcn_004c6680(bb8, v10, v14, 0);
+						p->timer = cm_RequestChTalkAction(bb8, v10, v14, 0);
 					}
 				}
 			}
@@ -403,7 +403,7 @@ tail1_body:
 						*((unsigned char*)p + 0x21), &v10, &v14))
 						break;
 					n = ent34(obj);
-					p->timer = fcn_004c6680((char*)n, v10, v14, 0);
+					p->timer = cm_RequestChTalkAction((char*)n, v10, v14, 0);
 				} else {
 					d3_GridPointToWorld((int)base, *((unsigned char*)p + 0x20),
 					    *((unsigned char*)p + 0x21), vec);
@@ -430,7 +430,7 @@ tail1_body:
 				*((unsigned char*)msg.f + 0x22) = 2;
 				fcn_004c6820(*(int*)(context + 0x10), msg.f);
 				n = (*(int*)(*(int*)(obj + 0x184) + 0x34));
-				p->timer = fcn_004c6680((char*)n, v10, v14, 0);
+				p->timer = cm_RequestChTalkAction((char*)n, v10, v14, 0);
 			} else if (*((unsigned char*)p + 0x22) == 2) {
 				d3_GridPointToWorld((int)base, *((unsigned char*)p + 0x20),
 				    *((unsigned char*)p + 0x21), vec);
@@ -468,7 +468,7 @@ tail1_body:
 						p->f20 = v10;
 						p->f24 = v14;
 						fcn_004c6940(obj, 6, msg.f);
-						p->timer = fcn_004c6680((char*)(*(int*)(*(int*)(obj + 0x184) + 0x34)), v10, v14, 0);
+						p->timer = cm_RequestChTalkAction((char*)(*(int*)(*(int*)(obj + 0x184) + 0x34)), v10, v14, 0);
 						goto after2;
 					}
 				}
@@ -515,7 +515,7 @@ case4b:
 				sprintf(b118, (char*)0x68b85c, *(int*)(obj + 4));
 				p->c0c = 1;
 				fcn_004c6940(obj, 6, msg.f);
-				p->timer = fcn_004c6680(b118, v10, v14, 0);
+				p->timer = cm_RequestChTalkAction(b118, v10, v14, 0);
 			} else {
 				d3_GridPointToWorld((int)base, p->f10, p->f14, vec);
 				if (!CompareVector3WithinTolerance(vec,

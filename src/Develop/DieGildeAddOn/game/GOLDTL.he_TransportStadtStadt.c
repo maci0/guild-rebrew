@@ -3,7 +3,7 @@ extern int g_774650;
 
 extern unsigned short *__cdecl gm_StartFilteredEntitySearch(int, ...);
 extern void *__cdecl gm_FindRecordById(int);
-extern int __cdecl fcn_00505340(unsigned char *);
+extern int __cdecl gm_IsWarehouse(unsigned char *);
 extern char *__cdecl fcn_0055d630(char *);
 extern void __cdecl fcn_0055d6e0(char *, char *);
 extern void *__cdecl fcn_00502cd0(int, int, ...);
@@ -54,7 +54,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 		if (!v6)
 			v6 = *(char **)(v5 + 0x61);
 		d3_TransformPoint(v6, v6 + 0x4c, l_pos);
-		if (fcn_00505340((unsigned char *)v4))
+		if (gm_IsWarehouse((unsigned char *)v4))
 			v6 = (char *)fcn_00502cd0(*(int *)(v3 + 0x5d), 1, 1, *(int *)(transportEvent + 0xac));
 		else
 			v6 = (char *)fcn_00502cd0(*(int *)(v4 + 0x5d), 1, 1,
@@ -70,7 +70,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 			*(int *)(transportEvent + 0xd8) = *(int *)&l_pos[0];
 			*(int *)(transportEvent + 0xdc) = *(int *)&l_pos[1];
 			*(int *)(transportEvent + 0xe0) = *(int *)&l_pos[2];
-			if (!fcn_00505340((unsigned char *)v4)) {
+			if (!gm_IsWarehouse((unsigned char *)v4)) {
 				if (*(int *)(v4 + 0x61)) {
 					v8 = fcn_0055d630(*(char **)(v4 + 0x61));
 					if (!(v8)) {
@@ -85,7 +85,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 				fcn_004c5d20(*(int *)(v6 + 2), 1);
 			}
 			cm_RequestWalkOnPath(*(int *)(v6 + 2), l_a, l_b, 0);
-			if (!fcn_00505340((unsigned char *)v4))
+			if (!gm_IsWarehouse((unsigned char *)v4))
 				*(int *)(transportEvent + 0xec) = cm_RequestMoveObjekt(*(int *)(v3 + 1),
 								   *(int *)(transportEvent + 0xb0),
 								   *(int *)(transportEvent + 0xac));
@@ -118,22 +118,22 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 		    *(int *)(transportEvent + 0xd4) <= 6)
 			return;
 		cm_RequestChangeBits(*(int *)(v4 + 2), 0x13, 1, 0, 0x40);
-		if (!fcn_00505340((unsigned char *)v5)) {
+		if (!gm_IsWarehouse((unsigned char *)v5)) {
 			fcn_004c5d20(*(int *)(v4 + 2), 0);
 			*(int *)(transportEvent + 0xec) = cm_RequestMoveObjekt(*(int *)(v5 + 1),
 							   *(int *)(v3 + 1),
 							   *(int *)(transportEvent + 0xac));
 		}
-		if (fcn_00505340((unsigned char *)v5))
+		if (gm_IsWarehouse((unsigned char *)v5))
 			io_FormatTextBuffer(l_text, 0x1c43);
 		else
 			io_FormatTextBuffer(l_text, 0x1c44, v5);
 		v10 = g_774650;
 		if ((*(int *)(0x7e35c0 + v10 * 8) != 0x5ba910 ||
 		     (*(int *)0x7746c4 != (int)v5 &&
-		      (!fcn_00505340((unsigned char *)v5) || !*(int *)0x7746cc ||
+		      (!gm_IsWarehouse((unsigned char *)v5) || !*(int *)0x7746cc ||
 		       (*(int *)0x7746c4 != (int)v5 &&
-			(!fcn_00505340((unsigned char *)v5) ||
+			(!gm_IsWarehouse((unsigned char *)v5) ||
 			 ((v1 = *(unsigned short *)*(int *)0x7746cc,
 			   (v1 < 0x92 || v1 > 0x97) && v1 != 0x2db))))))) &&
 		    !(*(unsigned char *)(v4 + 0x20) & 1) &&

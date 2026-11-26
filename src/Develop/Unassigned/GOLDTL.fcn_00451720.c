@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-void __cdecl fcn_00451720(float* a, float* b, float* oa, float* ob)
+void __cdecl d3_WrapEulerAnglesPi(float* a, float* b, float* oa, float* ob)
 {
 	int k;
 	float t;

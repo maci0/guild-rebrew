@@ -5,7 +5,7 @@ int __cdecl fcn_0042e410(int);
 unsigned char *__cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl fcn_00508540(int *);
-int __cdecl fcn_005c6270(void *, int);
+int __cdecl gm_HasActiveSpecialObject(void *, int);
 void __cdecl io_FormatTextBuffer(void *, int, ...);
 void __cdecl fcn_00545d40(int, int, void *, int, int, void *);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
@@ -24,7 +24,7 @@ unsigned int __cdecl fcn_004bb720(void *a0)
     {
         return 1;
     }
-    if (fcn_005c6270(entity, 0x290) != 0)
+    if (gm_HasActiveSpecialObject(entity, 0x290) != 0)
     {
         return 0x400;
     }

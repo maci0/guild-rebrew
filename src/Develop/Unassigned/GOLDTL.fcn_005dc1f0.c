@@ -22,7 +22,7 @@ void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005dbe90(char*);
 
-int __cdecl fcn_005dc1f0(Ent* ent, Cmd* cmd)
+int __cdecl gm_ObjBoostEntityHealth(Ent* ent, Cmd* cmd)
 {
 	char text[0x800];
 

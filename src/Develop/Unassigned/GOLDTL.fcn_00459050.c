@@ -8,7 +8,7 @@ extern const float g_662d40[3];
 
 extern char* d3_ActiveCamera;
 
-void __cdecl fcn_00451340(float*, float*, float, float*);
+void __cdecl d3_LerpVec3(float*, float*, float, float*);
 float __cdecl fcn_00451380(float*, float*);
 void __cdecl d3_NormalizeVector(float*);
 float* __stdcall D3DXMatrixTranspose(float*, const float*);
@@ -70,10 +70,10 @@ void __cdecl fcn_00459050(int self)
 	i = 0;
 	for (r = 0; r < 6; r++) {
 		u = (float) r * g_6629d0;
-		fcn_00451340(dr, br, u, o1);
-		fcn_00451340(cr, ar, u, o2);
+		d3_LerpVec3(dr, br, u, o1);
+		d3_LerpVec3(cr, ar, u, o2);
 		for (c = 0; c < 8; c++) {
-			fcn_00451340(o1, o2, (float) c * 0.14285715f, vp - 1);
+			d3_LerpVec3(o1, o2, (float) c * 0.14285715f, vp - 1);
 			d3_NormalizeVector(vp - 1);
 			p[0x30 + i] = vp[0] > *(float*) (p + 0x18);
 			u = (vp[0] - *(float*) (p + 0x1c)) * *(float*) (p + 0x20);

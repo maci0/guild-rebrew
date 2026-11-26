@@ -2,7 +2,7 @@
 extern float g_664330;
 extern unsigned char g_773d75;
 
-int __cdecl fcn_0050b810(int, unsigned char);
+int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x004f0ff0 */
 int __cdecl fcn_004f0ff0(char* obj, int a1, int a2, int a3, int* out1, int* out2)
@@ -47,7 +47,7 @@ int __cdecl fcn_004f0ff0(char* obj, int a1, int a2, int a3, int* out1, int* out2
 	if (*(int*) (obj + 0x194) < *out1) {
 		goto fail_0;
 	}
-	if (fcn_0050b810(*(int*) (obj + 0x178), g_773d75) < *out2) {
+	if (gm_SumQueryEntryValues(*(int*) (obj + 0x178), g_773d75) < *out2) {
 		goto fail_0;
 	}
 	return 1;

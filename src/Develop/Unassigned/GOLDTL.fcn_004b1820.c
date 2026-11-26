@@ -12,7 +12,7 @@
 extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca4[];
 
-int __cdecl fcn_004ae170(int);
+int __cdecl gm_IsSlotLivingPerson(int);
 void __cdecl cm_SendCopyEntityData(void*);
 
 int __cdecl hst_CmdSoeldnerMarodieren(void)
@@ -25,7 +25,7 @@ int __cdecl hst_CmdSoeldnerMarodieren(void)
 	memset(m, 0, sizeof(m));
 	*(int*) ((char*) &st + 6) = 0;
 	for (i = 0; i < 0x300; i++) {
-		if (fcn_004ae170(i) != 0) {
+		if (gm_IsSlotLivingPerson(i) != 0) {
 			memset(m, 0, sizeof(m));
 			st.hour = i % 4 + 0xd;
 			m[4] = 0x58;

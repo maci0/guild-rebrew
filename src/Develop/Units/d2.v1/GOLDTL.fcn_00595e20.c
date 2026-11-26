@@ -8,7 +8,7 @@ extern char* g_aed32c;
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetBuildingTypeCategory(int);
-int __cdecl fcn_0050dfd0(char*, int);
+int __cdecl gm_GetStorageSlotCapacity(char*, int);
 int __cdecl gm_GetMsgField(char*, void*);
 int __cdecl cm_BeginPacketFieldDelta(int, int);
 int __cdecl cm_AppendCommandSyncField(int, int, int, int*);
@@ -114,9 +114,9 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 		}
 		if (i < 8) {
 			*(int*) (i * 0x38 + 0x77970c) =
-			    (unsigned int) (fcn_0050dfd0(a1, *ent) * *(int*) (ent + 0xe)) >> 2;
+			    (unsigned int) (gm_GetStorageSlotCapacity(a1, *ent) * *(int*) (ent + 0xe)) >> 2;
 			*(int*) (i * 0x38 + 0x779710) = gm_GetMsgField(a1, ent);
-			*(int*) (i * 0x38 + 0x779714) = fcn_0050dfd0(a1, *ent);
+			*(int*) (i * 0x38 + 0x779714) = gm_GetStorageSlotCapacity(a1, *ent);
 			goto next;
 		}
 		for (i = 0, p = (unsigned int*) 0x7796e0; (int) p < 0x7798a0; p += 0xe) {
@@ -127,9 +127,9 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 		if (i < 8) {
 			*(int*) (i * 0x38 + 0x7796e0) = *ent;
 			*(int*) (i * 0x38 + 0x77970c) =
-			    (unsigned int) (fcn_0050dfd0(a1, *ent) * *(int*) (ent + 0xe)) >> 2;
+			    (unsigned int) (gm_GetStorageSlotCapacity(a1, *ent) * *(int*) (ent + 0xe)) >> 2;
 			*(int*) (i * 0x38 + 0x779710) = gm_GetMsgField(a1, ent);
-			*(int*) (i * 0x38 + 0x779714) = fcn_0050dfd0(a1, *ent);
+			*(int*) (i * 0x38 + 0x779714) = gm_GetStorageSlotCapacity(a1, *ent);
 		}
 		goto next;
 
@@ -141,9 +141,9 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 		}
 		if (i < 16) {
 			*(int*) (i * 0x38 + 0x778dcc) =
-			    (unsigned int) (fcn_0050dfd0(a1, *ent) * *(int*) (ent + 0xe)) >> 2;
+			    (unsigned int) (gm_GetStorageSlotCapacity(a1, *ent) * *(int*) (ent + 0xe)) >> 2;
 			*(int*) (i * 0x38 + 0x778dd0) = gm_GetMsgField(a1, ent);
-			*(int*) (i * 0x38 + 0x778dd4) = fcn_0050dfd0(a1, *ent);
+			*(int*) (i * 0x38 + 0x778dd4) = gm_GetStorageSlotCapacity(a1, *ent);
 			goto next;
 		}
 		for (i = 0, p = (unsigned int*) 0x778da0; (int) p < 0x779120; p += 0xe) {
@@ -154,9 +154,9 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 		if (i < 16) {
 			*(int*) (i * 0x38 + 0x778da0) = *ent;
 			*(int*) (i * 0x38 + 0x778dcc) =
-			    (unsigned int) (fcn_0050dfd0(a1, *ent) * *(int*) (ent + 0xe)) >> 2;
+			    (unsigned int) (gm_GetStorageSlotCapacity(a1, *ent) * *(int*) (ent + 0xe)) >> 2;
 			*(int*) (i * 0x38 + 0x778dd0) = gm_GetMsgField(a1, ent);
-			*(int*) (i * 0x38 + 0x778dd4) = fcn_0050dfd0(a1, *ent);
+			*(int*) (i * 0x38 + 0x778dd4) = gm_GetStorageSlotCapacity(a1, *ent);
 		}
 
 	next:

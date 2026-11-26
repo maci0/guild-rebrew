@@ -12,7 +12,7 @@ void __cdecl fcn_005100f0(int id, int amount);
 int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5);
 int __cdecl gm_RandomMod(int);
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
-int __cdecl fcn_005c6270(char* a1, int a2);
+int __cdecl gm_HasActiveSpecialObject(char* a1, int a2);
 void __cdecl he_NotifyAction0x35Blocked(void* a1, void* a2);
 void __cdecl he_NotifyAction0x35Success(void* a1);
 
@@ -78,7 +78,7 @@ void __cdecl fcn_0054c240(u8* o)
         (char*)(0x7f4ca0 + 540 * (u32)*(u16*)(o + 8)), 4);
     *((u32*)(o + 0xcc)) = 0x300;
 
-    if (fcn_005c6270(r, 0x15c) != 0) {
+    if (gm_HasActiveSpecialObject(r, 0x15c) != 0) {
         *(pos14_7f4c00*) d = gm_GameTime;
         *((u32*)(o + 0x84)) = (u32)fcn_004c5620(-1, o);
         he_NotifyAction0x35Blocked(r, (void*)(0x7f4ca0 + 540 * (u32)*(u16*)(o + 8)));

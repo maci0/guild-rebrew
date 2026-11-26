@@ -4,7 +4,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_AddObjekt(void);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CheckEntityType(unsigned char* geb);
-int __cdecl fcn_00505340(unsigned char* geb);
+int __cdecl gm_IsWarehouse(unsigned char* geb);
 
 /* ADDRESS: GOLDTL 0x00504db0 */
 unsigned char* __cdecl gm_FindNearestEligibleEntity(unsigned char* self, int kind)
@@ -25,7 +25,7 @@ unsigned char* __cdecl gm_FindNearestEligibleEntity(unsigned char* self, int kin
 		if (gm_CheckEntityType(e) != 0) {
 			continue;
 		}
-		if (fcn_00505340(e) != 0) {
+		if (gm_IsWarehouse(e) != 0) {
 			continue;
 		}
 		a = *(float**) (e + 0x61);

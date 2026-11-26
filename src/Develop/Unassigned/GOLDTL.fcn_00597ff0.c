@@ -12,7 +12,7 @@ typedef struct {
 
 extern Entry g_6a9bf8[15];
 
-int __cdecl fcn_00597ff0(int key, char* out)
+int __cdecl lc_GetBauplatzPrefix(int key, char* out)
 {
 	int i;
 	int j;

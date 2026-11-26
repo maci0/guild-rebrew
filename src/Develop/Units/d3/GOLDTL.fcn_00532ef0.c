@@ -21,7 +21,7 @@ extern char* g_7746a8;
 extern int g_7e2a9c;
 
 #include "client_scene_transform.h"
-void __cdecl fcn_00433780(View* v);
+void __cdecl d3_FreeObjectAnimation(View* v);
 void __cdecl fcn_00438b40(View* v, float* p);
 void __cdecl d3_SetObjectRotation(View* v, float* r);
 void __cdecl d3_AnimateCameraToStoredTransform(void);
@@ -35,14 +35,14 @@ void __cdecl fcn_00532ef0(void)
 	done = 0;
 	if (d3_ActiveCameraAnimation != 0) {
 		if (CompareVector3WithinTolerance(g_14ce880, g_7e3a40, 0.1f)) {
-			fcn_00433780(((View*)d3_ActiveCamera));
+			d3_FreeObjectAnimation(((View*)d3_ActiveCamera));
 			d3_ActiveCameraAnimation = 0;
 			d3_CameraAnimating = 0;
 			done = 1;
 			fcn_00438b40(((View*)d3_ActiveCamera), g_7e3a40);
 			d3_SetObjectRotation(((View*)d3_ActiveCamera), d3_CameraTargetRotation);
 		} else {
-			fcn_00433780(((View*)d3_ActiveCamera));
+			d3_FreeObjectAnimation(((View*)d3_ActiveCamera));
 			d3_ActiveCameraAnimation = 0;
 			d3_CameraAnimating = 0;
 		}

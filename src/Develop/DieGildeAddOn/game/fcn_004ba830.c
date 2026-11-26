@@ -2,11 +2,11 @@
 
 int __cdecl fcn_0042e410(int n);
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_005c6270(char* rec, int mode);
+int __cdecl gm_HasActiveSpecialObject(char* rec, int mode);
 int __cdecl fcn_00503fe0(int a, int b, int c);
 int __cdecl fcn_00504bd0(int type);
 char* __cdecl fcn_00503e80(void);
-void __cdecl fcn_004c6ba0(int a, int id, int off);
+void __cdecl cm_RequestModifyEntityLevel(int a, int id, int off);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, int a, int b, int c, int d);
 void __cdecl fcn_00545d40(int a, int b, char* buf, int overflow, int msg, int zero);
 
@@ -31,7 +31,7 @@ int __cdecl fcn_004ba830(unsigned short* request)
 	rec = (unsigned short*) gm_LookupEntityRecordById(*(int*) request);
 	if (rec == 0)
 		return 1;
-	if (fcn_005c6270((char*) rec, 0x290) == 0) {
+	if (gm_HasActiveSpecialObject((char*) rec, 0x290) == 0) {
 		e = (char*) fcn_00503fe0(1, 3, (int) *rec);
 		if (e != 0) {
 			do {
@@ -60,7 +60,7 @@ int __cdecl fcn_004ba830(unsigned short* request)
 							v = n;
 						else
 							v = (fcn_0042e410(10) & 0xffff) + 5;
-						fcn_004c6ba0(*(int*) (slot + 2), 1, -(int) (signed char) v);
+						cm_RequestModifyEntityLevel(*(int*) (slot + 2), 1, -(int) (signed char) v);
 						io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 						    *slot, pick, *slot, 0x16b8);
 						fcn_00545d40(*(int*) (rec + 2), *(int*) (rec + 2), buf,

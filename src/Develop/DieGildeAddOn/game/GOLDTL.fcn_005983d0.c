@@ -54,5 +54,5 @@ void __cdecl fcn_005983d0(char* e)
 		}
 	}
 done:
-	fcn_00598330(e, ok);
+	lc_SetVegetationVisible(e, ok);
 }

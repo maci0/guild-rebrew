@@ -19,15 +19,15 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005c5da0(int, int, int, int, int);
 void __cdecl fcn_00525ef0(void);
-int __cdecl fcn_005a7400(int, int, int);
-int __cdecl fcn_005c6270(char*, int);
+int __cdecl gm_IsGebaeudeOpen(int, int, int);
+int __cdecl gm_HasActiveSpecialObject(char*, int);
 int __cdecl fcn_00596810(int, int);
 int __cdecl fcn_00596b10(int, int, int, int);
 int __cdecl fcn_00595e20(int, int);
 int __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl fcn_005974e0(int, int);
 int __cdecl fcn_00597940(int, int, int, int, int);
-int __cdecl fcn_00505340(int);
+int __cdecl gm_IsWarehouse(int);
 int __cdecl gm_CanTradeWithObject(int, int);
 void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_00469880(int);
@@ -50,7 +50,7 @@ int __cdecl fcn_0046f9b0(int, int);
 int __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_004bfe00(int);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_0050dfd0(int, int);
+int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
 int __cdecl fcn_0064d41a(int, int, int, int, int);
 int __cdecl fcn_005c5e70(void);
@@ -497,7 +497,7 @@ l_5bb193:
 
 	ent = f.v14;
 	if ((*(int*) 0x7746d8 & 0x200) == 0) {
-		if (fcn_005a7400(ent, 0, 0) == 0) {
+		if (gm_IsGebaeudeOpen(ent, 0, 0) == 0) {
 			if (*(short*) 0x774970 == *(short*) (ent + 0x27)) {
 				goto l_c4;
 			}
@@ -517,7 +517,7 @@ l_5bb193:
 	f.v3c = 1;
 	}
 l_row:
-	if (fcn_005c6270((char*) (0x7f4ca0 + (int) (*(unsigned short*) 0x774970) * 0x21c), 0x299) != 0) {
+	if (gm_HasActiveSpecialObject((char*) (0x7f4ca0 + (int) (*(unsigned short*) 0x774970) * 0x21c), 0x299) != 0) {
 		f.v3c = 1;
 	}
 	goto l_sel;
@@ -560,7 +560,7 @@ l_sel:
 			                 *(int*) (idx + 2), 3,
 			                 (int) (*(unsigned short*) 0x774970)) != 0
 			    && e->f04 == 0) {
-				if (fcn_00505340(buildingArg) == 0) {
+				if (gm_IsWarehouse(buildingArg) == 0) {
 					goto l_next;
 				}
 				if (gm_CanTradeWithObject(buildingArg, idx) != 0) {
@@ -607,7 +607,7 @@ l_next:
 			break;
 		}
 		d2_SetForm(f.v2c, 2);
-		if (fcn_00505340(buildingArg) != 0) {
+		if (gm_IsWarehouse(buildingArg) != 0) {
 			if (gm_CanTradeWithObject(buildingArg, f.v20) == 0) {
 				goto l_fill_next;
 			}
@@ -848,7 +848,7 @@ l_slot_handles:
 			}
 			for (i = 0; i < f.v158; i++) {
 				if (*(int*) ((char*) e + 0xd8 + i * 4) == -1) {
-					f.v30 = fcn_0050dfd0(*(int*) (f.v15C + 0xb0),
+					f.v30 = gm_GetStorageSlotCapacity(*(int*) (f.v15C + 0xb0),
 					                     (int) (*(unsigned short*) (f.v15C + 0x44 + f.v24 * 2)));
 					j = ((int*) &f.v10C[0])[3 * ((int) (*(short*) e->f00) - 0x134) + i];
 					j -= *(int*) (0x1015f44 + *(int*) 0x772514 * 0x3cc);

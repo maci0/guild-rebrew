@@ -48,7 +48,7 @@ void __cdecl fcn_004c39b0(void);
 void __cdecl tb_SetCallbackPaused(int a1, int a2);
 int __cdecl main_RunFrameLoop(int a1, int a2);
 void __cdecl lc_PlayerInJail(void);
-void __cdecl fcn_0052c9b0(void);
+void __cdecl d3_UpdateCameraController(void);
 void* __cdecl evt_FindScriptById(int a1);
 int __cdecl evt_RequestScriptExit(int a1);
 void __cdecl fcn_0052db70(int a0);
@@ -59,7 +59,7 @@ int __cdecl fcn_00506380(int a, int b, int c, int d);
 int __cdecl gm_CheckEntityType(void* a0);
 int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d);
 void __cdecl fcn_005a80d0(int a0);
-int __cdecl fcn_00505340(void* a0);
+int __cdecl gm_IsWarehouse(void* a0);
 void __cdecl gm_RunGebaeudeVisit(int a, int b);
 void __cdecl fcn_005a3b30(int a0);
 void __cdecl fcn_004c3a10(void);
@@ -134,7 +134,7 @@ void __cdecl fcn_0059a340(void)
 		g_774658 = g_774650;
 		if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_198[0x19]) > 0)
 			lc_PlayerInJail();
-		fcn_0052c9b0();
+		d3_UpdateCameraController();
 
 		if (state == 0) {
 			fx = g_7f4c04 & 0xffff;
@@ -197,7 +197,7 @@ void __cdecl fcn_0059a340(void)
 				v11 = gm_CheckEntityType((void*) v9);
 				if (v11 && d2_DispatchTutorialEvent(0x1b, v9, 0, 0) == 1)
 					fcn_005a80d0(v9);
-				else if (!fcn_00505340((void*) v9)
+				else if (!gm_IsWarehouse((void*) v9)
 					&& d2_DispatchTutorialEvent(0x19, v9, 0,
 						*(unsigned short*) (v9 + 0x29)) == 1)
 					gm_RunGebaeudeVisit(v9,
@@ -214,18 +214,18 @@ void __cdecl fcn_0059a340(void)
 				if (!
 					(*(unsigned char*) (v9 + 0x5a) & 1)) {
 					if (*(int*) (v9 + 0x61)
-						&& !fcn_00505340((void*) v9))
+						&& !gm_IsWarehouse((void*) v9))
 						fcn_0052cf20(v9);
 					if (gm_CheckEntityType((void*) v9)) {
 						fcn_005a80d0(v9);
 						goto label_59a83a;
 					}
-					if (!fcn_00505340((void*) v9)) {
+					if (!gm_IsWarehouse((void*) v9)) {
 						gm_RunGebaeudeVisit(v9,
 							*(unsigned short*) (v9 + 0x29));
 						goto label_59a83a;
 					}
-					if (fcn_00505340((void*) v9)) {
+					if (gm_IsWarehouse((void*) v9)) {
 						fcn_0052cbb0(v9);
 						goto label_59a834;
 					}

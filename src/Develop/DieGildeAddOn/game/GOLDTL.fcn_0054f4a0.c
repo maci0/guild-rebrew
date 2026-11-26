@@ -18,7 +18,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_004c5620(int, char*);
 
 /* ADDRESS: GOLDTL 0x0054f4a0 */
-void __cdecl fcn_0054f4a0(char* a0, char* firstEntity, unsigned char* secondEntity)
+void __cdecl he_DeclineDuell(char* a0, char* firstEntity, unsigned char* secondEntity)
 {
 	Row_54f4a0 role;
 	Row_54f4a0 slot;

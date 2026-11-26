@@ -80,7 +80,7 @@ void __cdecl fcn_00410870(void);
 void __cdecl ch_RegisterScriptCommands(void);
 void __cdecl evt_RegisterSoundCommands(void);
 void __cdecl fcn_0042a020(void);
-void __cdecl fcn_005e2510(void);
+void __cdecl gm_ApplyGameSettings(void);
 int __cdecl main_PumpWindowMessages(void);
 #include <windows.h>
 #include <stdlib.h>
@@ -235,7 +235,7 @@ int __cdecl main_OpenEngine(void)
 	evt_RegisterSoundCommands();
 	g_67a590 = (int) fcn_0042a020;
 	(*(int*)&g_67a0d8) = 0x400000;
-	fcn_005e2510();
+	gm_ApplyGameSettings();
 	main_PumpWindowMessages();
 	return 1;
 }

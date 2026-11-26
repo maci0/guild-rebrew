@@ -1983,10 +1983,7 @@ int __cdecl amt_FindEntity27(int entity_id)
 	return 0;
 }
 
-int __cdecl amt_GetRoleTemplate(void)
-{
-	return 0;
-}
+
 
 int __cdecl amt_SwapOfficeHolders(int* a)
 {

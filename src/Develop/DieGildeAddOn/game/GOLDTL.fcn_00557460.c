@@ -14,7 +14,7 @@ int __cdecl cm_GetCommandStatus(int h);
 int* __cdecl cm_GetCommandResult(int h);
 int __cdecl fcn_004c5620(int a, char* dlg);
 void __cdecl cm_SendCancelCharacterActions(int a);
-void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* s);
+void __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* s);
 void __cdecl he_FreeAction(char* dlg);
 void __cdecl fcn_005015e0(int* out, int a, int b, int c);
 int __cdecl gm_IsEntityAtBuilding(char* e, char* h);
@@ -27,7 +27,7 @@ int __cdecl fcn_0042e410(int n);
 void __cdecl cm_RequestLinkEvidence(int a, int b);
 
 /* ADDRESS: GOLDTL 0x00557460 */
-void __cdecl fcn_00557460(char* dlg)
+void __cdecl he_RunDunkleEcke(char* dlg)
 {
 	char* hit;
 	char text[0x400];
@@ -109,7 +109,7 @@ void __cdecl fcn_00557460(char* dlg)
 		e = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
 		if (e != 0) {
 			cm_SendCancelCharacterActions(*(int*) (e + 4));
-			fcn_004c5da0(*(int*) (e + 4), *(int*) (hit + 1), -1, 0, 1,
+			ch_StartMovement(*(int*) (e + 4), *(int*) (hit + 1), -1, 0, 1,
 			    "Dunkle Ecke");
 			gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
 			*(int*) (dlg + 0xb8) = *(int*) (hit + 1);
@@ -166,7 +166,7 @@ void __cdecl fcn_00557460(char* dlg)
 			return;
 		}
 		cm_SendCancelCharacterActions(*(int*) (e + 4));
-		fcn_004c5da0(*(int*) (e + 4), *(int*) (hit + 1),
+		ch_StartMovement(*(int*) (e + 4), *(int*) (hit + 1),
 		    *(int*) (dlg + 0xb4), 0, 0, "Dunkle Ecke");
 		*(int*) (dlg + 0x84) = fcn_004c5620(3, dlg);
 		return;

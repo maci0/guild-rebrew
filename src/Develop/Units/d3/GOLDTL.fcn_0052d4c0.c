@@ -18,7 +18,7 @@ int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
 float* __stdcall D3DXMatrixTranspose(float*, const float*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 float __cdecl fcn_00413d10(float* p);
-void __cdecl fcn_00433780(char* cam);
+void __cdecl d3_FreeObjectAnimation(char* cam);
 void __cdecl d3_AnimateObjectTransform(char* cam, float* a, float* b, int d, int e);
 
 void __cdecl d3_AnimateCameraToObject(char* entity)
@@ -65,7 +65,7 @@ void __cdecl d3_AnimateCameraToObject(char* entity)
 	t[0] = *(float*) (cam + 0x84);
 	t[1] = *(float*) (cam + 0x88);
 	t[2] = *(float*) (cam + 0x8c);
-	fcn_00433780(cam);
+	d3_FreeObjectAnimation(cam);
 	d3_ActiveCameraAnimation = 0;
 	d3_CameraAnimating = 0;
 	h = fcn_00413d10(w);

@@ -17,7 +17,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind);
 unsigned char* __cdecl gm_AddObjekt(void);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CheckEntityType(unsigned char* e);
-int __cdecl fcn_00505340(unsigned char* e);
+int __cdecl gm_IsWarehouse(unsigned char* e);
 void __cdecl d3_TransformPoint(char* view, char* pos, Vec4* out);
 
 unsigned char* __cdecl gm_FindNearestBuildingByKind(unsigned char* me, int kind)
@@ -40,7 +40,7 @@ unsigned char* __cdecl gm_FindNearestBuildingByKind(unsigned char* me, int kind)
 	}
 	for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
 		rec = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e];
-		if (!gm_CheckEntityType(e) && !fcn_00505340(e) && *(char**) (e + 0x61) != 0 && e != me && (((BUILDING_PROTOTYPE*)rec)->category) == kind) {
+		if (!gm_CheckEntityType(e) && !gm_IsWarehouse(e) && *(char**) (e + 0x61) != 0 && e != me && (((BUILDING_PROTOTYPE*)rec)->category) == kind) {
 			d3_TransformPoint(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, &a);
 			d3_TransformPoint(*(char**) (me + 0x61), *(char**) (me + 0x61) + 0x4c, &b);
 			dx = a.x - b.x;

@@ -9,7 +9,7 @@ int __cdecl fcn_00445600(int, int, char*, int);
 void __cdecl fcn_00546480(char*);
 
 
-void __cdecl fcn_005467e0(int* s)
+void __cdecl d3_FreeEventGfxSlot(int* s)
 {
 	char* h;
 	int save;

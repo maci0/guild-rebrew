@@ -37,7 +37,7 @@ int __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
-float __cdecl fcn_004fef80(char*);
+float __cdecl gm_GetEntityHealth(char*);
 int __cdecl fcn_005c9f10(int, int, int, int, int, short*);
 int __cdecl fcn_005c99a0(int, int, int, int, int, int);
 void __cdecl fcn_00471af0(int, int);
@@ -162,7 +162,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 					}
 				}
 				if (!rec[i].text4) {
-					f = fcn_004fef80(ent);
+					f = gm_GetEntityHealth(ent);
 					if (f < g_662cf8)
 						rec[i].text4 = 0x6d2;
 					else if (f < g_664e88)

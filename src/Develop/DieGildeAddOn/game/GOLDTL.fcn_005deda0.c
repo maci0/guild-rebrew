@@ -39,7 +39,7 @@ char* __cdecl fcn_005cd440(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCopyEntityData(Msg*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-char* __cdecl fcn_005c6220(int, int*);
+char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
 static __inline void send_hit(int id)
@@ -84,7 +84,7 @@ int __cdecl fcn_005deda0(char* e, char* request)
 				io_FormatTextBuffer(msg, 0xffb);
 				fcn_00545d40(*(int*) (r + 4), -1, msg, 0, 0x5fb, 0);
 			}
-			p = fcn_005c6220(**(unsigned short**) request, &out);
+			p = gm_LookupSpecialObjectRecord(**(unsigned short**) request, &out);
 			*(int*) (request + 0x10) = 1;
 			io_FormatTextBuffer(msg, 0xfe8, *(unsigned short*) (p + 0x18) + 1, *(unsigned short*) r);
 			fcn_005dbe90(msg);

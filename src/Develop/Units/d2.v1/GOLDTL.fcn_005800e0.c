@@ -7,7 +7,7 @@ extern int* g_665f08;
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(void*);
 
-int __cdecl fcn_005800e0(void)
+int __cdecl d2_ClearTutorialText(void)
 {
 	char* p;
 

@@ -102,7 +102,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_SendSetAttribute(void);
 void __cdecl cm_SendCopyEntityData(void* msg);
 void __cdecl cm_SendSetGebBesitzer(int a, int b, int c);
-void __cdecl fcn_004c6000(int a, int b);
+void __cdecl cm_RequestSetWohnsitz(int a, int b);
 void __cdecl gm_BuyBuilding(int a, int b, int c, int d, int e);
 int __cdecl fcn_0050d2a0(char* a);
 void __cdecl d2_RunTechTreeDialog(int a, int b);
@@ -353,7 +353,7 @@ after_build:
 		}
 		if (d2_CurrentElementId == v.h4c) {
 			fcn_00471af0(dlg, 0);
-			fcn_004c6000(
+			cm_RequestSetWohnsitz(
 			    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
  + 4),
 			    *(int*) (ent + 1));

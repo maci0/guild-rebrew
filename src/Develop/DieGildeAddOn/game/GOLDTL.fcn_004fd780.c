@@ -15,7 +15,7 @@ extern int g_773d48;
  * the objects selected by the current filter. */
 
 /* ADDRESS: GOLDTL 0x004fd780 */
-void __cdecl fcn_004fd780(void)
+void __cdecl gm_TickObjectTable(void)
 {
 	char info[0x1c];
 	char* p;

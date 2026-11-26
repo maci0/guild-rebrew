@@ -7,7 +7,7 @@ struct EvRec {
 	char pad1[15];
 };
 #include "client_actions.h"
-int __cdecl fcn_004e8b40(int, int*);
+int __cdecl amt_GetRoleTemplate(int, int*);
 int __cdecl amt_FindOfficeSlotsByKind(int, int, EvRec*);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
@@ -19,7 +19,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x0055a0b0 */
-void __cdecl fcn_0055a0b0(char* action)
+void __cdecl he_RunOfficeAudit(char* action)
 {
 	int cnt;
 	int i;
@@ -55,7 +55,7 @@ void __cdecl fcn_0055a0b0(char* action)
 			cnt = amt_FindOfficeSlotsByKind(*(int*) (action + 0xb0 + idx * 4), 6, arr);
 			for (i = 0, r = (unsigned char*) arr; i < cnt; i++) {
 					v3 = gm_LookupEntityRecordById(*(int*) (r + 4));
-					if (v3 != 0 && fcn_004e8b40(*(unsigned char*) (r + 8), tmp)) {
+					if (v3 != 0 && amt_GetRoleTemplate(*(unsigned char*) (r + 8), tmp)) {
 						if (*(int*) (action + 0xac) == 1
 						    && ((unsigned char) *(tmp + 2) == 9 || ((*(2 + tmp)) & 0xFF) == 6)) {
 							if ((short) gm_RandomMod(3) != 0) {

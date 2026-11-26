@@ -16,7 +16,7 @@ int __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0043aa30(int);
 int __cdecl d3_TraverseSceneObjects(void*, int, int, void*);
 void __cdecl ch_PreloadBuildingMotions(char*);
-void __cdecl fcn_005167c0(char*, int);
+void __cdecl d3_UpdateBuildingView(char*, int);
 void __cdecl d3_SetupInteriorScene(char*, char*);
 void __cdecl fcn_00438b40(void*, void*);
 void __cdecl d3_SetObjectRotation(void*, void*);
@@ -72,7 +72,7 @@ void __cdecl d2_RunAlchemistMenu(int, void*);
 void __cdecl d2_RunSchneiderMenu(int, void*);
 void __cdecl fcn_0058af00(int, void*);
 void __cdecl fcn_0058ae60(int, void*);
-extern int g_6a2520;
+extern unsigned int g_6a2520;
 extern char g_6752a8[];
 char* __cdecl strcpy(char*, const char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -144,7 +144,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 d3_TraverseSceneObjects((void*) *(int*) &g_67a370, 0, 0xe0, (void*) 0x456df0);
                 ch_PreloadBuildingMotions(o);
                 t = *(int*) &g_7746c4;
-                fcn_005167c0((char*) t, (int) *(u16*) (t + 0x29));
+                d3_UpdateBuildingView((char*) t, (int) *(u16*) (t + 0x29));
                 d3_SetupInteriorScene((char*) *(int*) &g_7746c4, (char*) *(int*) &g_7746cc);
                 t = *(int*) &d3_ActiveCamera;
                 fcn_00438b40((void*) t, (char*) t + 0x5c);

@@ -5,7 +5,7 @@
 
 int __cdecl fcn_004f4970(int);
 
-void __cdecl fcn_004f4d10(void)
+void __cdecl gm_UpdateAllBuildingLevels(void)
 {
 	int i;
 	for (i = 0; i < 0x300; i++) {

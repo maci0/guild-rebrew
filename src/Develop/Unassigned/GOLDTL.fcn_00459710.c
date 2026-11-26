@@ -7,7 +7,7 @@ extern float g_10425b0[];
 extern float g_10425c0[];
 extern float g_10425d0[];
 
-void __cdecl fcn_00451340(float*, float*, float, float*);
+void __cdecl d3_LerpVec3(float*, float*, float, float*);
 void __cdecl d3_NormalizeVector(float*);
 
 void __cdecl fcn_00459710(char* o, char flag)
@@ -27,10 +27,10 @@ void __cdecl fcn_00459710(char* o, char flag)
 	}
 	for (i = 0; i < 6; i++) {
 		t = i * 0.2f;
-		fcn_00451340(g_10425d0, g_10425b0, t, v[0]);
-		fcn_00451340(g_10425c0, g_10425a0, t, v[1]);
+		d3_LerpVec3(g_10425d0, g_10425b0, t, v[0]);
+		d3_LerpVec3(g_10425c0, g_10425a0, t, v[1]);
 		for (j = 0; j < 8; j++) {
-			fcn_00451340(v[0], v[1], j * 0.14285715f, vc);
+			d3_LerpVec3(v[0], v[1], j * 0.14285715f, vc);
 			d3_NormalizeVector(vc);
 			*(float*) (o + 0x9c + (i * 8 + j) * 0x10) = atan2(vc[0], vc[2]);
 		}

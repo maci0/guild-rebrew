@@ -36,7 +36,7 @@ void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl fcn_005c72f0(char*);
 void __cdecl fcn_005c79a0(char*);
 void __cdecl fcn_0059d020(char*);
-void __cdecl fcn_0059d310(char*);
+void __cdecl d2_SelectPickpocketTarget(char*);
 void __cdecl fcn_0059d630(char*);
 void __cdecl d2_SelectBriberyTarget(char*);
 void __cdecl fcn_0059dc50(char*);
@@ -112,7 +112,7 @@ void __cdecl d2_RunRaeuberInteriorHud(char* e)
 					fcn_0059d020(e);
 				}
 				else if (g_7746a0 == c) {
-					fcn_0059d310(e);
+					d2_SelectPickpocketTarget(e);
 				}
 				else if (g_7746a0 == k) {
 					fcn_0059d630(e);

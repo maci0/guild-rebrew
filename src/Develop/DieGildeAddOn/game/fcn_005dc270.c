@@ -11,7 +11,7 @@ void __cdecl cm_BeginPacketFieldDelta(int a, int b);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char a, unsigned char b, unsigned short c, char* d);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_00508280(char* slot, int a, int b);
-int __cdecl fcn_005c6270(char* slot, int mode);
+int __cdecl gm_HasActiveSpecialObject(char* slot, int mode);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00503fe0(int a, int b, int c);
 void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
@@ -89,7 +89,7 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 	cm_AppendPacketFieldDelta(4, 1, h - g_aed32c + 0x25, esi + 1);
 	cm_RequestChangeAttribute();
 	slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
-	if (fcn_005c6270(slot, 0x2c4) == 0 || 0.75f < gm_RandomFloat01()) {
+	if (gm_HasActiveSpecialObject(slot, 0x2c4) == 0 || 0.75f < gm_RandomFloat01()) {
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
 		fcn_00508280(slot, 0, 0);
 	}

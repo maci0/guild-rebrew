@@ -30,7 +30,7 @@ void __cdecl fcn_004c6ae0(int a1, int a2);
 int __cdecl fcn_004c5620(int a1, char* e);
 
 /* ADDRESS: GOLDTL 0x0054ee10 */
-void __cdecl fcn_0054ee10(char* t)
+void __cdecl he_StartDuellChallenge(char* t)
 {
 	int impactValue;
 	int pick[16];

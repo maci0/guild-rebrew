@@ -27,7 +27,7 @@ float __cdecl fcn_0050b8d0(unsigned char* p, int k, int a, int b);
 void* __cdecl fcn_004ec7d0(unsigned char* e);
 int __cdecl fcn_004ee160(char* e);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0050b810(int, unsigned char b);
+int __cdecl gm_SumQueryEntryValues(int, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x0050c1b0 */
 int __cdecl fcn_0050c1b0(unsigned char* e, int id, char* out)
@@ -105,13 +105,13 @@ finalize:
 	if (*row == 7) {
 		p = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0xe8);
 		if (p != 0) {
-			v = fcn_0050b810(*(int*) (p + 0x14), g_773d75);
+			v = gm_SumQueryEntryValues(*(int*) (p + 0x14), g_773d75);
 			*(int*) (out + 0x30) += v;
 			var += *(int*) (out + 0x30);
 		}
 		p = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0xf0);
 		if (p != 0) {
-			v = fcn_0050b810(*(int*) (p + 0x14), g_773d75);
+			v = gm_SumQueryEntryValues(*(int*) (p + 0x14), g_773d75);
 			*(int*) (out + 0x3c) += v;
 			var += *(int*) (out + 0x3c);
 		}

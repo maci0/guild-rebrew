@@ -38,7 +38,7 @@ typedef struct Income {
 extern float g_665264[];
 extern int g_773d48;
 
-int __cdecl fcn_004e8b40(int idx, Rec18* out);
+int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 int __cdecl fcn_004f4830(int idx, void* dst);
 char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -79,11 +79,11 @@ int __cdecl fcn_004fcda0(unsigned short id, int pay, Income* out)
 	    && ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].class_166) != 0 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].grade) != 0 || ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].flags_1cc) & 0xe00) != 0)) {
 		fcn_004f4830(0xf, info);
 		mult = g_665264[info[6]];
-		fcn_004e8b40((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].grade), &q);
+		amt_GetRoleTemplate((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].grade), &q);
 		out->vb = (int) ((q.xc << 5) * mult);
-		fcn_004e8b40((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].class_166), &q);
+		amt_GetRoleTemplate((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].class_166), &q);
 		out->va = (int) ((q.xc << 5) * mult);
-		fcn_004e8b40(out->c, &q);
+		amt_GetRoleTemplate(out->c, &q);
 		out->vc = (int) ((q.xc << 5) * mult);
 		r = 1;
 		if (pay != 0) {

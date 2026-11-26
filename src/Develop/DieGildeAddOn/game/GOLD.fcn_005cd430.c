@@ -15,7 +15,7 @@ int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005cd430(char* e)
+int __cdecl gm_HandleWunder(char* e)
 {
 	int r;
 	int dlg;
@@ -52,7 +52,7 @@ int __cdecl fcn_005cd430(char* e)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (main_RunFrameLoop((void*) fcn_005cd430, 0x657c7) != 0);
+		} while (main_RunFrameLoop((void*) gm_HandleWunder, 0x657c7) != 0);
 		fcn_00471e30(dlg);
 		return r;
 	}

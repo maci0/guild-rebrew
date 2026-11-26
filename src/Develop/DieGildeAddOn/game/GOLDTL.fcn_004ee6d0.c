@@ -18,7 +18,7 @@ typedef struct {
 #define MINV(a, b) (((a) < (b)) ? (a) : (b))
 
 int __cdecl ahm_CheckFlag(void* a);
-int __cdecl fcn_004c6d30(Msg4ee6d0* m);
+int __cdecl cm_RequestAhmCommand(Msg4ee6d0* m);
 
 int __cdecl fcn_004ee6d0(char* obj, int arg, float v)
 {
@@ -32,5 +32,5 @@ int __cdecl fcn_004ee6d0(char* obj, int arg, float v)
 	m.id = *(int*) (obj + 4);
 	m.arg = arg;
 	m.val = MINV(MAXV(v, 0.0f), 1.0f);
-	return fcn_004c6d30(&m);
+	return cm_RequestAhmCommand(&m);
 }

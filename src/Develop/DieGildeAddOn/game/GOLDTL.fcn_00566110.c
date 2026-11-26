@@ -6,10 +6,10 @@ void __cdecl cm_AppendCommandSyncField(int a0, int a1, int a2, int* a3);
 void __cdecl cm_SendSetAttribute(void);
 int __cdecl fcn_0050f950(int a0, int a1);
 void __cdecl cm_RequestCopyEntityData(int a0, int a1, int a2, int a3);
-void __cdecl fcn_004c6430(int a0, int a1, int a2);
-void __cdecl fcn_004c6650(int a0);
+void __cdecl cm_RequestChangePlayerHe(int a0, int a1, int a2);
+void __cdecl cm_RequestCancelEntityEvent(int a0);
 int __cdecl gm_FindFallbackPublicBuilding(char* a0, int* a1, int* a2);
-void __cdecl fcn_004c5da0(int a0, int a1, int a2, int a3, int a4, char* a5);
+void __cdecl ch_StartMovement(int a0, int a1, int a2, int a3, int a4, char* a5);
 void __cdecl he_FreeAction(int a0);
 
 /* ADDRESS: GOLDTL 0x00566110 */
@@ -42,13 +42,13 @@ void __cdecl he_HandleEntlassen(int event)
 			v5 = v6;
 			cm_RequestCopyEntityData(*(int*) (v2 * 0x21c + 0x7f4ca4), *(int*) (ent + 4), v5, 1);
 		}
-		fcn_004c6430(*(int*) (ent + 4), 0, 0);
-		fcn_004c6650(*(int*) (ent + 4));
+		cm_RequestChangePlayerHe(*(int*) (ent + 4), 0, 0);
+		cm_RequestCancelEntityEvent(*(int*) (ent + 4));
 		if (gm_FindFallbackPublicBuilding(ent, &v8, &v7) != 0) {
 			if (v7 != -1) {
-				fcn_004c5da0(*(int*) (ent + 4), v8, v7, 0, 0, (char*) 0x6a68b0);
+				ch_StartMovement(*(int*) (ent + 4), v8, v7, 0, 0, (char*) 0x6a68b0);
 			} else {
-				fcn_004c5da0(*(int*) (ent + 4), v8, -1, 0, 1, (char*) 0x6a68b0);
+				ch_StartMovement(*(int*) (ent + 4), v8, -1, 0, 1, (char*) 0x6a68b0);
 			}
 		}
 		he_FreeAction(event);

@@ -9,19 +9,19 @@ typedef struct
 } Ent21c;
 // SIZE 0x21c
 
-extern Ent21c g_9b4a40[32];
+extern int g_9b4a40[];
 
 void __cdecl fcn_004cfa80(void);
-void __cdecl fcn_004cfab0(int, Ent21c*);
+void __cdecl d2_OpenEntityStatusPopup(int, Ent21c*);
 
 void __cdecl fcn_004cfc00(int a1)
 {
 	Ent21c* entity;
 
 	fcn_004cfa80();
-	for (entity = g_9b4a40; (int) entity < (int) (g_9b4a40 + 32); entity++) {
+	for (entity = (Ent21c*) g_9b4a40; (int) entity < (int) ((Ent21c*) g_9b4a40 + 32); entity++) {
 		if (entity->active != 0) {
-			fcn_004cfab0(a1, entity);
+			d2_OpenEntityStatusPopup(a1, entity);
 		}
 	}
 }

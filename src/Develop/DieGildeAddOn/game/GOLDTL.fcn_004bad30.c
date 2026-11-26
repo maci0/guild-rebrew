@@ -1,7 +1,7 @@
 #include <string.h>
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_DeductRandomBuildingGood(unsigned short*, int*, float);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -22,7 +22,7 @@ int __cdecl fcn_004bad30(int* request)
 	e = gm_LookupEntityRecordById(request[0]);
 	if (e == 0)
 		return 1;
-	if (fcn_005c6270(e, 0x290) != 0)
+	if (gm_HasActiveSpecialObject(e, 0x290) != 0)
 		goto fail;
 	if (gm_DeductRandomBuildingGood(e, &id, f) == 0)
 		goto fail;

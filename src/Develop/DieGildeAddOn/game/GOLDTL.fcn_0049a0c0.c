@@ -45,7 +45,7 @@ extern char g_7f4ca0[];
 int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Msg* out1, Msg* out2);
-int __cdecl fcn_004e8b40(int idx, Rec18* out);
+int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, unsigned short* out);
 
 /* ADDRESS: GOLDTL 0x0049a0c0 */
@@ -102,7 +102,7 @@ int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
 		return 0;
 	}
 	{
-		if (!fcn_004e8b40(((Ent*) e)->x166, &q)) {
+		if (!amt_GetRoleTemplate(((Ent*) e)->x166, &q)) {
 			i = 7;
 		} else {
 			if (q.x8 < 4) {

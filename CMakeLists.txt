@@ -441,6 +441,10 @@ if(REBREW_BUILD_GOLD)
   # lanes use and Gold does not define (generated from that day's link log).
   rebrew_append_scaffold(GOLD_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_adopted3.c")
+  # Functions the 2026-11-26 naming lanes renamed in shared callers whose Gold rows still have
+  # no body under the new name (generated from that day's link log).
+  rebrew_append_scaffold(GOLD_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_naming.c")
 
   if(GOLD_SOURCES)
     add_executable(europa1400gold WIN32 ${GOLD_SOURCES})

@@ -19,7 +19,7 @@ void d2_SetForm(int screen, int flag);
 void fcn_00473690(int key, int amount);
 void ResetDisplayCounters(void);
 void d3snd_PlayObjectClickSound(char* entity);
-float fcn_004ff040(char* entity);
+float gm_GetEntityHealthRatio(char* entity);
 int fcn_00507c30(int key);
 void fcn_00517c00(int id, int a, int b, char* out);
 void fcn_00529160(char* obj, int a, int id, int b);
@@ -219,7 +219,7 @@ label_529d30:
 				}
 				d2_SetForm(g_6a25b4, 1);
 				if (v13[3] != -1) {
-					v16 = (unsigned int) (fcn_004ff040(
+					v16 = (unsigned int) (gm_GetEntityHealthRatio(
 						(char*) (v13[2] * 0x21c + 0x7f4ca0))
 						* *(double*) 0x662c38);
 					sprintf(v9, "%s %i%%",

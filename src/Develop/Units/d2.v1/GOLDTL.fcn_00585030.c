@@ -55,10 +55,10 @@ void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void* __cdecl fcn_004ec7d0(unsigned char*);
-int __cdecl fcn_004ecf00(char*, int*, float*, int);
+int __cdecl he_GetActionProgress(char*, int*, float*, int);
 int __cdecl fcn_004ecc20(int);
 int __cdecl he_SendEvent096(char*, int*, int);
-int __cdecl fcn_00585850(char*, int*);
+int __cdecl d2_SendAlchemyResearch(char*, int*);
 void __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00532ef0(void);
 
@@ -95,7 +95,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 	e = (char*) alchemyObjectArg;
 	data = fcn_004ec7d0((unsigned char*) alchemyObjectArg);
 	records = *(int**) (e + 0x65);
-	prev = fcn_004ecf00(e, &owner, &frac, 0);
+	prev = he_GetActionProgress(e, &owner, &frac, 0);
 	stamp = g_6b7fac;
 	g_100f1dc = -1;
 	win = fcn_00470820(0, 0, "Locations\\Domizil\\Alchemistry2");
@@ -148,7 +148,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		ids++;
 	}
 	do {
-		sel = fcn_004ecf00(e, &owner, &frac, 0);
+		sel = he_GetActionProgress(e, &owner, &frac, 0);
 		d2_SetForm(win, 4);
 		io_AppendText(0x6811b0);
 		if (sel != 0) {
@@ -216,7 +216,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 					}
 				}
 			} else if (d2_CurrentElementId == btn0) {
-				fcn_00585850(e, records);
+				d2_SendAlchemyResearch(e, records);
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);

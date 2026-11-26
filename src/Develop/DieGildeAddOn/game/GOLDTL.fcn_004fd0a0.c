@@ -2,7 +2,7 @@
  * and the averaged fill level, then updates the row's animation values. */
 
 extern int g_773d48;
-extern char g_slot_table[];
+extern unsigned char g_slot_table[2];
 extern int g_aed32c;
 extern double g_6629c8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -17,7 +17,7 @@ void __cdecl fcn_00535960(void);
 void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl cm_BeginSecondaryPacketDelta(int*);
 int __cdecl cm_AppendDesireDelta(unsigned char, float);
-void __cdecl fcn_004c53e0(void);
+void __cdecl cm_SendChangeDesire(void);
 
 /* ADDRESS: GOLDTL 0x004fd0a0 */
 void __cdecl fcn_004fd0a0(void)
@@ -38,7 +38,7 @@ void __cdecl fcn_004fd0a0(void)
 
 	fcn_004fd400(&flag, &n);
 	g_773d48 = 0;
-	for (e = g_slot_table; (int) e < (int) g_slot_table + 0x65400; e += 0x21c) {
+	for (e = (char*) g_slot_table; (int) e < (int) g_slot_table + 0x65400; e += 0x21c) {
 		if (g_773d48 > 0x40) {
 			fcn_00535960();
 			g_773d48 = 0;
@@ -75,7 +75,7 @@ void __cdecl fcn_004fd0a0(void)
 		inv = (float) (-(*(float*) (e + 0xb4) - g_6640f0 * *(float*) (e + 0xb4)));
 		cm_BeginSecondaryPacketDelta((int*) e);
 		cm_AppendDesireDelta(3, inv);
-		fcn_004c53e0();
+		cm_SendChangeDesire();
 		g_773d48++;
 	}
 	g_773d48 = 0;

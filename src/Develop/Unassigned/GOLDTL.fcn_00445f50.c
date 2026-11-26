@@ -15,7 +15,7 @@ typedef struct {
 	Pal_1041d20 pal[6];
 } Slot445f50;
 
-extern Slot445f50 g_1041d80[];
+extern char g_1041d80[];
 extern int g_10405e0[];
 
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, void* cb, void* q);

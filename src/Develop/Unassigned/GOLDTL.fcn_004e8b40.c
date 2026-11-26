@@ -9,13 +9,13 @@ typedef Rec18_68da68 Rec18;
 
 extern Rec18_68da68 g_68da68[];
 
-int __cdecl fcn_004e8b40(int idx, Rec18* out)
+int __cdecl amt_GetRoleTemplate(int role, Rec18* out)
 {
-	if (idx >= 0x28) {
+	if (role >= 0x28) {
 		*out = g_68da68[0];
 		return 0;
 	}
-	*out = g_68da68[idx];
+	*out = g_68da68[role];
 	return 1;
 }
 
@@ -23,21 +23,21 @@ extern int g_9a9620[10];
 extern char g_7f4ca0[];
 
 /* ADDRESS: GOLDTL 0x004e98d0 */
-int* __cdecl fcn_004e98d0(void)
+int* __cdecl amt_CountRolesByLevel(void)
 {
-	Rec18 r;
+	Rec18 tmpl;
 	int p;
-	unsigned char c;
+	unsigned char state;
 
 	memset(g_9a9620, 0, sizeof(g_9a9620));
 	for (p = (int) (g_7f4ca0 + 0x167); p < (int) (g_7f4ca0 + 0x167 + 0x65400); p += 0x21c) {
-		c = *(unsigned char*) (p - 0x165);
-		if (c >= 2 && c <= 7) {
+		state = *(unsigned char*) (p - 0x165);
+		if (state >= 2 && state <= 7) {
 			if (*(unsigned char*) p == 0) {
 				g_9a9620[0]++;
 			} else {
-				fcn_004e8b40(*(unsigned char*) p, &r);
-				g_9a9620[r.type]++;
+				amt_GetRoleTemplate(*(unsigned char*) p, &tmpl);
+				g_9a9620[tmpl.type]++;
 			}
 		}
 	}
@@ -47,9 +47,9 @@ int* __cdecl fcn_004e98d0(void)
 extern Rec18 g_9a9228[];
 
 /* ADDRESS: GOLDTL 0x004e9950 */
-int __cdecl fcn_004e9950(int type, int max, int* out)
+int __cdecl amt_ListRolesOfLevel(int level, int max, int* out)
 {
-	Rec18 r;
+	Rec18 tmpl;
 	int p;
 	int n;
 	int id;
@@ -63,8 +63,8 @@ int __cdecl fcn_004e9950(int type, int max, int* out)
 			break;
 		}
 		id = ((Rec18*) p)->id;
-		fcn_004e8b40(id, &r);
-		if (r.type == type) {
+		amt_GetRoleTemplate(id, &tmpl);
+		if (tmpl.type == level) {
 			out[n] = id;
 			n++;
 		}

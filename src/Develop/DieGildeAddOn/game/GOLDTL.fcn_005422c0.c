@@ -50,11 +50,11 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_0050c1b0(unsigned char*, int, int*);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_0050b810(int, char);
+int __cdecl gm_SumQueryEntryValues(int, char);
 int __cdecl fcn_0050f950(int, int);
 
 /* ADDRESS: GOLDTL 0x005422c0 */
-void __cdecl fcn_005422c0(unsigned int arg)
+void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 {
 	unsigned char* rec;
 	unsigned char* def;
@@ -385,7 +385,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 			if (out[12]) {
 				r = (unsigned char*) fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0xe8);
 				if (r != 0) {
-					v = fcn_0050b810(*(int*) (r + 0x14), (char) g_773d75);
+					v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (char) g_773d75);
 					if (v > 0) {
 						count++;
 						cm_RequestMoveCredits(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) g_773d75, v);
@@ -395,7 +395,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 			if (out[15]) {
 				r = (unsigned char*) fcn_00502cd0(*(int*) (p + 0x5d), 1, 0, 0xf0);
 				if (r != 0) {
-					v = fcn_0050b810(*(int*) (r + 0x14), (char) g_773d75);
+					v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (char) g_773d75);
 					if (v > 0) {
 						count++;
 						cm_RequestMoveCredits(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]) + 4), *(int*) (r + 2), (char) g_773d75, v);

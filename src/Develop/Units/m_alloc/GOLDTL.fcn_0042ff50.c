@@ -37,7 +37,7 @@ int __cdecl unzGoToNextFile(void* file);
 void* __cdecl m_PoolAlloc(void*, int, int);
 void* __cdecl gzopen(char*, char*);
 void* __cdecl fopen(char*, char*);
-extern char g_file_extension_names[]; extern int g_6b7fec;
+extern const char g_file_extension_names[]; extern int g_6b7fec;
 extern char g_6b7fe4[];
 char* __cdecl strupr(char*);
 char __cdecl vfs_MakeDirs(char*, struct VFS_DIR*);

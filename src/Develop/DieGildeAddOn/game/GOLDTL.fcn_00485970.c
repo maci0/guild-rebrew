@@ -16,7 +16,7 @@ typedef struct
 	int f34;
 	int f38;
 	int f3c;
-} fcn_00485970_EntA;
+} AI_THIEF_BUY_ENTRY;
 /* SIZE 0x40 */
 
 typedef struct
@@ -43,7 +43,7 @@ typedef struct
 	int f4c;
 	int f50;
 	int f54;
-} fcn_00485970_EntB;
+} AI_THIEF_SELL_ENTRY;
 /* SIZE 0x58 */
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -61,19 +61,19 @@ float __cdecl fcn_0050bb50(int id, unsigned char a);
 float __cdecl eval_ObjektPreis2Credits(int id, int a);
 int __cdecl gm_GetMsgObjektField(int a, int b);
 int __cdecl gm_eval_SlotVoll(int a, int b, int c);
-char* __cdecl fcn_00503d10(int id);
+char* __cdecl gm_FindCityItemHolder(int id);
 char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_FindRecordById(int id);
 void __cdecl gm_CalcEntityInventoryStats(int a, int* out);
 
 /* ADDRESS: GOLDTL 0x00485970 */
-void __cdecl fcn_00485970(char* a0, int a1, int a2)
+void __cdecl ai_CollectThiefGoodsResources(char* actor, int building, int skipSell)
 {
-	fcn_00485970_EntA* pa;
-	fcn_00485970_EntB* pb;
-	fcn_00485970_EntA ta;
-	fcn_00485970_EntB tb;
+	AI_THIEF_BUY_ENTRY* pa;
+	AI_THIEF_SELL_ENTRY* pb;
+	AI_THIEF_BUY_ENTRY ta;
+	AI_THIEF_SELL_ENTRY tb;
 	char* ent;
 	char* cont;
 	char* slot;
@@ -95,11 +95,11 @@ void __cdecl fcn_00485970(char* a0, int a1, int a2)
 	float fa;
 	float fb;
 
-	pa = (fcn_00485970_EntA*) 0x100b0c0;
-	pb = (fcn_00485970_EntB*) 0x100d0c0;
+	pa = (AI_THIEF_BUY_ENTRY*) 0x100b0c0;
+	pb = (AI_THIEF_SELL_ENTRY*) 0x100d0c0;
 	g_100b0ac = 0;
 	ai_ResourceCount = 0;
-	if (!a2) {
+	if (!skipSell) {
 		ent = gm_StartFilteredEntitySearch(1, 0, 0x47);
 		while (ent) {
 			cont = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 0, 0x1db, 6);
@@ -132,8 +132,8 @@ void __cdecl fcn_00485970(char* a0, int a1, int a2)
 						pa[idx].f18 = 0;
 						pa[idx].f1c = f1;
 						pa[idx].f24 = 0;
-						pa[idx].f28 = gm_GetMsgObjektField(a1, id);
-						pa[idx].f2c = gm_eval_SlotVoll(a1, id, 1000000);
+						pa[idx].f28 = gm_GetMsgObjektField(building, id);
+						pa[idx].f2c = gm_eval_SlotVoll(building, id, 1000000);
 						pa[idx].f30 = 0x81;
 						pa[idx].f34 = 0;
 						pa[idx].f38 = gm_GetMsgObjektField((int) cont, id);
@@ -178,8 +178,8 @@ label_485b77:
 								pb[idx].f34 = f1;
 								pb[idx].f24 = 0;
 								pb[idx].f38 = 0;
-								pb[idx].f3c = gm_GetMsgObjektField(a1, id);
-								pb[idx].f40 = gm_eval_SlotVoll(a1, id, 1000000);
+								pb[idx].f3c = gm_GetMsgObjektField(building, id);
+								pb[idx].f40 = gm_eval_SlotVoll(building, id, 1000000);
 								pb[idx].f44 = 0;
 								pb[idx].f48 = 0x21;
 								pb[idx].f4c = 0;
@@ -241,8 +241,8 @@ label_485d61:
 				pa[idx].f24 = 0;
 				pa[idx].f30 = 0x81;
 				pa[idx].f3c = 0;
-				pa[idx].f28 = gm_GetMsgObjektField(a1, id);
-				pa[idx].f2c = gm_eval_SlotVoll(a1, id, 1000000);
+				pa[idx].f28 = gm_GetMsgObjektField(building, id);
+				pa[idx].f2c = gm_eval_SlotVoll(building, id, 1000000);
 				pa[idx].f34 = 0;
 				pa[idx].f38 = gm_GetMsgObjektField((int) cont, id);
 				if (idx == ai_ResourceCount)
@@ -265,7 +265,7 @@ label_485f7e:
 			}
 		}
 		if (!found) {
-			obj = fcn_00503d10(pa[idx].id);
+			obj = gm_FindCityItemHolder(pa[idx].id);
 			if (obj) {
 				f0 = eval_ObjektPreis2Credits(pa[idx].id, 100);
 				if (g_100b0ac <= 0x1f) {
@@ -283,8 +283,8 @@ label_485f7e:
 					pb[i].f38 = 0;
 					pb[i].f48 = 0x21;
 					pb[i].f54 = 0;
-					pb[i].f3c = gm_GetMsgObjektField(a1, pa[idx].id);
-					pb[i].f40 = gm_eval_SlotVoll(a1, pa[idx].id, 1000000);
+					pb[i].f3c = gm_GetMsgObjektField(building, pa[idx].id);
+					pb[i].f40 = gm_eval_SlotVoll(building, pa[idx].id, 1000000);
 					pb[i].f4c = 0;
 					pb[i].f50 = gm_eval_SlotVoll((int) obj, pa[idx].id, 1000000);
 					g_100b0ac++;
@@ -296,7 +296,7 @@ label_485f7e:
 		}
 		idx++;
 	}
-	rec = he_StartHandlungSearch(2, 0, 0xb, 3, *(int*) (*(char**) (a0 + 0x16c) + 1));
+	rec = he_StartHandlungSearch(2, 0, 0xb, 3, *(int*) (*(char**) (actor + 0x16c) + 1));
 	while (rec) {
 		recs2 = gm_FindRecordById(*(int*) (rec + 0xac));
 		if (recs2) {
@@ -346,7 +346,7 @@ label_485f7e:
 				t = pb[j].f50;
 			pa[i].f34 = t;
 			fa = (float) t;
-			fb = (float) (*(int*) (a0 + 0x1b8) / 4) / pa[i].f1c;
+			fb = (float) (*(int*) (actor + 0x1b8) / 4) / pa[i].f1c;
 			if (!(fa < fb))
 				fa = fb;
 			pa[i].f34 = (int) fa;

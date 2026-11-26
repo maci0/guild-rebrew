@@ -15,9 +15,9 @@ extern float g_665ea0;
 void __cdecl d3_SelectSceneContext(int, int);
 
 void __cdecl d3_TransformPoint(char*, char*, struct vec4*);
-float __cdecl fcn_004514d0(struct vec4*, char*);
+float __cdecl d3_WrapYawDelta(struct vec4*, char*);
 
-int __cdecl fcn_005589d0(char* u)
+int __cdecl he_AimSensenmann(char* u)
 {
 	char* x;
 	struct vec4 b;
@@ -39,7 +39,7 @@ int __cdecl fcn_005589d0(char* u)
 			d.x = a.x - b.x;
 			d.y = a.y - b.y;
 			d.z = a.z - b.z;
-			fcn_004514d0(&d, *(char**) (u + 0xc8) + 0x84);
+			d3_WrapYawDelta(&d, *(char**) (u + 0xc8) + 0x84);
 			*(int*) (u + 0xe0) = *(int*) (*(char**) (u + 0xc8) + 0x84);
 			*(int*) (u + 0xe4) = *(int*) (*(char**) (u + 0xc8) + 0x88);
 			*(int*) (u + 0xe8) = *(int*) (*(char**) (u + 0xc8) + 0x8c);

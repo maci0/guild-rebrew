@@ -12,7 +12,7 @@
  * 0x01015ea0; the created ids are kept in the g_6a25xx globals.
  */
 
-extern unsigned char g_slot_table[];
+extern unsigned char g_slot_table[2];
 
 extern unsigned short g_774970;
 extern int d2_ScreenHeight;

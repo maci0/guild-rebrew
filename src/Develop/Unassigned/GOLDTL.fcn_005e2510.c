@@ -9,9 +9,9 @@ extern float g_675308;
 extern int g_7766b0;
 extern int g_7766ac;
 
-void __cdecl fcn_00410610(int);
+void __cdecl io_SetMouseSensitivity(int);
 
-void __cdecl fcn_005e2510(void)
+void __cdecl gm_ApplyGameSettings(void)
 {
 	g_6b5c94 = 0;
 	if (g_7747b0 & 4) {
@@ -20,6 +20,6 @@ void __cdecl fcn_005e2510(void)
 	else {
 		g_675308 = (float) (g_7766a8 * 0.00625f + 0.25);
 	}
-	fcn_00410610(g_7766b0 - 0x40);
+	io_SetMouseSensitivity(g_7766b0 - 0x40);
 	g_6a256c = 100 - (g_7766ac & 0xff);
 }

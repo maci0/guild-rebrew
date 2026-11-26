@@ -32,7 +32,7 @@ typedef struct Req_59ecc0 {
 } Req_59ecc0;
 
 int __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_00525fb0(int);
+int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl fcn_00470820(int, int, char*);
@@ -80,7 +80,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 	ids[1] = 0x1c2;
 	ids[2] = 0x1c3;
 	ids[6] = fcn_00502cd0(*(int*) (gebaeude + 0x5d), 2, 6, 0, 0x2a);
-	if (fcn_00525fb0(gebaeude))
+	if (d2_CheckOwnerBlocked(gebaeude))
 		return;
 	for (i = 3; i < 6; i++) {
 		ids[i] = 0;

@@ -9,7 +9,7 @@ extern float g_662cf8;
 
 int __cdecl gm_RandomMod(int);
 void* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 int __cdecl gm_DeductRandomBuildingGood(void*, int*, float);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, int, void*);
@@ -35,7 +35,7 @@ int __cdecl gm_NotifyEntityEventTarget(void* request)
 	if (entity == 0) {
 		return 1;
 	}
-	if (fcn_005c6270(entity, 0x290) == 0) {
+	if (gm_HasActiveSpecialObject(entity, 0x290) == 0) {
 		if (gm_DeductRandomBuildingGood(entity, &target_id, scale) != 0) {
 			target = gm_StartFilteredEntitySearch(1, 1, target_id);
 			if (target != 0) {

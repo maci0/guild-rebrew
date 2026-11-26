@@ -12,9 +12,9 @@ extern int g_14ce8e0;
 extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_00525fb0(int);
+int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_0052a0c0(char*, int);
@@ -89,7 +89,7 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 	int* acc;
 	char* row;
 
-	if (fcn_00525fb0((int) building))
+	if (d2_CheckOwnerBlocked((int) building))
 		return 0;
 	h = fcn_00470820(0, 0, "Handel\\Handel_PRODUKTION");
 	d2_CenterDialogWindows(h);

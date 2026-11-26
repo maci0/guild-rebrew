@@ -8,7 +8,7 @@ float __cdecl gm_RandomFloat01(void);
 
 
 /* ADDRESS: GOLDTL 0x004aa920 */
-int __cdecl fcn_004aa920(short* entity, int a2, char* result)
+int __cdecl ai_SelectAnschwaerzenTargets(short* entity, int unused, char* result)
 {
 	unsigned short dst;
 	unsigned short ids[4];

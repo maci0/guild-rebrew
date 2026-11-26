@@ -13,7 +13,7 @@ extern double g_6640f8;
 extern double g_665fc0;
 extern char g_6ab2e0[];
 
-int __cdecl fcn_00525fb0(char*);
+int __cdecl d2_CheckOwnerBlocked(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00526120(char*, int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
@@ -57,7 +57,7 @@ void __cdecl fcn_005aeab0(char* rec)
 	double prob;
 
 	weight = 0.0f;
-	if (fcn_00525fb0(rec) != 0) {
+	if (d2_CheckOwnerBlocked(rec) != 0) {
 		return;
 	}
 	ent = gm_LookupEntityRecordById(*(int*) (rec + 0x65));

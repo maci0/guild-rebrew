@@ -4,11 +4,11 @@ extern char g_6b7d7c[];
 
 int __cdecl fcn_0042b780(int, int);
 
-void __cdecl fcn_00427370(int a)
+void __cdecl sb_SetMasterVolume(int volume)
 {
-	int h;
-	h = *(int*) &g_6b7d7c;
-	if (h != 0) {
-		fcn_0042b780(h, a);
+	int driver_handle;
+	driver_handle = *(int*) &g_6b7d7c;
+	if (driver_handle != 0) {
+		fcn_0042b780(driver_handle, volume);
 	}
 }

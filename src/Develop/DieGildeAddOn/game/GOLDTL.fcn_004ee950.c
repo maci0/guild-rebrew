@@ -15,7 +15,7 @@ typedef struct
 
 int __cdecl ahm_CheckFlag(char* p);
 int __cdecl ahm_FindRecipeSlot(char* p, int id);
-int __cdecl fcn_004c6d30(Msg18* m);
+int __cdecl cm_RequestAhmCommand(Msg18* m);
 
 int __cdecl fcn_004ee950(char* p, int id)
 {
@@ -31,5 +31,5 @@ int __cdecl fcn_004ee950(char* p, int id)
 	m.tag = 0x61736452;
 	m.id = *(int*) (p + 4);
 	m.x8 = id;
-	return fcn_004c6d30(&m);
+	return cm_RequestAhmCommand(&m);
 }

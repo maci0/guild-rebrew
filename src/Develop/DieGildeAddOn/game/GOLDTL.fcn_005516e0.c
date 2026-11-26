@@ -33,7 +33,7 @@ void __cdecl fcn_00507130(int k, int* a, int* b);
 int __cdecl gm_RandomMod(int n);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_004c6470(int, int);
+void __cdecl cm_RequestSetEntityLevel(int, int);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004c5620(int a1, char* e);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -41,7 +41,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
 
 /* ADDRESS: GOLDTL 0x005516e0 */
-void __cdecl fcn_005516e0(char* t)
+void __cdecl he_RunLevelTraining(char* t)
 {
 	char c;
 	int a;
@@ -70,7 +70,7 @@ void __cdecl fcn_005516e0(char* t)
 		c = gm_RandomMod(0x10) + 0x10;
 		cm_AppendPacketFieldValue(1, 1, b + 0x80, &c);
 		cm_RequestChangeAttribute();
-		fcn_004c6470(e->entity_id, *(unsigned char*) (t + 0xb0));
+		cm_RequestSetEntityLevel(e->entity_id, *(unsigned char*) (t + 0xb0));
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);

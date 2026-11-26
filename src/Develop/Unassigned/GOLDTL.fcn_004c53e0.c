@@ -8,7 +8,7 @@
 extern char g_aed2a0[];
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c53e0(void)
+void __cdecl cm_SendChangeDesire(void)
 {
 	char buf[0x9c];
 

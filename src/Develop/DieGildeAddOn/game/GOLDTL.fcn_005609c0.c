@@ -4,7 +4,7 @@ extern double g_6640e8;
 extern double g_6629c8;
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCancelCharacterActions(int);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl gm_AddTime(unsigned int*, int, int, int);
 int __cdecl gm_CompareGameTime(int, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -44,7 +44,7 @@ void __cdecl fcn_005609c0(char* jobState)
 				ent = gm_LookupEntityRecordById(*(int*) (jobState + 0x8c + i * 4));
 				if (ent != 0 && *(int*) (ent + 0x16c) != 0) {
 					cm_SendCancelCharacterActions(*(int*) (jobState + 0x8c + i * 4));
-					fcn_004c5da0(*(int*) (jobState + 0x8c + i * 4),
+					ch_StartMovement(*(int*) (jobState + 0x8c + i * 4),
 						*(int*) (*(int*) (ent + 0x16c) + 1),
 						*(int*) (jobState + 0xb4), 0, 0, (char*) 0x6a6510);
 				}

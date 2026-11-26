@@ -28,7 +28,7 @@ int __cdecl fcn_005dfe80(char *, int);
 int __cdecl cm_SendQuitGameCommand(void);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_005356b0(int);
+void __cdecl main_ExitToFrameHandler(int);
 void __cdecl fcn_005e3520(void);
 void __cdecl fcn_005e2b60(void);
 void __cdecl d2_ShowSoundOptions(void);
@@ -90,7 +90,7 @@ void __cdecl fcn_005e43f0(void)
                     if (d2_ShowLoadGameMenu()) {
                         *(int *)0x774958 = 1;
                         *(int *)0x774954 = 1;
-                        fcn_005356b0(0x5438c0);
+                        main_ExitToFrameHandler(0x5438c0);
                     } else fcn_00471af0(dialog, 1);
                 } else if (current == b) {
                     fcn_00471af0(dialog, 0);
@@ -109,7 +109,7 @@ void __cdecl fcn_005e43f0(void)
                             fcn_00535960();
                         }
                         *(int *)0x774954 = 1;
-                        fcn_005356b0(0x5438c0);
+                        main_ExitToFrameHandler(0x5438c0);
                     } else fcn_00471af0(dialog, 1);
                 } else if (current == c) {
                     fcn_00471af0(dialog, 0); fcn_005e3520(); fcn_00471af0(dialog, 1);

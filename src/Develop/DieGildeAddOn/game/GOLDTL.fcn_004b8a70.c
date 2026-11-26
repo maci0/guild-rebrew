@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
@@ -35,7 +35,7 @@ int __cdecl fcn_004b8a70(int* request)
 	e = gm_LookupEntityRecordById(request[0]);
 	if (e == 0)
 		return 1;
-	if (fcn_005c6270(e, 0x290) != 0)
+	if (gm_HasActiveSpecialObject(e, 0x290) != 0)
 		return 0x400;
 	for (it = gm_StartFilteredEntitySearch(1, 3, *e); it != 0 && n < 8; it = gm_FindNextFilteredEntity()) {
 		k = gm_GetBuildingTypeCategory(it[0]);

@@ -20,7 +20,7 @@ typedef struct Edge {
 	float k;
 } Edge;
 
-void __cdecl fcn_00451340(float* a, float* b, float t, float* out);
+void __cdecl d3_LerpVec3(float* a, float* b, float t, float* out);
 void __cdecl d3_BuildEulerRotationMatrix(float* a, float* out);
 void __cdecl d3_MatrixToEulerAngles(float* a, float* b);
 void __cdecl fcn_00438b40(int obj, float* v);
@@ -122,7 +122,7 @@ void __cdecl fcn_004316c0(int obj)
 						}
 					}
 					t = (float) edge->weight / *(int*) ((char*) node + edge->from * 0xc0 + 4);
-					fcn_00451340((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x54),
+					d3_LerpVec3((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x54),
 					    (float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x54), t, out);
 					out[0] -= rec[count].pos[0];
 					out[1] -= rec[count].pos[1];
@@ -136,13 +136,13 @@ void __cdecl fcn_004316c0(int obj)
 					d3_BuildEulerRotationMatrix((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x60), left);
 					d3_BuildEulerRotationMatrix((float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x60), right);
 					for (k = 0; k < 3; k++) {
-						fcn_00451340(left + k * 4, right + k * 4, t, rec[count].mat[k]);
+						d3_LerpVec3(left + k * 4, right + k * 4, t, rec[count].mat[k]);
 					}
 					rec[count].flag = 1;
 					count++;
 				} else {
 					t = (float) edge->weight / *(int*) ((char*) node + edge->from * 0xc0 + 4);
-					fcn_00451340((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x54),
+					d3_LerpVec3((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x54),
 					    (float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x54), t, out);
 					out[0] -= rec[j].target[0];
 					out[1] -= rec[j].target[1];
@@ -153,7 +153,7 @@ void __cdecl fcn_004316c0(int obj)
 					d3_BuildEulerRotationMatrix((float*) ((char*) node + (id + edge->from * 8) * 0x18 + 0x60), left);
 					d3_BuildEulerRotationMatrix((float*) ((char*) node + (id + edge->to * 8) * 0x18 + 0x60), right);
 					for (k = 0; k < 3; k++) {
-						fcn_00451340(left + k * 4, right + k * 4, t, out);
+						d3_LerpVec3(left + k * 4, right + k * 4, t, out);
 						rec[j].mat[k][0] = out[0] + rec[j].mat[k][0];
 						rec[j].mat[k][1] = out[1] + rec[j].mat[k][1];
 						rec[j].mat[k][2] = out[2] + rec[j].mat[k][2];

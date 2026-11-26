@@ -23,7 +23,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl he_FreeAction(char* e);
 void __cdecl fcn_00529160(char* e, int a, int id, char* rec);
 void __cdecl cm_SendCancelCharacterActions(int owner);
-void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* tag);
+void __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* tag);
 void __cdecl gm_AddTime(int* pos, int a, int b, int c);
 int __cdecl gm_GetEntityMood(char* e);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
@@ -36,7 +36,7 @@ void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int 
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 
 /* ADDRESS: GOLDTL 0x00553cd0 */
-void __cdecl fcn_00553cd0(char* event)
+void __cdecl he_RunBetriebsPruefung(char* event)
 {
 	char buf[1024];
 	char* e;
@@ -62,7 +62,7 @@ void __cdecl fcn_00553cd0(char* event)
 	case 0:
 		fcn_00529160(e, 0, *record, event);
 		cm_SendCancelCharacterActions(*(int*) (record + 2));
-		fcn_004c5da0(*(int*) (record + 2), *(int*) (e + 1), -1, 0, 1, "BetriebsPr");
+		ch_StartMovement(*(int*) (record + 2), *(int*) (e + 1), -1, 0, 1, "BetriebsPr");
 		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 		gm_AddTime((int*) (event + 0x52), 0, 10, 0);
 		*(int*) (event + 0x70) = 1;
@@ -116,7 +116,7 @@ void __cdecl fcn_00553cd0(char* event)
 	case 2:
 		fcn_00529160(e, 0, *record, 0);
 		cm_SendCancelCharacterActions(*(int*) (record + 2));
-		fcn_004c5da0(*(int*) (record + 2), *(int*) (event + 0xb4), *(int*) (event + 0xb8), 0,
+		ch_StartMovement(*(int*) (record + 2), *(int*) (event + 0xb4), *(int*) (event + 0xb8), 0,
 			0, "BetriebsPr");
 		he_FreeAction(event);
 		return;

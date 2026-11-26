@@ -103,7 +103,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl fcn_00534c40(unsigned int, int, int, ...);
 void __cdecl fcn_005350d0(char*);
-void __cdecl fcn_00534c20(char*);
+void __cdecl d2_HandleBookPageButton(char*);
 int __cdecl fcn_00517c00(int, int, int, char*);
 char* __cdecl fcn_0050dc90(int);
 void __cdecl d2_SetForm(int, int);
@@ -258,7 +258,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			*(int*) 0x774654 = 1;
 		}
 		fcn_005350d0(f.win);
-		fcn_00534c20(f.win);
+		d2_HandleBookPageButton(f.win);
 		if (*(unsigned char*) 0x14cf950 == 0xcd) {
 			fcn_00535550(f.win);
 		}

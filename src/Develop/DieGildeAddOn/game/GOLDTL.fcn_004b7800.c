@@ -9,7 +9,7 @@ typedef struct F8 {
 extern unsigned char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_005c6270(char* h, int n);
+int __cdecl gm_HasActiveSpecialObject(char* h, int n);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl gm_ResolveEntityById(void** out, int a, int b, int id);
 unsigned short __cdecl gm_RandomMod(int n);
@@ -35,7 +35,7 @@ int __cdecl fcn_004b7800(int* request)
 	h = gm_LookupEntityRecordById(*request);
 	if (h == 0)
 		return 1;
-	if (fcn_005c6270(h, 0x290) != 0)
+	if (gm_HasActiveSpecialObject(h, 0x290) != 0)
 		return 0x400;
 	f.mask = 0x400000;
 	f.b = 0;

@@ -39,7 +39,7 @@ void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 
 void* __cdecl fcn_004ec7d0(unsigned char*);
-int __cdecl fcn_004ecf00(char*, int*, float*, int);
+int __cdecl he_GetActionProgress(char*, int*, float*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -58,7 +58,7 @@ char* __cdecl fcn_004ee160(char*);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_005865f0(char*, int*, int);
+int __cdecl d2_RunDomizilSkillConfirmDialog(char*, int*, int);
 int __cdecl d2_RunDomizilSkillDialog(char*, int*);
 int __cdecl fcn_00586a80(char*, int*);
 void __cdecl fcn_00532ef0(void);
@@ -83,7 +83,7 @@ void __cdecl fcn_00585910(char* e)
 
 	data = fcn_004ec7d0((unsigned char*) e);
 	src = *(int**) (e + 0x65);
-	prev = fcn_004ecf00(e, &owner, &frac, 0);
+	prev = he_GetActionProgress(e, &owner, &frac, 0);
 	stamp = g_6b7fac;
 	g_100f1dc = -1;
 	memset(ids, -1, 0x24);
@@ -154,7 +154,7 @@ void __cdecl fcn_00585910(char* e)
 	d2_SetForm(ids[0], 3);
 	ids[3] = d2_GetWindowListItem(ids[0], 3, io_AppendText(0x4049));
 	do {
-		sel = fcn_004ecf00(e, &owner, &frac, 0);
+		sel = he_GetActionProgress(e, &owner, &frac, 0);
 		d2_SetForm(ids[0], 4);
 		io_AppendText(0x6811b0);
 		if (sel != 0) {
@@ -232,7 +232,7 @@ void __cdecl fcn_00585910(char* e)
 			for (i = 0, p = &ids[5]; i < 4; i++, p++) {
 				if (*p == d2_CurrentElementId) {
 					fcn_00471af0(ids[0], 0);
-					fcn_005865f0(e, src, i);
+					d2_RunDomizilSkillConfirmDialog(e, src, i);
 					fcn_00471af0(ids[0], 1);
 					d2_CurrentElementId = -1;
 				}

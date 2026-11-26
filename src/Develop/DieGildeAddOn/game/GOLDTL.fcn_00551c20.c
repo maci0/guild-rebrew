@@ -9,7 +9,7 @@ void __cdecl he_FreeAction(char* obj);
 void __cdecl gm_AddTime(void* clock, int arg2, int arg3, int arg4);
 
 /* ADDRESS: GOLDTL 0x00551c20 */
-void __cdecl fcn_00551c20(char* obj)
+void __cdecl he_AllocTalentBoost(char* obj)
 {
 	char* otherAction;
 	unsigned int idx;

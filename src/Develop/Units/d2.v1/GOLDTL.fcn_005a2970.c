@@ -37,7 +37,7 @@ void __cdecl fcn_00526120(char* text, int value);
 int __cdecl gm_CheckEntityStock(char* record, unsigned int value, char flag);
 void __cdecl cm_SendLogAction(char* text);
 void __cdecl cm_SendTraceEnd(char* text);
-void __cdecl fcn_004c68c0(void* msg);
+void __cdecl cm_RequestElectionOrTrade(void* msg);
 void __cdecl cm_RequestLinkEvidence(int a, unsigned int b);
 void __cdecl cm_RequestTransferCurrencyNoKill(unsigned int a, unsigned int b, int c, unsigned int d);
 int __cdecl main_RunFrameLoop(void* fn, int id);
@@ -134,7 +134,7 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 							out2[4] = seen[j];
 							out2[5] = vals[j];
 							cm_SendLogAction("buy dunkle ecke");
-							fcn_004c68c0(&out2[1]);
+							cm_RequestElectionOrTrade(&out2[1]);
 							cm_RequestLinkEvidence(seen[j],
 								*(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4));
 							cm_RequestTransferCurrencyNoKill(

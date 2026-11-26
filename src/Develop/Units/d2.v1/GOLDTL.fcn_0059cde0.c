@@ -62,7 +62,7 @@ void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_0059cde0(char* name)
+int __cdecl d2_ConfirmUeberfall(char* name)
 {
 	int btn2;
 	int dlg;
@@ -125,7 +125,7 @@ int __cdecl fcn_0059cde0(char* name)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_0059cde0, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ConfirmUeberfall, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

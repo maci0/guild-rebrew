@@ -26,11 +26,11 @@ void __cdecl fcn_005a31b0(char*, int);
 void __cdecl fcn_00533880(void);
 void __cdecl fcn_00532ef0(void);
 
-void __cdecl fcn_005a3680(void)
+void __cdecl d3_SelectTavernCardTableCity(void)
 {
 	char* items[4];
 	int i;
-	char* e;
+	char* city;
 
 	items[0] = 0;
 	items[1] = 0;
@@ -43,7 +43,7 @@ void __cdecl fcn_005a3680(void)
 	}
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005338a0();
-	if (main_RunFrameLoop((void*) fcn_005a3680, 0x677d7) != 0) {
+	if (main_RunFrameLoop((void*) d3_SelectTavernCardTableCity, 0x677d7) != 0) {
 		do {
 			(*(char**)&g_7746a0) = 0;
 			for (i = 0; i < 3; i++) {
@@ -54,9 +54,9 @@ void __cdecl fcn_005a3680(void)
 				(*(char**)&g_7746a0) = g_7746a4;
 				for (i = 0; i < 3; i++) {
 					if ((*(char**)&g_7746a0) == items[i]) {
-						for (e = gm_StartFilteredEntitySearch(1, 0, 0x47); e != 0; e = gm_FindNextFilteredEntity()) {
-							if (*(int*) (e + 0x65) == i + 1) {
-								fcn_005a31b0(e, 1);
+						for (city = gm_StartFilteredEntitySearch(1, 0, 0x47); city != 0; city = gm_FindNextFilteredEntity()) {
+							if (*(int*) (city + 0x65) == i + 1) {
+								fcn_005a31b0(city, 1);
 								break;
 							}
 						}
@@ -66,7 +66,7 @@ void __cdecl fcn_005a3680(void)
 			else if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (main_RunFrameLoop((void*) fcn_005a3680, 0x677d7) != 0);
+		} while (main_RunFrameLoop((void*) d3_SelectTavernCardTableCity, 0x677d7) != 0);
 	}
 	fcn_005338a0();
 	for (i = 0; i < 3; i++) {

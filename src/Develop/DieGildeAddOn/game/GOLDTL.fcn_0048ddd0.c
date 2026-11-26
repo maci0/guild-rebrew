@@ -13,7 +13,7 @@
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl amt_GetRoleLevel(int k);
-int __cdecl fcn_0050b810(int a, char b);
+int __cdecl gm_SumQueryEntryValues(int a, char b);
 int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 
 /* ADDRESS: GOLDTL 0x0048ddd0 */
@@ -48,7 +48,7 @@ int __cdecl fcn_0048ddd0(char* e, char* thresholdOut, char* resultOut)
 	} else {
 		return 0;
 	}
-	fcn_0050b810(*(int*) (e + 0x178), *(char*) 0x773d75);
+	gm_SumQueryEntryValues(*(int*) (e + 0x178), *(char*) 0x773d75);
 	total = gm_WalkEntityChain(*(unsigned short*) e);
 	total += gm_WalkEntityChain(t->entity_index);
 	tot[0] = (int) ((float) total * *(float*) 0x662910);

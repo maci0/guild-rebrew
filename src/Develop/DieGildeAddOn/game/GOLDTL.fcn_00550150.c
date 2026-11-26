@@ -10,7 +10,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl he_FreeAction(char*);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
@@ -35,7 +35,7 @@ void __cdecl he_RunHireJourneymanAction(char* action)
 		journeyman = cm_GetCommandResult(*(int*) (action + 0xbc));
 		if (journeyman != 0) {
 			role_str = (journeyman[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (journeyman + 0x165);
-			fcn_004c5da0(*(int*) (journeyman + 4), *(int*) (action + 0xb0), *(int*) (action + 0xb4), 0, 0, "RndGeselle");
+			ch_StartMovement(*(int*) (journeyman + 4), *(int*) (action + 0xb0), *(int*) (action + 0xb4), 0, 0, "RndGeselle");
 			io_FormatTextBuffer(buf, *(unsigned short*) (action + 0xb8), *(unsigned short*) journeyman, role_str, target_id);
 			he_MessageBoxQuickjump(*(int*) (action + 0xac), *(int*) (action + 0xac), buf, 0, 0x5ec, *(int*) (action + 0xb0), *(int*) (action + 0xb4), 0,
 			    "_NACHRICHTEN_HS_00");

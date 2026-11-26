@@ -1,7 +1,7 @@
 /* Owned (both targets) by src/GOLDTL.fcn_004f7890.c. */
 extern char g_679060[];
 
-int  __cdecl fcn_005db6a0(void*, void*);
+int  __cdecl gm_HandleVerhoerMode2(void*, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 
@@ -31,7 +31,7 @@ int __cdecl fcn_004fa3b0(void* obj, void* request)
 		return 1;
 	}
 	if (*(int*) request == 3) {
-		r = fcn_005db6a0(obj, request);
+		r = gm_HandleVerhoerMode2(obj, request);
 	}
 	return r | 2;
 }

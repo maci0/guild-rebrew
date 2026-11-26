@@ -8,7 +8,7 @@ typedef struct {
 blk19 g_68cb58 = { "bewegung/zu_boden_sinken" };
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-double __cdecl fcn_004ff040(char*);
+double __cdecl gm_GetEntityHealthRatio(char*);
 void __cdecl fcn_00417b50(char*, int, float, float, float, float);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl ch_CreateQueuedAction(char*, void*, int, int, int);
@@ -18,7 +18,7 @@ int __cdecl fcn_004dfd90(char* e)
 {
 	char* o;
 
-	if (fcn_004ff040(e) < 0.1) {
+	if (gm_GetEntityHealthRatio(e) < 0.1) {
 		fcn_00417b50(*(char**) (*(char**) (e + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
 		ch_CancelActionQueue(*(char**) (e + 0x184));
 		o = ch_CreateQueuedAction(*(char**) (e + 0x184), fcn_004dfd10, 0x12, 0x36, 1);

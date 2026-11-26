@@ -45,7 +45,7 @@ extern D2_ITEM_BUTTON g_776c60[6];
 extern char* g_775318;
 extern unsigned char g_773d75;
 
-Rec* __cdecl fcn_005c6220(int key, int* out);
+Rec* __cdecl gm_LookupSpecialObjectRecord(int key, int* out);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -76,7 +76,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 	int i;
 
 	buy = 0;
-	rec = fcn_005c6220(*item, &tmp);
+	rec = gm_LookupSpecialObjectRecord(*item, &tmp);
 	if (rec != 0) {
 		dlg = fcn_00470820(0, 0, "panel\\useobj");
 		d2_CenterDialogWindows(dlg);

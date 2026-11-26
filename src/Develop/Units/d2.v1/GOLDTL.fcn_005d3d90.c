@@ -65,11 +65,11 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		m = d2_DrawHistoryGraph(*(Arg *) &g, w - 1, h);
 	d2_PlotRadius = 1;
 	if (flags & 2)
-		fcn_005d3880(*(Arg *) &g, w - 1, h);
+		d2_DrawMoodHistoryGraph(*(Arg *) &g, w - 1, h);
 	if (flags & 4)
-		fcn_005d3c20(*(GRAPH_VALUE *) &g, w - 1, h);
+		d2_DrawRedHistoryGraph(*(GRAPH_VALUE *) &g, w - 1, h);
 	if (flags & 8)
-		fcn_005d3980(*(GRAPH_VALUE *) &g, w - 1, h);
+		d2_DrawYellowHistoryGraph(*(GRAPH_VALUE *) &g, w - 1, h);
 	if (flags & 0x10)
 		fcn_005d3ad0(*(GRAPH_VALUE *) &g, w - 1, h);
 	d2_PlotRadius = 0;

@@ -11,7 +11,7 @@ int __cdecl fcn_004f5dd0(int a);
 void __cdecl fcn_004f5e20(int a, int b);
 int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
-int __cdecl fcn_005c6270(char*, int);
+int __cdecl gm_HasActiveSpecialObject(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -66,7 +66,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 		cost = (int) ((float) kind * factor * scale);
 		scaledPrice = (double) cost * 0.1;
 		cost = (int) (320000.0 < (scaledPrice > 3200.0 ? scaledPrice : 3200.0) ? 320000.0 : (scaledPrice > 3200.0 ? scaledPrice : 3200.0));
-		if (fcn_005c6270((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0x2c6) != 0)
+		if (gm_HasActiveSpecialObject((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0x2c6) != 0)
 			cost = cost / 2;
 	}
 	dlg = fcn_00470820(0, 0, (char*) 0x6ab014);

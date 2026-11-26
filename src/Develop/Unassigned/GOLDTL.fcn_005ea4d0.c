@@ -1,6 +1,6 @@
 #include <math.h>
 void __cdecl d3_NormalizeVector(float *);
-float __cdecl fcn_004514d0(int, int);
+float __cdecl d3_WrapYawDelta(int, int);
 
 /* ADDRESS: GOLDTL 0x005ea4d0 */
 int __cdecl fcn_005ea4d0(void *a, void *b, void *c, void *d, void *e, void *f, void *g, void *h, void *i)
@@ -23,7 +23,7 @@ int __cdecl fcn_005ea4d0(void *a, void *b, void *c, void *d, void *e, void *f, v
     distance = (float)sqrt(vector[2] * vector[2] + vector[0] * vector[0]);
     d3_NormalizeVector(vector);
     d3_NormalizeVector(horizontal);
-    *bearing = fcn_004514d0(0x662d40, (int)vector);
+    *bearing = d3_WrapYawDelta(0x662d40, (int)vector);
     height = (float)fabs(target[1] - origin[1]) * *(float *)0x6660e4;
     distance *= *(float *)0x6660e4;
     if (origin[1] > target[1]) sign = 1;

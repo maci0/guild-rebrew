@@ -1,7 +1,7 @@
 
 
 extern char g_67515c[];
-char __cdecl fcn_00401590(const char* name, int* width, int* height, int* bpp);
+char __cdecl vfs_ReadBmpInfo(const char* name, int* width, int* height, int* bpp);
 char __cdecl fcn_00401650(const char* name, unsigned char* pixels, unsigned char* pal, int flags);
 unsigned char* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
@@ -26,7 +26,7 @@ char __cdecl fcn_00402090(const char* name, unsigned char* out)
 		int w;
 		int h;
 
-		if (!fcn_00401590(name, &w, &h, 0)) {
+		if (!vfs_ReadBmpInfo(name, &w, &h, 0)) {
 			return 0;
 		}
 		n = w * h;

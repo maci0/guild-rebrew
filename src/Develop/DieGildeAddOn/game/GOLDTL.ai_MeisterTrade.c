@@ -11,7 +11,7 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include <stdio.h>
 #include <string.h>
-extern int gm_GameTime, g_7f4c04, g_7f4c08, g_772620; extern unsigned short g_7f4c0c;
+extern int gm_GameTime, g_7f4c04, g_7f4c08, g_772620; extern short g_7f4c0c;
 /* Request message, 0xf8 bytes. */
 typedef struct {
 	int f00;			/* +0x00 */
@@ -107,7 +107,7 @@ extern float g_664144;
 extern char* g_100e748; extern char* lpObjektePROT;
 
 int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld);
-int __cdecl fcn_0050dfd0(char* pkt, int item_id);
+int __cdecl gm_GetStorageSlotCapacity(char* pkt, int item_id);
 float __cdecl eval_ObjektPreis2Credits(int id, int n);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 float __cdecl fcn_005a8a30(char* a);
@@ -128,7 +128,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl cm_SendSellObjekt(int a1, int a2, short a3, int a4, char a5, int a6);
 void __cdecl cm_RequestClearLagerslot(int a1, unsigned short a2);
 void __cdecl cm_SendCopyEntityData(int a1);
-char* __cdecl fcn_00503d10(int who);
+char* __cdecl gm_FindCityItemHolder(int who);
 double __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x00489a70 */
@@ -175,7 +175,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 		if ((pr->flags & 8) == 0) {
 			continue;
 		}
-		if (pr->qty28 > fcn_0050dfd0(bld, pr->id) / 3) {
+		if (pr->qty28 > gm_GetStorageSlotCapacity(bld, pr->id) / 3) {
 			if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *(*(char**)(o + 0x16c))].category == 0x16) {
 				pr->qty18 = pr->qty28 / 2;
 			} else {
@@ -283,7 +283,7 @@ dump_stock:
 				if ((t->flags54 & 6) != 0) {
 					continue;
 				}
-				tmp = fcn_0050dfd0(bld, t->id) / 4;
+				tmp = gm_GetStorageSlotCapacity(bld, t->id) / 4;
 				if (t->qty3c <= tmp) {
 					continue;
 				}
@@ -480,7 +480,7 @@ next_request:
 			sprintf(v.line, (char*) 0x67e5d0,
 			    *(char**) (o + 0x16c) + 5,
 			    ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]) + 1);
-			tmp = fcn_0050dfd0(bld, id);
+			tmp = gm_GetStorageSlotCapacity(bld, id);
 			if (v.s2.vals[i] < tmp) {
 				tmp = v.s2.vals[i];
 			}
@@ -525,7 +525,7 @@ next_request:
 			*(int*) (o + 0x1b8) = price;
 			v.s1.ids[j] = 0;
 			v.s1.vals[j] = 0;
-			tmp = fcn_0050dfd0(bld, id);
+			tmp = gm_GetStorageSlotCapacity(bld, id);
 			if (v.s2.vals[i] < tmp) {
 				tmp = v.s2.vals[i];
 			}
@@ -593,7 +593,7 @@ next_auto:
 		if (found) {
 			continue;
 		}
-		tmp = fcn_0050dfd0(q, id);
+		tmp = gm_GetStorageSlotCapacity(q, id);
 		for (j = 0; j < v.s2.cap; j++) {
 			if (v.s2.ids[j] != 0 && v.s2.ids[j] != id) {
 				continue;
@@ -649,7 +649,7 @@ next_auto:
 			if (found) {
 				continue;
 			}
-			tmp = fcn_0050dfd0(q, id);
+			tmp = gm_GetStorageSlotCapacity(q, id);
 			if (v.s3.vals[i] == 0) {
 				continue;
 			}
@@ -690,7 +690,7 @@ next_auto:
 			if (t->qty44 == 0) {
 				continue;
 			}
-			tmp = fcn_0050dfd0(q, t->id);
+			tmp = gm_GetStorageSlotCapacity(q, t->id);
 			if (t->qty44 == 0) {
 				continue;
 			}
@@ -724,7 +724,7 @@ next_auto:
 			if (pr->qty18 == 0) {
 				continue;
 			}
-			if (!fcn_00503d10(pr->id)) {
+			if (!gm_FindCityItemHolder(pr->id)) {
 				sprintf(v.line, (char*) 0x67e4e8,
 				    *(char**) (o + 0x16c) + 5, pr->qty18,
 				    (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[
@@ -741,7 +741,7 @@ next_auto:
 				pr->qty18 = 0;
 				continue;
 			}
-			tmp = fcn_0050dfd0(q, pr->id);
+			tmp = gm_GetStorageSlotCapacity(q, pr->id);
 			if (pr->qty18 == 0) {
 				continue;
 			}
@@ -792,7 +792,7 @@ next_auto:
 			v.m.ids[3 + n] =
 			    *(unsigned short*) ((char*) w - 0x14);
 			v.m.slots[3 + n] = *(int*) (z + 1);
-			tmp = fcn_0050dfd0(q,
+			tmp = gm_GetStorageSlotCapacity(q,
 			    *(unsigned short*) ((char*) w - 0x14));
 			if (tmp < *w) {
 				v.m.f88[n] = tmp;

@@ -2,7 +2,7 @@
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_004c6ba0(int, int, int);
+void __cdecl cm_RequestModifyEntityLevel(int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
@@ -24,7 +24,7 @@ int __cdecl fcn_004bb320(int* request)
 	room = 0xfc - e[k + 0x80];
 	if (room <= 0)
 		return 0x400;
-	fcn_004c6ba0(*(int*) (e + 4), k, (char) MIN(room, gm_RandomMod(0x11) + 8));
+	cm_RequestModifyEntityLevel(*(int*) (e + 4), k, (char) MIN(room, gm_RandomMod(0x11) + 8));
 	io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, k + 0x16b7);
 	fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;

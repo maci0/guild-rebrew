@@ -9,7 +9,7 @@ typedef struct
 } Body6;
 // SIZE 0x18
 
-void __cdecl fcn_004c6d30(Body6* source)
+void __cdecl cm_RequestAhmCommand(Body6* source)
 {
 	char buf[0x9c];
 

@@ -1970,7 +1970,7 @@ char* __cdecl fcn_00445600(char*, int, char*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
-void __cdecl fcn_00510820(char*, unsigned char*, int);
+void __cdecl d3_BindEntitySceneObject(char*, unsigned char*, int);
 D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
 void* __cdecl ch_AttachTransport(char*, D3_OBJECT*);
 char __cdecl SelectTextureSet(D3_OBJECT*, void*, unsigned char, char);
@@ -2183,7 +2183,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 		}
 		*(char**) (slot + 0x3b) = model;
 		ch_PreloadCharacterMotions(model, 1, "bewegung/karren_ziehen");
-		fcn_00510820(*(char**) (model + 0x34), (unsigned char*) slot, 1);
+		d3_BindEntitySceneObject(*(char**) (model + 0x34), (unsigned char*) slot, 1);
 		sprintf(*(char**) (model + 0x34), "sp_%i", *(int*) (slot + 2));
 		scene = NULL;
 		if (type == 0x134)
@@ -2211,7 +2211,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 					SelectTextureSet(scene, scene->kontext, lod, 1);
 			}
 			scene->unbekannt_224 = 1;
-			fcn_00510820((char*) scene, (unsigned char*) slot, 1);
+			d3_BindEntitySceneObject((char*) scene, (unsigned char*) slot, 1);
 		}
 		if (existing != NULL && gm_CheckEntityType((unsigned char*) existing) == 0) {
 			ch_SetVisible(model, 0);
@@ -3224,10 +3224,12 @@ int __cdecl gm_ListTypesOfKind(int kind, int* out)
 	return n;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_IsWarehouse(unsigned char* building)
 {
 	return g_entity_type_table[*building * 0x24d] == 10;
 }
+#endif
 
 /* Checks if an entity's type matches the expected class.
  * Returns non-zero if the entity type field matches. */

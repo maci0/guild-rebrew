@@ -36,7 +36,7 @@ extern unsigned char g_7747b0;
 
 int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_00489920(fcn_0047da10_Ent* e);
+void __cdecl ai_RepairMeisterObjects(fcn_0047da10_Ent* e);
 void __cdecl fcn_0047d810(fcn_0047da10_Ent* e);
 int __cdecl fcn_0047dca0(fcn_0047da10_Ent* e);
 #include "client_packet_builder.h"
@@ -83,7 +83,7 @@ void __cdecl fcn_0047da10(void)
 	for (k = n; k != 0; k--) {
 		if ((*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_index) != 0xffff) {
 			e = ((fcn_0047da10_Ent*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
-			fcn_00489920(e);
+			ai_RepairMeisterObjects(e);
 			if ((*(GAME_TIMESTAMP*)&gm_GameTime).hour > 6 && (*(GAME_TIMESTAMP*)&gm_GameTime).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
 			    || ((e->id ^ (*(GAME_TIMESTAMP*)&gm_GameTime).hour) & 1) == 0))
 				fcn_0047d810(e);

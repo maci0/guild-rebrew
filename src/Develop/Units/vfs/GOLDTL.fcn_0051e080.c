@@ -23,14 +23,14 @@ int __cdecl he_SaveEvents(void* stream);
 int __cdecl ls_SaveCutscenes(void* stream);
 int __cdecl fcn_00521420(void* stream);
 int __cdecl fcn_00521530(void* stream);
-int __cdecl fcn_00521840(void* stream);
+int __cdecl ls_SaveWeatherAndSlots(void* stream);
 int __cdecl amt_fio_SaveAemter(void* stream);
 int __cdecl fcn_004f49e0(void* stream);
 int __cdecl fcn_004b64b0(void* stream);
-int __cdecl fcn_004edd30(void* stream);
-int __cdecl fcn_004adc40(void* stream);
+int __cdecl ls_SaveAlchemyDrawSlots(void* stream);
+int __cdecl ls_SaveHighOfficeTargets(void* stream);
 int __cdecl fcn_004c0740(void* stream);
-int __cdecl fcn_005922e0(void* stream);
+int __cdecl ls_SaveSlot779d00(void* stream);
 int __cdecl fcn_005b1f10(void* stream);
 
 /* ADDRESS: GOLDTL 0x0051e080 */
@@ -134,7 +134,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 			fcn_0051ea70();
 			return 0;
 		}
-		if (fcn_00521840(stream) == 0) {
+		if (ls_SaveWeatherAndSlots(stream) == 0) {
 			CloseVfsStream(stream);
 			fcn_0051ea70();
 			return 0;
@@ -149,7 +149,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 			fcn_0051ea70();
 			return 0;
 		}
-		if (fcn_005922e0(stream) == 0) {
+		if (ls_SaveSlot779d00(stream) == 0) {
 			CloseVfsStream(stream);
 			fcn_0051ea70();
 			return 0;
@@ -159,12 +159,12 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 			fcn_0051ea70();
 			return 0;
 		}
-		if (fcn_004edd30(stream) == 0) {
+		if (ls_SaveAlchemyDrawSlots(stream) == 0) {
 			CloseVfsStream(stream);
 			fcn_0051ea70();
 			return 0;
 		}
-		if (fcn_004adc40(stream) == 0) {
+		if (ls_SaveHighOfficeTargets(stream) == 0) {
 			CloseVfsStream(stream);
 			fcn_0051ea70();
 			return 0;

@@ -18,7 +18,7 @@ extern char* lpObjektePROT;
 
 unsigned short* __cdecl fcn_00502cd0(int obj, int mode, ...);
 int __cdecl gm_GetMsgField(char* pkt, unsigned short* q);
-int __cdecl fcn_0050dfd0(char* pkt, int item_id);
+int __cdecl gm_GetStorageSlotCapacity(char* pkt, int item_id);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 
 int __cdecl gm_CollectBuildingStock(char* o, Stock* out, int producers)
@@ -54,7 +54,7 @@ int __cdecl gm_CollectBuildingStock(char* o, Stock* out, int producers)
 		if (((*rec == 0x17 || *rec == 0x25) && producers) || (*rec != 0x17 && *rec != 0x25 && !producers) ||
 		    *(unsigned short*) b == 0x116) {
 			out->vals[out->n] = gm_GetMsgField(b, e);
-		out->caps[out->n] = fcn_0050dfd0(b, *e);
+		out->caps[out->n] = gm_GetStorageSlotCapacity(b, *e);
 		out->ids[out->n] = *e;
 		out->n++;
 		}

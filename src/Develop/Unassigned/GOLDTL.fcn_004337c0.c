@@ -1,4 +1,4 @@
-extern void __cdecl fcn_00451720(int *a, int *b, int *c, int *d);
+extern void __cdecl d3_WrapEulerAnglesPi(int *a, int *b, int *c, int *d);
 extern void __cdecl fcn_004321f0(int *a, int *b, int *c);
 
 /* ADDRESS: GOLDTL 0x004337c0 */
@@ -17,7 +17,7 @@ void __cdecl fcn_004337c0(int *state)
             do {
                 if ((*(unsigned char *)((int)state + 0x34) & 1) != 0 &&
                     i < *state - 1) {
-                    fcn_00451720((int *)(i * 0x58 + (char *)state[0x10] + 0x6c),
+                    d3_WrapEulerAnglesPi((int *)(i * 0x58 + (char *)state[0x10] + 0x6c),
                                  (int *)(i * 0x58 + (char *)state[0x10] + 0x14),
                                  (int *)(i * 0x58 + (char *)state[0x10] + 0x6c),
                                  (int *)(i * 0x58 + (char *)state[0x10] + 0x14));
@@ -41,7 +41,7 @@ void __cdecl fcn_004337c0(int *state)
         for (j = 0; j < *state; j++) {
             if ((*(unsigned char *)((int)state + 0x34) & 1) != 0 &&
                 j < *state - 1) {
-                fcn_00451720((int *)((char *)state[0x10] + j * 0x58 + 0x6c),
+                d3_WrapEulerAnglesPi((int *)((char *)state[0x10] + j * 0x58 + 0x6c),
                              (int *)((char *)state[0x10] + j * 0x58 + 0x14),
                              (int *)((char *)state[0x10] + j * 0x58 + 0x6c),
                              (int *)((char *)state[0x10] + j * 0x58 + 0x14));

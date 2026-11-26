@@ -8,7 +8,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 int __cdecl amt_FindOfficeSlotByKey(char*, void*);
-int __cdecl fcn_004e8b40(int, void*);
+int __cdecl amt_GetRoleTemplate(int, void*);
 int __cdecl amt_CollectOfficeCandidates(int, int, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004aae50(char*, int, int*, void*);
@@ -40,7 +40,7 @@ int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 	if (amt_FindOfficeSlotByKey(a0, info) == 0) {
 		return -1;
 	}
-	if (fcn_004e8b40(*(int*) (info + 8) & 0xff, buf) == 0) {
+	if (amt_GetRoleTemplate(*(int*) (info + 8) & 0xff, buf) == 0) {
 		return -1;
 	}
 	n = amt_CollectOfficeCandidates(*(int*) (info + 8) & 0xff, 2, ents);

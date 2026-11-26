@@ -7,7 +7,7 @@ extern unsigned char g_773d75;
 extern char g_6aae08[];
 
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0050b810(int, char);
+int __cdecl gm_SumQueryEntryValues(int, char);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -23,7 +23,7 @@ void __cdecl d2_ShowGildenkasseDialog(char* e)
 	int h;
 
 	r = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x115);
-	v = fcn_0050b810(*(int*) (r + 0x14), (*(char*)&g_773d75));
+	v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (*(char*)&g_773d75));
 	h = fcn_00470820(0, 0, g_6aae08);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);

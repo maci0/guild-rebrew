@@ -2,12 +2,12 @@
 
 char* __cdecl fcn_005b1a80(int);
 
-void __cdecl fcn_005b1ed0(char* a, int v)
+void __cdecl hp_SetProdSettingScale(char* entity, int scaleBits)
 {
-	char* p;
+	char* setting;
 
-	p = fcn_005b1a80(*(int*) (a + 1));
-	if (p != 0) {
-		*(int*) (p + 0x44) = v;
+	setting = fcn_005b1a80(*(int*) (entity + 1));
+	if (setting != 0) {
+		*(int*) (setting + 0x44) = scaleBits;
 	}
 }

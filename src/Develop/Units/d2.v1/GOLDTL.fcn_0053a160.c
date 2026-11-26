@@ -22,7 +22,7 @@ void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00539490(void);
 int __cdecl d2_ShowServerBrowser(int);
-int __cdecl fcn_0053a020(void);
+int __cdecl d2_ShowNetworkLoadDialog(void);
 
 int __cdecl fcn_0053a160(void)
 {
@@ -69,7 +69,7 @@ int __cdecl fcn_0053a160(void)
 			} else if (d2_CurrentElementId == c) {
 				(*(int*)&g_7747b0) = 4;
 				fcn_00471af0(h, 0);
-				if (fcn_0053a020() != 0) {
+				if (d2_ShowNetworkLoadDialog() != 0) {
 					g_774654 = 1;
 					result = 1;
 				}

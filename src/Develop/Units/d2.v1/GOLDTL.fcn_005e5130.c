@@ -30,7 +30,7 @@ void __cdecl fcn_00526120(int, int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 int __cdecl fcn_005cd440(Req*, char*, char*, void*);
 void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_005e4e50(void);
+void __cdecl d2_ShowSchneidereiPlauschDialog(void);
 
 /* The request's zero-fill is the original's hand-written block-fill
  * prelude; recorded C memset probes did not emit it (archived docs/codegen-walls.md
@@ -68,7 +68,7 @@ void __cdecl fcn_005e5130(void)
 		req.a = 1;
 		req.size = 0x400;
 		req.kind = 6;
-		fcn_005cd440(&req, g_14b5bc8, g_6b5c60, fcn_005e4e50);
+		fcn_005cd440(&req, g_14b5bc8, g_6b5c60, d2_ShowSchneidereiPlauschDialog);
 	}
 	fcn_00532ef0();
 }

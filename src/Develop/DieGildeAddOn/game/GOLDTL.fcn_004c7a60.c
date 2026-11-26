@@ -2,7 +2,7 @@
  * and stores through it after the call, which MSVC 6 only emits when the callee
  * is defined in the same translation unit. Both bodies live in this file. */
 
-extern char cm_LastEntityId[];
+extern int cm_LastEntityId;
 extern char cm_LastBuildingId[];
 extern char cm_LastObjectId[];
 
@@ -11,7 +11,7 @@ extern char cm_LastObjectId[];
 int __cdecl cm_ResolveSpecialEntityId(int a1, int value)
 {
 	if (value == -2) {
-		return *(int*) cm_LastEntityId;
+		return cm_LastEntityId;
 	}
 	if (value == -3) {
 		return *(int*) cm_LastBuildingId;

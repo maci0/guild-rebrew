@@ -24,7 +24,7 @@ extern int d2_CurrentElementId;
 extern int g_14b556c;
 
 int __cdecl gm_GetSeason(pos14_7f4c00*);
-int __cdecl fcn_00525fb0(char*);
+int __cdecl d2_CheckOwnerBlocked(char*);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(int, int);
@@ -60,7 +60,7 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 
 	hh = 0;
 	st = gm_GetSeason(&gm_GameTime);
-	if (fcn_00525fb0(who) != 0) {
+	if (d2_CheckOwnerBlocked(who) != 0) {
 		return;
 	}
 	if (g_774800 == 0 && st != 2) {

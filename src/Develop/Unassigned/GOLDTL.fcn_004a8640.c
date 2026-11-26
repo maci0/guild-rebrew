@@ -6,7 +6,7 @@ extern Card_1007ce0 g_1007ce0[24];
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004a7880(int owner);
+int __cdecl gm_DrawCard(int owner);
 
 /* ADDRESS: GOLDTL 0x004a8640 */
 void __cdecl fcn_004a8640(void)
@@ -16,7 +16,7 @@ void __cdecl fcn_004a8640(void)
 
 	for (j = 0; j < 3; j++) {
 		for (p = 0; p < 3; p++) {
-			*(int*) (g_1007cd4 + 0xc + j * 4 + p * 0x34) = fcn_004a7880(p);
+			*(int*) (g_1007cd4 + 0xc + j * 4 + p * 0x34) = gm_DrawCard(p);
 			if (j > 1) {
 				g_1007ce0[*(int*) (g_1007cd4 + 0xc + j * 4 + p * 0x34)].owner = 1;
 			} else {

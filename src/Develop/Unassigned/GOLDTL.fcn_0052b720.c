@@ -22,7 +22,7 @@ extern char g_14cf7c8;
 
 float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
-float __cdecl fcn_004514d0(int a, int b);
+float __cdecl d3_WrapYawDelta(int a, int b);
 void __cdecl fcn_00438b40(char* p, int* v);
 
 /* ADDRESS: GOLDTL 0x0052b720 */
@@ -231,7 +231,7 @@ done:
 		q[0] = mat[0] * d[0] + mat[4] * v[1] + mat[8] * v[2];
 		q[2] = mat[2] * d[0] + mat[6] * v[1] + mat[10] * v[2];
 	} else {
-		step = fcn_004514d0((int) g_662d40, (int) &q[0]);
+		step = d3_WrapYawDelta((int) g_662d40, (int) &q[0]);
 		v[1] = 0.0f;
 		v[2] = d[1];
 		q[0] = d[0] * cos(-step) + d[1] * sin(-step);

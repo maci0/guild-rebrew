@@ -11,7 +11,7 @@ extern char* lpObjektePROT;
 
 void* __cdecl gm_EntityAccumulate(void* pkt);
 
-int __cdecl fcn_0050dfd0(char* pkt, int item_id);
+int __cdecl gm_GetStorageSlotCapacity(char* pkt, int item_id);
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 int __cdecl gm_GetMsgField(char* pkt, char* q);
 void* __cdecl gm_NextEntityQueryMatch(void);
@@ -35,7 +35,7 @@ int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
 		return 0;
 	}
 	is_cat2 = (gm_GetBuildingTypeCategory((unsigned char) *ent) == 2);
-	size = fcn_0050dfd0(pkt, item_id);
+	size = gm_GetStorageSlotCapacity(pkt, item_id);
 	query_result = fcn_00502cd0(*(int*) (pkt + 0x14), 1, 0, item_id);
 	if (query_result != NULL) {
 		msg_field = gm_GetMsgField(pkt, (char*) query_result);

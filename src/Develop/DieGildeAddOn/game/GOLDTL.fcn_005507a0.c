@@ -28,7 +28,7 @@ int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 
-void __cdecl fcn_005507a0(char* u)
+void __cdecl he_RunMeisterpruefungPrompt(char* u)
 {
 	int v;
 

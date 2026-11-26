@@ -672,6 +672,7 @@ int __cdecl amt_GetSlotByType(unsigned char type, OFFICE_SLOT* out)
 	return 1;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl amt_GetRoleTemplate(int role, OFFICE_ROLE_TEMPLATE* out)
 {
 	if (role >= 0x28) {
@@ -681,6 +682,7 @@ int __cdecl amt_GetRoleTemplate(int role, OFFICE_ROLE_TEMPLATE* out)
 	*out = g_office_role_templates[role];
 	return 1;
 }
+#endif
 
 int __cdecl amt_ListSlotsOfGroup(int group, int max, OFFICE_SLOT* out)
 {
@@ -1162,6 +1164,7 @@ int __cdecl amt_GetRankLimits(int role, OFFICE_RANK_LIMITS* out)
 	return 0;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl amt_ListRolesOfLevel(int level, int max, int* out)
 {
 	OFFICE_ROLE_TEMPLATE tmpl;
@@ -1182,6 +1185,7 @@ int __cdecl amt_ListRolesOfLevel(int level, int max, int* out)
 	}
 	return n;
 }
+#endif
 
 #if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl amt_GetRoleLevel(int role)

@@ -16,7 +16,7 @@ int __cdecl d2_SetForm();
 int __cdecl fcn_00476970();
 int __cdecl fcn_00495890();
 int __cdecl fcn_004ad8c0();
-int __cdecl fcn_004b3aa0();
+int __cdecl hst_ShowDueHistoryScroll();
 int __cdecl plt_UpdatePlantStages();
 int __cdecl d3snd_QueueSound();
 int __cdecl cm_RequestCopyEntityData();
@@ -25,7 +25,7 @@ char __cdecl cut_RunPendingCutscenes(int);
 int __cdecl srv_FormatStatEntity();
 int __cdecl fcn_004eafe0();
 int __cdecl fcn_004f5830();
-int __cdecl fcn_004f4d10();
+int __cdecl gm_UpdateAllBuildingLevels();
 int __cdecl fcn_004facb0();
 int __cdecl fcn_004fb390();
 int __cdecl fcn_004fb630();
@@ -43,11 +43,11 @@ int __cdecl init_AllocateGebaeudeSceneSlot();
 int __cdecl io_AppendText();
 int __cdecl fcn_00522c0();
 int __cdecl fcn_00526120();
-int __cdecl fcn_005356b0();
+int __cdecl main_ExitToFrameHandler();
 int __cdecl sv_WaitForNetworkSync();
 int __cdecl main_RunFrameLoop();
 int __cdecl gm_ApplyHourlyEntityUpdates();
-int __cdecl fcn_005422c0();
+int __cdecl gm_UpdateOwnerBuildings();
 int __cdecl fcn_005435d0();
 int __cdecl main_PlayOutroMovie();
 int __cdecl he_DispatchFlaggedEvents();
@@ -105,7 +105,7 @@ void __cdecl fcn_00543080(void)
 			io_FormatTextBuffer(messageText, 0x79);
 			if (!fcn_00526120(messageText, 1)) {
 				g_774954 = 1;
-				fcn_005356b0(0x5438c0);
+				main_ExitToFrameHandler(0x5438c0);
 				return;
 			}
 			fcn_0046ac30();
@@ -165,7 +165,7 @@ void __cdecl fcn_00543080(void)
 		v9 = (char*) 0x7f4ca8;
 		do {
 			if (*(unsigned short*) &v9[-8] != 0xffff && *v9) {
-				fcn_005422c0(v5);
+				gm_UpdateOwnerBuildings(v5);
 			}
 			v9 = &v9[0x21c];
 			v5 += 1;
@@ -190,7 +190,7 @@ void __cdecl fcn_00543080(void)
 		fcn_005490d0();
 		fcn_00535960();
 		Sleep(100);
-		fcn_004f4d10();
+		gm_UpdateAllBuildingLevels();
 		fcn_00535960();
 		Sleep(100);
 		fcn_00495890();
@@ -242,9 +242,9 @@ void __cdecl fcn_00543080(void)
 		}
 		if (g_6a3420 && !g_774954) {
 			if (!(*(int*) &g_77494c & 8) && g_14cbca0 != -1) {
-				fcn_004b3aa0(0);
+				hst_ShowDueHistoryScroll(0);
 			} else {
-				fcn_004b3aa0(1);
+				hst_ShowDueHistoryScroll(1);
 			}
 		}
 	}

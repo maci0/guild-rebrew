@@ -27,7 +27,7 @@ typedef struct {
 extern __int64 g_666018;
 extern char s_6accdc[];
 
-int __cdecl fcn_004e8b40(int, Info*);
+int __cdecl amt_GetRoleTemplate(int, Info*);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl cm_SendLogAction(char*);
@@ -64,7 +64,7 @@ int __cdecl d2_ShowAbsetzenDialog(unsigned char* e, int* o)
 	} else {
 		return 0x60;
 	}
-	if (!fcn_004e8b40(v, &info)) {
+	if (!amt_GetRoleTemplate(v, &info)) {
 		return 0x60;
 	}
 	if (e[2] != 6) {

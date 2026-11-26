@@ -17,7 +17,7 @@ int __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl cm_SendSellObjekt(int, int, int, int, int);
 void __cdecl cm_SendRemoveLinkedObject(int, int, int);
@@ -110,7 +110,7 @@ void __cdecl fcn_00569ff0(char* e)
 					if (o != 0) {
 						fcn_00529160(pa, 0, *(unsigned short*) o, e);
 						cm_SendCancelCharacterActions(*p);
-						fcn_004c5da0(*p, *(int*) (pa + 1), -1, 0, 1, "Einbruch");
+						ch_StartMovement(*p, *(int*) (pa + 1), -1, 0, 1, "Einbruch");
 					}
 				}
 				p++;
@@ -255,7 +255,7 @@ void __cdecl fcn_00569ff0(char* e)
 				do {
 					if (*p != -1) {
 						cm_SendCancelCharacterActions(*p);
-						fcn_004c5da0(*p, *(int*) (q + 1), *(int*) (pc + 2), 0,
+						ch_StartMovement(*p, *(int*) (q + 1), *(int*) (pc + 2), 0,
 						        0, "Entdeckt");
 					}
 					p++;
@@ -291,7 +291,7 @@ void __cdecl fcn_00569ff0(char* e)
 						o = (char*) fcn_00508e40(*p);
 						if (o != 0) {
 							cm_SendCancelCharacterActions(*p);
-							fcn_004c5da0(*p, *(int*) (pb + 1), *(int*) (q + 2), 0,
+							ch_StartMovement(*p, *(int*) (pb + 1), *(int*) (q + 2), 0,
 							        0, "Einbruch");
 							hits++;
 							gm_GetScaledEntitySkill(o, 2);
@@ -452,10 +452,10 @@ void __cdecl fcn_00569ff0(char* e)
 					if (o != 0) {
 						cm_SendCancelCharacterActions(*p);
 						if (pb != 0 && px != 0) {
-							fcn_004c5da0(*p, *(int*) (pb + 1), *(int*) (px + 2), 0,
+							ch_StartMovement(*p, *(int*) (pb + 1), *(int*) (px + 2), 0,
 							        0, "Einbruch");
 						} else {
-							fcn_004c5da0(*p, -1, -1, 0, 0, "Einbruch");
+							ch_StartMovement(*p, -1, -1, 0, 0, "Einbruch");
 						}
 						fcn_00529160(0, 0, *(unsigned short*) o, 0);
 					}

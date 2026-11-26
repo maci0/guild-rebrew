@@ -7,7 +7,7 @@ extern unsigned char* lpGebaeudePROT;
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_ROW;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
-int __cdecl fcn_00525fb0(void*);
+int __cdecl d2_CheckOwnerBlocked(void*);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -72,7 +72,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 
 	p = a0;
 	idx = 1;
-	item = fcn_00525fb0(a0);
+	item = d2_CheckOwnerBlocked(a0);
 	if (item) {
 		return 0;
 	}

@@ -18,11 +18,11 @@ char* __cdecl cut_FindCutsceneById(int);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004d5450(char*);
-int __cdecl fcn_004d5110(char*, char*, char*, char*);
+int __cdecl gm_TransferAndSellAssets(char*, char*, char*, char*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
 void __cdecl cm_SendCancelCharacterActions(int);
-int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
+int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 int __cdecl fcn_004c5620(char, char*);
 int __cdecl fcn_004c5980(void*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -33,7 +33,7 @@ void __cdecl fcn_00529160(char*, char*, unsigned int, char*);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x0054e390 */
-void __cdecl fcn_0054e390(char* e)
+void __cdecl he_RunRazzia(char* e)
 {
 	int n;
 	float f = 1.0f;
@@ -76,7 +76,7 @@ void __cdecl fcn_0054e390(char* e)
 					if (u != 0) {
 						fcn_00529160(own, 0, *(unsigned short*) u, e);
 						cm_SendCancelCharacterActions(*(int*) p);
-						fcn_004c5da0(*(int*) p, *(int*) (own + 1), -1, 0, 0,
+						ch_StartMovement(*(int*) p, *(int*) (own + 1), -1, 0, 0,
 						             (char*) 0x6a5ad8);
 					} else {
 						*(int*) p = -1;
@@ -113,7 +113,7 @@ void __cdecl fcn_0054e390(char* e)
 					u = gm_LookupEntityRecordById(*(int*) p);
 					if (u != 0 && *(unsigned char*) (u + 8) > 0) {
 						cm_SendCancelCharacterActions(*(int*) p);
-						fcn_004c5da0(*(int*) p, *(int*) (own + 1), *(int*) (slot + 2), 0, 0,
+						ch_StartMovement(*(int*) p, *(int*) (own + 1), *(int*) (slot + 2), 0, 0,
 						             (char*) 0x6a5ad8);
 						fcn_00529160(own, 0, *(unsigned short*) u, e);
 					} else {
@@ -256,7 +256,7 @@ label_54e6a1:
 				}
 				other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 				own = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
-				m = fcn_004d5110(own, other, (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)],
+				m = gm_TransferAndSellAssets(own, other, (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)],
 				                 (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)]);
 				kc = *(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_state;
 				if (kc == 6 || kc == 7) {
@@ -325,7 +325,7 @@ label_54e6a1:
 					u = gm_LookupEntityRecordById(*(int*) p);
 					if (u != 0) {
 						cm_SendCancelCharacterActions(*(int*) p);
-						fcn_004c5da0(*(int*) p, *(int*) (own + 1), *(int*) (slot + 2), 0, 0,
+						ch_StartMovement(*(int*) p, *(int*) (own + 1), *(int*) (slot + 2), 0, 0,
 						             (char*) 0x6a5ad8);
 						fcn_00529160(own, 0, *(unsigned short*) u, 0);
 					}

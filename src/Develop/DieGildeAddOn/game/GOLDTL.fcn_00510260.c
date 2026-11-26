@@ -4,7 +4,7 @@ extern char g_7f4ca0[];
 int __cdecl gm_GetBuildingTechEffect(unsigned char* p, int a, int b);
 char* __cdecl fcn_0050dc90(int arg1);
 char* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_004ff040(char* e);
+float __cdecl gm_GetEntityHealthRatio(char* e);
 float __cdecl fcn_0050fdb0(int k, int n, int* ids);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x00510260 */
@@ -45,7 +45,7 @@ float __cdecl fcn_00510260(unsigned char* buildingData, int countArg, int idsAdd
 			if (arr[i] != -1) {
 				ent = gm_LookupEntityRecordById(arr[i]);
 				if (ent != 0) {
-					sum = (float) (fcn_004ff040(ent) + sum);
+					sum = (float) (gm_GetEntityHealthRatio(ent) + sum);
 					if (*(char*) (typePrototype + 0x22f) == *(char*) (ent + 0x165)) {
 						bonus = (float) (bonus + 0.3);
 					}

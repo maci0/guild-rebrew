@@ -22,7 +22,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00551050(char* u)
+void __cdecl he_RunBuildingDamageEvent(char* u)
 {
 	unsigned char* cand[16];
 	char text[0x418];

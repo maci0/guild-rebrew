@@ -117,7 +117,7 @@ void __cdecl cm_SendLogAction(int);
 void __cdecl cm_SendTraceEnd(int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
-void __cdecl fcn_004bbc30(int, int);
+void __cdecl gm_SendRandomTurnEvents(int, int);
 int __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005459a0(int);
 int __cdecl d2_CreateScrollPerga(void);
@@ -380,7 +380,7 @@ void __cdecl fcn_00540020(void)
 	}
 	cm_RequestTransferCurrencyNoKill(-1, SLOT4(g_774970 & 0xffff), g_773d75,
 		     -he_SumEventCostsForSubject(g_774970 & 0xffff));
-	fcn_004bbc30(3, SLOT4(g_774970 & 0xffff));
+	gm_SendRandomTurnEvents(3, SLOT4(g_774970 & 0xffff));
 	cm_RequestSysMessage(1, 0);
 	if (g_7747b0 & 4) {
 		sv_WaitForNetworkSync(0x24087);

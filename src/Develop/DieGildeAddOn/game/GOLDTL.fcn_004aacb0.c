@@ -1,6 +1,6 @@
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 int __cdecl abs(int);
 
 
@@ -25,9 +25,9 @@ int __cdecl fcn_004aacb0(unsigned short* subjectEntity, unsigned short* candidat
 	q3 = gm_GetEntitySkill((char*) candidateB, 4);
 	s2 = (float)(q2 * 0.34 + d2 * 0.66);
 	s3 = (float)(q3 * 0.34 + d3 * 0.66);
-	if (fcn_005c6270(candidateA, 0x2be) != 0)
+	if (gm_HasActiveSpecialObject(candidateA, 0x2be) != 0)
 		d2 += 0.2f;
-	if (fcn_005c6270(candidateB, 0x2be) != 0)
+	if (gm_HasActiveSpecialObject(candidateB, 0x2be) != 0)
 		d3 += 0.2f;
 	if (abs((int) (d2 - d3)) * 0.66 > abs((int) (q2 - q3)) * 0.33)
 		*comparisonOut = 1;

@@ -14,7 +14,7 @@ typedef struct {
 
 extern char* g_14abce8;
 
-int __cdecl fcn_00525fb0(int);
+int __cdecl d2_CheckOwnerBlocked(int);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_005afa50(void);
 void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
@@ -25,7 +25,7 @@ void __cdecl fcn_005afca0(int e)
 {
 	Req req;
 
-	if (fcn_00525fb0(e) == 0 && e != 0) {
+	if (d2_CheckOwnerBlocked(e) == 0 && e != 0) {
 		req.a = 1;
 		req.size = -1;
 		req.kind = 6;

@@ -38,7 +38,7 @@ void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005d7e80(unsigned char* e, unsigned char* a2)
+int __cdecl gm_HandleDrainTargetAP(unsigned char* actor, unsigned char* action)
 {
 	int result;
 	int cancel;
@@ -50,29 +50,29 @@ int __cdecl fcn_005d7e80(unsigned char* e, unsigned char* a2)
 	int id;
 	int h;
 
-	if (e[2] != 6) {
-		if (*(int*) (e + 0x194) < 2) {
+	if (actor[2] != 6) {
+		if (*(int*) (actor + 0x194) < 2) {
 			return 0x20;
 		}
-		if (*(int*) (e + 0x1c8) & 0x8000) {
+		if (*(int*) (actor + 0x1c8) & 0x8000) {
 			return 0x20;
 		}
-		o = gm_LookupEntityRecordById(*(int*) (a2 + 0x214));
+		o = gm_LookupEntityRecordById(*(int*) (action + 0x214));
 		if (o == 0) {
 			return 0x60;
 		}
-		fcn_004c6ae0(*(int*) (e + 4), -2);
+		fcn_004c6ae0(*(int*) (actor + 4), -2);
 		fcn_004c6ae0(*(int*) (o + 4), -3);
-		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x8000, 0);
+		cm_RequestChangeBits(*(int*) (actor + 4), 0x1c8, 4, 0x8000, 0);
 		if (o[2] == 6 || o[2] == 7) {
-			io_FormatTextBuffer(text, 0x1dda, *(unsigned short*) e, 3);
+			io_FormatTextBuffer(text, 0x1dda, *(unsigned short*) actor, 3);
 			fcn_00545d40(*(int*) (o + 4), *(int*) (o + 4), text, 0, 0x5fb, s_6a59fc);
 		}
 		return 0x10;
 	}
 	result = 2;
 	memset(&req, 0, sizeof(req));
-	if (*(int*) (e + 0x1c8) & 0x8000) {
+	if (*(int*) (actor + 0x1c8) & 0x8000) {
 		io_FormatTextBuffer(text, 0x1ce0);
 		fcn_00526120(text, 0);
 		return 0x81;
@@ -96,10 +96,10 @@ int __cdecl fcn_005d7e80(unsigned char* e, unsigned char* a2)
 	do {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				if (d2_CheckActionBlocker(e, 2)) {
-					fcn_004c6ae0(*(int*) (e + 4), -2);
+				if (d2_CheckActionBlocker(actor, 2)) {
+					fcn_004c6ae0(*(int*) (actor + 4), -2);
 					fcn_004c6ae0(*(int*) (o + 4), -3);
-					h = cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x8000, 0);
+					h = cm_RequestChangeBits(*(int*) (actor + 4), 0x1c8, 4, 0x8000, 0);
 					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
@@ -107,7 +107,7 @@ int __cdecl fcn_005d7e80(unsigned char* e, unsigned char* a2)
 						*(unsigned short*) o, 3);
 					fcn_00526120(text, 0);
 					if (o[2] == 6 || o[2] == 7) {
-						io_FormatTextBuffer(text, 0x1dda, *(unsigned short*) e, 3);
+						io_FormatTextBuffer(text, 0x1dda, *(unsigned short*) actor, 3);
 						fcn_00545d40(*(int*) (o + 4), *(int*) (o + 4), text, 0, 0x5fb, s_6a59fc);
 					}
 					g_774654 = 1;
@@ -120,7 +120,7 @@ int __cdecl fcn_005d7e80(unsigned char* e, unsigned char* a2)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005d7e80, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) gm_HandleDrainTargetAP, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 }

@@ -7,7 +7,7 @@ char* __cdecl fcn_004d34f0(char* s);
 int __cdecl d3_TransformPoint(char* a, char* b, void* c);
 char __cdecl fcn_0045b990(int a, void* b, void* c, void* d, void* e);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int a, void* b);
-double __cdecl fcn_004ff040(char* s);
+double __cdecl gm_GetEntityHealthRatio(char* s);
 int __cdecl fcn_0064d228(float v);
 void* __cdecl memcpy(void* dst, const void* src, unsigned int n);
 
@@ -93,7 +93,7 @@ int __cdecl fcn_004d7fa0(int a, int b)
 		s = fcn_004cef30(v);
 		e = (char*) gm_FindOrCreateEntitySlot(a, s);
 		memcpy(tmp, e, 0x2c);
-		val = fcn_004ff040(s) * 100.0;
+		val = gm_GetEntityHealthRatio(s) * 100.0;
 		r = (int) val;
 		if (r >= 0x14 || fcn_0042e410(0x64) <= 0x1e) {
 			r = fcn_004d2f70(s);

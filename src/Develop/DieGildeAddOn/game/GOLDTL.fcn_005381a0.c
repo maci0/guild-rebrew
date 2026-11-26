@@ -16,7 +16,7 @@ void __cdecl gm_CleanupAllEntities(void);
 void __cdecl ls_FreeList774a78(void);
 void __cdecl fcn_004edce0(void);
 void __cdecl fcn_004acf00(void);
-void __cdecl fcn_004efcd0(void);
+void __cdecl d3_DestroySceneSlotObjects(void);
 void __cdecl ch_ShutdownCharacters(void);
 void __cdecl fcn_004c3ed0(void);
 
@@ -48,7 +48,7 @@ void __cdecl fcn_005381a0(void)
 	ls_FreeList774a78();
 	fcn_004edce0();
 	fcn_004acf00();
-	fcn_004efcd0();
+	d3_DestroySceneSlotObjects();
 	ch_ShutdownCharacters();
 	fcn_004c3ed0();
 }

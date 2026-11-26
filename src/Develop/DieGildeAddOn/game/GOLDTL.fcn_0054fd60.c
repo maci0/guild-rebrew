@@ -51,7 +51,7 @@ int __cdecl fcn_004c5980(void*);
 int __cdecl cm_GetCommandStatus(int);
 
 /* ADDRESS: GOLDTL 0x0054fd60 */
-void __cdecl fcn_0054fd60(Order_54fd60* o)
+void __cdecl he_RunDuellCutscene(Order_54fd60* o)
 {
     char msg[0x114];
     Entity_54fd60* a;

@@ -32,12 +32,12 @@ extern char g_7f4ca4[];
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, int);
 void __cdecl cm_SendCopyEntityData(Msg *);
-float __cdecl fcn_004feff0(char *);
+float __cdecl gm_GetEntityMaxHealth(char *);
 int __cdecl fcn_00567170(char *, int *, int *, int);
 void __cdecl fcn_00529160(int, int, int, int);
 char *__cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(char *);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char *);
+void __cdecl ch_StartMovement(int, int, int, int, int, char *);
 
 void __cdecl fcn_005498b0(char *a1, char *entity, char *a3, char *a4, int a5, float value)
 {
@@ -65,16 +65,16 @@ void __cdecl fcn_005498b0(char *a1, char *entity, char *a3, char *a4, int a5, fl
 		m.f58 = *(int *) (entity + 4);
 		cm_SendCopyEntityData(&m);
 	} else {
-		f = fcn_004feff0(entity) * 0.5f;
+		f = gm_GetEntityMaxHealth(entity) * 0.5f;
 		if (value < f && fcn_00567170(entity, &x0, &x4, 0) != 0 && *(char **) (entity + 0x184) != 0) {
 			fcn_00529160(0, 0, *(unsigned short *) entity, 0);
 			if (*(int *) (*(char **) (entity + 0x184) + 0x28) != -1) {
 				evt_RequestScriptExit(evt_FindScriptById(*(int *) (*(char **) (entity + 0x184) + 0x28)));
 			}
 			if (x4 == -1) {
-				fcn_004c5da0(*(int *) (entity + 4), x0, x4, 0, 1, "Unfall");
+				ch_StartMovement(*(int *) (entity + 4), x0, x4, 0, 1, "Unfall");
 			} else {
-				fcn_004c5da0(*(int *) (entity + 4), x0, x4, 0, 0, "Unfall");
+				ch_StartMovement(*(int *) (entity + 4), x0, x4, 0, 0, "Unfall");
 			}
 			if (a3[2] == 6 || a3[2] == 7) {
 				io_FormatTextBuffer(buf, 0x1631, *(unsigned short *) entity, a4, a5 + 0x1626);

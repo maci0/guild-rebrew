@@ -6,7 +6,7 @@ typedef struct {
 } H_4b82f0;
 
 char *__cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(char *, int);
+int __cdecl gm_HasActiveSpecialObject(char *, int);
 int __cdecl fcn_004a55c0(char *, int, int *, int, float, int *);
 int __cdecl gm_RandomMod(unsigned short);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -31,7 +31,7 @@ int __cdecl fcn_004b82f0(int *obj)
 	if (h == 0) {
 		return 1;
 	}
-	if (fcn_005c6270((char *) h, 0x290) != 0) {
+	if (gm_HasActiveSpecialObject((char *) h, 0x290) != 0) {
 		return 0x400;
 	}
 	b = 0x600c00;

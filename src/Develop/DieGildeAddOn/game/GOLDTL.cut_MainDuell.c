@@ -60,7 +60,7 @@ void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 void __cdecl fcn_004e51d0(unsigned int* a0, int a1);
 int __cdecl fcn_004e6a70(int a1);
 int __cdecl fcn_004de610(int v);
-float __cdecl fcn_004ff040(char* p);
+float __cdecl gm_GetEntityHealthRatio(char* p);
 float __cdecl fcn_004ff210(int a, int b);
 int __cdecl cut_RandMod(int n);
 void __cdecl fcn_004e0210(char* a, char* b, char* c);
@@ -262,7 +262,7 @@ void __cdecl cut_MainDuell(char* a0)
         j++;
     }
     if (g_772f44 != 0) {
-        if (fcn_004ff040((char*) &sB) > fcn_004ff040((char*) &sA))
+        if (gm_GetEntityHealthRatio((char*) &sB) > gm_GetEntityHealthRatio((char*) &sA))
             p = (char*) &sA;
         else {
             other = p = (char*) &sB;

@@ -20,7 +20,7 @@ extern void* ch_ContextCharacters[];
 extern int g_7f4ca4[];
 extern pos14_7f4c00 gm_GameTime;
 
-int __cdecl fcn_00525fb0(void*);
+int __cdecl d2_CheckOwnerBlocked(void*);
 void __cdecl fcn_0052a0c0(void*, int);
 int __cdecl fcn_00526120(void*, int);
 void __cdecl cm_SendCopyEntityData(void*);
@@ -39,7 +39,7 @@ void __cdecl fcn_0059dcf0(void* entity)
 	int idx;
 
 	entry = 0;
-	if (fcn_00525fb0(entity) != 0)
+	if (d2_CheckOwnerBlocked(entity) != 0)
 		return;
 	fcn_0052a0c0(entity, 0);
 	if (fcn_00526120((void*) *(int*) 0x14abb7c, 1) != 0) {

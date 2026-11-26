@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_timestamp.h"
 void *memset(void *, int, unsigned int);
-int __cdecl fcn_004ae170(int);
+int __cdecl gm_IsSlotLivingPerson(int);
 int __cdecl cm_SendCopyEntityData(void *);
 
 #include "client_types.h"
@@ -33,7 +33,7 @@ int __cdecl fcn_004b1740(void)
 	i = 0;
 	rec = (char*) 0x7f4ca4;
 	do {
-		if (fcn_004ae170(i) != 0) {
+		if (gm_IsSlotLivingPerson(i) != 0) {
 			memset(msg, 0, sizeof(msg));
 			stamp.hour = (short) (i % 4 + 0xa);
 			id = *(int*) rec;

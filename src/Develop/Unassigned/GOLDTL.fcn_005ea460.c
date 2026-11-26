@@ -4,7 +4,7 @@
 extern float g_666100;
 
 /* ADDRESS: GOLDTL 0x005ea460 */
-float __cdecl fcn_005ea460(float x)
+float __cdecl d3_ClampNormalizeFloat(float x)
 {
 	return MAX(MIN(x, g_666100), 0.0f) / g_666100;
 }

@@ -3,7 +3,7 @@
 
 
 /* ADDRESS: GOLDTL 0x00591c30 */
-void __cdecl fcn_00591c30(char* p)
+void __cdecl d2_ClearBookmarkSlot(char* p)
 {
 	*(int*) (p + 4) = -1;
 	*(int*) (p + 8) = -1;
@@ -22,7 +22,7 @@ extern Slot_779d00 g_779d00[];
 
 
 /* ADDRESS: GOLDTL 0x00591c40 */
-void __cdecl fcn_00591c40(void)
+void __cdecl d2_ResetBookmarkSlots(void)
 {
 	int i;
 
@@ -32,6 +32,6 @@ void __cdecl fcn_00591c40(void)
 		if (i == 10) {
 			((Ent591c*)g_779d00)[10].c = 0x57;
 		}
-		fcn_00591c30((char*) &((Ent591c*)g_779d00)[i]);
+		d2_ClearBookmarkSlot((char*) &((Ent591c*)g_779d00)[i]);
 	}
 }

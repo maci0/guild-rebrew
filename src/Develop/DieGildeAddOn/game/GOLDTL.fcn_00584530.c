@@ -20,7 +20,7 @@ extern char g_7e23e8;
 extern char g_7e23e9;
 extern char g_7e23ea[];
 extern char g_7e240a[];
-extern Name5 g_7e2430;
+extern char g_7e2430[5];
 extern int g_7e2468;
 extern char* g_14b4fa8;
 extern char* g_14b4fac;
@@ -46,5 +46,5 @@ void __cdecl d2_InitDefaultMenueProfile(void)
 	strcpy(g_7e23ea, g_14b4fa8);
 	strcpy(g_7e240a, g_14b4fac);
 	r = fcn_00506d50((*(unsigned char*)&g_7e23e3));
-	g_7e2430 = *(Name5*) &r;
+	*(Name5*) g_7e2430 = *(Name5*) &r;
 }

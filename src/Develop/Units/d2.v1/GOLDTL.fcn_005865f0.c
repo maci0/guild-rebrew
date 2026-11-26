@@ -39,7 +39,7 @@ extern int g_14ce8e0;
 extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004ecf00(char*, int*, int*, int);
+int __cdecl he_GetActionProgress(char*, int*, int*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -53,38 +53,38 @@ void __cdecl fcn_00471e30(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
-int __cdecl fcn_005865f0(char* e, int* who, int kind)
+int __cdecl d2_RunDomizilSkillConfirmDialog(char* entity, int* who, int kind)
 {
-	int s;
+	int item_idx;
 	int yes;
 	int no;
-	int b;
-	struct msg m;
-	int h;
+	int unused_b;
+	struct msg msg;
+	int dlg;
 	int ok;
 
 	ok = 1;
-	if (fcn_004ecf00(e, &s, &b, 0) != 0) {
+	if (he_GetActionProgress(entity, &item_idx, &unused_b, 0) != 0) {
 		ok = 0;
 	}
 	if (kind == 3) {
 		ok = 0;
 	}
-	h = fcn_00470820(0, 0, "Locations\\Domizil\\skill");
+	dlg = fcn_00470820(0, 0, "Locations\\Domizil\\skill");
 	d2_SetOverlayAnimation(0, 0);
-	d2_CenterDialogWindows(h);
-	d2_SetForm(h, 0);
+	d2_CenterDialogWindows(dlg);
+	d2_SetForm(dlg, 0);
 	fcn_005340f0(d2_CurrentWindowId);
-	d2_SetForm(h, 1);
+	d2_SetForm(dlg, 1);
 	io_AppendText(0x4045, kind + 0x4172);
 	io_AppendText(kind + 0x4176);
 	if (ok) {
 		io_AppendText(0x4046, 0x182);
 	}
-	d2_SetForm(h, 2);
-	s = io_AppendText(0x4047);
-	yes = d2_GetWindowListItem(h, 2, s);
-	no = d2_GetWindowListItem(h, 2, s + 1);
+	d2_SetForm(dlg, 2);
+	item_idx = io_AppendText(0x4047);
+	yes = d2_GetWindowListItem(dlg, 2, item_idx);
+	no = d2_GetWindowListItem(dlg, 2, item_idx + 1);
 	fcn_00472640(yes, ok);
 	g_100f1dc = -1;
 	do {
@@ -92,22 +92,22 @@ int __cdecl fcn_005865f0(char* e, int* who, int kind)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == yes) {
-				memset(&m, 0, sizeof(m));
-				m.kind = 0x97;
-				m.code = 1;
-				m.owner = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id;
-				m.target = *(int*) (e + 1);
-				m.when = gm_GameTime;
-				m.who = *who;
-				m.delay = gm_RandomMod(0x5a0) + 1000;
-				m.other = kind;
-				cm_SendCopyEntityData(&m);
+				memset(&msg, 0, sizeof(msg));
+				msg.kind = 0x97;
+				msg.code = 1;
+				msg.owner = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (entity + 0x27)].entity_id;
+				msg.target = *(int*) (entity + 1);
+				msg.when = gm_GameTime;
+				msg.who = *who;
+				msg.delay = gm_RandomMod(0x5a0) + 1000;
+				msg.other = kind;
+				cm_SendCopyEntityData(&msg);
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == no) {
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop(fcn_005865f0, 0x677c7) != 0);
-	fcn_00471e30(h);
+	} while (main_RunFrameLoop(d2_RunDomizilSkillConfirmDialog, 0x677c7) != 0);
+	fcn_00471e30(dlg);
 	return 1;
 }

@@ -12,18 +12,18 @@ extern char s_6a5b74[];
 
 int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl he_FreeAction(void* u);
-void __cdecl fcn_004c6ba0(int a1, int a2, int a3);
+void __cdecl cm_RequestModifyEntityLevel(int a1, int a2, int a3);
 void __cdecl io_FormatTextBuffer(char* out, int a2, int a3, int a4);
 void __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 void __cdecl cm_SendCopyEntityData(void* packet);
-void __cdecl fcn_004c6330(int id);
+void __cdecl cm_RequestUpdateResidenceDecor(int id);
 int __cdecl sprintf(char*, const char*, ...);
 
 #pragma optimize("y", off)
 
 /* Sends one behaviour event to the server when its delay has elapsed. */
 /* ADDRESS: GOLDTL 0x00551d50 */
-void __cdecl fcn_00551d50(char* actionRecord)
+void __cdecl he_RunTalentBoost(char* actionRecord)
 {
 	char buf[0x800];
 	char packet[0xf8];
@@ -49,7 +49,7 @@ void __cdecl fcn_00551d50(char* actionRecord)
 		if ((float) (id + delay) > 252.0f) {
 			delay = (int) (252.0f - (float) id);
 		}
-		fcn_004c6ba0(*(int*) (row + 4), byte, delay);
+		cm_RequestModifyEntityLevel(*(int*) (row + 4), byte, delay);
 		if (*(unsigned char*) (row + 2) == 6) {
 			byte = *(unsigned char*) (actionRecord + 0xae);
 			id = *(unsigned char*) (row + 0x80 + byte);
@@ -92,7 +92,7 @@ void __cdecl fcn_00551d50(char* actionRecord)
 				fcn_00545d40(id, id, buf, 0, 0x5fd, msg);
 			}
 		}
-		fcn_004c6330(*(int*) (row + 4));
+		cm_RequestUpdateResidenceDecor(*(int*) (row + 4));
 		he_FreeAction(actionRecord);
 		return;
 	}

@@ -21,7 +21,7 @@ extern char g_7f4ca0[];
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
-int* __cdecl fcn_0048f450(char* q);
+int* __cdecl ai_PickIdleGraveyardWorker(char* q);
 int __cdecl fcn_004a5340(char* e, int a, int* p, float lo, float hi,
 	unsigned short* out);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
@@ -42,7 +42,7 @@ int __cdecl fcn_0048f4f0(char* e, char* q, Blk24* b1, Blk24* b2)
 		return 0;
 	if (fcn_00502cd0(*(int*) (q + 0x5d), 2, 0, 0x1fc, 6) == 0)
 		return 0;
-	h = fcn_0048f450(q);
+	h = ai_PickIdleGraveyardWorker(q);
 	if (h == 0)
 		return 0;
 	if (he_StartHandlungSearch(2, 0, 0x88, 3, *(int*) (q + 1)) != 0)

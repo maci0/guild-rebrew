@@ -2,11 +2,11 @@
 
 /* fcn_0040eea0: fcn_00433780(g_6b8014); zero [0x6310e8] and [0x6310e4]. */
 
-void __cdecl fcn_00433780(void*);
+void __cdecl d3_FreeObjectAnimation(void*);
 
 void __cdecl fcn_0040eea0(void)
 {
-	fcn_00433780(d3_ActiveCamera);
+	d3_FreeObjectAnimation(d3_ActiveCamera);
 	*(int*) 0x6310e8 = 0;
 	*(int*) 0x6310e4 = 0;
 }

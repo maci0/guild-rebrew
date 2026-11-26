@@ -1,7 +1,7 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern int g_14a79c0[];
 
-int __cdecl fcn_0050dfd0(int, int);
+int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
@@ -18,7 +18,7 @@ int __cdecl fcn_004bf000(unsigned short* a1, int a2, int a3, int col, int x, int
 	int px;
 	int py;
 
-	k = fcn_0050dfd0(a2, a3);
+	k = gm_GetStorageSlotCapacity(a2, a3);
 	px = tbl[*a1 - 0x134][col] + x + 0x6e;
 	py = y + 0x22;
 	r = fcn_004677e0(px - 8, py - 5, 0x2f, 0, k, 0x6a, 0x2d, layer);

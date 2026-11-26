@@ -14,7 +14,7 @@ int __cdecl gm_RandomMod(unsigned short);
 int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
-void __cdecl fcn_004c6000(int, int);
+void __cdecl cm_RequestSetWohnsitz(int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
@@ -35,7 +35,7 @@ typedef struct {
 	*(UIPos*) ((q) + 0x52) = *(UIPos*) ((char*) gm_GameTime)
 
 /* ADDRESS: GOLDTL 0x00556170 */
-void __cdecl fcn_00556170(char* p)
+void __cdecl he_RunCityPopulationEvent(char* p)
 {
 	float ts[0xa];
 	int limits[2];
@@ -153,7 +153,7 @@ anim7:
 			}
 		}
 		if (found)
-			fcn_004c6000(*(int*) (obj + 4), *(int*) (ent + 1));
+			cm_RequestSetWohnsitz(*(int*) (obj + 4), *(int*) (ent + 1));
 		i = gm_RandomMod(0x32);
 		cm_RequestTransferCurrencyNoKill(*(int*) (obj + 4), -1, g_773d75, ((i & 0xffff) + 0x33) * 0x20);
 		cm_BeginPacketFieldDelta(obj, *(int*) (obj + 4));
@@ -227,7 +227,7 @@ anim7:
 					}
 				}
 				if (found != 0) {
-					fcn_004c6000(*(int*) (key + 0x7f4ca4), *(int*) (ent + 1));
+					cm_RequestSetWohnsitz(*(int*) (key + 0x7f4ca4), *(int*) (ent + 1));
 				}
 				break;
 			}

@@ -25,7 +25,7 @@ typedef struct Def {
 extern char* lpObjektePROT;
 
 Def* __cdecl fcn_005c61e0(int id);
-int __cdecl fcn_005c6270(char* e, int id);
+int __cdecl gm_HasActiveSpecialObject(char* e, int id);
 
 /* ADDRESS: GOLDTL 0x004a51d0 */
 void __cdecl gm_CheckEntityObjectSlots(char* entity, int slotCount, Slot* slots, Counts* counts)
@@ -54,7 +54,7 @@ void __cdecl gm_CheckEntityObjectSlots(char* entity, int slotCount, Slot* slots,
 					counts->blocked++;
 					slots[i].item = 0;
 					slots[i].b = -1;
-				} else if ((d->mask & *(int*) (entity + 0x1ec)) == 0 && fcn_005c6270(entity, *(unsigned short*) it) == 0) {
+				} else if ((d->mask & *(int*) (entity + 0x1ec)) == 0 && gm_HasActiveSpecialObject(entity, *(unsigned short*) it) == 0) {
 					counts->free++;
 					slots[i].a = *(int*) (it + 0xe);
 					slots[i].b = *(int*) (it + 2);

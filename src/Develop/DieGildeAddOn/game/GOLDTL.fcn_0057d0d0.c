@@ -10,7 +10,7 @@ void __cdecl he_FreeAction(char* unit);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 void __cdecl cm_SendCancelCharacterActions(int);
-int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
+int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 void __cdecl cm_RequestPlayAnimation(int, char*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl fcn_0057ceb0(char* entity);
@@ -88,7 +88,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 		o = (char*) objs[i];
 		fcn_00529160(0, 0, *(unsigned short*) o, entity);
 		cm_SendCancelCharacterActions(*(int*) (o + 4));
-		fcn_004c5da0(*(int*) (o + 4), *(int*) (found + 1), mode, 0, flag, "Bettler");
+		ch_StartMovement(*(int*) (o + 4), *(int*) (found + 1), mode, 0, flag, "Bettler");
 	}
 	*(int*) (entity + 0x70) = 1;
 	*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;

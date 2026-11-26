@@ -13,7 +13,7 @@ int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
-void __cdecl fcn_00580320(void)
+void __cdecl d2_ShowTutorialInlineForm(void)
 {
 	if (g_665f08[6] != 0 && *(int*) (g_665f08[6] + 0x14) != 0) {
 		fcn_00533a40(g_6b5c60);

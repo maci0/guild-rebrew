@@ -9,7 +9,7 @@ extern int d2_CurrentWindowId; extern unsigned char g_773d75; extern unsigned sh
 #include <string.h>
 
 float __cdecl fcn_0042e450(void);
-int __cdecl fcn_00433780();
+int __cdecl d3_FreeObjectAnimation();
 int __cdecl fcn_00438b40();
 int __cdecl d3_SetObjectRotation();
 int __cdecl CompareVector3WithinTolerance();
@@ -24,7 +24,7 @@ int __cdecl d2_SetOverlayAnimation();
 int __cdecl fcn_004927c0();
 int __cdecl fcn_00492950();
 int __cdecl fcn_00492d60();
-int __cdecl fcn_00492e50();
+int __cdecl ai_EvalBlackjackAction();
 int __cdecl fcn_00493000();
 int __cdecl cm_RequestTransferCurrencyNoKill();
 int __cdecl fcn_00502850();
@@ -272,7 +272,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
               if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
                 if ((v13[1] != 5) && (v13[1] != 6)) {
                   if (!v25) {
-                    v9 = fcn_00492e50(&v14,*v24);
+                    v9 = ai_EvalBlackjackAction(&v14,*v24);
                     fcn_005a0cd0(&v14,v24,v9,windowId,2,0x96,0);
                     if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
                       fcn_00492d60(&v14,*v24,v9);
@@ -322,7 +322,7 @@ label_5a1b81:
                           fcn_00493000(&v14);
                           fcn_005a0cd0(&v14,v12,v22[v11 * 0x43 + 1],windowId,3,0x14,1);
                           if ((v13[1] != 5) && (v13[1] != 6)) {
-                            v9 = fcn_00492e50(&v14,*v24);
+                            v9 = ai_EvalBlackjackAction(&v14,*v24);
                             fcn_005a0cd0(&v14,v24,v9,windowId,2,0x96,0);
                             fcn_00492d60(&v14,*v24,v9);
                             fcn_00493000(&v14);

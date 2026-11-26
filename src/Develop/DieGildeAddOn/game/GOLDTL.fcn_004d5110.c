@@ -14,7 +14,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 short* __cdecl gm_GetEntityTableEntry(char* entity);
 
 /* ADDRESS: GOLDTL 0x004d5110 */
-int __cdecl fcn_004d5110(char* a1, char* a2, char* entity, char* otherEntity)
+int __cdecl gm_TransferAndSellAssets(char* bld1, char* bld2, char* entity, char* otherEntity)
 {
 	char* p1;
 	char* p2;
@@ -22,8 +22,8 @@ int __cdecl fcn_004d5110(char* a1, char* a2, char* entity, char* otherEntity)
 	int v;
 	int delay;
 
-	p1 = fcn_00502cd0(*(int*) (a2 + 0x5d), 2, 6, 0, 0x116);
-	p2 = fcn_00502cd0(*(int*) (a1 + 0x5d), 2, 6, 0, 0x2a);
+	p1 = fcn_00502cd0(*(int*) (bld2 + 0x5d), 2, 6, 0, 0x116);
+	p2 = fcn_00502cd0(*(int*) (bld1 + 0x5d), 2, 6, 0, 0x2a);
 	v = gm_AccumulateTyped2(otherEntity);
 	v = v < 0 ? 0 : v;
 	if (v >= 0x9c400) {

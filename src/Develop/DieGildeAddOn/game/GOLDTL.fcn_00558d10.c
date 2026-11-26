@@ -6,11 +6,11 @@ extern unsigned char* lpGebaeudePROT;
 
 void __cdecl he_FreeAction(char*);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-int __cdecl fcn_00558370(char*);
+int __cdecl he_SpawnSensenmann(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00558d10 */
-void __cdecl fcn_00558d10(char* e)
+void __cdecl he_PickNextSensenmannTarget(char* e)
 {
 	char buf[0x200];
 	pos14_7f4c00* clock;
@@ -51,7 +51,7 @@ void __cdecl fcn_00558d10(char* e)
 		io_FormatTextBuffer(buf, "EvtSensenmann: next target = %G", p);
 	}
 	*(int*) (e + 0xb4) = *(int*) (p + 1);
-	if (fcn_00558370(e) == 0) {
+	if (he_SpawnSensenmann(e) == 0) {
 		he_FreeAction(e);
 	}
 	gm_AddTime(clock, 0, 0xf, 0);

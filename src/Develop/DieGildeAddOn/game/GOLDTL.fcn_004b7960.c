@@ -3,12 +3,12 @@
 void* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int  __cdecl fcn_005c6270(void*, int);
+int  __cdecl gm_HasActiveSpecialObject(void*, int);
 void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
 
-int __cdecl fcn_004b7960(void* request)
+int __cdecl gm_ApplyWealthPercentCredit(void* request)
 {
 	char buf[0x400];
 	double d;
@@ -20,7 +20,7 @@ int __cdecl fcn_004b7960(void* request)
 	if (p == 0) {
 		return 1;
 	}
-	if (fcn_005c6270(p, 0x290) != 0) {
+	if (gm_HasActiveSpecialObject(p, 0x290) != 0) {
 		return 0x400;
 	}
 	roll = gm_RandomMod(2);

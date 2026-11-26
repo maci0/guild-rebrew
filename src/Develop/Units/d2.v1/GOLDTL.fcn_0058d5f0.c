@@ -5,7 +5,7 @@ extern char* lpObjektePROT;
 extern int d2_CurrentWindowId;
 extern int g_7f4c04;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 extern int g_100f1dc;
 extern int g_14b556c;
 extern int g_774654;
@@ -14,7 +14,7 @@ extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_00525fb0(int);
+int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 void* __cdecl fcn_00470820(int, int, char*);
@@ -100,7 +100,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 			n = 3;
 		}
 	}
-	if (fcn_00525fb0((int) gebaeude))
+	if (d2_CheckOwnerBlocked((int) gebaeude))
 		return;
 	counts[0] = 0;
 	counts[1] = 0;

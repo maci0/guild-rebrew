@@ -28,9 +28,9 @@ int __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl cm_RequestWalkOnPath(int who, int x, int y, int id);
 void __cdecl cm_RequestChrMoveToUniverse(int a, int b, int c, char* name);
 void __cdecl cm_SendCancelCharacterActions(unsigned int h);
-int __cdecl fcn_004c5da0(int who, int key, int target, int name, int mode, char* text);
+int __cdecl ch_StartMovement(int who, int key, int target, int name, int mode, char* text);
 int __cdecl fcn_004c5620(int state, void* ev);
-int __cdecl fcn_00505340(unsigned char* rec);
+int __cdecl gm_IsWarehouse(unsigned char* rec);
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* rec);
 void __cdecl io_FormatTextBuffer(char* text, int format, ...);
 int __cdecl ch_IsEntityNearBuildingDoor(char* a, unsigned char* b);
@@ -70,7 +70,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 	fcn_0055d6e0(ev, e);
 	if (!*(char*) (ev + 0xd0)) {
 		cm_SendCancelCharacterActions(*(unsigned int*) (e + 2));
-		fcn_004c5da0(*(unsigned int*) (e + 2), *(unsigned int*) (v8 + 1),
+		ch_StartMovement(*(unsigned int*) (e + 2), *(unsigned int*) (v8 + 1),
 			0xffffffff, 0, 1, s_6a6310);
 		*(unsigned int*) (ev + 0xec) = cm_RequestMoveObjekt(*(int*) (v6 + 1),
 			*(int*) (v7 + 1), *(int*) (e + 2));
@@ -149,7 +149,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 				io_FormatTextBuffer(buf, 0x1c3f, 1, 0x1c39,
 					*(unsigned short*) (v8 + 0x27), v8);
 			}
-			else if (fcn_00505340(v8)) {
+			else if (gm_IsWarehouse(v8)) {
 				io_FormatTextBuffer(buf, 0x1c43);
 			}
 			else {
@@ -178,7 +178,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 	}
 	else if (*(char*) (ev + 0xd0) && *(int*) (ev + 0xd4) > 0x10
 		&& (p = *(char**) (e + 0x3b)) != 0 && *(int*) (p + 0x128) == 0) {
-		fcn_004c5da0(*(unsigned int*) (e + 2), *(unsigned int*) (v8 + 1),
+		ch_StartMovement(*(unsigned int*) (e + 2), *(unsigned int*) (v8 + 1),
 			0xffffffff, 0, 1, s_6a6310);
 		*(int*) (ev + 0xd4) = 0;
 	}

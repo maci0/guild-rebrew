@@ -45,7 +45,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 int __cdecl fcn_0046f7e0(int x, int y, int z, int owner, int flag);
 void __cdecl d2_DestroyElement(int element);
 int __cdecl fcn_00529800(char* s, int* out);
-float __cdecl fcn_004ff040(char* e);
+float __cdecl gm_GetEntityHealthRatio(char* e);
 int __cdecl d2_ClearWindowChildren(int win, int keep);
 void __cdecl fcn_004bfe00(char* e);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
@@ -170,7 +170,7 @@ no_header:
 	s = (char*) g_7ea360;
 	if (g_7746f0 < 2) {
 		d2_SetForm(g_6a25b8, 1);
-		pct = (int) (fcn_004ff040(s) * g_662c38);
+		pct = (int) (gm_GetEntityHealthRatio(s) * g_662c38);
 		io_FormatEntityNameMarkup(*(unsigned short*) s, 1, 4, name);
 		io_AppendText(g_6a2fec, name, pct);
 	}

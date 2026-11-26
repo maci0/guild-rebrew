@@ -7,7 +7,7 @@ extern int g_6b7fdc;
 
 char* __cdecl m_alloc(int, char*);
 void __cdecl vfs_BuildDirPath(int, int, char*);
-unsigned char __cdecl fcn_00401590(char*, int*, int*, int);
+unsigned char __cdecl vfs_ReadBmpInfo(char*, int*, int*, int);
 char __cdecl fcn_00401650(char*, unsigned char*, unsigned char*, int);
 void __cdecl d3_LoadFloorTexture(int*, char*, int);
 void __cdecl fcn_0043f6b0(int*);
@@ -84,7 +84,7 @@ int* __cdecl fcn_0043fa10(char* floorSpec)
 		{ int j = 0; do { prefix[j] = path[j]; } while (path[j++]); }
 		strcat(path, floorSpec);
 		strcat(path, ".bmp");
-		if (fcn_00401590(path, &width, &height, 0) && width == height) {
+		if (vfs_ReadBmpInfo(path, &width, &height, 0) && width == height) {
 			*v6 = width;
 			dst = m_alloc(width * width, (char*) 0x67a940);
 			v6[4] = (int) dst;
@@ -105,7 +105,7 @@ int* __cdecl fcn_0043fa10(char* floorSpec)
 			{ int j = 0; do { path[j] = prefix[j]; } while (prefix[j++]); }
 			strcat(path, floorSpec);
 			strcat(path, "_w.bmp");
-			if (fcn_00401590(path, &width, &height, 0) && width == height && width == *v6) {
+			if (vfs_ReadBmpInfo(path, &width, &height, 0) && width == height && width == *v6) {
 				dst = m_alloc(*v6 * *v6, (char*) 0x67a764);
 				v6[6] = (int) dst;
 				fcn_00401650(path, (unsigned char*) dst, 0, 5);
@@ -126,7 +126,7 @@ int* __cdecl fcn_0043fa10(char* floorSpec)
 		{ int j = 0; do { path[j] = prefix[j]; } while (prefix[j++]); }
 		strcat(path, floorSpec + 0x48);
 		strcat(path, ".bmp");
-		if (fcn_00401590(path, &width, &height, 0) && width == height && width == *v6) {
+		if (vfs_ReadBmpInfo(path, &width, &height, 0) && width == height && width == *v6) {
 			dst = m_alloc(*v6 * *v6, (char*) 0x67a87c);
 			v6[5] = (int) dst;
 			fcn_00401650(path, (unsigned char*) dst, 0, 5);

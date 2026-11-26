@@ -25,7 +25,7 @@ typedef struct {
 #pragma pack(pop)
 
 /* ADDRESS: GOLDTL 0x00559200 */
-void __cdecl fcn_00559200(char* o)
+void __cdecl he_BroadcastLeaderboard(char* o)
 {
 	int n;
 	char g[0xbc];

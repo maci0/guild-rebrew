@@ -19,7 +19,7 @@ extern int g_7728bc;
 extern int g_7747b4;
 
 int __cdecl amt_GetRoleLevel(int c);
-int __cdecl fcn_004e8b40(int idx, Rec18* out);
+int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 int __cdecl amt_CollectOfficeSlotsByGroup(int group, int max, Rec18* out);
 int __cdecl amt_CollectOfficeCandidates(int k, int max, char** out);
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -96,7 +96,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 		arr[3] = 0;
 		arr[4] = 0;
 		cls = amt_GetRoleLevel(*(unsigned char*) (subjectEnt + 0x166));
-		fcn_004e8b40(*(unsigned char*) (subjectEnt + 0x166), &r);
+		amt_GetRoleTemplate(*(unsigned char*) (subjectEnt + 0x166), &r);
 		x10 = r.id;
 		if (x10 > 0 && x10 < 4) {
 			grp = 3;

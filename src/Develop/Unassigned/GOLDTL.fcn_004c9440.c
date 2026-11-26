@@ -25,7 +25,7 @@ extern LightState g_100dc20;
 int __cdecl gm_CompareGameTime(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
 void __cdecl he_RunDueActions(void);
 void __cdecl fcn_004fc180(void);
-void __cdecl fcn_00500a40(void);
+void __cdecl gm_CollectPopulationStats(void);
 void __cdecl fcn_0047da70(void);
 void __cdecl ai_EvaluateMeister(char*);
 void __cdecl fcn_0047da10(void);
@@ -43,7 +43,7 @@ int __cdecl fcn_004c9440(char* x, char* out)
 		if (g_6a3434 != 0) {
 			fcn_004fc180();
 			if ((*(GAME_TIMESTAMP*)&gm_GameTime).minute % 6 == 0)
-				fcn_00500a40();
+				gm_CollectPopulationStats();
 		}
 		if (g_6a3430 != 0)
 			fcn_0047da70();

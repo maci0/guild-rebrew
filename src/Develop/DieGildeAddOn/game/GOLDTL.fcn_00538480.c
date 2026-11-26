@@ -8,10 +8,10 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-void __cdecl fcn_005356b0(void*);
+void __cdecl main_ExitToFrameHandler(void*);
 void __cdecl fcn_005438c0(void);
 
-void __cdecl fcn_00538480(void)
+void __cdecl d2_ShowEndRoundDialog(void)
 {
 	int h;
 	int q;
@@ -26,10 +26,10 @@ void __cdecl fcn_00538480(void)
 			}
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_00538480, 0x67fff) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowEndRoundDialog, 0x67fff) != 0);
 	fcn_00471e30(h);
 	if (q != 0) {
 		g_774960 = 1;
-		fcn_005356b0((void*) fcn_005438c0);
+		main_ExitToFrameHandler((void*) fcn_005438c0);
 	}
 }

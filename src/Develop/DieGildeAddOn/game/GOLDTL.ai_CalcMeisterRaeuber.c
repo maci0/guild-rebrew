@@ -32,7 +32,7 @@ int __cdecl gm_CheckEntityType(unsigned char*);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl ai_CollectGoodsResources(char*, char*);
-void __cdecl fcn_00486c40(char*, char*, int);
+void __cdecl ai_PlanMeisterSupplies(char*, char*, int);
 void __cdecl fcn_00489010(char*, char*);
 void __cdecl ai_MeisterCollectTrans(char*);
 void __cdecl ai_MeisterTrade(char*, char*);
@@ -83,7 +83,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 		g_100b0ac = 0;
 		ai_ResourceCount = 0;
 		ai_CollectGoodsResources(meister, res);
-		fcn_00486c40(meister, res, *(int*) (*(char**) (meister + 0x16c) + 0x39));
+		ai_PlanMeisterSupplies(meister, res, *(int*) (*(char**) (meister + 0x16c) + 0x39));
 		fcn_00489010(meister, res);
 		ai_MeisterCollectTrans(meister);
 		ai_MeisterTrade(meister, res);

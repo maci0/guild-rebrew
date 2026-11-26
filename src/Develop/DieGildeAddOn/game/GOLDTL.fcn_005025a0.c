@@ -6,7 +6,7 @@ extern float flt_1;
 extern double g_664e78;
 extern double dbl_1_0;
 
-char* __cdecl fcn_00503d10(int id);
+char* __cdecl gm_FindCityItemHolder(int id);
 char* __cdecl gm_FindKind47ByOwner(int owner);
 char* __cdecl fcn_00502cd0(int a, int b, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int arg);
@@ -26,7 +26,7 @@ float __cdecl fcn_005025a0(int season, int slot)
 
 	id = ((MARKET_STOCK_TABLE*) g_85ab80)[season].slots[slot].objekt_id;
 	def = lpObjektePROT + id * 0x41;
-	store = fcn_00503d10(id);
+	store = gm_FindCityItemHolder(id);
 	if (store == 0 && season != g_773d75) {
 		e = gm_FindKind47ByOwner(season);
 		if (e != 0) {

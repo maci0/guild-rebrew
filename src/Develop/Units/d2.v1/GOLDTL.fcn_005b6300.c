@@ -125,7 +125,7 @@ void __cdecl d2_DestroyElement(int);
 
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
 void __cdecl fcn_005b6130(int, int);
-void __cdecl fcn_00534c20(int);
+void __cdecl d2_HandleBookPageButton(int);
 void __cdecl fcn_00535550(int);
 void __cdecl fcn_00535560(int);
 int __cdecl d2_GetControlValue(int);
@@ -149,7 +149,7 @@ void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_005b5eb0(char*, char*);
 void __cdecl d2_UpdateGauge(int, int, int);
-void __cdecl fcn_005b5c70(int);
+void __cdecl d2_ClearGauge(int);
 void __cdecl fcn_005b5ce0(int, int, int, int);
 void __cdecl fcn_00473a90(int, int);
 int __cdecl main_RunFrameLoop(int, int);
@@ -315,7 +315,7 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 			G(0x774654) = 1;
 		fcn_005b6130((int) f.book, (int) a1);
 		fcn_005350d0((int) f.book);
-		fcn_00534c20((int) f.book);
+		d2_HandleBookPageButton((int) f.book);
 		if (*(unsigned char*) 0x14cf950 == 0xcd)
 			fcn_00535550((int) f.book);
 		if (*(unsigned char*) 0x14cf950 == 0xcb)
@@ -356,7 +356,7 @@ L6993:
 		if (n == -1)
 			goto L69b6;
 		f.sel.a08 = 0;
-		fcn_005b5c70((int) &f.sel);
+		d2_ClearGauge((int) &f.sel);
 		f.v1c = -1;
 L69b6:
 		if (g_100f1dc == -1)
@@ -535,7 +535,7 @@ L6fa2:
 		if (f.v30 > 0) {
 			for (i = 0; i < f.v30; i++) {
 				if (f.rows[i].a08 != f.rows2[i].a08 || f.rows[i].a24 != f.rows2[i].a24)
-					fcn_005b5c70((int) &f.rows[i]);
+					d2_ClearGauge((int) &f.rows[i]);
 			}
 		}
 		el = he_StartHandlungSearch(2, 0, 6, 3, G(a1 + 1));

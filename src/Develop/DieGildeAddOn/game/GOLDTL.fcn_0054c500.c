@@ -19,7 +19,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
-int __cdecl fcn_005c6270(char*, int);
+int __cdecl gm_HasActiveSpecialObject(char*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl fcn_00507ed0(float, float);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -56,7 +56,7 @@ void __cdecl he_RunAction53(char* e)
 		return;
 	}
 	if (b != 0) {
-		mult = (fcn_005c6270(b, 0x2c5) != 0) + 1;
+		mult = (gm_HasActiveSpecialObject(b, 0x2c5) != 0) + 1;
 	}
 	idx = *(int*) (e + 0xc4);
 	i = 0;

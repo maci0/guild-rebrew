@@ -11,7 +11,7 @@ extern char g_868060[];
 extern pos14_7f4c00 gm_GameTime;
 
 char *__cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(char *, int);
+int __cdecl gm_HasActiveSpecialObject(char *, int);
 char *__cdecl he_StartHandlungSearch(int, int, int);
 char *__cdecl he_fn_Handlung(void);
 int __cdecl gm_FindRecordById(int);
@@ -47,7 +47,7 @@ int __cdecl fcn_004b9030(int *msg)
 	if (p == 0) {
 		return 1;
 	}
-	if (fcn_005c6270(p, 0x290) != 0) {
+	if (gm_HasActiveSpecialObject(p, 0x290) != 0) {
 		return 0x400;
 	}
 	for (e = he_StartHandlungSearch(1, 0, 0xf); e != 0 && n < 8; e = he_fn_Handlung()) {

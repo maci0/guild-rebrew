@@ -32,7 +32,7 @@ extern char* g_14abc28;
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_00517c00(int, int, int, char*);
-void __cdecl fcn_005b5c70(Gauge*);
+void __cdecl d2_ClearGauge(Gauge*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 {
@@ -62,7 +62,7 @@ void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 		g->state = 1;
 		return;
 	}
-	fcn_005b5c70(g);
+	d2_ClearGauge(g);
 	src = g_14abc28;
 	dst = buf;
 	while ((*dst++ = *src++) != 0) {

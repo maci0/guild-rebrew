@@ -11,7 +11,7 @@ extern pos14_7f4c00 g_7e1f70;
 
 void __cdecl gm_AddTime(char*, int, int, int);
 
-void __cdecl fcn_00538060(void)
+void __cdecl gm_AdvanceGameClock(void)
 {
 	int t;
 	int h;

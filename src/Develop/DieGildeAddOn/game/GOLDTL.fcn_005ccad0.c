@@ -22,7 +22,7 @@ extern int g_14aadc8;
 int __cdecl fcn_005cc240(int, int, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
-void __cdecl fcn_005cc2f0(unsigned int, Item*);
+void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
 int __cdecl fcn_005ccad0(int dialog, int selectedForm, int alternateForm, unsigned int n, Item* items)
 {
@@ -51,7 +51,7 @@ int __cdecl fcn_005ccad0(int dialog, int selectedForm, int alternateForm, unsign
 		fcn_005ca740(0x4b, pos, d2_CurrentWindowId, 0x56, &items[i], 1);
 		pos += 0x70;
 	}
-	fcn_005cc2f0(n, items);
+	d2_EnableDialogItems(n, items);
 	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x21c] = y;
 	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x238] = 0x70;
 	return 1;

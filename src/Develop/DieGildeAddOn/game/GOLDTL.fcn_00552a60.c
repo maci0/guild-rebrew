@@ -3,7 +3,7 @@
 
 extern int g_7f4c08;
 extern int gm_GameTime;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 
 typedef struct BuildingRow552 {
 	unsigned char kind;
@@ -17,7 +17,7 @@ int __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_SetupEntityQuery(int);
 int __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+int __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl fcn_00529160(int, int, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
@@ -31,7 +31,7 @@ int __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl he_FreeAction(int);
 
 /* ADDRESS: GOLDTL 0x00552a60 */
-void __cdecl fcn_00552a60(int event)
+void __cdecl he_RunTaschendieb(int event)
 {
 	unsigned char v1;
 	unsigned char v2;
@@ -112,7 +112,7 @@ void __cdecl fcn_00552a60(int event)
 							} while (v7);
 						}
 						cm_SendCancelCharacterActions(*(int*) (v14 + 2));
-						fcn_004c5da0(*(int*) (v14 + 2),
+						ch_StartMovement(*(int*) (v14 + 2),
 						    *(int*) ((char*) v4 + 1),
 						    *(int*) ((char*) v5 + 2), 0, 0,
 						    (char*) 0x6a5bbc);
@@ -228,7 +228,7 @@ void __cdecl fcn_00552a60(int event)
 		}
 		fcn_00529160(v9, 0, *v14, event);
 		cm_SendCancelCharacterActions(*(int*) (v14 + 2));
-		fcn_004c5da0(*(int*) (v14 + 2), *(int*) ((char*) v9 + 1),
+		ch_StartMovement(*(int*) (v14 + 2), *(int*) ((char*) v9 + 1),
 		    -1, 0, 1, (char*) 0x6a5bbc);
 		*(int*) (event + 0xac + v17 * 4) = *(int*) ((char*) v9 + 1);
 	}

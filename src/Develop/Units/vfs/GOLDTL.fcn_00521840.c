@@ -9,34 +9,34 @@ extern int g_7e4530;
 extern Tabs_7e43a8 g_7e43a8;
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, int f);
-int __cdecl fcn_005e8c00(int f);
+int __cdecl ls_SaveWeatherState(int f);
 int __cdecl fcn_004ef2e0(int f);
 
-int __cdecl fcn_00521840(int f)
+int __cdecl ls_SaveWeatherAndSlots(int stream)
 {
 	int i;
 
-	if (vfs_fwrite(&g_7e4530, 4, 1, f) <= 0) {
+	if (vfs_fwrite(&g_7e4530, 4, 1, stream) <= 0) {
 		return 0;
 	}
 	for (i = 0; i < 24; i++) {
-		if (vfs_fwrite(&g_7e43a8.a[i], 4, 1, f) <= 0) {
+		if (vfs_fwrite(&g_7e43a8.a[i], 4, 1, stream) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(&g_7e43a8.b[i], 4, 1, f) <= 0) {
+		if (vfs_fwrite(&g_7e43a8.b[i], 4, 1, stream) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(&g_7e43a8.c[i], 4, 1, f) <= 0) {
+		if (vfs_fwrite(&g_7e43a8.c[i], 4, 1, stream) <= 0) {
 			return 0;
 		}
-		if (vfs_fwrite(&g_7e43a8.d[i], 4, 1, f) <= 0) {
+		if (vfs_fwrite(&g_7e43a8.d[i], 4, 1, stream) <= 0) {
 			return 0;
 		}
 	}
-	if (fcn_005e8c00(f) == 0) {
+	if (ls_SaveWeatherState(stream) == 0) {
 		return 0;
 	}
-	if (fcn_004ef2e0(f) == 0) {
+	if (fcn_004ef2e0(stream) == 0) {
 		return 0;
 	}
 	return 1;

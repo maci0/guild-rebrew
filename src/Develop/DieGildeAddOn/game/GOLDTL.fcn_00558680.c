@@ -16,7 +16,7 @@ void __cdecl fcn_00438b40(char*, float*);
 int __cdecl gm_GetGameSpeedSetting(void);
 
 /* ADDRESS: GOLDTL 0x00558680 */
-int __cdecl fcn_00558680(char* action)
+int __cdecl he_StepSensenmannMove(char* action)
 {
 	float pos1[4];
 	float pos2[4];

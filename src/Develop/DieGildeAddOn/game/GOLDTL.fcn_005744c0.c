@@ -42,7 +42,7 @@ void __cdecl fcn_005015e0(void*, int, int, int);
 int __cdecl fcn_00509570(int);
 int __cdecl fcn_0050cad0(int*, int*);
 int __cdecl gm_CreditCityTreasury(int);
-int __cdecl fcn_00510820(int, void*, int);
+int __cdecl d3_BindEntitySceneObject(int, void*, int);
 void __cdecl fcn_005165b0(int);
 void __cdecl fcn_0052d9d0(void*);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
@@ -181,7 +181,7 @@ LfailB:
 			d3_SelectSceneContext(savedContext, 1);
 			return;
 		}
-		fcn_00510820(*(int*) (v15 + 0x61), v15, 2);
+		d3_BindEntitySceneObject(*(int*) (v15 + 0x61), v15, 2);
 		v8 = *(unsigned char*) v15;
 		v27 = (int) &((Building5744c0*) lpGebaeudePROT)[v8];
 		if (g_774800) {

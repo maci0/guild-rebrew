@@ -18,20 +18,20 @@ extern struct s_7e6060 g_7e6060[64];
 
 void __cdecl d2_ClearHoverTooltipSlot(void);
 
-void __cdecl d2_SetHoverTooltip(char* o, int a, char* name)
+void __cdecl d2_SetHoverTooltip(char* obj, int text_id, char* name)
 {
 	int i;
 	int k;
-	struct s_7e6060* p;
+	struct s_7e6060* slot;
 
-	if (o == 0) {
+	if (obj == 0) {
 		return;
 	}
-	if (*(char**) (o + 0x88) != ((char*)g_67a370)) {
+	if (*(char**) (obj + 0x88) != ((char*)g_67a370)) {
 		return;
 	}
 	for (i = 0; i < 64; i++) {
-		if (g_7e6060[i].o == o) {
+		if (g_7e6060[i].o == obj) {
 			return;
 		}
 	}
@@ -54,14 +54,14 @@ void __cdecl d2_SetHoverTooltip(char* o, int a, char* name)
 			return;
 		}
 	}
-	p = &g_7e6060[k];
-	p->t = g_6b7fac;
-	p->o = o;
-	p->a = a;
-	*(void**) (o + 0x228) = (void*) d2_ClearHoverTooltipSlot;
+	slot = &g_7e6060[k];
+	slot->t = g_6b7fac;
+	slot->o = obj;
+	slot->a = text_id;
+	*(void**) (obj + 0x228) = (void*) d2_ClearHoverTooltipSlot;
 	if (name != 0) {
-		strcpy(p->name, name);
+		strcpy(slot->name, name);
 	} else {
-		p->name[0] = 0;
+		slot->name[0] = 0;
 	}
 }

@@ -9,7 +9,7 @@ void __cdecl fcn_004acf60(void);
 void __cdecl amt_SpawnHistoricalOfficeHolders(void);
 void __cdecl fcn_004ad2e0(void);
 void __cdecl amt_VacateSpecialOffice(void);
-void __cdecl fcn_004ad6a0(void);
+void __cdecl amt_AssignSpecialOffices(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl sim_SetSyncParams(pos14_7f4c00*, int, int, int);
 
@@ -41,7 +41,7 @@ void __cdecl fcn_0057baa0(char* o)
 		fcn_004c5620(4, o);
 		break;
 	case 4:
-		fcn_004ad6a0();
+		amt_AssignSpecialOffices();
 		sim_SetSyncParams((pos14_7f4c00*) (o + 0x52), 0xa, 0, 0);
 		fcn_004c5620(0, o);
 		break;

@@ -23,14 +23,14 @@ void __cdecl cm_BeginPacketFieldDelta(void* a, int b);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* p);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
-void __cdecl fcn_005356b0(int p);
+void __cdecl main_ExitToFrameHandler(int p);
 void __cdecl fcn_00509fc0(void* a, void* b, int c);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(void* h);
 void __cdecl fcn_004e44f0(void* h);
 void __cdecl fcn_004e4c00(void);
 void __cdecl cut_CleanupCutscene(void);
-void __cdecl fcn_004c09b0(void);
+void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl fcn_004230e0(void* h);
 void __cdecl fcn_004e4eb0(void);
 
@@ -155,7 +155,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 				io_FormatTextBuffer(buf1, 0x1ab3, *(unsigned short*) obj);
 			}
 			d2_ShowMessageBox(buf1, 0);
-			fcn_005356b0(0x5438c0);
+			main_ExitToFrameHandler(0x5438c0);
 		} else {
 			fcn_00509fc0(obj, buf2, 1);
 			d2_ShowMessageBox(buf2, 0x10);
@@ -166,7 +166,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 	fcn_004e44f0((void*) xslot);
 	fcn_004e4c00();
 	cut_CleanupCutscene();
-	fcn_004c09b0();
+	d3snd_StopTrackedVoices();
 	fcn_004230e0((void*) handle);
 	fcn_004e4eb0();
 	g_772f54 = 0;

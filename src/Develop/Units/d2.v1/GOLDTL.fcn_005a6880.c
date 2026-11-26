@@ -45,7 +45,7 @@ int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl ResetDisplayCounters(void);
 int __cdecl fcn_005a5440(int, ListRow*, int, int, char);
-int __cdecl fcn_005a5980(ListRow*);
+int __cdecl d2_FindSelectedListRow(ListRow*);
 int __cdecl fcn_005a66b0(char*, int, int, unsigned char);
 void __cdecl d2_ClearSelectedControl(void);
 void __cdecl fcn_00472380(int, int, int, int);
@@ -155,7 +155,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 		if (cur == 0) {
 			selected = fcn_005a5440(*(int*) (obj + 0x5d), list2, h, 5, 1);
 		}
-		sel2 = fcn_005a5980(list1);
+		sel2 = d2_FindSelectedListRow(list1);
 		if (cur == 0 && sel2 != -1 && selected != -1) {
 			ResetDisplayCounters();
 			if (fcn_005a66b0(obj, list2[selected].id, list2[selected].idx,

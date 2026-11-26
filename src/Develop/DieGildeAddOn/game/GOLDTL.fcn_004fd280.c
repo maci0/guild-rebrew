@@ -13,7 +13,7 @@ extern char* lpGebaeudeINST;
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 int __cdecl fcn_004fcb50(unsigned short id, int* out, int c);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_004fd780(void);
+int __cdecl gm_TickObjectTable(void);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 
@@ -55,7 +55,7 @@ void __cdecl fcn_004fd280(int flag)
 		} while ((int) p < 0x85a238);
 	}
 	if ((flag & 1) != 0) {
-		fcn_004fd780();
+		gm_TickObjectTable();
 	}
 	if ((flag & 1) != 0) {
 		char* ptrs[8];

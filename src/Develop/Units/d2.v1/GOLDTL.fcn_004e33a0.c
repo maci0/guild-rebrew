@@ -39,7 +39,7 @@ void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(int a);
 void __cdecl fcn_004e4aa0(int a);
 void __cdecl cut_CleanupCutscene(void);
-void __cdecl fcn_004c09b0(void);
+void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl fcn_004e4b00(int a);
 void __cdecl fcn_004e4eb0(void);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char kind, int amount);
@@ -330,7 +330,7 @@ void __cdecl cut_RunAuction(int* arg)
 	if (auctioneer != 0)
 		fcn_004e4aa0(auctioneer);
 	cut_CleanupCutscene();
-	fcn_004c09b0();
+	d3snd_StopTrackedVoices();
 	fcn_004e4b00(bank_intro);
 	fcn_004e4b00(bank_bids);
 	fcn_004e4b00(bank_comments);

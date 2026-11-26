@@ -34,7 +34,7 @@ int __cdecl lc_GetGebaeudeBauplatz(LC_GEBAEUDE_BAUPLATZ* out, unsigned char* obj
 	old = lc_SavedRender;
 	lc_RenderState(0, 1);
 	*(int*) out->name = 0;
-	if (fcn_00597ff0(obj[0], out->name) == 0) {
+	if (lc_GetBauplatzPrefix(obj[0], out->name) == 0) {
 		lc_RenderState(old, 1);
 		return 0;
 	}

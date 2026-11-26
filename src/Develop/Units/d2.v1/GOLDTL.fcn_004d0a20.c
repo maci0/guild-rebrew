@@ -25,7 +25,7 @@ extern char g_67d444[];
 void __cdecl ResetDisplayCounters(void);
 void __cdecl fcn_00473690(int, int);
 void __cdecl d2_SetElementValue(int, ...);
-float __cdecl fcn_004ff040(char*);
+float __cdecl gm_GetEntityHealthRatio(char*);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
 int __cdecl gm_GetUnitWeaponSpec(char*);
@@ -74,7 +74,7 @@ void __cdecl fcn_004d0a20(void)
 					d2_SetElementValue(q->icon, 0);
 				}
 				io_FormatTextBuffer(buf, (char*) 0x68b838, *(unsigned short*) q->unit,
-					(int) (fcn_004ff040(q->unit) * g_662c38));
+					(int) (gm_GetEntityHealthRatio(q->unit) * g_662c38));
 				fcn_0046f940(q->text, buf);
 				r = (int*) gm_GetUnitWeaponSpec(q->unit);
 				if (r != 0 && *r != 0) {

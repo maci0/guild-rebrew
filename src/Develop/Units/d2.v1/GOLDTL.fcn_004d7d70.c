@@ -37,7 +37,7 @@ void __cdecl fcn_004cf6b0(void);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
-void __cdecl fcn_004d7d70(char* rec)
+void __cdecl d2_UpdateCombatFrame(char* rec)
 {
 	ent2c l;
 

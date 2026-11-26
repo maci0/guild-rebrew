@@ -9,7 +9,7 @@ int __cdecl fcn_0050b710(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 
 /* ADDRESS: GOLDTL 0x004f4440 */
-int __cdecl fcn_004f4440(int handle, int value, int mode, int flag, int* out)
+int __cdecl gm_CalcBribeOrPriceScore(int handle, int value, int mode, int flag, int* out)
 {
 	double v;
 	double f;

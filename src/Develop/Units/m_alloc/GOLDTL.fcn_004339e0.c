@@ -1,7 +1,7 @@
 #include <string.h>
 extern volatile int g_6b7fac;
 #include "../d3/d3_animation.h"
-void __cdecl fcn_00433780(char* a0);
+void __cdecl d3_FreeObjectAnimation(char* a0);
 char* __cdecl m_alloc(unsigned int size, char* file);
 int __cdecl fcn_004321a0(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max);
 void __cdecl fcn_004337c0(void* a0);
@@ -19,7 +19,7 @@ int* __cdecl d3_CreateObjectAnimation(char* a0, D3_ANIMATION_OPTIONS flags, int 
 
 	animation = 0;
 	if (*(int*) (a0 + 0x1d0) != 0) {
-		fcn_00433780(a0);
+		d3_FreeObjectAnimation(a0);
 	}
 	if (*(int*) (a0 + 0x218) == 4 || *(int*) (a0 + 0x218) == 3) {
 		animation = (int*) m_alloc(0x44, (char*) 0x67a0f8);

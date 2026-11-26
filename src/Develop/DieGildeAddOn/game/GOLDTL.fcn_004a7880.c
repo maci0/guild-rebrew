@@ -9,7 +9,7 @@ extern Card_1007ce0 g_1007ce0[24];
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004a7880 */
-int __cdecl fcn_004a7880(int owner)
+int __cdecl gm_DrawCard(int owner)
 {
 	int i;
 

@@ -22,7 +22,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_GenerateShuffledIndices(int, int*);
-void __cdecl fcn_004c6ba0(int, int, int);
+void __cdecl cm_RequestModifyEntityLevel(int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
@@ -62,7 +62,7 @@ int __cdecl gm_ObjDrainRandomSkill(unsigned char* e, char* request)
 	goto done;
 found:
 	p = &ids[i];
-	fcn_004c6ba0(*(int*) (r + 4), *p, -0x15);
+	cm_RequestModifyEntityLevel(*(int*) (r + 4), *p, -0x15);
 	if (r[2] == 6 || r[2] == 7) {
 		io_FormatTextBuffer(msg, 0x100a, *p + 0x16b7);
 		fcn_00545d40(*(int*) (r + 4), -1, msg, 0, 0x5fb, 0);

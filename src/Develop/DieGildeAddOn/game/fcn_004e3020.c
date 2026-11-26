@@ -35,10 +35,10 @@ void __cdecl fcn_004e44f0(void* h);
 void __cdecl fcn_004e4c00(void);
 void __cdecl fcn_004e4c60(void);
 void __cdecl cut_CleanupCutscene(void);
-void __cdecl fcn_004c09b0(void);
+void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl fcn_004230e0(void* h);
 void __cdecl fcn_004e4eb0(void);
-void __cdecl fcn_005356b0(int p);
+void __cdecl main_ExitToFrameHandler(int p);
 void __cdecl fcn_00509fc0(void* a, void* b, int c);
 void __cdecl cut_RegisterEventCallbacks(void);
 
@@ -114,7 +114,7 @@ void __cdecl fcn_004e3020(void* arg)
 	fcn_004e4c00();
 	fcn_004e4c60();
 	cut_CleanupCutscene();
-	fcn_004c09b0();
+	d3snd_StopTrackedVoices();
 	fcn_004230e0((void*) handle);
 	fcn_004e4eb0();
 	flags = g_7747b0;
@@ -122,7 +122,7 @@ void __cdecl fcn_004e3020(void* arg)
 	if ((flags & 8) != 0) {
 		*(char*) ((char*) obj + 8) = 0;
 		g_774954 = 1;
-		fcn_005356b0(g_5438c0);
+		main_ExitToFrameHandler(g_5438c0);
 	} else {
 		fcn_00509fc0(obj, f.big, 0);
 	}

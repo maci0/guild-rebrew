@@ -3,13 +3,13 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c6ba0(int a1, int a2, int a3)
+void __cdecl cm_RequestModifyEntityLevel(int entityId, int index, int delta)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x5d;
-	*(int*) (buf + 0x10) = a1;
-	*(int*) (buf + 0x14) = a2;
-	*(int*) (buf + 0x18) = a3;
+	*(int*) (buf + 0x10) = entityId;
+	*(int*) (buf + 0x14) = index;
+	*(int*) (buf + 0x18) = delta;
 	cm_EnqueueClientPacket(buf);
 }

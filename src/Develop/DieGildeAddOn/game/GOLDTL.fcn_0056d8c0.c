@@ -10,7 +10,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CheckEntityType(char*);
-int __cdecl fcn_00505340(char*);
+int __cdecl gm_IsWarehouse(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 #include "client_scene_transform.h"
 
@@ -26,7 +26,7 @@ void __cdecl he_StartWeatherStorm(char* u)
 	n = 0;
 	k = 1;
 	for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
-		if (gm_CheckEntityType(e) == 0 && fcn_00505340(e) == 0 && *(char**) (e + 0x61) != 0) {
+		if (gm_CheckEntityType(e) == 0 && gm_IsWarehouse(e) == 0 && *(char**) (e + 0x61) != 0) {
 			list[n++] = e;
 		}
 	}

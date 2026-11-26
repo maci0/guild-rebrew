@@ -27,7 +27,7 @@ void __cdecl fcn_00514d80(char*);
 void __cdecl fcn_004143b0(char*, int, int);
 void __cdecl d3_SetSubtreeVisible(char*, int);
 void __cdecl fcn_00573e10(char*);
-void __cdecl fcn_00510820(char*, unsigned char*, int);
+void __cdecl d3_BindEntitySceneObject(char*, unsigned char*, int);
 
 char* __cdecl fcn_005742e0(float* rot, struct vec3* pos, unsigned char* kind, char* model, char* u)
 {
@@ -84,7 +84,7 @@ char* __cdecl fcn_005742e0(float* rot, struct vec3* pos, unsigned char* kind, ch
 	d3_SetSubtreeVisible(h, 0);
 	*(int*) (u + 0xbc) = *(int*) (u + 0xc8) = -1;
 	fcn_00573e10(u);
-	fcn_00510820(h, kind, 2);
+	d3_BindEntitySceneObject(h, kind, 2);
 	d3_SelectSceneContext(saved, 1);
 	return h;
 }

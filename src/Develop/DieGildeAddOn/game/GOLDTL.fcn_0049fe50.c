@@ -16,7 +16,7 @@ typedef struct Rec18 {
 } Rec18;
 // SIZE 0x18
 
-int __cdecl fcn_004e8b40(int idx, Rec18* out);
+int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 int __cdecl amt_CollectOfficeSlotsByGroup(int k, int max, Rec18* out);
 Ent* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
@@ -47,7 +47,7 @@ int __cdecl fcn_0049fe50(Ent* e)
 		n = e->x167;
 	}
 	if (n != 0) {
-		if (fcn_004e8b40(n, &q) == 0) {
+		if (amt_GetRoleTemplate(n, &q) == 0) {
 			return 0;
 		}
 		j = (q.x8 - 1) / 3;

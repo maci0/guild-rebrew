@@ -14,7 +14,7 @@ typedef struct {
 } Party5c18e0;
 extern pos14_7f4c00 gm_GameTime;
 extern int g_100f1dc, g_14ce8e0, d2_CurrentElementId; extern int g_666018, g_66601c, d2_CurrentWindowId, g_774654; extern unsigned short g_774970;
-int __cdecl fcn_00433780();
+int __cdecl d3_FreeObjectAnimation();
 int __cdecl fcn_00438b40();
 int __cdecl d3_SetObjectRotation();
 int __cdecl CompareVector3WithinTolerance();

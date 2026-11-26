@@ -39,8 +39,8 @@ double __cdecl gm_RandomFloat01(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl fcn_00508280(char*, int*, float*);
-float __cdecl fcn_004fef80(char*);
-int __cdecl fcn_005c6270(char*, int);
+float __cdecl gm_GetEntityHealth(char*);
+int __cdecl gm_HasActiveSpecialObject(char*, int);
 int __cdecl fcn_00556e80(unsigned short*);
 void __cdecl fcn_005498b0(char*, char*, char*, char*, int, float);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
@@ -114,7 +114,7 @@ void __cdecl RunSimKrankheiten(char* s)
 			} else {
 				y = g_664f08 - gm_RandomFloat01() * g_66430c * 0.5;
 			}
-			m = fcn_005c6270((char*) p, 0x2b3) != 0 ? y * 0.75f : y;
+			m = gm_HasActiveSpecialObject((char*) p, 0x2b3) != 0 ? y * 0.75f : y;
 			if (f < m - x) {
 				if (fcn_00508280((char*) p, &r, &g) != 0) {
 					home2 = g_7f4ca0[idx].home2;
@@ -122,7 +122,7 @@ void __cdecl RunSimKrankheiten(char* s)
 					    && (q = (unsigned char*) &g_7f4ca0[*(unsigned short*) (home2 + 0x27)]) != 0) {
 						fcn_005498b0(s, (char*) p, (char*) q, home2, r, g);
 					} else {
-						if (g < fcn_004fef80((char*) p)
+						if (g < gm_GetEntityHealth((char*) p)
 						    && (g_7f4ca0[idx].type == 6 || g_7f4ca0[idx].type == 7)) {
 							io_FormatTextBuffer(buf, (char*) 0x163c, (char*) (r + 0x1632));
 							fcn_00545d40(g_7f4ca0[idx].handle, -1, buf, 0, 0x5f7, g_6b5c60);

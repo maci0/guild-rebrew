@@ -20,7 +20,7 @@ int __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl fcn_00535960(void);
 int __cdecl d2_GetControlValue(int);
 int __cdecl gm_CheckInventoryCapacity(char*, int, int);
-int __cdecl fcn_0050e170(int, int, int);
+int __cdecl gm_GetFreeStorageSlotCapacity(int, int, int);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl gm_CheckEntityStock(void*, int, int);
 int __cdecl fcn_0050b750(int, int);
@@ -68,7 +68,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 			count = d2_GetControlValue(stockSlot[4]);
 			if (!a4) {
 				if (query) {
-					count = fcn_0050e170(query, *stockSlot, count);
+					count = gm_GetFreeStorageSlotCapacity(query, *stockSlot, count);
 				}
 			} else {
 				count = gm_CheckInventoryCapacity((char*)a4, *stockSlot, count);
@@ -140,7 +140,7 @@ next:
 		if (stockSlot[4] != -1 && d2_GetControlValue(stockSlot[4])) {
 			count = d2_GetControlValue(stockSlot[4]);
 			if (!a4) {
-				count = fcn_0050e170(query, *stockSlot, count);
+				count = gm_GetFreeStorageSlotCapacity(query, *stockSlot, count);
 			} else {
 				count = gm_CheckInventoryCapacity((char*)a4, *stockSlot, count);
 			}

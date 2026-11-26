@@ -75,13 +75,13 @@ void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl d3_ApplyAnimDelta(char*, char*, int, int, int);
 void __cdecl d3_AccumulateAnimDelta(char*, char*, int, int, int);
 void __cdecl fcn_00431dd0(char*, char*, int, int, float*);
-void __cdecl fcn_00451340(float*, float*, float, float*);
+void __cdecl d3_LerpVec3(float*, float*, float, float*);
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_004517e0(float, float, float, float, float);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl fcn_004321f0(void*, void*, void*);
 void __cdecl fcn_004316c0(char*);
-void __cdecl fcn_00433780(char*);
+void __cdecl d3_FreeObjectAnimation(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 char __cdecl fcn_0045cbe0(char*, unsigned int);
 
@@ -368,7 +368,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 						prev = SI(slot + 4);
 						t = (float) SI(slot + 8) /
 							(float) QI(BF(cur), 4);
-						fcn_00451340(
+						d3_LerpVec3(
 							(float*) (BF(cur) +
 								SI(slot + 0x1c) * 0x18 + 0x54),
 							(float*) (BF(prev) +
@@ -732,7 +732,7 @@ place2:
 			SB(st + 0x2d) |= 0x20;
 			return 1;
 		}
-		fcn_00433780(o);
+		d3_FreeObjectAnimation(o);
 		return 1;
 	}
 

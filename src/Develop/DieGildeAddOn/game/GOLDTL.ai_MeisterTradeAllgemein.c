@@ -100,7 +100,7 @@ extern int gm_GameTime;
 extern int g_7f4c04;
 extern char* lpObjektePROT;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 extern int g_772620;
 extern float g_6628a0;
 extern float g_664144;
@@ -114,13 +114,13 @@ int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_00503d10(int);
+int __cdecl gm_FindCityItemHolder(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_AccumulateTyped2(void*);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
-int __cdecl fcn_0050dfd0(void*, int);
+int __cdecl gm_GetStorageSlotCapacity(void*, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 
@@ -162,7 +162,7 @@ int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
 			continue;
 		}
 		tmp = *(int*) (0x100b0c0 + i * 0x40 + 0x28);
-		if (tmp > fcn_0050dfd0(bld,
+		if (tmp > gm_GetStorageSlotCapacity(bld,
 		    *(int*) (0x100b0c0 + i * 0x40)) / 3) {
 			*(int*) (0x100b0c0 + i * 0x40 + 0x18) = tmp;
 		}
@@ -179,7 +179,7 @@ int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
 				}
 				if ((t->flags54 & 8) != 0) {
 					tmp = t->qty3c;
-					if (tmp <= fcn_0050dfd0(bld,
+					if (tmp <= gm_GetStorageSlotCapacity(bld,
 					    t->id) / 3) {
 						continue;
 					}
@@ -255,7 +255,7 @@ clear_stack:
 				if ((t->flags54 & 6) != 0) {
 					continue;
 				}
-				tmp = fcn_0050dfd0(bld, t->id) / 4;
+				tmp = gm_GetStorageSlotCapacity(bld, t->id) / 4;
 				if (t->qty3c <= tmp) {
 					continue;
 				}
@@ -420,7 +420,7 @@ next_request:
 				sprintf(v.line, (char*) 0x67e7f0,
 				    *(char**) (o + 0x16c) + 5,
 				    lpObjektePROT + *ip * 0x40 + *ip + 1);
-				tmp = fcn_0050dfd0(bld, (int) *ip);
+				tmp = gm_GetStorageSlotCapacity(bld, (int) *ip);
 				tmp = *p < tmp ? *p : tmp;
 				sprintf(v.line, (char*) 0x67e358,
 				    *(int*) (bld + 2), *(int*) (q + 2),
@@ -485,7 +485,7 @@ next_request:
 					*(int*) (o + 0x1b8) = price;
 					v.ids[j] = 0;
 					v.a2[j] = 0;
-					tmp = fcn_0050dfd0(bld,
+					tmp = gm_GetStorageSlotCapacity(bld,
 					    (int) *ip);
 					tmp = *p < tmp ? *p : tmp;
 					sprintf(v.line, (char*) 0x67e358,
@@ -563,7 +563,7 @@ after_auto:
 			if (found) {
 				goto next_collect;
 			}
-			tmp = fcn_0050dfd0(q, id);
+			tmp = gm_GetStorageSlotCapacity(q, id);
 			j = 0;
 			if (*p == 0) {
 				goto clear_slot;
@@ -607,7 +607,7 @@ next_collect:
 				if (w->qty44 == 0) {
 					continue;
 				}
-				tmp = fcn_0050dfd0(q, w->id);
+				tmp = gm_GetStorageSlotCapacity(q, w->id);
 				j = 0;
 				if (w->qty44 == 0) {
 					continue;
@@ -649,7 +649,7 @@ next_collect:
 				if (w->qty18 == 0) {
 					continue;
 				}
-				if (!fcn_00503d10(w->id)) {
+				if (!gm_FindCityItemHolder(w->id)) {
 					sprintf(v.line,
 					    (char*) 0x67e4e8,
 					    *(char**) (o + 0x16c) + 5,
@@ -671,7 +671,7 @@ next_collect:
 					w->qty18 = 0;
 					continue;
 				}
-				tmp = fcn_0050dfd0(q, w->id);
+				tmp = gm_GetStorageSlotCapacity(q, w->id);
 				j = 0;
 				if (w->qty18 == 0) {
 					continue;
@@ -712,7 +712,7 @@ next_collect:
 			if (*(int*) (char*) w == 0) {
 				continue;
 			}
-			tmp = fcn_0050dfd0(q, *(int*) ((char*) w - 0x14));
+			tmp = gm_GetStorageSlotCapacity(q, *(int*) ((char*) w - 0x14));
 			{
 				int* x = *(int**) ((char*) w - 0xc);
 

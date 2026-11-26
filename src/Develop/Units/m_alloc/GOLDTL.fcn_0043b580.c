@@ -14,7 +14,7 @@ extern char g_67a59c[];
 void* __cdecl m_alloc(int, void*);
 void __cdecl m_FreeTracked(void*);
 
-char __cdecl fcn_0043b580(char* o, int idx, int id, char* name)
+char __cdecl d3_SetObjectEvent(char* o, int idx, int id, char* name)
 {
 	Event* e;
 	int i;

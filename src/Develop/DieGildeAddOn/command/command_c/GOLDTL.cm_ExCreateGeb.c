@@ -9,8 +9,8 @@ int __cdecl fcn_004488e0(char* path, int a, int b);
 void __cdecl fcn_00438b40(int h, void* p);
 void __cdecl d3_SetObjectRotation(int h, void* p);
 void __cdecl d3_SetObjectGroundPosition(int h, void* p);
-void __cdecl fcn_00510820(int h, void* p, int n);
-void __cdecl fcn_00597ff0(int id, char* dst);
+void __cdecl d3_BindEntitySceneObject(int h, void* p, int n);
+void __cdecl lc_GetBauplatzPrefix(int id, char* dst);
 int __cdecl lc_GetGebaeudeBauplatz(char* name, void* p);
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, int d, void* out);
 void __cdecl fcn_005982d0(void);
@@ -85,8 +85,8 @@ load:
 	fcn_00438b40(handle, &pos[0]);
 	d3_SetObjectRotation(handle, request + 0x29);
 	d3_SetObjectGroundPosition(handle, pos);
-	fcn_00510820(handle, geb, 2);
-	fcn_00597ff0(*geb, tmp);
+	d3_BindEntitySceneObject(handle, geb, 2);
+	lc_GetBauplatzPrefix(*geb, tmp);
 	strcpy(shortname, tmp);
 	sprintf(name, "cm_ExCreateGeb(): bauplatze name:%s", tmp);
 	if (lc_GetGebaeudeBauplatz(shortname, geb) != 0) {

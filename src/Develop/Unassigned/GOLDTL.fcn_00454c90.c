@@ -17,7 +17,7 @@ typedef struct Corner {
 
 extern Corner g_6b8720[8];
 
-Corner* __cdecl fcn_00454c90(Box* b, float* o, float* m)
+Corner* __cdecl d3_TransformBoundsCorners(Box* b, float* o, float* m)
 {
 	float x0;
 	float y0;

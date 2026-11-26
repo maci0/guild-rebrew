@@ -4,7 +4,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl fcn_004c5620(int, char*);
-int __cdecl fcn_004c5da0(unsigned int, unsigned int, int, int, int, char*);
+int __cdecl ch_StartMovement(unsigned int, unsigned int, int, int, int, char*);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -55,7 +55,7 @@ void __cdecl fcn_005784d0(char* obj)
 			*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
 			return;
 		}
-		*(int*) (obj + 0xbc) = fcn_004c5da0(*(unsigned int*) &lager[2],
+		*(int*) (obj + 0xbc) = ch_StartMovement(*(unsigned int*) &lager[2],
 			*(unsigned int*) (res + 1), -1, 0, 1, "HEIMSUCHUNG");
 		fcn_004c5620(2, obj);
 		return;
@@ -87,7 +87,7 @@ void __cdecl fcn_005784d0(char* obj)
 			*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
 			return;
 		}
-		*(int*) (obj + 0xbc) = fcn_004c5da0(*(unsigned int*) &lager[2],
+		*(int*) (obj + 0xbc) = ch_StartMovement(*(unsigned int*) &lager[2],
 			*(unsigned int*) (*(int*) &lager[0xb6] + 1), -1, 0, 0, "HEIMSUCHUNG");
 		*(int*) (obj + 0x84) = fcn_004c5620(4, obj);
 		return;

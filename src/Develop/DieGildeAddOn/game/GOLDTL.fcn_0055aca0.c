@@ -34,7 +34,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl he_FreeAction(Ent *);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
-void __cdecl fcn_004e97f0(int, int);
+void __cdecl amt_PurchaseOfficeApplication(int, int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP *, int, int, int);
 int __cdecl fcn_004c5620(int, Ent *);
 int __cdecl fcn_004e9530(int);
@@ -92,7 +92,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 			if (r == 1) {
 				n++;
 				r = cm_GetCommandResult(e->b4);
-				fcn_004e97f0(r, e->ac);
+				amt_PurchaseOfficeApplication(r, e->ac);
 				e->b4 = -1;
 			} else if (r == 2) {
 				e->b4 = -1;
@@ -106,7 +106,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 			if (r == 1) {
 				n++;
 				r = cm_GetCommandResult(e->b8);
-				fcn_004e97f0(r, e->ac);
+				amt_PurchaseOfficeApplication(r, e->ac);
 				e->b8 = -1;
 			} else if (r == 2) {
 				e->b8 = -1;

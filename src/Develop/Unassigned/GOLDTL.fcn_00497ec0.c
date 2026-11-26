@@ -10,8 +10,8 @@ typedef struct Cmd {
 extern unsigned char* g_entity_ptr;
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
-extern unsigned int g_666028;
-extern unsigned int g_66602c;
+extern int g_666028;
+extern int g_66602c;
 
 extern float g_6628bc;
 

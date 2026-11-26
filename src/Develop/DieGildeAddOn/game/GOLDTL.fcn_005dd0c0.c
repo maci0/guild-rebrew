@@ -1,5 +1,5 @@
 int __cdecl io_FormatTextBuffer(void *buf, int len);
-int __cdecl fcn_005cad70(void *a1, void *buf);
+int __cdecl d2_OpenEntityPicker(void *a1, void *buf);
 int __cdecl gm_LookupEntityRecordById(int value);
 int __cdecl gm_IncreaseEntitySkill(int value, int mode);
 
@@ -19,7 +19,7 @@ int __cdecl fcn_005dd0c0(void *a1, void *a2)
         }
         return 0;
     }
-    r = fcn_005cad70(a1, buf);
+    r = d2_OpenEntityPicker(a1, buf);
     if (r != 0) {
         gm_IncreaseEntitySkill(r, 3);
         return 1;

@@ -28,7 +28,7 @@ int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00549c50(int, char*, char*, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl cm_SendLogAction(char*);
-void __cdecl fcn_004c6900(int*);
+void __cdecl cm_RequestJoinLeaveElection(int*);
 void __cdecl cm_SendTraceEnd(char*);
 
 /* ADDRESS: GOLDTL 0x0054a210 */
@@ -117,7 +117,7 @@ void __cdecl fcn_0054a210(char* a0)
         loc[1] = none;
         loc[2] = *(int*) (a0 + 1);
         cm_SendLogAction(g_6a5998);
-        fcn_004c6900(loc);
+        cm_RequestJoinLeaveElection(loc);
         cm_SendTraceEnd(g_6a5998);
         *(int*) (o + 0xc0) = *(int*) (o + 0xc0) + 1;
     }

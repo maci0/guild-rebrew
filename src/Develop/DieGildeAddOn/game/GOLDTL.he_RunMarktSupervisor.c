@@ -62,7 +62,7 @@ int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_0050d320(int, unsigned char);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
-char* __cdecl fcn_00503d10(int);
+char* __cdecl gm_FindCityItemHolder(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(void*, void*);
 int __cdecl gm_RandomMod(unsigned short);
@@ -139,7 +139,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		if (kind != 0x25 && kind != 0x17) {
 			continue;
 		}
-		ent = fcn_00503d10(rec.id);
+		ent = gm_FindCityItemHolder(rec.id);
 		if (ent == 0) {
 			fcn_64d41a(scratch, "Could not find markt-lager:%s",
 			    *(char**) (0x14a79c0 + rec.id * 8));
@@ -207,7 +207,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			continue;
 		}
 		memcpy(&rec, slot, 0x80);
-		ent = fcn_00503d10(rec.id);
+		ent = gm_FindCityItemHolder(rec.id);
 		if (ent == 0) {
 			continue;
 		}

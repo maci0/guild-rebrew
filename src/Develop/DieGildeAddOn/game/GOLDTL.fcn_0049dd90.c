@@ -19,7 +19,7 @@ typedef struct {
 extern int __cdecl gm_FindPublicTreasury(int a0);
 extern int __cdecl fcn_004a5e60(unsigned short *a0, int a1, int a2, int a3, int a4, float a5, int *a6);
 extern int __cdecl gm_ResolveEntityById(void **a0, void **a1, void **a2, int a3);
-extern int __cdecl fcn_0050b810(int a0, unsigned char a1);
+extern int __cdecl gm_SumQueryEntryValues(int a0, unsigned char a1);
 extern unsigned short __cdecl gm_RandomMod(int a0);
 extern int __cdecl ai_SelectBestMethod(int a0, int a1, int a2, void *a3, void *a4);
 extern int __cdecl fcn_004a4fb0(void *a0, void *a1, char *a2, int a3);
@@ -54,7 +54,7 @@ int __cdecl ai_StartBuergermeisterKerker(int a0, unsigned short *a1, int a2, Msg
     v6p = (char *)gm_FindPublicTreasury(1);
     if (v6p == 0)
         return 0;
-    v7 = fcn_0050b810(*(int *)(v6p + 0x14), g_773d75);
+    v7 = gm_SumQueryEntryValues(*(int *)(v6p + 0x14), g_773d75);
     if ((targetEntity[0x5a] & 4) == 0)
     {
         if ((int)targetEntity[0x5c] < (int)(gm_RandomMod(0x40) + 0x25))

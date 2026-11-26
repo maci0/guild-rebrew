@@ -32,7 +32,7 @@ extern char g_1008540[];
 
 int __cdecl ai_IsMethodActive(int);
 void __cdecl fcn_00495120(int);
-void __cdecl fcn_00495140(void);
+void __cdecl ai_PopActiveMethod(void);
 
 int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
 {
@@ -98,7 +98,7 @@ int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
 				}
 			}
 		}
-		fcn_00495140();
+		ai_PopActiveMethod();
 	}
 	if (best1 != 0.0f && best1 >= best2) {
 		*out1 = primaryFirst;

@@ -5,17 +5,17 @@ int sprintf(char*, const char*, ...);
 char* __cdecl evt_LoadGfxScript(int);
 void __cdecl fcn_00428340(char*, int, char*);
 
-char* __cdecl ch_AttachEntityGfxScript(char* o, int x)
+char* __cdecl ch_AttachEntityGfxScript(char* ent, int script_id)
 {
 	char buf[0x80];
-	char* p;
+	char* script;
 
-	sprintf(buf, "sp_%i", *(int*) (o + 4));
-	p = evt_LoadGfxScript(x);
-	if (p != 0) {
-		fcn_00428340(p, 1, buf);
-		*(int*) (p + 0xc94) = *(int*) (o + 0x184);
-		*(int*) (*(char**) (o + 0x184) + 0x28) = *(int*) (p + 0x100);
+	sprintf(buf, "sp_%i", *(int*) (ent + 4));
+	script = evt_LoadGfxScript(script_id);
+	if (script != 0) {
+		fcn_00428340(script, 1, buf);
+		*(int*) (script + 0xc94) = *(int*) (ent + 0x184);
+		*(int*) (*(char**) (ent + 0x184) + 0x28) = *(int*) (script + 0x100);
 	}
-	return p;
+	return script;
 }

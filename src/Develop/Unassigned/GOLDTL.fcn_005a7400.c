@@ -13,7 +13,7 @@ extern Range g_6aa0b0[];
 extern unsigned char* lpGebaeudePROT;
 extern unsigned short g_7f4c04;
 
-int __cdecl fcn_005a7400(unsigned char* p, int* lo, int* hi)
+int __cdecl gm_IsGebaeudeOpen(unsigned char* p, int* lo, int* hi)
 {
 	BUILDING_PROTOTYPE *t;
 	int i;

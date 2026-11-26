@@ -13,7 +13,7 @@ extern int d2_CurrentWindowId;
 int __cdecl vfs_ResolvePath(char* a, int b, int c, char* out);
 int __cdecl fcn_0050d200(int a, int b);
 char* __cdecl _strupr(char* s);
-void __cdecl fcn_005986f0(char* a, int b);
+void __cdecl d3_GetObjectWorldPosition(char* a, int b);
 void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj);
 void __cdecl cm_SendCopyEntityData(int a1);
 
@@ -36,7 +36,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
-void __cdecl fcn_00597ff0(int, char*);
+void __cdecl lc_GetBauplatzPrefix(int, char*);
 int __cdecl d3_CollectUnusedSceneObjects(char*, int*);
 void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj);
 int __cdecl sprintf(char*, const char*, ...);

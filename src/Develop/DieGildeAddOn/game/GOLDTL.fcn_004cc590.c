@@ -12,7 +12,7 @@ struct rec_4cc590 {
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern int g_14cbca0;
 extern int gm_NextEntityId;
-extern char cm_LastEntityId[];
+extern int cm_LastEntityId;
 extern int(__stdcall* g_662318)(void);
 
 void __cdecl srv_SeedRandom(int);
@@ -63,7 +63,7 @@ int __cdecl fcn_004cc590(unsigned char* request, char* response)
 		gm_AllocObjekt((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), request[0x21], 1);
 		ch_UpdateHeldObjectAttachment(((struct rec_4cc590*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
 	}
-	(*(int*)cm_LastEntityId) = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id);
+	cm_LastEntityId = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id);
 	if (response != 0) {
 		response[0] = 1;
 		response[1] = 1;

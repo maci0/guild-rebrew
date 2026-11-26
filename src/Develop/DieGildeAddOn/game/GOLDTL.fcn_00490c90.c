@@ -6,7 +6,7 @@ void __cdecl fcn_004f4830(int, int*);
 float __cdecl gm_GetBuildingLevelRatio(void);
 int __cdecl gm_GetGuildHall(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0050b810(int, char);
+int __cdecl gm_SumQueryEntryValues(int, char);
 int __cdecl amt_CalcTotalOfficeSalaries(void);
 int __cdecl gm_RandomMod(int);
 
@@ -41,7 +41,7 @@ int __cdecl fcn_00490c90(char* entity, int a1, int* outResult)
 		}
 		p = gm_GetGuildHall(1);
 		p = fcn_00502cd0(*(int*) ((char*) p + 0x5d), 2, 6, 0, 0x115);
-		cur = fcn_0050b810(*(int*) ((char*) p + 0x14), g_773d75);
+		cur = gm_SumQueryEntryValues(*(int*) ((char*) p + 0x14), g_773d75);
 		if (cur < 3 * (int) ((float) amt_CalcTotalOfficeSalaries() * 0.25f)) {
 			r = r + 1 + (gm_RandomMod(3) & 0xffff);
 		}

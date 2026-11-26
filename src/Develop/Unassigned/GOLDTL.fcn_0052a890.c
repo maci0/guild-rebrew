@@ -17,15 +17,15 @@ extern struct hm_6a2900 g_6a2900[5];
 
 int __cdecl gm_GetSeason(int);
 
-void __cdecl gm_UpdateDaylightSchedule(int a)
+void __cdecl gm_UpdateDaylightSchedule(int date)
 {
-	int k;
+	int season;
 	int i;
 
-	k = gm_GetSeason(a);
+	season = gm_GetSeason(date);
 	for (i = 0; i < 5; i++) {
-		g_6a2900[i].h = g_665d58[k][i] / 60;
-		g_6a2900[i].m = g_665d58[k][i] - g_6a2900[i].h * 60;
+		g_6a2900[i].h = g_665d58[season][i] / 60;
+		g_6a2900[i].m = g_665d58[season][i] - g_6a2900[i].h * 60;
 		g_6a2900[i].v = (g_6a2900[i].h * 60 + g_6a2900[i].m) * 60;
 	}
 }

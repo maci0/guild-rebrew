@@ -52,12 +52,12 @@ extern unsigned char g_773d75;
 extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 
 int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
-int __cdecl fcn_0050dfd0(char*, int);
+int __cdecl gm_GetStorageSlotCapacity(char*, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0047d1b0(void);
 int __cdecl he_CountActiveTradeActions(void);
@@ -149,7 +149,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 					st.x68[j] = 0;
 				}
 			}
-			amt = fcn_0050dfd0(q, *(int*) 0x100d0c0);
+			amt = gm_GetStorageSlotCapacity(q, *(int*) 0x100d0c0);
 			lim = *(int*) 0x100d10c;
 			if (amt < lim)
 				lim = amt;
@@ -170,7 +170,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 					if (!(*(float*) (e + 0x34) <= 0.0f))
 						break;
 					if (*(int*) (*(int*) (e + 0x14) + 1) == m.slots[3] && *(int*) (e + 0x4c) != 0) {
-						lim = fcn_0050dfd0(q, *(int*) e);
+						lim = gm_GetStorageSlotCapacity(q, *(int*) e);
 						if (st.x0 > 0) {
 							for (idx = 0; idx < st.x0; idx++) {
 								if (st.x48[idx] != 0)
@@ -207,7 +207,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 						j++;
 						continue;
 					}
-					amt = fcn_0050dfd0(q, *(int*) (e + 0x0c));
+					amt = gm_GetStorageSlotCapacity(q, *(int*) (e + 0x0c));
 					if (g == 0) {
 						j++;
 						continue;

@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004c75b0 */
-int __cdecl fcn_004c75b0(char* p, char* out)
+int __cdecl cm_ChkCommandType(char* p, char* out)
 {
 	char c;
 

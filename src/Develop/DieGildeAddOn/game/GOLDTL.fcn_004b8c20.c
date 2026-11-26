@@ -1,7 +1,7 @@
 #include <string.h>
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -19,7 +19,7 @@ int __cdecl fcn_004b8c20(int* request)
 	e = gm_LookupEntityRecordById(request[0]);
 	if (e == 0)
 		return 1;
-	if (fcn_005c6270(e, 0x290) != 0)
+	if (gm_HasActiveSpecialObject(e, 0x290) != 0)
 		return 0x400;
 	if (*(int*) (e + 0xca) < n)
 		return 0x400;

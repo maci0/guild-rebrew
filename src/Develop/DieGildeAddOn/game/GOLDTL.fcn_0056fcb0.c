@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_slot_table[2];
 
 void __cdecl he_FreeAction(char* e);
-float __cdecl fcn_00507540(int idx, int* info);
+float __cdecl gm_CalcActionCompletionTime(int idx, int* info);
 void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl gm_AddTime(void*, int, int, int);
 
@@ -33,7 +33,7 @@ void __cdecl fcn_0056fcb0(char* e)
 			gm_AddTime(e + 0x52, 4, 0, 0);
 			return;
 		}
-		if (fcn_00507540(*(unsigned short*) (e + 8), info) >= 1.0) {
+		if (gm_CalcActionCompletionTime(*(unsigned short*) (e + 8), info) >= 1.0) {
 			memset(msg, 0, sizeof(msg));
 			msg[4] = 0x25;
 			*(int*) (msg + 0xc) = -1;

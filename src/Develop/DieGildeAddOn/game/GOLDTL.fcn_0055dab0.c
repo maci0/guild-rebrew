@@ -33,9 +33,9 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindRecordById(int);
 void __cdecl fcn_0055d6e0(char*, char*);
 void __cdecl cm_SendCancelCharacterActions(int);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl cm_RequestMoveObjekt(int, int, int);
-int __cdecl fcn_00505340(char*);
+int __cdecl gm_IsWarehouse(char*);
 void __cdecl fcn_004c5d20(int, int);
 int __cdecl ch_IsEntityNearBuildingDoor(char*, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -69,11 +69,11 @@ void __cdecl fcn_0055dab0(char* e)
 	fcn_0055d6e0(e, r);
 	if (e[0xd0] == 0) {
 		cm_SendCancelCharacterActions(*(int*) (r + 2));
-		if (!fcn_00505340(b)) {
+		if (!gm_IsWarehouse(b)) {
 			fcn_004c5d20(*(int*) (r + 2), 1);
 		}
-		fcn_004c5da0(*(int*) (r + 2), *(int*) (c + 1), -1, 0, 0, "Trans");
-		if (!fcn_00505340(b)) {
+		ch_StartMovement(*(int*) (r + 2), *(int*) (c + 1), -1, 0, 0, "Trans");
+		if (!gm_IsWarehouse(b)) {
 			*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (s44 + 1), *(int*) (b + 1), *(int*) (r + 2));
 		}
 		e[0xd0] = 1;
@@ -110,7 +110,7 @@ void __cdecl fcn_0055dab0(char* e)
 				io_FormatTextBuffer(msg, 0x1c3f, 1, 0x1c39, *(unsigned short*) (c + 0x27), c);
 			} else {
 				code = 0x608;
-				if (fcn_00505340(c)) {
+				if (gm_IsWarehouse(c)) {
 					io_FormatTextBuffer(msg, 0x1c43);
 				} else {
 					io_FormatTextBuffer(msg, 0x1c44, c);

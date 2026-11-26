@@ -4,7 +4,7 @@
 
 extern char* evt_CurrentScript;
 float __cdecl d3_ComputeYawToTarget(int h, char* pos);
-void __cdecl fcn_00451720(float* out, char* base, float* a, float* b);
+void __cdecl d3_WrapEulerAnglesPi(float* out, char* base, float* a, float* b);
 char* __cdecl ch_CreateAction(char* e, int kind, ...);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
@@ -24,7 +24,7 @@ int __cdecl LookAtCharacter(char** a, char** b)
 	v[0] = 0.0f;
 	v[1] = d;
 	v[2] = 0.0f;
-	fcn_00451720(v, *(char**) (*a + 0x34) + 0x84, u, w);
+	d3_WrapEulerAnglesPi(v, *(char**) (*a + 0x34) + 0x84, u, w);
 	e = *a;
 	v[0] += *(float*) (*(char**) (e + 0x34) + 0x84);
 	v[1] += *(float*) (*(char**) (e + 0x34) + 0x88);

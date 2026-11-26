@@ -31,7 +31,7 @@ int __cdecl fcn_00509570(int);
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_005272e0(void);
+void __cdecl d2_DestroyHudOverlay(void);
 void __cdecl fcn_00537320(int);
 int __cdecl d2_CreateScrollPerga(void);
 void __cdecl d2_CenterDialogWindows(int);
@@ -113,7 +113,7 @@ void __cdecl fcn_00541620(void)
 	}
 	d1f8 = 0;
 	d2_SetOverlayAnimation(0, 0);
-	fcn_005272e0();
+	d2_DestroyHudOverlay();
 	fcn_00537320(0x24087);
 	dlg = d2_CreateScrollPerga();
 	d2_CenterDialogWindows(dlg);

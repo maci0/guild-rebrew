@@ -7,11 +7,11 @@ extern int g_66601c;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005cd440(int*, char*, int, int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned int __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-int __cdecl fcn_005c6220(int, char*);
+int __cdecl gm_LookupSpecialObjectRecord(int, char*);
 void __cdecl fcn_005dbe90(char*);
 
 /* ADDRESS: GOLDTL 0x005dd5a0 */
@@ -50,7 +50,7 @@ unsigned int __cdecl fcn_005dd5a0(ENTITY_RECORD_VIEW* a0, unsigned int* a1)
 	if (!v4) {
 		return 0;
 	}
-	v6 = (fcn_005c6270((void*) a0, 0x2c5) != 0) + 1;
+	v6 = (gm_HasActiveSpecialObject((void*) a0, 0x2c5) != 0) + 1;
 	v5 = gm_RandomMod(0x300) & 0xffff;
 	v14 = 0x300;
 	do {
@@ -113,7 +113,7 @@ unsigned int __cdecl fcn_005dd5a0(ENTITY_RECORD_VIEW* a0, unsigned int* a1)
 	if (a0->entity_type != 6) {
 		return 1;
 	}
-	v6 = fcn_005c6220((int) *(unsigned short*) *a1, v13);
+	v6 = gm_LookupSpecialObjectRecord((int) *(unsigned short*) *a1, v13);
 	io_FormatTextBuffer(messageText, 0xfe8, *(unsigned short*) (v6 + 0x18) + 1,
 	                    v12[0]->entity_index, v12[1]->entity_index,
 	                    v12[2]->entity_index);

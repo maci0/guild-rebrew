@@ -63,7 +63,7 @@ extern int g_67a370;
 extern int g_6798d4;
 extern int g_6b7fdc;
 extern int d3_ActiveCamera;
-extern int g_774a68;
+extern char* g_774a68;
 extern unsigned short g_774970;
 extern char g_7f4ca0[];
 extern int g_774654;
@@ -87,9 +87,9 @@ unsigned short* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 char* __cdecl _strupr(char*);
-int __cdecl fcn_00597ff0(int, char*);
+int __cdecl lc_GetBauplatzPrefix(int, char*);
 int __cdecl d3_CollectUnusedSceneObjects(char*, void**);
-void* __cdecl fcn_005987c0(float*, void**);
+void* __cdecl d3_FindNearestSceneObject(float*, void**);
 void __cdecl d3_ComputeObjectYawToTarget(float*, char*);
 void __cdecl d3_SetObjectGroundPosition(char*, float*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
@@ -113,7 +113,7 @@ int __cdecl fcn_0050d200(int, int);
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(char*, int, int, float*);
 void __cdecl d3_AnimateCameraToObject(char*);
-int __cdecl fcn_0052c9b0(void);
+int __cdecl d3_UpdateCameraController(void);
 void* __cdecl fcn_005bdc30(int, char*, int, void*, int);
 int __cdecl main_RunFrameLoop(int, int);
 
@@ -186,11 +186,11 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 	if (lpGebaeudePROT[f.iTypOffset] == 0x21) {
 		f.iKennung = (*(unsigned char*) (g_7f4ca0 + 9 + g_774970 * 0x21c) != 1);
 	}
-	if (fcn_00597ff0(gebaeudetyp, f.cOgrName) == 0) {
+	if (lc_GetBauplatzPrefix(gebaeudetyp, f.cOgrName) == 0) {
 		return 0;
 	}
 	f.iTreffer = d3_CollectUnusedSceneObjects(f.cOgrName, (void**) f.pListe);
-	g_774a68 = (int) f.pListe;
+	g_774a68 = (char*) f.pListe;
 	f.fObjektPos[0] = 0.0f;
 	f.fObjektPos[1] = 0.0f;
 	f.fObjektPos[2] = 0.0f;
@@ -254,7 +254,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 			*(unsigned char*) (pAktuell + 0x214) &= 0x7f;
 			fcn_00438b40(pAktuell, f.fPos);
 			fcn_004143b0(pAktuell, f.iRot, 0);
-			pNaechster = (char*) fcn_005987c0(f.fPos, (void**) f.pListe);
+			pNaechster = (char*) d3_FindNearestSceneObject(f.fPos, (void**) f.pListe);
 			f.pPrev = pNaechster;
 			if (pNaechster != 0) {
 				d3_ComputeObjectYawToTarget(f.fObjektPos, pNaechster);
@@ -309,7 +309,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		}
 		f.iFlag44 = 0;
 platzieren:
-		pNaechster = (char*) fcn_005987c0((float*) (pAktuell + 0x4c), (void**) f.pListe);
+		pNaechster = (char*) d3_FindNearestSceneObject((float*) (pAktuell + 0x4c), (void**) f.pListe);
 		if (pNaechster == 0) {
 			f.pPrev = 0;
 			fcn_00533a40((char*) g_14ab2e4);
@@ -357,7 +357,7 @@ platzieren:
 				f.fPruef = 90.0f;
 			}
 		}
-		if (fcn_0052c9b0() == 0) {
+		if (d3_UpdateCameraController() == 0) {
 			fcn_0045bad0((int) f.pKontext, g_14ce8c0, g_14ce8c2, (int*) &f.fAbstand, &f.iKennung2);
 			if (d3_GridPointToWorld(f.pKontext, f.iKennung2, *(int*) &f.fAbstand, f.fPos) != 0) {
 				fcn_00438b40(pAktuell, f.fPos);

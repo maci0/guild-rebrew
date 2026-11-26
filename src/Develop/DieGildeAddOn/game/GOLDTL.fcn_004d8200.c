@@ -17,7 +17,7 @@ void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 unsigned int __cdecl cut_RandMod(unsigned int);
 int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
-int __cdecl fcn_004c6680(char*, int, int, char*);
+int __cdecl cm_RequestChTalkAction(char*, int, int, char*);
 void __cdecl fcn_004d4950(void);
 void __cdecl fcn_004d4e30(void);
 int __cdecl gm_RandomMod(unsigned short);
@@ -141,7 +141,7 @@ block_174:
 		}
 		fcn_004d31d0((char*) rec, g_102d020, g_102d024, 8, &tileX,
 		             (unsigned int*) &ent);
-		q = *(char**) ((char*) rec + 0x184); fcn_004c6680((char*) *(int*) (q + 0x34), tileX, (int) ent, 0);
+		q = *(char**) ((char*) rec + 0x184); cm_RequestChTalkAction((char*) *(int*) (q + 0x34), tileX, (int) ent, 0);
 		p[0] = -1;
 		p[1] = 0;
 	}

@@ -23,7 +23,7 @@ void __cdecl d3_ApplyGraphicsOptions(void);
 void __cdecl fcn_005e1ca0(void);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005e2510(void);
+void __cdecl gm_ApplyGameSettings(void);
 void __cdecl fcn_00527420(void);
 void __cdecl fcn_00526db0(char *);
 int __cdecl d2_GetHudThemeResourceId(void);
@@ -141,7 +141,7 @@ void __cdecl fcn_005e3520(void)
         }
       }
       fcn_005e12d0();
-      fcn_005e2510();
+      gm_ApplyGameSettings();
     }
   }
   fcn_00471e30(v3);

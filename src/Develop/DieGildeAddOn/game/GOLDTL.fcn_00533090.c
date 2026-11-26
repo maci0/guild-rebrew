@@ -41,11 +41,11 @@ void __cdecl io_ClearInputState(void);
 void __cdecl fcn_005de62f(void);
 void __cdecl fcn_00412830(unsigned char mask);
 void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
-void __cdecl fcn_00433780(void*);
+void __cdecl d3_FreeObjectAnimation(void*);
 void __cdecl fcn_00438b40(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-void __cdecl fcn_004bbd70(void);
+void __cdecl gm_UpdateAmbientAnimals(void);
 int* __cdecl gm_SetupEntityQuery(char*);
 int __cdecl fcn_00506380(int, void*, void*, int);
 void __cdecl d3_UpdateCameraAtScreenEdges(void);
@@ -116,7 +116,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 	}
 	if (flags & 0x800) {
 		d2_HandleEntityChooser();
-		fcn_004bbd70();
+		gm_UpdateAmbientAnimals();
 		if (g_14ce8e0 && g_7e2aa0
 		    && *(int*) (g_774650 * 8 + 0x7e35c0) == 0x59a340) {
 			fcn_00530510();
@@ -159,14 +159,14 @@ void __cdecl fcn_00533090(unsigned int flags)
 				goto done;
 			}
 			if (CompareVector3WithinTolerance(&g_14ce880, g_7e3a40, 0.1f)) {
-				fcn_00433780(d3_ActiveCamera);
+				d3_FreeObjectAnimation(d3_ActiveCamera);
 				d3_ActiveCameraAnimation = 0;
 				d3_CameraAnimating = 0;
 				v2 = 1;
 				fcn_00438b40(d3_ActiveCamera, g_7e3a40);
 				d3_SetObjectRotation(d3_ActiveCamera, d3_CameraTargetRotation);
 			} else {
-				fcn_00433780(d3_ActiveCamera);
+				d3_FreeObjectAnimation(d3_ActiveCamera);
 				d3_ActiveCameraAnimation = 0;
 				d3_CameraAnimating = 0;
 			}

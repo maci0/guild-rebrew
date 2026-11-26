@@ -8,7 +8,7 @@ extern int g_7f4c06;
 int sprintf(char*, const char*, ...);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00442e30(void);
-void __cdecl fcn_00514120(char*);
+void __cdecl gm_LoadCityMap(char*);
 void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl gm_ResetAllEntities(void);
@@ -23,7 +23,7 @@ void __cdecl main_LoadCitySelectionScene(char* name, int net)
 
 	d3_SelectSceneContext(0, 0);
 	fcn_00442e30();
-	fcn_00514120(name);
+	gm_LoadCityMap(name);
 	if (net != 0) {
 		sprintf(path, "%s/%s.NET", "gamedata/cities", name);
 	} else {

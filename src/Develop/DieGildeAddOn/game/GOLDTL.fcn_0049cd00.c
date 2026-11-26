@@ -13,7 +13,7 @@ typedef struct Blk24 {
 
 unsigned short __cdecl gm_RandomMod(int n);
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
-int __cdecl fcn_004aa920(short* a1, int a2, char* a3);
+int __cdecl ai_SelectAnschwaerzenTargets(short* a1, int a2, char* a3);
 int __cdecl ai_SelectBestMethod(int kind, unsigned short id, int n, Blk24* b1, Blk24* b2);
 
 /* ADDRESS: GOLDTL 0x0049cd00 */
@@ -71,7 +71,7 @@ int __cdecl ai_StartAnschwaerzen(int a1, char* ent, int a3, Blk24* o1, Blk24* o2
 fill:
 	memset(&b1, 0, sizeof(b1));
 	memset(&b2, 0, sizeof(b2));
-	if (fcn_004aa920((short*) ent, (int) &b1, (char*) &b2) == 0) {
+	if (ai_SelectAnschwaerzenTargets((short*) ent, (int) &b1, (char*) &b2) == 0) {
 		return 0;
 	}
 	memcpy(o1, &b1, sizeof(b1));

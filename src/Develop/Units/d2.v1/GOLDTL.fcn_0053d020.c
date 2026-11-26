@@ -3,7 +3,7 @@ extern char* g_1015ea0;
 extern int g_100f1dc;
 extern int g_100f1e4;
 extern char g_1015f4c[];
-extern char g_7e23e0;
+extern char g_7e23e0[];
 extern unsigned char g_7e23e1;
 extern unsigned char g_7e23e2;
 extern int g_7e23e4;
@@ -107,7 +107,7 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 			g_774654 = 1;
 		}
 		if (g_100f1dc == 2) {
-			g_7e23e0 = 0;
+			g_7e23e0[0] = 0;
 			g_7e23e1 = 0;
 			g_7e23e2 = 0x12;
 			g_7e23e4 = ((D2_CONTROL_TL*) g_1015ea0)[sel].value_008;

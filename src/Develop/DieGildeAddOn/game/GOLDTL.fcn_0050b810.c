@@ -4,7 +4,7 @@ void* __cdecl fcn_00502cd0(int, int, int, int);
 void* __cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x0050b810 */
-int __cdecl fcn_0050b810(int list)
+int __cdecl gm_SumQueryEntryValues(int list)
 {
 	void* entry;
 	int total;

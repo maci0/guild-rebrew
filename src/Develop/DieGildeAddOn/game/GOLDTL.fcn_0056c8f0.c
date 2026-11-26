@@ -8,7 +8,7 @@ extern unsigned char* lpGebaeudePROT;
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AddObjekt(void);
 int __cdecl gm_CheckEntityType(char*);
-int __cdecl fcn_00505340(char*);
+int __cdecl gm_IsWarehouse(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "client_scene_transform.h"
@@ -29,7 +29,7 @@ void __cdecl he_StartFireEvent(char* u)
 	m = 1;
 	for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
 		t = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) e];
-		if (gm_CheckEntityType(e) == 0 && fcn_00505340(e) == 0 && *(char**) (e + 0x61) != 0 && ((char)(((BUILDING_PROTOTYPE*)t)->category)) != 3) {
+		if (gm_CheckEntityType(e) == 0 && gm_IsWarehouse(e) == 0 && *(char**) (e + 0x61) != 0 && ((char)(((BUILDING_PROTOTYPE*)t)->category)) != 3) {
 			list[n++] = e;
 		}
 	}

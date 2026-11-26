@@ -64,7 +64,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, ch
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_SendSetGebBesitzer(int, int, int);
-void __cdecl fcn_004c6000(int, int);
+void __cdecl cm_RequestSetWohnsitz(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, Order*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -87,13 +87,13 @@ void __cdecl gm_BuyBuilding(int search, int buyer, int price, Order* o, int noti
 		cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD*)g_7f4ca0)[s->slot].entity_id, buyer, (*(char*)&g_773d75), price);
 		cm_SendSetGebBesitzer(s->id, u->id, u->id);
 		if (notify != 0 && office->category == 2) {
-			fcn_004c6000(u->id, s->id);
+			cm_RequestSetWohnsitz(u->id, s->id);
 		}
 	} else {
 		cm_RequestMoveCredits(-1, buyer, (*(char*)&g_773d75), price);
 		cm_SendSetGebBesitzer(s->id, u->id, u->id);
 		if (notify != 0 && office->category == 2) {
-			fcn_004c6000(u->id, s->id);
+			cm_RequestSetWohnsitz(u->id, s->id);
 		}
 	}
 	if (o != 0) {

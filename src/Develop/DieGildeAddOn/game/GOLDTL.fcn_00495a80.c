@@ -18,7 +18,7 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x00495a80 */
-int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
+int __cdecl ai_StartBildung(int unused, char* actorEntity, int mode, char* out1, char* out2)
 {
 	int left;
 	int i;
@@ -31,14 +31,14 @@ int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 	union { Out495a80 msg; float ratios[5]; } extra;
 	union { Out495a80 msg; unsigned int count[5]; } action;
 
-	(void) a0;
+	(void) unused;
 	left = 5;
 	keep[0] = 0x3a;
 	keep[1] = 0x1a;
 	keep[2] = 0x17;
 	keep[3] = 0x18;
 	keep[4] = 0x19;
-	if (a2 != 0) {
+	if (mode != 0) {
 		return 0;
 	}
 	if (*(int*) (actorEntity + 0x170) == 0 && *(char*) (actorEntity + 2) != 3) {
@@ -51,19 +51,19 @@ int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 		extra.msg.f5 = 0x3f28f5c3;
 		r = ai_SelectBestMethod(4, *(unsigned short*) actorEntity, 1, &extra.msg, &action.msg);
 		if (r != 0) {
-			*(Out495a80*) a3 = extra.msg;
-			*(Out495a80*) a4 = action.msg;
+			*(Out495a80*) out1 = extra.msg;
+			*(Out495a80*) out2 = action.msg;
 		}
 		return r;
 	}
 	if (he_StartHandlungSearch(2, 2, *(unsigned short*) actorEntity, 0, 0x60) != 0) {
 		return 0;
 	}
-	if (*(char*) a3 == 0x0e) {
+	if (*(char*) out1 == 0x0e) {
 		int slot;
 		float f;
 
-		i = *(int*) (a3 + 4);
+		i = *(int*) (out1 + 4);
 		for (k = 0; k < 0x88; k++) {
 			buf[k] = 0;
 		}
@@ -91,7 +91,7 @@ int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 		if ((float) *(unsigned char*) (actorEntity + i + 0x80) == 252.0f) {
 			return 0;
 		}
-		*(int*) (a3 + 0x10) = slot;
+		*(int*) (out1 + 0x10) = slot;
 		return 4;
 	}
 	for (i = 0; (unsigned int) i < 5; i++) {
@@ -174,15 +174,15 @@ int __cdecl fcn_00495a80(int a0, char* actorEntity, int a2, char* a3, char* a4)
 			action.msg.f2 = 1;
 			r = ai_SelectBestMethod(4, *(unsigned short*) actorEntity, 1, &extra.msg, &action.msg);
 			if (r != 0) {
-				*(Out495a80*) a3 = extra.msg;
-				*(Out495a80*) a4 = action.msg;
+				*(Out495a80*) out1 = extra.msg;
+				*(Out495a80*) out2 = action.msg;
 			}
 			return r;
 		}
 	}
 fill:
-	*(unsigned char*) a3 = 0x0e;
-	*(int*) (a3 + 4) = i;
-	*(int*) (a3 + 0x10) = (int) weight[i];
+	*(unsigned char*) out1 = 0x0e;
+	*(int*) (out1 + 4) = i;
+	*(int*) (out1 + 0x10) = (int) weight[i];
 	return 4;
 }

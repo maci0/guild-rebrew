@@ -14,7 +14,7 @@ extern double g_664180;
 
 void __cdecl d2_SetForm(int, int);
 float __cdecl gm_GetEntitySkill(char*, int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 float __cdecl cut_RandFloat(void);
 int __cdecl cut_RandMod(int);
 void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
@@ -45,7 +45,7 @@ void __cdecl fcn_004dff50(char* task)
 	a = gm_GetEntitySkill(e, 3);
 	gm_GetEntitySkill(foe, 3);
 	a = a * g_664108;
-	if (fcn_005c6270(e, 0x16f) != 0) {
+	if (gm_HasActiveSpecialObject(e, 0x16f) != 0) {
 		a = a * g_662a08;
 	}
 	if ((e == g_9afde4 && g_772f5b) || (e == (*(char * *)&g_9afde0) && g_772f5a)) {
@@ -58,7 +58,7 @@ void __cdecl fcn_004dff50(char* task)
 		} else {
 			n = cut_RandMod(0x1e) + 0xf;
 		}
-		if (fcn_005c6270(foe, 0x2b5) != 0) {
+		if (gm_HasActiveSpecialObject(foe, 0x2b5) != 0) {
 			n = (int) ((float) n * g_662a6c);
 		}
 		if (foe == g_9afde4) {

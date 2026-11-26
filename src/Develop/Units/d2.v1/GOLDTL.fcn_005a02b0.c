@@ -16,7 +16,7 @@ void __cdecl fcn_00471e30(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_GetOppositeStatIndex(int);
-float __cdecl fcn_00507540(int, int*);
+float __cdecl gm_CalcActionCompletionTime(int, int*);
 int __cdecl gm_MapEntityStatRange(int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00525ef0(void);
@@ -51,7 +51,7 @@ int __cdecl fcn_005a02b0(void)
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	fcn_00525ef0();
-	grade = fcn_00507540(g_774970, info);
+	grade = gm_CalcActionCompletionTime(g_774970, info);
 	r = (int) he_StartHandlungSearch(2, 2, g_774970, 0, 0x26);
 	if (r == 0 && grade >= 1.0 && n <= 6) {
 		base = *(char*) (slot + 9) != 0 ? 0x18f : 0x130;

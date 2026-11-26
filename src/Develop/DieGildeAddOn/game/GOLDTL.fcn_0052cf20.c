@@ -57,7 +57,7 @@ int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
 float* __stdcall D3DXMatrixTranspose(float* out, float* in);
 void __cdecl d3_TransformPoint(char* src, char* pos, Vec3* out);
 float __cdecl fcn_00413d10(Vec3* p);
-void __cdecl fcn_00433780(View* v);
+void __cdecl d3_FreeObjectAnimation(View* v);
 void __cdecl fcn_00438b40(View* v, Vec3* p);
 void __cdecl d3_SetObjectRotation(View* v, Vec3* r);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -104,7 +104,7 @@ void __cdecl fcn_0052cf20(Ent* e)
 	*(int*) &rot.x = *(int*) &((View*)d3_ActiveCamera)->rot.x;
 	*(int*) &rot.y = *(int*) &((View*)d3_ActiveCamera)->rot.y;
 	*(int*) &rot.z = *(int*) &((View*)d3_ActiveCamera)->rot.z;
-	fcn_00433780((View*)d3_ActiveCamera);
+	d3_FreeObjectAnimation((View*)d3_ActiveCamera);
 	d3_ActiveCameraAnimation = 0;
 	d3_CameraAnimating = 0;
 	h2 = fcn_00413d10((Vec3*) &q);

@@ -3,10 +3,10 @@
 extern struct Node* g_774a78;
 extern char s_6ab3f4[];
 
-char* __cdecl fcn_005b1aa0(char*);
+char* __cdecl hp_LookupProdEntry(char*);
 char* __cdecl m_alloc(int, char*);
 int __cdecl fcn_0064d3f8(void);
-void __cdecl fcn_005b1980(char*, char*);
+void __cdecl hp_UpdateProdSetting(char*, char*);
 
 /* 0x5b1b10 must be defined in this file ahead of 0x5b1b30: the original
  * compiler knew the callee leaves edx intact and pushed the reused `a`
@@ -36,7 +36,7 @@ char* __cdecl fcn_005b1b30(char* a)
 	char* r;
 
 	if (g_774a78 == 0) {
-		if (fcn_005b1aa0(a) == 0) {
+		if (hp_LookupProdEntry(a) == 0) {
 			return 0;
 		}
 		p = m_alloc(0x4c, s_6ab3f4);
@@ -64,7 +64,7 @@ char* __cdecl fcn_005b1b30(char* a)
 			*(int*) p = *(int*) (a + 1);
 			*(int*) (p + 4) = fcn_0064d3f8();
 			*(float*) (p + 0x44) = 1.0f;
-			fcn_005b1980(a, p);
+			hp_UpdateProdSetting(a, p);
 			g_774a78 = (Node*) p;
 			return p + 0xc;
 		}
@@ -74,7 +74,7 @@ char* __cdecl fcn_005b1b30(char* a)
 		if (r != 0) {
 			return r;
 		}
-		if (fcn_005b1aa0(a) == 0) {
+		if (hp_LookupProdEntry(a) == 0) {
 			return 0;
 		}
 		p = m_alloc(0x4c, s_6ab3f4);
@@ -105,7 +105,7 @@ char* __cdecl fcn_005b1b30(char* a)
 			*(int*) p = *(int*) (a + 1);
 			*(int*) (p + 4) = fcn_0064d3f8();
 			*(float*) (p + 0x44) = 1.0f;
-			fcn_005b1980(a, p);
+			hp_UpdateProdSetting(a, p);
 			*(char**) (p + 0x48) = (char*) g_774a78;
 			g_774a78 = (Node*) p;
 			return p + 0xc;

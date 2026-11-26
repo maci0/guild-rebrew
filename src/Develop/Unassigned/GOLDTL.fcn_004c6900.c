@@ -11,7 +11,7 @@ typedef struct
 } Small3i;
 // SIZE 0xc
 
-void __cdecl fcn_004c6900(Small3i* data)
+void __cdecl cm_RequestJoinLeaveElection(Small3i* data)
 {
 	char buf[0x9c];
 

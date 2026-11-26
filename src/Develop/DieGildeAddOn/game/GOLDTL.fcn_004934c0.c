@@ -5,7 +5,7 @@ void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, int* v);
 void __cdecl cm_RequestChangeAttribute(void);
 
 /* ADDRESS: GOLDTL 0x004934c0 */
-char* __cdecl fcn_004934c0(char* e)
+char* __cdecl gm_SelectEntityHeir(char* e)
 {
 	char* pick;
 	char* list[5];

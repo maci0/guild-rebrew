@@ -11,7 +11,7 @@ char* __cdecl fcn_00502cd0(void* id, int a, int b, int c);
 int __cdecl fcn_00503a70(int id);
 
 /* ADDRESS: GOLDTL 0x00486c40 */
-void __cdecl fcn_00486c40(ENTITY_RECORD* a0, unsigned int a1, int budget)
+void __cdecl ai_PlanMeisterSupplies(ENTITY_RECORD* entity, unsigned int unused, int budget)
 {
 	char* q;
 	int i;
@@ -20,10 +20,10 @@ void __cdecl fcn_00486c40(ENTITY_RECORD* a0, unsigned int a1, int budget)
 	int found;
 	int sum;
 
-	(void) a1;
+	(void) unused;
 	for (i = 0; i < 768; i++) {
 		if (((ENTITY_RECORD*) g_7f4ca0)[i].entity_index != 0xffff &&
-		    ((ENTITY_RECORD*) g_7f4ca0)[i].unk_16c == a0->unk_16c &&
+		    ((ENTITY_RECORD*) g_7f4ca0)[i].unk_16c == entity->unk_16c &&
 		    ((ENTITY_RECORD*) g_7f4ca0)[i].unk_165[0] != 0) {
 			q = fcn_00502cd0(((ENTITY_RECORD*) g_7f4ca0)[i].object_list, 1, 4, 0xc);
 			if (q == 0) {

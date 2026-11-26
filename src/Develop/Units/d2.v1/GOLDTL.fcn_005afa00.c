@@ -1,19 +1,19 @@
 
 
 
-int __cdecl fcn_00525fb0(int);
+int __cdecl d2_CheckOwnerBlocked(int);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_005bdc30(int, int, int, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
-void __cdecl fcn_005af7f0(void);
+void __cdecl d2_ConfirmPatrol(void);
 extern int g_14abcdc;
 
-void __cdecl fcn_005afa00(int a)
+void __cdecl d2_SelectPatrolTarget(int building)
 {
-	if (fcn_00525fb0(a) == 0 && a != 0) {
-		fcn_0052a0c0(a, 0);
-		fcn_005bdc30(4, 0, g_14abcdc, fcn_005af7f0, 0);
+	if (d2_CheckOwnerBlocked(building) == 0 && building != 0) {
+		fcn_0052a0c0(building, 0);
+		fcn_005bdc30(4, 0, g_14abcdc, d2_ConfirmPatrol, 0);
 		d2_RestoreHudAfterDialog();
 		sv_ClearObjectSelection();
 	}

@@ -3,7 +3,7 @@
 extern unsigned char g_773d75;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -21,7 +21,7 @@ int __cdecl fcn_004b74b0(int* a1)
 	entity = gm_LookupEntityRecordById(a1[0]);
 	if (entity == 0)
 		return 1;
-	if (fcn_005c6270(entity, 0x290) != 0)
+	if (gm_HasActiveSpecialObject(entity, 0x290) != 0)
 		return 0x400;
 	amount = (int) ((gm_RandomMod(2) + 1.0) * gm_WalkEntityChain(*entity) * 0.01);
 	if (amount > gm_WalkEntityChain(*entity))

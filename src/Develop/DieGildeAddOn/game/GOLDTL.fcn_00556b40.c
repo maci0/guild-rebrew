@@ -13,7 +13,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
 
 /* ADDRESS: GOLDTL 0x00556b40 */
-void __cdecl fcn_00556b40(char* e)
+void __cdecl he_RunAction0x6f(char* e)
 {
 	char buf[0x200];
 	char* a;

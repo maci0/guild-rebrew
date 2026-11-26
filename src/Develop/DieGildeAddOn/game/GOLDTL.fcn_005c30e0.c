@@ -100,14 +100,14 @@ void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 	}
 	lc_GetGebaeudeBauplatz(&bp, buildingEntry);
 	if (bp.node != 0) {
-		fcn_00597ff0(*(unsigned char*) buildingEntry + 1, (char*) &msg);
+		lc_GetBauplatzPrefix(*(unsigned char*) buildingEntry + 1, (char*) &msg);
 		if (strstr((char*) &msg, bp.node) == 0) {
 			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) buildingEntry * 14 + 0x49c);
 			fcn_00526120(buf, 0);
 			return;
 		}
 	} else {
-		fcn_00597ff0(*(unsigned char*) buildingEntry + 1, (char*) &msg);
+		lc_GetBauplatzPrefix(*(unsigned char*) buildingEntry + 1, (char*) &msg);
 		if (fcn_0065f220((char*) &msg, bp.name) != 0) {
 			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) buildingEntry * 14 + 0x49c);
 			fcn_00526120(buf, 0);

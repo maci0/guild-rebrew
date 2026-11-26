@@ -17,7 +17,7 @@ typedef struct {
 
 extern char* lpObjektePROT;
 
-int __cdecl fcn_005053c0(unsigned short* slot)
+int __cdecl gm_GetWareIconId(unsigned short* slot)
 {
 	WareIcon icons[55] = {
 		{0x13, 1}, {0x54, 2}, {0x15, 4}, {0x18, 0xd}, {0x14, 9}, {0x16, 0x18}, {0x17, 0xf},

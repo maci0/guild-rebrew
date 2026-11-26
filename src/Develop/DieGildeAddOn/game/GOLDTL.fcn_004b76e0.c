@@ -6,7 +6,7 @@ extern unsigned char g_773d75;
 void* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int  __cdecl fcn_005c6270(void*, int);
+int  __cdecl gm_HasActiveSpecialObject(void*, int);
 
 void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
@@ -27,7 +27,7 @@ int __cdecl gm_ApplyOfficePercentCredit(void* request)
 	if (*(char*) ((char*) entity + 0x166) == 0 && *(char*) ((char*) entity + 0x169) == 0) {
 		return 0x400;
 	}
-	if (fcn_005c6270(entity, 0x290) != 0) {
+	if (gm_HasActiveSpecialObject(entity, 0x290) != 0) {
 		return 0x400;
 	}
 	v = gm_RandomMod(4);

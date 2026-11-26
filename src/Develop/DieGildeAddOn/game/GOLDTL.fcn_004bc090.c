@@ -2,7 +2,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CheckEntityType(unsigned char*);
-int __cdecl fcn_00505340(unsigned char*);
+int __cdecl gm_IsWarehouse(unsigned char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl d3_TransformPoint(int, int, void*);
 #include "client_scene_transform.h"
@@ -35,7 +35,7 @@ void __cdecl gm_InitAmbientBirds(AMBIENT_ANIMAL_SLOT* result)
 		return;
 	n = 0;
 	for (it = gm_StartFilteredEntitySearch(1, 6); it != 0; it = gm_FindNextFilteredEntity()) {
-		if (gm_CheckEntityType(it) == 0 && fcn_00505340(it) == 0 && *(int*) (it + 0x61) != 0)
+		if (gm_CheckEntityType(it) == 0 && gm_IsWarehouse(it) == 0 && *(int*) (it + 0x61) != 0)
 			ents[n++] = it;
 	}
 	chosen = ents[gm_RandomMod(n)];

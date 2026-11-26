@@ -21,13 +21,13 @@ typedef struct {
 	char pad[15];
 } TierSrc;
 
-int __cdecl fcn_004e8b40(int id, TierSrc* src);
+int __cdecl amt_GetRoleTemplate(int id, TierSrc* src);
 
 int __cdecl fcn_004e9580(int id, TierInfo* out)
 {
 	TierSrc src;
 
-	if (fcn_004e8b40(id, &src) == 0) {
+	if (amt_GetRoleTemplate(id, &src) == 0) {
 		return 0;
 	}
 	switch (src.tier) {

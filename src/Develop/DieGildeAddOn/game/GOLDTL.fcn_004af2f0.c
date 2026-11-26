@@ -973,7 +973,7 @@ void __cdecl fcn_004c5980(Msg*);
  * fcn_004ae130/1c0/210 in view, c2 keeps the zero in edx across the first
  * call; declared from another file the object is 16 bytes longer. */
 /* ADDRESS: GOLDTL 0x004b0780 */
-int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
+int __cdecl hst_HandleStrafeHinrichtung(int* pairs, int idx, char* text)
 {
 	int n;
 	unsigned short* e;

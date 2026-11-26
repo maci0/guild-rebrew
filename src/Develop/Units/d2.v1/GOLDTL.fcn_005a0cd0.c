@@ -3,7 +3,7 @@ int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_RenderDialogIconsAndText(int);
 void __cdecl fcn_005a0ad0(int, unsigned char*);
-void __cdecl fcn_005a0be0(int, unsigned char*);
+void __cdecl d2_RenderPlayerDiceIcons(int, unsigned char*);
 extern volatile int g_6b7fac; extern unsigned short g_774970; extern char g_7f4ca4[];
 /* ADDRESS: GOLDTL 0x005a0cd0 */
 void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int windowId, int formId, int duration, int a6)
@@ -55,7 +55,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int wi
 			start = g_6b7fac;
 			last = g_6b7fac;
 			d2_SetForm(windowId, formId);
-			fcn_005a0be0((int) buf, a1);
+			d2_RenderPlayerDiceIcons((int) buf, a1);
 			while (start + duration > g_6b7fac) {
 				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
 					break;
@@ -68,7 +68,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int wi
 			start = g_6b7fac;
 			last = g_6b7fac;
 			d2_SetForm(windowId, formId);
-			fcn_005a0be0((int) buf, a1);
+			d2_RenderPlayerDiceIcons((int) buf, a1);
 			while (start + duration > g_6b7fac) {
 				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
 					break;
@@ -96,7 +96,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int wi
 		start = g_6b7fac;
 		last = g_6b7fac;
 		d2_SetForm(windowId, formId);
-		fcn_005a0be0((int) buf, a1);
+		d2_RenderPlayerDiceIcons((int) buf, a1);
 		while (start + duration > g_6b7fac) {
 			if (!(*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4))) {
 				break;

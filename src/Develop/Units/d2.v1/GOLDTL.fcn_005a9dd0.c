@@ -24,7 +24,7 @@ extern int d2_CurrentElementId;
 extern char g_6aae08[];
 
 unsigned char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0050b810(int a, char b);
+int __cdecl gm_SumQueryEntryValues(int a, char b);
 int __cdecl gm_AccumulateTyped2(ENTITY_RECORD* entity);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -61,7 +61,7 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 	b = 0;
 	tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p[0]];
 	obj = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x142);
-	n = fcn_0050b810(*(int*) (obj + 0x14), g_773d75);
+	n = gm_SumQueryEntryValues(*(int*) (obj + 0x14), g_773d75);
 	acc = gm_AccumulateTyped2(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
 	if ((((BUILDING_PROTOTYPE*)tbl)->category) == 0x17 && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].grade == 0x1e) {
 		ok = 1;

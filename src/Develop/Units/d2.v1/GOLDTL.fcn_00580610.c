@@ -12,7 +12,7 @@ void __cdecl d2_CloseTutorialProgress(void);
 #define ELAPSED(t) (((unsigned int)g_6b7fac) - (t) ? ((unsigned int)g_6b7fac) - (t) : 0)
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-void __cdecl fcn_00580610(void)
+void __cdecl d2_UpdateTutorialProgress(void)
 {
 	unsigned int dur;
 	unsigned int el;

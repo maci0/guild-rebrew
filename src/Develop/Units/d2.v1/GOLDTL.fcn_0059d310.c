@@ -24,7 +24,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_RunTaschendiebstahlDialog(void);
 
-void __cdecl fcn_0059d310(int a)
+void __cdecl d2_SelectPickpocketTarget(int building)
 {
 	Req req;
 
@@ -33,7 +33,7 @@ void __cdecl fcn_0059d310(int a)
 	req.size = 0x400;
 	req.kind = 7;
 	req.c = 0x93810;
-	fcn_0052a0c0(a, 0);
+	fcn_0052a0c0(building, 0);
 	fcn_005bdc30(1, &req, g_14abad4, (void*) d2_RunTaschendiebstahlDialog, 0);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();

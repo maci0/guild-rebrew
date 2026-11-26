@@ -3,7 +3,7 @@
 char* __cdecl fcn_005b1a80(int id);
 
 /* ADDRESS: GOLDTL 0x005b1ce0 */
-void __cdecl fcn_005b1ce0(char* a0, int entryKey, unsigned char requestedShare)
+void __cdecl gm_AdjustProductionShare(char* building, int entryKey, unsigned char requestedShare)
 {
 	char* p;
 	int used;
@@ -14,7 +14,7 @@ void __cdecl fcn_005b1ce0(char* a0, int entryKey, unsigned char requestedShare)
 	int delta;
 	int step;
 
-	p = fcn_005b1a80(*(int*) (a0 + 1));
+	p = fcn_005b1a80(*(int*) (building + 1));
 	avail = 100;
 	if (entryKey == 0) {
 		return;

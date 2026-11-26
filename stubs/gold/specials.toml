@@ -500,3 +500,6 @@ impl = ""
 [specials.fcn_004e4680]
 impl = ""
 
+
+[specials.amt_GetRoleTemplate]
+impl = ""

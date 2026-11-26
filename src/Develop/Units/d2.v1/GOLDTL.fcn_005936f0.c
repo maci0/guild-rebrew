@@ -15,7 +15,7 @@ extern char* g_100f1e4;      /* element of the current player */
 extern int g_102cbc8[];
 extern int g_102cbcc[];
 extern char g_1015f4c[];
-extern char g_7e23e0;
+extern char g_7e23e0[];
 extern unsigned char g_7e23e1; extern unsigned char g_7e23e2;
 extern int g_7e23e4;
 extern char g_7e23e8;
@@ -271,7 +271,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 			}
 		}
 		else if (sel == 5) {
-			g_7e23e0 = 0;
+			g_7e23e0[0] = 0;
 			(*(char *)&g_7e23e1) = 0;
 			(*(char *)&g_7e23e2) = 0x12;
 			g_7e23e4 = ((D2_CONTROL_TL*)g_1015ea0)[g_102cbcc[group * 35 + g_102cbc8[group * 35]]].value_008;

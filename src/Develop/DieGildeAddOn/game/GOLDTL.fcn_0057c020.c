@@ -22,7 +22,7 @@ typedef struct {
 
 
 
-int __cdecl fcn_004e8b40(int, rec18*);
+int __cdecl amt_GetRoleTemplate(int, rec18*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl amt_AdjustOfficeHoldersFavor(ENTITY_RECORD*, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -39,7 +39,7 @@ void __cdecl he_ApplyZigeunerFavorPenalty(ENTITY_RECORD* a, ENTITY_RECORD* b)
 	int p;
 	int id;
 
-	if (fcn_004e8b40(b->unk_165[1], &r) != 0 && (p = r.id) != 0) {
+	if (amt_GetRoleTemplate(b->unk_165[1], &r) != 0 && (p = r.id) != 0) {
 		amt_AdjustOfficeHoldersFavor(b, p, -20 - gm_RandomMod(0x10));
 	} else if (b->entity_state != 6 && b->entity_state != 7 && b->entity_state != 5) {
 		amt_AdjustOfficeHoldersFavor(b, gm_RandomMod(3) + 1, gm_RandomMod(0x10) + 0x14);

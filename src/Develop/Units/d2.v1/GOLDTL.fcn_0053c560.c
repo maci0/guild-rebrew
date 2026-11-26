@@ -49,7 +49,7 @@ void __cdecl fcn_00471e30(int);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00433780(void *);
+void __cdecl d3_FreeObjectAnimation(void *);
 void __cdecl d3_AnimateObjectTransform(char *, Vec3 *, Vec3 *, int, int);
 char *__cdecl fcn_00445600(char *, int, char *, char *);
 void __cdecl ch_QueueWalkToDummyRotate(char *, char *);
@@ -158,7 +158,7 @@ int __cdecl d2_RunParentProfessionSelection(void)
 						parentA = *(Vec3 *) (d3_ActiveCamera + 0xe4);
 						parentB = *(Vec3 *) (d3_ActiveCamera + 0xf0);
 					}
-					fcn_00433780(d3_ActiveCamera);
+					d3_FreeObjectAnimation(d3_ActiveCamera);
 					d3_CameraAnimating = 0;
 					d3_ActiveCameraAnimation = 0;
 					d3_AnimateObjectTransform(d3_ActiveCamera, &parentA, &parentB, 0x50, 8);
@@ -207,7 +207,7 @@ slot_found:
 				d2_SetForm(obj, 0);
 				io_AppendText(0x6811b0);
 				fcn_00471af0(obj, 0);
-				fcn_00433780(d3_ActiveCamera);
+				d3_FreeObjectAnimation(d3_ActiveCamera);
 				d3_CameraAnimating = 0;
 				d3_ActiveCameraAnimation = 0;
 				d3_AnimateObjectTransform(d3_ActiveCamera,
@@ -275,7 +275,7 @@ slot_found:
 				fn(base, 5, sub + 0x298, 0);
 		}
 	}
-	fcn_00433780(d3_ActiveCamera);
+	d3_FreeObjectAnimation(d3_ActiveCamera);
 	d3_CameraAnimating = 0;
 	d3_ActiveCameraAnimation = 0;
 	if (spr != 0)

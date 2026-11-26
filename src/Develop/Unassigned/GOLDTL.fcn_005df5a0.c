@@ -26,7 +26,7 @@ extern short g_7f4c0c;
 
 void __cdecl cm_SendCopyEntityData(Msg*);
 
-int __cdecl fcn_005df5a0(char* obj)
+int __cdecl gm_ObjSendMsg0xa4(char* obj)
 {
 	Msg msg;
 

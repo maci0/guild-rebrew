@@ -22,12 +22,12 @@ typedef struct F8 {
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
-int* __cdecl fcn_0048f450(char* q);
+int* __cdecl ai_PickIdleGraveyardWorker(char* q);
 int __cdecl fcn_004a5340(char* e, int a, int* p, int b, float r, unsigned short* out);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048f8f0 */
-int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2)
+int __cdecl ai_PlanHauchDesVerfalls(char* e, char* q, Blk24* b1, Blk24* b2)
 {
 	char* p;
 	int* h;
@@ -40,7 +40,7 @@ int __cdecl fcn_0048f8f0(char* e, char* q, Blk24* b1, Blk24* b2)
 	b1->c = *(int*) (q + 1);
 	if (fcn_00502cd0(*(int*) (q + 0x5d), 2, 0, 0x204, 6) == 0)
 		return 0;
-	h = fcn_0048f450(q);
+	h = ai_PickIdleGraveyardWorker(q);
 	if (h == 0)
 		return 0;
 	if (he_StartHandlungSearch(2, 0, 0x89, 3, *(int*) (q + 1)) != 0)

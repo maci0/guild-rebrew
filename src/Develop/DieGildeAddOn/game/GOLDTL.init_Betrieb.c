@@ -18,7 +18,7 @@ int __cdecl gm_GetBuildingTypeCategory(int arg1);
 char* __cdecl fcn_00502cd0(int a1, int a2, int a3, ...);
 int __cdecl gm_NextEntityQueryMatch(void);
 float __cdecl eval_ObjektPreis2Credits(int id, int a1);
-int __cdecl fcn_0050dfd0(char* a1, int a2);
+int __cdecl gm_GetStorageSlotCapacity(char* a1, int a2);
 int __cdecl cm_SendSellObjekt(int a1, int a2, int a3, int a4, char a5, int a6);
 void __cdecl ReportClientMessage(const char* msg);
 
@@ -86,10 +86,10 @@ void __cdecl init_Betrieb(unsigned char* building)
             }
             if (item->child[i] != 0xffff) {
                 qty = item->weight[i];
-                if (qty * limit < fcn_0050dfd0(obj, item->child[i])) {
+                if (qty * limit < gm_GetStorageSlotCapacity(obj, item->child[i])) {
                     limit = qty * limit;
                 } else {
-                    limit = fcn_0050dfd0(obj, item->child[i]);
+                    limit = gm_GetStorageSlotCapacity(obj, item->child[i]);
                 }
                 cm_SendSellObjekt(*(int*)(obj + 2), -1, item->child[i], limit,
                              g_773d75, 0);

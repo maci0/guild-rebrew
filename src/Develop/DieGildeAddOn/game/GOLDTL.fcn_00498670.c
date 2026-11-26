@@ -19,7 +19,7 @@ int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 
 /* ADDRESS: GOLDTL 0x00498670 */
-int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
+int __cdecl ai_StartBetriebBauen(int target_action, short *ent, int mode, Cmd *out1, Cmd *out2)
 {
 	Cmd o1;
 	Cmd o2;
@@ -50,7 +50,7 @@ int __cdecl fcn_00498670(int a1, short *ent, int mode, Cmd *out1, Cmd *out2)
 	if (*(char *) ((char *) ent + 2) == 3) {
 		return 0;
 	}
-	if (a1 != 0) {
+	if (target_action != 0) {
 		return 0;
 	}
 	if (mode == 0) {

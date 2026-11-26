@@ -45,7 +45,7 @@ void __cdecl fcn_004e71a0(void)
 	cut_RegisterEventCallbacks(2, cut_RunProzess, (void*) fcn_004df1b0, (void*) fcn_004dfba0, fcn_004dc7d0, 0);
 	cut_RegisterEventCallbacks(3, fcn_004d77e0, (void*) fcn_004da170, 0, fcn_004d74b0, 1);
 	cut_RegisterEventCallbacks(4, cut_MainDuell, (void*) fcn_004e1900, (void*) fcn_004e1890, fcn_004e1330, 0);
-	cut_RegisterEventCallbacks(5, cut_PlayHinrichtung, 0, 0, fcn_004e1960, 0);
+	cut_RegisterEventCallbacks(5, cut_PlayHinrichtung, 0, 0, cut_NotifyHinrichtung, 0);
 	cut_RegisterEventCallbacks(6, fcn_004e2090, 0, 0, gm_NotifyHochzeit, 0);
 	cut_RegisterEventCallbacks(7, fcn_004e2890, 0, 0, fcn_004e27b0, 0);
 	cut_RegisterEventCallbacks(8, cut_PlayDeathCutscene, 0, 0, fcn_004e2b40, 0);

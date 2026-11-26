@@ -11,7 +11,7 @@ extern int g_100f1dc;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_ResetTrainingRows(char*);
-int __cdecl fcn_00525fb0(char*);
+int __cdecl d2_CheckOwnerBlocked(char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_UpdateTrainingRows(int, int);
 
@@ -27,7 +27,7 @@ void __cdecl d2_RunDiebesgildeTraining(char* e)
 	int dlg;
 	int i;
 
-	if (fcn_00525fb0(e) == 0) {
+	if (d2_CheckOwnerBlocked(e) == 0) {
 		dlg = fcn_00470820(0, 0, "locations\\diebesgilde\\diebesgilde_trainieren");
 		d2_ResetTrainingRows(e);
 		d2_SetOverlayAnimation(0, 0);

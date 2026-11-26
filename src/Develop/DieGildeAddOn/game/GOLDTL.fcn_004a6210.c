@@ -29,12 +29,12 @@ void __cdecl gm_GetArtilleryLimits(char*, int*, int*);
 void __cdecl fcn_004f0f60(int, void*);
 float __cdecl gm_GetCannonPowerScale(char*);
 int __cdecl fcn_005e8de0(float, float, float*);
-void __cdecl fcn_005e8e50(float, float, char*, float*);
+void __cdecl d3_CalcSpeedRangeFromMass(float, float, char*, float*);
 int __cdecl fcn_005ea4d0(void*, void*, void*, void*, void*, void*, void*, void*, void*);
 int __cdecl _ftol(void);
 float __cdecl fcn_004f0eb0(int, int, int);
 int __cdecl fcn_004f0ff0(int, int, int, int, void*, void*);
-int __cdecl fcn_0050b810(int, unsigned char);
+int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 
 extern float g_662cf8;
@@ -82,7 +82,7 @@ int __cdecl fcn_004a6210(char* actor, char* a1, int a2)
 	row = gm_RandomMod(row + 1) & 0xffff;
 	fcn_005e8de0(g_6660f4, *(float*) (col * 0xc + 0x665290), entry);
 	off = col * 0xc;
-	fcn_005e8e50(*(float*) (off + 0x665288),
+	d3_CalcSpeedRangeFromMass(*(float*) (off + 0x665288),
 		value.level * *(float*) (off + 0x66528c), (char*) entry, range);
 	bounds[0] = range[0];
 	bounds[1] = range[1];
@@ -94,7 +94,7 @@ int __cdecl fcn_004a6210(char* actor, char* a1, int a2)
 	spread = fcn_004f0eb0(col, state, row + 1);
 	if (spread > *(float*) (p + 2 + row)) return 0;
 	if (fcn_004f0ff0((int) actor, col, state, row + 1, &res.amount, &res.cost) == 0) return 0;
-	value.cash = fcn_0050b810(*(int*) (actor + 0x178), g_773d75);
+	value.cash = gm_SumQueryEntryValues(*(int*) (actor + 0x178), g_773d75);
 	if ((int) (value.cash * 0.25f) < res.cost) return 0;
 	g_772850 = origin[0];
 	g_772854 = origin[1];

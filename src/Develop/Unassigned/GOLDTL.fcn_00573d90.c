@@ -7,18 +7,18 @@ typedef struct {
 	float x;
 	int y;
 	int z;
-} Vec573d90;
+} D3_VEC3_BUILD;
 // SIZE 0xc
 
-void __cdecl d3_AnimateObjectTransform(char*, char*, Vec573d90*, int, int);
+void __cdecl d3_AnimateObjectTransform(char*, char*, D3_VEC3_BUILD*, int, int);
 
-void __cdecl fcn_00573d90(char* e, char* b)
+void __cdecl d3_AnimateBuildStage(char* obj, char* buildAction)
 {
-	Vec573d90 v;
+	D3_VEC3_BUILD offset;
 
-	v.x = *(float*) (e + 0x84) + g_665e30;
-	v.y = *(int*) (e + 0x88);
-	v.z = *(int*) (e + 0x8c);
-	d3_AnimateObjectTransform(e, e + 0x4c, &v, 0x46, 0x20);
-	b[0xd0]--;
+	offset.x = *(float*) (obj + 0x84) + g_665e30;
+	offset.y = *(int*) (obj + 0x88);
+	offset.z = *(int*) (obj + 0x8c);
+	d3_AnimateObjectTransform(obj, obj + 0x4c, &offset, 0x46, 0x20);
+	buildAction[0xd0]--;
 }

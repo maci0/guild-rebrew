@@ -14,12 +14,12 @@ typedef struct {
 } Owner;
 // SIZE 0x44
 
-unsigned char* __cdecl fcn_005b1aa0(int);
+unsigned char* __cdecl hp_LookupProdEntry(int);
 
-void __cdecl fcn_005b1980(int a, Owner* o)
+void __cdecl hp_UpdateProdSetting(int building, Owner* setting)
 {
-	unsigned char* p;
-	unsigned short* q;
+	unsigned char* prod_entry;
+	unsigned short* prod_ids;
 	int n;
 	int k;
 	int found;
@@ -30,25 +30,25 @@ void __cdecl fcn_005b1980(int a, Owner* o)
 	int step;
 	int j;
 
-	p = fcn_005b1aa0(a);
-	if (p == 0) {
+	prod_entry = hp_LookupProdEntry(building);
+	if (prod_entry == 0) {
 		return;
 	}
-	q = (unsigned short*) (p + 1);
-	for (n = 0; n < 10; n++, q++) {
-		if (*q != 0) {
+	prod_ids = (unsigned short*) (prod_entry + 1);
+	for (n = 0; n < 10; n++, prod_ids++) {
+		if (*prod_ids != 0) {
 			found = 0;
-			id = *q;
+			id = *prod_ids;
 			for (k = 0; k < 7; k++) {
-				if (*q == o->e[k].id) {
+				if (*prod_ids == setting->e[k].id) {
 					found = 1;
 				}
 			}
 			if (!found) {
 				for (k = 0; k < 7; k++) {
-					if (o->e[k].id == 0) {
-						o->e[k].id = id;
-						o->e[k].pct = 0xe;
+					if (setting->e[k].id == 0) {
+						setting->e[k].id = id;
+						setting->e[k].pct = 0xe;
 						break;
 					}
 				}
@@ -58,9 +58,9 @@ void __cdecl fcn_005b1980(int a, Owner* o)
 	total = 0;
 	cnt = 0;
 	for (k = 0; k < 7; k++) {
-		if (o->e[k].id != 0) {
+		if (setting->e[k].id != 0) {
 			cnt++;
-			total += o->e[k].pct;
+			total += setting->e[k].pct;
 		}
 	}
 	if (total == 100) {
@@ -75,9 +75,9 @@ void __cdecl fcn_005b1980(int a, Owner* o)
 		step = 1;
 	}
 	for (j = 0; rem != 0 && cnt != 0; j = (j + 1) % 7) {
-		if (o->e[j].id != 0) {
-			if (o->e[j].pct + step > -1 && o->e[j].pct + step < 101) {
-				o->e[j].pct += step;
+		if (setting->e[j].id != 0) {
+			if (setting->e[j].pct + step > -1 && setting->e[j].pct + step < 101) {
+				setting->e[j].pct += step;
 				rem--;
 			}
 		}

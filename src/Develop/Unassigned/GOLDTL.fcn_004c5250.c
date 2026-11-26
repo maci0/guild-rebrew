@@ -3,7 +3,7 @@
 
 
 /* ADDRESS: GOLDTL 0x004c5250 */
-int __cdecl fcn_004c5250(int a1, unsigned short a2, int a3)
+int __cdecl cm_SendProdObjekt(int a1, unsigned short a2, int a3)
 {
 	char buf[0x9c];
 

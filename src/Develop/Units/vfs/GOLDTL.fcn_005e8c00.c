@@ -13,7 +13,7 @@ extern float g_77658c;
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, int);
 
-int __cdecl fcn_005e8c00(int fh)
+int __cdecl ls_SaveWeatherState(int fh)
 {
 	if (vfs_fwrite(&g_7763a0, 4, 1, fh) <= 0) {
 		return 0;

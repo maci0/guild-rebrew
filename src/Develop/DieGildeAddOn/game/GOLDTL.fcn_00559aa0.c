@@ -27,9 +27,9 @@ extern double __cdecl gm_RandomFloat01(void);
 extern void __cdecl gm_ResolveEntityById(void** out, int a, int b, int item);
 extern int __cdecl gm_IsEntityAtBuilding(void* entity, void* record);
 extern int __cdecl cm_RequestChangeBits(unsigned int handle, int a, int b, int c, int d);
-extern void __cdecl fcn_004c6650(unsigned int handle);
+extern void __cdecl cm_RequestCancelEntityEvent(unsigned int handle);
 extern void __cdecl cm_SendCancelCharacterActions(unsigned int handle);
-extern void __cdecl fcn_004c5da0(int house, int item, int a, int b, int c, char* name);
+extern void __cdecl ch_StartMovement(int house, int item, int a, int b, int c, char* name);
 extern void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 extern void* __cdecl gm_FindNextFilteredEntity(void);
 extern int __cdecl he_PickNearestWirtshaus(char* entity, int count, void** list, int* out, int* flag);
@@ -84,7 +84,7 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 				return;
 			job->flags &= 0xbf;
 			cm_RequestChangeBits(*(unsigned int*) (entity + 4), 0x1c8, 4, 0x1000, 0);
-			fcn_004c6650(*(unsigned int*) (entity + 4));
+			cm_RequestCancelEntityEvent(*(unsigned int*) (entity + 4));
 			job->pada[2] = (char) 0xff;
 		}
 		type = job->f8;
@@ -158,7 +158,7 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 	job->f8 = (unsigned char) (job->f8 + 1);
 	type = ((GebProt_559aa0*) lpGebaeudePROT)[(unsigned char) *record].type;
 	if (type != 0x16 && type != 7 && type != 0x0f)
-		fcn_004c5da0(job->house, job->item, -1, 0, 1, (char*) 0x6a6038);
+		ch_StartMovement(job->house, job->item, -1, 0, 1, (char*) 0x6a6038);
 	else
-		fcn_004c5da0(job->house, job->item, -1, 0, 0, (char*) 0x6a6038);
+		ch_StartMovement(job->house, job->item, -1, 0, 0, (char*) 0x6a6038);
 }

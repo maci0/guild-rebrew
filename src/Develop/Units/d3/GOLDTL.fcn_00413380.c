@@ -11,7 +11,7 @@ extern int g_67a370;
 #define OBJ_SND_OFF 0x20c
 #endif
 
-void __cdecl fcn_00433780(void*);
+void __cdecl d3_FreeObjectAnimation(void*);
 void __cdecl fcn_00418860(char*);
 
 /* ADDRESS: GOLD 0x00411c10 */
@@ -20,7 +20,7 @@ void __cdecl fcn_00413380(void)
 	if ((*(char**)&d3_ActiveCameraAnimation) != 0) {
 		d3_CameraAnimating = 1;
 		if ((*(char**)&d3_ActiveCameraAnimation)[0x2d] & 0x20) {
-			fcn_00433780(d3_ActiveCamera);
+			d3_FreeObjectAnimation(d3_ActiveCamera);
 			d3_CameraAnimating = 0;
 			(*(char**)&d3_ActiveCameraAnimation) = 0;
 		}

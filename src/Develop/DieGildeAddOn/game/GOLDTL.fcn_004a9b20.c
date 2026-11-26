@@ -21,7 +21,7 @@ int __cdecl fcn_004a8ed0(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction029Predicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction02aPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction02bPredicate(char*, char*, int, char*, int);
-int __cdecl fcn_004a91a0(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction02cPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction02dPredicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a96f0(char*, char*, int, char*, int);
 int __cdecl fcn_004a9780(char*, char*, int, char*, int);
@@ -159,7 +159,7 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 		r = ai_CheckAction02bPredicate(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x2c:
-		r = fcn_004a91a0(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction02cPredicate(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x2d:
 		r = ai_CheckAction02dPredicate(a0, actorEntity, (int) &c, a3, a4);

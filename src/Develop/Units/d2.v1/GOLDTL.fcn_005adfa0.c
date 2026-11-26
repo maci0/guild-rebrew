@@ -24,7 +24,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_005add40(void);
 
-void __cdecl fcn_005adfa0(int a)
+void __cdecl d2_OpenAngriffDialog(int a)
 {
 	Req req;
 

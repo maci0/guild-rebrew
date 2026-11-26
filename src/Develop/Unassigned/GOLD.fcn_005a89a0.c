@@ -2,7 +2,7 @@
 /* fcn_005a89a0: load edx=a; call fcn_005a8600(*(int*)(edx+1)); if eax!=0 call fcn_005b1980(edx, eax). */
 
 int __cdecl fcn_005a8600(int);
-int __cdecl fcn_005b1980(void*, int);
+int __cdecl hp_UpdateProdSetting(void*, int);
 
 /* MSVC6 /O2 homes `a` in esi across the call. The image keeps it in edx. */
 void __cdecl fcn_005a89a0(char* a)
@@ -18,7 +18,7 @@ void __cdecl fcn_005a89a0(char* a)
 		je done
 		push eax
 		push edx
-		call fcn_005b1980
+		call hp_UpdateProdSetting
 		add esp, 8
 	done:
 	}

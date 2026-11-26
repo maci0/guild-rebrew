@@ -17,7 +17,7 @@ void __cdecl gm_AddTime(SIM_CLOCK_489920* clock, int arg2, int arg3, int arg4);
 void __cdecl cm_SendCopyEntityData(int msg);
 
 /* ADDRESS: GOLDTL 0x00489920 */
-void __cdecl fcn_00489920(char* e)
+void __cdecl ai_RepairMeisterObjects(char* e)
 {
 	char* o;
 	char* q;

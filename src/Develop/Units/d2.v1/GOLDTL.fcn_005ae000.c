@@ -3,7 +3,7 @@
 extern int g_100f1dc, g_14abaac, g_14ce8e0;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-int __cdecl fcn_00525fb0(char* obj);
+int __cdecl d2_CheckOwnerBlocked(char* obj);
 void __cdecl fcn_0052a0c0(char* obj, int a);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -32,7 +32,7 @@ int __cdecl fcn_005ae000(char* obj)
 	int r;
 	int idx;
 
-	r = fcn_00525fb0(obj);
+	r = d2_CheckOwnerBlocked(obj);
 	if (r != 0) {
 		return r;
 	}

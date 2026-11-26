@@ -11,7 +11,7 @@ typedef struct {
 } Stamp;
 #pragma pack()
 extern int g_1007cd0, g_6a3760, g_774954;
-void __cdecl fcn_00538060(void);
+void __cdecl gm_AdvanceGameClock(void);
 int __cdecl srv_SeedRandom(int seed);
 int __cdecl tb_IsCallbackPaused(void* fn);
 int __cdecl tb_SetCallbackPaused(void* fn, int flag);
@@ -22,11 +22,11 @@ void __cdecl fcn_004b3d40(int a, int b);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_005167c0(void* ent, int v);
+void __cdecl d3_UpdateBuildingView(void* ent, int v);
 void __cdecl fcn_0052a3a0(void* t, int flag);
 void __cdecl d3_UpdateBuildingWimpelTextures(int idx);
 void __cdecl fcn_00533a40(void* p);
-void __cdecl fcn_005e2510(void);
+void __cdecl gm_ApplyGameSettings(void);
 
 /* ADDRESS: GOLDTL 0x004c9550 */
 int __cdecl cm_ExSysMessage(char* pkt, char* out)
@@ -62,16 +62,16 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 			g_77494c = (g_77494c & 0xfffffff7) | 0x10;
 		break;
 	case 3:
-		v = tb_IsCallbackPaused((void*) fcn_00538060);
+		v = tb_IsCallbackPaused((void*) gm_AdvanceGameClock);
 		if (v == 0)
-			tb_SetCallbackPaused((void*) fcn_00538060, 1);
+			tb_SetCallbackPaused((void*) gm_AdvanceGameClock, 1);
 		*(int*) 0x7f4c00 = *(int*) (buf + 0x11);
 		*(unsigned short*) 0x7f4c04 = *(unsigned short*) (buf + 0x15);
 		*(int*) 0x7f4c06 = *(int*) (buf + 0x17);
 		*(int*) 0x7f4c0a = *(int*) (buf + 0x1b);
 		*(Stamp*) 0x7e1f70 = *(Stamp*) 0x7f4c00;
 		if (v == 0)
-			tb_SetCallbackPaused((void*) fcn_00538060, 0);
+			tb_SetCallbackPaused((void*) gm_AdvanceGameClock, 0);
 		break;
 	case 4:
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (buf + 0x11));
@@ -79,9 +79,9 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 			r = fcn_00502cd0(*(int*) ((char*) e + 0x5d), 1, 1,
 			                 *(int*) (buf + 0x15));
 			if (r != 0)
-				fcn_005167c0(e, *r);
+				d3_UpdateBuildingView(e, *r);
 			else
-				fcn_005167c0(e, 0xfd);
+				d3_UpdateBuildingView(e, 0xfd);
 		}
 		break;
 	case 5:
@@ -164,7 +164,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 		*(int*) 0x68a9cc = v;
 		*(int*) 0x68a9c8 = *(int*) (0x664ea8 + v * 4);
 		fcn_00533a40(*(void**) (0x14ac528 + v * 4));
-		fcn_005e2510();
+		gm_ApplyGameSettings();
 		break;
 	case 19:
 		*(int*) 0x68a9dc = *(int*) (buf + 0x11);

@@ -16,7 +16,7 @@ typedef struct
 } Rec18;
 // SIZE 0x18
 #include "client_data.h"
-extern char g_68da68[];
+extern Rec18_68da68 g_68da68[];
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl he_NotifyOfficeAction(void* a1, void* a2);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -86,8 +86,8 @@ int __cdecl fcn_004e8360(char* requestData)
 					k++;
 				} while ((int) ip < (int) 0x9a94f4);
 			}
-			if (*(unsigned char*) (g_68da68 + ((Rec18*) amt_OfficeSlots)[i].f08 * 0x18 + 8) >=
-			    *(unsigned char*) (g_68da68 + *(unsigned char*) (ent + 0x166) * 0x18 + 8))
+			if (*(unsigned char*) ((char*)g_68da68 + ((Rec18*) amt_OfficeSlots)[i].f08 * 0x18 + 8) >=
+			    *(unsigned char*) ((char*)g_68da68 + *(unsigned char*) (ent + 0x166) * 0x18 + 8))
 				*(unsigned char*) (ent + 0x167) = ((Rec18*) amt_OfficeSlots)[i].f08;
 			bit = ((Rec18*) amt_OfficeSlots)[i].f08;
 			*(unsigned char*) (ent + 0x166) = bit;
@@ -100,7 +100,7 @@ int __cdecl fcn_004e8360(char* requestData)
 			} else if (((Rec18*) amt_OfficeSlots)[i].f08 == 0x1b) {
 				*(int*) (ent + 0x1cc) |= 0x100;
 			}
-			if (*(int*) (g_68da68 + ((Rec18*) amt_OfficeSlots)[i].f08 * 0x18 + 0x10) != 0) {
+			if (*(int*) ((char*)g_68da68 + ((Rec18*) amt_OfficeSlots)[i].f08 * 0x18 + 0x10) != 0) {
 				k = 0;
 				p = (unsigned char*) 0x9a9228;
 				do {

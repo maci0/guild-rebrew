@@ -44,7 +44,7 @@ void __cdecl fcn_005156a0(void);
 void __cdecl fcn_00515ef0(void);
 
 /* ADDRESS: GOLDTL 0x005167c0 */
-void __cdecl fcn_005167c0(unsigned char* building, int queryId)
+void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 {
 	int mode;
 	int type;

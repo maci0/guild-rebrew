@@ -32,7 +32,7 @@ void __cdecl fcn_00456e50(void)
 	fcn_004372d0(0xff, 0, 0, 0, 1);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 7, 0);
 	((Texture456e50Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0);
-	if ((*(char *)&g_1040600) != 0) {
+	if (g_1040600 != 0) {
 		for (p = g_6b86ec; p != 0; p = *(char**) (p + 0x1f0)) {
 			fcn_00456ef0(p);
 		}

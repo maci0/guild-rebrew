@@ -2,7 +2,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004e8b40(int kind, int* out);
+int __cdecl amt_GetRoleTemplate(int kind, int* out);
 int __cdecl amt_FindOfficeSlotsByKind(int kind, int max, void* out);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned int* a2,
@@ -42,7 +42,7 @@ int __cdecl fcn_00493200(char* actorEntity, char* a2)
 		if (*(unsigned char*) (actorEntity + 0x166) == 0) {
 			goto other;
 		}
-		if (fcn_004e8b40(*(unsigned char*) (actorEntity + 0x166), rec) == 0) {
+		if (amt_GetRoleTemplate(*(unsigned char*) (actorEntity + 0x166), rec) == 0) {
 			return 0;
 		}
 		count = amt_FindOfficeSlotsByKind(rec[1], 6, slots);

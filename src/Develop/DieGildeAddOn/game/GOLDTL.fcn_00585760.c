@@ -33,7 +33,7 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
-int __cdecl fcn_004ecf00(char*, int*, int*, int);
+int __cdecl he_GetActionProgress(char*, int*, int*, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_SendCopyEntityData(Msg*);
 
@@ -43,7 +43,7 @@ int __cdecl he_SendEvent096(char* e, int* list, int idx)
 	int y;
 	Msg msg;
 
-	if (fcn_004ecf00(e, &x, &y, 0) != 0) {
+	if (he_GetActionProgress(e, &x, &y, 0) != 0) {
 		return 0;
 	}
 	memset(&msg, 0, sizeof(msg));

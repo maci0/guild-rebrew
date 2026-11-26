@@ -1,7 +1,7 @@
 extern char g_679060[];
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int __cdecl fcn_005dac90(char*, int*);
+int __cdecl amt_HandleOfficeSupport(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f9e50 */
@@ -22,7 +22,7 @@ int __cdecl fcn_004f9e50(char* e, int* s)
 		if (*(int*) (e + 0x1cc) & 0x80000)
 			return 1;
 		if (*s == 3)
-			r = fcn_005dac90(e, s);
+			r = amt_HandleOfficeSupport(e, s);
 		return r | 2;
 	}
 	if (*s == 4 || *s == 2) {
@@ -33,7 +33,7 @@ int __cdecl fcn_004f9e50(char* e, int* s)
 		if (*(int*) (p + 0x1cc) & 0x80000)
 			return 1;
 		if (*s == 4)
-			r = fcn_005dac90(e, s);
+			r = amt_HandleOfficeSupport(e, s);
 		else if (e[2] == 6)
 			io_FormatTextBuffer((char*) s + 0x14, (int) "%s", 0x1e07);
 		return r | 10;

@@ -21,7 +21,7 @@ extern char* g_7746c4;
 extern unsigned char* g_7746c8;
 
 void __cdecl he_InitEventSystem(void);
-void __cdecl fcn_00538060(void);
+void __cdecl gm_AdvanceGameClock(void);
 #include "client_timer.h"
 void __cdecl fcn_0053f100(void);
 void __cdecl cm_InitCrimeRecords(void);
@@ -35,7 +35,7 @@ void __cdecl fcn_005338a0(void);
 void __cdecl fcn_005c80c0(void);
 void __cdecl fcn_004bbd20(void);
 void __cdecl fcn_0040bdc0(void);
-void __cdecl fcn_00591c40(void);
+void __cdecl d2_ResetBookmarkSlots(void);
 void __cdecl fcn_00510900(void);
 void __cdecl fcn_004e71a0(void);
 
@@ -49,8 +49,8 @@ void __cdecl gm_InitGameSession(void)
 	g_774958 = 0;
 	g_774965 = 0;
 	(*(int*)g_68a9cc) = 2;
-	tb_OpenFunction(fcn_00538060, 0x47);
-	tb_SetCallbackPaused(fcn_00538060, 1);
+	tb_OpenFunction(gm_AdvanceGameClock, 0x47);
+	tb_SetCallbackPaused(gm_AdvanceGameClock, 1);
 	fcn_0053f100();
 	cm_InitCrimeRecords();
 	gm_ResetCityStats();
@@ -76,7 +76,7 @@ void __cdecl gm_InitGameSession(void)
 	fcn_005c80c0();
 	fcn_004bbd20();
 	fcn_0040bdc0();
-	fcn_00591c40();
+	d2_ResetBookmarkSlots();
 	fcn_00510900();
 	fcn_004e71a0();
 }

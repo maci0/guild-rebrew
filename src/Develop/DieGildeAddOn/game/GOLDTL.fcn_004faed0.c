@@ -23,7 +23,7 @@ float __cdecl fcn_004fc3a0(int*);
 double __cdecl gm_CalcLaw00And01Factor(int*);
 
 /* ADDRESS: GOLDTL 0x004faed0 */
-void __cdecl fcn_004faed0(float* out)
+void __cdecl gm_CollectOccupancyStats(float* out)
 {
 	char* rec;
 	char* ent;

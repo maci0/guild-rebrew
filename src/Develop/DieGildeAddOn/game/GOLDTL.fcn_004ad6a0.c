@@ -34,7 +34,7 @@ extern char g_7f4ca0[];
 extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 
 int __cdecl amt_FindOfficeSlotByType(int id, int* out);
 char* __cdecl amt_GetOfficeHolderRecord(int kind);
@@ -47,7 +47,7 @@ void __cdecl amt_SendSpecialOfficeSlot(int a1);
 /* Rates every listed entity against the office record, then hands the highest
  * scoring owner to the office and notifies the other guild masters. */
 /* ADDRESS: GOLDTL 0x004ad6a0 */
-void __cdecl fcn_004ad6a0(void)
+void __cdecl amt_AssignSpecialOffices(void)
 {
 	Hit4ad6a0 hits[4];
 	int info[6];

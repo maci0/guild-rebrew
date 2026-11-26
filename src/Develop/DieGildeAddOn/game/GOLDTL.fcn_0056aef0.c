@@ -21,7 +21,7 @@ extern unsigned char g_773d75;
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern char* __cdecl gm_LookupEntityRecordById(int id);
 extern void __cdecl cm_SendCancelCharacterActions(int a1);
-extern void __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
+extern void __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 extern void __cdecl fcn_00529160(char*, char*, unsigned int, char*);
 extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 extern int __cdecl gm_IsEntityAtBuilding(char*, char*);
@@ -76,7 +76,7 @@ void __cdecl fcn_0056aef0(char* action)
 			e = (char*)gm_LookupEntityRecordById(((int*)(action + 0x8c))[n]);
 			if (e != 0) {
 				cm_SendCancelCharacterActions(*(int*)(e + 4));
-				fcn_004c5da0(*(int*)(e + 4), *(int*)(h + 1), -1, 0, 1, "GebSpionage");
+				ch_StartMovement(*(int*)(e + 4), *(int*)(h + 1), -1, 0, 1, "GebSpionage");
 				fcn_00529160(h, 0, *(unsigned short*)e, action);
 			}
 		}
@@ -156,7 +156,7 @@ void __cdecl fcn_0056aef0(char* action)
 				t += gm_GetScaledEntitySkill(e, 2);
 				u = e;
 				cm_SendCancelCharacterActions(((int*)(action + 0x8c))[n]);
-				fcn_004c5da0(((int*)(action + 0x8c))[n], *(int*)(h + 1), *(int*)(q + 2), 0, 0, "GebSpionage");
+				ch_StartMovement(((int*)(action + 0x8c))[n], *(int*)(h + 1), *(int*)(q + 2), 0, 0, "GebSpionage");
 				fcn_00529160(h, 0, *(unsigned short*)e, 0);
 				k++;
 			}
@@ -228,7 +228,7 @@ void __cdecl fcn_0056aef0(char* action)
 			if (e != 0) {
 				cm_SendCancelCharacterActions(((int*)(action + 0x8c))[n]);
 				if (h != 0) {
-					fcn_004c5da0(((int*)(action + 0x8c))[n], *(int*)(h + 1), *(int*)(q + 2), 0, 0, "GebSpionage");
+					ch_StartMovement(((int*)(action + 0x8c))[n], *(int*)(h + 1), *(int*)(q + 2), 0, 0, "GebSpionage");
 				}
 				fcn_00529160(0, 0, *(unsigned short*)e, 0);
 			}

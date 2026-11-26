@@ -94,7 +94,7 @@ char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl plt_FindPlantInfo(int);
-void* __cdecl fcn_00503d10(int);
+void* __cdecl gm_FindCityItemHolder(int);
 void __cdecl fcn_004849b0(char*, char*, char*);
 int __cdecl fcn_00486640(char*, int*, int);
 void __cdecl fcn_004868d0(char*, int*);
@@ -243,7 +243,7 @@ found:
 	if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
 		goto scan;
 	}
-	v = (int) fcn_00503d10(g_100d0c0[i].goods_id);
+	v = (int) gm_FindCityItemHolder(g_100d0c0[i].goods_id);
 	if (v == 0) {
 		goto scan;
 	}
@@ -285,7 +285,7 @@ scan:
 		if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
 			continue;
 		}
-		v = (int) fcn_00503d10(g_100d0c0[i].goods_id);
+		v = (int) gm_FindCityItemHolder(g_100d0c0[i].goods_id);
 		if (v == 0) {
 			continue;
 		}
@@ -328,7 +328,7 @@ after:
 		if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
 			continue;
 		}
-		v = (int) fcn_00503d10(g_100d0c0[i].goods_id);
+		v = (int) gm_FindCityItemHolder(g_100d0c0[i].goods_id);
 		if (v == 0) {
 			continue;
 		}

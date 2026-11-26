@@ -16,7 +16,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, unsigned int, int);
 int __cdecl he_FreeAction(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_004c5da0(int, unsigned int, int, int, int, int);
+void __cdecl ch_StartMovement(int, unsigned int, int, int, int, int);
 int __cdecl gm_AddTime(int*, int, int, int);
 float __cdecl fcn_00507e70(char*, char*, int);
 double __cdecl gm_RandomFloat01(void);
@@ -61,7 +61,7 @@ int __cdecl he_RunHauchDesVerfalls(char* event)
 			*(int*) (event + 0x70) = s;
 			return;
 		}
-		fcn_004c5da0(*(int*) (event + 0xb4), *(unsigned int*) (q + 1), s, 0, 1, 0x6a7ef4);
+		ch_StartMovement(*(int*) (event + 0xb4), *(unsigned int*) (q + 1), s, 0, 1, 0x6a7ef4);
 		return *(int*) (event + 0x70) = *(int*) (event + 0x70) + 1;
 	case 2:
 		gm_StartFilteredEntitySearch(1, 1, *(int*) (event + 0xac));
@@ -99,7 +99,7 @@ int __cdecl he_RunHauchDesVerfalls(char* event)
 			*(int*) (event + 0x70) = s;
 			return;
 		}
-		fcn_004c5da0(*(int*) (event + 0xb4), *(unsigned int*) (o + 1), s, 0, 0, 0x6a7ef4);
+		ch_StartMovement(*(int*) (event + 0xb4), *(unsigned int*) (o + 1), s, 0, 0, 0x6a7ef4);
 		return *(int*) (event + 0x70) = *(int*) (event + 0x70) + 1;
 	case 4:
 		m = gm_LookupEntityRecordById(*(int*) (event + 0xb4));

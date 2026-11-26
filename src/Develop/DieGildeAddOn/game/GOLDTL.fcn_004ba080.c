@@ -44,7 +44,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 
@@ -74,7 +74,7 @@ int __cdecl fcn_004ba080(Req* r)
 	if (o == 0) {
 		return 1;
 	}
-	if (fcn_005c6270(o, 0x290) != 0) {
+	if (gm_HasActiveSpecialObject(o, 0x290) != 0) {
 		return 0x400;
 	}
 	e = gm_StartFilteredEntitySearch(1, 3, *(unsigned short*) o);

@@ -145,7 +145,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 		remain--;
 		n = 0;
 		{
-			for (h = g_slot_table; (int) h < (int) (g_slot_table + 0x65400);
+			for (h = (char*) g_slot_table; (int) h < (int) (g_slot_table + 0x65400);
 			    h += 0x21c) {
 				if (n >= p->pcount || 4 <= n) {
 					break;

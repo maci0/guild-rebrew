@@ -8,7 +8,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char __cdecl d3_GridPointToWorld(void*, int, int, float*);
 
 /* ADDRESS: GOLDTL 0x004d3070 */
-float __cdecl fcn_004d3070(char* self, int x, int z, float range)
+float __cdecl gm_ScorePositionBalance(char* self, int x, int z, float range)
 {
 	char* e;
 	void* g;

@@ -22,7 +22,7 @@ int __cdecl fcn_00526120(int, int);
 void __cdecl d2_SetGroupVisibility(int, int);
 int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl fcn_00507400(int, int);
-void __cdecl fcn_004c6470(int, int);
+void __cdecl cm_RequestSetEntityLevel(int, int);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_00471e30(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -143,7 +143,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
                             }
                             io_FormatTextBuffer(v13, 0x1d37, -v7_cost, v14 + v10);
                             if (fcn_00526120((int) v13, 1)) {
-                                fcn_004c6470(*(int*) ((char*) a0 + 4), v14);
+                                cm_RequestSetEntityLevel(*(int*) ((char*) a0 + 4), v14);
                                 fcn_004c6ae0(*(int*) ((char*) a0 + 4), v7_cost);
                                 g_774654 = 1;
                                 v19 = 0x10;

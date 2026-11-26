@@ -11,10 +11,10 @@ extern void __cdecl fcn_0041d850(void);
 extern char __cdecl fcn_00439020(void*, HWND, int);
 extern void __cdecl d3_CreateSceneCameras(void);
 extern void __cdecl fcn_00411820(HWND, int, int);
-extern void __cdecl fcn_00410610(int);
+extern void __cdecl io_SetMouseSensitivity(int);
 extern int __cdecl fcn_005386e0(void);
 extern void __cdecl fcn_005386c0(int);
-extern void __cdecl fcn_005e2510(void);
+extern void __cdecl gm_ApplyGameSettings(void);
 extern void __cdecl d3_ApplyGraphicsOptions(void);
 extern void __cdecl fcn_0045bf50(char*);
 extern void __cdecl fcn_00449aa0(char*);
@@ -27,7 +27,7 @@ extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6acf80;
 extern int g_6acf84;
-extern int g_774940;
+extern HWND g_774940;
 
 typedef struct Gfx538 {
 	int w2;
@@ -164,11 +164,11 @@ int __cdecl fcn_00538850(int topmost)
 				fcn_005386c0(0);
 		}
 		fcn_00411820((HWND) g_774940, main_Instance, 1);
-		fcn_00410610(0x50);
+		io_SetMouseSensitivity(0x50);
 	} else {
 		fcn_00411820((HWND) g_774940, main_Instance, 6);
 	}
-	fcn_005e2510();
+	gm_ApplyGameSettings();
 	fcn_0045bf50((char*) 0x6a38f8);
 	*(int*) 0x67ac98 = *(int*) 0x6a38ec;
 	*(int*) 0x67ac9c = *(int*) 0x6a38f0;
@@ -185,7 +185,7 @@ int __cdecl fcn_00538850(int topmost)
 	if (!d2_Open((HWND) g_774940, g_6acf80, g_6acf84,
 			(char*) 0x6a3550, text))
 		return 0;
-	g_1015ce0 = g_774940;
+	g_1015ce0 = (int) g_774940;
 	d2_MouseRightBoundary = g_1040494 - 8;
 	d2_MouseBottomBoundary = d2_ScreenHeight;
 	fcn_00473df0();

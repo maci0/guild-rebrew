@@ -2,7 +2,7 @@
 #include "client_types.h"
 
 int __cdecl fcn_004e6f10(int);
-int __cdecl fcn_004e8b40(int, Rec18_68da68*);
+int __cdecl amt_GetRoleTemplate(int, Rec18_68da68*);
 void __cdecl fcn_004f4830(int, int*);
 int __cdecl gm_MapEntityStatRange(int);
 
@@ -70,7 +70,7 @@ float __cdecl fcn_004e7990(int a0, int a1, unsigned int a2, int a3)
 		}
 	}
 	if (a3 != 0) {
-		fcn_004e8b40(*(unsigned char*) (a1 + 0x166), &v9);
+		amt_GetRoleTemplate(*(unsigned char*) (a1 + 0x166), &v9);
 		fcn_004f4830(2, v10);
 		bonus = *(float*) ((char*) &v9 + 0x14);
 		if (v10[6] == 2) {

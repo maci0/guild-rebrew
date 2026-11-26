@@ -24,7 +24,7 @@ typedef union
 extern float g_664168;
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl fcn_00529160(int, int, int, char*);
-extern int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
+extern int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 extern int __cdecl fcn_004c5620(int, char*);
 extern int __cdecl cm_GetCommandStatus(int);
 extern char* __cdecl cm_GetCommandResult(int);
@@ -87,7 +87,7 @@ void __cdecl fcn_0056b700(char* obj)
 					rec = gm_LookupEntityRecordById(*(int*) iter);
 					if (rec != 0) {
 						fcn_00529160(0, 0, *(unsigned short*) rec, obj);
-						fcn_004c5da0(*(int*) iter, -1, -1, obj + 0xac, 1, (char*) 0x6a6aa0);
+						ch_StartMovement(*(int*) iter, -1, -1, obj + 0xac, 1, (char*) 0x6a6aa0);
 						*(int*) (obj + 0xe4) += *(unsigned char*) (rec + 0x82);
 						count++;
 					}
@@ -141,7 +141,7 @@ void __cdecl fcn_0056b700(char* obj)
 					rec = gm_LookupEntityRecordById(*(int*) iter);
 					if (rec != 0) {
 						if (ent != 0)
-							fcn_004c5da0(*(int*) (rec + 4), *(int*) (ent + 1), -1, 0, 0, (char*) 0x6a6aa0);
+							ch_StartMovement(*(int*) (rec + 4), *(int*) (ent + 1), -1, 0, 0, (char*) 0x6a6aa0);
 						fcn_00529160(0, 0, *(unsigned short*) rec, 0);
 					}
 				}

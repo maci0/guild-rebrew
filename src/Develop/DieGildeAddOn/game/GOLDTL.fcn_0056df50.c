@@ -24,7 +24,7 @@ void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl he_GetEntityReturnTarget(char*, int*, int*);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_RunInitBetrieb(char* u)
@@ -65,7 +65,7 @@ void __cdecl he_RunInitBetrieb(char* u)
 		}
 		cm_SendSetGebBesitzer(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
 		if (he_GetEntityReturnTarget(p, &site, &target) != 0) {
-			fcn_004c5da0(*(int*) (p + 4), site, target, 0, 0, g_6a6b70);
+			ch_StartMovement(*(int*) (p + 4), site, target, 0, 0, g_6a6b70);
 		}
 	case -2:
 	case -1:

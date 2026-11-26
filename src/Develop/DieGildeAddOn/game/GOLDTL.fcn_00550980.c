@@ -44,7 +44,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
-void __cdecl fcn_00550980(char* u)
+void __cdecl he_RunMeisterpruefungExam(char* u)
 {
 	int t;
 	struct msg m;

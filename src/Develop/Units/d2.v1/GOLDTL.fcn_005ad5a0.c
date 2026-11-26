@@ -16,7 +16,7 @@ typedef struct
 } Req;
 // SIZE 0x50
 
-int __cdecl fcn_00525fb0(char*);
+int __cdecl d2_CheckOwnerBlocked(char*);
 void __cdecl fcn_0052a0c0(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
@@ -29,7 +29,7 @@ void __cdecl fcn_005ad5a0(char* a)
 	Req req;
 	char text[0x80];
 
-	if (fcn_00525fb0(a) != 0) {
+	if (d2_CheckOwnerBlocked(a) != 0) {
 		return;
 	}
 	memset(&req, 0, sizeof(req));

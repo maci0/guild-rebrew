@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern char cm_LastEntityId[];
+extern int cm_LastEntityId;
 extern char g_7f4ca0[];
 
 int __cdecl rand(void);
@@ -41,7 +41,7 @@ int __cdecl fcn_004c7870(int cmd, char* result)
 	if (entity == 0xffff)
 		return 1;
 	off = entity * 0x21c;
-	(*(int*)cm_LastEntityId) = *(int*) (g_7f4ca0 + off + 4);
+	cm_LastEntityId = *(int*) (g_7f4ca0 + off + 4);
 	strncpy(g_7f4ca0 + off + 0x30, (char*) cmd + 0x25, 0x10);
 	entry = gm_GetEntityTableEntry((char*) (g_7f4ca0 + off));
 	if (entry != 0) {

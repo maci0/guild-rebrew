@@ -13,7 +13,7 @@ extern ALCHEMY_DRAW_SLOT g_772f90[3];
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, void* file);
 
-int __cdecl fcn_004edd30(void* file)
+int __cdecl ls_SaveAlchemyDrawSlots(void* file)
 {
 	int i;
 

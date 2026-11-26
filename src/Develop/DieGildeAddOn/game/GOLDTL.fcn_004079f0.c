@@ -44,7 +44,7 @@ void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
 char* __cdecl ch_AttachAni(char*, char*, unsigned char);
 int __cdecl d3_CreateObjectAnimation(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
-void __cdecl fcn_00433780(char*);
+void __cdecl d3_FreeObjectAnimation(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 #include <string.h>
@@ -150,7 +150,7 @@ void __cdecl ch_ExecuteTurn90(char* task)
 	}
 	if (*(int*) (owner + 0x78) != 0
 	    && (*(unsigned char*) (*(char**) (owner + 0x78) + 0x2d) & 0x20) != 0) {
-		fcn_00433780(*(char**) (owner + 0x34));
+		d3_FreeObjectAnimation(*(char**) (owner + 0x34));
 		*(int*) (owner + 0x78) = 0;
 		if (*(char**) (owner + 0x70) == 0) {
 			ch_RemoveQueueEntry(task);
@@ -163,7 +163,7 @@ void __cdecl ch_ExecuteTurn90(char* task)
 			     *(char**) (*(char**) (owner + 0x70) + 0x68));
 		d3_SetObjectRotation(*(char**) (*(char**) (task + 0x14) + 0x34),
 			     (float*) (task + 0x18));
-		fcn_00433780(*(char**) (*(char**) (task + 0x14) + 0x34));
+		d3_FreeObjectAnimation(*(char**) (*(char**) (task + 0x14) + 0x34));
 		*(int*) (owner + 0x78) = 0;
 		ch_RemoveQueueEntry(task);
 		return;

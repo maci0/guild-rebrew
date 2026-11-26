@@ -62,11 +62,11 @@ void __cdecl fcn_00487470(Ent483f20*);
 int __cdecl fcn_00486640(Ent483f20*, PRODUCTION_GOODS_RECORD*, int);
 void __cdecl fcn_004868d0(Ent483f20*, PRODUCTION_GOODS_RECORD*);
 int __cdecl fcn_005b1e40(int);
-void* __cdecl fcn_00503d10(int);
+void* __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(void*, int, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl fcn_0047e220(void*);
-void __cdecl fcn_0047e0e0(Ent483f20*, void*);
+void __cdecl ai_PlanResourceRestock(Ent483f20*, void*);
 void __cdecl ai_CancelBlockedActions(Ent483f20*, int);
 void __cdecl fcn_00529160(int, int, unsigned short, int);
 void __cdecl ai_MeisterCollectTrans(Ent483f20*);
@@ -100,7 +100,7 @@ static __inline int can_start(Ent483f20* e, void* rec, PRODUCTION_GOODS_RECORD* 
 	if (((OBJECT_PROTOTYPE *)type)->value_036 > p->unk_40) {
 		return 0;
 	}
-	obj = fcn_00503d10(p->goods_id);
+	obj = gm_FindCityItemHolder(p->goods_id);
 	if (obj == 0) {
 		return 0;
 	}
@@ -247,7 +247,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 
 after_start:
 	fcn_0047e220(rec);
-	fcn_0047e0e0(e, rec);
+	ai_PlanResourceRestock(e, rec);
 
 	for (prod = g_100d0c0, i = 0; i < g_100b0ac; i++, prod = &g_100d0c0[i]) {
 		if ((prod->flags & 8) != 0) {

@@ -36,7 +36,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00554b90 */
-void __cdecl fcn_00554b90(char* e)
+void __cdecl he_RunAction0x67(char* e)
 {
 	struct { int n; int ids[8]; } L;
 	int vals[8];

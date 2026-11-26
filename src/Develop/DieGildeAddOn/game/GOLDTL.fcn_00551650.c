@@ -7,7 +7,7 @@ int __cdecl fcn_004c5620(char a1, unsigned char* e);
 struct unit* __cdecl he_StartHandlungSearch(int n, ...);
 
 /* ADDRESS: GOLDTL 0x00551650 */
-void __cdecl fcn_00551650(char* e)
+void __cdecl he_AllocLevelTraining(char* e)
 {
 	int entry;
 

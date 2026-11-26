@@ -9,18 +9,18 @@ void __cdecl ai_TryHireWorker(int);
 void __cdecl fcn_00487970(int, int, int);
 void __cdecl fcn_00487c00(int, int, int);
 void __cdecl fcn_00487470(int);
-void __cdecl fcn_00488a20(int);
+void __cdecl ai_FlagWorkerTrainingNeeded(int);
 void __cdecl fcn_00488e10(int);
 void __cdecl fcn_004833a0(int);
 int __cdecl fcn_00486640(int, void *, int);
 void __cdecl fcn_004868d0(int, void *);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_005b1e40(int);
-int __cdecl fcn_00503d10(int);
+int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 void __cdecl fcn_0064d41a(char *, char *, ...);
 void __cdecl fcn_0047e220(int);
-void __cdecl fcn_0047e0e0(int, int);
+void __cdecl ai_PlanResourceRestock(int, int);
 void __cdecl ai_CancelBlockedActions(int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_004831f0(int);
@@ -73,7 +73,7 @@ void __cdecl fcn_00483480(int entityRecord)
 	fcn_00487970((int) rec1, entityRecord, 0x4b);
 	fcn_00487c00((int) rec1, entityRecord, 0x19);
 	fcn_00487470(entityRecord);
-	fcn_00488a20(entityRecord);
+	ai_FlagWorkerTrainingNeeded(entityRecord);
 	fcn_00488e10(entityRecord);
 	fcn_004833a0(entityRecord);
 	mode = (short) g_7f4c04;
@@ -140,7 +140,7 @@ type6:
 					    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) ((char *) sp + 0x20) &&
 					    *(int *) ((char *) sp + 0x40) >=
 						    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
-					    (res = fcn_00503d10(*(int *) sp)) != 0) {
+					    (res = gm_FindCityItemHolder(*(int *) sp)) != 0) {
 						have = gm_eval_SlotVoll(res, *(int *) sp, 1000000);
 						if ((int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) +
 							    *(int *) ((char *) sp + 0x3c) <= have) {
@@ -203,7 +203,7 @@ shuffle:
 		    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) (off + ((int) g_100d0c0 + 0x20)) &&
 		    *(int *) (off + ((int) g_100d0c0 + 0x40)) >=
 			    (int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) &&
-		    (res = fcn_00503d10(typ)) != 0) {
+		    (res = gm_FindCityItemHolder(typ)) != 0) {
 			have = gm_eval_SlotVoll(res, typ, 1000000);
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
 				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
@@ -237,7 +237,7 @@ shuffle:
 		    (int) *(unsigned char *) ((int) rec1 + 0x1d) >= *(int *) (off + ((int) g_100d0c0 + 0x20)) &&
 		    *(int *) (off + ((int) g_100d0c0 + 0x40)) >=
 			    (int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) &&
-		    (res = fcn_00503d10(typ)) != 0) {
+		    (res = gm_FindCityItemHolder(typ)) != 0) {
 			have = gm_eval_SlotVoll(res, typ, 1000000);
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
 				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
@@ -253,7 +253,7 @@ shuffle:
 	*(unsigned short *) (entityRecord + 0x1bc) = 0;
 tail:
 	fcn_0047e220((int) rec1);
-	fcn_0047e0e0(entityRecord, (int) rec1);
+	ai_PlanResourceRestock(entityRecord, (int) rec1);
 	{
 		unsigned int *fl;
 		int n;

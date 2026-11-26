@@ -94,7 +94,7 @@ void __cdecl d3_SetObjectRotation(void*, void*);
 char* __cdecl fcn_00509570(void*);
 void __cdecl d3_SetCameraHeightFraction(float);
 float* __stdcall D3DXMatrixTranspose(float*, const float*);
-float __cdecl fcn_004514d0(float*, float*);
+float __cdecl d3_WrapYawDelta(float*, float*);
 
 /* ADDRESS: GOLDTL 0x0052c060 */
 int __cdecl d3_UpdateCameraFromMouse(void)
@@ -283,7 +283,7 @@ predict:
 		q.x = mat[0] * d.x + mat[4] * d.y + mat[8] * 0.0f;
 		q.z = mat[2] * d.x + mat[6] * d.y + mat[10] * 0.0f;
 	} else {
-		ang = -fcn_004514d0(g_662d40, &q.x);
+		ang = -d3_WrapYawDelta(g_662d40, &q.x);
 		v.y = 0.0f;
 		v.z = d.y;
 		q.x = d.x * (float) cos(ang) + d.y * (float) sin(ang);

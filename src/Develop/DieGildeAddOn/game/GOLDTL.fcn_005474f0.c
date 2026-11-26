@@ -17,7 +17,7 @@ char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_LookupEntityRecordById(int k);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
-void __cdecl fcn_004c6900(Msg* msg);
+void __cdecl cm_RequestJoinLeaveElection(Msg* msg);
 
 void __cdecl he_PruneStammtischSeats(void)
 {
@@ -47,7 +47,7 @@ void __cdecl he_PruneStammtischSeats(void)
 				msg.who = *(int*) (e + 1);
 				msg.id = ((int*) (w + 0x1c))[i];
 				cm_SendLogAction(g_6a5894);
-				fcn_004c6900(&msg);
+				cm_RequestJoinLeaveElection(&msg);
 				cm_SendTraceEnd(g_6a5894);
 			}
 		}

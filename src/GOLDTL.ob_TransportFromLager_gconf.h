@@ -1,6 +1,6 @@
 #ifndef GOLDTL_OB_TRANSPORTFROMLAGER_GCONF_H
 #define GOLDTL_OB_TRANSPORTFROMLAGER_GCONF_H
 
-extern unsigned char g_slot_table[]; /* 0x007f4ca0 */
+extern unsigned char g_slot_table[2]; /* 0x007f4ca0 */
 
 #endif /* GOLDTL_OB_TRANSPORTFROMLAGER_GCONF_H */

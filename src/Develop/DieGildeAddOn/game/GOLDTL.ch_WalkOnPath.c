@@ -27,7 +27,7 @@ int __cdecl ch_StartWalkAnimation(char*, int);
 int __cdecl ch_UpdateWalkOnPath(char*, int);
 void __cdecl ch_FinishAni(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
-void __cdecl fcn_00433780(void*);
+void __cdecl d3_FreeObjectAnimation(void*);
 void __cdecl fcn_00438b40(char*, int*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl m_FreeTracked(void*);
@@ -105,7 +105,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 			if (anim != 0 && (anim[0x6d] & 0x20) != 0) {
 				d3_RemoveObjectAnimation(*(char**) (*(char**) (inst + 0x34) + 0x1ec) + 0xf4,
 				             *(char**) (anim + 0x68));
-				fcn_00433780(*(char**) (inst + 0x34));
+				d3_FreeObjectAnimation(*(char**) (inst + 0x34));
 				*(int*) (inst + 0x78) = 0;
 				*(unsigned int*) (obj + 0x160) &= ~0x40;
 			} else {

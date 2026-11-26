@@ -21,7 +21,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005db3d0(char*, char*, int);
+int __cdecl amt_SendAction0x45(char*, char*, int);
 void __cdecl fcn_00526120(int, int);
 unsigned short* __cdecl fcn_005cadc0(int, Query*, int, char*, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -62,7 +62,7 @@ int __cdecl fcn_005db460(char* e, char* o)
 		if (p[0x166] == 0) {
 			return 0x60;
 		}
-		fcn_005db3d0(e, p, 1);
+		amt_SendAction0x45(e, p, 1);
 		return 0x10;
 	}
 	r = 2;
@@ -89,7 +89,7 @@ int __cdecl fcn_005db460(char* e, char* o)
 	do {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok && d2_CheckActionBlocker(e, 4) != 0) {
-				h = fcn_005db3d0(e, (char*) g, 1);
+				h = amt_SendAction0x45(e, (char*) g, 1);
 				while (h != -1 && cm_GetCommandStatus(h) == 0) {
 					fcn_00535960();
 				}

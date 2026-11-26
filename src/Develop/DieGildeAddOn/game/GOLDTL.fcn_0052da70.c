@@ -22,7 +22,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_00502cd0(int, int, int, int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl d3_VisitSceneObjects(int, char*, int, void*, char*);
-char __cdecl fcn_0052d970(char*, char*);
+char __cdecl d3_ApplyWimpelTextureCallback(char*, char*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl SelectTextureSet(char*, int, int, int);
 
@@ -39,7 +39,7 @@ void __cdecl d3_UpdateBuildingWimpelTextures(int idx)
 	d3_SelectSceneContext(0, 1);
 	for (e = gm_StartFilteredEntitySearch(1, 4, idx); e != 0; e = gm_FindNextFilteredEntity()) {
 		if (*(char**) (e + 0x61) != 0) {
-			d3_VisitSceneObjects(g_67a370, *(char**) (e + 0x61), 0x340, (void*) fcn_0052d970, e);
+			d3_VisitSceneObjects(g_67a370, *(char**) (e + 0x61), 0x340, (void*) d3_ApplyWimpelTextureCallback, e);
 		}
 	}
 	for (e = fcn_00502cd0(0, 3, 7, 3, idx, 4, 0x1d); e != 0; e = gm_NextEntityQueryMatch()) {

@@ -4,7 +4,7 @@ extern char s_67fb68[];
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl cm_SendLogAction(char* s);
-void __cdecl fcn_004c68c0(void* msg);
+void __cdecl cm_RequestElectionOrTrade(void* msg);
 void __cdecl cm_RequestLinkEvidence(int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 void __cdecl cm_SendTraceEnd(char* s);
@@ -48,7 +48,7 @@ int __cdecl fcn_004ab3e0(char* actor, char* a2, char* a3)
 	msg.what = *(int*) (a2 + 4);
 	msg.amount = *(int*) (a2 + 0x10);
 	cm_SendLogAction(s_67fb68);
-	fcn_004c68c0(&msg);
+	cm_RequestElectionOrTrade(&msg);
 	cm_RequestLinkEvidence(*(int*) (a2 + 4), *(int*) (actor + 4));
 	cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (found + 0x27)].entity_id,
 	    *(int*) (actor + 4), 0, *(int*) (a2 + 0x10));

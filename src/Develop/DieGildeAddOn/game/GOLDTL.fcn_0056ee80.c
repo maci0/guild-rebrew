@@ -24,7 +24,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl gm_IsEntityAtBuilding(int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl he_DetectNearbyPatrolAction(int*);
@@ -99,7 +99,7 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 				if (e != 0) {
 					fcn_00529160(rec1, 0, *(unsigned short*) e, (int) actionRecord);
 					cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + cnt * 4));
-					fcn_004c5da0(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 1, s_6a6dc4);
+					ch_StartMovement(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 1, s_6a6dc4);
 				}
 			}
 		}
@@ -163,7 +163,7 @@ label_1bc:
 				if (e != 0) {
 					fcn_00529160(rec1, 0, *(unsigned short*) e, (int) actionRecord);
 					cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + cnt * 4));
-					fcn_004c5da0(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 0, s_6a6dc4);
+					ch_StartMovement(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 0, s_6a6dc4);
 					cm_RequestPlayAnimation(*(int*) (actionRecord + 0x8c + cnt * 4), gestik[gm_RandomMod(3)], 1);
 				}
 			}
@@ -239,7 +239,7 @@ label_1bc:
 		for (i = 0; i < 8; i++) {
 			if (*(int*) (actionRecord + 0x8c + i * 4) != -1) {
 				cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + i * 4));
-				fcn_004c5da0(*(int*) (actionRecord + 0x8c + i * 4), *(int*) (rec1 + 1), *(int*) (q + 2), 0, 0, s_6a6a40);
+				ch_StartMovement(*(int*) (actionRecord + 0x8c + i * 4), *(int*) (rec1 + 1), *(int*) (q + 2), 0, 0, s_6a6a40);
 			}
 		}
 		he_FreeAction(actionRecord);
@@ -262,7 +262,7 @@ label_1bc:
 					val = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4));
 					if (val != 0) {
 						cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4));
-						fcn_004c5da0(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4), *(int*) (h + 1), *(int*) (q + 2), 0, 0, s_6a6dc4);
+						ch_StartMovement(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4), *(int*) (h + 1), *(int*) (q + 2), 0, 0, s_6a6dc4);
 						count++;
 						gm_GetScaledEntitySkill((char*) val, 2);
 						fcn_00529160(h, 0, *(unsigned short*) val, 0);
@@ -363,7 +363,7 @@ label_fa92:
 						row = -1;
 						val = -1;
 					}
-					fcn_004c5da0(*(int*) (actionRecord + 0x8c + i * 4), val, row, 0, 0, s_6a6dc4);
+					ch_StartMovement(*(int*) (actionRecord + 0x8c + i * 4), val, row, 0, 0, s_6a6dc4);
 					fcn_00529160(0, 0, *(unsigned short*) ent, 0);
 				}
 			}

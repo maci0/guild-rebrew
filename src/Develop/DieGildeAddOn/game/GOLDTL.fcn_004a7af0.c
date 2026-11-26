@@ -10,7 +10,7 @@ typedef struct {
 
 extern slot_1007ce8 g_1007ce8[];
 
-int __cdecl fcn_004a7880(int);
+int __cdecl gm_DrawCard(int);
 
 
 /* ADDRESS: GOLDTL 0x004a7af0 */
@@ -22,7 +22,7 @@ void __cdecl fcn_004a7af0(fcn_004a7af0_obj* o, int i)
 		old = g_1007ce8[o->slot[i]].state;
 		g_1007ce8[o->slot[i]].state = 4;
 		o->last = o->slot[i];
-		o->slot[i] = fcn_004a7880(old);
+		o->slot[i] = gm_DrawCard(old);
 		g_1007ce8[o->slot[i]].flag = 0;
 	}
 }

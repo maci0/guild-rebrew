@@ -3,7 +3,7 @@ int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
 char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x004a91a0 */
-int __cdecl fcn_004a91a0(int a1, char* e, int a3, int a4, char* out)
+int __cdecl ai_CheckAction02cPredicate(int unused1, char* e, int unused3, int unused4, char* out)
 {
 	int d[32];
 	int ids[32];

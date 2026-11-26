@@ -13,7 +13,7 @@ extern char g_67eb54[];
 
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
-void __cdecl fcn_004c6900(Small3i* a1);
+void __cdecl cm_RequestJoinLeaveElection(Small3i* a1);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl ai_RunStammtisch(char* a1, char* a2)
@@ -25,7 +25,7 @@ int __cdecl ai_RunStammtisch(char* a1, char* a2)
 		msg.a = *(int*) (a1 + 4);
 		msg.b = *(int*) (a2 + 4);
 		cm_SendLogAction(g_67eb6c);
-		fcn_004c6900(&msg);
+		cm_RequestJoinLeaveElection(&msg);
 		cm_RequestChangeBits(*(int*) (a1 + 4), 0x1c8, 4, 0x2000000, 0);
 		cm_SendTraceEnd(g_67eb6c);
 		return 0x35;
@@ -35,7 +35,7 @@ int __cdecl ai_RunStammtisch(char* a1, char* a2)
 		msg.a = *(int*) (a1 + 4);
 		msg.b = *(int*) (a2 + 4);
 		cm_SendLogAction(g_67eb54);
-		fcn_004c6900(&msg);
+		cm_RequestJoinLeaveElection(&msg);
 		cm_RequestChangeBits(*(int*) (a1 + 4), 0x1c8, 4, 0x2000000, 0);
 		cm_SendTraceEnd(g_67eb54);
 		return 0x35;

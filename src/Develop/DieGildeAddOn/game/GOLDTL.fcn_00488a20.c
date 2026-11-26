@@ -24,7 +24,7 @@ extern char g_7f4ca0[];
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x00488a20 */
-int __cdecl fcn_00488a20(Ent* e)
+int __cdecl ai_FlagWorkerTrainingNeeded(Ent* e)
 {
 	int found;
 	int i;

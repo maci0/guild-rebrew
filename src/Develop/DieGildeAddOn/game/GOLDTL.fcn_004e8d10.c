@@ -28,7 +28,7 @@ typedef struct {
 
 #include "client_types.h"
 extern Rec18_68da68 amt_OfficeSlots[42];
-extern char g_68da68[];
+extern Rec18_68da68 g_68da68[];
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
 

@@ -28,9 +28,9 @@ extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_004c6650(int);
+void __cdecl cm_RequestCancelEntityEvent(int);
 int __cdecl gm_FindFallbackPublicBuilding(struct house*, int*, int*);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
@@ -54,13 +54,13 @@ void __cdecl he_UpdateGebAbreissen(char* e)
 		for (i = 0; i < 768; i++) {
 			if (((struct house*)g_7f4ca0)[i].owner == (char*) t) {
 				if (((struct house*)g_7f4ca0)[i].busy != 0) {
-					fcn_004c6650(((struct house*)g_7f4ca0)[i].handle);
+					cm_RequestCancelEntityEvent(((struct house*)g_7f4ca0)[i].handle);
 				}
 				if (gm_FindFallbackPublicBuilding(&((struct house*)g_7f4ca0)[i], &a, &b) != 0) {
 					if (b != -1) {
-						fcn_004c5da0(((struct house*)g_7f4ca0)[i].handle, a, b, 0, 0, "GebAbreissen");
+						ch_StartMovement(((struct house*)g_7f4ca0)[i].handle, a, b, 0, 0, "GebAbreissen");
 					} else {
-						fcn_004c5da0(((struct house*)g_7f4ca0)[i].handle, a, -1, 0, 1, "GebAbreissen");
+						ch_StartMovement(((struct house*)g_7f4ca0)[i].handle, a, -1, 0, 1, "GebAbreissen");
 					}
 				}
 			}

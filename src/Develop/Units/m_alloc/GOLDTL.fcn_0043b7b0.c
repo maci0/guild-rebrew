@@ -11,7 +11,7 @@ int __cdecl fcn_004011f0(void* stream, void* dst);
 #endif
 char* __cdecl vfs_ReadCString(void* stream, char* text);
 int __cdecl fcn_0043b500(char*);
-char __cdecl fcn_0043b580(char*, int, int, char*);
+char __cdecl d3_SetObjectEvent(char*, int, int, char*);
 
 /* ADDRESS: GOLD 0x0043e970 */
 void __cdecl d3_ReadObjectEvents(void* r, char* o)
@@ -32,7 +32,7 @@ void __cdecl d3_ReadObjectEvents(void* r, char* o)
 		id = fcn_0043b500(name);
 		vfs_ReadCString(r, val);
 		if (o != 0) {
-			fcn_0043b580(o, id, (*(fcn_0043b7b0_f*)&g_67a590)(o, id, val), val);
+			d3_SetObjectEvent(o, id, (*(fcn_0043b7b0_f*)&g_67a590)(o, id, val), val);
 		}
 	}
 }

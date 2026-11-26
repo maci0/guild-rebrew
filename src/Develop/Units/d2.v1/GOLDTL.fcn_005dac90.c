@@ -33,7 +33,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005dac90(char* e, char* o)
+int __cdecl amt_HandleOfficeSupport(char* e, char* o)
 {
 	Query q;
 	int cancel;
@@ -92,7 +92,7 @@ int __cdecl fcn_005dac90(char* e, char* o)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005dac90, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) amt_HandleOfficeSupport, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

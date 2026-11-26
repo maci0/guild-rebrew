@@ -37,7 +37,7 @@ void __cdecl fcn_00493920(void* m);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char c, int d);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 float __cdecl fcn_004ff210(int a, int b);
-int __cdecl fcn_005c6270(int a, int b);
+int __cdecl gm_HasActiveSpecialObject(int a, int b);
 void __cdecl fcn_004f6810(int a, int b);
 void __cdecl cut_FormatProzessPunishment(int a, int b, char* s);
 void __cdecl fcn_004f6850(int a, int b, int c, int d, int e);
@@ -45,7 +45,7 @@ int* __cdecl gm_GetEntityTableEntry(int a);
 void __cdecl gm_IncrementMissionActionCount(int a, int b);
 void __cdecl fcn_004e48b0(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
-void __cdecl fcn_004c09b0(void);
+void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl msx_StopAmbientTrack(int a);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_004e4b00(int a);
@@ -812,7 +812,7 @@ int __cdecl cut_RunProzess(int a0)
 		if (msg.pad[6] != 0 && *(float*) &msg.pad[8] < 0.0f) {
 			fcn_004ff210(*(unsigned short*) p38, (int) *(float*) &msg.pad[8]);
 		}
-		if (fcn_005c6270((int) p38, 0x22e) != 0) {
+		if (gm_HasActiveSpecialObject((int) p38, 0x22e) != 0) {
 			cm_RequestCopyEntityData(*(int*) (p38 + 4), *(int*) (p3c + 4), -0x1a, 1);
 			cm_RequestCopyEntityData(*(int*) (p34 + 4), *(int*) (p3c + 4), 0x1a, 1);
 			cm_RequestCopyEntityData(*(int*) (p38 + 4), *(int*) (p40 + 4), -0x1a, 1);
@@ -831,7 +831,7 @@ int __cdecl cut_RunProzess(int a0)
 		msx_StopAmbientTrack(msg.hnd[7]);
 	}
 	msx_RestoreMusicIfAllowed();
-	fcn_004c09b0();
+	d3snd_StopTrackedVoices();
 	if (h2 != 0) {
 		fcn_004e4b00(h2);
 	}

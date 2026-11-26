@@ -5,7 +5,7 @@
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 
-int __cdecl fcn_004adc40(void* stream)
+int __cdecl ls_SaveHighOfficeTargets(void* stream)
 {
 	if (!(vfs_fwrite(&g_7728c0, 4, 1, stream) > 0))
 		return 0;

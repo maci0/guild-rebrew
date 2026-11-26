@@ -21,47 +21,47 @@ void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00539600(void);
 int __cdecl d2_ShowServerBrowser(int);
 
-int __cdecl fcn_0053a020(void)
+int __cdecl d2_ShowNetworkLoadDialog(void)
 {
-	int list;
-	int b;
+	int radio_group;
+	int join_btn;
 	int result;
-	int h;
-	int a;
+	int dlg;
+	int host_btn;
 
 	result = 0;
-	h = fcn_00470820(0, 0, g_6a3a80);
-	d2_CenterDialogWindows(h);
-	d2_SetForm(h, 0);
+	dlg = fcn_00470820(0, 0, g_6a3a80);
+	d2_CenterDialogWindows(dlg);
+	d2_SetForm(dlg, 0);
 	io_AppendText(0x1ca5);
-	a = d2_GetWindowListItem(h, 0, io_AppendText(0x1ca9));
-	b = d2_GetWindowListItem(h, 0, io_AppendText(0x1caa));
-	list = d2_CreateRadioGroup(2, a, b);
-	while (main_RunFrameLoop(fcn_0053a020, 0x24087) != 0) {
-		d2_UpdateRadioGroup(list);
+	host_btn = d2_GetWindowListItem(dlg, 0, io_AppendText(0x1ca9));
+	join_btn = d2_GetWindowListItem(dlg, 0, io_AppendText(0x1caa));
+	radio_group = d2_CreateRadioGroup(2, host_btn, join_btn);
+	while (main_RunFrameLoop(d2_ShowNetworkLoadDialog, 0x24087) != 0) {
+		d2_UpdateRadioGroup(radio_group);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
 			result = 0;
 		}
 		if (g_100f1dc != -1) {
-			if (d2_CurrentElementId == a) {
-				fcn_00471af0(h, 0);
+			if (d2_CurrentElementId == host_btn) {
+				fcn_00471af0(dlg, 0);
 				if (fcn_00539600() != 0) {
 					g_774654 = 1;
 					result = 1;
 				}
-				fcn_00471af0(h, 1);
-			} else if (d2_CurrentElementId == b) {
-				fcn_00471af0(h, 0);
+				fcn_00471af0(dlg, 1);
+			} else if (d2_CurrentElementId == join_btn) {
+				fcn_00471af0(dlg, 0);
 				if (d2_ShowServerBrowser(1) != 0) {
 					g_774654 = 1;
 					result = 1;
 				}
-				fcn_00471af0(h, 1);
+				fcn_00471af0(dlg, 1);
 			}
 		}
 	}
-	d2_ClearRadioGroup(list);
-	fcn_00471e30(h);
+	d2_ClearRadioGroup(radio_group);
+	fcn_00471e30(dlg);
 	return result;
 }

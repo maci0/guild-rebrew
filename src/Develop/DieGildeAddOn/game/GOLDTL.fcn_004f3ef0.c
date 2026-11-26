@@ -19,7 +19,7 @@ extern int __cdecl fcn_004f1790(char* a, void* e);
 extern int __cdecl fcn_004f2810(int slot, int record, int item, int value, int a, int b);
 extern int __cdecl fcn_004f2a10(int a, int record, int item, int value);
 extern int __cdecl fcn_004f2d30(int record, int item, int value, int delta);
-extern int __cdecl fcn_004f4440(int slot, int byte, int item, int zero, int* out);
+extern int __cdecl gm_CalcBribeOrPriceScore(int slot, int byte, int item, int zero, int* out);
 extern int __cdecl cm_CountOccupiedBuildingStats(char* record);
 extern void __cdecl fcn_004f2e80(char* record, int value);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
@@ -126,7 +126,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 			}
 			if (*(unsigned short*) ((char*) entry + 0xa) != gm_GameTime)
 				continue;
-			result = fcn_004f4440((int) slot, *(unsigned char*) ((char*) entry + 0xc), entry[0], 0, &out);
+			result = gm_CalcBribeOrPriceScore((int) slot, *(unsigned char*) ((char*) entry + 0xc), entry[0], 0, &out);
 			if (slot == home) {
 				handle = fcn_004f2810((int) slot, (int) entity, entry[0],
 					fcn_004f1790((char*) *(int*) (entity + 0x65), entry), 10, 0);

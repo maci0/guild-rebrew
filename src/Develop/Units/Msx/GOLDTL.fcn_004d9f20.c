@@ -54,11 +54,11 @@ void __cdecl fcn_004d7e50(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl ch_SetAnimationPaused(Obj*, int);
 void __cdecl fcn_00533a40(char*);
-void __cdecl fcn_004d7d70(int);
+void __cdecl d2_UpdateCombatFrame(int);
 Ent* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004d3fe0(Ent*);
 void __cdecl fcn_004d4f30(Party*);
-void __cdecl fcn_004d8d00(Slot*);
+void __cdecl gm_UpdateTaskProgress(Slot*);
 void __cdecl fcn_004d7f70(void);
 
 void __cdecl fcn_004d9f20(int arg)
@@ -96,7 +96,7 @@ void __cdecl fcn_004d9f20(int arg)
 		if (g_772e94 != 0) {
 			fcn_00533a40(g_14a97d4);
 		} else {
-			fcn_004d7d70(arg);
+			d2_UpdateCombatFrame(arg);
 		}
 		if (g_772ea4 != 0 || g_772ea8 != 0) {
 			g_774654 = 1;
@@ -117,7 +117,7 @@ void __cdecl fcn_004d9f20(int arg)
 				fcn_004d4f30(((Party*)g_772eb4));
 				for (i = 0; i < ((Party*)g_772eb4)->count; i++) {
 					if (((Party*)g_772eb4)->ids[i] != -1) {
-						fcn_004d8d00(&((Slot*)g_9b0e20)[i]);
+						gm_UpdateTaskProgress(&((Slot*)g_9b0e20)[i]);
 					}
 				}
 			}

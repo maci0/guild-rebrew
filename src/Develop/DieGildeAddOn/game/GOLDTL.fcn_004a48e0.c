@@ -16,7 +16,7 @@ float __cdecl gm_RandomFloat01(void);
  * random weight) to the owner's or the player's reference entity, else a
  * random non-empty entry. */
 /* ADDRESS: GOLDTL 0x004a48e0 */
-char* __cdecl fcn_004a48e0(char* u, int key)
+char* __cdecl gm_PickRandomOrNearestBuilding(char* u, int key)
 {
 	char* list[0x100];
 	char text[0x40];
@@ -35,7 +35,7 @@ char* __cdecl fcn_004a48e0(char* u, int key)
 
 	saved = d3_CurrentContextIndex;
 	d3_SelectSceneContext(0, 1);
-	if (fcn_00597ff0(key, text) != 0) {
+	if (lc_GetBauplatzPrefix(key, text) != 0) {
 		memset(list, 0, sizeof(list));
 		n = d3_CollectUnusedSceneObjects(text, list);
 		if (n != 0) {

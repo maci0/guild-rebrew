@@ -17,7 +17,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_SendCopyEntityData(int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl cm_SendCancelCharacterActions(int);
-int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
+int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 void __cdecl fcn_004c6b20(int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -33,7 +33,7 @@ int __cdecl gm_IsEntityAtBuilding(char*, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(int);
-int __cdecl fcn_005c6270(char*, int);
+int __cdecl gm_HasActiveSpecialObject(char*, int);
 
 /* queued scene action handed to the packet builder */
 /* SIZE 0xf8 */
@@ -93,7 +93,7 @@ void __cdecl fcn_00568ed0(char* a1)
 				hs = (char*) gm_LookupEntityRecordById(*(int*) p);
 				fcn_00529160(0, 0, *(unsigned short*) hs, (unsigned char*) a1);
 				cm_SendCancelCharacterActions(*(int*) p);
-				fcn_004c5da0(*(int*) p, *(int*) (obj + 1), *(int*) (ent + 2), 0, 1,
+				ch_StartMovement(*(int*) p, *(int*) (obj + 1), *(int*) (ent + 2), 0, 1,
 				             (char*) 0x6a69bc);
 			}
 			p += 4;
@@ -148,7 +148,7 @@ void __cdecl fcn_00568ed0(char* a1)
 		do {
 			if (*(int*) p != -1) {
 				cm_SendCancelCharacterActions(*(int*) p);
-				fcn_004c5da0(*(int*) p, *(int*) (ent + 1), *(int*) (ent2 + 2), 0, 0,
+				ch_StartMovement(*(int*) p, *(int*) (ent + 1), *(int*) (ent2 + 2), 0, 0,
 				             (char*) 0x6a69bc);
 				cnt++;
 				r = (char*) gm_LookupEntityRecordById(*(int*) p);
@@ -165,7 +165,7 @@ void __cdecl fcn_00568ed0(char* a1)
 		    (gm_RandomFloat01() + g_6628cc)) {
 			sel = 1;
 		}
-		if (fcn_005c6270(obj, 0x17c) != 0) {
+		if (gm_HasActiveSpecialObject(obj, 0x17c) != 0) {
 			if (*(unsigned char*) (hs + 2) == 6 || *(unsigned char*) (hs + 2) == 7) {
 				io_FormatTextBuffer(buf, 0xff4);
 				fcn_00545d40(*(int*) (hs + 4), -1, buf, 0, 0x5fa, 0);
@@ -276,7 +276,7 @@ void __cdecl fcn_00568ed0(char* a1)
 					cm_SendCancelCharacterActions(*(int*) p);
 					if (obj != 0) {
 						if (i != 0) {
-							fcn_004c5da0(*(int*) p, *(int*) (obj + 1),
+							ch_StartMovement(*(int*) p, *(int*) (obj + 1),
 							             *(int*) (i + 2), 0, 0, (char*) 0x6a69bc);
 						}
 						fcn_00529160((unsigned char*) obj, 0, *(unsigned short*) hs, 0);

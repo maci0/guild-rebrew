@@ -23,7 +23,7 @@ void __cdecl fcn_00572d90(char*);
 void __cdecl fcn_00572da0(char*);
 void __cdecl fcn_00572e40(char*);
 void __cdecl fcn_00572ff0(char*);
-void __cdecl fcn_00573a10(char*);
+void __cdecl he_StartAction0x0c(char*);
 void __cdecl he_RunAction0x0c(char*);
 void __cdecl he_AllocGebaeudeBauen(char*);
 void __cdecl gm_HandleHausbau(char*);
@@ -61,7 +61,7 @@ int __cdecl he_RegisterCoreActionHandlers(void)
 	if (he_RegisterHandler(0xb, fcn_00572e40, fcn_00572ff0) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(0xc, fcn_00573a10, he_RunAction0x0c) != 0) {
+	if (he_RegisterHandler(0xc, he_StartAction0x0c, he_RunAction0x0c) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(0xd, he_AllocGebaeudeBauen, gm_HandleHausbau) != 0) {

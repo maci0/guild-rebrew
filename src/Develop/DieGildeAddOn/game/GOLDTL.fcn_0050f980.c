@@ -1,11 +1,11 @@
 extern unsigned char* g_entity_ptr;
 extern unsigned char* lpGebaeudePROT;
 int __cdecl gm_GetBuildingTechEffect(void*, int, int);
-int __cdecl fcn_004e8b40(int, void*);
+int __cdecl amt_GetRoleTemplate(int, void*);
 int __cdecl gm_GetGuildHall(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl fcn_004e7990(void*, void*, int, unsigned int);
-int __cdecl fcn_005c6270(void*, int);
+int __cdecl gm_HasActiveSpecialObject(void*, int);
 
 /* Effective price of one inventory slot: base value from the object class,
    plus the material/quality modifiers carried by both slots, scaled by the
@@ -42,7 +42,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
         score = (float) gm_GetBuildingTechEffect((void*) v3, 4, 1);
     }
     if (*(char*) (firstOffset + 0x7f4e06)) {
-        fcn_004e8b40(*(unsigned char*) (firstOffset + 0x7f4e06), q);
+        amt_GetRoleTemplate(*(unsigned char*) (firstOffset + 0x7f4e06), q);
         v16 = *(int*) (q + 4);
         if (v16 == 4) {
             v3 = gm_GetGuildHall(1);
@@ -100,28 +100,28 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
     secondOffset = a1 * 0x21c;
     score = fcn_004e7990((void*) v3, (void*) (secondOffset + 0x7f4ca0), qual, a2) + score;
     if (*(char*) (secondOffset + 0x7f4e06)) {
-        fcn_004e8b40(*(unsigned char*) (secondOffset + 0x7f4e06), q);
+        amt_GetRoleTemplate(*(unsigned char*) (secondOffset + 0x7f4e06), q);
         v17 = *(unsigned char*) (q + 8);
         if (v17 > 0 && v17 < 4) {
-            a1 = fcn_005c6270((void*) v3, 0x155);
+            a1 = gm_HasActiveSpecialObject((void*) v3, 0x155);
             score = (float) (int) a1 * *(float*) 0x6640cc + score;
-            a1 = fcn_005c6270((void*) v3, 0x15d);
+            a1 = gm_HasActiveSpecialObject((void*) v3, 0x15d);
             score = (float) (int) a1 * *(float*) 0x6640cc + score;
         } else if (v17 > 3 && v17 < 8) {
-            a1 = fcn_005c6270((void*) v3, 0x157);
+            a1 = gm_HasActiveSpecialObject((void*) v3, 0x157);
             score = (float) (int) a1 * *(float*) 0x6640cc + score;
-            a1 = fcn_005c6270((void*) v3, 0x15f);
+            a1 = gm_HasActiveSpecialObject((void*) v3, 0x15f);
             score = (float) (int) a1 * *(float*) 0x662924 + score;
         } else if (v17 > 7 && v17 < 10) {
-            a1 = fcn_005c6270((void*) v3, 0x159);
+            a1 = gm_HasActiveSpecialObject((void*) v3, 0x159);
             score = (float) (int) a1 * *(float*) 0x664170 + score;
-            a1 = fcn_005c6270((void*) v3, 0x165);
+            a1 = gm_HasActiveSpecialObject((void*) v3, 0x165);
             score = (float) (int) a1 * *(float*) 0x664170 + score;
-            a1 = fcn_005c6270((void*) v3, 0x166);
+            a1 = gm_HasActiveSpecialObject((void*) v3, 0x166);
             score = (float) (int) a1 * *(float*) 0x662938 + score;
         }
     }
-    if (fcn_005c6270((void*) v3, 0x2b6)) {
+    if (gm_HasActiveSpecialObject((void*) v3, 0x2b6)) {
         if (*(char*) (secondOffset + 0x7f4e06)) {
             score = score + *(float*) 0x662a98;
         }
@@ -131,7 +131,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
     }
     if (*(int*) (secondOffset + 0x7f4e0c) &&
         *(unsigned short*) (*(int*) (secondOffset + 0x7f4e0c) + 0x27) == a0) {
-        score = (float) fcn_005c6270((void*) v3, 0x16b) * *(float*) 0x664170 + score;
+        score = (float) gm_HasActiveSpecialObject((void*) v3, 0x16b) * *(float*) 0x664170 + score;
     }
     v4 = *(unsigned int*) (firstOffset + 0x7f4ccc) >> 0xe & 7;
     if (v4 && *(char*) (firstOffset + 0x7f4ca9) != *(char*) (secondOffset + 0x7f4ca9)) {

@@ -18,7 +18,7 @@ int __cdecl cm_RequestSendCutInfo(int, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 
-void __cdecl fcn_004e5070(unsigned char* s, int id)
+void __cdecl cut_ResetParticipantState(unsigned char* s, int id)
 {
 	int i;
 	rec35c copy;

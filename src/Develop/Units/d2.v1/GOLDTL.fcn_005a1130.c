@@ -9,7 +9,7 @@ int __cdecl d2_SetOverlayAnimation();
 int __cdecl fcn_004927c0();
 int __cdecl fcn_00492950();
 int __cdecl fcn_00492d60();
-int __cdecl fcn_00492e50();
+int __cdecl ai_EvalBlackjackAction();
 int __cdecl fcn_00493000();
 int __cdecl cm_RequestTransferCurrencyNoKill();
 int __cdecl gm_LookupEntityRecordById();

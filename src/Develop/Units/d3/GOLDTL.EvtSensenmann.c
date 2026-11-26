@@ -38,15 +38,15 @@ extern int g_7749ec;
 extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_00558370(char* e);
+int __cdecl he_SpawnSensenmann(char* e);
 void __cdecl he_FreeAction(char* e);
 void __cdecl msx_RestoreMusicIfAllowed(void);
 void __cdecl fcn_004e4e90(char* name);
 void __cdecl gm_AddTime(char* t, int a, int b, int c);
-int __cdecl fcn_005589d0(char* e);
+int __cdecl he_AimSensenmann(char* e);
 void __cdecl he_BroadcastReaperEvent(void);
-int __cdecl fcn_00558680(char* e);
-int __cdecl fcn_00558b70(char* e);
+int __cdecl he_StepSensenmannMove(char* e);
+int __cdecl he_PlaceSensenmannCamera(char* e);
 
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 
@@ -72,7 +72,7 @@ void __cdecl EvtSensenmann(char* e)
 		he_FreeAction(e);
 		return;
 	}
-	if (*(int*) (e + 0xc8) == 0 && fcn_00558370(e) == 0) {
+	if (*(int*) (e + 0xc8) == 0 && he_SpawnSensenmann(e) == 0) {
 		he_FreeAction(e);
 		if (g_7749ec != 0) {
 			msx_RestoreMusicIfAllowed();
@@ -89,7 +89,7 @@ void __cdecl EvtSensenmann(char* e)
 	*(struct pos14*) (e + 0x52) = gm_GameTime;
 	switch (*(int*) (e + 0x70)) {
 	case 0:
-		r = fcn_00558680(e);
+		r = he_StepSensenmannMove(e);
 		if (r == 1) {
 			*(int*) (e + 0x70) = 0;
 			gm_AddTime(e + 0x52, 0, 2, 0);
@@ -100,7 +100,7 @@ void __cdecl EvtSensenmann(char* e)
 			if (*(int*) (e + 0xc0) <= 0) {
 				if (*(int*) (e + 0xc0) == 0) {
 					*(int*) (e + 0xb4) = *(int*) (e + 0xac);
-					if (fcn_00558b70(e)) {
+					if (he_PlaceSensenmannCamera(e)) {
 						gm_AddTime(e + 0x52, 0, 0xf, 0);
 						*(int*) (e + 0x70) = 2;
 						*(int*) (e + 0xc0) = *(int*) (e + 0xc0) - 1;
@@ -140,7 +140,7 @@ void __cdecl EvtSensenmann(char* e)
 			io_FormatTextBuffer(buf, "EvtSensenmann: next target = %G", p);
 			*(int*) (e + 0xb4) = p->id;
 			*(int*) (e + 0xc0) = *(int*) (e + 0xc0) - 1;
-			if (fcn_00558b70(e)) {
+			if (he_PlaceSensenmannCamera(e)) {
 				gm_AddTime(e + 0x52, 0, 0xf, 0);
 				*(int*) (e + 0x70) = 2;
 				return;
@@ -154,7 +154,7 @@ void __cdecl EvtSensenmann(char* e)
 		return;
 	case 2:
 		gm_AddTime(e + 0x52, 0, 2, 0);
-		if (fcn_005589d0(e)) {
+		if (he_AimSensenmann(e)) {
 			*(int*) (e + 0x70) = 0;
 			return;
 		}

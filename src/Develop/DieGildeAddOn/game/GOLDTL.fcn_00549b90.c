@@ -10,7 +10,7 @@ int __cdecl gm_RandomMod(int range);
 int __cdecl fcn_004c5620(char a1, unsigned char* e);
 
 /* ADDRESS: GOLDTL 0x00549b90 */
-void __cdecl fcn_00549b90(char* p)
+void __cdecl he_StartElectionCampaign(char* p)
 {
 	if (*(unsigned char*) (p + 0x78) & 4) {
 		return;

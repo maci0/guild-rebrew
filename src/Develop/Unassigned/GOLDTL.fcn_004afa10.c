@@ -8,7 +8,7 @@ void* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl hst_SplitFormatPrefix(char*, char*, char**, int*);
 int __cdecl atoi(char*);
 int __cdecl fcn_004ae0f0(int);
-int __cdecl fcn_004ae260(int);
+int __cdecl gm_IsSlotActiveBuilding(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* The reference builds a frame (push ebp; mov ebp,esp; sub esp,0x20c) and
@@ -78,7 +78,7 @@ int __cdecl hst_HandleRndNpcEinwohner(int selectionMode, int pairs, int idx, cha
 			if (fcn_004ae0f0(*(int*) slotCursor) != 0) {
 				entityRecord = slotCursor - 4;
 				if (flag == 0 || *(unsigned char*) (slotCursor + 5) == wantGender) {
-					if (fcn_004ae260(i) != 0) {
+					if (gm_IsSlotActiveBuilding(i) != 0) {
 						break;
 					}
 					entityRecord = 0;

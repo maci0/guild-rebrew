@@ -35,7 +35,7 @@ int __cdecl cut_CheckMaster(int* event);
 int __cdecl fcn_004dc7d0(char* event);
 int __cdecl fcn_004d74b0(char* event);
 int __cdecl fcn_004e1330(char* event);
-int __cdecl fcn_004e1960(char* event);
+int __cdecl cut_NotifyHinrichtung(char* event);
 int __cdecl gm_NotifyHochzeit(char* event);
 int __cdecl fcn_004e27b0(char* event);
 int __cdecl fcn_004e2b40(char* event);

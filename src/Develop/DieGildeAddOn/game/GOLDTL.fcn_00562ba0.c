@@ -4,12 +4,12 @@ int __cdecl gm_GetEntityTableEntry(int a0);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a0, int a1, unsigned char a2, int a3);
 void __cdecl fcn_00529160(int a0, int a1, int a2, int a3);
 int __cdecl gm_StartFilteredEntitySearch(int a0, int a1, int a2);
-int __cdecl fcn_004c5da0(int a0, int a1, int a2, int a3, int a4, int a5);
+int __cdecl ch_StartMovement(int a0, int a1, int a2, int a3, int a4, int a5);
 int __cdecl gm_LookupEntityRecordById(int a0);
 void __cdecl gm_AddTime(int* p, int a1, int a2, int a3);
 int __cdecl gm_CompareGameTime(int a0, int a1);
 int __cdecl fcn_00494740(int a0, int a1, int a2);
-int __cdecl fcn_005c6270(int a0, int a1);
+int __cdecl gm_HasActiveSpecialObject(int a0, int a1);
 void __cdecl fcn_005100f0(int a0, int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int a0, int a1, char* buf, int a3, int a4, char* text);
@@ -66,7 +66,7 @@ void __cdecl fcn_00562ba0(int eventCursor)
 	case 1:
 		v6 = gm_StartFilteredEntitySearch(1, 1, *(int*) (eventBase + 0xd0));
 		if (v6 != 0) {
-			*(int*) (eventBase + 0xcc) = fcn_004c5da0(*(int*) (eventBase + 0xc8), *(int*) (v6 + 1), -1, 0, 1, 0x6a659c);
+			*(int*) (eventBase + 0xcc) = ch_StartMovement(*(int*) (eventBase + 0xc8), *(int*) (v6 + 1), -1, 0, 1, 0x6a659c);
 			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 			return;
 		}
@@ -136,13 +136,13 @@ label_562e74:
 			gm_AddTime((int*) (eventBase + 0x52), 0, 6, 0);
 			return;
 		}
-		fcn_004c5da0(*(int*) (eventBase + 0xc8), *(int*) (eventBase + 0x10), -1, 0, 1, 0x6a659c);
+		ch_StartMovement(*(int*) (eventBase + 0xc8), *(int*) (eventBase + 0x10), -1, 0, 1, 0x6a659c);
 		*(pos14_7f4c00*) (eventBase + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 		gm_AddTime((int*) (eventBase + 0x52), 0, 4, 0);
 		*(int*) (eventBase + 0x70) = 5;
 		return;
 	case 3:
-		fcn_004c5da0(*(int*) (eventBase + 0xc8), *(int*) (eventBase + 0x10), -1, 0, 1, 0x6a659c);
+		ch_StartMovement(*(int*) (eventBase + 0xc8), *(int*) (eventBase + 0x10), -1, 0, 1, 0x6a659c);
 		*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 		return;
 	case 4:
@@ -156,7 +156,7 @@ label_562e74:
 			return;
 		}
 		v4 = fcn_00494740((int*) ep, v7, (int) v11);
-		if (fcn_005c6270(v7, 0x2c0)) {
+		if (gm_HasActiveSpecialObject(v7, 0x2c0)) {
 			fcn_005100f0(*(int*) (ep + 4), -1);
 			if (*(char*) (ep + 2) == 6 || *(char*) (ep + 2) == 7) {
 				io_FormatTextBuffer(buf, 0x1012, *(unsigned short*) v7, 2);
@@ -168,7 +168,7 @@ label_562e74:
 			}
 			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 			return;
-		} else if (fcn_005c6270(v7, 0x17c) != 0) {
+		} else if (gm_HasActiveSpecialObject(v7, 0x17c) != 0) {
 			if (*(char*) (ep + 2) == 6 || *(char*) (ep + 2) == 7) {
 				io_FormatTextBuffer(buf, 0xff3);
 				fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
@@ -186,7 +186,7 @@ label_562e74:
 					io_FormatTextBuffer(buf, 0x173a, *(unsigned short*) v7);
 					fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 				}
-				if (fcn_005c6270(v7, 0x2b4)) {
+				if (gm_HasActiveSpecialObject(v7, 0x2b4)) {
 					fcn_005100f0(*(int*) (eventBase + 0xb4), -1);
 				} else {
 					fcn_005100f0(*(int*) (eventBase + 0xb4), -2);

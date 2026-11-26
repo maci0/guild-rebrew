@@ -6,7 +6,7 @@ extern int g_6b89b0, g_6b89b8;
 void __cdecl fcn_00456530(int, int);
 void __cdecl fcn_00456c80(void);
 extern unsigned int g_14ce798, g_10405fc, g_104061c;
-extern char g_1040600;
+extern unsigned char g_1040600;
 extern void* g_6b5ddc;
 extern unsigned char g_6b89bc;
 extern char g_6b89bd;

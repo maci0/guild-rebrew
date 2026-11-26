@@ -15,7 +15,7 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_00475c10(char*);
 int __cdecl fcn_00475780(void*, void*);
 void __cdecl fcn_00476a50(int, int, int, void*);
-int __cdecl fcn_005053c0(void*);
+int __cdecl gm_GetWareIconId(void*);
 int __cdecl fcn_00469c30(short, short, int);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strrchr(const char*, int);
@@ -186,7 +186,7 @@ found2:
 			v4 = (short*) fcn_00502cd0(*(unsigned int*) (v20 + 0x5d), 1, 0, v5);
 found:
 			if (v4 != 0) {
-				v13 = fcn_005053c0(v4);
+				v13 = gm_GetWareIconId(v4);
 				if (v13 != -1) {
 					v6 = fcn_00469c30(*(int*) 0x1040494 + v14 - 0x7e,
 						v3 + 0x4c, v13);

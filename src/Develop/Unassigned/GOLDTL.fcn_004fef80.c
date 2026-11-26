@@ -14,12 +14,12 @@ typedef struct
 	float f1c;
 	float f20;
 	int x24;
-} Obj28;
+} ENTITY_HEALTH_OBJ;
 // SIZE 0x28
 
 extern float g_662a94;
 
-float __cdecl fcn_004fef80(Obj28* p)
+float __cdecl gm_GetEntityHealth(ENTITY_HEALTH_OBJ* p)
 {
 	float x;
 	float v;
@@ -55,11 +55,11 @@ typedef struct
 	char p14[8];
 	float hi;
 	float max;
-} Bar24;
+} ENTITY_HEALTH_VIEW;
 // SIZE 0x24
 
 
-float __cdecl fcn_004feff0(Bar24* bar)
+float __cdecl gm_GetEntityMaxHealth(ENTITY_HEALTH_VIEW* bar)
 {
 	float v;
 
@@ -80,7 +80,7 @@ extern float g_6628a8;
 
 
 /* ADDRESS: GOLDTL 0x004ff040 */
-float __cdecl fcn_004ff040(Bar24* bar)
+float __cdecl gm_GetEntityHealthRatio(ENTITY_HEALTH_VIEW* bar)
 {
 	if (bar->id == 0xffff) {
 		return g_6628a8;
@@ -88,7 +88,7 @@ float __cdecl fcn_004ff040(Bar24* bar)
 	if (bar->active == 0) {
 		return g_6628a8;
 	}
-	return fcn_004fef80((Obj28*) bar) / fcn_004feff0(bar);
+	return gm_GetEntityHealth((ENTITY_HEALTH_OBJ*) bar) / gm_GetEntityMaxHealth(bar);
 }
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -97,19 +97,19 @@ float __cdecl fcn_004ff040(Bar24* bar)
 /* Named float addends: the two rounding stores die late and leave the
  * reference's fxch; fxch before faddp. */
 /* ADDRESS: GOLDTL 0x004ff080 */
-float __cdecl fcn_004ff080(unsigned short id)
+float __cdecl gm_CalcEntityHealthScore(unsigned short id)
 {
-	Bar24* p;
+	ENTITY_HEALTH_VIEW* p;
 	float v;
 	float a;
 	float b;
 
-	p = (Bar24*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
+	p = (ENTITY_HEALTH_VIEW*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
 	if (p->active == 1 || p->active == 0) {
 		return g_6628a8;
 	}
-	v = fcn_004feff0(p);
-	a = (float)(fcn_004fef80((Obj28*) p) / v * 0.8);
+	v = gm_GetEntityMaxHealth(p);
+	a = (float)(gm_GetEntityHealth((ENTITY_HEALTH_OBJ*) p) / v * 0.8);
 	b = (float)(v * 0.001f * 0.2);
 	return a + b;
 }

@@ -13,12 +13,12 @@ extern int __cdecl d3_SetFog(int, int, int);
 
 extern char g_10432c0[];
 extern char g_1041d80[];
-extern char g_1041d20[];
+#include "client_types.h"
+extern Pal_1041d20 g_1041d20[6];
 extern int g_6b8484;
 extern int g_1041d0c;
 extern int g_67a37c;
 extern int g_67a380;
-extern float g_67bbdc[3];
 extern float g_6b86c4;
 extern float g_6b86c8;
 extern float g_6b86cc;
@@ -84,9 +84,9 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 		CTX_TABLE[d3_CurrentContextIndex].fac = g_6b8300;
 		CTX_TABLE[d3_CurrentContextIndex].fb8 = g_6b89c0;
 		CTX_TABLE[d3_CurrentContextIndex].f3d8 = g_6b8058;
-		CTX_TABLE[d3_CurrentContextIndex].fbc = g_67bbdc[0];
-		CTX_TABLE[d3_CurrentContextIndex].fc0 = g_67bbdc[1];
-		CTX_TABLE[d3_CurrentContextIndex].fc4 = g_67bbdc[2];
+		CTX_TABLE[d3_CurrentContextIndex].fbc = g_67bbdc.x;
+		CTX_TABLE[d3_CurrentContextIndex].fc0 = g_67bbdc.y;
+		CTX_TABLE[d3_CurrentContextIndex].fc4 = g_67bbdc.z;
 		CTX_TABLE[d3_CurrentContextIndex].fc8 = g_6b86c4;
 		CTX_TABLE[d3_CurrentContextIndex].fcc = g_6b86c8;
 		CTX_TABLE[d3_CurrentContextIndex].fd0 = g_6b86cc;
@@ -163,9 +163,9 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 		g_67a37c = CTX_TABLE[contextIndex].f3cc;
 		g_67a380 = CTX_TABLE[contextIndex].f3d0;
 		g_6b8058 = CTX_TABLE[contextIndex].f3d8;
-		g_67bbdc[0] = CTX_TABLE[contextIndex].fbc;
-		g_67bbdc[1] = CTX_TABLE[contextIndex].fc0;
-		g_67bbdc[2] = CTX_TABLE[contextIndex].fc4;
+		g_67bbdc.x = CTX_TABLE[contextIndex].fbc;
+		g_67bbdc.y = CTX_TABLE[contextIndex].fc0;
+		g_67bbdc.z = CTX_TABLE[contextIndex].fc4;
 		g_6b86c4 = CTX_TABLE[contextIndex].fc8;
 		g_6b86c8 = CTX_TABLE[contextIndex].fcc;
 		d3_ActiveCamera = 0;

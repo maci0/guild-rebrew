@@ -1,5 +1,6 @@
 #include <string.h>
-extern int g_99f5a0;
+#include "client_types.h"
+extern Rec24_99f5a0 g_99f5a0;
 extern char* gm_CityEntity;
 
 #pragma pack(push, 2)
@@ -21,7 +22,7 @@ int __cdecl fcn_004c6a00(void* msg);
 extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 
 #pragma optimize("y", off)
 
@@ -36,7 +37,7 @@ void __cdecl fcn_004fb7a0(void)
 	int nextPhase;
 	float f;
 
-	if (g_99f5a0 != 1) {
+	if (g_99f5a0.head != 1) {
 		return;
 	}
 	memcpy(st, (void*) 0x99f5a0, sizeof(st));

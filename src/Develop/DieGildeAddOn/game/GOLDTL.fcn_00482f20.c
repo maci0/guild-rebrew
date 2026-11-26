@@ -48,7 +48,7 @@ char *__cdecl gm_NextEntityQueryMatch(void);
 char *__cdecl he_StartHandlungSearch(int, int, int, int, int);
 char *__cdecl he_fn_Handlung(void);
 void __cdecl ai_MeisterCollectTrans(char *);
-void __cdecl fcn_00485970(char *, char *, int);
+void __cdecl ai_CollectThiefGoodsResources(char *, char *, int);
 void __cdecl fcn_0048c5b0(char *, char *);
 void __cdecl fcn_0048cdb0(char *, char *);
 
@@ -103,7 +103,7 @@ void __cdecl fcn_00482f20(char *a)
 			return;
 		}
 		*(int *) (a + 0x1b4) |= 0x20;
-		fcn_00485970(a, t, flag);
+		ai_CollectThiefGoodsResources(a, t, flag);
 		h = *(char **) (a + 0x16c);
 		lvl = ((Level*) lpGebaeudePROT)[*(unsigned char *) h].level;
 		if (lvl == 1) {

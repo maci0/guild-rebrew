@@ -33,7 +33,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl fcn_005c9160(int, int, int, int, int);
-void __cdecl fcn_005cc2f0(unsigned int, Item*);
+void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
 int __cdecl fcn_005c07a0(int dialogId, int formId, int altFormId, unsigned int n, Item* items)
 {
@@ -55,7 +55,7 @@ int __cdecl fcn_005c07a0(int dialogId, int formId, int altFormId, unsigned int n
 		fcn_005ca740(0x4b, i * 0x70 + 0x28, d2_CurrentWindowId, 0x56, &items[i], 1);
 		fcn_005c9160(g_14aadc0[items[i].x2c], 0x14a, i * 0x70 + 0x28 + 0x1e, 200, 0x55);
 	}
-	fcn_005cc2f0(n, items);
+	d2_EnableDialogItems(n, items);
 	g_f8f120[d2_CurrentWindowId].scroll = y;
 	g_f8f120[d2_CurrentWindowId].step = 0x70;
 	return 1;

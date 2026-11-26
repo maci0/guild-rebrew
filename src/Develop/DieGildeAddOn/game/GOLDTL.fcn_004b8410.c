@@ -4,7 +4,7 @@ extern char g_7f4ca0[];
 #include <string.h>
 
 void* __cdecl gm_LookupEntityRecordById(int);
-int  __cdecl fcn_005c6270(void*, int);
+int  __cdecl gm_HasActiveSpecialObject(void*, int);
 int  __cdecl fcn_004a55c0(void*, int, int*, float, float, unsigned short*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -26,7 +26,7 @@ int __cdecl fcn_004b8410(void* a1)
 	if (p == 0) {
 		return 1;
 	}
-	if (fcn_005c6270(p, 0x290) != 0) {
+	if (gm_HasActiveSpecialObject(p, 0x290) != 0) {
 		return 0x400;
 	}
 	d2 = 0x600c00;

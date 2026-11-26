@@ -13,7 +13,7 @@ typedef unsigned short u16;
 typedef unsigned int   u32;
 
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
-int __cdecl fcn_0050dfd0(char* a1, int a2);
+int __cdecl gm_GetStorageSlotCapacity(char* a1, int a2);
 int __cdecl gm_GetMsgField(char* msg, char* pkt);
 u16* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_GetControlValue(int id);
@@ -75,7 +75,7 @@ int __cdecl fcn_00597bb0(char* ep)
             g_778da0[j].x30 =
                 gm_GetMsgField(ep, (char*)q);
             g_778da0[j].x34 =
-                fcn_0050dfd0((char*)ep, *(u16*)q);
+                gm_GetStorageSlotCapacity((char*)ep, *(u16*)q);
         }
     }
 

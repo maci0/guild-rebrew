@@ -21,7 +21,7 @@ void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 
 #define CLAMP0(v) ((v) > 0.0 ? (v) : 0.0)
 
-void __cdecl fcn_005d3c20(GRAPH_VALUE cur, int w, int h)
+void __cdecl d2_DrawRedHistoryGraph(GRAPH_VALUE cur, int w, int h)
 {
 	int step;
 	float scale;

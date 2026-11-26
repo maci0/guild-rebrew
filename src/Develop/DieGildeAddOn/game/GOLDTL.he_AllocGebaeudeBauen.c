@@ -20,7 +20,7 @@ char* __cdecl he_fn_Handlung(void);
 void __cdecl gm_AddTime(struct pos14*, int, int, int);
 #include "client_placement.h"
 int __cdecl d3_CollectUnusedSceneObjects(char*, char*);
-int __cdecl fcn_005987c0(char*, char*);
+int __cdecl d3_FindNearestSceneObject(char*, char*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_FreeAction(char*);
@@ -45,7 +45,7 @@ void __cdecl he_AllocGebaeudeBauen(char* u)
 	gm_AddTime((struct pos14*) (u + 0x52), 0, 1, 0);
 	*(int*) (u + 0xc4) = 0;
 	*(int*) (u + 0xc8) = 0;
-	if (fcn_00597ff0(*(int*) (u + 0xb0), text) == 0) {
+	if (lc_GetBauplatzPrefix(*(int*) (u + 0xb0), text) == 0) {
 		he_FreeAction(u);
 		return;
 	}
@@ -59,7 +59,7 @@ void __cdecl he_AllocGebaeudeBauen(char* u)
 		return;
 	}
 	for (i = 0; i < n; i++) {
-		if (fcn_005987c0(u + 0xd4, list) == 0) {
+		if (d3_FindNearestSceneObject(u + 0xd4, list) == 0) {
 			he_FreeAction(u);
 			d3_SelectSceneContext(saved, 1);
 			return;

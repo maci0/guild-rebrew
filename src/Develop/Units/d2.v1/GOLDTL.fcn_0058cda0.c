@@ -21,7 +21,7 @@ extern int d2_CurrentElementId;
 extern int g_665f78[];
 extern int main_LoopFlags;
 
-int __cdecl fcn_004f4440(ENTITY_RECORD*, int, int, int, int*);
+int __cdecl gm_CalcBribeOrPriceScore(ENTITY_RECORD*, int, int, int, int*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -53,7 +53,7 @@ int __cdecl fcn_0058cda0(char* who, int k)
 	if (*(unsigned short*) (who + 0x27) == g_774970) {
 		x = 0;
 	} else {
-		x = fcn_004f4440(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), 0xff, k, 1, &got);
+		x = gm_CalcBribeOrPriceScore(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), 0xff, k, 1, &got);
 	}
 	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Friedhof");
 	d2_SetOverlayAnimation(0, 0);

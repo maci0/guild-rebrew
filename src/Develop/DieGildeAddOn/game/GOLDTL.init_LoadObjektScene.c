@@ -44,7 +44,7 @@ void __cdecl ReportClientMessage(const char*);
 int __cdecl fcn_005105a0(char*);
 void __cdecl fcn_00510bd0(char*);
 void __cdecl d2_UpdateProgressOverlay(int, int, int);
-void __cdecl fcn_00538060(void);
+void __cdecl gm_AdvanceGameClock(void);
 char* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00510c90 */
@@ -78,8 +78,8 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		fcn_00473150((char*) ch);
 		progress = (int) d2_UpdateProgressOverlay;
 	}
-	if ((g_7747b0 & 8) && !tb_IsCallbackPaused((TIMER_CALLBACK) fcn_00538060)) {
-		tb_SetCallbackPaused((TIMER_CALLBACK) fcn_00538060, 1);
+	if ((g_7747b0 & 8) && !tb_IsCallbackPaused((TIMER_CALLBACK) gm_AdvanceGameClock)) {
+		tb_SetCallbackPaused((TIMER_CALLBACK) gm_AdvanceGameClock, 1);
 		paused = 1;
 	}
 	if (init_SceneContextIndices[objectTypeIndex] == -1) {
@@ -139,6 +139,6 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		}
 	}
 	if ((g_7747b0 & 8) && paused) {
-		tb_SetCallbackPaused((TIMER_CALLBACK) fcn_00538060, 0);
+		tb_SetCallbackPaused((TIMER_CALLBACK) gm_AdvanceGameClock, 0);
 	}
 }

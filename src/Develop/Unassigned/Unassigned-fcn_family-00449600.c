@@ -5,8 +5,8 @@ typedef unsigned char u8;
 extern int g_1041d0c;
 extern int g_1041d68;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-extern unsigned int g_14ce860;
-extern unsigned int g_14ce864;
+extern int g_14ce860;
+extern int g_14ce864;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 extern char g_14cf72a;

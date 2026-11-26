@@ -10,7 +10,7 @@ typedef struct {
 } rec18;
 // SIZE 0x18
 
-int __cdecl fcn_004e8b40(int, rec18*);
+int __cdecl amt_GetRoleTemplate(int, rec18*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 
 
@@ -28,7 +28,7 @@ int __cdecl fcn_004e93d0(unsigned char* a1, int max, int* out)
 
 	if (a1[0x166] == 0)
 		return 0;
-	if (fcn_004e8b40(a1[0x166], &r) == 0)
+	if (amt_GetRoleTemplate(a1[0x166], &r) == 0)
 		return 0;
 	n = amt_FindOfficeSlotsByKind(r.id, 6, arr);
 	if (n == 0)
@@ -43,7 +43,7 @@ int __cdecl fcn_004e93d0(unsigned char* a1, int max, int* out)
 			break;
 		if (arr[i].status == 3) {
 			id = arr[i].mamt;
-			fcn_004e8b40(id, &r);
+			amt_GetRoleTemplate(id, &r);
 			v = r.kind;
 			if (v % 3 == 0) {
 				out[cnt++] = id;

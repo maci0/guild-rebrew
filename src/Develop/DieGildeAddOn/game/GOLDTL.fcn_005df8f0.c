@@ -22,7 +22,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-char* __cdecl fcn_005c6220(int, int*);
+char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
 int __cdecl gm_ObjSetEntityFlag0x400000(char* e, char* action)
@@ -54,7 +54,7 @@ int __cdecl gm_ObjSetEntityFlag0x400000(char* e, char* action)
 	}
 	cm_RequestChangeBits(*(int*) (r + 4), 0x1cc, 4, 0x400000, 0);
 	if (e[2] == 6) {
-		p = fcn_005c6220(**(unsigned short**) action, &out);
+		p = gm_LookupSpecialObjectRecord(**(unsigned short**) action, &out);
 		io_FormatTextBuffer(buf, *(unsigned short*) (p + 0x18) + 1, *(unsigned short*) r);
 		io_FormatTextBuffer(line, 0xfe8, buf);
 		fcn_005dbe90(line);

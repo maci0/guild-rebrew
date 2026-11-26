@@ -31,7 +31,7 @@ void* __cdecl gm_FindRecordById(int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 void __cdecl d2_SelectRadioGroup(int, int);
-void __cdecl fcn_00591c30(char*);
+void __cdecl d2_ClearBookmarkSlot(char*);
 void __cdecl d2_SaveBookmarkSlot(int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00472640(int, int);
@@ -137,7 +137,7 @@ void __cdecl fcn_00591ea0(void)
 		if (*(int*) &g_100f1dc != -1) {
 			sel = *(int*) 0x67d370;
 			if (*(int*) 0x67d370 == clicks[1] && *(int*) (y + (unsigned long)&g_102cbc8) != -1) {
-				fcn_00591c30((char*) (*(int*) (y + (unsigned long)&g_102cbc8) * 0xc + (unsigned long)&g_779d00));
+				d2_ClearBookmarkSlot((char*) (*(int*) (y + (unsigned long)&g_102cbc8) * 0xc + (unsigned long)&g_779d00));
 				redraw = 1;
 			}
 			if (sel == clicks[0] && *(int*) (y + (unsigned long)&g_102cbc8) != -1) {

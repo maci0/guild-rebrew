@@ -81,7 +81,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_SendCopyEntityData(Msg *);
 int __cdecl cm_SendSetGebBesitzer(int, int, int);
-void __cdecl fcn_004c6000(int, int);
+void __cdecl cm_RequestSetWohnsitz(int, int);
 int __cdecl fcn_004c6090(unsigned char *, int, int, int);
 int __cdecl cm_RequestCreateGeb(int, int, char *, float *);
 void __cdecl fcn_004fb390(void);
@@ -102,7 +102,7 @@ void __cdecl fcn_00547010(void);
 void __cdecl fcn_005470a0(void);
 void __cdecl fcn_00547130(void);
 void __cdecl he_EnsureCityBuilding0x2bActions(void);
-int __cdecl fcn_00597ff0(int, char *);
+int __cdecl lc_GetBauplatzPrefix(int, char *);
 int __cdecl d3_CollectUnusedSceneObjects(char *, char **);
 void __cdecl d3_ComputeObjectYawToTarget(float *, int);
 
@@ -183,7 +183,7 @@ void __cdecl fcn_00512ee0(void)
 		} while (inner < 0xa900);
 		if (!done) {
 			kind = fcn_005072c0(*(unsigned char *)(e + 0x164));
-			if (fcn_00597ff0(kind, name)
+			if (lc_GetBauplatzPrefix(kind, name)
 					&& (res = d3_CollectUnusedSceneObjects(name, (char **)list)) != 0) {
 				j = 0;
 				if (res >= 1) {
@@ -247,7 +247,7 @@ void __cdecl fcn_00512ee0(void)
 					break;
 			}
 		}
-		fcn_004c6000(*(int *)(e + 4), *(int *)(q + 1));
+		cm_RequestSetWohnsitz(*(int *)(e + 4), *(int *)(q + 1));
 		h = cm_SendSetGebBesitzer(*(int *)(q + 1), *(int *)(e + 4), *(int *)(e + 4));
 		while (cm_GetCommandStatus(h) == 0) {
 			fcn_00535960();
@@ -364,7 +364,7 @@ void __cdecl fcn_00512ee0(void)
 						goto release_handles;
 				}
 			}
-			fcn_004c6000(*(int *)(e + 4), *(int *)(q + 1));
+			cm_RequestSetWohnsitz(*(int *)(e + 4), *(int *)(q + 1));
 			h = cm_SendSetGebBesitzer(*(int *)(q + 1), *(int *)(e + 4),
 					*(int *)(e + 4));
 			while (cm_GetCommandStatus(h) == 0) {

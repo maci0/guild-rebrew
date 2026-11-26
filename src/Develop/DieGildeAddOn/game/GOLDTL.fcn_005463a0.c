@@ -16,7 +16,7 @@ extern char g_7749dc;
 extern int g_7749e0;
 extern unsigned char g_6a4758[4];
 extern int g_6a475c;
-extern unsigned short g_6a4760[2];
+extern unsigned short g_6a4760;
 extern int g_6a4764;
 
 HE_ACTION* __cdecl he_fn_Handlung(void);
@@ -28,7 +28,7 @@ HE_ACTION* __cdecl he_StartHandlungSearch(int n, ...)
 
 	g_6a4758[0] = 0xff;
 	g_6a475c = -1;
-	g_6a4760[0] = 0xffff;
+	g_6a4760 = 0xffff;
 	g_6a4764 = -1;
 	g_7749dc = 1;
 	g_7749e0 = 0;
@@ -42,7 +42,7 @@ HE_ACTION* __cdecl he_StartHandlungSearch(int n, ...)
 			g_6a475c = va_arg(ap, int);
 			break;
 		case 2:
-			g_6a4760[0] = va_arg(ap, unsigned short);
+			g_6a4760 = va_arg(ap, unsigned short);
 			break;
 		case 3:
 			g_6a4764 = va_arg(ap, int);

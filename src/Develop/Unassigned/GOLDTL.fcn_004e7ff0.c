@@ -1,5 +1,5 @@
 #include "client_data.h"
-extern char g_68da68[];
+extern Rec18_68da68 g_68da68[];
 /* Slot pairing probe: matches the caller argument against two entries of the
  * 24-byte slot table at 0x9a9220 and a 24-byte type record at 0x68da68, then
  * bumps the per-entry counters. */

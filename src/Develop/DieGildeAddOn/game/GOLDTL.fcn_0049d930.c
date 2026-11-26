@@ -23,7 +23,7 @@ extern unsigned char g_773d75;
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl gm_ResolveEntityById(void** out, int a, int b, int c);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0050b810(int a, unsigned char b);
+int __cdecl gm_SumQueryEntryValues(int a, unsigned char b);
 int __cdecl fcn_004a4fb0(int* a, int* b, char* q, int c);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 float __cdecl gm_GetCityStatsSummary(char* p);
@@ -58,7 +58,7 @@ int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, B
 		return 0;
 	}
 	rec = (char*) fcn_00502cd0(*(int*) (q + 0x5d), 2, 6, 0, 0x115);
-	val = fcn_0050b810(*(int*) (rec + 0x14), g_773d75);
+	val = gm_SumQueryEntryValues(*(int*) (rec + 0x14), g_773d75);
 	if (!(*(unsigned char*) (q + 0x5a) & 4)) {
 		if (*(char*) (q + 0x5c) < gm_RandomMod(0x40) + 0x25) {
 			b1.kind = 4;

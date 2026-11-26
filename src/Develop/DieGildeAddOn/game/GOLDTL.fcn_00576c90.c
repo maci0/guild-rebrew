@@ -16,7 +16,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl gm_ApplyAssassinDamage(char*, char*, int);
 int __cdecl gm_RecordAssassinEvidence(char*, char*, int);
 int __cdecl gm_GetElapsedMinutes(char*, char*);
-int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
+int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl he_TryTriggerAction0x9b(int, char*);
@@ -70,7 +70,7 @@ void __cdecl fcn_00576c90(char* e)
 			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 			goto done;
 		}
-		*(int*) (e + 0xcc) = fcn_004c5da0(*(int*) (p + 4), *(int*) (r + 1), -1, 0, 1, (char*) 0x6a7e18);
+		*(int*) (e + 0xcc) = ch_StartMovement(*(int*) (p + 4), *(int*) (r + 1), -1, 0, 1, (char*) 0x6a7e18);
 		fcn_004c5620(1, e);
 		goto done;
 	case 1:
@@ -145,7 +145,7 @@ void __cdecl fcn_00576c90(char* e)
 		if (p == 0) {
 			goto minus_one;
 		}
-		*(int*) (e + 0xcc) = fcn_004c5da0(*(int*) (e + 0xb8), *(int*) (e + 0xb0), -1, 0, 0, (char*) 0x6a7e18);
+		*(int*) (e + 0xcc) = ch_StartMovement(*(int*) (e + 0xb8), *(int*) (e + 0xb0), -1, 0, 0, (char*) 0x6a7e18);
 		*(int*) (e + 0x84) = fcn_004c5620(5, e);
 		goto done;
 	case 5:
@@ -196,7 +196,7 @@ void __cdecl fcn_00576c90(char* e)
 			*(int*) (e + 0xc4) = *(int*) (r + 4);
 			*(int*) (e + 0xc8) = 1;
 			cm_SendCancelCharacterActions(*(int*) (q + 4));
-			fcn_004c5da0(*(int*) (q + 4), *(int*) (e + 0xac), -1, 0, 1, (char*) 0x6a7e3c);
+			ch_StartMovement(*(int*) (q + 4), *(int*) (e + 0xac), -1, 0, 1, (char*) 0x6a7e3c);
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(7, e);
@@ -206,7 +206,7 @@ void __cdecl fcn_00576c90(char* e)
 		*(int*) (e + 0xc4) = -1;
 		*(int*) (e + 0xc8) = 0;
 		cm_SendCancelCharacterActions(*(int*) (q + 4));
-		fcn_004c5da0(*(int*) (q + 4), *(int*) (e + 0xac), -1, 0, 1, (char*) 0x6a7e3c);
+		ch_StartMovement(*(int*) (q + 4), *(int*) (e + 0xac), -1, 0, 1, (char*) 0x6a7e3c);
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0xf, 0);
 		*(int*) (e + 0x84) = fcn_004c5620(6, e);

@@ -12,7 +12,7 @@
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
-extern char g_77670b;
+extern unsigned char g_77670b;
 extern char g_77e020[];
 extern char* g_14ad590[];
 #include "Develop/DieGildeAddOn/game/game_player.h"

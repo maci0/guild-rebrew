@@ -35,7 +35,7 @@ int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 int __cdecl fcn_0050f950(int a, int b);
 int __cdecl fcn_00507c30(int k);
-float __cdecl fcn_004ff040(char* e);
+float __cdecl gm_GetEntityHealthRatio(char* e);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
@@ -63,7 +63,7 @@ void __cdecl d2_OpenPersonInfoPanel(char* e)
 		if (*(unsigned char*) (e + 0x165) != 0) {
 			kind = fcn_00507c30(*(unsigned char*) (e + 0x165));
 		}
-		pct = (int) (fcn_004ff040(e) * 100.0);
+		pct = (int) (gm_GetEntityHealthRatio(e) * 100.0);
 		io_FormatEntityNameMarkup(*(unsigned short*) e, 1, 4, buf);
 		io_AppendText(g_6a2e8c, buf, pct);
 		d2_SetForm(g_6a25b8, 0);

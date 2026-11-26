@@ -23,21 +23,21 @@ int __cdecl fcn_0050c830(pos14_7f4c00* a, pos14_7f4c00* b, int modus);
 int __cdecl gm_GetBuildingTechEffect(unsigned char* objekt, int art, int modus);
 void __cdecl cm_RequestCopyEntityData(int besitzer, int objekt, int menge, int modus);
 char* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_004ff040(void* objekt);
+float __cdecl gm_GetEntityHealthRatio(void* objekt);
 float __cdecl ahm_CalcRecipeProductivityBonus(char* objekt, int ware);
-int __cdecl fcn_005c6270(char* objekt, int id);
-int __cdecl fcn_005c62c0(char* objekt, int id);
+int __cdecl gm_HasActiveSpecialObject(char* objekt, int id);
+int __cdecl gm_HasActiveSpecialObjectOnEntity(char* objekt, int id);
 int __cdecl he_HasZigeunerAction0x9f(char* objekt);
 void __cdecl gm_CountBuildingWorkers(char* objekt);
 float __cdecl fcn_0050fdb0(int besitzer, int anzahl, int* ids);
 struct unit* __cdecl he_StartHandlungSearch(int anzahl, ...);
 void __cdecl he_FreeAction(struct unit* objekt);
-void __cdecl fcn_005467e0(int* objekt);
+void __cdecl d3_FreeEventGfxSlot(int* objekt);
 int __cdecl cm_SendSellObjekt(int a, int b, short ware, int menge, char besitzer, int modus);
-int __cdecl fcn_004c5250(int objekt, unsigned short ware, int menge);
+int __cdecl cm_SendProdObjekt(int objekt, unsigned short ware, int menge);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text, unsigned char flags,
     int typ, int x, int y, char* name, char* bild);
-void __cdecl fcn_004c6300(int id);
+void __cdecl cm_RequestUpdateBuildingSmoke(int id);
 void __cdecl fcn_00529160(char* objekt, int a, int besitzer, char* ereignis);
 
 /* Field offsets and names below are inferred from the complete native body.
@@ -149,7 +149,7 @@ void __cdecl he_RunProduktion(char* e)
                     }
                 }
                 if (gebaeude != 0 && *(int*) (gebaeude + 0x95) != -1) {
-                    fcn_004c6300(*(int*) (gebaeude + 1));
+                    cm_RequestUpdateBuildingSmoke(*(int*) (gebaeude + 1));
                 }
                 *(int*) (e + 0xc8) = 1;
 warten:
@@ -164,7 +164,7 @@ warten:
             return;
         }
         if (*(int*) (gebaeude + 0x95) == -1) {
-            fcn_004c6300(*(int*) (gebaeude + 1));
+            cm_RequestUpdateBuildingSmoke(*(int*) (gebaeude + 1));
         }
         typ = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)gebaeude];
         leistung = gm_GetBuildingTechEffect((unsigned char*) gebaeude, 1, 1) * 0.01 + 1.0;
@@ -174,7 +174,7 @@ warten:
         }
         leistung = leistung + ((haus[2] == 6 || haus[2] == 7)
             ? (float) (*(unsigned char*) (haus + 0x81) * (1.0 / 1008.0)) : 0.0f);
-        if ((gebaeude[0x5a] & 0x20) && fcn_005c62c0(gebaeude, 0x178)) {
+        if ((gebaeude[0x5a] & 0x20) && gm_HasActiveSpecialObjectOnEntity(gebaeude, 0x178)) {
             leistung *= 0.5;
         }
         if (*(unsigned char*) (e + 0xd0) >= 60) {
@@ -189,7 +189,7 @@ warten:
                     }
                     arbeiter = gm_LookupEntityRecordById(*arbeiter_id);
                     if (arbeiter != 0) {
-                        arbeitsleistung = fcn_004ff040(arbeiter);
+                        arbeitsleistung = gm_GetEntityHealthRatio(arbeiter);
                         if (arbeiter[0x165] == 27 || arbeiter[0x165] == 28) {
                             arbeitsleistung = (gm_GetEntitySkill(arbeiter, 1) + 0.5) * arbeitsleistung;
                             if (arbeiter[0x1b4] & 1) {
@@ -199,7 +199,7 @@ warten:
                         if (arbeiter[0x1cc] & 4) {
                             arbeitsleistung = ahm_CalcRecipeProductivityBonus(arbeiter, *(unsigned short*) (e + 0xac)) * arbeitsleistung;
                         }
-                        if (fcn_005c6270((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)], 0x2ba)) {
+                        if (gm_HasActiveSpecialObject((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)], 0x2ba)) {
                             summe += arbeitsleistung * 1.25f;
                         } else {
                             summe += arbeitsleistung;
@@ -267,7 +267,7 @@ warten:
                 }
                 *(int*) (e + 0xc8) = 0;
                 if (*(int**) (e + 0x88) != 0) {
-                    fcn_005467e0(*(int**) (e + 0x88));
+                    d3_FreeEventGfxSlot(*(int**) (e + 0x88));
                     *(int**) (e + 0x88) = 0;
                 }
                 *letzte_zeit = *(pos14_7f4c00*) (e + 0x52);
@@ -288,7 +288,7 @@ warten:
                         *(float*) (e + 0xb8) = *(float*) (e + 0xb4);
                     } while (*(float*) (e + 0xb4) <= 0.0f);
                     if (produziert != 0) {
-                        *(int*) (e + 0xc4) = fcn_004c5250(*(int*) (e + 0xc0), *(unsigned short*) (e + 0xac), produziert);
+                        *(int*) (e + 0xc4) = cm_SendProdObjekt(*(int*) (e + 0xc0), *(unsigned short*) (e + 0xac), produziert);
                         goto lager_done;
                     }
                 }
@@ -323,7 +323,7 @@ mangel:
             }
         }
         if (gebaeude != 0 && !*(int*) (e + 0xc8) && *(int*) (gebaeude + 0x95) != -1) {
-            fcn_004c6300(*(int*) (gebaeude + 1));
+            cm_RequestUpdateBuildingSmoke(*(int*) (gebaeude + 1));
         }
         *(int*) (e + 0xc8) = 1;
         *(int*) (e + 0xc4) = -1;
@@ -349,7 +349,7 @@ mangel:
             }
         }
         if (gebaeude != 0) {
-            fcn_004c6300(*(int*) (gebaeude + 1));
+            cm_RequestUpdateBuildingSmoke(*(int*) (gebaeude + 1));
         }
         he_FreeAction((struct unit*) e);
         return;
@@ -357,7 +357,7 @@ mangel:
     case -1:
         gm_ResolveEntityById((void**) &gebaeude, 0, 0, *(int*) (e + 0xbc));
         if (gebaeude != 0) {
-            fcn_004c6300(*(int*) (gebaeude + 1));
+            cm_RequestUpdateBuildingSmoke(*(int*) (gebaeude + 1));
         }
         for (arbeiter = g_7f4ca0; (int) arbeiter < (int) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[768]); arbeiter += sizeof(ENTITY_RECORD)) {
             if (*(char**) (arbeiter + 0x17c) == e) {

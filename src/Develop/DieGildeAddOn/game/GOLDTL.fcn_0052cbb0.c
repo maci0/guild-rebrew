@@ -37,7 +37,7 @@ int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
 float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
 void __cdecl d3_TransformPoint(char* e, char* pos, float* out);
 float __cdecl fcn_00413d10(float* p);
-void __cdecl fcn_00433780(char* cam);
+void __cdecl d3_FreeObjectAnimation(char* cam);
 void __cdecl d3_AnimateObjectTransform(char* cam, float* a, float* b, int d, int e);
 
 /* ADDRESS: GOLDTL 0x0052cbb0 */
@@ -88,7 +88,7 @@ void __cdecl fcn_0052cbb0(Ent* e)
 	*(int*) &rot[0] = *(int*) (cam + 0x84);
 	*(int*) &rot[1] = *(int*) (cam + 0x88);
 	*(int*) &rot[2] = *(int*) (cam + 0x8c);
-	fcn_00433780(cam);
+	d3_FreeObjectAnimation(cam);
 	d3_ActiveCameraAnimation = 0;
 	d3_CameraAnimating = 0;
 	h = fcn_00413d10(q);

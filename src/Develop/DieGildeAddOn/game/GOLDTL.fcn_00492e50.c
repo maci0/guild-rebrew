@@ -16,18 +16,18 @@ typedef struct
 	int f38;
 	unsigned char arr1[0x10];
 	int f4c;
-} Cmd92e50;
+} BLACKJACK_STATE;
 // SIZE 0x50
 
 /* ADDRESS: GOLDTL 0x00492e50 */
-int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
+int __cdecl ai_EvalBlackjackAction(BLACKJACK_STATE* a, char* b)
 {
 	unsigned char* p;
 	int count;
 	int sum;
 	int sw;
-	unsigned char v1;
-	unsigned char v2;
+	unsigned char selfCardCount;
+	unsigned char otherCardCount;
 	int extra;
 	int i;
 	int n;
@@ -40,15 +40,15 @@ int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
 	if ((void*) b == a->link0) {
 		sw = a->f28;
 		count = a->f14;
-		v1 = a->f10;
+		selfCardCount = a->f10;
 		p = a->arr0;
-		v2 = a->f34;
+		otherCardCount = a->f34;
 		extra = 0;
 	} else if ((void*) b == a->link1) {
 		sw = a->f4c;
 		count = a->f38;
-		v1 = a->f34;
-		v2 = a->f10;
+		selfCardCount = a->f34;
+		otherCardCount = a->f10;
 		p = a->arr1;
 		extra = 1;
 	} else {
@@ -56,7 +56,7 @@ int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
 	}
 	count &= 0xff;
 	sum = 0;
-	for (i = 0; i < v1; i++) {
+	for (i = 0; i < selfCardCount; i++) {
 		sum += p[i];
 	}
 	switch (sw) {
@@ -82,7 +82,7 @@ int __cdecl fcn_00492e50(Cmd92e50* a, char* b)
 			return 3;
 		}
 		n = 6 - count;
-		if ((float) n >= v - (float) v2 * 3.5f) {
+		if ((float) n >= v - (float) otherCardCount * 3.5f) {
 			return 3;
 		}
 		return 4;

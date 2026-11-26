@@ -15,13 +15,13 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0050f950(int, int);
-void __cdecl fcn_004c6430(int, int, int);
-void __cdecl fcn_004c6650(int);
+void __cdecl cm_RequestChangePlayerHe(int, int, int);
+void __cdecl cm_RequestCancelEntityEvent(int);
 
 int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
 void __cdecl cm_SendSetAttribute(void);
 int __cdecl gm_FindFallbackPublicBuilding(char*, int*, int*);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 char* __cdecl fcn_005049a0(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -46,16 +46,16 @@ void __cdecl he_RunWorkerQuitAction(char* u)
 		    || fcn_0050f950(*(unsigned short*) (*(char**) (h + 0x16c) + 0x27), *(unsigned short*) h) > -0x1a) {
 			goto kill;
 		}
-		fcn_004c6430(*(int*) (h + 4), 0, 0);
-		fcn_004c6650(*(int*) (h + 4));
+		cm_RequestChangePlayerHe(*(int*) (h + 4), 0, 0);
+		cm_RequestCancelEntityEvent(*(int*) (h + 4));
 		cm_BeginPacketFieldDelta(h, *(int*) (h + 4));
 		cm_AppendCommandSyncField(4, 1, h - g_aed32c + 0x16c, &v);
 		cm_SendSetAttribute();
 		if (gm_FindFallbackPublicBuilding(h, &a, &b) != 0) {
 			if (b != -1) {
-				fcn_004c5da0(*(int*) (h + 4), a, b, 0, 0, "Entlassen");
+				ch_StartMovement(*(int*) (h + 4), a, b, 0, 0, "Entlassen");
 			} else {
-				fcn_004c5da0(*(int*) (h + 4), a, -1, 0, 1, "Entlassen");
+				ch_StartMovement(*(int*) (h + 4), a, -1, 0, 1, "Entlassen");
 			}
 		}
 		v = -5;

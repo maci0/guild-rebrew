@@ -29,7 +29,7 @@ int __cdecl cm_RequestSysMessage(int, void*);
 void __cdecl fcn_004c5980(void*);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
-int __cdecl fcn_004c6470(int, int);
+int __cdecl cm_RequestSetEntityLevel(int, int);
 int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_00535960(void);
@@ -80,7 +80,7 @@ void __cdecl fcn_00535ec0(void)
 		return;
 	}
 	case 0x19:
-		fcn_004c6470(*(int*) (g_774970 * 0x21c + 0x7f4ca4), 1);
+		cm_RequestSetEntityLevel(*(int*) (g_774970 * 0x21c + 0x7f4ca4), 1);
 		return;
 	case 0x22: {
 		char* m;

@@ -46,7 +46,7 @@ typedef struct Node_451f80 {
 #include "Develop/Units/d3/d3_camera.h"
 
 extern int g_6b8064;
-extern Node_451f80* g_6b8068;
+extern void* g_6b8068;
 extern int d3_RenderedVertexCount;
 extern int g_1042a08;
 extern float g_1040c80[16];
@@ -112,8 +112,8 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 						node->next = prev->next;
 						prev = node;
 					} else {
-						node->next = g_6b8068;
-						g_6b8068 = node;
+						node->next = (Node_451f80*) g_6b8068;
+						g_6b8068 = (void*) node;
 					}
 				} else {
 					if (!set) {

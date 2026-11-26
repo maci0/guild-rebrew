@@ -22,7 +22,7 @@ typedef struct {
 #include "client_types.h"
 extern slot_1007ce8 g_1007ce8[];
 
-int __cdecl fcn_004a7880(int);
+int __cdecl gm_DrawCard(int);
 
 
 /* ADDRESS: GOLDTL 0x004a8700 */
@@ -31,7 +31,7 @@ void __cdecl fcn_004a8700(void)
 	int i;
 
 	for (i = 0; i < 3; i++) {
-		((fcn_004a8700_game*)g_1007cd4)->e[i].h = fcn_004a7880(i);
+		((fcn_004a8700_game*)g_1007cd4)->e[i].h = gm_DrawCard(i);
 		((fcn_004a8700_slot*)g_1007ce8)[((fcn_004a8700_game*)g_1007cd4)->e[i].h].flag = 1;
 	}
 	((fcn_004a8700_game*)g_1007cd4)->count++;

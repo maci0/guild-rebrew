@@ -21,7 +21,7 @@ extern int g_1005840;
 extern int g_1005844;
 extern int g_1005848;
 extern short g_100584c;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 extern int gm_GameTime, g_7f4c04, g_7f4c08;
 float __cdecl fcn_00413d10(float* pos);
 int __cdecl gm_GetSeason(int* p);

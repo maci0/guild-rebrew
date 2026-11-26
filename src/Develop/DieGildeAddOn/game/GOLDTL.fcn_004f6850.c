@@ -7,7 +7,7 @@
 
 extern int g_7f4c04;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern int gm_RichterKatholisch;
 extern int gm_RichterEvangelisch;

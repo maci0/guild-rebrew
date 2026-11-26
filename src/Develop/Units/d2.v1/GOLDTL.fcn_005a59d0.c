@@ -44,7 +44,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00533a40(char*);
 int __cdecl fcn_005a5440(int, void*, int, int, int);
-int __cdecl fcn_005a5980(void*);
+int __cdecl d2_FindSelectedListRow(void*);
 int __cdecl d2_CountActiveListRows(void*);
 int __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_0046ed00(int, int, int);
@@ -205,7 +205,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 			}
 		}
 		if (v31 == 1) {
-			v16 = fcn_005a5980(globRows);
+			v16 = d2_FindSelectedListRow(globRows);
 			if (v16 != -1) {
 				v2 = globRows[v16].val;
 				v3 = ownRows[v30].val;
@@ -244,7 +244,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 				} else fcn_00475220(g_14ab710);
 			}
 		} else if (v31 == 2) {
-			v16 = fcn_005a5980(ownRows);
+			v16 = d2_FindSelectedListRow(ownRows);
 			if (v16 != -1) {
 				v2 = ownRows[v16].val;
 				v3 = globRows[v30].val;

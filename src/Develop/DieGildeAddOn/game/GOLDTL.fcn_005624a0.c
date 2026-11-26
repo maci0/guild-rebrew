@@ -27,7 +27,7 @@ char* __cdecl cm_GetCommandResult(int);
 int __cdecl fcn_004c5620(int, void*);
 void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl cm_SendCancelCharacterActions(unsigned int);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl gm_ResolveEntityById(void**, int, int, int);
 int __cdecl gm_CompareGameTime(void*, void*);
@@ -125,7 +125,7 @@ void __cdecl fcn_005624a0(char* ctx)
 		ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 		if (ent != 0) {
 			cm_SendCancelCharacterActions(*(int*) (ent + 4));
-			fcn_004c5da0(*(int*) (ent + 4), *(int*) (hit + 1), -1, 0, 1, s_67ed14);
+			ch_StartMovement(*(int*) (ent + 4), *(int*) (hit + 1), -1, 0, 1, s_67ed14);
 			gm_AddTime(ctx + 0x52, 0, 5, 0);
 			*(int*) (ctx + 0xb4) = *(int*) (hit + 1);
 			*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
@@ -158,7 +158,7 @@ void __cdecl fcn_005624a0(char* ctx)
 		if (hit != 0 && *(unsigned short*) (hit + 0x27) != 0xffff) {
 			if (gm_CompareGameTime(ctx + 0xc8, &gm_GameTime) == -1) {
 				cm_SendCancelCharacterActions(*(int*) (ent + 4));
-				fcn_004c5da0(*(int*) (ent + 4), *(int*) (hit + 1),
+				ch_StartMovement(*(int*) (ent + 4), *(int*) (hit + 1),
 				    -1, 0, 1, s_67ed14);
 				*(int*) (ctx + 0x84) = fcn_004c5620(3, ctx);
 				return;

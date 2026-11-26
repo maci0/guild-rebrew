@@ -3,7 +3,7 @@ extern Offer g_6abb08[];
 
 /* ADDRESS: GOLD 0x005ba7b0 */
 /* ADDRESS: GOLDTL 0x005c6220 */
-char* __cdecl fcn_005c6220(int key, int* out)
+char* __cdecl gm_LookupSpecialObjectRecord(int key, int* out)
 {
 	int n;
 	int v;

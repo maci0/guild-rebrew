@@ -22,10 +22,10 @@ typedef struct Cell {
 	Link* tail;
 } Cell;
 
-int __cdecl fcn_00454c90(Cell*, char*, char*);
+int __cdecl d3_TransformBoundsCorners(Cell*, char*, char*);
 Res __cdecl fcn_00437ee0(int, char*, char*);
 
-void __cdecl fcn_00454f80(Cell* c, char* e, int v)
+void __cdecl d3_UpdateFrustumCellVisibility(Cell* c, char* e, int v)
 {
 	Res r;
 	Link* l;
@@ -35,7 +35,7 @@ void __cdecl fcn_00454f80(Cell* c, char* e, int v)
 	if (c == 0) {
 		return;
 	}
-	t = fcn_00454c90(c, e + 0x4c, e + 0x18c);
+	t = d3_TransformBoundsCorners(c, e + 0x4c, e + 0x18c);
 	r = fcn_00437ee0(t, 0, 0);
 	if (r.b6) {
 		for (l = c->head; l != 0; l = l->next) {
@@ -46,7 +46,7 @@ void __cdecl fcn_00454f80(Cell* c, char* e, int v)
 	} else if (r.lo) {
 		for (i = 0; i < 4; i++) {
 			if (c->child[i] != 0) {
-				fcn_00454f80(c->child[i], e, v);
+				d3_UpdateFrustumCellVisibility(c->child[i], e, v);
 			}
 		}
 	}

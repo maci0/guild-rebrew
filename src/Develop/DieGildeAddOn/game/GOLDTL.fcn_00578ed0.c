@@ -1,7 +1,7 @@
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl fcn_00529160(int, int, int, int);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-extern void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+extern void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 extern int __cdecl fcn_004a57a0(char*, int, int, char*, int, int, unsigned int*);
 extern int __cdecl fcn_004f45b0(char*);
 extern int __cdecl gm_WalkEntityChain(int);
@@ -78,7 +78,7 @@ void __cdecl fcn_00578ed0(char* event)
 					*(int*) (event + 0x70) = -1;
 					return;
 				}
-				fcn_004c5da0(*(int*) (event + 0xac), *(int*) (e + 1), -1, 0, 1, (char*) 0x6a7f08);
+				ch_StartMovement(*(int*) (event + 0xac), *(int*) (e + 1), -1, 0, 1, (char*) 0x6a7f08);
 				*(int*) (event + 0x70) += 1;
 				return;
 			case 2:
@@ -148,7 +148,7 @@ found_one:
 					*(int*) (event + 0x70) = -1;
 					return;
 				}
-				fcn_004c5da0(*(int*) (event + 0xac), *(int*) (*(int*) (e + 0x16c) + 1), -1, 0, 0,
+				ch_StartMovement(*(int*) (event + 0xac), *(int*) (*(int*) (e + 0x16c) + 1), -1, 0, 0,
 					(char*) 0x6a7f08);
 				*(int*) (event + 0x70) += 1;
 				return;

@@ -44,7 +44,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(GAME_TIMESTAMP *, int, int, int);
 int __cdecl gm_CompareGameTime(GAME_TIMESTAMP *, GAME_TIMESTAMP *);
-void __cdecl fcn_004c6a70(int);
+void __cdecl cm_RequestRemoveCutscene(int);
 #include "Develop/DieGildeAddOn/game/cutscene.h"
 
 /* ADDRESS: GOLDTL 0x004e6650 */
@@ -79,7 +79,7 @@ int __cdecl cut_UpdateCutscenes(void)
 					continue;
 				}
 				if (((Kind*) (g_9b0840 + 0x10))[((Ent*)cut_Cutscenes)[i].type].fn != 0 && ((Kind*) (g_9b0840 + 0x10))[((Ent*)cut_Cutscenes)[i].type].fn((char*) &((Ent*)cut_Cutscenes)[i]) == 0) {
-					fcn_004c6a70(((Ent*)cut_Cutscenes)[i].id);
+					cm_RequestRemoveCutscene(((Ent*)cut_Cutscenes)[i].id);
 					continue;
 				}
 			}

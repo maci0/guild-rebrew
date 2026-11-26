@@ -15,7 +15,7 @@ extern float g_6628a8;
 
 int __cdecl ahm_CheckFlag(void* p);
 int __cdecl ahm_FindRecipeSlot(void* p, int id);
-int __cdecl fcn_004c6d30(void* m);
+int __cdecl cm_RequestAhmCommand(void* m);
 
 /* ADDRESS: GOLDTL 0x004eea30 */
 int __cdecl fcn_004eea30(void* obj, int id, float fraction)
@@ -35,12 +35,12 @@ int __cdecl fcn_004eea30(void* obj, int id, float fraction)
 	if (fraction > 0.0f) {
 		if (fraction < 1.0f) {
 			m.f = fraction;
-			return fcn_004c6d30(&m);
+			return cm_RequestAhmCommand(&m);
 		}
 	} else {
 		m.f = 0.0f;
-		return fcn_004c6d30(&m);
+		return cm_RequestAhmCommand(&m);
 	}
 	m.f = 1.0f;
-	return fcn_004c6d30(&m);
+	return cm_RequestAhmCommand(&m);
 }

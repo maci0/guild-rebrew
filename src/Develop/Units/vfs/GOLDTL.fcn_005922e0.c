@@ -9,7 +9,7 @@ extern Slot_779d00 g_779d00[];
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, int);
 
-int __cdecl fcn_005922e0(int fh)
+int __cdecl ls_SaveSlot779d00(int fh)
 {
 	int n;
 	int i;

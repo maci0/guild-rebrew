@@ -21,7 +21,7 @@ extern int g_67fca4;
 extern int g_67fcb0;
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_0042d670(char*);
+void __cdecl txt_ReleaseTextBank(char*);
 
 void __cdecl hst_ResetHistoryState(void)
 {
@@ -37,7 +37,7 @@ void __cdecl hst_ResetHistoryState(void)
 		}
 	}
 	fcn_0064d41a(buf, g_680890, g_868060 + g_773d75 * 0x2f4);
-	fcn_0042d670(buf);
+	txt_ReleaseTextBank(buf);
 	hst_HistoryTextBase = -1;
 	g_67fca4 = -1;
 	g_67fca8 = -1;

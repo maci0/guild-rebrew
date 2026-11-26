@@ -9,9 +9,9 @@ extern char* g_7746c4;
 extern char* g_7746c8;
 extern char* g_7746cc;
 extern int g_7749e4;
-extern unsigned char g_7749e8;
+extern char g_7749e8;
 extern unsigned char g_7747b0;
-extern int g_7747b8;
+extern char* g_7747b8;
 extern int g_100f884;
 extern int g_100f1dc;
 extern int g_14ce8d8;
@@ -120,7 +120,7 @@ done:
         fcn_004727a0(*(int*) (*(int*) (e + 0x74) + 8), 0);
         fcn_00519190(0x679060, *(int*) (e + 0x7c));
         if (g_774964 != 2)
-            sb_PlayVoice(g_7747b8, "NeueMessage_s_01", 1, 0x3f, 0x7f, 0, 0);
+            sb_PlayVoice((int) g_7747b8, "NeueMessage_s_01", 1, 0x3f, 0x7f, 0, 0);
         if (*(unsigned char*) (e + 0xf0) & 8)
             fcn_00545c50(*(int*) (e + 0x74));
         if (*(unsigned char*) (e + 0xf0) & 0x10) {

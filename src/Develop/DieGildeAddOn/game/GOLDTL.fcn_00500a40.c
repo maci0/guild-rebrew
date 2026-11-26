@@ -10,14 +10,14 @@ extern float g_662cf8;
 
 float __cdecl fcn_00505e30(int);
 int __cdecl gm_CheckEntityAgeLimit(int);
-float __cdecl fcn_004fef80(void*);
-float __cdecl fcn_004feff0(void*);
+float __cdecl gm_GetEntityHealth(void*);
+float __cdecl gm_GetEntityMaxHealth(void*);
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
 /* ADDRESS: GOLDTL 0x00500a40 */
-void __cdecl fcn_00500a40(void)
+void __cdecl gm_CollectPopulationStats(void)
 {
 	char* p;
 	int i;
@@ -36,8 +36,8 @@ void __cdecl fcn_00500a40(void)
 			g_99f624[idx] += 1;
 			if (gm_CheckEntityAgeLimit(i) != 0)
 				g_99f644 += 1.0f;
-			g_99f648[idx] += fcn_004fef80(p);
-			g_99f668[idx] += fcn_004feff0(p);
+			g_99f648[idx] += gm_GetEntityHealth(p);
+			g_99f668[idx] += gm_GetEntityMaxHealth(p);
 		}
 		p += 0x21c;
 		i++;

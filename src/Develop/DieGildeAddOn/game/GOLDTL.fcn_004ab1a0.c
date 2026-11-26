@@ -29,7 +29,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 void* __cdecl fcn_00502cd0(int, ...);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_004e8b40(int, Rec18*);
+int __cdecl amt_GetRoleTemplate(int, Rec18*);
 int __cdecl fcn_004f7120(unsigned int, void*, void*, void*, void*);
 
 /* ADDRESS: GOLDTL 0x004ab1a0 */
@@ -85,7 +85,7 @@ unsigned int __cdecl fcn_004ab1a0(int* subject, Msg* firstMessage, Msg* secondMe
 								 (void*) ((unsigned int) *(unsigned short*) (ent + 0x27) * 0x21c + 0x7f4ca0),
 								 &val, &out2, &out1) != 0 &&
 						    !((float) total * *(float*) 0x662b10 < (float) val)) {
-							fcn_004e8b40(*(unsigned char*) ((out2 & 0xffff) * 0x21c + 0x7f4e06), &rec);
+							amt_GetRoleTemplate(*(unsigned char*) ((out2 & 0xffff) * 0x21c + 0x7f4e06), &rec);
 							if ((unsigned short) gm_RandomMod(0xc) > (unsigned short) rec.x8) {
 								return 0;
 							}

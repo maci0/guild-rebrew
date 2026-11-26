@@ -2,7 +2,7 @@
 
 extern unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 extern int __cdecl gm_MapEntityStatRange(int type);
-extern int __cdecl fcn_005c6270(unsigned short* rec, int mode);
+extern int __cdecl gm_HasActiveSpecialObject(unsigned short* rec, int mode);
 extern int __cdecl gm_RandomMod(int range);
 extern void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 extern int __cdecl gm_WalkEntityChain(unsigned short v);
@@ -38,7 +38,7 @@ int __cdecl fcn_004b8130(int* arg)
     if (key == 0) {
         return 0x400;
     }
-    if (fcn_005c6270((unsigned short*) rec, 0x290) != 0) {
+    if (gm_HasActiveSpecialObject((unsigned short*) rec, 0x290) != 0) {
         return 0x400;
     }
     for (i = 0x7f4ca2; i < 0x85a0a2; i += 0x21c) {

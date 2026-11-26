@@ -11,7 +11,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c6b20(int, int, int);
 int __cdecl fcn_00567170(char*, int*, int*, int*);
-int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
+int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 int __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5620(int, char*);
@@ -56,7 +56,7 @@ void __cdecl fcn_005aee90(char* rec)
 		fcn_004c6b20(*(int*) (ent + 4), -(int) *(unsigned char*) (ent + 0x1b1), 0);
 		if (*(int*) (ent + 0x184) != 0) {
 			if (fcn_00567170(ent, &a, &b, 0) != 0) {
-				fcn_004c5da0(*(int*) (ent + 4), a, b, 0, 0,
+				ch_StartMovement(*(int*) (ent + 4), a, b, 0, 0,
 				    (char*) 0x6a69c8);
 			}
 		}

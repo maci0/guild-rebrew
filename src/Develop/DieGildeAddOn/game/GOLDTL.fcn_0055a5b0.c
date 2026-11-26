@@ -40,14 +40,14 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_SendCopyEntityData(Msg55a5*);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-float __cdecl fcn_004fef80(char*);
+float __cdecl gm_GetEntityHealth(char*);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
 /* ADDRESS: GOLD 0x5524c0 */
-void __cdecl fcn_0055a5b0(char* u)
+void __cdecl he_RunAction0x7f(char* u)
 {
 	float f;
 	int a;
@@ -81,7 +81,7 @@ void __cdecl fcn_0055a5b0(char* u)
 			h = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)]);
 			f = gm_GetEntitySkill(h, 3) > 0.1f ? gm_GetEntitySkill(h, 3) : 0.1f;
 			a = gm_WalkEntityChain(*(unsigned short*) h);
-			fcn_004ff210(*(unsigned short*) h, -(int) ((int) fcn_004fef80(h) * ((1.0f - f) * 0.5f)));
+			fcn_004ff210(*(unsigned short*) h, -(int) ((int) gm_GetEntityHealth(h) * ((1.0f - f) * 0.5f)));
 			d = (int) (a * f * 0.06f);
 			cm_RequestTransferCurrencyNoKill(*(int*) (u + 0xac), -1, g_773d75, d);
 			io_FormatTextBuffer(buf, 0x10ba, d);

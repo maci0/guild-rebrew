@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_00525fb0(unsigned char*);
+int __cdecl d2_CheckOwnerBlocked(unsigned char*);
 void __cdecl fcn_0052a0c0(unsigned char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowThievesGuildSpyDialog(void);
@@ -25,19 +25,19 @@ void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
-void __cdecl fcn_005ad950(unsigned char* e)
+void __cdecl d2_StartThievesGuildSpyPicker(unsigned char* building)
 {
 	Req req;
 	char text[0x400];
 
-	if (fcn_00525fb0(e) == 0) {
+	if (d2_CheckOwnerBlocked(building) == 0) {
 		memset(&req, 0, sizeof(req));
 		req.size = 0x400;
-		if (e != 0) {
-			fcn_0052a0c0(e, 0);
+		if (building != 0) {
+			fcn_0052a0c0(building, 0);
 			req.id = 0x727;
 			req.kind = 7;
-			if (*(char *)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category == 0x13) {
+			if (*(char *)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building].category == 0x13) {
 				req.c = 0x90010;
 				req.d = 0;
 			}

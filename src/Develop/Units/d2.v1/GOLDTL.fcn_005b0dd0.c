@@ -20,7 +20,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
-void __cdecl fcn_005b01c0(int, int);
+void __cdecl d2_AddWindowFrame(int, int);
 void __cdecl fcn_0046f540(int);
 int __cdecl io_AppendText(char*, ...);
 
@@ -35,23 +35,23 @@ int __cdecl fcn_005b0dd0(MsgBox* m)
 	d2_SetForm(m->dlg, 0);
 	if (m->msg == 0) {
 		if (m->flags & 4) {
-			fcn_005b01c0(d2_CurrentWindowId, 0x727);
+			d2_AddWindowFrame(d2_CurrentWindowId, 0x727);
 		}
 		else if (m->flags & 2) {
-			fcn_005b01c0(d2_CurrentWindowId, 0x72b);
+			d2_AddWindowFrame(d2_CurrentWindowId, 0x72b);
 		}
 		else if ((m->flags & 1) && m->text != 0) {
-			fcn_005b01c0(d2_CurrentWindowId, 0x723);
+			d2_AddWindowFrame(d2_CurrentWindowId, 0x723);
 		}
 		else if ((m->flags & 8) && m->text != 0) {
-			fcn_005b01c0(d2_CurrentWindowId, 0x723);
+			d2_AddWindowFrame(d2_CurrentWindowId, 0x723);
 		}
 		else {
-			fcn_005b01c0(d2_CurrentWindowId, 0x71f);
+			d2_AddWindowFrame(d2_CurrentWindowId, 0x71f);
 		}
 	}
 	else {
-		fcn_005b01c0(d2_CurrentWindowId, m->msg);
+		d2_AddWindowFrame(d2_CurrentWindowId, m->msg);
 	}
 	if (m->text != 0) {
 		d2_SetForm(m->dlg, 1);

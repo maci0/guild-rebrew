@@ -16,17 +16,17 @@ void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 char __cdecl fcn_004545c0(char*, char*);
 void __cdecl fcn_00454850(char*, int, int, int);
 
-char* __cdecl fcn_00454c00(int a1, int mask, int a3, int a4)
+char* __cdecl d3_BuildSceneQuadtree(int node, int mask, int split_limit, int max_depth)
 {
 	char* ctx;
 	Link* l;
 
 	ctx = (char*) m_PoolAlloc(g_6b89a0, 0x48, 0x40);
 	*(int*) (ctx + 0x44) = mask;
-	*(int*) (ctx + 0x34) = a3;
-	*(int*) (ctx + 0x38) = a4;
-	d3_VisitSceneObjects(g_67a370, a1, mask, fcn_004545c0, ctx);
-	fcn_00454850(ctx, a3, 1, a4);
+	*(int*) (ctx + 0x34) = split_limit;
+	*(int*) (ctx + 0x38) = max_depth;
+	d3_VisitSceneObjects(g_67a370, node, mask, fcn_004545c0, ctx);
+	fcn_00454850(ctx, split_limit, 1, max_depth);
 	if (*(int*) (ctx + 0x30) == 0) {
 		m_pool_free(g_6b89a0, ctx);
 		return 0;

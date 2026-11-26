@@ -23,7 +23,7 @@ void __cdecl fcn_0058f020(int);
 void __cdecl fcn_0058f6a0(int);
 void __cdecl d2_ShowHauntingDialog(int);
 void __cdecl fcn_0058d5f0(int);
-void __cdecl fcn_0058fb60(int);
+void __cdecl d2_StartGrabpflege(int);
 void __cdecl fcn_0058fba0(int);
 void __cdecl fcn_0058fbd0(int);
 void __cdecl fcn_0058fa20(int);
@@ -76,7 +76,7 @@ void __cdecl d2_RunFriedhofActions(int arg)
 				} else if (g_7746a0 == ingredientAction) {
 					fcn_0058d5f0(arg);
 				} else if (g_7746a0 == graveCareAction) {
-					fcn_0058fb60(arg);
+					d2_StartGrabpflege(arg);
 				} else if (g_7746a0 == createHelperAction) {
 					fcn_0058fba0(arg);
 				} else if (g_7746a0 == insuranceAction) {
@@ -100,7 +100,7 @@ void __cdecl d2_RunFriedhofActions(int arg)
 			} else if ((*(unsigned char*)&g_14cf950) == 0x23) {
 				d2_ShowHauntingDialog(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x19) {
-				fcn_0058fb60(arg);
+				d2_StartGrabpflege(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x16) {
 				fcn_0058fa40(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x11) {

@@ -1,5 +1,5 @@
 int __cdecl io_FormatTextBuffer(void *buf, int len);
-int __cdecl fcn_005cad70(char *a0, char *a1);
+int __cdecl d2_OpenEntityPicker(char *a0, char *a1);
 int __cdecl gm_LookupEntityRecordById(int value);
 int __cdecl gm_IncreaseEntitySkill(unsigned char *e, int idx);
 
@@ -11,7 +11,7 @@ int __cdecl fcn_005dd130(char *entity, int *a1)
 
 	if (entity[2] == 6) {
 		io_FormatTextBuffer(buf, 0x9d);
-		r = fcn_005cad70(entity, buf);
+		r = d2_OpenEntityPicker(entity, buf);
 		if (r != 0) {
 			gm_IncreaseEntitySkill((unsigned char *) r, 4);
 			return 1;

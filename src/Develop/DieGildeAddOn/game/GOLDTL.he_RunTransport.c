@@ -53,7 +53,7 @@ void __cdecl he_TransportStadtStadt(char *);
 void __cdecl ReportClientMessage(char *);
 void __cdecl sb_PlayVoice(int, char *, int, int, int, int, int);
 void __cdecl fcn_0046f280(int);
-int __cdecl fcn_005a7400(char *, int, int);
+int __cdecl gm_IsGebaeudeOpen(char *, int, int);
 
 /* ADDRESS: GOLDTL 0x0055ea30 */
 void __cdecl he_RunTransport(char *e)
@@ -225,7 +225,7 @@ void __cdecl he_RunTransport(char *e)
 		if (q == 0) {
 			goto ret_minus1;
 		}
-		if (fcn_005a7400(q, 0, 0) != 0) {
+		if (gm_IsGebaeudeOpen(q, 0, 0) != 0) {
 			c = g_773d75;
 			if (*q == 'G') {
 				c = *(unsigned char *)(q + 0x65);

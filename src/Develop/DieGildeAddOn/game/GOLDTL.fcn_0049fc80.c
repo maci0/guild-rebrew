@@ -17,7 +17,7 @@ typedef struct Rec18 {
 
 
 
-int __cdecl fcn_004e8b40(int idx, Rec18* out);
+int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl amt_CollectOfficeCandidates(int k, int max, ENTITY_RECORD** out);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
@@ -38,7 +38,7 @@ ENTITY_RECORD* __cdecl fcn_0049fc80(ENTITY_RECORD* subject)
 	if (subject->unk_165[1] == 0) {
 		float bd;
 
-		fcn_004e8b40(subject->unk_165[2], &q);
+		amt_GetRoleTemplate(subject->unk_165[2], &q);
 		for (i = 0; i < 768; i++) {
 			candidate = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[i]);
 			if (candidate->unk_165[1] != 0 && srv_GetEntityOfficeSlot((unsigned char*) candidate, &q, &r) != 0 && q.x8 <= 1) {

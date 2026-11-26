@@ -3,7 +3,7 @@
 
 void __cdecl gm_GenerateShuffledIndices(int, int*);
 void __cdecl gm_IncreaseEntitySkill(unsigned char*, int);
-void __cdecl fcn_004c6330(int);
+void __cdecl cm_RequestUpdateResidenceDecor(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005dbe90(char*);
 
@@ -29,7 +29,7 @@ int __cdecl gm_ObjBoostOneSkill(unsigned char* e, int* action)
 		i++;
 	}
 	if (e[2] == 6) {
-		fcn_004c6330(*(int*) (e + 4));
+		cm_RequestUpdateResidenceDecor(*(int*) (e + 4));
 		io_FormatTextBuffer(text, 0xfe8, **(unsigned short**) action * 2 + 0xd71, last + 0x16b7);
 		fcn_005dbe90(text);
 	}

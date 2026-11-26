@@ -1,7 +1,7 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_0050dfd0(char*, int);
+int __cdecl gm_GetStorageSlotCapacity(char*, int);
 int __cdecl gm_GetMsgField(char*, char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_FindSlotById(int, int);
@@ -161,17 +161,17 @@ int __cdecl fcn_005974e0(int a0, char* a1)
         v9 = fcn_00502cd0(*(unsigned int*) (v3 + 0x14), 1, 0, v13[-0xc]);
         if (v9) {
             if (*(unsigned short*) v3 != 0x1db && *(unsigned short*) v3 != 0x1dc) {
-                v10 = fcn_0050dfd0(v3, *v9);
+                v10 = gm_GetStorageSlotCapacity(v3, *v9);
                 v13[-1] = (unsigned int) (v10 * *(int*) (v9 + 0xe)) >> 2;
                 *v13 = gm_GetMsgField(v3, (char*) v9);
                 v2 = *v9;
-                v13[1] = fcn_0050dfd0(v3, v2);
+                v13[1] = gm_GetStorageSlotCapacity(v3, v2);
             } else {
                 v10 = (int) gm_FindSlotById(*(unsigned int*) ((char*) a0 + 0x65), *v9);
                 if (v10 && *(int*) (v10 + 4)) {
                     *v13 = gm_GetMsgField(v3, (char*) v9);
                     v2 = *v9;
-                    v13[1] = fcn_0050dfd0(v3, v2);
+                    v13[1] = gm_GetStorageSlotCapacity(v3, v2);
                 }
             }
         } else {

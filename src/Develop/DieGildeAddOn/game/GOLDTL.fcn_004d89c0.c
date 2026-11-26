@@ -29,7 +29,7 @@ int __cdecl gm_RandomMod(int);
 unsigned char __cdecl fcn_0045b990(int, int, int*, int*, int*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-int __cdecl fcn_004c6680(int, int, int, int);
+int __cdecl cm_RequestChTalkAction(int, int, int, int);
 int __cdecl fcn_004c6940(int, int, Ev_4d89c0*);
 int __cdecl gm_GetEquippedCombatGear(int);
 int __cdecl gm_FindEntityActiveItem(int);
@@ -38,7 +38,7 @@ int __cdecl fcn_004cec00(int, int, int*, int*);
 float __cdecl fcn_004cefb0(int, unsigned int);
 int __cdecl fcn_004d1020(int, int, int, int, int);
 int __cdecl cut_RandMod(int);
-int __cdecl fcn_005c6270(int, int);
+int __cdecl gm_HasActiveSpecialObject(int, int);
 
 /* ADDRESS: GOLDTL 0x004d89c0 */
 unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
@@ -82,7 +82,7 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 				goto fail;
 			if (fcn_004cec00(a1, a2, (int*) &a1, &a2) == 0)
 				goto fail;
-			return fcn_004c6680(*(int*) (*(int*) (actor + 0x184) + 0x34), a1, a2, 0);
+			return cm_RequestChTalkAction(*(int*) (*(int*) (actor + 0x184) + 0x34), a1, a2, 0);
 		}
 	}
 	if (*(int*) (*(int*) (actor + 0x184) + 0x128) != 0)
@@ -99,7 +99,7 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 		ev.amount = (int) ((unsigned int) (cut_RandMod(*((unsigned char*) p + 6) - *((unsigned char*) p + 5))
 		    + *((unsigned char*) p + 5)) * *(float*) (a2 + 0x1c) * 0.01);
 	}
-	if (v9 != 0 && fcn_005c6270(v9, 0x2b9))
+	if (v9 != 0 && gm_HasActiveSpecialObject(v9, 0x2b9))
 		ev.amount = (int) (ev.amount * g_664144);
 	ev.done = 1;
 	ev.hit = hit;

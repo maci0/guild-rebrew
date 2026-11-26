@@ -9,7 +9,7 @@ typedef struct FRAME_412B10 {
 } FRAME_412B10;
 extern int d3_ActiveCamera;
 int* __cdecl d3_CreateObjectAnimation(char* a0, D3_ANIMATION_OPTIONS flags, int count, void* frames);
-void __cdecl fcn_00451720(void* a0, void* a1, void* a2, void* a3);
+void __cdecl d3_WrapEulerAnglesPi(void* a0, void* a1, void* a2, void* a3);
 void __cdecl d3_SetObjectRotation(void* a0, void* a1);
 
 /* The native body keeps an EBP frame (/Oy-, non-frame-omitted build). */
@@ -60,7 +60,7 @@ unsigned int __cdecl fcn_00412b10(char* object, float targetX, float targetY, fl
 	frames[0].rotation[2] = 0.0f;
 	rotation[1] = targetRotY;
 	if ((a8 & 8) != 0) {
-		fcn_00451720(object + 0x84, rotation, v6, rotation);
+		d3_WrapEulerAnglesPi(object + 0x84, rotation, v6, rotation);
 		d3_SetObjectRotation(object, v6);
 	}
 	if (object == (char*) d3_ActiveCamera) {

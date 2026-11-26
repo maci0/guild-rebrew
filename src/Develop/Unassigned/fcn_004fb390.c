@@ -1,7 +1,7 @@
 #include "client_data.h"
 extern float g_773d4c, g_773d50, g_99ec14, g_99f590[];
 extern char g_99f5e0[];
-void __cdecl fcn_004faed0(void*);
+void __cdecl gm_CollectOccupancyStats(void*);
 void __cdecl cm_RequestUpdateEconomyStats(void*);
 void* __cdecl memcpy(void* dst, const void* src, unsigned int n);
 
@@ -12,7 +12,7 @@ void __cdecl fcn_004fb390(void)
 	float sample;
 	float slope;
 
-	fcn_004faed0(buf);
+	gm_CollectOccupancyStats(buf);
 	memcpy((void*) (g_99f5e0 + 0x0), buf, 0x28);
 	if (g_773d4c == 0.0f) {
 		sample = *(float*) &buf[5];

@@ -34,7 +34,7 @@ extern char* g_1015ea0;
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(char*, unsigned short*);
-int __cdecl fcn_0050dfd0(char*, int);
+int __cdecl gm_GetStorageSlotCapacity(char*, int);
 int __cdecl d2_GetControlValue(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00596810(char* msg, char* src)
@@ -146,7 +146,7 @@ int __cdecl fcn_00596810(char* msg, char* src)
 		q = fcn_00502cd0(*(int*) (msg + 0x14), 1, 0, ((Watch*) g_778da0)[i].id);
 		if (q != 0) {
 			((Watch*) g_778da0)[i].field = gm_GetMsgField(msg, q);
-			((Watch*) g_778da0)[i].value = fcn_0050dfd0(msg, *q);
+			((Watch*) g_778da0)[i].value = gm_GetStorageSlotCapacity(msg, *q);
 		}
 	}
 	result = 0;

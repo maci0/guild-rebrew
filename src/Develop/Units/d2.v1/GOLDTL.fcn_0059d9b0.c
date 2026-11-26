@@ -15,7 +15,7 @@ typedef struct {
 	int id;
 } Req;
 
-int __cdecl fcn_00525fb0(int);
+int __cdecl d2_CheckOwnerBlocked(int);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowBriberyDialog(void);
@@ -28,7 +28,7 @@ void __cdecl d2_SelectBriberyTarget(int e)
 	Req req;
 	char text[0x400];
 
-	if (fcn_00525fb0(e) == 0) {
+	if (d2_CheckOwnerBlocked(e) == 0) {
 		memset(&req, 0, sizeof(req));
 		req.size = 0x400;
 		if (e != 0) {

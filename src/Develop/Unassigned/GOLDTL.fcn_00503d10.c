@@ -5,7 +5,7 @@ extern char* g_773d78;
 
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 
-char* __cdecl fcn_00503d10(int who)
+char* __cdecl gm_FindCityItemHolder(int who)
 {
 	char* list[8];
 	int i;

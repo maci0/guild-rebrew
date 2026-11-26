@@ -12,7 +12,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl fcn_00502cd0(int a, int b, ...);
-int __cdecl fcn_00525fb0(void* obj);
+int __cdecl d2_CheckOwnerBlocked(void* obj);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_00470820(int a, int b, char* name);
@@ -85,7 +85,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 			count = 2;
 		}
 	}
-	if (fcn_00525fb0(targetBuilding) != 0) {
+	if (d2_CheckOwnerBlocked(targetBuilding) != 0) {
 		return;
 	}
 	memset(ids + 3, 0, 3 * sizeof(int));

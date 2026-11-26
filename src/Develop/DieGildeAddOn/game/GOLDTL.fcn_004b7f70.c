@@ -1,7 +1,7 @@
 #include <string.h>
 
 extern unsigned char g_773d75; extern double g_662a48; extern double g_6640e8; extern void* __cdecl gm_LookupEntityRecordById(unsigned int);
-extern int __cdecl fcn_005c6270(void*, int);
+extern int __cdecl gm_HasActiveSpecialObject(void*, int);
 extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl gm_FindNextFilteredEntity(void);
 unsigned short __cdecl gm_RandomMod(int);
@@ -33,7 +33,7 @@ int __cdecl fcn_004b7f70(unsigned int* request)
 	if (ent == 0) {
 		return 1;
 	}
-	if (fcn_005c6270(ent, 0x290) != 0) {
+	if (gm_HasActiveSpecialObject(ent, 0x290) != 0) {
 		return 0x400;
 	}
 	n = (int) gm_StartFilteredEntitySearch(1, 5, 7);

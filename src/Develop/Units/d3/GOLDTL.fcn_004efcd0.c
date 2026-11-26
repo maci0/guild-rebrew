@@ -12,7 +12,7 @@ extern Slot170_7731b8 g_7731b8[8];
 void __cdecl d3_SelectSceneContext(int, int);
 
 
-void __cdecl fcn_004efcd0(void)
+void __cdecl d3_DestroySceneSlotObjects(void)
 {
 	int save;
 	int i;

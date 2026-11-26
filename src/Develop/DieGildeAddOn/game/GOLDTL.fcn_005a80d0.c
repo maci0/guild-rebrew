@@ -11,7 +11,7 @@ void __cdecl init_LoadGebaeudeScene(int a0);
 int __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3, int a4);
 int __cdecl d3_SelectSceneContext(int a0, int a1);
 void __cdecl fcn_0043aa30(int a0);
-void __cdecl fcn_005167c0(unsigned char* a0, int a1);
+void __cdecl d3_UpdateBuildingView(unsigned char* a0, int a1);
 void __cdecl d3_SetupInteriorScene(int a0, unsigned char* a1);
 int __cdecl gm_GetBuildingTypeCategory(int a0);
 void __cdecl fcn_00438b40(char* p, int* v);
@@ -104,7 +104,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 				*(unsigned char*) (*(int*) &g_6b8300 + 0x8036) = (*(unsigned char*) (*(int*) &g_6b8300 + 0x8036) & 0xeb) | 8;
 			}
 		}
-		fcn_005167c0((unsigned char*) *(int*) &g_7746c8, *(unsigned short*) p);
+		d3_UpdateBuildingView((unsigned char*) *(int*) &g_7746c8, *(unsigned short*) p);
 		d3_SetupInteriorScene(*(int*) &g_7746c8, p);
 		if (*(int*) &g_67a370 != 0) {
 			v10 = *(int*) (*(int*) &g_67a370 + 0x3c8);

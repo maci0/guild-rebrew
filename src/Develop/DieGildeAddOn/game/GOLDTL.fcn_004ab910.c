@@ -14,7 +14,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_GetBuildingSlotCapacity(unsigned char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004a5340(unsigned short* e, int n, int* lim, float a4, float r, unsigned short* ids);
-int __cdecl fcn_0050b810(int a, char b);
+int __cdecl gm_SumQueryEntryValues(int a, char b);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x004ab910 */
@@ -65,7 +65,7 @@ int __cdecl ai_StartVerfluchen(int action, unsigned short* entity, int a3, char*
 	if (fcn_004a5340(entity, 1, &lim, 0.0f, gm_RandomMod(0x20) + 25.0f, &id) == 0)
 		return 0;
 	p = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]);
-	money = (int) (fcn_0050b810(*(int*) ((char*) entity + 0x178), (*(char*)&g_773d75)) * 0.25f);
+	money = (int) (gm_SumQueryEntryValues(*(int*) ((char*) entity + 0x178), (*(char*)&g_773d75)) * 0.25f);
 	gm_WalkEntityChain(*entity);
 	for (n = best_v - 1; n > 0; n--) {
 		if (money > (n > 1 ? n : 1) * 32000)

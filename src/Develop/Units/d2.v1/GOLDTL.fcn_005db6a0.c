@@ -21,7 +21,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005db3d0(char*, char*, int);
+int __cdecl amt_SendAction0x45(char*, char*, int);
 void __cdecl fcn_00526120(int, int);
 unsigned short* __cdecl fcn_005cadc0(int, Query*, int, char*, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -36,7 +36,7 @@ void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_005db6a0(char* e, char* o)
+int __cdecl gm_HandleVerhoerMode2(char* e, char* o)
 {
 	Query q;
 	int cancel;
@@ -62,7 +62,7 @@ int __cdecl fcn_005db6a0(char* e, char* o)
 		if (p[0x166] == 0) {
 			return 0x60;
 		}
-		fcn_005db3d0(e, p, 2);
+		amt_SendAction0x45(e, p, 2);
 		return 0x10;
 	}
 	r = 2;
@@ -89,7 +89,7 @@ int __cdecl fcn_005db6a0(char* e, char* o)
 	do {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok && d2_CheckActionBlocker(e, 4) != 0) {
-				h = fcn_005db3d0(e, (char*) g, 2);
+				h = amt_SendAction0x45(e, (char*) g, 2);
 				while (h != -1 && cm_GetCommandStatus(h) == 0) {
 					fcn_00535960();
 				}
@@ -102,7 +102,7 @@ int __cdecl fcn_005db6a0(char* e, char* o)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005db6a0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) gm_HandleVerhoerMode2, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

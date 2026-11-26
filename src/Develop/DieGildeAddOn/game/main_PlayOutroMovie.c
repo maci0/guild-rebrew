@@ -16,7 +16,9 @@ void __cdecl fcn_00473150(unsigned char*);
 
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
 extern void (__stdcall* g_662264)(int);
-extern int g_7747d4, main_LoopFlags, g_1040494, d2_ScreenHeight, main_Instance, g_774940;
+extern int g_7747d4, main_LoopFlags, g_1040494, d2_ScreenHeight, main_Instance;
+typedef void* HWND;
+extern HWND g_774940;
 extern float g_678158;
 extern unsigned char g_772d10;
 extern char g_14cf950;
@@ -57,7 +59,7 @@ void __cdecl main_PlayOutroMovie(void)
 	fcn_0041f350(g_7747d4);
 	fcn_00473150(h);
 	main_PumpWindowMessages();
-	g_662264(g_774940);
+	g_662264((int) g_774940);
 	io_AcquireKeyboard(1);
 	io_AcquireMouse(1);
 	*(int*) 0x6b5c90 = 1;

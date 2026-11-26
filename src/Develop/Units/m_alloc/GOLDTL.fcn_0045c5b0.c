@@ -52,7 +52,7 @@ int __cdecl fcn_0045be40(char*);
 int __cdecl fcn_0045c290(unsigned int, int*);
 void __cdecl fcn_0045c310(Tex*, char);
 void __cdecl fcn_0045c380(Tex*, unsigned int, unsigned int, unsigned int);
-int __cdecl fcn_00401590(int, unsigned int*, int*, unsigned int*);
+int __cdecl vfs_ReadBmpInfo(int, unsigned int*, int*, unsigned int*);
 
 /* ADDRESS: GOLDTL 0x0045c5b0 */
 Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int flags2)
@@ -160,7 +160,7 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 	}
 	avail = fcn_0045be40(name);
 	if (avail != 0) {
-		avail = fcn_00401590(avail, &width, &height, (unsigned int*) &fmt) & 0xff;
+		avail = vfs_ReadBmpInfo(avail, &width, &height, (unsigned int*) &fmt) & 0xff;
 	} else {
 		avail = 1;
 		width = 0;

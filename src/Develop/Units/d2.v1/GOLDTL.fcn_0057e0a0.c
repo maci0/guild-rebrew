@@ -23,11 +23,11 @@ void __cdecl fcn_00545c50(int);
 int __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00580140(void);
 int __cdecl fcn_00580290(void);
-void __cdecl fcn_00580320(void);
-void __cdecl fcn_005803f0(void);
+void __cdecl d2_ShowTutorialInlineForm(void);
+void __cdecl d2_HideTutorialHint(void);
 void __cdecl fcn_00580420(void);
 void __cdecl d2_HideTutorialPrompt(void);
-void __cdecl fcn_00580610(void);
+void __cdecl d2_UpdateTutorialProgress(void);
 void __cdecl fcn_005806d0(void);
 int __cdecl fcn_00580960(void);
 void __cdecl fcn_00584160(int);
@@ -67,7 +67,7 @@ int __cdecl fcn_0057e0a0(void)
 	if (g_774a18 == 0) {
 		return 0;
 	}
-	fcn_00580610();
+	d2_UpdateTutorialProgress();
 	if (d3_CameraAnimating != 0) {
 		return 0;
 	}
@@ -142,7 +142,7 @@ ret0:
 			g_665f08[2] = ((unsigned int) g_6b7fac);
 			if (g_665f08[10] == 0 && *(int *)((int)g_665f08[6] + 0x14) != 0) {
 				g_665f08[10] = 1;
-				fcn_00580320();
+				d2_ShowTutorialInlineForm();
 			}
 		} else {
 			if (((unsigned int) g_6b7fac) > g_665f08[2] + 0x238) {
@@ -151,7 +151,7 @@ ret0:
 				}
 				g_665f08[2] = ((unsigned int) g_6b7fac);
 				g_665f08[10] = 0;
-				fcn_005803f0();
+				d2_HideTutorialHint();
 			}
 		}
 		if (g_665f08[10] == 1) {
@@ -162,7 +162,7 @@ ret0:
 	case 5:
 		g_665f08[2] = ((unsigned int) g_6b7fac);
 		g_665f08[10] = 0;
-		fcn_005803f0();
+		d2_HideTutorialHint();
 		g_665f08[0xf] = 2;
 		if (*(unsigned int *)((int)g_665f08[6] + 0x50) <= 0) {
 			goto label7;
@@ -215,7 +215,7 @@ label7:
 		if (g_665f08[10] == 1) {
 			g_665f08[2] = ((unsigned int) g_6b7fac);
 			g_665f08[10] = 0;
-			fcn_005803f0();
+			d2_HideTutorialHint();
 		}
 		if (g_665f08[0xc] == 0 && *(int *)((int)g_665f08[6] + 0x1c) != 0) {
 			g_665f08[0xc] = 1;
@@ -231,7 +231,7 @@ label7:
 		if (g_665f08[10] == 1) {
 			g_665f08[2] = ((unsigned int) g_6b7fac);
 			g_665f08[10] = 0;
-			fcn_005803f0();
+			d2_HideTutorialHint();
 		}
 		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x44) + g_665f08[3]) {
 			fcn_00532ef0();
@@ -263,7 +263,7 @@ label7:
 		if (g_665f08[10] == 1) {
 			g_665f08[2] = ((unsigned int) g_6b7fac);
 			g_665f08[10] = 0;
-			fcn_005803f0();
+			d2_HideTutorialHint();
 		}
 		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x30) + g_665f08[3]) {
 			fcn_00532ef0();
@@ -295,7 +295,7 @@ label7:
 		if (g_665f08[10] == 1) {
 			g_665f08[2] = ((unsigned int) g_6b7fac);
 			g_665f08[10] = 0;
-			fcn_005803f0();
+			d2_HideTutorialHint();
 		}
 		cb = *(void (__cdecl **)(int))((int)g_665f08[6] + 0x34);
 		if (cb != 0) {

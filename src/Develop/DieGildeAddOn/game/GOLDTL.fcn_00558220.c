@@ -7,15 +7,15 @@ extern char g_7f4ca4[];
 void* __cdecl gm_SearchTable67(int id);
 double __cdecl gm_RandomFloat01(void);
 unsigned short* __cdecl sim_StartEntityQueryByType(unsigned char* arg1);
-void __cdecl fcn_004c6430(int a1, int a2, int a3);
-void __cdecl fcn_004c6650(int a1);
-int __cdecl fcn_004c5da0(int who, int key, int target, char* name, int mode, char* text);
+void __cdecl cm_RequestChangePlayerHe(int a1, int a2, int a3);
+void __cdecl cm_RequestCancelEntityEvent(int a1);
+int __cdecl ch_StartMovement(int who, int key, int target, char* name, int mode, char* text);
 void __cdecl gm_AddTime(void* clock, int arg2, int arg3, int arg4);
 int __cdecl gm_CompareGameTime(void* a, void* b);
 void __cdecl he_FreeAction(char* u);
 
 /* ADDRESS: GOLDTL 0x00558220 */
-void __cdecl fcn_00558220(char* obj)
+void __cdecl he_RunUnkendunk(char* obj)
 {
 	char* rec;
 	char* e;
@@ -44,10 +44,10 @@ void __cdecl fcn_00558220(char* obj)
 		if (*(unsigned char*) (rec + 4) > 0 && *(int*) (rec + 0x180) != 0 && *(void**) (rec + 0x168) == q && *(int*) (rec + 0x16c) != 0 && gm_RandomFloat01() > 0.5 &&
 		    *(int*) (*(int*) (rec + 0x180) + 0x2c) == *(int*) (obj + 0xac)) {
 			e = (char*) sim_StartEntityQueryByType((unsigned char*) *(int*) (rec + 0x16c));
-			fcn_004c6430(*(int*) rec, 0, 0);
-			fcn_004c6650(*(int*) rec);
+			cm_RequestChangePlayerHe(*(int*) rec, 0, 0);
+			cm_RequestCancelEntityEvent(*(int*) rec);
 			if (e != 0) {
-				fcn_004c5da0(*(int*) rec, *(int*) (*(int*) (rec + 0x16c) + 1), *(int*) (e + 2), 0, 0, "Unkendunk");
+				ch_StartMovement(*(int*) rec, *(int*) (*(int*) (rec + 0x16c) + 1), *(int*) (e + 2), 0, 0, "Unkendunk");
 			}
 		}
 	}

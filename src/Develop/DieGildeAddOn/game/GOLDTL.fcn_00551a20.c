@@ -32,7 +32,7 @@ void __cdecl he_RegisterApEvent(int, char*, int, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl gm_IncreaseEntitySkill(ENTITY_RECORD* e, int v);
 
-void __cdecl fcn_00551a20(char* t)
+void __cdecl he_RunApTraitAction(char* t)
 {
 	char buf[0x100];
 	ENTITY_RECORD* e;

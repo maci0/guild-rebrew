@@ -10,7 +10,7 @@ extern char g_10432c0[];
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00452420(char* p);
-void __cdecl fcn_00433780(char* obj);
+void __cdecl d3_FreeObjectAnimation(char* obj);
 void __cdecl d3_ClearMatchingAuxSlot(void);
 void __cdecl d3_VisitSceneObjects(char* u, int b, int c, void (__cdecl* cb)(void), char* obj);
 
@@ -57,7 +57,7 @@ void __cdecl d3_DisposeObject(char* obj)
 		}
 	}
 	if (*(int*) (obj + 0x1d0) != 0) {
-		fcn_00433780(obj);
+		d3_FreeObjectAnimation(obj);
 	}
 	if (*(unsigned char*) (obj + 0x214) & 2) {
 		d3_RemoveObjectFromList((D3_OBJECT*) obj);

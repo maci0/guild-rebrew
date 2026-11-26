@@ -3,7 +3,7 @@
 extern int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 extern void __cdecl fcn_004557c0(void*, void*, int, float*);
 extern float* __stdcall D3DXMatrixTranspose(float*, const float*);
-extern float __cdecl fcn_004514d0(float*, float*);
+extern float __cdecl d3_WrapYawDelta(float*, float*);
 extern void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
 extern float* __stdcall fcn_005eb970(float*, const float*, const float*);
 extern void __cdecl d3_MatrixToEulerAngles(float*, float*);
@@ -73,7 +73,7 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 				    + m[10] * g_662d40[2];
 				t[1] = 0.0f; len = (float) sqrt(t[0] * t[0] + t[2] * t[2]);
 				if (!(len < 0.1f)) {
-					ang = -(float) fcn_004514d0((float*) 0x662d40, t);
+					ang = -(float) d3_WrapYawDelta((float*) 0x662d40, t);
 					t[0] = dir[0]; t[2] = dir[1];
 					x = (float) cos(ang) * t[0] + (float) sin(ang) * t[2];
 					z = (float) cos(ang) * t[2] - (float) sin(ang) * t[0];

@@ -25,10 +25,10 @@ char* __cdecl gm_SearchTable67(int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl ch_CountCharacters(int, int);
-void __cdecl fcn_004c6650(int);
+void __cdecl cm_RequestCancelEntityEvent(int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl cm_RequestChrWalkToDummy(int, int, int, char*);
-void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
+void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl gm_RandomMod(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -76,7 +76,7 @@ void __cdecl fcn_00567590(char* action)
 				if (out1 != *(int*) (*(int*) (p + 0x18) + 0x2c)) {
 					v18 = *(int*) p;
 					if (gm_CheckEntityType((char*) v18) != 0 || *(int*) (*(int*) p + 0x61) == 0) {
-						fcn_004c6650(*(int*) (p - 0x168));
+						cm_RequestCancelEntityEvent(*(int*) (p - 0x168));
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x168), out1, out2, "dummy_EINGANG");
 						cm_RequestChrWalkToDummy(*(int*) (p - 0x168), out1, out2, g_6b5c60);
 						*(unsigned int*) (p + 0x5c) |= 0x1000;
@@ -104,8 +104,8 @@ void __cdecl fcn_00567590(char* action)
 								}
 							}
 							if ((float) (g_7f4c04 & 0xffff) < g_696540[hour] - 1.0f) {
-								fcn_004c6650(*(int*) (p - 0x168));
-								fcn_004c5da0(*(int*) (p - 0x168), out1, out2, 0, 0, "Go to work");
+								cm_RequestCancelEntityEvent(*(int*) (p - 0x168));
+								ch_StartMovement(*(int*) (p - 0x168), out1, out2, 0, 0, "Go to work");
 								found += 1;
 								*(unsigned int*) (p + 0x5c) |= 0x1000;
 							}
@@ -134,7 +134,7 @@ next0:
 			    && (*(unsigned int*) (p + 0x64) & 0x1000) == 0
 			    && he_GetEntityReturnTarget(p - 0x164, &out2, &out1) != 0) {
 				if (out2 != *(int*) (*(int*) (p + 0x20) + 0x2c)) {
-					fcn_004c6650(*(int*) (p - 0x160));
+					cm_RequestCancelEntityEvent(*(int*) (p - 0x160));
 					cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");
 					cm_RequestChrWalkToDummy(*(int*) (p - 0x160), out2, out1, g_6b5c60);
 					*(unsigned int*) (p + 0x64) |= 0x1000;
@@ -187,21 +187,21 @@ next0:
 					c2 = *(unsigned char*) (0x7f4ca2
 					     + *(unsigned short*) (*(int*) (p - 0x18) + 0x27) * 0x21c);
 					if (c2 == 6 || c2 == 7) {
-						fcn_004c6650(*(int*) (p - 0x180));
+						cm_RequestCancelEntityEvent(*(int*) (p - 0x180));
 						if (count != 0 && gm_AccumulateTyped2(p - 0x184) > 0xc80
 						    && gm_RandomMod(2) != 0) {
 							if (he_PickNearestWirtshaus(p - 0x184, count, list, &out1, &out2) != 0) {
-								fcn_004c5da0(*(int*) (p - 0x180), out1, out2, 0, 0, "Go to wirtshaus");
+								ch_StartMovement(*(int*) (p - 0x180), out1, out2, 0, 0, "Go to wirtshaus");
 							}
 						}
 						else {
 							if (out2 == -1) {
-								fcn_004c5da0(*(int*) (p - 0x180), out1, out2, 0, 1, "Go home");
+								ch_StartMovement(*(int*) (p - 0x180), out1, out2, 0, 1, "Go home");
 							} else {
 								if (found >= 0x40) {
 									goto after1;
 								}
-								fcn_004c5da0(*(int*) (p - 0x180), out1, out2, 0, 0, "Go home");
+								ch_StartMovement(*(int*) (p - 0x180), out1, out2, 0, 0, "Go home");
 							}
 						}
 after1:
@@ -230,18 +230,18 @@ after1:
 			    && (out1 != *(int*) (*(int*) (p + 0x18) + 0x2c)
 			        || out2 != *(int*) (*(int*) (p + 0x18) + 0x30))
 			    && (*(unsigned int*) (p + 0x5c) & 0x800) == 0) {
-				fcn_004c6650(*(int*) (p - 0x168));
+				cm_RequestCancelEntityEvent(*(int*) (p - 0x168));
 				if (count != 0 && gm_AccumulateTyped2(p - 0x16c) > 0xc80 && gm_RandomMod(2) != 0) {
 					if (he_PickNearestWirtshaus(p - 0x16c, count, list, &out1, &out2) != 0) {
-						fcn_004c5da0(*(int*) (p - 0x168), out1, out2, 0, 0, "Go to wirtshaus");
+						ch_StartMovement(*(int*) (p - 0x168), out1, out2, 0, 0, "Go to wirtshaus");
 					}
 				}
 				else {
 					if (out2 != -1) {
-						fcn_004c5da0(*(int*) (p - 0x168), out1, out2, 0, 0, "Go home");
+						ch_StartMovement(*(int*) (p - 0x168), out1, out2, 0, 0, "Go home");
 					}
 					else {
-						fcn_004c5da0(*(int*) (p - 0x168), out1, out2, 0, 1, "Go home");
+						ch_StartMovement(*(int*) (p - 0x168), out1, out2, 0, 1, "Go home");
 					}
 				}
 				*(unsigned int*) (p + 0x5c) |= 0x800;
@@ -273,7 +273,7 @@ after1:
 			    && (out2 != *(int*) (*(int*) (p + 0x20) + 0x2c)
 			        || out1 != *(int*) (*(int*) (p + 0x20) + 0x30))
 			    && (*(unsigned int*) (p + 0x64) & 0x800) == 0) {
-				fcn_004c6650(*(int*) (p - 0x160));
+				cm_RequestCancelEntityEvent(*(int*) (p - 0x160));
 				if (count != 0 && gm_AccumulateTyped2(p - 0x164) > 0xc80 && gm_RandomMod(2) != 0) {
 					if (he_PickNearestWirtshaus(p - 0x164, count, list, &out2, &out1) != 0) {
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");

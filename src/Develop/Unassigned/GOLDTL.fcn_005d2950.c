@@ -6,33 +6,33 @@ int __cdecl abs(int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00508eb0(unsigned short, int);
 
-int __cdecl fcn_005d2950(int a, int b)
+int __cdecl gm_CanCourtEntity(int actorId, int targetId)
 {
-	unsigned char* p;
-	unsigned char* q;
+	unsigned char* actor;
+	unsigned char* target;
 
-	p = gm_LookupEntityRecordById(a);
-	q = gm_LookupEntityRecordById(b);
-	if (p == 0 || q == 0) {
+	actor = gm_LookupEntityRecordById(actorId);
+	target = gm_LookupEntityRecordById(targetId);
+	if (actor == 0 || target == 0) {
 		return -0x400;
 	}
-	if (!(p[8] > 0)) {
+	if (!(actor[8] > 0)) {
 		return -0x401;
 	}
-	if (!(q[8] > 0)) {
+	if (!(target[8] > 0)) {
 		return -0x402;
 	}
-	if (*(int*) (q + 0x5c) != -1 && *(int*) (q + 0x5c) != a) {
+	if (*(int*) (target + 0x5c) != -1 && *(int*) (target + 0x5c) != actorId) {
 		return -0x403;
 	}
-	if (*(int*) (p + 0x5c) != -1 && *(int*) (p + 0x5c) != b) {
+	if (*(int*) (actor + 0x5c) != -1 && *(int*) (actor + 0x5c) != targetId) {
 		return -0x404;
 	}
-	if (p[0x1b1] > 0) {
+	if (actor[0x1b1] > 0) {
 		return -0x405;
 	}
-	if (q[0x1b1] > 0) {
+	if (target[0x1b1] > 0) {
 		return -0x406;
 	}
-	return abs(fcn_00508eb0(*(unsigned short*) p, 0) - fcn_00508eb0(*(unsigned short*) q, 0)) < 6;
+	return abs(fcn_00508eb0(*(unsigned short*) actor, 0) - fcn_00508eb0(*(unsigned short*) target, 0)) < 6;
 }

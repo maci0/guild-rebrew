@@ -42,7 +42,7 @@ void __cdecl d3_DestroyObject(int);
 char __cdecl d3_ComputeObjectBoundingSphere(char*, char*, float*, float*);
 char* __cdecl evt_LoadGfxScript(int);
 void __cdecl fcn_00428340(char*, int, ...);
-void __cdecl fcn_00510820(int, void*, int);
+void __cdecl d3_BindEntitySceneObject(int, void*, int);
 void __cdecl fcn_0052d9d0(void*);
 int __cdecl gm_GetSeason(char*);
 void __cdecl fcn_005165b0(int);
@@ -146,7 +146,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 				*(int*) (h + 0x104) = 0;
 			}
 		}
-		fcn_00510820(obj, upgradeBuilding, 2);
+		d3_BindEntitySceneObject(obj, upgradeBuilding, 2);
 	}
 	fcn_0052d9d0(upgradeBuilding);
 	h = *(int*) (upgradeBuilding + 0x61);

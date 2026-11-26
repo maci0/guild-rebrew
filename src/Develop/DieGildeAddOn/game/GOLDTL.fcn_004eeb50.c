@@ -4,7 +4,7 @@
 #include <string.h>
 
 int __cdecl ahm_CheckFlag(void*);
-int __cdecl fcn_004c6d30(int*);
+int __cdecl cm_RequestAhmCommand(int*);
 
 int __cdecl ahm_SendSetFloatValue(char* object, int value)
 {
@@ -17,5 +17,5 @@ int __cdecl ahm_SendSetFloatValue(char* object, int value)
 	buf[0] = 0x61536d53;
 	buf[1] = *(int*) (object + 4);
 	buf[4] = value;
-	return fcn_004c6d30(buf);
+	return cm_RequestAhmCommand(buf);
 }

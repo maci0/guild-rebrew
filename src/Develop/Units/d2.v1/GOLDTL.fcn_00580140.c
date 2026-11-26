@@ -21,7 +21,7 @@ struct fsm {
 
 extern int* g_665f08;
 
-int __cdecl fcn_005800e0(void);
+int __cdecl d2_ClearTutorialText(void);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl sb_CheckVoicePlaying(int);
@@ -35,7 +35,7 @@ int __cdecl fcn_00580140(void)
 	if (((struct fsm*)g_665f08)->page == 0) {
 		return -4;
 	}
-	r = fcn_005800e0();
+	r = d2_ClearTutorialText();
 	if (r == -4) {
 		return r;
 	}

@@ -6,7 +6,7 @@ extern int g_7e4538;
 extern int gm_GameTime;
 extern int g_7f4c04;
 extern int g_7f4c08;
-extern unsigned short g_7f4c0c;
+extern short g_7f4c0c;
 extern char g_7f4ca4[];
 extern char g_6b5c60[];
 extern char g_68149c[];
@@ -32,7 +32,7 @@ char *__cdecl gm_LookupEntityRecordById(int);
 char *__cdecl fcn_00445600(char *, int, int, char *);
 void __cdecl d3_TransformPoint(char *, char *, float *);
 int __cdecl CompareVector3WithinTolerance(float *, float *, float);
-int __cdecl fcn_004c5da0(int, int, int, char *, int, char *);
+int __cdecl ch_StartMovement(int, int, int, char *, int, char *);
 int __cdecl fcn_004c5620(int, char *);
 void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl sprintf(char *, char *, ...);
@@ -51,7 +51,7 @@ int __cdecl gm_RandomMod(unsigned short);
 char *__cdecl evt_LoadGfxScript(char *);
 int __cdecl fcn_00428340(int, int, int, int, int);
 char *__cdecl gm_FindNearestBuildingByKind(char *, int);
-void __cdecl fcn_004c6430(int, int, int);
+void __cdecl cm_RequestChangePlayerHe(int, int, int);
 void __cdecl cm_RequestPlayAnimation(int, char *, int);
 
 /* ADDRESS: GOLDTL 0x0056cfc0 */
@@ -174,9 +174,9 @@ inc_step:
 					    i < 0x10) {
 						m = (char *)*(int *)(h - 0x180);
 						*q = (int)m;
-						fcn_004c6430((int)m, 0, 0);
+						cm_RequestChangePlayerHe((int)m, 0, 0);
 						cm_SendCancelCharacterActions(*q);
-						fcn_004c5da0(*q, *(int *)(n + 1), -1, 0, 1, g_6a6af4);
+						ch_StartMovement(*q, *(int *)(n + 1), -1, 0, 1, g_6a6af4);
 						cm_RequestPlayAnimation(*q, g_6a6ae0,
 							     (gm_RandomMod(2) & 0xffff) + 1);
 						i++;
@@ -258,11 +258,11 @@ inc_step:
 							if (!(CompareVector3WithinTolerance(
 								    (float *)(*(int *)(*(int *)(r + 0x184) + 0x34) + 0x4c),
 								    pos, 80.0f) != 0)) {
-								fcn_004c5da0(*p, *(int *)(e + 1), -1, 0, 1,
+								ch_StartMovement(*p, *(int *)(e + 1), -1, 0, 1,
 									     g_6a6af4);
 							} else {
 								if (i != 0)
-									fcn_004c5da0(*p, *(int *)(i + 1), -1, 0, 1,
+									ch_StartMovement(*p, *(int *)(i + 1), -1, 0, 1,
 										     g_6a6af4);
 							}
 						}
@@ -286,7 +286,7 @@ inc_step:
 			do {
 				if (*p != -1) {
 					cm_SendCancelCharacterActions(*p);
-					fcn_004c5da0(*p, *(int *)(e + 1), -1, 0, 0, g_6a6af4);
+					ch_StartMovement(*p, *(int *)(e + 1), -1, 0, 0, g_6a6af4);
 				}
 				p++;
 			} while (--i);

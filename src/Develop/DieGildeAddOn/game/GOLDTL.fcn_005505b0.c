@@ -19,7 +19,7 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x005505b0 */
-void __cdecl fcn_005505b0(int a)
+void __cdecl he_RunEvent053(int a)
 {
 	char buf[0x800];
 	char msg[0x200];

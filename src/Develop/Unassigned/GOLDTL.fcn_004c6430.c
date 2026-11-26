@@ -3,13 +3,13 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c6430(int a1, int a2, int a3)
+void __cdecl cm_RequestChangePlayerHe(int entity_id, int kind, int unused)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x47;
-	*(int*) (buf + 0x10) = a1;
-	*(int*) (buf + 0x14) = a2;
-	*(int*) (buf + 0x18) = a3;
+	*(int*) (buf + 0x10) = entity_id;
+	*(int*) (buf + 0x14) = kind;
+	*(int*) (buf + 0x18) = unused;
 	cm_EnqueueClientPacket(buf);
 }

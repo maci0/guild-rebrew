@@ -22,7 +22,7 @@ int __cdecl d2_BuildPersonStatusDesc(void*);
 void __cdecl fcn_005ca740(int, int, int, int, void*, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl cm_SendLogAction(char*);
-int __cdecl fcn_004c6900(int*);
+int __cdecl cm_RequestJoinLeaveElection(int*);
 void __cdecl cm_SendTraceEnd(char*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -155,7 +155,7 @@ void __cdecl fcn_005a2080(int building, int table)
 				join[2] = *(int*) (building + 1);
 				join[1] = *(int*) (g_774970 * 0x21c + 0x7f4ca4);
 				cm_SendLogAction("stammtisch join H-Plr");
-				next = fcn_004c6900(join);
+				next = cm_RequestJoinLeaveElection(join);
 				cm_SendTraceEnd("stammtisch join H-Plr");
 				n = cm_GetCommandStatus(next);
 				while (n == 0) {

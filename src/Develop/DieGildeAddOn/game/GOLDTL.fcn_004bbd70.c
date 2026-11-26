@@ -37,7 +37,7 @@ void __cdecl fcn_004bc6b0(AMBIENT_ANIMAL_SLOT*);
 /* Per-tick driver for the 32 ambient slots: may spawn one, then updates and
    retires the slot at the rotating cursor g_7728ec. */
 /* ADDRESS: GOLDTL 0x004bbd70 */
-void __cdecl fcn_004bbd70(void)
+void __cdecl gm_UpdateAmbientAnimals(void)
 {
 	int saved;
 	int r;

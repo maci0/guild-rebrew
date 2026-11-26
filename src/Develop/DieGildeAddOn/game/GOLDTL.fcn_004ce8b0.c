@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int* __cdecl gm_GetEquippedCombatGear(char*);
-float __cdecl fcn_004ff040(char*);
+float __cdecl gm_GetEntityHealthRatio(char*);
 
 
 /* ADDRESS: GOLDTL 0x004ce8b0 */
@@ -39,5 +39,5 @@ float __cdecl fcn_004ce8b0(char* e)
 			break;
 		}
 	}
-	return fcn_004ff040(e) * base * mult;
+	return gm_GetEntityHealthRatio(e) * base * mult;
 }

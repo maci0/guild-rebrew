@@ -6,7 +6,7 @@ extern float g_6628a8;
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(int a, int b, int c);
 float __cdecl fcn_00507e70(char* a, char* b, int c);
-int __cdecl fcn_005c6270(char* a1, int a2);
+int __cdecl gm_HasActiveSpecialObject(char* a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00493a30 */
 int __cdecl fcn_00493a30(unsigned short* key, char* e)
@@ -30,7 +30,7 @@ int __cdecl fcn_00493a30(unsigned short* key, char* e)
 	p2 = gm_LookupEntityRecordById(*(int*) (e + 0x14));
 	f1 = fcn_0050f980(*(unsigned short*) p1, *key, 1) * 0.01f;
 	f2 = fcn_0050f980(*(unsigned short*) p2, *key, 1) * 0.01f;
-	if (fcn_005c6270(p1, 0x22e) != 0) {
+	if (gm_HasActiveSpecialObject(p1, 0x22e) != 0) {
 		f1 = f1 + 0.1f;
 		f2 = f2 - 0.1f;
 	}

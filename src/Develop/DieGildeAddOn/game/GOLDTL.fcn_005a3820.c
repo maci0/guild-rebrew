@@ -11,7 +11,7 @@ void __cdecl fcn_00597ec0(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
-void __cdecl fcn_005a3680(void);
+void __cdecl d3_SelectTavernCardTableCity(void);
 
 extern int g_7746d8;
 extern char* g_7746a0;
@@ -94,7 +94,7 @@ ready:
 				d2_OpenMeisterbriefDialog(app);
 			} else if (active == fourth) {
 				*(int*) (fourth + 0x224) = 0;
-				fcn_005a3680();
+				d3_SelectTavernCardTableCity();
 				*(int*) (fourth + 0x224) = 1;
 			}
 		}

@@ -1,9 +1,9 @@
-typedef struct fcn_004c09b0_node fcn_004c09b0_node;
-struct fcn_004c09b0_node {
+typedef struct TRACKED_VOICE_NODE TRACKED_VOICE_NODE;
+struct TRACKED_VOICE_NODE {
 	int* f0;
 	int f4;
 	int f8;
-	fcn_004c09b0_node* next;
+	TRACKED_VOICE_NODE* next;
 };
 // SIZE 0x10
 
@@ -16,18 +16,18 @@ void __cdecl m_FreeTracked(void*);
 
 
 /* ADDRESS: GOLDTL 0x004c09b0 */
-void __cdecl fcn_004c09b0(void)
+void __cdecl d3snd_StopTrackedVoices(void)
 {
-	fcn_004c09b0_node* next;
+	TRACKED_VOICE_NODE* next;
 
 	if (g_772d2c != 0) {
 		g_772d2c = 0;
 		msx_FadeMasterVolumeIfTrackActive(1.0f, 2000);
 	}
-	while ((*(fcn_004c09b0_node**)&g_772d34) != 0) {
-		next = (*(fcn_004c09b0_node**)&g_772d34)->next;
-		d3snd_SetVoiceFlag0x10((*(fcn_004c09b0_node**)&g_772d34)->f0, 0);
-		m_FreeTracked((*(fcn_004c09b0_node**)&g_772d34));
-		(*(fcn_004c09b0_node**)&g_772d34) = next;
+	while ((*(TRACKED_VOICE_NODE**)&g_772d34) != 0) {
+		next = (*(TRACKED_VOICE_NODE**)&g_772d34)->next;
+		d3snd_SetVoiceFlag0x10((*(TRACKED_VOICE_NODE**)&g_772d34)->f0, 0);
+		m_FreeTracked((*(TRACKED_VOICE_NODE**)&g_772d34));
+		(*(TRACKED_VOICE_NODE**)&g_772d34) = next;
 	}
 }

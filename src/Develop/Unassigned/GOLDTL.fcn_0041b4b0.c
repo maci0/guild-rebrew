@@ -14,7 +14,7 @@ struct unk_41b4b0 {
 
 extern void* g_6b5de4;
 extern void* g_6b5de0;
-extern struct unk_41b4b0* g_6b5ddc;
+extern void* g_6b5ddc;
 extern unsigned long g_14ce728;
 
 void __cdecl fcn_0041b7c0(void);
@@ -33,8 +33,8 @@ void __cdecl d3_ReleaseGraphicsInterfaces(void)
 		g_14ce728 = (*(struct unk_41b4b0**)&g_6b5de0)->vtbl->Release((*(struct unk_41b4b0**)&g_6b5de0));
 		(*(struct unk_41b4b0**)&g_6b5de0) = 0;
 	}
-	if (g_6b5ddc != 0) {
-		g_14ce728 = g_6b5ddc->vtbl->Release(g_6b5ddc);
-		g_6b5ddc = 0;
+	if ((*(struct unk_41b4b0**)&g_6b5ddc) != 0) {
+		g_14ce728 = (*(struct unk_41b4b0**)&g_6b5ddc)->vtbl->Release((*(struct unk_41b4b0**)&g_6b5ddc));
+		(*(struct unk_41b4b0**)&g_6b5ddc) = 0;
 	}
 }

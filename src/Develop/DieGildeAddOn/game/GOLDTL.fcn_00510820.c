@@ -9,7 +9,7 @@ void __cdecl d3_SetSubtreeVisible(char*, int);
 void __cdecl fcn_005105a0(char*);
 void __cdecl fcn_005107f0(void);
 
-void __cdecl fcn_00510820(char* obj, unsigned char* ent, int kind)
+void __cdecl d3_BindEntitySceneObject(char* obj, unsigned char* ent, int kind)
 {
 	unsigned char* t;
 	void** p;

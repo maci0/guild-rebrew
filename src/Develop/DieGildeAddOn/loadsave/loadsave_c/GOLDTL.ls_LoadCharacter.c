@@ -28,7 +28,7 @@ extern void __cdecl ch_SetBodyAttachment(void*, int, void*);
 extern void __cdecl ch_StartLoopingAnimation(void*, void*);
 extern void __cdecl d3_SetObjectRotation(void*, void*);
 extern void __cdecl ch_UpdateHeldObjectAttachment(void*);
-extern void __cdecl fcn_00510820(void*, void*, int);
+extern void __cdecl d3_BindEntitySceneObject(void*, void*, int);
 extern char* __cdecl fcn_00442910(int, void*, void*, char*);
 extern char* __cdecl gm_ResolveEntityOwnerBuilding(void*);
 extern char __cdecl SelectTextureSet(void*, void*, unsigned char, char);
@@ -163,7 +163,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 						}
 						ch_UpdateHeldObjectAttachment(u);
 					} else {
-						fcn_00510820(target, u, 1);
+						d3_BindEntitySceneObject(target, u, 1);
 						target = *(char**) (rec + 0x34);
 						sprintf(target, s_68b0d8, *(unsigned int*) ((char*) u + 2));
 						type = *(unsigned char*) u;
@@ -194,7 +194,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 									 (unsigned char) tex, 1);
 							ch_AttachTransport(rec, found);
 							*(unsigned int*) ((char*) found + 0x224) = 1;
-							fcn_00510820(found, u, 1);
+							d3_BindEntitySceneObject(found, u, 1);
 						}
 					}
 				}

@@ -20,7 +20,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowProductionSelection(char*);
-void __cdecl fcn_005afa00(char*);
+void __cdecl d2_SelectPatrolTarget(char*);
 void __cdecl fcn_005afca0(char*);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 
@@ -60,7 +60,7 @@ void __cdecl d2_RunZollamtMenu(char* building)
 					d2_ShowProductionSelection(building);
 				}
 				else if (g_7746a0 == b) {
-					fcn_005afa00(building);
+					d2_SelectPatrolTarget(building);
 				}
 				else if (g_7746a0 == e) {
 					fcn_005afca0(building);

@@ -9,7 +9,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl d2_OpenSeanceDialog(int, char*, int);
 
-int __cdecl fcn_0058edc0(int entity, char* s, int resultOut)
+int __cdecl d2_RunSeanceMenu(int entity, char* s, int resultOut)
 {
 	int r;
 	int i;
@@ -35,6 +35,6 @@ int __cdecl fcn_0058edc0(int entity, char* s, int resultOut)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop(fcn_0058edc0, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_RunSeanceMenu, 0x677c7) != 0);
 	return r;
 }

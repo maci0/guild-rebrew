@@ -23,7 +23,7 @@ typedef struct {
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-int __cdecl fcn_004e8b40(int, rec18*);
+int __cdecl amt_GetRoleTemplate(int, rec18*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e9180(unsigned char*, int);
@@ -37,7 +37,7 @@ int __cdecl amt_CollectOfficeCandidates(int k, int max, unsigned char** out)
 	int cnt;
 	unsigned char* e;
 
-	if (fcn_004e8b40(k, &a) == 0)
+	if (amt_GetRoleTemplate(k, &a) == 0)
 		return 0;
 	n = amt_FindOfficeSlotsByKind(a.id, MIN(max, 6), list);
 	if (n == 0)

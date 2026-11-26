@@ -1,6 +1,6 @@
 #include "client_types.h"
 
-int __cdecl fcn_004e8b40(int idx, Rec18_68da68* out);
+int __cdecl amt_GetRoleTemplate(int idx, Rec18_68da68* out);
 char* __cdecl gm_LookupEntityRecordById(int a1);
 
 /* ADDRESS: GOLDTL 0x00508eb0 */
@@ -14,7 +14,7 @@ int __cdecl fcn_00508eb0(unsigned short id, int a1)
 	idx = id * 0x21c;
 	if (*(int*) (0x7f4ca4 + idx) == -1 || *(unsigned char*) (0x7f4ca8 + idx) <= 0)
 		return 0;
-	if (!fcn_004e8b40(*(unsigned char*) (0x7f4e06 + idx), &rec))
+	if (!amt_GetRoleTemplate(*(unsigned char*) (0x7f4e06 + idx), &rec))
 		return 1;
 	level = (*(unsigned int*) ((char*) &rec + 8) & 0xff) + 1;
 	if ((char) *(unsigned int*) ((char*) &rec + 8) == '\n')
