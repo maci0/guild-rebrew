@@ -44,7 +44,7 @@ void __cdecl cm_SendSetGebBesitzer(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl d2_ShowMessageBox(char*, unsigned int);
 void __cdecl fcn_00412830(int);
-int __cdecl fcn_00471e30(int);
+int __cdecl d2_DestroyForm(int);
 int __cdecl cut_RandMod(int);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl cm_RequestMoveCredits(int, int, int, int);
@@ -489,7 +489,7 @@ settle:
 	goto sync;
 done:
 	fcn_00412830(0x10);
-	return fcn_00471e30(screen);
+	return d2_DestroyForm(screen);
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_772d14[392];

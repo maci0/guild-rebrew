@@ -55,7 +55,7 @@ void __cdecl fcn_004c35f0(void);
 int __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl he_AssignActionSlot(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x0059d060 */
 int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
@@ -151,7 +151,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 			}
 		}
 		if (main_RunFrameLoop((void*) d2_RunTaschendiebstahlDialog, 0x677c7) == 0) {
-			fcn_00471e30(dlg);
+			d2_DestroyForm(dlg);
 			return flag;
 		}
 	} while (1);

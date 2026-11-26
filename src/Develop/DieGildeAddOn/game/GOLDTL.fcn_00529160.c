@@ -17,7 +17,7 @@ extern void __cdecl he_RemoveActionActor(int, char*);
 extern void __cdecl gm_CountBuildingWorkers(char*);
 extern int __cdecl he_CountActionActors(char*);
 extern void __cdecl he_FreeAction(char*);
-extern int __cdecl fcn_004c5620(char, char*);
+extern int __cdecl cm_SendSetHE(char, char*);
 extern void __cdecl cm_BeginPacketFieldDelta(char*, int);
 extern int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
 extern void __cdecl cm_SendSetAttribute(void);
@@ -146,12 +146,12 @@ void __cdecl he_AssignActionSlot(unsigned char* activeRec, char* sceneObj, unsig
 			gm_CountBuildingWorkers((char*) old);
 			if (he_CountActionActors((char*) old) <= 0) {
 				*(pos14_7f4c00*) (old + 0x52) = gm_GameTime;
-				fcn_004c5620(-1, (char*) old);
+				cm_SendSetHE(-1, (char*) old);
 			}
 			break;
 		case 40:
 			if (he_CountActionActors((char*) old) <= 0) {
-				fcn_004c5620(-1, (char*) old);
+				cm_SendSetHE(-1, (char*) old);
 			}
 			break;
 		case 72:

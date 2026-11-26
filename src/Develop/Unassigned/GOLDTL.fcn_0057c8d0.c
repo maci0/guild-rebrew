@@ -3,7 +3,7 @@
 
 int __cdecl he_FreeAction(int*);
 
-int __cdecl fcn_0057c8d0(int* event)
+int __cdecl he_RunAction0x9f(int* event)
 {
 	int state;
 

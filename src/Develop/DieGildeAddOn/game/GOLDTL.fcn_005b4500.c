@@ -34,11 +34,11 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(char*, ...);
 char* __cdecl fcn_00502cd0(int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_005c61e0(int);
+int __cdecl gm_LookupSpecialObject(int);
 int __cdecl d2_UpdateWindowDrag(char*);
 void __cdecl fcn_0046f280(int);
 
-void __cdecl fcn_005b4500(void)
+void __cdecl d2_ShowPlayerObjektCounts(void)
 {
 	int w;
 	D2_WIN* win;
@@ -48,7 +48,7 @@ void __cdecl fcn_005b4500(void)
 
 	w = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[w].slot, 0x54);
-	if (main_RunFrameLoop((void*) fcn_005b4500, 0x657c7) != 0) {
+	if (main_RunFrameLoop((void*) d2_ShowPlayerObjektCounts, 0x657c7) != 0) {
 		win = &((D2_WIN*)g_1015f40)[w];
 		do {
 			if (g_14ce8e0 != 0) {
@@ -60,7 +60,7 @@ void __cdecl fcn_005b4500(void)
 				if (((Player*)g_7f4ca0)[i].x0 != 0xffff) {
 					n = 0;
 					for (e = fcn_00502cd0(((Player*)g_7f4ca0)[i].x178, 1, 5); e != 0; e = gm_NextEntityQueryMatch()) {
-						if (fcn_005c61e0(*(unsigned short*) e) != 0 && *(int*) (e + 0x21) != 0) {
+						if (gm_LookupSpecialObject(*(unsigned short*) e) != 0 && *(int*) (e + 0x21) != 0) {
 							if (n == 0) {
 								io_AppendText(s_6ab848, ((Player*)g_7f4ca0)[i].name);
 								io_AppendText(s_6ab834);
@@ -72,7 +72,7 @@ void __cdecl fcn_005b4500(void)
 				}
 			}
 			d2_UpdateWindowDrag((char*)win);
-		} while (main_RunFrameLoop((void*) fcn_005b4500, 0x657c7) != 0);
+		} while (main_RunFrameLoop((void*) d2_ShowPlayerObjektCounts, 0x657c7) != 0);
 	}
 	fcn_0046f280(w);
 }

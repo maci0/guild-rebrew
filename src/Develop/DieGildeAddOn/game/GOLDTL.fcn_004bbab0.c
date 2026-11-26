@@ -4,7 +4,7 @@ void* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
-int __cdecl fcn_004bbab0(void* record)
+int __cdecl gm_HandleMsg43PostNews(void* record)
 {
 	char buf[0x200];
 	void* p;

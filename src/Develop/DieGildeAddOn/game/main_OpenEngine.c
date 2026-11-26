@@ -49,7 +49,7 @@ void __cdecl cm_ResetCommandQueue(void);
 void __cdecl fcn_00590650(void);
 void __cdecl fcn_00501040(char*);
 void __cdecl fcn_004efc50(void);
-void __cdecl fcn_00500900(void);
+void __cdecl init_LoadCharacterNames(void);
 void __cdecl ls_FreeList774a78(void);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 void __cdecl msx_InitAIL(void);
@@ -65,12 +65,12 @@ void __cdecl fcn_00525eb0(void);
 void __cdecl fcn_00510900(void);
 void __cdecl ch_InitActionQueue(void);
 void __cdecl fcn_004186c0(void);
-void __cdecl fcn_0047ce90(void);
+void __cdecl ai_InitContextAndGoodsLists(void);
 void __cdecl fcn_004ed200(int);
 void __cdecl fcn_004ac560(void);
 void __cdecl gm_LoadHistoricalTable(void);
 void __cdecl fcn_004d3800(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00473150(unsigned char*);
@@ -121,7 +121,7 @@ extern void __cdecl fcn_00538160(void);
 extern int __cdecl main_PumpWindowMessages(void);
 extern void __cdecl main_Menue(void);
 extern void __cdecl main_SetLanguageByName(char* language);
-extern Rec6* __cdecl fcn_00506d50(Rec6* dst, int idx);
+extern Rec6* __cdecl gm_GetStatRecord(Rec6* dst, int idx);
 extern void __cdecl fcn_005438c0(int v);
 extern void __cdecl fcn_005386c0(void* p);
 
@@ -158,7 +158,7 @@ int __cdecl main_OpenEngine(void)
 	sprintf(path, "%sdata\\", g_6a3550);
 	fcn_00501040(path);
 	fcn_004efc50();
-	fcn_00500900();
+	init_LoadCharacterNames();
 	ls_FreeList774a78();
 	eval_ObjektPreis2Credits(0x1d5, 100);
 	eval_ObjektPreis2Credits(0x1d7, 100);
@@ -191,7 +191,7 @@ int __cdecl main_OpenEngine(void)
 	fcn_00510900();
 	ch_InitActionQueue();
 	fcn_004186c0();
-	fcn_0047ce90();
+	ai_InitContextAndGoodsLists();
 	fcn_004ed200(g_774820);
 	if (g_774824 != 0) {
 		fcn_004ac560();
@@ -199,7 +199,7 @@ int __cdecl main_OpenEngine(void)
 	g_774824 = 0;
 	gm_LoadHistoricalTable();
 	fcn_004d3800();
-	fcn_00471e30(screen);
+	d2_DestroyForm(screen);
 	fade = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x5a, 1);
 	while ((*fade & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);

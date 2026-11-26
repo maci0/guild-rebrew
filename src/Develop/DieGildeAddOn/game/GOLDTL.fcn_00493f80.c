@@ -2,7 +2,7 @@
 
 /* Message object handed to fcn_004c5530: 0xf8 bytes, the stores pin
  * +0x04/+0x08/+0x0c/+0x36/+0x58/+0x5c/+0x60. */
-typedef struct GOLDTL_Msg493 {
+typedef struct AI_LEVEL_TRAINING_MSG {
 	int f0;                     /* 0x00 */
 	unsigned char f4;           /* 0x04 */
 	char pad5[3];
@@ -20,7 +20,7 @@ typedef struct GOLDTL_Msg493 {
 	char pad5d[3];
 	int f60;                    /* 0x60 */
 	char pad64[0x94];
-} GOLDTL_Msg493;                /* SIZE 0xf8 */
+} AI_LEVEL_TRAINING_MSG;                /* SIZE 0xf8 */
 
 extern float g_664150;
 extern char g_7f4ca2[1];
@@ -29,15 +29,15 @@ void* __cdecl gm_LookupEntityRecordById(unsigned int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_MapEntityStatRange(unsigned char);
 int __cdecl gm_WalkEntityChain(unsigned short);
-unsigned char __cdecl fcn_00507400(int, int);
-void __cdecl cm_SendCopyEntityData(GOLDTL_Msg493*);
+unsigned char __cdecl gm_GetRangeStatId(int, int);
+void __cdecl cm_SendCopyEntityData(AI_LEVEL_TRAINING_MSG*);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00493f80 */
-void __cdecl fcn_00493f80(void)
+void __cdecl ai_ScheduleLevelTraining(void)
 {
 	int flags[0x300];
-	GOLDTL_Msg493 msg;
+	AI_LEVEL_TRAINING_MSG msg;
 	unsigned char* cand[5];
 	int candidateCount;
 	unsigned char* e0;
@@ -156,7 +156,7 @@ void __cdecl fcn_00493f80(void)
 					msg.f8 = *(int*) (best + 4);
 					msg.fc = -1;
 					msg.f58 = *(int*) (chosen + 4);
-					msg.f5c = fcn_00507400(arg, 1);
+					msg.f5c = gm_GetRangeStatId(arg, 1);
 					msg.f60 = stat;
 					cm_SendCopyEntityData(&msg);
 					rec += 2;

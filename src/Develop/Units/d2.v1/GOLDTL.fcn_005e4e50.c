@@ -39,7 +39,7 @@ void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 {
@@ -101,5 +101,5 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 			}
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

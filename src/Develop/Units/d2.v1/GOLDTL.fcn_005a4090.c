@@ -56,7 +56,7 @@ int __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl d2_SetGroupVisibility(int k, int flag);
 void __cdecl fcn_00526120(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ChooseNewLoan(char* p)
 {
@@ -134,5 +134,5 @@ found:
 			g_774654 = 1;
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

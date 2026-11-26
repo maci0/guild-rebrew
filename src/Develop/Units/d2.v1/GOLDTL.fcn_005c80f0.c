@@ -49,7 +49,7 @@ void __cdecl fcn_00535960(void);
 int __cdecl cm_RequestSysMessage(int, void*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ClearRadioGroup(int i);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ChooseWappen(void)
 {
@@ -134,5 +134,5 @@ void __cdecl d2_ChooseWappen(void)
 		}
 	} while (main_RunFrameLoop(d2_ChooseWappen, 0x677c7) != 0);
 	d2_ClearRadioGroup(grp);
-	fcn_00471e30(d);
+	d2_DestroyForm(d);
 }

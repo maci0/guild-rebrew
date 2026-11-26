@@ -48,7 +48,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -96,7 +96,7 @@ void __cdecl fcn_0059e090(char* b)
 		}
 		if (sel != shown) {
 			if (h != -1) {
-				fcn_00471e30(h);
+				d2_DestroyForm(h);
 			}
 			h = fcn_00470820(0, 0, "Handel\\Handel_Transport");
 			d2_CenterDialogWindows(h);
@@ -152,6 +152,6 @@ void __cdecl fcn_0059e090(char* b)
 		}
 	}
 	if (h != -1) {
-		fcn_00471e30(h);
+		d2_DestroyForm(h);
 	}
 }

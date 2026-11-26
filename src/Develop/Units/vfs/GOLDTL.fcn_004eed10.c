@@ -7,7 +7,7 @@
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, int file);
 
-int __cdecl fcn_004eed10(int file, char* obj)
+int __cdecl ahm_fio_SaveAhmInfo(int file, char* obj)
 {
 	char buf[0x3c];
 	char* data;

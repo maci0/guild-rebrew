@@ -11,15 +11,15 @@ char* __cdecl gm_GetEquippedCombatGear(char*);
 char* __cdecl gm_FindEntityActiveItem(char*);
 
 /* ADDRESS: GOLDTL 0x004d1970 */
-void* __cdecl fcn_004d1970(int entityId, int a2)
+void* __cdecl cut_SpawnCombatActor(int entityId, int dummyName)
 {
 	char* src;
 	char* rec;
 	char* obj;
-	char* e;
-	char* e2;
+	char* gear;
+	char* activeItem;
 	int i;
-	int f;
+	int nameBuf;
 	EntityStruct* pool;
 	EntityStruct* scan;
 
@@ -38,24 +38,25 @@ found:
 	pool[i] = *(EntityStruct*) src;
 	*(int*) ((char*) g_9b4a40 + i * 0x21c + 0x1ac) = 0;
 	*(int*) ((char*) g_9b4a40 + i * 0x21c + 0x184) = 0;
-	fcn_004fe2e0(rec, d3_CurrentContextIndex, 0, 0, 0, (int*) a2);
+	fcn_004fe2e0(rec, d3_CurrentContextIndex, 0, 0, 0, (int*) dummyName);
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);
 	*(unsigned char*) (obj + 0x240) = 4;
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);
 	*(unsigned char*) (obj + 0x8d) |= 0x80;
 	ch_UpdateHeldObjectAttachment(rec);
-	e = (char*) gm_GetEquippedCombatGear(src);
+	gear = (char*) gm_GetEquippedCombatGear(src);
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);
-	*(float*) (obj + 0x1a0) = (float) ((double) *(unsigned char*) (e + 9) * (2.0 / 7.0));
+	*(float*) (obj + 0x1a0) =
+	    (float) ((double) *(unsigned char*) (gear + 9) * (2.0 / 7.0));
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);
-	f = *(int*) (obj + 0x34);
-	sprintf((char*) f, "cmb_%i", *(int*) ((char*) g_9b4a40 + i * 0x21c + 4));
-	e2 = (char*) gm_FindEntityActiveItem(src);
-	if (e2 != 0) {
-		if (*(int*) (e + 0x58) == 2) {
-			*(int*) (e2 + 0x20) = 6;
+	nameBuf = *(int*) (obj + 0x34);
+	sprintf((char*) nameBuf, "cmb_%i", *(int*) ((char*) g_9b4a40 + i * 0x21c + 4));
+	activeItem = (char*) gm_FindEntityActiveItem(src);
+	if (activeItem != 0) {
+		if (*(int*) (gear + 0x58) == 2) {
+			*(int*) (activeItem + 0x20) = 6;
 		} else {
-			*(int*) (e2 + 0x20) = 0x0f;
+			*(int*) (activeItem + 0x20) = 0x0f;
 		}
 	}
 	return rec;

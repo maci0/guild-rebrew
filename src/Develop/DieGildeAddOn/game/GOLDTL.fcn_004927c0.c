@@ -23,14 +23,14 @@ extern unsigned char g_772628[];
 
 double __cdecl log10(double x);
 
-int __cdecl fcn_00492590(int kind);
+int __cdecl gm_PickWirtshausGuest(int kind);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0050b710(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004927c0 */
-int __cdecl fcn_004927c0(unsigned char* e, Deal* o, int kind)
+int __cdecl gm_ResolveWirtshausOffer(unsigned char* e, Deal* o, int kind)
 {
 	char* d;
 	int k;
@@ -45,7 +45,7 @@ int __cdecl fcn_004927c0(unsigned char* e, Deal* o, int kind)
 		return 0;
 	}
 	o->price = 0;
-	k = fcn_00492590(kind);
+	k = gm_PickWirtshausGuest(kind);
 	o->x54 = 0;
 	pr = fcn_0050b710(gm_WalkEntityChain(*(unsigned short*) e), g_773d75);
 	x = pr;

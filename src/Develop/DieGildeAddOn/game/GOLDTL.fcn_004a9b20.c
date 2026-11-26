@@ -10,20 +10,20 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CheckPrivilege(int, char*, int);
-int __cdecl fcn_004a8880(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction012Predicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckLawActionPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction01cPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction01dPredicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a8d40(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction025Predicate(char*, char*, int, char*, int);
-int __cdecl fcn_004a8e40(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction027Predicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a8ed0(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction029Predicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction02aPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction02bPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction02cPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction02dPredicate(char*, char*, int, char*, int);
-int __cdecl fcn_004a96f0(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction031Predicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a9780(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction035Predicate(char*, char*, int, char*, int);
 int __cdecl ai_SelectAction037Target(char*, char*, int, char*, int);
@@ -122,7 +122,7 @@ int __cdecl ai_SelectPrivilegeAction(char* unused0, char* actorEntity, int unuse
 	r = 0;
 	switch (id) {
 	case 0x12:
-		r = fcn_004a8880(unused0, actorEntity, (int) &c, ctx, unused4);
+		r = ai_CheckAction012Predicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x13:
 	case 0x14:
@@ -144,7 +144,7 @@ int __cdecl ai_SelectPrivilegeAction(char* unused0, char* actorEntity, int unuse
 		r = ai_CheckAction025Predicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x27:
-		r = fcn_004a8e40(unused0, actorEntity, (int) &c, ctx, unused4);
+		r = ai_CheckAction027Predicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x28:
 		r = fcn_004a8ed0(unused0, actorEntity, (int) &c, ctx, unused4);
@@ -165,7 +165,7 @@ int __cdecl ai_SelectPrivilegeAction(char* unused0, char* actorEntity, int unuse
 		r = ai_CheckAction02dPredicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x31:
-		r = fcn_004a96f0(unused0, actorEntity, (int) &c, ctx, unused4);
+		r = ai_CheckAction031Predicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x32:
 		r = fcn_004a9780(unused0, actorEntity, (int) &c, ctx, unused4);

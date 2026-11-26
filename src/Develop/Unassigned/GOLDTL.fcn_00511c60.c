@@ -25,7 +25,7 @@ int __cdecl amt_FindOfficeSlotByType(int i, void *out);
 int __cdecl amt_AssignOfficeHolder(int a, void *p, int b);
 void __cdecl fcn_004fee50(void *p, int h);
 int __cdecl gm_MapEntityStatRange(int);
-int __cdecl fcn_00507400(int, int);
+int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl fcn_0050b750(int, int);
 void __cdecl amt_SpawnHistoricalOfficeHolders(void);
 extern unsigned char g_773d75;
@@ -271,7 +271,7 @@ int __cdecl fcn_00511c60(void)
 			} else {
 				k = *(unsigned char *) (n + 0x164);
 			}
-			k = fcn_00507400(gm_MapEntityStatRange(k), 1);
+			k = gm_GetRangeStatId(gm_MapEntityStatRange(k), 1);
 			v38 = 2;
 			k = cm_RequestAllocSpieler(8, *(int *) (m + 4), *(int *) (n + 4),
 					 v42, -1, k, 0, 2);
@@ -305,7 +305,7 @@ int __cdecl fcn_00511c60(void)
 	do {
 		v36 = 2;
 		v42 = (gm_RandomMod(9) & 0xffff) + 1;
-		k = fcn_00507400((gm_RandomMod(2) & 0xffff) + 1,
+		k = gm_GetRangeStatId((gm_RandomMod(2) & 0xffff) + 1,
 				 (gm_RandomMod(0xc) & 0xffff) + 1);
 		k = cm_RequestAllocSpieler(3, -1, -1, gm_RandomMod(4) + 0xf, -1, k, 0, 0);
 		if (k != -1) {
@@ -321,7 +321,7 @@ int __cdecl fcn_00511c60(void)
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &v36);
 		cm_AppendPacketFieldDelta(1, 1, 0x167, &v42);
 		cm_RequestChangeAttribute();
-		k = fcn_00507400((gm_RandomMod(2) & 0xffff) + 1,
+		k = gm_GetRangeStatId((gm_RandomMod(2) & 0xffff) + 1,
 				 (gm_RandomMod(0xc) & 0xffff) + 1);
 		k = cm_RequestAllocSpieler(3, -1, -1, gm_RandomMod(4) + 0xe, -1, k, 0, 0);
 		if (k != -1) {

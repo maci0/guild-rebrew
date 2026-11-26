@@ -22,7 +22,7 @@ extern Pair_99f800 g_99f800[0x800];
 extern char g_7f4ca0[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_004c5870(int id, int v);
+void __cdecl cm_SendRemoveStraftat(int id, int v);
 void __cdecl he_NotifyStraftatExpired(char* o, char* p);
 
 int __cdecl fcn_004f5e20(int target, int max)
@@ -57,7 +57,7 @@ int __cdecl fcn_004f5e20(int target, int max)
 					}
 				}
 			}
-			fcn_004c5870(g_9a3800[j].id, 1);
+			cm_SendRemoveStraftat(g_9a3800[j].id, 1);
 			n++;
 		}
 	}

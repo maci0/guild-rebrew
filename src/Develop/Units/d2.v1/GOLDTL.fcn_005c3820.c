@@ -21,7 +21,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00526120(void*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SetGroupVisibility(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetElementValue(int, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c3820 */
@@ -141,7 +141,7 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 			}
 		}
 		if (main_RunFrameLoop((void*) d2_ShowTechTreeEffects, 0x677c7) == 0) {
-			fcn_00471e30(window);
+			d2_DestroyForm(window);
 			return;
 		}
 	}

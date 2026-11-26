@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-int __cdecl fcn_004a6550(int a1, int x);
+int __cdecl ai_FireCannonVolley(int a1, int x);
 
 /* ADDRESS: GOLDTL 0x0048e780 */
 int __cdecl ai_RunCannonTower(int a1, char* firstEntry, char* secondEntry)
@@ -19,5 +19,5 @@ int __cdecl ai_RunCannonTower(int a1, char* firstEntry, char* secondEntry)
 	if (!secondEntity) {
 		return 0;
 	}
-	return fcn_004a6550(a1, firstEntity) ? 0x42 : 0;
+	return ai_FireCannonVolley(a1, firstEntity) ? 0x42 : 0;
 }

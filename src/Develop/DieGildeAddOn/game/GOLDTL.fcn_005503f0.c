@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_HandleAction0x4b(char* u)
@@ -20,7 +20,7 @@ void __cdecl he_HandleAction0x4b(char* u)
 		if (u[0x78] & 2) {
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 2, 0);
-			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 		}
 		break;
 	case -2:

@@ -17,7 +17,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl amt_HasOccupiedOfficeType7(void);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl fcn_005cadc0(int, char*, char*, int, void*);
 int __cdecl d2_ShowTabbedSelectionDialog(char*, char*, int, void*);
 
@@ -109,6 +109,6 @@ int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005cd440, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 }

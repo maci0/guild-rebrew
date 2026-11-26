@@ -34,7 +34,7 @@ int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl gm_HandleVerhoerMode2(char* e, char* o)
 {
@@ -103,6 +103,6 @@ int __cdecl gm_HandleVerhoerMode2(char* e, char* o)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) gm_HandleVerhoerMode2, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return r;
 }

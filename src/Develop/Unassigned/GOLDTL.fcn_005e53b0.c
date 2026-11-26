@@ -56,8 +56,8 @@ void __cdecl he_ShowZigeunerGroupMessage(unsigned short *, int, char **);
 void __cdecl fcn_00526120(char *, int);
 char *__cdecl fcn_005cd440(REQUEST *, char *, int, int);
 int __cdecl main_RunFrameLoop(void (__cdecl *)(void *), int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005e53b0 */
 void __cdecl fcn_005e53b0(void *arg)
@@ -182,6 +182,6 @@ void __cdecl fcn_005e53b0(void *arg)
             refresh = 1;
         }
     } while (main_RunFrameLoop(fcn_005e53b0, 0x677c7));
-    fcn_00471e30(window);
-    fcn_00532ef0();
+    d2_DestroyForm(window);
+    d3_EndCameraAndUiMode();
 }

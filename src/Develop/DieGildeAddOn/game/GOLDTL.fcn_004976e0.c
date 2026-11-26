@@ -9,7 +9,7 @@ int __cdecl fcn_004a48a0(char*, int);
 
 /* The inventory entry also holds a second function at 0x4978d0 (180 bytes). */
 /* ADDRESS: GOLDTL 0x004976e0 */
-int __cdecl fcn_004976e0(int unused, char* e, int unused2, char* out, char* out2)
+int __cdecl ai_StartRepairBuilding(int unused, char* e, int unused2, char* out, char* out2)
 {
 	int minv;
 	char* best;

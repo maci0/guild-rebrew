@@ -51,7 +51,7 @@ extern char s_6acd1c[];
 void __cdecl cm_RequestModifyHealth(int, int);
 Obj* __cdecl he_StartHandlungSearch(int, int, int);
 Obj* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_004c5620(int, Obj*);
+void __cdecl cm_SendSetHE(int, Obj*);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -63,7 +63,7 @@ int __cdecl d2_CheckActionBlocker(unsigned char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl gm_HandleGegenspionage(unsigned char* e)
 {
@@ -95,7 +95,7 @@ int __cdecl gm_HandleGegenspionage(unsigned char* e)
 				result |= 0x10;
 				p->pos52 = gm_GameTime;
 				p->posc8 = gm_GameTime;
-				fcn_004c5620(p->f70, p);
+				cm_SendSetHE(p->f70, p);
 				m.f70 = ((ENTITY_RECORD*)g_7f4ca0)[p->w8].entity_id;
 				cm_SendCopyEntityData(&m);
 			}
@@ -128,7 +128,7 @@ int __cdecl gm_HandleGegenspionage(unsigned char* e)
 						if (p->fc4 == *(int*) (e + 4)) {
 							p->pos52 = gm_GameTime;
 							found |= 1;
-							fcn_004c5620(0, p);
+							cm_SendSetHE(0, p);
 							m.f70 = ((ENTITY_RECORD*)g_7f4ca0)[p->w8].entity_id;
 							cm_SendCopyEntityData(&m);
 							io_FormatTextBuffer(t, 0x1db9, p->w8);
@@ -149,6 +149,6 @@ int __cdecl gm_HandleGegenspionage(unsigned char* e)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) gm_HandleGegenspionage, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return 2;
 }

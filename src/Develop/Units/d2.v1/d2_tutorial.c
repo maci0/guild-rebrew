@@ -3,7 +3,7 @@ void __cdecl io_AppendText(int);
 void __cdecl fcn_00471af0(int, int);
 extern int* g_665f08; extern char d2_TutorialActive[];
 
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl d2_StartTutorial();
 
 /* ADDRESS: GOLDTL 0x005803f0 */
@@ -21,7 +21,7 @@ void __cdecl d2_CloseTutorialProgress(void)
 
 	dialog = *(int*) (((char*) g_665f08) + 0x68);
 	if (dialog != -1) {
-		fcn_00471e30(dialog);
+		d2_DestroyForm(dialog);
 		*(int*) (((char*) g_665f08) + 0x68) = -1;
 	}
 }

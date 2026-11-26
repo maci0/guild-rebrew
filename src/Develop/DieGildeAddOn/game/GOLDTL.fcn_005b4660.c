@@ -8,7 +8,7 @@ int __cdecl fcn_00470820(int, int, char*);
 int __cdecl io_AppendText(char*, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(void*, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_00471af0(int, int);
@@ -106,5 +106,5 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 			g_774654 = 1;
 		}
 	}
-	fcn_00471e30(dialog);
+	d2_DestroyForm(dialog);
 }

@@ -6,7 +6,7 @@
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int h);
 
-int __cdecl fcn_004cd7a0(char* o, char* out)
+int __cdecl cm_ExModifyEntityLevel(char* o, char* out)
 {
 	unsigned char* p;
 	int i;

@@ -18,7 +18,7 @@ __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 void __cdecl fcn_00514570(unsigned int a0);
 void __cdecl gm_InitCityAndTradeState(char a0);
 void __cdecl init_LocalData(void);
-void __cdecl fcn_00515340(char a0);
+void __cdecl gm_RestockTownMarket(char a0);
 int __cdecl ls_SendGame(char *path);
 int __cdecl fcn_00525b40(void);
 void __cdecl main_PumpWindowMessages(void);
@@ -155,7 +155,7 @@ int __cdecl fcn_005145a0(char *path)
     init_LocalData();
     sv_WaitForNetworkSync(0x24087);
     if (flag != 0) {
-        fcn_00515340(*(unsigned char *) &g_773d75);
+        gm_RestockTownMarket(*(unsigned char *) &g_773d75);
         i = 0;
         p = (char *) &g_868060;
         do {

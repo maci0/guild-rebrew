@@ -24,20 +24,20 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_ConfirmEinbruch(void);
 
-void __cdecl fcn_005ad5a0(char* a)
+void __cdecl d2_StartEinbruchTargetSelect(char* building)
 {
 	Req req;
 	char text[0x80];
 
-	if (d2_CheckOwnerBlocked(a) != 0) {
+	if (d2_CheckOwnerBlocked(building) != 0) {
 		return;
 	}
 	memset(&req, 0, sizeof(req));
 	req.size = 0x400;
-	if (a == 0) {
+	if (building == 0) {
 		return;
 	}
-	fcn_0052a0c0(a, 0);
+	fcn_0052a0c0(building, 0);
 	io_FormatTextBuffer(text, 0x19e2);
 	req.id = 0x727;
 	req.kind = 7;

@@ -101,15 +101,15 @@ void __cdecl fcn_004868d0(char*, int*);
 void __cdecl ai_ManageMeisterWorkers(char*);
 void __cdecl fcn_00487470(char*);
 void __cdecl fcn_00487970(char*, char*, int);
-void __cdecl fcn_00487c00(char*, char*, int);
+void __cdecl ai_RequestAusbauUpgrade(char*, char*, int);
 void __cdecl ai_CancelBlockedActions(char*, int);
-void __cdecl fcn_00487f90(int*);
+void __cdecl ai_DispatchMeisterAction(int*);
 void __cdecl ai_MeisterCollectTrans(char*);
 void __cdecl ai_MeisterTrade(char*, char*);
-void __cdecl fcn_0047e220(char*);
+void __cdecl ai_RequestProductionGoods(char*);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl he_AssignActionSlot(char*, int, int, int);
-void __cdecl fcn_004c5aa0(int, int, int, int, int, int);
+void __cdecl cm_SendChainRecordLookup(int, int, int, int, int, int);
 void* __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl fcn_005b1e40(int);
@@ -168,7 +168,7 @@ int __cdecl fcn_0047f6b0(char* a)
 
 	ai_ManageMeisterWorkers(a);
 	fcn_00487970(t2, a, 0xa);
-	fcn_00487c00(t2, a, 0x19);
+	ai_RequestAusbauUpgrade(t2, a, 0x19);
 	fcn_00487470(a);
 	if ((*(unsigned char*) (a + 0x1c8) & 0x10) == 0
 	    && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (a + 0x16c))].category != 0xb) {
@@ -469,7 +469,7 @@ after:
 				if (plt_CheckZoneAvailability(n, j, i, *(unsigned char*) (g + 0x42)) == 0) {
 					continue;
 				}
-				fcn_004c5aa0(*(int*) (*(char**) (a + 0x16c) + 1), j, i, *(unsigned short*) g, 0, -1);
+				cm_SendChainRecordLookup(*(int*) (*(char**) (a + 0x16c) + 1), j, i, *(unsigned short*) g, 0, -1);
 				v++;
 			}
 		}
@@ -487,7 +487,7 @@ ltail:
 				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].category != 0xb) {
 					st.kind = 8;
 					st.rec = rec;
-					fcn_00487f90((int*) &st);
+					ai_DispatchMeisterAction((int*) &st);
 				}
 			}
 			if (((PRODUCTION_GOODS_RECORD*) rec)->flags & 8) {
@@ -495,7 +495,7 @@ ltail:
 						st.rec = rec;
 						if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].category == 0xb) {
 							st.kind = 0x28;
-							fcn_00487f90((int*) &st);
+							ai_DispatchMeisterAction((int*) &st);
 							if (g_100dc20 == *(int*)(a + 0x16c) && *(int*) 0x100dc3c < 4) {
 								*(PRODUCTION_GOODS_RECORD*) (0x100ddc0 + *(int*) 0x100dc3c * 0x58) =
 								    *(PRODUCTION_GOODS_RECORD*) st.rec;
@@ -509,7 +509,7 @@ ltail:
 						st.kind = 4;
 						st.rec = rec;
 					}
-					fcn_00487f90((int*) &st);
+					ai_DispatchMeisterAction((int*) &st);
 					if (g_100dc20 == *(int*)(a + 0x16c) && *(int*) 0x100dc3c < 4) {
 						*(PRODUCTION_GOODS_RECORD*) (0x100ddc0 + *(int*) 0x100dc3c * 0x58) =
 						    *(PRODUCTION_GOODS_RECORD*) st.rec;
@@ -521,7 +521,7 @@ next_rec:
 		}
 	}
 
-	fcn_0047e220(t2);
+	ai_RequestProductionGoods(t2);
 	ai_MeisterCollectTrans(a);
 	ai_MeisterTrade(a, t2);
 	return 0;

@@ -8,7 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 void __cdecl he_InitEvent0a0(char* o)
 {
@@ -24,5 +24,5 @@ void __cdecl he_InitEvent0a0(char* o)
 		*(short*) (o + 0x56) = gm_RandomMod(2) + 0x13;
 	}
 	*(int*) (o + 0x58) = 0;
-	*(int*) (o + 0x84) = fcn_004c5620(0, o);
+	*(int*) (o + 0x84) = cm_SendSetHE(0, o);
 }

@@ -31,7 +31,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl amt_HandleOfficeSupport(char* e, char* o)
 {
@@ -93,6 +93,6 @@ int __cdecl amt_HandleOfficeSupport(char* e, char* o)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) amt_HandleOfficeSupport, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return r;
 }

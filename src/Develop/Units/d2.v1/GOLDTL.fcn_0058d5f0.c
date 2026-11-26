@@ -37,8 +37,8 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00526120(int, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* SIZE 0xf8 */
 typedef struct {
@@ -256,6 +256,6 @@ next:
 	}
 	sv_ClearObjectSelection();
 	d2_RestoreHudAfterDialog();
-	fcn_00471e30(menu);
-	fcn_00532ef0();
+	d2_DestroyForm(menu);
+	d3_EndCameraAndUiMode();
 }

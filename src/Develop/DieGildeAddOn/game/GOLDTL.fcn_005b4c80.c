@@ -46,7 +46,7 @@ int __cdecl fcn_0046f280(int);
 /* Modal two-column entity list: fills it once, then pumps the UI and opens
  * the entry the player picks. */
 /* ADDRESS: GOLDTL 0x005b4c80 */
-void __cdecl fcn_005b4c80(void)
+void __cdecl d2_ShowCharacterActionDebug(void)
 {
 	int ids[0x300];
 	D2_WIN* rp;
@@ -65,7 +65,7 @@ void __cdecl fcn_005b4c80(void)
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[win].slot, 0x54);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[left].slot, 0x54);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[right].slot, 0x54);
-	if (main_RunFrameLoop((void*) fcn_005b4c80, 0x657c7)) {
+	if (main_RunFrameLoop((void*) d2_ShowCharacterActionDebug, 0x657c7)) {
 		rp = &((D2_WIN*)g_1015f40)[right];
 		do {
 			if (g_14ce8e0 != 0) {
@@ -114,7 +114,7 @@ void __cdecl fcn_005b4c80(void)
 			}
 			d2_UpdateWindowDrag(&((D2_WIN*)g_1015f40)[left]);
 			d2_UpdateWindowDrag(rp);
-		} while (main_RunFrameLoop((void*) fcn_005b4c80, 0x657c7));
+		} while (main_RunFrameLoop((void*) d2_ShowCharacterActionDebug, 0x657c7));
 	}
 	fcn_0046f280(win);
 	fcn_0046f280(left);

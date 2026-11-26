@@ -34,7 +34,7 @@ extern char g_7f4ca0[];
 void __cdecl he_FreeAction(char* s);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_005547c0(Player* p);
+int __cdecl he_IsEntityEligibleForAccident(Player* p);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_GetBuildingTechEffect(Home* h, int a, int b);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
@@ -88,7 +88,7 @@ void __cdecl RunSimUnfall(char* s)
 	count = 12;
 	do {
 		p = &((Player*) g_7f4ca0)[idx];
-		if (fcn_005547c0(p) != 0 && ((Player*) g_7f4ca0)[idx].home->x27 != 0xffff) {
+		if (he_IsEntityEligibleForAccident(p) != 0 && ((Player*) g_7f4ca0)[idx].home->x27 != 0xffff) {
 			f = gm_RandomFloat01() * 100.0f;
 			r = gm_GetBuildingTechEffect(((Player*) g_7f4ca0)[idx].home, 2, 1);
 			x = r * 0.0125f;

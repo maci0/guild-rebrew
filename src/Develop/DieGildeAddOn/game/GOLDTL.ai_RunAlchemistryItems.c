@@ -12,7 +12,7 @@ extern float g_100af34;
 extern unsigned char g_773d75;
 
 char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
-float* __cdecl fcn_005c61e0(int id);
+float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 char* __cdecl gm_StartFilteredEntitySearch(int arg_count, ...);
 int __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char k, int n);
@@ -57,7 +57,7 @@ int __cdecl ai_RunAlchemistryItems(char* e, char* p, char* q)
 	if (!s) {
 		return 0;
 	}
-	d = fcn_005c61e0(*(unsigned short*) s);
+	d = gm_LookupSpecialObject(*(unsigned short*) s);
 	if (d) {
 		request.s = (unsigned short*) s;
 		request.id = *(int*) (q + 4);

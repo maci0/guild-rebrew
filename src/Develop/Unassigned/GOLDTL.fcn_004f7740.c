@@ -1,7 +1,7 @@
 
 
 
-void __cdecl fcn_005d6030(void*, void*);
+void __cdecl gm_RunDuelChallengeAction(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
@@ -14,7 +14,7 @@ int __cdecl fcn_004f7740(void* entity, void* params)
 		if (*(unsigned char*) ((char*) entity + 0xd) >= 3 &&
 		    (*(int*) ((char*) entity + 0x1c8) & 0x400) == 0) {
 			if (mode == 3) {
-				fcn_005d6030(entity, params);
+				gm_RunDuelChallengeAction(entity, params);
 				return 2;
 			}
 			if (mode == 1 && *(char*) ((char*) entity + 2) == 6) {

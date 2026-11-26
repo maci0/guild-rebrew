@@ -3,7 +3,7 @@
 
 void __cdecl cm_RequestChangeFloat(int, int, float);
 
-void __cdecl fcn_005782f0(char* o, int v)
+void __cdecl gm_IncreaseEntityStat(char* entity, int steps)
 {
 	float f;
 	float x;
@@ -11,18 +11,18 @@ void __cdecl fcn_005782f0(char* o, int v)
 	float t;
 	int n;
 
-	if (o != 0) {
-		f = (float) (v & 0xffff);
-		if (f <= *(float*) (o + 0x20)) {
-			cm_RequestChangeFloat(*(int*) (o + 4), 0x1c, *(float*) (o + 0x18) - *(float*) (o + 0x1c));
+	if (entity != 0) {
+		f = (float) (steps & 0xffff);
+		if (f <= *(float*) (entity + 0x20)) {
+			cm_RequestChangeFloat(*(int*) (entity + 4), 0x1c, *(float*) (entity + 0x18) - *(float*) (entity + 0x1c));
 		} else {
-			x = *(float*) (o + 0x18);
-			s = *(float*) (o + 0x14);
-			for (n = (int) (f - *(float*) (o + 0x20)); n > 0; n--) {
+			x = *(float*) (entity + 0x18);
+			s = *(float*) (entity + 0x14);
+			for (n = (int) (f - *(float*) (entity + 0x20)); n > 0; n--) {
 				t = s / x;
 				x = x - s + t;
 			}
-			cm_RequestChangeFloat(*(int*) (o + 4), 0x1c, x - *(float*) (o + 0x1c));
+			cm_RequestChangeFloat(*(int*) (entity + 4), 0x1c, x - *(float*) (entity + 0x1c));
 		}
 	}
 }

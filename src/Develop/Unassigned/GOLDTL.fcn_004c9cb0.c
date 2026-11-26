@@ -11,12 +11,12 @@
 #include "client_types.h"
 extern Pair_99f800 g_99f800[0x800];
 
-int __cdecl fcn_004c9cb0(char* a1, char* response)
+int __cdecl cm_ExClearEvidenceLink(char* command, char* response)
 {
 	int i;
 
 	for (i = 0; i < 0x800; i++) {
-		if (g_99f800[i].owner == *(int*) (a1 + 0x14) && g_99f800[i].key == *(int*) (a1 + 0x10)) {
+		if (g_99f800[i].owner == *(int*) (command + 0x14) && g_99f800[i].key == *(int*) (command + 0x10)) {
 			g_99f800[i].owner = -1;
 			g_99f800[i].key = -1;
 			if (response != 0) {

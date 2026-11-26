@@ -17,7 +17,7 @@ typedef struct
 	unsigned char type;
 	char pad3;
 	int handle;
-} Ent78e;
+} HatredEntity;
 /* SIZE 8 */
 
 extern int g_100f1dc;
@@ -43,7 +43,7 @@ int __cdecl fcn_005cd440(Query* q, char* text, int a, void* b);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_CenterDialogWindows(int h);
-void __cdecl fcn_00471e30(int h);
+void __cdecl d2_DestroyForm(int h);
 void __cdecl d2_SetForm(int h, int a);
 int __cdecl d2_GetWindowListItem(int h, int a, int b);
 int __cdecl io_AppendText(int id, ...);
@@ -53,12 +53,12 @@ void __cdecl fcn_00526120(char* text, int a);
 int __cdecl main_RunFrameLoop(void* fn, int a);
 
 /* ADDRESS: GOLDTL 0x005d78e0 */
-int __cdecl fcn_005d78e0(char* a0, char* a1)
+int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 {
 	Query req;
 	char buf[0x100];
-	Ent78e* firstEntity;
-	Ent78e* secondEntity;
+	HatredEntity* firstEntity;
+	HatredEntity* secondEntity;
 	int rc;
 	int v;
 	int w1;
@@ -71,7 +71,7 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	int r2;
 	int sum;
 
-	if (*(unsigned char*) (a0 + 2) != 6) {
+	if (*(unsigned char*) (actor + 2) != 6) {
 		int bv;
 		int bw1;
 		int bw2;
@@ -79,21 +79,21 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 		int bd2;
 		int bsum;
 
-		if (*(int*) (a0 + 0x194) < 4) {
+		if (*(int*) (actor + 0x194) < 4) {
 			return 0x20;
 		}
-		firstEntity = (Ent78e*) gm_LookupEntityRecordById(*(int*) (a1 + 0x214));
+		firstEntity = (HatredEntity*) gm_LookupEntityRecordById(*(int*) (request + 0x214));
 		if (firstEntity == 0) {
 			return 0x20;
 		}
-		secondEntity = (Ent78e*) gm_LookupEntityRecordById(*(int*) (a1 + 0x218));
+		secondEntity = (HatredEntity*) gm_LookupEntityRecordById(*(int*) (request + 0x218));
 		if (secondEntity == 0) {
 			return 0x20;
 		}
 		bsum = gm_WalkEntityChain(secondEntity->id);
 		bsum = bsum + gm_WalkEntityChain(firstEntity->id);
 		bv = (int) (bsum * g_6628ac);
-		if (gm_AccumulateTyped2(a0) < bv) {
+		if (gm_AccumulateTyped2(actor) < bv) {
 			return 0x20;
 		}
 		bw1 = gm_RandomMod(0x1e) + 3;
@@ -102,8 +102,8 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 		bd2 = fcn_0050f950(secondEntity->id, firstEntity->id);
 		cm_RequestCopyEntityData(firstEntity->handle, secondEntity->handle, bw1 - bd1 - 0x7f, 1);
 		cm_RequestCopyEntityData(secondEntity->handle, firstEntity->handle, bw2 - bd2 - 0x7f, 1);
-		cm_RequestMoveCredits(-1, *(int*) (a0 + 4), *(char*) &g_773d75, bv);
-		cm_RequestModifyHealth(*(int*) (a0 + 4), -4);
+		cm_RequestMoveCredits(-1, *(int*) (actor + 4), *(char*) &g_773d75, bv);
+		cm_RequestModifyHealth(*(int*) (actor + 4), -4);
 		if (firstEntity->type == 6 || firstEntity->type == 7) {
 			io_FormatTextBuffer(buf, 0x1dd3, secondEntity->id, secondEntity->id);
 			he_PostEntityMessage(firstEntity->handle, firstEntity->handle, buf, 0, 0x5fb, (char*) 0x6a59fc);
@@ -120,12 +120,12 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	req.x10 = 6;
 	req.mask = g_666018;
 	io_FormatTextBuffer(buf, 0x1dcf);
-	firstEntity = (Ent78e*) fcn_005cd440(&req, buf, 0, 0);
+	firstEntity = (HatredEntity*) fcn_005cd440(&req, buf, 0, 0);
 	if (firstEntity == 0) {
 		return 0;
 	}
 	io_FormatTextBuffer(buf, 0x1dd0, firstEntity->id);
-	secondEntity = (Ent78e*) fcn_005cd440(&req, buf, 0, 0);
+	secondEntity = (HatredEntity*) fcn_005cd440(&req, buf, 0, 0);
 	if (secondEntity == 0) {
 		return 0;
 	}
@@ -143,8 +143,8 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	do {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == r1) {
-				if (d2_CheckActionBlocker(a0, 4) != 0 &&
-				    gm_CheckEntityStock(a0, v, *(char*) &g_773d75) != 0) {
+				if (d2_CheckActionBlocker(actor, 4) != 0 &&
+				    gm_CheckEntityStock(actor, v, *(char*) &g_773d75) != 0) {
 					w1 = gm_RandomMod(0x1e) + 3;
 					w2 = gm_RandomMod(0x1e) + 3;
 					d1 = fcn_0050f950(firstEntity->id, secondEntity->id);
@@ -153,9 +153,9 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 						     w1 - d1 - 0x7f, 1);
 					cm_RequestCopyEntityData(secondEntity->handle, firstEntity->handle,
 						     w2 - d2 - 0x7f, 1);
-					cm_RequestMoveCredits(-1, *(int*) (a0 + 4),
+					cm_RequestMoveCredits(-1, *(int*) (actor + 4),
 						     *(char*) &g_773d75, v);
-					cm_RequestModifyHealth(*(int*) (a0 + 4), -4);
+					cm_RequestModifyHealth(*(int*) (actor + 4), -4);
 					io_FormatTextBuffer(buf, 0x1dd2, firstEntity->id, secondEntity->id);
 					fcn_00526120(buf, 0);
 					if (firstEntity->type == 6 || firstEntity->type == 7) {
@@ -179,6 +179,6 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) 0x5d78e0, 0x657c7) != 0);
-	fcn_00471e30(dialog);
+	d2_DestroyForm(dialog);
 	return rc;
 }

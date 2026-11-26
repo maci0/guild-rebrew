@@ -5,7 +5,7 @@
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, void*);
 void __cdecl gm_AddTime(char*, int, int, int);
@@ -59,7 +59,7 @@ void __cdecl he_RunBardeEvent(char* obj)
 		base[0] += gm_RandomMod(4) + 3;
 		*(unsigned short*) (obj + 0x56) = 10;
 		*(int*) (obj + 0x58) = 0;
-		fcn_004c5620(1, obj);
+		cm_SendSetHE(1, obj);
 		*(int*) (obj + 0x84) = -1;
 		return;
 	case 1:
@@ -78,7 +78,7 @@ void __cdecl he_RunBardeEvent(char* obj)
 				     0x601, (void*) 0x6b5c60);
 		}
 		gm_AddTime(obj + 0x52, 0, 5, 0);
-		*(int*) (obj + 0x84) = fcn_004c5620(2, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(2, obj);
 		return;
 	case 2:
 		base = (int*) (obj + 0x52);
@@ -138,7 +138,7 @@ void __cdecl he_RunBardeEvent(char* obj)
 			*(int*) (obj + 0x88) = 0;
 		}
 		if (*(unsigned char*) (obj + 0x78) & 2) {
-			*(int*) (obj + 0x84) = fcn_004c5620(0, obj);
+			*(int*) (obj + 0x84) = cm_SendSetHE(0, obj);
 		}
 		*(int*) (obj + 0x84) = -1;
 		return;

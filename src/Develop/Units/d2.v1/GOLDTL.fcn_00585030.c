@@ -53,14 +53,14 @@ void __cdecl d2_SetElementFont(int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void* __cdecl fcn_004ec7d0(unsigned char*);
 int __cdecl he_GetActionProgress(char*, int*, float*, int);
 int __cdecl ahm_PickRandomUnknownRecipe(int);
 int __cdecl he_SendEvent096(char*, int*, int);
 int __cdecl d2_SendAlchemyResearch(char*, int*);
 void __cdecl fcn_00526120(int, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 
@@ -115,7 +115,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				g_774654 = 1;
 			}
 		} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
-		fcn_00471e30(win);
+		d2_DestroyForm(win);
 		return;
 	}
 	d2_SetForm(win, 3);
@@ -221,6 +221,6 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		}
 	} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
 	d2_ClearRadioGroup(list);
-	fcn_00471e30(win);
-	fcn_00532ef0();
+	d2_DestroyForm(win);
+	d3_EndCameraAndUiMode();
 }

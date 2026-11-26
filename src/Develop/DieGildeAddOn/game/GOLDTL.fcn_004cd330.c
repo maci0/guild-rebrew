@@ -1,18 +1,18 @@
 extern int* cut_ActiveCutscene;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-void __cdecl fcn_004cd2a0(char*, float*, float*, int);
+void __cdecl cut_SyncEntityTransform(char*, float*, float*, int);
 void __cdecl fcn_004d8200(int*);
 void __cdecl gm_CancelEntityActionQueue(int*);
 void __cdecl cut_QueueHideCharacter(int*);
 void __cdecl gm_StartGroundCollectAction(int*);
 void __cdecl gm_StartGroundPickupAnimation(int*);
 void __cdecl cut_CancelActorActions(int*);
-void __cdecl fcn_004d87f0(int*);
+void __cdecl d3_UpdateConquerFlag(int*);
 
 
 /* ADDRESS: GOLDTL 0x004cd330 */
-int __cdecl fcn_004cd330(unsigned char* command, char* result)
+int __cdecl cm_ExDispatchCutsceneAction(unsigned char* command, char* result)
 {
 	char* e;
 
@@ -22,13 +22,13 @@ int __cdecl fcn_004cd330(unsigned char* command, char* result)
 	switch (command[0x14]) {
 	case 2:
 		if (e[8] != 0) {
-			fcn_004cd2a0(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
+			cut_SyncEntityTransform(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
 			fcn_004d8200((int*) (command + 0x35));
 		}
 		break;
 	case 6:
 		if (e[8] != 0) {
-			fcn_004cd2a0(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
+			cut_SyncEntityTransform(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
 			gm_CancelEntityActionQueue((int*) (command + 0x35));
 		}
 		break;
@@ -49,8 +49,8 @@ int __cdecl fcn_004cd330(unsigned char* command, char* result)
 		break;
 	case 3:
 		if (e[8] != 0) {
-			fcn_004cd2a0(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
-			fcn_004d87f0((int*) (command + 0x35));
+			cut_SyncEntityTransform(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
+			d3_UpdateConquerFlag((int*) (command + 0x35));
 		}
 		break;
 	}

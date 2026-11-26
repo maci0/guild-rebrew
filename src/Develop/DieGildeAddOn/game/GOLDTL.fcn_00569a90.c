@@ -17,10 +17,10 @@ void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 int __cdecl ch_StartMovement(int, int, int, int, int, char*);
-int __cdecl fcn_004c6b20(int, int, int);
+int __cdecl cm_SendBlockCharacter(int, int, int);
 int __cdecl he_GetEntityHomeTarget(unsigned short*, int*, int*, int);
 int __cdecl gm_GetEntityTableEntry(char*);
-int __cdecl fcn_004c5620(int, void*);
+int __cdecl cm_SendSetHE(int, void*);
 void __cdecl he_FreeAction(char*);
 int __cdecl he_fn_Handlung(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
@@ -71,7 +71,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 					    (pkt - g_aed32c) + 0x65, (void*) &v[2]);
 					cm_RequestChangeAttribute();
 				}
-				fcn_004c6b20(*(int*) ((char*) v3 + 4),
+				cm_SendBlockCharacter(*(int*) ((char*) v3 + 4),
 				    -(int) *(unsigned char*) ((char*) v3 + 0x1b1), 0);
 				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) v4 + 4), *(int*) ((char*) v3 + 4),
 				    (char) g_773d75, *(int*) (action + 0xb4));
@@ -116,7 +116,7 @@ done_case1:
 				cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 				cm_AppendPacketFieldDelta(4, 1, (pkt - g_aed32c) + 0x65, (void*) &v[1]);
 				cm_RequestChangeAttribute();
-				fcn_004c6b20(*(int*) ((char*) v3 + 4),
+				cm_SendBlockCharacter(*(int*) ((char*) v3 + 4),
 				    -(int) *(unsigned char*) ((char*) v3 + 0x1b1), 0);
 				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) v4 + 4), *(int*) ((char*) v3 + 4),
 				    (char) g_773d75, *(int*) (action + 0xb4));
@@ -149,7 +149,7 @@ done_case1:
 					he_FreeAction(action);
 					return;
 				}
-				*(int*) (action + 0x84) = fcn_004c5620(-1, action);
+				*(int*) (action + 0x84) = cm_SendSetHE(-1, action);
 			}
 			break;
 		case -2:

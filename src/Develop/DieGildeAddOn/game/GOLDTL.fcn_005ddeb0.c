@@ -13,7 +13,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl he_NotifyAction0x35Blocked(char*, char*);
-void __cdecl fcn_004c5620(int, char*);
+void __cdecl cm_SendSetHE(int, char*);
 
 int __cdecl gm_ObjTriggerAction0x35(char* e)
 {
@@ -23,7 +23,7 @@ int __cdecl gm_ObjTriggerAction0x35(char* e)
 		if (*(int*) (e + 4) == *(int*) (p + 0xbc)) {
 			he_NotifyAction0x35Blocked(e, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (p + 8)]));
 			*(Stamp*) (p + 0x52) = (*(Stamp*)&gm_GameTime);
-			fcn_004c5620(-1, p);
+			cm_SendSetHE(-1, p);
 		}
 	}
 	return 1;

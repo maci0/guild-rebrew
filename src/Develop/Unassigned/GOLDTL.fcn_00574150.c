@@ -21,7 +21,7 @@ int __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, struct list*);
 char __cdecl d3_CollectObjectCallback(int v, int* list);
 
-int __cdecl fcn_00574150(char* a)
+int __cdecl d3_CountBuildStageMeshes(char* action)
 {
 	int best;
 	int saved;
@@ -37,7 +37,7 @@ int __cdecl fcn_00574150(char* a)
 	best = 0;
 	saved = d3_CurrentContextIndex;
 	d3_SelectSceneContext(0, 1);
-	sprintf(buf, "he_%i", *(int*) (a + 4));
+	sprintf(buf, "he_%i", *(int*) (action + 4));
 	l.handle = fcn_00445600(0, 0x1c0, 0, buf);
 	l.count = 0;
 	d3_VisitSceneObjects(g_67a370, l.handle, 0x2c0, d3_CollectObjectCallback, &l);

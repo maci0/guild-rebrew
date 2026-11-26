@@ -21,7 +21,7 @@ float __cdecl eval_ObjektPreis2Credits(int, char);
 void *__cdecl fcn_00502cd0(int, int, ...);
 void *__cdecl gm_NextEntityQueryMatch(void);
 void __cdecl cm_SendRemoveLinkedObject(int, int, int);
-void __cdecl fcn_004c5620(int, void *);
+void __cdecl cm_SendSetHE(int, void *);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char *, int, int, int);
 
@@ -82,7 +82,7 @@ int __cdecl gm_SabotageHandlungShipment(int *msg)
 	}
 	*(pos14_7f4c00 *) (task + 0x52) = gm_GameTime;
 	cm_SendRemoveLinkedObject(-1, -1, *(int *) (item + 2));
-	fcn_004c5620(-1, task);
+	cm_SendSetHE(-1, task);
 	gm_ResolveEntityById((void **) (&b), 0, 0, *(int *) (task + 0xb0));
 	gm_ResolveEntityById((void **) (&a), 0, 0, *(int *) (task + 0xb4));
 	if (b != 0 && a != 0) {

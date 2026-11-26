@@ -12,14 +12,14 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 
-void __cdecl he_InitMeisterpruefungPassed(char* e)
+void __cdecl he_InitMeisterpruefungPassed(char* action)
 {
-	char* r;
+	char* found;
 
-	gm_LookupEntityRecordById(*(int*) (e + 0xac));
-	r = he_StartHandlungSearch(2, 2, *(unsigned short*) (e + 8), 0, 0x25);
-	if (r != 0) {
-		*(int*) (r + 0x70) = -1;
+	gm_LookupEntityRecordById(*(int*) (action + 0xac));
+	found = he_StartHandlungSearch(2, 2, *(unsigned short*) (action + 8), 0, 0x25);
+	if (found != 0) {
+		*(int*) (found + 0x70) = -1;
 	}
-	*(pos14_7f4c00*) (e + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
+	*(pos14_7f4c00*) (action + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
 }

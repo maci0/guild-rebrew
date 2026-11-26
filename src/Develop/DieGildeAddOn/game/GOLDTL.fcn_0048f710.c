@@ -9,7 +9,7 @@ extern char* g_77261c;
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 int __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048f710 */
 int __cdecl fcn_0048f710(char* a1, char* e, char* r, char* out)
@@ -35,8 +35,8 @@ int __cdecl fcn_0048f710(char* a1, char* e, char* r, char* out)
 	found = -1;
 	f.mask = 0xa07c43b4;
 	f.b = 1;
-	if (g_77261c == 0 || (fcn_004a5e60(g_77261c, 4, f, 0, 100.0f, &found), found == -1)) {
-		if (!fcn_004a5e60(a1, 6, f, 0, (float) gm_RandomMod(0x20) + 19.0f, &found)) {
+	if (g_77261c == 0 || (ai_FindEntityInFavorRange(g_77261c, 4, f, 0, 100.0f, &found), found == -1)) {
+		if (!ai_FindEntityInFavorRange(a1, 6, f, 0, (float) gm_RandomMod(0x20) + 19.0f, &found)) {
 			return 0;
 		}
 	}

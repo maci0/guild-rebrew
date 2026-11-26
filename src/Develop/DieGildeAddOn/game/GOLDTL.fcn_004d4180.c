@@ -19,7 +19,7 @@ extern unsigned short* g_772e9c;
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_004d4250(char*, char*);
+void __cdecl cut_AssignCombatUnitOrder(char*, char*);
 
 void __cdecl fcn_004d4180(char* x)
 {
@@ -50,7 +50,7 @@ void __cdecl fcn_004d4180(char* x)
 		if (d->f8 == 1 || cm_GetCommandStatus(d->f8) != 0) {
 			d->f8 = -1;
 			if (d->f4 == 0 && *(int*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x218) != 1)
-				fcn_004d4250(rec, e);
+				cut_AssignCombatUnitOrder(rec, e);
 		}
 	}
 }

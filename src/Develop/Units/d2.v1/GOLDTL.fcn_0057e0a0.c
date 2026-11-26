@@ -17,18 +17,18 @@ void __cdecl fcn_004707d0(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl fcn_00533a40(int);
 void __cdecl d2_HighlightSelectedControl(int);
 int __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_00580140(void);
+int __cdecl d2_ShowTutorialPage(void);
 int __cdecl fcn_00580290(void);
 void __cdecl d2_ShowTutorialInlineForm(void);
 void __cdecl d2_HideTutorialHint(void);
 void __cdecl fcn_00580420(void);
 void __cdecl d2_HideTutorialPrompt(void);
 void __cdecl d2_UpdateTutorialProgress(void);
-void __cdecl fcn_005806d0(void);
+void __cdecl d2_ShowTutorialStep(void);
 int __cdecl fcn_00580960(void);
 void __cdecl fcn_00584160(int);
 
@@ -79,7 +79,7 @@ int __cdecl fcn_0057e0a0(void)
 		if (d3_ActiveCameraAnimation != 0) {
 			break;
 		}
-		if (fcn_00580140() != 0) {
+		if (d2_ShowTutorialPage() != 0) {
 			return -4;
 		}
 		g_665f08[0xe] = 0;
@@ -170,7 +170,7 @@ ret0:
 		g_665f08[0x10] = 0;
 		g_665f08[0] = 6;
 		g_665f08[1] = 6;
-		fcn_005806d0();
+		d2_ShowTutorialStep();
 		return 0;
 label7:
 		g_665f08[0] = 7;
@@ -192,7 +192,7 @@ label7:
 		g_665f08[2] = ((unsigned int) g_6b7fac);
 		if ((unsigned int)g_665f08[0x10] < *(unsigned int *)((int)g_665f08[6] + 0x50)) {
 			g_665f08[3] = ((unsigned int) g_6b7fac);
-			fcn_005806d0();
+			d2_ShowTutorialStep();
 			return 0;
 		}
 		goto label7;
@@ -200,7 +200,7 @@ label7:
 		g_665f08[0xf] = 3;
 		g_665f08[3] = ((unsigned int) g_6b7fac);
 		g_665f08[0x14] = 0;
-		fcn_005806d0();
+		d2_ShowTutorialStep();
 		g_6b7fc0 = 0;
 		if (*(int *)((int)g_665f08[6] + 0x4c) != 0) {
 			g_665f08[0] = 9;
@@ -234,7 +234,7 @@ label7:
 			d2_HideTutorialHint();
 		}
 		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x44) + g_665f08[3]) {
-			fcn_00532ef0();
+			d3_EndCameraAndUiMode();
 			g_774654 = g_774650 - g_774658;
 			g_665f08[0] = 0xb;
 			g_665f08[1] = 0xb;
@@ -257,7 +257,7 @@ label7:
 			g_665f08[5] = d3snd_PlaySoundEffect(-7, 0, *(int *)((int)g_665f08[6] + 0x28), -1);
 		}
 		g_665f08[0xb] = 1;
-		fcn_00580140();
+		d2_ShowTutorialPage();
 		return 0;
 	case 11:
 		if (g_665f08[10] == 1) {
@@ -266,7 +266,7 @@ label7:
 			d2_HideTutorialHint();
 		}
 		if (((unsigned int) g_6b7fac) > *(int *)((int)g_665f08[6] + 0x30) + g_665f08[3]) {
-			fcn_00532ef0();
+			d3_EndCameraAndUiMode();
 			g_774654 = g_774650 - g_774658;
 			g_665f08[0] = 0xc;
 			g_665f08[1] = 0xc;
@@ -289,7 +289,7 @@ label7:
 			g_665f08[5] = d3snd_PlaySoundEffect(-7, 0, *(int *)((int)g_665f08[6] + 0x28), -1);
 		}
 		g_665f08[0xb] = 1;
-		fcn_00580140();
+		d2_ShowTutorialPage();
 		return 0;
 	case 12:
 		if (g_665f08[10] == 1) {

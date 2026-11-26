@@ -6,7 +6,7 @@ int __cdecl fcn_005cfb00(unsigned short* a0, int* a1, int a2);
 float __cdecl gm_CalcEntityFavor(unsigned short a0, unsigned short a1, int a2);
 
 /* ADDRESS: GOLDTL 0x004a5e60 */
-int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, float minimum, float maximum, int* resultId)
+int __cdecl ai_FindEntityInFavorRange(unsigned short* entity, int kind, int filterLo, int filterHi, float minimum, float maximum, int* resultId)
 {
 	int buf[20];
 	int step;
@@ -19,12 +19,12 @@ int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, float minim
 
 	step = g_6643d8[(gm_RandomMod(0x10) & 0xffff)];
 	flag = 0;
-	buf[2] = a2;
+	buf[2] = filterLo;
 
-	buf[4] = a1;
+	buf[4] = kind;
 
 	buf[5] = 0;
-	buf[3] = a3 | 0x80000000;
+	buf[3] = filterHi | 0x80000000;
 	*resultId = -1;
 	found = 0;
 	if ((minimum > 0.0 || maximum < 100.0) && minimum < maximum) {
@@ -43,11 +43,11 @@ int __cdecl fcn_004a5e60(unsigned short* a0, int a1, int a2, int a3, float minim
 		if (*(char*) ent == 0) {
 			goto next;
 		}
-		if (fcn_005cfb00(a0, buf, ent) == 0) {
+		if (fcn_005cfb00(entity, buf, ent) == 0) {
 			goto next;
 		}
 		if (flag != 0) {
-			f = gm_CalcEntityFavor(*(unsigned short*) (ent + 0x27), *a0, 1);
+			f = gm_CalcEntityFavor(*(unsigned short*) (ent + 0x27), *entity, 1);
 			if (f < *(float*) (buf + 17) || f > *(float*) (buf + 17)) {
 				goto next;
 			}

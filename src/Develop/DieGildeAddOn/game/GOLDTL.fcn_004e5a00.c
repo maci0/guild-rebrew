@@ -25,7 +25,7 @@ int __cdecl fcn_00470820(int a, int b, char* c);
 void __cdecl fcn_00471d80(int a, int b);
 void __cdecl fcn_00471af0(int a, int b);
 void __cdecl fcn_004e6c60(int a);
-void __cdecl fcn_00471e30(int a);
+void __cdecl d2_DestroyForm(int a);
 void __cdecl fcn_004da280(void);
 void __cdecl fcn_004e59c0(void);
 void __cdecl fcn_0042def0(char* a);
@@ -237,7 +237,7 @@ display:
     sprintf(text, (char*) 0x68d58c, e[8]);
     *(int*) 0x772f40 = (int) e;
     (*(void (__cdecl**) (int*)) (g_9b0840 + e[8] * 20)) (event);
-    fcn_00471e30(*(int*) (e + 0x2c));
+    d2_DestroyForm(*(int*) (e + 0x2c));
     *(int*) 0x68bfc0 = saved_68bfc0;
     if (*(int*) 0x772f3c != 0)
         goto post_cleanup;

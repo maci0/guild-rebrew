@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
-int __cdecl fcn_005c61e0(int);
+int __cdecl gm_LookupSpecialObject(int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -24,7 +24,7 @@ extern unsigned char g_773d75;
  * effect and sound. */
 
 /* ADDRESS: GOLDTL 0x005c6310 */
-void __cdecl fcn_005c6310(void)
+void __cdecl gm_TickStampedItems(void)
 {
 	char text[0x400];
 	unsigned short* item;
@@ -48,7 +48,7 @@ void __cdecl fcn_005c6310(void)
 		if (*(unsigned short*) (g_7f4ca0 + off) != 0xffff) {
 			item = fcn_00502cd0(*(int*) (g_7f4ca0 + 376 + off), 1, 5);
 			while (item != 0) {
-				obj = fcn_005c61e0(*item);
+				obj = gm_LookupSpecialObject(*item);
 				if (obj != 0) {
 					if (*(int*) (obj + 4) > 0) {
 						rec = (char*) item;

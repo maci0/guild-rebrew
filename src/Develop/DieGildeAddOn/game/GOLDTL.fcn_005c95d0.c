@@ -25,10 +25,10 @@ int __cdecl io_AppendText(int, ...);
 /* Preserve the original declaration order for native register allocation. */
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-void __cdecl fcn_0050c1b0(unsigned char*, int, int*);
+void __cdecl gm_CalcBuildingRoundBalance(unsigned char*, int, int*);
 int __cdecl gm_GetEntityMood(unsigned char*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ShowBuildingTurnSummary(unsigned char* a)
 {
@@ -42,7 +42,7 @@ void __cdecl d2_ShowBuildingTurnSummary(unsigned char* a)
 	d2_SetForm(dlg, 1);
 	*(int*) (g_77255c + 0x28c) = 0x56;
 	gm_GetBuildingTypeCategory(a[0]);
-	fcn_0050c1b0(a, g_774970, st);
+	gm_CalcBuildingRoundBalance(a, g_774970, st);
 	if (a[5] != 0) {
 		io_AppendText((int) s_6a4310, a[0] * 14 + 0x48e, a + 5);
 	}
@@ -104,5 +104,5 @@ void __cdecl d2_ShowBuildingTurnSummary(unsigned char* a)
 			}
 		} while (main_RunFrameLoop((void*) d2_ShowBuildingTurnSummary, 0x677c7) != 0);
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

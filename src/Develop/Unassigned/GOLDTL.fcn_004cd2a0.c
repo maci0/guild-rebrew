@@ -5,13 +5,13 @@
 void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 
-void __cdecl fcn_004cd2a0(char* e, float* pos, float* rot, int v)
+void __cdecl cut_SyncEntityTransform(char* entity, float* pos, float* rot, int state)
 {
-	if (e != 0 && *(char**) (e + 0x184) != 0) {
-		if (CompareVector3WithinTolerance((float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c), pos, 8.0f) == 0)
-			d3_SetNodePosition(*(char**) (*(char**) (e + 0x184) + 0x34), pos);
-		if (CompareVector3WithinTolerance((float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x84), rot, 8.0f) == 0)
-			d3_SetObjectRotation(*(char**) (*(char**) (e + 0x184) + 0x34), rot);
-		*(int*) (e + 0x24) = v;
+	if (entity != 0 && *(char**) (entity + 0x184) != 0) {
+		if (CompareVector3WithinTolerance((float*) (*(char**) (*(char**) (entity + 0x184) + 0x34) + 0x4c), pos, 8.0f) == 0)
+			d3_SetNodePosition(*(char**) (*(char**) (entity + 0x184) + 0x34), pos);
+		if (CompareVector3WithinTolerance((float*) (*(char**) (*(char**) (entity + 0x184) + 0x34) + 0x84), rot, 8.0f) == 0)
+			d3_SetObjectRotation(*(char**) (*(char**) (entity + 0x184) + 0x34), rot);
+		*(int*) (entity + 0x24) = state;
 	}
 }

@@ -15,7 +15,7 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl gm_CanCourtEntity(int, int);
 int __cdecl fcn_005c6770(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(char, char*);
+int __cdecl cm_SendSetHE(char, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl cm_SendLogAction(char*);
@@ -62,7 +62,7 @@ void __cdecl fcn_00544a90(char* e)
 	if (a == 0 || b == 0 || a[9] == b[9]) {
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
-		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+		*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 		return;
 	}
 	if (*(int*) (e + 0x84) != -1 && cm_GetCommandStatus(*(int*) (e + 0x84)) == 0) {
@@ -75,7 +75,7 @@ void __cdecl fcn_00544a90(char* e)
 		if (v == -0x405) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
-			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+			*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 			io_FormatTextBuffer(text, 0x42f6, *(unsigned short*) b);
 			he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), text, 1, 0x5f4, 0);
 			return;
@@ -83,7 +83,7 @@ void __cdecl fcn_00544a90(char* e)
 		if (v == -0x406) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
-			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+			*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 			io_FormatTextBuffer(text, 0x42f7, *(unsigned short*) b);
 			he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), text, 1, 0x5f4, 0);
 			return;
@@ -120,7 +120,7 @@ void __cdecl fcn_00544a90(char* e)
 			if (e[0xb8] >= e[0xb9]) {
 				*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 				gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
-				*(int*) (e + 0x84) = fcn_004c5620(1, e);
+				*(int*) (e + 0x84) = cm_SendSetHE(1, e);
 				return;
 			}
 			if (a[2] == 6) {
@@ -139,7 +139,7 @@ void __cdecl fcn_00544a90(char* e)
 			e[0xba] = 1;
 			he_RollTripletEventScores(e, a, b);
 			*(int*) (e + 0x84) = -1;
-			fcn_004c5620(0, e);
+			cm_SendSetHE(0, e);
 			return;
 		}
 		if (a[2] != 6) {
@@ -176,14 +176,14 @@ void __cdecl fcn_00544a90(char* e)
 		cm_SendTraceEnd(g_6a5a48);
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
-		*(int*) (e + 0x84) = fcn_004c5620(5, e);
+		*(int*) (e + 0x84) = cm_SendSetHE(5, e);
 		return;
 	case 2:
 	case 3:
 		return;
 	case 4:
 		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
-		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+		*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 		return;
 	case 5:
 		if ((*(int*) (a + 0x5c) == *(int*) (b + 4)) & (*(int*) (b + 0x5c) == *(int*) (a + 4))) {
@@ -243,7 +243,7 @@ void __cdecl fcn_00544a90(char* e)
 		e[0xbb] = 1;
 		*(pos14_7f4c00*) (e + 0x52) = *(pos14_7f4c00*) (msg + 0x18);
 		*(int*) (e + 0x84) = -1;
-		fcn_004c5620(4, e);
+		cm_SendSetHE(4, e);
 		fcn_004c4fa0(msg);
 		return;
 		}
@@ -294,5 +294,5 @@ Lneg:
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 Lsend:
 	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
-	*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+	*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 }

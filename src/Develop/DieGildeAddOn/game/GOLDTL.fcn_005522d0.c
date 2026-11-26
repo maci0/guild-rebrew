@@ -12,7 +12,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01Squared(void);
 int __cdecl cm_GetCommandStatus(unsigned int id);
 void* __cdecl cm_GetCommandResult(unsigned int id);
-unsigned int __cdecl fcn_004c5620(int state, void* ev);
+unsigned int __cdecl cm_SendSetHE(int state, void* ev);
 void __cdecl cm_RequestKillSpieler(unsigned int h, int flag);
 void __cdecl cm_SendCancelCharacterActions(unsigned int h);
 void __cdecl ch_StartMovement(unsigned int h, unsigned int id, int a3, int a4, int a5, char* tag);
@@ -89,7 +89,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 			}
 		}
 		gm_AddTime(ev + 0x52, 0, 1, 0);
-		*(unsigned int*) (ev + 0x84) = fcn_004c5620(1, ev);
+		*(unsigned int*) (ev + 0x84) = cm_SendSetHE(1, ev);
 		return;
 	case 1:
 		slot_no = *(unsigned int*) (ev + 0xb0);
@@ -118,7 +118,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 		*(unsigned int*) (ev + 0xb0) = slot_no;
 		if (!rec) {
 			gm_AddTime(ev + 0x52, 0, 1, 0);
-			*(unsigned int*) (ev + 0x84) = fcn_004c5620(-1, ev);
+			*(unsigned int*) (ev + 0x84) = cm_SendSetHE(-1, ev);
 			return;
 		}
 		io_FormatTextBuffer(buf, s_6a5b8c, rec);
@@ -134,13 +134,13 @@ void __cdecl he_RunPlagueEvent(char* ev)
 		}
 		gm_AddTime(ev + 0x52, 0, count > 0 ? 5 : 0x14, 0);
 		*(unsigned int*) (ev + 0xcc) = *(unsigned int*) ((char*) rec + 1);
-		*(unsigned int*) (ev + 0x84) = fcn_004c5620(2, ev);
+		*(unsigned int*) (ev + 0x84) = cm_SendSetHE(2, ev);
 		return;
 	case 2:
 		gm_ResolveEntityById((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xcc));
 		gm_AddTime(ev + 0x52, 0, 5, 0);
 		if (!rec) {
-			*(unsigned int*) (ev + 0x84) = fcn_004c5620(-1, ev);
+			*(unsigned int*) (ev + 0x84) = cm_SendSetHE(-1, ev);
 			return;
 		}
 		for (i = 0; i < 4; i++) {
@@ -148,7 +148,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 			if (p && !gm_IsEntityAtBuilding((char*) p, (char*) rec)) {
 				*(unsigned int*) (ev + 0x70) = 2;
 				gm_AddTime(ev + 0x52, 0, 5, 0);
-				*(unsigned int*) (ev + 0x84) = fcn_004c5620(2, ev);
+				*(unsigned int*) (ev + 0x84) = cm_SendSetHE(2, ev);
 				return;
 			}
 		}
@@ -220,7 +220,7 @@ after_scan:
 		state = *(int*) (ev + 0xac) - 1;
 		*(int*) (ev + 0xac) = state;
 		if (state > 0) {
-			*(unsigned int*) (ev + 0x84) = fcn_004c5620(1, ev);
+			*(unsigned int*) (ev + 0x84) = cm_SendSetHE(1, ev);
 			return;
 		}
 		gm_ResolveEntityById((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xd0));
@@ -238,7 +238,7 @@ after_scan:
 			}
 		}
 		gm_AddTime(ev + 0x52, 0, count > 0 ? 1 : 10, 0);
-		*(unsigned int*) (ev + 0x84) = fcn_004c5620(3, ev);
+		*(unsigned int*) (ev + 0x84) = cm_SendSetHE(3, ev);
 		return;
 	case 3:
 		gm_AddTime(ev + 0x52, 0, 5, 0);
@@ -251,7 +251,7 @@ after_scan:
 			if (p && !gm_IsEntityAtBuilding((char*) p, (char*) rec)) {
 				*(unsigned int*) (ev + 0x70) = 3;
 				gm_AddTime(ev + 0x52, 0, 5, 0);
-				*(unsigned int*) (ev + 0x84) = fcn_004c5620(3, ev);
+				*(unsigned int*) (ev + 0x84) = cm_SendSetHE(3, ev);
 				return;
 			}
 		}
@@ -259,5 +259,5 @@ after_scan:
 	default:
 		return;
 	}
-	*(unsigned int*) (ev + 0x84) = fcn_004c5620(-1, ev);
+	*(unsigned int*) (ev + 0x84) = cm_SendSetHE(-1, ev);
 }

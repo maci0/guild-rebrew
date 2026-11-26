@@ -23,7 +23,7 @@ void __cdecl cm_RequestMoveCredits(int a, int b, char c, int d);
 void __cdecl cm_BeginPacketFieldDelta(void* a, int b);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* d);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_00471e30(int a);
+void __cdecl d2_DestroyForm(int a);
 
 /* ADDRESS: GOLDTL 0x005a4bb0 */
 void __cdecl fcn_005a4bb0(char* o)
@@ -74,6 +74,6 @@ void __cdecl fcn_005a4bb0(char* o)
             g_774654 = 1;
         }
     }
-    fcn_00471e30((int)dlg);
+    d2_DestroyForm((int)dlg);
     g_774698 = 0;
 }

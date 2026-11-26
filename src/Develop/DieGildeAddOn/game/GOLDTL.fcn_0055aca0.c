@@ -36,7 +36,7 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
 void __cdecl amt_PurchaseOfficeApplication(int, int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP *, int, int, int);
-int __cdecl fcn_004c5620(int, Ent *);
+int __cdecl cm_SendSetHE(int, Ent *);
 int __cdecl fcn_004e9530(int);
 int __cdecl fcn_004e9730(int);
 short __cdecl gm_RandomMod(int);
@@ -67,7 +67,7 @@ void __cdecl he_RunDailyCouncilEvent(Ent *e)
 			e->b0 = 0x1b;
 			e->b4 = -1;
 			e->b8 = -1;
-			e->wait = fcn_004c5620(0, e);
+			e->wait = cm_SendSetHE(0, e);
 			return;
 		}
 		e->ac = fcn_004e9530(e->b0);
@@ -79,7 +79,7 @@ void __cdecl he_RunDailyCouncilEvent(Ent *e)
 			e->b0 = 0x1b;
 			e->b4 = -1;
 			e->b8 = -1;
-			e->wait = fcn_004c5620(0, e);
+			e->wait = cm_SendSetHE(0, e);
 			return;
 		}
 		e->b4 = fcn_004e9730(e->ac);
@@ -118,7 +118,7 @@ void __cdecl he_RunDailyCouncilEvent(Ent *e)
 		if (n == 2) {
 			e->t = (*(GAME_TIMESTAMP*)&gm_GameTime);
 			gm_AddTime(&e->t, 0, 5, 0);
-			e->wait = fcn_004c5620(0, e);
+			e->wait = cm_SendSetHE(0, e);
 			return;
 		}
 		break;
@@ -126,5 +126,5 @@ void __cdecl he_RunDailyCouncilEvent(Ent *e)
 		return;
 	}
 	e->t = (*(GAME_TIMESTAMP*)&gm_GameTime);
-	e->wait = fcn_004c5620(1, e);
+	e->wait = cm_SendSetHE(1, e);
 }

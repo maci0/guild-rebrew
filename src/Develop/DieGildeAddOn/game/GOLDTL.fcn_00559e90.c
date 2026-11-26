@@ -18,7 +18,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl he_ReturnPoliticianFromJob(struct job*);
 void __cdecl gm_SimulatePoliticians(struct job*);
 int __cdecl he_TryDispatchNpcAction(struct job*, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_RunPoliticians(char* u)
@@ -47,7 +47,7 @@ void __cdecl he_RunPoliticians(char* u)
 				*(unsigned short*) (u + 0x56) = (unsigned short) n;
 				(*(int*) (u + 0x52))++;
 			}
-			fcn_004c5620(0, u);
+			cm_SendSetHE(0, u);
 			return;
 		}
 		for (i = 0; i < 10; i++) {
@@ -68,7 +68,7 @@ void __cdecl he_RunPoliticians(char* u)
 				break;
 			}
 		}
-		fcn_004c5620(0, u);
+		cm_SendSetHE(0, u);
 	} else {
 		he_FreeAction(u);
 	}

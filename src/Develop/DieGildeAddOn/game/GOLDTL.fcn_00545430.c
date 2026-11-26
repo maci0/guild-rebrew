@@ -16,11 +16,11 @@ void __cdecl fcn_00545420(void);
 int __cdecl he_RegisterEventHandlers(void);
 int __cdecl he_RegisterActionHandlers(void);
 int __cdecl he_RegisterCoreActionHandlers(void);
-int __cdecl fcn_005780b0(void);
-int __cdecl fcn_0056d4c0(void);
-int __cdecl fcn_00576ae0(void);
-int __cdecl fcn_0057bbc0(void);
-int __cdecl fcn_0057ba30(void);
+int __cdecl he_RegisterFriedhofHandlers(void);
+int __cdecl he_RegisterAhmHandlers(void);
+int __cdecl he_RegisterAssassinHandlers(void);
+int __cdecl he_RegisterZigeunerHandlers(void);
+int __cdecl he_RegisterAction0xa2Handler(void);
 
 int __cdecl he_InitEventSystem(void)
 {
@@ -39,19 +39,19 @@ int __cdecl he_InitEventSystem(void)
 	if (he_RegisterCoreActionHandlers() != 0) {
 		return 1;
 	}
-	if (fcn_005780b0() != 0) {
+	if (he_RegisterFriedhofHandlers() != 0) {
 		return 1;
 	}
-	if (fcn_0056d4c0() != 0) {
+	if (he_RegisterAhmHandlers() != 0) {
 		return 1;
 	}
-	if (fcn_00576ae0() != 0) {
+	if (he_RegisterAssassinHandlers() != 0) {
 		return 1;
 	}
-	if (fcn_0057bbc0() != 0) {
+	if (he_RegisterZigeunerHandlers() != 0) {
 		return 1;
 	}
-	if (fcn_0057ba30() != 0) {
+	if (he_RegisterAction0xa2Handler() != 0) {
 		return 1;
 	}
 	memset(g_7d2020, 0, sizeof(g_7d2020));

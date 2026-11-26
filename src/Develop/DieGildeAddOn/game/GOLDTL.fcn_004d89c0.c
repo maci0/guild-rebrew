@@ -36,7 +36,7 @@ int __cdecl gm_FindEntityActiveItem(int);
 int __cdecl gm_FindOrCreateEntitySlot(int, int);
 int __cdecl fcn_004cec00(int, int, int*, int*);
 float __cdecl fcn_004cefb0(int, unsigned int);
-int __cdecl fcn_004d1020(int, int, int, int, int);
+int __cdecl cut_AssignTargetOrder(int, int, int, int, int);
 int __cdecl cut_RandMod(int);
 int __cdecl gm_HasActiveSpecialObject(int, int);
 
@@ -117,7 +117,7 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 			if (*(int*) (v8 + 4) == 0) {
 				w = gm_FindEntityActiveItem(a2);
 				if (w != 0 && *(int*) (w + 0x20) > 0)
-					*(unsigned int*) (v8 + 8) = fcn_004d1020(v9, a2, actor, 0, 0);
+					*(unsigned int*) (v8 + 8) = cut_AssignTargetOrder(v9, a2, actor, 0, 0);
 			}
 		}
 	}

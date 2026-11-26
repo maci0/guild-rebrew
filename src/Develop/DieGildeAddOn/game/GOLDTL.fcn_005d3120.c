@@ -12,12 +12,12 @@ int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(char*, int, char*);
-int __cdecl fcn_00471e30(int);
+int __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl cm_SendCopyEntityData(char* a);
 void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
-int __cdecl fcn_004c5620(char a1, unsigned char* e);
+int __cdecl cm_SendSetHE(char a1, unsigned char* e);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl fcn_00526120(char*, int);
@@ -32,7 +32,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca0[];
 
 /* ADDRESS: GOLDTL 0x005d3120 */
-int __cdecl fcn_005d3120(int entity, int* request)
+int __cdecl d2_RunCourtshipDialog(int entity, int* request)
 {
 	int mode;
 	int id;
@@ -178,7 +178,7 @@ int __cdecl fcn_005d3120(int entity, int* request)
 						gm_AddTime(e + 0x52, 0, 1, 0);
 					}
 					*(char*) (e + 0xba) = 0;
-					*(int*) (e + 0x84) = fcn_004c5620(0, (unsigned char*) e);
+					*(int*) (e + 0x84) = cm_SendSetHE(0, (unsigned char*) e);
 					cm_RequestMoveCredits(-1, *(int*) (entity + 4), g_773d75, q);
 					fcn_00526120(buf2, 0);
 					mode = mode;
@@ -188,12 +188,12 @@ int __cdecl fcn_005d3120(int entity, int* request)
 				p = gm_LookupEntityRecordById(id);
 				io_FormatTextBuffer(buf3, 0x1cfa, *(unsigned short*) p);
 				*(char*) (e + 0xba) = 0;
-				*(int*) (e + 0x84) = fcn_004c5620(0, (unsigned char*) e);
+				*(int*) (e + 0x84) = cm_SendSetHE(0, (unsigned char*) e);
 				fcn_00526120(buf3, 0);
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005d3120, 0x657c7) != 0);
-	fcn_00471e30(h);
+	} while (main_RunFrameLoop((void*) d2_RunCourtshipDialog, 0x657c7) != 0);
+	d2_DestroyForm(h);
 	return 2;
 }

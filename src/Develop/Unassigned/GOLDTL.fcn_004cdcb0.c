@@ -3,7 +3,7 @@
 
 char* __cdecl cut_FindCutsceneById(int);
 
-int __cdecl fcn_004cdcb0(char* request, char* result)
+int __cdecl cm_ExSetCutsceneState(char* request, char* result)
 {
 	char* p;
 

@@ -14,7 +14,7 @@ char __cdecl SelectTextureSet(void*, void*, unsigned char, char);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004d87f0 */
-void __cdecl fcn_004d87f0(int* orderRecord)
+void __cdecl d3_UpdateConquerFlag(int* orderRecord)
 {
 	char buf[0x100];
 	float rotation[3];

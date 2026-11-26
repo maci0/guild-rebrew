@@ -15,7 +15,7 @@ void __cdecl io_AppendText(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 
@@ -42,7 +42,7 @@ void __cdecl fcn_004b5530(int a1, int flags)
 			g_774654 = 1;
 	}
 	if (h != -1)
-		fcn_00471e30(h);
+		d2_DestroyForm(h);
 	if (sb_CheckVoicePlaying(x) != 0)
 		sb_StopVoice(x, 0x19);
 }

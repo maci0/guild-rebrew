@@ -29,7 +29,7 @@ int __cdecl fcn_005cf720(unsigned short a, unsigned short b, void* q, int c);
  * max == 0, the count available. The inventory entry also holds a second
  * function at 0x5cc100 (314 bytes). */
 /* ADDRESS: GOLDTL 0x005cbfb0 */
-unsigned int __cdecl fcn_005cbfb0(char* e, unsigned int max, Sel* out, void* q)
+unsigned int __cdecl d2_CollectOfficePeers(char* e, unsigned int max, Sel* out, void* q)
 {
 	int m;
 	unsigned int n;

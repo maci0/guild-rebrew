@@ -15,7 +15,7 @@ extern char g_7e3a60[];
 void __cdecl d2_RunChatConsole(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 
@@ -40,6 +40,6 @@ void __cdecl fcn_00536b10(void)
 	if (g_6a2c20 == -1) {
 		return;
 	}
-	fcn_00471e30(g_6a2c20);
+	d2_DestroyForm(g_6a2c20);
 	g_6a2c20 = -1;
 }

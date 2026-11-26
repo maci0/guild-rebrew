@@ -28,9 +28,9 @@ void __cdecl d2_AddToRadioGroup(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ShowChooseProfessionDialog(void);
 void __cdecl d2_UpdateRadioGroup(int);
-char __cdecl fcn_00507400(int, int);
+char __cdecl gm_GetRangeStatId(int, int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_win.h"
 
 
@@ -49,7 +49,7 @@ extern int g_774a38;
 extern char* g_779cb8;
 extern char* g_14b5d58;
 
-char* __cdecl fcn_004ce000(void);
+char* __cdecl d2_GetCurrentTextLogRecord(void);
 char* __cdecl fcn_004ce040(void);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -110,7 +110,7 @@ int __cdecl d2_ChooseProfession(int a1)
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 11; i++) {
 				if (d2_CurrentElementId == btns[i]) {
-					g_7e23e3 = fcn_00507400(types[i], 1);
+					g_7e23e3 = gm_GetRangeStatId(types[i], 1);
 					g_774654 = 1;
 					r = 1;
 					break;
@@ -119,7 +119,7 @@ int __cdecl d2_ChooseProfession(int a1)
 		}
 	}
 	d2_ClearRadioGroup(grp);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return r;
 }
 
@@ -134,7 +134,7 @@ void __cdecl fcn_005941e0(void)
 	char* p;
 
 	last = -1;
-	e = fcn_004ce000();
+	e = d2_GetCurrentTextLogRecord();
 	d2_SetForm(g_6a9b9c, 5);
 	h = *(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x218];
 	io_AppendText((int) "$C");

@@ -14,7 +14,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004ba2e0 */
-int __cdecl fcn_004ba2e0(int* input)
+int __cdecl gm_HandleMsg2cPostWorkerNews(int* input)
 {
 	char* ents[8];
 	char buf[0x200];

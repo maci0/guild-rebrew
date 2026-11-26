@@ -11,11 +11,11 @@ extern char *__cdecl d3sm_GetObjectSuperMap(char *);
 extern char __cdecl fcn_0045b990(char *, float *, int *, int *, float *);
 extern void __cdecl d3_SelectSceneContext(int, int);
 extern void __cdecl d3_TransformPoint(char *, char *, float *);
-extern void __cdecl fcn_004c5d20(int, int);
+extern void __cdecl cm_SendCreateAction0x38(int, int);
 extern void __cdecl cm_RequestWalkOnPath(int, int, int, int);
 extern int __cdecl cm_RequestMoveObjekt(int, int, int);
 extern void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-extern int __cdecl fcn_004c5620(int, char *);
+extern int __cdecl cm_SendSetHE(int, char *);
 extern int __cdecl CompareVector3WithinTolerance(float *, float *, float);
 extern char *__cdecl gm_FindBuildingPrimarySlot(unsigned char *);
 extern void __cdecl io_FormatTextBuffer(char *, int, ...);
@@ -82,7 +82,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 						d3_TransformPoint(v8, v8 + 0x4c, l_v13);
 					}
 				}
-				fcn_004c5d20(*(int *)(v6 + 2), 1);
+				cm_SendCreateAction0x38(*(int *)(v6 + 2), 1);
 			}
 			cm_RequestWalkOnPath(*(int *)(v6 + 2), l_a, l_b, 0);
 			if (!gm_IsWarehouse((unsigned char *)v4))
@@ -119,7 +119,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 			return;
 		cm_RequestChangeBits(*(int *)(v4 + 2), 0x13, 1, 0, 0x40);
 		if (!gm_IsWarehouse((unsigned char *)v5)) {
-			fcn_004c5d20(*(int *)(v4 + 2), 0);
+			cm_SendCreateAction0x38(*(int *)(v4 + 2), 0);
 			*(int *)(transportEvent + 0xec) = cm_RequestMoveObjekt(*(int *)(v5 + 1),
 							   *(int *)(v3 + 1),
 							   *(int *)(transportEvent + 0xac));
@@ -151,7 +151,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 						       *(int *)(v5 + 1), -1, 0, 0);
 		}
 		*(int *)(transportEvent + 0xc4) = *(int *)(transportEvent + 0xb4);
-		*(int *)(transportEvent + 0x84) = fcn_004c5620(3, transportEvent);
+		*(int *)(transportEvent + 0x84) = cm_SendSetHE(3, transportEvent);
 		if (!*(int *)(v6 + 0x128) && *(int *)(transportEvent + 0xd4) > 6 &&
 		    !CompareVector3WithinTolerance((float *)(*(int *)(v6 + 0x34) + 0x4c),
 				  (float *)(transportEvent + 0xd8), 100.0f))

@@ -106,7 +106,7 @@ extern float g_6628a0;
 extern float g_664144;
 
 double __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_0047d1b0(void);
+int __cdecl ai_GetMaxActiveTradeActions(void);
 int __cdecl he_CountActiveTradeActions(void);
 int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 int __cdecl cm_RequestClearLagerslot(int, int);
@@ -338,7 +338,7 @@ next_request:
 		cnt = 0;
 		sent = 0;
 		n = 0;
-		if (he_CountActiveTradeActions() > fcn_0047d1b0()) {
+		if (he_CountActiveTradeActions() > ai_GetMaxActiveTradeActions()) {
 			v.m.skip = 1;
 		}
 		for (i = 0; i < 3; i++) {

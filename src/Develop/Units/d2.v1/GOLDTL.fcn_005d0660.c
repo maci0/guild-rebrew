@@ -44,7 +44,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005c9090(char*, int, int, int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_005d1790(void*, int);
 
 typedef struct TreeRec {
@@ -643,6 +643,6 @@ id]) + 0x18c), d2_CurrentWindowId);
 			break;
 		}
 	}
-	fcn_00471e30(win);
+	d2_DestroyForm(win);
 	fcn_0057e880(6, 0, 1, 0);
 }

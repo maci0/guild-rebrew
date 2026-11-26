@@ -6,7 +6,7 @@ extern void __cdecl d2_RunKerkermeisterBribeDialog(char* obj);
 #define SOUND_FLAG (*(unsigned char*) (0x7f4e51 + *(unsigned short*) 0x774970 * 0x21c))
 
 /* ADDRESS: GOLDTL 0x005ad260 */
-void __cdecl fcn_005ad260(char* obj)
+void __cdecl d2_RunKerkermeisterMenu(char* obj)
 {
 	int handle;
 	int wait;

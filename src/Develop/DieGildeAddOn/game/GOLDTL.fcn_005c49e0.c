@@ -24,7 +24,7 @@ void __cdecl d2_ShowRenovationDialog(unsigned char*);
 void __cdecl fcn_005c2a40(unsigned char*);
 void __cdecl fcn_005c30e0(unsigned char*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 {
@@ -133,6 +133,6 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 			}
 		}
 	} while (main_RunFrameLoop(d2_ShowGebaeudeOptions, 0x677c7) != 0);
-	fcn_00471e30(d);
+	d2_DestroyForm(d);
 	g_7746f8 = 0;
 }

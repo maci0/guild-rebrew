@@ -17,7 +17,7 @@ int __cdecl d2_CreateRadioGroup(int, int, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471af0(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl fcn_00539600(void);
 int __cdecl d2_ShowServerBrowser(int);
 
@@ -62,6 +62,6 @@ int __cdecl d2_ShowNetworkLoadDialog(void)
 		}
 	}
 	d2_ClearRadioGroup(radio_group);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 }

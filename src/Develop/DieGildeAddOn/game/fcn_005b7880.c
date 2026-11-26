@@ -137,7 +137,7 @@ int __cdecl fcn_004693b0(int, int);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00534f30(char*);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_00505370(char*);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x005b7880 */
@@ -591,5 +591,5 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 		d2_ClearRadioGroup(f.hRadio);
 	}
 	fcn_00534f30(f.win);
-	fcn_00532ef0();
+	d3_EndCameraAndUiMode();
 }

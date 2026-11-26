@@ -45,7 +45,7 @@ static __inline void fill0_5dc5e0(char* dst, int size)
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x005dc5e0 */
-int __cdecl fcn_005dc5e0(char* entity, int* target)
+int __cdecl gm_UseSmokeOrUnkendunkEffect(char* entity, int* target)
 {
 	char buf[0xf8];
 	char* pkt;

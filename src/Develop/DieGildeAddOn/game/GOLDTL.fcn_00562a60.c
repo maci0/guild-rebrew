@@ -20,7 +20,7 @@ extern __int64 g_666018;
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
-int __cdecl fcn_004a5e60(ENTITY_RECORD* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(ENTITY_RECORD* p, int kind, F8 f, int c, float r, int* out);
 
 void __cdecl he_AllocPruegelAction(char* action)
 {
@@ -45,7 +45,7 @@ void __cdecl he_AllocPruegelAction(char* action)
 		target = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) actor);
 	}
 	if (target == 0) {
-		if (fcn_004a5e60(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (action + 8)]), 6, (*(F8*)&g_666018), 0, 100.0f, &found) != 0) {
+		if (ai_FindEntityInFavorRange(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (action + 8)]), 6, (*(F8*)&g_666018), 0, 100.0f, &found) != 0) {
 			target = gm_StartFilteredEntitySearch(1, 1, found);
 		}
 	}

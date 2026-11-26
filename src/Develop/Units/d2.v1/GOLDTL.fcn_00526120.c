@@ -41,7 +41,7 @@ void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 
 /* Modal message box: flags pick the layout (2, 0x10, 0x20, 0x100), 8 the
@@ -125,6 +125,6 @@ int __cdecl fcn_00526120(char* text, int flags)
 	}
 	g_77470c = 0;
 	d2_ClearRadioGroup(list);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 }

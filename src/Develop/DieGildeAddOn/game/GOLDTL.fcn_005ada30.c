@@ -44,10 +44,10 @@ int __cdecl cm_SendRemoveLinkedObject(int a1, int a2, int a3);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d3_EndCameraAndUiMode(void);
+void __cdecl d2_DestroyForm(int);
 
-void __cdecl fcn_005ada30(char* p)
+void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 {
 	int n;
 	int i;
@@ -138,10 +138,10 @@ void __cdecl fcn_005ada30(char* p)
 				refresh = 1;
 			}
 		}
-	} while (main_RunFrameLoop(fcn_005ada30, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_RunDiebesgildeInfoDialog, 0x677c7) != 0);
 	if (grp != -1) {
 		d2_ClearRadioGroup(grp);
 	}
-	fcn_00532ef0();
-	fcn_00471e30(d);
+	d3_EndCameraAndUiMode();
+	d2_DestroyForm(d);
 }

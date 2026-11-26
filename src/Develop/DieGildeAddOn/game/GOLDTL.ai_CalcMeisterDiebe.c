@@ -51,7 +51,7 @@ void __cdecl fcn_00489250(int);
 void __cdecl fcn_00489a70(int, int);
 void __cdecl ai_ManageMeisterWorkers(int);
 void __cdecl fcn_00487970(int, int, int);
-void __cdecl fcn_00487c00(int, int, int);
+void __cdecl ai_RequestAusbauUpgrade(int, int, int);
 void __cdecl fcn_00487470(int);
 void __cdecl fcn_004888a0(int);
 void __cdecl ai_DispatchWorkerRecovery(int);
@@ -59,7 +59,7 @@ void __cdecl ai_CalcAngriff(int, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_PosToStatsGrid(int, int*, int*);
 int __cdecl fcn_0050c4e0(unsigned char*);
-int __cdecl fcn_0050d0c0(unsigned char*, int);
+int __cdecl gm_CalcOwnerAndStockValue(unsigned char*, int);
 int __cdecl gm_AccumulateTyped2(unsigned char*);
 int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl gm_GetBuildingTypeCategory(unsigned int);
@@ -142,7 +142,7 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 common:
 	ai_ManageMeisterWorkers((int) rec);
 	fcn_00487970(saved, (int) rec, 10);
-	fcn_00487c00(saved, (int) rec, 10);
+	ai_RequestAusbauUpgrade(saved, (int) rec, 10);
 	fcn_00487470((int) rec);
 	if (fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 2, 6, 0, 0x60) != 0) {
 		fcn_004888a0((int) rec);
@@ -286,9 +286,9 @@ L176c:
 					factor = (8.0f - (float) j) * factor * 0.5f;
 					factor = (float) (gm_RandomMod(100) & 0xffff) * factor * 0.01;
 					if (best != 0) {
-						int a2 = fcn_0050d0c0(e, saved != 0);
+						int a2 = gm_CalcOwnerAndStockValue(e, saved != 0);
 						float fa = (float) a2 * factor;
-						int b2 = fcn_0050d0c0(best, saved != 0);
+						int b2 = gm_CalcOwnerAndStockValue(best, saved != 0);
 						if (!(fa > (float) b2 * best_score)) {
 							goto L1a0c2;
 						}

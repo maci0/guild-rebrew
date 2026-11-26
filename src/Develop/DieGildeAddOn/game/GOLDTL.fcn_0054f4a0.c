@@ -15,7 +15,7 @@ float __cdecl gm_GetEntitySkill(char*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl amt_AdjustOfficeHoldersFavor(unsigned char*, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_004c5620(int, char*);
+void __cdecl cm_SendSetHE(int, char*);
 
 /* ADDRESS: GOLDTL 0x0054f4a0 */
 void __cdecl he_DeclineDuell(char* a0, char* firstEntity, unsigned char* secondEntity)
@@ -49,5 +49,5 @@ void __cdecl he_DeclineDuell(char* a0, char* firstEntity, unsigned char* secondE
 	amt_AdjustOfficeHoldersFavor(secondEntity, ret, -9 - (int) (gm_GetEntitySkill(firstEntity, 4) * 8.0f) - (gm_RandomMod(8) & 0xffff));
 	cm_RequestCopyEntityData(*(int*) (firstEntity + 4), *(int*) (secondEntity + 4), -0x14, 1);
 	*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
-	fcn_004c5620(-1, a0);
+	cm_SendSetHE(-1, a0);
 }

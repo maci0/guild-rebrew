@@ -131,7 +131,7 @@ extern void fcn_00536bb0();
 extern void fcn_004c0cd0();
 extern void gm_UpdateAmbientAudio();
 extern void fcn_004c0b40();
-extern void fcn_004c2860();
+extern void msx_StopOutdoorTrackOnSeason();
 extern void d3_UpdateLightningAndThunder();
 extern void fcn_00415d70();
 extern void d3_UpdateSelectionBoxCharacters();
@@ -342,7 +342,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		fcn_004c0b40();
 	}
 	if (msx_MusicEnabled != 0 && (flags & 0x40000)) {
-		fcn_004c2860();
+		msx_StopOutdoorTrackOnSeason();
 	}
 	if (g_774670 == 0) {
 		if (g_6b8300 != 0 && p != 0 && (flags & 0x40)) {

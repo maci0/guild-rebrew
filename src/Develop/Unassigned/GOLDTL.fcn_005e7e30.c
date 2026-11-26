@@ -11,7 +11,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char *, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl main_RunFrameLoop(void *, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e7e30 */
 void __cdecl fcn_005e7e30(void)
@@ -147,5 +147,5 @@ void __cdecl fcn_005e7e30(void)
     if ((g_100f1dc != -1) && ((*(int *)0x67d370) == v4))
       (*(int *)0x774654) = 1;
   } while (main_RunFrameLoop((void *)fcn_005e7e30,0x777c7));
-  fcn_00471e30(v2);
+  d2_DestroyForm(v2);
 }

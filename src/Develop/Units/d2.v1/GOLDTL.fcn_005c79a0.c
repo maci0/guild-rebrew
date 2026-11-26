@@ -79,7 +79,7 @@ extern short g_7f4c0c;
 void __cdecl d2_SetBackgroundTexture(const char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl CountDisplayCounters(void);
@@ -96,7 +96,7 @@ int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_0052a0c0(unsigned char*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 int __cdecl sv_ClearObjectSelection(void);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_005c78f0(int, int, int*, int);
 
@@ -314,8 +314,8 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 		}
 		if (main_RunFrameLoop((void*) fcn_005c79a0, 0x677c7) == 0) {
 			d2_RestoreHudAfterDialog();
-			fcn_00471e30(dlg);
-			fcn_00532ef0();
+			d2_DestroyForm(dlg);
+			d3_EndCameraAndUiMode();
 			sv_ClearObjectSelection();
 			return;
 		}

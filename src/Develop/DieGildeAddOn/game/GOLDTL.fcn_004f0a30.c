@@ -6,7 +6,7 @@ int __cdecl fcn_004f0c90(int);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl fcn_005100f0(int, int);
-int __cdecl fcn_004c6de0(void*);
+int __cdecl cm_SendAdjustResourceSlots(void*);
 
 /* ADDRESS: GOLDTL 0x004f0a30 */
 int __cdecl fcn_004f0a30(char* a0, char* payer, unsigned int* firstPayload,
@@ -44,7 +44,7 @@ int __cdecl fcn_004f0a30(char* a0, char* payer, unsigned int* firstPayload,
 			ok = 0;
 			memcpy(&pkt[3], firstPayload, 0x1a * 4);
 			prio = 0;
-			ret = fcn_004c6de0(pkt);
+			ret = cm_SendAdjustResourceSlots(pkt);
 		}
 		if (secondPayload != 0) {
 			if (ok != 0) {
@@ -57,7 +57,7 @@ int __cdecl fcn_004f0a30(char* a0, char* payer, unsigned int* firstPayload,
 			pkt[2] = need_start;
 			memcpy(&pkt[3], secondPayload, 0x1a * 4);
 			prio = 0;
-			ret = fcn_004c6de0(pkt);
+			ret = cm_SendAdjustResourceSlots(pkt);
 		}
 		if (thirdPayload != 0) {
 			if (ok != 0) {
@@ -68,7 +68,7 @@ int __cdecl fcn_004f0a30(char* a0, char* payer, unsigned int* firstPayload,
 			pkt[1] = prio;
 			pkt[2] = need_start;
 			memcpy(&pkt[3], thirdPayload, 0x1a * 4);
-			ret = fcn_004c6de0(pkt);
+			ret = cm_SendAdjustResourceSlots(pkt);
 		}
 		return ret;
 	}

@@ -19,7 +19,7 @@ int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
@@ -35,10 +35,10 @@ void __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005aaf60 */
-void __cdecl fcn_005aaf60(char* gebaeude)
+void __cdecl d2_RunKircheSpendenDialog(char* gebaeude)
 {
 	char buf[512];
 	int dlg;
@@ -149,7 +149,7 @@ void __cdecl fcn_005aaf60(char* gebaeude)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005aaf60, 0x677c7) != 0);
-	fcn_00471e30(dlg);
-	fcn_00532ef0();
+	} while (main_RunFrameLoop((void*) d2_RunKircheSpendenDialog, 0x677c7) != 0);
+	d2_DestroyForm(dlg);
+	d3_EndCameraAndUiMode();
 }

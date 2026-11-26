@@ -11,7 +11,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl fcn_004b5a80(int flags)
 {
@@ -31,5 +31,5 @@ void __cdecl fcn_004b5a80(int flags)
 		else if (g_100f1dc == 2)
 			g_774654 = 1;
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

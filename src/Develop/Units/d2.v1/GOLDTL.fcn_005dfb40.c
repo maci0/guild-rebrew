@@ -57,7 +57,7 @@ void __cdecl fcn_0046f940(int, char*);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, char* out)
 {
@@ -132,6 +132,6 @@ int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, c
 			result = 1;
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 }

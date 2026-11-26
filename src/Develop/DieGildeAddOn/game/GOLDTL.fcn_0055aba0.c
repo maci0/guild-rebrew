@@ -4,7 +4,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_HandleAction0x82SkillModifier(char* u)
@@ -14,7 +14,7 @@ void __cdecl he_HandleAction0x82SkillModifier(char* u)
 			return;
 		}
 		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-		*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+		*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 	} else {
 		he_FreeAction(u);
 	}

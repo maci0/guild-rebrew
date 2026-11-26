@@ -1,12 +1,12 @@
 #include "client_types.h"
 extern Rec24_99f5a0 g_99f5a0;
 
-void __cdecl fcn_004c6a00(void* msg);
+void __cdecl cm_SendRandomEventState(void* msg);
 
 extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x004fb650 */
-void __cdecl fcn_004fb650(int a1, int a2, int a3, int a4)
+void __cdecl gm_InitDisasterState(int enabled, int scaleA, int scaleB, int duration)
 {
 	int buf[10];
 
@@ -36,20 +36,20 @@ void __cdecl fcn_004fb650(int a1, int a2, int a3, int a4)
 		}
 	}
 	buf[9] = 0x696e6974;
-	buf[0] = a1;
+	buf[0] = enabled;
 	buf[1] = 0;
 	buf[2] = (*(int*)&gm_GameTime);
-	buf[3] = a2;
-	buf[4] = a3;
+	buf[3] = scaleA;
+	buf[4] = scaleB;
 	buf[5] = 0;
-	buf[6] = a4;
+	buf[6] = duration;
 	buf[7] = 0;
 	buf[8] = 0;
-	fcn_004c6a00(buf);
+	cm_SendRandomEventState(buf);
 }
 
 /* ADDRESS: GOLDTL 0x004fb6e0 */
-void __cdecl fcn_004fb6e0(void)
+void __cdecl gm_EnableDisasterState(void)
 {
 	int buf[10];
 
@@ -80,11 +80,11 @@ void __cdecl fcn_004fb6e0(void)
 	}
 	buf[0] = 1;
 	buf[9] = 0x656e626c;
-	fcn_004c6a00(buf);
+	cm_SendRandomEventState(buf);
 }
 
 /* ADDRESS: GOLDTL 0x004fb740 */
-void __cdecl fcn_004fb740(void)
+void __cdecl gm_DisableDisasterState(void)
 {
 	int buf[10];
 
@@ -115,11 +115,11 @@ void __cdecl fcn_004fb740(void)
 	}
 	buf[0] = 0;
 	buf[9] = 0x6473626c;
-	fcn_004c6a00(buf);
+	cm_SendRandomEventState(buf);
 }
 
 /* ADDRESS: GOLDTL 0x004fbc90 */
-int __cdecl fcn_004fbc90(unsigned int* msg)
+int __cdecl gm_DispatchDisasterCommand(unsigned int* msg)
 {
 	int len;
 

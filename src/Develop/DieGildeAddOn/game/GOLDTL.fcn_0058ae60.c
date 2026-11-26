@@ -8,17 +8,17 @@ void __cdecl fcn_005338a0(void);
 char* __cdecl RegisterStatusText(char* name, char* path, int arg);
 int __cdecl main_RunFrameLoop(void* p, int mask);
 void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p);
-void __cdecl fcn_00586c10(int h);
-void __cdecl fcn_0058ae60(int a0, char* a1);
+void __cdecl d2_RunKanoneUI(int h);
+void __cdecl d2_RunDomizilKanoneMenu(int dlg, char* msg);
 
 /* ADDRESS: GOLDTL 0x0058ae60 */
-void __cdecl fcn_0058ae60(int a0, char* a1)
+void __cdecl d2_RunDomizilKanoneMenu(int dlg, char* msg)
 {
 	char* control;
 
 	control = 0;
 	fcn_005338a0();
-	if (!main_RunFrameLoop((void*) fcn_0058ae60, 0x67fff)) {
+	if (!main_RunFrameLoop((void*) d2_RunDomizilKanoneMenu, 0x67fff)) {
 		return;
 	}
 	do {
@@ -29,11 +29,11 @@ void __cdecl fcn_0058ae60(int a0, char* a1)
 			g_774654 = 1;
 		}
 		if (g_7746a0 != 0) {
-			if (*(int*) (a1 + 0x1c) != 0) {
-				d2_RunDomizilKabinettDialog(a0, a1);
+			if (*(int*) (msg + 0x1c) != 0) {
+				d2_RunDomizilKabinettDialog(dlg, msg);
 			} else if (g_7746a0 == control) {
-				fcn_00586c10(a0);
+				d2_RunKanoneUI(dlg);
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_0058ae60, 0x67fff));
+	} while (main_RunFrameLoop((void*) d2_RunDomizilKanoneMenu, 0x67fff));
 }

@@ -19,7 +19,7 @@ int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_005c9450(int, int, int);
 int __cdecl fcn_005c9310(int, int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
-int __cdecl fcn_00471e30(int);
+int __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005a6e90 */
 int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
@@ -157,7 +157,7 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
             }
         }
 
-        return fcn_00471e30(dialogWindow);
+        return d2_DestroyForm(dialogWindow);
     }
 
 done:

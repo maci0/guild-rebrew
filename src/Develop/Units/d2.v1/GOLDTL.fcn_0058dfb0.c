@@ -48,7 +48,7 @@ int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(struct house*, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 {
@@ -115,6 +115,6 @@ int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 			}
 		}
 	} while (main_RunFrameLoop(d2_OpenSeanceDialog, 0x677c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return r;
 }

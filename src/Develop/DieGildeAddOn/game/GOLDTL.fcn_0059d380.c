@@ -46,7 +46,7 @@ extern void __cdecl fcn_004c35f0(void);
 extern void __cdecl cm_SendCopyEntityData(Msg_59d380*);
 extern void __cdecl sv_ClearObjectSelection(void);
 extern int __cdecl main_RunFrameLoop(void*, int);
-extern void __cdecl fcn_00471e30(int);
+extern void __cdecl d2_DestroyForm(int);
 
 
 /* Oeffnet den Jahrmarkt-Dialog eines Objekts, bietet seine zwei Eintraege an
@@ -141,6 +141,6 @@ int __cdecl d2_RunRaeuberlagerTargetDialog(int unusedFlags, char* object)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_RunRaeuberlagerTargetDialog, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return 0;
 }

@@ -23,7 +23,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00472380(int, char*);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00476b60(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0053d020 */
@@ -151,6 +151,6 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 		}
 		id = main_RunFrameLoop((int) d2_ShowChoosePlayerDialog, a0);
 	}
-	fcn_00471e30(win);
+	d2_DestroyForm(win);
 	return changed;
 }

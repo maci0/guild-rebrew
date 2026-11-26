@@ -49,7 +49,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
@@ -108,6 +108,6 @@ int __cdecl d2_RunDomizilSkillConfirmDialog(char* entity, int* who, int kind)
 			}
 		}
 	} while (main_RunFrameLoop(d2_RunDomizilSkillConfirmDialog, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return 1;
 }

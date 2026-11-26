@@ -8,7 +8,7 @@ extern int g_772e8c;
 extern int g_9ba9f4;
 extern TEXT_LOG_RECORD g_9ba3a0[15];
 
-char* __cdecl fcn_004ce000(void)
+char* __cdecl d2_GetCurrentTextLogRecord(void)
 {
 	if (g_772e88 != 0) {
 		g_772e8c = g_9ba9f4 - g_772e88;

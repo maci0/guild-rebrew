@@ -33,7 +33,7 @@ int __cdecl main_RunFrameLoop(void* fn, int key);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_SendTraceEnd(char* s);
-void __cdecl fcn_00471e30(int dlg);
+void __cdecl d2_DestroyForm(int dlg);
 
 /* ADDRESS: GOLDTL 0x005bf0d0 */
 int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
@@ -132,6 +132,6 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 			count = 1;
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return count;
 }

@@ -18,7 +18,7 @@ int __cdecl cm_RequestSysMessage(int a, void* b);
 int __cdecl cm_GetCommandStatus(int a);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void* a, int b);
-void __cdecl fcn_00471e30(int a);
+void __cdecl d2_DestroyForm(int a);
 void __cdecl fcn_004b5530(int a, int b);
 void __cdecl fcn_004b5b20(int a);
 void __cdecl fcn_004230e0(int a);
@@ -114,7 +114,7 @@ void __cdecl fcn_004b5b40(int mode)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_004b5b40, flags | 0x80) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	if (changed) {
 		fcn_004b5530(*obj, flags);
 	}

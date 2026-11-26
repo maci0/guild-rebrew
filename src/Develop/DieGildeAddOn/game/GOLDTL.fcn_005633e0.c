@@ -32,7 +32,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
-int __cdecl fcn_0050d270(int);
+int __cdecl gm_SumContainerCredits(int);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl he_FreeAction(char*);
 
@@ -66,7 +66,7 @@ void __cdecl he_StartAction0x1b(char* u)
 				}
 			}
 			if (gd->category == 5 && h != 0 && h->entity_state != 6 && h->entity_state != 7) {
-				v = fcn_0050d270(*(int*) (e + 0x5d));
+				v = gm_SumContainerCredits(*(int*) (e + 0x5d));
 				if (v != 0) {
 					cm_RequestMoveCredits(h->entity_id, *(int*) (e + 1), g_773d75, v);
 				}

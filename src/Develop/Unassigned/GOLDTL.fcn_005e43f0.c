@@ -34,7 +34,7 @@ void __cdecl fcn_005e2b60(void);
 void __cdecl d2_ShowSoundOptions(void);
 void __cdecl fcn_005e3c40(void);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_004c39b0(void);
 void __cdecl fcn_0057e870(void);
 
@@ -125,7 +125,7 @@ void __cdecl fcn_005e43f0(void)
     if (!(*(unsigned char *)0x7747b0 & 4)) *(int *)0x6b7fc0 = 0;
     *(unsigned char *)0x774966 = 0;
     d2_ClearRadioGroup(group);
-    fcn_00471e30(dialog);
+    d2_DestroyForm(dialog);
     fcn_004c3140((void *)(unsigned int)*(unsigned char *)0x7766a1);
     *(unsigned char *)0x772d10 = saved;
     fcn_004c39b0();

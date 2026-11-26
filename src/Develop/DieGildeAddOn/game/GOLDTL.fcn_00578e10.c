@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl fcn_004a5fe0(char*, int, int, int, int, int, int, int*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_004c5620(char, unsigned char*);
+int __cdecl cm_SendSetHE(char, unsigned char*);
 
 /* ADDRESS: GOLDTL 0x00578e10 */
 void __cdecl he_StartDeathPact(char* action)
@@ -34,5 +34,5 @@ void __cdecl he_StartDeathPact(char* action)
 	*(int*) (action + 0xb0) = 0;
 	*(pos14_7f4c00*) (action + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 	gm_AddTime(action + 0x52, 0, 1, 0);
-	*(int*) (action + 0x84) = fcn_004c5620(0, (unsigned char*) action);
+	*(int*) (action + 0x84) = cm_SendSetHE(0, (unsigned char*) action);
 }

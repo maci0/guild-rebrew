@@ -14,7 +14,7 @@ extern char g_67d940[];
 
 char* __cdecl m_alloc(int size, char* tag);
 
-void __cdecl fcn_00500900(void)
+void __cdecl init_LoadCharacterNames(void)
 {
 	char path[260];
 	char line[260];

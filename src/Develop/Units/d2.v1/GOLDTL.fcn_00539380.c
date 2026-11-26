@@ -17,7 +17,7 @@ void __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 unsigned char __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00471af0(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_ChoosePlayerCount(void)
 {
@@ -55,7 +55,7 @@ int __cdecl d2_ChoosePlayerCount(void)
 		}
 	}
 	if (h != -1) {
-		fcn_00471e30(h);
+		d2_DestroyForm(h);
 	}
 	return result;
 }

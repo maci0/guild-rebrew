@@ -7,7 +7,7 @@ extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl cm_BeginPacketFieldDelta(char*, unsigned int);
 extern int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 extern void __cdecl cm_RequestChangeAttribute(void);
-extern int __cdecl fcn_004c5620(int, char*);
+extern int __cdecl cm_SendSetHE(int, char*);
 extern int __cdecl gm_CompareGameTime(char*, char*);
 extern void __cdecl fcn_00545780(char*);
 extern int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
@@ -132,7 +132,7 @@ void __cdecl fcn_0054bc90(char* action)
 				}
 				if (idx < 4) {
 					*(int*) (v15 + 0xac + idx * 4) = -1;
-					fcn_004c5620(0, action);
+					cm_SendSetHE(0, action);
 				}
 			}
 			if (idx >= 4) {
@@ -191,7 +191,7 @@ void __cdecl fcn_0054bc90(char* action)
 				}
 				if (idx < 4) {
 					*(int*) (v15 + 0xac + idx * 4) = -1;
-					fcn_004c5620(0, action);
+					cm_SendSetHE(0, action);
 				}
 			}
 			if (idx < 4) {

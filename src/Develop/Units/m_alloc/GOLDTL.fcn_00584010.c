@@ -5,7 +5,7 @@ extern char g_6a9288[];
 extern char g_6a9274[];
 
 int* __cdecl m_alloc(int size, char* tag);
-void __cdecl fcn_00580cf0(int);
+void __cdecl d2_FreeTutorialNodes(int);
 
 #pragma optimize("y", off)
 int* __cdecl d2_InitTutorialMainOutro(void)
@@ -17,7 +17,7 @@ int* __cdecl d2_InitTutorialMainOutro(void)
 	p = m_alloc(0x74, g_6a9288);
 	fdest = (char*) p;
 	if (p == 0) {
-		fcn_00580cf0(0);
+		d2_FreeTutorialNodes(0);
 		return 0;
 	}
 	flen = 0x74;

@@ -16,7 +16,7 @@ typedef struct Query {
 	int fbc;
 } Query;
 
-typedef struct ShiftDlg {
+typedef struct COMBAT_CUTSCENE_DLG {
 	char pad0[0xc];
 	int rec;
 	char pad10[4];
@@ -31,7 +31,7 @@ typedef struct ShiftDlg {
 	int list_b[16];
 	int list_c[3];
 	int owner;
-} ShiftDlg;
+} COMBAT_CUTSCENE_DLG;
 #include "client_data.h"
 int __cdecl cut_GetRandSeed(void);
 void __cdecl fcn_004e6c60(int);
@@ -44,26 +44,26 @@ void __cdecl fcn_004ce740(Ent*);
 int __cdecl _ftol(void);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_004ff210(unsigned short, int);
-void __cdecl fcn_004d1ff0(ShiftDlg*);
+void __cdecl cut_SetupBattleArena(COMBAT_CUTSCENE_DLG*);
 void __cdecl fcn_004d1a80(void);
 void __cdecl fcn_004d2c80(int*, int);
-void __cdecl cut_RunGfxCutscene(ShiftDlg*);
+void __cdecl cut_RunGfxCutscene(COMBAT_CUTSCENE_DLG*);
 void __cdecl fcn_0052a960(void*);
 void __cdecl fcn_00445f50(int, int, float, int);
-void __cdecl fcn_004d5940(ShiftDlg*);
-void __cdecl cut_RunTurnRound(ShiftDlg*, int);
+void __cdecl fcn_004d5940(COMBAT_CUTSCENE_DLG*);
+void __cdecl cut_RunTurnRound(COMBAT_CUTSCENE_DLG*, int);
 void __cdecl d2_DestroyElement(int);
-void __cdecl fcn_004d6170(ShiftDlg*);
-void __cdecl cut_RunCombatFlightOutro(ShiftDlg*);
-void __cdecl fcn_004d2a60(ShiftDlg*);
+void __cdecl fcn_004d6170(COMBAT_CUTSCENE_DLG*);
+void __cdecl cut_RunCombatFlightOutro(COMBAT_CUTSCENE_DLG*);
+void __cdecl fcn_004d2a60(COMBAT_CUTSCENE_DLG*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowMessageBox(char*, unsigned int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl gm_TransferAndSellAssets(int, int, int, int);
-void __cdecl cut_PlunderBuildingCarts(ShiftDlg*, int, int, int, float);
+void __cdecl cut_PlunderBuildingCarts(COMBAT_CUTSCENE_DLG*, int, int, int, float);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x004d77e0 */
-void __cdecl fcn_004d77e0(ShiftDlg* p)
+void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 {
 	int changed;
 	int flag;
@@ -112,7 +112,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 	if (*(int*) &g_772f3c == 0) {
 		*(int*) 0x68bfbc = 0xc8;
 		*(int*) 0x68b79c = p->rec;
-		fcn_004d1ff0(p);
+		cut_SetupBattleArena(p);
 		fcn_004d1a80();
 		fcn_004d2c80(p->list_b, 0x68becc);
 		fcn_004d2c80(p->list_a, 0x68bec8);

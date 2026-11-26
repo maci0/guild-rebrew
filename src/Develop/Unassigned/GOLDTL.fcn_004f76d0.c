@@ -1,7 +1,7 @@
 
 
 
-int  __cdecl fcn_005d63e0(void*, void*);
+int  __cdecl gm_RunIntimidationAction(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
@@ -17,7 +17,7 @@ int __cdecl fcn_004f76d0(void* entity, void* command)
 		return 1;
 	}
 	if (kind == 3) {
-		fcn_005d63e0(entity, command);
+		gm_RunIntimidationAction(entity, command);
 		return 2;
 	}
 	if (kind == 1 && *(char*) ((char*) entity + 2) == 6) {

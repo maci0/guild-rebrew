@@ -16,7 +16,7 @@ float __cdecl fcn_004ff210(unsigned short, int);
 
 
 /* ADDRESS: GOLDTL 0x004b8a70 */
-int __cdecl fcn_004b8a70(int* request)
+int __cdecl gm_HandleMsg1fDrainHealth(int* request)
 {
 	char* ents[8];
 	char buf[0x200];

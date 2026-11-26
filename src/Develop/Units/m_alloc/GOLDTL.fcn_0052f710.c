@@ -12,7 +12,7 @@ extern int g_6a25f0;
 
 
 void __cdecl d2_DestroyElement(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 /* ADDRESS: GOLD 0x529ff0 */
 
 void __cdecl fcn_0052f710(void)
@@ -26,7 +26,7 @@ void __cdecl fcn_0052f710(void)
 				g_6a25c4[i] = -1;
 			}
 		}
-		fcn_00471e30(g_6a25b8);
+		d2_DestroyForm(g_6a25b8);
 		g_6a25b8 = -1;
 		g_6a25bc = -1;
 		d2_CurrentValueBar = -1;

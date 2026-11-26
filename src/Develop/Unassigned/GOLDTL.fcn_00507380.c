@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00507380 */
-int __cdecl fcn_00507380(int k)
+int __cdecl gm_GetItemGuild(int k)
 {
 	if (k >= 1 && k <= 6) {
 		return 7;

@@ -18,7 +18,7 @@ extern char* gm_CityEntity;
 
 int __cdecl fcn_00503fe0(int a, int b, int c);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
-void __cdecl fcn_00549c50(int a, int b, int c, int d);
+void __cdecl gm_HandleAllianceCommand(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x004ccf10 */
 int __cdecl fcn_004ccf10(int cmd, char* result)
@@ -126,7 +126,7 @@ int __cdecl fcn_004cd090(T_4cd090* s, char* out)
 		}
 		if (out != 0) {
 			out[0] = 1;
-			fcn_00549c50(s->tag, h, p, s->value);
+			gm_HandleAllianceCommand(s->tag, h, p, s->value);
 		}
 		*(int*) (p + 0x1c + i * 4) = s->value;
 		return 0;
@@ -150,7 +150,7 @@ int __cdecl fcn_004cd090(T_4cd090* s, char* out)
 		}
 		if (out != 0) {
 			out[0] = 1;
-			fcn_00549c50(s->tag, h, p, s->value);
+			gm_HandleAllianceCommand(s->tag, h, p, s->value);
 		}
 		*(int*) (p + 0x1c + i * 4) = -1;
 		return 0;
@@ -176,7 +176,7 @@ int __cdecl fcn_004cd090(T_4cd090* s, char* out)
 		}
 		if (out != 0) {
 			out[0] = 1;
-			fcn_00549c50(s->tag, h, p, s->value);
+			gm_HandleAllianceCommand(s->tag, h, p, s->value);
 		}
 		q = (int*) (p + 0x1c);
 		for (i = 4; i != 0; i--) {

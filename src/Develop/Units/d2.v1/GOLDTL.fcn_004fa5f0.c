@@ -13,7 +13,7 @@ void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int b);
 void __cdecl io_AppendText(char* x);
 int __cdecl main_RunFrameLoop(void* fn, int y);
-void __cdecl fcn_00471e30(int h);
+void __cdecl d2_DestroyForm(int h);
 
 void __cdecl d2_ShowPrivilegMessage(char* x, int mode, int y)
 {
@@ -35,5 +35,5 @@ void __cdecl d2_ShowPrivilegMessage(char* x, int mode, int y)
 			g_774654 = 1;
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

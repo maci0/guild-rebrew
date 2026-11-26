@@ -39,7 +39,7 @@ void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl fcn_005e0140(int, int, void*, void*, char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_005dfe80(int, unsigned int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl fcn_005e0930(void)
 {
@@ -90,6 +90,6 @@ found:
 			}
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return result;
 }

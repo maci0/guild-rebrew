@@ -9,7 +9,7 @@ int __cdecl fcn_004ceba0(int, int);
 void __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
 /* ADDRESS: GOLDTL 0x004cecf0 */
-unsigned int __cdecl fcn_004cecf0(char* originNode, int* outColumn, int* outRow, int selectFarthest)
+unsigned int __cdecl d3_FindGridCellOutsideRadius(char* originNode, int* outColumn, int* outRow, int selectFarthest)
 {
 	char* m;
 	float start[4];

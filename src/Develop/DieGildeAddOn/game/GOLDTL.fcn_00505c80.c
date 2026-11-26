@@ -5,7 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 
 void* __cdecl fcn_00502cd0(int list, int a, int b, int c);
 void* __cdecl gm_NextEntityQueryMatch(void);
-void __cdecl fcn_005058b0(unsigned char* e, void* q, int k);
+void __cdecl d3_UpdateEntityStageMeshes(unsigned char* e, void* q, int k);
 
 void __cdecl gm_UpdateResidenceOwnerDecor(unsigned char* e)
 {
@@ -22,7 +22,7 @@ void __cdecl gm_UpdateResidenceOwnerDecor(unsigned char* e)
 			q = gm_NextEntityQueryMatch();
 		}
 		for (i = 0; i < n; i++) {
-			fcn_005058b0(e, list[i], *(unsigned short*) (e + 0x27));
+			d3_UpdateEntityStageMeshes(e, list[i], *(unsigned short*) (e + 0x27));
 		}
 	}
 }

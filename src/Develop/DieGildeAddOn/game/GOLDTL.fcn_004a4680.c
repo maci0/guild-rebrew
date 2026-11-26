@@ -7,7 +7,7 @@ extern float g_662c98;
 int __cdecl fcn_004f5dd0(int);
 
 /* ADDRESS: GOLDTL 0x004a4680 */
-int __cdecl fcn_004a4680(float* o0, float* o1, int idx, char* s, int* p4)
+int __cdecl ai_ComputeActionScore(float* o0, float* o1, int idx, char* s, int* p4)
 {
 	float base;
 	float v9;

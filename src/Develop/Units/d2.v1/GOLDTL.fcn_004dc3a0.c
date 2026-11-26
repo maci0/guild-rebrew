@@ -20,7 +20,7 @@ int __cdecl d2_GetWindowListItem(int, int, char*);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x004dc3a0 */
 int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
@@ -97,6 +97,6 @@ setflag:
 next:
 		;
 	}
-	fcn_00471e30(gui);
+	d2_DestroyForm(gui);
 	return result;
 }

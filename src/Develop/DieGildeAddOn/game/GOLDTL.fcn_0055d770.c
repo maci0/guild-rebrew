@@ -41,14 +41,14 @@ void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl cm_RequestMoveObjekt(int, int, int);
 #include "client_scene_transform.h"
 int __cdecl gm_IsWarehouse(char*);
-void __cdecl fcn_004c5d20(int, int);
+void __cdecl cm_SendCreateAction0x38(int, int);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl gm_FindBuildingPrimarySlot(char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_005ba910(void*, int);
+void __cdecl d2_RunTradeInventoryPanel(void*, int);
 
 void __cdecl he_StepTransportCart(char* e)
 {
@@ -87,7 +87,7 @@ void __cdecl he_StepTransportCart(char* e)
 		     *(int*) (e + 0xd4) > 6)) {
 			if (!gm_IsWarehouse(c)) {
 				*(int*) (e + 0xec) = cm_RequestMoveObjekt(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
-				fcn_004c5d20(*(int*) (r + 2), 0);
+				cm_SendCreateAction0x38(*(int*) (r + 2), 0);
 			}
 			cm_RequestChangeBits(*(int*) (r + 2), 0x13, 1, 0, 0x40);
 			if (gm_IsWarehouse(c)) {
@@ -101,7 +101,7 @@ void __cdecl he_StepTransportCart(char* e)
 			}
 			k = g_7f4ca0[*(unsigned short*) (e + 8)].kind;
 			if (k == 6 || k == 7) {
-				if (((Handler*) g_7e35c0)[g_774650].fn == fcn_005ba910) {
+				if (((Handler*) g_7e35c0)[g_774650].fn == d2_RunTradeInventoryPanel) {
 					if (g_7746c4 == c) {
 						goto done;
 					}
@@ -124,7 +124,7 @@ void __cdecl he_StepTransportCart(char* e)
 				}
 			}
 		done:
-			*(int*) (e + 0x84) = fcn_004c5620(3, e);
+			*(int*) (e + 0x84) = cm_SendSetHE(3, e);
 		}
 	}
 	d3_SelectSceneContext(saved, 1);

@@ -13,7 +13,7 @@ int __cdecl d2_GetControlValue(int w);
 void __cdecl cm_BeginPacketFieldDelta(char* o, int v);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* p);
 void __cdecl cm_RequestChangeAttribute(void);
-int __cdecl fcn_00471e30(int dlg);
+int __cdecl d2_DestroyForm(int dlg);
 
 /* ADDRESS: GOLDTL 0x005a6570 */
 void __cdecl fcn_005a6570(char* o)
@@ -52,5 +52,5 @@ void __cdecl fcn_005a6570(char* o)
             g_774654 = 1;
         }
     }
-    fcn_00471e30((int) dlg);
+    d2_DestroyForm((int) dlg);
 }

@@ -31,12 +31,12 @@ char *__cdecl gm_SearchTable67(int);
 void __cdecl gm_ResolveEntityById(int, void *, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl cm_GetCommandStatus(int);
-int __cdecl fcn_004c5620(int, char *);
+int __cdecl cm_SendSetHE(int, char *);
 char *__cdecl gm_GetChainNodeAtIndex(int, int);
-int __cdecl fcn_004c0240(void *, char);
+int __cdecl he_LoadTransportCargoAtStop(void *, char);
 int __cdecl fcn_004c0460(void *, char);
 void __cdecl cm_RequestSysMessage(int, void *);
-void __cdecl fcn_004c6530(int);
+void __cdecl cm_SendKillTransporter(int);
 int __cdecl gm_AddTime(char *, int, int, int);
 int __cdecl gm_CompareGameTime(char *, int);
 char *__cdecl fcn_00502cd0(int, int, int, int, int);
@@ -45,7 +45,7 @@ void __cdecl gm_ChangeObjektZustand(char *, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char *, int, int, int);
 void __cdecl he_FreeAction(char *);
-void __cdecl fcn_00549330(char *, int);
+void __cdecl he_SetActionSubject(char *, int);
 void __cdecl he_StepTransportCart(char *);
 void __cdecl he_StepTransportCarrier(char *);
 void __cdecl he_StepTransportEntry(char *);
@@ -95,7 +95,7 @@ void __cdecl he_RunTransport(char *e)
 		}
 		*(int *)(e + 0xe8) = -1;
 		gm_AddTime(e + 0x52, 0, 0, 1);
-		*(int *)(e + 0x84) = fcn_004c5620(*(int *)(e + 0x70) + 1, e);
+		*(int *)(e + 0x84) = cm_SendSetHE(*(int *)(e + 0x70) + 1, e);
 		return;
 	case 1:
 		if ((*(unsigned char *)(e + 0x78) & 2) == 0) {
@@ -136,8 +136,8 @@ void __cdecl he_RunTransport(char *e)
 			if ((unsigned short)gm_RandomMod(0x1e) > *(unsigned char *)(q + 0x12)) {
 				io_FormatTextBuffer(buf, 0x1c46, *(unsigned short *)q * 2 + 0x9a8);
 				he_PostEntityMessage(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x5ec, 0);
-				fcn_004c6530(*(int *)(q + 2));
-				*(int *)(e + 0x84) = fcn_004c5620(-1, e);
+				cm_SendKillTransporter(*(int *)(q + 2));
+				*(int *)(e + 0x84) = cm_SendSetHE(-1, e);
 				return;
 			}
 		}
@@ -188,7 +188,7 @@ void __cdecl he_RunTransport(char *e)
 			if (g_7746c4 == r || g_7746c8 == r) {
 				sb_PlayVoice(g_7747cc, g_6a63dc, 1, 0x3f, 0x7f, 0, 0);
 			}
-			*(int *)(e + 0x84) = fcn_004c5620(3, e);
+			*(int *)(e + 0x84) = cm_SendSetHE(3, e);
 			return;
 		}
 		break;
@@ -197,7 +197,7 @@ void __cdecl he_RunTransport(char *e)
 			break;
 		}
 		if (*(char *)(e + 0xf2) != 0) {
-			*(int *)(e + 0x84) = fcn_004c5620(4, e);
+			*(int *)(e + 0x84) = cm_SendSetHE(4, e);
 			return;
 		}
 		goto ret_minus1;
@@ -210,8 +210,8 @@ void __cdecl he_RunTransport(char *e)
 		if (*r == 'G') {
 			c = *(unsigned char *)(r + 0x65);
 		}
-		fcn_004c0240(pB0, c);
-		*(int *)(e + 0x84) = fcn_004c5620(5, e);
+		he_LoadTransportCargoAtStop(pB0, c);
+		*(int *)(e + 0x84) = cm_SendSetHE(5, e);
 		return;
 	case 5:
 		if ((*(unsigned char *)(e + 0x78) & 2) == 0) {
@@ -231,7 +231,7 @@ void __cdecl he_RunTransport(char *e)
 				c = *(unsigned char *)(q + 0x65);
 			}
 			fcn_004c0460(pB0, c);
-			*(int *)(e + 0x84) = fcn_004c5620(-1, e);
+			*(int *)(e + 0x84) = cm_SendSetHE(-1, e);
 			return;
 		}
 		r = e + 0x52;
@@ -239,9 +239,9 @@ void __cdecl he_RunTransport(char *e)
 		gm_AddTime(r, 0, 0xf, 0);
 		return;
 	case -2:
-		fcn_00549330(e, *gm_CityEntity);
+		he_SetActionSubject(e, *gm_CityEntity);
 		if (*(int *)(e + 0xc4) == *(int *)(p44 + 1)) {
-			*(int *)(e + 0x84) = fcn_004c5620(1, e);
+			*(int *)(e + 0x84) = cm_SendSetHE(1, e);
 			return;
 		}
 		if (*(int *)(e + 0xc4) == *(int *)(pB4 + 1)) {
@@ -250,7 +250,7 @@ void __cdecl he_RunTransport(char *e)
 		if (*(int *)(e + 0xc4) != *(int *)(q + 1)) {
 			break;
 		}
-		*(int *)(e + 0x84) = fcn_004c5620(1, e);
+		*(int *)(e + 0x84) = cm_SendSetHE(1, e);
 		return;
 	case -1:
 		r = (char *)fcn_00502cd0(0, 2, 7, 1, *(int *)(e + 0xac));
@@ -275,7 +275,7 @@ void __cdecl he_RunTransport(char *e)
 	}
 	return;
 ret_minus1:
-	*(int *)(e + 0x84) = fcn_004c5620(-1, e);
+	*(int *)(e + 0x84) = cm_SendSetHE(-1, e);
 	return;
 ret190:
 	he_FreeAction(e);

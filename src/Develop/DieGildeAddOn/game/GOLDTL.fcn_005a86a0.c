@@ -23,7 +23,7 @@ void __cdecl d2_RunWacheInteriorHud(void*);
 void __cdecl d2_RunMineInteriorHud(void*);
 void __cdecl d2_RunGildeInfoHud(void*);
 void __cdecl d2_RunFriedhofInteriorHud(void*);
-void __cdecl fcn_0058ff00(void*);
+void __cdecl d2_RunFriedhofSeanceMenu(void*);
 void __cdecl fcn_005e6840(void*);
 void __cdecl fcn_005e68e0(void*);
 void __cdecl d2_RunTheaterInteriorHud(void*);
@@ -117,7 +117,7 @@ void __cdecl d2_EnterObjektInterior(void* objMessage)
 		d2_RunFriedhofInteriorHud(*(void**) &g_7746c8);
 		break;
 	case 0x21b:
-		fcn_0058ff00(*(void**) &g_7746c8);
+		d2_RunFriedhofSeanceMenu(*(void**) &g_7746c8);
 		break;
 	case 0x276:
 		fcn_005e6840(*(void**) &g_7746c8);

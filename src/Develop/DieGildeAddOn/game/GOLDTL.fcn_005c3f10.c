@@ -93,7 +93,7 @@ int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 void __cdecl fcn_00472640(int a, int b);
 void __cdecl d2_SetBildArgument(int a, int b);
 void __cdecl fcn_00471af0(int a, int b);
-void __cdecl fcn_00471e30(int a);
+void __cdecl d2_DestroyForm(int a);
 int __cdecl d2_GetControlValue(int a);
 void __cdecl cm_BeginPacketFieldDelta(char* ent, int id);
 void __cdecl cm_AppendCommandSyncField(int a, int b, int c, void* d);
@@ -473,7 +473,7 @@ loop_test:
 		cm_AppendCommandSyncField(1, 0x20, 5, name);
 		cm_SendSetAttribute();
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	if (*(unsigned short*) (ent + 0x25) == g_774970)
 		fcn_0057e880(0x10, (int) ent, 1, 0);
 }

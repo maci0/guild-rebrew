@@ -43,11 +43,11 @@ void __cdecl fcn_00476b60(void);
 void __cdecl d2_SelectControl(int);
 int __cdecl d2_SetSlotVisibility(int, int);
 char* __cdecl d2_GetControlValue(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl fcn_004ce190(int);
-int __cdecl fcn_004ce1d0(void);
+int __cdecl cm_RequestClearSceneEntries(void);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl fcn_004ce180(void);
 void __cdecl fcn_00535960(void);
@@ -163,7 +163,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 	for (;;) {
 		if (g_779ce4[1] != 0) {
 			g_779ce4[1] = 0;
-			p = fcn_004ce1d0();
+			p = cm_RequestClearSceneEntries();
 			while (!cm_GetCommandStatus(p)) {
 				fcn_00535960();
 			}
@@ -288,7 +288,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 			d2_ClearRadioGroup(w8);
 			d2_ClearRadioGroup(w24);
 			d2_ClearRadioGroup(group);
-			fcn_00471e30(h);
+			d2_DestroyForm(h);
 			WritePrivateProfileStringA("Network", "Name", g_7e23ea, g_7e22c0);
 			WritePrivateProfileStringA("Network", "Familienname", g_7e240a, g_7e22c0);
 			itoa(g_7e23e4 - 0x59a, digit, 10);

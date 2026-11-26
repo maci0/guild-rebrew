@@ -4,7 +4,7 @@ extern char g_7f4ca0[];
 
 int __cdecl gm_CheckEntityAgeLimit(unsigned short id);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_004eb180(int k);
+int __cdecl amt_CheckZunftTaxLaw(int k);
 void __cdecl gm_CollectCityTaxOffers(unsigned short id, int* out, int c);
 void __cdecl gm_ApplySteuerLaw0aToSlots(unsigned short id, int* out, int c);
 void __cdecl gm_ApplyLaw0x0bTaxSlot(unsigned short id, int* out, int c);
@@ -27,7 +27,7 @@ int __cdecl fcn_004fcb50(unsigned short id, int* out, int c)
 	if (gm_CheckEntityAgeLimit(id) != 0) {
 		return 0;
 	}
-	if (fcn_004eb180(gm_MapEntityStatRange(*(unsigned char*) (g_7f4ca0 + o + 0x164))) != 0) {
+	if (amt_CheckZunftTaxLaw(gm_MapEntityStatRange(*(unsigned char*) (g_7f4ca0 + o + 0x164))) != 0) {
 		gm_ApplySteuerLaw0aToSlots(id, out, c);
 	} else {
 		gm_CollectCityTaxOffers(id, out, c);

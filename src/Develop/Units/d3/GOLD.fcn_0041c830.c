@@ -81,7 +81,7 @@ extern const GUID IID_IDirect3D3;
 int __stdcall DirectDrawCreate(const GUID *guid, IDirectDraw **out, void *outer);
 int __cdecl io_OpenRegistryKey(const char *sub, int mode);
 void __cdecl io_WriteRegistryString(int key, int name, char *value);
-void __cdecl fcn_00410430(int key);
+void __cdecl io_CloseRegistryKey(int key);
 char *__cdecl d3_FormatGuid(GUID *guid, char *out);
 int __stdcall fcn_0041c460(int a1, int a2, int a3, int a4, int a5, int a6);
 
@@ -248,7 +248,7 @@ write_device:
 				io_WriteRegistryString(key, (int) "d3d_Guid", "00000000-0000-0000-0000000000000000");
 			}
 close_key:
-			fcn_00410430(key);
+			io_CloseRegistryKey(key);
 		}
 		while (ShowCursor(0) > 0) {
 		}

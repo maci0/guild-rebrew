@@ -9,9 +9,9 @@ unsigned short *__cdecl gm_NextEntityQueryMatch(void);
 
 /* Native body ends at 0x4b03d6; the stored 448-byte extent adds 10 alignment NOPs. */
 /* ADDRESS: GOLDTL 0x004b0220 */
-int __cdecl fcn_004b0220(int a1, int a2, char *a3)
+int __cdecl hst_CmdStadtkasse(int unused1, int unused2, char *argText)
 {
-	if (*a3 != '-') {
+	if (*argText != '-') {
 		return 0;
 	}
 	{
@@ -27,7 +27,7 @@ int __cdecl fcn_004b0220(int a1, int a2, char *a3)
 		unsigned short *q;
 		unsigned short *item;
 
-		cursor = a3 + 1;
+		cursor = argText + 1;
 		for (i = 0; i < 2; i++) {
 			if (memcmp(cursor, word[i], strlen(word[i])) == 0) {
 				break;
@@ -42,8 +42,8 @@ int __cdecl fcn_004b0220(int a1, int a2, char *a3)
 			return 0;
 		}
 		cursor++;
-		a3 = (char *) atoi(cursor);
-		if ((int) a3 <= 0) {
+		argText = (char *) atoi(cursor);
+		if ((int) argText <= 0) {
 			return 1;
 		}
 		e = gm_GetGuildHall(1);
@@ -73,10 +73,10 @@ int __cdecl fcn_004b0220(int a1, int a2, char *a3)
 			return 1;
 		}
 		if (dir == -1) {
-			factor = (int) a3 * 0.01f;
+			factor = (int) argText * 0.01f;
 			cm_RequestTransferCurrencyNoKill(-1, *(int *) ((char *) q + 2), 0, (int) (factor * amount));
 		} else if (dir == 1) {
-			factor = (int) a3 * 0.01f;
+			factor = (int) argText * 0.01f;
 			cm_RequestTransferCurrencyNoKill(*(int *) ((char *) q + 2), -1, 0, (int) (factor * amount));
 		}
 		return 1;

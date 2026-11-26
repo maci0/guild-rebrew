@@ -38,7 +38,7 @@ void __cdecl fcn_00469110(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
@@ -246,6 +246,6 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 			break;
 		}
 	} while (1);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return result;
 }

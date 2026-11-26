@@ -1,5 +1,5 @@
 #include "client_data.h"
-extern int g_100f888, g_6a99e8, g_14ce8e8, g_6772c4, d2_MouseX, d2_MouseY, d2_CurrentElementId, d2_SuppressOverlay; void __cdecl fcn_00471e30(int); void __cdecl fcn_004125c0(int, int);
+extern int g_100f888, g_6a99e8, g_14ce8e8, g_6772c4, d2_MouseX, d2_MouseY, d2_CurrentElementId, d2_SuppressOverlay; void __cdecl d2_DestroyForm(int); void __cdecl fcn_004125c0(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl d2_OpenObjektUpgradeTooltip(int);
@@ -27,7 +27,7 @@ void __cdecl d2_UpdateSceneTooltip(void)
 	tooltipWindow = g_6a99e8;
 	if ((v3 == -1 && *(int*) 0x6a99ec != -1)
 		|| (*(int*) 0x774a24 != 0 && g_14ce8e8 == 0 && tooltipWindow != -1)) {
-		fcn_00471e30(g_6a99e8);
+		d2_DestroyForm(g_6a99e8);
 		g_6a99e8 = -1;
 		*(int*) 0x6a99f0 = -1;
 		*(int*) 0x6a99ec = -1;
@@ -101,7 +101,7 @@ void __cdecl d2_UpdateSceneTooltip(void)
 	}
 	if (v4 != 0 || v6 != 0 || v7 != 0 || p != 0) {
 		if (tooltipWindow != -1) {
-			fcn_00471e30(tooltipWindow);
+			d2_DestroyForm(tooltipWindow);
 			tooltipWindow = -1;
 			g_6a99e8 = -1;
 			*(int*) 0x6a99f0 = -1;

@@ -23,7 +23,7 @@ int __cdecl gm_CheckEntityStock(void*, int, char);
 int __cdecl fcn_004f2f90(void*, int, char*, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 
@@ -81,6 +81,6 @@ int __cdecl d2_RunFriedhofDialog(char* entity, int a2, unsigned char a3, int cho
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunFriedhofDialog, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return r;
 }

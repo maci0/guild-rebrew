@@ -9,7 +9,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_004cf450(char* pos, int a, int b);
 
 /* ADDRESS: GOLDTL 0x004d4e30 */
-void __cdecl fcn_004d4e30(char* e)
+void __cdecl cut_FinishPotThrow(char* e)
 {
 	char* o;
 	char* q;

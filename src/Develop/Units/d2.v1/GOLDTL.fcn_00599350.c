@@ -75,7 +75,7 @@ char* __cdecl strncpy(char*, const char*, unsigned int);
 char* __cdecl strcpy(char*, const char*);
 int __cdecl cm_SendCopyEntityData(char*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x00599350 */
 void __cdecl d2_ShowBuildingMenu(void)
@@ -269,7 +269,7 @@ skip_place:
 		}
 	} while (main_RunFrameLoop(d2_ShowBuildingMenu, 0x657c7) != 0);
 	if (hwnd != -1) {
-		fcn_00471e30(hwnd);
+		d2_DestroyForm(hwnd);
 	}
 	g_7746f8 = 0;
 	fcn_0057e880(0xe, 0, 1, 0);

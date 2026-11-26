@@ -6,7 +6,7 @@ double __cdecl fcn_0042e450(char a, int b);
 void __cdecl cm_SendSellObjekt(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00515340 */
-void __cdecl fcn_00515340(int idx)
+void __cdecl gm_RestockTownMarket(int idx)
 {
 	char* rec;
 	char* p;

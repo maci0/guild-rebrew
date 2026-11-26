@@ -92,7 +92,7 @@ int __cdecl fcn_00470820(int, int, const char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl io_AppendText(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_00402220(int);
 void __cdecl nt_ConnectTcp(int, int);
 void __cdecl cm_ResetCommandQueue(void);
@@ -109,13 +109,13 @@ void __cdecl fcn_00538220(void);
 void __cdecl init_AllocateKind0bSceneSlot(void);
 void __cdecl gm_InitCityAndTradeState(unsigned char);
 void __cdecl init_LocalData(void);
-void __cdecl fcn_00515340(unsigned char);
+void __cdecl gm_RestockTownMarket(unsigned char);
 void __cdecl gm_InitStartingBuildingsAndWorkers(void);
 int __cdecl ls_LoadSavegame(void*, int);
 void __cdecl gm_UpdateDaylightSchedule(void*);
 int __cdecl fcn_0052a310(void*);
 void __cdecl fcn_0052a3a0(void*, int);
-void __cdecl fcn_00516f60(void);
+void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl fcn_00528fd0(void);
 void __cdecl fcn_00540020(void);
 int __cdecl cm_RequestSysMessage(int, void*);
@@ -139,7 +139,7 @@ void __cdecl fcn_00541620(void);
 int __cdecl fcn_004e9ee0(void);
 void __cdecl fcn_004ea350(void);
 int __cdecl fcn_004c5980(void*);
-void __cdecl fcn_00543080(void);
+void __cdecl gm_RunRoundUpdate(void);
 void __cdecl cm_RequestMoveCredits(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
 void __cdecl ls_LoadNetworkGame(void*);
@@ -241,7 +241,7 @@ void __cdecl fcn_005438c0(int a0)
 				FreeLibrary((void*) g_7e2500);
 				g_7e2500 = 0;
 				main_LoopFlags = 0x66087;
-				fcn_00471e30(h);
+				d2_DestroyForm(h);
 				fcn_00526120(g_14ac5cc, 0x100);
 				g_774958 = 0;
 				g_774954 = 1;
@@ -251,7 +251,7 @@ void __cdecl fcn_005438c0(int a0)
 				FreeLibrary((void*) g_7e2500);
 				g_7e2500 = 0;
 				main_LoopFlags = 0x66087;
-				fcn_00471e30(h);
+				d2_DestroyForm(h);
 				fcn_00526120(g_14ac5cc, 0x100);
 				g_774958 = 0;
 				g_774954 = 1;
@@ -262,7 +262,7 @@ void __cdecl fcn_005438c0(int a0)
 			g_77497c = 1;
 		}
 		nt_ConnectTcp((int) g_7e2000, g_7e2510);
-		fcn_00471e30(h);
+		d2_DestroyForm(h);
 	} else {
 		nt_ConnectTcp(0, 0);
 		if (fcn_005435d0() != 1) {
@@ -322,7 +322,7 @@ void __cdecl fcn_005438c0(int a0)
 			gm_CreateSetupFamily();
 			gm_InitCityAndTradeState(g_773d75);
 			init_LocalData();
-			fcn_00515340(g_773d75);
+			gm_RestockTownMarket(g_773d75);
 			d2_SetProgressPercent(0, 100);
 			d2_SetProgressPercent(0, 100);
 			if (g_7747f8 != 0) {
@@ -498,7 +498,7 @@ void __cdecl fcn_005438c0(int a0)
 		if (!(g_7747b0 & 0x42)) {
 			fcn_00540020();
 		} else {
-			fcn_00516f60();
+			d3_ResetWorldSceneState();
 			fcn_00528fd0();
 			if (g_7747b0 & 4) {
 				cm_RequestSysMessage(1, 0);
@@ -653,7 +653,7 @@ l_gate:
 		if (g_7747b0 & 4) {
 			sv_WaitForNetworkSync(0x24087);
 		}
-		fcn_00543080();
+		gm_RunRoundUpdate();
 l_step:
 		g_774950 += 1;
 		if (g_774954 == 0) {

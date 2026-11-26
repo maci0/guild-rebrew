@@ -58,7 +58,7 @@ void __cdecl fcn_00526120(int, int);
 int __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
@@ -128,7 +128,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 			}
 		}
 	} while (main_RunFrameLoop(d2_ConfirmGrabpflege, 0x677c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 	return r;

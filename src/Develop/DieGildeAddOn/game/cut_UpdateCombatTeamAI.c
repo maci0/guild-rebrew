@@ -12,7 +12,7 @@ int __cdecl fcn_0064d228(float v);
 void* __cdecl memcpy(void* dst, const void* src, unsigned int n);
 
 /* ADDRESS: GOLDTL 0x004d7fa0 */
-int __cdecl fcn_004d7fa0(int a, int b)
+int __cdecl cut_UpdateCombatTeamAI(int ctx, int teamPtr)
 {
 	int level;
 	int count80;
@@ -21,14 +21,14 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	char* base;
 	char* list;
 	char* s;
-	char* e;
-	char* e2;
+	char* slotPtr;
+	char* targetPtr;
 	char* found;
 	int tmp[11];
 	float point[3];
 	int map_x;
-	int v;
-	int r;
+	int entityId;
+	int status;
 	double ratio;
 	double val;
 
@@ -37,16 +37,16 @@ int __cdecl fcn_004d7fa0(int a, int b)
 		return level;
 	}
 	list = g_772eb4;
-	if (b == (int) g_772e9c) {
+	if (teamPtr == (int) g_772e9c) {
 		base = list + 0xc0;
 	} else {
 		base = list + 0x80;
 	}
 	count80 = 0;
 	for (i = 0; i < 0x10; i++) {
-		v = *(int*) (list + 0x80 + i * 4);
-		if (v != -1) {
-			s = fcn_004cef30(v);
+		entityId = *(int*) (list + 0x80 + i * 4);
+		if (entityId != -1) {
+			s = fcn_004cef30(entityId);
 			if (s[8] != 0 && s[8] != 4) {
 				count80++;
 			}
@@ -54,15 +54,15 @@ int __cdecl fcn_004d7fa0(int a, int b)
 	}
 	countC0 = 0;
 	for (i = 0; i < 0x10; i++) {
-		v = *(int*) (list + 0xc0 + i * 4);
-		if (v != -1) {
-			s = fcn_004cef30(v);
+		entityId = *(int*) (list + 0xc0 + i * 4);
+		if (entityId != -1) {
+			s = fcn_004cef30(entityId);
 			if (s[8] != 0 && s[8] != 4) {
 				countC0++;
 			}
 		}
 	}
-	if (b == (int) g_772e9c) {
+	if (teamPtr == (int) g_772e9c) {
 		ratio = (double) countC0 / (double) count80;
 	} else {
 		ratio = (double) count80 / (double) countC0;
@@ -71,55 +71,55 @@ int __cdecl fcn_004d7fa0(int a, int b)
 		found = 0;
 		i = 0;
 		while (i < 0x10 && found == 0) {
-			v = *(int*) (base + i * 4);
-			if (v != -1) {
-				found = fcn_004cef30(v);
+			entityId = *(int*) (base + i * 4);
+			if (entityId != -1) {
+				found = fcn_004cef30(entityId);
 			}
 			i++;
 		}
 		if (found == 0) {
 			return 0;
 		}
-		e = (char*) gm_FindOrCreateEntitySlot(a, found);
-		*(int*) e = *(int*) (found + 4);
-		*(int*) (e + 4) = 5;
-		return (int) e;
+		slotPtr = (char*) gm_FindOrCreateEntitySlot(ctx, found);
+		*(int*) slotPtr = *(int*) (found + 4);
+		*(int*) (slotPtr + 4) = 5;
+		return (int) slotPtr;
 	}
 	for (i = 0; i < 0x10; i++) {
-		v = *(int*) (base + i * 4);
-		if (v == -1) {
+		entityId = *(int*) (base + i * 4);
+		if (entityId == -1) {
 			continue;
 		}
-		s = fcn_004cef30(v);
-		e = (char*) gm_FindOrCreateEntitySlot(a, s);
-		memcpy(tmp, e, 0x2c);
+		s = fcn_004cef30(entityId);
+		slotPtr = (char*) gm_FindOrCreateEntitySlot(ctx, s);
+		memcpy(tmp, slotPtr, 0x2c);
 		val = gm_GetEntityHealthRatio(s) * 100.0;
-		r = (int) val;
-		if (r >= 0x14 || fcn_0042e410(0x64) <= 0x1e) {
-			r = fcn_004d2f70(s);
-			if (r == 0) {
+		status = (int) val;
+		if (status >= 0x14 || fcn_0042e410(0x64) <= 0x1e) {
+			status = fcn_004d2f70(s);
+			if (status == 0) {
 				continue;
 			}
-			e2 = (char*) r;
+			targetPtr = (char*) status;
 			*(int*) (tmp + 0) = *(int*) (s + 4);
 			*(int*) (tmp + 1) = 2;
-			*(int*) (tmp + 5) = *(int*) (e2 + 4);
-			cm_SendUpdateCutsceneEntitySlot(*(int*) (a + 0x10), tmp);
+			*(int*) (tmp + 5) = *(int*) (targetPtr + 4);
+			cm_SendUpdateCutsceneEntitySlot(*(int*) (ctx + 0x10), tmp);
 		} else {
 			float height;
-			e2 = (char*) fcn_004d34f0(s);
-			d3_TransformPoint(e2, e2 + 0x4c, point);
-			map_x = a;
-			r = fcn_0045b990(*(int*) (g_67a370 + 0xb0),
+			targetPtr = (char*) fcn_004d34f0(s);
+			d3_TransformPoint(targetPtr, targetPtr + 0x4c, point);
+			map_x = ctx;
+			status = fcn_0045b990(*(int*) (g_67a370 + 0xb0),
 			    point, &map_x, &countC0, &height);
-			if (r != 0) {
+			if (status != 0) {
 				continue;
 			}
 			*(int*) (tmp + 0) = *(int*) (s + 4);
 			*(int*) (tmp + 1) = 3;
 			*(int*) (tmp + 4) = map_x;
 			*(int*) (tmp + 5) = countC0;
-			cm_SendUpdateCutsceneEntitySlot(*(int*) (a + 0x10), tmp);
+			cm_SendUpdateCutsceneEntitySlot(*(int*) (ctx + 0x10), tmp);
 		}
 	}
 	return 0;

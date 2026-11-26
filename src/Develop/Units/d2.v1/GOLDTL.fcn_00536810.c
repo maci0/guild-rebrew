@@ -57,7 +57,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SelectControl(int);
 char* __cdecl d2_GetControlValue(int);
 void __cdecl cm_RequestSendChat(Chat*);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_RunChatConsole(void)
 {
@@ -123,6 +123,6 @@ void __cdecl d2_RunChatConsole(void)
 			g_6a2c14[i] = (unsigned char) d2_GetControlValue(ids[i]);
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	g_14cf950 = 0;
 }

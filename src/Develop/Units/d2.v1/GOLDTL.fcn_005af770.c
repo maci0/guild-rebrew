@@ -24,7 +24,7 @@ void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
-void __cdecl fcn_005af770(int e)
+void __cdecl d2_OpenRazziaDialog(int e)
 {
 	Req req;
 

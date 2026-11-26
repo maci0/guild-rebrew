@@ -30,7 +30,7 @@ extern unsigned char g_773d75;
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_IsNpcEntityState(unsigned char* p);
 void __cdecl gm_CalcStudiumOffers(char* e, Share* out);
-Rec6 __cdecl fcn_00506d50(int idx);
+Rec6 __cdecl gm_GetStatRecord(int idx);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_0050d320(char* e, unsigned char b);
 
@@ -75,7 +75,7 @@ int __cdecl ai_StartStudium(int a1, char* actor, int a3, Blk24* o1, Blk24* o2)
 		return 0;
 	}
 	gm_CalcStudiumOffers(actor, sh);
-	s = fcn_00506d50(best[0x164]);
+	s = gm_GetStatRecord(best[0x164]);
 	{
 		float r[3];
 

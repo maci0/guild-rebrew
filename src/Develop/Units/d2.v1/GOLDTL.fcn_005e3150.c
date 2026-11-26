@@ -46,7 +46,7 @@ void __cdecl SetMasterVolume(int);
 int __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl msx_ApplyAudioSettings(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ShowSoundOptions(void)
 {
@@ -136,5 +136,5 @@ void __cdecl d2_ShowSoundOptions(void)
 		fcn_005e12d0();
 		msx_ApplyAudioSettings();
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

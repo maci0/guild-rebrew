@@ -21,15 +21,15 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_004c5620(char, unsigned char*);
+int __cdecl cm_SendSetHE(char, unsigned char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_0046fac0(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
@@ -72,7 +72,7 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 				io_FormatTextBuffer(buf, 0x42c1, *(unsigned short*) rec);
 				if (fcn_00526120(buf, 0x101) != 0) {
 					*(pos14_7f4c00*) (q + 0x52) = gm_GameTime;
-					*(int*) (q + 0x84) = fcn_004c5620(-1, (unsigned char*) q);
+					*(int*) (q + 0x84) = cm_SendSetHE(-1, (unsigned char*) q);
 				}
 				return 0;
 			}
@@ -142,7 +142,7 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 			}
 		}
 	}
-	fcn_00471e30((int) h);
-	fcn_00532ef0();
+	d2_DestroyForm((int) h);
+	d3_EndCameraAndUiMode();
 	return ret;
 }

@@ -46,7 +46,7 @@ void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
 void __cdecl cm_SendSetAttribute(void);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl io_ClearInputState(void);
 
 /* ADDRESS: GOLDTL 0x004bf8e0 */
@@ -118,6 +118,6 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 		cm_AppendCommandSyncField(1, 1, (short) (p + 0x31 - g_aed32c), &b);
 		cm_SendSetAttribute();
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	io_ClearInputState();
 }

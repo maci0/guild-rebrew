@@ -41,7 +41,7 @@ void __cdecl d3_FreeObjectAnimation(char* cam);
 void __cdecl d3_AnimateObjectTransform(char* cam, float* a, float* b, int d, int e);
 
 /* ADDRESS: GOLDTL 0x0052cbb0 */
-void __cdecl fcn_0052cbb0(Ent* e)
+void __cdecl d3_FocusCameraOnEntity(Ent* entity)
 {
 	float n;
 	float q[4];
@@ -62,9 +62,9 @@ void __cdecl fcn_0052cbb0(Ent* e)
 	float c;
 	char* obj;
 	char* cam;
-	Save* s;
+	Save* save;
 
-	obj = e->obj;
+	obj = entity->obj;
 	d3_GetObjectVerticalBounds(obj, &lo, &hi);
 	D3DXMatrixTranspose(m, (float*) ((char*) d3_ActiveCamera + 0x18c));
 	a = g_662d40[0] * -600.0f;
@@ -106,15 +106,15 @@ void __cdecl fcn_0052cbb0(Ent* e)
 	g_7e3a40[0] = q[0];
 	g_7e3a40[1] = q[1];
 	g_7e3a40[2] = q[2];
-	s = (Save*) gm_GetEntityTableEntry((char*) (((House*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])));
-	if (s != 0) {
-		*(int*) &s->pos[0] = *(int*) &q[0];
-		*(int*) &s->pos[1] = *(int*) &q[1];
-		*(int*) &s->pos[2] = *(int*) &q[2];
-		*(int*) &s->rot[0] = *(int*) &rot[0];
-		*(int*) &s->rot[1] = *(int*) &rot[1];
-		*(int*) &s->rot[2] = *(int*) &rot[2];
+	save = (Save*) gm_GetEntityTableEntry((char*) (((House*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])));
+	if (save != 0) {
+		*(int*) &save->pos[0] = *(int*) &q[0];
+		*(int*) &save->pos[1] = *(int*) &q[1];
+		*(int*) &save->pos[2] = *(int*) &q[2];
+		*(int*) &save->rot[0] = *(int*) &rot[0];
+		*(int*) &save->rot[1] = *(int*) &rot[1];
+		*(int*) &save->rot[2] = *(int*) &rot[2];
 	}
-	g_7e2aa0 = (char*) e;
-	g_7746c0 = e->obj;
+	g_7e2aa0 = (char*) entity;
+	g_7746c0 = entity->obj;
 }

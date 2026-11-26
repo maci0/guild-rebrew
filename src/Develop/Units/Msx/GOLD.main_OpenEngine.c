@@ -81,7 +81,7 @@ void __cdecl main_RunFrameLoop(int, int);
 #include "client_sprites.h"
 void __cdecl evt_InitScriptEngine(void);
 void __cdecl evt_RegisterCoreCommands(void);
-void __cdecl fcn_0040f960(void);
+void __cdecl evt_RegisterSceneCommands(void);
 void __cdecl fcn_0040d270(void);
 void __cdecl evt_RegisterSoundCommands(void);
 void __cdecl fcn_0042b700(void);
@@ -192,7 +192,7 @@ int __cdecl main_OpenEngine(void)
 	g_6f258c = 1;
 	evt_InitScriptEngine();
 	evt_RegisterCoreCommands();
-	fcn_0040f960();
+	evt_RegisterSceneCommands();
 	fcn_0040d270();
 	evt_RegisterSoundCommands();
 	g_5fb920 = (int) fcn_0042b700;

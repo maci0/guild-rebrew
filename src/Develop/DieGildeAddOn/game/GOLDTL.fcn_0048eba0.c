@@ -40,7 +40,7 @@ extern char* g_77261c;
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* Slot chooser for the execution scene. A fifteen-entry slot table is matched
  * against the entity's inventory; its total, blocked and free counts
@@ -137,9 +137,9 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 				f.b = 1;
 				out = -1;
 				if (g_77261c != 0) {
-					fcn_004a5e60(g_77261c, 4, f, 0, 100.0f, &out);
+					ai_FindEntityInFavorRange(g_77261c, 4, f, 0, 100.0f, &out);
 				}
-				if (out != -1 || fcn_004a5e60(e, 6, f, 0, (float) gm_RandomMod(0x20) + 16.0f, &out)) {
+				if (out != -1 || ai_FindEntityInFavorRange(e, 6, f, 0, (float) gm_RandomMod(0x20) + 16.0f, &out)) {
 					b->type = 4;
 					b->a = out;
 					b->b = -1;

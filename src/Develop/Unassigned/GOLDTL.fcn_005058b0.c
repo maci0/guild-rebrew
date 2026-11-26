@@ -27,7 +27,7 @@ int __cdecl fcn_00505840(void);
 void __cdecl d3_VisitSceneObjects(int h, int a, int b, int (__cdecl* cb)(void), Hits* out);
 void __cdecl d3_SetSubtreeVisible(int id, int on);
 
-void __cdecl fcn_005058b0(int unused, int who, int id)
+void __cdecl d3_UpdateEntityStageMeshes(int unused, int who, int id)
 {
 	int want[5];
 	Hits hits;

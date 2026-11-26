@@ -19,7 +19,7 @@ int __cdecl fcn_004e4ae0(char* name, int a2);
 int __cdecl fcn_004e4b20(int a1, int a2, char* name, int mode);
 int __cdecl msx_StartAmbientTrack(char* snd, int flag);
 int __cdecl cut_RandMod(int n);
-void __cdecl fcn_004e4e90(char* snd);
+void __cdecl msx_StartMusicIfAllowed(char* snd);
 int __cdecl sb_CheckVoicePlaying(int a1);
 void __cdecl cut_WaitTicks(int dur);
 void __cdecl d2_SetForm(int k, int i);
@@ -200,9 +200,9 @@ int __cdecl cut_RunProzess(int a0)
 		msg.hnd[7] = msx_StartAmbientTrack("Athmos\\Athmo_sitzung.mp3", 0x40);
 	}
 	if (cut_RandMod(2) != 0) {
-		fcn_004e4e90("cd2\\ArmerDelinquent.mp3");
+		msx_StartMusicIfAllowed("cd2\\ArmerDelinquent.mp3");
 	} else {
-		fcn_004e4e90("cd2\\ImKerker.mp3");
+		msx_StartMusicIfAllowed("cd2\\ImKerker.mp3");
 	}
 	h2 = fcn_004e4ae0("ADDON\\PROZESS_NEU.sbf", 0);
 	msg.pad[0] = fcn_00493dc0((unsigned short*) p34, (unsigned short*) p38);

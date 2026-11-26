@@ -25,7 +25,7 @@ int __cdecl gm_EntitiesDifferByOwnerPtr(char*, int);
 int __cdecl gm_IssueEscapeOrder(char*, char*, char*);
 int __cdecl cut_AssignConquerTarget(char*, char*, char*);
 int __cdecl he_QueueTradeWareCommand(char*, char*, char*);
-int __cdecl fcn_004d1020(char*, char*, char*, int, int);
+int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
 pkt2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, pkt2c*);
 void __cdecl fcn_00533a40(char*);
@@ -46,7 +46,7 @@ char __cdecl fcn_004d15c0(char* context, char* targetEntity)
 			if (*(int*) ((char*) g_7746a0 + 0x220) == 2) {
 				obj = *(int*) ((char*) g_7746a0 + 0x204);
 				if (gm_EntitiesDifferByOwnerPtr(targetEntity, obj) != 0 || g_14cf736 != 0) {
-					if (fcn_004d1020(context, targetEntity, (char*) obj, 0, 0) != -1) {
+					if (cut_AssignTargetOrder(context, targetEntity, (char*) obj, 0, 0) != -1) {
 						r = 1;
 						goto end;
 					}

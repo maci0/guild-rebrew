@@ -1,4 +1,4 @@
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -19,12 +19,12 @@ void __cdecl he_AllocPlagueEvent(char* o)
 	for (p = he_StartHandlungSearch(1, 0, 0x59); p != 0; p = he_fn_Handlung()) {
 		if (p != o) {
 			*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-			*(int*) (o + 0x84) = fcn_004c5620(-1, o);
+			*(int*) (o + 0x84) = cm_SendSetHE(-1, o);
 			return;
 		}
 	}
 	*(int*) (o + 0x70) = 5;
 	*(pos14_7f4c00*) (o + 0x52) = *(pos14_7f4c00*) (o + 0x44);
 	*(int*) (o + 0x84) = -1;
-	fcn_004c5620(5, o);
+	cm_SendSetHE(5, o);
 }

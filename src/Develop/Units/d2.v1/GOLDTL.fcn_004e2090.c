@@ -9,7 +9,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 char* __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl fcn_004e4ae0(char*, int);
 void __cdecl fcn_004e4730(char*);
-void __cdecl fcn_004e4e90(char*);
+void __cdecl msx_StartMusicIfAllowed(char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471af0(int, int);
@@ -69,7 +69,7 @@ void __cdecl fcn_004e2090(int event)
 
 	scene[2] = fcn_004e4ae0("ADDON\\HOCHZEIT_NEU.sbf", 0);
 	fcn_004e4730("KIRCHE_HOCHZEIT.ed3");
-	fcn_004e4e90("cd2\\Hochzeit.mp3");
+	msx_StartMusicIfAllowed("cd2\\Hochzeit.mp3");
 	scene[1] = fcn_00470820(0, 0, "cutscenes\\hochzeit");
 	fcn_00471d80(scene[1], 3);
 	fcn_00471af0(scene[1], 0);

@@ -36,13 +36,13 @@ void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl cm_RequestMoveObjekt(int, int, int);
 int __cdecl gm_IsWarehouse(char*);
-void __cdecl fcn_004c5d20(int, int);
+void __cdecl cm_SendCreateAction0x38(int, int);
 int __cdecl ch_IsEntityNearBuildingDoor(char*, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_005ba910(void*, int);
+void __cdecl d2_RunTradeInventoryPanel(void*, int);
 
 /* ADDRESS: GOLDTL 0x0055dab0 */
 void __cdecl he_StepTransportCarrier(char* e)
@@ -70,7 +70,7 @@ void __cdecl he_StepTransportCarrier(char* e)
 	if (e[0xd0] == 0) {
 		cm_SendCancelCharacterActions(*(int*) (r + 2));
 		if (!gm_IsWarehouse(b)) {
-			fcn_004c5d20(*(int*) (r + 2), 1);
+			cm_SendCreateAction0x38(*(int*) (r + 2), 1);
 		}
 		ch_StartMovement(*(int*) (r + 2), *(int*) (c + 1), -1, 0, 0, "Trans");
 		if (!gm_IsWarehouse(b)) {
@@ -127,7 +127,7 @@ void __cdecl he_StepTransportCarrier(char* e)
 				}
 			}
 		}
-		*(int*) (e + 0x84) = fcn_004c5620(3, e);
+		*(int*) (e + 0x84) = cm_SendSetHE(3, e);
 	}
 	d3_SelectSceneContext(saved, 1);
 }

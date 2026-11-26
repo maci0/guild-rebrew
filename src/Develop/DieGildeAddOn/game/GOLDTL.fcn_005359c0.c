@@ -18,12 +18,12 @@ float __cdecl fcn_004ff210(unsigned short, int);
 int __cdecl ai_StartGraveyardOwner(int, char*, int, Blk24*, Blk24*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_ComputeCannonShot(char*, char*, int);
-int __cdecl fcn_004a6550(char*, char*);
+int __cdecl ai_FireCannonVolley(char*, char*);
 void __cdecl d2_OpenBlutracheDialog(char*);
 void __cdecl fcn_005e5a50(int);
 void __cdecl d2_ShowBlutracheDialog(int);
 void __cdecl fcn_005e6360(int);
-void __cdecl fcn_00586c10(int);
+void __cdecl d2_RunKanoneUI(int);
 int __cdecl fcn_005e6e00(void);
 
 /* ADDRESS: GOLDTL 0x005359c0 */
@@ -90,12 +90,12 @@ int __cdecl fcn_005359c0(void)
 		if (gm_ComputeCannonShot((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o, (int) e) == 0) {
 			return;
 		}
-		fcn_004a6550((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o);
+		ai_FireCannonVolley((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o);
 		return;
 	case 0x2f:
 		o = g_7e2aa0;
 		if (o != 0) {
-			fcn_00586c10((int) o);
+			d2_RunKanoneUI((int) o);
 		}
 		break;
 	}

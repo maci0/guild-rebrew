@@ -4,7 +4,7 @@
 
 extern Offer g_6abb08[];
 
-char* __cdecl fcn_005c61e0(int id)
+char* __cdecl gm_LookupSpecialObject(int id)
 {
 	int index;
 	int entryId;

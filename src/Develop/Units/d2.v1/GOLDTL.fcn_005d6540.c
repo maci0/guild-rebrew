@@ -8,7 +8,7 @@ extern int g_774654;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "d2_gui.h"
@@ -157,6 +157,6 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005d6540, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return r;
 }

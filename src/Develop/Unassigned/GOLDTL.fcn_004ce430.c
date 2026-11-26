@@ -22,9 +22,9 @@ extern Rec9baa20 g_9baa20;
 extern int g_9baa08;
 extern int g_9baa04;
 
-int* __cdecl fcn_004cdf00(int);
+int* __cdecl d3_LookupSceneEntry(int);
 struct s87_4ce430* __cdecl fcn_004cded0(void);
-void __cdecl fcn_004cdf40(int, int, char*);
+void __cdecl lb_AppendChatLog(int, int, char*);
 
 
 /* ADDRESS: GOLDTL 0x004ce430 */
@@ -40,7 +40,7 @@ int __cdecl fcn_004ce430(char* rec, char* out)
 		g_9baa20 = *(Rec9baa20*) (rec + 0x14);
 		break;
 	case 1:
-		r = fcn_004cdf00(*(int*) (rec + 0x14));
+		r = d3_LookupSceneEntry(*(int*) (rec + 0x14));
 		if (r == 0)
 			return -2;
 		r[0] = *(int*) (rec + 0x14);
@@ -53,7 +53,7 @@ int __cdecl fcn_004ce430(char* rec, char* out)
 		*(struct s87_4ce430*) r = *(struct s87_4ce430*) (rec + 0x14);
 		break;
 	case 3:
-		r = fcn_004cdf00(*(int*) (rec + 0x14));
+		r = d3_LookupSceneEntry(*(int*) (rec + 0x14));
 		if (r == 0)
 			return -2;
 		if (*(int*) (rec + 0x18) == 1)
@@ -61,20 +61,20 @@ int __cdecl fcn_004ce430(char* rec, char* out)
 		memset(r, 0, sizeof(struct s87_4ce430));
 		break;
 	case 4:
-		r = fcn_004cdf00(*(int*) (rec + 0x14));
+		r = d3_LookupSceneEntry(*(int*) (rec + 0x14));
 		if (r == 0)
 			return -2;
 		*(struct s87_4ce430*) r = *(struct s87_4ce430*) (rec + 0x14);
 		break;
 	case 5:
-		r = fcn_004cdf00(*(int*) (rec + 0x14));
+		r = d3_LookupSceneEntry(*(int*) (rec + 0x14));
 		if (r == 0)
 			return -2;
 		*(struct s87_4ce430*) r = *(struct s87_4ce430*) (rec + 0x14);
 		break;
 	case 6:
 		tmp = *(struct s72_4ce430*) (rec + 0x14);
-		fcn_004cdf40(tmp.a, tmp.b, tmp.text);
+		lb_AppendChatLog(tmp.a, tmp.b, tmp.text);
 		break;
 	default:
 		return 1;

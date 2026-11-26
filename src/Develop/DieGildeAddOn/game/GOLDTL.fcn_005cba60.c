@@ -6,17 +6,17 @@ typedef struct {
 	int role;
 	int value;
 	int task;
-} Item5cba60;
+} Action6fCandidate;
 // SIZE 0x38
 
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl d2_BuildPersonStatusDesc(Item5cba60*);
+int __cdecl d2_BuildPersonStatusDesc(Action6fCandidate*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
 /* ADDRESS: GOLDTL 0x005cba60 */
-int __cdecl fcn_005cba60(unsigned short* who, unsigned int max, Item5cba60* out, int kind)
+int __cdecl d2_CollectAction6fCandidates(unsigned short* who, unsigned int max, Action6fCandidate* out, int kind)
 {
 	unsigned short* ps[4];
 	char* t;

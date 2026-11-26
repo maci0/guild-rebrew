@@ -31,7 +31,7 @@ int __cdecl ai_SelectBestMethod(int kind, int id, int n, Msg* b1, Msg* b2);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl fcn_004f4830(int size, Stat* st);
 unsigned short __cdecl gm_RandomMod(int a);
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 void __cdecl gm_ResolveEntityById(int* out, int a, int b, int id);
 int __cdecl he_HasNoActiveAction0x88(char* obj, char* e);
 int __cdecl gm_CalculateGebaeudeValue(int* p, int n);
@@ -104,9 +104,9 @@ int __cdecl fcn_00499090(int who, char* e, int arg, Msg* o1, Msg* o2)
 		ff.b = 1;
 		id = -1;
 		if (g_77261c != 0) {
-			fcn_004a5e60(g_77261c, 4, ff, 0, 100.0f, &id);
+			ai_FindEntityInFavorRange(g_77261c, 4, ff, 0, 100.0f, &id);
 		}
-		if (id != -1 || fcn_004a5e60(e, 6, ff, 0, (float)gm_RandomMod(0x20) + 19.0f, &id) != 0) {
+		if (id != -1 || ai_FindEntityInFavorRange(e, 6, ff, 0, (float)gm_RandomMod(0x20) + 19.0f, &id) != 0) {
 			gm_ResolveEntityById(&targetRec, 0, 0, id);
 			if (targetRec != 0) {
 				if (*(unsigned short*)(targetRec + 0x27) != 0xffff) {

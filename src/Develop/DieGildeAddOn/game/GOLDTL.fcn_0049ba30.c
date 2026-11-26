@@ -11,7 +11,7 @@ extern float g_100991c;
 extern float g_100993c;
 
 unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
-float* __cdecl fcn_005c61e0(int id);
+float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049ba30 */
@@ -25,7 +25,7 @@ int __cdecl ai_RunSecurityObject(char* e, int* p)
 	if (!s) {
 		return 0;
 	}
-	d = fcn_005c61e0(*s);
+	d = gm_LookupSpecialObject(*s);
 	if (d) {
 		r.s = s;
 		r.id = -1;

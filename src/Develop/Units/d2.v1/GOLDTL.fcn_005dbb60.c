@@ -72,7 +72,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl fcn_005dbb60(int unused, unsigned short* p)
 {
@@ -136,6 +136,6 @@ int __cdecl fcn_005dbb60(int unused, unsigned short* p)
 			}
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 }

@@ -3,7 +3,7 @@
 
 char* __cdecl ch_FindCharacterByName(char*);
 
-int __cdecl fcn_004ccc90(char* x, char* out)
+int __cdecl cm_ExUpdateCharacterSubRecord(char* x, char* out)
 {
 	char* a;
 	char* c;

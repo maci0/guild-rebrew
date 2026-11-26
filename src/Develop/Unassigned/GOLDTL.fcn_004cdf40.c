@@ -12,7 +12,7 @@ extern int g_772e88;
 char* __cdecl fcn_004ce190(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
-void __cdecl fcn_004cdf40(int a, int b, char* s)
+void __cdecl lb_AppendChatLog(int a, int b, char* s)
 {
 	char* r;
 

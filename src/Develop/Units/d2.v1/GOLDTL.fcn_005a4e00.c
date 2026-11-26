@@ -16,14 +16,14 @@ int __cdecl fcn_00533a60(int, int, int*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_0046f280(int);
 void __cdecl d2_DestroyElement(int);
-int __cdecl fcn_0050d640(int, char*, unsigned int, char**);
+int __cdecl he_GetActiveKrediteByLender(int, char*, unsigned int, char**);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_0050dd00(int, int*, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_005a4bb0(char*);
 void __cdecl fcn_005a4960(char*, int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005a4e00 */
 void __cdecl fcn_005a4e00(char* building)
@@ -85,7 +85,7 @@ void __cdecl fcn_005a4e00(char* building)
 				}
 			}
 			io_AppendText((int) g_6811b0);
-			n = fcn_0050d640(*(unsigned short*) (building + 0x27), building, 0xffff, out);
+			n = he_GetActiveKrediteByLender(*(unsigned short*) (building + 0x27), building, 0xffff, out);
 			for (i = 0; i < 16; i++) {
 				ids[i] = -1;
 			}
@@ -113,7 +113,7 @@ void __cdecl fcn_005a4e00(char* building)
 			}
 			fcn_0050dd00(count, ids, 0);
 			for (i = 0; i < count; i++) {
-				v = fcn_0050d640(*(unsigned short*) (building + 0x27), building,
+				v = he_GetActiveKrediteByLender(*(unsigned short*) (building + 0x27), building,
 				    ids[i], out);
 				sum = 0;
 				for (j = 0; j < v; j++) {
@@ -138,6 +138,6 @@ void __cdecl fcn_005a4e00(char* building)
 			}
 		}
 	}
-	fcn_00471e30(h);
-	fcn_00532ef0();
+	d2_DestroyForm(h);
+	d3_EndCameraAndUiMode();
 }

@@ -48,7 +48,7 @@ typedef struct Col {
 
 char __cdecl vfs_FileExists(char*);
 char* __cdecl d3_FindTextureByName(const char*);
-int __cdecl fcn_0045be40(char*);
+int __cdecl d3_ResolveTexturePath(char*);
 Tex* __cdecl fcn_0045c5b0(char*, Col, unsigned int, unsigned int);
 
 /* ADDRESS: GOLDTL 0x0045c380 */
@@ -87,7 +87,7 @@ void __cdecl fcn_0045c380(Tex* t, Col c, unsigned int flags, unsigned int flags2
 			t->color48 = g_10405c0;
 			t->field5d = (unsigned char) n;
 			buf1[i + 1] = 0;
-			p = (char*) fcn_0045be40(buf0);
+			p = (char*) d3_ResolveTexturePath(buf0);
 			if (p != 0) {
 				q = strrchr(p, '/');
 				if (q != 0) {

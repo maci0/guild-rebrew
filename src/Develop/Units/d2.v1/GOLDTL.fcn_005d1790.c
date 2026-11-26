@@ -26,7 +26,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471af0(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl gm_HasActiveMission(int);
@@ -34,7 +34,7 @@ void __cdecl d2_ShowMissionForEntity(int);
 void __cdecl cm_SendChangePlayerIdentity(int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_00505e30(unsigned short);
-void __cdecl fcn_00509050(char *, char *);
+void __cdecl gm_GetEntityDate(char *, char *);
 int __cdecl fcn_00509120(char *, char *);
 int __cdecl gm_AccumulateTyped2(char *);
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -47,7 +47,7 @@ int __cdecl main_RunFrameLoop(int, int);
 char *__cdecl he_StartHandlungSearch(int, ...);
 char *__cdecl he_fn_Handlung(void);
 int __cdecl d2_ShowGiftDialog(void *, void *);
-int __cdecl fcn_005db8e0(void *, void *);
+int __cdecl d2_ShowChooseProfessionDialog2(void *, void *);
 int __cdecl fcn_005dbb60(void *, void *);
 int __cdecl _ftol(void);
 int __cdecl d2_ShowTxt(int, int, char *, int);
@@ -89,7 +89,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 	d2_SetForm(h, 1);
 	io_AppendText(0x1f53, *person);
 	d2_SetForm(h, 2);
-	fcn_00509050((char *)person, (char *)&dt);
+	gm_GetEntityDate((char *)person, (char *)&dt);
 	io_FormatTextBuffer(buf12, "*%i.%i.%i", dt.day, dt.month, dt.year);
 	io_AppendText("$3>$L%s$A$0>", buf12);
 	if (fcn_00509120((char *)person, (char *)&dt) != 0) {
@@ -342,7 +342,7 @@ label_2281:
 					fcn_00472640(r1, 0);
 				}
 			} else if (d2_CurrentElementId == r2) {
-				if (fcn_005db8e0(g_7f4ca0 + 540 * g_774970, person) != 0) {
+				if (d2_ShowChooseProfessionDialog2(g_7f4ca0 + 540 * g_774970, person) != 0) {
 					fcn_00472640(r2, 0);
 				}
 			} else if (d2_CurrentElementId == r4) {
@@ -355,5 +355,5 @@ label_2281:
 			fcn_00471af0(h, 1);
 		}
 	} while (main_RunFrameLoop((int)fcn_005d1790, msg) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

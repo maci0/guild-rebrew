@@ -40,7 +40,7 @@ void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_0050dc90(int);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl d2_ClearRadioGroup(int); void __cdecl fcn_00471e30(int);
+void __cdecl d2_ClearRadioGroup(int); void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "client_packet_builder.h"
 /* ADDRESS: GOLDTL 0x005c8c40 */
@@ -158,15 +158,15 @@ void __cdecl d2_OpenPlayerStats(void)
 		}
 		*(int*) 0x77533c = *(int*) (ofs + (unsigned long)&g_102cbc8);
 		d2_ClearRadioGroup(idx);
-		fcn_00471e30(save);
+		d2_DestroyForm(save);
 		if (firstWindow != -1) {
-			fcn_00471e30(firstWindow);
+			d2_DestroyForm(firstWindow);
 		}
 		if (v3 != -1) {
-			fcn_00471e30(v3);
+			d2_DestroyForm(v3);
 		}
 		if (v4 != -1) {
-			fcn_00471e30(v4);
+			d2_DestroyForm(v4);
 		}
 		fcn_0057e880(0x13, 0, 1, 0);
 		return;

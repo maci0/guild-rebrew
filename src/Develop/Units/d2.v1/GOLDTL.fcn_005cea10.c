@@ -11,7 +11,7 @@ void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(char*, ...);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 /* ADDRESS: GOLD 0x5c27f0 */
 
 void __cdecl fcn_005cea10(void)
@@ -31,5 +31,5 @@ void __cdecl fcn_005cea10(void)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(fcn_005cea10, 0x677c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

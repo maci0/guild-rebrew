@@ -23,7 +23,7 @@ struct msg {
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 void __cdecl he_StartRazzia(char* o)
 {
@@ -31,10 +31,10 @@ void __cdecl he_StartRazzia(char* o)
 		if (gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac)) == 0) {
 			*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
-			*(int*) (o + 0x84) = fcn_004c5620(-1, o);
+			*(int*) (o + 0x84) = cm_SendSetHE(-1, o);
 		}
 		*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
-		*(int*) (o + 0x84) = fcn_004c5620(0, o);
+		*(int*) (o + 0x84) = cm_SendSetHE(0, o);
 	}
 }

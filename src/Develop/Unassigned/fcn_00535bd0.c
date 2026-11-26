@@ -1,5 +1,5 @@
 void __cdecl fcn_00533a40(char *);
-void __cdecl fcn_005b54b0(char *);
+void __cdecl d2_BroadcastCutscene0xa2(char *);
 int __cdecl fcn_004bfe00(char *);
 unsigned short * __cdecl fcn_00502cd0(int, int, ...);
 float __cdecl fcn_004ff210(unsigned short, int);
@@ -16,7 +16,7 @@ void __cdecl fcn_00535bd0(void)
     case 37:
         object_entry = *(void **)0x7e2a9c;
         if (object_entry)
-            fcn_005b54b0(object_entry);
+            d2_BroadcastCutscene0xa2(object_entry);
         break;
     case 35:
         if (*(int *)0x6a3438 = (*(int *)0x6a3438 == 0)) {

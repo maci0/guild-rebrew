@@ -21,9 +21,9 @@ int __cdecl gm_AddTime(int*, int, int, int);
 float __cdecl gm_CalcSkillDuelScore(char*, char*, int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_005782f0(char*, int, int);
-void __cdecl fcn_005b2f60(char*);
-void __cdecl fcn_005b2fb0(char*);
+void __cdecl gm_IncreaseEntityStat(char*, int, int);
+void __cdecl he_NotifyFriedhof12(char*);
+void __cdecl he_NotifyFriedhof13(char*);
 float __cdecl gm_GetEntitySkill(char*, int);
 void __cdecl he_NotifyHauchDesVerfalls(char*, char*, char*, int);
 void __cdecl he_ShowFriedhofMessage(char*, char*, char*);
@@ -85,11 +85,11 @@ int __cdecl he_RunHauchDesVerfalls(char* event)
 				o = *(char**) (m + 0x16c);
 				c = *(unsigned char*) o;
 				*(int*) (event + 0xbc) = 1;
-				fcn_005782f0(n, ((CrimeProto*)lpGebaeudePROT)[c].field247 * 2 + (unsigned short) gm_RandomMod(3) + *(signed char*) (o + 0x5c) / 50, 3);
-				fcn_005b2f60(n);
+				gm_IncreaseEntityStat(n, ((CrimeProto*)lpGebaeudePROT)[c].field247 * 2 + (unsigned short) gm_RandomMod(3) + *(signed char*) (o + 0x5c) / 50, 3);
+				he_NotifyFriedhof12(n);
 				return *(int*) (event + 0x70) = *(int*) (event + 0x70) + 1;
 			}
-			fcn_005b2fb0(n);
+			he_NotifyFriedhof13(n);
 			*(int*) (event + 0xbc) = 0;
 		}
 		return *(int*) (event + 0x70) = *(int*) (event + 0x70) + 1;

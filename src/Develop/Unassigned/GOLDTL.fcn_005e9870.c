@@ -13,7 +13,7 @@ extern float g_6660e8;
 extern int g_1043370;
 
 char __cdecl fcn_0045b990(int, float*, int*, int*, float*);
-int __cdecl fcn_005ea2d0(int, float*, float*, int, int, int*, int*);
+int __cdecl d3_TraceTerrainSegment(int, float*, float*, int, int, int*, int*);
 
 /* ADDRESS: GOLDTL 0x005e9870 */
 int __cdecl fcn_005e9870(Sefde0Entry *entry)
@@ -89,7 +89,7 @@ int __cdecl fcn_005e9870(Sefde0Entry *entry)
 		pf[2] += v[2] * 39.37008f * *(float *)0x6660ec;
 		nx = ox;
 		ny = oy;
-		if (fcn_005ea2d0(map, (float*) (obj + 0x30), pf, ox, oy, &nx, &ny) != 0 && *(unsigned int*) (obj + 0x64) > 0x32) {
+		if (d3_TraceTerrainSegment(map, (float*) (obj + 0x30), pf, ox, oy, &nx, &ny) != 0 && *(unsigned int*) (obj + 0x64) > 0x32) {
 			*(float*) (obj + 0x30) = pf[0];
 			*(float*) (obj + 0x34) = pf[1];
 			*(float*) (obj + 0x38) = pf[2];

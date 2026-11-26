@@ -38,7 +38,7 @@ extern int g_7e2704;
 extern int g_7e2708;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl gm_GetSeason(char*);
-void __cdecl fcn_00516f60(void);
+void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl fcn_0043c2c0(int* a0);
 void __cdecl d2_ChooseWappen(void);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
@@ -53,7 +53,7 @@ void* __cdecl evt_FindScriptById(int a1);
 int __cdecl evt_RequestScriptExit(int a1);
 void __cdecl fcn_0052db70(int a0);
 void __cdecl d3_HandleCameraLevelKey(void);
-void __cdecl fcn_0052cbb0(int a0);
+void __cdecl d3_FocusCameraOnEntity(int a0);
 void __cdecl d2_ShowBuildingMenu(void);
 int __cdecl fcn_00506380(int a, int b, int c, int d);
 int __cdecl gm_CheckEntityType(void* a0);
@@ -89,7 +89,7 @@ void __cdecl d2_RunWorldHudLoop(void)
 
 	v7 = gm_GetSeason((char*) &gm_GameTime);
 	g_677508 = -1;
-	fcn_00516f60();
+	d3_ResetWorldSceneState();
 	if (g_773ddc) {
 		fcn_0043c2c0((int*) g_6b8300);
 		g_773ddc = 0;
@@ -183,7 +183,7 @@ void __cdecl d2_RunWorldHudLoop(void)
 		}
 		d3_HandleCameraLevelKey();
 		if (g_14ce8d4 && !g_14ce8e4 && g_7746b0 && !d3_ActiveCameraAnimation)
-			fcn_0052cbb0(g_7746b0);
+			d3_FocusCameraOnEntity(g_7746b0);
 		if (g_100f1dc != -1 && d2_CurrentElementId == g_6a25dc)
 			d2_ShowBuildingMenu();
 		if (g_7e2aa0) {
@@ -226,13 +226,13 @@ void __cdecl d2_RunWorldHudLoop(void)
 						goto label_59a83a;
 					}
 					if (gm_IsWarehouse((void*) v9)) {
-						fcn_0052cbb0(v9);
+						d3_FocusCameraOnEntity(v9);
 						goto label_59a834;
 					}
 					goto label_59a83a;
 				}
 			} else {
-				fcn_0052cbb0(v9);
+				d3_FocusCameraOnEntity(v9);
 			}
 label_59a834:
 			g_7e2700 = 0;

@@ -42,7 +42,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005a5440(int, Tab5c84*, int, int, int);
 void __cdecl fcn_0046f280(int);
 void __cdecl d2_DestroyElement(int);
-int __cdecl fcn_0050d5d0(int, int, char**);
+int __cdecl he_GetActiveKrediteByBorrower(int, int, char**);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
@@ -96,8 +96,8 @@ int __cdecl fcn_005c8400(void)
 			lines[k].e = 0;
 		}
 	}
-	fcn_0050d5d0(g_774970, 0, list);
-	n = fcn_0050d5d0(g_774970, 0, list);
+	he_GetActiveKrediteByBorrower(g_774970, 0, list);
+	n = he_GetActiveKrediteByBorrower(g_774970, 0, list);
 	d2_SetForm(h, 3);
 	io_AppendText((int) g_6811b0);
 	if (n >= 9) {

@@ -23,7 +23,7 @@ int __cdecl fcn_004efd30(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_SendSlotAddNCta(void*);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_004a5e60(char*, int, F8, int, float, int*);
+int __cdecl ai_FindEntityInFavorRange(char*, int, F8, int, float, int*);
 void __cdecl gm_ResolveEntityById(void**, int, int, int);
 int __cdecl gm_ComputeCannonShot(char*, char*, int);
 
@@ -73,7 +73,7 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* firstAction, cha
 
 	f.mask = 0xe07c43b4;
 	f.b = 1;
-	if (fcn_004a5e60(p, 6, f, 0, (float) ((gm_RandomMod(0x20) & 0xffff) + 0x20), &out) == 0) {
+	if (ai_FindEntityInFavorRange(p, 6, f, 0, (float) ((gm_RandomMod(0x20) & 0xffff) + 0x20), &out) == 0) {
 		return 0;
 	}
 	gm_ResolveEntityById((void**) &a1, 0, 0, out);

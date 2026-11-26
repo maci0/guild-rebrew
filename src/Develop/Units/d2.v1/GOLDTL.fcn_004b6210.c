@@ -12,7 +12,7 @@ void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int on);
 void __cdecl io_AppendText(int id, int a, int b);
 int __cdecl main_RunFrameLoop(void (__cdecl* cb)(int), int flags);
-void __cdecl fcn_00471e30(int h);
+void __cdecl d2_DestroyForm(int h);
 void __cdecl fcn_004b5b20(int arg);
 
 void __cdecl d2_ShowMissionDialog(int arg)
@@ -34,7 +34,7 @@ void __cdecl d2_ShowMissionDialog(int arg)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(d2_ShowMissionDialog, arg | 0x80) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	if (mode == 2) {
 		fcn_004b5b20(arg);
 	}

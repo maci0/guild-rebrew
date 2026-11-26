@@ -34,7 +34,7 @@ int __cdecl gm_AccumulateTyped2(ENTITY_RECORD*);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -49,7 +49,7 @@ void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_RunBuergerrechtDialog(char* p)
 {
@@ -70,7 +70,7 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 
 		io_FormatTextBuffer(text, 0x1a00);
 		fcn_00526120(text, ok);
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 		return;
 	}
 	h = fcn_00470820(0, 0, g_6aae78);
@@ -174,8 +174,8 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunBuergerrechtDialog, 0x677c7) != 0);
-	fcn_00471e30(h);
-	fcn_00532ef0();
+	d2_DestroyForm(h);
+	d3_EndCameraAndUiMode();
 	if (ok) {
 		fcn_0057e880(0x2e, 0, 1, 0);
 	}

@@ -3,7 +3,7 @@
 
 int __cdecl fcn_004f5d00(int, int, int, int);
 
-int __cdecl fcn_004cbda0(void* input, char* response)
+int __cdecl cm_ExUpdateStraftatState(void* input, char* response)
 {
 	char b;
 

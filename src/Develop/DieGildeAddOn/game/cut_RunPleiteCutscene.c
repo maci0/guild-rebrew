@@ -7,7 +7,7 @@ typedef struct {
 	char path[0x100];    /* 0x18 sprintf path buffer */
 	char msg[0x200];     /* 0x118 message buffer */
 	char big[0x1fb8];    /* 0x318 work buffer */
-} Frame4e3020;
+} PLEITE_CUTSCENE_FRAME;
 
 #include "client_types.h"
 
@@ -18,7 +18,7 @@ extern char g_5438c0[];
 
 int __cdecl gm_LookupEntityRecordById(void* p);
 int __cdecl sb_LoadLocalizedSampleBank(char* s, int a);
-void __cdecl fcn_004e4e90(char* s);
+void __cdecl msx_StartMusicIfAllowed(char* s);
 void __cdecl fcn_004e4730(char* s);
 void __cdecl fcn_00445f50(int a, int b, float f, int c);
 void __cdecl fcn_004463f0(int a, int b, float f);
@@ -43,10 +43,10 @@ void __cdecl fcn_00509fc0(void* a, void* b, int c);
 void __cdecl cut_RegisterEventCallbacks(void);
 
 /* ADDRESS: GOLDTL 0x004e3020 */
-void __cdecl fcn_004e3020(void* arg)
+void __cdecl cut_RunPleiteCutscene(void* arg)
 {
 	int table[6];
-	Frame4e3020 f;
+	PLEITE_CUTSCENE_FRAME f;
 	void* obj;
 	int handle;
 	int h2;
@@ -76,7 +76,7 @@ void __cdecl fcn_004e3020(void* arg)
 		i++;
 	}
 	handle = sb_LoadLocalizedSampleBank((char*) 0x68d324, 1);
-	fcn_004e4e90((char*) 0x68bd2c);
+	msx_StartMusicIfAllowed((char*) 0x68bd2c);
 	fcn_004e4730((char*) 0x68d318);
 	fcn_00445f50(state, 0, 1.0f, 1);
 	fcn_004463f0(0, 0, 0.0f);

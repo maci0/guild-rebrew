@@ -64,7 +64,7 @@ int __cdecl d2_GetWindowListItem(int h, int a, int b);
 void __cdecl cm_SendCopyEntityData(void* p);
 void __cdecl fcn_004c35f0(void);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
-void __cdecl fcn_00471e30(int h);
+void __cdecl d2_DestroyForm(int h);
 void __cdecl fcn_005305a0(void);
 
 /* ADDRESS: GOLDTL 0x005ad640 */
@@ -176,7 +176,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 						}
 					}
 				} while (main_RunFrameLoop(d2_ShowThievesGuildSpyDialog, 0x677c7));
-				fcn_00471e30((int) dlg);
+				d2_DestroyForm((int) dlg);
 				fcn_005305a0();
 				return ret;
 			}

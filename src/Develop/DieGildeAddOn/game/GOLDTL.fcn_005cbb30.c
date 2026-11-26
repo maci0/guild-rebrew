@@ -18,7 +18,7 @@ typedef struct {
 	int role;
 	int value;
 	int task;
-} Item5cbb;
+} Action2cCandidate;
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -26,17 +26,17 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl d2_BuildPersonStatusDesc(Item5cbb* s);
+int __cdecl d2_BuildPersonStatusDesc(Action2cCandidate* s);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
-int __cdecl fcn_005cbb30(unsigned short* who, unsigned int max, Item5cbb* out, int kind)
+int __cdecl d2_CollectAction2cCandidates(unsigned short* who, unsigned int max, Action2cCandidate* out, int kind)
 {
 	int result;
 	int mindays;
 	unsigned short* ps[6];
 	int role[6];
 	char* t;
-	Item5cbb* o;
+	Action2cCandidate* o;
 	unsigned short* p;
 	int found;
 	int n;

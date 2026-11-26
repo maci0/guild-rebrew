@@ -13,7 +13,7 @@ void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
-void __cdecl fcn_005ba910(int, int);
+void __cdecl d2_RunTradeInventoryPanel(int, int);
 
 void __cdecl d2_OpenMarktstandPanel(int buildingArg, int queryTypeId)
 {
@@ -30,7 +30,7 @@ void __cdecl d2_OpenMarktstandPanel(int buildingArg, int queryTypeId)
 		fcn_0057e880(0x17, (*(int*)&g_7746cc), 0, queryTypeId);
 		while ((*(int*)&g_7746cc) != 0) {
 			g_7746d4 = 1;
-			fcn_005ba910(buildingArg, 9);
+			d2_RunTradeInventoryPanel(buildingArg, 9);
 		}
 	}
 	fcn_0057e880(0x18, (*(int*)&g_7746cc), 0, queryTypeId);

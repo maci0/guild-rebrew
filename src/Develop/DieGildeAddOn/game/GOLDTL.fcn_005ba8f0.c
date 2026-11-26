@@ -1,8 +1,8 @@
 
 
-void __cdecl fcn_005ba910(void*, int);
+void __cdecl d2_RunTradeInventoryPanel(void*, int);
 
-void __cdecl fcn_005ba8f0(void* p)
+void __cdecl d2_OpenLagerTradeMode2(void* p)
 {
-	fcn_005ba910(p, 2);
+	d2_RunTradeInventoryPanel(p, 2);
 }

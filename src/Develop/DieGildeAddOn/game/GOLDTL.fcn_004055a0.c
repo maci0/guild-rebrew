@@ -72,7 +72,7 @@ void __cdecl ch_GetCameraView(char* obj, int view, float* pos, float* rot)
 	if (obj[0x8c] & 0x10) {
 		pos[1] = (float) (pos[1] - 15.0);
 	}
-	fcn_00455540(*(char**) (obj + 0x34), pos, pos);
+	d3_TransformToObjectSpace(*(char**) (obj + 0x34), pos, pos);
 	rot[0] = *(float*) (*(char**) (obj + 0x34) + 0x84) + rot[0];
 	rot[1] = *(float*) (*(char**) (obj + 0x34) + 0x88) + rot[1];
 	rot[2] = *(float*) (*(char**) (obj + 0x34) + 0x8c) + rot[2];

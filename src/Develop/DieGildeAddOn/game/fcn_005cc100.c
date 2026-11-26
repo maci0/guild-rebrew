@@ -1,4 +1,4 @@
-int __cdecl fcn_004e93d0(unsigned char* a1, int max, int* out);
+int __cdecl amt_ListPromotionOffices(unsigned char* a1, int max, int* out);
 int __cdecl d2_BuildPersonStatusDesc(void* sel);
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, int c, int d);
 
@@ -16,7 +16,7 @@ int __cdecl fcn_005cc100(char* a1, unsigned int capacity, char* results, int a4)
 	if (*(char*) (a1 + 0x166) == 0) {
 		return 0;
 	}
-	n = fcn_004e93d0((unsigned char*) a1, 4, ids);
+	n = amt_ListPromotionOffices((unsigned char*) a1, 4, ids);
 	if (n == 0) {
 		return 0;
 	}

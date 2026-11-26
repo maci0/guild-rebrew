@@ -10,11 +10,11 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl main_RunFrameLoop(void* a, int b);
 void __cdecl fcn_0046f280(int w);
 int __cdecl d2_DestroyElement(int id);
-int __cdecl fcn_0050d5d0(int id, char* owner, char** out);
+int __cdecl he_GetActiveKrediteByBorrower(int id, char* owner, char** out);
 int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 int __cdecl fcn_0046f100(int a, int b, int c, int d, int e, int f);
-void __cdecl fcn_00471e30(int a);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int a);
+void __cdecl d3_EndCameraAndUiMode(void);
 /* ADDRESS: GOLDTL 0x005a4960 */
 void __cdecl fcn_005a4960(char* owner, int id)
 {
@@ -56,7 +56,7 @@ void __cdecl fcn_005a4960(char* owner, int id)
                 }
             }
 
-            count = fcn_0050d5d0(id, owner, entries);
+            count = he_GetActiveKrediteByBorrower(id, owner, entries);
             cx = *(short*) (g_772500 + 0x269d8);
             cy = *(short*) (g_772500 + 0x269da);
             for (i = 0; i < count; i++) {
@@ -85,6 +85,6 @@ void __cdecl fcn_005a4960(char* owner, int id)
             g_774654 = 1;
     }
 
-    fcn_00471e30((int)dlg);
-    fcn_00532ef0();
+    d2_DestroyForm((int)dlg);
+    d3_EndCameraAndUiMode();
 }

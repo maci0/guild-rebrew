@@ -29,7 +29,7 @@ void __cdecl cm_RequestWalkOnPath(int who, int x, int y, int id);
 void __cdecl cm_RequestChrMoveToUniverse(int a, int b, int c, char* name);
 void __cdecl cm_SendCancelCharacterActions(unsigned int h);
 int __cdecl ch_StartMovement(int who, int key, int target, int name, int mode, char* text);
-int __cdecl fcn_004c5620(int state, void* ev);
+int __cdecl cm_SendSetHE(int state, void* ev);
 int __cdecl gm_IsWarehouse(unsigned char* rec);
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* rec);
 void __cdecl io_FormatTextBuffer(char* text, int format, ...);
@@ -174,7 +174,7 @@ void __cdecl he_StepTransportEntry(char* ev)
 				}
 			}
 		}
-		*(unsigned int*) (ev + 0x84) = fcn_004c5620(3, ev);
+		*(unsigned int*) (ev + 0x84) = cm_SendSetHE(3, ev);
 	}
 	else if (*(char*) (ev + 0xd0) && *(int*) (ev + 0xd4) > 0x10
 		&& (p = *(char**) (e + 0x3b)) != 0 && *(int*) (p + 0x128) == 0) {

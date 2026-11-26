@@ -14,7 +14,7 @@ extern char s_6a3bc4[];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl d2_SetForm(int, int);
@@ -172,6 +172,6 @@ int __cdecl fcn_0053b1b0(void)
 			}
 		} while (main_RunFrameLoop((void*) fcn_0053b1b0, 0x12d6) != 0);
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return v_ret;
 }

@@ -20,7 +20,7 @@ int __cdecl d3_SetObjectRotation();
 int __cdecl CompareVector3WithinTolerance();
 int __cdecl fcn_00470820();
 int __cdecl d2_CenterDialogWindows();
-int __cdecl fcn_00471e30();
+int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
 int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
@@ -39,7 +39,7 @@ int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
 int __cdecl d3_AnimateCameraToStoredTransform();
 int __cdecl fcn_00530510();
-int __cdecl fcn_00532ef0();
+int __cdecl d3_EndCameraAndUiMode();
 int __cdecl fcn_00533a60();
 int __cdecl fcn_005340f0();
 int __cdecl main_RunFrameLoop();
@@ -269,7 +269,7 @@ label_5c221e:
         v12 = v27;
       }
       if (v12) {
-        fcn_00471e30(v28);
+        d2_DestroyForm(v28);
         v36 = -1;
         v18 = 1;
         commit = -1;
@@ -423,12 +423,12 @@ label_5c221e:
           }
         } while (main_RunFrameLoop(0x5c18e0,0x677c7));
         if (v27) {
-          fcn_00471e30(v9);
+          d2_DestroyForm(v9);
           goto label_5c221e;
         }
       }
     }
   }
-  fcn_00471e30(v28);
-  fcn_00532ef0();
+  d2_DestroyForm(v28);
+  d3_EndCameraAndUiMode();
 }

@@ -12,7 +12,7 @@ void __cdecl main_ExitToFrameHandler(void*);
 void __cdecl d2_RunWorldHudLoop(void);
 void __cdecl fcn_004e89e0(unsigned char*, int);
 
-int __cdecl fcn_004cd690(char* x, char* out)
+int __cdecl cm_ExBlockCharacter(char* x, char* out)
 {
 	unsigned char* e;
 	int v;

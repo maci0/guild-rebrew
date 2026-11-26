@@ -3,10 +3,10 @@ typedef unsigned short u16;
 typedef unsigned int   u32;
 
 void* __cdecl gm_LookupEntityRecordById(int a1);
-int __cdecl fcn_004c5620(char a1, unsigned char* e);
+int __cdecl cm_SendSetHE(char a1, unsigned char* e);
 void* __cdecl he_StartHandlungSearch(int n, ...);
 void* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_005b22d0(void* a1);
+void __cdecl he_NotifyObjektMessage(void* a1);
 void __cdecl gm_AddTime(void* clock, int a2, int a3, int a4);
 void __cdecl fcn_005100f0(int id, int amount);
 int __cdecl gm_TryRecordCrime(int idx, int id, int a3, int a4, int a5);
@@ -34,7 +34,7 @@ void __cdecl fcn_0054c240(u8* o)
     if (r == 0) {
         d = o + 0x52;
         *(pos14_7f4c00*) d = gm_GameTime;
-        *((u32*)(o + 0x84)) = (u32)fcn_004c5620(-1, o);
+        *((u32*)(o + 0x84)) = (u32)cm_SendSetHE(-1, o);
         return;
     }
 
@@ -45,8 +45,8 @@ void __cdecl fcn_0054c240(u8* o)
         if (cnt > 4) {
             d = o + 0x52;
             *(pos14_7f4c00*) d = gm_GameTime;
-            *((u32*)(o + 0x84)) = (u32)fcn_004c5620(-1, o);
-            return fcn_005b22d0((void*)(0x7f4ca0 + 540 * (u32)*(u16*)(o + 8)));
+            *((u32*)(o + 0x84)) = (u32)cm_SendSetHE(-1, o);
+            return he_NotifyObjektMessage((void*)(0x7f4ca0 + 540 * (u32)*(u16*)(o + 8)));
         }
     }
 
@@ -80,11 +80,11 @@ void __cdecl fcn_0054c240(u8* o)
 
     if (gm_HasActiveSpecialObject(r, 0x15c) != 0) {
         *(pos14_7f4c00*) d = gm_GameTime;
-        *((u32*)(o + 0x84)) = (u32)fcn_004c5620(-1, o);
+        *((u32*)(o + 0x84)) = (u32)cm_SendSetHE(-1, o);
         he_NotifyAction0x35Blocked(r, (void*)(0x7f4ca0 + 540 * (u32)*(u16*)(o + 8)));
         return;
     }
 
     he_NotifyAction0x35Success(r);
-    *((u32*)(o + 0x84)) = (u32)fcn_004c5620(0, o);
+    *((u32*)(o + 0x84)) = (u32)cm_SendSetHE(0, o);
 }

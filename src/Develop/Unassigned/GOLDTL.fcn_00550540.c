@@ -3,7 +3,7 @@
 
 int __cdecl he_FreeAction(int*);
 
-int __cdecl fcn_00550540(int* action)
+int __cdecl he_RunAction0x52(int* action)
 {
 	int v;
 

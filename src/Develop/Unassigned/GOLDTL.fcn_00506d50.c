@@ -8,7 +8,7 @@ typedef struct {
 
 extern Rec6 g_699398[];
 
-Rec6 __cdecl fcn_00506d50(int idx)
+Rec6 __cdecl gm_GetStatRecord(int idx)
 {
 	if (idx >= 0x5f) {
 		return g_699398[0];

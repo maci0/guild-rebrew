@@ -18,7 +18,7 @@ int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl fcn_0053e9a0(void)
 {
@@ -70,6 +70,6 @@ int __cdecl fcn_0053e9a0(void)
 	}
 	g_77670a = (unsigned char) g_7747b4;
 	d2_ClearRadioGroup(list);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return result;
 }

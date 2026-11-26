@@ -19,7 +19,7 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 int __cdecl ai_FindMissingBuildingUpgrade(int* a, int* b, char* q, int c);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
@@ -45,7 +45,7 @@ int __cdecl ai_StartBuergermeisterUpgrade(int kind, char* e, int busy, Blk24* o1
 	f.mask = 2;
 	f.b = 0;
 	do {
-		if (fcn_004a5e60(e, 2, f, 0, 100.0f, &found) != 0) {
+		if (ai_FindEntityInFavorRange(e, 2, f, 0, 100.0f, &found) != 0) {
 			gm_ResolveEntityById((void**) (&target), 0, 0, found);
 			if (target != 0 && ai_FindMissingBuildingUpgrade(&v[0], &v[1], target, 0) != 0) {
 				b1.kind = 2;

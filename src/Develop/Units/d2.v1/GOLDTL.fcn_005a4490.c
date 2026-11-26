@@ -15,7 +15,7 @@ struct loan_offer {
 	char* line;
 };
 
-int __cdecl fcn_0050d5d0(int, char*, char**);
+int __cdecl he_GetActiveKrediteByBorrower(int, char*, char**);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyElement(int);
@@ -25,12 +25,12 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText();
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ChooseNewLoan(char*);
@@ -91,8 +91,8 @@ void __cdecl d2_ShowLoanDialog(char* p)
 					rows[i].line = 0;
 				}
 			}
-			n = fcn_0050d5d0(g_774970, 0, lines);
-			count = fcn_0050d5d0(g_774970, p, lines);
+			n = he_GetActiveKrediteByBorrower(g_774970, 0, lines);
+			count = he_GetActiveKrediteByBorrower(g_774970, p, lines);
 			d2_SetForm(dialog, 4);
 			io_AppendText(g_6811b0);
 			if (count >= 9) {
@@ -175,9 +175,9 @@ void __cdecl d2_ShowLoanDialog(char* p)
 			}
 		}
 	}
-	fcn_00471e30(dialog);
+	d2_DestroyForm(dialog);
 	if (slot != -1) {
 		d2_ClearRadioGroup(slot);
 	}
-	return fcn_00532ef0();
+	return d3_EndCameraAndUiMode();
 }

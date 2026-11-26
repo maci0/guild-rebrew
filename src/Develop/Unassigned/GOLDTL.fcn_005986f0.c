@@ -15,6 +15,6 @@ void __cdecl d3_GetObjectWorldPosition(float* result, char* object)
 	v[0] = 0;
 	v[1] = 0;
 	v[2] = 0;
-	fcn_00455540(object, v, result);
+	d3_TransformToObjectSpace(object, v, result);
 	d3_SelectSceneContext(saved, 1);
 }

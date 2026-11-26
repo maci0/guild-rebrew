@@ -16,7 +16,7 @@ extern char g_7f4ca0[];
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004f2810(char*, unsigned char*, int, int, short, int);
-void __cdecl fcn_005b2db0(struct s_7f4ca0*, char*, unsigned char*, int, int, int);
+void __cdecl he_NotifyFriedhofEvent0x414f(struct s_7f4ca0*, char*, unsigned char*, int, int, int);
 
 void __cdecl he_ApplyAction0x92Favor(char* o)
 {
@@ -37,7 +37,7 @@ void __cdecl he_ApplyAction0x92Favor(char* o)
 			                       ((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].kind == 7)) {
 				a = *(int*) (o + 0xb0);
 				b = *(int*) (o + 0xb8);
-				fcn_005b2db0(r, x, e, a, b, (int) (b * g_6652d8[a]));
+				he_NotifyFriedhofEvent0x414f(r, x, e, a, b, (int) (b * g_6652d8[a]));
 			}
 		}
 	}

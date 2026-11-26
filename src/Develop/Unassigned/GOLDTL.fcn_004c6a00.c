@@ -6,14 +6,14 @@ void __cdecl cm_EnqueueClientPacket(void*);
 typedef struct
 {
 	int v[0xa];
-} Body10;
+} SCHEDULER_STATE_CMD;
 // SIZE 0x28
 
-void __cdecl fcn_004c6a00(Body10* body)
+void __cdecl cm_SendRandomEventState(SCHEDULER_STATE_CMD* body)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x56;
-	*(Body10*) (buf + 0x10) = *body;
+	*(SCHEDULER_STATE_CMD*) (buf + 0x10) = *body;
 	cm_EnqueueClientPacket(buf);
 }

@@ -11,9 +11,9 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(char*, int, int, int);
 
-void __cdecl fcn_0057a130(char* e)
+void __cdecl he_StartAction0x8e(char* action)
 {
-	*(pos14_7f4c00*) (e + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
-	*(int*) (e + 0x70) = 0;
-	gm_AddTime(e + 0x52, 0x48, 0, 0);
+	*(pos14_7f4c00*) (action + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
+	*(int*) (action + 0x70) = 0;
+	gm_AddTime(action + 0x52, 0x48, 0, 0);
 }

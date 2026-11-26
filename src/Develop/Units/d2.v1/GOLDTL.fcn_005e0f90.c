@@ -79,10 +79,10 @@ int __cdecl vfs_LookupPath(char*, int, int*);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_005e0b40(int, int, char*);
 int __cdecl fcn_005dfe80(char*, int);
-int __cdecl fcn_005e4060(void);
+int __cdecl ls_CanSaveGame(void);
 void __cdecl fcn_00533a40(char*);
 int __cdecl cm_RequestSysMessage(int, Msg*);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_ShowNetworkLoadGame(void)
 {
@@ -139,7 +139,7 @@ int __cdecl d2_ShowNetworkLoadGame(void)
 					break;
 				}
 				if (!flag || fcn_005dfe80(g_14ac64c, 0x101)) {
-					if (!fcn_005e4060()) {
+					if (!ls_CanSaveGame()) {
 						fcn_00533a40(g_14ac604);
 					} else {
 						memset(&m, 0, sizeof(m));
@@ -153,6 +153,6 @@ int __cdecl d2_ShowNetworkLoadGame(void)
 			}
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return 0;
 }

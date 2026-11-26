@@ -11,7 +11,7 @@ typedef struct {
 } Bytes4;
 
 int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, float a, int b, void (__cdecl* cb)(void));
-void __cdecl fcn_004526d0(int* s, float* pos);
+void __cdecl d3_SetEffectPosition(int* s, float* pos);
 void __cdecl fcn_00417270(int* s, float a, float b, float c);
 void __cdecl fcn_004172e0(void);
 
@@ -31,7 +31,7 @@ int* __cdecl fcn_004177d0(int a1, int n)
 		v[2] = 0.0f;
 		v[3] = 0.0f;
 		fcn_00417270(s, 0.9f, 4.0f, -5.0f);
-		fcn_004526d0(s, v);
+		d3_SetEffectPosition(s, v);
 	}
 	return s;
 }

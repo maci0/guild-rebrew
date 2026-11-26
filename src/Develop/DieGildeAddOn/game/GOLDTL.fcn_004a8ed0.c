@@ -21,7 +21,7 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 
 
@@ -38,9 +38,9 @@ int __cdecl fcn_004a8ed0(char* unused1, char* e, char* unused3, char* unused4, c
 	f.mask = 0x807d4190;
 	f.b = 1;
 	if (g_77261c != 0) {
-		fcn_004a5e60(g_77261c, 4, f, 0, 100.0f, &found);
+		ai_FindEntityInFavorRange(g_77261c, 4, f, 0, 100.0f, &found);
 	}
-	if (found == -1 && fcn_004a5e60(e, 6, f, 0, gm_RandomMod(0x20) + 32.0f, &found) == 0) {
+	if (found == -1 && ai_FindEntityInFavorRange(e, 6, f, 0, gm_RandomMod(0x20) + 32.0f, &found) == 0) {
 		return 0;
 	}
 	q = gm_StartFilteredEntitySearch(1, 1, found);

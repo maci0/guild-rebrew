@@ -6,7 +6,7 @@ extern unsigned short g_774970;
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl amt_FindOfficeSlotsByKind(int, int, void *);
 int __cdecl fcn_004e4ae0(char *, int);
-int __cdecl fcn_004e4e90(int);
+int __cdecl msx_StartMusicIfAllowed(int);
 void __cdecl fcn_004e4de0(int, ...);
 int __cdecl cm_WaitNetworkSyncBanner(int);
 int __cdecl fcn_004ea130(int);
@@ -40,7 +40,7 @@ int __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl fcn_004e48b0(void);
 int __cdecl fcn_004e45c0(int);
 void __cdecl cut_CleanupCutscene(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_004da4d0(int, void *);
 
 
@@ -152,7 +152,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     s2C = 0;
     s34 = fcn_004e4ae0((char *)0x68c214, 0);
     s38 = fcn_004e4ae0((char *)0x68c204, 0);
-    fcn_004e4e90(0);
+    msx_StartMusicIfAllowed(0);
 
     n = 0;
     s44 = 0;
@@ -482,8 +482,8 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 fcn_004727a0(s14, 0);
                 fcn_00471af0(s14, 0);
                 io_AppendText((char *)0x6811b0);
-                fcn_00471e30(s60);
-                fcn_00471e30(s5C);
+                d2_DestroyForm(s60);
+                d2_DestroyForm(s5C);
                 fcn_004e4de0(0x3e8);
                 cm_WaitNetworkSyncBanner(0x6b5c60);
             }
@@ -793,8 +793,8 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
                     fcn_00471af0(s14, 0);
-                    fcn_00471e30(s14);
-                    fcn_00471e30(s50);
+                    d2_DestroyForm(s14);
+                    d2_DestroyForm(s50);
                     fcn_004e4de0(0x3e8);
                     cm_WaitNetworkSyncBanner(0x6b5c60);
                 }
@@ -809,7 +809,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         fcn_004e45c0(fcn_004e44b0((char *)0x6b5c60, (char *)0x68c010));
         cut_CleanupCutscene();
     }
-    fcn_00471e30(s14);
+    d2_DestroyForm(s14);
     }
     s30 += 1;
     } while (s30 < 6);

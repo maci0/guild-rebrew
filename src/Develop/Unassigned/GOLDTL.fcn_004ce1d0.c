@@ -7,7 +7,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004ce1d0(void)
+void __cdecl cm_RequestClearSceneEntries(void)
 {
 	char buf[0x9c];
 

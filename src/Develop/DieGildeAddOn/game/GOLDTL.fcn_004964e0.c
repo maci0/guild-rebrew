@@ -58,7 +58,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004f4830(int idx, void* dst);
 int __cdecl fcn_004a4410(float* a0, float* a1, int idx, Actor* e, int a4,
 	char* a5, int a6);
-int __cdecl fcn_004a4680(float* a0, float* a1, int idx, Actor* e, int* rec);
+int __cdecl ai_ComputeActionScore(float* a0, float* a1, int idx, Actor* e, int* rec);
 
 /* Prices the stored goods of the selected warehouse and reports the
    cheapest one as action type 7; otherwise falls back to the plain
@@ -139,7 +139,7 @@ fallback:
 	if (rec[6] == 0) {
 		return fcn_004a4410(firstScore, secondScore, idx, actor, 0, resultData, extra);
 	}
-	return fcn_004a4680(firstScore, secondScore, idx, actor, rec);
+	return ai_ComputeActionScore(firstScore, secondScore, idx, actor, rec);
 calc:
 	for (i = 0; i < 4; i++) {
 		if (method->effects[i].value > 0.0f) {

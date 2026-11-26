@@ -9,7 +9,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cut_RandMod(int);
 void __cdecl fcn_004e4730(char*);
 void __cdecl fcn_004e4b60(char*);
-void __cdecl fcn_004e4e90(char*);
+void __cdecl msx_StartMusicIfAllowed(char*);
 void __cdecl fcn_004e4c40(int);
 int __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl gm_FindOrAllocHeadSet(int, int);
@@ -67,7 +67,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	} else {
 		fcn_004e4b60((char*) (cut_RandMod(4) * 0x4c + 0x6a2600));
 	}
-	fcn_004e4e90((char*) 0x68cb08);
+	msx_StartMusicIfAllowed((char*) 0x68cb08);
 	if (mode == 1) {
 		fcn_004e4c40(500);
 	}

@@ -9,29 +9,29 @@ void __cdecl cm_RequestChrMoveToUniverse(int h, int a, int b, char* tag);
 void __cdecl cm_RequestChrWalkToDummy(int h, int a, int b, char* tag);
 
 /* ADDRESS: GOLDTL 0x0057f9a0 */
-void __cdecl fcn_0057f9a0(int a0)
+void __cdecl cm_SendPlayerReturnToBuilding(int unused)
 {
-	char* p;
+	char* cursor;
 	int idx;
 	char* slot;
 	unsigned short key;
-	int v1;
-	int v2;
+	int posX;
+	int posY;
 
-	if (a0 != 0) {
+	if (unused != 0) {
 		return;
 	}
 	key = g_774970;
 	idx = -1;
-	p = g_7f4ca0 + 0x16c;
+	cursor = g_7f4ca0 + 0x16c;
 	for (;;) {
-		char* rec = *(char**) p;
+		char* rec = *(char**) cursor;
 		idx++;
 		if (rec != 0 && *(unsigned short*) (rec + 0x27) == key) {
 			break;
 		}
-		p += sizeof(ENTITY_RECORD);
-		if ((int) p >= (int)(g_7f4ca0 + 0x6556c)) {
+		cursor += sizeof(ENTITY_RECORD);
+		if ((int) cursor >= (int)(g_7f4ca0 + 0x6556c)) {
 			return;
 		}
 	}
@@ -39,8 +39,8 @@ void __cdecl fcn_0057f9a0(int a0)
 	if (slot == 0) {
 		return;
 	}
-	if (he_GetEntityReturnTarget(slot, &v1, &v2)) {
-		cm_RequestChrMoveToUniverse(*(int*) (slot + 4), v1, v2, g_675908);
-		cm_RequestChrWalkToDummy(*(int*) (slot + 4), v1, v2, g_6b5c60);
+	if (he_GetEntityReturnTarget(slot, &posX, &posY)) {
+		cm_RequestChrMoveToUniverse(*(int*) (slot + 4), posX, posY, g_675908);
+		cm_RequestChrWalkToDummy(*(int*) (slot + 4), posX, posY, g_6b5c60);
 	}
 }

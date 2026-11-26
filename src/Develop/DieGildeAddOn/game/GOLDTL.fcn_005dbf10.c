@@ -39,7 +39,7 @@ extern int g_7f4c06;
 extern int g_7f4c0a;
 extern unsigned char g_773d75;
 
-Desc* __cdecl fcn_005c61e0(int);
+Desc* __cdecl gm_LookupSpecialObject(int);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_0057e880(int, int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -72,7 +72,7 @@ int __cdecl gm_UseSpecialObject(Ent* ent, Cmd* cmd)
 	if (cmd->rec == 0) {
 		return -3;
 	}
-	d = fcn_005c61e0(*cmd->rec);
+	d = gm_LookupSpecialObject(*cmd->rec);
 	if (d == 0) {
 		return -4;
 	}

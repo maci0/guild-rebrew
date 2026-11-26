@@ -36,7 +36,7 @@ void __cdecl d2_SaveBookmarkSlot(int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_FocusBookmarkSlot(void);
-int __cdecl main_RunFrameLoop(int, int); void __cdecl fcn_00471e30(int);
+int __cdecl main_RunFrameLoop(int, int); void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00591ea0 */
@@ -153,5 +153,5 @@ void __cdecl fcn_00591ea0(void)
 		d2_FocusBookmarkSlot();
 	} while (main_RunFrameLoop((int) fcn_00591ea0, 0x657c7));
 	d2_ClearRadioGroup(last_win);
-	fcn_00471e30(win);
+	d2_DestroyForm(win);
 }

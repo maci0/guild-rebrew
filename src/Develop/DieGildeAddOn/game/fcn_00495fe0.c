@@ -14,7 +14,7 @@ typedef struct {
 } Out495fe0;
 
 int __cdecl ai_SelectBestMethod(int a, int b, int c, Out495fe0* a4, Out495fe0* a5);
-int* __cdecl fcn_00506d50(Sel495fe0* out, int id);
+int* __cdecl gm_GetStatRecord(Sel495fe0* out, int id);
 int __cdecl he_StartHandlungSearch(int a, ...);
 int __cdecl fcn_0042e410(unsigned short a);
 int __cdecl fcn_004fbd20(int a);
@@ -78,7 +78,7 @@ int __cdecl fcn_00495fe0(int unused, char* obj, int flag, int* out1, int* out2)
 		goto tail;
 	}
 
-	pi = fcn_00506d50(&sel, tmp8);
+	pi = gm_GetStatRecord(&sel, tmp8);
 	attributes.x = pi[0];
 	attributes.y = *(unsigned short*) (pi + 1);
 	if (*(int*) (obj + 0x170) == 0 && obj[2] != 3) {

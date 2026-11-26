@@ -7,7 +7,7 @@ char* __cdecl fcn_004bcc50(int a, int b);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d);
 void __cdecl he_AssignActionSlot(char* obj, int a, int id, int b);
-int __cdecl fcn_004c5aa0(int a, char b, char c, short d, char e, int f);
+int __cdecl cm_SendChainRecordLookup(int a, char b, char c, short d, char e, int f);
 void __cdecl he_FreeAction(char* obj);
 
 /* ADDRESS: GOLDTL 0x00565980 */
@@ -31,7 +31,7 @@ void __cdecl he_StartErnten(char* obj)
 					v = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0xfd);
 					he_AssignActionSlot(e, v, (int) *pal, (int) obj);
 					v = *(int*) (obj + 4);
-					*(int*) (obj + 0xc0) = fcn_004c5aa0(*(int*) (obj + 0xac),
+					*(int*) (obj + 0xc0) = cm_SendChainRecordLookup(*(int*) (obj + 0xac),
 						*(char*) (t + 8),
 						*(char*) (t + 9),
 						*(unsigned short*) (t + 0xa), 1, v);

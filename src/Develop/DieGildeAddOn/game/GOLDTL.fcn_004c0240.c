@@ -22,7 +22,7 @@ int __cdecl fcn_0050d320(char*, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004c0240 */
-void __cdecl fcn_004c0240(char* a0, int a1)
+void __cdecl he_LoadTransportCargoAtStop(char* route, int difficulty)
 {
 	char* rec;
 	char* t;
@@ -37,10 +37,10 @@ void __cdecl fcn_004c0240(char* a0, int a1)
 	Slots buf;
 	Slots stats;
 
-	if (*(int*) (a0 + 0x29) == 0) {
+	if (*(int*) (route + 0x29) == 0) {
 		return;
 	}
-	rec = (char*) gm_GetChainNodeAtIndex(*(int*) (a0 + 0x29), *(int*) (a0 + 0x2d));
+	rec = (char*) gm_GetChainNodeAtIndex(*(int*) (route + 0x29), *(int*) (route + 0x2d));
 	pkt = gm_SearchTable67(*(int*) (rec + 4));
 	if (pkt == 0) {
 		return;
@@ -49,8 +49,8 @@ void __cdecl fcn_004c0240(char* a0, int a1)
 	if ((((char)(((BUILDING_PROTOTYPE*)t)->category)) != 0xa && ((char)(((BUILDING_PROTOTYPE*)t)->category)) != 0x1c) && gm_CollectBuildingStock(pkt, &buf, 0) == 0) {
 		return;
 	}
-	v4 = fcn_0050d490(a0);
-	if (gm_CalcEntityInventoryStats(a0, &stats) == 0) {
+	v4 = fcn_0050d490(route);
+	if (gm_CalcEntityInventoryStats(route, &stats) == 0) {
 		return;
 	}
 	rec += 0x20;
@@ -81,9 +81,9 @@ void __cdecl fcn_004c0240(char* a0, int a1)
 								     *(float*) (pkt + 0x49));
 						}
 					}
-					if (fcn_0050d320(v4, a1) >= val * c) {
+					if (fcn_0050d320(v4, difficulty) >= val * c) {
 						cm_SendSellObjekt(*(int*) (src + 2), *(int*) (stats.obj + 2),
-							     *(int*) rec, c, a1, val);
+							     *(int*) rec, c, difficulty, val);
 					}
 				}
 			}

@@ -181,7 +181,7 @@ void __cdecl fcn_00599b00(void)
 			g_774654 = 1;
 		if (main_RunFrameLoop(0x599b00, 0x657c7) == 0) {
 			if (dlg != -1)
-				fcn_00471e30(dlg);
+				d2_DestroyForm(dlg);
 			g_7746f8 = 0;
 			return;
 		}

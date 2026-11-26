@@ -18,9 +18,9 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(int (__cdecl*)(char*), int);
 void __cdecl he_CancelErforschenActions(char*);
 void __cdecl ahm_SendFireCommand(char*);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_00586a80(char* a, int* unused)
+int __cdecl d2_ConfirmFireAlchemist(char* a, int* unused)
 {
 	int result;
 	int h;
@@ -49,8 +49,8 @@ int __cdecl fcn_00586a80(char* a, int* unused)
 		p = fcn_004ec7d0(a);
 		if (p == 0) {
 			g_774654 = 1;
-			main_RunFrameLoop(fcn_00586a80, 0x20007);
-			fcn_00471e30(h);
+			main_RunFrameLoop(d2_ConfirmFireAlchemist, 0x20007);
+			d2_DestroyForm(h);
 			return 0;
 		}
 		if (g_14ce8e0 != 0) {
@@ -65,7 +65,7 @@ int __cdecl fcn_00586a80(char* a, int* unused)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop(fcn_00586a80, 0x677c7) != 0);
-	fcn_00471e30(h);
+	} while (main_RunFrameLoop(d2_ConfirmFireAlchemist, 0x677c7) != 0);
+	d2_DestroyForm(h);
 	return result;
 }

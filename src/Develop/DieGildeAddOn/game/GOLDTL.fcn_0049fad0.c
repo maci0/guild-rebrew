@@ -23,7 +23,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl amt_CanUpgradeBuildingTier2(char* e);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0050d320(char* e, char k);
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 
 int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
@@ -50,7 +50,7 @@ int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 	}
 	f.mask = 0x807d4190;
 	f.b = 1;
-	if (fcn_004a5e60(e, 6, f, 0, (float) (gm_RandomMod(0x20) + 0x20), &targetId) == 0) {
+	if (ai_FindEntityInFavorRange(e, 6, f, 0, (float) (gm_RandomMod(0x20) + 0x20), &targetId) == 0) {
 		return 0;
 	}
 	gm_ResolveEntityById((void**) (&target), 0, 0, targetId);

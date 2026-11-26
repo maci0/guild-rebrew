@@ -26,7 +26,7 @@ void __cdecl fcn_00533a40(char* a);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int a1, void* a2);
 
 /* ADDRESS: GOLDTL 0x004d1020 */
-int __cdecl fcn_004d1020(char* context, char* e, char* obj, int col, int row)
+int __cdecl cut_AssignTargetOrder(char* context, char* e, char* obj, int col, int row)
 {
 	Msg2c m;
 	int kind;

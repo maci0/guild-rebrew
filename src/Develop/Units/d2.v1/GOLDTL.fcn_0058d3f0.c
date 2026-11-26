@@ -37,7 +37,7 @@ int __cdecl sprintf(char*, const char*, ...);
 int __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(int, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 {
@@ -100,6 +100,6 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowFriedhofGehilfenDialog, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 }

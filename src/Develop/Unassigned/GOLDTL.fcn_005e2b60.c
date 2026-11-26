@@ -21,7 +21,7 @@ int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
 void __cdecl fcn_005e1ca0(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e2b60 */
 void __cdecl fcn_005e2b60(void)
@@ -147,5 +147,5 @@ void __cdecl fcn_005e2b60(void)
     *(unsigned int *)0x77495c = 1;
     fcn_005e1ca0();
   }
-  fcn_00471e30(v4);
+  d2_DestroyForm(v4);
 }

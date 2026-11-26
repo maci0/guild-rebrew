@@ -2,7 +2,7 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AddTime(char*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl cm_SendLogAction(char*);
 void __cdecl cm_SendTraceEnd(char*);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -27,11 +27,11 @@ void __cdecl fcn_00556a20(char* p)
 
 	gm_AddTime((char*) q, 0, 1, 0);
 	if (a == 0) {
-		*(int*) (p + 0x84) = fcn_004c5620(-1, p);
+		*(int*) (p + 0x84) = cm_SendSetHE(-1, p);
 		return;
 	}
 	if (*(int*) (a + 0x1c8) & 0x800000) {
-		*(int*) (p + 0x84) = fcn_004c5620(-1, p);
+		*(int*) (p + 0x84) = cm_SendSetHE(-1, p);
 		return;
 	}
 	cm_SendLogAction("Alloc_Geliebte");
@@ -41,5 +41,5 @@ void __cdecl fcn_00556a20(char* p)
 	*(int*) (p + 0xb4) = 0;
 	*(int*) (p + 0xb8) = 2;
 	*(int*) (p + 0xbc) = -1;
-	*(int*) (p + 0x84) = fcn_004c5620(2, p);
+	*(int*) (p + 0x84) = cm_SendSetHE(2, p);
 }

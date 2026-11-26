@@ -10,7 +10,7 @@ void __cdecl d3_SetObjectRotation(char*, char*);
 void __cdecl fcn_00439aa0(char* o)
 {
 	if (*(int*) (o + 0x218) == 3 && d3_ActiveCamera == 0) {
-		fcn_00439c60(o);
+		d3_SetActiveCamera(o);
 		d3_SetObjectRotation(o, o + 0x84);
 	}
 	if (*(int*) (o + 0x218) != 0) {

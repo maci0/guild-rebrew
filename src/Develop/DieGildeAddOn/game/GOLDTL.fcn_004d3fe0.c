@@ -6,7 +6,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 float __cdecl fcn_004d3e90(void*, unsigned int);
 float __cdecl cut_RandFloat(void);
 double __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004d4250(char*, char*);
+void __cdecl cut_AssignCombatUnitOrder(char*, char*);
 
 /* ADDRESS: GOLDTL 0x004d3fe0 */
 void __cdecl fcn_004d3fe0(char* a0)
@@ -79,7 +79,7 @@ void __cdecl fcn_004d3fe0(char* a0)
 	}
 	for (i = 0; i < 16; i++) {
 		if (*(int*) (base + i * 4) != -1) {
-			fcn_004d4250(rec, gm_LookupEntityRecordIn32SlotTable(*(int*) (base + i * 4)));
+			cut_AssignCombatUnitOrder(rec, gm_LookupEntityRecordIn32SlotTable(*(int*) (base + i * 4)));
 		}
 	}
 }

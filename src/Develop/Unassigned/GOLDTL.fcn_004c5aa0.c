@@ -3,7 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c5aa0(int a1, char a2, char a3, short a4, char a5, int a6)
+void __cdecl cm_SendChainRecordLookup(int a1, char a2, char a3, short a4, char a5, int a6)
 {
 	char buf[0x9c];
 

@@ -45,7 +45,7 @@ void __cdecl fcn_00472c30(int x1, int y1, int x2, int y2, int r, int g, int b);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl d2_GetControlValue(int id);
 int __cdecl main_RunFrameLoop(void* fn, int id);
-void __cdecl fcn_00471e30(char* dlg);
+void __cdecl d2_DestroyForm(char* dlg);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d42e0 */
 void __cdecl fcn_005d42e0(void)
@@ -149,6 +149,6 @@ void __cdecl fcn_005d42e0(void)
 			break;
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	fcn_0057e880(0xc, 0, 1, 0);
 }

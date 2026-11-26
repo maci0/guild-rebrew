@@ -22,7 +22,7 @@ int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_005cd440(char*, int, int, void*);
-int __cdecl fcn_005ba910(int, int);
+int __cdecl d2_RunTradeInventoryPanel(int, int);
 void __cdecl fcn_00525ef0(void);
 void __cdecl d2_RunTechTreeDialog(char*, int);
 void __cdecl fcn_005c3f10(char*);
@@ -101,7 +101,7 @@ void __cdecl fcn_0052f7b0(void)
                     if (d2_TutorialAllowsFlag(0x400) == 1) {
                         g_7746d8 = fcn_00506380(g_774970, (u8*)selected, 0, 0);
                         fcn_0057e880(0x12, (int)selected, 0, 0);
-                        fcn_005ba910((int)selected, 1);
+                        d2_RunTradeInventoryPanel((int)selected, 1);
                         fcn_0057e880(0x12, (int)selected, 1, 0);
                         g_7e2aa0 = selected;
                         fcn_00525ef0();

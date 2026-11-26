@@ -18,7 +18,7 @@ unsigned char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl d3_ChangeObjectTransparency(char*, char*, OBJECT_COLOR);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 float __cdecl fcn_004ce1b0(char*, char*);
-char* __cdecl fcn_004ceb40(char*);
+char* __cdecl gm_FindEntitySlot(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 float __cdecl d3_ComputeYawToTarget(char*, float*);
@@ -130,7 +130,7 @@ void __cdecl fcn_004cf000(void)
 			*(unsigned char*) (*(char**) (o + 0x34) + 0x212) |= 2;
 		}
 	other_effect:
-		s = fcn_004ceb40(e);
+		s = gm_FindEntitySlot(e);
 		if (s != 0 && *(int*) (s + 4) == 2 && *(char*) (s + 0x1d) != 0) {
 			g = gm_LookupEntityRecordIn32SlotTable(*(int*) (s + 0x10));
 			if (g != 0) {

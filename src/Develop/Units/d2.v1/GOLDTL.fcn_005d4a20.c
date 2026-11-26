@@ -52,7 +52,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckPrivilege(int, char*, Query*);
 void __cdecl d2_ShowPrivilegMessage(char*, int, int);
 void __cdecl fcn_00471af0(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
@@ -228,6 +228,6 @@ void __cdecl d2_ShowPrivilegien(void)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowPrivilegien, 0x657c7) != 0);
-	fcn_00471e30((int) dlg);
+	d2_DestroyForm((int) dlg);
 	fcn_0057e880(8, 0, 1, 0);
 }

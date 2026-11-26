@@ -15,7 +15,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowFestInvitation(int, int);
 void __cdecl d2_RunTalenteDialog(int, int, int);
 void __cdecl d2_ShowAnschwaerzenDialog(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d2_RunSocialActionsHud(int entity, int mode)
 {
@@ -37,7 +37,7 @@ void __cdecl d2_RunSocialActionsHud(int entity, int mode)
 			}
 			else if (g_7746a0 == z) {
 				d2_ShowAnschwaerzenDialog(entity);
-				fcn_00532ef0();
+				d3_EndCameraAndUiMode();
 			}
 		}
 	}

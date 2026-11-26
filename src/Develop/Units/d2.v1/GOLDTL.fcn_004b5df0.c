@@ -49,7 +49,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl cm_RequestSysMessage(int, Req*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int* __cdecl fcn_004b3d80(int a, int b, int c);
 void __cdecl fcn_004b5530(int a1, int flags);
 void __cdecl fcn_004b5b20(int flags);
@@ -127,7 +127,7 @@ void __cdecl fcn_004b5df0(int flags)
 			}
 		}
 	} while (main_RunFrameLoop(fcn_004b5df0, mode) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	if (done) {
 		p = fcn_004b3d80(ent->entity_id, level, 1);
 		m2.id = ent->entity_id;

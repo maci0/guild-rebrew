@@ -32,7 +32,7 @@ void __cdecl d3_SetObjectRotation(char* object, int* vector);
 char* __cdecl fcn_00437890(char* object);
 void __cdecl d3_DisposeObject(char* object);
 void __cdecl fcn_00439aa0(char* object);
-void __cdecl fcn_00439c60(char* object);
+void __cdecl d3_SetActiveCamera(char* object);
 char* __cdecl d3_CloneObject(char* object);
 void __cdecl fcn_0043b850(void* stream);
 int __cdecl fcn_00446ca0(unsigned version);
@@ -186,7 +186,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 					d3_SetNodePosition(obj, (int*) (obj + 0x5c));
 					d3_SetObjectRotation(obj, (int*) (obj + 0x90));
 				}
-				fcn_00439c60(obj);
+				d3_SetActiveCamera(obj);
 				break;
 			}
 			obj = *(char**) (obj + 0x1f4);

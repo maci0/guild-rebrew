@@ -36,17 +36,17 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005c5da0(int, int, int, unsigned short, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_005c5e70(void);
+void __cdecl d2_UpdateActiveItemSlots(void);
 
-int __cdecl fcn_005c61e0(int);
+int __cdecl gm_LookupSpecialObject(int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl d2_ConfirmUseObjekt(char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_00526120(int, int);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_005c61c0(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_CloseInventoryPanel(void);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ShowInventoryDialog(void)
 {
@@ -71,11 +71,11 @@ void __cdecl d2_ShowInventoryDialog(void)
 	fcn_005c5da0(d2_CurrentWindowId, 0, 0, g_774970, 0x1f3b);
 	if (main_RunFrameLoop((void*) d2_ShowInventoryDialog, 0x657c7) != 0) {
 		do {
-			fcn_005c5e70();
+			d2_UpdateActiveItemSlots();
 			if (g_100f1dc != -1 || CountDisplayCounters() != 0) {
 				for (i = 0; i < 6; i++) {
 					if (g_776c60[i].item != 0 && d2_CurrentElementId == g_776c60[i].btn) {
-						if (fcn_005c61e0(*(unsigned short*) g_776c60[i].item) != 0) {
+						if (gm_LookupSpecialObject(*(unsigned short*) g_776c60[i].item) != 0) {
 							fcn_00471af0(dlg, 0);
 							d2_ConfirmUseObjekt(g_776c60[i].item);
 							d2_SetElementValue(g_776c60[i].btn, 0, 0x3e7, 0);
@@ -103,7 +103,7 @@ void __cdecl d2_ShowInventoryDialog(void)
 			}
 		} while (main_RunFrameLoop((void*) d2_ShowInventoryDialog, 0x657c7) != 0);
 	}
-	fcn_005c61c0();
-	fcn_00471e30(dlg);
+	d2_CloseInventoryPanel();
+	d2_DestroyForm(dlg);
 	fcn_0057e880(0x14, 0, 1, 0);
 }

@@ -5,7 +5,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_SetEntityLevel(int, int);
 void __cdecl fcn_004fdfe0(unsigned short*);
 
-int __cdecl fcn_004cc530(char* command, char* result)
+int __cdecl cm_ExSetEntityLevel(char* command, char* result)
 {
 	unsigned short* p;
 

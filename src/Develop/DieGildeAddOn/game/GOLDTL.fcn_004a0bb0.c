@@ -9,7 +9,7 @@ int __cdecl fcn_0050d320(char*, char);
 unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl gm_MapEntityStatRange(int);
-int __cdecl fcn_00507400(int, int);
+int __cdecl gm_GetRangeStatId(int, int);
 
 /* ADDRESS: GOLDTL 0x004a0bb0 */
 int __cdecl ai_StartBerufsausbildung(int busy, char* ent, int pending, char* out1, char* out2)
@@ -85,7 +85,7 @@ int __cdecl ai_StartBerufsausbildung(int busy, char* ent, int pending, char* out
 	*out1 = 7;
 	*(int*) (out1 + 4) = *(int*) (best + 4);
 	*out2 = 0x17;
-	*(int*) (out2 + 4) = fcn_00507400(idx, 1);
+	*(int*) (out2 + 4) = gm_GetRangeStatId(idx, 1);
 	*(int*) (out2 + 0x10) = scale;
 	return 0x3a;
 }

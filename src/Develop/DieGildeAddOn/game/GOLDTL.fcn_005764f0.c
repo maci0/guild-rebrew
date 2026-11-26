@@ -12,9 +12,9 @@ int __cdecl ahm_CheckFlag(char*);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl ahm_SendSetFloatValue(char*, float);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 int __cdecl he_GetActionProgress(char*, int*, int*, int);
-void __cdecl sub_00576750(char*, char*, char*, int);
+void __cdecl he_TriggerAhmLabEvent(char*, char*, char*, int);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_RunAhmAction0x98(char* e)
@@ -37,7 +37,7 @@ void __cdecl he_RunAhmAction0x98(char* e)
 		return;
 	}
 	if (o == 0 || ahm_CheckFlag(o) == 0 || *(int*) (e + 0x70) == -2 || *(int*) (e + 0x70) == -1) {
-		fcn_004c5620(-1, e);
+		cm_SendSetHE(-1, e);
 		return;
 	}
 	sp = *(char**) (*(char**) (o + 0x16c) + 0x65);
@@ -48,13 +48,13 @@ void __cdecl he_RunAhmAction0x98(char* e)
 	if (*(int*) (e + 0xac) != 0) {
 		ahm_SendSetFloatValue(o, (gm_RandomFloat01() + 1.0f) * 0.25f);
 		*(int*) (e + 0xac) = 0;
-		fcn_004c5620(0, e);
+		cm_SendSetHE(0, e);
 		return;
 	}
 	s = he_GetActionProgress(*(char**) (o + 0x16c), &b, &a, 1);
 	if ((gm_RandomFloat01() + 1.0f) * 0.25f > *(float*) (sp + 4)) {
-		sub_00576750(o, e, *(char**) (o + 0x16c), s);
-		fcn_004c5620(0, e);
+		he_TriggerAhmLabEvent(o, e, *(char**) (o + 0x16c), s);
+		cm_SendSetHE(0, e);
 		return;
 	}
 	switch (s) {
@@ -73,5 +73,5 @@ void __cdecl he_RunAhmAction0x98(char* e)
 		break;
 	}
 	ahm_SendSetFloatValue(o, v);
-	fcn_004c5620(0, e);
+	cm_SendSetHE(0, e);
 }

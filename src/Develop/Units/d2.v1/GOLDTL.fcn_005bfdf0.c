@@ -48,7 +48,7 @@ int __cdecl fcn_004f4830(int, Stat5bfd*);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl gm_CheckPrivilege(int, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 {
@@ -103,5 +103,5 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(d2_ShowBeweiseDetails, 0x657c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

@@ -35,7 +35,7 @@ void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestSetEntityLevel(int, int);
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004c5620(int a1, char* e);
+int __cdecl cm_SendSetHE(int a1, char* e);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
@@ -74,27 +74,27 @@ void __cdecl he_RunLevelTraining(char* t)
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
-			fcn_004c5620(-1, t);
+			cm_SendSetHE(-1, t);
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x1a9c, e->entity_index, (e->gender ? 0x18f : 0x130) + *(unsigned char*) (t + 0xb0));
 		h = *(int*) (p + 4);
 		he_PostEntityMessage(h, h, buf, 0, 0x5f4, 0);
 		*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
-		fcn_004c5620(-1, t);
+		cm_SendSetHE(-1, t);
 		return;
 	case 0:
 		e = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (t + 8)]);
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
-			fcn_004c5620(-1, t);
+			cm_SendSetHE(-1, t);
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x1a9b, e->entity_index);
 		t[0xb8]++;
 		*(short*) (t + 0x56) += 0x18;
-		fcn_004c5620((unsigned char) t[0xb8] >= 3, t);
+		cm_SendSetHE((unsigned char) t[0xb8] >= 3, t);
 		he_RegisterApEvent(*(unsigned short*) p, buf, 0, -*(int*) (t + 0xb4));
 		return;
 	}

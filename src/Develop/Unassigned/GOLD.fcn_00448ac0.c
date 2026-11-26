@@ -5,7 +5,7 @@
 
 extern float g_662d40[3];
 
-void __cdecl fcn_00455540(char* o, float* v, float* out);
+void __cdecl d3_TransformToObjectSpace(char* o, float* v, float* out);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl d3_NormalizeVector(float* v);
 
@@ -23,7 +23,7 @@ float __cdecl d3_ComputeYawToTarget(char* obj, float* target)
 	float c;
 	float rotated_x;
 
-	fcn_00455540(obj, g_662d40, a);
+	d3_TransformToObjectSpace(obj, g_662d40, a);
 	d3_TransformPoint(obj, obj + 0x4c, pos);
 	a[0] -= pos[0];
 	a[2] -= pos[2];

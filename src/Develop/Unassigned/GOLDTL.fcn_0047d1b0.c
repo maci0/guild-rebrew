@@ -5,7 +5,7 @@ extern char g_6640c0[];
 
 /* ADDRESS: GOLD 0x0047dcf0 */
 /* ADDRESS: GOLDTL 0x0047d1b0 */
-int __cdecl fcn_0047d1b0(void)
+int __cdecl ai_GetMaxActiveTradeActions(void)
 {
 	int v;
 

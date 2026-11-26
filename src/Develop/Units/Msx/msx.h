@@ -29,7 +29,7 @@ void __cdecl msx_CloseStream(int handle);
 
 void __cdecl msx_SetTrackVolume(Chan_14cc460* track, int mode);
 
-void __cdecl fcn_00420700(Chan_14cc460* hTrack, int mode);
+void __cdecl msx_StartTrackFade(Chan_14cc460* hTrack, int mode);
 void __cdecl msx_StopTrack(Chan_14cc460* hTrack, int fade);
 void __cdecl msx_StopAmbientTrack(Chan_14cc460* hTrack);
 Chan_14cc460* __cdecl msx_StartAmbientTrack(const char* name, int mode);

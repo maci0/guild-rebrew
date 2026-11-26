@@ -2,7 +2,7 @@ int __cdecl fcn_00503fe0(int, int, int);
 char* __cdecl fcn_0050dc90(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
-void __cdecl fcn_004c5fa0(int);
+void __cdecl cm_SendSetGebUpgrade(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -59,7 +59,7 @@ void __cdecl fcn_00563cc0(char* action)
 					i++;
 				} while ((int) e < 0x85a0a2);
 			}
-			fcn_004c5fa0(*(int*) (ent + 1));
+			cm_SendSetGebUpgrade(*(int*) (ent + 1));
 			cm_RequestChangeBits(*(int*) (ent + 1), 0x5a, 2, 0, 0x40);
 		}
 		he_FreeAction(action);

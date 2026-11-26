@@ -44,7 +44,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl gm_ExecZunftAufruhr(ZUNFT_ENTITY_VIEW*, ZUNFT_LEVEL2_REQUEST*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_RunZunftLevel2Dialog(int unused, char* target)
 {
@@ -93,6 +93,6 @@ int __cdecl d2_RunZunftLevel2Dialog(int unused, char* target)
 			}
 		}
 	} while (main_RunFrameLoop(d2_RunZunftLevel2Dialog, 0x677c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return 1;
 }

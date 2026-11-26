@@ -22,7 +22,7 @@ extern unsigned char g_773d75;
 void __cdecl gm_RandomizeIntArray(int, int *);
 int __cdecl _ftol(void);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_00507400(int, int);
+int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl gm_IsInRange(int);
 int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
@@ -100,7 +100,7 @@ void __cdecl gm_ReplenishOfficeCandidates(void)
 	gm_RandomizeIntArray(15, ids);
 	for (j = 0, k = 0; j < 3; j++) {
 		for (cnt = (int) score[j]; cnt < 2; cnt++) {
-			x = fcn_00507400(ids[k++], (unsigned short) gm_RandomMod(3) + 4);
+			x = gm_GetRangeStatId(ids[k++], (unsigned short) gm_RandomMod(3) + 4);
 			h = cm_RequestAllocSpieler(3, -1, -1, gm_RandomMod(8) + 0x19, -1, x, 0, gm_IsInRange(x));
 			if (h != -1) {
 				do {

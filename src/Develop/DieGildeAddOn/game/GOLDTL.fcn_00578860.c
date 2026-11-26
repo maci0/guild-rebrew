@@ -19,7 +19,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_005100f0(int, int);
@@ -41,7 +41,7 @@ void __cdecl he_StartHauchDesVerfalls(char* e)
 				io_FormatTextBuffer(buf, 0x40a2, *(unsigned short*) p);
 				he_PostEntityMessage(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 8)])->entity_id, -1, buf, 0, 0x5fa, 0);
 			}
-			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+			*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 			he_FreeAction(e);
 			return;
 		}

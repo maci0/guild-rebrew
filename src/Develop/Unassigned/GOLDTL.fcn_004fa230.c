@@ -3,7 +3,7 @@
 
 extern char g_679060[];
 
-int __cdecl fcn_005db460(void*, void*);
+int __cdecl d2_OpenVerhoerDialog(void*, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl fcn_004fa230(void* a1, void* a2)
@@ -31,7 +31,7 @@ int __cdecl fcn_004fa230(void* a1, void* a2)
 		return 1;
 	}
 	if (*(int*) a2 == 3) {
-		result = fcn_005db460(a1, a2);
+		result = d2_OpenVerhoerDialog(a1, a2);
 	}
 	return result | 2;
 }

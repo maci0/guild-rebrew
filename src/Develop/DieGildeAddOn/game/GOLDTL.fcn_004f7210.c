@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 char* __cdecl gm_LookupEntityRecordById(int entityId);
-int __cdecl fcn_005d3120(int entity, int* request);
+int __cdecl d2_RunCourtshipDialog(int entity, int* request);
 char* __cdecl he_StartHandlungSearch(int mode, int ownerId, int actionType);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, int arg);
@@ -20,7 +20,7 @@ int __cdecl gm_HandleCourtshipCommand(int entity, int* command)
 	            && (*(char*) (s + 8) == 0 || *(char*) (s + 2) == 0x0f)))) {
 		r = 2;
 		if (*command == 3) {
-			r = fcn_005d3120(entity, command) | 2;
+			r = d2_RunCourtshipDialog(entity, command) | 2;
 		} else if (*command == 1 && *(char*) (entity + 2) == 6) {
 			for (e = he_StartHandlungSearch(1, 0, 0x41); e != 0; e = he_fn_Handlung()) {
 				if (*(int*) (e + 0xac) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {

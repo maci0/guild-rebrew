@@ -8,7 +8,7 @@ extern char g_6b5c60[];
 void __cdecl fcn_004e48b0(void);
 void __cdecl sb_StopVoice(int, int);
 void __cdecl fcn_004230e0(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_004e4610(int);
 int __cdecl fcn_004e44b0(char*, char*);
 void __cdecl fcn_004e44f0(int);
@@ -23,7 +23,7 @@ int __cdecl fcn_004e1ff0(int* x)
 	x[3] = 0;
 	fcn_004230e0(x[2]);
 	if (x[1] != -1)
-		fcn_00471e30(x[1]);
+		d2_DestroyForm(x[1]);
 	if (x[0] != -1)
 		fcn_004e4610(x[0]);
 	x[0] = fcn_004e44b0(g_68d00c, g_6b5c60);

@@ -42,7 +42,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, Order_54f0c0*);
+int __cdecl cm_SendSetHE(int, Order_54f0c0*);
 void __cdecl he_FreeAction(Order_54f0c0*);
 
 
@@ -103,7 +103,7 @@ void __cdecl he_RunDuellChallenge(Order_54f0c0* o)
 			}
 			o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 			gm_AddTime(&o->stamp, 0, 2, 0);
-			o->event = fcn_004c5620(-1, o);
+			o->event = cm_SendSetHE(-1, o);
 		}
 		break;
 	}

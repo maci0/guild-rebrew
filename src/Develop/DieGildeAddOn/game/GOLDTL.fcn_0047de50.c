@@ -67,8 +67,8 @@ void __cdecl ai_CalcMeisterDiebe(Master47de*);
 void __cdecl ai_CalcMeisterRaeuber(Master47de*);
 void __cdecl ai_CalcMeisterBank(Master47de*);
 void __cdecl ai_CalcMeisterLager(Master47de*);
-void __cdecl fcn_00483480(Master47de*);
-void __cdecl fcn_00483f20(Master47de*);
+void __cdecl ai_PlanMasterProduction(Master47de*);
+void __cdecl ai_RunWorkshopMaster(Master47de*);
 void __cdecl ai_UpdateMeisterBuilding(Master47de*);
 void __cdecl ai_StartMeisterProduction(Master47de*);
 
@@ -105,9 +105,9 @@ void __cdecl ai_EvaluateMeister(Master47de* m)
 		if (k == 0xe || k == 8 || k == 0x20) {
 			ai_StartMeisterProduction(m);
 		} else if (k == 0x1d) {
-			fcn_00483480(m);
+			ai_PlanMasterProduction(m);
 		} else if (k == 0x1f) {
-			fcn_00483f20(m);
+			ai_RunWorkshopMaster(m);
 		} else {
 			ai_UpdateMeisterBuilding(m);
 		}

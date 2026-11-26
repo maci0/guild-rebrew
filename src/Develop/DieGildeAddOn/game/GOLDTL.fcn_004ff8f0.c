@@ -15,7 +15,7 @@ int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_00507400(int, int);
+int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl gm_IsNpcEntityState(void*);
 
 /* ADDRESS: GOLDTL 0x004ff8f0 */
@@ -121,7 +121,7 @@ void __cdecl gm_MaintainNpcPopulation(void)
 			rnd2 = gm_RandomMod(2);
 			passes = gm_RandomMod(0xc);
 			handle = cm_RequestAllocSpieler(3, -1, -1, 0x14, -1,
-				fcn_00507400((passes & 0xffff) + 1, (rnd2 & 0xffff) + 1), 0, 2);
+				gm_GetRangeStatId((passes & 0xffff) + 1, (rnd2 & 0xffff) + 1), 0, 2);
 			if (handle != -1) {
 				while (!cm_GetCommandStatus(handle)) {
 					fcn_00535960();

@@ -57,7 +57,7 @@ extern unsigned char* lpGebaeudePROT;
 
 
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_004c5620(int, Order_551f90*);
+int __cdecl cm_SendSetHE(int, Order_551f90*);
 void __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, const char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -124,12 +124,12 @@ void __cdecl he_RunPlagueSpread(Order_551f90* o)
 			o->ev[3] = cm_SendAllocCharacter(0xe, p->id, -1, 0x12, 0, 0, "PEST");
 			o->player = p->id;
 			gm_AddTime(&o->stamp, 0, 1, 0);
-			o->event = fcn_004c5620(0, o);
+			o->event = cm_SendSetHE(0, o);
 			he_BroadcastPlagueOutbreak();
 			return;
 		}
 		n--;
 		i = (i + 1) % 256;
 	} while (n != 0);
-	o->event = fcn_004c5620(-1, o);
+	o->event = cm_SendSetHE(-1, o);
 }

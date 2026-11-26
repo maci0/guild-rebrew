@@ -7,7 +7,7 @@ void __cdecl he_CancelEntityActions0x23(unsigned short*);
 void __cdecl fcn_005758f0(unsigned short*);
 void __cdecl fcn_004e8940(unsigned short*);
 
-void __cdecl fcn_00506a70(unsigned short* e)
+void __cdecl gm_CleanupPlayerActions(unsigned short* e)
 {
 	if (e != 0 && *e != 0xffff) {
 		he_AssignActionSlot(0, 0, *e, 0);

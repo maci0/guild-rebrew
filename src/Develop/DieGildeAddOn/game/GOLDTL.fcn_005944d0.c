@@ -32,7 +32,7 @@ void __cdecl fcn_004c35f0(void);
 void __cdecl he_AssignActionSlot(void*, int, int, int);
 void __cdecl fcn_00526120(int, int);
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(int, int);
 void __cdecl fcn_00657a73(int, int*, int);
@@ -40,7 +40,7 @@ void __cdecl fcn_0046f940(int, int*);
 void __cdecl d2_RenderProduktionStockRows(int, int, int, int, int);
 void __cdecl fcn_00595e20(void*, int);
 void __cdecl fcn_005963f0(int, int, int, void*);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 
 /* ADDRESS: GOLDTL 0x005944d0 */
@@ -302,7 +302,7 @@ found_row:
 			if (!any) {
 				if (d2_CanCloseWindowDuringTutorial() == 1) {
 					g_774654 = 1;
-					fcn_00532ef0();
+					d3_EndCameraAndUiMode();
 				}
 				goto after_input;
 			}
@@ -428,7 +428,7 @@ after_input:
 				building[0x59] = (unsigned char) ((*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161a0) +
 				                             *(int*) (d2_CurrentWindowId * 0x3cc + 0x1016198)) /
 				                            *(int*) (d2_CurrentWindowId * 0x3cc + 0x10161b4));
-				fcn_00471e30(saved);
+				d2_DestroyForm(saved);
 				d2_RestoreHudAfterDialog();
 				fcn_0057e880(0x1f, 0, 1, 0);
 				return 0;

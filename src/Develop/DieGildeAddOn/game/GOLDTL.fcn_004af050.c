@@ -27,7 +27,7 @@ int __cdecl gm_IsSlotActivePerson(unsigned short a1);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLD 0x4aef10 */
-int __cdecl fcn_004af050(int mode, int* pairs, int idx, char* text, void* out)
+int __cdecl hst_SelectRichestPerson(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
 	int best;

@@ -10,7 +10,7 @@ int __cdecl fcn_00504f30(int, int);
 int __cdecl fcn_00526120(int, int);
 void* __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(void*);
-void __cdecl fcn_00471e30(void*);
+void __cdecl d2_DestroyForm(void*);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 int __cdecl fcn_0050b710(int, char);
 int __cdecl d2_SetForm(void*, int);
@@ -87,5 +87,5 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_RunSellGebaeudeDialog, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

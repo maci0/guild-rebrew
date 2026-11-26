@@ -3,7 +3,7 @@
 
 int __cdecl fcn_00426ba0(int);
 
-int __cdecl fcn_0040ffe0(int* a)
+int __cdecl ecmd_KillSampleBank(int* a)
 {
 	fcn_00426ba0(*a);
 	return 0;

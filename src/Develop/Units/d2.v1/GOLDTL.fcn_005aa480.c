@@ -1,7 +1,7 @@
 int __cdecl d2_AddElementToWindow(int, int, int, int); int __cdecl fcn_00470820(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl gm_CheckZunftPreismanipulation(char*);
@@ -9,7 +9,7 @@ int __cdecl fcn_004eb3e0(int, int*);
 int __cdecl io_AppendText();
 int __cdecl d2_CheckActionBlocker(void*, int);
 int __cdecl fcn_00526120(void*, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl fcn_005340f0(int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -118,6 +118,6 @@ void __cdecl fcn_005aa480(void)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005aa480, 0x677c7) != 0);
-	fcn_00471e30(h);
-	fcn_00532ef0();
+	d2_DestroyForm(h);
+	d3_EndCameraAndUiMode();
 }

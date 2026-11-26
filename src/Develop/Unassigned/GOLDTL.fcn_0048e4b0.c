@@ -15,7 +15,7 @@ extern unsigned char g_773d75;
 
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl cm_SendCopyEntityData(char* msg);
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048e4b0 */
 int __cdecl fcn_0048e4b0(char* entity, char* a2, char* a3)
@@ -42,7 +42,7 @@ int __cdecl fcn_0048e4b0(char* entity, char* a2, char* a3)
 	found = -1;
 	filter.mask = 0x7b4c4a0;
 	filter.b = 0;
-	fcn_004a5e60(entity, 0, filter, 0, 100.0f, &found);
+	ai_FindEntityInFavorRange(entity, 0, filter, 0, 100.0f, &found);
 	*(int*) (msg + 0x58) = found;
 	cm_SendCopyEntityData(msg);
 	return 1;

@@ -64,7 +64,7 @@ int __cdecl ls_LoadAlchemyDrawSlots(void* stream);
 int __cdecl ls_LoadHighOfficeTargets(void* stream, int version);
 int __cdecl fcn_004c0840(int stream);
 void __cdecl d3_RefreshBuildingPennants(void);
-void __cdecl fcn_00516f60(void);
+void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl fcn_00516de0(int a, char b);
 
 /* ADDRESS: GOLDTL 0x00521920 */
@@ -248,7 +248,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	CloseVfsStream(stream);
 	d3_RefreshBuildingPennants();
 	fcn_00514f10();
-	fcn_00516f60();
+	d3_ResetWorldSceneState();
 	fcn_00516de0(g_6b8300, 1);
 	strcpy(g_7e2480, g_7f3a5c);
 	return 1;

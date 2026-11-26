@@ -11,7 +11,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 char* __cdecl ahm_FindRecipeSlot(char*, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_005b3190(char*, char*, int, int);
+void __cdecl he_NotifyDomizil03(char*, char*, int, int);
 void __cdecl fcn_004eea30(char*, int, float);
 void __cdecl he_AssignActionSlot(char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
@@ -46,7 +46,7 @@ void __cdecl he_RunAhmRefineRecipe(char* u)
 				q = fcn_00502cd0(*(int*) (*(char**) (h + 0x16c) + 0x5d), 2, 6, 0, 0x24b);
 				o = gm_LookupEntityRecordById(*(int*) (u + 0xc));
 				if (o != 0) {
-					fcn_005b3190(o, h, q, *(int*) (u + 0xb0));
+					he_NotifyDomizil03(o, h, q, *(int*) (u + 0xb0));
 				}
 				fcn_004eea30(h, *(int*) (u + 0xb0), *(float*) (u + 0xb4) + *(float*) (s + 4));
 				he_AssignActionSlot(0, 0, *(unsigned short*) h, 0);

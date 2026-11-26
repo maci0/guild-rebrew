@@ -81,7 +81,7 @@ extern char g_6b5c60[];
 
 
 Group* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_004c5620(int, Order*);
+void __cdecl cm_SendSetHE(int, Order*);
 Entity* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_ResolveDinnerParty(Party*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -118,7 +118,7 @@ void __cdecl he_UpdateFest(Order* o)
 		g = fcn_00502cd0(pl->home, 1, 0, 0x17);
 		if (g == 0) {
 			o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
-			fcn_004c5620(-1, o);
+			cm_SendSetHE(-1, o);
 			return;
 		}
 	}
@@ -184,11 +184,11 @@ void __cdecl he_UpdateFest(Order* o)
 			he_PostEntityMessage(party.ent->id, -1, msg, 0x20, 0x5fd, g_6b5c60);
 		}
 		o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
-		fcn_004c5620(-1, o);
+		cm_SendSetHE(-1, o);
 		return;
 	case 1:
 		o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
-		fcn_004c5620(-1, o);
+		cm_SendSetHE(-1, o);
 		return;
 	}
 }

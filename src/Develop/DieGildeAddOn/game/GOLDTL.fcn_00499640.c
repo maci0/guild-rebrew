@@ -27,16 +27,16 @@ typedef struct {
 	int pad2;
 	int pad3;
 	float value;
-} Msg499640;
+} AI_BEATUP_MSG;
 
 /* ADDRESS: GOLDTL 0x00499640 */
-int __cdecl fcn_00499640(int unused0, char* e, int a2, Msg499640* out1, Msg499640* out2)
+int __cdecl ai_StartBeatUp(int unused0, char* e, int busy, AI_BEATUP_MSG* out1, AI_BEATUP_MSG* out2)
 {
 	int vb;
 	int va;
 	int idx;
-	Msg499640 msg0;
-	Msg499640 msg1;
+	AI_BEATUP_MSG msg0;
+	AI_BEATUP_MSG msg1;
 	int mask;
 	char rec[0x24];
 	int buf[0x88];
@@ -46,7 +46,7 @@ int __cdecl fcn_00499640(int unused0, char* e, int a2, Msg499640* out1, Msg49964
 	char kind;
 
 	va = fcn_0050d320(e, g_773d75);
-	if (a2 != 0) {
+	if (busy != 0) {
 		goto fail;
 	}
 	memset(buf, 0, sizeof(buf));

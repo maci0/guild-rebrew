@@ -15,7 +15,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_004f2a10(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_ShowGraveyardConfirm(int building, int itemId, unsigned char slotIndex)
 {
@@ -51,6 +51,6 @@ int __cdecl d2_ShowGraveyardConfirm(int building, int itemId, unsigned char slot
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowGraveyardConfirm, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return r;
 }

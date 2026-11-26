@@ -23,7 +23,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 /* ADDRESS: GOLDTL 0x005c4ec0 */
-int __cdecl fcn_005c4ec0(int a0, char* ownerEntity, int requestedAmount, char* a3)
+int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int requestedAmount, char* outLog)
 {
 	char buf[0x100];
 	char* ent;
@@ -45,7 +45,7 @@ int __cdecl fcn_005c4ec0(int a0, char* ownerEntity, int requestedAmount, char* a
 	remaining = requestedAmount;
 	amount = got < remaining ? got : remaining;
 	if (amount > 0) {
-		cm_RequestMoveCredits(a0, *(int*) (ownerEntity + 4), g_773d75, amount);
+		cm_RequestMoveCredits(receiverId, *(int*) (ownerEntity + 4), g_773d75, amount);
 		remaining -= amount;
 		written = amount;
 	}
@@ -150,13 +150,13 @@ int __cdecl fcn_005c4ec0(int a0, char* ownerEntity, int requestedAmount, char* a
 		}
 	}
 	if (total != 0) {
-		cm_RequestMoveCredits(a0, -1, g_773d75, total);
+		cm_RequestMoveCredits(receiverId, -1, g_773d75, total);
 		io_FormatTextBuffer(buf, 0x18eb, total);
-		strcat(a3, buf);
+		strcat(outLog, buf);
 		return written;
 	}
 	if (remaining > 0) {
-		cm_RequestTransferCurrencyNoKill(a0, *(int*) (ownerEntity + 4), g_773d75, remaining);
+		cm_RequestTransferCurrencyNoKill(receiverId, *(int*) (ownerEntity + 4), g_773d75, remaining);
 	}
 	return written;
 }

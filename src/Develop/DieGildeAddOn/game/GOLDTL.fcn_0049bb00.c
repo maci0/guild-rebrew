@@ -4,7 +4,7 @@ typedef struct Stat {
 // SIZE 0x24
 
 void __cdecl fcn_004f4830(int a, Stat* st);
-int __cdecl fcn_004a4680(float* o1, float* o2, int a3, char* e, Stat* st);
+int __cdecl ai_ComputeActionScore(float* o1, float* o2, int a3, char* e, Stat* st);
 int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, char* p);
 
 /* ADDRESS: GOLDTL 0x0049bb00 */
@@ -19,7 +19,7 @@ int __cdecl ai_ScoreUseParfuem(float* o1, float* o2, int idx, char* entity, int 
 	}
 	fcn_004f4830(0x11, &st);
 	if (st.v[6]) {
-		return fcn_004a4680(o1, o2, idx, entity, &st);
+		return ai_ComputeActionScore(o1, o2, idx, entity, &st);
 	}
 	return fcn_004a4410(o1, o2, idx, entity, extra_a, extra_b, p);
 }

@@ -24,7 +24,7 @@ void __cdecl evt_WaitForScriptExit(int a0);
 void __cdecl d3snd_FreeObjectSoundBanks(void);
 void __cdecl fcn_00516ed0(int a0);
 void __cdecl fcn_0043a9c0(int a0);
-void __cdecl fcn_00516f60(void);
+void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl d2_RunSchmiedeInteriorHud(int a0);
 void __cdecl d2_RunHolzfaellerInteriorHud(int a0);
 void __cdecl d3_HideSubtreeEntries(int a0);
@@ -213,7 +213,7 @@ void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 	*(int*) &g_6791c8 = 0;
 	g_67530c = -1;
 	g_675310 = -1;
-	fcn_00516f60();
+	d3_ResetWorldSceneState();
 	*(int*) &g_7e3a40 = s0;
 	*(int*) &g_7e3a44 = s1;
 	*(int*) &g_7e3a48 = s2;

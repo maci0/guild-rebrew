@@ -17,7 +17,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl io_AppendText(char *, ...);
 int __cdecl main_RunFrameLoop(void *, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl fcn_005e6ba0(void);
 int __cdecl fcn_004a6bb0(char *, void *);
 void __cdecl fcn_005e6dd0(void);
@@ -266,6 +266,6 @@ int __cdecl fcn_005e6e00(void)
     while (main_RunFrameLoop((void *)fcn_005e6e00, 0x777c7)) {
         if (g_14ce8e0 || B(0x14cf701)) g_774654 = 1;
     }
-    fcn_00471e30(dialog);
+    d2_DestroyForm(dialog);
     return 0;
 }

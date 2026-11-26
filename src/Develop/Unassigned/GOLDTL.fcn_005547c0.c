@@ -3,7 +3,7 @@
 
 int __cdecl fcn_0047dcf0(unsigned short*);
 
-int __cdecl fcn_005547c0(unsigned short* e)
+int __cdecl he_IsEntityEligibleForAccident(unsigned short* e)
 {
 	int ok;
 	char* c;

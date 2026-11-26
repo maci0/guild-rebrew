@@ -8,7 +8,7 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void* __cdecl fcn_00470820(int, int, void*);
 void __cdecl d2_CenterDialogWindows(void*);
-void __cdecl fcn_00471e30(void*);
+void __cdecl d2_DestroyForm(void*);
 void __cdecl d2_SetForm(void*, int);
 int __cdecl d2_GetWindowListItem(void*, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
@@ -23,7 +23,7 @@ void __cdecl cm_SendTraceEnd(void*);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_SendCopyEntityData(void*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 typedef struct Dlg005ad000 {
 	int ctl;
@@ -50,13 +50,13 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 	obj = gm_LookupEntityRecordById(*(int*) (msg.pkt + 4));
 	if (obj == 0) {
 		fcn_00526120(*(int*) 0x14ab9f4, 0);
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 		return;
 	}
 	if (he_StartHandlungSearch(2, 0, 0x39, 2, *(unsigned short*) &g_774970) != 0) {
 		io_FormatTextBuffer(msg.pkt + 0x110, 0x19b6, *(unsigned short*) obj);
 		fcn_00526120((int) (msg.pkt + 0x110), 0);
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 		return;
 	}
 	dlg = fcn_00470820(0, 0, (void*) 0x6ab180);
@@ -95,6 +95,6 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) 0x5ad000, 0x677c7) != 0);
-	fcn_00471e30(dlg);
-	fcn_00532ef0();
+	d2_DestroyForm(dlg);
+	d3_EndCameraAndUiMode();
 }

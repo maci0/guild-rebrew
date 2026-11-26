@@ -71,7 +71,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	if (flags & 8)
 		d2_DrawYellowHistoryGraph(*(GRAPH_VALUE *) &g, w - 1, h);
 	if (flags & 0x10)
-		fcn_005d3ad0(*(GRAPH_VALUE *) &g, w - 1, h);
+		d2_DrawMagentaHistoryGraph(*(GRAPH_VALUE *) &g, w - 1, h);
 	d2_PlotRadius = 0;
 	fcn_00472c30(0x2d, 8, 0x2d, h - 0x13, 0x10, 0x10, 0x10);
 	fcn_00472c30(0x2d, h - 0x13, w - 0x3b, h - 0x13, 0x10, 0x10, 0x10);

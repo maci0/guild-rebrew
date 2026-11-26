@@ -28,10 +28,10 @@ int __cdecl io_AppendText(int a1, ...);
 int __cdecl d2_GetWindowListItem(int a1, int a2, int a3);
 int __cdecl main_RunFrameLoop(void* a1, int a2);
 void __cdecl cm_SendCopyEntityData(struct msg58* m);
-void __cdecl fcn_00471e30(int a1);
+void __cdecl d2_DestroyForm(int a1);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl fcn_005305a0(void);
-int __cdecl fcn_00532ef0(void);
+int __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl fcn_00526120(int a1, int a2);
 /* ADDRESS: GOLDTL 0x0058fbd0 */
 int __cdecl fcn_0058fbd0(char* gebaeude)
@@ -99,8 +99,8 @@ nofree:
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_0058fbd0, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	d2_RestoreHudAfterDialog();
 	fcn_005305a0();
-	return fcn_00532ef0();
+	return d3_EndCameraAndUiMode();
 }

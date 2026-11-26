@@ -49,7 +49,7 @@ Rec* __cdecl gm_LookupSpecialObjectRecord(int key, int* out);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-char* __cdecl fcn_005c61e0(int);
+char* __cdecl gm_LookupSpecialObject(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00525ef0(void);
@@ -61,7 +61,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl gm_UseSpecialObject(Ent* e, Req* r);
 
 int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
@@ -81,7 +81,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 		dlg = fcn_00470820(0, 0, "panel\\useobj");
 		d2_CenterDialogWindows(dlg);
 		d2_SetForm(dlg, 1);
-		if ((rec->mask & ((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->mask) == 0 && fcn_005c61e0(id = *item) != 0) {
+		if ((rec->mask & ((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->mask) == 0 && gm_LookupSpecialObject(id = *item) != 0) {
 			io_AppendText(0xfe3, id * 2 + 0x9a8, rec->price, id * 2 + 0x9a8);
 		} else {
 			io_AppendText(0xfe4, *item * 2 + 0x9a8);
@@ -116,7 +116,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 				}
 			}
 		} while (main_RunFrameLoop(d2_ConfirmUseObjekt, 0x677c7) != 0);
-		fcn_00471e30(dlg);
+		d2_DestroyForm(dlg);
 		if (buy == 0) {
 			return 0;
 		}

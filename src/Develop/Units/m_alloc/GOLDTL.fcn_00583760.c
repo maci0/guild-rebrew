@@ -35,7 +35,7 @@ extern int g_774a0c;
 extern int g_1040494;
 int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 int* __cdecl m_alloc(int size, char* tag);
-void __cdecl fcn_00580cf0(int*);
+void __cdecl d2_FreeTutorialNodes(int*);
 void __cdecl d2_GrantTutorialLumber(void);
 void __cdecl fcn_0057fb20(void);
 void __cdecl fcn_0057fb60(void);
@@ -505,6 +505,6 @@ int* __cdecl d2_CreateTutorialChapter5(void)
 	g_774a0c = sb_LoadLocalizedSampleBank(g_6a9024, 0);
 	return first;
 fail:
-	fcn_00580cf0(first);
+	d2_FreeTutorialNodes(first);
 	return 0;
 }

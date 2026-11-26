@@ -88,7 +88,7 @@ void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005cff20 */
@@ -264,6 +264,6 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 	if (holder != -1) {
 		d2_ClearRadioGroup(holder);
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 }

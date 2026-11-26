@@ -20,7 +20,7 @@ void __cdecl cm_SendCopyEntityData(int a1);
 void __cdecl fcn_004c35f0(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(int a, int b);
-void __cdecl fcn_00471e30(int dlg);
+void __cdecl d2_DestroyForm(int dlg);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0059d6b0 */
 void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
@@ -127,5 +127,5 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 			}
 		}
 	} while (main_RunFrameLoop(0x59d6b0, 0x677c7));
-	fcn_00471e30(option);
+	d2_DestroyForm(option);
 }

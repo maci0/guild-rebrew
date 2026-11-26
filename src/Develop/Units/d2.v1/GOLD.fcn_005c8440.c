@@ -54,7 +54,7 @@ void __cdecl fcn_005c9090(char*, int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl fcn_005c8440(void)
 {
@@ -116,6 +116,6 @@ void __cdecl fcn_005c8440(void)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) fcn_005c8440, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	fcn_0057e880(10, 0, 1, 0);
 }

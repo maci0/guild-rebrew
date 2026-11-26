@@ -33,10 +33,10 @@ void __cdecl fcn_00587f40(char*);
 void __cdecl fcn_005875c0(char*, float);
 void __cdecl fcn_00587a50(char*);
 void __cdecl d2_UpdateDealSummaryLog(char*);
-void __cdecl fcn_00588710(int, int, int, int, int);
+void __cdecl d2_SwitchKanoneMode(int, int, int, int, int);
 int __cdecl fcn_00587f90(char*);
-int __cdecl fcn_00588aa0(void*, char*);
-void __cdecl fcn_00471e30(int);
+int __cdecl d2_FireKanone(void*, char*);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_DestroyElement(int);
 char __cdecl d3_DestroyObject(int);
 void __cdecl fcn_00533a40(char*);
@@ -47,7 +47,7 @@ void __cdecl fcn_00443230(int);
 void __cdecl fcn_00528fd0(void);
 
 /* ADDRESS: GOLDTL 0x00586c10 */
-void __cdecl fcn_00586c10(char* obj)
+void __cdecl d2_RunKanoneUI(char* obj)
 {
     int flags;
     int tbl;
@@ -214,7 +214,7 @@ void __cdecl fcn_00586c10(char* obj)
     *(int*)(g_77dda0 + 0x70) = -1;
     *(int*)(g_77dda0 + 0x38) = -1;
     *(int*)(g_77dda0 + 0x0) = -1;
-    while (main_RunFrameLoop((int)fcn_00586c10, 0x2656c7)) {
+    while (main_RunFrameLoop((int)d2_RunKanoneUI, 0x2656c7)) {
         fcn_005270c0(0);
         *(unsigned int*) ((char*) S + 0x6c) = (unsigned int)g_6b7fac;
         elapsedTicks = (unsigned int)g_6b7fac - *(unsigned int*) ((char*) S + 0x68);
@@ -232,14 +232,14 @@ void __cdecl fcn_00586c10(char* obj)
             if (*(int*) (res + 4) == 0) {
                 if (g_100f1dc != -1) {
                     if (d2_CurrentElementId == *(int*) ((char*) S + 0xc8))
-                        fcn_00588710((int) obj, (int) S, (int) res, 0, 0x2656c7);
+                        d2_SwitchKanoneMode((int) obj, (int) S, (int) res, 0, 0x2656c7);
                     else if (d2_CurrentElementId == *(int*) ((char*) S + 0xcc))
-                        fcn_00588710((int) obj, (int) S, (int) res, 1, 0x2656c7);
+                        d2_SwitchKanoneMode((int) obj, (int) S, (int) res, 1, 0x2656c7);
                     else if (d2_CurrentElementId == *(int*) ((char*) S + 0xd0))
-                        fcn_00588710((int) obj, (int) S, (int) res, 2, 0x2656c7);
+                        d2_SwitchKanoneMode((int) obj, (int) S, (int) res, 2, 0x2656c7);
                 }
                 if (*(int*) (res + 4) == 0 && fcn_00587f90((char*) S)) {
-                    fcn_00588aa0(S, obj);
+                    d2_FireKanone(S, obj);
                     *(int*)(g_77dda0 + 0x70) = -1;
                     *(int*)(g_77dda0 + 0x38) = -1;
                     *(int*)(g_77dda0 + 0x0) = -1;
@@ -253,9 +253,9 @@ void __cdecl fcn_00586c10(char* obj)
     sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
     while (!(*(u8*) sp & 4))
         main_RunFrameLoop(0, flags);
-    fcn_00471e30(*(int*) ((char*) S + 0xa4));
-    fcn_00471e30(*(int*) ((char*) S + 0xc0));
-    fcn_00471e30(*(int*) ((char*) S + 0x74));
+    d2_DestroyForm(*(int*) ((char*) S + 0xa4));
+    d2_DestroyForm(*(int*) ((char*) S + 0xc0));
+    d2_DestroyForm(*(int*) ((char*) S + 0x74));
     d2_DestroyElement(*(int*) ((char*) S + 0xd4));
     d2_DestroyElement(*(int*) ((char*) S + 0xd8));
     if (*(int*) ((char*) S + 0x8c) != 0)

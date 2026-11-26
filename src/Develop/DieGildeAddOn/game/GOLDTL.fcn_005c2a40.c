@@ -48,7 +48,7 @@ void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_SendTraceEnd(char*);
 void __cdecl cm_SendCopyEntityData(char*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl fcn_0046f940(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -233,5 +233,5 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 		             (int) (unsigned char) *(base + 0x21) - total - removed,
 		             0x17d4);
 	} while (main_RunFrameLoop((void*) 0x5c2a40, 0x657c7) != 0);
-	fcn_00471e30(han);
+	d2_DestroyForm(han);
 }

@@ -48,7 +48,7 @@ typedef struct Col {
 } Col;
 
 char* __cdecl d3_FindTextureByName(const char*);
-int __cdecl fcn_0045be40(char*);
+int __cdecl d3_ResolveTexturePath(char*);
 int __cdecl fcn_0045c290(unsigned int, int*);
 void __cdecl fcn_0045c310(Tex*, char);
 void __cdecl fcn_0045c380(Tex*, unsigned int, unsigned int, unsigned int);
@@ -158,7 +158,7 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 				fcn_0045c380(t, *(unsigned int*) &c, flags, flags2);
 				return t;
 	}
-	avail = fcn_0045be40(name);
+	avail = d3_ResolveTexturePath(name);
 	if (avail != 0) {
 		avail = vfs_ReadBmpInfo(avail, &width, &height, (unsigned int*) &fmt) & 0xff;
 	} else {

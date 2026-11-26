@@ -18,7 +18,7 @@ int __cdecl cm_SendLogAction(char*);
 void __cdecl cm_SendTraceEnd(char*);
 int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 extern int g_14ce8e0, d2_CurrentElementId, g_774654;
 #define SHP_REC (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]))
 #define SHP_ID (*(unsigned short*) SHP_REC)
@@ -117,6 +117,6 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowGiftDialog, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return r;
 }

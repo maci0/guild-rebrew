@@ -9,7 +9,7 @@ extern int g_7e1d40;
 void __cdecl fcn_0053f4b0(void);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_00469e70(void);
 void __cdecl fcn_00476970(int);
 void __cdecl fcn_00473150(unsigned char*);
@@ -28,7 +28,7 @@ void __cdecl fcn_0053f720(void)
 	while ((*p & 4) == 0) {
 		main_RunFrameLoop(0, flags);
 	}
-	fcn_00471e30(g_7e1d40);
+	d2_DestroyForm(g_7e1d40);
 	fcn_00469e70();
 	fcn_00476970(g_77250c);
 	d2_SuppressOverlay = 0;

@@ -43,7 +43,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 /* One result variable set on every path keeps the two arms' tails apart (no
    cross-jump). Each arm has its own message struct: with one shared struct,
    arm 2's b4 store written before the e+4 load issues ahead of the push. */
-int __cdecl fcn_005dc990(unsigned char* obj, int* arg)
+int __cdecl gm_UseSkillModifier82Stats3And2(unsigned char* obj, int* request)
 {
 	Req req;
 	char text[0x100];
@@ -82,7 +82,7 @@ int __cdecl fcn_005dc990(unsigned char* obj, int* arg)
 			result = 0;
 		}
 	} else {
-		e = gm_LookupEntityRecordById(arg[1]);
+		e = gm_LookupEntityRecordById(request[1]);
 		if (e != 0) {
 			struct msg m;
 

@@ -31,13 +31,13 @@ void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_004c6b20(int, int, int);
+void __cdecl cm_SendBlockCharacter(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00532ef0(void);
-int __cdecl fcn_00471e30(int);
+void __cdecl d3_EndCameraAndUiMode(void);
+int __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005aeab0 */
-void __cdecl fcn_005aeab0(char* rec)
+void __cdecl d2_RunLoesegeldDialog(char* rec)
 {
 	char text[0x400];
 	char line[0x200];
@@ -138,7 +138,7 @@ void __cdecl fcn_005aeab0(char* rec)
 				cm_AppendPacketFieldDelta(4, 1, (int) (rec - g_aed32c) + 0x65,
 				    &flags);
 				cm_RequestChangeAttribute();
-				fcn_004c6b20(*(int*) (ent + 4),
+				cm_SendBlockCharacter(*(int*) (ent + 4),
 				    -(int) *(unsigned char*) (ent + 0x1b1), 0);
 				io_FormatTextBuffer(line, 0x19c6, *(unsigned short*) ent);
 				fcn_00526120(line, 0);
@@ -149,9 +149,9 @@ void __cdecl fcn_005aeab0(char* rec)
 				g_774654 = 1;
 			}
 		}
-		if (main_RunFrameLoop((void*) fcn_005aeab0, 0x677c7) == 0) {
-			fcn_00532ef0();
-			fcn_00471e30((int) ctx);
+		if (main_RunFrameLoop((void*) d2_RunLoesegeldDialog, 0x677c7) == 0) {
+			d3_EndCameraAndUiMode();
+			d2_DestroyForm((int) ctx);
 			return;
 		}
 	}

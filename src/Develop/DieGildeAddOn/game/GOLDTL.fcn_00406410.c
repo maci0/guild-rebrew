@@ -20,7 +20,7 @@ struct anim_406410 {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 struct anim_406410* __cdecl ch_AttachAni(char* obj, char* name, int mode);
-void __cdecl fcn_00436a00(int h, struct anim_406410* a, int n);
+void __cdecl d3_SetAnimFrame(int h, struct anim_406410* a, int n);
 int __cdecl ch_FinishAnimation(char* ev);
 int __cdecl d3_GetContextIndex(char* p);
 void __cdecl d3_SelectSceneContext(int a, int b);
@@ -40,7 +40,7 @@ void __cdecl ch_RunAnimationEvent(char* ev)
 				a = ch_AttachAni(*(char**) (ev + 0x14), ev + 0xf0, 1);
 				*(struct anim_406410**) (obj + 0x70) = a;
 				*(struct anim_406410**) (obj + 0x74) = a;
-				fcn_00436a00(*(int*) (obj + 0x34), a, -1);
+				d3_SetAnimFrame(*(int*) (obj + 0x34), a, -1);
 			} else {
 				a = ch_AttachAni(*(char**) (ev + 0x14), ev + 0xf0, 1);
 				*(struct anim_406410**) (obj + 0x70) = a;

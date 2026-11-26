@@ -23,8 +23,8 @@ double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00526120(int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_004c5620(int, int);
-void __cdecl fcn_00471e30(int);
+int __cdecl cm_SendSetHE(int, int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005c3cc0 */
 void __cdecl d2_RunFireExtinguishDialog(char* e)
@@ -81,7 +81,7 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 					if (ent != 0) {
 						do {
 							if (*(int*) (ent + 0xac) == *(int*) (e + 1)) {
-								*(int*) (ent + 0x84) = fcn_004c5620(-1, (int) ent);
+								*(int*) (ent + 0x84) = cm_SendSetHE(-1, (int) ent);
 								fcn_00526120((*(int*) 0x14ab2fc), 4);
 								goto done;
 							}
@@ -104,5 +104,5 @@ next:
 			break;
 		}
 	} while (1);
-	fcn_00471e30(win);
+	d2_DestroyForm(win);
 }

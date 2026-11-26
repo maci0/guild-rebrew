@@ -43,7 +43,7 @@ int __cdecl fcn_00472640(int, int);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl d2_OpenMessageBox(int, int);
 int __cdecl nt_ListenForServerAnnouncements(int, int, char*, int);
-int __cdecl fcn_00471e30(int);
+int __cdecl d2_DestroyForm(int);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_ClearRadioGroup(int);
 int* __cdecl d2_CreateRadioGroup(int);
@@ -130,7 +130,7 @@ unsigned int __cdecl d2_ShowServerBrowser(int a0)
 				d2_SuppressOverlay = 1;
 				v6 = d2_OpenMessageBox(g_14ac5e4, 0);
 				v36 = nt_ListenForServerAnnouncements(0x3039, 3000, ((char*) hosts), 8);
-				fcn_00471e30(v6);
+				d2_DestroyForm(v6);
 				v32 = 0;
 				d2_SuppressOverlay = 0;
 				d2_SetForm(dialog, 2);
@@ -348,6 +348,6 @@ label_539d27:
 			d2_ClearRadioGroup(group);
 		}
 	}
-	fcn_00471e30(dialog);
+	d2_DestroyForm(dialog);
 	return v38;
 }

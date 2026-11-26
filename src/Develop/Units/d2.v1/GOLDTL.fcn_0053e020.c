@@ -14,7 +14,7 @@ int __cdecl d2_UpdateRadioGroup();
 int __cdecl fcn_00470820();
 int __cdecl fcn_00471af0();
 int __cdecl d2_CenterDialogWindows();
-int __cdecl fcn_00471e30();
+int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
 int __cdecl d2_SetForm();
 int __cdecl fcn_004730c0();
@@ -29,7 +29,7 @@ typedef struct {
 } Name5_53e020;
 
 int __cdecl gm_FindHeadIconIndex();
-Name6_53e020 __cdecl fcn_00506d50(int);
+Name6_53e020 __cdecl gm_GetStatRecord(int);
 int __cdecl io_AppendText();
 int __cdecl d2_OpenMessageBox();
 int __cdecl main_RunFrameLoop();
@@ -129,7 +129,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 					}
 				} else if (r == 0) {
 					if (d2_ShowChooseProfessionDialog(0xc6) != 0) {
-						v11 = fcn_00506d50((unsigned char) g_7e23e3);
+						v11 = gm_GetStatRecord((unsigned char) g_7e23e3);
 						*(Name5_53e020*) g_7e2430 = *(Name5_53e020*) &v11;
 						g_7e2468 = gm_FindHeadIconIndex(0x6a3db4) + 0x639;
 					} else {
@@ -158,7 +158,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 		}
 	}
 	d2_ClearRadioGroup(group);
-	fcn_00471e30(dialog);
+	d2_DestroyForm(dialog);
 	if (v12 != 0) {
 		v3 = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 100, 1);
 		*(int*) &main_LoopFlags = 0x12d6;

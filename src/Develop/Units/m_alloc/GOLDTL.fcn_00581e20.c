@@ -16,7 +16,7 @@ typedef struct TaskNode {
 extern int g_1040494;
 
 void* __cdecl m_alloc(int, char*);
-void __cdecl fcn_00580cf0(int*);
+void __cdecl d2_FreeTutorialNodes(int*);
 int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 
 #pragma optimize("y", off)
@@ -888,7 +888,7 @@ if (g_1040494 == 0x320) {
 	p[0x1c] = (int) m_alloc(0x74, (char*) 0x6a8a18);
 	if (p[0x1c] == 0) {
 fail:
-		fcn_00580cf0(first);
+		d2_FreeTutorialNodes(first);
 		return 0;
 	}
 

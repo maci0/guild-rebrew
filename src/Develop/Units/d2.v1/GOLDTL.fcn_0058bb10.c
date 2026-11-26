@@ -76,7 +76,7 @@ void __cdecl fcn_0058b440(unsigned int, unsigned int*, int, int);
 char __cdecl fcn_004f1790(int, void*);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x0058bb10 */
 void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
@@ -220,7 +220,7 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 			selft = st.selected;
 		}
 		if (main_RunFrameLoop((void*) 0x58bb10, 0x677c7) == 0) {
-			fcn_00471e30(st.handle);
+			d2_DestroyForm(st.handle);
 			return;
 		}
 	}

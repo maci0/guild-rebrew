@@ -43,7 +43,7 @@ int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLD 0x004e53e0 */
 /* ADDRESS: GOLDTL 0x004e6e20 */
@@ -146,6 +146,6 @@ int __cdecl d2_ShowMessageBox(char *text, unsigned int flags)
 	}
 	g_772f74 = 0;
 	d2_ClearRadioGroup(list);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return result;
 }

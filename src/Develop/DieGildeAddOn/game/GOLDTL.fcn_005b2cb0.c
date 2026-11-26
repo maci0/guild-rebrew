@@ -6,7 +6,7 @@ int  __cdecl fcn_0051e070(void);
 void __cdecl io_FormatTextBuffer(void*, int, int, int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
-void __cdecl fcn_005b2cb0(void* entity, void* otherEntity, int a3, int a4, int a5, int a6)
+void __cdecl he_NotifyFriedhofEvent08(void* entity, void* otherEntity, int targetPtr, int actionKind, int amount, int bonus)
 {
 	char t;
 
@@ -15,12 +15,12 @@ void __cdecl fcn_005b2cb0(void* entity, void* otherEntity, int a3, int a4, int a
 		switch (fcn_0051e070()) {
 		case 0:
 		case 2:
-			io_FormatTextBuffer(g_774a80, 0x414e, *(unsigned short*) otherEntity, a3,
-			    *(int*) (0x665f78 + a4 * 4), a5, a6);
+			io_FormatTextBuffer(g_774a80, 0x414e, *(unsigned short*) otherEntity, targetPtr,
+			    *(int*) (0x665f78 + actionKind * 4), amount, bonus);
 			break;
 		case 1:
 			io_FormatTextBuffer(g_774a80, 0x414e, *(unsigned short*) otherEntity,
-			    *(int*) (0x665f78 + a4 * 4), a3, a5, a6);
+			    *(int*) (0x665f78 + actionKind * 4), targetPtr, amount, bonus);
 			break;
 		}
 		he_PostEntityMessage(*(int*) ((char*) entity + 4), -1, g_774a80, 0, 0x5fc, g_6ab49c);

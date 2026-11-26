@@ -14,7 +14,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ShowWirtshausRules(void)
 {
@@ -39,5 +39,5 @@ void __cdecl d2_ShowWirtshausRules(void)
 			g_774654 = 1;
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

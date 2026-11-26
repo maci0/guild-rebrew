@@ -24,7 +24,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_005a31b0(char*, int);
 
 void __cdecl fcn_00533880(void);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d3_SelectTavernCardTableCity(void)
 {
@@ -75,5 +75,5 @@ void __cdecl d3_SelectTavernCardTableCity(void)
 		}
 	}
 	fcn_00533880();
-	fcn_00532ef0();
+	d3_EndCameraAndUiMode();
 }

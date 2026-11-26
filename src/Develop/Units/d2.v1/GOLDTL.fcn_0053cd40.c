@@ -31,9 +31,9 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_AddToRadioGroup(int, int);
 int __cdecl main_RunFrameLoop(int (__cdecl*)(int), int);
 void __cdecl d2_UpdateRadioGroup(int);
-unsigned char __cdecl fcn_00507400(int, int);
+unsigned char __cdecl gm_GetRangeStatId(int, int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_ShowChooseProfessionDialog(int flags)
 {
@@ -79,7 +79,7 @@ int __cdecl d2_ShowChooseProfessionDialog(int flags)
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 11; i++) {
 				if (d2_CurrentElementId == ids[i]) {
-					(*(unsigned char*)&g_7e23e3) = fcn_00507400(types[i], 1);
+					(*(unsigned char*)&g_7e23e3) = gm_GetRangeStatId(types[i], 1);
 					g_774654 = 1;
 					result = 1;
 					break;
@@ -88,6 +88,6 @@ int __cdecl d2_ShowChooseProfessionDialog(int flags)
 		}
 	}
 	d2_ClearRadioGroup(list);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return result;
 }

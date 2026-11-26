@@ -11,7 +11,7 @@ int __cdecl he_fn_Handlung(void);
 int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl fcn_00507910(int);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_00507400(int, int);
+int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl fcn_005072c0(int);
 int __cdecl ai_PrepareBuildSite(int, int, int, int*, int*, int);
 int __cdecl fcn_0050d170(int);
@@ -77,7 +77,7 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 			if (v10 == -1) {
 				return 0;
 			}
-			v7 = fcn_00507400(v10, 1);
+			v7 = gm_GetRangeStatId(v10, 1);
 			v10 = fcn_005072c0(v7);
 			if (v10 == 0) {
 				return 0;

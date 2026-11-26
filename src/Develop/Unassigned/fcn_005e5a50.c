@@ -34,7 +34,7 @@ extern int g_666018, g_66601c;
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl fcn_005263d0(int, int, int);
 char* __cdecl fcn_005cd440(int*, int, int, void*);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -54,7 +54,7 @@ void __cdecl cm_SendCopyEntityData(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e5a50 */
 void __cdecl fcn_005e5a50(char* entity)
@@ -84,7 +84,7 @@ void __cdecl fcn_005e5a50(char* entity)
 	query[4] = 6;
 	target = fcn_005cd440(query, *(int*) 0x14b5a2c, 0, 0);
 	if (target == 0) {
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 		return;
 	}
 	dialog = fcn_00470820(0, 0, (char*) 0x6ad434);
@@ -145,6 +145,6 @@ void __cdecl fcn_005e5a50(char* entity)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005e5a50, 0x677c7) != 0);
-	fcn_00471e30(dialog);
-	fcn_00532ef0();
+	d2_DestroyForm(dialog);
+	d3_EndCameraAndUiMode();
 }

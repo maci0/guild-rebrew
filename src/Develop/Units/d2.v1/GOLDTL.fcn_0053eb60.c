@@ -31,7 +31,7 @@ void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(void (__cdecl*)(int), int);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl fcn_0053eb60(int n)
 {
@@ -70,5 +70,5 @@ void __cdecl fcn_0053eb60(int n)
 	for (i = 0; i < n; i++) {
 		g_7e1fa0[i] = d2_GetControlValue(ids[i]);
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

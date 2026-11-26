@@ -8,7 +8,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(void*);
 void* __cdecl he_fn_Handlung(void);
@@ -53,5 +53,5 @@ void __cdecl d2_ShowGebaeudeSaleDialog(char* e)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowGebaeudeSaleDialog, 0x677c7) != 0);
-	fcn_00471e30(win);
+	d2_DestroyForm(win);
 }

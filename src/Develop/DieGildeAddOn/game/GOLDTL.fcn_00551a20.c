@@ -25,7 +25,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl cm_GetCommandStatus(int id);
 void __cdecl he_FreeAction(char* t);
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004c5620(int a1, char* e);
+int __cdecl cm_SendSetHE(int a1, char* e);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
@@ -54,7 +54,7 @@ void __cdecl he_RunApTraitAction(char* t)
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
-			fcn_004c5620(-1, t);
+			cm_SendSetHE(-1, t);
 			return;
 		}
 		gm_IncreaseEntitySkill(e, *(unsigned char*) (t + 0xb8));
@@ -69,7 +69,7 @@ void __cdecl he_RunApTraitAction(char* t)
 		p = gm_LookupEntityRecordById(*(int*) (t + 0xac));
 		if (p == 0) {
 			*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
-			fcn_004c5620(-1, t);
+			cm_SendSetHE(-1, t);
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x1a9f, e->entity_index);
@@ -79,7 +79,7 @@ void __cdecl he_RunApTraitAction(char* t)
 			(*(int*) (q + 0x64))++;
 		}
 		*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
-		fcn_004c5620(-1, t);
+		cm_SendSetHE(-1, t);
 		return;
 	}
 }

@@ -62,7 +62,7 @@ void __cdecl cm_AppendPacketFieldDelta(int, int, int, int);
 int __cdecl cm_RequestChangeAttribute(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_00532ef0(void);
+int __cdecl d3_EndCameraAndUiMode(void);
 char* __cdecl itoa(int, char*, int);
 
 /* ADDRESS: GOLDTL 0x005a59d0 */
@@ -286,6 +286,6 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 		}
 	} while (main_RunFrameLoop(d2_ShowMoneyExchangeDialog, 0x677c7));
 	ResetDisplayCounters();
-	fcn_00471e30(dialogId);
-	return fcn_00532ef0();
+	d2_DestroyForm(dialogId);
+	return d3_EndCameraAndUiMode();
 }

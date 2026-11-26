@@ -1,5 +1,5 @@
 void __cdecl io_FormatTextBuffer(void* buffer, int format, ...);
-void __cdecl fcn_005d96d0(void* rec, void* ctx);
+void __cdecl gm_HandleWunder(void* rec, void* ctx);
 
 /* ADDRESS: GOLDTL 0x004f9ad0 */
 int __cdecl fcn_004f9ad0(char* rec, int* ctx)
@@ -18,7 +18,7 @@ int __cdecl fcn_004f9ad0(char* rec, int* ctx)
 			return 9;
 		}
 		if (*ctx == 3) {
-			fcn_005d96d0(rec, ctx);
+			gm_HandleWunder(rec, ctx);
 		}
 		return 2;
 	}
@@ -30,7 +30,7 @@ int __cdecl fcn_004f9ad0(char* rec, int* ctx)
 			return 1;
 		}
 		if (action == 4) {
-			fcn_005d96d0(rec, ctx);
+			gm_HandleWunder(rec, ctx);
 			return 10;
 		}
 		if (*(char*) (rec + 2) == 6) {

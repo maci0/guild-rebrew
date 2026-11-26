@@ -20,7 +20,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl d2_ChooseMission(int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 
 /* ADDRESS: GOLDTL 0x004b41b0 */
@@ -88,7 +88,7 @@ int __cdecl fcn_004b41b0(void)
 		}
 	}
 	d2_ClearRadioGroup(lst);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return result;
 }
 unsigned char _dlead_GOLDTL_fcn_004b41b0[63138] = {

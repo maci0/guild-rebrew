@@ -3,7 +3,7 @@
 char* __cdecl gm_FindSlotById(int arg1, int arg2);
 
 /* ADDRESS: GOLDTL 0x004cc260 */
-int __cdecl fcn_004cc260(void* input, char* response)
+int __cdecl cm_ExSetMarktSlot(void* input, char* response)
 {
 	char* slot;
 

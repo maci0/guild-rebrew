@@ -1,4 +1,4 @@
-void __cdecl fcn_004e4e90(char*);
+void __cdecl msx_StartMusicIfAllowed(char*);
 int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
 void __cdecl fcn_004e4230(void*, int);
 void __cdecl fcn_004e4730(char*);
@@ -46,7 +46,7 @@ void __cdecl fcn_004e4180(char* event)
 
 	m = (int*) event;
 	fallback = 0;
-	fcn_004e4e90(0);
+	msx_StartMusicIfAllowed(0);
 	gm_ResolveEntityById(&dyn, 0, 0, m[5]);
 	if (dyn != 0) {
 		fcn_004e4230(dyn, 0x17);

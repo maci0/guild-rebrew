@@ -48,7 +48,7 @@ Ent* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
 
-int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
+int __cdecl ai_CheckAction012Predicate(int unused1, Ent* e, Req* req, int unused4, Order* out)
 {
 	Ent* found;
 	int h;

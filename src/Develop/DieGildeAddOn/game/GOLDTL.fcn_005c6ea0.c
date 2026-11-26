@@ -70,12 +70,12 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl sv_ClearObjectSelection(void);
 
-void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
+void __cdecl d2_ShowTrainingDialog(unsigned char* obj, char* sceneObj, int targetId)
 {
 	int btn2;
 	int btn1;
@@ -111,7 +111,7 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	s = io_AppendText(0x1a45, kind + 0x20d, kind + 0x20e, a2 + 0x16b7);
+	s = io_AppendText(0x1a45, kind + 0x20d, kind + 0x20e, targetId + 0x16b7);
 	btn1 = d2_GetWindowListItem(dlg, 1, s);
 	btn2 = d2_GetWindowListItem(dlg, 1, s + 1);
 	g_100f1dc = -1;
@@ -133,14 +133,14 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 						pkt.xc = *(int*) (obj + 1);
 						pkt.name = (*(pos14_7f4c00*)&gm_GameTime);
 						pkt.x36 = 1;
-						if (a1 != 0) {
-							pkt.x60 = *(int*) (a1 + 2);
+						if (sceneObj != 0) {
+							pkt.x60 = *(int*) (sceneObj + 2);
 						}
 						else {
 							pkt.x60 = -1;
 						}
 						pkt.x5c = ((Player*)g_7f4ca0)[i].x4;
-						pkt.x58 = (char) a2;
+						pkt.x58 = (char) targetId;
 						cm_SendCopyEntityData(&pkt);
 						n++;
 					}
@@ -161,9 +161,9 @@ void __cdecl fcn_005c6ea0(unsigned char* obj, char* a1, int a2)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005c6ea0, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	} while (main_RunFrameLoop((void*) d2_ShowTrainingDialog, 0x677c7) != 0);
+	d2_DestroyForm(dlg);
 	d2_RestoreHudAfterDialog();
-	fcn_00532ef0();
+	d3_EndCameraAndUiMode();
 	sv_ClearObjectSelection();
 }

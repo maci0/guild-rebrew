@@ -37,7 +37,7 @@ float __cdecl fcn_00451380(float*, float*);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl d3_SetObjectGroundPosition(int, void*);
-void __cdecl fcn_004550b0(int, int);
+void __cdecl d3_RemoveSubTreeFromCellTree(int, int);
 void __cdecl d3_DestroyObject(int);
 char __cdecl d3_ComputeObjectBoundingSphere(char*, char*, float*, float*);
 char* __cdecl evt_LoadGfxScript(int);
@@ -134,7 +134,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		d3_SetObjectRotation((char*) obj, (int*) angles);
 		d3_SetObjectGroundPosition(obj, vec);
 		if (g_773dd8 != 0) {
-			fcn_004550b0(*(int*)(upgradeBuilding + 0x61), g_773dd8);
+			d3_RemoveSubTreeFromCellTree(*(int*)(upgradeBuilding + 0x61), g_773dd8);
 		}
 		d3_DestroyObject(*(int*)(upgradeBuilding + 0x61));
 		if (*(int*) (obj + 0x1ec) != 0 && d3_ComputeObjectBoundingSphere((char*) obj, (char*) d3_ActiveCamera, vec, &radius)) {

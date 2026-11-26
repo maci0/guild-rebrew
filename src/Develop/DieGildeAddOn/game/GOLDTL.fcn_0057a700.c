@@ -35,7 +35,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -52,7 +52,7 @@ void __cdecl he_StartAction0x90(char* u)
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	for (o = he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (u + 0x10)); o != 0; o = he_fn_Handlung()) {
 		if (o != u) {
-			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 			return;
 		}
 	}
@@ -75,5 +75,5 @@ void __cdecl he_StartAction0x90(char* u)
 	}
 	fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -((*(int*) (u + 0xb4) + 2) * (*(int*) (u + 0xb0) + 2)));
 	gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
-	fcn_004c5620(0, u);
+	cm_SendSetHE(0, u);
 }

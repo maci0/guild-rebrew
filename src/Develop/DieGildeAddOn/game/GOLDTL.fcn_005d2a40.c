@@ -22,7 +22,7 @@ float __cdecl fcn_00505e30(int a)
 
 #ifndef REBREW_GOLD
 /* ADDRESS: GOLDTL 0x005d2a40 */
-int __cdecl fcn_005d2a40(int sourceId, int targetId)
+int __cdecl gm_CalcWerbungSteps(int sourceId, int targetId)
 {
 	char* p;
 	char* q;

@@ -24,7 +24,7 @@ extern char g_773de8;
 extern char g_6b5c60[];
 
 void __cdecl fcn_00533a40(char*);
-int __cdecl fcn_005e4060(void);
+int __cdecl ls_CanSaveGame(void);
 int __cdecl cm_RequestSysMessage(int, void*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
@@ -68,7 +68,7 @@ void __cdecl ls_QuickSave(void)
 			fcn_00533a40((char*) g_14ac608);
 			return;
 		}
-		if (fcn_005e4060() == 0) {
+		if (ls_CanSaveGame() == 0) {
 			fcn_00533a40((char*) (*(int*)&g_14ac604));
 			return;
 		}

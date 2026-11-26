@@ -24,7 +24,7 @@ void __cdecl he_FreeAction(void*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
-int __cdecl fcn_004c5620(int, void*);
+int __cdecl cm_SendSetHE(int, void*);
 void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl cm_SendCancelCharacterActions(unsigned int);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
@@ -79,12 +79,12 @@ void __cdecl he_RunSpionage(char* ctx)
 			    + *(unsigned short*) (ctx + 8) * 0x21c + 4), g_773d75, *(int*) (ctx + 0xe4));
 			he_AssignActionSlot(0, 0, *(unsigned short*) ent, ctx);
 			*(pos14_7f4c00*)(ctx + 0x52) = gm_GameTime;
-			*(int*) (ctx + 0x84) = fcn_004c5620(1, ctx);
+			*(int*) (ctx + 0x84) = cm_SendSetHE(1, ctx);
 			return;
 		}
 		*(int*) (ctx + 0xd8) = -1;
 		*(pos14_7f4c00*)(ctx + 0x52) = *(pos14_7f4c00*)(ctx + 0xc8);
-		*(int*) (ctx + 0x84) = fcn_004c5620(4, ctx);
+		*(int*) (ctx + 0x84) = cm_SendSetHE(4, ctx);
 		return;
 	case 1:
 	{
@@ -118,7 +118,7 @@ void __cdecl he_RunSpionage(char* ctx)
 		*(int*) (ctx + 0xbc) = idx;
 		if (hit == 0) {
 			gm_AddTime(ctx + 0x52, 0, 1, 0);
-			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+			*(int*) (ctx + 0x84) = cm_SendSetHE(-1, ctx);
 			return;
 		}
 		io_FormatTextBuffer(text, 0x6a6578, hit);
@@ -128,30 +128,30 @@ void __cdecl he_RunSpionage(char* ctx)
 			ch_StartMovement(*(int*) (ent + 4), *(int*) (hit + 1), -1, 0, 1, s_67ed14);
 			gm_AddTime(ctx + 0x52, 0, 5, 0);
 			*(int*) (ctx + 0xb4) = *(int*) (hit + 1);
-			*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
+			*(int*) (ctx + 0x84) = cm_SendSetHE(2, ctx);
 			return;
 		}
 		gm_AddTime(ctx + 0x52, 0, 1, 0);
-		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+		*(int*) (ctx + 0x84) = cm_SendSetHE(-1, ctx);
 		return;
 	}
 	case 2:
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xb4));
 		gm_AddTime(ctx + 0x52, 0, 5, 0);
 		if (hit == 0) {
-			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+			*(int*) (ctx + 0x84) = cm_SendSetHE(-1, ctx);
 			return;
 		}
 		ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 		if (ent == 0) {
 			gm_AddTime(ctx + 0x52, 0, 1, 0);
-			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+			*(int*) (ctx + 0x84) = cm_SendSetHE(-1, ctx);
 			return;
 		}
 		if (gm_IsEntityAtBuilding(ent, hit) == 0) {
 			*(int*) (ctx + 0x70) = 2;
 			gm_AddTime(ctx + 0x52, 0, 5, 0);
-			*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
+			*(int*) (ctx + 0x84) = cm_SendSetHE(2, ctx);
 			return;
 		}
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
@@ -160,13 +160,13 @@ void __cdecl he_RunSpionage(char* ctx)
 				cm_SendCancelCharacterActions(*(int*) (ent + 4));
 				ch_StartMovement(*(int*) (ent + 4), *(int*) (hit + 1),
 				    -1, 0, 1, s_67ed14);
-				*(int*) (ctx + 0x84) = fcn_004c5620(3, ctx);
+				*(int*) (ctx + 0x84) = cm_SendSetHE(3, ctx);
 				return;
 			}
-			*(int*) (ctx + 0x84) = fcn_004c5620(1, ctx);
+			*(int*) (ctx + 0x84) = cm_SendSetHE(1, ctx);
 			return;
 		}
-		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+		*(int*) (ctx + 0x84) = cm_SendSetHE(-1, ctx);
 		return;
 	case 3:
 		gm_AddTime(ctx + 0x52, 0, 5, 0);
@@ -176,7 +176,7 @@ void __cdecl he_RunSpionage(char* ctx)
 			if (ent != 0 && gm_IsEntityAtBuilding(ent, hit) == 0) {
 				*(int*) (ctx + 0x70) = 3;
 				gm_AddTime(ctx + 0x52, 0, 5, 0);
-				*(int*) (ctx + 0x84) = fcn_004c5620(3, ctx);
+				*(int*) (ctx + 0x84) = cm_SendSetHE(3, ctx);
 				return;
 			}
 			rec = gm_LookupEntityRecordById(*(int*) (ctx + 0xc4));
@@ -187,11 +187,11 @@ void __cdecl he_RunSpionage(char* ctx)
 				    -1, text, 0, 0x5fa, 0);
 			}
 		}
-		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+		*(int*) (ctx + 0x84) = cm_SendSetHE(-1, ctx);
 		return;
 	case 4:
 		gm_AddTime(ctx + 0x52, 0, 1, 0);
-		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
+		*(int*) (ctx + 0x84) = cm_SendSetHE(-1, ctx);
 		return;
 	default:
 		return;

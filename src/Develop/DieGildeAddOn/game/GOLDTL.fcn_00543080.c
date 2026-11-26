@@ -8,7 +8,7 @@ int __cdecl fcn_00469e30();
 int __cdecl d2_AddElementToWindow();
 int __cdecl fcn_00470820();
 int __cdecl fcn_00471d80();
-int __cdecl fcn_00471e30();
+int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
 int __cdecl fcn_00472380();
 int __cdecl fcn_00472640();
@@ -29,7 +29,7 @@ int __cdecl gm_UpdateAllBuildingLevels();
 int __cdecl fcn_004facb0();
 int __cdecl fcn_004fb390();
 int __cdecl gm_GetDisasterState();
-void __cdecl fcn_004fb650(int, int, int, float);
+void __cdecl gm_InitDisasterState(int, int, int, float);
 int __cdecl gm_UpdateDisasterState();
 int __cdecl fcn_004fcc20();
 int __cdecl gm_CollectAllTaxes();
@@ -68,38 +68,38 @@ typedef struct ResetProto { unsigned char kind; unsigned char rest[0x24c]; } Res
 extern int g_6a3420; extern int g_774954; extern char g_774965; extern int g_14cbca0; extern int d2_SuppressOverlay; extern double g_662cc0;
 extern int g_1040480; extern int g_1040484; extern int g_1040488; extern int g_104048c; extern int d2_ScreenHeight; extern int g_1040494;
 /* ADDRESS: GOLDTL 0x00543080 */
-void __cdecl fcn_00543080(void)
+void __cdecl gm_RunRoundUpdate(void)
 {
-	int v1;
-	int v2;
-	unsigned char* v3;
-	unsigned int* v4;
-	int v5;
-	int v11;
+	int savedSpeed;
+	int tmpVal;
+	unsigned char* bldPtr;
+	unsigned int* ptr;
+	int tmpIdx;
+	int loopStat;
 	char messageText[256];
-	char v7[12];
-	char* v9;
+	char timeBuf[12];
+	char* entPtr;
 	Rec24_99f5a0 st;
 	BUILDING_PROTOTYPE* proto;
 
-	v5 = -1;
-	v1 = *(unsigned char*) &g_772d10;
+	tmpIdx = -1;
+	savedSpeed = *(unsigned char*) &g_772d10;
 	fcn_004fa750();
-	v11 = 0;
+	loopStat = 0;
 	do {
-		srv_FormatStatEntity(&((ENTITY_RECORD*) g_7f4ca0)[v11]);
-		*(unsigned int*) &((ENTITY_RECORD*) g_7f4ca0)[v11].unk_198[0x30] &= 0xe0874703;
-		((ENTITY_RECORD*) g_7f4ca0)[v11].entity_flags &= 0x3d31ffc7;
-		if (((ENTITY_RECORD*) g_7f4ca0)[v11].entity_state == 6) {
-			v5 = v11;
+		srv_FormatStatEntity(&((ENTITY_RECORD*) g_7f4ca0)[loopStat]);
+		*(unsigned int*) &((ENTITY_RECORD*) g_7f4ca0)[loopStat].unk_198[0x30] &= 0xe0874703;
+		((ENTITY_RECORD*) g_7f4ca0)[loopStat].entity_flags &= 0x3d31ffc7;
+		if (((ENTITY_RECORD*) g_7f4ca0)[loopStat].entity_state == 6) {
+			tmpIdx = loopStat;
 		}
-		v11 += 1;
-	} while (v11 < 768);
-	*(short*) &g_774970 = (short) v5;
+		loopStat += 1;
+	} while (loopStat < 768);
+	*(short*) &g_774970 = (short) tmpIdx;
 	he_DispatchFlaggedEvents();
 	if (!(g_7747b0 & 4) && (unsigned short) gm_RandomMod(10) > 6) {
-		v11 = fcn_005435d0();
-		while (v11 != 1) {
+		loopStat = fcn_005435d0();
+		while (loopStat != 1) {
 			d2_SuppressOverlay = 0;
 			*(int*) &main_LoopFlags = 0x24087;
 			io_FormatTextBuffer(messageText, 0x79);
@@ -110,7 +110,7 @@ void __cdecl fcn_00543080(void)
 			}
 			fcn_0046ac30();
 			Sleep(1000);
-			v11 = fcn_005435d0();
+			loopStat = fcn_005435d0();
 		}
 	}
 	*(int*) &main_LoopFlags = 0x24087;
@@ -118,7 +118,7 @@ void __cdecl fcn_00543080(void)
 		sv_WaitForNetworkSync(0x24087);
 	}
 	fcn_004e4f10(0);
-	if (cut_RunPendingCutscenes(v5) && g_6a3420) {
+	if (cut_RunPendingCutscenes(tmpIdx) && g_6a3420) {
 		g_1040488 = 0;
 		g_1040480 = g_1040494;
 		g_1040484 = 0;
@@ -129,47 +129,47 @@ void __cdecl fcn_00543080(void)
 	fcn_0053f100();
 	fcn_00546f80();
 	if (g_6a3420) {
-		v2 = fcn_00470820(0, 0, 0x6a43ac);
-		fcn_00471d80(v2, 3);
-		d2_SetForm(v2, 1);
+		tmpVal = fcn_00470820(0, 0, 0x6a43ac);
+		fcn_00471d80(tmpVal, 3);
+		d2_SetForm(tmpVal, 1);
 		io_AppendText(0x7d);
-		gm_PackGameTime(0x7f4c00, v7);
-		d2_SetForm(v2, 0);
-		fcn_00471e30(v2);
+		gm_PackGameTime(0x7f4c00, timeBuf);
+		d2_SetForm(tmpVal, 0);
+		d2_DestroyForm(tmpVal);
 	}
-	v3 = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
-	while (v3) {
-		proto = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*v3];
-		if (*v3 == 0x1e) {
-			v5 = init_AllocateGebaeudeSceneSlot(v3);
-			if (v5 != -1) {
-				v2 = d3_CurrentContextIndex;
-				d3_SelectSceneContext((int) *(char*) (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v3].category + (unsigned long)&g_7f3b00), 1);
+	bldPtr = (unsigned char*) gm_StartFilteredEntitySearch(1, 6);
+	while (bldPtr) {
+		proto = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*bldPtr];
+		if (*bldPtr == 0x1e) {
+			tmpIdx = init_AllocateGebaeudeSceneSlot(bldPtr);
+			if (tmpIdx != -1) {
+				tmpVal = d3_CurrentContextIndex;
+				d3_SelectSceneContext((int) *(char*) (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*bldPtr].category + (unsigned long)&g_7f3b00), 1);
 				fcn_0043aa30(3);
-				plt_UpdatePlantStages(*(unsigned int*) &v3[0x71]);
+				plt_UpdatePlantStages(*(unsigned int*) &bldPtr[0x71]);
 				fcn_0043a9c0(3);
-				d3_SelectSceneContext(v2, 1);
+				d3_SelectSceneContext(tmpVal, 1);
 			}
 		} else if (proto->category == 7) {
-			*(int*)(v3 + 0x69) = 0;
+			*(int*)(bldPtr + 0x69) = 0;
 		}
-		v3 = (unsigned char*) gm_FindNextFilteredEntity();
+		bldPtr = (unsigned char*) gm_FindNextFilteredEntity();
 	}
-	v5 = 0;
+	tmpIdx = 0;
 	fcn_005016c0();
 	fcn_004facb0();
 	if ((*(int*) &g_77494c & 8) || g_14cbca0 == -1) {
 		fcn_004f5830();
 		fcn_00535960();
 		Sleep(100);
-		v9 = (char*) 0x7f4ca8;
+		entPtr = (char*) 0x7f4ca8;
 		do {
-			if (*(unsigned short*) &v9[-8] != 0xffff && *v9) {
-				gm_UpdateOwnerBuildings(v5);
+			if (*(unsigned short*) &entPtr[-8] != 0xffff && *entPtr) {
+				gm_UpdateOwnerBuildings(tmpIdx);
 			}
-			v9 = &v9[0x21c];
-			v5 += 1;
-		} while ((int) v9 < 0x85a0a8);
+			entPtr = &entPtr[0x21c];
+			tmpIdx += 1;
+		} while ((int) entPtr < 0x85a0a8);
 		fcn_00535960();
 		Sleep(100);
 		fcn_004ff0f0();
@@ -199,44 +199,44 @@ void __cdecl fcn_00543080(void)
 		fcn_004fb390();
 		gm_GetDisasterState(&st);
 		if (st.head == -1) {
-			fcn_004fb650(1, 0x3f800000, 0x3f000000, (float)(10.0 - (double)(4 - g_7747b4) * g_662cc0));
+			gm_InitDisasterState(1, 0x3f800000, 0x3f000000, (float)(10.0 - (double)(4 - g_7747b4) * g_662cc0));
 		} else {
 			gm_UpdateDisasterState();
 		}
 		fcn_00547770();
 		fcn_00535960();
 		Sleep(100);
-		v4 = (unsigned int*) &g_7f4ca4;
+		ptr = (unsigned int*) &g_7f4ca4;
 		do {
-			cm_RequestCopyEntityData(0xffffffff, *v4, 0, 3);
-			v4 = &v4[0x87];
-		} while ((int) v4 < 0x85a0a4);
+			cm_RequestCopyEntityData(0xffffffff, *ptr, 0, 3);
+			ptr = &ptr[0x87];
+		} while ((int) ptr < 0x85a0a4);
 		cm_RequestCopyEntityData(0xffffffff, 0xffffffff, 0, 4);
 		gm_ReplenishOfficeCandidates();
 	} else {
 		gm_AdvanceRoundCounters(2);
 	}
-	v4 = (unsigned int*) 0x7f4e8c;
+	ptr = (unsigned int*) 0x7f4e8c;
 	do {
-		*v4 = 0;
-		v4 = &v4[0x87];
-	} while ((int) v4 < 0x85a28c);
+		*ptr = 0;
+		ptr = &ptr[0x87];
+	} while ((int) ptr < 0x85a28c);
 	if (g_6a3420) {
 		if (g_774965 && !(g_7747b0 & 4)) {
-			v2 = d2_CreateScrollPerga();
-			d2_SetForm(v2, 2);
+			tmpVal = d2_CreateScrollPerga();
+			d2_SetForm(tmpVal, 2);
 			io_AppendText(0x7d);
-			d2_SetForm(v2, 1);
+			d2_SetForm(tmpVal, 1);
 			io_AppendText(0x1ba0, *(int*) &g_774970 & 0xffff, *(int*) &g_774970 & 0xffff);
 			d3snd_QueueSound(0xfffffff9, 0, 0x6a438c, 0xffffffff, 0);
-			v5 = main_RunFrameLoop(0x543080, 0x66087);
-			while (v5) {
+			tmpIdx = main_RunFrameLoop(0x543080, 0x66087);
+			while (tmpIdx) {
 				if (*(int*) &g_100f1dc == 2) {
 					g_774654 = 1;
 				}
-				v5 = main_RunFrameLoop(0x543080, 0x66087);
+				tmpIdx = main_RunFrameLoop(0x543080, 0x66087);
 			}
-			fcn_00471e30(v2);
+			d2_DestroyForm(tmpVal);
 			main_PlayOutroMovie();
 			g_774954 = 1;
 		}
@@ -251,5 +251,5 @@ void __cdecl fcn_00543080(void)
 	if ((*(int*) &g_77494c & 8) || g_14cbca0 == -1) {
 		gm_ApplyHourlyEntityUpdates();
 	}
-	*(char*) &g_772d10 = (char) v1;
+	*(char*) &g_772d10 = (char) savedSpeed;
 }

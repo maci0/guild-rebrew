@@ -3,7 +3,7 @@
 
 int __cdecl evt_RequestScriptExit(int);
 
-int __cdecl fcn_0040b6f0(int* a)
+int __cdecl ecmd_ExitScript(int* a)
 {
 	evt_RequestScriptExit(*a);
 	return 0;

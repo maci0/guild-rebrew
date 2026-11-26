@@ -8,7 +8,7 @@ extern int g_aux_entity_buffer;
 
 unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
 void* __cdecl realloc(void* p, unsigned int size);
-int __cdecl fcn_004eed10(char* stream, char* rec);
+int __cdecl ahm_fio_SaveAhmInfo(char* stream, char* rec);
 int __cdecl gv_SaveGraveyardField(char* stream, char* rec);
 
 /* ADDRESS: GOLDTL 0x0051ecf0 */
@@ -127,7 +127,7 @@ int __cdecl fcn_0051ecf0(char* file)
 			}
 		}
 		else if (esi[0] == 0x4b || esi[0] == 0x4c || esi[0] == 0x4d) {
-			if (fcn_004eed10(file, esi) == 0) {
+			if (ahm_fio_SaveAhmInfo(file, esi) == 0) {
 				return 0;
 			}
 		}

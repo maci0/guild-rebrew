@@ -19,7 +19,7 @@ typedef struct
 } fcn_0043f7e0_Floor;
 // SIZE 0x8024
 
-int __cdecl fcn_0045be40(char* name);
+int __cdecl d3_ResolveTexturePath(char* name);
 void __cdecl fcn_0045bfb0(int anim);
 int __cdecl fcn_0045c5b0(char* name, fcn_0043f7e0_Tint tint, int a, int b);
 void __cdecl fcn_0045ce90(int anim);
@@ -44,11 +44,11 @@ int __cdecl d3_LoadFloorTexture(fcn_0043f7e0_Floor* o, char* name, int slot)
 		}
 		strcpy(path, name);
 		strcat(path, "_high");
-		if (fcn_0045be40(path) != 0) {
+		if (d3_ResolveTexturePath(path) != 0) {
 			fcn_0064d530(o->names[slot], name, 0x40);
 			strcpy(msg, name);
 			strcat(msg, "_high");
-			if (fcn_0045be40(msg) != 0) {
+			if (d3_ResolveTexturePath(msg) != 0) {
 				*(int*) &tint = 0;
 				tint.level = 0xff;
 				o->anims[slot] = fcn_0045c5b0(msg, tint, 0, 0);

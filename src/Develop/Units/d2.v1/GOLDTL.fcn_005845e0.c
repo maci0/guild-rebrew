@@ -5,7 +5,7 @@ extern int g_6a81dc[5];
 #include "Develop/Units/d2.v1/d2_gui.h"
 char* __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(char*);
-void __cdecl fcn_00471e30(char*);
+void __cdecl d2_DestroyForm(char*);
 int __cdecl d2_GetWindowListItem(char*, int, char*);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(char*, int);
@@ -91,6 +91,6 @@ int __cdecl d2_ChooseTutorial(void)
 			}
 		} while (main_RunFrameLoop((char*) 0x5845e0, 0x86) != 0);
 	}
-	fcn_00471e30(menu);
+	d2_DestroyForm(menu);
 	return flag;
 }

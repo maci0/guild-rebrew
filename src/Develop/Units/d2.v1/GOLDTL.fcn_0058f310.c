@@ -18,7 +18,7 @@ extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 
 void* __cdecl fcn_005cd440(void*, char*, int, int);
-int __cdecl fcn_00532ef0(void);
+int __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl fcn_0052a0c0(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -36,11 +36,11 @@ typedef struct F8 {
 	int b;
 } F8;
 /* SIZE 0x8 */
-int __cdecl fcn_004a5e60(char*, int, F8, int, float, int*);
+int __cdecl ai_FindEntityInFavorRange(char*, int, F8, int, float, int*);
 int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
@@ -73,7 +73,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 	q[4] = 6;
 	v = (char*) fcn_005cd440(q, (char*) g_14b5574, 0, 0);
 	if (v == 0) {
-		return fcn_00532ef0();
+		return d3_EndCameraAndUiMode();
 	}
 	fcn_0052a0c0(subject, 0);
 	h = fcn_00470820(0, 0, (char*) 0x6a96d8);
@@ -135,7 +135,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 						flag = -1;
 						f.mask = 0x7b4c4a0;
 						f.b = 0;
-						fcn_004a5e60(((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), 0, f, 0,
+						ai_FindEntityInFavorRange(((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), 0, f, 0,
 						    100.0f, &flag);
 						*(int*) (req + 0x58) = flag;
 					}
@@ -152,8 +152,8 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowHauntingDialog, 0x677c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
-	return fcn_00532ef0();
+	return d3_EndCameraAndUiMode();
 }

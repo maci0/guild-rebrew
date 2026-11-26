@@ -6,7 +6,7 @@ extern int g_6ac240;
 unsigned short __cdecl gm_RandomMod(unsigned short);
 
 /* ADDRESS: GOLDTL 0x005b5660 */
-unsigned short __cdecl fcn_005b5660(int count, unsigned short* ids)
+unsigned short __cdecl gm_PickUniqueOfferId(int count, unsigned short* ids)
 {
 	int idx;
 	int i;

@@ -12,7 +12,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int n, int* lim, float a4, float r, unsigned short* ids);
 
 /* ADDRESS: GOLDTL 0x004a8e40 */
-int __cdecl fcn_004a8e40(int a1, char* e, int a3, int a4, char* out)
+int __cdecl ai_CheckAction027Predicate(int unused1, char* e, int unused3, int unused4, char* out)
 {
 	int lim;
 	unsigned short id;

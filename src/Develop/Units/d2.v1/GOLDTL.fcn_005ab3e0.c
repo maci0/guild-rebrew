@@ -28,11 +28,11 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl he_NotifyAblassPurchase(char*, char*, char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_0050e600(int, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_ShowKircheTop5(void);
 
 /* Church indulgence ("Ablass") dialog: offers the indulgence for the current
@@ -113,9 +113,9 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) fcn_005ab3e0, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	if (changed)
 		d2_ShowKircheTop5();
 	else
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 }

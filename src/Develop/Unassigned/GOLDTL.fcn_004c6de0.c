@@ -9,7 +9,7 @@ typedef struct
 } Body20;
 // SIZE 0x80
 
-void __cdecl fcn_004c6de0(Body20* source)
+void __cdecl cm_SendAdjustResourceSlots(Body20* source)
 {
 	char buf[0x9c];
 

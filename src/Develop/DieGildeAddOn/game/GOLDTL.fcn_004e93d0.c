@@ -15,7 +15,7 @@ int __cdecl amt_GetRoleTemplate(int, rec18*);
 
 
 /* ADDRESS: GOLDTL 0x004e93d0 */
-int __cdecl fcn_004e93d0(unsigned char* a1, int max, int* out)
+int __cdecl amt_ListPromotionOffices(unsigned char* entity, int max, int* out)
 {
 	int want;
 	int i;
@@ -26,9 +26,9 @@ int __cdecl fcn_004e93d0(unsigned char* a1, int max, int* out)
 	int id;
 	int v;
 
-	if (a1[0x166] == 0)
+	if (entity[0x166] == 0)
 		return 0;
-	if (amt_GetRoleTemplate(a1[0x166], &r) == 0)
+	if (amt_GetRoleTemplate(entity[0x166], &r) == 0)
 		return 0;
 	n = amt_FindOfficeSlotsByKind(r.id, 6, arr);
 	if (n == 0)

@@ -30,7 +30,7 @@ void __cdecl d2_RunGesetzbuchInfoDialog(int, int);
 void __cdecl d2_UpdatePagedPanel(Book *);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_00534f30(Book *);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl fcn_005ce460(int cmd)
 {
@@ -126,5 +126,5 @@ void __cdecl fcn_005ce460(int cmd)
 		}
 	} while (main_RunFrameLoop(fcn_005ce460, 0x677c7) != 0);
 	fcn_00534f30(w);
-	fcn_00532ef0();
+	d3_EndCameraAndUiMode();
 }

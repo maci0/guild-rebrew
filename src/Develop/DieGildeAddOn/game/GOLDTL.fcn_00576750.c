@@ -13,7 +13,7 @@ void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int offset, void* value);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_004eea30(int city, int id, float value);
-void __cdecl fcn_005782f0(int a, unsigned short b);
+void __cdecl gm_IncreaseEntityStat(int a, unsigned short b);
 void __cdecl he_NotifyDomizilAccident(char* slot, int a, char* object);
 void __cdecl he_NotifyDomizilEvent(char* slot, int a, char* object);
 void __cdecl he_NotifyAlchemistDiscovery(char* slot, int a, char* object, void* record);
@@ -110,7 +110,7 @@ void __cdecl he_TriggerAhmLabEvent(int city, char* owner, char* object, int mode
 		    city, object);
 		break;
 	case 3:
-		fcn_005782f0(city, gm_RandomMod(3) + 1);
+		gm_IncreaseEntityStat(city, gm_RandomMod(3) + 1);
 		he_NotifyDomizilEvent((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 		    city, object);
 		break;

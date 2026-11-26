@@ -39,7 +39,7 @@ int __cdecl gm_GetSeason(int* p);
 int __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3);
 char __cdecl fcn_004463f0(unsigned int a, unsigned int b, float t);
 void __cdecl fcn_004cfe00(void);
-void __cdecl fcn_004e4e90(char* s);
+void __cdecl msx_StartMusicIfAllowed(char* s);
 void* __cdecl sb_LoadSampleBank(char* name, int init);
 int __cdecl sb_LoadLocalizedSampleBank(char* name, int x);
 int __cdecl fcn_004e4470(char* name);
@@ -63,7 +63,7 @@ int __cdecl fcn_004de610(int v);
 float __cdecl gm_GetEntityHealthRatio(char* p);
 float __cdecl fcn_004ff210(int a, int b);
 int __cdecl cut_RandMod(int n);
-void __cdecl fcn_004e0210(char* a, char* b, char* c);
+void __cdecl cut_PlayDuelIntroMove(char* a, char* b, char* c);
 int __cdecl srv_GetEntityOfficeSlot(char* ent, int* role, int* slot);
 int __cdecl amt_SendOfficeCommand(int id, int ea, int eb, int x1, int x2);
 void __cdecl io_FormatTextBuffer(char* out, int id, int a, int b);
@@ -138,11 +138,11 @@ void __cdecl cut_MainDuell(char* a0)
     fcn_004463f0(0, 1, 0.0f);
     fcn_004cfe00();
     if (sel == 0)
-        fcn_004e4e90((char*) 0x68ce24);
+        msx_StartMusicIfAllowed((char*) 0x68ce24);
     else if (sel == 1)
-        fcn_004e4e90((char*) 0x68bd2c);
+        msx_StartMusicIfAllowed((char*) 0x68bd2c);
     else
-        fcn_004e4e90((char*) 0x68bd14);
+        msx_StartMusicIfAllowed((char*) 0x68bd14);
 
     snd = (int) sb_LoadSampleBank((char*) 0x68ce14, 0);
     bank = sb_LoadLocalizedSampleBank((char*) 0x68ce08, 0);
@@ -244,11 +244,11 @@ void __cdecl cut_MainDuell(char* a0)
         g_772f5c = 0;
         g_772f5d = 0;
         if (*(unsigned char*) (e + 0x94) == 2 || *(unsigned char*) (e + 0x94) == 3) {
-            fcn_004e0210((char*) &sA, (char*) &sB, (char*) 0x68ccc4);
-            fcn_004e0210((char*) &sB, (char*) &sA, (char*) 0x68ccc8);
+            cut_PlayDuelIntroMove((char*) &sA, (char*) &sB, (char*) 0x68ccc4);
+            cut_PlayDuelIntroMove((char*) &sB, (char*) &sA, (char*) 0x68ccc8);
         } else {
-            fcn_004e0210((char*) &sB, (char*) &sA, (char*) 0x68ccc8);
-            fcn_004e0210((char*) &sA, (char*) &sB, (char*) 0x68ccc4);
+            cut_PlayDuelIntroMove((char*) &sB, (char*) &sA, (char*) 0x68ccc8);
+            cut_PlayDuelIntroMove((char*) &sA, (char*) &sB, (char*) 0x68ccc4);
         }
         if ((g_772f5a != 0 || g_772f5c != 0) && (g_772f5b != 0 || g_772f5d != 0)) {
             t = cut_RandMod(9);

@@ -65,14 +65,14 @@ void __cdecl fcn_005e3520(void);
 void __cdecl d2_ShowSoundOptions(void);
 void __cdecl fcn_005e2b60(void);
 int __cdecl d2_ShowLoadGameMenu(void);
-int __cdecl fcn_0053a160(void);
+int __cdecl d2_ShowChooseNetworkDialog(void);
 int __cdecl d2_ChooseTutorial(void);
 void __cdecl d2_InitDefaultMenueProfile(void);
 void __cdecl fcn_00469e70(void);
 void __cdecl gm_ResetHistoricalCursors(void);
 int __cdecl d2_StartSinglePlayerChooseCity(void);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl msx_StopTrack(int, int);
 
 /* Frame pointer kept: the reference restores esp from ebp and homes every
@@ -248,7 +248,7 @@ label_53a8e3:
 				d2_SetSlotVisibility(v5, 1);
 			} else if (d2_CurrentElementId == b[3]) {
 				d2_SetSlotVisibility(v5, 0);
-				if (fcn_0053a160()) {
+				if (d2_ShowChooseNetworkDialog()) {
 					g_774654 = 1;
 				} else {
 					d2_SetSlotVisibility(v5, 1);
@@ -296,7 +296,7 @@ label_53a8e3:
 		}
 	} while (main_RunFrameLoop((int)(void *)0x53a400, 0x24087) != 0);
 	d2_ClearRadioGroup(v28);
-	fcn_00471e30(v15);
+	d2_DestroyForm(v15);
 	d2_ClearScreen();
 	d3_SelectSceneContext(0, 0);
 	fcn_00442e30();

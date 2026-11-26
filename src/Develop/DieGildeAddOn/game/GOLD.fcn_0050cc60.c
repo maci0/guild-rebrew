@@ -4,7 +4,7 @@ void *__cdecl gm_FindNextFilteredEntity(void);
 void *__cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLD 0x0050cc60 */
-void __cdecl fcn_0050cc60(void)
+void __cdecl gm_ResetWarehouse0x1eItemCounts(void)
 {
     char *entity;
     int state;

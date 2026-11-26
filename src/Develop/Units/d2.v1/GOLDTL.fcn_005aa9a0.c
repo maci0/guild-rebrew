@@ -24,7 +24,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_004eba60(char*, Req*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl fcn_005aa9a0(int a1)
 {
@@ -59,5 +59,5 @@ void __cdecl fcn_005aa9a0(int a1)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) fcn_005aa9a0, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

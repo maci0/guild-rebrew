@@ -42,7 +42,7 @@ int __cdecl fcn_005c9f10(int, int, int, int, int, short*);
 int __cdecl fcn_005c99a0(int, int, int, int, int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005cadc0 */
 char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(char*, int))
@@ -247,13 +247,13 @@ select:
 		}
 loopend:
 		if (!main_RunFrameLoop((int) fcn_005cadc0, 0x657c7)) {
-			fcn_00471e30(dlg);
+			d2_DestroyForm(dlg);
 			return res;
 		}
 	}
 fail:
 	g_774654 = 1;
 	main_RunFrameLoop((int) fcn_005cadc0, 0x657c7);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return 0;
 }

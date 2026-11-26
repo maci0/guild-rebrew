@@ -18,7 +18,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_005ac2d0(char*);
 void __cdecl fcn_005ab810(char*, int);
 void __cdecl d2_OpenBeichteDialog(char*);
-void __cdecl fcn_005aaf60(char*);
+void __cdecl d2_RunKircheSpendenDialog(char*);
 
 void __cdecl d2_RunKircheMenu(char* e, int msg)
 {
@@ -59,7 +59,7 @@ void __cdecl d2_RunKircheMenu(char* e, int msg)
 					d2_OpenBeichteDialog(e);
 				}
 				if (g_7746a0 == spende) {
-					fcn_005aaf60(e);
+					d2_RunKircheSpendenDialog(e);
 				}
 				if (g_7746a0 == weih) {
 					fcn_005ab810(e, msg);

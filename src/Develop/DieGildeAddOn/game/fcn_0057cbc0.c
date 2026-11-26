@@ -18,8 +18,8 @@ void __cdecl d3_SelectSceneContext(int, int);
 void* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(void*, int, int);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_0057c9f0(char*);
-int __cdecl fcn_004c5620(int, char*);
+void __cdecl he_AwardEvent0a0Bonus(char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 /* ADDRESS: GOLDTL 0x0057cbc0 */
 void __cdecl fcn_0057cbc0(char* p)
@@ -68,7 +68,7 @@ void __cdecl fcn_0057cbc0(char* p)
         return;
     }
     if (*(int*) (p + 0x70) == 1 && (*(u8*) (p + 0x78) & 4) == 0) {
-        fcn_0057c9f0(p);
-        *(int*) (p + 0x84) = fcn_004c5620(-1, p);
+        he_AwardEvent0a0Bonus(p);
+        *(int*) (p + 0x84) = cm_SendSetHE(-1, p);
     }
 }

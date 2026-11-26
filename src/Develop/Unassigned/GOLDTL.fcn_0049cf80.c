@@ -11,7 +11,7 @@ typedef struct Msg {
 } Msg;
 // SIZE 0x18
 
-int __cdecl fcn_004aa240(int a1, int a2, int a3, Msg* a, Msg* b);
+int __cdecl ai_SelectPrivTarget(int a1, int a2, int a3, Msg* a, Msg* b);
 
 /* ADDRESS: GOLDTL 0x0049cf80 */
 int __cdecl ai_StartBeleidigen(int a1, int a2, int k, Msg* out1, Msg* out2)
@@ -25,7 +25,7 @@ int __cdecl ai_StartBeleidigen(int a1, int a2, int k, Msg* out1, Msg* out2)
 		a.type = 0x10;
 		a.a = 8;
 		a.b = 0;
-		if (fcn_004aa240(a1, a2, 0, &a, &b)) {
+		if (ai_SelectPrivTarget(a1, a2, 0, &a, &b)) {
 			*out1 = a;
 			*out2 = b;
 			return 0x2b;

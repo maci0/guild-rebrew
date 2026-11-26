@@ -1,4 +1,4 @@
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -16,6 +16,6 @@ void __cdecl he_AllocMultiActorAction(char* action)
 		*(pos14_7f4c00*) (action + 0x44) = gm_GameTime;
 		*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (action + 0x52), 0, 1, 0);
-		*(int*) (action + 0x84) = fcn_004c5620(0, action);
+		*(int*) (action + 0x84) = cm_SendSetHE(0, action);
 	}
 }

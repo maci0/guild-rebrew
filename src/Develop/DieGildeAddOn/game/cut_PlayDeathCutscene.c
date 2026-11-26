@@ -4,7 +4,7 @@
  * block (single `add esp,0x23EC; ret` exit at 0x4e3018/0x4e301e). */
 
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004e4e90(char* s);
+void __cdecl msx_StartMusicIfAllowed(char* s);
 int __cdecl sb_LoadLocalizedSampleBank(char* s, int a);
 void __cdecl fcn_004e4730(char* s);
 void __cdecl fcn_004e4b60(char* s);
@@ -72,7 +72,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 		}
 		i++;
 	}
-	fcn_004e4e90((char*) 0x68bd14);
+	msx_StartMusicIfAllowed((char*) 0x68bd14);
 	handle = sb_LoadLocalizedSampleBank((char*) 0x68d2d0, 1);
 	fcn_004e4730((char*) 0x68d2c8);
 	fcn_004e4b60((char*) 0x68d2b8);

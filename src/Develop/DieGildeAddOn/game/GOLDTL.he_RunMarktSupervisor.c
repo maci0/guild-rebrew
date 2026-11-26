@@ -72,7 +72,7 @@ int __cdecl cm_SendMarktSlotDelta(MarktSlot*, unsigned char);
 float __cdecl fcn_005025a0(int, int);
 char* __cdecl gm_FindKind47ByOwner(int);
 void __cdecl gm_AddTime(void*, int, int, int);
-void __cdecl fcn_00549330(char*, int);
+void __cdecl he_SetActionSubject(char*, int);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl fcn_64d41a(char*, const char*, ...);
 
@@ -115,7 +115,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		return;
 	}
 	if (*(int*) (action + 0x70) < 0) {
-		fcn_00549330(action, *(unsigned short*) gm_CityEntity);
+		he_SetActionSubject(action, *(unsigned short*) gm_CityEntity);
 		*(int*) (action + 0x70) = 0;
 		return;
 	}

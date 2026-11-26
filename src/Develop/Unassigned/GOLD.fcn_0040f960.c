@@ -4,7 +4,7 @@ int __cdecl fcn_0042b5b0(char* name, int a1, int a2, int n, ...);
  * argument list. DATA TODO: the name strings
  * (0x5f2cc0..0x5f30f8) and handlers (0x40d680..0x40f8f0) are raw addresses. */
 /* ADDRESS: GOLD 0x0040f960 */
-void __cdecl fcn_0040f960(void)
+void __cdecl evt_RegisterSceneCommands(void)
 {
 	fcn_0042b5b0((char*) 0x005f30f8, 0x0040d8d0, 1, 4, 7, 7, 7, 6);
 	fcn_0042b5b0((char*) 0x005f30e4, 0x0040d940, 1, 2, 6, 1);

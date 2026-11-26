@@ -6,7 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c6820(int a1, void* payload)
+void __cdecl cm_SendCutCommand51(int a1, void* payload)
 {
 	char buf[0x9c];
 

@@ -43,7 +43,7 @@ extern LightState g_100dc20;
 
 char *__cdecl fcn_00502cd0(int, int, int, int, int, ...);
 void __cdecl fcn_00487970(char *, char *, int);
-void __cdecl fcn_00487c00(char *, char *, int);
+void __cdecl ai_RequestAusbauUpgrade(char *, char *, int);
 char *__cdecl gm_NextEntityQueryMatch(void);
 char *__cdecl he_StartHandlungSearch(int, int, int, int, int);
 char *__cdecl he_fn_Handlung(void);
@@ -73,7 +73,7 @@ void __cdecl ai_CalcMeisterLager(char *meister)
 			return;
 		}
 		fcn_00487970(warehouse, meister, 0x14);
-		fcn_00487c00(warehouse, meister, 0x32);
+		ai_RequestAusbauUpgrade(warehouse, meister, 0x32);
 		flag = 1;
 		s = (Slot*) lpObjekteINST;
 		for (i = 0; flag && i < 0x5008; s++, i++) {

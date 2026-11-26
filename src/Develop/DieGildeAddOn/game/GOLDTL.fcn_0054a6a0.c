@@ -21,7 +21,7 @@ extern unsigned char g_773d75;
 void __cdecl he_FreeAction(int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl gm_ResolveEntityById(int*, int, int, int);
-int __cdecl fcn_004c5620(int, int);
+int __cdecl cm_SendSetHE(int, int);
 void __cdecl gm_AddTime(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_RandomMod(int);
@@ -63,13 +63,13 @@ void __cdecl fcn_0054a6a0(int a0)
 	*(int*) (v2 + 0x84) = 0xffffffff;
 	gm_ResolveEntityById(&entity, 0, 0, *(int*) (v2 + 0x10));
 	if (!entity) {
-		fcn_004c5620(0xffffffff, v2);
+		cm_SendSetHE(0xffffffff, v2);
 		return;
 	}
 	if (*(unsigned short*) (entity + 0x27) == 0xffff) {
 		gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 		*(unsigned short*) (v2 + 0x56) = 7;
-		fcn_004c5620(0, v2);
+		cm_SendSetHE(0, v2);
 		return;
 	}
 	v3 = fcn_00502cd0(*(int*) (entity + 0x5d), 1, 0, 0x1b5);
@@ -111,13 +111,13 @@ void __cdecl fcn_0054a6a0(int a0)
 		}
 		gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 		*(unsigned short*) (v2 + 0x56) = 7;
-		*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
+		*(int*) (v2 + 0x84) = cm_SendSetHE(0, v2);
 		break;
 	}
 	case 1:
 		gm_AddTime(v2 + 0x52,
 		              (int) ((gm_RandomMod(2) & 0xffff) + 1), 0, 0);
-		*(int*) (v2 + 0x84) = fcn_004c5620(2, v2);
+		*(int*) (v2 + 0x84) = cm_SendSetHE(2, v2);
 		break;
 	case 0:
 		v1 = g_7f4ca0[*(unsigned short*) (entity + 0x27)].kind;
@@ -125,24 +125,24 @@ void __cdecl fcn_0054a6a0(int a0)
 			if (!v3) {
 				gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 				*(unsigned short*) (v2 + 0x56) = 7;
-				*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
+				*(int*) (v2 + 0x84) = cm_SendSetHE(0, v2);
 				return;
 			}
 			if (!fcn_00493200(&g_7f4ca0[*(unsigned short*) (entity + 0x27)], v3)) {
 				gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 				*(unsigned short*) (v2 + 0x56) = 7;
-				*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
+				*(int*) (v2 + 0x84) = cm_SendSetHE(0, v2);
 				return;
 			}
 			gm_AddTime(v2 + 0x52, 1, 0, 0);
-			*(int*) (v2 + 0x84) = fcn_004c5620(1, v2);
+			*(int*) (v2 + 0x84) = cm_SendSetHE(1, v2);
 		} else if (v3 && *(char*) (v3 + 0x22)) {
 			gm_AddTime(v2 + 0x52, 1, 0, 0);
-			*(int*) (v2 + 0x84) = fcn_004c5620(1, v2);
+			*(int*) (v2 + 0x84) = cm_SendSetHE(1, v2);
 		} else {
 			gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 			*(unsigned short*) (v2 + 0x56) = 7;
-			*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
+			*(int*) (v2 + 0x84) = cm_SendSetHE(0, v2);
 		}
 		break;
 	}

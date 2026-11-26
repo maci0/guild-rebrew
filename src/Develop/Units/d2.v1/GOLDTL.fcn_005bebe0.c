@@ -58,7 +58,7 @@ char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 int __cdecl gm_CheckPrivilege(int a1, char* a2, int a3);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int h);
-void __cdecl fcn_00471e30(int h);
+void __cdecl d2_DestroyForm(int h);
 void __cdecl d2_SetForm(int h, int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl io_AppendText(int id, ...);
@@ -66,7 +66,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
 void __cdecl fcn_005340f0(int i);
 void __cdecl fcn_00534160(int x0, int y, int len, int t);
 int __cdecl fcn_0051e070(void);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl main_RunFrameLoop(void* fn, int a);
 void __cdecl fcn_0057e880(int a, int b, int c, int d);
 void __cdecl gm_AddTime(Tbebe*, int, int, int);
@@ -200,6 +200,6 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_RunTalenteDialog, 0x677c7) != 0);
-	fcn_00532ef0();
-	fcn_00471e30(h);
+	d3_EndCameraAndUiMode();
+	d2_DestroyForm(h);
 }

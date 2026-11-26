@@ -18,7 +18,7 @@ int __cdecl fcn_0057de80(int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_0057df50(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_RunMessageFilterDialog(void)
 {
@@ -50,5 +50,5 @@ void __cdecl d2_RunMessageFilterDialog(void)
 			}
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

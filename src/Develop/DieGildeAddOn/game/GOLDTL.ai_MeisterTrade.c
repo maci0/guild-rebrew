@@ -118,7 +118,7 @@ int __cdecl gm_CollectBuildingStock(char* o, Stock* out, int producers);
 int __cdecl gm_CalcEntityInventoryStats(char* e, Stock* s);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_0047d1b0(void);
+int __cdecl ai_GetMaxActiveTradeActions(void);
 int __cdecl he_CountActiveTradeActions(void);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(char* a, int b);
@@ -405,7 +405,7 @@ next_request:
 	cnt = 0;
 	sent = 0;
 	n = 0;
-	if (he_CountActiveTradeActions() > fcn_0047d1b0()) {
+	if (he_CountActiveTradeActions() > ai_GetMaxActiveTradeActions()) {
 		*(unsigned char*) ((char*) &v.m + 0x9d) = 1;
 	}
 	for (i = 0; i < 3; i++) {

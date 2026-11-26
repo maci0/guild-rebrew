@@ -24,7 +24,7 @@ typedef struct Def {
 
 extern char* lpObjektePROT;
 
-Def* __cdecl fcn_005c61e0(int id);
+Def* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_HasActiveSpecialObject(char* e, int id);
 
 /* ADDRESS: GOLDTL 0x004a51d0 */
@@ -48,7 +48,7 @@ void __cdecl gm_CheckEntityObjectSlots(char* entity, int slotCount, Slot* slots,
 		counts->total++;
 		for (i = 0; i < slotCount; i++) {
 			if (*(unsigned short*) it == slots[i].id) {
-				d = fcn_005c61e0(*(unsigned short*) it);
+				d = gm_LookupSpecialObject(*(unsigned short*) it);
 				if (d == 0) {
 					slots[i].a = -1;
 					counts->blocked++;
@@ -71,7 +71,7 @@ void __cdecl gm_CheckEntityObjectSlots(char* entity, int slotCount, Slot* slots,
 	}
 	for (i = 0; i < slotCount; i++) {
 		if (slots[i].b == -1) {
-			d = fcn_005c61e0(slots[i].id);
+			d = gm_LookupSpecialObject(slots[i].id);
 			if (d != 0 && (d->mask & *(int*) (entity + 0x1ec)) != 0) {
 				counts->blocked++;
 			}

@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 void __cdecl he_StartAhmAction0x98(char* o)
 {
@@ -26,5 +26,5 @@ void __cdecl he_StartAhmAction0x98(char* o)
 	*(int*) (o + 0xac) = 0;
 	*(int*) (o + 0xb0) = -1;
 	*(int*) (o + 0xb4) = -1;
-	*(int*) (o + 0x84) = fcn_004c5620(0, o);
+	*(int*) (o + 0x84) = cm_SendSetHE(0, o);
 }

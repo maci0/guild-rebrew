@@ -26,8 +26,8 @@ void __cdecl fcn_00533a60(int, int, void *, int, int, int);
 void __cdecl fcn_00472640(void *, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(void *);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(void *);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_00584f00(int, void *, int);
 void __cdecl fcn_005263d0(void *, char *, int);
 
@@ -70,7 +70,7 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 	if (count == 0) {
 		io_FormatTextBuffer(msg, 0x404a, 0x868060 + g_773d75 * 0x2f4);
 		fcn_005263d0(*(void **)0x14b5404, msg, 0);
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 		return;
 	}
 	w = fcn_00470820(0, 0, (void *)0x6a9380);
@@ -172,6 +172,6 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 		}
 	} while (main_RunFrameLoop(0x5848b0, 0x677c7));
 	d2_ClearRadioGroup(idx);
-	fcn_00471e30(w);
-	fcn_00532ef0();
+	d2_DestroyForm(w);
+	d3_EndCameraAndUiMode();
 }

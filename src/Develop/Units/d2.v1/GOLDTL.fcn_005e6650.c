@@ -53,10 +53,10 @@ void __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl fcn_00526120(int, int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d2_OpenBlutracheDialog(char* e)
 {
@@ -113,8 +113,8 @@ void __cdecl d2_OpenBlutracheDialog(char* e)
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_OpenBlutracheDialog, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
-	fcn_00532ef0();
+	d3_EndCameraAndUiMode();
 }

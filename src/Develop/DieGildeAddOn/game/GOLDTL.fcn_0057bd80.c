@@ -13,7 +13,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 void __cdecl he_ChargeOrCurseZigeuner(ENTITY_RECORD*, int);
 void __cdecl fcn_0057bed0(ENTITY_RECORD*, char*, int);
@@ -36,7 +36,7 @@ void __cdecl he_RunAction0x9d(char* u)
 		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 		h2 = gm_LookupEntityRecordById(*(int*) (u + 0xb0));
 		if (h2 == 0 || ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)])->entity_index == 0xffff) {
-			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 			return;
 		}
 		h = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)]);
@@ -46,11 +46,11 @@ void __cdecl he_RunAction0x9d(char* u)
 			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0x18, 0, 0);
 			*(short*) (u + 0x56) = 6;
 			*(int*) (u + 0x58) = gm_RandomMod(4) * 15 + 5;
-			*(int*) (u + 0x84) = fcn_004c5620(1, u);
+			*(int*) (u + 0x84) = cm_SendSetHE(1, u);
 			break;
 		case 1:
 			he_ChargeOrCurseZigeuner(h, *(int*) (u + 0xac));
-			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 			break;
 		}
 	} else {

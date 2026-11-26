@@ -40,7 +40,7 @@ void __cdecl d2_ShowIntimidationDialog(void);
 
 /* The message struct is local to the branch that sends it: with it at function
    scope the header stores before the e+4 load issue ahead of the push. */
-int __cdecl fcn_005d63e0(unsigned char* obj, char* arg)
+int __cdecl gm_RunIntimidationAction(unsigned char* obj, char* request)
 {
 	Req req;
 	char text[0x40];
@@ -49,7 +49,7 @@ int __cdecl fcn_005d63e0(unsigned char* obj, char* arg)
 
 	result = 0;
 	if (obj[2] != 6 && obj[2] != 7) {
-		e = gm_LookupEntityRecordById(*(int*) (arg + 0x214));
+		e = gm_LookupEntityRecordById(*(int*) (request + 0x214));
 		if (e == 0) {
 			return 0x60;
 		}

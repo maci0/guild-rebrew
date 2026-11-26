@@ -7,7 +7,7 @@ extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl he_AssignActionSlot(int, int, int, char*);
 extern void __cdecl cm_SendCancelCharacterActions(int);
 extern int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
-extern int __cdecl fcn_004c5620(int, char*);
+extern int __cdecl cm_SendSetHE(int, char*);
 extern char* __cdecl he_StartHandlungSearch(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern unsigned short __cdecl gm_RandomMod(unsigned short);
@@ -68,7 +68,7 @@ void __cdecl he_RunMultiActorAction(char* obj)
 			iter += 4;
 		}
 		gm_AddTime(time, 0, 5, 0);
-		*(int*) (obj + 0x84) = fcn_004c5620(1, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(1, obj);
 		return;
 	case 1:
 		iter = obj + 0x8c;
@@ -76,7 +76,7 @@ void __cdecl he_RunMultiActorAction(char* obj)
 			rec = gm_LookupEntityRecordById(*(int*) iter);
 			if (rec != 0 && *(int*) (rec + 0x184) != 0 && *(int*) (*(char**) (rec + 0x184) + 0x128) != 0) {
 				gm_AddTime(time, 0, 4, 0);
-				*(int*) (obj + 0x84) = fcn_004c5620(1, obj);
+				*(int*) (obj + 0x84) = cm_SendSetHE(1, obj);
 				return;
 			}
 			count++;
@@ -84,14 +84,14 @@ void __cdecl he_RunMultiActorAction(char* obj)
 		}
 		*(pos14_7f4c00*) (obj + 0x44) = gm_GameTime;
 		gm_AddTime(time, 0, 0xa, 0);
-		*(int*) (obj + 0x84) = fcn_004c5620(2, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(2, obj);
 		return;
 	case 2:
 		stamp = *(pos14_7f4c00*) (obj + 0x44);
 		gm_AddTime(&stamp, 0x18, 0, 0);
 		if (gm_CompareGameTime((pos14_7f4c00*) 0x7f4c00, &stamp) > 0) {
 			gm_AddTime(time, 0, 2, 0);
-			*(int*) (obj + 0x84) = fcn_004c5620(5, obj);
+			*(int*) (obj + 0x84) = cm_SendSetHE(5, obj);
 			return;
 		}
 		found = he_StartHandlungSearch(1, 0, 0x48);
@@ -144,7 +144,7 @@ void __cdecl he_RunMultiActorAction(char* obj)
 				*(int*) (obj + 0xd8) = fcn_004c5980(msg);
 				*(int*) (obj + 0x70) = 3;
 				gm_AddTime(time, 0, 0xa, 0);
-				*(int*) (obj + 0x84) = fcn_004c5620(3, obj);
+				*(int*) (obj + 0x84) = cm_SendSetHE(3, obj);
 				return;
 			}
 		}
@@ -159,7 +159,7 @@ void __cdecl he_RunMultiActorAction(char* obj)
 				he_CharacterBehavior(obj, (int) pos);
 			}
 		}
-		*(int*) (obj + 0x84) = fcn_004c5620(2, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(2, obj);
 		return;
 	case 3:
 		gm_AddTime(time, 0, 1, 0);
@@ -167,21 +167,21 @@ void __cdecl he_RunMultiActorAction(char* obj)
 			rec = cm_GetCommandResult(*(int*) (obj + 0xd8));
 			if (rec != 0) {
 				*(int*) (obj + 0xd4) = *(int*) rec;
-				*(int*) (obj + 0x84) = fcn_004c5620(4, obj);
+				*(int*) (obj + 0x84) = cm_SendSetHE(4, obj);
 				return;
 			}
-			*(int*) (obj + 0x84) = fcn_004c5620(5, obj);
+			*(int*) (obj + 0x84) = cm_SendSetHE(5, obj);
 			return;
 		}
-		*(int*) (obj + 0x84) = fcn_004c5620(3, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(3, obj);
 		return;
 	case 4:
 		gm_AddTime(time, 0, 5, 0);
 		if (cut_FindCutsceneById(*(int*) (obj + 0xd4)) != 0) {
-			*(int*) (obj + 0x84) = fcn_004c5620(4, obj);
+			*(int*) (obj + 0x84) = cm_SendSetHE(4, obj);
 			return;
 		}
-		*(int*) (obj + 0x84) = fcn_004c5620(5, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(5, obj);
 		return;
 	case 5:
 		iter = obj + 0x8c;
@@ -200,7 +200,7 @@ void __cdecl he_RunMultiActorAction(char* obj)
 			he_FreeAction(obj);
 			return;
 		}
-		*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(-1, obj);
 		return;
 	default:
 		return;

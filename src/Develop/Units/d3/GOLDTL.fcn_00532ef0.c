@@ -27,7 +27,7 @@ void __cdecl d3_SetObjectRotation(View* v, float* r);
 void __cdecl d3_AnimateCameraToStoredTransform(void);
 void __cdecl fcn_00530510(void);
 
-void __cdecl fcn_00532ef0(void)
+void __cdecl d3_EndCameraAndUiMode(void)
 {
 	int done;
 	char* e;

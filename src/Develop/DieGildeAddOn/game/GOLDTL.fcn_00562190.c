@@ -29,12 +29,12 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 
-int __cdecl fcn_004a5e60(House* h, int kind, __int64 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(House* h, int kind, __int64 f, int c, float r, int* out);
 int __cdecl gm_CheckPrivilege(int k, House* h, Query* q);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
 int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 /* `close` is set in two if arms: one combined condition keeps it in a
  * register, three arms give it more slot weight than `o`. */
@@ -57,7 +57,7 @@ void __cdecl he_InitSpionage(char* u)
 	*(int*) (u + 0xd8) = -1;
 	p = gm_LookupEntityRecordById(*(int*) (u + 0xc4));
 	if (p == 0) {
-		*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+		*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 		return;
 	}
 	*(int*) (u + 0xbc) = gm_RandomMod(0x100);
@@ -68,7 +68,7 @@ void __cdecl he_InitSpionage(char* u)
 	gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 	for (e = he_StartHandlungSearch(1, 0, 0x18); e != 0; e = he_fn_Handlung()) {
 		if (*(unsigned short*) (u + 8) == *(unsigned short*) (e + 8) && *(int*) (e + 4) != *(int*) (u + 4) && *(int*) (e + 0xc4) == *(int*) (u + 0xc4)) {
-			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 			return;
 		}
 		if (*(int*) (e + 0xd8) != -1) {
@@ -77,10 +77,10 @@ void __cdecl he_InitSpionage(char* u)
 	}
 	gm_ResolveEntityById((void**) (&o), 0, 0, *(int*) (u + 0xac));
 	if (o == 0) {
-		fcn_004a5e60(&((House*)g_7f4ca0)[*(unsigned short*) (u + 8)], 6, g_666018, 0, 100.0f, (int*) (u + 0xac));
+		ai_FindEntityInFavorRange(&((House*)g_7f4ca0)[*(unsigned short*) (u + 8)], 6, g_666018, 0, 100.0f, (int*) (u + 0xac));
 		gm_ResolveEntityById((void**) (&o), 0, 0, *(int*) (u + 0xac));
 		if (o == 0) {
-			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 			return;
 		}
 	}
@@ -102,10 +102,10 @@ void __cdecl he_InitSpionage(char* u)
 	cm_SendLogAction(g_67ed14);
 	if (close != 0) {
 		*(int*) (u + 0xd8) = cm_SendAllocCharacter(0x11, *(int*) (o + 1), -1, 0, 0, 0, g_6a656c);
-		r = fcn_004c5620(0, u);
+		r = cm_SendSetHE(0, u);
 	} else {
 		*(pos14_7f4c00*) (u + 0x52) = *(pos14_7f4c00*) (u + 0xc8);
-		r = fcn_004c5620(4, u);
+		r = cm_SendSetHE(4, u);
 	}
 	*(int*) (u + 0x84) = r;
 	cm_SendTraceEnd(g_67ed14);

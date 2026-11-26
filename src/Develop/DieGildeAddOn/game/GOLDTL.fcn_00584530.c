@@ -29,7 +29,7 @@ extern char g_6a3db4[];
 char* __cdecl strcpy(char*, const char*);
 #pragma intrinsic(strcpy)
 int __cdecl gm_FindHeadIconIndex(char*);
-Name6 __cdecl fcn_00506d50(int);
+Name6 __cdecl gm_GetStatRecord(int);
 
 void __cdecl d2_InitDefaultMenueProfile(void)
 {
@@ -45,6 +45,6 @@ void __cdecl d2_InitDefaultMenueProfile(void)
 	g_7e2468 = gm_FindHeadIconIndex(g_6a3db4) + 0x639;
 	strcpy(g_7e23ea, g_14b4fa8);
 	strcpy(g_7e240a, g_14b4fac);
-	r = fcn_00506d50((*(unsigned char*)&g_7e23e3));
+	r = gm_GetStatRecord((*(unsigned char*)&g_7e23e3));
 	*(Name5*) g_7e2430 = *(Name5*) &r;
 }

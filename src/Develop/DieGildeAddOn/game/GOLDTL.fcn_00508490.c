@@ -11,7 +11,7 @@ typedef struct
 
 extern float g_6628a8;
 
-int __cdecl fcn_00508220(int k, S0c* s);
+int __cdecl gm_GetKindRecord(int k, S0c* s);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, int* v);
@@ -29,7 +29,7 @@ float __cdecl gm_ApplyPlagueInfection(char* p)
 	if (flags & 0xf) {
 		return g_6628a8;
 	}
-	if (!fcn_00508220(1, &s)) {
+	if (!gm_GetKindRecord(1, &s)) {
 		return g_6628a8;
 	}
 	r = gm_RandomMod((unsigned short) s.c);

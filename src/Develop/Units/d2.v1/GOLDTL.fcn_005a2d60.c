@@ -6,7 +6,7 @@
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_005a2580(char*, char*, char*);
 void __cdecl d2_ShowDunkleEcke(char*, char*);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d2_OpenDunkleEcke(char* building, char* context)
 {
@@ -21,5 +21,5 @@ void __cdecl d2_OpenDunkleEcke(char* building, char* context)
 			d2_ShowDunkleEcke(building, entry);
 		}
 	}
-	fcn_00532ef0();
+	d3_EndCameraAndUiMode();
 }

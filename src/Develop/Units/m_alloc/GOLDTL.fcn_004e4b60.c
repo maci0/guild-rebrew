@@ -13,7 +13,7 @@ extern int g_772f64;
 
 int __cdecl fcn_00459ae0(float a, float b, float c);
 int __cdecl d3_CreateSkyLayer(int h, int a, int b, Col4e4b60 c, float d, int e, float f, float g);
-void __cdecl fcn_00459940(int h, int s, int a);
+void __cdecl d3_SetSkyLayerScrollSpeed(int h, int s, int a);
 void __cdecl fcn_00459980(int h, int s, int a, float b);
 
 /* ADDRESS: GOLDTL 0x004e4b60 */
@@ -26,7 +26,7 @@ void __cdecl fcn_004e4b60(int textureName)
 		*(int*) &c = 0;
 		c.b = 0;
 		g_772f64 = d3_CreateSkyLayer(g_772f68, 0, textureName, c, 3.0f, 0, 0.8f, -0.25f);
-		fcn_00459940(g_772f68, g_772f64, 0);
+		d3_SetSkyLayerScrollSpeed(g_772f68, g_772f64, 0);
 		fcn_00459980(g_772f68, g_772f64, 0xff, 10.0f);
 	}
 }

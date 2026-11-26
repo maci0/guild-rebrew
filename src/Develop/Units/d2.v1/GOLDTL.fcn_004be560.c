@@ -21,7 +21,7 @@ unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl io_ClearInputState(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* Route one enhanced-building selection through the query engine: build the
@@ -136,7 +136,7 @@ tail:
 			}
 		}
 	}
-	fcn_00471e30(win);
+	d2_DestroyForm(win);
 	io_ClearInputState();
 	return ret;
 }

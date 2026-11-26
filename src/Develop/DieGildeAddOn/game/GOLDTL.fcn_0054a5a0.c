@@ -17,7 +17,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_004c5620(int, char*);
+void __cdecl cm_SendSetHE(int, char*);
 int __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl cm_RequestAllocThemaPredigt(int, struct target7);
 
@@ -36,7 +36,7 @@ void __cdecl he_AllocPredigt(char* u)
 	*(int*) (u + 0x58) = 0;
 	gm_ResolveEntityById((void**) (&found), 0, 0, *(int*) (u + 0x10));
 	if (found == 0) {
-		fcn_004c5620(-1, u);
+		cm_SendSetHE(-1, u);
 		return;
 	}
 	if (fcn_00502cd0(*(int*) (found + 0x5d), 1, 0, 0x1b5) == 0) {
@@ -46,5 +46,5 @@ void __cdecl he_AllocPredigt(char* u)
 		cm_RequestAllocThemaPredigt(*(int*) (found + 1), t);
 	}
 	*(int*) (u + 0x84) = -1;
-	fcn_004c5620(0, u);
+	cm_SendSetHE(0, u);
 }

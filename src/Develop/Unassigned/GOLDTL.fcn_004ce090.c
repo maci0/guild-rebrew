@@ -10,7 +10,7 @@ extern int g_9baa24[8];
 
 char* __cdecl fcn_004ce190(int);
 
-int __cdecl fcn_004ce090(void)
+int __cdecl gm_AreAllMultiplayerReady(void)
 {
 	unsigned int need;
 	unsigned int cnt;

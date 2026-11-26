@@ -22,7 +22,7 @@ extern char* g_104049c;
 extern unsigned int g_10404a0;
 extern int g_67bd2c;
 
-int __cdecl fcn_0045be40(char* name);
+int __cdecl d3_ResolveTexturePath(char* name);
 void __cdecl d3_LoadTextureFromFile(int a1, int a2, void* a3, int a4, int a5, int a6);
 void __cdecl fcn_0045ce20(Tex* a0);
 
@@ -40,7 +40,7 @@ void __cdecl fcn_0045ce90(Tex* texture)
 		}
 		saved = g_6b7ff8;
 		if (texture->x50 == 0 && texture->parent != 0 && texture->name[0] != '*') {
-			obj = fcn_0045be40(texture->name);
+			obj = d3_ResolveTexturePath(texture->name);
 			if (obj != 0) {
 				int val = g_67bd2c;
 				g_6b7ff8 = (texture->flags & 0x20) ? 0 : saved;

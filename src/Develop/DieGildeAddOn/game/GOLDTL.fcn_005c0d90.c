@@ -36,7 +36,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl cm_SendCopyEntityData(char* msg);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl fcn_005c0d90(unsigned short* obj)
 {
@@ -116,6 +116,6 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005c0d90, 0x677c7) != 0);
-	fcn_00471e30(d);
+	d2_DestroyForm(d);
 	return res;
 }

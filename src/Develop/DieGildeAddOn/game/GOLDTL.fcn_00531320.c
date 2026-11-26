@@ -22,7 +22,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl cm_SendCopyEntityData(Msg_531320*);
 
 /* ADDRESS: GOLDTL 0x00531320 */
@@ -137,7 +137,7 @@ void __cdecl fcn_00531320(void)
 		*(char*) (row + 0x1c) = 0;
 	}
 	if (hit != 0) {
-		fcn_004c5620(*(int*) (hit + 0x70), hit);
+		cm_SendSetHE(*(int*) (hit + 0x70), hit);
 	}
 	if (msg.kind != 0) {
 		cm_SendCopyEntityData(&msg);

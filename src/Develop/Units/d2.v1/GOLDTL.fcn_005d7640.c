@@ -37,10 +37,10 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl gm_HandleGegenspionage();
 
-int __cdecl fcn_005d7640(ENTITY_RECORD* ent, Cmd* cmd)
+int __cdecl d2_RunGegenspionageDialog(ENTITY_RECORD* ent, Cmd* cmd)
 {
 	ENTITY_RECORD* pa;
 	char text[0x200];
@@ -128,6 +128,6 @@ int __cdecl fcn_005d7640(ENTITY_RECORD* ent, Cmd* cmd)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(gm_HandleGegenspionage, 0x657c7));
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return 1;
 }

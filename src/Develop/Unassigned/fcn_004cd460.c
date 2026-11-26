@@ -1,4 +1,4 @@
-int __cdecl fcn_004fbc90(void *);
+int __cdecl gm_DispatchDisasterCommand(void *);
 
 /* ADDRESS: GOLDTL 0x004cd460 */
 int __cdecl fcn_004cd460(void *a1, char *result)
@@ -8,7 +8,7 @@ int __cdecl fcn_004cd460(void *a1, char *result)
 		result[1] = 0;
 		*(int *) (result + 6) = 0;
 	}
-	if (fcn_004fbc90((void *) ((char *) a1 + 0x10)) == 0) {
+	if (gm_DispatchDisasterCommand((void *) ((char *) a1 + 0x10)) == 0) {
 		return 1;
 	}
 	if (result != 0) {

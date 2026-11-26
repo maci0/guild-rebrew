@@ -35,13 +35,13 @@ unsigned short __cdecl gm_RandomMod(int);
 unsigned int __cdecl cut_RandMod(int);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
 char* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
-int __cdecl fcn_004d1020(char*, char*, char*, int, int);
+int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
-int __cdecl fcn_004c6820(int, void*);
+int __cdecl cm_SendCutCommand51(int, void*);
 int __cdecl cm_RequestChTalkAction(char*, int, int, char*);
 unsigned int __cdecl fcn_004d89c0(int, unsigned int, int);
 int __cdecl sprintf(char*, char*, ...);
@@ -277,7 +277,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 								n = (int)gm_FindEntityActiveItem(tgt);
 								if (n && *(int*)(n + 0x20) >= 1) {
 									cm_RequestChangeBits(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
-									*(int*)(e + 8) = fcn_004d1020((char*)v80, tgt, obj, 0, 0);
+									*(int*)(e + 8) = cut_AssignTargetOrder((char*)v80, tgt, obj, 0, 0);
 								}
 							}
 						}
@@ -412,7 +412,7 @@ tail1_body:
 						break;
 					cm_SendCutCommand55(obj, 4, msg.f);
 					*((unsigned char*)msg.f + 0x22) = 1;
-					p->timer = fcn_004c6820(*(int*)(context + 0x10), msg.f);
+					p->timer = cm_SendCutCommand51(*(int*)(context + 0x10), msg.f);
 				}
 			} else if (*((unsigned char*)p + 0x22) == 1) {
 				if (*(int*)(*(int*)(obj + 0x184) + 0x128) != 0)
@@ -428,7 +428,7 @@ tail1_body:
 				*((unsigned char*)msg.f + 0x20) = (unsigned char)v10;
 				*((unsigned char*)msg.f + 0x21) = (unsigned char)v14;
 				*((unsigned char*)msg.f + 0x22) = 2;
-				fcn_004c6820(*(int*)(context + 0x10), msg.f);
+				cm_SendCutCommand51(*(int*)(context + 0x10), msg.f);
 				n = (*(int*)(*(int*)(obj + 0x184) + 0x34));
 				p->timer = cm_RequestChTalkAction((char*)n, v10, v14, 0);
 			} else if (*((unsigned char*)p + 0x22) == 2) {

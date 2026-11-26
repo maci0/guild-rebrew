@@ -1,6 +1,6 @@
 unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_00508220(int type, int* out);
+int __cdecl gm_GetKindRecord(int type, int* out);
 void __cdecl cm_BeginPacketFieldDelta(char* off, int v);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, int* v);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -58,7 +58,7 @@ int __cdecl he_InflictAffliction(char* off, float chance, int kind, float* out)
 			}
 			type = other;
 		}
-		if (!fcn_00508220(type, tmp)) {
+		if (!gm_GetKindRecord(type, tmp)) {
 			return type;
 		}
 		roll = gm_RandomMod(tmp[0]);

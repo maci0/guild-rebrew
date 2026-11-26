@@ -22,26 +22,26 @@ void __cdecl fcn_0054c800(void);
 void __cdecl he_RunCourtship(void);
 void __cdecl he_StartAction0x42EntityMsg(void);
 void __cdecl he_InitStreife(void);
-void __cdecl fcn_0054da10(void);
+void __cdecl he_UpdateRobberyAction(void);
 void __cdecl he_StartRazzia(void);
 void __cdecl he_RunRazzia(void);
 void __cdecl he_StartDuellChallenge(void);
 void __cdecl he_RunDuellChallenge(void);
-void __cdecl fcn_0054f340(void);
+void __cdecl he_InitDuellIntro(void);
 void __cdecl fcn_0054f600(void);
 void __cdecl he_RunDuellCutscene(void);
 void __cdecl he_AllocRndGeselle(void);
 void __cdecl he_RunHireJourneymanAction(void);
 void __cdecl he_StartAction0x4b(void);
 void __cdecl he_HandleAction0x4b(void);
-void __cdecl fcn_005504f0(void);
-void __cdecl fcn_00550540(void);
+void __cdecl he_InitAction0x52(void);
+void __cdecl he_RunAction0x52(void);
 void __cdecl he_InitEvent053(void);
 void __cdecl he_RunEvent053(void);
 void __cdecl he_RunMeisterpruefungPrompt(void);
-void __cdecl fcn_00550940(void);
+void __cdecl he_InitMeisterpruefDialog(void);
 void __cdecl he_RunMeisterpruefungExam(void);
-void __cdecl fcn_00550ba0(void);
+void __cdecl he_InitAction0x56(void);
 void __cdecl he_RunGambleBet(void);
 void __cdecl he_AllocSellObjekt(void);
 void __cdecl he_AllocBuildingDamageEvent(void);
@@ -51,7 +51,7 @@ void __cdecl he_RunAction0x5a(void);
 void __cdecl fcn_00551210(void);
 void __cdecl he_RunPeriodicStipend(void);
 void __cdecl he_RunPeriodicApDrain(void);
-void __cdecl fcn_005513c0(void);
+void __cdecl he_InitAction0x5d(void);
 void __cdecl he_RunChildBirth(void);
 void __cdecl he_AllocLevelTraining(void);
 void __cdecl he_RunLevelTraining(void);
@@ -73,13 +73,13 @@ void __cdecl fcn_00554770(void);
 void __cdecl RunSimUnfall(void);
 void __cdecl he_StartAction0x67(void);
 void __cdecl he_RunAction0x67(void);
-void __cdecl fcn_00554ed0(void);
+void __cdecl he_InitAction0x69(void);
 void __cdecl fcn_00554f00(void);
 void __cdecl fcn_00555440(void);
 void __cdecl gm_SimulateWirtshaus(void);
 void __cdecl he_StartTalentLevelAction(void);
 void __cdecl d2_HandleTalentLevelDialog(void);
-void __cdecl fcn_00555cd0(void);
+void __cdecl he_InitAction0x6bGedicht(void);
 void __cdecl he_RunBardeEvent(void);
 void __cdecl fcn_00556110(void);
 void __cdecl he_RunCityPopulationEvent(void);
@@ -162,7 +162,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(66, (void*) he_StartAction0x42EntityMsg, (void*) 0x0054d810) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(67, (void*) he_InitStreife, (void*) fcn_0054da10) != 0) {
+	if (he_RegisterHandler(67, (void*) he_InitStreife, (void*) he_UpdateRobberyAction) != 0) {
 		return 1;
 	}
 	he_RegisterActionMeta(67, 0, 0, 1287, -1);
@@ -172,7 +172,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(69, (void*) he_StartDuellChallenge, (void*) he_RunDuellChallenge) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(70, (void*) fcn_0054f340, (void*) fcn_0054f600) != 0) {
+	if (he_RegisterHandler(70, (void*) he_InitDuellIntro, (void*) fcn_0054f600) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(71, (void*) 0x0054f910, (void*) he_RunDuellCutscene) != 0) {
@@ -187,7 +187,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(81, (void*) 0x550480, (void*) 0x5504c0) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(82, (void*) fcn_005504f0, (void*) fcn_00550540) != 0) {
+	if (he_RegisterHandler(82, (void*) he_InitAction0x52, (void*) he_RunAction0x52) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(83, (void*) he_InitEvent053, (void*) he_RunEvent053) != 0) {
@@ -196,10 +196,10 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(84, (void*) 0x00550770, (void*) he_RunMeisterpruefungPrompt) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(85, (void*) fcn_00550940, (void*) he_RunMeisterpruefungExam) != 0) {
+	if (he_RegisterHandler(85, (void*) he_InitMeisterpruefDialog, (void*) he_RunMeisterpruefungExam) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(86, (void*) fcn_00550ba0, (void*) he_RunGambleBet) != 0) {
+	if (he_RegisterHandler(86, (void*) he_InitAction0x56, (void*) he_RunGambleBet) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(87, (void*) he_AllocSellObjekt, (void*) 0x00550de0) != 0) {
@@ -217,7 +217,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(92, (void*) 0x5512f0, (void*) he_RunPeriodicApDrain) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(93, (void*) fcn_005513c0, (void*) he_RunChildBirth) != 0) {
+	if (he_RegisterHandler(93, (void*) he_InitAction0x5d, (void*) he_RunChildBirth) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(94, (void*) he_AllocLevelTraining, (void*) he_RunLevelTraining) != 0) {
@@ -260,13 +260,13 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(104, (void*) fcn_00555440, (void*) gm_SimulateWirtshaus) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(105, (void*) fcn_00554ed0, (void*) fcn_00554f00) != 0) {
+	if (he_RegisterHandler(105, (void*) he_InitAction0x69, (void*) fcn_00554f00) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(106, (void*) he_StartTalentLevelAction, (void*) d2_HandleTalentLevelDialog) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(107, (void*) fcn_00555cd0, (void*) he_RunBardeEvent) != 0) {
+	if (he_RegisterHandler(107, (void*) he_InitAction0x6bGedicht, (void*) he_RunBardeEvent) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(109, (void*) fcn_00556110, (void*) he_RunCityPopulationEvent) != 0) {

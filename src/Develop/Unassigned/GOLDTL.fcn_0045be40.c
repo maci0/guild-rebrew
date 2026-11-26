@@ -10,7 +10,7 @@ extern char g_6b89f0[];
 
 int __cdecl vfs_ResolvePath(char*, int, int, char*);
 
-void __cdecl fcn_0045be40(char* name)
+void __cdecl d3_ResolveTexturePath(char* name)
 {
 	char buf[0x100];
 

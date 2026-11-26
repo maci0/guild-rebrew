@@ -9,7 +9,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_HandleAction0x2e(char* u)
@@ -30,7 +30,7 @@ void __cdecl he_HandleAction0x2e(char* u)
 		b = gm_LookupEntityRecordById(*(int*) (u + 0xb0));
 		if (b == 0 || a == 0) {
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 			return;
 		}
 		if (*(int*) (u + 0x70) != 0) {
@@ -42,7 +42,7 @@ void __cdecl he_HandleAction0x2e(char* u)
 		}
 		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
-		*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+		*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 	} else {
 		he_FreeAction(u);
 	}

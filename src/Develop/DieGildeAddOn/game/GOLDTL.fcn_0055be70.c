@@ -22,7 +22,7 @@ void __cdecl cm_RequestPlayAnimation(int, char*, int);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 int __cdecl he_DetectNearbyPatrolAction(struct search* query)
 {
@@ -79,6 +79,6 @@ int __cdecl he_DetectNearbyPatrolAction(struct search* query)
 	*(int*) (found + 0xd4) = *(int*) (query->house + 4);
 	*(pos14_7f4c00*) (found + 0x52) = gm_GameTime;
 	gm_AddTime((pos14_7f4c00*) (found + 0x52), 0, 8, 0);
-	fcn_004c5620(0x400, found);
+	cm_SendSetHE(0x400, found);
 	return 1;
 }

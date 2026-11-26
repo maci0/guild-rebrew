@@ -28,7 +28,7 @@ int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
-int __cdecl fcn_00580140(void)
+int __cdecl d2_ShowTutorialPage(void)
 {
 	int r;
 

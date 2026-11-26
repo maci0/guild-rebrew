@@ -19,7 +19,7 @@ extern double g_664f18;
 int __cdecl gm_AccumulateTyped2(Entity*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_005c4ec0(int, Entity*, int, char*);
+int __cdecl gm_CollectPaymentOrLiquidate(int, Entity*, int, char*);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
 int __cdecl gm_CheckAndCollectEntityDebt(Entity* e, int extra)
@@ -47,7 +47,7 @@ int __cdecl gm_CheckAndCollectEntityDebt(Entity* e, int extra)
 		return 0;
 	}
 	io_FormatTextBuffer(msg, 0x42c3);
-	got = fcn_005c4ec0(e->id, e, amount, msg);
+	got = gm_CollectPaymentOrLiquidate(e->id, e, amount, msg);
 	he_PostEntityMessage(e->id, e->id, msg, 1, 0x5ff, "_NACHRICHTEN_HS_69");
 	return got <= amount / 2;
 }

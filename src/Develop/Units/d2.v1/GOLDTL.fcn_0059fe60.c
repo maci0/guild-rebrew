@@ -38,8 +38,8 @@ void __cdecl cm_SendCopyEntityData(char *);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_0059fa80(Slot59fe *, char *, char *);
 int __cdecl main_RunFrameLoop(void *, int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* Residence ("Wohnsitz") dialog: lists the player's lovers' residences as
  * buttons and runs the dialog loop until it closes. */
@@ -159,6 +159,6 @@ void __cdecl fcn_0059fe60(char *a0)
 			}
 		}
 	} while (main_RunFrameLoop((void *) fcn_0059fe60, 0x67fff) != 0);
-	fcn_00471e30(dlg);
-	fcn_00532ef0();
+	d2_DestroyForm(dlg);
+	d3_EndCameraAndUiMode();
 }

@@ -20,7 +20,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_004e4ae0(char*, int);
-void __cdecl fcn_004e4e90(char*);
+void __cdecl msx_StartMusicIfAllowed(char*);
 void __cdecl fcn_004e4730(char*);
 int __cdecl fcn_004e4470(char*);
 int __cdecl cut_WaitForTimeoutOrInput(int, int, int);
@@ -36,7 +36,7 @@ void __cdecl d2_SetBildArgument(int, int);
 void __cdecl d2_SelectControl(int);
 char* __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(int);
 void __cdecl fcn_004e44f0(int);
@@ -50,67 +50,67 @@ float __cdecl gm_GetEntityHealth(char*);
 
 /* ADDRESS: GOLD 0x004e0e90 */
 /* ADDRESS: GOLDTL 0x004e27b0 */
-int __cdecl fcn_004e27b0(char* x)
+int __cdecl gm_NotifyGeburt(char* event)
 {
 	char buf[0x200];
-	char* a;
-	char* b;
-	char* c;
+	char* parent;
+	char* child;
+	char* spouse;
 
-	a = gm_LookupEntityRecordById(*(int*) (x + 0x34));
-	b = gm_LookupEntityRecordById(*(int*) (x + 0x38));
-	if (a == 0 || b == 0)
+	parent = gm_LookupEntityRecordById(*(int*) (event + 0x34));
+	child = gm_LookupEntityRecordById(*(int*) (event + 0x38));
+	if (parent == 0 || child == 0)
 		return 0;
-	c = gm_LookupEntityRecordById(*(int*) (a + 0x5c));
-	if (c == 0 || c[2] == 0xf) {
-		cm_RequestKillSpieler(*(int*) (b + 4), 1);
+	spouse = gm_LookupEntityRecordById(*(int*) (parent + 0x5c));
+	if (spouse == 0 || spouse[2] == 0xf) {
+		cm_RequestKillSpieler(*(int*) (child + 4), 1);
 		return 0;
 	}
-	if (a[2] == 6 || a[2] == 7) {
+	if (parent[2] == 6 || parent[2] == 7) {
 		io_FormatTextBuffer(buf, 0x11c1);
 		strcat(buf, g_14a9a28);
-		he_SendCmdMessage(a, x, buf, g_6b5c60);
+		he_SendCmdMessage(parent, event, buf, g_6b5c60);
 	}
 	return 1;
 }
 
 /* ADDRESS: GOLDTL 0x004e2890 */
-void __cdecl fcn_004e2890(char* m)
+void __cdecl cut_PlayBirthCutscene(char* event)
 {
 	char buf[0x10];
-	char* a;
-	char* b;
+	char* parent;
+	char* child;
 	int snd;
 	int esc;
 	int n;
 	int sc;
 	int w;
 
-	a = gm_LookupEntityRecordById(*(int*) (m + 0x34));
-	b = gm_LookupEntityRecordById(*(int*) (m + 0x38));
-	if (a == 0 || b == 0)
+	parent = gm_LookupEntityRecordById(*(int*) (event + 0x34));
+	child = gm_LookupEntityRecordById(*(int*) (event + 0x38));
+	if (parent == 0 || child == 0)
 		return;
 	{
 		int v;
 
 		v = 8;
-		cm_BeginPacketFieldDelta(b, *(int*) (b + 4));
+		cm_BeginPacketFieldDelta(child, *(int*) (child + 4));
 		cm_AppendPacketFieldDelta(1, 1, 2, &v);
 		cm_RequestChangeAttribute();
 	}
 	cut_EventLoopFlags = 0x702c6;
 	d2_SuppressOverlay = 1;
 	snd = fcn_004e4ae0("GEBURT.sbf", 0);
-	fcn_004e4e90("cd2\\Geburt.mp3");
+	msx_StartMusicIfAllowed("cd2\\Geburt.mp3");
 	fcn_004e4730("Geburt.ed3");
 	esc = fcn_004e4470("cutscenes\\geburt\\enter_Geburt.esc");
 	if (cut_WaitForTimeoutOrInput(0x1964, 0, 0) == 0) {
-		if (a[9] == 0) {
-			if (b[9] == 0)
+		if (parent[9] == 0) {
+			if (child[9] == 0)
 				fcn_004e4b40(-8, snd, "_GEBURT", cut_RandMod(2), 0);
 			else
 				fcn_004e4b40(-8, snd, "_GEBURT", cut_RandMod(2) + 2, 0);
-		} else if (b[9] == 0) {
+		} else if (child[9] == 0) {
 			fcn_004e4b40(-8, snd, "_GEBURT", cut_RandMod(2) + 4, 0);
 		} else {
 			fcn_004e4b40(-8, snd, "_GEBURT", cut_RandMod(2) + 6, 0);
@@ -124,12 +124,12 @@ void __cdecl fcn_004e2890(char* m)
 	sc = fcn_00470820(0, 0, "cutscenes\\geburt");
 	d2_CenterDialogWindows(sc);
 	d2_SetForm(sc, 1);
-	if (b[9] == 0)
+	if (child[9] == 0)
 		io_AppendText(0x1aae);
 	else
 		io_AppendText(0x1aaf);
 	d2_SetForm(sc, 2);
-	w = d2_GetWindowListItem(sc, 2, io_AppendText((int) "$L%t", b + 0x30));
+	w = d2_GetWindowListItem(sc, 2, io_AppendText((int) "$L%t", child + 0x30));
 	d2_SetBildArgument(w, 0xf);
 	d2_SelectControl(w);
 	for (;;) {
@@ -142,10 +142,10 @@ void __cdecl fcn_004e2890(char* m)
 		if (main_RunFrameLoop(0, cut_EventLoopFlags) == 0 || g_7747f0 != 0)
 			break;
 	}
-	cm_BeginPacketFieldDelta(b, *(int*) (b + 4));
+	cm_BeginPacketFieldDelta(child, *(int*) (child + 4));
 	cm_AppendPacketFieldDelta(1, 0x10, 0x30, buf);
 	cm_RequestChangeAttribute();
-	fcn_00471e30(sc);
+	d2_DestroyForm(sc);
 	fcn_004e48b0();
 	fcn_004e4610(esc);
 	fcn_004e44f0(esc);
@@ -158,9 +158,9 @@ void __cdecl fcn_004e2890(char* m)
 }
 
 /* ADDRESS: GOLDTL 0x004e2b40 */
-int __cdecl fcn_004e2b40(char* m)
+int __cdecl cut_CheckDeathCutscene(char* event)
 {
-	if (gm_GetEntityHealth(gm_LookupEntityRecordById(*(int*) (m + 0x34))) > 0.0f)
+	if (gm_GetEntityHealth(gm_LookupEntityRecordById(*(int*) (event + 0x34))) > 0.0f)
 		return 0;
 	return 1;
 }

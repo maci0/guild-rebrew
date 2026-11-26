@@ -11,11 +11,11 @@ extern float g_1009888[8];
 extern float g_10098a8[8];
 
 unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
-float* __cdecl fcn_005c61e0(int id);
+float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049b680 */
-int __cdecl fcn_0049b680(char* e, int* p, int* q)
+int __cdecl ai_RunUseObjectGemeinheit(char* e, int* p, int* q)
 {
 	float* d;
 	unsigned short* s;
@@ -25,7 +25,7 @@ int __cdecl fcn_0049b680(char* e, int* p, int* q)
 	if (!s) {
 		return 0;
 	}
-	d = fcn_005c61e0(*s);
+	d = gm_LookupSpecialObject(*s);
 	if (d) {
 		r.s = s;
 		r.id = q[1];

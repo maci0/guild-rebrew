@@ -12,7 +12,7 @@ extern char g_868080[];
 void __cdecl he_FreeAction(void*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float, int*);
+int __cdecl ai_FindEntityInFavorRange(unsigned short*, int, int, int, float, float, int*);
 void __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -43,7 +43,7 @@ void __cdecl he_RunEvent053(int a)
 		p = q - 2;
 		if (*(short*) p != -1 && *(unsigned char*) (p + 8) >= 2
 		    && (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7 || *(char*) (p + 2) == 5)) {
-			if (fcn_004a5e60((unsigned short*) p, 4, 0x400080, 0, 0.0f, 100.0f, &found)) {
+			if (ai_FindEntityInFavorRange((unsigned short*) p, 4, 0x400080, 0, 0.0f, 100.0f, &found)) {
 				gm_ResolveEntityById((void**) &id, 0, 0, found);
 			}
 			if (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7) {

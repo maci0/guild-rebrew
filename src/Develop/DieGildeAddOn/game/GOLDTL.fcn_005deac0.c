@@ -23,7 +23,7 @@ char* __cdecl fcn_005cd440(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004c6b20(int, int, int);
+void __cdecl cm_SendBlockCharacter(int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
 int __cdecl gm_ObjApplyAction0x5b(char* e, char* action)
@@ -51,7 +51,7 @@ int __cdecl gm_ObjApplyAction0x5b(char* e, char* action)
 		return 0;
 	}
 	if (gm_HasActiveSpecialObject(r, 0x2c4) == 0 || gm_RandomFloat01() > g_662a6c) {
-		fcn_004c6b20(*(int*) (r + 4), 1, 0);
+		cm_SendBlockCharacter(*(int*) (r + 4), 1, 0);
 	}
 	*(int*) (action + 0x10) = 1;
 	if (e[2] == 6) {

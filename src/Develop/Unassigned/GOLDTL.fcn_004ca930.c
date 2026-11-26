@@ -3,7 +3,7 @@
 
 int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 
-int __cdecl fcn_004ca930(char* params, char* out)
+int __cdecl cm_ExSpawnBuildingCharacter(char* params, char* out)
 {
 	int result;
 

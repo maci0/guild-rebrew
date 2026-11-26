@@ -8,7 +8,7 @@ typedef struct {
 
 void __cdecl gm_AddTime(char*, int, int, int);
 
-void __cdecl fcn_00550940(char* e)
+void __cdecl he_InitMeisterpruefDialog(char* e)
 {
 	*(Rec14*) (e + 0x52) = *(Rec14*) (e + 0x44);
 	gm_AddTime(e + 0x52, 3, 0, 0);

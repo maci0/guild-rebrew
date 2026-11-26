@@ -20,7 +20,7 @@ void __cdecl ReportClientMessage(const char*);
 void __cdecl fcn_0043a6f0(float, float, int);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
-void __cdecl fcn_00439c60(char*);
+void __cdecl d3_SetActiveCamera(char*);
 void __cdecl fcn_0043c7a0(char*);
 char* __cdecl fcn_0044abb0(void*, char*, unsigned int, unsigned char);
 int __cdecl fcn_0044a9e0(unsigned int);
@@ -176,7 +176,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 					d3_SetNodePosition(obj, (int*) (obj + 0x5c));
 					d3_SetObjectRotation(obj, (int*) (obj + 0x90));
 				}
-				fcn_00439c60(obj);
+				d3_SetActiveCamera(obj);
 				break;
 			}
 			obj = *(char**) (obj + 0x1f0);

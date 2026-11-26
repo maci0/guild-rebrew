@@ -21,7 +21,7 @@ int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(char*, unsigned char);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 
 /* ADDRESS: GOLDTL 0x004e3de0 */
@@ -86,5 +86,5 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 			}
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

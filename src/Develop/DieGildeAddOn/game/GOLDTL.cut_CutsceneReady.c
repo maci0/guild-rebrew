@@ -18,7 +18,7 @@ int __cdecl cm_RequestRemoveCutsceneParticipant(int, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl cm_SendLogAction(char*);
-int __cdecl fcn_004c6aa0(Msg*);
+int __cdecl cm_RequestCutsceneReady(Msg*);
 void __cdecl cm_SendTraceEnd(char*);
 
 
@@ -61,7 +61,7 @@ int __cdecl cut_CutsceneReady(int* c)
 	m.who = c[0];
 	m.ids = *(Ids*) (c + 13);
 	cm_SendLogAction("cut_CutsceneReady");
-	h = fcn_004c6aa0(&m);
+	h = cm_RequestCutsceneReady(&m);
 	cm_SendTraceEnd("cut_CutsceneReady");
 	while (cm_GetCommandStatus(h) == 0)
 		fcn_00535960();

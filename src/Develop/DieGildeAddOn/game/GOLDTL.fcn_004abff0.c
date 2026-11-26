@@ -13,7 +13,7 @@ int __cdecl ai_StartEhrerbietung(void);
 int __cdecl ai_RunEhrerbietung(void);
 
 /* ADDRESS: GOLDTL 0x004abff0 */
-int __cdecl fcn_004abff0(char* e)
+int __cdecl ai_RegisterSocialMethods(char* e)
 {
 	AM_METHOD d;
 

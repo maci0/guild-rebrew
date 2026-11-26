@@ -1,6 +1,6 @@
 typedef struct {
 	char c[0x18];
-} Anim_4e0210;
+} DuelActionAnim;
 // SIZE 0x18
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -10,7 +10,7 @@ extern char g_772f5a;
 extern char g_772f5b;
 extern char g_772f5c;
 extern char g_772f5d;
-extern Anim_4e0210 g_68cc34;
+extern DuelActionAnim g_68cc34;
 
 unsigned char* __cdecl fcn_004e6a70(int);
 int __cdecl d2_SetForm(int, int);
@@ -27,7 +27,7 @@ int __cdecl ch_QueuePlayAnimation(char*, const char*, int);
 
 /* Duel intro: plays the challenger's opening move chosen by the duel kind. */
 /* ADDRESS: GOLDTL 0x004e0210 */
-void __cdecl fcn_004e0210(char* e, char* foe)
+void __cdecl cut_PlayDuelIntroMove(char* e, char* foe)
 {
 	unsigned char* d;
 	int t;
@@ -50,7 +50,7 @@ void __cdecl fcn_004e0210(char* e, char* foe)
 			o = ch_CreateQueuedAction(*(char**) (e + 0x184), (void*) fcn_004dff50, 6, 0x2e, 1);
 			*(char**) (o + 0x17c) = foe;
 			*(char**) (o + 0x180) = e;
-			*(Anim_4e0210*) (o + 0xf0) = g_68cc34;
+			*(DuelActionAnim*) (o + 0xf0) = g_68cc34;
 			break;
 		case 3:
 			d2_SetForm(g_68bfc0, 0);

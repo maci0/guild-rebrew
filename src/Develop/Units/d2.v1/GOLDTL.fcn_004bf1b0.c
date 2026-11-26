@@ -22,7 +22,7 @@ char* __cdecl gm_FindRecordById(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -253,7 +253,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 			}
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	d2_SetGroupVisibility(uiContext[0], 1);
 }
 unsigned char _dpad_772908[1032];

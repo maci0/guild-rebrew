@@ -30,7 +30,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl gm_AccumulateTyped2(House_554b90*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl fcn_004c5980(void*);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
@@ -60,7 +60,7 @@ void __cdecl he_RunAction0x67(char* e)
 	case 0:
 		r = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 		if (r == 0) {
-			fcn_004c5620(-1, e);
+			cm_SendSetHE(-1, e);
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x11be, r, *(int*) (e + 0xb0));
@@ -73,7 +73,7 @@ void __cdecl he_RunAction0x67(char* e)
 		(*(int*) (e + 0x52))++;
 		*(short*) (e + 0x56) = 0xd;
 		*(int*) (e + 0x58) = 0x1e;
-		*(int*) (e + 0x84) = fcn_004c5620(1, e);
+		*(int*) (e + 0x84) = cm_SendSetHE(1, e);
 		return;
 	case 1:
 		memset(L.ids, 0xff, sizeof(L.ids));
@@ -140,7 +140,7 @@ put:
 		}
 		*(Pos_554b90*) (e + 0x52) = gm_GameTime;
 		gm_AddTime(e + 0x52, 0x18, 0, 0);
-		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+		*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 		return;
 	}
 }

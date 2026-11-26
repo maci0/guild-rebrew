@@ -42,14 +42,14 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_005782f0(struct house*, int);
+void __cdecl gm_IncreaseEntityStat(struct house*, int);
 int __cdecl io_AppendText();
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl evt_RequestScriptExit(char*);
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -88,7 +88,7 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 		ev[0x36] = 1;
 		*(int*) (ev + 0x58) = amt;
 		cm_SendCopyEntityData(ev);
-		fcn_005782f0(&((struct house*)g_7f4ca0)[g_774970], 3);
+		gm_IncreaseEntityStat(&((struct house*)g_7f4ca0)[g_774970], 3);
 	}
 	h = fcn_00470820(0, 0, g_6a96d8);
 	d2_SetOverlayAnimation(0, 0);
@@ -110,7 +110,7 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunSeanceTreasureDialog, 0x777c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	if (m != 0) {
 		evt_RequestScriptExit(m);
 	}

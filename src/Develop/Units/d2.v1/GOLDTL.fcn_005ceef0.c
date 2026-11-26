@@ -43,7 +43,7 @@ void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, unsigned int* valu
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int off, void* value);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
-void __cdecl fcn_00471e30(int a);
+void __cdecl d2_DestroyForm(int a);
 
 /* ADDRESS: GOLDTL 0x005ceef0 */
 void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
@@ -271,7 +271,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 			cm_AppendPacketFieldValue(4, 1,
 				(int) ((char*) a1 + 0x1b8 - g_aed32c), &v18[0]);
 			cm_RequestChangeAttribute();
-			fcn_00471e30(v28);
+			d2_DestroyForm(v28);
 			return;
 		}
 	}

@@ -7,8 +7,8 @@ int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AccumulateTyped2(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
-int __cdecl fcn_004c5620(int, int);
-int __cdecl fcn_005c4ec0(int, int, int, char*);
+int __cdecl cm_SendSetHE(int, int);
+int __cdecl gm_CollectPaymentOrLiquidate(int, int, int, char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_64d41a(char*, char*, int);
 void __cdecl he_FreeAction(int);
@@ -47,7 +47,7 @@ void __cdecl he_RunKredit(int loanEvent)
 			if (!n) {
 				io_FormatTextBuffer(buf, 0x18e7, *(int*) (loanEvent + 0xb4));
 				he_PostEntityMessage(*(int*) (slot + 4), -1, buf, 0, 0x5ff, 0);
-				*(int*) (loanEvent + 0x84) = fcn_004c5620(-1, loanEvent);
+				*(int*) (loanEvent + 0x84) = cm_SendSetHE(-1, loanEvent);
 				return;
 			}
 			f = (float) (*(int*) (loanEvent + 0xb4) *
@@ -56,7 +56,7 @@ void __cdecl he_RunKredit(int loanEvent)
 			if ((float) time < f) {
 				time = (int) f;
 				io_FormatTextBuffer(msg, 0x18e8, time);
-				n = fcn_005c4ec0(*(int*) ((char*) obj + 1), n, time, msg);
+				n = gm_CollectPaymentOrLiquidate(*(int*) ((char*) obj + 1), n, time, msg);
 				*(int*) ((char*) obj + 0x55) += n;
 				if (*(unsigned char*) (slot + 2) == 6 ||
 				    *(unsigned char*) (slot + 2) == 7) {
@@ -89,7 +89,7 @@ void __cdecl he_RunKredit(int loanEvent)
 					io_FormatTextBuffer(buf, 0x18ea, *(int*) (loanEvent + 0xb4));
 				else
 					io_FormatTextBuffer(buf, 0x18e9, *(int*) (loanEvent + 0xb4));
-				fcn_005c4ec0(*(int*) ((char*) obj + 1), n,
+				gm_CollectPaymentOrLiquidate(*(int*) ((char*) obj + 1), n,
 				           *(int*) (loanEvent + 0xb4), buf);
 				if (time < *(int*) (loanEvent + 0xb4))
 					he_PostEntityMessage(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x699a88);

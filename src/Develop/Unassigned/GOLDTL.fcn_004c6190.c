@@ -7,7 +7,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c6190(char* data, char a2)
+void __cdecl cm_SendUpdateSlot80(char* data, char a2)
 {
 	char buf[0x9c];
 

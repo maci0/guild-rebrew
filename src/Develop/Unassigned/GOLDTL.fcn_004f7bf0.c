@@ -14,7 +14,7 @@
 extern char g_679060[];
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_005d52d0(unsigned char* a1, int* a2);
+int __cdecl d2_RunDivorceAction(unsigned char* a1, int* a2);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl fcn_004f7bf0(unsigned char* a1, int* a2)
@@ -49,7 +49,7 @@ int __cdecl fcn_004f7bf0(unsigned char* a1, int* a2)
 		return 1;
 	}
 	if (*a2 == 3) {
-		return fcn_005d52d0(a1, a2);
+		return d2_RunDivorceAction(a1, a2);
 	}
 	if (*a2 == 1 && a1[2] == 6) {
 		io_FormatTextBuffer((char*) a2 + 0x14, (int) "%s", 0x1d8e);

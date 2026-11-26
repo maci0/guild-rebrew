@@ -29,7 +29,7 @@ void __cdecl fcn_0046ed00(int, int, int);
 char* __cdecl fcn_0050d490(char*);
 
 /* ADDRESS: GOLDTL 0x005b11f0 */
-void __cdecl fcn_005b11f0(int* state)
+void __cdecl d2_UpdateCityScrollMap(int* state)
 {
 	char* view;
 	char* t;

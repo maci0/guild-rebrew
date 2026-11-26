@@ -58,7 +58,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_SendCopyEntityData(void*);
-int __cdecl fcn_004c5620(int, Order_5635b0*);
+int __cdecl cm_SendSetHE(int, Order_5635b0*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl he_FreeAction(Order_5635b0*);
 
@@ -116,7 +116,7 @@ void __cdecl he_RunBuildingOfferAction(Order_5635b0* o)
 					*(int*) (m + 0x60) = o->who;
 					*(int*) (m + 0x68) = o->value;
 					cm_SendCopyEntityData(m);
-					o->event = fcn_004c5620(-1, o);
+					o->event = cm_SendSetHE(-1, o);
 					cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 0, 2);
 				}
 			}

@@ -127,7 +127,7 @@ void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl fcn_00519190(int, ...);
 void __cdecl cm_RequestKillSpieler(int, int);
 int __cdecl he_SumEventCostsForSubject(int);
-void __cdecl fcn_00516f60(void);
+void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl fcn_005270c0(int);
 void __cdecl fcn_00528fd0(void);
 int __cdecl fcn_0050d2a0(void*);
@@ -389,7 +389,7 @@ void __cdecl fcn_00540020(void)
 	g_1040480 = g_6a3764;
 	g_1040484 = g_6a3768;
 	g_104048c = g_6a3770;
-	fcn_00516f60();
+	d3_ResetWorldSceneState();
 	fcn_005270c0(1);
 	fcn_00528fd0();
 	if (g_6a3420 != 0) {

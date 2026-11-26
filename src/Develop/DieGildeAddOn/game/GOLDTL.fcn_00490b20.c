@@ -15,26 +15,26 @@ void __cdecl fcn_004f4830(int a, Stat* st);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x00490b20 */
-int __cdecl fcn_00490b20(Ent* e, int a2, int* out)
+int __cdecl ai_EvaluateLaw0x05(Ent* entity, int unused, int* out)
 {
 	Stat st;
-	int t;
-	int v;
-	int r;
+	int target;
+	int clamped;
+	int jobCategory;
 
-	t = (int) ((3.0f - e->mood) * 5.0f);
-	if (t < 4) {
-		v = t;
+	target = (int) ((3.0f - entity->mood) * 5.0f);
+	if (target < 4) {
+		clamped = target;
 	} else {
-		v = 4;
+		clamped = 4;
 	}
-	r = gm_MapEntityStatRange(e->job);
-	if ((r == 8 || r == 9) && v > 1) {
-		v = 1;
+	jobCategory = gm_MapEntityStatRange(entity->job);
+	if ((jobCategory == 8 || jobCategory == 9) && clamped > 1) {
+		clamped = 1;
 	}
 	fcn_004f4830(5, &st);
-	if (v != st.v[6]) {
-		*out = v;
+	if (clamped != st.v[6]) {
+		*out = clamped;
 		return 1;
 	}
 	return 0;

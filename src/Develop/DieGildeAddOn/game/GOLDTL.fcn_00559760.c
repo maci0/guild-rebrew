@@ -30,7 +30,7 @@ extern unsigned char* lpGebaeudeINST;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004a55c0(struct house*, int, int*, float, float, unsigned short*);
-int __cdecl fcn_004a5e60(struct house*, int, F8, int, float, int*);
+int __cdecl ai_FindEntityInFavorRange(struct house*, int, F8, int, float, int*);
 double __cdecl gm_RandomFloat01(void);
 
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -72,7 +72,7 @@ int __cdecl he_TryDispatchNpcAction(char* s, int n, int m)
 	if (h->who != 0) {
 		tgt = *(int*) (h->who + 1);
 	} else {
-		if (fcn_004a5e60(&((struct house*)g_7f4ca0)[g_774970], 0, f, 0, 100.0f, &tgt) == 0) {
+		if (ai_FindEntityInFavorRange(&((struct house*)g_7f4ca0)[g_774970], 0, f, 0, 100.0f, &tgt) == 0) {
 			goto fail;
 		}
 	}

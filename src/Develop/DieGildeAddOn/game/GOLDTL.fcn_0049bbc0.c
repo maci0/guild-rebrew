@@ -11,7 +11,7 @@ extern float g_1008574[];
 extern float g_10099d0[8];
 
 unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
-float* __cdecl fcn_005c61e0(int id);
+float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049bbc0 */
@@ -25,7 +25,7 @@ int __cdecl ai_RunUseParfuem(char* actor, int* itemArgs, int* animData)
 	if (!slot) {
 		return 0;
 	}
-	props = fcn_005c61e0(*slot);
+	props = gm_LookupSpecialObject(*slot);
 	if (props) {
 		req.s = slot;
 		req.id = animData[1];

@@ -47,7 +47,7 @@ int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win);
 int __cdecl fcn_0050b710(int, unsigned char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl fcn_005bcb10(void)
 {
@@ -102,7 +102,7 @@ int __cdecl fcn_005bcb10(void)
 		} while (e != 0);
 	}
 	if (n == 0) {
-		fcn_00471e30(h);
+		d2_DestroyForm(h);
 		return -1;
 	}
 	return h;

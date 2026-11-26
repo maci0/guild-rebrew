@@ -16,8 +16,8 @@ int __cdecl he_HasActiveAction0x99(int id);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl ai_PrepareSecretRoomAction0(char* e, Msg* a, Msg* b);
 int __cdecl ai_SetupSecretRoomMode1(char* e, Msg* a, Msg* b);
-int __cdecl fcn_0048ddd0(char* e, Msg* a, Msg* b);
-int __cdecl fcn_0048df90(char* e, Msg* a, Msg* b);
+int __cdecl ai_SetupSecretRoomMode2(char* e, Msg* a, Msg* b);
+int __cdecl ai_SetupSecretRoomMode3(char* e, Msg* a, Msg* b);
 
 /* ADDRESS: GOLDTL 0x0048da10 */
 int __cdecl ai_StartSecretRoom(int kind, char* e, int busy, Msg* out1, Msg* out2)
@@ -60,10 +60,10 @@ int __cdecl ai_StartSecretRoom(int kind, char* e, int busy, Msg* out1, Msg* out2
 		r = ai_SetupSecretRoomMode1(e, &a, &b);
 		break;
 	case 2:
-		r = fcn_0048ddd0(e, &a, &b);
+		r = ai_SetupSecretRoomMode2(e, &a, &b);
 		break;
 	case 3:
-		r = fcn_0048df90(e, &a, &b);
+		r = ai_SetupSecretRoomMode3(e, &a, &b);
 		break;
 	default:
 		return 0;

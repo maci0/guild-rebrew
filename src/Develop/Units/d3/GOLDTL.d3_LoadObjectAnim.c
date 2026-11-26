@@ -12,7 +12,7 @@ typedef struct {
 	int b;
 	int c;
 } T4321a0;
-int __cdecl fcn_004321a0(T4321a0, int, int, int, int);
+int __cdecl d3_StepAnimFrame(T4321a0, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0044c460 */
 char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop)
@@ -62,7 +62,7 @@ char* __cdecl d3_LoadObjectAnim(char* path, char* object, char loop)
 				*(int*) (r + 0xc) =
 					*(int*) (*(char**) (r + 0x40) + i * 0x58) - 1;
 				*(int*) (r + 8) =
-					fcn_004321a0(*(T4321a0*) (r + 0x2c), i, 0, i, n);
+					d3_StepAnimFrame(*(T4321a0*) (r + 0x2c), i, 0, i, n);
 			}
 			else {
 				*(int*) (r + 8) = 1;

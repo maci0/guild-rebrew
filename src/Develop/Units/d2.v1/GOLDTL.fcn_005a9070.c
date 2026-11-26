@@ -13,8 +13,8 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d3_EndCameraAndUiMode(void);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ShowGildenkasseDialog(char* e)
 {
@@ -33,6 +33,6 @@ void __cdecl d2_ShowGildenkasseDialog(char* e)
 			g_774654 = 1;
 		}
 	}
-	fcn_00532ef0();
-	fcn_00471e30(h);
+	d3_EndCameraAndUiMode();
+	d2_DestroyForm(h);
 }

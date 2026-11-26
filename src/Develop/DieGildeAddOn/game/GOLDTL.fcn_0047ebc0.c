@@ -65,7 +65,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004849b0(Bld*, int, int);
 void __cdecl ai_ManageMeisterWorkers(Bld*);
 void __cdecl fcn_00487970(int, Bld*, int);
-void __cdecl fcn_00487c00(int, Bld*, int);
+void __cdecl ai_RequestAusbauUpgrade(int, Bld*, int);
 void __cdecl fcn_00487470(Bld*);
 int __cdecl ai_CanProduceGood(Bld*, PRODUCTION_GOODS_RECORD*, int);
 void __cdecl fcn_004868d0(Bld*, PRODUCTION_GOODS_RECORD*);
@@ -73,11 +73,11 @@ int __cdecl fcn_005b1e40(int);
 int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_0047e220(int);
+void __cdecl ai_RequestProductionGoods(int);
 void __cdecl ai_PlanResourceRestock(Bld*, int);
 void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl ai_CancelBlockedActions(Bld*, int);
-void __cdecl fcn_00487f90(Req*);
+void __cdecl ai_DispatchMeisterAction(Req*);
 void __cdecl fcn_00489250(Bld*);
 void __cdecl fcn_00489a70(Bld*, int);
 
@@ -110,7 +110,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 	fcn_004849b0(bld, prod, craft);
 	ai_ManageMeisterWorkers(bld);
 	fcn_00487970(craft, bld, 0x4b);
-	fcn_00487c00(craft, bld, 0x19);
+	ai_RequestAusbauUpgrade(craft, bld, 0x19);
 	fcn_00487470(bld);
 	if (g_7f4c04 != 0xd && g_7f4c04 != 8) {
 		for (i = 0; i < g_100b0ac; i++) {
@@ -244,7 +244,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 	}
 	bld->id = 0;
 done:
-	fcn_0047e220(craft);
+	ai_RequestProductionGoods(craft);
 	ai_PlanResourceRestock(bld, craft);
 	if (0 < g_100b0ac) {
 		for (i = 0; i < g_100b0ac; i++) {
@@ -349,12 +349,12 @@ done:
 				if (val & 0x20) {
 					put.kind = 0x14;
 					put.rec = (int) ((char*) g_100d0c0 + i * 0x58);
-					fcn_00487f90(&put);
+					ai_DispatchMeisterAction(&put);
 				}
 				else if (val & 0x200) {
 					put.kind = 0x15;
 					put.rec = (int) ((char*) g_100d0c0 + i * 0x58);
-					fcn_00487f90(&put);
+					ai_DispatchMeisterAction(&put);
 				}
 				else
 					continue;
@@ -362,7 +362,7 @@ done:
 			else if (val & 8) {
 				put.kind = 4;
 				put.rec = (int) ((char*) g_100d0c0 + i * 0x58);
-				fcn_00487f90(&put);
+				ai_DispatchMeisterAction(&put);
 			}
 			else
 				continue;

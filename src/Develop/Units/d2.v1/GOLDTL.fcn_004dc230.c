@@ -15,7 +15,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl ai_CompareOfficeCandidates(unsigned short*, unsigned short*, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 
 /* ADDRESS: GOLDTL 0x004dc230 */
@@ -51,6 +51,6 @@ int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short*
 				res = (d2_CurrentElementId != b2) + 1;
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return res;
 }

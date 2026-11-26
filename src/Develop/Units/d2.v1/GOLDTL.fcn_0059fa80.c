@@ -37,7 +37,7 @@ char* __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(char* text, int flag);
 void* __cdecl fcn_005cd440(void* desc, int a, int b, int c);
 int __cdecl d2_CheckActionBlocker(void* p, int flag);
-int __cdecl fcn_004c5620(int mode, int arg);
+int __cdecl cm_SendSetHE(int mode, int arg);
 void __cdecl fcn_005100f0(int handle, int value);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 int __cdecl cm_GetCommandStatus(int handle);
@@ -108,7 +108,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 
 
 						*(int*) (v7 + 0xbc) = gm_GameTime.a;
-						v9 = fcn_004c5620(1, v7);
+						v9 = cm_SendSetHE(1, v7);
 						while (v9 != -1 && !cm_GetCommandStatus(v9)) {
 							main_RunFrameLoop(0, 0x20007);
 						}
@@ -130,7 +130,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 						if (fcn_00526120(title, 1) && (v11 = g_774970,
 							d2_CheckActionBlocker((char*) (v11 * 0x21c + 0x7f4ca0), 2))) {
 							*(int*) (v7 + 0xbc) = gm_GameTime.a;
-							fcn_004c5620(3, v7);
+							cm_SendSetHE(3, v7);
 							fcn_005100f0(*(unsigned int*) (a0 + 4),
 								0xfffffffe);
 							cm_RequestCopyEntityData(*(unsigned int*) &v10[2],
@@ -144,7 +144,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 			g_774654 = 1;
 		}
 		if (!main_RunFrameLoop(0x59fa80, 0x677c7)) {
-			fcn_00471e30(dialog);
+			d2_DestroyForm(dialog);
 			return;
 		}
 	}

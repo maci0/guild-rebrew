@@ -15,7 +15,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 // SIZE 0xf8
-struct msg_00547130 {
+struct ACTION_MSG {
 	int f0;
 	char b4;
 	char pad[3];
@@ -42,11 +42,11 @@ struct msg_00547130 {
 #include <string.h>
 
 int __cdecl he_StartHandlungSearch(int, int, int);
-void __cdecl cm_SendCopyEntityData(struct msg_00547130*);
+void __cdecl cm_SendCopyEntityData(struct ACTION_MSG*);
 
 void __cdecl he_EnsureAction0x7a(void)
 {
-	struct msg_00547130 m;
+	struct ACTION_MSG m;
 
 	if (he_StartHandlungSearch(1, 0, 0x7a) == 0) {
 		memset(&m, 0, sizeof(m));

@@ -57,8 +57,8 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
 void __cdecl fcn_00526120(int, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x0059ecc0 */
 void __cdecl fcn_0059ecc0(int gebaeude, int a1)
@@ -210,6 +210,6 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 	}
 	sv_ClearObjectSelection();
 	d2_RestoreHudAfterDialog();
-	fcn_00471e30(total);
-	return fcn_00532ef0();
+	d2_DestroyForm(total);
+	return d3_EndCameraAndUiMode();
 }

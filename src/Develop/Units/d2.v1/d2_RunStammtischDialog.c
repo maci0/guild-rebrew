@@ -15,7 +15,7 @@ int __cdecl io_AppendText();
 void __cdecl d2_BuildPersonStatusDesc(void* slot);
 void __cdecl fcn_005ca740(int x, int y, int a, int b, void* slot, int c);
 int __cdecl main_RunFrameLoop(void (*fn)(void), int code);
-void __cdecl fcn_00471e30(void* dlg);
+void __cdecl d2_DestroyForm(void* dlg);
 
 /* ADDRESS: GOLDTL 0x005a1e40 */
 void __cdecl d2_RunStammtischDialog(int gebaeude, int* objekt)
@@ -90,5 +90,5 @@ void __cdecl d2_RunStammtischDialog(int gebaeude, int* objekt)
 			break;
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

@@ -20,7 +20,7 @@ unsigned char __cdecl fcn_0044e570(int a)
 
 #include <string.h>
 
-char* __cdecl fcn_0045be40(int tex);
+char* __cdecl d3_ResolveTexturePath(int tex);
 unsigned char __cdecl vfs_ReadBmpInfo(char* name, int* w, int* h, int z);
 
 int __cdecl fcn_0044cbd0(int tex, char verbose)
@@ -31,7 +31,7 @@ int __cdecl fcn_0044cbd0(int tex, char verbose)
 	int ok;
 	char msg[256];
 
-	name = fcn_0045be40(tex);
+	name = d3_ResolveTexturePath(tex);
 	if (name != 0)
 		ok = vfs_ReadBmpInfo(name, &w, &h, 0);
 	if (name == 0 || ok == 0) {

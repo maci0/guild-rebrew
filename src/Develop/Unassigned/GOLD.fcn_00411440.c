@@ -2,7 +2,7 @@
 extern int g_01467390;
 extern int g_0146739c;
 extern int g_14673a0;
-void __cdecl fcn_004112e0(void);
+void __cdecl io_PollKeyboardInput(void);
 /* Inferred 0x4c queued snapshot view; remaining storage ownership is unknown. */
 typedef struct GOLD_INPUT_SNAPSHOT {
     short coordinate[6];
@@ -11,7 +11,7 @@ typedef struct GOLD_INPUT_SNAPSHOT {
 } GOLD_INPUT_SNAPSHOT;
 
 /* ADDRESS: GOLD 0x00411440 */
-void __cdecl fcn_00411440(void)
+void __cdecl io_PollInputSnapshots(void)
 {
     GOLD_INPUT_SNAPSHOT* current = (GOLD_INPUT_SNAPSHOT*) 0x1467380;
     GOLD_INPUT_SNAPSHOT* snapshots = (GOLD_INPUT_SNAPSHOT*) 0x1467440;
@@ -51,5 +51,5 @@ void __cdecl fcn_00411440(void)
             break;
         }
     }
-    fcn_004112e0();
+    io_PollKeyboardInput();
 }

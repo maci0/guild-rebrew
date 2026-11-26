@@ -28,7 +28,7 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_00526120(char*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005a2080 */
 void __cdecl fcn_005a2080(int building, int table)
@@ -173,7 +173,7 @@ void __cdecl fcn_005a2080(int building, int table)
 			}
 		}
 		if (!main_RunFrameLoop((void*) 0x5a1e40, 0x677c7)) {
-			fcn_00471e30(win);
+			d2_DestroyForm(win);
 			return;
 		}
 	}

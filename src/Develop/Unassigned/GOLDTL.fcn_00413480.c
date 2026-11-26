@@ -4,7 +4,7 @@
 extern char* d3_ActiveCamera;
 
 void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
-void __cdecl fcn_00455540(char*, float*, float*);
+void __cdecl d3_TransformToObjectSpace(char*, float*, float*);
 
 /* ADDRESS: GOLDTL 0x00413480 */
 int __cdecl fcn_00413480(char* obj, float a1, float* a2, float* a3, float* a4, float* a5)
@@ -63,18 +63,18 @@ int __cdecl fcn_00413480(char* obj, float a1, float* a2, float* a3, float* a4, f
 	t[0] = lo[0];
 	t[1] = lo[1];
 	t[2] = lo[2];
-	fcn_00455540(obj, t, a2);
+	d3_TransformToObjectSpace(obj, t, a2);
 	t[0] = hi[0];
 	t[1] = lo[1];
 	t[2] = lo[2];
-	fcn_00455540(obj, t, a3);
+	d3_TransformToObjectSpace(obj, t, a3);
 	t[0] = hi[0];
 	t[1] = lo[1];
 	t[2] = hi[2];
-	fcn_00455540(obj, t, a4);
+	d3_TransformToObjectSpace(obj, t, a4);
 	t[0] = lo[0];
 	t[1] = lo[1];
 	t[2] = hi[2];
-	fcn_00455540(obj, t, a5);
+	d3_TransformToObjectSpace(obj, t, a5);
 	return 0;
 }

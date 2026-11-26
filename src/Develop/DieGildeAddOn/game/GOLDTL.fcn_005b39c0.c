@@ -30,7 +30,7 @@ typedef struct
 /* SIZE 0x80 */
 
 /* ADDRESS: GOLDTL 0x005b39c0 */
-void __cdecl fcn_005b39c0(void)
+void __cdecl d2_ShowLagerInventoryDebug(void)
 {
 	Rec80* rec;
 	char* save;

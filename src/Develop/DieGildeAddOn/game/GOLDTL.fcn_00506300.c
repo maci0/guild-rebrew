@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004c5620(int a, char* q);
+int __cdecl cm_SendSetHE(int a, char* q);
 int __cdecl d3_GetContextIndex(int x);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl ch_DestroyCharacter(char* r);
@@ -20,7 +20,7 @@ void __cdecl gm_RemoveClientEntityLink(char* p)
 	save = d3_CurrentContextIndex;
 	q = *(char**) (p + 0x24);
 	if (q != 0 && (q[0x78] & 2)) {
-		*(int*) (q + 0x84) = fcn_004c5620(-1, q);
+		*(int*) (q + 0x84) = cm_SendSetHE(-1, q);
 	}
 	r = *(char**) (p + 0x3b);
 	if (r != 0) {

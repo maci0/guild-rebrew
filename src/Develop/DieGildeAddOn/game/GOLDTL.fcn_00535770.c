@@ -12,7 +12,7 @@ int __cdecl d2_OpenMessageBox(int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl sv_WaitForNetworkSync(int flags)
 {
@@ -35,5 +35,5 @@ void __cdecl sv_WaitForNetworkSync(int flags)
 		}
 		main_RunFrameLoop(0, flags);
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

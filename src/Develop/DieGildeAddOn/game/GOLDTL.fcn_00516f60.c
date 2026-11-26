@@ -84,21 +84,21 @@ void __cdecl fcn_00516de0(int, int);
 void __cdecl fcn_0052a960(char*);
 #include "Develop/Units/d3/d3_d3d.h"
 
-void __cdecl fcn_00516f60(void)
+void __cdecl d3_ResetWorldSceneState(void)
 {
 	int mode;
-	View* v;
+	View* view;
 	int i;
 
 	mode = gm_GetSeason(&(*(char*)&gm_GameTime));
 	if (d3_CurrentContextIndex != 0) {
 		return;
 	}
-	v = (View*) gm_GetEntityTableEntry((char*) (&((Entity*)g_7f4ca0)[g_774970]));
-	if (v != 0 && v->zoom != -1.0f) {
-		d3_SetNodePosition(((Camera*)d3_ActiveCamera), v->pos);
-		d3_SetCameraHeightFraction(v->zoom);
-		((Camera*)d3_ActiveCamera)->angle = v->angle;
+	view = (View*) gm_GetEntityTableEntry((char*) (&((Entity*)g_7f4ca0)[g_774970]));
+	if (view != 0 && view->zoom != -1.0f) {
+		d3_SetNodePosition(((Camera*)d3_ActiveCamera), view->pos);
+		d3_SetCameraHeightFraction(view->zoom);
+		((Camera*)d3_ActiveCamera)->angle = view->angle;
 		d3_SetObjectRotation(((Camera*)d3_ActiveCamera), ((Camera*)d3_ActiveCamera)->pos);
 	} else {
 		d3_SetCameraHeightFraction(0.33f);

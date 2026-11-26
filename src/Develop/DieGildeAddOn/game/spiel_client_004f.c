@@ -15,7 +15,7 @@ void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, void* d, int e);
 int __cdecl fcn_004f1840(void*, int*);
 void __cdecl gm_SubObjectNoKill(int, int, int);
 void __cdecl gm_AddObjekt(int, int, int);
-void __cdecl fcn_005b2cb0(char*, void*, void*, int, int, int);
+void __cdecl he_NotifyFriedhofEvent08(char*, void*, void*, int, int, int);
 
 #define MAXV(a, b) (((a) > (b)) ? (a) : (b))
 #define MINV(a, b) (((a) < (b)) ? (a) : (b))
@@ -79,7 +79,7 @@ int __cdecl fcn_004f25a0(char* req)
 		off = *(unsigned short*) ((char*) entity1 + 0x27) * (int)sizeof(ENTITY_RECORD);
 		player = g_7f4ca0 + off;
 		if ((char*) entity2 != player && g_7f4ca0[off + 2] == 6) {
-			fcn_005b2cb0(player, entity2, entity1, *(int*) (req + 0xc), *(int*) (req + 0x13),
+			he_NotifyFriedhofEvent08(player, entity2, entity1, *(int*) (req + 0xc), *(int*) (req + 0x13),
 				(int) (*(int*) (req + 0x13) * g_6652d8[*(int*) (req + 0xc)]));
 		}
 	}

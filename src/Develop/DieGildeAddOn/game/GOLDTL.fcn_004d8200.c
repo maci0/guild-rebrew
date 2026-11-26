@@ -19,7 +19,7 @@ int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl cm_RequestChTalkAction(char*, int, int, char*);
 void __cdecl gm_ResolveDuelHit(void);
-void __cdecl fcn_004d4e30(void);
+void __cdecl cut_FinishPotThrow(void);
 int __cdecl gm_RandomMod(unsigned short);
 
 extern int g_67a370;
@@ -153,7 +153,7 @@ label_4d84fc:
 		return;
 	}
 	task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184),
-	                    (void (__cdecl*)(int)) fcn_004d4e30, 5, 0x2e, 1);
+	                    (void (__cdecl*)(int)) cut_FinishPotThrow, 5, 0x2e, 1);
 	*(unsigned short**) (task + 0x17c) = rec;
 	*(int*) (task + 0x180) = p[5];
 	*(int*) (task + 0x184) = p[6];

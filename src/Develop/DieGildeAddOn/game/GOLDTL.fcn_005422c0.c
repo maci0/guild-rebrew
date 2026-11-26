@@ -37,7 +37,7 @@ int __cdecl fcn_0050c4e0(unsigned char*);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_00507380(int);
+int __cdecl gm_GetItemGuild(int);
 void __cdecl gm_HasGuildHall(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
@@ -48,7 +48,7 @@ unsigned char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_0050c1b0(unsigned char*, int, int*);
+int __cdecl gm_CalcBuildingRoundBalance(unsigned char*, int, int*);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_SumQueryEntryValues(int, char);
 int __cdecl fcn_0050f950(int, int);
@@ -220,7 +220,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 
 	idx = arg & 0xffff;
 	off = idx;
-	v = fcn_00507380(*(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].unk_164);
+	v = gm_GetItemGuild(*(unsigned char*)&((ENTITY_RECORD*)g_7f4ca0)[off].unk_164);
 	if (v >= 2 && v <= 5) {
 		gm_HasGuildHall(v);
 	}
@@ -381,7 +381,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 	}
 	p = (unsigned char*) gm_StartFilteredEntitySearch(1, 4, idx);
 	while (p != 0) {
-		if (fcn_0050c1b0(p, idx, out) != 0) {
+		if (gm_CalcBuildingRoundBalance(p, idx, out) != 0) {
 			if (out[12]) {
 				r = (unsigned char*) fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0xe8);
 				if (r != 0) {

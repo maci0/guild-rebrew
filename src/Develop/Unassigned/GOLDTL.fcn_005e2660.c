@@ -18,7 +18,7 @@ void __cdecl fcn_0041b820(float *, float *, float *);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e2660 */
 void __cdecl fcn_005e2660(void)
@@ -105,5 +105,5 @@ void __cdecl fcn_005e2660(void)
         fcn_005e12d0();
     }
     d3_ApplyGraphicsOptions();
-    fcn_00471e30(dialog);
+    d2_DestroyForm(dialog);
 }

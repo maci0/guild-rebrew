@@ -41,7 +41,7 @@ void __cdecl cm_RequestElectionOrTrade(void* msg);
 void __cdecl cm_RequestLinkEvidence(int a, unsigned int b);
 void __cdecl cm_RequestTransferCurrencyNoKill(unsigned int a, unsigned int b, int c, unsigned int d);
 int __cdecl main_RunFrameLoop(void* fn, int id);
-void __cdecl fcn_00471e30(int handle);
+void __cdecl d2_DestroyForm(int handle);
 void __cdecl fcn_005a2580(char* a, char* b, char* c);
 
 /* ADDRESS: GOLDTL 0x005a2970 */
@@ -152,5 +152,5 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(fcn_005a2580, 0x677c7) != 0);
-	fcn_00471e30(handle);
+	d2_DestroyForm(handle);
 }

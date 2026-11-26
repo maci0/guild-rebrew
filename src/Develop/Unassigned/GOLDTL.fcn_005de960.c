@@ -4,7 +4,7 @@
 int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl fcn_005100f0(int, int);
 
-int __cdecl fcn_005de960(char* e)
+int __cdecl gm_ObjSpendThreeActionPoints(char* e)
 {
 	if (e[2] == 6) {
 		if (d2_CheckActionBlocker(e, 3) == 0) {

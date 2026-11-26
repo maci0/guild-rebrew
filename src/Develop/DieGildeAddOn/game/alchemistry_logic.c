@@ -758,6 +758,7 @@ void* __cdecl m_alloc(unsigned int allocSize, const char* groupTag);
  * a building. Sets up recipe slots and ingredient storage. */
 
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only (TL 0x4eed10, discarded): writes the alchemist record of a building that ahm_AllocAhmInfo
  * sets up, or an empty record with id -1. */
 int __cdecl ahm_fio_SaveAhmInfo(void* file, char* obj)
@@ -817,6 +818,7 @@ int __cdecl ahm_fio_SaveAhmInfo(void* file, char* obj)
 	}
 	return 1;
 }
+#endif
 
 int __cdecl ahm_AllocAhmInfo(void* stream, int arg2)
 {

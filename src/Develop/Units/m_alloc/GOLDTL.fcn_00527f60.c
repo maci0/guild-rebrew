@@ -79,7 +79,7 @@ void __cdecl fcn_00469c40(int, int, int);
 void __cdecl fcn_0046f940(int, const char*);
 int __cdecl fcn_00517c00(int, int, int, char*);
 char* __cdecl gm_FindPublicTreasury(int);
-int __cdecl fcn_0050d270(int);
+int __cdecl gm_SumContainerCredits(int);
 int __cdecl gm_QueryEntitySum(int, int);
 int __cdecl fcn_0050b710(int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
@@ -383,7 +383,7 @@ hidden:
 			      *(int*) (0x7f4e18 + g_774970 * 0x21c), si)
 			+ g_774698;
 	} else {
-		val = fcn_0050d270(*(int*) (gm_FindPublicTreasury(g_7746f8) + 0x14))
+		val = gm_SumContainerCredits(*(int*) (gm_FindPublicTreasury(g_7746f8) + 0x14))
 			+ g_774698;
 		si = g_773d75;
 	}

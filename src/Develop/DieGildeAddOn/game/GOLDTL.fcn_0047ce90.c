@@ -17,7 +17,7 @@ void __cdecl sim_SetSyncParams(void* target, int type_id, int field_6, int field
 int __cdecl fcn_00494820(void);
 
 /* ADDRESS: GOLDTL 0x0047ce90 */
-int __cdecl fcn_0047ce90(void)
+int __cdecl ai_InitContextAndGoodsLists(void)
 {
 	g_100dc00 = 0;
 	g_100dc04 = 0;

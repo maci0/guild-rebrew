@@ -22,7 +22,7 @@ void __cdecl fcn_00416300(int, ...);
 void __cdecl d3_SetRainEffectOptions(int, ...);
 void __cdecl fcn_004599d0(void*, void*);
 void __cdecl fcn_00459980(void*, void*, unsigned char, float);
-void __cdecl fcn_00459940(void*, void*, float);
+void __cdecl d3_SetSkyLayerScrollSpeed(void*, void*, float);
 
 /* ADDRESS: GOLDTL 0x00536bb0 */
 void __cdecl fcn_00536bb0(void)
@@ -123,12 +123,12 @@ void __cdecl fcn_00536bb0(void)
 		((int*) g_7e4540)[5] = *(int*) (name + 0x48);
 		fcn_00459980((void*) g_6b89c0, g_7e4544, 0, 1500.0f);
 	}
-	fcn_00459940((void*) g_6b89c0, g_7e4540, (float) (f * 0.75));
-	fcn_00459940((void*) g_6b89c0, g_7e4544, f);
+	d3_SetSkyLayerScrollSpeed((void*) g_6b89c0, g_7e4540, (float) (f * 0.75));
+	d3_SetSkyLayerScrollSpeed((void*) g_6b89c0, g_7e4544, f);
 	if (lim == 0) {
 		fcn_00459980((void*) g_6b89c0, g_7e4548, 0, 2500.0f);
 	} else {
 		fcn_00459980((void*) g_6b89c0, g_7e4548, (unsigned char) ((lim << 6) / 1000 + 0x60), 1000.0f);
 	}
-	fcn_00459940((void*) g_6b89c0, g_7e4548, (float) (f * 1.5));
+	d3_SetSkyLayerScrollSpeed((void*) g_6b89c0, g_7e4548, (float) (f * 1.5));
 }

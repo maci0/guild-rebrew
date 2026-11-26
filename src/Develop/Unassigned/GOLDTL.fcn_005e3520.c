@@ -21,7 +21,7 @@ int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
 void __cdecl fcn_005e1ca0(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl gm_ApplyGameSettings(void);
 void __cdecl fcn_00527420(void);
@@ -144,5 +144,5 @@ void __cdecl fcn_005e3520(void)
       gm_ApplyGameSettings();
     }
   }
-  fcn_00471e30(v3);
+  d2_DestroyForm(v3);
 }

@@ -6,7 +6,7 @@
 
 /* ADDRESS: GOLD 0x004324e0 */
 /* ADDRESS: GOLDTL 0x004321a0 */
-int __cdecl fcn_004321a0(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max)
+int __cdecl d3_StepAnimFrame(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max)
 {
 	unsigned char f;
 
@@ -37,12 +37,12 @@ int __cdecl fcn_004321a0(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int 
 void __cdecl d3_InvalidateSubTreeFlags(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00436a00 */
-void __cdecl fcn_00436a00(int arg0, char* p, int index)
+void __cdecl d3_SetAnimFrame(int object, char* animState, int index)
 {
 	char* owner;
 	int count;
 
-	if (p != 0 && (owner = *(char**) (p + 0x68)) != 0) {
+	if (animState != 0 && (owner = *(char**) (animState + 0x68)) != 0) {
 		count = *(int*) (owner + 0x154);
 		if (index >= count) {
 			index = count - 1;
@@ -51,15 +51,15 @@ void __cdecl fcn_00436a00(int arg0, char* p, int index)
 			index = count - 1;
 		}
 		if (index + 1 >= count) {
-			*(int*) (p + 8) = *(int*) (*(char**) (owner + 0x15c) + index * 0xc0 + 4) - 1;
+			*(int*) (animState + 8) = *(int*) (*(char**) (owner + 0x15c) + index * 0xc0 + 4) - 1;
 		}
 		else {
-			*(int*) (p + 8) = 0;
+			*(int*) (animState + 8) = 0;
 		}
-		*(int*) p = index;
-		*(int*) (p + 4) = fcn_004321a0(*(D3_ANIMATION_OPTIONS*) (p + 0x6c), index,
+		*(int*) animState = index;
+		*(int*) (animState + 4) = d3_StepAnimFrame(*(D3_ANIMATION_OPTIONS*) (animState + 0x6c), index,
 		    *(int*) (owner + 0x150), *(int*) (owner + 0x154), *(int*) (owner + 0x148));
-		d3_InvalidateSubTreeFlags(arg0, 1);
+		d3_InvalidateSubTreeFlags(object, 1);
 	}
 }
 #endif

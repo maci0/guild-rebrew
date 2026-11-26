@@ -10,7 +10,7 @@ extern unsigned char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_HasActiveSpecialObject(char* h, int n);
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl gm_ResolveEntityById(void** out, int a, int b, int id);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl gm_WalkEntityChain(unsigned short id);
@@ -39,7 +39,7 @@ int __cdecl fcn_004b7800(int* request)
 		return 0x400;
 	f.mask = 0x400000;
 	f.b = 0;
-	if (fcn_004a5e60(h, 6, f, 0, 100.0f, &x) == 0)
+	if (ai_FindEntityInFavorRange(h, 6, f, 0, 100.0f, &x) == 0)
 		return 0x400;
 	if (gm_ResolveEntityById((void**) &y, 0, 0, x) == 0)
 		return 0x400;

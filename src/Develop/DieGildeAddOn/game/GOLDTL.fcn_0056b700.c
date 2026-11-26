@@ -25,7 +25,7 @@ extern float g_664168;
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl he_AssignActionSlot(int, int, int, char*);
 extern int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
-extern int __cdecl fcn_004c5620(int, char*);
+extern int __cdecl cm_SendSetHE(int, char*);
 extern int __cdecl cm_GetCommandStatus(int);
 extern char* __cdecl cm_GetCommandResult(int);
 extern int __cdecl cut_FindCutsceneById(int);
@@ -97,7 +97,7 @@ void __cdecl he_RunUeberfall(char* obj)
 			if (count != 0) {
 				*(unsigned int*) (obj + 0xe4) /= count;
 			} else {
-				*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
+				*(int*) (obj + 0x84) = cm_SendSetHE(-1, obj);
 				*(int*) (obj + 0xe4) = 0;
 				return;
 			}
@@ -119,7 +119,7 @@ void __cdecl he_RunUeberfall(char* obj)
 			*(int*) (obj + 0x70) = 3;
 			return;
 		}
-		*(int*) (obj + 0x84) = fcn_004c5620(1, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(1, obj);
 		return;
 	case 3:
 		if (!cut_FindCutsceneById(*(int*) (obj + 0xe0))) {
@@ -300,7 +300,7 @@ label_56b858:
 		}
 	}
 	if (gm_CompareGameTime((pos14_7f4c00*) &gm_GameTime, (pos14_7f4c00*) (obj + 0xcc)) >= 0) {
-		*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(-1, obj);
 		return;
 	}
 	*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;

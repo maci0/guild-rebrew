@@ -53,7 +53,7 @@ int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_ConfirmEinbruch(int unused, char* e)
 {
@@ -127,6 +127,6 @@ int __cdecl d2_ConfirmEinbruch(int unused, char* e)
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_ConfirmEinbruch, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return r;
 }

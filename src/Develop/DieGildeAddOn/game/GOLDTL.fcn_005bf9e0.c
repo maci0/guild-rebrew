@@ -16,7 +16,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, int, int, int);
 void __cdecl fcn_005c9220(int*);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl gm_SelectRandomEntityCandidate(unsigned short*);
 void __cdecl cm_SendLogAction(char*);
 void __cdecl cm_SendTraceEnd(char*);
@@ -118,6 +118,6 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 			res = 1;
 		}
 	}
-	fcn_00471e30(hwnd);
+	d2_DestroyForm(hwnd);
 	return res;
 }

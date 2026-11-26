@@ -40,8 +40,8 @@ int __cdecl fcn_0050b750(int a, unsigned char k);
 int __cdecl gm_CheckEntityStock(ENTITY_RECORD*, int, unsigned char);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d3_EndCameraAndUiMode(void);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 {
@@ -111,6 +111,6 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 			}
 		}
 	}
-	fcn_00532ef0();
-	fcn_00471e30(d);
+	d3_EndCameraAndUiMode();
+	d2_DestroyForm(d);
 }

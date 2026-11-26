@@ -7,7 +7,7 @@ int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00507870(char*);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 int __cdecl d3_GetContextIndex(int);
@@ -70,7 +70,7 @@ void __cdecl he_RunBefoerdern(char* action)
 			return;
 		}
 		*(int*) (o + 0xb0) = -1;
-		*(int*) (o + 0x84) = fcn_004c5620(2, o);
+		*(int*) (o + 0x84) = cm_SendSetHE(2, o);
 		return;
 	case 2:
 		if (*(int*) (ent + 0x184) == 0) {

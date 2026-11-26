@@ -31,7 +31,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_RequestModifyHealth(int id, int k);
 float __cdecl gm_CalcSkillDuelScore(void*, unsigned short*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005c06e0 */
 int __cdecl fcn_005c06e0(unsigned short* entityRecord)
@@ -114,7 +114,7 @@ int __cdecl fcn_005c06e0(unsigned short* entityRecord)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005c06e0, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 none:
 	return 0;

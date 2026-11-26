@@ -3,7 +3,7 @@
 #pragma optimize("y", off)
 
 int __cdecl fcn_004524e0(int, int, int, int, int, int);
-void __cdecl fcn_004526d0(void*, int);
+void __cdecl d3_SetEffectPosition(void*, int);
 void __cdecl fcn_004526f0(void*, void*, int);
 
 /* ADDRESS: GOLDTL 0x00454460 */
@@ -24,7 +24,7 @@ int __cdecl fcn_00454460(int a0, int a1, int a2, int a3, int* a4, int a5, int* a
 		s = (int*) fcn_004524e0(a2, a3, (int) a4, a5, a0, 0x453d80);
 	}
 	if (s != 0) {
-		fcn_004526d0(s, a1);
+		d3_SetEffectPosition(s, a1);
 		a5 = 0xa4;
 		a4 = (int*) ((char*) s + 0x34);
 		__asm {

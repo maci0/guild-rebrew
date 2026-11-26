@@ -38,7 +38,7 @@ void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 void __cdecl d2_SetElementValue(int, int, int, int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* Modal message box: flags pick the layout (2, 0x10, 0x20), 8 the wait
  * value, 0x80 a progress bar, 4 closes after 0x1f4 ticks of g_6b7fac,
@@ -117,6 +117,6 @@ int __cdecl d2_RunMessageBox(int parent, int flags)
 	}
 	g_77470e = 0;
 	d2_ClearRadioGroup(list);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return n;
 }

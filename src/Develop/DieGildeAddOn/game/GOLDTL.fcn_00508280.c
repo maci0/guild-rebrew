@@ -8,7 +8,7 @@ typedef struct
 // SIZE 0xc
 
 int __cdecl gm_RandomMod(unsigned short n);
-int __cdecl fcn_00508220(int, S0c*);
+int __cdecl gm_GetKindRecord(int, S0c*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -81,7 +81,7 @@ found:
 	}
 	flags = *(int*) (p + 0x2c);
 	i += 2;
-	if (fcn_00508220(i, &s) == 0) {
+	if (gm_GetKindRecord(i, &s) == 0) {
 		goto fail;
 	}
 	r = (unsigned short) gm_RandomMod(s.c);

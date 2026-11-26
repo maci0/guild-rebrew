@@ -6,7 +6,7 @@ int __cdecl gm_TryRecordCrime(int a, int b, int c, int d, int e);
 float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
-int __cdecl fcn_004c5620(int a, char* e);
+int __cdecl cm_SendSetHE(int a, char* e);
 int __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 int __cdecl he_PostEntityMessage(int a, int b, char* s, int c, int d, int e);
 int __cdecl fcn_004e7b70(char* e, void* a, void* b);
@@ -52,7 +52,7 @@ void __cdecl fcn_0054f910(char* ent)
 
 
 			gm_AddTime(ent + 0x52, 0, 2, 0);
-			*(int*) (ent + 0x84) = fcn_004c5620(-1, ent);
+			*(int*) (ent + 0x84) = cm_SendSetHE(-1, ent);
 			return;
 		}
 	}
@@ -90,7 +90,7 @@ void __cdecl fcn_0054f910(char* ent)
 			he_PostEntityMessage(*(int*) (e1 + 4), *(int*) (e1 + 4),
 			    text, 0, 0x5fa, (int) (char*) 0x6a5b08);
 		}
-		*(int*) (ent + 0x84) = fcn_004c5620(2, ent);
+		*(int*) (ent + 0x84) = cm_SendSetHE(2, ent);
 		return;
 	}
 	v = 0;
@@ -120,7 +120,7 @@ void __cdecl fcn_0054f910(char* ent)
 
 
 	gm_AddTime(ent + 0x52, 0, 2, 0);
-	*(int*) (ent + 0x84) = fcn_004c5620(-1, ent);
+	*(int*) (ent + 0x84) = cm_SendSetHE(-1, ent);
 	return;
 big:
 	{
@@ -142,7 +142,7 @@ big:
 	gm_AddTime(ent + 0x52, 0x18, 0, 0);
 	*(short*) (ent + 0x56) = 6;
 	*(int*) (ent + 0x58) = 0x1e;
-	*(int*) (ent + 0x84) = fcn_004c5620(1, ent);
+	*(int*) (ent + 0x84) = cm_SendSetHE(1, ent);
 	cm_RequestChangeBits(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
 	cm_RequestChangeBits(*(int*) (e2 + 4), 0x1c8, 4, 0x400, 0);
 	}

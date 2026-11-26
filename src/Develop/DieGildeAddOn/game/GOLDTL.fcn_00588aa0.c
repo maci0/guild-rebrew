@@ -74,7 +74,7 @@ int __cdecl sb_PlayPrioritizedVoice(char* bank, const char* name, int prio, int 
 void __cdecl fcn_00589390(void);
 
 /* ADDRESS: GOLDTL 0x00588aa0 */
-int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
+int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 {
 	Particle p0;
 	Particle p1;
@@ -115,8 +115,8 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 			slot0, slot1, emitter->mode + 1, &o1, &o2)) {
 		return 0;
 	}
-	gm_CalcArtillerySpread(a1, &spread, &scale);
-	k = gm_GetCannonPowerScale(a1);
+	gm_CalcArtillerySpread(building, &spread, &scale);
+	k = gm_GetCannonPowerScale(building);
 	b = ((CANNON_ROW_588AA0*)0x665288)[slot0].f08;
 	speed = (k * ((CANNON_ROW_588AA0*)0x665288)[slot0].f04
 			- ((CANNON_ROW_588AA0*)0x665288)[slot0].f00)
@@ -131,7 +131,7 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
 		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		h = fcn_004f0a30(a1,
+		h = fcn_004f0a30(building,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			(unsigned int*) &p0, 0, 0,
 			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);
@@ -152,7 +152,7 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 			scale);
 		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		h = fcn_004f0a30(a1,
+		h = fcn_004f0a30(building,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			(unsigned int*) &p1, (unsigned int*) &p0, 0,
 			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);
@@ -188,7 +188,7 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 			scale);
 		d3_PerturbParticleVelocity((float*) &p1, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		h = fcn_004f0a30(a1,
+		h = fcn_004f0a30(building,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			(unsigned int*) &p2, (unsigned int*) &p0, (unsigned int*) &p1,
 			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);

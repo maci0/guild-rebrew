@@ -11,7 +11,7 @@ struct pos14 {
 };
 #pragma pack()
 
-void __cdecl fcn_00554ed0(char* e)
+void __cdecl he_InitAction0x69(char* e)
 {
 	*(struct pos14*) (e + 0x52) = *(struct pos14*) (e + 0x44);
 	*(int*) (e + 0x70) = 0;

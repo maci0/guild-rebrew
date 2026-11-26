@@ -57,11 +57,11 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 char* __cdecl fcn_004ee160(char*);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl d2_RunDomizilSkillConfirmDialog(char*, int*, int);
 int __cdecl d2_RunDomizilSkillDialog(char*, int*);
-int __cdecl fcn_00586a80(char*, int*);
-void __cdecl fcn_00532ef0(void);
+int __cdecl d2_ConfirmFireAlchemist(char*, int*);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl fcn_00585030(int);
 
 /* ADDRESS: GOLDTL 0x00585910 */
@@ -104,7 +104,7 @@ void __cdecl fcn_00585910(char* e)
 				g_774654 = 1;
 			}
 		} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
-		fcn_00471e30(ids[0]);
+		d2_DestroyForm(ids[0]);
 		return;
 	}
 	d2_SetForm(ids[0], 2);
@@ -177,7 +177,7 @@ void __cdecl fcn_00585910(char* e)
 			if (data == 0) {
 				g_774654 = 1;
 				main_RunFrameLoop((void*) fcn_00585910, 0x20007);
-				fcn_00471e30(ids[0]);
+				d2_DestroyForm(ids[0]);
 				return;
 			}
 			d2_SetForm(ids[0], 2);
@@ -243,15 +243,15 @@ void __cdecl fcn_00585910(char* e)
 				fcn_00471af0(ids[0], 1);
 			} else if (d2_CurrentElementId == ids[3]) {
 				fcn_00471af0(ids[0], 0);
-				if (fcn_00586a80(e, src) != 0) {
+				if (d2_ConfirmFireAlchemist(e, src) != 0) {
 					g_774654 = 1;
 				}
 				fcn_00471af0(ids[0], 1);
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_00585910, 0x677c7) != 0);
-	fcn_00471e30(ids[0]);
-	fcn_00532ef0();
+	d2_DestroyForm(ids[0]);
+	d3_EndCameraAndUiMode();
 }
 unsigned char _dpad_678200[3680] = {
     0x44, 0x3a, 0x5c, 0x64, 0x65, 0x76, 0x65, 0x6c, 0x6f, 0x70, 0x5c, 0x75, 0x6e, 0x69, 0x74, 0x73,

@@ -14,27 +14,27 @@ int __cdecl fcn_004f4650(int h, char** obj, int** val);
 unsigned char __cdecl fcn_004f1790(int a, int* b);
 void __cdecl fcn_004f22e0(int h, char* obj, int v, int flag);
 
-int __cdecl fcn_004c79b0(char* o, char* out)
+int __cdecl cm_ExChangePlayerIdentity(char* cmd, char* result)
 {
 	int idx;
 	int h;
 
-	idx = gm_TransferDynastyEstate(*(int*) (o + 0x10), *(int*) (o + 0x14));
-	if (out != 0) {
-		out[0] = 1;
+	idx = gm_TransferDynastyEstate(*(int*) (cmd + 0x10), *(int*) (cmd + 0x14));
+	if (result != 0) {
+		result[0] = 1;
 		if (idx >= 0) {
 			char* obj;
 			int* val;
 
-			h = gm_LookupEntityRecordById(*(int*) (o + 0x14));
+			h = gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
 			if (fcn_004f4650(h, &obj, &val) != 0) {
 				fcn_004f22e0(h, obj, *val, fcn_004f1790(*(int*) (obj + 0x65), val));
 			}
-			out[1] = 1;
-			*(Rec21c**) (out + 6) = ((Rec21c *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
+			result[1] = 1;
+			*(Rec21c**) (result + 6) = ((Rec21c *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
 		} else {
-			out[1] = 0;
-			*(int*) (out + 6) = 0;
+			result[1] = 0;
+			*(int*) (result + 6) = 0;
 		}
 	}
 	return 0;

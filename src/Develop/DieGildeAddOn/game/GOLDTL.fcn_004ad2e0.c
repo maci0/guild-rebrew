@@ -2,10 +2,10 @@
 #include "client_data.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-typedef struct Hit4ad2e0 {
+typedef struct OfficeCandidateHit {
 	ENTITY_RECORD* p;
 	float f;
-} Hit4ad2e0;
+} OfficeCandidateHit;
 
 void __cdecl amt_SendSpecialOfficeSlot(int a1);
 char* __cdecl amt_GetOfficeHolderRecord(int kind);
@@ -15,9 +15,9 @@ int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
 /* ADDRESS: GOLDTL 0x004ad2e0 */
-void __cdecl fcn_004ad2e0(void)
+void __cdecl amt_NominateSpecialOfficeCandidates(void)
 {
-	Hit4ad2e0 hits[4];
+	OfficeCandidateHit hits[4];
 	char text[0x104];
 	int idx;
 	int requiredMask;

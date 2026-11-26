@@ -24,7 +24,7 @@ void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
-int __cdecl fcn_005ccad0(int dialog, int selectedForm, int alternateForm, unsigned int n, Item* items)
+int __cdecl d2_LayoutOfficeCandidateList(int dialog, int selectedForm, int alternateForm, unsigned int n, Item* items)
 {
 	int y;
 	int half;

@@ -3,7 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c6db0(int* values)
+void __cdecl cm_RequestSlot170Command(int* values)
 {
 	char buf[0x9c];
 

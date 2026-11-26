@@ -22,7 +22,7 @@ extern unsigned char g_773d75;
 int __cdecl atoi(char*);
 char* __cdecl fcn_004ce590(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
-void __cdecl fcn_004c6190(char*, char);
+void __cdecl cm_SendUpdateSlot80(char*, char);
 
 /* ADDRESS: GOLDTL 0x004b1320 */
 int __cdecl hst_AdjustMarketCategoryPrices(int unused1, int unused2, char* argumentText)
@@ -83,7 +83,7 @@ int __cdecl hst_AdjustMarketCategoryPrices(int unused1, int unused2, char* argum
 					copy = *(Ent80*)((MARKET_STOCK_SLOT*)(g_85ab90 + g_773d75 * 0x2a90 + i));
 					copy.price = copy.base * (factor + 1.0f);
 					copy.value = eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 0x64) * f;
-					fcn_004c6190((char*) &copy, g_773d75);
+					cm_SendUpdateSlot80((char*) &copy, g_773d75);
 				}
 				return 1;
 			}
@@ -100,7 +100,7 @@ int __cdecl hst_AdjustMarketCategoryPrices(int unused1, int unused2, char* argum
 					copy = *(Ent80*) row;
 					copy.price = copy.base * (factor + 1.0f);
 					copy.value = eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 0x64) * f;
-					fcn_004c6190((char*) &copy, g_773d75);
+					cm_SendUpdateSlot80((char*) &copy, g_773d75);
 				}
 				return 1;
 			}
@@ -117,7 +117,7 @@ int __cdecl hst_AdjustMarketCategoryPrices(int unused1, int unused2, char* argum
 					copy = *(Ent80*) row;
 					copy.price = copy.base * (factor + 1.0f);
 					copy.value = eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 0x64) * f;
-					fcn_004c6190((char*) &copy, g_773d75);
+					cm_SendUpdateSlot80((char*) &copy, g_773d75);
 				}
 			}
 			}

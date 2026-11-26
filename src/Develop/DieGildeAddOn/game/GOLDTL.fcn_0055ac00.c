@@ -3,7 +3,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 /* ADDRESS: GOLDTL 0x0055ac00 */
 void __cdecl he_AllocDailyCouncilEvent(char* e)
@@ -21,5 +21,5 @@ void __cdecl he_AllocDailyCouncilEvent(char* e)
 	*(int*) (e + 0xb0) = 0x1b;
 	*(int*) (e + 0xb4) = -1;
 	*(int*) (e + 0xb8) = -1;
-	*(int*) (e + 0x84) = fcn_004c5620(0, e);
+	*(int*) (e + 0x84) = cm_SendSetHE(0, e);
 }

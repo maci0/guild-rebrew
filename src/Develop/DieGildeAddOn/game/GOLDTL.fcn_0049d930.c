@@ -20,7 +20,7 @@ extern float g_66436c;
 extern float g_6628d8;
 extern unsigned char g_773d75;
 
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl gm_ResolveEntityById(void** out, int a, int b, int c);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int a, unsigned char b);
@@ -50,7 +50,7 @@ int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, B
 	if (a1 != 0 && e[0x130] != 7 && e[0x130] != 6) {
 		return 0;
 	}
-	if (fcn_004a5e60(e, 2, f, 0, 100.0f, &a1) == 0) {
+	if (ai_FindEntityInFavorRange(e, 2, f, 0, 100.0f, &a1) == 0) {
 		return 0;
 	}
 	gm_ResolveEntityById((void**) &q, 0, 0, a1);

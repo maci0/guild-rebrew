@@ -32,7 +32,7 @@ int __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
-void __cdecl fcn_004c6190(char*, char);
+void __cdecl cm_SendUpdateSlot80(char*, char);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_00535960(void);
 
@@ -122,7 +122,7 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 						}
 					}
 				}
-				fcn_004c6190((char*) &rec, (char) player);
+				cm_SendUpdateSlot80((char*) &rec, (char) player);
 			}
 			s = (MARKET_STOCK_SLOT*) ((char*) s + 0x80);
 			p = (MARKET_STOCK_SLOT*) ((char*) p + 0x80);
@@ -180,7 +180,7 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 				} else {
 					rec.active = 0;
 				}
-				fcn_004c6190((char*) &rec, (char) player);
+				cm_SendUpdateSlot80((char*) &rec, (char) player);
 			}
 			p = (MARKET_STOCK_SLOT*) ((char*) p + 0x80);
 		}

@@ -13,7 +13,7 @@ extern char g_6a4870[];
 int __cdecl cm_EnqueueClientPacket(char*);
 void __cdecl cm_StageRawPacketPayload(int, void*);
 
-int __cdecl fcn_004c5620(char a1, unsigned char* e)
+int __cdecl cm_SendSetHE(char a1, unsigned char* e)
 {
 	char buf[0x9c];
 

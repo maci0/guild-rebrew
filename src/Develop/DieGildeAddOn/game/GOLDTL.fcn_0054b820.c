@@ -12,7 +12,7 @@ extern FEST_CLOCK gm_GameTime;
 
 void __cdecl gm_AddTime(FEST_CLOCK* clock, int days, int hours, int mins);
 void __cdecl cm_SendCopyEntityData(int packet);
-void __cdecl fcn_004c5620(int mode, char* e);
+void __cdecl cm_SendSetHE(int mode, char* e);
 char* __cdecl gm_LookupEntityRecordById(int entityId);
 
 /* ADDRESS: GOLDTL 0x0054b820 */
@@ -50,5 +50,5 @@ void __cdecl he_StartFest(char* e)
 			}
 		}
 	}
-	fcn_004c5620(0, e);
+	cm_SendSetHE(0, e);
 }

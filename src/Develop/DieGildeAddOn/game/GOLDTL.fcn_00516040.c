@@ -4,7 +4,7 @@ extern char gm_GameTime[];
 int __cdecl gm_GetSeason(char*);
 char* __cdecl strstr(char*, char*);
 int __cdecl sprintf(char*, char*, ...);
-int __cdecl fcn_0045be40(char*);
+int __cdecl d3_ResolveTexturePath(char*);
 void __cdecl fcn_0043f990(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x00516040 */
@@ -60,7 +60,7 @@ void __cdecl fcn_00516040(void)
 				*q = 0;
 			}
 			sprintf(name, "%s_SNOW", buf);
-			if (fcn_0045be40(name) != 0) {
+			if (d3_ResolveTexturePath(name) != 0) {
 				fcn_0043f990(g_6b8300, name, i);
 			} else {
 				fcn_0043f990(g_6b8300, buf, i);
@@ -102,7 +102,7 @@ void __cdecl fcn_00516040(void)
 				*q = 0;
 			}
 			sprintf(name, "%s_HERBST", buf);
-			if (fcn_0045be40(name) != 0) {
+			if (d3_ResolveTexturePath(name) != 0) {
 				fcn_0043f990(g_6b8300, name, i);
 			} else {
 				fcn_0043f990(g_6b8300, buf, i);
@@ -144,7 +144,7 @@ void __cdecl fcn_00516040(void)
 				*q = 0;
 			}
 			sprintf(name, "%s_FRUEHLING", buf);
-			if (fcn_0045be40(name) != 0) {
+			if (d3_ResolveTexturePath(name) != 0) {
 				fcn_0043f990(g_6b8300, name, i);
 			} else {
 				fcn_0043f990(g_6b8300, buf, i);
@@ -186,7 +186,7 @@ void __cdecl fcn_00516040(void)
 			}
 			if (q != 0) {
 				*q = 0;
-				if (fcn_0045be40(buf) != 0) {
+				if (d3_ResolveTexturePath(buf) != 0) {
 					fcn_0043f990(g_6b8300, buf, i);
 				}
 			}

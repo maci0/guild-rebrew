@@ -32,7 +32,7 @@ extern int d2_CurrentWindowId;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 
-int __cdecl fcn_0050d5d0(int, int, char**);
+int __cdecl he_GetActiveKrediteByBorrower(int, int, char**);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
@@ -50,7 +50,7 @@ void __cdecl fcn_005c9310(unsigned short* who, int max, Row* rows, int dlg, int 
 	if (max >= 9) {
 		max = 9;
 	}
-	cnt = fcn_0050d5d0(*who, 0, list);
+	cnt = he_GetActiveKrediteByBorrower(*who, 0, list);
 	w = *(short*) (g_772500 + 0x269d8);
 	if (cnt >= max) {
 		cnt = max;

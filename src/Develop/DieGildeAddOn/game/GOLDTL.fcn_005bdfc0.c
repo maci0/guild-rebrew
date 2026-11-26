@@ -9,7 +9,7 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005bdfc0 */
 int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, int a3)
@@ -61,6 +61,6 @@ int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, in
 		}
 		r = main_RunFrameLoop(fcn_005bdfc0, 0x677c7);
 	} while (r != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return handled;
 }

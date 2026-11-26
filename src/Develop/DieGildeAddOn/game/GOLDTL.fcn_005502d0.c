@@ -9,7 +9,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 void __cdecl he_StartAction0x4b(char* u)
 {
@@ -28,7 +28,7 @@ void __cdecl he_StartAction0x4b(char* u)
 		a = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 		if (a == 0 || b == 0) {
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-			fcn_004c5620(-1, u);
+			cm_SendSetHE(-1, u);
 			return;
 		}
 		if (b[2] == 6 || b[2] == 7) {
@@ -36,5 +36,5 @@ void __cdecl he_StartAction0x4b(char* u)
 			he_PostEntityMessage(*(int*) (b + 4), -1, text, 0, 0x5fb, g_6a59fc);
 		}
 	}
-	fcn_004c5620(0, u);
+	cm_SendSetHE(0, u);
 }

@@ -37,7 +37,7 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 int __cdecl cm_SendCopyEntityData(char*);
 void __cdecl gm_AddTime(char*, int, int, int);
-void __cdecl fcn_00549330(char*, int);
+void __cdecl he_SetActionSubject(char*, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_CanTradeWithObject(char*, char*);
 char* __cdecl gm_FindCityItemHolder(int);
@@ -80,7 +80,7 @@ void __cdecl he_RunHandelsrouteTrade(char* a)
 
 	if (*(int*) (a + 0x70) == -2) {
 		*(int*) (a + 0x70) = 0;
-		fcn_00549330(a, *(unsigned short*) gm_CityEntity);
+		he_SetActionSubject(a, *(unsigned short*) gm_CityEntity);
 	}
 	if (*(int*) (a + 0xe8) != -1) {
 		if (!cm_GetCommandStatus(*(int*) (a + 0xe8))) {

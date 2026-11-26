@@ -9,7 +9,7 @@ char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 int __cdecl cm_RequestUpdateStraftatState(int, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 /* ADDRESS: GOLDTL 0x0054aa70 */
 void __cdecl fcn_0054aa70(char* u)
@@ -42,7 +42,7 @@ void __cdecl fcn_0054aa70(char* u)
 			io_FormatTextBuffer(buf, 0x1bbe, *(unsigned short*) r2, *(unsigned short*) r1);
 			he_PostEntityMessage(*(int*) (r2 + 4), *(int*) (r2 + 4), buf, 0, 0x5f5, 0);
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 			return;
 		}
 		if (*(int*) (u + 0xc5) > *(int*) (p + 0xc5)) {
@@ -54,5 +54,5 @@ void __cdecl fcn_0054aa70(char* u)
 		*(int*) (u + 0xcb) = 0;
 	}
 	*(int*) (u + 0xd4) = cm_RequestUpdateStraftatState(*(int*) (u + 0xac), *(int*) (u + 0xb0), *(int*) (u + 4), 1);
-	*(int*) (u + 0x84) = fcn_004c5620(0, u);
+	*(int*) (u + 0x84) = cm_SendSetHE(0, u);
 }

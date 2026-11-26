@@ -37,7 +37,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 {
@@ -103,7 +103,7 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 	}
 	g_77534d = 0;
 	d2_ClearRadioGroup(ctx);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return result;
 }
 

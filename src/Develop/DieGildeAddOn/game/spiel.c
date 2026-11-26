@@ -3610,6 +3610,7 @@ char* __cdecl gm_AllocRaum(char* geb, int obj_id)
 /* Preserve subsequent client diagnostic line numbers. */
 #line 3464
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_RemoveObjectWrapper(int entity_record, unsigned int obj_type)
 {
 	int remove_result;
@@ -3620,6 +3621,7 @@ int __cdecl gm_RemoveObjectWrapper(int entity_record, unsigned int obj_type)
 	}
 	return 0;
 }
+#endif
 
 /* Removes a link from an entity. Clears a specific entity
  * reference field, breaking the association. */
@@ -3732,6 +3734,7 @@ typedef struct {
 	short w[3];
 } STAT_REC;
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 STAT_REC __cdecl gm_GetStatRecord(int stat)
 {
 	if (stat >= 0x5f) {
@@ -3739,6 +3742,7 @@ STAT_REC __cdecl gm_GetStatRecord(int stat)
 	}
 	return ((STAT_REC*) g_stat_table)[stat];
 }
+#endif
 #if defined(REBREW_SERVER)
 int __cdecl gm_IsInRange(int x)
 {
@@ -4068,6 +4072,7 @@ int __cdecl gm_GetStatFirstItem(int stat)
 	return 0;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_GetItemGuild(int item)
 {
 	if (item >= 1 && item <= 6) {
@@ -4095,7 +4100,9 @@ int __cdecl gm_GetItemGuild(int item)
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetItemGuild(): guild not found", 1);
 	return 0;
 }
+#endif
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_GetRangeStatId(int range, int level)
 {
 	int d;
@@ -4144,6 +4151,7 @@ int __cdecl gm_GetRangeStatId(int range, int level)
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetRangeStatId(): stat not found", 1);
 	return 0;
 }
+#endif
 
 /* Returns the occupation code when its group matches stat_id.
  * Otherwise reads the group byte from the table entry, or returns zero. */
@@ -4490,11 +4498,13 @@ int __cdecl gm_GetOppositeStatIndex(int stat_id)
 	return result;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only: blends two weights 60/40 both ways and averages (discarded). */
 float __cdecl gm_BlendWeights(float a, float b)
 {
 	return (((a - b * b) * 0.6f + 0.4f) + ((a * a - b) * 0.4f + 0.6f)) * 0.5f;
 }
+#endif
 
 /* Client-only (TL 0x508220, discarded): copies the 12-byte record of kind (0..9) from the table at
  * g_spiel_const_table + 8, record 0 and result 0 for kind 10 and above. The client's copy of the table
@@ -4503,6 +4513,7 @@ typedef struct {
 	unsigned int v[3];
 } KIND_REC;
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_GetKindRecord(int kind, KIND_REC* out)
 {
 	extern unsigned int g_spiel_const_table[38];
@@ -4514,6 +4525,7 @@ int __cdecl gm_GetKindRecord(int kind, KIND_REC* out)
 	*out = ((KIND_REC*) (g_spiel_const_table + 8))[kind];
 	return 1;
 }
+#endif
 
 #if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only (TL 0x508c30, discarded): fills arr with 0..n-1 and swaps n/2 + max(n/4, 1) random
@@ -4676,6 +4688,7 @@ typedef struct {
 } PACKED_TIME;
 #pragma pack(pop)
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only (TL 0x509050, discarded): a packed date for an entity, from its age record (+0x28, or
  * the current year once +8 is set) less its +0xa word, with day and month drawn from its +0x30 seed. */
 void __cdecl gm_GetEntityDate(char* entity, PACKED_TIME* out)
@@ -4699,6 +4712,7 @@ void __cdecl gm_GetEntityDate(char* entity, PACKED_TIME* out)
 	packed.day = (unsigned char) ((seed >> 5) % 28 + 1);
 	*out = packed;
 }
+#endif
 
 int __cdecl gm_GetBirthday(char* entity, unsigned char* out)
 {

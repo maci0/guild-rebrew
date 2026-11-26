@@ -30,14 +30,14 @@ void __cdecl fcn_005963f0(int dlg, int a, int b, void* obj);
 int __cdecl main_RunFrameLoop(void* fn, int key);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_RestoreHudAfterDialog(void);
-void __cdecl fcn_00471e30(int dlg);
+void __cdecl d2_DestroyForm(int dlg);
 int __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl fcn_004c35f0(void);
 int __cdecl cm_GetCommandStatus(int handle);
 void __cdecl cm_GetCommandResult(int handle);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00526120(char* buf, int flag);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0059e740 */
 void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a1)
@@ -208,6 +208,6 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 	}
 	sv_ClearObjectSelection();
 	d2_RestoreHudAfterDialog();
-	fcn_00471e30(dlg);
-	fcn_00532ef0();
+	d2_DestroyForm(dlg);
+	d3_EndCameraAndUiMode();
 }

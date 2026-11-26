@@ -30,7 +30,7 @@ float* __stdcall D3DXMatrixTranspose(float* a, const float* b);
 void __cdecl d3_SetNodePosition(int h, float* p);
 int __cdecl plt_CheckZoneAvailability(int a, int b, int c, unsigned int d);
 void __cdecl d3_SetSubtreeColor(int a, int b, int c, int d);
-int __cdecl fcn_004c5aa0(int a, int b, int c, int d, int e, int f);
+int __cdecl cm_SendChainRecordLookup(int a, int b, int c, int d, int e, int f);
 int __cdecl cm_GetCommandStatus(int a);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl cm_GetCommandResult(int a);
@@ -47,7 +47,7 @@ int __cdecl fcn_004488e0(char* a, int b, int c);
 void __cdecl fcn_0043a5a0(int a, int p);
 void __cdecl ReportClientMessage(char* a);
 void __cdecl d2_ClearRadioGroup(int a);
-void __cdecl fcn_00471e30(int a);
+void __cdecl d2_DestroyForm(int a);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c5310 */
 void __cdecl ob_HandleBepflanzung(int gebaeude)
@@ -210,7 +210,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 		}
 		v4 = v26;
 		if (g_14ce8cc && v18 != 0xffffffff && v1) {
-			v20 = fcn_004c5aa0(*(unsigned int*) ((char*) gebaeude + 1),
+			v20 = cm_SendChainRecordLookup(*(unsigned int*) ((char*) gebaeude + 1),
 				v34, v37, *v26, 0, 0xffffffff);
 			v17 = cm_GetCommandStatus(v20);
 			while (!v17) {
@@ -302,7 +302,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			if (g_6a25b8 != -1) {
 				fcn_00471af0(g_6a25b8, 1);
 			}
-			fcn_00471e30(v38);
+			d2_DestroyForm(v38);
 			return;
 		}
 	}

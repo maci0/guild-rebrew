@@ -16,7 +16,7 @@ void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl cm_AreQueuedCommandsDone(void);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_004d1970(int, char *);
+int __cdecl cut_SpawnCombatActor(int, char *);
 void __cdecl SelectTextureSet(int, int, int, int);
 void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
@@ -38,7 +38,7 @@ extern double g_664ef8;
 extern int g_6b89c0; extern char g_6a2574[];
 typedef struct BuildingRow4d1ff0 { unsigned char kind; char fields[0x24c]; } BuildingRow4d1ff0;
 /* ADDRESS: GOLDTL 0x004d1ff0 */
-void __cdecl fcn_004d1ff0(void *arg)
+void __cdecl cut_SetupBattleArena(void *arg)
 {
 	int first;
 	int cur;
@@ -228,7 +228,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 	}
 	for (p = (int *) (o + 0xc0), i = 0x10; i != 0; i--, p++) {
 		if (*p != -1) {
-			e = fcn_004d1970(*p, "dummy_OFFENSE_ENTRY");
+			e = cut_SpawnCombatActor(*p, "dummy_OFFENSE_ENTRY");
 			*(int *) (e + 0x16c) = *(int *) &g_772e9c;
 			if (*(int *) (e + 0x184) != 0) {
 				t = *(int *) (*(int *) (e + 0x184) + 0x34);
@@ -238,7 +238,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 	}
 	for (p = (int *) (o + 0x80), i = 0x10; i != 0; i--, p++) {
 		if (*p != -1) {
-			e = fcn_004d1970(*p, "dummy_DEFENSE_ENTRY");
+			e = cut_SpawnCombatActor(*p, "dummy_DEFENSE_ENTRY");
 			*(int *) (e + 0x16c) = *(int *) 0x772e98;
 			*(float *) (*(int *) (e + 0x184) + 0x1a0) =
 				(float) (*(float *) (*(int *) (e + 0x184) + 0x1a0) * 1.2);

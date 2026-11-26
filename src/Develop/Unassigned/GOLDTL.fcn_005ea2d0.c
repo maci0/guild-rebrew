@@ -24,7 +24,7 @@ extern float g_6628a0;
 
 void __cdecl fcn_0045b990(void*, V3*, int*, int*, float*);
 
-int __cdecl fcn_005ea2d0(void* map, V3* from, V3* to, int gx, int gy, int* ox, int* oy)
+int __cdecl d3_TraceTerrainSegment(void* map, V3* from, V3* to, int gx, int gy, int* ox, int* oy)
 {
 	int cx;
 	V4 d;

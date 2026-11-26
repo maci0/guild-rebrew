@@ -74,7 +74,7 @@ char* __cdecl gm_LookupEntityRecordById(int description_id);
 int __cdecl fcn_00470820(int x, int y, char* title);
 int __cdecl d2_SetOverlayAnimation(int a1, int a2);
 void __cdecl d2_CenterDialogWindows(int dlg);
-void __cdecl fcn_00471e30(int dlg);
+void __cdecl d2_DestroyForm(int dlg);
 void __cdecl d2_SetForm(int dlg, int page);
 int __cdecl d2_GetWindowListItem(int dlg, int page, int id);
 void __cdecl fcn_00472640(int button, int state);
@@ -89,7 +89,7 @@ int __cdecl fcn_005ca740(int x, int y, int win, int id, sel005ac2d0* sel, int fl
 int __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 char* __cdecl fcn_005cd440(void* m, char* text, int a2, int a3);
 int __cdecl gm_RandomMod(unsigned short range);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005ac2d0 */
 void __cdecl fcn_005ac2d0(char* building)
@@ -323,8 +323,8 @@ void __cdecl fcn_005ac2d0(char* building)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005ac2d0, 0x677c7) != 0);
-	fcn_00471e30(dlg);
-	fcn_00532ef0();
+	d2_DestroyForm(dlg);
+	d3_EndCameraAndUiMode();
 }
 unsigned char _dpad_681114[24] = {
     0x54, 0x52, 0x41, 0x45, 0x47, 0x45, 0x5f, 0x56, 0x45, 0x52, 0x47, 0x41, 0x42, 0x45, 0x5f, 0x48,

@@ -5,13 +5,13 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 
-int __cdecl fcn_004ccb70(char* a1, char* response)
+int __cdecl cm_ExStopEntityScript(char* request, char* response)
 {
 	char* entity;
 	char* q;
 	int v;
 
-	entity = gm_LookupEntityRecordById(*(int*) (a1 + 0x10));
+	entity = gm_LookupEntityRecordById(*(int*) (request + 0x10));
 	if (entity == 0) {
 		return 1;
 	}

@@ -76,13 +76,13 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
 int __cdecl fcn_0064d41a(int, int, int, int, int);
-int __cdecl fcn_005c5e70(void);
+int __cdecl d2_UpdateActiveItemSlots(void);
 void __cdecl ResetDisplayCounters(void);
 int __cdecl fcn_00473690(int, int);
 int __cdecl CountDisplayCounters(void);
 void __cdecl d2_ClearSelectedControl(void);
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 float __cdecl fcn_0050bb50(int, int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl ob_TransportFromLager(int, int, int, int, int, float, int, int);
@@ -98,8 +98,8 @@ int __cdecl cm_SendCopyEntityData(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl sb_PlayVoice(int, int, int, int, int, int, int);
 int __cdecl gm_CheckEntityStock(int, int, int);
-int __cdecl fcn_00471e30(int);
-void __cdecl fcn_005c61c0(void);
+int __cdecl d2_DestroyForm(int);
+void __cdecl d2_CloseInventoryPanel(void);
 int __cdecl d2_SellObjectsDialog(int, int);
 int __cdecl cm_DispatchCartTransfer(int, int, int, int);
 void __cdecl cm_CompleteAction0x0f(int);
@@ -898,7 +898,7 @@ l_da9:
 	/* 0x5bbdd5: keep the row selection cursor in sync with the open container */
 	if (g_6abb00 != -1) {
 		if (f.v38 == 0) {
-			f.v60 = fcn_005c5e70();
+			f.v60 = d2_UpdateActiveItemSlots();
 			i = d2_GetControlValue(f.v78);
 			if (f.v90 != i) {
 				if (i != 0) {
@@ -913,7 +913,7 @@ l_da9:
 			}
 			f.v90 = i;
 		} else {
-			fcn_005c5e70();
+			d2_UpdateActiveItemSlots();
 		}
 	}
 	/* 0x5bbeb7: mark the open container row in the item table */
@@ -1040,7 +1040,7 @@ l_da9:
 			} else if (d2_CanCloseWindowDuringTutorial() == 1) {
 				g_774654 = 1;
 				if (f.v88 == 0 && g_7e2aa0 == 0) {
-					fcn_00532ef0();
+					d3_EndCameraAndUiMode();
 				}
 			}
 		}
@@ -1784,12 +1784,12 @@ l_5bd632:
 	if (main_RunFrameLoop((void*) d2_RunTradeTransportPanel, 0x657c7) != 0) {
 		goto l_5bb193;
 	}
-	fcn_005c61c0();
+	d2_CloseInventoryPanel();
 	ResetDisplayCounters();
-	fcn_00471e30(f.v2c);
+	d2_DestroyForm(f.v2c);
 	g_774698 = 0;
 	if (f.v80 != 0) {
-		fcn_00471e30(f.v94);
+		d2_DestroyForm(f.v94);
 		g_7746cc = (char*) f.v7c;
 	}
 	fcn_0057e880(0x23, (char*) 0, 1, 0);

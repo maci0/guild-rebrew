@@ -18,7 +18,7 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048e230 */
 int __cdecl fcn_0048e230(char* entity, char* request, char* a3)
@@ -55,7 +55,7 @@ int __cdecl fcn_0048e230(char* entity, char* request, char* a3)
 		found = -1;
 		f.mask = 0x7b4c4a0;
 		f.b = 0;
-		fcn_004a5e60(p, 0, f, 0, 100.0f, &found);
+		ai_FindEntityInFavorRange(p, 0, f, 0, 100.0f, &found);
 		*(int*) (msg + 0x58) = found;
 	}
 	cm_SendCopyEntityData(msg);

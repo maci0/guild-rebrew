@@ -7,7 +7,7 @@ extern int d2_CurrentWindowId;
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 
-void __cdecl fcn_005931a0(void)
+void __cdecl d2_InitNetLobbyScrollbar(void)
 {
 	int a;
 	int b;

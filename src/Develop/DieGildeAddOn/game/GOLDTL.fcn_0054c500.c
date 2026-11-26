@@ -18,10 +18,10 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-float __cdecl fcn_00507ed0(float, float);
+float __cdecl gm_BlendWeights(float, float);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl gm_CompareGameTime(char*, pos14_7f4c00*);
 void __cdecl he_FreeAction(char*);
@@ -52,7 +52,7 @@ void __cdecl he_RunAction53(char* e)
 	*(int*) (e + 0x84) = -1;
 	if (a == 0) {
 		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
-		fcn_004c5620(-1, e);
+		cm_SendSetHE(-1, e);
 		return;
 	}
 	if (b != 0) {
@@ -63,7 +63,7 @@ void __cdecl he_RunAction53(char* e)
 	while (*(int*) (e + 0xcc) != 0 && i < 16) {
 		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_index) != 0xffff && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_id) != *(int*) (e + 0xbc) && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_type) < 10
 		    && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].health) > 0) {
-			f = -fcn_00507ed0(*(float*) (e + 0xd0), gm_GetEntitySkill((char*) ((struct house*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]), 4));
+			f = -gm_BlendWeights(*(float*) (e + 0xd0), gm_GetEntitySkill((char*) ((struct house*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]), 4));
 			v = (int) (f * 10.0f + 1.0f) * mult;
 			cm_RequestCopyEntityData(*(int*) (e + 0xbc), (((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_id), v, 1);
 		}
@@ -78,5 +78,5 @@ void __cdecl he_RunAction53(char* e)
 		return;
 	}
 	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
-	*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+	*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 }

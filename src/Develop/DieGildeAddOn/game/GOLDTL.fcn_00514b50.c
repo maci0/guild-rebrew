@@ -43,7 +43,7 @@ extern unsigned char g_7747b0;
 extern unsigned char g_773d75;
 
 void __cdecl gm_InitCityOfficialsAndCitizens(int);
-void __cdecl fcn_0053abe0(int);
+void __cdecl gm_InitCivicBuildings(int);
 void __cdecl cm_DistributeStartingWares(int, int, int*);
 void __cdecl fcn_00512ee0(void);
 Player* __cdecl gm_GetGuildHall(int);
@@ -67,7 +67,7 @@ int __cdecl gm_InitCityAndTradeState(int variant)
 	if (g_7747e8 != 0) {
 		for (i = 0; i < 768; i++) {
 			if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6) {
-				fcn_0053abe0(i);
+				gm_InitCivicBuildings(i);
 				break;
 			}
 		}

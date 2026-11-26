@@ -15,7 +15,7 @@ extern char* g_1015ea0;
 void __cdecl fcn_00472640(int, int);
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_0058c780(char* a1, int a2, int a3, int* controlIds, int* selectedIndex)
+int __cdecl d2_UpdateRentGraveOptions(char* building, int unlockedCount, int unused, int* controlIds, int* selectedIndex)
 {
 	int r;
 	int sel;
@@ -25,12 +25,12 @@ int __cdecl fcn_0058c780(char* a1, int a2, int a3, int* controlIds, int* selecte
 
 	r = 0;
 	sel = -1;
-	for (i = 0; i < a2 + 1; i++) {
+	for (i = 0; i < unlockedCount + 1; i++) {
 		fcn_00472640(controlIds[i], 0);
 		((D2_CONTROL_TL*) g_1015ea0)[controlIds[i]].value_038 = 0;
 	}
-	for (i = a2 + 1; i < 4; i++) {
-		if (gv_CheckSlotActive(*(void**) (a1 + 0x65), i)) {
+	for (i = unlockedCount + 1; i < 4; i++) {
+		if (gv_CheckSlotActive(*(void**) (building + 0x65), i)) {
 			r = 1;
 			fcn_00472640(controlIds[i], 1);
 			if (sel == -1) {

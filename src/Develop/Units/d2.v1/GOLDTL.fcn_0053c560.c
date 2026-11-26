@@ -45,7 +45,7 @@ int __cdecl fcn_00470820(int, int, char *);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_004e4b60(char *);
 int __cdecl fcn_00445f50(unsigned int, float, float, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -136,7 +136,7 @@ int __cdecl d2_RunParentProfessionSelection(void)
 	i = 4;
 	fcn_00445f50(i, 0, 1.0f, 1);
 	if (*(int *) 0x6a37f8 != -1) {
-		fcn_00471e30(*(int *) 0x6a37f8);
+		d2_DestroyForm(*(int *) 0x6a37f8);
 		*(int *) 0x6a37f8 = -1;
 	}
 	d2_SuppressOverlay = 0;
@@ -254,7 +254,7 @@ slot_found:
 	if (rhMann != 0)
 		ch_DestroyCharacter((char *) rhMann);
 	if (obj != -1)
-		fcn_00471e30(obj);
+		d2_DestroyForm(obj);
 	if (oldSound != -1) {
 		found = evt_FindScriptById(oldSound);
 		if (found != 0)

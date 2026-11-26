@@ -34,10 +34,10 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 
-int __cdecl fcn_0050c1b0(Player*, int, int*);
+int __cdecl gm_CalcBuildingRoundBalance(Player*, int, int*);
 void __cdecl io_AppendText(char*, ...);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl fcn_00541150(Player* p)
 {
@@ -51,7 +51,7 @@ void __cdecl fcn_00541150(Player* p)
 	d2_SetForm(box, 1);
 	((Dialog*)g_77255c)->style = 0x55;
 	gm_GetBuildingTypeCategory(p->office);
-	if (fcn_0050c1b0(p, (unsigned short) (*(int*)&g_774970), st) != 0) {
+	if (gm_CalcBuildingRoundBalance(p, (unsigned short) (*(int*)&g_774970), st) != 0) {
 		if (p->name[0] != 0) {
 			io_AppendText("$A$Z%1s >%s<$2A", p->office * 14 + 0x48e, p->name);
 		} else {
@@ -108,5 +108,5 @@ void __cdecl fcn_00541150(Player* p)
 			g_774654 = 1;
 		}
 	}
-	fcn_00471e30(box);
+	d2_DestroyForm(box);
 }

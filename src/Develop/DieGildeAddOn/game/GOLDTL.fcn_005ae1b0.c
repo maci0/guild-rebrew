@@ -32,12 +32,12 @@ int __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_SetSubtreeVisible(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_005ad5a0(unsigned char*);
+void __cdecl d2_StartEinbruchTargetSelect(unsigned char*);
 void __cdecl d2_StartThievesGuildSpyPicker(unsigned char*);
 void __cdecl d2_OpenAngriffDialog(unsigned char*);
 void __cdecl fcn_005ae000(unsigned char*);
 void __cdecl d2_ShowPersonalbuch(unsigned char*, char*);
-void __cdecl fcn_005ada30(unsigned char*);
+void __cdecl d2_RunDiebesgildeInfoDialog(unsigned char*);
 void __cdecl d2_OpenMeisterbriefDialog(unsigned char*);
 
 void __cdecl d2_RunRaeuberlagerMenu(unsigned char* building)
@@ -90,7 +90,7 @@ void __cdecl d2_RunRaeuberlagerMenu(unsigned char* building)
 			}
 			if (g_7746a0 != 0) {
 				if (g_7746a0 == a) {
-					fcn_005ad5a0(building);
+					d2_StartEinbruchTargetSelect(building);
 				}
 				else if (g_7746a0 == b) {
 					d2_StartThievesGuildSpyPicker(building);
@@ -105,7 +105,7 @@ void __cdecl d2_RunRaeuberlagerMenu(unsigned char* building)
 					d2_ShowPersonalbuch(building, s_6aa34c);
 				}
 				else if (g_7746a0 == e) {
-					fcn_005ada30(building);
+					d2_RunDiebesgildeInfoDialog(building);
 				}
 				else if (g_7746a0 == g) {
 					d2_OpenMeisterbriefDialog(building);

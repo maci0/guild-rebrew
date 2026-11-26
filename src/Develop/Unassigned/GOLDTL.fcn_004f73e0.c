@@ -1,7 +1,7 @@
 
 
 
-int  __cdecl fcn_005d97f0(void*, void*);
+int  __cdecl d2_RunProfessionSelectDialog(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
@@ -17,7 +17,7 @@ int __cdecl fcn_004f73e0(void* entity, void* context)
 		return 1;
 	}
 	if (*(int*) context == 3 && *(char*) ((char*) entity + 2) == 6) {
-		result = fcn_005d97f0(entity, context) | 2;
+		result = d2_RunProfessionSelectDialog(entity, context) | 2;
 	} else if (*(int*) context == 1 && *(char*) ((char*) entity + 2) == 6) {
 		io_FormatTextBuffer((char*) context + 0x14, (int) "%s", 0x1d35);
 	}

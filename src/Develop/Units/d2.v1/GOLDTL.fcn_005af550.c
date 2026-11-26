@@ -54,7 +54,7 @@ int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005af550 */
 int __cdecl fcn_005af550(int unused, char* param)
@@ -133,6 +133,6 @@ int __cdecl fcn_005af550(int unused, char* param)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005af550, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return flag;
 }

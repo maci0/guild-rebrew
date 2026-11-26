@@ -17,12 +17,12 @@ int __cdecl d2_ClearWindowChildren();
 int __cdecl fcn_00470820();
 int __cdecl fcn_00471af0();
 int __cdecl d2_CenterDialogWindows();
-int __cdecl fcn_00471e30();
+int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
 int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
-int __cdecl fcn_004927c0();
-int __cdecl fcn_00492950();
+int __cdecl gm_ResolveWirtshausOffer();
+int __cdecl gm_IsDiceStageValid();
 int __cdecl fcn_00492d60();
 int __cdecl ai_EvalBlackjackAction();
 int __cdecl fcn_00493000();
@@ -42,7 +42,7 @@ int __cdecl main_RunFrameLoop();
 int __cdecl d2_ShowWirtshausRules();
 int __cdecl fcn_005a0cd0();
 int __cdecl fcn_005a1130();
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 #define v13 ((int *)(frame + 0x04))
 #define v14 (*(unsigned int *)(frame + 0x00))
@@ -177,7 +177,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
         else if ((*(int *)0x67d370) == v8) {
           v9 = 4;
         }
-        fcn_004927c0(v3,&v14,v9);
+        gm_ResolveWirtshausOffer(v3,&v14,v9);
         g_774654 = 1;
       }
     } while (main_RunFrameLoop(0x5a1430,0x777c7));
@@ -199,7 +199,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
           g_774654 = 1;
       } while (main_RunFrameLoop(0x5a1430,0x777c7));
       if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
-        fcn_00471e30(windowId);
+        d2_DestroyForm(windowId);
         v22[1] = 2;
         v22[0] = -1;
         v22[2] = 0;
@@ -297,7 +297,7 @@ label_5a1b81:
                       v31 = 3;
                       do {
                         v11 = v10[1];
-                        if (fcn_00492950(&v14,v3,v11)) {
+                        if (gm_IsDiceStageValid(&v14,v3,v11)) {
                           v9 = io_AppendText(&v10[3]);
                           *v10 = d2_GetWindowListItem(windowId,4,v9);
                         }
@@ -355,6 +355,6 @@ label_5a1b81:
     }
   }
 label_532ef0:
-	fcn_00471e30(windowId);
-	fcn_00532ef0();
+	d2_DestroyForm(windowId);
+	d3_EndCameraAndUiMode();
 }

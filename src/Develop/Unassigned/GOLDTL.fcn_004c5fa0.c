@@ -3,7 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c5fa0(int a1)
+void __cdecl cm_SendSetGebUpgrade(int a1)
 {
 	char buf[0x9c];
 

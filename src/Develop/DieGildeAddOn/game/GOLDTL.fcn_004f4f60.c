@@ -27,12 +27,12 @@ typedef struct {
 #pragma pack()
 
 /* ADDRESS: GOLDTL 0x004f4f60 */
-int __cdecl gm_TryRecordCrime(int idx, int id, int a3, int a4, int a5)
+int __cdecl gm_TryRecordCrime(int idx, int id, int actorId, int targetId, int locationId)
 {
 	char rec[36];
 	CRIME_REPORT_MSG msg;
 	char* h1;
-	int v3;
+	int origActorId;
 
 	float f;
 
@@ -40,10 +40,10 @@ int __cdecl gm_TryRecordCrime(int idx, int id, int a3, int a4, int a5)
 	if (!fcn_004f4830(idx, rec)) {
 		goto fail;
 	}
-	v3 = a3;
-	h1 = gm_LookupEntityRecordById(v3);
-	gm_LookupEntityRecordById(a4);
-	gm_ResolveEntityById((char**)&a3, 0, 0, a5);
+	origActorId = actorId;
+	h1 = gm_LookupEntityRecordById(origActorId);
+	gm_LookupEntityRecordById(targetId);
+	gm_ResolveEntityById((char**)&actorId, 0, 0, locationId);
 	switch ((unsigned char) *(int*) (rec + 0x14)) {
 	case 1:
 		if (*(int*) (rec + 0x18) != id) {
@@ -95,11 +95,11 @@ int __cdecl gm_TryRecordCrime(int idx, int id, int a3, int a4, int a5)
 	msg.pos = gm_GameTime;
 	msg.f = id;
 	msg.e = rec[0];
-	msg.b = a4;
-	msg.c = v3;
+	msg.b = targetId;
+	msg.c = origActorId;
 	msg.d = *(short*) (rec + 0x10);
 	msg.h = 1;
-	msg.g = a5;
+	msg.g = locationId;
 	return cm_SendAddStraftat(&msg);
 fail:
 	return -1;

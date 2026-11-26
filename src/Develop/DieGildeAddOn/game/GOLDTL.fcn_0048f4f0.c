@@ -24,7 +24,7 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int* __cdecl ai_PickIdleGraveyardWorker(char* q);
 int __cdecl fcn_004a5340(char* e, int a, int* p, float lo, float hi,
 	unsigned short* out);
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048f4f0 */
 int __cdecl ai_FindGraveyardTargets(char* e, char* q, Blk24* b1, Blk24* b2)
@@ -64,7 +64,7 @@ int __cdecl ai_FindGraveyardTargets(char* e, char* q, Blk24* b1, Blk24* b2)
 			found = -1;
 			f.mask = 0x7b4c4a0;
 			f.b = 0;
-			fcn_004a5e60(e, 0, f, 0, 100.0f, &found);
+			ai_FindEntityInFavorRange(e, 0, f, 0, 100.0f, &found);
 			if (found == -1)
 				return 0;
 			b2->b = found;

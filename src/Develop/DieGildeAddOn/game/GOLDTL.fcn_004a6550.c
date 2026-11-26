@@ -50,7 +50,7 @@ typedef struct {
 } FxRow_4a6550;
 
 /* ADDRESS: GOLDTL 0x004a6550 */
-int __cdecl fcn_004a6550(char* a0, char* a1)
+int __cdecl ai_FireCannonVolley(char* actor, char* cannon)
 {
 	char buf1[104];
 	char buf2[104];
@@ -71,11 +71,11 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 	int p1;
 	int kind;
 
-	if (g_772848 != *(int*) (a0 + 4) || g_77284c != *(int*) (a1 + 1)) {
+	if (g_772848 != *(int*) (actor + 4) || g_77284c != *(int*) (cannon + 1)) {
 		return 0;
 	}
-	gm_CalcArtillerySpread(a1, &ss[0], &ss[1]);
-	factor = gm_GetCannonPowerScale(a1);
+	gm_CalcArtillerySpread(cannon, &ss[0], &ss[1]);
+	factor = gm_GetCannonPowerScale(cannon);
 	p2 = g_7728b8;
 	p1 = g_7728b4;
 	entry = &((FxRow_4a6550*) 0x665288)[g_77289c];
@@ -94,7 +94,7 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 			bits, g_6660f4);
 		d3_PerturbParticleVelocity((float*) buf1, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
-		fcn_004f0a30(a1, a0, (float*) buf1, 0, 0,
+		fcn_004f0a30(cannon, actor, (float*) buf1, 0, 0,
 			fcn_004f0eb0(g_77289c, g_772898, 1), p2, (unsigned int) p1);
 		return 1;
 	}
@@ -125,7 +125,7 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 			(float*) 0x772880, ss[1]);
 		d3_PerturbParticleVelocity((float*) buf1, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
-		fcn_004f0a30(a1, a0, (float*) buf2, (float*) buf1, 0,
+		fcn_004f0a30(cannon, actor, (float*) buf2, (float*) buf1, 0,
 			fcn_004f0eb0(g_77289c, g_772898, 2), p2, (unsigned int) p1);
 		return 1;
 	}
@@ -175,7 +175,7 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 			(float*) 0x772880, ss[1]);
 		d3_PerturbParticleVelocity((float*) buf2, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
-		fcn_004f0a30(a1, a0, (float*) buf3, (float*) buf1, (float*) buf2,
+		fcn_004f0a30(cannon, actor, (float*) buf3, (float*) buf1, (float*) buf2,
 			fcn_004f0eb0(g_77289c, g_772898, 3), p2, (unsigned int) p1);
 		return 1;
 	}

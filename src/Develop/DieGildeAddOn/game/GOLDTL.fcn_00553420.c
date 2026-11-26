@@ -1,4 +1,4 @@
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -16,6 +16,6 @@ void __cdecl he_InitSchutzgeld(char* o)
 		*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 2, 0);
 		*(int*) (o + 0x70) = 1;
-		*(int*) (o + 0x84) = fcn_004c5620(1, o);
+		*(int*) (o + 0x84) = cm_SendSetHE(1, o);
 	}
 }

@@ -13,13 +13,13 @@ int __cdecl gm_CheckZunftPreismanipulation(char*);
 void __cdecl fcn_005aa480(int);
 
 /* ADDRESS: GOLD 0x5a1bb0 */
-void __cdecl fcn_005aaed0(int a)
+void __cdecl d2_RunZunftPreismanipMenu(int a)
 {
 	int x;
 
 	x = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop(fcn_005aaed0, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunZunftPreismanipMenu, 0x67fff) != 0) {
 		if (gm_CheckZunftPreismanipulation(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])) != 0) {
 			x = RegisterStatusText(g_6aafe4, g_14aac24, 0x16);
 		}

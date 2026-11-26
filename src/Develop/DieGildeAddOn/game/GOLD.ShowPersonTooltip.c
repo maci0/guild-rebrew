@@ -28,7 +28,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534210(int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00525ef0(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl ShowPersonTooltip(char* w)
 {
@@ -113,5 +113,5 @@ void __cdecl ShowPersonTooltip(char* w)
 		}
 	} while (main_RunFrameLoop(ShowPersonTooltip, 0x677c7) != 0);
 	fcn_00525ef0();
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

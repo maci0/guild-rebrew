@@ -30,12 +30,12 @@ int __cdecl fcn_00496dc0(void);
 int __cdecl fcn_00496e60(void);
 int __cdecl ai_RunAmtsbewerbung(void);
 int __cdecl fcn_00497030(void);
-int __cdecl fcn_004973a0(void);
+int __cdecl ai_RunBuyObject(void);
 int __cdecl am_StartBuyObjektAP(void);
 int __cdecl fcn_004974d0(void);
 int __cdecl fcn_004974e0(void);
 int __cdecl ai_RunRaumKaufen(void);
-int __cdecl fcn_004976e0(void);
+int __cdecl ai_StartRepairBuilding(void);
 int __cdecl fcn_004978d0(void);
 int __cdecl fcn_00497990(void);
 int __cdecl fcn_00497e60(void);
@@ -55,14 +55,14 @@ int __cdecl fcn_00499000(void);
 int __cdecl fcn_00499090(void);
 int __cdecl ai_RunSabotieren(void);
 int __cdecl fcn_004995b0(void);
-int __cdecl fcn_00499640(void);
+int __cdecl ai_StartBeatUp(void);
 int __cdecl fcn_00499950(void);
 int __cdecl PrepareBuergerrecht(void*, char*, int, char*);
 int __cdecl fcn_00499ad0(void);
 int __cdecl fcn_00499cc0(void);
 int __cdecl cm_RunApsSparen(void);
 int __cdecl ai_StartUseObjectMilitary(void);
-int __cdecl fcn_00499fe0(void);
+int __cdecl ai_RunUseObjectMilitary(void);
 int __cdecl fcn_0049a0c0(void);
 int __cdecl ai_RunUseObjectAnsehen(void);
 int __cdecl ai_StartUseObjectAps(void);
@@ -71,10 +71,10 @@ int __cdecl ai_StartEducationObject(void);
 int __cdecl fcn_0049aa80(void);
 int __cdecl fcn_0049ab50(void);
 int __cdecl fcn_0049ace0(void);
-int __cdecl fcn_0049adb0(void);
+int __cdecl ai_StartUseDynastyObject(void);
 int __cdecl fcn_0049b120(void);
 int __cdecl ai_StartUseObjectGemeinheit(void);
-int __cdecl fcn_0049b680(void);
+int __cdecl ai_RunUseObjectGemeinheit(void);
 int __cdecl fcn_0049b7c0(void);
 int __cdecl ai_RunSecurityObject(void);
 int __cdecl ai_ScoreUseParfuem(void);
@@ -521,7 +521,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Objekt kaufen");
 	d.score = fcn_004a4410;
 	d.start = fcn_00497030;
-	d.run = fcn_004973a0;
+	d.run = ai_RunBuyObject;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -622,7 +622,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0xf;
 	strcpy(d.name, "Repair Building");
 	d.score = fcn_004a4410;
-	d.start = fcn_004976e0;
+	d.start = ai_StartRepairBuilding;
 	d.run = fcn_004978d0;
 	d.flags = 0xff;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -928,7 +928,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x18;
 	strcpy(d.name, "Verpruegeln");
 	d.score = fcn_004995b0;
-	d.start = fcn_00499640;
+	d.start = ai_StartBeatUp;
 	d.run = fcn_00499950;
 	d.flags = 0x1c9;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -1031,7 +1031,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "UseObject (Military)");
 	d.score = fcn_004a4410;
 	d.start = ai_StartUseObjectMilitary;
-	d.run = fcn_00499fe0;
+	d.run = ai_RunUseObjectMilitary;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1200,7 +1200,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x20;
 	strcpy(d.name, "UseObject (Dynastie)");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049adb0;
+	d.start = ai_StartUseDynastyObject;
 	d.run = fcn_0049b120;
 	d.flags = 0x17;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -1235,7 +1235,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "UseObject (Gemeinheit)");
 	d.score = fcn_004a4410;
 	d.start = ai_StartUseObjectGemeinheit;
-	d.run = fcn_0049b680;
+	d.run = ai_RunUseObjectGemeinheit;
 	d.flags = 0xc9;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;

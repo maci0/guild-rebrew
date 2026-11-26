@@ -16,7 +16,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenDuelTargetPicker(int);
 void __cdecl d2_OpenStraftatAccusePicker(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_RunTalenteDialog(int, int, int);
 
 void __cdecl d2_RunRhetoricActionsHud(int entity, int mode)
@@ -41,7 +41,7 @@ void __cdecl d2_RunRhetoricActionsHud(int entity, int mode)
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == x) {
 				d2_OpenStraftatAccusePicker(entity);
-				fcn_00532ef0();
+				d3_EndCameraAndUiMode();
 			}
 			else if (g_7746a0 == y) {
 				d2_OpenDuelTargetPicker(entity);

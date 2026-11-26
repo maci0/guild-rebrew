@@ -27,7 +27,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_Plot(int, int, unsigned char, unsigned char, unsigned char);
 
 void __cdecl d2_ShowSupermap(Map5b52* m, int x0, int y0, int x1, int y1)
@@ -88,7 +88,7 @@ void __cdecl d2_ShowSupermap(Map5b52* m, int x0, int y0, int x1, int y1)
 			g_774654 = 1;
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	g_6b7fc0 = 0;
 	g_6a2c04 = 1;
 }

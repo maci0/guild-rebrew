@@ -23,8 +23,8 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl d2_CheckActionBlocker(int, int);
 void __cdecl cm_SendCopyEntityData(int*);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* The reference frame keeps EBP; /O2 /Gd omits the frame pointer, so restore
  * it here instead of overriding the locked CFLAGS. */
@@ -84,7 +84,7 @@ void __cdecl fcn_0058dbe0(int a0)
 	query[0x13] = 0x727;
 	rec = fcn_005bdc30(1, query, *(int*) 0x14b55f8, 0, 0);
 	if (!rec) {
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 		return;
 	}
 	dialogId = fcn_00470820(0, 0, (char*) 0x6a9768);
@@ -146,7 +146,7 @@ void __cdecl fcn_0058dbe0(int a0)
 			}
 		}
 	} while (main_RunFrameLoop(0x58dbe0, 0x677c7));
-	fcn_00471e30(dialogId);
-	fcn_00532ef0();
+	d2_DestroyForm(dialogId);
+	d3_EndCameraAndUiMode();
 }
 #pragma optimize("", on)

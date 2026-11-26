@@ -10,7 +10,7 @@ void __cdecl he_FreeAction(char*);
 unsigned char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_004c6090(unsigned char*, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_00507400(int, int);
+int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl cm_RequestAllocSpieler(int, int, int, short, int, int, int, int);
 
 void __cdecl he_StartInitBetrieb(char* o)
@@ -37,7 +37,7 @@ void __cdecl he_StartInitBetrieb(char* o)
 		}
 		*(int*) (o + 0xac) = fcn_004c6090(r, 1, t[0x230], k);
 	} else {
-		x = fcn_00507400(gm_RandomMod(12) + 1, 1);
+		x = gm_GetRangeStatId(gm_RandomMod(12) + 1, 1);
 		*(int*) (o + 0xac) = cm_RequestAllocSpieler(2, -1, -1, gm_RandomMod(5) + 0x16, -1, x, 0, 2);
 	}
 	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;

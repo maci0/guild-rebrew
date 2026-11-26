@@ -11,7 +11,7 @@ typedef struct OfficeRecord {
 	int v[6];
 } OfficeRecord;
 /* SIZE 0x18 */
-int __cdecl fcn_004a5e60(void *, int, F8, float, float, int *); int __cdecl gm_ResolveEntityById(void *, int, int, int);
+int __cdecl ai_FindEntityInFavorRange(void *, int, F8, float, float, int *); int __cdecl gm_ResolveEntityById(void *, int, int, int);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_868060[];
 unsigned short __cdecl gm_RandomMod(int);
@@ -29,7 +29,7 @@ void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005d9000 */
-void __cdecl fcn_005d9000(unsigned char *e, int mode)
+void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 {
 	char msg[0x400];
 	char t1[0x400];
@@ -53,7 +53,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 
 		f.mask = 0x80;
 		f.b = 0;
-		if (fcn_004a5e60(e, 2, f, 0.0f, 100.0f, &found) == 0)
+		if (ai_FindEntityInFavorRange(e, 2, f, 0.0f, 100.0f, &found) == 0)
 			return;
 		gm_ResolveEntityById(&ent, 0, 0, found);
 		best = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short *) (ent + 0x27)];
@@ -98,7 +98,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 
 		f.mask = 0xa07c43b0;
 		f.b = 1;
-		if (fcn_004a5e60(e, 2, f, 0.0f, 100.0f, &found) == 0)
+		if (ai_FindEntityInFavorRange(e, 2, f, 0.0f, 100.0f, &found) == 0)
 			return;
 		gm_ResolveEntityById(&ent, 0, 0, found);
 		best = &((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short *) (ent + 0x27)];
@@ -176,7 +176,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		}
 		f.mask = 0xb07d43b4;
 		f.b = 1;
-		if (fcn_004a5e60(best, 4, f, 0.0f, 100.0f, &id) == 0)
+		if (ai_FindEntityInFavorRange(best, 4, f, 0.0f, 100.0f, &id) == 0)
 			return;
 		v = gm_RandomMod(5) + 3;
 		score = (int) ((float) v * bv * 0.01f);

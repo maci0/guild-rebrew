@@ -32,7 +32,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00508620(int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl cm_SendCopyEntityData(char*);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 {
@@ -78,6 +78,6 @@ int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 			}
 		} while (main_RunFrameLoop(fcn_005a66b0, 0x677c7) != 0);
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return res;
 }

@@ -35,7 +35,7 @@ extern float __cdecl fcn_0050bb50(int, unsigned char);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
 extern int __cdecl gm_RandomMod(int);
 extern int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
-extern void __cdecl fcn_004c6be0(char*, char*);
+extern void __cdecl cm_RequestAllocWarEvent(char*, char*);
 extern char* __cdecl fcn_0050dc90(char*);
 extern unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 extern int __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
@@ -202,7 +202,7 @@ void __cdecl he_RunGebSpionage(char* action)
 		m.f16 = v;
 		m.f1a = (char)gm_GetBuildingTechEffect((unsigned char*)h2, 7, 1);
 		m.f1b = (char)k;
-		fcn_004c6be0(h, (char*)&m);
+		cm_RequestAllocWarEvent(h, (char*)&m);
 		if (*(char*)(ent + 2) == 6 || *(char*)(ent + 2) == 7) {
 			e = (char*)fcn_0050dc90(h);
 			if (u != 0) {

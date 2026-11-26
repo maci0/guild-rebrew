@@ -21,7 +21,7 @@ int __cdecl fcn_004d31d0(char*, int, int, int, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
-int __cdecl fcn_004d14b0(char* rec, char* e)
+int __cdecl cut_AssignGuardOrder(char* rec, char* e)
 {
 	int a;
 	int b;

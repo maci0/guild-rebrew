@@ -9,7 +9,7 @@ typedef struct {
 	int cd_hi;
 	int kind;
 	int pad14[15];
-} Req5d81f0;
+} ExpelWorkerReq;
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
@@ -49,14 +49,14 @@ extern void __cdecl fcn_00535960(void);
 extern void __cdecl fcn_00526120(char*, int);
 extern int __cdecl gm_RandomMod(int);
 extern int __cdecl main_RunFrameLoop(int, int);
-extern void __cdecl fcn_00471e30(int);
+extern void __cdecl d2_DestroyForm(int);
 
 /* Validates the current entity action against its target and executes the
  * action's announce/notify path; returns one of the 0x10/0x20/0x60/0x81 codes. */
 /* ADDRESS: GOLDTL 0x005d81f0 */
-unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
+unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 {
-	Req5d81f0 found;
+	ExpelWorkerReq found;
 	char text[512];
 	char name[256];
 	char* ent;
@@ -181,8 +181,8 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 		}
 		if (g_14ce8e0 != 0)
 			g_774654 = 1;
-	} while (main_RunFrameLoop((int) fcn_005d81f0, 0x657c7) != 0);
-	fcn_00471e30(j);
+	} while (main_RunFrameLoop((int) d2_ShowExpelWorkerDialog, 0x657c7) != 0);
+	d2_DestroyForm(j);
 	return ret;
 fail60:
 	return 0x60;

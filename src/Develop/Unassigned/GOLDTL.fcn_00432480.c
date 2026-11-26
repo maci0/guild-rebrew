@@ -68,7 +68,7 @@ typedef struct Frame {
 	float tA0;			/* 0xa0 */
 } Frame;
 
-int __cdecl fcn_004321a0(ClampBlk flags, int v, int lo, int hi, int max);
+int __cdecl d3_StepAnimFrame(ClampBlk flags, int v, int lo, int hi, int max);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
@@ -216,7 +216,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 					}
 					if (SI(slot + 4) > lo) {
 						SI(slot) = SI(slot) - 1;
-						SI(slot + 4) = fcn_004321a0(
+						SI(slot + 4) = d3_StepAnimFrame(
 							*(ClampBlk*) (slot + 0x6c),
 							SI(slot), lo, hi, max);
 						frames = SP(owner + 0x15c);
@@ -230,7 +230,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 						SI(slot) = lo;
 						flags &= ~2;
 						SB(slot + 0x6d) = (unsigned char) flags;
-						SI(slot + 4) = fcn_004321a0(
+						SI(slot + 4) = d3_StepAnimFrame(
 							*(ClampBlk*) (slot + 0x6c),
 							lo, lo, hi, max);
 						if ((unsigned char) SB(slot + 0x6c) > 0) {
@@ -298,7 +298,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 					}
 				}
 	clamp1:
-				SI(slot + 4) = fcn_004321a0(*(ClampBlk*) (slot + 0x6c),
+				SI(slot + 4) = d3_StepAnimFrame(*(ClampBlk*) (slot + 0x6c),
 					SI(slot), lo, hi, max);
 
 	geom:
@@ -637,7 +637,7 @@ adv2:
 			}
 		}
 	cl2:
-		SI(st + 8) = fcn_004321a0(*(ClampBlk*) (st + 0x2c),
+		SI(st + 8) = d3_StepAnimFrame(*(ClampBlk*) (st + 0x2c),
 			SI(st + 4), 0, cnt - 1, cnt);
 		goto place2;
 	}
@@ -712,7 +712,7 @@ reset:
 	}
 
 cl2b:
-	SI(st + 8) = fcn_004321a0(*(ClampBlk*) (st + 0x2c),
+	SI(st + 8) = d3_StepAnimFrame(*(ClampBlk*) (st + 0x2c),
 		SI(st + 4), 0, cnt - 1, cnt);
 	goto place2;
 

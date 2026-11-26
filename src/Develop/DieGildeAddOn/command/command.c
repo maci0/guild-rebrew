@@ -1750,6 +1750,7 @@ int __cdecl cm_ExAllocClientSpieler(int cmd, char* result)
 	return 0;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ExChangePlayerIdentity(int cmd, char* result)
 {
 	int impl_result;
@@ -1774,6 +1775,7 @@ int __cdecl cm_ExChangePlayerIdentity(int cmd, char* result)
 	);
 	return 0;
 }
+#endif
 
 /* Execution handler: frees/deallocates a game entity. Resolves
  * entity by ID and removes it from the game world. Logs error
@@ -4086,7 +4088,7 @@ void __cdecl fcn_00530510(void);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl gm_RemoveClientEntityLink(char*);
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_004550b0(int, int*);
+void __cdecl d3_RemoveSubTreeFromCellTree(int, int*);
 #include "../../Units/d3/d3_object.h"
 void* __cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(char*);
@@ -4153,7 +4155,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 #ifndef REBREW_SERVER
 	d3_SelectSceneContext(0, 1);
 	if (g_773dd8 != 0) {
-		fcn_004550b0(*(int*) ((char*) building + 0x61), (int*) g_773dd8);
+		d3_RemoveSubTreeFromCellTree(*(int*) ((char*) building + 0x61), (int*) g_773dd8);
 	}
 	d3_DestroyObject((D3_OBJECT*) (*(void**) ((char*) building + 0x61)));
 	if (*(int*) ((char*) building + 0x95) != -1) {
@@ -4715,6 +4717,7 @@ int __cdecl cm_ExCutsceneReady(int cmd, char* result)
  * Looks up entity by ID at cmd+0x10 and applies the health
  * delta from the command payload. */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ExModifyHealth(int cmd)
 {
 	int entity;
@@ -4732,6 +4735,7 @@ int __cdecl cm_ExModifyHealth(int cmd)
 	*(uint*) (entity + 0x194) = health;
 	return 0;
 }
+#endif
 
 /* Execution handler: modifies an entity's stamina value.
  * Looks up entity by ID at cmd+0x10 and applies the stamina

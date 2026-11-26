@@ -17,7 +17,7 @@ typedef struct
 
 #pragma pack(pop)
 
-void __cdecl fcn_004c6c70(void*);
+void __cdecl cm_RequestMoveSlot(void*);
 
 void __cdecl fcn_004f2f90(int a1, int a2, int a3, int a4, char a5, int a6)
 {
@@ -29,5 +29,5 @@ void __cdecl fcn_004f2f90(int a1, int a2, int a3, int a4, char a5, int a6)
 	message.fc = a5;
 	message.fd = a2;
 	message.f11 = a6;
-	fcn_004c6c70(&message);
+	cm_RequestMoveSlot(&message);
 }

@@ -19,29 +19,29 @@ void __cdecl d2_TurnBookPagesBack(Panel*);
 void __cdecl fcn_00535550(Panel*);
 void __cdecl fcn_00471490(int);
 
-void __cdecl d2_UpdatePagedPanel(Panel* p)
+void __cdecl d2_UpdatePagedPanel(Panel* panel)
 {
 	int i;
 
-	if (p == 0) {
+	if (panel == 0) {
 		return;
 	}
-	for (i = 0; i < p->count; i++) {
-		if (i < p->first || i > p->first + 1) {
-			d2_SetGroupVisibility(p->items[i], 0);
+	for (i = 0; i < panel->count; i++) {
+		if (i < panel->first || i > panel->first + 1) {
+			d2_SetGroupVisibility(panel->items[i], 0);
 		}
 	}
-	if (p->owner1 != -1 && d2_CurrentElementId == p->owner1 && g_14ce8cc != 0) {
-		d2_TurnBookPagesBack(p);
+	if (panel->owner1 != -1 && d2_CurrentElementId == panel->owner1 && g_14ce8cc != 0) {
+		d2_TurnBookPagesBack(panel);
 	}
-	if (p->owner2 != -1 && d2_CurrentElementId == p->owner2 && g_14ce8cc != 0) {
-		fcn_00535550(p);
+	if (panel->owner2 != -1 && d2_CurrentElementId == panel->owner2 && g_14ce8cc != 0) {
+		fcn_00535550(panel);
 	}
-	for (i = p->first + (unsigned char) g_7747ac; i < p->count; i++) {
-		if (i > p->first + (unsigned char) g_7747ac) {
+	for (i = panel->first + (unsigned char) g_7747ac; i < panel->count; i++) {
+		if (i > panel->first + (unsigned char) g_7747ac) {
 			break;
 		}
-		fcn_00471490(p->items[i]);
+		fcn_00471490(panel->items[i]);
 	}
 	*(unsigned char*) &g_7747ac ^= 1;
 }

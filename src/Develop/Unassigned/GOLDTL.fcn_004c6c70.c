@@ -7,7 +7,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c6c70(char* source)
+void __cdecl cm_RequestMoveSlot(char* source)
 {
 	char buf[0x9c];
 

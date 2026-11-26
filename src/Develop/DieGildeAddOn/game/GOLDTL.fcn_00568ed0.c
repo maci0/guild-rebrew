@@ -18,7 +18,7 @@ void __cdecl cm_SendCopyEntityData(int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
-void __cdecl fcn_004c6b20(int, int, int);
+void __cdecl cm_SendBlockCharacter(int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
@@ -56,7 +56,7 @@ typedef struct {
 /* Runs the three-step trade window: open it, wait until a scene slot reports
  * the matching partner, then queue the packet for the selected house. */
 /* ADDRESS: GOLDTL 0x00568ed0 */
-void __cdecl he_RunEntfuehren(char* a1)
+void __cdecl he_RunEntfuehren(char* action)
 {
 	char buf[0x200];
 	char* obj;
@@ -74,41 +74,41 @@ void __cdecl he_RunEntfuehren(char* a1)
 	float total;
 	float countf;
 
-	switch (*(int*) (a1 + 0x70)) {
+	switch (*(int*) (action + 0x70)) {
 	case 0:
-		obj = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (a1 + 0xb0));
+		obj = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0xb0));
 		if (obj == 0) {
-			*(int*) (a1 + 0x70) = -1;
+			*(int*) (action + 0x70) = -1;
 			return;
 		}
 		ent = (char*) gm_SetupEntityQuery(obj);
 		if (ent == 0) {
-			*(int*) (a1 + 0x70) = -1;
+			*(int*) (action + 0x70) = -1;
 			return;
 		}
 		i = 8;
-		p = a1 + 0x8c;
+		p = action + 0x8c;
 		do {
 			if (*(int*) p != -1) {
 				hs = (char*) gm_LookupEntityRecordById(*(int*) p);
-				he_AssignActionSlot(0, 0, *(unsigned short*) hs, (unsigned char*) a1);
+				he_AssignActionSlot(0, 0, *(unsigned short*) hs, (unsigned char*) action);
 				cm_SendCancelCharacterActions(*(int*) p);
 				ch_StartMovement(*(int*) p, *(int*) (obj + 1), *(int*) (ent + 2), 0, 1,
 				             (char*) 0x6a69bc);
 			}
 			p += 4;
 		} while (--i != 0);
-		*(pos14_7f4c00*) (a1 + 0x52) = gm_GameTime;
-		gm_AddTime((pos14_7f4c00*) (a1 + 0x52), 0, 0x1e, 0);
-		*(int*) (a1 + 0x70) = 1;
+		*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
+		gm_AddTime((pos14_7f4c00*) (action + 0x52), 0, 0x1e, 0);
+		*(int*) (action + 0x70) = 1;
 		return;
 	case 1:
-		ent2 = (char*) gm_SearchTable67(*(int*) (a1 + 0xb0));
+		ent2 = (char*) gm_SearchTable67(*(int*) (action + 0xb0));
 		if (ent2 == 0) {
-			*(int*) (a1 + 0x70) = -1;
+			*(int*) (action + 0x70) = -1;
 			return;
 		}
-		for (i = 0, p = a1 + 0x8c; i < 8; i++, p += 4) {
+		for (i = 0, p = action + 0x8c; i < 8; i++, p += 4) {
 			if (*(int*) p == -1) {
 				continue;
 			}
@@ -120,31 +120,31 @@ void __cdecl he_RunEntfuehren(char* a1)
 				goto used;
 			}
 		}
-		*(pos14_7f4c00*) (a1 + 0x52) = gm_GameTime;
-		gm_AddTime((pos14_7f4c00*) (a1 + 0x52), 0, 0, 1);
-		*(int*) (a1 + 0x70) = 2;
+		*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
+		gm_AddTime((pos14_7f4c00*) (action + 0x52), 0, 0, 1);
+		*(int*) (action + 0x70) = 2;
 		return;
 	used:
-		*(pos14_7f4c00*) (a1 + 0x52) = gm_GameTime;
-		gm_AddTime((pos14_7f4c00*) (a1 + 0x52), 0, 0xa, 0);
+		*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
+		gm_AddTime((pos14_7f4c00*) (action + 0x52), 0, 0xa, 0);
 		return;
 	case 2:
-		obj = (char*) gm_LookupEntityRecordById(*(int*) (a1 + 0xac));
+		obj = (char*) gm_LookupEntityRecordById(*(int*) (action + 0xac));
 		hs = (char*) gm_LookupEntityRecordById(
-		    *(int*) (0x7f4ca4 + (unsigned short) *(unsigned short*) (a1 + 8) * 0x21c));
-		ent = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (a1 + 0xb4));
+		    *(int*) (0x7f4ca4 + (unsigned short) *(unsigned short*) (action + 8) * 0x21c));
+		ent = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0xb4));
 		if (ent == 0 || obj == 0 || hs == 0) {
-			*(int*) (a1 + 0x70) = -1;
+			*(int*) (action + 0x70) = -1;
 			return;
 		}
 		if (*(unsigned char*) (obj + 0x1b1) != 0) {
-			*(int*) (a1 + 0x70) = -1;
+			*(int*) (action + 0x70) = -1;
 			return;
 		}
 		ent2 = (char*) gm_SetupEntityQuery(ent);
 		total = 0;
 		n = 8;
-		p = a1 + 0x8c;
+		p = action + 0x8c;
 		do {
 			if (*(int*) p != -1) {
 				cm_SendCancelCharacterActions(*(int*) p);
@@ -170,12 +170,12 @@ void __cdecl he_RunEntfuehren(char* a1)
 				io_FormatTextBuffer(buf, 0xff4);
 				he_PostEntityMessage(*(int*) (hs + 4), -1, buf, 0, 0x5fa, 0);
 			}
-			*(int*) (a1 + 0x70) = -1;
+			*(int*) (action + 0x70) = -1;
 			return;
 		}
 		if (sel != 0) {
 			if (*(int*) (ent + 0x65) != -1) {
-				*(int*) (a1 + 0x70) = -1;
+				*(int*) (action + 0x70) = -1;
 				return;
 			}
 			r = (char*) fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, 0x65);
@@ -212,7 +212,7 @@ void __cdecl he_RunEntfuehren(char* a1)
 			cm_BeginPacketFieldDelta(ent, *(int*) (ent + 1));
 			cm_AppendPacketFieldDelta(4, 1, (unsigned short) (ent - g_aed32c + 0x65), obj + 4);
 			cm_RequestChangeAttribute();
-			fcn_004c6b20(*(int*) (obj + 4), 5, 0);
+			cm_SendBlockCharacter(*(int*) (obj + 4), 5, 0);
 			{
 				Msg_568ed0 msg;
 
@@ -237,7 +237,7 @@ void __cdecl he_RunEntfuehren(char* a1)
 				he_PostEntityMessage(*(int*) (obj + 4), *(int*) (obj + 4), buf, 1, 0x5fa, 0);
 			}
 			i = 8;
-			p = a1 + 0x8c;
+			p = action + 0x8c;
 			do {
 				if (*(int*) p != -1) {
 					r = (char*) gm_LookupEntityRecordById(*(int*) p);
@@ -249,7 +249,7 @@ void __cdecl he_RunEntfuehren(char* a1)
 				p += 4;
 			} while (--i != 0);
 		}
-		p = a1 + 0x8c;
+		p = action + 0x8c;
 		for (i = 8; i != 0; i--) {
 			if (*(int*) p != -1) {
 				r = (char*) gm_LookupEntityRecordById(*(int*) p);
@@ -259,15 +259,15 @@ void __cdecl he_RunEntfuehren(char* a1)
 			}
 			p += 4;
 		}
-		he_FreeAction((int) a1);
+		he_FreeAction((int) action);
 		return;
 	case -2:
 	case -1:
-		obj = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (a1 + 0xb0));
+		obj = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0xb0));
 		if (obj != 0) {
 			i = (int) gm_SetupEntityQuery(obj);
 		}
-		p = a1 + 0x8c;
+		p = action + 0x8c;
 		n = 8;
 		do {
 			if (*(int*) p != -1) {
@@ -285,7 +285,7 @@ void __cdecl he_RunEntfuehren(char* a1)
 			}
 			p += 4;
 		} while (--n != 0);
-		he_FreeAction((int) a1);
+		he_FreeAction((int) action);
 		return;
 	}
 }

@@ -32,7 +32,7 @@ int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 int __cdecl sb_CheckVoicePlaying(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl io_AppendText(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 typedef struct { char pad[0x48]; int x48; int x4c; } S58;
 
@@ -110,6 +110,6 @@ int __cdecl d2_RunSeance(int a1, S58* scriptSubject)
 			}
 		} while (main_RunFrameLoop(d2_RunSeance, 0x743c7) != 0);
 	}
-	fcn_00471e30(w);
+	d2_DestroyForm(w);
 	return h;
 }

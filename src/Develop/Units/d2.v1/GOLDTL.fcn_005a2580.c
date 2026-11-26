@@ -63,7 +63,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl d2_GetWindowListItem(int h, int a, int b);
 void __cdecl cm_SendCopyEntityData(Rec* r);
 int __cdecl main_RunFrameLoop(void* fn, int id);
-void __cdecl fcn_00471e30(int h);
+void __cdecl d2_DestroyForm(int h);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x005a2580 */
@@ -198,6 +198,6 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(fcn_005a2580, 0x677c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }
 #pragma optimize("", on)

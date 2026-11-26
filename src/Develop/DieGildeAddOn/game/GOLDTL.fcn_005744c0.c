@@ -19,7 +19,7 @@ void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
 char __cdecl d3_DestroyObject(int);
 void __cdecl d3_SetSubtreeVisible(int, int);
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_004550b0(int, int);
+void __cdecl d3_RemoveSubTreeFromCellTree(int, int);
 void __cdecl fcn_004550e0(int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl fcn_004bd4e0(int, int);
@@ -31,7 +31,7 @@ int __cdecl cm_RequestAllocRaum(unsigned char, int, int, int);
 int __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_RequestChangeAttribute();
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl cm_RequestSysMessage(int, void*);
 void __cdecl cm_RequestDestroyBuilding(int);
 void __cdecl fcn_005001e0(void*, int);
@@ -48,7 +48,7 @@ void __cdecl fcn_0052d9d0(void*);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(int);
 void __cdecl fcn_00573e10(int);
-int __cdecl fcn_00574150();
+int __cdecl d3_CountBuildStageMeshes();
 int __cdecl he_CreateGebaeudeSceneModel(void*, void*, void*, void*, void*);
 void __cdecl d3_ReleaseUnusedSceneObjects();
 int __cdecl fcn_005985f0(void*, int);
@@ -109,14 +109,14 @@ void __cdecl gm_HandleHausbau(int a0)
 			}
 			else {
 LfailB:
-				*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+				*(int*) (buildAction + 0x84) = cm_SendSetHE(-1, (void*) buildAction);
 				return;
 			}
 		}
 		else {
 			*(int*) (buildAction + 0xcc) = gm_CreditCityTreasury(*(int*) (buildAction + 0xb4));
 		}
-		*(int*) (buildAction + 0x84) = fcn_004c5620(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
+		*(int*) (buildAction + 0x84) = cm_SendSetHE(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
 		return;
 
 	case 3:
@@ -128,10 +128,10 @@ LfailB:
 			break;
 		}
 		if (cm_GetCommandStatus(*(int*) (buildAction + 0xcc)) == 2) {
-			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+			*(int*) (buildAction + 0x84) = cm_SendSetHE(-1, (void*) buildAction);
 			return;
 		}
-		*(int*) (buildAction + 0x84) = fcn_004c5620(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
+		*(int*) (buildAction + 0x84) = cm_SendSetHE(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
 		return;
 
 	case 4:
@@ -141,7 +141,7 @@ LfailB:
 		v13 = cm_RequestAllocRaum((v8 & 0xffffff00) | *(unsigned char*) (buildAction + 0xb0),
 			*(int*) (buildAction + 0xac), 0, 1);
 		*(int*) (buildAction + 0xcc) = v13;
-		*(int*) (buildAction + 0x84) = fcn_004c5620(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
+		*(int*) (buildAction + 0x84) = cm_SendSetHE(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
 		return;
 
 	case 5:
@@ -161,10 +161,10 @@ LfailB:
 			*(int*) (buildAction + 0x10) = *(int*) (v15 + 1);
 		}
 		else {
-			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+			*(int*) (buildAction + 0x84) = cm_SendSetHE(-1, (void*) buildAction);
 			return;
 		}
-		*(int*) (buildAction + 0x84) = fcn_004c5620(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
+		*(int*) (buildAction + 0x84) = cm_SendSetHE(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
 		return;
 
 	case 6:
@@ -177,7 +177,7 @@ LfailB:
 		v8 = he_CreateGebaeudeSceneModel((void*) (buildAction + 0xe4), (void*) (buildAction + 0xd4), (void*) v15,
 			(void*) (buildAction + 0xf0), (void*) buildAction);
 		if (!v8) {
-			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+			*(int*) (buildAction + 0x84) = cm_SendSetHE(-1, (void*) buildAction);
 			d3_SelectSceneContext(savedContext, 1);
 			return;
 		}
@@ -185,11 +185,11 @@ LfailB:
 		v8 = *(unsigned char*) v15;
 		v27 = (int) &((Building5744c0*) lpGebaeudePROT)[v8];
 		if (g_774800) {
-			*(int*) (buildAction + 0xc4) = fcn_00574150(buildAction);
+			*(int*) (buildAction + 0xc4) = d3_CountBuildStageMeshes(buildAction);
 			*(int*) (buildAction + 0xc0) = 10;
 		}
 		else {
-			v11 = fcn_00574150(buildAction);
+			v11 = d3_CountBuildStageMeshes(buildAction);
 			*(int*) (buildAction + 0xc4) = v11;
 			*(int*) (buildAction + 0xc0) = ((Building5744c0*) v27)->period * 0x3fc / v11;
 		}
@@ -203,7 +203,7 @@ LfailB:
 		d3_SelectSceneContext(0, 1);
 		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		if (!v15 || !fcn_005985f0(v16, (int) v15)) {
-			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+			*(int*) (buildAction + 0x84) = cm_SendSetHE(-1, (void*) buildAction);
 			d3_SelectSceneContext(savedContext, 1);
 			return;
 		}
@@ -229,7 +229,7 @@ LfailB:
 			v11 += 0xa9;
 		} while (v11 < 0xa900);
 		if (!v13) {
-			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+			*(int*) (buildAction + 0x84) = cm_SendSetHE(-1, (void*) buildAction);
 			d3_SelectSceneContext(savedContext, 1);
 			return;
 		}
@@ -272,7 +272,7 @@ LfailB:
 		d3_SelectSceneContext(0, 1);
 		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		if (!fcn_005985f0(v16, (int) v15)) {
-			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
+			*(int*) (buildAction + 0x84) = cm_SendSetHE(-1, (void*) buildAction);
 			d3_SelectSceneContext(savedContext, 1);
 			return;
 		}
@@ -282,7 +282,7 @@ LfailB:
 		d3_VisitSceneObjects(g_67a370, *(int*) (v16 + 0x50), 0x2c0, 0x5982d0, v18);
 		for (v11 = 0; v11 < v18[32]; v11++) {
 			if (g_773dd8) {
-				fcn_004550b0(v18[v11], g_773dd8);
+				d3_RemoveSubTreeFromCellTree(v18[v11], g_773dd8);
 			}
 			d3_DestroyObject(v18[v11]);
 		}

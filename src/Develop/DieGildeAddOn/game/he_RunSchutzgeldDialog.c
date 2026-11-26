@@ -27,7 +27,7 @@ int __cdecl gm_CompareGameTime(void* sel, int* out);
 void __cdecl fcn_00545670(int a, int b, int c, char* caption, int d);
 int __cdecl fcn_0051e070(void);
 int __cdecl gm_AddTime(int* sel, int a, int b, int c);
-void __cdecl fcn_004c5620(int a, int b);
+void __cdecl cm_SendSetHE(int a, int b);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl d3snd_QueueSound(int a, int b, char* name, int c, int d);
 
@@ -78,7 +78,7 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 			*(int*) (dlg + 0x70) = 3;
 			*(Pos14*) (actor + 0x52) = t;
 			*(int*) (actor + 0xb8) = 1;
-			fcn_004c5620(3, actor);
+			cm_SendSetHE(3, actor);
 			cm_RequestChangeBits(*(int*) (msg + 1), 0x5a, 2, 0x100, 0);
 			cm_RequestTransferCurrencyNoKill(
 			    *(int*) (*(unsigned short*) (actor + 8) * 0x21c
@@ -94,7 +94,7 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 			*(int*) (dlg + 0x70) = 3;
 			*(Pos14*) (actor + 0x52) = t;
 			*(int*) (actor + 0xb8) = 0;
-			fcn_004c5620(3, actor);
+			cm_SendSetHE(3, actor);
 		}
 		fcn_00545780(dlg);
 		he_FreeAction(dlg);

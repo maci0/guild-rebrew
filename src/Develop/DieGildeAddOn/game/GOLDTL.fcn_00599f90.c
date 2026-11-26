@@ -26,7 +26,7 @@ unsigned char* __cdecl fcn_005bdc30(int, Query*, int, int, int);
 int __cdecl gm_CheckEntityType(unsigned char*);
 void __cdecl fcn_00526920(unsigned char*, int, char*);
 unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
-void __cdecl fcn_0052cbb0(unsigned char*);
+void __cdecl d3_FocusCameraOnEntity(unsigned char*);
 
 void __cdecl d2_HandleEntityChooser(void)
 {
@@ -64,7 +64,7 @@ void __cdecl d2_HandleEntityChooser(void)
 		return;
 	}
 	if ((*(int*)&g_7746c8) == 0 && (*(int*)&g_7746c4) == 0) {
-		fcn_0052cbb0(e);
+		d3_FocusCameraOnEntity(e);
 		return;
 	}
 	fcn_00526920(e, *(unsigned short*) (e + 0x29), "");

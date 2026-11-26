@@ -9,7 +9,7 @@ extern int d2_CurrentWindowId;
 int __cdecl fcn_0046f9b0();
 int __cdecl fcn_00470820();
 int __cdecl d2_CenterDialogWindows();
-int __cdecl fcn_00471e30();
+int __cdecl d2_DestroyForm();
 int __cdecl d2_SetSlotVisibility();
 int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
@@ -25,7 +25,7 @@ int __cdecl io_FormatTextBuffer();
 int __cdecl d2_CheckOwnerBlocked();
 int __cdecl gm_CheckEntityStock();
 int __cdecl fcn_00526120();
-int __cdecl fcn_00532ef0();
+int __cdecl d3_EndCameraAndUiMode();
 int __cdecl fcn_00533a60();
 int __cdecl d2_DrawPanelFrame();
 int __cdecl fcn_00535960();
@@ -378,8 +378,8 @@ label_5bea6c:
     if (((*(int *)0x14ce8e0)) && (d2_CanCloseWindowDuringTutorial() == 1))
       (*(int *)0x774654) = 1;
     if (!main_RunFrameLoop(0x5be140,0x657c7)) {
-      fcn_00532ef0();
-      fcn_00471e30(dialogId);
+      d3_EndCameraAndUiMode();
+      d2_DestroyForm(dialogId);
       fcn_0057e880(0x1d,v2,1,0);
       return;
     }

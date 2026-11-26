@@ -23,7 +23,7 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
 void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
-int __cdecl fcn_004c5620(char, char*);
+int __cdecl cm_SendSetHE(char, char*);
 int __cdecl fcn_004c5980(void*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -87,7 +87,7 @@ void __cdecl he_RunRazzia(char* e)
 			} while (i != 0);
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
-			*(int*) (e + 0x84) = fcn_004c5620(2, e);
+			*(int*) (e + 0x84) = cm_SendSetHE(2, e);
 			return;
 		}
 	case 1:
@@ -129,7 +129,7 @@ void __cdecl he_RunRazzia(char* e)
 				he_FreeAction(e);
 				return;
 			}
-			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+			*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 			return;
 		}
 	case 2:
@@ -163,10 +163,10 @@ label_54e6a1:
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 			if (s) {
-				*(int*) (e + 0x84) = fcn_004c5620(3, e);
+				*(int*) (e + 0x84) = cm_SendSetHE(3, e);
 				return;
 			}
-			*(int*) (e + 0x84) = fcn_004c5620(2, e);
+			*(int*) (e + 0x84) = cm_SendSetHE(2, e);
 			return;
 		}
 	case 3:
@@ -343,5 +343,5 @@ label_54e6a1:
 label_54e513:
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
-	*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+	*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 }

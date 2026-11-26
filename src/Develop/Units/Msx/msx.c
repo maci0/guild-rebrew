@@ -122,7 +122,7 @@ int __cdecl msx_StartTrackInternal(Chan_14cc460* c, int restart)
 			sprintf(g_6b6f90, "Queuing Track %s after Track %s !", c->name, cur->name);
 			cur->next = c;
 			c->b105 = 1;
-			fcn_00420700(cur, 2);
+			msx_StartTrackFade(cur, 2);
 		}
 		else {
 			sprintf(g_6b6f90, "Starting Track %s !", c->name);
@@ -132,7 +132,7 @@ int __cdecl msx_StartTrackInternal(Chan_14cc460* c, int restart)
 		}
 	}
 	else if (c->f114 == 2) {
-		fcn_00420700(c, 1);
+		msx_StartTrackFade(c, 1);
 	}
 	LeaveCriticalSection(&msx_TrackLock);
 	return 0;
@@ -144,7 +144,7 @@ void __cdecl msx_StopTrack(Chan_14cc460* hTrack, int fade)
         EnterCriticalSection(&msx_TrackLock);
         if (hTrack->active != 0) {
             if (fade != 0) {
-                fcn_00420700(hTrack, 2);
+                msx_StartTrackFade(hTrack, 2);
             } else {
                 fcn_0042ad90(hTrack->handle, 1);
                 msx_CloseStream(hTrack->handle);
@@ -197,7 +197,7 @@ Chan_14cc460* __cdecl FindFreeTrack(void)
 	return 0;
 }
 
-void __cdecl fcn_00420700(Chan_14cc460* hTrack, int mode)
+void __cdecl msx_StartTrackFade(Chan_14cc460* hTrack, int mode)
 {
     if (hTrack == 0) {
         return;

@@ -31,7 +31,7 @@ void __cdecl fcn_004d06d0(void);
 void __cdecl fcn_004d0f00(void);
 void __cdecl fcn_004d1790(char*);
 void __cdecl fcn_004d0070(void);
-void __cdecl fcn_004cfc00(char*);
+void __cdecl d2_UpdateEntityOverlays(char*);
 void __cdecl fcn_004cf180(void);
 void __cdecl fcn_004cf6b0(void);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
@@ -48,7 +48,7 @@ void __cdecl d2_UpdateCombatFrame(char* rec)
 	fcn_004d0f00();
 	fcn_004d1790(rec);
 	fcn_004d0070();
-	fcn_004cfc00(rec);
+	d2_UpdateEntityOverlays(rec);
 	fcn_004cf180();
 	fcn_004cf6b0();
 	if (cut_ClockExpired != 0 || g_772ea4 != 0) {

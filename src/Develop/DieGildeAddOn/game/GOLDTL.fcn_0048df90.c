@@ -11,7 +11,7 @@ extern unsigned char g_773d75;
 int __cdecl gm_SumQueryEntryValues(int a, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x0048df90 */
-int __cdecl fcn_0048df90(Ent* e, char* firstOut, char* secondOut)
+int __cdecl ai_SetupSecretRoomMode3(Ent* e, char* firstOut, char* secondOut)
 {
 	int t;
 	int thr[3];

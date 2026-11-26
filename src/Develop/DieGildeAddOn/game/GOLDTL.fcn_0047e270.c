@@ -63,7 +63,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004849b0(Bld*, int, int);
 void __cdecl ai_ManageMeisterWorkers(Bld*);
 void __cdecl fcn_00487970(int, Bld*, int);
-void __cdecl fcn_00487c00(int, Bld*, int);
+void __cdecl ai_RequestAusbauUpgrade(int, Bld*, int);
 void __cdecl fcn_00487470(Bld*);
 int __cdecl ai_CanProduceGood(Bld*, PRODUCTION_GOODS_RECORD*, int);
 void __cdecl fcn_004868d0(Bld*, PRODUCTION_GOODS_RECORD*);
@@ -72,11 +72,11 @@ int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_0047e220(int);
+void __cdecl ai_RequestProductionGoods(int);
 void __cdecl ai_PlanResourceRestock(Bld*, int);
 void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl ai_CancelBlockedActions(Bld*, int);
-void __cdecl fcn_00487f90(Req*);
+void __cdecl ai_DispatchMeisterAction(Req*);
 void __cdecl ai_MeisterCollectTrans(Bld*);
 void __cdecl ai_MeisterTrade(Bld*, int);
 
@@ -108,7 +108,7 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 	fcn_004849b0(bld, prod, craft);
 	ai_ManageMeisterWorkers(bld);
 	fcn_00487970(craft, bld, 0x4b);
-	fcn_00487c00(craft, bld, 0x19);
+	ai_RequestAusbauUpgrade(craft, bld, 0x19);
 	fcn_00487470(bld);
 	if (g_7f4c04 != 8 && g_7f4c04 != 0xd) {
 		hit = 0;
@@ -244,7 +244,7 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 	}
 	bld->id = 0;
 done:
-	fcn_0047e220(craft);
+	ai_RequestProductionGoods(craft);
 	ai_PlanResourceRestock(bld, craft);
 	if (g_100dc20 == bld->x16c) {
 		i = 0;
@@ -312,7 +312,7 @@ done:
 		if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags & 8) {
 			put.kind = 4;
 			put.rec = (int) &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i];
-			fcn_00487f90(&put);
+			ai_DispatchMeisterAction(&put);
 			if (g_100dc20 == bld->x16c && g_100dc3c < 4) {
 				((PRODUCTION_GOODS_RECORD*) g_100ddc0)[g_100dc3c] = *(PRODUCTION_GOODS_RECORD*) put.rec;
 				g_100dc3c = g_100dc3c + 1;

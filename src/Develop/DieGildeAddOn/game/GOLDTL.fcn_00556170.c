@@ -7,7 +7,7 @@ extern char gm_GameTime[];
 
 void __cdecl he_FreeAction(char*);
 int __cdecl gm_AddTime(char*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 float __cdecl gm_GetCityStatsSummary(char*);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl gm_RandomMod(unsigned short);
@@ -67,7 +67,7 @@ void __cdecl he_RunCityPopulationEvent(char* p)
 		*(int*) (p + 0xac) = 0;
 		*(float*) (p + 0xb0) = *(float*) (p + 0xb0) * 0.0f;
 		gm_AddTime(p + 0x52, 0, 0, 5);
-		*(int*) (p + 0x84) = fcn_004c5620(1, p);
+		*(int*) (p + 0x84) = cm_SendSetHE(1, p);
 		return;
 	case 1:
 		gm_GetCityStatsSummary((char*) ts);
@@ -77,13 +77,13 @@ void __cdecl he_RunCityPopulationEvent(char* p)
 		gm_AddTime(p + 0x52, 1, 0, 0);
 		if (ts[3] < 0.1) {
 			*(float*) (p + 0xb0) = (2.0f - ts[9]) * *(float*) (p + 0xb0);
-			*(int*) (p + 0x84) = fcn_004c5620(2, p);
+			*(int*) (p + 0x84) = cm_SendSetHE(2, p);
 			return;
 		}
 		if (0.3 < ts[3]) {
 			*(float*) (p + 0xb0) = (float) fabs((ts[9] + 1.0f) * *(float*) (p + 0xb0));
 			*(float*) (p + 0xb4) = (float) fabs(*(float*) (p + 0xb4));
-			*(int*) (p + 0x84) = fcn_004c5620(6, p);
+			*(int*) (p + 0x84) = cm_SendSetHE(6, p);
 			return;
 		}
 		COPY_UI(p);
@@ -95,7 +95,7 @@ void __cdecl he_RunCityPopulationEvent(char* p)
 inc_anim7:
 			*(int*) (p + 0x58) += 1;
 anim7:
-			*(int*) (p + 0x84) = fcn_004c5620(7, p);
+			*(int*) (p + 0x84) = cm_SendSetHE(7, p);
 			return;
 		}
 		f = gm_RandomFloat01();
@@ -105,25 +105,25 @@ anim7:
 				gm_RandomMod(0xc) + 0xf, -1, 0, 0, 2);
 			COPY_UI(p);
 			gm_AddTime(p + 0x52, 0, 0, 1);
-			*(int*) (p + 0x84) = fcn_004c5620(3, p);
+			*(int*) (p + 0x84) = cm_SendSetHE(3, p);
 			return;
 		}
 		*(float*) (p + 0xb0) -= *(float*) (p + 0xb4);
 		COPY_UI(p);
 		gm_AddTime(p + 0x52, 1, 0, 0);
-		*(int*) (p + 0x84) = fcn_004c5620(2, p);
+		*(int*) (p + 0x84) = cm_SendSetHE(2, p);
 		return;
 	case 3:
 		if (cm_GetCommandStatus(*(int*) (p + 0xb8)) == 0) {
 			COPY_UI(p);
 			gm_AddTime(p + 0x52, 0, 0, 1);
-			*(int*) (p + 0x84) = fcn_004c5620(3, p);
+			*(int*) (p + 0x84) = cm_SendSetHE(3, p);
 			return;
 		}
 		if (cm_GetCommandStatus(*(int*) (p + 0xb8)) == 2) {
 			gm_AddTime(p + 0x52, 1, 0, 0);
 			*(int*) (p + 0xb8) = -1;
-			*(int*) (p + 0x84) = fcn_004c5620(6, p);
+			*(int*) (p + 0x84) = cm_SendSetHE(6, p);
 			return;
 		}
 		obj = cm_GetCommandResult(*(int*) (p + 0xb8));
@@ -132,7 +132,7 @@ anim7:
 		if (obj == 0) {
 			gm_AddTime(p + 0x52, 1, 0, 0);
 			*(int*) (p + 0xb8) = -1;
-			*(int*) (p + 0x84) = fcn_004c5620(6, p);
+			*(int*) (p + 0x84) = cm_SendSetHE(6, p);
 			return;
 		}
 		found = 0;
@@ -163,7 +163,7 @@ anim7:
 		COPY_UI(p);
 		gm_AddTime(p + 0x52, 1, 0, 0);
 		*(int*) (p + 0xac) += 1;
-		*(int*) (p + 0x84) = fcn_004c5620(1, p);
+		*(int*) (p + 0x84) = cm_SendSetHE(1, p);
 		return;
 	case 6:
 		if (*(unsigned short*) ((char*) gm_GameTime + 4) >= 0x14) {
@@ -190,13 +190,13 @@ anim7:
 			*(int*) (p + 0xb8) = -1;
 			COPY_UI(p);
 			gm_AddTime(p + 0x52, 0, 0x1e, 0);
-			*(int*) (p + 0x84) = fcn_004c5620(1, p);
+			*(int*) (p + 0x84) = cm_SendSetHE(1, p);
 			return;
 		}
 		*(float*) (p + 0xb0) -= *(float*) (p + 0xb4);
 		COPY_UI(p);
 		gm_AddTime(p + 0x52, 1, 0, 0);
-		*(int*) (p + 0x84) = fcn_004c5620(6, p);
+		*(int*) (p + 0x84) = cm_SendSetHE(6, p);
 		return;
 	case 7:
 		v = (unsigned short) gm_RandomMod(0x300);
@@ -240,13 +240,13 @@ anim7:
 			*(int*) (p + 0x58) = 0;
 			*(int*) (p + 0x52) += 1;
 			*(short*) (p + 0x56) = 6;
-			*(int*) (p + 0x84) = fcn_004c5620(0, p);
+			*(int*) (p + 0x84) = cm_SendSetHE(0, p);
 			return;
 		}
 		if (*(unsigned short*) (p + 0x56) < 0xf) {
 			COPY_UI(p);
 			*(int*) (p + 0x58) += 1;
-			*(int*) (p + 0x84) = fcn_004c5620(0, p);
+			*(int*) (p + 0x84) = cm_SendSetHE(0, p);
 			return;
 		}
 		goto anim7;

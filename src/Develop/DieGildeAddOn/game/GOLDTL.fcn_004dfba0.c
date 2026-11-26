@@ -12,7 +12,7 @@ int __cdecl fcn_00493ce0(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004dfba0 */
-void __cdecl fcn_004dfba0(char* context, int* ev)
+void __cdecl cut_HandleProzessEvent(char* context, int* ev)
 {
 	char* e;
 

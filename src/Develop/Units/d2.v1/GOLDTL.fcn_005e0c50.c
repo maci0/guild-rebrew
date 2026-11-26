@@ -83,7 +83,7 @@ int __cdecl fcn_005e0b40(int, int, char*);
 int __cdecl fcn_005dfe80(char*, int);
 int __cdecl d2_OpenMessageBox(char*, int);
 void __cdecl ls_SaveGame(char*, char*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_RunSaveGameDialog(Blob* src)
 {
@@ -147,13 +147,13 @@ int __cdecl d2_RunSaveGameDialog(Blob* src)
 					g_773de8 = (char) i;
 					h = d2_OpenMessageBox(g_14ac648, 0);
 					ls_SaveGame(buf, slots[i].rec.text, 1);
-					fcn_00471e30(h);
+					d2_DestroyForm(h);
 					g_774654 = 1;
 				}
 				d2_SetSlotVisibility(slots[i].h, 1);
 			}
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return 0;
 }

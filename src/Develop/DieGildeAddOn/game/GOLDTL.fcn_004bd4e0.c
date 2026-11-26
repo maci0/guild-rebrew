@@ -22,7 +22,7 @@ char* __cdecl fcn_0045b700(int* a1, int n, int a3);
 void __cdecl gv_Free3Fields(char* p);
 void __cdecl fcn_004bdd40(int a);
 int __cdecl lc_GetBauplatzPrefix(int a1, char* out);
-void __cdecl fcn_00455540(char* object, float* position, float* result);
+void __cdecl d3_TransformToObjectSpace(char* object, float* position, float* result);
 int __cdecl d3_TransformPoint(char* object, char* pos, float* result);
 char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags, char (__cdecl* cb)(char*, char*), char* ctx);
 char* __cdecl rd_GetBKSize(char* name);
@@ -104,7 +104,7 @@ int __cdecl fcn_004bd4e0(int sceneObjectArg, int typeIdArg)
 	pos[0] = 0.0f;
 	pos[1] = 0.0f;
 	pos[2] = 0.0f;
-	fcn_00455540((char*) sceneObjectArg, pos, (float*)(ctx + 0x40));
+	d3_TransformToObjectSpace((char*) sceneObjectArg, pos, (float*)(ctx + 0x40));
 	*(int*) (ctx + 0x50) = 0;
 	d3_VisitSceneObjects((char*) g_67a370, 0, 0x180, d3_MatchObjectByNameAndPos, ctx);
 	if (*(int*) (ctx + 0x50) == 0) {

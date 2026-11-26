@@ -16,7 +16,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int);
 int __cdecl main_RunFrameLoop(void (__cdecl*)(void), int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 /* ADDRESS: GOLD 0x530820 */
 
 void __cdecl main_RunAdvanceGameDialog(void)
@@ -44,7 +44,7 @@ void __cdecl main_RunAdvanceGameDialog(void)
 		g_7766a8 = saved;
 		g_774660 = 0;
 		g_675308 = (float) (saved * g_665e40 + 0.25);
-		fcn_00471e30(h);
+		d2_DestroyForm(h);
 		fcn_0057e880(0xb, 0, 1, 0);
 	}
 }

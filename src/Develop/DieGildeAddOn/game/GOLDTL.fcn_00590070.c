@@ -28,7 +28,7 @@ int __cdecl d2_CheckOwnerBlocked(char*);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(int, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -41,7 +41,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00472640(int, int);
 int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char*, ENTITY_RECORD*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
@@ -66,13 +66,13 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 	if (g_774800 == 0 && st != 2) {
 		io_FormatTextBuffer(buf, 0x413b);
 		fcn_00526120((int) buf, 4);
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 		return;
 	}
 	if (he_StartHandlungSearch(2, 0, 0x8f, 3, *(int*) (who + 1)) != 0) {
 		io_FormatTextBuffer(buf, 0x413c);
 		fcn_00526120((int) buf, 4);
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 		return;
 	}
 	h = fcn_00470820(0, 0, "Locations\\Friedhof\\UpgradeWorker");
@@ -132,8 +132,8 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 			}
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
-	fcn_00532ef0();
+	d3_EndCameraAndUiMode();
 }

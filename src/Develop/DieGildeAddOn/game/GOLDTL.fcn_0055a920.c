@@ -12,7 +12,7 @@ void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(char, char*);
+int __cdecl cm_SendSetHE(char, char*);
 
 /* ADDRESS: GOLDTL 0x0055a920 */
 void __cdecl he_RunAction0x81(char* rec)
@@ -66,12 +66,12 @@ void __cdecl he_RunAction0x81(char* rec)
 	if (cnt < want) {
 		*(pos14_7f4c00*) (rec + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (rec + 0x52), 0, 5, 0);
-		*(int*) (rec + 0x84) = fcn_004c5620(-1, rec);
+		*(int*) (rec + 0x84) = cm_SendSetHE(-1, rec);
 	} else {
 		*(int*) (rec + 0xb0) = *(int*) (rec + 0xb0) - 1;
 		*(int*) (rec + 0xac) = *(int*) (rec + 0xac) - want;
 		*(pos14_7f4c00*) (rec + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (rec + 0x52), 0x18, 0, 0);
-		*(int*) (rec + 0x84) = fcn_004c5620(0, rec);
+		*(int*) (rec + 0x84) = cm_SendSetHE(0, rec);
 	}
 }

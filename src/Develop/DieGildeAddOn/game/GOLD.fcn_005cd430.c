@@ -5,7 +5,7 @@
 
 void __cdecl cm_RequestModifyHealth(int, int);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_005d9000(char*, int);
+void __cdecl gm_ApplyMiracleEffect(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -13,7 +13,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl gm_HandleWunder(char* e)
 {
@@ -25,7 +25,7 @@ int __cdecl gm_HandleWunder(char* e)
 			return 0x20;
 		}
 		cm_RequestModifyHealth(*(int*) (e + 4), -4);
-		fcn_005d9000(e, gm_RandomMod(6));
+		gm_ApplyMiracleEffect(e, gm_RandomMod(6));
 		return 0x10;
 	}
 	if (e[2] == 6) {
@@ -41,7 +41,7 @@ int __cdecl gm_HandleWunder(char* e)
 				if (g_100f1dc == 0) {
 					if (d2_CheckActionBlocker(e, 4) != 0) {
 						cm_RequestModifyHealth(*(int*) (e + 4), -4);
-						fcn_005d9000(e, gm_RandomMod(6));
+						gm_ApplyMiracleEffect(e, gm_RandomMod(6));
 						r = 1;
 						g_774654 = 1;
 					}
@@ -53,7 +53,7 @@ int __cdecl gm_HandleWunder(char* e)
 				g_774654 = 1;
 			}
 		} while (main_RunFrameLoop((void*) gm_HandleWunder, 0x657c7) != 0);
-		fcn_00471e30(dlg);
+		d2_DestroyForm(dlg);
 		return r;
 	}
 	return 0;

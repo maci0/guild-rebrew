@@ -10,7 +10,7 @@ typedef struct DevData16 {
    DATA TODO: 0x14673cc, 0x1468410, 0x14681c0, 0x1468420, 0x6310c0, 0x6310e0,
    0x631098 and 0x6333d8 have no Gold definition, so raw addresses stay. */
 /* ADDRESS: GOLD 0x004112e0 */
-void __cdecl fcn_004112e0(void)
+void __cdecl io_PollKeyboardInput(void)
 {
 	DevData16 ev;
 	unsigned int n;

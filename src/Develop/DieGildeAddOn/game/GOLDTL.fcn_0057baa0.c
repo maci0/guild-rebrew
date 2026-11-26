@@ -1,4 +1,4 @@
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -7,13 +7,13 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl amt_RetireExpiredRulers(void);
 void __cdecl amt_SpawnHistoricalOfficeHolders(void);
-void __cdecl fcn_004ad2e0(void);
+void __cdecl amt_NominateSpecialOfficeCandidates(void);
 void __cdecl amt_VacateSpecialOffice(void);
 void __cdecl amt_AssignSpecialOffices(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl sim_SetSyncParams(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_0057baa0(char* o)
+void __cdecl he_RunSpecialOffices(char* o)
 {
 	if (o[0x78] & 4) {
 		return;
@@ -22,28 +22,28 @@ void __cdecl fcn_0057baa0(char* o)
 	case 0:
 		amt_RetireExpiredRulers();
 		gm_AddTime((pos14_7f4c00*) (o + 0x52), 2, 0, 0);
-		fcn_004c5620(1, o);
+		cm_SendSetHE(1, o);
 		break;
 	case 1:
 		amt_SpawnHistoricalOfficeHolders();
 		gm_AddTime((pos14_7f4c00*) (o + 0x52), 2, 0, 0);
-		fcn_004c5620(2, o);
+		cm_SendSetHE(2, o);
 		break;
 	case 2:
-		fcn_004ad2e0();
+		amt_NominateSpecialOfficeCandidates();
 		sim_SetSyncParams((pos14_7f4c00*) (o + 0x52), 0x16, 0, 0);
-		fcn_004c5620(3, o);
+		cm_SendSetHE(3, o);
 		break;
 	case 3:
 		amt_VacateSpecialOffice();
 		sim_SetSyncParams((pos14_7f4c00*) (o + 0x52), 6, 5, 0);
 		((pos14_7f4c00*) (o + 0x52))->a++;
-		fcn_004c5620(4, o);
+		cm_SendSetHE(4, o);
 		break;
 	case 4:
 		amt_AssignSpecialOffices();
 		sim_SetSyncParams((pos14_7f4c00*) (o + 0x52), 0xa, 0, 0);
-		fcn_004c5620(0, o);
+		cm_SendSetHE(0, o);
 		break;
 	}
 }

@@ -18,7 +18,7 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
 void __cdecl cm_SendCopyEntityData(char*);
-void __cdecl fcn_004c6b20(int, int, int);
+void __cdecl cm_SendBlockCharacter(int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -98,13 +98,13 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		cm_SendCopyEntityData(msg);
 		return;
 	case 4:
-		fcn_004c6b20(*(int*) (entity + 2), 1, 0);
+		cm_SendBlockCharacter(*(int*) (entity + 2), 1, 0);
 		return;
 	case 5:
 		amt_SendOfficeCommand(((char*) entity)[0x166], 0, 0, 4, 0xff);
 		return;
 	case 6:
-		fcn_004c6b20(*(int*) (entity + 2), 2, 0);
+		cm_SendBlockCharacter(*(int*) (entity + 2), 2, 0);
 		return;
 	case 7:
 		level = (char) (((unsigned char*) entity)[0xd] > 2 ? 2 : 1);
@@ -113,10 +113,10 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		cm_RequestChangeAttribute();
 		return;
 	case 8:
-		fcn_004c6b20(*(int*) (entity + 2), 3, 0);
+		cm_SendBlockCharacter(*(int*) (entity + 2), 3, 0);
 		return;
 	case 9:
-		fcn_004c6b20(*(int*) (entity + 2), 0xff, 1);
+		cm_SendBlockCharacter(*(int*) (entity + 2), 0xff, 1);
 		pkt = b9 + 0x18;
 		list = (int*) (pkt + 0x34);
 		id = *(int*) (entity + 2);

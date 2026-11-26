@@ -4,7 +4,7 @@
 char* __cdecl fcn_004cded0(void);
 extern char g_9baae0[];
 
-char* __cdecl fcn_004cdf00(int id)
+char* __cdecl d3_LookupSceneEntry(int id)
 {
 	int i;
 	int address;

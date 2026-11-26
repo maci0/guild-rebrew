@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x004115b0 */
-void __cdecl fcn_004115b0(unsigned char flags)
+void __cdecl io_ClearInputAxes(unsigned char flags)
 {
     if (*(int*) 0x6310c4) {
         if (flags & 1) {

@@ -124,7 +124,7 @@ void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
 void __cdecl d2_DestroyElement(int);
 
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
-void __cdecl fcn_005b6130(int, int);
+void __cdecl d2_UpdateWorkerOverlaySlots(int, int);
 void __cdecl d2_HandleBookPageButton(int);
 void __cdecl fcn_00535550(int);
 void __cdecl d2_TurnBookPagesBack(int);
@@ -142,12 +142,12 @@ int __cdecl fcn_004727a0(int, int);
 void __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_0050c1b0(int, int, void*);
+int __cdecl gm_CalcBuildingRoundBalance(int, int, void*);
 int __cdecl fcn_004693b0(void);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_005b5eb0(char*, char*);
+void __cdecl d2_InitWorkerOverlaySlots(char*, char*);
 void __cdecl d2_UpdateGauge(int, int, int);
 void __cdecl d2_ClearGauge(int);
 void __cdecl fcn_005b5ce0(int, int, int, int);
@@ -168,7 +168,7 @@ char* __cdecl fcn_0064d228(void);
 int __cdecl fcn_0064d228_b(void);
 int __cdecl fcn_00534f30(int);
 int __cdecl fcn_00532510(void);
-int __cdecl fcn_00532ef0(void);
+int __cdecl d3_EndCameraAndUiMode(void);
 
 #define G(p) (*(int*) (p))
 
@@ -307,13 +307,13 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 	}
 	d2_SelectRadioGroup(f.v40, -1);
 	f.v30 = f.v10;
-	fcn_005b5eb0(f.book, a1);
+	d2_InitWorkerOverlaySlots(f.book, a1);
 	fcn_00473a90(0, 0);
 
 	while (main_RunFrameLoop((int) d2_ShowPersonalbuch, 0x677c7)) {
 		if (G(0x14ce8e0) != 0 && d2_CanCloseWindowDuringTutorial() == 1)
 			G(0x774654) = 1;
-		fcn_005b6130((int) f.book, (int) a1);
+		d2_UpdateWorkerOverlaySlots((int) f.book, (int) a1);
 		d2_UpdatePagedPanel((int) f.book);
 		d2_HandleBookPageButton((int) f.book);
 		if (*(unsigned char*) 0x14cf950 == 0xcd)
@@ -334,7 +334,7 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 		}
 L6901:
 		fcn_004727a0(G(f.book + 0x228), 4);
-		fcn_0050c1b0((int) a1, *(unsigned short*) 0x774970, f.rec2);
+		gm_CalcBuildingRoundBalance((int) a1, *(unsigned short*) 0x774970, f.rec2);
 		io_AppendText(0x1a2c, G(f.rec2 + 0xc));
 		f.v2c = (int) fcn_0050dc90(a1);
 		n = G(&f.sel.a1c);
@@ -708,5 +708,5 @@ L77de:
 	cm_RequestChangeAttribute();
 	fcn_0057e880(0x21, 0, 1, 0);
 	fcn_00534f30((int) f.book);
-	return fcn_00532ef0();
+	return d3_EndCameraAndUiMode();
 }

@@ -1,6 +1,6 @@
 /* fcn_004f0930 — pass an 8-byte tagged pair plus the argument to a helper. */
 
-int __cdecl fcn_004c6db0(void*);
+int __cdecl cm_RequestSlot170Command(void*);
 
 /* ADDRESS: GOLDTL 0x004f0930 */
 int __cdecl fcn_004f0930(int a1)
@@ -9,5 +9,5 @@ int __cdecl fcn_004f0930(int a1)
 
 	pair[0] = 0x6454436e;
 	pair[1] = a1;
-	return fcn_004c6db0(pair);
+	return cm_RequestSlot170Command(pair);
 }

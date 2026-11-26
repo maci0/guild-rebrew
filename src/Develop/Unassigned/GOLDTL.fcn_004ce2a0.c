@@ -24,7 +24,7 @@ typedef struct {
 int __cdecl cm_EnqueueClientPacket(msg9c*);
 char* __cdecl fcn_0064d530(char*, char*, int);
 
-int __cdecl fcn_004ce2a0(int a, char* s)
+int __cdecl cm_SendChatMessage(int channel, char* text)
 {
 	info48 info;
 	msg9c m;
@@ -32,8 +32,8 @@ int __cdecl fcn_004ce2a0(int a, char* s)
 	memset(&m.f10, 0, 0x80);
 	info.g = g_9badd0;
 	m.kind = 0x5f;
-	info.a = a;
-	fcn_0064d530(info.name, s, 0x3f);
+	info.a = channel;
+	fcn_0064d530(info.name, text, 0x3f);
 	info.name[0x3f] = 0;
 	m.f10 = 6;
 	m.info = info;

@@ -33,7 +33,7 @@ char *__cdecl fcn_00445600(char *, int, int, char *);
 void __cdecl d3_TransformPoint(char *, char *, float *);
 int __cdecl CompareVector3WithinTolerance(float *, float *, float);
 int __cdecl ch_StartMovement(int, int, int, char *, int, char *);
-int __cdecl fcn_004c5620(int, char *);
+int __cdecl cm_SendSetHE(int, char *);
 void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl sprintf(char *, char *, ...);
 int __cdecl evt_FindScriptByName(char *);
@@ -55,7 +55,7 @@ void __cdecl cm_RequestChangePlayerHe(int, int, int);
 void __cdecl cm_RequestPlayAnimation(int, char *, int);
 
 /* ADDRESS: GOLDTL 0x0056cfc0 */
-void __cdecl he_RunHausbrand(char *a0)
+void __cdecl he_RunHausbrand(char *action)
 {
 	char *e;
 	char *r;
@@ -68,21 +68,21 @@ void __cdecl he_RunHausbrand(char *a0)
 	int d;
 	float f;
 
-	if ((*(unsigned char *)(a0 + 0x78) & 2) &&
-	    (n = *(int *)(a0 + 0x84)) != -1) {
+	if ((*(unsigned char *)(action + 0x78) & 2) &&
+	    (n = *(int *)(action + 0x84)) != -1) {
 		if (!cm_GetCommandStatus(n))
 			return;
-		*(int *)(a0 + 0x84) = -1;
+		*(int *)(action + 0x84) = -1;
 	}
-	switch (*(int *)(a0 + 0x70)) {
+	switch (*(int *)(action + 0x70)) {
 	case 0:
-		e = gm_StartFilteredEntitySearch(1, 1, *(int *)(a0 + 0xac));
+		e = gm_StartFilteredEntitySearch(1, 1, *(int *)(action + 0xac));
 		if (e != 0) {
 			if (*(unsigned char *)(e + 0x5a) & 1) {
-				*(int *)(a0 + 0x70) = -1;
+				*(int *)(action + 0x70) = -1;
 				return;
 			}
-			if (*(unsigned char *)(a0 + 0xb4) >= 3)
+			if (*(unsigned char *)(action + 0xb4) >= 3)
 				goto inc_step;
 			{
 				char names[3][64] = {"dummy_FAHNE", "dummy_RAUCH_0", "dummy_BRAND"};
@@ -92,18 +92,18 @@ void __cdecl he_RunHausbrand(char *a0)
 
 				if (*(int *)(e + 0x61) != 0) {
 					d3_SelectSceneContext(0, 1);
-					if (*(char *)(a0 + 0xb4) == 1) {
+					if (*(char *)(action + 0xb4) == 1) {
 						r = sb_PrepareVoice(0, g_6a6b48);
 						if (r != 0 &&
 						    (r = (char *)d3snd_AttachSoundSource((int)r, *(int *)(e + 0x61), 0x6b, 2200.0f)) != 0)
 							d3snd_PlaySource((int)r, 0, 0, 0);
-					} else if (*(char *)(a0 + 0xb4) == 0) {
+					} else if (*(char *)(action + 0xb4) == 0) {
 						r = sb_PrepareVoice(0, g_6a6b38);
 						if (r != 0)
 							d3snd_PlayObjectSound((int)r, *(int *)(e + 0x61), 0x6b, 2200.0f);
 						if (*(unsigned short *)(e + 0x27) == g_774970) {
 							d3snd_QueueSound(-8, 0, g_6a6b28, 0, 100);
-							if (*(char *)(a0 + 0x104)) {
+							if (*(char *)(action + 0x104)) {
 								io_FormatTextBuffer(text, 0x42d6, e);
 								he_MessageBoxQuickjump(
 									*(int *)(g_7f4ca4 + (unsigned short)g_774970 * 0x21c),
@@ -113,7 +113,7 @@ void __cdecl he_RunHausbrand(char *a0)
 						}
 					}
 					r = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
-							 &names[(unsigned char)*(unsigned char *)(a0 + 0xb4)][0]);
+							 &names[(unsigned char)*(unsigned char *)(action + 0xb4)][0]);
 					if (r != 0) {
 						d3_TransformPoint(r, r + 0x4c, pos);
 					} else {
@@ -127,45 +127,45 @@ void __cdecl he_RunHausbrand(char *a0)
 						pos[1] = pos[1] - 20.0;
 						m = evt_LoadGfxScript(g_6a6b0c);
 						if (m != 0) {
-							sprintf(m, g_6a6afc, *(int *)(a0 + 4),
-								*(unsigned char *)(a0 + 0xb4));
+							sprintf(m, g_6a6afc, *(int *)(action + 4),
+								*(unsigned char *)(action + 0xb4));
 							fcn_00428340((int)m, 3, (int)pos[0], (int)pos[1],
 								     (int)pos[2]);
 							*(int *)(m + 0x104) = 0;
 						}
 					}
-				} else if (*(unsigned char *)(a0 + 0x78) & 2) {
-					*(int *)(a0 + 0x84) = fcn_004c5620(-1, (char *)a0);
+				} else if (*(unsigned char *)(action + 0x78) & 2) {
+					*(int *)(action + 0x84) = cm_SendSetHE(-1, (char *)action);
 					return;
 				}
-				*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
+				*(pos14_7f4c00*) (action + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 
 
 
-				*(pos14_7f4c00*) (a0 + 0x60) = *(pos14_7f4c00*) &gm_GameTime;
+				*(pos14_7f4c00*) (action + 0x60) = *(pos14_7f4c00*) &gm_GameTime;
 
 
 
-				gm_AddTime(a0 + 0x52, 0, 4, 0);
+				gm_AddTime(action + 0x52, 0, 4, 0);
 				d3_SelectSceneContext(v10, 1);
 			}
 		} else {
 inc_step:
-			(*(int *)(a0 + 0x70))++;
+			(*(int *)(action + 0x70))++;
 		}
 		if (e == 0) {
-			*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
+			*(pos14_7f4c00*) (action + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 
 
 
 		}
-		if ((*(unsigned char *)(a0 + 0x78) & 2) &&
-		    *(unsigned char *)(a0 + 0xb4) == 1) {
+		if ((*(unsigned char *)(action + 0x78) & 2) &&
+		    *(unsigned char *)(action + 0xb4) == 1) {
 			i = 0;
 			n = (int)gm_FindNearestBuildingByKind(e, 3);
 			if (n != 0) {
 				h = g_7f4ca4 + 0x180;
-				q = (int *)(a0 + 0xb8);
+				q = (int *)(action + 0xb8);
 				do {
 					if (*(char *)(h - 0x17c) != 0 &&
 					    *(int *)h != 0 &&
@@ -186,65 +186,65 @@ inc_step:
 				} while ((int)h < 0x85a224);
 			}
 		}
-		if (*(unsigned char *)(a0 + 0xb4) >= 3)
+		if (*(unsigned char *)(action + 0xb4) >= 3)
 			break;
-		*(unsigned char *)(a0 + 0xb4) = *(unsigned char *)(a0 + 0xb4) + 1;
+		*(unsigned char *)(action + 0xb4) = *(unsigned char *)(action + 0xb4) + 1;
 		return;
 	case 1:
-		if (!(*(unsigned char *)(a0 + 0x78) & 2))
+		if (!(*(unsigned char *)(action + 0x78) & 2))
 			return;
-		e = gm_StartFilteredEntitySearch(1, 1, *(int *)(a0 + 0xac));
-		if (*(int *)(a0 + 0xb0) > 0) {
+		e = gm_StartFilteredEntitySearch(1, 1, *(int *)(action + 0xac));
+		if (*(int *)(action + 0xb0) > 0) {
 			if (e != 0) {
 				float pos[3];
 				float tmp;
 				double dtmp;
 
 				f = 1.0f;
-				p = (int *)(a0 + 0x60);
+				p = (int *)(action + 0x60);
 				tmp = (float)fcn_0050cad0(p, (int *)0x7f4c00) * (1.0f / 6.0f);
 				n = (int)(tmp + tmp);
 				if (g_7e4538 != 0) {
 					dtmp = *(int *)g_7e4538 * 0.002;
 					f = 1.0 + dtmp * 0.7;
 				}
-				*(int *)(a0 + 0xb0) =
-					(int)((float)*(int *)(a0 + 0xb0) - n * f);
+				*(int *)(action + 0xb0) =
+					(int)((float)*(int *)(action + 0xb0) - n * f);
 				gm_AdjustGebaeudeCondition(e, -n);
 				if (*(unsigned short *)(e + 0x27) == g_774970 &&
-				    *(unsigned int *)(a0 + 0xfc) + 0x20d < (unsigned int)g_6b7fb8) {
+				    *(unsigned int *)(action + 0xfc) + 0x20d < (unsigned int)g_6b7fb8) {
 					d = *(char *)(e + 0x5c) - n;
 					if (d <= 0) {
 						d3snd_QueueSound(-8, 0, g_6a6ad0, 2, 100);
-						*(int *)(a0 + 0xfc) = g_6b7fb8;
+						*(int *)(action + 0xfc) = g_6b7fb8;
 					} else if (d <= 0xa) {
 						d3snd_QueueSound(-8, 0, g_6a6ad0, 1, 100);
-						*(int *)(a0 + 0xfc) = g_6b7fb8;
+						*(int *)(action + 0xfc) = g_6b7fb8;
 					} else if (d <= 0x19) {
 						d3snd_QueueSound(-8, 0, g_6a6ad0, 0, 100);
-						*(int *)(a0 + 0xfc) = g_6b7fb8;
+						*(int *)(action + 0xfc) = g_6b7fb8;
 					}
 				}
-				*(pos14_7f4c00*) (a0 + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
+				*(pos14_7f4c00*) (action + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 
 
 
-				*(pos14_7f4c00*) (a0 + 0x60) = *(pos14_7f4c00*) &gm_GameTime;
+				*(pos14_7f4c00*) (action + 0x60) = *(pos14_7f4c00*) &gm_GameTime;
 
 
 
 				e = 0;
-				gm_AddTime(a0 + 0x52, 0, 4, 0);
-				if (*(unsigned char *)(a0 + 0xb4) < 3)
-					*(int *)(a0 + 0x70) = 0;
+				gm_AddTime(action + 0x52, 0, 4, 0);
+				if (*(unsigned char *)(action + 0xb4) < 3)
+					*(int *)(action + 0x70) = 0;
 				i = 0;
-				p = (int *)(a0 + 0xb8);
+				p = (int *)(action + 0xb8);
 				n = 0x10;
 				do {
 					if (*p != -1) {
 						if (e == 0) {
 							e = gm_StartFilteredEntitySearch(1, 1,
-										 *(int *)(a0 + 0xac));
+										 *(int *)(action + 0xac));
 							i = (int)gm_FindNearestBuildingByKind(e, 3);
 						}
 						r = gm_LookupEntityRecordById(*p);
@@ -270,18 +270,18 @@ inc_step:
 					p++;
 				} while (--n);
 			}
-			if (*(int *)(a0 + 0xb0) > 0 && e != 0)
+			if (*(int *)(action + 0xb0) > 0 && e != 0)
 				return;
 		}
-		*(int *)(a0 + 0x84) = fcn_004c5620(-1, (char *)a0);
+		*(int *)(action + 0x84) = cm_SendSetHE(-1, (char *)action);
 		return;
 	case 0xfffffffe:
 	case 0xffffffff: {
 		char buf[0x40];
 
-		e = gm_StartFilteredEntitySearch(1, 1, *(int *)(a0 + 0xac));
-		if ((*(unsigned char *)(a0 + 0x78) & 2) && e != 0) {
-			p = (int *)(a0 + 0xb8);
+		e = gm_StartFilteredEntitySearch(1, 1, *(int *)(action + 0xac));
+		if ((*(unsigned char *)(action + 0x78) & 2) && e != 0) {
+			p = (int *)(action + 0xb8);
 			i = 0x10;
 			do {
 				if (*p != -1) {
@@ -292,7 +292,7 @@ inc_step:
 			} while (--i);
 		}
 		for (i = 0; i < 3; i++) {
-			sprintf(buf, g_6a6afc, *(int *)(a0 + 4), i);
+			sprintf(buf, g_6a6afc, *(int *)(action + 4), i);
 			n = evt_FindScriptByName(buf);
 			if (n != 0)
 				evt_RequestScriptExit((char *)n);
@@ -300,7 +300,7 @@ inc_step:
 		if (e != 0 && *(int *)(e + 0x61) != 0 &&
 		    (n = *(int *)(*(int *)(e + 0x61) + 0x210)) != 0)
 			fcn_00418f90(n);
-		he_FreeAction(a0);
+		he_FreeAction(action);
 		break;
 	}
 	default:

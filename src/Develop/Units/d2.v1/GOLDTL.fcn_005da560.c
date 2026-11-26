@@ -35,7 +35,7 @@ int __cdecl fcn_004f4830(int, Stat5da5*);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl gm_CheckPrivilege(int, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl gs_StartCourtTrial(unsigned short*, unsigned short*, int, int);
@@ -111,6 +111,6 @@ int __cdecl fcn_005da560(unsigned short* viewer, unsigned short* subject)
 			}
 		}
 	} while (main_RunFrameLoop(fcn_005da560, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 }

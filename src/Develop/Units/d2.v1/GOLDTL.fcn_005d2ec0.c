@@ -23,21 +23,21 @@ extern int g_14ce8e0;
 extern int g_14ce8d8;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_005d28e0(char*, int*, int*);
+int __cdecl gm_FindWerbungCandidates(char*, int*, int*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d2_BuildPersonStatusDesc(Item*);
-int __cdecl fcn_005d2a40(int, int);
+int __cdecl gm_CalcWerbungSteps(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 int __cdecl d2_RunWerbungDialog(unsigned short*);
 void __cdecl d2_SetGroupVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005d2ec0 */
 int __cdecl fcn_005d2ec0(char* a0)
@@ -53,7 +53,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 	int i;
 
 	res = 2;
-	fcn_005d28e0(a0, &count, ids);
+	gm_FindWerbungCandidates(a0, &count, ids);
 	dlg = fcn_00470820(0, 0, (char*) 0x6acbd4);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
@@ -67,7 +67,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 		items[i].e = gm_LookupEntityRecordById(ids[i]);
 		items[i].flag = 1;
 		d2_BuildPersonStatusDesc(&items[i]);
-		items[i].val = fcn_005d2a40(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, *(int*) (items[i].e + 4));
+		items[i].val = gm_CalcWerbungSteps(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, *(int*) (items[i].e + 4));
 		io_FormatTextBuffer(buf, 0x1ce4, items[i].val);
 		fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);
 		fcn_005c9090((int) buf, items[i].x + *(short*) (g_772500 + 0x1ebd8) / 2,
@@ -92,6 +92,6 @@ int __cdecl fcn_005d2ec0(char* a0)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005d2ec0, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return res;
 }

@@ -25,7 +25,7 @@ void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl d2_ShowAmtInfo(int, int);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 typedef struct {
 	int ent;
@@ -218,7 +218,7 @@ void __cdecl fcn_005cd810(int office)
 		}
 loopend:
 		if (!main_RunFrameLoop((int) fcn_005cd810, 0x657c7)) {
-			fcn_00471e30(dlg);
+			d2_DestroyForm(dlg);
 			return;
 		}
 	}

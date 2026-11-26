@@ -3,7 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c5d20(int a1, int a2)
+void __cdecl cm_SendCreateAction0x38(int a1, int a2)
 {
 	char buf[0x9c];
 

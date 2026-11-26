@@ -3,7 +3,7 @@
 
 extern char* evt_CurrentScript;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
-void __cdecl fcn_004526d0(char* e, float* v);
+void __cdecl d3_SetEffectPosition(char* e, float* v);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl SetParticlePos(char** a, int* x, int* y, int* z)
@@ -19,6 +19,6 @@ int __cdecl SetParticlePos(char** a, int* x, int* y, int* z)
 	v[0] = (float) *x;
 	v[1] = (float) *y;
 	v[2] = (float) *z;
-	fcn_004526d0(e, v);
+	d3_SetEffectPosition(e, v);
 	return 0;
 }

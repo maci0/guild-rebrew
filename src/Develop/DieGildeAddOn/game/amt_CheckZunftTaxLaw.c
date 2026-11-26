@@ -3,10 +3,10 @@ extern void __cdecl amt_calc_zuenfte(int);
 extern void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 
 /* ADDRESS: GOLDTL 0x004eb180 */
-int __cdecl fcn_004eb180(int v)
+int __cdecl amt_CheckZunftTaxLaw(int rankRange)
 {
-	int w;
-	void* p;
+	int officeType;
+	void* officeRec;
 
 	if (he_StartHandlungSearch(1, 0, 0x80) != 0) {
 		amt_calc_zuenfte(0x1e);
@@ -15,26 +15,26 @@ int __cdecl fcn_004eb180(int v)
 		amt_calc_zuenfte(0x21);
 		return 0;
 	}
-	switch (v) {
+	switch (rankRange) {
 	case 1:
-		w = 0x18;
+		officeType = 0x18;
 		break;
 	case 2:
-		w = 0x19;
+		officeType = 0x19;
 		break;
 	case 3:
-		w = 0x1a;
+		officeType = 0x1a;
 		break;
 	case 4:
-		w = 0x17;
+		officeType = 0x17;
 		break;
 	case 5:
 		return 0;
 	default:
 		goto ret0;
 	}
-	p = gm_StartFilteredEntitySearch(1, 5, w);
-	if (p == 0 || (((unsigned char*) p)[0x5a] & 1))
+	officeRec = gm_StartFilteredEntitySearch(1, 5, officeType);
+	if (officeRec == 0 || (((unsigned char*) officeRec)[0x5a] & 1))
 		return 0;
 	return 1;
 ret0:

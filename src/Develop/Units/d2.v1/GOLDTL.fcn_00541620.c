@@ -40,9 +40,9 @@ void __cdecl gm_PackGameTime(void*, void*);
 int __cdecl fcn_00503fe0(int, int);
 int __cdecl fcn_00503e80(void);
 int __cdecl fcn_00504bd0(int);
-int __cdecl fcn_0050c1b0(char*, int, int*);
-int __cdecl fcn_0050d640(int, int, int, int*);
-int __cdecl fcn_0050d5d0(int, char*, int*);
+int __cdecl gm_CalcBuildingRoundBalance(char*, int, int*);
+int __cdecl he_GetActiveKrediteByLender(int, int, int, int*);
+int __cdecl he_GetActiveKrediteByBorrower(int, char*, int*);
 int __cdecl fcn_0050d2a0(int);
 int __cdecl fcn_004fcda0(unsigned short, int, int*);
 int __cdecl fcn_004fcb50(unsigned short, int*, int);
@@ -209,7 +209,7 @@ void __cdecl fcn_00541620(void)
 		    *(short*) (ent + 0x25) == (short) (((unsigned short)g_774970) & 0xffff)) {
 			b = *(unsigned char*) ent;
 			kind = fcn_00504bd0((int) b);
-			n = fcn_0050c1b0(ent, (int) (((unsigned short)g_774970) & 0xffff), info);
+			n = gm_CalcBuildingRoundBalance(ent, (int) (((unsigned short)g_774970) & 0xffff), info);
 			if (n != 0 || (kind != 5 && kind != 6)) {
 				c1fc += *(int*) ((char*) info + 0x44);
 				e1ec += *(int*) ((char*) info + 0xc);
@@ -219,7 +219,7 @@ void __cdecl fcn_00541620(void)
 		}
 		ent = (char*) fcn_00503e80();
 	}
-	n = fcn_0050d640(((unsigned short)g_774970) & 0xffff, 0, 0xffff, v1d0);
+	n = he_GetActiveKrediteByLender(((unsigned short)g_774970) & 0xffff, 0, 0xffff, v1d0);
 	i = 0; k = 0;
 	if (n > 0) {
 		do {
@@ -270,7 +270,7 @@ void __cdecl fcn_00541620(void)
 	if (e1ec != 0) {
 		io_AppendText(0x204a, e1ec);
 	}
-	n = fcn_0050d5d0(((unsigned short)g_774970) & 0xffff, 0, v1d0);
+	n = he_GetActiveKrediteByBorrower(((unsigned short)g_774970) & 0xffff, 0, v1d0);
 	runningTotal = 0;
 	i = 0;
 	if (n > 0) {

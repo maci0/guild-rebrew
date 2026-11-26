@@ -34,13 +34,13 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl he_AssignActionSlot(char*, int, int, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl gm_GetMsgField(int, int);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl d2_RenderProduktionStockRows(int, int, int, int, int);
 void __cdecl fcn_00595e20(char*, int);
 void __cdecl fcn_005963f0(int, int, int, char*);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 char* __cdecl itoa(int, char*, int);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -211,7 +211,7 @@ located:
 				} while ((int) p < 0x7e35d0);
 			} else {
 				g_774654 = 1;
-				fcn_00532ef0();
+				d3_EndCameraAndUiMode();
 			}
 		}
 		m = fcn_00502cd0(*(unsigned int*) (t + 0x14), 1, 4, 0x17);
@@ -261,7 +261,7 @@ located:
 		fcn_00595e20(building, r);
 		fcn_005963f0(h, 1, 0, building);
 	} while (main_RunFrameLoop((int) d2_RunProductionTradeDialog, 0x677c7));
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	d2_RestoreHudAfterDialog();
 	return 0;
 }

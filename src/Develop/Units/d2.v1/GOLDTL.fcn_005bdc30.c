@@ -35,8 +35,8 @@ extern char g_10161bc[];
 
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_005b0dd0(MsgCtx*);
-void __cdecl fcn_005b0230(MsgCtx*);
-void __cdecl fcn_005b11f0(MsgCtx*);
+void __cdecl d2_BuildCityScrollMap(MsgCtx*);
+void __cdecl d2_UpdateCityScrollMap(MsgCtx*);
 void __cdecl fcn_0057e880(int, int, int, int);
 void __cdecl fcn_005b18c0(int*);
 void __cdecl fcn_00471af0(int, int);
@@ -62,13 +62,13 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 		ctx.text[0] = g_6b5c60[0];
 	}
 	fcn_005b0dd0(&ctx);
-	fcn_005b0230(&ctx);
+	d2_BuildCityScrollMap(&ctx);
 	while (main_RunFrameLoop((void*) fcn_005bdc30, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
 		g_6ab3dc = (tp_d2_SelectedControl == 0);
-		fcn_005b11f0(&ctx);
+		d2_UpdateCityScrollMap(&ctx);
 		if (flags & 4) {
 			if (g_14ce8d8 != 0 && d2_CurrentElementId != -1) {
 				for (i = 0; i < 0x10; i++) {

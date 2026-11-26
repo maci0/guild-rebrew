@@ -25,7 +25,7 @@ int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl d2_ShowBuildingTurnSummary(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c9850 */
 void __cdecl d2_ShowGebaeudeList(void)
@@ -60,5 +60,5 @@ void __cdecl d2_ShowGebaeudeList(void)
 			}
 		}
 	} while (main_RunFrameLoop(d2_ShowGebaeudeList, 0x657c7) != 0);
-	fcn_00471e30(obj);
+	d2_DestroyForm(obj);
 }

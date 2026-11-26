@@ -36,7 +36,7 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
 void __cdecl cm_SendCopyEntityData(Msg5c23b0*);
 int __cdecl fcn_00526120(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005c23b0 */
 void __cdecl d2_ShowSellGebaeudeDialog(char* e)
@@ -84,5 +84,5 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowSellGebaeudeDialog, 0x677c7) != 0);
-	fcn_00471e30(win);
+	d2_DestroyForm(win);
 }

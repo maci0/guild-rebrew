@@ -42,7 +42,7 @@ void __cdecl fcn_00526120(char*, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 {
@@ -117,6 +117,6 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) fcn_005d5670, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 }

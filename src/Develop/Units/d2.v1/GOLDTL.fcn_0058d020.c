@@ -12,8 +12,8 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0058c4f0(char*, int, int, int*, int*);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00471e30(int);
-int __cdecl fcn_0058cda0(char*, int);
+void __cdecl d2_DestroyForm(int);
+int __cdecl d2_ConfirmRentAGrave(char*, int);
 void __cdecl fcn_00471af0(int, int);
 
 /* ADDRESS: GOLDTL 0x0058d020 */
@@ -43,7 +43,7 @@ void __cdecl d2_OpenRentAGraveDialog(char* a0)
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == task) {
 				fcn_00471af0(dlg, 0);
-				if (fcn_0058cda0(a0, selected) == 1) {
+				if (d2_ConfirmRentAGrave(a0, selected) == 1) {
 					g_774654 = 1;
 				}
 				fcn_00471af0(dlg, 1);
@@ -58,5 +58,5 @@ void __cdecl d2_OpenRentAGraveDialog(char* a0)
 			}
 		}
 	} while (main_RunFrameLoop(0x58d020, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

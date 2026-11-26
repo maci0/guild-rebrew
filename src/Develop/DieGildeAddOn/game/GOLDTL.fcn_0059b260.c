@@ -24,7 +24,7 @@ char* __cdecl itoa(int, char*, int);
 int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
 int __cdecl fcn_0046f940(int, char*);
@@ -32,7 +32,7 @@ int __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 void __cdecl fcn_00533f40(int, int, int, int);
 void __cdecl fcn_00594340(void);
@@ -285,7 +285,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 			}
 			else {
 				g_774654 = 1;
-				fcn_00532ef0();
+				d3_EndCameraAndUiMode();
 			}
 		}
 		e = fcn_00502cd0(*(int*) (p1 + 0x14), 1, 4, 0x17);
@@ -367,7 +367,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 		fcn_00595e20((int) building, (int) p2);
 		fcn_005963f0(h, 1, 0, (int) building);
 	} while (main_RunFrameLoop(d2_RunProduktionDialog, 0x677c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	d2_RestoreHudAfterDialog();
 	return 0;
 }

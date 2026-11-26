@@ -1,6 +1,6 @@
 typedef struct {
 	int v[0x11];
-} Rec44_58ee70;
+} SEANCE_TARGET_REC;
 
 typedef struct {
 	int kind;
@@ -9,7 +9,7 @@ typedef struct {
 	unsigned char fc;
 	char padd[3];
 	int f10;
-	Rec44_58ee70 rec;
+	SEANCE_TARGET_REC rec;
 } Result_58ee70;
 
 typedef struct {
@@ -38,9 +38,9 @@ void* __cdecl FindSlotEntryFiltered(int, char*, unsigned char*, void*, int);
 int __cdecl fcn_004f1790(int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl d2_CreateRentAGraveDialog(int*, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl d2_RunSeanceMenu(int, char*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl d2_RunSeanceDialog(char*, char*);
@@ -49,7 +49,7 @@ void __cdecl d2_RunSeanceTreasureDialog(char*, char*);
 void __cdecl fcn_00526120(int, int);
 
 /* ADDRESS: GOLDTL 0x0058ee70 */
-void __cdecl fcn_0058ee70(char* e)
+void __cdecl d2_RunSeanceAction(char* e)
 {
 	Result_58ee70 result;
 	Dialog_58ee70 dlg;
@@ -66,11 +66,11 @@ void __cdecl fcn_0058ee70(char* e)
 		dlg.rec_state = v;
 		io_FormatTextBuffer(text, 0x4107, g_665f78[*(int*) rec]);
 		if (!d2_CreateRentAGraveDialog((int*) &dlg, g_14b5650)) {
-			fcn_00532ef0();
+			d3_EndCameraAndUiMode();
 			return;
 		}
 		r = d2_RunSeanceMenu((int) e, (char*) &dlg, (int) &result);
-		fcn_00471e30(dlg.dlg);
+		d2_DestroyForm(dlg.dlg);
 		if (r != 0) {
 			cm_RequestChangeBits(*(int*) (g_slot_table + g_774970 * 0x21c + 4), 0x1cc, 4, 0x800000, 0);
 			if (result.cost != 0) {
@@ -88,7 +88,7 @@ void __cdecl fcn_0058ee70(char* e)
 				break;
 			}
 		}
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 	} else {
 		fcn_00526120(g_14b5674, 0);
 	}

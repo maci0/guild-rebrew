@@ -7,7 +7,7 @@ extern char g_77df20[];
 int __cdecl sprintf(char*, const char*, ...);
 __declspec(dllimport) int __stdcall WritePrivateProfileStringA(const char*, const char*, const char*, const char*);
 
-void __cdecl fcn_0057de00(void)
+void __cdecl io_SaveMessageFilterMask(void)
 {
 	char buf[12];
 

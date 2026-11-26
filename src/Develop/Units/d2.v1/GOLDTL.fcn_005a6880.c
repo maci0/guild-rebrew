@@ -36,11 +36,11 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_0046fac0(int, int, void*, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
-int __cdecl fcn_0050d270(int);
+int __cdecl gm_SumContainerCredits(int);
 void __cdecl fcn_005a5760(void*, int, int, int);
 void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl ResetDisplayCounters(void);
@@ -126,7 +126,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 	d2_SetForm(h, 3);
 	fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, g_14ab738, g_14b5278);
 
-	d270 = fcn_0050d270(*(int*) (obj + 0x5d));
+	d270 = gm_SumContainerCredits(*(int*) (obj + 0x5d));
 	if (d270 <= 0) {
 		d2_SetForm(h, 5);
 		io_AppendText(0x190a, obj);
@@ -221,6 +221,6 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 		}
 	}
 	ResetDisplayCounters();
-	fcn_00471e30(h);
-	fcn_00532ef0();
+	d2_DestroyForm(h);
+	d3_EndCameraAndUiMode();
 }

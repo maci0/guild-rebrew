@@ -6,7 +6,7 @@
 struct Node;
 void __cdecl d3_TransformPoint(struct Node*, float*, float*);
 
-void __cdecl fcn_00455540(char* o, float* v, float* out)
+void __cdecl d3_TransformToObjectSpace(char* o, float* v, float* out)
 {
 	float t[4];
 	float a;

@@ -7,7 +7,7 @@ int __cdecl main_RunFrameLoop(void* p, int a);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
 int __cdecl fcn_005095d0(char* e, int* out_count);
 int __cdecl fcn_00526120(char* text, int flags);
-int __cdecl fcn_00471e30(int k);
+int __cdecl d2_DestroyForm(int k);
 
 /* ADDRESS: GOLDTL 0x005a06a0 */
 void __cdecl d2_ShowWeinkellerDialog(void)
@@ -45,5 +45,5 @@ void __cdecl d2_ShowWeinkellerDialog(void)
 			*(int*) 0x774654 = 1;
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

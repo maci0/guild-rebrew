@@ -14,7 +14,7 @@ void __cdecl d2_SetForm(char*, int);
 void __cdecl fcn_004b5630(int, int);
 void __cdecl io_AppendText(int, int);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00471e30(char*);
+void __cdecl d2_DestroyForm(char*);
 void __cdecl fcn_004b5530(int, int);
 void __cdecl fcn_004b5a80(int);
 void __cdecl fcn_004b5b20(int);
@@ -53,7 +53,7 @@ void __cdecl fcn_004b60e0(int flags)
 			break;
 		}
 	}
-	fcn_00471e30(obj);
+	d2_DestroyForm(obj);
 	if (r == 1) {
 		fcn_004b5530(g_10069a0, v);
 		return;

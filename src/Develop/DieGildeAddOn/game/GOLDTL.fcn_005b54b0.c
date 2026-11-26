@@ -31,7 +31,7 @@ void __cdecl gm_EquipDuelist(char*, char);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_004c5980(void* data);
 
-void __cdecl fcn_005b54b0(char* p)
+void __cdecl d2_BroadcastCutscene0xa2(char* p)
 {
 	char msg[0x114];
 	char* e;

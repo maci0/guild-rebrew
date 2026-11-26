@@ -22,7 +22,7 @@ typedef struct {
 
 
 int* __cdecl fcn_004524e0(int a0, char* a1, Bytes4 a2, float a3, char* a4, void (__cdecl* a5)(void));
-void __cdecl fcn_004526d0(int* a0, float* a1);
+void __cdecl d3_SetEffectPosition(int* a0, float* a1);
 void __cdecl fcn_00417bf0(void);
 
 /* ADDRESS: GOLDTL 0x00417d00 */
@@ -48,7 +48,7 @@ int* __cdecl fcn_00417d00(char* a0, float* pos, int n, float a3, float a4, float
 		count = s->count;
 		n6 = count / 6;
 		inv = 1.0f / (float) count;
-		fcn_004526d0((int*) s, pos);
+		d3_SetEffectPosition((int*) s, pos);
 		s->x = a3;
 		s->y = a4;
 		s->z = a5;

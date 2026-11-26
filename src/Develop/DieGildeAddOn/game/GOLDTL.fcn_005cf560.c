@@ -29,7 +29,7 @@ void __cdecl d2_ConfirmMeisterbrief(unsigned char*, int);
 void __cdecl fcn_005ceef0(unsigned char*, void*);
 void __cdecl d2_ShowMeisterbriefDialog(unsigned char*);
 void __cdecl fcn_005cea10(unsigned char*);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d2_OpenMeisterbriefDialog(unsigned char* obj)
 {
@@ -87,5 +87,5 @@ void __cdecl d2_OpenMeisterbriefDialog(unsigned char* obj)
 		fcn_005cea10(obj);
 		break;
 	}
-	fcn_00532ef0();
+	d3_EndCameraAndUiMode();
 }

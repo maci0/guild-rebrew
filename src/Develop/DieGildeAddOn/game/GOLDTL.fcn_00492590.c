@@ -8,7 +8,7 @@ extern unsigned char g_772628[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00492590 */
-unsigned int __cdecl fcn_00492590(int a0)
+unsigned int __cdecl gm_PickWirtshausGuest(int kind)
 {
 	float tab[15];
 	float r;
@@ -41,14 +41,14 @@ unsigned int __cdecl fcn_00492590(int a0)
 	tab[14] = 1.0f;
 
 	r = gm_RandomFloat01();
-	if (a0 == 1) {
+	if (kind == 1) {
 		row = 0;
 	} else {
-		row = (a0 != 2) + 1;
+		row = (kind != 2) + 1;
 	}
 	i = 0; threshold = tab + row * 5; do {
 		i++; if (r <= *threshold) {
-			a0 = i;
+			kind = i;
 			break;
 		}
 		threshold++; } while (i < 5);
@@ -59,7 +59,7 @@ unsigned int __cdecl fcn_00492590(int a0)
 		cs = row == 0 ? v : row - v;
 	}
 	r = gm_RandomFloat01();
-	resultBits = a0;
+	resultBits = kind;
 	for (col = 0; col < 5; col++) {
 		if (r <= tab[cs * 5 + col]) {
 			resultBits = (col + 1) * 0x100;
@@ -75,7 +75,7 @@ unsigned int __cdecl fcn_00492590(int a0)
 		src = gm_FemaleNames[gm_RandomMod(0x70) & 0xffff];
 	}
 	fcn_0064d530(((char *)g_772628) + 0x30, src, 0xf);
-	switch (a0) {
+	switch (kind) {
 	case 1:
 		bl = 0x15;
 		sel = 0x2a;
@@ -97,13 +97,13 @@ unsigned int __cdecl fcn_00492590(int a0)
 		sel = 0x54;
 		break;
 	default:
-		bl = (unsigned char) a0;
-		sel = a0;
+		bl = (unsigned char) kind;
+		sel = kind;
 		break;
 	}
 	for (i = 0; i < 5; i++) {
 		((char *)g_772628)[0x80 + i] = (char) (gm_RandomMod(sel) + bl + 1);
 	}
 	((char *)g_772628)[2] = 10;
-	return resultBits | a0;
+	return resultBits | kind;
 }

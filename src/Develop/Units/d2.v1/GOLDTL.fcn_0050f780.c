@@ -40,7 +40,7 @@ void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, int a, int b);
 int __cdecl d2_BuildDependencyDiagram(unsigned char* a, unsigned short* b, int w, int h);
-void __cdecl fcn_00471e30(int h);
+void __cdecl d2_DestroyForm(int h);
 void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b);
 void __cdecl fcn_0050f750(int a, int b, int c, int d);
 
@@ -62,7 +62,7 @@ int __cdecl d2_OpenDependencyDiagram(int arg, unsigned char* a, unsigned short* 
 	}
 	d2_SetForm(0, 3);
 	if (d2_BuildDependencyDiagram(a, b, s->width, s->height)) {
-		fcn_00471e30(g_7f4c10);
+		d2_DestroyForm(g_7f4c10);
 		return -1;
 	}
 	fcn_0050ee80(a, b);

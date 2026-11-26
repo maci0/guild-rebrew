@@ -14,7 +14,7 @@ void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 void __cdecl fcn_00526920(char* text, int a2, int a3);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005b6130 */
-void __cdecl fcn_005b6130(int a0, char* a1)
+void __cdecl d2_UpdateWorkerOverlaySlots(int panelState, char* ownerName)
 {
     char label[512];
     int v1;
@@ -48,7 +48,7 @@ void __cdecl fcn_005b6130(int a0, char* a1)
             v3 = *(int*) (v4 * 4 + 0x777cdc);
             if (v3 != -1) {
                 fcn_0046f940(v3, label);
-                if (a1 != v2 &&
+                if (ownerName != v2 &&
                     *(int*) (v4 * 4 + 0x777cd0) == -1) {
                     v3 = d2_AddElementToWindow(0, v7, 5, d2_CurrentWindowId);
                     *(int*) (v4 * 4 + 0x777cd0) = v3;
@@ -70,7 +70,7 @@ void __cdecl fcn_005b6130(int a0, char* a1)
         } while (v4 < *(int*) 0x777cc0);
     }
 
-    if (*(char*) (a0 + 0x270) == 2 && g_100f1dc == 5) {
+    if (*(char*) (panelState + 0x270) == 2 && g_100f1dc == 5) {
         v6 = (int*) 0x777cd0;
         do {
             v4 = *v6;

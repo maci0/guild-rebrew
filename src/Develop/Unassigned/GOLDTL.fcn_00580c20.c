@@ -8,8 +8,8 @@ extern char* g_774a10;
 extern int g_774a18;
 
 void __cdecl fcn_004230e0(int);
-void __cdecl fcn_00580cf0(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_FreeTutorialNodes(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ShutdownTutorial(void)
 {
@@ -20,7 +20,7 @@ void __cdecl d2_ShutdownTutorial(void)
 			fcn_004230e0(g_7749f8[i]);
 		}
 	}
-	fcn_00580cf0((*(int*)&g_774a10));
+	d2_FreeTutorialNodes((*(int*)&g_774a10));
 	(*(int*)&g_774a10) = 0;
 	g_665f08[0] = 0;
 	g_665f08[2] = 0;
@@ -30,9 +30,9 @@ void __cdecl d2_ShutdownTutorial(void)
 	g_665f08[6] = 0;
 	g_665f08[7] = 0;
 	g_665f08[8] = -1;
-	fcn_00471e30(g_665f08[9]);
+	d2_DestroyForm(g_665f08[9]);
 	g_665f08[9] = -1;
-	fcn_00471e30(g_665f08[13]);
+	d2_DestroyForm(g_665f08[13]);
 	g_665f08[13] = -1;
 	g_665f08[5] = 0;
 	d2_TutorialActive = 0;

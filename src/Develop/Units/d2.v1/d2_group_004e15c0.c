@@ -15,7 +15,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 extern int g_772f2c;
 extern int d2_CurrentElementId;
 
@@ -29,7 +29,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004cfca0(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl fcn_004e15c0(void);
 void __cdecl fcn_004e16e0(void);
@@ -59,7 +59,7 @@ void __cdecl fcn_004e15c0(char* state)
 			g_774654 = 1;
 		}
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }
 
 /* ADDRESS: GOLDTL 0x004e16e0 */
@@ -106,7 +106,7 @@ void __cdecl fcn_004e16e0(char* state, int* event)
 		if (d2_UpdateProgressBar(w, 0, 0) == 0)
 			g_774654 = 1;
 	}
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }
 
 /* ADDRESS: GOLDTL 0x004e1900 */

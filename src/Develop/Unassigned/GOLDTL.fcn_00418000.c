@@ -11,7 +11,7 @@ typedef struct {
 
 int __cdecl fcn_0064d3f8(void);
 int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, int b, void (__cdecl* cb)(void));
-void __cdecl fcn_004526d0(int* s, float* pos);
+void __cdecl d3_SetEffectPosition(int* s, float* pos);
 void __cdecl fcn_00417f00(void);
 extern volatile int g_6b7fac;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -37,7 +37,7 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
     if (s != 0) {
         k = g_6b7fac;
         mask = color.d;
-        fcn_004526d0(s, pos);
+        d3_SetEffectPosition(s, pos);
         s[0] = v2;
         s[1] = v0;
         s[4] = *(int*) &p[0];

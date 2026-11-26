@@ -52,13 +52,13 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl fcn_005898f0(void*);
 void __cdecl fcn_005100f0(int, int);
-int __cdecl fcn_004a5e60(unsigned short*, int, F8, int, float, int*);
+int __cdecl ai_FindEntityInFavorRange(unsigned short*, int, F8, int, float, int*);
 int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* Builds the stock-trade dialog for the selected building, pumps the dialog
  * message loop and hands the scene back to the shared frame function. */
@@ -91,7 +91,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 	q[4] = 6;
 	targetEntity = (char*) fcn_005cd440(q, (char*) *(int*) 0x14b5310, 0, 0);
 	if (targetEntity == 0) {
-		fcn_00532ef0();
+		d3_EndCameraAndUiMode();
 		return;
 	}
 	n = amt_GetRoleLevel(*(unsigned char*) (targetEntity + 0x166)) / 3 + 2;
@@ -149,7 +149,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 						v16 = -1;
 						f.mask = 0x7b4c4a0;
 						f.b = 0;
-						fcn_004a5e60((unsigned short*) (g_slot_table + g_774970 * 0x21c), 0, f, 0, 100.0f, &v16);
+						ai_FindEntityInFavorRange((unsigned short*) (g_slot_table + g_774970 * 0x21c), 0, f, 0, 100.0f, &v16);
 						req.f58 = v16;
 					}
 					id = cm_SendCopyEntityData(&req);
@@ -164,6 +164,6 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunSpyCabinetDialog, 0x677c7) != 0);
-	fcn_00471e30(dlg);
-	fcn_00532ef0();
+	d2_DestroyForm(dlg);
+	d3_EndCameraAndUiMode();
 }

@@ -59,7 +59,7 @@ int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetStorageSlotCapacity(char*, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_0047d1b0(void);
+int __cdecl ai_GetMaxActiveTradeActions(void);
 int __cdecl he_CountActiveTradeActions(void);
 int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_RequestMoveCredits(int, int, char, int);
@@ -118,7 +118,7 @@ int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 			continue;
 		}
 		memset(&m, 0, 0xf8);
-		if (he_CountActiveTradeActions() > fcn_0047d1b0()) {
+		if (he_CountActiveTradeActions() > ai_GetMaxActiveTradeActions()) {
 			m.skip = 1;
 		}
 		for (i = 0; i < 3; i++) {

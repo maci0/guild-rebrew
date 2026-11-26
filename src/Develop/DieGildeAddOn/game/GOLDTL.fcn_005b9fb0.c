@@ -11,7 +11,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_004c5620(int, char*);
+void __cdecl cm_SendSetHE(int, char*);
 
 void __cdecl cm_CompleteAction0x0f(char* e)
 {
@@ -20,7 +20,7 @@ void __cdecl cm_CompleteAction0x0f(char* e)
 	for (p = he_StartHandlungSearch(1, 0, 0xf); p != 0; p = he_fn_Handlung()) {
 		if (*(int*) (p + 0xac) == *(int*) (e + 2)) {
 			*(Stamp*) (p + 0x52) = (*(Stamp*)&gm_GameTime);
-			fcn_004c5620(-1, p);
+			cm_SendSetHE(-1, p);
 			return;
 		}
 	}

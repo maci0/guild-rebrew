@@ -8,7 +8,7 @@ extern int __cdecl d2_CreateRadioGroup(int a, int b, int c, int d);
 extern void __cdecl d2_SelectRadioGroup(int obj, int a);
 extern int __cdecl main_RunFrameLoop(int proc, int a);
 extern void __cdecl d2_ClearRadioGroup(int obj);
-extern void __cdecl fcn_00471e30(int obj);
+extern void __cdecl d2_DestroyForm(int obj);
 extern void __cdecl d2_UpdateRadioGroup(int obj);
 extern void __cdecl fcn_004b20d0(int a);
 extern void __cdecl fcn_00471af0(int obj, int a);
@@ -19,7 +19,7 @@ extern int __cdecl gm_FindHeadIconIndex(const char *name);
 extern int __cdecl d2_RunChoosePlayerDialog(int a, int b);
 extern int __cdecl fcn_0053e8a0(int a);
 extern int __cdecl d2_ShowChooseProfessionDialog(int a);
-extern unsigned int *__cdecl fcn_00506d50(char *buf, unsigned char a);
+extern unsigned int *__cdecl gm_GetStatRecord(char *buf, unsigned char a);
 extern void __cdecl d3_SelectSceneContext(int a, int b);
 extern int __cdecl d2_OpenMessageBox(int a, int b);
 extern int __cdecl d2_RunParentProfessionSelection(int a);
@@ -85,7 +85,7 @@ label_53dd68:
 	for (;;) {
 		if (!r) {
 			d2_ClearRadioGroup(dlg);
-			fcn_00471e30(obj);
+			d2_DestroyForm(obj);
 			if (again) {
 				*(int *) 0x7747b0 |= 8;
 				return again;
@@ -161,7 +161,7 @@ label_53df85:
 					} else {
 						if (v4 == 0) {
 							if (d2_ShowChooseProfessionDialog(0xc6)) {
-								p = fcn_00506d50(buf, *(unsigned char *) 0x7e23e3);
+								p = gm_GetStatRecord(buf, *(unsigned char *) 0x7e23e3);
 								*(int *) 0x7e2430 = *p;
 								*(char *) 0x7e2434 = (char) *(unsigned short *) &p[1];
 								g_7e2468 =

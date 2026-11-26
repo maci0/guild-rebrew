@@ -11,7 +11,7 @@ void __cdecl he_PostEntityMessage(int a, int b, void* buf, int d, int e, void* f
 void __cdecl he_FreeAction(char* a);
 
 
-void __cdecl fcn_0057d9e0(char* a)
+void __cdecl he_UpdateEvent0a3(char* a)
 {
 	unsigned short* e;
 	int v;

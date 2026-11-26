@@ -41,7 +41,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl he_SpawnSensenmann(char* e);
 void __cdecl he_FreeAction(char* e);
 void __cdecl msx_RestoreMusicIfAllowed(void);
-void __cdecl fcn_004e4e90(char* name);
+void __cdecl msx_StartMusicIfAllowed(char* name);
 void __cdecl gm_AddTime(char* t, int a, int b, int c);
 int __cdecl he_AimSensenmann(char* e);
 void __cdecl he_BroadcastReaperEvent(void);
@@ -81,7 +81,7 @@ void __cdecl EvtSensenmann(char* e)
 		return;
 	}
 	if (g_7749ec == 0) {
-		fcn_004e4e90("cd2\\DerSeuchenzug.mp3");
+		msx_StartMusicIfAllowed("cd2\\DerSeuchenzug.mp3");
 		if (tp_msx_CurrentTrack != 0) {
 			g_7749ec = 1;
 		}

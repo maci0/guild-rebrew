@@ -10,7 +10,7 @@ typedef struct {
 	int flags;			/* +0x1b4 */
 	char pad1b8[4];
 	unsigned short item;		/* +0x1bc */
-} Ent483f20;
+} AI_MASTER_ENTITY;
 
 /* SIZE 0x58, production entry */
 #include "production_goods.h"
@@ -37,7 +37,7 @@ typedef struct {
 	int kind;			/* +0x00 */
 	int ent;			/* +0x04 */
 	int entry;			/* +0x08 */
-} Plan483f20;
+} AI_MEISTER_PLAN;
 
 extern char* lpObjektePROT;			/* entity type table, entry stride 0x41 */
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -54,31 +54,31 @@ extern int* g_100dc48;
 extern unsigned short g_7f4c04;
 
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_004849b0(Ent483f20*, void*, void*);
-void __cdecl ai_ManageMeisterWorkers(Ent483f20*);
-void __cdecl fcn_00487970(void*, Ent483f20*, int);
-void __cdecl fcn_00487c00(void*, Ent483f20*, int);
-void __cdecl fcn_00487470(Ent483f20*);
-int __cdecl ai_CanProduceGood(Ent483f20*, PRODUCTION_GOODS_RECORD*, int);
-void __cdecl fcn_004868d0(Ent483f20*, PRODUCTION_GOODS_RECORD*);
+void __cdecl fcn_004849b0(AI_MASTER_ENTITY*, void*, void*);
+void __cdecl ai_ManageMeisterWorkers(AI_MASTER_ENTITY*);
+void __cdecl fcn_00487970(void*, AI_MASTER_ENTITY*, int);
+void __cdecl ai_RequestAusbauUpgrade(void*, AI_MASTER_ENTITY*, int);
+void __cdecl fcn_00487470(AI_MASTER_ENTITY*);
+int __cdecl ai_CanProduceGood(AI_MASTER_ENTITY*, PRODUCTION_GOODS_RECORD*, int);
+void __cdecl fcn_004868d0(AI_MASTER_ENTITY*, PRODUCTION_GOODS_RECORD*);
 int __cdecl fcn_005b1e40(int);
 void* __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(void*, int, int);
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_0047e220(void*);
-void __cdecl ai_PlanResourceRestock(Ent483f20*, void*);
-void __cdecl ai_CancelBlockedActions(Ent483f20*, int);
+void __cdecl ai_RequestProductionGoods(void*);
+void __cdecl ai_PlanResourceRestock(AI_MASTER_ENTITY*, void*);
+void __cdecl ai_CancelBlockedActions(AI_MASTER_ENTITY*, int);
 void __cdecl he_AssignActionSlot(int, int, unsigned short, int);
-void __cdecl ai_MeisterCollectTrans(Ent483f20*);
-void __cdecl ai_MeisterTrade(Ent483f20*, void*);
-void __cdecl fcn_00487f90(Plan483f20*);
+void __cdecl ai_MeisterCollectTrans(AI_MASTER_ENTITY*);
+void __cdecl ai_MeisterTrade(AI_MASTER_ENTITY*, void*);
+void __cdecl ai_DispatchMeisterAction(AI_MEISTER_PLAN*);
 int __cdecl wsprintfA(char*, char*, ...);
 
 #define type_entry(id) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(id)]))
 #define slot_at(id) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(id)])
 
 /* Runs the start preconditions and returns fcn_00486640's answer. */
-static __inline int can_start(Ent483f20* e, void* rec, PRODUCTION_GOODS_RECORD* p, int human)
+static __inline int can_start(AI_MASTER_ENTITY* e, void* rec, PRODUCTION_GOODS_RECORD* p, int human)
 {
 	char* type;
 	void* obj;
@@ -111,7 +111,7 @@ static __inline int can_start(Ent483f20* e, void* rec, PRODUCTION_GOODS_RECORD* 
 	return ai_CanProduceGood(e, p, human);
 }
 
-static __inline void start_production(Ent483f20* e, PRODUCTION_GOODS_RECORD* p, char* fmt, char* msg)
+static __inline void start_production(AI_MASTER_ENTITY* e, PRODUCTION_GOODS_RECORD* p, char* fmt, char* msg)
 {
 	p->flags |= 8;
 	fcn_004868d0(e, p);
@@ -122,12 +122,12 @@ static __inline void start_production(Ent483f20* e, PRODUCTION_GOODS_RECORD* p, 
 }
 
 /* ADDRESS: GOLDTL 0x00483f20 */
-void __cdecl fcn_00483f20(Ent483f20* e)
+void __cdecl ai_RunWorkshopMaster(AI_MASTER_ENTITY* e)
 {
 	PRODUCTION_GOODS_RECORD* prod;
 	PRODUCTION_GOODS_RECORD* scan;
 	Res483f20* res;
-	Plan483f20 plan;
+	AI_MEISTER_PLAN plan;
 	char* slot;
 	char* type;
 	char* p;
@@ -155,7 +155,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 	fcn_004849b0(e, rec, stk);
 	ai_ManageMeisterWorkers(e);
 	fcn_00487970(stk, e, 0x4b);
-	fcn_00487c00(stk, e, 0x19);
+	ai_RequestAusbauUpgrade(stk, e, 0x19);
 	fcn_00487470(e);
 
 	if (g_7f4c04 == 8 || g_7f4c04 == 0xd) {
@@ -246,7 +246,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 	e->item = 0;
 
 after_start:
-	fcn_0047e220(rec);
+	ai_RequestProductionGoods(rec);
 	ai_PlanResourceRestock(e, rec);
 
 	for (prod = g_100d0c0, i = 0; i < g_100b0ac; i++, prod = &g_100d0c0[i]) {
@@ -354,10 +354,10 @@ after_start:
 				continue;
 			}
 			plan.kind = 0x8c;
-			fcn_00487f90(&plan);
+			ai_DispatchMeisterAction(&plan);
 		} else if ((prod->flags & 8) != 0) {
 			plan.kind = 4;
-			fcn_00487f90(&plan);
+			ai_DispatchMeisterAction(&plan);
 		} else {
 			continue;
 		}

@@ -12,7 +12,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_OpenShopTradePanel(int);
-void __cdecl fcn_005ba8f0(int);
+void __cdecl d2_OpenLagerTradeMode2(int);
 
 void __cdecl d2_RunKontorTradeHud(int a)
 {
@@ -29,7 +29,7 @@ void __cdecl d2_RunKontorTradeHud(int a)
 				d2_OpenShopTradePanel(a);
 			}
 			else if (g_7746a0 == y) {
-				fcn_005ba8f0(a);
+				d2_OpenLagerTradeMode2(a);
 			}
 		}
 	}

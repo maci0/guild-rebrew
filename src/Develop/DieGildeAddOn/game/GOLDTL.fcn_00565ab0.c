@@ -26,7 +26,7 @@ void __cdecl evt_RequestScriptExit(char*);
 char* __cdecl evt_LoadScript(char*);
 int __cdecl vfs_LookupPath(char*, void*, void**);
 int __cdecl fcn_00428340(char*, int, ...);
-void __cdecl fcn_004c5aa0(int, char, char, short, char, int);
+void __cdecl cm_SendChainRecordLookup(int, char, char, short, char, int);
 char* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl cm_SendSellObjekt(int, int, unsigned int, int, char, int);
 void __cdecl cm_SendCopyEntityData(int);
@@ -137,7 +137,7 @@ void __cdecl he_UpdateErnten(char* ev)
 							int k;
 							int c;
 
-							fcn_004c5aa0(*(int*) (ev + 0xac), *(char*) (v5 + 8), *(char*) (v5 + 9), 0, 0, -1);
+							cm_SendChainRecordLookup(*(int*) (ev + 0xac), *(char*) (v5 + 8), *(char*) (v5 + 9), 0, 0, -1);
 							rec = fcn_00502cd0(*(int*) (v4 + 0x5d), 2, 0, 0x2a, 6);
 							if (rec != 0) {
 								cm_SendSellObjekt(*(int*) (rec + 2), -1, *(unsigned short*) (v5 + 0xa),
@@ -190,7 +190,7 @@ void __cdecl he_UpdateErnten(char* ev)
 						}
 					case -1:
 					case -2:
-						fcn_004c5aa0(*(int*) (ev + 0xac), *(char*) (v5 + 8), *(char*) (v5 + 9),
+						cm_SendChainRecordLookup(*(int*) (ev + 0xac), *(char*) (v5 + 8), *(char*) (v5 + 9),
 						             *(unsigned short*) (v5 + 0xa), 0, *(int*) (ev + 4));
 						he_FreeAction(ev);
 						return;

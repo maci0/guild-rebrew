@@ -21,7 +21,7 @@ int __cdecl cm_GetCommandStatus(int a);
 void __cdecl fcn_00535960(void);
 void __cdecl io_FormatTextBuffer(char* out, int id, ...);
 int __cdecl fcn_00526120(char* text, int a);
-int __cdecl fcn_00471e30(int dlg);
+int __cdecl d2_DestroyForm(int dlg);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl d2_CheckActionBlocker(int a, int b);
 
@@ -96,7 +96,7 @@ int __cdecl fcn_005d6c50(int actor, int a1)
         if (g_14ce8e0 != 0)
             g_774654 = 1;
         if (main_RunFrameLoop((void*) fcn_005d6c50, 0x657c7) == 0) {
-            fcn_00471e30(dlg);
+            d2_DestroyForm(dlg);
             return *(int*) (frame + 0);
         }
     }

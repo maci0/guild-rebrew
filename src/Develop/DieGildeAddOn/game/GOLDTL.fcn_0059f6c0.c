@@ -34,7 +34,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
 int __cdecl fcn_005cd440(Req*, char*, int, void*);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_RunTalenteDialog(int, int, int);
 void __cdecl d2_OpenPaymentTargetPicker(int);
 void __cdecl fcn_005bf0d0(void);
@@ -104,7 +104,7 @@ void __cdecl d2_RunSabotageActionsHud(int entity, int mode)
 					req.id = 0x727;
 					io_FormatTextBuffer(text, 0x1707);
 					fcn_005cd440(&req, text, 0, (void*) fcn_005bf9e0);
-					fcn_00532ef0();
+					d3_EndCameraAndUiMode();
 				}
 				else if (g_7746a0 == c) {
 					d2_RunTalenteDialog(entity, mode, 2);

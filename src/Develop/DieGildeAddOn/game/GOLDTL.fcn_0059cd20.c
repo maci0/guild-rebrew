@@ -13,7 +13,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenMeisterbriefDialog(int);
 void __cdecl d2_ShowPersonalbuch(int, char*);
-void __cdecl fcn_005ada30(int);
+void __cdecl d2_RunDiebesgildeInfoDialog(int);
 
 void __cdecl d2_RunGildeInfoHud(int a)
 {
@@ -34,7 +34,7 @@ void __cdecl d2_RunGildeInfoHud(int a)
 				d2_ShowPersonalbuch(a, g_6aa34c);
 			}
 			else if (g_7746a0 == z) {
-				fcn_005ada30(a);
+				d2_RunDiebesgildeInfoDialog(a);
 			}
 		}
 	}

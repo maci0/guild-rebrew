@@ -4,7 +4,7 @@
 
 void __cdecl fcn_00438af0(unsigned char);
 
-void __cdecl fcn_00439c60(char* camera)
+void __cdecl d3_SetActiveCamera(char* camera)
 {
 	if (camera == d3_ActiveCamera) {
 		return;

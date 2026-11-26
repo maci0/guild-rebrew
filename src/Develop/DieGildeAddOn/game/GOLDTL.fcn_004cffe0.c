@@ -1,5 +1,5 @@
 extern int g_68b7a0;
-int __cdecl fcn_00471e30(int);
+int __cdecl d2_DestroyForm(int);
 char __cdecl fcn_00443e10(char*, int*);
 int __cdecl fcn_00470820(int, int, char*);
 
@@ -11,7 +11,7 @@ void __cdecl fcn_004cffe0(int unused, void* object)
     int cy;
 
     if (g_68b7a0 != -1) {
-        fcn_00471e30(g_68b7a0);
+        d2_DestroyForm(g_68b7a0);
         g_68b7a0 = -1;
     }
     if (fcn_00443e10((char*) *(int*)((char*) *(int*)((char*) object + 0x184) + 0x34), info) != 0) {

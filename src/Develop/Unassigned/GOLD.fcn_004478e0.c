@@ -4,7 +4,7 @@ void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_004475f0(char*);
 void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
-void __cdecl fcn_00439c60(char*);
+void __cdecl d3_SetActiveCamera(char*);
 void __cdecl d3sm_Destroy(void*);
 void __cdecl fcn_0045e610(void*, int);
 void* __cdecl d3sm_Create(int, int, int);
@@ -182,7 +182,7 @@ char __cdecl d3_SelectSceneContext(int index, char force)
         if (camera != 0) {
             d3_SetNodePosition(camera, (float*)(next + 0x8c));
             d3_SetObjectRotation((char*)I32(0x6338c4), (float*)(next + 0x98));
-            fcn_00439c60((char*)I32(0x6338c4));
+            d3_SetActiveCamera((char*)I32(0x6338c4));
         }
         if (force) {
             return 1;

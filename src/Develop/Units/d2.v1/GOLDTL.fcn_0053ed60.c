@@ -58,7 +58,7 @@ void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_0053e9a0(void);
 int __cdecl fcn_0053dc20(void);
 int __cdecl fcn_004130b0(char*, char*);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d3_DestroyObject(char*);
 void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
 
@@ -252,10 +252,10 @@ accepted:
 		}
 	}
 	if (win2 != -1) {
-		fcn_00471e30(win2);
+		d2_DestroyForm(win2);
 	}
 	if (win1 != -1) {
-		fcn_00471e30(win1);
+		d2_DestroyForm(win1);
 	}
 	if (obj != 0) {
 		fcn_004130b0(obj, (char*) 0x6a415c);

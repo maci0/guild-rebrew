@@ -36,7 +36,7 @@ typedef struct ScrollSlot {
 #define g_entity_type(t) ((unsigned char*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(t)]))
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005b0230 */
-void __cdecl fcn_005b0230(char* town)
+void __cdecl d2_BuildCityScrollMap(char* town)
 {
 	ScrollSlot* slot;
 	ScrollSlot tmp;

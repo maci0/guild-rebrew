@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-int __cdecl fcn_004c6d70(int*, char*);
+int __cdecl cm_RequestSetCutsceneMaster(int*, char*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 
@@ -30,7 +30,7 @@ int __cdecl cut_CheckMaster(int* event)
 		}
 		if (e != 0 && *(int*) (e + 4) != event[3]) {
 			fcn_0064d41a(buf, "cut_CheckMaster(): new master for id %i => %i", event[0], *(int*) (e + 4));
-			r = fcn_004c6d70(event, e);
+			r = cm_RequestSetCutsceneMaster(event, e);
 			while (cm_GetCommandStatus(r) == 0)
 				fcn_00535960();
 			return 0;

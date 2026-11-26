@@ -25,7 +25,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl cm_SendCopyEntityData(void*);
@@ -37,7 +37,7 @@ int __cdecl main_RunFrameLoop(int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 
-void __cdecl fcn_005b3b60(void)
+void __cdecl d2_RunTheatreCutscenePicker(void)
 {
 	char msg[0xf8];
 	char m[0x114];
@@ -257,5 +257,5 @@ weather_send:
 			}
 		}
 	}
-	fcn_00471e30(item[7]);
+	d2_DestroyForm(item[7]);
 }

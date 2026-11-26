@@ -15,7 +15,7 @@ void __cdecl fcn_00472380(int a, int b, int c, int d);
 void __cdecl io_FormatTextBuffer(char* out, int id, ...);
 int __cdecl fcn_00526120(char* buf, int a);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
-int __cdecl fcn_00471e30(int dlg);
+int __cdecl d2_DestroyForm(int dlg);
 int __cdecl d2_GetControlValue(int h);
 int __cdecl d2_CheckActionBlocker(void* tbl, int player);
 int __cdecl gm_CalcBecircenFavor(void* tbl, int a0, int player);
@@ -79,6 +79,6 @@ int __cdecl d2_ShowBecircenDialog(int entity)
         if (main_RunFrameLoop((void*) 0x5d6ea0, 0x657c7) == 0)
             break;
     }
-    fcn_00471e30(dlg);
+    d2_DestroyForm(dlg);
     return result;
 }

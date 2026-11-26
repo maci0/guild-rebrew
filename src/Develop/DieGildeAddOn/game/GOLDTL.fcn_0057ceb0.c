@@ -25,7 +25,7 @@ float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
 /* ADDRESS: GOLDTL 0x0057ceb0 */
-void __cdecl fcn_0057ceb0(char* entity)
+void __cdecl he_AwardEvent0a1Yield(char* entity)
 {
 	char buf[0x200];
 	char msg[0x100];

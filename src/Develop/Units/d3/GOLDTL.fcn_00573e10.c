@@ -8,7 +8,7 @@ void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
 void __cdecl d3_SetSubtreeVisible(int, int);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_004550b0(int, int);
+void __cdecl d3_RemoveSubTreeFromCellTree(int, int);
 void __cdecl d3_DestroyObject(int);
 int __cdecl gm_SearchTable67(int);
 void __cdecl d3_CollectObjectCallback(void);
@@ -65,7 +65,7 @@ void __cdecl fcn_00573e10(int action)
 			slot = (int) list.items[idx];
 			if ((*(unsigned char*) (slot + 0x217) & 1)
 			    && g_773dd8 != 0)
-				fcn_004550b0(slot, g_773dd8);
+				d3_RemoveSubTreeFromCellTree(slot, g_773dd8);
 			slot = (int) list.items[idx];
 			*(unsigned char*) (slot + 0x217) &= 0xfe;
 next_mark:
@@ -91,7 +91,7 @@ next_mark:
 		    || (*(unsigned char*) (item + 0x217) & 1)) {
 			if ((*(unsigned char*) (item + 0x217) & 1)
 			    && g_773dd8 != 0)
-				fcn_004550b0(item, g_773dd8);
+				d3_RemoveSubTreeFromCellTree(item, g_773dd8);
 			item = (int) list.items[idx];
 			*(int*) (item + 0x220) = 5;
 			item = (int) list.items[idx];
@@ -151,7 +151,7 @@ release:
 		d3_SetSubtreeVisible(*(int*) (slot + 0x61), 1);
 	if (obj != 0) {
 		if (g_773dd8 != 0)
-			fcn_004550b0(obj, g_773dd8);
+			d3_RemoveSubTreeFromCellTree(obj, g_773dd8);
 		d3_DestroyObject(obj);
 	}
 done:

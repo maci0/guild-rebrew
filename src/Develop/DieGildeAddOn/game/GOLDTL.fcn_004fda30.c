@@ -13,51 +13,51 @@ void __cdecl fcn_004fdd70(HEAD_SET* hs);
 /* ADDRESS: GOLDTL 0x004fda30 */
 HEAD_SET* __cdecl gm_SelectEntityHeadSet(unsigned int entityIndex)
 {
-	char* v4;
+	char* srcName;
 	HEAD_SET* headSet;
 	int* headEntry;
-	int v3;
-	int v5;
-	int v8;
-	unsigned char v1;
-	char v2;
+	int entOff;
+	int idx;
+	int portraitId;
+	unsigned char roleId;
+	char ch;
 
 	headSet = 0;
-	v5 = 0;
-	v3 = entityIndex * 0x21c;
-	v1 = *(unsigned char*) (v3 + 0x7f4e04);
-	if (!v1 && *(unsigned short*) (v3 + 0x7f4caa) < *(float*) (v3 + 0x7f4cc0)) {
-		if (*(char*) (v3 + 0x7f4ca9)) {
+	idx = 0;
+	entOff = entityIndex * 0x21c;
+	roleId = *(unsigned char*) (entOff + 0x7f4e04);
+	if (!roleId && *(unsigned short*) (entOff + 0x7f4caa) < *(float*) (entOff + 0x7f4cc0)) {
+		if (*(char*) (entOff + 0x7f4ca9)) {
 			return (HEAD_SET*) 0x690600;
 		}
 		return (HEAD_SET*) 0x6905b8;
 	}
-	v4 = (char*) (v3 + 0x7f4e94);
-	if (*(char*) (v3 + 0x7f4e94) && (v8 = *(int*) (v3 + 0x7f4e2c)) != -1) {
+	srcName = (char*) (entOff + 0x7f4e94);
+	if (*(char*) (entOff + 0x7f4e94) && (portraitId = *(int*) (entOff + 0x7f4e2c)) != -1) {
 		*(int*) 0x773d60 = (*(int*) 0x773d60 + 1) & 0x80000007;
 		if (*(int*) 0x773d60 <= -1) {
 			*(int*) 0x773d60 = (*(int*) 0x773d60 - 1 | 0xfffffff8) + 1;
 		}
-		v3 = *(int*) 0x773d60 * 0x44;
-		v5 = v3 - (int) v4;
+		entOff = *(int*) 0x773d60 * 0x44;
+		idx = entOff - (int) srcName;
 		do {
-			v2 = *v4;
-			v4[v5 + 0x99ed64] = v2;
-			v4 = v4 + 1;
-		} while (v2);
-		v8 -= 0x639;
-		*(int*) (v3 + 0x99ed94) = v8;
-		*(int*) (v3 + 0x99ed98) = v8;
-		*(int*) (v3 + 0x99ed9c) = v8;
-		*(int*) (v3 + 0x99eda0) = v8;
-		return (HEAD_SET*) (v3 + 0x99ed60);
+			ch = *srcName;
+			srcName[idx + 0x99ed64] = ch;
+			srcName = srcName + 1;
+		} while (ch);
+		portraitId -= 0x639;
+		*(int*) (entOff + 0x99ed94) = portraitId;
+		*(int*) (entOff + 0x99ed98) = portraitId;
+		*(int*) (entOff + 0x99ed9c) = portraitId;
+		*(int*) (entOff + 0x99eda0) = portraitId;
+		return (HEAD_SET*) (entOff + 0x99ed60);
 	}
-	if (*(char*) (v3 + 0x7f4ca2) == 0x11) {
+	if (*(char*) (entOff + 0x7f4ca2) == 0x11) {
 		return (HEAD_SET*) ((unsigned short) gm_RandomMod(3) * 0x44 + 0x6960a8);
 	}
-	if (v1) {
-		if (*(char*) (v3 + 0x7f4ca9)) {
-			if (*(char*) (v3 + 0x7f4ca9) == 1) {
+	if (roleId) {
+		if (*(char*) (entOff + 0x7f4ca9)) {
+			if (*(char*) (entOff + 0x7f4ca9) == 1) {
 				headSet = (HEAD_SET*) 0x693228;
 			}
 		} else {
@@ -68,18 +68,18 @@ HEAD_SET* __cdecl gm_SelectEntityHeadSet(unsigned int entityIndex)
 			if (*headEntry == 0) {
 				break;
 			}
-			if (*headEntry == v1) {
-				fcn_004fdd70(&headSet[v5]);
-				return &headSet[v5];
+			if (*headEntry == roleId) {
+				fcn_004fdd70(&headSet[idx]);
+				return &headSet[idx];
 			}
-			v5++;
+			idx++;
 			headEntry = &headEntry[0x11];
-		} while (v5 < 0x5f);
-		return &headSet[v5];
+		} while (idx < 0x5f);
+		return &headSet[idx];
 	}
-	if (*(unsigned char*) (v3 + 0x7f4e05)) {
-		if (*(char*) (v3 + 0x7f4ca9)) {
-			if (*(char*) (v3 + 0x7f4ca9) == 1) {
+	if (*(unsigned char*) (entOff + 0x7f4e05)) {
+		if (*(char*) (entOff + 0x7f4ca9)) {
+			if (*(char*) (entOff + 0x7f4ca9) == 1) {
 				headSet = (HEAD_SET*) 0x690f98;
 			}
 		} else {
@@ -88,23 +88,23 @@ HEAD_SET* __cdecl gm_SelectEntityHeadSet(unsigned int entityIndex)
 		headEntry = (int*) headSet;
 		do {
 			if (*headEntry == 0) {
-				if (v5 <= 0x22) {
-					return &headSet[v5];
+				if (idx <= 0x22) {
+					return &headSet[idx];
 				}
 				break;
 			}
-			if (*headEntry == *(unsigned char*) (v3 + 0x7f4e05)) {
-				fcn_004fdd70(&headSet[v5]);
-				return &headSet[v5];
+			if (*headEntry == *(unsigned char*) (entOff + 0x7f4e05)) {
+				fcn_004fdd70(&headSet[idx]);
+				return &headSet[idx];
 			}
-			v5++;
+			idx++;
 			headEntry = &headEntry[0x11];
-		} while (v5 < 0x23);
+		} while (idx < 0x23);
 	}
-	if (!*(char*) (v3 + 0x7f4ca9)) {
+	if (!*(char*) (entOff + 0x7f4ca9)) {
 		return (HEAD_SET*) 0x690648;
 	}
-	if (*(char*) (v3 + 0x7f4ca9) != 1) {
+	if (*(char*) (entOff + 0x7f4ca9) != 1) {
 		return headSet;
 	}
 	return (HEAD_SET*) 0x690f98;

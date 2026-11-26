@@ -6,7 +6,7 @@ void __cdecl fcn_004bdfb0(float* ox, float* oy, float* position, char* object, c
 {
 	float v[4];
 
-	fcn_00455540(object, position, v);
+	d3_TransformToObjectSpace(object, position, v);
 #ifdef REBREW_GOLD
 	*ox = (v[0] - *(float*) (*ctx + 0x90)) / *(float*) (*ctx + 0xa0);
 	*oy = (v[2] - *(float*) (*ctx + 0x98)) / *(float*) (*ctx + 0xb8);

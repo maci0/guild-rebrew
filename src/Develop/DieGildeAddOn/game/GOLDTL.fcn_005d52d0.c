@@ -16,7 +16,7 @@ int __cdecl cm_SendSetAttribute(void);
 int __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -32,13 +32,13 @@ typedef struct {
 	int sel;
 	int mode;
 	int n;
-} DlgSel;
+} DivorceDlgSel;
 
 /* ADDRESS: GOLDTL 0x005d52d0 */
-int __cdecl fcn_005d52d0(char* p)
+int __cdecl d2_RunDivorceAction(char* p)
 {
 	float w;
-	DlgSel s;
+	DivorceDlgSel s;
 	char* obj;
 	int dlg;
 	int m;
@@ -122,10 +122,10 @@ tail:
 			g_774654 = 1;
 			s.mode = 2;
 		}
-		if (main_RunFrameLoop(fcn_005d52d0, 0x657c7) == 0) {
+		if (main_RunFrameLoop(d2_RunDivorceAction, 0x657c7) == 0) {
 			break;
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return s.mode;
 }

@@ -46,7 +46,7 @@ Node* __cdecl he_StartHandlungSearch(int, int, int);
 #include "GOLDTL.fcn_005cb440_gconf.h"
 
 /* ADDRESS: GOLDTL 0x005cb440 */
-int __cdecl fcn_005cb440(Ent* subject, int capacity, Row* rows, int a3)
+int __cdecl d2_CollectDynastyCandidates(Ent* subject, int capacity, Row* rows, int filterKind)
 {
 	Ent* e;
 	Node* p;
@@ -158,7 +158,7 @@ next:
 	o = rows;
 	for (i = 0; i < n; i++) {
 		d2_BuildPersonStatusDesc(o);
-		o->val = fcn_005cf720(subject->id, o->ent->id, a3, 0);
+		o->val = fcn_005cf720(subject->id, o->ent->id, filterKind, 0);
 		o = (Row*) ((char*) o + 0x38);
 	}
 	return n;

@@ -74,11 +74,11 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl main_RunFrameLoop(void*, int);
-char __cdecl fcn_00507400(int, int);
+char __cdecl gm_GetRangeStatId(int, int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005db8e0(Ent* e, Req* p)
+int __cdecl d2_ShowChooseProfessionDialog2(Ent* e, Req* p)
 {
 	int colw;
 	int n;
@@ -114,7 +114,7 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 		((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc = 0x56;
 	}
 	result = 0;
-	while (main_RunFrameLoop(fcn_005db8e0, main_LoopFlags) != 0) {
+	while (main_RunFrameLoop(d2_ShowChooseProfessionDialog2, main_LoopFlags) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_14ce8d8 != 0) {
@@ -126,7 +126,7 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 					m.f58 = e->handle;
 					m.f8 = p->handle;
 					m.fc = -1;
-					m.b5c = fcn_00507400(i + 1, result);
+					m.b5c = gm_GetRangeStatId(i + 1, result);
 					m.f60 = n;
 					cm_SendCopyEntityData(&m);
 					g_774654 = result;
@@ -135,6 +135,6 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 			}
 		}
 	}
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	return result;
 }

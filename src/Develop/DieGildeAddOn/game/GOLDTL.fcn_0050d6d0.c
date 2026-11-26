@@ -12,7 +12,7 @@ extern float g_662914, g_662a98;
 
 int __cdecl gm_QueryEntitySum(int, unsigned char);
 int __cdecl gm_WalkEntityChain(unsigned short);
-int __cdecl fcn_0050d640(int, int, int, char*);
+int __cdecl he_GetActiveKrediteByLender(int, int, int, char*);
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl gm_CheckPrivilege(int, unsigned short*, unsigned int*);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
@@ -85,7 +85,7 @@ unsigned int __cdecl fcn_0050d6d0(int a0, unsigned short* a1, unsigned int a2,
 				return 3;
 			}
 		}
-		if (fcn_0050d640(*(unsigned short*) (a0 + 0x27), 0, 0xffff, v15) < 9) {
+		if (he_GetActiveKrediteByLender(*(unsigned short*) (a0 + 0x27), 0, 0xffff, v15) < 9) {
 			memset(a3, 0, a2 * 12);
 			total = gm_WalkEntityChain(*a1);
 			memset(v16, 0, 0x220);

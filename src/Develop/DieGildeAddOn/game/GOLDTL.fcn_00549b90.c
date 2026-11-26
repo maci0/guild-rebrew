@@ -7,7 +7,7 @@ extern short g_7f4c0c;
 
 void __cdecl gm_AddTime(void* clock, int arg2, int arg3, int arg4);
 int __cdecl gm_RandomMod(int range);
-int __cdecl fcn_004c5620(char a1, unsigned char* e);
+int __cdecl cm_SendSetHE(char a1, unsigned char* e);
 
 /* ADDRESS: GOLDTL 0x00549b90 */
 void __cdecl he_StartElectionCampaign(char* p)
@@ -22,5 +22,5 @@ void __cdecl he_StartElectionCampaign(char* p)
 	*(int*) (p + 0xb6) = 0;
 	*(short*) (p + 0xb4) = (short) (gm_RandomMod(4) + 0x13);
 	*(int*) (p + 0xc0) = 1;
-	*(int*) (p + 0x84) = fcn_004c5620(0, (unsigned char*) p);
+	*(int*) (p + 0x84) = cm_SendSetHE(0, (unsigned char*) p);
 }

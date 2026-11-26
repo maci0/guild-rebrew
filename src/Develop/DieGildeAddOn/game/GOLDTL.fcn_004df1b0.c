@@ -10,7 +10,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl gm_GenerateShuffledIndices(unsigned char, int*);
 int __cdecl d2_GetWindowListItem(int, int, int);
 unsigned int __cdecl cut_RandMod(unsigned int);
@@ -79,7 +79,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
                 }
             }
         }
-        fcn_00471e30(dialog);
+        d2_DestroyForm(dialog);
         return;
     case 1:
         if (*(int*) (participant + 0x10) != action[5]) return;
@@ -104,7 +104,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
                 }
             }
         }
-        fcn_00471e30(dialog);
+        d2_DestroyForm(dialog);
         return;
     case 2:
         if (*(int*) (participant + 0x10) != action[5]) return;
@@ -138,7 +138,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
                 }
             }
         }
-        fcn_00471e30(dialog);
+        d2_DestroyForm(dialog);
         return;
     case 3:
         if (*(int*) (participant + 0x10) != action[10]) return;
@@ -164,7 +164,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
                 }
             }
         }
-        fcn_00471e30(dialog);
+        d2_DestroyForm(dialog);
         return;
     case 6:
         if (*(int*) (participant + 0x10) != action[6]) return;
@@ -189,7 +189,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
                 }
             }
         }
-        fcn_00471e30(dialog);
+        d2_DestroyForm(dialog);
         return;
     case 4:
         value = *(int*) (participant + 0x10);
@@ -217,7 +217,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
                 }
             }
         }
-        fcn_00471e30(dialog);
+        d2_DestroyForm(dialog);
         return;
     case 5:
         if (*(int*) (participant + 0x10) != action[7]) return;
@@ -263,7 +263,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
                 }
             }
         }
-        fcn_00471e30(dialog);
+        d2_DestroyForm(dialog);
         return;
     }
 }

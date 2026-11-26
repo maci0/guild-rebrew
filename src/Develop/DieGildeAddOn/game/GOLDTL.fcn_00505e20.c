@@ -66,7 +66,7 @@ void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_SendSetGebBesitzer(int, int, int);
 void __cdecl cm_RequestSetWohnsitz(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, Order*);
+int __cdecl cm_SendSetHE(int, Order*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_SendTraceEnd(char*);
 
@@ -99,7 +99,7 @@ void __cdecl gm_BuyBuilding(int search, int buyer, int price, Order* o, int noti
 	if (o != 0) {
 		o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 		gm_AddTime(&o->stamp, 0, 0, 1);
-		o->event = fcn_004c5620(-1, o);
+		o->event = cm_SendSetHE(-1, o);
 	}
 	cm_RequestChangeBits(s->id, 0x5a, 2, 0, 2);
 	cm_SendTraceEnd("buy_building");

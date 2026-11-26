@@ -13,7 +13,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl gm_GenerateShuffledIndices(int, int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 void __cdecl he_InitStreife(char* e)
 {
@@ -69,5 +69,5 @@ void __cdecl he_InitStreife(char* e)
 	*(int*) (e + 0xd8) = 0;
 	e[0xdc] = 0;
 	*(int*) (e + 0xd4) = -1;
-	*(int*) (e + 0x84) = fcn_004c5620(0, e);
+	*(int*) (e + 0x84) = cm_SendSetHE(0, e);
 }

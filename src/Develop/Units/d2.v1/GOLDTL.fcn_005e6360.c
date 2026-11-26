@@ -11,7 +11,7 @@ extern int g_14ce8e0;
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl fcn_005263d0(int, int, int);
 int __cdecl fcn_005cd440(char*, int, int, void*);
 int __cdecl fcn_00470820(int, int, char*);
@@ -30,7 +30,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e6360 */
 void __cdecl fcn_005e6360(char* entity)
@@ -44,7 +44,7 @@ void __cdecl fcn_005e6360(char* entity)
     int amount;
 
     if (*(unsigned short*) (entity + 0x27) == 0xffff) {
-        fcn_00532ef0();
+        d3_EndCameraAndUiMode();
         return;
     }
     if (*(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_flags & 0x20) {
@@ -59,7 +59,7 @@ void __cdecl fcn_005e6360(char* entity)
     query[2] = g_666018; query[3] = g_66601c;
     target = (char*) fcn_005cd440((char*) query, *(int*) 0x14b5b44, 0, 0);
     if (target == 0) {
-        fcn_00532ef0();
+        d3_EndCameraAndUiMode();
         return;
     }
     dialog = fcn_00470820(0, 0, "Locations\\zigeuner\\blutrache");
@@ -96,6 +96,6 @@ void __cdecl fcn_005e6360(char* entity)
             }
         }
     } while (main_RunFrameLoop((void*) fcn_005e6360, 0x677c7) != 0);
-    fcn_00471e30(dialog);
-    fcn_00532ef0();
+    d2_DestroyForm(dialog);
+    d3_EndCameraAndUiMode();
 }

@@ -3,7 +3,7 @@ extern char g_7f4ca4[];
 
 /* ADDRESS: GOLD 0x005414b0 */
 /* ADDRESS: GOLDTL 0x00549330 */
-void __cdecl fcn_00549330(char* p, int slotId)
+void __cdecl he_SetActionSubject(char* p, int slotId)
 {
 	*(unsigned short*) (p + 8) = (unsigned short) slotId;
 	if (slotId != 0xffff) {

@@ -20,7 +20,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
 int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 
 void __cdecl he_InitDunkleEcke(char* u)
 {
@@ -57,11 +57,11 @@ void __cdecl he_InitDunkleEcke(char* u)
 				cm_RequestChangeAttribute();
 				cm_SendLogAction(g_67ec2c);
 				*(int*) (u + 0xac) = cm_SendAllocCharacter(0xe, *(int*) (o + 1), -1, 0, 0, 0, "DunkleEcke");
-				*(int*) (u + 0x84) = fcn_004c5620(0, u);
+				*(int*) (u + 0x84) = cm_SendSetHE(0, u);
 				cm_SendTraceEnd(g_67ec2c);
 				return;
 			}
 		}
 	}
-	*(int*) (u + 0x84) = fcn_004c5620(-1, u);
+	*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
 }

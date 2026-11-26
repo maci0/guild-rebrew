@@ -15,7 +15,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_004b5530(int, int);
 
 int __cdecl fcn_0053cf30(void)
@@ -44,7 +44,7 @@ int __cdecl fcn_0053cf30(void)
 			}
 		}
 		if (h != -1) {
-			fcn_00471e30(h);
+			d2_DestroyForm(h);
 		}
 	}
 	if (r != 0) {

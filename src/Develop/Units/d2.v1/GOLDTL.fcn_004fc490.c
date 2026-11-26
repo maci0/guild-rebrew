@@ -15,7 +15,7 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_SetForm(int h, int b);
 void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl main_RunFrameLoop(void* fn, int y);
-void __cdecl fcn_00471e30(int h);
+void __cdecl d2_DestroyForm(int h);
 
 void __cdecl d2_ShowTaxStatistics(void)
 {
@@ -34,5 +34,5 @@ void __cdecl d2_ShowTaxStatistics(void)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) d2_ShowTaxStatistics, 0x677c7));
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

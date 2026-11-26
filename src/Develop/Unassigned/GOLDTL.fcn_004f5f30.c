@@ -27,7 +27,7 @@ extern Pair_99f800 g_99f800[0x800];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_004c5870(int id, int v);
+void __cdecl cm_SendRemoveStraftat(int id, int v);
 void __cdecl he_NotifyStraftatExpired(char* o, char* p);
 
 int __cdecl fcn_004f5f30(int target, int count, int* ids)
@@ -73,7 +73,7 @@ int __cdecl fcn_004f5f30(int target, int count, int* ids)
 					}
 				}
 			}
-			fcn_004c5870(id, 1);
+			cm_SendRemoveStraftat(id, 1);
 			n++;
 		}
 	}

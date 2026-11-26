@@ -17,7 +17,7 @@ double __cdecl gm_RandomFloat01(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl gm_AddTime(Time14* t, int hours, int minutes, int seconds);
 void __cdecl cm_SendCopyEntityData(void* msg);
-int __cdecl fcn_004c6a00(void* msg);
+int __cdecl cm_SendRandomEventState(void* msg);
 
 extern int gm_GameTime;
 extern int g_7f4c04;
@@ -184,5 +184,5 @@ state3:
 send_state:
 	memcpy(msg, st, sizeof(st));
 	msg[9] = 0x73657420;
-	fcn_004c6a00(msg);
+	cm_SendRandomEventState(msg);
 }

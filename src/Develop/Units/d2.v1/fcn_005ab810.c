@@ -39,8 +39,8 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005ab810 */
 void __cdecl fcn_005ab810(char* e, int unused)
@@ -118,7 +118,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 				}
 			}
 		} while (main_RunFrameLoop((void*) fcn_005ab810, 0x677c7) != 0);
-		fcn_00471e30((int) dlg);
+		d2_DestroyForm((int) dlg);
 	} else {
 		q = &((struct house*) g_7f4ca0)[*(unsigned short*) (e + 0x27)];
 		if (q == 0) {
@@ -166,7 +166,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 				}
 			}
 		} while (main_RunFrameLoop((void*) fcn_005ab810, 0x677c7) != 0);
-		fcn_00471e30((int) dlg);
+		d2_DestroyForm((int) dlg);
 	}
-	fcn_00532ef0();
+	d3_EndCameraAndUiMode();
 }

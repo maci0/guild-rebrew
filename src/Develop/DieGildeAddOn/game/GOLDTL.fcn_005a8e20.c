@@ -47,11 +47,11 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl gm_CheckEntityStock(Player*, int, char);
 void __cdecl fcn_00526920(char*, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_OpenRathausGebInfo(void)
 {
@@ -106,7 +106,7 @@ void __cdecl d2_OpenRathausGebInfo(void)
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
-			fcn_00532ef0();
+			d3_EndCameraAndUiMode();
 		}
 		if (g_100f1dc != -1) {
 			for (i = 0; i < n; i++) {
@@ -117,5 +117,5 @@ void __cdecl d2_OpenRathausGebInfo(void)
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_OpenRathausGebInfo, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

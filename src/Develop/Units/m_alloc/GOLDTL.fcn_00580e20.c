@@ -47,7 +47,7 @@ extern char g_6a8448[];
 extern int g_7749fc;
 int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 int* __cdecl m_alloc(int size, char* tag);
-void __cdecl fcn_00580cf0(int*);
+void __cdecl d2_FreeTutorialNodes(int*);
 void __cdecl d2_IsTutorialStepAllowed(void);
 void __cdecl fcn_0057ef30(void);
 void __cdecl fcn_0057f030(void);
@@ -600,6 +600,6 @@ int* __cdecl d2_CreateTutorialChapter1(void)
 	g_7749fc = sb_LoadLocalizedSampleBank(g_6a8448, 0);
 	return first;
 fail:
-	fcn_00580cf0(first);
+	d2_FreeTutorialNodes(first);
 	return 0;
 }

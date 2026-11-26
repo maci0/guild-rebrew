@@ -31,7 +31,7 @@ struct tutor {
 
 extern int* g_665f08;
 
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 int __cdecl fcn_00470820(int, int, char*);
@@ -41,7 +41,7 @@ int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 
-int __cdecl fcn_005806d0(void)
+int __cdecl d2_ShowTutorialStep(void)
 {
 	int k;
 
@@ -54,7 +54,7 @@ int __cdecl fcn_005806d0(void)
 				((struct tutor*)g_665f08)->lesson->done();
 			}
 			if (((struct tutor*)g_665f08)->dlg != -1) {
-				fcn_00471e30(((struct tutor*)g_665f08)->dlg);
+				d2_DestroyForm(((struct tutor*)g_665f08)->dlg);
 				((struct tutor*)g_665f08)->dlg = -1;
 				((struct tutor*)g_665f08)->button = -1;
 				((struct tutor*)g_665f08)->state = 4;
@@ -68,7 +68,7 @@ int __cdecl fcn_005806d0(void)
 			io_AppendText("$C");
 		} else {
 			if (((struct tutor*)g_665f08)->dlg != -1) {
-				fcn_00471e30(((struct tutor*)g_665f08)->dlg);
+				d2_DestroyForm(((struct tutor*)g_665f08)->dlg);
 				((struct tutor*)g_665f08)->dlg = -1;
 				((struct tutor*)g_665f08)->button = -1;
 				((struct tutor*)g_665f08)->state = 4;

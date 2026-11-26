@@ -3,7 +3,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl cm_GetCommandStatus(int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 int __cdecl ch_StartMovement(unsigned int, unsigned int, int, int, int, char*);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -52,19 +52,19 @@ void __cdecl he_RunHeimsuchung(char* obj)
 		res = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0xac));
 		if (res == 0) {
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-			*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
+			*(int*) (obj + 0x84) = cm_SendSetHE(-1, obj);
 			return;
 		}
 		*(int*) (obj + 0xbc) = ch_StartMovement(*(unsigned int*) &lager[2],
 			*(unsigned int*) (res + 1), -1, 0, 1, "HEIMSUCHUNG");
-		fcn_004c5620(2, obj);
+		cm_SendSetHE(2, obj);
 		return;
 	case 2:
 		*(int*) (obj + 0xbc) = -1;
 		if (*(int*) (*(int*) &lager[0xc2] + 0x128) != 0) {
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 			gm_AddTime(obj + 0x52, 0, 4, 0);
-			*(int*) (obj + 0x84) = fcn_004c5620(2, obj);
+			*(int*) (obj + 0x84) = cm_SendSetHE(2, obj);
 			return;
 		}
 		if (gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0xac)) != 0) {
@@ -75,26 +75,26 @@ void __cdecl he_RunHeimsuchung(char* obj)
 				he_NotifyHeimsuchung(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (obj + 8)]),
 					(char*) h, obj + 0x52);
 			}
-			*(int*) (obj + 0x84) = fcn_004c5620(3, obj);
+			*(int*) (obj + 0x84) = cm_SendSetHE(3, obj);
 			return;
 		}
 		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-		*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(-1, obj);
 		return;
 	case 3:
 		if (*(int*) &lager[0xb6] == 0) {
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-			*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
+			*(int*) (obj + 0x84) = cm_SendSetHE(-1, obj);
 			return;
 		}
 		*(int*) (obj + 0xbc) = ch_StartMovement(*(unsigned int*) &lager[2],
 			*(unsigned int*) (*(int*) &lager[0xb6] + 1), -1, 0, 0, "HEIMSUCHUNG");
-		*(int*) (obj + 0x84) = fcn_004c5620(4, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(4, obj);
 		return;
 	case 4:
 		if (*(int*) &lager[0xb6] == 0) {
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-			*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
+			*(int*) (obj + 0x84) = cm_SendSetHE(-1, obj);
 			return;
 		}
 		if (*(int*) (*(int*) &lager[0xc2] + 0x128) != 0) {
@@ -104,7 +104,7 @@ void __cdecl he_RunHeimsuchung(char* obj)
 		}
 		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 		he_AssignActionSlot(0, 0, *lager, 0);
-		*(int*) (obj + 0x84) = fcn_004c5620(5, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(5, obj);
 		h = *(int*) (obj + 0xb8) >> 1;
 		if (h < 1) {
 			h = 1;
@@ -112,7 +112,7 @@ void __cdecl he_RunHeimsuchung(char* obj)
 		*(int*) (obj + 0x52) = *(int*) (obj + 0x52) + h + 1;
 		return;
 	case 5:
-		*(int*) (obj + 0x84) = fcn_004c5620(-1, obj);
+		*(int*) (obj + 0x84) = cm_SendSetHE(-1, obj);
 		return;
 	}
 }

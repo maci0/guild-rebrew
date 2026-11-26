@@ -14,7 +14,7 @@ void __cdecl d3_AnimateCameraToNode(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
 void __cdecl d2_SetBackgroundTexture(const char* name, int win);
@@ -60,7 +60,7 @@ void __cdecl fcn_005a31b0(char* building)
 			}
 			if (k != 1) {
 				if (idx != -1) {
-					fcn_00471e30(idx);
+					d2_DestroyForm(idx);
 				}
 				idx = fcn_00470820(0, 0, "Handel\\Handel_Stadtinfo");
 				d2_CenterDialogWindows(idx);
@@ -120,7 +120,7 @@ void __cdecl fcn_005a31b0(char* building)
 			*(float*) (windowData + 0x3a4) = (float) dt;
 		} while (main_RunFrameLoop((void*) fcn_005a31b0, 0x677c7));
 		if (idx != -1) {
-			fcn_00471e30(idx);
+			d2_DestroyForm(idx);
 		}
 	}
 	if (object != 0) {

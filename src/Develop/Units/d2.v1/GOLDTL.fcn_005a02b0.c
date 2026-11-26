@@ -12,7 +12,7 @@ extern char* g_77255c;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_GetOppositeStatIndex(int);
@@ -28,7 +28,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_00532ef0(void);
+int __cdecl d3_EndCameraAndUiMode(void);
 /* ADDRESS: GOLDTL 0x005a02b0 */
 int __cdecl fcn_005a02b0(void)
 {
@@ -123,6 +123,6 @@ int __cdecl fcn_005a02b0(void)
 			g_774654 = 1;
 		}
 	}
-	fcn_00471e30(h);
-	return fcn_00532ef0();
+	d2_DestroyForm(h);
+	return d3_EndCameraAndUiMode();
 }

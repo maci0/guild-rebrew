@@ -5,7 +5,7 @@ void __cdecl d2_BuildPersonStatusDesc(int *out);
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005cbe00 */
-int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
+int __cdecl d2_CollectDuelOrPruegelCandidates(int *src, unsigned limit, int *out, int filterKind)
 {
 	int *rec;
 	int found;
@@ -85,7 +85,7 @@ int __cdecl fcn_005cbe00(int *src, unsigned limit, int *out, int arg3)
 				d2_BuildPersonStatusDesc(out);
 				out[0xc] = fcn_005cf720(
 				    *(unsigned short *) src,
-				    *(unsigned short *) out[0], arg3, 0);
+				    *(unsigned short *) out[0], filterKind, 0);
 				out = (int *) ((char *) out + 0x38);
 				n--;
 			} while (n);

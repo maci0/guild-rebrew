@@ -16,9 +16,9 @@ void __cdecl cm_SendCopyEntityData(int a1);
 void __cdecl fcn_004c35f0(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
-int __cdecl fcn_00532ef0(void);
+int __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005ae000 */
 int __cdecl fcn_005ae000(char* obj)
@@ -86,7 +86,7 @@ int __cdecl fcn_005ae000(char* obj)
 			}
 		}
 	} while (main_RunFrameLoop(0x5ae000, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	d2_RestoreHudAfterDialog();
-	return fcn_00532ef0();
+	return d3_EndCameraAndUiMode();
 }

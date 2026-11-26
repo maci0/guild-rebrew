@@ -36,7 +36,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl gm_TryRecordCrime(int, int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* Inferred payment dialog callback; record accesses are slot +0, kind +2, id +4. */
 extern float g_664330;
@@ -116,6 +116,6 @@ int __cdecl fcn_005c02a0(char* entity)
                 g_774654 = 1;
         }
     } while (main_RunFrameLoop((void*)fcn_005c02a0, 0x677c7));
-    fcn_00471e30(dlg);
+    d2_DestroyForm(dlg);
     return result;
 }

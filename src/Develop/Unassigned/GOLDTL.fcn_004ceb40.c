@@ -18,7 +18,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-Slot2c* __cdecl fcn_004ceb40(char* a1)
+Slot2c* __cdecl gm_FindEntitySlot(char* entity)
 {
 	int n;
 	int i;
@@ -29,7 +29,7 @@ Slot2c* __cdecl fcn_004ceb40(char* a1)
 	for (i = 0; i < n; i++) {
 		p = &((Player35c*)g_9b0e20)[i];
 		for (j = 0; j < 16; j++) {
-			if (p->slots[j].id == *(int*) (a1 + 4)) {
+			if (p->slots[j].id == *(int*) (entity + 4)) {
 				return &p->slots[j];
 			}
 		}

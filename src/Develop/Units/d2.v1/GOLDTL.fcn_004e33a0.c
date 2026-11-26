@@ -15,7 +15,7 @@ extern unsigned short g_774970;
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 int __cdecl cut_RandMod(int a);
-void __cdecl fcn_004e4e90(int a);
+void __cdecl msx_StartMusicIfAllowed(int a);
 int __cdecl gm_LookupEntityRecordById(int id);
 void* __cdecl fcn_004e4ae0(char* name, int a);
 void __cdecl fcn_004e4730(char* name);
@@ -95,7 +95,7 @@ void __cdecl cut_RunAuction(int* arg)
 	bid[2] = 0;
 	bid[3] = 0;
 	result = cut_RandMod(3);
-	fcn_004e4e90(0);
+	msx_StartMusicIfAllowed(0);
 	if (npc == 0)
 		return;
 	proto = &((Building4e33a0*) lpGebaeudePROT)[*(unsigned char*) npc];
@@ -319,7 +319,7 @@ void __cdecl cut_RunAuction(int* arg)
 	cand = (int) fcn_004e44b0("cutscenes\\auktion\\Auktion_Outro.esc",
 	    0x6b5c60);
 	fcn_004e44f0(cand);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	fcn_004e48b0();
 	fcn_004e4610(escBehavior);
 	fcn_004e44f0(escBehavior);

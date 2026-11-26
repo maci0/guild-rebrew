@@ -1,7 +1,7 @@
 
 /* ADDRESS: GOLD 0x005043d0 */
 /* ADDRESS: GOLDTL 0x00507400 */
-int __cdecl fcn_00507400(int k, int b)
+int __cdecl gm_GetRangeStatId(int k, int b)
 {
 	int d;
 

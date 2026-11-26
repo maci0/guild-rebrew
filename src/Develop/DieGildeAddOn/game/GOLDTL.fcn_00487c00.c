@@ -16,11 +16,11 @@ void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 void __cdecl cm_SendTraceEnd(int a1);
 
 /* ADDRESS: GOLDTL 0x00487c00 */
-void __cdecl fcn_00487c00(char* a0, char* entity, int chance)
+void __cdecl ai_RequestAusbauUpgrade(char* slot, char* entity, int chance)
 {
 	unsigned char msg[0xf8];
 
-	if (a0 == 0) {
+	if (slot == 0) {
 		return;
 	}
 	if ((*(unsigned int*) (entity + 0x1c8) & 8) != 0) {
@@ -32,7 +32,7 @@ void __cdecl fcn_00487c00(char* a0, char* entity, int chance)
 	if (he_StartHandlungSearch(2, 0, 0x13, 3, *(int*) (*(char**) (entity + 0x16c) + 1)) != 0) {
 		return;
 	}
-	if (*(int*) (a0 + 0xe) >= 3) {
+	if (*(int*) (slot + 0xe) >= 3) {
 		return;
 	}
 	if (*(int*) (entity + 0x1b8) < 0x9600) {
@@ -44,7 +44,7 @@ void __cdecl fcn_00487c00(char* a0, char* entity, int chance)
 	*(int*) (msg + 0xc) = *(int*) (*(char**) (entity + 0x16c) + 1);
 	msg[0x36] = 1;
 	*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
-	*(int*) (msg + 0x58) = *(int*) (a0 + 2);
+	*(int*) (msg + 0x58) = *(int*) (slot + 2);
 	*(int*) (msg + 0x5c) = 1;
 	*(int*) (msg + 0x64) = 1;
 	cm_SendLogAction((int) g_67e348);

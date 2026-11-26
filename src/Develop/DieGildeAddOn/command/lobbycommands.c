@@ -238,7 +238,7 @@ int __cdecl lb_BroadcastStateChange(unsigned int* a, unsigned int* b, unsigned c
 
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
-int __cdecl fcn_005d78e0(char*, char*);
+int __cdecl d2_ShowIncitingHatredDialog(char*, char*);
 
 /* arg1 = packet (byte +2 kind, +0x166, +0x1c8 flags), arg2 = player record
  * (state +0, payload +0x14, entity +0x21c). */
@@ -300,7 +300,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 			return 9;
 		}
 		if (*(int*) msg == 3) {
-			fcn_005d78e0((char*) player, (char*) msg);
+			d2_ShowIncitingHatredDialog((char*) player, (char*) msg);
 		}
 		return 2;
 	}
@@ -313,7 +313,7 @@ int __cdecl lb_ExPlayerRecordBroadcast(unsigned int* player, unsigned char* msg)
 					return 1;
 				}
 				if (state == 4) {
-					fcn_005d78e0((char*) player, (char*) msg);
+					d2_ShowIncitingHatredDialog((char*) player, (char*) msg);
 					return 0xa;
 				}
 				if (*((char*) player + 2) == 6) {

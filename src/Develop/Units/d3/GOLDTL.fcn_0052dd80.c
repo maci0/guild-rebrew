@@ -14,7 +14,7 @@ struct list_52dd80 {
 
 void __cdecl d3_VisitSceneObjects(int, char*, int, void*, struct list_52dd80*);
 char __cdecl fcn_0052dd40(char*, struct list_52dd80*);
-void __cdecl fcn_004550b0(char*, int);
+void __cdecl d3_RemoveSubTreeFromCellTree(char*, int);
 
 
 #ifdef REBREW_GOLD
@@ -46,7 +46,7 @@ void __cdecl fcn_0052dd80(char* e)
 		}
 		for (i = 0; i < l.n; i++) {
 			if (g_773dd8 != 0) {
-				fcn_004550b0(l.a[i], g_773dd8);
+				d3_RemoveSubTreeFromCellTree(l.a[i], g_773dd8);
 			}
 			d3_DestroyObject((D3_OBJECT*) (l.a[i]));
 		}

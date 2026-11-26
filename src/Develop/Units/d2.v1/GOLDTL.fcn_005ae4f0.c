@@ -19,8 +19,8 @@ int __cdecl d2_GetControlValue(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d2_RunDiebesgildeTraining(char* e)
 {
@@ -54,7 +54,7 @@ void __cdecl d2_RunDiebesgildeTraining(char* e)
 				ResetDisplayCounters();
 			}
 		} while (main_RunFrameLoop((void*) d2_RunDiebesgildeTraining, 0x677c7) != 0);
-		fcn_00471e30(dlg);
-		fcn_00532ef0();
+		d2_DestroyForm(dlg);
+		d3_EndCameraAndUiMode();
 	}
 }

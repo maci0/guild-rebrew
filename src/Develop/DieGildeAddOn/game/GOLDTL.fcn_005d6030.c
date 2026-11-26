@@ -13,12 +13,12 @@ void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl io_FormatTextBuffer(char*, int);
 int __cdecl fcn_005cd440(void*, char*, int, void*);
-int __cdecl fcn_005d5d70(unsigned char*);
+int __cdecl d2_ShowDuelChallengeDialog(unsigned char*);
 /* Two dialog outcomes: the shop path builds a 0xf8-byte request record from
  * the owner id and four random-range globals; the quest path fills a
  * five-dword descriptor and looks up the record for id 0x1d66. */
 /* ADDRESS: GOLDTL 0x005d6030 */
-int __cdecl fcn_005d6030(char* actor, char* a1)
+int __cdecl gm_RunDuelChallengeAction(char* actor, char* request)
 {
 	unsigned char rec[0xf8];
 	unsigned int init[20];
@@ -30,7 +30,7 @@ int __cdecl fcn_005d6030(char* actor, char* a1)
 
 	ret = 2;
 	if (*(unsigned char*) (actor + 2) != 6 && *(unsigned char*) (actor + 2) != 7) {
-		found = gm_LookupEntityRecordById(*(unsigned int*) (a1 + 0x214));
+		found = gm_LookupEntityRecordById(*(unsigned int*) (request + 0x214));
 		if (found == 0) {
 			return 0x60;
 		}
@@ -61,7 +61,7 @@ int __cdecl fcn_005d6030(char* actor, char* a1)
 	init[3] = g_66601c;
 	init[4] = 6;
 	io_FormatTextBuffer(name, 0x1d66);
-	found = fcn_005cd440(init, name, 0, (void*) fcn_005d5d70);
+	found = fcn_005cd440(init, name, 0, (void*) d2_ShowDuelChallengeDialog);
 	if (found != 0 && (*(unsigned int*) (found + 0x1c8) & 0x400) != 0) {
 		ret = 0x81;
 	}

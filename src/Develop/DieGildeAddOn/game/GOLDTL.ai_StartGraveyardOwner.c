@@ -20,7 +20,7 @@ typedef struct F8 {
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl gm_CheckStatLevel(int, int);
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 int __cdecl ai_FindGraveyardTargets(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl fcn_0048f710(char* e, char* q, Blk24* b1, Blk24* b2);
@@ -56,7 +56,7 @@ int __cdecl ai_StartGraveyardOwner(int a1, char* e, int a3, Blk24* o1, Blk24* o2
 	if (gm_CheckStatLevel(*(unsigned short*) e, 0xd) == 0) {
 		return 0;
 	}
-	if (fcn_004a5e60(e, 4, f, 0, 100.0f, &targetId) == 0) {
+	if (ai_FindEntityInFavorRange(e, 4, f, 0, 100.0f, &targetId) == 0) {
 		return 0;
 	}
 	gm_ResolveEntityById((void**) (&target), 0, 0, targetId);

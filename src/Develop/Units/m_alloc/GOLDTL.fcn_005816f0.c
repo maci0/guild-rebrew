@@ -37,7 +37,7 @@ extern char g_6a8784[];
 extern int g_774a00;
 int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 int* __cdecl m_alloc(int size, char* tag);
-void __cdecl fcn_00580cf0(int*);
+void __cdecl d2_FreeTutorialNodes(int*);
 void __cdecl d2_IsTutorialStepAllowed(void);
 void __cdecl fcn_0057ed60(void);
 void __cdecl fcn_0057edf0(void);
@@ -53,7 +53,7 @@ void __cdecl fcn_0057f1d0(void);
 void __cdecl fcn_0057f220(void);
 void __cdecl fcn_0057f2e0(void);
 void __cdecl fcn_0057f310(void);
-void __cdecl fcn_0057f3b0(void);
+void __cdecl d2_FocusTutorialBuilding0x0a(void);
 void __cdecl fcn_0057f3e0(void);
 
 int* __cdecl d2_CreateTutorialChapter2(void)
@@ -395,7 +395,7 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
 	p[0xf] = (int) fcn_0057eea0;
-	p[0xd] = (int) fcn_0057f3b0;
+	p[0xd] = (int) d2_FocusTutorialBuilding0x0a;
 	p[0xe] = (int) fcn_0057f310;
 	p[0x10] = 1;
 	p[0x11] = 0x2148;
@@ -499,6 +499,6 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	g_774a00 = sb_LoadLocalizedSampleBank(g_6a8784, 0);
 	return first;
 fail:
-	fcn_00580cf0(first);
+	d2_FreeTutorialNodes(first);
 	return 0;
 }

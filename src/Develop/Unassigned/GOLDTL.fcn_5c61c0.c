@@ -6,7 +6,7 @@ extern char g_6abb00[];
 
 int __cdecl fcn_00472cd0(int);
 
-void __cdecl fcn_005c61c0(void)
+void __cdecl d2_CloseInventoryPanel(void)
 {
 	ResetDisplayCounters();
 	fcn_00472cd0(*(int*) &g_6abb00);

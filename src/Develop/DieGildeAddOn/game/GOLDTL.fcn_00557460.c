@@ -12,7 +12,7 @@ typedef struct BuildingRow557460 { unsigned char kind; char fields[0x24c]; } Bui
 
 int __cdecl cm_GetCommandStatus(int h);
 int* __cdecl cm_GetCommandResult(int h);
-int __cdecl fcn_004c5620(int a, char* dlg);
+int __cdecl cm_SendSetHE(int a, char* dlg);
 void __cdecl cm_SendCancelCharacterActions(int a);
 void __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* s);
 void __cdecl he_FreeAction(char* dlg);
@@ -63,11 +63,11 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 			v = *(int*) ((char*) p + 4);
 			*(int*) (dlg + 0xac) = v;
 			gm_AddTime((int*) (dlg + 0x52), 0, 1, 0);
-			*(int*) (dlg + 0x84) = fcn_004c5620(1, dlg);
+			*(int*) (dlg + 0x84) = cm_SendSetHE(1, dlg);
 			return;
 		}
 		gm_AddTime((int*) (dlg + 0x52), 0x18, 0, 0);
-		*(int*) (dlg + 0x84) = fcn_004c5620(4, dlg);
+		*(int*) (dlg + 0x84) = cm_SendSetHE(4, dlg);
 		return;
 	}
 	case 1: {
@@ -102,7 +102,7 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 		*(int*) (dlg + 0xc4) = scan;
 		if (hit == 0) {
 			gm_AddTime((int*) (dlg + 0x52), 0, 1, 0);
-			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
+			*(int*) (dlg + 0x84) = cm_SendSetHE(-1, dlg);
 			return;
 		}
 		io_FormatTextBuffer(text, 0x6a5f7c, (void*) hit);
@@ -113,11 +113,11 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 			    "Dunkle Ecke");
 			gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
 			*(int*) (dlg + 0xb8) = *(int*) (hit + 1);
-			*(int*) (dlg + 0x84) = fcn_004c5620(2, dlg);
+			*(int*) (dlg + 0x84) = cm_SendSetHE(2, dlg);
 			return;
 		}
 		gm_AddTime((int*) (dlg + 0x52), 0, 1, 0);
-		*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
+		*(int*) (dlg + 0x84) = cm_SendSetHE(-1, dlg);
 		return;
 	}
 	case 2: {
@@ -127,19 +127,19 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 		fcn_005015e0((int*) &hit, 0, 0, *(int*) (dlg + 0xb8));
 		gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
 		if (hit == 0) {
-			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
+			*(int*) (dlg + 0x84) = cm_SendSetHE(-1, dlg);
 			return;
 		}
 		e = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
 		if (e == 0) {
 			gm_AddTime((int*) (dlg + 0x52), 0, 1, 0);
-			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
+			*(int*) (dlg + 0x84) = cm_SendSetHE(-1, dlg);
 			return;
 		}
 		if (gm_IsEntityAtBuilding(e, (char*) hit) == 0) {
 			*(int*) (dlg + 0x70) = 2;
 			gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
-			*(int*) (dlg + 0x84) = fcn_004c5620(2, dlg);
+			*(int*) (dlg + 0x84) = cm_SendSetHE(2, dlg);
 			return;
 		}
 		*(int*) (dlg + 0xbc) = *(int*) (dlg + 0xbc) - 1;
@@ -162,13 +162,13 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 			goto fail;
 		}
 		if (*(int*) (dlg + 0xbc) > 0) {
-			*(int*) (dlg + 0x84) = fcn_004c5620(1, dlg);
+			*(int*) (dlg + 0x84) = cm_SendSetHE(1, dlg);
 			return;
 		}
 		cm_SendCancelCharacterActions(*(int*) (e + 4));
 		ch_StartMovement(*(int*) (e + 4), *(int*) (hit + 1),
 		    *(int*) (dlg + 0xb4), 0, 0, "Dunkle Ecke");
-		*(int*) (dlg + 0x84) = fcn_004c5620(3, dlg);
+		*(int*) (dlg + 0x84) = cm_SendSetHE(3, dlg);
 		return;
 	}
 	case 3: {
@@ -194,7 +194,7 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 		if (e != 0 && gm_IsEntityAtBuilding(e, (char*) hit) == 0) {
 			*(int*) (dlg + 0x70) = 3;
 			gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
-			*(int*) (dlg + 0x84) = fcn_004c5620(3, dlg);
+			*(int*) (dlg + 0x84) = cm_SendSetHE(3, dlg);
 			return;
 		}
 		{
@@ -258,7 +258,7 @@ void __cdecl he_RunDunkleEcke(char* dlg)
 		    0x5ec, *(int*) (hit + 1), *(int*) (dlg + 0xb4), 0,
 		    (char*) 0x6b5c60);
 fail:
-		*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
+		*(int*) (dlg + 0x84) = cm_SendSetHE(-1, dlg);
 		return;
 	}
 	case 4: {

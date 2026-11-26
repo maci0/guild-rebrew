@@ -31,9 +31,9 @@ void __cdecl fcn_004c6ea0(int);
 int __cdecl gm_SearchTable67(int);
 void __cdecl fcn_00533bb0(int, int, void *, int, int, int, int);
 int __cdecl main_RunFrameLoop(void *, int);
-void __cdecl fcn_005b0230(void *);
+void __cdecl d2_BuildCityScrollMap(void *);
 int __cdecl fcn_005b0dd0(void *);
-void __cdecl fcn_005b11f0(void *);
+void __cdecl d2_UpdateCityScrollMap(void *);
 void __cdecl fcn_005b18c0(void *);
 
 /* ADDRESS: GOLDTL 0x004bfe00 */
@@ -64,7 +64,7 @@ int __cdecl fcn_004bfe00(char *obj)
 	*(int *) (town + 0x58) = 0x723;
 	strcpy(town + 0x5c, *(char **) 0x14b5e84);
 	fcn_005b0dd0(town);
-	fcn_005b0230(town);
+	d2_BuildCityScrollMap(town);
 	g_772900 = 0;
 	for (i = 0; i < 8; i++) {
 		*(int *) (0x10058a0 + i * 8) = -1;
@@ -115,7 +115,7 @@ int __cdecl fcn_004bfe00(char *obj)
 				g_772904 = 0;
 			}
 		}
-		fcn_005b11f0(town);
+		d2_UpdateCityScrollMap(town);
 		if (g_14ce8d8 != 0 && d2_CurrentElementId != -1 &&
 		    *(int *) (town + 0x27a4) > 0) {
 			n = *(int *) (town + 0x27a4);

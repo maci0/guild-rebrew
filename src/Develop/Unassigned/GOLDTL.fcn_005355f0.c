@@ -4,12 +4,12 @@ int g_6a2c00 = 0xffffffff;
 
 
 
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_DestroyScrollPerga(void)
 {
 	if (g_6a2bf8 != -1) {
-		fcn_00471e30(g_6a2bf8);
+		d2_DestroyForm(g_6a2bf8);
 		g_6a2bf8 = -1;
 		g_6a2bfc = -1;
 		g_6a2c00 = -1;

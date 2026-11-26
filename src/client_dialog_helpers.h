@@ -108,7 +108,7 @@ void __cdecl fcn_00472c30(int x0, int y0, int x1, int y1, int r, int g, int b);
 
 /* Graph drawers, all matched RELOC. */
 void __cdecl d2_DrawYellowHistoryGraph(GRAPH_VALUE cur, int w, int h);
-void __cdecl fcn_005d3ad0(GRAPH_VALUE cur, int w, int h);
+void __cdecl d2_DrawMagentaHistoryGraph(GRAPH_VALUE cur, int w, int h);
 void __cdecl d2_DrawRedHistoryGraph(GRAPH_VALUE cur, int w, int h);
 
 /* Panel begin and window selection. */
@@ -122,7 +122,7 @@ int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 void __cdecl fcn_00472380(int a, int b, int c, int d, int e);
 int __cdecl io_AppendText(void* id, ...);
 int __cdecl main_RunFrameLoop(void* fn, int message);
-void __cdecl fcn_00471e30(int handle);
+void __cdecl d2_DestroyForm(int handle);
 /* inferred: two-argument form from fcn_005a4bb0 */
 int __cdecl d2_GetControlValue(int handle, int player);
 

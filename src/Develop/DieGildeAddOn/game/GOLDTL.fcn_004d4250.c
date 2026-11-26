@@ -6,18 +6,18 @@ unsigned short* __cdecl gm_FindEntityActiveItem(char*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 unsigned char* __cdecl fcn_004d2f70(char*);
 int __cdecl fcn_004d3330(char*, int, int, int, unsigned int*, unsigned int*);
-int __cdecl fcn_004d1020(char*, char*, char*, int, int);
+int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
 char* __cdecl fcn_004d3600(char*);
 int __cdecl he_QueueTradeWareCommand(char*, char*, char*);
 char* __cdecl fcn_004d36e0(char*);
 int __cdecl cut_AssignConquerTarget(char*, char*, char*);
 void __cdecl fcn_004d1570(char*, char*);
-int __cdecl fcn_004d14b0(char*, char*);
+int __cdecl cut_AssignGuardOrder(char*, char*);
 char* __cdecl fcn_004d34f0(char*);
 int __cdecl gm_IssueEscapeOrder(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x004d4250 */
-void __cdecl fcn_004d4250(char* rec, char* e)
+void __cdecl cut_AssignCombatUnitOrder(char* rec, char* e)
 {
 	char* obj;
 	char* map;
@@ -38,14 +38,14 @@ void __cdecl fcn_004d4250(char* rec, char* e)
 				if (fcn_0045b990(map, (float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c), (int*) &gridX, (int*) &grid_z, &f4)) {
 					obj = (char*) fcn_004d3330(e, gridX, (int) grid_z, (int) (g_664330 / *(float*) (map + 0x10)), &gridX, &grid_z);
 					if (obj != 0) {
-						fcn_004d1020(rec, e, 0, gridX, (int) grid_z);
+						cut_AssignTargetOrder(rec, e, 0, gridX, (int) grid_z);
 						return;
 					}
 				}
 			} else {
 				obj = (char*) fcn_004d2f70(e);
 				if (obj != 0) {
-					fcn_004d1020(rec, e, obj, 0, 0);
+					cut_AssignTargetOrder(rec, e, obj, 0, 0);
 					return;
 				}
 			}
@@ -72,7 +72,7 @@ void __cdecl fcn_004d4250(char* rec, char* e)
 			}
 			break;
 		case 4:
-			fcn_004d14b0(rec, e);
+			cut_AssignGuardOrder(rec, e);
 			return;
 		case 3:
 			fcn_004d1570(rec, e);

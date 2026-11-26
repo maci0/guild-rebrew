@@ -15,7 +15,7 @@ int __cdecl lc_GetGebaeudeBauplatz(char* name, void* p);
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, int d, void* out);
 void __cdecl fcn_005982d0(void);
 void __cdecl ReportClientMessage(char* msg);
-void __cdecl fcn_004550b0(int a, int b);
+void __cdecl d3_RemoveSubTreeFromCellTree(int a, int b);
 #include "Develop/Units/d3/d3_object.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct BuildingProto { unsigned char kind; char name[0x24c]; } BuildingProto;
@@ -94,7 +94,7 @@ load:
 		d3_VisitSceneObjects(g_67a370, *(int*)(shortname + 0x50), 0x2c0, (int) fcn_005982d0, &list);
 		for (i = 0; i < list.count; i++) {
 			if (g_773dd8 != 0)
-				fcn_004550b0(list.items[i], g_773dd8);
+				d3_RemoveSubTreeFromCellTree(list.items[i], g_773dd8);
 			sprintf(msg, "cm_ExCreateGeb(): killing objectname: %s",
 			        list.items[i]);
 			sprintf(msg, "cm_ExCreateGeb(): killing objectptr: %s",

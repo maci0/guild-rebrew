@@ -38,7 +38,7 @@ void __cdecl CloseVfsStream(char* f);
 int __cdecl am_RegisterGameMethods(char* ini);
 int __cdecl ai_RegisterGraveyardMethods(char* ini);
 int __cdecl ai_RegisterDomizilMethods(char* ini);
-int __cdecl fcn_004abff0(char* ini);
+int __cdecl ai_RegisterSocialMethods(char* ini);
 
 /* ADDRESS: GOLDTL 0x00494820 */
 int __cdecl fcn_00494820(void)
@@ -68,7 +68,7 @@ int __cdecl fcn_00494820(void)
 		if (ai_RegisterDomizilMethods(g_77481c) == 0) {
 			goto bad;
 		}
-		if (fcn_004abff0(g_77481c) == 0) {
+		if (ai_RegisterSocialMethods(g_77481c) == 0) {
 			goto bad;
 		}
 		f = vfs_Tfopen("/gamedata/ai/ai_data_2.dfn", "wb", g_6b7fdc);
@@ -172,7 +172,7 @@ int __cdecl fcn_00494820(void)
 		CloseVfsStream(f);
 		goto bad;
 	}
-	if (fcn_004abff0(g_77481c) == 0) {
+	if (ai_RegisterSocialMethods(g_77481c) == 0) {
 		CloseVfsStream(f);
 		goto bad;
 	}

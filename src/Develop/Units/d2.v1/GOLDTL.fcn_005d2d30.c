@@ -34,7 +34,7 @@ extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_005d2a40(int, int);
+int __cdecl gm_CalcWerbungSteps(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -43,7 +43,7 @@ int __cdecl cm_SendCopyEntityData(Packet*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_00412830(int);
 
 int __cdecl d2_RunWerbungDialog(unsigned short* target)
@@ -54,7 +54,7 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 	int r;
 	int h;
 
-	cost = fcn_005d2a40(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*) (target + 2));
+	cost = gm_CalcWerbungSteps(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*) (target + 2));
 	dlg = fcn_00470820(0, 0, "privillegien\\werbung2");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
@@ -86,7 +86,7 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 			}
 		}
 	} while (main_RunFrameLoop((void*) d2_RunWerbungDialog, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 	g_100f1dc = -1;
 	fcn_00412830(0x11);
 	return r;

@@ -12,7 +12,7 @@ void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
 void __cdecl fcn_00536640(int);
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(int, int, int, char*);
-void __cdecl fcn_004cf110(char*);
+void __cdecl d3_SpawnBombObject(char*);
 void __cdecl fcn_00412830(int);
 
 void __cdecl gm_HandleCannonAimInput(void)
@@ -36,7 +36,7 @@ void __cdecl gm_HandleCannonAimInput(void)
 			p = *(int*) (((char*)g_67a370) + 0xb0);
 			if (fcn_0045bad0(p, d2_MouseX, d2_MouseY, &b, &a) != 0 &&
 			    d3_GridPointToWorld(p, b, a, buf) != 0) {
-				fcn_004cf110(buf);
+				d3_SpawnBombObject(buf);
 			}
 			fcn_00412830(0x10);
 		}

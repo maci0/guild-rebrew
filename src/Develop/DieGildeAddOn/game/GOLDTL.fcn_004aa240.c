@@ -19,7 +19,7 @@ extern int __cdecl fcn_004a9540(int a0, int obj, void *rec, char *out, int a4);
 extern int __cdecl fcn_004a9600(int a0, int obj, void *rec, char *out, int a4);
 
 /* ADDRESS: GOLDTL 0x004aa240 */
-unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int a4)
+unsigned int __cdecl ai_SelectPrivTarget(int unused0, int entity, int unused2, char *request, int extraOut)
 {
     int n;
     unsigned short r;
@@ -108,15 +108,15 @@ unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int
     switch (id)
     {
     case 0:
-        return ai_PreparePrivBeleidigung(a0, entity, &rec, request, a4);
+        return ai_PreparePrivBeleidigung(unused0, entity, &rec, request, extraOut);
     case 3:
-        return ai_PreparePriv0x03(a0, entity, &rec, request, a4);
+        return ai_PreparePriv0x03(unused0, entity, &rec, request, extraOut);
     case 4:
-        return fcn_004a9470(a0, entity, &rec, request, a4);
+        return fcn_004a9470(unused0, entity, &rec, request, extraOut);
     case 7:
-        return fcn_004a9540(a0, entity, &rec, request, a4);
+        return fcn_004a9540(unused0, entity, &rec, request, extraOut);
     case 8:
-        return fcn_004a9600(a0, entity, &rec, request, a4);
+        return fcn_004a9600(unused0, entity, &rec, request, extraOut);
     }
     return 0;
 }

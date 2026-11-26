@@ -27,7 +27,7 @@ void __cdecl cm_RequestClearEvidenceLink(int a1, int a2, int a3);
 int __cdecl gm_IncrementMissionActionCount(char* a1, int kind);
 void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 void __cdecl cm_RequestModifyHealth(int a1, int a2);
-int __cdecl fcn_004c5620(int a1, char* e);
+int __cdecl cm_SendSetHE(int a1, char* e);
 
 /* ADDRESS: GOLDTL 0x0054ee10 */
 void __cdecl he_StartDuellChallenge(char* t)
@@ -51,7 +51,7 @@ void __cdecl he_StartDuellChallenge(char* t)
 	if (firstEntity == 0 || (*(int*) (firstEntity + 0x1c8) & 0x100) || secondEntity == 0 || (*(int*) (secondEntity + 0x1c8) & 0x200)) {
 		*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
 		gm_AddTime((pos14_7f4c00*) (t + 0x52), 0, 2, 0);
-		*(int*) (t + 0x84) = fcn_004c5620(-1, t);
+		*(int*) (t + 0x84) = cm_SendSetHE(-1, t);
 		return;
 	}
 	if (*(int*) (t + 0xb4) != 0) {

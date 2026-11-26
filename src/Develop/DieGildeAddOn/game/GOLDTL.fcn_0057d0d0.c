@@ -13,13 +13,13 @@ void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 void __cdecl cm_RequestPlayAnimation(int, char*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
-void __cdecl fcn_0057ceb0(char* entity);
+void __cdecl he_AwardEvent0a1Yield(char* entity);
 int __cdecl he_FindNextTargetBuilding0a1(char* e);
 void __cdecl he_AccumulateEvent0a1Yield(char* u, int count);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0057d0d0 */
-void __cdecl fcn_0057d0d0(char* entity)
+void __cdecl he_UpdateEvent0a1(char* entity)
 {
 	int found;
 	int mode;
@@ -127,7 +127,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 				for (i = 0; i < n; i++) {
 					he_AssignActionSlot(0, 0, *(unsigned short*) objs[i], 0);
 				}
-				fcn_0057ceb0(entity);
+				he_AwardEvent0a1Yield(entity);
 				*(int*) (entity + 0x70) = -1;
 				*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 				return;

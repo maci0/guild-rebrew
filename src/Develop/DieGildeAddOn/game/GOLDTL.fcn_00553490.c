@@ -28,7 +28,7 @@ void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
@@ -73,7 +73,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		gm_AddTime((pos14_7f4c00*) (self + 0x52), 0, 2, 0);
 		*(int*) (self + 0x70) = -1;
-		*(int*) (self + 0x84) = fcn_004c5620(-1, self);
+		*(int*) (self + 0x84) = cm_SendSetHE(-1, self);
 		return;
 	}
 	switch (*(int*) (self + 0x70)) {
@@ -84,14 +84,14 @@ void __cdecl he_RunSchutzgeld(char* self)
 		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		gm_AddTime((pos14_7f4c00*) (self + 0x52), 0, 10, 0);
 		*(int*) (self + 0x70) = 2;
-		*(int*) (self + 0x84) = fcn_004c5620(2, self);
+		*(int*) (self + 0x84) = cm_SendSetHE(2, self);
 		return;
 	case 2:
 		if (*(int*) (*(int*) (ent + 0x184) + 0x128) != 0) {
 			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			gm_AddTime((pos14_7f4c00*) (self + 0x52), 0, step, 0);
 			*(int*) (self + 0x70) = 2;
-			*(int*) (self + 0x84) = fcn_004c5620(2, self);
+			*(int*) (self + 0x84) = cm_SendSetHE(2, self);
 			return;
 		}
 		*(int*) (self + 0xb4) = (int) (gm_CalculateGebaeudeValue(p, 100) * *(float*) 0x665e98);
@@ -113,7 +113,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 					*(int*) (self + 0xb8) = gm_RandomMod(2) & 0xffff;
 				}
 			}
-			*(int*) (self + 0x84) = fcn_004c5620(3, self);
+			*(int*) (self + 0x84) = cm_SendSetHE(3, self);
 			return;
 		}
 		memset(&msg, 0, sizeof(msg));
@@ -128,7 +128,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 		gm_AddTime((pos14_7f4c00*) (self + 0x52), 3, 0, 0);
 		*(int*) (self + 0x70) = 3;
 		*(int*) (self + 0xb8) = 2;
-		*(int*) (self + 0x84) = fcn_004c5620(3, self);
+		*(int*) (self + 0x84) = cm_SendSetHE(3, self);
 		return;
 	case 3:
 		if (*(int*) (self + 0xb8) == 1) {
@@ -145,7 +145,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 			*(pos14_7f4c00*) (self + 0x44) = (*(pos14_7f4c00*) &gm_GameTime);
 			gm_AddTime((pos14_7f4c00*) (self + 0x52), 0x30, 0, 0);
 			*(int*) (self + 0x70) = step;
-			*(int*) (self + 0x84) = fcn_004c5620(step, self);
+			*(int*) (self + 0x84) = cm_SendSetHE(step, self);
 			io_FormatTextBuffer(buf, 0x1a8d, *(unsigned short*) (p + 0x27), p, *(int*) (self + 0xb4));
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
 			he_PostEntityMessage(i, i, buf, 0, 0x5f3, (char*) 0x6a5c10);
@@ -155,7 +155,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			gm_AddTime((pos14_7f4c00*) (self + 0x52), 0, 5, 0);
 			*(int*) (self + 0x70) = step;
-			*(int*) (self + 0x84) = fcn_004c5620(step, self);
+			*(int*) (self + 0x84) = cm_SendSetHE(step, self);
 			io_FormatTextBuffer(buf, 0x1a8f, *(unsigned short*) (p + 0x27), p);
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
 			he_PostEntityMessage(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
@@ -164,7 +164,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 			gm_AddTime((pos14_7f4c00*) (self + 0x52), 0, 5, 0);
 			*(int*) (self + 0x70) = step;
-			*(int*) (self + 0x84) = fcn_004c5620(step, self);
+			*(int*) (self + 0x84) = cm_SendSetHE(step, self);
 			io_FormatTextBuffer(buf, 0x1a8e, *(unsigned short*) (p + 0x27), p);
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
 			he_PostEntityMessage(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
@@ -184,7 +184,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
 		gm_AddTime((pos14_7f4c00*) (self + 0x52), 0, 2, 0);
 		*(int*) (self + 0x70) = -1;
-		*(int*) (self + 0x84) = fcn_004c5620(-1, self);
+		*(int*) (self + 0x84) = cm_SendSetHE(-1, self);
 		return;
 	}
 }

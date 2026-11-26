@@ -12,7 +12,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 float __cdecl gm_RandomFloat01(void);
-unsigned short __cdecl fcn_005b5660(int, unsigned short*);
+unsigned short __cdecl gm_PickUniqueOfferId(int, unsigned short*);
 
 void __cdecl he_AccumulateEvent0a1Yield(char* u, int count)
 {
@@ -43,7 +43,7 @@ void __cdecl he_AccumulateEvent0a1Yield(char* u, int count)
 		for (i = 0; i < 4; i++) {
 			if (*(unsigned short*) (u + 0xc8 + i * 2) == 0) {
 				if (gm_RandomFloat01() > 0.4) {
-					*(unsigned short*) (u + 0xc8 + i * 2) = fcn_005b5660(i, (unsigned short*) (u + 0xc8));
+					*(unsigned short*) (u + 0xc8 + i * 2) = gm_PickUniqueOfferId(i, (unsigned short*) (u + 0xc8));
 				}
 				break;
 			}

@@ -25,7 +25,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl he_HasNoActiveAction0x62(char*);
 int __cdecl gm_PosToStatsGrid(int, int*, int*);
 int __cdecl fcn_0050c4e0(unsigned char*);
-int __cdecl fcn_0050d0c0(char*, int);
+int __cdecl gm_CalcOwnerAndStockValue(char*, int);
 void __cdecl cm_SendCopyEntityData(char*);
 
 /* ADDRESS: GOLDTL 0x00480c60 */
@@ -118,8 +118,8 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 			if (cand == 0) {
 				best = w;
 			} else {
-				v = (float) fcn_0050d0c0(p, 0) * w;
-				if ((float) fcn_0050d0c0(cand, 0) * best < v) {
+				v = (float) gm_CalcOwnerAndStockValue(p, 0) * w;
+				if ((float) gm_CalcOwnerAndStockValue(cand, 0) * best < v) {
 					best = w;
 				} else {
 					continue;

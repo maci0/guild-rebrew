@@ -16,7 +16,7 @@ void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005cde50 */
 void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
@@ -82,5 +82,5 @@ void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005cde50, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

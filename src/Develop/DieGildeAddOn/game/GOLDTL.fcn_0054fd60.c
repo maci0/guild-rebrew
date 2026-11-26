@@ -44,7 +44,7 @@ extern char g_7f4ca4[];
 
 Entity_54fd60* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-int __cdecl fcn_004c5620(int, Order_54fd60*);
+int __cdecl cm_SendSetHE(int, Order_54fd60*);
 void __cdecl gm_AddTime(Stamp_54fd60*, int, int, int);
 void __cdecl he_FreeAction(Order_54fd60*);
 int __cdecl fcn_004c5980(void*);
@@ -93,7 +93,7 @@ void __cdecl he_RunDuellCutscene(Order_54fd60* o)
         }
         o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
         gm_AddTime(&o->stamp, 0, 2, 0);
-        o->event = fcn_004c5620(-1, o);
+        o->event = cm_SendSetHE(-1, o);
         return;
     case 1:
         if ((o->flags & 2) == 0) {
@@ -109,7 +109,7 @@ void __cdecl he_RunDuellCutscene(Order_54fd60* o)
         }
         o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
         gm_AddTime(&o->stamp, 0, 2, 0);
-        o->event = fcn_004c5620(-1, o);
+        o->event = cm_SendSetHE(-1, o);
         return;
     case -1:
     case -2:
@@ -124,7 +124,7 @@ void __cdecl he_RunDuellCutscene(Order_54fd60* o)
             }
             o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
             gm_AddTime(&o->stamp, 0, 2, 0);
-            o->event = fcn_004c5620(-1, o);
+            o->event = cm_SendSetHE(-1, o);
         }
         he_FreeAction(o);
         return;

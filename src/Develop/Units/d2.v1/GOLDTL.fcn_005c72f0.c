@@ -58,9 +58,9 @@ void __cdecl d2_ClearSelectedControl(void);
 int __cdecl ch_UpdateHeldObjectAttachment(int);
 int __cdecl d2_UpdateTrainingRows(int, int);
 int __cdecl fcn_0046f940(int, char*);
-int __cdecl fcn_00471e30(int);
+int __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl CountDisplayCounters(void);
 void __cdecl ResetDisplayCounters(void);
 int __cdecl __itoa(int, char*, int);
@@ -316,6 +316,6 @@ label_5c76eb:
 	if (v7 != 0) {
 		goto label_5c7466;
 	}
-	fcn_00471e30(win);
-	fcn_00532ef0();
+	d2_DestroyForm(win);
+	d3_EndCameraAndUiMode();
 }

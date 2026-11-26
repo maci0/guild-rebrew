@@ -24,7 +24,7 @@ void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 void __cdecl d2_ShowHandelSearch(char*, int);
-void __cdecl fcn_005e5130(char*, int);
+void __cdecl d2_SelectPlauschTarget(char*, int);
 void __cdecl fcn_00597ec0(char*);
 
 void __cdecl d2_RunSchneiderMenu(char* obj, int arg)
@@ -71,7 +71,7 @@ void __cdecl d2_RunSchneiderMenu(char* obj, int arg)
 			} else if (g_7746a0 == trade) {
 				d2_ShowHandelSearch(obj, arg);
 			} else if (g_7746a0 == build) {
-				fcn_005e5130(obj, arg);
+				d2_SelectPlauschTarget(obj, arg);
 			}
 		}
 		fcn_00597ec0(obj);

@@ -42,18 +42,18 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl fcn_005898f0(void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_005100f0(int, int);
-int __cdecl fcn_004a5e60(unsigned short*, int, F8_589d00, int, float, int*);
+int __cdecl ai_FindEntityInFavorRange(unsigned short*, int, F8_589d00, int, float, int*);
 int __cdecl cm_SendCopyEntityData(Msg_589d00*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x00589d00 */
 void __cdecl fcn_00589d00(int a0)
@@ -176,7 +176,7 @@ void __cdecl fcn_00589d00(int a0)
 						n = -1;
 						f.mask = 0x7b4c4a0;
 						f.b = 0;
-						fcn_004a5e60(
+						ai_FindEntityInFavorRange(
 						    (unsigned short*) (0x7f4ca0 +
 						                       (unsigned int) g_774970 *
 						                           0x21c),
@@ -199,6 +199,6 @@ void __cdecl fcn_00589d00(int a0)
 			}
 		}
 	} while (main_RunFrameLoop((void*) 0x589d00, 0x677c7) != 0);
-	fcn_00471e30(dlg);
-	fcn_00532ef0();
+	d2_DestroyForm(dlg);
+	d3_EndCameraAndUiMode();
 }

@@ -5,7 +5,7 @@
 
 int __cdecl gm_FindSimilarEntities(char*, int, int, int, float, unsigned short*);
 
-void __cdecl fcn_005d28e0(char* e, int* count, int* out)
+void __cdecl gm_FindWerbungCandidates(char* e, int* count, int* out)
 {
 	unsigned short ids[10];
 	int i;

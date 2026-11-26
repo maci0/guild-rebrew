@@ -21,9 +21,9 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowLagerOptions(int, int);
 void __cdecl fcn_005c72f0(int);
-void __cdecl fcn_005af770(int);
+void __cdecl d2_OpenRazziaDialog(int);
 void __cdecl d2_StartThievesGuildSpyPicker(int);
-void __cdecl fcn_005ada30(int);
+void __cdecl d2_RunDiebesgildeInfoDialog(int);
 void __cdecl d2_OpenTransportPanel(int);
 
 void __cdecl d2_RunRazziaWacheMenu(int building)
@@ -60,13 +60,13 @@ void __cdecl d2_RunRazziaWacheMenu(int building)
 					fcn_005c72f0(building);
 				}
 				else if (g_7746a0 == c) {
-					fcn_005af770(building);
+					d2_OpenRazziaDialog(building);
 				}
 				else if (g_7746a0 == d) {
 					d2_StartThievesGuildSpyPicker(building);
 				}
 				else if (g_7746a0 == e) {
-					fcn_005ada30(building);
+					d2_RunDiebesgildeInfoDialog(building);
 				}
 				else if (g_7746a0 == f) {
 					d2_OpenTransportPanel(building);

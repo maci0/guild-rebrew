@@ -13,7 +13,7 @@ extern volatile int g_6b7fac;
 
 int __cdecl fcn_00442910(int, int, float*, char*);
 
-rec8* __cdecl fcn_004cf110(int a)
+rec8* __cdecl d3_SpawnBombObject(int pos)
 {
 	float v[3];
 	int i;
@@ -23,7 +23,7 @@ rec8* __cdecl fcn_004cf110(int a)
 	v[2] = 0;
 	for (i = 0; i < 32; i++) {
 		if (((rec8*)g_9ba1c0)[i].p == 0) {
-			((rec8*)g_9ba1c0)[i].p = fcn_00442910(0, a, v, g_68b7b4);
+			((rec8*)g_9ba1c0)[i].p = fcn_00442910(0, pos, v, g_68b7b4);
 			((rec8*)g_9ba1c0)[i].t = g_6b7fac;
 			return &((rec8*)g_9ba1c0)[i];
 		}

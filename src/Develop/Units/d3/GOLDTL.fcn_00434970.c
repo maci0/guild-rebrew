@@ -6,7 +6,7 @@ extern volatile int g_6b7fac;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_00434ba0(char* anim, char* mesh);
-int __cdecl fcn_004321a0(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max);
+int __cdecl d3_StepAnimFrame(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max);
 int __cdecl d3_CreateObjectMesh(char* e);
 char __cdecl fcn_004315c0(char* obj);
 void __cdecl fcn_004316c0(int obj);
@@ -75,7 +75,7 @@ char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATIO
 					if (*(unsigned char*) (entry + 0x6d) & 2) {
 						*(int*) entry = *(int*) (object + 0x148) - 1;
 						*(int*) (entry + 8) = *(int*) (*(int*) (object + 0x15c) + *(int*) entry * 0xc0 + 4) - 1;
-						*(int*) (entry + 4) = fcn_004321a0(*(D3_ANIMATION_OPTIONS*) (entry + 0x6c), *(int*) entry,
+						*(int*) (entry + 4) = d3_StepAnimFrame(*(D3_ANIMATION_OPTIONS*) (entry + 0x6c), *(int*) entry,
 							*(int*) (object + 0x150), *(int*) (object + 0x154), *(int*) (object + 0x148));
 					} else {
 						*(int*) (entry + 8) = 0;

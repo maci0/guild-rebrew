@@ -52,8 +52,8 @@ int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* Inferred name from the selection dialog and production-command packet. */
 int __cdecl ConfirmProductionSelection(int unused, char* a)
@@ -123,7 +123,7 @@ int __cdecl ConfirmProductionSelection(int unused, char* a)
 			}
 		}
 	} while (main_RunFrameLoop((void*) ConfirmProductionSelection, 0x677c7) != 0);
-	fcn_00471e30(dlg);
-	fcn_00532ef0();
+	d2_DestroyForm(dlg);
+	d3_EndCameraAndUiMode();
 	return 1;
 }

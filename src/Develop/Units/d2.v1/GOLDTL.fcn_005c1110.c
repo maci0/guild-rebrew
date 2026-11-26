@@ -26,11 +26,11 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl d2_CheckActionBlocker(char*, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+int __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_005100f0(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005c1110 */
@@ -136,7 +136,7 @@ done:;
 					    * (unsigned int) *(unsigned short*) &g_774970, 2) != 0) {
 						*(pos14_7f4c00*) ((char*) o + 0x52) =
 						    *(pos14_7f4c00*) &gm_GameTime;
-						r = fcn_004c5620(-1, (char*) o);
+						r = cm_SendSetHE(-1, (char*) o);
 						while (r != -1 && cm_GetCommandStatus(r) == 0) {
 							main_RunFrameLoop(0, 0x677c7);
 						}
@@ -151,6 +151,6 @@ done:;
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005c1110, 0x677c7) != 0);
-	fcn_00471e30(h);
-	return fcn_00532ef0();
+	d2_DestroyForm(h);
+	return d3_EndCameraAndUiMode();
 }

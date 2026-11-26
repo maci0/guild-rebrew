@@ -18,7 +18,7 @@ extern int __cdecl d2_CreateRadioGroup(int a0, int a1, int a2, int a3);
 extern int __cdecl d2_SelectRadioGroup(int a0, int a1);
 
 extern int __cdecl main_RunFrameLoop(void *a0, int a1);
-extern void __cdecl fcn_00471e30(int a0);
+extern void __cdecl d2_DestroyForm(int a0);
 extern int __cdecl d2_ClearRadioGroup(int a0);
 extern float __cdecl eval_ObjektPreis2Credits(int a0, int a1);
 extern int __cdecl gm_CheckEntityStock(char *a0, int a1, unsigned char a2);
@@ -117,6 +117,6 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
         if (g_14ce8e0 != 0)
             g_774654 = 1;
     } while (main_RunFrameLoop((void *)0x5b9980, 0x677c7) != 0);
-    fcn_00471e30(h);
+    d2_DestroyForm(h);
     d2_ClearRadioGroup(groupId);
 }

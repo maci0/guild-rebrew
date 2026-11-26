@@ -7,7 +7,7 @@ void __cdecl ch_ReleaseMorphAnimation(char*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SelectSceneContext(int, int);
 
-void __cdecl fcn_00403df0(char*);
+void __cdecl ch_FreeAuxData(char*);
 void __cdecl m_FreeTracked(char*);
 
 
@@ -50,7 +50,7 @@ int __cdecl ch_DestroyCharacter(char* obj)
 				}
 			}
 			if (*(int*) (obj + 0x124) != 0) {
-				fcn_00403df0(obj);
+				ch_FreeAuxData(obj);
 			}
 			m_FreeTracked(obj);
 			return 1;

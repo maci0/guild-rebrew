@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_00508220(int, int*);
+int __cdecl gm_GetKindRecord(int, int*);
 int __cdecl cm_BeginPacketFieldDelta(int*, int);
 int __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 int __cdecl cm_RequestChangeAttribute(void);
@@ -52,7 +52,7 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 		return 0;
 	}
 	mode = sel[r];
-	if (fcn_00508220(mode, avail) == 0) {
+	if (gm_GetKindRecord(mode, avail) == 0) {
 		return 0;
 	}
 	r = gm_RandomMod((int) ((double) (unsigned int) avail[2] * 0.5));

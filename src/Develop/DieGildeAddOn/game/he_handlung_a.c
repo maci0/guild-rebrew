@@ -9,45 +9,45 @@ char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 
 /* ADDRESS: GOLD 0x0050a150 */
 /* ADDRESS: GOLDTL 0x0050d5d0 */
-int __cdecl fcn_0050d5d0(int id, char* owner, char** out)
+int __cdecl he_GetActiveKrediteByBorrower(int id, char* owner, char** out)
 {
-	char* p;
-	int n;
+	char* action;
+	int count;
 
-	n = 0;
-	p = he_StartHandlungSearch(1, n, 0x23);
-	while (p != 0) {
-		if (n >= 9) {
+	count = 0;
+	action = he_StartHandlungSearch(1, count, 0x23);
+	while (action != 0) {
+		if (count >= 9) {
 			break;
 		}
-		if (*(int*) (p + 0xb0) == *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id] + 4)) && (owner == 0 || *(int*) (p + 0xac) == *(int*) (owner + 1))) {
-			out[n++] = p;
+		if (*(int*) (action + 0xb0) == *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id] + 4)) && (owner == 0 || *(int*) (action + 0xac) == *(int*) (owner + 1))) {
+			out[count++] = action;
 		}
-		p = he_fn_Handlung();
+		action = he_fn_Handlung();
 	}
-	return n;
+	return count;
 }
 
 /* ADDRESS: GOLD 0x0050a1c0 */
 /* ADDRESS: GOLDTL 0x0050d640 */
-int __cdecl fcn_0050d640(int key, char* obj, unsigned int id, char** out)
+int __cdecl he_GetActiveKrediteByLender(int key, char* obj, unsigned int id, char** out)
 {
-	char* p;
-	char* r;
-	int n;
+	char* action;
+	char* lender;
+	int count;
 
-	n = 0;
-	p = he_StartHandlungSearch(1, n, 0x23);
-	while (p != 0) {
-		if (n >= 9) {
+	count = 0;
+	action = he_StartHandlungSearch(1, count, 0x23);
+	while (action != 0) {
+		if (count >= 9) {
 			break;
 		}
-		r = gm_StartFilteredEntitySearch(1, 1, *(int*) (p + 0xac));
-		if (r != 0 && *(unsigned short*) (r + 0x27) == key && (obj == 0 || obj == r)
-		    && (id == 0xffff || *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id] + 4)) == *(int*) (p + 0xb0))) {
-			out[n++] = p;
+		lender = gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0xac));
+		if (lender != 0 && *(unsigned short*) (lender + 0x27) == key && (obj == 0 || obj == lender)
+		    && (id == 0xffff || *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id] + 4)) == *(int*) (action + 0xb0))) {
+			out[count++] = action;
 		}
-		p = he_fn_Handlung();
+		action = he_fn_Handlung();
 	}
-	return n;
+	return count;
 }

@@ -3,7 +3,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c6530(int a1)
+void __cdecl cm_SendKillTransporter(int a1)
 {
 	char buf[0x9c];
 

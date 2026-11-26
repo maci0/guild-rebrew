@@ -12,13 +12,13 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b74b0 */
-int __cdecl fcn_004b74b0(int* a1)
+int __cdecl gm_HandleMsg0eGrantBonus(int* request)
 {
 	char buf[0x100];
 	unsigned short* entity;
 	int amount;
 
-	entity = gm_LookupEntityRecordById(a1[0]);
+	entity = gm_LookupEntityRecordById(request[0]);
 	if (entity == 0)
 		return 1;
 	if (gm_HasActiveSpecialObject(entity, 0x290) != 0)
@@ -26,8 +26,8 @@ int __cdecl fcn_004b74b0(int* a1)
 	amount = (int) ((gm_RandomMod(2) + 1.0) * gm_WalkEntityChain(*entity) * 0.01);
 	if (amount > gm_WalkEntityChain(*entity))
 		return 0;
-	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, amount);
-	cm_RequestTransferCurrencyNoKill(-1, a1[0], g_773d75, amount);
+	io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, amount);
+	cm_RequestTransferCurrencyNoKill(-1, request[0], g_773d75, amount);
 	he_PostEntityMessage(*(int*) (entity + 2), *(int*) (entity + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

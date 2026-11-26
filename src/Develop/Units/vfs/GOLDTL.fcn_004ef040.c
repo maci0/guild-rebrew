@@ -7,7 +7,7 @@ extern Entry68e020 g_68e020[32];
 
 int __cdecl vfs_fwrite(void* buf, int size, int count, int stream);
 
-int __cdecl fcn_004ef040(int stream)
+int __cdecl ls_SaveAvatarStates(int stream)
 {
 	unsigned int n;
 	unsigned int i;

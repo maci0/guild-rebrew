@@ -22,10 +22,10 @@ void __cdecl he_FreeAction(char*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl gm_ResolveEntityById(char**, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
-void __cdecl fcn_00549c50(int, char*, char*, int);
+void __cdecl gm_HandleAllianceCommand(int, char*, char*, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl cm_SendLogAction(char*);
 void __cdecl cm_RequestJoinLeaveElection(int*);
@@ -58,20 +58,20 @@ void __cdecl fcn_0054a210(char* a0)
     gm_ResolveEntityById(&a0, 0, 0, *(int*) (o + 0xac));
     if (a0 == 0) {
         gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
-        fcn_004c5620(none, o);
+        cm_SendSetHE(none, o);
         return;
     }
     sel = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, 0x12d);
     if (sel == 0) {
         gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
-        fcn_004c5620(none, o);
+        cm_SendSetHE(none, o);
         return;
     }
     if (*(unsigned short*) (a0 + 0x27) != 0xffff) {
         rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (a0 + 0x27)]);
         if (rec != 0 && rec != (char*) gm_CityEntity && *(char*)&((ENTITY_RECORD_VIEW*)rec)->health != 0 && *(char*)&((ENTITY_RECORD_VIEW*)rec)->entity_type != 0xf) {
             if (*(int*) (o + 0xc0) == 1) {
-                fcn_00549c50(0x6e657720, a0, sel, -1);
+                gm_HandleAllianceCommand(0x6e657720, a0, sel, -1);
                 *(int*) (o + 0xc0) = *(int*) (o + 0xc0) - 1;
                 *(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 
@@ -82,7 +82,7 @@ void __cdecl fcn_0054a210(char* a0)
                 gm_AddTime((pos14_7f4c00*) (o + 0xb0), 0x18, 0, 0);
                 *(int*) (o + 0xb6) = 0;
                 *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
-                fcn_004c5620(0, o);
+                cm_SendSetHE(0, o);
                 return;
 
 
@@ -91,10 +91,10 @@ void __cdecl fcn_0054a210(char* a0)
             else {
                 if (gm_GetElapsedMinutes(&gm_GameTime, (pos14_7f4c00*) (o + 0xb0)) > 0) {
                     gm_AddTime((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
-                    fcn_004c5620(0, o);
+                    cm_SendSetHE(0, o);
                     return;
                 }
-                fcn_00549c50(0x65786563, a0, sel, -1);
+                gm_HandleAllianceCommand(0x65786563, a0, sel, -1);
                 *(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 
 
@@ -104,7 +104,7 @@ void __cdecl fcn_0054a210(char* a0)
                 gm_AddTime((pos14_7f4c00*) (o + 0xb0), 0x18, 0, 0);
                 *(int*) (o + 0xb6) = 0;
                 *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
-                fcn_004c5620(0, o);
+                cm_SendSetHE(0, o);
                 return;
 
 
@@ -133,5 +133,5 @@ void __cdecl fcn_0054a210(char* a0)
     gm_AddTime((pos14_7f4c00*) (o + 0xb0), 0x18, 0, 0);
     *(int*) (o + 0xb6) = 0;
     *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
-    fcn_004c5620(0, o);
+    cm_SendSetHE(0, o);
 }

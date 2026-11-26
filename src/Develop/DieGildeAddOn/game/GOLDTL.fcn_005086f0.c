@@ -1,7 +1,7 @@
 extern double g_662908;
 
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_00508220(int, int*);
+int __cdecl gm_GetKindRecord(int, int*);
 void __cdecl cm_BeginPacketFieldDelta(unsigned short*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -67,7 +67,7 @@ unsigned int __cdecl fcn_005086f0(unsigned short* objectContext)
 		return 0;
 	}
 	id = ids[i];
-	if (fcn_00508220(id, avail) == 0) {
+	if (gm_GetKindRecord(id, avail) == 0) {
 		return 0;
 	}
 	value = gm_RandomMod((int) ((double) (unsigned int) avail[2] * 0.5)) & 0xffff;

@@ -6,7 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004ce260(int a1)
+void __cdecl lb_RequestLeaveLobby(int unused)
 {
 	char buf[0x9c];
 

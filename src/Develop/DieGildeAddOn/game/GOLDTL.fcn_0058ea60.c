@@ -44,13 +44,13 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
-void __cdecl fcn_005782f0(ENTITY_RECORD*, int);
+void __cdecl gm_IncreaseEntityStat(ENTITY_RECORD*, int);
 int __cdecl io_AppendText();
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 void __cdecl evt_RequestScriptExit(char*);
 
 void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
@@ -109,7 +109,7 @@ void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
 	d2_SetForm(h, 1);
 	if (mode == 0) {
 		cm_SendSellObjekt(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1, id, 1, g_773d75, 0);
-		fcn_005782f0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2);
+		gm_IncreaseEntityStat(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2);
 		io_AppendText(0x40f2, 0x40cc, id * 2 + 0x9a8);
 		d3snd_PlaySoundEffect(t, 0, "GEIST_KOMMT", gm_RandomMod(8));
 	} else if (mode == 1) {
@@ -126,7 +126,7 @@ void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunSeanceItemsDialog, 0x777c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	if (m != 0) {
 		evt_RequestScriptExit(m);
 	}

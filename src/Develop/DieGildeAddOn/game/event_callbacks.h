@@ -9,16 +9,16 @@ typedef void (__cdecl* EVENT_RUN)(char* event);
 void __cdecl cut_RegisterEventCallbacks(int kind, EVENT_RUN first, void* second, void* third,
     EVENT_CHECK check, unsigned char flag);
 
-void __cdecl fcn_004e1920(char* event);
+void __cdecl cut_RunTobyCutscene(char* event);
 void __cdecl cut_RunOfficeSessions(char* event);
 void __cdecl cut_RunProzess(char* event);
-void __cdecl fcn_004d77e0(char* event);
+void __cdecl cut_RunCombatCutscene(char* event);
 void __cdecl cut_MainDuell(char* event);
 void __cdecl cut_PlayHinrichtung(char* event);
 void __cdecl fcn_004e2090(char* event);
-void __cdecl fcn_004e2890(char* event);
+void __cdecl cut_PlayBirthCutscene(char* event);
 void __cdecl cut_PlayDeathCutscene(char* event);
-void __cdecl fcn_004e3020(char* event);
+void __cdecl cut_RunPleiteCutscene(char* event);
 void __cdecl cut_RunAuction(char* event);
 void __cdecl fcn_004e4180(char* event);
 
@@ -37,8 +37,8 @@ int __cdecl fcn_004d74b0(char* event);
 int __cdecl fcn_004e1330(char* event);
 int __cdecl cut_NotifyHinrichtung(char* event);
 int __cdecl gm_NotifyHochzeit(char* event);
-int __cdecl fcn_004e27b0(char* event);
-int __cdecl fcn_004e2b40(char* event);
+int __cdecl gm_NotifyGeburt(char* event);
+int __cdecl cut_CheckDeathCutscene(char* event);
 int __cdecl cut_BroadcastCutsceneNotice(char* event);
 
 /* Declaration only: complete allocation extent and storage owner remain unresolved. */

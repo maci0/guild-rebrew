@@ -7,7 +7,7 @@ void __cdecl he_FreeAction(char*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
-int __cdecl fcn_004c5620(int, char*);
+int __cdecl cm_SendSetHE(int, char*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
@@ -45,7 +45,7 @@ void __cdecl he_RunAction0x6f(char* e)
 	}
 	if (a == 0) {
 		gm_AddTime(e + 0x52, 0, 2, 0);
-		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+		*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 		return;
 	}
 	if (*(int*) (e + 0x70) == 2) {
@@ -55,12 +55,12 @@ void __cdecl he_RunAction0x6f(char* e)
 		}
 		if (r == 1) {
 			gm_AddTime(e + 0x52, 0, 2, 0);
-			fcn_004c5620(0, e);
+			cm_SendSetHE(0, e);
 			return;
 		}
 		if (r == 2) {
 			gm_AddTime(e + 0x52, 0, 2, 0);
-			fcn_004c5620(-1, e);
+			cm_SendSetHE(-1, e);
 		}
 		return;
 	}
@@ -69,12 +69,12 @@ void __cdecl he_RunAction0x6f(char* e)
 			cm_RequestChangeBits(*(int*) (a + 4), 0x1c8, 4, 0, 0x800000);
 			cm_RequestCopyEntityData(*(int*) (b + 4), *(int*) (a + 4), (-2 - *(int*) (e + 0xb4)) * 5, 1);
 			gm_AddTime(e + 0x52, 0, 2, 0);
-			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+			*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 			return;
 		}
 		if (*(int*) (e + 0x70) == 3) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-			fcn_004c5620(0, e);
+			cm_SendSetHE(0, e);
 			return;
 		}
 		if (a[9] == 1) {
@@ -85,10 +85,10 @@ void __cdecl he_RunAction0x6f(char* e)
 		he_RegisterApEvent(*(unsigned short*) (e + 8), buf, -*(int*) (e + 0xb8), 0);
 		(*(int*) (e + 0xb4))++;
 		gm_AddTime(e + 0x52, 0x18, 0, 0);
-		*(int*) (e + 0x84) = fcn_004c5620(0, e);
+		*(int*) (e + 0x84) = cm_SendSetHE(0, e);
 		return;
 	}
 	cm_RequestChangeBits(*(int*) (a + 4), 0x1c8, 4, 0, 0x800000);
 	gm_AddTime(e + 0x52, 0, 2, 0);
-	*(int*) (e + 0x84) = fcn_004c5620(-1, e);
+	*(int*) (e + 0x84) = cm_SendSetHE(-1, e);
 }

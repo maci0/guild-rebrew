@@ -4,7 +4,7 @@
 int __cdecl fcn_004f0960(int);
 int __cdecl fcn_004f09c0(int);
 
-int __cdecl fcn_004cdd00(char* request, char* response)
+int __cdecl cm_ExDispatchSlotNCt(char* request, char* response)
 {
 	int result;
 	int code;

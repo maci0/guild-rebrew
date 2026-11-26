@@ -19,12 +19,12 @@ int __cdecl d2_CreateRadioGroup(int, int, int, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471af0(int, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 int __cdecl fcn_00539490(void);
 int __cdecl d2_ShowServerBrowser(int);
 int __cdecl d2_ShowNetworkLoadDialog(void);
 
-int __cdecl fcn_0053a160(void)
+int __cdecl d2_ShowChooseNetworkDialog(void)
 {
 	int list;
 	int b;
@@ -43,7 +43,7 @@ int __cdecl fcn_0053a160(void)
 	c = d2_GetWindowListItem(h, 0, io_AppendText(0x1ca8));
 	list = d2_CreateRadioGroup(3, a, b, c);
 	(*(unsigned char*)&g_6a3440) = 0xfe;
-	while (main_RunFrameLoop(fcn_0053a160, 0x24087) != 0) {
+	while (main_RunFrameLoop(d2_ShowChooseNetworkDialog, 0x24087) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
@@ -78,6 +78,6 @@ int __cdecl fcn_0053a160(void)
 		}
 	}
 	d2_ClearRadioGroup(list);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return result;
 }

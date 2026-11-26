@@ -4,7 +4,7 @@
 extern int g_7749f8[];
 
 int* __cdecl m_alloc(int size, char* tag);
-void __cdecl fcn_00580cf0(int);
+void __cdecl d2_FreeTutorialNodes(int);
 int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 
 #pragma optimize("y", off)
@@ -18,7 +18,7 @@ int* __cdecl d2_InitTutorialMainIntro(void)
 	intro = m_alloc(0x74, "FTInitMainIntro");
 	fdest = (char*) intro;
 	if (intro == 0) {
-		fcn_00580cf0(0);
+		d2_FreeTutorialNodes(0);
 		return 0;
 	}
 	flen = 0x74;

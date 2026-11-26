@@ -29,7 +29,7 @@ typedef struct {
 
 extern int g_7f4e0c[];
 
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 void __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int a4);
 void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Pos* b, Pos* a);
@@ -59,7 +59,7 @@ int __cdecl ai_StartUseObjectMilitary(int methodKindArg, char* e, int busy, Pos*
 	if (busy == 0 && methodKindArg == 0) {
 		f.mask = 0x90010;
 		f.b = 0;
-		if (fcn_004a5e60(e, 4, f, 0, 100.0f, &found) != 0) {
+		if (ai_FindEntityInFavorRange(e, 4, f, 0, 100.0f, &found) != 0) {
 			gm_ResolveEntityById(&p, 0, 0, found);
 			if (p != 0) {
 				count = 0;

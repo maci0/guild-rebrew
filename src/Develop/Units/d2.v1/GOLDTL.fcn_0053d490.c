@@ -39,7 +39,7 @@ void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 char* __cdecl d2_GetControlValue(int);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -248,7 +248,7 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 		d2_ClearRadioGroup(list1);
 		d2_ClearRadioGroup(list2);
 		d2_ClearRadioGroup(list);
-		fcn_00471e30(dlg);
+		d2_DestroyForm(dlg);
 		WritePrivateProfileStringA(s_6a1e4c, s_6a1e54, g_7e23ea,
 		    g_7e22c0);
 		WritePrivateProfileStringA(s_6a1e4c, s_6a1e3c, g_7e240a,

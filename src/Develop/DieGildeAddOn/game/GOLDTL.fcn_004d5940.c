@@ -31,7 +31,7 @@ int __cdecl cut_PlunderBuildingCarts(int, int, char*, char*, float);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 /* Record buffer filled by fcn_0050de80: two counts, a per-entry value table,
  * the id table and the weight table. */
@@ -313,7 +313,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 	}
 
 	if (win != -1) {
-		fcn_00471e30(win);
+		d2_DestroyForm(win);
 	}
 	return answer;
 }

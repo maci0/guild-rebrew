@@ -29,13 +29,13 @@ extern char g_6b5c60[];
 void __cdecl fcn_00526120(int, int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 int __cdecl fcn_005cd440(Req*, char*, char*, void*);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_ShowSchneidereiPlauschDialog(void);
 
 /* The request's zero-fill is the original's hand-written block-fill
  * prelude; recorded C memset probes did not emit it (archived docs/codegen-walls.md
  * section 6b). */
-void __cdecl fcn_005e5130(void)
+void __cdecl d2_SelectPlauschTarget(void)
 {
 	Req req;
 	Req* p;
@@ -70,5 +70,5 @@ void __cdecl fcn_005e5130(void)
 		req.kind = 6;
 		fcn_005cd440(&req, g_14b5bc8, g_6b5c60, d2_ShowSchneidereiPlauschDialog);
 	}
-	fcn_00532ef0();
+	d3_EndCameraAndUiMode();
 }

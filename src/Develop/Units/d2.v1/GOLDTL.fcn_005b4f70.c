@@ -43,13 +43,13 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471af0(int k, int flag);
 void __cdecl d2_ShowSmapDiagnostics(void);
 void __cdecl d2_ShowScriptMemory(void);
-void __cdecl fcn_005b37d0(void);
-void __cdecl fcn_005b39c0(void);
-void __cdecl fcn_005b3b60(void);
-void __cdecl fcn_005b4500(void);
-void __cdecl fcn_005b4c80(void);
+void __cdecl d2_ShowMemoryStats(void);
+void __cdecl d2_ShowLagerInventoryDebug(void);
+void __cdecl d2_RunTheatreCutscenePicker(void);
+void __cdecl d2_ShowPlayerObjektCounts(void);
+void __cdecl d2_ShowCharacterActionDebug(void);
 void __cdecl d2_Plot(int, int, unsigned char, unsigned char, unsigned char);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_RunSceneChecker(void)
 {
@@ -94,24 +94,24 @@ void __cdecl d2_RunSceneChecker(void)
 				d2_ShowScriptMemory();
 			}
 			if (d2_CurrentElementId == h3) {
-				fcn_005b37d0();
+				d2_ShowMemoryStats();
 			}
 			if (d2_CurrentElementId == h4) {
-				fcn_005b39c0();
+				d2_ShowLagerInventoryDebug();
 			}
 			if (d2_CurrentElementId == h5) {
 				fcn_00471af0(d, 0);
-				fcn_005b3b60();
+				d2_RunTheatreCutscenePicker();
 				fcn_00471af0(d, 1);
 			}
 			else if (d2_CurrentElementId == h6) {
 				fcn_00471af0(d, 0);
-				fcn_005b4500();
+				d2_ShowPlayerObjektCounts();
 				fcn_00471af0(d, 1);
 			}
 			else if (d2_CurrentElementId == h7) {
 				fcn_00471af0(d, 0);
-				fcn_005b4c80();
+				d2_ShowCharacterActionDebug();
 				fcn_00471af0(d, 1);
 			}
 		}
@@ -168,5 +168,5 @@ void __cdecl d2_RunSceneChecker(void)
 			g_774654 = 1;
 		}
 	}
-	fcn_00471e30(d);
+	d2_DestroyForm(d);
 }

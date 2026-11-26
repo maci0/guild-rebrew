@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00455540(char* o, float* v, float* out);
+void __cdecl d3_TransformToObjectSpace(char* o, float* v, float* out);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl d3_NormalizeVector(float* v);
 
@@ -20,7 +20,7 @@ float __cdecl d3_ComputeYawToTarget(char* obj, float* target)
 	float s;
 	float c;
 
-	fcn_00455540(obj, (float*) 0x662d40, a);
+	d3_TransformToObjectSpace(obj, (float*) 0x662d40, a);
 	d3_TransformPoint(obj, obj + 0x4c, pos);
 	a[0] -= pos[0];
 	a[2] -= pos[2];

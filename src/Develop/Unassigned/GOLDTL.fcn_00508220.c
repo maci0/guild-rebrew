@@ -10,7 +10,7 @@ typedef struct {
 
 extern Rec12 g_696560[];
 
-int __cdecl fcn_00508220(int idx, Rec12* out)
+int __cdecl gm_GetKindRecord(int idx, Rec12* out)
 {
 	if (idx >= 10) {
 		*out = g_696560[0];

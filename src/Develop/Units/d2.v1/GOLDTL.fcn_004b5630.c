@@ -13,7 +13,7 @@ extern void *__cdecl d3snd_PlaySoundEffect(int a, int b, const char *name, int c
 extern int __cdecl sb_CheckVoicePlaying(void *node);
 extern void __cdecl sb_StopVoice(void *node, int a);
 extern void __cdecl main_RunFrameLoop(int a, int b);
-extern void __cdecl fcn_00471e30(void *obj);
+extern void __cdecl d2_DestroyForm(void *obj);
 
 /* ADDRESS: GOLDTL 0x004b5630 */
 void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
@@ -123,7 +123,7 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 		if (sb_CheckVoicePlaying(node)) {
 			while (main_RunFrameLoop(0, b), g_100f1dc == -1 || d2_CurrentElementId != tab) {
 				if (!sb_CheckVoicePlaying(node)) {
-					fcn_00471e30(obj);
+					d2_DestroyForm(obj);
 					return;
 				}
 			}
@@ -142,5 +142,5 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 			} while (i > g_6b7fac);
 		}
 	}
-	fcn_00471e30(obj);
+	d2_DestroyForm(obj);
 }

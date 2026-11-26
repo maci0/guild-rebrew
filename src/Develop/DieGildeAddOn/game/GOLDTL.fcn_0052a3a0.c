@@ -74,7 +74,7 @@ double __cdecl cos(double);
 
 int* __cdecl fcn_00459ae0(float, float, float);
 int __cdecl d3_CreateSkyLayer(int, int, int, Col, float, int, float, float);
-void __cdecl fcn_00459940(int, int, float);
+void __cdecl d3_SetSkyLayerScrollSpeed(int, int, float);
 void __cdecl fcn_004597f0(int, int);
 void __cdecl gm_InitWeatherWave(int, int, Vec24*, Vec24*);
 void __cdecl d3_SelectSceneContext(int, int);
@@ -185,15 +185,15 @@ void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 	*(int*) &col = 0xff;
 	col.b = 0;
 	g_7e4540[0] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "Sky_Schoen_01", col, g_6a2640, 0, g_6a2644, g_6a2648);
-	fcn_00459940(g_6b89c0, g_7e4540[0], 0);
+	d3_SetSkyLayerScrollSpeed(g_6b89c0, g_7e4540[0], 0);
 	*(int*) &col = 0;
 	col.b = 0;
 	g_7e4540[1] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "Sky_Schoen_02", col, g_6a268c, 0, g_6a2690, g_6a2694);
-	fcn_00459940(g_6b89c0, g_7e4540[1], 0);
+	d3_SetSkyLayerScrollSpeed(g_6b89c0, g_7e4540[1], 0);
 	*(int*) &col = 0;
 	col.b = 0;
 	g_7e4540[2] = d3_CreateSkyLayer(g_6b89c0, 0, (int) "sky_dunkel_01", col, g_6a28f0, 0, g_6a28f4, g_6a28f8);
-	fcn_00459940(g_6b89c0, g_7e4540[2], 0);
+	d3_SetSkyLayerScrollSpeed(g_6b89c0, g_7e4540[2], 0);
 	player = d3_CurrentContextIndex;
 	for (i = 0; i < 64; i++) {
 		if (((Slot_52a3a0*) g_1043340)[i].f2c != 0) {

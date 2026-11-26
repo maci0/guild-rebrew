@@ -21,7 +21,7 @@ void __cdecl fcn_005e3520(void);
 void __cdecl fcn_005e2b60(void);
 void __cdecl d2_ShowSoundOptions(void);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ShowOptionsMenu(void)
 {
@@ -61,5 +61,5 @@ void __cdecl d2_ShowOptionsMenu(void)
 		}
 	}
 	d2_ClearRadioGroup(p);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 }

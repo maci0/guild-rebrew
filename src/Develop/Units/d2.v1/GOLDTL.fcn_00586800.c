@@ -37,7 +37,7 @@ int __cdecl gm_CheckEntityStock(ENTITY_RECORD*, int, unsigned char);
 void __cdecl ahm_SendSetFloatValue(char*, float);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 {
@@ -79,7 +79,7 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 		if (p == 0) {
 			g_774654 = 1;
 			main_RunFrameLoop(d2_RunDomizilSkillDialog, 0x20007);
-			fcn_00471e30(h);
+			d2_DestroyForm(h);
 			return 0;
 		}
 		if (g_14ce8e0 != 0) {
@@ -98,6 +98,6 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 			}
 		}
 	} while (main_RunFrameLoop(d2_RunDomizilSkillDialog, 0x677c7) != 0);
-	fcn_00471e30(h);
+	d2_DestroyForm(h);
 	return r;
 }

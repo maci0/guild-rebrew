@@ -9,7 +9,7 @@ void __cdecl cm_RequestClearLagerslot(int, int);
 
 
 /* ADDRESS: GOLDTL 0x0047e220 */
-void __cdecl fcn_0047e220(char* x)
+void __cdecl ai_RequestProductionGoods(char* x)
 {
 	int i;
 

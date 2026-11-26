@@ -39,7 +39,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl d2_BuildPersonStatusDesc(SEL_54f600*);
 int __cdecl fcn_005caaa0(int, int, int, SEL_54f600*);
-void __cdecl fcn_004c5620(int, void*);
+void __cdecl cm_SendSetHE(int, void*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0054f600 */
 void __cdecl fcn_0054f600(char* o)
@@ -117,7 +117,7 @@ void __cdecl fcn_0054f600(char* o)
 		}
 		if (entity != 0) {
 			*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
-			fcn_004c5620(-1, entity);
+			cm_SendSetHE(-1, entity);
 		}
 	}
 	he_FreeAction(o);

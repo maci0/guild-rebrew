@@ -90,8 +90,8 @@ int __cdecl d2_CheckActionBlocker(void*, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl cm_SendCopyEntityData(void*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
-void __cdecl fcn_00532ef0(void);
+void __cdecl d2_DestroyForm(int);
+void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005e5ea0 */
 void __cdecl d2_ShowBlutracheDialog(char* participant)
@@ -200,6 +200,6 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 			break;
 		}
 	}
-	fcn_00471e30(dlg);
-	fcn_00532ef0();
+	d2_DestroyForm(dlg);
+	d3_EndCameraAndUiMode();
 }

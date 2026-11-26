@@ -23,7 +23,7 @@ struct msg {
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_0054f340(char* o)
+void __cdecl he_InitDuellIntro(char* o)
 {
 	*(pos14_7f4c00*) (o + 0x44) = gm_GameTime;
 	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;

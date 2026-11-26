@@ -66,9 +66,9 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005afa50(int unused, char* e)
+int __cdecl d2_SelectBetriebsPruefungTarget(int unused, char* e)
 {
 	int btn1;
 	Packet pkt;
@@ -140,7 +140,7 @@ int __cdecl fcn_005afa50(int unused, char* e)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005afa50, 0x677c7) != 0);
-	fcn_00471e30(dlg);
+	} while (main_RunFrameLoop((void*) d2_SelectBetriebsPruefungTarget, 0x677c7) != 0);
+	d2_DestroyForm(dlg);
 	return 0;
 }

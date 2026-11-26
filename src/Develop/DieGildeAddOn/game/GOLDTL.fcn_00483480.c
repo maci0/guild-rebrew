@@ -7,7 +7,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004849b0(int, int, int);
 void __cdecl ai_TryHireWorker(int);
 void __cdecl fcn_00487970(int, int, int);
-void __cdecl fcn_00487c00(int, int, int);
+void __cdecl ai_RequestAusbauUpgrade(int, int, int);
 void __cdecl fcn_00487470(int);
 void __cdecl ai_FlagWorkerTrainingNeeded(int);
 void __cdecl ai_SendAction0x8f(int);
@@ -19,24 +19,24 @@ int __cdecl fcn_005b1e40(int);
 int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 void __cdecl fcn_0064d41a(char *, char *, ...);
-void __cdecl fcn_0047e220(int);
+void __cdecl ai_RequestProductionGoods(int);
 void __cdecl ai_PlanResourceRestock(int, int);
 void __cdecl ai_CancelBlockedActions(int, int);
 void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl fcn_004831f0(int);
 void __cdecl ai_MeisterCollectTrans(int);
 void __cdecl ai_MeisterTrade(int, int);
-void __cdecl fcn_00487f90(void *);
+void __cdecl ai_DispatchMeisterAction(void *);
 
 
 
 
 typedef struct {
 	int v[0x10];
-} RECORD;
+} MEISTER_COPY_BLK64;
 
 /* ADDRESS: GOLDTL 0x00483480 */
-void __cdecl fcn_00483480(int entityRecord)
+void __cdecl ai_PlanMasterProduction(int entityRecord)
 {
 	void *rec1;
 	int i;
@@ -71,7 +71,7 @@ void __cdecl fcn_00483480(int entityRecord)
 	fcn_004849b0(entityRecord, (int) rec0, (int) rec1);
 	ai_TryHireWorker(entityRecord);
 	fcn_00487970((int) rec1, entityRecord, 0x4b);
-	fcn_00487c00((int) rec1, entityRecord, 0x19);
+	ai_RequestAusbauUpgrade((int) rec1, entityRecord, 0x19);
 	fcn_00487470(entityRecord);
 	ai_FlagWorkerTrainingNeeded(entityRecord);
 	ai_SendAction0x8f(entityRecord);
@@ -252,7 +252,7 @@ shuffle:
 	}
 	*(unsigned short *) (entityRecord + 0x1bc) = 0;
 tail:
-	fcn_0047e220((int) rec1);
+	ai_RequestProductionGoods((int) rec1);
 	ai_PlanResourceRestock(entityRecord, (int) rec1);
 	{
 		unsigned int *fl;
@@ -325,7 +325,7 @@ tail:
 					s2 = (int *) ((char *) g_100b0c0 + id * 0x40);
 					d2 = (int *) ((*(int *) (g_100dc38 * 4 + 0x100dc40) +
 						       g_100dc38 * 4) * 0x40 + 0x100df20);
-					*(RECORD *) d2 = *(RECORD *) s2;
+					*(MEISTER_COPY_BLK64 *) d2 = *(MEISTER_COPY_BLK64 *) s2;
 					*(int *) (g_100dc38 * 4 + 0x100dc40) += 1;
 				}
 			}
@@ -396,7 +396,7 @@ tail:
 			if ((fv & 8) != 0) {
 				arg.kind = 4;
 				arg.entry = (void *) ((char *) fl - 0x54);
-				fcn_00487f90(&arg);
+				ai_DispatchMeisterAction(&arg);
 				if (g_100dc20 == *(int *) (entityRecord + 0x16c) && g_100dc3c < 4) {
 					int dst;
 
@@ -408,7 +408,7 @@ tail:
 		} else if ((fv & 0x400) != 0) {
 			arg.kind = 0x8c;
 			arg.entry = (void *) ((char *) fl - 0x54);
-			fcn_00487f90(&arg);
+			ai_DispatchMeisterAction(&arg);
 			if (g_100dc20 == *(int *) (entityRecord + 0x16c) && g_100dc3c < 4) {
 				int dst;
 

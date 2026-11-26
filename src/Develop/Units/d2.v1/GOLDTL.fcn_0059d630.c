@@ -25,11 +25,11 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl d2_RunRaeuberlagerTargetDialog(int a0, char* a1);
 
-void __cdecl fcn_0059d630(char* a)
+void __cdecl d2_SelectSchutzgeldTarget(char* building)
 {
 	Req req;
 
-	if (d2_CheckOwnerBlocked(a) != 0 || a == 0) {
+	if (d2_CheckOwnerBlocked(building) != 0 || building == 0) {
 		return;
 	}
 	memset(&req, 0, sizeof(req));
@@ -38,7 +38,7 @@ void __cdecl fcn_0059d630(char* a)
 	req.kind = 6;
 	req.c = 0xa07c43a0;
 	req.d = 1;
-	fcn_0052a0c0(a, 0);
+	fcn_0052a0c0(building, 0);
 	fcn_005bdc30(1, &req, g_14abd48, (void*) d2_RunRaeuberlagerTargetDialog, 0);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();

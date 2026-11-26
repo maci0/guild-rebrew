@@ -5,7 +5,7 @@ int __cdecl io_AppendText(int id, ...);
 void __cdecl fcn_005c4d00(int win, int sub, int idx, int flag);
 int __cdecl d2_GetControlValue(int key);
 int __cdecl main_RunFrameLoop(void *proc, int msg);
-void __cdecl fcn_00471e30(int obj);
+void __cdecl d2_DestroyForm(int obj);
 
 /* ADDRESS: GOLDTL 0x005c4dc0 */
 void __cdecl d2_ShowApPanel(void)
@@ -41,5 +41,5 @@ void __cdecl d2_ShowApPanel(void)
 			}
 		}
 	} while (main_RunFrameLoop((void *) d2_ShowApPanel, 0x657c7) != 0);
-	fcn_00471e30(dlg);
+	d2_DestroyForm(dlg);
 }

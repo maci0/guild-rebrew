@@ -9,8 +9,8 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 int __cdecl fcn_00510170(char*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00532ef0(void);
-void __cdecl fcn_00471e30(int);
+void __cdecl d3_EndCameraAndUiMode(void);
+void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005aceb0 */
 void __cdecl d2_RunKerkerplanDialog(char* obj)
@@ -45,6 +45,6 @@ void __cdecl d2_RunKerkerplanDialog(char* obj)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(d2_RunKerkerplanDialog, 0x677c7) != 0);
-	fcn_00532ef0();
-	fcn_00471e30(h);
+	d3_EndCameraAndUiMode();
+	d2_DestroyForm(h);
 }

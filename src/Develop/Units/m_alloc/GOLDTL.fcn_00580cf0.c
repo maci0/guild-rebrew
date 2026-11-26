@@ -3,11 +3,11 @@
 
 void __cdecl m_FreeTracked(void*);
 
-void __cdecl fcn_00580cf0(char* node)
+void __cdecl d2_FreeTutorialNodes(char* node)
 {
 	if (node != 0) {
 		if (*(char**) (node + 0x70) != 0) {
-			fcn_00580cf0(*(char**) (node + 0x70));
+			d2_FreeTutorialNodes(*(char**) (node + 0x70));
 		}
 		if (*(void**) (node + 0x58) != 0) {
 			m_FreeTracked(*(void**) (node + 0x58));

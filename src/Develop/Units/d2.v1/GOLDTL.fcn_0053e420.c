@@ -20,7 +20,7 @@ int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471e30(int);
+void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_ChooseHistory(void)
 {
@@ -91,6 +91,6 @@ int __cdecl d2_ChooseHistory(void)
 		}
 	}
 	d2_ClearRadioGroup(radioGroup);
-	fcn_00471e30(dialogHandle);
+	d2_DestroyForm(dialogHandle);
 	return result;
 }

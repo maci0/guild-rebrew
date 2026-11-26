@@ -11,7 +11,7 @@ typedef struct F8 {
 // SIZE 0x8
 
 int __cdecl d2_CheckActionBlocker(char* a1, int a2);
-int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
+int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 int __cdecl fcn_00470820(int a1, int a2, char* text);
 void __cdecl d2_CenterDialogWindows(int a1);
@@ -20,7 +20,7 @@ void __cdecl d2_SetForm(int a1, int a2);
 int __cdecl io_AppendText(int a1, int a2, int a3, int a4);
 int __cdecl d2_GetWindowListItem(int a1, int a2, int a3);
 int __cdecl main_RunFrameLoop(void* a1, int a2);
-void __cdecl fcn_00471e30(int a1);
+void __cdecl d2_DestroyForm(int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(void* a1, int a2);
 void __cdecl cm_SendCopyEntityData(char* msg);
@@ -60,7 +60,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 	if (p == 0) {
 		f.mask = 0x4080a0;
 		f.b = 0;
-		if (fcn_004a5e60((char*) a0, 0, f, 0, 100.0f, &found) == 0)
+		if (ai_FindEntityInFavorRange((char*) a0, 0, f, 0, 100.0f, &found) == 0)
 			return 0;
 		p = gm_StartFilteredEntitySearch(1, 1, found);
 	}
@@ -112,7 +112,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 				g_774654 = 1;
 		}
 	} while (main_RunFrameLoop((void*) 0x5ae6a0, 0x677c7) != 0);
-	fcn_00471e30(dialogId);
+	d2_DestroyForm(dialogId);
 	return res;
 	}
 	return 0;

@@ -28,7 +28,7 @@ void __cdecl evt_RequestScriptExit(void*);
 void __cdecl evt_WaitForScriptExit(int);
 void __cdecl fcn_00516ed0(char*);
 void __cdecl d3snd_FreeObjectSoundBanks(void);
-void __cdecl fcn_00516f60(void);
+void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl fcn_00597fd0(void*);
 void __cdecl d2_RunCharacterActionsHud(int, void*);
 void __cdecl d2_RunSabotageActionsHud(int, void*);
@@ -47,10 +47,10 @@ void __cdecl fcn_005a7200(int, void*);
 void __cdecl d2_RunKircheMenu(int, void*);
 void __cdecl d2_RunKircheAltarMenu(int, void*);
 void __cdecl fcn_005acf90(int, void*);
-void __cdecl fcn_005ad260(int, void*);
-void __cdecl fcn_005ad360(int, void*);
+void __cdecl d2_RunKerkermeisterMenu(int, void*);
+void __cdecl d2_RunIdleBuildingInterior0xbb(int, void*);
 void __cdecl d2_RunRaeuberlagerMenu(int, void*);
-void __cdecl fcn_005ae3c0(int, void*);
+void __cdecl d2_RunIdleBuildingInterior0x4d(int, void*);
 void __cdecl d2_RunWachstubeMenu(int, void*);
 void __cdecl d2_RunWachstubeRegenMenu(int, void*);
 void __cdecl fcn_005af140(int, void*);
@@ -63,7 +63,7 @@ void __cdecl d2_RunRathausCouncilMenu(int, void*);
 void __cdecl d2_RunStadtkasseMenu(int, void*);
 void __cdecl d2_RunZunftLevel2Menu(int, void*);
 void __cdecl d2_RunSchreibstubeMenu(int, void*);
-void __cdecl fcn_005aaed0(int, void*);
+void __cdecl d2_RunZunftPreismanipMenu(int, void*);
 void __cdecl d2_RunZunftMenu(int, void*);
 void __cdecl d2_RunWachhofRegenMenu(int, void*);
 void __cdecl d2_RunZollamtMenu(int, void*);
@@ -71,7 +71,7 @@ void __cdecl d2_RunRazziaWacheMenu(int, void*);
 void __cdecl d2_RunAlchemistMenu(int, void*);
 void __cdecl d2_RunSchneiderMenu(int, void*);
 void __cdecl d2_RunDomizilKabinettMenu(int, void*);
-void __cdecl fcn_0058ae60(int, void*);
+void __cdecl d2_RunDomizilKanoneMenu(int, void*);
 extern unsigned int g_6a2520;
 extern char g_6752a8[];
 char* __cdecl strcpy(char*, const char*);
@@ -240,16 +240,16 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         fcn_005acf90(*(int*)&g_7746c4, msg);
         break;
     case 0xba:
-        fcn_005ad260(*(int*)&g_7746c4, msg);
+        d2_RunKerkermeisterMenu(*(int*)&g_7746c4, msg);
         break;
     case 0xbb:
-        fcn_005ad360(*(int*)&g_7746c4, msg);
+        d2_RunIdleBuildingInterior0xbb(*(int*)&g_7746c4, msg);
         break;
     case 0x54:
         d2_RunRaeuberlagerMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x4d:
-        fcn_005ae3c0(*(int*)&g_7746c4, msg);
+        d2_RunIdleBuildingInterior0x4d(*(int*)&g_7746c4, msg);
         break;
     case 0x5c:
         d2_RunWachstubeMenu(*(int*)&g_7746c4, msg);
@@ -288,7 +288,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         d2_RunSchreibstubeMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x138:
-        fcn_005aaed0(*(int*)&g_7746c4, msg);
+        d2_RunZunftPreismanipMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x139:
         d2_RunZunftMenu(*(int*)&g_7746c4, msg);
@@ -312,7 +312,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         d2_RunDomizilKabinettMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x256:
-        fcn_0058ae60(*(int*)&g_7746c4, msg);
+        d2_RunDomizilKanoneMenu(*(int*)&g_7746c4, msg);
         break;
             default:
                 fcn_00597fd0(msg);
@@ -359,7 +359,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
     g_675310 = -1;
     *(int*) &g_7746c4 = 0;
     *(int*) &g_7746cc = 0;
-    fcn_00516f60();
+    d3_ResetWorldSceneState();
     *(int*) &g_7e3a40 = *(int*) &saved.pos[0];
     *(int*) &g_7e3a44 = *(int*) &saved.pos[1];
     *(int*) &g_7e3a48 = *(int*) &saved.pos[2];
