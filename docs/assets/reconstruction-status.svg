@@ -4,7 +4,7 @@
 <rect width="715" height="788" rx="16" fill="#101820"/>
 <g font-family="DejaVu Sans, sans-serif">
 <text x="24" y="33" font-size="19" fill="#f1f6fa" text-anchor="start">RECONSTRUCTION METRICS</text>
-<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-11-26 05:56 UTC</text>
+<text x="691" y="32" font-size="12" fill="#aebdca" text-anchor="end">2026-11-26 12:47 UTC</text>
 <text x="24" y="57" font-size="13" fill="#aebdca" text-anchor="start">Code bytes, function counts and raw-file agreement · separate measures</text>
 <rect x="24" y="80" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
 <text x="40" y="107" font-size="16" fill="#f1f6fa" text-anchor="start">server.dll</text>
@@ -32,10 +32,10 @@
 <text x="675" y="390" font-size="17" fill="#39bdf8" text-anchor="end">82.3%</text>
 <rect x="40" y="399" width="635" height="10" fill="#394a59"/>
 <rect x="40" y="399" width="523.21" height="10" fill="#39bdf8"/>
-<text x="40" y="433" font-size="12" fill="#aebdca" text-anchor="start">Raw file, original offsets · 136,917 / 3,018,752 bytes</text>
-<text x="675" y="433" font-size="17" fill="#ffc68b" text-anchor="end">4.5%</text>
+<text x="40" y="433" font-size="12" fill="#aebdca" text-anchor="start">Raw file, original offsets · 138,811 / 3,010,560 bytes</text>
+<text x="675" y="433" font-size="17" fill="#ffc68b" text-anchor="end">4.6%</text>
 <rect x="40" y="442" width="635" height="10" fill="#394a59"/>
-<rect x="40" y="442" width="28.80" height="10" fill="#ffc68b"/>
+<rect x="40" y="442" width="29.28" height="10" fill="#ffc68b"/>
 <text x="40" y="472" font-size="11" fill="#aebdca" text-anchor="start">0 assembly matches · 926 functions still to match</text>
 <text x="40" y="488" font-size="11" fill="#ffc68b" text-anchor="start">Raw file differs from reference</text>
 <rect x="24" y="512" width="667" height="204" rx="10" fill="#18242f" stroke="#2a3b49"/>
@@ -48,10 +48,10 @@
 <text x="675" y="606" font-size="17" fill="#39bdf8" text-anchor="end">49.1%</text>
 <rect x="40" y="615" width="635" height="10" fill="#394a59"/>
 <rect x="40" y="615" width="312.34" height="10" fill="#39bdf8"/>
-<text x="40" y="649" font-size="12" fill="#aebdca" text-anchor="start">Raw file, original offsets · 27,114 / 2,301,952 bytes</text>
+<text x="40" y="649" font-size="12" fill="#aebdca" text-anchor="start">Raw file, original offsets · 26,991 / 2,301,952 bytes</text>
 <text x="675" y="649" font-size="17" fill="#ffc68b" text-anchor="end">1.1%</text>
 <rect x="40" y="658" width="635" height="10" fill="#394a59"/>
-<rect x="40" y="658" width="7.48" height="10" fill="#ffc68b"/>
+<rect x="40" y="658" width="7.45" height="10" fill="#ffc68b"/>
 <text x="40" y="688" font-size="11" fill="#aebdca" text-anchor="start">7 assembly matches · 2,244 functions still to match</text>
 <text x="40" y="704" font-size="11" fill="#ffc68b" text-anchor="start">Raw file differs from reference</text>
 <text x="24" y="738" font-size="11" fill="#aebdca" text-anchor="start">Code accounting includes libraries and padding; C counts exclude whole-function assembly.</text>
