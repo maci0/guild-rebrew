@@ -13,7 +13,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
 float __cdecl gm_GetEntitySkill(char*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_004ec2d0(unsigned char*, int, int);
+void __cdecl amt_AdjustOfficeHoldersFavor(unsigned char*, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c5620(int, char*);
 
@@ -46,7 +46,7 @@ void __cdecl fcn_0054f4a0(char* a0, char* firstEntity, unsigned char* secondEnti
 			ret = (unsigned short) gm_RandomMod(3) + 1;
 		}
 	}
-	fcn_004ec2d0(secondEntity, ret, -9 - (int) (gm_GetEntitySkill(firstEntity, 4) * 8.0f) - (gm_RandomMod(8) & 0xffff));
+	amt_AdjustOfficeHoldersFavor(secondEntity, ret, -9 - (int) (gm_GetEntitySkill(firstEntity, 4) * 8.0f) - (gm_RandomMod(8) & 0xffff));
 	fcn_004c54c0(*(int*) (firstEntity + 4), *(int*) (secondEntity + 4), -0x14, 1);
 	*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
 	fcn_004c5620(-1, a0);

@@ -12,7 +12,7 @@ extern double g_6640e8;
 char* __cdecl fcn_004ce590(int);
 unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl fcn_004c6880(int, int, int);
-char* __cdecl fcn_004ce610(char*);
+char* __cdecl gm_GetEquippedCombatGear(char*);
 int __cdecl fcn_004cef70(int, char*);
 unsigned char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl d3_ChangeObjectTransparency(char*, char*, OBJECT_COLOR);
@@ -75,7 +75,7 @@ void __cdecl fcn_004cf000(void)
 		if (e == 0) {
 			continue;
 		}
-		s = fcn_004ce610(e);
+		s = gm_GetEquippedCombatGear(e);
 		if (s != 0 && *(int*) s == 0x172) {
 			t = 0;
 			if ((*(char**) 0x6f0d74) != 0) {

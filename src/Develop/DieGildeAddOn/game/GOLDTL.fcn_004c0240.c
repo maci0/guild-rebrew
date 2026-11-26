@@ -10,9 +10,9 @@ extern float g_664174;
 
 int* __cdecl gm_GetChainNodeAtIndex(int, int);
 char* __cdecl gm_SearchTable67(int);
-int __cdecl fcn_0050cce0(char*, Slots*, int);
+int __cdecl gm_CollectBuildingStock(char*, Slots*, int);
 char* __cdecl fcn_0050d490(char*);
-int __cdecl fcn_0050de80(char*, Slots*);
+int __cdecl gm_CalcEntityInventoryStats(char*, Slots*);
 char* __cdecl fcn_00503d10(int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
@@ -46,11 +46,11 @@ void __cdecl fcn_004c0240(char* a0, int a1)
 		return;
 	}
 	t = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) pkt];
-	if ((((char)(((BUILDING_PROTOTYPE*)t)->category)) != 0xa && ((char)(((BUILDING_PROTOTYPE*)t)->category)) != 0x1c) && fcn_0050cce0(pkt, &buf, 0) == 0) {
+	if ((((char)(((BUILDING_PROTOTYPE*)t)->category)) != 0xa && ((char)(((BUILDING_PROTOTYPE*)t)->category)) != 0x1c) && gm_CollectBuildingStock(pkt, &buf, 0) == 0) {
 		return;
 	}
 	v4 = fcn_0050d490(a0);
-	if (fcn_0050de80(a0, &stats) == 0) {
+	if (gm_CalcEntityInventoryStats(a0, &stats) == 0) {
 		return;
 	}
 	rec += 0x20;

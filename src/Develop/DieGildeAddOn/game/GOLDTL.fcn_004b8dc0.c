@@ -70,7 +70,7 @@ int __cdecl fcn_004b8dc0(int *msg)
 	gm_ResolveEntityById((void**) (&b), 0, 0, *(int *) (e + 0xb0));
 	gm_ResolveEntityById((void**) (&a), 0, 0, *(int *) (e + 0xb4));
 	val = (char) (*(unsigned char *) (r + 0x12) * ((gm_RandomMod(0x23) + 0x3c) * 0.01f));
-	fcn_004c4510(r, *(int *) (r + 2));
+	cm_BeginPacketFieldDelta(r, *(int *) (r + 2));
 	cm_AppendPacketFieldDelta(1, 1, 0x12, &val);
 	fcn_004c5360();
 	if (*b == 0x47) {

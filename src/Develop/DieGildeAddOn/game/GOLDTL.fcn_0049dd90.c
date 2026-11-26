@@ -16,7 +16,7 @@ typedef struct {
     float value;
 } Msg_49dd90;
 
-extern int __cdecl fcn_00507ab0(int a0);
+extern int __cdecl gm_FindPublicTreasury(int a0);
 extern int __cdecl fcn_004a5e60(unsigned short *a0, int a1, int a2, int a3, int a4, float a5, int *a6);
 extern int __cdecl gm_ResolveEntityById(void **a0, void **a1, void **a2, int a3);
 extern int __cdecl fcn_0050b810(int a0, unsigned char a1);
@@ -42,7 +42,7 @@ int __cdecl ai_StartBuergermeisterKerker(int a0, unsigned short *a1, int a2, Msg
     int rv;
     char *v6p;
 
-    fcn_00507ab0(1);
+    gm_FindPublicTreasury(1);
     if (a2 != 0 || *(unsigned char *)((char *)a1 + 0x166) != 0xf || a3->type != 0 ||
         (a0 != 0 && *((char *)a1 + 0x130) != 7 && *((char *)a1 + 0x130) != 6))
         return 0;
@@ -51,7 +51,7 @@ int __cdecl ai_StartBuergermeisterKerker(int a0, unsigned short *a1, int a2, Msg
     gm_ResolveEntityById((void **)&targetEntity, 0, 0, v9);
     if (targetEntity == 0)
         return 0;
-    v6p = (char *)fcn_00507ab0(1);
+    v6p = (char *)gm_FindPublicTreasury(1);
     if (v6p == 0)
         return 0;
     v7 = fcn_0050b810(*(int *)(v6p + 0x14), g_773d75);

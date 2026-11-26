@@ -19,9 +19,9 @@ extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
-void __cdecl fcn_004c61d0(Offer* o, char who);
+void __cdecl cm_SendMarktSlotDelta(Offer* o, char who);
 
-void __cdecl fcn_00501fe0(void)
+void __cdecl cm_SendRandomMarktSlotDelta(void)
 {
 	Offer copy;
 	Offer* row;
@@ -43,7 +43,7 @@ void __cdecl fcn_00501fe0(void)
 				copy.price = copy.base * 0.5;
 				copy.value = (float)(eval_ObjektPreis2Credits(((MARKET_STOCK_SLOT*)row)->objekt_id, 100) * 0.5);
 			}
-			fcn_004c61d0(&copy, g_773d75);
+			cm_SendMarktSlotDelta(&copy, g_773d75);
 		}
 	}
 }

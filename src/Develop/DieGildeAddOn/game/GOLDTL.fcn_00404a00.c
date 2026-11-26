@@ -13,7 +13,7 @@ void __cdecl d3_RemoveObjectAnimation(char*, char*);
 #include "ch_motion.h"
 
 char* __cdecl d3_CreateMorphAnimation(char*, char*, char*, int, int, char*, char*, int);
-void __cdecl fcn_004311a0(char*, char*, int, int, int);
+void __cdecl d3_ApplyAnimDelta(char*, char*, int, int, int);
 #ifdef REBREW_GOLD
 int __cdecl fcn_00411be0(char*);
 #else
@@ -70,7 +70,7 @@ void __cdecl ch_FinishAni(char* obj)
     }
     ani = *(char**) (obj + 0x70);
     if ((*(char**) (ani + 0x68))[0x169] == 0 && (ani[0x70] & 3) != 0) {
-        fcn_004311a0(node, ani, 0, *(int*) ani, 3);
+        d3_ApplyAnimDelta(node, ani, 0, *(int*) ani, 3);
     }
     d3_RemoveObjectAnimation(*(char**) (node + 0x1ec) + 0xf4, *(char**) (ani + 0x68));
     *(char**) (obj + 0x70) = 0;

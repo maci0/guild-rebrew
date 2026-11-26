@@ -9,7 +9,7 @@ extern void __cdecl fcn_0045b290(int, int);
 extern int __cdecl fcn_0045b700(int, int, int);
 extern void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 extern void __cdecl gv_Free3Fields(int);
-extern int __cdecl fcn_00438920(int, int, int);
+extern int __cdecl d3_SetFog(int, int, int);
 
 extern char g_10432c0[];
 extern char g_1041d80[];
@@ -237,7 +237,7 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 				*(int*) 0x6b89e4 = 0;
 			}
 			g_1042a08 = 0;
-			fcn_00438920(CTX_TABLE[contextIndex].fd8,
+			d3_SetFog(CTX_TABLE[contextIndex].fd8,
 				CTX_TABLE[contextIndex].fdc, CTX_TABLE[contextIndex].fd4);
 			*(char*) 0x6b859b = 1;
 		}

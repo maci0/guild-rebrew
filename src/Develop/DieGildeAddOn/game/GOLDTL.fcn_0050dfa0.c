@@ -4,11 +4,11 @@
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl gm_GetMsgField(void*, int);
 
-int __cdecl fcn_0050dfa0(void* msg, int a2)
+int __cdecl gm_GetMsgObjektField(void* msg, int obj_id)
 {
 	int r;
 
-	r = fcn_00502cd0(*(int*) ((char*) msg + 0x14), 1, 0, a2);
+	r = fcn_00502cd0(*(int*) ((char*) msg + 0x14), 1, 0, obj_id);
 	if (r == 0) {
 		return 0;
 	}

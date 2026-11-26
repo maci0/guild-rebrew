@@ -30,10 +30,10 @@ char* __cdecl gm_AddObjekt(void);
 ENTITY_RECORD* __cdecl gm_LookupEntityRecordById(int id);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 #include "Develop/DieGildeAddOn/game/aemter.h"
-void __cdecl fcn_004ea560(ENTITY_RECORD* o, int v);
-void __cdecl fcn_004ea4b0(ENTITY_RECORD* o, int v);
+void __cdecl amt_NotifyOfficeLost(ENTITY_RECORD* o, int v);
+void __cdecl amt_NotifyOfficeAppointed(ENTITY_RECORD* o, int v);
 
-void __cdecl fcn_004ea9a0(void)
+void __cdecl amt_FillOffice0x22FromRichest(void)
 {
 	int k;
 	ENTITY_RECORD* cur;
@@ -96,12 +96,12 @@ void __cdecl fcn_004ea9a0(void)
 	}
 	if (best != 0 && best != cur) {
 		if (cur != 0) {
-			fcn_004e8240(rec.a, (unsigned char*) best, 0, 1, 0xff);
-			fcn_004ea560(cur, 0x22);
-			fcn_004ea4b0(best, 0x22);
+			amt_SendOfficeCommand(rec.a, (unsigned char*) best, 0, 1, 0xff);
+			amt_NotifyOfficeLost(cur, 0x22);
+			amt_NotifyOfficeAppointed(best, 0x22);
 		} else {
-			fcn_004e8240(rec.a, (unsigned char*) best, 0, 1, 0xff);
-			fcn_004ea4b0(best, 0x22);
+			amt_SendOfficeCommand(rec.a, (unsigned char*) best, 0, 1, 0xff);
+			amt_NotifyOfficeAppointed(best, 0x22);
 		}
 	}
 }

@@ -43,7 +43,7 @@ extern void __cdecl d2_CenterDialogWindows(int);
 extern void __cdecl d2_SetForm(int, int);
 extern int __cdecl io_AppendText(int, int, int, int);
 extern int __cdecl d2_GetWindowListItem(int, int, int);
-extern int __cdecl fcn_00525f60(char*, int);
+extern int __cdecl d2_CheckActionBlocker(char*, int);
 extern int __cdecl fcn_004c4450(int);
 extern void __cdecl fcn_00535960(void);
 extern void __cdecl fcn_00526120(char*, int);
@@ -140,7 +140,7 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 	do {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == kid) {
-				if (fcn_00525f60(entity, 5) != 0) {
+				if (d2_CheckActionBlocker(entity, 5) != 0) {
 					fcn_004c6ae0(*(int*) (entity + 4), -5);
 					thr = fcn_004c5420(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
 					while (fcn_004c4450(thr) == 0) {

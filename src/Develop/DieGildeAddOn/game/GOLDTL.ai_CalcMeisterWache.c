@@ -17,7 +17,7 @@ void __cdecl fcn_00487970(char *, char *, int);
 void __cdecl fcn_00487c00(char *, char *, int);
 void __cdecl fcn_00487470(char *);
 void __cdecl fcn_004888a0(char *);
-void __cdecl fcn_00488c00(char *);
+void __cdecl ai_DispatchWorkerRecovery(char *);
 char *__cdecl ai_CalcAngriff(char *, int);
 unsigned short __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
@@ -67,7 +67,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 	fcn_00487c00(res, meister, 10);
 	fcn_00487470(meister);
 	fcn_004888a0(meister);
-	fcn_00488c00(meister);
+	ai_DispatchWorkerRecovery(meister);
 	if (((unsigned short) gm_GameTime.b <= 6)
 		|| ((*(int *) (meister + 4) + (unsigned int) (unsigned short) gm_GameTime.b) % 3 != 0)) {
 		*(unsigned int *) (meister + 0x1b4) &= 0xffffffdf;

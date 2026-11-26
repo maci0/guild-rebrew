@@ -25,7 +25,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
-void __cdecl fcn_0054e2d0(char* o)
+void __cdecl he_StartRazzia(char* o)
 {
 	if (o[0x78] & 2) {
 		if (gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac)) == 0) {

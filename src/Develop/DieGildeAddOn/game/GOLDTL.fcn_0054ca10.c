@@ -19,7 +19,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
-void __cdecl fcn_004c4510(void*, int);
+void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -162,11 +162,11 @@ void __cdecl fcn_0054ca10(char* e)
 		return;
 	case 1:
 		fcn_004c4eb0(g_6a5a48);
-		fcn_004c4510(b, *(int*) (b + 4));
+		cm_BeginPacketFieldDelta(b, *(int*) (b + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x5c, a + 4);
 		cm_AppendPacketFieldDelta(2, 1, 0x50, a + 0x50);
 		fcn_004c5360();
-		fcn_004c4510(a, *(int*) (a + 4));
+		cm_BeginPacketFieldDelta(a, *(int*) (a + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x5c, b + 4);
 		fcn_004c5360();
 		fcn_004c5420(*(int*) (b + 4), 0x1c8, 4, 0x40000, 0);

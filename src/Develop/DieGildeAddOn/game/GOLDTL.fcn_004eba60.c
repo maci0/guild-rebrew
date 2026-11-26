@@ -14,7 +14,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int id, int arg, char* text1, int flags, int value, char* text2);
 int __cdecl fcn_00526120(char* text, int arg);
 int __cdecl srv_GetEntityOfficeSlot(char* entity, void* role_out, void* slot_out);
-int __cdecl fcn_004e8240(int id, char* ea, char* eb, int x1, int x2);
+int __cdecl amt_SendOfficeCommand(int id, char* ea, char* eb, int x1, int x2);
 int __cdecl amt_FindOfficeSlotsByKind(int kind, int max, OFFICE_SLOT* out);
 
 /* ADDRESS: GOLDTL 0x004eba60 */
@@ -54,7 +54,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 		if (srv_GetEntityOfficeSlot(h, role, slot) == 0)
 			return 0;
 		if (f > 0.3f)
-			fcn_004e8240(slot[0], 0, 0, 4, 0xff);
+			amt_SendOfficeCommand(slot[0], 0, 0, 4, 0xff);
 		fcn_005100f0(*(int*) (e + 4), -8);
 		fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
 		if (f > 0.3f) {

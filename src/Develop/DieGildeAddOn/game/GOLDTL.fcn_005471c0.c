@@ -32,7 +32,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004c5530(struct msg*);
 
-void __cdecl fcn_005471c0(void)
+void __cdecl he_EnsureCityBuilding0x2bActions(void)
 {
 	struct msg m;
 	char* e;

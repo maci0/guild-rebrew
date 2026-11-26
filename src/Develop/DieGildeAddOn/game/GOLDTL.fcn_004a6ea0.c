@@ -10,14 +10,14 @@ typedef struct {
 	int f20;
 	int f24;
 	int pad[3];
-} Rec34;
+} CARD_SEAT_STATE;
 
 // SIZE 0xc0
 typedef struct {
 	int f0;
 	int f4;
 	int f8;
-	Rec34 recs[3];
+	CARD_SEAT_STATE recs[3];
 	char tail[0x18];
 } State;
 
@@ -34,34 +34,34 @@ extern Card_1007ce0 g_1007ce0[24];
 
 int __cdecl gm_RandomMod(int id);
 
-int __cdecl fcn_004a6ea0(State* s)
+int __cdecl gm_ResetCardGameRound(State* game_state)
 {
 	int i;
 	int j;
 
-	if (s == 0) {
+	if (game_state == 0) {
 		return 0;
 	}
-	*((unsigned char*) s + 0xb4) = 0x18;
-	*((unsigned char*) s + 0xb5) = 0;
-	*(int*) ((char*) s + 0xa0) = 0;
-	s->f0 = 0;
-	*(int*) ((char*) s + 0xb0) = (unsigned short) gm_RandomMod(3);
-	*(int*) ((char*) s + 0xbc) = 0;
+	*((unsigned char*) game_state + 0xb4) = 0x18;
+	*((unsigned char*) game_state + 0xb5) = 0;
+	*(int*) ((char*) game_state + 0xa0) = 0;
+	game_state->f0 = 0;
+	*(int*) ((char*) game_state + 0xb0) = (unsigned short) gm_RandomMod(3);
+	*(int*) ((char*) game_state + 0xbc) = 0;
 	for (i = 0; i < 24; i++) {
 		((Slot10*)g_1007ce0)[i].c = 3;
 		((Slot10*)g_1007ce0)[i].d = 0;
 	}
 	for (i = 0; i < 3; i++) {
 		for (j = 0; j < 5; j++) {
-			s->recs[i].ids[j] = -1;
+			game_state->recs[i].ids[j] = -1;
 		}
-		s->recs[i].f14 = 0;
-		s->recs[i].f24 = 0;
-		s->recs[i].f1c = -1;
-		s->recs[i].f18 = (unsigned short) gm_RandomMod(5) == 1;
-		s->recs[i].f24 = 0;
-		s->recs[i].f20 = -1;
+		game_state->recs[i].f14 = 0;
+		game_state->recs[i].f24 = 0;
+		game_state->recs[i].f1c = -1;
+		game_state->recs[i].f18 = (unsigned short) gm_RandomMod(5) == 1;
+		game_state->recs[i].f24 = 0;
+		game_state->recs[i].f20 = -1;
 	}
 	return 1;
 }

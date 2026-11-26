@@ -23,7 +23,7 @@ void __cdecl io_FormatTextBuffer(char* out, int id, ...);
 int __cdecl fcn_00526120(char* text, int a);
 int __cdecl fcn_00471e30(int dlg);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
-int __cdecl fcn_00525f60(int a, int b);
+int __cdecl d2_CheckActionBlocker(int a, int b);
 
 /* ADDRESS: GOLDTL 0x005d6c50 */
 int __cdecl fcn_005d6c50(int actor, int a1)
@@ -76,7 +76,7 @@ int __cdecl fcn_005d6c50(int actor, int a1)
     for (;;) {
         if (g_100f1dc != -1) {
             if (g_100f1dc == 2) {
-                if (fcn_00525f60(actor, 4) != 0) {
+                if (d2_CheckActionBlocker(actor, 4) != 0) {
                     fcn_004c51a0(*(int*) (actor + 4), -1, 0, h2);
                     fcn_004c6ae0(*(int*) (actor + 4), -4);
                     dlg = fcn_004c5420(*(int*) (p + 2), 0x1c8, 4, 0x400000,

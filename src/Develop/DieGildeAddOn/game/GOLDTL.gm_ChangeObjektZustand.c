@@ -24,7 +24,7 @@ void __cdecl gm_ChangeObjektZustand(int id, int delta)
 	if (r[0x12] + delta < 0) {
 		v = 0;
 	}
-	fcn_004c4510((char*) r, id);
+	cm_BeginPacketFieldDelta((char*) r, id);
 	fcn_004c4670(1, 1, 0x12, &v);
 	fcn_004c5360();
 }

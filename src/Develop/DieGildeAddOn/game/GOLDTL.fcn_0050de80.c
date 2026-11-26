@@ -22,7 +22,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0050dfd0(char* q, int id);
 float __cdecl eval_ObjektPreis2Credits(int id, int n);
 
-int __cdecl fcn_0050de80(char* e, Stats* s)
+int __cdecl gm_CalcEntityInventoryStats(char* e, Stats* s)
 {
 	char* q;
 	char* r;

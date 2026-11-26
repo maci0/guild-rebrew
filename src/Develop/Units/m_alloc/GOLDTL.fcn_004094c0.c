@@ -13,7 +13,7 @@ extern void __cdecl m_FreeTracked(void* ptr);
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern int __cdecl ch_FindWalkableCell();
 extern short __cdecl fcn_00421350();
-extern int __cdecl fcn_00407760();
+extern int __cdecl ch_DownsamplePath();
 extern int __cdecl d3_GridPointToWorld();
 extern int __cdecl CompareVector3WithinTolerance();
 
@@ -128,7 +128,7 @@ unsigned int __cdecl fcn_004094c0(int rec, int gridContext)
 		}
 		*(int*) (rec + 0xf4) = (int) m_alloc(g_14d0c20.n * 2,
 		    (char*) 0x675ad8);
-		*(int*) (rec + 0xf0) = fcn_00407760(obj, (void*) &g_14d0c20,
+		*(int*) (rec + 0xf0) = ch_DownsamplePath(obj, (void*) &g_14d0c20,
 		    (void*) *(int*) (rec + 0xf4), gridContext);
 		*(int*) (rec + 0xf8) = 0;
 		*(int*) (rec + 0xfc) = -1;

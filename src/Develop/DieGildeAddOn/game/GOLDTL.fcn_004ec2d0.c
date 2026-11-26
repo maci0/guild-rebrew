@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 
-void __cdecl fcn_004ec2d0(char* p, int kind, int arg)
+void __cdecl amt_AdjustOfficeHoldersFavor(char* p, int kind, int arg)
 {
 	OFFICE_SLOT recs[6];
 	int n;

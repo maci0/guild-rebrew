@@ -5,7 +5,7 @@ void __cdecl init_LoadObjektScene(int);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0043aa30(int);
 void __cdecl fcn_005167c0(void*, int);
-void __cdecl fcn_00516c50(void*, void*);
+void __cdecl d3_SetupInteriorScene(void*, void*);
 void __cdecl fcn_00438b40(void*, void*);
 void __cdecl d3_SetObjectRotation(void*, void*);
 void __cdecl fcn_005338a0(void);
@@ -67,7 +67,7 @@ void __cdecl fcn_005a86a0(void* a0)
 		d3_SelectSceneContext(*(char*) (*(unsigned short*)message + (unsigned long)&init_SceneContextIndices), 0);
 		fcn_0043aa30(3);
 		fcn_005167c0(*(void**) &g_7746c8, *(unsigned short*)message);
-		fcn_00516c50(*(void**) &g_7746c8, message);
+		d3_SetupInteriorScene(*(void**) &g_7746c8, message);
 		if (*(void**) &g_67a370 != 0) {
 			t = *(void**) ((char*) *(void**) &g_67a370 + 0x3c8);
 			if (t != 0 && *(void**) ((char*) t + 0x210) != 0) {

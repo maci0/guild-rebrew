@@ -94,7 +94,7 @@ int __cdecl fcn_005dbf10(Ent* ent, Cmd* cmd)
 			vc = d->value;
 			v8 = 1;
 			one = 1;
-			fcn_004c4510((char*) cmd->rec, *(int*) (cmd->rec + 1));
+			cm_BeginPacketFieldDelta((char*) cmd->rec, *(int*) (cmd->rec + 1));
 			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x1c), &vc);
 			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x21), &v8);
 			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) cmd->rec - g_aed32c + 0x20), &one);

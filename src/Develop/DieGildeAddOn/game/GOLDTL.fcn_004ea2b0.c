@@ -24,7 +24,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/aemter.h"
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 
-int __cdecl fcn_004ea2b0(int kind, char* x)
+int __cdecl amt_IsCandidateInOffice(int kind, char* x)
 {
 	OFFICE_SLOT list[6];
 	int n;

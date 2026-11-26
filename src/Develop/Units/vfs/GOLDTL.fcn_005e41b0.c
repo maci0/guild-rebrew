@@ -40,7 +40,7 @@ extern VFS_DIR* g_6b7fdc;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_6b5c60[];
 
-void __cdecl fcn_00535850(int, char*);
+void __cdecl cm_SaveGameAndWait(int, char*);
 void __cdecl ls_LoadSavePreview(char*);
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 int __cdecl fcn_0051e490(void* stream, int flags);
@@ -68,7 +68,7 @@ void __cdecl ls_SaveNetworkGame(char* name, char* title)
 		g_7f3ac0[i].id = -1;
 	}
 	if (g_7747b0 & 4) {
-		fcn_00535850(main_LoopFlags, g_14ac60c);
+		cm_SaveGameAndWait(main_LoopFlags, g_14ac60c);
 		g_6a375c = 0;
 		for (i = 0; i < 768; i++) {
 			if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_index != 0xffff && (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7)) {
@@ -104,7 +104,7 @@ void __cdecl ls_SaveNetworkGame(char* name, char* title)
 			}
 			fcn_00535960();
 		}
-		fcn_00535850(main_LoopFlags, g_14ac60c);
+		cm_SaveGameAndWait(main_LoopFlags, g_14ac60c);
 		sprintf(path, "Gamedata\\network\\%s.SRV", name);
 		ls_SaveGame(path, title, 6);
 		sprintf(path, "Gamedata\\network\\%s.SAV", name);

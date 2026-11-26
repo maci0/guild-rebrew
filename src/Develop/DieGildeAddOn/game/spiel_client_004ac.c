@@ -46,7 +46,7 @@ void __cdecl fcn_004ac410(unsigned char* entity, int a2, int a3)
 	if (p[0] == 0 && *(unsigned short*) (p + 1) <= 4) {
 		c = gm_RandomMod(8) + 8;
 		c = (char)(c < 252.0f - entity[*(unsigned short*) (p + 1) + 0x80] ? c : 252.0f - entity[*(unsigned short*) (p + 1) + 0x80]);
-		fcn_004c4510((char*) entity, *(int*) (entity + 4));
+		cm_BeginPacketFieldDelta((char*) entity, *(int*) (entity + 4));
 		fcn_004c4670(1, 1, *(unsigned short*) (p + 1) + 0x80, &c);
 		fcn_004c5360();
 		return;

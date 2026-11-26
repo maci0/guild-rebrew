@@ -8,7 +8,7 @@ void __cdecl fcn_00455140(char* src, float* v, float* out);
 float __cdecl fcn_00451380(float* a, float* b);
 void __cdecl d3_SetObjectRotation(char* h, float* v);
 
-void __cdecl fcn_00402b00(char* obj, char* src)
+void __cdecl ch_SetToDummy(char* obj, char* src)
 {
 	float v[3];
 	float b[3];

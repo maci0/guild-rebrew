@@ -16,7 +16,7 @@ extern void (__cdecl* g_7dc440[])(unsigned char*);
 
 
 
-void __cdecl fcn_00546b40(void);
+void __cdecl d3_PruneEventGfxSlots(void);
 void __cdecl he_CreateEventGfxInfo(HE_ACTION*);
 int __cdecl fcn_00500cb0(char*, char*);
 void __cdecl fcn_00546be0(HE_ACTION*);
@@ -25,7 +25,7 @@ void __cdecl he_RunDueActions(void)
 {
 	int i;
 
-	fcn_00546b40();
+	d3_PruneEventGfxSlots();
 	for (i = 0; i <= he_LastEventSlot && i < 1024; i++) {
 		if (g_77e980[i].kind != 0 && (g_77e980[i].flags & 0x18) == 0) {
 			he_CreateEventGfxInfo(&g_77e980[i]);

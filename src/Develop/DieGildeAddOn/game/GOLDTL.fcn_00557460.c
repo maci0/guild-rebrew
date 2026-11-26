@@ -240,7 +240,7 @@ void __cdecl fcn_00557460(char* dlg)
 			}
 			rec = fcn_00502cd0(*(int*) (hit + 0x5d), 2, 6, 0, 0x12c);
 			if (rec != 0) {
-				fcn_004c4510(rec, *(int*) (rec + 2));
+				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 2));
 				j = 0;
 				while (j < 3) {
 					off = (unsigned int) (rec + 0x1c + j * 4 - g_aed32c);
@@ -320,7 +320,7 @@ fail:
 			}
 			rec = fcn_00502cd0(*(int*) (hit + 0x5d), 2, 6, 0, 0x12c);
 			if (rec != 0) {
-				fcn_004c4510(rec, *(int*) (rec + 2));
+				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 2));
 				j = 0;
 				while (j < 3) {
 					cm_AppendPacketFieldDelta(4, 1, (int) (rec + 0x1c + j * 4 - g_aed32c),

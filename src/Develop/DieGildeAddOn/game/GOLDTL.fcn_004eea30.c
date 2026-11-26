@@ -14,7 +14,7 @@ extern float g_6628a8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl ahm_CheckFlag(void* p);
-int __cdecl fcn_004ec950(void* p, int id);
+int __cdecl ahm_FindRecipeSlot(void* p, int id);
 int __cdecl fcn_004c6d30(void* m);
 
 /* ADDRESS: GOLDTL 0x004eea30 */
@@ -25,7 +25,7 @@ int __cdecl fcn_004eea30(void* obj, int id, float fraction)
 	if (ahm_CheckFlag(obj) == 0) {
 		return -1;
 	}
-	if (fcn_004ec950(obj, id) == 0) {
+	if (ahm_FindRecipeSlot(obj, id) == 0) {
 		return -1;
 	}
 	memset(&m, 0, sizeof(m));

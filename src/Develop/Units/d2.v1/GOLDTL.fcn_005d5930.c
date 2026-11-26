@@ -52,7 +52,7 @@ void __cdecl fcn_005ca560(Rec_5d5930*);
 void __cdecl fcn_005ca740(int, int, int, int, Rec_5d5930*, int);
 void __cdecl fcn_005c9160(char*, int, int, int, int);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_00525f60(void*, int);
+int __cdecl d2_CheckActionBlocker(void*, int);
 int __cdecl fcn_005d5670(unsigned char*, unsigned char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -155,7 +155,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 		if (g_100f1dc != -1) {
 			for (i = 0, rp = (int*) recs; i < cnt; i++, rp += 0xe) {
 				if (d2_CurrentElementId == rp[1]) {
-					if (fcn_00525f60(p, 2) != 0) {
+					if (d2_CheckActionBlocker(p, 2) != 0) {
 						if ((*(unsigned int*) (recs[i].p0 + 0x1c8) & 0x200) != 0) {
 							io_FormatTextBuffer(buf, 0x1d52, *(unsigned short*) recs[i].p0);
 							fcn_00526120(buf, 0);

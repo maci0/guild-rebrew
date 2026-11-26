@@ -4,7 +4,7 @@
 int __cdecl fcn_004f4830(int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-int __cdecl fcn_004f5110(void* buf, int a2)
+int __cdecl gm_FormatLawName(void* buf, int a2)
 {
 	unsigned char local[0x24];
 	unsigned char a;

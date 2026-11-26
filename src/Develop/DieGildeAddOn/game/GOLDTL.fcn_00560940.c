@@ -15,7 +15,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, char*);
 void __cdecl gm_AddTime(struct pos14*, int, int, int);
 
-void __cdecl fcn_00560940(char* e)
+void __cdecl he_StartGetier(char* e)
 {
 	char* p;
 	int i;

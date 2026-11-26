@@ -27,7 +27,7 @@ int __cdecl gm_FreeGebaeude(void* entity);
 void __cdecl gm_KillSpieler(int entity_id, int flag);
 
 /* ADDRESS: GOLDTL 0x004c7a60 */
-int __cdecl fcn_004c7a60(void* e, char* flag)
+int __cdecl cm_ExFreeEntity(void* e, char* flag)
 {
 	void* existing;
 	void* stat; unsigned short id;

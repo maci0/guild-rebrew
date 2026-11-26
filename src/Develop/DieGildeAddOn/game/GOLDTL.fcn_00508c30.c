@@ -1,31 +1,31 @@
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
 /* ADDRESS: GOLDTL 0x00508c30 */
-void __cdecl fcn_00508c30(unsigned char n, unsigned char* arr)
+void __cdecl gm_GenerateShuffledByteIndices(unsigned char count, unsigned char* arr)
 {
 	unsigned char i;
-	int k;
-	unsigned char cnt;
-	unsigned char a;
-	unsigned char b;
-	unsigned char t;
+	int half_swaps;
+	unsigned char swaps;
+	unsigned char idx_a;
+	unsigned char idx_b;
+	unsigned char tmp;
 
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < count; i++) {
 		arr[i] = i;
 	}
-	if (n < 2) {
+	if (count < 2) {
 		return;
 	}
-	k = n / 4 > 1 ? n / 4 : 1;
+	half_swaps = count / 4 > 1 ? count / 4 : 1;
 	i = 0;
-	cnt = n / 2 + k;
-	while (i < cnt) {
-		a = (unsigned char) gm_RandomMod(n);
-		b = (unsigned char) gm_RandomMod(n);
-		if (a != b) {
-			t = arr[a];
-			arr[a] = arr[b];
-			arr[b] = t;
+	swaps = count / 2 + half_swaps;
+	while (i < swaps) {
+		idx_a = (unsigned char) gm_RandomMod(count);
+		idx_b = (unsigned char) gm_RandomMod(count);
+		if (idx_a != idx_b) {
+			tmp = arr[idx_a];
+			arr[idx_a] = arr[idx_b];
+			arr[idx_b] = tmp;
 			i++;
 		}
 	}

@@ -6,9 +6,9 @@ extern int g_9b4a40[];
 
 void* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fe2e0(char*, int, int*, int*, int, int*);
-void __cdecl fcn_004ce9e0(char*);
-char* __cdecl fcn_004ce610(char*);
-char* __cdecl fcn_004ce680(char*);
+void __cdecl ch_UpdateHeldObjectAttachment(char*);
+char* __cdecl gm_GetEquippedCombatGear(char*);
+char* __cdecl gm_FindEntityActiveItem(char*);
 
 /* ADDRESS: GOLDTL 0x004d1970 */
 void* __cdecl fcn_004d1970(int entityId, int a2)
@@ -43,14 +43,14 @@ found:
 	*(unsigned char*) (obj + 0x240) = 4;
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);
 	*(unsigned char*) (obj + 0x8d) |= 0x80;
-	fcn_004ce9e0(rec);
-	e = (char*) fcn_004ce610(src);
+	ch_UpdateHeldObjectAttachment(rec);
+	e = (char*) gm_GetEquippedCombatGear(src);
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);
 	*(float*) (obj + 0x1a0) = (float) ((double) *(unsigned char*) (e + 9) * (2.0 / 7.0));
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);
 	f = *(int*) (obj + 0x34);
 	sprintf((char*) f, "cmb_%i", *(int*) ((char*) g_9b4a40 + i * 0x21c + 4));
-	e2 = (char*) fcn_004ce680(src);
+	e2 = (char*) gm_FindEntityActiveItem(src);
 	if (e2 != 0) {
 		if (*(int*) (e + 0x58) == 2) {
 			*(int*) (e2 + 0x20) = 6;

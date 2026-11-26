@@ -9,7 +9,7 @@ void __cdecl fcn_004c5580(char*, int, char*);
 
 /* ADDRESS: GOLD 0x004e48b0 */
 /* ADDRESS: GOLDTL 0x004e6240 */
-void __cdecl fcn_004e6240(int* a1, char* a2, char* text, char* extra)
+void __cdecl he_SendCmdMessage(int* a1, char* a2, char* text, char* extra)
 {
 	char message[0xf8];
 	char buf[0x800];

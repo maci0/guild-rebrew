@@ -33,7 +33,7 @@ int __cdecl fcn_004c5620(int state, void* ev);
 int __cdecl fcn_00505340(unsigned char* rec);
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* rec);
 void __cdecl io_FormatTextBuffer(char* text, int format, ...);
-int __cdecl fcn_00529710(char* a, unsigned char* b);
+int __cdecl ch_IsEntityNearBuildingDoor(char* a, unsigned char* b);
 char* __cdecl fcn_0055d630(char* o);
 void __cdecl fcn_0055d6e0(char* a, char* b);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags,
@@ -76,7 +76,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 			*(int*) (v7 + 1), *(int*) (e + 2));
 		*(char*) (ev + 0xd0) = 1;
 	}
-	else if (fcn_00529710(e, v8)) {
+	else if (ch_IsEntityNearBuildingDoor(e, v8)) {
 		*(unsigned int*) (ev + 0xec) = fcn_004c5290(*(int*) (v8 + 1),
 			*(int*) (v6 + 1), *(int*) (e + 2));
 		cm_RequestChrMoveToUniverse(*(int*) (e + 2), *(int*) (v8 + 1), 0xffffffff, s_68b1e0);

@@ -8,7 +8,7 @@ void __cdecl d3_TransformPoint(char*, char*, float*);
 char* __cdecl fcn_004fda30(int);
 int __cdecl cut_RandMod(int);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
-void __cdecl fcn_00402b00(char*, char*);
+void __cdecl ch_SetToDummy(char*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004da2b0 */
@@ -45,7 +45,7 @@ char* __cdecl fcn_004da2b0(unsigned short* entity, char* prefix, int idx)
 	o = fcn_004e4a80(name, pos);
 	g_9b0dc0[idx] = o;
 	if (o != 0) {
-		fcn_00402b00(o, w);
+		ch_SetToDummy(o, w);
 		fcn_0064d41a(name, "sp_%i", *(int*) (entity + 2));
 		strcpy(*(char**) (o + 0x34), name);
 		strcpy(o + 8, name);

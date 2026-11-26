@@ -8,7 +8,7 @@ extern char g_68a930[];
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c3030(int, int, char*, int);
 
-void __cdecl fcn_004c3540(unsigned short* e)
+void __cdecl d3snd_PlayObjectClickSound(unsigned short* e)
 {
 	int r;
 

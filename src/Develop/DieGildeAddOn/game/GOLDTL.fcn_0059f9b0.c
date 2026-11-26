@@ -14,7 +14,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowFestInvitation(int, int);
 void __cdecl d2_RunTalenteDialog(int, int, int);
-void __cdecl fcn_005c0a90(int);
+void __cdecl d2_ShowAnschwaerzenDialog(int);
 void __cdecl fcn_00532ef0(void);
 
 void __cdecl fcn_0059f9b0(int a1, int a2)
@@ -36,7 +36,7 @@ void __cdecl fcn_0059f9b0(int a1, int a2)
 				d2_RunTalenteDialog(a1, a2, 3);
 			}
 			else if (g_7746a0 == z) {
-				fcn_005c0a90(a1);
+				d2_ShowAnschwaerzenDialog(a1);
 				fcn_00532ef0();
 			}
 		}

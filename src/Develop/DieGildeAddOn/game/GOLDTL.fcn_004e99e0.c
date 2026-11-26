@@ -11,7 +11,7 @@ int __cdecl fcn_004aacb0(unsigned short*, unsigned short*, unsigned short*, int*
 int __cdecl fcn_004aae50(unsigned char, unsigned short*, int*, int*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
-int __cdecl fcn_004e8240(unsigned char, unsigned char*, unsigned char*, int, int);
+int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char*, unsigned char*, int, int);
 int __cdecl fcn_004e9180(char*, int);
 void __cdecl fcn_00535960(void);
 unsigned short __cdecl gm_RandomMod(int);
@@ -87,7 +87,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 					}
 				}
 			}
-			version = fcn_004e8240(p->id, 0, 0, 3, 0xff);
+			version = amt_SendOfficeCommand(p->id, 0, 0, 3, 0xff);
 			if (version != -1) {
 				do {
 					if (fcn_004c4450(version) != 0) {
@@ -110,7 +110,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 					}
 				}
 			}
-			version = fcn_004e8240(p->id, (unsigned char*) self, 0, 1, 0xff);
+			version = amt_SendOfficeCommand(p->id, (unsigned char*) self, 0, 1, 0xff);
 			if (version != -1) {
 				do {
 					if (fcn_004c4450(version) != 0) {
@@ -161,7 +161,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 			continue;
 		}
 		if (n == 1) {
-			version = fcn_004e8240(p->id, (unsigned char*) work.recs[0], 0, 1, 0xff);
+			version = amt_SendOfficeCommand(p->id, (unsigned char*) work.recs[0], 0, 1, 0xff);
 			if (version != -1) {
 				do {
 					if (fcn_004c4450(version) != 0) {
@@ -211,7 +211,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 				}
 			}
 			if (!tie) {
-				version = fcn_004e8240(p->id,
+				version = amt_SendOfficeCommand(p->id,
 				    (unsigned char*) work.recs[pick], 0, 1, 0xff);
 				if (version != -1) {
 					do {
@@ -230,7 +230,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 					}
 					k = (k + 1) % n;
 				}
-				version = fcn_004e8240(p->id,
+				version = amt_SendOfficeCommand(p->id,
 				    (unsigned char*) work.recs[pick], 0, 1, 0xff);
 				if (version != -1) {
 					do {

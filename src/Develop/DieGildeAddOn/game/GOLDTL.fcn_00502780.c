@@ -4,7 +4,7 @@
 
 float __cdecl fcn_005025a0(int, int);
 
-float __cdecl fcn_00502780(int a, int id)
+float __cdecl gm_CalcMarketSlotPriceByObjektId(int a, int id)
 {
 	int i;
 

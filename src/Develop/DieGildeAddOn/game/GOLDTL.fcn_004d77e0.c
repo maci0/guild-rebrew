@@ -37,7 +37,7 @@ int __cdecl cut_GetRandSeed(void);
 void __cdecl fcn_004e6c60(int);
 Ent* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_FindRecordById(int);
-void __cdecl fcn_0050de80(int, Query*);
+void __cdecl gm_CalcEntityInventoryStats(int, Query*);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl fcn_004ce8b0(Ent*);
 void __cdecl fcn_004ce740(Ent*);
@@ -47,7 +47,7 @@ float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_004d1ff0(ShiftDlg*);
 void __cdecl fcn_004d1a80(void);
 void __cdecl fcn_004d2c80(int*, int);
-void __cdecl fcn_004d2e60(ShiftDlg*);
+void __cdecl cut_RunGfxCutscene(ShiftDlg*);
 void __cdecl fcn_0052a960(void*);
 void __cdecl fcn_00445f50(int, int, float, int);
 void __cdecl fcn_004d5940(ShiftDlg*);
@@ -57,7 +57,7 @@ void __cdecl fcn_004d6170(ShiftDlg*);
 void __cdecl cut_RunCombatFlightOutro(ShiftDlg*);
 void __cdecl fcn_004d2a60(ShiftDlg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_004e6eb0(char*, unsigned int);
+void __cdecl d2_ShowMessageBox(char*, unsigned int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl fcn_004d5110(int, int, int, int);
 void __cdecl fcn_004d52a0(ShiftDlg*, int, int, int, float);
@@ -100,7 +100,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		for (i = 0; i < 3; i++) {
 			if (p->list_c[i] != -1) {
 				e = gm_FindRecordById(p->list_c[i]);
-				if (e == 0 || (fcn_0050de80(e, &q), q.total <= 0)) {
+				if (e == 0 || (gm_CalcEntityInventoryStats(e, &q), q.total <= 0)) {
 					flag = 2;
 				}
 			}
@@ -116,7 +116,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		fcn_004d1a80();
 		fcn_004d2c80(p->list_b, 0x68becc);
 		fcn_004d2c80(p->list_a, 0x68bec8);
-		fcn_004d2e60(p);
+		cut_RunGfxCutscene(p);
 		if (*(int*) 0x774804 != 0) {
 			fcn_00445f50(2, 0, 1.0f, 1);
 		} else {
@@ -159,7 +159,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 			} else {
 				io_FormatTextBuffer(buf, 0x1146);
 			}
-			fcn_004e6eb0(buf, 0x10);
+			d2_ShowMessageBox(buf, 0x10);
 		}
 		fcn_004d2a60(p);
 		return;

@@ -20,7 +20,7 @@ extern char g_6964f0[];
 int __cdecl fcn_0050a710(char*);
 int __cdecl fcn_004f3770(char*);
 void __cdecl fcn_004c57e0(int, int);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl fcn_004c4700(int, int, char*, void*);
 void __cdecl fcn_004c53a0(void);
 void __cdecl fcn_004c5530(char*);
@@ -30,7 +30,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 int __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_0050c710(int, int, int);
+int __cdecl gm_GetBuildingTechEffect(int, int, int);
 void __cdecl fcn_004ff490(char*);
 
 /* ADDRESS: GOLDTL 0x004fe5f0 */
@@ -64,7 +64,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 		v4 = fcn_004f3770(entity);
 		if (v4 == 1) {
 			c = 0;
-			fcn_004c4510(entity, *(int*) (entity + 4));
+			cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 			fcn_004c4700(1, 1, (char*) ((int) entity + (8 - (int) g_aed32c)),
 			             &c);
 			fcn_004c53a0();
@@ -173,13 +173,13 @@ double __cdecl fcn_004fe5f0(char* entity)
 	if ((*(unsigned char*) (entity + 0x1cc) & 2) != 0) {
 		v10 = *(float*) (entity + 0x1c) -
 		      (float) (int) ((gm_RandomMod(0x10) & 0xffff) + 0x11);
-		fcn_004c4510(entity, *(int*) (entity + 4));
+		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x1c, &v10);
 		fcn_004c5360();
 		g_773d48 += 1;
 		if (v10 <= 0.0f) {
 			c = 0;
-			fcn_004c4510(entity, *(int*) (entity + 4));
+			cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 			fcn_004c4700(1, 1, (char*) ((int) entity + (8 - (int) g_aed32c)),
 			             &c);
 			fcn_004c53a0();
@@ -222,12 +222,12 @@ double __cdecl fcn_004fe5f0(char* entity)
 		float adjusted;
 		adjusted = *(float*) (entity + 0x14);
 		if (*(int*) (entity + 0x170) != 0) {
-			v4 = fcn_0050c710(*(int*) (entity + 0x170), 8, 1);
+			v4 = gm_GetBuildingTechEffect(*(int*) (entity + 0x170), 8, 1);
 			adjusted = v4 * g_665370 * g_66444c + adjusted;
 		}
 		v10 = adjusted / *(float*) (entity + 0x1c);
 		v10 += *(float*) (entity + 0x1c) - adjusted;
-		fcn_004c4510(entity, *(int*) (entity + 4));
+		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x1c, &v10);
 		fcn_004c5360();
 		g_773d48 += 1;
@@ -240,7 +240,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 		    *(char*) (entity + 2) != 6 && *(char*) (entity + 2) != 7) {
 			float v14 = 0.0f;
 			v10 = 100.0f;
-			fcn_004c4510(entity, *(int*) (entity + 4));
+			cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 			cm_AppendPacketFieldDelta(4, 1, 0x1c, &v10);
 			cm_AppendPacketFieldDelta(4, 1, 0x24, &v14);
 			fcn_004c5360();
@@ -249,7 +249,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 			g_773d48 = g_773d48 + 1;
 			return v10;
 		}
-		fcn_004c4510(entity, *(int*) (entity + 4));
+		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 		fcn_004c4700(1, 1, (char*) ((int) entity + (8 - (int) g_aed32c)), &c);
 		fcn_004c53a0();
 		g_773d48 += 1;
@@ -296,7 +296,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 		v11 = 0.0;
 	}
 	w = *(unsigned short*) (entity + 0xa) + 1;
-	fcn_004c4510(entity, *(int*) (entity + 4));
+	cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 	cm_AppendPacketFieldDelta(2, 1, 10, &w);
 	fcn_004c5360();
 	g_773d48 = g_773d48 + 1;

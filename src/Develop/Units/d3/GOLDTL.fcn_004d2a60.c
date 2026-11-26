@@ -10,7 +10,7 @@ void __cdecl fcn_0044c440(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl ch_DestroyCharacter(int);
-void __cdecl fcn_004e4910(void);
+void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004c2d50(void);
 void __cdecl fcn_00475220(char*);
 
@@ -82,7 +82,7 @@ void __cdecl fcn_004d2a60(int a0)
 		g_6b89c0 = 0;
 		*(int*) (0x1043378 + i * 0x3dc) = 0;
 	}
-	fcn_004e4910();
+	cut_CleanupCutscene();
 	fcn_004c2d50();
 	*(char*) 0x6a2574 = 1;
 	fcn_00475220((char*) 0x6b5c60);

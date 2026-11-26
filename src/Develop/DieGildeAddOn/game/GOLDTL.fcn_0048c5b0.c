@@ -54,13 +54,13 @@ extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
 extern int g_772620;
 
-int __cdecl fcn_0050cce0(char*, void*, int);
-int __cdecl fcn_0050de80(char*, Stats*);
+int __cdecl gm_CollectBuildingStock(char*, void*, int);
+int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_0050dfd0(char*, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0047d1b0(void);
-int __cdecl fcn_0047d1e0(void);
+int __cdecl he_CountActiveTradeActions(void);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c5150(int, int, char, int);
 int __cdecl fcn_004c4eb0(char*);
@@ -91,7 +91,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 	if (g_100b0e0 <= 0.0f || g_100b0f4 == 0) {
 		return 0;
 	}
-	fcn_0050cce0(*(char**) (o + 0x16c), &st2, 0);
+	gm_CollectBuildingStock(*(char**) (o + 0x16c), &st2, 0);
 	for (i2 = 0; i2 < g_100e74c; i2++) {
 		if (k > 3) {
 			__asm { int 3 }
@@ -118,7 +118,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			continue;
 		}
 		memset(&m, 0, 0xf8);
-		if (fcn_0047d1e0() > fcn_0047d1b0()) {
+		if (he_CountActiveTradeActions() > fcn_0047d1b0()) {
 			m.skip = 1;
 		}
 		for (i = 0; i < 3; i++) {
@@ -127,7 +127,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			m.ids[i + 3] = 0;
 			m.slots[i + 3] = -1;
 		}
-		fcn_0050de80(ent, &st);
+		gm_CalcEntityInventoryStats(ent, &st);
 		q = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0x1dd);
 		i = 0;
 		if (st.x0 > 0) {

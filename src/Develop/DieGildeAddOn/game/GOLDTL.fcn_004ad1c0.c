@@ -10,7 +10,7 @@ char* __cdecl fcn_004ad130(int, int*);
 char* __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c4fc0(int, int, int, char*, int, int, int, int);
 
-void __cdecl fcn_004ad1c0(void)
+void __cdecl amt_SpawnHistoricalOfficeHolders(void)
 {
 	int kind;
 	int a[6];

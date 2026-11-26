@@ -7,7 +7,7 @@ extern char g_6b5c60[];
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
-void __cdecl fcn_004ea4b0(unsigned char* e, int k)
+void __cdecl amt_NotifyOfficeAppointed(unsigned char* e, int k)
 {
 	char buf[0x200];
 	int i;

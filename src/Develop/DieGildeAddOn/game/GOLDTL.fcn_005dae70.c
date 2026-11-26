@@ -53,7 +53,7 @@ int __cdecl d2_ShowExpelWorkersDialog(char* e)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				fcn_004e8240(x.x0, 0, 0, g_7f4c04 > 13 ? 0xff : 3, 0xff);
+				amt_SendOfficeCommand(x.x0, 0, 0, g_7f4c04 > 13 ? 0xff : 3, 0xff);
 				r = 0x90;
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == cancel) {

@@ -13,7 +13,7 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
 extern char g_7f4ca4[];
 
-void __cdecl fcn_004b5440(int kind, stat12* out)
+void __cdecl gm_SummarizeBuildingOwnership(int kind, stat12* out)
 {
 	unsigned char* e;
 	int match;

@@ -20,7 +20,7 @@ void __cdecl fcn_004f4830(int kind, Offer* o);
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004fa6f0(char* pos, int* x, int* y);
 
-void __cdecl fcn_004fa850(int key, unsigned char kind, int* ox, int* oy)
+void __cdecl gm_AddNeighborhoodLawEffect(int key, unsigned char kind, int* ox, int* oy)
 {
 	int x;
 	char* p;

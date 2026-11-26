@@ -2,7 +2,7 @@
 
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005077c0(int, int);
+void __cdecl gm_SetEntityLevel(int, int);
 void __cdecl fcn_004fdfe0(unsigned short*);
 
 int __cdecl fcn_004cc530(char* command, char* result)
@@ -13,7 +13,7 @@ int __cdecl fcn_004cc530(char* command, char* result)
 	if (p == 0) {
 		return 1;
 	}
-	fcn_005077c0(*p, *(unsigned char*) (command + 0x14));
+	gm_SetEntityLevel(*p, *(unsigned char*) (command + 0x14));
 	fcn_004fdfe0(p);
 	if (result != 0) {
 		result[0] = 1;

@@ -6,7 +6,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, unsigned int* v);
 void __cdecl fcn_004c5360(void);
 
-int __cdecl fcn_00508890(char* o)
+int __cdecl gm_CureRandomAffliction(char* o)
 {
 	int has[8];
 	unsigned int flags;
@@ -89,7 +89,7 @@ int __cdecl fcn_00508890(char* o)
 		result = 9;
 	}
 	flags = f;
-	fcn_004c4510(o, *(int*) (o + 4));
+	cm_BeginPacketFieldDelta(o, *(int*) (o + 4));
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &flags);
 	fcn_004c5360();
 	return result;

@@ -23,9 +23,9 @@ extern int g_14aad18;
 extern int g_14aacf8;
 extern int g_14aacd0;
 
-int __cdecl fcn_004eb320(char*);
+int __cdecl amt_CheckHighOfficeEligibility(char*);
 void __cdecl fcn_00526120(int, int);
-void __cdecl fcn_00525f60(char*, int);
+void __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl fcn_005cd440(Query*, int, int, void*);
 void __cdecl fcn_005cde50(void*, int, int);
 int __cdecl fcn_005aa860(unsigned short*);
@@ -39,13 +39,13 @@ void __cdecl fcn_005aac20(void)
 	int r;
 	char lvl;
 
-	r = fcn_004eb320((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]);
+	r = amt_CheckHighOfficeEligibility((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]);
 	if (r != 1) {
 		if (r == -1) {
 			fcn_00526120(g_14aad38, 0);
 			return;
 		}
-		fcn_00525f60((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 8);
+		d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 8);
 		return;
 	}
 	lvl = ((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_165[4];

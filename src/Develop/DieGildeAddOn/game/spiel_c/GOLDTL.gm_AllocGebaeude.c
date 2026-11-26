@@ -28,7 +28,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CheckEntityType(char*);
 void __cdecl gm_SetBuildingWorkerLimits(char*);
 int __cdecl gm_GetBuildingTypeCategory(int);
-void __cdecl fcn_00504250(char*);
+void __cdecl gm_InitBuildingStartingGoods(char*);
 char* __cdecl gv_AllocGraveyardField(char*);
 void __cdecl fcn_004f1ad0(char*, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
@@ -296,6 +296,6 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	}
 	gm_SetBuildingWorkerLimits(geb);
 	gm_GetBuildingTypeCategory((unsigned char) *geb);
-	fcn_00504250(geb);
+	gm_InitBuildingStartingGoods(geb);
 	return geb;
 }

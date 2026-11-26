@@ -10,7 +10,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
-void __cdecl fcn_0054f3b0(char* o, char* a, char* b)
+void __cdecl he_AcceptDuell(char* o, char* a, char* b)
 {
 	char buf[0x400];
 

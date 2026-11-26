@@ -3,7 +3,7 @@
 void* __cdecl gm_SearchTable67(int id);
 void __cdecl io_FormatTextBuffer(char* buf, int id, void* a3, int a4);
 char* __cdecl gm_LookupEntityRecordById(int a1);
-void __cdecl fcn_004e6240(int* a1, char* a2, char* text, char* extra);
+void __cdecl he_SendCmdMessage(int* a1, char* a2, char* text, char* extra);
 
 extern unsigned char g_7747b0;
 extern char* g_14a9a1c;
@@ -31,7 +31,7 @@ int __cdecl fcn_004e32c0(char* p)
 	for (i = 0; i < *(unsigned char*) (p + 0x30); i++) {
 		q = gm_LookupEntityRecordById(*(int*) (p + 0x34 + i * 4));
 		if (q != 0 && (*(unsigned char*) (q + 2) == 6 || *(unsigned char*) (q + 2) == 7)) {
-			fcn_004e6240((int*) q, p, buf, g_6b5c60);
+			he_SendCmdMessage((int*) q, p, buf, g_6b5c60);
 		}
 	}
 	return 1;

@@ -25,7 +25,7 @@ void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl fcn_004bd4e0(int, int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
-void __cdecl fcn_004c4510(void*, int);
+void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 int __cdecl fcn_004c4f30(unsigned char, int, int, int);
 int __cdecl fcn_004c5150(int, int, char, int);
@@ -424,7 +424,7 @@ LfailB:
 					*(int*) (v20 + 4) = gm_GameTime.b;
 					*(int*) (v20 + 8) = gm_GameTime.c;
 					*(unsigned short*) (v20 + 12) = (unsigned short) gm_GameTime.d;
-					fcn_004c4510(v15, *(int*) (v15 + 1));
+					cm_BeginPacketFieldDelta(v15, *(int*) (v15 + 1));
 					cm_AppendPacketFieldDelta(1, 0xe, 0x69, v20);
 					fcn_004c5360();
 				}

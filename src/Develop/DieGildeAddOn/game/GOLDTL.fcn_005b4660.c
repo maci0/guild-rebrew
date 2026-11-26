@@ -15,7 +15,7 @@ void __cdecl fcn_00471af0(int, int);
 void* __cdecl fcn_005cd440(void*, char*, int, int);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
-void __cdecl fcn_004c4510(void*, int);
+void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c4fc0(char, int, int, short, int, char, char, char);
@@ -67,10 +67,10 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 					p = fcn_005cd440(buf, 0, 0, 0);
 					if (p != 0) {
 						fcn_004c4eb0("marriage");
-						fcn_004c4510(p, *(int*) ((char*) p + 4));
+						cm_BeginPacketFieldDelta(p, *(int*) ((char*) p + 4));
 						cm_AppendPacketFieldDelta(4, 1, 0x5c, e + 4);
 						fcn_004c5360();
-						fcn_004c4510(e, *(int*) (e + 4));
+						cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 						cm_AppendPacketFieldDelta(4, 1, 0x5c,
 							(char*) p + 4);
 						fcn_004c5360();

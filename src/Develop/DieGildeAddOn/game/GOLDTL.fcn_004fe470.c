@@ -20,7 +20,7 @@ void __cdecl fcn_004fe2e0(char* o, int h, int x, int y, int view, char* name);
 void __cdecl ch_PreloadCharacterMotions(char* v, int n, ...);
 void __cdecl ch_SetVisible(char* v, int a);
 
-char* __cdecl fcn_004fe470(int id, int type, int sub, int x, int y)
+char* __cdecl init_SpawnBuildingCharacter(int id, int type, int sub, int x, int y)
 {
 	int old;
 	char* o;

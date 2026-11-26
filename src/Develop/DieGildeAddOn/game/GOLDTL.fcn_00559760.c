@@ -37,7 +37,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5d60(int, int, int);
 
-int __cdecl fcn_00559760(char* s, int n, int m)
+int __cdecl he_TryDispatchNpcAction(char* s, int n, int m)
 {
 	int tgt;
 	int flt[2];

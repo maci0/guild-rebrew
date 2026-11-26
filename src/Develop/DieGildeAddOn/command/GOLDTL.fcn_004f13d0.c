@@ -7,7 +7,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_004f13d0(unsigned char* cmd)
+int __cdecl cm_GetBuildingSlotCount(unsigned char* cmd)
 {
 	int upgrade_data;
 	int stat_count;

@@ -13,7 +13,7 @@ void *__cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_SumTreasury(void *);
 void __cdecl fcn_004c5150(int, int, int, int);
 int __cdecl gm_WalkEntityChain(int);
-void __cdecl fcn_004c4510(void *, int);
+void __cdecl cm_BeginPacketFieldDelta(void *, int);
 void __cdecl fcn_004c4670(int, int, int, void *);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *);
 void __cdecl fcn_004c5360(void);
@@ -105,7 +105,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 		i = 4 + (*((unsigned char *) arg1 + 2) == 5);
 		fcn_004c5150(*(int *) ((char *) arg2 + 4), -1, g_773d75, val);
 		type = gm_WalkEntityChain(*(unsigned short *) arg1);
-		fcn_004c4510(arg2, *(int *) ((char *) arg2 + 4));
+		cm_BeginPacketFieldDelta(arg2, *(int *) ((char *) arg2 + 4));
 		fcn_004c4670(4, 1, (int) arg2 - g_aed32c + 0x1a8, &type);
 		if (flag != 0
 			&& (*((unsigned char *) arg2 + 2) == 3 || *((unsigned char *) arg2 + 2) == 8

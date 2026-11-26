@@ -20,7 +20,7 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(void*, ...);
 int __cdecl fcn_00526120(int, int);
 void __cdecl d2_SetGroupVisibility(int, int);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl fcn_00507400(int, int);
 void __cdecl fcn_004c6470(int, int);
 void __cdecl fcn_004c6ae0(int, int);
@@ -130,7 +130,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
                     v5 = gm_CheckStatLevel(*a0, v8 + 1);
                     v7_cost = (unsigned int) (v5 != 0) * 4 + -8;
                     if (v5 != *(unsigned char*) ((char*) a0 + 0x164)
-                        && fcn_00525f60((char*) a0, -v7_cost)) {
+                        && d2_CheckActionBlocker((char*) a0, -v7_cost)) {
                         for (v8 = 0; v8 <= 0xf; v8++) {
                             if (g_100f1dc == v8 + 0x5a2) {
                                 break;

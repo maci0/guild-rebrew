@@ -5,13 +5,13 @@ extern int g_67a370;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl ch_QueuePlayAnimation(char*, char*, int);
-int __cdecl fcn_004bc8a0(int*, int, float*);
+int __cdecl ch_GenerateNearbyWalkablePoints(int*, int, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl ch_QueuePlayAnimation(char*, char*, int);
-int __cdecl fcn_004bc8a0(int*, int, float*);
+int __cdecl ch_GenerateNearbyWalkablePoints(int*, int, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
@@ -42,7 +42,7 @@ void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT* state)
 	}
 	g = *(int*) (((char*)g_67a370) + 0xb0);
 	n = gm_RandomMod(3) + 1;
-	n = fcn_004bc8a0((int*) state->pos, n, pts[0]);
+	n = ch_GenerateNearbyWalkablePoints((int*) state->pos, n, pts[0]);
 	if (n <= 0)
 		return;
 	for (pt = pts[0]; n != 0; n--, pt += 4) {
@@ -76,7 +76,7 @@ void __cdecl fcn_004bc6b0(AMBIENT_ANIMAL_SLOT* state)
 	}
 	g = *(int*) (((char*)g_67a370) + 0xb0);
 	n = gm_RandomMod(3) + 1;
-	n = fcn_004bc8a0((int*) state->pos, n, pts[0]);
+	n = ch_GenerateNearbyWalkablePoints((int*) state->pos, n, pts[0]);
 	if (n <= 0)
 		return;
 	for (pt = pts[0]; n != 0; n--, pt += 4) {

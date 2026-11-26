@@ -3,7 +3,7 @@
 #include "client_data.h"
 int __cdecl d2_GetControlValue(int);
 float __cdecl fcn_004f0eb0(int, int, int);
-void __cdecl fcn_004f10d0(char*, int*, int*);
+void __cdecl gm_GetArtilleryLimits(char*, int*, int*);
 void __cdecl fcn_00472380(int, ...);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_004f0ff0(char*, int, int, int, int*, int*);
@@ -33,7 +33,7 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	level = d2_GetControlValue(*(int*) (panel + 0xb0));
 	percent = d2_GetControlValue(*(int*) (panel + 0xb4));
 	f = fcn_004f0eb0(level, percent, 1);
-	fcn_004f10d0(obj, (int*) (panel + 0xdc), (int*) (panel + 0xe0));
+	gm_GetArtilleryLimits(obj, (int*) (panel + 0xdc), (int*) (panel + 0xe0));
 	max = *(int*) (panel + 0xe0);
 	if (max < level) {
 		level = max;

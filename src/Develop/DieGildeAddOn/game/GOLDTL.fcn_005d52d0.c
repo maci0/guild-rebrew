@@ -9,7 +9,7 @@ extern double g_6629a0;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c53a0(void);
@@ -24,7 +24,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00525f60(void*, int);
+int __cdecl d2_CheckActionBlocker(void*, int);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl gm_AccumulateTyped2(char*);
 
@@ -58,10 +58,10 @@ int __cdecl fcn_005d52d0(char* p)
 		}
 		obj = gm_LookupEntityRecordById(*(int*) (p + 0x5c));
 		fcn_004c6ae0(*(int*) (p + 4), -8);
-		fcn_004c4510(p, *(int*) (p + 4));
+		cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
 		fcn_004c4700(4, 1, 0x5c, &s.sel);
 		fcn_004c5360();
-		fcn_004c4510(obj, *(int*) (obj + 4));
+		cm_BeginPacketFieldDelta(obj, *(int*) (obj + 4));
 		fcn_004c4700(4, 1, 0x5c, &s.sel);
 		fcn_004c4700(2, 1, 0x50, &s.sel);
 		fcn_004c5360();
@@ -87,17 +87,17 @@ int __cdecl fcn_005d52d0(char* p)
 	for (;;) {
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (fcn_00525f60(p, 8) == 0 || fcn_00526010(p, s.n, g_773d75) == 0) {
+				if (d2_CheckActionBlocker(p, 8) == 0 || fcn_00526010(p, s.n, g_773d75) == 0) {
 					goto tail;
 				}
 				fcn_004c6ae0(*(int*) (p + 4), -8);
-				fcn_004c4510(p, *(int*) (p + 4));
+				cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
 				fcn_004c4700(4, 1, 0x5c, &s.sel);
 				x = fcn_004c53a0();
 				while (fcn_004c4450(x) == 0) {
 					fcn_00535960();
 				}
-				fcn_004c4510(obj, *(int*) (obj + 4));
+				cm_BeginPacketFieldDelta(obj, *(int*) (obj + 4));
 				fcn_004c4700(4, 1, 0x5c, &s.sel);
 				fcn_004c4700(2, 1, 0x50, &s.sel);
 				x = fcn_004c53a0();

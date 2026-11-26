@@ -8,14 +8,14 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 
 
 /* ADDRESS: GOLDTL 0x004b5020 */
-int __cdecl fcn_004b5020(void)
+int __cdecl gm_HasNoType5Owner(void)
 {
-	char* p;
-	unsigned short h;
+	char* entity;
+	unsigned short owner_slot;
 
-	for (p = gm_StartFilteredEntitySearch(1, 6); p != 0; p = gm_FindNextFilteredEntity()) {
-		h = *(unsigned short*) (p + 0x27);
-		if (h != 0xffff && g_7f4ca2[h].kind == 5)
+	for (entity = gm_StartFilteredEntitySearch(1, 6); entity != 0; entity = gm_FindNextFilteredEntity()) {
+		owner_slot = *(unsigned short*) (entity + 0x27);
+		if (owner_slot != 0xffff && g_7f4ca2[owner_slot].kind == 5)
 			return 0;
 	}
 	return 1;

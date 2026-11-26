@@ -11,7 +11,7 @@ int* __cdecl cut_FindLowestIdFlaggedCutscene(void);
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c53a0(void);
 
-char __cdecl fcn_004e6910(int idx)
+char __cdecl cut_RunPendingCutscenes(int idx)
 {
 	char ok;
 	int* p;
@@ -30,7 +30,7 @@ char __cdecl fcn_004e6910(int idx)
 		cut_FreeCutscene(*p);
 		p = cut_FindLowestIdFlaggedCutscene();
 	}
-	fcn_004c4510(g_7f4ca4 + idx * 0x21c - 4, *(int*) (g_7f4ca4 + idx * 0x21c));
+	cm_BeginPacketFieldDelta(g_7f4ca4 + idx * 0x21c - 4, *(int*) (g_7f4ca4 + idx * 0x21c));
 	fcn_004c4700(4, 1, (short) (g_7f4ca4 + idx * 0x21c + 0x208 - g_aed32c), &saved);
 	fcn_004c53a0();
 	return ok;

@@ -40,7 +40,7 @@ void __cdecl fcn_004c6530(int);
 int __cdecl gm_AddTime(char *, int, int, int);
 int __cdecl fcn_00500cb0(char *, int);
 char *__cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0050c710(char *, int, int);
+int __cdecl gm_GetBuildingTechEffect(char *, int, int);
 void __cdecl gm_ChangeObjektZustand(char *, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl fcn_00545d40(int, int, char *, int, int, int);
@@ -151,7 +151,7 @@ void __cdecl he_RunTransport(char *e)
 		gm_ResolveEntityById(0, &q, 0, *(int *)(e + 0xac));
 		r = gm_SearchTable67(*(int *)(q + 0x1c));
 		if (r != 0) {
-			f = (float)fcn_0050c710(r, 2, 1) + g_662cf8;
+			f = (float)gm_GetBuildingTechEffect(r, 2, 1) + g_662cf8;
 		}
 		if (g_7e453c != 0 && *g_7e453c > 0x64) {
 			f = f - g_662938;

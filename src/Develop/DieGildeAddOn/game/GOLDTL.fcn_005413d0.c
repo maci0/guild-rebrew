@@ -42,7 +42,7 @@ unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 #include "Develop/DieGildeAddOn/game/cutscene.h"
 
-void __cdecl fcn_005413d0(int idx)
+void __cdecl gm_ResetDynastySlot(int idx)
 {
 	int keep[3];
 	int kill[15];

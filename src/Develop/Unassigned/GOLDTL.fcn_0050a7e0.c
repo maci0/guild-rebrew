@@ -20,7 +20,7 @@ char __cdecl gm_RandomStatModifier(char v);
 void __cdecl ahm_ResetEntityState(void* rec);
 void __cdecl fcn_004fdfe0(char* rec);
 int __cdecl fcn_004fdec0(char* name);
-char* __cdecl fcn_004eef70(void);
+char* __cdecl gm_PickUnusedPresetCharacter(void);
 void __cdecl fcn_004adcd0(int type, int a, int b, char* rec);
 
 #define B(p, o) (*(unsigned char*) ((char*) (p) + (o)))
@@ -102,7 +102,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
     if (B(slot, 2) == 0x10) {
         char* ent;
 
-        ent = fcn_004eef70();
+        ent = gm_PickUnusedPresetCharacter();
         B(slot, 2) = 3;
         if (ent != 0) {
             D(slot, 0x54) = 0x59a;

@@ -143,7 +143,7 @@ void __cdecl fcn_005017a0(int player)
 					o = fcn_00502cd0(*(int*) (ent + 0x14), 1, 4, 0x11);
 					if (o != 0 && (int) *(unsigned char*) (o + 0x1c) < count) {
 						count -= *(unsigned char*) (o + 0x1c);
-						fcn_004c4510(o, *(int*) (o + 2));
+						cm_BeginPacketFieldDelta(o, *(int*) (o + 2));
 						fcn_004c4670(1, 1, o - g_aed32c + 0x1c, &count);
 						fcn_004c5360();
 					}

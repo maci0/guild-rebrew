@@ -72,7 +72,7 @@ int __cdecl fcn_004321a0(ClampBlk flags, int v, int lo, int hi, int max);
 void __cdecl fcn_00438ac0(char*, int);
 void __cdecl fcn_00438b40(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
-void __cdecl fcn_004311a0(char*, char*, int, int, int);
+void __cdecl d3_ApplyAnimDelta(char*, char*, int, int, int);
 void __cdecl fcn_00431330(char*, char*, int, int, int);
 void __cdecl fcn_00431dd0(char*, char*, int, int, float*);
 void __cdecl fcn_00451340(float*, float*, float, float*);
@@ -293,7 +293,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 					SI(slot + 8) -= QI(BF(cur), 4);
 					SI(slot) = lo;
 					if (SB(owner + 0x169) == 0) {
-						fcn_004311a0(o, slot, SI(slot + 0xc), hi,
+						d3_ApplyAnimDelta(o, slot, SI(slot + 0xc), hi,
 							(SI(slot + 0x70) << 30) >> 30);
 					}
 				}
@@ -399,7 +399,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 					SB(slot + 0x74) &= ~2;
 					if (!(SB(slot + 0x6d) & 8)) {
 						if (SB(owner + 0x169) == 0) {
-							fcn_004311a0(o, slot, SI(slot + 0xc),
+							d3_ApplyAnimDelta(o, slot, SI(slot + 0xc),
 								saved,
 								(SI(slot + 0x70) << 30) >> 30);
 						}

@@ -13,7 +13,7 @@ int __cdecl fcn_00507910(int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00507400(int, int);
 int __cdecl fcn_005072c0(int);
-int __cdecl fcn_004a4bb0(int, int, int, int*, int*, int);
+int __cdecl ai_PrepareBuildSite(int, int, int, int*, int*, int);
 int __cdecl fcn_0050d170(int);
 
 /* ADDRESS: GOLDTL 0x0049f000 */
@@ -88,7 +88,7 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 			*(unsigned char*) v14 = 0;
 			v14[1] = 0;
 			v14[2] = 0;
-			v9 = fcn_004a4bb0(a0, (int) a1, a2, v15, v14, 1);
+			v9 = ai_PrepareBuildSite(a0, (int) a1, a2, v15, v14, 1);
 			if (v9 == 0) {
 				return 0;
 			}

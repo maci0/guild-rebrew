@@ -52,7 +52,7 @@ void __cdecl fcn_004d1a80(void);
 void __cdecl fcn_004d7e50(int);
 #include "Develop/Units/Msx/msx.h"
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00405540(Obj*, int);
+void __cdecl ch_SetAnimationPaused(Obj*, int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl fcn_004d7d70(int);
 Ent* __cdecl gm_LookupEntityRecordById(int);
@@ -88,7 +88,7 @@ void __cdecl fcn_004d9f20(int arg)
 			g_772e94 = g_772e94 == 0;
 			for (i = 0; i < 0x20; i++) {
 				if (((Unit**)ch_ContextCharacters)[i] != 0 && ((Unit**)ch_ContextCharacters)[i]->obj->owner == g_67a370) {
-					fcn_00405540(((Unit**)ch_ContextCharacters)[i]->obj, g_772e94);
+					ch_SetAnimationPaused(((Unit**)ch_ContextCharacters)[i]->obj, g_772e94);
 				}
 			}
 			fcn_00533a40(&(*(char*)g_6b5c60));

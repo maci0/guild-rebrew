@@ -6,7 +6,7 @@ extern unsigned char* lpGebaeudePROT;
 void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
 int __cdecl fcn_00508da0(unsigned char* e);
 
-int __cdecl fcn_0050c710(unsigned char* e, int kind, int flag)
+int __cdecl gm_GetBuildingTechEffect(unsigned char* e, int kind, int flag)
 {
 	BUILDING_PROTOTYPE* t;
 	int sum;

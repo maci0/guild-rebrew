@@ -25,7 +25,7 @@ extern char g_6a6b48[];
 int __cdecl fcn_004c4450(int);
 char *__cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_0050cad0(int *, int *);
-void __cdecl fcn_0050ff70(char *, int);
+void __cdecl gm_AdjustGebaeudeCondition(char *, int);
 int __cdecl fcn_004c30a0(int, int, char *, int, int);
 void __cdecl gm_AddTime(char *, int, int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
@@ -210,7 +210,7 @@ inc_step:
 				}
 				*(int *)(a0 + 0xb0) =
 					(int)((float)*(int *)(a0 + 0xb0) - n * f);
-				fcn_0050ff70(e, -n);
+				gm_AdjustGebaeudeCondition(e, -n);
 				if (*(unsigned short *)(e + 0x27) == g_774970 &&
 				    *(unsigned int *)(a0 + 0xfc) + 0x20d < (unsigned int)g_6b7fb8) {
 					d = *(char *)(e + 0x5c) - n;

@@ -130,7 +130,7 @@ void __cdecl fcn_00535550(int);
 void __cdecl fcn_00535560(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_004c4510(int, int);
+void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 int __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5530(void*);
@@ -327,7 +327,7 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 			if (f.v3c != G(a1 + 0x3d)) {
 				if (f.v4c != -1 && fcn_004c4450(f.v4c) == 0)
 					goto L6901;
-				fcn_004c4510((int) a1, G(a1 + 1));
+				cm_BeginPacketFieldDelta((int) a1, G(a1 + 1));
 				cm_AppendPacketFieldDelta(4, 1, 0x3d, &f.v3c);
 				f.v4c = fcn_004c5360();
 			}
@@ -696,7 +696,7 @@ L77c4:
 L77de:
 	if (f.v40 != -1)
 		d2_ClearRadioGroup(f.v40);
-	fcn_004c4510((int) a1, G(a1 + 1));
+	cm_BeginPacketFieldDelta((int) a1, G(a1 + 1));
 	if (f.v4c != -1) {
 		f.v3c = d2_GetControlValue(f.v4c);
 		cm_AppendPacketFieldDelta(4, 1, 0x41, &f.v3c);

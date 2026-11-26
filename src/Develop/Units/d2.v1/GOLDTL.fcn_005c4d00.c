@@ -20,7 +20,7 @@ extern Btn5c4d g_776ca0[256];
 
 
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0050e380(int, char*);
+int __cdecl gm_BuildDealSummary(int, char*);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -33,7 +33,7 @@ void __cdecl fcn_005c4d00(int win, int sub, int idx, int unused)
 
 	d2_SetForm(win, sub);
 	memset(g_776ca0, 0, sizeof(g_776ca0));
-	fcn_0050e380(idx, buf);
+	gm_BuildDealSummary(idx, buf);
 	io_AppendText(0x1efa, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].value_194);
 	k = 0;
 	while (*(int*) (buf + 0x35 + k * 0x1e) != 0 && k < 256) {

@@ -47,7 +47,7 @@ void __cdecl fcn_00471e30(int h);
 void __cdecl d2_SetForm(int h, int a);
 int __cdecl d2_GetWindowListItem(int h, int a, int b);
 int __cdecl io_AppendText(int id, ...);
-int __cdecl fcn_00525f60(char* e, int a);
+int __cdecl d2_CheckActionBlocker(char* e, int a);
 int __cdecl fcn_00526010(void* e, int a, char b);
 void __cdecl fcn_00526120(char* text, int a);
 int __cdecl main_RunFrameLoop(void* fn, int a);
@@ -143,7 +143,7 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	do {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == r1) {
-				if (fcn_00525f60(a0, 4) != 0 &&
+				if (d2_CheckActionBlocker(a0, 4) != 0 &&
 				    fcn_00526010(a0, v, *(char*) &g_773d75) != 0) {
 					w1 = gm_RandomMod(0x1e) + 3;
 					w2 = gm_RandomMod(0x1e) + 3;

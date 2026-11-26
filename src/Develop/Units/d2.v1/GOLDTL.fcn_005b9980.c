@@ -5,7 +5,7 @@ extern unsigned char g_773d75;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
 
-extern int __cdecl fcn_0050c490(int a0, int a1);
+extern int __cdecl gm_CollectEntityCarts(int a0, int a1);
 extern int __cdecl io_FormatTextBuffer(char *a0, char *a1, ...);
 extern int __cdecl fcn_00526120(char *a0, int a1);
 extern int __cdecl fcn_00470820(int a0, int a1, char *a2);
@@ -46,7 +46,7 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
     int v;
 
     choiceIndex = 0;
-    if (fcn_0050c490(sourceObj, 0) >= 3)
+    if (gm_CollectEntityCarts(sourceObj, 0) >= 3)
     {
         io_FormatTextBuffer(messageBuf, (char *)0xf1, 3);
         fcn_00526120(messageBuf, 0);

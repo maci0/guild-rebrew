@@ -1,4 +1,4 @@
-int __cdecl fcn_004eb320(char* e);
+int __cdecl amt_CheckHighOfficeEligibility(char* e);
 char* __cdecl fcn_0049fc80(char* e);
 int __cdecl fcn_0049fe50(char* e);
 int __cdecl fcn_004a0020(char* e);
@@ -16,7 +16,7 @@ int __cdecl ai_StartZunftLevel3(int a1, char* e, int a3, char* out)
 	if (a1) {
 		return 0;
 	}
-	if (fcn_004eb320(e) != 1) {
+	if (amt_CheckHighOfficeEligibility(e) != 1) {
 		return 0;
 	}
 	c = e[0x169];

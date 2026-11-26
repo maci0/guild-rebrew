@@ -12,7 +12,7 @@ void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
 
-int __cdecl fcn_004b7280(void* request)
+int __cdecl gm_HandleEntityMsg0c(void* request)
 {
 	char buf[0x100];
 	double d;

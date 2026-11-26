@@ -34,7 +34,7 @@ extern int g_6b5c60;
 extern int d2_CurrentElementId;
 
 
-int __cdecl fcn_0050e4a0(int a);
+int __cdecl gm_FindPublicBuilding(int a);
 int __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl d2_CenterDialogWindows(int dlg);
 int __cdecl fcn_0050d200(int a, int b);
@@ -42,7 +42,7 @@ int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 int __cdecl fcn_0046fac0(int a, int b, int c, int d);
 void __cdecl d2_SetElementFont(int a, int b);
 void __cdecl fcn_0046f940(int a, int b);
-int __cdecl fcn_00526070(int, int, int, int);
+int __cdecl d2_CheckFundsAndNotify(int, int, int, int);
 int __cdecl lc_GebaeudeAusrichten(int, char*);
 void __cdecl d3_TransformPoint(int a, int b, void* c);
 void __cdecl fcn_00598740(void* a, int b);
@@ -81,7 +81,7 @@ void __cdecl fcn_00599b00(void)
 	cats[2] = 10;
 	cats[3] = 1;
 	cats[4] = 0;
-	raw = fcn_0050e4a0(1);
+	raw = gm_FindPublicBuilding(1);
 	raw = *(int*) (raw + 0x5d);
 	query = fcn_00502cd0(raw, 2, 6, 0, 0x115);
 	dlg = fcn_00470820(0, 0, (char*) 0x6aa2a8);
@@ -137,7 +137,7 @@ void __cdecl fcn_00599b00(void)
 				((D2_CONTROL_TL*) (g_1015ea0))[selected].value_03c = 0;
 			}
 			selected = d2_CurrentElementId;
-			ent = fcn_00526070(query, *(int*) (query + 0x14),
+			ent = d2_CheckFundsAndNotify(query, *(int*) (query + 0x14),
 			    fcn_0050d200((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i), g_773d75);
 			if (ent != 0) {
 				fcn_00471af0(dlg, 0);

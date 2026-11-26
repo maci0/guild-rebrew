@@ -20,7 +20,7 @@ void __cdecl fcn_004c6ae0(int, int);
 int __cdecl fcn_004f4830(int, void*);
 int __cdecl fcn_004f4860(char*, unsigned char, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
 
@@ -135,7 +135,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 		}
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (fcn_00525f60(a0, 2) != 0) {
+				if (d2_CheckActionBlocker(a0, 2) != 0) {
 					if (*(unsigned char*) ((char*) rec + 1) == 2) {
 						delta = 1 - rec[6];
 					} else {

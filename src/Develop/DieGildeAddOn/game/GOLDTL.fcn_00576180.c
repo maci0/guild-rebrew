@@ -11,7 +11,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_005b3120(char*, char*, int, int);
-float __cdecl fcn_004ec8a0(char*, int);
+float __cdecl ahm_GetEssenceValue(char*, int);
 void __cdecl fcn_004ee6d0(char*, int, float);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
@@ -31,7 +31,7 @@ void __cdecl fcn_00576180(char* u)
 	k = fcn_00500e20(&gm_GameTime);
 	f = 0.0f;
 	h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
-	if (h == 0 || ahm_CheckFlag(h) == 0 || (f = fcn_004ec8a0(h, *(int*) (u + 0xb0))) <= 0.0f) {
+	if (h == 0 || ahm_CheckFlag(h) == 0 || (f = ahm_GetEssenceValue(h, *(int*) (u + 0xb0))) <= 0.0f) {
 		*(int*) (u + 0x70) = -2;
 	}
 	if (*(int*) (u + 0x70) != -2 && *(int*) (u + 0x70) != -1) {

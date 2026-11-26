@@ -17,7 +17,7 @@ void __cdecl fcn_00534160(int, int, int, int);
 float __cdecl fcn_004ff040(char*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
-int* __cdecl fcn_004ce610(char*);
+int* __cdecl gm_GetEquippedCombatGear(char*);
 void __cdecl fcn_00472680(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004d5740 */
@@ -59,7 +59,7 @@ void __cdecl fcn_004d5740(char* ids, int originX, int originY)
 		io_FormatTextBuffer(buf, "%1N1 %i%", *(unsigned short*) rec,
 			     (int) (fcn_004ff040(rec) * 100.0));
 		fcn_0046f940(h, buf);
-		p = fcn_004ce610(rec);
+		p = gm_GetEquippedCombatGear(rec);
 		if (p != 0 && *p != 0) {
 			v = d2_AddElementToWindow(x + 0x28, y + 0xf, *p + 0xdf, d2_CurrentWindowId);
 			fcn_00472680(v, -2);

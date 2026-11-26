@@ -9,7 +9,7 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, int);
 
-int __cdecl fcn_004b7e70(void* request)
+int __cdecl gm_HandleEntityMsg17(void* request)
 {
 	char buf[0x400];
 	int d2;

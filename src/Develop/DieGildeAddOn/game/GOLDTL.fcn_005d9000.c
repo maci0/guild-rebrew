@@ -17,13 +17,13 @@ extern char g_868060[];
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
-void __cdecl fcn_004c4510(void *, int);
+void __cdecl cm_BeginPacketFieldDelta(void *, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *);
 void __cdecl fcn_004c4670(int, int, int, void *);
 void __cdecl fcn_004c5360(void);
 unsigned int __cdecl fcn_004a55c0(void *, unsigned int, unsigned int *, float, float, unsigned short *);
 int __cdecl srv_GetEntityOfficeSlot(void *, void *, void *);
-void __cdecl fcn_004e8240(void *, int, int, int, int);
+void __cdecl amt_SendOfficeCommand(void *, int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char *, int, int, char *);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_0064d41a(char *, char *, ...);
@@ -78,7 +78,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 				if (best->unk_024 < -0x14) {
 					if (gm_RandomMod(2) != 0) {
 						a = abs(best->unk_024 / 2);
-						fcn_004c4510(best, best->entity_id);
+						cm_BeginPacketFieldDelta(best, best->entity_id);
 						cm_AppendPacketFieldDelta(4, 1, 0x24, &a);
 						fcn_004c5360();
 						if (best->entity_state == 6 || best->entity_state == 7)
@@ -105,7 +105,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		delta = (char) (ent[0x5c] - gm_RandomMod(0x10) - 10);
 		if (delta <= 0)
 			return;
-		fcn_004c4510(ent, *(int *) (ent + 1));
+		cm_BeginPacketFieldDelta(ent, *(int *) (ent + 1));
 		cm_AppendPacketFieldDelta(1, 1, 0x5c, &delta);
 		fcn_004c5360();
 		io_FormatTextBuffer(t1, 0x1dfc, best->entity_index, ent);
@@ -121,7 +121,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		best = &((ENTITY_RECORD*)g_7f4ca0)[b];
 		if (srv_GetEntityOfficeSlot(best, &role, &slot) == 0)
 			return;
-		fcn_004e8240((void *) slot.v[0], 0, 0, 4, 0xff);
+		amt_SendOfficeCommand((void *) slot.v[0], 0, 0, 4, 0xff);
 		io_FormatTextBuffer(t1, 0x1dfd, best->entity_index, best->entity_index, best->entity_index);
 	} else if (mode == 4) {
 		unsigned int a;
@@ -145,7 +145,7 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 		}
 		if (picked == -1)
 			return;
-		fcn_004c4510(best, best->entity_id);
+		cm_BeginPacketFieldDelta(best, best->entity_id);
 		fcn_004c4670(1, 1, picked + 0x80, &delta);
 		fcn_004c5360();
 		io_FormatTextBuffer(t1, 0x1dfe, best->entity_index, best->entity_index, picked + 0x16b7);

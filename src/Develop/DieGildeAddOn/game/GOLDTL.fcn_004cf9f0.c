@@ -13,7 +13,7 @@ int __cdecl fcn_004cf9f0(char* p)
 
 extern unsigned short* g_772e98;
 
-void* __cdecl fcn_004ce610(char*);
+void* __cdecl gm_GetEquippedCombatGear(char*);
 float __cdecl fcn_004ff040(char*);
 void __cdecl fcn_00417b50(int, int, float, float, float, float);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -34,7 +34,7 @@ int __cdecl fcn_004d4790(char* e)
 	char* p;
 	char* q;
 
-	fcn_004ce610(e);
+	gm_GetEquippedCombatGear(e);
 	if (fcn_004ff040(e) < 0.05) {
 		fcn_00417b50(*(int*) (*(char**) (e + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
 		ch_CancelActionQueue(*(char**) (e + 0x184));

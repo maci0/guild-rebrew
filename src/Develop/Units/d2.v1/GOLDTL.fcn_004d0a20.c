@@ -28,10 +28,10 @@ void __cdecl d2_SetElementValue(int, ...);
 float __cdecl fcn_004ff040(char*);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
-int __cdecl fcn_004ce5c0(char*);
+int __cdecl gm_GetUnitWeaponSpec(char*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_00472680(int, int);
-char* __cdecl fcn_004ce680(char*);
+char* __cdecl gm_FindEntityActiveItem(char*);
 void __cdecl d2_DestroyElement(int);
 void __cdecl d2_SetSlotVisibility(int, int);
 
@@ -76,7 +76,7 @@ void __cdecl fcn_004d0a20(void)
 				io_FormatTextBuffer(buf, (char*) 0x68b838, *(unsigned short*) q->unit,
 					(int) (fcn_004ff040(q->unit) * g_662c38));
 				fcn_0046f940(q->text, buf);
-				r = (int*) fcn_004ce5c0(q->unit);
+				r = (int*) gm_GetUnitWeaponSpec(q->unit);
 				if (r != 0 && *r != 0) {
 					if (q->name != -1) {
 						if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[q->name].value_008)) != *r + 0xdf) {
@@ -93,7 +93,7 @@ relabel:
 					}
 					if (q->label != -1) {
 						if (*(int*) (r + 0x16) == 1 || *(int*) (r + 0x16) == 2) {
-							v = fcn_004ce680(q->unit);
+							v = gm_FindEntityActiveItem(q->unit);
 							if (v != 0) {
 								sprintf(buf, "%i", *(int*) (v + 0x20));
 								fcn_0046f940(q->label, buf);

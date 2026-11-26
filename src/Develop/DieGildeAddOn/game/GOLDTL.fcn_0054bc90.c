@@ -4,7 +4,7 @@ extern void __cdecl he_FreeAction(char*);
 extern char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 extern int __cdecl fcn_004943e0(unsigned short*, unsigned short*);
 extern void __cdecl io_FormatTextBuffer(char*, int, ...);
-extern void __cdecl fcn_004c4510(char*, unsigned int);
+extern void __cdecl cm_BeginPacketFieldDelta(char*, unsigned int);
 extern int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 extern void __cdecl fcn_004c5360(void);
 extern int __cdecl fcn_004c5620(int, char*);
@@ -121,7 +121,7 @@ void __cdecl fcn_0054bc90(char* action)
 						break;
 				}
 				if (idx < 4) {
-					fcn_004c4510(v13, *(unsigned int*) (v13 + 2));
+					cm_BeginPacketFieldDelta(v13, *(unsigned int*) (v13 + 2));
 					cm_AppendPacketFieldDelta(4, 1, idx * 4 + 0x1c, (char*) &v11);
 					fcn_004c5360();
 				}
@@ -180,7 +180,7 @@ void __cdecl fcn_0054bc90(char* action)
 						break;
 				}
 				if (idx < 4) {
-					fcn_004c4510(v13, *(unsigned int*) (v13 + 2));
+					cm_BeginPacketFieldDelta(v13, *(unsigned int*) (v13 + 2));
 					cm_AppendPacketFieldDelta(4, 1, idx * 4 + 0x1c, (char*) &v11);
 					fcn_004c5360();
 				}

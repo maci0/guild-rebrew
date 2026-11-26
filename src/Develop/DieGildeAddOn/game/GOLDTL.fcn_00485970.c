@@ -59,13 +59,13 @@ char* __cdecl gm_FindSlotById(int a, int b);
 int __cdecl gm_GetBuildingTypeCategory(int a);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 float __cdecl eval_ObjektPreis2Credits(int id, int a);
-int __cdecl fcn_0050dfa0(int a, int b);
+int __cdecl gm_GetMsgObjektField(int a, int b);
 int __cdecl gm_eval_SlotVoll(int a, int b, int c);
 char* __cdecl fcn_00503d10(int id);
 char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_FindRecordById(int id);
-void __cdecl fcn_0050de80(int a, int* out);
+void __cdecl gm_CalcEntityInventoryStats(int a, int* out);
 
 /* ADDRESS: GOLDTL 0x00485970 */
 void __cdecl fcn_00485970(char* a0, int a1, int a2)
@@ -132,11 +132,11 @@ void __cdecl fcn_00485970(char* a0, int a1, int a2)
 						pa[idx].f18 = 0;
 						pa[idx].f1c = f1;
 						pa[idx].f24 = 0;
-						pa[idx].f28 = fcn_0050dfa0(a1, id);
+						pa[idx].f28 = gm_GetMsgObjektField(a1, id);
 						pa[idx].f2c = gm_eval_SlotVoll(a1, id, 1000000);
 						pa[idx].f30 = 0x81;
 						pa[idx].f34 = 0;
-						pa[idx].f38 = fcn_0050dfa0((int) cont, id);
+						pa[idx].f38 = gm_GetMsgObjektField((int) cont, id);
 						pa[idx].f3c = 0x80;
 						if (idx == ai_ResourceCount)
 							ai_ResourceCount++;
@@ -178,7 +178,7 @@ label_485b77:
 								pb[idx].f34 = f1;
 								pb[idx].f24 = 0;
 								pb[idx].f38 = 0;
-								pb[idx].f3c = fcn_0050dfa0(a1, id);
+								pb[idx].f3c = gm_GetMsgObjektField(a1, id);
 								pb[idx].f40 = gm_eval_SlotVoll(a1, id, 1000000);
 								pb[idx].f44 = 0;
 								pb[idx].f48 = 0x21;
@@ -241,10 +241,10 @@ label_485d61:
 				pa[idx].f24 = 0;
 				pa[idx].f30 = 0x81;
 				pa[idx].f3c = 0;
-				pa[idx].f28 = fcn_0050dfa0(a1, id);
+				pa[idx].f28 = gm_GetMsgObjektField(a1, id);
 				pa[idx].f2c = gm_eval_SlotVoll(a1, id, 1000000);
 				pa[idx].f34 = 0;
-				pa[idx].f38 = fcn_0050dfa0((int) cont, id);
+				pa[idx].f38 = gm_GetMsgObjektField((int) cont, id);
 				if (idx == ai_ResourceCount)
 					ai_ResourceCount++;
 				q = fcn_00502cd0(*(int*) (cont + 0x14), 1, 5);
@@ -283,7 +283,7 @@ label_485f7e:
 					pb[i].f38 = 0;
 					pb[i].f48 = 0x21;
 					pb[i].f54 = 0;
-					pb[i].f3c = fcn_0050dfa0(a1, pa[idx].id);
+					pb[i].f3c = gm_GetMsgObjektField(a1, pa[idx].id);
 					pb[i].f40 = gm_eval_SlotVoll(a1, pa[idx].id, 1000000);
 					pb[i].f4c = 0;
 					pb[i].f50 = gm_eval_SlotVoll((int) obj, pa[idx].id, 1000000);
@@ -300,7 +300,7 @@ label_485f7e:
 	while (rec) {
 		recs2 = gm_FindRecordById(*(int*) (rec + 0xac));
 		if (recs2) {
-			fcn_0050de80((int) recs2, rb.recs);
+			gm_CalcEntityInventoryStats((int) recs2, rb.recs);
 			for (i = 0; i < rb.recs[0]; i++) {
 				if (!rb.slots[i])
 					continue;

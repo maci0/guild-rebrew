@@ -29,7 +29,7 @@ extern unsigned char g_773d75;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_0047dd60(unsigned char* p);
-void __cdecl fcn_004942a0(char* e, Share* out);
+void __cdecl gm_CalcStudiumOffers(char* e, Share* out);
 Rec6 __cdecl fcn_00506d50(int idx);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_0050d320(char* e, unsigned char b);
@@ -74,7 +74,7 @@ int __cdecl ai_StartStudium(int a1, char* actor, int a3, Blk24* o1, Blk24* o2)
 	if (best == 0) {
 		return 0;
 	}
-	fcn_004942a0(actor, sh);
+	gm_CalcStudiumOffers(actor, sh);
 	s = fcn_00506d50(best[0x164]);
 	{
 		float r[3];

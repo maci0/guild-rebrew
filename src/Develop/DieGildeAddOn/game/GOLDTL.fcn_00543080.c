@@ -21,7 +21,7 @@ int __cdecl plt_UpdatePlantStages();
 int __cdecl fcn_004c30a0();
 int __cdecl fcn_004c54c0();
 int __cdecl fcn_004e4f10();
-char __cdecl fcn_004e6910(int);
+char __cdecl cut_RunPendingCutscenes(int);
 int __cdecl fcn_004e7700();
 int __cdecl fcn_004eafe0();
 int __cdecl fcn_004f5830();
@@ -46,7 +46,7 @@ int __cdecl fcn_00526120();
 int __cdecl fcn_005356b0();
 int __cdecl sv_WaitForNetworkSync();
 int __cdecl main_RunFrameLoop();
-int __cdecl fcn_005421f0();
+int __cdecl gm_ApplyHourlyEntityUpdates();
 int __cdecl fcn_005422c0();
 int __cdecl fcn_005435d0();
 int __cdecl main_PlayOutroMovie();
@@ -118,7 +118,7 @@ void __cdecl fcn_00543080(void)
 		sv_WaitForNetworkSync(0x24087);
 	}
 	fcn_004e4f10(0);
-	if (fcn_004e6910(v5) && g_6a3420) {
+	if (cut_RunPendingCutscenes(v5) && g_6a3420) {
 		g_1040488 = 0;
 		g_1040480 = g_1040494;
 		g_1040484 = 0;
@@ -249,7 +249,7 @@ void __cdecl fcn_00543080(void)
 		}
 	}
 	if ((*(int*) &g_77494c & 8) || g_14cbca0 == -1) {
-		fcn_005421f0();
+		gm_ApplyHourlyEntityUpdates();
 	}
 	*(char*) &g_772d10 = (char) v1;
 }

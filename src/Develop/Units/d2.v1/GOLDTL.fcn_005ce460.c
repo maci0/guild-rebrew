@@ -23,7 +23,7 @@ extern int g_100f1dc;
 Book *__cdecl fcn_00534c40(char *, char *, int, char *, char *);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
-void __cdecl fcn_004f5110(char *, int);
+void __cdecl gm_FormatLawName(char *, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_004f4830(int, Law *);
 void __cdecl d2_RunGesetzbuchInfoDialog(int, int);
@@ -85,7 +85,7 @@ void __cdecl fcn_005ce460(int cmd)
 			d2_SetForm(w->right, 2);
 			col = w->right;
 		}
-		fcn_004f5110(buf, i);
+		gm_FormatLawName(buf, i);
 		items[n] = d2_GetWindowListItem(col, 2, io_AppendText("%it$1>%s$N$0>", buf));
 	}
 	d2_SetForm(w->left, 3);

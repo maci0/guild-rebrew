@@ -71,7 +71,7 @@ void __cdecl fcn_0055fd10(char* u)
 		if (*(int*) (u + 0xb0) > 0) {
 			*(int*) (u + 0xb0) -= 1;
 			if (*(unsigned char*) (h + 0x1c) < a) {
-				fcn_004c4510(h, *(int*) (h + 2));
+				cm_BeginPacketFieldDelta(h, *(int*) (h + 2));
 				off = h - g_aed32c + 0x1c;
 				fcn_004c4670(1, 1, off, &v);
 				fcn_004c5360();
@@ -79,7 +79,7 @@ void __cdecl fcn_0055fd10(char* u)
 		} else if (*(int*) (u + 0xb4) > 0) {
 			*(int*) (u + 0xb4) -= 1;
 			if (*(unsigned char*) (h + 0x1d) < b) {
-				fcn_004c4510(h, *(int*) (h + 2));
+				cm_BeginPacketFieldDelta(h, *(int*) (h + 2));
 				off = h - g_aed32c + 0x1d;
 				fcn_004c4670(1, 1, off, &v);
 				fcn_004c5360();

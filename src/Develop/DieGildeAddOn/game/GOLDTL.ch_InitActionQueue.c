@@ -23,7 +23,7 @@ int __cdecl fcn_0040aa00();
 int __cdecl ch_RunWalkToRandomDummy();
 int __cdecl fcn_0040abd0();
 int __cdecl ch_UpdateFade();
-int __cdecl fcn_0040bd80();
+int __cdecl ch_UpdateWait();
 char* __cdecl m_alloc(int, const char*);
 void __cdecl ch_DeclareAction(int, void*, int, const char*, int);
 int __cdecl fcn_00408220(float);
@@ -55,7 +55,7 @@ int __cdecl ch_InitActionQueue(void)
 	ch_DeclareAction(54, ch_ExecuteAttachAnimation, 1, &(*(char*)g_6b5c60), 0);
 	ch_DeclareAction(55, fcn_0040abd0, 1, &(*(char*)g_6b5c60), 1);
 	ch_DeclareAction(56, ch_UpdateFade, 1, &(*(char*)g_6b5c60), 1);
-	ch_DeclareAction(59, fcn_0040bd80, 1, &(*(char*)g_6b5c60), 1);
+	ch_DeclareAction(59, ch_UpdateWait, 1, &(*(char*)g_6b5c60), 1);
 	ch_DeclareAction(52, UsingGate, 1, &(*(char*)g_6b5c60), 5);
 	memset(g_1551f40, 0, sizeof(g_1551f40));
 	(*(int*)&g_6b5c5c) = fcn_00408220(60.0f);

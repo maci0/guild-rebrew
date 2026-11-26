@@ -7,7 +7,7 @@ void  __cdecl fcn_005da250(void*, void*);
 void  __cdecl io_FormatTextBuffer(void*, int, int);
 extern char g_679060[];
 
-int __cdecl fcn_004f74e0(void* entity, void* request)
+int __cdecl he_HandleBeweiseSichtenRequest(void* entity, void* request)
 {
 	void* p;
 

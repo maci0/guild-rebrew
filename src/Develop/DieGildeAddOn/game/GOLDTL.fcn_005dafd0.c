@@ -42,7 +42,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00525f60(unsigned char*, int);
+int __cdecl d2_CheckActionBlocker(unsigned char*, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -78,7 +78,7 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 		if (!amt_FindOfficeSlotByType(o[0x166], &info)) {
 			return 0x40;
 		}
-		fcn_004e8240(info.f0, 0, 0, g_7f4c04 > 0xd ? 0xff : 3, 0xff);
+		amt_SendOfficeCommand(info.f0, 0, 0, g_7f4c04 > 0xd ? 0xff : 3, 0xff);
 		fcn_005100f0(*(int*) (e + 4), -8);
 		fcn_004c5420(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
 		if (o[2] == 6 || o[2] == 7) {
@@ -113,8 +113,8 @@ int __cdecl fcn_005dafd0(unsigned char* e, unsigned char* a2)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (d2_CurrentElementId == ok && fcn_00525f60(e, 8)) {
-				fcn_004e8240(info.f0, 0, 0, g_7f4c04 > 0xd ? 0xff : 3, 0xff);
+			if (d2_CurrentElementId == ok && d2_CheckActionBlocker(e, 8)) {
+				amt_SendOfficeCommand(info.f0, 0, 0, g_7f4c04 > 0xd ? 0xff : 3, 0xff);
 				fcn_005100f0(*(int*) (e + 4), -8);
 				h = fcn_004c5420(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
 				while (h != -1 && fcn_004c4450(h) == 0) {

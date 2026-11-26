@@ -14,8 +14,8 @@ char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 int __cdecl fcn_00577850(int id);
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_0048dbc0(char* e, Msg* a, Msg* b);
-int __cdecl fcn_0048dcd0(char* e, Msg* a, Msg* b);
+int __cdecl ai_PrepareSecretRoomAction0(char* e, Msg* a, Msg* b);
+int __cdecl ai_SetupSecretRoomMode1(char* e, Msg* a, Msg* b);
 int __cdecl fcn_0048ddd0(char* e, Msg* a, Msg* b);
 int __cdecl fcn_0048df90(char* e, Msg* a, Msg* b);
 
@@ -54,10 +54,10 @@ int __cdecl ai_StartSecretRoom(int kind, char* e, int busy, Msg* out1, Msg* out2
 	}
 	switch (gm_RandomMod(4)) {
 	case 0:
-		r = fcn_0048dbc0(e, &a, &b);
+		r = ai_PrepareSecretRoomAction0(e, &a, &b);
 		break;
 	case 1:
-		r = fcn_0048dcd0(e, &a, &b);
+		r = ai_SetupSecretRoomMode1(e, &a, &b);
 		break;
 	case 2:
 		r = fcn_0048ddd0(e, &a, &b);

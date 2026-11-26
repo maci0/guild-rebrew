@@ -4,24 +4,24 @@
 extern char g_7f4ca4[];
 
 
-void* __cdecl fcn_0050e4a0(int);
+void* __cdecl gm_FindPublicBuilding(int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl atoi(char*);
 int __cdecl fcn_004ae130(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004c51a0(int, int, int, int);
 
-int __cdecl fcn_004b03e0(int a1, int a2, char* arg)
+int __cdecl hst_HandleVermoegenSteuer(int sel, int id, char* arg)
 {
-	void* e;
+	void* city;
 	char* obj;
 	float scale;
 	int i;
 
-	e = fcn_0050e4a0(1);
-	if (e == 0)
+	city = gm_FindPublicBuilding(1);
+	if (city == 0)
 		return 0;
-	obj = fcn_00502cd0(*(int*) ((char*) e + 0x5d), 2, 6, 0, 0x115);
+	obj = fcn_00502cd0(*(int*) ((char*) city + 0x5d), 2, 6, 0, 0x115);
 	if (obj == 0)
 		return 0;
 	if (*arg != '-')

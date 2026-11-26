@@ -13,7 +13,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_0050c7d0(int, int);
-int __cdecl fcn_0050c710(unsigned char*, int, int);
+int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_0046f9b0(int, char*);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
@@ -133,9 +133,9 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 					{
 						int v0;
 						int v1;
-						fcn_0050c710((unsigned char*) building, table[i], 0);
-						v0 = fcn_0050c710((unsigned char*) building, table[i], 0);
-						v1 = fcn_0050c710((unsigned char*) building, table[i], 1);
+						gm_GetBuildingTechEffect((unsigned char*) building, table[i], 0);
+						v0 = gm_GetBuildingTechEffect((unsigned char*) building, table[i], 0);
+						v1 = gm_GetBuildingTechEffect((unsigned char*) building, table[i], 1);
 						d2_SetElementValue(elems[i], 0, type, v1, v0);
 					}
 			}

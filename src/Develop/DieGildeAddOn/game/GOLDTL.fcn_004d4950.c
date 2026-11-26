@@ -3,11 +3,11 @@
 #include "client_packet_builder.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_004ce610(char*);
+char* __cdecl gm_GetEquippedCombatGear(char*);
 int __cdecl fcn_00402610(char*);
 float __cdecl fcn_004cefb0(char*, unsigned int);
-unsigned short* __cdecl fcn_004ce680(char*);
-void __cdecl fcn_004c4510(char*, int);
+unsigned short* __cdecl gm_FindEntityActiveItem(char*);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 unsigned int __cdecl cut_RandMod(unsigned int);
@@ -42,8 +42,8 @@ void __cdecl fcn_004d4950(int a0)
     v4 = *(unsigned short**) (a0 + 0x17c);
     v22 = *(int*) (a0 + 0x184);
     v5 = 1;
-    v9 = fcn_004ce610((char*) v4);
-    v7 = (int*) fcn_004ce610(v3);
+    v9 = gm_GetEquippedCombatGear((char*) v4);
+    v7 = (int*) gm_GetEquippedCombatGear(v3);
     fcn_00402610((char*) *(int*) ((char*) v4 + 0x184));
     if (!v7 ||
         *(float*) ((char*) v7 + 0xc) <
@@ -54,11 +54,11 @@ void __cdecl fcn_004d4950(int a0)
     }
     if (*(int*)((char*)g_772f24 + 4) == g_68b79c &&
         (v7[0x16] == 1 || v7[0x16] == 2)) {
-        v8 = (int) fcn_004ce680(v3);
+        v8 = (int) gm_FindEntityActiveItem(v3);
         if (v8) {
             int v11;
             v11 = -1;
-            fcn_004c4510((char*) v8, *(int*) (v8 + 2));
+            cm_BeginPacketFieldDelta((char*) v8, *(int*) (v8 + 2));
             fcn_004c4670(4, 1, (v8 - (int)g_aed32c) + 0x20, &v11);
             fcn_004c5360();
         }

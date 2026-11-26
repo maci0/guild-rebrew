@@ -50,7 +50,7 @@ extern int __cdecl fcn_0064d41a(char*, char*, ...);
 extern void __cdecl fcn_00412e50(char*, int);
 extern int __cdecl fcn_00506380(int, int, int, void*);
 extern void __cdecl sv_ClearObjectSelection(void);
-extern void __cdecl fcn_004c3540(char*);
+extern void __cdecl d3snd_PlayObjectClickSound(char*);
 extern void __cdecl fcn_00530510(void);
 
 typedef int (__cdecl* Fn_5305d0)(char*, int, char*, int);
@@ -193,7 +193,7 @@ L744:
 			*(char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) p].unk_17c[12] = 1;
 			g_7746f0 = 1;
 			g_6b5c48 = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) p].unk_17c[8];
-			fcn_004c3540(p);
+			d3snd_PlayObjectClickSound(p);
 			p = g_7746b4;
 		}
 		g_6b5c48 = *(int*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) p].unk_17c[8];

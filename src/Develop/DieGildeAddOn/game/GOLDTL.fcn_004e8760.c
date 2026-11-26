@@ -16,7 +16,7 @@ typedef struct {
 #include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl fcn_004c6b60(char*);
 
-int __cdecl fcn_004e8760(char* x, unsigned char* firstEntity, unsigned char* secondEntity)
+int __cdecl amt_SendSameOfficeCommand(char* x, unsigned char* firstEntity, unsigned char* secondEntity)
 {
 	char message[0xc];
 	rec18 a1;

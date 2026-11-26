@@ -8,7 +8,7 @@ int __cdecl fcn_004efd30(int);
 int __cdecl fcn_004f08d0(char*);
 int __cdecl fcn_004c4450(int);
 int __cdecl main_RunFrameLoop(int, unsigned int);
-void __cdecl fcn_004f0e40(int, void*, void*);
+void __cdecl gm_SetSlotCallback(int, void*, void*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl ResetDisplayCounters(void);
@@ -93,7 +93,7 @@ void __cdecl fcn_00586c10(char* obj)
             return;
     }
 
-    fcn_004f0e40(*(int*) (obj + 1), (void*) 0x586bd0, (void*) 0x77de60);
+    gm_SetSlotCallback(*(int*) (obj + 1), (void*) 0x586bd0, (void*) 0x77de60);
     flags = (flags & 0xffffdef7) | 0x10000;
     g = (int*) d3_ActiveCamera;
     p[0] = *(int*) ((char*) g + 0x4c);
@@ -292,5 +292,5 @@ void __cdecl fcn_00586c10(char* obj)
     fcn_00443230(1);
     fcn_00473150(sp);
     fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);
-    fcn_004f0e40(*(int*) (obj + 1), 0, 0);
+    gm_SetSlotCallback(*(int*) (obj + 1), 0, 0);
 }

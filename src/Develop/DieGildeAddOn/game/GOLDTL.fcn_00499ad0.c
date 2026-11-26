@@ -73,7 +73,7 @@ int __cdecl fcn_00499ad0(char* e)
 		return 0;
 	}
 	fcn_004c51a0(*(int*) (r + 2), *(int*) (e + 4), 0, 0x3e80);
-	fcn_004c4510(e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 	cm_AppendPacketFieldDelta(1, 1, 0xd, &ret);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0, 0x4000);

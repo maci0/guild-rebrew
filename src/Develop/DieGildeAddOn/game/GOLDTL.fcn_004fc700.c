@@ -30,46 +30,46 @@ extern int g_773d48;
 extern int g_99f724;
 
 void __cdecl fcn_004f4830(int kind, Offer* o);
-char* __cdecl fcn_0050e4a0(int n);
+char* __cdecl gm_FindPublicBuilding(int n);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 void __cdecl fcn_004c51a0(int a, int b, int c, int d);
 
-int __cdecl fcn_004fc700(unsigned short id, Slots* s, unsigned char flags)
+int __cdecl gm_ApplySteuerLaw0aToSlots(unsigned short id, Slots* slots, unsigned char flags)
 {
 	Offer offer;
 	int i;
-	int n;
-	int v;
-	float f;
-	char* p;
+	int wealth;
+	int tax_amount;
+	float calc_amount;
+	char* treasury;
 
 	fcn_004f4830(10, &offer);
 	for (i = 0; i < 6; i++) {
-		if (s->used[i] == 0) {
+		if (slots->used[i] == 0) {
 			break;
 		}
 	}
 	if (i >= 6) {
 		return 0;
 	}
-	n = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].value_19c);
-	f = n * (offer.amount * 0.01f);
-	if (!(f > 0.0f)) {
-		f = 0.0f;
+	wealth = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].value_19c);
+	calc_amount = wealth * (offer.amount * 0.01f);
+	if (!(calc_amount > 0.0f)) {
+		calc_amount = 0.0f;
 	}
-	v = (int) f;
-	if (n > 0) {
-		s->used[i] = 2;
-		s->value[i] = v;
-		s->amount[i] = offer.amount;
+	tax_amount = (int) calc_amount;
+	if (wealth > 0) {
+		slots->used[i] = 2;
+		slots->value[i] = tax_amount;
+		slots->amount[i] = offer.amount;
 		if (flags & 1) {
-			p = fcn_0050e4a0(1);
-			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
-			fcn_004c51a0(*(int*) (p + 2), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), 0, v);
+			treasury = gm_FindPublicBuilding(1);
+			treasury = fcn_00502cd0(*(int*) (treasury + 0x5d), 2, 6, 0, 0x115);
+			fcn_004c51a0(*(int*) (treasury + 2), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), 0, tax_amount);
 			g_773d48++;
 		}
 		if (flags & 2) {
-			g_99f724 += v;
+			g_99f724 += tax_amount;
 		}
 	}
 	return 1;

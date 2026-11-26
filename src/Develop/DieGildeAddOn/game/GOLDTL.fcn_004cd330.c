@@ -3,11 +3,11 @@ extern int* cut_ActiveCutscene;
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl fcn_004cd2a0(char*, float*, float*, int);
 void __cdecl fcn_004d8200(int*);
-void __cdecl fcn_004d85c0(int*);
-void __cdecl fcn_004d85f0(int*);
+void __cdecl gm_CancelEntityActionQueue(int*);
+void __cdecl cut_QueueHideCharacter(int*);
 void __cdecl fcn_004d8660(int*);
 void __cdecl gm_StartGroundPickupAnimation(int*);
-void __cdecl fcn_004d87b0(int*);
+void __cdecl cut_CancelActorActions(int*);
 void __cdecl fcn_004d87f0(int*);
 
 
@@ -29,12 +29,12 @@ int __cdecl fcn_004cd330(unsigned char* command, char* result)
 	case 6:
 		if (e[8] != 0) {
 			fcn_004cd2a0(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
-			fcn_004d85c0((int*) (command + 0x35));
+			gm_CancelEntityActionQueue((int*) (command + 0x35));
 		}
 		break;
 	case 1:
 		if (e[8] != 0)
-			fcn_004d85f0((int*) (command + 0x35));
+			cut_QueueHideCharacter((int*) (command + 0x35));
 		break;
 	case 4:
 		if (e[8] != 0)
@@ -45,7 +45,7 @@ int __cdecl fcn_004cd330(unsigned char* command, char* result)
 			gm_StartGroundPickupAnimation((int*) (command + 0x35));
 		break;
 	case 7:
-		fcn_004d87b0((int*) (command + 0x35));
+		cut_CancelActorActions((int*) (command + 0x35));
 		break;
 	case 3:
 		if (e[8] != 0) {

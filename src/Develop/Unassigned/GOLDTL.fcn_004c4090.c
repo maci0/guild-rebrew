@@ -30,7 +30,7 @@ extern int g_aed330;
 extern CLIENT_QUEUED_PACKET g_aed740[0x8000];
 extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
-int __cdecl fcn_004c3a50(unsigned char*);
+int __cdecl ahm_GetCommandPayloadSize(unsigned char*);
 
 /* ADDRESS: GOLDTL 0x004c4090 */
 int __cdecl fcn_004c4090(void)
@@ -53,7 +53,7 @@ int __cdecl fcn_004c4090(void)
 		seq = (g_1005768 += 1) & 0x7fff;
 		p = &g_aed740[seq];
 		p->type = 7;
-		p->crc = fcn_004c3a50((unsigned char*) p);
+		p->crc = ahm_GetCommandPayloadSize((unsigned char*) p);
 #ifdef REBREW_GOLD
 		*(pkt99_payload*) p->data = *(pkt99_payload*) (0xa68800 + i);
 #else

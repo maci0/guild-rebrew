@@ -13,15 +13,15 @@
 
 extern char g_6813e8[];
 
-int __cdecl fcn_004bc7f0(float*);
+int __cdecl gm_PickRandomBuildingPoint(float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl ch_CreateAction(char*, int, int);
 
-void __cdecl fcn_004bc270(AMBIENT_ANIMAL_SLOT* s)
+void __cdecl ch_SpawnAmbientDog(AMBIENT_ANIMAL_SLOT* s)
 {
 	float v[4];
 
-	if (fcn_004bc7f0(v) == 0)
+	if (gm_PickRandomBuildingPoint(v) == 0)
 		return;
 	s->objekt = ch_CreateAtPosition(g_6813e8, v);
 	if (s->objekt == 0)

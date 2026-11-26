@@ -14,11 +14,11 @@ extern char s_6a2e78[];
 
 extern void __cdecl fcn_00529000(int, char*);
 extern void __cdecl fcn_00529060(int, char*);
-extern void __cdecl fcn_005290d0(char*);
+extern void __cdecl gm_CountBuildingWorkers(char*);
 extern int __cdecl fcn_005241f0(char*);
 extern void __cdecl he_FreeAction(char*);
 extern int __cdecl fcn_004c5620(char, char*);
-extern void __cdecl fcn_004c4510(char*, int);
+extern void __cdecl cm_BeginPacketFieldDelta(char*, int);
 extern int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 extern void __cdecl fcn_004c53a0(void);
 extern char* __cdecl ch_CreateAction(char*, int, ...);
@@ -122,7 +122,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		case 4:
 		case 8:
 		case 9:
-			fcn_005290d0((char*) old);
+			gm_CountBuildingWorkers((char*) old);
 			break;
 		case 20:
 		case 21:
@@ -143,7 +143,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		case 137:
 		case 141:
 		case 143:
-			fcn_005290d0((char*) old);
+			gm_CountBuildingWorkers((char*) old);
 			if (fcn_005241f0((char*) old) <= 0) {
 				*(pos14_7f4c00*) (old + 0x52) = gm_GameTime;
 				fcn_004c5620(-1, (char*) old);
@@ -178,7 +178,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		case 20:
 		case 21:
 		case 140:
-			fcn_005290d0((char*) newShown);
+			gm_CountBuildingWorkers((char*) newShown);
 			break;
 		}
 		type = *newShown;
@@ -186,7 +186,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 	if ((slot->shown == 0 || newShown != 0) && type == 0) {
 		return;
 	}
-	fcn_004c4510((char*) slot, slot->handle);
+	cm_BeginPacketFieldDelta((char*) slot, slot->handle);
 	fcn_004c4700(1, 1, 0x180, &type);
 	fcn_004c53a0();
 	slot->shown = (char*) newShown;

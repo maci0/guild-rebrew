@@ -2,7 +2,7 @@ extern unsigned short* g_772f24;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_packet_builder.h"
 
-char* __cdecl fcn_004ce680(char* o);
+char* __cdecl gm_FindEntityActiveItem(char* o);
 
 void __cdecl fcn_004c4670(int a, int b, int c, int* d);
 void __cdecl fcn_004c5360(void);
@@ -16,11 +16,11 @@ void __cdecl fcn_004d4e30(char* e)
 
 	o = *(char**) (e + 0x17c);
 	if (*(int*) (((char*)g_772f24) + 4) == g_68b79c) {
-		q = fcn_004ce680(o);
+		q = gm_FindEntityActiveItem(o);
 		if (q != 0) {
 			int v = -1;
 
-			fcn_004c4510(q, *(int*) (q + 2));
+			cm_BeginPacketFieldDelta(q, *(int*) (q + 2));
 			fcn_004c4670(4, 1, q - g_aed32c + 0x20, &v);
 			fcn_004c5360();
 		}

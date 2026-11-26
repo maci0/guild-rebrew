@@ -4,7 +4,7 @@
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
-int __cdecl fcn_0055c0f0(char* a, char* b)
+int __cdecl he_HasNoActiveEvent04b(char* a, char* b)
 {
 	char* r;
 

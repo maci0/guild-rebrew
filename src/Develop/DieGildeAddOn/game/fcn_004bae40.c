@@ -8,7 +8,7 @@ typedef struct BAE0 {
 int __cdecl fcn_0042e410(int a0);
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_005c6270(void* p, int n);
-int __cdecl fcn_004bac00(void* q, int* out, float f);
+int __cdecl gm_DeductRandomBuildingGood(void* q, int* out, float f);
 int __cdecl fcn_00503fe0(int a0, int a1, int a2);
 void __cdecl io_FormatTextBuffer(char* out, int fmt, ...);
 void __cdecl fcn_00545e80(int a0, int a1, char* s, int flag, int a4,
@@ -35,7 +35,7 @@ int __cdecl fcn_004bae40(BAE0* request)
 		return 1;
 	}
 	if (fcn_005c6270(q, 0x290) == 0) {
-		if (fcn_004bac00(q, &v, f0) != 0) {
+		if (gm_DeductRandomBuildingGood(q, &v, f0) != 0) {
 			h = fcn_00503fe0(1, 1, v);
 			if (h != 0) {
 				io_FormatTextBuffer(buf, request->f4 + 0x12e7, h,

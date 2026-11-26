@@ -10,7 +10,7 @@ typedef struct F8 {
 } F8;
 // SIZE 0x8
 
-int __cdecl fcn_00525f60(char* a1, int a2);
+int __cdecl d2_CheckActionBlocker(char* a1, int a2);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 int __cdecl fcn_00470820(int a1, int a2, char* text);
@@ -48,7 +48,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 
 	res = 0;
 	if (a0 != 0 &&
-	    fcn_00525f60((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970], 3) != 0 &&
+	    d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970], 3) != 0 &&
 	    (*(int*) ((char*) a0 + 0x16c) == 0 ||
 	     *(unsigned short*) (*(int*) ((char*) a0 + 0x16c) + 0x27) != *(unsigned short*) a0)) {
 	if (*(unsigned char*) ((char*) a0 + 0x1b1) != 0) {

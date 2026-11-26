@@ -127,7 +127,7 @@ void __cdecl fcn_00471e30(int handle);
 int __cdecl d2_GetControlValue(int handle, int player);
 
 /* Entity value accessors. fcn_004c51a0 additionally returns int. */
-void __cdecl fcn_004c4510(char* base, int entity_id);
+void __cdecl cm_BeginPacketFieldDelta(char* base, int entity_id);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, void* value);
 void __cdecl fcn_004c4670(int a, int b, int off, void* value);
 void __cdecl fcn_004c5360(void);
@@ -157,7 +157,7 @@ int __cdecl fcn_00497ec0(int action, short* target, int a2, Cmd* out1,
     Cmd* out2);
 int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
     char* out2);
-int __cdecl fcn_004a4bb0(int action, short* ent, int mode, Cmd* cmd,
+int __cdecl ai_PrepareBuildSite(int action, short* ent, int mode, Cmd* cmd,
     Cmd* out, int want);
 
 /* Entity season/kind value. The entity is a short* record and the second

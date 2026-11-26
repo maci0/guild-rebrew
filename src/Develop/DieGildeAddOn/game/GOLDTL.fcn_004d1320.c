@@ -18,12 +18,12 @@ typedef struct {
 
 extern int g_67a370;
 
-void __cdecl fcn_004ce610(char*);
+void __cdecl gm_GetEquippedCombatGear(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 
-int __cdecl fcn_004d1320(char* rec, char* e, char* obj)
+int __cdecl cut_AssignConquerTarget(char* rec, char* e, char* obj)
 {
 	float v[4];
 	ent2c* r;
@@ -33,7 +33,7 @@ int __cdecl fcn_004d1320(char* rec, char* e, char* obj)
 	int c;
 
 	h = *(int*) (((char*)g_67a370) + 0xb0);
-	fcn_004ce610(e);
+	gm_GetEquippedCombatGear(e);
 	d3_TransformPoint(obj, obj + 0x4c, v);
 	if (fcn_0045b990(h, v, &c, &a, &b) == 0)
 		return 0;

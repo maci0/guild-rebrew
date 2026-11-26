@@ -42,7 +42,7 @@ void __cdecl fcn_004c5f60(int, int, int);
 int __cdecl fcn_004c6090(Player*, int, int, int);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
-void __cdecl fcn_005153f0(void)
+void __cdecl gm_InitStartingBuildingsAndWorkers(void)
 {
 	int i;
 	ENTITY_RECORD* e;
@@ -66,7 +66,7 @@ void __cdecl fcn_005153f0(void)
 			if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category != 0xb) {
 				int value = 0xfa00;
 
-				fcn_004c4510((char*) p, p->id);
+				cm_BeginPacketFieldDelta((char*) p, p->id);
 				cm_AppendPacketFieldDelta(4, 1, (char*) p - g_aed32c + 0x39, &value);
 				fcn_004c5360();
 				fcn_004c5f60(p->id, e->entity_id, e->entity_id);

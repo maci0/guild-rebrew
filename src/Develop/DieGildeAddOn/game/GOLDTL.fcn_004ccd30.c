@@ -11,7 +11,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 
-int __cdecl fcn_004ccd30(char* x, char* out)
+int __cdecl cm_ExUpdateCutsceneEntitySlot(char* x, char* out)
 {
 	int i;
 	char* e;

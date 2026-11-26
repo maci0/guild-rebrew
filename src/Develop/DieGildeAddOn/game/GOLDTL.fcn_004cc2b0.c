@@ -21,7 +21,7 @@ typedef struct {
 
 slot80* __cdecl gm_FindSlotById(int, int);
 
-int __cdecl fcn_004cc2b0(char* x, char* out)
+int __cdecl cm_ExMarktSlotDelta(char* x, char* out)
 {
 	slot80* s;
 

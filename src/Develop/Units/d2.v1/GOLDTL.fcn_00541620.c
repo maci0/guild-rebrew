@@ -53,9 +53,9 @@ void __cdecl fcn_0046e830(int, int, int, int, int);
 void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 void __cdecl d2_UpdateScrollPerga(void);
 void __cdecl fcn_005355f0(void);
-int __cdecl fcn_0050db40(char*, int);
+int __cdecl gm_CheckAndCollectEntityDebt(char*, int);
 void __cdecl cut_ExecuteCutscene(void*);
-void __cdecl fcn_005413d0(int);
+void __cdecl gm_ResetDynastySlot(int);
 
 
 /* Black editor panel for the current 0x7f4ca0 entity: prints the building
@@ -340,7 +340,7 @@ fold:
 		fcn_00473150((unsigned char*) g1f4);
 		g1f4 = 0;
 	}
-	n = fcn_0050db40((char*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0),
+	n = gm_CheckAndCollectEntityDebt((char*) ((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0),
 		-(f1e8 + e1ec + runningTotal));
 	if (n != 0) {
 		memset(panel, 0, 0x114);
@@ -355,7 +355,7 @@ fold:
 		}
 		cut_ExecuteCutscene(panel);
 		if (g_774968 != 0) {
-			fcn_005413d0(((unsigned short)g_774970) & 0xffff);
+			gm_ResetDynastySlot(((unsigned short)g_774970) & 0xffff);
 		}
 		g_774968 = 0;
 	}

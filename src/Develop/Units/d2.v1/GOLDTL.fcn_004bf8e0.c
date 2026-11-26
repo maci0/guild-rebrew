@@ -85,7 +85,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 		fcn_0046f9b0(flip, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
 		if (g_100f1dc != -1 && d2_CurrentElementId == clear) {
 			if (g_772908 != 0) {
-				fcn_004be280((char*) g_772908);
+				rt_FreeRoutePoints((char*) g_772908);
 			}
 			for (i = 0; i < 8; i++) {
 				if (g_10058a0[i].id != -1) {
@@ -105,7 +105,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 			unsigned char b;
 
 			b = *(unsigned char*) (p + 0x33) == 0;
-			fcn_004c4510(p, *(int*) (p + 2));
+			cm_BeginPacketFieldDelta(p, *(int*) (p + 2));
 			fcn_004c4700(1, 1, (short) (p + 0x33 - g_aed32c), &b);
 			fcn_004c53a0();
 		}
@@ -114,7 +114,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 		unsigned char b;
 
 		b = d2_GetControlValue(list);
-		fcn_004c4510(p, *(int*) (p + 2));
+		cm_BeginPacketFieldDelta(p, *(int*) (p + 2));
 		fcn_004c4700(1, 1, (short) (p + 0x31 - g_aed32c), &b);
 		fcn_004c53a0();
 	}

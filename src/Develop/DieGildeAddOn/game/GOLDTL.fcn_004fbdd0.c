@@ -24,7 +24,7 @@ extern double g_dbl_6653d8;
 extern double g_dbl_6653e0;
 extern double g_dbl_6653e8;
 
-float __cdecl fcn_004fc520(void);
+float __cdecl gm_GetLiteracyRate(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int slot, int entity, char* text, int flag, int size, int extra);
 
@@ -55,7 +55,7 @@ void __cdecl fcn_004fbdd0(void)
 	sum[1] = (g_99ed10 + g_99ed24 + g_99ed38 + g_99ed4c) * 0.25f;
 	sum[2] = (g_99ed14 + g_99ed28 + g_99ed3c + g_99ed50) * 0.25f;
 	sum3 = (g_99ed1c + g_99ed30 + g_99ed44 + g_99ed58) * 0.25f;
-	lit = fcn_004fc520();
+	lit = gm_GetLiteracyRate();
 	id0 = 0x1c11;
 	if (!(sum[0] <= g_dbl_6653e8)) {
 		id0 = 0x1c15;

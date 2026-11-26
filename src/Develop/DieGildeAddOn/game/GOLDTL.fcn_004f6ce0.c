@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-void __cdecl fcn_004f6ce0(void* entity, int mode, void* output)
+void __cdecl cut_FormatProzessPunishment(void* entity, int mode, void* output)
 {
 	int v;
 	int n;

@@ -17,7 +17,7 @@ int __cdecl fcn_00526120(char* buf, int a);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl fcn_00471e30(int dlg);
 int __cdecl d2_GetControlValue(int h);
-int __cdecl fcn_00525f60(void* tbl, int player);
+int __cdecl d2_CheckActionBlocker(void* tbl, int player);
 int __cdecl fcn_004946f0(void* tbl, int a0, int player);
 void __cdecl fcn_004c6ae0(int a, int b);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
@@ -55,7 +55,7 @@ int __cdecl d2_ShowBecircenDialog(int entity)
         if (g_100f1dc != -1) {
             if (g_100f1dc == 2) {
                 player = d2_GetControlValue(wnd);
-                if (fcn_00525f60((void*) (0x7f4ca0 + 540 * *(u16*) 0x774970),
+                if (d2_CheckActionBlocker((void*) (0x7f4ca0 + 540 * *(u16*) 0x774970),
                                  player) != 0) {
                     t = fcn_004946f0((void*) (0x7f4ca0 +
                                               540 * *(u16*) 0x774970),

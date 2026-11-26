@@ -4,7 +4,7 @@ extern volatile int g_6b7fac;
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 
-void __cdecl fcn_0040bd80(char* entry)
+void __cdecl ch_UpdateWait(char* entry)
 {
 	if (*(int*) (entry + 0xc) == 0) {
 		*(int*) (entry + 0x34) = *(int*) ((char*)&g_6b7fac);

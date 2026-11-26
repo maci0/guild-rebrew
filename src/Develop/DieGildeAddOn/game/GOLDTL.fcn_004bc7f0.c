@@ -11,7 +11,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
-int __cdecl fcn_004bc7f0(float* out)
+int __cdecl gm_PickRandomBuildingPoint(float* out)
 {
 	char* list[0x100];
 	unsigned short n;

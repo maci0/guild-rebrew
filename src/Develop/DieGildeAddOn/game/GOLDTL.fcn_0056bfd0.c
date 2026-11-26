@@ -5,7 +5,7 @@ void __cdecl fcn_004c5c80(int id);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* label);
 int __cdecl fcn_00529160(int a, int b, int c, int d);
 int __cdecl gm_AddTime(char* sel, int a, int b, int c);
-int __cdecl fcn_0050c710(char* e, int a, int b);
+int __cdecl gm_GetBuildingTechEffect(char* e, int a, int b);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 char* __cdecl fcn_00502850(void);
 int __cdecl fcn_0042e410(int code);
@@ -110,7 +110,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 		    + *(unsigned short*) (e2 + 0x27) * 0x21c);
 		i = (int) (0x7f4ca0
 		    + *(unsigned short*) (ent + 8) * 0x21c);
-		slot = fcn_0050c710(e2, 5, 1);
+		slot = gm_GetBuildingTechEffect(e2, 5, 1);
 		prob = (float) ((double) slot * 0.01 + 1.0);
 		e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 		target = fcn_00502cd0(*(int*) (e2 + 0x5d), 1, 0, 0xca);

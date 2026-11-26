@@ -16,7 +16,7 @@ int __cdecl fcn_004bc9c0(char*, pickctx*);
 void __cdecl d3_VisitSceneObjects(int, int, int, int(__cdecl*)(char*, pickctx*), pickctx*);
 unsigned short __cdecl gm_RandomMod(int);
 
-char* __cdecl fcn_004bca30(char* name)
+char* __cdecl d3_PickRandomSceneObjectByName(char* name)
 {
 	pickctx c;
 

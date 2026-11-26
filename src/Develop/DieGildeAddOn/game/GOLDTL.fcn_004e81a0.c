@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
 
-void __cdecl fcn_004e81a0(int id)
+void __cdecl amt_VacateOfficeSlot(int id)
 {
-	fcn_004e8240(id, 0, 0, 3, 0xff);
+	amt_SendOfficeCommand(id, 0, 0, 3, 0xff);
 }

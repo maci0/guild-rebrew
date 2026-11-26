@@ -4,10 +4,10 @@ extern Rec18_68da68 amt_OfficeSlots[42];
 extern char g_7f4ca0[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004e81a0(unsigned char);
-int __cdecl fcn_004e8240(unsigned char, char*, char*, int, int);
+int __cdecl amt_VacateOfficeSlot(unsigned char);
+int __cdecl amt_SendOfficeCommand(unsigned char, char*, char*, int, int);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00535960(void);
@@ -27,17 +27,17 @@ void __cdecl fcn_004ea350(void)
 		res = -1;
 		if (e != 0 && *(unsigned char*) (e + 8) != 0) {
 			if (*r != 1) {
-				res = fcn_004e8240(*(unsigned char*) (r - 0x10), e, 0, 1, 0xff);
+				res = amt_SendOfficeCommand(*(unsigned char*) (r - 0x10), e, 0, 1, 0xff);
 			}
 		} else {
 			if (*r != 3) {
-				res = fcn_004e81a0(*(unsigned char*) (r - 0x10));
+				res = amt_VacateOfficeSlot(*(unsigned char*) (r - 0x10));
 			}
 			if (e != 0 && *(unsigned char*) (e + 0x166) != 0) {
 				int n = *(int*) (e + 4);
 				int v;
 				v = 0;
-				fcn_004c4510(e, n);
+				cm_BeginPacketFieldDelta(e, n);
 				cm_AppendPacketFieldDelta(1, 1, 0x166, &v);
 				fcn_004c5360();
 			}
@@ -54,7 +54,7 @@ void __cdecl fcn_004ea350(void)
 	for (p = g_7f4ca0 + 0x168; (int) p < (int) (g_7f4ca0 + 0x168 + 0x65400); p += 0x21c) {
 		if (*(unsigned char*) p != 0) {
 			int v = 0;
-			fcn_004c4510(p - 0x168, *(int*) (p - 0x164));
+			cm_BeginPacketFieldDelta(p - 0x168, *(int*) (p - 0x164));
 			cm_AppendPacketFieldDelta(1, 1, 0x168, &v);
 			fcn_004c5360();
 		}

@@ -34,7 +34,7 @@ int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_0046ed00(int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, char);
-void __cdecl fcn_004c4510(int, int);
+void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, unsigned short, int*);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
@@ -138,13 +138,13 @@ void __cdecl d2_OpenPlayerStats(void)
 						n = fcn_0050b750(d2_GetControlValue(*(int*) (i - 0x10)),
 							g_773d75);
 						obj = *(int*) i;
-						fcn_004c4510(obj, *(int*) (obj + 1));
+						cm_BeginPacketFieldDelta(obj, *(int*) (obj + 1));
 						delta = *(unsigned short*) i - *(unsigned short*) &g_aed32c + 0x39;
 						cm_AppendPacketFieldDelta(4, 1, (unsigned short) delta, &n);
 						fcn_004c5360();
 						q = fcn_0050dc90(*(int*) i);
 						n = n - *(int*) (*(int*) i + 0x39);
-						fcn_004c4510(q, *(int*) (q + 4));
+						cm_BeginPacketFieldDelta(q, *(int*) (q + 4));
 						fcn_004c4670(4, 1, (q - *(int*) &g_aed32c) + 0x1b8, &n);
 						fcn_004c5360();
 						*(int*) (i - 4) = d2_GetControlValue(*(int*) (i - 0x10));

@@ -14,7 +14,7 @@
 extern char g_681414[];
 extern char g_68140c[];
 
-char* __cdecl fcn_004bca30(char*);
+char* __cdecl d3_PickRandomSceneObjectByName(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl ch_CreateAction(char*, int, int);
@@ -24,7 +24,7 @@ void __cdecl ch_SpawnAmbientCow(AMBIENT_ANIMAL_SLOT* s)
 	float v[4];
 	char* o;
 
-	o = fcn_004bca30(g_681414);
+	o = d3_PickRandomSceneObjectByName(g_681414);
 	if (o == 0)
 		return;
 	d3_TransformPoint(o, o + 0x4c, v);

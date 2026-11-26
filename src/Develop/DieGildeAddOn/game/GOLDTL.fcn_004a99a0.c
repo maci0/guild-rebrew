@@ -8,7 +8,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
-int __cdecl fcn_004a99a0(char* a1, char* e, char* context, char* a4, char* out)
+int __cdecl ai_SelectAction037Target(char* unused1, char* e, char* context, char* unused2, char* out)
 {
 	int id;
 	float d;

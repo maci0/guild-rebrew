@@ -37,10 +37,10 @@ extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
 
 int __cdecl amt_FindOfficeSlotByType(int id, int* out);
-char* __cdecl fcn_004e9110(int kind);
+char* __cdecl amt_GetOfficeHolderRecord(int kind);
 float __cdecl fcn_004ad500(unsigned char* a1, unsigned short* a2, int a3, int a4);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
-int __cdecl fcn_004e8240(unsigned char a1, char* a2, char* a3, int a4, int a5);
+int __cdecl amt_SendOfficeCommand(unsigned char a1, char* a2, char* a3, int a4, int a5);
 void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004ad4d0(int a1);
 
@@ -83,7 +83,7 @@ void __cdecl fcn_004ad6a0(void)
 		}
 		rec += 0x21c;
 	} while ((int) rec < 0x85a0a0);
-	obj = fcn_004e9110(id);
+	obj = amt_GetOfficeHolderRecord(id);
 	if (obj == 0) {
 		for (i = 0; i < count; i++) {
 			if (hits[i].p == 0) {
@@ -107,7 +107,7 @@ void __cdecl fcn_004ad6a0(void)
 		}
 	}
 	if (best != 0) {
-		fcn_004e8240((unsigned char) info[0], best, 0, 1, 0xff);
+		amt_SendOfficeCommand((unsigned char) info[0], best, 0, 1, 0xff);
 		if (best[2] == 6 || best[2] == 7 || best[2] == 5) {
 			msg.timestamp.a = gm_GameTime;
 			msg.timestamp.b = g_7f4c04;

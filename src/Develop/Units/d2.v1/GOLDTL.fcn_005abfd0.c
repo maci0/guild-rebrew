@@ -29,7 +29,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
+int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_005b21d0(ENTITY_RECORD*, ENTITY_RECORD*, unsigned char*);
 void __cdecl fcn_004f5e20(int, int);
@@ -83,7 +83,7 @@ void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 			if (d2_CurrentElementId == btnA) {
 				me = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]);
 				v = d2_GetControlValue(btnB);
-				if (fcn_00525f60(me, v) != 0) {
+				if (d2_CheckActionBlocker(me, v) != 0) {
 					fcn_005100f0(me->entity_id, -v);
 					if (*(unsigned short*) (e + 0x27) != 0xffff && *(unsigned short*) (e + 0x27) != g_774970) {
 						fcn_005100f0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id, 1);

@@ -4,7 +4,7 @@
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int  __cdecl fcn_00526120(void*, int);
 
-int __cdecl fcn_00525f60(void* obj, int value)
+int __cdecl d2_CheckActionBlocker(void* obj, int value)
 {
 	char buf[0x80];
 

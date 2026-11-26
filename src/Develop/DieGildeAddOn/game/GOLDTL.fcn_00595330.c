@@ -5,7 +5,7 @@ extern int g_7798a0;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0050cce0(char*, void*, int);
+int __cdecl gm_CollectBuildingStock(char*, void*, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
@@ -78,7 +78,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 	gm_GetBuildingTypeCategory((unsigned char) *ent);
 	d2_SetForm(windowId, 0);
 	d2_SetForm(windowId, formId);
-	fcn_0050cce0(ent, &stock, 1);
+	gm_CollectBuildingStock(ent, &stock, 1);
 
 	if (rowCount > 0) {
 		row = g_row(0);

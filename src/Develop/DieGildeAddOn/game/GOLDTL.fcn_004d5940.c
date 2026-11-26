@@ -21,12 +21,12 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);
-int __cdecl fcn_0050de80(char*, int*);
+int __cdecl gm_CalcEntityInventoryStats(char*, int*);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004d5490(int, int, int);
 void __cdecl fcn_004d5740(char*, int, int);
-int __cdecl fcn_004e6eb0(char*, unsigned int);
+int __cdecl d2_ShowMessageBox(char*, unsigned int);
 int __cdecl fcn_004d52a0(int, int, char*, char*, float);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl gm_RandomMod(int);
@@ -207,7 +207,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 			if (*p != -1) {
 				sel = gm_FindRecordById(*p);
 				if (sel) {
-					fcn_0050de80((char*) sel, (int*) &items);
+					gm_CalcEntityInventoryStats((char*) sel, (int*) &items);
 					sel = 0;
 					if (0 < items.count_b) {
 						do {
@@ -263,14 +263,14 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 					if ((gm_RandomMod(0x5a) & 0xffff) + 10 <= count) {
 						rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x10c));
 						io_FormatTextBuffer(text, 0x1142);
-						fcn_004e6eb0(text, 0);
+						d2_ShowMessageBox(text, 0);
 						g_774654 = 1;
 						answer = 0;
 						g_772ea8 = 1;
 						g_772eac = fcn_004d52a0((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * 0.01);
 					} else {
 						io_FormatTextBuffer(str, 0x1143);
-						fcn_004e6eb0(str, 0);
+						d2_ShowMessageBox(str, 0);
 						g_774654 = 1;
 						answer = 1;
 					}

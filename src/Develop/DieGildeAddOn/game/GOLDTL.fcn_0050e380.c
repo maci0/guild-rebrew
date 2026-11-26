@@ -39,7 +39,7 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_00505d00(char* obj, Sorted* out);
 
-int __cdecl fcn_0050e380(int owner, Summary* out)
+int __cdecl gm_BuildDealSummary(int owner, Summary* out)
 {
 	Sorted sorted;
 	int k;

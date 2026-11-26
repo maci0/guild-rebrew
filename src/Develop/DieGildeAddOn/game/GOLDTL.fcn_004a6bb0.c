@@ -53,7 +53,7 @@ int __cdecl fcn_004fdec0(char* name);
 int __cdecl fcn_0050b810(int a, unsigned char b);
 int __cdecl fcn_0050b710(int a, unsigned char b);
 int __cdecl fcn_0050b750(int a, unsigned char b);
-int __cdecl fcn_004a6ea0(Game* s);
+int __cdecl gm_ResetCardGameRound(Game* s);
 
 int __cdecl fcn_004a6bb0(char* owner, Game* game)
 {
@@ -128,5 +128,5 @@ int __cdecl fcn_004a6bb0(char* owner, Game* game)
 		p->state = 10;
 		((Game*) g_1007cd4)->seats[i].player = p;
 	}
-	return fcn_004a6ea0(game);
+	return gm_ResetCardGameRound(game);
 }

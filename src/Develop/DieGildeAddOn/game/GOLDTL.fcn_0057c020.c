@@ -24,7 +24,7 @@ typedef struct {
 
 int __cdecl fcn_004e8b40(int, rec18*);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004ec2d0(ENTITY_RECORD*, int, int);
+void __cdecl amt_AdjustOfficeHoldersFavor(ENTITY_RECORD*, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
@@ -40,9 +40,9 @@ void __cdecl fcn_0057c020(ENTITY_RECORD* a, ENTITY_RECORD* b)
 	int id;
 
 	if (fcn_004e8b40(b->unk_165[1], &r) != 0 && (p = r.id) != 0) {
-		fcn_004ec2d0(b, p, -20 - gm_RandomMod(0x10));
+		amt_AdjustOfficeHoldersFavor(b, p, -20 - gm_RandomMod(0x10));
 	} else if (b->entity_state != 6 && b->entity_state != 7 && b->entity_state != 5) {
-		fcn_004ec2d0(b, gm_RandomMod(3) + 1, gm_RandomMod(0x10) + 0x14);
+		amt_AdjustOfficeHoldersFavor(b, gm_RandomMod(3) + 1, gm_RandomMod(0x10) + 0x14);
 	} else {
 		d = -20 - gm_RandomMod(0x10);
 		for (i = 0; i < 768; i++) {

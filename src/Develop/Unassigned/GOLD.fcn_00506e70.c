@@ -55,7 +55,7 @@ int __cdecl gm_SumTreasury(unsigned short*);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_005085f0(int, unsigned char);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, int, char*);
 void __cdecl fcn_004c4700(int, int, int, char*);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -173,7 +173,7 @@ void __cdecl fcn_00506e70(unsigned short* entity, char* outputText, int a2)
 		ui_f30 = 0;
 		ui_f30 = 0;
 		ui_pos = (unsigned char) i;
-		fcn_004c4510((char*) entity, *(int*) (entity + 2));
+		cm_BeginPacketFieldDelta((char*) entity, *(int*) (entity + 2));
 		cm_AppendPacketFieldDelta(1, 1, ((int) entity - *(int*) 0xa68d2c) + 8, (char*) &ui_pos);
 		cm_AppendPacketFieldDelta(2, 1, ((int) entity - *(int*) 0xa68d2c) + 10, (char*) &ui_f08);
 		cm_AppendPacketFieldDelta(4, 1, ((int) entity - *(int*) 0xa68d2c) + 0x194, (char*) &ui_f14);
@@ -186,7 +186,7 @@ void __cdecl fcn_00506e70(unsigned short* entity, char* outputText, int a2)
 		cm_AppendPacketFieldDelta(1, 1, ((int) entity - *(int*) 0xa68d2c) + 0x1b1, (char*) &ui_b0a);
 		fcn_004c5420(*(int*) (entity + 2), 0x1c8, 4, 0x800000, 0);
 		fcn_004c5360();
-		fcn_004c4510((char*) entity, *(int*) (entity + 2));
+		cm_BeginPacketFieldDelta((char*) entity, *(int*) (entity + 2));
 		for (i = 0; i < 8; i++) {
 			cm_AppendPacketFieldDelta(4, 1, (i * 4 + 0x5c - *(int*) 0xa68d2c) + (int) entity, (char*) &ui_f0c);
 		}
@@ -201,7 +201,7 @@ void __cdecl fcn_00506e70(unsigned short* entity, char* outputText, int a2)
 		fcn_004c5480(*(int*) (entity + 2), 0x1c, 1000.0f - *(float*) (entity + 0xe));
 		fcn_004c5480(*(int*) (entity + 2), 0x18, 1000.0f - *(float*) (entity + 0xc));
 		fcn_004c5480(*(int*) (entity + 2), 0x20, 12.0f - *(float*) (entity + 0x10));
-		fcn_004c4510((char*) entity, *(int*) (entity + 2));
+		cm_BeginPacketFieldDelta((char*) entity, *(int*) (entity + 2));
 		for (i = 0; i < 5; i++) {
 			ui_b34 = 0;
 			fcn_004c4700(1, 1, (i - (*(int*) 0xa68d2c)) + 0x80 + (int) entity, (char*) &ui_b34);

@@ -12,7 +12,7 @@ extern char g_7f4ca0[];
 int __cdecl gm_RandomMod(unsigned short range);
 int __cdecl fcn_0050a7e0(int a, int b, int c, int d, int e, int f, int g, int h);
 
-unsigned short __cdecl fcn_004ffd90(unsigned int param)
+unsigned short __cdecl gm_SpawnPopulationChild(unsigned int param)
 {
 	int weights[6];
 	unsigned int off;

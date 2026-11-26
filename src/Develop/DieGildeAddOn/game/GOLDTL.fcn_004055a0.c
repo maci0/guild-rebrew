@@ -5,7 +5,7 @@ void __cdecl fcn_00435630(char*, char*, char);
 #include "client_scene_transform.h"
 
 /* ADDRESS: GOLDTL 0x00405540 */
-void __cdecl fcn_00405540(unsigned char* object, int enabled)
+void __cdecl ch_SetAnimationPaused(unsigned char* object, int paused)
 {
     unsigned char* animation;
     unsigned char* motion;
@@ -16,7 +16,7 @@ void __cdecl fcn_00405540(unsigned char* object, int enabled)
         if (animation != 0) {
             motion = *(unsigned char**) (animation + 0x68);
             node = *(unsigned char**) (*(unsigned char**) (object + 0x34) + 0x1ec);
-            if (enabled) {
+            if (paused) {
                 fcn_004355d0((char*) (node + 0xf4), (const char*) motion);
                 *(unsigned char*) (object + 0x8c) |= 4;
             } else {

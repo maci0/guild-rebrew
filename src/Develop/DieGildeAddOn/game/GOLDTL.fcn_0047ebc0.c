@@ -76,7 +76,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0047e220(int);
 void __cdecl fcn_0047e0e0(Bld*, int);
 void __cdecl fcn_00529160(int, int, int, int);
-void __cdecl fcn_00487e60(Bld*, int);
+void __cdecl ai_CancelBlockedActions(Bld*, int);
 void __cdecl fcn_00487f90(Req*);
 void __cdecl fcn_00489250(Bld*);
 void __cdecl fcn_00489a70(Bld*, int);
@@ -291,7 +291,7 @@ done:
 			i = i + 1;
 		}
 	}
-	fcn_00487e60(bld, 4);
+	ai_CancelBlockedActions(bld, 4);
 	put.count = 0;
 	for (n = 0x7f4ca2; n < 0x85a0a2; n += 0x21c) {
 		if (*(unsigned char*) (n + 6) <= 0)

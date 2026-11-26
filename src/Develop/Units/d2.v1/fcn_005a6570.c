@@ -10,7 +10,7 @@ int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 void __cdecl fcn_00472380(int w, int a, int b, int c);
 int __cdecl main_RunFrameLoop(void* fn, int name);
 int __cdecl d2_GetControlValue(int w);
-void __cdecl fcn_004c4510(char* o, int v);
+void __cdecl cm_BeginPacketFieldDelta(char* o, int v);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* p);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_00471e30(int dlg);
@@ -43,7 +43,7 @@ void __cdecl fcn_005a6570(char* o)
 
             a = d2_GetControlValue(w2);
             b = d2_GetControlValue(w1);
-            fcn_004c4510(o, *(int*) (o + 1));
+            cm_BeginPacketFieldDelta(o, *(int*) (o + 1));
             cm_AppendPacketFieldDelta(4, 1, 0x69, &a);
             cm_AppendPacketFieldDelta(4, 1, 0x6d, &b);
             fcn_004c5360();

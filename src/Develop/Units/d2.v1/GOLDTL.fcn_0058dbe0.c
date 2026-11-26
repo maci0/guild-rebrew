@@ -20,7 +20,7 @@ void __cdecl fcn_00468b80(int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_00525f60(int, int);
+int __cdecl d2_CheckActionBlocker(int, int);
 void __cdecl fcn_004c5530(int*);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
@@ -125,7 +125,7 @@ void __cdecl fcn_0058dbe0(int a0)
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == v27) {
 				v5 = g_774970;
-				if (fcn_00525f60((int) (g_7f4ca0 + v5 * 0x21c), v6) == 1) {
+				if (d2_CheckActionBlocker((int) (g_7f4ca0 + v5 * 0x21c), v6) == 1) {
 					for (v9 = 0; v9 < 0x3e; v9++) {
 						req[v9] = 0;
 					}

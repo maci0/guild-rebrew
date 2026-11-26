@@ -12,7 +12,7 @@ struct unit* __cdecl he_StartHandlungSearch(int n, ...);
 int __cdecl he_fn_Handlung(void);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl gm_QueryEntitySum(int, int);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -57,10 +57,10 @@ void __cdecl fcn_00482b60(char* e)
 	if (abs(*(int*) (o + 0x65) - st.v[6]) > 3) {
 		if (*(int*) (o + 0x65) > st.v[6]) {
 			t = *(int*) (o + 0x65) - 1;
-			fcn_004c4510(o, *(int*) (o + 1));
+			cm_BeginPacketFieldDelta(o, *(int*) (o + 1));
 		} else {
 			t = *(int*) (o + 0x65) + 1;
-			fcn_004c4510(o, *(int*) (o + 1));
+			cm_BeginPacketFieldDelta(o, *(int*) (o + 1));
 		}
 	} else if (n == 0) {
 		if (*(int*) (o + 0x65) <= st.v[6] - 2) {
@@ -74,7 +74,7 @@ void __cdecl fcn_00482b60(char* e)
 		if (t < 4) {
 			t = 4;
 		}
-		fcn_004c4510(o, *(int*) (o + 1));
+		cm_BeginPacketFieldDelta(o, *(int*) (o + 1));
 	} else {
 		if (n <= 3 || *(int*) (o + 0x65) >= st.v[6]) {
 			goto stock_done;
@@ -84,7 +84,7 @@ void __cdecl fcn_00482b60(char* e)
 		if (t >= st.v[6] + 3) {
 			t = st.v[6] + 3;
 		}
-		fcn_004c4510(o, *(int*) (o + 1));
+		cm_BeginPacketFieldDelta(o, *(int*) (o + 1));
 	}
 	cm_AppendPacketFieldDelta(4, 1,
 	             (unsigned short) (*(unsigned short*) (e + 0x16c) -

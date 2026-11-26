@@ -23,8 +23,8 @@ extern float g_66444c;
 extern float g_664450;
 extern float g_6660f4;
 
-void __cdecl fcn_004f11c0(char* p, float* o1, float* o2);
-float __cdecl fcn_004f1290(char* p);
+void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2);
+float __cdecl gm_GetCannonPowerScale(char* p);
 int __cdecl fcn_005e8e80(char* o, float* pos, float* dir, float speed, float b, float a);
 int __cdecl fcn_005e8fe0(float* p, float spread, float* dir, float lift, float* up, float scale);
 float __cdecl fcn_004f0eb0(int level, int percent, int count);
@@ -74,8 +74,8 @@ int __cdecl fcn_004a6550(char* a0, char* a1)
 	if (g_772848 != *(int*) (a0 + 4) || g_77284c != *(int*) (a1 + 1)) {
 		return 0;
 	}
-	fcn_004f11c0(a1, &ss[0], &ss[1]);
-	factor = fcn_004f1290(a1);
+	gm_CalcArtillerySpread(a1, &ss[0], &ss[1]);
+	factor = gm_GetCannonPowerScale(a1);
 	p2 = g_7728b8;
 	p1 = g_7728b4;
 	entry = &((FxRow_4a6550*) 0x665288)[g_77289c];

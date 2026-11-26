@@ -11,7 +11,7 @@ int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, int, char*, int, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c4670(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
@@ -66,7 +66,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 				fcn_00545d40(*(int*) ((char*) v4 + 4), *(int*) ((char*) v4 + 4),
 				    buf, 0, 0x5fa, 0);
 				if (pkt != 0) {
-					fcn_004c4510((char*) pkt, *(int*) (pkt + 1));
+					cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 					cm_AppendPacketFieldDelta(4, 1,
 					    (pkt - g_aed32c) + 0x65, (void*) &v[2]);
 					fcn_004c5360();
@@ -81,7 +81,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 					    "L\xf6segeld");
 				if (pkt != 0) {
 					entity = gm_GetEntityTableEntry((char*) v4);
-					fcn_004c4510((char*) pkt, *(int*) (pkt + 1));
+					cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 					fcn_004c4670(4, 1, 0x69, (void*) (action + 0xb4));
 					fcn_004c5360();
 					if (entity != 0)
@@ -113,7 +113,7 @@ done_case1:
 				    *(int*) (action + 0xb4), *(unsigned short*) v3);
 				fcn_00545d40(*(int*) ((char*) v4 + 4), *(int*) (action + 0x10),
 				    buf, 0, 0x5fa, 0);
-				fcn_004c4510((char*) pkt, *(int*) (pkt + 1));
+				cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 				cm_AppendPacketFieldDelta(4, 1, (pkt - g_aed32c) + 0x65, (void*) &v[1]);
 				fcn_004c5360();
 				fcn_004c6b20(*(int*) ((char*) v3 + 4),
@@ -124,7 +124,7 @@ done_case1:
 				    && fcn_00567170(v3, &v[2], &v[0], 0) != 0)
 					fcn_004c5da0(*(int*) ((char*) v3 + 4), v[2], v[0], 0, 0,
 					    "L\xf6segeld");
-				fcn_004c4510((char*) pkt, *(int*) (pkt + 1));
+				cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 				fcn_004c4670(4, 1, 0x69, (void*) (action + 0xb4));
 				fcn_004c5360();
 				entity = gm_GetEntityTableEntry((char*) v4);

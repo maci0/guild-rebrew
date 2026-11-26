@@ -37,7 +37,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca4[];
 
 void* __cdecl fcn_005cd440(void*, char*, int, int);
-int __cdecl fcn_004e99c0(int);
+int __cdecl amt_GetOfficeRank(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -49,7 +49,7 @@ void __cdecl fcn_00468bb0(int, int, ...);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl fcn_005898f0(void*);
 void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004a5e60(unsigned short*, int, F8, int, float, int*);
@@ -94,7 +94,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 		fcn_00532ef0();
 		return;
 	}
-	n = fcn_004e99c0(*(unsigned char*) (targetEntity + 0x166)) / 3 + 2;
+	n = amt_GetOfficeRank(*(unsigned char*) (targetEntity + 0x166)) / 3 + 2;
 	ids[0] = n + 3;
 	ids[1] = n + 5;
 	ids[2] = n + 8;
@@ -127,7 +127,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == confirmButton) {
-				if (fcn_00525f60(g_slot_table + g_774970 * 0x21c, cost) == 1 && fcn_005898f0((void*) a0) != 0) {
+				if (d2_CheckActionBlocker(g_slot_table + g_774970 * 0x21c, cost) == 1 && fcn_005898f0((void*) a0) != 0) {
 					fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -cost);
 					memset(&req, 0, sizeof(req));
 					req.kind = 0x99;

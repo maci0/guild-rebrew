@@ -9,7 +9,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 int __cdecl fcn_00567170(char*, int*, int*, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, int);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl he_FreeAction(char*);
@@ -67,7 +67,7 @@ void __cdecl fcn_00569760(char* eventTrack)
 						fcn_004c5da0(*(int*) (e + 4), n, *(int*) &f, 0, 0, (int) 0x6a69c8);
 					}
 				}
-				fcn_004c4510(rec, *(int*) (rec + 1));
+				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 1));
 				cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) rec - g_aed32c + 0x65),
 				             (char*) &idx);
 				fcn_004c5360();

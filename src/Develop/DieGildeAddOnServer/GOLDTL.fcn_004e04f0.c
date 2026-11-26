@@ -2,7 +2,7 @@
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char* entity, void* role_out, void* slot_out);
-int __cdecl fcn_004e8240(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
+int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
@@ -23,7 +23,7 @@ void __cdecl fcn_004e04f0(char* a0)
 		if (*(unsigned char*) (w + 0x166) != 0) {
 			if (srv_GetEntityOfficeSlot((unsigned char*) w, role, slot) != 0) {
 				if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + g_774970 * 0x21c)) {
-					fcn_004e8240(*(unsigned char*) slot, 0, 0, 4, 0xff);
+					amt_SendOfficeCommand(*(unsigned char*) slot, 0, 0, 4, 0xff);
 					p = (char*) 0x7f4ca2;
 					do {
 						if (*p == 6 || *p == 7) {

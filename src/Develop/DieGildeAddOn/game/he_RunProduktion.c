@@ -20,15 +20,15 @@ int __cdecl gm_eval_SlotVoll(char* objekt, int ware, int menge);
 void __cdecl gm_AddTime(pos14_7f4c00* zeit, int a, int b, int c);
 int __cdecl fcn_00500cb0(pos14_7f4c00* a, pos14_7f4c00* b);
 int __cdecl fcn_0050c830(pos14_7f4c00* a, pos14_7f4c00* b, int modus);
-int __cdecl fcn_0050c710(unsigned char* objekt, int art, int modus);
+int __cdecl gm_GetBuildingTechEffect(unsigned char* objekt, int art, int modus);
 void __cdecl fcn_004c54c0(int besitzer, int objekt, int menge, int modus);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_004ff040(void* objekt);
-float __cdecl fcn_004eceb0(char* objekt, int ware);
+float __cdecl ahm_CalcRecipeProductivityBonus(char* objekt, int ware);
 int __cdecl fcn_005c6270(char* objekt, int id);
 int __cdecl fcn_005c62c0(char* objekt, int id);
 int __cdecl fcn_005743b0(char* objekt);
-void __cdecl fcn_005290d0(char* objekt);
+void __cdecl gm_CountBuildingWorkers(char* objekt);
 float __cdecl fcn_0050fdb0(int besitzer, int anzahl, int* ids);
 struct unit* __cdecl he_StartHandlungSearch(int anzahl, ...);
 void __cdecl he_FreeAction(struct unit* objekt);
@@ -167,7 +167,7 @@ warten:
             fcn_004c6300(*(int*) (gebaeude + 1));
         }
         typ = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)gebaeude];
-        leistung = fcn_0050c710((unsigned char*) gebaeude, 1, 1) * 0.01 + 1.0;
+        leistung = gm_GetBuildingTechEffect((unsigned char*) gebaeude, 1, 1) * 0.01 + 1.0;
         haus = fcn_0050dc90((int) gebaeude);
         if (haus == 0) {
             haus = (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)];
@@ -197,7 +197,7 @@ warten:
                             }
                         }
                         if (arbeiter[0x1cc] & 4) {
-                            arbeitsleistung = fcn_004eceb0(arbeiter, *(unsigned short*) (e + 0xac)) * arbeitsleistung;
+                            arbeitsleistung = ahm_CalcRecipeProductivityBonus(arbeiter, *(unsigned short*) (e + 0xac)) * arbeitsleistung;
                         }
                         if (fcn_005c6270((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)], 0x2ba)) {
                             summe += arbeitsleistung * 1.25f;
@@ -214,7 +214,7 @@ warten:
                     *(float*) (e + 0xd4) *= 0.9f;
                 }
             }
-            fcn_005290d0(e);
+            gm_CountBuildingWorkers(e);
             *(float*) (e + 0xcc) = (fcn_0050fdb0(*(unsigned short*) (gebaeude + 0x27), 8, (int*) (e + 0x8c)) - 0.5) * 0.25;
             e[0xd0] = 0;
         }

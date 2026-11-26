@@ -26,7 +26,7 @@ typedef struct {
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl gm_SetBuildingWorkerLimits(unsigned char*);
-void __cdecl fcn_00504250(unsigned char*);
+void __cdecl gm_InitBuildingStartingGoods(unsigned char*);
 void __cdecl gv_UpgradeField(unsigned char*);
 int __cdecl vfs_ResolvePath(char*, int, int, char*);
 void __cdecl d3_SelectSceneContext(int, int);
@@ -87,7 +87,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 	upgradeBuilding[0] = (unsigned char) (upgradeBuilding[0] + 1);
 	upgradeBuilding[0x5c] = (unsigned char) ((100 - (int) (signed char) upgradeBuilding[0x5c]) / 2 + (signed char) upgradeBuilding[0x5c]);
 	gm_SetBuildingWorkerLimits(upgradeBuilding);
-	fcn_00504250(upgradeBuilding);
+	gm_InitBuildingStartingGoods(upgradeBuilding);
 	if (rec->kind == 0x1d) {
 		gv_UpgradeField(upgradeBuilding);
 	}

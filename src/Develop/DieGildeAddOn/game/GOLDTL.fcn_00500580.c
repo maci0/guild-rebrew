@@ -1,9 +1,9 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-int __cdecl fcn_004ffd90(int);
+int __cdecl gm_SpawnPopulationChild(int);
 int __cdecl fcn_0050a7e0(int, int, int, int, int, int, int, int);
 char* __cdecl sim_StartEntityQueryByType(char*);
-int __cdecl fcn_004fe470(int, int, int, int, int);
+int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00500580 */
 char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
@@ -14,7 +14,7 @@ char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
 	char* s;
 
 	if (flags & 1) {
-		i = fcn_004ffd90(a3) & 0xffff;
+		i = gm_SpawnPopulationChild(a3) & 0xffff;
 		if (i != 0xffff && (flags & 2)) {
 			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].active = (char) a5;
 			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].stat_category = (char) a4;
@@ -34,7 +34,7 @@ char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
 		if (queryEntity != 0) {
 			s = sim_StartEntityQueryByType(queryEntity);
 			if (s != 0) {
-				fcn_004fe470(*(int*) (rec + 4), *(int*) (queryEntity + 1),
+				init_SpawnBuildingCharacter(*(int*) (rec + 4), *(int*) (queryEntity + 1),
 					*(int*) (s + 2), 0, 0);
 			}
 		}

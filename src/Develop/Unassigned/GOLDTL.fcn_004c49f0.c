@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl nt_CloseClientConnection(void);
-unsigned short __cdecl fcn_004c3a50(char* n);
+unsigned short __cdecl ahm_GetCommandPayloadSize(char* n);
 
 /* ADDRESS: GOLDTL 0x004c49f0 */
 int __cdecl cm_EnqueueCommand(char* src)
@@ -22,7 +22,7 @@ int __cdecl cm_EnqueueCommand(char* src)
 	pn = (char**) (g_aed200 + 0x95);
 	g_aed200 = *pn;
 	memcpy(p, src, 0x99);
-	*(unsigned short*) (p + 1) = fcn_004c3a50(p);
+	*(unsigned short*) (p + 1) = ahm_GetCommandPayloadSize(p);
 	q = cm_CommandQueueHead;
 	if (q != 0) {
 		while (*(char**) (q + 0x95) != 0) {

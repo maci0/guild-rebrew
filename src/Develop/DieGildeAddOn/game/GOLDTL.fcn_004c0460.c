@@ -11,8 +11,8 @@ extern unsigned char g_773d75;
 int* __cdecl gm_GetChainNodeAtIndex(int, int);
 char* __cdecl gm_ResolveParentEntity(char*);
 char* __cdecl gm_SearchTable67(int);
-int __cdecl fcn_0050cce0(char*, Slots*, int);
-int __cdecl fcn_0050de80(char*, Slots*);
+int __cdecl gm_CollectBuildingStock(char*, Slots*, int);
+int __cdecl gm_CalcEntityInventoryStats(char*, Slots*);
 char* __cdecl fcn_00503d10(int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
@@ -54,11 +54,11 @@ void __cdecl fcn_004c0460(char* e, char who)
 	}
 	t = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) q];
 	if (t->category != 10 && t->category != 0x1c) {
-		if (fcn_0050cce0(q, &a, 0) == 0) {
+		if (gm_CollectBuildingStock(q, &a, 0) == 0) {
 			return;
 		}
 	}
-	if (fcn_0050de80(e, &b) == 0) {
+	if (gm_CalcEntityInventoryStats(e, &b) == 0) {
 		return;
 	}
 	for (k = 3, p = d + 2; k != 0; k--, p += 2) {

@@ -42,7 +42,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004b4650(char*, int);
 void __cdecl fcn_004c5f60(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_004e6eb0(char*, unsigned int);
+int __cdecl d2_ShowMessageBox(char*, unsigned int);
 void __cdecl fcn_00412830(int);
 int __cdecl fcn_00471e30(int);
 int __cdecl cut_RandMod(int);
@@ -53,14 +53,14 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl fcn_004c4700(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00507910(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_0050ff70(char*, int);
+void __cdecl gm_AdjustGebaeudeCondition(char*, int);
 
 /* ADDRESS: GOLDTL 0x004d6170 */
 int __cdecl fcn_004d6170(char* ctx)
@@ -289,7 +289,7 @@ sync:
 		strcat(msg, cat);
 		io_FormatTextBuffer(cat, 0x11a3);
 		strcat(msg, cat);
-		choice = fcn_004e6eb0(msg, 0x11);
+		choice = d2_ShowMessageBox(msg, 0x11);
 		if (kind == 0x1e || kind == 0x20 || kind == 0x1f) {
 			choice++;
 		}
@@ -300,12 +300,12 @@ sync:
 			}
 			fcn_004c5f60(*(int*) (ent + 1), *(int*) (g_772e9c + 4), *(int*) (g_772e9c + 4));
 			io_FormatTextBuffer(msg, 0x11a4, *(unsigned short*) g_772e9c, ent);
-			fcn_004e6eb0(msg, 0);
+			d2_ShowMessageBox(msg, 0);
 		} else if (choice == 2) {
 			buf[0] = g_6b5c60[0];
 			memset(buf + 1, 0, 0x3ff);
 			io_FormatTextBuffer(buf, 0x11a5, *(unsigned short*) g_772e9c, ent);
-			fcn_004e6eb0(buf, 0);
+			d2_ShowMessageBox(buf, 0);
 			cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 			if (cur == 0) {
 				cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
@@ -347,13 +347,13 @@ reduce:
 			buf[0] = g_6b5c60[0];
 			memset(buf + 1, 0, 0x3ff);
 			io_FormatTextBuffer(buf, 0x11a6, *(unsigned short*) g_772e9c, ent);
-			fcn_004e6eb0(buf, 0);
+			d2_ShowMessageBox(buf, 0);
 			if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
-				fcn_0050ff70(ent, 0x14 - cut_RandMod(0x14));
+				gm_AdjustGebaeudeCondition(ent, 0x14 - cut_RandMod(0x14));
 			}
 		} else if (choice == 0) {
 			io_FormatTextBuffer(msg, 0x11a7, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e9c);
-			fcn_004e6eb0(msg, 0);
+			d2_ShowMessageBox(msg, 0);
 			for (row = g_7f4ca0 + 0x164; row < g_7f4ca0 + 0x65564; row += 0x21c) {
 				if (*(unsigned short*) (row - 0x164) == 0xffff || *(unsigned char*) (row - 0x15c) == 0) {
 					continue;
@@ -385,7 +385,7 @@ reduce:
 					bonus = fcn_0050b750(bonus * 40, g_773d75);
 				}
 				if (side == g_772e9c && cur[8] != 0) {
-					fcn_004c4510(cur, *(int*) (cur + 4));
+					cm_BeginPacketFieldDelta(cur, *(int*) (cur + 4));
 					pay = 0;
 					fcn_004c4700(4, 1, (int) cur - g_aed32c + 0x16c, &pay);
 					fcn_004c5360();
@@ -417,7 +417,7 @@ reduce:
 					buf[0] = g_6b5c60[0];
 					memset(buf + 1, 0, 0x3ff);
 					io_FormatTextBuffer(buf, 0x11a5, *(unsigned short*) g_772e9c, ent);
-					fcn_004e6eb0(buf, 0);
+					d2_ShowMessageBox(buf, 0);
 					cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x2a);
 					if (cur == 0) {
 						cur = fcn_00502cd0(*(int*) (ent + 0x5d), 2, 6, 0, 0x116);
@@ -457,7 +457,7 @@ reduce:
 					goto reduce;
 				} else if (choice == 1) {
 					io_FormatTextBuffer(cat, 0x11a7, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e9c);
-					fcn_004e6eb0(cat, 0);
+					d2_ShowMessageBox(cat, 0);
 					for (row = g_7f4ca0 + 0x164; row < g_7f4ca0 + 0x65564; row += 0x21c) {
 						if (*(unsigned short*) (row - 0x164) == 0xffff || *(unsigned char*) (row - 0x15c) == 0) {
 							continue;
@@ -471,7 +471,7 @@ reduce:
 			}
 		} else {
 			io_FormatTextBuffer(cat, 0x11a4, *(unsigned short*) g_772e9c, ent);
-			fcn_004e6eb0(cat, 0);
+			d2_ShowMessageBox(cat, 0);
 		}
 	}
 	goto done;

@@ -169,10 +169,12 @@ float __cdecl ahm_GetRecipeQuality(char* entity, int which)
 	return g_const_neg_1_0;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int* __cdecl ahm_FindRecipeSlot(char* entity, int key)
 {
 	return ahm_FindRecipeSlotImpl(entity, key);
 }
+#endif
 
 /* ADDRESS: GOLDTL 0x004ec960 */
 int* __cdecl ahm_FindRecipeSlotImpl(char* entity, int key)
@@ -297,7 +299,7 @@ extern unsigned char g_slot_table[2];
 extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
 void* __cdecl m_alloc(unsigned int size, const char* source);
-void __cdecl fcn_004fe470(int, int, int, int, int);
+void __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 void __cdecl fcn_004fdfe0(unsigned short*);
 /* Defined in alchemistry_logic2.c; same literal, same VA. */
 
@@ -520,7 +522,7 @@ ret_false:
 	 * releases the query record; the server reference has neither the query nor
 	 * the two calls, and its body is 80 bytes shorter. */
 	query_result = (int*) gm_ff_Objekt(*(int*) ((char*) dynamic + 0x5d), 1, 0, 0x24b);
-	fcn_004fe470(*(int*) (slot + 4), *(int*) ((char*) dynamic + 1),
+	init_SpawnBuildingCharacter(*(int*) (slot + 4), *(int*) ((char*) dynamic + 1),
 	             query_result != 0 ? *(int*) ((char*) query_result + 2) : -1, 0, 0);
 	fcn_004fdfe0((unsigned short*) slot);
 #endif
@@ -619,6 +621,7 @@ int __cdecl ahm_ApplyColorComponent(char* color_cmd, char* target)
  * given parameters. */
 
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 {
 	int i;
@@ -638,6 +641,7 @@ int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 	}
 	return 0;
 }
+#endif
 
 
 int __cdecl ahm_SlotClearMatch(char* data, char* target, char* src)
@@ -1288,6 +1292,7 @@ int* __cdecl ahm_QueryEntityBuildingType(int arg1)
 }
 
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* RELOC 752/752.  The switch-byte/index register pair (dl/ecx in the target,
  * cl/edx before this fix) is decided by which case-0x16 statement reads
  * cmd_payload first: assigning `cursor` from the `*cmd_payload == 0x16`
@@ -1451,6 +1456,7 @@ int ahm_GetCommandPayloadSize(unsigned char* cmd_payload)
 	}
 	return total_size;
 }
+#endif
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1002a1cc[7812];
 #endif

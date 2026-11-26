@@ -41,7 +41,7 @@ char* __cdecl fcn_004934c0(char* e)
 			t = gm_LookupEntityRecordById(*(int*) (e + 0x5c));
 			v = -1;
 			if (t != 0) {
-				fcn_004c4510(t, *(int*) (t + 4));
+				cm_BeginPacketFieldDelta(t, *(int*) (t + 4));
 				cm_AppendPacketFieldDelta(4, 1, 0x5c, &v);
 				fcn_004c5360();
 			}
@@ -55,7 +55,7 @@ char* __cdecl fcn_004934c0(char* e)
 					} else {
 						continue;
 					}
-					fcn_004c4510(t, *(int*) (t + 4));
+					cm_BeginPacketFieldDelta(t, *(int*) (t + 4));
 					cm_AppendPacketFieldDelta(4, 1, k * 4 + 0x5c, &v);
 					fcn_004c5360();
 				}

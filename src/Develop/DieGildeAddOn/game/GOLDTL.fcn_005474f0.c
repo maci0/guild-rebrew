@@ -19,7 +19,7 @@ void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 void __cdecl fcn_004c6900(Msg* msg);
 
-void __cdecl fcn_005474f0(void)
+void __cdecl he_PruneStammtischSeats(void)
 {
 	char* e;
 	char* w;

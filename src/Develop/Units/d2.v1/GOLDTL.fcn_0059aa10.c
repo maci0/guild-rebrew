@@ -40,7 +40,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int);
-void __cdecl fcn_00527f10(char*);
+void __cdecl gm_CollectGebaeudeUpgrades(char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ShowTechTreeEffects(char*);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
@@ -48,10 +48,10 @@ void __cdecl fcn_0050f900(void);
 void __cdecl fcn_0050ee80(char*, char*);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl fcn_00526010(char*, int, char);
-int __cdecl fcn_00526070(char*, int, int, char);
+int __cdecl d2_CheckFundsAndNotify(char*, int, int, char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526920(char*, int, char*);
-char* __cdecl fcn_00507a10(char*);
+char* __cdecl gm_FindBuildingTreasury(char*);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -104,7 +104,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 4);
 	h = d2_GetWindowListItem(h, 4, io_AppendText(0x17e2));
-	fcn_00527f10(a0);
+	gm_CollectGebaeudeUpgrades(a0);
 	while (main_RunFrameLoop((void*) d2_RunTechTreeDialog, 0x657c7)) {
 		if (g_14ce8e0)
 			g_774654 = 1;
@@ -154,8 +154,8 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 									ok = 1;
 								io_FormatTextBuffer(buf, 0x1a, amount, a0, sel * 2 + 0x9a8);
 							} else {
-								p = fcn_00507a10(a0);
-								if (fcn_00526070(p, *(int*) (p + 0x14), amount, (char) g_773d75))
+								p = gm_FindBuildingTreasury(a0);
+								if (d2_CheckFundsAndNotify(p, *(int*) (p + 0x14), amount, (char) g_773d75))
 									ok = 1;
 								io_FormatTextBuffer(buf, 0x1c, amount, a0, sel * 2 + 0x9a8);
 							}
@@ -170,7 +170,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 									if (p)
 										*(int*) (p + 0x40) += amount;
 								} else {
-									p = fcn_00507a10(a0);
+									p = gm_FindBuildingTreasury(a0);
 									if (p)
 										fcn_004c51a0(-1, *(int*) (p + 2), (char) g_773d75, amount);
 								}

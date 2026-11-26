@@ -50,7 +50,7 @@ int* __cdecl fcn_00417d00(int a1, float* pos, int n, float a4, float a5,
 int __cdecl fcn_00422460(int a1, char* name);
 void __cdecl fcn_004193f0(int a1, int a2, int a3, float a4);
 int __cdecl gm_ResolveEntityById(char** out, int a, int b, int c);
-void __cdecl fcn_004c4510(char* a1, int a2);
+void __cdecl cm_BeginPacketFieldDelta(char* a1, int a2);
 void __cdecl fcn_004c4670(int a1, int a2, int a3, void* a4);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5530(char* msg);
@@ -259,7 +259,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 				fcn_004c5530(msg);
 			} else if (out.slot[i].type == 2) {
 				neg = (char) (int) -out.slot[i].strength;
-				fcn_004c4510(p, *(int*) (p + 1));
+				cm_BeginPacketFieldDelta(p, *(int*) (p + 1));
 				fcn_004c4670(1, 1, 0x5c, &neg);
 				fcn_004c5360();
 			}

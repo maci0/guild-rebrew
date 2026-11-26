@@ -7,7 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 
-int __cdecl fcn_004c7350(char* x)
+int __cdecl cm_ChkClientElectionOrTrade(char* x)
 {
 	char* e;
 	char* r;

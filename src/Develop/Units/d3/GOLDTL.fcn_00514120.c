@@ -66,7 +66,7 @@ void __cdecl fcn_00512680(void);
 void __cdecl gm_InitializeShopInventory(void);
 void __cdecl fcn_00535960(void);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_005059b0(void*, int, int);
+void __cdecl gm_AssignBuildingOwner(void*, int, int);
 void* __cdecl gm_AddObjekt(void);
 void __cdecl fcn_005016c0(void);
 void __cdecl fcn_005016f0(int);
@@ -148,7 +148,7 @@ int __cdecl fcn_00514120(char* map)
 		fcn_00535960();
 	}
 	for (s = gm_StartFilteredEntitySearch(1, 5, 0x1c); s != 0; s = gm_FindNextFilteredEntity()) {
-		fcn_005059b0(s, (*(Figure**)&gm_CityEntity)->slot, (*(Figure**)&gm_CityEntity)->slot);
+		gm_AssignBuildingOwner(s, (*(Figure**)&gm_CityEntity)->slot, (*(Figure**)&gm_CityEntity)->slot);
 	}
 	fcn_005016c0();
 	for (i = 0; i < 4; i++) {

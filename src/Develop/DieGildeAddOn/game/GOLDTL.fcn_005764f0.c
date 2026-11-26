@@ -11,7 +11,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004eeb50(char*, float);
+void __cdecl ahm_SendSetFloatValue(char*, float);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_004ecf00(char*, int*, int*, int);
 void __cdecl sub_00576750(char*, char*, char*, int);
@@ -46,7 +46,7 @@ void __cdecl fcn_005764f0(char* e)
 	*(short*) (e + 0x56) = gm_RandomMod((int) (g_696550[k] - g_696540[k])) + (int) g_696540[k];
 	*(int*) (e + 0x58) = gm_RandomMod(4) * 15;
 	if (*(int*) (e + 0xac) != 0) {
-		fcn_004eeb50(o, (gm_RandomFloat01() + 1.0f) * 0.25f);
+		ahm_SendSetFloatValue(o, (gm_RandomFloat01() + 1.0f) * 0.25f);
 		*(int*) (e + 0xac) = 0;
 		fcn_004c5620(0, e);
 		return;
@@ -72,6 +72,6 @@ void __cdecl fcn_005764f0(char* e)
 		v = gm_RandomFloat01() * 0.15f + 0.05f;
 		break;
 	}
-	fcn_004eeb50(o, v);
+	ahm_SendSetFloatValue(o, v);
 	fcn_004c5620(0, e);
 }

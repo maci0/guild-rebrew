@@ -9,7 +9,7 @@ extern int g_67a370;
 char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl ch_QueuePlayAnimation(char* e, char* name, int param);
-int __cdecl fcn_004bc8a0(int, int, float (*)[4]);
+int __cdecl ch_GenerateNearbyWalkablePoints(int, int, float (*)[4]);
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
@@ -47,7 +47,7 @@ void __cdecl he_CharacterBehavior(char* u, int where)
 		} else {
 			world = *(int*) (((char*)g_67a370) + 0xb0);
 			n = gm_RandomMod(3) + 1;
-			n = fcn_004bc8a0(where, n, list);
+			n = ch_GenerateNearbyWalkablePoints(where, n, list);
 			for (i = 0; i < n; i++) {
 				if (fcn_0045b990(world, list[i], &b, &a, &c) != 0) {
 					r = ch_CreateAction(*(char**) (e + 0x184), 0x2d, b, a, 0);

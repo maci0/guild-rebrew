@@ -31,7 +31,7 @@ unsigned int __cdecl strlen(const char*);
 float __cdecl fcn_0050f980(unsigned int a, unsigned int b, unsigned int c);
 int __cdecl fcn_004e4b40(int a1, int a2, char* s, int a4, int a5);
 
-int __cdecl fcn_00493e50(int a, int b);
+int __cdecl gm_CalcTrialTortureFee(int a, int b);
 int __cdecl fcn_004938c0(void* m);
 void __cdecl fcn_00493920(void* m);
 int __cdecl fcn_004c51a0(int a, int b, unsigned char c, int d);
@@ -39,7 +39,7 @@ void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 float __cdecl fcn_004ff210(int a, int b);
 int __cdecl fcn_005c6270(int a, int b);
 void __cdecl fcn_004f6810(int a, int b);
-void __cdecl fcn_004f6ce0(int a, int b, char* s);
+void __cdecl cut_FormatProzessPunishment(int a, int b, char* s);
 void __cdecl fcn_004f6850(int a, int b, int c, int d, int e);
 int* __cdecl gm_GetEntityTableEntry(int a);
 void __cdecl fcn_004b4650(int a, int b);
@@ -382,7 +382,7 @@ int __cdecl cut_RunProzess(int a0)
 
 	/* ---- 0x4dd976: msg.state == 1 follow-up ---- */
 	if (msg.state == 1) {
-		msg.pad[1] = fcn_00493e50((int) p34, (int) p38);
+		msg.pad[1] = gm_CalcTrialTortureFee((int) p34, (int) p38);
 		d2_SetForm(g_68bfc0, 0);
 		io_AppendText(0x6811b0);
 		io_AppendText(0x14ca, *(unsigned short*) p34, *(unsigned short*) p38, msg.pad[1]);
@@ -745,7 +745,7 @@ int __cdecl cut_RunProzess(int a0)
 		fcn_004f6810((int) p38, st);
 		fcn_004e4450(g_68bfc0, 1);
 		d2_SetForm(g_68bfc0, 0);
-		fcn_004f6ce0((int) p38, st, buf);
+		cut_FormatProzessPunishment((int) p38, st, buf);
 		io_AppendText((int) buf);
 		if (*(char*) (p38 + 0x166) != 0) {
 			if (st == 4 || st == 6 || st == 8) {

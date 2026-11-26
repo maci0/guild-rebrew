@@ -23,7 +23,7 @@ void* __cdecl fcn_00445600(int a, int b, int c, char* name);
 void __cdecl SelectTextureSet(int a, int b, int c, int d);
 void __cdecl d3_TransformPoint(int a, int b, int* c);
 void* __cdecl fcn_004e4a80(char* name, int* b);
-void __cdecl fcn_00402b00(int a, int b);
+void __cdecl ch_SetToDummy(int a, int b);
 int __cdecl fcn_004fda30(unsigned short a);
 void* __cdecl fcn_004e44b0(char* name, int a);
 void __cdecl fcn_004e4b40(int id, int bank, char* label, int a, int b);
@@ -32,13 +32,13 @@ void __cdecl fcn_00471d80(int dlg, int a);
 void __cdecl fcn_004e44f0(int a);
 void __cdecl fcn_004e51d0(int arg, int* ids);
 void __cdecl cut_WaitTicks(int a);
-int __cdecl fcn_0050e4a0(int a);
+int __cdecl gm_FindPublicBuilding(int a);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl fcn_004c5f60(int a, int b, int c);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(int a);
 void __cdecl fcn_004e4aa0(int a);
-void __cdecl fcn_004e4910(void);
+void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004c09b0(void);
 void __cdecl fcn_004e4b00(int a);
 void __cdecl fcn_004e4eb0(void);
@@ -156,7 +156,7 @@ void __cdecl cut_RunAuction(int* arg)
 		d3_TransformPoint(auctioneer, auctioneer + 0x4c, bid);
 	auctioneer = (int) fcn_004e4a80(line, bid);
 	if (auctioneer != 0) {
-		fcn_00402b00(auctioneer, npc);
+		ch_SetToDummy(auctioneer, npc);
 		strcpy((char*) auctioneer + 8, "Auktionator");
 		strcpy(*(char**) ((char*) auctioneer + 0x34), "Auktionator");
 	}
@@ -184,7 +184,7 @@ void __cdecl cut_RunAuction(int* arg)
 		}
 		if (bidders[i] != 0) {
 			objs[i] = (int) fcn_004e4a80(temp, bid);
-			fcn_00402b00(objs[i], (int) npc2);
+			ch_SetToDummy(objs[i], (int) npc2);
 		} else {
 			objs[i] = 0;
 		}
@@ -285,14 +285,14 @@ void __cdecl cut_RunAuction(int* arg)
 				}
 			}
 			cur = *(int*) 0x7f4c00;
-			fcn_004c4510((char*) building, *(int*) ((char*) building + 1));
+			cm_BeginPacketFieldDelta((char*) building, *(int*) ((char*) building + 1));
 			cm_AppendPacketFieldDelta(4, 1, 0x69, &done);
 			cm_AppendPacketFieldDelta(4, 1, 0x6d, &cur);
 			fcn_004c5360();
 			fcn_004c5f60(*(int*) ((char*) building + 1),
 			    *(int*) (gm_CityEntity + 4),
 			    *(int*) ((char*) bidders[besti] + 4));
-			other = (int) fcn_0050e4a0(1);
+			other = (int) gm_FindPublicBuilding(1);
 			other = fcn_00502cd0(*(int*) ((char*) other + 0x5d), 2, 6, 0, 0x115);
 			if (found == bidders[besti]) {
 				fcn_004c51a0(*(int*) ((char*) other + 2),
@@ -329,7 +329,7 @@ void __cdecl cut_RunAuction(int* arg)
 	}
 	if (auctioneer != 0)
 		fcn_004e4aa0(auctioneer);
-	fcn_004e4910();
+	cut_CleanupCutscene();
 	fcn_004c09b0();
 	fcn_004e4b00(bank_intro);
 	fcn_004e4b00(bank_bids);

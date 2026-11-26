@@ -5,7 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
 
-int __cdecl fcn_004eb320(unsigned char* obj)
+int __cdecl amt_CheckHighOfficeEligibility(unsigned char* obj)
 {
 	unsigned char* r;
 	int kind;

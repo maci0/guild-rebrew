@@ -5,7 +5,7 @@ typedef struct {
 // SIZE 0x24
 
 int __cdecl fcn_004f4980(char*, int, Rec24*);
-int __cdecl fcn_004f5110(void*, int);
+int __cdecl gm_FormatLawName(void*, int);
 int __cdecl fcn_005d6540(char*, int*);
 
 
@@ -23,7 +23,7 @@ int __cdecl fcn_004f82f0(char* e, int* s)
 		if (fcn_004f4980(e, 2, &rec) == 0)
 			return 1;
 		if (e[2] == 6)
-			fcn_004f5110((char*) s + 0x14, rec.id);
+			gm_FormatLawName((char*) s + 0x14, rec.id);
 		if (*(int*) (e + 0x1c8) & 0x200)
 			return 9;
 		if (*(int*) (e + 0x1c8) & 0x100000)
@@ -49,7 +49,7 @@ int __cdecl fcn_004f82f0(char* e, int* s)
 			s[0x85] = 2;
 			r = fcn_005d6540(e, s);
 		} else if (e[2] == 6) {
-			fcn_004f5110((char*) s + 0x14, rec.id);
+			gm_FormatLawName((char*) s + 0x14, rec.id);
 		}
 		return r | 10;
 	}

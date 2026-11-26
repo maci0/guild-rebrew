@@ -36,7 +36,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 void __cdecl he_FreeAction(char*);
 void __cdecl fcn_004c5530(struct msg*);
 
-void __cdecl fcn_00549130(void)
+void __cdecl he_RestartAction03b(void)
 {
 	struct msg m;
 	char* p;

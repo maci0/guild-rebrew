@@ -12,7 +12,7 @@ extern Rec15_699058 g_699058[37];
 char* __cdecl fcn_00502cd0(int list, int a, int b, int c, ...);
 char* __cdecl gm_AllocObjekt(int a, int b, int c);
 
-void __cdecl fcn_00504250(unsigned char* e)
+void __cdecl gm_InitBuildingStartingGoods(unsigned char* e)
 {
 	char* o;
 	int i;

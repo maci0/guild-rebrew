@@ -16,7 +16,7 @@ extern char* gm_CityEntity;
 extern float g_100a0a0;
 extern float g_100a0c0[];
 
-char* __cdecl fcn_00507ab0(int k);
+char* __cdecl gm_FindPublicTreasury(int k);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 int __cdecl fcn_0050d170(int k);
@@ -29,7 +29,7 @@ int __cdecl ai_RunBaumeister(char* entity, char* a2, char* a3)
 	char msg[0xf8];
 	char* b;
 
-	b = fcn_00507ab0(1);
+	b = gm_FindPublicTreasury(1);
 	if (b == 0 || (unsigned char) entity[0x166] != 0xa) {
 		goto out0;
 	}

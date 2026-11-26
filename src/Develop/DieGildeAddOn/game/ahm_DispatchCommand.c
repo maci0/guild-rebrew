@@ -2,10 +2,10 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 int __cdecl ahm_SetMatchingSlotValue(char*, int);
 int __cdecl ahm_ApplyColorComponent(char*, int);
-int __cdecl fcn_004eec60(char*, int, char*);
+int __cdecl ahm_HandleFireCommand(char*, int, char*);
 int __cdecl fcn_004eebb0(char*, int);
 int __cdecl ahm_SlotClearMatch(char*, int, char*);
-int __cdecl fcn_004ee8c0(char*, int, char*);
+int __cdecl ahm_AllocateEntitySlot(char*, int, char*);
 
 /* ADDRESS: GOLDTL 0x004cdb90 */
 int __cdecl ahm_DispatchCommand(char* cfg, char* out)
@@ -32,7 +32,7 @@ int __cdecl ahm_DispatchCommand(char* cfg, char* out)
 		r = ahm_ApplyColorComponent(cfg + 0x10, *(int*)(*(char**)(s + 0x16c) + 0x65));
 		break;
 	case 0x46697245:
-		r = fcn_004eec60(cfg + 0x10, *(int*)(*(char**)(s + 0x16c) + 0x65), *(char**)(s + 0x16c));
+		r = ahm_HandleFireCommand(cfg + 0x10, *(int*)(*(char**)(s + 0x16c) + 0x65), *(char**)(s + 0x16c));
 		break;
 	case 0x61536d53:
 		r = fcn_004eebb0(cfg + 0x10, *(int*)(*(char**)(s + 0x16c) + 0x65));
@@ -41,7 +41,7 @@ int __cdecl ahm_DispatchCommand(char* cfg, char* out)
 		r = ahm_SlotClearMatch(cfg + 0x10, *(int*)(*(char**)(s + 0x16c) + 0x65), *(char**)(s + 0x16c));
 		break;
 	case 0x61616452:
-		r = fcn_004ee8c0(cfg + 0x10, *(int*)(*(char**)(s + 0x16c) + 0x65), *(char**)(s + 0x16c));
+		r = ahm_AllocateEntitySlot(cfg + 0x10, *(int*)(*(char**)(s + 0x16c) + 0x65), *(char**)(s + 0x16c));
 		break;
 	default:
 		return -3;

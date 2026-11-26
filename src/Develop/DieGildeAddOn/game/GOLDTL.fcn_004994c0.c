@@ -11,7 +11,7 @@ void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 void __cdecl fcn_004c5530(char* msg);
 
-int __cdecl fcn_004994c0(char* e, char* cmd)
+int __cdecl ai_RunSabotieren(char* actor, char* cmd)
 {
 	char msg[0xf8];
 	char* t;
@@ -26,8 +26,8 @@ int __cdecl fcn_004994c0(char* e, char* cmd)
 	}
 	memset(msg, 0, sizeof(msg));
 	msg[4] = 0x19;
-	*(int*) (msg + 8) = *(int*) (e + 4);
-	o = *(char**) (e + 0x170);
+	*(int*) (msg + 8) = *(int*) (actor + 4);
+	o = *(char**) (actor + 0x170);
 	if (o != 0) {
 		*(int*) (msg + 0xc) = *(int*) (o + 1);
 	} else {

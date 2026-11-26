@@ -10,7 +10,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl fcn_0050dfd0(char*, int);
 int __cdecl gm_GetMsgField(char*, void*);
-int __cdecl fcn_004c4510(int, int);
+int __cdecl cm_BeginPacketFieldDelta(int, int);
 int __cdecl fcn_004c4700(int, int, int, int*);
 void __cdecl fcn_004c53a0(void);
 int __cdecl d2_GetControlValue(int);
@@ -199,7 +199,7 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 				cat = 0;
 			else
 				cat = *(unsigned int*) (ent + 0xe) + 1;
-			fcn_004c4510((int) ent, *(int*) (ent + 1));
+			cm_BeginPacketFieldDelta((int) ent, *(int*) (ent + 1));
 			fcn_004c4700(4, 1, (int) ((char*) ent - g_aed32c) + 0x1c, &cat);
 			fcn_004c53a0();
 			*(int*) (ent + 0xe) = cat;
@@ -214,7 +214,7 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 				cat = 0;
 			else
 				cat = *(unsigned int*) (ent + 0xe) + 1;
-			fcn_004c4510((int) ent, *(int*) (ent + 1));
+			cm_BeginPacketFieldDelta((int) ent, *(int*) (ent + 1));
 			fcn_004c4700(4, 1, (int) ((char*) ent - g_aed32c) + 0x1c, &cat);
 			fcn_004c53a0();
 			*(int*) (ent + 0xe) = cat;

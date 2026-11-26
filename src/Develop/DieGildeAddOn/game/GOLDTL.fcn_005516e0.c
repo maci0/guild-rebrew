@@ -64,7 +64,7 @@ void __cdecl fcn_005516e0(char* t)
 	case 1:
 		e = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (t + 8)]);
 		fcn_00507130(gm_MapEntityStatRange(*(unsigned char*) (t + 0xb0)), &a, &b);
-		fcn_004c4510((char*) e, e->entity_id);
+		cm_BeginPacketFieldDelta((char*) e, e->entity_id);
 		c = gm_RandomMod(0x10) + 0x10;
 		fcn_004c4670(1, 1, a + 0x80, &c);
 		c = gm_RandomMod(0x10) + 0x10;

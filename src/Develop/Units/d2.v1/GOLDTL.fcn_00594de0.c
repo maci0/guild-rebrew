@@ -25,7 +25,7 @@ extern int d2_CurrentWindowId;
 extern char gm_GameTime[];
 
 int __cdecl d2_SetForm(int k, int i);
-int __cdecl fcn_0050cce0(char* o, void* out, int producers);
+int __cdecl gm_CollectBuildingStock(char* o, void* out, int producers);
 int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5);
@@ -63,7 +63,7 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 	}
 	d2_SetForm(formIdArg, 0);
 	d2_SetForm(formIdArg, formTabArg);
-	fcn_0050cce0((char*) obj, stock, 1);
+	gm_CollectBuildingStock((char*) obj, stock, 1);
 
 	for (i = 0; i < panelCountArg; i++) {
 		p = (Panel*) (g_779160 + i * 0x58);

@@ -16,11 +16,11 @@ char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl sim_CreateCitizen(char, uint, int, uchar, uchar, ushort*);
 char* __cdecl sim_StartEntityQueryByType(uchar*);
 char* __cdecl fcn_005049a0(ushort*);
-void __cdecl fcn_004fe470(int, int, int, int, int);
+void __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 int* __cdecl ahm_QueryEntityBuildingType(char*);
 char* __cdecl gm_AllocObjekt(int, int, int);
 void __cdecl gm_SubObjekt(int, uint, int);
-void __cdecl fcn_004ce9e0(char*);
+void __cdecl ch_UpdateHeldObjectAttachment(char*);
 int __cdecl sim_PriorityUpdate(char*, char*);
 int __cdecl ahm_ResetEntityState(char*);
 
@@ -89,12 +89,12 @@ int __cdecl fcn_004cbde0(int cmd, char* result)
 		if (workplace_entity != (ushort*) 0) {
 			q = sim_StartEntityQueryByType((uchar*) workplace_entity);
 			if (q != 0 && *(int*) (q + 2) != -1)
-				fcn_004fe470(*(int*) (citizen_entity + 4), *(int*) ((char*) workplace_entity + 1), *(int*) (q + 2), 0, 0);
+				init_SpawnBuildingCharacter(*(int*) (citizen_entity + 4), *(int*) ((char*) workplace_entity + 1), *(int*) (q + 2), 0, 0);
 		}
 		else {
 			q = fcn_005049a0(building_entity);
 			if (q != 0 && *(int*) (q + 2) != -1)
-				fcn_004fe470(*(int*) (citizen_entity + 4), *(int*) ((char*) building_entity + 1), *(int*) (q + 2), 0, 0);
+				init_SpawnBuildingCharacter(*(int*) (citizen_entity + 4), *(int*) ((char*) building_entity + 1), *(int*) (q + 2), 0, 0);
 		}
 	}
 	worker_type = *(char*) (cmd + 0x1d);
@@ -103,14 +103,14 @@ int __cdecl fcn_004cbde0(int cmd, char* result)
 		building_type_ptr = ahm_QueryEntityBuildingType(citizen_entity);
 		if (*building_type_ptr == 0) {
 			gm_AllocObjekt(*(int*) (citizen_entity + 4), 0x154, 1);
-			fcn_004ce9e0(citizen_entity);
+			ch_UpdateHeldObjectAttachment(citizen_entity);
 		}
 	}
 	else {
 		building_type_ptr = ahm_QueryEntityBuildingType(citizen_entity);
 		if (*building_type_ptr != 0) {
 			gm_SubObjekt(*(int*) (citizen_entity + 4), (uint) *building_type_ptr, 1);
-			fcn_004ce9e0(citizen_entity);
+			ch_UpdateHeldObjectAttachment(citizen_entity);
 		}
 	}
 	*(ushort**) (citizen_entity + 0x16c) = building_entity;

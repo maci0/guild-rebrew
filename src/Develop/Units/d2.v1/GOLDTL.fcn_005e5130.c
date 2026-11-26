@@ -27,7 +27,7 @@ extern char* g_14b5bc8;
 extern char g_6b5c60[];
 
 void __cdecl fcn_00526120(int, int);
-int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
+int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 int __cdecl fcn_005cd440(Req*, char*, char*, void*);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_005e4e50(void);
@@ -45,7 +45,7 @@ void __cdecl fcn_005e5130(void)
 		fcn_00526120(g_14b5bc0, 4);
 		return;
 	}
-	if (fcn_00525f60(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1)) {
+	if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1)) {
 		n = 0x50;
 		p = &req;
 		__asm {

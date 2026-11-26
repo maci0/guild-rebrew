@@ -3,11 +3,11 @@
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004ce6e0(void*);
+void __cdecl gm_RemoveSpecialTableItems(void*);
 
 void __cdecl fcn_004c4670(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
-void* __cdecl fcn_004ce610(void*);
+void* __cdecl gm_GetEquippedCombatGear(void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -35,8 +35,8 @@ char __cdecl fcn_004ce740(char* entity)
 	c0 = *(signed char*) (entity + 0x1c5);
 	if (gm_RandomMod(10) < (unsigned short) (unsigned char) c0) {
 		c = -c0;
-		fcn_004ce6e0(entity);
-		fcn_004c4510(entity, *(int*) (entity + 4));
+		gm_RemoveSpecialTableItems(entity);
+		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 		fcn_004c4670(1, 1, entity - g_aed32c + 0x1c5, &c);
 		fcn_004c5360();
 		e = *(void**) (entity + 0x16c);
@@ -45,7 +45,7 @@ char __cdecl fcn_004ce740(char* entity)
 			if (idx != 0xffff) {
 				p = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]);
 				if (*(char*)&((ENTITY_RECORD_VIEW*)p)->entity_type == 6 || *(char*)&((ENTITY_RECORD_VIEW*)p)->entity_type == 7) {
-					q = fcn_004ce610(entity);
+					q = gm_GetEquippedCombatGear(entity);
 					r = *(int*) q;
 					if (r != 0) {
 						io_FormatTextBuffer(buf, 0x1bca, r * 2 + 0x9a8,
@@ -57,7 +57,7 @@ char __cdecl fcn_004ce740(char* entity)
 		}
 		return 1;
 	}
-	fcn_004c4510(entity, *(int*) (entity + 4));
+	cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 	fcn_004c4670(1, 1, entity - g_aed32c + 0x1c5, &c);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (entity + 4), 0x1c8, 4, 0, 0x20000000);

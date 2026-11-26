@@ -1,5 +1,5 @@
 char* __cdecl ch_AttachMotion(char* obj, int kind);
-void __cdecl fcn_004311a0(char* node, char* an, int from, int to, int flags);
+void __cdecl d3_ApplyAnimDelta(char* node, char* an, int from, int to, int flags);
 void __cdecl d3_RemoveObjectAnimation(char* o, char* name);
 
 /* Finish the animation parked on the object. A fresh clip is started when
@@ -33,7 +33,7 @@ byte_ret:
 	if ((an[0x6d] & 0x20) != 0) {
 		frames = *(char**) (an + 0x68);
 		if (frames[0x169] == 0 && (an[0x70] & 3) != 0) {
-			fcn_004311a0(*(char**) (obj + 0x34), an, 0, *(int*) an, 3);
+			d3_ApplyAnimDelta(*(char**) (obj + 0x34), an, 0, *(int*) an, 3);
 		}
 		if ((obj[0x8c] & 2) != 0) {
 			goto clear_anim;
@@ -49,7 +49,7 @@ byte_ret:
 	if (ev[0x190] != 0) {
 		frames = *(char**) (an + 0x68);
 		if (frames[0x169] == 0 && (an[0x70] & 3) != 0) {
-			fcn_004311a0(*(char**) (obj + 0x34), an, 0, *(int*) an, 3);
+			d3_ApplyAnimDelta(*(char**) (obj + 0x34), an, 0, *(int*) an, 3);
 		}
 		if ((obj[0x8c] & 2) != 0) {
 			goto clear_anim;

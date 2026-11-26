@@ -1,20 +1,20 @@
 extern char* g_67a370;
 extern float g_664330;
 
-char* __cdecl fcn_004ce610(char*);
-unsigned short* __cdecl fcn_004ce680(char*);
+char* __cdecl gm_GetEquippedCombatGear(char*);
+unsigned short* __cdecl gm_FindEntityActiveItem(char*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 unsigned char* __cdecl fcn_004d2f70(char*);
 int __cdecl fcn_004d3330(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl fcn_004d1020(char*, char*, char*, int, int);
 char* __cdecl fcn_004d3600(char*);
-int __cdecl fcn_004d13d0(char*, char*, char*);
+int __cdecl he_QueueTradeWareCommand(char*, char*, char*);
 char* __cdecl fcn_004d36e0(char*);
-int __cdecl fcn_004d1320(char*, char*, char*);
+int __cdecl cut_AssignConquerTarget(char*, char*, char*);
 void __cdecl fcn_004d1570(char*, char*);
 int __cdecl fcn_004d14b0(char*, char*);
 char* __cdecl fcn_004d34f0(char*);
-int __cdecl fcn_004d1250(char*, char*, char*);
+int __cdecl gm_IssueEscapeOrder(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x004d4250 */
 void __cdecl fcn_004d4250(char* rec, char* e)
@@ -27,9 +27,9 @@ void __cdecl fcn_004d4250(char* rec, char* e)
 	if (!e || !*(char**) (e + 0x184) || (*(char*) (e + 8) && *(int*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x218) != 1)) {
 		switch (*(unsigned char*) (e + 0x1c4)) {
 		case 0:
-			obj = fcn_004ce610(e);
+			obj = gm_GetEquippedCombatGear(e);
 			if (*(int*) (obj + 0x58) == 1 || *(int*) (obj + 0x58) == 2) {
-				if (*(int*) ((char*) fcn_004ce680(e) + 0x20) <= 0) {
+				if (*(int*) ((char*) gm_FindEntityActiveItem(e) + 0x20) <= 0) {
 					break;
 				}
 			}
@@ -53,21 +53,21 @@ void __cdecl fcn_004d4250(char* rec, char* e)
 		case 5:
 			obj = fcn_004d34f0(e);
 			if (obj != 0) {
-				fcn_004d1250(rec, e, obj);
+				gm_IssueEscapeOrder(rec, e, obj);
 				return;
 			}
 			break;
 		case 1:
 			obj = fcn_004d3600(e);
 			if (obj != 0) {
-				fcn_004d13d0(rec, e, obj);
+				he_QueueTradeWareCommand(rec, e, obj);
 				return;
 			}
 			break;
 		case 2:
 			obj = fcn_004d36e0(e);
 			if (obj != 0) {
-				fcn_004d1320(rec, e, obj);
+				cut_AssignConquerTarget(rec, e, obj);
 				return;
 			}
 			break;

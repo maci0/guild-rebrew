@@ -46,7 +46,7 @@ int __cdecl fcn_005974e0(int, int);
 int __cdecl fcn_00597940(int, int, int, int, int);
 int __cdecl d2_GetControlValue(int);
 int* __cdecl fcn_004ce590(int);
-int* __cdecl fcn_004ce610(int);
+int* __cdecl gm_GetEquippedCombatGear(int);
 int __cdecl fcn_005c7270(int, int);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 int __cdecl fcn_00472380(int, int, int, int, int);
@@ -55,7 +55,7 @@ void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
 void __cdecl d2_ClearSelectedControl(void);
-int __cdecl fcn_004ce9e0(int);
+int __cdecl ch_UpdateHeldObjectAttachment(int);
 int __cdecl d2_UpdateTrainingRows(int, int);
 int __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_00471e30(int);
@@ -167,7 +167,7 @@ label_5c752a:
 		if (v5 != -1 && d2_GetControlValue(v5) != 0) {
 			v5 = rec[-4];
 			if (fcn_004ce590(v5) != 0) {
-				if (*(int*) fcn_004ce610(selected) != 0) {
+				if (*(int*) gm_GetEquippedCombatGear(selected) != 0) {
 					fcn_00526120(g_14aba9c, 4);
 					goto label_5c7572;
 				}
@@ -230,7 +230,7 @@ label_5c7572:
 		fcn_00535960();
 		v7 = fcn_004c44c0();
 	}
-	fcn_004ce9e0(selected);
+	ch_UpdateHeldObjectAttachment(selected);
 label_5c76eb:
 	v7 = d2_UpdateTrainingRows(win, 2);
 	if (d2_HoveredWindow == g_1038140[win].wins[1] && v7 != 0 && g_14ce8cc != 0) {
@@ -264,7 +264,7 @@ label_5c76eb:
 		p4 = (int*) ((int) g_7774a0 + 0x0);
 		do {
 			if (*p4 != 0) {
-				fcn_004ce9e0(*p4);
+				ch_UpdateHeldObjectAttachment(*p4);
 			}
 			p4 += 0x10;
 		} while ((int) p4 < ((int) g_7774a0 + 0x800));

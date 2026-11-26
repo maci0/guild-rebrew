@@ -79,7 +79,7 @@ int __cdecl fcn_005d6950(unsigned char* e, int* o)
 			return 0x60;
 		}
 		fcn_004c4eb0(s_6accdc);
-		fcn_004e81c0(q, t);
+		amt_AssignEntityOfficeDefault(q, t);
 		fcn_004c5420(*(int*) (t + 4), 0x1c8, 4, 0x200000, 0);
 		fcn_004c54c0(*(int*) (e + 4), *(int*) (q + 4), -0x28, 1);
 		fcn_004c4ef0(s_6accdc);
@@ -106,7 +106,7 @@ int __cdecl fcn_005d6950(unsigned char* e, int* o)
 			goto refused;
 		}
 		fcn_004c4eb0(s_6accdc);
-		fcn_004e81c0((unsigned char*) g, t);
+		amt_AssignEntityOfficeDefault((unsigned char*) g, t);
 		h1 = fcn_004c5420(*(int*) (t + 4), 0x1c8, 4, 0x200000, 0);
 		fcn_004c54c0(*(int*) (e + 4), *(int*) (g + 2), -0x14, 1);
 		h = fcn_004c4ef0(s_6accdc);

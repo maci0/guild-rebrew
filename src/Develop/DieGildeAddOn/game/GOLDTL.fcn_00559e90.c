@@ -15,9 +15,9 @@ extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl fcn_004c4450(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_00559660(struct job*);
+int __cdecl he_ReturnPoliticianFromJob(struct job*);
 void __cdecl gm_SimulatePoliticians(struct job*);
-int __cdecl fcn_00559760(struct job*, int, int);
+int __cdecl he_TryDispatchNpcAction(struct job*, int, int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl he_FreeAction(char*);
 
@@ -39,7 +39,7 @@ void __cdecl fcn_00559e90(char* u)
 		*(int*) (u + 0x84) = -1;
 		if (*(unsigned short*) (u + 0x56) >= 0x11) {
 			for (i = 0; i < 10; i++) {
-				if (fcn_00559660(&((struct job*) (u + 0xac))[i]) == 2) {
+				if (he_ReturnPoliticianFromJob(&((struct job*) (u + 0xac))[i]) == 2) {
 					n++;
 				}
 			}
@@ -52,7 +52,7 @@ void __cdecl fcn_00559e90(char* u)
 		}
 		for (i = 0; i < 10; i++) {
 			if (((struct job*) (u + 0xac))[i].flags & 4) {
-				fcn_00559660(&((struct job*) (u + 0xac))[i]);
+				he_ReturnPoliticianFromJob(&((struct job*) (u + 0xac))[i]);
 			} else {
 				gm_SimulatePoliticians(&((struct job*) (u + 0xac))[i]);
 			}
@@ -61,7 +61,7 @@ void __cdecl fcn_00559e90(char* u)
 			}
 		}
 		for (i = 0; i < 10; i++) {
-			*(int*) (u + 0x84) = fcn_00559760(&((struct job*) (u + 0xac))[i], n, 0);
+			*(int*) (u + 0x84) = he_TryDispatchNpcAction(&((struct job*) (u + 0xac))[i], n, 0);
 			if (*(int*) (u + 0x84) != -1) {
 				*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 				gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);

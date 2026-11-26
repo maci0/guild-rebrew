@@ -5,7 +5,7 @@ int __cdecl gm_QueryEntitySum(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00526120(char*, int);
 
-int __cdecl fcn_00526070(short* p, int a, int lim, int b)
+int __cdecl d2_CheckFundsAndNotify(short* p, int a, int lim, int b)
 {
 	char buf[0x200];
 

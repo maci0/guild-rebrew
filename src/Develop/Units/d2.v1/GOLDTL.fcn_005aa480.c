@@ -7,7 +7,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl gm_CheckZunftPreismanipulation(char*);
 int __cdecl fcn_004eb3e0(int, int*);
 int __cdecl io_AppendText();
-int __cdecl fcn_00525f60(void*, int);
+int __cdecl d2_CheckActionBlocker(void*, int);
 int __cdecl fcn_00526120(void*, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00533a60(int, int, int*, int, ...);
@@ -42,7 +42,7 @@ void __cdecl fcn_005aa480(void)
 			fcn_00526120((void*) *(int*) 0x14aad38, 0);
 			return;
 		}
-		fcn_00525f60((void*) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) &g_774970]), 3);
+		d2_CheckActionBlocker((void*) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) &g_774970]), 3);
 		return;
 	}
 	h = fcn_00470820(0, 0, "LOCATIONS\\ZUNFTHAUS\\LEVEL1");

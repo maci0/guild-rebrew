@@ -36,7 +36,7 @@ void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_005547c0(Player* p);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_0050c710(Home* h, int a, int b);
+int __cdecl gm_GetBuildingTechEffect(Home* h, int a, int b);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
 void __cdecl fcn_00549580(char* s, Player* p, Player* q, Home* h, float v, int f);
 void __cdecl gm_AddTime(Clock* c, int a, int b, int d);
@@ -90,7 +90,7 @@ void __cdecl RunSimUnfall(char* s)
 		p = &((Player*) g_7f4ca0)[idx];
 		if (fcn_005547c0(p) != 0 && ((Player*) g_7f4ca0)[idx].home->x27 != 0xffff) {
 			f = gm_RandomFloat01() * 100.0f;
-			r = fcn_0050c710(((Player*) g_7f4ca0)[idx].home, 2, 1);
+			r = gm_GetBuildingTechEffect(((Player*) g_7f4ca0)[idx].home, 2, 1);
 			x = r * 0.0125f;
 			if (25.0f - 20.0f * x > f) {
 				y = MINV(MAXV(2.0f - x, 0.0f), 2.0f);

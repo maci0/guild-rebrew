@@ -8,7 +8,7 @@ extern float g_662960;
 
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 
-void __cdecl fcn_004f11c0(char* p, float* o1, float* o2)
+void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2)
 {
 	float x;
 	float y;

@@ -20,9 +20,9 @@ int __cdecl cm_ResolveSpecialEntityId(unsigned char*, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned short __cdecl fcn_0050a7e0(int, int, int, int, int, int, int, int);
 char* __cdecl gm_FindRecordById(int);
-void __cdecl fcn_004fe470(int, int, int, int, int);
+void __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 char* __cdecl gm_AllocObjekt(int, int, int);
-void __cdecl fcn_004ce9e0(struct rec_4cc590*);
+void __cdecl ch_UpdateHeldObjectAttachment(struct rec_4cc590*);
 
 
 /* ADDRESS: GOLDTL 0x004cc590 */
@@ -54,14 +54,14 @@ int __cdecl fcn_004cc590(unsigned char* request, char* response)
 	if (id == 0xffff)
 		return 1;
 	if (*(int*) (request + 0x1b) != -1 && (r = gm_FindRecordById(*(int*) (request + 0x1b))) != 0)
-		fcn_004fe470((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), *(int*) (e + 1), *(int*) (r + 2), 0, 0);
+		init_SpawnBuildingCharacter((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), *(int*) (e + 1), *(int*) (r + 2), 0, 0);
 	else
-		fcn_004fe470((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), *(int*) (e + 1), -1, 0, 0);
+		init_SpawnBuildingCharacter((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), *(int*) (e + 1), -1, 0, 0);
 	(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].ptr_16c) = 0;
 	(*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_type) = 0xd;
 	if (request[0x21] != 0) {
 		gm_AllocObjekt((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), request[0x21], 1);
-		fcn_004ce9e0(((struct rec_4cc590*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
+		ch_UpdateHeldObjectAttachment(((struct rec_4cc590*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
 	}
 	(*(int*)cm_LastEntityId) = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id);
 	if (response != 0) {

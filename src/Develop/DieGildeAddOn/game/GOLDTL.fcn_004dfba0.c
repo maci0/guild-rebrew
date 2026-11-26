@@ -3,7 +3,7 @@ extern unsigned short* g_772f24;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00493640(int*);
 int __cdecl IsRandomSecondChoice(int*);
-int __cdecl fcn_004937f0(int*);
+int __cdecl ai_SelectRandomTorture(int*);
 int __cdecl fcn_00493800(int*);
 void __cdecl fcn_004c54c0(int, int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
@@ -31,7 +31,7 @@ void __cdecl fcn_004dfba0(char* context, int* ev)
 		break;
 	case 2:
 		if (*(int*) (context + 0x10) == ev[5])
-			*(int*) (context + 0x94) = fcn_004937f0(ev);
+			*(int*) (context + 0x94) = ai_SelectRandomTorture(ev);
 		break;
 	case 3:
 		if (*(int*) (context + 0x10) == ev[10]) {

@@ -27,8 +27,8 @@ void __cdecl d3_GridPointToWorld(int, int, int, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-char* __cdecl fcn_004ce610(char*);
-unsigned short* __cdecl fcn_004ce680(char*);
+char* __cdecl gm_GetEquippedCombatGear(char*);
+unsigned short* __cdecl gm_FindEntityActiveItem(char*);
 float __cdecl fcn_004cefb0(char*, int);
 float __cdecl gm_GetEntityGridDistance(void*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -112,7 +112,7 @@ void __cdecl fcn_004d8d00(char* context)
 		obj = (p->state == 5)
 		    ? gm_LookupEntityRecordById(p->type)
 		    : gm_LookupEntityRecordIn32SlotTable(p->type);
-		ent = fcn_004ce610(obj);
+		ent = gm_GetEquippedCombatGear(obj);
 		if (!obj || *((unsigned char*)obj + 8) == 0) {
 			if (ent) {
 				p->type = -1;
@@ -171,7 +171,7 @@ void __cdecl fcn_004d8d00(char* context)
 				}
 			}
 			if (*(int*)(ent + 0x58) == 1 || *(int*)(ent + 0x58) == 2) {
-				n = (int)fcn_004ce680(obj);
+				n = (int)gm_FindEntityActiveItem(obj);
 				if (n && *(int*)(n + 0x20) < 1) {
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
@@ -274,7 +274,7 @@ void __cdecl fcn_004d8d00(char* context)
 						if (*(int*)(e + 8) == -1 || fcn_004c4450(*(int*)(e + 8))) {
 							*(int*)(e + 8) = -1;
 							if (*(int*)(e + 4) == 0) {
-								n = (int)fcn_004ce680(tgt);
+								n = (int)gm_FindEntityActiveItem(tgt);
 								if (n && *(int*)(n + 0x20) >= 1) {
 									fcn_004c5420(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
 									*(int*)(e + 8) = fcn_004d1020((char*)v80, tgt, obj, 0, 0);

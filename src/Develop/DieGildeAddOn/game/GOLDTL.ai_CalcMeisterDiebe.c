@@ -54,7 +54,7 @@ void __cdecl fcn_00487970(int, int, int);
 void __cdecl fcn_00487c00(int, int, int);
 void __cdecl fcn_00487470(int);
 void __cdecl fcn_004888a0(int);
-void __cdecl fcn_00488c00(int);
+void __cdecl ai_DispatchWorkerRecovery(int);
 void __cdecl ai_CalcAngriff(int, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_004fa6f0(int, int*, int*);
@@ -147,7 +147,7 @@ common:
 	if (fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 2, 6, 0, 0x60) != 0) {
 		fcn_004888a0((int) rec);
 	}
-	fcn_00488c00((int) rec);
+	ai_DispatchWorkerRecovery((int) rec);
 	if (g_7f4c04 <= 6
 	    || (*(int*) (rec + 4) + ((unsigned int) g_7f4c04 & 0xffff)) % 3 != 0) {
 		*(unsigned int*) (rec + 0x1b4) = *(unsigned int*) (rec + 0x1b4) & 0xffffffdf;

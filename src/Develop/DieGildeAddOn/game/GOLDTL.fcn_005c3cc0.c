@@ -16,7 +16,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_00471af0(int, int);
 double __cdecl gm_RandomFloat01(void);
@@ -73,7 +73,7 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 			} else {
 				goto next;
 			}
-			if (fcn_00525f60(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), n)) {
+			if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), n)) {
 				fcn_005100f0(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -n);
 				fcn_00471af0(win, 0);
 				if (gm_RandomFloat01() < p) {

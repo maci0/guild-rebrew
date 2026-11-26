@@ -91,7 +91,7 @@ void __cdecl fcn_0047da10(void)
 				int v;
 
 				v = -e->gold - (int) (e->gold * -0.89f);
-				fcn_004c4510((char*) e, e->h);
+				cm_BeginPacketFieldDelta((char*) e, e->h);
 				fcn_004c4670(4, 1, 0x24, &v);
 				fcn_004c5360();
 			}

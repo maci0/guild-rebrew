@@ -21,7 +21,7 @@ int __cdecl gm_GetMsgField(char* pkt, unsigned short* q);
 int __cdecl fcn_0050dfd0(char* pkt, int item_id);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 
-int __cdecl fcn_0050cce0(char* o, Stock* out, int producers)
+int __cdecl gm_CollectBuildingStock(char* o, Stock* out, int producers)
 {
 	char* b;
 	unsigned short* e;

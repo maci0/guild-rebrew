@@ -9,7 +9,7 @@ blk24 g_68bef4 = { { 0x7a657073, 0x2f6c6169, 0x686e6965, 0x646e6561, 0x765f6769,
 
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-char* __cdecl fcn_004ce610(char*);
+char* __cdecl gm_GetEquippedCombatGear(char*);
 char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(int), int, int, int);
 char* __cdecl ch_CreateAction(char*, int, ...);
 int __cdecl ch_QueuePlayAnimation(char*, char*, int);
@@ -59,7 +59,7 @@ void __cdecl fcn_004d8200(int* p)
 		return;
 	}
 	rec = (unsigned short*) gm_LookupEntityRecordIn32SlotTable(p[0]);
-	r = fcn_004ce610((char*) rec);
+	r = gm_GetEquippedCombatGear((char*) rec);
 	save = *(int*) ((char*) rec + 0x16c);
 	eid = p[4];
 	ent = (int*) gm_LookupEntityRecordIn32SlotTable(eid);

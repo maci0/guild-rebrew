@@ -4,7 +4,7 @@
 
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 
-float __cdecl fcn_004f1290(char* p)
+float __cdecl gm_GetCannonPowerScale(char* p)
 {
 	float v;
 

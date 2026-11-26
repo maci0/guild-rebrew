@@ -1,7 +1,7 @@
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl gm_CheckEntityType(char*);
-char* __cdecl fcn_00500480(char*, int*, int*);
+char* __cdecl gm_FindFallbackPublicBuilding(char*, int*, int*);
 char* __cdecl gm_FindRecordById(int);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl init_EnsureObjektSceneContext(char*);
@@ -40,7 +40,7 @@ int __cdecl fcn_00567170(char* h, int* out1, int* out2, int* out3)
 		}
 	}
 	if (*(char**) (h + 0x170) == 0) {
-		e = fcn_00500480(h, out1, out2);
+		e = gm_FindFallbackPublicBuilding(h, out1, out2);
 		if (e == 0) {
 			return 0;
 		}

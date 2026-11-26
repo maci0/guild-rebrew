@@ -1,7 +1,7 @@
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_0055c0a0(char* a, char* b);
+int __cdecl he_HasNoActiveAction0x2e(char* a, char* b);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x004aa7c0 */
@@ -30,7 +30,7 @@ int __cdecl fcn_004aa7c0(char* entity, char* res, char* out)
 		if (!target) {
 			return 0;
 		}
-		if (!fcn_0055c0a0(entity, target)) {
+		if (!he_HasNoActiveAction0x2e(entity, target)) {
 			return 0;
 		}
 		*(double*) vb = fcn_0050f980(*(unsigned short*) entity, *(unsigned short*) target, 1);

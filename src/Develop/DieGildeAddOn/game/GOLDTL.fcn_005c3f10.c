@@ -95,7 +95,7 @@ void __cdecl d2_SetBildArgument(int a, int b);
 void __cdecl fcn_00471af0(int a, int b);
 void __cdecl fcn_00471e30(int a);
 int __cdecl d2_GetControlValue(int a);
-void __cdecl fcn_004c4510(char* ent, int id);
+void __cdecl cm_BeginPacketFieldDelta(char* ent, int id);
 void __cdecl fcn_004c4700(int a, int b, int c, void* d);
 void __cdecl fcn_004c5150(int a, int b, int c, int d);
 void __cdecl fcn_004c5360(void);
@@ -439,7 +439,7 @@ after_build:
 				fcn_004c5f60(*(int*) (ent + 1),
 				    *(int*) (gm_CityEntity + 4),
 				    *(int*) (gm_CityEntity + 4));
-				fcn_004c4510(ent, *(int*) (ent + 1));
+				cm_BeginPacketFieldDelta(ent, *(int*) (ent + 1));
 				fcn_004c4700(4, 1,
 				    (int) ent - g_aed32c + 0x65, &v.len);
 				fcn_004c5360();
@@ -469,7 +469,7 @@ loop_test:
 			c = *s++;
 			*d++ = c;
 		} while (c != 0);
-		fcn_004c4510(ent, *(int*) (ent + 1));
+		cm_BeginPacketFieldDelta(ent, *(int*) (ent + 1));
 		fcn_004c4700(1, 0x20, 5, name);
 		fcn_004c53a0();
 	}

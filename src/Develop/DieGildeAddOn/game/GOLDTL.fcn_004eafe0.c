@@ -13,14 +13,14 @@ typedef struct Rec {
 
 int __cdecl amt_CollectOfficeGroup7(int all, int max, Rec* out);
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_004ea560(Rec* r, int type);
-int __cdecl fcn_004e8240(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
+void __cdecl amt_NotifyOfficeLost(Rec* r, int type);
+int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
 int __cdecl fcn_004c4450(int v);
 void __cdecl fcn_00535960(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl amt_calc_zuenfte(int n);
 void __cdecl fcn_004ea620(void);
-void __cdecl fcn_004ea9a0(void);
+void __cdecl amt_FillOffice0x22FromRichest(void);
 
 /* ADDRESS: GOLDTL 0x004eafe0 */
 void __cdecl fcn_004eafe0(void)
@@ -89,8 +89,8 @@ void __cdecl fcn_004eafe0(void)
 					goto skip;
 			}
 		body:
-			fcn_004ea560((Rec*) q, tt);
-			v = fcn_004e8240(out[i].id, 0, 0, 4, 0xff);
+			amt_NotifyOfficeLost((Rec*) q, tt);
+			v = amt_SendOfficeCommand(out[i].id, 0, 0, 4, 0xff);
 			while (v != -1 && fcn_004c4450(v) == 0) {
 				fcn_00535960();
 			}
@@ -105,5 +105,5 @@ void __cdecl fcn_004eafe0(void)
 		amt_calc_zuenfte(0x21);
 	}
 	fcn_004ea620();
-	fcn_004ea9a0();
+	amt_FillOffice0x22FromRichest();
 }

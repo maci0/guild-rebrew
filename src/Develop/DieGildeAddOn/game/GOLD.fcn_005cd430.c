@@ -11,7 +11,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -39,7 +39,7 @@ int __cdecl fcn_005cd430(char* e)
 		do {
 			if (g_100f1dc != -1) {
 				if (g_100f1dc == 0) {
-					if (fcn_00525f60(e, 4) != 0) {
+					if (d2_CheckActionBlocker(e, 4) != 0) {
 						fcn_004c6ae0(*(int*) (e + 4), -4);
 						fcn_005d9000(e, gm_RandomMod(6));
 						r = 1;

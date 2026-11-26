@@ -6,11 +6,11 @@ extern unsigned char* lpGebaeudeINST;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_00510400(char*);
+int __cdecl gm_CountBuildingExtensions(char*);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004a5340(int*, int, int*, int, float, unsigned short*);
 int __cdecl fcn_004a5c40(int*, int, int, float, float, int, unsigned short*);
-int __cdecl fcn_004e99c0(unsigned char);
+int __cdecl amt_GetOfficeRank(unsigned char);
 
 /* ADDRESS: GOLDTL 0x004ab500 */
 unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, int a2,
@@ -51,9 +51,9 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 			    fcn_00502cd0(*(int*) (v11 + 0x5d), 2, 6, 0, 0x27c) != 0) {
 				if (v12 == 0) {
 					v12 = (unsigned short*) v11;
-					v6 = fcn_00510400((char*) v11);
+					v6 = gm_CountBuildingExtensions((char*) v11);
 				} else {
-					v5 = fcn_00510400((char*) v11);
+					v5 = gm_CountBuildingExtensions((char*) v11);
 					if (v5 > v6) {
 						v6 = v5;
 						v12 = (unsigned short*) v11;
@@ -69,7 +69,7 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 			                 (float) (gm_RandomMod(0x20) & 0xffff) + 25.0f,
 			                 (unsigned short*) &v8) != 0) {
 				a2 = (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[v8 & 0xffff]));
-				v5 = fcn_004e99c0(*(unsigned char*) (a2 + 0x166)) / 3 + 2;
+				v5 = amt_GetOfficeRank(*(unsigned char*) (a2 + 0x166)) / 3 + 2;
 				if (v5 + 2 <= *(int*) ((char*) entity + 0x194) &&
 				    (a0 = fcn_004a5c40((int*) entity, 4, (int) v4, 25.0f,
 				                       75.0f, v6, v9)) != 0) {
@@ -79,7 +79,7 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 						do {
 							v1 = *(unsigned char*) (
 							    ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)v9[v7]]) + 0x166);
-							v1 = fcn_004e99c0((unsigned char) v1) / 3 +
+							v1 = amt_GetOfficeRank((unsigned char) v1) / 3 +
 							     2 + v5;
 							if (v1 >= *(int*) ((char*) entity + 0x194)) {
 								v5 = v1;

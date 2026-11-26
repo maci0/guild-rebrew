@@ -16,8 +16,8 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(int (__cdecl*)(char*), int);
-void __cdecl fcn_004ed190(char*);
-void __cdecl fcn_004eec10(char*);
+void __cdecl he_CancelErforschenActions(char*);
+void __cdecl ahm_SendFireCommand(char*);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_00586a80(char* a, int* unused)
@@ -58,8 +58,8 @@ int __cdecl fcn_00586a80(char* a, int* unused)
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == b1) {
 				result = 1;
-				fcn_004ed190(a);
-				fcn_004eec10(p);
+				he_CancelErforschenActions(a);
+				ahm_SendFireCommand(p);
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == b2) {
 				g_774654 = 1;

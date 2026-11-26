@@ -14,7 +14,7 @@ unsigned char* __cdecl he_StartHandlungSearch(int, int, int);
 unsigned char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004c5620(int, unsigned char*);
 
-void __cdecl fcn_004ed190(char* object)
+void __cdecl he_CancelErforschenActions(char* object)
 {
 	unsigned char* p;
 

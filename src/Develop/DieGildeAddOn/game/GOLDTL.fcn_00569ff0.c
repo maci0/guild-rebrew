@@ -27,7 +27,7 @@ char* __cdecl fcn_004c4480(int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SetupEntityQuery(char*);
@@ -41,8 +41,8 @@ int __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetScaledEntitySkill(char*, int);
 char* __cdecl gm_GetEntityTableEntry(char*);
-int __cdecl fcn_0050c5d0(char*, int*);
-int __cdecl fcn_0050c710(char*, int, int);
+int __cdecl gm_EvalEntityInventoryValue(char*, int*);
+int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
@@ -224,7 +224,7 @@ void __cdecl fcn_00569ff0(char* e)
 			}
 			q = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xbc));
 			if (q != 0) {
-				fcn_004c4510(q, *(int*) (q + 1));
+				cm_BeginPacketFieldDelta(q, *(int*) (q + 1));
 				fcn_004c4670(4, 1, 0x65, &num);
 				fcn_004c5360();
 			}
@@ -319,7 +319,7 @@ void __cdecl fcn_00569ff0(char* e)
 					fv = 0.001f;
 				}
 			}
-			num = fcn_0050c710(pa, 7, 1);
+			num = gm_GetBuildingTechEffect(pa, 7, 1);
 			*(float*) &num = (float) num * g_662910;
 			fv = fv - *(float*) &num * g_665ed0;
 			if (fv > gm_RandomFloat01()) {
@@ -344,16 +344,16 @@ void __cdecl fcn_00569ff0(char* e)
 		}
 		if (flag != 0) {
 			num = fcn_00502cd0(*(int*) (pa + 0x5d), 2, 6, 0, 0x2a);
-			fcn_0050c5d0(pa, (int*) &cnt2);
+			gm_EvalEntityInventoryValue(pa, (int*) &cnt2);
 			hits = (int) (((float) (gm_RandomMod(0x32) & 0xffff) * 0.001f
 			        + 1.0) * (float) (int) cnt2);
-			num = (int) (((float) fcn_0050c710(pa, 7, 1) * 0.0025f
+			num = (int) (((float) gm_GetBuildingTechEffect(pa, 7, 1) * 0.0025f
 			        + 1.0f) * (float) hits);
 			num = num < 0 ? 0 : num;
 			io_FormatTextBuffer(b400, 0x68bea4, num);
 			strcat(b400, b100);
 			fcn_004c51a0(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
-			fcn_004c4510(pb, *(int*) (pb + 1));
+			cm_BeginPacketFieldDelta(pb, *(int*) (pb + 1));
 			fcn_004c4670(4, 1, 0x69, &flag);
 			fcn_004c5360();
 		} else {

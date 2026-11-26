@@ -16,7 +16,7 @@ void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int
 char* __cdecl ch_CreateAction(int, int, int);
 char* __cdecl fcn_004934c0(char*);
 void __cdecl fcn_005099e0(char*, char*);
-void __cdecl fcn_004c4510(int, int);
+void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050a710(char*);
@@ -138,7 +138,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		fcn_005099e0(s, p);
 		c = *(char*) (s + 2);
 		if ((c == 6 || c == 7 || c == 5) && *(unsigned char*) (s + 0xd) > *(unsigned char*) (p + 0xd)) {
-			fcn_004c4510((int) p, *(int*) (p + 4));
+			cm_BeginPacketFieldDelta((int) p, *(int*) (p + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, (int*) (s + 0xd));
 			fcn_004c5360();
 		}

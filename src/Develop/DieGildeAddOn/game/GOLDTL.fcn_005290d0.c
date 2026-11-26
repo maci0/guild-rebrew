@@ -6,7 +6,7 @@ extern unsigned char* lpGebaeudePROT;
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(unsigned char*);
 
-void __cdecl fcn_005290d0(char* o)
+void __cdecl gm_CountBuildingWorkers(char* o)
 {
 	int i;
 	unsigned char* e;

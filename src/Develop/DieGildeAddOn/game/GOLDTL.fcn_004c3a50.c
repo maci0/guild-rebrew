@@ -3,7 +3,7 @@
 // the code.
 
 /* ADDRESS: GOLDTL 0x004c3a50 */
-int __cdecl fcn_004c3a50(unsigned char* cmd_payload)
+int __cdecl ahm_GetCommandPayloadSize(unsigned char* cmd_payload)
 {
 	int count;
 	unsigned char* cursor;

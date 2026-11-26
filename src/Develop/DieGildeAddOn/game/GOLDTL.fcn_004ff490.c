@@ -23,7 +23,7 @@ int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004c4480(int);
-void __cdecl fcn_004c4510(int, int);
+void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5980(void*);
@@ -147,7 +147,7 @@ void __cdecl fcn_004ff490(char* entity)
 			*(int*) (pkt + 0x14) = -1;
 			pkt[0x30] = 2;
 			*(int*) (pkt + 0x38) = id;
-			fcn_004c4510(handle, id);
+			cm_BeginPacketFieldDelta(handle, id);
 			cm_AppendPacketFieldDelta(1, 1, 2, &mode);
 			fcn_004c5360();
 			fcn_004c5980(pkt);

@@ -12,7 +12,7 @@ int __cdecl fcn_00545d40(int a, int b, char* s, int c, int d, int e);
 int __cdecl fcn_004e7b70(char* e, void* a, void* b);
 int __cdecl fcn_0042e410(int code);
 float __cdecl gm_GetEntitySkill(char* e, int a);
-int __cdecl fcn_004ec2d0(char* e, int a, int b);
+int __cdecl amt_AdjustOfficeHoldersFavor(char* e, int a, int b);
 int __cdecl fcn_004c54c0(int a, int b, int c, int d);
 int __cdecl fcn_00500de0(char* p, int id, int a, int b, int c);
 int __cdecl fcn_004c5530(void* p);
@@ -113,7 +113,7 @@ void __cdecl fcn_0054f910(char* ent)
 	}
 	dmg = -9 - (int) (gm_GetEntitySkill(e1, 4) * 8.0f);
 	dmg -= fcn_0042e410(8) & 0xffff;
-	fcn_004ec2d0(e2, v, dmg);
+	amt_AdjustOfficeHoldersFavor(e2, v, dmg);
 	fcn_004c54c0(*(int*) (e2 + 4), *(int*) (e1 + 4), -0x14, 1);
 	*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 

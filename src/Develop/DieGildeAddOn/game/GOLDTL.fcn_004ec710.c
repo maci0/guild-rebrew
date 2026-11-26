@@ -23,7 +23,7 @@ extern float g_665264[];
 
 void __cdecl fcn_004f4830(int kind, int* out);
 
-int __cdecl fcn_004ec710(void)
+int __cdecl amt_CalcTotalOfficeSalaries(void)
 {
 	int buf[9];
 	int mult;

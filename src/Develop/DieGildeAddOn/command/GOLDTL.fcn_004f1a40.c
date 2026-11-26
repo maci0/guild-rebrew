@@ -13,7 +13,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl cm_GetBuildingStatCount(unsigned char* e);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
-Rec44* __cdecl fcn_004f1a40(unsigned char* e)
+Rec44* __cdecl gv_PickRandomFieldEntry(unsigned char* e)
 {
 	BUILDING_PROTOTYPE *ent;
 	char* d;

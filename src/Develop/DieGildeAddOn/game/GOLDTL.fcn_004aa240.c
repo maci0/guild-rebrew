@@ -12,7 +12,7 @@ extern int __cdecl gm_RandomMod(int limit);
 extern void *__cdecl he_StartHandlungSearch(int a, int b, int c);
 extern void *__cdecl he_fn_Handlung(void);
 extern void *__cdecl gm_LookupEntityRecordById(int a);
-extern int __cdecl fcn_004a92c0(int a0, int obj, void *rec, char *out, int a4);
+extern int __cdecl ai_PreparePrivBeleidigung(int a0, int obj, void *rec, char *out, int a4);
 extern int __cdecl fcn_004a93a0(int a0, int obj, void *rec, char *out, int a4);
 extern int __cdecl fcn_004a9470(int a0, int obj, void *rec, char *out, int a4);
 extern int __cdecl fcn_004a9540(int a0, int obj, void *rec, char *out, int a4);
@@ -108,7 +108,7 @@ unsigned int __cdecl fcn_004aa240(int a0, int entity, int a2, char *request, int
     switch (id)
     {
     case 0:
-        return fcn_004a92c0(a0, entity, &rec, request, a4);
+        return ai_PreparePrivBeleidigung(a0, entity, &rec, request, a4);
     case 3:
         return fcn_004a93a0(a0, entity, &rec, request, a4);
     case 4:

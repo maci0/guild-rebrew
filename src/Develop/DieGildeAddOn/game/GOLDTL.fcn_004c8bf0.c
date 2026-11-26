@@ -15,7 +15,7 @@ typedef struct {
 int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 
-int __cdecl fcn_004c8bf0(char* x, char* out)
+int __cdecl cm_ExChangeDesire(char* x, char* out)
 {
 	char* e;
 	unsigned char* q;

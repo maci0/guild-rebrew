@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_004e4730(char *);
-int __cdecl fcn_004e4ec0(void);
+int __cdecl d3_UpdateSeasonTextures(void);
 int __cdecl fcn_00536bb0(void);
 void __cdecl fcn_00459710(int, int);
 int __cdecl sb_LoadSampleBank(char *, int);
@@ -22,7 +22,7 @@ void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 int __cdecl fcn_00445600(int, int, int, char *);
 void __cdecl fcn_00442c00(int, int);
-void __cdecl fcn_00508c30(int, void *);
+void __cdecl gm_GenerateShuffledByteIndices(int, void *);
 void __cdecl d3_SetSubtreeVisible(int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl gm_FindRecordById(int);
@@ -31,7 +31,7 @@ void __cdecl d3_TransformPoint(int, int, void *);
 int __cdecl fcn_004488e0(char *, int, int);
 void __cdecl fcn_00438b40(int, void *);
 void __cdecl fcn_0045b290(int, int);
-int __cdecl fcn_0050c710(int, int, int);
+int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl gm_CheckEntityType(void *);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_664ef8;
@@ -115,7 +115,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 		}
 	}
 	cur = *(int *) (*(int *) &g_67a370 + 0xb0);
-	fcn_004e4ec0();
+	d3_UpdateSeasonTextures();
 	if (*(int *) &g_6b8300 != 0) {
 		*(int *) (*(int *) &d3_CurrentContextIndex * 0x3dc + 0x1043378) = *(int *) 0x1043378;
 		g_6b89c0 = *(int *) 0x1043378;
@@ -271,7 +271,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 		slots[0] = 0;
 		slots[1] = 0;
 		slots[2] = 0;
-		fcn_00508c30(9, ids);
+		gm_GenerateShuffledByteIndices(9, ids);
 		i++;
 		fcn_0064d41a(buf, "dummy_KARREN_0%i", i);
 		h = fcn_00445600(0, 0x100, 0, buf);
@@ -345,7 +345,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 				}
 			}
 			if (first != 0) {
-				*(float *) 0x68b798 = (float) fcn_0050c710(first, 6, 1) + 1.4f;
+				*(float *) 0x68b798 = (float) gm_GetBuildingTechEffect(first, 6, 1) + 1.4f;
 			} else {
 				*(float *) 0x68b798 = 1.0f;
 			}

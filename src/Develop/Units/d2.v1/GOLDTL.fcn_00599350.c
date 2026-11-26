@@ -64,8 +64,8 @@ void __cdecl fcn_0050bc10(int, unsigned char, char*);
 int __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_0046f940(int, const char*);
 int __cdecl d2_ClearWindowChildren(int, int);
-char* __cdecl fcn_00507ab0(int);
-int __cdecl fcn_00526070(int, int, int, int);
+char* __cdecl gm_FindPublicTreasury(int);
+int __cdecl d2_CheckFundsAndNotify(int, int, int, int);
 int __cdecl fcn_00526010(void*, int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl lc_GebaeudeAusrichten(int, char*);
@@ -173,7 +173,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 			mode = 0;
 			if (g_6aa0a8 == 3) {
 				g_7746f8 = 1;
-				mode = fcn_00507ab0(1);
+				mode = gm_FindPublicTreasury(1);
 			} else {
 				g_7746f8 = 0;
 			}
@@ -226,7 +226,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 			prevIdx = d2_CurrentElementId;
 			if (mode != 0) {
 				txt = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
-				if (!fcn_00526070((int) mode, *(int*) (mode + 0x14), txt, g_773d75)) {
+				if (!d2_CheckFundsAndNotify((int) mode, *(int*) (mode + 0x14), txt, g_773d75)) {
 					goto skip_place;
 				}
 			} else {

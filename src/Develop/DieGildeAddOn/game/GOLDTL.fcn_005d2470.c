@@ -11,7 +11,7 @@ int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl fcn_00526010(void*, int, int);
 void __cdecl fcn_004c5150(int, int, int, int);
-void __cdecl fcn_004c4510(void*, int);
+void __cdecl cm_BeginPacketFieldDelta(void*, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c4eb0(char*);
@@ -106,7 +106,7 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 				fcn_004c5150(*(int*) ((char*) arg3 + 4),
 				    *(int*) ((char*) arg2 + 4),
 				    *(unsigned char*) &g_773d75, uv);
-				fcn_004c4510(arg2, *(int*) ((char*) arg2 + 4));
+				cm_BeginPacketFieldDelta(arg2, *(int*) ((char*) arg2 + 4));
 				cm_AppendPacketFieldDelta(4, 1, 0x1c8, (char*) &flags);
 				fcn_004c5360();
 				fcn_004c4ef0((char*) 0x6acba4);

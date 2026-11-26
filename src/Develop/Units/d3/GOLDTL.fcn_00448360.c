@@ -26,7 +26,7 @@ int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl fcn_00401280(void* stream, void* dst);
 void __cdecl ReportClientMessage(const char* msg);
-void __cdecl fcn_00438920(float a, float b, int c);
+void __cdecl d3_SetFog(float a, float b, int c);
 void __cdecl fcn_00438b40(char* object, int* vector);
 void __cdecl d3_SetObjectRotation(char* object, int* vector);
 char* __cdecl fcn_00437890(char* object);
@@ -114,7 +114,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 			fcn_004011f0(s, &fog_color);
 			fcn_004011d0(s, &fog_a);
 			fcn_004011d0(s, &fog_b);
-			fcn_00438920(fog_a, fog_b, fog_color);
+			d3_SetFog(fog_a, fog_b, fog_color);
 		}
 		/* The reference writes the row count into index before the loop
 		 * and never reads it back. */

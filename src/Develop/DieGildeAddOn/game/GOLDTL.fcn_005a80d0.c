@@ -12,7 +12,7 @@ int __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3, int a4);
 int __cdecl d3_SelectSceneContext(int a0, int a1);
 void __cdecl fcn_0043aa30(int a0);
 void __cdecl fcn_005167c0(unsigned char* a0, int a1);
-void __cdecl fcn_00516c50(int a0, unsigned char* a1);
+void __cdecl d3_SetupInteriorScene(int a0, unsigned char* a1);
 int __cdecl gm_GetBuildingTypeCategory(int a0);
 void __cdecl fcn_00438b40(char* p, int* v);
 void __cdecl d3_SetObjectRotation(int a0, int a1);
@@ -105,7 +105,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 			}
 		}
 		fcn_005167c0((unsigned char*) *(int*) &g_7746c8, *(unsigned short*) p);
-		fcn_00516c50(*(int*) &g_7746c8, p);
+		d3_SetupInteriorScene(*(int*) &g_7746c8, p);
 		if (*(int*) &g_67a370 != 0) {
 			v10 = *(int*) (*(int*) &g_67a370 + 0x3c8);
 			if (v10 != 0 && *(int*) (v10 + 0x210) != 0) {

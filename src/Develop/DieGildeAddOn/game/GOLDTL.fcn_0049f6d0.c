@@ -26,7 +26,7 @@ extern unsigned char* lpGebaeudeINST;
 
 int __cdecl gm_CheckZunftPreismanipulation(char*);
 int __cdecl fcn_00507910(int);
-int __cdecl fcn_004a40c0(Calc*);
+int __cdecl ai_EvalRecipePriceRatios(Calc*);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0049f6d0 */
@@ -160,7 +160,7 @@ unsigned int __cdecl ai_StartZunftPreismanipulation(int a0, unsigned short* acto
 			have = 0xf;
 		total[i] = count;
 		matched[i] = have;
-		if (count >= 1 && fcn_004a40c0(&calc[i])) {
+		if (count >= 1 && ai_EvalRecipePriceRatios(&calc[i])) {
 			score = ((float) total[i] + 1.0f - (float) matched[i]) / (float) total[i] *
 				((16.0f - (float) matched[i]) * 0.06666667f) *
 				calc[i].avg;

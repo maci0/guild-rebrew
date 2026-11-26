@@ -11,7 +11,7 @@ void __cdecl fcn_00516550(void);
 void __cdecl fcn_005165b0(void);
 void __cdecl fcn_00516040(void);
 
-void __cdecl fcn_004e4ec0(void)
+void __cdecl d3_UpdateSeasonTextures(void)
 {
 	fcn_00500e20(((char*)&gm_GameTime));
 	d3_TraverseSceneObjects(g_67a370, 0, 0xc0, fcn_00516550);

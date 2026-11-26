@@ -6,7 +6,7 @@
 extern int g_14ce8e0, d2_CurrentElementId, g_7e2468;
 extern char g_6b5c60[], g_7e23e8;
 void __cdecl ch_SetVisible(void* obj, int value);
-void __cdecl fcn_00402b00(void* obj, void* dev);
+void __cdecl ch_SetToDummy(void* obj, void* dev);
 void __cdecl ch_DestroyCharacter(void* obj);
 void* __cdecl ch_CreateAtPosition(char* name, void* pos);
 void __cdecl ch_CreateAction(void* obj, int mode, int value);
@@ -153,7 +153,7 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 			strcpy((char*) 0x7e2435, name);
 			g_7e2468 = fcn_004fdec0(name) + 0x639;
 			obj = ch_CreateAtPosition(name, pos);
-			fcn_00402b00(obj, dev);
+			ch_SetToDummy(obj, dev);
 			ch_SetVisible(obj, 0);
 			*(unsigned char*) (*(int*) ((char*) obj + 0x34) + 0x215) &= 0xfe;
 			*(unsigned char*) ((char*) obj + 0x8c) |= 8;

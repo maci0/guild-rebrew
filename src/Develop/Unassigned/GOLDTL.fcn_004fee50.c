@@ -1,4 +1,4 @@
-void __cdecl fcn_004c4510(char* base, int entity_id);
+void __cdecl cm_BeginPacketFieldDelta(char* base, int entity_id);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
 void __cdecl fcn_004c5480(int id, int kind, float value);
 void __cdecl fcn_004c5360(void);
@@ -27,7 +27,7 @@ void __cdecl fcn_004fee50(char* o, int v)
 			}
 			fcn_004c5480(*(int*) (o + 4), 0x1c, x - *(float*) (o + 0x1c));
 		}
-		fcn_004c4510(o, *(int*) (o + 4));
+		cm_BeginPacketFieldDelta(o, *(int*) (o + 4));
 		cm_AppendPacketFieldDelta(2, 1, 10, (char*) &v);
 		fcn_004c5360();
 		g_773d48++;

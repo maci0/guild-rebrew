@@ -118,7 +118,7 @@ void __cdecl fcn_004ad8c0(void)
 			kind = kinds[j];
 			o = fcn_004c4480(h);
 			fcn_004c5150(*(int *) (o + 4), -1, g_773d75, v);
-			fcn_004c4510(o, *(int *) (o + 4));
+			cm_BeginPacketFieldDelta(o, *(int *) (o + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, &seven);
 			cm_AppendPacketFieldDelta(1, 1, 0x167, &kind);
 			fcn_004c5360();

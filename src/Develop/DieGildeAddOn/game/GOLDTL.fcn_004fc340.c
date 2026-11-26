@@ -6,7 +6,7 @@ extern const double g_6640f8;
 
 void __cdecl fcn_004f4830(int, int*);
 
-double __cdecl fcn_004fc340(void)
+double __cdecl gm_CalcLaw00And01Factor(void)
 {
 	int a[9];
 	int b[9];

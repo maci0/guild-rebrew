@@ -8,9 +8,9 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
-int __cdecl fcn_004e8240(unsigned char, char*, char*, int, int);
-void __cdecl fcn_004ea4b0(void*, unsigned int);
-void __cdecl fcn_004ea560(void*, unsigned int);
+int __cdecl amt_SendOfficeCommand(unsigned char, char*, char*, int, int);
+void __cdecl amt_NotifyOfficeAppointed(void*, unsigned int);
+void __cdecl amt_NotifyOfficeLost(void*, unsigned int);
 
 /* ADDRESS: GOLDTL 0x004ea620 */
 void __cdecl fcn_004ea620(void)
@@ -137,36 +137,36 @@ void __cdecl fcn_004ea620(void)
 	if (existing != 0) {
 		t = *(unsigned char*) (best + 0x164);
 		if (abs(*(unsigned char*) (existing + 0x164) - t) < 6) {
-			fcn_004ea560(existing, *(unsigned char*) (existing + 0x169));
-			fcn_004ea4b0(best, *(unsigned char*) (existing + 0x169));
+			amt_NotifyOfficeLost(existing, *(unsigned char*) (existing + 0x169));
+			amt_NotifyOfficeAppointed(best, *(unsigned char*) (existing + 0x169));
 			t = *(unsigned char*) (best + 0x164);
 			if (t >= 1 && t <= 6) {
-				fcn_004e8240((unsigned char) b[0], best, 0, 1, 0xff);
+				amt_SendOfficeCommand((unsigned char) b[0], best, 0, 1, 0xff);
 			} else {
-				fcn_004e8240((unsigned char) a[0], best, 0, 1, 0xff);
+				amt_SendOfficeCommand((unsigned char) a[0], best, 0, 1, 0xff);
 			}
 			return;
 		}
 		if (t >= 1 && t <= 6) {
-			fcn_004e8240((unsigned char) b[0], best, 0, 1, 0xff);
-			fcn_004e8240((unsigned char) a[0], 0, 0, 1, 0xff);
+			amt_SendOfficeCommand((unsigned char) b[0], best, 0, 1, 0xff);
+			amt_SendOfficeCommand((unsigned char) a[0], 0, 0, 1, 0xff);
 			kind = 0x1c;
 		} else {
-			fcn_004e8240((unsigned char) b[0], 0, 0, 1, 0xff);
-			fcn_004e8240((unsigned char) a[0], best, 0, 1, 0xff);
+			amt_SendOfficeCommand((unsigned char) b[0], 0, 0, 1, 0xff);
+			amt_SendOfficeCommand((unsigned char) a[0], best, 0, 1, 0xff);
 			kind = 0x1d;
 		}
-		fcn_004ea560(existing, *(unsigned char*) (existing + 0x169));
-		fcn_004ea4b0(best, kind);
+		amt_NotifyOfficeLost(existing, *(unsigned char*) (existing + 0x169));
+		amt_NotifyOfficeAppointed(best, kind);
 		return;
 	}
 	t = *(unsigned char*) (best + 0x164);
 	if (t >= 1 && t <= 6) {
-		fcn_004e8240((unsigned char) b[0], best, 0, 1, 0xff);
+		amt_SendOfficeCommand((unsigned char) b[0], best, 0, 1, 0xff);
 		kind = 0x1c;
 	} else {
-		fcn_004e8240((unsigned char) a[0], best, 0, 1, 0xff);
+		amt_SendOfficeCommand((unsigned char) a[0], best, 0, 1, 0xff);
 		kind = 0x1d;
 	}
-	fcn_004ea4b0(best, kind);
+	amt_NotifyOfficeAppointed(best, kind);
 }

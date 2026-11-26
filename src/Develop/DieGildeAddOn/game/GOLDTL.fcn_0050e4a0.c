@@ -3,31 +3,31 @@
 
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 
-void* __cdecl fcn_0050e4a0(int k)
+void* __cdecl gm_FindPublicBuilding(int building_slot)
 {
-	void* r;
+	void* building;
 
-	r = 0;
-	switch (k) {
+	building = 0;
+	switch (building_slot) {
 	case 1:
-		r = gm_StartFilteredEntitySearch(1, 5, 0xf);
+		building = gm_StartFilteredEntitySearch(1, 5, 0xf);
 		break;
 	case 6:
 	case 7:
-		r = 0;
+		building = 0;
 		break;
 	case 2:
-		r = gm_StartFilteredEntitySearch(1, 5, 0x17);
+		building = gm_StartFilteredEntitySearch(1, 5, 0x17);
 		break;
 	case 3:
-		r = gm_StartFilteredEntitySearch(1, 5, 0x18);
+		building = gm_StartFilteredEntitySearch(1, 5, 0x18);
 		break;
 	case 4:
-		r = gm_StartFilteredEntitySearch(1, 5, 0x19);
+		building = gm_StartFilteredEntitySearch(1, 5, 0x19);
 		break;
 	case 5:
-		r = gm_StartFilteredEntitySearch(1, 5, 0x1a);
+		building = gm_StartFilteredEntitySearch(1, 5, 0x1a);
 		break;
 	}
-	return r;
+	return building;
 }

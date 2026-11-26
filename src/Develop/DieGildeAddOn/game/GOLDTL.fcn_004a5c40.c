@@ -6,7 +6,7 @@ extern int g_77261c;
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
-int __cdecl fcn_004e99c0(int);
+int __cdecl amt_GetOfficeRank(int);
 
 /* ADDRESS: GOLDTL 0x004a5c40 */
 unsigned int __cdecl fcn_004a5c40(unsigned short* source, unsigned int count, unsigned int a2,
@@ -40,7 +40,7 @@ unsigned int __cdecl fcn_004a5c40(unsigned short* source, unsigned int count, un
 	if ((lo > *(double*) 0x662950 || hi < *(double*) 0x662c38) && lo < hi) {
 		flag = 1;
 	}
-	base = fcn_004e99c0(*(unsigned char*) ((char*) source + 0x166));
+	base = amt_GetOfficeRank(*(unsigned char*) ((char*) source + 0x166));
 	if (have < count) {
 		do {
 			query[1] = a2;
@@ -63,7 +63,7 @@ unsigned int __cdecl fcn_004a5c40(unsigned short* source, unsigned int count, un
 							continue;
 						}
 					}
-					diff = abs(base - fcn_004e99c0(
+					diff = abs(base - amt_GetOfficeRank(
 								     *(unsigned char*) (cand * 0x21c +
 										0x7f4e06)));
 					if (diff <= range) {

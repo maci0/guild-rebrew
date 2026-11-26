@@ -4,10 +4,10 @@
 
 /* ADDRESS: GOLD 0x004e6650 */
 /* ADDRESS: GOLDTL 0x004e8210 */
-int __cdecl fcn_004e8210(int a1, unsigned char* payload, int a3)
+int __cdecl amt_AssignOfficeHolder(int office_id, unsigned char* payload, int mode)
 {
 	if (payload == 0) {
 		return -1;
 	}
-	return fcn_004e8240(a1, payload, 0, 1, a3);
+	return amt_SendOfficeCommand(office_id, payload, 0, 1, mode);
 }

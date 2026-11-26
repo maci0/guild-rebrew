@@ -25,9 +25,9 @@ extern unsigned char g_773d75;
 
 int __cdecl fcn_004efd30(int);
 int __cdecl fcn_004a6160(char*, void*, int, void*);
-void __cdecl fcn_004f10d0(char*, int*, int*);
+void __cdecl gm_GetArtilleryLimits(char*, int*, int*);
 void __cdecl fcn_004f0f60(int, void*);
-float __cdecl fcn_004f1290(char*);
+float __cdecl gm_GetCannonPowerScale(char*);
 int __cdecl fcn_005e8de0(float, float, float*);
 void __cdecl fcn_005e8e50(float, float, char*, float*);
 int __cdecl fcn_005ea4d0(void*, void*, void*, void*, void*, void*, void*, void*, void*);
@@ -74,11 +74,11 @@ int __cdecl fcn_004a6210(char* actor, char* a1, int a2)
 	p = (int*) fcn_004efd30(*(int*) (a1 + 1));
 	if (p == 0) return 0;
 	if (fcn_004a6160(a1, origin, a2, target) != 0) return 0;
-	fcn_004f10d0(a1, &row, &col);
+	gm_GetArtilleryLimits(a1, &row, &col);
 	col = gm_RandomMod(col + 1) & 0xffff;
 	fcn_004f0f60(col, profile);
 	if (*(int*) (actor + 0x194) < profile[1]) return 0;
-	value.level = fcn_004f1290(a1);
+	value.level = gm_GetCannonPowerScale(a1);
 	row = gm_RandomMod(row + 1) & 0xffff;
 	fcn_005e8de0(g_6660f4, *(float*) (col * 0xc + 0x665290), entry);
 	off = col * 0xc;

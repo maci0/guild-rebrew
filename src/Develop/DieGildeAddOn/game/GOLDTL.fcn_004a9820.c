@@ -8,7 +8,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 
-int __cdecl fcn_004a9820(char* a1, char* entity, char* a3, char* a4, char* out)
+int __cdecl ai_CheckAction035Predicate(char* unused, char* entity, char* ctx, char* unused2, char* out)
 {
 	int id;
 	float score;
@@ -26,10 +26,10 @@ int __cdecl fcn_004a9820(char* a1, char* entity, char* a3, char* a4, char* out)
 	if (*(int*) (entity + 0x194) < 4) {
 		return 0x20;
 	}
-	if (*(int*) a3 == 1) {
+	if (*(int*) ctx == 1) {
 		id = *(int*) (entity + 4);
-	} else if (*(int*) a3 == 2 && *(char**) (a3 + 0x21c) != 0) {
-		id = *(int*) (*(char**) (a3 + 0x21c) + 4);
+	} else if (*(int*) ctx == 2 && *(char**) (ctx + 0x21c) != 0) {
+		id = *(int*) (*(char**) (ctx + 0x21c) + 4);
 	} else {
 		return 0;
 	}

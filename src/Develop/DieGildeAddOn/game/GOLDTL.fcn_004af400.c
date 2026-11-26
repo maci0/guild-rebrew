@@ -9,7 +9,7 @@ extern unsigned char g_773d75;
 
 /* Callees of this translation unit; see src/GOLDTL.fcn_004af2f0.c, the
  * sibling in the same address family. */
-void* __cdecl fcn_0050e4a0(int);
+void* __cdecl gm_FindPublicBuilding(int);
 void* __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004ae080(char*, char*, int*, char**);
@@ -31,7 +31,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
  * frame to 0x210); the same block shape is what keeps the caller's copy of
  * a4 in esi, so the tail adds the length in edx instead of reusing esi. */
 #pragma optimize("y", off)
-int __cdecl fcn_004af400(int a1, int a2, int a3, char* a4, int a5)
+int __cdecl hst_HandleStadtkasse(int unused1, int unused2, int unused3, char* token_text, int text_out)
 {
 	char buf[0x200];
 	char* p;
@@ -40,7 +40,7 @@ int __cdecl fcn_004af400(int a1, int a2, int a3, char* a4, int a5)
 	void* e;
 	unsigned short k;
 
-	e = fcn_0050e4a0(1);
+	e = gm_FindPublicBuilding(1);
 	if (e == 0)
 		return 0;
 	e = fcn_00502cd0(*(int*) ((char*) e + 0x5d), 2, 6, 0, 0x115);
@@ -81,9 +81,9 @@ int __cdecl fcn_004af400(int a1, int a2, int a3, char* a4, int a5)
 	{
 		int n;
 
-		fcn_004ae080(a4, buf, &n, &p);
-		n = atoi(a4 + n);
-		io_FormatTextBuffer((void*) a5, (int) buf,
+		fcn_004ae080(token_text, buf, &n, &p);
+		n = atoi(token_text + n);
+		io_FormatTextBuffer((void*) text_out, (int) buf,
 		    fcn_0050b710((int) (((float) n * 0.01f) * (float) v),
 		    g_773d75),
 		    g_773d75);

@@ -28,7 +28,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl d2_DispatchTutorialEvent(int, char*, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(char*);
-void __cdecl fcn_0050de80(char*, char*);
+void __cdecl gm_CalcEntityInventoryStats(char*, char*);
 int __cdecl fcn_0050ddf0(int, int);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_0057e880(int, char*, int, int);
@@ -60,7 +60,7 @@ int __cdecl fcn_005b9df0(int idx, char* p, char* q, char* r)
 		g_77531c = (char) *(int*) (msg + 0x78);
 		fcn_004c5530(msg);
 		if (p[0x28] != 0) {
-			fcn_0050de80(p, info);
+			gm_CalcEntityInventoryStats(p, info);
 			res = fcn_0050ddf0(*(int*) (info + 0xb0), p[0x28]);
 			fcn_004c51a0(-1, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_id, g_773d75, res);
 		}

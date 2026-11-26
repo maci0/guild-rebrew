@@ -17,7 +17,7 @@ unsigned char* __cdecl gm_AddObjekt(void);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_0050ff70(unsigned char*, int);
+void __cdecl gm_AdjustGebaeudeCondition(unsigned char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
@@ -42,7 +42,7 @@ void __cdecl fcn_00551050(char* u)
 		if (n != 0) {
 			e = cand[gm_RandomMod(n)];
 			if (e != 0) {
-				fcn_0050ff70(e, -0x32);
+				gm_AdjustGebaeudeCondition(e, -0x32);
 			}
 			if (((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_state == 6) {
 				io_FormatTextBuffer(text, 0x10b8, e);

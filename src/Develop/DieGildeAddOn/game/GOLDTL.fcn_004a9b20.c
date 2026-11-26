@@ -12,21 +12,21 @@ int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fa5b0(int, char*, int);
 int __cdecl fcn_004a8880(char*, char*, int, char*, int);
 int __cdecl fcn_004a8b70(char*, char*, int, char*, int);
-int __cdecl fcn_004a8bf0(char*, char*, int, char*, int);
-int __cdecl fcn_004a8d10(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction01cPredicate(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction01dPredicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a8d40(char*, char*, int, char*, int);
 int __cdecl fcn_004a8da0(char*, char*, int, char*, int);
 int __cdecl fcn_004a8e40(char*, char*, int, char*, int);
 int __cdecl fcn_004a8ed0(char*, char*, int, char*, int);
-int __cdecl fcn_004a9000(char*, char*, int, char*, int);
-int __cdecl fcn_004a9040(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction029Predicate(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction02aPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction02bPredicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a91a0(char*, char*, int, char*, int);
-int __cdecl fcn_004a9270(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction02dPredicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a96f0(char*, char*, int, char*, int);
 int __cdecl fcn_004a9780(char*, char*, int, char*, int);
-int __cdecl fcn_004a9820(char*, char*, int, char*, int);
-int __cdecl fcn_004a99a0(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction035Predicate(char*, char*, int, char*, int);
+int __cdecl ai_SelectAction037Target(char*, char*, int, char*, int);
 
 int __cdecl fcn_004a8d30(char*, char*, int, char*, int);
 
@@ -129,10 +129,10 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 		r = fcn_004a8b70(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x1c:
-		r = fcn_004a8bf0(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction01cPredicate(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x1d:
-		r = fcn_004a8d10(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction01dPredicate(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x21:
 		r = fcn_004a8d30(a0, actorEntity, (int) &c, a3, a4);
@@ -150,10 +150,10 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 		r = fcn_004a8ed0(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x29:
-		r = fcn_004a9000(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction029Predicate(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x2a:
-		r = fcn_004a9040(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction02aPredicate(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x2b:
 		r = ai_CheckAction02bPredicate(a0, actorEntity, (int) &c, a3, a4);
@@ -162,7 +162,7 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 		r = fcn_004a91a0(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x2d:
-		r = fcn_004a9270(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction02dPredicate(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x31:
 		r = fcn_004a96f0(a0, actorEntity, (int) &c, a3, a4);
@@ -171,10 +171,10 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 		r = fcn_004a9780(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x35:
-		r = fcn_004a9820(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction035Predicate(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x37:
-		r = fcn_004a99a0(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_SelectAction037Target(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	}
 	return r;

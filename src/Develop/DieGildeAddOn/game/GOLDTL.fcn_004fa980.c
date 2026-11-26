@@ -20,10 +20,10 @@ void __cdecl fcn_004f4830(int kind, Offer* o);
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004fa6f0(char* pos, int* x, int* y);
 
-void __cdecl fcn_004fa980(int key, unsigned char kind)
+void __cdecl cm_SubtractCrimeGrid(int key, unsigned char kind)
 {
 	int x;
-	char* p;
+	char* entity;
 	Offer offer;
 	int y;
 	int xmax;
@@ -32,11 +32,11 @@ void __cdecl fcn_004fa980(int key, unsigned char kind)
 	int j;
 
 	fcn_004f4830(kind, &offer);
-	gm_ResolveEntityById((void**) (&p), 0, 0, key);
+	gm_ResolveEntityById((void**) (&entity), 0, 0, key);
 	x = gm_RandomMod(8);
 	y = gm_RandomMod(8);
-	if (p != 0 && *(char**) (p + 0x61) != 0) {
-		fcn_004fa6f0(*(char**) (p + 0x61) + 0x4c, &x, &y);
+	if (entity != 0 && *(char**) (entity + 0x61) != 0) {
+		fcn_004fa6f0(*(char**) (entity + 0x61) + 0x4c, &x, &y);
 		g_99ef80[x][y].supply -= offer.amount;
 		if (x + 1 > 8) {
 			xmax = 8;

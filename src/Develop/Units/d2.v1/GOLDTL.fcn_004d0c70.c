@@ -51,7 +51,7 @@ extern Win_1015f40 g_1015f40[0x60];
 int __cdecl fcn_004cef70(int a1, char* a2);
 int __cdecl fcn_00469c30(int x, int y, int a3);
 int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
-char** __cdecl fcn_004ce610(char* x);
+char** __cdecl gm_GetEquippedCombatGear(char* x);
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 void __cdecl fcn_00472680(int id, int a2);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -84,7 +84,7 @@ void __cdecl fcn_004d0c70(void)
 		if (unit != 0 && (fcn_004cef70(((Game*)g_772f24)->id, unit) & 0x800) != 0) {
 			g_9b4840[k].frame = fcn_00469c30(k * 0x80 + 0x18, 0xf, 0x5da);
 			g_9b4840[k].win = fcn_0046e940(k * 0x80, 0, 0x80, 0x4b, 0x110);
-			name = fcn_004ce610(unit);
+			name = gm_GetEquippedCombatGear(unit);
 			if (name != 0 && *name != 0) {
 				g_9b4840[k].name = d2_AddElementToWindow(0x54, 0xf, (int) (*name + 0xdf), d2_CurrentWindowId);
 				fcn_00472680(g_9b4840[k].name, -2);

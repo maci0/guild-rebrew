@@ -4,7 +4,7 @@ typedef struct {
 } Rec24;
 
 int __cdecl fcn_004f4980(char*, int, Rec24*);
-void __cdecl fcn_004f5110(void*, int);
+void __cdecl gm_FormatLawName(void*, int);
 int __cdecl fcn_005d6540(void*, void*);
 
 /* ADDRESS: GOLDTL 0x004f8140 */
@@ -21,7 +21,7 @@ int __cdecl fcn_004f8140(char* a1, int* a2)
 		if (fcn_004f4980(a1, 1, &rec) == 0)
 			return 1;
 		if (a1[2] == 6)
-			fcn_004f5110((char*) a2 + 0x14, rec.id);
+			gm_FormatLawName((char*) a2 + 0x14, rec.id);
 		if (*(int*) (a1 + 0x1c8) & 0x200)
 			return 9;
 		if (*(int*) (a1 + 0x1c8) & 0x80000)
@@ -47,7 +47,7 @@ int __cdecl fcn_004f8140(char* a1, int* a2)
 			*(int*) ((char*) a2 + 0x214) = 1;
 			result = fcn_005d6540(a1, a2);
 		} else if (a1[2] == 6) {
-			fcn_004f5110((char*) a2 + 0x14, rec.id);
+			gm_FormatLawName((char*) a2 + 0x14, rec.id);
 		}
 		return result | 10;
 	}

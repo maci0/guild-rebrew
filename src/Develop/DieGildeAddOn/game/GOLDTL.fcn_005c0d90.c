@@ -23,7 +23,7 @@ extern char g_6ac494[];
 
 int __cdecl fcn_0055c140(void*, unsigned short*, int*);
 int __cdecl fcn_00579640(unsigned short*, void*);
-int __cdecl fcn_00525f60(void*, int);
+int __cdecl d2_CheckActionBlocker(void*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00470820(int, int, void*);
@@ -71,7 +71,7 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	if (fcn_00525f60(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1) == 0) {
+	if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1) == 0) {
 		return 0;
 	}
 	d = fcn_00470820(0, 0, g_6ac494);

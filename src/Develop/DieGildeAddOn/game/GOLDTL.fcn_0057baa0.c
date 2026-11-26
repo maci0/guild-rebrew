@@ -6,9 +6,9 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 void __cdecl fcn_004acf60(void);
-void __cdecl fcn_004ad1c0(void);
+void __cdecl amt_SpawnHistoricalOfficeHolders(void);
 void __cdecl fcn_004ad2e0(void);
-void __cdecl fcn_004ad630(void);
+void __cdecl amt_VacateSpecialOffice(void);
 void __cdecl fcn_004ad6a0(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl sim_SetSyncParams(pos14_7f4c00*, int, int, int);
@@ -25,7 +25,7 @@ void __cdecl fcn_0057baa0(char* o)
 		fcn_004c5620(1, o);
 		break;
 	case 1:
-		fcn_004ad1c0();
+		amt_SpawnHistoricalOfficeHolders();
 		gm_AddTime((pos14_7f4c00*) (o + 0x52), 2, 0, 0);
 		fcn_004c5620(2, o);
 		break;
@@ -35,7 +35,7 @@ void __cdecl fcn_0057baa0(char* o)
 		fcn_004c5620(3, o);
 		break;
 	case 3:
-		fcn_004ad630();
+		amt_VacateSpecialOffice();
 		sim_SetSyncParams((pos14_7f4c00*) (o + 0x52), 6, 5, 0);
 		((pos14_7f4c00*) (o + 0x52))->a++;
 		fcn_004c5620(4, o);

@@ -114,14 +114,14 @@ float __cdecl fcn_005a8a30(char* a);
 int __cdecl gm_AccumulateTyped2(void* m);
 void* __cdecl fcn_00502cd0(int list, int mode, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_0050cce0(char* o, Stock* out, int producers);
-int __cdecl fcn_0050de80(char* e, Stock* s);
+int __cdecl gm_CollectBuildingStock(char* o, Stock* out, int producers);
+int __cdecl gm_CalcEntityInventoryStats(char* e, Stock* s);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0047d1b0(void);
-int __cdecl fcn_0047d1e0(void);
+int __cdecl he_CountActiveTradeActions(void);
 void __cdecl gm_AddTime(void*, int, int, int);
-void __cdecl fcn_004c4510(char* a, int b);
+void __cdecl cm_BeginPacketFieldDelta(char* a, int b);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count,
 	unsigned short off, char* src);
 void __cdecl fcn_004c5360(void);
@@ -308,8 +308,8 @@ dump_stock:
 	}
 
 	/* 0x0334-0x03a7: collect the own stock lanes */
-	fcn_0050cce0(*(char**) (o + 0x16c), &v.s1, 1);
-	fcn_0050cce0(*(char**) (o + 0x16c), &v.s3, 0);
+	gm_CollectBuildingStock(*(char**) (o + 0x16c), &v.s1, 1);
+	gm_CollectBuildingStock(*(char**) (o + 0x16c), &v.s3, 0);
 
 	/* 0x03a7-0x0420: drop producer requests already being handled */
 	for (i = 0; i < ai_ResourceCount; i++) {
@@ -325,7 +325,7 @@ dump_stock:
 		if (*(int*) (r + 0x1c) == 4) {
 			continue;
 		}
-		fcn_004c4510(r, *(int*) (r + 2));
+		cm_BeginPacketFieldDelta(r, *(int*) (r + 2));
 		cm_AppendPacketFieldDelta(4, 1,
 		    (unsigned short) ((r - *(char**) 0xaed32c) + 0x1c),
 		    (char*) &tmp);
@@ -350,7 +350,7 @@ dump_stock:
 				continue;
 			}
 			tmp = 0;
-			fcn_004c4510(r, *(int*) (r + 2));
+			cm_BeginPacketFieldDelta(r, *(int*) (r + 2));
 			cm_AppendPacketFieldDelta(4, 1,
 			    (unsigned short) ((r - *(char**) 0xaed32c) + 0x1c),
 			    (char*) &tmp);
@@ -405,7 +405,7 @@ next_request:
 	cnt = 0;
 	sent = 0;
 	n = 0;
-	if (fcn_0047d1e0() > fcn_0047d1b0()) {
+	if (he_CountActiveTradeActions() > fcn_0047d1b0()) {
 		*(unsigned char*) ((char*) &v.m + 0x9d) = 1;
 	}
 	for (i = 0; i < 3; i++) {
@@ -414,7 +414,7 @@ next_request:
 		v.m.ids[3 + i] = 0;
 		v.m.slots[3 + i] = -1;
 	}
-	fcn_0050de80(r, &v.s2);
+	gm_CalcEntityInventoryStats(r, &v.s2);
 	q = (char*) fcn_00502cd0(*(int*) (r + 0x14), 1, 0, 0x1dd);
 	if (q == 0) {
 		q = (char*) fcn_00502cd0(*(int*) (r + 0x14), 1, 0, 0x1dd);

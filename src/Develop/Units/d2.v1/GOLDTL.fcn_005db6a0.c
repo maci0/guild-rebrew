@@ -30,7 +30,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -88,7 +88,7 @@ int __cdecl fcn_005db6a0(char* e, char* o)
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
-			if (d2_CurrentElementId == ok && fcn_00525f60(e, 4) != 0) {
+			if (d2_CurrentElementId == ok && d2_CheckActionBlocker(e, 4) != 0) {
 				h = fcn_005db3d0(e, (char*) g, 2);
 				while (h != -1 && fcn_004c4450(h) == 0) {
 					fcn_00535960();

@@ -8,7 +8,7 @@ char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl gm_AddObjekt(int a, int b, int c);
 void __cdecl fcn_00501d20(int season);
 
-int __cdecl fcn_004ee8c0(char* obj, char* tgt, char* src)
+int __cdecl ahm_AllocateEntitySlot(char* obj, char* tgt, char* src)
 {
 	int i;
 	char* query;

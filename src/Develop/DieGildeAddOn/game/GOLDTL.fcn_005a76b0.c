@@ -17,7 +17,7 @@ void __cdecl fcn_0043aa30(int);
 int __cdecl d3_TraverseSceneObjects(void*, int, int, void*);
 void __cdecl fcn_005166a0(char*);
 void __cdecl fcn_005167c0(char*, int);
-void __cdecl fcn_00516c50(char*, char*);
+void __cdecl d3_SetupInteriorScene(char*, char*);
 void __cdecl fcn_00438b40(void*, void*);
 void __cdecl d3_SetObjectRotation(void*, void*);
 int __cdecl fcn_00504bd0(int);
@@ -145,7 +145,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 fcn_005166a0(o);
                 t = *(int*) &g_7746c4;
                 fcn_005167c0((char*) t, (int) *(u16*) (t + 0x29));
-                fcn_00516c50((char*) *(int*) &g_7746c4, (char*) *(int*) &g_7746cc);
+                d3_SetupInteriorScene((char*) *(int*) &g_7746c4, (char*) *(int*) &g_7746cc);
                 t = *(int*) &d3_ActiveCamera;
                 fcn_00438b40((void*) t, (char*) t + 0x5c);
                 t = *(int*) &d3_ActiveCamera;

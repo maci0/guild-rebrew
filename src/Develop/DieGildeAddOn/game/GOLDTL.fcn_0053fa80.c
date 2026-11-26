@@ -36,7 +36,7 @@ void __cdecl fcn_004230e0(int p);
 void __cdecl fcn_004b1f80(void);
 void __cdecl fcn_004b3b60(void);
 void __cdecl fcn_00545510(void);
-void __cdecl fcn_00545930(void);
+void __cdecl d2_ClearActionPopupSlots(void);
 void __cdecl fcn_00545550(void);
 void __cdecl fcn_00527420(void);
 void __cdecl gm_KillAllSpieler(void);
@@ -95,7 +95,7 @@ void __cdecl fcn_0053fa80(void)
 	fcn_004b1f80();
 	fcn_004b3b60();
 	fcn_00545510();
-	fcn_00545930();
+	d2_ClearActionPopupSlots();
 	fcn_00545550();
 	fcn_00527420();
 	gm_KillAllSpieler();

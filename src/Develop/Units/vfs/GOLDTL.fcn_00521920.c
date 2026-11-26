@@ -63,7 +63,7 @@ int __cdecl fcn_005b1ff0(void* stream);
 int __cdecl fcn_004edec0(void* stream);
 int __cdecl fcn_004adba0(void* stream, int version);
 int __cdecl fcn_004c0840(int stream);
-void __cdecl fcn_0052de50(void);
+void __cdecl d3_RefreshBuildingPennants(void);
 void __cdecl fcn_00516f60(void);
 void __cdecl fcn_00516de0(int a, char b);
 
@@ -246,7 +246,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 		return 0;
 	}
 	CloseVfsStream(stream);
-	fcn_0052de50();
+	d3_RefreshBuildingPennants();
 	fcn_00514f10();
 	fcn_00516f60();
 	fcn_00516de0(g_6b8300, 1);

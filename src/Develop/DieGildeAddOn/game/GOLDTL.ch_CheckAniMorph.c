@@ -13,7 +13,7 @@ extern int g_675318;
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
-void __cdecl fcn_004311a0(char*, char*, int, int, int);
+void __cdecl d3_ApplyAnimDelta(char*, char*, int, int, int);
 void __cdecl d3_ReleaseAnim(char*, char);
 int __cdecl d3_GetContextIndex(char*);
 int __cdecl d3_CreateMorphAnimation(char*, char*, int, int, int, int, char*, int);
@@ -50,7 +50,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 	    (obj[0x8c] & 2) == 0) {
 		frames = *(char**) (src + 0x68);
 		if (frames[0x169] == 0 && (src[0x70] & 3) != 0) {
-			fcn_004311a0(entity, src, 0, *(int*) src, 3);
+			d3_ApplyAnimDelta(entity, src, 0, *(int*) src, 3);
 		}
 		frames = *(char**) (src + 0x68);
 		d3_RemoveObjectAnimation(*(char**) (entity + 0x1ec) + 0xf4, frames);
@@ -111,7 +111,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 			}
 			frames = *(char**) (src + 0x68);
 			if (frames[0x169] == 0 && (src[0x70] & 3) != 0) {
-				fcn_004311a0(entity, src, 0, *(int*) src, 3);
+				d3_ApplyAnimDelta(entity, src, 0, *(int*) src, 3);
 			}
 			frames = *(char**) (src + 0x68);
 			d3_RemoveObjectAnimation(*(char**) (entity + 0x1ec) + 0xf4, frames);

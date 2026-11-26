@@ -11,7 +11,7 @@ int __cdecl fcn_0064fcaf(char*);
 int __cdecl gm_FindObjektPrototypeByName(char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
-int __cdecl fcn_004b1dd0(char* tbl, int idx, char* arg)
+int __cdecl hst_CmdInventarPlus(char* tbl, int idx, char* arg)
 {
 	char* e;
 	char* s;

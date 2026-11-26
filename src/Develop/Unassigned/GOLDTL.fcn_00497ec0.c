@@ -26,7 +26,7 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_0050d320(short*, unsigned char);
 int __cdecl fcn_0050d200(short*, int);
 int __cdecl fcn_0050d170(int);
-int __cdecl fcn_004a4bb0(int, short*, int, Cmd*, Cmd*, int);
+int __cdecl ai_PrepareBuildSite(int, short*, int, Cmd*, Cmd*, int);
 int __cdecl ai_StartKreditNehmen(int, short*, int, Cmd*, Cmd*);
 
 /* ADDRESS: GOLDTL 0x00497ec0 */
@@ -107,7 +107,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 								out.kind = 4;
 								out.f1 = *(int*) (q + 1);
 								out.f2 = 1;
-								if (!fcn_004a4bb0(a0, entity, a2, &cmd, &out, 0))
+								if (!ai_PrepareBuildSite(a0, entity, a2, &cmd, &out, 0))
 									return 0;
 								need = fcn_0050d200(entity, cmd.f1);
 								if (p < need) {
@@ -130,7 +130,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 					cmd.kind = 5;
 					cmd.f1 = 6;
 					cmd.f2 = 1;
-					if (fcn_004a4bb0(a0, entity, a2, &cmd, &out, 1)) {
+					if (ai_PrepareBuildSite(a0, entity, a2, &cmd, &out, 1)) {
 						need = fcn_0050d200(entity, cmd.f1);
 						if (p < need) {
 							rem = need - p;
@@ -148,7 +148,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 					cmd.kind = 5;
 					cmd.f1 = 4;
 					cmd.f2 = 1;
-					if (!fcn_004a4bb0(a0, entity, a2, &cmd, &out, 1))
+					if (!ai_PrepareBuildSite(a0, entity, a2, &cmd, &out, 1))
 						return 0;
 					a0 = fcn_0050d200(entity, cmd.f1);
 					if (p < a0) {
@@ -183,7 +183,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 					out.f1 = *(int*) (q + 1);
 					out.f2 = 1;
 					need = (int) ((float) fcn_0050d170(v) * 0.3f);
-					if (!fcn_004a4bb0(a0, entity, a2, &cmd, &out, 0))
+					if (!ai_PrepareBuildSite(a0, entity, a2, &cmd, &out, 0))
 						return 0;
 					if (p < need) {
 						rem = need - p;
@@ -200,7 +200,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 				}
 				if (((BldProt_497ec0*) lpGebaeudePROT)[request->f1].type != 2)
 					return 0;
-				if (!fcn_004a4bb0(a0, entity, a2, &cmd, &out, 1))
+				if (!ai_PrepareBuildSite(a0, entity, a2, &cmd, &out, 1))
 					return 0;
 				if (*(char*) ((char*) entity + 2) != 5)
 					return 0;

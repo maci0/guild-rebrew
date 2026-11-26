@@ -8,7 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_00553420(char* o)
+void __cdecl he_InitSchutzgeld(char* o)
 {
 	*(int*) (o + 0x84) = -1;
 	if ((o[0x78] & 4) == 0) {

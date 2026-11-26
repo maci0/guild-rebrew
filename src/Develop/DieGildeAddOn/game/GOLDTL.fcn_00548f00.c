@@ -24,7 +24,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, ch
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 
-void __cdecl fcn_00548f00(void)
+void __cdecl gm_RolloverBuilding0x16Stats(void)
 {
 	short zero2;
 	int zero4;
@@ -52,7 +52,7 @@ void __cdecl fcn_00548f00(void)
 					he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 0x27)])->entity_id, -1, text2, 0, 0x5fc, *(int*) (e + 1), -1, 0, g_6b5c60);
 				}
 			}
-			fcn_004c4510(e, *(int*) (e + 1));
+			cm_BeginPacketFieldDelta(e, *(int*) (e + 1));
 			cm_AppendPacketFieldDelta(4, 1, e - g_aed32c + 0x6d, e + 0x65);
 			cm_AppendPacketFieldDelta(4, 1, e - g_aed32c + 0x65, &zero4);
 			cm_AppendPacketFieldDelta(2, 1, e - g_aed32c + 0x6b, &zero2);

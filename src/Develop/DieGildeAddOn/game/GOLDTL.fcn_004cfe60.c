@@ -1,7 +1,7 @@
 extern char* g_67a370;
 
 char* __cdecl gm_FindOrCreateEntitySlot(int, char*);
-char* __cdecl fcn_004ce610(char*);
+char* __cdecl gm_GetEquippedCombatGear(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char __cdecl fcn_0045b990(int, int, void*, void*, void*);
 void __cdecl fcn_00414be0(int, int, int, int);
@@ -23,7 +23,7 @@ void __cdecl fcn_004cfe60(int a, char* b)
 
 	top = *(int*) (g_67a370 + 0xb0);
 	rec = gm_FindOrCreateEntitySlot(a, b);
-	ent = fcn_004ce610(b);
+	ent = gm_GetEquippedCombatGear(b);
 	if (rec == 0) {
 		return;
 	}
@@ -39,7 +39,7 @@ void __cdecl fcn_004cfe60(int a, char* b)
 			fcn_00414be0(x, 0xff, 0, 0);
 		}
 		{
-			char* t = fcn_004ce610(slot);
+			char* t = gm_GetEquippedCombatGear(slot);
 			io_FormatTextBuffer(buf, 0x1177, *(int*) (ent + 0x54), *(unsigned short*) b,
 				*(int*) (t + 0x54), *(unsigned short*) slot);
 		}

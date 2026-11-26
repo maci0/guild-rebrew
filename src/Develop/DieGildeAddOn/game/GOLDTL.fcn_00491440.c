@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004f4830(int idx, void* dst);
 
-int __cdecl fcn_00491440(char* e, int unused, int* out)
+int __cdecl ai_EvaluateLaw0x10(char* e, int unused, int* out)
 {
 	int info[9];
 	double a;

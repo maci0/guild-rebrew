@@ -2,7 +2,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short n);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl gm_RandomizeIntArray(unsigned int n, int *arr);
 int __cdecl fcn_0047dd60(void *p);
-void __cdecl fcn_00511b70(int n, int *out, unsigned char *src);
+void __cdecl amt_CalcOfficeHolderAges(int n, int *out, unsigned char *src);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
@@ -12,7 +12,7 @@ void __cdecl fcn_004c4b00(void);
 char *__cdecl fcn_004c4480(int h);
 int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_004c5150(int, int, int, int);
-void __cdecl fcn_004c4510(char *p, int h);
+void __cdecl cm_BeginPacketFieldDelta(char *p, int h);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *p);
 int __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl fcn_004c54c0(int, int, int, int);
@@ -22,12 +22,12 @@ int __cdecl fcn_004c4450(int h);
 int __cdecl amt_FindOfficeSlotByKey(unsigned char c, void *out);
 int __cdecl fcn_004e8b40(int i, void *out);
 int __cdecl amt_FindOfficeSlotByType(int i, void *out);
-int __cdecl fcn_004e8210(int a, void *p, int b);
+int __cdecl amt_AssignOfficeHolder(int a, void *p, int b);
 void __cdecl fcn_004fee50(void *p, int h);
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl fcn_00507400(int, int);
 int __cdecl fcn_0050b750(int, int);
-void __cdecl fcn_004ad1c0(void);
+void __cdecl amt_SpawnHistoricalOfficeHolders(void);
 extern unsigned char g_773d75;
 /* ADDRESS: GOLDTL 0x00511c60 */
 int __cdecl fcn_00511c60(void)
@@ -122,7 +122,7 @@ int __cdecl fcn_00511c60(void)
 	gm_RandomizeIntArray(6, &shuffledIds[12]);
 	gm_RandomizeIntArray(6, &shuffledIds[18]);
 	gm_RandomizeIntArray(6, &shuffledIds[24]);
-	fcn_00511b70(0x1e - n, &v33[n], (unsigned char *) &shuffledIds[n]);
+	amt_CalcOfficeHolderAges(0x1e - n, &v33[n], (unsigned char *) &shuffledIds[n]);
 	i = n;
 	while (i < 0x1e) {
 		cm_BeginCommandSync();
@@ -184,7 +184,7 @@ int __cdecl fcn_00511c60(void)
 		p = (char *) v26[i];
 		fcn_004c5150(*(int *) (p + 4), -1, g_773d75,
 			     v49);
-		fcn_004c4510(p, *(int *) (p + 4));
+		cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &v36);
 		if (*(unsigned char *) (p + 2) == 3) {
 			cm_AppendPacketFieldDelta(1, 1, 0x84, &v37);
@@ -199,7 +199,7 @@ int __cdecl fcn_00511c60(void)
 		}
 		fcn_004c5360();
 		fcn_004fee50(p, v25[i] & 0xffff);
-		k = fcn_004e8210((unsigned char) shuffledIds[i], p, 0xff);
+		k = amt_AssignOfficeHolder((unsigned char) shuffledIds[i], p, 0xff);
 		if (k != -1) {
 			while (fcn_004c4450(k) == 0) {
 				fcn_00535960();
@@ -223,13 +223,13 @@ int __cdecl fcn_00511c60(void)
 		}
 		if (*(unsigned char *) (p + 0x166) == 0x1b) {
 			amt_FindOfficeSlotByType(0x25, v39);
-			fcn_004e8210(v39[0], p, 0xff);
+			amt_AssignOfficeHolder(v39[0], p, 0xff);
 		} else if (*(unsigned char *) (p + 0x166) == 0x1a) {
 			amt_FindOfficeSlotByType(0x24, v40);
-			fcn_004e8210(v40[0], p, 0xff);
+			amt_AssignOfficeHolder(v40[0], p, 0xff);
 		} else if (*(unsigned char *) (p + 0x166) == 0x19) {
 			amt_FindOfficeSlotByType(0x23, v41);
-			fcn_004e8210(v41[0], p, 0xff);
+			amt_AssignOfficeHolder(v41[0], p, 0xff);
 		}
 	}
 	do {
@@ -259,10 +259,10 @@ int __cdecl fcn_00511c60(void)
 		}
 		v42 = *(unsigned short *) (n + 0xa) - 0x12;
 		v36 = n;
-		fcn_004c4510((char *) m, *(int *) (m + 4));
+		cm_BeginPacketFieldDelta((char *) m, *(int *) (m + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x5c, (char *) (n + 4));
 		fcn_004c5360();
-		fcn_004c4510((char *) n, *(int *) (n + 4));
+		cm_BeginPacketFieldDelta((char *) n, *(int *) (n + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x5c, (char *) (m + 4));
 		fcn_004c5360();
 		if (v42 > 5) {
@@ -285,7 +285,7 @@ int __cdecl fcn_00511c60(void)
 			fcn_004c5150(*(int *) (p + 4), -1,
 				     g_773d75,
 				     ((k & 0xffff) + 0x200) << 5);
-			fcn_004c4510(p, *(int *) (p + 4));
+			cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, &v38);
 			fcn_004c5360();
 		}
@@ -317,7 +317,7 @@ int __cdecl fcn_00511c60(void)
 		k = gm_RandomMod(0x400);
 		fcn_004c5150(*(int *) (p + 4), -1, g_773d75,
 			     ((k & 0xffff) + 0x200) << 5);
-		fcn_004c4510(p, *(int *) (p + 4));
+		cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &v36);
 		cm_AppendPacketFieldDelta(1, 1, 0x167, &v42);
 		fcn_004c5360();
@@ -333,12 +333,12 @@ int __cdecl fcn_00511c60(void)
 		k = gm_RandomMod(0x400);
 		fcn_004c5150(*(int *) (p + 4), -1, g_773d75,
 			     ((k & 0xffff) + 0x200) << 5);
-		fcn_004c4510(p, *(int *) (p + 4));
+		cm_BeginPacketFieldDelta(p, *(int *) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &v36);
 		cm_AppendPacketFieldDelta(1, 1, 0x167, &v42);
 		fcn_004c5360();
 		i--;
 	} while (i != 0);
-	fcn_004ad1c0();
+	amt_SpawnHistoricalOfficeHolders();
 	return 1;
 }

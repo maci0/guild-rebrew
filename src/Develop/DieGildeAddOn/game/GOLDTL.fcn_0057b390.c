@@ -32,7 +32,7 @@ extern double g_662908;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_0050c710(char* e, int a, int b);
+int __cdecl gm_GetBuildingTechEffect(char* e, int a, int b);
 char* __cdecl fcn_0050dc90(char* e);
 float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
@@ -63,7 +63,7 @@ void __cdecl fcn_0057b390(char* e)
 		u = gm_StartFilteredEntitySearch(1, 5, 0x1d);
 		while (u != 0) {
 			if (*(unsigned short*) (u + 0x27) != 0xffff) {
-				lim = (float) fcn_0050c710(u, 0x15, 1) * 0.0025f;
+				lim = (float) gm_GetBuildingTechEffect(u, 0x15, 1) * 0.0025f;
 				count = 0;
 				for (p = 0x7f4ca0; p < 0x85a0a0; p += 0x21c) {
 					if (*(unsigned short*) p != 0xffff && *(int*) (p + 0x16c) == (int) u) {
@@ -111,7 +111,7 @@ void __cdecl fcn_0057b390(char* e)
 					list[count++] = (char*) p;
 				}
 			}
-			fcn_0050c710(u, 0x15, 1);
+			gm_GetBuildingTechEffect(u, 0x15, 1);
 			for (k = 0; k < count; k++) {
 				s = list[k];
 				if ((*(unsigned char*) (s + 0x1b4) & 1) &&

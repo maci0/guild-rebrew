@@ -29,9 +29,9 @@ int __cdecl gm_RandomMod(int);
 int __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_TransformPoint(char*, char*, int*);
 void __cdecl fcn_004c5530(int a1);
-int __cdecl fcn_004e8240(unsigned char, char*, char*, int, int);
-void __cdecl fcn_004ea4b0(void*, unsigned int);
-void __cdecl fcn_004ea560(void*, unsigned int);
+int __cdecl amt_SendOfficeCommand(unsigned char, char*, char*, int, int);
+void __cdecl amt_NotifyOfficeAppointed(void*, unsigned int);
+void __cdecl amt_NotifyOfficeLost(void*, unsigned int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -223,13 +223,13 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 				}
 				if (best != 0 && best != existing) {
 					if (existing != 0) {
-						fcn_004e8240((unsigned char) info.office[0], best, 0, 1, 0xff);
-						fcn_004ea560(existing, kind);
-						fcn_004ea4b0(best, kind);
+						amt_SendOfficeCommand((unsigned char) info.office[0], best, 0, 1, 0xff);
+						amt_NotifyOfficeLost(existing, kind);
+						amt_NotifyOfficeAppointed(best, kind);
 						return;
 					}
-					fcn_004e8240((unsigned char) info.office[0], best, 0, 1, 0xff);
-					fcn_004ea4b0(best, kind);
+					amt_SendOfficeCommand((unsigned char) info.office[0], best, 0, 1, 0xff);
+					amt_NotifyOfficeAppointed(best, kind);
 				}
 			}
 		}

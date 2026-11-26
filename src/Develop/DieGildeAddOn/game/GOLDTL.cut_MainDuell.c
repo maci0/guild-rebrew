@@ -34,7 +34,7 @@ void __cdecl fcn_004e04f0(char* a0);
 void __cdecl fcn_004e4f10(void* event);
 void __cdecl fcn_004e4730(char* name);
 void __cdecl fcn_004dfef0(int v);
-void __cdecl fcn_004e4ec0(void);
+void __cdecl d3_UpdateSeasonTextures(void);
 int __cdecl fcn_00500e20(int* p);
 int __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3);
 char __cdecl fcn_004463f0(unsigned int a, unsigned int b, float t);
@@ -65,13 +65,13 @@ float __cdecl fcn_004ff210(int a, int b);
 int __cdecl cut_RandMod(int n);
 void __cdecl fcn_004e0210(char* a, char* b, char* c);
 int __cdecl srv_GetEntityOfficeSlot(char* ent, int* role, int* slot);
-int __cdecl fcn_004e8240(int id, int ea, int eb, int x1, int x2);
+int __cdecl amt_SendOfficeCommand(int id, int ea, int eb, int x1, int x2);
 void __cdecl io_FormatTextBuffer(char* out, int id, int a, int b);
 int __cdecl fcn_00545d40(int id, int arg, char* t1, int flags, int value, char* t2);
 int __cdecl fcn_004e4aa0(int a);
 void __cdecl fcn_004e4610(int a);
 void __cdecl fcn_004e45c0(int a);
-void __cdecl fcn_004e4910(void);
+void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004230e0(char* p);
 void __cdecl fcn_004cfe20(void);
@@ -126,7 +126,7 @@ void __cdecl cut_MainDuell(char* a0)
     lvl = (signed char) a0[0x7c];
     fcn_004e4730(scene[lvl]);
     fcn_004dfef0(0xa);
-    fcn_004e4ec0();
+    d3_UpdateSeasonTextures();
     sel = fcn_00500e20((int*) 0x7f4c00);
     if (sel == 3)
         sel = 0;
@@ -323,7 +323,7 @@ void __cdecl cut_MainDuell(char* a0)
             fcn_004c3030(-8, 0, (int) 0x68cc9c, *(unsigned char*) (p + 9) + 1);
             if (srv_GetEntityOfficeSlot(p, outR, outS) != 0) {
                 if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + (g_774970 & 0xffff) * 0x21c)) {
-                    fcn_004e8240(outS[0], 0, 0, 4, 0xff);
+                    amt_SendOfficeCommand(outS[0], 0, 0, 4, 0xff);
                     q = (char*) 0x7f4ca2;
                     do {
                         if (*q == 6 || *q == 7) {
@@ -354,7 +354,7 @@ void __cdecl cut_MainDuell(char* a0)
     sA.entity = 0;
     fcn_004e4610(event);
     fcn_004e45c0(event);
-    fcn_004e4910();
+    cut_CleanupCutscene();
     fcn_004230e0((char*) bank);
     fcn_004230e0((char*) snd);
     fcn_004cfe20();

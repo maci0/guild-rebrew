@@ -7,7 +7,7 @@ extern short g_aed32c;
 int __cdecl fcn_005bdc30(int a, int* dlg, char* txt, int c, int d);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 void __cdecl fcn_004c5530(char* msg);
-void __cdecl fcn_004c4510(int a, int b);
+void __cdecl cm_BeginPacketFieldDelta(int a, int b);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char a, unsigned char b, unsigned short c, char* d);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00508280(char* slot, int a, int b);
@@ -55,7 +55,7 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		*(short*) (msg + 0x34) = g_7f4c0c;
 		msg[0x36] = 0xa;
 		fcn_004c5530(msg);
-		fcn_004c4510(*(int*) arg2, *(int*) (*(int*) arg2 + 2));
+		cm_BeginPacketFieldDelta(*(int*) arg2, *(int*) (*(int*) arg2 + 2));
 		h = *(short*) arg2;
 		cm_AppendPacketFieldDelta(4, 1, h - g_aed32c + 0x25, esi + 1);
 		fcn_004c5360();
@@ -84,7 +84,7 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	msg[0x36] = 0xa;
 	fcn_004c5530(msg);
-	fcn_004c4510(*(int*) arg2, *(int*) (*(int*) arg2 + 2));
+	cm_BeginPacketFieldDelta(*(int*) arg2, *(int*) (*(int*) arg2 + 2));
 	h = *(short*) arg2;
 	cm_AppendPacketFieldDelta(4, 1, h - g_aed32c + 0x25, esi + 1);
 	fcn_004c5360();

@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
 
-int __cdecl fcn_004e81c0(unsigned char* entity, unsigned char* a2)
+int __cdecl amt_AssignEntityOfficeDefault(unsigned char* entity, unsigned char* other_entity)
 {
 	int l0[6];
 	int l1[6];
@@ -11,8 +11,8 @@ int __cdecl fcn_004e81c0(unsigned char* entity, unsigned char* a2)
 	if (srv_GetEntityOfficeSlot(entity, l1, l0) == 0) {
 		return -1;
 	}
-	if (a2 == 0) {
+	if (other_entity == 0) {
 		return -1;
 	}
-	return fcn_004e8240(l0[0], entity, a2, 2, 1);
+	return amt_SendOfficeCommand(l0[0], entity, other_entity, 2, 1);
 }

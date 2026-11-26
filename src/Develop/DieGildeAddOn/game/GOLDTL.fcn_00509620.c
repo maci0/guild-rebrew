@@ -9,9 +9,9 @@ extern unsigned char* g_entity_ptr;
 extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern void* __cdecl fcn_004b3c00(void* entity);
 extern int __cdecl gm_GetBuildingTypeCategory(int type);
-extern int __cdecl fcn_005059b0(void* record, int a, int b);
+extern int __cdecl gm_AssignBuildingOwner(void* record, int a, int b);
 extern int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
-extern void __cdecl fcn_00546ce0(void* entity);
+extern void __cdecl he_FreeActionsByKind(void* entity);
 extern void __cdecl fcn_0055bc40(void* entity);
 extern void __cdecl fcn_004e8940(void* entity);
 extern int __cdecl gm_MapEntityStatRange(int age);
@@ -57,7 +57,7 @@ int __cdecl fcn_00509620(int sourceId, int targetId)
 			if (gm_GetBuildingTypeCategory(*ep & 0xff) == 2) {
 				if (*(unsigned short*) (ep + 0x27) == p->entity_index) {
 					owner = *(unsigned short*) gm_CityEntity;
-					fcn_005059b0(ep, owner, owner);
+					gm_AssignBuildingOwner(ep, owner, owner);
 				}
 			}
 		}
@@ -70,7 +70,7 @@ int __cdecl fcn_00509620(int sourceId, int targetId)
 	q = (EntityStruct*) gm_LookupEntityRecordById(targetId);
 	if (q == 0)
 		return -2;
-	fcn_00546ce0(p);
+	he_FreeActionsByKind(p);
 	fcn_0055bc40(p);
 	fcn_0055bc40(q);
 	q_slot = q->entity_index;

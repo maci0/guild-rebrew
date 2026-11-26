@@ -30,7 +30,7 @@ extern char g_6b5c60[];
 
 Ent* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_004ff040(Ent*);
-void __cdecl fcn_004e6240(Ent*, Cmd*, char*, char*);
+void __cdecl he_SendCmdMessage(Ent*, Cmd*, char*, char*);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -76,13 +76,13 @@ int __cdecl fcn_004e1330(char* event)
 	if (a->kind == 6 || a->kind == 7) {
 		io_FormatTextBuffer(buf, 0x11ca, b->id);
 		strcat(buf, g_14a9a54);
-		fcn_004e6240(a, cmd, buf, &(*(char*)g_6b5c60));
+		he_SendCmdMessage(a, cmd, buf, &(*(char*)g_6b5c60));
 		result = 1;
 	}
 	if (b->kind == 6 || b->kind == 7) {
 		io_FormatTextBuffer(buf, 0x11ca, a->id);
 		strcat(buf, g_14a9a54);
-		fcn_004e6240(b, cmd, buf, &(*(char*)g_6b5c60));
+		he_SendCmdMessage(b, cmd, buf, &(*(char*)g_6b5c60));
 		result = 1;
 	}
 	if (result != 0) {

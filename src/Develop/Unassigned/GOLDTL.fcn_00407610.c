@@ -59,7 +59,7 @@ typedef struct PairRun {
 
 
 /* ADDRESS: GOLDTL 0x00407760 */
-int __cdecl fcn_00407760(char* flags, PairRun* src, char* dst, char* scale)
+int __cdecl ch_DownsamplePath(char* flags, PairRun* src, char* dst, char* scale)
 {
 	int hi;
 	int n;

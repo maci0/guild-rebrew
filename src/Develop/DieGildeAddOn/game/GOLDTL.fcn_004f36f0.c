@@ -2,12 +2,12 @@
 
 
 int __cdecl fcn_004f3e60(char* e, int* out);
-int* __cdecl fcn_004f1a40(char* e);
+int* __cdecl gv_PickRandomFieldEntry(char* e);
 int* __cdecl fcn_004f1a10(char* e, int* r);
 int __cdecl fcn_004f1790(int d, int* s);
 int __cdecl fcn_004f3280(char* e, int a, int b, int c, int d);
 
-int __cdecl fcn_004f36f0(char* e)
+int __cdecl gv_AssignGraveyardField(char* e)
 {
 	int* r;
 	int* s;
@@ -16,7 +16,7 @@ int __cdecl fcn_004f36f0(char* e)
 	if (fcn_004f3e60(e, 0) != 1) {
 		return -1;
 	}
-	r = fcn_004f1a40(e);
+	r = gv_PickRandomFieldEntry(e);
 	if (r == 0) {
 		return -1;
 	}

@@ -66,7 +66,7 @@ void __cdecl fcn_00541ff0(int index)
 		one = 1;
 		if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].ptr_16c) != 0 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 5 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 1
 			|| (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 2 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 4) {
-			fcn_004c4510((char*) e, e->id);
+			cm_BeginPacketFieldDelta((char*) e, e->id);
 			fcn_004c4670(4, 1, 0x174, &one);
 			fcn_004c5360();
 		}
@@ -96,7 +96,7 @@ void __cdecl fcn_00541ff0(int index)
 
 		e = ((Entity*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[index]);
 		flag = 1;
-		fcn_004c4510((char*) e, e->id);
+		cm_BeginPacketFieldDelta((char*) e, e->id);
 		fcn_004c4670(4, 1, 0x174, &flag);
 		fcn_004c5360();
 	}

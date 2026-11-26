@@ -37,7 +37,7 @@ void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_004c5290(int, int, int);
 int __cdecl fcn_00505340(char*);
 void __cdecl fcn_004c5d20(int, int);
-int __cdecl fcn_00529710(char*, char*);
+int __cdecl ch_IsEntityNearBuildingDoor(char*, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_004c5620(int, char*);
@@ -77,7 +77,7 @@ void __cdecl fcn_0055dab0(char* e)
 			*(int*) (e + 0xec) = fcn_004c5290(*(int*) (s44 + 1), *(int*) (b + 1), *(int*) (r + 2));
 		}
 		e[0xd0] = 1;
-	} else if (fcn_00529710(r, c)) {
+	} else if (ch_IsEntityNearBuildingDoor(r, c)) {
 		*(int*) (e + 0xec) = fcn_004c5290(*(int*) (c + 1), *(int*) (s44 + 1), *(int*) (r + 2));
 		if (*(unsigned char*) c == 0x47) {
 			io_FormatTextBuffer(msg, 0x1c3b, 1, 0x1c39, g_868060 + *(int*) (c + 0x65) * 0x2f4);

@@ -43,7 +43,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c9220(int*);
-int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
+int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5530(struct msg*);
 int __cdecl fcn_004c4450(int);
@@ -90,7 +90,7 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 	do {
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (fcn_00525f60(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2)) {
+				if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2)) {
 					struct msg m;
 
 					a = gm_RandomMod(9) + 0x1d76;

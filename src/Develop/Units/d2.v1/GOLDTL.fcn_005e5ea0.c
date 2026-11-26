@@ -86,7 +86,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
-int __cdecl fcn_00525f60(void*, int);
+int __cdecl d2_CheckActionBlocker(void*, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_004c5530(void*);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -179,7 +179,7 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 		}
 		else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ids[0]) {
-				if (fcn_00525f60(((House*) g_7f4ca0) + g_774970, stage) == 1) {
+				if (d2_CheckActionBlocker(((House*) g_7f4ca0) + g_774970, stage) == 1) {
 					fcn_005100f0(((House*) g_7f4ca0)[g_774970].f4, -stage);
 					memset(&msg, 0, sizeof(msg));
 					msg.b4 = 0xa0;

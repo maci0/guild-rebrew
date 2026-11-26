@@ -3,7 +3,7 @@
 
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 
-int __cdecl fcn_004c72e0(int* args)
+int __cdecl cm_ChkSetGebBesitzer(int* args)
 {
 	char* p;
 

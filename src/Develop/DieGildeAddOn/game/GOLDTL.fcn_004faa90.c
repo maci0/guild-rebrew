@@ -6,7 +6,7 @@ extern char g_1043370[];
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl d3_GridPointToWorld(char*, int, int, int);
 
-void __cdecl fcn_004faa90(int x, int y, int c)
+void __cdecl cm_CrimeGridCellToWorld(int x, int y, int c)
 {
 	char* g;
 	int d;

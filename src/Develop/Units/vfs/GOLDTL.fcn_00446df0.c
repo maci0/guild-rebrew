@@ -27,7 +27,7 @@ int __cdecl fcn_004011d0(void* stream, void* dst);
 void __cdecl fcn_00401280(void* stream, void* dst);
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 int __cdecl fcn_00446ca0(int);
-void __cdecl fcn_00438920(float, float, int);
+void __cdecl d3_SetFog(float, float, int);
 void __cdecl rd_object(void*, int, int, int);
 #include "Develop/Units/vfs/vfs.h"
 
@@ -63,7 +63,7 @@ void __cdecl fcn_00446df0(const char* name, void* stream)
 		fcn_004011f0(s, &color);
 		fcn_004011d0(s, &f);
 		fcn_004011d0(s, &g);
-		fcn_00438920(f, g, color);
+		d3_SetFog(f, g, color);
 		for (i = 0; i < n; i++) {
 			fcn_00401280(s, &((D3_SCENE_SLOT*)g_1041d80)[i].a);
 			fcn_00401280(s, &((D3_SCENE_SLOT*)g_1041d80)[i].b);

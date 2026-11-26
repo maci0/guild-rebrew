@@ -13,7 +13,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int h, int a, char* text, int b, int c, char* snd);
 void __cdecl fcn_004c5fd0(int h);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-void __cdecl fcn_0050ff70(char* o, int delta)
+void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta)
 {
 	char d;
 	char other[0x400];
@@ -28,7 +28,7 @@ void __cdecl fcn_0050ff70(char* o, int delta)
 	if (delta + o[0x5c] > 100) {
 		d = 100 - o[0x5c];
 	}
-	fcn_004c4510(o, *(int*) (o + 1));
+	cm_BeginPacketFieldDelta(o, *(int*) (o + 1));
 	fcn_004c4670(1, 1, 0x5c, &d);
 	fcn_004c5360();
 	if (*o != 0 && d + o[0x5c] <= 0) {

@@ -7,12 +7,12 @@
 
 #include <string.h>
 
-typedef struct Aux0488c00 {
+typedef struct WORKER_RECOVERY_AUX {
 	char pad0[0x2c];
 	int id;
-} Aux0488c00;
+} WORKER_RECOVERY_AUX;
 
-typedef struct Ent0488c00 {
+typedef struct WORKER_RECOVERY_ENTITY {
 	unsigned short id;
 	unsigned char kind;
 	char pad3;
@@ -28,13 +28,13 @@ typedef struct Ent0488c00 {
 	char pad170[0x17c - 0x170];
 	char* job;
 	int pad180;
-	Aux0488c00* aux;
+	WORKER_RECOVERY_AUX* aux;
 	char pad188[0x1b4 - 0x188];
 	int flags;
 	char pad1b8[0x1c8 - 0x1b8];
 	int flags2;
 	char pad1cc[0x21c - 0x1cc];
-} Ent0488c00;
+} WORKER_RECOVERY_ENTITY;
 // SIZE 0x21c
 
 #pragma pack(push, 2)
@@ -45,7 +45,7 @@ typedef struct Ent0488c00 {
 
 
 
-typedef struct Msg0488c00 {
+typedef struct WORKER_RECOVERY_MSG {
 	int pad0;
 	unsigned char type;
 	char pad5[3];
@@ -60,32 +60,32 @@ typedef struct Msg0488c00 {
 	int target;
 	int from;
 	char pad64[0xf8 - 0x64];
-} Msg0488c00;
+} WORKER_RECOVERY_MSG;
 #pragma pack(pop)
 
-typedef struct Unit0488c00 {
+typedef struct WORKER_RECOVERY_UNIT {
 	char pad0[0x16c];
 	char* info;
-} Unit0488c00;
+} WORKER_RECOVERY_UNIT;
 
 extern char g_7f4ca0[];
 
 extern pos14_7f4c00 gm_GameTime;
 #pragma pack(push, 1)
-typedef struct Race0488c00 {
+typedef struct WORKER_RECOVERY_RACE {
 	char kind;
 	char pad1[0x24d - 1];
-} Race0488c00;
+} WORKER_RECOVERY_RACE;
 #pragma pack(pop)
 
 extern unsigned char* lpGebaeudePROT;
 
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
-void __cdecl fcn_004c5530(Msg0488c00* m);
+void __cdecl fcn_004c5530(WORKER_RECOVERY_MSG* msg);
 
-void __cdecl fcn_00488c00(Unit0488c00* u)
+void __cdecl ai_DispatchWorkerRecovery(WORKER_RECOVERY_UNIT* meister)
 {
-	Msg0488c00 m;
+	WORKER_RECOVERY_MSG msg;
 	char* res;
 	int cnt;
 	int i;
@@ -93,56 +93,59 @@ void __cdecl fcn_00488c00(Unit0488c00* u)
 
 	cnt = 2;
 	for (i = 0; i < 768; i++) {
-		if (((Ent0488c00*)g_7f4ca0)[i].id != 0xffff && ((Ent0488c00*)g_7f4ca0)[i].owner == u->info && ((Ent0488c00*)g_7f4ca0)[i].active
-		    && ((Ent0488c00*)g_7f4ca0)[i].job != 0 && *((Ent0488c00*)g_7f4ca0)[i].job == 0x16) {
+		if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].id != 0xffff && ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].owner == meister->info && ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].active
+		    && ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].job != 0 && *((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].job == 0x16) {
 			cnt--;
 		}
 	}
 	if (cnt <= 0) {
 		return;
 	}
-	race = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)u->info];
+	race = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)meister->info];
 	if (((char)race->category) == 4) {
-		res = fcn_00502cd0(*(int*)(u->info + 0x5d), 2, 6, 0, 0x60);
+		res = fcn_00502cd0(*(int*)(meister->info + 0x5d), 2, 6, 0, 0x60);
 	} else if (((char)race->category) == 0x13) {
-		res = fcn_00502cd0(*(int*)(u->info + 0x5d), 2, 6, 0, 0x145);
+		res = fcn_00502cd0(*(int*)(meister->info + 0x5d), 2, 6, 0, 0x145);
 	} else {
 		res = 0;
 	}
-	memset(&m, 0, sizeof(m));
-	m.type = 0x16;
-	m.seed = ((Ent0488c00*)g_7f4ca0)[*(unsigned short*)(u->info + 0x27)].seed;
-	m.id = *(int*)(u->info + 1);
-	m.pos = (*(pos14_7f4c00*)&gm_GameTime);
-	m.flag = 1;
+	memset(&msg, 0, sizeof(msg));
+	msg.type = 0x16;
+	msg.seed = ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[*(unsigned short*)(meister->info + 0x27)].seed;
+	msg.id = *(int*)(meister->info + 1);
+	msg.pos = (*(pos14_7f4c00*)&gm_GameTime);
+	msg.flag = 1;
 	if (res != 0) {
-		m.from = *(int*)(res + 2);
+		msg.from = *(int*)(res + 2);
 	} else {
-		m.from = -1;
+		msg.from = -1;
 	}
 	i = 0;
 	do {
 		if (i >= 768) {
 			return;
 		}
-		if (((Ent0488c00*)g_7f4ca0)[i].id != 0xffff && ((Ent0488c00*)g_7f4ca0)[i].owner == u->info && ((Ent0488c00*)g_7f4ca0)[i].active && (((Ent0488c00*)g_7f4ca0)[i].flags & 0x10)) {
-			if (((Ent0488c00*)g_7f4ca0)[i].job != 0) {
-				if (*((Ent0488c00*)g_7f4ca0)[i].job == 0x16) {
-					((Ent0488c00*)g_7f4ca0)[i].flags &= ~0x10;
+		if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].id != 0xffff
+			&& ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].owner == meister->info
+			&& ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].active
+			&& (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].flags & 0x10)) {
+			if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].job != 0) {
+				if (*((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].job == 0x16) {
+					((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].flags &= ~0x10;
 				}
-			} else if (((Ent0488c00*)g_7f4ca0)[i].aux != 0 && ((Ent0488c00*)g_7f4ca0)[i].aux->id == *(int*)(((Ent0488c00*)g_7f4ca0)[i].owner + 1)) {
-				if (((Ent0488c00*)g_7f4ca0)[i].b83 < ((Ent0488c00*)g_7f4ca0)[i].b82) {
-					m.target = ((Ent0488c00*)g_7f4ca0)[i].seed;
-					m.mode = 3;
-					fcn_004c5530(&m);
+			} else if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].aux != 0 && ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].aux->id == *(int*)(((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].owner + 1)) {
+				if (((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].b83 < ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].b82) {
+					msg.target = ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].seed;
+					msg.mode = 3;
+					fcn_004c5530(&msg);
 					cnt--;
 				} else {
-					m.target = ((Ent0488c00*)g_7f4ca0)[i].seed;
-					m.mode = 2;
-					fcn_004c5530(&m);
+					msg.target = ((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].seed;
+					msg.mode = 2;
+					fcn_004c5530(&msg);
 					cnt--;
 				}
-				((Ent0488c00*)g_7f4ca0)[i].flags2 |= 4;
+				((WORKER_RECOVERY_ENTITY*)g_7f4ca0)[i].flags2 |= 4;
 			}
 		}
 		i++;

@@ -25,7 +25,7 @@ int __cdecl fcn_00495fe0(void);
 int __cdecl fcn_00496480(void);
 int __cdecl fcn_004964e0(void);
 int __cdecl fcn_00496810(void);
-int __cdecl fcn_00496ca0(void);
+int __cdecl ai_RunBestechung(void);
 int __cdecl fcn_00496dc0(void);
 int __cdecl fcn_00496e60(void);
 int __cdecl fcn_00497000(void);
@@ -40,11 +40,11 @@ int __cdecl fcn_004978d0(void);
 int __cdecl fcn_00497990(void);
 int __cdecl fcn_00497e60(void);
 int __cdecl fcn_00497ec0(void);
-int __cdecl fcn_00498470(void);
+int __cdecl ai_RunWohnsitzBauen(void);
 int __cdecl fcn_00498570(void);
 int __cdecl fcn_00498660(void);
 int __cdecl fcn_00498670(void);
-int __cdecl fcn_00498c90(void);
+int __cdecl ai_RunBetriebBauen(void);
 int __cdecl fcn_00498e00(void);
 int __cdecl fcn_00498e10(void);
 int __cdecl fcn_00498e20(void);
@@ -53,7 +53,7 @@ int __cdecl fcn_00498f50(void);
 int __cdecl fcn_00498fb0(void);
 int __cdecl fcn_00499000(void);
 int __cdecl fcn_00499090(void);
-int __cdecl fcn_004994c0(void);
+int __cdecl ai_RunSabotieren(void);
 int __cdecl fcn_004995b0(void);
 int __cdecl fcn_00499640(void);
 int __cdecl fcn_00499950(void);
@@ -110,7 +110,7 @@ int __cdecl ai_RunUsePrivs(void);
 int __cdecl ai_ScoreBuergermeister(void);
 int __cdecl ai_StartBuergermeister(void);
 #include "client_actions.h"
-int __cdecl fcn_0049d7c0(void);
+int __cdecl ai_StartBuergermeisterUpgrade(void);
 int __cdecl am_RunBuergermeisterUpgrade(void);
 int __cdecl ai_StartBuergermeisterRathaus(void);
 int __cdecl ai_RunBuergermeisterRathaus(void);
@@ -453,7 +453,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Bestechung");
 	d.score = fcn_004964e0;
 	d.start = fcn_00496810;
-	d.run = fcn_00496ca0;
+	d.run = ai_RunBestechung;
 	d.flags = 0x19;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -691,7 +691,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Wohnsitz bauen");
 	d.score = fcn_004a4410;
 	d.start = fcn_00497ec0;
-	d.run = fcn_00498470;
+	d.run = ai_RunWohnsitzBauen;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -759,7 +759,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Betrieb bauen");
 	d.score = fcn_004a4410;
 	d.start = fcn_00498670;
-	d.run = fcn_00498c90;
+	d.run = ai_RunBetriebBauen;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -895,7 +895,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Sabotieren");
 	d.score = fcn_00499000;
 	d.start = fcn_00499090;
-	d.run = fcn_004994c0;
+	d.run = ai_RunSabotieren;
 	d.flags = 0x1c3;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1778,7 +1778,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x30;
 	strcpy(d.name, "Buergermeister upgrade");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049d7c0;
+	d.start = ai_StartBuergermeisterUpgrade;
 	d.run = am_RunBuergermeisterUpgrade;
 	d.flags = 0x39;
 	if (am_RegisterMethod(&d, e) == 0) {

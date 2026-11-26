@@ -11,7 +11,7 @@ extern unsigned char g_773d75;
 
 int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_00510470(unsigned char*);
+int __cdecl gm_GetBuildingSlotCapacity(unsigned char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004a5340(unsigned short* e, int n, int* lim, float a4, float r, unsigned short* ids);
 int __cdecl fcn_0050b810(int a, char b);
@@ -49,9 +49,9 @@ int __cdecl ai_StartVerfluchen(int action, unsigned short* entity, int a3, char*
 		    && fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x28a) != 0) {
 			if (best == 0) {
 				best = e;
-				best_v = fcn_00510470(e);
+				best_v = gm_GetBuildingSlotCapacity(e);
 			} else {
-				v = fcn_00510470(e);
+				v = gm_GetBuildingSlotCapacity(e);
 				if (v > best_v) {
 					best = e;
 					best_v = v;

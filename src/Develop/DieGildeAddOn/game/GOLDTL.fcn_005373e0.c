@@ -132,7 +132,7 @@ extern void fcn_004c0cd0();
 extern void fcn_004c16c0();
 extern void fcn_004c0b40();
 extern void fcn_004c2860();
-extern void fcn_00537080();
+extern void d3_UpdateLightningAndThunder();
 extern void fcn_00415d70();
 extern void d3_UpdateSelectionBoxCharacters();
 extern void d3_UpdateCharacterBoxSelection();
@@ -186,7 +186,7 @@ extern void d2_RunMessageBox();
 extern void fcn_004b6470();
 extern void fcn_64d41a();
 extern void ls_SaveNetworkGame();
-extern void fcn_00535850();
+extern void cm_SaveGameAndWait();
 
 
 /* ADDRESS: GOLDTL 0x005373e0 */
@@ -346,7 +346,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 	}
 	if (g_774670 == 0) {
 		if (g_6b8300 != 0 && p != 0 && (flags & 0x40)) {
-			fcn_00537080();
+			d3_UpdateLightningAndThunder();
 		}
 		if (g_774670 == 0) {
 			if ((flags & 0x10000) && g_772f6c != 0) {
@@ -562,7 +562,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 	}
 	if (g_772e84 > 0 && !(main_LoopFlags & 0x200000)) {
 		g_772e84--;
-		fcn_00535850(flags, g_14ac5e8);
+		cm_SaveGameAndWait(flags, g_14ac5e8);
 	}
 	if (g_774670 > 0) {
 		g_774670--;

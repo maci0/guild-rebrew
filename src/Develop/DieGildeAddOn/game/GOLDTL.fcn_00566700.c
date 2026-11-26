@@ -20,7 +20,7 @@ void __cdecl fcn_004c6650(int);
 
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c53a0(void);
-int __cdecl fcn_00500480(char*, int*, int*);
+int __cdecl gm_FindFallbackPublicBuilding(char*, int*, int*);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl fcn_004c54c0(int, int, int, int);
 char* __cdecl fcn_005049a0(char*);
@@ -48,10 +48,10 @@ void __cdecl fcn_00566700(char* u)
 		}
 		fcn_004c6430(*(int*) (h + 4), 0, 0);
 		fcn_004c6650(*(int*) (h + 4));
-		fcn_004c4510(h, *(int*) (h + 4));
+		cm_BeginPacketFieldDelta(h, *(int*) (h + 4));
 		fcn_004c4700(4, 1, h - g_aed32c + 0x16c, &v);
 		fcn_004c53a0();
-		if (fcn_00500480(h, &a, &b) != 0) {
+		if (gm_FindFallbackPublicBuilding(h, &a, &b) != 0) {
 			if (b != -1) {
 				fcn_004c5da0(*(int*) (h + 4), a, b, 0, 0, "Entlassen");
 			} else {

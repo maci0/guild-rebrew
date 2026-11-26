@@ -21,12 +21,12 @@ extern char g_6b5c60[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_FindRecordById(int);
-int __cdecl fcn_0050de80(char* e, Stats* s);
+int __cdecl gm_CalcEntityInventoryStats(char* e, Stats* s);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_004d5450(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_004e6240(char*, char*, char*, char*);
+void __cdecl he_SendCmdMessage(char*, char*, char*, char*);
 
 // Sends the two parties of a transfer (+0x34, +0x38) their message pair,
 // chosen by the flag byte at +0x7c (1, 2 or 4). With flag 1 set, every
@@ -59,7 +59,7 @@ int __cdecl fcn_004d74b0(char* x)
 				if (r == 0) {
 					return 0;
 				}
-				fcn_0050de80(r, &st);
+				gm_CalcEntityInventoryStats(r, &st);
 				if (st.xb0 <= 0) {
 					return 0;
 				}
@@ -74,26 +74,26 @@ int __cdecl fcn_004d74b0(char* x)
 	if (flags & 1) {
 		io_FormatTextBuffer(buf, 0x11e0, *(unsigned short*) b);
 		strcat(buf, g_14a9aa8);
-		fcn_004e6240(a, x, buf, g_6b5c60);
+		he_SendCmdMessage(a, x, buf, g_6b5c60);
 		io_FormatTextBuffer(buf, 0x11e1, *(unsigned short*) a);
 		strcat(buf, g_14a9aa8);
-		fcn_004e6240(b, x, buf, g_6b5c60);
+		he_SendCmdMessage(b, x, buf, g_6b5c60);
 	} else if (flags & 2) {
 		t = fcn_004d5450(gm_SearchTable67(*(int*) (x + 0x10c))) + 0x1125;
 		io_FormatTextBuffer(buf, 0x11e3, t, *(unsigned short*) b, t67);
 		strcat(buf, g_14a9ab4);
-		fcn_004e6240(a, x, buf, g_6b5c60);
+		he_SendCmdMessage(a, x, buf, g_6b5c60);
 		io_FormatTextBuffer(buf, 0x11e4, *(unsigned short*) a, t, t67);
 		strcat(buf, g_14a9ab4);
-		fcn_004e6240(b, x, buf, g_6b5c60);
+		he_SendCmdMessage(b, x, buf, g_6b5c60);
 		return 1;
 	} else if (flags & 4) {
 		io_FormatTextBuffer(buf, 0x11e6, *(unsigned short*) b);
 		strcat(buf, g_14a9ac0);
-		fcn_004e6240(a, x, buf, g_6b5c60);
+		he_SendCmdMessage(a, x, buf, g_6b5c60);
 		io_FormatTextBuffer(buf, 0x11e7, *(unsigned short*) a);
 		strcat(buf, g_14a9ac0);
-		fcn_004e6240(b, x, buf, g_6b5c60);
+		he_SendCmdMessage(b, x, buf, g_6b5c60);
 	}
 	return 1;
 }

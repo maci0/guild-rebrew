@@ -23,7 +23,7 @@ void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_00529670(int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_0050c710(unsigned char*, int, int);
+int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 char* __cdecl fcn_0050dc90(unsigned char*);
@@ -176,11 +176,11 @@ void __cdecl fcn_00560290(char* a0)
 			}
 			win = fcn_00500e20(&gm_GameTime);
 			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v9].category == 0x20) {
-				scale = (double) fcn_0050c710(v9, 0x1e, 1) * *(double*) 0x665eb0 + 1.0;
+				scale = (double) gm_GetBuildingTechEffect(v9, 0x1e, 1) * *(double*) 0x665eb0 + 1.0;
 				t = gm_RandomMod(6) & 0xffff;
 				t = (int) ((double) ((t + 9) * *(unsigned char*) (a0 + 0xac)) * scale);
 			} else {
-				scale = (double) fcn_0050c710(v9, 0xb, 1) * *(double*) 0x665eb0 + 1.0;
+				scale = (double) gm_GetBuildingTechEffect(v9, 0xb, 1) * *(double*) 0x665eb0 + 1.0;
 				t = gm_RandomMod(6) & 0xffff;
 				t = (int) ((double) ((t + 9) * *(unsigned char*) (a0 + 0xac)) * scale);
 			}

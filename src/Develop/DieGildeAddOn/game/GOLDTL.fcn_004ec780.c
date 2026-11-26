@@ -9,13 +9,13 @@ extern Rec18_68da68 amt_OfficeSlots[42];
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
 
-void __cdecl fcn_004ec780(int type)
+void __cdecl amt_TriggerOfficeActionByType(int type)
 {
 	int i;
 
 	for (i = 0; i < 30; i++) {
 		if (amt_OfficeSlots[i].type == type) {
-			fcn_004e8240(amt_OfficeSlots[i].id, 0, 0, 3, 0xff);
+			amt_SendOfficeCommand(amt_OfficeSlots[i].id, 0, 0, 3, 0xff);
 			return;
 		}
 	}

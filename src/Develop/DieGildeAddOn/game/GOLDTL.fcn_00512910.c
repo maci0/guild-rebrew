@@ -61,7 +61,7 @@ void __cdecl gm_InitializeShopInventory(void)
 					count++;
 				}
 			}
-			fcn_004c4510((char*) w, w->id);
+			cm_BeginPacketFieldDelta((char*) w, w->id);
 			cm_AppendPacketFieldDelta(1, 1, (char*) w - g_aed32c + 0x1c, &count);
 			count = 4;
 			cm_AppendPacketFieldDelta(4, 1, (char*) w - g_aed32c + 0xe, &count);
@@ -83,7 +83,7 @@ void __cdecl gm_InitializeShopInventory(void)
 					count++;
 				}
 			}
-			fcn_004c4510((char*) w, w->id);
+			cm_BeginPacketFieldDelta((char*) w, w->id);
 			cm_AppendPacketFieldDelta(1, 1, (char*) w - g_aed32c + 0x1c, &count);
 			count = 4;
 			cm_AppendPacketFieldDelta(4, 1, (char*) w - g_aed32c + 0xe, &count);

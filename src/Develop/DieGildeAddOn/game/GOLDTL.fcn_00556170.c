@@ -16,7 +16,7 @@ int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c6000(int, int);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004fac80(int, int*);
@@ -156,7 +156,7 @@ anim7:
 			fcn_004c6000(*(int*) (obj + 4), *(int*) (ent + 1));
 		i = gm_RandomMod(0x32);
 		fcn_004c51a0(*(int*) (obj + 4), -1, g_773d75, ((i & 0xffff) + 0x33) * 0x20);
-		fcn_004c4510(obj, *(int*) (obj + 4));
+		cm_BeginPacketFieldDelta(obj, *(int*) (obj + 4));
 		cm_AppendPacketFieldDelta(1, 1, 2, &v38);
 		cm_AppendPacketFieldDelta(1, 1, 0xc, &v34);
 		fcn_004c5360();

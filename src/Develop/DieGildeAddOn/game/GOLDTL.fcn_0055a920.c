@@ -8,7 +8,7 @@ extern char g_7f4ca0[];
 
 int __cdecl gm_RandomMod(int);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -56,7 +56,7 @@ void __cdecl fcn_0055a920(char* rec)
 		if (*(unsigned short*) slot != 0xffff &&
 		    *(unsigned char*)&((ENTITY_RECORD_VIEW*)slot)->entity_type <= 4 &&
 		    *(unsigned char*)&((ENTITY_RECORD_VIEW*)slot)->side == *(int*) (rec + 0xb4)) {
-			fcn_004c4510(slot, *(int*)&((ENTITY_RECORD_VIEW*)slot)->entity_id);
+			cm_BeginPacketFieldDelta(slot, *(int*)&((ENTITY_RECORD_VIEW*)slot)->entity_id);
 			cm_AppendPacketFieldDelta(1, 1, 0xc, (char*) &flag);
 			fcn_004c5360();
 			cnt++;

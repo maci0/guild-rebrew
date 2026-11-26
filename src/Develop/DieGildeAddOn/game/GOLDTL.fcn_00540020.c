@@ -105,7 +105,7 @@ void __cdecl fcn_00469e70(void);
 void __cdecl fcn_00473150(void*);
 void __cdecl sv_WaitForNetworkSync(int);
 void __cdecl fcn_005355f0(void);
-void __cdecl fcn_0050e380(int, void*);
+void __cdecl gm_BuildDealSummary(int, void*);
 void __cdecl fcn_004fd400(short*, int*);
 void* __cdecl fcn_004c5790(int, void*);
 int __cdecl fcn_004c4450(void*);
@@ -148,7 +148,7 @@ void* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
 void __cdecl fcn_00406120(void*);
 char* __cdecl ch_CreateAction(void*, int, ...);
-void __cdecl fcn_004ec660(void*);
+void __cdecl amt_NotifyLowRankEligibility(void*);
 void __cdecl fcn_004c2d90(float, int);
 
 #define SLOTPTR(k) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(k)])
@@ -211,7 +211,7 @@ void __cdecl fcn_00540020(void)
 		sv_WaitForNetworkSync(0x24087);
 	}
 
-	fcn_0050e380(g_774970 & 0xffff, arr);
+	gm_BuildDealSummary(g_774970 & 0xffff, arr);
 	fcn_0052a890((pos14_7f4c00*) &pos);
 	g_7e4314 = fcn_0052a310((pos14_7f4c00*) &pos);
 	fcn_004fd400(&pos.out, &i);
@@ -602,6 +602,6 @@ next2:
 	}
 
 	g_1007cd0 = 1;
-	fcn_004ec660(SLOTPTR(g_774970 & 0xffff));
+	amt_NotifyLowRankEligibility(SLOTPTR(g_774970 & 0xffff));
 	fcn_004c2d90(1.0f, 0x7d0);
 }

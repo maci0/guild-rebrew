@@ -8,7 +8,7 @@ extern short g_7f4c0c;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_00507ab0(int k);
+char* __cdecl gm_FindPublicTreasury(int k);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 int __cdecl fcn_0050d170(int k);
@@ -26,7 +26,7 @@ int __cdecl ai_RunBuergermeisterRathaus(unsigned char* rec, unsigned char* obj, 
 	char msg[0xf8];
 	char* dialog;
 
-	dialog = fcn_00507ab0(1);
+	dialog = gm_FindPublicTreasury(1);
 	if (dialog == 0) {
 		return 0;
 	}

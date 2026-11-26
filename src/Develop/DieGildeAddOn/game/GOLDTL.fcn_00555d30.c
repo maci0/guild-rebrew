@@ -9,7 +9,7 @@ int __cdecl fcn_004c5620(int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, void*);
 void __cdecl gm_AddTime(char*, int, int, int);
-int __cdecl fcn_004ac150(short);
+int __cdecl gm_PickRandomGedicht(short);
 unsigned short __cdecl fcn_004ac290(int);
 char* __cdecl fcn_004ac1e0(short);
 char* __cdecl evt_FindScriptById(int);
@@ -51,7 +51,7 @@ void __cdecl fcn_00555d30(char* obj)
 		if (*(unsigned char*) (obj + 0x78) & 4) {
 			return;
 		}
-		id = fcn_004ac150(*(short*) (obj + 0xac));
+		id = gm_PickRandomGedicht(*(short*) (obj + 0xac));
 		*(short*) (obj + 0xac) = id;
 		*(short*) (obj + 0xae) = fcn_004ac290(id);
 		base = (int*) (obj + 0x52);

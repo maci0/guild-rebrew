@@ -68,7 +68,7 @@ int __cdecl gm_GetMsgField(void*, void*);
 int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-int __cdecl fcn_004c61d0(MarktSlot*, unsigned char);
+int __cdecl cm_SendMarktSlotDelta(MarktSlot*, unsigned char);
 float __cdecl fcn_005025a0(int, int);
 char* __cdecl gm_FindKind47ByOwner(int);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -191,7 +191,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		if ((unsigned short) gm_RandomMod(100) > 0xa || (unsigned short) gm_GameTime.b == 0xc) {
 			rec.f38 = fcn_005025a0(g_773d75, i);
 		}
-		fcn_004c61d0(&rec, g_773d75);
+		cm_SendMarktSlotDelta(&rec, g_773d75);
 	}
 	/* pass 2: price the slots the player does not hold */
 	for (i = 0; i < 0x55; i++) {
@@ -281,7 +281,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 		if ((unsigned short) gm_RandomMod(100) > 0xa || (unsigned short) gm_GameTime.b == 0xc) {
 			rec.f38 = fcn_005025a0(g_773d75, i);
 		}
-		fcn_004c61d0(&rec, g_773d75);
+		cm_SendMarktSlotDelta(&rec, g_773d75);
 	}
 	/* pass 3: the three trade lagers next to each market hall */
 	i = 1;
@@ -359,7 +359,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			if ((unsigned short) gm_RandomMod(100) > 0x4b) {
 				rec.f38 = fcn_005025a0(i, t);
 			}
-			fcn_004c61d0(&rec, i);
+			cm_SendMarktSlotDelta(&rec, i);
 		}
 		ent = (char*) fcn_00502cd0(*(int*) (hall + 0x5d), 2, 0, 0x1dc, 6);
 		if (ent == 0) {
@@ -413,7 +413,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			if ((unsigned short) gm_RandomMod(100) > 0x4b) {
 				((MarktSlot*) scratch)->f38 = fcn_005025a0(i, t);
 			}
-			fcn_004c61d0((MarktSlot*) scratch, i);
+			cm_SendMarktSlotDelta((MarktSlot*) scratch, i);
 		}
 next_lager:
 		i++;

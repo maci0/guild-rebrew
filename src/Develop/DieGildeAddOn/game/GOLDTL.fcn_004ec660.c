@@ -9,7 +9,7 @@ int __cdecl amt_SelectOfficeCandidates(void*, int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 
-void __cdecl fcn_004ec660(void* entity)
+void __cdecl amt_NotifyLowRankEligibility(void* entity)
 {
 	char items[0x48];
 	char buf[0x800];

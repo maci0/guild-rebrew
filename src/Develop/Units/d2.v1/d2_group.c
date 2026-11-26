@@ -66,7 +66,7 @@ int __cdecl d2_UpdateProgressBar(int h, int total, int reset)
 }
 
 /* ADDRESS: GOLDTL 0x004e6eb0 */
-int __cdecl fcn_004e6eb0(char *text, unsigned int flags)
+int __cdecl d2_ShowMessageBox(char *text, unsigned int flags)
 {
 	int mode;
 	int result;
@@ -122,7 +122,7 @@ int __cdecl fcn_004e6eb0(char *text, unsigned int flags)
 	if (f80) {
 		id = fcn_004677e0(0x1c, ((Screen*)g_77255c)->h - 0x18, ((Screen*)g_77255c)->w - 0x40, 0, 500, 0x83, 0x42, d2_CurrentWindowId);
 	}
-	while (main_RunFrameLoop(fcn_004e6eb0, mode) != 0) {
+	while (main_RunFrameLoop(d2_ShowMessageBox, mode) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			fcn_004707d0(h);

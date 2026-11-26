@@ -213,8 +213,8 @@ extern int __cdecl cm_GetBuildingStatCount(unsigned char* entity);
 #define gv_SlotTable (g_slot_table)
 #define gv_SlotTableEnd ((char*) g_entity_table_end)
 #else
-extern int __cdecl fcn_004f13d0(unsigned char* entity);
-#define gv_BuildingStatCount(e) fcn_004f13d0((unsigned char*) (e))
+extern int __cdecl cm_GetBuildingSlotCount(unsigned char* entity);
+#define gv_BuildingStatCount(e) cm_GetBuildingSlotCount((unsigned char*) (e))
 #define gv_SlotWorkerCount(worktype, index) (((int*) (0x665328 + (worktype) * 0x10))[(index)])
 #define gv_SlotTable ((char*) 0x7f4ca0)
 #define gv_SlotTableEnd ((char*) (*(unsigned int*) 0x773da8))

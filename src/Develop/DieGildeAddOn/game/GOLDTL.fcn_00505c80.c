@@ -7,7 +7,7 @@ void* __cdecl fcn_00502cd0(int list, int a, int b, int c);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_005058b0(unsigned char* e, void* q, int k);
 
-void __cdecl fcn_00505c80(unsigned char* e)
+void __cdecl gm_UpdateResidenceOwnerDecor(unsigned char* e)
 {
 	void* list[32];
 	void* q;

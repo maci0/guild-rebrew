@@ -17,11 +17,11 @@ extern void __cdecl fcn_004c5530(int block);
 extern void* __cdecl gm_GetChainNodeAtIndex(int a, int b);
 extern void* __cdecl gm_SearchTable67(int value);
 extern int __cdecl fcn_004be340(int a);
-extern void __cdecl fcn_004c4510(void* record, unsigned int value);
+extern void __cdecl cm_BeginPacketFieldDelta(void* record, unsigned int value);
 extern void __cdecl fcn_004c4700(int a, int b, int offset, void* value);
 extern unsigned int __cdecl fcn_004c53a0(void);
 extern void* __cdecl gm_EntityAccumulate(void* record);
-extern int __cdecl fcn_00529710(void* record, void* entry);
+extern int __cdecl ch_IsEntityNearBuildingDoor(void* record, void* entry);
 extern int __cdecl fcn_00505340(void* entry);
 
 #pragma pack(push, 1)
@@ -108,7 +108,7 @@ void __cdecl fcn_005705a0(int action, char* rec)
 				return;
 			rec[0x32] = 0;
 		}
-		if (fcn_00529710(rec, entry) != 0
+		if (ch_IsEntityNearBuildingDoor(rec, entry) != 0
 			&& (fcn_00505340(entry) == 0
 				|| *(int*) (rec + 6) == *(int*) ((char*) *(void**) 0x7749f0 + 1))) {
 			int next_idx;
@@ -116,7 +116,7 @@ void __cdecl fcn_005705a0(int action, char* rec)
 			next_idx = *(int*) (rec + 0x2d) + 1;
 			if (next_idx >= next)
 				next_idx = 0;
-			fcn_004c4510(rec, *(unsigned int*) (rec + 2));
+			cm_BeginPacketFieldDelta(rec, *(unsigned int*) (rec + 2));
 			fcn_004c4700(4, 1, (int) (rec + 0x2d) - g_aed32c, &next_idx);
 			*(unsigned int*) (action + 0x84) = fcn_004c53a0();
 			return;

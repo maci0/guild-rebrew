@@ -8,7 +8,7 @@ unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_004ce590(int);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
-void __cdecl fcn_004ce6e0(char* entity)
+void __cdecl gm_RemoveSpecialTableItems(char* entity)
 {
 	unsigned short* p;
 	int id;

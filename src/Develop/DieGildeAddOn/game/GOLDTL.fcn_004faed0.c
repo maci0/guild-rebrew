@@ -18,9 +18,9 @@ extern double g_664e60;
 
 void __cdecl fcn_004fad10(void);
 int __cdecl fcn_004fa6f0(char*, int*, int*);
-float __cdecl fcn_004fc520(void);
+float __cdecl gm_GetLiteracyRate(void);
 float __cdecl fcn_004fc3a0(int*);
-double __cdecl fcn_004fc340(int*);
+double __cdecl gm_CalcLaw00And01Factor(int*);
 
 /* ADDRESS: GOLDTL 0x004faed0 */
 void __cdecl fcn_004faed0(float* out)
@@ -140,7 +140,7 @@ void __cdecl fcn_004faed0(float* out)
 	out[5] = (float) ((((double) sum_a / (double) sum_b)
 	    * ((double) sum_d / (double) slot0_e) + g_662908)
 	    * ((double) f / (double) weight_a) * (double) sum_c);
-	out[0] = fcn_004fc520();
+	out[0] = gm_GetLiteracyRate();
 	out[3] = g_6628a0 - (double) slot1_count / f;
 	out[1] = g_6628a0 - (double) slot0_count / f;
 	scale = g_6628a0 / (f + f);
@@ -158,7 +158,7 @@ void __cdecl fcn_004faed0(float* out)
 		}
 	}
 	lit = fcn_004fc3a0(buf_a);
-	w = fcn_004fc340(buf_a);
+	w = gm_CalcLaw00And01Factor(buf_a);
 	out[2] = (float) ((g_6629c8 - ((double) lit * (double) g_6629c0
 	    + w * g_664e60)) * (double) accum);
 	f = g_6628a0 - out[2];

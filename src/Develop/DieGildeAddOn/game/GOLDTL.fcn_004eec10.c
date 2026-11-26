@@ -6,7 +6,7 @@
 int __cdecl ahm_CheckFlag(void*);
 int __cdecl fcn_004c6d30(int*);
 
-int __cdecl fcn_004eec10(char* obj)
+int __cdecl ahm_SendFireCommand(char* obj)
 {
 	int buf[6];
 

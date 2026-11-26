@@ -10,7 +10,7 @@ extern double g_664f08;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
-int __cdecl fcn_0050c710(int, int, int);
+int __cdecl gm_GetBuildingTechEffect(int, int, int);
 float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl fcn_005b5660(int, unsigned short*);
 
@@ -32,7 +32,7 @@ void __cdecl fcn_0057d830(char* u, int count)
 	if (found == 0) {
 		return;
 	}
-	n = fcn_0050c710(found, 0x1d, 1);
+	n = gm_GetBuildingTechEffect(found, 0x1d, 1);
 	mult = n * g_6652c4 + 1.0f;
 	g = gm_GetEntitySkill(h, 2);
 	sq = g * g;

@@ -40,7 +40,7 @@ void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
-void __cdecl fcn_00511580(void)
+void __cdecl gm_InitCityOfficialsAndCitizens(void)
 {
 	int flag;
 	int money;
@@ -53,7 +53,7 @@ void __cdecl fcn_00511580(void)
 	for (i = 0; i < 16; i++) {
 		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type < 5) {
 			money = fcn_0050b750(gm_RandomMod(0x122) + 10, (*(char*)&g_773d75));
-			fcn_004c4510((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
+			cm_BeginPacketFieldDelta((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
 			fcn_004c4670(4, 1, 0x1ac, &money);
 			fcn_004c5360();
 		}
@@ -71,11 +71,11 @@ void __cdecl fcn_00511580(void)
 	gm_RichterEvangelisch = (char*) fcn_004c4480(b);
 	cm_BeginCommandSync();
 	flag = 0;
-	fcn_004c4510(gm_RichterKatholisch, ((Figure*) gm_RichterKatholisch)->owner);
+	cm_BeginPacketFieldDelta(gm_RichterKatholisch, ((Figure*) gm_RichterKatholisch)->owner);
 	cm_AppendPacketFieldDelta(1, 1, gm_RichterKatholisch - g_aed32c + 0xc, &flag);
 	fcn_004c5360();
 	flag = 1;
-	fcn_004c4510(gm_RichterEvangelisch, ((Figure*) gm_RichterEvangelisch)->owner);
+	cm_BeginPacketFieldDelta(gm_RichterEvangelisch, ((Figure*) gm_RichterEvangelisch)->owner);
 	cm_AppendPacketFieldDelta(1, 1, gm_RichterEvangelisch - g_aed32c + 0xc, &flag);
 	fcn_004c5360();
 	cm_EndCommandSync();

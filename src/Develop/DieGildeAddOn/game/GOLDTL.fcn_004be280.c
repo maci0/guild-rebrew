@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl m_FreeTracked(void*);
 
-void __cdecl fcn_004be280(char* p)
+void __cdecl rt_FreeRoutePoints(char* p)
 {
 	char* q;
 

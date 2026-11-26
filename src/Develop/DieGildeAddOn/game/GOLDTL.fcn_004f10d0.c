@@ -3,7 +3,7 @@
 
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 
-void __cdecl fcn_004f10d0(char* p, int* a, int* b)
+void __cdecl gm_GetArtilleryLimits(char* p, int* a, int* b)
 {
 	*b = 0;
 	*a = 0;

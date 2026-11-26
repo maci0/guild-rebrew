@@ -7,10 +7,10 @@ int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_004f4830(int, int*);
 float __cdecl fcn_004fbd40(void);
-int __cdecl fcn_0050e4a0(int);
+int __cdecl gm_FindPublicBuilding(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int, char);
-int __cdecl fcn_004ec710(void);
+int __cdecl amt_CalcTotalOfficeSalaries(void);
 int __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x00490e20 */
@@ -53,10 +53,10 @@ int __cdecl fcn_00490e20(char* a0, int a1, int* outValue)
 			if (mode == 1 || mode == 2 || mode == 3 || mode == 5) {
 				r--;
 			}
-			owner = fcn_0050e4a0(1);
+			owner = gm_FindPublicBuilding(1);
 			p = fcn_00502cd0(*(int*) ((char*) owner + 0x5d), 2, 6, 0, 0x115);
 			cur = fcn_0050b810(*(int*) ((char*) p + 0x14), g_773d75);
-			if (cur < fcn_004ec710() * 3) {
+			if (cur < amt_CalcTotalOfficeSalaries() * 3) {
 				r = r + 1 + (gm_RandomMod(3) & 0xffff);
 			}
 			if (v5[6] - 3 > r) {

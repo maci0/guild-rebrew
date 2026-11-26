@@ -17,9 +17,9 @@ void __cdecl main_RunFrameLoop(int a, int b);
 void __cdecl fcn_004234e0(int a, char* s, int b, int c, int d, int e, int f);
 int __cdecl fcn_005095d0(void* p, void* buf);
 void __cdecl io_FormatTextBuffer(char* buf, ...);
-int __cdecl fcn_004e6eb0(void* buf, int n);
+int __cdecl d2_ShowMessageBox(void* buf, int n);
 void __cdecl fcn_005d0660(int a, int b, int c, int d);
-void __cdecl fcn_004c4510(void* a, int b);
+void __cdecl cm_BeginPacketFieldDelta(void* a, int b);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* p);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
@@ -29,7 +29,7 @@ void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(void* h);
 void __cdecl fcn_004e44f0(void* h);
 void __cdecl fcn_004e4c00(void);
-void __cdecl fcn_004e4910(void);
+void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004c09b0(void);
 void __cdecl fcn_004230e0(void* h);
 void __cdecl fcn_004e4eb0(void);
@@ -116,14 +116,14 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			goto dialog_fallback;
 		idxval = *(unsigned short*) obj;
 		io_FormatTextBuffer(buf1, 0x40fb, 0x40f5, idxval);
-		if (fcn_004e6eb0(buf1, 0x10) == 0) {
+		if (d2_ShowMessageBox(buf1, 0x10) == 0) {
 		dialog_fallback:
 			fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, cut_EventLoopFlags);
 		} else {
 			int alo;
 			alo = 0;
 			r = *(int*) ((char*) obj + 4);
-			fcn_004c4510(obj, r);
+			cm_BeginPacketFieldDelta(obj, r);
 			f10 = 100.0f;
 			cm_AppendPacketFieldDelta(4, 1, 0x1c, &f10);
 			cm_AppendPacketFieldDelta(4, 1, 0x24, &alo);
@@ -138,8 +138,8 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			*(int*) &f10 = 0;
 			alo = 100.0f;
 			io_FormatTextBuffer(buf1, 0x40fc, 0x40f5, idxval);
-			fcn_004e6eb0(buf1, 0x10);
-			fcn_004c4510(obj, *(int*) ((char*) obj + 4));
+			d2_ShowMessageBox(buf1, 0x10);
+			cm_BeginPacketFieldDelta(obj, *(int*) ((char*) obj + 4));
 			cm_AppendPacketFieldDelta(4, 1, 0x1c, &alo);
 			cm_AppendPacketFieldDelta(4, 1, 0x24, &f10);
 			fcn_004c5360();
@@ -154,18 +154,18 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			} else {
 				io_FormatTextBuffer(buf1, 0x1ab3, *(unsigned short*) obj);
 			}
-			fcn_004e6eb0(buf1, 0);
+			d2_ShowMessageBox(buf1, 0);
 			fcn_005356b0(0x5438c0);
 		} else {
 			fcn_00509fc0(obj, buf2, 1);
-			fcn_004e6eb0(buf2, 0x10);
+			d2_ShowMessageBox(buf2, 0x10);
 		}
 	}
 	fcn_004e48b0();
 	fcn_004e4610((void*) xslot);
 	fcn_004e44f0((void*) xslot);
 	fcn_004e4c00();
-	fcn_004e4910();
+	cut_CleanupCutscene();
 	fcn_004c09b0();
 	fcn_004230e0((void*) handle);
 	fcn_004e4eb0();

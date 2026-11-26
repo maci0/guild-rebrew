@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/entity.h"
 
-void __cdecl fcn_004ec780(int);
+void __cdecl amt_TriggerOfficeActionByType(int);
 int __cdecl amt_SelectOfficeCandidates(EntityStruct* slot, int mode, int* out);
 void __cdecl amt_ApplyForOffice(EntityStruct* slot, int value);
 
@@ -13,7 +13,7 @@ void __cdecl fcn_0057fea0(int action)
 	int value[3];
 
 	if (action == 0) {
-		fcn_004ec780(1);
+		amt_TriggerOfficeActionByType(1);
 		return;
 	}
 	if (action != 1) {

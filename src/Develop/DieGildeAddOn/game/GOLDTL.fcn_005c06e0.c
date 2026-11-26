@@ -15,7 +15,7 @@ extern int d2_CurrentElementId;
 extern char g_6ac494[];
 
 float __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_00525f60(void*, int);
+int __cdecl d2_CheckActionBlocker(void*, int);
 int __cdecl fcn_00579640(void*, void*);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -55,7 +55,7 @@ int __cdecl fcn_005c06e0(unsigned short* entityRecord)
 		goto none;
 	if (*entityRecord == g_774970)
 		goto none;
-	if (!fcn_00525f60(&g_7f4ca0[g_774970], 2))
+	if (!d2_CheckActionBlocker(&g_7f4ca0[g_774970], 2))
 		return 0;
 	if (!fcn_00579640(entityRecord, &g_7f4ca0[g_774970])) {
 		io_FormatTextBuffer(text, 0x409f, *entityRecord);
@@ -69,7 +69,7 @@ int __cdecl fcn_005c06e0(unsigned short* entityRecord)
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	if (!fcn_00525f60(&g_7f4ca0[g_774970], 2))
+	if (!d2_CheckActionBlocker(&g_7f4ca0[g_774970], 2))
 		return 0;
 	dlg = fcn_00470820(0, 0, g_6ac494);
 	d2_CenterDialogWindows(dlg);

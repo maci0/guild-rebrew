@@ -3,7 +3,7 @@
 
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 
-int __cdecl fcn_00510400(char* p)
+int __cdecl gm_CountBuildingExtensions(char* p)
 {
 	int r;
 

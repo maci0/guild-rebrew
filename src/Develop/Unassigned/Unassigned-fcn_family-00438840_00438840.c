@@ -60,15 +60,15 @@ void __cdecl d3_SetFogRange(float a, float b)
 }
 
 /* ADDRESS: GOLDTL 0x00438920 */
-void __cdecl fcn_00438920(float a, float b, int c)
+void __cdecl d3_SetFog(float fog_start, float fog_end, int fog_color)
 {
 	char on;
 
-	if (a < b) {
+	if (fog_start < fog_end) {
 		on = 1;
-		d3_SetFogRange(a, b);
-		g_10425fc = a;
-		g_104329c = b;
+		d3_SetFogRange(fog_start, fog_end);
+		g_10425fc = fog_start;
+		g_104329c = fog_end;
 		((FloatRenderStateFn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState)(((D3D_DEVICE_VIEW*)g_6b5de0), 0x24, g_1042ce4);
 		((FloatRenderStateFn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState)(((D3D_DEVICE_VIEW*)g_6b5de0), 0x25, g_1042a14);
 	} else {
@@ -76,9 +76,9 @@ void __cdecl fcn_00438920(float a, float b, int c)
 		if (g_6b8060 != 0) {
 			fcn_00438da0(g_10529d8, g_10529d4, g_10529c4, g_1043288, g_10529c8, g_10529d0, g_10432a4, g_1042a28, g_1042a24);
 		}
-		g_10425fc = a;
-		g_104329c = b;
+		g_10425fc = fog_start;
+		g_104329c = fog_end;
 	}
 	g_6b8060 = on;
-	d3_FogColor = c;
+	d3_FogColor = fog_color;
 }

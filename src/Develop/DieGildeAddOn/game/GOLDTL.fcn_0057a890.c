@@ -1,7 +1,7 @@
 unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00508220(int type, int* out);
-void __cdecl fcn_004c4510(char* off, int v);
+void __cdecl cm_BeginPacketFieldDelta(char* off, int v);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, int* v);
 void __cdecl fcn_004c5360(void);
 float __cdecl fcn_004ff210(unsigned short id, int v);
@@ -84,7 +84,7 @@ int __cdecl fcn_0057a890(char* off, float chance, int kind, float* out)
 		} else if (type == 9) {
 			flags ^= ((x << 25) ^ flags) & 0x1e000000;
 		}
-		fcn_004c4510(off, *(int*) (off + 4));
+		cm_BeginPacketFieldDelta(off, *(int*) (off + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x2c, &flags);
 		fcn_004c5360();
 		f = fcn_004ff210(*(unsigned short*) off, -d);

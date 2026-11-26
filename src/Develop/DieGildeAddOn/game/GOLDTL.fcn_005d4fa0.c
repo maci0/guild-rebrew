@@ -16,14 +16,14 @@ int __cdecl fcn_004c5420(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c5150(int, int, char, int);
 float __cdecl fcn_004ff210(unsigned short, int);
-int __cdecl fcn_00508890(unsigned char*);
+int __cdecl gm_CureRandomAffliction(unsigned char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00525f60(unsigned char*, int);
+int __cdecl d2_CheckActionBlocker(unsigned char*, int);
 int __cdecl fcn_00526010(unsigned char*, int, char);
 void __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl fcn_004c4450(int);
@@ -57,7 +57,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 		if (gm_RandomMod(2)) {
 			fcn_004c5150(-1, *(int*) (e + 4), g_773d75, money);
 			fcn_004ff210(*(unsigned short*) e, half);
-			fcn_00508890(e);
+			gm_CureRandomAffliction(e);
 		}
 		return 0x11;
 	}
@@ -73,14 +73,14 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 	do {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				if (fcn_00525f60(e, 2) && fcn_00526010(e, money, g_773d75)) {
+				if (d2_CheckActionBlocker(e, 2) && fcn_00526010(e, money, g_773d75)) {
 					fcn_004c6ae0(*(int*) (e + 4), -2);
 					io_FormatTextBuffer(text, 0x1d3c);
 					if (gm_RandomMod(2)) {
 						io_FormatTextBuffer(tmp, s_679060, 0x1d3d);
 						strcat(text, tmp);
 						fcn_004c5150(-1, *(int*) (e + 4), g_773d75, money);
-						fcn_00508890(e);
+						gm_CureRandomAffliction(e);
 					} else {
 						io_FormatTextBuffer(tmp, s_679060, 0x1d3e);
 						strcat(text, tmp);

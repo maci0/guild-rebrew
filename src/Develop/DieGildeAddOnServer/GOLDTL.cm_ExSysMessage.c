@@ -24,7 +24,7 @@ unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_005167c0(void* ent, int v);
 void __cdecl fcn_0052a3a0(void* t, int flag);
-void __cdecl fcn_0052da70(int idx);
+void __cdecl d3_UpdateBuildingWimpelTextures(int idx);
 void __cdecl fcn_00533a40(void* p);
 void __cdecl fcn_005e2510(void);
 
@@ -126,7 +126,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 		*(char**) 0x6b5c54 = 0;
 		break;
 	case 13:
-		fcn_0052da70(*(int*) (buf + 0x11));
+		d3_UpdateBuildingWimpelTextures(*(int*) (buf + 0x11));
 		break;
 	case 15:
 		*(int*) 0x774980 = *(int*) (buf + 0x11);

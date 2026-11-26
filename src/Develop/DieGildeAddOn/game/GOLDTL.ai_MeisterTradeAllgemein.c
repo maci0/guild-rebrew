@@ -107,7 +107,7 @@ extern float g_664144;
 
 double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_0047d1b0(void);
-int __cdecl fcn_0047d1e0(void);
+int __cdecl he_CountActiveTradeActions(void);
 int __cdecl fcn_004c51f0(int, int, int, int, int, int);
 int __cdecl fcn_004c52d0(int, int);
 int __cdecl fcn_004c5530(void*);
@@ -117,9 +117,9 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_00503d10(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_0050cce0(char*, void*, int);
+int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_AccumulateTyped2(void*);
-int __cdecl fcn_0050de80(char*, Stats*);
+int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 int __cdecl fcn_0050dfd0(void*, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -285,7 +285,7 @@ clear_stack:
 		{
 			char* tp = *(char**) (o + 0x16c);
 
-			fcn_0050cce0(tp, v.nslot, 0);
+			gm_CollectBuildingStock(tp, v.nslot, 0);
 			r = fcn_00502cd0(*(int*) (tp + 0x5d), 3, 6, 4,
 			    0x1d, 3, *(unsigned short*) (tp + 0x27));
 		}
@@ -338,7 +338,7 @@ next_request:
 		cnt = 0;
 		sent = 0;
 		n = 0;
-		if (fcn_0047d1e0() > fcn_0047d1b0()) {
+		if (he_CountActiveTradeActions() > fcn_0047d1b0()) {
 			v.m.skip = 1;
 		}
 		for (i = 0; i < 3; i++) {
@@ -347,7 +347,7 @@ next_request:
 			v.m.ids[3 + i] = 0;
 			v.m.slots[3 + i] = -1;
 		}
-		fcn_0050de80(r, &v.st);
+		gm_CalcEntityInventoryStats(r, &v.st);
 		q = fcn_00502cd0(*(int*) (r + 0x14), 1, 0, 0x1dd);
 		i = 0;
 		if (v.st.x0 <= 0) {

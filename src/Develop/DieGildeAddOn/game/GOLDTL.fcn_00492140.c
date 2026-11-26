@@ -7,7 +7,7 @@ extern unsigned char* lpGebaeudeINST;
 unsigned char __cdecl fcn_004f97a0(int a);
 int __cdecl fcn_004f4830(int idx, void* dst);
 
-int __cdecl fcn_00492140(char* e, int unused, int* out)
+int __cdecl ai_EvaluateLaw0x08(char* e, int unused, int* out)
 {
 	int info[9];
 	float m;

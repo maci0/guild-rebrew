@@ -1,7 +1,7 @@
 int __cdecl fcn_004f4830(int, void*);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c5480(int, int, float);
-void __cdecl fcn_004c4510(void*, int);
+void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00535960(void);
@@ -42,7 +42,7 @@ void __cdecl fcn_004fd780(void)
 						fcn_004c5480(*(int*) (p + 2), 0x1d0,
 							gm_RandomFloat01() * 0.5f + 0.25f);
 						g_773d48++;
-						fcn_004c4510(p - 2, *(int*) (p + 2));
+						cm_BeginPacketFieldDelta(p - 2, *(int*) (p + 2));
 						cm_AppendPacketFieldDelta(1, 1, 0xc, &count);
 						fcn_004c5360();
 						g_773d48++;

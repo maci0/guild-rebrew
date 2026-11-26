@@ -17,7 +17,7 @@ void __cdecl fcn_004c57e0(unsigned int h, int flag);
 void __cdecl fcn_004c5c80(unsigned int h);
 void __cdecl fcn_004c5da0(unsigned int h, unsigned int id, int a3, int a4, int a5, char* tag);
 void __cdecl gm_AddTime(void* q, int a2, int a3, int a4);
-float __cdecl fcn_00508490(char* entity);
+float __cdecl gm_ApplyPlagueInfection(char* entity);
 void* __cdecl gm_LookupEntityRecordById(unsigned int slot_id);
 void __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int id);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
@@ -193,15 +193,15 @@ void __cdecl he_RunPlagueEvent(char* ev)
 			count = (int) f;
 			for (n = 0; n < count; n++) {
 				left = 1;
-				scores[n] = fcn_00508490((char*) g_slot_table + picks[n] * 0x21c);
+				scores[n] = gm_ApplyPlagueInfection((char*) g_slot_table + picks[n] * 0x21c);
 			}
 			p = found;
 			if (found && !gm_RandomMod(8)) {
-				best = fcn_00508490((char*) found);
+				best = gm_ApplyPlagueInfection((char*) found);
 				left = 1;
 			}
 			if (!gm_RandomMod(0x100)) {
-				fcn_00508490(slot);
+				gm_ApplyPlagueInfection(slot);
 			}
 			if (left) {
 				fcn_005b2810(slot, (char*) rec);

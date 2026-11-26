@@ -35,11 +35,11 @@ void __cdecl gm_CreateReligiousJudges(void)
 	gm_RichterEvangelisch = (char*) fcn_004c4480(b);
 	cm_BeginCommandSync();
 	v = 0;
-	fcn_004c4510(gm_RichterKatholisch, *(int*) (gm_RichterKatholisch + 4));
+	cm_BeginPacketFieldDelta(gm_RichterKatholisch, *(int*) (gm_RichterKatholisch + 4));
 	cm_AppendPacketFieldDelta(1, 1, gm_RichterKatholisch - g_aed32c + 0xc, &v);
 	fcn_004c5360();
 	v = 1;
-	fcn_004c4510(gm_RichterEvangelisch, *(int*) (gm_RichterEvangelisch + 4));
+	cm_BeginPacketFieldDelta(gm_RichterEvangelisch, *(int*) (gm_RichterEvangelisch + 4));
 	cm_AppendPacketFieldDelta(1, 1, gm_RichterEvangelisch - g_aed32c + 0xc, &v);
 	fcn_004c5360();
 	cm_EndCommandSync();

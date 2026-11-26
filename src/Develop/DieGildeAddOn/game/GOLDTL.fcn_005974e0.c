@@ -6,7 +6,7 @@ int __cdecl gm_GetMsgField(char*, char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_FindSlotById(int, int);
 int __cdecl CountDisplayCounters(void);
-void __cdecl fcn_004c4510(void*, int);
+void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl fcn_004c4700(int, int, int, void*);
 void __cdecl fcn_004c53a0(void);
 int __cdecl d2_GetControlValue(int);
@@ -195,7 +195,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
                 } else {
                     v12 = *(unsigned int*) (v10 + 0x1c) + 1;
                 }
-                fcn_004c4510((void*) v10, *(unsigned int*) (v10 + 2));
+                cm_BeginPacketFieldDelta((void*) v10, *(unsigned int*) (v10 + 2));
                 fcn_004c4700(4, 1, (v10 - *(int*) 0xaed32c) + 0x1c, &v12);
                 fcn_004c53a0();
                 *(int*) (v10 + 0x1c) = v12;

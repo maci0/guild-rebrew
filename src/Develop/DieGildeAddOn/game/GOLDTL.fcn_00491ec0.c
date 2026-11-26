@@ -5,36 +5,36 @@
 unsigned char __cdecl fcn_004f97a0(int a);
 int __cdecl fcn_004f4830(int idx, void* dst);
 
-int __cdecl fcn_00491ec0(char* e, int unused, int* out)
+int __cdecl ai_EvalStrafrechtLaw19(char* actor, int unused, int* out)
 {
 	int info[9];
-	float m;
-	float x;
-	float y;
-	float z;
-	float w;
+	float skill_val;
+	float weight;
+	float axis_good;
+	float axis_evil;
+	float axis_neutral;
 	int job;
 
-	job = gm_MapEntityStatRange(*(unsigned char*) (e + 0x164));
-	m = gm_GetEntitySkill(e, 3);
-	m = (m - (fcn_004f97a0(3) + 1.0f) * 0.003968254f) * 0.023809524f;
-	y = (float)((*(float*) (e + 0xf4) - 2.0) * *(float*) (e + 0xfc));
-	w = (*(float*) (e + 0x100) - 2.0) * *(float*) (e + 0x108);
-	z = (*(float*) (e + 0x10c) - 2.0) * *(float*) (e + 0x114);
+	job = gm_MapEntityStatRange(*(unsigned char*) (actor + 0x164));
+	skill_val = gm_GetEntitySkill(actor, 3);
+	skill_val = (skill_val - (fcn_004f97a0(3) + 1.0f) * 0.003968254f) * 0.023809524f;
+	axis_good = (float)((*(float*) (actor + 0xf4) - 2.0) * *(float*) (actor + 0xfc));
+	axis_neutral = (*(float*) (actor + 0x100) - 2.0) * *(float*) (actor + 0x108);
+	axis_evil = (*(float*) (actor + 0x10c) - 2.0) * *(float*) (actor + 0x114);
 	if (job == 12) {
-		x = m * 1.3f;
+		weight = skill_val * 1.3f;
 	} else {
-		x = m * 0.9f;
+		weight = skill_val * 0.9f;
 	}
 	fcn_004f4830(0x19, info);
-	if (x < 1.0f && info[6] == 0) {
-		if (!(z > y)) {
+	if (weight < 1.0f && info[6] == 0) {
+		if (!(axis_evil > axis_good)) {
 			return 0;
 		}
 		*out = 1;
 		return 1;
 	}
-	if (!(x > 1.0) || info[6] != 1 || !(w > y)) {
+	if (!(weight > 1.0) || info[6] != 1 || !(axis_neutral > axis_good)) {
 		return 0;
 	}
 	*out = 0;

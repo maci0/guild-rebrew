@@ -6,7 +6,7 @@
 
 int __cdecl fcn_0050e520(int, int*);
 
-void __cdecl fcn_00527f10(unsigned char* e)
+void __cdecl gm_CollectGebaeudeUpgrades(unsigned char* e)
 {
 	int t;
 	int v;

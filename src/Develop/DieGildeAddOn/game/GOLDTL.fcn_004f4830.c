@@ -21,7 +21,7 @@ int __cdecl fcn_004f4830(int idx, void* dst)
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_004f5110(char* buf, int k);
+void __cdecl gm_FormatLawName(char* buf, int k);
 void __cdecl fcn_005b26e0(char* o, char* buf);
 
 /* ADDRESS: GOLD 0x004f27d0 */
@@ -39,7 +39,7 @@ int __cdecl fcn_004f48e0(char* s)
 	if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id != *(int*) s) {
 		o = gm_LookupEntityRecordById(*(int*) s);
 		if (o != 0) {
-			fcn_004f5110(buf, *(unsigned char*) (s + 4));
+			gm_FormatLawName(buf, *(unsigned char*) (s + 4));
 			fcn_005b26e0(o, buf);
 		}
 	}

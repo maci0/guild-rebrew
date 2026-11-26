@@ -24,9 +24,9 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
 AMBIENT_ANIMAL_SLOT* __cdecl fcn_004bc010(void);
 void __cdecl fcn_004bc060(AMBIENT_ANIMAL_SLOT*);
-void __cdecl fcn_004bc090(AMBIENT_ANIMAL_SLOT*);
-void __cdecl fcn_004bc1e0(AMBIENT_ANIMAL_SLOT*);
-void __cdecl fcn_004bc270(AMBIENT_ANIMAL_SLOT*);
+void __cdecl gm_InitAmbientBirds(AMBIENT_ANIMAL_SLOT*);
+void __cdecl gm_SpawnAmbientCat(AMBIENT_ANIMAL_SLOT*);
+void __cdecl ch_SpawnAmbientDog(AMBIENT_ANIMAL_SLOT*);
 void __cdecl gm_SpawnAmbientSheep(AMBIENT_ANIMAL_SLOT*);
 void __cdecl ch_SpawnAmbientCow(AMBIENT_ANIMAL_SLOT*);
 void __cdecl fcn_004bc410(AMBIENT_ANIMAL_SLOT*, int);
@@ -58,10 +58,10 @@ void __cdecl fcn_004bbd70(void)
 			if (s != 0) {
 				switch (gm_RandomMod(100) > 30 ? gm_RandomMod(5) + 3 : gm_RandomMod(2)) {
 				case 1:
-					fcn_004bc1e0(s);
+					gm_SpawnAmbientCat(s);
 					break;
 				case 0:
-					fcn_004bc270(s);
+					ch_SpawnAmbientDog(s);
 					break;
 				case 4:
 					gm_SpawnAmbientSheep(s);
@@ -95,7 +95,7 @@ void __cdecl fcn_004bbd70(void)
 			fcn_004bc6b0(s);
 			break;
 		case 2:
-			fcn_004bc090(s);
+			gm_InitAmbientBirds(s);
 			break;
 		}
 		if (r == 3) {

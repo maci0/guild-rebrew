@@ -13,7 +13,7 @@ extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 extern void __cdecl fcn_004c5420(int, int, int, int, int);
 extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern int __cdecl he_MessageBoxQuickjump(int, int, char*, unsigned char, int, int, int, char*, char*);
-extern void __cdecl fcn_004c4510(char*, int);
+extern void __cdecl cm_BeginPacketFieldDelta(char*, int);
 extern int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 extern void __cdecl fcn_004c5360(void);
 extern void __cdecl fcn_004c5530(void*);
@@ -75,7 +75,7 @@ void __cdecl fcn_004f4970(unsigned int packedId)
 	if (v > *(int*) ((char*) 0x5ee0f8 + limit * 4) && count < 9) {
 		*((unsigned char*)&packedId + 3) = count + 1;
 		if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
-			fcn_004c4510(slot, *(int*) (slot + 4));
+			cm_BeginPacketFieldDelta(slot, *(int*) (slot + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, ((unsigned char*)&packedId + 3));
 			fcn_004c5360();
 		} else {

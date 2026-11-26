@@ -6,14 +6,14 @@ extern unsigned char g_773d75;
 extern double g_664360;
 extern float g_664198;
 
-int __cdecl fcn_0050e4a0(int);
+int __cdecl gm_FindPublicBuilding(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int, unsigned char);
 float __cdecl fcn_004fc460(char*);
 int __cdecl gm_RandomMod(int);
 int __cdecl ai_SelectBestMethod(int, int, int, void*, void*);
 int __cdecl fcn_0050d170(int);
-int __cdecl fcn_004a4bb0(int, char*, int, void*, void*, int);
+int __cdecl ai_PrepareBuildSite(int, char*, int, void*, void*, int);
 
 /* ADDRESS: GOLDTL 0x0049d300 */
 int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
@@ -41,7 +41,7 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 	if (a0 != 0 || a2 != 0 || *(unsigned char*) &a1[0xb3] != 0x0f) {
 		return 0;
 	}
-	r = fcn_0050e4a0(1);
+	r = gm_FindPublicBuilding(1);
 	if (r == 0) {
 		return 0;
 	}
@@ -101,7 +101,7 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 			*(unsigned char*) vals = 0;
 			vals[1] = 0;
 			vals[2] = 0;
-			if (fcn_004a4bb0(0, (char*) a1, 1, ptrs, vals, 1) == 0)
+			if (ai_PrepareBuildSite(0, (char*) a1, 1, ptrs, vals, 1) == 0)
 				return 0;
 			memcpy(a3, ptrs, 0x18);
 			memcpy(a4, vals, 0x18);

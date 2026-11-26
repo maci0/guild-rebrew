@@ -6,7 +6,7 @@ int __cdecl gm_FreeObjectListRecursive(struct LinkedNode** head);
 void __cdecl gm_ClearObjektResources(struct LinkedNode* node);
 #ifndef REBREW_SERVER
 extern char* lpObjektePROT;
-void __cdecl fcn_004be280(char* list);
+void __cdecl rt_FreeRoutePoints(char* list);
 #endif
 
 int __cdecl gm_WalkEntityChain(unsigned short raw_idx);

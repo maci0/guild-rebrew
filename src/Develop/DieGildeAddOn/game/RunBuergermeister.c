@@ -15,7 +15,7 @@ int __cdecl RunBuergermeister(char* objekt, char* ziel, char* aktion)
     char paket[0xf8];
     char* spieler;
 
-    spieler = fcn_00507ab0(1);
+    spieler = gm_FindPublicTreasury(1);
     if (spieler == 0 || (unsigned char) objekt[0x166] != 0x0f) {
         goto out0;
     }

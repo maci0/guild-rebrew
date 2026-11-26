@@ -16,24 +16,24 @@ int __cdecl fcn_0055c140(char* e, ENTITY_RECORD* t, int* cnt);
 int __cdecl fcn_00579640(ENTITY_RECORD* t, char* e);
 double __cdecl gm_RandomFloat01(void);
 
-int __cdecl fcn_004aa580(char* e, char* a2, char* out)
+int __cdecl ai_SelectPamphletTarget(char* actor, char* unused, char* out)
 {
 	int cnt;
 	int mask;
 	int idx;
 
 	cnt = 0;
-	if (*(int*) (e + 0x194) < 1) {
+	if (*(int*) (actor + 0x194) < 1) {
 		return 0;
 	}
 	mask = 0xf00500;
-	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x40), &idx) == 0) {
+	if (fcn_004a5340(actor, 1, &mask, 0, gm_RandomMod(0x40), &idx) == 0) {
 		return 0;
 	}
-	if (fcn_0055c140(e, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]), &cnt) == 0) {
+	if (fcn_0055c140(actor, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]), &cnt) == 0) {
 		return 0;
 	}
-	if (fcn_00579640(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]), e) == 0) {
+	if (fcn_00579640(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]), actor) == 0) {
 		return 0;
 	}
 	if (cnt > 3) {

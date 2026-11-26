@@ -10,7 +10,7 @@ extern char g_7f4ca4[];
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 
-int __cdecl fcn_004ccdf0(char* x, char* out)
+int __cdecl cm_ExSendCutCommand51(char* x, char* out)
 {
 	int i;
 	int* d;

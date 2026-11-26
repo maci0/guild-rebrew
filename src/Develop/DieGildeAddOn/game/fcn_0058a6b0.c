@@ -41,7 +41,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00526010(Slot58a6 *, int, unsigned char);
-int __cdecl fcn_00525f60(Slot58a6 *, int);
+int __cdecl d2_CheckActionBlocker(Slot58a6 *, int);
 int __cdecl fcn_005898f0(char *);
 char *__cdecl gm_GetEntityTableEntry(Slot58a6 *);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
@@ -105,7 +105,7 @@ void __cdecl fcn_0058a6b0(char *gebaeude)
         } else if (g_100f1dc != -1) {
             if (d2_CurrentElementId == h1) {
                 if (fcn_00526010(&g_7f4ca0[g_774970], price, g_773d75) != 0
-                    && fcn_00525f60(&g_7f4ca0[g_774970], 0x10) == 1
+                    && d2_CheckActionBlocker(&g_7f4ca0[g_774970], 0x10) == 1
                     && fcn_005898f0(gebaeude) != 0) {
                     rec = gm_GetEntityTableEntry(&g_7f4ca0[g_774970]);
                     if (rec != 0)

@@ -7,7 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_0055aba0(char* u)
+void __cdecl he_HandleAction0x82SkillModifier(char* u)
 {
 	if (*(int*) (u + 0x70) != -1 && *(int*) (u + 0x70) != -2) {
 		if (u[0x78] & 4) {

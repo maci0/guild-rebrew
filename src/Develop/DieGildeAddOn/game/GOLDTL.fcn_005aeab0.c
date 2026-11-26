@@ -28,7 +28,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_004c5530(char*);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c6b20(int, int, int);
@@ -134,7 +134,7 @@ void __cdecl fcn_005aeab0(char* rec)
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == b2) {
 				flags = -1;
-				fcn_004c4510(rec, *(int*) (rec + 1));
+				cm_BeginPacketFieldDelta(rec, *(int*) (rec + 1));
 				cm_AppendPacketFieldDelta(4, 1, (int) (rec - g_aed32c) + 0x65,
 				    &flags);
 				fcn_004c5360();

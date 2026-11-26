@@ -12,7 +12,7 @@ int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 
 /* ADDRESS: GOLDTL 0x004bac00 */
-int __cdecl fcn_004bac00(unsigned short* entity, int* outId, float factor)
+int __cdecl gm_DeductRandomBuildingGood(unsigned short* entity, int* outId, float factor)
 {
 	char* arr[12];
 	unsigned char* it;

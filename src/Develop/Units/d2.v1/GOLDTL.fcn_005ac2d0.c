@@ -67,7 +67,7 @@ void __cdecl cm_ExecCommand(void);
 int __cdecl fcn_004c5b00(int entity_id, tag7 key);
 int __cdecl fcn_004c5530(msg005ac2d0* m);
 int __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c4510(char* base, int entity_id);
+void __cdecl cm_BeginPacketFieldDelta(char* base, int entity_id);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
 char* __cdecl he_StartHandlungSearch(int kind, int first, int id, int arg, int entity_id);
 char* __cdecl gm_LookupEntityRecordById(int description_id);
@@ -82,7 +82,7 @@ int __cdecl d2_ClearWindowChildren(int win, int keep);
 void __cdecl fcn_005340f0(int win);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
-int __cdecl fcn_00525f60(char* house, int mode);
+int __cdecl d2_CheckActionBlocker(char* house, int mode);
 void __cdecl fcn_005100f0(int id, int amount);
 int __cdecl fcn_005ca560(sel005ac2d0* sel);
 int __cdecl fcn_005ca740(int x, int y, int win, int id, sel005ac2d0* sel, int flag);
@@ -259,10 +259,10 @@ void __cdecl fcn_005ac2d0(char* building)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == btnState0) {
-				if (fcn_00525f60((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 1) != 0) {
+				if (d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 1) != 0) {
 					v12 = 1;
 					fcn_005100f0(((ENTITY_RECORD*)(g_7f4ca4 - 4))[g_774970].entity_id, -1);
-					fcn_004c4510(obj, *(int*) (obj + 2));
+					cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(1, 1, 0x22, &v12);
 					rc = fcn_004c5360();
 					flag = 1;
@@ -283,13 +283,13 @@ void __cdecl fcn_005ac2d0(char* building)
 				if (info != 0 && *(int*) (info + 4) != -1 && obj != 0) {
 					v15 = (char) gm_RandomMod(8);
 					v16 = (char) gm_RandomMod(8);
-					fcn_004c4510(obj, *(int*) (obj + 2));
+					cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(4, 1, 0x1e, info + 4);
 					fcn_004c5360();
-					fcn_004c4510(obj, *(int*) (obj + 2));
+					cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(1, 1, 0x1c, &v15);
 					fcn_004c5360();
-					fcn_004c4510(obj, *(int*) (obj + 2));
+					cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(1, 1, 0x1d, &v16);
 					rc = fcn_004c5360();
 					state = 2;
@@ -304,13 +304,13 @@ void __cdecl fcn_005ac2d0(char* building)
 				v12 = -1;
 				v18 = -1;
 				id = -1;
-				fcn_004c4510(obj, *(int*) (obj + 2));
+				cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 				cm_AppendPacketFieldDelta(4, 1, 0x1e, (char*) &id);
 				fcn_004c5360();
-				fcn_004c4510(obj, *(int*) (obj + 2));
+				cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 				cm_AppendPacketFieldDelta(1, 1, 0x1c, &v12);
 				fcn_004c5360();
-				fcn_004c4510(obj, *(int*) (obj + 2));
+				cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 				cm_AppendPacketFieldDelta(1, 1, 0x1d, &v18);
 				rc = fcn_004c5360();
 				flag = 1;

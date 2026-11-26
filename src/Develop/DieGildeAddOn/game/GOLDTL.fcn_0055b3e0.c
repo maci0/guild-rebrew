@@ -9,12 +9,12 @@ void __cdecl fcn_0054a6a0(void);
 void __cdecl fcn_0054aa70(void);
 void __cdecl fcn_0054b130(void);
 void __cdecl fcn_0054b150(void);
-void __cdecl fcn_0054b2b0(void);
+void __cdecl he_HandleAction0x2e(void);
 void __cdecl fcn_0054b420(void);
 void __cdecl fcn_0054b450(void);
 void __cdecl fcn_0054b800(void);
 void __cdecl fcn_0054b820(void);
-void __cdecl fcn_0054b940(void);
+void __cdecl he_UpdateFest(void);
 void __cdecl fcn_0054bc40(void);
 void __cdecl fcn_0054bc90(void);
 void __cdecl fcn_0054c500(void);
@@ -23,7 +23,7 @@ void __cdecl fcn_0054ca10(void);
 void __cdecl fcn_0054d7b0(void);
 void __cdecl he_InitStreife(void);
 void __cdecl fcn_0054da10(void);
-void __cdecl fcn_0054e2d0(void);
+void __cdecl he_StartRazzia(void);
 void __cdecl fcn_0054e390(void);
 void __cdecl fcn_0054ee10(void);
 void __cdecl fcn_0054f0c0(void);
@@ -33,10 +33,10 @@ void __cdecl fcn_0054fd60(void);
 void __cdecl fcn_005500a0(void);
 void __cdecl fcn_00550150(void);
 void __cdecl fcn_005502d0(void);
-void __cdecl fcn_005503f0(void);
+void __cdecl he_HandleAction0x4b(void);
 void __cdecl fcn_005504f0(void);
 void __cdecl fcn_00550540(void);
-void __cdecl fcn_00550560(void);
+void __cdecl he_InitEvent053(void);
 void __cdecl fcn_005505b0(void);
 void __cdecl fcn_005507a0(void);
 void __cdecl fcn_00550940(void);
@@ -61,9 +61,9 @@ void __cdecl fcn_00551c20(void);
 void __cdecl fcn_00551d50(void);
 void __cdecl fcn_00552220(void);
 void __cdecl he_RunPlagueEvent(void);
-void __cdecl fcn_005529a0(void);
+void __cdecl he_StartTaschendieb(void);
 void __cdecl fcn_00552a60(void);
-void __cdecl fcn_00553420(void);
+void __cdecl he_InitSchutzgeld(void);
 void __cdecl fcn_00553490(void);
 void __cdecl fcn_00553c60(void);
 void __cdecl fcn_00553cd0(void);
@@ -77,7 +77,7 @@ void __cdecl fcn_00554ed0(void);
 void __cdecl fcn_00554f00(void);
 void __cdecl fcn_00555440(void);
 void __cdecl gm_SimulateWirtshaus(void);
-void __cdecl fcn_00555a40(void);
+void __cdecl he_StartTalentLevelAction(void);
 void __cdecl d2_HandleTalentLevelDialog(void);
 void __cdecl fcn_00555cd0(void);
 void __cdecl fcn_00555d30(void);
@@ -86,7 +86,7 @@ void __cdecl fcn_00556170(void);
 void __cdecl fcn_00556b40(void);
 void __cdecl fcn_00556e30(void);
 void __cdecl RunSimKrankheiten(void);
-void __cdecl fcn_00557270(void);
+void __cdecl he_InitDunkleEcke(void);
 void __cdecl fcn_00557460(void);
 void __cdecl fcn_00557e50(void);
 void __cdecl fcn_00557fe0(void);
@@ -109,11 +109,11 @@ void __cdecl fcn_0055a860(void);
 void __cdecl fcn_0055a8e0(void);
 void __cdecl fcn_0055a920(void);
 void __cdecl fcn_0055ab40(void);
-void __cdecl fcn_0055aba0(void);
+void __cdecl he_HandleAction0x82SkillModifier(void);
 void __cdecl fcn_0055ac00(void);
 void __cdecl fcn_0055aca0(void);
 void __cdecl fcn_0055af10(void);
-void __cdecl fcn_0055af40(void);
+void __cdecl he_UpdateTutorialEvent(void);
 void __cdecl fcn_0055afb0(void);
 void __cdecl d2_ShowTitleAward(void);
 
@@ -138,7 +138,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(45, (void*) fcn_0054b130, (void*) 0x54b140) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(46, (void*) fcn_0054b150, (void*) fcn_0054b2b0) != 0) {
+	if (he_RegisterHandler(46, (void*) fcn_0054b150, (void*) he_HandleAction0x2e) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(47, (void*) fcn_0054b420, (void*) fcn_0054b450) != 0) {
@@ -147,7 +147,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(48, (void*) fcn_0054b800, (void*) 0x54b810) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(55, (void*) fcn_0054b820, (void*) fcn_0054b940) != 0) {
+	if (he_RegisterHandler(55, (void*) fcn_0054b820, (void*) he_UpdateFest) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(54, (void*) fcn_0054bc40, (void*) fcn_0054bc90) != 0) {
@@ -166,7 +166,7 @@ int __cdecl he_RegisterEventHandlers(void)
 		return 1;
 	}
 	fcn_00530ab0(67, 0, 0, 1287, -1);
-	if (he_RegisterHandler(68, (void*) fcn_0054e2d0, (void*) fcn_0054e390) != 0) {
+	if (he_RegisterHandler(68, (void*) he_StartRazzia, (void*) fcn_0054e390) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(69, (void*) fcn_0054ee10, (void*) fcn_0054f0c0) != 0) {
@@ -181,7 +181,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(74, (void*) fcn_005500a0, (void*) fcn_00550150) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(75, (void*) fcn_005502d0, (void*) fcn_005503f0) != 0) {
+	if (he_RegisterHandler(75, (void*) fcn_005502d0, (void*) he_HandleAction0x4b) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(81, (void*) 0x550480, (void*) 0x5504c0) != 0) {
@@ -190,7 +190,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(82, (void*) fcn_005504f0, (void*) fcn_00550540) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(83, (void*) fcn_00550560, (void*) fcn_005505b0) != 0) {
+	if (he_RegisterHandler(83, (void*) he_InitEvent053, (void*) fcn_005505b0) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(84, (void*) 0x00550770, (void*) fcn_005507a0) != 0) {
@@ -232,14 +232,14 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(89, (void*) fcn_00552220, (void*) he_RunPlagueEvent) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(97, (void*) fcn_005529a0, (void*) fcn_00552a60) != 0) {
+	if (he_RegisterHandler(97, (void*) he_StartTaschendieb, (void*) fcn_00552a60) != 0) {
 		return 1;
 	}
 	fcn_00530ab0(97, 0, 0, 1287, -1);
 	if (he_RegisterHandler(99, (void*) 0x005530d0, (void*) 0x00553110) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(98, (void*) fcn_00553420, (void*) fcn_00553490) != 0) {
+	if (he_RegisterHandler(98, (void*) he_InitSchutzgeld, (void*) fcn_00553490) != 0) {
 		return 1;
 	}
 	fcn_00530ab0(98, 0, 0, 1294, -1);
@@ -263,7 +263,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(105, (void*) fcn_00554ed0, (void*) fcn_00554f00) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(106, (void*) fcn_00555a40, (void*) d2_HandleTalentLevelDialog) != 0) {
+	if (he_RegisterHandler(106, (void*) he_StartTalentLevelAction, (void*) d2_HandleTalentLevelDialog) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(107, (void*) fcn_00555cd0, (void*) fcn_00555d30) != 0) {
@@ -278,7 +278,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(112, (void*) fcn_00556e30, (void*) RunSimKrankheiten) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(116, (void*) fcn_00557270, (void*) fcn_00557460) != 0) {
+	if (he_RegisterHandler(116, (void*) he_InitDunkleEcke, (void*) fcn_00557460) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(118, (void*) fcn_00557e50, (void*) fcn_00557fe0) != 0) {
@@ -314,13 +314,13 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(129, (void*) fcn_0055a8e0, (void*) fcn_0055a920) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(130, (void*) fcn_0055ab40, (void*) fcn_0055aba0) != 0) {
+	if (he_RegisterHandler(130, (void*) fcn_0055ab40, (void*) he_HandleAction0x82SkillModifier) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(134, (void*) fcn_0055ac00, (void*) fcn_0055aca0) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(135, (void*) fcn_0055af10, (void*) fcn_0055af40) != 0) {
+	if (he_RegisterHandler(135, (void*) fcn_0055af10, (void*) he_UpdateTutorialEvent) != 0) {
 		return 1;
 	}
 	return he_RegisterHandler(165, (void*) fcn_0055afb0, (void*) d2_ShowTitleAward) != 0;

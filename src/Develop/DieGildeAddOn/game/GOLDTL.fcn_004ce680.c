@@ -5,7 +5,7 @@ unsigned short* __cdecl fcn_00502cd0(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl fcn_004ce590(int);
 
-unsigned short* __cdecl fcn_004ce680(char* entity)
+unsigned short* __cdecl gm_FindEntityActiveItem(char* entity)
 {
 	unsigned short* p;
 	char* r;

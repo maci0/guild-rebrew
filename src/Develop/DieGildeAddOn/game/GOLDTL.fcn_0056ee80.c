@@ -35,7 +35,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl fcn_004c4450(int);
 int* __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c58b0(int, int);
-void __cdecl fcn_004c4510(int, int);
+void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050b750(int, unsigned char);
@@ -47,7 +47,7 @@ float __cdecl fcn_004ff210(int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl gm_GetScaledEntitySkill(char*, int);
-void __cdecl fcn_0050c5d0(char*, int*);
+void __cdecl gm_EvalEntityInventoryValue(char*, int*);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0055c050(char*);
 int __cdecl _ftol(void);
@@ -218,7 +218,7 @@ label_1bc:
 			}
 			q = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xbc));
 			if (q != 0) {
-				fcn_004c4510(q, *(int*) (q + 1));
+				cm_BeginPacketFieldDelta(q, *(int*) (q + 1));
 				fcn_004c4670(4, 1, 0x65, &ent);
 				fcn_004c5360();
 			}
@@ -284,12 +284,12 @@ label_1bc:
 		memset(msg + 1, 0, 0x3ff);
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));
 		h = (int) fcn_00502cd0(*(int*) (rec1 + 0x5d), 2, 6, 0, 0x2a);
-		fcn_0050c5d0((char*) rec1, req);
+		gm_EvalEntityInventoryValue((char*) rec1, req);
 		val = (int) (*(int*) req * 0.35);
 		io_FormatTextBuffer(str, 0x68bea4, val);
 		strcat(msg, str);
 		fcn_004c5150(*(int*) (ent + 4), *(int*) (row + 4), g_773d75, val);
-		fcn_004c4510(rec1, *(int*) (rec1 + 1));
+		cm_BeginPacketFieldDelta(rec1, *(int*) (rec1 + 1));
 		fcn_004c4670(4, 1, 0x69, &val);
 		fcn_004c5360();
 		if (h != 0) {

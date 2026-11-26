@@ -75,7 +75,7 @@ void __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0047e220(int);
 void __cdecl fcn_0047e0e0(Bld*, int);
 void __cdecl fcn_00529160(int, int, int, int);
-void __cdecl fcn_00487e60(Bld*, int);
+void __cdecl ai_CancelBlockedActions(Bld*, int);
 void __cdecl fcn_00487f90(Req*);
 void __cdecl ai_MeisterCollectTrans(Bld*);
 void __cdecl ai_MeisterTrade(Bld*, int);
@@ -264,7 +264,7 @@ done:
 			} while (g_100dc38 < 4);
 		}
 	}
-	fcn_00487e60(bld, 4);
+	ai_CancelBlockedActions(bld, 4);
 	put.count = 0;
 	for (n = 0x7f4ca2; n < 0x85a0a2; n += (int)sizeof(ENTITY_RECORD)) {
 		if (*(unsigned char*) (n + 6) <= 0)

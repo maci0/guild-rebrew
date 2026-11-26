@@ -16,8 +16,8 @@ unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004a5340(char*, int, int*, int, float, unsigned short*);
 float __cdecl fcn_00507e70(char*, char*, int);
-int __cdecl fcn_0055c0f0(char*, char*);
-int __cdecl fcn_0055c0a0(char*, char*);
+int __cdecl he_HasNoActiveEvent04b(char*, char*);
+int __cdecl he_HasNoActiveAction0x2e(char*, char*);
 
 typedef struct {
 	char type;
@@ -131,10 +131,10 @@ main:
 		}
 		goto copy_out;
 	}
-	if (fcn_0055c0f0(e, entry) == 0) {
+	if (he_HasNoActiveEvent04b(e, entry) == 0) {
 		goto fail;
 	}
-	if (fcn_0055c0a0(e, entry) == 0) {
+	if (he_HasNoActiveAction0x2e(e, entry) == 0) {
 		goto fail;
 	}
 	out1->type = 7;

@@ -16,7 +16,7 @@ typedef struct
 
 int __cdecl gm_RandomMod(int);
 
-void __cdecl fcn_00555a40(void* action)
+void __cdecl he_StartTalentLevelAction(void* action)
 {
 	*(S14*) ((char*) action + 0x52) = *(S14*) ((char*) action + 0x44);
 	*(int*) ((char*) action + 0xb4) = gm_RandomMod(6) & 0xffff;

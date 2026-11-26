@@ -14,7 +14,7 @@ int __cdecl gm_GetMsgField(char* pkt, char* q);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 char* __cdecl gm_NextEntityQueryMatch(void);
 
-int __cdecl fcn_0050c5d0(unsigned char* o, int* out)
+int __cdecl gm_EvalEntityInventoryValue(unsigned char* o, int* out)
 {
 	BUILDING_PROTOTYPE *rec;
 	float v;

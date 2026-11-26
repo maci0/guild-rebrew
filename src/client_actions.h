@@ -7,7 +7,7 @@ extern short g_7f4c0c;
 extern unsigned char g_773d75;
 extern char* gm_CityEntity;
 
-char* __cdecl fcn_00507ab0(int modus);
+char* __cdecl gm_FindPublicTreasury(int modus);
 int __cdecl RunBuergermeister(char* objekt, char* ziel, char* aktion);
 
 #endif

@@ -31,13 +31,13 @@ int __cdecl fcn_004b11a0(int a1, int a2, char* arg)
 	if (*arg != '-')
 		return 0;
 	if (amt_FindOfficeSlotByType(0x1e, &s) != 0 && s.id != -1)
-		fcn_004e8240(s.kind, 0, 0, 4, 0xff);
+		amt_SendOfficeCommand(s.kind, 0, 0, 4, 0xff);
 	if (amt_FindOfficeSlotByType(0x1f, &s) != 0 && s.id != -1)
-		fcn_004e8240(s.kind, 0, 0, 4, 0xff);
+		amt_SendOfficeCommand(s.kind, 0, 0, 4, 0xff);
 	if (amt_FindOfficeSlotByType(0x20, &s) != 0 && s.id != -1)
-		fcn_004e8240(s.kind, 0, 0, 4, 0xff);
+		amt_SendOfficeCommand(s.kind, 0, 0, 4, 0xff);
 	if (amt_FindOfficeSlotByType(0x21, &s) != 0 && s.id != -1)
-		fcn_004e8240(s.kind, 0, 0, 4, 0xff);
+		amt_SendOfficeCommand(s.kind, 0, 0, 4, 0xff);
 	atoi(arg + 1);
 	memset(m, 0, sizeof(m));
 	m[4] = (char) 0x80;

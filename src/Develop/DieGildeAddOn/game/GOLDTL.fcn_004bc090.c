@@ -8,7 +8,7 @@ void __cdecl d3_TransformPoint(int, int, void*);
 #include "client_scene_transform.h"
 #include "Develop/DieGildeAddOn/game/ambient_animal_slot.h"
 
-struct vec_4bc090 {
+struct D3_AMBIENT_POINT {
 	float x;
 	float y;
 	float z;
@@ -18,12 +18,12 @@ struct vec_4bc090 {
 
 
 /* ADDRESS: GOLDTL 0x004bc090 */
-void __cdecl fcn_004bc090(AMBIENT_ANIMAL_SLOT* result)
+void __cdecl gm_InitAmbientBirds(AMBIENT_ANIMAL_SLOT* result)
 {
 	unsigned char* chosen;
-	struct vec_4bc090 pb;
-	struct vec_4bc090 pa;
-	struct vec_4bc090 pts[16];
+	struct D3_AMBIENT_POINT pb;
+	struct D3_AMBIENT_POINT pa;
+	struct D3_AMBIENT_POINT pts[16];
 	unsigned char* ents[256];
 	unsigned char* it;
 	unsigned char* b;

@@ -21,7 +21,7 @@ char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl fcn_004c67c0(int, ent2c*);
 
-int __cdecl fcn_004d1250(char* rec, char* e, char* obj)
+int __cdecl gm_IssueEscapeOrder(char* rec, char* e, char* obj)
 {
 	float v[4];
 	ent2c l;

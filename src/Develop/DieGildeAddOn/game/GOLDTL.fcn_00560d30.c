@@ -11,7 +11,7 @@ void __cdecl fcn_00529160(char*, char*, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00560d30(char* u)
+void __cdecl he_InitTrainieren(char* u)
 {
 	char* h;
 	char* e;

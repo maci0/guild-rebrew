@@ -2,7 +2,7 @@ extern double g_662908;
 
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508220(int, int*);
-void __cdecl fcn_004c4510(unsigned short*, int);
+void __cdecl cm_BeginPacketFieldDelta(unsigned short*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 float __cdecl fcn_004ff210(unsigned short, int);
@@ -86,7 +86,7 @@ unsigned int __cdecl fcn_005086f0(unsigned short* objectContext)
 		flags.b23 = value;
 	}
 	v = flags;
-	fcn_004c4510(objectContext, *(int*) ((char*) objectContext + 4));
+	cm_BeginPacketFieldDelta(objectContext, *(int*) ((char*) objectContext + 4));
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &v);
 	fcn_004c5360();
 	fcn_004ff210(*objectContext, -n);

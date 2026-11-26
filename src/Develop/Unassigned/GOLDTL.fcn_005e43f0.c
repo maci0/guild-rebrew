@@ -3,7 +3,7 @@
 extern int d2_CurrentWindowId;
 
 void __cdecl ls_CaptureSavePreview(void);
-void __cdecl fcn_005e3b70(void);
+void __cdecl d2_EnterMenuScreen(void);
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl fcn_00537320(int);
 void __cdecl fcn_00471db0(int, int);
@@ -47,7 +47,7 @@ void __cdecl fcn_005e43f0(void)
 
     ls_CaptureSavePreview();
     memcpy(preview, (void *)0x7ea3c0, 0x9600);
-    fcn_005e3b70();
+    d2_EnterMenuScreen();
     dialog = fcn_00470820(0, 0, (char *)0x6ad384);
     fcn_00537320(0x24087);
     fcn_00471db0(dialog, 1);

@@ -8,7 +8,7 @@ extern double g_662a20;
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
-char* __cdecl fcn_004eef70(void)
+char* __cdecl gm_PickUnusedPresetCharacter(void)
 {
 	unsigned int idx;
 	int counter;

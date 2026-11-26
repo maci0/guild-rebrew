@@ -5,7 +5,7 @@ int __cdecl fcn_0050b710(int, char);
 
 
 /* ADDRESS: GOLDTL 0x004b46c0 */
-int __cdecl fcn_004b46c0(int id, char* thr)
+int __cdecl ai_ExceedsEntityGoldThreshold(int id, char* thr)
 {
 	char* p;
 

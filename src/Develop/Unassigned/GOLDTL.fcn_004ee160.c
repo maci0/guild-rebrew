@@ -1,5 +1,5 @@
 char* __cdecl fcn_004ec7d0(char*);
-float __cdecl fcn_004ec8a0(char*, int);
+float __cdecl ahm_GetEssenceValue(char*, int);
 char* __cdecl fcn_004ecbe0(int);
 
 /* ADDRESS: GOLDTL 0x004ee160 */
@@ -20,13 +20,13 @@ int __cdecl fcn_004ee160(char* a0)
 		return -1;
 	}
 	e = *(char**) (a0 + 0x65);
-	r = fcn_004ec8a0(p, 0);
+	r = ahm_GetEssenceValue(p, 0);
 	total = r * r;
-	r = fcn_004ec8a0(p, 1);
+	r = ahm_GetEssenceValue(p, 1);
 	total = r * r + total;
-	r = fcn_004ec8a0(p, 2);
+	r = ahm_GetEssenceValue(p, 2);
 	total = r * r + total;
-	r = fcn_004ec8a0(p, 3);
+	r = ahm_GetEssenceValue(p, 3);
 	total = r * r + total;
 	for (p2 = e + 0x10, n = 6; n != 0; n--, p2 += 8) {
 		q = fcn_004ecbe0(*(int*) (p2 - 4));

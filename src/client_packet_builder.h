@@ -6,6 +6,6 @@
 /* ADDRESS: GOLD 0x00a68d2c */
 extern char* g_aed32c;
 
-void __cdecl fcn_004c4510(char* base, int entity_id);
+void __cdecl cm_BeginPacketFieldDelta(char* base, int entity_id);
 
 #endif

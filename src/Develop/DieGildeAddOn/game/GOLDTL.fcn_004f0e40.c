@@ -35,24 +35,24 @@ extern Slot170_7731b8 g_7731b8[8];
 extern Set g_772ff8[8];
 
 Slot170* __cdecl fcn_004f0c90(int id);
-int __cdecl fcn_004ef250(Set* p);
+int __cdecl gm_NotifyDomizilCallback(Set* p);
 
-void __cdecl fcn_004f0e40(int id, void* fn, void* ctx)
+void __cdecl gm_SetSlotCallback(int id, void* fn, void* ctx)
 {
-	Slot170* s;
+	Slot170* slot;
 
 	if (id == -1) {
 		return;
 	}
-	s = fcn_004f0c90(id);
-	if (s == 0) {
+	slot = fcn_004f0c90(id);
+	if (slot == 0) {
 		return;
 	}
 	if (fn != 0) {
-		s->fn = fn;
-		s->ctx = ctx;
+		slot->fn = fn;
+		slot->ctx = ctx;
 	} else {
-		s->fn = (void*) fcn_004ef250;
-		s->ctx = &g_772ff8[s - ((Slot170*)g_7731b8)];
+		slot->fn = (void*) gm_NotifyDomizilCallback;
+		slot->ctx = &g_772ff8[slot - ((Slot170*)g_7731b8)];
 	}
 }

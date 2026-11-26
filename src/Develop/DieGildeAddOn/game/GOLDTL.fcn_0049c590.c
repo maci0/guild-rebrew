@@ -16,7 +16,7 @@ extern float g_1009b9c;
 
 int __cdecl gm_StartFilteredEntitySearch(int a0, int a1, int a2);
 int __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3, int a4);
-void __cdecl fcn_004c4510(int a0, int a1);
+void __cdecl cm_BeginPacketFieldDelta(int a0, int a1);
 void __cdecl fcn_004c4670(int a0, int a1, int a2, char* a3);
 int __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c51a0(int a0, int a1, char a2, int a3);
@@ -49,7 +49,7 @@ int __cdecl ai_RunAblassKaufen(int entityArg, char* purchaseReq, char* commandAr
 	if (cmd == 0x12) {
 		n = *(int*) (purchaseReq + 0x10);
 		computedAmount = (int) (n / log10((double) n));
-		fcn_004c4510(entityArg, *(int*) (entityArg + 4));
+		cm_BeginPacketFieldDelta(entityArg, *(int*) (entityArg + 4));
 		fcn_004c4670(4, 1, 0x1ac, purchaseReq + 0x10);
 		fcn_004c5360();
 		fcn_004c51a0(-1, *(int*) (entityArg + 4), g_773d75,

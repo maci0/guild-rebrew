@@ -22,7 +22,7 @@ int __cdecl fcn_0064d41a(char *, char *, ...);
 int __cdecl fcn_004e44b0(char *, char *);
 int __cdecl fcn_0051af00(char *, char *, char *);
 int __cdecl fcn_004e44f0(int);
-int __cdecl fcn_004ea2b0(int, char *);
+int __cdecl amt_IsCandidateInOffice(int, char *);
 int __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_005ca560(void *);
 int __cdecl fcn_005ca740(int, int, int, int, int *, int);
@@ -33,13 +33,13 @@ unsigned int __cdecl cut_RandMod(unsigned int, ...);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_004e51d0(unsigned int *, void *);
 int __cdecl fcn_004e9180(void *, int);
-int __cdecl fcn_004e8240(unsigned char, unsigned char *, unsigned char *, int, int);
+int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char *, unsigned char *, int, int);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_00535960(void);
 int __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_004e48b0(void);
 int __cdecl fcn_004e45c0(int);
-void __cdecl fcn_004e4910(void);
+void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004da4d0(int, void *);
 
@@ -300,7 +300,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
             v1[0] = 0;
             v1[1] = 0;
             v1[2] = 0;
-            if (fcn_004ea2b0(s20, (char *)(s00 - 4)) != 0) {
+            if (amt_IsCandidateInOffice(s20, (char *)(s00 - 4)) != 0) {
                 i = 0;
                 k = 0;
                 while (i < s44) {
@@ -437,7 +437,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                              (*(int *)(jc + 0x84) == 1 ? 0xa : -0x14), 1);
                             jc += 0x35c;
                         } while (--n);
-                        s70 = fcn_004e8240(*(unsigned char *)(s00 - 4), 0, 0, 3, 0xff);
+                        s70 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 4), 0, 0, 3, 0xff);
                         if (fcn_004c4450(s70) == 0) {
                             do {
                                 fcn_00535960();
@@ -468,10 +468,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             } while (n != 0);
                         }
                         if (s70)
-                            s24 = fcn_004e8240(*(unsigned char *)(s00 - 4), 0,
+                            s24 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 4), 0,
                                                (unsigned char *)s70, 1, 0xff);
                         else
-                            s24 = fcn_004e8240(*(unsigned char *)(s00 - 4), 0, 0, 4, 0xff);
+                            s24 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 4), 0, 0, 4, 0xff);
                         if (fcn_004c4450(s24) == 0) {
                             do {
                                 fcn_00535960();
@@ -637,7 +637,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                   *(unsigned char *)s00 + 0x253);
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)g_774970 * 0x21c)) {
-                        s5C = fcn_004e8240(*(unsigned char *)(s00 - 8), 0, (unsigned char *)blkA.sel[0], numSel, 0xff);
+                        s5C = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0, (unsigned char *)blkA.sel[0], numSel, 0xff);
                         if (fcn_004c4450(s5C) == 0) {
                             do {
                                 fcn_00535960();
@@ -660,7 +660,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     fcn_004e4de0(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
                                           (unsigned int)g_774970 * 0x21c)) {
-                        s70 = fcn_004e8240(*(unsigned char *)(s00 - 8), 0, (unsigned char *)s58, 1, 0xff);
+                        s70 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0, (unsigned char *)s58, 1, 0xff);
                         if (fcn_004c4450(s70) == 0) {
                             do {
                                 fcn_00535960();
@@ -744,7 +744,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             fcn_004e4de0(0xfa0);
                             if (a0[3] == *(int *)(0x7f4ca4 +
                                                   (unsigned int)g_774970 * 0x21c)) {
-                                s78 = fcn_004e8240(*(unsigned char *)(s00 - 8), 0,
+                                s78 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0,
                                                    (unsigned char *)blkA.sel[s6C], 1, 0xff);
                                 if (fcn_004c4450(s78) == 0) {
                                     do {
@@ -779,7 +779,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             fcn_004e4de0(0xfa0);
                             if (a0[3] == *(int *)(0x7f4ca4 +
                                                   (unsigned int)g_774970 * 0x21c)) {
-                                s78 = fcn_004e8240(*(unsigned char *)(s00 - 8), 0,
+                                s78 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0,
                                                    (unsigned char *)blkA.sel[s6C], 1, 0xff);
                                 if (fcn_004c4450(s78) == 0) {
                                     do {
@@ -807,7 +807,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         fcn_004e48b0();
         fcn_004e4de0(0x3e8);
         fcn_004e45c0(fcn_004e44b0((char *)0x6b5c60, (char *)0x68c010));
-        fcn_004e4910();
+        cut_CleanupCutscene();
     }
     fcn_00471e30(s14);
     }

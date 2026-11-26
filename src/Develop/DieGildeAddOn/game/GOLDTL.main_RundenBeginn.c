@@ -8,8 +8,8 @@ int __cdecl gm_GetOppositeStatIndex(int kind);
 int __cdecl he_RegisterApEvent(int id, char* text, int kind, int arg);
 int __cdecl fcn_005c6270(void* slot, int key);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
-void __cdecl fcn_0050e380(int id, char* out);
-int __cdecl fcn_0050c710(int a1, int a2, int a3);
+void __cdecl gm_BuildDealSummary(int id, char* out);
+int __cdecl gm_GetBuildingTechEffect(int a1, int a2, int a3);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl he_SumEventValuesForSubject(int id);
@@ -104,9 +104,9 @@ void __cdecl main_RundenBeginn(void)
 			}
 			fcn_004c5420(*(int*) (slot + 4), 0x1cc, 4, 0, 0x200000);
 		}
-		fcn_0050e380(*(unsigned short*) slot, disp);
+		gm_BuildDealSummary(*(unsigned short*) slot, disp);
 		if (*(int*) (slot + 0x170) != 0) {
-			v5 = fcn_0050c710(*(int*) (slot + 0x170), 3, 1);
+			v5 = gm_GetBuildingTechEffect(*(int*) (slot + 0x170), 3, 1);
 			if (v5 != 0) {
 				io_FormatTextBuffer(bufH, 0x2053, *(int*) (slot + 0x170));
 				p = (char*) he_RegisterApEvent(*(unsigned short*) slot, bufH, v5, 0);
@@ -116,7 +116,7 @@ void __cdecl main_RundenBeginn(void)
 		}
 		p = (char*) gm_StartFilteredEntitySearch(2, 4, *(unsigned short*) slot, 5, 5);
 		while (p != 0) {
-			eventValue = fcn_0050c710((int) p, 3, 1);
+			eventValue = gm_GetBuildingTechEffect((int) p, 3, 1);
 			if (eventValue != 0) {
 				io_FormatTextBuffer(bufG, 0x3fd7, p);
 				n = (int) he_RegisterApEvent(*(unsigned short*) slot, bufG, eventValue, 0);

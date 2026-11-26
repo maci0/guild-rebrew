@@ -40,7 +40,7 @@ extern int g_773d48;
 
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
 int __cdecl fcn_004f4830(int idx, void* dst);
-char* __cdecl fcn_0050e4a0(int n);
+char* __cdecl gm_FindPublicBuilding(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
@@ -87,7 +87,7 @@ int __cdecl fcn_004fcda0(unsigned short id, int pay, Income* out)
 		out->vc = (int) ((q.xc << 5) * mult);
 		r = 1;
 		if (pay != 0) {
-			w = fcn_0050e4a0(1);
+			w = gm_FindPublicBuilding(1);
 			if (w == 0) {
 				return 0;
 			}

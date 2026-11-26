@@ -1,7 +1,7 @@
 extern char* lpGebaeudePROT;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-int __cdecl fcn_0050c710(unsigned char* p, int a, int b);
+int __cdecl gm_GetBuildingTechEffect(unsigned char* p, int a, int b);
 char* __cdecl fcn_0050dc90(int arg1);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl fcn_004ff040(char* e);
@@ -29,7 +29,7 @@ float __cdecl fcn_00510260(unsigned char* buildingData, int countArg, int idsAdd
 	sum = 0.0f;
 	bonus = 0.0f;
 	typePrototype = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(int) *buildingData];
-	a = fcn_0050c710(buildingData, 1, 1) * 0.01 + 1.0;
+	a = gm_GetBuildingTechEffect(buildingData, 1, 1) * 0.01 + 1.0;
 	e = fcn_0050dc90((int) buildingData);
 	if (e == 0) {
 		e = (char*)&((ENTITY_RECORD*)0x7f4ca0)[(int) *(unsigned short*) (buildingData + 0x27)];

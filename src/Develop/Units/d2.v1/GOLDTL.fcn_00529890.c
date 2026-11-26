@@ -18,7 +18,7 @@ void fcn_00472640(int id, int flag);
 void d2_SetForm(int screen, int flag);
 void fcn_00473690(int key, int amount);
 void ResetDisplayCounters(void);
-void fcn_004c3540(char* entity);
+void d3snd_PlayObjectClickSound(char* entity);
 float fcn_004ff040(char* entity);
 int fcn_00507c30(int key);
 void fcn_00517c00(int id, int a, int b, char* out);
@@ -175,7 +175,7 @@ label_529c64:
 				if (d2_CurrentElementId == v13[-4]) {
 					if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v13[-4]].value_038))) {
 						*(char*) (v3 * 0x21c + 0x7f4e28) = 1;
-						fcn_004c3540((char*) (v3 * 0x21c + 0x7f4ca0));
+						d3snd_PlayObjectClickSound((char*) (v3 * 0x21c + 0x7f4ca0));
 					}
 					else {
 						*(char*) (v3 * 0x21c + 0x7f4e28) = 0;

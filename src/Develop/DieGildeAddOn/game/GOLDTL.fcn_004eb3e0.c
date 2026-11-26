@@ -28,8 +28,8 @@ float __cdecl gm_GetEntitySkill(char* entity, int index);
 double __cdecl gm_RandomFloat01(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 slot80* __cdecl gm_FindSlotById(int a1, int a2);
-float __cdecl fcn_00502780(int a1, int a2);
-int __cdecl fcn_004c61d0(slot80* e, unsigned char kind);
+float __cdecl gm_CalcMarketSlotPriceByObjektId(int a1, int a2);
+int __cdecl cm_SendMarktSlotDelta(slot80* e, unsigned char kind);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
 void __cdecl fcn_005100f0(int a1, int a2);
 int __cdecl gm_RandomMod(int a1);
@@ -136,15 +136,15 @@ found:
 	if (e != 0) {
 		ent = *e;
 		ent.f24 = ent.f20 * scale;
-		ent.f38 = fcn_00502780(g_773d75, v20);
-		fcn_004c61d0(&ent, g_773d75);
+		ent.f38 = gm_CalcMarketSlotPriceByObjektId(g_773d75, v20);
+		cm_SendMarktSlotDelta(&ent, g_773d75);
 		packet[3] = v20;
 		e = gm_FindSlotById(g_773d75, secondId);
 		if (e != 0) {
 			ent = *e;
 			ent.f24 = ent.f20 * scale;
-			ent.f38 = fcn_00502780(g_773d75, secondId);
-			fcn_004c61d0(&ent, g_773d75);
+			ent.f38 = gm_CalcMarketSlotPriceByObjektId(g_773d75, secondId);
+			cm_SendMarktSlotDelta(&ent, g_773d75);
 			packet[4] = secondId;
 		}
 		fcn_004c5420(*(int*) (self + 4), 0x1c8, 4, 0x4000000, 0);

@@ -26,7 +26,7 @@ char __cdecl fcn_0052d970(char*, char*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl SelectTextureSet(char*, int, int, int);
 
-void __cdecl fcn_0052da70(int idx)
+void __cdecl d3_UpdateBuildingWimpelTextures(int idx)
 {
 	int save;
 	struct s_7f4ca0* r;

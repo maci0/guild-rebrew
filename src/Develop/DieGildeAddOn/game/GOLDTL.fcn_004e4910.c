@@ -19,7 +19,7 @@ void __cdecl fcn_00442e30(void);
 
 
 /* ADDRESS: GOLDTL 0x004e4910 */
-void __cdecl fcn_004e4910(void)
+void __cdecl cut_CleanupCutscene(void)
 {
 	char* w;
 	char* ui;

@@ -22,8 +22,8 @@ extern int g_772fe0;
 extern ALCHEMY_RECIPE_PROTOTYPE* g_772fe4;
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
-int __cdecl fcn_004ec9a0(int p);
-int __cdecl fcn_004ec950(int p, int id);
+int __cdecl ahm_HasRecipeSlotCapacity(int p);
+int __cdecl ahm_FindRecipeSlot(int p, int id);
 
 /* ADDRESS: GOLD 0x004ead20 */
 /* ADDRESS: GOLDTL 0x004ecaa0 */
@@ -73,7 +73,7 @@ ALCHEMY_RECIPE_PROTOTYPE* __cdecl fcn_004ecc20(int p)
 	int idx;
 	int n;
 
-	if (fcn_004ec9a0(p)) {
+	if (ahm_HasRecipeSlotCapacity(p)) {
 		step = gm_RandomMod((unsigned short) g_772fe0) + 1;
 		while (step % g_772fe0 == 0) {
 			step++;
@@ -81,7 +81,7 @@ ALCHEMY_RECIPE_PROTOTYPE* __cdecl fcn_004ecc20(int p)
 		idx = gm_RandomMod((unsigned short) g_772fe0);
 		n = g_772fe0;
 		while (n != 0) {
-			if (!fcn_004ec950(p, g_772fe4[idx].key)) {
+			if (!ahm_FindRecipeSlot(p, g_772fe4[idx].key)) {
 				return &g_772fe4[idx];
 			}
 			n--;

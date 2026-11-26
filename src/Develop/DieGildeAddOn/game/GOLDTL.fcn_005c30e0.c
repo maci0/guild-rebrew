@@ -53,9 +53,9 @@ int __cdecl fcn_00526120(void*, int);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-void* __cdecl fcn_0050e4a0(int);
-int __cdecl fcn_00507a10(unsigned char*);
-int __cdecl fcn_00526070(int, int, int, char);
+void* __cdecl gm_FindPublicBuilding(int);
+int __cdecl gm_FindBuildingTreasury(unsigned char*);
+int __cdecl d2_CheckFundsAndNotify(int, int, int, char);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c5530(char*);
@@ -151,13 +151,13 @@ void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 		return;
 	}
 	if (kind == 3) {
-		id = *(int*) ((char*) fcn_0050e4a0(1) + 0x5d);
+		id = *(int*) ((char*) gm_FindPublicBuilding(1) + 0x5d);
 		m = fcn_00502cd0(id, 2, 6, 0, 0x115);
 		if (fcn_00526120(buf, 0x11) == 0) {
 			return;
 		}
 	} else {
-		m = fcn_00507a10(buildingEntry);
+		m = gm_FindBuildingTreasury(buildingEntry);
 		if (fcn_00526120(buf, 0x11) == 0) {
 			return;
 		}
@@ -165,7 +165,7 @@ void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 			return;
 		}
 	}
-	if (fcn_00526070(m, *(int*) (m + 0x14), quotedCost, (char) g_773d75) == 0) {
+	if (d2_CheckFundsAndNotify(m, *(int*) (m + 0x14), quotedCost, (char) g_773d75) == 0) {
 		return;
 	}
 	memset(&msg, 0, sizeof msg);

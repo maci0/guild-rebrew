@@ -21,7 +21,7 @@ void __cdecl fcn_004e4de0(int);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4c60(void);
 void __cdecl fcn_004e4c00(void);
-void __cdecl fcn_004e4910(void);
+void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004e3640(void);
 int __cdecl fcn_00445f50(int, float, float, int);
 void __cdecl fcn_004463f0(int, int, float);
@@ -124,7 +124,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	}
 	fcn_004e4c00();
 	g_772f54 = 0;
-	fcn_004e4910();
+	cut_CleanupCutscene();
 	d2_SuppressOverlay = 0;
 	fcn_004e3640();
 }

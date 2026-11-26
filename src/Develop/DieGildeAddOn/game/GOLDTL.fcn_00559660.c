@@ -29,7 +29,7 @@ void __cdecl fcn_004c6a40(int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-int __cdecl fcn_00559660(struct slot* s)
+int __cdecl he_ReturnPoliticianFromJob(struct slot* s)
 {
 	struct obj* o;
 	int r;

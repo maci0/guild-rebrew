@@ -18,10 +18,10 @@ extern signed char g_6a3440;
 
 Spec* __cdecl fcn_004b3c50(int op);
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004b46c0(char* t, Spec* s);
+int __cdecl ai_ExceedsEntityGoldThreshold(char* t, Spec* s);
 int __cdecl fcn_004b4590(char* t, Spec* s);
 int __cdecl fcn_004b4730(char* t, Cmd* c, Spec* s);
-int __cdecl fcn_004b4760(char* t, Spec* s);
+int __cdecl gm_HasMinDynastyWealth(char* t, Spec* s);
 int __cdecl fcn_004b47a0(char* t, Spec* s);
 int __cdecl fcn_004b47e0(char* t, Spec* s);
 int __cdecl fcn_004b4830(char* t, Cmd* c, Spec* s);
@@ -33,18 +33,18 @@ int __cdecl fcn_004b4a20(char* t, Spec* s);
 int __cdecl fcn_004b4a60(char* t, Spec* s);
 int __cdecl fcn_004b4ad0(char* t, Spec* s);
 int __cdecl fcn_004b4b70(char* t, Spec* s);
-int __cdecl fcn_004b4c10(char* t, Cmd* c, Spec* s);
+int __cdecl gm_HasThreeType7Entities(char* t, Cmd* c, Spec* s);
 int __cdecl fcn_004b4c60(char* t, Spec* s);
 int __cdecl fcn_004b4dc0(char* t, Cmd* c, Spec* s);
 int __cdecl fcn_004b4fa0(char* t, Spec* s);
 int __cdecl fcn_004b4f30(char* t, Cmd* c, Spec* s);
 int __cdecl fcn_004b4ec0(char* t, Spec* s);
 int __cdecl fcn_004b4f00(char* t, Spec* s);
-int __cdecl fcn_004b5020(char* t, Spec* s);
+int __cdecl gm_HasNoType5Owner(char* t, Spec* s);
 
 /* ADDRESS: GOLD 0x004b4f00 */
 /* ADDRESS: GOLDTL 0x004b5070 */
-int __cdecl fcn_004b5070(Cmd* c)
+int __cdecl gm_CheckMissionCondition(Cmd* c)
 {
 	Spec* s;
 	char* t;
@@ -67,7 +67,7 @@ int __cdecl fcn_004b5070(Cmd* c)
 	case 14:
 	case 22:
 	case 32:
-		return fcn_004b46c0(t, s);
+		return ai_ExceedsEntityGoldThreshold(t, s);
 	case 2:
 	case 7:
 		return fcn_004b4590(t, s);
@@ -79,7 +79,7 @@ int __cdecl fcn_004b5070(Cmd* c)
 	case 13:
 	case 21:
 	case 30:
-		return fcn_004b4760(t, s);
+		return gm_HasMinDynastyWealth(t, s);
 	case 31:
 		return fcn_004b47a0(t, s);
 	case 4:
@@ -119,7 +119,7 @@ int __cdecl fcn_004b5070(Cmd* c)
 	case 38:
 		return fcn_004b4b70(t, s);
 	case 33:
-		return fcn_004b4c10(t, c, s);
+		return gm_HasThreeType7Entities(t, c, s);
 	case 43:
 		return fcn_004b4c60(t, s);
 	case 44:
@@ -133,7 +133,7 @@ int __cdecl fcn_004b5070(Cmd* c)
 	case 48:
 		return fcn_004b4f00(t, s);
 	case 49:
-		return fcn_004b5020(t, s);
+		return gm_HasNoType5Owner(t, s);
 	}
 	return 0;
 }

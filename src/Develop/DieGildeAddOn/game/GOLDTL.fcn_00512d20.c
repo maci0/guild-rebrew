@@ -49,7 +49,7 @@ extern unsigned char g_773d75;
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 int __cdecl fcn_0050b750(int, char);
 void __cdecl fcn_004c5150(int, int, char, int);
-int __cdecl fcn_004f36f0(Player*);
+int __cdecl gv_AssignGraveyardField(Player*);
 int __cdecl fcn_004c6090(Player*, int, int, int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
@@ -59,7 +59,7 @@ Site* __cdecl fcn_005049a0(Player*);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl init_Betrieb(Player*);
 
-void __cdecl fcn_00512d20(Player* p)
+void __cdecl init_SetupBetriebWorkers(Player* p)
 {
 	BUILDING_PROTOTYPE * o;
 	int h;
@@ -77,7 +77,7 @@ void __cdecl fcn_00512d20(Player* p)
 	if (o->category != 9) {
 		if (o->category == 4 || o->category == 0x10 || o->category == 0x13 || o->category == 0x1d) {
 			if (o->category == 0x1d) {
-				h = fcn_004f36f0(p);
+				h = gv_AssignGraveyardField(p);
 			} else {
 				if (((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_state != 6 && ((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_state != 7) {
 					fcn_004c6090(p, 0, o->role_230, 0);

@@ -8,7 +8,7 @@ extern char g_6b5c60[];
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c57e0(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_004e6240(char*, char*, char*, char*);
+void __cdecl he_SendCmdMessage(char*, char*, char*, char*);
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf950;
@@ -42,7 +42,7 @@ void __cdecl fcn_004e4610(int);
 void __cdecl fcn_004e44f0(int);
 void __cdecl fcn_004c09b0(void);
 void __cdecl fcn_004e4b00(int);
-void __cdecl fcn_004e4910(void);
+void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004e3640(void);
 
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -69,7 +69,7 @@ int __cdecl fcn_004e27b0(char* x)
 	if (a[2] == 6 || a[2] == 7) {
 		io_FormatTextBuffer(buf, 0x11c1);
 		strcat(buf, g_14a9a28);
-		fcn_004e6240(a, x, buf, g_6b5c60);
+		he_SendCmdMessage(a, x, buf, g_6b5c60);
 	}
 	return 1;
 }
@@ -94,7 +94,7 @@ void __cdecl fcn_004e2890(char* m)
 		int v;
 
 		v = 8;
-		fcn_004c4510(b, *(int*) (b + 4));
+		cm_BeginPacketFieldDelta(b, *(int*) (b + 4));
 		cm_AppendPacketFieldDelta(1, 1, 2, &v);
 		fcn_004c5360();
 	}
@@ -142,7 +142,7 @@ void __cdecl fcn_004e2890(char* m)
 		if (main_RunFrameLoop(0, cut_EventLoopFlags) == 0 || g_7747f0 != 0)
 			break;
 	}
-	fcn_004c4510(b, *(int*) (b + 4));
+	cm_BeginPacketFieldDelta(b, *(int*) (b + 4));
 	cm_AppendPacketFieldDelta(1, 0x10, 0x30, buf);
 	fcn_004c5360();
 	fcn_00471e30(sc);
@@ -152,7 +152,7 @@ void __cdecl fcn_004e2890(char* m)
 	fcn_004c09b0();
 	fcn_004e4b00(snd);
 	g_772f54 = 0;
-	fcn_004e4910();
+	cut_CleanupCutscene();
 	fcn_004e3640();
 	d2_SuppressOverlay = 0;
 }

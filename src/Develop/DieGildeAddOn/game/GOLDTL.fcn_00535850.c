@@ -10,7 +10,7 @@ int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl main_RunFrameLoop(int, int);
 
-void __cdecl fcn_00535850(int flags, char* name)
+void __cdecl cm_SaveGameAndWait(int flags, char* name)
 {
 	char buf[0x7c];
 	int s;

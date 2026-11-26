@@ -71,7 +71,7 @@ int __cdecl fcn_004c4480(int);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
-void __cdecl fcn_004c4510(char *, int);
+void __cdecl cm_BeginPacketFieldDelta(char *, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char *);
 void __cdecl fcn_004c4940(void);
 void __cdecl cm_ExecCommand(void);
@@ -95,13 +95,13 @@ int __cdecl gm_CalculateGebaeudeValue(unsigned char *, int);
 int __cdecl fcn_0050d170(int);
 void __cdecl fcn_00511c60(int);
 void __cdecl init_Betrieb(unsigned char *);
-void __cdecl fcn_00512d20(unsigned char *);
+void __cdecl init_SetupBetriebWorkers(unsigned char *);
 void __cdecl fcn_00535960(void);
 void __cdecl d2_SetProgressPercent(int, int);
 void __cdecl fcn_00547010(void);
 void __cdecl fcn_005470a0(void);
 void __cdecl fcn_00547130(void);
-void __cdecl fcn_005471c0(void);
+void __cdecl he_EnsureCityBuilding0x2bActions(void);
 int __cdecl fcn_00597ff0(int, char *);
 int __cdecl d3_CollectUnusedSceneObjects(char *, char **);
 void __cdecl fcn_00598740(float *, int);
@@ -170,7 +170,7 @@ void __cdecl fcn_00512ee0(void)
 						while (fcn_004c4450(h) == 0) {
 							fcn_00535960();
 						}
-						fcn_00512d20((unsigned char *)p);
+						init_SetupBetriebWorkers((unsigned char *)p);
 						done = 1;
 						counts[o->category]++;
 						break;
@@ -203,7 +203,7 @@ void __cdecl fcn_00512ee0(void)
 				}
 				h = fcn_004c4480(h);
 				if (h)
-					fcn_00512d20((unsigned char *)h);
+					init_SetupBetriebWorkers((unsigned char *)h);
 			}
 		}
 	}
@@ -260,7 +260,7 @@ void __cdecl fcn_00512ee0(void)
 		if (e == 0)
 			continue;
 		count = gm_CalculateGebaeudeValue((unsigned char *)e, 100);
-		fcn_004c4510(e, *(int *)(e + 1));
+		cm_BeginPacketFieldDelta(e, *(int *)(e + 1));
 		cm_AppendPacketFieldDelta(4, 1, 0x65, (char *)&count);
 		count = count * 2;
 		cm_AppendPacketFieldDelta(4, 1, 0x69, (char *)&count);
@@ -462,7 +462,7 @@ handles_done:
 	fcn_00547010();
 	fcn_005470a0();
 	fcn_00547130();
-	fcn_005471c0();
+	he_EnsureCityBuilding0x2bActions();
 	outer = 0;
 	for (e = g_7f4ca0 + 2; e < g_7f4ca0 + 0x651e6; e += sizeof(ENTITY_RECORD)) {
 		if (*e == 6 || *e == 7 || *e == 5 || *e == 3 || *e == 4 || *e == 2) {

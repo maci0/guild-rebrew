@@ -5,11 +5,11 @@ extern char g_7f4ca0[];
 int __cdecl fcn_004fffb0(unsigned short id);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004eb180(int k);
-void __cdecl fcn_004fc600(unsigned short id, int* out, int c);
-void __cdecl fcn_004fc700(unsigned short id, int* out, int c);
+void __cdecl gm_CollectCityTaxOffers(unsigned short id, int* out, int c);
+void __cdecl gm_ApplySteuerLaw0aToSlots(unsigned short id, int* out, int c);
 void __cdecl fcn_004fca70(unsigned short id, int* out, int c);
-void __cdecl fcn_004fc800(unsigned short id, int* out, int c);
-void __cdecl fcn_004fc940(unsigned short id, int* out, int c);
+void __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, int* out, int c);
+void __cdecl gm_CalcLaw0x0cTaxSlot(unsigned short id, int* out, int c);
 
 /* ADDRESS: GOLDTL 0x004fcb50 */
 int __cdecl fcn_004fcb50(unsigned short id, int* out, int c)
@@ -28,14 +28,14 @@ int __cdecl fcn_004fcb50(unsigned short id, int* out, int c)
 		return 0;
 	}
 	if (fcn_004eb180(gm_MapEntityStatRange(*(unsigned char*) (g_7f4ca0 + o + 0x164))) != 0) {
-		fcn_004fc700(id, out, c);
+		gm_ApplySteuerLaw0aToSlots(id, out, c);
 	} else {
-		fcn_004fc600(id, out, c);
+		gm_CollectCityTaxOffers(id, out, c);
 	}
 	fcn_004fca70(id, out, c);
 	if (*(int*) (g_7f4ca0 + o + 0x1a8) > 0) {
-		fcn_004fc800(id, out, c);
+		gm_CalcLaw0x0dTaxSlot(id, out, c);
 	}
-	fcn_004fc940(id, out, c);
+	gm_CalcLaw0x0cTaxSlot(id, out, c);
 	return 1;
 }

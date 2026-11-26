@@ -7,7 +7,7 @@ typedef struct {
 
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, ...);
-void __cdecl fcn_005059b0(char* e, int a, int b);
+void __cdecl gm_AssignBuildingOwner(char* e, int a, int b);
 void __cdecl fcn_005058b0(char* e, char* q, int a);
 int __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char k, int n);
 void __cdecl fcn_004c6090(char* e, int a, int b, int c);
@@ -26,7 +26,7 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 	e = gm_StartFilteredEntitySearch(1, 0, 6);
 	if (e != 0) {
 		*(Blk16_53abe0*) (e + 5) = *(Blk16_53abe0*) g_6a3bb4;
-		fcn_005059b0(e, ownerSlot, ownerSlot);
+		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0x13);
 		if (q != 0) {
 			fcn_005058b0(e, q, ownerSlot);
@@ -57,7 +57,7 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x2a);
 	if (e != 0) {
-		fcn_005059b0(e, ownerSlot, ownerSlot);
+		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
 			cm_BeginCommandSync();
@@ -73,24 +73,24 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x1e);
 	if (e != 0) {
-		fcn_005059b0(e, ownerSlot, ownerSlot);
+		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x1f);
 	if (e != 0) {
-		fcn_005059b0(e, ownerSlot, ownerSlot);
+		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x12);
 	if (e != 0) {
-		fcn_005059b0(e, ownerSlot, ownerSlot);
+		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x14);
 	if (e != 0) {
-		fcn_005059b0(e, ownerSlot, ownerSlot);
+		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 		fcn_004c51f0(*(int*) (e + 1), -1, 0xf7, 1, g_773d75, 0);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x32);
 	if (e != 0) {
-		fcn_005059b0(e, ownerSlot, ownerSlot);
+		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
 			cm_BeginCommandSync();
@@ -105,17 +105,17 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x21);
 	if (e != 0) {
-		fcn_005059b0(e, ownerSlot, ownerSlot);
+		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 		fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x19);
 	if (e != 0) {
-		fcn_005059b0(e, ownerSlot, ownerSlot);
+		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 		fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 	}
 	e = gm_StartFilteredEntitySearch(1, 0, 0x34);
 	if (e != 0) {
-		fcn_005059b0(e, ownerSlot, ownerSlot);
+		gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
 			cm_BeginCommandSync();
@@ -132,6 +132,6 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 	if (e == 0) {
 		return;
 	}
-	fcn_005059b0(e, ownerSlot, ownerSlot);
+	gm_AssignBuildingOwner(e, ownerSlot, ownerSlot);
 	fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 }

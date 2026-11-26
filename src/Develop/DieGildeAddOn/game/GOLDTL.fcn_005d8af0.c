@@ -35,7 +35,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00525f60(House*, int);
+int __cdecl d2_CheckActionBlocker(House*, int);
 int __cdecl fcn_00526010(House*, int, char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
@@ -66,7 +66,7 @@ int __cdecl fcn_005d8af0(House* e)
 			if (((House*)g_7f4ca0)[i].id != 0xffff && ((House*)g_7f4ca0)[i].b2 < 10 && ((House*)g_7f4ca0)[i].b2 != 6 && ((House*)g_7f4ca0)[i].b2 != 7 &&
 				((House*)g_7f4ca0)[i].bc != e->bc) {
 				if ((unsigned char) rank > gm_RandomMod(0x7e) + ((House*)g_7f4ca0)[i].b84) {
-					fcn_004c4510((char*) &((House*)g_7f4ca0)[i], ((House*)g_7f4ca0)[i].f4);
+					cm_BeginPacketFieldDelta((char*) &((House*)g_7f4ca0)[i], ((House*)g_7f4ca0)[i].f4);
 					cm_AppendPacketFieldDelta(1, 1, 0xc, &who);
 					fcn_004c5360();
 				}
@@ -102,7 +102,7 @@ int __cdecl fcn_005d8af0(House* e)
 					n = 0;
 					rank = e->b84;
 					who = e->bc;
-					if (fcn_00525f60(e, 6) && fcn_00526010(e, money, g_773d75)) {
+					if (d2_CheckActionBlocker(e, 6) && fcn_00526010(e, money, g_773d75)) {
 						fcn_004c5150(-1, e->f4, g_773d75, money);
 						fcn_004c6ae0(e->f4, -6);
 						for (i = 0; i < 768; i++) {
@@ -111,7 +111,7 @@ int __cdecl fcn_005d8af0(House* e)
 							if (h->id != 0xffff && h->b2 < 10 && h->b2 <= 10 && h->bc != e->bc) {
 								if (rank > gm_RandomMod(0x7e) + h->b84) {
 									n++;
-									fcn_004c4510((char*) h, h->f4);
+									cm_BeginPacketFieldDelta((char*) h, h->f4);
 									cm_AppendPacketFieldDelta(1, 1, 0xc, &who);
 									fcn_004c5360();
 								}

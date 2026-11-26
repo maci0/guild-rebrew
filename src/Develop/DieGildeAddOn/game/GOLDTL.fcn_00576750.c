@@ -82,7 +82,7 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 
 				one = 1;
 				amount = (gm_RandomMod(4) & 0xffff) + 3;
-				fcn_004c4510((char*) found[index], *(int*) ((char*) found[index] + 2));
+				cm_BeginPacketFieldDelta((char*) found[index], *(int*) ((char*) found[index] + 2));
 				cm_AppendPacketFieldDelta(4, 1, 0x1c, &one);
 				cm_AppendPacketFieldDelta(4, 1, 0x20, &amount);
 				fcn_004c5360();
@@ -103,7 +103,7 @@ void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
 		else {
 			byte = (char) (0xf8 - gm_RandomMod(3));
 		}
-		fcn_004c4510(object, *(int*) (object + 1));
+		cm_BeginPacketFieldDelta(object, *(int*) (object + 1));
 		fcn_004c4670(1, 1, 0x5c, &byte);
 		fcn_004c5360();
 		fcn_005b3270((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),

@@ -12,7 +12,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_0059a0e0(void);
-void __cdecl fcn_005c5990(char*, int);
+void __cdecl d2_HandleErnten(char*, int);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl fcn_0059c000(char*);
@@ -48,7 +48,7 @@ void __cdecl fcn_0059c9a0(char* e)
 			sp = RegisterStatusText("ob_STROHPUPPE", g_14abc30, 0xc);
 		}
 		fcn_0059a0e0();
-		fcn_005c5990(e, x);
+		d2_HandleErnten(e, x);
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == transport) {
 				d2_OpenTransportPanel(e);

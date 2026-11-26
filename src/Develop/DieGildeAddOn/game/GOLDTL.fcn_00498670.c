@@ -221,7 +221,7 @@ use_slot:
 	c2.kind = 0;
 	c2.f1 = 0;
 	c2.f2 = 0;
-	act = fcn_004a4bb0(0, ent, mode, &c1, &c2, 1);
+	act = ai_PrepareBuildSite(0, ent, mode, &c1, &c2, 1);
 	if (act != 0) {
 		v = fcn_0050d200(ent, c1.f1);
 		if (ratio >= v) {

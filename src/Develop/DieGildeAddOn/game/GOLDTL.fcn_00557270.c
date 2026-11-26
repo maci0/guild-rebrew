@@ -22,7 +22,7 @@ void __cdecl fcn_004c4ef0(char* s);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
 int __cdecl fcn_004c5620(int, char*);
 
-void __cdecl fcn_00557270(char* u)
+void __cdecl he_InitDunkleEcke(char* u)
 {
 	char* e;
 	char* o;
@@ -52,7 +52,7 @@ void __cdecl fcn_00557270(char* u)
 			if (q != 0) {
 				int t = gm_GameTime.a;
 
-				fcn_004c4510(q, *(int*) (q + 2));
+				cm_BeginPacketFieldDelta(q, *(int*) (q + 2));
 				cm_AppendPacketFieldDelta(4, 1, q - g_aed32c + 0x28, &t);
 				fcn_004c5360();
 				fcn_004c4eb0(g_67ec2c);

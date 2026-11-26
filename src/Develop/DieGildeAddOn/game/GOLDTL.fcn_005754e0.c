@@ -35,7 +35,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl he_FreeAction(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_004b5070(rec24*);
+int __cdecl gm_CheckMissionCondition(rec24*);
 int __cdecl fcn_004c5790(int, struct req*);
 int __cdecl fcn_004c4450(int);
 
@@ -60,7 +60,7 @@ void __cdecl fcn_005754e0(char* u)
 	}
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		if (((rec24*)g_10069a0)[i].f20 == 0 && (unsigned short) gm_GameTime.b < 0x16 && fcn_004b5070(&((rec24*)g_10069a0)[i]) != 0) {
+		if (((rec24*)g_10069a0)[i].f20 == 0 && (unsigned short) gm_GameTime.b < 0x16 && gm_CheckMissionCondition(&((rec24*)g_10069a0)[i]) != 0) {
 			((rec24*)g_10069a0)[i].f20 = 1;
 			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 			*(int*) (u + 0x70) = 1;

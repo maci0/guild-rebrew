@@ -54,13 +54,13 @@ extern int g_7f4c04;
 extern int g_7f4c08;
 extern unsigned short g_7f4c0c;
 
-int __cdecl fcn_0050cce0(char*, void*, int);
-int __cdecl fcn_0050de80(char*, Stats*);
+int __cdecl gm_CollectBuildingStock(char*, void*, int);
+int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_0050dfd0(char*, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
 int __cdecl fcn_0047d1b0(void);
-int __cdecl fcn_0047d1e0(void);
+int __cdecl he_CountActiveTradeActions(void);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c5150(int, int, char, int);
 int __cdecl fcn_004c4eb0(int);
@@ -96,7 +96,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 	k = 0;
 	if (*(float*) 0x100d0f4 <= 0.0f || *(int*) 0x100d10c == 0)
 		return 0;
-	fcn_0050cce0(*(char**) (o + 0x16c), name, 0);
+	gm_CollectBuildingStock(*(char**) (o + 0x16c), name, 0);
 	for (i = 0; i < *(int*) 0x100e74c; i++) {
 		item = (char*) *(int*) (0x100dbc0 + i * 4);
 		if (*(unsigned char*) (item + 0x12) < 0x21) {
@@ -119,7 +119,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 		}
 		else {
 			memset(&m, 0, sizeof(m));
-			if (fcn_0047d1e0() > fcn_0047d1b0())
+			if (he_CountActiveTradeActions() > fcn_0047d1b0())
 				m.skip = 1;
 			for (j = 0; j < 3; j++) {
 				m.ids[j] = 0;
@@ -127,7 +127,7 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 				m.ids[j + 3] = 0;
 				m.slots[j + 3] = -1;
 			}
-			fcn_0050de80(item, &st);
+			gm_CalcEntityInventoryStats(item, &st);
 			q = fcn_00502cd0(*(int*) (item + 0x14), 1, 0, 0x1dd);
 			j = 0;
 			if (st.x0 > 0) {

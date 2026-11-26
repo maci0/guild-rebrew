@@ -2,7 +2,7 @@
 #include "client_packet_queue.h"
 
 void* __cdecl gm_FindRecordById(int);
-void __cdecl fcn_004be280(void*);
+void __cdecl rt_FreeRoutePoints(void*);
 void* __cdecl fcn_004be2a0(void*);
 
 /* ADDRESS: GOLDTL 0x004cdda0 */
@@ -24,7 +24,7 @@ int __cdecl fcn_004cdda0(char* command, unsigned char* response, unsigned char* 
 	if (p == 0)
 		return -1;
 	if (*(int*) ((char*) p + 0x29) != 0) {
-		fcn_004be280(*(void**) ((char*) p + 0x29));
+		rt_FreeRoutePoints(*(void**) ((char*) p + 0x29));
 		*(int*) ((char*) p + 0x29) = 0;
 	}
 	n = *(int*) (command + 0x14);

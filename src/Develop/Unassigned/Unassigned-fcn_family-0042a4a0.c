@@ -13,7 +13,7 @@ int __cdecl fcn_0042b140(int*);
 __declspec(dllimport) int __stdcall AIL_allocate_sample_handle(int);
 
 /* ADDRESS: GOLDTL 0x0042a4a0 */
-int __cdecl fcn_0042a4a0(int* out)
+int __cdecl msx_GetSampleHandleLimit(int* out)
 {
 	int r = 0;
 

@@ -27,10 +27,10 @@ extern int __cdecl ch_CreateMesh(void*, char*, void*);
 extern void __cdecl ch_SetBodyAttachment(void*, int, void*);
 extern void __cdecl ch_StartLoopingAnimation(void*, void*);
 extern void __cdecl d3_SetObjectRotation(void*, void*);
-extern void __cdecl fcn_004ce9e0(void*);
+extern void __cdecl ch_UpdateHeldObjectAttachment(void*);
 extern void __cdecl fcn_00510820(void*, void*, int);
 extern char* __cdecl fcn_00442910(int, void*, void*, char*);
-extern char* __cdecl fcn_0050d430(void*);
+extern char* __cdecl gm_ResolveEntityOwnerBuilding(void*);
 extern char __cdecl SelectTextureSet(void*, void*, unsigned char, char);
 extern int __cdecl ch_AttachTransport(void*, void*);
 extern void __cdecl ch_SetVisible(void*, int);
@@ -161,7 +161,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 						if (*(char**) ((char*) u + 0x17c) != 0) {
 							*(char*) ((char*) u + 0x180) = **(char**) ((char*) u + 0x17c);
 						}
-						fcn_004ce9e0(u);
+						ch_UpdateHeldObjectAttachment(u);
 					} else {
 						fcn_00510820(target, u, 1);
 						target = *(char**) (rec + 0x34);
@@ -181,7 +181,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 							found = 0;
 						}
 						if (found != 0) {
-							e = fcn_0050d430(u);
+							e = gm_ResolveEntityOwnerBuilding(u);
 							if (e != 0 && *(int*) (e + 0x54) != 0
 							    && (*(unsigned char*) (e + 2) == 5
 								|| *(unsigned char*) (e + 2) == 6

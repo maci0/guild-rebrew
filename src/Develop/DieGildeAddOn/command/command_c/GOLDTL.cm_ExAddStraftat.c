@@ -25,8 +25,8 @@ void __cdecl srv_SeedRandom(int);
 void __cdecl fcn_004b4650(char*, int);
 int __cdecl gs_AddBeweis(int, int);
 int __cdecl fcn_004f57e0(void);
-void __cdecl fcn_004fa850(int, char, unsigned int*, unsigned int*);
-void __cdecl fcn_004faa90(unsigned int, unsigned int, Area*);
+void __cdecl gm_AddNeighborhoodLawEffect(int, char, unsigned int*, unsigned int*);
+void __cdecl cm_CrimeGridCellToWorld(unsigned int, unsigned int, Area*);
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl he_StartHandlungSearch(int, int, int);
@@ -82,10 +82,10 @@ int __cdecl cm_ExAddStraftat(char* src, char* out)
 				srv_SeedRandom(*(int*) (src + 0x39));
 			}
 		}
-		fcn_004fa850(taeter, *(char*) (src + 0x2c), &v13, &v14);
+		gm_AddNeighborhoodLawEffect(taeter, *(char*) (src + 0x2c), &v13, &v14);
 		gm_ResolveEntityById(&p, 0, 0, taeter);
 		if (p == 0) {
-			fcn_004faa90(v13, v14, &area);
+			cm_CrimeGridCellToWorld(v13, v14, &area);
 		} else {
 			if (*(int*) (p + 0x61) != 0) {
 				area.a = *(unsigned int*) (*(char**) (p + 0x61) + 0x4c);

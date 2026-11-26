@@ -24,7 +24,7 @@ extern char g_6b5c60[];
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_0050c710(char*, int, int);
+int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl fcn_0050c830(pos14_7f4c00*, pos14_7f4c00*, char*);
 void __cdecl fcn_004c4670(int, int, short, unsigned char*);
 void __cdecl fcn_004c5360(void);
@@ -69,7 +69,7 @@ void __cdecl fcn_00560eb0(char* e)
 				n = fcn_0050c830((pos14_7f4c00*) (e + 0x60), (pos14_7f4c00*) (e + 0xb8), q);
 				*(int*) (e + 0x70) = 1;
 			}
-			skill = (float) fcn_0050c710(q, 0xc, 1);
+			skill = (float) gm_GetBuildingTechEffect(q, 0xc, 1);
 			months = n * (1.0 / 30.0);
 			add = (unsigned char) ((months * 8.0) * (skill * 0.01 + 1.0));
 			p = (unsigned char*) &who[((unsigned char*) e)[0xac] + 0x80];
@@ -77,7 +77,7 @@ void __cdecl fcn_00560eb0(char* e)
 			if (add + *p > 252.0f) {
 				add = (unsigned char) (252.0f - *p);
 			}
-			fcn_004c4510(who, *(int*) (who + 4));
+			cm_BeginPacketFieldDelta(who, *(int*) (who + 4));
 			fcn_004c4670(1, 1, (short) (who - g_aed32c + ((unsigned char*) e)[0xac] + 0x80), &add);
 			fcn_004c5360();
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;

@@ -37,7 +37,7 @@ extern float g_662a6c;
 int __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl fcn_0050c710(char*, int, int);
+int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl fcn_00508280(char*, int*, float*);
 float __cdecl fcn_004fef80(char*);
 int __cdecl fcn_005c6270(char*, int);
@@ -107,9 +107,9 @@ void __cdecl RunSimKrankheiten(char* s)
 			x = 0.0f;
 			if (home != 0) {
 				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) home].category == 2) {
-					x = (float) fcn_0050c710(home, 8, 1) * g_665370 * g_66430c;
+					x = (float) gm_GetBuildingTechEffect(home, 8, 1) * g_665370 * g_66430c;
 				} else {
-					x = (float) fcn_0050c710(home, 8, 1) * 0.02f * g_66430c;
+					x = (float) gm_GetBuildingTechEffect(home, 8, 1) * 0.02f * g_66430c;
 				}
 			} else {
 				y = g_664f08 - gm_RandomFloat01() * g_66430c * 0.5;

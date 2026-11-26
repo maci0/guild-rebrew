@@ -28,7 +28,7 @@ extern int g_aed330;
 extern CLIENT_QUEUED_PACKET g_aed740[0x8000];
 extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 
-unsigned short __cdecl fcn_004c3a50(CLIENT_QUEUED_PACKET*);
+unsigned short __cdecl ahm_GetCommandPayloadSize(CLIENT_QUEUED_PACKET*);
 int __cdecl fcn_004c4090(void);
 
 
@@ -54,7 +54,7 @@ int __cdecl fcn_004c4330(CLIENT_QUEUED_PACKET* queuedInput)
 	}
 	g_1005768 = n;
 	*p = *queuedInput;
-	p->crc = fcn_004c3a50(p);
+	p->crc = ahm_GetCommandPayloadSize(p);
 	p->flag = 0;
 	p->seq = seq;
 	p->cur = g_1005768;

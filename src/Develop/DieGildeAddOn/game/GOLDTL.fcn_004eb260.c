@@ -5,9 +5,9 @@ extern unsigned char* lpGebaeudePROT;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
 
-int __cdecl fcn_004eb260(unsigned char* obj)
+int __cdecl amt_CheckZunftLevel2Eligibility(unsigned char* obj)
 {
-	unsigned char* r;
+	unsigned char* building;
 	int kind;
 
 	if (obj[0x169] < 0x1e || obj[0x169] > 0x21) {
@@ -29,11 +29,11 @@ int __cdecl fcn_004eb260(unsigned char* obj)
 	default:
 		return 0;
 	}
-	r = gm_StartFilteredEntitySearch(1, 5, kind);
-	if (r == 0 || (r[0x5a] & 1) != 0) {
+	building = gm_StartFilteredEntitySearch(1, 5, kind);
+	if (building == 0 || (building[0x5a] & 1) != 0) {
 		return 0;
 	}
-	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*r].level < 2) {
+	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*building].level < 2) {
 		return 0;
 	}
 	if (*(unsigned int*) (obj + 0x1c8) & 0x8000000) {

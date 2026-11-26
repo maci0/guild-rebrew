@@ -12,7 +12,7 @@ int __cdecl fcn_0047dd60(void*);
 int __cdecl fcn_00508eb0(int, int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c4510(int, int);
+void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c4670(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
@@ -67,7 +67,7 @@ int __cdecl fcn_0047d2a0(char* e)
 			return 0;
 		}
 		b = 0;
-		fcn_004c4510((int) e, *(int*) (e + 4));
+		cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
 		d = abs((int) bestscore);
 		b = (unsigned char) (d / 3 + 1);
@@ -108,7 +108,7 @@ int __cdecl fcn_0047d2a0(char* e)
 		return (int) other;
 	}
 	b = (unsigned char) ((int) gm_RandomMod(2) + 1);
-	fcn_004c4510((int) e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
 	fcn_004c4670(1, 1, 0x215, &b);
 	if ((int) (unsigned char) e[0x215] + b > 3) {
 		cm_AppendPacketFieldDelta(1, 1, 0x218, e + 0x217);
@@ -125,7 +125,7 @@ reset:
 	b2 = 0;
 	best = -1;
 	v11 = 0;
-	fcn_004c4510((int) e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
 	cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
 	cm_AppendPacketFieldDelta(1, 1, 0x216, &b2);
 	cm_AppendPacketFieldDelta(4, 1, 0x210, &best);
@@ -143,7 +143,7 @@ reset:
 pulse:
 	b = 1;
 	b2 = 1;
-	fcn_004c4510((int) e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
 	fcn_004c4670(1, 1, 0x215, &b);
 	cm_AppendPacketFieldDelta(1, 1, 0x218, &b2);
 	fcn_004c5360();
@@ -152,7 +152,7 @@ pulse:
 pulse2:
 	b = (unsigned char) (e[0x216] + 1);
 	b2 = 1;
-	fcn_004c4510((int) e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
 	cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
 	cm_AppendPacketFieldDelta(1, 1, 0x218, &b2);
 	fcn_004c5360();

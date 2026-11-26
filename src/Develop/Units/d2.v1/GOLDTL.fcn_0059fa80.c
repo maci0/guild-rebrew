@@ -36,7 +36,7 @@ void __cdecl fcn_00472640(int value, int flag);
 char* __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(char* text, int flag);
 void* __cdecl fcn_005cd440(void* desc, int a, int b, int c);
-int __cdecl fcn_00525f60(void* p, int flag);
+int __cdecl d2_CheckActionBlocker(void* p, int flag);
 int __cdecl fcn_004c5620(int mode, int arg);
 void __cdecl fcn_005100f0(int handle, int value);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
@@ -128,7 +128,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 						io_FormatTextBuffer(title, 0x1a5b, 2, *v6,
 							*v10);
 						if (fcn_00526120(title, 1) && (v11 = g_774970,
-							fcn_00525f60((char*) (v11 * 0x21c + 0x7f4ca0), 2))) {
+							d2_CheckActionBlocker((char*) (v11 * 0x21c + 0x7f4ca0), 2))) {
 							*(int*) (v7 + 0xbc) = gm_GameTime.a;
 							fcn_004c5620(3, v7);
 							fcn_005100f0(*(unsigned int*) (a0 + 4),

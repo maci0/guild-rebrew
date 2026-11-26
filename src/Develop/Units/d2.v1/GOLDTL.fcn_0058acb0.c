@@ -25,7 +25,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
+int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 void __cdecl fcn_005100f0(int, int);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
@@ -63,10 +63,10 @@ void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				if (fcn_00525f60(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), b) == 1) {
+				if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), b) == 1) {
 					v = 0;
 					fcn_005100f0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -b);
-					fcn_004c4510(p, *(int*) (p + 2));
+					cm_BeginPacketFieldDelta(p, *(int*) (p + 2));
 					cm_AppendPacketFieldDelta(4, 1, 0x1c, &v);
 					cm_AppendPacketFieldDelta(4, 1, 0x20, &v);
 					id = fcn_004c5360();

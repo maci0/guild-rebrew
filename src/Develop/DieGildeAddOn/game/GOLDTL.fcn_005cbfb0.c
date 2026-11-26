@@ -17,7 +17,7 @@ typedef struct Sel {
 
 
 
-int __cdecl fcn_004e9310(int k, int max, char** out);
+int __cdecl amt_CollectOfficeCandidates(int k, int max, char** out);
 int __cdecl fcn_005ca560(Sel* s);
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, void* q, int c);
 
@@ -42,7 +42,7 @@ unsigned int __cdecl fcn_005cbfb0(char* e, unsigned int max, Sel* out, void* q)
 	if (*(unsigned char*) (e + 0x168) == 0) {
 		return 0;
 	}
-	n = fcn_004e9310(*(unsigned char*) (e + 0x168), 6, ids);
+	n = amt_CollectOfficeCandidates(*(unsigned char*) (e + 0x168), 6, ids);
 	m = 0;
 	for (i = 0; i < 768; i++) {
 		if (m >= 3) {

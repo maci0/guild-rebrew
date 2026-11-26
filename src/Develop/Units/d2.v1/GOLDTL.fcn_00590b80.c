@@ -29,7 +29,7 @@ int __cdecl fcn_0046f7e0(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_0050c710(int, int, int);
+int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl fcn_0050dc90(int);
 float __cdecl fcn_00510260(int, int, int*);
 
@@ -89,7 +89,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 	if (ent == 0) {
 		io_AppendText(0x20, *(int*) (def + 0x22));
 	} else {
-		fcn_0050c710((int) ent, 1, 1);
+		gm_GetBuildingTechEffect((int) ent, 1, 1);
 		p = (char*) fcn_0050dc90((int) ent);
 		slot = 0;
 		count = 0x7f4ca0;

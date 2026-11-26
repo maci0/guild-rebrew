@@ -27,7 +27,7 @@ int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005b23e0(Rec54a6a0*, int, int);
-void __cdecl fcn_004c4510(int, int);
+void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004fd4f0(int, Out54a6a0*);
@@ -88,7 +88,7 @@ void __cdecl fcn_0054a6a0(int a0)
 				pair.who = (char*) v4;
 				fcn_005b23e0(&g_7f4ca0[*(unsigned short*) (entity + 0x27)], v4, entity);
 			}
-			fcn_004c4510(v3, *(int*) (v3 + 2));
+			cm_BeginPacketFieldDelta(v3, *(int*) (v3 + 2));
 			cm_AppendPacketFieldDelta(1, 1, 0x22, (int*) &v8);
 			cm_AppendPacketFieldDelta(1, 1, 0x1c, (int*) &v9);
 			cm_AppendPacketFieldDelta(1, 1, 0x1d, (int*) &v9);
@@ -104,7 +104,7 @@ void __cdecl fcn_0054a6a0(int a0)
 				}
 				fcn_004c5150(g_7f4ca0[*(unsigned short*) (entity + 0x27)].h,
 				             0xffffffff, g_773d75, pair.b);
-				fcn_004c4510(entity, *(int*) (entity + 1));
+				cm_BeginPacketFieldDelta(entity, *(int*) (entity + 1));
 				cm_AppendPacketFieldDelta(4, 1, 0x69, &pair.b);
 				fcn_004c5360();
 			}

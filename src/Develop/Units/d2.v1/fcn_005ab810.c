@@ -31,7 +31,7 @@ int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl fcn_004c51a0(int, int, int, int);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
@@ -89,7 +89,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 					if (fcn_00526010(&((struct house*) g_7f4ca0)[g_774970], d, (char) g_773d75) != 0) {
 						x = 1 - p->state;
 						fcn_004c51a0(-1, p->handle, 0, d);
-						fcn_004c4510((char*) p, p->handle);
+						cm_BeginPacketFieldDelta((char*) p, p->handle);
 						cm_AppendPacketFieldDelta(1, 1, 0xc, &x);
 						fcn_004c5360();
 						for (i = 3; i <= 7; i++) {
@@ -97,7 +97,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 							if (h != (char*) -1) {
 								h = (char*) gm_LookupEntityRecordById((int) h);
 								if (h != 0) {
-									fcn_004c4510(h, *(int*) (h + 4));
+									cm_BeginPacketFieldDelta(h, *(int*) (h + 4));
 									cm_AppendPacketFieldDelta(1, 1, 0xc, &x);
 									fcn_004c5360();
 								}
@@ -150,7 +150,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 					if (fcn_00526010(&((struct house*) g_7f4ca0)[g_774970], t, (char) g_773d75) != 0) {
 						x = q->state;
 						fcn_004c51a0(q->handle, p->handle, 0, t);
-						fcn_004c4510((char*) p, p->handle);
+						cm_BeginPacketFieldDelta((char*) p, p->handle);
 						cm_AppendPacketFieldDelta(1, 1, 0xc, &x);
 						fcn_004c5360();
 						if (q->type == 6 || q->type == 7) {

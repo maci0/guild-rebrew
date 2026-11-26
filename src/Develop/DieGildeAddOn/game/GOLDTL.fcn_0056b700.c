@@ -40,7 +40,7 @@ extern void __cdecl he_CharacterBehavior(char*, int);
 extern char* __cdecl he_StartHandlungSearch(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern char* __cdecl gm_FindRecordById(int);
-extern int __cdecl fcn_0050de80(char*, Stats*);
+extern int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 extern char* __cdecl fcn_00502cd0(int, ...);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl cut_FindCutscene(int, int);
@@ -192,7 +192,7 @@ label_56b858:
 					if (cur == 0)
 						goto next;
 					r = CompareVector3WithinTolerance((float*) (*(int*) (*(int*) (cur + 0x3b) + 0x34) + 0x4c), (float*) &pos, 1500.0f);
-					fcn_0050de80(cur, &buf.stats);
+					gm_CalcEntityInventoryStats(cur, &buf.stats);
 					code = buf.stats.xb0;
 					if (code <= 0)
 						goto next;

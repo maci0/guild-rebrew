@@ -7,7 +7,7 @@ unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 char* __cdecl gm_FindRecordById(unsigned int);
 char* __cdecl gm_SearchTable67(unsigned int);
 char* __cdecl gm_LookupEntityRecordById(int);
-short* __cdecl fcn_0050d430(short*);
+short* __cdecl gm_ResolveEntityOwnerBuilding(short*);
 int __cdecl fcn_0050d320(char*, char);
 float __cdecl fcn_0050bb50(int, unsigned char);
 
@@ -125,7 +125,7 @@ done:
 		*(int*) (a3 + 0x10) = 0x39;
 	} else {
 		if (rec != 0) {
-			owner = (int) fcn_0050d430((short*) rec);
+			owner = (int) gm_ResolveEntityOwnerBuilding((short*) rec);
 		} else if (ent != 0) {
 			if (*(unsigned short*) (ent + 0x27) == 0xffff) {
 				goto fail;

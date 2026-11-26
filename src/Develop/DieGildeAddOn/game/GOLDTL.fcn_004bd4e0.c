@@ -30,7 +30,7 @@ void __cdecl fcn_004bdfb0(float* ox, float* oy, float* position, char* object, c
 int __cdecl fcn_004bdbe0(int obj, int x, int y, int i, int j);
 char* __cdecl fcn_00445600(char* o, int flags, char* ptr, char* name);
 char __cdecl fcn_0045b990(char* map, float* pos, int* x, int* y, int* z);
-char __cdecl fcn_004bdeb0(char* e, char* obj);
+char __cdecl d3_MatchObjectByNameAndPos(char* e, char* obj);
 /* ADDRESS: GOLDTL 0x004bd4e0 */
 int __cdecl fcn_004bd4e0(int sceneObjectArg, int typeIdArg)
 {
@@ -106,7 +106,7 @@ int __cdecl fcn_004bd4e0(int sceneObjectArg, int typeIdArg)
 	pos[2] = 0.0f;
 	fcn_00455540((char*) sceneObjectArg, pos, (float*)(ctx + 0x40));
 	*(int*) (ctx + 0x50) = 0;
-	d3_VisitSceneObjects((char*) g_67a370, 0, 0x180, fcn_004bdeb0, ctx);
+	d3_VisitSceneObjects((char*) g_67a370, 0, 0x180, d3_MatchObjectByNameAndPos, ctx);
 	if (*(int*) (ctx + 0x50) == 0) {
 		gv_Free3Fields(g_1005904);
 		return 0;

@@ -33,7 +33,7 @@ void __cdecl ls_CaptureSavePreview(void);
 void __cdecl ls_SaveGame(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x005e3b70 */
-void __cdecl fcn_005e3b70(void)
+void __cdecl d2_EnterMenuScreen(void)
 {
 	int flags;
 	unsigned char* p;

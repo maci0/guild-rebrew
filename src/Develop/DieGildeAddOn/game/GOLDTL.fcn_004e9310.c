@@ -28,7 +28,7 @@ int __cdecl fcn_004e8b40(int, rec18*);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e9180(unsigned char*, int);
 
-int __cdecl fcn_004e9310(int k, int max, unsigned char** out)
+int __cdecl amt_CollectOfficeCandidates(int k, int max, unsigned char** out)
 {
 	rec18 a;
 	OFFICE_SLOT list[6];

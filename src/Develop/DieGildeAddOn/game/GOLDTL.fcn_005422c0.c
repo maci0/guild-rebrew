@@ -27,7 +27,7 @@ void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_004c6090(char*, int, int, int);
 void __cdecl fcn_004f3ef0(char*);
-void __cdecl fcn_0050ff70(char*, int);
+void __cdecl gm_AdjustGebaeudeCondition(char*, int);
 unsigned char* __cdecl fcn_0050dc90(unsigned char*);
 unsigned char* __cdecl fcn_004ec7d0(unsigned char*);
 int __cdecl fcn_004ee160(char*);
@@ -45,7 +45,7 @@ int __cdecl fcn_00505d00(char*, int*);
 float __cdecl fcn_0050b8d0(unsigned char*, int, int, int);
 void* __cdecl sim_StartEntityQueryByType(unsigned char*);
 unsigned char* __cdecl fcn_005049a0(unsigned char*);
-int __cdecl fcn_004fe470(int, int, int, int, int);
+int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_0050c1b0(unsigned char*, int, int*);
@@ -100,7 +100,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 			if (v != 4 && v != 0x10 && v != 0x13) {
 				if (v == 5) {
 					zero = 0;
-					fcn_004c4510((char*) rec, *(int*) (rec + 1));
+					cm_BeginPacketFieldDelta((char*) rec, *(int*) (rec + 1));
 					for (i = 0; i < 3; i++) {
 						fcn_004c4700(4, 1, (int) (rec - g_aed32c) + 0x71 + i * 12, &zero);
 					}
@@ -127,7 +127,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							buf4[1] = *(int*) (obj + 0x1b8);
 							buf4[2] = *(int*) (obj + 0x1bc);
 							buf4[3] = *(int*) (obj + 0x1c0);
-							fcn_004c4510((char*) obj, *(int*) (obj + 4));
+							cm_BeginPacketFieldDelta((char*) obj, *(int*) (obj + 4));
 							cm_AppendPacketFieldDelta(4, 1, (int) (obj - g_aed32c) + 0x1b4, buf4);
 							fcn_004c5360();
 						}
@@ -150,7 +150,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 							if (cv < 0) {
 								cv = 0;
 							}
-							fcn_004c4510((char*) obj, *(int*) (obj + 2));
+							cm_BeginPacketFieldDelta((char*) obj, *(int*) (obj + 2));
 							cm_AppendPacketFieldDelta(1, 1, (int) (obj - g_aed32c) + 0x37, &cv);
 							fcn_004c5360();
 						}
@@ -210,7 +210,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 			    && *def != 0xd && *def != 0xc && *def != 0xb && *def != 0x10
 			    && (*(unsigned char*) (rec + 0x5a) & 1) == 0
 			    && *def != 0xa) {
-				fcn_0050ff70((char*) rec, -(gm_RandomMod(3) & 0xffff) - 2);
+				gm_AdjustGebaeudeCondition((char*) rec, -(gm_RandomMod(3) & 0xffff) - 2);
 				count++;
 			}
 		}
@@ -253,14 +253,14 @@ void __cdecl fcn_005422c0(unsigned int arg)
 									q = (unsigned char*) sim_StartEntityQueryByType(*(unsigned char**) (tile2 + 0x170));
 									if (q != 0 && *(int*) (q + 2) != -1) {
 										count++;
-										fcn_004fe470(*(int*) (tile2 + 4), *(int*) (*(int*) (tile2 + 0x170) + 1), *(int*) (q + 2), 0, 0);
+										init_SpawnBuildingCharacter(*(int*) (tile2 + 4), *(int*) (*(int*) (tile2 + 0x170) + 1), *(int*) (q + 2), 0, 0);
 									}
 								}
 								else {
 									q = fcn_005049a0(p);
 									if (q != 0 && *(int*) (q + 2) != -1) {
 										count++;
-										fcn_004fe470(*(int*) (tile2 + 4), *(int*) (p + 1), *(int*) (q + 2), 0, 0);
+										init_SpawnBuildingCharacter(*(int*) (tile2 + 4), *(int*) (p + 1), *(int*) (q + 2), 0, 0);
 									}
 								}
 							}
@@ -303,7 +303,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 								count++;
 								fcn_004c54c0(*(int*) (tile + 4), *(int*) (tile2 + 4), (int) delta, 0);
 							}
-							fcn_004c4510((char*) tile2, *(int*) (tile2 + 4));
+							cm_BeginPacketFieldDelta((char*) tile2, *(int*) (tile2 + 4));
 							cm_AppendPacketFieldDelta(4, 1, 0x19c, &v);
 							fcn_004c5360();
 							count++;
@@ -337,7 +337,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 								}
 								v = *(unsigned char*) (tile2 + 0x165);
 								if (v == 2 || v == 1 || v == 0x13 || v == 0x14 || v == 0x10 || v == 0xf) {
-									fcn_004c4510((char*) tile2, *(int*) (tile2 + 4));
+									cm_BeginPacketFieldDelta((char*) tile2, *(int*) (tile2 + 4));
 									b1 = *(unsigned char*) (tile2 + 0x82);
 									cv = (char) (int) ((double) b1 * 0.9 + 0.5);
 									if (b1 > 42.0f) {
@@ -361,7 +361,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 						if (id2 != 0xffff) {
 							tile2 = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[id2]);
 							fcn_004c51a0(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
-							fcn_004c4510((char*) tile2, *(int*) (tile2 + 4));
+							cm_BeginPacketFieldDelta((char*) tile2, *(int*) (tile2 + 4));
 							cm_AppendPacketFieldDelta(4, 1, 0x19c, &v);
 							fcn_004c5360();
 							count += 2;

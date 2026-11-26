@@ -21,7 +21,7 @@ extern int d2_CurrentElementId;
 
 int __cdecl fcn_004ee160(char*);
 char* __cdecl fcn_004ec7d0(char*);
-float __cdecl fcn_004ec8a0(char*, int);
+float __cdecl ahm_GetEssenceValue(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -34,7 +34,7 @@ int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
-void __cdecl fcn_004eeb50(char*, float);
+void __cdecl ahm_SendSetFloatValue(char*, float);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -60,7 +60,7 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 	if (p == 0) {
 		return 0;
 	}
-	f = fcn_004ec8a0(p, 3);
+	f = ahm_GetEssenceValue(p, 3);
 	h = fcn_00470820(0, 0, "Locations\\Domizil\\skill");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
@@ -88,7 +88,7 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 			if (d2_CurrentElementId == ok) {
 				c = fcn_0050b750(d2_GetControlValue(line), g_773d75);
 				if (fcn_00526010(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), c, g_773d75) != 0) {
-					fcn_004eeb50(p, (float) c / n * f * 0.75f);
+					ahm_SendSetFloatValue(p, (float) c / n * f * 0.75f);
 					r = 1;
 					g_774654 = 1;
 					fcn_004c5150(*(int*) (p + 4), ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, g_773d75, c);

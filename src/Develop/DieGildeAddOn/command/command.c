@@ -1121,6 +1121,7 @@ extern int g_sequence_counter;
  * match structurally. */
 
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 {
 	void* entity_or_node;
@@ -1154,6 +1155,7 @@ int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 	}
 	return 0;
 }
+#endif
 
 int __cdecl cm_ChkSellObjekt(char* cmd)
 {
@@ -1295,6 +1297,7 @@ int __cdecl cm_ChkChangeAttribute(int cmd, char* result)
 	return 0;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ChkChangeBits(int cmd, char* result)
 {
 	void* ent_c;
@@ -1326,11 +1329,13 @@ int __cdecl cm_ChkChangeBits(int cmd, char* result)
 	}
 	return 0;
 }
+#endif
 
 /* Validation handler: checks if a building (Gebaeude) can have
  * its owner set. Verifies the entity exists and has bit 1 of
  * field 0x2d set. Logs error and returns 1 on failure. */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ChkSetGebBesitzer(char* obj)
 {
 	ushort* building;
@@ -1347,6 +1352,7 @@ int __cdecl cm_ChkSetGebBesitzer(char* obj)
 	);
 	return 1;
 }
+#endif
 
 /* Validation handler: checks if the entity described by the command
  * payload at offset 0x10 is eligible for an office position. Returns
@@ -3074,6 +3080,7 @@ int __cdecl cm_ExChangeAttribute(int cmd, char* result)
  * a separate `resolved` out-param variable keeps cmd in the base register,
  * and the pre-resolve field store is emitted after the resolve call. */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ExSetAttribute(int cmd, char* result)
 {
 	void* entity_or_node;
@@ -3148,6 +3155,7 @@ int __cdecl cm_ExSetAttribute(int cmd, char* result)
 	}
 	return 0;
 }
+#endif
 
 /* Execution handler: modifies a character's desire/need stat.
  * Resolves the entity, then adds each float delta from the command
@@ -3183,6 +3191,7 @@ int __cdecl cm_ExSetAttribute(int cmd, char* result)
  * (1000.0) is 1000.0. */
 
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
 {
 	int field;
@@ -3233,6 +3242,7 @@ int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
 	}
 	return 0;
 }
+#endif
 
 /* Execution handler: modifies a bit-field on an entity.  Resolves
  * the entity, then sets/clears bits at the command-specified offset
@@ -3839,6 +3849,7 @@ int __cdecl cm_ChainRecordLookup(int cmd, char* result)
 /* Execution handler: allocates a sermon theme (Thema Predigt)
  * for a church/religious building entity. */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 {
 	int field;
@@ -3869,6 +3880,7 @@ int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 	}
 	return 0;
 }
+#endif
 
 /*
  * Ghidra decompilation reference:
@@ -3892,6 +3904,7 @@ int __cdecl cm_ChainNoop(void)
 	return 0;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ExSetGebBesitzer(int cmd, char* result)
 {
 	ushort* building;
@@ -3944,6 +3957,7 @@ int __cdecl cm_ExSetGebBesitzer(int cmd, char* result)
 	}
 	return 0;
 }
+#endif
 
 int __cdecl cm_ExSetWohnsitz(int cmd, char* result)
 {
@@ -4068,7 +4082,7 @@ extern char* g_7e2aa0;
 extern int g_773dd8;
 void __cdecl fcn_00530510(void);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
-void __cdecl fcn_00506300(char*);
+void __cdecl gm_RemoveClientEntityLink(char*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_004550b0(int, int*);
 #include "../../Units/d3/d3_object.h"
@@ -4120,7 +4134,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 #ifdef REBREW_SERVER
 			gm_RemoveEntityLink((int) match);
 #else
-			fcn_00506300((char*) match);
+			gm_RemoveClientEntityLink((char*) match);
 #endif
 		}
 		match = gm_NextEntityQueryMatch();
@@ -4344,6 +4358,7 @@ int __cdecl cm_ExAllocCharacter(int cmd, char* result)
 /* Execution handler: removes a transporter entity. Resolves
  * entity by ID and deallocates it from the game world. */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ExKillTransporter(int cmd, char* result)
 {
 	void* record;
@@ -4366,6 +4381,7 @@ int __cdecl cm_ExKillTransporter(int cmd, char* result)
 	}
 	return 0;
 }
+#endif
 
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl cm_ExCreateGeb(int cmd, char* result)

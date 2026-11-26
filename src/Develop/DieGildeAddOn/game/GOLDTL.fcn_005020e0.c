@@ -61,7 +61,7 @@ extern unsigned char g_773d75;
 
 void __cdecl fcn_00500d60(char*, Stamp*);
 void __cdecl fcn_005017a0(int);
-void __cdecl fcn_00501fe0(int);
+void __cdecl cm_SendRandomMarktSlotDelta(int);
 int __cdecl fcn_00502450(int, int);
 int __cdecl fcn_005024e0(int, int);
 float __cdecl fcn_005025a0(int, int);
@@ -149,6 +149,6 @@ void __cdecl fcn_005020e0(int townRow, char* timeSource)
 	}
 	if (g_14cbca0 == -1) {
 		fcn_005017a0(townRow);
-		fcn_00501fe0(townRow);
+		cm_SendRandomMarktSlotDelta(townRow);
 	}
 }

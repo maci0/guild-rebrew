@@ -12,7 +12,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_0054b2b0(char* u)
+void __cdecl he_HandleAction0x2e(char* u)
 {
 	char text[0x100];
 	char* a;

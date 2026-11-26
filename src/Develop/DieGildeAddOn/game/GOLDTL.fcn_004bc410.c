@@ -4,7 +4,7 @@
 extern char g_6812d0[][32];
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
-char* __cdecl fcn_004bca30(char*);
+char* __cdecl d3_PickRandomSceneObjectByName(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 char* __cdecl ch_CreateAction(char*, int, int);
@@ -19,7 +19,7 @@ void __cdecl fcn_004bc410(AMBIENT_ANIMAL_SLOT* entry, int kind)
 	char* obj;
 
 	fcn_0064d41a(buf, "dummy_%s", g_6812d0[kind]);
-	ent = fcn_004bca30(buf);
+	ent = d3_PickRandomSceneObjectByName(buf);
 	if (ent == 0)
 		return;
 	d3_TransformPoint(ent, ent + 0x4c, pos);

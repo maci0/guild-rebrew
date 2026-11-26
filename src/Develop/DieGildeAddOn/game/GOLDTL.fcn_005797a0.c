@@ -21,7 +21,7 @@ extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 extern void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
 extern int __cdecl gm_GetElapsedMinutes(void* p, int v);
-extern int __cdecl fcn_0050c710(void* p, int a, int b);
+extern int __cdecl gm_GetBuildingTechEffect(void* p, int a, int b);
 extern int __cdecl fcn_005241f0(char* record);
 extern int __cdecl fcn_0050dc90(void* p);
 extern int __cdecl gm_eval_SlotVoll(int a, int b, int c);
@@ -97,9 +97,9 @@ void __cdecl fcn_005797a0(char* event)
 	if (*(int*) (event + 0x70) == 0) {
 		value = gm_GetElapsedMinutes(event + 0xb8, 0x7f4c00);
 		if (((char)((BUILDING_PROTOTYPE*)row)->category) == 0x1d) {
-			fvalue = (float) fcn_0050c710(search, 0x12, 1) * 0.01f;
+			fvalue = (float) gm_GetBuildingTechEffect(search, 0x12, 1) * 0.01f;
 		} else {
-			fvalue = (float) fcn_0050c710(search, 0x1e, 1) * 0.01f;
+			fvalue = (float) gm_GetBuildingTechEffect(search, 0x1e, 1) * 0.01f;
 			if (handle == 3 && (search[0x5b] & 0x20) == 0)
 				fvalue = fvalue - 0.5f;
 		}

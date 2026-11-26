@@ -29,7 +29,7 @@ void __cdecl fcn_00495890(void)
 		flags |= gm_RandomMod(3) ? 4 : 0;
 		flags |= gm_RandomMod(3) ? 8 : 0;
 		flags |= gm_RandomMod(2) ? 0x10 : 0;
-		fcn_004c4510((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
+		cm_BeginPacketFieldDelta((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
 		cm_AppendPacketFieldDelta(4, 1, 0x1e8, &flags);
 		fcn_004c5360();
 	}

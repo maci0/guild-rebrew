@@ -10,7 +10,7 @@ extern double g_6640f0;
 
 void __cdecl fcn_004fd400(short*, int*);
 int __cdecl gm_WalkEntityChain(unsigned short);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_00535960(void);
@@ -55,7 +55,7 @@ void __cdecl fcn_004fd0a0(void)
 		total = 0;
 		count = 0;
 		r = gm_WalkEntityChain(*(unsigned short*) e);
-		fcn_004c4510(e, *(int*) (e + 4));
+		cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 		for (i = 0; i < 3; i++) {
 			v = *(int*) (e + 0x1d8 + i * 4);
 			total += v;

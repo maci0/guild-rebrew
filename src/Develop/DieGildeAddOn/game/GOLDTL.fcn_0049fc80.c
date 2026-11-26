@@ -19,7 +19,7 @@ typedef struct Rec18 {
 
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
 #include "Develop/DieGildeAddOn/game/aemter.h"
-int __cdecl fcn_004e9310(int k, int max, ENTITY_RECORD** out);
+int __cdecl amt_CollectOfficeCandidates(int k, int max, ENTITY_RECORD** out);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_004a5340(ENTITY_RECORD* e, int a, int* b, int c, float r, int* out);
 
@@ -59,7 +59,7 @@ ENTITY_RECORD* __cdecl fcn_0049fc80(ENTITY_RECORD* subject)
 			int n;
 			float bd;
 
-			n = fcn_004e9310(subject->unk_165[3], 5, list);
+			n = amt_CollectOfficeCandidates(subject->unk_165[3], 5, list);
 			if (n != 0) {
 				for (i = 0; i < n; i++) {
 					if (list[i] != subject) {

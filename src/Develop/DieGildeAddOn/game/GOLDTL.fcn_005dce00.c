@@ -58,7 +58,7 @@ int __cdecl fcn_005dce00(char* cmd, char* arg)
 	for (i = 0; i < 768; i++) {
 		if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_16c) == obj) {
 			val = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) % 2 + (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) / 2;
-			fcn_004c4510((char*) ((Ent*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id));
+			cm_BeginPacketFieldDelta((char*) ((Ent*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id));
 			cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((char*) &(*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].level_1c5) - g_aed32c), &val);
 			fcn_004c5360();
 		}

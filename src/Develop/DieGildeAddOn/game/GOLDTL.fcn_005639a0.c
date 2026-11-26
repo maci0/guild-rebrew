@@ -6,7 +6,7 @@ extern char g_7f4ca0[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
-void __cdecl fcn_0050ff70(void*, int);
+void __cdecl gm_AdjustGebaeudeCondition(void*, int);
 char* __cdecl fcn_0050dc90(void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -39,7 +39,7 @@ void __cdecl fcn_005639a0(int a)
 		t = gm_GetElapsedMinutes((void*) (a + 0x60), (void*) &gm_GameTime);
 		t = (int) ((double) t * 0.1 + 0.5);
 		*(int*) (a + 0xb0) -= t;
-		fcn_0050ff70(r, t);
+		gm_AdjustGebaeudeCondition(r, t);
 		if (*(int*) (a + 0xb0) > 0) {
 			*(pos14_7f4c00*) (a + 0x60) = *(pos14_7f4c00*) &gm_GameTime;
 			*(pos14_7f4c00*) (a + 0x52) = *(pos14_7f4c00*) &gm_GameTime;

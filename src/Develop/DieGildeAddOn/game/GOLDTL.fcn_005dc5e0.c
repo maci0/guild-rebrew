@@ -112,7 +112,7 @@ int __cdecl fcn_005dc5e0(char* entity, int* target)
 	*(int*) (buf + 0x58) = *(int*) (pkt + 1);
 	fcn_004c5530(buf);
 
-	fcn_004c4510((char*) *target, *(int*) (*target + 2));
+	cm_BeginPacketFieldDelta((char*) *target, *(int*) (*target + 2));
 	cm_AppendPacketFieldDelta(4, 1, (char*) *target + 0x25 - g_aed32c, pkt + 1);
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (pkt + 1), 0x5a, 2, 0x20, 0);

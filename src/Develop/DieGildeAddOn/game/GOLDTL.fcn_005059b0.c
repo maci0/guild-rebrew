@@ -79,7 +79,7 @@ extern char* gm_CityEntity;
 
 void __cdecl fcn_005b1c90(int);
 void __cdecl fcn_005b1b30(Estate*);
-void __cdecl fcn_00505c80(Estate*);
+void __cdecl gm_UpdateResidenceOwnerDecor(Estate*);
 Figure* __cdecl fcn_0050dc90(Estate*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SelectSceneContext(int, int);
@@ -88,86 +88,86 @@ void __cdecl SelectTextureSet(Model*, int, int, int);
 void __cdecl fcn_0052dd80(Estate*);
 void __cdecl fcn_0052d9d0(Estate*);
 
-void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
+void __cdecl gm_AssignBuildingOwner(Estate* building, unsigned short owner, int slot)
 {
 	char* rec;
-	Entity* e;
-	Figure* f;
-	Obj* q;
-	Model* m;
+	Entity* slot_ent;
+	Figure* fig;
+	Obj* obj;
+	Model* model;
 	int saved;
 	int sc;
 	int i;
 
-	rec = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[s->type];
-	s->owner = owner;
+	rec = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[building->type];
+	building->owner = owner;
 	if (slot == 0xffff) {
 		return;
 	}
-	if (s->slot != slot) {
-		if (s->slot != 0xffff && ((Entity*)g_7f4ca0)[s->slot].type == 6) {
-			fcn_005b1c90(s->key);
+	if (building->slot != slot) {
+		if (building->slot != 0xffff && ((Entity*)g_7f4ca0)[building->slot].type == 6) {
+			fcn_005b1c90(building->key);
 		}
 		if (((Entity*)g_7f4ca0)[slot].type == 6) {
-			fcn_005b1b30(s);
+			fcn_005b1b30(building);
 		}
 	}
-	if (s->slot != 0xffff && ((Entity*)g_7f4ca0)[s->slot].best == s) {
-		((Entity*)g_7f4ca0)[s->slot].best = 0;
+	if (building->slot != 0xffff && ((Entity*)g_7f4ca0)[building->slot].best == building) {
+		((Entity*)g_7f4ca0)[building->slot].best = 0;
 	}
-	s->slot = slot;
+	building->slot = slot;
 	if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 2) {
-		fcn_00505c80(s);
+		gm_UpdateResidenceOwnerDecor(building);
 		if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 2) {
-			if (((Entity*)g_7f4ca0)[s->slot].best == 0 || ((Entity*)g_7f4ca0)[s->slot].best->type <= s->type) {
-				((Entity*)g_7f4ca0)[s->slot].best = s;
+			if (((Entity*)g_7f4ca0)[building->slot].best == 0 || ((Entity*)g_7f4ca0)[building->slot].best->type <= building->type) {
+				((Entity*)g_7f4ca0)[building->slot].best = building;
 			}
 		}
 	}
 	if (((Entity*)g_7f4ca0)[slot].type == 6 || ((Entity*)g_7f4ca0)[slot].type == 7) {
-		f = fcn_0050dc90(s);
-		if (f != 0) {
-			f->busy = 0;
-			f->flags &= ~1;
+		fig = fcn_0050dc90(building);
+		if (fig != 0) {
+			fig->busy = 0;
+			fig->flags &= ~1;
 			if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 5 || ((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 9) {
-				f->task = 0;
+				fig->task = 0;
 			}
 		}
 	}
-	q = ((Obj*)lpObjekteINST);
+	obj = ((Obj*)lpObjekteINST);
 	for (i = 0x5008; i != 0; i--) {
-		if (q->kind != 0 && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[q->kind].kind) == 0x1d && q->key == s->key) {
-			q->id = ((Entity*)g_7f4ca0)[slot].id;
-			if (q->link != 0) {
-				q->link->id = ((Entity*)g_7f4ca0)[slot].id;
+		if (obj->kind != 0 && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[obj->kind].kind) == 0x1d && obj->key == building->key) {
+			obj->id = ((Entity*)g_7f4ca0)[slot].id;
+			if (obj->link != 0) {
+				obj->link->id = ((Entity*)g_7f4ca0)[slot].id;
 			}
 			saved = d3_CurrentContextIndex;
-			m = q->model;
+			model = obj->model;
 			if (((Entity*)g_7f4ca0)[slot].scene != 0 && (((Entity*)g_7f4ca0)[slot].type == 5 || ((Entity*)g_7f4ca0)[slot].type == 6 || ((Entity*)g_7f4ca0)[slot].type == 7)) {
 				sc = ((Entity*)g_7f4ca0)[slot].scene - 0x599;
 			} else {
 				sc = 0;
 			}
-			d3_SelectSceneContext(d3_GetContextIndex(m->res), 1);
-			if (m->body->visible == 0) {
-				fcn_00402aa0(m);
+			d3_SelectSceneContext(d3_GetContextIndex(model->res), 1);
+			if (model->body->visible == 0) {
+				fcn_00402aa0(model);
 			}
-			SelectTextureSet(*m->parts, (*m->parts)->visible, sc, 1);
+			SelectTextureSet(*model->parts, (*model->parts)->visible, sc, 1);
 			d3_SelectSceneContext(saved, 1);
 		}
-		q++;
+		obj++;
 	}
-	e = &((Entity*)g_7f4ca0)[slot];
-	if (e != ((Entity*)gm_CityEntity) && s->placed != 0 && (e->type == 6 || e->type == 7 || e->type == 5)) {
+	slot_ent = &((Entity*)g_7f4ca0)[slot];
+	if (slot_ent != ((Entity*)gm_CityEntity) && building->placed != 0 && (slot_ent->type == 6 || slot_ent->type == 7 || slot_ent->type == 5)) {
 		saved = d3_CurrentContextIndex;
 		d3_SelectSceneContext(0, 1);
-		fcn_0052dd80(s);
-		fcn_0052d9d0(s);
+		fcn_0052dd80(building);
+		fcn_0052d9d0(building);
 		d3_SelectSceneContext(saved, 1);
 		return;
 	}
 	saved = d3_CurrentContextIndex;
 	d3_SelectSceneContext(0, 1);
-	fcn_0052dd80(s);
+	fcn_0052dd80(building);
 	d3_SelectSceneContext(saved, 1);
 }

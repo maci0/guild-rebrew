@@ -35,7 +35,7 @@ void __cdecl d2_ClearRadioGroup(int i);
 unsigned char* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_0050c5d0(unsigned char* o, int* out);
+int __cdecl gm_EvalEntityInventoryValue(unsigned char* o, int* out);
 void __cdecl fcn_004c5120(int);
 int __cdecl d2_CreateRadioGroup(int n, ...);
 void __cdecl d2_AddToRadioGroup(int g, int id);
@@ -104,7 +104,7 @@ void __cdecl fcn_005ada30(char* p)
 						if (*(unsigned short*) (q + 0x27) == 0xffff) {
 							continue;
 						}
-						fcn_0050c5d0(q, val);
+						gm_EvalEntityInventoryValue(q, val);
 						b = d2_GetWindowListItem(d, 2, io_AppendText(0x19fc, *q + 0x427, *(unsigned short*) (q + 0x27), q, e + 0x1c, val[0], val[1], e[0x37], e[0x36]));
 						btns[n] = b;
 						(*(unsigned char**)&((D2_CONTROL_TL*)g_1015ea0)[b].associated_object) = q;

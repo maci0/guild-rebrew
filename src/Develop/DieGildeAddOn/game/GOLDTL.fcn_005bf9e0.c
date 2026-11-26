@@ -5,8 +5,8 @@ int __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00526010(int, int, char);
-int __cdecl fcn_0055c0f0(unsigned short*, int);
-int __cdecl fcn_0055c0a0(unsigned short*, int);
+int __cdecl he_HasNoActiveEvent04b(unsigned short*, int);
+int __cdecl he_HasNoActiveAction0x2e(unsigned short*, int);
 int __cdecl fcn_00579640(unsigned short*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -64,12 +64,12 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 	if (!fcn_00526010(*(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0, timeout, *(char*) &g_773d75)) {
 		return 0;
 	}
-	if (!fcn_0055c0f0(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
+	if (!he_HasNoActiveEvent04b(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
 		io_FormatTextBuffer((char*) evt, 0x170b, *entity);
 		fcn_00526120((char*) evt, 0);
 		return 0;
 	}
-	if (!fcn_0055c0a0(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
+	if (!he_HasNoActiveAction0x2e(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
 		io_FormatTextBuffer((char*) evt, 0x170c, *entity);
 		fcn_00526120((char*) evt, 0);
 		return 0;

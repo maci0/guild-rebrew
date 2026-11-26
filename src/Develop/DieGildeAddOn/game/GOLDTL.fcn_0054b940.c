@@ -89,7 +89,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(Order*);
 
-void __cdecl fcn_0054b940(Order* o)
+void __cdecl he_UpdateFest(Order* o)
 {
 	char msg[0x800];
 	char line[0x100];

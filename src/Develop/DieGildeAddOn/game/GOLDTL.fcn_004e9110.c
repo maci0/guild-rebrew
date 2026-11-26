@@ -24,7 +24,7 @@ typedef struct {
 int __cdecl amt_FindOfficeSlotByType(int, rec18*);
 char* __cdecl gm_LookupEntityRecordById(int);
 
-char* __cdecl fcn_004e9110(int kind)
+char* __cdecl amt_GetOfficeHolderRecord(int kind)
 {
 	rec18 r;
 

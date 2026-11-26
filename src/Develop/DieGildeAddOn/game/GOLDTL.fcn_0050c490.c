@@ -4,7 +4,7 @@
 void* __cdecl fcn_00502cd0(int, int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 
-int __cdecl fcn_0050c490(char* a, void** out)
+int __cdecl gm_CollectEntityCarts(char* a, void** out)
 {
 	int n;
 	char* r;

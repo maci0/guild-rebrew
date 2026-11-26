@@ -12,7 +12,7 @@ extern unsigned char g_773d75;
 extern float g_66414c;
 extern char g_67eb20[];
 
-char* __cdecl fcn_00507ab0(int k);
+char* __cdecl gm_FindPublicTreasury(int k);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 int __cdecl fcn_0050d170(int k);
@@ -24,7 +24,7 @@ int __cdecl ai_RunBuergermeisterKerker(char* actor, char* a2, char* target)
 	char msg[0xf8];
 	char* p;
 
-	p = fcn_00507ab0(1);
+	p = gm_FindPublicTreasury(1);
 	if (p == 0) {
 		return 0;
 	}

@@ -24,7 +24,7 @@ int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl fcn_004a4fb0(int* a, int* b, char* q, int c);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 
-int __cdecl fcn_0049d7c0(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
+int __cdecl ai_StartBuergermeisterUpgrade(int kind, char* e, int busy, Blk24* o1, Blk24* o2)
 {
 	int v[2];
 	Blk24 b2;
@@ -35,10 +35,10 @@ int __cdecl fcn_0049d7c0(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	int r;
 	F8 f;
 
-	if (a3 != 0 || e[0x166] != 0xf || o1->kind != 0) {
+	if (busy != 0 || e[0x166] != 0xf || o1->kind != 0) {
 		return 0;
 	}
-	if (a1 != 0 && e[0x130] != 6 && e[0x130] != 9) {
+	if (kind != 0 && e[0x130] != 6 && e[0x130] != 9) {
 		return 0;
 	}
 	tries = 4;

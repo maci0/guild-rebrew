@@ -25,7 +25,7 @@ void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_00535960(void);
 void __cdecl sv_WaitForNetworkSync(int id);
 void __cdecl fcn_005017a0(int i);
-void __cdecl fcn_00501fe0(int i);
+void __cdecl cm_SendRandomMarktSlotDelta(int i);
 int __cdecl fcn_0050b750(int timeout, char who);
 int __cdecl fcn_00413160(void);
 int __cdecl d3_SelectSceneContext(int a0, int a1);
@@ -162,7 +162,7 @@ int __cdecl fcn_005145a0(char *path)
             if (*p == 0)
                 break;
             fcn_005017a0(i);
-            fcn_00501fe0(i);
+            cm_SendRandomMarktSlotDelta(i);
             p += 0x2f4;
             i++;
         } while ((int) p < 0x868c30);

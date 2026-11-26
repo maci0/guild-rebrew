@@ -7,33 +7,33 @@ void __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
 
 /* ADDRESS: GOLDTL 0x004bc8a0 */
-int __cdecl fcn_004bc8a0(float* position, int n, float* out)
+int __cdecl ch_GenerateNearbyWalkablePoints(float* position, int count, float* out)
 {
 	int ny;
 	int y;
 	int x;
 	int z;
 	int nx;
-	int k;
-	char* g;
+	int idx;
+	char* grid;
 
-	g = *(char**) (((char*)g_67a370) + 0xb0);
-	fcn_0045b990(g, position, &x, &y, &z);
-	for (k = 0; k < n; k++) {
+	grid = *(char**) (((char*)g_67a370) + 0xb0);
+	fcn_0045b990(grid, position, &x, &y, &z);
+	for (idx = 0; idx < count; idx++) {
 		nx = gm_RandomMod(10) + x - 4;
 		ny = gm_RandomMod(10) + y - 4;
-		if (*(int*) (g + 0x20) - 2 < nx)
-			nx = *(int*) (g + 0x20) - 2;
+		if (*(int*) (grid + 0x20) - 2 < nx)
+			nx = *(int*) (grid + 0x20) - 2;
 		if (nx < 2)
 			nx = 2;
-		if (*(int*) (g + 0x20) - 2 < ny)
-			ny = *(int*) (g + 0x20) - 2;
+		if (*(int*) (grid + 0x20) - 2 < ny)
+			ny = *(int*) (grid + 0x20) - 2;
 		if (ny < 2)
 			ny = 2;
-		if (ch_FindWalkableCell(g, position, position, nx, ny, &nx, &ny, 0x258, 0) != 0)
-			d3_GridPointToWorld(g, nx, ny, out + k * 4);
+		if (ch_FindWalkableCell(grid, position, position, nx, ny, &nx, &ny, 0x258, 0) != 0)
+			d3_GridPointToWorld(grid, nx, ny, out + idx * 4);
 		else
-			d3_GridPointToWorld(g, x, y, out + k * 4);
+			d3_GridPointToWorld(grid, x, y, out + idx * 4);
 	}
-	return n;
+	return count;
 }

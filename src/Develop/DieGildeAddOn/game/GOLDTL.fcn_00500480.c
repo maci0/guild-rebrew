@@ -7,36 +7,36 @@ extern unsigned char* lpGebaeudePROT;
 
 char* __cdecl sim_StartEntityQueryByType(char* e);
 
-char* __cdecl fcn_00500480(char* obj, int* id, int* sub)
+char* __cdecl gm_FindFallbackPublicBuilding(char* entity, int* id, int* sub)
 {
-	char* q;
-	int k;
-	int n;
-	char* d;
+	char* found_ent;
+	int idx;
+	int rem;
+	char* proto;
 
-	n = 255;
-	if (*(char**) (obj + 0x170) != 0) {
-		q = sim_StartEntityQueryByType(*(char**) (obj + 0x170));
-		if (q != 0) {
-			*sub = *(int*) (q + 2);
+	rem = 255;
+	if (*(char**) (entity + 0x170) != 0) {
+		found_ent = sim_StartEntityQueryByType(*(char**) (entity + 0x170));
+		if (found_ent != 0) {
+			*sub = *(int*) (found_ent + 2);
 		} else {
 			*sub = -1;
 		}
-		*id = *(int*) (*(char**) (obj + 0x170) + 1);
-		return *(char**) (obj + 0x170);
+		*id = *(int*) (*(char**) (entity + 0x170) + 1);
+		return *(char**) (entity + 0x170);
 	}
-	k = g_773d64;
+	idx = g_773d64;
 	do {
-		if (((char*)lpGebaeudeINST)[k * 169] != 0) {
-			d = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)((char*)lpGebaeudeINST)[k * 169]];
-			if (*d == 3 || *d == 0x16 || *d == 0xf) {
-				g_773d64 = k + 1;
+		if (((char*)lpGebaeudeINST)[idx * 169] != 0) {
+			proto = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)((char*)lpGebaeudeINST)[idx * 169]];
+			if (*proto == 3 || *proto == 0x16 || *proto == 0xf) {
+				g_773d64 = idx + 1;
 				*sub = -1;
-				*id = *(int*) (((char*)lpGebaeudeINST) + k * 169 + 1);
-				return ((char*)lpGebaeudeINST) + k * 169;
+				*id = *(int*) (((char*)lpGebaeudeINST) + idx * 169 + 1);
+				return ((char*)lpGebaeudeINST) + idx * 169;
 			}
 		}
-		k = (k + 1) % 256;
-	} while (--n != 0);
+		idx = (idx + 1) % 256;
+	} while (--rem != 0);
 	return 0;
 }

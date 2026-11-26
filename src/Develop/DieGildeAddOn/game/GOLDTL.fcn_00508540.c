@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508220(int, int*);
-int __cdecl fcn_004c4510(int*, int);
+int __cdecl cm_BeginPacketFieldDelta(int*, int);
 int __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 int __cdecl fcn_004c5360(void);
 float __cdecl fcn_004ff210(unsigned short, int);
@@ -81,7 +81,7 @@ int __cdecl fcn_00508540(int* rec, int unused, void* out)
 		r = 0;
 	}
 	value ^= r;
-	fcn_004c4510(rec, rec[1]);
+	cm_BeginPacketFieldDelta(rec, rec[1]);
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &value);
 	fcn_004c5360();
 	fcn_004ff210(*(short*) rec, -amount);

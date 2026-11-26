@@ -9,7 +9,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl fcn_004c4670(unsigned char, unsigned char, int, void*);
 void __cdecl fcn_004c5360(void);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -51,7 +51,7 @@ void __cdecl he_RunLagerErweitern(char* action)
 	v5[1] = 1;
 	gm_ResolveEntityById(0, (void**) v5, 0, *(unsigned int*) (action + 0xac));
 	if (v5[0]) {
-		fcn_004c4510((char*) v5[0], *(int*) ((char*) v5[0] + 2));
+		cm_BeginPacketFieldDelta((char*) v5[0], *(int*) ((char*) v5[0] + 2));
 		fcn_004c4670(4, 1, (v5[0] - (int) g_aed32c) + 0xe, &v5[1]);
 		fcn_004c5360();
 		if (--*(int*) (action + 0xb0) <= 0) {

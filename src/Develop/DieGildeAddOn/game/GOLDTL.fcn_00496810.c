@@ -9,7 +9,7 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004a5340(unsigned short*, unsigned int, unsigned int*, float, float, unsigned short*);
-int __cdecl fcn_004e9310(int, int, unsigned char**);
+int __cdecl amt_CollectOfficeCandidates(int, int, unsigned char**);
 extern char* g_77261c;
 extern float g_662910;
 extern double g_662aa0;
@@ -65,7 +65,7 @@ int __cdecl fcn_00496810(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* o
         if (*((unsigned char*)ent + 0x168) != 0) {
             best = -1;
             best_value = 100.0f;
-            count = fcn_004e9310(*((unsigned char*)ent + 0x168), 6, list);
+            count = amt_CollectOfficeCandidates(*((unsigned char*)ent + 0x168), 6, list);
             if (count <= 0) return 0;
             for (i = 0; i < count; i++) {
                 if (list[i] != (unsigned char*)g_77261c) {

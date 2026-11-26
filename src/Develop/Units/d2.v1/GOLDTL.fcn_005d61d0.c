@@ -39,7 +39,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl fcn_004c6ae0(int, int);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -66,7 +66,7 @@ int __cdecl d2_ShowIntimidationDialog(unsigned short* target)
 	do {
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (fcn_00525f60(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2) != 0) {
+				if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2) != 0) {
 					fcn_004c6ae0(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 0x4b;

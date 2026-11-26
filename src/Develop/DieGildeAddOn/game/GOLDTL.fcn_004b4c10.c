@@ -5,15 +5,15 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 
 
 /* ADDRESS: GOLDTL 0x004b4c10 */
-int __cdecl fcn_004b4c10(unsigned short* e, int b, int c)
+int __cdecl gm_HasThreeType7Entities(unsigned short* owner_id, int arg_b, int arg_c)
 {
-	int n;
-	char* p;
+	int count;
+	char* entity;
 
-	if (fcn_004b4730(e, b, c) == 0)
+	if (fcn_004b4730(owner_id, arg_b, arg_c) == 0)
 		return 0;
-	n = 0;
-	for (p = gm_StartFilteredEntitySearch(2, 4, *e, n, 7); p != 0; p = gm_FindNextFilteredEntity())
-		n++;
-	return n >= 3;
+	count = 0;
+	for (entity = gm_StartFilteredEntitySearch(2, 4, *owner_id, count, 7); entity != 0; entity = gm_FindNextFilteredEntity())
+		count++;
+	return count >= 3;
 }

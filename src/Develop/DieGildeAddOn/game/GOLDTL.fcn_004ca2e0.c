@@ -9,7 +9,7 @@ extern char cm_LastObjectId[];
 int __cdecl cm_ResolveSpecialEntityId(char*, int);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
-int __cdecl fcn_004ca2e0(char* x, char* out)
+int __cdecl cm_ExAllocThemaPredigt(char* x, char* out)
 {
 	char* obj;
 	char* dst;

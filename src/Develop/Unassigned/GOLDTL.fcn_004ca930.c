@@ -1,13 +1,13 @@
 
 
 
-int __cdecl fcn_004fe470(int, int, int, int, int);
+int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 
 int __cdecl fcn_004ca930(char* params, char* out)
 {
 	int result;
 
-	result = fcn_004fe470(*(int*) (params + 0x10), *(int*) (params + 0x14), *(int*) (params + 0x18), 0, 0);
+	result = init_SpawnBuildingCharacter(*(int*) (params + 0x10), *(int*) (params + 0x14), *(int*) (params + 0x18), 0, 0);
 	if (result == 0) {
 		return 1;
 	}

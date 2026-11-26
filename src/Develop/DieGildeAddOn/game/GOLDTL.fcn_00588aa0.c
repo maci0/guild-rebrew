@@ -56,8 +56,8 @@ extern float g_662914, g_662c98, g_662a98, g_664450, g_66444c, g_6660f4;
 
 int __cdecl d2_GetControlValue(int slot);
 int __cdecl fcn_004f0ff0(char* a0, int a1, int a2, int a3, int* o1, int* o2);
-void __cdecl fcn_004f11c0(char* p, float* o1, float* o2);
-float __cdecl fcn_004f1290(char* p);
+void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2);
+float __cdecl gm_GetCannonPowerScale(char* p);
 int __cdecl fcn_004f0a30(char* a0, char* a1, unsigned int* a2,
 	unsigned int* a3, unsigned int* a4, float a5, int a6, unsigned int a7);
 float __cdecl fcn_004f0eb0(int level, int percent, int count);
@@ -115,8 +115,8 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 			slot0, slot1, emitter->mode + 1, &o1, &o2)) {
 		return 0;
 	}
-	fcn_004f11c0(a1, &spread, &scale);
-	k = fcn_004f1290(a1);
+	gm_CalcArtillerySpread(a1, &spread, &scale);
+	k = gm_GetCannonPowerScale(a1);
 	b = ((CANNON_ROW_588AA0*)0x665288)[slot0].f08;
 	speed = (k * ((CANNON_ROW_588AA0*)0x665288)[slot0].f04
 			- ((CANNON_ROW_588AA0*)0x665288)[slot0].f00)

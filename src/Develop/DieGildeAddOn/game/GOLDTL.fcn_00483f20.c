@@ -67,7 +67,7 @@ int __cdecl gm_eval_SlotVoll(void*, int, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl fcn_0047e220(void*);
 void __cdecl fcn_0047e0e0(Ent483f20*, void*);
-void __cdecl fcn_00487e60(Ent483f20*, int);
+void __cdecl ai_CancelBlockedActions(Ent483f20*, int);
 void __cdecl fcn_00529160(int, int, unsigned short, int);
 void __cdecl ai_MeisterCollectTrans(Ent483f20*);
 void __cdecl ai_MeisterTrade(Ent483f20*, void*);
@@ -292,7 +292,7 @@ after_start:
 		} while (g_100dc38 < 4);
 	}
 
-	fcn_00487e60(e, 4);
+	ai_CancelBlockedActions(e, 4);
 
 	built = 0;
 	for (slot = g_7f4ca0; slot < (char*)&((ENTITY_RECORD*)g_7f4ca0)[0x300]; slot = (char*)((ENTITY_RECORD*)slot + 1)) {

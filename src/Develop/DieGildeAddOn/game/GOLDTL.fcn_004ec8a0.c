@@ -6,7 +6,7 @@ extern float g_66416c;
 
 int __cdecl ahm_CheckFlag(char* p);
 
-float __cdecl fcn_004ec8a0(char* p, int which)
+float __cdecl ahm_GetEssenceValue(char* p, int which)
 {
 	if (ahm_CheckFlag(p)) {
 		if (which == 0) {

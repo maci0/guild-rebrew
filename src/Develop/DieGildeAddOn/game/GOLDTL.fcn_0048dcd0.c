@@ -15,9 +15,9 @@
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
-int __cdecl fcn_004e99c0(int k);
+int __cdecl amt_GetOfficeRank(int k);
 
-int __cdecl fcn_0048dcd0(char* e, char* action, char* target)
+int __cdecl ai_SetupSecretRoomMode1(char* e, char* action, char* target)
 {
 	int mask;
 	int idx;
@@ -31,7 +31,7 @@ int __cdecl fcn_0048dcd0(char* e, char* action, char* target)
 		return 0;
 	}
 	t = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]);
-	n = fcn_004e99c0(t->unk_165[1]) / 3 + 2;
+	n = amt_GetOfficeRank(t->unk_165[1]) / 3 + 2;
 	thr[0] = n + 3;
 	thr[1] = n + 5;
 	thr[2] = n + 8;

@@ -24,7 +24,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
 #include "Develop/DieGildeAddOn/game/sonnenstrahlen.h"
 
-void __cdecl fcn_00537080(void)
+void __cdecl d3_UpdateLightningAndThunder(void)
 {
 	if (g_7e4538 != 0) {
 		fcn_00415d70(g_7e4538);

@@ -5,7 +5,7 @@ extern double g_662908; extern float g_662914;  extern float g_6628cc; extern co
 int __cdecl fcn_00402610();
 int __cdecl ch_RestoreGridRegion();
 int __cdecl fcn_00405a50();
-int __cdecl fcn_00407760();
+int __cdecl ch_DownsamplePath();
 char __cdecl ch_FindWalkableCell();
 int __cdecl fcn_00408250();
 int __cdecl ch_WorldToGridCoordinates();
@@ -337,7 +337,7 @@ label_40892d:
       }
       v34 = fcn_0041db70((v27 + v10) * 2,(char *)0x675ac8);
       *(unsigned int *)(v28 + 0xf4) = v34;
-      v16 = fcn_00407760(a0,0x14d0c20,v34,v13);
+      v16 = ch_DownsamplePath(a0,0x14d0c20,v34,v13);
       v27 = 0;
       if (1 <= v10) {
         v6 = v16 * 2;

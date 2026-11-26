@@ -19,7 +19,7 @@ int __cdecl fcn_004b0a20(int* a1, int slot, char* arg)
 	e = gm_LookupEntityRecordById(a1[slot * 2 + 1]);
 	if (e == 0)
 		return 0;
-	fcn_004c4510(e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 	fcn_004c4670(1, 1, 0x1b1, &c);
 	fcn_004c5360();
 	return 1;

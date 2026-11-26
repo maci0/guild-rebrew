@@ -1,4 +1,4 @@
-int* __cdecl fcn_004ce610(char*);
+int* __cdecl gm_GetEquippedCombatGear(char*);
 
 // SIZE 0x20
 
@@ -28,7 +28,7 @@ int __cdecl fcn_00529800(char* a, int* out)
 			}
 		}
 	}
-	p = fcn_004ce610(a);
+	p = gm_GetEquippedCombatGear(a);
 	if (p != 0 && *p != 0) {
 		out[n++] = *p + 0xdf;
 	}

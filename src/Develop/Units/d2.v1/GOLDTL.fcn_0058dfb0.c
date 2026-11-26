@@ -46,7 +46,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00525f60(struct house*, int);
+int __cdecl d2_CheckActionBlocker(struct house*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -98,11 +98,11 @@ int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 				g_774654 = 1;
 			} else {
 				if (d2_CurrentElementId == b4) {
-					k = fcn_00525f60(&((struct house*)g_7f4ca0)[g_774970], 4);
+					k = d2_CheckActionBlocker(&((struct house*)g_7f4ca0)[g_774970], 4);
 				} else if (d2_CurrentElementId == b6) {
-					k = fcn_00525f60(&((struct house*)g_7f4ca0)[g_774970], 6) * 2;
+					k = d2_CheckActionBlocker(&((struct house*)g_7f4ca0)[g_774970], 6) * 2;
 				} else if (d2_CurrentElementId == b8) {
-					k = fcn_00525f60(&((struct house*)g_7f4ca0)[g_774970], 8) * 3;
+					k = d2_CheckActionBlocker(&((struct house*)g_7f4ca0)[g_774970], 8) * 3;
 				} else {
 					continue;
 				}

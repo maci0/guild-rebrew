@@ -15,7 +15,7 @@ char* __cdecl fcn_00502cd0(int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_SetupEntityQuery(char*);
 char* __cdecl cut_FindCutsceneById(int);
-int __cdecl fcn_0050c710(char*, int, int);
+int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004d5450(char*);
 int __cdecl fcn_004d5110(char*, char*, char*, char*);
@@ -188,7 +188,7 @@ label_54e6a1:
 			own = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));
 			ownrow = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)];
 			p = (char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)];
-			limit = (float) (fcn_0050c710(own, 5, 1) * 0.01 + g_6629c8);
+			limit = (float) (gm_GetBuildingTechEffect(own, 5, 1) * 0.01 + g_6629c8);
 			other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 			rec = fcn_00502cd0(*(int*) (other + 0x5d), 1, 0, 0xca);
 			while (rec != 0) {

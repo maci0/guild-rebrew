@@ -32,7 +32,7 @@ void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c30a0(int, int, char*, int, int);
@@ -112,7 +112,7 @@ state_zero:
 	d2_SetForm(*(int*) (*(char**) (obj + 0x74) + 8), 1);
 	if (p == rec) {
 	if (*(int*) (obj + 0xb4) == 0) {
-		fcn_004c4510(p, *(int*) (p + 4));
+		cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, obj + 0xac);
 		fcn_004c5360();
 		*(int*) (obj + 0xb4) = 1;

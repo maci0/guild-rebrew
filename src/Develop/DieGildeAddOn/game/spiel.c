@@ -1888,7 +1888,7 @@ void __cdecl gm_ClearObjektResources(LinkedNode* node)
 {
 #ifndef REBREW_SERVER
     if ((lpObjektePROT + node->type * 64)[node->type] == 0x1d && *(int*) ((char*) node + 0x29) != 0) {
-        fcn_004be280(*(char**) ((char*) node + 0x29));
+        rt_FreeRoutePoints(*(char**) ((char*) node + 0x29));
         *(int*) ((char*) node + 0x29) = 0;
     }
 #endif
@@ -3285,6 +3285,7 @@ int __cdecl gm_CollectBuildingResidents(unsigned char* building, unsigned char* 
 	return count;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 void __cdecl gm_AssignBuildingOwner(unsigned char* building, unsigned short new_owner, unsigned int owner_slot)
 {
 	char building_class;
@@ -3336,6 +3337,7 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* building, unsigned short new_
 		} while (loop_count != 0);
 	}
 }
+#endif
 
 #ifdef REBREW_SERVER
 char* __cdecl gm_AllocRaum(char* geb, int obj_id)

@@ -17,7 +17,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
 /* ADDRESS: GOLD 0x004972c0 */
 /* ADDRESS: GOLDTL 0x00496ca0 */
-int __cdecl fcn_00496ca0(int obj, char* a2, int a3)
+int __cdecl ai_RunBestechung(int obj, char* target_desc, int bribe_data)
 {
 	char buf[0x400];
 	int v;
@@ -25,29 +25,29 @@ int __cdecl fcn_00496ca0(int obj, char* a2, int a3)
 	float f;
 	void* e;
 
-	if (*(char*) a2 != 7) {
+	if (*(char*) target_desc != 7) {
 		return 0;
 	}
-	if (*(char*) a3 != 0x12) {
+	if (*(char*) bribe_data != 0x12) {
 		return 0;
 	}
-	e = gm_LookupEntityRecordById(*(int*) ((char*) a2 + 4));
+	e = gm_LookupEntityRecordById(*(int*) ((char*) target_desc + 4));
 	if (e == 0) {
 		return 0;
 	}
 	fcn_004c5150(*(int*) ((char*) e + 4), *(int*) ((char*) obj + 4), g_773d75,
-	    *(int*) ((char*) a3 + 8));
+	    *(int*) ((char*) bribe_data + 8));
 	if (*(int*) ((char*) obj + 0x1cc) & 0x800) {
 		f = g_664164;
 	} else {
 		f = g_662ac8;
 	}
-	v = *(int*) ((char*) a3 + 0x10) + 1;
+	v = *(int*) ((char*) bribe_data + 0x10) + 1;
 	r = (int) (v * f);
 	fcn_004c54c0(*(int*) ((char*) obj + 4), *(int*) ((char*) e + 4), r, 1);
 	fcn_004c5420(*(int*) ((char*) obj + 4), 0x1e8, 4, 0x400, 0);
 	if (*(char*) ((char*) e + 2) == 6 || *(char*) ((char*) e + 2) == 7) {
-		io_FormatTextBuffer(buf, 0x1751, *(unsigned short*) obj, *(int*) ((char*) a3 + 8));
+		io_FormatTextBuffer(buf, 0x1751, *(unsigned short*) obj, *(int*) ((char*) bribe_data + 8));
 		fcn_00545d40(*(int*) ((char*) e + 4), -1, buf, 0, 0x5fb, g_67eab0);
 	}
 	return 9;

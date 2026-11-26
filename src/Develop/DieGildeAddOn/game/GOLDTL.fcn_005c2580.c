@@ -19,12 +19,12 @@ void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
 int __cdecl fcn_004c5530(void*);
 int __cdecl gm_SearchTable67(int);
-char* __cdecl fcn_00507a10(char*);
+char* __cdecl gm_FindBuildingTreasury(char*);
 int __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 int __cdecl io_AppendText(int, char*, int, int, int);
 int __cdecl fcn_00526010(char*, int, char);
-int __cdecl fcn_00526070(char*, int, int, char);
+int __cdecl d2_CheckFundsAndNotify(char*, int, int, char);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 
@@ -111,8 +111,8 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 				if (*(unsigned short*) (e + 0x27) == *(unsigned short*) gm_CityEntity) {
 					char* q;
 
-					q = fcn_00507a10(e);
-					if (q != 0 && fcn_00526070(q, *(int*) (q + 0x14), val, (char) g_773d75) != 0) {
+					q = gm_FindBuildingTreasury(e);
+					if (q != 0 && d2_CheckFundsAndNotify(q, *(int*) (q + 0x14), val, (char) g_773d75) != 0) {
 						*(int*) (msg + 0x5c) = dur;
 						fcn_004c4eb0("renovieren");
 						fcn_004c5150(-1, *(int*) (q + 2), (char) g_773d75, val);

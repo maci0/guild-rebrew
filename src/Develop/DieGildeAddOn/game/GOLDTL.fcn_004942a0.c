@@ -19,7 +19,7 @@ float __cdecl fcn_00502820(int x0, int y0, int x1, int y1);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004942a0 */
-void __cdecl fcn_004942a0(unsigned short* e, Share* out)
+void __cdecl gm_CalcStudiumOffers(unsigned short* e, Share* out)
 {
 	int total;
 	float dist[3];

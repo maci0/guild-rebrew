@@ -29,7 +29,7 @@ int __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00500cb0(void*, void*);
 void __cdecl fcn_0054f4a0(char*, char*, unsigned char*);
-void __cdecl fcn_0054f3b0(char*, char*, char*);
+void __cdecl he_AcceptDuell(char*, char*, char*);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
@@ -74,7 +74,7 @@ void __cdecl fcn_0054f600(char* o)
 				return;
 			}
 			if (g_100f1dc == 2) {
-				fcn_0054f3b0(entity, v4, v6);
+				he_AcceptDuell(entity, v4, v6);
 			} else if (g_100f1dc == 1) {
 				fcn_0054f4a0(entity, v4, (unsigned char*) v6);
 			}

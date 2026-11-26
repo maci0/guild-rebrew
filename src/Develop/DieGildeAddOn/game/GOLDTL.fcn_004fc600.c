@@ -30,11 +30,11 @@ extern int g_773d48;
 extern int g_99f6e0;
 
 void __cdecl fcn_004f4830(int kind, Offer* o);
-char* __cdecl fcn_0050e4a0(int n);
+char* __cdecl gm_FindPublicBuilding(int n);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 void __cdecl fcn_004c51a0(int a, int b, int c, int d);
 
-int __cdecl fcn_004fc600(unsigned short id, Slots* s, unsigned char flags)
+int __cdecl gm_CollectCityTaxOffers(unsigned short id, Slots* s, unsigned char flags)
 {
 	Offer offer;
 	int i;
@@ -63,7 +63,7 @@ int __cdecl fcn_004fc600(unsigned short id, Slots* s, unsigned char flags)
 		s->value[i] = v;
 		s->amount[i] = offer.amount;
 		if (flags & 1) {
-			p = fcn_0050e4a0(1);
+			p = gm_FindPublicBuilding(1);
 			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 			fcn_004c51a0(*(int*) (p + 2), ((Obj *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id])->owner, 0, v);
 			g_773d48++;

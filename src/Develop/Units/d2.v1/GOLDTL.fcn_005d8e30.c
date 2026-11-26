@@ -15,7 +15,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -57,7 +57,7 @@ int __cdecl gm_HandleAbbitte(char* e, char* o)
 			if (g_100f1dc != -1) {
 				if (d2_CurrentElementId == ok) {
 					v = d2_GetControlValue(sl);
-					if (fcn_00525f60(e, v) != 0) {
+					if (d2_CheckActionBlocker(e, v) != 0) {
 						fcn_004c6ae0(*(int*) (e + 4), -v);
 						io_FormatTextBuffer(buf, 0x1deb, fcn_004f5e20(*(int*) (e + 4), v));
 						fcn_00526120(buf, 0);

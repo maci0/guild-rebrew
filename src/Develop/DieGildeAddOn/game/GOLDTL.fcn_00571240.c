@@ -17,7 +17,7 @@
 void __cdecl gm_ResolveEntityById(void*, void*, int, int);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_0050c710(char*, int, int);
+int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 double __cdecl fcn_0050fdb0(int, int, char*);
 int __cdecl fcn_0050c830(char*, char*, int);
@@ -77,7 +77,7 @@ void __cdecl fcn_00571240(char* self)
 			return;
 		}
 		gm_ResolveEntityById(&node, 0, 0, *(int*) (self + 0xb8));
-		total = fcn_0050c710(node, 1, 1) * 0.01 + g_6629c8;
+		total = gm_GetBuildingTechEffect(node, 1, 1) * 0.01 + g_6629c8;
 		if (*(unsigned char*) (self + 0xc8) >= 0x3c) {
 			for (i = 0; i < 8; i++) {
 				if (map == 0)

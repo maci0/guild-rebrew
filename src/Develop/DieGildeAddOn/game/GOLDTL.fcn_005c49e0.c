@@ -11,7 +11,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl gm_CalculateGebaeudeValue(unsigned char*, int);
-void __cdecl fcn_00527f10(unsigned char* e);
+void __cdecl gm_CollectGebaeudeUpgrades(unsigned char* e);
 char* __cdecl gm_SearchTable67(int id);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00508da0(unsigned char* e);
@@ -54,7 +54,7 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 	d2_CenterDialogWindows(d);
 	d2_SetOverlayAnimation(0, 0);
 	r = gm_CalculateGebaeudeValue(p, (char) p[0x5c]);
-	fcn_00527f10(p);
+	gm_CollectGebaeudeUpgrades(p);
 	do {
 		t = gm_SearchTable67(id);
 		if ((*(unsigned short*) (p + 0x5a) & 0x400) != 0 || t == 0) {

@@ -9,7 +9,7 @@ extern float g_696540[];
 int __cdecl fcn_00500e20(pos14_7f4c00*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
-char* __cdecl fcn_004ec950(char*, int);
+char* __cdecl ahm_FindRecipeSlot(char*, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_005b3190(char*, char*, int, int);
 void __cdecl fcn_004eea30(char*, int, float);
@@ -31,7 +31,7 @@ void __cdecl fcn_00575e10(char* u)
 	k = fcn_00500e20(&gm_GameTime);
 	s = 0;
 	h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
-	if (h == 0 || ahm_CheckFlag(h) == 0 || (s = fcn_004ec950(h, *(int*) (u + 0xb0))) == 0) {
+	if (h == 0 || ahm_CheckFlag(h) == 0 || (s = ahm_FindRecipeSlot(h, *(int*) (u + 0xb0))) == 0) {
 		*(int*) (u + 0x70) = -2;
 	}
 	if (*(int*) (u + 0x70) != -2) {

@@ -7,7 +7,7 @@ struct unit;
 
 struct unit* __cdecl he_StartHandlungSearch(int n, ...);
 int __cdecl gm_RandomMod(unsigned short n);
-unsigned char* __cdecl fcn_004f43b0(char* e, unsigned char lim);
+unsigned char* __cdecl gv_FindLowestCostSlot(char* e, unsigned char lim);
 int __cdecl fcn_004f1790(char* a, void* e);
 void __cdecl fcn_004c5530(int a1);
 
@@ -35,7 +35,7 @@ void __cdecl fcn_004831f0(char* obj)
 	if (he_StartHandlungSearch(2, 0, 0x8d, 3, *(int*) ((char*) *(int*) (obj + 0x16c) + 1)) != 0) {
 		return;
 	}
-	e = (char*) fcn_004f43b0((char*) *(int*) (obj + 0x16c),
+	e = (char*) gv_FindLowestCostSlot((char*) *(int*) (obj + 0x16c),
 	    (unsigned char) (gm_RandomMod(0x40) + 0x80));
 	if (e == 0) {
 		return;

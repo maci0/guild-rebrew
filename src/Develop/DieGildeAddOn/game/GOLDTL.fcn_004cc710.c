@@ -2,9 +2,9 @@
 
 
 char* __cdecl gm_FindRecordById(int);
-void __cdecl fcn_00506300(char*);
+void __cdecl gm_RemoveClientEntityLink(char*);
 
-int __cdecl fcn_004cc710(char* input, char* response)
+int __cdecl cm_ExKillTransporter(char* input, char* response)
 {
 	char* p;
 
@@ -12,7 +12,7 @@ int __cdecl fcn_004cc710(char* input, char* response)
 	if (p == 0) {
 		return 1;
 	}
-	fcn_00506300(p);
+	gm_RemoveClientEntityLink(p);
 	if (response != 0) {
 		response[0] = 1;
 		response[1] = 0;

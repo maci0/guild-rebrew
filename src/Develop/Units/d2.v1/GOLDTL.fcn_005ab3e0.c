@@ -20,7 +20,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00526010(char*, int, int);
-int __cdecl fcn_004c4510(char*, int);
+int __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c5150(int, int, int, int);
@@ -91,7 +91,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 		} else if (g_100f1dc != -1 && d2_CurrentElementId == item
 			&& fcn_00526010((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], cost, g_773d75) != 0) {
 			rec = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
-			fcn_004c4510(rec, *(int*) (rec + 4));
+			cm_BeginPacketFieldDelta(rec, *(int*) (rec + 4));
 			fcn_004c4670(4, 1, 0x1ac, &cost);
 			fcn_004c5360();
 			fcn_004f5e20(*(int*) (rec + 4), count);

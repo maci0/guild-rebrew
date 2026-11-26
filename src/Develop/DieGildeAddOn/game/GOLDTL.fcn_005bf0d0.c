@@ -16,8 +16,8 @@ int __cdecl fcn_00526010(void* slot, int value, unsigned char flag);
 int __cdecl fcn_004fa5b0(int cmd, void* slot, unsigned int* list);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_0055c0f0(void* a, void* b);
-int __cdecl fcn_0055c0a0(void* a, void* b);
+int __cdecl he_HasNoActiveEvent04b(void* a, void* b);
+int __cdecl he_HasNoActiveAction0x2e(void* a, void* b);
 int __cdecl fcn_0055c050(void* a);
 int __cdecl fcn_00579640(void* a, void* b);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
@@ -74,12 +74,12 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 		}
 		entity = he_fn_Handlung();
 	}
-	if (fcn_0055c0f0(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
+	if (he_HasNoActiveEvent04b(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
 		io_FormatTextBuffer(text, 0x1703, *(unsigned short*) (record + 0x27), record);
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	if (fcn_0055c0a0(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
+	if (he_HasNoActiveAction0x2e(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
 		io_FormatTextBuffer(text, 0x1704, *(unsigned short*) obj);
 		fcn_00526120(text, 0);
 		return 0;

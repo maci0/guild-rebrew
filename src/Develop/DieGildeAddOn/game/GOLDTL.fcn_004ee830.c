@@ -15,11 +15,11 @@ typedef struct
 // SIZE 0x18
 
 int __cdecl ahm_CheckFlag(char* p);
-int __cdecl fcn_004ec9a0(char* p);
+int __cdecl ahm_HasRecipeSlotCapacity(char* p);
 int* __cdecl fcn_004ecbe0(int id);
 int __cdecl fcn_004c6d30(Msg18* m);
 
-int __cdecl fcn_004ee830(char* p, int id)
+int __cdecl ahm_UnlockSlotRecipe(char* p, int id)
 {
 	Msg18 m;
 	int* q;
@@ -27,7 +27,7 @@ int __cdecl fcn_004ee830(char* p, int id)
 	if (!ahm_CheckFlag(p)) {
 		return -1;
 	}
-	if (!fcn_004ec9a0(p)) {
+	if (!ahm_HasRecipeSlotCapacity(p)) {
 		return -1;
 	}
 	q = fcn_004ecbe0(id);

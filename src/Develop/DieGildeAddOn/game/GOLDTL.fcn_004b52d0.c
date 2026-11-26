@@ -24,7 +24,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl sim_SetSyncParams(GAME_TIMESTAMP*, unsigned char, unsigned char, unsigned char);
 int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
 
-int __cdecl fcn_004b52d0(holder* p, int flag, int limit)
+int __cdecl ai_FilterCandidateLimit(holder* p, int flag, int limit)
 {
 	if (flag != 0) {
 		if (p->st.unit_0 == 0 && p->st.hour == 0 && p->st.minute == 0 && p->st.second == 0) {

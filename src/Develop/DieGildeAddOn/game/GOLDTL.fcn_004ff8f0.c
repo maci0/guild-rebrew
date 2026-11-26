@@ -7,7 +7,7 @@ int __cdecl fcn_004ff860(unsigned char*);
 float __cdecl fcn_004ff210(unsigned short, int);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004fffb0(int);
-void __cdecl fcn_004c4510(void*, int);
+void __cdecl cm_BeginPacketFieldDelta(void*, int);
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c53a0(void);
 int __cdecl fcn_004c51a0(int, int, unsigned char, int);
@@ -80,7 +80,7 @@ void __cdecl fcn_004ff8f0(void)
 				continue;
 			v11 = 3;
 			v12 = 2;
-			fcn_004c4510(e, *(int*) (e + 4));
+			cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 			fcn_004c4700(1, 1, (short) ((int) s - g_aed32c), &v11);
 			if (s[0xb] < 2)
 				fcn_004c4700(1, 1, (short) ((int) s - g_aed32c + 0xb), &v12);
@@ -133,7 +133,7 @@ void __cdecl fcn_004ff8f0(void)
 				passes = gm_RandomMod(0x400);
 				fcn_004c51a0(*(int*) (handle + 4), -1, g_773d75,
 					((passes & 0xffff) + 0x400) * 0x40);
-				fcn_004c4510(handle, *(int*) (handle + 4));
+				cm_BeginPacketFieldDelta(handle, *(int*) (handle + 4));
 				fcn_004c4700(1, 1, (short) (handle - g_aed32c + 0x167), &v11);
 				fcn_004c53a0();
 			}

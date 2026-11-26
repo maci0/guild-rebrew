@@ -6,7 +6,7 @@ extern char g_7f4ca0[];
 
 
 
-short* __cdecl fcn_0050d430(short* entity)
+short* __cdecl gm_ResolveEntityOwnerBuilding(short* entity)
 {
 	void* dynamic_ent;
 

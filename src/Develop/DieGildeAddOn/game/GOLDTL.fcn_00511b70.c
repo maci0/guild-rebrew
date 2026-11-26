@@ -3,9 +3,9 @@
 
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl amt_FindOfficeSlotByKey(char, char*);
-int __cdecl fcn_004e99c0(int);
+int __cdecl amt_GetOfficeRank(int);
 
-void __cdecl fcn_00511b70(int n, int* dst, int* src)
+void __cdecl amt_CalcOfficeHolderAges(int n, int* dst, int* src)
 {
 	char buf[0x18];
 	int t[15];
@@ -30,7 +30,7 @@ void __cdecl fcn_00511b70(int n, int* dst, int* src)
 	j = gm_RandomMod(15);
 	for (i = 0; i < n; i++) {
 		amt_FindOfficeSlotByKey((char) src[i], buf);
-		dst[i] = t[j] - fcn_004e99c0((unsigned char) buf[8]) / 2;
+		dst[i] = t[j] - amt_GetOfficeRank((unsigned char) buf[8]) / 2;
 		j = (j + 1) % 15;
 	}
 }

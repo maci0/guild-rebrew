@@ -19,7 +19,7 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004fa5b0(int k, char* e, Query* q);
 
-int __cdecl fcn_004aa0c0(char* entity, char* cmd, char* params)
+int __cdecl ai_ExecuteAmtAction(char* entity, char* cmd, char* params)
 {
 	Query query;
 	char* r;

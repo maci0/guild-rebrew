@@ -20,7 +20,7 @@ char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl evt_RunScript(char*);
 void __cdecl fcn_004cfa00(int);
 
-void __cdecl fcn_004d2e60(void)
+void __cdecl cut_RunGfxCutscene(void)
 {
 	int r;
 	char* p;

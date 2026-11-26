@@ -20,7 +20,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_0052dd80(char*);
 void __cdecl fcn_0052d9d0(char*);
 
-void __cdecl fcn_0052de50(void)
+void __cdecl d3_RefreshBuildingPennants(void)
 {
 	int save;
 	struct s_7f4ca0* r;

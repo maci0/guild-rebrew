@@ -48,7 +48,7 @@ int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c4700(int, int, int, char*);
 void __cdecl fcn_004c5150(int, int, char, int);
@@ -175,7 +175,7 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 		ui_f30 = 0;
 		ui_f30 = 0;
 		ui_pos = (unsigned char) i;
-		fcn_004c4510((char*) subjectRecord, *(int*) (subjectRecord + 2));
+		cm_BeginPacketFieldDelta((char*) subjectRecord, *(int*) (subjectRecord + 2));
 		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) subjectRecord + (8 - g_aed32c)), (char*) &ui_pos);
 		cm_AppendPacketFieldDelta(2, 1, (unsigned short) ((int) subjectRecord + (10 - g_aed32c)), (char*) &ui_f08);
 		cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((int) subjectRecord + (0x194 - g_aed32c)), (char*) &ui_f14);
@@ -188,7 +188,7 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 		cm_AppendPacketFieldDelta(1, 1, (unsigned short) ((int) subjectRecord + (0x1b1 - g_aed32c)), (char*) &ui_b0a);
 		fcn_004c5420(*(int*) (subjectRecord + 2), 0x1c8, 4, 0x800000, 0);
 		fcn_004c5360();
-		fcn_004c4510((char*) subjectRecord, *(int*) (subjectRecord + 2));
+		cm_BeginPacketFieldDelta((char*) subjectRecord, *(int*) (subjectRecord + 2));
 		for (i = 0; i < 8; i++) {
 			cm_AppendPacketFieldDelta(4, 1, (unsigned short) ((i * 4 + 0x5c - g_aed32c) + (int) subjectRecord), (char*) &ui_f0c);
 		}
@@ -203,7 +203,7 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 		fcn_004c5480(*(int*) (subjectRecord + 2), 0x1c, 1000.0f - *(float*) (subjectRecord + 0xe));
 		fcn_004c5480(*(int*) (subjectRecord + 2), 0x18, 1000.0f - *(float*) (subjectRecord + 0xc));
 		fcn_004c5480(*(int*) (subjectRecord + 2), 0x20, 12.0f - *(float*) (subjectRecord + 0x10));
-		fcn_004c4510((char*) subjectRecord, *(int*) (subjectRecord + 2));
+		cm_BeginPacketFieldDelta((char*) subjectRecord, *(int*) (subjectRecord + 2));
 		for (i = 0; i < 5; i++) {
 			ui_b34 = 0;
 			fcn_004c4700(1, 1, (i - g_aed32c) + 0x80 + (int) subjectRecord, (char*) &ui_b34);

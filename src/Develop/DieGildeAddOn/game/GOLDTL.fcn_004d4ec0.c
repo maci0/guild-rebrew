@@ -2,7 +2,7 @@
 
 void __cdecl ch_SetVisible(int, int);
 
-void __cdecl fcn_004d4ec0(char* p)
+void __cdecl ch_HideAttachedCharacter(char* entity)
 {
-	ch_SetVisible(*(int*) (*(int*) (p + 0x17c) + 0x184), 0);
+	ch_SetVisible(*(int*) (*(int*) (entity + 0x17c) + 0x184), 0);
 }

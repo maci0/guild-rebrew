@@ -19,11 +19,11 @@ extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 
 unsigned short __cdecl gm_RandomMod(int n);
-char* __cdecl fcn_0050e4a0(int n);
+char* __cdecl gm_FindPublicBuilding(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int a, unsigned char b);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
-int __cdecl fcn_004a4bb0(char* a1, char* e, int a3, Blk24* b1, Blk24* b2, int want);
+int __cdecl ai_PrepareBuildSite(char* a1, char* e, int a3, Blk24* b1, Blk24* b2, int want);
 
 /* The fallback's b1.kind is never written (as in the reference). The
  * pair structs are block-scoped: at function scope the b1.kind store is
@@ -45,7 +45,7 @@ int __cdecl ai_StartBaumeister(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 	if (gm_GameTime.a < 4 || a3 != 0 || e[0x166] != 0xa || a1 != 0) {
 		return 0;
 	}
-	q = fcn_0050e4a0(1);
+	q = gm_FindPublicBuilding(1);
 	if (q == 0) {
 		return 0;
 	}
@@ -127,7 +127,7 @@ int __cdecl ai_StartBaumeister(char* a1, char* e, int a3, Blk24* o1, Blk24* o2)
 		b2.kind = 0;
 		b2.a = 0;
 		b2.b = 0;
-		if (fcn_004a4bb0(0, e, 1, &b1, &b2, 1) != 0) {
+		if (ai_PrepareBuildSite(0, e, 1, &b1, &b2, 1) != 0) {
 			*o1 = b1;
 			*o2 = b2;
 			return 0x2f;

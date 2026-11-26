@@ -5,7 +5,7 @@ extern int g_100dc20;
 extern int g_100dc3c;
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004849b0(int, int, int);
-void __cdecl fcn_00487360(int);
+void __cdecl ai_TryHireWorker(int);
 void __cdecl fcn_00487970(int, int, int);
 void __cdecl fcn_00487c00(int, int, int);
 void __cdecl fcn_00487470(int);
@@ -21,7 +21,7 @@ int __cdecl gm_eval_SlotVoll(int, int, int);
 void __cdecl fcn_0064d41a(char *, char *, ...);
 void __cdecl fcn_0047e220(int);
 void __cdecl fcn_0047e0e0(int, int);
-void __cdecl fcn_00487e60(int, int);
+void __cdecl ai_CancelBlockedActions(int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_004831f0(int);
 void __cdecl ai_MeisterCollectTrans(int);
@@ -69,7 +69,7 @@ void __cdecl fcn_00483480(int entityRecord)
 		return;
 	}
 	fcn_004849b0(entityRecord, (int) rec0, (int) rec1);
-	fcn_00487360(entityRecord);
+	ai_TryHireWorker(entityRecord);
 	fcn_00487970((int) rec1, entityRecord, 0x4b);
 	fcn_00487c00((int) rec1, entityRecord, 0x19);
 	fcn_00487470(entityRecord);
@@ -333,7 +333,7 @@ tail:
 			pp += 0x16;
 		}
 	}
-	fcn_00487e60(entityRecord, 4);
+	ai_CancelBlockedActions(entityRecord, 4);
 	arg.cur = 0;
 	sp = (void *) 0x7f4ca2;
 	while ((int) sp < 0x85a0a2) {

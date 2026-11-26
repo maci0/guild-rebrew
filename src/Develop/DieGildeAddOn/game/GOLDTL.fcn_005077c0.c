@@ -7,7 +7,7 @@ extern int g_7746d4;
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 
-void __cdecl fcn_005077c0(int id, int nk)
+void __cdecl gm_SetEntityLevel(int id, int nk)
 {
 	unsigned char* o;
 	int a;

@@ -22,7 +22,7 @@ extern Pair_99f800 g_99f800[0x800];
 
 int __cdecl FindStraftatIndexById(int key);
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_004fa980(int arg, unsigned char kind);
+void __cdecl cm_SubtractCrimeGrid(int arg, unsigned char kind);
 void __cdecl fcn_005b2a00(Obj* o, char* p);
 
 int __cdecl fcn_004f5940(int key, int force)
@@ -45,7 +45,7 @@ int __cdecl fcn_004f5940(int key, int force)
 		return 1;
 	}
 	p = gm_LookupEntityRecordById(g_9a3800[k].target_id);
-	fcn_004fa980(g_9a3800[k].unk_21, g_9a3800[k].kind);
+	cm_SubtractCrimeGrid(g_9a3800[k].unk_21, g_9a3800[k].kind);
 	for (i = 0; i < 2048; i++) {
 		if (key == g_99f800[i].key) {
 			if (g_774970 != 0xffff && g_99f800[i].owner == (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id) && p != 0 && force == 0) {

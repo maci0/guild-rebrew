@@ -29,7 +29,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl fcn_00526120(int, int);
 typedef struct F8 {
 	int mask;
@@ -98,7 +98,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 				flag = 0;
 				n = d2_GetControlValue(b1);
 
-				if (fcn_00525f60(((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), n) == 0) {
+				if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), n) == 0) {
 					flag = 1;
 				}
 				hh = 0;

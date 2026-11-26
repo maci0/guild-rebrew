@@ -22,7 +22,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005c4ec0(int, Entity*, int, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
-int __cdecl fcn_0050db40(Entity* e, int extra)
+int __cdecl gm_CheckAndCollectEntityDebt(Entity* e, int extra)
 {
 	char msg[0x800];
 	float v;

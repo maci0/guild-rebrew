@@ -23,7 +23,7 @@ int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_005a86a0(int);
 void __cdecl fcn_005167c0(unsigned char*, int);
-void __cdecl fcn_00516c50(unsigned char*, int);
+void __cdecl d3_SetupInteriorScene(unsigned char*, int);
 void __cdecl fcn_00597ec0(unsigned char*);
 
 void __cdecl fcn_0059a0e0(void)
@@ -38,7 +38,7 @@ void __cdecl fcn_0059a0e0(void)
 			x = fcn_00502cd0(*(int*) (g_7746c8 + 0x5d), 2, 6, 0, 0xfd);
 			fcn_005a86a0((int) g_7e431c);
 			fcn_005167c0(g_7746c8, 0xfd);
-			fcn_00516c50(g_7746c8, x);
+			d3_SetupInteriorScene(g_7746c8, x);
 			g_774658 = g_774650;
 		}
 	}
@@ -47,7 +47,7 @@ void __cdecl fcn_0059a0e0(void)
 		if (g_7e2708 != x) {
 			fcn_005a86a0(g_7e2708);
 			fcn_005167c0(g_7746c8, 0xfd);
-			fcn_00516c50(g_7746c8, x);
+			d3_SetupInteriorScene(g_7746c8, x);
 		} else {
 			g_7e2700 = 0;
 			g_7e2708 = 0;
@@ -58,7 +58,7 @@ void __cdecl fcn_0059a0e0(void)
 		x = fcn_00502cd0(*(int*) (g_7746c8 + 0x5d), 2, 6, 0, 0xfd);
 		fcn_005a86a0(g_7746b8);
 		fcn_005167c0(g_7746c8, 0xfd);
-		fcn_00516c50(g_7746c8, x);
+		d3_SetupInteriorScene(g_7746c8, x);
 	}
 	e = g_7746c8;
 	r = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e];

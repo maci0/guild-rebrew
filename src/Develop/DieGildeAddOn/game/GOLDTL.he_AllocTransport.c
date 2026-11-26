@@ -26,9 +26,9 @@ void __cdecl he_FreeAction(char*);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-int __cdecl fcn_0050c710(unsigned char*, int, int);
+int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 int __cdecl fcn_0050ddf0(int, int);
-int __cdecl fcn_0050de80(char*, void*);
+int __cdecl gm_CalcEntityInventoryStats(char*, void*);
 void __cdecl ReportClientMessage(const char*);
 
 #pragma pack(1)
@@ -178,7 +178,7 @@ void __cdecl he_AllocTransport(char* action)
 		*(float*) (node + 0x1a0) = (float) (base_speed + *(double*) 0x664e60);
 	}
 	if (rec != 0) {
-		v = fcn_0050c710((unsigned char*) rec, 0x11, 1);
+		v = gm_GetBuildingTechEffect((unsigned char*) rec, 0x11, 1);
 		f = (float) (((double) v * *(double*) 0x6640e8 + *(double*) 0x6629c8) *
 		    *(float*) (node + 0x1a0));
 		*(float*) (node + 0x1a0) = f;
@@ -192,7 +192,7 @@ void __cdecl he_AllocTransport(char* action)
 	*(int*) (action + 0x10) = *(int*) (query + 2);
 
 	if ((*(unsigned char*) (query + 0x20) & 1) != 0) {
-		fcn_0050de80(query, &stats);
+		gm_CalcEntityInventoryStats(query, &stats);
 		if (stats.total > 0) {
 			*(int*) (action + 0xcc) = stats.total / 16000 + (unsigned short) gm_RandomMod(2);
 		} else {

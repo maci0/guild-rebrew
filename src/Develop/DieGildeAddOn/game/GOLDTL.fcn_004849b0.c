@@ -63,8 +63,8 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_FindRecordById(int);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
-int __cdecl fcn_0050de80(char*, Stats*);
-int __cdecl fcn_0050c710(char*, int, int);
+int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
+int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 void __cdecl fcn_004c52d0(int, int);
 void __cdecl fcn_00486500(PRODUCTION_GOODS_RECORD*);
 
@@ -270,7 +270,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		if (r == 0) {
 			continue;
 		}
-		fcn_0050de80(r, &st);
+		gm_CalcEntityInventoryStats(r, &st);
 		for (i = 0; i < st.x0; i++) {
 			id = st.x48[i];
 			if (id == 0) {
@@ -324,7 +324,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 					continue;
 				}
 				g_100b0c0[i].allocated =
-				    (int) (((float) fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
+				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
 				           (float) g_100b0c0[i].allocated);
 			}
@@ -343,7 +343,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 					continue;
 				}
 				g_100b0c0[i].allocated =
-				    (int) (((float) fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
+				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
 				           (float) g_100b0c0[i].allocated);
 			}
@@ -362,7 +362,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 					continue;
 				}
 				g_100b0c0[i].allocated =
-				    (int) (((float) fcn_0050c710(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
+				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
 				           (float) g_100b0c0[i].allocated);
 			}

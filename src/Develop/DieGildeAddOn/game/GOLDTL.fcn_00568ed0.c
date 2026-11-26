@@ -11,7 +11,7 @@ extern char* g_aed32c;
 int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl fcn_0042e410(unsigned short);
-int __cdecl fcn_004c4510(char*, int);
+int __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5530(int);
@@ -26,7 +26,7 @@ int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 char* __cdecl gm_SearchTable67(int);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_0050c710(unsigned char*, int, int);
+int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00529160(unsigned char*, char*, unsigned int, unsigned char*);
 int __cdecl fcn_00529670(char*, char*);
@@ -157,7 +157,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			p += 4;
 		} while (--n != 0);
 		countf = (float) cnt;
-		t = fcn_0050c710((unsigned char*) ent, 0xf, 1);
+		t = gm_GetBuildingTechEffect((unsigned char*) ent, 0xf, 1);
 		if ((float) ((((float) t * 0.01f + g_6629c8) *
 		              (countf * 0.1f + g_6628a0) *
 		              (total / countf)) /
@@ -209,7 +209,7 @@ void __cdecl fcn_00568ed0(char* a1)
 					fcn_00545d40(*(int*) n, -1, buf, 0, 0x5ec, (char*) 0x6a696c);
 				}
 			}
-			fcn_004c4510(ent, *(int*) (ent + 1));
+			cm_BeginPacketFieldDelta(ent, *(int*) (ent + 1));
 			cm_AppendPacketFieldDelta(4, 1, (unsigned short) (ent - g_aed32c + 0x65), obj + 4);
 			fcn_004c5360();
 			fcn_004c6b20(*(int*) (obj + 4), 5, 0);

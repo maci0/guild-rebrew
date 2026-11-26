@@ -3,7 +3,7 @@
 
 int __cdecl fcn_004f4830(int k, int* info);
 
-float __cdecl fcn_004fc520(void)
+float __cdecl gm_GetLiteracyRate(void)
 {
 	float w[7] = {0.3f, 0.25f, 0.12f, 0.1f, 0.05f, 0.08f, 0.1f};
 	float sum = 0.0f;

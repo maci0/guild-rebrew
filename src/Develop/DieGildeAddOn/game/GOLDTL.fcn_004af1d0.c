@@ -15,7 +15,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
  * addresses the 0x200 scratch buffer off ebp; section 13 of
  * archived docs/msvc6-c-shapes.md. */
 #pragma optimize("y", off)
-int __cdecl fcn_004af1d0(int mode, int a2, int a3, char* a4, int a5)
+int __cdecl hst_HandleBestesWirtshaus(int mode, int tbl, int idx, char* token_text, int text_out)
 {
 	char buf[0x200];
 	int entity = 0;
@@ -25,7 +25,7 @@ int __cdecl fcn_004af1d0(int mode, int a2, int a3, char* a4, int a5)
 	if (mode == 2)
 		return 0;
 	if (mode == 1) {
-		gm_ResolveEntityById((void**) (&entity), 0, 0, *(int*) ((char*) a2 + a3 * 8 + 4));
+		gm_ResolveEntityById((void**) (&entity), 0, 0, *(int*) ((char*) tbl + idx * 8 + 4));
 		if (entity == 0)
 			return 0;
 	} else {
@@ -43,22 +43,22 @@ int __cdecl fcn_004af1d0(int mode, int a2, int a3, char* a4, int a5)
 		if (entity == 0)
 			return 0;
 		if (mode == 0)
-			*(int*) ((char*) a2 + a3 * 8 + 4) = *(int*) ((char*) entity + 1);
+			*(int*) ((char*) tbl + idx * 8 + 4) = *(int*) ((char*) entity + 1);
 	}
 	/* The original keeps the scratch buffer pointer and its length in the
 	 * dead a2/a3 argument homes ([ebp+0xc], [ebp+0x10]) and passes their
 	 * addresses to fcn_004ae080, which is why no extra frame slot is
 	 * allocated here; with separate locals msvc6 spills them instead
 	 * (object 0x208 frame instead of 0x204). */
-	a2 = (int) buf;
-	a3 = 0x200;
-	/* The original'score zero-fill is the 24-byte hand-written block-fill prelude
+	tbl = (int) buf;
+	idx = 0x200;
+	/* The original's zero-fill is the 24-byte hand-written block-fill prelude
 	 * (archived docs/msvc6-c-shapes.md section 11, archived docs/codegen-walls.md section 6b);
 	 * recorded C probes did not emit it.  Reproduced as a block-fill with ordinary
 	 * named operands. */
 	__asm {
-		mov edi, a2
-		mov ebx, a3
+		mov edi, tbl
+		mov ebx, idx
 		xor eax, eax
 		lea ecx, [edi+edi*2]
 		and ecx, 3
@@ -73,7 +73,7 @@ int __cdecl fcn_004af1d0(int mode, int a2, int a3, char* a4, int a5)
 		add ecx, ebx
 		rep stosb
 	}
-	fcn_004ae080(a4, buf, &a2, &a3);
-	io_FormatTextBuffer((void*) a5, (int) buf, entity);
+	fcn_004ae080(token_text, buf, &tbl, &idx);
+	io_FormatTextBuffer((void*) text_out, (int) buf, entity);
 	return 1;
 }

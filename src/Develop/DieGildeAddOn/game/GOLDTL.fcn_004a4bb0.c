@@ -15,7 +15,7 @@ int __cdecl fcn_004fa5b0(int k, char* e, Query* q);
 int __cdecl fcn_00504f30(int k, int id);
 int __cdecl fcn_004a48e0(char* e, int k);
 
-int __cdecl fcn_004a4bb0(char* a1, char* e, char* a3, char* cmd, char* out, int want)
+int __cdecl ai_PrepareBuildSite(char* action, char* e, char* mode, char* cmd, char* out, int want)
 {
 	Query q;
 	int k;

@@ -20,7 +20,7 @@ int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_00529160(int, int, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
-int __cdecl fcn_0050c710(int, int, int);
+int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 int __cdecl gm_GetEntityTableEntry(int);
 int __cdecl fcn_0050dc90(int);
@@ -122,7 +122,7 @@ void __cdecl fcn_00552a60(int event)
 					v17 -= 1;
 				} while (v17);
 				v5 = fcn_0050b750(v15, g_773d75);
-				v6 = fcn_0050c710(v4, 1, 1);
+				v6 = gm_GetBuildingTechEffect(v4, 1, 1);
 				v5 = (int) (((float) v6 * 0.01f + 1.0f) * v5);
 				fcn_004c51a0(*(int*) (v18 + 4), -1,
 				    g_773d75, v5);

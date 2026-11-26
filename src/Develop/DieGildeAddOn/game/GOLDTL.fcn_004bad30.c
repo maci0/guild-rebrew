@@ -3,7 +3,7 @@
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_005c6270(void*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_004bac00(unsigned short*, int*, float);
+int __cdecl gm_DeductRandomBuildingGood(unsigned short*, int*, float);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
@@ -24,7 +24,7 @@ int __cdecl fcn_004bad30(int* request)
 		return 1;
 	if (fcn_005c6270(e, 0x290) != 0)
 		goto fail;
-	if (fcn_004bac00(e, &id, f) == 0)
+	if (gm_DeductRandomBuildingGood(e, &id, f) == 0)
 		goto fail;
 	s = gm_StartFilteredEntitySearch(1, 1, id);
 	if (s != 0) {

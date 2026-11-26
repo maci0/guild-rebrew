@@ -28,13 +28,13 @@ int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
 void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
 void __cdecl fcn_004e4c40(int a);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
-int __cdecl fcn_004e6eb0(void* buf, int n);
+int __cdecl d2_ShowMessageBox(void* buf, int n);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(void* h);
 void __cdecl fcn_004e44f0(void* h);
 void __cdecl fcn_004e4c00(void);
 void __cdecl fcn_004e4c60(void);
-void __cdecl fcn_004e4910(void);
+void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004c09b0(void);
 void __cdecl fcn_004230e0(void* h);
 void __cdecl fcn_004e4eb0(void);
@@ -107,13 +107,13 @@ void __cdecl fcn_004e3020(void* arg)
 	} else {
 		io_FormatTextBuffer(f.msg, 0x1ab1, *(unsigned short*) obj);
 	}
-	fcn_004e6eb0(f.msg, 0);
+	d2_ShowMessageBox(f.msg, 0);
 	fcn_004e48b0();
 	fcn_004e4610((void*) h2);
 	fcn_004e44f0((void*) h2);
 	fcn_004e4c00();
 	fcn_004e4c60();
-	fcn_004e4910();
+	cut_CleanupCutscene();
 	fcn_004c09b0();
 	fcn_004230e0((void*) handle);
 	fcn_004e4eb0();

@@ -6,7 +6,7 @@ int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl fcn_00533a40(void*);
 
-void __cdecl fcn_004d87b0(void* request)
+void __cdecl cut_CancelActorActions(void* request)
 {
 	char buf[0x100];
 

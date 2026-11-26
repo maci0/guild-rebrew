@@ -21,7 +21,7 @@ void __cdecl fcn_004c4ef0(unsigned int);
 int __cdecl fcn_004c51f0(int, int, short, int, char, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 int __cdecl fcn_004c4670(unsigned char, unsigned char, short, void*);
-void __cdecl fcn_004c4510(int, int);
+void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl fcn_004c5360(void);
 void __cdecl gm_AddTime(int*, int, int, int);
 
@@ -106,12 +106,12 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 					fcn_004c51f0(-1, *(int*) (ent[idx].p4 + 6), 0x179, 1, g_773d75, 0);
 					fcn_004c51a0(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) x1 * g_665e9c));
 					fcn_004c51a0(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, x1);
-					fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
+					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 					fcn_004c4670(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &x1);
 					fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
 					fcn_004c5360();
 					fcn_004c4ef0((unsigned int) g_6a5e88);
-					fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
+					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 					fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x69, &v);
 					fcn_004c5360();
 				} else {
@@ -119,12 +119,12 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 					fcn_004c51f0(-1, *(int*) (ent[idx].p8 + 6), 0x17a, 1, g_773d75, 0);
 					fcn_004c51a0(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) y1 * g_665e9c));
 					fcn_004c51a0(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, y1);
-					fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
+					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 					fcn_004c4670(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &y1);
 					fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
 					fcn_004c5360();
 					fcn_004c4ef0((unsigned int) g_6a5e88);
-					fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
+					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 					fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x69, &v);
 					fcn_004c5360();
 				}
@@ -133,12 +133,12 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 				fcn_004c51f0(-1, *(int*) (ent[idx].p4 + 6), 0x179, 1, g_773d75, 0);
 				fcn_004c51a0(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) x1 * g_665e9c));
 				fcn_004c51a0(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, x1);
-				fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
+				cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 				fcn_004c4670(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &x1);
 				fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
 				fcn_004c5360();
 				fcn_004c4ef0((unsigned int) g_6a5e88);
-				fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
+				cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 				fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x69, &v);
 				fcn_004c5360();
 			} else if (w > y1) {
@@ -147,16 +147,16 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 					fcn_004c51f0(-1, *(int*) (ent[idx].p8 + 6), 0x17a, 1, g_773d75, 0);
 					fcn_004c51a0(-1, *(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i] + 4), g_773d75, (int) ((float) y1 * g_665e9c));
 					fcn_004c51a0(*(unsigned int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ent[idx].p0 + 0x27)] + 4), -1, g_773d75, y1);
-					fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
+					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 					fcn_004c4670(4, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x65, &y1);
 					fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x6b, &v);
 					fcn_004c5360();
 					fcn_004c4ef0((unsigned int) g_6a5e88);
-					fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
+					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 					fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x69, &v);
 					fcn_004c5360();
 				} else if (w > x1) {
-					fcn_004c4510((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
+					cm_BeginPacketFieldDelta((int) ent[idx].p0, *(int*) (ent[idx].p0 + 1));
 					fcn_004c4670(2, 1, (int) *(unsigned short*) ent[idx].p0 - g_aed32c + 0x69, &v);
 					fcn_004c5360();
 				}

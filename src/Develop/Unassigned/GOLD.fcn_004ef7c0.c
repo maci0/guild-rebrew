@@ -1,6 +1,6 @@
 extern char* g_entity_type_table;
 int __cdecl gv_CheckSlotActive(void*, int);
-int __cdecl fcn_004f13d0(unsigned char*);
+int __cdecl cm_GetBuildingSlotCount(unsigned char*);
 
 /* ADDRESS: GOLD 0x004ef7c0 */
 void* __cdecl fcn_004ef7c0(void* a0, void* a1, void* a2, int (__cdecl* predicate)(void*, void*), int kind)
@@ -22,7 +22,7 @@ void* __cdecl fcn_004ef7c0(void* a0, void* a1, void* a2, int (__cdecl* predicate
 	} else if (kind == 3) {
 		end = (unsigned char*) *(int*) (group + 0x14) + ((int*) 0x5ee0b4)[type[0x247]] * 20;
 	} else if (kind == 0xff) {
-		end = (unsigned char*) *(int*) (group + 0x1c) + fcn_004f13d0((unsigned char*) a1) * 20;
+		end = (unsigned char*) *(int*) (group + 0x1c) + cm_GetBuildingSlotCount((unsigned char*) a1) * 20;
 	} else {
 		return 0;
 	}

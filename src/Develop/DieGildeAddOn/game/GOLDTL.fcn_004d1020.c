@@ -18,8 +18,8 @@ extern int g_14a9a04;
 extern int g_14a9a08;
 extern int g_14a9a0c;
 
-char* __cdecl fcn_004ce610(char* x);
-char* __cdecl fcn_004ce680(char* a1);
+char* __cdecl gm_GetEquippedCombatGear(char* x);
+char* __cdecl gm_FindEntityActiveItem(char* a1);
 char* __cdecl gm_FindOrCreateEntitySlot(char* rec, char* e);
 char __cdecl fcn_0045b990(char* map, float* pos, int* col, int* row, float* height);
 void __cdecl fcn_00533a40(char* a);
@@ -39,7 +39,7 @@ int __cdecl fcn_004d1020(char* context, char* e, char* obj, int col, int row)
 
 	kind = *(int*) (g_67a370 + 0xb0);
 	if (e == 0) goto fail;
-	x = fcn_004ce610(e);
+	x = gm_GetEquippedCombatGear(e);
 	if (obj == 0) goto fail;
 	map = *(char**) (obj + 0x184);
 	node = *(char**) (map + 0x34);
@@ -60,7 +60,7 @@ plain:
 		m.f0 = *(int*) (e + 4);
 		m.f4 = 2;
 	} else if (v == 0x15e || v == 0x160) {
-		rec = fcn_004ce680(e);
+		rec = gm_FindEntityActiveItem(e);
 		if (rec != 0 && *(int*) (rec + 0x20) <= 0) {
 			fcn_00533a40((char*) g_14a9a04);
 			return -1;
@@ -71,7 +71,7 @@ plain:
 		m.f18 = row;
 		m.f4 = 2;
 	} else if (v == 0x174) {
-		rec = fcn_004ce680(e);
+		rec = gm_FindEntityActiveItem(e);
 		if (rec != 0 && *(int*) (rec + 0x20) <= 0) {
 			fcn_00533a40((char*) g_14a9a08);
 fail:
@@ -83,7 +83,7 @@ fail:
 		m.f0 = *(int*) (e + 4);
 		m.f4 = 2;
 	} else if (v == 0x176) {
-		rec = fcn_004ce680(e);
+		rec = gm_FindEntityActiveItem(e);
 		if (rec != 0 && *(int*) (rec + 0x20) <= 0) {
 			fcn_00533a40((char*) g_14a9a0c);
 			return -1;

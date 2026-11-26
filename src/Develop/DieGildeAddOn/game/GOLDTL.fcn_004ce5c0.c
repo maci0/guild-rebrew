@@ -5,7 +5,7 @@ unsigned short* __cdecl fcn_00502cd0(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_004ce590(int);
 
-int __cdecl fcn_004ce5c0(char* obj)
+int __cdecl gm_GetUnitWeaponSpec(char* obj)
 {
 	unsigned short* p;
 	int r;

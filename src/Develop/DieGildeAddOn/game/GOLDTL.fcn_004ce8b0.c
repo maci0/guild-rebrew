@@ -1,5 +1,5 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int* __cdecl fcn_004ce610(char*);
+int* __cdecl gm_GetEquippedCombatGear(char*);
 float __cdecl fcn_004ff040(char*);
 
 
@@ -12,7 +12,7 @@ float __cdecl fcn_004ce8b0(char* e)
 
 	mult = 0.5f;
 	base = gm_GetEntitySkill(e, 3);
-	p = fcn_004ce610(e);
+	p = gm_GetEquippedCombatGear(e);
 	if (p != 0) {
 		switch (*p) {
 		case 0x158:

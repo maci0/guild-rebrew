@@ -15,11 +15,11 @@ int __cdecl fcn_00507870(char* e)
 	} else {
 		v = *(unsigned char*) (e + 0x165) - 1;
 	}
-	fcn_004c4510(e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 	fcn_004c4700(1, 1, 0x165, &v);
 	fcn_004c53a0();
 	v = 0;
-	fcn_004c4510(e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
 	fcn_004c4700(4, 1, 0x174, &v);
 	fcn_004c53a0();
 	return -1;

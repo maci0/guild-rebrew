@@ -25,7 +25,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_00529160(char* o, int a, int id, int b);
 
-void __cdecl fcn_00487e60(char* e, int k)
+void __cdecl ai_CancelBlockedActions(char* e, int k)
 {
 	char* q;
 	int found;

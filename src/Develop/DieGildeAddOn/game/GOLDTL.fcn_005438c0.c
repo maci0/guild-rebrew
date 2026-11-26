@@ -110,7 +110,7 @@ void __cdecl fcn_00512500(void);
 void __cdecl fcn_00514b50(unsigned char);
 void __cdecl init_LocalData(void);
 void __cdecl fcn_00515340(unsigned char);
-void __cdecl fcn_005153f0(void);
+void __cdecl gm_InitStartingBuildingsAndWorkers(void);
 int __cdecl ls_LoadSavegame(void*, int);
 void __cdecl fcn_0052a890(void*);
 int __cdecl fcn_0052a310(void*);
@@ -126,7 +126,7 @@ void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_005490e0(void);
-void __cdecl fcn_00549130(void);
+void __cdecl he_RestartAction03b(void);
 void __cdecl fcn_00549240(void);
 void __cdecl fcn_005491c0(void);
 void __cdecl fcn_005459a0(int);
@@ -326,7 +326,7 @@ void __cdecl fcn_005438c0(int a0)
 			d2_SetProgressPercent(0, 100);
 			d2_SetProgressPercent(0, 100);
 			if (g_7747f8 != 0) {
-				fcn_005153f0();
+				gm_InitStartingBuildingsAndWorkers();
 			}
 		} else {
 			if (g_14cbca0 == -1) {
@@ -512,7 +512,7 @@ void __cdecl fcn_005438c0(int a0)
 			if ((g_7747b0 & 8) ||
 			    ((g_14cbca0 != -1) && (g_77494c & 8))) {
 				fcn_005490e0();
-				fcn_00549130();
+				he_RestartAction03b();
 				fcn_00549240();
 			}
 			fcn_005491c0();

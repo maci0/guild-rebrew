@@ -4,7 +4,7 @@
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl fcn_004cfc40(char*, int, int);
 
-int __cdecl fcn_004cceb0(char* request, char* output)
+int __cdecl cm_ExReduceLifespan(char* request, char* output)
 {
 	char* target;
 

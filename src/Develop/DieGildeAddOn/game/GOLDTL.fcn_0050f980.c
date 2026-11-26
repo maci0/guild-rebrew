@@ -1,8 +1,8 @@
 extern unsigned char* g_entity_ptr;
 extern unsigned char* lpGebaeudePROT;
-int __cdecl fcn_0050c710(void*, int, int);
+int __cdecl gm_GetBuildingTechEffect(void*, int, int);
 int __cdecl fcn_004e8b40(int, void*);
-int __cdecl fcn_0050e4a0(int);
+int __cdecl gm_FindPublicBuilding(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl fcn_004e7990(void*, void*, int, unsigned int);
 int __cdecl fcn_005c6270(void*, int);
@@ -39,15 +39,15 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
     firstOffset = a0 * 0x21c;
     v3 = *(int*) (firstOffset + 0x7f4e10);
     if (v3) {
-        score = (float) fcn_0050c710((void*) v3, 4, 1);
+        score = (float) gm_GetBuildingTechEffect((void*) v3, 4, 1);
     }
     if (*(char*) (firstOffset + 0x7f4e06)) {
         fcn_004e8b40(*(unsigned char*) (firstOffset + 0x7f4e06), q);
         v16 = *(int*) (q + 4);
         if (v16 == 4) {
-            v3 = fcn_0050e4a0(1);
+            v3 = gm_FindPublicBuilding(1);
             if (v3) {
-                score = (float) fcn_0050c710((void*) v3, 4, 1) + score;
+                score = (float) gm_GetBuildingTechEffect((void*) v3, 4, 1) + score;
             }
         }
     }
@@ -70,7 +70,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
         }
         v3 = (int) gm_StartFilteredEntitySearch(1, 5, v5);
         if (v3 && !(*(unsigned char*) (v3 + 0x5a) & 1)) {
-            score = (float) fcn_0050c710((void*) v3, 4, 1) + score;
+            score = (float) gm_GetBuildingTechEffect((void*) v3, 4, 1) + score;
         }
     }
     v13 = (float) (*(char*) (a0 * 0x300 + 0x869480 + a1) + 0x7f) *

@@ -40,13 +40,13 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00533a60(int, int, int *, int, ...);
-int __cdecl fcn_00510400(char *);
+int __cdecl gm_CountBuildingExtensions(char *);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005ca560(ITEM *);
 void __cdecl fcn_005ca740(int, int, int, int, ITEM *, int);
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_004e99c0(int);
-int __cdecl fcn_00525f60(char *, int);
+int __cdecl amt_GetOfficeRank(int);
+int __cdecl d2_CheckActionBlocker(char *, int);
 int __cdecl io_FormatTextBuffer(char *, int, ...);
 float __cdecl fcn_00507e70(char *, char *, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
@@ -102,7 +102,7 @@ void __cdecl fcn_005e53b0(void *arg)
     fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, g_14b59fc, g_14b5a00);
     do {
         if (refresh) {
-            count = fcn_00510400((char *)arg) + 1;
+            count = gm_CountBuildingExtensions((char *)arg) + 1;
             last = g_6b7fac;
             refresh = 0;
             d2_SetForm(window, 1);
@@ -122,7 +122,7 @@ void __cdecl fcn_005e53b0(void *arg)
                 } else {
                     ((D2_CONTROL_TL*) g_1015ea0)[items[i].control].value_060 = 1;
                 }
-                cost += (items[i].entity && i) ? (fcn_004e99c0((unsigned char)items[i].entity[0x166]) / 3 + 2) : 0;
+                cost += (items[i].entity && i) ? (amt_GetOfficeRank((unsigned char)items[i].entity[0x166]) / 3 + 2) : 0;
             }
             d2_SetForm(window, 2);
             io_AppendText((int)g_6811b0, cost);
@@ -133,7 +133,7 @@ void __cdecl fcn_005e53b0(void *arg)
         else if (g_100f1dc != -1) {
             if (d2_CurrentElementId == buttons[0]) {
                 house = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
-                if (fcn_00525f60(house, cost) == 1) {
+                if (d2_CheckActionBlocker(house, cost) == 1) {
                     p = items[0].entity;
                     io_FormatTextBuffer(text, 0x41bf, *(unsigned short *)p);
                     n = 0;

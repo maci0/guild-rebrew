@@ -25,7 +25,7 @@ int __cdecl he_StartHandlungSearch();
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_004c4450(int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -132,7 +132,7 @@ done:;
 			if (k < 4) {
 				o = he_StartHandlungSearch(1, 1, b[k]);
 				if (o != 0) {
-					if (fcn_00525f60((char*) &g_7f4ca0 + 0x21c
+					if (d2_CheckActionBlocker((char*) &g_7f4ca0 + 0x21c
 					    * (unsigned int) *(unsigned short*) &g_774970, 2) != 0) {
 						*(pos14_7f4c00*) ((char*) o + 0x52) =
 						    *(pos14_7f4c00*) &gm_GameTime;

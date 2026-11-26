@@ -12,9 +12,9 @@ extern int g_14aad38;
 extern int g_14aac9c;
 extern char g_7d4190[];
 
-int __cdecl fcn_004eb260(Ent5aa3* e);
+int __cdecl amt_CheckZunftLevel2Eligibility(Ent5aa3* e);
 void __cdecl fcn_00526120(int, int);
-void __cdecl fcn_00525f60(Ent5aa3* e, int);
+void __cdecl d2_CheckActionBlocker(Ent5aa3* e, int);
 void __cdecl fcn_005aa120(void);
 void __cdecl fcn_005bdc30(int, char*, int, void (__cdecl*)(void), int);
 
@@ -26,13 +26,13 @@ void __cdecl fcn_005aa390(void)
 	int flen;
 	int r;
 
-	r = fcn_004eb260(&((Ent5aa3*)g_7f4ca0)[g_774970]);
+	r = amt_CheckZunftLevel2Eligibility(&((Ent5aa3*)g_7f4ca0)[g_774970]);
 	if (r != 1) {
 		if (r == -1) {
 			fcn_00526120(g_14aad38, 0);
 			return;
 		}
-		fcn_00525f60(&((Ent5aa3*)g_7f4ca0)[g_774970], 5);
+		d2_CheckActionBlocker(&((Ent5aa3*)g_7f4ca0)[g_774970], 5);
 		return;
 	}
 	flen = 0x50;

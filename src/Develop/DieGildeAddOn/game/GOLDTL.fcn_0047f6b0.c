@@ -102,7 +102,7 @@ void __cdecl fcn_00487000(char*);
 void __cdecl fcn_00487470(char*);
 void __cdecl fcn_00487970(char*, char*, int);
 void __cdecl fcn_00487c00(char*, char*, int);
-void __cdecl fcn_00487e60(char*, int);
+void __cdecl ai_CancelBlockedActions(char*, int);
 void __cdecl fcn_00487f90(int*);
 void __cdecl ai_MeisterCollectTrans(char*);
 void __cdecl ai_MeisterTrade(char*, char*);
@@ -371,9 +371,9 @@ after:
 		}
 	}
 
-	fcn_00487e60(a, 4);
-	fcn_00487e60(a, 8);
-	fcn_00487e60(a, 3);
+	ai_CancelBlockedActions(a, 4);
+	ai_CancelBlockedActions(a, 8);
+	ai_CancelBlockedActions(a, 3);
 
 	st.avail = 0;
 	for (j = 0; j < 0x300; j++) {

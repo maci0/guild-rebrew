@@ -8,7 +8,7 @@ char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl gm_RemoveObjectByType(void* list, unsigned int id);
 void __cdecl gm_KillSpieler(unsigned int idx, int param);
 
-int __cdecl fcn_004eec60(int cmd, int* ids, char* parent)
+int __cdecl ahm_HandleFireCommand(int cmd, int* ids, char* parent)
 {
 	unsigned short* entity;
 	char* query;

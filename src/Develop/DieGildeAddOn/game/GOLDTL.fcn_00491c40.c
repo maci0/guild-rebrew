@@ -5,7 +5,7 @@
 unsigned char __cdecl fcn_004f97a0(int a);
 int __cdecl fcn_004f4830(int idx, void* dst);
 
-int __cdecl fcn_00491c40(char* e, int unused, int* out)
+int __cdecl ai_EvalStrafrechtLaw17(char* e, int unused, int* out)
 {
 	int info[9];
 	float m;

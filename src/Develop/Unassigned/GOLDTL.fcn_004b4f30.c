@@ -5,7 +5,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 double __cdecl fcn_004fc460(float*);
-int __cdecl fcn_004b52d0(int, int, int);
+int __cdecl ai_FilterCandidateLimit(int, int, int);
 
 int __cdecl fcn_004b4f30(int a1, int a2, char* a3)
 {
@@ -15,6 +15,6 @@ int __cdecl fcn_004b4f30(int a1, int a2, char* a3)
 		return 0;
 	fcn_004fc460(buf);
 	if (*(int*) (a3 + 0x14) < buf[6])
-		return fcn_004b52d0(a2, 0, *(int*) (a3 + 0x18));
-	return fcn_004b52d0(a2, 1, *(int*) (a3 + 0x18));
+		return ai_FilterCandidateLimit(a2, 0, *(int*) (a3 + 0x18));
+	return ai_FilterCandidateLimit(a2, 1, *(int*) (a3 + 0x18));
 }

@@ -12,7 +12,7 @@ void __cdecl fcn_005438c0(void);
 int __cdecl fcn_0057e0a0(void);
 int __cdecl d2_OpenTutorialMainDialog(void);
 
-void __cdecl fcn_0055af40(char* o)
+void __cdecl he_UpdateTutorialEvent(char* o)
 {
 	if (g_774964 != 0) {
 		switch (*(int*) (o + 0x70)) {

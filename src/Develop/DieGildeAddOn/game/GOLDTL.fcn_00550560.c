@@ -8,7 +8,7 @@ typedef struct {
 
 int __cdecl gm_RandomMod(int);
 
-void __cdecl fcn_00550560(char* e)
+void __cdecl he_InitEvent053(char* e)
 {
 	*(int*) (e + 0xb0) = -1;
 	*(Rec14*) (e + 0x52) = *(Rec14*) (e + 0x44);

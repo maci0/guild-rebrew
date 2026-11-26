@@ -4,7 +4,7 @@ int __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int); int __cdecl
 int __cdecl fcn_0045bad0(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(int, int, int, float*);
 int __cdecl fcn_004cef70(int, int);
-int* __cdecl fcn_004ce610(int);
+int* __cdecl gm_GetEquippedCombatGear(int);
 int __cdecl fcn_0064f170(char*, char*, int);
 #include <string.h>
 
@@ -56,7 +56,7 @@ void __cdecl fcn_004d06d0(void)
 					if ((fcn_004cef70(*g_772f24, i) & 0x800) != 0
 						&& g_14cf736 == 0) {
 						kind = 0;
-						meta = fcn_004ce610(i);
+						meta = gm_GetEquippedCombatGear(i);
 						if (meta != 0) {
 							if (*meta == 0x160) code = 0x18;
 							else if (*meta == 0x174) code = 0x19;

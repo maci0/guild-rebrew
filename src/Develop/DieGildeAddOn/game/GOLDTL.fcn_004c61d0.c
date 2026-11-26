@@ -40,7 +40,7 @@ typedef struct {
 slot80* __cdecl gm_FindSlotById(int, int);
 int __cdecl fcn_004c4330(msg9c*);
 
-int __cdecl fcn_004c61d0(slot80* e, unsigned char kind)
+int __cdecl cm_SendMarktSlotDelta(slot80* e, unsigned char kind)
 {
 	slot80 l;
 	msg9c m;

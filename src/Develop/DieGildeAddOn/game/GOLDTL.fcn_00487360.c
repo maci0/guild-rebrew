@@ -17,9 +17,9 @@ extern unsigned short g_7f4c04;
 extern unsigned char* lpGebaeudePROT;
 
 unsigned short __cdecl gm_RandomMod(int n);
-void __cdecl fcn_004f36f0(char* o);
+void __cdecl gv_AssignGraveyardField(char* o);
 
-void __cdecl fcn_00487360(char* e)
+void __cdecl ai_TryHireWorker(char* e)
 {
 	short k;
 	char* o;
@@ -58,5 +58,5 @@ void __cdecl fcn_00487360(char* e)
 			return;
 		}
 	}
-	fcn_004f36f0(*(char**) (e + 0x16c));
+	gv_AssignGraveyardField(*(char**) (e + 0x16c));
 }

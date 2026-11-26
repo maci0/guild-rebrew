@@ -60,7 +60,7 @@ int __cdecl ai_RunKreditNehmen(char* actor, char* action, char* terms)
 			fcn_004c5150(*(int*) (actor + 4), *(int*) (p1 + 1), (*(char*)&g_773d75), *(int*) (terms + 4));
 			fcn_004c5530(msg);
 			if (p2 != 0) {
-				fcn_004c4510(p2, *(int*) (p2 + 1));
+				cm_BeginPacketFieldDelta(p2, *(int*) (p2 + 1));
 				fcn_004c4670(4, 1, p2 - g_aed32c + 0x39, &v);
 				fcn_004c5360();
 			}

@@ -3,9 +3,9 @@ extern char* g_aed32c;
 
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_00525f60(char*, int);
+int __cdecl d2_CheckActionBlocker(char*, int);
 float __cdecl gm_GetEntitySkill(char*, int);
-void __cdecl fcn_004c4510(char*, int);
+void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c6ae0(int, int);
@@ -39,7 +39,7 @@ void __cdecl fcn_005aee90(char* rec)
 	if (fcn_00526120(text, 0x11) == 0) {
 		goto done;
 	}
-	if (fcn_00525f60(ent, *(unsigned char*) (ent + 0x1b1) * 2) == 0) {
+	if (d2_CheckActionBlocker(ent, *(unsigned char*) (ent + 0x1b1) * 2) == 0) {
 		goto done;
 	}
 	f = gm_GetEntitySkill(ent, 4);
@@ -50,7 +50,7 @@ void __cdecl fcn_005aee90(char* rec)
 	if (gm_RandomFloat01() < f) {
 		int flags = -1;
 
-		fcn_004c4510(rec, *(int*) (rec + 1));
+		cm_BeginPacketFieldDelta(rec, *(int*) (rec + 1));
 		cm_AppendPacketFieldDelta(4, 1, (int) (rec - g_aed32c) + 0x65, &flags);
 		fcn_004c5360();
 		fcn_004c6b20(*(int*) (ent + 4), -(int) *(unsigned char*) (ent + 0x1b1), 0);

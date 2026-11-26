@@ -39,8 +39,8 @@ int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl fcn_004fa5b0(int a, char* e, void* buf);
 float __cdecl fcn_00507e70(char* a, char* b, int i);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_0055c0f0(char* obj, char* e);
-int __cdecl fcn_0055c0a0(char* obj, char* e);
+int __cdecl he_HasNoActiveEvent04b(char* obj, char* e);
+int __cdecl he_HasNoActiveAction0x2e(char* obj, char* e);
 int __cdecl fcn_0055c050(int* p);
 
 /* ADDRESS: GOLDTL 0x00499090 */
@@ -134,8 +134,8 @@ int __cdecl fcn_00499090(int who, char* e, int arg, Msg* o1, Msg* o2)
 								}
 								return r;
 							}
-							if (fcn_0055c0f0(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
-								if (fcn_0055c0a0(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
+							if (he_HasNoActiveEvent04b(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
+								if (he_HasNoActiveAction0x2e(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
 									if (fcn_0055c050((int*)targetRec) != 0) {
 										if (fcn_00579640(g_7f4ca0 + *(unsigned short*)(targetRec + 0x27) * 0x21c, e) != 0) {
 											o1->kind = 4;

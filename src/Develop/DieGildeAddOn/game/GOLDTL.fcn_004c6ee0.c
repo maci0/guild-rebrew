@@ -6,7 +6,7 @@ int __cdecl cm_ResolveSpecialEntityId(char*, int);
 
 int __cdecl gm_QueryEntitySum(int, char);
 
-int __cdecl fcn_004c6ee0(char* x)
+int __cdecl cm_ChkMoveCredits(char* x)
 {
 	char* e1;
 	char* e2;

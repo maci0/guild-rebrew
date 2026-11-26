@@ -21,7 +21,7 @@ extern int __cdecl he_StartHandlungSearch(int, int, int);
 extern int __cdecl gm_SearchTable67(int);
 extern int __cdecl cut_FindCutsceneById(int);
 extern void __cdecl d3_SelectSceneContext(int, int);
-extern void __cdecl fcn_005290d0(char*);
+extern void __cdecl gm_CountBuildingWorkers(char*);
 extern void __cdecl fcn_00573e10(char*);
 extern void __cdecl fcn_00510100(void);
 extern char *gm_CityEntity, *g_773d78;
@@ -156,7 +156,7 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 			continue;
 		}
 		if (*(unsigned char*) r == 0x14) {
-			fcn_005290d0(r);
+			gm_CountBuildingWorkers(r);
 			*(unsigned char*) (r + 0xac) =
 			    *(unsigned char*) (r + 0x14) + *(unsigned char*) (r + 0x18);
 		}

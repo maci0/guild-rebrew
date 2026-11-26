@@ -10,9 +10,9 @@ extern stamp14 g_68bf38;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl ch_CreateQueuedAction(int, void*, int, int, int);
-void __cdecl fcn_004d4ec0(void);
+void __cdecl ch_HideAttachedCharacter(void);
 
-void __cdecl fcn_004d85f0(int* a)
+void __cdecl cut_QueueHideCharacter(int* a)
 {
 	char* e;
 	char* o;
@@ -20,7 +20,7 @@ void __cdecl fcn_004d85f0(int* a)
 	if (a[1] == 0 || a[0] == -1)
 		return;
 	e = gm_LookupEntityRecordIn32SlotTable(a[0]);
-	o = ch_CreateQueuedAction(*(int*) (e + 0x184), fcn_004d4ec0, 5, 0x2e, 1);
+	o = ch_CreateQueuedAction(*(int*) (e + 0x184), ch_HideAttachedCharacter, 5, 0x2e, 1);
 	*(char**) (o + 0x17c) = e;
 	*(stamp14*) (o + 0xf0) = g_68bf38;
 }

@@ -31,8 +31,8 @@ int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl fcn_004c6680(int, int, int, int);
 int __cdecl fcn_004c6940(int, int, Ev_4d89c0*);
-int __cdecl fcn_004ce610(int);
-int __cdecl fcn_004ce680(int);
+int __cdecl gm_GetEquippedCombatGear(int);
+int __cdecl gm_FindEntityActiveItem(int);
 int __cdecl gm_FindOrCreateEntitySlot(int, int);
 int __cdecl fcn_004cec00(int, int, int*, int*);
 float __cdecl fcn_004cefb0(int, unsigned int);
@@ -64,9 +64,9 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 	ev.target = *(unsigned int*) (a2 + 4);
 	if (v2 == 1 || v2 == 2 || v2 == 3)
 		ev.busy = 1;
-	p = (int*) fcn_004ce610(a1);
+	p = (int*) gm_GetEquippedCombatGear(a1);
 	if ((p[0x16] == 1 || p[0x16] == 2)
-	    && (w = fcn_004ce680(actor)) != 0
+	    && (w = gm_FindEntityActiveItem(actor)) != 0
 	    && *(int*) (w + 0x20) <= 0)
 		goto fail;
 	v8 = p[0];
@@ -115,7 +115,7 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 		if (*(int*) (v8 + 8) == -1 || fcn_004c4450(*(int*) (v8 + 8))) {
 			*(unsigned int*) (v8 + 8) = 0xffffffff;
 			if (*(int*) (v8 + 4) == 0) {
-				w = fcn_004ce680(a2);
+				w = gm_FindEntityActiveItem(a2);
 				if (w != 0 && *(int*) (w + 0x20) > 0)
 					*(unsigned int*) (v8 + 8) = fcn_004d1020(v9, a2, actor, 0, 0);
 			}

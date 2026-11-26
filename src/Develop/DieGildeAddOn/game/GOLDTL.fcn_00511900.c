@@ -85,7 +85,7 @@ void __cdecl fcn_00511900(int count, int size, int* faces)
 	for (i = 0; i < count; i++) {
 		p = fcn_004c4480(ids[i]);
 		if (g_7e1fa0[i] != 2) {
-			fcn_004c4510((char*) p, p->id);
+			cm_BeginPacketFieldDelta((char*) p, p->id);
 			for (j = 0; j < 5; j++) {
 				unsigned char b;
 

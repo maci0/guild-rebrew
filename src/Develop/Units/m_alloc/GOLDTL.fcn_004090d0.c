@@ -13,7 +13,7 @@ char __cdecl ch_FindWalkableCell(char*, float*, float*, int, int, int*, int*, in
 unsigned short __cdecl fcn_00421350(struct path_421350*, char*, int, int, int, int, int);
 void __cdecl m_FreeTracked(int);
 int __cdecl m_alloc(int, char*);
-int __cdecl fcn_00407760(char*, void*, char*, void*);
+int __cdecl ch_DownsamplePath(char*, void*, char*, void*);
 
 /* ADDRESS: GOLDTL 0x004090d0 */
 unsigned int __cdecl fcn_004090d0(int self)
@@ -83,7 +83,7 @@ unsigned int __cdecl fcn_004090d0(int self)
 		__asm { int 3 }
 	}
 	*(int*) (self + 0xf0) =
-	    fcn_00407760((char*) v1, (void*) 0x14d0c20, (char*) *(int*) (self + 0xf4),
+	    ch_DownsamplePath((char*) v1, (void*) 0x14d0c20, (char*) *(int*) (self + 0xf4),
 	                 v4);
 	v1 = *(int*) (self + 0x110);
 	*(int*) (self + 0xf8) = 0;

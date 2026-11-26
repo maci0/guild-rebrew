@@ -14,7 +14,7 @@ typedef struct
 // SIZE 0x18
 
 int __cdecl ahm_CheckFlag(char* p);
-int __cdecl fcn_004ec950(char* p, int id);
+int __cdecl ahm_FindRecipeSlot(char* p, int id);
 int __cdecl fcn_004c6d30(Msg18* m);
 
 int __cdecl fcn_004ee950(char* p, int id)
@@ -24,7 +24,7 @@ int __cdecl fcn_004ee950(char* p, int id)
 	if (!ahm_CheckFlag(p)) {
 		return -1;
 	}
-	if (!fcn_004ec950(p, id)) {
+	if (!ahm_FindRecipeSlot(p, id)) {
 		return -1;
 	}
 	memset(&m, 0, sizeof(m));

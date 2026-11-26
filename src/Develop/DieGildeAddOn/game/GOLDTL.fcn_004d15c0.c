@@ -22,9 +22,9 @@ typedef struct {
 
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
 int __cdecl fcn_004ce270(char*, int);
-int __cdecl fcn_004d1250(char*, char*, char*);
-int __cdecl fcn_004d1320(char*, char*, char*);
-int __cdecl fcn_004d13d0(char*, char*, char*);
+int __cdecl gm_IssueEscapeOrder(char*, char*, char*);
+int __cdecl cut_AssignConquerTarget(char*, char*, char*);
+int __cdecl he_QueueTradeWareCommand(char*, char*, char*);
 int __cdecl fcn_004d1020(char*, char*, char*, int, int);
 pkt2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl fcn_004c67c0(int, pkt2c*);
@@ -53,17 +53,17 @@ char __cdecl fcn_004d15c0(char* context, char* targetEntity)
 				}
 			} else {
 				if (strcmp((char*) g_7746a0, "sp_ESCAPE") == 0) {
-					fcn_004d1250(context, targetEntity, (char*) g_7746a0);
+					gm_IssueEscapeOrder(context, targetEntity, (char*) g_7746a0);
 					r = 1;
 					goto end;
 				}
 				if (strncmp((char*) g_7746a0, "sp_CONQUER", 10) == 0) {
-					fcn_004d1320(context, targetEntity, (char*) g_7746a0);
+					cut_AssignConquerTarget(context, targetEntity, (char*) g_7746a0);
 					r = 1;
 					goto end;
 				}
 				if (strncmp((char*) g_7746a0, "WARE", 4) == 0) {
-					fcn_004d13d0(context, targetEntity, (char*) g_7746a0);
+					he_QueueTradeWareCommand(context, targetEntity, (char*) g_7746a0);
 					r = 1;
 					goto end;
 				}

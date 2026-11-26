@@ -10,7 +10,7 @@ void __cdecl d2_SetElementFont(int i, int v);
 void __cdecl fcn_0046f9b0(int element, int a2);
 char* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 char* __cdecl gm_EntityAccumulate(int entity);
-int __cdecl fcn_0050c490(char* a, void** out);
+int __cdecl gm_CollectEntityCarts(char* a, void** out);
 void __cdecl io_AppendText(int a1, ...);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 
@@ -37,7 +37,7 @@ void __cdecl fcn_005b5eb0(int windowContext, char* entityName)
     io_AppendText(0x6811b0);
     io_AppendText(0x1a1f);
     d2_SetForm(*(int*) (windowContext + 0x234), 3);
-    v = fcn_0050c490(entityName, (void**) 0x777cc4);
+    v = gm_CollectEntityCarts(entityName, (void**) 0x777cc4);
     *(int*) 0x777cc0 = v;
     if (v > 3) {
         v = 3;

@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_00500d60(int*, char*);
 void __cdecl fcn_004fec10(int);
-void __cdecl fcn_00501fe0(int);
+void __cdecl cm_SendRandomMarktSlotDelta(int);
 int __cdecl fcn_004ff8c0(int, int);
 int __cdecl fcn_004ff950(int, int);
 float __cdecl fcn_004ffa10(int, int);
@@ -105,6 +105,6 @@ void __cdecl fcn_004ff550(int city, int* date)
     }
     if (*(int*) 0x1460ae0 == -1) {
         fcn_004fec10(city);
-        fcn_00501fe0(city);
+        cm_SendRandomMarktSlotDelta(city);
     }
 }

@@ -29,7 +29,7 @@ extern unsigned char g_773d75;
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 float __cdecl eval_ObjektPreis2Credits(int id, int k);
 
-int __cdecl fcn_004a40c0(Calc* p)
+int __cdecl ai_EvalRecipePriceRatios(Calc* p)
 {
 	int i;
 	int k;

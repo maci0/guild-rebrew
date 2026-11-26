@@ -5,7 +5,7 @@ void __cdecl fcn_004e4730(char*);
 void __cdecl cut_WaitTicks(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004e48b0(void);
-void __cdecl fcn_004e4910(void);
+void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004e3640(void);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
@@ -63,7 +63,7 @@ void __cdecl fcn_004e4180(char* event)
 	}
 	if (fallback) {
 		fcn_004e48b0();
-		fcn_004e4910();
+		cut_CleanupCutscene();
 	}
 	fcn_004e3640();
 }

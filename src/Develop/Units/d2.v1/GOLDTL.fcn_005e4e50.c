@@ -24,7 +24,7 @@ extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl fcn_004f65a0(ENTITY_RECORD*, int, int*, int*);
-int __cdecl fcn_0050c710(int, int, int);
+int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -57,7 +57,7 @@ void __cdecl fcn_005e4e50(ENTITY_RECORD* other)
 	h = fcn_00470820(0, 0, s_6ad3c4);
 	found = fcn_004f65a0(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 4, list, &count);
 	if ((*(int*)&g_7746c4)) {
-		max = fcn_0050c710((*(int*)&g_7746c4), 0x24, 1);
+		max = gm_GetBuildingTechEffect((*(int*)&g_7746c4), 0x24, 1);
 	} else {
 		max = 1;
 	}

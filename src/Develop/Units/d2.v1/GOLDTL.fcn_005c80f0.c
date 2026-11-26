@@ -111,7 +111,7 @@ void __cdecl d2_ChooseWappen(void)
 			me_h = &((House5c80*)g_7f4ca0)[g_774970];
 			district = g_102cbc4[grp].sel + DISTRICT0;
 			found = 0;
-			fcn_004c4510((char*) me_h, me_h->handle);
+			cm_BeginPacketFieldDelta((char*) me_h, me_h->handle);
 			fcn_004c4700(4, 1, (char*) me_h - g_aed32c + 0x54, (char*) &district);
 			r = fcn_004c53a0();
 			while (fcn_004c4450(r) == 0) {

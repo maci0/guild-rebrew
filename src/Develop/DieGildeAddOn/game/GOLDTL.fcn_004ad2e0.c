@@ -8,7 +8,7 @@ typedef struct Hit4ad2e0 {
 } Hit4ad2e0;
 
 void __cdecl fcn_004ad4d0(int a1);
-char* __cdecl fcn_004e9110(int kind);
+char* __cdecl amt_GetOfficeHolderRecord(int kind);
 float __cdecl fcn_004ad500(unsigned char* a1, unsigned short* a2, int a3, int a4);
 void __cdecl fcn_004c5420(int a1, int a2, int a3, int a4, int a5);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
@@ -44,7 +44,7 @@ void __cdecl fcn_004ad2e0(void)
 	idx--;
 	v6 = *(int*) (idx * 4 + 0x664e34);
 	fcn_004ad4d0(idx);
-	obj = fcn_004e9110(v4);
+	obj = amt_GetOfficeHolderRecord(v4);
 	if (obj == 0) {
 		return;
 	}

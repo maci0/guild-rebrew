@@ -13,7 +13,7 @@ extern char* g_772904;
 void *__cdecl fcn_004be2a0(void *);
 void *__cdecl fcn_004be1f0(void *);
 int __cdecl fcn_004be340(void *);
-void __cdecl fcn_004be280(void *);
+void __cdecl rt_FreeRoutePoints(void *);
 void __cdecl fcn_004be3d0(void *, void *, void *, void *);
 void __cdecl fcn_004be530(void);
 void __cdecl fcn_004bf1b0(int, void *);
@@ -72,7 +72,7 @@ int __cdecl fcn_004bfe00(char *obj)
 	}
 	head = g_772908;
 	if (head == 0) {
-		changed = 1; fcn_004c4510(obj, *(int *) (obj + 2));
+		changed = 1; cm_BeginPacketFieldDelta(obj, *(int *) (obj + 2));
 		fcn_004c4700(1, 1, (int) (obj - g_aed32c) + 0x33, &changed);
 		fcn_004c53a0();
 		head = (int) fcn_004be1f0(0);
@@ -151,7 +151,7 @@ int __cdecl fcn_004bfe00(char *obj)
 		fcn_004c6e20((int) obj, (void *) g_772908);
 	} else {
 		changed = 0; fcn_004c6ea0((int) obj);
-		fcn_004c4510(obj, *(int *) (obj + 2));
+		cm_BeginPacketFieldDelta(obj, *(int *) (obj + 2));
 		fcn_004c4700(1, 1, (int) (obj - g_aed32c) + 0x33, &changed);
 		fcn_004c53a0();
 	}
@@ -160,6 +160,6 @@ int __cdecl fcn_004bfe00(char *obj)
 		d2_ClearRadioGroup(g_6816d8);
 		g_6816d8 = -1;
 	}
-	fcn_004be280((void *) g_772908);
+	rt_FreeRoutePoints((void *) g_772908);
 	return 0;
 }

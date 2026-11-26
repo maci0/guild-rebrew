@@ -19,12 +19,12 @@ int __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_004c6b20(int, int, int);
-void __cdecl fcn_004c4510(void*, int);
+void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5980(void*);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
-int __cdecl fcn_004e8240(unsigned char, int, int, int, int);
+int __cdecl amt_SendOfficeCommand(unsigned char, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004f6850 */
 void __cdecl fcn_004f6850(unsigned short* entity, int action)
@@ -101,14 +101,14 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		fcn_004c6b20(*(int*) (entity + 2), 1, 0);
 		return;
 	case 5:
-		fcn_004e8240(((char*) entity)[0x166], 0, 0, 4, 0xff);
+		amt_SendOfficeCommand(((char*) entity)[0x166], 0, 0, 4, 0xff);
 		return;
 	case 6:
 		fcn_004c6b20(*(int*) (entity + 2), 2, 0);
 		return;
 	case 7:
 		level = (char) (((unsigned char*) entity)[0xd] > 2 ? 2 : 1);
-		fcn_004c4510(entity, *(int*) (entity + 2));
+		cm_BeginPacketFieldDelta(entity, *(int*) (entity + 2));
 		cm_AppendPacketFieldDelta(1, 1, 0xd, &level);
 		fcn_004c5360();
 		return;
@@ -153,7 +153,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		if (srv_GetEntityOfficeSlot((unsigned char*) entity, b9 + 0x12c, b9) == 0) {
 			return;
 		}
-		fcn_004e8240(*(int*) b9, 0, 0, 3, 0xff);
+		amt_SendOfficeCommand(*(int*) b9, 0, 0, 3, 0xff);
 		return;
 	default:
 		return;

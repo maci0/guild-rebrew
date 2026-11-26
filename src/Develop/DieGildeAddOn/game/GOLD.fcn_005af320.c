@@ -65,7 +65,7 @@ int __cdecl fcn_00472380(int, ...);
 int __cdecl fcn_00466330(int, int);
 int __cdecl fcn_0050ddf0(int, int);
 void __cdecl fcn_0051af00(int, int, ...);
-int __cdecl fcn_004c4510(char*, int);
+int __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl fcn_004c4700(int, int, int, void*);
 void __cdecl fcn_004c53a0(void);
 void __cdecl fcn_00533a40(int);
@@ -113,7 +113,7 @@ int __cdecl fcn_005bdc30(int, int, int, int, int);
 int __cdecl gm_CheckEntityType(int);
 int __cdecl fcn_004c35f0(void);
 int __cdecl fcn_005ba0e0(int, int, int, int, int, float, int, int);
-void __cdecl fcn_0050de80(int, int*);
+void __cdecl gm_CalcEntityInventoryStats(int, int*);
 int __cdecl main_RunFrameLoop(void*, int);
 
 /* One 0xf0-byte inventory entity slot. Only the eight bytes at +0x0c..+0x18
@@ -737,7 +737,7 @@ l_slot:
 	if (idx == 0) {
 		goto l_da9;
 	}
-	fcn_0050de80(idx, (int*) &f.v158);
+	gm_CalcEntityInventoryStats(idx, (int*) &f.v158);
 	if (f.v158 > 0) {
 		j = 0;
 		do {
@@ -775,7 +775,7 @@ l_slot:
 		*(signed char*) (idx + 0x28) =
 		    (signed char) (((int) (*(signed char*) (idx + 0x28)) + 1) % 3);
 		((char*) &f.v5c)[3] = *(signed char*) (idx + 0x28);
-		fcn_004c4510((char*) idx, *(int*) (idx + 2));
+		cm_BeginPacketFieldDelta((char*) idx, *(int*) (idx + 2));
 		fcn_004c4700(1, 1, 0x28, (void*) (((char*) &f.v5c) + 3));
 		fcn_004c53a0();
 	} else {
@@ -805,7 +805,7 @@ l_slot_handles:
 		}
 		*(int*) ((int) g_00f8f080 + k + 0x2c) = (e->f08 != 0) ? 1 : 0;
 	}
-	fcn_0050de80(idx, (int*) &f.v158);
+	gm_CalcEntityInventoryStats(idx, (int*) &f.v158);
 	d2_SetForm(f.v2c, 2);
 	for (f.v20 = 0; f.v20 < f.v158; f.v20++) {
 		for (j = 0; j < *(int*) &f.v15C; j++) {

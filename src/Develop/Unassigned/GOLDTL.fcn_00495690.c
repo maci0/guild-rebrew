@@ -4,7 +4,7 @@ extern AM_METHOD g_1008540[];
 extern char* g_77261c;
 
 void __cdecl fcn_004c47e0(void*);
-void __cdecl fcn_004c4510(void*, int);
+void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c53e0(void);
@@ -37,7 +37,7 @@ int __cdecl fcn_00495690(int a0)
 				fcn_004c4820(0xd, 500.0f);
 				if (g_77261c && *(int*) (g_77261c + 4) == b->unk_210) {
 					*(unsigned char*) &a0 = 2;
-					fcn_004c4510(b, b->entity_id);
+					cm_BeginPacketFieldDelta(b, b->entity_id);
 					fcn_004c4670(1, 1, 0x215, &a0);
 					fcn_004c5360();
 				}
@@ -45,7 +45,7 @@ int __cdecl fcn_00495690(int a0)
 				fcn_004c4820(0xd, 250.0f);
 				if (g_77261c && *(int*) (g_77261c + 4) == b->unk_210) {
 					*(unsigned char*) &a0 = 1;
-					fcn_004c4510(b, b->entity_id);
+					cm_BeginPacketFieldDelta(b, b->entity_id);
 					fcn_004c4670(1, 1, 0x215, &a0);
 					fcn_004c5360();
 				}
@@ -57,7 +57,7 @@ int __cdecl fcn_00495690(int a0)
 	}
 	if (g_77261c && *(int*) (g_77261c + 4) == b->unk_210) {
 		*(unsigned char*) &a0 = 3;
-		fcn_004c4510(b, b->entity_id);
+		cm_BeginPacketFieldDelta(b, b->entity_id);
 		fcn_004c4670(1, 1, 0x215, &a0);
 		fcn_004c5360();
 	}

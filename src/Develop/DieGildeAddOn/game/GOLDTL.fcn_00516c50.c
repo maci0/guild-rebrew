@@ -44,7 +44,7 @@ void __cdecl fcn_00516040(void);
 #include "Develop/Units/d3/d3_d3d.h"
 void __cdecl fcn_0052a7d0(void);
 
-void __cdecl fcn_00516c50(Player* p, void* unit)
+void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 {
 	Office* o;
 	Contact* c;

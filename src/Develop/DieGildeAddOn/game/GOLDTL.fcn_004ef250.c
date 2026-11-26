@@ -24,7 +24,7 @@ extern char g_7f4ca0[];
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
 void __cdecl fcn_005b3410(char* e, char* r, int mode);
 
-int __cdecl fcn_004ef250(Set* p)
+int __cdecl gm_NotifyDomizilCallback(Set* p)
 {
 	int i;
 	int mode;

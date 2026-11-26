@@ -11,7 +11,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ahm_CheckFlag(char*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_005b3200(char*, char*, int, int);
-void __cdecl fcn_004ee830(char*, int);
+void __cdecl ahm_UnlockSlotRecipe(char*, int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_005764a0(char*, int);
@@ -40,7 +40,7 @@ void __cdecl fcn_00575ab0(char* u)
 				if (o != 0) {
 					fcn_005b3200(o, h, q, *(int*) (u + 0xb0));
 				}
-				fcn_004ee830(h, *(int*) (u + 0xb0));
+				ahm_UnlockSlotRecipe(h, *(int*) (u + 0xb0));
 				fcn_00529160(0, 0, *(unsigned short*) h, 0);
 				he_FreeAction(u);
 				return;

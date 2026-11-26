@@ -8,7 +8,7 @@ char* __cdecl fcn_00445600(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "client_scene_transform.h"
 
-int __cdecl fcn_00529710(char* a, unsigned char* b)
+int __cdecl ch_IsEntityNearBuildingDoor(char* a, unsigned char* b)
 {
 	float r;
 	float pos[4];

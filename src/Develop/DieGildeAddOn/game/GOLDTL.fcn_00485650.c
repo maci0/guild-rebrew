@@ -25,12 +25,12 @@ extern int g_100e760[];
 extern unsigned char g_773d75;
 
 float __cdecl fcn_0050bb50(int id, unsigned char k);
-int __cdecl fcn_0050dfa0(char* b, int id);
+int __cdecl gm_GetMsgObjektField(char* b, int id);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_FindRecordById(int);
-int __cdecl fcn_0050de80(char* e, Stats* s);
+int __cdecl gm_CalcEntityInventoryStats(char* e, Stats* s);
 
 /* ADDRESS: GOLD 0x486180 */
 void __cdecl ai_CollectGoodsResources(char* a, char* b)
@@ -63,7 +63,7 @@ void __cdecl ai_CollectGoodsResources(char* a, char* b)
 			g_100b0c0[ai_ResourceCount].stock = 0;
 			g_100b0c0[ai_ResourceCount].state_30 = 0x81;
 			g_100b0c0[ai_ResourceCount].flags = 0;
-			g_100b0c0[ai_ResourceCount].stock = fcn_0050dfa0(b, g_100e760[j]);
+			g_100b0c0[ai_ResourceCount].stock = gm_GetMsgObjektField(b, g_100e760[j]);
 			g_100b0c0[ai_ResourceCount].capacity = gm_eval_SlotVoll(b, g_100e760[j], 1000000);
 			ai_ResourceCount++;
 		}
@@ -86,7 +86,7 @@ void __cdecl ai_CollectGoodsResources(char* a, char* b)
 			g_100b0c0[ai_ResourceCount].stock = 0;
 			g_100b0c0[ai_ResourceCount].state_30 = 0x81;
 			g_100b0c0[ai_ResourceCount].flags = 0;
-			g_100b0c0[ai_ResourceCount].stock = fcn_0050dfa0(b, g_100e720[j]);
+			g_100b0c0[ai_ResourceCount].stock = gm_GetMsgObjektField(b, g_100e720[j]);
 			g_100b0c0[ai_ResourceCount].capacity = gm_eval_SlotVoll(b, g_100e720[j], 1000000);
 			ai_ResourceCount++;
 		}
@@ -96,7 +96,7 @@ void __cdecl ai_CollectGoodsResources(char* a, char* b)
 		if (r == 0) {
 			continue;
 		}
-		fcn_0050de80(r, &st);
+		gm_CalcEntityInventoryStats(r, &st);
 		for (k = 0; k < st.x0; k++) {
 			id = st.x48[k];
 			if (id == 0) {

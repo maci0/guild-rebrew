@@ -9,7 +9,7 @@ extern int g_100f1dc;
 
 int __cdecl amt_FindOfficeSlotByKey(char*, void*);
 int __cdecl fcn_004e8b40(int, void*);
-int __cdecl fcn_004e9310(int, int, void*);
+int __cdecl amt_CollectOfficeCandidates(int, int, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004aae50(char*, int, int*, void*);
 int __cdecl fcn_00470820(int, int, char*);
@@ -43,7 +43,7 @@ int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 	if (fcn_004e8b40(*(int*) (info + 8) & 0xff, buf) == 0) {
 		return -1;
 	}
-	n = fcn_004e9310(*(int*) (info + 8) & 0xff, 2, ents);
+	n = amt_CollectOfficeCandidates(*(int*) (info + 8) & 0xff, 2, ents);
 	i = 0;
 	found = 0;
 	for (; i < 4; i++) {

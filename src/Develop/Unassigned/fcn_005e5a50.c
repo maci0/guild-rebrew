@@ -43,7 +43,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, ...);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
-int __cdecl fcn_00510470(char*);
+int __cdecl gm_GetBuildingSlotCapacity(char*);
 int __cdecl d2_GetControlValue(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl io_AppendText(int, ...);
@@ -101,7 +101,7 @@ void __cdecl fcn_005e5a50(char* entity)
 	d2_SetForm(dialog, 3);
 	fcn_00533a60(d2_CurrentWindowId, 0, ids, 2, *(int*) 0x14b5a80, *(int*) 0x14b5a84);
 	do {
-		max_val = fcn_00510470(entity) - 1;
+		max_val = gm_GetBuildingSlotCapacity(entity) - 1;
 		val = d2_GetControlValue(control);
 		if (val >= max_val) {
 			val = max_val;

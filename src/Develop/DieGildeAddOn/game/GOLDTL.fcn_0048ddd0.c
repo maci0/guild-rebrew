@@ -12,7 +12,7 @@
 
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
-int __cdecl fcn_004e99c0(int k);
+int __cdecl amt_GetOfficeRank(int k);
 int __cdecl fcn_0050b810(int a, char b);
 int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 
@@ -35,7 +35,7 @@ int __cdecl fcn_0048ddd0(char* e, char* thresholdOut, char* resultOut)
 		}
 		t = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);
 	}
-	n = fcn_004e99c0(t->unk_165[1]) / 3 + 2;
+	n = amt_GetOfficeRank(t->unk_165[1]) / 3 + 2;
 	thr[0] = (int) (float) n;
 	thr[1] = (int) ((float) n * 1.5f);
 	thr[2] = (int) ((float) n * 2);

@@ -57,7 +57,7 @@ int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4eb0(char*);
 int __cdecl fcn_004c4ef0(char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
-void __cdecl fcn_004c4510(int, int);
+void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int);
 int __cdecl fcn_004c5360(int);
 int __cdecl d2_GetControlValue(int);
