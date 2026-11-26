@@ -91,7 +91,7 @@ void __cdecl fcn_0046ac30(void);
 int __cdecl fcn_00470820(int, int, const char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl io_AppendText(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00402220(int);
 void __cdecl nt_ConnectTcp(int, int);
@@ -122,8 +122,8 @@ int __cdecl fcn_004c5790(int, void*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 void __cdecl sv_WaitForNetworkSync(int);
-void __cdecl fcn_004c44a0(void);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_BeginCommandSync(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_005490e0(void);
 void __cdecl fcn_00549130(void);
@@ -132,7 +132,7 @@ void __cdecl fcn_005491c0(void);
 void __cdecl fcn_005459a0(int);
 void __cdecl fcn_0059a340(void);
 void __cdecl fcn_0042df30(void*, int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl sim_SetSyncParams(void*, int, int, int);
 int __cdecl fcn_004c5700(void*);
 void __cdecl fcn_00541620(void);
@@ -169,7 +169,7 @@ void __cdecl fcn_00526920(void*, int, void*);
 void __cdecl fcn_004c5530(void*);
 void* __cdecl fcn_00527000(void);
 void __cdecl fcn_00526db0(void*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl main_RundenBeginn(void);
 
 /* Rectangle-plus-handle records exchanged with the town view. */
@@ -235,7 +235,7 @@ void __cdecl fcn_005438c0(int a0)
 			h = fcn_00470820(0, 0, g_68d714);
 			d2_CenterDialogWindows(h);
 			io_AppendText(0x3ff6);
-			fcn_005373e0(0, 0x24087);
+			main_RunFrameLoop(0, 0x24087);
 			proc = GetProcAddress((void*) g_7e2500, g_6a44f4);
 			if (proc == 0) {
 				FreeLibrary((void*) g_7e2500);
@@ -398,7 +398,7 @@ void __cdecl fcn_005438c0(int a0)
 	fcn_0053f720();
 	d2_SuppressOverlay = 0;
 	fcn_00526db0(fcn_00527000());
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	if ((g_7747b0 & 1) && (!(g_7747b0 & 0x40))) {
 		fcn_00514f10();
 		fcn_00514fc0();
@@ -445,7 +445,7 @@ void __cdecl fcn_005438c0(int a0)
 		fcn_004c5530(buf);
 	}
 	for (;;) {
-		if (fcn_005373e0((void*) 0x5438c0, 0x20007) == 0) {
+		if (main_RunFrameLoop((void*) 0x5438c0, 0x20007) == 0) {
 			break;
 		}
 		if (g_774950 >= 0x320) {
@@ -508,7 +508,7 @@ void __cdecl fcn_005438c0(int a0)
 			}
 		}
 		if (!(g_7747b0 & 2)) {
-			fcn_004c44a0();
+			cm_BeginCommandSync();
 			if ((g_7747b0 & 8) ||
 			    ((g_14cbca0 != -1) && (g_77494c & 8))) {
 				fcn_005490e0();
@@ -516,7 +516,7 @@ void __cdecl fcn_005438c0(int a0)
 				fcn_00549240();
 			}
 			fcn_005491c0();
-			fcn_004c44b0();
+			cm_EndCommandSync();
 			while (fcn_004c44c0() == 0) {
 				fcn_00535960();
 			}
@@ -576,7 +576,7 @@ void __cdecl fcn_005438c0(int a0)
 			r2.w = *(int*) 0x7f4c08;
 			r2.h = *(short*) 0x7f4c0c;
 			while ((unsigned short) r2.y < 0x17) {
-				fcn_00500bb0(&r2, 0, 0x1e, 0);
+				gm_AddTime(&r2, 0, 0x1e, 0);
 				x = fcn_004c5700(&r2);
 				while (fcn_004c4450(x) == 0) {
 					fcn_00535960();
@@ -606,13 +606,13 @@ l_gate:
 			r1.w = *(int*) 0x7f4c08;
 			r1.h = *(short*) 0x7f4c0c;
 			while ((unsigned short) r1.y < 0x17) {
-				fcn_00500bb0(&r1, 0, 0x1e, 0);
+				gm_AddTime(&r1, 0, 0x1e, 0);
 				x = fcn_004c5700(&r1);
 				while (fcn_004c4450(x) == 0) {
 					fcn_00535960();
 				}
 			}
-			fcn_00500bb0(&r1, 0x18, 0, 0);
+			gm_AddTime(&r1, 0x18, 0, 0);
 			sim_SetSyncParams(&r1, 6, 0, 0);
 			fcn_004c5700(&r1);
 			fcn_0042df30((void*) 0x538060, 0);

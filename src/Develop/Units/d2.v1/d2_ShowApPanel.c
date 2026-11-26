@@ -3,8 +3,8 @@ void __cdecl d2_CenterDialogWindows(int obj);
 void __cdecl d2_SetForm(int obj, int a);
 int __cdecl io_AppendText(int id, ...);
 void __cdecl fcn_005c4d00(int win, int sub, int idx, int flag);
-int __cdecl fcn_00471f80(int key);
-int __cdecl fcn_005373e0(void *proc, int msg);
+int __cdecl d2_GetControlValue(int key);
+int __cdecl main_RunFrameLoop(void *proc, int msg);
 void __cdecl fcn_00471e30(int obj);
 
 /* ADDRESS: GOLDTL 0x005c4dc0 */
@@ -32,7 +32,7 @@ void __cdecl d2_ShowApPanel(void)
 			q = (int *) 0x776ca0;
 			for (i = 0; i < 0x100; i++) {
 				if (p[i * 2] != 0 && q[i * 2] == v) {
-					*(int *) (p[i * 2] + 8) = fcn_00471f80(q[i * 2]);
+					*(int *) (p[i * 2] + 8) = d2_GetControlValue(q[i * 2]);
 					d2_SetForm(dlg, 0);
 					io_AppendText(0x6811b0);
 					fcn_005c4d00(dlg, 0, *(unsigned short *) 0x774970, 0);
@@ -40,6 +40,6 @@ void __cdecl d2_ShowApPanel(void)
 				}
 			}
 		}
-	} while (fcn_005373e0((void *) d2_ShowApPanel, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void *) d2_ShowApPanel, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 }

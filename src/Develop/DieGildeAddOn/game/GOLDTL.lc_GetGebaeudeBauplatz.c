@@ -7,18 +7,18 @@ extern char s_6aa1b4[];
 
 int __cdecl sprintf(char*, const char*, ...);
 #ifdef REBREW_GOLD
-void __cdecl fcn_004478e0(int, int);
-void __cdecl fcn_00458a10(char*, float*, float*);
+void __cdecl d3_SelectSceneContext(int, int);
+void __cdecl d3_TransformPoint(char*, float*, float*);
 char __cdecl d3_VisitSceneObjectsUntilStopped(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
-#define lc_RenderState fcn_004478e0
-#define lc_ScenePoint fcn_00458a10
+#define lc_RenderState d3_SelectSceneContext
+#define lc_ScenePoint d3_TransformPoint
 #define lc_WalkScene d3_VisitSceneObjectsUntilStopped
 #define lc_SavedRender g_633444
 #else
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 char __cdecl d3_VisitSceneObjects(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
-#define lc_RenderState fcn_004432d0
+#define lc_RenderState d3_SelectSceneContext
 #define lc_ScenePoint d3_TransformPoint
 #define lc_WalkScene d3_VisitSceneObjects
 #define lc_SavedRender d3_CurrentContextIndex

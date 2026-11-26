@@ -34,7 +34,7 @@ extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004b5070(rec24*);
 int __cdecl fcn_004c5790(int, struct req*);
 int __cdecl fcn_004c4450(int);
@@ -55,43 +55,43 @@ void __cdecl fcn_005754e0(char* u)
 		}
 	}
 	if (i >= 128) {
-		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 0x1e, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 0x1e, 0);
 		return;
 	}
 	switch (*(int*) (u + 0x70)) {
 	case 0:
 		if (((rec24*)g_10069a0)[i].f20 == 0 && (unsigned short) gm_GameTime.b < 0x16 && fcn_004b5070(&((rec24*)g_10069a0)[i]) != 0) {
 			((rec24*)g_10069a0)[i].f20 = 1;
-			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
+			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 			*(int*) (u + 0x70) = 1;
 			return;
 		}
-		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 10, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 10, 0);
 		return;
 	case 1:
-		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 		if (((rec24*)g_10069a0)[i].f20 == 1 && (unsigned short) gm_GameTime.b < 0x16 && g_6a3760 == -1) {
 			q.who = ((rec24*)g_10069a0)[i].f4;
 			*(int*) (u + 0xac) = fcn_004c5790(8, &q);
 			*(int*) (u + 0x70) = 2;
 			return;
 		}
-		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
 		*(int*) (u + 0x70) = 1;
 		return;
 	case 2:
 		r = fcn_004c4450(*(int*) (u + 0xac));
-		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 		if (r == 0) {
 			return;
 		}
 		if (r == 1) {
 			*(int*) (u + 0x70) = 0;
-			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0x18, 0, 0);
+			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0x18, 0, 0);
 			return;
 		}
 		*(int*) (u + 0x70) = 1;
-		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 0x1e, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 0x1e, 0);
 		return;
 	case -2:
 	case -1:

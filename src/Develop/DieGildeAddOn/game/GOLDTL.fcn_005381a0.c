@@ -1,19 +1,19 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_005e12d0(void);
-void __cdecl fcn_00500a20(void);
-void __cdecl fcn_0053f8f0(void);
+void __cdecl gm_FreeBuffer773d44(void);
+void __cdecl d3_FreeTable7e1d60(void);
 void __cdecl fcn_00429800(void);
 void __cdecl fcn_00520f40(void);
 void __cdecl d3snd_Shutdown(void);
-void __cdecl fcn_00418c60(void);
+void __cdecl d3_FreeBuffer6b5d08(void);
 void __cdecl msx_ShutdownDrivers(void);
 void __cdecl msx_ShutdownAIL(void);
 void __cdecl fcn_004195f0(void);
 void __cdecl fcn_0057de00(void);
 void __cdecl txt_ReleaseTextBanks(void);
 void __cdecl gm_CleanupAllEntities(void);
-void __cdecl fcn_005b1ef0(void);
+void __cdecl ls_FreeList774a78(void);
 void __cdecl fcn_004edce0(void);
 void __cdecl fcn_004acf00(void);
 void __cdecl fcn_004efcd0(void);
@@ -27,13 +27,13 @@ void __cdecl fcn_004c3ed0(void);
 void __cdecl fcn_005381a0(void)
 {
 	fcn_005e12d0();
-	fcn_00500a20();
-	fcn_0053f8f0();
+	gm_FreeBuffer773d44();
+	d3_FreeTable7e1d60();
 	fcn_00429800();
 	fcn_00520f40();
 	if (g_774934 != 0) {
 		d3snd_Shutdown();
-		fcn_00418c60();
+		d3_FreeBuffer6b5d08();
 	}
 	if (msx_MusicEnabled != 0) {
 		msx_ShutdownDrivers();
@@ -45,7 +45,7 @@ void __cdecl fcn_005381a0(void)
 	fcn_0057de00();
 	txt_ReleaseTextBanks();
 	gm_CleanupAllEntities();
-	fcn_005b1ef0();
+	ls_FreeList774a78();
 	fcn_004edce0();
 	fcn_004acf00();
 	fcn_004efcd0();

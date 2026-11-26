@@ -28,7 +28,7 @@ int __cdecl fcn_0050c710(char*, int, int);
 int __cdecl fcn_0050c830(pos14_7f4c00*, pos14_7f4c00*, char*);
 void __cdecl fcn_004c4670(int, int, short, unsigned char*);
 void __cdecl fcn_004c5360(void);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl fcn_0050dc90(unsigned char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
@@ -82,7 +82,7 @@ void __cdecl fcn_00560eb0(char* e)
 			fcn_004c5360();
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(pos14_7f4c00*) (e + 0x60) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0x1e, 0);
+			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0x1e, 0);
 			return;
 		}
 		*(int*) (e + 0x70) = 1;

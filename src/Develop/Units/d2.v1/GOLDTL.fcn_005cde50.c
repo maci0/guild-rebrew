@@ -11,11 +11,11 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00471af0(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005cde50 */
@@ -42,13 +42,13 @@ void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 	else
 		io_AppendText(0xa2);
 	d2_SetForm(dlg, 1);
-	btn[0] = fcn_0046f740(0x10f, 0x25, 0x599, d2_CurrentWindowId);
-	btn[1] = fcn_0046f740(0x10f, 0x93, 0x58d, d2_CurrentWindowId);
-	btn[2] = fcn_0046f740(0x69, 0xab, 0x590, d2_CurrentWindowId);
-	btn[3] = fcn_0046f740(0x1b5, 0xab, 0x58c, d2_CurrentWindowId);
-	btn[4] = fcn_0046f740(0x45, 0x125, 0x58a, d2_CurrentWindowId);
-	btn[5] = fcn_0046f740(0x10f, 0x125, 0x58f, d2_CurrentWindowId);
-	btn[6] = fcn_0046f740(0x1d9, 0x125, 0x58b, d2_CurrentWindowId);
+	btn[0] = d2_AddElementToWindow(0x10f, 0x25, 0x599, d2_CurrentWindowId);
+	btn[1] = d2_AddElementToWindow(0x10f, 0x93, 0x58d, d2_CurrentWindowId);
+	btn[2] = d2_AddElementToWindow(0x69, 0xab, 0x590, d2_CurrentWindowId);
+	btn[3] = d2_AddElementToWindow(0x1b5, 0xab, 0x58c, d2_CurrentWindowId);
+	btn[4] = d2_AddElementToWindow(0x45, 0x125, 0x58a, d2_CurrentWindowId);
+	btn[5] = d2_AddElementToWindow(0x10f, 0x125, 0x58f, d2_CurrentWindowId);
+	btn[6] = d2_AddElementToWindow(0x1d9, 0x125, 0x58b, d2_CurrentWindowId);
 	for (i = 0; i < 7; i++) {
 		if (i != 0 || enableFirst != 0) {
 			id = btn[i];
@@ -81,6 +81,6 @@ void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 				fcn_00471af0(dlg, 1);
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005cde50, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005cde50, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 }

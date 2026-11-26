@@ -8,7 +8,7 @@ int __cdecl fcn_00526120(void* buf, int a2);
 void __cdecl io_FormatTextBuffer(void* buf, int id, ...);
 int __cdecl fcn_004ee220(int a1, int a2);
 int __cdecl fcn_004c4450(int a1);
-int __cdecl fcn_005373e0(int a1, int a2);
+int __cdecl main_RunFrameLoop(int a1, int a2);
 void __cdecl fcn_004ee080(int a1);
 void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
 
@@ -34,7 +34,7 @@ int __cdecl fcn_00584f00(int a1, char* a2, int cost)
                     int q;
 
                     while ((q = fcn_004c4450(r)) == 0)
-                        fcn_005373e0(q, 0x20007);
+                        main_RunFrameLoop(q, 0x20007);
                 }
                 if (fcn_004c4450(r) == 1) {
                     fcn_004ee080((int) a2);

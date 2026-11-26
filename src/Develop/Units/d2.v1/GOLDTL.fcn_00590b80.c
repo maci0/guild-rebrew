@@ -24,7 +24,7 @@ void __cdecl fcn_00469c40(int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0046f7e0(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 float __cdecl eval_ObjektPreis2Credits(int, int);
@@ -67,7 +67,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 				((D2_WIN*) g_1015f40)[n].slot);
 	}
 	d2_SetForm(0, 2);
-	fcn_0046f740(0, 0, itemId + 0xdf, d2_CurrentWindowId);
+	d2_AddElementToWindow(0, 0, itemId + 0xdf, d2_CurrentWindowId);
 	io_AppendText(itemId * 2 + 0x9a9);
 	d2_SetForm(0, 1);
 	io_AppendText(itemId * 2 + 0x9a8);

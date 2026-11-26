@@ -11,7 +11,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 
 static __inline int any_pending(void)
 {
@@ -29,7 +29,7 @@ static __inline int any_pending(void)
 /* ADDRESS: GOLDTL 0x004e4680 */
 void __cdecl fcn_004e4680(void)
 {
-	while (fcn_005373e0(0, 0x79706) != 0) {
+	while (main_RunFrameLoop(0, 0x79706) != 0) {
 		if (!any_pending()) {
 			return;
 		}

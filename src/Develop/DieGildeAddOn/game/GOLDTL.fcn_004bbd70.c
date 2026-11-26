@@ -19,7 +19,7 @@ extern AMBIENT_ANIMAL_SLOT* g_7728e8;
 extern int g_7728ec;
 
 int __cdecl fcn_00500e20(char*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
 AMBIENT_ANIMAL_SLOT* __cdecl fcn_004bc010(void);
@@ -46,7 +46,7 @@ void __cdecl fcn_004bbd70(void)
 
 	saved = d3_CurrentContextIndex;
 	r = fcn_00500e20(gm_GameTime);
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	if (g_776664 == 0) {
 		lim = 0;
 	} else {
@@ -112,7 +112,7 @@ void __cdecl fcn_004bbd70(void)
 			fcn_004bc060(s);
 		}
 	}
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	g_7728ec = (g_7728ec + 1) % 32;
 }
 unsigned char _dpad_775318[4940];

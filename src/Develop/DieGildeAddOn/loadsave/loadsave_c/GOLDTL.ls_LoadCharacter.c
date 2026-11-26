@@ -35,10 +35,10 @@ extern char __cdecl SelectTextureSet(void*, void*, unsigned char, char);
 extern int __cdecl ch_AttachTransport(void*, void*);
 extern void __cdecl ch_SetVisible(void*, int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-extern int __cdecl fcn_004432d0(int, int);
+extern int __cdecl d3_SelectSceneContext(int, int);
 extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern int __cdecl init_EnsureObjektSceneContext(char*);
-extern int __cdecl fcn_005155e0(char*);
+extern int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 
 
 /* Laedt die gespeicherten Figurendatensaetze, wandelt gespeicherte
@@ -107,12 +107,12 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 				if (alloc != 0 && *(short*) alloc != 0xfd) {
 					v = init_EnsureObjektSceneContext((char*) alloc);
 				} else {
-					v = fcn_005155e0((char*) found);
+					v = init_AllocateGebaeudeSceneSlot((char*) found);
 				}
 			} else {
 				v = 0;
 			}
-			fcn_004432d0(v, 1);
+			d3_SelectSceneContext(v, 1);
 			sprintf(name, s_675504, rec + 0x170, rec + 0x130);
 			if (strstr(name, s_6a24a8) != 0) {
 				sprintf(name, s_6a2498, rec + 0x130);
@@ -205,7 +205,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 		}
 		list++;
 	} while ((int) list < 0x14d0c20);
-	fcn_004432d0(total, 1);
+	d3_SelectSceneContext(total, 1);
 	{
 		*(unsigned int*) g_6b5c20 = 0;
 		n = 0;
@@ -289,7 +289,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 				if (alloc != 0 && *(short*) alloc != 0xfd) {
 					v = init_EnsureObjektSceneContext((char*) alloc);
 				} else {
-					v = fcn_005155e0(e);
+					v = init_AllocateGebaeudeSceneSlot(e);
 				}
 				u[0xc] = v;
 				u[0x5c] = v;

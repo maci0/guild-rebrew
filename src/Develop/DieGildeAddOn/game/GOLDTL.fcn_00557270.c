@@ -9,7 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char g_67ec2c[];
 
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
@@ -39,7 +39,7 @@ void __cdecl fcn_00557270(char* u)
 	*(int*) (u + 0xb8) = -1;
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	*(pos14_7f4c00*) (u + 0x44) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
+	gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 	for (e = he_StartHandlungSearch(1, 0, 0x74); e != 0; e = he_fn_Handlung()) {
 		if (*(int*) (e + 4) != *(int*) (u + 4) && *(int*) (e + 0xb0) == *(int*) (u + 0xb0)) {
 			break;

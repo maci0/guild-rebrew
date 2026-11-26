@@ -18,13 +18,13 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00472380(int, char*);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00476b60(void);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0053d020 */
 unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
@@ -56,7 +56,7 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 	d2_SetForm(win, 2);
 	n = (*(int*) (g_1015f4c + d2_CurrentWindowId * 0x3cc) - 0x20) / 0x30;
 	for (i = 0; i < 8; i++) {
-		slot = fcn_0046f740((i % n) * 0x30, (i / n) * 0x30, i + 0x59a, d2_CurrentWindowId);
+		slot = d2_AddElementToWindow((i % n) * 0x30, (i / n) * 0x30, i + 0x59a, d2_CurrentWindowId);
 		items[i] = slot;
 		((D2_CONTROL_TL*) g_1015ea0)[slot].value_058 = 1;
 		((D2_CONTROL_TL*) g_1015ea0)[slot].value_038 = 0;
@@ -81,11 +81,11 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 		}
 	}
 	d2_SetForm(win, 3);
-	r3 = fcn_00472250(win, 3, io_AppendText((int) "%2mt", 0x489, 0x489));
+	r3 = d2_GetWindowListItem(win, 3, io_AppendText((int) "%2mt", 0x489, 0x489));
 	d2_SetForm(win, 4);
-	r4 = fcn_00472250(win, 4, io_AppendText((int) "%2mt", 0x486, 0x486));
-	w3 = fcn_00472250(win, 0, 3);
-	w4 = fcn_00472250(win, 0, 5);
+	r4 = d2_GetWindowListItem(win, 4, io_AppendText((int) "%2mt", 0x486, 0x486));
+	w3 = d2_GetWindowListItem(win, 0, 3);
+	w4 = d2_GetWindowListItem(win, 0, 5);
 	*(unsigned int*) (d2_BildArgument2 + ((D2_CONTROL_TL*) g_1015ea0)[w3].value_088 * 0x160) = 0xc;
 	*(unsigned int*) (d2_BildArgument2 + ((D2_CONTROL_TL*) g_1015ea0)[w4].value_088 * 0x160) = 0xc;
 	if (g_7e23ea[0]) {
@@ -101,7 +101,7 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 		}
 	}
 	fcn_00476b60();
-	id = fcn_005373e0((int) d2_ShowChoosePlayerDialog, a0);
+	id = main_RunFrameLoop((int) d2_ShowChoosePlayerDialog, a0);
 	while (id) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -111,9 +111,9 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 			g_7e23e1 = 0;
 			g_7e23e2 = 0x12;
 			g_7e23e4 = ((D2_CONTROL_TL*) g_1015ea0)[sel].value_008;
-			g_7e23e8 = (char) (fcn_00471f80(r3) + 'w');
-			g_7e23e9 = (char) (fcn_00471f80(r4) + 'z');
-			src = (char*) fcn_00471f80(w3);
+			g_7e23e8 = (char) (d2_GetControlValue(r3) + 'w');
+			g_7e23e9 = (char) (d2_GetControlValue(r4) + 'z');
+			src = (char*) d2_GetControlValue(w3);
 			dst = g_7e23ea;
 			do {
 				ch = *src;
@@ -121,7 +121,7 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 				*dst = ch;
 				dst++;
 			} while (ch);
-			src = (char*) fcn_00471f80(w4);
+			src = (char*) d2_GetControlValue(w4);
 			dst = g_7e240a;
 			do {
 				ch = *src;
@@ -149,7 +149,7 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 				((D2_CONTROL_TL*) g_1015ea0)[sel].value_03c = 1;
 			}
 		}
-		id = fcn_005373e0((int) d2_ShowChoosePlayerDialog, a0);
+		id = main_RunFrameLoop((int) d2_ShowChoosePlayerDialog, a0);
 	}
 	fcn_00471e30(win);
 	return changed;

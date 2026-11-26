@@ -7,17 +7,17 @@ int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(char *, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl fcn_00468cd0(int, int);
 void __cdecl fcn_00468b80(int, int);
 void __cdecl fcn_00468bb0(int, int, ...);
 void __cdecl fcn_00533a60(int, int, int *, int, ...);
-int __cdecl fcn_005373e0(void *, int);
+int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005e2660(void);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
 void __cdecl fcn_005e1ca0(void);
@@ -41,16 +41,16 @@ void __cdecl fcn_005e2b60(void)
   d2_SetForm(v4,2);
   io_AppendText((char *)0x1c5a);
   d2_SetForm(v4,1);
-  v15 = fcn_00472250(v4,1,0);
-  v5 = fcn_00472250(v4,1,1);
-  v6 = fcn_00472250(v4,1,2);
-  v7 = fcn_00472250(v4,1,3);
-  v8 = fcn_00472250(v4,1,4);
-  v9 = fcn_00472250(v4,1,5);
+  v15 = d2_GetWindowListItem(v4,1,0);
+  v5 = d2_GetWindowListItem(v4,1,1);
+  v6 = d2_GetWindowListItem(v4,1,2);
+  v7 = d2_GetWindowListItem(v4,1,3);
+  v8 = d2_GetWindowListItem(v4,1,4);
+  v9 = d2_GetWindowListItem(v4,1,5);
   d2_SetSlotVisibility(v7,0);
-  v10 = fcn_00472250(v4,1,6);
-  v11 = fcn_00472250(v4,1,7);
-  v12 = fcn_00472250(v4,1,8);
+  v10 = d2_GetWindowListItem(v4,1,6);
+  v11 = d2_GetWindowListItem(v4,1,7);
+  v12 = d2_GetWindowListItem(v4,1,8);
   d2_SetElementValue(v15,0,2,*(unsigned int *)0x77534c & 0xff);
   fcn_00468cd0(v15,0x82);
   fcn_00468b80(v15,*(unsigned int *)0x14ac4bc);
@@ -90,7 +90,7 @@ void __cdecl fcn_005e2b60(void)
     d2_SetSlotVisibility(v15,0);
   d2_SetForm(v4,3);
   fcn_00533a60(*(unsigned int *)0x772514,0,&selection[0],3,*(unsigned int *)0x14ac5a8,*(unsigned int *)0x14ac5ac,(char *)0x6ad2cc);
-  if (fcn_005373e0((void *)fcn_005e2b60,v14)) {
+  if (main_RunFrameLoop((void *)fcn_005e2b60,v14)) {
     do {
       if ((*(unsigned int *)0x14ce8e0) || (*(unsigned char *)0x14cf950 == 1))
         *(unsigned int *)0x774654 = 1;
@@ -115,31 +115,31 @@ void __cdecl fcn_005e2b60(void)
           *(unsigned int *)0x774654 = 1;
         }
       }
-    } while (fcn_005373e0((void *)fcn_005e2b60,v14));
+    } while (main_RunFrameLoop((void *)fcn_005e2b60,v14));
     if (v1) {
-      v2 = fcn_00471f80(v5);
+      v2 = d2_GetControlValue(v5);
       *(unsigned char *)0x776664 = v2;
-      v2 = fcn_00471f80(v6);
+      v2 = d2_GetControlValue(v6);
       *(unsigned char *)0x776665 = v2;
-      v2 = fcn_00471f80(v9);
+      v2 = d2_GetControlValue(v9);
       *(unsigned char *)0x776666 = v2;
-      v2 = fcn_00471f80(v10);
+      v2 = d2_GetControlValue(v10);
       *(unsigned char *)0x776667 = v2;
-      v2 = fcn_00471f80(v8);
+      v2 = d2_GetControlValue(v8);
       *(unsigned char *)0x776668 = v2;
-      v2 = fcn_00471f80(v12);
+      v2 = d2_GetControlValue(v12);
       *(unsigned char *)0x776669 = v2;
-      v2 = fcn_00471f80(v7);
+      v2 = d2_GetControlValue(v7);
       *(unsigned char *)0x77666a = v2;
-      v3 = fcn_00471f80(v11);
+      v3 = d2_GetControlValue(v11);
       *(unsigned char *)0x77666c = 100 - v3;
       fcn_005e12d0();
       d3_ApplyGraphicsOptions();
     }
   }
-  v14 = fcn_00471f80(v15);
+  v14 = d2_GetControlValue(v15);
   if ((v14 != (*(unsigned int *)0x77534c & 0xff)) && (v1)) {
-    v2 = fcn_00471f80(v15);
+    v2 = d2_GetControlValue(v15);
     *(unsigned char *)0x77534c = v2;
     fcn_005e12d0();
     *(unsigned int *)0x774958 = 0;

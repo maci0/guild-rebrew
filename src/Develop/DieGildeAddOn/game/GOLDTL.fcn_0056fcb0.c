@@ -8,7 +8,7 @@ extern unsigned char g_slot_table[2];
 void __cdecl he_FreeAction(char* e);
 float __cdecl fcn_00507540(int idx, int* info);
 void __cdecl fcn_004c5530(char* msg);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 
 /* Drives the dozing state of one entity: a negative record flag resets the
  * timer, a sub-1.0 rest value keeps it idle for 0x14, otherwise a 0x25 packet
@@ -30,7 +30,7 @@ void __cdecl fcn_0056fcb0(char* e)
 		}
 		if ((*(int*) (g_slot_table + (*(unsigned short*) (e + 8)) * 0x21c + 0x1c8) & 0x80000000) != 0) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-			fcn_00500bb0(e + 0x52, 4, 0, 0);
+			gm_AddTime(e + 0x52, 4, 0, 0);
 			return;
 		}
 		if (fcn_00507540(*(unsigned short*) (e + 8), info) >= 1.0) {
@@ -44,11 +44,11 @@ void __cdecl fcn_0056fcb0(char* e)
 			fcn_004c5530(msg);
 			*(int*) (g_slot_table + (*(unsigned short*) (e + 8)) * 0x21c + 0x1c8) |= 0x80000000;
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-			fcn_00500bb0(e + 0x52, 4, 0, 0);
+			gm_AddTime(e + 0x52, 4, 0, 0);
 			return;
 		}
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-		fcn_00500bb0(e + 0x52, 0, 0x14, 0);
+		gm_AddTime(e + 0x52, 0, 0x14, 0);
 	} else {
 		he_FreeAction(e);
 	}

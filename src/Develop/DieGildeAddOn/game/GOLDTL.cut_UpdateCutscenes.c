@@ -42,7 +42,7 @@ extern unsigned char g_7747b0;
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00500bb0(GAME_TIMESTAMP *, int, int, int);
+void __cdecl gm_AddTime(GAME_TIMESTAMP *, int, int, int);
 int __cdecl fcn_00500cb0(GAME_TIMESTAMP *, GAME_TIMESTAMP *);
 void __cdecl fcn_004c6a70(int);
 #include "Develop/DieGildeAddOn/game/cutscene.h"
@@ -57,7 +57,7 @@ int __cdecl cut_UpdateCutscenes(void)
 	for (i = 0; i < 96; i++) {
 		if (((Ent*)cut_Cutscenes)[i].active != 0 && (((Ent*)cut_Cutscenes)[i].flags & 5) == 0) {
 			t = ((Ent*)cut_Cutscenes)[i].t;
-			fcn_00500bb0(&t, 0, -60, 0);
+			gm_AddTime(&t, 0, -60, 0);
 			if (((Ent*)cut_Cutscenes)[i].key == -1 && ((g_77494c & 8) != 0 || ((*(int*)&g_7747b0) & 8) != 0)) {
 				((Ent*)cut_Cutscenes)[i].key = *(int *) (g_7f4ca4 + g_774970 * 0x21c);
 			}
@@ -65,16 +65,16 @@ int __cdecl cut_UpdateCutscenes(void)
 			    fcn_00500cb0(&(*(GAME_TIMESTAMP*)&gm_GameTime), &t) > 0) {
 				r = cut_CutsceneReady((int*) &((Ent*)cut_Cutscenes)[i]);
 				if (r == -1) {
-					fcn_00500bb0(&((Ent*)cut_Cutscenes)[i].t, 0, 5, 0);
+					gm_AddTime(&((Ent*)cut_Cutscenes)[i].t, 0, 5, 0);
 					if (((Ent*)cut_Cutscenes)[i].t.hour >= 22) {
-						fcn_00500bb0(&((Ent*)cut_Cutscenes)[i].t, 9, 0, 0);
+						gm_AddTime(&((Ent*)cut_Cutscenes)[i].t, 9, 0, 0);
 					}
 					continue;
 				}
 				if (r == 0) {
-					fcn_00500bb0(&((Ent*)cut_Cutscenes)[i].t, 0, 30, 0);
+					gm_AddTime(&((Ent*)cut_Cutscenes)[i].t, 0, 30, 0);
 					if (((Ent*)cut_Cutscenes)[i].t.hour >= 22) {
-						fcn_00500bb0(&((Ent*)cut_Cutscenes)[i].t, 9, 0, 0);
+						gm_AddTime(&((Ent*)cut_Cutscenes)[i].t, 9, 0, 0);
 					}
 					continue;
 				}

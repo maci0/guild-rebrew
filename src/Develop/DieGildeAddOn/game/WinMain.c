@@ -50,7 +50,7 @@ void __cdecl fcn_00590650(void);
 void __cdecl fcn_00501040(char*);
 void __cdecl fcn_004efc50(void);
 void __cdecl fcn_00500900(void);
-void __cdecl fcn_005b1ef0(void);
+void __cdecl ls_FreeList774a78(void);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 void __cdecl msx_InitAIL(void);
 int __cdecl sb_Init(int, int, int, int, int);
@@ -72,7 +72,7 @@ void __cdecl fcn_004acbb0(void);
 void __cdecl fcn_004d3800(void);
 void __cdecl fcn_00471e30(int);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
-void __cdecl fcn_005373e0(int, int);
+void __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00473150(unsigned char*);
 void __cdecl fcn_00429920(void);
 void __cdecl evt_RegisterCoreCommands(void);
@@ -104,7 +104,7 @@ typedef struct str7 {
 
 extern char* __cdecl fcn_0064d1a0(char* s, int c);
 extern char* __cdecl fcn_0064e790(char* s, int c);
-extern int __cdecl fcn_0064eeec(char* s);
+extern int __cdecl atoi(char* s);
 extern int __cdecl fcn_0065f220(char* a, char* b);
 extern int __cdecl gm_RandomMod(int n);
 extern int __cdecl fcn_004fdec0(char* name);
@@ -248,7 +248,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 		} else {
 			pbuf[0] = 0;
 		}
-		*(int*) 0x7e2510 = fcn_0064eeec(pbuf);
+		*(int*) 0x7e2510 = atoi(pbuf);
 	}
 
 	if (main_CheckExistingInstance(&mutex) != 0)

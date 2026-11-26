@@ -11,7 +11,7 @@ int __cdecl fcn_0050d170(int);
 int __cdecl fcn_005072c0(int);
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl fcn_00507080(int);
-int __cdecl fcn_0050cf50(unsigned char *, int);
+int __cdecl gm_CalculateGebaeudeValue(unsigned char *, int);
 int __cdecl fcn_0050d200(short *, int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_FindNextFilteredEntity(void);
@@ -257,7 +257,7 @@ use_slot:
 						type = *(int *) (e + 0xb0);
 						cap = type;
 						if (ratio < type) {
-							v = fcn_0050cf50(p, (char) p[0x5c]);
+							v = gm_CalculateGebaeudeValue(p, (char) p[0x5c]);
 							ratio = type - ratio;
 							if (!((((float) (type - v) / (float) v) * -0.5f + 0.25f) >
 							    (float) ratio / (float) cap)) {

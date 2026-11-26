@@ -14,7 +14,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_004c5620(char a1, unsigned char* e);
-void __cdecl fcn_00500bb0(SIM_CLOCK* clock, int arg2, int arg3, int arg4);
+void __cdecl gm_AddTime(SIM_CLOCK* clock, int arg2, int arg3, int arg4);
 void __cdecl fcn_004c54c0(int a1, int a2, int a3, int a4);
 int __cdecl io_FormatTextBuffer(char* dst, int id, ...);
 int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
@@ -40,7 +40,7 @@ void __cdecl fcn_0054b150(char* entity)
 		fcn_004c5620(-1, (unsigned char*) entity);
 	}
 	*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
-	fcn_00500bb0((SIM_CLOCK*) (entity + 0x52), 0x30, 0, 0);
+	gm_AddTime((SIM_CLOCK*) (entity + 0x52), 0x30, 0, 0);
 	fcn_004c5620(0, (unsigned char*) entity);
 	fcn_004c54c0(*(int*) (secondEntity + 4), *(int*) (firstEntity + 4), -0x14, 1);
 	if (firstEntity[2] == 6 || firstEntity[2] == 7) {

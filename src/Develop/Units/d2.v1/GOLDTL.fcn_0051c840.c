@@ -48,7 +48,7 @@ extern char g_6a238e[];
 int sprintf(char*, const char*, ...);
 int __cdecl fcn_0042b2f0(char*, int, int);
 int __cdecl fcn_0064d530(char*, const char*, unsigned int);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl io_CopyTrailingDigits(char*, int, char*);
 int __cdecl fcn_0051e070(void);
 int __cdecl d2_ClearWindowChildren(int, int);
@@ -536,7 +536,7 @@ body:
 				k++;
 			}
 			fcn_0064d530((char*) tab78, buf + i + 3, k - i - 4);
-			res = fcn_0064eeec((char*) tab78);
+			res = atoi((char*) tab78);
 			for (j = id; j < txt_EntryCount; j++) {
 				if (g_11bb000[j] == e) {
 					break;

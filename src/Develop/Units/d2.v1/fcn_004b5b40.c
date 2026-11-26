@@ -12,12 +12,12 @@ int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);
 int __cdecl io_AppendText(int a, ...);
-int __cdecl fcn_00472250(int a, int b, int c);
+int __cdecl d2_GetWindowListItem(int a, int b, int c);
 int __cdecl fcn_004b3d80(int a, int b, int c);
 int __cdecl fcn_004c5790(int a, void* b);
 int __cdecl fcn_004c4450(int a);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_005373e0(void* a, int b);
+int __cdecl main_RunFrameLoop(void* a, int b);
 void __cdecl fcn_00471e30(int a);
 void __cdecl fcn_004b5530(int a, int b);
 void __cdecl fcn_004b5b20(int a);
@@ -70,9 +70,9 @@ void __cdecl fcn_004b5b40(int mode)
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1b95, *(unsigned short*) slot);
-	r1 = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b98));
-	r2 = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b99));
-	r3 = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b9a));
+	r1 = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1b96, 0x1b98));
+	r2 = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1b96, 0x1b99));
+	r3 = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1b96, 0x1b9a));
 
 	g_100f1dc = -1;
 	do {
@@ -113,7 +113,7 @@ void __cdecl fcn_004b5b40(int mode)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_004b5b40, flags | 0x80) != 0);
+	} while (main_RunFrameLoop((void*) fcn_004b5b40, flags | 0x80) != 0);
 	fcn_00471e30(dlg);
 	if (changed) {
 		fcn_004b5530(*obj, flags);

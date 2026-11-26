@@ -1952,8 +1952,8 @@ int __cdecl gm_FreeObjectListRecursive(LinkedNode** head)
 #ifndef REBREW_SERVER
 #include "../../Units/d3/d3_object.h"
 extern int d3_CurrentContextIndex;
-int __cdecl fcn_005155e0(unsigned char*);
-void __cdecl fcn_004432d0(int, int);
+int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char*);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
@@ -2140,9 +2140,9 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 #ifndef REBREW_SERVER
 		existing = gm_StartFilteredEntitySearch(1, 1, parent_id);
 		if (existing != NULL && gm_CheckEntityType((unsigned char*) existing) != 0)
-			universe = fcn_005155e0((unsigned char*) existing);
+			universe = init_AllocateGebaeudeSceneSlot((unsigned char*) existing);
 		saved_mode = d3_CurrentContextIndex;
-		fcn_004432d0(universe, 1);
+		d3_SelectSceneContext(universe, 1);
 		if (gm_CheckEntityType((unsigned char*) existing) != 0)
 			found = fcn_00445600(NULL, 0x100, NULL, "dummy_TRANSPORTER");
 		else
@@ -2214,7 +2214,7 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 			*(int*) (model + 0x2c) = -1;
 		}
 		*(int*) (slot + 0x24) = 0;
-		fcn_004432d0(saved_mode, 1);
+		d3_SelectSceneContext(saved_mode, 1);
 #endif
 		break;
 	case 0x15e:
@@ -5643,7 +5643,7 @@ float __cdecl gm_GetManufacturerRating(int item)
 	def = g_item_def_table + item * 0x41;
 	return sum * *(int*) (def + 0x22) / (int) *(unsigned short*) (def + 0x36);
 }
-#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+#if defined(REBREW_SERVER) /* Gold 0x508820 is the GoldTL body (GOLD.fcn_00508820.c), not this one */
 #pragma optimize("a", on)
 double __cdecl eval_ObjektPreis2Credits(int entity_index, int param2)
 {

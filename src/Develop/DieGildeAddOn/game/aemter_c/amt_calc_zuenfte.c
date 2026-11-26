@@ -26,7 +26,7 @@ extern char g_68de2c[];
 
 void __cdecl ReportClientMessage(const char*);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_004432d0(int, int);
+int __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_TransformPoint(char*, char*, int*);
 void __cdecl fcn_004c5530(int a1);
 int __cdecl fcn_004e8240(unsigned char, char*, char*, int, int);
@@ -37,7 +37,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_00597ff0(int, char*);
-int __cdecl fcn_00598150(char*, int*);
+int __cdecl d3_CollectUnusedSceneObjects(char*, int*);
 void __cdecl fcn_00598740(float* out, int obj);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strupr(char*);
@@ -143,10 +143,10 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 			t = gm_StartFilteredEntitySearch(1, 5, sel);
 			if (t == 0) {
 				found = (unsigned int) d3_CurrentContextIndex;
-				fcn_004432d0(0, 1);
+				d3_SelectSceneContext(0, 1);
 				rowbase = (char*) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[row];
 				fcn_00597ff0(row, names);
-				n = fcn_00598150(names, ids);
+				n = d3_CollectUnusedSceneObjects(names, ids);
 				rec = (char*) ids[gm_RandomMod(n) & 0xffff];
 				i = 0;
 				if (rec == 0) {
@@ -166,7 +166,7 @@ void __cdecl amt_calc_zuenfte(unsigned int kind)
 				}
 				d3_TransformPoint(rec, (float*) (rec + 0x4c), info.position);
 				fcn_00598740(rotation, (int) rec);
-				fcn_004432d0((int) found, 1);
+				d3_SelectSceneContext((int) found, 1);
 				cand[0] = (unsigned int) g_6798d4;
 				strcat((char*) cand, rowbase + 1);
 				strupr((char*) cand + 2);

@@ -1,4 +1,4 @@
-int __cdecl fcn_005373e0(void* handler, int screen_id);
+int __cdecl main_RunFrameLoop(void* handler, int screen_id);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* Screen arm body for the "Gesetze\Auswahl2" dialog (laws selection).
  *
@@ -76,9 +76,9 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 void __cdecl d2_ClearWindowChildren(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
-void __cdecl fcn_00469470(int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 int __cdecl fcn_0046fac0(int, int, char*, int);
@@ -198,18 +198,18 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 							continue;
 						}
 					}
-					btn = fcn_0046f740(0x96, y, 0x5db, d2_CurrentWindowId);
+					btn = d2_AddElementToWindow(0x96, y, 0x5db, d2_CurrentWindowId);
 					s->btn = btn;
 					if (shown) {
 						if (holder == -1) {
 							holder = d2_CreateRadioGroup(1, btn);
 						} else {
-							fcn_00469470(holder, btn);
+							d2_AddToRadioGroup(holder, btn);
 						}
 					}
 					progress = (int) fcn_0050f980(g_774970,
 					                              (unsigned short) s->id, 1);
-					s->label = fcn_0046f740(0x98, y + 1,
+					s->label = d2_AddElementToWindow(0x98, y + 1,
 					                        ((GOLDTL_House5cff*) g_7f4ca0)[s->id].f18c,
 					                        d2_CurrentWindowId);
 					io_FormatTextBuffer(text, 0x6a9680, s->id);
@@ -260,7 +260,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 				}
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005cff20, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005cff20, 0x677c7) != 0);
 	if (holder != -1) {
 		d2_ClearRadioGroup(holder);
 	}

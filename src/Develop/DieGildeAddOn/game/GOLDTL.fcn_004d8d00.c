@@ -30,7 +30,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl fcn_004ce610(char*);
 unsigned short* __cdecl fcn_004ce680(char*);
 float __cdecl fcn_004cefb0(char*, int);
-float __cdecl fcn_004cf000(void*, int, int);
+float __cdecl gm_GetEntityGridDistance(void*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 unsigned int __cdecl cut_RandMod(int);
 int __cdecl fcn_005c6270(void*, int);
@@ -205,10 +205,10 @@ void __cdecl fcn_004d8d00(char* context)
 							v24 = 0;
 					}
 				} else {
-					if (fcn_004cf000(obj, p->f14, p->f18) > *(float*)(ent + 0xc))
+					if (gm_GetEntityGridDistance(obj, p->f14, p->f18) > *(float*)(ent + 0xc))
 						v24 = 0;
 					if (!p->c0c) {
-						if (fcn_004cf000(obj, p->f14, p->f18) > *(float*)(ent + 0xc) * 0.1)
+						if (gm_GetEntityGridDistance(obj, p->f14, p->f18) > *(float*)(ent + 0xc) * 0.1)
 							v24 = 0;
 					}
 				}
@@ -217,7 +217,7 @@ void __cdecl fcn_004d8d00(char* context)
 					if (fcn_004cefb0(obj, ent34(tgt)) > *(float*)(ent + 0xc))
 						v24 = 0;
 				} else {
-					if (fcn_004cf000(obj, p->f14, p->f18) > *(float*)(ent + 0xc))
+					if (gm_GetEntityGridDistance(obj, p->f14, p->f18) > *(float*)(ent + 0xc))
 						v24 = 0;
 				}
 			}

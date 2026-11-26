@@ -41,7 +41,7 @@ int __cdecl fcn_004f6470(int, int*, unsigned short);
 int __cdecl fcn_004f61c0(int*, int*, int*, unsigned short);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5530(Msg_5d5930*);
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl d2_CenterDialogWindows(int);
@@ -54,7 +54,7 @@ void __cdecl fcn_005c9160(char*, int, int, int, int);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00525f60(void*, int);
 int __cdecl fcn_005d5670(unsigned char*, unsigned char*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 
@@ -90,7 +90,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 			pos14_7f4c00 pos;
 			int sender;
 			pos = gm_GameTime;
-			fcn_00500bb0(&pos, 0x60, 0, 0);
+			gm_AddTime(&pos, 0x60, 0, 0);
 			memset(&m, 0, sizeof(m));
 			sender = *(int*) (p + 4);
 			m.f8 = sender;
@@ -176,7 +176,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005d5930, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005d5930, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 }

@@ -45,12 +45,12 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl fcn_00471e30(int h);
 void __cdecl d2_SetForm(int h, int a);
-int __cdecl fcn_00472250(int h, int a, int b);
+int __cdecl d2_GetWindowListItem(int h, int a, int b);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_00525f60(char* e, int a);
 int __cdecl fcn_00526010(void* e, int a, char b);
 void __cdecl fcn_00526120(char* text, int a);
-int __cdecl fcn_005373e0(void* fn, int a);
+int __cdecl main_RunFrameLoop(void* fn, int a);
 
 /* ADDRESS: GOLDTL 0x005d78e0 */
 int __cdecl fcn_005d78e0(char* a0, char* a1)
@@ -137,8 +137,8 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 	d2_CenterDialogWindows(dialog);
 	d2_SetForm(dialog, 1);
 	ret = io_AppendText(0x1dd1, 4, v, firstEntity->id, secondEntity->id);
-	r1 = fcn_00472250(dialog, 1, ret);
-	r2 = fcn_00472250(dialog, 1, ret + 1);
+	r1 = d2_GetWindowListItem(dialog, 1, ret);
+	r2 = d2_GetWindowListItem(dialog, 1, ret + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
@@ -178,7 +178,7 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) 0x5d78e0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) 0x5d78e0, 0x657c7) != 0);
 	fcn_00471e30(dialog);
 	return rc;
 }

@@ -8,7 +8,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, void*);
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_004ac150(short);
 unsigned short __cdecl fcn_004ac290(int);
 char* __cdecl fcn_004ac1e0(short);
@@ -16,7 +16,7 @@ char* __cdecl evt_FindScriptById(int);
 char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(char*, int, int);
 void __cdecl evt_RequestScriptExit(char*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl sprintf(char*, const char*, ...);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_005467e0(int);
@@ -77,13 +77,13 @@ void __cdecl fcn_00555d30(char* obj)
 			fcn_00545d40(*(int*) (j + 2), *(int*) (obj + 4), buf, 0,
 				     0x601, (void*) 0x6b5c60);
 		}
-		fcn_00500bb0(obj + 0x52, 0, 5, 0);
+		gm_AddTime(obj + 0x52, 0, 5, 0);
 		*(int*) (obj + 0x84) = fcn_004c5620(2, obj);
 		return;
 	case 2:
 		base = (int*) (obj + 0x52);
 		*(pos14_7f4c00*) base = gm_GameTime;
-		fcn_00500bb0((char*) base, 0, 5, 0);
+		gm_AddTime((char*) base, 0, 5, 0);
 		e = evt_FindScriptById(*(int*) (obj + 0xb4));
 		if (*(unsigned short*) (obj + 0x56) < 0x14) {
 			if (e == 0 || *(int*) e != 0x68427244) {
@@ -91,7 +91,7 @@ void __cdecl fcn_00555d30(char* obj)
 				x = fcn_004ac1e0(*(unsigned short*) (obj + 0xac));
 				sprintf(buf, (char*) 0x67d444, *(int*) (x + 8));
 				t = *(int*) 0x6b8010;
-				fcn_004432d0(0, 1);
+				d3_SelectSceneContext(0, 1);
 				q = evt_LoadGfxScript((char*) 0x6a5edc);
 				if (q != 0) {
 					*(int*) q = 0x68427244;
@@ -99,13 +99,13 @@ void __cdecl fcn_00555d30(char* obj)
 					fcn_00428340(q, 1, *(int*) (x + 8));
 					*(int*) (q + 0x104) = 0;
 				}
-				fcn_004432d0(t, 1);
+				d3_SelectSceneContext(t, 1);
 			}
 		} else {
 			if (e != 0 && *(int*) e == 0x68427244) {
 				evt_RequestScriptExit(e);
 			}
-			fcn_00500bb0((char*) base, 0, 5, 0);
+			gm_AddTime((char*) base, 0, 5, 0);
 			*(int*) (obj + 0x70) = 3;
 			return;
 		}

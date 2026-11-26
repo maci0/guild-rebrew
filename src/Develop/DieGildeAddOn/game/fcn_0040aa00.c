@@ -28,7 +28,7 @@ extern char* __cdecl ch_AdjustHeightToGround(char*);
 extern void __cdecl fcn_00402aa0(char*);
 extern void __cdecl fcn_004193f0(char*, char*, int, float);
 extern char* __cdecl fcn_00422460(int, char*);
-extern float __cdecl fcn_00444700(char*, float*);
+extern float __cdecl d3_ComputeYawToTarget(char*, float*);
 extern void __cdecl fcn_00438d70(char*, int, int, int);
 extern void __cdecl ch_FinishAni(char*);
 extern void __cdecl fcn_0041ddd0(char*);
@@ -269,7 +269,7 @@ next:
 		q = (char*) (obj + 0x124);
 		d3_GridPointToWorld((char*) v, *(unsigned char*) (table + i * 2),
 		             *(unsigned char*) (table + i * 2 + 1), (float*) q);
-		d = fcn_00444700(*(char**) (o + 0x34), (float*) q);
+		d = d3_ComputeYawToTarget(*(char**) (o + 0x34), (float*) q);
 		*(float*) (obj + 0x108) = d;
 		o = *(char**) (*(int*) (obj + 0x14) + 0x34);
 		a = (float) sqrt(
@@ -312,7 +312,7 @@ next:
 	}
 	if (*(float*) (obj + 0x108) < 0.0f) {
 		o = *(char**) (*(int*) (obj + 0x14) + 0x34);
-		d = fcn_00444700(o, (float*) (obj + 0x124));
+		d = d3_ComputeYawToTarget(o, (float*) (obj + 0x124));
 		*(float*) (obj + 0x108) = d;
 		if (d > 0.04 || d < -0.04) {
 			t = ch_UpdateTime - g_67529c;
@@ -348,7 +348,7 @@ next:
 		fcn_00438d70(o, *(int*) (o + 0x84), *(int*) &a, *(int*) (o + 0x8c));
 	} else if (*(float*) (obj + 0x108) > 0.0f) {
 		o = *(char**) (*(int*) (obj + 0x14) + 0x34);
-		d = fcn_00444700(o, (float*) (obj + 0x124));
+		d = d3_ComputeYawToTarget(o, (float*) (obj + 0x124));
 		*(float*) (obj + 0x108) = d;
 		if (d > 0.04 || d < -0.04) {
 			t = ch_UpdateTime - g_67529c;

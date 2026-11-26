@@ -5,7 +5,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl fcn_0050b750(int, int);
@@ -16,8 +16,8 @@ int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned sho
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
-int __cdecl fcn_00471f80(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl d2_GetControlValue(int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 extern int g_14ce8e0, d2_CurrentElementId, g_774654;
 #define SHP_REC (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]))
@@ -76,11 +76,11 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 	if (flag != 0) {
 		io_AppendText(0x1f4f);
 	} else {
-		slider = fcn_00472250(dlg, 1,
+		slider = d2_GetWindowListItem(dlg, 1,
 		    io_AppendText(0x1f4d, *arg3, *(unsigned char*) &g_773d75));
 		hv = io_AppendText(0x1f4e);
-		confirm = fcn_00472250(dlg, 1, hv);
-		vc = fcn_00472250(dlg, 1, hv + 1);
+		confirm = d2_GetWindowListItem(dlg, 1, hv);
+		vc = d2_GetWindowListItem(dlg, 1, hv + 1);
 		fcn_00472380(slider,
 		    fcn_0050b710(v14, *(unsigned char*) &g_773d75),
 		    fcn_0050b710(ebp, *(unsigned char*) &g_773d75),
@@ -96,7 +96,7 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 			continue;
 		}
 		if (d2_CurrentElementId == confirm) {
-			hv = fcn_00471f80(slider);
+			hv = d2_GetControlValue(slider);
 			uv = fcn_0050b750(hv, *(unsigned char*) &g_773d75);
 			if (fcn_00526010((void*) ((unsigned long)((char*)&((ENTITY_RECORD*)g_7f4ca0)[
 *(unsigned short*) &g_774970])), uv,
@@ -116,7 +116,7 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 		} else if (d2_CurrentElementId == vc) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) d2_ShowGiftDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowGiftDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

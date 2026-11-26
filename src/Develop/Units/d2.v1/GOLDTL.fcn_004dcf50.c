@@ -47,7 +47,7 @@ void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e3640(void);
 void __cdecl fcn_004c09b0(void);
 void __cdecl msx_StopAmbientTrack(int a);
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_004e4b00(int a);
 
 typedef struct S2d {
@@ -612,7 +612,7 @@ int __cdecl cut_RunProzess(int a0)
 			fcn_004e44f0(h);
 		}
 		if (g_772f3c == 0 && msg.hnd[6] != -1) {
-			fcn_004432d0(msg.hnd[6], 0);
+			d3_SelectSceneContext(msg.hnd[6], 0);
 		}
 	}
 	/* 0x4de6e0 */

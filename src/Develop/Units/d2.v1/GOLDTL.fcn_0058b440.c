@@ -8,7 +8,7 @@ void __cdecl fcn_00469110(int, int);
 void __cdecl fcn_0046c310(int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl io_FormatTextBuffer(void*, ...);
@@ -93,8 +93,8 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             v14 = v2[3];
             v8 = (*(int*) (v14 * 0x3cc + 0x1015f4c) -
                   (int) *(short*) ((int) g_772500 + 0x2399c)) / 2;
-            v15[-1] = fcn_0046f740(v8, *(int*) (v14 * 0x3cc + 0x1015f50) * rowIndex + 2, 0x6c7, v14);
-            v14 = fcn_0046f740(v8 + 2,
+            v15[-1] = d2_AddElementToWindow(v8, *(int*) (v14 * 0x3cc + 0x1015f50) * rowIndex + 2, 0x6c7, v14);
+            v14 = d2_AddElementToWindow(v8 + 2,
                                *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex + 4,
                                *(unsigned int*) (*v15 + 0x3c), v2[3]);
             v15[-1] = v14;

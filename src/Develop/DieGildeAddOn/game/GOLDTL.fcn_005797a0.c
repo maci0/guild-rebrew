@@ -15,7 +15,7 @@ typedef struct BuildingRow5797 {
 extern unsigned char g_773d75;
 
 extern int __cdecl fcn_00500e20(int* p);
-extern void __cdecl fcn_00500bb0(void* clock, int a, int b, int c);
+extern void __cdecl gm_AddTime(void* clock, int a, int b, int c);
 extern void __cdecl he_FreeAction(char* record);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
@@ -63,7 +63,7 @@ void __cdecl fcn_005797a0(char* event)
 	if ((*(float*) (handle * 4 + 0x696550) <= (float) value
 			|| (float) value < *(float*) (handle * 4 + 0x696540))
 		&& *(int*) (event + 0x70) != -1 && *(int*) (event + 0x70) != -2) {
-		fcn_00500bb0(event + 0x52, 0, 5, 0);
+		gm_AddTime(event + 0x52, 0, 5, 0);
 		return;
 	}
 	if (*(unsigned short*) (event + 8) == 0xffff || *(int*) (event + 0xc) == -1) {
@@ -120,7 +120,7 @@ void __cdecl fcn_005797a0(char* event)
 		*(int*) (event + 0x56) = g_7f4c04;
 		*(int*) (event + 0x5a) = g_7f4c08;
 		*(short*) (event + 0x5e) = g_7f4c0c;
-		fcn_00500bb0(event + 0x52, 0, 5, 0);
+		gm_AddTime(event + 0x52, 0, 5, 0);
 		if (*(int*) (event + 0xb4) <= -1)
 			*(unsigned int*) (event + 0x70) = 0xffffffff;
 	}

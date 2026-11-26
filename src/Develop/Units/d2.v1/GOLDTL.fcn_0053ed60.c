@@ -23,7 +23,7 @@ extern int d2_CurrentWindowId;
 
 void __cdecl fcn_00533880(void);
 void __cdecl fcn_005338a0(void);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl fcn_00445f50(int, int, float, int);
@@ -50,7 +50,7 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int);
 int __cdecl fcn_0064f170(char*, char*, int);
 void __cdecl fcn_0053eb60(int);
@@ -100,7 +100,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	highlight = -1;
 	fcn_00533880();
 	fcn_005338a0();
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	fcn_00438b40(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x5c));
 	d3_SetObjectRotation(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x90));
 	fcn_00445f50(0, 0, 1.0f, 0);
@@ -168,7 +168,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	fcn_00533a60(d2_CurrentWindowId, 0, tmp_ids, 2, g_14b5e50, g_14b5e54);
 	ok_id = tmp_ids[0];
 	info_id = tmp_ids[1];
-	while (fcn_005373e0((void*) fcn_0053ed60, 0x10d6) != 0) {
+	while (main_RunFrameLoop((void*) fcn_0053ed60, 0x10d6) != 0) {
 		g_7746a0 = 0;
 		image = d3_FindSceneObjectAtScreenPoint((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
 		g_7746a4 = image;

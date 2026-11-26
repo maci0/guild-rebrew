@@ -9,10 +9,10 @@ extern int g_100f1dc;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
+int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, int, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_ClearRadioGroup(int);
@@ -34,10 +34,10 @@ int __cdecl fcn_0053a020(void)
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	io_AppendText(0x1ca5);
-	a = fcn_00472250(h, 0, io_AppendText(0x1ca9));
-	b = fcn_00472250(h, 0, io_AppendText(0x1caa));
+	a = d2_GetWindowListItem(h, 0, io_AppendText(0x1ca9));
+	b = d2_GetWindowListItem(h, 0, io_AppendText(0x1caa));
 	list = d2_CreateRadioGroup(2, a, b);
-	while (fcn_005373e0(fcn_0053a020, 0x24087) != 0) {
+	while (main_RunFrameLoop(fcn_0053a020, 0x24087) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;

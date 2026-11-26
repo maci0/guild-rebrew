@@ -12,7 +12,7 @@ struct vec4 {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_665ea0;
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 
 void __cdecl d3_TransformPoint(char*, char*, struct vec4*);
 float __cdecl fcn_004514d0(struct vec4*, char*);
@@ -27,7 +27,7 @@ int __cdecl fcn_005589d0(char* u)
 	char* c;
 
 	t = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	c = *(char**) (u + 0xc8);
 	if (c != 0 && *(char**) (c + 0x1cc) != 0 && *(char**) (*(char**) (c + 0x1cc) + 0x318) != 0) {
 		gm_ResolveEntityById((void**) (&x), 0, 0, *(int*) (u + 0xb4));
@@ -47,10 +47,10 @@ int __cdecl fcn_005589d0(char* u)
 			*(float*) (u + 0xd4) = b.y;
 			*(float*) (u + 0xd8) = b.z;
 			*(int*) (u + 0xc4) = 1;
-			fcn_004432d0(t, 1);
+			d3_SelectSceneContext(t, 1);
 			return 1;
 		}
 	}
-	fcn_004432d0(t, 1);
+	d3_SelectSceneContext(t, 1);
 	return 0;
 }

@@ -42,13 +42,13 @@ void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_00594340(void);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_004c35f0(void);
 void __cdecl sv_ClearObjectSelection(void);
@@ -109,7 +109,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 	d2_SetForm(total, 2);
 	y = -0x80 + *(int*) ((char*) g_1015f4c + d2_CurrentWindowId * 0x3cc) / 2;
 	for (x = 0x19, cnt = 0; x < 0x109; x += 0x50, cnt++) {
-		h = fcn_0046f740(y, x, (int) ids[cnt] + 0xdf, d2_CurrentWindowId);
+		h = d2_AddElementToWindow(y, x, (int) ids[cnt] + 0xdf, d2_CurrentWindowId);
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c = 1;
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].flags_1d0 = 3;
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1dc = 100;
@@ -122,7 +122,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00595e20(gebaeude, ids[6]);
 	fcn_005963f0(total, 1, 0, gebaeude);
-	sel = fcn_005373e0(0x59ecc0, 0x677c7);
+	sel = main_RunFrameLoop(0x59ecc0, 0x677c7);
 	while (sel) {
 		fcn_00595e20(gebaeude, ids[6]);
 		fcn_005963f0(total, 1, 0, gebaeude);
@@ -194,7 +194,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 					sv_ClearObjectSelection();
 					sel = fcn_004c5530(&req);
 					while (!fcn_004c4450(sel)) {
-						fcn_005373e0(0, 0x20007);
+						main_RunFrameLoop(0, 0x20007);
 					}
 					fcn_004c4480(sel);
 				}
@@ -206,7 +206,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 		}
 		else if (g_14ce8e0 != 0)
 			g_774654 = 1;
-		sel = fcn_005373e0(0x59ecc0, 0x677c7);
+		sel = main_RunFrameLoop(0x59ecc0, 0x677c7);
 	}
 	sv_ClearObjectSelection();
 	fcn_0052a2d0();

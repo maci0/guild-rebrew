@@ -16,7 +16,7 @@ extern char g_7f4ca4[];
 
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(GAME_TIMESTAMP*, int, int, int);
+void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_004c6b20(int, int, int);
 void __cdecl fcn_004c4510(void*, int);
@@ -48,7 +48,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
-		fcn_00500bb0((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
+		gm_AddTime((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = 3;
@@ -62,7 +62,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
-		fcn_00500bb0((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
+		gm_AddTime((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = (int) ((float) n * g_6652c8);
@@ -76,7 +76,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
-		fcn_00500bb0((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
+		gm_AddTime((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = 3;
@@ -90,7 +90,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(int*) (msg + 0x2c) = g_7f4c04;
 		*(int*) (msg + 0x30) = g_7f4c08;
 		*(unsigned short*) (msg + 0x34) = g_7f4c0c;
-		fcn_00500bb0((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
+		gm_AddTime((GAME_TIMESTAMP*) (msg + 0x28), 1, 0, 0);
 		*(int*) (msg + 8) = *(int*) (entity + 2);
 		*(int*) (msg + 0xc) = -1;
 		*(int*) (msg + 0x58) = (int) ((float) n * g_6652c8);
@@ -138,7 +138,7 @@ void __cdecl fcn_004f6850(unsigned short* entity, int action)
 		*(int*) (pkt + 0x1c) = g_7f4c04;
 		*(int*) (pkt + 0x20) = g_7f4c08;
 		*(unsigned short*) (pkt + 0x24) = g_7f4c0c;
-		fcn_00500bb0((GAME_TIMESTAMP*) (pkt + 0x18), 0x18, 0, 0);
+		gm_AddTime((GAME_TIMESTAMP*) (pkt + 0x18), 0x18, 0, 0);
 		/* packed packet fields: 2-byte hour override, then 4 zeroed bytes */
 		*(unsigned short*) (pkt + 0x1c) = 10;
 		*(int*) (pkt + 0x1e) = 0;

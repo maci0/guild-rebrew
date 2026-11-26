@@ -32,8 +32,8 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_CreateRadioGroup(int);
-void __cdecl fcn_00469470(int, int);
-int __cdecl fcn_005373e0(void*, int);
+void __cdecl d2_AddToRadioGroup(int, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 void __cdecl d2_ClearRadioGroup(int);
@@ -77,10 +77,10 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 	for (i = 0; i < ((IdList*)g_77255c)->count; i++) {
 		id = ((IdList*)g_77255c)->ids[i];
 		if (((D2_CONTROL_TL*)g_1015ea0)[id].kind != 0x40) {
-			fcn_00469470(ctx, id);
+			d2_AddToRadioGroup(ctx, id);
 		}
 	}
-	while (fcn_005373e0(fcn_005dfe80, wflags)) {
+	while (main_RunFrameLoop(fcn_005dfe80, wflags)) {
 		d2_UpdateRadioGroup(ctx);
 		if (flags & 0x40) {
 			fcn_004707d0(h);

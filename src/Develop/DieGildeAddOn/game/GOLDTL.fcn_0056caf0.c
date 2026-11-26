@@ -14,7 +14,7 @@ void __cdecl d3_TransformPoint(char*, char*, float*);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl he_StartHandlungSearch(int, ...);
 int __cdecl he_FreeAction(char*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 
 /* ADDRESS: GOLDTL 0x0056caf0 */
@@ -105,7 +105,7 @@ void __cdecl he_RunFireEvent(char* a0)
 				}
 			}
 			*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (a0 + 0x52), 0, 10, 0);
+			gm_AddTime((pos14_7f4c00*) (a0 + 0x52), 0, 10, 0);
 			*(int*) (a0 + 0x70) = 1;
 			return;
 		}
@@ -122,7 +122,7 @@ void __cdecl he_RunFireEvent(char* a0)
 			return;
 		}
 		*(pos14_7f4c00*) (a0 + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (a0 + 0x52), 0, 10, 0);
+		gm_AddTime((pos14_7f4c00*) (a0 + 0x52), 0, 10, 0);
 		return;
 	case -2:
 	case -1:

@@ -8,7 +8,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);
 void __cdecl fcn_00529160(char*, int, int, char*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_0056db10(char* u)
 {
@@ -28,5 +28,5 @@ void __cdecl fcn_0056db10(char* u)
 	*(pos14_7f4c00*) (u + 0x44) = gm_GameTime;
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	*(pos14_7f4c00*) (u + 0x60) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (u + 0xb4), 0, 400, 0);
+	gm_AddTime((pos14_7f4c00*) (u + 0xb4), 0, 400, 0);
 }

@@ -9,7 +9,7 @@ extern int g_7746a0;
 
 void __cdecl fcn_0057e880(int, char*, int, int);
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_0059a0e0(void);
@@ -36,7 +36,7 @@ void __cdecl fcn_0059c800(char* e)
 	g = 0;
 	fcn_0057e880(0x1b, e, 0, 0);
 	fcn_005338a0();
-	while (fcn_005373e0((void*) fcn_0059c800, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) fcn_0059c800, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			a = RegisterStatusText("contact_PRODUKTION_METALL", g_14ad0f8, 0x13);
 			b = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);

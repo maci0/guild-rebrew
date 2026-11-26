@@ -7,7 +7,7 @@ extern char g_6a9924[];
 extern char g_6aa34c[];
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_005cf560(int);
 void __cdecl d2_ShowPersonalbuch(int, char*);
@@ -18,7 +18,7 @@ void __cdecl fcn_0059b0b0(int a)
 	int y;
 
 	fcn_005338a0();
-	while (fcn_005373e0(fcn_0059b0b0, 0x67fff) != 0) {
+	while (main_RunFrameLoop(fcn_0059b0b0, 0x67fff) != 0) {
 		x = RegisterStatusText(g_6a9924, g_14a7d28, 0xc);
 		y = RegisterStatusText(g_6aa34c, g_14a7b50, 0xc);
 		if (g_7746a0 != 0) {

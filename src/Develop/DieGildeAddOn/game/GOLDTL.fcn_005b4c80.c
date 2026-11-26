@@ -34,11 +34,11 @@ extern char g_7f4ca0[];
 int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
 int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_RunCharacterDebugDialog(void*);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_005b44b0(Ent_5b4c80*);
-int __cdecl fcn_00472250(int, int, char*);
+int __cdecl d2_GetWindowListItem(int, int, char*);
 void __cdecl d2_UpdateWindowDrag(D2_WIN*);
 int __cdecl fcn_0046f280(int);
 
@@ -65,7 +65,7 @@ void __cdecl fcn_005b4c80(void)
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[win].slot, 0x54);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[left].slot, 0x54);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[right].slot, 0x54);
-	if (fcn_005373e0((void*) fcn_005b4c80, 0x657c7)) {
+	if (main_RunFrameLoop((void*) fcn_005b4c80, 0x657c7)) {
 		rp = &((D2_WIN*)g_1015f40)[right];
 		do {
 			if (g_14ce8e0 != 0) {
@@ -85,7 +85,7 @@ void __cdecl fcn_005b4c80(void)
 				d2_CurrentWindowId = left;
 				saved = *(int*) &((D2_WIN*)g_1015f40)[left].pad3c[0x21c];
 				io_AppendText((int) "$C");
-				ids[0] = fcn_00472250(-1, d2_CurrentWindowId, io_AppendText((int) "%ib[NIEMAND]$6THeCnt:%i$A", 2, fcn_005b44b0(0)));
+				ids[0] = d2_GetWindowListItem(-1, d2_CurrentWindowId, io_AppendText((int) "%ib[NIEMAND]$6THeCnt:%i$A", 2, fcn_005b44b0(0)));
 				((D2_CONTROL_TL*) g_1015ea0)[ids[0]].associated_object = 0;
 				((D2_CONTROL_TL*) g_1015ea0)[ids[0]].value_05c = 1;
 				n = 1;
@@ -95,7 +95,7 @@ void __cdecl fcn_005b4c80(void)
 					}
 					ids[i] = -1;
 					if (((Ent_5b4c80*)g_7f4ca0)[i].slot != 0xffff) {
-						ids[i] = fcn_00472250(-1, d2_CurrentWindowId, io_AppendText((int) "%it[%1N4]$6THeCnt:%i$A", ((Ent_5b4c80*)g_7f4ca0)[i].slot, fcn_005b44b0(&((Ent_5b4c80*)g_7f4ca0)[i])));
+						ids[i] = d2_GetWindowListItem(-1, d2_CurrentWindowId, io_AppendText((int) "%it[%1N4]$6THeCnt:%i$A", ((Ent_5b4c80*)g_7f4ca0)[i].slot, fcn_005b44b0(&((Ent_5b4c80*)g_7f4ca0)[i])));
 						((D2_CONTROL_TL*) g_1015ea0)[ids[i]].associated_object = &((Ent_5b4c80*)g_7f4ca0)[i];
 						n++;
 						((D2_CONTROL_TL*) g_1015ea0)[ids[i]].value_05c = 1;
@@ -114,7 +114,7 @@ void __cdecl fcn_005b4c80(void)
 			}
 			d2_UpdateWindowDrag(&((D2_WIN*)g_1015f40)[left]);
 			d2_UpdateWindowDrag(rp);
-		} while (fcn_005373e0((void*) fcn_005b4c80, 0x657c7));
+		} while (main_RunFrameLoop((void*) fcn_005b4c80, 0x657c7));
 	}
 	fcn_0046f280(win);
 	fcn_0046f280(left);

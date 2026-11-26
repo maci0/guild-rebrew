@@ -5,7 +5,7 @@
 extern pos14_7f4c00 gm_GameTime;
 extern char g_6a59fc[];
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
@@ -22,7 +22,7 @@ void __cdecl fcn_005502d0(char* u)
 		return;
 	}
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0x18, 0, 0);
+	gm_AddTime((pos14_7f4c00*) (u + 0x52), 0x18, 0, 0);
 	if (u[0x78] & 2) {
 		b = gm_LookupEntityRecordById(*(int*) (u + 0xb0));
 		a = gm_LookupEntityRecordById(*(int*) (u + 0xac));

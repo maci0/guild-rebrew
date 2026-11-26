@@ -41,7 +41,7 @@ int __cdecl fcn_004c5620(int mode, int arg);
 void __cdecl fcn_005100f0(int handle, int value);
 void __cdecl fcn_004c54c0(int a, int b, int c, int d);
 int __cdecl fcn_004c4450(int handle);
-int __cdecl fcn_005373e0(int func, int id);
+int __cdecl main_RunFrameLoop(int func, int id);
 
 /* ADDRESS: GOLDTL 0x0059fa80 */
 void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
@@ -110,7 +110,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 						*(int*) (v7 + 0xbc) = gm_GameTime.a;
 						v9 = fcn_004c5620(1, v7);
 						while (v9 != -1 && !fcn_004c4450(v9)) {
-							fcn_005373e0(0, 0x20007);
+							main_RunFrameLoop(0, 0x20007);
 						}
 						g_774654 = 1;
 					}
@@ -143,7 +143,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 		} else {
 			g_774654 = 1;
 		}
-		if (!fcn_005373e0(0x59fa80, 0x677c7)) {
+		if (!main_RunFrameLoop(0x59fa80, 0x677c7)) {
 			fcn_00471e30(dialog);
 			return;
 		}

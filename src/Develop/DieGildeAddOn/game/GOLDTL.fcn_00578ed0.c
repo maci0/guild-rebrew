@@ -11,7 +11,7 @@ extern void __cdecl fcn_00579390(char*, char*);
 extern void __cdecl fcn_00579410(char*, char*);
 extern void __cdecl fcn_004c5530(char*);
 extern void __cdecl he_FreeAction(char*);
-extern void __cdecl fcn_00500bb0(char*, int, int, int);
+extern void __cdecl gm_AddTime(char*, int, int, int);
 
 typedef struct Req578 {
 	int a;
@@ -92,7 +92,7 @@ void __cdecl fcn_00578ed0(char* event)
 
 
 
-					fcn_00500bb0(event + 0x52, 0, 10, 0);
+					gm_AddTime(event + 0x52, 0, 10, 0);
 					return;
 				}
 				if (fcn_004a57a0((char*) ((*(unsigned short*) (event + 8)) * 0x21c + (unsigned long)&g_7f4ca0),
@@ -163,7 +163,7 @@ found_one:
 
 
 
-				fcn_00500bb0(event + 0x52, 0, 4, 0);
+				gm_AddTime(event + 0x52, 0, 4, 0);
 				return;
 			default:
 				return;

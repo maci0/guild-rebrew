@@ -12,7 +12,7 @@
 extern pos14_7f4c00 gm_GameTime;
 extern char* gm_CityEntity;
 
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 void __cdecl fcn_004c5530(void*);
 
 int __cdecl fcn_004aff10(int a1, int a2, char* arg)
@@ -21,7 +21,7 @@ int __cdecl fcn_004aff10(int a1, int a2, char* arg)
 
 	if (*arg != '-')
 		return 0;
-	if (fcn_0064eeec(arg + 1) > 0) {
+	if (atoi(arg + 1) > 0) {
 		memset(m, 0, sizeof(m));
 		m[4] = 0x53;
 		*(int*) (m + 8) = *(int*) (gm_CityEntity + 4);

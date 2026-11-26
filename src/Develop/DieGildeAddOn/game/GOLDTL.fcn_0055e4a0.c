@@ -21,7 +21,7 @@ extern char* g_1043370[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl gm_StartFilteredEntitySearch(int a, ...);
 char* __cdecl gm_FindRecordById(int id);
-int __cdecl fcn_004432d0(int a, int b);
+int __cdecl d3_SelectSceneContext(int a, int b);
 char __cdecl fcn_0045b990(char* map, float* out, int* x, int* y, float* z);
 int __cdecl fcn_004c5290(int a, int b, int c);
 int __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
@@ -31,7 +31,7 @@ void __cdecl fcn_004c5c80(unsigned int h);
 int __cdecl fcn_004c5da0(int who, int key, int target, int name, int mode, char* text);
 int __cdecl fcn_004c5620(int state, void* ev);
 int __cdecl fcn_00505340(unsigned char* rec);
-int __cdecl fcn_005155e0(unsigned char* rec);
+int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* rec);
 void __cdecl io_FormatTextBuffer(char* text, int format, ...);
 int __cdecl fcn_00529710(char* a, unsigned char* b);
 char* __cdecl fcn_0055d630(char* o);
@@ -80,8 +80,8 @@ void __cdecl fcn_0055e4a0(char* ev)
 		*(unsigned int*) (ev + 0xec) = fcn_004c5290(*(int*) (v8 + 1),
 			*(int*) (v6 + 1), *(int*) (e + 2));
 		cm_RequestChrMoveToUniverse(*(int*) (e + 2), *(int*) (v8 + 1), 0xffffffff, s_68b1e0);
-		n7 = fcn_005155e0(v8);
-		fcn_004432d0(n7, 1);
+		n7 = init_AllocateGebaeudeSceneSlot(v8);
+		d3_SelectSceneContext(n7, 1);
 		if (fcn_0055d630(0)) {
 			idx = g_1043370[n7 * 247];
 			if (idx != 0 && fcn_0045b990(idx, position, (int*) &cellX, (int*) &cellY, (float*) v10)) {
@@ -182,5 +182,5 @@ void __cdecl fcn_0055e4a0(char* ev)
 			0xffffffff, 0, 1, s_6a6310);
 		*(int*) (ev + 0xd4) = 0;
 	}
-	fcn_004432d0(v4, 1);
+	d3_SelectSceneContext(v4, 1);
 }

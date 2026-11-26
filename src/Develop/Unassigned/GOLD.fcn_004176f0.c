@@ -3,7 +3,7 @@
 
 int __cdecl m_FreeTracked(int);
 
-void __cdecl fcn_004176f0(void)
+void __cdecl d3_FreeBuffer6b5d08(void)
 {
 	int h;
 	h = *(int*) 0x631130;

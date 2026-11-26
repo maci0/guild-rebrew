@@ -15,7 +15,7 @@ void __cdecl fcn_004ee830(char*, int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_005764a0(char*, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 
 void __cdecl fcn_00575ab0(char* u)
@@ -47,7 +47,7 @@ void __cdecl fcn_00575ab0(char* u)
 			}
 			if (fcn_005764a0(*(char**) (h + 0x16c), 0x24b) != 0) {
 				*(pos14_7f4c00*) (u + 0xbc) = gm_GameTime;
-				fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 0xf, 0);
+				gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 0xf, 0);
 				return;
 			}
 			if (*(int*) (u + 0x70) != 0) {
@@ -55,7 +55,7 @@ void __cdecl fcn_00575ab0(char* u)
 			}
 			*(int*) (u + 0xb4) -= gm_GetElapsedMinutes((pos14_7f4c00*) (u + 0xbc), &gm_GameTime);
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
+			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
 			*(pos14_7f4c00*) (u + 0xbc) = gm_GameTime;
 			if (*(int*) (u + 0xb4) <= 0) {
 				*(int*) (u + 0x70) = 1;
@@ -63,7 +63,7 @@ void __cdecl fcn_00575ab0(char* u)
 			return;
 		}
 		*(pos14_7f4c00*) (u + 0xbc) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
 		return;
 	}
 	he_FreeAction(u);

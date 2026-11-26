@@ -8,7 +8,7 @@ typedef struct TIME_4FE140 {
 #pragma pack(pop)
 
 /* ADDRESS: GOLD 0x004fe140 */
-void __cdecl fcn_004fe140(TIME_4FE140* clock, int hours, int minutes, int seconds)
+void __cdecl gm_AddTime(TIME_4FE140* clock, int hours, int minutes, int seconds)
 {
 	unsigned short* hour = &clock->hour;
 	int value;

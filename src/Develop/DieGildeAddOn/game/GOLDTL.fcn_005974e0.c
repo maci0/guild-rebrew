@@ -9,7 +9,7 @@ int __cdecl CountDisplayCounters(void);
 void __cdecl fcn_004c4510(void*, int);
 void __cdecl fcn_004c4700(int, int, int, void*);
 void __cdecl fcn_004c53a0(void);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 
 /* Build the message slot table for one packet: widen the four 0x14-byte
    attribute rows selected by the packet's type byte, merge the queried
@@ -213,7 +213,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
         v8 = *v7;
         if (v8 != -1 &&
             *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v8].kind)) == 0x41 &&
-            fcn_00471f80(v8)) {
+            d2_GetControlValue(v8)) {
             v10 = 1;
         }
         v7 = &v7[0xe];

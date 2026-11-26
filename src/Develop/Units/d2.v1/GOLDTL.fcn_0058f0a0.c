@@ -17,7 +17,7 @@ extern int g_14b5734;
 
 void __cdecl fcn_005338a0(void);
 int __cdecl RegisterStatusText(char*, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00590500(int);
 void __cdecl fcn_0058f020(int);
 void __cdecl fcn_0058f6a0(int);
@@ -53,7 +53,7 @@ void __cdecl d2_RunFriedhofActions(int arg)
 	insuranceAction = 0;
 	transportAction = 0;
 	fcn_005338a0();
-	while (fcn_005373e0(d2_RunFriedhofActions, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunFriedhofActions, 0x67fff) != 0) {
 		fcn_00590500(arg);
 		if ((g_7746d8 & 0x200) != 0) {
 			ageAction = RegisterStatusText("contact_ALTERN_LASSEN", g_14b55a0, 0x2f);

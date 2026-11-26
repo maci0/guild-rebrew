@@ -22,10 +22,10 @@ char* __cdecl ch_FindCharacterByName(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 int __cdecl gm_CheckEntityType(char*);
 int __cdecl d3_GetContextIndex(int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl init_EnsureObjektSceneContext(char*);
-int __cdecl fcn_005155e0(char*);
+int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl ch_QueueStandUpAnimation(char*, char*);
 char* __cdecl ch_UseGate(char*, char*, char*, int, int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
@@ -94,7 +94,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 	saved = d3_CurrentContextIndex;
 	if (C != 0 && gm_CheckEntityType(C) != 0) {
 		k = d3_GetContextIndex(*(int*) (o + 0x88));
-		fcn_004432d0(k, 1);
+		d3_SelectSceneContext(k, 1);
 		if (k < 0)
 			goto end;
 		if (*(int*) (o + 0x30) != -1) {
@@ -103,7 +103,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 				fcn_0064d41a(buf, g_68b214,
 				    strupr((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[*(unsigned short*) q] + 1));
 				q = fcn_00502cd0(*(int*) (C + 0x5d), 1, 0, 0xfd);
-				k = fcn_005155e0(C);
+				k = init_AllocateGebaeudeSceneSlot(C);
 				if (k >= 0 && q != 0) {
 					ch_QueueStandUpAnimation(o, g_6756b8);
 					r = ch_UseGate(o, buf, g_68b1f8, k, *(int*) (C + 1),
@@ -116,10 +116,10 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 
 		/* chunk 2: native ins 200-299 */
 		if (*(int*) (B + 1) != *(int*) (C + 1)) {
-			k = fcn_005155e0(C);
+			k = init_AllocateGebaeudeSceneSlot(C);
 			if (k < 0)
 				goto end;
-			fcn_004432d0(k, 1);
+			d3_SelectSceneContext(k, 1);
 			u = fcn_00445600(0, 0x100, 0, g_68b1e0);
 			if (u != 0) {
 				m = g_1043370[k * 247];
@@ -136,12 +136,12 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			r = ch_CreateAction(o, 0x33, 0, -1, -1);
 			ch_CreateAction(o, 0x38, 1);
 			if (r == 0) {
-				fcn_004432d0(saved, 1);
+				d3_SelectSceneContext(saved, 1);
 				return 1;
 			}
 			strcpy(r + 0x70, e + 0x3d);
 			if (*(int*) (C + 0x61) != 0) {
-				fcn_004432d0(0, 1);
+				d3_SelectSceneContext(0, 1);
 				u = fcn_00445600(*(int*) (C + 0x61), 0x100, 0,
 				    (char*) &g_68149c);
 				if (u == 0)
@@ -161,7 +161,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 		if (*(int*) (o + 0x2c) != *(int*) (A + 1)
 		    && *(int*) (o + 0x2c) != -1) {
 			k = d3_GetContextIndex(*(int*) (o + 0x88));
-			fcn_004432d0(k, 1);
+			d3_SelectSceneContext(k, 1);
 			if (k < 0)
 				goto end;
 			ch_QueueStandUpAnimation(o, g_6756b8);
@@ -207,7 +207,7 @@ after:
 	/* chunk 6: native ins 600-699 */
 	if (gm_CheckEntityType(B) != 0)
 		goto b3;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	if (e[0x1d] != 0) {
 		u = fcn_00445600(0, 0x100, 0, e + 0x1d);
 	} else if (*(int*) (B + 0x61) != 0) {
@@ -268,7 +268,7 @@ diag39:
 b3:
 	/* chunk 8: native ins 800-899 */
 	if (*(int*) (B + 1) != *(int*) (o + 0x2c)) {
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		u = fcn_00445600(*(int*) (B + 0x61), 0x100, 0,
 		    (char*) &g_68149c);
 		if (u == 0)
@@ -292,7 +292,7 @@ b3:
 	if (q == 0)
 		q = fcn_00502cd0(*(int*) (B + 0x5d), 1, 0, 0xfd);
 	if (q == 0) {
-		k = fcn_005155e0(B);
+		k = init_AllocateGebaeudeSceneSlot(B);
 		if (k < 0)
 			goto saved_exit;
 		ch_CreateAction(o, 0x38, 0);
@@ -315,7 +315,7 @@ b3:
 	} else {
 		if (*(int*) (B + 1) == *(int*) (o + 0x2c))
 			goto saved_exit;
-		k = fcn_005155e0(B);
+		k = init_AllocateGebaeudeSceneSlot(B);
 		if (k < 0)
 			goto end;
 		ch_CreateAction(o, 0x38, 0);
@@ -325,7 +325,7 @@ b3:
 			memcpy(r + 0xf0, g_68b1e0, 0x18);
 		}
 		ch_CreateAction(o, 0x38, 1);
-		fcn_004432d0(k, 1);
+		d3_SelectSceneContext(k, 1);
 		if (*(int*) (o + 0x124) != 0)
 			u = fcn_00445600(0, 0x100, 0, (char*) &g_68b0f4);
 		else
@@ -342,7 +342,7 @@ b3:
 	}
 
 saved_exit:
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	if (out != 0) {
 		out[0] = 1;
 		out[1] = 7;

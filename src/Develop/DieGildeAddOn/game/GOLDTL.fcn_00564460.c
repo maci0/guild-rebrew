@@ -19,7 +19,7 @@ void __cdecl fcn_00545670(char* e, int a, int b, char* tag, int c);
 void __cdecl d2_SetForm(int dlg, int page);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl fcn_00500cb0(int* pos, int base);
-int __cdecl fcn_0050cf50(char* e, int n);
+int __cdecl gm_CalculateGebaeudeValue(char* e, int n);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id, int c, int d);
 int __cdecl gm_FindNextFilteredEntity(void);
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
@@ -67,7 +67,7 @@ void __cdecl fcn_00564460(char* e)
 		q = (unsigned short*) gm_LookupEntityRecordById(*(int*) (e + 0xb4));
 		p = (unsigned char*) gm_SearchTable67(*(int*) (e + 0xac));
 		rec = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p];
-		n = fcn_0050cf50(p, (int) (char) p[0x5c]);
+		n = gm_CalculateGebaeudeValue(p, (int) (char) p[0x5c]);
 		if ((((BUILDING_PROTOTYPE*)rec)->category) == 2) {
 			unsigned char* v4;
 

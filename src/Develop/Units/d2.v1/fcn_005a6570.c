@@ -6,10 +6,10 @@ void* __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a);
 int __cdecl io_AppendText(int id, ...);
-int __cdecl fcn_00472250(int dlg, int a, int b);
+int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 void __cdecl fcn_00472380(int w, int a, int b, int c);
-int __cdecl fcn_005373e0(void* fn, int name);
-int __cdecl fcn_00471f80(int w);
+int __cdecl main_RunFrameLoop(void* fn, int name);
+int __cdecl d2_GetControlValue(int w);
 void __cdecl fcn_004c4510(char* o, int v);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* p);
 void __cdecl fcn_004c5360(void);
@@ -29,20 +29,20 @@ void __cdecl fcn_005a6570(char* o)
     io_AppendText(0x1908);
     d2_SetForm((int) dlg, 1);
     id = io_AppendText(0x1907);
-    w1 = fcn_00472250((int) dlg, 1, id);
-    w2 = fcn_00472250((int) dlg, 1, id + 1);
+    w1 = d2_GetWindowListItem((int) dlg, 1, id);
+    w2 = d2_GetWindowListItem((int) dlg, 1, id + 1);
     fcn_00472380(w2, 3, 0xf, *(int*) (o + 0x69));
     fcn_00472380(w1, 3, 0xf, *(int*) (o + 0x6d));
 
-    while (fcn_005373e0((void*) fcn_005a6570, 0x677c7) != 0) {
+    while (main_RunFrameLoop((void*) fcn_005a6570, 0x677c7) != 0) {
         if (g_14ce8e0 != 0 || g_100f1dc == 1)
             g_774654 = 1;
         if (g_100f1dc == 2) {
             int a;
             int b;
 
-            a = fcn_00471f80(w2);
-            b = fcn_00471f80(w1);
+            a = d2_GetControlValue(w2);
+            b = d2_GetControlValue(w1);
             fcn_004c4510(o, *(int*) (o + 1));
             cm_AppendPacketFieldDelta(4, 1, 0x69, &a);
             cm_AppendPacketFieldDelta(4, 1, 0x6d, &b);

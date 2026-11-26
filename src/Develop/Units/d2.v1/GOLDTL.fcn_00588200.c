@@ -1,7 +1,7 @@
 /* Refreshes the portrait graphics of one animation object: three slot frames,
    bars, the two counter labels and the position/displacement fields. */
 #include "client_data.h"
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 float __cdecl fcn_004f0eb0(int, int, int);
 void __cdecl fcn_004f10d0(char*, int*, int*);
 void __cdecl fcn_00472380(int, ...);
@@ -30,8 +30,8 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	float f;
 	char text[64];
 
-	level = fcn_00471f80(*(int*) (panel + 0xb0));
-	percent = fcn_00471f80(*(int*) (panel + 0xb4));
+	level = d2_GetControlValue(*(int*) (panel + 0xb0));
+	percent = d2_GetControlValue(*(int*) (panel + 0xb4));
 	f = fcn_004f0eb0(level, percent, 1);
 	fcn_004f10d0(obj, (int*) (panel + 0xdc), (int*) (panel + 0xe0));
 	max = *(int*) (panel + 0xe0);

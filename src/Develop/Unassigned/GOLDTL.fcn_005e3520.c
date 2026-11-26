@@ -7,17 +7,17 @@ int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(char *, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl fcn_00468cd0(int, int);
 void __cdecl fcn_00468b80(int, int);
 void __cdecl fcn_00468bb0(int, int, ...);
 void __cdecl fcn_00533a60(int, int, int *, int, ...);
-int __cdecl fcn_005373e0(void *, int);
+int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005e2660(void);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
 void __cdecl fcn_005e1ca0(void);
@@ -46,17 +46,17 @@ void __cdecl fcn_005e3520(void)
   d2_SetForm(v3,2);
   io_AppendText((char *)0x1c59);
   d2_SetForm(v3,1);
-  v4 = fcn_00472250(v3,1,0);
-  v5 = fcn_00472250(v3,1,1);
-  v6 = fcn_00472250(v3,1,2);
-  v7 = fcn_00472250(v3,1,3);
-  v8 = fcn_00472250(v3,1,4);
-  v9 = fcn_00472250(v3,1,5);
-  v10 = fcn_00472250(v3,1,6);
-  v11 = fcn_00472250(v3,1,9);
-  v12 = fcn_00472250(v3,1,10);
-  v13 = fcn_00472250(v3,1,0xb);
-  v14 = fcn_00472250(v3,1,0xc);
+  v4 = d2_GetWindowListItem(v3,1,0);
+  v5 = d2_GetWindowListItem(v3,1,1);
+  v6 = d2_GetWindowListItem(v3,1,2);
+  v7 = d2_GetWindowListItem(v3,1,3);
+  v8 = d2_GetWindowListItem(v3,1,4);
+  v9 = d2_GetWindowListItem(v3,1,5);
+  v10 = d2_GetWindowListItem(v3,1,6);
+  v11 = d2_GetWindowListItem(v3,1,9);
+  v12 = d2_GetWindowListItem(v3,1,10);
+  v13 = d2_GetWindowListItem(v3,1,0xb);
+  v14 = d2_GetWindowListItem(v3,1,0xc);
   d2_SetElementValue(v4,0,0xa0,*(unsigned int *)0x7766a8);
   fcn_00468cd0(v4,0x882);
   fcn_00468b80(v4,*(unsigned int *)0x14ac578);
@@ -103,7 +103,7 @@ void __cdecl fcn_005e3520(void)
   fcn_00533a60(*(unsigned int *)0x772514,0,&selection[0],2,*(unsigned int *)0x14ac5a8,*(unsigned int *)0x14ac5ac);
   sel0 = selection[0];
   sel1 = selection[1];
-  if (fcn_005373e0((void *)fcn_005e3520,v16)) {
+  if (main_RunFrameLoop((void *)fcn_005e3520,v16)) {
     do {
       if ((*(unsigned int *)0x14ce8e0) || (*(unsigned char *)0x14cf950 == 1))
         *(unsigned int *)0x774654 = 1;
@@ -117,21 +117,21 @@ void __cdecl fcn_005e3520(void)
           *(unsigned int *)0x774654 = 1;
         }
       }
-    } while (fcn_005373e0((void *)fcn_005e3520,v16));
+    } while (main_RunFrameLoop((void *)fcn_005e3520,v16));
     if (v1) {
-      *(unsigned int *)0x7766a8 = fcn_00471f80(v4);
-      *(unsigned char *)0x7766ac = (unsigned char)fcn_00471f80(v7);
-      *(unsigned int *)0x7766b0 = fcn_00471f80(v5);
-      *(int *)0x7766b4 = fcn_00471f80(v6);
+      *(unsigned int *)0x7766a8 = d2_GetControlValue(v4);
+      *(unsigned char *)0x7766ac = (unsigned char)d2_GetControlValue(v7);
+      *(unsigned int *)0x7766b0 = d2_GetControlValue(v5);
+      *(int *)0x7766b4 = d2_GetControlValue(v6);
       *(unsigned char *)0x7766b8 = 0;
-      *(unsigned char *)0x7766ba = (unsigned char)fcn_00471f80(v9);
-      *(unsigned char *)0x7766bb = (unsigned char)fcn_00471f80(v10);
-      *(unsigned char *)0x776709 = (unsigned char)fcn_00471f80(v12);
-      *(unsigned char *)0x77670b = (unsigned char)fcn_00471f80(v13);
-      *(unsigned char *)0x77670c = (unsigned char)fcn_00471f80(v14);
-      v16 = fcn_00471f80(v11);
+      *(unsigned char *)0x7766ba = (unsigned char)d2_GetControlValue(v9);
+      *(unsigned char *)0x7766bb = (unsigned char)d2_GetControlValue(v10);
+      *(unsigned char *)0x776709 = (unsigned char)d2_GetControlValue(v12);
+      *(unsigned char *)0x77670b = (unsigned char)d2_GetControlValue(v13);
+      *(unsigned char *)0x77670c = (unsigned char)d2_GetControlValue(v14);
+      v16 = d2_GetControlValue(v11);
       if (v16 != (*(unsigned int *)0x776708 & 0xff)) {
-        *(unsigned char *)0x776708 = (unsigned char)fcn_00471f80(v11);
+        *(unsigned char *)0x776708 = (unsigned char)d2_GetControlValue(v11);
         fcn_00471af0(v3,0);
         if (*(unsigned char *)0x774964) {
           fcn_00527420();

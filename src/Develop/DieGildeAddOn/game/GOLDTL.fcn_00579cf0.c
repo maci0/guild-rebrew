@@ -10,7 +10,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_00529160(char*, char*, int, char*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_00579cf0(char* o)
 {
@@ -29,7 +29,7 @@ void __cdecl fcn_00579cf0(char* o)
 			*(pos14_7f4c00*) (o + 0xbc) = gm_GameTime;
 			*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 			*(int*) (o + 0x70) = 0;
-			fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
+			gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
 			return;
 		}
 	}

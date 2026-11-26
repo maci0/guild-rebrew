@@ -7,7 +7,7 @@ extern unsigned char* lpGebaeudePROT;
 void __cdecl he_FreeAction(char*);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00558370(char*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00558d10 */
 void __cdecl fcn_00558d10(char* e)
@@ -54,5 +54,5 @@ void __cdecl fcn_00558d10(char* e)
 	if (fcn_00558370(e) == 0) {
 		he_FreeAction(e);
 	}
-	fcn_00500bb0(clock, 0, 0xf, 0);
+	gm_AddTime(clock, 0, 0xf, 0);
 }

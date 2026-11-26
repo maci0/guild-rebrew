@@ -18,7 +18,7 @@ extern int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsig
 extern void __cdecl fcn_004c5360(void);
 extern void __cdecl fcn_004c5530(void*);
 extern unsigned short __cdecl gm_RandomMod(int);
-extern void __cdecl fcn_004fe140(void*, int, int, int);
+extern void __cdecl gm_AddTime(void*, int, int, int);
 
 
 
@@ -153,7 +153,7 @@ void __cdecl fcn_004f4970(unsigned int packedId)
 				*(short*) (msg + 0x2c) = 7;
 				*(int*) (msg + 0x2e) = 0;
 				if (*(char*) (slot + 2) == 5) {
-					fcn_004fe140(msg + 0x28, gm_RandomMod(4), gm_RandomMod(8) * 7, 0);
+					gm_AddTime(msg + 0x28, gm_RandomMod(4), gm_RandomMod(8) * 7, 0);
 				}
 				*(char*) (msg + 0x58) = *((unsigned char*)&packedId + 3);
 				*(int*) (msg + 0x5c) = *(int*) (slot + 4);

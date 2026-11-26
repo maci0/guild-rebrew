@@ -23,7 +23,7 @@ float __cdecl eval_ObjektPreis2Credits(int, unsigned char);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0050cf50 */
-int __cdecl fcn_0050cf50(unsigned char* buildingRecordArg, int percentScale)
+int __cdecl gm_CalculateGebaeudeValue(unsigned char* buildingRecordArg, int percentScale)
 {
 	BUILDING_PROTOTYPE* lvl;
 	char* t;

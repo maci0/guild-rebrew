@@ -30,7 +30,7 @@ void __cdecl evt_RunScriptLine(int, char*);
 int __cdecl fcn_004273c0(void);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
 int __cdecl fcn_00423460(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl io_AppendText(int);
 void __cdecl fcn_00471e30(int);
 
@@ -79,11 +79,11 @@ int __cdecl d2_RunSeance(int a1, S58* scriptSubject)
 		}
 		for (j = 0; j < 8; j++) {
 			while (fcn_00423460(wait[j]) == 0)
-				fcn_005373e0(0, 0x743c7);
+				main_RunFrameLoop(0, 0x743c7);
 			d2_SetForm(w, 0);
 			io_AppendText(snd[j]);
 			while (fcn_00423460(wait[j]) != 0)
-				fcn_005373e0(0, 0x743c7);
+				main_RunFrameLoop(0, 0x743c7);
 		}
 	} else {
 		t0 = g_6b7fac;
@@ -108,7 +108,7 @@ int __cdecl d2_RunSeance(int a1, S58* scriptSubject)
 					i++;
 				}
 			}
-		} while (fcn_005373e0(d2_RunSeance, 0x743c7) != 0);
+		} while (main_RunFrameLoop(d2_RunSeance, 0x743c7) != 0);
 	}
 	fcn_00471e30(w);
 	return h;

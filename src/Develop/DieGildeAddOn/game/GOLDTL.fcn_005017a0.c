@@ -26,8 +26,8 @@ char* __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
-void __cdecl fcn_004c44a0(void);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_BeginCommandSync(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_004c4670(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
@@ -163,7 +163,7 @@ void __cdecl fcn_005017a0(int player)
 		if (ent2 == 0) {
 			return;
 		}
-		fcn_004c44a0();
+		cm_BeginCommandSync();
 		p = s;
 		for (n = 0x55; n != 0; n--) {
 			rec = *(Slot*)p;
@@ -184,7 +184,7 @@ void __cdecl fcn_005017a0(int player)
 			}
 			p = (MARKET_STOCK_SLOT*) ((char*) p + 0x80);
 		}
-		fcn_004c44b0();
+		cm_EndCommandSync();
 		while (fcn_004c44c0() == 0) {
 			fcn_00535960();
 		}

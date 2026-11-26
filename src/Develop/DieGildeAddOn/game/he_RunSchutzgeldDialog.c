@@ -26,7 +26,7 @@ void __cdecl he_FreeAction(int a);
 int __cdecl fcn_00500cb0(void* sel, int* out);
 void __cdecl fcn_00545670(int a, int b, int c, char* caption, int d);
 int __cdecl fcn_0051e070(void);
-int __cdecl fcn_00500bb0(int* sel, int a, int b, int c);
+int __cdecl gm_AddTime(int* sel, int a, int b, int c);
 void __cdecl fcn_004c5620(int a, int b);
 void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 void __cdecl fcn_004c30a0(int a, int b, char* name, int c, int d);
@@ -121,7 +121,7 @@ open:
 	}
 	*(Pos14*) (dlg + 0x44) = *(Pos14*) &gm_GameTime;
 	*(Pos14*) (dlg + 0x52) = *(Pos14*) &gm_GameTime;
-	fcn_00500bb0((int*) (dlg + 0x52), 3, 0, 0);
+	gm_AddTime((int*) (dlg + 0x52), 3, 0, 0);
 	fcn_004c30a0(-7, 0, "_NACHRICHTEN_HS_34", 0, 0);
 	*(int*) (dlg + 0x70) = *(int*) (dlg + 0x70) + 1;
 }

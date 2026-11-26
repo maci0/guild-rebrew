@@ -5,7 +5,7 @@
 char* __cdecl fcn_00402610(char*);
 int __cdecl d3_GetContextIndex(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl ch_SelectRandomDummy(void);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
@@ -36,7 +36,7 @@ void __cdecl ch_RunWalkToRandomDummy(char* ev)
 		ch_RemoveQueueEntry(ev);
 		return;
 	}
-	fcn_004432d0(room, 1);
+	d3_SelectSceneContext(room, 1);
 	door = ch_SelectRandomDummy();
 	if (door != 0 && map != 0) {
 		d3_TransformPoint(door, door + 0x4c, pos);
@@ -50,5 +50,5 @@ void __cdecl ch_RunWalkToRandomDummy(char* ev)
 		}
 	}
 	ch_RemoveQueueEntry(ev);
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 }

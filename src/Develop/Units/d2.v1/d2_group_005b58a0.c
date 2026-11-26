@@ -31,7 +31,7 @@ extern int g_772534;
 extern char* g_1015ea0;
 extern char* g_14abc28;
 
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 typedef struct
 {
@@ -66,7 +66,7 @@ extern char g_68c1c8[];
 extern char g_679060[];
 
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0046f740(int x, int y, int a3, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 void __cdecl fcn_00517c00(int, int, int, char*);
 void __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
@@ -79,7 +79,7 @@ void __cdecl d2_CreateGauge(int x, int y, Gauge* s)
 {
 	int i;
 
-	s->icon = fcn_0046f740(x, y, 0x5db, d2_CurrentWindowId);
+	s->icon = d2_AddElementToWindow(x, y, 0x5db, d2_CurrentWindowId);
 	((D2_CONTROL_TL*) g_1015ea0)[s->icon].value_05c = 1;
 	s->label = d2_ShowTxt(x - 0x36, y - 0x11, g_14abc28, d2_CurrentWindowId);
 	((D2_CONTROL_TL*) g_1015ea0)[s->label].width = 0xa0;
@@ -108,7 +108,7 @@ void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 
 	rec = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[**(unsigned char**) (e + 0x16c)];
 	d2_SetForm(g->win, 3);
-	g->x1c = fcn_0046f740(g->x + 2, g->y, *(int*) (e + 0x18c), d2_CurrentWindowId);
+	g->x1c = d2_AddElementToWindow(g->x + 2, g->y, *(int*) (e + 0x18c), d2_CurrentWindowId);
 	fcn_00517c00(*(unsigned short*) e, 1, 1, buf);
 	fcn_0046f940(g->label, buf);
 	((D2_CONTROL_TL*) g_1015ea0)[g->label].value_06c = 1;

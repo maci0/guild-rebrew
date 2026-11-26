@@ -12,7 +12,7 @@ extern CellStat g_99ef84[8][8];
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_004fa6f0(char* pos, int* x, int* y);
-int __cdecl fcn_0050cf50(void* e, int k);
+int __cdecl gm_CalculateGebaeudeValue(void* e, int k);
 
 /* ADDRESS: GOLDTL 0x004fa750 */
 void __cdecl fcn_004fa750(void)
@@ -40,7 +40,7 @@ void __cdecl fcn_004fa750(void)
     while (e != 0) {
         if (*(char**) (e + 0x61) != 0
             && fcn_004fa6f0(*(char**) (e + 0x61) + 0x4c, &x, &y) != 0) {
-            index = x * 8 + y; t = fcn_0050cf50(e, *(signed char*) (e + 0x5c));
+            index = x * 8 + y; t = gm_CalculateGebaeudeValue(e, *(signed char*) (e + 0x5c));
             ((CellStat*)g_99ef84)[index].count++;
             values[index] = (float) t;
         }

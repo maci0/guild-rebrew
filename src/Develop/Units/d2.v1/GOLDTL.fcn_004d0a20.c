@@ -29,7 +29,7 @@ float __cdecl fcn_004ff040(char*);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_004ce5c0(char*);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_00472680(int, int);
 char* __cdecl fcn_004ce680(char*);
 void __cdecl d2_DestroyElement(int);
@@ -88,7 +88,7 @@ void __cdecl fcn_004d0a20(void)
 					} else {
 relabel:
 						d2_CurrentWindowId = q->win;
-						fcn_00472680(q->name = fcn_0046f740(0x54, 0xf,
+						fcn_00472680(q->name = d2_AddElementToWindow(0x54, 0xf,
 							*r + 0xdf, d2_CurrentWindowId), 0xfffffffe);
 					}
 					if (q->label != -1) {

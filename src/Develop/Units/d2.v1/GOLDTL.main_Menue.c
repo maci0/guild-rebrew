@@ -34,8 +34,8 @@ struct Handler {
 void __cdecl fcn_00412630(void);
 char *__cdecl fcn_004730c0(int, int, int, int, char *, int, int);
 int __cdecl main_PumpWindowMessages(void);
-int __cdecl fcn_005373e0(int, int);
-void __cdecl fcn_004432d0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_00442e30(void);
 int __cdecl fcn_0051e070(void);
 #include "client_scene_loader.h"
@@ -108,10 +108,10 @@ void __cdecl main_Menue(void)
 	fcn_0042a070();
 	v4 = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, (char *)0x67d67c, 0, 1);
 	while ((*(unsigned char *)v4 & 4) == 0) {
-		fcn_005373e0(0, 0x24087);
+		main_RunFrameLoop(0, 0x24087);
 	}
 	d2_SuppressOverlay = 1;
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	fcn_00442e30();
 	if (fcn_0051e070() != 0) {
 		v14 = "scenes/*ChooseCity_Europa.ed3";
@@ -120,7 +120,7 @@ void __cdecl main_Menue(void)
 	}
 	d3_LoadScene(v14, 0, 0);
 	main_PumpWindowMessages();
-	fcn_004432d0(1, 0);
+	d3_SelectSceneContext(1, 0);
 	fcn_00442e30();
 	if (!d3_LoadScene((char *)0x6a3b98, 0, 0)) {
 		ReportClientMessage((char *)0x6a3b70);
@@ -294,20 +294,20 @@ label_53a8e3:
 			g_77496c = 1;
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((int)(void *)0x53a400, 0x24087) != 0);
+	} while (main_RunFrameLoop((int)(void *)0x53a400, 0x24087) != 0);
 	d2_ClearRadioGroup(v28);
 	fcn_00471e30(v15);
 	d2_ClearScreen();
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	fcn_00442e30();
-	fcn_004432d0(1, 0);
+	d3_SelectSceneContext(1, 0);
 	fcn_00442e30();
 	msx_SetFadeDuration(1000);
 	if (*(int *)0x7747d0 != 0) {
 		msx_StopTrack(*(int *)0x7747d0, 1);
 		d2_SuppressOverlay = 1;
 		while (*(char *)(*(int *)0x7747d0 + 0x104)) {
-			fcn_005373e0(0, main_LoopFlags);
+			main_RunFrameLoop(0, main_LoopFlags);
 		}
 		Sleep(1000);
 	}

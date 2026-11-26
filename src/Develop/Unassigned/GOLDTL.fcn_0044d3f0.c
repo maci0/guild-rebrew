@@ -22,7 +22,7 @@ typedef struct
 extern char s_662d18[];
 
 char* __cdecl fcn_0064f026(char* s, char* delim);
-int __cdecl fcn_0064eeec(char* s);
+int __cdecl atoi(char* s);
 
 /* ADDRESS: GOLDTL 0x0044d3f0 */
 void __cdecl fcn_0044d3f0(void* stream, fcn_0044d3f0_Ctx* c)
@@ -30,9 +30,9 @@ void __cdecl fcn_0044d3f0(void* stream, fcn_0044d3f0_Ctx* c)
 	char* tok;
 
 	tok = fcn_0064f026(0, s_662d18);
-	c->recs[c->n].a = fcn_0064eeec(tok) + c->base;
+	c->recs[c->n].a = atoi(tok) + c->base;
 	tok = fcn_0064f026(0, s_662d18);
-	c->recs[c->n].b = fcn_0064eeec(tok) + c->base;
+	c->recs[c->n].b = atoi(tok) + c->base;
 	tok = fcn_0064f026(0, s_662d18);
-	c->recs[c->n].c = fcn_0064eeec(tok) + c->base;
+	c->recs[c->n].c = atoi(tok) + c->base;
 }

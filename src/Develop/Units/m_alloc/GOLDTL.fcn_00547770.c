@@ -41,7 +41,7 @@ int __cdecl fcn_004c4fc0();
 int __cdecl fcn_004c5150();
 int __cdecl fcn_004c5360();
 int __cdecl fcn_00507400();
-int __cdecl fcn_0050cf50();
+int __cdecl gm_CalculateGebaeudeValue();
 int __cdecl fcn_0050d170();
 int __cdecl fcn_00535960();
 int __cdecl fcn_00547670();
@@ -188,7 +188,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(0xb, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else if (sel == 2) {
@@ -200,7 +200,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(0xa, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else {
@@ -300,7 +300,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(1, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else if (j == 1) {
@@ -312,7 +312,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(3, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else if (j == 2) {
@@ -324,7 +324,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(2, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else {
@@ -336,7 +336,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(5, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
@@ -410,7 +410,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(6, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else {
@@ -422,7 +422,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(4, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
@@ -503,7 +503,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(8, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else if (j == 1) {
@@ -514,7 +514,7 @@ void __cdecl fcn_00547770(void)
                 }
                 FIND_REC(7);
                 if (m < 0x100) {
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(7, (u32)((Building547770*) q)->level * 2 - 1);
                 } else if (cnt[7] < 2) {
                     e2 = fcn_0050d170(0x14) * 2;
@@ -532,7 +532,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(9, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }
@@ -619,7 +619,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(0xf, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else if (j == 1) {
@@ -631,7 +631,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(0xe, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else {
@@ -643,7 +643,7 @@ void __cdecl fcn_00547770(void)
                     if (m >= 0x100) {
                         return;
                     }
-                    e2 = fcn_0050cf50(rp, 0x64) * 2;
+                    e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = fcn_00507400(0xd, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             }

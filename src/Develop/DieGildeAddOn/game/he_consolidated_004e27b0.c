@@ -31,11 +31,11 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, char*);
+int __cdecl d2_GetWindowListItem(int, int, char*);
 void __cdecl d2_SetBildArgument(int, int);
 void __cdecl d2_SelectControl(int);
-char* __cdecl fcn_00471f80(int);
-int __cdecl fcn_005373e0(int, int);
+char* __cdecl d2_GetControlValue(int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4610(int);
@@ -129,17 +129,17 @@ void __cdecl fcn_004e2890(char* m)
 	else
 		io_AppendText(0x1aaf);
 	d2_SetForm(sc, 2);
-	w = fcn_00472250(sc, 2, io_AppendText((int) "$L%t", b + 0x30));
+	w = d2_GetWindowListItem(sc, 2, io_AppendText((int) "$L%t", b + 0x30));
 	d2_SetBildArgument(w, 0xf);
 	d2_SelectControl(w);
 	for (;;) {
 		if (g_14cf950 == 0x1c || tp_d2_SelectedControl == 0) {
-			strcpy(buf, fcn_00471f80(w));
+			strcpy(buf, d2_GetControlValue(w));
 			if (buf[0] != 0)
 				break;
 			d2_SelectControl(w);
 		}
-		if (fcn_005373e0(0, cut_EventLoopFlags) == 0 || g_7747f0 != 0)
+		if (main_RunFrameLoop(0, cut_EventLoopFlags) == 0 || g_7747f0 != 0)
 			break;
 	}
 	fcn_004c4510(b, *(int*) (b + 4));

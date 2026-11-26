@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_662d40[3];
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00455140(int, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
 
@@ -14,7 +14,7 @@ void __cdecl fcn_00598740(float* out, int obj)
 	int save;
 
 	save = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	v[0] = 0;
 	v[1] = 0;
 	v[2] = 0;
@@ -23,5 +23,5 @@ void __cdecl fcn_00598740(float* out, int obj)
 	out[2] = 0;
 	fcn_00455140(obj, g_662d40, v);
 	out[1] = fcn_00451380(g_662d40, v);
-	fcn_004432d0(save, 1);
+	d3_SelectSceneContext(save, 1);
 }

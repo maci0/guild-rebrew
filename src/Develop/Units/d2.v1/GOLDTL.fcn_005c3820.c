@@ -11,15 +11,15 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_0050c7d0(int, int);
 int __cdecl fcn_0050c710(unsigned char*, int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_0046f9b0(int, char*);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00526120(void*, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_SetElementValue(int, ...);
@@ -59,7 +59,7 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 	d2_SetForm(window, 1);
 	io_AppendText(0x17e0, building);
 	d2_SetForm(window, 3);
-	elem = fcn_00472250(window, 3, io_AppendText(0x17e1));
+	elem = d2_GetWindowListItem(window, 3, io_AppendText(0x17e1));
 	d2_SetForm(window, 2);
 	entry = table[0];
 	count = 0;
@@ -74,7 +74,7 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 	height = (*(int*) (g_77255c + 0x10) - step * count) / 2 + 0xe;
 	for (i = 0; table[i] != 0; i++) {
 		if (fcn_0050c7d0(building[0], table[i]) != 0) {
-			label = fcn_0046f740(0, height, 2, d2_CurrentWindowId);
+			label = d2_AddElementToWindow(0, height, 2, d2_CurrentWindowId);
 			wins[i] = label;
 			((D2_CONTROL_TL*) (g_1015ea0))[label].flags_1d0 = 3;
 			((D2_CONTROL_TL*) (g_1015ea0))[label].font = 0x55;
@@ -140,7 +140,7 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 					}
 			}
 		}
-		if (fcn_005373e0((void*) d2_ShowTechTreeEffects, 0x677c7) == 0) {
+		if (main_RunFrameLoop((void*) d2_ShowTechTreeEffects, 0x677c7) == 0) {
 			fcn_00471e30(window);
 			return;
 		}

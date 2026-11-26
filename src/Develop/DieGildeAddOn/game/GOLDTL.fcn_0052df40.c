@@ -53,7 +53,7 @@ int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 void __cdecl io_AppendText(char* fmt, ...);
-int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
+int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
@@ -86,7 +86,7 @@ void __cdecl fcn_0052df40(unsigned char* s)
 		io_AppendText(g_6a2f24, 0x870, &g_868060[*(int*) (s + 0x65)]);
 	}
 	d2_SetForm(g_6a25b8, 0);
-	g_6a25bc = fcn_0046f740((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1, 0x48, *s + 0x427, d2_CurrentWindowId);
+	g_6a25bc = d2_AddElementToWindow((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1, 0x48, *s + 0x427, d2_CurrentWindowId);
 	((Ctl_52df40*)g_1015ea0)[g_6a25bc].shown = 1;
 	if (*(unsigned short*) (s + 0x27) != 0xffff && *(unsigned short*) (s + 0x27) != *(unsigned short*) gm_CityEntity) {
 		((Ctl_52df40*)g_1015ea0)[g_6a25bc].link = &g_7f4ca0[*(unsigned short*) (s + 0x27)];

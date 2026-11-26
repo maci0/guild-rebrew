@@ -5,7 +5,7 @@ extern int main_LoopFlags;
 int __cdecl fcn_00470820(int, int, const char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int);
-void __cdecl fcn_005373e0(int, int);
+void __cdecl main_RunFrameLoop(int, int);
 
 int __cdecl d2_OpenMessageBox(int a, char flags)
 {
@@ -20,6 +20,6 @@ int __cdecl d2_OpenMessageBox(int a, char flags)
 	}
 	d2_CenterDialogWindows(h);
 	io_AppendText(a);
-	fcn_005373e0(0, main_LoopFlags);
+	main_RunFrameLoop(0, main_LoopFlags);
 	return h;
 }

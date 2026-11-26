@@ -16,8 +16,8 @@ void __cdecl d2_SetElementFont(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SelectControl(int);
 void __cdecl d2_SetBildArgument(int, int);
-int __cdecl fcn_005373e0(void*, int);
-char* __cdecl fcn_00471f80(int);
+int __cdecl main_RunFrameLoop(void*, int);
+char* __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyElement(int);
 
 int __cdecl fcn_005e0b40(int a, int b, char* text)
@@ -33,9 +33,9 @@ int __cdecl fcn_005e0b40(int a, int b, char* text)
 	*(int*) (g_102d150 + *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_088)) * 0x160) = 0x80;
 	*(int*) (g_102d29c + *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_088)) * 0x160) = 0x110;
 	d2_SetBildArgument(h, 0x1f);
-	while (fcn_005373e0(fcn_005e0b40, main_LoopFlags) != 0) {
+	while (main_RunFrameLoop(fcn_005e0b40, main_LoopFlags) != 0) {
 		if ((*(unsigned char*)&g_14cf950) == 0x1c) {
-			strcpy(text, fcn_00471f80(h));
+			strcpy(text, d2_GetControlValue(h));
 			g_774654 = 1;
 			result = 1;
 		}

@@ -63,7 +63,7 @@ int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004e4fc0(unsigned char*);
 void __cdecl d2_AppendPendingPlayerNames(unsigned char*);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_004e51a0(unsigned char*, int);
 void __cdecl fcn_004e6c60(int);
 int __cdecl sprintf(char*, const char*, ...);
@@ -154,7 +154,7 @@ label_4e526f:
 							fcn_00535960();
 						}
 						d2_AppendPendingPlayerNames(s);
-						fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
+						main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 					}
 					rec++;
 				}
@@ -180,7 +180,7 @@ label_4e526f:
 			while (fcn_004e4fc0(s) == 0) {
 				d2_AppendPendingPlayerNames(s);
 				fcn_00533a40(g_14ac5ec);
-				fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
+				main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 			}
 		} else if (kind == 0) {
 			pos = -1;
@@ -196,7 +196,7 @@ label_4e526f:
 			}
 			while (fcn_004e4fc0(s) == 0) {
 				d2_AppendPendingPlayerNames(s);
-				fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
+				main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 				if (pos != -1
 						&& (pos == 0 || ((rec35c*) g_9b0e20)[found].f8 == 1)
 						&& ((rec35c*) g_9b0e20)[pos].f8 == 0) {
@@ -215,7 +215,7 @@ label_4e526f:
 						fcn_00535960();
 					}
 					d2_AppendPendingPlayerNames(s);
-					fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
+					main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 				}
 				if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
 					for (i = 0; i < (int) s[0x30]; i++) {
@@ -244,7 +244,7 @@ label_4e526f:
 				}
 			}
 			d2_AppendPendingPlayerNames(s);
-			fcn_005373e0(0, cut_EventLoopFlags | 0x8000);
+			main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 		}
 	}
 	g_772f2c += 1;

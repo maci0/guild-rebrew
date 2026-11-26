@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_00445600(int, int, int, int*);
 void __cdecl d3_TransformPoint(char*, char*, int*);
 int __cdecl fcn_004fda30(int);
@@ -41,7 +41,7 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 	if (a1 < 0) {
 		return 0;
 	}
-	fcn_004432d0(a1, 1);
+	d3_SelectSceneContext(a1, 1);
 	if (a5 != 0) {
 		v5 = fcn_00445600(a4, 0x100, 0, a5);
 		if (v5 != 0) {
@@ -76,6 +76,6 @@ have:
 		}
 	}
 done:
-	fcn_004432d0(savedContext, 1);
+	d3_SelectSceneContext(savedContext, 1);
 	return *(int*) (a0 + 0x184);
 }

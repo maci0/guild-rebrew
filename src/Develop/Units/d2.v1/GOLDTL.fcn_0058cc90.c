@@ -23,7 +23,7 @@ void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_0058c670(char*, int, unsigned char);
 int __cdecl d2_RunRentGraveDialog(char*, int, unsigned char);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 
 void __cdecl fcn_0058cc90(char* input, Req* s)
 {
@@ -56,5 +56,5 @@ void __cdecl fcn_0058cc90(char* input, Req* s)
 				fcn_00471af0(s->x0, 1);
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_0058cc90, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_0058cc90, 0x677c7) != 0);
 }

@@ -3,7 +3,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl fcn_00500480(char*, int*, int*);
 char* __cdecl gm_FindRecordById(int);
-int __cdecl fcn_005155e0(char*);
+int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl init_EnsureObjektSceneContext(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl sim_StartEntityQueryByType(char*);
@@ -47,7 +47,7 @@ int __cdecl fcn_00567170(char* h, int* out1, int* out2, int* out3)
 		if (out3 != 0) {
 			r = gm_FindRecordById(*out2);
 			if (gm_CheckEntityType(e) != 0) {
-				*out3 = fcn_005155e0(e);
+				*out3 = init_AllocateGebaeudeSceneSlot(e);
 				return 1;
 			}
 			if (r != 0) {
@@ -81,7 +81,7 @@ int __cdecl fcn_00567170(char* h, int* out1, int* out2, int* out3)
 		}
 		if (out3 != 0) {
 			if (gm_CheckEntityType(t) != 0) {
-				*out3 = fcn_005155e0(t);
+				*out3 = init_AllocateGebaeudeSceneSlot(t);
 			} else if (q != 0) {
 				*out3 = init_EnsureObjektSceneContext(q);
 			} else {

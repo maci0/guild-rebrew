@@ -15,7 +15,7 @@ void __cdecl fcn_00526120(int a, int b);
 void __cdecl fcn_004c5530(int a1);
 void __cdecl fcn_004c35f0(void);
 void __cdecl sv_ClearObjectSelection(void);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
 int __cdecl fcn_00532ef0(void);
@@ -85,7 +85,7 @@ int __cdecl fcn_005ae000(char* obj)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(0x5ae000, 0x677c7) != 0);
+	} while (main_RunFrameLoop(0x5ae000, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_0052a2d0();
 	return fcn_00532ef0();

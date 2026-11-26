@@ -28,7 +28,7 @@ extern Pos_554b90 gm_GameTime;
 
 void __cdecl he_FreeAction(char*);
 int __cdecl gm_AccumulateTyped2(House_554b90*);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl fcn_004c5980(void*);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
@@ -135,11 +135,11 @@ put:
 			*(int*) (msg + 0x80) = *(int*) (e + 0xb0);
 			*(int*) (msg + 0x84) = 0;
 			*(Pos_554b90*) (msg + 0x18) = gm_GameTime;
-			fcn_00500bb0(msg + 0x18, 0, 0x1e, 0);
+			gm_AddTime(msg + 0x18, 0, 0x1e, 0);
 			fcn_004c5980(msg);
 		}
 		*(Pos_554b90*) (e + 0x52) = gm_GameTime;
-		fcn_00500bb0(e + 0x52, 0x18, 0, 0);
+		gm_AddTime(e + 0x52, 0x18, 0, 0);
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 		return;
 	}

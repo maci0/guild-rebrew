@@ -8,7 +8,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl fcn_0050ff70(void*, int);
 char* __cdecl fcn_0050dc90(void*);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, void*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -43,7 +43,7 @@ void __cdecl fcn_005639a0(int a)
 		if (*(int*) (a + 0xb0) > 0) {
 			*(pos14_7f4c00*) (a + 0x60) = *(pos14_7f4c00*) &gm_GameTime;
 			*(pos14_7f4c00*) (a + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
-			fcn_00500bb0((void*) (a + 0x52), 0, 0xa, 0);
+			gm_AddTime((void*) (a + 0x52), 0, 0xa, 0);
 			return;
 		}
 		id = 0x5f6;

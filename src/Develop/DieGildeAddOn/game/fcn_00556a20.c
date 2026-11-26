@@ -1,7 +1,7 @@
 #include "client_data.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00500bb0(char*, int, int, int);
+int __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
@@ -25,7 +25,7 @@ void __cdecl fcn_00556a20(char* p)
 
 
 
-	fcn_00500bb0((char*) q, 0, 1, 0);
+	gm_AddTime((char*) q, 0, 1, 0);
 	if (a == 0) {
 		*(int*) (p + 0x84) = fcn_004c5620(-1, p);
 		return;

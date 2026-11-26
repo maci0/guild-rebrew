@@ -54,7 +54,7 @@ extern float g_662914, g_662c98, g_662a98, g_664450, g_66444c, g_6660f4;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "GOLDTL.fcn_00588aa0_gconf.h"
 
-int __cdecl fcn_00471f80(int slot);
+int __cdecl d2_GetControlValue(int slot);
 int __cdecl fcn_004f0ff0(char* a0, int a1, int a2, int a3, int* o1, int* o2);
 void __cdecl fcn_004f11c0(char* p, float* o1, float* o2);
 float __cdecl fcn_004f1290(char* p);
@@ -66,7 +66,7 @@ int __cdecl fcn_005e8e80(Particle* o, Vec3* pos, Vec3* dir, float speed,
 int __cdecl fcn_005e8fe0(float* p, float spread, float* dir, float lift,
 	float* up, float scale);
 int __cdecl fcn_004c4450(int i);
-int __cdecl fcn_005373e0(int a, int b);
+int __cdecl main_RunFrameLoop(int a, int b);
 int __cdecl evt_LoadGfxScript(const char* name);
 int __cdecl fcn_00428340(int h, int a, int b, int c, int d, int e);
 int __cdecl fcn_004235b0(char* bank, const char* name, int prio, int loop,
@@ -109,8 +109,8 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 	ex = 0;
 	ey = 0;
 	ez = 0;
-	slot0 = fcn_00471f80(emitter->slot0);
-	slot1 = fcn_00471f80(emitter->slot1);
+	slot0 = d2_GetControlValue(emitter->slot0);
+	slot1 = d2_GetControlValue(emitter->slot1);
 	if (!fcn_004f0ff0((char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			slot0, slot1, emitter->mode + 1, &o1, &o2)) {
 		return 0;
@@ -203,7 +203,7 @@ int __cdecl fcn_00588aa0(Emitter* emitter, char* a1)
 	}
 	if (h != -1) {
 		while (!fcn_004c4450(h)) {
-			fcn_005373e0(0, 0x20007);
+			main_RunFrameLoop(0, 0x20007);
 		}
 	}
 	if (sel == 0) {

@@ -45,7 +45,7 @@ extern char g_7f4ca4[];
 Entity_54fd60* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 int __cdecl fcn_004c5620(int, Order_54fd60*);
-void __cdecl fcn_00500bb0(Stamp_54fd60*, int, int, int);
+void __cdecl gm_AddTime(Stamp_54fd60*, int, int, int);
 void __cdecl he_FreeAction(Order_54fd60*);
 int __cdecl fcn_004c5980(void*);
 int __cdecl fcn_004c4450(int);
@@ -83,7 +83,7 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
                 msg[0x7c] = 0;
                 *(int*) (msg + 0x20) = g_7f4c08;
                 *(short*) (msg + 0x24) = g_7f4c0c;
-                fcn_00500bb0((Stamp_54fd60*) (msg + 0x18), 0, 0x1e, 0);
+                gm_AddTime((Stamp_54fd60*) (msg + 0x18), 0, 0x1e, 0);
                 fcn_004c5980(msg);
             }
             fcn_004c5420(a->id, 0x1c8, 4, 0, 0x400);
@@ -92,7 +92,7 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
             fcn_004c5420(b->id, 0x1c8, 4, 0, 0x400);
         }
         o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
-        fcn_00500bb0(&o->stamp, 0, 2, 0);
+        gm_AddTime(&o->stamp, 0, 2, 0);
         o->event = fcn_004c5620(-1, o);
         return;
     case 1:
@@ -108,7 +108,7 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
             fcn_004c5420(b->id, 0x1c8, 4, 0, 0x400);
         }
         o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
-        fcn_00500bb0(&o->stamp, 0, 2, 0);
+        gm_AddTime(&o->stamp, 0, 2, 0);
         o->event = fcn_004c5620(-1, o);
         return;
     case -1:
@@ -123,7 +123,7 @@ void __cdecl fcn_0054fd60(Order_54fd60* o)
                 fcn_004c5420(b->id, 0x1c8, 4, 0, 0x400);
             }
             o->stamp = (*(Stamp_54fd60*) &gm_GameTime);
-            fcn_00500bb0(&o->stamp, 0, 2, 0);
+            gm_AddTime(&o->stamp, 0, 2, 0);
             o->event = fcn_004c5620(-1, o);
         }
         he_FreeAction(o);

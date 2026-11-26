@@ -11,7 +11,7 @@ extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 
 int __cdecl gm_WalkEntityChain(unsigned short id);
-int __cdecl fcn_0050cf50(void* obj, int n);
+int __cdecl gm_CalculateGebaeudeValue(void* obj, int n);
 int __cdecl fcn_00526010(void* slot, int value, unsigned char flag);
 int __cdecl fcn_004fa5b0(int cmd, void* slot, unsigned int* list);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
@@ -27,9 +27,9 @@ void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int flag);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl io_AppendText(int id, ...);
-int __cdecl fcn_00472250(int dlg, int a, int b);
+int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 int __cdecl fcn_005c9220(unsigned int* ids);
-int __cdecl fcn_005373e0(void* fn, int key);
+int __cdecl main_RunFrameLoop(void* fn, int key);
 void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c4ef0(char* s);
@@ -58,7 +58,7 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 	idx = *(unsigned short*) 0x774970;
 	slots[0] = 1;
 	value = (int) ((float) gm_WalkEntityChain(*(unsigned short*) (0x7f4ca0 + idx * 0x21c)) * *(float*) 0x6628ac
-		+ (float) fcn_0050cf50(record, 100) * *(float*) 0x662b10);
+		+ (float) gm_CalculateGebaeudeValue(record, 100) * *(float*) 0x662b10);
 	if (fcn_004fa5b0(0x1b, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c), slots) & 2) {
 		value = value / 2;
 	}
@@ -99,7 +99,7 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 	d2_SetForm(dlg, 1);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
-	evid = fcn_00472250(dlg, 1,
+	evid = d2_GetWindowListItem(dlg, 1,
 		io_AppendText(0x1700, 0x1711, value, *(unsigned short*) (record + 0x27),
 			*(unsigned char*) record * 0xe + 0x48e));
 	/* The native 0x1705 text and later packet share ev. */
@@ -111,7 +111,7 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 	ids[4] = 2;
 	ids[5] = 0x18;
 	fcn_005c9220(ids);
-	while (fcn_005373e0((void*) fcn_005bf0d0, 0x677c7) != 0) {
+	while (main_RunFrameLoop((void*) fcn_005bf0d0, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0 || g_100f1dc == 1) {
 			g_774654 = 1;
 		}

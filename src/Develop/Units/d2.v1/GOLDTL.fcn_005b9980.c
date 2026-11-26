@@ -12,12 +12,12 @@ extern int __cdecl fcn_00470820(int a0, int a1, char *a2);
 extern void __cdecl d2_CenterDialogWindows(int a0);
 extern void __cdecl d2_SetForm(int a0, int a1);
 extern int __cdecl io_AppendText(int a0);
-extern int __cdecl fcn_00472250(int a0, int a1, int a2);
+extern int __cdecl d2_GetWindowListItem(int a0, int a1, int a2);
 extern void __cdecl d2_DrawPanelFrame(int a0, int a1, int a2);
 extern int __cdecl d2_CreateRadioGroup(int a0, int a1, int a2, int a3);
 extern int __cdecl d2_SelectRadioGroup(int a0, int a1);
 
-extern int __cdecl fcn_005373e0(void *a0, int a1);
+extern int __cdecl main_RunFrameLoop(void *a0, int a1);
 extern void __cdecl fcn_00471e30(int a0);
 extern int __cdecl d2_ClearRadioGroup(int a0);
 extern float __cdecl eval_ObjektPreis2Credits(int a0, int a1);
@@ -56,13 +56,13 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
     d2_CenterDialogWindows(h);
     d2_SetForm(h, 2);
     io_AppendText(0xd8);
-    optionButtons[0] = fcn_00472250(h, 1, 0);
-    optionButtons[1] = fcn_00472250(h, 1, 1);
-    optionButtons[2] = fcn_00472250(h, 1, 2);
+    optionButtons[0] = d2_GetWindowListItem(h, 1, 0);
+    optionButtons[1] = d2_GetWindowListItem(h, 1, 1);
+    optionButtons[2] = d2_GetWindowListItem(h, 1, 2);
     d2_SetForm(h, 0);
     d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x741);
     d2_SetForm(h, 3);
-    confirmButton = fcn_00472250(h, 3, io_AppendText(0xdb));
+    confirmButton = d2_GetWindowListItem(h, 3, io_AppendText(0xdb));
     groupId = d2_CreateRadioGroup(3, optionButtons[0], optionButtons[1], optionButtons[2]);
     d2_SelectRadioGroup(groupId, 0);
     groupOffset = 35 * groupId;
@@ -116,7 +116,7 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
         }
         if (g_14ce8e0 != 0)
             g_774654 = 1;
-    } while (fcn_005373e0((void *)0x5b9980, 0x677c7) != 0);
+    } while (main_RunFrameLoop((void *)0x5b9980, 0x677c7) != 0);
     fcn_00471e30(h);
     d2_ClearRadioGroup(groupId);
 }

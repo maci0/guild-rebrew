@@ -2,7 +2,7 @@
 #include "client_actions.h"
 #include "client_data.h"
 
-int __cdecl fcn_0064eeec(const char*);
+int __cdecl atoi(const char*);
 void __cdecl fcn_004c5530(void*);
 
 /* ADDRESS: GOLDTL 0x004b1d10 */
@@ -15,7 +15,7 @@ int __cdecl fcn_004b1d10(int a1, int a2, char* s)
 	if (*s != '-') {
 		return 0;
 	}
-	v = fcn_0064eeec(s + 1);
+	v = atoi(s + 1);
 	if (v <= 10) {
 		if (v <= 1) {
 			v = 1;

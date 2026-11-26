@@ -20,7 +20,7 @@ extern struct s_fd7ba0 g_fd7ba0[];
 int __cdecl fcn_00413160(void);
 void __cdecl fcn_0050dc30(int);
 
-int __cdecl fcn_00511e90(unsigned char* e)
+int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* e)
 {
 	int k;
 	int r;

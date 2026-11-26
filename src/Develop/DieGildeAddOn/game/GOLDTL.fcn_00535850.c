@@ -8,7 +8,7 @@ extern char g_6b5c60[];
 int __cdecl fcn_004c5790(int, char*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00533a40(char*);
-void __cdecl fcn_005373e0(int, int);
+void __cdecl main_RunFrameLoop(int, int);
 
 void __cdecl fcn_00535850(int flags, char* name)
 {
@@ -21,7 +21,7 @@ void __cdecl fcn_00535850(int flags, char* name)
 	flags |= 0x300000;
 	while (fcn_004c4450(s) == 0) {
 		fcn_00533a40(name);
-		fcn_005373e0(0, flags);
+		main_RunFrameLoop(0, flags);
 	}
 	fcn_00533a40(g_6b5c60);
 }

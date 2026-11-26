@@ -13,7 +13,7 @@ extern int g_7f4c04;
 extern unsigned char g_773d75;
 
 int __cdecl fcn_00500e20(int*);
-void __cdecl fcn_00500bb0(int, int, int, int);
+void __cdecl gm_AddTime(int, int, int, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl d3_TransformPoint(int, int, float*);
 void* __cdecl gm_FindNextFilteredEntity(void);
@@ -52,7 +52,7 @@ void __cdecl fcn_00560290(char* a0)
 	value = g_7f4c04 & 0xffff;
 	nearest = 0;
 	if ((g_696550[win] <= (float) value || (float) value < g_696540[win]) && *(int*) (a0 + 0x70) != -1 && *(int*) (a0 + 0x70) != -2) {
-		fcn_00500bb0((int) (a0 + 0x52), 0, 5, 0);
+		gm_AddTime((int) (a0 + 0x52), 0, 5, 0);
 		return;
 	}
 	if (*(unsigned short*) (a0 + 8) != 0xffff && *(int*) (a0 + 0xc) != -1) {
@@ -115,12 +115,12 @@ void __cdecl fcn_00560290(char* a0)
 				rec = gm_LookupEntityRecordById(((int*) (a0 + 0x8c))[i]);
 				if (rec && !fcn_00529670(rec, (int) v9)) {
 					*(int*) (a0 + 0x70) = 2;
-					fcn_00500bb0((int) (a0 + 0x52), 0, 5, 0);
+					gm_AddTime((int) (a0 + 0x52), 0, 5, 0);
 					return;
 				}
 			}
 			*(int*) (a0 + 0x70) = 3;
-			fcn_00500bb0((int) (a0 + 0x52), 0, 10, 0);
+			gm_AddTime((int) (a0 + 0x52), 0, 10, 0);
 			return;
 		}
 		case 3: {
@@ -141,7 +141,7 @@ void __cdecl fcn_00560290(char* a0)
 			}
 			if (found) {
 				*(int*) (a0 + 0x70) = 4;
-				fcn_00500bb0((int) (a0 + 0x52), 0, 5, 0);
+				gm_AddTime((int) (a0 + 0x52), 0, 5, 0);
 				return;
 			}
 			break;
@@ -160,7 +160,7 @@ void __cdecl fcn_00560290(char* a0)
 				rec = gm_LookupEntityRecordById(((int*) (a0 + 0x8c))[i]);
 				if (rec && !fcn_00529670(rec, (int) v9)) {
 					*(int*) (a0 + 0x70) = 4;
-					fcn_00500bb0((int) (a0 + 0x52), 0, 5, 0);
+					gm_AddTime((int) (a0 + 0x52), 0, 5, 0);
 					return;
 				}
 			}

@@ -25,7 +25,7 @@ extern char g_6abaec[];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_Plot(int, int, unsigned char, unsigned char, unsigned char);
@@ -47,7 +47,7 @@ void __cdecl d2_ShowSupermap(Map5b52* m, int x0, int y0, int x1, int y1)
 	fcn_00471d80(h, 3);
 	g_6b7fc0 = 1;
 	g_6a2c04 = 0;
-	while (fcn_005373e0((void*) d2_ShowSupermap, 0x277c7) != 0) {
+	while (main_RunFrameLoop((void*) d2_ShowSupermap, 0x277c7) != 0) {
 		d2_SetForm(h, 1);
 		if (m != 0) {
 			if (frame % 8 == 0) {

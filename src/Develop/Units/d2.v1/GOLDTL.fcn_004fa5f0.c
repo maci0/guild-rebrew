@@ -12,7 +12,7 @@ int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int b);
 void __cdecl io_AppendText(char* x);
-int __cdecl fcn_005373e0(void* fn, int y);
+int __cdecl main_RunFrameLoop(void* fn, int y);
 void __cdecl fcn_00471e30(int h);
 
 void __cdecl d2_ShowPrivilegMessage(char* x, int mode, int y)
@@ -30,7 +30,7 @@ void __cdecl d2_ShowPrivilegMessage(char* x, int mode, int y)
 	d2_SetForm(h, 1);
 	io_AppendText(x);
 	g_100f1dc = -1;
-	while (fcn_005373e0((void*) d2_ShowPrivilegMessage, y)) {
+	while (main_RunFrameLoop((void*) d2_ShowPrivilegMessage, y)) {
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		}

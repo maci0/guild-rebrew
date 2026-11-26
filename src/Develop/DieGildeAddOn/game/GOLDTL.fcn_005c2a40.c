@@ -35,7 +35,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
 void __cdecl fcn_00533f40(int, int, int, int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
-int __cdecl fcn_0046f740(int, int, char*, int);
+int __cdecl d2_AddElementToWindow(int, int, char*, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_0046fac0(int, int, char*, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -47,7 +47,7 @@ char* __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5530(char*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl fcn_0046f940(int, int);
@@ -138,7 +138,7 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 		id = slots[i * 3];
 		scale = (float) ((double) g_7747b4 * 0.25 + 0.5);
 		val = (int) (eval_ObjektPreis2Credits(id, 100) * scale);
-		handle = fcn_0046f740(0x10, cnt, (char*) (id + 0xdf), d2_CurrentWindowId);
+		handle = d2_AddElementToWindow(0x10, cnt, (char*) (id + 0xdf), d2_CurrentWindowId);
 		slots[i * 3 + 1] = handle;
 		((D2_CONTROL_TL*) g_1015ea0)[handle].value_05c = 1;
 		((D2_CONTROL_TL*) g_1015ea0)[handle].flags_1d0 = 3;
@@ -232,6 +232,6 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 		io_AppendText(0x17cf, productionBuilding,
 		             (int) (unsigned char) *(base + 0x21) - total - removed,
 		             0x17d4);
-	} while (fcn_005373e0((void*) 0x5c2a40, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) 0x5c2a40, 0x657c7) != 0);
 	fcn_00471e30(han);
 }

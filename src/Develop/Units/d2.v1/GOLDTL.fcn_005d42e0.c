@@ -38,13 +38,13 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl io_AppendText(int id, ...);
 float __cdecl fcn_004fc460(Gfx* g);
 void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int rec);
-char* __cdecl fcn_0046f740(int x, int y, int id, int layer);
+char* __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
 void __cdecl fcn_0046fac0(int a, int y, char* text, int rec);
 int __cdecl fcn_00472380(int id, int mask);
 void __cdecl fcn_00472c30(int x1, int y1, int x2, int y2, int r, int g, int b);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-int __cdecl fcn_00471f80(int id);
-int __cdecl fcn_005373e0(void* fn, int id);
+int __cdecl d2_GetControlValue(int id);
+int __cdecl main_RunFrameLoop(void* fn, int id);
 void __cdecl fcn_00471e30(char* dlg);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d42e0 */
@@ -116,7 +116,7 @@ void __cdecl fcn_005d42e0(void)
 	for (i = 4; i < 0x9a; i += 0x1e) {
 		mask = (1 << row) & g_775340;
 		mask = mask != 0;
-		n = fcn_0046f740(5, i + 1, 2, d2_CurrentWindowId);
+		n = d2_AddElementToWindow(5, i + 1, 2, d2_CurrentWindowId);
 		items[row] = n;
 		io_FormatTextBuffer(buf, row + 0x1f25);
 		fcn_0046fac0(0x19, i, buf, d2_CurrentWindowId);
@@ -137,7 +137,7 @@ void __cdecl fcn_005d42e0(void)
 		if (g_100f1dc != -1) {
 			g_775340 = 0;
 			for (i = 0; i < 5; i++) {
-				g_775340 |= fcn_00471f80(items[i]) ? (1 << i) : 0;
+				g_775340 |= d2_GetControlValue(items[i]) ? (1 << i) : 0;
 			}
 			d2_SetForm(dlg, 3);
 			fcn_005d3d90(g_775340, gfx, d2_CurrentWindowId);
@@ -145,7 +145,7 @@ void __cdecl fcn_005d42e0(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		if (!fcn_005373e0(fcn_005d42e0, 0x657c7)) {
+		if (!main_RunFrameLoop(fcn_005d42e0, 0x657c7)) {
 			break;
 		}
 	}

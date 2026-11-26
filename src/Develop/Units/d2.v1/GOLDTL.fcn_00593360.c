@@ -21,7 +21,7 @@ extern char g_779c82[];
 int __cdecl fcn_004ce190(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0046fac0(int, int, char*, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
@@ -41,7 +41,7 @@ void __cdecl fcn_00593360(void)
 		g_779c6c = *(int*) (rec + 0xc);
 	d2_SetForm(g_6a9b9c, 3);
 	io_AppendText((int) g_6811b0);
-	i = *(int*)&((D2_CONTROL_TL*)g_1015ea0)[fcn_0046f740(5, 10, g_779c6c + 0x59a, d2_CurrentWindowId)].width + 0xf;
+	i = *(int*)&((D2_CONTROL_TL*)g_1015ea0)[d2_AddElementToWindow(5, 10, g_779c6c + 0x59a, d2_CurrentWindowId)].width + 0xf;
 	if (!g_779c70) {
 		v = g_14a5774;
 	} else {

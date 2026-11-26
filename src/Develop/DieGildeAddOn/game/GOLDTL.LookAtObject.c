@@ -5,7 +5,7 @@
 extern char* evt_CurrentScript;
 extern float g_6628dc;
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
-float __cdecl fcn_00444700(int h, float* pos);
+float __cdecl d3_ComputeYawToTarget(int h, float* pos);
 char* __cdecl ch_CreateAction(char* e, int kind, ...);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
@@ -19,7 +19,7 @@ int __cdecl LookAtObject(char** a, char** b)
 		return 1;
 	}
 	d3_TransformPoint(*b, *b + 0x4c, pos);
-	f = fcn_00444700(*(int*) (*a + 0x34), pos) * g_6628dc;
+	f = d3_ComputeYawToTarget(*(int*) (*a + 0x34), pos) * g_6628dc;
 	ch_CreateAction(*a, 7, (int) f, 0);
 	return 0;
 }

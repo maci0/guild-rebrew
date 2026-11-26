@@ -3,7 +3,7 @@
 
 int __cdecl fcn_00426ba0(int);
 
-void __cdecl fcn_00538010(void)
+void __cdecl d3_FreeTable7e1d60(void)
 {
 	int p;
 	for (p = 0x75df20; p < 0x75e120; p += 4) {

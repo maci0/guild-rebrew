@@ -1,5 +1,5 @@
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005a0a40(int);
 void __cdecl fcn_005a0ad0(int, unsigned char*);
@@ -21,7 +21,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int wi
 			start = g_6b7fac;
 			last = g_6b7fac;
 			while (start + duration > g_6b7fac) {
-				fcn_005373e0(0, 0x777c7);
+				main_RunFrameLoop(0, 0x777c7);
 				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
 					break;
 				}
@@ -38,7 +38,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int wi
 			start = g_6b7fac;
 			last = g_6b7fac;
 			while (start + duration > g_6b7fac) {
-				fcn_005373e0(0, 0x777c7);
+				main_RunFrameLoop(0, 0x777c7);
 				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
 					break;
 				}
@@ -60,7 +60,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int wi
 				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
 					break;
 				}
-				fcn_005373e0(0, 0x777c7);
+				main_RunFrameLoop(0, 0x777c7);
 			}
 			break;
 		case 4:
@@ -73,7 +73,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int wi
 				if (!*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4)) {
 					break;
 				}
-				fcn_005373e0(0, 0x777c7);
+				main_RunFrameLoop(0, 0x777c7);
 			}
 			break;
 		}
@@ -101,7 +101,7 @@ void __cdecl fcn_005a0cd0(unsigned char* a0, unsigned char* a1, int mode, int wi
 			if (!(*(char*) ((char*) &g_7f4ca4 + (*(unsigned short*) &g_774970) * 0x21c + 4))) {
 				break;
 			}
-			fcn_005373e0(0, 0x777c7);
+			main_RunFrameLoop(0, 0x777c7);
 		}
 	}
 }

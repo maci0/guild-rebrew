@@ -16,10 +16,10 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 unsigned int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, char*);
+int __cdecl d2_GetWindowListItem(int, int, char*);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x004dc3a0 */
@@ -70,7 +70,7 @@ int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 		    (*(int*) (info + 8) & 0xff) + 0x253);
 	}
 	for (i = 0; i < found; i++) {
-		handles[i] = fcn_00472250(gui, 0,
+		handles[i] = d2_GetWindowListItem(gui, 0,
 		    (char*) io_AppendText(0x68c354, *(unsigned short*) ents[i]));
 	}
 	for (i = found; i < 4; i++) {
@@ -80,7 +80,7 @@ int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 	    0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(n, 0x5dc, 1);
 	g_100f1dc = -1;
-	while (fcn_005373e0((void*) 0x4dc230, cut_EventLoopFlags) != 0) {
+	while (main_RunFrameLoop((void*) 0x4dc230, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(n, 0, 0) != 0) {
 			if (g_100f1dc != -1) {
 				for (i = 0; i < found; i++) {

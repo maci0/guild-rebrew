@@ -39,7 +39,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_0050f950(int a, int b);
 void __cdecl fcn_005904a0(char* s, int v);
 void __cdecl fcn_004c5530(Msg5* m);
-void __cdecl fcn_00500bb0(GAME_TIMESTAMP* t, int a, int b, int c);
+void __cdecl gm_AddTime(GAME_TIMESTAMP* t, int a, int b, int c);
 void __cdecl he_FreeAction(char* e);
 
 /* ADDRESS: GOLDTL 0x0057b390 */
@@ -133,12 +133,12 @@ void __cdecl fcn_0057b390(char* e)
 		break;
 	case 2:
 		*(GAME_TIMESTAMP*) (e + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;
-		fcn_00500bb0((GAME_TIMESTAMP*) (e + 0x52), 0, 0x1e, 0);
+		gm_AddTime((GAME_TIMESTAMP*) (e + 0x52), 0, 0x1e, 0);
 		*(int*) (e + 0x70) += 1;
 		return;
 	case 3:
 		*(GAME_TIMESTAMP*) (e + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;
-		fcn_00500bb0((GAME_TIMESTAMP*) (e + 0x52), 0, 0x1e, 0);
+		gm_AddTime((GAME_TIMESTAMP*) (e + 0x52), 0, 0x1e, 0);
 		*(int*) (e + 0x70) = 0;
 		return;
 	case -1:
@@ -149,6 +149,6 @@ void __cdecl fcn_0057b390(char* e)
 		return;
 	}
 	*(GAME_TIMESTAMP*) (e + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;
-	fcn_00500bb0((GAME_TIMESTAMP*) (e + 0x52), 0, gm_RandomMod(0x14) + 0x14, 0);
+	gm_AddTime((GAME_TIMESTAMP*) (e + 0x52), 0, gm_RandomMod(0x14) + 0x14, 0);
 	*(int*) (e + 0x70) += 1;
 }

@@ -22,8 +22,8 @@ extern char s_68be7c[];
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_0050cf50(char*, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl gm_CalculateGebaeudeValue(char*, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
@@ -49,8 +49,8 @@ int __cdecl fcn_005c9450(unsigned short* who, int n, int* arr)
 		if (e[0x5a] & 1) {
 			continue;
 		}
-		v = fcn_0050cf50(e, e[0x5c]);
-		h = fcn_0046f740(0x20, y, (unsigned char) e[0] + 0x427, d2_CurrentWindowId);
+		v = gm_CalculateGebaeudeValue(e, e[0x5c]);
+		h = d2_AddElementToWindow(0x20, y, (unsigned char) e[0] + 0x427, d2_CurrentWindowId);
 		io_FormatTextBuffer(buf, s_6ac948, e);
 		d2_ShowTxt(0x80, y, buf, d2_CurrentWindowId);
 		io_FormatTextBuffer(buf, s_68be7c, v);

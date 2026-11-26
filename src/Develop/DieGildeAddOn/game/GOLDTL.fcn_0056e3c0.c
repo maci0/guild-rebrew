@@ -6,7 +6,7 @@ extern char g_6b5c60[];
 extern int gm_CityEntity;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00500bb0(int*, int, int, int);
+void __cdecl gm_AddTime(int*, int, int, int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 void __cdecl fcn_00529160(int, int, int, int);
@@ -48,7 +48,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 	}
 	if (*(int*) (s + 0x20c) != -1 && *(int*) (eventState + 0x70) != 6) {
 		*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
-		fcn_00500bb0((int*) (eventState + 0x52), 0, 5, 0);
+		gm_AddTime((int*) (eventState + 0x52), 0, 5, 0);
 		return;
 	}
 	switch (*(int*) (eventState + 0x70)) {
@@ -100,7 +100,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 			}
 		}
 		*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
-		fcn_00500bb0((int*) (eventState + 0x52), 0, 0x1e, 0);
+		gm_AddTime((int*) (eventState + 0x52), 0, 0x1e, 0);
 		*(int*) (eventState + 0x70) = *(int*) (eventState + 0x70) + 1;
 		if ((*(unsigned char*) (eventState + 0x78) & 4) != 0) {
 			goto tail;
@@ -109,7 +109,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 	case 3:
 		c = *(char*) (s + 2);
 		if (c != 6 && c != 7) {
-			fcn_00500bb0((int*) (eventState + 0x52), 0, 2, 0);
+			gm_AddTime((int*) (eventState + 0x52), 0, 2, 0);
 			*(int*) (eventState + 0x70) = 4;
 			return;
 		}
@@ -119,14 +119,14 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		*(char*) (buf + 0x08) = 8;
 		*(char*) (buf + 0x26) = 0xa0;
 		*(pos14_7f4c00*) (buf + 0x18) = *(pos14_7f4c00*) gm_GameTime;
-		fcn_00500bb0((int*) (buf + 0x18), 0, 0x1e, 0);
+		gm_AddTime((int*) (buf + 0x18), 0, 0x1e, 0);
 		s = *(char**) (s + 4);
 		*(int*) (buf + 0x14) = -1;
 		*(char*) (buf + 0x30) = 1;
 		*(int*) (buf + 0x0c) = (int) s;
 		*(int*) (buf + 0x34) = (int) s;
 		*(int*) (eventState + 0xb4) = fcn_004c5980((int) buf);
-		fcn_00500bb0((int*) (eventState + 0x52), 0, 1, 0);
+		gm_AddTime((int*) (eventState + 0x52), 0, 1, 0);
 		*(int*) (eventState + 0x70) = 6;
 		return;
 	case 4:
@@ -161,7 +161,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		} else {
 			*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
 			*(int*) (eventState + 0xb0) = *(int*) fcn_004c4480(*(int*) (eventState + 0xb4));
-			fcn_00500bb0((int*) (eventState + 0x52), 2, 0, 0);
+			gm_AddTime((int*) (eventState + 0x52), 2, 0, 0);
 			*(int*) (eventState + 0x70) = 7;
 		}
 		return;
@@ -177,7 +177,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 			return;
 		}
 		*(pos14_7f4c00*) (eventState + 0x52) = *(pos14_7f4c00*) gm_GameTime;
-		fcn_00500bb0((int*) (eventState + 0x52), 2, 0, 0);
+		gm_AddTime((int*) (eventState + 0x52), 2, 0, 0);
 		return;
 	default:
 		return;

@@ -13,13 +13,13 @@ int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl io_AppendText();
 int __cdecl fcn_00533a60(int, int, int*, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_0046f280(int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_0050d640(int, char*, unsigned int, char**);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_0050dd00(int, int*, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_005a4bb0(char*);
 void __cdecl fcn_005a4960(char*, int);
 void __cdecl fcn_00471e30(int);
@@ -69,7 +69,7 @@ void __cdecl fcn_005a4e00(char* building)
 	d2_SetForm(h, 3);
 	fcn_00533a60(d2_CurrentWindowId, 0, tmp, 1, g_14ab694);
 	close_btn = tmp[0];
-	while (fcn_005373e0((void*) fcn_005a4e00, 0x677c7) != 0) {
+	while (main_RunFrameLoop((void*) fcn_005a4e00, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
@@ -119,7 +119,7 @@ void __cdecl fcn_005a4e00(char* building)
 				for (j = 0; j < v; j++) {
 					sum += *(int*) (out[j] + 0xb4);
 				}
-				items[i][1] = fcn_00472250(h, 2,
+				items[i][1] = d2_GetWindowListItem(h, 2,
 				    io_AppendText(0x18df, ids[i], v, sum));
 			}
 			first = 0;

@@ -8,7 +8,7 @@ extern int g_14a79c0[];
 void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_005c61e0(unsigned short id);
-int __cdecl fcn_00471f80(int handle);
+int __cdecl d2_GetControlValue(int handle);
 void __cdecl d2_SetElementValue(int handle, ...);
 void __cdecl fcn_00472640(int handle, int value);
 void __cdecl d2_SetDisplayCounter(int id, int value);
@@ -34,7 +34,7 @@ unsigned int __cdecl fcn_005c5e70(void)
 	for (slot = (int*) 0x776c64; (int) slot < 0x776c94; slot += 2) {
 		if (*slot != 0) {
 			if (fcn_00502cd0(*(int*) (container + 0x178), 1, 0, *(unsigned short*) *slot) != 0) {
-				handle = fcn_00471f80(slot[-1]);
+				handle = d2_GetControlValue(slot[-1]);
 				d2_SetElementValue(slot[-1], 0, *(unsigned int*) (*slot + 0xe), handle);
 				fcn_0064d41a(((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]] + 0xcc), "%s~ %li %s",
 				    (unsigned int) g_14a79c0[*(unsigned short*) *slot * 2], *(unsigned int*) (*slot + 0xe), g_14b52c4);

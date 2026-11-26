@@ -3,7 +3,7 @@ extern float g_662d40[3];
 extern volatile int g_6b7fac;
 
 extern int __cdecl gm_ResolveEntityById(void **a0, int a1, int a2, int a3);
-extern void __cdecl fcn_004432d0(int a0, int a1);
+extern void __cdecl d3_SelectSceneContext(int a0, int a1);
 extern void __cdecl d3_TransformPoint(int a0, int a1, float *a2);
 extern float __cdecl fcn_004514d0(float *a0, float *a1);
 extern int __cdecl fcn_00442910(int a0, float *a1, float *a2, char *a3);
@@ -32,7 +32,7 @@ int __cdecl fcn_00558370(int a0)
     VEC dir;
 
     savedContext = d3_CurrentContextIndex;
-    fcn_004432d0(0, 1);
+    d3_SelectSceneContext(0, 1);
     v3 = a0;
     gm_ResolveEntityById(&out, 0, 0, *(int *)(v3 + 0xb0));
     v5 = (int)out;
@@ -102,10 +102,10 @@ int __cdecl fcn_00558370(int a0)
         *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x217) = *(unsigned char *)(*(int *)(v3 + 0xc8) + 0x217) & 0xfe;
         d3_ApplyObjectAnimation(*(int *)(v3 + 0xc8), (char *)0x6a5fb4, 1);
         *(int *)(v3 + 0xec) = g_6b7fac;
-        fcn_004432d0(savedContext, 1);
+        d3_SelectSceneContext(savedContext, 1);
         return 1;
     }
 fail:
-    fcn_004432d0(savedContext, 1);
+    d3_SelectSceneContext(savedContext, 1);
     return 0;
 }

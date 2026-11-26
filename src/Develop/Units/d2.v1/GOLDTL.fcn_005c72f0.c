@@ -44,14 +44,14 @@ int __cdecl fcn_00595e20(int, int);
 int __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl fcn_005974e0(int, int);
 int __cdecl fcn_00597940(int, int, int, int, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int* __cdecl fcn_004ce590(int);
 int* __cdecl fcn_004ce610(int);
 int __cdecl fcn_005c7270(int, int);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 int __cdecl fcn_00472380(int, int, int, int, int);
-void __cdecl fcn_004c44a0(void);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_BeginCommandSync(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
 void __cdecl d2_ClearSelectedControl(void);
@@ -59,7 +59,7 @@ int __cdecl fcn_004ce9e0(int);
 int __cdecl d2_UpdateTrainingRows(int, int);
 int __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_00471e30(int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl CountDisplayCounters(void);
 void __cdecl ResetDisplayCounters(void);
@@ -145,7 +145,7 @@ label_5c7466:
 			if (p4[-2] != 0 && *p4 == d2_CurrentElementId) {
 				selected = g_7774a0[v7].entity;
 				if (selected != 0) {
-					fcn_004c44a0();
+					cm_BeginCommandSync();
 					d2_ClearSelectedControl();
 					v7 = 0; rec = (int*) ((char*) g_778da0 + 0x10);
 					goto label_5c752a;
@@ -164,7 +164,7 @@ label_5c752a:
 	do {
 		int v5;
 		v5 = *rec;
-		if (v5 != -1 && fcn_00471f80(v5) != 0) {
+		if (v5 != -1 && d2_GetControlValue(v5) != 0) {
 			v5 = rec[-4];
 			if (fcn_004ce590(v5) != 0) {
 				if (*(int*) fcn_004ce610(selected) != 0) {
@@ -177,7 +177,7 @@ label_5c752a:
 				if (v5 != 0) {
 					fcn_004c51f0(*(int*) (selected + 4), *(int*) &p[1], v13, 1,
 							g_773d75, 0);
-					v5 = fcn_00471f80(*(int*) (v7 + ((int) g_778da0 + 0x10)));
+					v5 = d2_GetControlValue(*(int*) (v7 + ((int) g_778da0 + 0x10)));
 					fcn_00472380(*(int*) (v7 + ((int) g_778da0 + 0x10)), 0,
 							*(int*) (v7 + ((int) g_778da0 + 0x30)), v5 - 1, 0);
 					break;
@@ -200,7 +200,7 @@ label_5c7572:
 	do {
 		int v5;
 		v5 = *rec;
-		if (v5 != -1 && fcn_00471f80(v5) != 0) {
+		if (v5 != -1 && d2_GetControlValue(v5) != 0) {
 			v7 *= 0x38;
 			v13 = *(int*) (v7 + ((int) g_7796e0 + 0x0));
 			if (fcn_004ce590(v13) != 0) {
@@ -209,7 +209,7 @@ label_5c7572:
 				if (v5 != 0) {
 					fcn_004c51f0(*(int*) (selected + 4), *(int*) &p[1], v13, 1,
 							g_773d75, 0);
-					v5 = fcn_00471f80(*(int*) (v7 + ((int) g_7796e0 + 0x10)));
+					v5 = d2_GetControlValue(*(int*) (v7 + ((int) g_7796e0 + 0x10)));
 					fcn_00472380(*(int*) (v7 + ((int) g_7796e0 + 0x10)), 0,
 							*(int*) (v7 + ((int) g_7796e0 + 0x30)), v5 - 1, 0);
 					break;
@@ -224,7 +224,7 @@ label_5c7572:
 		rec += 0xe;
 		v7 += 1;
 	} while ((int) rec < ((int) g_7796e0 + 0x1d0));
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	v7 = fcn_004c44c0();
 	while (v7 == 0) {
 		fcn_00535960();
@@ -234,7 +234,7 @@ label_5c7572:
 label_5c76eb:
 	v7 = d2_UpdateTrainingRows(win, 2);
 	if (d2_HoveredWindow == g_1038140[win].wins[1] && v7 != 0 && g_14ce8cc != 0) {
-		fcn_004c44a0();
+		cm_BeginCommandSync();
 		p4 = (int*) ((int) g_7774a0 + 0x0);
 		do {
 			if (*p4 != 0) {
@@ -243,7 +243,7 @@ label_5c76eb:
 				q = &p4[4];
 				n = 6;
 				do {
-					if (*q != -1 && fcn_00471f80(*q) != 0) {
+					if (*q != -1 && d2_GetControlValue(*q) != 0) {
 						fcn_004c51f0(*(int*) &p[1], *(int*) (*p4 + 4),
 								q[1], 1,
 								g_773d75,
@@ -255,7 +255,7 @@ label_5c76eb:
 			}
 			p4 += 0x10;
 		} while ((int) p4 < ((int) g_7774a0 + 0x800));
-		fcn_004c44b0();
+		cm_EndCommandSync();
 		v7 = fcn_004c44c0();
 		while (v7 == 0) {
 			fcn_00535960();
@@ -280,7 +280,7 @@ label_5c76eb:
 			q = (int*) ((int) g_778da0 + 0x10);
 			do {
 				v7 = *q;
-				if (v7 != -1 && fcn_00471f80(v7) != 0) {
+				if (v7 != -1 && d2_GetControlValue(v7) != 0) {
 					fcn_00472380(*q, 0, q[8], 0, 0);
 				}
 				q += 0xe;
@@ -288,7 +288,7 @@ label_5c76eb:
 			q = (int*) ((int) g_7796e0 + 0x10);
 			do {
 				v7 = *q;
-				if (v7 != -1 && fcn_00471f80(v7) != 0) {
+				if (v7 != -1 && d2_GetControlValue(v7) != 0) {
 					fcn_00472380(*q, 0, q[8], 0, 0);
 				}
 				q += 0xe;
@@ -312,7 +312,7 @@ label_5c76eb:
 			} while ((int) p4 < 0x777cb0);
 		}
 	}
-	v7 = fcn_005373e0(0x5c72f0, v18);
+	v7 = main_RunFrameLoop(0x5c72f0, v18);
 	if (v7 != 0) {
 		goto label_5c7466;
 	}

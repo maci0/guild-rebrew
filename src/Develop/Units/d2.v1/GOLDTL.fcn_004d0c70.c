@@ -52,7 +52,7 @@ int __cdecl fcn_004cef70(int a1, char* a2);
 int __cdecl fcn_00469c30(int x, int y, int a3);
 int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
 char** __cdecl fcn_004ce610(char* x);
-int __cdecl fcn_0046f740(int x, int y, int a3, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 void __cdecl fcn_00472680(int id, int a2);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -86,7 +86,7 @@ void __cdecl fcn_004d0c70(void)
 			g_9b4840[k].win = fcn_0046e940(k * 0x80, 0, 0x80, 0x4b, 0x110);
 			name = fcn_004ce610(unit);
 			if (name != 0 && *name != 0) {
-				g_9b4840[k].name = fcn_0046f740(0x54, 0xf, (int) (*name + 0xdf), d2_CurrentWindowId);
+				g_9b4840[k].name = d2_AddElementToWindow(0x54, 0xf, (int) (*name + 0xdf), d2_CurrentWindowId);
 				fcn_00472680(g_9b4840[k].name, -2);
 				g_9b4840[k].label = d2_ShowTxt(0x54, 0x26, &(*(char*)g_6b5c60), d2_CurrentWindowId);
 				((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].label].font = 0x54;
@@ -96,7 +96,7 @@ void __cdecl fcn_004d0c70(void)
 			g_9b4840[k].unit = unit;
 			*(int*) &((D2_WIN*)g_1015f40)[g_9b4840[k].win].pad14[0xc] = 0;
 			*(int*) &((D2_WIN*)g_1015f40)[g_9b4840[k].win].pad280[12] = 0x54;
-			g_9b4840[k].icon = fcn_0046f740(0x28, 0x11, *(int*) (unit + 0x18c), d2_CurrentWindowId);
+			g_9b4840[k].icon = d2_AddElementToWindow(0x28, 0x11, *(int*) (unit + 0x18c), d2_CurrentWindowId);
 			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].icon].value_058 = 1;
 			g_9b4840[k].text = d2_ShowTxt(0, 0, &(*(char*)g_6b5c60), d2_CurrentWindowId);
 			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].text].font = 0x54;

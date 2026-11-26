@@ -11,7 +11,7 @@ extern char* gm_CityEntity;
 
 int __cdecl amt_FindOfficeSlotByType(int, void*);
 #include "Develop/DieGildeAddOn/game/aemter.h"
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 void __cdecl fcn_004c5530(void*);
 
 struct slot_4b11a0 {
@@ -38,7 +38,7 @@ int __cdecl fcn_004b11a0(int a1, int a2, char* arg)
 		fcn_004e8240(s.kind, 0, 0, 4, 0xff);
 	if (amt_FindOfficeSlotByType(0x21, &s) != 0 && s.id != -1)
 		fcn_004e8240(s.kind, 0, 0, 4, 0xff);
-	fcn_0064eeec(arg + 1);
+	atoi(arg + 1);
 	memset(m, 0, sizeof(m));
 	m[4] = (char) 0x80;
 	*(int*) (m + 8) = *(int*) (gm_CityEntity + 4);

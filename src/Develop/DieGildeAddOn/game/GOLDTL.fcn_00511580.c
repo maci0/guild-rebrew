@@ -28,9 +28,9 @@ int __cdecl fcn_0050b750(int, char);
 
 void __cdecl fcn_004c4670(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
-void __cdecl fcn_004c44a0(void);
+void __cdecl cm_BeginCommandSync(void);
 int __cdecl fcn_004c4fc0(int, int, int, short, int, char, int, int);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_004c3ff0(void);
 void __cdecl fcn_004c4940(void);
@@ -58,10 +58,10 @@ void __cdecl fcn_00511580(void)
 			fcn_004c5360();
 		}
 	}
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	a = fcn_004c4fc0(0xc, -1, -1, 0x12, -1, 0, 0, 0);
 	b = fcn_004c4fc0(0xc, -1, -1, 0x12, -1, 0, 0, 0);
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_004c3ff0();
 		fcn_004c4940();
@@ -69,7 +69,7 @@ void __cdecl fcn_00511580(void)
 	}
 	gm_RichterKatholisch = (char*) fcn_004c4480(a);
 	gm_RichterEvangelisch = (char*) fcn_004c4480(b);
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	flag = 0;
 	fcn_004c4510(gm_RichterKatholisch, ((Figure*) gm_RichterKatholisch)->owner);
 	cm_AppendPacketFieldDelta(1, 1, gm_RichterKatholisch - g_aed32c + 0xc, &flag);
@@ -78,26 +78,26 @@ void __cdecl fcn_00511580(void)
 	fcn_004c4510(gm_RichterEvangelisch, ((Figure*) gm_RichterEvangelisch)->owner);
 	cm_AppendPacketFieldDelta(1, 1, gm_RichterEvangelisch - g_aed32c + 0xc, &flag);
 	fcn_004c5360();
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_004c3ff0();
 		fcn_004c4940();
 		ls_ID2Ptr();
 	}
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	for (i = 0; i < 8; i++) {
 		figures[i] = fcn_004c4fc0(0, -1, -1, gm_RandomMod(8) + 0x10, -1, (char) (gm_RandomMod(3) + 4), 0, 0);
 	}
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();
 	}
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	for (i = 0; i < 8; i++) {
 		figures[i] = fcn_004c4fc0(0xb, -1, -1, gm_RandomMod(8) + 0x10, -1, 0, 0x13, 0);
 		fcn_004c51f0(-2, -1, 0x154, 1, (*(char*)&g_773d75), 0);
 	}
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();
 	}

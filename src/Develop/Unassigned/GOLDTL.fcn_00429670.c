@@ -5,7 +5,7 @@ extern int evt_LastGfxScriptId;
 extern int g_6791c8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00429490(char*);
 void __cdecl evt_ExecuteStatements(char*);
 
@@ -36,7 +36,7 @@ void __cdecl evt_RunGfxScript(char* s)
 		}
 		if (*(int*) (s + 0xc8c) != 0 || (s[0x124] & 2)) {
 			saved = d3_CurrentContextIndex;
-			fcn_004432d0(*(int*) (s + 0xc90), 1);
+			d3_SelectSceneContext(*(int*) (s + 0xc90), 1);
 		}
 		if (*(int*) (s + 0xc60) != 0) {
 			fcn_00429490(s);
@@ -47,7 +47,7 @@ void __cdecl evt_RunGfxScript(char* s)
 			} while (*(int*) (s + 0xc84) == 2 && (s[0x124] & 1));
 		}
 		if (saved != -1) {
-			fcn_004432d0(saved, 1);
+			d3_SelectSceneContext(saved, 1);
 		}
 	}
 	if (g_6b7ec8 > 0) {

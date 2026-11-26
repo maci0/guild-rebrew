@@ -29,14 +29,14 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004f3280(int, int, int, int, int);
 int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(int, int, char*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
@@ -71,8 +71,8 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 	io_AppendText(0x4132, 0x4131, 0x229);
 	d2_SetForm(dlg, 2);
 	id = io_AppendText(0x4133);
-	ok = fcn_00472250(dlg, 2, id);
-	cancel = fcn_00472250(dlg, 2, id + 1);
+	ok = d2_GetWindowListItem(dlg, 2, id);
+	cancel = d2_GetWindowListItem(dlg, 2, id + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -84,7 +84,7 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 				} else {
 					h = fcn_004f3280(a1, *request->x0, request->x8, request->x10, 0x1c);
 					while (h != -1 && (status = fcn_004c4450(h)) == 0) {
-						fcn_005373e0((void*) status, 0x20007);
+						main_RunFrameLoop((void*) status, 0x20007);
 					}
 					p = fcn_004c4480(h);
 					if (p != 0) {
@@ -99,7 +99,7 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) d2_ShowFriedhofGehilfenDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowFriedhofGehilfenDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 }

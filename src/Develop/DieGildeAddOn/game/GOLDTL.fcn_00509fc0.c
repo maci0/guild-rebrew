@@ -42,7 +42,7 @@ extern pos14_7f4c00 gm_GameTime;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 unsigned char* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_0050cf50(int, int);
+int __cdecl gm_CalculateGebaeudeValue(int, int);
 int __cdecl gm_SumTreasury(unsigned short*);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_0050b710(int, unsigned char);
@@ -105,7 +105,7 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 		send = 0;
 		cur = 0;
 		if ((g_666028 & mask) != 0 || (g_66602c & bit) != 0) {
-			score = fcn_0050cf50((int) p, (int) (char) p[0x5c]);
+			score = gm_CalculateGebaeudeValue((int) p, (int) (char) p[0x5c]);
 			if (score > best) {
 				if (prev != 0) {
 					list[n] = prev;
@@ -132,7 +132,7 @@ void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a
 			pkt.x8 = *(int*) (sp + 4);
 			pkt.xc = -1;
 			pkt.x36 = 2;
-			pkt.x5c = fcn_0050cf50((int) cur, (int) (char) cur[0x5c]);
+			pkt.x5c = gm_CalculateGebaeudeValue((int) cur, (int) (char) cur[0x5c]);
 			fcn_004c5530(&pkt);
 			q = (char*) g_7f4ca4;
 			do {

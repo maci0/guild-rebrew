@@ -3,7 +3,7 @@
 extern char g_7f4ca0[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl fcn_004ae130(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 
@@ -38,7 +38,7 @@ int __cdecl fcn_004b05e0(int* record, int index, char* text)
 		if (*text != '_')
 			return 0;
 		text++;
-		n = fcn_0064eeec(text) * sign[i] * 2;
+		n = atoi(text) * sign[i] * 2;
 	}
 	for (i = 0; i < 768; i++) {
 		if (fcn_004ae130(i) != 0

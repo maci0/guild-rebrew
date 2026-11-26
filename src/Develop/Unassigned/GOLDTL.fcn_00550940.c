@@ -6,10 +6,10 @@ typedef struct {
 } Rec14;
 // SIZE 0xe
 
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 
 void __cdecl fcn_00550940(char* e)
 {
 	*(Rec14*) (e + 0x52) = *(Rec14*) (e + 0x44);
-	fcn_00500bb0(e + 0x52, 3, 0, 0);
+	gm_AddTime(e + 0x52, 3, 0, 0);
 }

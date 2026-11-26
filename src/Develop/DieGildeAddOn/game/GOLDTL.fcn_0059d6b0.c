@@ -15,11 +15,11 @@ void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_SetForm(int dlg, int flag);
 int __cdecl io_AppendText(int id, ...);
-int __cdecl fcn_00472250(int dlg, int a, int b);
+int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 void __cdecl fcn_004c5530(int a1);
 void __cdecl fcn_004c35f0(void);
 void __cdecl sv_ClearObjectSelection(void);
-int __cdecl fcn_005373e0(int a, int b);
+int __cdecl main_RunFrameLoop(int a, int b);
 void __cdecl fcn_00471e30(int dlg);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0059d6b0 */
@@ -87,8 +87,8 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(option, 1);
 	index = io_AppendText(0x19f7, *(unsigned short*) choice, obj);
-	other = fcn_00472250(option, 1, index);
-	index = fcn_00472250(option, 1, index + 1);
+	other = d2_GetWindowListItem(option, 1, index);
+	index = d2_GetWindowListItem(option, 1, index + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -126,6 +126,6 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(0x59d6b0, 0x677c7));
+	} while (main_RunFrameLoop(0x59d6b0, 0x677c7));
 	fcn_00471e30(option);
 }

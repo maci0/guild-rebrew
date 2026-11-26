@@ -40,7 +40,7 @@ void __cdecl fcn_004c4ef0(char* text);
 void __cdecl fcn_004c68c0(void* msg);
 void __cdecl fcn_004c58b0(int a, unsigned int b);
 void __cdecl fcn_004c51a0(unsigned int a, unsigned int b, int c, unsigned int d);
-int __cdecl fcn_005373e0(void* fn, int id);
+int __cdecl main_RunFrameLoop(void* fn, int id);
 void __cdecl fcn_00471e30(int handle);
 void __cdecl fcn_005a2580(char* a, char* b, char* c);
 
@@ -151,6 +151,6 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 		} else if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_005a2580, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_005a2580, 0x677c7) != 0);
 	fcn_00471e30(handle);
 }

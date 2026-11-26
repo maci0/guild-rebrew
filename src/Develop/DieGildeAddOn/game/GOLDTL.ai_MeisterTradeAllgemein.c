@@ -111,7 +111,7 @@ int __cdecl fcn_0047d1e0(void);
 int __cdecl fcn_004c51f0(int, int, int, int, int, int);
 int __cdecl fcn_004c52d0(int, int);
 int __cdecl fcn_004c5530(void*);
-int __cdecl fcn_00500bb0(void*, int, int, int);
+int __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_00503d10(int);
@@ -312,7 +312,7 @@ next_request:
 			v.m.p30 = g_7f4c08;
 			v.m.p34 = g_7f4c0c;
 			v.m.flag2 = 1;
-			fcn_00500bb0(&v.m.p28, 0, 0, 0xa);
+			gm_AddTime(&v.m.p28, 0, 0, 0xa);
 			v.m.f58 = *(int*) (r + 2);
 			v.m.slots[0] = 5;
 			*(int*) ((char*) &v.m + 0x84) = 0;

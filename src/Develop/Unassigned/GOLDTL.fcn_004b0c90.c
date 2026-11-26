@@ -1,6 +1,6 @@
 #include <string.h>
 
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl fcn_004f4830(int, void*);
 void __cdecl fcn_004f4860(unsigned short*, unsigned char, int);
 
@@ -64,7 +64,7 @@ int __cdecl fcn_004b0c90(int a1, int a2, char* text)
 		if (fcn_004f4830(id, r) == 0)
 			return 0;
 		text++;
-		n = fcn_0064eeec(text) * sign + r->cur;
+		n = atoi(text) * sign + r->cur;
 		n = MAX(MIN(r->hi, n), r->lo);
 	}
 	fcn_004f4860(0, id, n);

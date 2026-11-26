@@ -12,7 +12,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00471e30(int);
 
@@ -28,7 +28,7 @@ void __cdecl d2_ShowGildenkasseDialog(char* e)
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1a0f, v);
-	while (fcn_005373e0(d2_ShowGildenkasseDialog, 0x677c7) != 0) {
+	while (main_RunFrameLoop(d2_ShowGildenkasseDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

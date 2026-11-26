@@ -61,7 +61,7 @@ extern int d3_ActiveCamera;
 void __cdecl fcn_0047a040(int, int, int, int);
 int __cdecl fcn_0047cb60(int, int, int, int);
 void __cdecl d2_DestroyElement(int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl fcn_00469c30(int, int, int);
 int __cdecl fcn_0046fcd0(int, int, char*);
@@ -173,13 +173,13 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 			g_6a2594 = -1;
 		}
 
-		g_6a2578 = fcn_0046f740(
+		g_6a2578 = d2_AddElementToWindow(
 			0x10, 8, *(int*) (g_slot_table + 0x54
 					  + g_774970 * 0x21c), g_6a2598);
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].flags_1d0 = 0x43;
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2578].value_05c = 1;
 
-		g_6a257c = fcn_0046f740(0x23a, 0xd, 0x522, g_6a2598);
+		g_6a257c = d2_AddElementToWindow(0x23a, 0xd, 0x522, g_6a2598);
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a257c].flags_1d0 = 0x43;
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a257c].value_05c = 1;
 
@@ -404,7 +404,7 @@ hidden:
 		    != *(int*) (g_slot_table + 0x54 + g_774970 * 0x21c)) {
 			d2_DestroyElement(g_6a2578);
 			g_6a2578 = -1;
-			g_6a2578 = fcn_0046f740(
+			g_6a2578 = d2_AddElementToWindow(
 				0x10, 8,
 				*(int*) (g_slot_table + 0x54
 					 + g_774970 * 0x21c),

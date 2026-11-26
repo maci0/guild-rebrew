@@ -40,7 +40,7 @@ int __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00533a60(int, int, int*, int, int, int, int);
 int __cdecl fcn_00472640(int, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 int __cdecl d2_OpenMessageBox(int, int);
 int __cdecl nt_ListenForServerAnnouncements(int, int, char*, int);
 int __cdecl fcn_00471e30(int);
@@ -53,8 +53,8 @@ int __cdecl CloseVfsStream(int);
 int __cdecl __strupr(char*);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl fcn_00465950(char*);
-int __cdecl fcn_0046f740(int, int, int, int);
-int __cdecl fcn_00469470(int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
+int __cdecl d2_AddToRadioGroup(int, int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_00471af0(int, int);
@@ -122,7 +122,7 @@ unsigned int __cdecl d2_ShowServerBrowser(int a0)
 	d2_SetForm(dialog, 3);
 	fcn_00533a60(d2_CurrentWindowId, 0, buttons, 3, g_14ac614, g_14ac618, g_14ac61c);
 	fcn_00472640(buttons[0], 0);
-	if (fcn_005373e0(0x539930, 0x24087) != 0) {
+	if (main_RunFrameLoop(0x539930, 0x24087) != 0) {
 		do {
 			if (g_6b7fac > v36 + 0x5dc || v4 != 0) {
 				int v6;
@@ -197,7 +197,7 @@ label_539ba4:
 								v32 = fcn_00465950(s_6a2e24);
 							}
 							d2_SetForm(dialog, 2);
-							v32 = fcn_0046f740(8, v34, v32, d2_CurrentWindowId);
+							v32 = d2_AddElementToWindow(8, v34, v32, d2_CurrentWindowId);
 							*v31 = v32;
 							*(int*) (v32 * 0x2f4 + 0x5c + (int) g_1015ea0) = 1;
 							if (*(int*) ((int) ((int*) ((char*) hosts + 0x7c)) + v34) == 0x3f
@@ -205,7 +205,7 @@ label_539ba4:
 								fcn_00472640(v32, 0);
 							}
 							*(int*) (v32 * 0x2f4 + 0x1d0 + (int) g_1015ea0) = 3;
-							fcn_00469470(group, v32);
+							d2_AddToRadioGroup(group, v32);
 							v32 = fcn_0046f100(0x88, v35, 400, 0x78, 0x10, d2_CurrentWindowId);
 							v31[1] = v32;
 							d2_SetElementFont(*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161bc), 0x53);
@@ -343,7 +343,7 @@ label_539d27:
 			} else {
 				fcn_00472640(buttons[0], 0);
 			}
-		} while (fcn_005373e0(0x539930, 0x24087) != 0);
+		} while (main_RunFrameLoop(0x539930, 0x24087) != 0);
 		if (group != -1) {
 			d2_ClearRadioGroup(group);
 		}

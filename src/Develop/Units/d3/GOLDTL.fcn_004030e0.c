@@ -5,7 +5,7 @@ extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl ch_ReleaseMorphAnimation(char*);
 int __cdecl d3_GetContextIndex(int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 
 void __cdecl fcn_00403df0(char*);
 void __cdecl m_FreeTracked(char*);
@@ -32,7 +32,7 @@ int __cdecl ch_DestroyCharacter(char* obj)
 				ch_ReleaseMorphAnimation(obj);
 				if (g_67a370 != *(int*) (obj + 0x88)) {
 					saved = d3_CurrentContextIndex;
-					fcn_004432d0(d3_GetContextIndex(*(int*) (obj + 0x88)), 1);
+					d3_SelectSceneContext(d3_GetContextIndex(*(int*) (obj + 0x88)), 1);
 				}
 				if (*(void (__cdecl**)(char*)) (obj + 0x228) != 0) {
 					(*(void (__cdecl**)(char*)) (obj + 0x228))(obj);
@@ -46,7 +46,7 @@ int __cdecl ch_DestroyCharacter(char* obj)
 					d3_DestroyObject((D3_OBJECT*) (*(void**) (obj + 0x22c)));
 				}
 				if (saved != -1) {
-					fcn_004432d0(saved, 1);
+					d3_SelectSceneContext(saved, 1);
 				}
 			}
 			if (*(int*) (obj + 0x124) != 0) {

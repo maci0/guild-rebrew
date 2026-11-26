@@ -4,7 +4,7 @@ extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00533cf0(int);
 void __cdecl d2_ClearScreen(void);
 void __cdecl fcn_00469e30(int);
@@ -28,7 +28,7 @@ int __cdecl fcn_005e4060(void);
 int __cdecl fcn_004c5790(int, void*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl ls_CaptureSavePreview(void);
 void __cdecl ls_SaveGame(char*, char*, int);
 
@@ -41,7 +41,7 @@ void __cdecl fcn_005e3b70(void)
 	flags = (main_LoopFlags & ~0x2000) | 0x100000;
 	p = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x1e, 1);
 	while (!(*p & 4)) {
-		fcn_005373e0(0, flags);
+		main_RunFrameLoop(0, flags);
 	}
 	g_1040488 = 0;
 	g_1040480 = g_1040494;
@@ -81,7 +81,7 @@ void __cdecl ls_QuickSave(void)
 		}
 	} else if (!(g_7747b0 & 0x80)) {
 		fcn_00533a40("Quicksave");
-		fcn_005373e0(0, 0x657c7);
+		main_RunFrameLoop(0, 0x657c7);
 		ls_CaptureSavePreview();
 		g_773de8 = 1;
 		ls_SaveGame("Gamedata\\Saves\\Quicksave.SAV", "Quicksave", 1);

@@ -27,7 +27,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_004b3c80(int);
 void __cdecl fcn_004b54e0(int);
@@ -43,7 +43,7 @@ void __cdecl io_FormatTextBuffer();
 int __cdecl fcn_00526120(char *, int);
 void __cdecl fcn_00533a60(int, int, int *, int, char *, char *);
 void __cdecl fcn_00534210(int, int, char *, int, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 char *__cdecl he_StartHandlungSearch(int, ...);
 char *__cdecl he_fn_Handlung(void);
 int __cdecl d2_ShowGiftDialog(void *, void *);
@@ -263,7 +263,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 	}
 	if (a1 != 0) {
 		d2_SetForm(h, 4);
-		r5 = fcn_00472250(h, 4, io_AppendText(0x1f50, *person));
+		r5 = d2_GetWindowListItem(h, 4, io_AppendText(0x1f50, *person));
 	} else {
 		if ((*((char *)g_7f4ca0 + 540 * g_774970 + 9) == 0 &&
 		     *(int *)((char *)person + 0x60) == *(int *)(g_7f4ca0 + 540 * g_774970 + 4)) ||
@@ -287,7 +287,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 				if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
 					io_FormatTextBuffer(bufA, 0x1f4b, *person);
 					d2_SetForm(h, 4);
-					r1 = fcn_00472250(h, 4,
+					r1 = d2_GetWindowListItem(h, 4,
 					    io_AppendText("%ia[%s]", bufA));
 				}
 			} else {
@@ -304,14 +304,14 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 				} else if ((*((unsigned char *)g_7f4ca0 + 540 * g_774970 + 0x1c8) & 0x20) == 0) {
 					io_FormatTextBuffer(bufA, 0x1f4b, *person);
 					d2_SetForm(h, 4);
-					r1 = fcn_00472250(h, 4,
+					r1 = d2_GetWindowListItem(h, 4,
 					    io_AppendText("%ia[%s]", bufA));
 				}
 			}
 		} else if (*(int *)(g_7f4ca0 + 540 * g_774970 + 4) == *(int *)((char *)person + 4) &&
 		    fcn_004b3c80(*(int *)((char *)person + 4)) != 0) {
 			d2_SetForm(h, 4);
-			r3 = fcn_00472250(h, 4, io_AppendText(0x1f49));
+			r3 = d2_GetWindowListItem(h, 4, io_AppendText(0x1f49));
 		}
 	}
 label_2281:
@@ -354,6 +354,6 @@ label_2281:
 			}
 			fcn_00471af0(h, 1);
 		}
-	} while (fcn_005373e0((int)fcn_005d1790, msg) != 0);
+	} while (main_RunFrameLoop((int)fcn_005d1790, msg) != 0);
 	fcn_00471e30(h);
 }

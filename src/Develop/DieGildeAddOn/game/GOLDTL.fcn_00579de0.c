@@ -34,7 +34,7 @@ extern float g_696540[];
 extern float g_696550[];
 
 int __cdecl fcn_00500e20(int* pos);
-void __cdecl fcn_00500bb0(pos14_7f4c00* pos, int a, int b, int c);
+void __cdecl gm_AddTime(pos14_7f4c00* pos, int a, int b, int c);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int a, int b, int id, int d);
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
@@ -72,7 +72,7 @@ void __cdecl he_RunGrabpflege(char* a0)
 		&& ((Place579*) a0)->status != -1
 		&& ((Place579*) a0)->status != -2) {
 		((Place579*) a0)->posBC = gm_GameTime;
-		fcn_00500bb0(&((Place579*) a0)->pos52, 0, 5, 0);
+		gm_AddTime(&((Place579*) a0)->pos52, 0, 5, 0);
 		return;
 	}
 	place = (Place579*) a0;
@@ -102,7 +102,7 @@ void __cdecl he_RunGrabpflege(char* a0)
 		}
 		place->add += f;
 		place->pos52 = gm_GameTime;
-		fcn_00500bb0(&place->pos52, 0, 5, 0);
+		gm_AddTime(&place->pos52, 0, 5, 0);
 		place->xb8 -= v;
 
 		place->posBC = gm_GameTime;

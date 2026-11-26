@@ -13,7 +13,7 @@ void* __cdecl fcn_0050e4a0(int);
 void* __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004ae080(char*, char*, int*, char**);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
@@ -82,7 +82,7 @@ int __cdecl fcn_004af400(int a1, int a2, int a3, char* a4, int a5)
 		int n;
 
 		fcn_004ae080(a4, buf, &n, &p);
-		n = fcn_0064eeec(a4 + n);
+		n = atoi(a4 + n);
 		io_FormatTextBuffer((void*) a5, (int) buf,
 		    fcn_0050b710((int) (((float) n * 0.01f) * (float) v),
 		    g_773d75),

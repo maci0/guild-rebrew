@@ -55,7 +55,7 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 unsigned int __cdecl fcn_00504f30(int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
@@ -74,7 +74,7 @@ void __cdecl fcn_00598740(float*, int);
 char* __cdecl strncpy(char*, const char*, unsigned int);
 char* __cdecl strcpy(char*, const char*);
 int __cdecl fcn_004c5530(char*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x00599350 */
@@ -141,7 +141,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 				}
 			}
 		}
-		id = fcn_0046f740((count % 2) * 0x46 + 0x30, (count / 2) * 0x5a + 0x0f, i + 0x6d4, d2_CurrentWindowId);
+		id = d2_AddElementToWindow((count % 2) * 0x46 + 0x30, (count / 2) * 0x5a + 0x0f, i + 0x6d4, d2_CurrentWindowId);
 		ids[i] = id;
 		if (flag == 0) {
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_05c)) = 1;
@@ -187,7 +187,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 					avail = fcn_00504f30(idx, g_774970);
 					if (avail == 1) {
 						if (p->category != 0x0f && p->category != 6) {
-							id = fcn_0046f740((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, idx + 0x427, d2_CurrentWindowId);
+							id = d2_AddElementToWindow((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, idx + 0x427, d2_CurrentWindowId);
 							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_058)) = 1;
 							strcpy((char*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x0cc)), *(char**) rec);
 							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0)) = 3;
@@ -203,7 +203,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 						}
 					} else {
 						if (avail == 2) {
-							id = fcn_0046f740((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, 0x4fb, d2_CurrentWindowId);
+							id = d2_AddElementToWindow((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, 0x4fb, d2_CurrentWindowId);
 							*(char*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x0cc)) = g_6b5c60[0];
 							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0)) = 3;
 							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc)) = 0x54;
@@ -267,7 +267,7 @@ skip_place:
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(d2_ShowBuildingMenu, 0x657c7) != 0);
+	} while (main_RunFrameLoop(d2_ShowBuildingMenu, 0x657c7) != 0);
 	if (hwnd != -1) {
 		fcn_00471e30(hwnd);
 	}

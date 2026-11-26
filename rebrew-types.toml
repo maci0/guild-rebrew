@@ -10,7 +10,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "809b921aa3a17a4e174f4a62f3d3e092dc10c08f55ed540a4edb869c7f6f1c61"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object".GOLDTL.offsets]
@@ -32,7 +32,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "809b921aa3a17a4e174f4a62f3d3e092dc10c08f55ed540a4edb869c7f6f1c61"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.object".GOLD.offsets]
@@ -55,7 +55,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "809b921aa3a17a4e174f4a62f3d3e092dc10c08f55ed540a4edb869c7f6f1c61"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object_draw_data".GOLDTL.offsets]
@@ -74,7 +74,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "809b921aa3a17a4e174f4a62f3d3e092dc10c08f55ed540a4edb869c7f6f1c61"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.object_draw_data".GOLD.offsets]
@@ -92,7 +92,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "809b921aa3a17a4e174f4a62f3d3e092dc10c08f55ed540a4edb869c7f6f1c61"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.draw_part".GOLDTL.offsets]
@@ -108,7 +108,7 @@ evidence = "Native full instruction receipts: .scratch/goal20/type-identity-layo
 cflags = "/O2 /Gd"
 source_hash = "809b921aa3a17a4e174f4a62f3d3e092dc10c08f55ed540a4edb869c7f6f1c61"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.draw_part".GOLD.offsets]
@@ -123,7 +123,7 @@ evidence = "TL ch_Updatelowpoly 0x403700 allocates and copies three DWORDs as th
 cflags = "/O2 /Gd"
 source_hash = "d8ab80d29ff41aa44ae428c37fde3294c46fb6d81f9323330277170c4c0f712e"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.animation-options".GOLDTL.offsets]
@@ -142,7 +142,7 @@ evidence = "Shared with the verified Gold ch_AttachMotion and motion-preload cal
 cflags = "/O2 /Gd"
 source_hash = "d8ab80d29ff41aa44ae428c37fde3294c46fb6d81f9323330277170c4c0f712e"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.animation-options".GOLD.offsets]
@@ -160,7 +160,7 @@ evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 
 cflags = "/O2 /Gd"
 source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
 headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."client.display_counter".GOLDTL.offsets]
@@ -178,7 +178,7 @@ evidence = "TL4737c0/4737e0 and Gold476c60/476c80 iterate six records across 72 
 cflags = "/O2 /Gd"
 source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
 headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."client.display_counter".GOLD.offsets]
@@ -195,7 +195,7 @@ evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context
 cflags = "/O2 /Gd"
 source_hash = "ff70112aca7d1768506b6f4ae55e8ecbf97a7fb3c3970835869500168d6e1c70"
 headers_hash = "6c9a0193750d6b9212a940193b6230da4bc26dbc12e477832c841e7a3d4a0378"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object-animation-frame".GOLDTL.offsets]
@@ -209,7 +209,7 @@ evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context
 cflags = "/O2 /Gd"
 source_hash = "ff70112aca7d1768506b6f4ae55e8ecbf97a7fb3c3970835869500168d6e1c70"
 headers_hash = "6c9a0193750d6b9212a940193b6230da4bc26dbc12e477832c841e7a3d4a0378"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object-animation-flags".GOLDTL.offsets]
@@ -223,7 +223,7 @@ evidence = "Inferred auxiliary record access view, not an independent allocation
 cflags = "/O2 /Gd"
 source_hash = "809b921aa3a17a4e174f4a62f3d3e092dc10c08f55ed540a4edb869c7f6f1c61"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object_aux_slot".GOLDTL.offsets]
@@ -244,7 +244,7 @@ evidence = "Inferred auxiliary record access view, not an independent allocation
 cflags = "/O2 /Gd"
 source_hash = "809b921aa3a17a4e174f4a62f3d3e092dc10c08f55ed540a4edb869c7f6f1c61"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.object_aux_slot".GOLD.offsets]
@@ -264,7 +264,7 @@ evidence = "Existing inferred office-slot view. Native TL4e8b80/Gold4e6fc0 copy 
 cflags = "/O2 /Gd"
 source_hash = "8bc0ba7808369aca1b6a2d5b200d54af30d742e17ee54ee972eeb9c1fde640f1"
 headers_hash = "247fea32c7aa1df482dd700c099d0fe01acb8406b921b047fd8890c59371939d"
-context_hash = "d93bd7ef4e30678f3225f1cf68f4034845c04ba851dbabde4f21d07a84efcfd6"
+context_hash = "4f9e32a46021b407d604c4cdec0aa1ea6eda91091225b24dcd2bb776b8269baa"
 binary_hash = "3cc2ce9049e41ab6d0eea042df4966fbf57e5e27c67fb923e81709d2683609d1"
 
 [types."amt.office_slot".SERVER.offsets]
@@ -285,7 +285,7 @@ evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context
 cflags = "/O2 /Gd"
 source_hash = "8bc0ba7808369aca1b6a2d5b200d54af30d742e17ee54ee972eeb9c1fde640f1"
 headers_hash = "247fea32c7aa1df482dd700c099d0fe01acb8406b921b047fd8890c59371939d"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."amt.office_slot".GOLDTL.offsets]
@@ -300,7 +300,7 @@ evidence = "Existing inferred office-slot view. Native TL4e8b80/Gold4e6fc0 copy 
 cflags = "/O2 /Gd"
 source_hash = "8bc0ba7808369aca1b6a2d5b200d54af30d742e17ee54ee972eeb9c1fde640f1"
 headers_hash = "247fea32c7aa1df482dd700c099d0fe01acb8406b921b047fd8890c59371939d"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."amt.office_slot".GOLD.offsets]
@@ -320,7 +320,7 @@ evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context
 cflags = "/O2 /Gd"
 source_hash = "0f90ba65e7524611b2d92379d43fd9c268a934ced3fefe7350dd46913bc6c6cf"
 headers_hash = "85facd272ceb1de9957eea6134f640d8c58c1c386824f0cd653e6b8e5c4fa2af"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."ch.action_queue_slot".GOLDTL.offsets]
@@ -335,7 +335,7 @@ evidence = "Native free-slot helpers TL 0x405080 and Gold 0x404760 scan 2000 rec
 cflags = "/O2 /Gd"
 source_hash = "0f90ba65e7524611b2d92379d43fd9c268a934ced3fefe7350dd46913bc6c6cf"
 headers_hash = "85facd272ceb1de9957eea6134f640d8c58c1c386824f0cd653e6b8e5c4fa2af"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."ch.action_queue_slot".GOLD.offsets]
@@ -351,7 +351,7 @@ evidence = "Paired native action registration TL406210/Gold405670 use 0x4c strid
 cflags = "/O2 /Gd"
 source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
 headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."ch.action_dispatch_entry".GOLDTL.offsets]
@@ -370,7 +370,7 @@ evidence = "Paired native action registration TL406210/Gold405670 use 0x4c strid
 cflags = "/O2 /Gd"
 source_hash = "33fd3a5a3cb6e66e159784f70cd5da2327eaf9be92cfb51add4617f7fc387eb3"
 headers_hash = "0afa1cd98f8d1d526a9b703d3522a9341d495b3723f17c0280190d617f4058d3"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."ch.action_dispatch_entry".GOLD.offsets]
@@ -388,7 +388,7 @@ evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callb
 cflags = "/O2 /Gd"
 source_hash = "ffc2e5b5f734440e7b496c3df2da49045d20ecef1b88acb7fdb0ba4fbbb859b2"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."ch.dummy_picks".GOLDTL.offsets]
@@ -405,7 +405,7 @@ evidence = "Goal55 TL407330/Gold406790 reserve and clear 0x84 stack bytes; callb
 cflags = "/O2 /Gd"
 source_hash = "ffc2e5b5f734440e7b496c3df2da49045d20ecef1b88acb7fdb0ba4fbbb859b2"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."ch.dummy_picks".GOLD.offsets]
@@ -417,11 +417,11 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-19 after shared struct headers replaced local typedefs (r5b48); definition, native extent and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after server global renames and macro alias fixes changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b50 shared-declaration and struct edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-19 after shared struct headers replaced local typedefs (r5b48); definition, native extent and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after server global renames and macro alias fixes changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b50 shared-declaration and struct edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged. Rebound 2026-11-26 after the Gold twin naming renamed callee fcn_00500bb0 to gm_AddTime in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "ca92806f334fa01b6f3a9fab63442e9e24c9eff6eb80cdec5aed090c5a7a57d6"
+source_hash = "10c3386d6136cc37d607fa4a3a99f973ff777bbab5b0bc6f216b76c1f42517e9"
 headers_hash = "ff0c6e877e68d987482f619fb19016908581fb343382978b2d7b9123b78771d4"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."event.validator_view".GOLDTL.offsets]
@@ -432,11 +432,11 @@ symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-19 after shared struct headers replaced local typedefs (r5b48); definition, native extent and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after server global renames and macro alias fixes changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b50 shared-declaration and struct edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-19 after shared struct headers replaced local typedefs (r5b48); definition, native extent and offsets unchanged. Rebound 2026-11-19 after the reviewed global renames changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after server global renames and macro alias fixes changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b49 struct and literal edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-19 after batch r5b50 shared-declaration and struct edits changed its source context; definition, native extent and offsets unchanged. Rebound 2026-11-20 after the second function rename batch changed identifiers in its source context; definition, native extent and offsets unchanged. Rebound 2026-11-21 after the reviewed type renames changed identifiers in its source context; definition, extent and offsets unchanged. Rebound 2026-11-26 after the Gold twin naming renamed callee fcn_00500bb0 to gm_AddTime in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
-source_hash = "ca92806f334fa01b6f3a9fab63442e9e24c9eff6eb80cdec5aed090c5a7a57d6"
+source_hash = "10c3386d6136cc37d607fa4a3a99f973ff777bbab5b0bc6f216b76c1f42517e9"
 headers_hash = "ff0c6e877e68d987482f619fb19016908581fb343382978b2d7b9123b78771d4"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."event.validator_view".GOLD.offsets]
@@ -451,7 +451,7 @@ evidence = "TL42dcd0/Gold42e7b0 dispatch 32 slots at 1052c60/fe7aa0 with stride1
 cflags = "/O2 /Gd"
 source_hash = "dadfb0c546101a1d2d2ca710d2f5f0edd577b228f457488589efe80f3058f1b4"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."client.timer_callback_slot".GOLDTL.offsets]
@@ -469,7 +469,7 @@ evidence = "TL42dcd0/Gold42e7b0 dispatch 32 slots at 1052c60/fe7aa0 with stride1
 cflags = "/O2 /Gd"
 source_hash = "dadfb0c546101a1d2d2ca710d2f5f0edd577b228f457488589efe80f3058f1b4"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."client.timer_callback_slot".GOLD.offsets]
@@ -486,7 +486,7 @@ evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy
 cflags = "/O2 /Gd"
 source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."am.effect".GOLDTL.offsets]
@@ -503,7 +503,7 @@ evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy
 cflags = "/O2 /Gd"
 source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."am.effect".GOLD.offsets]
@@ -519,7 +519,7 @@ evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy
 cflags = "/O2 /Gd"
 source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."am.method".GOLDTL.offsets]
@@ -543,7 +543,7 @@ evidence = "TL494ed0/Gold495510: effect-value cursor method+0x34 advances8; copy
 cflags = "/O2 /Gd"
 source_hash = "4bfd556cb6b592815659f901f18da1064294d85a5082154273c959359b397285"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."am.method".GOLD.offsets]
@@ -567,7 +567,7 @@ evidence = "Rebound after game/game_data.h gained client data declarations (head
 cflags = "/O2 /Gd"
 source_hash = "407996e460122ad64d5aeb2524034571c3193a7512835e9987dadc9e249cb1c9"
 headers_hash = "f0596901cfed4f6dcde9814e040bff3243f7d572c6b9c32b0dc864b3f3d83bd8"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.universe-view".GOLDTL.offsets]
@@ -582,7 +582,7 @@ evidence = "Rebound after game/game_data.h gained client data declarations (head
 cflags = "/O2 /Gd"
 source_hash = "407996e460122ad64d5aeb2524034571c3193a7512835e9987dadc9e249cb1c9"
 headers_hash = "f0596901cfed4f6dcde9814e040bff3243f7d572c6b9c32b0dc864b3f3d83bd8"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.universe-view".GOLD.offsets]
@@ -599,7 +599,7 @@ evidence = "Inferred stack result: TL4cc9da-4cc9e8 / Gold4cbe5a-4cbe68 clears 21
 cflags = "/O2 /Gd"
 source_hash = "9e051ecc6fbe6a6010a5874c58648d8bfed60dbe7c225533b376381a44ad5f7b"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."lc.gebaeude-bauplatz-result".GOLDTL.offsets]
@@ -614,7 +614,7 @@ evidence = "Inferred stack result: TL4cc9da-4cc9e8 / Gold4cbe5a-4cbe68 clears 21
 cflags = "/O2 /Gd"
 source_hash = "9e051ecc6fbe6a6010a5874c58648d8bfed60dbe7c225533b376381a44ad5f7b"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."lc.gebaeude-bauplatz-result".GOLD.offsets]
@@ -628,7 +628,7 @@ evidence = "Inferred stack list: cm_ExCreateGeb clears 33 DWORDs (TL4cca7c-4cca8
 cflags = "/O2 /Gd"
 source_hash = "9e051ecc6fbe6a6010a5874c58648d8bfed60dbe7c225533b376381a44ad5f7b"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d3.object-selection-list32".GOLDTL.offsets]
@@ -643,7 +643,7 @@ evidence = "Inferred stack list: cm_ExCreateGeb clears 33 DWORDs (TL4cca7c-4cca8
 cflags = "/O2 /Gd"
 source_hash = "9e051ecc6fbe6a6010a5874c58648d8bfed60dbe7c225533b376381a44ad5f7b"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.object-selection-list32".GOLD.offsets]
@@ -657,7 +657,7 @@ evidence = "GOLD rebind after source edits; enumeration writes description/name/
 cflags = "/O2 /Gd"
 source_hash = "f7ecab77422d7c6a46bd4deef0d2982b4457f2a0476c99251ed867324cadb4bb"
 headers_hash = "0993605b0795dafafcc0832d4a73b200eb581af694463bf9291116b3f1065883"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."dd.device_record".GOLD.offsets]
@@ -675,7 +675,7 @@ evidence = "GOLD rebind after source edits; enumeration writes guid/description/
 cflags = "/O2 /Gd"
 source_hash = "f7ecab77422d7c6a46bd4deef0d2982b4457f2a0476c99251ed867324cadb4bb"
 headers_hash = "0993605b0795dafafcc0832d4a73b200eb581af694463bf9291116b3f1065883"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."dd.driver_record".GOLD.offsets]
@@ -692,7 +692,7 @@ evidence = "Existing inferred client table layout, no complete array extent or s
 cflags = "/O2 /Gd"
 source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."town.cell_record".GOLDTL.offsets]
@@ -713,7 +713,7 @@ evidence = "Existing inferred client table layout, no complete array extent or s
 cflags = "/O2 /Gd"
 source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."town.cell_record".GOLD.offsets]
@@ -733,7 +733,7 @@ evidence = "Existing inferred client table layout, no complete array extent or s
 cflags = "/O2 /Gd"
 source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."town.row_record".GOLDTL.offsets]
@@ -750,7 +750,7 @@ evidence = "Existing inferred client table layout, no complete array extent or s
 cflags = "/O2 /Gd"
 source_hash = "9f33b2e43600a246b659af24fc21a2acf6f84ad6fef1d9ef52ab56d699444fc3"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."town.row_record".GOLD.offsets]
@@ -767,7 +767,7 @@ evidence = "Gold native 0x461080 advances array [0xfb9074] by 0x80; worker 0x460
 cflags = "/O2 /Gd"
 source_hash = "5da68c8200522a4a1e406c039dc992a9a764294acbf12ea09a342a32f2d616d9"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."scene.resource_record".GOLD.offsets]
@@ -794,7 +794,7 @@ evidence = "T&L 0x43ac00 builds a 20-byte stack callback context; 0x43aad0 consu
 cflags = "/O2 /Gd"
 source_hash = "a94b3b9a665e538c4fa3dd9ccc864c9973ea7af7559fa75a73bbdf276c027a47"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."scene.progress_context".GOLDTL.offsets]
@@ -813,7 +813,7 @@ evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context
 cflags = "/O2 /Gd"
 source_hash = "5692ef9d4dff34b49fb5e16a22ab8c04e8ab14999bf6692997ff30fd3735ea31"
 headers_hash = "836f1721da1f9b7252c01bd042642912fed996c8f97efbf91deee922c3ee1b17"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d2.text-window.tl".GOLDTL.offsets]
@@ -827,7 +827,7 @@ evidence = "Rebound after the Rebrew 6.14.3 upgrade changed the compiler-context
 cflags = "/O2 /Gd"
 source_hash = "7bc071ecfb3243e58aa8693cb55985074bff23f854234ef7f5b770afcbaa8bc8"
 headers_hash = "84b247668f02c8b8387eac67509ba5a805dec830b34650588fa8c30fabcc5101"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d2.text-entry.tl".GOLDTL.offsets]
@@ -841,7 +841,7 @@ evidence = "Inferred shared action record; client native free-slot helpers strid
 cflags = "/O2 /Gd"
 source_hash = "198ce00188732191daa0b2fca5c12890541ef9519f2acb0090abaf83d366ee39"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."ch.action_record".GOLDTL.offsets]
@@ -874,7 +874,7 @@ evidence = "Inferred shared action record; client native free-slot helpers strid
 cflags = "/O2 /Gd"
 source_hash = "198ce00188732191daa0b2fca5c12890541ef9519f2acb0090abaf83d366ee39"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "db5f9bd32d2d12c6da846e3d7760563d19f9aeed02b198f01f8d277f2cc4b004"
+context_hash = "a690f269814c85cbe10b297816f0bbf61c3efa9e869690883cd30860f5d7cf39"
 binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."ch.action_record".GOLD.offsets]
@@ -907,7 +907,7 @@ evidence = "TL stride evidence: 0x46e7a0 lea eax*4 plus 0x1015f40 with tex at 0x
 cflags = "/O2 /Gd"
 source_hash = "9bc4e2e1408fe27137a8826e20ec0abdd04fa634a9eb37b25ea95a90cb33191a"
 headers_hash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-context_hash = "81584b6bfa418764d9c0cacb313fa9993e56d73f56f5532845fe0251df3601bb"
+context_hash = "c64f764cd83daca788662d56da59758ac73d6c262235b18c9028bd73d3e1b3e0"
 binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 
 [types."d2.win.tl".GOLDTL.offsets]

@@ -20,8 +20,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00471f80(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetControlValue(int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -34,7 +34,7 @@ int __cdecl fcn_00526010(void*, int, unsigned char);
 void __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
 
 /* ADDRESS: GOLDTL 0x005aaf60 */
@@ -97,13 +97,13 @@ void __cdecl fcn_005aaf60(char* gebaeude)
 		c = io_AppendText(0x1988, g_774970, *(unsigned short*) (gebaeude + 0x27), 0x48c,
 			*(unsigned short*) (g_8680b4 + (unsigned char) g_773d75 * 0x2f4) * 2 + 0x9a8);
 		d2_ClampAmountToRange(cnt, v, 0x20, &b);
-		c = fcn_00472250(dlg, 1, c);
+		c = d2_GetWindowListItem(dlg, 1, c);
 		fcn_00472380(c, fcn_0050b710(cnt, g_773d75), fcn_0050b710(b, g_773d75),
 			fcn_0050b710(cnt, g_773d75));
 		d2_SetForm(dlg, 2);
 		n = io_AppendText(0x1989);
-		a = fcn_00472250(dlg, 2, n);
-		b = fcn_00472250(dlg, 2, n + 1);
+		a = d2_GetWindowListItem(dlg, 2, n);
+		b = d2_GetWindowListItem(dlg, 2, n + 1);
 	}
 	g_100f1dc = -1;
 	do {
@@ -112,7 +112,7 @@ void __cdecl fcn_005aaf60(char* gebaeude)
 		}
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == a) {
-				d = fcn_00471f80(c);
+				d = d2_GetControlValue(c);
 				d = fcn_0050b750(d, g_773d75);
 				if (fcn_00526010((char*) (g_774970 * 0x21c + (int) g_7f4ca0), d,
 					g_773d75) != 0) {
@@ -149,7 +149,7 @@ void __cdecl fcn_005aaf60(char* gebaeude)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005aaf60, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005aaf60, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 }

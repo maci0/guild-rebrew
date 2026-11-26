@@ -20,7 +20,7 @@ int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 int __cdecl gm_CheckEntityType(unsigned char*);
 char* __cdecl gm_SearchTable67(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_00500bb0(int*, int, int, int);
+void __cdecl gm_AddTime(int*, int, int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl he_FreeAction(char*);
 char* __cdecl he_StartHandlungSearch(int, int, int);
@@ -160,7 +160,7 @@ void __cdecl he_AllocTransport(char* action)
 	*(int*) (action + 0xb8) = *(int*) (second + 0x30) + *(int*) (first + 0x30);
 	*(int*) (action + 0xc4) = *(int*) (first + 1);
 	*(char*) (action + 0xd0) = 0;
-	fcn_00500bb0((int*) (action + 0x52), 0, 0, 1);
+	gm_AddTime((int*) (action + 0x52), 0, 0, 1);
 
 	if (query == 0) {
 		goto done;

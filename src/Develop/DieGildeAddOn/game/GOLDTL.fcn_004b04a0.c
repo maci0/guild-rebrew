@@ -1,7 +1,7 @@
 #include <string.h>
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl fcn_004c51a0(int, int, int, int);
 
@@ -34,7 +34,7 @@ int __cdecl fcn_004b04a0(int* entries, int index, char* text)
 	if (*text != '_')
 		return 0;
 	text++;
-	f = fcn_0064eeec(text) * 0.01f;
+	f = atoi(text) * 0.01f;
 	amount = (int) (gm_AccumulateTyped2(e) * f);
 	if (sign[i] == -1)
 		fcn_004c51a0(-1, *(int*) (e + 4), 0, amount);

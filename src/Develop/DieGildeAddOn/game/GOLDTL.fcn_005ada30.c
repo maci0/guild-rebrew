@@ -28,7 +28,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00476b60(void);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00472830(int k, int j);
 void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
 void __cdecl d2_ClearRadioGroup(int i);
@@ -38,12 +38,12 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0050c5d0(unsigned char* o, int* out);
 void __cdecl fcn_004c5120(int);
 int __cdecl d2_CreateRadioGroup(int n, ...);
-void __cdecl fcn_00469470(int g, int id);
+void __cdecl d2_AddToRadioGroup(int g, int id);
 int __cdecl fcn_0046c690(int a);
 int __cdecl fcn_004c5a60(int a1, int a2, int a3);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00471e30(int);
 
@@ -74,7 +74,7 @@ void __cdecl fcn_005ada30(char* p)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00476b60();
 	d2_SetForm(d, 3);
-	back = fcn_00472250(d, 3, io_AppendText(0x1ba6));
+	back = d2_GetWindowListItem(d, 3, io_AppendText(0x1ba6));
 	fcn_0046e830(-1, -1, d2_CurrentWindowId, fcn_00472830(d, 2), 0x767);
 	do {
 		if (g_14ce8e0 != 0) {
@@ -105,7 +105,7 @@ void __cdecl fcn_005ada30(char* p)
 							continue;
 						}
 						fcn_0050c5d0(q, val);
-						b = fcn_00472250(d, 2, io_AppendText(0x19fc, *q + 0x427, *(unsigned short*) (q + 0x27), q, e + 0x1c, val[0], val[1], e[0x37], e[0x36]));
+						b = d2_GetWindowListItem(d, 2, io_AppendText(0x19fc, *q + 0x427, *(unsigned short*) (q + 0x27), q, e + 0x1c, val[0], val[1], e[0x37], e[0x36]));
 						btns[n] = b;
 						(*(unsigned char**)&((D2_CONTROL_TL*)g_1015ea0)[b].associated_object) = q;
 						if (grp == -1) {
@@ -117,7 +117,7 @@ void __cdecl fcn_005ada30(char* p)
 							n++;
 						}
 						else {
-							fcn_00469470(grp, b);
+							d2_AddToRadioGroup(grp, b);
 							n++;
 						}
 					}
@@ -138,7 +138,7 @@ void __cdecl fcn_005ada30(char* p)
 				refresh = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_005ada30, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_005ada30, 0x677c7) != 0);
 	if (grp != -1) {
 		d2_ClearRadioGroup(grp);
 	}

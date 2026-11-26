@@ -41,7 +41,7 @@ int __cdecl fcn_00529710(char*, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_005ba910(void*, int);
 
 /* ADDRESS: GOLDTL 0x0055dab0 */
@@ -129,5 +129,5 @@ void __cdecl fcn_0055dab0(char* e)
 		}
 		*(int*) (e + 0x84) = fcn_004c5620(3, e);
 	}
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 }

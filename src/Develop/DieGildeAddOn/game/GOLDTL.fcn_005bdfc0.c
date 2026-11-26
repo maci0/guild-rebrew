@@ -7,8 +7,8 @@ extern int g_14ce8e0;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005bdfc0 */
@@ -31,17 +31,17 @@ int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, in
 			io_AppendText(0x110);
 		} else {
 			btn = io_AppendText(0x10c, 0x1f40);
-			x_dlg = fcn_00472250(dlg, 0, btn);
+			x_dlg = d2_GetWindowListItem(dlg, 0, btn);
 		}
 		if (a3 >= (int) (unsigned char) ((char) info->dimension_241)) {
 			io_AppendText(0x111);
 		} else {
-			y_dlg = fcn_00472250(dlg, 0, io_AppendText(0x10d, 0x1f40));
+			y_dlg = d2_GetWindowListItem(dlg, 0, io_AppendText(0x10d, 0x1f40));
 		}
 	} else if (a2 >= (int) (unsigned char) ((char) info->dimension_242)) {
 		io_AppendText(0x111);
 	} else {
-		x_dlg = fcn_00472250(dlg, 0, io_AppendText(0x10e, 0x1f40));
+		x_dlg = d2_GetWindowListItem(dlg, 0, io_AppendText(0x10e, 0x1f40));
 	}
 	io_AppendText(0x10f, 1);
 	do {
@@ -59,7 +59,7 @@ int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, in
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		r = fcn_005373e0(fcn_005bdfc0, 0x677c7);
+		r = main_RunFrameLoop(fcn_005bdfc0, 0x677c7);
 	} while (r != 0);
 	fcn_00471e30(dlg);
 	return handled;

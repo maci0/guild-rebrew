@@ -43,16 +43,16 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl d2_CreateRadioGroup(int, ...);
-void __cdecl fcn_00469470(int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_UpdateRadioGroup(int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534160(int, int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void* __cdecl fcn_004ec7d0(unsigned char*);
 int __cdecl fcn_004ecf00(char*, int*, float*, int);
@@ -114,7 +114,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) fcn_00585030, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
 		fcn_00471e30(win);
 		return;
 	}
@@ -134,11 +134,11 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		}
 		x = (count & 1) * 0xf0 + 10;
 		y = (count / 2) * 0x50 + 10;
-		item = fcn_0046f740(x, y, src[0] + 0xdf, wnd);
+		item = d2_AddElementToWindow(x, y, src[0] + 0xdf, wnd);
 		*ids = item;
 		((D2_CONTROL_TL*) g_1015ea0)[item].value_05c = 1;
 		*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[item].associated_object) = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[src[0]]);
-		fcn_00469470(list, item);
+		d2_AddToRadioGroup(list, item);
 		io_FormatTextBuffer(buf, (char*) 0x679060, src[0] * 2 + 0x9a8);
 		item = d2_ShowTxt(x + 0x3c, y + 5, buf, wnd);
 		((D2_CONTROL_TL*) g_1015ea0)[item].width = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
@@ -185,11 +185,11 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				}
 				x = (count & 1) * 0xf0 + 10;
 				y = (count / 2) * 0x50 + 10;
-				item = fcn_0046f740(x, y, src[0] + 0xdf, wnd);
+				item = d2_AddElementToWindow(x, y, src[0] + 0xdf, wnd);
 				*ids = item;
 				((D2_CONTROL_TL*) g_1015ea0)[item].value_05c = 1;
 				*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[item].associated_object) = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[src[0]]);
-				fcn_00469470(list, item);
+				d2_AddToRadioGroup(list, item);
 				io_FormatTextBuffer(buf2, (char*) 0x679060, src[0] * 2 + 0x9a8);
 				item = d2_ShowTxt(x + 0x3c, y + 5, buf2, wnd);
 				((D2_CONTROL_TL*) g_1015ea0)[item].width = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
@@ -219,7 +219,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				fcn_00585850(e, records);
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_00585030, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
 	d2_ClearRadioGroup(list);
 	fcn_00471e30(win);
 	fcn_00532ef0();

@@ -42,7 +42,7 @@ extern char* g_14b52c0;
 extern unsigned char g_773d75;
 
 Group* __cdecl fcn_00502cd0(int a, int b, int c, ...);
-int __cdecl fcn_0046f740(int x, int y, int id, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0046f940(int, char*);
 float __cdecl fcn_0050bb50(int, unsigned char);
@@ -76,8 +76,8 @@ int __cdecl fcn_004d5490(int x, int y, int mode)
 			}
 			px = x + n % 5 * 0x78;
 			py = y + n / 5 * 0x60;
-			fcn_0046f740(px, py, 0x525, d2_CurrentWindowId);
-			fcn_0046f740(px, py, e->id + 0xdf, d2_CurrentWindowId);
+			d2_AddElementToWindow(px, py, 0x525, d2_CurrentWindowId);
+			d2_AddElementToWindow(px, py, e->id + 0xdf, d2_CurrentWindowId);
 			tx = px - 0x10;
 			lbl = d2_ShowTxt(tx, py - 0xf, &(*(char*)g_6b5c60), d2_CurrentWindowId);
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].font) = 0x56;

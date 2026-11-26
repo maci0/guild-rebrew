@@ -10,13 +10,13 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl amt_HasOccupiedOfficeType7(void);
 void __cdecl fcn_00471af0(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005cadc0(int, char*, char*, int, void*);
 int __cdecl d2_ShowTabbedSelectionDialog(char*, char*, int, void*);
@@ -52,17 +52,17 @@ int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 		io_AppendText(0xa1);
 	}
 	d2_SetForm(dlg, 3);
-	id = fcn_00472250(dlg, 3, io_AppendText(0x1687));
+	id = d2_GetWindowListItem(dlg, 3, io_AppendText(0x1687));
 	d2_SetForm(dlg, 1);
-	btn[0] = fcn_0046f740(0x45, 0x3c, 0x589, d2_CurrentWindowId);
-	btn[1] = fcn_0046f740(0x10f, 0x25, 0x599, d2_CurrentWindowId);
-	btn[2] = fcn_0046f740(0x10f, 0x93, 0x58d, d2_CurrentWindowId);
-	btn[3] = fcn_0046f740(0x69, 0xab, 0x590, d2_CurrentWindowId);
-	btn[4] = fcn_0046f740(0x1b5, 0xab, 0x58c, d2_CurrentWindowId);
-	btn[5] = fcn_0046f740(0x45, 0x125, 0x58a, d2_CurrentWindowId);
-	btn[6] = fcn_0046f740(0x10f, 0x125, 0x58f, d2_CurrentWindowId);
-	btn[7] = fcn_0046f740(0x1d9, 0x125, 0x58b, d2_CurrentWindowId);
-	btn[8] = fcn_0046f740(0x1d9, 0x3c, 0x58e, d2_CurrentWindowId);
+	btn[0] = d2_AddElementToWindow(0x45, 0x3c, 0x589, d2_CurrentWindowId);
+	btn[1] = d2_AddElementToWindow(0x10f, 0x25, 0x599, d2_CurrentWindowId);
+	btn[2] = d2_AddElementToWindow(0x10f, 0x93, 0x58d, d2_CurrentWindowId);
+	btn[3] = d2_AddElementToWindow(0x69, 0xab, 0x590, d2_CurrentWindowId);
+	btn[4] = d2_AddElementToWindow(0x1b5, 0xab, 0x58c, d2_CurrentWindowId);
+	btn[5] = d2_AddElementToWindow(0x45, 0x125, 0x58a, d2_CurrentWindowId);
+	btn[6] = d2_AddElementToWindow(0x10f, 0x125, 0x58f, d2_CurrentWindowId);
+	btn[7] = d2_AddElementToWindow(0x1d9, 0x125, 0x58b, d2_CurrentWindowId);
+	btn[8] = d2_AddElementToWindow(0x1d9, 0x3c, 0x58e, d2_CurrentWindowId);
 	for (i = 0; i < 9; i++) {
 		if (i != 1 || *(int*) (a0 + 0x18) == 0) {
 			e = btn[i];
@@ -108,7 +108,7 @@ int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005cd440, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005cd440, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 }

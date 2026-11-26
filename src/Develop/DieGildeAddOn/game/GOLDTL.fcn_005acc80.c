@@ -12,7 +12,7 @@ extern char g_14cf950;
 extern int g_774800;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_005ac2d0(char*);
@@ -32,7 +32,7 @@ void __cdecl fcn_005acc80(char* e, int a2)
 	predigt = 0;
 	weih = 0;
 	fcn_005338a0();
-	while (fcn_005373e0((void*) fcn_005acc80, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) fcn_005acc80, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			predigt = RegisterStatusText("contact_PREDIGT", g_14ab954, 0x16);
 			weih = RegisterStatusText("ob_WEIHWASSERBECKEN", g_14ab8f4, 0x16);

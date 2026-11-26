@@ -76,12 +76,12 @@ int __cdecl d2_SetOverlayAnimation(int a1, int a2);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl fcn_00471e30(int dlg);
 void __cdecl d2_SetForm(int dlg, int page);
-int __cdecl fcn_00472250(int dlg, int page, int id);
+int __cdecl d2_GetWindowListItem(int dlg, int page, int id);
 void __cdecl fcn_00472640(int button, int state);
 int __cdecl d2_ClearWindowChildren(int win, int keep);
 void __cdecl fcn_005340f0(int win);
 int __cdecl io_AppendText(int id, ...);
-int __cdecl fcn_005373e0(void* fn, int msg);
+int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl fcn_00525f60(char* house, int mode);
 void __cdecl fcn_005100f0(int id, int amount);
 int __cdecl fcn_005ca560(sel005ac2d0* sel);
@@ -153,7 +153,7 @@ void __cdecl fcn_005ac2d0(char* building)
 		pkt.b5c = 0;
 		rc = fcn_004c5530(&pkt);
 		while (rc != -1 && fcn_004c4450(rc) == 0) {
-			fcn_005373e0((void*) 0, 0x677c7);
+			main_RunFrameLoop((void*) 0, 0x677c7);
 		}
 		unit = fcn_004c4480(rc);
 	}
@@ -211,8 +211,8 @@ void __cdecl fcn_005ac2d0(char* building)
 			d2_SetForm(dlg, 2);
 			io_AppendText((int) g_6811b0);
 			i = io_AppendText(0x19a6);
-			btnState0 = fcn_00472250(dlg, 2, i);
-			btnCancel = fcn_00472250(dlg, 2, i + 1);
+			btnState0 = d2_GetWindowListItem(dlg, 2, i);
+			btnCancel = d2_GetWindowListItem(dlg, 2, i + 1);
 		} else if (state == 1) {
 			d2_SetForm(dlg, 1);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
@@ -222,8 +222,8 @@ void __cdecl fcn_005ac2d0(char* building)
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
 			i = io_AppendText(0x19a1);
-			btnState1 = fcn_00472250(dlg, 2, i);
-			btnCancel = fcn_00472250(dlg, 2, i + 1);
+			btnState1 = d2_GetWindowListItem(dlg, 2, i);
+			btnCancel = d2_GetWindowListItem(dlg, 2, i + 1);
 			if (*(int*) (unit + 0x70) > 0) {
 				fcn_00472640(btnState1, 0);
 			} else {
@@ -245,8 +245,8 @@ void __cdecl fcn_005ac2d0(char* building)
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
 			i = io_AppendText(0x198f);
-			btnState2 = fcn_00472250(dlg, 2, i);
-			btnCancel = fcn_00472250(dlg, 2, i + 1);
+			btnState2 = d2_GetWindowListItem(dlg, 2, i);
+			btnCancel = d2_GetWindowListItem(dlg, 2, i + 1);
 			if (*(int*) (unit + 0x70) > 0) {
 				fcn_00472640(btnState2, 0);
 			} else {
@@ -268,7 +268,7 @@ void __cdecl fcn_005ac2d0(char* building)
 					flag = 1;
 					state = 1;
 					while (rc != -1 && fcn_004c4450(rc) == 0) {
-						fcn_005373e0((void*) 0, 0x677c7);
+						main_RunFrameLoop((void*) 0, 0x677c7);
 					}
 				}
 			} else if (d2_CurrentElementId == btnState1) {
@@ -295,7 +295,7 @@ void __cdecl fcn_005ac2d0(char* building)
 					state = 2;
 					flag = 1;
 					while (rc != -1 && fcn_004c4450(rc) == 0) {
-						fcn_005373e0((void*) 0, 0x677c7);
+						main_RunFrameLoop((void*) 0, 0x677c7);
 					}
 				}
 			} else if (d2_CurrentElementId == btnState2) {
@@ -316,13 +316,13 @@ void __cdecl fcn_005ac2d0(char* building)
 				flag = 1;
 				state = 1;
 				while (rc != -1 && fcn_004c4450(rc) == 0) {
-					fcn_005373e0((void*) 0, 0x677c7);
+					main_RunFrameLoop((void*) 0, 0x677c7);
 				}
 			} else if (d2_CurrentElementId == btnCancel) {
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005ac2d0, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005ac2d0, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 }

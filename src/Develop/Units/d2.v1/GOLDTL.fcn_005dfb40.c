@@ -50,13 +50,13 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl vfs_ListFilesByExtension(int, int, Rec*);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_00471f80(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl d2_GetControlValue(int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, char* out)
@@ -90,9 +90,9 @@ int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, c
 	flag = mode & 1;
 	if (!flag) {
 		d2_SetForm(dlg, 3);
-		ok = fcn_00472250(dlg, 3, io_AppendText(0x1ccc));
+		ok = d2_GetWindowListItem(dlg, 3, io_AppendText(0x1ccc));
 		d2_SetForm(dlg, 0);
-		list = fcn_00472250(dlg, 0, 0);
+		list = d2_GetWindowListItem(dlg, 0, 0);
 		d2_SetElementValue(list, g_14ac654);
 	}
 	d2_SetForm(dlg, 1);
@@ -106,7 +106,7 @@ int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, c
 	_itoa(count, buf, 10);
 	fcn_0046f940(field, buf);
 	d2_SetElementFont(field, 0x54);
-	while (fcn_005373e0((void*) d2_OpenFileSelector, wait) != 0) {
+	while (main_RunFrameLoop((void*) d2_OpenFileSelector, wait) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
@@ -126,7 +126,7 @@ int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, c
 		}
 		if (g_100f1dc != -1 && d2_CurrentElementId == ok) {
 			if (!flag) {
-				sprintf(out, s_6acf90, a4, fcn_00471f80(list), a5);
+				sprintf(out, s_6acf90, a4, d2_GetControlValue(list), a5);
 			}
 			g_774654 = 1;
 			result = 1;

@@ -114,7 +114,7 @@ void __cdecl fcn_005350d0(int);
 int __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00517c00(int, int, int, void*);
 char* __cdecl fcn_0050dc90(char*);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -128,7 +128,7 @@ void __cdecl fcn_005b6130(int, int);
 void __cdecl fcn_00534c20(int);
 void __cdecl fcn_00535550(int);
 void __cdecl fcn_00535560(int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_004c4510(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
@@ -144,7 +144,7 @@ int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_0050c1b0(int, int, void*);
 int __cdecl fcn_004693b0(void);
-void __cdecl fcn_00469470(int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_005b5eb0(char*, char*);
@@ -152,7 +152,7 @@ void __cdecl d2_UpdateGauge(int, int, int);
 void __cdecl fcn_005b5c70(int);
 void __cdecl fcn_005b5ce0(int, int, int, int);
 void __cdecl fcn_00473a90(int, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_004c53b0(void);
 int __cdecl fcn_00505d00(int, void*);
 int __cdecl fcn_005b5750(void);
@@ -226,10 +226,10 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 		fcn_00517c00(*(unsigned short*) r, 1, 1, f.txt204);
 	}
 	d2_SetForm(*(int*) (book + 0x228), 3);
-	f.v50 = fcn_00472250(*(int*) (book + 0x228), 3, 2);
+	f.v50 = d2_GetWindowListItem(*(int*) (book + 0x228), 3, 2);
 	fcn_00472380(f.v50, 0x32, 0x96, *(int*) (rec + 0x3d));
 	if (f.row[0] != 4 && f.row[0] != 0x13 && f.row[0] != 0x10) {
-		el = f.v44 = fcn_00472250(*(int*) (book + 0x228), 3, 3);
+		el = f.v44 = d2_GetWindowListItem(*(int*) (book + 0x228), 3, 3);
 		fcn_00472380(el, 0, 4, *(int*) (rec + 0x41));
 		fcn_00468bb0(el, 5, *(int*) 0x14abbd8, *(int*) 0x14abbdc,
 			*(int*) 0x14abbe0, *(int*) 0x14abbe4, *(int*) 0x14abbe8);
@@ -237,7 +237,7 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 	d2_SetForm(*(int*) (book + 0x228), 3);
 	io_AppendText(0x6ac2c8);
 	io_AppendText(0x6ac2c8);
-	f.msg.f0c = fcn_00472250(*(int*) (book + 0x228), 3, io_AppendText(0x1a20));
+	f.msg.f0c = d2_GetWindowListItem(*(int*) (book + 0x228), 3, io_AppendText(0x1a20));
 	if (f.row[0] != 5 && f.row[0] != 9) {
 		d2_SetForm(*(int*) (book + 0x228), 3);
 		d2_CreateGauge(&f.sel.a08, 0x20, *(int*) (0x77255c + 0xc) / 2 - 0x18);
@@ -257,8 +257,8 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 		io_AppendText(0x6a2310, 0x1a37, i);
 	}
 	if (f.row[0] == 4 || f.row[0] == 0x13 || f.row[0] == 0x10) {
-		el = fcn_00472250(G(book + 0x228), 3, 3);
-		f.v44 = fcn_00472250(G(book + 0x228), 3, 1);
+		el = d2_GetWindowListItem(G(book + 0x228), 3, 3);
+		f.v44 = d2_GetWindowListItem(G(book + 0x228), 3, 1);
 		d2_DestroyElement(el);
 		d2_DestroyElement(f.v44);
 		f.v44 = -1;
@@ -296,12 +296,12 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 		if (f.v10 == 0 && f.v40 == -1) {
 			f.v40 = fcn_004693b0();
 			if (f.sel.a0c != -1) {
-				fcn_00469470(f.v40, f.sel.a0c);
+				d2_AddToRadioGroup(f.v40, f.sel.a0c);
 			} else {
-				fcn_00469470(f.v40, f.rows[0].a0c);
+				d2_AddToRadioGroup(f.v40, f.rows[0].a0c);
 			}
 		} else {
-			fcn_00469470(f.v40, f.rows[f.v10].a0c);
+			d2_AddToRadioGroup(f.v40, f.rows[f.v10].a0c);
 		}
 		k++;
 	}
@@ -310,7 +310,7 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 	fcn_005b5eb0(f.book, a1);
 	fcn_00473a90(0, 0);
 
-	while (fcn_005373e0((int) d2_ShowPersonalbuch, 0x677c7)) {
+	while (main_RunFrameLoop((int) d2_ShowPersonalbuch, 0x677c7)) {
 		if (G(0x14ce8e0) != 0 && d2_CanCloseWindowDuringTutorial() == 1)
 			G(0x774654) = 1;
 		fcn_005b6130((int) f.book, (int) a1);
@@ -323,7 +323,7 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 		if (*(char*) (f.book + 0x270) != 0)
 			goto L6fa2;
 		if (f.v50 != -1) {
-			f.v3c = fcn_00471f80(f.v50);
+			f.v3c = d2_GetControlValue(f.v50);
 			if (f.v3c != G(a1 + 0x3d)) {
 				if (f.v4c != -1 && fcn_004c4450(f.v4c) == 0)
 					goto L6901;
@@ -377,12 +377,12 @@ L69b6:
 					*a1, 0, (char*) -1);
 				e = fcn_0064d228();
 				fcn_004727a0(f.sel.a58, 2);
-				f.v48 = fcn_00472250(f.sel.a58, 2,
+				f.v48 = d2_GetWindowListItem(f.sel.a58, 2,
 					io_AppendText(0x1a22, (int) e, f.row[0x223] + 0x130));
 			} else if (t == 1) {
 				fcn_004727a0(f.sel.a58, 2);
 				io_AppendText(0x6811b0);
-				f.v34 = fcn_00472250(f.sel.a58, 2,
+				f.v34 = d2_GetWindowListItem(f.sel.a58, 2,
 					io_AppendText(0x1a21, *(unsigned short*) f.sel.a08));
 			}
 		}
@@ -580,15 +580,15 @@ L6fa2:
 					*a1, -1, 1);
 				e = fcn_0064d228();
 				fcn_004727a0(f.rows[k].a58, 2);
-				f.v28 = fcn_00472250(f.rows[k].a58, 2,
+				f.v28 = d2_GetWindowListItem(f.rows[k].a58, 2,
 					io_AppendText(0x1a22, (int) e, (unsigned char) f.row[0x230] + 0x20d));
 			} else if (f.rows[k].a20 == 1) {
 				fcn_004727a0(f.rows[k].a58, 2);
 				io_AppendText(0x6811b0);
-				f.v1c = fcn_00472250(f.rows[k].a58, 2,
+				f.v1c = d2_GetWindowListItem(f.rows[k].a58, 2,
 					io_AppendText(0x1a21, *(unsigned short*) f.rows[k].a08));
 				if (*(unsigned char*) (f.rows[k].a08 + 0x165) == f.row[0x230])
-					f.v20 = fcn_00472250(f.rows[k].a58, 2,
+					f.v20 = d2_GetWindowListItem(f.rows[k].a58, 2,
 						io_AppendText(0x1a25, *(unsigned short*) f.rows[k].a08));
 			}
 		}
@@ -698,11 +698,11 @@ L77de:
 		d2_ClearRadioGroup(f.v40);
 	fcn_004c4510((int) a1, G(a1 + 1));
 	if (f.v4c != -1) {
-		f.v3c = fcn_00471f80(f.v4c);
+		f.v3c = d2_GetControlValue(f.v4c);
 		cm_AppendPacketFieldDelta(4, 1, 0x41, &f.v3c);
 	}
 	if (f.v50 != -1) {
-		f.v3c = fcn_00471f80(f.v50);
+		f.v3c = d2_GetControlValue(f.v50);
 		cm_AppendPacketFieldDelta(4, 1, 0x3d, &f.v3c);
 	}
 	fcn_004c5360();

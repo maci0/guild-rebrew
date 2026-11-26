@@ -6,7 +6,7 @@ extern char g_7f4ca0[];
 extern float g_662cf8; extern int g_6652f8[];
 
 int __cdecl d2_SetForm(int win, int layer);
-int __cdecl fcn_0046f740(int x, int y, int id, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl fcn_0046fac0(int x, int y, char* text, int win);
 void __cdecl d2_SetElementFont(int element, int value);
 int __cdecl io_AppendText();
@@ -79,10 +79,10 @@ void __cdecl fcn_0058bfd0(int* ctx)
 		do {
 			h = *(int*) (ctx[2] * 0x3cc + 0x1015f4c);
 			y = (h - *(short*) (g_772500 + 0x2399c)) / 2;
-			r[-1] = fcn_0046f740(y,
+			r[-1] = d2_AddElementToWindow(y,
 			                     *(int*) (ctx[2] * 0x3cc + 0x1015f50) * i + 2,
 			                     0x6c7, ctx[2]);
-			h = fcn_0046f740(y + 2,
+			h = d2_AddElementToWindow(y + 2,
 			                 *(int*) (ctx[2] * 0x3cc + 0x1015f50) * i + 4,
 			                 *(int*) (*r + 0x3c), ctx[2]);
 			r[-1] = h;

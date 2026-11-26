@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 extern int g_14cbca0, gm_NextEntityId, g_773dd8; extern void* g_6b7fdc;
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 int __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_AllocGebaeude(char typ, unsigned short id);
 int __cdecl vfs_ResolvePath(char* path, int a, int b, char* out);
@@ -70,7 +70,7 @@ int __cdecl cm_ExCreateGeb(char* request, char* out)
 	goto done;
 load:
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	pos[0] = *(int*) (request + 0x19);
 	pos[1] = *(int*) (request + 0x1d);
 	pos[2] = *(int*) (request + 0x21);
@@ -107,7 +107,7 @@ load:
 	fcn_0052d9d0(geb);
 	fcn_004bd4e0(*(int*) (geb + 0x61), *geb);
 destroy:
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 done:
 	if (out != 0) {
 		out[0] = 1;

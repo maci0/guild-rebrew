@@ -10,7 +10,7 @@ extern char g_6aa77c[];
 extern char g_6aa764[];
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowFestInvitation(int, int);
 void __cdecl d2_RunTalenteDialog(int, int, int);
@@ -24,7 +24,7 @@ void __cdecl fcn_0059f9b0(int a1, int a2)
 	int z;
 
 	fcn_005338a0();
-	while (fcn_005373e0(fcn_0059f9b0, 0x67fff) != 0) {
+	while (main_RunFrameLoop(fcn_0059f9b0, 0x67fff) != 0) {
 		x = RegisterStatusText(g_6aa78c, g_14ab0b8, 0x16);
 		y = RegisterStatusText(g_6aa77c, g_14aadd8, 0xc);
 		z = RegisterStatusText(g_6aa764, g_14ab098, 0xc);

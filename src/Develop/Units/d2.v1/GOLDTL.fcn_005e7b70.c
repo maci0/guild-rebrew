@@ -64,7 +64,7 @@ extern int g_664454;
 char* __cdecl io_AppendText(int, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_0046f740(int x, int y, int gfx, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int gfx, int win);
 
 /* ADDRESS: GOLDTL 0x005e7b70 */
 
@@ -95,19 +95,19 @@ void __cdecl fcn_005e7b70(int row, int count, int* list)
 	if (row != 0) {
 		icon = g_7765a0[row].icon;
 		y = h / 2;
-		fcn_0046f740(x - 0x37, y - ((Gfx_5e7b70*)g_772500)[icon].w / 2, icon, g_6ad584[row].win);
+		d2_AddElementToWindow(x - 0x37, y - ((Gfx_5e7b70*)g_772500)[icon].w / 2, icon, g_6ad584[row].win);
 	} else {
 		icon = ((Ent_5e7b70*)g_7f4ca0)[g_774970].icon;
 		y = h / 2;
-		fcn_0046f740(x - 0x37, y - ((Gfx_5e7b70*)g_772500)[icon].w / 2, icon, g_6ad584[row].win);
+		d2_AddElementToWindow(x - 0x37, y - ((Gfx_5e7b70*)g_772500)[icon].w / 2, icon, g_6ad584[row].win);
 	}
 	for (i = 0; i < count; i++, x += 0x20) {
 		if (g_7765a0[row].fixed >= 0) {
-			g_6ad584[row].items[i] = fcn_0046f740(x, y - ((Gfx_5e7b70*)g_772500)[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
+			g_6ad584[row].items[i] = d2_AddElementToWindow(x, y - ((Gfx_5e7b70*)g_772500)[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
 		} else if (row != 0 && i < 2 && g_776658 == 4) {
-			g_6ad584[row].items[i] = fcn_0046f740(x, y - ((Gfx_5e7b70*)g_772500)[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
+			g_6ad584[row].items[i] = d2_AddElementToWindow(x, y - ((Gfx_5e7b70*)g_772500)[g_664454 + 0x775].w / 2, g_664454 + 0x775, g_6ad584[row].win);
 		} else {
-			g_6ad584[row].items[i] = fcn_0046f740(x, y - ((Gfx_5e7b70*)g_772500)[list[i] + 0x775].w / 2, list[i] + 0x775, g_6ad584[row].win);
+			g_6ad584[row].items[i] = d2_AddElementToWindow(x, y - ((Gfx_5e7b70*)g_772500)[list[i] + 0x775].w / 2, list[i] + 0x775, g_6ad584[row].win);
 			if (row == 0 && i < 2) {
 				((Ctl_5e7b70*)g_1015ea0)[g_6ad584[0].items[i]].x60 = 1;
 			}

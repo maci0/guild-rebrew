@@ -24,7 +24,7 @@ void __cdecl fcn_004ac410(unsigned char*, int, unsigned short);
 int __cdecl io_AppendText();
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl he_StartHandlungSearch();
 
 /* ADDRESS: GOLDTL 0x005c1490 */
@@ -61,7 +61,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 				if (g_14ce8e0 != 0) {
 					g_774654 = 1;
 				}
-			} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
+			} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 			fcn_00471e30(h);
 			fcn_00532ef0();
 			return;
@@ -74,7 +74,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 				if (g_14ce8e0 != 0) {
 					g_774654 = 1;
 				}
-			} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
+			} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 			fcn_00471e30(h);
 			fcn_00532ef0();
 			return;
@@ -97,7 +97,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 					g_774654 = 1;
 				}
 			}
-		} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 		if (r == 0) {
 			fcn_00471e30(h);
 			fcn_00532ef0();
@@ -125,7 +125,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 		d2_SetForm(h, 3);
 		io_AppendText(g_6811b0);
 		d2_SetForm(h, 1);
@@ -145,7 +145,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 		fcn_00471e30(h);
 		fcn_00532ef0();
 		return;
@@ -155,7 +155,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowBardPoemDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_00532ef0();
 }

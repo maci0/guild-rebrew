@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-void __cdecl fcn_00458a10(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 char* __cdecl fcn_00501190(int, int);
 char* __cdecl fcn_00501030(void);
 #include "client_scene_transform.h"
@@ -21,12 +21,12 @@ void __cdecl fcn_0058fb00(char* e)
 	ok = 1;
 	o = *(char**) (e + 0x1f8);
 	if (o != 0) {
-		fcn_00458a10(o, o + 0x4c, pa);
+		d3_TransformPoint(o, o + 0x4c, pa);
 		p = fcn_00501190(1, 6);
 		while (p != 0) {
 			q = *(char**) (p + 0x61);
 			if (q != 0) {
-				fcn_00458a10(q, q + 0x4c, pb);
+				d3_TransformPoint(q, q + 0x4c, pb);
 				if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 					ok = 0;
 					break;
@@ -37,12 +37,12 @@ void __cdecl fcn_0058fb00(char* e)
 	}
 	for (s = *(char**) (e + 0x1fc); s != 0; s = *(char**) (s + 0x1f0)) {
 		if (strncmp(s, "bk_", 3) == 0 || strncmp(s, "!bk_", 4) == 0) {
-			fcn_00458a10(s, s + 0x4c, pa);
+			d3_TransformPoint(s, s + 0x4c, pa);
 			p = fcn_00501190(1, 6);
 			while (p != 0) {
 				q = *(char**) (p + 0x61);
 				if (q != 0) {
-					fcn_00458a10(q, q + 0x4c, pb);
+					d3_TransformPoint(q, q + 0x4c, pb);
 					if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 						ok = 0;
 						goto done;

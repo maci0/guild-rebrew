@@ -3,7 +3,7 @@
 int __cdecl gm_ResolveEntityById();
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl gm_ChangeObjektZustand(int, int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_005049a0(unsigned char*);
@@ -41,7 +41,7 @@ void __cdecl fcn_0055f300(char* e)
 		if ((int) *((unsigned char*) item + 0x12) < *(int*) (e + 0xb4)) {
 			gm_ChangeObjektZustand(*(int*) (e + 0xac), i / *(int*) (e + 0xb8));
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-			fcn_00500bb0((void*) (e + 0x52), 0, *(int*) (e + 0xb8) * 2, 0);
+			gm_AddTime((void*) (e + 0x52), 0, *(int*) (e + 0xb8) * 2, 0);
 		} else {
 			*(int*) (e + 0x70) = *(int*) (e + 0x70) + 1;
 		}

@@ -5,7 +5,7 @@ extern int d2_CurrentWindowId;    /* 0x772514 */
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_004fdec0(char* name);
 int __cdecl d2_SetForm(int k, int i);
-int __cdecl fcn_0046f740(int x, int y, int id, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 void __cdecl d2_SetElementFont(int i, int v);
 void __cdecl fcn_0046f9b0(int element, int a2);
 char* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
@@ -54,11 +54,11 @@ void __cdecl fcn_005b5eb0(int windowContext, char* entityName)
         workerIcons[1] = fcn_004fdec0("handwerker_MANN");
         workerIcons[2] = fcn_004fdec0("handwerker2_MANN");
         workerIcons[3] = fcn_004fdec0("handwerker3_MANN");
-        fcn_0046f740(0xe, y - 2, 0x5db, d2_CurrentWindowId);
-        fcn_0046f740(0x10, y,
+        d2_AddElementToWindow(0xe, y - 2, 0x5db, d2_CurrentWindowId);
+        d2_AddElementToWindow(0x10, y,
                      workerIcons[*(int*) (*(int*) (i * 4 + 0x777cc4) + 2) & 3] + 0x639,
                      d2_CurrentWindowId);
-        fcn_0046f740(0x50, x - 0x5a,
+        d2_AddElementToWindow(0x50, x - 0x5a,
                      *(unsigned short*) (*(int*) (i * 4 + 0x777cc4)) + 0x4b1,
                      d2_CurrentWindowId);
         v = *(int*) (i * 4 + 0x777cc4);
@@ -78,7 +78,7 @@ void __cdecl fcn_005b5eb0(int windowContext, char* entityName)
         *(int*) (i * 4 + 0x777cdc) = v;
         d2_SetElementFont(v, 0x56);
         if (entityName != name) {
-            v = fcn_0046f740(0, x, 5, d2_CurrentWindowId);
+            v = d2_AddElementToWindow(0, x, 5, d2_CurrentWindowId);
             *(int*) (i * 4 + 0x777cd0) = v;
             *(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v].value_05c)) = 1;
             *(char**) (&((D2_CONTROL_TL*)g_1015ea0)

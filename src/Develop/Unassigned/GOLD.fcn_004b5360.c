@@ -9,7 +9,7 @@ void __cdecl d2_CenterTopLevelWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004c3030(int, int, int, int);
-int __cdecl fcn_005309d0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004758e0(int);
 int __cdecl fcn_00423460(int*);
 void __cdecl fcn_004237f0(int*, int);
@@ -31,7 +31,7 @@ void __cdecl fcn_004b5360(int id, int flags)
 	io_AppendText(0x7d);
 	sprintf(text, "_AUFTRAEGE_VERGABE_HS_%.2d", *(int*) (rec + 0xc));
 	sound = fcn_004c3030(-7, 0, (int) text, -1);
-	while (fcn_005309d0(fcn_004b5360, flags)) {
+	while (main_RunFrameLoop(fcn_004b5360, flags)) {
 		if (g_14673a0)
 			g_6f22a0 = 1;
 		if (!g_f8a668)

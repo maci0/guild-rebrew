@@ -64,12 +64,12 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f740(short, short, int, int);
+int __cdecl d2_AddElementToWindow(short, short, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004c5530(struct msg*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_00471e30(int);
@@ -91,7 +91,7 @@ int __cdecl fcn_005cf640(int unused, unsigned short* p)
 	io_AppendText(0x1a9d, (((unsigned char*) p)[9] != 0) + 0x1aa0, *p, 5);
 	d2_SetForm(dlg, 2);
 	for (i = 0; i < 3; i++) {
-		ids[i] = fcn_0046f740(0x14, i * 0x5a + 10, 0x4c6, d2_CurrentWindowId);
+		ids[i] = d2_AddElementToWindow(0x14, i * 0x5a + 10, 0x4c6, d2_CurrentWindowId);
 		((Slot*)g_f8f080)[ids[i]].shown = 1;
 		((Slot*)g_f8f080)[ids[i]].style = 3;
 		io_FormatTextBuffer(text, s_679060, ((Player*)g_868060)[i + 1].name);
@@ -104,11 +104,11 @@ int __cdecl fcn_005cf640(int unused, unsigned short* p)
 		d2_ShowTxt(0xbe, i * 0x5a + 10 + 0x3c, text, d2_CurrentWindowId);
 	}
 	d2_SetForm(dlg, 3);
-	ids[3] = fcn_00472250(dlg, 3, io_AppendText(0x1ba8));
+	ids[3] = d2_GetWindowListItem(dlg, 3, io_AppendText(0x1ba8));
 	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = -1;
 	result = 0;
-	while (fcn_005373e0((void*) fcn_005cf640, main_LoopFlags) != 0) {
+	while (main_RunFrameLoop((void*) fcn_005cf640, main_LoopFlags) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

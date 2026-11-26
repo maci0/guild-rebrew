@@ -44,7 +44,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_005c9160(char*, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_005d9f70(char* e, char* who);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005da250(char* e, char* a2)
@@ -127,7 +127,7 @@ int __cdecl fcn_005da250(char* e, char* a2)
 				result = fcn_005d9f70(e, rows[sel].who);
 			}
 		}
-	} while (fcn_005373e0(fcn_005da250, 0x657c7));
+	} while (main_RunFrameLoop(fcn_005da250, 0x657c7));
 	fcn_00471e30(dlg);
 	return result;
 }

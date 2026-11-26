@@ -8,7 +8,7 @@ void __cdecl d2_ClearWindowChildren(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetElementFont(int, int);
-void __cdecl fcn_0046f740(int, int, int, int);
+void __cdecl d2_AddElementToWindow(int, int, int, int);
 
 
 /* The positional GOLD twin 0x4d8cb0 is NOT the same build: its first 0xcf bytes
@@ -41,17 +41,17 @@ void __cdecl fcn_004da510(int a1, int reset, int row)
 		return;
 	}
 	if (row == 0) {
-		fcn_0046f740((short) ((g_772f1c * 5 + 40) * 2), 0x20, 0x4df, d2_CurrentWindowId);
+		d2_AddElementToWindow((short) ((g_772f1c * 5 + 40) * 2), 0x20, 0x4df, d2_CurrentWindowId);
 		g_772f1c++;
 		return;
 	}
 	if (row == 1) {
-		fcn_0046f740((short) ((g_772f18 * 5 + 40) * 2), 0x3e, 0x4df, d2_CurrentWindowId);
+		d2_AddElementToWindow((short) ((g_772f18 * 5 + 40) * 2), 0x3e, 0x4df, d2_CurrentWindowId);
 		g_772f18++;
 		return;
 	}
 	if (row == 2) {
-		fcn_0046f740((short) ((g_772f20 * 5 + 40) * 2), 0x2f, 0x4df, d2_CurrentWindowId);
+		d2_AddElementToWindow((short) ((g_772f20 * 5 + 40) * 2), 0x2f, 0x4df, d2_CurrentWindowId);
 		g_772f20++;
 	}
 }

@@ -36,7 +36,7 @@ extern int g_6a25ec;
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, ...);
-int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
+int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 unsigned short* __cdecl gm_ResolveParentEntity(unsigned short* e);
 int __cdecl fcn_00506380(int id, unsigned char* store, int a, int b);
 int __cdecl fcn_0050bf30(unsigned char* store, unsigned short* item, int a);
@@ -75,7 +75,7 @@ void __cdecl fcn_0052e250(unsigned short* item)
 		io_AppendText(g_6a2f5c, *item * 2 + 0x9a8);
 	}
 	d2_SetForm(g_6a25b8, 0);
-	id = fcn_0046f740(((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x48, *item + 0xdf, d2_CurrentWindowId);
+	id = d2_AddElementToWindow(((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x48, *item + 0xdf, d2_CurrentWindowId);
 	((D2_CONTROL_TL*)g_1015ea0)[id].value_05c = 1;
 	rec = (char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[*item];
 	if (store != 0 && (*rec == 2 || *rec == 6)) {

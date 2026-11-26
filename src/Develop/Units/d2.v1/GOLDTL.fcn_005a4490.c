@@ -21,7 +21,7 @@ void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 void __cdecl fcn_0046f280(int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -32,7 +32,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText();
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ChooseNewLoan(char*);
 void __cdecl fcn_005a4360(char*, char*);
 
@@ -80,7 +80,7 @@ void __cdecl d2_ShowLoanDialog(char* p)
 	d2_SetForm(dialog, 1);
 	io_AppendText(0x18c9, *(unsigned short*) (g_8680b4 + g_773d75 * 0x2f4) * 2 + 0x9a8);
 	d2_SetOverlayAnimation(0, 0);
-	while (fcn_005373e0(d2_ShowLoanDialog, 0x677c7) != 0) {
+	while (main_RunFrameLoop(d2_ShowLoanDialog, 0x677c7) != 0) {
 		if (refresh) {
 			for (i = 0; i < 9; i++) {
 				if (rows[i].image != -1) {
@@ -127,7 +127,7 @@ void __cdecl d2_ShowLoanDialog(char* p)
 				y = 0;
 				for (i = 0; i < count; i++) {
 					d2_SetForm(dialog, 2);
-					rows[i].text = fcn_0046f740((*(int*) (g_77255c + 0xc) - w) >> 1, y, 0x75a, d2_CurrentWindowId);
+					rows[i].text = d2_AddElementToWindow((*(int*) (g_77255c + 0xc) - w) >> 1, y, 0x75a, d2_CurrentWindowId);
 					rows[i].image = fcn_0046f100((*(int*) (g_77255c + 0xc) - w) >> 1, y, w, h, 0x10, d2_CurrentWindowId);
 					line = lines[index];
 					rows[i].line = line;

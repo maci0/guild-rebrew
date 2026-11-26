@@ -62,7 +62,7 @@ typedef struct {
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x004432d0 */
-char __cdecl fcn_004432d0(int contextIndex, char a1)
+char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 {
 	if (contextIndex >= 0x40)
 		return 0;

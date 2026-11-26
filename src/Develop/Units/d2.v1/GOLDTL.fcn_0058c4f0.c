@@ -27,7 +27,7 @@ extern int d2_CurrentWindowId;
 
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel)
@@ -39,7 +39,7 @@ void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel)
 	d2_SetForm(dlg, mode);
 	io_AppendText((int) g_6811b0);
 	for (i = 0; i < 4; i++) {
-		ids[i] = fcn_0046f740(6 + i * 0x6c, 0, g_665f58[i], d2_CurrentWindowId);
+		ids[i] = d2_AddElementToWindow(6 + i * 0x6c, 0, g_665f58[i], d2_CurrentWindowId);
 		((D2_CONTROL_TL*) g_1015ea0)[ids[i]].value_05c = 1;
 		((D2_CONTROL_TL*) g_1015ea0)[ids[i]].flags_1d0 = 3;
 		((D2_CONTROL_TL*) g_1015ea0)[ids[i]].associated_object = (char*) &((OBJECT_PROTOTYPE*)lpObjektePROT)[g_665f84[i]];

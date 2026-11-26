@@ -10,7 +10,7 @@ typedef struct
 
 extern S54b820_Clock gm_GameTime;
 
-void __cdecl fcn_00500bb0(S54b820_Clock* clock, int arg2, int arg3, int arg4);
+void __cdecl gm_AddTime(S54b820_Clock* clock, int arg2, int arg3, int arg4);
 void __cdecl fcn_004c5530(int a1);
 void __cdecl fcn_004c5620(int a1, char* e);
 char* __cdecl gm_LookupEntityRecordById(int a1);
@@ -27,7 +27,7 @@ void __cdecl fcn_0054b820(char* e)
 		return;
 	}
 	*(S54b820_Clock*) (e + 0x52) = gm_GameTime;
-	fcn_00500bb0((S54b820_Clock*) (e + 0x52), 0x18, 0, 0);
+	gm_AddTime((S54b820_Clock*) (e + 0x52), 0x18, 0, 0);
 	*(short*) (e + 0x56) = 0x14;
 	*(int*) (e + 0x58) = 0;
 	if (*(int*) (e + 0xc0) == 1) {

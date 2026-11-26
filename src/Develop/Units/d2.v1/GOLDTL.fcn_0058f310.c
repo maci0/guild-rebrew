@@ -26,9 +26,9 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_00525f60(char*, int);
 void __cdecl fcn_00526120(int, int);
 typedef struct F8 {
@@ -39,7 +39,7 @@ typedef struct F8 {
 int __cdecl fcn_004a5e60(char*, int, F8, int, float, int*);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
@@ -83,11 +83,11 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	n = io_AppendText(0x4098, 0x4097, *(unsigned short*) v, *(unsigned short*) v);
-	b1 = fcn_00472250(h, 1, n);
+	b1 = d2_GetWindowListItem(h, 1, n);
 	d2_SetForm(h, 2);
 	n = io_AppendText(0x4099);
-	b2 = fcn_00472250(h, 2, n);
-	b3 = fcn_00472250(h, 2, n + 1);
+	b2 = d2_GetWindowListItem(h, 2, n);
+	b3 = d2_GetWindowListItem(h, 2, n + 1);
 	fcn_00472380(b1, 4, 0xc, 4);
 	g_100f1dc = -1;
 	do {
@@ -96,7 +96,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == b2) {
 				flag = 0;
-				n = fcn_00471f80(b1);
+				n = d2_GetControlValue(b1);
 
 				if (fcn_00525f60(((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), n) == 0) {
 					flag = 1;
@@ -141,7 +141,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 					}
 					id = fcn_004c5530(req);
 					while (id != -1 && fcn_004c4450(id) == 0) {
-						fcn_005373e0(0, 0x20007);
+						main_RunFrameLoop(0, 0x20007);
 					}
 					main_LoopFlags = 0x677c7;
 					g_774654 = 1;
@@ -151,7 +151,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) d2_ShowHauntingDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowHauntingDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_0052a2d0();
 	sv_ClearObjectSelection();

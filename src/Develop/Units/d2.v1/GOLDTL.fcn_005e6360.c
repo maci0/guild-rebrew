@@ -21,7 +21,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00525f60(void*, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -29,7 +29,7 @@ void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005e6360 */
@@ -73,7 +73,7 @@ void __cdecl fcn_005e6360(char* entity)
     d2_SetForm(dialog, 3);
     fcn_00533a60(d2_CurrentWindowId, 0, ids, 2, *(int*) 0x14b5b50, *(int*) 0x14b5b54);
     do {
-        amount = fcn_00471f80(control);
+        amount = d2_GetControlValue(control);
         d2_SetForm(dialog, 1);
         io_AppendText((int) g_6811b0);
         io_AppendText(0x420a, 0x4207, *(unsigned short*) target, amount);
@@ -95,7 +95,7 @@ void __cdecl fcn_005e6360(char* entity)
                 g_774654 = 1;
             }
         }
-    } while (fcn_005373e0((void*) fcn_005e6360, 0x677c7) != 0);
+    } while (main_RunFrameLoop((void*) fcn_005e6360, 0x677c7) != 0);
     fcn_00471e30(dialog);
     fcn_00532ef0();
 }

@@ -10,7 +10,7 @@ void __cdecl fcn_004ad1c0(void);
 void __cdecl fcn_004ad2e0(void);
 void __cdecl fcn_004ad630(void);
 void __cdecl fcn_004ad6a0(void);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl sim_SetSyncParams(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_0057baa0(char* o)
@@ -21,12 +21,12 @@ void __cdecl fcn_0057baa0(char* o)
 	switch (*(int*) (o + 0x70)) {
 	case 0:
 		fcn_004acf60();
-		fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 2, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (o + 0x52), 2, 0, 0);
 		fcn_004c5620(1, o);
 		break;
 	case 1:
 		fcn_004ad1c0();
-		fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 2, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (o + 0x52), 2, 0, 0);
 		fcn_004c5620(2, o);
 		break;
 	case 2:

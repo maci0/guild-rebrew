@@ -75,7 +75,7 @@ extern char g_773d75[];
 
 int __cdecl fcn_0042b2f0(char*, int, int);
 int __cdecl fcn_0064d530(char*, const char*, unsigned int);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 int __cdecl fcn_0064d740(char*, char*, int);
 int __cdecl io_CopyTrailingDigits(char*, int, char*);
@@ -684,7 +684,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				e++;
 			} while (j != 0);
 			fcn_0064d530((char*) tab78, text.buf + i + 3, e - i - 4);
-			j = fcn_0064eeec((char*) tab78);
+			j = atoi((char*) tab78);
 			r = format_selector;
 			while (r < txt_EntryCount) {
 				if (g_11bb000[r] == res) {

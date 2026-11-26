@@ -1,4 +1,4 @@
-int __cdecl fcn_005373e0(void*, const char*);
+int __cdecl main_RunFrameLoop(void*, const char*);
 int __cdecl RegisterStatusText(const char*, int, int);
 void __cdecl fcn_0059fe60(int);
 extern int g_14abc58;
@@ -10,7 +10,7 @@ void __cdecl fcn_005a0250(int arg)
 	int status;
 	int value;
 
-	status = fcn_005373e0((void*) fcn_005a0250, (const char*) 0x67fff);
+	status = main_RunFrameLoop((void*) fcn_005a0250, (const char*) 0x67fff);
 	if (status == 0) {
 		return;
 	}
@@ -19,6 +19,6 @@ void __cdecl fcn_005a0250(int arg)
 		if (g_7746a0 != 0 && g_7746a0 == value) {
 			fcn_0059fe60(arg);
 		}
-		status = fcn_005373e0((void*) fcn_005a0250, (const char*) 0x67fff);
+		status = main_RunFrameLoop((void*) fcn_005a0250, (const char*) 0x67fff);
 	}
 }

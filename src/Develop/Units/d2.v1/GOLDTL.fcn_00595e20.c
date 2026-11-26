@@ -13,7 +13,7 @@ int __cdecl gm_GetMsgField(char*, void*);
 int __cdecl fcn_004c4510(int, int);
 int __cdecl fcn_004c4700(int, int, int, int*);
 void __cdecl fcn_004c53a0(void);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl CountDisplayCounters(void);
 
 /* ADDRESS: GOLDTL 0x00595e20 */
@@ -176,14 +176,14 @@ int __cdecl fcn_00595e20(char* building, char* a1)
 	for (p = (unsigned int*) 0x778db0; !found && (int) p < 0x779130; p += 0xe) {
 		if (*p != (unsigned int) -1
 		    && *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*p].kind)) == 0x41
-		    && fcn_00471f80(*p))
+		    && d2_GetControlValue(*p))
 			found = 1;
 	}
 	if (!found) {
 		for (p = (unsigned int*) 0x7796f0; !found && (int) p < 0x7798b0; p += 0xe) {
 			if (*p != (unsigned int) -1
 			    && *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*p].kind)) == 0x41
-			    && fcn_00471f80(*p))
+			    && d2_GetControlValue(*p))
 				found = 1;
 		}
 	}

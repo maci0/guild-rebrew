@@ -10,7 +10,7 @@ extern int g_14ad0e8;
 extern int g_7746a0;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_0059a0e0(void);
@@ -42,7 +42,7 @@ void __cdecl fcn_0059cb40(char* e)
 	sp = 0;
 	zs = 0;
 	fcn_005338a0();
-	while (fcn_005373e0((void*) fcn_0059cb40, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) fcn_0059cb40, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			abbau = RegisterStatusText("contact_ABBAU", g_14ad208, 0xa);

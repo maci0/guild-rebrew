@@ -5,7 +5,7 @@
 
 int __cdecl fcn_004c5620(int a, char* q);
 int __cdecl d3_GetContextIndex(int x);
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl ch_DestroyCharacter(char* r);
 char* __cdecl gm_EntityAccumulate(char* p);
 int __cdecl gm_RemoveLinkedNodeById(char* list, int id);
@@ -24,9 +24,9 @@ void __cdecl fcn_00506300(char* p)
 	}
 	r = *(char**) (p + 0x3b);
 	if (r != 0) {
-		fcn_004432d0(d3_GetContextIndex(*(int*) (r + 0x88)), 1);
+		d3_SelectSceneContext(d3_GetContextIndex(*(int*) (r + 0x88)), 1);
 		ch_DestroyCharacter(r);
-		fcn_004432d0(save, 1);
+		d3_SelectSceneContext(save, 1);
 	}
 	e = gm_EntityAccumulate(p);
 	if (e != 0) {

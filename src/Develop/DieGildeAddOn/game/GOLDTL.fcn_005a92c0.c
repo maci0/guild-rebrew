@@ -43,12 +43,12 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
 int __cdecl d2_IsTutorialInactive(void);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_004c51a0(int, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl fcn_005a92c0(char* p)
@@ -119,9 +119,9 @@ void __cdecl fcn_005a92c0(char* p)
 				msg[0x36] = 9;
 				*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
 				if (d2_IsTutorialInactive() == 0) {
-					fcn_00500bb0((pos14_7f4c00*) (msg + 0x28), 0, 5, 0);
+					gm_AddTime((pos14_7f4c00*) (msg + 0x28), 0, 5, 0);
 				} else {
-					fcn_00500bb0((pos14_7f4c00*) (msg + 0x28), gm_RandomMod(3) + 1, 0, 0);
+					gm_AddTime((pos14_7f4c00*) (msg + 0x28), gm_RandomMod(3) + 1, 0, 0);
 				}
 				st = *(pos14_7f4c00*) (msg + 0x28);
 				msg[0x58] = 2;
@@ -173,7 +173,7 @@ void __cdecl fcn_005a92c0(char* p)
 			}
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_005a92c0, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_005a92c0, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_00532ef0();
 	if (ok) {

@@ -36,7 +36,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl fcn_004f4830(int, struct stats*);
-int __cdecl fcn_0050cf50(char*, int);
+int __cdecl gm_CalculateGebaeudeValue(char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c5530(struct msg*);
 
@@ -89,7 +89,7 @@ void __cdecl fcn_00548d50(void)
 	m.who = *(int*) (pick + 1);
 	m.amount = *(int*) (pick + 0x69) + amount;
 	if (m.amount <= 0) {
-		n = fcn_0050cf50(pick, 0x64);
+		n = gm_CalculateGebaeudeValue(pick, 0x64);
 		m.amount = (int) ((gm_RandomFloat01() + 1.0f) * n);
 	}
 	m.mode = 2;

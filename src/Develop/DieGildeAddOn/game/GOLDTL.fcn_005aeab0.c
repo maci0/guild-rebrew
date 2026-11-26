@@ -25,14 +25,14 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c6b20(int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00471e30(int);
 
@@ -110,9 +110,9 @@ void __cdecl fcn_005aeab0(char* rec)
 
 	v = io_AppendText(0x19c4, *(unsigned short*) ent, (int) (act + 0xb4),
 	    2, cnt, *(unsigned short*) ent, *(unsigned short*) ent);
-	b1 = fcn_00472250((int) ctx, 1, v);
-	b2 = fcn_00472250((int) ctx, 1, v + 1);
-	b3 = fcn_00472250((int) ctx, 1, v + 2);
+	b1 = d2_GetWindowListItem((int) ctx, 1, v);
+	b2 = d2_GetWindowListItem((int) ctx, 1, v + 1);
+	b3 = d2_GetWindowListItem((int) ctx, 1, v + 2);
 	g_100f1dc = -1;
 	for (;;) {
 		if (g_14ce8e0 != 0) {
@@ -149,7 +149,7 @@ void __cdecl fcn_005aeab0(char* rec)
 				g_774654 = 1;
 			}
 		}
-		if (fcn_005373e0((void*) fcn_005aeab0, 0x677c7) == 0) {
+		if (main_RunFrameLoop((void*) fcn_005aeab0, 0x677c7) == 0) {
 			fcn_00532ef0();
 			fcn_00471e30((int) ctx);
 			return;

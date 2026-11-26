@@ -29,7 +29,7 @@ int __cdecl fcn_00532ef0();
 int __cdecl fcn_00533a60();
 int __cdecl d2_DrawPanelFrame();
 int __cdecl fcn_00535960();
-int __cdecl fcn_005373e0();
+int __cdecl main_RunFrameLoop();
 int __cdecl he_fn_Handlung();
 int __cdecl he_StartHandlungSearch();
 int __cdecl fcn_0057e880();
@@ -377,7 +377,7 @@ label_5bea6c:
     }
     if (((*(int *)0x14ce8e0)) && (d2_CanCloseWindowDuringTutorial() == 1))
       (*(int *)0x774654) = 1;
-    if (!fcn_005373e0(0x5be140,0x657c7)) {
+    if (!main_RunFrameLoop(0x5be140,0x657c7)) {
       fcn_00532ef0();
       fcn_00471e30(dialogId);
       fcn_0057e880(0x1d,v2,1,0);

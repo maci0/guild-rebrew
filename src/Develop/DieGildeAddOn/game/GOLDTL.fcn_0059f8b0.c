@@ -12,7 +12,7 @@ extern char g_6aa73c[];
 extern char g_6aa728[];
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_005c1090(int);
 void __cdecl fcn_005c0a30(int);
@@ -26,7 +26,7 @@ void __cdecl fcn_0059f8b0(int a1, int a2)
 	int z;
 
 	fcn_005338a0();
-	while (fcn_005373e0(fcn_0059f8b0, 0x67fff) != 0) {
+	while (main_RunFrameLoop(fcn_0059f8b0, 0x67fff) != 0) {
 		x = RegisterStatusText(g_6aa750, g_14ab07c, 0xc);
 		y = RegisterStatusText(g_6aa73c, g_14ab750, 0xc);
 		z = RegisterStatusText(g_6aa728, g_14aadd8, 0xc);

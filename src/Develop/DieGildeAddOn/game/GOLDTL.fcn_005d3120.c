@@ -11,14 +11,14 @@ int __cdecl fcn_00470820(int a, int b, char* name);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472250(char*, int, char*);
+int __cdecl d2_GetWindowListItem(char*, int, char*);
 int __cdecl fcn_00471e30(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl fcn_004c5530(char* a);
 void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
 int __cdecl fcn_004c5620(char a1, unsigned char* e);
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_00526010(char*, int, char);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005d2ec0(char*, int*);
@@ -121,13 +121,13 @@ int __cdecl fcn_005d3120(int entity, int* request)
 		d = (char) *(e + 0xb9);
 		d -= (char) *(e + 0xb8);
 		io_AppendText(0x1cf4, *(unsigned short*) p, 0x5d, d, 0x5d);
-		ids[0] = fcn_00472250((char*) h, 1,
+		ids[0] = d2_GetWindowListItem((char*) h, 1,
 		                      (char*) io_AppendText(0x1cf5, lv[3] + 0x1d11, lv[0]));
-		ids[1] = fcn_00472250((char*) h, 1,
+		ids[1] = d2_GetWindowListItem((char*) h, 1,
 		                      (char*) io_AppendText(0x1cf6, lv[4] + 0x1d11, lv[1]));
-		ids[2] = fcn_00472250((char*) h, 1,
+		ids[2] = d2_GetWindowListItem((char*) h, 1,
 		                      (char*) io_AppendText(0x1cf7, lv[5] + 0x1d11, lv[2]));
-		ids[3] = fcn_00472250((char*) h, 1, (char*) io_AppendText(0x1cf8));
+		ids[3] = d2_GetWindowListItem((char*) h, 1, (char*) io_AppendText(0x1cf8));
 	}
 	g_100f1dc = -1;
 	do {
@@ -175,7 +175,7 @@ int __cdecl fcn_005d3120(int entity, int* request)
 					*(char*) (e + 0xb8) += n;
 					if (*(char*) (e + 0xb8) >= *(char*) (e + 0xb9)) {
 						*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-						fcn_00500bb0(e + 0x52, 0, 1, 0);
+						gm_AddTime(e + 0x52, 0, 1, 0);
 					}
 					*(char*) (e + 0xba) = 0;
 					*(int*) (e + 0x84) = fcn_004c5620(0, (unsigned char*) e);
@@ -193,7 +193,7 @@ int __cdecl fcn_005d3120(int entity, int* request)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005d3120, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005d3120, 0x657c7) != 0);
 	fcn_00471e30(h);
 	return 2;
 }

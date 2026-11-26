@@ -36,7 +36,7 @@ extern char* lpObjektePROT;
 
 char* __cdecl gm_SearchTable67(int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl gm_AddTime(struct pos14*, int, int, int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 float __cdecl fcn_0050fdb0(int, int, char*);
 
@@ -60,7 +60,7 @@ void __cdecl he_AllocProduktion(char* e)
 	*(struct pos14*) (e + 0x60) = *(struct pos14*) (e + 0x44);
 	*(float*) (e + 0xb4) = v;
 	*(float*) (e + 0xb8) = v;
-	fcn_00500bb0((struct pos14*) (e + 0x52), 0, 0, 1);
+	gm_AddTime((struct pos14*) (e + 0x52), 0, 0, 1);
 	*(int*) (e + 0xc4) = -1;
 	*(int*) (e + 0xc8) = 0;
 	for (i = 0; i < 768; i++) {

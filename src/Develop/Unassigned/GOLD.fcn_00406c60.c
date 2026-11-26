@@ -1,5 +1,5 @@
 int __cdecl fcn_00411be0(char*);
-void __cdecl fcn_004478e0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_DestroyObject(void*);
 char* __cdecl fcn_00446e10(int, float*, float*, int);
 void __cdecl fcn_00453270(char*);
@@ -18,14 +18,14 @@ void __cdecl ch_SetAttachedObject(char* owner, int selector, int id)
     else if (selector == 3) slot = (char**) (owner + 0x6c);
     if (id) {
         previous = g_633444;
-        fcn_004478e0(fcn_00411be0(*(char**) (owner + 0x88)), 1);
+        d3_SelectSceneContext(fcn_00411be0(*(char**) (owner + 0x88)), 1);
         if (*slot) {
             d3_DestroyObject(*slot);
             *slot = 0;
         }
         *slot = fcn_00446e10(*(int*) (owner + 0x34), position, rotation, id);
         if (!*slot) {
-            fcn_004478e0(previous, 1);
+            d3_SelectSceneContext(previous, 1);
             return;
         }
         (*slot)[0x212] |= 0xc;
@@ -36,14 +36,14 @@ void __cdecl ch_SetAttachedObject(char* owner, int selector, int id)
         if (selector == 1) fcn_0043d6c0(*slot, "d3_LeftHand");
         else if (selector == 2) fcn_0043d6c0(*slot, "d3_RightHand");
         else if (selector == 3) fcn_0043d6c0(*slot, "d3_Head");
-        fcn_004478e0(previous, 1);
+        d3_SelectSceneContext(previous, 1);
         return;
     }
     previous = g_633444;
-    fcn_004478e0(fcn_00411be0(*(char**) (owner + 0x88)), 1);
+    d3_SelectSceneContext(fcn_00411be0(*(char**) (owner + 0x88)), 1);
     if (*slot) {
         d3_DestroyObject(*slot);
         *slot = 0;
     }
-    fcn_004478e0(previous, 1);
+    d3_SelectSceneContext(previous, 1);
 }

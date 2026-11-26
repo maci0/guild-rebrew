@@ -15,7 +15,7 @@ struct target7 {
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_00502cd0(int, int, int, int);
@@ -31,7 +31,7 @@ void __cdecl fcn_0054a5a0(char* u)
 		return;
 	}
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0x18, 0, 0);
+	gm_AddTime((pos14_7f4c00*) (u + 0x52), 0x18, 0, 0);
 	*(short*) (u + 0x56) = 7;
 	*(int*) (u + 0x58) = 0;
 	gm_ResolveEntityById((void**) (&found), 0, 0, *(int*) (u + 0x10));

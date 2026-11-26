@@ -17,7 +17,7 @@ extern char g_77e0a0[];
 extern char g_6a3550[];
 
 int __cdecl txt_FindEntryIndex(char*);
-int __cdecl fcn_0064eeec(const char*);
+int __cdecl atoi(const char*);
 
 void __cdecl he_OpenHelpEvents(char* name)
 {
@@ -52,11 +52,11 @@ void __cdecl he_OpenHelpEvents(char* name)
 						sprintf(msg, "he_OpenHelpEvents(): invalid textlabel:%s", label);
 					}
 				} else if (i == 1) {
-					((struct helpev*)g_77e0a0)[n].a = fcn_0064eeec(tok);
+					((struct helpev*)g_77e0a0)[n].a = atoi(tok);
 				} else if (i == 2) {
-					((struct helpev*)g_77e0a0)[n].b = fcn_0064eeec(tok);
+					((struct helpev*)g_77e0a0)[n].b = atoi(tok);
 				} else if (i == 3) {
-					((struct helpev*)g_77e0a0)[n].c = fcn_0064eeec(tok);
+					((struct helpev*)g_77e0a0)[n].c = atoi(tok);
 				}
 				i++;
 			}

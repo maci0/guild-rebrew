@@ -85,7 +85,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl CountDisplayCounters(void);
 void __cdecl fcn_004c35f0(void);
 int __cdecl fcn_004c5530(Packet*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -312,7 +312,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 				}
 			}
 		}
-		if (fcn_005373e0((void*) fcn_005c79a0, 0x677c7) == 0) {
+		if (main_RunFrameLoop((void*) fcn_005c79a0, 0x677c7) == 0) {
 			fcn_0052a2d0();
 			fcn_00471e30(dlg);
 			fcn_00532ef0();

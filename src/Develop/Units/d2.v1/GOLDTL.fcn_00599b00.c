@@ -38,7 +38,7 @@ int __cdecl fcn_0050e4a0(int a);
 int __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl d2_CenterDialogWindows(int dlg);
 int __cdecl fcn_0050d200(int a, int b);
-int __cdecl fcn_0046f740(int a, int b, int c, int d);
+int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 int __cdecl fcn_0046fac0(int a, int b, int c, int d);
 void __cdecl d2_SetElementFont(int a, int b);
 void __cdecl fcn_0046f940(int a, int b);
@@ -49,7 +49,7 @@ void __cdecl fcn_00598740(void* a, int b);
 void __cdecl fcn_004c5530(void* a);
 void __cdecl fcn_0050bc10(int a, unsigned char b, char* c);
 void __cdecl fcn_0046ed00(int a, int b, int c);
-int __cdecl fcn_005373e0(int a, int b);
+int __cdecl main_RunFrameLoop(int a, int b);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00599b00 */
 void __cdecl fcn_00599b00(void)
@@ -109,7 +109,7 @@ void __cdecl fcn_00599b00(void)
 		cost = fcn_0050d200((int)&((ENTITY_RECORD*)g_7f4ca0)[
 		    (unsigned short)g_774970], cat);
 		last = rec->kind;
-		raw = fcn_0046f740(ofs + 0x30, row - 0x30, cat + 0x427,
+		raw = d2_AddElementToWindow(ofs + 0x30, row - 0x30, cat + 0x427,
 		    d2_CurrentWindowId);
 		/* raw is the control index. */
 		((D2_CONTROL_TL*)g_1015ea0)[raw].value_05c = 1;
@@ -179,7 +179,7 @@ void __cdecl fcn_00599b00(void)
 		}
 		if (g_14ce8e0 != 0)
 			g_774654 = 1;
-		if (fcn_005373e0(0x599b00, 0x657c7) == 0) {
+		if (main_RunFrameLoop(0x599b00, 0x657c7) == 0) {
 			if (dlg != -1)
 				fcn_00471e30(dlg);
 			g_7746f8 = 0;

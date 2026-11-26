@@ -1,9 +1,9 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl d2_SetForm(int win, int layer);
-int __cdecl fcn_0046f740(int x, int y, int id, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl fcn_00469c40(int x, int y, int slot);
-int __cdecl fcn_00471f80(int element);
+int __cdecl d2_GetControlValue(int element);
 void __cdecl d2_SetDisplayCounter(int id, int value);
 void __cdecl ResetDisplayCounters(void);
 void __cdecl fcn_00596d70(int a0, int a1, int* rect, int w, int n,
@@ -29,7 +29,7 @@ void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 
 	for (v = (int*) 0x778d50; (int) v < 0x778da0; v += 5) {
 		if (*v == -1) {
-			*v = fcn_0046f740(0, 0, 0x743, *(int*) 0x772514);
+			*v = d2_AddElementToWindow(0, 0, 0x743, *(int*) 0x772514);
 		}
 	}
 
@@ -37,7 +37,7 @@ void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 
 	for (v = (int*) 0x779130; (int) v < 0x779158; v += 5) {
 		if (*v == -1) {
-			*v = fcn_0046f740(0, 0, 0x743, *(int*) 0x772514);
+			*v = d2_AddElementToWindow(0, 0, 0x743, *(int*) 0x772514);
 		}
 	}
 
@@ -137,12 +137,12 @@ void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 		ResetDisplayCounters();
 		for (v = (int*) 0x778db0; (int) v < 0x779130; v += 0xe) {
 			if (*v != -1) {
-				d2_SetDisplayCounter(v[-4] + 0xdf, fcn_00471f80(*v));
+				d2_SetDisplayCounter(v[-4] + 0xdf, d2_GetControlValue(*v));
 			}
 		}
 		for (v = (int*) 0x7796f0; (int) v < 0x7798b0; v += 0xe) {
 			if (*v != -1) {
-				d2_SetDisplayCounter(v[-4] + 0xdf, fcn_00471f80(*v));
+				d2_SetDisplayCounter(v[-4] + 0xdf, d2_GetControlValue(*v));
 			}
 		}
 	}

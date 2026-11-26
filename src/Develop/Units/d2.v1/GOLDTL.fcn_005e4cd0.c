@@ -10,13 +10,13 @@ extern char g_14cf950;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_0046f9b0(int, int);
 int __cdecl fcn_0057de80(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl main_RunFrameLoop(void*, int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_0057df50(int, int);
 void __cdecl fcn_00471e30(int);
 
@@ -31,7 +31,7 @@ void __cdecl d2_RunMessageFilterDialog(void)
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 2);
 	for (i = 0; i < 9; i++) {
-		b = fcn_0046f740(8, i * 0x1c + 0xa, 0x605 + i, d2_CurrentWindowId);
+		b = d2_AddElementToWindow(8, i * 0x1c + 0xa, 0x605 + i, d2_CurrentWindowId);
 		btn[i] = b;
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_058)) = 1;
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_05c)) = 1;
@@ -42,11 +42,11 @@ void __cdecl d2_RunMessageFilterDialog(void)
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_1e0)) = 3;
 		d2_SetElementValue(b, fcn_0057de80(0x605 + i) == 0);
 	}
-	while (fcn_005373e0(d2_RunMessageFilterDialog, 0x677c7) != 0) {
+	while (main_RunFrameLoop(d2_RunMessageFilterDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0 || (*(unsigned char*)&g_14cf950) == 1) {
 			g_774654 = 1;
 			for (i = 0; i < 9; i++) {
-				fcn_0057df50(0x605 + i, fcn_00471f80(btn[i]) == 0);
+				fcn_0057df50(0x605 + i, d2_GetControlValue(btn[i]) == 0);
 			}
 		}
 	}

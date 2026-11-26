@@ -108,9 +108,9 @@ int __cdecl fcn_00517c00(int, int, int, char*);
 char* __cdecl fcn_0050dc90(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00535550(char*);
 void __cdecl fcn_00535560(char*);
 int __cdecl fcn_005b5750(void);
@@ -123,7 +123,7 @@ void __cdecl fcn_004c4ef0(int);
 void __cdecl fcn_004c5530(void*);
 void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_00505d00(unsigned char*, int*);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_0046fac0(int, int, char*, int);
@@ -134,7 +134,7 @@ int __cdecl fcn_0051af00(char*, char*, ...);
 int __cdecl fcn_0050f950(int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 int __cdecl fcn_004693b0(int, int);
-void __cdecl fcn_00469470(int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00534f30(char*);
 void __cdecl fcn_00532ef0(void);
@@ -174,7 +174,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 	d2_SetForm(*(int*) (f.win + 0x228), 3);
 	io_AppendText((char*) 0x68beac);
 	io_AppendText((char*) 0x6ac33c);
-	f.hE = fcn_00472250(*(int*) (f.win + 0x228), 3,
+	f.hE = d2_GetWindowListItem(*(int*) (f.win + 0x228), 3,
 	                    io_AppendText((char*) 0x1a20));
 	d2_SetForm(*(int*) (f.win + 0x228), 3);
 	for (i = 0; i < 4; i++) {
@@ -219,12 +219,12 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 		f.rows[i].x = f.tv;
 		f.rows[i].y = f.cnt / 2 * f.tv2 + 0x11;
 		f.tv = f.tv + 0x18;
-		f.rows[i].icon = fcn_0046f740(f.tv, f.rows[i].y, 0x5db,
+		f.rows[i].icon = d2_AddElementToWindow(f.tv, f.rows[i].y, 0x5db,
 		                              *(int*) 0x772514);
 		if (i == 0) {
 			f.hRadio = fcn_004693b0(1, f.rows[i].icon);
 		} else {
-			fcn_00469470(f.hRadio, f.rows[i].icon);
+			d2_AddToRadioGroup(f.hRadio, f.rows[i].icon);
 		}
 		f.tv -= 0x36;
 		f.rows[i].label = fcn_0046fac0(f.tv, f.rows[i].y - 0x11,
@@ -253,7 +253,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 	f.cnt = i;
 
 	d2_SetOverlayAnimation(0, 0);
-	while (fcn_005373e0((void*) 0x5b7880, 0x677c7)) {
+	while (main_RunFrameLoop((void*) 0x5b7880, 0x677c7)) {
 		if (*(int*) 0x14ce8e0) {
 			*(int*) 0x774654 = 1;
 		}
@@ -383,7 +383,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 				if (r->obj != 0) {
 					if (r->x1c == -1) {
 						d2_SetForm(r->win, 3);
-						r->x1c = fcn_0046f740(
+						r->x1c = d2_AddElementToWindow(
 						    r->x + 0x1a, r->y,
 						    *(int*) (r->obj + 0x18c),
 						    *(int*) 0x772514);
@@ -480,21 +480,21 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 						]),
 				    building[0], -1, 1);
 				d2_SetForm(f.rows[i].win, 2);
-				f.hC = fcn_00472250(f.rows[i].win, 2,
+				f.hC = d2_GetWindowListItem(f.rows[i].win, 2,
 				                    io_AppendText(
 				                        (char*) 0x1a22, n,
 				                        (char*) 0x220));
 			} else if (f.rows[i].state == 1) {
 				d2_SetForm(f.rows[i].win, 2);
 				io_AppendText((char*) 0x6811b0);
-				f.hB = fcn_00472250(
+				f.hB = d2_GetWindowListItem(
 				    f.rows[i].win, 2,
 				    io_AppendText(
 				        (char*) 0x1a21,
 				        *(unsigned short*) f.rows[i].obj));
 				if (*(unsigned char*) (f.rows[i].obj + 0x165)
 				    == f.ent[0x230]) {
-					f.hD = fcn_00472250(
+					f.hD = d2_GetWindowListItem(
 					    f.rows[i].win, 2,
 					    io_AppendText(
 					        (char*) 0x1a25,

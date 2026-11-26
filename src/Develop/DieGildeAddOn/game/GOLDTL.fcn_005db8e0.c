@@ -72,8 +72,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f740(int x, int y, int id, int win);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
+int __cdecl main_RunFrameLoop(void*, int);
 char __cdecl fcn_00507400(int, int);
 void __cdecl fcn_004c5530(struct msg*);
 void __cdecl fcn_00471e30(int);
@@ -102,7 +102,7 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 	x0 = (colw - ((Font*) g_772500)->w) / 2;
 	io_AppendText(0x1a9a, (p->female != 0) + 0x1aa0, p->id, n);
 	for (i = 1; i <= 15; i++) {
-		id = fcn_0046f740((i - 1) % 5 * colw + x0 + 0x20, (i - 1) / 5 * rowh + x0 + 0x64, i - 1 + 0x5a2, d2_CurrentWindowId);
+		id = d2_AddElementToWindow((i - 1) % 5 * colw + x0 + 0x20, (i - 1) / 5 * rowh + x0 + 0x64, i - 1 + 0x5a2, d2_CurrentWindowId);
 		((D2_CONTROL_TL*)g_1015ea0)[id].value_05c = 1;
 		((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0 = 3;
 		s = g_14a5adc[i - 1];
@@ -114,7 +114,7 @@ int __cdecl fcn_005db8e0(Ent* e, Req* p)
 		((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc = 0x56;
 	}
 	result = 0;
-	while (fcn_005373e0(fcn_005db8e0, main_LoopFlags) != 0) {
+	while (main_RunFrameLoop(fcn_005db8e0, main_LoopFlags) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		} else if (g_14ce8d8 != 0) {

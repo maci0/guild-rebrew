@@ -9,7 +9,7 @@ extern void __cdecl ch_FinishAni(void *);
 extern void __cdecl fcn_004090d0(void *);
 extern void __cdecl m_FreeTracked(void *);
 extern void __cdecl fcn_00438b40(int, void *);
-extern float __cdecl fcn_00444700(int, float *);
+extern float __cdecl d3_ComputeYawToTarget(int, float *);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 extern char __cdecl d3_GridPointToWorld(void *, int, int, float *);
 
@@ -163,7 +163,7 @@ Lafter:
     *(float *)(eventEntry + 0x128) = v14 + *(float *)(eventEntry + 0x128);
     v14 = *(float *)0x6b5c40;
     *(float *)(eventEntry + 0x12c) = v14 + *(float *)(eventEntry + 0x12c);
-    *(float *)(eventEntry + 0x108) = fcn_00444700(*(int *)(character + 0x34), v2);
+    *(float *)(eventEntry + 0x108) = d3_ComputeYawToTarget(*(int *)(character + 0x34), v2);
     v8 = *(int *)(*(int *)(eventEntry + 0x14) + 0x34);
     v13 = *(float *)(v8 + 0x4c) - *v2;
     v14 = *(float *)(v8 + 0x50) - *(float *)(eventEntry + 0x128);

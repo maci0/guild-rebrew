@@ -1,5 +1,5 @@
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 #include "client_packet_builder.h"
 void __cdecl fcn_004c4670(int, int, int, char*);
 void __cdecl fcn_004c5360(void);
@@ -13,7 +13,7 @@ int __cdecl fcn_004b0a20(int* a1, int slot, char* arg)
 
 	if (*arg != '-')
 		return 0;
-	c = (char) fcn_0064eeec(arg + 1);
+	c = (char) atoi(arg + 1);
 	if (a1 == 0 || slot >= 8)
 		return 0;
 	e = gm_LookupEntityRecordById(a1[slot * 2 + 1]);

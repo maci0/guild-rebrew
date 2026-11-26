@@ -16,7 +16,7 @@ int __cdecl fcn_00413160(void);
 void __cdecl init_LoadGebaeudeScene(int);
 
 /* ADDRESS: GOLDTL 0x005155e0 */
-int __cdecl fcn_005155e0(unsigned char* e)
+int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* e)
 {
 	int k;
 	int r;

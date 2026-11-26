@@ -99,7 +99,7 @@ int __cdecl fcn_0052a310(pos14_7f4c00*);
 void __cdecl fcn_0052a890(pos14_7f4c00*);
 int __cdecl fcn_004ec9e0(void);
 void* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00469e30(int);
 void __cdecl fcn_00469e70(void);
 void __cdecl fcn_00473150(void*);
@@ -141,7 +141,7 @@ int __cdecl fcn_00504bd0(int);
 int __cdecl fcn_0047d240(void*);
 unsigned short __cdecl fcn_0042e410(int);
 int __cdecl fcn_00508da0(void*);
-int __cdecl fcn_0050cf50(void*, int);
+int __cdecl gm_CalculateGebaeudeValue(void*, int);
 int __cdecl fcn_0047dd60(void*);
 int __cdecl fcn_00567170(void*, int*, int*, int*);
 void* __cdecl evt_FindScriptById(int);
@@ -200,7 +200,7 @@ void __cdecl fcn_00540020(void)
 		if (g_774978 == 0) {
 			hp = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0, 1);
 			while (!(*(unsigned char*) hp & 4)) {
-				fcn_005373e0(0, 0x24087);
+				main_RunFrameLoop(0, 0x24087);
 			}
 			fcn_00469e30(0x79d);
 			fcn_00473150(hp);
@@ -366,14 +366,14 @@ void __cdecl fcn_00540020(void)
 			fcn_00519190(0x1efd, arr[4 + i * 5] + 0x253, *(int*) (arr + 5 + i * 5));
 		}
 		fcn_00519190(0x1efa, *(int*) (SLOTPTR(g_774970 & 0xffff) + 0x194));
-		while (fcn_005373e0(0x540020, 0x24087) != 0) {
+		while (main_RunFrameLoop(0x540020, 0x24087) != 0) {
 			if (g_100f1dc == 2 || g_14cf950[0] == 0x1c) {
 				*(int*) 0x774654 = 1;
 			}
 		}
 		hp = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x1e, 1);
 		while (!(*(unsigned char*) hp & 4)) {
-			fcn_005373e0(0, *(int*) 0x7e46ac | 0x80);
+			main_RunFrameLoop(0, *(int*) 0x7e46ac | 0x80);
 		}
 		fcn_005355f0();
 		fcn_00469e70();
@@ -473,7 +473,7 @@ void __cdecl fcn_00540020(void)
 					if (fcn_00508da0(obj) < fcn_0042e410(0x5a)) {
 						int ent;
 
-						cand = fcn_0050cf50(obj, 0x64);
+						cand = gm_CalculateGebaeudeValue(obj, 0x64);
 						*(float*) &agebits = (float) cand * g_664138;
 						if (32.0f > *(float*) &agebits) {
 							*(float*) &agebits = 32.0f;

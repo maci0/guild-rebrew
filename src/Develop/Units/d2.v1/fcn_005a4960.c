@@ -7,11 +7,11 @@ void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);
 void __cdecl io_AppendText(void* id, ...);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
-int __cdecl fcn_005373e0(void* a, int b);
+int __cdecl main_RunFrameLoop(void* a, int b);
 void __cdecl fcn_0046f280(int w);
 int __cdecl d2_DestroyElement(int id);
 int __cdecl fcn_0050d5d0(int id, char* owner, char** out);
-int __cdecl fcn_0046f740(int a, int b, int c, int d);
+int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 int __cdecl fcn_0046f100(int a, int b, int c, int d, int e, int f);
 void __cdecl fcn_00471e30(int a);
 void __cdecl fcn_00532ef0(void);
@@ -44,7 +44,7 @@ void __cdecl fcn_005a4960(char* owner, int id)
     d2_SetForm((int)dlg, 1);
     io_AppendText((void*)0x18d9);
     d2_SetOverlayAnimation(0, 0);
-    while (fcn_005373e0((void*)0x5a4960, 0x677c7)) {
+    while (main_RunFrameLoop((void*)0x5a4960, 0x677c7)) {
         if (esi != 0) {
             for (i = 0; i < 9; i++) {
                 if (slot[i][0] != -1) {
@@ -61,7 +61,7 @@ void __cdecl fcn_005a4960(char* owner, int id)
             cy = *(short*) (g_772500 + 0x269da);
             for (i = 0; i < count; i++) {
                 d2_SetForm((int)dlg, 2);
-                slot[i][1] = fcn_0046f740(0, ebx, 0x75a,
+                slot[i][1] = d2_AddElementToWindow(0, ebx, 0x75a,
                                            d2_CurrentWindowId);
                 slot[i][0] = fcn_0046f100(0, ebx, cx, cy,
                                            0x110, d2_CurrentWindowId);

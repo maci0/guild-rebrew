@@ -55,11 +55,11 @@ extern unsigned char* lpGebaeudePROT;
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c4450(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_0050cf50(char*, int);
+int __cdecl gm_CalculateGebaeudeValue(char*, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c5620(int, Order_5635b0*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl he_FreeAction(Order_5635b0*);
 
 
@@ -103,7 +103,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 						goto next;
 					}
 				}
-				v = fcn_0050cf50(p, p[0x5c]);
+				v = gm_CalculateGebaeudeValue(p, p[0x5c]);
 				d = v + 256.0f;
 				f = o->value / d;
 				if (gm_RandomMod(100) > f * 50.0f) {
@@ -124,7 +124,7 @@ void __cdecl fcn_005635b0(Order_5635b0* o)
 next:
 		o->tries = o->tries + 1;
 		o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
-		fcn_00500bb0(&o->stamp, gm_RandomMod(3) + 4, 0, 0);
+		gm_AddTime(&o->stamp, gm_RandomMod(3) + 4, 0, 0);
 		return;
 	case -2:
 	case -1:

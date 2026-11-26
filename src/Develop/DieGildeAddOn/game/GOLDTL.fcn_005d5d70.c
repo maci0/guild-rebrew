@@ -49,7 +49,7 @@ int __cdecl fcn_004c5530(struct msg*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 void __cdecl fcn_004c6ae0(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005d5d70(unsigned char* e)
@@ -122,7 +122,7 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005d5d70, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005d5d70, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 }

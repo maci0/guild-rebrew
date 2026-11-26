@@ -77,7 +77,7 @@ int __cdecl d3_CreateSkyLayer(int, int, int, Col, float, int, float, float);
 void __cdecl fcn_00459940(int, int, float);
 void __cdecl fcn_004597f0(int, int);
 void __cdecl fcn_005e8870(int, int, Vec24*, Vec24*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0052a7d0(void);
 void __cdecl fcn_0052a960(GAME_TIMESTAMP*);
 int* __cdecl fcn_00415310(int);
@@ -197,11 +197,11 @@ void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 	player = d3_CurrentContextIndex;
 	for (i = 0; i < 64; i++) {
 		if (((Slot_52a3a0*) g_1043340)[i].f2c != 0) {
-			fcn_004432d0(i, 1);
+			d3_SelectSceneContext(i, 1);
 			fcn_0052a7d0();
 		}
 	}
-	fcn_004432d0(player, 1);
+	d3_SelectSceneContext(player, 1);
 	g_7e4380 = -100;
 	g_7746fc = 0;
 	fcn_0052a960(now);

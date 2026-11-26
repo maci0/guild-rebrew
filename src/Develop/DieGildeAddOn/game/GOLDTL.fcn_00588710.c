@@ -1,7 +1,7 @@
 /* Fades the objects of a selected animation slot in or out after a mode switch
    and stores the new current slot. */
 
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00588200(int, int, int);
 void __cdecl d3_NormalizeVector(float*);
 void __cdecl fcn_00438b40(char*, int*);
@@ -21,7 +21,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 	if (selectedIndex == *(int*) (a1 + 0xa0) || selectedIndex > *(int*) (a1 + 0xdc)) {
 		return;
 	}
-	while (fcn_005373e0((void*) fcn_00588710, a4) != 0) {
+	while (main_RunFrameLoop((void*) fcn_00588710, a4) != 0) {
 		fcn_00588200(a0, a1, a2);
 		if ((float) (*(unsigned int*) 0x6b7fac - start) >
 		    *(float*) 0x665f3c) {
@@ -56,7 +56,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 	fcn_00442c00((char*) *(int*) (a1 + 0x8c + selectedIndex * 4), 1);
 	*(int*) (a1 + 0xa0) = selectedIndex;
 	start = *(unsigned int*) 0x6b7fac;
-	while (fcn_005373e0((void*) fcn_00588710, a4) != 0) {
+	while (main_RunFrameLoop((void*) fcn_00588710, a4) != 0) {
 		fcn_00588200(a0, a1, a2);
 		if ((float) (*(unsigned int*) 0x6b7fac - start) >
 		    *(float*) 0x665f3c) {

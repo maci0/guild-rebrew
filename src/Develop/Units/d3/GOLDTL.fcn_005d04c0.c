@@ -22,7 +22,7 @@ extern float g_665e64;
 char* __cdecl fcn_00445600(int, int, int, char*);
 char* __cdecl fcn_00442910(int, float*, char*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 
 
 void __cdecl fcn_005d04c0(void)
@@ -64,7 +64,7 @@ void __cdecl fcn_005d04c0(void)
 		objs[i] = o;
 		d3_ApplyObjectAnimation(o, g_6a4080, 1);
 	}
-	while (fcn_005373e0(fcn_005d04c0, 0x67fff) != 0) {
+	while (main_RunFrameLoop(fcn_005d04c0, 0x67fff) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

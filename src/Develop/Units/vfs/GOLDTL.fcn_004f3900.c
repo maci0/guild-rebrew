@@ -19,7 +19,7 @@ typedef struct {
 	void* entry_table; /* 0x20 */
 } GraveyardSlot;
 
-int __cdecl fcn_004f3900(void* stream_ctx, unsigned char* field)
+int __cdecl gv_SaveGraveyardField(void* stream_ctx, unsigned char* field)
 {
 	GraveyardSlot* slot;
 	char* entry;

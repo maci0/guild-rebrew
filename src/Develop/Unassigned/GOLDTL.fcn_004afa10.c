@@ -6,7 +6,7 @@ extern char g_7f4ca4[];
 
 void* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004ae080(char*, char*, char**, int*);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl fcn_004ae0f0(int);
 int __cdecl fcn_004ae260(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -55,7 +55,7 @@ int __cdecl fcn_004afa10(int selectionMode, int a2, int a3, char* a4, int a5)
 		if (len != 1) {
 			return 0;
 		}
-		parsedOption = fcn_0064eeec(a4 + (int) p);
+		parsedOption = atoi(a4 + (int) p);
 	}
 	if (parsedOption < 0 || parsedOption > 2) {
 		return 0;

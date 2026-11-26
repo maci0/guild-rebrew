@@ -14,7 +14,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 extern int g_772f2c;
 extern int d2_CurrentElementId;
@@ -24,10 +24,10 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004cfca0(void);
 void __cdecl fcn_00471e30(int);
 
@@ -48,7 +48,7 @@ void __cdecl fcn_004e15c0(char* state)
 	state[0x14] = (*(char*)g_6b5c60);
 	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(w, g_68bfbc * 75, 1);
-	while (fcn_005373e0(fcn_004e15c0, cut_EventLoopFlags) != 0) {
+	while (main_RunFrameLoop(fcn_004e15c0, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(w, 0, 0) == 0)
 			g_774654 = 1;
 		if (g_100f1dc == 2) {
@@ -85,14 +85,14 @@ void __cdecl fcn_004e16e0(char* state, int* event)
 	fcn_00471d80(h, 3);
 	d2_SetForm(h, 0);
 	t = io_AppendText(0x10e6, g_772f2c, *(unsigned short*) ((int*)g_772f24), *(unsigned short*) who);
-	b0 = fcn_00472250(h, 0, t);
-	b1 = fcn_00472250(h, 0, t + 1);
-	b2 = fcn_00472250(h, 0, t + 2);
+	b0 = d2_GetWindowListItem(h, 0, t);
+	b1 = d2_GetWindowListItem(h, 0, t + 1);
+	b2 = d2_GetWindowListItem(h, 0, t + 2);
 	state[0x94] = 4;
 	state[0x14] = (*(char*)g_6b5c60);
 	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(w, g_68bfbc * 75, 1);
-	while (fcn_005373e0(fcn_004e16e0, cut_EventLoopFlags) != 0) {
+	while (main_RunFrameLoop(fcn_004e16e0, cut_EventLoopFlags) != 0) {
 		fcn_004cfca0();
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == b0)

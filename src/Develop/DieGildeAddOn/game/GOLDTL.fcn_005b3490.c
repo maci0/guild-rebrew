@@ -27,7 +27,7 @@ void __cdecl d3_VisitSceneObjects(char*, int, int, void*, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_UpdateWindowDrag(char*);
 void __cdecl fcn_0046f280(int);
 void __cdecl d2_CollectDebugObject(void);
@@ -69,14 +69,14 @@ void __cdecl d2_ShowSmapDiagnostics(void)
 		}
 		io_AppendText(s_6ab588, g_778b20[i], buf);
 	}
-	if (fcn_005373e0((void*) d2_ShowSmapDiagnostics, 0x657c7) != 0) {
+	if (main_RunFrameLoop((void*) d2_ShowSmapDiagnostics, 0x657c7) != 0) {
 		win = &((D2_WIN*)g_1015f40)[w];
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
 			d2_UpdateWindowDrag((char*)win);
-		} while (fcn_005373e0((void*) d2_ShowSmapDiagnostics, 0x657c7) != 0);
+		} while (main_RunFrameLoop((void*) d2_ShowSmapDiagnostics, 0x657c7) != 0);
 	}
 	fcn_0046f280(w);
 }

@@ -36,7 +36,7 @@ int __cdecl fcn_00529670(char*, char*);
 int __cdecl fcn_0055be70(int*);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetScaledEntitySkill(char*, int);
@@ -117,7 +117,7 @@ void __cdecl fcn_00569ff0(char* e)
 			} while (--n);
 		}
 		MSG_COPY(e + 0x52);
-		fcn_00500bb0(e + 0x52, 0, 4, 0);
+		gm_AddTime(e + 0x52, 0, 4, 0);
 		*(int*) (e + 0x70) = 1;
 		return;
 	case 1:
@@ -136,7 +136,7 @@ void __cdecl fcn_00569ff0(char* e)
 					if (o != 0 && *(int*) (o + 0x184) != 0) {
 						if (fcn_00529670(o, pa) == 0) {
 							MSG_COPY(e + 0x52);
-							fcn_00500bb0(e + 0x52, 0, 4, 0);
+							gm_AddTime(e + 0x52, 0, 4, 0);
 							return;
 						}
 					}
@@ -145,7 +145,7 @@ void __cdecl fcn_00569ff0(char* e)
 			}
 		}
 		MSG_COPY(e + 0x52);
-		fcn_00500bb0(e + 0x52, 0, 0, 1);
+		gm_AddTime(e + 0x52, 0, 0, 1);
 		*(int*) (e + 0x70) = 2;
 		return;
 	case 2:
@@ -169,7 +169,7 @@ void __cdecl fcn_00569ff0(char* e)
 		}
 		*(int*) (e + 0x70) = 5;
 		MSG_COPY(e + 0x52);
-		fcn_00500bb0(e + 0x52, 0, 0xf, 0);
+		gm_AddTime(e + 0x52, 0, 0xf, 0);
 		return;
 	case 3:
 		if (*(int*) (e + 0xb4) != -1 && fcn_004c4450(*(int*) (e + 0xb4)) == 0) {
@@ -192,7 +192,7 @@ void __cdecl fcn_00569ff0(char* e)
 			fcn_004c58b0(*(int*) q, *(int*) (px + 4));
 		}
 		*(int*) (e + 0x70) = 4;
-		fcn_00500bb0(e + 0x52, 0, 0xa, 0);
+		gm_AddTime(e + 0x52, 0, 0xa, 0);
 		return;
 	case 4:
 		pb = (char*) he_StartHandlungSearch(1, 1, *(int*) (e + 0xb8));
@@ -201,7 +201,7 @@ void __cdecl fcn_00569ff0(char* e)
 			return;
 		}
 		if (*(int*) (pb + 0xd4) == *(int*) (e + 4)) {
-			fcn_00500bb0(e + 0x52, 0, 6, 0);
+			gm_AddTime(e + 0x52, 0, 6, 0);
 			return;
 		}
 		pa = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xac));

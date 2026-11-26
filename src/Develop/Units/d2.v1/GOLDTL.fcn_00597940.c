@@ -1,10 +1,10 @@
 extern void __cdecl d2_SetForm(int, int);
-extern int __cdecl fcn_0046f740(int, int, int, int);
+extern int __cdecl d2_AddElementToWindow(int, int, int, int);
 extern void __cdecl d2_SetElementImage(int, int);
 extern void __cdecl fcn_00469c40(int, int, int);
 extern void __cdecl fcn_00596d70(int, int, int *, int, int, int);
 extern void __cdecl ResetDisplayCounters(void);
-extern int __cdecl fcn_00471f80(int);
+extern int __cdecl d2_GetControlValue(int);
 extern void __cdecl d2_SetDisplayCounter(int, int);
 
 /* ADDRESS: GOLDTL 0x00597940 */
@@ -25,7 +25,7 @@ void __cdecl fcn_00597940(int a0, int a1, int a2, int a3, short *a4)
     p = (int *)0x778d50;
     do {
         if (*p == -1)
-            *p = fcn_0046f740(0, 0, 0x743, *(int *)0x772514);
+            *p = d2_AddElementToWindow(0, 0, 0x743, *(int *)0x772514);
         p += 5;
     } while ((int)p < 0x778da0);
 
@@ -92,7 +92,7 @@ void __cdecl fcn_00597940(int a0, int a1, int a2, int a3, short *a4)
     p = (int *)0x778db0;
     do {
         if (*p != -1) {
-            value = fcn_00471f80(*p);
+            value = d2_GetControlValue(*p);
             d2_SetDisplayCounter(p[-4] + 0xdf, value);
         }
         p += 0xe;
@@ -101,7 +101,7 @@ void __cdecl fcn_00597940(int a0, int a1, int a2, int a3, short *a4)
     p = (int *)0x7796f0;
     do {
         if (*p != -1) {
-            value = fcn_00471f80(*p);
+            value = d2_GetControlValue(*p);
             d2_SetDisplayCounter(p[-4] + 0xdf, value);
         }
         p += 0xe;

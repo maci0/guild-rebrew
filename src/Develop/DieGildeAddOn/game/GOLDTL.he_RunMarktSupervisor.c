@@ -71,7 +71,7 @@ void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 int __cdecl fcn_004c61d0(MarktSlot*, unsigned char);
 float __cdecl fcn_005025a0(int, int);
 char* __cdecl gm_FindKind47ByOwner(int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl fcn_00549330(char*, int);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl fcn_64d41a(char*, const char*, ...);
@@ -425,6 +425,6 @@ next_lager:
 		return;
 	}
 	*(GAME_TIMESTAMP*) (action + 0x52) = *(GAME_TIMESTAMP*) &gm_GameTime;
-	fcn_00500bb0(action + 0x52, 1, 0, 0);
+	gm_AddTime(action + 0x52, 1, 0, 0);
 	*(int*) (action + 0x70) = 0;
 }

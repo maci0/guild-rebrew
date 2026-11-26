@@ -13,7 +13,7 @@ void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl d2_ShowWirtshausRules(void)
@@ -34,7 +34,7 @@ void __cdecl d2_ShowWirtshausRules(void)
 	io_AppendText(0x1889);
 	d2_SetForm(h, 2);
 	io_AppendText(0x188a);
-	while (fcn_005373e0(d2_ShowWirtshausRules, 0x677c7) != 0) {
+	while (main_RunFrameLoop(d2_ShowWirtshausRules, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

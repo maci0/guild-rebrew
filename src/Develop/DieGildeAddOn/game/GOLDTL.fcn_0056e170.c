@@ -12,7 +12,7 @@ void __cdecl evt_RequestScriptExit(int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl ch_CreateAction(char*, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c57e0(int, int);
 void __cdecl he_FreeAction(char*);
 
@@ -55,7 +55,7 @@ void __cdecl fcn_0056e170(char* u)
 			strcpy(h + 0xf0, "bewegung/zu_boden_sinken");
 		}
 		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
 		(*(int*) (u + 0x70))++;
 		break;
 	case 3:

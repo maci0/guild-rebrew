@@ -30,9 +30,9 @@ extern char g_6b5c60[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_0046fac0(int, int, void*, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
@@ -97,11 +97,11 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);
-	w2 = fcn_00472250(h, 0, 2);
-	w3 = fcn_00472250(h, 0, 3);
-	w1 = fcn_00472250(h, 0, 1);
-	w0 = fcn_00472250(h, 0, 0);
-	w4 = fcn_00472250(h, 0, 4);
+	w2 = d2_GetWindowListItem(h, 0, 2);
+	w3 = d2_GetWindowListItem(h, 0, 3);
+	w1 = d2_GetWindowListItem(h, 0, 1);
+	w0 = d2_GetWindowListItem(h, 0, 0);
+	w4 = d2_GetWindowListItem(h, 0, 4);
 	d2_SetForm(h, 0);
 	cx = ((D2_CONTROL_TL*) (g_1015ea0))[w1].x - *(int*) (g_77255c + 4) + 2;
 	cy = ((D2_CONTROL_TL*) (g_1015ea0))[w1].height -
@@ -136,7 +136,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 		if (list1[i].sel != -1)
 			fcn_00472640(list1[i].sel, 0);
 	}
-	while (fcn_005373e0((void*) 0x5a6880, 0x677c7) != 0) {
+	while (main_RunFrameLoop((void*) 0x5a6880, 0x677c7) != 0) {
 		cur = he_StartHandlungSearch(1, 0, 0x27);
 		if (cur != 0) {
 			while (cur != 0 && *(int*) (cur + 0xac) != *(int*) (obj + 1))

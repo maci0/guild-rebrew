@@ -4,12 +4,12 @@ typedef void (__cdecl* Cb5a80d0b)(int a0, int a1, int a2, int a3);
 int __cdecl gm_CanEnterGebaeude(unsigned char* a0);
 void __cdecl fcn_00530510(void);
 void __cdecl sv_ClearObjectSelection(void);
-int __cdecl fcn_005155e0(unsigned char* a0);
+int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* a0);
 void __cdecl fcn_004c3170(unsigned char* b);
-int __cdecl fcn_005373e0(int a0, int a1);
+int __cdecl main_RunFrameLoop(int a0, int a1);
 void __cdecl init_LoadGebaeudeScene(int a0);
 int __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3, int a4);
-int __cdecl fcn_004432d0(int a0, int a1);
+int __cdecl d3_SelectSceneContext(int a0, int a1);
 void __cdecl fcn_0043aa30(int a0);
 void __cdecl fcn_005167c0(unsigned char* a0, int a1);
 void __cdecl fcn_00516c50(int a0, unsigned char* a1);
@@ -75,15 +75,15 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	*(int*) 0x6752a8 = *(int*) 0x6aada0;
 	*(int*) 0x6752ac = *(int*) 0x6aada4;
 	*(unsigned char*) 0x6752b0 = *(unsigned char*) 0x6aada8;
-	n = fcn_005155e0(buildingPtr);
+	n = init_AllocateGebaeudeSceneSlot(buildingPtr);
 	w = n * 0x3dc;
 	*(int*) (w + 0x1043378) = *(int*) 0x1043378;
 	if (n != 0) {
 		fcn_004c3170(buildingPtr);
 		if (n == -1 || *(char*) (w + 0x1043695) != 0) {
 			d2_SuppressOverlay = 1;
-			fcn_005373e0(0, 0x603c7);
-			fcn_005373e0(0, 0x603c7);
+			main_RunFrameLoop(0, 0x603c7);
+			main_RunFrameLoop(0, 0x603c7);
 			init_LoadGebaeudeScene(*buildingPtr);
 			d2_SuppressOverlay = 0;
 		}
@@ -95,7 +95,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 			p = (unsigned char*) fcn_00502cd0(*(int*) (buildingPtr + 0x5d), 2, 6, 4, 2);
 		}
 		g_675310 = *(int*) (p + 2);
-		fcn_004432d0(n, 0);
+		d3_SelectSceneContext(n, 0);
 		fcn_0043aa30(3);
 		if (*(int*) &g_6b8300 != 0) {
 			if (*(unsigned char*) 0x77666a == 2) {
@@ -207,7 +207,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	fcn_004c34d0();
 	fcn_00516ed0(*(int*) &g_7746c8);
 	fcn_0043a9c0(3);
-	fcn_004432d0((int) a0, 0);
+	d3_SelectSceneContext((int) a0, 0);
 	*(int*) &g_7ea360 = 0;
 	*(int*) &g_7746c8 = 0;
 	*(int*) &g_6791c8 = 0;

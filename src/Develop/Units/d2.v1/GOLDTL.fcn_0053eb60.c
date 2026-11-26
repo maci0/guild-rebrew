@@ -28,9 +28,9 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00468cd0(int, int);
 void __cdecl fcn_00468b80(int, char*);
 void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_005373e0(void (__cdecl*)(int), int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl main_RunFrameLoop(void (__cdecl*)(int), int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl fcn_0053eb60(int n)
@@ -61,14 +61,14 @@ void __cdecl fcn_0053eb60(int n)
 		fcn_00468bb0(ids[i], 5, g_14b5e3c, g_14b5e40, g_14b5e44, g_14b5e48, g_14b5e4c);
 	}
 	d2_SetForm(h, 2);
-	ok = fcn_00472250(h, 2, io_AppendText(0x7d));
-	while (fcn_005373e0(fcn_0053eb60, 0xc6) != 0) {
+	ok = d2_GetWindowListItem(h, 2, io_AppendText(0x7d));
+	while (main_RunFrameLoop(fcn_0053eb60, 0xc6) != 0) {
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || (g_100f1dc == 2 && d2_CurrentElementId == ok)) {
 			g_774654 = 1;
 		}
 	}
 	for (i = 0; i < n; i++) {
-		g_7e1fa0[i] = fcn_00471f80(ids[i]);
+		g_7e1fa0[i] = d2_GetControlValue(ids[i]);
 	}
 	fcn_00471e30(h);
 }

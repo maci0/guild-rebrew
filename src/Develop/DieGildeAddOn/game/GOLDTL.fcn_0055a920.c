@@ -11,7 +11,7 @@ void __cdecl he_FreeAction(char*);
 void __cdecl fcn_004c4510(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl fcn_004c5360(void);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(char, char*);
 
 /* ADDRESS: GOLDTL 0x0055a920 */
@@ -65,13 +65,13 @@ void __cdecl fcn_0055a920(char* rec)
 	} while (--left);
 	if (cnt < want) {
 		*(pos14_7f4c00*) (rec + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (rec + 0x52), 0, 5, 0);
+		gm_AddTime((pos14_7f4c00*) (rec + 0x52), 0, 5, 0);
 		*(int*) (rec + 0x84) = fcn_004c5620(-1, rec);
 	} else {
 		*(int*) (rec + 0xb0) = *(int*) (rec + 0xb0) - 1;
 		*(int*) (rec + 0xac) = *(int*) (rec + 0xac) - want;
 		*(pos14_7f4c00*) (rec + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (rec + 0x52), 0x18, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (rec + 0x52), 0x18, 0, 0);
 		*(int*) (rec + 0x84) = fcn_004c5620(0, rec);
 	}
 }

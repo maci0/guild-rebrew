@@ -49,7 +49,7 @@ void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl fcn_004c5360(void);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(GAME_TIMESTAMP*, int, int, int);
+void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
 void __cdecl fcn_004c5530(Msg499a*);
 
 #pragma optimize("y", off)
@@ -78,7 +78,7 @@ int __cdecl fcn_00499ad0(char* e)
 	fcn_004c5360();
 	fcn_004c5420(*(int*) (e + 4), 0x1c8, 4, 0, 0x4000);
 	st = (*(GAME_TIMESTAMP*)&gm_GameTime);
-	fcn_00500bb0(&st, gm_RandomMod(4) + 1, gm_RandomMod(8) * 7, 0);
+	gm_AddTime(&st, gm_RandomMod(4) + 1, gm_RandomMod(8) * 7, 0);
 	if (e[2] == 5) {
 		i = 0;
 		for (k = 0; k < 768; k++) {

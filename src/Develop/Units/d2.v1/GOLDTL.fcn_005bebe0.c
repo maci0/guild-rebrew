@@ -62,14 +62,14 @@ void __cdecl fcn_00471e30(int h);
 void __cdecl d2_SetForm(int h, int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl io_AppendText(int id, ...);
-int __cdecl fcn_0046f740(int x, int y, int id, int layer);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
 void __cdecl fcn_005340f0(int i);
 void __cdecl fcn_00534160(int x0, int y, int len, int t);
 int __cdecl fcn_0051e070(void);
 void __cdecl fcn_00532ef0(void);
-int __cdecl fcn_005373e0(void* fn, int a);
+int __cdecl main_RunFrameLoop(void* fn, int a);
 void __cdecl fcn_0057e880(int a, int b, int c, int d);
-void __cdecl fcn_00500bb0(Tbebe*, int, int, int);
+void __cdecl gm_AddTime(Tbebe*, int, int, int);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl fcn_004c6ae0(int a, int b);
 void __cdecl fcn_004c5530(MsgBebe* msg);
@@ -132,7 +132,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 	if (!(f < 5.0f)) {
 		f = 5.0f;
 	}
-	found = fcn_0046f740(x / 2 - 0x18, 4, (int) ((float) yoff[broadcastSlot] + f), d2_CurrentWindowId);
+	found = d2_AddElementToWindow(x / 2 - 0x18, 4, (int) ((float) yoff[broadcastSlot] + f), d2_CurrentWindowId);
 	fcn_00534160(x / 2 - 0x23, 0x3c, *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot), 0x4df);
 	d2_SetForm(h, 3);
 	if (slot != 0) {
@@ -176,7 +176,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 			float dur;
 
 			t = *(Tbebe*) (slot + 0x44);
-			fcn_00500bb0(&t, 5, 0, 0);
+			gm_AddTime(&t, 5, 0, 0);
 			dur = (float) gm_GetElapsedMinutes(slot + 0x44, slot + 0x52);
 			*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[found].value_1f4)) =
 				(float) gm_GetElapsedMinutes(slot + 0x44, (void*) &gm_GameTime) / dur;
@@ -199,7 +199,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 		} else if (g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) d2_RunTalenteDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunTalenteDialog, 0x677c7) != 0);
 	fcn_00532ef0();
 	fcn_00471e30(h);
 }

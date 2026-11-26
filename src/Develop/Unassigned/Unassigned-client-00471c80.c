@@ -30,7 +30,7 @@ typedef struct Slot {
 	char pad90[0x2f4 - 0x90];
 } Slot;
 
-int __cdecl fcn_00471f80(int id);
+int __cdecl d2_GetControlValue(int id);
 
 /* ADDRESS: GOLDTL 0x00471c80 */
 void __cdecl fcn_00471c80(int idx, unsigned char flags)
@@ -90,7 +90,7 @@ char* __cdecl fcn_00471f20(int j, int k)
 }
 
 /* ADDRESS: GOLDTL 0x00471f80 */
-int __cdecl fcn_00471f80(int slot)
+int __cdecl d2_GetControlValue(int slot)
 {
 	Slot* s;
 	char* d;
@@ -126,5 +126,5 @@ int __cdecl fcn_00471ff0(int j, int k)
 	if (j > *(int*) (m + 0x2c)) {
 		return 0;
 	}
-	return fcn_00471f80((*(int**) (m + 0x28))[j]);
+	return d2_GetControlValue((*(int**) (m + 0x28))[j]);
 }

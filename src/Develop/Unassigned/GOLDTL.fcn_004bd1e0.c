@@ -16,7 +16,7 @@ typedef BoxVtx* (__cdecl* BoxFn)(char* name, char* obj, float* m);
 extern int g_10058e0;
 extern BoxRec* g_10058e4;
 
-int __cdecl fcn_0065f2f0(const char* a, const char* b, int n);
+int __cdecl _strnicmp(const char* a, const char* b, int n);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 void* __cdecl fcn_0064fde9(void* p, int size);
 
@@ -29,7 +29,7 @@ char __cdecl fcn_004bd1e0(char* name)
 	char* obj;
 	int i;
 
-	if (fcn_0065f2f0(name, "bk_", 3) != 0 && fcn_0065f2f0(name, "!bk_", 4) != 0) {
+	if (_strnicmp(name, "bk_", 3) != 0 && _strnicmp(name, "!bk_", 4) != 0) {
 		return 1;
 	}
 	for (i = 0; i < g_10058e0; i++) {

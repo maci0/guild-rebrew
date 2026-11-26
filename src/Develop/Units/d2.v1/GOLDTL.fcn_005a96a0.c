@@ -53,7 +53,7 @@ int __cdecl fcn_004e6f10(int a);
 void __cdecl fcn_005cadc0(int, int, int, int, void*);
 void __cdecl fcn_0052f7a0(void);
 void __cdecl d2_ShowAmtInfo(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
@@ -164,7 +164,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 				d2_ShowAmtInfo(id, 0);
 			}
 		}
-	} while (fcn_005373e0(d2_RunAmtsbewerbungDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_RunAmtsbewerbungDialog, 0x677c7) != 0);
 	if (d != -1) {
 		fcn_00471e30(d);
 	}

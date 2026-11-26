@@ -14,7 +14,7 @@ typedef struct Time14 {
 unsigned short __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
-void __cdecl fcn_00500bb0(Time14* t, int hours, int minutes, int seconds);
+void __cdecl gm_AddTime(Time14* t, int hours, int minutes, int seconds);
 void __cdecl fcn_004c5530(void* msg);
 int __cdecl fcn_004c6a00(void* msg);
 
@@ -136,9 +136,9 @@ void __cdecl fcn_004fb7a0(void)
 		*(unsigned short*) (ev + 0x34) = g_7f4c0c;
 		((Time14*) (ev + 0x28))->min = 0;
 		if ((unsigned short) g_7f4c04 < 0x17 && (unsigned short) g_7f4c04 >= 7) {
-			fcn_00500bb0((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
+			gm_AddTime((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		} else {
-			fcn_00500bb0((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
+			gm_AddTime((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		}
 	} else if (nextPhase == 2) {
 		ev[4] = 'N';
@@ -153,9 +153,9 @@ void __cdecl fcn_004fb7a0(void)
 		*(int*) (ev + 0x74) = 1000;
 		((Time14*) (ev + 0x28))->min = 0;
 		if ((unsigned short) g_7f4c04 >= 0x17) {
-			fcn_00500bb0((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
+			gm_AddTime((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		} else {
-			fcn_00500bb0((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
+			gm_AddTime((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		}
 	} else if (nextPhase == 3) {
 state3:
@@ -170,9 +170,9 @@ state3:
 		*(int*) (ev + 0x58) = -1;
 		*(int*) (ev + 0x74) = 1000;
 		if ((unsigned short) g_7f4c04 >= 0x17) {
-			fcn_00500bb0((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
+			gm_AddTime((Time14*) (ev + 0x28), (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		} else {
-			fcn_00500bb0((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
+			gm_AddTime((Time14*) (ev + 0x28), gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 		}
 	} else {
 		st[8] = nextPhase;

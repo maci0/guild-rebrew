@@ -8,7 +8,7 @@ int __cdecl fcn_004c4450(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl he_FreeAction(char*);
 
@@ -41,7 +41,7 @@ void __cdecl fcn_0054b2b0(char* u)
 			fcn_00545d40(*(int*) (b + 4), -1, text, 0, 0x5fa, 0);
 		}
 		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 		*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 	} else {
 		he_FreeAction(u);

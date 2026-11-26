@@ -35,14 +35,14 @@ void __cdecl fcn_005ced80(int dlg, int* list, int* bars, int* icons);
 void __cdecl fcn_005ce800(int id, int* out, int* value, int* slots,
 	unsigned char* type, int text, Ce800Config cfg, int* handle, int source);
 void __cdecl fcn_00533a60(int a, int b, int* c, int d, int e, int f);
-int __cdecl fcn_00471f80(int a);
+int __cdecl d2_GetControlValue(int a);
 void __cdecl fcn_00472380(int a, int b, int c, int d);
 void __cdecl fcn_00472640(int a, int b);
 void __cdecl fcn_004c4510(void* p, unsigned int value);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, unsigned int* value);
 void __cdecl fcn_004c4670(int a, int b, int off, void* value);
 void __cdecl fcn_004c5360(void);
-int __cdecl fcn_005373e0(void* fn, int msg);
+int __cdecl main_RunFrameLoop(void* fn, int msg);
 void __cdecl fcn_00471e30(int a);
 
 /* ADDRESS: GOLDTL 0x005ceef0 */
@@ -117,7 +117,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 					if (d2_CurrentElementId == v12[v23]) {
 						if (v23 < 7 && v12[v23] != -1) {
 							g_100f1dc = -1;
-							v5 = fcn_00471f80(v12[v23]);
+							v5 = d2_GetControlValue(v12[v23]);
 							fcn_005b1ce0(a0,
 								*(unsigned int*) ((char*) v27 + v23 * 8),
 								v5);
@@ -137,7 +137,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 					v23 += 1;
 				} while (v23 < 7);
 			} else if (!g_775348 && v13 != -1 && d2_CurrentElementId == v13) {
-				v18[0] = fcn_00471f80(v13);
+				v18[0] = d2_GetControlValue(v13);
 				fcn_005b1ed0(a0, (float) v18[0] * 0.01f);
 			}
 		}
@@ -171,7 +171,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 					do {
 						if (v23 == v12[v22]) {
 							if (v22 < 7) {
-								v5 = fcn_00471f80(v12[v22]);
+								v5 = d2_GetControlValue(v12[v22]);
 								fcn_005b1ce0(a0,
 									*(unsigned int*) ((char*) v27 + v22 * 8), v5);
 								v23 = 0;
@@ -191,7 +191,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 					} while (v22 < 7);
 				}
 			} else if (!g_775348) {
-				v15 = fcn_00471f80(v16);
+				v15 = d2_GetControlValue(v16);
 				if (d2_CurrentElementId == v30) {
 					fcn_005ced80(v28, v27, v12, v17);
 					g_775348 = 1;
@@ -206,7 +206,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 						v22 = v14[v24];
 						if (v23 == v22) {
 							cfg = *(Ce800Config*) &a1[0xda];
-							if (fcn_00471f80(v22)) {
+							if (d2_GetControlValue(v22)) {
 								switch (v24) {
 								case 0:
 									cfg.flags |= 1;
@@ -257,9 +257,9 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 				}
 			}
 		}
-		if (!fcn_005373e0((void*) fcn_005ceef0, 0x677c7)) {
+		if (!main_RunFrameLoop((void*) fcn_005ceef0, 0x677c7)) {
 			if (!g_775348) {
-				v15 = fcn_00471f80(v16);
+				v15 = d2_GetControlValue(v16);
 			}
 			v15 = fcn_0050b750(v15, g_773d75);
 			fcn_004c4510(a0, *(unsigned int*) ((char*) a0 + 1));

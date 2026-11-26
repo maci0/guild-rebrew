@@ -12,11 +12,11 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_SelectRadioGroup(int, int);
-void __cdecl fcn_00469470(int, int);
-int __cdecl fcn_005373e0(void*, int);
+void __cdecl d2_AddToRadioGroup(int, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl d2_ChooseMission(int);
 void __cdecl d2_ClearRadioGroup(int);
@@ -45,18 +45,18 @@ int __cdecl fcn_004b41b0(void)
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	t = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca, 0x1acb, 0x1acc);
-	b0 = fcn_00472250(h, 0, t);
-	b1 = fcn_00472250(h, 0, t + 1);
-	b2 = fcn_00472250(h, 0, t + 2);
-	b3 = fcn_00472250(h, 0, t + 3);
-	b4 = fcn_00472250(h, 0, t + 4);
-	b5 = fcn_00472250(h, 0, t + 5);
+	b0 = d2_GetWindowListItem(h, 0, t);
+	b1 = d2_GetWindowListItem(h, 0, t + 1);
+	b2 = d2_GetWindowListItem(h, 0, t + 2);
+	b3 = d2_GetWindowListItem(h, 0, t + 3);
+	b4 = d2_GetWindowListItem(h, 0, t + 4);
+	b5 = d2_GetWindowListItem(h, 0, t + 5);
 	if (g_6a375c > 1)
-		b6 = fcn_00472250(h, 0, io_AppendText((int) g_681164, 2, 0x1acd));
+		b6 = d2_GetWindowListItem(h, 0, io_AppendText((int) g_681164, 2, 0x1acd));
 	lst = d2_CreateRadioGroup(6, b0, b1, b2, b3, b4, b5);
 	d2_SelectRadioGroup(lst, 0);
-	fcn_00469470(lst, fcn_00472250(h, 0, io_AppendText(0x7e)));
-	while (fcn_005373e0(fcn_004b41b0, main_LoopFlags) != 0) {
+	d2_AddToRadioGroup(lst, d2_GetWindowListItem(h, 0, io_AppendText(0x7e)));
+	while (main_RunFrameLoop(fcn_004b41b0, main_LoopFlags) != 0) {
 		d2_UpdateRadioGroup(lst);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1) {
 			result = 0xff;

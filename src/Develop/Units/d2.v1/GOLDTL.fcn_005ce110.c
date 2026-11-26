@@ -9,7 +9,7 @@ void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004ad190(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_005ce0f0(void);
 void __cdecl fcn_00471e30(int);
 
@@ -144,6 +144,6 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005ce0f0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005ce0f0, 0x657c7) != 0);
 	fcn_00471e30(dialog);
 }

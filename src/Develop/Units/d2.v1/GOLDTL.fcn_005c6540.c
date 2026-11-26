@@ -56,11 +56,11 @@ void __cdecl fcn_00525ef0(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005dbf10(Ent* e, Req* r);
 
@@ -103,7 +103,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 					fcn_00471af0(dlg, 0);
 					if (fcn_00526120(text, 1) != 0) {
 						for (i = 0; i < 6; i++) {
-							if (((Btn*)g_776c60)[i].item != 0 && (id = fcn_00471f80(((Btn*)g_776c60)[i].btn)) != 0) {
+							if (((Btn*)g_776c60)[i].item != 0 && (id = d2_GetControlValue(((Btn*)g_776c60)[i].btn)) != 0) {
 								fcn_004c51f0(-1, ((Player*)g_775318)->handle, *((Btn*)g_776c60)[i].item, id, g_773d75, 0);
 								d2_SetElementValue(((Btn*)g_776c60)[i].btn, 0, 0x3e7, 0);
 							}
@@ -115,7 +115,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 					g_774654 = 1;
 				}
 			}
-		} while (fcn_005373e0(d2_ConfirmUseObjekt, 0x677c7) != 0);
+		} while (main_RunFrameLoop(d2_ConfirmUseObjekt, 0x677c7) != 0);
 		fcn_00471e30(dlg);
 		if (buy == 0) {
 			return 0;

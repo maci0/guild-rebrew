@@ -9,7 +9,7 @@ typedef Slot170_7731b8 Slot170;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern Slot170_7731b8 g_7731b8[8];
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 
 
 void __cdecl fcn_004efcd0(void)
@@ -19,7 +19,7 @@ void __cdecl fcn_004efcd0(void)
 	int j;
 
 	save = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < 3; j++) {
 			if (g_7731b8[i].h[j] != 0) {
@@ -28,5 +28,5 @@ void __cdecl fcn_004efcd0(void)
 			}
 		}
 	}
-	fcn_004432d0(save, 1);
+	d3_SelectSceneContext(save, 1);
 }

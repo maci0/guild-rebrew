@@ -50,7 +50,7 @@ int __cdecl fcn_00466ee0(int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_00508640(int a, int b);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -117,7 +117,7 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 		if (r->icon == -1) {
 			continue;
 		}
-		ent = fcn_00471f80(r->icon);
+		ent = d2_GetControlValue(r->icon);
 		r->ent = ent;
 		q = (char*) fcn_00502cd0(list, 1, 0, r->key);
 		if (q != 0 && fcn_00508640(*(int*) (q + 0xe), r->key) != 0) {

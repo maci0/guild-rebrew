@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern Rec7dc6e0 g_7dc6e0[64];
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_00445600(char*, int, char*, char*);
 char* __cdecl he_CreateAnimatedEntityMarker(char*, char*, char*);
 
@@ -27,18 +27,18 @@ void __cdecl he_CreateGfxInfo(unsigned char* p, char* name, char* entity)
 	if (i == 0x40)
 		goto done;
 	slot = &g_7dc6e0[i];
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	created = fcn_00445600(0, 0x40, entity, 0);
 	if (created == 0) {
 		sprintf(buf, "he_CreateGfxInfo(): invalid parent :%s", entity);
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 	} else {
 		slot->b = (char*) p;
 		slot->a = *(int*) (p + 4);
 		slot->c = 0;
 		*(unsigned char**) (p + 0x88) = (unsigned char*) slot;
 		he_CreateAnimatedEntityMarker((char*) slot, name, entity);
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 	}
 done:
 	return;

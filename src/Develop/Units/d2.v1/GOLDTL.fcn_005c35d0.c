@@ -11,17 +11,17 @@ int __cdecl fcn_00526120(int, int);
 void* __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(void*);
 void __cdecl fcn_00471e30(void*);
-int __cdecl fcn_0050cf50(char*, int);
+int __cdecl gm_CalculateGebaeudeValue(char*, int);
 int __cdecl fcn_0050b710(int, char);
 int __cdecl d2_SetForm(void*, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(void*, int, int);
+int __cdecl d2_GetWindowListItem(void*, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_0050b750(int, char);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_00526010(char*, int, char);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -42,17 +42,17 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 	}
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac5d8);
 	d2_CenterDialogWindows(dlg);
-	x = fcn_0050cf50(e, *(signed char*) (e + 0x5c));
+	x = gm_CalculateGebaeudeValue(e, *(signed char*) (e + 0x5c));
 	w = fcn_0050b710(x, g_773d75);
 	d2_SetForm(dlg, 2);
-	ctl = fcn_00472250(dlg, 2,
+	ctl = d2_GetWindowListItem(dlg, 2,
 	                   io_AppendText(0x17de, *(unsigned short*) (e + 0x25), e,
 	                                g_773d75));
 	x = (int) ((double) w * 10.0);
 	y = (int) ((double) w * 0.5);
 	fcn_00472380(ctl, y, x, w);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_005373e0(0, 0x677c7);
+	main_RunFrameLoop(0, 0x677c7);
 	do {
 		x = gm_SearchTable67(id);
 		if ((*(unsigned char*) (e + 0x5b) & 4) != 0 || x == 0) {
@@ -67,7 +67,7 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 
 			if (fcn_00526010((char*) (0x7f4ca0 +
 			                          g_774970 * 0x21c),
-			                 fcn_0050b750(fcn_00471f80(ctl), g_773d75), g_773d75)) {
+			                 fcn_0050b750(d2_GetControlValue(ctl), g_773d75), g_773d75)) {
 				*(char*) (pkt + 4) = 0x21;
 				*(int*) (pkt + 8) = *(int*) (g_7f4ca4 +
 				                             *(unsigned short*) (e + 0x25) * 0x21c);
@@ -75,7 +75,7 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 				*(char*) (pkt + 0x36) = 9;
 				*(int*) (pkt + 0x58) = *(int*) (e + 1);
 				*(int*) (pkt + 0x5c) = fcn_0050b750(
-				    fcn_00471f80(ctl),
+				    d2_GetControlValue(ctl),
 				    g_773d75);
 				*(int*) (pkt + 0x60) = *(int*) (g_7f4ca4 +
 				                                g_774970 * 0x21c);
@@ -86,6 +86,6 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 		} else if (g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) d2_RunSellGebaeudeDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunSellGebaeudeDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 }

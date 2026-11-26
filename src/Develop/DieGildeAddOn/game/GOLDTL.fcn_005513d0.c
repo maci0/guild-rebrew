@@ -9,7 +9,7 @@ extern int gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_004c5980(void*);
 int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
@@ -53,7 +53,7 @@ void __cdecl fcn_005513d0(char* action)
 				msg[0x30] = 2;
 				*(int*) (msg + 0x20) = g_7f4c08;
 				*(short*) (msg + 0x24) = g_7f4c0c;
-				fcn_00500bb0(msg + 0x18, 0, 0x1e, 0);
+				gm_AddTime(msg + 0x18, 0, 0x1e, 0);
 				fcn_004c5980(msg);
 			}
 			*(float*) (action + 0xac) = 0;

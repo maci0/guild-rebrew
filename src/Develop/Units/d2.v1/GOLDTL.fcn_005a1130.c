@@ -1,9 +1,9 @@
 int __cdecl d2_ClearWindowChildren();
-int __cdecl fcn_0046f740();
+int __cdecl d2_AddElementToWindow();
 int __cdecl fcn_00471af0();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl fcn_00471e30();
-int __cdecl fcn_00472250();
+int __cdecl d2_GetWindowListItem();
 int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
 int __cdecl fcn_004927c0();
@@ -18,7 +18,7 @@ int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_00532ef0();
 int __cdecl fcn_005340f0();
-int __cdecl fcn_005373e0();
+int __cdecl main_RunFrameLoop();
 int __cdecl d2_ShowWirtshausRules();
 int __cdecl fcn_005a0cd0();
 int __cdecl fcn_005a1130();
@@ -48,7 +48,7 @@ int __cdecl fcn_005a1130(char* a0, int window)
 		x = 0x1c;
 		y = 0x1d;
 		while (i < *(unsigned char*) (self + 0x10)) {
-			fcn_0046f740(x, y, *(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &d2_CurrentWindowId);
+			d2_AddElementToWindow(x, y, *(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &d2_CurrentWindowId);
 			i++;
 			if (i % 8 == 0) x = 0; else x += 0x3a;
 			y = 0x1d + (i > 7 ? 0x29 : 0);
@@ -61,9 +61,9 @@ int __cdecl fcn_005a1130(char* a0, int window)
 		y = 0x1d;
 		while (i < *(unsigned char*) (self + 0x10)) {
 			if (*(int*) (self + 0x28) == 4) {
-				fcn_0046f740(x, y, 0x761, *(int*) &d2_CurrentWindowId);
+				d2_AddElementToWindow(x, y, 0x761, *(int*) &d2_CurrentWindowId);
 			} else {
-				fcn_0046f740(x, y, *(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &d2_CurrentWindowId);
+				d2_AddElementToWindow(x, y, *(unsigned char*) (self + 0x18 + i) + 0x75a, *(int*) &d2_CurrentWindowId);
 			}
 			i++;
 			if (i % 8 == 0) x = 0; else x += 0x3a;
@@ -78,7 +78,7 @@ int __cdecl fcn_005a1130(char* a0, int window)
 		x = 0x1c;
 		y = 0x1d;
 		while (i < *(unsigned char*) (self + 0x34)) {
-			fcn_0046f740(x, y, *(unsigned char*) (self + 0x3c + i) + 0x75a, *(int*) &d2_CurrentWindowId);
+			d2_AddElementToWindow(x, y, *(unsigned char*) (self + 0x3c + i) + 0x75a, *(int*) &d2_CurrentWindowId);
 			i++;
 			if (i % 8 == 0) x = 0; else x += 0x3a;
 			y = 0x1d + (i > 7 ? 0x29 : 0);
@@ -91,9 +91,9 @@ int __cdecl fcn_005a1130(char* a0, int window)
 		y = 0x1d;
 		while (i < *(unsigned char*) (self + 0x34)) {
 			if (*(int*) (self + 0x28) == 4) {
-				fcn_0046f740(x, y, 0x761, *(int*) &d2_CurrentWindowId);
+				d2_AddElementToWindow(x, y, 0x761, *(int*) &d2_CurrentWindowId);
 			} else {
-				fcn_0046f740(x, y, *(unsigned char*) (self + 0x3c + i) + 0x75a, *(int*) &d2_CurrentWindowId);
+				d2_AddElementToWindow(x, y, *(unsigned char*) (self + 0x3c + i) + 0x75a, *(int*) &d2_CurrentWindowId);
 			}
 			i++;
 			if (i % 8 == 0) x = 0; else x += 0x3a;

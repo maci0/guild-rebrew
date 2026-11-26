@@ -46,7 +46,7 @@ extern char* g_1015ea0;
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-int __cdecl fcn_0046f740(int x, int y, int a3, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00472640(int i, int flag);
@@ -59,16 +59,16 @@ int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
 	int b;
 
 	cx = x + ((fcn_005caaa0_Def*)g_772500)[1498].w / 2;
-	selection->tile = fcn_0046f740(x, y, 0x5da, d2_CurrentWindowId);
+	selection->tile = d2_AddElementToWindow(x, y, 0x5da, d2_CurrentWindowId);
 	selection->bar = -1;
 	if (selection->e != 0) {
-		selection->icon = fcn_0046f740(cx - ((fcn_005caaa0_Def*)g_772500)[*(int*) (selection->e + 0x18c)].w / 2 - 3, y + 1, *(int*) (selection->e + 0x18c), d2_CurrentWindowId);
-		fcn_0046f740(x + 3, y + 3, selection->f1c, d2_CurrentWindowId);
+		selection->icon = d2_AddElementToWindow(cx - ((fcn_005caaa0_Def*)g_772500)[*(int*) (selection->e + 0x18c)].w / 2 - 3, y + 1, *(int*) (selection->e + 0x18c), d2_CurrentWindowId);
+		d2_AddElementToWindow(x + 3, y + 3, selection->f1c, d2_CurrentWindowId);
 		if (selection->f20 != 0)
-			fcn_0046f740(x + 3, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, selection->f20, d2_CurrentWindowId);
+			d2_AddElementToWindow(x + 3, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, selection->f20, d2_CurrentWindowId);
 		if (selection->f24 != 0)
-			fcn_0046f740(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, y + 3, selection->f24, d2_CurrentWindowId);
-		fcn_0046f740(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, selection->f28, d2_CurrentWindowId);
+			d2_AddElementToWindow(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, y + 3, selection->f24, d2_CurrentWindowId);
+		d2_AddElementToWindow(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, selection->f28, d2_CurrentWindowId);
 		if (selection->e[2] != 6) {
 			b = fcn_004677e0(cx - 0x23, ((fcn_005caaa0_Def*)g_772500)[1498].h + y + 2, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 			selection->bar = b;
@@ -79,16 +79,16 @@ int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
 			fcn_00472640(selection->bar, 0);
 		}
 		if (*(int*) (selection->e + 0x210) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id)
-			fcn_0046f740(((fcn_005caaa0_Def*)g_772500)[1498].w + x, y, 0x6d3, d2_CurrentWindowId);
+			d2_AddElementToWindow(((fcn_005caaa0_Def*)g_772500)[1498].w + x, y, 0x6d3, d2_CurrentWindowId);
 		if (selection->f30 != 0) {
 			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].value_05c = 1;
 			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].flags_1d0 = 3;
 			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].associated_object = selection->e;
 		}
 		if (selection->e[2] == 5 || selection->e[2] == 6 || selection->e[2] == 7)
-			fcn_0046f740(x - 0x20, y, *(int*) (selection->e + 0x54), d2_CurrentWindowId);
+			d2_AddElementToWindow(x - 0x20, y, *(int*) (selection->e + 0x54), d2_CurrentWindowId);
 	} else {
-		fcn_0046f740(cx - ((fcn_005caaa0_Def*)g_772500)[1275].w / 2 - 3, y + 1, 0x4fb, d2_CurrentWindowId);
+		d2_AddElementToWindow(cx - ((fcn_005caaa0_Def*)g_772500)[1275].w / 2 - 3, y + 1, 0x4fb, d2_CurrentWindowId);
 	}
 	return 0;
 }

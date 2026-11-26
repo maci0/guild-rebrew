@@ -15,7 +15,7 @@ extern char g_6a95e8[];
 extern int g_7746a0;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void (__cdecl*)(int, char*), int);
+int __cdecl main_RunFrameLoop(void (__cdecl*)(int, char*), int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunDomizilKabinettDialog(int, char*);
 void __cdecl d2_RunSpyCabinetDialog(int);
@@ -35,7 +35,7 @@ void __cdecl fcn_0058af00(int a, char* b)
 	k3 = 0;
 	k4 = 0;
 	fcn_005338a0();
-	while (fcn_005373e0(fcn_0058af00, 0x67fff) != 0) {
+	while (main_RunFrameLoop(fcn_0058af00, 0x67fff) != 0) {
 		if (g_7746d8 & 0x400) {
 			k1 = RegisterStatusText(g_6a9640, g_14b5308, 0x16);
 			k2 = RegisterStatusText(g_6a9624, g_14b538c, 0x16);

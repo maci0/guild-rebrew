@@ -2,7 +2,7 @@
 
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
 /* ADDRESS: GOLDTL 0x0055ac00 */
@@ -13,7 +13,7 @@ void __cdecl fcn_0055ac00(char* e)
 	}
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	if (*(unsigned short*) (e + 0x56) >= 0x11) {
-		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0x18, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0x18, 0, 0);
 	}
 	*(unsigned short*) (e + 0x56) = 0x11;
 	*(int*) (e + 0x58) = 0;

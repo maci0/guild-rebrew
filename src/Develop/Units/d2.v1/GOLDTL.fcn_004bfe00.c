@@ -30,7 +30,7 @@ void __cdecl fcn_004c6e20(int, void *);
 void __cdecl fcn_004c6ea0(int);
 int __cdecl gm_SearchTable67(int);
 void __cdecl fcn_00533bb0(int, int, void *, int, int, int, int);
-int __cdecl fcn_005373e0(void *, int);
+int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_005b0230(void *);
 int __cdecl fcn_005b0dd0(void *);
 void __cdecl fcn_005b11f0(void *);
@@ -91,7 +91,7 @@ int __cdecl fcn_004bfe00(char *obj)
 	fcn_00533bb0(d2_CurrentWindowId, 5, forms, 3,
 		*(int *) 0x14b5e90, *(int *) 0x14b5e94, *(int *) 0x14b5e98);
 	form0 = forms[0]; form1 = forms[1]; form2 = forms[2];
-	while (fcn_005373e0((void *) 0x4bfe00, 0x657c7) != 0) {
+	while (main_RunFrameLoop((void *) 0x4bfe00, 0x657c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

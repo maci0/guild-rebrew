@@ -20,12 +20,12 @@ int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl fcn_005ca560(void*);
 void __cdecl fcn_005ca740(int, int, int, int, void*, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_004c4eb0(char*);
 int __cdecl fcn_004c6900(int*);
 void __cdecl fcn_004c4ef0(char*);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00471e30(int);
@@ -140,9 +140,9 @@ void __cdecl fcn_005a2080(int building, int table)
 			} else if (state == 4) {
 				io_AppendText((char*) 0x1891);
 			} else if (state == 3) {
-				btn = fcn_00472250(win, 2, io_AppendText((char*) 0x188f));
+				btn = d2_GetWindowListItem(win, 2, io_AppendText((char*) 0x188f));
 			} else if (state == 1) {
-				btn = fcn_00472250(win, 2, io_AppendText((char*) 0x1890));
+				btn = d2_GetWindowListItem(win, 2, io_AppendText((char*) 0x1890));
 			}
 		}
 		if (g_14ce8e0 != 0) {
@@ -159,7 +159,7 @@ void __cdecl fcn_005a2080(int building, int table)
 				fcn_004c4ef0("stammtisch join H-Plr");
 				n = fcn_004c4450(next);
 				while (n == 0) {
-					fcn_005373e0(0, 0x20007);
+					main_RunFrameLoop(0, 0x20007);
 					n = fcn_004c4450(next);
 				}
 				if (n == 1) {
@@ -172,7 +172,7 @@ void __cdecl fcn_005a2080(int building, int table)
 				fcn_00526120(buf, 0);
 			}
 		}
-		if (!fcn_005373e0((void*) 0x5a1e40, 0x677c7)) {
+		if (!main_RunFrameLoop((void*) 0x5a1e40, 0x677c7)) {
 			fcn_00471e30(win);
 			return;
 		}

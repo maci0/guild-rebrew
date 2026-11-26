@@ -6,7 +6,7 @@ extern int g_7f4c06;
 
 
 int sprintf(char*, const char*, ...);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00442e30(void);
 void __cdecl fcn_00514120(char*);
 void __cdecl ls_SaveGame(char*, char*, int);
@@ -21,7 +21,7 @@ void __cdecl main_LoadCitySelectionScene(char* name, int net)
 {
 	char path[0x104];
 
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	fcn_00442e30();
 	fcn_00514120(name);
 	if (net != 0) {
@@ -37,7 +37,7 @@ void __cdecl main_LoadCitySelectionScene(char* name, int net)
 	gm_ResetAllEntities();
 	gm_CleanupObjectEntities();
 	fcn_00510930();
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	fcn_00442e30();
 	if (fcn_0051e070() == 0) {
 		d3_LoadScene("scenes/*ChooseCity.ed3", 0, 0);

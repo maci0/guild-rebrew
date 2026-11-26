@@ -9,7 +9,7 @@ int __cdecl fcn_004790d0(void*);
 int __cdecl fcn_004799d0(int, int, unsigned char, unsigned char, unsigned char, void*);
 
 /* ADDRESS: GOLD 0x00476210 */
-void __cdecl fcn_00476210(int x, int y, int r, int g, int b)
+void __cdecl d2_Plot(int x, int y, int r, int g, int b)
 {
 	GOLD_GUI_WINDOW* win;
 	int border;

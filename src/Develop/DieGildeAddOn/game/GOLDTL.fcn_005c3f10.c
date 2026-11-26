@@ -79,7 +79,7 @@ int __cdecl fcn_00504bd0(int a);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl fcn_00473a90(int a, int b);
-int __cdecl fcn_0050cf50(char* ent, int kind);
+int __cdecl gm_CalculateGebaeudeValue(char* ent, int kind);
 int __cdecl fcn_00504f30(int a, int b);
 int __cdecl he_StartHandlungSearch(int a, int b, int c);
 int __cdecl fcn_005462a0(void);
@@ -89,12 +89,12 @@ void __cdecl fcn_004727a0(int a, int b);
 int __cdecl fcn_00519190(int id, ...);
 void __cdecl io_FormatTextBuffer(char* out, int id, ...);
 int __cdecl fcn_00526120(char* text, int mode);
-int __cdecl fcn_00472250(int dlg, int a, int b);
+int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 void __cdecl fcn_00472640(int a, int b);
 void __cdecl d2_SetBildArgument(int a, int b);
 void __cdecl fcn_00471af0(int a, int b);
 void __cdecl fcn_00471e30(int a);
-int __cdecl fcn_00471f80(int a);
+int __cdecl d2_GetControlValue(int a);
 void __cdecl fcn_004c4510(char* ent, int id);
 void __cdecl fcn_004c4700(int a, int b, int c, void* d);
 void __cdecl fcn_004c5150(int a, int b, int c, int d);
@@ -114,7 +114,7 @@ void __cdecl fcn_005c30e0(int a);
 void __cdecl d2_RunSellGebaeudeDialog(int a);
 void __cdecl d2_ShowTechTreeEffects(int a);
 void __cdecl d2_RunFireExtinguishDialog(int a);
-int __cdecl fcn_005373e0(void* fn, int message);
+int __cdecl main_RunFrameLoop(void* fn, int message);
 
 /* ADDRESS: GOLDTL 0x005c3f10 */
 void __cdecl fcn_005c3f10(char* ent)
@@ -168,7 +168,7 @@ void __cdecl fcn_005c3f10(char* ent)
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac690);
 	d2_CenterDialogWindows(dlg);
 	fcn_00473a90(0, 0);
-	v.ptr = fcn_0050cf50(ent, ent[0x5c]);
+	v.ptr = gm_CalculateGebaeudeValue(ent, ent[0x5c]);
 	fcn_00504f30((unsigned char) ent[0], g_774970);
 	if ((*(unsigned char*) (ent + 0x5a) & 2) != 0
 	    && *(unsigned short*) (ent + 0x25) != g_774970) {
@@ -230,10 +230,10 @@ void __cdecl fcn_005c3f10(char* ent)
 				    (unsigned char) ent[0x65]);
 			if (v.mode != 3 && v.mode != 5 && v.rec[0] != 1) {
 				if (v.other != 0)
-					v.h54 = fcn_00472250(dlg, 1,
+					v.h54 = d2_GetWindowListItem(dlg, 1,
 					    fcn_00519190(0x17aa));
 				else if (v.mode != 2 || v.rec[0] == 0x10)
-					v.h20 = fcn_00472250(dlg, 1,
+					v.h20 = d2_GetWindowListItem(dlg, 1,
 					    fcn_00519190(0x17ad));
 				if ((*(unsigned char*) (ent + 0x5b) & 2) != 0)
 					fcn_00472640(v.h20, 0);
@@ -247,10 +247,10 @@ build_other:
 			    (int) ent, n2 + 0x17b1, n2 + 0x17bb, v.ptr);
 			if (*(unsigned short*) (ent + 0x25) == g_774970) {
 				if (v.rec[0] == 0x21)
-					v.h38 = fcn_00472250(dlg, 1,
+					v.h38 = d2_GetWindowListItem(dlg, 1,
 					    fcn_00519190(0x17fc, ent + 5));
 				else
-					v.h38 = fcn_00472250(dlg, 1,
+					v.h38 = d2_GetWindowListItem(dlg, 1,
 					    fcn_00519190(0x17a1, ent + 5));
 				d2_SetBildArgument(v.h38, 0x10);
 			}
@@ -258,36 +258,36 @@ build_other:
 				fcn_00519190(0x17a2,
 				    (unsigned char) ent[0x65]);
 			if (v.mode == 2) {
-				v.h48 = fcn_00472250(dlg, 1,
+				v.h48 = d2_GetWindowListItem(dlg, 1,
 				    fcn_00519190(0x17af));
 			} else {
 				if ((*(unsigned char*) (ent + 0x5a) & 2)
 				    != 0)
-					v.h44 = fcn_00472250(dlg, 1,
+					v.h44 = d2_GetWindowListItem(dlg, 1,
 					    fcn_00519190(0x17a7));
 				else
-					v.h1c = fcn_00472250(dlg, 1,
+					v.h1c = d2_GetWindowListItem(dlg, 1,
 					    fcn_00519190(0x17a4));
 			}
-			v.h3c = fcn_00472250(dlg, 1,
+			v.h3c = d2_GetWindowListItem(dlg, 1,
 			    fcn_00519190(0x17a5));
 			if ((*(unsigned char*) (ent + 0x5a) & 0x18) == 0
 			    && v.mode != 2 && v.rec[0] != 0x10)
-				v.h30 = fcn_00472250(dlg, 1,
+				v.h30 = d2_GetWindowListItem(dlg, 1,
 				    fcn_00519190(0x17a6));
 			if (v.rec[0] != 3 && v.rec[0] != 0x21)
-				v.h34 = fcn_00472250(dlg, 1,
+				v.h34 = d2_GetWindowListItem(dlg, 1,
 				    fcn_00519190(0x17ac));
 			if ((unsigned char) v.rec[0x21] > 1)
-				v.h28 = fcn_00472250(dlg, 1,
+				v.h28 = d2_GetWindowListItem(dlg, 1,
 				    fcn_00519190(0x17a8));
 			else
 				v.h28 = -1;
 			if (v.mode != 2)
-				v.h18 = fcn_00472250(dlg, 1,
+				v.h18 = d2_GetWindowListItem(dlg, 1,
 				    fcn_00519190(0x17ab));
 			if (v.hover != 0)
-				v.h58 = fcn_00472250(dlg, 1,
+				v.h58 = d2_GetWindowListItem(dlg, 1,
 				    fcn_00519190(0x17b0));
 			if (*(unsigned short*) (ent + 0x27) == g_774970) {
 				fcn_004727a0(dlg, 1);
@@ -295,12 +295,12 @@ build_other:
 				    && *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
 
 					+ 0x170) != (int) ent)
-					v.h4c = fcn_00472250(dlg, 1,
+					v.h4c = d2_GetWindowListItem(dlg, 1,
 					    fcn_00519190(0x17a9));
 			}
 after_build:
 			if (g_774800 != 0)
-				v.h5c = fcn_00472250(dlg, 1,
+				v.h5c = d2_GetWindowListItem(dlg, 1,
 				    fcn_00519190(0x1ba7));
 			changed = 0;
 		}
@@ -460,10 +460,10 @@ tail_changed:
 		changed = 1;
 loop_test:
 		;
-	} while (fcn_005373e0((void*) 0x5c3f10, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) 0x5c3f10, 0x657c7) != 0);
 
 	if (v.h38 != -1) {
-		s = (char*) fcn_00471f80(v.h38);
+		s = (char*) d2_GetControlValue(v.h38);
 		d = name;
 		do {
 			c = *s++;

@@ -51,7 +51,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004d1a80(void);
 void __cdecl fcn_004d7e50(int);
 #include "Develop/Units/Msx/msx.h"
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00405540(Obj*, int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl fcn_004d7d70(int);
@@ -80,7 +80,7 @@ void __cdecl fcn_004d9f20(int arg)
 		g_772efc = msx_StartAmbientTrack("Athmos\\Kampfathmo_2.mp3", 0xb);
 	}
 	g_772e94 = 0;
-	while (fcn_005373e0(fcn_004d9f20, 0xfd6c6) != 0) {
+	while (main_RunFrameLoop(fcn_004d9f20, 0xfd6c6) != 0) {
 		if (g_772ea8 != 0) {
 			break;
 		}

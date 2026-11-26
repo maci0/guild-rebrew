@@ -10,13 +10,13 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl fcn_0045b990(float*, float*, int*, int*, float*);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005b00f0(char*, int, int);
 void __cdecl fcn_005b00d0(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 int __cdecl fcn_005cfd00(unsigned short*, int*, unsigned char*);
 char* __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0046c310(int);
 
 typedef struct ScrollSlot {
@@ -154,7 +154,7 @@ void __cdecl fcn_005b0230(char* town)
 					               * (float) offs[2 * (unsigned char) obj[0x34] + 1] * g_6ab3e0 * 0.435f
 					               + (float) *(int*) (tex + 0x20) * g_6ab3e0 * 0.5f);
 				}
-				slot->handle = fcn_0046f740(bld_x, bld_y, *obj + 0x47f, dir);
+				slot->handle = d2_AddElementToWindow(bld_x, bld_y, *obj + 0x47f, dir);
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 1;
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0x43;
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1cc = 0x56;
@@ -177,7 +177,7 @@ void __cdecl fcn_005b0230(char* town)
 				if (kind != 0xffff) {
 					kind_type = g_7f4ca2[kind].kind;
 					if (kind_type == 5 || kind_type == 6 || kind_type == 7) {
-						fcn_0046f740(bld_x - 8, bld_y - 8,
+						d2_AddElementToWindow(bld_x - 8, bld_y - 8,
 						             *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[kind] + 0x54),
 						             g_cur_dir);
 					}
@@ -216,7 +216,7 @@ void __cdecl fcn_005b0230(char* town)
 			if (slot->handle == -1) {
 				bld_x = (int) slot->fx;
 				bld_y = (int) slot->fy;
-				slot->handle = fcn_0046f740(bld_x, bld_y,
+				slot->handle = d2_AddElementToWindow(bld_x, bld_y,
 				                      (unsigned char) *slot->ent + 0x47f, g_cur_dir);
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 1;
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1dc = -1;
@@ -258,7 +258,7 @@ void __cdecl fcn_005b0230(char* town)
 				if (kind != 0xffff) {
 					kind_type = g_7f4ca2[kind].kind;
 					if (kind_type == 5 || kind_type == 6 || kind_type == 7) {
-						fcn_0046f740(slot->x - 8, slot->y - 8,
+						d2_AddElementToWindow(slot->x - 8, slot->y - 8,
 						             *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[kind] + 0x54),
 						             g_cur_dir);
 					}
@@ -271,7 +271,7 @@ void __cdecl fcn_005b0230(char* town)
 
 	if (g_town_flags(town) & 4) {
 		mode = d3_CurrentContextIndex;
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		g_cur_dir = g_town_dir(town);
 		g_cur_building = (char*) &g_1015f40[g_town_dir(town)];
 		p = (char*) 0x6a4770;
@@ -285,7 +285,7 @@ void __cdecl fcn_005b0230(char* town)
 				fcn_005b00f0((char*) &tmp, base_x, base_y);
 				bld_x = (int) tmp.fx;
 				bld_y = (int) tmp.fy;
-				handle = fcn_0046f740(bld_x, bld_y, 0x550, g_cur_dir);
+				handle = d2_AddElementToWindow(bld_x, bld_y, 0x550, g_cur_dir);
 				((D2_CONTROL_TL*) (g_1015ea0))[handle].value_05c = 1;
 				((D2_CONTROL_TL*) (g_1015ea0))[handle].flags_1d0 = 0x43;
 				((D2_CONTROL_TL*) (g_1015ea0))[handle].value_1cc = 0x56;
@@ -295,7 +295,7 @@ void __cdecl fcn_005b0230(char* town)
 			}
 			p += 0x20;
 		}
-		fcn_004432d0(mode, 1);
+		d3_SelectSceneContext(mode, 1);
 	}
 
 	if (g_town_flags(town) & 8) {
@@ -312,7 +312,7 @@ void __cdecl fcn_005b0230(char* town)
 				fcn_005b00f0((char*) &tmp, base_x, base_y);
 				bld_x = (int) tmp.fx;
 				bld_y = (int) tmp.fy;
-				*tab = fcn_0046f740(bld_x, bld_y, 0x54f, g_cur_dir);
+				*tab = d2_AddElementToWindow(bld_x, bld_y, 0x54f, g_cur_dir);
 				((D2_CONTROL_TL*) (g_1015ea0))[*tab].value_05c = 1;
 				((D2_CONTROL_TL*) (g_1015ea0))[*tab].flags_1d0 = 0x43;
 			}

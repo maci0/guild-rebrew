@@ -13,7 +13,7 @@ extern struct s_fd7c50 g_fd7c50[64];
 
 /* Twin of GOLDTL 0x510930; the GOLD slot records are 0x3e0 bytes, not 0x3dc. */
 
-void __cdecl fcn_004478e0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00457c20(int);
 void __cdecl fcn_004473f0(void);
 void __cdecl d3sm_Destroy(int);
@@ -22,7 +22,7 @@ void __cdecl fcn_0050d490(void)
 {
 	int i;
 
-	fcn_004478e0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	if (g_6f1c28 != 0) {
 		fcn_00457c20(g_6f1c28);
 		g_6f1c28 = 0;
@@ -30,14 +30,14 @@ void __cdecl fcn_0050d490(void)
 	fcn_004473f0();
 	for (i = 0; i < 0x2dc; i++) {
 		if (g_76faa0[i] > 0) {
-			fcn_004478e0(g_76faa0[i], 0);
+			d3_SelectSceneContext(g_76faa0[i], 0);
 			fcn_004473f0();
 			g_76faa0[i] = -1;
 		}
 	}
 	for (i = 0; i < 0x22; i++) {
 		if (g_76fa60[i] > 0) {
-			fcn_004478e0(g_76fa60[i], 0);
+			d3_SelectSceneContext(g_76fa60[i], 0);
 			fcn_004473f0();
 			g_76fa60[i] = -1;
 		}

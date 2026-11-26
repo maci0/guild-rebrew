@@ -56,17 +56,17 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_AccumulateTyped2(Player*);
 int __cdecl fcn_0050b710(int, char);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, char);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl fcn_004c4ef0(char*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00471e30(int);
 typedef struct {
@@ -80,7 +80,7 @@ extern char* g_77255c;
 extern int g_10161cc[];
 
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x006abb00 */
@@ -199,15 +199,15 @@ void __cdecl fcn_005c5b10(char* a)
 	io_AppendText(0x19a9);
 	d2_SetForm(dlg, 2);
 	s = io_AppendText(0x19aa, g_773d75);
-	sl = fcn_00472250(dlg, 2, s);
-	btn2 = fcn_00472250(dlg, 2, s + 1);
+	sl = d2_GetWindowListItem(dlg, 2, s);
+	btn2 = d2_GetWindowListItem(dlg, 2, s + 1);
 	v = fcn_0050b710(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75) > 1000 ? 1000 : fcn_0050b710(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75);
 	d2_SetElementValue(sl, 0x64, v, 0x64);
-	if (fcn_005373e0((void*) fcn_005c5b10, 0x677c7) != 0) {
+	if (main_RunFrameLoop((void*) fcn_005c5b10, 0x677c7) != 0) {
 		do {
 			if (g_100f1dc == 2) {
 				if (btn2 != -1 && d2_CurrentElementId == btn2) {
-					v = fcn_0050b750(fcn_00471f80(sl), g_773d75);
+					v = fcn_0050b750(d2_GetControlValue(sl), g_773d75);
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 0x38;
 					pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;
@@ -228,7 +228,7 @@ void __cdecl fcn_005c5b10(char* a)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) fcn_005c5b10, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) fcn_005c5b10, 0x677c7) != 0);
 	}
 	fcn_00532ef0();
 	fcn_00471e30(dlg);
@@ -246,7 +246,7 @@ void __cdecl fcn_005c5da0(int layer, int x, int y, unsigned short who, int text)
 		}
 		g_775318 = g_7f4ca0 + who * 540;
 		g_6abb00 = fcn_0046f100(x, y, 0xcd, 0xc4, 0x10, layer);
-		fcn_0046f740(0, 0, 0x587, g_6abb00);
+		d2_AddElementToWindow(0, 0, 0x587, g_6abb00);
 		fcn_0046f100(0, 0x2c, *(int*) (g_77255c + 0xc), 0x1e, 0x110, d2_CurrentWindowId);
 		g_10161cc[d2_CurrentWindowId * 243] = 0x54;
 		io_AppendText(text);

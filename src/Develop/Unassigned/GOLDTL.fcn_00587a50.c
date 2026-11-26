@@ -17,7 +17,7 @@ extern void __cdecl d3_NormalizeVector(float*);
 extern float __cdecl fcn_004514d0(int, int);
 extern void* __cdecl fcn_005e8850(void);
 extern void __stdcall D3DXMatrixTranspose(float*, float*);
-extern int __cdecl fcn_00471f80(int);
+extern int __cdecl d2_GetControlValue(int);
 extern void __cdecl fcn_00587f40(char*);
 
 /* ADDRESS: GOLDTL 0x00587a50 */
@@ -85,7 +85,7 @@ void __cdecl fcn_00587a50(char* o)
 
 	d1 = (v[0] - -0.61086524f) / ((double) 0.7853982f - (double) -0.61086524f);
 	f = (v[0] - -0.2617994f) / ((double) 0.7853982f - (double) -0.2617994f);
-	iv = fcn_00471f80(*(int*) (o + 0xb4));
+	iv = d2_GetControlValue(*(int*) (o + 0xb4));
 	iv_scale = (float) iv * 0.01f;
 	s = (0.5f - 0.25f * iv_scale) * f * *(float*) (o + 0x20) + d1;
 	s = s * 30.0f + v[5];

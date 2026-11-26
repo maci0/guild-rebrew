@@ -13,7 +13,7 @@ void __cdecl d2_CenterDialogWindows(char*);
 void __cdecl d2_SetForm(char*, int);
 void __cdecl fcn_004b5630(int, int);
 void __cdecl io_AppendText(int, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(char*);
 void __cdecl fcn_004b5530(int, int);
 void __cdecl fcn_004b5a80(int);
@@ -49,7 +49,7 @@ void __cdecl fcn_004b60e0(int flags)
 			}
 			g_774654 = 1;
 		}
-		if (!fcn_005373e0((int) fcn_004b60e0, v | 0x80)) {
+		if (!main_RunFrameLoop((int) fcn_004b60e0, v | 0x80)) {
 			break;
 		}
 	}

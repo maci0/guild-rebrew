@@ -14,7 +14,7 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 float __cdecl fcn_00507540(int, int*);
 int __cdecl gm_MapEntityStatRange(int);
@@ -24,7 +24,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl fcn_00526120(char*, int);
@@ -94,7 +94,7 @@ int __cdecl fcn_005a02b0(void)
 			d2_SetElementValue(d, 0, 0x64, (int) (grade * 100.0f));
 		}
 	}
-	while (fcn_005373e0((void*) fcn_005a02b0, 0x677c7) != 0) {
+	while (main_RunFrameLoop((void*) fcn_005a02b0, 0x677c7) != 0) {
 		if ((mode = g_100f1dc) != -1 && grade >= 1.0) {
 			if (mode == 2) {
 				if (*(int*) (slot + 0x194) < 4) {
@@ -110,7 +110,7 @@ int __cdecl fcn_005a02b0(void)
 					msg[0x36] = 9;
 					*(int*) (msg + 0x58) = *(int*) (slot + 4);
 					*(pos14_7f4c00*) (msg + 0x28) = gm_GameTime;
-					fcn_00500bb0(msg + 0x28, 2, 0, 0);
+					gm_AddTime(msg + 0x28, 2, 0, 0);
 					fcn_004c5530(msg);
 					g_774654 = 1;
 				}

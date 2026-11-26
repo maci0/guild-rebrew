@@ -7,7 +7,7 @@
 
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void* __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_0050cf50(void*, int);
+int __cdecl gm_CalculateGebaeudeValue(void*, int);
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
@@ -33,7 +33,7 @@ int __cdecl fcn_004af1d0(int mode, int a2, int a3, char* a4, int a5)
 
 		e = gm_StartFilteredEntitySearch(1, 5, 0x16);
 		while (e != 0) {
-			score = fcn_0050cf50(e, *(signed char*) ((char*) e + 0x5c));
+			score = gm_CalculateGebaeudeValue(e, *(signed char*) ((char*) e + 0x5c));
 			if (score > bestScore) {
 				entity = (int) e;
 				bestScore = score;

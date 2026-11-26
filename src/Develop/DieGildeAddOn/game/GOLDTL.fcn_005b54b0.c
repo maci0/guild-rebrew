@@ -28,7 +28,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_ResolveParentEntity(char*);
 void __cdecl fcn_004d1d40(char*, char);
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_004c5980(void* data);
 
 void __cdecl fcn_005b54b0(char* p)
@@ -93,6 +93,6 @@ void __cdecl fcn_005b54b0(char* p)
 	*(int*) (msg + 0x1c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x20) = g_7f4c08;
 	*(short*) (msg + 0x24) = g_7f4c0c;
-	fcn_00500bb0(msg + 0x18, 0, 0xf, 0);
+	gm_AddTime(msg + 0x18, 0, 0xf, 0);
 	fcn_004c5980(msg);
 }

@@ -48,7 +48,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004fa5b0(int, char*, Query*);
 void __cdecl d2_ShowPrivilegMessage(char*, int, int);
 void __cdecl fcn_00471af0(int, int);
@@ -57,7 +57,7 @@ void __cdecl fcn_0046e830(int, int, int, int, int);
 char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d4a20 */
 void __cdecl d2_ShowPrivilegien(void)
@@ -150,7 +150,7 @@ void __cdecl d2_ShowPrivilegien(void)
 					io_AppendText(0x1cdd);
 					if (ptr != 0) {
 						d2_SetForm((int) dlg, 3);
-						sel = fcn_00472250((int) dlg, 3,
+						sel = d2_GetWindowListItem((int) dlg, 3,
 							io_AppendText(0x1cdc, *(unsigned short*) ptr));
 					}
 				} else if (mode == 10) {
@@ -158,7 +158,7 @@ void __cdecl d2_ShowPrivilegien(void)
 						d2_SetForm((int) dlg, 1);
 						io_AppendText(0x1cde);
 						d2_SetForm((int) dlg, 3);
-						sel = fcn_00472250((int) dlg, 3,
+						sel = d2_GetWindowListItem((int) dlg, 3,
 							io_AppendText(0x1cdb, *(unsigned short*) ptr));
 					} else {
 						d2_SetForm((int) dlg, 1);
@@ -176,14 +176,14 @@ void __cdecl d2_ShowPrivilegien(void)
 						if (count) {
 							io_AppendText((int) g_68b300);
 						}
-						keys[i] = fcn_00472250((int) dlg, 2,
+						keys[i] = d2_GetWindowListItem((int) dlg, 2,
 							io_AppendText((int) fmt, q.name));
 						count++;
 					} else if (mode == 2 && r == 9) {
 						if (count) {
 							io_AppendText((int) g_68b300);
 						}
-						h = fcn_00472250((int) dlg, 2,
+						h = d2_GetWindowListItem((int) dlg, 2,
 							io_AppendText((int) fmt, q.name));
 						keys[i] = -1;
 						((D2_CONTROL_TL*) g_1015ea0)[h].disabled = 1;
@@ -227,7 +227,7 @@ void __cdecl d2_ShowPrivilegien(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) d2_ShowPrivilegien, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowPrivilegien, 0x657c7) != 0);
 	fcn_00471e30((int) dlg);
 	fcn_0057e880(8, 0, 1, 0);
 }

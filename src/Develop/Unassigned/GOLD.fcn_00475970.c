@@ -4,7 +4,7 @@
 
 extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 
-int __cdecl fcn_00475970(int slot)
+int __cdecl d2_GetControlValue(int slot)
 {
 	GuiEnt* s;
 	char* d;

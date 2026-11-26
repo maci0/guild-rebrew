@@ -42,7 +42,7 @@ int __cdecl fcn_00558370(char* e);
 void __cdecl he_FreeAction(char* e);
 void __cdecl fcn_004e3640(void);
 void __cdecl fcn_004e4e90(char* name);
-void __cdecl fcn_00500bb0(char* t, int a, int b, int c);
+void __cdecl gm_AddTime(char* t, int a, int b, int c);
 int __cdecl fcn_005589d0(char* e);
 void __cdecl fcn_005b2880(void);
 int __cdecl fcn_00558680(char* e);
@@ -92,7 +92,7 @@ void __cdecl EvtSensenmann(char* e)
 		r = fcn_00558680(e);
 		if (r == 1) {
 			*(int*) (e + 0x70) = 0;
-			fcn_00500bb0(e + 0x52, 0, 2, 0);
+			gm_AddTime(e + 0x52, 0, 2, 0);
 			return;
 		}
 		if (r == 2) {
@@ -101,12 +101,12 @@ void __cdecl EvtSensenmann(char* e)
 				if (*(int*) (e + 0xc0) == 0) {
 					*(int*) (e + 0xb4) = *(int*) (e + 0xac);
 					if (fcn_00558b70(e)) {
-						fcn_00500bb0(e + 0x52, 0, 0xf, 0);
+						gm_AddTime(e + 0x52, 0, 0xf, 0);
 						*(int*) (e + 0x70) = 2;
 						*(int*) (e + 0xc0) = *(int*) (e + 0xc0) - 1;
 						return;
 					}
-					fcn_00500bb0(e + 0x52, 0, 2, 0);
+					gm_AddTime(e + 0x52, 0, 2, 0);
 					*(int*) (e + 0x70) = -1;
 					return;
 				}
@@ -141,19 +141,19 @@ void __cdecl EvtSensenmann(char* e)
 			*(int*) (e + 0xb4) = p->id;
 			*(int*) (e + 0xc0) = *(int*) (e + 0xc0) - 1;
 			if (fcn_00558b70(e)) {
-				fcn_00500bb0(e + 0x52, 0, 0xf, 0);
+				gm_AddTime(e + 0x52, 0, 0xf, 0);
 				*(int*) (e + 0x70) = 2;
 				return;
 			}
-			fcn_00500bb0(e + 0x52, 0, 2, 0);
+			gm_AddTime(e + 0x52, 0, 2, 0);
 			*(int*) (e + 0x70) = -1;
 			return;
 		}
-		fcn_00500bb0(e + 0x52, 0, 2, 0);
+		gm_AddTime(e + 0x52, 0, 2, 0);
 		*(int*) (e + 0x70) = -1;
 		return;
 	case 2:
-		fcn_00500bb0(e + 0x52, 0, 2, 0);
+		gm_AddTime(e + 0x52, 0, 2, 0);
 		if (fcn_005589d0(e)) {
 			*(int*) (e + 0x70) = 0;
 			return;

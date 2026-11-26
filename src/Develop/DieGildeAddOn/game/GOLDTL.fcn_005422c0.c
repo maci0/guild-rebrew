@@ -35,7 +35,7 @@ int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_0050c4e0(unsigned char*);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_0050cf50(char*, int);
+int __cdecl gm_CalculateGebaeudeValue(char*, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00507380(int);
 void __cdecl fcn_005049c0(int);
@@ -46,7 +46,7 @@ float __cdecl fcn_0050b8d0(unsigned char*, int, int, int);
 void* __cdecl sim_StartEntityQueryByType(unsigned char*);
 unsigned char* __cdecl fcn_005049a0(unsigned char*);
 int __cdecl fcn_004fe470(int, int, int, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_0050c1b0(unsigned char*, int, int*);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
@@ -172,7 +172,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 				*(int*) ((msg + 0xf8) + 0xc) = -1;
 				(msg + 0xf8)[0x36] = 2;
 				*(int*) ((msg + 0xf8) + 0x58) = *(int*) (rec + 1);
-				*(int*) ((msg + 0xf8) + 0x5c) = fcn_0050cf50((char*) rec, *(signed char*) (rec + 0x5c));
+				*(int*) ((msg + 0xf8) + 0x5c) = gm_CalculateGebaeudeValue((char*) rec, *(signed char*) (rec + 0x5c));
 				fcn_004c5530((msg + 0xf8));
 			}
 			off = (arg & 0xffff);
@@ -187,7 +187,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 					*(int*) (msg + 0xc) = -1;
 					msg[0x36] = 2;
 					*(int*) (msg + 0x58) = *(int*) (rec + 1);
-					*(int*) (msg + 0x5c) = fcn_0050cf50((char*) rec, *(signed char*) (rec + 0x5c));
+					*(int*) (msg + 0x5c) = gm_CalculateGebaeudeValue((char*) rec, *(signed char*) (rec + 0x5c));
 					fcn_004c5530(msg);
 					count++;
 					for (i = 0; i < 768; i++) {
@@ -318,7 +318,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 										(msg + 0x1f0)[4] = 0x33;
 										(msg + 0x1f0)[0x36] = 1;
 										*(int*) ((msg + 0x1f0) + 0x58) = *(int*) (tile2 + 4);
-										fcn_00500bb0((pos14_7f4c00*) ((msg + 0x1f0) + 0x28), (gm_RandomMod(6) & 0xffff) + 4, 0, 0);
+										gm_AddTime((pos14_7f4c00*) ((msg + 0x1f0) + 0x28), (gm_RandomMod(6) & 0xffff) + 4, 0, 0);
 										fcn_004c5530((msg + 0x1f0));
 										count++;
 									}
@@ -330,7 +330,7 @@ void __cdecl fcn_005422c0(unsigned int arg)
 										(msg + 0xf8)[4] = 0x34;
 										(msg + 0xf8)[0x36] = 1;
 										*(int*) ((msg + 0xf8) + 0x58) = *(int*) (tile2 + 4);
-										fcn_00500bb0((pos14_7f4c00*) ((msg + 0xf8) + 0x28), (gm_RandomMod(6) & 0xffff) + 4, 0, 0);
+										gm_AddTime((pos14_7f4c00*) ((msg + 0xf8) + 0x28), (gm_RandomMod(6) & 0xffff) + 4, 0, 0);
 										fcn_004c5530((msg + 0xf8));
 										count++;
 									}

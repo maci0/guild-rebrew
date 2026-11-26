@@ -6,7 +6,7 @@ extern int d2_CurrentWindowId;
 extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 
 int __cdecl fcn_005455b0(void);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_00470820(int, int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471af0(int, int);
@@ -44,7 +44,7 @@ allocate_slot:
 	d2_SetForm(g_77e8a0, 0);
 	*(int*) (e + 0x74) = (int) &g_77e8c0[i];
 	*(int*) ((char*) *(int*) (e + 0x74)) = (int) e;
-	*(int*) ((char*) *(int*) (e + 0x74) + 4) = fcn_0046f740(i << 5, 0, a5, d2_CurrentWindowId);
+	*(int*) ((char*) *(int*) (e + 0x74) + 4) = d2_AddElementToWindow(i << 5, 0, a5, d2_CurrentWindowId);
 	v = *(int*) ((char*) *(int*) (e + 0x74) + 4);
 	((D2_CONTROL_TL*) (g_1015ea0))[v].value_058 = 1;
 	*(int*) ((char*) *(int*) (e + 0x74) + 8) = fcn_00470820(a2, a3, a4);

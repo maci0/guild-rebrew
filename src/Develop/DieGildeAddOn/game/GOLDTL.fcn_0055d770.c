@@ -47,7 +47,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005049a0(char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_005ba910(void*, int);
 
 void __cdecl fcn_0055d770(char* e)
@@ -127,5 +127,5 @@ void __cdecl fcn_0055d770(char* e)
 			*(int*) (e + 0x84) = fcn_004c5620(3, e);
 		}
 	}
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 }

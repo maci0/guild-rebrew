@@ -29,10 +29,10 @@ extern int __cdecl fcn_004c5620(int, char*);
 extern int __cdecl fcn_004c4450(int);
 extern char* __cdecl fcn_004c4480(int);
 extern int __cdecl cut_FindCutsceneById(int);
-extern void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 extern int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 extern void __cdecl he_FreeAction(char*);
-extern void __cdecl fcn_004432d0(int, int);
+extern void __cdecl d3_SelectSceneContext(int, int);
 extern char* __cdecl fcn_00445600(int, int, int, char*);
 extern void __cdecl d3_TransformPoint(char*, char*, float*);
 extern int __cdecl CompareVector3WithinTolerance(float*, float*, float);
@@ -103,7 +103,7 @@ void __cdecl fcn_0056b700(char* obj)
 			}
 		}
 		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 0x1e, 0);
+		gm_AddTime((pos14_7f4c00*) (obj + 0x52), 0, 0x1e, 0);
 		*(int*) (obj + 0x70) = *(int*) (obj + 0x70) + 1;
 		return;
 	case 1:
@@ -115,7 +115,7 @@ void __cdecl fcn_0056b700(char* obj)
 		if (cur != 0) {
 			*(int*) (obj + 0xe0) = *(int*) cur;
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 1, 0);
+			gm_AddTime((pos14_7f4c00*) (obj + 0x52), 0, 1, 0);
 			*(int*) (obj + 0x70) = 3;
 			return;
 		}
@@ -124,12 +124,12 @@ void __cdecl fcn_0056b700(char* obj)
 	case 3:
 		if (!cut_FindCutsceneById(*(int*) (obj + 0xe0))) {
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 0, 1);
+			gm_AddTime((pos14_7f4c00*) (obj + 0x52), 0, 0, 1);
 			*(int*) (obj + 0x70) = -1;
 			return;
 		}
 		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, 5, 0);
+		gm_AddTime((pos14_7f4c00*) (obj + 0x52), 0, 5, 0);
 		return;
 	case -2:
 	case -1:
@@ -163,7 +163,7 @@ label_56b858:
 		list[0] = 0;
 		list[1] = 0;
 		list[2] = 0;
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		door = fcn_00445600(0, 0x100, 0, obj + 0xac);
 		if (door != 0)
 			d3_TransformPoint(door, door + 0x4c, (float*) &pos);
@@ -251,7 +251,7 @@ label_56b858:
 			limit -= 0x32;
 		if (*(int*) &g_774800)
 			limit = 0;
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 		if (door != 0 && cut_FindCutscene(3, -1) == 0 &&
 		    limit < (int) (gm_RandomMod(100) & 0xffff)) {
 			slot = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0x10));
@@ -289,7 +289,7 @@ label_56b858:
 				*(int*) (buf.msg + 0x10c) = *(int*) (slot + 1);
 				memcpy(buf.msg + 0xc0, obj + 0x8c, 0x20);
 				*(pos14_7f4c00*) (buf.msg + 0x18) = gm_GameTime;
-				fcn_00500bb0((pos14_7f4c00*) (buf.msg + 0x18), 0xf, 0, 0);
+				gm_AddTime((pos14_7f4c00*) (buf.msg + 0x18), 0xf, 0, 0);
 				*(int*) (obj + 0xdc) = fcn_004c5980(buf.msg);
 				*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 				*(int*) (obj + 0x70) = 2;
@@ -305,5 +305,5 @@ label_56b858:
 	}
 	*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 	limit = (gm_RandomMod(5) & 0xffff) + 10;
-	fcn_00500bb0((pos14_7f4c00*) (obj + 0x52), 0, limit, 0);
+	gm_AddTime((pos14_7f4c00*) (obj + 0x52), 0, limit, 0);
 }

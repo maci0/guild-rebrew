@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern float g_665ea0;
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl gm_ResolveEntityById(int*, int, int, int);
 void __cdecl d3_TransformPoint(void*, void*, float*);
 void __cdecl fcn_00455140(void*, void*, float*);
@@ -24,7 +24,7 @@ unsigned int __cdecl fcn_00558b70(char* eventRecord)
 	char* view;
 
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 
 	view = *(char**) (eventRecord + 0xc8);
 	if (view == 0) {
@@ -75,9 +75,9 @@ unsigned int __cdecl fcn_00558b70(char* eventRecord)
 	aim[2] = *(float*) (view + 0x8c);
 	aim[1] = aim[1] + angle;
 	d3_AnimateObjectTransform(view, to, aim, 0x78, 8);
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	return 1;
 fail:
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	return 0;
 }

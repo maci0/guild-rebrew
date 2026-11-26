@@ -7,7 +7,7 @@ extern char g_6a9694[];
 
 int __cdecl fcn_004f4830(int, int*);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_00534210(int, int, char*, int, int);
 
@@ -20,7 +20,7 @@ void __cdecl fcn_005c9220(int* o)
 		if (fcn_004f4830(o[5], info) != 0 && info[6] != 0 && info[3] != 0) {
 			d2_SetForm(o[0], o[1]);
 			for (i = 0; i < info[3]; i++) {
-				fcn_0046f740(5 + i * 16, 5, 0x526, d2_CurrentWindowId);
+				d2_AddElementToWindow(5 + i * 16, 5, 0x526, d2_CurrentWindowId);
 			}
 		}
 		if (o[4] <= 4) {

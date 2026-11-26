@@ -60,7 +60,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c5620(int, Order_551f90*);
 void __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, const char*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_005b2790(void);
 
 
@@ -123,7 +123,7 @@ void __cdecl fcn_00551f90(Order_551f90* o)
 			o->ev[2] = fcn_004c64b0(0xe, p->id, -1, 0x12, 0, 0, "PEST");
 			o->ev[3] = fcn_004c64b0(0xe, p->id, -1, 0x12, 0, 0, "PEST");
 			o->player = p->id;
-			fcn_00500bb0(&o->stamp, 0, 1, 0);
+			gm_AddTime(&o->stamp, 0, 1, 0);
 			o->event = fcn_004c5620(0, o);
 			fcn_005b2790();
 			return;

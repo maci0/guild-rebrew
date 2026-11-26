@@ -118,13 +118,13 @@ int __cdecl d2_ClearWindowChildren(int win, int keep);
 /* Dialog construction, from fcn_005a4bb0. */
 void* __cdecl fcn_00470820(short a, short b, char* name);
 void __cdecl d2_SetForm(int dlg, int stage);
-int __cdecl fcn_00472250(int dlg, int a, int b);
+int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 void __cdecl fcn_00472380(int a, int b, int c, int d, int e);
 int __cdecl io_AppendText(void* id, ...);
-int __cdecl fcn_005373e0(void* fn, int message);
+int __cdecl main_RunFrameLoop(void* fn, int message);
 void __cdecl fcn_00471e30(int handle);
 /* inferred: two-argument form from fcn_005a4bb0 */
-int __cdecl fcn_00471f80(int handle, int player);
+int __cdecl d2_GetControlValue(int handle, int player);
 
 /* Entity value accessors. fcn_004c51a0 additionally returns int. */
 void __cdecl fcn_004c4510(char* base, int entity_id);

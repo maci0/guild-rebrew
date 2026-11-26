@@ -17,7 +17,7 @@ extern float g_696444[];
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c5480(int, int, float);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_004c4fc0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_004c4450(int);
@@ -71,7 +71,7 @@ void __cdecl fcn_004ff490(char* entity)
 
 		t = *(GAME_TIMESTAMP*) &gm_GameTime;
 		extra = 2;
-		fcn_00500bb0(&t, 8, 0, 0);
+		gm_AddTime(&t, 8, 0, 0);
 
 		other = 0;
 		t.hour = gm_RandomMod(4) + 8;

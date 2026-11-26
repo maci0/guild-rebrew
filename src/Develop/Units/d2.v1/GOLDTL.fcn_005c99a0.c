@@ -14,7 +14,7 @@ typedef struct Item_5c99a0 {
 	int pad2c[3];		/* +0x2c */
 } Item_5c99a0;			/* SIZE 0x38 */
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_0046f740();
+int __cdecl d2_AddElementToWindow();
 int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_005c9090();
 int __cdecl fcn_004677e0();
@@ -113,20 +113,20 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, Item_5c99a
 		x = item->x + 0x65;
 		y = item->y + 0x23;
 		left = x - (int) *(short*) (g_772500 + 0x1ebd8) / 2;
-		item->win = fcn_0046f740(left, y, 0x5da, d2_CurrentWindowId);
+		item->win = d2_AddElementToWindow(left, y, 0x5da, d2_CurrentWindowId);
 		if (item->obj != 0) {
 			if (*(char*) ((int) item->obj + 2) == 6 || *(char*) ((int) item->obj + 2) == 7 || *(char*) ((int) item->obj + 2) == 5) {
-				fcn_0046f740(left - 0x20, y, *(int*) ((int) item->obj + 0x54), d2_CurrentWindowId);
+				d2_AddElementToWindow(left - 0x20, y, *(int*) ((int) item->obj + 0x54), d2_CurrentWindowId);
 			}
-			item->cw18 = fcn_0046f740(x - (int) *(short*) (g_772500 + 0x50 + *(int*) ((int) item->obj + 0x18c) * 0x54) / 2 - 3, y + 1, *(int*) ((int) item->obj + 0x18c), d2_CurrentWindowId);
-			fcn_0046f740(left + 3, y + 3, item->cw1c, d2_CurrentWindowId);
+			item->cw18 = d2_AddElementToWindow(x - (int) *(short*) (g_772500 + 0x50 + *(int*) ((int) item->obj + 0x18c) * 0x54) / 2 - 3, y + 1, *(int*) ((int) item->obj + 0x18c), d2_CurrentWindowId);
+			d2_AddElementToWindow(left + 3, y + 3, item->cw1c, d2_CurrentWindowId);
 			if (item->cw20 != 0) {
-				fcn_0046f740(left + 3, (int) *(short*) (g_772500 + 0x1ebda) - 0x13 + y, item->cw20, d2_CurrentWindowId);
+				d2_AddElementToWindow(left + 3, (int) *(short*) (g_772500 + 0x1ebda) - 0x13 + y, item->cw20, d2_CurrentWindowId);
 			}
 			if (item->cw24 != 0) {
-				fcn_0046f740((int) *(short*) (g_772500 + 0x1ebd8) - 0x10 + (left), y + 3, item->cw24, d2_CurrentWindowId);
+				d2_AddElementToWindow((int) *(short*) (g_772500 + 0x1ebd8) - 0x10 + (left), y + 3, item->cw24, d2_CurrentWindowId);
 			}
-			fcn_0046f740((int) *(short*) (g_772500 + 0x1ebd8) - 0x10 + (left), (int) *(short*) (g_772500 + 0x1ebda) - 0x13 + y, item->cw28, d2_CurrentWindowId);
+			d2_AddElementToWindow((int) *(short*) (g_772500 + 0x1ebd8) - 0x10 + (left), (int) *(short*) (g_772500 + 0x1ebda) - 0x13 + y, item->cw28, d2_CurrentWindowId);
 			if (mode == 7) {
 				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) item->obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) item->obj + 0xd), *(unsigned short*) item->obj);
 				fcn_005c9090(buf, x, item->y, 0xca, 0x56);
@@ -149,7 +149,7 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, Item_5c99a
 				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win2].value_05c = 1;
 			}
 			if (owner != 0 && *(char*) (owner + 2) == 6 && *(int*) ((int) item->obj + 0x210) == *(int*) (owner + 4)) {
-				fcn_0046f740((int) *(short*) (g_772500 + 0x1ebd8) + (left), y, 0x6d3, d2_CurrentWindowId);
+				d2_AddElementToWindow((int) *(short*) (g_772500 + 0x1ebd8) + (left), y, 0x6d3, d2_CurrentWindowId);
 			}
 			if (filter == 0 || fcn_005cf720(*(unsigned short*) &g_774970, *(unsigned short*) item->obj, filter, 0) != 0) {
 				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win].value_05c = 1;

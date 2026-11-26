@@ -12,9 +12,9 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00525f60(char*, int);
 void __cdecl fcn_005100f0(int, int);
@@ -47,11 +47,11 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 	io_AppendText(0x17e4, e);
 	d2_SetForm(win, 2);
 	base = io_AppendText(0x17e5, 1, 2, 4);
-	h1 = fcn_00472250(win, 2, base);
-	h2 = fcn_00472250(win, 2, base + 1);
-	h3 = fcn_00472250(win, 2, base + 2);
+	h1 = d2_GetWindowListItem(win, 2, base);
+	h2 = d2_GetWindowListItem(win, 2, base + 1);
+	h3 = d2_GetWindowListItem(win, 2, base + 2);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_005373e0(0, 0x677c7);
+	main_RunFrameLoop(0, 0x677c7);
 	do {
 		cur = gm_SearchTable67(id);
 		if ((*(unsigned char*) (e + 0x5b) & 4) != 0 || cur == 0) {
@@ -100,7 +100,7 @@ done:
 			g_774654 = n;
 		}
 next:
-		if (fcn_005373e0((void*) d2_RunFireExtinguishDialog, 0x677c7) == 0) {
+		if (main_RunFrameLoop((void*) d2_RunFireExtinguishDialog, 0x677c7) == 0) {
 			break;
 		}
 	} while (1);

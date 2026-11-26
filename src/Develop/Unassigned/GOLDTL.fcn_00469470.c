@@ -17,7 +17,7 @@ extern char* g_1015ea0;
 void __cdecl d2_SelectRadioGroup(int g, int sel);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00469470 */
-void __cdecl fcn_00469470(int g, int id)
+void __cdecl d2_AddToRadioGroup(int g, int id)
 {
 	g_102cbc4[g].ids[g_102cbc4[g].count] = id;
 	((D2_CONTROL_TL*) g_1015ea0)[id].value_058 = 1;

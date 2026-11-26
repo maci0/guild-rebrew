@@ -10,20 +10,20 @@ extern char g_6ac690[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_0050cf50(unsigned char*, int);
+int __cdecl gm_CalculateGebaeudeValue(unsigned char*, int);
 void __cdecl fcn_00527f10(unsigned char* e);
 char* __cdecl gm_SearchTable67(int id);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00508da0(unsigned char* e);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int i, int flag);
 void __cdecl fcn_00471af0(int k, int flag);
 void __cdecl d2_RunTechTreeDialog(unsigned char*, int);
 void __cdecl d2_ShowRenovationDialog(unsigned char*);
 void __cdecl fcn_005c2a40(unsigned char*);
 void __cdecl fcn_005c30e0(unsigned char*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
@@ -53,7 +53,7 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 	d = fcn_00470820(0, 0, g_6ac690);
 	d2_CenterDialogWindows(d);
 	d2_SetOverlayAnimation(0, 0);
-	r = fcn_0050cf50(p, (char) p[0x5c]);
+	r = gm_CalculateGebaeudeValue(p, (char) p[0x5c]);
 	fcn_00527f10(p);
 	do {
 		t = gm_SearchTable67(id);
@@ -78,14 +78,14 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 			if (*tbl == 1) {
 				io_AppendText(0x17a2, p[0x65]);
 			}
-			h2 = fcn_00472250(d, 1, io_AppendText(0x17a5));
+			h2 = d2_GetWindowListItem(d, 1, io_AppendText(0x17a5));
 			if (*tbl != 3) {
-				h1 = fcn_00472250(d, 1, io_AppendText(0x17ac));
+				h1 = d2_GetWindowListItem(d, 1, io_AppendText(0x17ac));
 			}
 			if (tbl[0x21] > 1) {
-				h3 = fcn_00472250(d, 1, io_AppendText(0x17a8));
+				h3 = d2_GetWindowListItem(d, 1, io_AppendText(0x17a8));
 			}
-			h4 = fcn_00472250(d, 1, io_AppendText(0x17ab));
+			h4 = d2_GetWindowListItem(d, 1, io_AppendText(0x17ab));
 			redraw = 0;
 		}
 		if ((p[0x5a] & 4) != 0) {
@@ -132,7 +132,7 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 				redraw = 1;
 			}
 		}
-	} while (fcn_005373e0(d2_ShowGebaeudeOptions, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_ShowGebaeudeOptions, 0x677c7) != 0);
 	fcn_00471e30(d);
 	g_7746f8 = 0;
 }

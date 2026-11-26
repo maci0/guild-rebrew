@@ -6,7 +6,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl he_FreeAction(char*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_004c4450(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -44,7 +44,7 @@ void __cdecl fcn_00556b40(char* e)
 		return;
 	}
 	if (a == 0) {
-		fcn_00500bb0(e + 0x52, 0, 2, 0);
+		gm_AddTime(e + 0x52, 0, 2, 0);
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 		return;
 	}
@@ -54,12 +54,12 @@ void __cdecl fcn_00556b40(char* e)
 			return;
 		}
 		if (r == 1) {
-			fcn_00500bb0(e + 0x52, 0, 2, 0);
+			gm_AddTime(e + 0x52, 0, 2, 0);
 			fcn_004c5620(0, e);
 			return;
 		}
 		if (r == 2) {
-			fcn_00500bb0(e + 0x52, 0, 2, 0);
+			gm_AddTime(e + 0x52, 0, 2, 0);
 			fcn_004c5620(-1, e);
 		}
 		return;
@@ -68,7 +68,7 @@ void __cdecl fcn_00556b40(char* e)
 		if (*(int*) (e + 0x70) == 1) {
 			fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0, 0x800000);
 			fcn_004c54c0(*(int*) (b + 4), *(int*) (a + 4), (-2 - *(int*) (e + 0xb4)) * 5, 1);
-			fcn_00500bb0(e + 0x52, 0, 2, 0);
+			gm_AddTime(e + 0x52, 0, 2, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 			return;
 		}
@@ -84,11 +84,11 @@ void __cdecl fcn_00556b40(char* e)
 		}
 		he_RegisterApEvent(*(unsigned short*) (e + 8), buf, -*(int*) (e + 0xb8), 0);
 		(*(int*) (e + 0xb4))++;
-		fcn_00500bb0(e + 0x52, 0x18, 0, 0);
+		gm_AddTime(e + 0x52, 0x18, 0, 0);
 		*(int*) (e + 0x84) = fcn_004c5620(0, e);
 		return;
 	}
 	fcn_004c5420(*(int*) (a + 4), 0x1c8, 4, 0, 0x800000);
-	fcn_00500bb0(e + 0x52, 0, 2, 0);
+	gm_AddTime(e + 0x52, 0, 2, 0);
 	*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 }

@@ -1,5 +1,5 @@
 void __cdecl d3_TransformPoint(char*, char*, float*);
-float __cdecl fcn_00444700(void*, float*);
+float __cdecl d3_ComputeYawToTarget(void*, float*);
 void __cdecl fcn_00451720(float*, float*, float*, float*);
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -22,7 +22,7 @@ void __cdecl ch_ExecTurnTowards(char* ev)
 	target = *(char**) (ev + 0x30);
 	obj = *(char**) (ev + 0x14);
 	d3_TransformPoint(target, target + 0x4c, pos);
-	angle = fcn_00444700(*(void**) (obj + 0x34), pos);
+	angle = d3_ComputeYawToTarget(*(void**) (obj + 0x34), pos);
 	rot[1] = angle;
 	rot[0] = 0.0f;
 	rot[2] = 0.0f;

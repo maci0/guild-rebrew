@@ -1,7 +1,7 @@
 
 
 
-int __cdecl fcn_00598150(int, int*);
+int __cdecl d3_CollectUnusedSceneObjects(int, int*);
 void __cdecl fcn_005983d0(int);
 
 void __cdecl fcn_00598510(void)
@@ -10,7 +10,7 @@ void __cdecl fcn_00598510(void)
 	int n;
 	int i;
 
-	n = fcn_00598150(0, ids);
+	n = d3_CollectUnusedSceneObjects(0, ids);
 	for (i = 0; i < n; i++) {
 		if (ids[i] != 0) {
 			fcn_005983d0(ids[i]);

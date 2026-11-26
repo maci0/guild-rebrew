@@ -14,7 +14,7 @@ extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 
 void __cdecl fcn_0046c620(int g, int sel);
 
-void __cdecl fcn_0046c550(int g, int id)
+void __cdecl d2_AddToRadioGroup(int g, int id)
 {
 	g_00fa5aa4[g].ids[g_00fa5aa4[g].count] = id;
 	g_00f8f080[id].dirty = 1;

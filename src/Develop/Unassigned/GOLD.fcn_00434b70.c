@@ -5,7 +5,7 @@ char __cdecl d3_ReleaseUnusedAnimations(unsigned int, unsigned int);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLD 0x00434b70 */
-void __cdecl fcn_00434b70(char* a, char force)
+void __cdecl d3_ReleaseAnim(char* a, char force)
 {
 	char* e;
 	unsigned int n;

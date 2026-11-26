@@ -5,7 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_004c5da0(unsigned int, unsigned int, int, int, int, char*);
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, int);
@@ -63,7 +63,7 @@ void __cdecl fcn_005784d0(char* obj)
 		*(int*) (obj + 0xbc) = -1;
 		if (*(int*) (*(int*) &lager[0xc2] + 0x128) != 0) {
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-			fcn_00500bb0(obj + 0x52, 0, 4, 0);
+			gm_AddTime(obj + 0x52, 0, 4, 0);
 			*(int*) (obj + 0x84) = fcn_004c5620(2, obj);
 			return;
 		}
@@ -71,7 +71,7 @@ void __cdecl fcn_005784d0(char* obj)
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 			h = (int) gm_LookupEntityRecordById(*(int*) (obj + 0xb0));
 			if (h != 0) {
-				fcn_00500bb0(obj + 0x52, 0x18, 0, 0);
+				gm_AddTime(obj + 0x52, 0x18, 0, 0);
 				fcn_005b2ee0(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (obj + 8)]),
 					(char*) h, obj + 0x52);
 			}
@@ -99,7 +99,7 @@ void __cdecl fcn_005784d0(char* obj)
 		}
 		if (*(int*) (*(int*) &lager[0xc2] + 0x128) != 0) {
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-			fcn_00500bb0(obj + 0x52, 0, 4, 0);
+			gm_AddTime(obj + 0x52, 0, 4, 0);
 			return;
 		}
 		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;

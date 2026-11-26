@@ -39,14 +39,14 @@ void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl fcn_0050dc90(unsigned char*);
-int __cdecl fcn_0046f740(short x, short y, int id, int win);
+int __cdecl d2_AddElementToWindow(short x, short y, int id, int win);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 
 void __cdecl fcn_004760a0(int, int);
 int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win);
 int __cdecl fcn_0050b710(int, unsigned char);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005bcb10(void)
@@ -85,7 +85,7 @@ int __cdecl fcn_005bcb10(void)
 			m = fcn_0050dc90(e);
 			if (m != 0 && *(unsigned short*) m != g_774970) {
 				d2_SetForm(h, 2);
-				g_777d00[n].btn = fcn_0046f740(0, n * 0x3e, *e + 0x427, d2_CurrentWindowId);
+				g_777d00[n].btn = d2_AddElementToWindow(0, n * 0x3e, *e + 0x427, d2_CurrentWindowId);
 				io_FormatTextBuffer(buf, g_6ac870, *e * 14 + 0x48e, e + 5);
 				g_777d00[n].name_text = d2_ShowTxt(0x40, n * 0x3e + 8, buf, d2_CurrentWindowId);
 				((Font5c89*)g_f8f080)[g_777d00[n].name_text].w = 0xa0;
@@ -94,7 +94,7 @@ int __cdecl fcn_005bcb10(void)
 				g_777d00[n].value_text = d2_ShowTxt(0x180, n * 0x3e + 0x14, buf, d2_CurrentWindowId);
 				g_777d00[n].bar = fcn_00467480(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, d2_CurrentWindowId);
 				d2_SetElementValue(g_777d00[n].bar, 0x3e8, 0x2328, fcn_0050b710(*(int*) (e + 0x39), g_773d75));
-				g_777d00[n].value = fcn_00471f80(g_777d00[n].bar);
+				g_777d00[n].value = d2_GetControlValue(g_777d00[n].bar);
 				g_777d00[n].e = e;
 				n++;
 			}

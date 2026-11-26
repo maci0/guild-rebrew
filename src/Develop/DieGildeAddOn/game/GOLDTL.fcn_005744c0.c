@@ -18,7 +18,7 @@ void __cdecl evt_RunGfxScript(int);
 void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
 char __cdecl d3_DestroyObject(int);
 void __cdecl d3_SetSubtreeVisible(int, int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_004550b0(int, int);
 void __cdecl fcn_004550e0(int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
@@ -35,7 +35,7 @@ int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_004c5790(int, void*);
 void __cdecl fcn_004c5fd0(int);
 void __cdecl fcn_005001e0(void*, int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl fcn_00500cb0(int*, int*);
 int __cdecl fcn_00500e20(int);
 void __cdecl fcn_005015e0(void*, int, int, int);
@@ -178,7 +178,7 @@ LfailB:
 			(void*) (buildAction + 0xf0), (void*) buildAction);
 		if (!v8) {
 			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
-			fcn_004432d0(savedContext, 1);
+			d3_SelectSceneContext(savedContext, 1);
 			return;
 		}
 		fcn_00510820(*(int*) (v15 + 0x61), v15, 2);
@@ -194,17 +194,17 @@ LfailB:
 			*(int*) (buildAction + 0xc0) = ((Building5744c0*) v27)->period * 0x3fc / v11;
 		}
 		*(int*) (buildAction + 0xc8) = 0;
-		fcn_00500bb0((void*) (buildAction + 0x52), 0, 1, 0);
+		gm_AddTime((void*) (buildAction + 0x52), 0, 1, 0);
 		*(int*) (buildAction + 0x70) = *(int*) (buildAction + 0x70) + 1;
 		return;
 
 	case 7:
 		*(int*) (buildAction + 0x84) = -1;
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		if (!v15 || !fcn_005985f0(v16, (int) v15)) {
 			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
-			fcn_004432d0(savedContext, 1);
+			d3_SelectSceneContext(savedContext, 1);
 			return;
 		}
 		v13 = 0;
@@ -230,7 +230,7 @@ LfailB:
 		} while (v11 < 0xa900);
 		if (!v13) {
 			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
-			fcn_004432d0(savedContext, 1);
+			d3_SelectSceneContext(savedContext, 1);
 			return;
 		}
 		for (v11 = 0; v11 < 33; v11++) {
@@ -258,22 +258,22 @@ LfailB:
 			} while (v11 < v18[32]);
 		}
 		*(pos14_7f4c00*) (buildAction + 0x52) = gm_GameTime;
-		fcn_00500bb0((void*) (buildAction + 0x52), 0, 10, 0);
+		gm_AddTime((void*) (buildAction + 0x52), 0, 10, 0);
 		*(int*) (buildAction + 0x70) = *(int*) (buildAction + 0x70) + 1;
-		fcn_004432d0(savedContext, 1);
+		d3_SelectSceneContext(savedContext, 1);
 		return;
 
 	case 8:
 		*(int*) (buildAction + 0x84) = -1;
-		fcn_00500bb0((void*) (buildAction + 0x52), 0, 0x14, 0);
+		gm_AddTime((void*) (buildAction + 0x52), 0, 0x14, 0);
 		if (*(unsigned char*) (buildAction + 0xd0)) {
 			break;
 		}
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		if (!fcn_005985f0(v16, (int) v15)) {
 			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);
-			fcn_004432d0(savedContext, 1);
+			d3_SelectSceneContext(savedContext, 1);
 			return;
 		}
 		for (v11 = 0; v11 < 33; v11++) {
@@ -294,17 +294,17 @@ LfailB:
 		*(int*) (buildAction + 0x56) = gm_GameTime.b;
 		*(int*) (buildAction + 0x5a) = gm_GameTime.c;
 		*(unsigned short*) (buildAction + 0x5e) = (unsigned short) gm_GameTime.d;
-		fcn_00500bb0((void*) (buildAction + 0x52), 0, 10, 0);
+		gm_AddTime((void*) (buildAction + 0x52), 0, 10, 0);
 		*(int*) (buildAction + 0x70) = *(int*) (buildAction + 0x70) + 1;
 		*(int*) (buildAction + 0xb4) = 0;
-		fcn_004432d0(savedContext, 1);
+		d3_SelectSceneContext(savedContext, 1);
 		return;
 
 	case 9:
 		v8 = fcn_0050cad0((void*) (buildAction + 0x60), (void*) &gm_GameTime);
 		v36 = v8 + *(int*) (buildAction + 0xb4);
 		if (v36 < *(int*) (buildAction + 0xc0)) {
-			fcn_00500bb0((void*) (buildAction + 0x52), 0, 0x1e, 0);
+			gm_AddTime((void*) (buildAction + 0x52), 0, 0x1e, 0);
 			return;
 		}
 		*(int*) (buildAction + 0x60) = *(int*) (buildAction + 0x52);
@@ -315,7 +315,7 @@ LfailB:
 			fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
 		}
 		if (*(int*) (buildAction + 0xbc) == -1 && *(int*) (buildAction + 0xc8) >= 2) {
-			fcn_004432d0(0, 1);
+			d3_SelectSceneContext(0, 1);
 			fcn_0064d41a(v19, (char*) 0x6a7d60, *(int*) (buildAction + 4));
 			v8 = fcn_00445600(0, 0x1c0, 0, v19);
 			d3_TransformPoint((char*) v8, (char*) (v8 + 0x4c), (float*) v20);
@@ -346,12 +346,12 @@ LfailB:
 				*(int*) (buildAction + 0xbc) = *(int*) (v24 + 0x100);
 				evt_RunGfxScript(v24);
 			}
-			fcn_004432d0(savedContext, 1);
+			d3_SelectSceneContext(savedContext, 1);
 		}
 		v11 = *(int*) (buildAction + 0xc0);
 		*(int*) (buildAction + 0xc8) = *(int*) (buildAction + 0xc8) + v36 / v11;
 		*(int*) (buildAction + 0xb4) = v36 % v11;
-		fcn_00500bb0((void*) (buildAction + 0x52), 0, v11, 0);
+		gm_AddTime((void*) (buildAction + 0x52), 0, v11, 0);
 		if (d3_CurrentContextIndex == 0) {
 			if (*(int*) (buildAction + 0xc8) <= *(int*) (buildAction + 0xc4)) {
 				fcn_00573e10(buildAction);
@@ -364,7 +364,7 @@ LfailB:
 			}
 		}
 		if (*(int*) (buildAction + 0xc8) > *(int*) (buildAction + 0xc4)) {
-			fcn_004432d0(0, 1);
+			d3_SelectSceneContext(0, 1);
 			if (*(int*) (buildAction + 0xbc) != -1) {
 				v8 = evt_FindScriptById(*(int*) (buildAction + 0xbc));
 				if (v8) {
@@ -472,7 +472,7 @@ LfailB:
 			}
 			fcn_005001e0((void*) ((int) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (v15 + 0x27)]),
 				(int) v15);
-			fcn_004432d0(savedContext, 1);
+			d3_SelectSceneContext(savedContext, 1);
 			*(int*) (buildAction + 0x7c) = 0;
 			he_FreeAction(buildAction);
 			return;
@@ -482,7 +482,7 @@ LfailB:
 	case 0:
 	case 1:
 		fcn_005015e0(&v15, 0, 0, *(int*) (buildAction + 0xb8));
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		if (*(int*) (buildAction + 0xbc) != -1) {
 			v8 = evt_FindScriptById(*(int*) (buildAction + 0xbc));
 			if (v8) {
@@ -499,7 +499,7 @@ LfailB:
 			}
 			fcn_004c5790(0xc, v19);
 		}
-		fcn_004432d0(savedContext, 1);
+		d3_SelectSceneContext(savedContext, 1);
 		he_FreeAction(buildAction);
 		return;
 	}

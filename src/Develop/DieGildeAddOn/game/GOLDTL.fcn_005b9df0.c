@@ -26,7 +26,7 @@ extern char g_77531c;
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl d2_DispatchTutorialEvent(int, char*, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_0050de80(char*, char*);
 int __cdecl fcn_0050ddf0(int, int);
@@ -52,7 +52,7 @@ int __cdecl fcn_005b9df0(int idx, char* p, char* q, char* r)
 		*(int*) (msg + 0xc) = -1;
 		msg[0x36] = 2;
 		*(pos14_7f4c00*) (msg + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
-		fcn_00500bb0((pos14_7f4c00*) (msg + 0x28), 0, 0, 1);
+		gm_AddTime((pos14_7f4c00*) (msg + 0x28), 0, 0, 1);
 		*(int*) (msg + 0x58) = *(int*) (p + 2);
 		*(int*) (msg + 0x5c) = *(int*) (q + 1);
 		*(int*) (msg + 0x60) = *(int*) (r + 1);

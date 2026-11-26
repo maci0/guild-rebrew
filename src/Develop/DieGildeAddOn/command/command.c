@@ -4069,7 +4069,7 @@ extern int g_773dd8;
 void __cdecl fcn_00530510(void);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl fcn_00506300(char*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_004550b0(int, int*);
 #include "../../Units/d3/d3_object.h"
 void* __cdecl evt_FindScriptById(int);
@@ -4135,7 +4135,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 	} while ((int) slot_scan < (int) (g_slot_table + 0x6556c));
 
 #ifndef REBREW_SERVER
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	if (g_773dd8 != 0) {
 		fcn_004550b0(*(int*) ((char*) building + 0x61), (int*) g_773dd8);
 	}
@@ -4147,7 +4147,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 		}
 		*(int*) ((char*) building + 0x95) = -1;
 	}
-	fcn_004432d0(saved_mode, 1);
+	d3_SelectSceneContext(saved_mode, 1);
 #endif
 #ifdef REBREW_SERVER
 	gm_CleanupBuildingEntity((uchar*) building);

@@ -5,7 +5,7 @@ extern char* g_14ad660;
 
 void __cdecl he_FreeAction(char*);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00551330 */
 void __cdecl fcn_00551330(char* e)
@@ -22,7 +22,7 @@ void __cdecl fcn_00551330(char* e)
 			break;
 		}
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0x18, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0x18, 0, 0);
 		break;
 	}
 }

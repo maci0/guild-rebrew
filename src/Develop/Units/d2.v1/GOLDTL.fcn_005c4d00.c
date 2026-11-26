@@ -22,7 +22,7 @@ extern Btn5c4d g_776ca0[256];
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0050e380(int, char*);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl fcn_005c4d00(int win, int sub, int idx, int unused)
@@ -38,7 +38,7 @@ void __cdecl fcn_005c4d00(int win, int sub, int idx, int unused)
 	k = 0;
 	while (*(int*) (buf + 0x35 + k * 0x1e) != 0 && k < 256) {
 		r = buf + 0x35 + k * 0x1e;
-		g_776ca0[k].w = fcn_00472250(win, sub, io_AppendText(0x1efb, 2, *(int*) (r + 8), *(int*) (r + 0xc)));
+		g_776ca0[k].w = d2_GetWindowListItem(win, sub, io_AppendText(0x1efb, 2, *(int*) (r + 8), *(int*) (r + 0xc)));
 		g_776ca0[k].p = *(char**) (r + 4);
 		d2_SetElementValue(g_776ca0[k].w, *(int*) (g_776ca0[k].p + 8));
 		k++;

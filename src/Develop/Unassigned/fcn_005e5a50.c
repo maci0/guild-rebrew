@@ -44,7 +44,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, ...);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl fcn_00510470(char*);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00526010(char*, int, unsigned char);
@@ -53,7 +53,7 @@ void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_004c5530(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005e5a50 */
@@ -102,7 +102,7 @@ void __cdecl fcn_005e5a50(char* entity)
 	fcn_00533a60(d2_CurrentWindowId, 0, ids, 2, *(int*) 0x14b5a80, *(int*) 0x14b5a84);
 	do {
 		max_val = fcn_00510470(entity) - 1;
-		val = fcn_00471f80(control);
+		val = d2_GetControlValue(control);
 		if (val >= max_val) {
 			val = max_val;
 		}
@@ -144,7 +144,7 @@ void __cdecl fcn_005e5a50(char* entity)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005e5a50, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005e5a50, 0x677c7) != 0);
 	fcn_00471e30(dialog);
 	fcn_00532ef0();
 }

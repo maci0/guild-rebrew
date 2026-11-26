@@ -30,7 +30,7 @@ extern char s_6a9924[];
 void __cdecl fcn_005338a0(void);
 int __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_SetSubtreeVisible(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_005ad5a0(unsigned char*);
 void __cdecl fcn_005ad950(unsigned char*);
@@ -73,7 +73,7 @@ void __cdecl fcn_005ae1b0(unsigned char* arg)
 			d3_SetSubtreeVisible(r, 0);
 		}
 	}
-	if (fcn_005373e0((void*) fcn_005ae1b0, 0x67fff) != 0) {
+	if (main_RunFrameLoop((void*) fcn_005ae1b0, 0x67fff) != 0) {
 		do {
 			if (g_7746d8 & 0x200) {
 				a = RegisterStatusText(s_6ab24c, g_14abaa4, 0x17);
@@ -111,6 +111,6 @@ void __cdecl fcn_005ae1b0(unsigned char* arg)
 					fcn_005cf560(arg);
 				}
 			}
-		} while (fcn_005373e0((void*) fcn_005ae1b0, 0x67fff) != 0);
+		} while (main_RunFrameLoop((void*) fcn_005ae1b0, 0x67fff) != 0);
 	}
 }

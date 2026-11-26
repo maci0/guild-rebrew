@@ -52,7 +52,7 @@ int __cdecl ls_LoadHistoryState(void* stream);
 int __cdecl fcn_005252d0(void* stream);
 int __cdecl fcn_005255b0(void* stream);
 unsigned int __cdecl gm_RebuildLoadedReferences(void);
-int __cdecl fcn_004432d0(int a, int b);
+int __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_00514f10(void);
 void __cdecl fcn_00514fc0(void);
 int __cdecl ls_LoadCharacter(void* stream);
@@ -198,7 +198,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	if (gm_RebuildLoadedReferences() == 0) {
 		goto fail;
 	}
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	fcn_00514f10();
 	fcn_00514fc0();
 	if (ls_LoadCharacter(stream) == 0) {

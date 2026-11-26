@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl d3_GetContextIndex(int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_DestroyObject(int);
 int* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl fcn_0043a720(int*, char*);
@@ -32,7 +32,7 @@ void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name)
 	}
 	saved_mode = d3_CurrentContextIndex;
 	if (name != 0) {
-		fcn_004432d0(d3_GetContextIndex(*(int*) (e + 0x88)), 1);
+		d3_SelectSceneContext(d3_GetContextIndex(*(int*) (e + 0x88)), 1);
 		if (*slot != 0) {
 			d3_DestroyObject(*slot);
 			*slot = 0;
@@ -40,7 +40,7 @@ void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name)
 		*slot = (int) fcn_00442910(*(int*) (e + 0x34), position, rotation, name);
 
 		if (*slot == 0) {
-			fcn_004432d0(saved_mode, 1);
+			d3_SelectSceneContext(saved_mode, 1);
 			return;
 		}
 		*(unsigned char*) ((char*) *slot + 0x216) |= 3;
@@ -49,24 +49,24 @@ void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name)
 		*(int*) ((char*) *slot + 0x220) = 5;
 		if (mode == 1) {
 			fcn_0043a720((int*) *slot, "d3_LeftHand");
-			fcn_004432d0(saved_mode, 1);
+			d3_SelectSceneContext(saved_mode, 1);
 			return;
 		}
 		if (mode == 2) {
 			fcn_0043a720((int*) *slot, "d3_RightHand");
-			fcn_004432d0(saved_mode, 1);
+			d3_SelectSceneContext(saved_mode, 1);
 			return;
 		}
 		if (mode == 3) {
 			fcn_0043a720((int*) *slot, "d3_Head");
 		}
-		fcn_004432d0(saved_mode, 1);
+		d3_SelectSceneContext(saved_mode, 1);
 	} else {
-		fcn_004432d0(d3_GetContextIndex(*(int*) (e + 0x88)), 1);
+		d3_SelectSceneContext(d3_GetContextIndex(*(int*) (e + 0x88)), 1);
 		if (*slot != 0) {
 			d3_DestroyObject(*slot);
 			*slot = 0;
 		}
-		fcn_004432d0(saved_mode, 1);
+		d3_SelectSceneContext(saved_mode, 1);
 	}
 }

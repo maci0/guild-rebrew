@@ -9,7 +9,7 @@ extern void __cdecl fcn_0055d6e0(char *, char *);
 extern void *__cdecl fcn_00502cd0(int, int, ...);
 extern char *__cdecl fcn_00402610(char *);
 extern char __cdecl fcn_0045b990(char *, float *, int *, int *, float *);
-extern void __cdecl fcn_004432d0(int, int);
+extern void __cdecl d3_SelectSceneContext(int, int);
 extern void __cdecl d3_TransformPoint(char *, char *, float *);
 extern void __cdecl fcn_004c5d20(int, int);
 extern void __cdecl fcn_004c5b50(int, int, int, int);
@@ -49,7 +49,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 	v5 = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(transportEvent + 0xb4));
 	if (*(int *)(transportEvent + 0xc4) == *(int *)(v4 + 1) && !*(char *)(transportEvent + 0xd0)) {
 		l_saved = *(int *)0x6b8010;
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		v6 = fcn_0055d630(*(char **)(v5 + 0x61));
 		if (!v6)
 			v6 = *(char **)(v5 + 0x61);
@@ -92,7 +92,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 		} else {
 			fcn_00502cd0(0, 2, 7, 1, *(int *)(transportEvent + 0xac));
 		}
-		fcn_004432d0(l_saved, 1);
+		d3_SelectSceneContext(l_saved, 1);
 		*(int *)(transportEvent + 0xc4) = *(int *)(v3 + 1);
 		return;
 	}

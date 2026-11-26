@@ -22,12 +22,12 @@ void __cdecl d2_DrawPanelFrame(int ctx, int a, int b);
 int __cdecl io_AppendText(int id, ...);
 void __cdecl fcn_0052a0c0(void* obj, int flag);
 void __cdecl fcn_00594340(void);
-int __cdecl fcn_0046f740(int a, int b, int c, int d);
+int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 void __cdecl fcn_0046f9b0(int handle, char* name);
 void __cdecl fcn_00472640(int handle, int flag);
 void __cdecl fcn_00595e20(void* obj, int packet);
 void __cdecl fcn_005963f0(int dlg, int a, int b, void* obj);
-int __cdecl fcn_005373e0(void* fn, int key);
+int __cdecl main_RunFrameLoop(void* fn, int key);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl fcn_00471e30(int dlg);
@@ -113,7 +113,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 		y = *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) / 2 - 0x80;
 		x = 0x19;
 		for (i = 0; i < count; i++) {
-			h = fcn_0046f740(y, x, ids[i] + 0xdf, d2_CurrentWindowId);
+			h = d2_AddElementToWindow(y, x, ids[i] + 0xdf, d2_CurrentWindowId);
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x5c) = 1;
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x1d0) = 3;
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x1dc) = 100;
@@ -128,7 +128,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00595e20(targetBuilding, ids[6]);
 	fcn_005963f0(dlg, 1, 0, targetBuilding);
-	while (fcn_005373e0((void*) d2_ShowHandelSearch, 0x677c7) != 0) {
+	while (main_RunFrameLoop((void*) d2_ShowHandelSearch, 0x677c7) != 0) {
 		fcn_00595e20(targetBuilding, ids[6]);
 		fcn_005963f0(dlg, 1, 0, targetBuilding);
 		memset(ids + 3, 0, 3 * sizeof(int));
@@ -193,7 +193,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 						sv_ClearObjectSelection();
 						h = fcn_004c5530(pkt);
 						while (fcn_004c4450(h) == 0) {
-							fcn_005373e0(0, 0x20007);
+							main_RunFrameLoop(0, 0x20007);
 						}
 						fcn_004c4480(h);
 					} else {

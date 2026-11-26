@@ -6,7 +6,7 @@ extern int g_6b23a4;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
 void __cdecl d3_SetSubtreeVisible(int, int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_004550b0(int, int);
 void __cdecl d3_DestroyObject(int);
@@ -15,7 +15,7 @@ void __cdecl d3_CollectObjectCallback(void);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 char* __cdecl fcn_0064d1a0(char*, int);
 char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl _isctype(int, int);
 
 typedef struct ObjList {
@@ -46,7 +46,7 @@ void __cdecl fcn_00573e10(int action)
 	char* p;
 
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	fcn_0064d41a(name, "he_%i", *(int*) (action + 4));
 	obj = fcn_00445600(0, 0x1c0, 0, name);
 	cur = *(int*) (action + 0xc8);
@@ -126,7 +126,7 @@ next_mark:
 					    ((unsigned char*) g_6b23a4
 					     + (signed char) digits[0] * 2) & 4;
 				if (flag)
-					range[num++] = fcn_0064eeec((char*) digits);
+					range[num++] = atoi((char*) digits);
 				*p = 0;
 				p = fcn_0064d1a0(buf, '_');
 			} while (p != 0);
@@ -155,5 +155,5 @@ release:
 		d3_DestroyObject(obj);
 	}
 done:
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 }

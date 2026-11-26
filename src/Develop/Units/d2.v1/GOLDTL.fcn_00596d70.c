@@ -42,7 +42,7 @@ extern char* g_14b52c0;
 
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl d2_DestroyElement(int);
@@ -53,7 +53,7 @@ float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl fcn_0050bc10(int, unsigned char, char*);
 void* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl fcn_00469c40(int, int, int);
 int __cdecl sprintf(char*, const char*, ...);
@@ -84,15 +84,15 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 				r->icon = fcn_00466ee0(r->x + 0xf, r->y + 6, r->id + 0xdf, v, d2_CurrentWindowId);
 				d2_SetElementFont(r->icon, 0x54);
 			} else {
-				r->icon = fcn_0046f740(r->x + 0xf, r->y + 6, r->id + 0xdf, d2_CurrentWindowId);
+				r->icon = d2_AddElementToWindow(r->x + 0xf, r->y + 6, r->id + 0xdf, d2_CurrentWindowId);
 				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_05c = 1;
 			}
 		}
 		if (r->icon2 == -1) {
 			if (flags & 1) {
-				r->icon2 = fcn_0046f740(r->x + 0xf, r->y + 0x3a, 0x747, d2_CurrentWindowId);
+				r->icon2 = d2_AddElementToWindow(r->x + 0xf, r->y + 0x3a, 0x747, d2_CurrentWindowId);
 			} else if (flags & 2) {
-				r->icon2 = fcn_0046f740(r->x + 0xf, r->y + 0x3a, 0x746, d2_CurrentWindowId);
+				r->icon2 = d2_AddElementToWindow(r->x + 0xf, r->y + 0x3a, 0x746, d2_CurrentWindowId);
 			}
 		}
 		if (flags & 2) {
@@ -157,7 +157,7 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 			((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_1f4.bits = 0;
 		}
 		if (makeIcon) {
-			v = fcn_00471f80(r->icon);
+			v = d2_GetControlValue(r->icon);
 			if (v > r->f30) {
 				v = r->f30;
 			}
@@ -172,7 +172,7 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 			} else {
 				((D2_CONTROL_TL*) (g_1015ea0))[r->icon].value_060 = 1;
 			}
-			v = fcn_00471f80(r->icon);
+			v = d2_GetControlValue(r->icon);
 			if (v < 0) {
 				v = 0;
 			}

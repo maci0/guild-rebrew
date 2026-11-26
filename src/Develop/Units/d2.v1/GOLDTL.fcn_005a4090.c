@@ -48,9 +48,9 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 int __cdecl fcn_004c5530(char* msg);
 int __cdecl fcn_004c4450(int);
@@ -88,12 +88,12 @@ void __cdecl d2_ChooseNewLoan(char* p)
 	io_AppendText(0x18d1, *(unsigned short*) (p + 0x25), p);
 	for (i = 0; i < 3; i++) {
 		if (list[i].n > 0) {
-			list[i].handle = fcn_00472250(h, 2, io_AppendText(0x18d2, list[i].n, list[i].y, list[i].x, 0x5d));
+			list[i].handle = d2_GetWindowListItem(h, 2, io_AppendText(0x18d2, list[i].n, list[i].y, list[i].x, 0x5d));
 		}
 	}
 	io_AppendText(0x18d3);
 	d2_SetOverlayAnimation(0, 0);
-	while (fcn_005373e0(d2_ChooseNewLoan, 0x677c7) != 0) {
+	while (main_RunFrameLoop(d2_ChooseNewLoan, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
@@ -122,7 +122,7 @@ found:
 			fcn_004c51a0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, *(int*) (p + 1), g_773d75, list[i].n);
 			r = fcn_004c5530(ev);
 			while (fcn_004c4450(r) == 0) {
-				fcn_005373e0(0, 0x677c7);
+				main_RunFrameLoop(0, 0x677c7);
 			}
 			d2_SetGroupVisibility(h, 0);
 			fcn_00526120(g_14ab670, 4);

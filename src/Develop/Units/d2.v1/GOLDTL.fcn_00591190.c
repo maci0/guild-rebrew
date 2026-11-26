@@ -18,7 +18,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_0046f740(int, int, int, int);
+void __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 double __cdecl eval_ObjektPreis2Credits(int, int);
 
@@ -44,7 +44,7 @@ int __cdecl d2_OpenObjektUpgradeTooltip(int id)
 		fcn_00469c40(g_1040494 - p->width - 16, p->top, p->slot);
 	}
 	d2_SetForm(0, 2);
-	fcn_0046f740(0, 0, id + 0xdf, d2_CurrentWindowId);
+	d2_AddElementToWindow(0, 0, id + 0xdf, d2_CurrentWindowId);
 	io_AppendText(id * 2 + 0x9a9);
 	d2_SetForm(0, 1);
 	io_AppendText(id * 2 + 0x9a8);

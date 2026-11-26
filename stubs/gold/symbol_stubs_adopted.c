@@ -28,9 +28,7 @@ int __cdecl fcn_004287b0(void* a)
 	return 0;
 }
 
-void __cdecl fcn_004e4680(void)
-{
-}
+
 
 int __cdecl fcn_005a8600(int a)
 {

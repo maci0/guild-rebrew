@@ -70,7 +70,7 @@ void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00531320(void);
 int __cdecl init_EnsureObjektSceneContext(char*);
-int __cdecl fcn_005155e0(unsigned char*);
+int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char*);
 void __cdecl d3_BeginSelectionBox(void);
 void __cdecl fcn_005345a0(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -246,7 +246,7 @@ L192f:
 		}
 		if (*(unsigned short*) g_7746b8 == 0xfd) {
 			if (g_7746c8 != 0) {
-				ei = fcn_005155e0(g_7746c8);
+				ei = init_AllocateGebaeudeSceneSlot(g_7746c8);
 			} else if (g_7746c4 != 0) {
 				ei = 0;
 				p = g_7746c4;

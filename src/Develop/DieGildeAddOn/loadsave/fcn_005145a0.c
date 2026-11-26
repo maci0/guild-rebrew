@@ -28,7 +28,7 @@ void __cdecl fcn_005017a0(int i);
 void __cdecl fcn_00501fe0(int i);
 int __cdecl fcn_0050b750(int timeout, char who);
 int __cdecl fcn_00413160(void);
-int __cdecl fcn_004432d0(int a0, int a1);
+int __cdecl d3_SelectSceneContext(int a0, int a1);
 int __cdecl fcn_00442e30(void);
 int __cdecl d3_LoadScene(char *name, int a1, int a2);
 int __cdecl fcn_00471af0(int a0, int a1);
@@ -84,12 +84,12 @@ int __cdecl fcn_005145a0(char *path)
     strcpy(p, "\\game.INI");
     engine = d3_CurrentContextIndex;
     *(int *) 0x7725c8 = 0;
-    fcn_004432d0(fcn_00413160(), 0);
+    d3_SelectSceneContext(fcn_00413160(), 0);
     d3_LoadScene("scenes/*network.ed3", 0, 0);
     fcn_00471af0(*(int *) 0x7e1d40, 0);
     *(int *) 0x7725c8 = 1;
     fcn_00442e30();
-    fcn_004432d0(engine, 0);
+    d3_SelectSceneContext(engine, 0);
     fcn_00471af0(*(int *) 0x7e1d40, 1);
     WritePrivateProfileStringA("Network", "Name", (char *) 0x7e23ea, file);
     WritePrivateProfileStringA("Network", "Familienname", (char *) 0x7e240a, file);
@@ -171,11 +171,11 @@ int __cdecl fcn_005145a0(char *path)
     *(int *) 0x7725c8 = 0;
     if (*(signed char *) &g_6a3440 > -1 && *(signed char *) &g_6a3440 < 6) {
         engine = d3_CurrentContextIndex;
-        fcn_004432d0(fcn_00413160(), 0);
+        d3_SelectSceneContext(fcn_00413160(), 0);
         d3_LoadScene("scenes/*network.ed3", 0, 0);
         fcn_004b54e0(*(int *) (handle + 4));
         fcn_00442e30();
-        fcn_004432d0(engine, 0);
+        d3_SelectSceneContext(engine, 0);
     }
     return 0;
 }

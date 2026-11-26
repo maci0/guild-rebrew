@@ -4,9 +4,9 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_773d78;
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 #include "client_placement.h"
-int __cdecl fcn_00598150(char*, char**);
+int __cdecl d3_CollectUnusedSceneObjects(char*, char**);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 float __cdecl gm_RandomFloat01(void);
@@ -34,10 +34,10 @@ char* __cdecl fcn_004a48e0(char* u, int key)
 	int cnt;
 
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	if (fcn_00597ff0(key, text) != 0) {
 		memset(list, 0, sizeof(list));
-		n = fcn_00598150(text, list);
+		n = d3_CollectUnusedSceneObjects(text, list);
 		if (n != 0) {
 			if (*(char**) (u + 0x170) != 0 && *(char**) (*(char**) (u + 0x170) + 0x61) != 0 && gm_RandomMod(3) != 0) {
 				ref = *(char**) (*(char**) (u + 0x170) + 0x61);
@@ -57,7 +57,7 @@ char* __cdecl fcn_004a48e0(char* u, int key)
 						}
 					}
 				}
-				fcn_004432d0(saved, 1);
+				d3_SelectSceneContext(saved, 1);
 				return found;
 			}
 			if (g_773d78 != 0 && *(char**) (g_773d78 + 0x61) != 0) {
@@ -78,20 +78,20 @@ char* __cdecl fcn_004a48e0(char* u, int key)
 						}
 					}
 				}
-				fcn_004432d0(saved, 1);
+				d3_SelectSceneContext(saved, 1);
 				return found;
 			}
 			cnt = n;
 			i = gm_RandomMod(n);
 			do {
 				if (list[i] != 0) {
-					fcn_004432d0(saved, 1);
+					d3_SelectSceneContext(saved, 1);
 					return list[i];
 				}
 				i = (i + 1) % n;
 			} while (--cnt != 0);
 		}
 	}
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	return 0;
 }

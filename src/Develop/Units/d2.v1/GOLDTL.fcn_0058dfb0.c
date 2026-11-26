@@ -45,9 +45,9 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00525f60(struct house*, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
@@ -85,10 +85,10 @@ int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 	d2_SetForm(h, 1);
 	io_AppendText(0x40ce, 0x40cc);
 	d2_SetForm(h, 2);
-	b4 = fcn_00472250(h, 2, io_AppendText(0x40cf, 4));
-	b6 = fcn_00472250(h, 2, io_AppendText(0x40d0, 6));
-	b8 = fcn_00472250(h, 2, io_AppendText(0x40d1, 8));
-	cancel = fcn_00472250(h, 2, io_AppendText(0x40d2));
+	b4 = d2_GetWindowListItem(h, 2, io_AppendText(0x40cf, 4));
+	b6 = d2_GetWindowListItem(h, 2, io_AppendText(0x40d0, 6));
+	b8 = d2_GetWindowListItem(h, 2, io_AppendText(0x40d1, 8));
+	cancel = d2_GetWindowListItem(h, 2, io_AppendText(0x40d2));
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -114,7 +114,7 @@ int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 				}
 			}
 		}
-	} while (fcn_005373e0(d2_OpenSeanceDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_OpenSeanceDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	return r;
 }

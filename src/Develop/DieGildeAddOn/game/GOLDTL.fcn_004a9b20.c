@@ -20,7 +20,7 @@ int __cdecl fcn_004a8e40(char*, char*, int, char*, int);
 int __cdecl fcn_004a8ed0(char*, char*, int, char*, int);
 int __cdecl fcn_004a9000(char*, char*, int, char*, int);
 int __cdecl fcn_004a9040(char*, char*, int, char*, int);
-int __cdecl fcn_004a9150(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction02bPredicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a91a0(char*, char*, int, char*, int);
 int __cdecl fcn_004a9270(char*, char*, int, char*, int);
 int __cdecl fcn_004a96f0(char*, char*, int, char*, int);
@@ -156,7 +156,7 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 		r = fcn_004a9040(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x2b:
-		r = fcn_004a9150(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction02bPredicate(a0, actorEntity, (int) &c, a3, a4);
 		break;
 	case 0x2c:
 		r = fcn_004a91a0(a0, actorEntity, (int) &c, a3, a4);

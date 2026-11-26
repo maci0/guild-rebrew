@@ -7,7 +7,7 @@ void* __cdecl memset(void*, int, unsigned int);
 int __cdecl fcn_004efd30(int);
 int __cdecl fcn_004f08d0(char*);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(int, unsigned int);
+int __cdecl main_RunFrameLoop(int, unsigned int);
 void __cdecl fcn_004f0e40(int, void*, void*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl sv_ClearObjectSelection(void);
@@ -16,7 +16,7 @@ void __cdecl fcn_00525ef0(void);
 void* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
 void __cdecl fcn_00438da0(float, float, float, float, float, float, float, int, int);
 void __cdecl fcn_005270c0(int);
-void __cdecl fcn_004432d0(int, char);
+void __cdecl d3_SelectSceneContext(int, char);
 void __cdecl fcn_00459710(char*, char);
 void __cdecl fcn_00414960(float*, float*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
@@ -86,7 +86,7 @@ void __cdecl fcn_00586c10(char* obj)
         id = fcn_004f08d0(obj);
         if (id != -1) {
             while ((i = fcn_004c4450(id)) == 0)
-                fcn_005373e0(i, 0x20007);
+                main_RunFrameLoop(i, 0x20007);
         }
         res = (char*) fcn_004efd30(*(int*) (obj + 1));
         if (res == 0)
@@ -116,7 +116,7 @@ void __cdecl fcn_00586c10(char* obj)
     g_100f8c0[0] = 0;
     sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
     while (!(*(u8*) sp & 4))
-        fcn_005373e0(0, flags | 0x100);
+        main_RunFrameLoop(0, flags | 0x100);
 
     j = (int)g_1015ea0;
     count = 0;
@@ -157,7 +157,7 @@ void __cdecl fcn_00586c10(char* obj)
     v[0] = *(int*) ((char*) g + 0x84);
     v[1] = *(int*) ((char*) g + 0x88);
     v[2] = *(int*) ((char*) g + 0x8c);
-    fcn_004432d0(0, 0);
+    d3_SelectSceneContext(0, 0);
     if (g_6b89c0 != 0)
         fcn_00459710((char*) g_6b89c0, 1);
 
@@ -195,7 +195,7 @@ void __cdecl fcn_00586c10(char* obj)
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x216) |= 0x10;
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x214) &= 0x7f;
     fcn_00476970((void*) g_77250c);
-    fcn_005373e0(0, 0x86);
+    main_RunFrameLoop(0, 0x86);
     fcn_00476970((void*) g_77250c);
     fcn_00473150(sp);
 
@@ -214,7 +214,7 @@ void __cdecl fcn_00586c10(char* obj)
     *(int*)(g_77dda0 + 0x70) = -1;
     *(int*)(g_77dda0 + 0x38) = -1;
     *(int*)(g_77dda0 + 0x0) = -1;
-    while (fcn_005373e0((int)fcn_00586c10, 0x2656c7)) {
+    while (main_RunFrameLoop((int)fcn_00586c10, 0x2656c7)) {
         fcn_005270c0(0);
         *(unsigned int*) ((char*) S + 0x6c) = (unsigned int)g_6b7fac;
         elapsedTicks = (unsigned int)g_6b7fac - *(unsigned int*) ((char*) S + 0x68);
@@ -252,7 +252,7 @@ void __cdecl fcn_00586c10(char* obj)
     fcn_00533a40((char*) 0x6b5c60);
     sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
     while (!(*(u8*) sp & 4))
-        fcn_005373e0(0, flags);
+        main_RunFrameLoop(0, flags);
     fcn_00471e30(*(int*) ((char*) S + 0xa4));
     fcn_00471e30(*(int*) ((char*) S + 0xc0));
     fcn_00471e30(*(int*) ((char*) S + 0x74));
@@ -283,7 +283,7 @@ void __cdecl fcn_00586c10(char* obj)
     g_104048c = s3;
     fcn_005270c0(1);
     fcn_00528fd0();
-    fcn_004432d0(g28, 0);
+    d3_SelectSceneContext(g28, 0);
     if (g_6b89c0 != 0)
         fcn_00459710((char*) g_6b89c0, 1);
     fcn_00438b40((char*) d3_ActiveCamera, p);

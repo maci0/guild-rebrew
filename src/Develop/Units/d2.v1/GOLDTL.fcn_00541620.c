@@ -26,7 +26,7 @@ extern double g_6640e8;
 int __cdecl io_AppendText(int, ...);
 char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_00473150(unsigned char*);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_00509570(int);
 void __cdecl fcn_00438b40(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
@@ -98,7 +98,7 @@ void __cdecl fcn_00541620(void)
 	if (g_6a3420 != 0) {
 		win = (unsigned char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x1e, 1);
 		while ((*win & 4) == 0) {
-			fcn_005373e0(0, main_LoopFlags);
+			main_RunFrameLoop(0, main_LoopFlags);
 		}
 		g1f4 = (int) win;
 	}
@@ -310,13 +310,13 @@ void __cdecl fcn_00541620(void)
 	fcn_0046e830(-1, -1, d2_CurrentWindowId, k, 0x767);
 	*(int*) (k * 0x3cc + 0x10161b4) = 0x18;
 	fcn_004234e0(0, "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
-	i = fcn_005373e0((int) fcn_00541620, 0x24087);
+	i = main_RunFrameLoop((int) fcn_00541620, 0x24087);
 	while (i != 0) {
 		d2_UpdateScrollPerga();
 		if (g_100f1dc == 2 || g_14cf950 == 0x1c) {
 			g_774654 = 1;
 		}
-		i = fcn_005373e0((int) fcn_00541620, 0x24087);
+		i = main_RunFrameLoop((int) fcn_00541620, 0x24087);
 	}
 	fcn_005355f0();
 fold:

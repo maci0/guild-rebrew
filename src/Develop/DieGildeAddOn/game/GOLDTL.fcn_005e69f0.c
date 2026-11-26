@@ -9,7 +9,7 @@ extern int g_14ad0f8;
 extern int g_14b5ab4;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_0058d5f0(int);
 void __cdecl d2_OpenTransportPanel(int);
@@ -38,7 +38,7 @@ void __cdecl fcn_005e69f0(int a)
 	meister = 0;
 	betteln = 0;
 	fcn_005338a0();
-	while (fcn_005373e0(fcn_005e69f0, 0x67fff) != 0) {
+	while (main_RunFrameLoop(fcn_005e69f0, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			zig = RegisterStatusText("contact_ZUTATEN_SUCHEN_ZIGEUNER", g_14b5b94, 0x16);
 			trans = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);

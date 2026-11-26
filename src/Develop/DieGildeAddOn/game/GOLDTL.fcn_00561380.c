@@ -24,7 +24,7 @@ void __cdecl fcn_004c51a0(int, int, char, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, char *);
 void *__cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00500bb0(void *, int, int, int);
+void __cdecl gm_AddTime(void *, int, int, int);
 int __cdecl fcn_0055be70(void *);
 void __cdecl fcn_004c5ed0(int, char *, int);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
@@ -41,7 +41,7 @@ void *__cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl fcn_004c58b0(int, int);
 void __cdecl fcn_004c57e0(int, int);
 void __cdecl he_FreeAction(void *);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_00422460(int, char *);
 void __cdecl fcn_004193f0(int, int, int, int);
 void *__cdecl fcn_00445600(void *, int, int, char *);
@@ -123,7 +123,7 @@ void __cdecl fcn_00561380(void *action)
 			if (*(int *)(*(int *)(r + 0x184) + 0x128) == 0)
 				goto label_561b4d;
 			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;
-			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
+			gm_AddTime((void *)(p + 0x52), 0, 4, 0);
 			*(int *)(p + 0x70) = 2;
 			return;
 		}
@@ -173,7 +173,7 @@ void __cdecl fcn_00561380(void *action)
 			if (hand != 0 && query != 0)
 				fcn_004c58b0(*(int *)hand, *(int *)(query + 4));
 			*(int *)(p + 0x70) = 8;
-			fcn_00500bb0((void *)(p + 0x52), 0, 10, 0);
+			gm_AddTime((void *)(p + 0x52), 0, 10, 0);
 			return;
 		}
 	case 8:
@@ -186,12 +186,12 @@ void __cdecl fcn_00561380(void *action)
 				return;
 			}
 			if (*(int *)(r + 0xd4) == *(int *)(p + 4)) {
-				fcn_00500bb0((void *)(p + 0x52), 0, 6, 0);
+				gm_AddTime((void *)(p + 0x52), 0, 6, 0);
 				return;
 			}
 			fcn_004c5da0(*(int *)(p + 0xc4), *(int *)(p + 0x10), -1, 0, 1, g_6a6560);
 			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;
-			fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
+			gm_AddTime((void *)(p + 0x52), 0, 4, 0);
 			*(int *)(p + 0x70) = 6;
 			return;
 		}
@@ -243,7 +243,7 @@ void __cdecl fcn_00561380(void *action)
 			} while ((int)v22 < (int)0x85a0a4);
 			*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
 			*(MSGCOLOR *)q = *(MSGCOLOR *)&gm_GameTime;
-			fcn_00500bb0(q, 0, 10, 0);
+			gm_AddTime(q, 0, 10, 0);
 			return;
 			}
 		label_561a7a:
@@ -312,7 +312,7 @@ void __cdecl fcn_00561380(void *action)
 					fcn_004193f0(n, *(int *)(r + 0x61), 0x6b, 0x463ea000);
 				v24 = 3.0f;
 			}
-			fcn_004432d0(0, 1);
+			d3_SelectSceneContext(0, 1);
 			model = (unsigned char *)*(int *)(r + 0x61);
 			if (model == 0)
 				goto label_562049;
@@ -356,9 +356,9 @@ void __cdecl fcn_00561380(void *action)
 				20.0f, 60.0f, 0x50);
 		label_562049:
 			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;
-			fcn_00500bb0((void *)(p + 0x52), 0, gm_RandomMod(2) & 0xffff, 0);
+			gm_AddTime((void *)(p + 0x52), 0, gm_RandomMod(2) & 0xffff, 0);
 			*(unsigned char *)(p + 0xc2) = *(unsigned char *)(p + 0xc2) + 1;
-			fcn_004432d0(v10, 1);
+			d3_SelectSceneContext(v10, 1);
 			return;
 			}
 		}
@@ -373,7 +373,7 @@ void __cdecl fcn_00561380(void *action)
 			}
 			if (*(int *)(*(int *)(r + 0x184) + 0x128) != 0) {
 				*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;
-				fcn_00500bb0((void *)(p + 0x52), 0, 4, 0);
+				gm_AddTime((void *)(p + 0x52), 0, 4, 0);
 				goto label_56211d;
 			} else {
 				goto label_56148f;

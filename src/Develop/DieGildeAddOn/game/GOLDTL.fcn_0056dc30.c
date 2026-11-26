@@ -18,7 +18,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 double __cdecl fcn_004ff040(char*);
 float __cdecl fcn_004ff210(unsigned short, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_SearchTable67(int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -46,7 +46,7 @@ void __cdecl fcn_0056dc30(char* u)
 			fcn_004ff210(*(unsigned short*) h, (int) x);
 			*(unsigned int*) (u + 0xb0) = (unsigned int) (*(unsigned int*) (u + 0xb0) - x);
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 10, 0);
+			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 10, 0);
 		} else {
 			(*(int*) (u + 0x70))++;
 		}

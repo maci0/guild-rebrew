@@ -26,7 +26,7 @@ extern char s_6aaef4[];
 extern char s_6aaedc[];
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl d2_IsTutorialActionAllowed(int);
 void __cdecl fcn_005ce460(int);
@@ -42,7 +42,7 @@ void __cdecl fcn_005a9c50(int arg)
 	int e;
 
 	fcn_005338a0();
-	if (fcn_005373e0((void*) fcn_005a9c50, 0x67fff) != 0) {
+	if (main_RunFrameLoop((void*) fcn_005a9c50, 0x67fff) != 0) {
 		do {
 			if (d2_IsTutorialActionAllowed(0x1000) == 1) {
 				a = RegisterStatusText(s_6aaf40, g_14aa2f0, 0xc);
@@ -83,6 +83,6 @@ void __cdecl fcn_005a9c50(int arg)
 					d2_ShowOfficeApplicationDialog();
 				}
 			}
-		} while (fcn_005373e0((void*) fcn_005a9c50, 0x67fff) != 0);
+		} while (main_RunFrameLoop((void*) fcn_005a9c50, 0x67fff) != 0);
 	}
 }

@@ -26,14 +26,14 @@ extern char g_7f4ca0[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c5980(void*);
 void __cdecl cut_ExecuteCutscene(void*);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl io_AppendText(char*);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 
@@ -52,17 +52,17 @@ void __cdecl fcn_005b3b60(void)
 	item[7] = fcn_00470820(0, 0, "misc\\theatre");
 	d2_CenterDialogWindows(item[7]);
 	d2_SetForm(item[7], 0);
-	item[2] = fcn_00472250(item[7], 0, io_AppendText("%ia[Hochzeit]$N"));
-	item[4] = fcn_00472250(item[7], 0, io_AppendText("%ia[Tod]$N"));
-	item[8] = fcn_00472250(item[7], 0, io_AppendText("%ia[Pleite]$N"));
-	item[9] = fcn_00472250(item[7], 0, io_AppendText("%ia[Hinrichtung]$N"));
-	item[6] = fcn_00472250(item[7], 0, io_AppendText("%ia[Pacht]$N"));
-	item[10] = fcn_00472250(item[7], 0, io_AppendText("%ia[Geburt]$N"));
-	item[0] = fcn_00472250(item[7], 0, io_AppendText("%ia[Pest]$N"));
-	item[1] = fcn_00472250(item[7], 0, io_AppendText("%ia[Brand]$N"));
-	item[3] = fcn_00472250(item[7], 0, io_AppendText("%ia[Sturm]$N"));
-	item[5] = fcn_00472250(item[7], 0, io_AppendText("%ia[Duell]$N"));
-	while (fcn_005373e0(0x5b3b60, 0x657c7)) {
+	item[2] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Hochzeit]$N"));
+	item[4] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Tod]$N"));
+	item[8] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Pleite]$N"));
+	item[9] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Hinrichtung]$N"));
+	item[6] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Pacht]$N"));
+	item[10] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Geburt]$N"));
+	item[0] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Pest]$N"));
+	item[1] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Brand]$N"));
+	item[3] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Sturm]$N"));
+	item[5] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Duell]$N"));
+	while (main_RunFrameLoop(0x5b3b60, 0x657c7)) {
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		}
@@ -109,7 +109,7 @@ void __cdecl fcn_005b3b60(void)
 					i++;
 				}
 				*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
-				fcn_00500bb0(m + 0x18, 0, 0x1e, 0);
+				gm_AddTime(m + 0x18, 0, 0x1e, 0);
 				fcn_004c5980(m);
 			} else if (k == item[2]) {
 				r = gm_StartFilteredEntitySearch(1, 5, 7);
@@ -173,7 +173,7 @@ void __cdecl fcn_005b3b60(void)
 					*(int*) (m + 0xc) = ((EntityStruct*) g_7f4ca0)[g_774970].entity_id;
 					*(int*) (m + 0x7c) = *(int*) (r + 1);
 					*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
-					fcn_00500bb0(m + 0x18, 0, 0x1e, 0);
+					gm_AddTime(m + 0x18, 0, 0x1e, 0);
 					fcn_004c5980(m);
 				}
 				g_774954 = 0;
@@ -205,9 +205,9 @@ void __cdecl fcn_005b3b60(void)
 				*(int*) (msg + 0x9c) = 0x7d0;
 				*(int*) (msg + 0x2e) = 0;
 				if ((unsigned short) g_7f4c04 >= 0x17) {
-					fcn_00500bb0(msg + 0x28, (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
+					gm_AddTime(msg + 0x28, (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 				} else {
-					fcn_00500bb0(msg + 0x28, gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
+					gm_AddTime(msg + 0x28, gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 				}
 				fcn_004c5530(msg);
 			} else if (k == item[3]) {
@@ -223,9 +223,9 @@ weather_send:
 				*(int*) (msg + 0x28) = gm_GameTime.a;
 				*(unsigned short*) (msg + 0x34) = g_7f4c0c;
 				if ((unsigned short) g_7f4c04 >= 0x17) {
-					fcn_00500bb0(msg + 0x28, (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
+					gm_AddTime(msg + 0x28, (gm_RandomMod(4) & 0xffff) + 7, (gm_RandomMod(2) & 0xffff) * 30, 0);
 				} else {
-					fcn_00500bb0(msg + 0x28, gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
+					gm_AddTime(msg + 0x28, gm_RandomMod(4) & 0xffff, (gm_RandomMod(2) & 0xffff) * 30, 0);
 				}
 				fcn_004c5530(msg);
 			} else if (k == item[5]) {
@@ -251,7 +251,7 @@ weather_send:
 				}
 				*(char*) (m + 0x7c) = 0;
 				*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
-				fcn_00500bb0(m + 0x18, 0, 0x1e, 0);
+				gm_AddTime(m + 0x18, 0, 0x1e, 0);
 				fcn_004c5980(m);
 				g_774654 = 2;
 			}

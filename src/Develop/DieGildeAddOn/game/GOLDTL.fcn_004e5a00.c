@@ -8,7 +8,7 @@ extern double dbl_6629c8;
 
 int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004cfe00(void);
-void __cdecl fcn_005373e0(int a, int b);
+void __cdecl main_RunFrameLoop(int a, int b);
 int __cdecl fcn_004730c0(int a, int b, int c, int d, char* e, int f, int g);
 void __cdecl fcn_004e5980(void);
 void __cdecl tb_OpenFunction(char* a, int b);
@@ -30,7 +30,7 @@ void __cdecl fcn_004da280(void);
 void __cdecl fcn_004e59c0(void);
 void __cdecl fcn_0042def0(char* a);
 void __cdecl fcn_00528fd0(void);
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_00459710(int a, int b);
 void __cdecl fcn_004463f0(int a, int b, int c);
 void __cdecl fcn_00516de0(int a, int b);
@@ -160,7 +160,7 @@ fill_tail:
     flags = (*(int*) 0x7e46ac & ~8) | 0x110080;
     *(int*) 0x772f50 = fcn_004730c0(0, 0, b, a, (char*) 0x67d67c, 0x5a, 1);
     while ((*(unsigned char*) *(int*) 0x772f50 & 4) == 0)
-        fcn_005373e0(0, flags);
+        main_RunFrameLoop(0, flags);
     s3a40 = *(int*) 0x7e3a40;
     s3a44 = *(int*) 0x7e3a44;
     s3a48 = *(int*) 0x7e3a48;
@@ -269,7 +269,7 @@ display:
         }
     }
 tail:
-    fcn_004432d0(*(int*) 0x9a9648, 0);
+    d3_SelectSceneContext(*(int*) 0x9a9648, 0);
     if (*(int*) 0x6b89c0 != 0)
         fcn_00459710(*(int*) 0x6b89c0, 1);
     *(int*) 0x7e3a40 = s3a40;

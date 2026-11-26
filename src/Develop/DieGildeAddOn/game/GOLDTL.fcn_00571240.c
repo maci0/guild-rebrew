@@ -25,7 +25,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_00500cb0(char*, char*);
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
 extern char g_7f4ca0[];
@@ -129,7 +129,7 @@ skip_map:
 				*(float*) (self + 0xb4) = (float) *(int*) (self + 0xb0);
 			}
 			*(pos14_7f4c00*) (self + 0x60) = *(pos14_7f4c00*) (self + 0x52);
-			fcn_00500bb0(self + 0x52, 0, 0, 5);
+			gm_AddTime(self + 0x52, 0, 0, 5);
 		} while (fcn_00500cb0(self + 0x52, gm_GameTime) < 0);
 		return;
 	case 2:

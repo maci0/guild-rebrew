@@ -8,8 +8,8 @@ char* __cdecl ch_FindCharacterByName(char*);
 char* __cdecl gm_FindRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl init_EnsureObjektSceneContext(char*);
-int __cdecl fcn_005155e0(char*);
-void __cdecl fcn_004432d0(int, int);
+int __cdecl init_AllocateGebaeudeSceneSlot(char*);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl ch_QueueStandUpAnimation(char*, char*);
 char* __cdecl ch_QueueWalkToDummy(char*, char*);
@@ -42,7 +42,7 @@ int __cdecl cm_ExChrWalkToDummy(char* a1, char* a2)
 	if (*(int*) (a1 + 0x18) != -1)
 		k = init_EnsureObjektSceneContext(s);
 	else if (*(int*) (a1 + 0x14) != -1)
-		k = fcn_005155e0(r);
+		k = init_AllocateGebaeudeSceneSlot(r);
 	else
 		k = 0;
 	if (k == -1)
@@ -50,9 +50,9 @@ int __cdecl cm_ExChrWalkToDummy(char* a1, char* a2)
 	if (g_1043695[k * 988] != 0)
 		return 3;
 	if (a1[0x1c] != 0) {
-		fcn_004432d0(k, 1);
+		d3_SelectSceneContext(k, 1);
 		dummy = fcn_00445600(0, 0x160, 0, a1 + 0x1c);
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 		if (dummy == 0)
 			return 4;
 		ch_QueueStandUpAnimation(character, "sitzend/aufstehen");

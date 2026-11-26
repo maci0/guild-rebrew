@@ -2,7 +2,7 @@ int __cdecl fcn_004f39b0(int);
 
 
 /* ADDRESS: GOLDTL 0x004a9150 */
-int __cdecl fcn_004a9150(int a, char* e, int b, char* out)
+int __cdecl ai_CheckAction02bPredicate(int a, char* e, int b, char* out)
 {
 	int n;
 	int h;

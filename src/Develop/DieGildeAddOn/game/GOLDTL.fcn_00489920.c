@@ -13,7 +13,7 @@ int __cdecl gm_CanEvaluateMaster(char* e);
 int __cdecl gm_RandomMod(unsigned short n);
 char* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
-void __cdecl fcn_00500bb0(SIM_CLOCK_489920* clock, int arg2, int arg3, int arg4);
+void __cdecl gm_AddTime(SIM_CLOCK_489920* clock, int arg2, int arg3, int arg4);
 void __cdecl fcn_004c5530(int msg);
 
 /* ADDRESS: GOLDTL 0x00489920 */
@@ -46,7 +46,7 @@ void __cdecl fcn_00489920(char* e)
 
 			*(char*) (s + 0x36) = 1;
 			*(pos14_7f4c00*) (s + 0x28) = gm_GameTime;
-			fcn_00500bb0((SIM_CLOCK_489920*) (s + 0x28), 0, 0, 10);
+			gm_AddTime((SIM_CLOCK_489920*) (s + 0x28), 0, 0, 10);
 			*(int*) (s + 0x58) = *(int*) (q + 2);
 			*(int*) (s + 0x64) = 5;
 			*(int*) (s + 0x84) = 0;

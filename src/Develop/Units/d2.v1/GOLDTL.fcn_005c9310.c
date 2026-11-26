@@ -34,7 +34,7 @@ extern Win_1015f40 g_1015f40[0x60];
 
 int __cdecl fcn_0050d5d0(int, int, char**);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
 void* __cdecl gm_SearchTable67(int);
 int __cdecl io_AppendText(int, ...);
@@ -57,7 +57,7 @@ void __cdecl fcn_005c9310(unsigned short* who, int max, Row* rows, int dlg, int 
 	}
 	for (i = 0; i < cnt; i++) {
 		d2_SetForm(dlg, n);
-		rows[i].icon = fcn_0046f740((((Screen*)g_77255c)->width - w) >> 1, i * 0x80, 0x75a, d2_CurrentWindowId);
+		rows[i].icon = d2_AddElementToWindow((((Screen*)g_77255c)->width - w) >> 1, i * 0x80, 0x75a, d2_CurrentWindowId);
 		rows[i].text = fcn_0046f100((((Screen*)g_77255c)->width - w) >> 1, i * 0x80 + 4, w, 0x72, 0x10, d2_CurrentWindowId);
 		rows[i].obj = list[i];
 		*(int*) &((D2_WIN*)g_1015f40)[rows[i].text].pad280[12] = 0x56;

@@ -11,7 +11,7 @@ int __cdecl fcn_004c5620(int, char*);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 int __cdecl d3_GetContextIndex(int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl ch_DestroyCharacter(char*);
 char* __cdecl fcn_004fe2e0(char*, int, float*, float*, int, int);
 void __cdecl ch_SetBodyAttachment(int, int, char*);
@@ -102,7 +102,7 @@ void __cdecl fcn_00566360(char* action)
 		v7 = d3_GetContextIndex(*(unsigned int*) (v6 + 0x88));
 		name[0] = g_6b5c60[0];
 		memset(name + 1, 0, 0x7f);
-		fcn_004432d0(v7, 1);
+		d3_SelectSceneContext(v7, 1);
 		v6 = *(int*) (ent + 0x184);
 		pos[0] = *(float*) (*(int*) (v6 + 0x34) + 0x4c);
 		pos[1] = *(float*) (*(int*) (v6 + 0x34) + 0x50);
@@ -135,7 +135,7 @@ void __cdecl fcn_00566360(char* action)
 				*(unsigned int*) (p + 0xc8c) = 1;
 			}
 		}
-		fcn_004432d0(v15, 1);
+		d3_SelectSceneContext(v15, 1);
 		o = action;
 		if ((unsigned char) o[0x78] & 2) {
 			fcn_004c5420(*(unsigned int*) (ent + 4), 0x1cc, 4, 0, 0x1000000);

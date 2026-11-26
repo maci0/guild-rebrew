@@ -39,7 +39,7 @@ float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_0050c710(Home* h, int a, int b);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
 void __cdecl fcn_00549580(char* s, Player* p, Player* q, Home* h, float v, int f);
-void __cdecl fcn_00500bb0(Clock* c, int a, int b, int d);
+void __cdecl gm_AddTime(Clock* c, int a, int b, int d);
 
 /* One step of the accident simulation: walks twelve players in a
  * pseudo-random order and rolls an accident for each. */
@@ -111,7 +111,7 @@ void __cdecl RunSimUnfall(char* s)
 		((Clock*) (s + 0x52))->hour = 10;
 		return;
 	}
-	fcn_00500bb0((Clock*) (s + 0x52), 0, 0x1e, 0);
+	gm_AddTime((Clock*) (s + 0x52), 0, 0x1e, 0);
 	if (((Clock*) (s + 0x52))->hour >= 0x12) {
 		((Clock*) (s + 0x52))->minute = 0;
 		((Clock*) (s + 0x52))->hour = 10;

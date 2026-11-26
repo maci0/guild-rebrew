@@ -42,7 +42,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_005cc240(int, int, int);
 void __cdecl fcn_005ccbe0(void);
 void __cdecl fcn_005ccc00(int, int, void*);
@@ -242,7 +242,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 			time0 = g_6b7fac + 0xd8;
 		}
 	after:
-		if (fcn_005373e0((void*) d2_ShowTabbedSelectionDialog, 0x657c7) == 0) {
+		if (main_RunFrameLoop((void*) d2_ShowTabbedSelectionDialog, 0x657c7) == 0) {
 			break;
 		}
 	} while (1);

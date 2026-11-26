@@ -23,11 +23,11 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00472830(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
@@ -35,7 +35,7 @@ char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl fcn_0050dfd0(int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 void __cdecl d2_SetElementValue(int, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_004bf000(unsigned short*, int, int, int, int, int, int, int*);
 void __cdecl fcn_004bf150(int*);
 void __cdecl fcn_004bf1a0(char*);
@@ -108,11 +108,11 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 		fcn_004bf1a0((char*) &nodeA[k][0]);
 		fcn_004bf1a0((char*) &nodeB[k][0]);
 	}
-	fcn_0046f740(0x6e, 0x1a, *(unsigned short*) rec + 0x4ae, first);
+	d2_AddElementToWindow(0x6e, 0x1a, *(unsigned short*) rec + 0x4ae, first);
 	i = d2_ShowTxt(0x6e, 2, g_14b5e88, first);
 	((D2_CONTROL_TL*) (g_1015ea0))[i].value_06c = 1;
 	((D2_CONTROL_TL*) (g_1015ea0))[i].width = 0xcd;
-	fcn_0046f740(0x6e, 0x88, *(unsigned short*) rec + 0x4ae, first);
+	d2_AddElementToWindow(0x6e, 0x88, *(unsigned short*) rec + 0x4ae, first);
 	i = d2_ShowTxt(0x6e, 0x70, g_14b5e8c, first);
 	((D2_CONTROL_TL*) (g_1015ea0))[i].value_06c = 1;
 	((D2_CONTROL_TL*) (g_1015ea0))[i].width = 0xcd;
@@ -128,15 +128,15 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 		icons[11] = 0x93;
 		for (i = 0; i < n; i++) {
 			k = icons[3 + i + (*(unsigned short*) rec - 0x134) * 3] + 0x6e;
-			icons[i] = fcn_0046f740(k, 0x22, 0x525, first);
+			icons[i] = d2_AddElementToWindow(k, 0x22, 0x525, first);
 			((D2_CONTROL_TL*) (g_1015ea0))[icons[i]].value_05c = 1;
 			((D2_CONTROL_TL*) (g_1015ea0))[icons[i]].flags_1d0 = 3;
-			labels[i] = fcn_0046f740(k, 0x90, 0x525, first);
+			labels[i] = d2_AddElementToWindow(k, 0x90, 0x525, first);
 			((D2_CONTROL_TL*) (g_1015ea0))[labels[i]].value_05c = 1;
 			((D2_CONTROL_TL*) (g_1015ea0))[labels[i]].flags_1d0 = 3;
 		}
 	}
-	while (fcn_005373e0(fcn_004bf1b0, 0x657c7) != 0) {
+	while (main_RunFrameLoop(fcn_004bf1b0, 0x657c7) != 0) {
 		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == selA)) {
 			g_774654 = 1;
 		}
@@ -159,7 +159,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 				d2_SetElementValue(n, 1, value, k);
 			}
 			if (nodeA[i][2] != -1) {
-				d2_SetElementValue(nodeA[i][2], 0, value, fcn_00471f80(n));
+				d2_SetElementValue(nodeA[i][2], 0, value, d2_GetControlValue(n));
 			}
 		}
 		for (i = 0; i < 3; i++) {
@@ -174,7 +174,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 				d2_SetElementValue(n, 1, value, k);
 			}
 			if (nodeB[i][2] != -1) {
-				d2_SetElementValue(nodeB[i][2], 0, value, fcn_00471f80(n));
+				d2_SetElementValue(nodeB[i][2], 0, value, d2_GetControlValue(n));
 			}
 		}
 		if (g_100f1dc != -1) {
@@ -244,12 +244,12 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 	if (a0 != 0) {
 		for (i = 0; i < 3; i++) {
 			if (nodeA[i][1] != -1) {
-				*(int*) ((char*) a0 + 0xc + i * 8) = fcn_00471f80(nodeA[i][1]);
+				*(int*) ((char*) a0 + 0xc + i * 8) = d2_GetControlValue(nodeA[i][1]);
 			}
 		}
 		for (i = 0; i < 3; i++) {
 			if (nodeB[i][1] != -1) {
-				*(int*) ((char*) a0 + 0x24 + i * 8) = fcn_00471f80(nodeB[i][1]);
+				*(int*) ((char*) a0 + 0x24 + i * 8) = d2_GetControlValue(nodeB[i][1]);
 			}
 		}
 	}

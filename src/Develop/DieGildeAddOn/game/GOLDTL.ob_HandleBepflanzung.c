@@ -22,8 +22,8 @@ unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl fcn_00471af0(int a, int b);
 void __cdecl d2_SetForm(int a, int b);
-int __cdecl fcn_0046f740(int a, int b, int c, int d);
-void __cdecl fcn_00469470(int a, int b);
+int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
+void __cdecl d2_AddToRadioGroup(int a, int b);
 int __cdecl d2_CreateRadioGroup(int a, ...);
 int __cdecl fcn_00441ab0(char* a, int b, int c, float d, float* out);
 float* __stdcall D3DXMatrixTranspose(float* a, const float* b);
@@ -32,7 +32,7 @@ int __cdecl plt_CheckZoneAvailability(int a, int b, int c, unsigned int d);
 void __cdecl d3_SetSubtreeColor(int a, int b, int c, int d);
 int __cdecl fcn_004c5aa0(int a, int b, int c, int d, int e, int f);
 int __cdecl fcn_004c4450(int a);
-int __cdecl fcn_005373e0(void* fn, int msg);
+int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl fcn_004c4480(int a);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 
@@ -155,7 +155,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 	v17 = 0;
 	if (1 <= v16) {
 		do {
-			v16 = fcn_0046f740(0x1a, v17 * 0x32, v7[v17 + 1] + 0xdf,
+			v16 = d2_AddElementToWindow(0x1a, v17 * 0x32, v7[v17 + 1] + 0xdf,
 				d2_CurrentWindowId);
 			v8[v17] = v16;
 			if (v24 == -1) {
@@ -163,7 +163,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v16].value_038) = 1;
 				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v16].value_03c) = 1;
 			} else {
-				fcn_00469470(v24, v16);
+				d2_AddToRadioGroup(v24, v16);
 			}
 			v17 += 1;
 		} while (v17 < v25);
@@ -214,7 +214,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 				v34, v37, *v26, 0, 0xffffffff);
 			v17 = fcn_004c4450(v20);
 			while (!v17) {
-				fcn_005373e0(0, 0x677c7);
+				main_RunFrameLoop(0, 0x677c7);
 				v17 = fcn_004c4450(v20);
 			}
 			v17 = fcn_004c4480(v20);
@@ -294,7 +294,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			}
 			v33 = v23;
 		}
-		if (!fcn_005373e0((void*) ob_HandleBepflanzung, 0x677cf)) {
+		if (!main_RunFrameLoop((void*) ob_HandleBepflanzung, 0x677cf)) {
 			if (v6) {
 				d3_DestroyObject(v6);
 			}

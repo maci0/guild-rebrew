@@ -65,7 +65,7 @@ void __cdecl fcn_004c51a0(int, int, char, int);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c5f60(int, int, int);
 void __cdecl fcn_004c6000(int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, Order*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c4ef0(char*);
@@ -98,7 +98,7 @@ void __cdecl gm_BuyBuilding(int search, int buyer, int price, Order* o, int noti
 	}
 	if (o != 0) {
 		o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
-		fcn_00500bb0(&o->stamp, 0, 0, 1);
+		gm_AddTime(&o->stamp, 0, 0, 1);
 		o->event = fcn_004c5620(-1, o);
 	}
 	fcn_004c5420(s->id, 0x5a, 2, 0, 2);

@@ -13,7 +13,7 @@ struct pos14 {
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, char*);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl gm_AddTime(struct pos14*, int, int, int);
 
 void __cdecl fcn_00560940(char* e)
 {
@@ -27,5 +27,5 @@ void __cdecl fcn_00560940(char* e)
 		}
 	}
 	*(struct pos14*) (e + 0x52) = *(struct pos14*) (e + 0x44);
-	fcn_00500bb0((struct pos14*) (e + 0x52), 0, 1, 0);
+	gm_AddTime((struct pos14*) (e + 0x52), 0, 1, 0);
 }

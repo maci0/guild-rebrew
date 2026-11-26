@@ -2,7 +2,7 @@ extern float g_662d40[3];
 
 
 char* __cdecl fcn_00402140(char* p);
-void __cdecl fcn_00458a10(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl fcn_00458800(char* src, float* v, float* out);
 float __cdecl fcn_004539e0(float* a, float* b);
 char __cdecl fcn_0045f160(char* g, float* v, int* a, int* b, int* c);
@@ -21,7 +21,7 @@ void __cdecl fcn_0040aaf0(char* owner, char* e)
 	float ang;
 
 	g = fcn_00402140(owner);
-	fcn_00458a10(e, e + 0x4c, a);
+	d3_TransformPoint(e, e + 0x4c, a);
 	fcn_00458800(e, g_662d40, b);
 	ang = fcn_004539e0(g_662d40, b);
 	if (fcn_0045f160(g, a, &x, &y, &z)) {

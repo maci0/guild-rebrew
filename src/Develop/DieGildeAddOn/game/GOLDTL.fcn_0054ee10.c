@@ -16,7 +16,7 @@ extern char g_6a5af4[];
 extern char g_6a5ae0[];
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_00500bb0(pos14_7f4c00* s, int a2, int a3, int a4);
+void __cdecl gm_AddTime(pos14_7f4c00* s, int a2, int a3, int a4);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
@@ -50,12 +50,12 @@ void __cdecl fcn_0054ee10(char* t)
 	secondEntity = gm_LookupEntityRecordById(*(int*) (t + 0xb0));
 	if (firstEntity == 0 || (*(int*) (firstEntity + 0x1c8) & 0x100) || secondEntity == 0 || (*(int*) (secondEntity + 0x1c8) & 0x200)) {
 		*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
-		fcn_00500bb0((pos14_7f4c00*) (t + 0x52), 0, 2, 0);
+		gm_AddTime((pos14_7f4c00*) (t + 0x52), 0, 2, 0);
 		*(int*) (t + 0x84) = fcn_004c5620(-1, t);
 		return;
 	}
 	if (*(int*) (t + 0xb4) != 0) {
-		fcn_00500bb0((pos14_7f4c00*) (t + 0x52), 0x18, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (t + 0x52), 0x18, 0, 0);
 		*(int*) (t + 0x58) = 0;
 		if (secondEntity[2] == 6 || secondEntity[2] == 7) {
 			io_FormatTextBuffer(buf, 0x1e18, *(unsigned short*) firstEntity);
@@ -63,7 +63,7 @@ void __cdecl fcn_0054ee10(char* t)
 		}
 		impactValue = -4;
 	} else {
-		fcn_00500bb0((pos14_7f4c00*) (t + 0x52), 0x60, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (t + 0x52), 0x60, 0, 0);
 		*(int*) (t + 0x58) = 0;
 		impactValue = -2;
 		if (secondEntity[2] == 6 || secondEntity[2] == 7) {

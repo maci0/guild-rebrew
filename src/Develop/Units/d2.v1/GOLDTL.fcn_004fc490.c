@@ -14,7 +14,7 @@ void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_SetForm(int h, int b);
 void __cdecl io_AppendText(char* fmt, ...);
-int __cdecl fcn_005373e0(void* fn, int y);
+int __cdecl main_RunFrameLoop(void* fn, int y);
 void __cdecl fcn_00471e30(int h);
 
 void __cdecl d2_ShowTaxStatistics(void)
@@ -33,6 +33,6 @@ void __cdecl d2_ShowTaxStatistics(void)
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) d2_ShowTaxStatistics, 0x677c7));
+	} while (main_RunFrameLoop((void*) d2_ShowTaxStatistics, 0x677c7));
 	fcn_00471e30(h);
 }

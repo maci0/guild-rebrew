@@ -17,8 +17,8 @@ extern void* __cdecl fcn_00470820(int, int, char*);
 extern void __cdecl d2_CenterDialogWindows(void*);
 extern void __cdecl io_AppendText(int);
 extern int __cdecl fcn_00471e30(void*);
-extern int __cdecl fcn_00471f80(void*);
-extern int __cdecl fcn_00472250(void*, int, int);
+extern int __cdecl d2_GetControlValue(void*);
+extern int __cdecl d2_GetWindowListItem(void*, int, int);
 extern int __cdecl fcn_00472380(void*, char*);
 extern int __cdecl d2_SetBildArgument(void*, int);
 extern int __cdecl fcn_004727a0(void*, int);
@@ -42,7 +42,7 @@ extern int __cdecl fcn_00507b00(int);
 extern int __cdecl fcn_0051af00(char*, int);
 extern int __cdecl fcn_00526120(char*, int);
 extern int __cdecl fcn_00535960(void);
-extern int __cdecl fcn_005373e0(void*, int);
+extern int __cdecl main_RunFrameLoop(void*, int);
 extern int __cdecl fcn_00593110(void);
 extern int __cdecl fcn_005931a0(void);
 extern int __cdecl fcn_00593200(void);
@@ -101,7 +101,7 @@ int __cdecl fcn_005926f0(void)
 				fcn_00471e30(h);
 				return 0;
 			}
-		} while (fcn_005373e0((void*)fcn_005926f0, 0x24087) != 0);
+		} while (main_RunFrameLoop((void*)fcn_005926f0, 0x24087) != 0);
 		fcn_00471e30(h);
 		return 0;
 	}
@@ -160,7 +160,7 @@ int __cdecl fcn_005926f0(void)
 				fcn_00471e30(h);
 				return 0;
 			}
-		} while (fcn_005373e0((void*)fcn_005926f0, 0x24087) != 0);
+		} while (main_RunFrameLoop((void*)fcn_005926f0, 0x24087) != 0);
 		fcn_00471e30(h);
 		return 0;
 	}
@@ -174,7 +174,7 @@ int __cdecl fcn_005926f0(void)
 	fcn_00593360();
 	fcn_00593550();
 	fcn_004727a0(g_6a9b9c, 1);
-	h = (void*)fcn_00472250(g_6a9b9c, 0, 0);
+	h = (void*)d2_GetWindowListItem(g_6a9b9c, 0, 0);
 	d2_SetBildArgument(h, 0x40);
 	flag = 0;
 	fcn_00472380(h, (char*)0x6b5c60);
@@ -195,7 +195,7 @@ int __cdecl fcn_005926f0(void)
 		} else {
 			if (*(int*)0x7725d0 == 0 || *(char*)0x14cf950 == 0x1c) {
 				flag = 0;
-				strcpy(inputText, (char*)fcn_00471f80(h));
+				strcpy(inputText, (char*)d2_GetControlValue(h));
 				fcn_00472380(h, (char*)0x6b5c60);
 				if (strlen(inputText) != 0) {
 					if (g_779c40 != -1)
@@ -297,7 +297,7 @@ int __cdecl fcn_005926f0(void)
 		}
 	last:
 		;
-	} while (fcn_005373e0((void*)fcn_005926f0, 0x24087) != 0);
+	} while (main_RunFrameLoop((void*)fcn_005926f0, 0x24087) != 0);
 
 	fcn_00471e30(g_6a9b9c);
 	*(unsigned char*)0x7e23e2 = 0x12;

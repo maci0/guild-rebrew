@@ -6,14 +6,14 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_0057c720(char* o)
 {
 	*(int*) (o + 0x70) = 0;
 	*(pos14_7f4c00*) (o + 0x44) = gm_GameTime;
 	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0x18, 0, 0);
+	gm_AddTime((pos14_7f4c00*) (o + 0x52), 0x18, 0, 0);
 	*(short*) (o + 0x56) = 6;
 	*(int*) (o + 0x58) = gm_RandomMod(0x10) + 5;
 }

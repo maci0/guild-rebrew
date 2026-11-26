@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00435740 */
-int __cdecl fcn_00435740(void)
+int __cdecl d3_RemoveObjectAnimation(void)
 {
 	/* stub */
 	return 0;

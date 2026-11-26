@@ -11,8 +11,8 @@ void __cdecl fcn_005059b0(char* e, int a, int b);
 void __cdecl fcn_005058b0(char* e, char* q, int a);
 int __cdecl fcn_004c51f0(int a, int b, int c, int d, unsigned char k, int n);
 void __cdecl fcn_004c6090(char* e, int a, int b, int c);
-void __cdecl fcn_004c44a0(void);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_BeginCommandSync(void);
+void __cdecl cm_EndCommandSync(void);
 char* __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
 
@@ -47,9 +47,9 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 		} while (n);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
-			fcn_004c44a0();
+			cm_BeginCommandSync();
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d0, 0x19, g_773d75, 0);
-			fcn_004c44b0();
+			cm_EndCommandSync();
 			while (!fcn_004c44c0()) {
 				fcn_00535960();
 			}
@@ -60,12 +60,12 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 		fcn_005059b0(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
-			fcn_004c44a0();
+			cm_BeginCommandSync();
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d0, 0x14, g_773d75, 0);
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d7, 0x0f, g_773d75, 0);
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d6, 0x0f, g_773d75, 0);
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x158, 10, g_773d75, 0);
-			fcn_004c44b0();
+			cm_EndCommandSync();
 			while (!fcn_004c44c0()) {
 				fcn_00535960();
 			}
@@ -93,11 +93,11 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 		fcn_005059b0(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
-			fcn_004c44a0();
+			cm_BeginCommandSync();
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x1cb, 10, g_773d75, 0);
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x1cc, 10, g_773d75, 0);
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d0, 10, g_773d75, 0);
-			fcn_004c44b0();
+			cm_EndCommandSync();
 			while (!fcn_004c44c0()) {
 				fcn_00535960();
 			}
@@ -118,11 +118,11 @@ void __cdecl fcn_0053abe0(unsigned int ownerSlot)
 		fcn_005059b0(e, ownerSlot, ownerSlot);
 		q = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x2a);
 		if (q != 0) {
-			fcn_004c44a0();
+			cm_BeginCommandSync();
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x1cb, 10, g_773d75, 0);
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x1cc, 10, g_773d75, 0);
 			fcn_004c51f0(*(int*) (q + 2), -1, 0x1d0, 10, g_773d75, 0);
-			fcn_004c44b0();
+			cm_EndCommandSync();
 			while (!fcn_004c44c0()) {
 				fcn_00535960();
 			}

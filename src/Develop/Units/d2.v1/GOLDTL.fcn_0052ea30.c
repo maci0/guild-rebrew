@@ -40,8 +40,8 @@ void __cdecl io_AppendText(char* fmt, ...);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 int __cdecl gm_GetElapsedMinutes(void* a, void* b);
-void __cdecl fcn_00500bb0(void* p, int a, int b, int c);
-int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
+void __cdecl gm_AddTime(void* p, int a, int b, int c);
+int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 int __cdecl fcn_0046f7e0(int x, int y, int z, int owner, int flag);
 void __cdecl d2_DestroyElement(int element);
 int __cdecl fcn_00529800(char* s, int* out);
@@ -107,7 +107,7 @@ header_done:
 		((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
-			g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+			g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 		}
 		return;
 	}
@@ -123,7 +123,7 @@ header_done:
 			}
 			if (g_6a25c4[0] == -1) {
 				d2_SetForm(g_6a25b8, 0);
-				g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+				g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 			}
 		}
 		((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
@@ -139,7 +139,7 @@ header_done:
 		((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
 		if (g_6a25c4[0] == -1) {
 			d2_SetForm(g_6a25b8, 0);
-			g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+			g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 		}
 		return;
 	}
@@ -159,7 +159,7 @@ header_done:
 	((D2_CONTROL_TL*) (g_1015ea0))[g_6a25bc].value_1f4.real = ratio;
 	if (g_6a25c4[0] == -1) {
 		d2_SetForm(g_6a25b8, 0);
-		g_6a25c4[0] = fcn_0046f740(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
+		g_6a25c4[0] = d2_AddElementToWindow(((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) + 0x2f, 0x4c, 0x4ff, d2_CurrentWindowId);
 	}
 	return;
 
@@ -198,7 +198,7 @@ no_header:
 			if (kinds[i] >= 0xdf && kinds[i] < 0x3bb) {
 				g_6a25c4[i] = fcn_0046f7e0(x + 0x32, y, kinds[i], d2_CurrentWindowId, -2);
 			} else {
-				g_6a25c4[i] = fcn_0046f740(x + 0x32, y, kinds[i], d2_CurrentWindowId);
+				g_6a25c4[i] = d2_AddElementToWindow(x + 0x32, y, kinds[i], d2_CurrentWindowId);
 			}
 			y += 0x1a;
 		}
@@ -239,7 +239,7 @@ no_header:
 		break;
 	case 0x61:
 		pos = *(pos14_7f4c00*) (p + 0xc4);
-		fcn_00500bb0(&pos, 8, 0, 0);
+		gm_AddTime(&pos, 8, 0, 0);
 		n = gm_GetElapsedMinutes(p + 0xc4, &pos);
 		if (n != 0) {
 			ratio = (float) gm_GetElapsedMinutes(p + 0xc4, (char*) &gm_GameTime) / (float) n;
@@ -247,7 +247,7 @@ no_header:
 		break;
 	case 0x43:
 		pos = *(pos14_7f4c00*) (p + 0x44);
-		fcn_00500bb0(&pos, 0x18, 0, 0);
+		gm_AddTime(&pos, 0x18, 0, 0);
 		n = gm_GetElapsedMinutes(p + 0x44, &pos);
 		if (n != 0) {
 			ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;
@@ -258,7 +258,7 @@ no_header:
 			ratio = 0.01f;
 		} else if (*(int*) (p + 0x70) == 4) {
 			pos = *(pos14_7f4c00*) (p + 0x44);
-			fcn_00500bb0(&pos, 0x60, 0, 0);
+			gm_AddTime(&pos, 0x60, 0, 0);
 			n = gm_GetElapsedMinutes(p + 0x44, &pos);
 			if (n != 0) {
 				ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;
@@ -270,7 +270,7 @@ no_header:
 			ratio = 0.01f;
 		} else {
 			pos = *(pos14_7f4c00*) (p + 0x44);
-			fcn_00500bb0(&pos, 0x18, 0, 0);
+			gm_AddTime(&pos, 0x18, 0, 0);
 			n = gm_GetElapsedMinutes(p + 0x44, &pos);
 			if (n != 0) {
 				ratio = (float) gm_GetElapsedMinutes(p + 0x44, (char*) &gm_GameTime) / (float) n;

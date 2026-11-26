@@ -570,7 +570,13 @@ input_hash = "b92ed306570fd8207d17f3f5259a38446be62866d69bcd80be2dcb1af04cbc41"
 definition_hash = "eb5631f422b3a0f2c8737e072bec1d5143f8bb5e82cc3dcd8628535048b21bd7"
 measured_at = "2026-10-17T12:44:33+00:00"
 ["GOLD.0x005ee020"]
-section = ".data"
+section = ".rdata"
+type = "float"
+name = "g_662d34"
+size = 4
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:55:56+00:00"
 
 ["GOLD.0x005ee8e0"]
 file = "src/Develop/Unassigned/GOLDTL.fcn_00502820.c"
@@ -26965,12 +26971,12 @@ updated_at = "2026-11-06T03:14:24+00:00"
 ["GOLD.0x00633444"]
 storage_kind = "alias"
 type = "int"
-name = "g_6b8010"
+name = "d3_CurrentContextIndex"
 size = 4
 section = ".data"
 note = "GOLD twin of TL g_6b8010: int index, 142 xrefs, no source definition, owner unknown"
 updated_by = "data"
-updated_at = "2026-11-06T03:14:24+00:00"
+updated_at = "2026-11-25T23:59:18+00:00"
 
 ["GOLD.0x006f2640"]
 storage_kind = "alias"
@@ -27035,3 +27041,733 @@ kind = "GLOBAL"
 note = "dword read by 0x58f6a0 at 0x58f6c7 (mov eax,[0x14b55a4]); zero-filled .bss"
 updated_by = "data"
 updated_at = "2026-11-12T14:26:23+00:00"
+
+["GOLDTL.0x00772620"]
+type = "int"
+name = "g_772620"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:39:25+00:00"
+
+["GOLD.0x006248a4"]
+kind = "GLOBAL"
+name = "g_6a375c"
+type = "unsigned char"
+section = ".data"
+
+["GOLD.0x006f046c"]
+kind = "GLOBAL"
+name = "g_772620"
+type = "int"
+section = ".data"
+
+["GOLDTL.0x0067ead8"]
+type = "char[9]"
+name = "s_67ead8"
+size = 9
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:40:17+00:00"
+
+["GOLD.0x005ffe70"]
+type = "char[9]"
+name = "s_67ead8"
+size = 9
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:40:29+00:00"
+
+["GOLDTL.0x014cbcb4"]
+type = "unsigned int"
+name = "g_14cbcb4"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:41:04+00:00"
+
+["GOLD.0x01460af4"]
+type = "unsigned int"
+name = "g_14cbcb4"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:41:12+00:00"
+
+["GOLDTL.0x006b5c24"]
+type = "int"
+name = "ch_UpdateTime"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:41:54+00:00"
+
+["GOLDTL.0x0067529c"]
+type = "unsigned int"
+name = "g_67529c"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:41:54+00:00"
+
+["GOLD.0x00631054"]
+type = "int"
+name = "ch_UpdateTime"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:42:20+00:00"
+
+["GOLD.0x005f1224"]
+type = "unsigned int"
+name = "g_67529c"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:42:20+00:00"
+
+["GOLDTL.0x0067fb40"]
+type = "char[15]"
+name = "s_67fb40"
+size = 15
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:43:32+00:00"
+
+["GOLD.0x00600ed8"]
+type = "char[15]"
+name = "s_67fb40"
+size = 15
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:43:52+00:00"
+
+["GOLDTL.0x0099f5a0"]
+type = "Rec24_99f5a0"
+name = "g_99f5a0"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:45:08+00:00"
+
+["GOLD.0x0091b480"]
+type = "Rec24_99f5a0"
+name = "g_99f5a0"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:45:15+00:00"
+
+["GOLDTL.0x006b7eb8"]
+type = "char *"
+name = "g_6b7eb8"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:45:48+00:00"
+
+["GOLDTL.0x014cb8e0"]
+type = "void *"
+name = "g_14cb8e0"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:45:48+00:00"
+
+["GOLDTL.0x014cb8e4"]
+type = "int"
+name = "g_14cb8e4"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:45:48+00:00"
+
+["GOLD.0x006332d8"]
+type = "char *"
+name = "g_6b7eb8"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:45:56+00:00"
+
+["GOLD.0x014607a0"]
+type = "void *"
+name = "g_14cb8e0"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:45:56+00:00"
+
+["GOLD.0x014607a4"]
+type = "int"
+name = "g_14cb8e4"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:45:56+00:00"
+
+["GOLDTL.0x0067553c"]
+kind = "GLOBAL"
+name = "g_67553c"
+type = "char[]"
+section = ".data"
+
+["GOLD.0x00631058"]
+kind = "GLOBAL"
+name = "g_6b5c28"
+type = "char"
+section = ".data"
+
+["GOLD.0x00770b82"]
+storage_kind = "alias"
+backing = "g_slot_table"
+type = "char[1]"
+name = "g_7f4ca2"
+size = 1
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:46:18+00:00"
+
+["GOLDTL.0x00664260"]
+type = "Mult664260[7]"
+name = "g_664260"
+size = 112
+section = ".rdata"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:51:27+00:00"
+
+["GOLD.0x005ecfd8"]
+type = "Mult664260[7]"
+name = "g_664260"
+size = 112
+section = ".rdata"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:51:29+00:00"
+
+["GOLDTL.0x006a24e8"]
+type = "int"
+name = "g_6a24e8"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:51:56+00:00"
+
+["GOLD.0x00623798"]
+type = "int"
+name = "g_6a24e8"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:52:03+00:00"
+
+["GOLDTL.0x006a24e4"]
+type = "float"
+name = "g_6a24e4"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:52:05+00:00"
+
+["GOLD.0x00623794"]
+type = "float"
+name = "g_6a24e4"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:52:07+00:00"
+
+["GOLD.0x006f2594"]
+kind = "GLOBAL"
+name = "g_77494c"
+type = "int"
+section = ".data"
+
+["GOLDTL.0x006816d8"]
+type = "int"
+name = "g_6816d8"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:55:25+00:00"
+
+["GOLD.0x00602a70"]
+type = "int"
+name = "g_6816d8"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:55:27+00:00"
+
+["GOLDTL.0x00699364"]
+type = "int"
+name = "gm_NextEntityId"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:55:29+00:00"
+
+["GOLD.0x0061a634"]
+type = "int"
+name = "gm_NextEntityId"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:55:31+00:00"
+
+["GOLDTL.0x006a9694"]
+type = "char[7]"
+name = "g_6a9694"
+size = 7
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:55:49+00:00"
+
+["GOLD.0x0062a578"]
+type = "char[7]"
+name = "g_6a9694"
+size = 7
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:55:51+00:00"
+
+["GOLDTL.0x00662d34"]
+type = "float"
+name = "g_662d34"
+size = 4
+section = ".rdata"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:55:54+00:00"
+
+["GOLDTL.0x00774934"]
+type = "int"
+name = "g_774934"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:55:59+00:00"
+
+["GOLD.0x006f257c"]
+type = "int"
+name = "g_774934"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:56:01+00:00"
+
+["GOLDTL.0x007725c8"]
+type = "int"
+name = "d2_SuppressOverlay"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:56:03+00:00"
+
+["GOLD.0x006ed9d4"]
+type = "int"
+name = "d2_SuppressOverlay"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:56:06+00:00"
+
+["GOLDTL.0x007747f0"]
+type = "int"
+name = "g_7747f0"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:56:09+00:00"
+
+["GOLD.0x006f2438"]
+type = "int"
+name = "g_7747f0"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:56:12+00:00"
+
+["GOLDTL.0x00772f54"]
+type = "int"
+name = "g_772f54"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:56:14+00:00"
+
+["GOLD.0x006f0da4"]
+type = "int"
+name = "g_772f54"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:56:17+00:00"
+
+["GOLDTL.0x007749ec"]
+type = "int"
+name = "g_7749ec"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:56:20+00:00"
+
+["GOLD.0x006f2634"]
+type = "int"
+name = "g_7749ec"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:56:23+00:00"
+
+["GOLD.0x006ed9dc"]
+kind = "GLOBAL"
+name = "tp_d2_SelectedControl"
+type = "int"
+section = ".data"
+
+["GOLDTL.0x00772d1c"]
+kind = "GLOBAL"
+name = "tp_msx_CurrentTrack"
+size = 4
+type = "Chan_14cc460*"
+section = ".data"
+
+["GOLDTL.0x007f4c08"]
+kind = "GLOBAL"
+name = "g_7f4c08"
+size = 4
+type = "int"
+section = ".data"
+
+["GOLDTL.0x007f4c0c"]
+kind = "GLOBAL"
+name = "g_7f4c0c"
+size = 2
+type = "short"
+section = ".data"
+
+["GOLDTL.0x006b86c0"]
+type = "int"
+name = "g_6b86c0"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:11+00:00"
+
+["GOLDTL.0x0067d964"]
+type = "int"
+name = "d2_ClipRight"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:11+00:00"
+
+["GOLDTL.0x007725f8"]
+type = "int"
+name = "d2_ClipLeft"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:11+00:00"
+
+["GOLDTL.0x0100ef80"]
+type = "int"
+name = "g_100ef80"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:11+00:00"
+
+["GOLDTL.0x0067d96c"]
+type = "int"
+name = "g_67d96c"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:11+00:00"
+
+["GOLDTL.0x0100f1bc"]
+type = "int"
+name = "g_100f1bc"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:11+00:00"
+
+["GOLD.0x00633b00"]
+type = "int"
+name = "g_6b86c0"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:13+00:00"
+
+["GOLD.0x005fed5c"]
+type = "int"
+name = "d2_ClipRight"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:13+00:00"
+
+["GOLD.0x006f0458"]
+type = "int"
+name = "d2_ClipLeft"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:13+00:00"
+
+["GOLD.0x00f8a630"]
+type = "int"
+name = "g_100ef80"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:13+00:00"
+
+["GOLD.0x005fed64"]
+type = "int"
+name = "g_67d96c"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:13+00:00"
+
+["GOLD.0x00f8a64c"]
+type = "int"
+name = "g_100f1bc"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:13+00:00"
+
+["GOLDTL.0x0100b0ac"]
+type = "int"
+name = "g_100b0ac"
+size = 4
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:14+00:00"
+
+["GOLDTL.0x0068d6dc"]
+type = "char[]"
+name = "g_68d6dc"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:14+00:00"
+
+["GOLDTL.0x006a3bb4"]
+type = "char[]"
+name = "g_6a3bb4"
+size = 16
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:14+00:00"
+
+["GOLD.0x006f0468"]
+kind = "GLOBAL"
+name = "g_77261c"
+type = "char *"
+section = ".data"
+
+["GOLD.0x00f86a2c"]
+type = "int"
+name = "g_100b0ac"
+size = 4
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:18+00:00"
+
+["GOLD.0x00f88a40"]
+type = "char[]"
+name = "g_100d0c0"
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:18+00:00"
+
+["GOLD.0x0060ea20"]
+type = "char[]"
+name = "g_68d6dc"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:18+00:00"
+
+["GOLD.0x00624cdc"]
+type = "char[]"
+name = "g_6a3bb4"
+size = 16
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:18+00:00"
+
+["GOLD.0x006f1bc8"]
+type = "char *"
+name = "g_773d78"
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-25T23:59:18+00:00"
+
+["GOLDTL.0x010058e0"]
+type = "int"
+name = "g_aux_entity_count"
+size = 4
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:09:50+00:00"
+
+["GOLD.0x00f812e0"]
+type = "int"
+name = "g_aux_entity_count"
+size = 4
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:09:52+00:00"
+
+["GOLDTL.0x010058e4"]
+type = "int"
+name = "g_aux_entity_buffer"
+size = 4
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:09:54+00:00"
+
+["GOLD.0x00f812e4"]
+type = "int"
+name = "g_aux_entity_buffer"
+size = 4
+section = ".bss"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:09:56+00:00"
+
+["GOLDTL.0x006808a4"]
+type = "char[10]"
+name = "g_6808a4"
+size = 10
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:11:04+00:00"
+
+["GOLD.0x00601c3c"]
+type = "char[10]"
+name = "g_6808a4"
+size = 10
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:11:06+00:00"
+
+["GOLDTL.0x01007bc0"]
+type = "char[272]"
+name = "g_1007bc0"
+size = 272
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:11:07+00:00"
+
+["GOLD.0x00f83540"]
+type = "char[272]"
+name = "g_1007bc0"
+size = 272
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:11:09+00:00"
+
+["GOLDTL.0x0149d120"]
+type = "char[14848]"
+name = "txt_TextBanks"
+size = 14848
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:11:10+00:00"
+
+["GOLD.0x01431fc0"]
+type = "char[14848]"
+name = "txt_TextBanks"
+size = 14848
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:11:12+00:00"
+
+["GOLDTL.0x0068bfb8"]
+type = "int"
+name = "cut_EventLoopFlags"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:17:15+00:00"
+
+["GOLD.0x0060d340"]
+type = "int"
+name = "cut_EventLoopFlags"
+size = 4
+section = ".data"
+kind = "GLOBAL"
+updated_by = "data"
+updated_at = "2026-11-26T00:17:16+00:00"
+
+["GOLDTL.0x014cbca0"]
+kind = "GLOBAL"
+name = "g_14cbca0"
+type = "int"
+section = ".data"
+
+["GOLDTL.0x0068a9d8"]
+kind = "GLOBAL"
+name = "cm_LastObjectId"
+type = "char[]"
+section = ".data"
+
+["GOLDTL.0x00774930"]
+kind = "GLOBAL"
+name = "msx_MusicEnabled"
+section = ".data"

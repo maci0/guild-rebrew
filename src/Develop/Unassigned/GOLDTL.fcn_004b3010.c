@@ -7,7 +7,7 @@ extern char g_868080[];
 
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
-int __cdecl fcn_0064eeec(void*);
+int __cdecl atoi(void*);
 
 typedef struct Parts {
 	char a;
@@ -119,12 +119,12 @@ int __cdecl hst_ParseDate(int key, int flags, int* out, char* text)
 			break;
 		}
 		copy0((char*) tmp, buf, 2);
-		a = (char) fcn_0064eeec(tmp);
+		a = (char) atoi(tmp);
 		copy0((char*) tmp, buf + 3, 2);
-		b = (char) fcn_0064eeec(tmp);
+		b = (char) atoi(tmp);
 		copy0((char*) tmp, buf + 6, 4);
-		c = (short) fcn_0064eeec(tmp);
-		val = fcn_0064eeec(tmp);
+		c = (short) atoi(tmp);
+		val = atoi(tmp);
 		if (a == 0) {
 			a = 1;
 			mode = 1;

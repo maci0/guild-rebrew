@@ -31,7 +31,7 @@ void __cdecl fcn_004c5420(int a, int b, int c, int d, int e);
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 char* __cdecl fcn_0050dc90(unsigned char* e);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, char* h);
-void __cdecl fcn_00500bb0(pos14_7f4c00* t, int a, int b, int c);
+void __cdecl gm_AddTime(pos14_7f4c00* t, int a, int b, int c);
 int __cdecl fcn_004c5790(int kind, Req* r);
 void __cdecl he_FreeAction(char* o);
 
@@ -74,7 +74,7 @@ void __cdecl fcn_00563f60(char* o)
 
 				p = fcn_00502cd0(*(int*) (e + 0x5d), 1, 4, 2);
 				*(pos14_7f4c00*) &m = gm_GameTime;
-				fcn_00500bb0((pos14_7f4c00*) &m, 0, 0, 1);
+				gm_AddTime((pos14_7f4c00*) &m, 0, 0, 1);
 				m.id = *(int*) (e + 1);
 				m.x4 = *(int*) (p + 2);
 				fcn_004c5790(4, &m);

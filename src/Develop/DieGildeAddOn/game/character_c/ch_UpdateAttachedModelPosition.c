@@ -32,7 +32,7 @@ void __cdecl evt_LogScriptError(char*, int, const char*);
 
 char* __cdecl fcn_00402610(char*);
 #include "../client_scene_transform.h"
-float __cdecl fcn_00444700(char*, float*);
+float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 void __cdecl fcn_00441720(char*, float*, int, int*, int*, float*);
@@ -129,7 +129,7 @@ void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force)
 	position[1] = *(float*) (model + 0x50) - relative[1];
 	position[2] = *(float*) (model + 0x54) - relative[2];
 	fcn_00438b40(attachment, (int*) position);
-	angle = -(6.2831855f - fcn_00444700(attachment, (float*) (model + 0x4c)));
+	angle = -(6.2831855f - d3_ComputeYawToTarget(attachment, (float*) (model + 0x4c)));
 	*(int*) &rotation[0] = *(int*) (attachment + 0x84);
 	*(int*) &rotation[1] = *(int*) (attachment + 0x88);
 	*(int*) &rotation[2] = *(int*) (attachment + 0x8c);

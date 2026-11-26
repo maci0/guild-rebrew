@@ -21,7 +21,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 
@@ -52,7 +52,7 @@ void __cdecl fcn_00578860(char* e)
 	}
 	*(int*) (e + 0xbc) = 0;
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
+	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 	fcn_005100f0(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 8)])->entity_id, -*(int*) (e + 0xb8));
 	*(int*) (e + 0x70) = 0;
 	fcn_004f4f60(0x1b, 1, ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 8)])->entity_id, p != 0 ? *(int*) (p + 4) : -1,

@@ -11,7 +11,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0046f740(int, int, int, int);
+void __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0050d200(void*, int);
 
 int __cdecl d2_CreateGebaeudeTooltip(int i)
@@ -30,7 +30,7 @@ int __cdecl d2_CreateGebaeudeTooltip(int i)
 		io_AppendText(i * 14 + 0x48e);
 	}
 	d2_SetForm(0, 2);
-	fcn_0046f740(0, 0, i + 0x427, d2_CurrentWindowId);
+	d2_AddElementToWindow(0, 0, i + 0x427, d2_CurrentWindowId);
 	io_AppendText(i * 14 + 0x48f);
 	if (rec[0] != 10) {
 		d2_SetForm(0, 3);

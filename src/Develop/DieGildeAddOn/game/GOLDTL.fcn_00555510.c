@@ -23,7 +23,7 @@ void __cdecl fcn_004c51a0(int, int, char, int);
 int __cdecl fcn_004c4670(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c4510(int, int);
 void __cdecl fcn_004c5360(void);
-void __cdecl fcn_00500bb0(int*, int, int, int);
+void __cdecl gm_AddTime(int*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00555510 */
 void __cdecl gm_SimulateWirtshaus(char* action)
@@ -172,5 +172,5 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 		*(int*) (action + 0x58) = 0x1e;
 		return;
 	}
-	fcn_00500bb0((int*) (action + 0x52), 0, 0xf, 0);
+	gm_AddTime((int*) (action + 0x52), 0, 0xf, 0);
 }

@@ -19,7 +19,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char* gm_CityEntity;
 
 
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 void __cdecl fcn_004c5530(void*);
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -89,8 +89,8 @@ int __cdecl fcn_004b0e80(int a1, int a2, char* argumentText)
 	if (n == 0) {
 		return 0;
 	}
-	per = fcn_0064eeec(hi);
-	num = fcn_0064eeec(lo);
+	per = atoi(hi);
+	num = atoi(lo);
 	if (per < 1 || per > 0x50 || num < 1 || num > 8) {
 		return 0;
 	}

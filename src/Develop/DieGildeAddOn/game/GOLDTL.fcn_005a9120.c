@@ -8,7 +8,7 @@ extern int g_14abb58;
 extern char g_6aae28[];
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowGildenkasseDialog(int);
 
@@ -17,7 +17,7 @@ void __cdecl fcn_005a9120(int a)
 	int x;
 
 	fcn_005338a0();
-	while (fcn_005373e0(fcn_005a9120, 0x67fff) != 0) {
+	while (main_RunFrameLoop(fcn_005a9120, 0x67fff) != 0) {
 		if (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])[0x166] != 0) {
 			x = RegisterStatusText(g_6aae28, g_14abb58, 0x16);
 		}

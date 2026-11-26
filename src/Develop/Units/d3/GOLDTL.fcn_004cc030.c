@@ -6,7 +6,7 @@ extern char g_6b5c60[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d3_GetContextIndex(int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
 
 
@@ -25,7 +25,7 @@ int __cdecl fcn_004cc030(char* cmd, char* result)
 	if (o == 0 || *(char**) (o + 0x184) == 0)
 		return 1;
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(d3_GetContextIndex(*(int*) (*(char**) (o + 0x184) + 0x88)), 1);
+	d3_SelectSceneContext(d3_GetContextIndex(*(int*) (*(char**) (o + 0x184) + 0x88)), 1);
 	{
 		float pos[4];
 		float rot[3];
@@ -66,7 +66,7 @@ int __cdecl fcn_004cc030(char* cmd, char* result)
 				*(*(char**) (o + 0x184) + 0x130) = g_6b5c60[0];
 			}
 		}
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 		if (result != 0) {
 			result[0] = 2;
 			result[1] = 1;
@@ -74,6 +74,6 @@ int __cdecl fcn_004cc030(char* cmd, char* result)
 		}
 		return 0;
 	}
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	return 1;
 }

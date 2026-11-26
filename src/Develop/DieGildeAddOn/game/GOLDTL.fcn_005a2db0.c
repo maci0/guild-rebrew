@@ -39,7 +39,7 @@ extern char g_7f4ca4[];
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl RegisterStatusText(char* name, char* path, int arg);
 void __cdecl fcn_00597ec0(char* e);
 void __cdecl d2_ShowWirtshausDialog(char* e);
@@ -61,7 +61,7 @@ void __cdecl fcn_005a2db0(char* a0, char* a1)
 	char* p3;
 
 	fcn_005338a0();
-	while (fcn_005373e0(fcn_005a2db0, 0x67fff)) {
+	while (main_RunFrameLoop(fcn_005a2db0, 0x67fff)) {
 		fcn_00597ec0(a0);
 		p1 = RegisterStatusText("contact_WUERFELSPIEL", g_14ab4ec, 0x16);
 		p2 = RegisterStatusText("contact_STAMMTISCH", g_14ab54c, 0x16);

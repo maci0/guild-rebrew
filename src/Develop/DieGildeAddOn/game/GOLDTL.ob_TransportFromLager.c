@@ -14,11 +14,11 @@ extern double dbl_1_0;               /* 0x006629c8 */
 
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl ReportClientMessage(const char*);
-void __cdecl fcn_004c44a0(void);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_BeginCommandSync(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl gm_CheckInventoryCapacity(char*, int, int);
 int __cdecl fcn_0050e170(int, int, int);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
@@ -55,7 +55,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 			return 0;
 		}
 	}
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	{
 		int count;
 		float unitPrice;
@@ -64,8 +64,8 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 		float scale;
 	stockSlot = (int*)0x7796e0;
 	do {
-		if (stockSlot[4] != -1 && fcn_00471f80(stockSlot[4])) {
-			count = fcn_00471f80(stockSlot[4]);
+		if (stockSlot[4] != -1 && d2_GetControlValue(stockSlot[4])) {
+			count = d2_GetControlValue(stockSlot[4]);
 			if (!a4) {
 				if (query) {
 					count = fcn_0050e170(query, *stockSlot, count);
@@ -128,7 +128,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 						fcn_004234e0(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
 					d2_SetElementValue(stockSlot[4], 0, stockSlot[0xc],
-					                   fcn_00471f80(stockSlot[4]) - count, 0);
+					                   d2_GetControlValue(stockSlot[4]) - count, 0);
 				}
 			}
 		}
@@ -137,8 +137,8 @@ next:
 	} while ((int)stockSlot < 0x7798a0);
 	stockSlot = (int*)0x778da0;
 	do {
-		if (stockSlot[4] != -1 && fcn_00471f80(stockSlot[4])) {
-			count = fcn_00471f80(stockSlot[4]);
+		if (stockSlot[4] != -1 && d2_GetControlValue(stockSlot[4])) {
+			count = d2_GetControlValue(stockSlot[4]);
 			if (!a4) {
 				count = fcn_0050e170(query, *stockSlot, count);
 			} else {
@@ -192,7 +192,7 @@ next:
 						fcn_004234e0(0, (char*)0x68aed0, 1, 0x3f, 0x7f, 0, 0);
 					}
 					d2_SetElementValue(stockSlot[4], 0, stockSlot[0xc],
-					                   fcn_00471f80(stockSlot[4]) - count, 0);
+					                   d2_GetControlValue(stockSlot[4]) - count, 0);
 				}
 			}
 		}
@@ -200,7 +200,7 @@ next2:
 		stockSlot += 0xe;
 	} while ((int)stockSlot < 0x779120);
 	}
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (!fcn_004c44c0()) {
 		fcn_00535960();
 	}

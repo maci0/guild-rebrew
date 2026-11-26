@@ -26,7 +26,7 @@ extern char g_68de2c[];
 
 void __cdecl ReportClientMessage(const char*);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_004432d0(int, int);
+int __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_TransformPoint(char*, char*, int*);
 void __cdecl fcn_004c5530(int a1);
 int __cdecl fcn_004e8240(unsigned char, char*, char*, int, int);
@@ -37,7 +37,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl fcn_00597ff0(int, char*);
-int __cdecl fcn_00598150(char*, int*);
+int __cdecl d3_CollectUnusedSceneObjects(char*, int*);
 void __cdecl fcn_00598740(float* out, int obj);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strupr(char*);

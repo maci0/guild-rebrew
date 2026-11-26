@@ -42,13 +42,13 @@ extern void __cdecl d2_SetOverlayAnimation(int, int);
 extern void __cdecl d2_CenterDialogWindows(int);
 extern void __cdecl d2_SetForm(int, int);
 extern int __cdecl io_AppendText(int, int, int, int);
-extern int __cdecl fcn_00472250(int, int, int);
+extern int __cdecl d2_GetWindowListItem(int, int, int);
 extern int __cdecl fcn_00525f60(char*, int);
 extern int __cdecl fcn_004c4450(int);
 extern void __cdecl fcn_00535960(void);
 extern void __cdecl fcn_00526120(char*, int);
 extern int __cdecl gm_RandomMod(int);
-extern int __cdecl fcn_005373e0(int, int);
+extern int __cdecl main_RunFrameLoop(int, int);
 extern void __cdecl fcn_00471e30(int);
 
 /* Validates the current entity action against its target and executes the
@@ -134,8 +134,8 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 	d2_CenterDialogWindows(j);
 	d2_SetForm(j, 1);
 	i = io_AppendText(0x1ddd, 5, *(unsigned short*) state_ptr, rec);
-	kid = fcn_00472250(j, 1, i);
-	i = fcn_00472250(j, 1, i + 1);
+	kid = d2_GetWindowListItem(j, 1, i);
+	i = d2_GetWindowListItem(j, 1, i + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_100f1dc != -1) {
@@ -181,7 +181,7 @@ unsigned int __cdecl fcn_005d81f0(char* entity, int* action)
 		}
 		if (g_14ce8e0 != 0)
 			g_774654 = 1;
-	} while (fcn_005373e0((int) fcn_005d81f0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((int) fcn_005d81f0, 0x657c7) != 0);
 	fcn_00471e30(j);
 	return ret;
 fail60:

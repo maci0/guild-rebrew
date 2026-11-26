@@ -3,7 +3,7 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 typedef struct GOLD_RESET_COLOR { unsigned char a, b, c, d; } GOLD_RESET_COLOR;
 void __cdecl d3_ChangeObjectTransparency(void*, void*, GOLD_RESET_COLOR);
-void __cdecl fcn_00434b70(void*, int);
+void __cdecl d3_ReleaseAnim(void*, int);
 
 /* ADDRESS: GOLD 0x0043cc90 */
 void __cdecl d3_ClearObjectDrawRecord(char* record)
@@ -47,7 +47,7 @@ void __cdecl d3_ClearObjectDrawRecord(char* record)
     object = (char**) (record + 0x84);
     for (i = 3; i != 0; i--, object = (char**) ((char*) object + 0x7c)) {
         if (*object != 0) {
-            fcn_00434b70(*object, 0);
+            d3_ReleaseAnim(*object, 0);
             *object = 0;
         }
     }

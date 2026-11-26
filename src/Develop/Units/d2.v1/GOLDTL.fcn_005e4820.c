@@ -14,7 +14,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_005e3b10(int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_005e3520(void);
@@ -39,7 +39,7 @@ void __cdecl d2_ShowOptionsMenu(void)
 	b2 = fcn_005e3b10(2, g_14ac49c, d2_CurrentWindowId);
 	b3 = fcn_005e3b10(3, g_14ac4a0, d2_CurrentWindowId);
 	p = d2_CreateRadioGroup(3, b1, b2, b3);
-	while (fcn_005373e0(d2_ShowOptionsMenu, 0x24087) != 0) {
+	while (main_RunFrameLoop(d2_ShowOptionsMenu, 0x24087) != 0) {
 		if (g_14ce8e0 != 0 || (*(unsigned char*)&g_14cf950) == 1) {
 			g_774654 = 1;
 		}

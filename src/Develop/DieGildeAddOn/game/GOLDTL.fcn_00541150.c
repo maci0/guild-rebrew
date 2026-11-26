@@ -36,7 +36,7 @@ void __cdecl d2_SetForm(int, int);
 
 int __cdecl fcn_0050c1b0(Player*, int, int*);
 void __cdecl io_AppendText(char*, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl fcn_00541150(Player* p)
@@ -103,7 +103,7 @@ void __cdecl fcn_00541150(Player* p)
 			io_AppendText((char*) 0x2047, st[20] + st[18]);
 		}
 	}
-	while (fcn_005373e0(fcn_00541150, 0x24087) != 0) {
+	while (main_RunFrameLoop(fcn_00541150, 0x24087) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

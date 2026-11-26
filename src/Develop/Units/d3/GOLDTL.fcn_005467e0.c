@@ -4,7 +4,7 @@
 
 
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_00445600(int, int, char*, int);
 void __cdecl fcn_00546480(char*);
 
@@ -18,13 +18,13 @@ void __cdecl fcn_005467e0(int* s)
 	if (s[3] != 0) {
 		save = d3_CurrentContextIndex;
 		s[2] = 0;
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		if (h != 0 && fcn_00445600(0, 0x1c0, h, 0) != 0) {
 			fcn_00546480(h);
 		}
 		d3_DestroyObject((D3_OBJECT*) ((char*) s[3]));
 		s[3] = 0;
-		fcn_004432d0(save, 1);
+		d3_SelectSceneContext(save, 1);
 	}
 	s[1] = 0;
 	s[0] = -1;

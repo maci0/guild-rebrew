@@ -8,12 +8,12 @@ extern char** g_6f5308;
 
 void __cdecl d3_VisitSceneObjectsUntilStopped(int, int, int, void*, int);
 char __cdecl fcn_0058f780(char* e, char* pfx);
-void __cdecl fcn_00458a10(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 char* __cdecl fcn_00501190(int, int);
 char* __cdecl fcn_00501030(void);
 #include "client_scene_transform.h"
 
-void __cdecl fcn_0058f880(int a1, char** list)
+void __cdecl d3_CollectUnusedSceneObjects(int a1, char** list)
 {
 	float pa[4];
 	float pb[4];
@@ -33,12 +33,12 @@ void __cdecl fcn_0058f880(int a1, char** list)
 		}
 		o = *(char**) (e + 0x1f8);
 		if (o != 0) {
-			fcn_00458a10(o, o + 0x4c, pa);
+			d3_TransformPoint(o, o + 0x4c, pa);
 			p = fcn_00501190(1, 6);
 			while (p != 0) {
 				q = *(char**) (p + 0x61);
 				if (q != 0) {
-					fcn_00458a10(q, q + 0x4c, pb);
+					d3_TransformPoint(q, q + 0x4c, pb);
 					if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 						g_6f5308[i] = 0;
 						break;
@@ -49,12 +49,12 @@ void __cdecl fcn_0058f880(int a1, char** list)
 		}
 		for (e = *(char**) (e + 0x1fc); e != 0; e = *(char**) (e + 0x1f0)) {
 			if (strncmp(e, "bk_", 3) == 0) {
-				fcn_00458a10(e, e + 0x4c, pa);
+				d3_TransformPoint(e, e + 0x4c, pa);
 				p = fcn_00501190(1, 6);
 				while (p != 0) {
 					q = *(char**) (p + 0x61);
 					if (q != 0) {
-						fcn_00458a10(q, q + 0x4c, pb);
+						d3_TransformPoint(q, q + 0x4c, pb);
 						if (CompareVector3WithinTolerance(pb, pa, 100.0f)) {
 							g_6f5308[i] = 0;
 							goto next;

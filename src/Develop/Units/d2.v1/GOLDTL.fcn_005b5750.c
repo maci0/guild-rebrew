@@ -20,13 +20,13 @@ extern char s_68d704[];
 int __cdecl fcn_00526010(Player*, int, char);
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_AccumulateTyped2(Player*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_CenterDialogWindows(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00526120(int, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005b5750(void)
@@ -43,14 +43,14 @@ int __cdecl fcn_005b5750(void)
 		return 0;
 	}
 	dlg = fcn_00470820(0, 0, s_68d704);
-	ctl = fcn_00472250(dlg, 0, io_AppendText(0x1a34, (unsigned char) (*(char*)&g_773d75)));
+	ctl = d2_GetWindowListItem(dlg, 0, io_AppendText(0x1a34, (unsigned char) (*(char*)&g_773d75)));
 	v = gm_AccumulateTyped2(((Player *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
 	if (v >= 0x12c0) {
 		v = 0x12c0;
 	}
 	d2_SetElementValue(ctl, 0xa, v / 32, 0xa);
 	d2_CenterDialogWindows(dlg);
-	if (fcn_005373e0((void*) fcn_005b5750, timer) != 0) {
+	if (main_RunFrameLoop((void*) fcn_005b5750, timer) != 0) {
 		do {
 			if (g_100f1dc != 2) {
 				if (g_100f1dc == 1 || g_14cf950 == 1) {
@@ -61,12 +61,12 @@ int __cdecl fcn_005b5750(void)
 			else {
 				fcn_00526120(g_14abbf4, 4);
 				g_774654 = 1;
-				r = fcn_00471f80(ctl);
+				r = d2_GetControlValue(ctl);
 			}
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) fcn_005b5750, timer) != 0);
+		} while (main_RunFrameLoop((void*) fcn_005b5750, timer) != 0);
 	}
 	fcn_00471e30(dlg);
 	return r;

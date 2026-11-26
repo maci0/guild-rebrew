@@ -26,7 +26,7 @@ int __cdecl fcn_00502cd0(int, int, ...);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0046f280(int);
 int __cdecl io_AppendText();
 int __cdecl gm_GetElapsedMinutes(void*, void*);
@@ -138,18 +138,18 @@ skip_st3:
 			if (st == 0) {
 				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = windowId;
-				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = fcn_0046f740(0, 0, 0x52b, windowId);
-				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = fcn_0046f740(3, 3, 0x4fb, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
+				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = d2_AddElementToWindow(0, 0, 0x52b, windowId);
+				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = d2_AddElementToWindow(3, 3, 0x4fb, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
 			} else if (st == 1) {
 				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = windowId;
-				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = fcn_0046f740(0, 0, 0x529, windowId);
+				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = d2_AddElementToWindow(0, 0, 0x529, windowId);
 				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id < 0x2dc) {
 					y = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id + 0xdf;
 				} else {
 					y = 0xdf;
 				}
-				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = fcn_0046f740(3, 3, y, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
+				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = d2_AddElementToWindow(3, 3, y, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
 				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_064) = 1;
 				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_05c) = 1;
 				d2_CurrentWindowId = h;
@@ -164,13 +164,13 @@ skip_st3:
 			} else if (st == 2) {
 				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = windowId;
-				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = fcn_0046f740(0, 0, 0x52a, windowId);
+				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = d2_AddElementToWindow(0, 0, 0x52a, windowId);
 				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id < 0x2dc) {
 					y = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id + 0xdf;
 				} else {
 					y = 0xdf;
 				}
-				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = fcn_0046f740(3, 3, y, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
+				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = d2_AddElementToWindow(3, 3, y, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
 				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_05c) = 1;
 				d2_CurrentWindowId = h;
 				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x32, 0x60, 0x11, 0x4510, v1);
@@ -184,14 +184,14 @@ skip_st3:
 			} else {
 				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = windowId;
-				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = fcn_0046f740(0, 0, 0x529, windowId);
+				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = d2_AddElementToWindow(0, 0, 0x529, windowId);
 				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id < 0x2dc) {
 					y = ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id + 0xdf;
 				} else {
 					y = 0xdf;
 				}
-				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = fcn_0046f740(3, 3, y, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
-				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_28 = fcn_0046f740(3, 3, 0x4fc, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
+				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = d2_AddElementToWindow(3, 3, y, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
+				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_28 = d2_AddElementToWindow(3, 3, 0x4fc, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
 				d2_CurrentWindowId = h;
 				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x32, 0x60, 0x11, 0x4510, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_2c = windowId;

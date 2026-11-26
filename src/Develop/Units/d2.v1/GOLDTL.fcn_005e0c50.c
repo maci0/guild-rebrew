@@ -76,7 +76,7 @@ int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl fcn_005e0140(int, int, void*, void*, char*, int);
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl vfs_LookupPath(char*, int, int*);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_005e0b40(int, int, char*);
@@ -117,7 +117,7 @@ int __cdecl d2_RunSaveGameDialog(Blob* src)
 	fcn_00472640(slots[0].h, 0);
 	fcn_00472640(slots[1].h, 0);
 	sel = fcn_00472830(dlg, 1);
-	while (fcn_005373e0((void*) d2_RunSaveGameDialog, wait) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunSaveGameDialog, wait) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

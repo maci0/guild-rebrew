@@ -4,7 +4,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 /* Finds a record other than the entity whose 0xac field matches the entity's,
  * flags that entity, then copies the current selection into it. */
@@ -28,5 +28,5 @@ void __cdecl fcn_00569f70(char* ent)
 	}
 	q = (pos14_7f4c00*) (ent + 0x52);
 	*q = gm_GameTime;
-	fcn_00500bb0(q, 0, 0, 1);
+	gm_AddTime(q, 0, 0, 1);
 }

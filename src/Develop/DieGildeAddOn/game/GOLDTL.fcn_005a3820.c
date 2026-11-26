@@ -5,7 +5,7 @@ char* __cdecl fcn_00445600(char*, int, char*, char*);
 void __cdecl d3_SetSubtreeVisible(void*, int);
 int __cdecl fcn_0051e070(void);
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 char* __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_00597ec0(char*);
 void __cdecl d2_OpenTransportPanel(char*);
@@ -67,7 +67,7 @@ void __cdecl fcn_005a3820(char* app)
 
 ready:
 	fcn_005338a0();
-	if (fcn_005373e0(0x5a3820, 0x67fff) == 0) {
+	if (main_RunFrameLoop(0x5a3820, 0x67fff) == 0) {
 		return;
 	}
 
@@ -98,7 +98,7 @@ ready:
 				*(int*) (fourth + 0x224) = 1;
 			}
 		}
-		if (fcn_005373e0(0x5a3820, 0x67fff) == 0) {
+		if (main_RunFrameLoop(0x5a3820, 0x67fff) == 0) {
 			break;
 		}
 	}

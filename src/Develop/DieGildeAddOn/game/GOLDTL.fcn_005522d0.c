@@ -16,7 +16,7 @@ unsigned int __cdecl fcn_004c5620(int state, void* ev);
 void __cdecl fcn_004c57e0(unsigned int h, int flag);
 void __cdecl fcn_004c5c80(unsigned int h);
 void __cdecl fcn_004c5da0(unsigned int h, unsigned int id, int a3, int a4, int a5, char* tag);
-void __cdecl fcn_00500bb0(void* q, int a2, int a3, int a4);
+void __cdecl gm_AddTime(void* q, int a2, int a3, int a4);
 float __cdecl fcn_00508490(char* entity);
 void* __cdecl gm_LookupEntityRecordById(unsigned int slot_id);
 void __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int id);
@@ -88,7 +88,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 				*(unsigned int*) (ev + 0xbc + i * 4) = 0xffffffff;
 			}
 		}
-		fcn_00500bb0(ev + 0x52, 0, 1, 0);
+		gm_AddTime(ev + 0x52, 0, 1, 0);
 		*(unsigned int*) (ev + 0x84) = fcn_004c5620(1, ev);
 		return;
 	case 1:
@@ -117,7 +117,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 		slot_no = (slot_no + *(int*) (ev + 0xb4)) % 256;
 		*(unsigned int*) (ev + 0xb0) = slot_no;
 		if (!rec) {
-			fcn_00500bb0(ev + 0x52, 0, 1, 0);
+			gm_AddTime(ev + 0x52, 0, 1, 0);
 			*(unsigned int*) (ev + 0x84) = fcn_004c5620(-1, ev);
 			return;
 		}
@@ -132,13 +132,13 @@ void __cdecl he_RunPlagueEvent(char* ev)
 				count++;
 			}
 		}
-		fcn_00500bb0(ev + 0x52, 0, count > 0 ? 5 : 0x14, 0);
+		gm_AddTime(ev + 0x52, 0, count > 0 ? 5 : 0x14, 0);
 		*(unsigned int*) (ev + 0xcc) = *(unsigned int*) ((char*) rec + 1);
 		*(unsigned int*) (ev + 0x84) = fcn_004c5620(2, ev);
 		return;
 	case 2:
 		gm_ResolveEntityById((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xcc));
-		fcn_00500bb0(ev + 0x52, 0, 5, 0);
+		gm_AddTime(ev + 0x52, 0, 5, 0);
 		if (!rec) {
 			*(unsigned int*) (ev + 0x84) = fcn_004c5620(-1, ev);
 			return;
@@ -147,7 +147,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 			if (p && !fcn_00529670((char*) p, (char*) rec)) {
 				*(unsigned int*) (ev + 0x70) = 2;
-				fcn_00500bb0(ev + 0x52, 0, 5, 0);
+				gm_AddTime(ev + 0x52, 0, 5, 0);
 				*(unsigned int*) (ev + 0x84) = fcn_004c5620(2, ev);
 				return;
 			}
@@ -237,11 +237,11 @@ after_scan:
 				count++;
 			}
 		}
-		fcn_00500bb0(ev + 0x52, 0, count > 0 ? 1 : 10, 0);
+		gm_AddTime(ev + 0x52, 0, count > 0 ? 1 : 10, 0);
 		*(unsigned int*) (ev + 0x84) = fcn_004c5620(3, ev);
 		return;
 	case 3:
-		fcn_00500bb0(ev + 0x52, 0, 5, 0);
+		gm_AddTime(ev + 0x52, 0, 5, 0);
 		gm_ResolveEntityById((char**) &rec, 0, 0, *(unsigned int*) (ev + 0xd0));
 		if (!rec) {
 			break;
@@ -250,7 +250,7 @@ after_scan:
 			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
 			if (p && !fcn_00529670((char*) p, (char*) rec)) {
 				*(unsigned int*) (ev + 0x70) = 3;
-				fcn_00500bb0(ev + 0x52, 0, 5, 0);
+				gm_AddTime(ev + 0x52, 0, 5, 0);
 				*(unsigned int*) (ev + 0x84) = fcn_004c5620(3, ev);
 				return;
 			}

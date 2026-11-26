@@ -9,10 +9,10 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl gm_GenerateShuffledIndices(unsigned char, int*);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_00493be0(char*);
@@ -67,7 +67,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (fcn_005373e0((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -92,7 +92,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (fcn_005373e0((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -117,7 +117,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         io_AppendText(0x14db, *(unsigned short*) own);
         for (i = 0; i < 3; i++) {
             choice = order[i];
-            buttons[i] = fcn_00472250(dialog, 0, io_AppendText(0x14dc,
+            buttons[i] = d2_GetWindowListItem(dialog, 0, io_AppendText(0x14dc,
                 choice * 2 + 0xb20, rates[choice] * value));
         }
         g_100f1dc = -1;
@@ -125,7 +125,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (fcn_005373e0((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -151,7 +151,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (fcn_005373e0((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -177,7 +177,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (fcn_005373e0((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -205,7 +205,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (fcn_005373e0((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -232,7 +232,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         i = 0;
         text_id = base * 3 + 0x1534;
         do {
-            choice = fcn_00472250(dialog, 0, io_AppendText(0x1533, text_id));
+            choice = d2_GetWindowListItem(dialog, 0, io_AppendText(0x1533, text_id));
             available[i] = choice;
             if (fcn_004f6810(other, i + base)) fcn_00472640(choice, 0);
             i++;
@@ -249,7 +249,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (fcn_005373e0((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {

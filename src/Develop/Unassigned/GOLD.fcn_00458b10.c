@@ -1,4 +1,4 @@
-void __cdecl fcn_00458a10(char* object, float* position, float* out);
+void __cdecl d3_TransformPoint(char* object, float* position, float* out);
 
 /* ADDRESS: GOLD 0x00458b10 */
 void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* out)
@@ -6,10 +6,10 @@ void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* ou
     float v[4];
 
     if ((*(unsigned char*)(object + 0x210) & 0x80) != 0 || camera == 0) {
-        fcn_00458a10(object, position, out);
+        d3_TransformPoint(object, position, out);
         return;
     }
-    fcn_00458a10(object, position, v);
+    d3_TransformPoint(object, position, v);
     v[0] -= *(float*)(camera + 0x4c);
     v[1] -= *(float*)(camera + 0x50);
     v[2] -= *(float*)(camera + 0x54);

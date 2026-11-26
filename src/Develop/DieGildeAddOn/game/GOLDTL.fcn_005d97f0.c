@@ -10,12 +10,12 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int);
 int __cdecl gm_CheckStatLevel(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl gm_GetOppositeStatIndex(int, int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(void*, ...);
 int __cdecl fcn_00526120(int, int);
@@ -67,7 +67,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
     do {
         v1 = v8 + 1;
         v5 = gm_CheckStatLevel(*v11, v1);
-        v6 = fcn_0046f740((v8 % 5) * v15 + 0x20 + v14,
+        v6 = d2_AddElementToWindow((v8 % 5) * v15 + 0x20 + v14,
                           (v8 / 5) * v7 + 100 + v14, v8 + 0x5a2,
                           d2_CurrentWindowId);
         ((D2_CONTROL_TL*) g_1015ea0)[v6].value_05c = 1;
@@ -105,7 +105,7 @@ unsigned int __cdecl fcn_005d97f0(unsigned short* a0)
         v8 = v1;
     } while (v8 + 1 <= 0xf);
     g_100f1dc = -1;
-    while (fcn_005373e0((void*) 0x5d97f0, 0x657c7)) {
+    while (main_RunFrameLoop((void*) 0x5d97f0, 0x657c7)) {
         if (g_14ce8e0) {
             g_774654 = 1;
         }

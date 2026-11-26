@@ -19,7 +19,7 @@ typedef struct {
 Rec21c* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004ae0f0(int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -90,7 +90,7 @@ int __cdecl fcn_004af800(int mode, int* pairs, int idx, char* text, void* out)
 		int rest;
 
 		fcn_004ae080(text, buf, &p, &rest);
-		if (rest != 1 || (sel = fcn_0064eeec(text + p)) < 0 || sel > 2) {
+		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
 		if (sel == 0) {

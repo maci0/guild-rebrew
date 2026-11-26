@@ -29,7 +29,7 @@ extern char s_6aa6e4[];
 extern char s_6aa6d0[];
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
@@ -51,7 +51,7 @@ void __cdecl fcn_0059f6c0(int a0, int a1)
 	int d;
 
 	fcn_005338a0();
-	if (fcn_005373e0((void*) fcn_0059f6c0, 0x67fff) != 0) {
+	if (main_RunFrameLoop((void*) fcn_0059f6c0, 0x67fff) != 0) {
 		do {
 			a = RegisterStatusText(s_6aa714, g_14aaf18, 0x17);
 			b = RegisterStatusText(s_6aa700, g_14aaf38, 0xd);
@@ -113,6 +113,6 @@ void __cdecl fcn_0059f6c0(int a0, int a1)
 					fcn_005c0670(a0);
 				}
 			}
-		} while (fcn_005373e0((void*) fcn_0059f6c0, 0x67fff) != 0);
+		} while (main_RunFrameLoop((void*) fcn_0059f6c0, 0x67fff) != 0);
 	}
 }

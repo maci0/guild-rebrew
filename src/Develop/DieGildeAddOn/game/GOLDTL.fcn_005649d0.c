@@ -22,7 +22,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
@@ -41,7 +41,7 @@ void __cdecl fcn_005649d0(char* e)
 
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	*(pos14_7f4c00*) (e + 0xc4) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (e + 0xc4), *(int*) (e + 0xb8) * 24, 0, 0);
+	gm_AddTime((pos14_7f4c00*) (e + 0xc4), *(int*) (e + 0xb8) * 24, 0, 0);
 	*(short*) (e + 0xc8) = 8;
 	*(int*) (e + 0xca) = 0;
 	*(int*) (e + 0xce) = 0;

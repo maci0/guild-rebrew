@@ -28,11 +28,11 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
 int __cdecl fcn_004f0430(ENTITY_RECORD*, char*, int, int, int);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00471e30(int);
@@ -68,8 +68,8 @@ int __cdecl fcn_0058cda0(char* who, int k)
 	}
 	d2_SetForm(h, 2);
 	s = io_AppendText(0x410d);
-	ok = fcn_00472250(h, 2, s);
-	cancel = fcn_00472250(h, 2, s + 1);
+	ok = d2_GetWindowListItem(h, 2, s);
+	cancel = d2_GetWindowListItem(h, 2, s + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -79,7 +79,7 @@ int __cdecl fcn_0058cda0(char* who, int k)
 				if (x == 0 || fcn_00526010(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), x, g_773d75) != 0) {
 					id = fcn_004f0430(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), who, k, 10, x);
 					while (id != -1 && fcn_004c4450(id) == 0) {
-						fcn_005373e0(0, 0x20007);
+						main_RunFrameLoop(0, 0x20007);
 					}
 					main_LoopFlags = 0x677c7;
 					if (fcn_004c4450(id) == 2) {
@@ -95,7 +95,7 @@ int __cdecl fcn_0058cda0(char* who, int k)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_0058cda0, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_0058cda0, 0x677c7) != 0);
 	fcn_00471e30(h);
 	return r;
 }

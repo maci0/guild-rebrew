@@ -8,7 +8,7 @@ extern float g_696540[];
 extern float g_696550[];
 
 int __cdecl fcn_00500e20(int*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void* __cdecl evt_LoadGfxScript(char*);
 void* __cdecl evt_FindScriptById(int);
@@ -55,7 +55,7 @@ void __cdecl fcn_0052db70(char* buildingRecord)
 			if (!(ft < g_696550[sel])) {
 				return;
 			}
-			h = d3_CurrentContextIndex; fcn_004432d0(0, 1);
+			h = d3_CurrentContextIndex; d3_SelectSceneContext(0, 1);
 			obj = fcn_00445600(*(int*) (buildingRecord + 0x61), 0x100, 0, "dummy_RAUCH_0");
 			if (obj == 0) {
 				goto unlock;
@@ -70,7 +70,7 @@ void __cdecl fcn_0052db70(char* buildingRecord)
 			}
 			*(int*) ((char*) found + 0x104) = 0;
 		unlock:
-			fcn_004432d0(h, 1);
+			d3_SelectSceneContext(h, 1);
 			return;
 		}
 		ent += 0x21c;

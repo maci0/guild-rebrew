@@ -15,7 +15,7 @@ extern struct ref_fb5761 g_fb5761[0x8000];
 
 
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 
 void __cdecl fcn_0051e9d0(void)
 {
@@ -23,14 +23,14 @@ void __cdecl fcn_0051e9d0(void)
 	int i;
 
 	save = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	for (i = 0; i < 0x100; i++) {
 		if (((char*)lpGebaeudeINST)[i * 0xa9] != 0 && *(char**) (((char*)lpGebaeudeINST) + i * 0xa9 + 0x61) != 0) {
 			*(int*) (*(char**) (((char*)lpGebaeudeINST) + i * 0xa9 + 0x61) + 0x204) =
 			    *(int*) (((char*)lpGebaeudeINST) + i * 0xa9 + 1);
 		}
 	}
-	fcn_004432d0(save, 1);
+	d3_SelectSceneContext(save, 1);
 	for (i = 0; i < 0x8000; i++) {
 		if (g_fb5761[i].ref != 0) {
 			if (g_fb5761[i].type == 1) {

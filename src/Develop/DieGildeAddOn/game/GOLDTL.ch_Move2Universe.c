@@ -13,7 +13,7 @@ int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe);
 char __cdecl SelectTextureSet(void* obj, void* ctx, unsigned char a, char b);
 #include "Develop/DieGildeAddOn/game/ch_action.h"
 void __cdecl ch_SetPosition(char* obj, float* position, int flag);
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl ch_SetVisible(char* obj, int shown);
 
 /* ADDRESS: GOLDTL 0x00407390 */
@@ -53,7 +53,7 @@ void __cdecl ch_Move2Universe(char* a0)
 	{
 		int saved = d3_CurrentContextIndex;
 
-		fcn_004432d0(*(int*) (action + 0x30), 1);
+		d3_SelectSceneContext(*(int*) (action + 0x30), 1);
 		if (*(int*) (action + 0x30) == 0) {
 			if (g_67530c == *(int*) (character + 0x2c))
 				SelectTextureSet(*(void**) (character + 0x34),
@@ -95,7 +95,7 @@ void __cdecl ch_Move2Universe(char* a0)
 		if (*(int*) (action + 0x28) != 0
 			&& *(char*) (*(int*) (action + 0x28) + 9) == 0x38)
 			ch_SetVisible(character, 0);
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 		ch_RemoveQueueEntry(action);
 	}
 }

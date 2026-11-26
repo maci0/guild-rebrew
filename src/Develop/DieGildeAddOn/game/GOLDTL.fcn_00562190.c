@@ -25,7 +25,7 @@ extern char g_6a656c[];
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 
@@ -65,7 +65,7 @@ void __cdecl he_InitSpionage(char* u)
 	*(int*) (u + 0xb8) = 0;
 	*(int*) (u + 0xb4) = -1;
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
+	gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);
 	for (e = he_StartHandlungSearch(1, 0, 0x18); e != 0; e = he_fn_Handlung()) {
 		if (*(unsigned short*) (u + 8) == *(unsigned short*) (e + 8) && *(int*) (e + 4) != *(int*) (u + 4) && *(int*) (e + 0xc4) == *(int*) (u + 0xc4)) {
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
@@ -90,9 +90,9 @@ void __cdecl he_InitSpionage(char* u)
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 	*(pos14_7f4c00*) (u + 0xc8) = gm_GameTime;
 	if (fcn_004fa5b0(0x26, h, &q) == 2) {
-		fcn_00500bb0((pos14_7f4c00*) (u + 0xc8), (*(int*) (u + 0xe8) + 4) * 24, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0xc8), (*(int*) (u + 0xe8) + 4) * 24, 0, 0);
 	} else {
-		fcn_00500bb0((pos14_7f4c00*) (u + 0xc8), (*(int*) (u + 0xe8) + 3) * 24, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (u + 0xc8), (*(int*) (u + 0xe8) + 3) * 24, 0, 0);
 	}
 	if (((char*) h)[2] == 6) {
 		close = 1;

@@ -27,7 +27,7 @@ char *__cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_0050cad0(int *, int *);
 void __cdecl fcn_0050ff70(char *, int);
 int __cdecl fcn_004c30a0(int, int, char *, int, int);
-void __cdecl fcn_00500bb0(char *, int, int, int);
+void __cdecl gm_AddTime(char *, int, int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
 char *__cdecl fcn_00445600(char *, int, int, char *);
 void __cdecl d3_TransformPoint(char *, char *, float *);
@@ -40,7 +40,7 @@ int __cdecl evt_FindScriptByName(char *);
 int __cdecl evt_RequestScriptExit(char *);
 void __cdecl fcn_00418f90(int);
 void __cdecl he_FreeAction(char *);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char *__cdecl fcn_00422460(int, char *);
 int __cdecl d3snd_AttachSoundSource(int, int, int, float);
 void __cdecl d3snd_PlaySource(int, int, int, int);
@@ -91,7 +91,7 @@ void __cdecl fcn_0056cfc0(char *a0)
 				int v10 = d3_CurrentContextIndex;
 
 				if (*(int *)(e + 0x61) != 0) {
-					fcn_004432d0(0, 1);
+					d3_SelectSceneContext(0, 1);
 					if (*(char *)(a0 + 0xb4) == 1) {
 						r = fcn_00422460(0, g_6a6b48);
 						if (r != 0 &&
@@ -146,8 +146,8 @@ void __cdecl fcn_0056cfc0(char *a0)
 
 
 
-				fcn_00500bb0(a0 + 0x52, 0, 4, 0);
-				fcn_004432d0(v10, 1);
+				gm_AddTime(a0 + 0x52, 0, 4, 0);
+				d3_SelectSceneContext(v10, 1);
 			}
 		} else {
 inc_step:
@@ -234,7 +234,7 @@ inc_step:
 
 
 				e = 0;
-				fcn_00500bb0(a0 + 0x52, 0, 4, 0);
+				gm_AddTime(a0 + 0x52, 0, 4, 0);
 				if (*(unsigned char *)(a0 + 0xb4) < 3)
 					*(int *)(a0 + 0x70) = 0;
 				i = 0;

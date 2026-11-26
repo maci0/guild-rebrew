@@ -10,7 +10,7 @@ extern char g_1043370[];
 
 
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00454560(int);
 void __cdecl fcn_00442e30(void);
 void __cdecl gv_Free3Fields(int);
@@ -19,7 +19,7 @@ void __cdecl fcn_00510930(void)
 {
 	int i;
 
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	if (g_773dd8 != 0) {
 		fcn_00454560(g_773dd8);
 		g_773dd8 = 0;
@@ -27,14 +27,14 @@ void __cdecl fcn_00510930(void)
 	fcn_00442e30();
 	for (i = 0; i < 0x2dc; i++) {
 		if (((signed char*)init_SceneContextIndices)[i] > 0) {
-			fcn_004432d0(((signed char*)init_SceneContextIndices)[i], 0);
+			d3_SelectSceneContext(((signed char*)init_SceneContextIndices)[i], 0);
 			fcn_00442e30();
 			((signed char*)init_SceneContextIndices)[i] = -1;
 		}
 	}
 	for (i = 0; i < 0x22; i++) {
 		if (g_7f3b00[i] > 0) {
-			fcn_004432d0(g_7f3b00[i], 0);
+			d3_SelectSceneContext(g_7f3b00[i], 0);
 			fcn_00442e30();
 			g_7f3b00[i] = -1;
 		}

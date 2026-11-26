@@ -3,7 +3,7 @@
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 void* __cdecl gm_FindRecordById(int);
 int __cdecl fcn_004c5530(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -33,7 +33,7 @@ void __cdecl fcn_00572e40(char* c)
 	memcpy(c + 0x60, p44, 0xe);
 	*(int*) (c + 0xe8) = -1;
 	*(int*) (c + 0xec) = -1;
-	fcn_00500bb0(p52, 0, 1, 0);
+	gm_AddTime(p52, 0, 1, 0);
 	memset(buf, 0, 0xf8);
 	buf[4] = 0xf;
 	*(int*) (buf + 8) = *(int*) ((char*) 0x7f4ca0 + *(unsigned short*) (c + 8) * 0x21c + 4);
@@ -49,7 +49,7 @@ void __cdecl fcn_00572e40(char* c)
 	*(int*) (buf + 0xa0) = *(int*) (c + 4);
 	if (gm_FindRecordById(*(int*) (c + 0xac))) {
 		if (*(char*) (c + 0xf1)) {
-			fcn_00500bb0(p52, 1, 0x1e, 0);
+			gm_AddTime(p52, 1, 0x1e, 0);
 		} else {
 			*(int*) (c + 0xec) = fcn_004c5530(buf);
 		}

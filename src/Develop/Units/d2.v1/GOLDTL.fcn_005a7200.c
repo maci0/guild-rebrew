@@ -1,5 +1,5 @@
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void* p, int n);
+int __cdecl main_RunFrameLoop(void* p, int n);
 char* __cdecl RegisterStatusText(char* name, int id, int len);
 void __cdecl fcn_005cf560(char* obj);
 void __cdecl fcn_005a7190(char* obj);
@@ -20,7 +20,7 @@ void __cdecl fcn_005a7200(char* subject)
 	s3 = 0;
 	s4 = 0;
 	fcn_005338a0();
-	if (!fcn_005373e0((void*) 0x5a7200, 0x67fff)) {
+	if (!main_RunFrameLoop((void*) 0x5a7200, 0x67fff)) {
 		return;
 	}
 	do {
@@ -55,5 +55,5 @@ void __cdecl fcn_005a7200(char* subject)
 				}
 			}
 		}
-	} while (fcn_005373e0((void*) 0x5a7200, 0x67fff));
+	} while (main_RunFrameLoop((void*) 0x5a7200, 0x67fff));
 }

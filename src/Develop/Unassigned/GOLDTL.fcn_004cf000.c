@@ -5,7 +5,7 @@ extern int g_67a370;
 char __cdecl d3_GridPointToWorld(int g, int x, int z, float *out);
 
 /* ADDRESS: GOLDTL 0x004cf000 */
-float __cdecl fcn_004cf000(void *a0, int gridX, int gridZ)
+float __cdecl gm_GetEntityGridDistance(void *a0, int gridX, int gridZ)
 {
     float p[8];
     struct { float z, x; } b;

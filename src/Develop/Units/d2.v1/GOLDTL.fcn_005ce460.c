@@ -24,11 +24,11 @@ Book *__cdecl fcn_00534c40(char *, char *, int, char *, char *);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl fcn_004f5110(char *, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_004f4830(int, Law *);
 void __cdecl d2_RunGesetzbuchInfoDialog(int, int);
 void __cdecl fcn_005350d0(Book *);
-int __cdecl fcn_005373e0(void *, int);
+int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_00534f30(Book *);
 void __cdecl fcn_00532ef0(void);
 
@@ -86,7 +86,7 @@ void __cdecl fcn_005ce460(int cmd)
 			col = w->right;
 		}
 		fcn_004f5110(buf, i);
-		items[n] = fcn_00472250(col, 2, io_AppendText("%it$1>%s$N$0>", buf));
+		items[n] = d2_GetWindowListItem(col, 2, io_AppendText("%it$1>%s$N$0>", buf));
 	}
 	d2_SetForm(w->left, 3);
 	io_AppendText(0x1a38, 1);
@@ -124,7 +124,7 @@ void __cdecl fcn_005ce460(int cmd)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_005ce460, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_005ce460, 0x677c7) != 0);
 	fcn_00534f30(w);
 	fcn_00532ef0();
 }

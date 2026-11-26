@@ -16,7 +16,7 @@ char* __cdecl fcn_005a3580(char*);
 char* __cdecl RegisterStatusText(char*, char*, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
@@ -43,7 +43,7 @@ void __cdecl fcn_005a3680(void)
 	}
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005338a0();
-	if (fcn_005373e0((void*) fcn_005a3680, 0x677d7) != 0) {
+	if (main_RunFrameLoop((void*) fcn_005a3680, 0x677d7) != 0) {
 		do {
 			(*(char**)&g_7746a0) = 0;
 			for (i = 0; i < 3; i++) {
@@ -66,7 +66,7 @@ void __cdecl fcn_005a3680(void)
 			else if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) fcn_005a3680, 0x677d7) != 0);
+		} while (main_RunFrameLoop((void*) fcn_005a3680, 0x677d7) != 0);
 	}
 	fcn_005338a0();
 	for (i = 0; i < 3; i++) {

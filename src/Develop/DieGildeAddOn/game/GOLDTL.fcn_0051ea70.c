@@ -15,7 +15,7 @@ extern struct ref_fb5761 g_fb5761[0x8000];
 
 
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_FindRecordById(int);
 int __cdecl gm_SearchTable67(int);
@@ -28,14 +28,14 @@ void __cdecl fcn_0051ea70(void)
 	char* e;
 
 	save = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	for (i = 0; i < 0x100; i++) {
 		e = ((char*)lpGebaeudeINST) + i * 0xa9;
 		if (*e != 0 && *(char**) (e + 0x61) != 0) {
 			*(char**) (*(char**) (e + 0x61) + 0x204) = e;
 		}
 	}
-	fcn_004432d0(save, 1);
+	d3_SelectSceneContext(save, 1);
 	for (i = 0; i < 0x8000; i++) {
 		if (g_fb5761[i].ref != 0) {
 			if (g_fb5761[i].type == 1) {

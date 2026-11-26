@@ -18,7 +18,7 @@ extern char g_67d67c[];
 typedef void(__cdecl* hook_4e4730)(char*, int, char*, int);
 
 int __cdecl fcn_00413160(void);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 #include "client_scene_loader.h"
 void __cdecl fcn_004428d0(char*, int, int);
@@ -43,11 +43,11 @@ void __cdecl fcn_004e4730(char* sceneName)
 		int s;
 
 		s = fcn_00413160();
-		fcn_004432d0(s, 0);
+		d3_SelectSceneContext(s, 0);
 		fcn_0064d41a(buf, "scenes/*%s", sceneName);
 		d3_LoadScene(buf, 0, 0);
-		fcn_004432d0(0, 1);
-		fcn_004432d0(s, 0);
+		d3_SelectSceneContext(0, 1);
+		d3_SelectSceneContext(s, 0);
 	}
 	if (((char*)g_6b8300) != 0) {
 		if (g_77666a == 0) {

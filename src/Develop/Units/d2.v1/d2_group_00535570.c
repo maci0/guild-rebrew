@@ -5,7 +5,7 @@ extern int d2_CurrentWindowId;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 extern int g_6a2bf8;
 extern char* g_77255c;
 extern char* g_1015ea0;
@@ -147,8 +147,8 @@ int __cdecl d2_CreateScrollPerga(void)
 		return g_6a2bf8;
 	}
 	d2_SetForm(g_6a2bf8, 0);
-	g_6a2bfc = fcn_0046f740(0, 0, 0x6e0, d2_CurrentWindowId);
-	g_6a2c00 = fcn_0046f740(0, 0x1d1, 0x6e0, d2_CurrentWindowId);
+	g_6a2bfc = d2_AddElementToWindow(0, 0, 0x6e0, d2_CurrentWindowId);
+	g_6a2c00 = d2_AddElementToWindow(0, 0x1d1, 0x6e0, d2_CurrentWindowId);
 	return g_6a2bf8;
 }
 

@@ -30,7 +30,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
 void __cdecl fcn_004d5740(char*, int, int);
 int __cdecl fcn_004d5490(int, int, int);
@@ -50,7 +50,7 @@ int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl fcn_004c5150(int, int, int, int);
 int __cdecl gm_MapEntityStatRange(int);
 void __cdecl fcn_004c54c0(int, int, int, int);
-void __cdecl fcn_0046f740(int, int, int, int);
+void __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
 void __cdecl fcn_004c4510(char*, int);
@@ -189,7 +189,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	} else {
 		io_AppendText(0x118f, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e98);
 	}
-	while (fcn_005373e0(fcn_004d6170, 0x7d6c6) != 0) {
+	while (main_RunFrameLoop(fcn_004d6170, 0x7d6c6) != 0) {
 		if (g_14ce8e0 != 0 || g_100f1dc == 2) {
 			g_774654 = 1;
 		}
@@ -224,7 +224,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	io_AppendText((int) "$7A");
 	io_AppendText(0x1193, *(unsigned short*) g_772e98, mode + 0x1125);
 	fcn_004d5740(self + 0x80, 0, 0x12c);
-	while (fcn_005373e0(fcn_004d6170, 0x7d6c6) != 0) {
+	while (main_RunFrameLoop(fcn_004d6170, 0x7d6c6) != 0) {
 		if (g_14ce8e0 != 0 || g_100f1dc == 2) {
 			g_774654 = 1;
 		}
@@ -270,7 +270,7 @@ int __cdecl fcn_004d6170(char* ctx)
 			}
 		}
 sync:
-		while (fcn_005373e0(fcn_004d6170, 0x7d6c6) != 0) {
+		while (main_RunFrameLoop(fcn_004d6170, 0x7d6c6) != 0) {
 			if (g_14ce8e0 != 0 || g_100f1dc == 2) {
 				g_774654 = 1;
 			}
@@ -375,13 +375,13 @@ reduce:
 				cur = gm_LookupEntityRecordIn32SlotTable(*id);
 				col = (i % 4) * 80 + 0x30;
 				line = (i / 4 + 1) * 100;
-				fcn_0046f740(col, line, 0x5db, d2_CurrentWindowId);
-				fcn_0046f740(col + 2, line, *(int*) (cur + 0x18c), d2_CurrentWindowId);
+				d2_AddElementToWindow(col, line, 0x5db, d2_CurrentWindowId);
+				d2_AddElementToWindow(col + 2, line, *(int*) (cur + 0x18c), d2_CurrentWindowId);
 				fcn_00534160(col, line + 0x3c, *(unsigned char*) (cur + 0x83), 0x4eb);
 				bonus = 0;
 				if (cur[8] == 0) {
 					bonus = (int) (*(unsigned char*) (cur + 0x83) * (1.0f / 42.0f) + 1.0f);
-					fcn_0046f740(col + 6, line + 6, 0x3b, d2_CurrentWindowId);
+					d2_AddElementToWindow(col + 6, line + 6, 0x3b, d2_CurrentWindowId);
 					bonus = fcn_0050b750(bonus * 40, g_773d75);
 				}
 				if (side == g_772e9c && cur[8] != 0) {

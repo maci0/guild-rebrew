@@ -20,7 +20,7 @@ extern char* g_14ad590[];
 
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00570250(char* u)
@@ -38,10 +38,10 @@ void __cdecl fcn_00570250(char* u)
 				*(int*) (u + 0x70) = 1;
 			}
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), gm_RandomMod(4) + 8, 0, 0);
+			gm_AddTime((pos14_7f4c00*) (u + 0x52), gm_RandomMod(4) + 8, 0, 0);
 		} else {
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
+			gm_AddTime((pos14_7f4c00*) (u + 0x52), 1, 0, 0);
 		}
 		break;
 	}

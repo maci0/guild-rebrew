@@ -33,14 +33,14 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00468cd0(int, int);
 void __cdecl fcn_00468b80(int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
-int __cdecl fcn_005373e0(void*, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl main_RunFrameLoop(void*, int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00427370(int);
 void __cdecl SetMasterVolume(int);
 int __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
@@ -79,11 +79,11 @@ void __cdecl d2_ShowSoundOptions(void)
 	d2_SetForm(dlg, 2);
 	io_AppendText(0x1c5b);
 	d2_SetForm(dlg, 1);
-	s0 = fcn_00472250(dlg, 1, 0);
-	s1 = fcn_00472250(dlg, 1, 1);
-	s2 = fcn_00472250(dlg, 1, 2);
-	s3 = fcn_00472250(dlg, 1, 3);
-	s4 = fcn_00472250(dlg, 1, 4);
+	s0 = d2_GetWindowListItem(dlg, 1, 0);
+	s1 = d2_GetWindowListItem(dlg, 1, 1);
+	s2 = d2_GetWindowListItem(dlg, 1, 2);
+	s3 = d2_GetWindowListItem(dlg, 1, 3);
+	s4 = d2_GetWindowListItem(dlg, 1, 4);
 	d2_SetElementValue(s0, 0, 0x7f, g_7766a0[0]);
 	fcn_00468cd0(s0, 0x882);
 	fcn_00468b80(s0, g_14ac564);
@@ -104,7 +104,7 @@ void __cdecl d2_ShowSoundOptions(void)
 	fcn_00533a60(d2_CurrentWindowId, 0, btn, 2, g_14ac5a8, g_14ac5ac);
 	ok = btn[0];
 	cancel = btn[1];
-	while (fcn_005373e0((void*) d2_ShowSoundOptions, wait) != 0) {
+	while (main_RunFrameLoop((void*) d2_ShowSoundOptions, wait) != 0) {
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;
 		}
@@ -117,9 +117,9 @@ void __cdecl d2_ShowSoundOptions(void)
 			}
 		}
 		if (g_14ce8d0 != 0 && (d2_CurrentElementId == s0 || d2_CurrentElementId == s1 || d2_CurrentElementId == s2 || d2_CurrentElementId == s3)) {
-			master = fcn_00471f80(s0) * 0.01f;
-			music = (float)(fcn_00471f80(s1));
-			sfx = (float)(fcn_00471f80(s2));
+			master = d2_GetControlValue(s0) * 0.01f;
+			music = (float)(d2_GetControlValue(s1));
+			sfx = (float)(d2_GetControlValue(s2));
 			fcn_00427370((int) (music * master));
 			SetMasterVolume((int) (sfx * master));
 			if (d2_CurrentElementId == s1 && playing == 0) {
@@ -128,11 +128,11 @@ void __cdecl d2_ShowSoundOptions(void)
 		}
 	}
 	if (changed) {
-		g_7766a0[0] = (unsigned char) fcn_00471f80(s0);
-		g_7766a0[1] = (unsigned char) fcn_00471f80(s1);
-		g_7766a0[2] = (unsigned char) fcn_00471f80(s2);
-		g_7766a0[3] = (unsigned char) fcn_00471f80(s3);
-		g_7766a4[0] = (unsigned char) fcn_00471f80(s4);
+		g_7766a0[0] = (unsigned char) d2_GetControlValue(s0);
+		g_7766a0[1] = (unsigned char) d2_GetControlValue(s1);
+		g_7766a0[2] = (unsigned char) d2_GetControlValue(s2);
+		g_7766a0[3] = (unsigned char) d2_GetControlValue(s3);
+		g_7766a4[0] = (unsigned char) d2_GetControlValue(s4);
 		fcn_005e12d0();
 		msx_ApplyAudioSettings();
 	}

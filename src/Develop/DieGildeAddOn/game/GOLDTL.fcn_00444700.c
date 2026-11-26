@@ -9,7 +9,7 @@ void __cdecl d3_NormalizeVector(float* v);
 
 
 /* ADDRESS: GOLDTL 0x00444700 */
-float __cdecl fcn_00444700(char* obj, float* target)
+float __cdecl d3_ComputeYawToTarget(char* obj, float* target)
 {
 	float pos[4];
 	float td[4];

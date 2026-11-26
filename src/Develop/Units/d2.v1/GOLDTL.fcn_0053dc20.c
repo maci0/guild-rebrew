@@ -3,10 +3,10 @@ extern void __cdecl d2_CenterDialogWindows(int obj);
 extern void __cdecl d2_SetForm(int obj, int a);
 extern int __cdecl fcn_0051e070(void);
 extern int __cdecl io_AppendText(int id, ...);
-extern int __cdecl fcn_00472250(int obj, int a, int b);
+extern int __cdecl d2_GetWindowListItem(int obj, int a, int b);
 extern int __cdecl d2_CreateRadioGroup(int a, int b, int c, int d);
 extern void __cdecl d2_SelectRadioGroup(int obj, int a);
-extern int __cdecl fcn_005373e0(int proc, int a);
+extern int __cdecl main_RunFrameLoop(int proc, int a);
 extern void __cdecl d2_ClearRadioGroup(int obj);
 extern void __cdecl fcn_00471e30(int obj);
 extern void __cdecl d2_UpdateRadioGroup(int obj);
@@ -20,7 +20,7 @@ extern int __cdecl d2_RunChoosePlayerDialog(int a, int b);
 extern int __cdecl fcn_0053e8a0(int a);
 extern int __cdecl d2_ShowChooseProfessionDialog(int a);
 extern unsigned int *__cdecl fcn_00506d50(char *buf, unsigned char a);
-extern void __cdecl fcn_004432d0(int a, int b);
+extern void __cdecl d3_SelectSceneContext(int a, int b);
 extern int __cdecl d2_OpenMessageBox(int a, int b);
 extern int __cdecl d2_RunParentProfessionSelection(int a);
 extern char g_14cf950;
@@ -59,16 +59,16 @@ int __cdecl fcn_0053dc20(void)
 	d2_SetForm(obj, 0);
 	if (fcn_0051e070()) {
 		v4 = io_AppendText(0x1ac0, 0x1ac2, 0x1ac4, 0x1ac2, 0x1ac4, 1);
-		firstOption = fcn_00472250(obj, 0, v4);
-		lastOption = fcn_00472250(obj, 0, v4 + 1);
-		dlg = d2_CreateRadioGroup(3, firstOption, lastOption, fcn_00472250(obj, 0, v4 + 2));
+		firstOption = d2_GetWindowListItem(obj, 0, v4);
+		lastOption = d2_GetWindowListItem(obj, 0, v4 + 1);
+		dlg = d2_CreateRadioGroup(3, firstOption, lastOption, d2_GetWindowListItem(obj, 0, v4 + 2));
 	} else {
 		v4 = io_AppendText(0x1ac0, 0x1ac2, 0x1ac3, 0x1ac4, 0x1ac2, 0x1ac3,
 		    0x1ac4, 1);
-		firstOption = fcn_00472250(obj, 0, v4);
-		v12 = fcn_00472250(obj, 0, v4 + 1);
-		lastOption = fcn_00472250(obj, 0, v4 + 2);
-		dlg = d2_CreateRadioGroup(4, firstOption, v12, lastOption, fcn_00472250(obj, 0, v4 + 3));
+		firstOption = d2_GetWindowListItem(obj, 0, v4);
+		v12 = d2_GetWindowListItem(obj, 0, v4 + 1);
+		lastOption = d2_GetWindowListItem(obj, 0, v4 + 2);
+		dlg = d2_CreateRadioGroup(4, firstOption, v12, lastOption, d2_GetWindowListItem(obj, 0, v4 + 3));
 	}
 	if (*(int *) 0x7766fc == 0) {
 		mode = 2;
@@ -81,7 +81,7 @@ int __cdecl fcn_0053dc20(void)
 	}
 	d2_SelectRadioGroup(dlg, mode);
 label_53dd68:
-	r = fcn_005373e0(0x53dc20, 0xc6);
+	r = main_RunFrameLoop(0x53dc20, 0xc6);
 	for (;;) {
 		if (!r) {
 			d2_ClearRadioGroup(dlg);
@@ -155,7 +155,7 @@ label_53df85:
 							again = 1;
 							g_774654 = 1;
 						} else {
-							fcn_004432d0(0, 0);
+							d3_SelectSceneContext(0, 0);
 							v2 = 1;
 						}
 					} else {
@@ -168,7 +168,7 @@ label_53df85:
 								    fcn_004fdec0((const char *) 0x6a3db4) + 0x639;
 								goto label_53df85;
 							}
-							fcn_004432d0(0, 0);
+							d3_SelectSceneContext(0, 0);
 							again = 0;
 							retry = 1;
 						} else {
@@ -190,6 +190,6 @@ label_53df85:
 				g_774654 = 1;
 			}
 		}
-		r = fcn_005373e0(0x53dc20, 0xc6);
+		r = main_RunFrameLoop(0x53dc20, 0xc6);
 	}
 }

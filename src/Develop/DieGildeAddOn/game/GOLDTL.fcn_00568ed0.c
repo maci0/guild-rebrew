@@ -20,7 +20,7 @@ void __cdecl fcn_004c5c80(int);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 void __cdecl fcn_004c6b20(int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
@@ -99,7 +99,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			p += 4;
 		} while (--i != 0);
 		*(pos14_7f4c00*) (a1 + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (a1 + 0x52), 0, 0x1e, 0);
+		gm_AddTime((pos14_7f4c00*) (a1 + 0x52), 0, 0x1e, 0);
 		*(int*) (a1 + 0x70) = 1;
 		return;
 	case 1:
@@ -121,12 +121,12 @@ void __cdecl fcn_00568ed0(char* a1)
 			}
 		}
 		*(pos14_7f4c00*) (a1 + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (a1 + 0x52), 0, 0, 1);
+		gm_AddTime((pos14_7f4c00*) (a1 + 0x52), 0, 0, 1);
 		*(int*) (a1 + 0x70) = 2;
 		return;
 	used:
 		*(pos14_7f4c00*) (a1 + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (a1 + 0x52), 0, 0xa, 0);
+		gm_AddTime((pos14_7f4c00*) (a1 + 0x52), 0, 0xa, 0);
 		return;
 	case 2:
 		obj = (char*) gm_LookupEntityRecordById(*(int*) (a1 + 0xac));

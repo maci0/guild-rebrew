@@ -15,7 +15,7 @@ void __cdecl fcn_00538060(void);
 int __cdecl srv_SeedRandom(int seed);
 int __cdecl fcn_0042df70(void* fn);
 int __cdecl fcn_0042df30(void* fn, int flag);
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_0045b290(int a, int b);
 void __cdecl fcn_004ad2d0(int v);
 void __cdecl fcn_004b3d40(int a, int b);
@@ -120,9 +120,9 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 		break;
 	case 12:
 		saved = *(int*) 0x6b8010;
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		fcn_0045b290(*(int*) (*(int*) 0x67a370 + 0xb0), *(int*) 0x6b8300);
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 		*(char**) 0x6b5c54 = 0;
 		break;
 	case 13:

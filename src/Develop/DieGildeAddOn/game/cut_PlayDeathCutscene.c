@@ -13,7 +13,7 @@ void __cdecl fcn_004463f0(int a, int b, float f);
 int __cdecl fcn_004e44b0(char* s, void* p);
 int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
 void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
-void __cdecl fcn_005373e0(int a, int b);
+void __cdecl main_RunFrameLoop(int a, int b);
 void __cdecl fcn_004234e0(int a, char* s, int b, int c, int d, int e, int f);
 int __cdecl fcn_005095d0(void* p, void* buf);
 void __cdecl io_FormatTextBuffer(char* buf, ...);
@@ -91,7 +91,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 		if (state == 0) {
 			start = *(int*) 0x6b7fac;
 			while (*(volatile unsigned int*) 0x6b7fac < (unsigned int) (start + 0x339) && state == 0) {
-				fcn_005373e0(0, cut_EventLoopFlags);
+				main_RunFrameLoop(0, cut_EventLoopFlags);
 				if (g_14ce8e0 != 0) {
 					state = 1;
 				}

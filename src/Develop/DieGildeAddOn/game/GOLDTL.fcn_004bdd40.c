@@ -1,6 +1,6 @@
 #include <string.h>
 
-int __cdecl fcn_00598150(int, int*);
+int __cdecl d3_CollectUnusedSceneObjects(int, int*);
 void __cdecl rd_AllBauplatzToSupermap(int, int);
 
 
@@ -12,7 +12,7 @@ void __cdecl fcn_004bdd40(int a)
 	int i;
 
 	memset(list, 0, sizeof(list));
-	n = fcn_00598150(0, list);
+	n = d3_CollectUnusedSceneObjects(0, list);
 	if (n != 0) {
 		for (i = 0; i < n; i++) {
 			if (list[i] != 0)

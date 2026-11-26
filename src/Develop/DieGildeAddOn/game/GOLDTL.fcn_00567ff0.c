@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_00567ff0(char* o)
 {
@@ -16,5 +16,5 @@ void __cdecl fcn_00567ff0(char* o)
 	*p = gm_GameTime;
 	sim_SetSyncParams(p, 5, 0, 0);
 	*(pos14_7f4c00*) (o + 0x60) = *p;
-	fcn_00500bb0(p, 1, 0, 0);
+	gm_AddTime(p, 1, 0, 0);
 }

@@ -11,7 +11,7 @@ int __cdecl fcn_004c5790(int, char*);
 int __cdecl d2_OpenMessageBox(int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_005373e0(int, int);
+void __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl sv_WaitForNetworkSync(int flags)
@@ -33,7 +33,7 @@ void __cdecl sv_WaitForNetworkSync(int flags)
 		if (timeGetTime() > start + 0x5dc) {
 			fcn_00471af0(h, 1);
 		}
-		fcn_005373e0(0, flags);
+		main_RunFrameLoop(0, flags);
 	}
 	fcn_00471e30(h);
 }

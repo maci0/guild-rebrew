@@ -5,9 +5,9 @@ extern int g_14abee0[];
 extern int g_774654;
 extern int g_1040494;
 extern int d2_ScreenHeight;
-int __cdecl fcn_004432d0();
+int __cdecl d3_SelectSceneContext();
 int __cdecl d2_CreateRadioGroup();
-int __cdecl fcn_00469470();
+int __cdecl d2_AddToRadioGroup();
 int __cdecl d2_ClearRadioGroup();
 int __cdecl d2_SelectRadioGroup();
 int __cdecl d2_UpdateRadioGroup();
@@ -15,7 +15,7 @@ int __cdecl fcn_00470820();
 int __cdecl fcn_00471af0();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl fcn_00471e30();
-int __cdecl fcn_00472250();
+int __cdecl d2_GetWindowListItem();
 int __cdecl d2_SetForm();
 int __cdecl fcn_004730c0();
 int __cdecl fcn_00473150();
@@ -32,7 +32,7 @@ int __cdecl fcn_004fdec0();
 Name6_53e020 __cdecl fcn_00506d50(int);
 int __cdecl io_AppendText();
 int __cdecl d2_OpenMessageBox();
-int __cdecl fcn_005373e0();
+int __cdecl main_RunFrameLoop();
 int __cdecl d2_RunParentProfessionSelection();
 int __cdecl d2_ShowChooseProfessionDialog();
 int __cdecl d2_RunChoosePlayerDialog();
@@ -62,12 +62,12 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 	d2_CenterDialogWindows(dialog);
 	d2_SetForm(dialog, 0);
 	v3 = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca);
-	v4 = fcn_00472250(dialog, 0, v3);
-	v5 = fcn_00472250(dialog, 0, v3 + 1);
-	v6 = fcn_00472250(dialog, 0, v3 + 2);
-	v3 = fcn_00472250(dialog, 0, v3 + 3);
+	v4 = d2_GetWindowListItem(dialog, 0, v3);
+	v5 = d2_GetWindowListItem(dialog, 0, v3 + 1);
+	v6 = d2_GetWindowListItem(dialog, 0, v3 + 2);
+	v3 = d2_GetWindowListItem(dialog, 0, v3 + 3);
 	if (*(unsigned char*) &g_6a375c > 1) {
-		v13 = fcn_00472250(dialog, 0, io_AppendText(0x681164, 2, 0x1acb));
+		v13 = d2_GetWindowListItem(dialog, 0, io_AppendText(0x681164, 2, 0x1acb));
 	}
 	if (*(int*) 0x776700 <= -1) {
 		*(int*) 0x776700 = -1;
@@ -79,9 +79,9 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 	} else {
 		d2_SelectRadioGroup(group, 0);
 	}
-	fcn_00469470(group, fcn_00472250(dialog, 0, io_AppendText(0x7e)));
+	d2_AddToRadioGroup(group, d2_GetWindowListItem(dialog, 0, io_AppendText(0x7e)));
 	for (;;) {
-		if (fcn_005373e0((int)d2_RunChooseHistoryMenu, 0xc6) == 0) {
+		if (main_RunFrameLoop((int)d2_RunChooseHistoryMenu, 0xc6) == 0) {
 			break;
 		}
 		d2_UpdateRadioGroup(group);
@@ -124,7 +124,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 					d2_SuppressOverlay = r;
 					*(int*) 0x6a37f8 = d2_OpenMessageBox(g_14abee0[9], 0);
 					if (d2_RunParentProfessionSelection(0) == 0) {
-						fcn_004432d0(0, 0);
+						d3_SelectSceneContext(0, 0);
 						v1 = 1;
 					}
 				} else if (r == 0) {
@@ -133,7 +133,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 						*(Name5_53e020*) &g_7e2430 = *(Name5_53e020*) &v11;
 						g_7e2468 = fcn_004fdec0(0x6a3db4) + 0x639;
 					} else {
-						fcn_004432d0(0, 0);
+						d3_SelectSceneContext(0, 0);
 						v12 = 0;
 						v1 = 1;
 					}

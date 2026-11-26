@@ -14,7 +14,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_004fa5b0(int, int, int);
 int __cdecl ai_StartKreditNehmen(int, char*, int, char*, int);
-int __cdecl fcn_0050cf50(char*, int);
+int __cdecl gm_CalculateGebaeudeValue(char*, int);
 int __cdecl fcn_0050d320(char*, char);
 int __cdecl gm_BuyBuilding(int, int, int, char*, int);
 
@@ -183,7 +183,7 @@ found:
 ret16:
 	return 0x10;
 fraction:
-	r = fcn_0050cf50((char*) e, (int) *(signed char*) (e + 0x5c));
+	r = gm_CalculateGebaeudeValue((char*) e, (int) *(signed char*) (e + 0x5c));
 	if ((double) (B - A) / (double) B < (double) (B - r) / (double) r * g_664158 + 0.25f) {
 		*(int*) (decisionMsg + 8) = B - A;
 		*(char*) decisionMsg = 0x12;

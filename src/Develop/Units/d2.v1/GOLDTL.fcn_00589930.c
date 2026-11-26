@@ -53,9 +53,9 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00471f80(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl d2_GetControlValue(int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00526010(char*, int, char);
 int __cdecl fcn_005898f0(void*);
@@ -107,11 +107,11 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	             *(int*) 0x14b53ac);
 	d2_SetForm(dlg, 3);
 	btn = io_AppendText(0x4024);
-	act.no = fcn_00472250(dlg, 3, btn);
-	act.yes = fcn_00472250(dlg, 3, btn + 1);
+	act.no = d2_GetWindowListItem(dlg, 3, btn);
+	act.yes = d2_GetWindowListItem(dlg, 3, btn + 1);
 	*(int*) &g_100f1dc = -1;
 	do {
-		j = fcn_00471f80(lst);
+		j = d2_GetControlValue(lst);
 		d2_SetForm(dlg, 1);
 		io_AppendText(0x6811b0);
 		io_AppendText(0x401e, 0x401c);
@@ -163,7 +163,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 					m.f58 = act.count;
 					i = fcn_004c5530(&m);
 					while (i != -1 && !fcn_004c4450(i)) {
-						fcn_005373e0(0, 0x20007);
+						main_RunFrameLoop(0, 0x20007);
 					}
 					fcn_004c3030(-7, 0, (char*) 0x6a9508, 0);
 					lst = act.item;
@@ -173,7 +173,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 				*(int*) 0x774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) 0x589930, 0x677c7));
+	} while (main_RunFrameLoop((void*) 0x589930, 0x677c7));
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 }

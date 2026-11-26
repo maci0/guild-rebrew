@@ -1,7 +1,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_00500bb0(char* sel, int a, int b, int c);
+int __cdecl gm_AddTime(char* sel, int a, int b, int c);
 int __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
 float __cdecl fcn_00507e70(char* a, char* b, int c);
 double __cdecl gm_RandomFloat01(void);
@@ -35,7 +35,7 @@ void __cdecl fcn_0054f910(char* ent)
 
 
 
-	fcn_00500bb0(ent + 0x52, 0x18, 0, 0);
+	gm_AddTime(ent + 0x52, 0x18, 0, 0);
 	flags = *(unsigned char*) (ent + 0x78);
 	*(short*) (ent + 0x56) = 6;
 	*(int*) (ent + 0x58) = 0x1e;
@@ -51,7 +51,7 @@ void __cdecl fcn_0054f910(char* ent)
 
 
 
-			fcn_00500bb0(ent + 0x52, 0, 2, 0);
+			gm_AddTime(ent + 0x52, 0, 2, 0);
 			*(int*) (ent + 0x84) = fcn_004c5620(-1, ent);
 			return;
 		}
@@ -78,7 +78,7 @@ void __cdecl fcn_0054f910(char* ent)
 
 
 
-		fcn_00500bb0(ent + 0x52, 0x18, 0, 0);
+		gm_AddTime(ent + 0x52, 0x18, 0, 0);
 		*(short*) (ent + 0x56) = 6;
 		*(int*) (ent + 0x58) = 0x1e;
 		if (*(unsigned char*) (e1 + 2) == 6
@@ -119,7 +119,7 @@ void __cdecl fcn_0054f910(char* ent)
 
 
 
-	fcn_00500bb0(ent + 0x52, 0, 2, 0);
+	gm_AddTime(ent + 0x52, 0, 2, 0);
 	*(int*) (ent + 0x84) = fcn_004c5620(-1, ent);
 	return;
 big:
@@ -139,7 +139,7 @@ big:
 
 
 
-	fcn_00500bb0(ent + 0x52, 0x18, 0, 0);
+	gm_AddTime(ent + 0x52, 0x18, 0, 0);
 	*(short*) (ent + 0x56) = 6;
 	*(int*) (ent + 0x58) = 0x1e;
 	*(int*) (ent + 0x84) = fcn_004c5620(1, ent);

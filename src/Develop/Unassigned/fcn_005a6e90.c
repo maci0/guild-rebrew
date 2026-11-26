@@ -8,7 +8,7 @@ int __cdecl gm_AccumulateTyped2(int);
 int __cdecl fcn_00470820(int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00472830(int, int, ...);
 int __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl d2_CenterDialogWindows(int);
@@ -18,7 +18,7 @@ void __cdecl d2_ClearPaintbox(void);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_005c9450(int, int, int);
 int __cdecl fcn_005c9310(int, int, int, int, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005a6e90 */
@@ -64,9 +64,9 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
     io_AppendText(0x18ef, edi, r);
 
     d2_SetForm(dialogWindow, 3);
-    q1 = fcn_00472250(dialogWindow, 3, io_AppendText(0x18f0));
+    q1 = d2_GetWindowListItem(dialogWindow, 3, io_AppendText(0x18f0));
     d2_SetForm(dialogWindow, 5);
-    q2 = fcn_00472250(dialogWindow, 5, io_AppendText(0x18f1));
+    q2 = d2_GetWindowListItem(dialogWindow, 5, io_AppendText(0x18f1));
     d2_SetForm(dialogWindow, 0);
 
     r = fcn_00472830(dialogWindow, 2, 0x100, (int)&s20, (int)&s24, (int)&s1c);
@@ -141,7 +141,7 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
         if (g_14ce8e0 != 0)
             g_774654 = 1;
 
-        if (fcn_005373e0(0x5a6e90, 0x677c7) != 0)
+        if (main_RunFrameLoop(0x5a6e90, 0x677c7) != 0)
             continue;
 
         for (i = 0; i < 9; i++)

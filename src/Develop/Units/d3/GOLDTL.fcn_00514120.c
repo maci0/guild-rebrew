@@ -39,7 +39,7 @@ extern char g_868060[];
 extern int g_6b8300;
 
 void __cdecl fcn_00517250(char*, int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char __cdecl fcn_00510b70(char*);
 void __cdecl srv_LogWinsockError(void);
 void __cdecl cm_InitCrimeRecords(void);
@@ -51,10 +51,10 @@ void __cdecl fcn_005109f0(void);
 void __cdecl fcn_005105a0(void);
 void __cdecl fcn_00510b40(void);
 void __cdecl fcn_00513d40(char*);
-void __cdecl fcn_004c44a0(void);
+void __cdecl cm_BeginCommandSync(void);
 void __cdecl fcn_004c4f30(int, int, int, int);
 int __cdecl fcn_004c4fc0(int, int, int, short, int, unsigned char, int, int);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_004c3ff0(void);
 void __cdecl fcn_004c4940(void);
@@ -82,7 +82,7 @@ int __cdecl fcn_00514120(char* map)
 
 	gm_NextEntityId = 1;
 	fcn_00517250(map, 0);
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	if (fcn_00510b70(map) == 0) {
 		return 1;
 	}
@@ -115,17 +115,17 @@ int __cdecl fcn_00514120(char* map)
 	fcn_00513d40("bk_RAUBRITTERFESTE");
 	fcn_00513d40("bk_DOMIZIL");
 	fcn_00513d40("bk_STATUEN");
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	fcn_004c4f30(0x44, -1, 0, 0);
 	fcn_004c4f30(0x45, -1, 0, 0);
 	h = fcn_004c4fc0(0xa, -1, -1, 0x12, -1, 0, 0, 1);
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_004c3ff0();
 		fcn_004c4940();
 		ls_ID2Ptr();
 	}
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	(*(Figure**)&gm_CityEntity) = fcn_004c4480(h);
 	strcpy((*(Figure**)&gm_CityEntity)->name, "STADT");
 	fcn_004c5150((*(Figure**)&gm_CityEntity)->id, -1, (*(char*)&g_773d75), 200000000);
@@ -134,16 +134,16 @@ int __cdecl fcn_00514120(char* map)
 		fcn_004c4940();
 		ls_ID2Ptr();
 	}
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	for (i = 1; i < 4; i++) {
 		if (((Variant*)g_868060)[i].used != 0) {
 			fcn_004c5150((*(Figure**)&gm_CityEntity)->id, -1, (char) i, 200000000);
 		}
 	}
 	fcn_00512680();
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	gm_InitializeShopInventory();
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();
 	}
@@ -157,14 +157,14 @@ int __cdecl fcn_00514120(char* map)
 		}
 		fcn_005016f0(i);
 	}
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	fcn_005017a0((unsigned char) (*(char*)&g_773d75));
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();
 	}
-	fcn_004432d0(1, 0);
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(1, 0);
+	d3_SelectSceneContext(0, 0);
 	if (((Device*)g_6b8300)->kind == 0x80) {
 		((Scene*) g_67a370)->view = fcn_0045b700(((Device*)g_6b8300), 0x100, 2);
 	} else if (((Device*)g_6b8300)->kind == 0x40) {

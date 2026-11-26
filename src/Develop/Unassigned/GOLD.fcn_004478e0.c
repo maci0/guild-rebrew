@@ -17,7 +17,7 @@ void __cdecl fcn_0043a6f0(int, int, int);
 #define F32(p) (*(float*)(p))
 
 /* ADDRESS: GOLD 0x004478e0 */
-char __cdecl fcn_004478e0(int index, char force)
+char __cdecl d3_SelectSceneContext(int index, char force)
 {
     char* old;
     char* next;

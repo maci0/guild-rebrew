@@ -18,11 +18,11 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl fcn_004f2f90(void*, int, char*, int, int, int);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
@@ -54,8 +54,8 @@ int __cdecl d2_RunFriedhofDialog(char* entity, int a2, unsigned char a3, int cho
 	}
 	d2_SetForm(dlg, 2);
 	id = io_AppendText(0x4116);
-	ok = fcn_00472250(dlg, 2, id);
-	cancel = fcn_00472250(dlg, 2, id + 1);
+	ok = d2_GetWindowListItem(dlg, 2, id);
+	cancel = d2_GetWindowListItem(dlg, 2, id + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -65,7 +65,7 @@ int __cdecl d2_RunFriedhofDialog(char* entity, int a2, unsigned char a3, int cho
 				if (cost == 0 || fcn_00526010(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), cost, (*(char*)&g_773d75)) != 0) {
 					h = fcn_004f2f90(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), choice, entity, a2, a3, cost);
 					while (h != -1 && (s = fcn_004c4450(h)) == 0) {
-						fcn_005373e0((void*) s, 0x20007);
+						main_RunFrameLoop((void*) s, 0x20007);
 					}
 					main_LoopFlags = 0x677c7;
 					if (fcn_004c4450(h) == 2) {
@@ -80,7 +80,7 @@ int __cdecl d2_RunFriedhofDialog(char* entity, int a2, unsigned char a3, int cho
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) d2_RunFriedhofDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunFriedhofDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

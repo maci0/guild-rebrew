@@ -17,7 +17,7 @@ void __cdecl d2_PauseTutorialUpdates(void);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_004c3140(void *);
 void __cdecl fcn_004c3a10(void);
-int __cdecl fcn_005373e0(void *, int);
+int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl d2_ShowLoadGameMenu(void);
@@ -79,7 +79,7 @@ void __cdecl fcn_005e43f0(void)
     saved = *(unsigned char *)0x772d10;
     *(unsigned char *)0x772d10 = 0;
     fcn_004c3a10();
-    while (fcn_005373e0((void *)fcn_005e43f0, 0x24087)) {
+    while (main_RunFrameLoop((void *)fcn_005e43f0, 0x24087)) {
         d2_UpdateRadioGroup(group);
         if (*(int *)0x14ce8e0 || *(unsigned char *)0x14cf950 == 1) *(int *)0x774654 = 1;
         if (*(int *)0x14ce8d8) {

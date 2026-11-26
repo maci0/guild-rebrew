@@ -60,7 +60,7 @@ extern Row g_7e30c0[32];
 
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
-int __cdecl fcn_00472250(int h, int a, int b);
+int __cdecl d2_GetWindowListItem(int h, int a, int b);
 void __cdecl fcn_00471af0(int h, int v);
 int __cdecl fcn_0046f7e0(int a, int b, int c, int d, int e);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -80,11 +80,11 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 		d2_SetForm(g_6a25b4, 1);
 		owner = d2_CurrentWindowId;
 		d2_SetForm(g_6a25b4, 2);
-		id = fcn_00472250(g_6a25b4, 2, 0);
+		id = d2_GetWindowListItem(g_6a25b4, 2, 0);
 		((D2_CONTROL_TL*) g_1015ea0)[id].flags_1d0 = 3;
 		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0x10] = id;
 		((D2_CONTROL_TL*) g_1015ea0)[id].value_1f0 = owner;
-		id = fcn_00472250(g_6a25b4, 2, 1);
+		id = d2_GetWindowListItem(g_6a25b4, 2, 1);
 		((D2_CONTROL_TL*) g_1015ea0)[id].flags_1d0 = 3;
 		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0x14] = id;
 		((D2_CONTROL_TL*) g_1015ea0)[id].value_1f0 = owner;

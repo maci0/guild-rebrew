@@ -16,7 +16,7 @@ struct list {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67a370;
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, struct list*);
 char __cdecl d3_CollectObjectCallback(int v, int* list);
@@ -36,7 +36,7 @@ int __cdecl fcn_00574150(char* a)
 
 	best = 0;
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	sprintf(buf, "he_%i", *(int*) (a + 4));
 	l.handle = fcn_00445600(0, 0x1c0, 0, buf);
 	l.count = 0;
@@ -63,6 +63,6 @@ int __cdecl fcn_00574150(char* a)
 			best = vals[0];
 		}
 	}
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	return best;
 }

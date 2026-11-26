@@ -53,11 +53,11 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00526120(int, int);
 int __cdecl fcn_004c5530(struct msg*);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
@@ -89,8 +89,8 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 	io_AppendText(0x4120, 0x411e, 0x228);
 	d2_SetForm(h, 2);
 	s = io_AppendText(0x4121);
-	ok = fcn_00472250(h, 2, s);
-	cancel = fcn_00472250(h, 2, s + 1);
+	ok = d2_GetWindowListItem(h, 2, s);
+	cancel = d2_GetWindowListItem(h, 2, s + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -118,7 +118,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 					m.field = hh->entity_id;
 					id = fcn_004c5530(&m);
 					while (id != -1 && fcn_004c4450(id) == 0) {
-						fcn_005373e0(0, 0x20007);
+						main_RunFrameLoop(0, 0x20007);
 					}
 					r = 1;
 					g_774654 = 1;
@@ -127,7 +127,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(d2_ConfirmGrabpflege, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_ConfirmGrabpflege, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_0052a2d0();
 	sv_ClearObjectSelection();

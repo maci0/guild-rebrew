@@ -4,7 +4,7 @@
 typedef struct { char pad00[0x5c]; int f5c; char pad60[0x1d0-0x60]; int f1d0; char pad1d4[0x2f4-0x1d4]; } GUI_ROW_5893D0;
 int __cdecl fcn_00469c30(int x, int y, int a3);
 int __cdecl fcn_00469c40(int x, int y, int win);
-int __cdecl fcn_0046f740(int x, int y, int a3, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 int __cdecl fcn_00470820(int a0, int a1, char* text);
 void __cdecl fcn_00471d80(int k, int flags);
 void __cdecl fcn_00471af0(int k, int flag);
@@ -49,10 +49,10 @@ void __cdecl d2_CreateCannonControls(int w, int a1)
 	fcn_00469c40(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].left, v - 0x19,
 	    ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].slot);
 	d2_SetForm(*(int*) (w + 0xa4), 2);
-	*(int*) (w + 0xb8) = fcn_0046f740(0x59, 0xf, 0x7d5, *(int*) &d2_CurrentWindowId);
+	*(int*) (w + 0xb8) = d2_AddElementToWindow(0x59, 0xf, 0x7d5, *(int*) &d2_CurrentWindowId);
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xb8)].value_05c) = 1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xb8)].flags_1d0) = 3;
-	*(int*) (w + 0xbc) = fcn_0046f740(0x9b, 0xf, 0x7d4, *(int*) &d2_CurrentWindowId);
+	*(int*) (w + 0xbc) = d2_AddElementToWindow(0x9b, 0xf, 0x7d4, *(int*) &d2_CurrentWindowId);
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xbc)].value_05c) = 1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xbc)].flags_1d0) = 3;
 	d2_SetForm(*(int*) (w + 0xa4), 1);
@@ -67,13 +67,13 @@ void __cdecl d2_CreateCannonControls(int w, int a1)
 	    *(int*) &d2_CurrentWindowId);
 	fcn_00472380(*(int*) (w + 0xb4), 0, 100, *(int*) 0x9a9218, 1);
 	fcn_00468b80(*(int*) (w + 0xb4), *(int*) 0x14b54a8);
-	*(int*) (w + 0xc8) = fcn_0046f740(0x14, 0x17, 0x7d3, *(int*) &d2_CurrentWindowId);
+	*(int*) (w + 0xc8) = d2_AddElementToWindow(0x14, 0x17, 0x7d3, *(int*) &d2_CurrentWindowId);
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xc8)].value_05c) = 1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xc8)].flags_1d0) = 3;
-	*(int*) (w + 0xcc) = fcn_0046f740(0x56, 0x17, 0x7d1, *(int*) &d2_CurrentWindowId);
+	*(int*) (w + 0xcc) = d2_AddElementToWindow(0x56, 0x17, 0x7d1, *(int*) &d2_CurrentWindowId);
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xcc)].value_05c) = 1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xcc)].flags_1d0) = 3;
-	*(int*) (w + 0xd0) = fcn_0046f740(0x98, 0x17, 0x7d2, *(int*) &d2_CurrentWindowId);
+	*(int*) (w + 0xd0) = d2_AddElementToWindow(0x98, 0x17, 0x7d2, *(int*) &d2_CurrentWindowId);
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xd0)].value_05c) = 1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) (w + 0xd0)].flags_1d0) = 3;
 	*(int*) (w + 0xc0) = fcn_00470820(0, 0, (char*) 0x6a94c8);

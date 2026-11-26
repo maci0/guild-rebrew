@@ -17,13 +17,13 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 float __cdecl gm_GetEntitySkill(char*, int);
 int __cdecl gm_GetScaledEntitySkill(char*, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);
 int __cdecl fcn_0050de80(char*, int*);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004d5490(int, int, int);
 void __cdecl fcn_004d5740(char*, int, int);
 int __cdecl fcn_004e6eb0(char*, unsigned int);
@@ -129,9 +129,9 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 		d2_SetForm(win, 1);
 		io_AppendText(0x1132);
 		fcn_004d5740((char*) (dialogState + 0xc0), 0, 0xb4);
-		fcn_00472250(win, 2, sel);
-		fcn_00472250(win, 2, sel + 1);
-		t = fcn_005373e0(0x4d5940, 0x7d6c6);
+		d2_GetWindowListItem(win, 2, sel);
+		d2_GetWindowListItem(win, 2, sel + 1);
+		t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
 		while (t) {
 			if (g_14ce8e0) {
 				g_774654 = 1;
@@ -148,7 +148,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 			}
 
 
-			t = fcn_005373e0(0x4d5940, 0x7d6c6);
+			t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
 		}
 	}
 	if ((*(unsigned char*) (dialogState + 0x7c) & 1) && *((char*) g_772e98 + 2) == 6 && !g_772ea8) {
@@ -223,9 +223,9 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 		d2_SetForm(win, 2);
 		io_AppendText(0x6811b0);
 		t = io_AppendText(0x1141, (int) (total * 0.1), (int) (total * 0.5), (int) (total * g_664108));
-		sel = fcn_00472250(win, 2, t);
-		r = fcn_00472250(win, 2, t + 1);
-		n = fcn_00472250(win, 2, t + 2);
+		sel = d2_GetWindowListItem(win, 2, t);
+		r = d2_GetWindowListItem(win, 2, t + 1);
+		n = d2_GetWindowListItem(win, 2, t + 2);
 		clicked = 0;
 		p = (int*) (dialogState + 0x80);
 		i = 0x10;
@@ -236,11 +236,11 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 			p++;
 			i--;
 		} while (i);
-		t4 = fcn_00472250(win, 2, t + 3);
+		t4 = d2_GetWindowListItem(win, 2, t + 3);
 		if (!clicked) {
 			d2_SetSlotVisibility(t4, 0);
 		}
-		t = fcn_005373e0(0x4d5940, 0x7d6c6);
+		t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
 		while (t) {
 			if (g_14ce8e0) {
 				g_774654 = 1;
@@ -276,7 +276,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 					}
 				}
 			}
-			t = fcn_005373e0(0x4d5940, 0x7d6c6);
+			t = main_RunFrameLoop(0x4d5940, 0x7d6c6);
 		}
 	} else if ((*(unsigned char*) (dialogState + 0x7c) & 1) && *((char*) g_772e98 + 2) != 6 && !g_772ea8) {
 

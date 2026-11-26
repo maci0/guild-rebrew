@@ -17,7 +17,7 @@ void __cdecl fcn_00452340(void);
 void __cdecl fcn_0043b8f0(int a);
 void __cdecl fcn_00459a90(int a);
 void __cdecl fcn_00456c60(void);
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_00456c10(void);
 void __cdecl fcn_0041b7c0(void);
 void __cdecl fcn_0041b7f0(void);
@@ -56,7 +56,7 @@ char __cdecl fcn_0043b360(void)
 	saved = d3_CurrentContextIndex;
 	for (i = 0; i < 0x40; i++) {
 		if (i != saved) {
-			fcn_004432d0(i, 1);
+			d3_SelectSceneContext(i, 1);
 			if (g_6b8300 != 0) {
 				fcn_0043b8f0(g_6b8300);
 			}
@@ -66,7 +66,7 @@ char __cdecl fcn_0043b360(void)
 			fcn_00456c60();
 		}
 	}
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	fcn_00456c10();
 	fcn_0041b7c0();
 	fcn_0041b7f0();
@@ -83,7 +83,7 @@ char __cdecl fcn_0043b360(void)
 		fcn_00456c80();
 		for (i = 0; i < 0x40; i++) {
 			if (i != saved) {
-				fcn_004432d0(i, 1);
+				d3_SelectSceneContext(i, 1);
 				if (g_6b8300 != 0) {
 					fcn_0043b990(g_6b8300);
 					UpdateSceneLighting(1);
@@ -93,7 +93,7 @@ char __cdecl fcn_0043b360(void)
 				}
 			}
 		}
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 		UpdateSceneLighting(1);
 		r = 1;
 	}

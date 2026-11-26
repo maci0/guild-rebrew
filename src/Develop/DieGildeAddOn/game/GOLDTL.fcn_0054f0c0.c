@@ -41,7 +41,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, Order_54f0c0*);
 void __cdecl he_FreeAction(Order_54f0c0*);
 
@@ -102,7 +102,7 @@ void __cdecl fcn_0054f0c0(Order_54f0c0* o)
 				}
 			}
 			o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
-			fcn_00500bb0(&o->stamp, 0, 2, 0);
+			gm_AddTime(&o->stamp, 0, 2, 0);
 			o->event = fcn_004c5620(-1, o);
 		}
 		break;

@@ -2,7 +2,7 @@
 
 
 int __cdecl d3_GetContextIndex(int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 
 
 void __cdecl fcn_00418ae0(char* p)
@@ -14,11 +14,11 @@ void __cdecl fcn_00418ae0(char* p)
 	k = -1;
 	if (*(int*) (p + 0x20c) != *(int*) 0x67a370) {
 		k = d3_GetContextIndex(*(int*) (p + 0x20c));
-		fcn_004432d0(k, 1);
+		d3_SelectSceneContext(k, 1);
 	}
 	d3_DestroyObject((D3_OBJECT*) (p));
 	*(int*) 0x6b5cfc = 0;
 	if (k != -1) {
-		fcn_004432d0(save, 1);
+		d3_SelectSceneContext(save, 1);
 	}
 }

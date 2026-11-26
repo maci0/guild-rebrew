@@ -29,13 +29,13 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl fcn_0046f9b0(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00468cd0(int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004bfc70(int);
 void __cdecl fcn_004be360(void);
@@ -45,7 +45,7 @@ void __cdecl d2_SelectRadioGroup(int, int);
 
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c53a0(void);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
 
@@ -64,7 +64,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x42e2);
-	list = fcn_00472250(dlg, 2, 0);
+	list = d2_GetWindowListItem(dlg, 2, 0);
 	d2_SetForm(dlg, 4);
 	io_AppendText(*(unsigned char*) (p + 0x33) + 0x42ec);
 	d2_SetForm(dlg, 3);
@@ -76,7 +76,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 	d2_SetElementValue(list, 0, 4, *(unsigned char*) (p + 0x31));
 	fcn_00468cd0(list, 0x82);
 	fcn_00468bb0(list, 5, g_14b5eb4, g_14b5eb8, g_14b5ebc, g_14b5ec0, g_14b5ec4);
-	while (fcn_005373e0(fcn_004bf8e0, 0x657c7) != 0) {
+	while (main_RunFrameLoop(fcn_004bf8e0, 0x657c7) != 0) {
 		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == ok)) {
 			g_774654 = 1;
 		}
@@ -110,10 +110,10 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 			fcn_004c53a0();
 		}
 	}
-	if (fcn_00471f80(list) != *(unsigned char*) (p + 0x31)) {
+	if (d2_GetControlValue(list) != *(unsigned char*) (p + 0x31)) {
 		unsigned char b;
 
-		b = fcn_00471f80(list);
+		b = d2_GetControlValue(list);
 		fcn_004c4510(p, *(int*) (p + 2));
 		fcn_004c4700(1, 1, (short) (p + 0x31 - g_aed32c), &b);
 		fcn_004c53a0();

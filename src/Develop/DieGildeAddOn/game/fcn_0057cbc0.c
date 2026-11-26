@@ -9,12 +9,12 @@ extern char g_6a80c0[];
 int __cdecl fcn_004c4450(int);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00502cd0(int, int, int, int);
-int __cdecl fcn_00500bb0(char*, int, int, int);
+int __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*,
                           char*);
 int __cdecl init_EnsureObjektSceneContext(int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(void*, int, int);
 void __cdecl he_FreeAction(char*);
@@ -44,7 +44,7 @@ void __cdecl fcn_0057cbc0(char* p)
         s = gm_SearchTable67(*(int*) (p + 0x10));
         if (s != 0)
             wnd = (char*) fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0x27f);
-        fcn_00500bb0(p + 0x52, 2, 0, 0);
+        gm_AddTime(p + 0x52, 2, 0, 0);
         if (wnd != 0) {
             w = *(unsigned short*) (s + 0x27);
             tbl = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[w]);
@@ -54,14 +54,14 @@ void __cdecl fcn_0057cbc0(char* p)
                          g_6b5c60);
             gfx = d3_CurrentContextIndex;
             r = init_EnsureObjektSceneContext((int) wnd);
-            fcn_004432d0(r, 1);
+            d3_SelectSceneContext(r, 1);
             e = (char*) evt_LoadGfxScript(g_6a80c0);
             if (e != 0) {
                 *(int*) (e + 0x104) = *(int*) (wnd + 2);
                 *(int*) (e + 0xc8c) = 1;
                 fcn_00428340(e, 1, *(int*) (p + 0xac));
             }
-            fcn_004432d0(gfx, 1);
+            d3_SelectSceneContext(gfx, 1);
         }
         *(int*) (p + 0x58) = 0;
         *(int*) (p + 0x70) = 1;

@@ -7,7 +7,7 @@ extern int g_14ad278;
 extern int g_7746a0;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_00597ec0(char*);
 void __cdecl fcn_005944d0(char*);
@@ -30,7 +30,7 @@ void __cdecl fcn_0059e5f0(char* e)
 	transport = 0;
 	personal = 0;
 	fcn_005338a0();
-	while (fcn_005373e0((void*) fcn_0059e5f0, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) fcn_0059e5f0, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			prod = RegisterStatusText("contact_PRODUKTION_TISCHLER", g_14ad278, 0x13);
 		}

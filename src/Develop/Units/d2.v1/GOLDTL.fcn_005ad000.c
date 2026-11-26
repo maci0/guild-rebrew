@@ -10,19 +10,19 @@ void* __cdecl fcn_00470820(int, int, void*);
 void __cdecl d2_CenterDialogWindows(void*);
 void __cdecl fcn_00471e30(void*);
 void __cdecl d2_SetForm(void*, int);
-int __cdecl fcn_00472250(void*, int, int);
+int __cdecl d2_GetWindowListItem(void*, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl gm_SumSlotTreasury(int);
 int __cdecl fcn_0050b710(int, char);
 int __cdecl fcn_0050b750(int, char);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_004c4eb0(void*);
 void __cdecl fcn_004c4ef0(void*);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c5530(void*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
 
 typedef struct Dlg005ad000 {
@@ -64,8 +64,8 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 	d2_SetForm(dlg, 1);
 	h = *(unsigned char*) &g_773d75;
 	id = io_AppendText(0x19b1, h, h, *(unsigned short*) obj);
-	ctl1 = fcn_00472250(dlg, 1, id);
-	ctl2 = fcn_00472250(dlg, 1, id + 1);
+	ctl1 = d2_GetWindowListItem(dlg, 1, id);
+	ctl2 = d2_GetWindowListItem(dlg, 1, id + 1);
 	msg.ctl = ctl2;
 	h = gm_SumSlotTreasury(*(unsigned short*) &g_774970);
 	fcn_00472380(ctl1, 0x96,
@@ -85,7 +85,7 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 			                                    *(unsigned short*) &g_774970 * 0x21c);
 			h = *(unsigned char*) &g_773d75;
 			*(int*) (msg.pkt + 0x78) = fcn_0050b750(
-			    fcn_00471f80(ctl1), h);
+			    d2_GetControlValue(ctl1), h);
 			fcn_004c4eb0((void*) 0x6ab168);
 			fcn_004c5150(*(int*) (obj + 4),
 			             *(int*) ((unsigned long)&g_7f4ca4 + *(unsigned short*) &g_774970 * 0x21c),
@@ -94,7 +94,7 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 			fcn_004c4ef0((void*) 0x6ab168);
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) 0x5ad000, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) 0x5ad000, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 }

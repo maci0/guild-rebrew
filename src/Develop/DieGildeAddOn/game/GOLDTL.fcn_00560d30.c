@@ -8,7 +8,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_00529160(char*, char*, int, char*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl fcn_00560d30(char* u)
@@ -33,9 +33,9 @@ void __cdecl fcn_00560d30(char* u)
 				fcn_00529160(e, 0, *(unsigned short*) h, u);
 			}
 			*(pos14_7f4c00*) (u + 0x60) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 0x1e, 0);
+			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 0x1e, 0);
 			*(pos14_7f4c00*) (u + 0xb8) = *(pos14_7f4c00*) (u + 0x52);
-			fcn_00500bb0((pos14_7f4c00*) (u + 0xb8), 6, 0, 0);
+			gm_AddTime((pos14_7f4c00*) (u + 0xb8), 6, 0, 0);
 			if (*(unsigned short*) (u + 0xbc) < 6) {
 				*(unsigned short*) (u + 0xbc) = *(unsigned short*) (u + 0xbc) - *(unsigned short*) (u + 0x56) + 0x1d;
 			}

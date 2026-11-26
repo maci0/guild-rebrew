@@ -86,7 +86,7 @@ int __cdecl fcn_004770a0(int* p, int kind);
 void __cdecl fcn_00476970(int h);
 int __cdecl d2_AllocateElement(void);
 int __cdecl m_alloc(int size, char* tag);
-void __cdecl fcn_0046f740(int x, int y, int id, int layer);
+void __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
 
 /* ADDRESS: GOLDTL 0x0046e940 */
 int __cdecl fcn_0046e940(unsigned int x, unsigned int y, unsigned int width, int height,
@@ -200,11 +200,11 @@ found:
 	rec->x3b0 = 0;
 	rec->x3b4 = 0;
 	if (flags & 8) {
-		fcn_0046f740(3, 3, g_67d390, i);
+		d2_AddElementToWindow(3, 3, g_67d390, i);
 	}
 	if (flags & 0x20) {
-		fcn_0046f740((short) (rec->xc - 0xc), 3, g_67d390 + 1, i);
-		fcn_0046f740((short) (rec->xc - 0xc), (short) (rec->x10 - 10), g_67d390 + 2, i);
+		d2_AddElementToWindow((short) (rec->xc - 0xc), 3, g_67d390 + 1, i);
+		d2_AddElementToWindow((short) (rec->xc - 0xc), (short) (rec->x10 - 10), g_67d390 + 2, i);
 	}
 	if (flags & 0x10) {
 		rec->x3c = m_alloc(0x17d0, "d2_t:w->txt");

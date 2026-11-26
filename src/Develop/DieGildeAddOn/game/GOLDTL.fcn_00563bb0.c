@@ -15,7 +15,7 @@ extern unsigned char* lpGebaeudePROT;
 extern int g_774800;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
@@ -38,9 +38,9 @@ void __cdecl fcn_00563bb0(char* e)
 		if (d <= 0) {
 			d = 24;
 		}
-		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), d, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (e + 0x52), d, 0, 0);
 	} else {
-		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0x1e, 0);
+		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0x1e, 0);
 	}
 	*(int*) (e + 0x10) = *(int*) (t + 1);
 	if ((*(unsigned short*) (t + 0x5a) & 0x40) != 0) {

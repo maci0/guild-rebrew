@@ -12,7 +12,7 @@ unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
 void __cdecl fcn_004c5c80(int);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 void __cdecl fcn_004c5ed0(int, char*, int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl fcn_0057ceb0(char* entity);
 int __cdecl fcn_0057d7e0(char* e);
 void __cdecl fcn_0057d830(char* u, int count);
@@ -92,7 +92,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 	}
 	*(int*) (entity + 0x70) = 1;
 	*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
-	fcn_00500bb0(entity + 0x52, 0, 10, 0);
+	gm_AddTime(entity + 0x52, 0, 10, 0);
 		return;
 	}
 		gm_ResolveEntityById((void**) &found, 0, 0, *(int*) (entity + 0xd0));
@@ -119,7 +119,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 				if (fcn_00529670((char*) objs[i], (char*) found) == 0) {
 					*(int*) (entity + 0x70) = 1;
 					*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
-					fcn_00500bb0(entity + 0x52, 0, 5, 0);
+					gm_AddTime(entity + 0x52, 0, 5, 0);
 					return;
 				}
 			}
@@ -133,7 +133,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 				return;
 			}
 			*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
-			fcn_00500bb0(entity + 0x52, 2, 0, 0);
+			gm_AddTime(entity + 0x52, 2, 0, 0);
 			*(int*) (entity + 0x70) = 2;
 			for (i = 0; i < n; i++) {
 				o = (char*) objs[i];

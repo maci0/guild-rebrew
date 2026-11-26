@@ -24,14 +24,14 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00525f60(ENTITY_RECORD*, int);
 void __cdecl fcn_005100f0(int, int);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 int __cdecl fcn_004c5360(void);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
@@ -56,8 +56,8 @@ void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p)
 	io_AppendText(0x407d, 0x4171, b);
 	d2_SetForm(h, 2);
 	s = io_AppendText(0x407e);
-	ok = fcn_00472250(h, 2, s);
-	cancel = fcn_00472250(h, 2, s + 1);
+	ok = d2_GetWindowListItem(h, 2, s);
+	cancel = d2_GetWindowListItem(h, 2, s + 1);
 	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -71,7 +71,7 @@ void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p)
 					cm_AppendPacketFieldDelta(4, 1, 0x20, &v);
 					id = fcn_004c5360();
 					while (id != -1 && fcn_004c4450(id) == 0) {
-						fcn_005373e0(0, 0x20007);
+						main_RunFrameLoop(0, 0x20007);
 					}
 					g_774654 = 1;
 				}
@@ -79,7 +79,7 @@ void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(d2_RunDomizilKabinettDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_RunDomizilKabinettDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_00532ef0();
 }

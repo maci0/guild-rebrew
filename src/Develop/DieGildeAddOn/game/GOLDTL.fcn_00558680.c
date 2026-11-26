@@ -7,7 +7,7 @@ extern float g_662920;
 extern float g_665ea0;
 extern double g_665ea8;
 
-int __cdecl fcn_004432d0(int, int);
+int __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
 char __cdecl fcn_0045b990(int, float*, int*, int*, float*);
@@ -33,7 +33,7 @@ int __cdecl fcn_00558680(char* action)
 	int ret;
 
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	block = *(int*) (action + 0xc8);
 	if (block != 0) {
 		rec = *(int*) (block + 0x1cc);
@@ -46,7 +46,7 @@ int __cdecl fcn_00558680(char* action)
 					if (level != 0 && *(int*) (level + 0x318) != 0) {
 						if (*(int*) (*(int*) (action + 0xc8) + 0x1d0) != 0) {
 							*(int*) (action + 0xec) = g_6b7fac;
-							fcn_004432d0(saved, 1);
+							d3_SelectSceneContext(saved, 1);
 							return 1;
 						}
 						d3_TransformPoint((char*) rec, (char*) rec + 0x4c, pos1);
@@ -96,13 +96,13 @@ int __cdecl fcn_00558680(char* action)
 						*(float*) (action + 0xd8) = pos1[2];
 						fcn_00438b40((char*) rec, pos1);
 done:
-						fcn_004432d0(saved, 1);
+						d3_SelectSceneContext(saved, 1);
 						return ret;
 					}
 				}
 			}
 		}
 	}
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	return 0;
 }

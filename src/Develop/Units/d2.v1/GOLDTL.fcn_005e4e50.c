@@ -31,9 +31,9 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_005338a0(void);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004c58b0(int, int);
 void __cdecl fcn_004c6ae0(int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -71,12 +71,12 @@ void __cdecl fcn_005e4e50(ENTITY_RECORD* other)
 	io_AppendText(0x4227);
 	io_AppendText(0x422b, other->entity_index, count, 0x422c, other->entity_index, 1);
 	d2_SetForm(h, 2);
-	yes = fcn_00472250(h, 2, io_AppendText((int) s_681140, 0x422d));
+	yes = d2_GetWindowListItem(h, 2, io_AppendText((int) s_681140, 0x422d));
 	io_AppendText((int) s_6ad3bc, 0x422e);
 	if (found == 0 || count == 0) {
 		fcn_00472640(yes, 0);
 	}
-	while (fcn_005373e0(fcn_005e4e50, 0x67fff)) {
+	while (main_RunFrameLoop(fcn_005e4e50, 0x67fff)) {
 		if (g_14ce8e0 || g_100f1dc == 1) {
 			g_774654 = 1;
 		}

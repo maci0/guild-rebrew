@@ -5,7 +5,7 @@ extern int g_14ad1f8;
 extern int g_7746a0;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_00597ec0(char*);
 void __cdecl fcn_005944d0(char*);
@@ -17,7 +17,7 @@ void __cdecl fcn_005cf560(char*);
 extern int g_14ad1f0;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_00597ec0(char*);
 void __cdecl fcn_005944d0(char*);
@@ -45,7 +45,7 @@ void __cdecl fcn_0059f190(char* e, int a2)
 	sammeln = 0;
 	personal = 0;
 	fcn_005338a0();
-	while (fcn_005373e0((void*) fcn_0059f190, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) fcn_0059f190, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			sammeln = RegisterStatusText("contact_SAMMELN", g_14ab314, 0x16);
 			prod = RegisterStatusText("contact_PRODUKTION_PARFUMERIE", g_14ad1f8, 0x13);
@@ -93,7 +93,7 @@ void __cdecl d2_RunMixingProductionMenu(char* e, int a2)
 	sammeln = 0;
 	personal = 0;
 	fcn_005338a0();
-	while (fcn_005373e0((void*) d2_RunMixingProductionMenu, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunMixingProductionMenu, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			sammeln = RegisterStatusText("contact_SAMMELN", g_14ab314, 0x16);
 			prod = RegisterStatusText("contact_PRODUKTION_MISCHEN", g_14ad1f0, 0x13);

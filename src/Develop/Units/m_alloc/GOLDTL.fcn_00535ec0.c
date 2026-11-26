@@ -31,7 +31,7 @@ int __cdecl fcn_004c4450(int);
 char* __cdecl fcn_004c4480(int);
 int __cdecl fcn_004c6470(int, int);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_00535960(void);
 
 /* ADDRESS: GOLDTL 0x00535ec0 */
@@ -75,7 +75,7 @@ void __cdecl fcn_00535ec0(void)
 		}
 		*(pos14_7f4c00*) (slot_buf + 0x18) = gm_GameTime;
 		slot_buf[0x7c] = 0;
-		fcn_00500bb0((pos14_7f4c00*) (slot_buf + 0x18), 0, 0x1e, 0);
+		gm_AddTime((pos14_7f4c00*) (slot_buf + 0x18), 0, 0x1e, 0);
 		fcn_004c5980(slot_buf);
 		return;
 	}
@@ -232,7 +232,7 @@ void __cdecl fcn_00535ec0(void)
 		slot_buf[0x30] = 2;
 		*(int*) (slot_buf + 0x38) = *(int*) (n * 0x21c + 0x7f4ca4);
 		*(pos14_7f4c00*) (slot_buf + 0x18) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (slot_buf + 0x18), 0, 0x1e, 0);
+		gm_AddTime((pos14_7f4c00*) (slot_buf + 0x18), 0, 0x1e, 0);
 		fcn_004c5980(slot_buf);
 		return;
 	}

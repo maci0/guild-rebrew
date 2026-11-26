@@ -10,7 +10,7 @@ extern float g_665ee8;
 
 extern char* __cdecl gm_ResolveParentEntity(void* record);
 extern int __cdecl gm_RandomMod(int range);
-extern void __cdecl fcn_00500bb0(void* clock, int arg2, int arg3, int arg4);
+extern void __cdecl gm_AddTime(void* clock, int arg2, int arg3, int arg4);
 extern float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 extern void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
 extern void __cdecl fcn_004c5530(int block);
@@ -79,7 +79,7 @@ void __cdecl fcn_005705a0(int action, char* rec)
 		job.e36 = 1;
 		job.timestamp.c = g_7f4c08;
 		job.timestamp.d = g_7f4c0c;
-		fcn_00500bb0(&job.timestamp, 0, 0, 10);
+		gm_AddTime(&job.timestamp, 0, 0, 10);
 		job.f58 = *(unsigned int*) (rec + 2);
 		job.f64 = 5;
 		job.f84 = 0;

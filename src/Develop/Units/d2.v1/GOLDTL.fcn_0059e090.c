@@ -47,7 +47,7 @@ extern char g_868060[];
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -90,7 +90,7 @@ void __cdecl fcn_0059e090(char* b)
 	h = -1;
 	sel = 1;
 	shown = -1;
-	while (fcn_005373e0(fcn_0059e090, 0x677c7) != 0) {
+	while (main_RunFrameLoop(fcn_0059e090, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

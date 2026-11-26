@@ -18,7 +18,7 @@ void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_004bcc50(char*, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c4450(unsigned int);
-int __cdecl fcn_005155e0(unsigned char*);
+int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char*);
 void __cdecl he_FreeAction(void*);
 void __cdecl fcn_00529160(char*, int, int, int);
 char* __cdecl evt_FindScriptById(int);
@@ -30,7 +30,7 @@ void __cdecl fcn_004c5aa0(int, char, char, short, char, int);
 char* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_004c51f0(int, int, unsigned int, int, char, int);
 void __cdecl fcn_004c5530(int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl plt_FindPlantInfo(int);
 
 /* ADDRESS: GOLDTL 0x00565ab0 */
@@ -62,7 +62,7 @@ void __cdecl he_UpdateErnten(char* ev)
 						if (!fcn_004c4450(*(int*) (ev + 0xc0))) {
 							return;
 						}
-						if (d3_CurrentContextIndex == fcn_005155e0((unsigned char*) v4)) {
+						if (d3_CurrentContextIndex == init_AllocateGebaeudeSceneSlot((unsigned char*) v4)) {
 							void* found;
 							char* ent = (char *)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)*v4];
 
@@ -86,7 +86,7 @@ void __cdecl he_UpdateErnten(char* ev)
 							*(int*) (ev + 0xc0) = -1;
 						}
 						*(pos14_7f4c00*) (ev + 0x52) = gm_GameTime;
-						fcn_00500bb0(ev + 0x52, 0, 0, 1);
+						gm_AddTime(ev + 0x52, 0, 0, 1);
 						*(int*) (ev + 0x70) = *(int*) (ev + 0x70) + 1;
 						return;
 					case 1:
@@ -96,7 +96,7 @@ void __cdecl he_UpdateErnten(char* ev)
 							char* def = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[type]);
 
 							*(pos14_7f4c00*) (ev + 0x52) = gm_GameTime;
-							fcn_00500bb0(ev + 0x52, 0,
+							gm_AddTime(ev + 0x52, 0,
 							             (int) ((double) (*(char*) (v5 + 0xd) * ((OBJECT_PROTOTYPE *)def)->value_022) * 0.25), 0);
 						}
 						*(int*) (ev + 0x70) = *(int*) (ev + 0x70) + 1;
@@ -105,7 +105,7 @@ void __cdecl he_UpdateErnten(char* ev)
 						if (*(int*) (ev + 0xb4) != -1) {
 							evt_RequestScriptExit(evt_FindScriptById(*(int*) (ev + 0xb4)));
 						}
-						if (d3_CurrentContextIndex == fcn_005155e0((unsigned char*) v4)) {
+						if (d3_CurrentContextIndex == init_AllocateGebaeudeSceneSlot((unsigned char*) v4)) {
 							void* found;
 							char* ent = (char *)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)*v4];
 
@@ -126,7 +126,7 @@ void __cdecl he_UpdateErnten(char* ev)
 							}
 						}
 						*(pos14_7f4c00*) (ev + 0x52) = gm_GameTime;
-						fcn_00500bb0(ev + 0x52, 0, 10, 0);
+						gm_AddTime(ev + 0x52, 0, 10, 0);
 						*(int*) (ev + 0x70) = *(int*) (ev + 0x70) + 1;
 						return;
 					case 3:

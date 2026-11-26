@@ -9,13 +9,13 @@ extern char g_6a2300[];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
-unsigned char __cdecl fcn_00471f80(int);
+int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
+unsigned char __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471e30(int);
 
@@ -29,7 +29,7 @@ int __cdecl d2_ChoosePlayerCount(void)
 	result = 0;
 	h = fcn_00470820(0, 0, g_6a3a04);
 	d2_CenterDialogWindows(h);
-	d = fcn_00472250(h, 0, 0);
+	d = d2_GetWindowListItem(h, 0, 0);
 	mode = *(unsigned char*) &(*(int*)&g_6a375c);
 	*(unsigned char*) &(*(int*)&g_6a375c) = 2;
 	if (mode >= 2) {
@@ -41,14 +41,14 @@ int __cdecl d2_ChoosePlayerCount(void)
 	io_AppendText(0x1ab5);
 	d2_SetForm(h, 2);
 	io_AppendText((int) g_6a2300, 0x7d, 0x7e);
-	while (fcn_005373e0(d2_ChoosePlayerCount, 0x24087) != 0) {
+	while (main_RunFrameLoop(d2_ChoosePlayerCount, 0x24087) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc == 1) {
 			g_774654 = 1;
 		} else if (g_100f1dc == 2) {
-			*(unsigned char*) &(*(int*)&g_6a375c) = fcn_00471f80(d);
+			*(unsigned char*) &(*(int*)&g_6a375c) = d2_GetControlValue(d);
 			fcn_00471af0(h, 0);
 			result = 1;
 			g_774654 = 1;

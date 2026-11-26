@@ -9,7 +9,7 @@ extern char g_6b5c60[]; extern int g_6a25b4; extern char g_774724;
 void d2_DestroyElement(int id);
 int fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
 void fcn_0046f280(int id);
-int fcn_0046f740(int x, int y, int id, int win);
+int d2_AddElementToWindow(int x, int y, int id, int win);
 int fcn_0046f7e0(int x, int y, int id, int win, int a5);
 void fcn_0046f940(int id, char* text);
 int d2_ShowTxt(int x, int y, char* text, int win);
@@ -122,10 +122,10 @@ void __cdecl fcn_00529890(char* building)
 				d2_SetForm(g_6a25b4, 1);
 				v5 = v6 * 0x4e;
 				v6 *= 0x28;
-				v4 = fcn_0046f740(6, v5, 0x5dc, d2_CurrentWindowId);
+				v4 = d2_AddElementToWindow(6, v5, 0x5dc, d2_CurrentWindowId);
 				v16 = *(unsigned int*) (v11 + 0x27);
 				*(unsigned int*) (v6 + 0x7e30c4) = v4;
-				v16 = fcn_0046f740(8, v5 + 0x11, v16, d2_CurrentWindowId);
+				v16 = d2_AddElementToWindow(8, v5 + 0x11, v16, d2_CurrentWindowId);
 				*(unsigned int*) (v6 + 0x7e30c0) = v16;
 				v15 = d2_ShowTxt(0, v5 + 4, g_6b5c60, d2_CurrentWindowId);
 				*(int*) (v6 + 0x7e30d4) = v15;
@@ -148,11 +148,11 @@ void __cdecl fcn_00529890(char* building)
 					v16 = fcn_0046f100(6, v5 + 0x3f, 0x50, 0xf, 0,
 						d2_CurrentWindowId);
 					*(unsigned int*) (v6 + 0x7e30d8) = v16;
-					fcn_0046f740(4, 1, 0x5df, d2_CurrentWindowId);
+					d2_AddElementToWindow(4, 1, 0x5df, d2_CurrentWindowId);
 					fcn_00534210(0x10, 4,
 						(char*) (*(int*) (v6 + 0x7e30d0) * 0x21c
 							+ 0x7f4ca0), 2, 0x4f1);
-					fcn_0046f740(0x28, 1, 0x5e0, d2_CurrentWindowId);
+					d2_AddElementToWindow(0x28, 1, 0x5e0, d2_CurrentWindowId);
 					fcn_00534210(0x34, 4,
 						(char*) (*(int*) (v6 + 0x7e30d0) * 0x21c
 							+ 0x7f4ca0), 3, 0x4f1);
@@ -244,7 +244,7 @@ label_529d30:
 									v6, d2_CurrentWindowId, -2);
 							}
 							else {
-								v6 = fcn_0046f740(0x38, v3 - 0x18,
+								v6 = d2_AddElementToWindow(0x38, v3 - 0x18,
 									v6, d2_CurrentWindowId);
 							}
 						}
@@ -260,7 +260,7 @@ label_529d30:
 									v6, d2_CurrentWindowId, -2);
 							}
 							else {
-								v6 = fcn_0046f740(0x38, v3 - 0x18,
+								v6 = d2_AddElementToWindow(0x38, v3 - 0x18,
 									v6, d2_CurrentWindowId);
 							}
 						}
@@ -281,7 +281,7 @@ label_529f4c:
 									d2_CurrentWindowId, -2);
 							}
 							else {
-								v6 = fcn_0046f740(0x38, v3, 0,
+								v6 = d2_AddElementToWindow(0x38, v3, 0,
 									d2_CurrentWindowId);
 							}
 						} else {
@@ -290,7 +290,7 @@ label_529f4c:
 									d2_CurrentWindowId, -2);
 							}
 							else {
-								v6 = fcn_0046f740(0x38, v3, v15,
+								v6 = d2_AddElementToWindow(0x38, v3, v15,
 									d2_CurrentWindowId);
 							}
 						}

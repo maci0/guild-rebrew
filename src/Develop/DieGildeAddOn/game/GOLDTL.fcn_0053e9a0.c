@@ -11,9 +11,9 @@ extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
+int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_UpdateRadioGroup(int);
@@ -37,14 +37,14 @@ int __cdecl fcn_0053e9a0(void)
 	d2_CenterDialogWindows(h);
 	g_7747b4 = g_77670a;
 	s = io_AppendText(0x1abf);
-	option0 = fcn_00472250(h, 0, s);
-	option1 = fcn_00472250(h, 0, s + 1);
-	option2 = fcn_00472250(h, 0, s + 2);
-	option3 = fcn_00472250(h, 0, s + 3);
-	option4 = fcn_00472250(h, 0, s + 4);
-	list = d2_CreateRadioGroup(6, option0, option1, option2, option3, option4, fcn_00472250(h, 0, s + 5));
+	option0 = d2_GetWindowListItem(h, 0, s);
+	option1 = d2_GetWindowListItem(h, 0, s + 1);
+	option2 = d2_GetWindowListItem(h, 0, s + 2);
+	option3 = d2_GetWindowListItem(h, 0, s + 3);
+	option4 = d2_GetWindowListItem(h, 0, s + 4);
+	list = d2_CreateRadioGroup(6, option0, option1, option2, option3, option4, d2_GetWindowListItem(h, 0, s + 5));
 	d2_SelectRadioGroup(list, g_7747b4);
-	while (fcn_005373e0(fcn_0053e9a0, 0xc6) != 0) {
+	while (main_RunFrameLoop(fcn_0053e9a0, 0xc6) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			result = 0;

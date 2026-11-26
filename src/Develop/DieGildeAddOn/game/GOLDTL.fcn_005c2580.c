@@ -11,7 +11,7 @@ extern unsigned char g_773d75;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_004c4eb0(char*);
@@ -21,12 +21,12 @@ int __cdecl fcn_004c5530(void*);
 int __cdecl gm_SearchTable67(int);
 char* __cdecl fcn_00507a10(char*);
 int __cdecl gm_GetEntityTableEntry(char*);
-int __cdecl fcn_0050cf50(char*, int);
+int __cdecl gm_CalculateGebaeudeValue(char*, int);
 int __cdecl io_AppendText(int, char*, int, int, int);
 int __cdecl fcn_00526010(char*, int, char);
 int __cdecl fcn_00526070(char*, int, int, char);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 
 
 /* Renovation order dialog of the currently selected building. The handler
@@ -53,7 +53,7 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 	int h;
 
 	id = *(int*) (e + 1);
-	p = fcn_0050cf50(e, 100);
+	p = gm_CalculateGebaeudeValue(e, 100);
 	x = (float) p;
 	n = 100 - (int) *(char*) (e + 0x5c);
 	if (n <= 0) {
@@ -71,12 +71,12 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 	b = (int) (n * x * 0.5);
 	c = (int) (n * x * 0.25);
 	h = io_AppendText(0x17c8, e, c, b, a);
-	h0 = fcn_00472250(win, 2, h);
-	h1 = fcn_00472250(win, 2, h + 1);
-	h2 = fcn_00472250(win, 2, h + 2);
-	h3 = fcn_00472250(win, 2, h + 3);
+	h0 = d2_GetWindowListItem(win, 2, h);
+	h1 = d2_GetWindowListItem(win, 2, h + 1);
+	h2 = d2_GetWindowListItem(win, 2, h + 2);
+	h3 = d2_GetWindowListItem(win, 2, h + 3);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_005373e0(0, 0x677c7);
+	main_RunFrameLoop(0, 0x677c7);
 	do {
 		p = gm_SearchTable67(id);
 		if (!((*(unsigned char*) (e + 0x5b) & 4) == 0 && p != 0)) {
@@ -136,6 +136,6 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 				}
 			}
 		}
-	} while (fcn_005373e0((void*) d2_ShowRenovationDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowRenovationDialog, 0x677c7) != 0);
 	fcn_00471e30(win);
 }

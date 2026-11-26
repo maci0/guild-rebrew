@@ -38,7 +38,7 @@ extern char g_631090[];
 extern char* g_6f240c;
 
 char* __cdecl fcn_00401040(char*);
-void __cdecl fcn_00435740(char*, char*);
+void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl fcn_00474c90(int, char*, char*);
 void __cdecl fcn_004754c0(int, int);
 void __cdecl fcn_00411960(Model*, char*, int);
@@ -72,7 +72,7 @@ int __cdecl fcn_0052f740(Book* b, signed char dir)
 			if (!(pg->flags & 0x20)) {
 				return 0;
 			}
-			fcn_00435740(b->model->pages->sounds, b->model->pages->pages[i].name);
+			d3_RemoveObjectAnimation(b->model->pages->sounds, b->model->pages->pages[i].name);
 		}
 		strcpy(name, "buch\\Buch_zurueckblaettern.baf");
 		r = fcn_00401040(name);
@@ -80,7 +80,7 @@ int __cdecl fcn_0052f740(Book* b, signed char dir)
 			if (!(pg->flags & 0x20) && dir > 0) {
 				return 0;
 			}
-			fcn_00435740(b->model->pages->sounds, b->model->pages->pages[i].name);
+			d3_RemoveObjectAnimation(b->model->pages->sounds, b->model->pages->pages[i].name);
 		}
 	}
 	for (i = 0; i < 3; i++) {

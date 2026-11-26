@@ -39,7 +39,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00526010(Slot58a6 *, int, unsigned char);
 int __cdecl fcn_00525f60(Slot58a6 *, int);
 int __cdecl fcn_005898f0(char *);
@@ -49,7 +49,7 @@ void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004a5e60(Slot58a6 *p, int kind, F8 f, int c, float r, int *out);
 int __cdecl fcn_004c5530(char *);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(void *, int);
+int __cdecl main_RunFrameLoop(void *, int);
 int __cdecl fcn_004c3030(int, int, char *, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
@@ -96,8 +96,8 @@ void __cdecl fcn_0058a6b0(char *gebaeude)
     io_AppendText(0x402e, 0x402b, price, *(unsigned short *) sel);
     d2_SetForm(dlg, 2);
     h2 = io_AppendText(0x402f);
-    h1 = fcn_00472250(dlg, 2, h2);
-    h2 = fcn_00472250(dlg, 2, h2 + 1);
+    h1 = d2_GetWindowListItem(dlg, 2, h2);
+    h2 = d2_GetWindowListItem(dlg, 2, h2 + 1);
     g_100f1dc = -1;
     do {
         if (g_14ce8e0 != 0) {
@@ -139,7 +139,7 @@ void __cdecl fcn_0058a6b0(char *gebaeude)
                     }
                     tmp = fcn_004c5530(msg);
                     while (tmp != -1 && fcn_004c4450(tmp) == 0)
-                        fcn_005373e0(0, 0x20007);
+                        main_RunFrameLoop(0, 0x20007);
                     fcn_004c3030(-7, 0, "KOMMENTARE", -1);
                     g_774654 = 1;
                 }
@@ -147,7 +147,7 @@ void __cdecl fcn_0058a6b0(char *gebaeude)
                 g_774654 = 1;
             }
         }
-    } while (fcn_005373e0((void *) fcn_0058a6b0, 0x677c7) != 0);
+    } while (main_RunFrameLoop((void *) fcn_0058a6b0, 0x677c7) != 0);
     fcn_00471e30(dlg);
     fcn_00532ef0();
 }

@@ -4,7 +4,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004c5c80(int id);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* label);
 int __cdecl fcn_00529160(int a, int b, int c, int d);
-int __cdecl fcn_00500bb0(char* sel, int a, int b, int c);
+int __cdecl gm_AddTime(char* sel, int a, int b, int c);
 int __cdecl fcn_0050c710(char* e, int a, int b);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 char* __cdecl fcn_00502850(void);
@@ -66,7 +66,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 
 
 
-			fcn_00500bb0(ent + 0x52, 0, 10, 0);
+			gm_AddTime(ent + 0x52, 0, 10, 0);
 			*(int*) (ent + 0x70) = 1;
 			return;
 		}
@@ -88,7 +88,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 
 
 
-					fcn_00500bb0(ent + 0x52, 0, 10, 0);
+					gm_AddTime(ent + 0x52, 0, 10, 0);
 					return;
 				}
 			}
@@ -97,7 +97,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 
 
 
-		fcn_00500bb0(ent + 0x52, 0, 0, 1);
+		gm_AddTime(ent + 0x52, 0, 0, 1);
 		*(int*) (ent + 0x70) = 2;
 		return;
 	case 2:
@@ -182,13 +182,13 @@ void __cdecl fcn_0056bfd0(char* ent)
 
 
 
-				fcn_00500bb0((char*) msg + 0x18, 0, 0x1e, 0);
+				gm_AddTime((char*) msg + 0x18, 0, 0x1e, 0);
 				*(int*) (ent + 0xb4) = fcn_004c5980(msg);
 				*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
-				fcn_00500bb0(ent + 0x52, 0, 0, 1);
+				gm_AddTime(ent + 0x52, 0, 0, 1);
 				*(int*) (ent + 0x70) = 3;
 				goto tail;
 			}
@@ -215,7 +215,7 @@ void __cdecl fcn_0056bfd0(char* ent)
 
 
 
-			fcn_00500bb0(ent + 0x52, 0, 0, 1);
+			gm_AddTime(ent + 0x52, 0, 0, 1);
 			*(int*) (ent + 0x70) = 5;
 tail:
 			if (count != 0) {
@@ -257,7 +257,7 @@ tail:
 
 
 
-		fcn_00500bb0(ent + 0x52, 0, 1, 0);
+		gm_AddTime(ent + 0x52, 0, 1, 0);
 		*(int*) (ent + 0x70) = 4;
 		return;
 	case 4:
@@ -266,14 +266,14 @@ tail:
 
 
 
-			fcn_00500bb0(ent + 0x52, 0, 5, 0);
+			gm_AddTime(ent + 0x52, 0, 5, 0);
 			return;
 		}
 		*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 
 
-		fcn_00500bb0(ent + 0x52, 0, 0, 1);
+		gm_AddTime(ent + 0x52, 0, 0, 1);
 		*(int*) (ent + 0x70) = 5;
 		return;
 	case -2:

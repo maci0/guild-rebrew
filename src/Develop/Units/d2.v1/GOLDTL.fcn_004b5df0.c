@@ -44,8 +44,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_004c5790(int, Req*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
@@ -94,10 +94,10 @@ void __cdecl fcn_004b5df0(int flags)
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1b94, ent->entity_index);
 	if (level > -1 && level < 4) {
-		b_ok = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b98));
+		b_ok = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1b96, 0x1b98));
 	}
-	b_back = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b99));
-	b_quit = fcn_00472250(dlg, 1, io_AppendText(0x1b96, 0x1b9a));
+	b_back = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1b96, 0x1b99));
+	b_quit = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1b96, 0x1b9a));
 	g_100f1dc = -1;
 	mode = flags | 0x80;
 	do {
@@ -126,7 +126,7 @@ void __cdecl fcn_004b5df0(int flags)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_004b5df0, mode) != 0);
+	} while (main_RunFrameLoop(fcn_004b5df0, mode) != 0);
 	fcn_00471e30(dlg);
 	if (done) {
 		p = fcn_004b3d80(ent->entity_id, level, 1);

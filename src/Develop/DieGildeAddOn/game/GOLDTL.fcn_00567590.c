@@ -17,7 +17,7 @@ extern unsigned char g_7747b0;
 
 int __cdecl fcn_00500e20(int*);
 void __cdecl he_FreeAction(void*);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl sim_SetSyncParams(int*, int, int, int);
 int __cdecl fcn_00567030(char*, int*, int*);
 int __cdecl gm_CheckEntityType(char*);
@@ -123,7 +123,7 @@ next0:
 			*(int*) (action + 0x56) = g_7f4c04;
 			*(int*) (action + 0x5a) = g_7f4c08;
 			*(unsigned short*) (action + 0x5e) = g_7f4c0c;
-			fcn_00500bb0(action + 0x52, 0, 5, 0);
+			gm_AddTime(action + 0x52, 0, 5, 0);
 		}
 		if ((float) (g_7f4c04 & 0xffff) < g_696540[hour]) {
 			return;
@@ -257,7 +257,7 @@ after1:
 			*(int*) (action + 0x56) = g_7f4c04;
 			*(int*) (action + 0x5a) = g_7f4c08;
 			*(unsigned short*) (action + 0x5e) = g_7f4c0c;
-			fcn_00500bb0(action + 0x52, 0, 5, 0);
+			gm_AddTime(action + 0x52, 0, 5, 0);
 		}
 		if ((float) (g_7f4c04 & 0xffff) <= g_696550[hour] + 2.0f) {
 			return;

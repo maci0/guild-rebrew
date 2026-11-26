@@ -32,7 +32,7 @@ void __cdecl fcn_004c35f0(void);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl gm_GetMsgField(int, int);
@@ -169,7 +169,7 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 							req.f6c = *(unsigned int*) (q + 2);
 							m = fcn_004c5530(&req);
 							while (!fcn_004c4450(m))
-								fcn_005373e0(0, 0x20007);
+								main_RunFrameLoop(0, 0x20007);
 							found = fcn_004c4480(m);
 located:
 							p = (int*) 0x7e30d0;
@@ -260,7 +260,7 @@ located:
 		fcn_00595330(h, 2, count, r, 1);
 		fcn_00595e20(building, r);
 		fcn_005963f0(h, 1, 0, building);
-	} while (fcn_005373e0((int) d2_RunProductionTradeDialog, 0x677c7));
+	} while (main_RunFrameLoop((int) d2_RunProductionTradeDialog, 0x677c7));
 	fcn_00471e30(h);
 	fcn_0052a2d0();
 	return 0;

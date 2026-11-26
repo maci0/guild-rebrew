@@ -54,9 +54,9 @@ void __cdecl fcn_004b3b60(void);
 #else
 void __cdecl fcn_004b39f0(void);
 #endif
-void __cdecl fcn_004c44a0(void);
+void __cdecl cm_BeginCommandSync(void);
 int __cdecl fcn_004c5040(int, int, int, unsigned char, int, unsigned char, unsigned char, char*, char*);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
 Figure* __cdecl fcn_004c4480(int);
@@ -83,18 +83,18 @@ void __cdecl gm_CreateSetupFamily(void)
 	if ((*(Setup*)g_7e23e0).enabled == 0) {
 		return;
 	}
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	h = fcn_004c5040(-1, -1, 0x10, (*(Setup*)g_7e23e0).look, (*(Setup*)g_7e23e0).face, (*(Setup*)g_7e23e0).hair, (*(Setup*)g_7e23e0).body,
 		(*(Setup*)g_7e23e0).name, (*(Setup*)g_7e23e0).family);
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();
 	}
 	p = fcn_004c4480(h);
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	h = fcn_004c4fc0(9, -1, -1, gm_RandomMod(4) + 0x20, -1, (*(Setup*)g_7e23e0).child_look, 0, 1);
 	i = fcn_004c4fc0(9, -1, -1, gm_RandomMod(4) + 0x20, -1, (*(Setup*)g_7e23e0).spouse_look, 0, 0);
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_00535960();
 	}

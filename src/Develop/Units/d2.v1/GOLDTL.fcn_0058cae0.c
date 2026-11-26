@@ -17,10 +17,10 @@ int __cdecl io_AppendText();
 void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel);
 int __cdecl fcn_0058c780(char* a1, int a2, int a3, int* a4, int* a5);
 int __cdecl d2_RunFriedhofDialog(char* a1, int a2, int a3, int a4);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int i, int flag);
 void __cdecl fcn_00471af0(int k, int flag);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl d2_RunRentGraveDialog(char* p, int a1, int a2)
@@ -43,7 +43,7 @@ int __cdecl d2_RunRentGraveDialog(char* p, int a1, int a2)
 	io_AppendText(0x4113, 0x4112);
 	fcn_0058c4f0(p, d, 2, ids, &sel);
 	d2_SetForm(d, 3);
-	back = fcn_00472250(d, 3, io_AppendText(g_6a4078, 0x4119));
+	back = d2_GetWindowListItem(d, 3, io_AppendText(g_6a4078, 0x4119));
 	fcn_00472640(back, fcn_0058c780(p, a1, a2, ids, &sel));
 	g_100f1dc = -1;
 	do {
@@ -72,7 +72,7 @@ found:
 				fcn_00472640(back, fcn_0058c780(p, a1, a2, ids, &sel));
 			}
 		}
-	} while (fcn_005373e0(d2_RunRentGraveDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_RunRentGraveDialog, 0x677c7) != 0);
 	fcn_00471e30(d);
 	return res;
 }

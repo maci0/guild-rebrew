@@ -36,7 +36,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 extern char g_6b5c60[];
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5530(Msg55a5*);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -67,11 +67,11 @@ void __cdecl fcn_0055a5b0(char* u)
 			m.owner2 = *(int*) (u + 0xac);
 			m.other = *(int*) (u + 4);
 			m.due = (*(pos14_7f4c00*)&gm_GameTime);
-			fcn_00500bb0(&m.due, 2, 0, 0);
+			gm_AddTime(&m.due, 2, 0, 0);
 			fcn_004c5530(&m);
 			*(int*) (u + 0x70) = 1;
 			*(pos14_7f4c00*) (u + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
-			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 8, 0, 0);
+			gm_AddTime((pos14_7f4c00*) (u + 0x52), 8, 0, 0);
 			return;
 		}
 		if (*(int*) (u + 0x70) != 1) {

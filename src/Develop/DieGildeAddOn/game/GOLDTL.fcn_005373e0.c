@@ -190,7 +190,7 @@ extern void fcn_00535850();
 
 
 /* ADDRESS: GOLDTL 0x005373e0 */
-int __cdecl fcn_005373e0(int a0, unsigned int flags)
+int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 {
 	int result;
 	float t;

@@ -17,7 +17,7 @@ unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 char* __cdecl fcn_005049a0(char* objekt);
 char* __cdecl fcn_0050dc90(int objekt);
 int __cdecl gm_eval_SlotVoll(char* objekt, int ware, int menge);
-void __cdecl fcn_00500bb0(pos14_7f4c00* zeit, int a, int b, int c);
+void __cdecl gm_AddTime(pos14_7f4c00* zeit, int a, int b, int c);
 int __cdecl fcn_00500cb0(pos14_7f4c00* a, pos14_7f4c00* b);
 int __cdecl fcn_0050c830(pos14_7f4c00* a, pos14_7f4c00* b, int modus);
 int __cdecl fcn_0050c710(unsigned char* objekt, int art, int modus);
@@ -154,7 +154,7 @@ void __cdecl he_RunProduktion(char* e)
                 *(int*) (e + 0xc8) = 1;
 warten:
                 *(int*) (e + 0xc4) = -1;
-                fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
+                gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
                 return;
             }
         }
@@ -298,7 +298,7 @@ warten:
                 }
 lager_done:
                 *letzte_zeit = *naechste_zeit;
-                fcn_00500bb0(naechste_zeit, 0, 1, 0);
+                gm_AddTime(naechste_zeit, 0, 1, 0);
             } while (fcn_00500cb0(naechste_zeit, &gm_GameTime) < 0);
             return;
         }
@@ -327,7 +327,7 @@ mangel:
         }
         *(int*) (e + 0xc8) = 1;
         *(int*) (e + 0xc4) = -1;
-        fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
+        gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
         *letzte_zeit = *(pos14_7f4c00*) (e + 0x52);
         return;
     case 0:

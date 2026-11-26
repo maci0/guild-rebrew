@@ -45,9 +45,9 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c91c0(int, int, int, int, int);
 int __cdecl fcn_004f4830(int, Stat5bfd*);
-int __cdecl fcn_0046f740(int x, int y, int id, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl fcn_004fa5b0(int, unsigned short*, int*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
@@ -87,7 +87,7 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 		fcn_005c91c0(g_14aa314[recs[k].kind].name, 10, k * 0x28 + 10, 0x13b, 0x55);
 		if (fcn_004f4830(recs[k].kind, &st) != 0 && st.count != 0) {
 			for (i = 0; i < st.count; i++) {
-				fcn_0046f740(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, d2_CurrentWindowId);
+				d2_AddElementToWindow(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, d2_CurrentWindowId);
 			}
 		}
 	}
@@ -102,6 +102,6 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(d2_ShowBeweiseDetails, 0x657c7) != 0);
+	} while (main_RunFrameLoop(d2_ShowBeweiseDetails, 0x657c7) != 0);
 	fcn_00471e30(h);
 }

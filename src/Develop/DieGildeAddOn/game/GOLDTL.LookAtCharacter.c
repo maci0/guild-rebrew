@@ -3,7 +3,7 @@
 
 
 extern char* evt_CurrentScript;
-float __cdecl fcn_00444700(int h, char* pos);
+float __cdecl d3_ComputeYawToTarget(int h, char* pos);
 void __cdecl fcn_00451720(float* out, char* base, float* a, float* b);
 char* __cdecl ch_CreateAction(char* e, int kind, ...);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
@@ -20,7 +20,7 @@ int __cdecl LookAtCharacter(char** a, char** b)
 		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 1;
 	}
-	d = fcn_00444700(*(int*) (*a + 0x34), *(char**) (*b + 0x34) + 0x4c);
+	d = d3_ComputeYawToTarget(*(int*) (*a + 0x34), *(char**) (*b + 0x34) + 0x4c);
 	v[0] = 0.0f;
 	v[1] = d;
 	v[2] = 0.0f;

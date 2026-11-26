@@ -55,7 +55,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl he_ShowZigeunerGroupMessage(unsigned short *, int, char **);
 void __cdecl fcn_00526120(char *, int);
 char *__cdecl fcn_005cd440(REQUEST *, char *, int, int);
-int __cdecl fcn_005373e0(void (__cdecl *)(void *), int);
+int __cdecl main_RunFrameLoop(void (__cdecl *)(void *), int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -181,7 +181,7 @@ void __cdecl fcn_005e53b0(void *arg)
             }
             refresh = 1;
         }
-    } while (fcn_005373e0(fcn_005e53b0, 0x677c7));
+    } while (main_RunFrameLoop(fcn_005e53b0, 0x677c7));
     fcn_00471e30(window);
     fcn_00532ef0();
 }

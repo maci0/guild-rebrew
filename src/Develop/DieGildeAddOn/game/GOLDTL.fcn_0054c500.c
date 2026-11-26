@@ -17,7 +17,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c4450(int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_005c6270(char*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -51,7 +51,7 @@ void __cdecl fcn_0054c500(char* e)
 	}
 	*(int*) (e + 0x84) = -1;
 	if (a == 0) {
-		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
+		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 		fcn_004c5620(-1, e);
 		return;
 	}
@@ -74,9 +74,9 @@ void __cdecl fcn_0054c500(char* e)
 	*(int*) (e + 0xc4) = idx;
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	if (fcn_00500cb0(e + 0xac, &gm_GameTime) == 1) {
-		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 1, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (e + 0x52), 1, 0, 0);
 		return;
 	}
-	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
+	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 	*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 }

@@ -9,7 +9,7 @@ int __cdecl plt_CheckZoneAvailability(void*, unsigned int, unsigned int, unsigne
 char* __cdecl plt_FindRecord(void*, unsigned int, unsigned int);
 char* __cdecl plt_SetPlantMapSlot(void*, unsigned int, unsigned int, unsigned int, unsigned int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 
 void __cdecl init_SetPflanzenMap(char*, int);
 
@@ -62,12 +62,12 @@ int __cdecl fcn_004ca0c0(int cmd, char* result)
 				*(unsigned char*) (cmd + 0x19)
 			);
 			if (found != (char*) 0x0 && *(int*) (found + 0x10) == *(int*) (cmd + 0x1d)) {
-				fcn_004432d0(g_7f3b00[lpGebaeudePROT[*(unsigned char*) entity + *(unsigned char*) entity * 0x24c]], 1);
+				d3_SelectSceneContext(g_7f3b00[lpGebaeudePROT[*(unsigned char*) entity + *(unsigned char*) entity * 0x24c]], 1);
 				d3_DestroyObject((D3_OBJECT*) (*(void**) (found + 0x14)));
 				*(void**) (found + 0x14) = 0;
 				init_SetPflanzenMap(found, 0);
 				*(int*) (found + 0x10) = -1;
-				fcn_004432d0(saved, 1);
+				d3_SelectSceneContext(saved, 1);
 			}
 			if (result == (char*) 0x0) {
 				return 0;
@@ -79,7 +79,7 @@ int __cdecl fcn_004ca0c0(int cmd, char* result)
 		}
 
 		if (needs_create != 0) {
-			fcn_004432d0(g_7f3b00[lpGebaeudePROT[*(unsigned char*) entity + *(unsigned char*) entity * 0x24c]], 1);
+			d3_SelectSceneContext(g_7f3b00[lpGebaeudePROT[*(unsigned char*) entity + *(unsigned char*) entity * 0x24c]], 1);
 			found = plt_SetPlantMapSlot(
 				*(void**) ((char*) entity + 0x71),
 				*(unsigned char*) (cmd + 0x18),
@@ -87,7 +87,7 @@ int __cdecl fcn_004ca0c0(int cmd, char* result)
 				*(unsigned short*) (cmd + 0x1a),
 				*(unsigned char*) (cmd + 0x1c)
 			);
-			fcn_004432d0(saved, 1);
+			d3_SelectSceneContext(saved, 1);
 		}
 
 		if (found != (char*) 0x0) {

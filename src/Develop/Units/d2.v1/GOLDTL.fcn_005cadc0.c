@@ -41,7 +41,7 @@ float __cdecl fcn_004fef80(char*);
 int __cdecl fcn_005c9f10(int, int, int, int, int, short*);
 int __cdecl fcn_005c99a0(int, int, int, int, int, int);
 void __cdecl fcn_00471af0(int, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005cadc0 */
@@ -246,14 +246,14 @@ select:
 			again = 1;
 		}
 loopend:
-		if (!fcn_005373e0((int) fcn_005cadc0, 0x657c7)) {
+		if (!main_RunFrameLoop((int) fcn_005cadc0, 0x657c7)) {
 			fcn_00471e30(dlg);
 			return res;
 		}
 	}
 fail:
 	g_774654 = 1;
-	fcn_005373e0((int) fcn_005cadc0, 0x657c7);
+	main_RunFrameLoop((int) fcn_005cadc0, 0x657c7);
 	fcn_00471e30(dlg);
 	return 0;
 }

@@ -1,5 +1,5 @@
 int __cdecl fcn_004677e0();
-int __cdecl fcn_0046f740();
+int __cdecl d2_AddElementToWindow();
 #include "d2_gui.h"
 extern char g_679060[];
 int __cdecl fcn_00472640();
@@ -77,25 +77,25 @@ label_5ca044:
 		v6 = v15[-2] + 0x65;
 		v10 = v15[-1] + 0x23;
 		v11 = v6 - (int) *(short*) ((int) g_772500 + 0x1ebd8) / 2;
-		v5 = fcn_0046f740(v11, v10, 0x5da, d2_CurrentWindowId);
+		v5 = d2_AddElementToWindow(v11, v10, 0x5da, d2_CurrentWindowId);
 		v15[-5] = v5;
 		v2 = v15[-6];
 		v15[-4] = -1;
 		if (v2) {
 			v1 = *(char*) (v2 + 2);
 			if (v1 == 6 || v1 == 7 || v1 == 5) {
-				fcn_0046f740(v11 - 0x20, v10, *(unsigned int*) (v2 + 0x54), d2_CurrentWindowId);
+				d2_AddElementToWindow(v11 - 0x20, v10, *(unsigned int*) (v2 + 0x54), d2_CurrentWindowId);
 			}
-			v5 = fcn_0046f740(((v6 - (int) *(short*) ((int) g_772500 + 0x50 + *(int*) (v15[-6] + 0x18c) * 0x54) / 2) - 3), v10 + 1, *(int*) (v15[-6] + 0x18c), d2_CurrentWindowId);
+			v5 = d2_AddElementToWindow(((v6 - (int) *(short*) ((int) g_772500 + 0x50 + *(int*) (v15[-6] + 0x18c) * 0x54) / 2) - 3), v10 + 1, *(int*) (v15[-6] + 0x18c), d2_CurrentWindowId);
 			*v15 = v5;
-			fcn_0046f740(v11 + 3, v10 + 3, v15[1], d2_CurrentWindowId);
+			d2_AddElementToWindow(v11 + 3, v10 + 3, v15[1], d2_CurrentWindowId);
 			if (v15[2]) {
-				fcn_0046f740(v11 + 3, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[2], d2_CurrentWindowId);
+				d2_AddElementToWindow(v11 + 3, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[2], d2_CurrentWindowId);
 			}
 			if (v15[3]) {
-				fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, v10 + 3, v15[3], d2_CurrentWindowId);
+				d2_AddElementToWindow((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, v10 + 3, v15[3], d2_CurrentWindowId);
 			}
-			fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[4], d2_CurrentWindowId);
+			d2_AddElementToWindow((int) *(short*) ((int) g_772500 + 0x1ebd8) + -0x10 + v11, (int) *(short*) ((int) g_772500 + 0x1ebda) + -0x13 + v10, v15[4], d2_CurrentWindowId);
 			if (a1 == 8) {
 				v12 = *(int*) &((unsigned short*) v15[-6])[0xe6];
 				if (v12 & 0x1000) {
@@ -134,7 +134,7 @@ label_5ca044:
 				((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-4]].value_05c = 1;
 			}
 			if (v3 != 0 && *(char*) &v3[1] == 6 && *(int*) (v15[-6] + 0x210) == *(int*) &v3[2]) {
-				fcn_0046f740((int) *(short*) ((int) g_772500 + 0x1ebd8) + v11, v10, 0x6d3, d2_CurrentWindowId);
+				d2_AddElementToWindow((int) *(short*) ((int) g_772500 + 0x1ebd8) + v11, v10, 0x6d3, d2_CurrentWindowId);
 			}
 			if (a2 == 0 || fcn_005cf720(g_774970, *(unsigned short*) v15[-6], a2, 0) != 0) {
 				((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].value_05c = 1;
@@ -142,7 +142,7 @@ label_5ca044:
 				*(int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].associated_object) = v15[-6];
 			}
 		} else {
-			fcn_0046f740((v6 - (int) *(short*) ((int) g_772500 + 0x1a2ac) / 2) - 3, v10 + 1, 0x4fb, d2_CurrentWindowId);
+			d2_AddElementToWindow((v6 - (int) *(short*) ((int) g_772500 + 0x1a2ac) / 2) - 3, v10 + 1, 0x4fb, d2_CurrentWindowId);
 			io_FormatTextBuffer(caption, "%s", v15[-3] + 0x253);
 			fcn_005c9090(caption, v6, v15[-1], 0xca, 0x56);
 			((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].value_05c = 1;

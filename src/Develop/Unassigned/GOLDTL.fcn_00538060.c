@@ -9,7 +9,7 @@ extern pos14_7f4c00 g_7e1f70;
 
 
 
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 
 void __cdecl fcn_00538060(void)
 {
@@ -21,6 +21,6 @@ void __cdecl fcn_00538060(void)
 		t = (int) ((g_7766a8 * 0.00625f + 0.5) * g_6a3774);
 		h = t / 3600;
 		m = (t - h * 3600) / 60;
-		fcn_00500bb0((char*)&g_7e1f70, h, m, t - (h * 60 + m) * 60);
+		gm_AddTime((char*)&g_7e1f70, h, m, t - (h * 60 + m) * 60);
 	}
 }

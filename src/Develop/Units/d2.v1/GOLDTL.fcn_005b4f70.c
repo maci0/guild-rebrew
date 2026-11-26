@@ -38,8 +38,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471af0(int k, int flag);
 void __cdecl d2_ShowSmapDiagnostics(void);
 void __cdecl d2_ShowScriptMemory(void);
@@ -78,14 +78,14 @@ void __cdecl d2_RunSceneChecker(void)
 	d = fcn_00470820(0, 0, g_6abad8);
 	d2_CenterDialogWindows(d);
 	d2_SetForm(d, 0);
-	h1 = fcn_00472250(d, 0, io_AppendText(g_6ababc, 2));
-	h2 = fcn_00472250(d, 0, io_AppendText(g_6abaa8, 2));
-	h3 = fcn_00472250(d, 0, io_AppendText(g_6aba94, 2));
-	h4 = fcn_00472250(d, 0, io_AppendText(g_6aba80, 2));
-	h5 = fcn_00472250(d, 0, io_AppendText(g_6aba70, 2));
-	h6 = fcn_00472250(d, 0, io_AppendText(g_6aba5c, 2));
-	h7 = fcn_00472250(d, 0, io_AppendText(g_6aba48, 2));
-	while (fcn_005373e0(d2_RunSceneChecker, t) != 0) {
+	h1 = d2_GetWindowListItem(d, 0, io_AppendText(g_6ababc, 2));
+	h2 = d2_GetWindowListItem(d, 0, io_AppendText(g_6abaa8, 2));
+	h3 = d2_GetWindowListItem(d, 0, io_AppendText(g_6aba94, 2));
+	h4 = d2_GetWindowListItem(d, 0, io_AppendText(g_6aba80, 2));
+	h5 = d2_GetWindowListItem(d, 0, io_AppendText(g_6aba70, 2));
+	h6 = d2_GetWindowListItem(d, 0, io_AppendText(g_6aba5c, 2));
+	h7 = d2_GetWindowListItem(d, 0, io_AppendText(g_6aba48, 2));
+	while (main_RunFrameLoop(d2_RunSceneChecker, t) != 0) {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == h1) {
 				d2_ShowSmapDiagnostics();

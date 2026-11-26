@@ -10,7 +10,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c6090(unsigned char*, int, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_005500a0(char* o)
 {
@@ -25,5 +25,5 @@ void __cdecl fcn_005500a0(char* o)
 	t = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e];
 	*(int*) (o + 0xbc) = fcn_004c6090(e, 0, t->role_22f, 0);
 	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 6, 0);
+	gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 6, 0);
 }

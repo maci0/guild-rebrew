@@ -41,9 +41,9 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_004eb780(Ent5aa1*, Req5aa1*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005aa120(int unused, char* p)
@@ -74,8 +74,8 @@ int __cdecl fcn_005aa120(int unused, char* p)
 		name = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].grade) + 0x27b;
 	}
 	t = io_AppendText(0x1660, name, 5, cost, *(unsigned short*) (p + 0x27), p);
-	w1 = fcn_00472250(h, 2, t);
-	w2 = fcn_00472250(h, 2, t + 1);
+	w1 = d2_GetWindowListItem(h, 2, t);
+	w2 = d2_GetWindowListItem(h, 2, t + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -92,7 +92,7 @@ int __cdecl fcn_005aa120(int unused, char* p)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_005aa120, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_005aa120, 0x677c7) != 0);
 	fcn_00471e30(h);
 	return 1;
 }

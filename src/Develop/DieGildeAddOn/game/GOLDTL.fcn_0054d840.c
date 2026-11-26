@@ -12,7 +12,7 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl gm_GenerateShuffledIndices(int, int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
 void __cdecl he_InitStreife(char* e)
@@ -65,7 +65,7 @@ void __cdecl he_InitStreife(char* e)
 	fcn_0064d41a(buf, "STREIFE_INIT: Target: %i, Way: %i, %i, %i, %i, Start: %i", *(int*) (e + 0xac), *(int*) (e + 0xb4),
 	    *(int*) (e + 0xb8), *(int*) (e + 0xbc), *(int*) (e + 0xc0), *(int*) (e + 0xb0));
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
+	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 	*(int*) (e + 0xd8) = 0;
 	e[0xdc] = 0;
 	*(int*) (e + 0xd4) = -1;

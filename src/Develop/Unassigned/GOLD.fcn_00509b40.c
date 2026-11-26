@@ -2,7 +2,7 @@ extern unsigned char* g_7e3f30;
 
 extern char* g_item_def_table;
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
-float __cdecl fcn_00508820(int, unsigned char);
+float __cdecl eval_ObjektPreis2Credits(int, unsigned char);
 
 /* ADDRESS: GOLD 0x00509b40 */
 int __cdecl gm_CalculateGebaeudeValue(unsigned char* a0, int scale)
@@ -37,7 +37,7 @@ int __cdecl gm_CalculateGebaeudeValue(unsigned char* a0, int scale)
 			if (ent == 0) {
 				continue;
 			}
-			acc = (int) (fcn_00508820(ent[0], *((unsigned char*) ent + 0x12)) + acc);
+			acc = (int) (eval_ObjektPreis2Credits(ent[0], *((unsigned char*) ent + 0x12)) + acc);
 			if (i >= 0x3f) {
 				continue;
 			}
@@ -48,7 +48,7 @@ int __cdecl gm_CalculateGebaeudeValue(unsigned char* a0, int scale)
 		} else if (ent != 0) {
 			rec = fcn_00502cd0(*(int*) ((unsigned char*) ent + 0x14), 1, 0, id);
 			if (rec != 0) {
-				acc = (int) (fcn_00508820(rec[0], *((unsigned char*) rec + 0x12)) + acc);
+				acc = (int) (eval_ObjektPreis2Credits(rec[0], *((unsigned char*) rec + 0x12)) + acc);
 			}
 			if (i >= 0x3f) {
 				continue;

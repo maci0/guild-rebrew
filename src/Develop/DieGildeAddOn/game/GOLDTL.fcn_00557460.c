@@ -20,7 +20,7 @@ void __cdecl fcn_005015e0(int* out, int a, int b, int c);
 int __cdecl fcn_00529670(char* e, char* h);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 int __cdecl fcn_00500cb0(char* a, char* b);
-void __cdecl fcn_00500bb0(int* r, int a, int b, int c);
+void __cdecl gm_AddTime(int* r, int a, int b, int c);
 float __cdecl gm_GetEntitySkill(char* e, int i);
 float __cdecl fcn_0042e450(void);
 int __cdecl fcn_0042e410(int n);
@@ -62,11 +62,11 @@ void __cdecl fcn_00557460(char* dlg)
 			p = fcn_004c4480(*(int*) (dlg + 0xac));
 			v = *(int*) ((char*) p + 4);
 			*(int*) (dlg + 0xac) = v;
-			fcn_00500bb0((int*) (dlg + 0x52), 0, 1, 0);
+			gm_AddTime((int*) (dlg + 0x52), 0, 1, 0);
 			*(int*) (dlg + 0x84) = fcn_004c5620(1, dlg);
 			return;
 		}
-		fcn_00500bb0((int*) (dlg + 0x52), 0x18, 0, 0);
+		gm_AddTime((int*) (dlg + 0x52), 0x18, 0, 0);
 		*(int*) (dlg + 0x84) = fcn_004c5620(4, dlg);
 		return;
 	}
@@ -101,7 +101,7 @@ void __cdecl fcn_00557460(char* dlg)
 		scan = (scan + *(int*) (dlg + 0xc8)) % 0x100;
 		*(int*) (dlg + 0xc4) = scan;
 		if (hit == 0) {
-			fcn_00500bb0((int*) (dlg + 0x52), 0, 1, 0);
+			gm_AddTime((int*) (dlg + 0x52), 0, 1, 0);
 			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
 			return;
 		}
@@ -111,12 +111,12 @@ void __cdecl fcn_00557460(char* dlg)
 			fcn_004c5c80(*(int*) (e + 4));
 			fcn_004c5da0(*(int*) (e + 4), *(int*) (hit + 1), -1, 0, 1,
 			    "Dunkle Ecke");
-			fcn_00500bb0((int*) (dlg + 0x52), 0, 5, 0);
+			gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
 			*(int*) (dlg + 0xb8) = *(int*) (hit + 1);
 			*(int*) (dlg + 0x84) = fcn_004c5620(2, dlg);
 			return;
 		}
-		fcn_00500bb0((int*) (dlg + 0x52), 0, 1, 0);
+		gm_AddTime((int*) (dlg + 0x52), 0, 1, 0);
 		*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
 		return;
 	}
@@ -125,20 +125,20 @@ void __cdecl fcn_00557460(char* dlg)
 		float f;
 
 		fcn_005015e0((int*) &hit, 0, 0, *(int*) (dlg + 0xb8));
-		fcn_00500bb0((int*) (dlg + 0x52), 0, 5, 0);
+		gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
 		if (hit == 0) {
 			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
 			return;
 		}
 		e = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
 		if (e == 0) {
-			fcn_00500bb0((int*) (dlg + 0x52), 0, 1, 0);
+			gm_AddTime((int*) (dlg + 0x52), 0, 1, 0);
 			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
 			return;
 		}
 		if (fcn_00529670(e, (char*) hit) == 0) {
 			*(int*) (dlg + 0x70) = 2;
-			fcn_00500bb0((int*) (dlg + 0x52), 0, 5, 0);
+			gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
 			*(int*) (dlg + 0x84) = fcn_004c5620(2, dlg);
 			return;
 		}
@@ -182,7 +182,7 @@ void __cdecl fcn_00557460(char* dlg)
 		int j;
 		unsigned int off;
 
-		fcn_00500bb0((int*) (dlg + 0x52), 0, 5, 0);
+		gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
 		fcn_005015e0((int*) &hit, 0, 0, *(int*) (dlg + 0xb0));
 		if (hit == 0) {
 			goto fail;
@@ -193,7 +193,7 @@ void __cdecl fcn_00557460(char* dlg)
 		e = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
 		if (e != 0 && fcn_00529670(e, (char*) hit) == 0) {
 			*(int*) (dlg + 0x70) = 3;
-			fcn_00500bb0((int*) (dlg + 0x52), 0, 5, 0);
+			gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
 			*(int*) (dlg + 0x84) = fcn_004c5620(3, dlg);
 			return;
 		}

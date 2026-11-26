@@ -35,9 +35,9 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_0052a0c0(char*, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_0058ff60(char*, ENTITY_RECORD*, int);
@@ -84,11 +84,11 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 	io_AppendText(0x4138);
 	d2_SetForm(h, 3);
 	s = io_AppendText(0x4139, 0x228);
-	b1 = fcn_00472250(h, 3, s);
-	b2 = fcn_00472250(h, 3, s + 1);
-	b4 = fcn_00472250(h, 3, s + 2);
+	b1 = d2_GetWindowListItem(h, 3, s);
+	b2 = d2_GetWindowListItem(h, 3, s + 1);
+	b4 = d2_GetWindowListItem(h, 3, s + 2);
 	fcn_0052a0c0(who, 0);
-	while (fcn_005373e0(d2_RunFriedhofUpgradeWorkerDialog, 0x677c7) != 0) {
+	while (main_RunFrameLoop(d2_RunFriedhofUpgradeWorkerDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

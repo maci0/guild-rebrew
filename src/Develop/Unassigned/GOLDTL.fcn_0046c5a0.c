@@ -38,7 +38,7 @@ void __cdecl fcn_0047cba0(int x, int y, int a0, int text);
 void __cdecl fcn_0046c4e0(int a1);
 int __cdecl fcn_00467480(int x, int y, int a, int b, int c, int d);
 int __cdecl fcn_00466fe0(int a, int b);
-int __cdecl fcn_0046f740(int x, int y, int img, int a1);
+int __cdecl d2_AddElementToWindow(int x, int y, int img, int a1);
 void __cdecl fcn_0046f9b0(int img, char* text);
 int __cdecl d2_AddWindowText(int x, int y, int img, int a1);
 int __cdecl fcn_0046ff90(int a, int b);
@@ -293,7 +293,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				if (g_102d020 > xr) {
 					e += 6;
 				}
-				img = fcn_0046f740((short) (len - *(short*) (slot + 8)),
+				img = d2_AddElementToWindow((short) (len - *(short*) (slot + 8)),
 				    (short) ((short) e - *(short*) (slot + 4)), img, a1);
 				if (img == -1) {
 					*(int*) (slot + nImg * 4 + 0x294) = -1;

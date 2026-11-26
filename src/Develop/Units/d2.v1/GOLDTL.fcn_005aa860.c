@@ -23,7 +23,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_004eba60(char*, Req*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl fcn_005aa860(unsigned short* target)
@@ -61,7 +61,7 @@ int __cdecl fcn_005aa860(unsigned short* target)
 		} else if (g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005aa860, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005aa860, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

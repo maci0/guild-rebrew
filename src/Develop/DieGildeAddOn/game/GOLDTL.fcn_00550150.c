@@ -5,7 +5,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c4450(int);
@@ -25,7 +25,7 @@ void __cdecl fcn_00550150(char* e)
 	b = 0;
 	a = 0;
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 4, 0);
+	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 4, 0);
 	gm_ResolveEntityById((void**) (&a), 0, 0, *(int*) (e + 0xb0));
 	gm_ResolveEntityById(0, 0, (void**) (&b), *(int*) (e + 0xac));
 	if (*(int*) (e + 0x70) == -2 || a == 0) {

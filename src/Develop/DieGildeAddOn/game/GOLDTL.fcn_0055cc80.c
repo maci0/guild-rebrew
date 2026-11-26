@@ -37,7 +37,7 @@ void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct S55cc80Proto { unsigned char bytes[0x24d]; } S55cc80Proto;
 /* ADDRESS: GOLDTL 0x0055cc80 */
@@ -153,7 +153,7 @@ void __cdecl fcn_0055cc80(char* self)
 			he_FreeAction(self);
 			return;
 		}
-		fcn_00500bb0(self + 0x52, 0, (gm_RandomMod(10) & 0xffff) + 10, 0);
+		gm_AddTime(self + 0x52, 0, (gm_RandomMod(10) & 0xffff) + 10, 0);
 		*(int*) (self + 0x70) = 1;
 		return;
 	case -2:

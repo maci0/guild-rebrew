@@ -27,7 +27,7 @@ extern char gm_GameTime[];
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl fcn_0050cce0(char* o, void* out, int producers);
 int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
-int __cdecl fcn_0046f740(int x, int y, int a3, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5);
 void __cdecl d2_DestroyElement(int id);
 int __cdecl gm_GetElapsedMinutes(void* a, void* b);
@@ -71,11 +71,11 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 			w = fcn_0046f100(p->x24, p->x28, 0xcd, 0x57, 0x10, d2_CurrentWindowId);
 			p->c[1] = w;
 			*(int*) (0x10161cc + w * 0x3cc) = 0x54;
-			fcn_0046f740(0, 0, 0x749, w);
+			d2_AddElementToWindow(0, 0, 0x749, w);
 			if (i == 0) {
-				((Panel*) g_779160)->c[2] = fcn_0046f740(0xd, 5, 0x74a, ((Panel*) g_779160)->c[1]);
+				((Panel*) g_779160)->c[2] = d2_AddElementToWindow(0xd, 5, 0x74a, ((Panel*) g_779160)->c[1]);
 			} else {
-				p->c[2] = fcn_0046f740(0xd, 5, p->x0 + 0xdf, p->c[1]);
+				p->c[2] = d2_AddElementToWindow(0xd, 5, p->x0 + 0xdf, p->c[1]);
 			}
 			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_05c = 1;
 			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1e8 = -1;
@@ -132,7 +132,7 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 		}
 		if (row != 0 && (*(int*) ((char*) row + 0x14) != 0 || *(int*) ((char*) row + 0x18) != 0)) {
 			if (p->c[3] < 0) {
-				p->c[3] = fcn_0046f740(0xd, 5, 0x4fd, p->c[1]);
+				p->c[3] = d2_AddElementToWindow(0xd, 5, 0x4fd, p->c[1]);
 			}
 			span = *(int*) ((char*) row + 0x18) + *(int*) ((char*) row + 0x14);
 			t1 = gm_GetElapsedMinutes((void*) ((char*) row + 0x44), (void*) ((char*) row + 0x52));

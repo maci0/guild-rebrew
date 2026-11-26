@@ -20,9 +20,9 @@ int __cdecl fcn_004be300(char*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 void __cdecl fcn_005b00f0(char*, int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
-void __cdecl fcn_00469470(int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 
 /* ADDRESS: GOLDTL 0x004be3d0 */
 int __cdecl fcn_004be3d0(int* a0, char* a1, char* a2, char* a3)
@@ -57,14 +57,14 @@ int __cdecl fcn_004be3d0(int* a0, char* a1, char* a2, char* a3)
 	}
 	fcn_005b00f0((char*) &p, a, b);
 	v = fcn_004be300(a2, rec) + 0x7bb;
-	v = fcn_0046f740((int) p.x - 0x20, (int) p.y - 0x20, v, a0[2]);
+	v = d2_AddElementToWindow((int) p.x - 0x20, (int) p.y - 0x20, v, a0[2]);
 	n = g_772900;
 	g_10058a0[n].id = v;
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v].value_058)) = 1;
 	if (g_6816d8 == -1) {
 		g_6816d8 = d2_CreateRadioGroup(1, g_10058a0[g_772900].id);
 	} else {
-		fcn_00469470(g_6816d8, g_10058a0[g_772900].id);
+		d2_AddToRadioGroup(g_6816d8, g_10058a0[g_772900].id);
 	}
 	n = g_772900;
 	g_10058a0[n].b = (int) rec;

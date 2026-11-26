@@ -7,7 +7,7 @@ extern float g_6628a8;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_004ece30(char*, int, int*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl fcn_004c35f0(void);
@@ -24,7 +24,7 @@ void __cdecl fcn_00576070(char* u)
 			*(int*) (u + 0xb8) = *(int*) (u + 0xbc);
 			*(pos14_7f4c00*) (u + 0xc0) = gm_GameTime;
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
+			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
 			*(int*) (u + 0x70) = 0;
 			fcn_00529160(*(char**) (h + 0x16c), fcn_00502cd0(*(int*) (*(char**) (h + 0x16c) + 0x5d), 2, 6, 0, 0x24b),
 			    *(unsigned short*) h, u);

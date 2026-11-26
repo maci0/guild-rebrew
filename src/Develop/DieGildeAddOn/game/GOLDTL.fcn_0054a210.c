@@ -21,7 +21,7 @@ extern char g_6a5998[];
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c4450(int);
 void __cdecl gm_ResolveEntityById(char**, int, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
@@ -57,13 +57,13 @@ void __cdecl fcn_0054a210(char* a0)
     *(int*) (o + 0x84) = none;
     gm_ResolveEntityById(&a0, 0, 0, *(int*) (o + 0xac));
     if (a0 == 0) {
-        fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
+        gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
         fcn_004c5620(none, o);
         return;
     }
     sel = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, 0x12d);
     if (sel == 0) {
-        fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
+        gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
         fcn_004c5620(none, o);
         return;
     }
@@ -77,9 +77,9 @@ void __cdecl fcn_0054a210(char* a0)
 
 
 
-                fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
+                gm_AddTime((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
                 *(pos14_7f4c00*) (o + 0xb0) = gm_GameTime;
-                fcn_00500bb0((pos14_7f4c00*) (o + 0xb0), 0x18, 0, 0);
+                gm_AddTime((pos14_7f4c00*) (o + 0xb0), 0x18, 0, 0);
                 *(int*) (o + 0xb6) = 0;
                 *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
                 fcn_004c5620(0, o);
@@ -90,7 +90,7 @@ void __cdecl fcn_0054a210(char* a0)
             }
             else {
                 if (gm_GetElapsedMinutes(&gm_GameTime, (pos14_7f4c00*) (o + 0xb0)) > 0) {
-                    fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
+                    gm_AddTime((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
                     fcn_004c5620(0, o);
                     return;
                 }
@@ -99,9 +99,9 @@ void __cdecl fcn_0054a210(char* a0)
 
 
 
-                fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
+                gm_AddTime((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
                 *(pos14_7f4c00*) (o + 0xb0) = gm_GameTime;
-                fcn_00500bb0((pos14_7f4c00*) (o + 0xb0), 0x18, 0, 0);
+                gm_AddTime((pos14_7f4c00*) (o + 0xb0), 0x18, 0, 0);
                 *(int*) (o + 0xb6) = 0;
                 *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
                 fcn_004c5620(0, o);
@@ -125,12 +125,12 @@ void __cdecl fcn_0054a210(char* a0)
 
 
 
-    fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
+    gm_AddTime((pos14_7f4c00*) (o + 0x52), 1, 0, 0);
     *(pos14_7f4c00*) (o + 0xb0) = gm_GameTime;
 
 
 
-    fcn_00500bb0((pos14_7f4c00*) (o + 0xb0), 0x18, 0, 0);
+    gm_AddTime((pos14_7f4c00*) (o + 0xb0), 0x18, 0, 0);
     *(int*) (o + 0xb6) = 0;
     *(short*) (o + 0xb4) = gm_RandomMod(4) + 0x13;
     fcn_004c5620(0, o);

@@ -12,13 +12,13 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_00525f60(char*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl gm_HandleAbbitte(char* e, char* o)
@@ -48,15 +48,15 @@ int __cdecl gm_HandleAbbitte(char* e, char* o)
 		d2_CenterDialogWindows(dlg);
 		d2_SetForm(dlg, 1);
 		id = io_AppendText(0x1dea);
-		ok = fcn_00472250(dlg, 1, id + 1);
-		cancel = fcn_00472250(dlg, 1, id + 2);
-		sl = fcn_00472250(dlg, 1, id);
+		ok = d2_GetWindowListItem(dlg, 1, id + 1);
+		cancel = d2_GetWindowListItem(dlg, 1, id + 2);
+		sl = d2_GetWindowListItem(dlg, 1, id);
 		d2_SetElementValue(sl, 1, 9, 1);
 		g_100f1dc = -1;
 		do {
 			if (g_100f1dc != -1) {
 				if (d2_CurrentElementId == ok) {
-					v = fcn_00471f80(sl);
+					v = d2_GetControlValue(sl);
 					if (fcn_00525f60(e, v) != 0) {
 						fcn_004c6ae0(*(int*) (e + 4), -v);
 						io_FormatTextBuffer(buf, 0x1deb, fcn_004f5e20(*(int*) (e + 4), v));
@@ -71,7 +71,7 @@ int __cdecl gm_HandleAbbitte(char* e, char* o)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) gm_HandleAbbitte, 0x657c7) != 0);
+		} while (main_RunFrameLoop((void*) gm_HandleAbbitte, 0x657c7) != 0);
 		fcn_00471e30(dlg);
 		return r;
 	}

@@ -7,7 +7,7 @@ int __cdecl fcn_004c5620(char a1, unsigned char* e);
 void* __cdecl he_StartHandlungSearch(int n, ...);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_005b22d0(void* a1);
-void __cdecl fcn_00500bb0(void* clock, int a2, int a3, int a4);
+void __cdecl gm_AddTime(void* clock, int a2, int a3, int a4);
 void __cdecl fcn_005100f0(int id, int amount);
 int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5);
 int __cdecl gm_RandomMod(int);
@@ -55,8 +55,8 @@ void __cdecl fcn_0054c240(u8* o)
     *(pos14_7f4c00*) (o + 0x44) = gm_GameTime;
     *(pos14_7f4c00*) (o + 0xac) = gm_GameTime;
 
-    fcn_00500bb0(d, 0, 1, 0);
-    fcn_00500bb0(o + 0xac, 0x18, 0, 0);
+    gm_AddTime(d, 0, 1, 0);
+    gm_AddTime(o + 0xac, 0x18, 0, 0);
 
     fcn_005100f0(*((u32*)(0x7f4ca4 + 540 * (u32)*(u16*)(o + 8))), -1);
 

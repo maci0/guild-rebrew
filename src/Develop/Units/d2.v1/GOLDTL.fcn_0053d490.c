@@ -32,17 +32,17 @@ extern char s_6a3ff4[]; /* "Glauben" */
 extern char s_6a3fe0[]; /* "Menu\\CHOOSEPLAYER" */
 
 int __cdecl d2_CreateRadioGroup(int, ...);
-void __cdecl fcn_00469470(int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_UpdateRadioGroup(int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
-char* __cdecl fcn_00471f80(int);
+char* __cdecl d2_GetControlValue(int);
 void __cdecl d2_SetSlotVisibility(int, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472380(int, ...);
 void __cdecl d2_SetBildArgument(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -51,7 +51,7 @@ void __cdecl d2_SelectControl(int);
 int __cdecl fcn_00517b10(char*, char*);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00533a60(int, int, int*, int, int, int);
-int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
+int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 
 /* ADDRESS: GOLDTL 0x0053d490 */
 int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
@@ -98,9 +98,9 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	fcn_00517b10(g_7e1d00, buf);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1acf, buf);
-	firstNameField = fcn_00472250(dlg, 1, io_AppendText(0x1ad0, 0x1ad2));
+	firstNameField = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1ad0, 0x1ad2));
 	d2_SetForm(dlg, 2);
-	surnameField = fcn_00472250(dlg, 2, io_AppendText(0x1ad1, 0x1ad3));
+	surnameField = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1ad1, 0x1ad3));
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x1ad4);
 	fcn_00533a60(d2_CurrentWindowId, 0x1c, v11, 2, g_14abe74,
@@ -118,7 +118,7 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	rows = (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0x20) / 0x30;
 	list = d2_CreateRadioGroup(0);
 	for (i = 0; i < 8; i++) {
-		id = fcn_0046f740((i % rows) * 0x30 + 0x50,
+		id = d2_AddElementToWindow((i % rows) * 0x30 + 0x50,
 		    (i / rows) * 0x30 + 0x20, i + 0x59a, d2_CurrentWindowId);
 		sel[i] = id;
 		((D2_CONTROL_TL*)g_1015ea0)[id].value_058 = 1;
@@ -126,10 +126,10 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 		((D2_CONTROL_TL*)g_1015ea0)[id].value_03c = 0;
 		((D2_CONTROL_TL*)g_1015ea0)[id].value_060 = 1;
 		((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0 = 3;
-		fcn_00469470(list, id);
+		d2_AddToRadioGroup(list, id);
 	}
 	d2_SetForm(dlg, 6);
-	v27 = fcn_00472250(dlg, 6, io_AppendText(0x7e));
+	v27 = d2_GetWindowListItem(dlg, 6, io_AppendText(0x7e));
 	fcn_00472380(firstNameField, g_7e23ea);
 	fcn_00472380(surnameField, g_7e240a);
 	for (j = 0; j < 8; j++) {
@@ -163,7 +163,7 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 		}
 	redraw_ui:
 		for (i = 0; i < 5; i++) {
-			d2_SetSlotVisibility(fcn_00472250(dlg, 0, i), i <= v9);
+			d2_SetSlotVisibility(d2_GetWindowListItem(dlg, 0, i), i <= v9);
 		}
 		if (v9 == 0) {
 			d2_SelectControl(firstNameField);
@@ -174,14 +174,14 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	state_machine:
 		if (v9 == 0) {
 			if (g_14cf950 == 0x1c) {
-				strcpy(g_7e23ea, fcn_00471f80(firstNameField));
+				strcpy(g_7e23ea, d2_GetControlValue(firstNameField));
 				v9 = 1;
 				redraw = 1;
 				g_14cf950 = 0;
 			}
 		} else if (v9 == 1) {
 			if (g_14cf950 == 0x1c) {
-				strcpy(g_7e240a, fcn_00471f80(surnameField));
+				strcpy(g_7e240a, d2_GetControlValue(surnameField));
 				v9 = 2;
 				redraw = 1;
 				g_14cf950 = 0;
@@ -242,7 +242,7 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 			result = 1;
 			g_774654 = 1;
 		}
-		if (fcn_005373e0((int (__cdecl*)(void)) d2_RunChoosePlayerDialog, a0) != 0) {
+		if (main_RunFrameLoop((int (__cdecl*)(void)) d2_RunChoosePlayerDialog, a0) != 0) {
 			continue;
 		}
 		d2_ClearRadioGroup(list1);

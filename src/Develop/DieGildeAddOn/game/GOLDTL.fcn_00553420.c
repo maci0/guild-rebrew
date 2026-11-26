@@ -6,7 +6,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_00553420(char* o)
 {
@@ -14,7 +14,7 @@ void __cdecl fcn_00553420(char* o)
 	if ((o[0x78] & 4) == 0) {
 		*(int*) (o + 0xb8) = -1;
 		*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 2, 0);
+		gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 2, 0);
 		*(int*) (o + 0x70) = 1;
 		*(int*) (o + 0x84) = fcn_004c5620(1, o);
 	}

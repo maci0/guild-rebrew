@@ -12,7 +12,7 @@ extern char g_7f4ca4[];
 int __cdecl fcn_004c4450(int id);
 int __cdecl fcn_004c5620(int a, char* unit);
 void __cdecl fcn_004c5980(void* msg);
-void __cdecl fcn_00500bb0(pos14_7f4c00* when, int h, int m, int s);
+void __cdecl gm_AddTime(pos14_7f4c00* when, int h, int m, int s);
 void __cdecl he_FreeAction(char* unit);
 char* __cdecl gm_LookupEntityRecordById(int id);
 
@@ -120,9 +120,9 @@ void __cdecl fcn_0054ac70(char* e)
 		*(int*) (m + 0x20) = g_7f4c08;
 		*(unsigned short*) (m + 0x24) = g_7f4c0c;
 		*(int*) (m + 0x34) = w;
-		fcn_00500bb0((pos14_7f4c00*) (m + 0x18), 0, 0x2d, 0);
+		gm_AddTime((pos14_7f4c00*) (m + 0x18), 0, 0x2d, 0);
 		fcn_004c5980(pkt);
-		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
+		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 		*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 		return;
 	}

@@ -7,12 +7,12 @@ char* __cdecl ch_FindCharacterByName(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl init_EnsureObjektSceneContext(char*);
-int __cdecl fcn_005155e0(char*);
+int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004fdcf0(char*);
 char* __cdecl ch_CreateAction(char*, int, ...);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, char*);
 
@@ -51,7 +51,7 @@ int __cdecl fcn_004ca560(char* x, char* out)
 	if (d != 0 && *(short*) d != 0xfd) {
 		k = init_EnsureObjektSceneContext(d);
 	} else if (s != 0 && gm_CheckEntityType(s) != 0) {
-		k = fcn_005155e0(s);
+		k = init_AllocateGebaeudeSceneSlot(s);
 		d = fcn_00502cd0(*(int*) (s + 0x5d), 1, 0, 0xfd);
 	} else {
 		k = 0;
@@ -76,7 +76,7 @@ int __cdecl fcn_004ca560(char* x, char* out)
 			r = ch_CreateAction(o, 0x33, 0, -1, -1);
 			if (r != 0) {
 				saved = d3_CurrentContextIndex;
-				fcn_004432d0(0, 1);
+				d3_SelectSceneContext(0, 1);
 				m = fcn_00445600(*(int*) (s + 0x61), 0x100, 0, x + 0x1c);
 				if (m != 0) {
 					d3_TransformPoint(m, m + 0x4c, r + 0x180);
@@ -84,7 +84,7 @@ int __cdecl fcn_004ca560(char* x, char* out)
 				} else {
 					strcpy(r + 0xf0, x + 0x1c);
 				}
-				fcn_004432d0(saved, 1);
+				d3_SelectSceneContext(saved, 1);
 			}
 		}
 		ch_CreateAction(o, 0x38, 1);

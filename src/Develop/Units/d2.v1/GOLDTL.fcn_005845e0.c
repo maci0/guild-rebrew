@@ -6,11 +6,11 @@ extern int g_6a81dc[5];
 char* __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(char*);
 void __cdecl fcn_00471e30(char*);
-int __cdecl fcn_00472250(char*, int, char*);
+int __cdecl d2_GetWindowListItem(char*, int, char*);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(char*, int);
 char* __cdecl io_AppendText(char*, int);
-int __cdecl fcn_005373e0(char*, int);
+int __cdecl main_RunFrameLoop(char*, int);
 typedef struct { int i[0x2f4 / 4]; } Row_5845e0;
 
 /* ADDRESS: GOLDTL 0x005845e0 */
@@ -35,7 +35,7 @@ int __cdecl d2_ChooseTutorial(void)
 	d2_SetForm(menu, 2);
 	for (; i < 5; i++) {
 		item = io_AppendText((char*) 0x681140, 0x3f1b + i);
-		item = fcn_00472250(menu, 2, item);
+		item = d2_GetWindowListItem(menu, 2, item);
 		ids[i] = (int) item;
 		index = (int) item;
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[index].value_058) = 1;
@@ -43,12 +43,12 @@ int __cdecl d2_ChooseTutorial(void)
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[index].flags_1d0) &= -3;
 	}
 	item = io_AppendText((char*) 0x681140, 0x3f20);
-	result = (int) fcn_00472250(menu, 2, item);
+	result = (int) d2_GetWindowListItem(menu, 2, item);
 	item = io_AppendText((char*) 0x681140, 0x3f21);
-	result2 = (int) fcn_00472250(menu, 2, item);
+	result2 = (int) d2_GetWindowListItem(menu, 2, item);
 	d2_SetForm(menu, 2);
 
-	if (fcn_005373e0((char*) 0x5845e0, 0x86) != 0) {
+	if (main_RunFrameLoop((char*) 0x5845e0, 0x86) != 0) {
 		do {
 			n = k = 0;
 			for (; k < 5; k++) {
@@ -89,7 +89,7 @@ int __cdecl d2_ChooseTutorial(void)
 					}
 				}
 			}
-		} while (fcn_005373e0((char*) 0x5845e0, 0x86) != 0);
+		} while (main_RunFrameLoop((char*) 0x5845e0, 0x86) != 0);
 	}
 	fcn_00471e30(menu);
 	return flag;

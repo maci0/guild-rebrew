@@ -5,7 +5,7 @@ extern int g_7f4ca4[];
 extern unsigned char g_773d75;
 
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x00551250 */
@@ -20,7 +20,7 @@ void __cdecl fcn_00551250(char* u)
 			return;
 		}
 		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-		fcn_00500bb0(u + 0x52, 0x18, 0, 0);
+		gm_AddTime(u + 0x52, 0x18, 0, 0);
 		break;
 	case -1:
 	case -2:

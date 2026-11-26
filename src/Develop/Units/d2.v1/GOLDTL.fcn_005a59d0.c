@@ -34,7 +34,7 @@ void __cdecl ResetDisplayCounters(void);
 int __cdecl CountDisplayCounters(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
@@ -60,8 +60,8 @@ int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl fcn_004c4510(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int);
 int __cdecl fcn_004c5360(int);
-int __cdecl fcn_00471f80(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl d2_GetControlValue(int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00532ef0(void);
 char* __cdecl itoa(int, char*, int);
 
@@ -89,11 +89,11 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 	} while (v7 < 0x1c0);
 	dialogId = fcn_00470820(0, 0, g_6aac84);
 	d2_CenterDialogWindows(dialogId);
-	e2 = fcn_00472250(dialogId, 0, 2);
-	e3 = fcn_00472250(dialogId, 0, 3);
-	e1 = fcn_00472250(dialogId, 0, 1);
-	e0 = fcn_00472250(dialogId, 0, 0);
-	e4 = fcn_00472250(dialogId, 0, 4);
+	e2 = d2_GetWindowListItem(dialogId, 0, 2);
+	e3 = d2_GetWindowListItem(dialogId, 0, 3);
+	e1 = d2_GetWindowListItem(dialogId, 0, 1);
+	e0 = d2_GetWindowListItem(dialogId, 0, 0);
+	e4 = d2_GetWindowListItem(dialogId, 0, 4);
 	d2_SetForm(dialogId, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);
 	d2_SetForm(dialogId, 0);
@@ -231,7 +231,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 						fcn_004c51f0(-1, *(int*)(a0 + 1), v3, v17, g_773d75, 0);
 						fcn_004c51f0(*(int*)(a0 + 1), -1, v2, (int) (v17 + fee), g_773d75, 0);
 						v5 = fcn_004c4ef0(g_6aac7c);
-						while (!fcn_004c4450(v5)) fcn_005373e0(0, 0x677c7);
+						while (!fcn_004c4450(v5)) main_RunFrameLoop(0, 0x677c7);
 						fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
 						fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, dialogId, 5, 1);
 						fcn_00533a40(g_14ab718);
@@ -268,7 +268,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 						fcn_004c51f0(-1, *(int*)(a0 + 1), v2, v17, g_773d75, 0);
 						fcn_004c51f0(*(int*)(a0 + 1), -1, v3, v28, g_773d75, 0);
 						v5 = fcn_004c4ef0(g_6aac7c);
-						while (!fcn_004c4450(v5)) fcn_005373e0(0, 0x677c7);
+						while (!fcn_004c4450(v5)) main_RunFrameLoop(0, 0x677c7);
 						fcn_005a5440(*(int*)(g_774970 * 0x21c + 0x7f4e18), globRows, dialogId, 4, 1);
 						fcn_005a5440(*(int*)(a0 + 0x5d), ownRows, dialogId, 5, 1);
 						fcn_00533a40(g_14ab718);
@@ -284,7 +284,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 				} else fcn_00533a40(g_14ab710);
 			}
 		}
-	} while (fcn_005373e0(d2_ShowMoneyExchangeDialog, 0x677c7));
+	} while (main_RunFrameLoop(d2_ShowMoneyExchangeDialog, 0x677c7));
 	ResetDisplayCounters();
 	fcn_00471e30(dialogId);
 	return fcn_00532ef0();

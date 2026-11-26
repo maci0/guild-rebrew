@@ -33,13 +33,13 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl fcn_0050b710(int a, unsigned char b);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_00471f80(int slot);
+int __cdecl d2_GetControlValue(int slot);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00471e30(int);
 
@@ -88,18 +88,18 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 
 		b = io_AppendText(0x1a1b, *(unsigned short*) (((char(*)[0x2f4])g_868060)[g_773d75] + 0x54) * 2 + 0x9a8);
 		d2_ClampAmountToRange(0x640, acc, 0x20, &col);
-		d2_SetElementValue(fcn_00472250(d, 1, b), fcn_0050b710(0x640, g_773d75), fcn_0050b710(col, g_773d75), fcn_0050b710(0x640, g_773d75));
-		h1 = fcn_00472250(d, 1, b + 1);
-		h2 = fcn_00472250(d, 1, b + 2);
+		d2_SetElementValue(d2_GetWindowListItem(d, 1, b), fcn_0050b710(0x640, g_773d75), fcn_0050b710(col, g_773d75), fcn_0050b710(0x640, g_773d75));
+		h1 = d2_GetWindowListItem(d, 1, b + 1);
+		h2 = d2_GetWindowListItem(d, 1, b + 2);
 	}
 	g_100f1dc = -1;
-	while (fcn_005373e0(d2_RunGildenkasseDialog, 0x677c7) != 0) {
+	while (main_RunFrameLoop(d2_RunGildenkasseDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
 		if (ok != 0 && g_100f1dc != -1) {
 			if (d2_CurrentElementId == h1) {
-				v = fcn_00471f80(fcn_00472250(d, 1, b));
+				v = d2_GetControlValue(d2_GetWindowListItem(d, 1, b));
 				v = fcn_0050b750(v, g_773d75);
 				if (fcn_00526010(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), v, g_773d75) != 0) {
 					fcn_004c5150(*(int*) (obj + 2), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, v);

@@ -4,7 +4,7 @@ extern char g_67b624[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_0064f026(char* s, const char* delim);
-int __cdecl fcn_0064eeec(const char* s);
+int __cdecl atoi(const char* s);
 void* __cdecl m_alloc(int size, char* tag);
 
 /* ADDRESS: GOLD 0x0044ece0 */
@@ -13,7 +13,7 @@ void __cdecl d3_InitAGIPointBuffer(int unused, char* s)
 {
 	int n;
 
-	n = fcn_0064eeec(fcn_0064f026(0, " "));
+	n = atoi(fcn_0064f026(0, " "));
 	*(int*) (s + 0x24) = n;
 	if (n > 0 && *(void**) (s + 0x30) == 0) {
 		*(int*) (s + 0x28) = 0;

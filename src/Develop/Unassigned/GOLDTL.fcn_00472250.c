@@ -20,7 +20,7 @@ typedef D2_FORM_RECORD Obj;
 extern D2_FORM_RECORD g_1038140[];
 
 /* ADDRESS: GOLDTL 0x00472250 */
-int __cdecl fcn_00472250(int k, int i, int j)
+int __cdecl d2_GetWindowListItem(int k, int i, int j)
 {
 	D2_WIN* w;
 

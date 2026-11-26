@@ -129,23 +129,16 @@ void __cdecl d2_UpdateRadioGroup(int obj)
 {
 }
 
-int __cdecl d3_FindAnimByName(char* a)
-{
-	return 0;
-}
+
 
 char* __cdecl d3_LoadAnimStream(char* path, char* name, char loop)
 {
 	return (void*) 0;
 }
 
-void __cdecl d3_ReleaseAnim(int a, int b)
-{
-}
 
-void __cdecl d3_RemoveObjectAnim(char* a)
-{
-}
+
+
 
 void __cdecl d3_UpdateSoundSourcePan(void* a)
 {

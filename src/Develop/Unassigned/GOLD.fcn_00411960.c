@@ -2,7 +2,7 @@
 #include <string.h>
 typedef struct { unsigned int words[3]; } GOLD_ATTACH_OPTIONS; /* Inferred 12-byte argument record. */
 unsigned int __cdecl fcn_00401040(char*);
-int __cdecl fcn_00433f40(unsigned int);
+int __cdecl d3_FindAnimByName(unsigned int);
 void __cdecl fcn_0044e4a0(char*, unsigned int, int);
 int __cdecl fcn_00435550(char*, unsigned int, GOLD_ATTACH_OPTIONS);
 char* __cdecl fcn_0044e2e0(char*, char*, int);
@@ -23,7 +23,7 @@ int __cdecl fcn_00411960(char* object, char* name, unsigned int flags)
 		return 0;
 	strcpy(key, name);
 	id = fcn_00401040(key);
-	if (!fcn_00433f40(id))
+	if (!d3_FindAnimByName(id))
 		fcn_0044e4a0(name, id, 0);
 	fillDst = (char*) &options;
 	fillCount = sizeof(options);

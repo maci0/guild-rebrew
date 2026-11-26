@@ -111,7 +111,7 @@ void __cdecl fcn_004c5530(char*);
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl fcn_004c5aa0(int, int, int, int, int, int);
 void* __cdecl gm_eval_SlotVoll(char*, int, int);
-int __cdecl fcn_005155e0(char*);
+int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl fcn_005b1e40(int);
 int __cdecl plt_CheckZoneAvailability(int, int, int, int);
 int __cdecl gm_RandomMod(int);
@@ -433,7 +433,7 @@ after:
 	if ((*(int*) (a + 0x1b4) & 0x20) != 0) {
 		goto ltail;
 	}
-	v = fcn_005155e0(*(char**) (a + 0x16c));
+	v = init_AllocateGebaeudeSceneSlot(*(char**) (a + 0x16c));
 	p2 = *(char**) (0x104336c + v * 0x3dc);
 	if (p2 == 0) {
 		return 0;

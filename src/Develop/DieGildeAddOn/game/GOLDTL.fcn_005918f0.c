@@ -26,7 +26,7 @@ char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00534210(int, int, char*, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00525ef0(void);
 void __cdecl fcn_00471e30(int);
 
@@ -112,7 +112,7 @@ void __cdecl fcn_005918f0(char* w)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0(fcn_005918f0, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_005918f0, 0x677c7) != 0);
 	fcn_00525ef0();
 	fcn_00471e30(h);
 }

@@ -10,7 +10,7 @@ extern char* g_1015ea0;
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00465950(char* name);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00593200 */
 void __cdecl fcn_00593200(void)
@@ -40,7 +40,7 @@ void __cdecl fcn_00593200(void)
 	if (slot == -1) {
 		slot = fcn_00465950((char*) 0x6a2e24);
 	}
-	slot = fcn_0046f740(5, 5, slot, d2_CurrentWindowId);
+	slot = d2_AddElementToWindow(5, 5, slot, d2_CurrentWindowId);
 	x = ((D2_CONTROL_TL*) (g_1015ea0))[slot].width + 0xf;
 	row = d2_ShowTxt(x, 0x19, s2, d2_CurrentWindowId);
 	sprintf(s1, (char*) 0x6a9bb8, *(int*) 0x14b5d34, flag);

@@ -21,7 +21,7 @@ void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5ed0(int, char*, int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
 int __cdecl fcn_0055be70(struct search* s)
@@ -78,7 +78,7 @@ int __cdecl fcn_0055be70(struct search* s)
 	}
 	*(int*) (found + 0xd4) = *(int*) (s->house + 4);
 	*(pos14_7f4c00*) (found + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (found + 0x52), 0, 8, 0);
+	gm_AddTime((pos14_7f4c00*) (found + 0x52), 0, 8, 0);
 	fcn_004c5620(0x400, found);
 	return 1;
 }

@@ -24,8 +24,8 @@ void __cdecl fcn_00476b60(void);
 void __cdecl d2_ClearRadioGroup(int);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
-void __cdecl fcn_00469470(int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 void* __cdecl gm_SearchTable67(int);
 void* __cdecl gm_FindRecordById(int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -36,7 +36,7 @@ void __cdecl fcn_00591da0(int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00591d00(void);
-int __cdecl fcn_005373e0(int, int); void __cdecl fcn_00471e30(int);
+int __cdecl main_RunFrameLoop(int, int); void __cdecl fcn_00471e30(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00591ea0 */
@@ -100,14 +100,14 @@ void __cdecl fcn_00591ea0(void)
 			do {
 				ent = 0;
 				res = 0;
-				item = fcn_0046f740(0x10, y - 5, i + 0x769, *(int*) &d2_CurrentWindowId);
-				fcn_00469470(last_win, item);
+				item = d2_AddElementToWindow(0x10, y - 5, i + 0x769, *(int*) &d2_CurrentWindowId);
+				d2_AddToRadioGroup(last_win, item);
 				if (row[-1] != -1)
 					ent = (unsigned char*) gm_SearchTable67(row[-1]);
 				if (row[0] != -1)
 					res = (unsigned short*) gm_FindRecordById(row[0]);
 				if (ent != 0) {
-					fcn_0046f740(0x60, y - 9, *ent + 0x427, *(int*) &d2_CurrentWindowId);
+					d2_AddElementToWindow(0x60, y - 9, *ent + 0x427, *(int*) &d2_CurrentWindowId);
 					io_FormatTextBuffer(buf, 0x6a9b48, *(unsigned short*) &ent[0x27], ent);
 					v3 = d2_ShowTxt(0x9c, y, buf, *(int*) &d2_CurrentWindowId);
 					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].width = 0x80;
@@ -117,7 +117,7 @@ void __cdecl fcn_00591ea0(void)
 					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].font = 0x53;
 				}
 				if (res != 0 && *res != 0xfd) {
-					fcn_0046f740(0x128, y - 9, *res + 0xdf, *(int*) &d2_CurrentWindowId);
+					d2_AddElementToWindow(0x128, y - 9, *res + 0xdf, *(int*) &d2_CurrentWindowId);
 					io_FormatTextBuffer(buf, 0x6a9b44, (int) *res * 2 + 0x9a8);
 					v3 = d2_ShowTxt(0x164, y + 9, buf, *(int*) &d2_CurrentWindowId);
 					((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[v3].width = 0x80;
@@ -151,7 +151,7 @@ void __cdecl fcn_00591ea0(void)
 		fcn_00472640(clicks[1], i);
 		fcn_00472640(clicks[0], *(int*) (y + (unsigned long)&g_102cbc8) != -1);
 		fcn_00591d00();
-	} while (fcn_005373e0((int) fcn_00591ea0, 0x657c7));
+	} while (main_RunFrameLoop((int) fcn_00591ea0, 0x657c7));
 	d2_ClearRadioGroup(last_win);
 	fcn_00471e30(win);
 }

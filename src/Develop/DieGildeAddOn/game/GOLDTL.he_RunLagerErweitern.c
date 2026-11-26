@@ -5,7 +5,7 @@ extern char* g_aed32c;
 extern char g_7f4ca4[];
 
 int __cdecl fcn_00500cb0(void*, char*);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl he_FreeAction(char*);
@@ -76,7 +76,7 @@ void __cdecl he_RunLagerErweitern(char* action)
 		}
 		} else {
 			*(pos14_7f4c00*) q = gm_GameTime;
-			fcn_00500bb0(q, 0, 0xf, 0);
+			gm_AddTime(q, 0, 0xf, 0);
 			return;
 				}
 	}

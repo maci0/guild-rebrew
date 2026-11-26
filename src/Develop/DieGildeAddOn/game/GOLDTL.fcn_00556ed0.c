@@ -36,7 +36,7 @@ extern float g_662a6c;
 
 int __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_0050c710(char*, int, int);
 int __cdecl fcn_00508280(char*, int*, float*);
 float __cdecl fcn_004fef80(char*);
@@ -143,7 +143,7 @@ void __cdecl RunSimKrankheiten(char* s)
 		*(int*) (s + 0x52) = *(int*) (s + 0x52) + 1;
 		return;
 	}
-	fcn_00500bb0((pos14_7f4c00*) (s + 0x52), 0, 0x1e, 0);
+	gm_AddTime((pos14_7f4c00*) (s + 0x52), 0, 0x1e, 0);
 	if (*(unsigned short*) (s + 0x56) >= 0x12) {
 		*(int*) (s + 0x58) = 0;
 		*(unsigned short*) (s + 0x56) = 10;

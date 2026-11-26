@@ -14,13 +14,13 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_005039e0(int);
 int __cdecl fcn_00502cd0(int, int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -45,7 +45,7 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 	a2 = fcn_00470820(0, 0, (char*) 0x6816e8);
 	d2_CenterDialogWindows(a2);
 	d2_SetForm(a2, 4);
-	fcn_00472250(a2, 4, io_AppendText(0x7d));
+	d2_GetWindowListItem(a2, 4, io_AppendText(0x7d));
 	d2_SetForm(a2, 2);
 	win = a2;
 	if ((((BUILDING_PROTOTYPE*)src)->category) == 0x1c) {
@@ -60,7 +60,7 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 		}
 		do {
 			if (*(int*) (e + 0xe) > 1) {
-				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
+				t = d2_AddElementToWindow((n % 4) * 0x40, (n / 4) * 0x40,
 					*(unsigned short*) e + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
 				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
@@ -83,7 +83,7 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 		}
 		do {
 			if (*(int*) (e + 0xe) >= 1) {
-				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
+				t = d2_AddElementToWindow((n % 4) * 0x40, (n / 4) * 0x40,
 					*(unsigned short*) e + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
 				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
@@ -101,7 +101,7 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 		for (i = 0; i < g_7f3ee4; i++) {
 			e = (char*) fcn_00502cd0(*(int*) (q + 0x14), 1, 0, g_90d520[n]);
 			if (e && *(int*) (e + 0xe) > 1) {
-				t = fcn_0046f740((n % 4) * 0x40, (n / 4) * 0x40,
+				t = d2_AddElementToWindow((n % 4) * 0x40, (n / 4) * 0x40,
 					g_90d520[n] + 0xdf, d2_CurrentWindowId);
 				items[n] = t;
 				*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
@@ -118,11 +118,11 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 tail:
 	g_7f3ee4 = (unsigned short) n;
 	g_90d520[n] = 0;
-	t = fcn_0046f740((n % 4) * 0x40 + 7, (n / 4) * 0x40 + 7, 0x527, d2_CurrentWindowId);
+	t = d2_AddElementToWindow((n % 4) * 0x40 + 7, (n / 4) * 0x40 + 7, 0x527, d2_CurrentWindowId);
 	items[n] = t;
 	*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].value_05c) = 1;
 	*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[t].flags_1d0) = 3;
-	while (fcn_005373e0(0x4be560, 0x657c7)) {
+	while (main_RunFrameLoop(0x4be560, 0x657c7)) {
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		}

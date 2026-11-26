@@ -13,7 +13,7 @@ extern char* gm_CityEntity;
 
 
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
@@ -28,7 +28,7 @@ void __cdecl fcn_0052de50(void)
 
 	save = d3_CurrentContextIndex;
 	r = 0;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	for (e = gm_StartFilteredEntitySearch(1, 6); e != 0; e = gm_FindNextFilteredEntity()) {
 		if (*(unsigned short*) (e + 0x27) != 0xffff) {
 			r = ((struct s_7f4ca0 *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 0x27)]);
@@ -39,5 +39,5 @@ void __cdecl fcn_0052de50(void)
 			fcn_0052d9d0(e);
 		}
 	}
-	fcn_004432d0(save, 1);
+	d3_SelectSceneContext(save, 1);
 }

@@ -1,4 +1,4 @@
-int __cdecl fcn_0046f740(int, int, int, int); int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_AddElementToWindow(int, int, int, int); int __cdecl fcn_00470820(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
@@ -12,7 +12,7 @@ int __cdecl fcn_00526120(void*, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_00533a60(int, int, int*, int, ...);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 extern int g_100f1dc; extern char * g_1015ea0; extern int d2_CurrentWindowId; extern unsigned short g_774970; extern char g_7f4ca0[];
 /* ADDRESS: GOLDTL 0x005aa480 */
 void __cdecl fcn_005aa480(void)
@@ -55,7 +55,7 @@ void __cdecl fcn_005aa480(void)
 	d2_SetForm(h, 2);
 	i = 0;
 	do {
-		n = fcn_0046f740(pos[i][0] - 0x28, pos[i][1] - 0x46, i + 0x5a2, *(int*) &d2_CurrentWindowId);
+		n = d2_AddElementToWindow(pos[i][0] - 0x28, pos[i][1] - 0x46, i + 0x5a2, *(int*) &d2_CurrentWindowId);
 		ids[i] = n;
 		i++;
 		((D2_CONTROL_TL*)*(void**)&g_1015ea0)[n].value_05c = 1;
@@ -117,7 +117,7 @@ void __cdecl fcn_005aa480(void)
 				} while (j < 7);
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005aa480, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005aa480, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_00532ef0();
 }

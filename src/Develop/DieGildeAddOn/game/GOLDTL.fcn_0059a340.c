@@ -46,7 +46,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_0052cf20(int a0);
 void __cdecl fcn_004c39b0(void);
 void __cdecl fcn_0042df30(int a1, int a2);
-int __cdecl fcn_005373e0(int a1, int a2);
+int __cdecl main_RunFrameLoop(int a1, int a2);
 void __cdecl lc_PlayerInJail(void);
 void __cdecl fcn_0052c9b0(void);
 void* __cdecl evt_FindScriptById(int a1);
@@ -129,7 +129,7 @@ void __cdecl fcn_0059a340(void)
 	fcn_004c39b0();
 	state = 0;
 	fcn_0042df30(0x538060, 0);
-	v9 = fcn_005373e0(0x59a340, 0x67fff);
+	v9 = main_RunFrameLoop(0x59a340, 0x67fff);
 	while (v9) {
 		g_774658 = g_774650;
 		if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_198[0x19]) > 0)
@@ -238,7 +238,7 @@ label_59a834:
 			g_7e2700 = 0;
 		}
 label_59a83a:
-		v9 = fcn_005373e0(0x59a340, 0x67fff);
+		v9 = main_RunFrameLoop(0x59a340, 0x67fff);
 	}
 	g_772d10 = 0;
 	g_774964 = 0;
@@ -254,5 +254,5 @@ label_59a83a:
 	d2_MouseBottomBoundary = savedBottom;
 	g_6b5c80 = v5;
 	d2_MouseTopBoundary = v6;
-	fcn_005373e0(0, 0x67fff);
+	main_RunFrameLoop(0, 0x67fff);
 }

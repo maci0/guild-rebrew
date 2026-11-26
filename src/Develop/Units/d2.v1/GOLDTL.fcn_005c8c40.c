@@ -32,14 +32,14 @@ void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d2_ShowBuildingStatsDetail(int);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_0046ed00(int, int, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, char);
 void __cdecl fcn_004c4510(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, unsigned short, int*);
 void __cdecl fcn_004c4670(int, int, int, int*);
 void __cdecl fcn_004c5360(void);
 int __cdecl fcn_0050dc90(int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_ClearRadioGroup(int); void __cdecl fcn_00471e30(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "client_packet_builder.h"
@@ -133,9 +133,9 @@ void __cdecl d2_OpenPlayerStats(void)
 			while (i < 0x778914) {
 				h = *(int*) (i - 0x10);
 				if (h != -1) {
-					cur = fcn_00471f80(h);
+					cur = d2_GetControlValue(h);
 					if (*(int*) (i - 4) != cur) {
-						n = fcn_0050b750(fcn_00471f80(*(int*) (i - 0x10)),
+						n = fcn_0050b750(d2_GetControlValue(*(int*) (i - 0x10)),
 							g_773d75);
 						obj = *(int*) i;
 						fcn_004c4510(obj, *(int*) (obj + 1));
@@ -147,13 +147,13 @@ void __cdecl d2_OpenPlayerStats(void)
 						fcn_004c4510(q, *(int*) (q + 4));
 						fcn_004c4670(4, 1, (q - *(int*) &g_aed32c) + 0x1b8, &n);
 						fcn_004c5360();
-						*(int*) (i - 4) = fcn_00471f80(*(int*) (i - 0x10));
+						*(int*) (i - 4) = d2_GetControlValue(*(int*) (i - 0x10));
 					}
 				}
 				i += 0x18;
 			}
 		}
-		if (fcn_005373e0((int) d2_OpenPlayerStats, 0x657c7) != 0) {
+		if (main_RunFrameLoop((int) d2_OpenPlayerStats, 0x657c7) != 0) {
 			continue;
 		}
 		*(int*) 0x77533c = *(int*) (ofs + (unsigned long)&g_102cbc8);

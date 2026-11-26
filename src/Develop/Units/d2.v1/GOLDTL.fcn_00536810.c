@@ -46,16 +46,16 @@ extern char g_7e3a60[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_00468df0(int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetBildArgument(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SelectControl(int);
-char* __cdecl fcn_00471f80(int);
+char* __cdecl d2_GetControlValue(int);
 void __cdecl fcn_004c6560(Chat*);
 void __cdecl fcn_00471e30(int);
 
@@ -84,7 +84,7 @@ void __cdecl d2_RunChatConsole(void)
 	n = 0;
 	for (i = 0; i < 768; i++) {
 		if (((House*) g_7f4ca0)[i].kind == 7) {
-			ids[n] = fcn_0046f740(n * 0x30 + 0x64, 4, ((House*) g_7f4ca0)[i].f54, d2_CurrentWindowId);
+			ids[n] = d2_AddElementToWindow(n * 0x30 + 0x64, 4, ((House*) g_7f4ca0)[i].f54, d2_CurrentWindowId);
 			((Ctl*) g_1015ea0)[ids[n]].f58 = 1;
 			((Ctl*) g_1015ea0)[ids[n]].house = &((House*) g_7f4ca0)[i];
 			d2_SetElementValue(ids[n], g_6a2c14[n]);
@@ -94,9 +94,9 @@ void __cdecl d2_RunChatConsole(void)
 	win = fcn_00468df0(0, 0, 0xc5, g_14ac628, d2_CurrentWindowId);
 	d2_SetElementFont(win, 0x54);
 	d2_SetForm(dlg, 2);
-	edit = fcn_00472250(dlg, 2, io_AppendText(0x1cc3, g_6b5c60));
+	edit = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1cc3, g_6b5c60));
 	d2_SetBildArgument(edit, 0x60);
-	while (fcn_005373e0(d2_RunChatConsole, 0x657c7)) {
+	while (main_RunFrameLoop(d2_RunChatConsole, 0x657c7)) {
 		d2_SetForm(dlg, 1);
 		io_AppendText((int) "$C");
 		io_AppendText((int) g_7e3a60);
@@ -106,12 +106,12 @@ void __cdecl d2_RunChatConsole(void)
 		d2_SelectControl(edit);
 		if ((g_100f1dc != -1 || g_14cf950 == 0x1c) && (d2_CurrentElementId == win || g_14cf950 == 0x1c)) {
 			for (i = 0; i < 8; i++) {
-				if (ids[i] != -1 && fcn_00471f80(ids[i]) != 0) {
+				if (ids[i] != -1 && d2_GetControlValue(ids[i]) != 0) {
 					chat.names[i] = ((Ctl*) g_1015ea0)[ids[i]].house->f4;
 				}
 			}
 			sprintf(chat.text, "$%iFF ", ((House*) g_7f4ca0)[g_774970].f54 - 0x59a);
-			strcat(chat.text, fcn_00471f80(edit));
+			strcat(chat.text, d2_GetControlValue(edit));
 			strcat(chat.text, "$A");
 			d2_SetElementValue(edit, g_6b5c60);
 			fcn_004c6560(&chat);
@@ -120,7 +120,7 @@ void __cdecl d2_RunChatConsole(void)
 	}
 	for (i = 0; i < 8; i++) {
 		if (ids[i] != -1) {
-			g_6a2c14[i] = (unsigned char) fcn_00471f80(ids[i]);
+			g_6a2c14[i] = (unsigned char) d2_GetControlValue(ids[i]);
 		}
 	}
 	fcn_00471e30(dlg);

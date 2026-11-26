@@ -14,7 +14,7 @@ int __cdecl fcn_0046f100(int, int, int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char *, int);
 int __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_004692c0(int, int, int, int, void *, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x005e0140 */
@@ -100,7 +100,7 @@ void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, 
         *(int *)(row + 4) = element;
         d2_SetElementFont(element, 0x53);
         fcn_004692c0(0, 0, 160, 120, (void *)0x7ea3c0, d2_CurrentWindowId);
-        fcn_0046f740(0x3c, 0x20, 0x4fb, d2_CurrentWindowId);
+        d2_AddElementToWindow(0x3c, 0x20, 0x4fb, d2_CurrentWindowId);
         *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x5c) = 1;
         *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
         *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x1d0) = 3;

@@ -26,7 +26,7 @@ void __cdecl fcn_005340f0(int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 char *__cdecl he_StartHandlungSearch(int, int, int);
 char *__cdecl he_fn_Handlung(void);
 char *__cdecl gm_LookupEntityRecordById(int);
@@ -37,7 +37,7 @@ int __cdecl fcn_00526120(char *, int);
 void __cdecl fcn_004c5530(char *);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_0059fa80(Slot59fe *, char *, char *);
-int __cdecl fcn_005373e0(void *, int);
+int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
@@ -75,9 +75,9 @@ void __cdecl fcn_0059fe60(char *a0)
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
 	if (g_7f4ca0[g_774970].b9 == 0) {
-		item = fcn_00472250(dlg, 2, io_AppendText(0x1a50));
+		item = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1a50));
 	} else {
-		item = fcn_00472250(dlg, 2, io_AppendText(0x1a51));
+		item = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1a51));
 	}
 	g_100f1dc = -1;
 	do {
@@ -108,7 +108,7 @@ void __cdecl fcn_0059fe60(char *a0)
 			if (ent == 0) {
 				break;
 			}
-			buttons[i] = fcn_00472250(dlg, 1, io_AppendText(0x1a52, *(unsigned short *) ent));
+			buttons[i] = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1a52, *(unsigned short *) ent));
 			fcn_00472640(buttons[i], avail[i]);
 		}
 		if (n >= 4) {
@@ -158,7 +158,7 @@ void __cdecl fcn_0059fe60(char *a0)
 				}
 			}
 		}
-	} while (fcn_005373e0((void *) fcn_0059fe60, 0x67fff) != 0);
+	} while (main_RunFrameLoop((void *) fcn_0059fe60, 0x67fff) != 0);
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 }

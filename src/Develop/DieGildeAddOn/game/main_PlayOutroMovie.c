@@ -4,7 +4,7 @@ int __cdecl fcn_0041e620(void);
 void __cdecl fcn_0041e650(void);
 void __cdecl fcn_004c2d90(float, int);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
-void __cdecl fcn_005373e0(int, int);
+void __cdecl main_RunFrameLoop(int, int);
 void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_004124b0(void);
 void __cdecl fcn_004117c0(int);
@@ -39,7 +39,7 @@ void __cdecl main_PlayOutroMovie(void)
 		if ((*h & 4) && !(g_678158 >= 0.0f)) {
 			break;
 		}
-		fcn_005373e0(0, main_LoopFlags);
+		main_RunFrameLoop(0, main_LoopFlags);
 	}
 	b = buf;
 	saved = g_772d10;

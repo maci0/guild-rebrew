@@ -2,7 +2,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00529160(char*, int, int, char*);
-int __cdecl fcn_00500bb0(char*, int, int, int);
+int __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl he_FreeAction(char*);
 
 #include "client_types.h"
@@ -30,9 +30,9 @@ int __cdecl fcn_0057a260(char* p)
 		else
 			fcn_00529160(e, 0, *(unsigned short*)s, p);
 		*(pos14_7f4c00*) (p + 0x60) = gm_GameTime;
-		fcn_00500bb0(p + 0x52, 0, 0x1e, 0);
+		gm_AddTime(p + 0x52, 0, 0x1e, 0);
 		*(pos14_7f4c00*) (p + 0xb8) = *(pos14_7f4c00*) (p + 0x52);
-		return fcn_00500bb0(p + 0xb8, 3, 0, 0);
+		return gm_AddTime(p + 0xb8, 3, 0, 0);
 	}
 	return he_FreeAction(p);
 }

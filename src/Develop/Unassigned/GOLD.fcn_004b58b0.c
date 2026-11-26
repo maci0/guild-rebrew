@@ -10,7 +10,7 @@ int __cdecl fcn_004741e0(int, int, char*);
 void __cdecl d2_CenterTopLevelWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00515990(int);
-int __cdecl fcn_005309d0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004758e0(int);
 
 void __cdecl fcn_004b58b0(int flags)
@@ -25,7 +25,7 @@ void __cdecl fcn_004b58b0(int flags)
 	d2_SetForm(h, 2);
 	fcn_00515990(0x7d);
 	flags |= 0x80;
-	while (fcn_005309d0(fcn_004b58b0, flags) != 0) {
+	while (main_RunFrameLoop(fcn_004b58b0, flags) != 0) {
 		if (g_14673a0 != 0)
 			g_6f22a0 = 1;
 		else if (g_f8a668 == 0)

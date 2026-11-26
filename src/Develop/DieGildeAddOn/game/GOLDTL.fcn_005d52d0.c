@@ -19,10 +19,10 @@ void __cdecl fcn_00535960(void);
 void __cdecl fcn_00471e30(int);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00525f60(void*, int);
 int __cdecl fcn_00526010(void*, int, char);
@@ -81,8 +81,8 @@ int __cdecl fcn_005d52d0(char* p)
 	d2_SetForm(dlg, 1);
 	base = 0x114 + (*(unsigned char*) (p + 9) ? 0xa : 0);
 	x = io_AppendText(0x1d8f, base + *(unsigned char*) (p + 0xd), 8, s.n - (int) (w * g_6629a0), *(unsigned short*) obj, *(unsigned short*) obj);
-	fcn_00472250(dlg, 1, x);
-	fcn_00472250(dlg, 1, x + 1);
+	d2_GetWindowListItem(dlg, 1, x);
+	d2_GetWindowListItem(dlg, 1, x + 1);
 	g_100f1dc = -1;
 	for (;;) {
 		if (g_100f1dc != -1) {
@@ -122,7 +122,7 @@ tail:
 			g_774654 = 1;
 			s.mode = 2;
 		}
-		if (fcn_005373e0(fcn_005d52d0, 0x657c7) == 0) {
+		if (main_RunFrameLoop(fcn_005d52d0, 0x657c7) == 0) {
 			break;
 		}
 	}

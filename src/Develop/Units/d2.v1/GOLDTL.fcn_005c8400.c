@@ -45,7 +45,7 @@ void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_0050d5d0(int, int, char**);
 int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3);
-int __cdecl fcn_0046f740(int x, int y, int id, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
 char* __cdecl gm_SearchTable67(int);
 
@@ -108,7 +108,7 @@ int __cdecl fcn_005c8400(void)
 	fcn_00533f40(0x215, 0x16b, d2_CurrentWindowId, fcn_00472830(h, 3), 0x6a, &id2, &id1, &id3);
 	for (i = 0; i < n; i++) {
 		d2_SetForm(h, 3);
-		lines[i].btn = fcn_0046f740((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a, 0x75a, d2_CurrentWindowId);
+		lines[i].btn = d2_AddElementToWindow((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a, 0x75a, d2_CurrentWindowId);
 		lines[i].bar = fcn_0046f100((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a + 4, cy, 0x62, 0x10, d2_CurrentWindowId);
 		lines[i].e = list[i];
 		/* both fields through one symbol: c2 chains the two stores, which issues the bar store first */

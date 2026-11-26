@@ -22,7 +22,7 @@ void __cdecl he_FreeAction(int);
 int __cdecl fcn_004c4450(int);
 void __cdecl gm_ResolveEntityById(int*, int, int, int);
 int __cdecl fcn_004c5620(int, int);
-void __cdecl fcn_00500bb0(int, int, int, int);
+void __cdecl gm_AddTime(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_LookupEntityRecordById(int);
@@ -67,7 +67,7 @@ void __cdecl fcn_0054a6a0(int a0)
 		return;
 	}
 	if (*(unsigned short*) (entity + 0x27) == 0xffff) {
-		fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
+		gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 		*(unsigned short*) (v2 + 0x56) = 7;
 		fcn_004c5620(0, v2);
 		return;
@@ -109,13 +109,13 @@ void __cdecl fcn_0054a6a0(int a0)
 				fcn_004c5360();
 			}
 		}
-		fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
+		gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 		*(unsigned short*) (v2 + 0x56) = 7;
 		*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
 		break;
 	}
 	case 1:
-		fcn_00500bb0(v2 + 0x52,
+		gm_AddTime(v2 + 0x52,
 		              (int) ((gm_RandomMod(2) & 0xffff) + 1), 0, 0);
 		*(int*) (v2 + 0x84) = fcn_004c5620(2, v2);
 		break;
@@ -123,24 +123,24 @@ void __cdecl fcn_0054a6a0(int a0)
 		v1 = g_7f4ca0[*(unsigned short*) (entity + 0x27)].kind;
 		if (v1 != 6 && v1 != 7) {
 			if (!v3) {
-				fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
+				gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 				*(unsigned short*) (v2 + 0x56) = 7;
 				*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
 				return;
 			}
 			if (!fcn_00493200(&g_7f4ca0[*(unsigned short*) (entity + 0x27)], v3)) {
-				fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
+				gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 				*(unsigned short*) (v2 + 0x56) = 7;
 				*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
 				return;
 			}
-			fcn_00500bb0(v2 + 0x52, 1, 0, 0);
+			gm_AddTime(v2 + 0x52, 1, 0, 0);
 			*(int*) (v2 + 0x84) = fcn_004c5620(1, v2);
 		} else if (v3 && *(char*) (v3 + 0x22)) {
-			fcn_00500bb0(v2 + 0x52, 1, 0, 0);
+			gm_AddTime(v2 + 0x52, 1, 0, 0);
 			*(int*) (v2 + 0x84) = fcn_004c5620(1, v2);
 		} else {
-			fcn_00500bb0(v2 + 0x52, 0x18, 0, 0);
+			gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 			*(unsigned short*) (v2 + 0x56) = 7;
 			*(int*) (v2 + 0x84) = fcn_004c5620(0, v2);
 		}

@@ -38,7 +38,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl fcn_004c5530(struct msg*);
 void __cdecl fcn_005100f0(int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_0057a700(char* u)
 {
@@ -74,6 +74,6 @@ void __cdecl fcn_0057a700(char* u)
 		*(int*) (u + 0xb0) = 2;
 	}
 	fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -((*(int*) (u + 0xb4) + 2) * (*(int*) (u + 0xb0) + 2)));
-	fcn_00500bb0((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
+	gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
 	fcn_004c5620(0, u);
 }

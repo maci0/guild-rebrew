@@ -13,7 +13,7 @@ extern char s_6a625c[];
 extern char s_6a5b54[];
 
 int __cdecl fcn_00500cb0(void*, void*);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
@@ -79,7 +79,7 @@ void __cdecl fcn_0055c740(char* ctx)
 
 
 
-				fcn_00500bb0(ctx + 0x52, 0, 0, 1);
+				gm_AddTime(ctx + 0x52, 0, 0, 1);
 				*(int*) (ctx + 0x70) = *(int*) (ctx + 0x70) + 1;
 				return;
 			}
@@ -119,7 +119,7 @@ void __cdecl fcn_0055c740(char* ctx)
 
 
 
-		fcn_00500bb0(ctx + 0x52, 0, 0, 1);
+		gm_AddTime(ctx + 0x52, 0, 0, 1);
 		return;
 	case 3:
 		rec = gm_StartFilteredEntitySearch(1, 1, *(int*) (ctx + 0x10));
@@ -170,7 +170,7 @@ void __cdecl fcn_0055c740(char* ctx)
 
 
 
-		fcn_00500bb0(ctx + 0x52, 0, (gm_RandomMod(10) & 0xffff) + 0x1e, 0);
+		gm_AddTime(ctx + 0x52, 0, (gm_RandomMod(10) & 0xffff) + 0x1e, 0);
 		*(int*) (ctx + 0x70) = 1;
 		return;
 	case -2:

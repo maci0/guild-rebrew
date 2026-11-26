@@ -26,7 +26,7 @@ void __cdecl d2_AddRefcount(int a0);
 int __cdecl fcn_0046f100(int a, int b, int c, int d, int e, int f);
 int __cdecl fcn_0046e940(int a, int b, int c, int d, int e);
 void __cdecl d2_SetBackgroundTexture(const char* name, int win);
-int __cdecl fcn_0046f740(int a, int b, int c, int d);
+int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 int __cdecl fcn_00467480(int a, int b, int c, int d, int e, int f);
 int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f,
 	int g, int h);
@@ -256,7 +256,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 				do {
 					if (t[-0x330] <= 0x3f) {
 						v12 = fcn_00465950((char*) v19);
-						v13 = fcn_0046f740((short) *q,
+						v13 = d2_AddElementToWindow((short) *q,
 							(short) q[0x18], v12, v34);
 						if (*t == 0x12) {
 							*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)[v13].value_058)

@@ -4,7 +4,7 @@ int __cdecl evt_RunScript(char* script);
 void __cdecl fcn_00428340(char* o, int n, ...);
 char* __cdecl fcn_0064f026(char* s, char* delim);
 int __cdecl _isctype(int c, int mask);
-int __cdecl fcn_0064eeec(char* s);
+int __cdecl atoi(char* s);
 
 
 /* Splits a script call line on spaces and runs the script with up to seven
@@ -51,7 +51,7 @@ void __cdecl evt_RunScriptLine(char* o, char* line)
 			num = *(unsigned char*) (*(unsigned char**) 0x6b23a4 + *p * 2) & 4;
 		}
 		if (num != 0) {
-			values[i] = fcn_0064eeec(p);
+			values[i] = atoi(p);
 		} else {
 			values[i] = (unsigned int) (tokens + i * 0x40);
 		}

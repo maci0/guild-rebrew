@@ -36,7 +36,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 extern char g_6b5c60[];
 
-int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
+int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3)
@@ -44,11 +44,11 @@ int __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2,
 	D2_WIN* s;
 
 	s = &((D2_WIN*)g_1015f40)[other];
-	*id1 = fcn_0046f740(x, y, 3, owner);
+	*id1 = d2_AddElementToWindow(x, y, 3, owner);
 	*(int*) &((D2_WIN*)g_1015f40)[owner].pad3a8[0x10] = *id1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id1].value_05c) = 1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id1].flags_1d0) = 3;
-	*id2 = fcn_0046f740(x, y + 0x2a, 4, owner);
+	*id2 = d2_AddElementToWindow(x, y + 0x2a, 4, owner);
 	*(int*) &((D2_WIN*)g_1015f40)[owner].pad3a8[0x14] = *id2;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id2].value_05c) = 1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*id2].flags_1d0) = 3;

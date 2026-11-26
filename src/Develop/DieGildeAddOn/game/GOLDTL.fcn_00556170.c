@@ -6,7 +6,7 @@ extern unsigned char g_773d75;
 extern char gm_GameTime[];
 
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_00500bb0(char*, int, int, int);
+int __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 float __cdecl fcn_004fc460(char*);
 double __cdecl gm_RandomFloat01(void);
@@ -66,7 +66,7 @@ void __cdecl fcn_00556170(char* p)
 		*(int*) (p + 0xb4) = 0;
 		*(int*) (p + 0xac) = 0;
 		*(float*) (p + 0xb0) = *(float*) (p + 0xb0) * 0.0f;
-		fcn_00500bb0(p + 0x52, 0, 0, 5);
+		gm_AddTime(p + 0x52, 0, 0, 5);
 		*(int*) (p + 0x84) = fcn_004c5620(1, p);
 		return;
 	case 1:
@@ -74,7 +74,7 @@ void __cdecl fcn_00556170(char* p)
 		f = (float) (((int*) ts)[8] - ((int*) ts)[4]) / (float) ((int*) ts)[8];
 		*(float*) (p + 0xb0) = 1.0f - f;
 		*(float*) (p + 0xb4) = f / (float) (*(int*) (p + 0xac) + 2);
-		fcn_00500bb0(p + 0x52, 1, 0, 0);
+		gm_AddTime(p + 0x52, 1, 0, 0);
 		if (ts[3] < 0.1) {
 			*(float*) (p + 0xb0) = (2.0f - ts[9]) * *(float*) (p + 0xb0);
 			*(int*) (p + 0x84) = fcn_004c5620(2, p);
@@ -104,24 +104,24 @@ anim7:
 			*(int*) (p + 0xb8) = fcn_004c4fc0(0xff, -1, -1,
 				gm_RandomMod(0xc) + 0xf, -1, 0, 0, 2);
 			COPY_UI(p);
-			fcn_00500bb0(p + 0x52, 0, 0, 1);
+			gm_AddTime(p + 0x52, 0, 0, 1);
 			*(int*) (p + 0x84) = fcn_004c5620(3, p);
 			return;
 		}
 		*(float*) (p + 0xb0) -= *(float*) (p + 0xb4);
 		COPY_UI(p);
-		fcn_00500bb0(p + 0x52, 1, 0, 0);
+		gm_AddTime(p + 0x52, 1, 0, 0);
 		*(int*) (p + 0x84) = fcn_004c5620(2, p);
 		return;
 	case 3:
 		if (fcn_004c4450(*(int*) (p + 0xb8)) == 0) {
 			COPY_UI(p);
-			fcn_00500bb0(p + 0x52, 0, 0, 1);
+			gm_AddTime(p + 0x52, 0, 0, 1);
 			*(int*) (p + 0x84) = fcn_004c5620(3, p);
 			return;
 		}
 		if (fcn_004c4450(*(int*) (p + 0xb8)) == 2) {
-			fcn_00500bb0(p + 0x52, 1, 0, 0);
+			gm_AddTime(p + 0x52, 1, 0, 0);
 			*(int*) (p + 0xb8) = -1;
 			*(int*) (p + 0x84) = fcn_004c5620(6, p);
 			return;
@@ -130,7 +130,7 @@ anim7:
 		v38 = 0;
 		v34 = gm_RandomMod(2) & 0xffff;
 		if (obj == 0) {
-			fcn_00500bb0(p + 0x52, 1, 0, 0);
+			gm_AddTime(p + 0x52, 1, 0, 0);
 			*(int*) (p + 0xb8) = -1;
 			*(int*) (p + 0x84) = fcn_004c5620(6, p);
 			return;
@@ -161,7 +161,7 @@ anim7:
 		cm_AppendPacketFieldDelta(1, 1, 0xc, &v34);
 		fcn_004c5360();
 		COPY_UI(p);
-		fcn_00500bb0(p + 0x52, 1, 0, 0);
+		gm_AddTime(p + 0x52, 1, 0, 0);
 		*(int*) (p + 0xac) += 1;
 		*(int*) (p + 0x84) = fcn_004c5620(1, p);
 		return;
@@ -189,13 +189,13 @@ anim7:
 			} while (n != 0);
 			*(int*) (p + 0xb8) = -1;
 			COPY_UI(p);
-			fcn_00500bb0(p + 0x52, 0, 0x1e, 0);
+			gm_AddTime(p + 0x52, 0, 0x1e, 0);
 			*(int*) (p + 0x84) = fcn_004c5620(1, p);
 			return;
 		}
 		*(float*) (p + 0xb0) -= *(float*) (p + 0xb4);
 		COPY_UI(p);
-		fcn_00500bb0(p + 0x52, 1, 0, 0);
+		gm_AddTime(p + 0x52, 1, 0, 0);
 		*(int*) (p + 0x84) = fcn_004c5620(6, p);
 		return;
 	case 7:
@@ -234,7 +234,7 @@ anim7:
 			n--;
 			v = (v + 1) % 0x300;
 		} while (n != 0);
-		fcn_00500bb0(p + 0x52, 0, 10, 0);
+		gm_AddTime(p + 0x52, 0, 10, 0);
 		if (*(unsigned short*) (p + 0x56) >= 0x16) {
 			COPY_UI(p);
 			*(int*) (p + 0x58) = 0;

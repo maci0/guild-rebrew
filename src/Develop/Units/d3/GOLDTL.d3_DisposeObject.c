@@ -7,7 +7,7 @@ typedef void (__cdecl* dispose_fn_4398d0)(char* obj);
 extern int g_67a370;
 extern char g_10432c0[];
 
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00452420(char* p);
 void __cdecl fcn_00433780(char* obj);
@@ -38,7 +38,7 @@ void __cdecl d3_DisposeObject(char* obj)
 	if (((char*)g_67a370) != u) {
 		sprintf(msg, "d3_DisposeObject(): invalid universe by object %s", obj);
 		idx = (unsigned int) (u - g_10432c0) / 0x3dc;
-		fcn_004432d0(idx, 1);
+		d3_SelectSceneContext(idx, 1);
 	}
 	if (*(dispose_fn_4398d0**) (obj + 0x1ec) != 0 && **(dispose_fn_4398d0**) (obj + 0x1ec) != 0) {
 		(**(dispose_fn_4398d0**) (obj + 0x1ec))(obj);
@@ -82,6 +82,6 @@ void __cdecl d3_DisposeObject(char* obj)
 	d3_CleanupObjectDrawData((D3_OBJECT*) (obj));
 	m_FreeTracked(obj);
 	if (idx != -1) {
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 	}
 }

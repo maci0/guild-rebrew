@@ -17,11 +17,11 @@ struct pos14 {
 
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_00500bb0(struct pos14*, int, int, int);
+void __cdecl gm_AddTime(struct pos14*, int, int, int);
 #include "client_placement.h"
-int __cdecl fcn_00598150(char*, char*);
+int __cdecl d3_CollectUnusedSceneObjects(char*, char*);
 int __cdecl fcn_005987c0(char*, char*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_FreeAction(char*);
 
@@ -42,7 +42,7 @@ void __cdecl he_AllocGebaeudeBauen(char* u)
 	}
 	*(struct pos14*) (u + 0x52) = *(struct pos14*) (u + 0x44);
 	*(struct pos14*) (u + 0x60) = *(struct pos14*) (u + 0x44);
-	fcn_00500bb0((struct pos14*) (u + 0x52), 0, 1, 0);
+	gm_AddTime((struct pos14*) (u + 0x52), 0, 1, 0);
 	*(int*) (u + 0xc4) = 0;
 	*(int*) (u + 0xc8) = 0;
 	if (fcn_00597ff0(*(int*) (u + 0xb0), text) == 0) {
@@ -51,21 +51,21 @@ void __cdecl he_AllocGebaeudeBauen(char* u)
 	}
 	saved = d3_CurrentContextIndex;
 	memset(list, 0, sizeof(list));
-	fcn_004432d0(0, 1);
-	n = fcn_00598150(text, list);
+	d3_SelectSceneContext(0, 1);
+	n = d3_CollectUnusedSceneObjects(text, list);
 	if (n == 0) {
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 		he_FreeAction(u);
 		return;
 	}
 	for (i = 0; i < n; i++) {
 		if (fcn_005987c0(u + 0xd4, list) == 0) {
 			he_FreeAction(u);
-			fcn_004432d0(saved, 1);
+			d3_SelectSceneContext(saved, 1);
 			return;
 		}
 	}
 	io_FormatTextBuffer(text, (int) "he_AllocGebaeudeBauen: %1N1", *(unsigned short*) (u + 8));
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	*(int*) (u + 0x84) = -1;
 }

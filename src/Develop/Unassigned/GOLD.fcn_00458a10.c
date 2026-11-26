@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00458a10 */
-void __cdecl fcn_00458a10(char* obj, const float* in, float* out)
+void __cdecl d3_TransformPoint(char* obj, const float* in, float* out)
 {
     float x;
     float y;

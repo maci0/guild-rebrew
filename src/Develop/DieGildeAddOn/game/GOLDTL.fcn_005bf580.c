@@ -27,7 +27,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl fcn_0046fac0(int, int, int, int);
@@ -36,7 +36,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00526010(void*, int, unsigned char);
@@ -103,11 +103,11 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 	fcn_00468bb0(row2, 3, g_14b5e0c, g_14b5e10, g_14b5e14);
 	d2_SetForm((int) h, 3);
 	fcn_00533a60(d2_CurrentWindowId, 0, sel, 2, g_14b5e04, g_14b5e08);
-	while (fcn_005373e0((void*) d2_RunSpionageDialog, 0x677c7) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunSpionageDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0 || *(unsigned short*) rec == 0xffff) {
 			g_774654 = 1;
 		} else {
-			v = fcn_00471f80(row2);
+			v = d2_GetControlValue(row2);
 			f = (float) v * 0.33f + 1.0f;
 			w1 = gm_WalkEntityChain(*(unsigned short*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])));
 			f2 = (float) w1 * 0.005f;
@@ -129,7 +129,7 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 					*(int*) (pkt + 0x58) = ea != 0 ? *(int*) (ea + 1) : -1;
 					*(int*) (pkt + 0x90) = n;
 					fcn_004c4eb0("spionage");
-					*(int*) (pkt + 0x94) = fcn_00471f80(row2);
+					*(int*) (pkt + 0x94) = d2_GetControlValue(row2);
 					fcn_004c5530(pkt);
 					fcn_004c4ef0("spionage");
 					io_FormatTextBuffer(buf, 0x42bf, *(unsigned short*) rec);

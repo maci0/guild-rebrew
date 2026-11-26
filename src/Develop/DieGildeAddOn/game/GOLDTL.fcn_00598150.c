@@ -14,7 +14,7 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 #include "client_scene_transform.h"
 
-void __cdecl fcn_00598150(int a1, char** list)
+void __cdecl d3_CollectUnusedSceneObjects(int a1, char** list)
 {
 	float pa[4];
 	float pb[4];

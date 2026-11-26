@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
-int __cdecl fcn_005373e0(void*, const char*);
+int __cdecl main_RunFrameLoop(void*, const char*);
 
 /* ADDRESS: GOLDTL 0x005c8090 */
 void __cdecl fcn_005c8090(void)
@@ -9,7 +9,7 @@ retry:
 	if (g_14ce8e0 != 0) {
 		g_774654 = 1;
 	}
-	if (fcn_005373e0((void*)fcn_005c8090, (const char*)0x677c7) != 0) {
+	if (main_RunFrameLoop((void*)fcn_005c8090, (const char*)0x677c7) != 0) {
 		goto retry;
 	}
 }

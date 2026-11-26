@@ -6,10 +6,10 @@ extern int main_LoopFlags;
 
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl io_AppendText(char*, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_00471af0(int, int);
 void* __cdecl fcn_005cd440(void*, char*, int, int);
@@ -45,12 +45,12 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 	dialog = fcn_00470820(0, 0, "misc\\Messagebox_BIG");
 	io_AppendText("$Z$[%1N4$]$N$L", *(unsigned short*) e);
 	io_AppendText("Mode:%s$A", names[*(unsigned char*) (e + 2)]);
-	hKill = fcn_00472250(dialog, 0, io_AppendText("%it[Kill player]$A"));
-	hShow = fcn_00472250(dialog, 0, io_AppendText("%it[Show He]$A"));
-	hMarriage = fcn_00472250(dialog, 0, io_AppendText("%it[Marriage]$A"));
-	hChild = fcn_00472250(dialog, 0, io_AppendText("%it[Get Child]$A"));
+	hKill = d2_GetWindowListItem(dialog, 0, io_AppendText("%it[Kill player]$A"));
+	hShow = d2_GetWindowListItem(dialog, 0, io_AppendText("%it[Show He]$A"));
+	hMarriage = d2_GetWindowListItem(dialog, 0, io_AppendText("%it[Marriage]$A"));
+	hChild = d2_GetWindowListItem(dialog, 0, io_AppendText("%it[Get Child]$A"));
 	d2_CenterDialogWindows(dialog);
-	while (fcn_005373e0((void*) d2_RunCharacterDebugDialog, flags) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunCharacterDebugDialog, flags) != 0) {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == hKill) {
 				fcn_004ff210(*(unsigned short*) e, -2000);

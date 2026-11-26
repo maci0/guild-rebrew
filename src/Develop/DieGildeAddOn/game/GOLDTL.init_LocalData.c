@@ -22,7 +22,7 @@ extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
 extern char* g_773db4[];
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_005016c0(void);
 void __cdecl fcn_005016f0(int);
 #include "Develop/Units/Error/error_message.h"
@@ -35,7 +35,7 @@ void __cdecl init_LocalData(void)
 	int i;
 	int n;
 
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	if ((g_7747b0 & 0x40) == 0) {
 		fcn_005016c0();
 		for (i = 0; i < 4; i++) {

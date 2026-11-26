@@ -32,7 +32,7 @@ float __cdecl fcn_004cefb0(char*, char*);
 char* __cdecl fcn_004ceb40(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-float __cdecl fcn_00444700(char*, float*);
+float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl fcn_00438d70(char*, int, float, int);
 void __cdecl fcn_004cfca0(void);
 
@@ -159,7 +159,7 @@ void __cdecl fcn_004d0070(void)
 				if (CompareVector3WithinTolerance((float*) (e34 + 0x4c), (float*) (g34 + 0x4c), 10.0f) == 0) {
 					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 					g34 = *(char**) (*(char**) (g + 0x184) + 0x34);
-					v = fcn_00444700(e34, (float*) (g34 + 0x4c));
+					v = d3_ComputeYawToTarget(e34, (float*) (g34 + 0x4c));
 					o = *(char**) (e + 0x184);
 					s = (char*) *(int*) (o + 0x128);
 					if (s == 0 || (*(char*) (s + 9) != 0x2d && *(char*) (s + 9) != 0x3a)) {

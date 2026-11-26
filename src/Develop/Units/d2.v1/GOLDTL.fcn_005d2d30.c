@@ -42,7 +42,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004c5530(Packet*);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00412830(int);
 
@@ -85,7 +85,7 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) d2_RunWerbungDialog, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunWerbungDialog, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	g_100f1dc = -1;
 	fcn_00412830(0x11);

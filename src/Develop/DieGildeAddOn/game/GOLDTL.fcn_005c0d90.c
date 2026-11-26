@@ -32,7 +32,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c9220(int*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004c5530(char* msg);
@@ -115,7 +115,7 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005c0d90, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005c0d90, 0x677c7) != 0);
 	fcn_00471e30(d);
 	return res;
 }

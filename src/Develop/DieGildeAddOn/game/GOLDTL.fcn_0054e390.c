@@ -25,7 +25,7 @@ void __cdecl fcn_004c5c80(int);
 int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 int __cdecl fcn_004c5620(char, char*);
 int __cdecl fcn_004c5980(void*);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
@@ -86,7 +86,7 @@ void __cdecl fcn_0054e390(char* e)
 				i--;
 			} while (i != 0);
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
+			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(2, e);
 			return;
 		}
@@ -124,7 +124,7 @@ void __cdecl fcn_0054e390(char* e)
 				i--;
 			} while (i != 0);
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
+			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 			if (n) {
 				he_FreeAction(e);
 				return;
@@ -161,7 +161,7 @@ void __cdecl fcn_0054e390(char* e)
 			s = 0;
 label_54e6a1:
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
+			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 			if (s) {
 				*(int*) (e + 0x84) = fcn_004c5620(3, e);
 				return;
@@ -247,10 +247,10 @@ label_54e6a1:
 				} while (k < 8);
 				if (m != 0 && i != 0) {
 					*(pos14_7f4c00*) (pkt + 0x18) = gm_GameTime;
-					fcn_00500bb0((pos14_7f4c00*) (pkt + 0x18), 0, 0x1e, 0);
+					gm_AddTime((pos14_7f4c00*) (pkt + 0x18), 0, 0x1e, 0);
 					*(int*) (e + 0xb4) = fcn_004c5980(pkt);
 					*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-					fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
+					gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 					*(int*) (e + 0x70) = 4;
 					return;
 				}
@@ -270,7 +270,7 @@ label_54e6a1:
 					fcn_00545d40(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
 				}
 				*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-				fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
+				gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 				*(int*) (e + 0x70) = 1;
 				return;
 			}
@@ -291,18 +291,18 @@ label_54e6a1:
 		if (fcn_004c4450(*(int*) (e + 0xb4))) {
 			*(int*) (e + 0xb8) = *(int*) fcn_004c4480(*(int*) (e + 0xb4));
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
+			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 			*(int*) (e + 0x70) = 5;
 		}
 		return;
 	case 5:
 		if (cut_FindCutsceneById(*(int*) (e + 0xb8))) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
+			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 5, 0);
 			return;
 		}
 		*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
+		gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 		*(int*) (e + 0x70) = 1;
 		return;
 	case -1:
@@ -342,6 +342,6 @@ label_54e6a1:
 	return;
 label_54e513:
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
+	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 	*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 }

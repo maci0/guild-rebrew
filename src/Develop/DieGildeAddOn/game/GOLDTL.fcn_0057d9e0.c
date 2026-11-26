@@ -4,7 +4,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_RandomMod(unsigned short n);
-void __cdecl fcn_00500bb0(void* clock, int arg2, int arg3, int arg4);
+void __cdecl gm_AddTime(void* clock, int arg2, int arg3, int arg4);
 void __cdecl fcn_005100f0(int a, int b);
 void __cdecl io_FormatTextBuffer(int a, int b, ...);
 void __cdecl fcn_00545d40(int a, int b, void* buf, int d, int e, void* f);
@@ -23,7 +23,7 @@ void __cdecl fcn_0057d9e0(char* a)
 		return;
 	}
 	*(int*) (a + 0x70) = *(int*) (a + 0x70) + 1;
-	fcn_00500bb0(a + 0x52, (gm_RandomMod(3) & 0xffff) + 3, 0, 0);
+	gm_AddTime(a + 0x52, (gm_RandomMod(3) & 0xffff) + 3, 0, 0);
 	v = *(int*) ((char*) e + 0x194);
 	if (v < 1)
 		return;

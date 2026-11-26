@@ -30,10 +30,10 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_CreateRadioGroup(int);
-void __cdecl fcn_00469470(int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl fcn_004707d0(int);
 void __cdecl d2_SetElementValue(int, int, int, int);
@@ -81,7 +81,7 @@ int __cdecl d2_RunMessageBox(int parent, int flags)
 	for (i = 0; i < g_77255c->count; i++) {
 		id = g_77255c->ids[i];
 		if (*(int*) (g_1015ea0 + id * 756 + 0x20) != 0x40) {
-			fcn_00469470(list, id);
+			d2_AddToRadioGroup(list, id);
 		}
 	}
 	d2_SelectRadioGroup(list, 0);
@@ -89,7 +89,7 @@ int __cdecl d2_RunMessageBox(int parent, int flags)
 	if (flags & 0x80) {
 		h = fcn_004677e0(0x1c, g_77255c->x10 - 0x20, g_77255c->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
 	}
-	while (fcn_005373e0((void*) d2_RunMessageBox, style) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunMessageBox, style) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			fcn_004707d0(dlg);

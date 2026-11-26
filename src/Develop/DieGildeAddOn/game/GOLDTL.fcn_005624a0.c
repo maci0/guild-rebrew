@@ -28,7 +28,7 @@ int __cdecl fcn_004c5620(int, void*);
 void __cdecl fcn_004c57e0(int, int);
 void __cdecl fcn_004c5c80(unsigned int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl gm_ResolveEntityById(void**, int, int, int);
 int __cdecl fcn_00500cb0(void*, void*);
 int __cdecl fcn_00529670(void*, void*);
@@ -117,7 +117,7 @@ void __cdecl fcn_005624a0(char* ctx)
 		idx = (*(int*) (ctx + 0xc0) + idx) % 256;
 		*(int*) (ctx + 0xbc) = idx;
 		if (hit == 0) {
-			fcn_00500bb0(ctx + 0x52, 0, 1, 0);
+			gm_AddTime(ctx + 0x52, 0, 1, 0);
 			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 			return;
 		}
@@ -126,31 +126,31 @@ void __cdecl fcn_005624a0(char* ctx)
 		if (ent != 0) {
 			fcn_004c5c80(*(int*) (ent + 4));
 			fcn_004c5da0(*(int*) (ent + 4), *(int*) (hit + 1), -1, 0, 1, s_67ed14);
-			fcn_00500bb0(ctx + 0x52, 0, 5, 0);
+			gm_AddTime(ctx + 0x52, 0, 5, 0);
 			*(int*) (ctx + 0xb4) = *(int*) (hit + 1);
 			*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
 			return;
 		}
-		fcn_00500bb0(ctx + 0x52, 0, 1, 0);
+		gm_AddTime(ctx + 0x52, 0, 1, 0);
 		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 		return;
 	}
 	case 2:
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xb4));
-		fcn_00500bb0(ctx + 0x52, 0, 5, 0);
+		gm_AddTime(ctx + 0x52, 0, 5, 0);
 		if (hit == 0) {
 			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 			return;
 		}
 		ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 		if (ent == 0) {
-			fcn_00500bb0(ctx + 0x52, 0, 1, 0);
+			gm_AddTime(ctx + 0x52, 0, 1, 0);
 			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 			return;
 		}
 		if (fcn_00529670(ent, hit) == 0) {
 			*(int*) (ctx + 0x70) = 2;
-			fcn_00500bb0(ctx + 0x52, 0, 5, 0);
+			gm_AddTime(ctx + 0x52, 0, 5, 0);
 			*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
 			return;
 		}
@@ -169,13 +169,13 @@ void __cdecl fcn_005624a0(char* ctx)
 		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 		return;
 	case 3:
-		fcn_00500bb0(ctx + 0x52, 0, 5, 0);
+		gm_AddTime(ctx + 0x52, 0, 5, 0);
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
 		if (hit != 0 && *(unsigned short*) (hit + 0x27) != 0xffff) {
 			ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
 			if (ent != 0 && fcn_00529670(ent, hit) == 0) {
 				*(int*) (ctx + 0x70) = 3;
-				fcn_00500bb0(ctx + 0x52, 0, 5, 0);
+				gm_AddTime(ctx + 0x52, 0, 5, 0);
 				*(int*) (ctx + 0x84) = fcn_004c5620(3, ctx);
 				return;
 			}
@@ -190,7 +190,7 @@ void __cdecl fcn_005624a0(char* ctx)
 		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 		return;
 	case 4:
-		fcn_00500bb0(ctx + 0x52, 0, 1, 0);
+		gm_AddTime(ctx + 0x52, 0, 1, 0);
 		*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 		return;
 	default:

@@ -6,7 +6,7 @@ extern char* g_7746a0;
 
 void __cdecl fcn_005338a0(void);
 char* __cdecl RegisterStatusText(char* name, char* path, int arg);
-int __cdecl fcn_005373e0(void* p, int mask);
+int __cdecl main_RunFrameLoop(void* p, int mask);
 void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p);
 void __cdecl fcn_00586c10(int h);
 void __cdecl fcn_0058ae60(int a0, char* a1);
@@ -18,7 +18,7 @@ void __cdecl fcn_0058ae60(int a0, char* a1)
 
 	control = 0;
 	fcn_005338a0();
-	if (!fcn_005373e0((void*) fcn_0058ae60, 0x67fff)) {
+	if (!main_RunFrameLoop((void*) fcn_0058ae60, 0x67fff)) {
 		return;
 	}
 	do {
@@ -35,5 +35,5 @@ void __cdecl fcn_0058ae60(int a0, char* a1)
 				fcn_00586c10(a0);
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_0058ae60, 0x67fff));
+	} while (main_RunFrameLoop((void*) fcn_0058ae60, 0x67fff));
 }

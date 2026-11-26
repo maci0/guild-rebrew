@@ -35,7 +35,7 @@ extern char* lpObjektePROT;
 
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -52,7 +52,7 @@ void __cdecl fcn_005ced80(int dlg, Entry* list, int* bars, int* icons)
 	io_AppendText((int) "$C");
 	for (i = 0; i < 7; i++) {
 		if (list[i].id != 0) {
-			h = fcn_0046f740(0xf, i * 0x30, list[i].id + 0xdf, d2_CurrentWindowId);
+			h = d2_AddElementToWindow(0xf, i * 0x30, list[i].id + 0xdf, d2_CurrentWindowId);
 			((D2_CONTROL_TL*) g_1015ea0)[h].flags_1d0 = 3;
 			((D2_CONTROL_TL*) g_1015ea0)[h].associated_object = (char *)&((OBJECT_PROTOTYPE*)lpObjektePROT)[list[i].id].kind;
 			fcn_00472640(h, 1);

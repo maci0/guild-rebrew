@@ -16,7 +16,7 @@ extern char g_14cf950;
 #endif
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_IsTutorialActionAllowed(int);
 int __cdecl d2_IsTutorialInactive(void);
 int __cdecl RegisterStatusText(char*, int, int);
@@ -37,7 +37,7 @@ void __cdecl fcn_005a07c0(char* e, int a2)
 	int meister;
 
 	fcn_005338a0();
-	while (fcn_005373e0((void*) fcn_005a07c0, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) fcn_005a07c0, 0x67fff) != 0) {
 		if (d2_IsTutorialActionAllowed(8) == 1) {
 			verhandeln = RegisterStatusText("contact_VERHANDELN", g_14ad318, 0xc);
 			handwerk = RegisterStatusText("contact_HANDWERKSKUNST", g_14ad2e0, 0xc);

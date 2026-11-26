@@ -22,7 +22,7 @@ struct msg {
 
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
 void __cdecl fcn_0054e2d0(char* o)
@@ -30,11 +30,11 @@ void __cdecl fcn_0054e2d0(char* o)
 	if (o[0x78] & 2) {
 		if (gm_StartFilteredEntitySearch(1, 1, *(int*) (o + 0xac)) == 0) {
 			*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
+			gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
 			*(int*) (o + 0x84) = fcn_004c5620(-1, o);
 		}
 		*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
+		gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
 		*(int*) (o + 0x84) = fcn_004c5620(0, o);
 	}
 }

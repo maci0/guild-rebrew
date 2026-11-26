@@ -18,7 +18,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00526010(char*, int, int);
 int __cdecl fcn_004c4510(char*, int);
 void __cdecl fcn_004c4670(int, int, int, int*);
@@ -29,7 +29,7 @@ void __cdecl fcn_005b2150(char*, char*, char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_0050e600(int, int);
 void __cdecl fcn_00532ef0(void);
@@ -79,7 +79,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 	if (cost > 0) {
 		io_AppendText(0x1962, count, cost);
 		d2_SetForm(dlg, 2);
-		item = fcn_00472250(dlg, 2, io_AppendText(0x1963));
+		item = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1963));
 	} else {
 		io_AppendText(0x1961, g_774970);
 	}
@@ -112,7 +112,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 			changed = 1;
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005ab3e0, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005ab3e0, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	if (changed)
 		d2_ShowKircheTop5();

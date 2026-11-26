@@ -5,7 +5,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl d2_OpenSeanceDialog(int, char*, int);
 
@@ -35,6 +35,6 @@ int __cdecl fcn_0058edc0(int entity, char* s, int resultOut)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_0058edc0, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_0058edc0, 0x677c7) != 0);
 	return r;
 }

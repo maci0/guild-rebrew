@@ -21,7 +21,7 @@ int __cdecl CompareVector3WithinTolerance();
 int __cdecl fcn_00470820();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl fcn_00471e30();
-int __cdecl fcn_00472250();
+int __cdecl d2_GetWindowListItem();
 int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
@@ -30,7 +30,7 @@ int __cdecl fcn_004c4510();
 int __cdecl cm_AppendPacketFieldDelta();
 int __cdecl fcn_004c5360();
 int __cdecl fcn_004c5530();
-int __cdecl fcn_00500bb0();
+int __cdecl gm_AddTime();
 int __cdecl fcn_00502850();
 int __cdecl fcn_00502cd0();
 int __cdecl fcn_00503fe0();
@@ -42,7 +42,7 @@ int __cdecl fcn_00530510();
 int __cdecl fcn_00532ef0();
 int __cdecl fcn_00533a60();
 int __cdecl fcn_005340f0();
-int __cdecl fcn_005373e0();
+int __cdecl main_RunFrameLoop();
 int __cdecl he_fn_Handlung();
 int __cdecl he_StartHandlungSearch();
 int __cdecl fcn_005cd440();
@@ -107,7 +107,7 @@ void __cdecl d2_ShowFestInvitation(int a0,int a1)
   v15[1] = 0x400;
   v15[2] = g_666018;
   v15[3] = g_66601c;
-  fcn_00500bb0(&timer,0x18,0,0);
+  gm_AddTime(&timer,0x18,0,0);
   timer.b = 0x14;
   *(unsigned short*) &timer.c = 0;
   v12 = he_StartHandlungSearch(1,0,0x37);
@@ -166,7 +166,7 @@ label_5c221e:
     do {
       if (g_14ce8e0)
         g_774654 = 1;
-    } while (fcn_005373e0(0x5c18e0,0x677c7));
+    } while (main_RunFrameLoop(0x5c18e0,0x677c7));
   }
   else {
     v9 = fcn_00470820(0,0,(char *)0x6ac5bc);
@@ -182,12 +182,12 @@ label_5c221e:
     v18 = 0;
     do {
       v13 = v18 & 0xff;
-      v12 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5b0,v13 + 0x1773));
+      v12 = d2_GetWindowListItem(v9,1,io_AppendText((char *)0x6ac5b0,v13 + 0x1773));
       v17[v18 & 0xff] = v12;
       v6 = (char)v18 + 1;
       v18 = ((v18 & 0xffffff00) | ((v6) & 0xff));
     } while (v6 < 5);
-    v10 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5a4,v6 + 0x1773));
+    v10 = d2_GetWindowListItem(v9,1,io_AppendText((char *)0x6ac5a4,v6 + 0x1773));
     v12 = a1;
     g_100f1dc = -1;
     v17[v18 & 0xff] = v10;
@@ -214,7 +214,7 @@ label_5c221e:
           v18 = ((v18 & 0xffffff00) | ((v6) & 0xff));
         } while (v6 < 6);
       }
-      v8 = fcn_005373e0(0x5c18e0,0x677c7);
+      v8 = main_RunFrameLoop(0x5c18e0,0x677c7);
       v9 = v28;
     } while (v8);
     v27 = v10;
@@ -226,12 +226,12 @@ label_5c221e:
         v18 = 0;
         do {
           v13 = v18 & 0xff;
-          v12 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5b0,v13 + 0x177a));
+          v12 = d2_GetWindowListItem(v9,1,io_AppendText((char *)0x6ac5b0,v13 + 0x177a));
           v17[v18 & 0xff] = v12;
           v6 = (char)v18 + 1;
           v18 = ((v18 & 0xffffff00) | ((v6) & 0xff));
         } while (v6 < 5);
-        v12 = fcn_00472250(v9,1,io_AppendText((char *)0x6ac5a4,v6 + 0x177a));
+        v12 = d2_GetWindowListItem(v9,1,io_AppendText((char *)0x6ac5a4,v6 + 0x177a));
         v10 = a1;
         g_100f1dc = -1;
         v17[v18 & 0xff] = v12;
@@ -258,7 +258,7 @@ label_5c221e:
               v18 = ((v18 & 0xffffff00) | ((v6) & 0xff));
             } while (v6 < 6);
           }
-        } while (fcn_005373e0(0x5c18e0,0x677c7));
+        } while (main_RunFrameLoop(0x5c18e0,0x677c7));
         v27 = v12;
       }
       else {
@@ -299,7 +299,7 @@ label_5c221e:
               v2 = *(unsigned short **)((int)v20 + v12);
               if (v2) { 
                 v11 = io_AppendText(0x176a,*v2);
-                *(unsigned int *)((int)v17 + v12) = fcn_00472250(v9,1,v11);
+                *(unsigned int *)((int)v17 + v12) = d2_GetWindowListItem(v9,1,v11);
                 party.members[party.count].ent = v2;
                 v10 += 1;
                 party.count++;
@@ -313,7 +313,7 @@ label_5c221e:
             d2_SetForm(v9,2);
             io_AppendText(0x6811b0);
             v11 = io_AppendText(0x176b,party.text);
-            v12 = fcn_00472250(v9,2,v11);
+            v12 = d2_GetWindowListItem(v9,2,v11);
             v36 = v12;
             if (v10 == 4)
               fcn_00472640(v12,0);
@@ -421,7 +421,7 @@ label_5c221e:
               }
             }
           }
-        } while (fcn_005373e0(0x5c18e0,0x677c7));
+        } while (main_RunFrameLoop(0x5c18e0,0x677c7));
         if (v27) {
           fcn_00471e30(v9);
           goto label_5c221e;

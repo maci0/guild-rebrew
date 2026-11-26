@@ -69,7 +69,7 @@ extern int d2_CurrentElementId;
 extern float g_6628a0;
 extern float g_662cf8;
 
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl fcn_0042e410(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -83,13 +83,13 @@ void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 int __cdecl fcn_0057c9d0(char*);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00525f60(void*, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl fcn_004c5530(void*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
@@ -110,7 +110,7 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 	int dlg;
 
 	st = *(GAME_TIMESTAMP*) &gm_GameTime;
-	fcn_00500bb0(&st, 0x18, 0, 0);
+	gm_AddTime(&st, 0x18, 0, 0);
 	st.hour = (unsigned short) (fcn_0042e410(stage) + 0x15);
 	*(int*) ((char*) &st + 6) = 0;
 
@@ -130,7 +130,7 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 	fcn_00533a60(d2_CurrentWindowId, 0, ids, stage, g_14b5af8, g_14b5afc);
 
 	for (;;) {
-		if ((unsigned int) g_6b7fac > last + 0x8c || fcn_00471f80(timer2) != idx) {
+		if ((unsigned int) g_6b7fac > last + 0x8c || d2_GetControlValue(timer2) != idx) {
 			last = g_6b7fac;
 			entity = (char*) fcn_0057c9d0(participant);
 			if (entity != 0) {
@@ -143,7 +143,7 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 			}
 			else {
 				st = *(GAME_TIMESTAMP*) &gm_GameTime;
-				fcn_00500bb0(&st, 0x18, 0, 0);
+				gm_AddTime(&st, 0x18, 0, 0);
 				st.hour = (unsigned short) (fcn_0042e410(2) + 0x15);
 				*(int*) ((char*) &st + 6) = 0;
 				d2_SetElementValue(timer1, 0, 100, 0);
@@ -159,7 +159,7 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 				}
 			}
 			else {
-				idx = fcn_00471f80(timer2);
+				idx = d2_GetControlValue(timer2);
 				if (idx < 4) {
 					stage = 2;
 				}
@@ -196,7 +196,7 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 				g_774654 = 1;
 			}
 		}
-		if (fcn_005373e0((void*) d2_ShowBlutracheDialog, 0x677c7) == 0) {
+		if (main_RunFrameLoop((void*) d2_ShowBlutracheDialog, 0x677c7) == 0) {
 			break;
 		}
 	}

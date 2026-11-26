@@ -11,7 +11,7 @@ int __cdecl fcn_00469c30(int x, int y, int a3);
 void __cdecl d2_AddWindowChild(int id, int win);
 
 /* ADDRESS: GOLDTL 0x0046f740 */
-int __cdecl fcn_0046f740(int x, int y, int a3, int win)
+int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win)
 {
 	D2_WIN* w;
 	int id;

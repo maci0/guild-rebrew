@@ -30,7 +30,7 @@ extern char s_6ab6d0[];
 
 int __cdecl fcn_0046e940(int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0045a230(int, int, int);
 int __cdecl fcn_00459d50(int);
@@ -51,7 +51,7 @@ void __cdecl fcn_005b37d0(void)
 
 	h = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[h].slot, 0x54);
-	while (fcn_005373e0((void*) fcn_005b37d0, 0x657c7) != 0) {
+	while (main_RunFrameLoop((void*) fcn_005b37d0, 0x657c7) != 0) {
 		w = &((D2_WIN*)g_1015f40)[h];
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

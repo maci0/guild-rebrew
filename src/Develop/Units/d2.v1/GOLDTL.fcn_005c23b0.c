@@ -23,16 +23,16 @@ extern char g_7f4ca4[];
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-int __cdecl fcn_0050cf50(void*, int);
+int __cdecl gm_CalculateGebaeudeValue(void*, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, void*, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
 void __cdecl fcn_004c5530(Msg5c23b0*);
 int __cdecl fcn_00526120(int, int);
@@ -53,13 +53,13 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 	id = *(int*) (e + 1);
 	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Verkaufen_pergament");
 	d2_CenterDialogWindows(win);
-	p = fcn_0050cf50(e, *(char*) (e + 0x5c));
+	p = gm_CalculateGebaeudeValue(e, *(char*) (e + 0x5c));
 	v = fcn_0050b710(p, g_773d75);
 	d2_SetForm(win, 2);
-	h = fcn_00472250(win, 2, io_AppendText(0x17c5, e, *(unsigned short*) (g_773d75 * 0x2f4 + 0x8680b4) * 2 + 0x9a8));
+	h = d2_GetWindowListItem(win, 2, io_AppendText(0x17c5, e, *(unsigned short*) (g_773d75 * 0x2f4 + 0x8680b4) * 2 + 0x9a8));
 	fcn_00472380(h, (int) (v * 0.5), (int) (v * 1.5), v);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_005373e0(0, 0x677c7);
+	main_RunFrameLoop(0, 0x677c7);
 	do {
 		ret = gm_SearchTable67(id);
 		if ((*(unsigned char*) (e + 0x5b) & 4) || ret == 0) {
@@ -75,7 +75,7 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 			m.flags = 2;
 			m.key = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 			m.other = *(int*) (e + 1);
-			m.extra = fcn_0050b750(fcn_00471f80(h), g_773d75);
+			m.extra = fcn_0050b750(d2_GetControlValue(h), g_773d75);
 			fcn_004c5530(&m);
 			fcn_00526120(*(int*) 0x14ab238, 0);
 			g_774654 = 1;
@@ -83,6 +83,6 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 		else if (g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) d2_ShowSellGebaeudeDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowSellGebaeudeDialog, 0x677c7) != 0);
 	fcn_00471e30(win);
 }

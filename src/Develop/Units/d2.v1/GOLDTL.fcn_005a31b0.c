@@ -11,7 +11,7 @@ extern char g_6a40b0[];
 
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl fcn_00412e50(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
@@ -53,7 +53,7 @@ void __cdecl fcn_005a31b0(char* building)
 	object = (int) fcn_00445600(0, 0x40, 0, "ob_KARTENTISCH");
 	idx = -1;
 	k = -1;
-	if (fcn_005373e0((void*) fcn_005a31b0, 0x677c7)) {
+	if (main_RunFrameLoop((void*) fcn_005a31b0, 0x677c7)) {
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
@@ -118,7 +118,7 @@ void __cdecl fcn_005a31b0(char* building)
 				dt = g_665ed0;
 			}
 			*(float*) (windowData + 0x3a4) = (float) dt;
-		} while (fcn_005373e0((void*) fcn_005a31b0, 0x677c7));
+		} while (main_RunFrameLoop((void*) fcn_005a31b0, 0x677c7));
 		if (idx != -1) {
 			fcn_00471e30(idx);
 		}

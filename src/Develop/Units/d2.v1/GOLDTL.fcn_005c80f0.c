@@ -36,10 +36,10 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CreateRadioGroup(int n, ...);
-int __cdecl fcn_0046f740(int x, int y, int a3, int win);
-void __cdecl fcn_00469470(int g, int id);
+int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
+void __cdecl d2_AddToRadioGroup(int g, int id);
 void __cdecl fcn_00472640(int i, int flag);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00525ef0(void);
 
 int __cdecl fcn_004c4700(int type, int count, int off, char* data);
@@ -47,7 +47,7 @@ int __cdecl fcn_004c53a0(void);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004c5790(int, void*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ClearRadioGroup(int i);
 void __cdecl fcn_00471e30(int);
 
@@ -75,8 +75,8 @@ void __cdecl d2_ChooseWappen(void)
 	d2_SetForm(d, 2);
 	grp = d2_CreateRadioGroup(0);
 	for (i = 0; i < 8; i++) {
-		btn[i] = fcn_0046f740(i * 0x30 + 10, 0x78, i + DISTRICT0, d2_CurrentWindowId);
-		fcn_00469470(grp, btn[i]);
+		btn[i] = d2_AddElementToWindow(i * 0x30 + 10, 0x78, i + DISTRICT0, d2_CurrentWindowId);
+		d2_AddToRadioGroup(grp, btn[i]);
 	}
 	for (i = 0; i < 8; i++) {
 		for (j = 0; j < HOUSES; j++) {
@@ -87,7 +87,7 @@ void __cdecl d2_ChooseWappen(void)
 		}
 	}
 	d2_SetForm(d, 3);
-	back = fcn_00472250(d, 3, io_AppendText(0x7f));
+	back = d2_GetWindowListItem(d, 3, io_AppendText(0x7f));
 	g_102cbc4[grp].sel = -1;
 	fcn_00525ef0();
 	do {
@@ -132,7 +132,7 @@ void __cdecl d2_ChooseWappen(void)
 				fcn_004c5790(0xd, ev);
 			}
 		}
-	} while (fcn_005373e0(d2_ChooseWappen, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_ChooseWappen, 0x677c7) != 0);
 	d2_ClearRadioGroup(grp);
 	fcn_00471e30(d);
 }

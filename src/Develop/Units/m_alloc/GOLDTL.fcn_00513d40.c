@@ -22,7 +22,7 @@ extern int g_10058e0;
 extern BoxRec* g_10058e4;
 extern int g_67a370;
 
-int __cdecl fcn_0065f2f0(const char* a, const char* b, int n);
+int __cdecl _strnicmp(const char* a, const char* b, int n);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 void* __cdecl fcn_0064fde9(void* p, int size);
 void __cdecl d3_VisitSceneObjects(int, int, int, int (__cdecl*)(), Query*);
@@ -55,7 +55,7 @@ void __cdecl fcn_00513d40(char* name)
 		return;
 	}
 	o = q.list[0];
-	if (fcn_0065f2f0(name, "bk_", 3) == 0 || fcn_0065f2f0(name, "!bk_", 4) == 0) {
+	if (_strnicmp(name, "bk_", 3) == 0 || _strnicmp(name, "!bk_", 4) == 0) {
 		for (i = 0; i < g_10058e0; i++) {
 			if (fcn_0065f220(name, g_10058e4[i].name) == 0) {
 				break;

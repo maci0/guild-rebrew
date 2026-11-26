@@ -1,7 +1,7 @@
 #include <string.h>
 
 /* ADDRESS: GOLD 0x00433f40 */
-char* __cdecl fcn_00433f40(const char* name)
+char* __cdecl d3_FindAnimByName(const char* name)
 {
 	char* node;
 

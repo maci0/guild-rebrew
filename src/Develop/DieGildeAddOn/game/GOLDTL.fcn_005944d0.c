@@ -26,7 +26,7 @@ int __cdecl he_fn_Handlung(void);
 int __cdecl d2_DispatchTutorialEvent(int, void*, int, unsigned int);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_004c4480(int);
 void __cdecl fcn_004c35f0(void);
 void __cdecl fcn_00529160(void*, int, int, int);
@@ -256,7 +256,7 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 										found = fcn_004c5530(tmpl);
 										if (found != -1) {
 											while (!fcn_004c4450(found)) {
-												fcn_005373e0(0, 0x20007);
+												main_RunFrameLoop(0, 0x20007);
 											}
 										}
 										found = fcn_004c4480(found);
@@ -423,7 +423,7 @@ after_input:
 			}
 			fcn_00595e20(a0, entry);
 			fcn_005963f0(saved, 1, 0, a0);
-			if (!fcn_005373e0((void*) 0x5944d0, 0x677c7)) {
+			if (!main_RunFrameLoop((void*) 0x5944d0, 0x677c7)) {
 				d2_SetForm(saved, 2);
 				a0[0x59] = (unsigned char) ((*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161a0) +
 				                             *(int*) (d2_CurrentWindowId * 0x3cc + 0x1016198)) /

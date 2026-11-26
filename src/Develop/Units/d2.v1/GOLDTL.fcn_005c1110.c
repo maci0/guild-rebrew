@@ -23,12 +23,12 @@ int __cdecl io_AppendText();
 char* __cdecl he_fn_Handlung(void);
 int __cdecl he_StartHandlungSearch();
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00525f60(char*, int);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00532ef0(void);
 int __cdecl fcn_005100f0(int, int);
@@ -94,7 +94,7 @@ int __cdecl fcn_005c1110(void)
 							    (int) *p);
 							d2_SetForm(h, i);
 							io_AppendText(0x6811b0);
-							*(int*) ((char*) a + k) = fcn_00472250(h, i,
+							*(int*) ((char*) a + k) = d2_GetWindowListItem(h, i,
 							    io_AppendText(0x1914, 2));
 							*(int*) ((char*) b + k) = ent->f4;
 							d2_SetSlotVisibility(*(int*) ((char*) &g_10161bc
@@ -138,7 +138,7 @@ done:;
 						    *(pos14_7f4c00*) &gm_GameTime;
 						r = fcn_004c5620(-1, (char*) o);
 						while (r != -1 && fcn_004c4450(r) == 0) {
-							fcn_005373e0(0, 0x677c7);
+							main_RunFrameLoop(0, 0x677c7);
 						}
 						if (fcn_004c4450(r) == 1) {
 							fcn_005100f0(*(int*) ((char*) &g_7f4ca0
@@ -150,7 +150,7 @@ done:;
 				}
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005c1110, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005c1110, 0x677c7) != 0);
 	fcn_00471e30(h);
 	return fcn_00532ef0();
 }

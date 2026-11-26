@@ -12,10 +12,10 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, int, int, int);
 void __cdecl fcn_005c9220(int*);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl gm_SelectRandomEntityCandidate(unsigned short*);
 void __cdecl fcn_004c4eb0(char*);
@@ -85,7 +85,7 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 	d2_SetOverlayAnimation(0, 0);
 	if (entity) {
 		d2_SetForm(hwnd, 1);
-		idx = fcn_00472250(hwnd, 1, io_AppendText(0x1708, 0x1711, timeout, *entity));
+		idx = d2_GetWindowListItem(hwnd, 1, io_AppendText(0x1708, 0x1711, timeout, *entity));
 	}
 	for (i = 0; i < 6; i++) {
 		t[i] = -1;
@@ -97,7 +97,7 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 	t[4] = 3;
 	t[5] = 0x15;
 	fcn_005c9220(t);
-	while (fcn_005373e0(0x5bf9e0, 0x677c7)) {
+	while (main_RunFrameLoop(0x5bf9e0, 0x677c7)) {
 		if (g_14ce8e0 || *(int*) &g_100f1dc == 1) {
 			g_774654 = 1;
 		}

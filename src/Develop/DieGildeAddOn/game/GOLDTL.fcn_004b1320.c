@@ -19,7 +19,7 @@ extern char g_85ab90[];
 extern char* lpObjektePROT;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 char* __cdecl fcn_004ce590(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 void __cdecl fcn_004c6190(char*, char);

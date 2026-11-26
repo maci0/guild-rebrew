@@ -27,9 +27,9 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CreateRadioGroup(int);
-int __cdecl fcn_0046f740(int, int, int, int);
-void __cdecl fcn_00469470(int, int);
-int __cdecl fcn_005373e0(int (__cdecl*)(int), int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
+int __cdecl main_RunFrameLoop(int (__cdecl*)(int), int);
 void __cdecl d2_UpdateRadioGroup(int);
 unsigned char __cdecl fcn_00507400(int, int);
 void __cdecl d2_ClearRadioGroup(int);
@@ -65,16 +65,16 @@ int __cdecl d2_ShowChooseProfessionDialog(int flags)
 	list = d2_CreateRadioGroup(0);
 	for (i = 0; i < 11; i++) {
 		t = types[i];
-		id = fcn_0046f740((i % 3) * 0x60 + 0x64, (i / 3 * 5 + 5) * 0x10, t + 0x5a1, d2_CurrentWindowId);
+		id = d2_AddElementToWindow((i % 3) * 0x60 + 0x64, (i / 3 * 5 + 5) * 0x10, t + 0x5a1, d2_CurrentWindowId);
 		ids[i] = id;
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_05c) = 1;
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0) = 3;
 		strcpy(((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0xcc), g_14a5ad8[t]);
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc) = 0x56;
-		fcn_00469470(list, id);
+		d2_AddToRadioGroup(list, id);
 	}
 	g_100f1dc = -1;
-	while (fcn_005373e0(d2_ShowChooseProfessionDialog, flags) != 0) {
+	while (main_RunFrameLoop(d2_ShowChooseProfessionDialog, flags) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 11; i++) {

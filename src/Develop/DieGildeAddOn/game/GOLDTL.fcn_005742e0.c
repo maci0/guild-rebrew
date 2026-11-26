@@ -19,7 +19,7 @@ struct vec3 {
 extern struct modelent g_6a6ee8[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_004488e0(char* name, int a, int b);
 void __cdecl fcn_00438b40(char*, struct vec3*);
 void __cdecl d3_SetObjectRotation(char*, float*);
@@ -56,10 +56,10 @@ char* __cdecl fcn_005742e0(float* rot, struct vec3* pos, unsigned char* kind, ch
 		strcpy(name, g_6a6ee8[i].name);
 	}
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	h = fcn_004488e0(name, 0, 0);
 	if (h == 0) {
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 		return 0;
 	}
 	fcn_00438b40(h, pos);
@@ -69,7 +69,7 @@ char* __cdecl fcn_005742e0(float* rot, struct vec3* pos, unsigned char* kind, ch
 	sprintf(h, "he_%i", *(int*) (u + 4));
 	h = fcn_004488e0(model, 0, 0);
 	if (h == 0) {
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 		return 0;
 	}
 	fcn_00438b40(h, pos);
@@ -85,6 +85,6 @@ char* __cdecl fcn_005742e0(float* rot, struct vec3* pos, unsigned char* kind, ch
 	*(int*) (u + 0xbc) = *(int*) (u + 0xc8) = -1;
 	fcn_00573e10(u);
 	fcn_00510820(h, kind, 2);
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	return h;
 }

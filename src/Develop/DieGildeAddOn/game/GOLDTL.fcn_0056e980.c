@@ -1,7 +1,7 @@
 #include "client_data.h"
 extern int __cdecl fcn_00500e20(char*); extern void __cdecl fcn_004c30a0(int, int, char*, int, int);
 extern void __cdecl he_FreeAction(char*);
-extern void __cdecl fcn_00500bb0(char*, int, int, int);
+extern void __cdecl gm_AddTime(char*, int, int, int);
 extern unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
@@ -101,5 +101,5 @@ void __cdecl he_RunNightWatchmanAnnouncements(char* action)
 		return;
 	}
 sync_time:
-	fcn_00500bb0((char*) &gm_GameTime, 0, 0, 1);
+	gm_AddTime((char*) &gm_GameTime, 0, 0, 1);
 }

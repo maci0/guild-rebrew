@@ -7,7 +7,7 @@ extern int g_14ad1d8;
 extern int g_7746a0;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_00597ec0(char*);
 void __cdecl fcn_005944d0(char*);
@@ -30,7 +30,7 @@ void __cdecl fcn_005acb30(char* e)
 	personal = 0;
 	transport = 0;
 	fcn_005338a0();
-	while (fcn_005373e0((void*) fcn_005acb30, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) fcn_005acb30, 0x67fff) != 0) {
 		fcn_00597ec0(e);
 		if (g_7746d8 & 0x200) {
 			prod = RegisterStatusText("contact_PRODUKTION_SCHREIBEN", g_14ad1d8, 0x13);

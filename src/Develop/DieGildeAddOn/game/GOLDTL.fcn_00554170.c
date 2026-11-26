@@ -18,7 +18,7 @@ extern int __cdecl cut_FindCutsceneById(int);
 extern char* __cdecl fcn_00445600(int, int, int, char*);
 extern void __cdecl d3_TransformPoint(char*, char*, float*);
 extern void __cdecl he_CharacterBehavior(char*, int);
-extern void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 extern int __cdecl fcn_00500cb0(pos14_7f4c00*, pos14_7f4c00*);
 extern pos14_7f4c00 gm_GameTime;
 
@@ -67,7 +67,7 @@ void __cdecl fcn_00554170(char* obj)
 			}
 			iter += 4;
 		}
-		fcn_00500bb0(time, 0, 5, 0);
+		gm_AddTime(time, 0, 5, 0);
 		*(int*) (obj + 0x84) = fcn_004c5620(1, obj);
 		return;
 	case 1:
@@ -75,7 +75,7 @@ void __cdecl fcn_00554170(char* obj)
 		while (count < 6) {
 			rec = gm_LookupEntityRecordById(*(int*) iter);
 			if (rec != 0 && *(int*) (rec + 0x184) != 0 && *(int*) (*(char**) (rec + 0x184) + 0x128) != 0) {
-				fcn_00500bb0(time, 0, 4, 0);
+				gm_AddTime(time, 0, 4, 0);
 				*(int*) (obj + 0x84) = fcn_004c5620(1, obj);
 				return;
 			}
@@ -83,14 +83,14 @@ void __cdecl fcn_00554170(char* obj)
 			iter += 4;
 		}
 		*(pos14_7f4c00*) (obj + 0x44) = gm_GameTime;
-		fcn_00500bb0(time, 0, 0xa, 0);
+		gm_AddTime(time, 0, 0xa, 0);
 		*(int*) (obj + 0x84) = fcn_004c5620(2, obj);
 		return;
 	case 2:
 		stamp = *(pos14_7f4c00*) (obj + 0x44);
-		fcn_00500bb0(&stamp, 0x18, 0, 0);
+		gm_AddTime(&stamp, 0x18, 0, 0);
 		if (fcn_00500cb0((pos14_7f4c00*) 0x7f4c00, &stamp) > 0) {
-			fcn_00500bb0(time, 0, 2, 0);
+			gm_AddTime(time, 0, 2, 0);
 			*(int*) (obj + 0x84) = fcn_004c5620(5, obj);
 			return;
 		}
@@ -140,16 +140,16 @@ void __cdecl fcn_00554170(char* obj)
 				*(int*) (msg + 0x104) = -1;
 				*(int*) (msg + 0x108) = -1;
 				*(int*) (msg + 0x10c) = *(int*) (obj + 0xcc);
-				fcn_00500bb0((pos14_7f4c00*) (msg + 0x18), 0x1e, 0, 0);
+				gm_AddTime((pos14_7f4c00*) (msg + 0x18), 0x1e, 0, 0);
 				*(int*) (obj + 0xd8) = fcn_004c5980(msg);
 				*(int*) (obj + 0x70) = 3;
-				fcn_00500bb0(time, 0, 0xa, 0);
+				gm_AddTime(time, 0, 0xa, 0);
 				*(int*) (obj + 0x84) = fcn_004c5620(3, obj);
 				return;
 			}
 		}
 	not_found:
-		fcn_00500bb0(time, 0, 0xa, 0);
+		gm_AddTime(time, 0, 0xa, 0);
 		if (d3_CurrentContextIndex == 0) {
 			rec = fcn_00445600(0, 0x140, 0, obj + 0xac);
 			if (rec != 0) {
@@ -162,7 +162,7 @@ void __cdecl fcn_00554170(char* obj)
 		*(int*) (obj + 0x84) = fcn_004c5620(2, obj);
 		return;
 	case 3:
-		fcn_00500bb0(time, 0, 1, 0);
+		gm_AddTime(time, 0, 1, 0);
 		if (fcn_004c4450(*(int*) (obj + 0xd8)) != 0) {
 			rec = fcn_004c4480(*(int*) (obj + 0xd8));
 			if (rec != 0) {
@@ -176,7 +176,7 @@ void __cdecl fcn_00554170(char* obj)
 		*(int*) (obj + 0x84) = fcn_004c5620(3, obj);
 		return;
 	case 4:
-		fcn_00500bb0(time, 0, 5, 0);
+		gm_AddTime(time, 0, 5, 0);
 		if (cut_FindCutsceneById(*(int*) (obj + 0xd4)) != 0) {
 			*(int*) (obj + 0x84) = fcn_004c5620(4, obj);
 			return;
@@ -195,7 +195,7 @@ void __cdecl fcn_00554170(char* obj)
 			}
 			iter += 4;
 		}
-		fcn_00500bb0(time, 0, 2, 0);
+		gm_AddTime(time, 0, 2, 0);
 		if (added) {
 			he_FreeAction(obj);
 			return;

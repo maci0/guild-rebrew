@@ -5,7 +5,7 @@ void* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int a, int b, int c, void* d);
 void __cdecl he_FreeAction(void* p);
-void __cdecl fcn_00500bb0(void* p, int a, int b, int c);
+void __cdecl gm_AddTime(void* p, int a, int b, int c);
 
 extern pos14_7f4c00 gm_GameTime;
 
@@ -40,5 +40,5 @@ void __cdecl fcn_00579690(char* event)
 	*(int*) (event + 0xb4) = 0x168;
 	*(pos14_7f4c00*) (event + 0x52) = gm_GameTime;
 	*(int*) (event + 0x70) = 0;
-	fcn_00500bb0(event + 0x52, 0, 5, 0);
+	gm_AddTime(event + 0x52, 0, 5, 0);
 }

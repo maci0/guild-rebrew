@@ -23,7 +23,7 @@ extern char* __cdecl gm_LookupEntityRecordById(int id);
 extern void __cdecl fcn_004c5c80(int a1);
 extern void __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 extern void __cdecl fcn_00529160(char*, char*, unsigned int, char*);
-extern void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 extern int __cdecl fcn_00529670(char*, char*);
 extern int __cdecl gm_GetScaledEntitySkill(char*, int);
 extern int __cdecl fcn_0050c4e0(unsigned char*);
@@ -81,7 +81,7 @@ void __cdecl fcn_0056aef0(char* action)
 			}
 		}
 		*(pos14_7f4c00*)(action + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*)(action + 0x52), 0, 0xa, 0);
+		gm_AddTime((pos14_7f4c00*)(action + 0x52), 0, 0xa, 0);
 		*(int*)(action + 0x70) = 1;
 		return;
 
@@ -132,12 +132,12 @@ void __cdecl fcn_0056aef0(char* action)
 			}
 			*(pos14_7f4c00*)(action + 0x44) = gm_GameTime;
 			*(pos14_7f4c00*)(action + 0x52) = gm_GameTime;
-			fcn_00500bb0((pos14_7f4c00*)(action + 0x52), 0, (int)x, 0);
+			gm_AddTime((pos14_7f4c00*)(action + 0x52), 0, (int)x, 0);
 			*(int*)(action + 0x70) = 2;
 			return;
 		}
 		*(pos14_7f4c00*)(action + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*)(action + 0x52), 0, 5, 0);
+		gm_AddTime((pos14_7f4c00*)(action + 0x52), 0, 5, 0);
 		return;
 
 	case 2:

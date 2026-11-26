@@ -31,7 +31,7 @@ void __cdecl fcn_004234e0(int, char*, int, int, int, int, int);
 void __cdecl fcn_00545c50(int);
 int __cdecl fcn_004c30a0(int, int, char*, int, int);
 void __cdecl fcn_004237f0(void*, int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl cut_FindCutsceneById(int);
 int __cdecl cut_RemoveParticipant(int, int);
 void __cdecl fcn_004c5a20(int, int);
@@ -138,11 +138,11 @@ done:
 
 
         if (*(unsigned char*) (e + 0xf0) & 4) {
-            fcn_00500bb0(e + 0x52, 0x18, 0, 0);
+            gm_AddTime(e + 0x52, 0x18, 0, 0);
         } else {
-            fcn_00500bb0(e + 0x52, 8, 0, 0);
+            gm_AddTime(e + 0x52, 8, 0, 0);
             if (*(unsigned short*) (e + 0x56) < 6)
-                fcn_00500bb0(e + 0x52, 8, 0, 0);
+                gm_AddTime(e + 0x52, 8, 0, 0);
         }
         *(int*) (e + 0x70) = *(int*) (e + 0x70) + 1;
         return;

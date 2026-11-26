@@ -8,7 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_0050c710(char*, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_00565800(char* o)
 {
@@ -18,7 +18,7 @@ void __cdecl fcn_00565800(char* o)
 	if (e != 0) {
 		fcn_0050c710(e, 0x10, 1);
 		*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-		fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0x18, 0, 0);
+		gm_AddTime((pos14_7f4c00*) (o + 0x52), 0x18, 0, 0);
 		*(int*) (o + 0x58) = 0;
 		return;
 	}

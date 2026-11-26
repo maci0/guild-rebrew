@@ -6,7 +6,7 @@
 extern struct Node* g_774a78;
 extern char s_6ab408[];
 
-void __cdecl fcn_005b1ef0(void);
+void __cdecl ls_FreeList774a78(void);
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 char* __cdecl m_alloc(int, char*);
 
@@ -19,7 +19,7 @@ int __cdecl fcn_005b1ff0(void* fh)
 	char* e;
 	int k;
 
-	fcn_005b1ef0();
+	ls_FreeList774a78();
 	if (ls_ReadVfsDataChecked(&count, 4, 1, fh) == 0) {
 		return 0;
 	}
@@ -76,6 +76,6 @@ int __cdecl fcn_005b1ff0(void* fh)
 	}
 	return 1;
 fail:
-	fcn_005b1ef0();
+	ls_FreeList774a78();
 	return 0;
 }

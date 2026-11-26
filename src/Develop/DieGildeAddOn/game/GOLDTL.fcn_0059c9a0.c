@@ -9,7 +9,7 @@ extern int g_7746a0;
 extern int g_6a25f0;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_0059a0e0(void);
 void __cdecl fcn_005c5990(char*, int);
@@ -38,7 +38,7 @@ void __cdecl fcn_0059c9a0(char* e)
 	zs = 0;
 	fcn_005338a0();
 	x = *(int*) (e + 0x71);
-	while (fcn_005373e0((void*) fcn_0059c9a0, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) fcn_0059c9a0, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			holz = RegisterStatusText("contact_PRODUKTION_HOLZ", g_14ad288, 0x13);

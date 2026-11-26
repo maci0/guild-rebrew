@@ -14,7 +14,7 @@ int __cdecl gm_GetElapsedMinutes(void*, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_00500bb0(void*, int, int, int);
+int __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_SetupEntityQuery(int);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004c5da0(int, int, int, int, int, char*);
@@ -81,7 +81,7 @@ void __cdecl fcn_00552a60(int event)
 		*(int*) (event + 0x56) = *(int*) &g_7f4c04;
 		*(int*) (event + 0x5a) = g_7f4c08;
 		*(unsigned short*) (event + 0x5e) = g_7f4c0c;
-		fcn_00500bb0((int*) (event + 0x52), 0, 6, 0);
+		gm_AddTime((int*) (event + 0x52), 0, 6, 0);
 		*(unsigned char*) (event + 0xd2) =
 		    (unsigned char) (*(unsigned char*) (event + 0xd2) % 6);
 		v15 = (int) v14;

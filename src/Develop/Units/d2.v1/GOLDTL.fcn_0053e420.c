@@ -12,10 +12,10 @@ extern int d2_CurrentElementId;
 
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
+int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_UpdateRadioGroup(int);
@@ -41,13 +41,13 @@ int __cdecl d2_ChooseHistory(void)
 	d2_CenterDialogWindows(dialogHandle);
 	d2_SetForm(dialogHandle, 0);
 	textStart = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca, 0x1acb, 0x1acc);
-	option0 = fcn_00472250(dialogHandle, 0, textStart);
-	option1 = fcn_00472250(dialogHandle, 0, textStart + 1);
-	option2 = fcn_00472250(dialogHandle, 0, textStart + 2);
-	option3 = fcn_00472250(dialogHandle, 0, textStart + 3);
-	option4 = fcn_00472250(dialogHandle, 0, textStart + 4);
-	option5 = fcn_00472250(dialogHandle, 0, textStart + 5);
-	option6 = fcn_00472250(dialogHandle, 0, io_AppendText((int) g_6a4078, 0x1acd));
+	option0 = d2_GetWindowListItem(dialogHandle, 0, textStart);
+	option1 = d2_GetWindowListItem(dialogHandle, 0, textStart + 1);
+	option2 = d2_GetWindowListItem(dialogHandle, 0, textStart + 2);
+	option3 = d2_GetWindowListItem(dialogHandle, 0, textStart + 3);
+	option4 = d2_GetWindowListItem(dialogHandle, 0, textStart + 4);
+	option5 = d2_GetWindowListItem(dialogHandle, 0, textStart + 5);
+	option6 = d2_GetWindowListItem(dialogHandle, 0, io_AppendText((int) g_6a4078, 0x1acd));
 	if (g_776704 <= -1) {
 		g_776704 = -1;
 	}
@@ -57,7 +57,7 @@ int __cdecl d2_ChooseHistory(void)
 	} else {
 		d2_SelectRadioGroup(radioGroup, 0);
 	}
-	while (fcn_005373e0(d2_ChooseHistory, 0xc6) != 0) {
+	while (main_RunFrameLoop(d2_ChooseHistory, 0xc6) != 0) {
 		d2_UpdateRadioGroup(radioGroup);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			g_774654 = 1;

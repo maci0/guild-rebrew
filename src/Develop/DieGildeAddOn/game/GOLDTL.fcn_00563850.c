@@ -33,7 +33,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl he_FreeAction(struct unit*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_00563850(struct unit* u)
 {
@@ -50,8 +50,8 @@ void __cdecl fcn_00563850(struct unit* u)
 	u->p60 = gm_GameTime;
 	u->p52 = gm_GameTime;
 	u->p44 = gm_GameTime;
-	fcn_00500bb0(&u->p52, 0, 10, 0);
+	gm_AddTime(&u->p52, 0, 10, 0);
 	u->pb8 = u->p52;
 	h = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[u->house]);
-	fcn_00500bb0(&u->pb8, 0, (int) (10.0 * (h->unk_00d >= 9 ? 0.4f : h->unk_00d == 8 ? 0.6f : h->unk_00d == 7 ? 0.8f : 1.0f) * u->dist), 0);
+	gm_AddTime(&u->pb8, 0, (int) (10.0 * (h->unk_00d >= 9 ? 0.4f : h->unk_00d == 8 ? 0.6f : h->unk_00d == 7 ? 0.8f : 1.0f) * u->dist), 0);
 }

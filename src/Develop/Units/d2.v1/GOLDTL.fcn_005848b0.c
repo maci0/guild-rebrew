@@ -16,15 +16,15 @@ void __cdecl d2_SetForm(void *, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl io_AppendText(int);
 int __cdecl d2_CreateRadioGroup(int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0046fac0(int, int, char *, int);
-void __cdecl fcn_00469470(int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 int __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_00534160(int, int, int, int);
 void __cdecl fcn_00533a60(int, int, void *, int, int, int);
 void __cdecl fcn_00472640(void *, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(void *);
 void __cdecl fcn_00532ef0(void);
@@ -92,12 +92,12 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 	off = 0;
 	if (count > 0) {
 		do {
-			item[i] = fcn_0046f740(5, y - 0x19, 0x6c7, keep);
+			item[i] = d2_AddElementToWindow(5, y - 0x19, 0x6c7, keep);
 			fields = (int *)((char *)pt[0] + 0x34);
-			item[i] = fcn_0046f740(7, y - 0x17, fields[i % 2] + 0x639, keep);
+			item[i] = d2_AddElementToWindow(7, y - 0x17, fields[i % 2] + 0x639, keep);
 			ent = (int *)((unsigned int)g_1015ea0 + item[i] * 0x2f4);
 			ent[0x5c / 4] = 1;
-			fcn_00469470(idx, item[i]);
+			d2_AddToRadioGroup(idx, item[i]);
 			r = rec[off / 4];
 			rp = (char *)r;
 			io_FormatTextBuffer(buf, 0x68b3f8, *(unsigned int *)(0x14b5908 + *(int *)(rp + 0x10) * 4), *(unsigned int *)(0x14b596c + *(int *)(rp + 0x14) * 4));
@@ -170,7 +170,7 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(0x5848b0, 0x677c7));
+	} while (main_RunFrameLoop(0x5848b0, 0x677c7));
 	d2_ClearRadioGroup(idx);
 	fcn_00471e30(w);
 	fcn_00532ef0();

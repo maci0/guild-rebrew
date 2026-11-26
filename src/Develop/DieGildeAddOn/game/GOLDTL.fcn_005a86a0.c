@@ -2,7 +2,7 @@
 extern int g_675310, g_67530c, g_774658, g_774650, g_6a2520, d2_SuppressOverlay, d3_CameraHorizontalIndex, d3_CameraVerticalStep;
 void __cdecl fcn_00530510(void); void __cdecl sv_ClearObjectSelection(void);
 void __cdecl init_LoadObjektScene(int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0043aa30(int);
 void __cdecl fcn_005167c0(void*, int);
 void __cdecl fcn_00516c50(void*, void*);
@@ -64,7 +64,7 @@ void __cdecl fcn_005a86a0(void* a0)
 			d2_SuppressOverlay = 0;
 		}
 		*(unsigned short*) (*(int*) &g_7746c8 + 0x29) = *(unsigned short*)message;
-		fcn_004432d0(*(char*) (*(unsigned short*)message + (unsigned long)&init_SceneContextIndices), 0);
+		d3_SelectSceneContext(*(char*) (*(unsigned short*)message + (unsigned long)&init_SceneContextIndices), 0);
 		fcn_0043aa30(3);
 		fcn_005167c0(*(void**) &g_7746c8, *(unsigned short*)message);
 		fcn_00516c50(*(void**) &g_7746c8, message);
@@ -154,7 +154,7 @@ void __cdecl fcn_005a86a0(void* a0)
 		fcn_005312d0(*(int*) &evt_LastGfxScriptId);
 	}
 	fcn_0043a9c0(3);
-	fcn_004432d0(save10, 0);
+	d3_SelectSceneContext(save10, 0);
 	*(void**) &g_7746cc = 0;
 	*(unsigned short*) (*(int*) &g_7746c8 + 0x29) = 0xfd;
 	*(int*) &g_6791c8 = 0;

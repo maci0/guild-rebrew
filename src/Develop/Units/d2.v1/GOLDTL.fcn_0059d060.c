@@ -47,14 +47,14 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl fcn_004c35f0(void);
 int __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00529160(int, int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x0059d060 */
@@ -79,8 +79,8 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	n = io_AppendText(0x19ee, *(unsigned short*) (param + 0x27), param);
-	btn1 = fcn_00472250(dlg, 1, n);
-	btn2 = fcn_00472250(dlg, 1, n + 1);
+	btn1 = d2_GetWindowListItem(dlg, 1, n);
+	btn2 = d2_GetWindowListItem(dlg, 1, n + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0)
@@ -150,7 +150,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 				g_774654 = 1;
 			}
 		}
-		if (fcn_005373e0((void*) d2_RunTaschendiebstahlDialog, 0x677c7) == 0) {
+		if (main_RunFrameLoop((void*) d2_RunTaschendiebstahlDialog, 0x677c7) == 0) {
 			fcn_00471e30(dlg);
 			return flag;
 		}

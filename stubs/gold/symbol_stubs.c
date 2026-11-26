@@ -2770,10 +2770,7 @@ int __cdecl d3_AttachAnimationToContext(char* a, char* b, int c)
 	return 0;
 }
 
-int __cdecl d3_RemoveObjectAnimation(void)
-{
-	return 0;
-}
+
 
 int __cdecl fcn_004355d0(char* a, const char* b)
 {
@@ -2971,9 +2968,7 @@ int __cdecl fcn_00455140(char* a, float* b, float* c)
 	return 0;
 }
 
-void __cdecl d3_TransformPoint(void)
-{
-}
+
 
 int __cdecl fcn_00455910(char* e, int h, char* p)
 {

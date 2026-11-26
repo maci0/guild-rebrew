@@ -3,7 +3,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 extern void __cdecl he_FreeAction(void* a0);
-extern void __cdecl fcn_00500bb0(unsigned int* p, int a, int b, int c);
+extern void __cdecl gm_AddTime(unsigned int* p, int a, int b, int c);
 extern int __cdecl fcn_004c5620(int a, void* b);
 
 
@@ -18,7 +18,7 @@ void __cdecl fcn_005511a0(char* a0)
 			if (state == 0) {
 				if ((*(unsigned char*)(a0 + 0x78) & 2) != 0) {
 					*(pos14_7f4c00*)(a0 + 0x52) = gm_GameTime;
-					fcn_00500bb0((unsigned int*)(a0 + 0x52), 0, 2, 0);
+					gm_AddTime((unsigned int*)(a0 + 0x52), 0, 2, 0);
 					*(int*)(a0 + 0x84) = fcn_004c5620(-1, a0);
 				}
 			}

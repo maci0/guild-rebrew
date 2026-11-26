@@ -45,8 +45,8 @@ int __cdecl amt_SelectOfficeCandidates(ENTITY_RECORD*, int, Ent*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl d2_ShowOfficeApplicationDialog(void)
@@ -99,7 +99,7 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText(0x1a01);
 			for (i = 0; i < n; i++) {
-				btns[i] = fcn_00472250(dlg, 1, io_AppendText(0x1a04, list[i].x0 + 0x253));
+				btns[i] = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1a04, list[i].x0 + 0x253));
 			}
 			for (i = n; i < 6; i++) {
 				btns[i] = -1;
@@ -124,7 +124,7 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 				}
 			}
 		}
-	} while (fcn_005373e0((void*) d2_ShowOfficeApplicationDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowOfficeApplicationDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 }

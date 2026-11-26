@@ -35,7 +35,7 @@ void __cdecl he_FreeAction(Ent *);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
 void __cdecl fcn_004e97f0(int, int);
-void __cdecl fcn_00500bb0(GAME_TIMESTAMP *, int, int, int);
+void __cdecl gm_AddTime(GAME_TIMESTAMP *, int, int, int);
 int __cdecl fcn_004c5620(int, Ent *);
 int __cdecl fcn_004e9530(int);
 int __cdecl fcn_004e9730(int);
@@ -60,7 +60,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 	switch (e->state) {
 	case 0:
 		if (e->b0 == 0) {
-			fcn_00500bb0(&e->t, 0x18, 0, 0);
+			gm_AddTime(&e->t, 0x18, 0, 0);
 			e->t.hour = 0x11;
 			e->t.minute = 0;
 			e->ac = 0;
@@ -72,7 +72,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 		}
 		e->ac = fcn_004e9530(e->b0);
 		if (e->ac == 0) {
-			fcn_00500bb0(&e->t, 0x18, 0, 0);
+			gm_AddTime(&e->t, 0x18, 0, 0);
 			e->t.hour = 0x11;
 			e->t.minute = 0;
 			e->ac = 0;
@@ -117,7 +117,7 @@ void __cdecl fcn_0055aca0(Ent *e)
 		}
 		if (n == 2) {
 			e->t = (*(GAME_TIMESTAMP*)&gm_GameTime);
-			fcn_00500bb0(&e->t, 0, 5, 0);
+			gm_AddTime(&e->t, 0, 5, 0);
 			e->wait = fcn_004c5620(0, e);
 			return;
 		}

@@ -5,7 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 
 typedef struct slot_114 {
 	char pad0[0x14];
@@ -81,7 +81,7 @@ int __cdecl fcn_00524fc0(void* fp)
 			}
 		} else {
 			*(pos14_7f4c00*) (&p->pad18[0]) = gm_GameTime;
-			fcn_00500bb0(&p->pad18[0], i + 1, 0, 0);
+			gm_AddTime(&p->pad18[0], i + 1, 0, 0);
 		}
 		if (ls_SaveVersion >= 0x10040) {
 			if (!ls_ReadVfsDataChecked(&p->pad0[0xc], 4, 1, fp)) {

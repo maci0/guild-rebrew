@@ -24,11 +24,11 @@ void __cdecl he_FreeAction(char* e);
 void __cdecl fcn_00529160(char* e, int a, int id, char* rec);
 void __cdecl fcn_004c5c80(int owner);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* tag);
-void __cdecl fcn_00500bb0(int* pos, int a, int b, int c);
+void __cdecl gm_AddTime(int* pos, int a, int b, int c);
 int __cdecl fcn_00508da0(char* e);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 char* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_0050cf50(char* e, int n);
+int __cdecl gm_CalculateGebaeudeValue(char* e, int n);
 void __cdecl fcn_004c51a0(int a, int b, int c, int d);
 void __cdecl fcn_00545d40(int a, int b, char* text, int c, int d, char* tag);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g,
@@ -64,12 +64,12 @@ void __cdecl fcn_00553cd0(char* event)
 		fcn_004c5c80(*(int*) (record + 2));
 		fcn_004c5da0(*(int*) (record + 2), *(int*) (e + 1), -1, 0, 1, "BetriebsPr");
 		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
-		fcn_00500bb0((int*) (event + 0x52), 0, 10, 0);
+		gm_AddTime((int*) (event + 0x52), 0, 10, 0);
 		*(int*) (event + 0x70) = 1;
 		return;
 	case 1:
 		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
-		fcn_00500bb0((int*) (event + 0x52), 0, 4, 0);
+		gm_AddTime((int*) (event + 0x52), 0, 4, 0);
 		p = *(char**) ((char*) record + 0x184);
 		if (*(int*) (p + 0x128)) {
 			*(int*) (event + 0x70) = 1;
@@ -95,7 +95,7 @@ void __cdecl fcn_00553cd0(char* event)
 			*(int*) (event + 0x70) = 2;
 			return;
 		}
-		x = (int) (fcn_0050cf50(e, 100) * f * 0.07f);
+		x = (int) (gm_CalculateGebaeudeValue(e, 100) * f * 0.07f);
 		fcn_004c51a0((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id),
 			(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id), 0, x);
 		type = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_type);

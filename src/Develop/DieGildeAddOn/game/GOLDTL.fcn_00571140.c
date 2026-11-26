@@ -11,7 +11,7 @@ extern char* lpObjektePROT;
 double __cdecl fcn_0050fdb0(int, int, void*);
 int __cdecl gm_SearchTable67(int);
 void __cdecl fcn_00529160(int, int, int, void*);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00571140 */
 void __cdecl fcn_00571140(char* obj)
@@ -40,5 +40,5 @@ void __cdecl fcn_00571140(char* obj)
 			fcn_00529160(id, 0, *(unsigned short*) p, obj);
 		}
 	}
-	fcn_00500bb0(dst, 0, 0, 1);
+	gm_AddTime(dst, 0, 0, 1);
 }

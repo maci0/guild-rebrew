@@ -25,9 +25,9 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_005c9220(int*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004c5530(char* msg);
 void __cdecl fcn_004c6ae0(int id, int k);
 float __cdecl fcn_00507e70(void*, unsigned short*, int);
@@ -76,8 +76,8 @@ int __cdecl fcn_005c06e0(unsigned short* entityRecord)
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
 	t = io_AppendText(0x1759, r, (r != 1) + 0x1752, *entityRecord, *entityRecord);
-	h1 = fcn_00472250(dlg, 1, t);
-	h2 = fcn_00472250(dlg, 1, t + 1);
+	h1 = d2_GetWindowListItem(dlg, 1, t);
+	h2 = d2_GetWindowListItem(dlg, 1, t + 1);
 	memset(ids, 0xff, sizeof(ids));
 	ids[0] = dlg;
 	ids[1] = 2;
@@ -113,7 +113,7 @@ int __cdecl fcn_005c06e0(unsigned short* entityRecord)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005c06e0, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005c06e0, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 none:

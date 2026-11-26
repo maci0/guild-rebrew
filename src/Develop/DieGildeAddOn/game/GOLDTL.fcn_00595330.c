@@ -9,7 +9,7 @@ int __cdecl fcn_0050cce0(char*, void*, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_0046f100(int, int, int, int, int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0046f7e0(int, int, int, int, int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl d2_SetElementFont(int, int);
@@ -104,8 +104,8 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 			                   d2_CurrentWindowId);
 			g_row_handle(row) = idx;
 			*(int*) (idx * 0x3cc + 0x10161cc) = 0x54;
-			fcn_0046f740(0, 0, 0x74c, idx);
-			g_row_sub(row) = fcn_0046f740(0xd, 5, g_row_type(row) + 0xdf,
+			d2_AddElementToWindow(0, 0, 0x74c, idx);
+			g_row_sub(row) = d2_AddElementToWindow(0xd, 5, g_row_type(row) + 0xdf,
 			                              g_row_handle(row));
 			key = 0x26;
 			delta = 0x11;
@@ -217,7 +217,7 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 				g_row_extra(row) = -1;
 			}
 			if (g_row_extra(row) <= -1) {
-				g_row_extra(row) = fcn_0046f740(0xd, 5, state, g_row_handle(row));
+				g_row_extra(row) = d2_AddElementToWindow(0xd, 5, state, g_row_handle(row));
 			}
 			delta = *(int*) (found + 0x18) + *(int*) (found + 0x14);
 			if (*found == 4) {

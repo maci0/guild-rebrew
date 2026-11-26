@@ -18,11 +18,11 @@ void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl fcn_00468cd0(int, int);
 void __cdecl fcn_00468b80(int, int);
 void __cdecl fcn_00468bb0(int, int, int, int, int);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_00525f60(int, int);
 void __cdecl fcn_004c5530(int*);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -110,13 +110,13 @@ void __cdecl fcn_0058dbe0(int a0)
 	             *(int*) 0x14b5638);
 	d2_SetForm(dialogId, 2);
 	v30 = io_AppendText(0x40be);
-	v27 = fcn_00472250(dialogId, 2, v30);
-	v30 = fcn_00472250(dialogId, 2, v30 + 1);
+	v27 = d2_GetWindowListItem(dialogId, 2, v30);
+	v30 = d2_GetWindowListItem(dialogId, 2, v30 + 1);
 	g_100f1dc = -1;
 	do {
 		d2_SetForm(dialogId, 3);
 		io_AppendText(0x6811b0);
-		v6 = (fcn_00471f80(secondControl) + 2) * (fcn_00471f80(firstControl) + 2);
+		v6 = (d2_GetControlValue(secondControl) + 2) * (d2_GetControlValue(firstControl) + 2);
 		io_AppendText(0x40b9);
 		io_AppendText(0x40ba, v6);
 		if (g_14ce8e0) {
@@ -134,8 +134,8 @@ void __cdecl fcn_0058dbe0(int a0)
 					*(int*) ((char*) req + 8) = *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
 					*(int*) ((char*) req + 0xc) = *(int*) (a0 + 1);
 					*(pos14_7f4c00*) ((char*) req + 0x28) = gm_GameTime;
-					*(int*) ((char*) req + 0x5c) = fcn_00471f80(firstControl);
-					*(int*) ((char*) req + 0x60) = fcn_00471f80(secondControl);
+					*(int*) ((char*) req + 0x5c) = d2_GetControlValue(firstControl);
+					*(int*) ((char*) req + 0x60) = d2_GetControlValue(secondControl);
 					*(int*) ((char*) req + 0x58) = *(int*) (rec + 1);
 					fcn_004c5530(req);
 				label_58df76:
@@ -145,7 +145,7 @@ void __cdecl fcn_0058dbe0(int a0)
 				goto label_58df76;
 			}
 		}
-	} while (fcn_005373e0(0x58dbe0, 0x677c7));
+	} while (main_RunFrameLoop(0x58dbe0, 0x677c7));
 	fcn_00471e30(dialogId);
 	fcn_00532ef0();
 }

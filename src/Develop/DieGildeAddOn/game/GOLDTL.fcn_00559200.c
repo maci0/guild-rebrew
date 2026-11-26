@@ -10,7 +10,7 @@ extern char g_868080[];
 extern char g_7f4ca0[];
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl fcn_005091d0(int*, char*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
 char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
@@ -38,7 +38,7 @@ void __cdecl fcn_00559200(char* o)
 	n = 8;
 	switch (*(int*) (o + 0x70)) {
 	case 1:
-		fcn_00500bb0(o + 0x52, 0x18, 0, 0);
+		gm_AddTime(o + 0x52, 0x18, 0, 0);
 		*(unsigned short*) (o + 0x56) = 7;
 		*(int*) (o + 0x58) = 0;
 		*(int*) (o + 0x70) = 0;
@@ -89,7 +89,7 @@ void __cdecl fcn_00559200(char* o)
 			fcn_00402340(g, *(unsigned short*) (g + 4));
 		}
 		*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-		fcn_00500bb0(o + 0x52, 1, 0, 0);
+		gm_AddTime(o + 0x52, 1, 0, 0);
 		if (*(unsigned short*) (o + 0x56) >= 0x15)
 			*(int*) (o + 0x70) += 1;
 		break;

@@ -3,7 +3,7 @@
 #include "client_placement.h"
 
 #ifdef REBREW_GOLD
-void __cdecl fcn_00458a10(char* object, float* position, float* result);
+void __cdecl d3_TransformPoint(char* object, float* position, float* result);
 #else
 void __cdecl d3_TransformPoint(char* object, float* position, float* result);
 #endif
@@ -18,7 +18,7 @@ char __cdecl lc_MatchGebaeudeBauplatzNode(char* object, void* context)
 	result = context;
 	if (_strnicmp(object, "bk_", 3) == 0 || _strnicmp(object + 1, "bk_", 3) == 0) {
 #ifdef REBREW_GOLD
-		fcn_00458a10(object, (float*) (object + 0x4c), position);
+		d3_TransformPoint(object, (float*) (object + 0x4c), position);
 #else
 		d3_TransformPoint(object, (float*) (object + 0x4c), position);
 #endif

@@ -7,7 +7,7 @@ extern int __cdecl sprintf(char* buf, const char* fmt, ...);
 extern int ch_UpdateTime;
 extern unsigned int g_67529c;
 
-float __cdecl fcn_00444700(char* obj, float* pos);
+float __cdecl d3_ComputeYawToTarget(char* obj, float* pos);
 void __cdecl fcn_00438d70(int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x0040a200 */
@@ -27,7 +27,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 	inst = *(char**) (obj + 0x14);
 	if (*(float*) (obj + 0x108) < 0.0f) {
 		o = *(char**) (inst + 0x34);
-		turnDelta = fcn_00444700(o, (float*) (obj + 0x124));
+		turnDelta = d3_ComputeYawToTarget(o, (float*) (obj + 0x124));
 		base = *(float*) (o + 0x88);
 		*(float*) (obj + 0x108) = turnDelta;
 		if (turnDelta <= 0.04 && turnDelta >= -0.04) {
@@ -69,7 +69,7 @@ void __cdecl ch_WalkOnPathRotation(char* obj)
 	}
 	if (*(float*) (obj + 0x108) > 0.0f) {
 		o = *(char**) (inst + 0x34);
-		turnDelta = fcn_00444700(o, (float*) (obj + 0x124));
+		turnDelta = d3_ComputeYawToTarget(o, (float*) (obj + 0x124));
 		base = *(float*) (o + 0x88);
 		*(float*) (obj + 0x108) = turnDelta;
 		if (turnDelta <= 0.04 && turnDelta >= -0.04) {

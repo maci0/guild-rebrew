@@ -3,7 +3,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -24,7 +24,7 @@ void __cdecl fcn_0054aa70(char* u)
 	r2 = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 	stamp = (pos14_7f4c00*) (u + 0xc5);
 	*stamp = gm_GameTime;
-	fcn_00500bb0(stamp, 0x18, 0, 0);
+	gm_AddTime(stamp, 0x18, 0, 0);
 	*(short*) (u + 0xc9) = 0xa;
 	*(int*) (u + 0xcb) = 0;
 	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
@@ -49,7 +49,7 @@ void __cdecl fcn_0054aa70(char* u)
 			continue;
 		}
 		*stamp = *(pos14_7f4c00*) (p + 0xc5);
-		fcn_00500bb0(stamp, 0x18, 0, 0);
+		gm_AddTime(stamp, 0x18, 0, 0);
 		*(short*) (u + 0xc9) = 0xa;
 		*(int*) (u + 0xcb) = 0;
 	}

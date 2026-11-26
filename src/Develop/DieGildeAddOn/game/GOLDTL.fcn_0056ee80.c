@@ -26,7 +26,7 @@ void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 int __cdecl fcn_00529670(int, int);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl fcn_0055be70(int*);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 void __cdecl fcn_004c5ed0(int, char*, int);
@@ -104,7 +104,7 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 			}
 		}
 		*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
-		fcn_00500bb0(actionRecord + 0x52, 0, 4, 0);
+		gm_AddTime(actionRecord + 0x52, 0, 4, 0);
 		*(int*) (actionRecord + 0x70) = 1;
 		return;
 	}
@@ -123,13 +123,13 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 			i++;
 			if (i >= 8) {
 				*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
-				fcn_00500bb0(actionRecord + 0x52, 0, 0, 1);
+				gm_AddTime(actionRecord + 0x52, 0, 0, 1);
 				*(int*) (actionRecord + 0x70) = 2;
 				return;
 			}
 		}
 		*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
-		fcn_00500bb0(actionRecord + 0x52, 0, 4, 0);
+		gm_AddTime(actionRecord + 0x52, 0, 4, 0);
 		return;
 	}
 	case 2:
@@ -171,7 +171,7 @@ label_1bc:
 		}
 		*(int*) (actionRecord + 0x70) = 5;
 		*(pos14_7f4c00*) (actionRecord + 0x52) = gm_GameTime;
-		fcn_00500bb0(actionRecord + 0x52, 0, 0xf, 0);
+		gm_AddTime(actionRecord + 0x52, 0, 0xf, 0);
 		return;
 	case 3: {
 		int e;
@@ -188,7 +188,7 @@ label_1bc:
 				fcn_004c58b0(*(int*) h, *(int*) (e + 4));
 			}
 			*(int*) (actionRecord + 0x70) = 4;
-			fcn_00500bb0(actionRecord + 0x52, 0, 10, 0);
+			gm_AddTime(actionRecord + 0x52, 0, 10, 0);
 			return;
 		}
 		*(int*) (actionRecord + 0x70) = -1;
@@ -201,7 +201,7 @@ label_1bc:
 			return;
 		}
 		if (*(int*) (q + 0xd4) == *(int*) (actionRecord + 4)) {
-			fcn_00500bb0(actionRecord + 0x52, 0, 6, 0);
+			gm_AddTime(actionRecord + 0x52, 0, 6, 0);
 			return;
 		}
 		rec1 = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xac));

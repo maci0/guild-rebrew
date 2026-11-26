@@ -18,7 +18,7 @@ int __cdecl fcn_00469c30(int x, int y, int a3);
 void __cdecl d2_DestroyElement(int kind);
 int __cdecl fcn_004fdec0(char* name);
 int __cdecl gm_MapEntityStatRange(int arg);
-int __cdecl fcn_005373e0(int task, int time);
+int __cdecl main_RunFrameLoop(int task, int time);
 
 /* ADDRESS: GOLDTL 0x0053b6b0 */
 unsigned int __cdecl fcn_0053b6b0(int jobCode)
@@ -95,7 +95,7 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 
 
 
-	while (fcn_005373e0(0x53b6b0, 0x12d6)) {
+	while (main_RunFrameLoop(0x53b6b0, 0x12d6)) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 			selected = 0;
@@ -130,7 +130,7 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 			if (obj != 0) {
 				ch_CreateAction(obj, 0x38, 0);
 				do {
-					if (!fcn_005373e0(0, 0x12d6)) {
+					if (!main_RunFrameLoop(0, 0x12d6)) {
 						break;
 					}
 				} while (*(int*) ((char*) obj + 0x128) != 0);

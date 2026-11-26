@@ -18,7 +18,7 @@ int __cdecl fcn_00470820();
 int __cdecl fcn_00471af0();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl fcn_00471e30();
-int __cdecl fcn_00472250();
+int __cdecl d2_GetWindowListItem();
 int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
 int __cdecl fcn_004927c0();
@@ -38,7 +38,7 @@ int __cdecl io_FormatTextBuffer();
 int __cdecl d3_AnimateCameraToStoredTransform();
 int __cdecl fcn_00530510();
 int __cdecl fcn_005340f0();
-int __cdecl fcn_005373e0();
+int __cdecl main_RunFrameLoop();
 int __cdecl d2_ShowWirtshausRules();
 int __cdecl fcn_005a0cd0();
 int __cdecl fcn_005a1130();
@@ -122,9 +122,9 @@ void __cdecl d2_ShowWirtshausDialog(void)
     d2_SetForm(windowId,2);
     io_AppendText(0x1876);
     d2_SetForm(windowId,3);
-    v29 = fcn_00472250(windowId,3,io_AppendText(0x1877));
-    v28 = fcn_00472250(windowId,3,io_AppendText(0x1878));
-    v30 = fcn_00472250(windowId,3,io_AppendText(0x1879));
+    v29 = d2_GetWindowListItem(windowId,3,io_AppendText(0x1877));
+    v28 = d2_GetWindowListItem(windowId,3,io_AppendText(0x1878));
+    v30 = d2_GetWindowListItem(windowId,3,io_AppendText(0x1879));
     *(float *)(v7 + 0x5c) = *(float *)(v7 + 0x5c) * 0.66f - 0.1f;
   }
   else {
@@ -157,14 +157,14 @@ void __cdecl d2_ShowWirtshausDialog(void)
         fcn_00471af0(windowId,1);
       }
     }
-  } while (fcn_005373e0(0x5a1430,0x677c7));
+  } while (main_RunFrameLoop(0x5a1430,0x677c7));
   /* Phase 3: guest/order subdialog opened from the Wirtshaus menu. */
   if ((!v2) && (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8))) {
     d2_SetForm(windowId,3);
     io_AppendText(0x6811b0);
-    v11 = fcn_00472250(windowId,3,io_AppendText(0x187a));
-    v7 = fcn_00472250(windowId,3,io_AppendText(0x187b));
-    v8 = fcn_00472250(windowId,3,io_AppendText(0x187c));
+    v11 = d2_GetWindowListItem(windowId,3,io_AppendText(0x187a));
+    v7 = d2_GetWindowListItem(windowId,3,io_AppendText(0x187b));
+    v8 = d2_GetWindowListItem(windowId,3,io_AppendText(0x187c));
     (*(int *)&g_100f1dc) = -1;
     do {
       if ((*(int *)&g_100f1dc) != -1) {
@@ -180,7 +180,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
         fcn_004927c0(v3,&v14,v9);
         g_774654 = 1;
       }
-    } while (fcn_005373e0(0x5a1430,0x777c7));
+    } while (main_RunFrameLoop(0x5a1430,0x777c7));
     if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
       d2_SetForm(windowId,2);
       io_AppendText(0x6811b0);
@@ -197,7 +197,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
       do {
         if ((*(int *)&g_100f1dc) == 2)
           g_774654 = 1;
-      } while (fcn_005373e0(0x5a1430,0x777c7));
+      } while (main_RunFrameLoop(0x5a1430,0x777c7));
       if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
         fcn_00471e30(windowId);
         v22[1] = 2;
@@ -299,7 +299,7 @@ label_5a1b81:
                         v11 = v10[1];
                         if (fcn_00492950(&v14,v3,v11)) {
                           v9 = io_AppendText(&v10[3]);
-                          *v10 = fcn_00472250(windowId,4,v9);
+                          *v10 = d2_GetWindowListItem(windowId,4,v9);
                         }
                         else {
                           *v10 = -1;
@@ -336,7 +336,7 @@ label_5a1b81:
                         v10 = &v10[0x43];
                       } while (v11 < 3);
                     }
-                  } while (fcn_005373e0(0x5a1430,0x777c7));
+                  } while (main_RunFrameLoop(0x5a1430,0x777c7));
                 }
                 if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
                   fcn_005a1130(&v14,windowId);
@@ -345,7 +345,7 @@ label_5a1b81:
                   do {
                     if (g_14ce8e0)
                       g_774654 = 1;
-                  } while (fcn_005373e0(0x5a1430,0x777c7));
+                  } while (main_RunFrameLoop(0x5a1430,0x777c7));
                 }
               }
             }

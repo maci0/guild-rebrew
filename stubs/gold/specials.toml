@@ -480,3 +480,23 @@ impl = ""
 
 [specials.ReleaseVideoInterfaces]
 impl = ""
+
+# Real Gold bodies now define these (Gold twin naming, 2026-11-26).
+[specials.d3_RemoveObjectAnimation]
+impl = ""
+
+[specials.d3_TransformPoint]
+impl = ""
+
+[specials.d3_FindAnimByName]
+impl = ""
+
+[specials.d3_ReleaseAnim]
+impl = ""
+
+[specials.d3_RemoveObjectAnim]
+impl = ""
+
+[specials.fcn_004e4680]
+impl = ""
+

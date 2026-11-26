@@ -88,7 +88,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 char* __cdecl _strupr(char*);
 int __cdecl fcn_00597ff0(int, char*);
-int __cdecl fcn_00598150(char*, void**);
+int __cdecl d3_CollectUnusedSceneObjects(char*, void**);
 void* __cdecl fcn_005987c0(float*, void**);
 void __cdecl fcn_00598740(float*, char*);
 void __cdecl fcn_00598860(char*, float*);
@@ -115,7 +115,7 @@ char __cdecl d3_GridPointToWorld(char*, int, int, float*);
 void __cdecl d3_AnimateCameraToObject(char*);
 int __cdecl fcn_0052c9b0(void);
 void* __cdecl fcn_005bdc30(int, char*, int, void*, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 
 /* ADDRESS: GOLDTL 0x005988b0 */
 int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
@@ -189,7 +189,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 	if (fcn_00597ff0(gebaeudetyp, f.cOgrName) == 0) {
 		return 0;
 	}
-	f.iTreffer = fcn_00598150(f.cOgrName, (void**) f.pListe);
+	f.iTreffer = d3_CollectUnusedSceneObjects(f.cOgrName, (void**) f.pListe);
 	g_774a68 = (int) f.pListe;
 	f.fObjektPos[0] = 0.0f;
 	f.fObjektPos[1] = 0.0f;
@@ -381,7 +381,7 @@ platzieren:
 			}
 			g_774654 = 1;
 		}
-		if (fcn_005373e0((int) 0x5988b0, 0x657c7) == 0) {
+		if (main_RunFrameLoop((int) 0x5988b0, 0x657c7) == 0) {
 			break;
 		}
 		pNaechster = 0;

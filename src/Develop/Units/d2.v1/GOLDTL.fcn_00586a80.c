@@ -14,8 +14,8 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_005373e0(int (__cdecl*)(char*), int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl main_RunFrameLoop(int (__cdecl*)(char*), int);
 void __cdecl fcn_004ed190(char*);
 void __cdecl fcn_004eec10(char*);
 void __cdecl fcn_00471e30(int);
@@ -42,14 +42,14 @@ int __cdecl fcn_00586a80(char* a, int* unused)
 	io_AppendText(0x403d, 0x182);
 	d2_SetForm(h, 2);
 	s = io_AppendText(0x403e);
-	b1 = fcn_00472250(h, 2, s);
-	b2 = fcn_00472250(h, 2, s + 1);
+	b1 = d2_GetWindowListItem(h, 2, s);
+	b2 = d2_GetWindowListItem(h, 2, s + 1);
 	g_100f1dc = -1;
 	do {
 		p = fcn_004ec7d0(a);
 		if (p == 0) {
 			g_774654 = 1;
-			fcn_005373e0(fcn_00586a80, 0x20007);
+			main_RunFrameLoop(fcn_00586a80, 0x20007);
 			fcn_00471e30(h);
 			return 0;
 		}
@@ -65,7 +65,7 @@ int __cdecl fcn_00586a80(char* a, int* unused)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_00586a80, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_00586a80, 0x677c7) != 0);
 	fcn_00471e30(h);
 	return result;
 }

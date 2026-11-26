@@ -28,7 +28,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_00526010(void*, int, char);
 int __cdecl fcn_004c51a0(int, int, int, int);
 void __cdecl fcn_004c4510(char*, int);
@@ -38,7 +38,7 @@ unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_00545d40(int, int, char*, int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
 
@@ -77,8 +77,8 @@ void __cdecl fcn_005ab810(char* e, int unused)
 		io_AppendText(0x1976, p->id, d, 2 * (0x75 <= gm_GameTime) + 0x197a + 1 - p->state);
 		d2_SetForm((int) dlg, 2);
 		s = io_AppendText(0x1977);
-		firstButton = fcn_00472250((int) dlg, 2, s);
-		secondButton = fcn_00472250((int) dlg, 2, s + 1);
+		firstButton = d2_GetWindowListItem((int) dlg, 2, s);
+		secondButton = d2_GetWindowListItem((int) dlg, 2, s + 1);
 		g_100f1dc = -1;
 		do {
 			if (g_14ce8e0 != 0) {
@@ -117,7 +117,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 					g_774654 = 1;
 				}
 			}
-		} while (fcn_005373e0((void*) fcn_005ab810, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) fcn_005ab810, 0x677c7) != 0);
 		fcn_00471e30((int) dlg);
 	} else {
 		q = &((struct house*) g_7f4ca0)[*(unsigned short*) (e + 0x27)];
@@ -138,8 +138,8 @@ void __cdecl fcn_005ab810(char* e, int unused)
 		io_AppendText(0x1971, p->id, t, 2 * (0x75 <= gm_GameTime) + 0x197a + q->state);
 		d2_SetForm((int) dlg, 2);
 		s = io_AppendText(0x1972);
-		firstButton = fcn_00472250((int) dlg, 2, s);
-		secondButton = fcn_00472250((int) dlg, 2, s + 1);
+		firstButton = d2_GetWindowListItem((int) dlg, 2, s);
+		secondButton = d2_GetWindowListItem((int) dlg, 2, s + 1);
 		g_100f1dc = -1;
 		do {
 			if (g_14ce8e0 != 0) {
@@ -165,7 +165,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 					g_774654 = 1;
 				}
 			}
-		} while (fcn_005373e0((void*) fcn_005ab810, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) fcn_005ab810, 0x677c7) != 0);
 		fcn_00471e30((int) dlg);
 	}
 	fcn_00532ef0();

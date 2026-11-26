@@ -17,7 +17,7 @@ extern Slot_778da0 g_778da0[16];
 extern double g_664ef8;
 extern int g_774698;
 
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 
 void __cdecl fcn_005af160(unsigned char* p, int unused, int mode)
@@ -37,8 +37,8 @@ void __cdecl fcn_005af160(unsigned char* p, int unused, int mode)
 		kind = g_773d75;
 	}
 	for (i = 0; i < 8; i++) {
-		if (((Slot5ba7*)g_7796e0)[i].h != -1 && fcn_00471f80(((Slot5ba7*)g_7796e0)[i].h) != 0) {
-			n = fcn_00471f80(((Slot5ba7*)g_7796e0)[i].h);
+		if (((Slot5ba7*)g_7796e0)[i].h != -1 && d2_GetControlValue(((Slot5ba7*)g_7796e0)[i].h) != 0) {
+			n = d2_GetControlValue(((Slot5ba7*)g_7796e0)[i].h);
 			if (n != 0) {
 				if (rec->category == 10) {
 					v = (float) (fcn_0050bb50(((Slot5ba7*)g_7796e0)[i].id, (char) kind) * g_664ef8);
@@ -53,8 +53,8 @@ void __cdecl fcn_005af160(unsigned char* p, int unused, int mode)
 		}
 	}
 	for (i = 0; i < 16; i++) {
-		if (((Slot5ba7*)g_778da0)[i].h != -1 && fcn_00471f80(((Slot5ba7*)g_778da0)[i].h) != 0) {
-			n = fcn_00471f80(((Slot5ba7*)g_778da0)[i].h);
+		if (((Slot5ba7*)g_778da0)[i].h != -1 && d2_GetControlValue(((Slot5ba7*)g_778da0)[i].h) != 0) {
+			n = d2_GetControlValue(((Slot5ba7*)g_778da0)[i].h);
 			if (n != 0) {
 				if (rec->category == 10) {
 					v = (float) (fcn_0050bb50(((Slot5ba7*)g_778da0)[i].id, (char) kind) * g_664ef8);

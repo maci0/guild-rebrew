@@ -5,7 +5,7 @@ extern double g_6629c8;
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-int __cdecl fcn_00500bb0(unsigned int*, int, int, int);
+int __cdecl gm_AddTime(unsigned int*, int, int, int);
 int __cdecl fcn_00500cb0(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -52,7 +52,7 @@ void __cdecl fcn_005609c0(char* jobState)
 			}
 		}
 		*(pos14_7f4c00*) (jobState + 0x52) = gm_GameTime;
-		fcn_00500bb0((unsigned int*) (jobState + 0x52), 2, gm_RandomMod(0x1e), 0);
+		gm_AddTime((unsigned int*) (jobState + 0x52), 2, gm_RandomMod(0x1e), 0);
 		*(int*) (jobState + 0x70) = *(int*) (jobState + 0x70) + 1;
 		return;
 	case 1:

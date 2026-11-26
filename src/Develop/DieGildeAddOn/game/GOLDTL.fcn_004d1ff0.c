@@ -11,9 +11,9 @@ int __cdecl fcn_0044c310(char *, char *);
 int __cdecl fcn_0045b700(int, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004d1cf0(void);
-void __cdecl fcn_004c44a0(void);
+void __cdecl cm_BeginCommandSync(void);
 void __cdecl fcn_004c51f0(int, int, int, int, int, int);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_00535960(void);
 int __cdecl fcn_004d1970(int, char *);
@@ -217,12 +217,12 @@ void __cdecl fcn_004d1ff0(void *arg)
 	*(int *) &g_772e9c = gm_LookupEntityRecordById(*(int *) (o + 0x34));
 	*(int *) 0x772e98 = gm_LookupEntityRecordById(*(int *) (o + 0x38));
 	if (*(int *) (*(unsigned short *) &g_774970 * 0x21c + (unsigned long)&g_7f4ca4) == g_68b79c && (o[0x7c] & 1) != 0) {
-		fcn_004c44a0();
+		cm_BeginCommandSync();
 		for (p = (int *) (o + 0x100), i = 3; i != 0; i--, p++) {
 			if (*p != -1)
 				fcn_004c51f0(-2, -1, 0x154, 1, *(unsigned char *) &g_773d75, 0);
 		}
-		fcn_004c44b0();
+		cm_EndCommandSync();
 		while (fcn_004c44c0() == 0)
 			fcn_00535960();
 	}

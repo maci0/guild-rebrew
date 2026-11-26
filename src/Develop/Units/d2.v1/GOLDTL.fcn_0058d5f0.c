@@ -24,13 +24,13 @@ void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_00594340(void);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_0046f9b0(int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
@@ -138,7 +138,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 		i = *(int*) (0x1015f4c + d2_CurrentWindowId * 0x3cc) / 2 - 0x80;
 		j = 0x19;
 		for (count = 0; count < n; count++) {
-			h = fcn_0046f740(i, j, (int) ids[count] + 0xdf, d2_CurrentWindowId);
+			h = d2_AddElementToWindow(i, j, (int) ids[count] + 0xdf, d2_CurrentWindowId);
 			vp = (unsigned char*) &((D2_CONTROL_TL*)g_1015ea0)[h];
 			*(int*)&((D2_CONTROL_TL*)vp)->value_05c = 1;
 			*(int*)&((D2_CONTROL_TL*)vp)->flags_1d0 = 3;
@@ -155,7 +155,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00595e20((int) gebaeude, handles[3]);
 	fcn_005963f0(menu, 1, 0, (int) gebaeude);
-	sel = fcn_005373e0(0x58d5f0, 0x677c7);
+	sel = main_RunFrameLoop(0x58d5f0, 0x677c7);
 	while (sel) {
 		fcn_00595e20((int) gebaeude, handles[3]);
 		fcn_005963f0(menu, 1, 0, (int) gebaeude);
@@ -236,7 +236,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 					h = fcn_004c5530(&req);
 					if (h != -1) {
 						while (!fcn_004c4450(h)) {
-							fcn_005373e0(0, 0x20007);
+							main_RunFrameLoop(0, 0x20007);
 						}
 					}
 					main_LoopFlags = 0x677c7;
@@ -251,7 +251,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 			g_774654 = 1;
 		}
 next:
-		sel = fcn_005373e0(0x58d5f0, 0x677c7);
+		sel = main_RunFrameLoop(0x58d5f0, 0x677c7);
 		menu = ids[3];
 	}
 	sv_ClearObjectSelection();

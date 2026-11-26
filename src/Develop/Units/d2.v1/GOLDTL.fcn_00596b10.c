@@ -1,13 +1,13 @@
 extern char* g_1015ea0; /* 0x1015ea0, GUI pool, stride 0x2f4 */
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_SetForm(int k, int i);
-int __cdecl fcn_0046f740(int x, int y, int id, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 void __cdecl d2_SetElementImage(int element, int bild);
 int __cdecl fcn_00469c40(int x, int y, int a3);
 void __cdecl fcn_00596d70(int a0, int a1, int* rect, int w, int n,
                           unsigned int a5);
 void __cdecl ResetDisplayCounters(void);
-int __cdecl fcn_00471f80(int element);
+int __cdecl d2_GetControlValue(int element);
 void __cdecl d2_SetDisplayCounter(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00596b10 */
@@ -28,7 +28,7 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
     p = (int*) 0x778d50;
     do {
         if (*p == -1) {
-            *p = fcn_0046f740(0, 0, 0x743, *(int*) 0x772514);
+            *p = d2_AddElementToWindow(0, 0, 0x743, *(int*) 0x772514);
         }
         p += 5;
     } while ((int) p < 0x778da0);
@@ -95,7 +95,7 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
     p = (int*) 0x778db0;
     do {
         if (*p != -1) {
-            value = fcn_00471f80(*p);
+            value = d2_GetControlValue(*p);
             d2_SetDisplayCounter(p[-4] + 0xdf, value);
         }
         p += 0xe;
@@ -104,7 +104,7 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
     p = (int*) 0x7796f0;
     do {
         if (*p != -1) {
-            value = fcn_00471f80(*p);
+            value = d2_GetControlValue(*p);
             d2_SetDisplayCounter(p[-4] + 0xdf, value);
         }
         p += 0xe;

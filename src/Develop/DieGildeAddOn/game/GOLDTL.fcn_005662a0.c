@@ -9,7 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
 void __cdecl fcn_005662a0(char* o)
@@ -25,7 +25,7 @@ void __cdecl fcn_005662a0(char* o)
 	}
 	*(int*) (o + 0xb0) = -1;
 	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
+	gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
 	e = gm_LookupEntityRecordById(*(int*) (o + 0xac));
 	if (e == 0) {
 		he_FreeAction(o);

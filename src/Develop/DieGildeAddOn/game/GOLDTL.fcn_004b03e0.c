@@ -6,7 +6,7 @@ extern char g_7f4ca4[];
 
 void* __cdecl fcn_0050e4a0(int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl fcn_004ae130(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004c51a0(int, int, int, int);
@@ -26,7 +26,7 @@ int __cdecl fcn_004b03e0(int a1, int a2, char* arg)
 		return 0;
 	if (*arg != '-')
 		return 0;
-	scale = (float) fcn_0064eeec(arg + 1) * 0.01f;
+	scale = (float) atoi(arg + 1) * 0.01f;
 	for (i = 0; i < 0x300; i++) {
 		if (fcn_004ae130(i) != 0) {
 			fcn_004c51a0(*(int*) (obj + 2), *(int*) (g_7f4ca4 + i * 0x21c), 0,

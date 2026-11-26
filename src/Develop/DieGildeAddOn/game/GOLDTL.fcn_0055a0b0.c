@@ -15,7 +15,7 @@ int __cdecl fcn_004e8240(unsigned char, unsigned char*, unsigned char*, int, int
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x0055a0b0 */
@@ -48,7 +48,7 @@ void __cdecl fcn_0055a0b0(char* action)
 			p += 0x21c;
 		} while ((int) p < 0x85a0a2);
 		*(int*) (action + 0x70) = 0;
-		fcn_00500bb0((unsigned char*) action + 0x52, 1, 0, 0);
+		gm_AddTime((unsigned char*) action + 0x52, 1, 0, 0);
 		return;
 	} else {
 		if (idx >= 0 && idx < 6) {
@@ -92,7 +92,7 @@ void __cdecl fcn_0055a0b0(char* action)
 					r = r + 0x18;
 			}
 			(*(int*) (action + 0x70))++;
-			fcn_00500bb0((unsigned char*) action + 0x52, 1, 0, 0);
+			gm_AddTime((unsigned char*) action + 0x52, 1, 0, 0);
 			return;
 		}
 		he_FreeAction((unsigned char*) action);

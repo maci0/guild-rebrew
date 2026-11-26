@@ -14,7 +14,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl fcn_004c3030(int, int, char*, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_00423460(int);
 void __cdecl fcn_004237f0(int, int);
@@ -35,7 +35,7 @@ void __cdecl fcn_004b5530(int a1, int flags)
 	io_AppendText(0x7d);
 	fcn_0064d41a(buf, g_681110, *(int*) (r + 0xc));
 	x = fcn_004c3030(-7, 0, buf, -1);
-	while (fcn_005373e0(fcn_004b5530, flags) != 0) {
+	while (main_RunFrameLoop(fcn_004b5530, flags) != 0) {
 		if (g_14ce8e0 != 0)
 			g_774654 = 1;
 		if (g_100f1dc == 2)

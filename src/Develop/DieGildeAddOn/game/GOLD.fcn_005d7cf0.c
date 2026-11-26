@@ -21,7 +21,7 @@ extern char g_14cf950;
 extern float g_6a24e4;
 
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00473150(unsigned char*);
 void __cdecl d2_ClearScreen(void);
 void __cdecl fcn_00469e30(int);
@@ -40,7 +40,7 @@ void __cdecl fcn_005d7cf0(void)
 	speed = 4;
 	fade = fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 1);
 	while ((*fade & 4) == 0) {
-		fcn_005373e0(0, 0x24087);
+		main_RunFrameLoop(0, 0x24087);
 	}
 	fcn_00473150(fade);
 	fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 10);
@@ -52,7 +52,7 @@ void __cdecl fcn_005d7cf0(void)
 	(*(GOLD_GUI_WINDOW**)&g_77255c)->scroll = -g_fb9070;
 	i = 0;
 	d2_SuppressOverlay = 1;
-	while (fcn_005373e0(fcn_005d7cf0, 0x24087)) {
+	while (main_RunFrameLoop(fcn_005d7cf0, 0x24087)) {
 		if (g_14ce8e0 || g_14cf950) {
 			g_774654 = 1;
 		}
@@ -74,7 +74,7 @@ void __cdecl fcn_005d7cf0(void)
 	}
 	fade = fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 1);
 	while ((*fade & 4) == 0) {
-		fcn_005373e0(0, 0x24087);
+		main_RunFrameLoop(0, 0x24087);
 		(*(GOLD_GUI_WINDOW**)&g_77255c) = &g_f8f120[win];
 		if (i % speed == 0) {
 			(*(GOLD_GUI_WINDOW**)&g_77255c)->scroll++;

@@ -48,11 +48,11 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004c5530(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 void __cdecl sv_ClearObjectSelection(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl d2_ConfirmEinbruch(int unused, char* e)
@@ -87,8 +87,8 @@ int __cdecl d2_ConfirmEinbruch(int unused, char* e)
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
 	s = io_AppendText(0x19e4, p->entity_index, e);
-	btn1 = fcn_00472250(dlg, 1, s);
-	btn2 = fcn_00472250(dlg, 1, s + 1);
+	btn1 = d2_GetWindowListItem(dlg, 1, s);
+	btn2 = d2_GetWindowListItem(dlg, 1, s + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -126,7 +126,7 @@ int __cdecl d2_ConfirmEinbruch(int unused, char* e)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) d2_ConfirmEinbruch, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ConfirmEinbruch, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

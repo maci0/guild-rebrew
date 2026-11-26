@@ -1,6 +1,6 @@
 #include <string.h>
 
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl fcn_004f4830(int, void*);
 void __cdecl fcn_004f4860(unsigned short*, unsigned char, int);
 
@@ -44,7 +44,7 @@ int __cdecl fcn_004b0b30(int a1, int a2, char* arg)
 		if (*arg != '_')
 			return 0;
 		arg++;
-		n = fcn_0064eeec(arg);
+		n = atoi(arg);
 		id = ids[i];
 		r = (struct range_4b0b30*) names;
 		if (fcn_004f4830(id, r) == 0)

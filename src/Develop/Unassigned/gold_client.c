@@ -14,13 +14,13 @@ struct ref_f31161 {
 extern COMMAND_STATUS_SLOT g_fb5760[0x8000];
 #define g_f31161 ((struct ref_f31161 *)((char *)g_fb5760 + 1))
 
-void __cdecl fcn_004478e0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_FindRecordById(int);
 int __cdecl fcn_00502020(int);
 int __cdecl fcn_004e50a0(int);
 
-void __cdecl fcn_004478e0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0044aa10(int, int);
 
 /* ADDRESS: GOLD 0x00519ad0 */
@@ -31,14 +31,14 @@ void __cdecl fcn_00519ad0(void)
 	char* e;
 
 	save = g_633444;
-	fcn_004478e0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	for (i = 0; i < 0x100; i++) {
 		e = g_889f74 + i * 0xa9;
 		if (*e != 0 && *(char**) (e + 0x61) != 0) {
 			*(char**) (*(char**) (e + 0x61) + 0x200) = e;
 		}
 	}
-	fcn_004478e0(save, 1);
+	d3_SelectSceneContext(save, 1);
 	for (i = 0; i < 0x8000; i++) {
 		if (g_f31161[i].ref != 0) {
 			if (g_f31161[i].type == 1) {
@@ -65,7 +65,7 @@ int __cdecl fcn_00519b80(int a)
 	char* e;
 
 	save = g_633444;
-	fcn_004478e0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	for (i = 0; i < 0x100; i++) {
 		if (g_889f74[i * 0xa9] != 0 && *(char**) (g_889f74 + i * 0xa9 + 0x61) != 0) {
 			*(int*) (*(char**) (g_889f74 + i * 0xa9 + 0x61) + 0x200) =
@@ -79,6 +79,6 @@ int __cdecl fcn_00519b80(int a)
 			*(char**) (*(char**) (e + 0x61) + 0x200) = e;
 		}
 	}
-	fcn_004478e0(save, 1);
+	d3_SelectSceneContext(save, 1);
 	return 1;
 }

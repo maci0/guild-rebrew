@@ -18,8 +18,8 @@ void __cdecl d2_CenterDialogWindows(int a1);
 void __cdecl d2_SetOverlayAnimation(int a1, int a2);
 void __cdecl d2_SetForm(int a1, int a2);
 int __cdecl io_AppendText(int a1, int a2, int a3, int a4);
-int __cdecl fcn_00472250(int a1, int a2, int a3);
-int __cdecl fcn_005373e0(void* a1, int a2);
+int __cdecl d2_GetWindowListItem(int a1, int a2, int a3);
+int __cdecl main_RunFrameLoop(void* a1, int a2);
 void __cdecl fcn_00471e30(int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(void* a1, int a2);
@@ -69,8 +69,8 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dialogId, 1);
 	v9 = io_AppendText(0x19b9, *(unsigned short*) a0, 3, *(unsigned short*) a0);
-	v10 = fcn_00472250(dialogId, 1, v9);
-	v9 = fcn_00472250(dialogId, 1, v9 + 1);
+	v10 = d2_GetWindowListItem(dialogId, 1, v9);
+	v9 = d2_GetWindowListItem(dialogId, 1, v9 + 1);
 	*(int*) &g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0)
@@ -111,7 +111,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 			} else if (d2_CurrentElementId == v9)
 				g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) 0x5ae6a0, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) 0x5ae6a0, 0x677c7) != 0);
 	fcn_00471e30(dialogId);
 	return res;
 	}

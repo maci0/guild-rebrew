@@ -19,7 +19,7 @@ typedef struct {
 Rec21c* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004ae0f0(int);
 
@@ -73,7 +73,7 @@ int __cdecl fcn_004af050(int mode, int* pairs, int idx, char* text, void* out)
 		if (rest != 1) {
 			return 0;
 		}
-		sel = fcn_0064eeec(text + p);
+		sel = atoi(text + p);
 	}
 	if (sel < 0 || sel > 2) {
 		return 0;

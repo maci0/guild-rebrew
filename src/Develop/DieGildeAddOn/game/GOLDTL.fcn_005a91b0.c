@@ -9,7 +9,7 @@ extern char g_14cf950;
 extern int g_7746a0;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_IsTutorialActionAllowed(int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowTaxStatistics(void);
@@ -24,7 +24,7 @@ void __cdecl fcn_005a91b0(void)
 	int amt;
 
 	fcn_005338a0();
-	while (fcn_005373e0((void*) fcn_005a91b0, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) fcn_005a91b0, 0x67fff) != 0) {
 		if (d2_IsTutorialActionAllowed(0x200) == 1) {
 			kauf = RegisterStatusText("contact_GEB_KAUFEN", g_14ad250, 0x10);
 		} else {

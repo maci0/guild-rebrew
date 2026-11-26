@@ -33,7 +33,7 @@ char* __cdecl fcn_004ce190(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl sprintf(char*, const char*, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl fcn_00593550(void)
@@ -50,7 +50,7 @@ void __cdecl fcn_00593550(void)
 	for (i = 0; i < 8; i++) {
 		p = fcn_004ce190(g_774a34[i + 1]);
 		if (p != 0) {
-			h = fcn_0046f740(5, y, *(int*) (p + 0xc) + 0x59a, d2_CurrentWindowId);
+			h = d2_AddElementToWindow(5, y, *(int*) (p + 0xc) + 0x59a, d2_CurrentWindowId);
 			sprintf(buf, "%s %s %s ", p[0x10] == 0 ? g_14a5774 : g_14a579c, p + 0x12, p + 0x22);
 			if (*(int*) (p + 4) != 0) {
 				strcat(buf, g_14b5d54);

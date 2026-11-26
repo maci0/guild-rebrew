@@ -35,7 +35,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005c5da0(int, int, int, unsigned short, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_005c5e70(void);
 
 int __cdecl fcn_005c61e0(int);
@@ -44,7 +44,7 @@ void __cdecl d2_ConfirmUseObjekt(char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 int __cdecl fcn_00526120(int, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_005c61c0(void);
 void __cdecl fcn_00471e30(int);
 
@@ -69,7 +69,7 @@ void __cdecl d2_ShowInventoryDialog(void)
 	d2_SetForm(dlg, 0);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_005c5da0(d2_CurrentWindowId, 0, 0, g_774970, 0x1f3b);
-	if (fcn_005373e0((void*) d2_ShowInventoryDialog, 0x657c7) != 0) {
+	if (main_RunFrameLoop((void*) d2_ShowInventoryDialog, 0x657c7) != 0) {
 		do {
 			fcn_005c5e70();
 			if (g_100f1dc != -1 || CountDisplayCounters() != 0) {
@@ -91,7 +91,7 @@ void __cdecl d2_ShowInventoryDialog(void)
 			if (g_14ce8e0 != 0) {
 				if (CountDisplayCounters() != 0) {
 					for (i = 0; i < 6; i++) {
-						if (g_776c60[i].item != 0 && fcn_00471f80(g_776c60[i].btn) != 0) {
+						if (g_776c60[i].item != 0 && d2_GetControlValue(g_776c60[i].btn) != 0) {
 							d2_SetElementValue(g_776c60[i].btn, 0, 0x3e7, 0);
 						}
 					}
@@ -101,7 +101,7 @@ void __cdecl d2_ShowInventoryDialog(void)
 					g_774654 = 1;
 				}
 			}
-		} while (fcn_005373e0((void*) d2_ShowInventoryDialog, 0x657c7) != 0);
+		} while (main_RunFrameLoop((void*) d2_ShowInventoryDialog, 0x657c7) != 0);
 	}
 	fcn_005c61c0();
 	fcn_00471e30(dlg);

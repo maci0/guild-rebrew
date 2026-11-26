@@ -33,7 +33,7 @@ unsigned short* __cdecl gm_ResolveParentEntity(unsigned short* e);
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, int a, int b);
-int __cdecl fcn_0046f740(int x, int y, int kind, int owner);
+int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f, int g, int h);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -52,7 +52,7 @@ void __cdecl d2_OpenTransporterInfoPanel(unsigned short* e)
 			io_AppendText(g_6a2f74, *parent, *e * 2 + 0x9a8);
 			d2_SetForm(g_6a25b8, 0);
 			x = ((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1;
-			id = fcn_0046f740(x, 0x30, *e + 0xdf, d2_CurrentWindowId);
+			id = d2_AddElementToWindow(x, 0x30, *e + 0xdf, d2_CurrentWindowId);
 			((D2_CONTROL_TL*) g_1015ea0)[id].value_05c = 1;
 			if (*parent == g_774970) {
 				g_6a25e8 = fcn_0052dee0(x, 0xac, g_14b5e84);

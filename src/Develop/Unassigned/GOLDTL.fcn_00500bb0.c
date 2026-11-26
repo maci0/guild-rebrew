@@ -10,7 +10,7 @@ typedef struct {
 
 #pragma optimize("a", on)
 /* ADDRESS: GOLDTL 0x00500bb0 */
-void __cdecl fcn_00500bb0(Time* clock, int arg2, int arg3, int arg4)
+void __cdecl gm_AddTime(Time* clock, int arg2, int arg3, int arg4)
 {
 	unsigned short* p4 = &clock->hour;
 	int minutes;

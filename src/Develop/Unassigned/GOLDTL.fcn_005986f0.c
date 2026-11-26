@@ -2,7 +2,7 @@
 
 
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 #include "client_scene_transform.h"
 
 void __cdecl fcn_005986f0(float* result, char* object)
@@ -11,10 +11,10 @@ void __cdecl fcn_005986f0(float* result, char* object)
 	int saved;
 
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	v[0] = 0;
 	v[1] = 0;
 	v[2] = 0;
 	fcn_00455540(object, v, result);
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 }

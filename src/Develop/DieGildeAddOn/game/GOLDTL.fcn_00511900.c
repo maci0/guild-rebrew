@@ -15,8 +15,8 @@ extern int g_7747f8;
 #include "client_packet_builder.h"
 
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_004c44a0(void);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_BeginCommandSync(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_004c3ff0(void);
 void __cdecl fcn_004c4940(void);
@@ -57,7 +57,7 @@ void __cdecl fcn_00511900(int count, int size, int* faces)
 	bonus[2] = 0;
 	bonus[3] = 42;
 	bonus[4] = 84;
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	for (i = 0; i < count; i++) {
 		k = size;
 		while (k != 0) {
@@ -75,13 +75,13 @@ void __cdecl fcn_00511900(int count, int size, int* faces)
 			fcn_004c5150(-2, -1, (*(char*)&g_773d75), fcn_0050b750(gm_RandomMod(5000) + 5000, (*(char*)&g_773d75)));
 		}
 	}
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_004c3ff0();
 		fcn_004c4940();
 		ls_ID2Ptr();
 	}
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	for (i = 0; i < count; i++) {
 		p = fcn_004c4480(ids[i]);
 		if (g_7e1fa0[i] != 2) {
@@ -97,7 +97,7 @@ void __cdecl fcn_00511900(int count, int size, int* faces)
 			fcn_004c53a0();
 		}
 	}
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_004c3ff0();
 		fcn_004c4940();

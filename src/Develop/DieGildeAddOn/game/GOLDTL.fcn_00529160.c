@@ -24,10 +24,10 @@ extern void __cdecl fcn_004c53a0(void);
 extern char* __cdecl ch_CreateAction(char*, int, ...);
 extern int __cdecl fcn_00500e20(int*);
 extern int __cdecl init_EnsureObjektSceneContext(char*);
-extern int __cdecl fcn_005155e0(unsigned char*);
+extern int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char*);
 extern void* __cdecl evt_FindScriptById(int);
 extern void __cdecl evt_RequestScriptExit(char*);
-extern int __cdecl fcn_005373e0(void);
+extern int __cdecl main_RunFrameLoop(void);
 
 /* SIZE 0x188 */
 typedef struct {
@@ -86,7 +86,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		if (*(short*) a2 != 0xfd) {
 			contextIdx = init_EnsureObjektSceneContext(a2);
 		} else {
-			contextIdx = fcn_005155e0(activeRec);
+			contextIdx = init_AllocateGebaeudeSceneSlot(activeRec);
 		}
 		cls = fcn_00500e20((int*) &gm_GameTime);
 		tick = g_7f4c04 & 0xffff;

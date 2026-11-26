@@ -47,15 +47,15 @@ void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00468bb0(int, int, ...);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_00525f60(char*, int);
 int __cdecl fcn_005898f0(void*);
 void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004a5e60(unsigned short*, int, F8, int, float, int*);
 int __cdecl fcn_004c5530(void*);
 int __cdecl fcn_004c4450(int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
@@ -113,11 +113,11 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 	fcn_00468bb0(elem, 3, *(int*) 0x14b5320, *(int*) 0x14b5324, *(int*) 0x14b5328);
 	d2_SetForm(dlg, 3);
 	v16 = io_AppendText(0x4003);
-	confirmButton = fcn_00472250(dlg, 3, v16);
-	cancelButton = fcn_00472250(dlg, 3, v16 + 1);
+	confirmButton = d2_GetWindowListItem(dlg, 3, v16);
+	cancelButton = d2_GetWindowListItem(dlg, 3, v16 + 1);
 	g_100f1dc = -1;
 	do {
-		sel = fcn_00471f80(elem);
+		sel = d2_GetControlValue(elem);
 		v16 = sel;
 		d2_SetForm(dlg, 1);
 		io_AppendText(0x6811b0);
@@ -154,7 +154,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 					}
 					id = fcn_004c5530(&req);
 					while (id != -1 && fcn_004c4450(id) == 0) {
-						fcn_005373e0(0, 0x20007);
+						main_RunFrameLoop(0, 0x20007);
 					}
 					fcn_004c3030(-7, 0, (char*) 0x6a9508, 0);
 					g_774654 = 1;
@@ -163,7 +163,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) d2_RunSpyCabinetDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunSpyCabinetDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_00532ef0();
 }

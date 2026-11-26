@@ -75,7 +75,7 @@ void __cdecl fcn_0058b1f0(char*, DialogState*, unsigned int);
 void __cdecl fcn_0058b440(unsigned int, unsigned int*, int, int);
 char __cdecl fcn_004f1790(int, void*);
 void __cdecl fcn_00471af0(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x0058bb10 */
@@ -219,7 +219,7 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 			fcn_0058b440((unsigned int) a1, (unsigned int*) &st, cur, mode);
 			selft = st.selected;
 		}
-		if (fcn_005373e0((void*) 0x58bb10, 0x677c7) == 0) {
+		if (main_RunFrameLoop((void*) 0x58bb10, 0x677c7) == 0) {
 			fcn_00471e30(st.handle);
 			return;
 		}

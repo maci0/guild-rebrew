@@ -16,7 +16,7 @@ extern char s_6aa34c[];
 extern char s_6a9924[];
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl fcn_005944d0(char*);
@@ -45,7 +45,7 @@ void __cdecl d2_RunSchneiderMenu(char* obj, int arg)
 	trade = 0;
 	build = 0;
 	fcn_005338a0();
-	while (fcn_005373e0(d2_RunSchneiderMenu, 0x67fff)) {
+	while (main_RunFrameLoop(d2_RunSchneiderMenu, 0x67fff)) {
 		if (g_7746d8 & 0x200) {
 			info = RegisterStatusText(s_6ad414, g_14b5be4, 0x13);
 			trade = RegisterStatusText(s_6ad3f0, g_14ab314, 0x16);

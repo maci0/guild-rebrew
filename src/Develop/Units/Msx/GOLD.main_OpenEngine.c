@@ -55,8 +55,8 @@ void __cdecl fcn_00590650(void);
 void __cdecl gm_InitializeGameTables(char*);
 void __cdecl fcn_004eddf0(void);
 void __cdecl fcn_004fde90(void);
-void __cdecl fcn_005a8a70(void);
-float __cdecl fcn_00508820(int, int);
+void __cdecl ls_FreeList774a78(void);
+float __cdecl eval_ObjektPreis2Credits(int, int);
 void __cdecl fcn_0042b720(void);
 int __cdecl fcn_00425bc0(int, int, int, int, int);
 void __cdecl fcn_00417650(int);
@@ -77,7 +77,7 @@ void __cdecl fcn_004acbb0(void);
 void __cdecl fcn_004d27a0(void);
 void __cdecl fcn_004758e0(int);
 unsigned char* __cdecl fcn_004767c0(int, int, int, int, char*, int, int);
-void __cdecl fcn_005309d0(int, int);
+void __cdecl main_RunFrameLoop(int, int);
 #include "client_sprites.h"
 void __cdecl evt_InitScriptEngine(void);
 void __cdecl evt_RegisterCoreCommands(void);
@@ -121,14 +121,14 @@ int __cdecl main_OpenEngine(void)
 	gm_InitializeGameTables(path);
 	fcn_004eddf0();
 	fcn_004fde90();
-	fcn_005a8a70();
-	fcn_00508820(0x1d5, 100);
-	fcn_00508820(0x1d7, 100);
-	fcn_00508820(0x1d4, 100);
-	fcn_00508820(0x1da, 100);
-	fcn_00508820(0x1d9, 100);
-	fcn_00508820(0x1d6, 100);
-	fcn_00508820(0x1d8, 100);
+	ls_FreeList774a78();
+	eval_ObjektPreis2Credits(0x1d5, 100);
+	eval_ObjektPreis2Credits(0x1d7, 100);
+	eval_ObjektPreis2Credits(0x1d4, 100);
+	eval_ObjektPreis2Credits(0x1da, 100);
+	eval_ObjektPreis2Credits(0x1d9, 100);
+	eval_ObjektPreis2Credits(0x1d6, 100);
+	eval_ObjektPreis2Credits(0x1d8, 100);
 	if (g_6f257c != 0) {
 		fcn_0042b720();
 		if (fcn_00425bc0(10000000, 0x30, 2, 0x10, 44100) != 0) {
@@ -164,7 +164,7 @@ int __cdecl main_OpenEngine(void)
 	fcn_004758e0(screen);
 	fade = fcn_004767c0(0, 0, g_fb9072, g_fb9070, "BLACK", 0x5a, 1);
 	while ((*fade & 4) == 0) {
-		fcn_005309d0(0, 0x24087);
+		main_RunFrameLoop(0, 0x24087);
 	}
 	fcn_00476850(fade);
 	n = 0x8c;

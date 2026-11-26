@@ -1,12 +1,12 @@
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_1015ea0;
 extern int d2_CurrentWindowId;
@@ -61,10 +61,10 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 	menu = fcn_00470820(0, 0, (char*) 0x6816e8);
 	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 4);
-	active = fcn_00472250(menu, 4, io_AppendText(0x7d));
+	active = d2_GetWindowListItem(menu, 4, io_AppendText(0x7d));
 	d2_SetForm(menu, 2);
 	for (i = 0; i < count; i++) {
-		entry = fcn_0046f740((i % 4) << 6, (i / 4) << 6, values[i] + 0xdf,
+		entry = d2_AddElementToWindow((i % 4) << 6, (i / 4) << 6, values[i] + 0xdf,
 			d2_CurrentWindowId);
 		entries[i] = entry;
 
@@ -73,14 +73,14 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 		*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x1e4) = 0x525;
 	}
 	values[i] = 0;
-	entry = fcn_0046f740((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527,
+	entry = d2_AddElementToWindow((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527,
 		d2_CurrentWindowId);
 	entries[i] = entry;
 
 	*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x5c) = 1;
 	*(int*) ((char*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[entry]) + 0x1d0) = 3;
 
-	while (fcn_005373e0(0x4bea00, 0x657c7) != 0) {
+	while (main_RunFrameLoop(0x4bea00, 0x657c7) != 0) {
 
 
 		if (g_14ce8e0 != 0 || result != 0) {

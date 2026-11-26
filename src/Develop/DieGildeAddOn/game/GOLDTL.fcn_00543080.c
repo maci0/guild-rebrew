@@ -2,14 +2,14 @@ __declspec(dllimport) void __stdcall Sleep(unsigned long);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_0043a9c0();
 int __cdecl fcn_0043aa30();
-int __cdecl fcn_004432d0();
+int __cdecl d3_SelectSceneContext();
 int __cdecl fcn_0046ac30();
 int __cdecl fcn_00469e30();
-int __cdecl fcn_0046f740();
+int __cdecl d2_AddElementToWindow();
 int __cdecl fcn_00470820();
 int __cdecl fcn_00471d80();
 int __cdecl fcn_00471e30();
-int __cdecl fcn_00472250();
+int __cdecl d2_GetWindowListItem();
 int __cdecl fcn_00472380();
 int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
@@ -39,13 +39,13 @@ int __cdecl fcn_00500d60();
 int __cdecl fcn_005016c0();
 int __cdecl gm_FindNextFilteredEntity();
 int __cdecl gm_StartFilteredEntitySearch();
-int __cdecl fcn_005155e0();
+int __cdecl init_AllocateGebaeudeSceneSlot();
 int __cdecl io_AppendText();
 int __cdecl fcn_00522c0();
 int __cdecl fcn_00526120();
 int __cdecl fcn_005356b0();
 int __cdecl sv_WaitForNetworkSync();
-int __cdecl fcn_005373e0();
+int __cdecl main_RunFrameLoop();
 int __cdecl fcn_005421f0();
 int __cdecl fcn_005422c0();
 int __cdecl fcn_005435d0();
@@ -141,14 +141,14 @@ void __cdecl fcn_00543080(void)
 	while (v3) {
 		proto = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*v3];
 		if (*v3 == 0x1e) {
-			v5 = fcn_005155e0(v3);
+			v5 = init_AllocateGebaeudeSceneSlot(v3);
 			if (v5 != -1) {
 				v2 = d3_CurrentContextIndex;
-				fcn_004432d0((int) *(char*) (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v3].category + (unsigned long)&g_7f3b00), 1);
+				d3_SelectSceneContext((int) *(char*) (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*v3].category + (unsigned long)&g_7f3b00), 1);
 				fcn_0043aa30(3);
 				plt_UpdatePlantStages(*(unsigned int*) &v3[0x71]);
 				fcn_0043a9c0(3);
-				fcn_004432d0(v2, 1);
+				d3_SelectSceneContext(v2, 1);
 			}
 		} else if (proto->category == 7) {
 			*(int*)(v3 + 0x69) = 0;
@@ -229,12 +229,12 @@ void __cdecl fcn_00543080(void)
 			d2_SetForm(v2, 1);
 			io_AppendText(0x1ba0, *(int*) &g_774970 & 0xffff, *(int*) &g_774970 & 0xffff);
 			fcn_004c30a0(0xfffffff9, 0, 0x6a438c, 0xffffffff, 0);
-			v5 = fcn_005373e0(0x543080, 0x66087);
+			v5 = main_RunFrameLoop(0x543080, 0x66087);
 			while (v5) {
 				if (*(int*) &g_100f1dc == 2) {
 					g_774654 = 1;
 				}
-				v5 = fcn_005373e0(0x543080, 0x66087);
+				v5 = main_RunFrameLoop(0x543080, 0x66087);
 			}
 			fcn_00471e30(v2);
 			main_PlayOutroMovie();

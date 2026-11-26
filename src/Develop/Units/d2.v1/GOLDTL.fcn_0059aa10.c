@@ -38,10 +38,10 @@ int __cdecl d2_OpenDependencyDiagram(char*, char*, void*);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int);
 void __cdecl fcn_00527f10(char*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ShowTechTreeEffects(char*);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 void __cdecl fcn_0050f900(void);
@@ -103,9 +103,9 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 	}
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 4);
-	h = fcn_00472250(h, 4, io_AppendText(0x17e2));
+	h = d2_GetWindowListItem(h, 4, io_AppendText(0x17e2));
 	fcn_00527f10(a0);
-	while (fcn_005373e0((void*) d2_RunTechTreeDialog, 0x657c7)) {
+	while (main_RunFrameLoop((void*) d2_RunTechTreeDialog, 0x657c7)) {
 		if (g_14ce8e0)
 			g_774654 = 1;
 		if (g_100f1dc != -1 && d2_CurrentElementId == h)
@@ -214,7 +214,7 @@ wait:
 		if (s != -1) {
 wait_loop:
 			if (fcn_004c4450(s) == 0) {
-				fcn_005373e0(0, 0x657c7);
+				main_RunFrameLoop(0, 0x657c7);
 				goto wait_loop;
 			}
 		}

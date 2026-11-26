@@ -42,7 +42,7 @@ void __cdecl fcn_005ca560(Item*);
 void __cdecl fcn_005caaa0(int, int, int, Item*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005c91c0(char*, int, int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00471e30(int);
 
@@ -110,7 +110,7 @@ void __cdecl d2_ShowKircheTop5(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) d2_ShowKircheTop5, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowKircheTop5, 0x677c7) != 0);
 	fcn_00532ef0();
 	fcn_00471e30(dlg);
 }

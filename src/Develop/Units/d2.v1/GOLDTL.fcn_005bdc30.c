@@ -33,7 +33,7 @@ extern char* g_1015ea0;
 extern char* g_774a68;
 extern char g_10161bc[];
 
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_005b0dd0(MsgCtx*);
 void __cdecl fcn_005b0230(MsgCtx*);
 void __cdecl fcn_005b11f0(MsgCtx*);
@@ -63,7 +63,7 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 	}
 	fcn_005b0dd0(&ctx);
 	fcn_005b0230(&ctx);
-	while (fcn_005373e0((void*) fcn_005bdc30, 0x677c7) != 0) {
+	while (main_RunFrameLoop((void*) fcn_005bdc30, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

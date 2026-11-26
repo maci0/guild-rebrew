@@ -32,17 +32,17 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00517b10(char*, char*);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00533a60(int, int, int*, int, ...);
 int __cdecl d2_CreateRadioGroup(int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
-void __cdecl fcn_00469470(int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_SetBildArgument(int, int);
 void __cdecl fcn_00476b60(void);
 void __cdecl d2_SelectControl(int);
 int __cdecl d2_SetSlotVisibility(int, int);
-char* __cdecl fcn_00471f80(int);
+char* __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_UpdateRadioGroup(int);
@@ -51,7 +51,7 @@ int __cdecl fcn_004ce1d0(void);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004ce180(void);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_005373e0(int (__cdecl*)(void), int);
+int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 char* __cdecl itoa(int, char*, int);
 
 
@@ -99,9 +99,9 @@ int __cdecl fcn_005936f0(int msg, int param)
 	fcn_00517b10((char*) 0x9baa76, text);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1acf, text);
-	first = fcn_00472250(h, 1, io_AppendText(0x1ad0, 0x1ad2));
+	first = d2_GetWindowListItem(h, 1, io_AppendText(0x1ad0, 0x1ad2));
 	d2_SetForm(h, 2);
-	second = fcn_00472250(h, 2, io_AppendText(0x1ad1, 0x1ad3));
+	second = d2_GetWindowListItem(h, 2, io_AppendText(0x1ad1, 0x1ad3));
 	d2_SetForm(h, 3);
 	io_AppendText(0x1ad4);
 	fcn_00533a60(d2_CurrentWindowId, 0x1c, out, 2, g_14abe74, g_14abe78);
@@ -117,16 +117,16 @@ int __cdecl fcn_005936f0(int msg, int param)
 	cols = (*(int*) (d2_CurrentWindowId * 0x3cc + (int) g_1015f4c) - 0x20) / 0x30;
 	group = d2_CreateRadioGroup(0);
 	for (i = 0; i < 8; i++) {
-		ids[i] = fcn_0046f740((i % cols) * 0x30 + 0x50, (i / cols) * 0x30 + 0x20, i + 0x59a, d2_CurrentWindowId);
+		ids[i] = d2_AddElementToWindow((i % cols) * 0x30 + 0x50, (i / cols) * 0x30 + 0x20, i + 0x59a, d2_CurrentWindowId);
 		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_058 = 1;
 		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_038 = 0;
 		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_03c = 0;
 		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].value_060 = 1;
 		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].flags_1d0 = 3;
-		fcn_00469470(group, ids[i]);
+		d2_AddToRadioGroup(group, ids[i]);
 	}
 	d2_SetForm(h, 6);
-	elem6 = fcn_00472250(h, 6, io_AppendText(0x7e));
+	elem6 = d2_GetWindowListItem(h, 6, io_AppendText(0x7e));
 	d2_SetElementValue(first, g_7e23ea);
 	d2_SetElementValue(second, g_7e240a);
 	for (i = 0; i < 8; i++) {
@@ -193,7 +193,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 		}
 		if (redraw) {
 			for (i = 0; i < 5; i++) {
-				int slot = fcn_00472250(h, 0, i);
+				int slot = d2_GetWindowListItem(h, 0, i);
 				if (i <= sel)
 					d2_SetSlotVisibility(slot, 1);
 				else
@@ -207,7 +207,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 		}
 		if (sel == 0) {
 			if (g_14cf950 == 0x1c) {
-				s = fcn_00471f80(first);
+				s = d2_GetControlValue(first);
 				strcpy(g_7e23ea, s);
 				sel = 1;
 				redraw = 1;
@@ -216,7 +216,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 		}
 		else if (sel == 1) {
 			if (g_14cf950 == 0x1c) {
-				s = fcn_00471f80(second);
+				s = d2_GetControlValue(second);
 				strcpy(g_7e240a, s);
 				sel = 2;
 				redraw = 1;
@@ -284,7 +284,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 			}
 			g_774654 = 1;
 		}
-		if (fcn_005373e0((int (__cdecl*)(void)) 0x53d490, msg) == 0) {
+		if (main_RunFrameLoop((int (__cdecl*)(void)) 0x53d490, msg) == 0) {
 			d2_ClearRadioGroup(w8);
 			d2_ClearRadioGroup(w24);
 			d2_ClearRadioGroup(group);

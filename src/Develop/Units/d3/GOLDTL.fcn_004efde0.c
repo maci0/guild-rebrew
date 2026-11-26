@@ -44,7 +44,7 @@ extern pos14_7f4c00 g_772fe8;
 extern pos14_7f4c00 gm_GameTime;
 extern float g_6652c4;
 int __cdecl gm_GetElapsedMinutes(char*, char*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_005e9870(Sefde0Entry*);
 int __cdecl fcn_005e9da0(Sefde0Entry*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
@@ -72,7 +72,7 @@ void __cdecl fcn_004efde0(void)
 	g_772fe8 = gm_GameTime;
 	step *= g_662a3c;
 	save = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	for (slot = 0; slot < 8; slot++) {
 		if (SLOTS[slot].id != -1) {
 			count = 0;
@@ -155,5 +155,5 @@ void __cdecl fcn_004efde0(void)
 			}
 		}
 	}
-	fcn_004432d0(save, 1);
+	d3_SelectSceneContext(save, 1);
 }

@@ -11,7 +11,7 @@ extern int g_6b8484;
 extern int g_6b8300;
 extern int g_67a370;
 
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_DisposeObject(char* p);
 void __cdecl fcn_00452420(char* p);
 void __cdecl fcn_0043bcf0(int a);
@@ -34,7 +34,7 @@ void __cdecl fcn_004392c0(void)
 	saved = d3_CurrentContextIndex;
 	for (i = 0; i < 64; i++) {
 		if (i != saved && g_1043340[i].used != 0) {
-			fcn_004432d0(i, 1);
+			d3_SelectSceneContext(i, 1);
 			while (d3_ObjectListHead != d3_SceneObjectSentinel) {
 				d3_DisposeObject(d3_ObjectListHead);
 			}
@@ -57,7 +57,7 @@ void __cdecl fcn_004392c0(void)
 		}
 	}
 	if (saved != d3_CurrentContextIndex) {
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 	}
 	while (d3_ObjectListHead != d3_SceneObjectSentinel) {
 		d3_DisposeObject(d3_ObjectListHead);

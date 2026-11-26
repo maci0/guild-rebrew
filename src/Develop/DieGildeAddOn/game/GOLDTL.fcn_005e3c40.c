@@ -13,7 +13,7 @@ extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00533cf0(int);
 void __cdecl d2_ClearScreen(void);
 void __cdecl fcn_00473150(unsigned char*);
@@ -26,7 +26,7 @@ void __cdecl fcn_005e3c40(void)
 
 	p = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x1e, 1);
 	while (!(*p & 4)) {
-		fcn_005373e0(0, 0x24087);
+		main_RunFrameLoop(0, 0x24087);
 	}
 	if (g_774954 != 0) {
 		d2_ClearScreen();

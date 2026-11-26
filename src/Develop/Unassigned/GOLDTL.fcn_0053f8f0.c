@@ -3,7 +3,7 @@
 void __cdecl fcn_004230e0(int);
 
 /* ADDRESS: GOLDTL 0x0053f8f0 */
-void __cdecl fcn_0053f8f0(void)
+void __cdecl d3_FreeTable7e1d60(void)
 {
 	int* entry;
 

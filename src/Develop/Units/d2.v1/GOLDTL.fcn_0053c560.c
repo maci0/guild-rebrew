@@ -39,14 +39,14 @@ typedef void (__cdecl *VirtFn)(int, int, int, int);
 
 int __cdecl fcn_00533880(void);
 int __cdecl fcn_005338a0(void);
-int __cdecl fcn_004432d0(int, int);
+int __cdecl d3_SelectSceneContext(int, int);
 Figure *__cdecl ch_CreateCharacterAtSceneObject(char *, char *, int);
 int __cdecl fcn_00470820(int, int, char *);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_004e4b60(char *);
 int __cdecl fcn_00445f50(unsigned int, float, float, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00433780(void *);
@@ -105,7 +105,7 @@ int __cdecl d2_RunParentProfessionSelection(void)
 	memset((void *) 0x7e1fc0, -1, 0x18);
 	fcn_00533880();
 	fcn_005338a0();
-	fcn_004432d0(1, 0);
+	d3_SelectSceneContext(1, 0);
 	base = g_67a370;
 	if (base != 0) {
 		sub = *(int *) (base + 0x3c8);
@@ -140,7 +140,7 @@ int __cdecl d2_RunParentProfessionSelection(void)
 		*(int *) 0x6a37f8 = -1;
 	}
 	d2_SuppressOverlay = 0;
-	if (fcn_005373e0((int) d2_RunParentProfessionSelection, 0x12d6) != 0) {
+	if (main_RunFrameLoop((int) d2_RunParentProfessionSelection, 0x12d6) != 0) {
 		do {
 			if (flag) {
 				for (i = 4; i < 6; i++) {
@@ -227,12 +227,12 @@ slot_found:
 					fcn_00471af0(obj, 1);
 				}
 			}
-		} while (fcn_005373e0((int) d2_RunParentProfessionSelection, 0x12d6) != 0);
+		} while (main_RunFrameLoop((int) d2_RunParentProfessionSelection, 0x12d6) != 0);
 		if (ret == 1) {
 			spr = fcn_004730c0(0, 0, g_1040494,
 			    d2_ScreenHeight, (char *) 0x67d67c, 0x5a, 1);
 			while ((*(unsigned char *) spr & 4) == 0)
-				fcn_005373e0(0, 0xc6);
+				main_RunFrameLoop(0, 0xc6);
 		}
 	}
 	if (nnMann != 0)

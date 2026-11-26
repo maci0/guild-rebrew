@@ -1,5 +1,5 @@
 
-extern int __cdecl fcn_0046f740(int x, int y, int id, int ctx);
+extern int __cdecl d2_AddElementToWindow(int x, int y, int id, int ctx);
 extern int __cdecl io_FormatTextBuffer(char* dst, const char* fmt, ...);
 extern int __cdecl fcn_005c9090(char* text, int x, int y, int color, int flags);
 extern int __cdecl fcn_004677e0(int x, int y, int w, int a, int b, int c, int d, int ctx);
@@ -24,20 +24,20 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* row, int a5)
 	(void) a2;
 	v10 = ((D2_BILD_GROESSE*)g_772500)[0x5da].breite / 2 + a0;
 	v8 = a1 + 0x1c;
-	row[1] = fcn_0046f740(a0, v8, 0x5da, d2_CurrentWindowId);
+	row[1] = d2_AddElementToWindow(a0, v8, 0x5da, d2_CurrentWindowId);
 	row[2] = -1;
 	if (row[0] != 0) {
 		v5 = *(int*) (row[0] + 0x18c);
-		row[6] = fcn_0046f740(v10 - ((D2_BILD_GROESSE*)g_772500)[v5].breite / 2 - 3,
+		row[6] = d2_AddElementToWindow(v10 - ((D2_BILD_GROESSE*)g_772500)[v5].breite / 2 - 3,
 		                     a1 + 0x1d, v5, d2_CurrentWindowId);
-		fcn_0046f740(a0 + 3, a1 + 0x1f, row[7], d2_CurrentWindowId);
+		d2_AddElementToWindow(a0 + 3, a1 + 0x1f, row[7], d2_CurrentWindowId);
 		if (row[8])
-			fcn_0046f740(a0 + 3, ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 9 + a1,
+			d2_AddElementToWindow(a0 + 3, ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 9 + a1,
 			             row[8], d2_CurrentWindowId);
 		if (row[9])
-			fcn_0046f740(((D2_BILD_GROESSE*)g_772500)[0x5da].breite - 0x10 + a0,
+			d2_AddElementToWindow(((D2_BILD_GROESSE*)g_772500)[0x5da].breite - 0x10 + a0,
 			             a1 + 0x1f, row[9], d2_CurrentWindowId);
-		fcn_0046f740(((D2_BILD_GROESSE*)g_772500)[0x5da].breite - 0x10 + a0,
+		d2_AddElementToWindow(((D2_BILD_GROESSE*)g_772500)[0x5da].breite - 0x10 + a0,
 		             ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 9 + a1, row[10],
 		             d2_CurrentWindowId);
 		if (a5 && *(unsigned char*) (row[0] + 0xd))
@@ -71,9 +71,9 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* row, int a5)
 		kind = *(unsigned char*) (row[0] + 2);
 		if (kind != 5 && kind != 6 && kind != 7)
 			return 0;
-		fcn_0046f740(a0 - 0x20, v8, *(int*) (row[0] + 0x54), d2_CurrentWindowId);
+		d2_AddElementToWindow(a0 - 0x20, v8, *(int*) (row[0] + 0x54), d2_CurrentWindowId);
 	} else {
-		fcn_0046f740(v10 - ((D2_BILD_GROESSE*)g_772500)[0x4fb].breite / 2 - 3,
+		d2_AddElementToWindow(v10 - ((D2_BILD_GROESSE*)g_772500)[0x4fb].breite / 2 - 3,
 		             a1 + 0x1d, 0x4fb, d2_CurrentWindowId);
 	}
 	return 0;

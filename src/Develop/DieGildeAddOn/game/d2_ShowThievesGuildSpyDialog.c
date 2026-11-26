@@ -60,10 +60,10 @@ void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_SetForm(int h, int stage);
 int __cdecl io_AppendText(int id, int a, void* p);
-int __cdecl fcn_00472250(int h, int a, int b);
+int __cdecl d2_GetWindowListItem(int h, int a, int b);
 void __cdecl fcn_004c5530(void* p);
 void __cdecl fcn_004c35f0(void);
-int __cdecl fcn_005373e0(void* fn, int msg);
+int __cdecl main_RunFrameLoop(void* fn, int msg);
 void __cdecl fcn_00471e30(int h);
 void __cdecl fcn_005305a0(void);
 
@@ -133,8 +133,8 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 				d2_SetOverlayAnimation(0, 0);
 				d2_SetForm((int) dlg, 1);
 				r1 = io_AppendText(0x19f7, (int) ent->id, obj);
-				cnt = fcn_00472250((int) dlg, 1, r1);
-				r1 = fcn_00472250((int) dlg, 1, r1 + 1);
+				cnt = d2_GetWindowListItem((int) dlg, 1, r1);
+				r1 = d2_GetWindowListItem((int) dlg, 1, r1 + 1);
 				g_100f1dc = -1;
 				do {
 					if (g_14ce8e0) {
@@ -175,7 +175,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 							g_774654 = 1;
 						}
 					}
-				} while (fcn_005373e0(d2_ShowThievesGuildSpyDialog, 0x677c7));
+				} while (main_RunFrameLoop(d2_ShowThievesGuildSpyDialog, 0x677c7));
 				fcn_00471e30((int) dlg);
 				fcn_005305a0();
 				return ret;

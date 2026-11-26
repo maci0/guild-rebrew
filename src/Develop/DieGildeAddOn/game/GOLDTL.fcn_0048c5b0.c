@@ -66,7 +66,7 @@ int __cdecl fcn_004c5150(int, int, char, int);
 int __cdecl fcn_004c4eb0(char*);
 int __cdecl fcn_004c4ef0(char*);
 int __cdecl fcn_004c51f0(int, int, short, int, char, int);
-int __cdecl fcn_00500bb0(void*, int, int, int);
+int __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_QueryEntitySum(int, int);
 
 /* ADDRESS: GOLDTL 0x0048c5b0 */
@@ -108,7 +108,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			m.p30 = g_7f4c08;
 			m.p34 = g_7f4c0c;
 			m.flag2 = 1;
-			fcn_00500bb0(&m.p28, 0, 0, 10);
+			gm_AddTime(&m.p28, 0, 0, 10);
 			m.f58 = *(int*) (ent + 2);
 			m.slots[0] = 5;
 			m.ids[4] = 0;

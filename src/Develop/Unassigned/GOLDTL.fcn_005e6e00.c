@@ -16,7 +16,7 @@ int __cdecl fcn_00470820(int, int, char *);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl io_AppendText(char *, ...);
-int __cdecl fcn_005373e0(void *, int);
+int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005e6ba0(void);
 int __cdecl fcn_004a6bb0(char *, void *);
@@ -29,7 +29,7 @@ void __cdecl fcn_00471af0(int, int);
 int __cdecl fcn_005e7e30(void);
 void __cdecl fcn_005e7b70(int, int, void *);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_004a8750(int);
 
 /* ADDRESS: GOLDTL 0x005e6e00 */
@@ -81,7 +81,7 @@ int __cdecl fcn_005e6e00(void)
             if (!D(0x776650)) {
                 strcpy(text, (char *)D(0x14b5c60)); io_AppendText(text);
                 if (g_100f1dc != -1 && D(0x6ad56c) == D(0x67d370)) {
-                    choice = fcn_00471f80(D(0x6ad580));
+                    choice = d2_GetControlValue(D(0x6ad580));
                     D(0x77664c) = fcn_0050b750(choice, g_773d75);
                     flags = fcn_004a6f50();
                 }
@@ -109,7 +109,7 @@ int __cdecl fcn_005e6e00(void)
             if (g_100f1dc != -1) {
                 if (D(0x6ad56c) == D(0x67d370)) {
                     if (!D(0x776650)) {
-                        choice = fcn_00471f80(D(0x6ad580));
+                        choice = d2_GetControlValue(D(0x6ad580));
                         D(0x77664c) = fcn_0050b750(choice, g_773d75);
                     }
                     flags = fcn_004a6f50();
@@ -138,7 +138,7 @@ int __cdecl fcn_005e6e00(void)
             if (g_100f1dc != -1) {
                 if (D(0x6ad56c) == D(0x67d370)) {
                     if (!D(0x776650)) {
-                        choice = fcn_00471f80(D(0x6ad580));
+                        choice = d2_GetControlValue(D(0x6ad580));
                         D(0x77664c) = fcn_0050b750(choice, g_773d75);
                     }
                     flags = fcn_004a6f50();
@@ -228,7 +228,7 @@ int __cdecl fcn_005e6e00(void)
             if (g_100f1dc != -1) {
                 if (D(0x6ad56c) == D(0x67d370)) {
                     if (!D(0x776650)) {
-                        choice = fcn_00471f80(D(0x6ad580));
+                        choice = d2_GetControlValue(D(0x6ad580));
                         D(0x77664c) = fcn_0050b750(choice, g_773d75);
                     }
                     flags = fcn_004a6f50();
@@ -254,7 +254,7 @@ int __cdecl fcn_005e6e00(void)
             if (g_100f1dc != -1 && D(0x6ad578) == D(0x67d370)) g_774654 = 1;
             break;
         }
-    } while (fcn_005373e0((void *)fcn_005e6e00, 0x777c7));
+    } while (main_RunFrameLoop((void *)fcn_005e6e00, 0x777c7));
     fcn_005e6dd0();
     return 1;
     }
@@ -263,7 +263,7 @@ int __cdecl fcn_005e6e00(void)
     d2_CenterDialogWindows(D(0x6ad568));
     io_FormatTextBuffer(text, 0x4239, 0x4238);
     io_AppendText(text);
-    while (fcn_005373e0((void *)fcn_005e6e00, 0x777c7)) {
+    while (main_RunFrameLoop((void *)fcn_005e6e00, 0x777c7)) {
         if (g_14ce8e0 || B(0x14cf701)) g_774654 = 1;
     }
     fcn_00471e30(dialog);

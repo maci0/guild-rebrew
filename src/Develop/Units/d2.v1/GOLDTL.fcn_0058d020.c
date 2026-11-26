@@ -10,8 +10,8 @@ int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0058c4f0(char*, int, int, int*, int*);
-int __cdecl fcn_00472250(int, int, int);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
+int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_0058cda0(char*, int);
 void __cdecl fcn_00471af0(int, int);
@@ -35,7 +35,7 @@ void __cdecl d2_OpenRentAGraveDialog(char* a0)
 	io_AppendText(0x410a, 0x4108);
 	fcn_0058c4f0(a0, dlg, 2, ids, &sel);
 	d2_SetForm(dlg, 3);
-	task = fcn_00472250(dlg, 3, io_AppendText(0x6a4078, 0x4117));
+	task = d2_GetWindowListItem(dlg, 3, io_AppendText(0x6a4078, 0x4117));
 	selected = sel; g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -57,6 +57,6 @@ void __cdecl d2_OpenRentAGraveDialog(char* a0)
 				}
 			}
 		}
-	} while (fcn_005373e0(0x58d020, 0x677c7) != 0);
+	} while (main_RunFrameLoop(0x58d020, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 }

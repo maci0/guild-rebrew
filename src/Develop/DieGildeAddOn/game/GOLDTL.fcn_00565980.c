@@ -1,7 +1,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00500bb0(char* dst, int a, int b, int c);
+void __cdecl gm_AddTime(char* dst, int a, int b, int c);
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl fcn_004bcc50(int a, int b);
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -19,7 +19,7 @@ void __cdecl fcn_00565980(char* obj)
 	int v;
 
 	*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-	fcn_00500bb0(obj + 0x52, 0, 0, 1);
+	gm_AddTime(obj + 0x52, 0, 0, 1);
 	*(int*) (obj + 0x70) = 0;
 	e = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0xac));
 	if (e != 0) {

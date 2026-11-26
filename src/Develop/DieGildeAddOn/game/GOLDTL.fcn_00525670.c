@@ -20,7 +20,7 @@ extern int __cdecl gm_FindRecordById(int);
 extern int __cdecl he_StartHandlungSearch(int, int, int);
 extern int __cdecl gm_SearchTable67(int);
 extern int __cdecl cut_FindCutsceneById(int);
-extern void __cdecl fcn_004432d0(int, int);
+extern void __cdecl d3_SelectSceneContext(int, int);
 extern void __cdecl fcn_005290d0(char*);
 extern void __cdecl fcn_00573e10(char*);
 extern void __cdecl fcn_00510100(void);
@@ -114,7 +114,7 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 		v9++;
 	}
 	savedContext = d3_CurrentContextIndex;
-	fcn_004432d0(0, 0);
+	d3_SelectSceneContext(0, 0);
 	for (r = (char*) 0x77e980; (int) r < 0x7d1980; r += 0x14c) {
 		if (!*(unsigned char*) r)
 			continue;
@@ -161,7 +161,7 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 			    *(unsigned char*) (r + 0x14) + *(unsigned char*) (r + 0x18);
 		}
 	}
-	fcn_004432d0(savedContext, 0);
+	d3_SelectSceneContext(savedContext, 0);
 	for (q = (int*) 0x7d2020; (int) q < 0x7dc420; q += 0x29) {
 		v9 = *q;
 		if (v9)

@@ -6,7 +6,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl d3_GetContextIndex(int p);
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_RemoveObjectAnim(int h);
 
 void __cdecl fcn_00403870(char* e);
@@ -22,7 +22,7 @@ void __cdecl ch_SetLowPolyMode(unsigned char mode)
 	do {
 		e = *p;
 		if (e != 0) {
-			fcn_004432d0(d3_GetContextIndex(*(int*) (e + 0x88)), 1);
+			d3_SelectSceneContext(d3_GetContextIndex(*(int*) (e + 0x88)), 1);
 			if (mode == 2) {
 				if (*(int*) (e + 0x22c) != 0) {
 					d3_RemoveObjectAnim(*(int*) (e + 0x22c));
@@ -37,5 +37,5 @@ void __cdecl ch_SetLowPolyMode(unsigned char mode)
 		p++;
 	} while ((int) p < (int) (((char**)ch_CharacterSlots) + 0x300));
 	ch_LowPolyMode = 2 - mode;
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 }

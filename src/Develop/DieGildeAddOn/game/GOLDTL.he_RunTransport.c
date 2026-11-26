@@ -37,7 +37,7 @@ int __cdecl fcn_004c0240(void *, char);
 int __cdecl fcn_004c0460(void *, char);
 void __cdecl fcn_004c5790(int, void *);
 void __cdecl fcn_004c6530(int);
-int __cdecl fcn_00500bb0(char *, int, int, int);
+int __cdecl gm_AddTime(char *, int, int, int);
 int __cdecl fcn_00500cb0(char *, int);
 char *__cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050c710(char *, int, int);
@@ -94,7 +94,7 @@ void __cdecl he_RunTransport(char *e)
 			break;
 		}
 		*(int *)(e + 0xe8) = -1;
-		fcn_00500bb0(e + 0x52, 0, 0, 1);
+		gm_AddTime(e + 0x52, 0, 0, 1);
 		*(int *)(e + 0x84) = fcn_004c5620(*(int *)(e + 0x70) + 1, e);
 		return;
 	case 1:
@@ -130,7 +130,7 @@ void __cdecl he_RunTransport(char *e)
 		*(pos14_7f4c00 *)(e + 0x60) = gm_GameTime;
 		r = e + 0x52;
 		*(pos14_7f4c00 *)r = gm_GameTime;
-		fcn_00500bb0(r, 0, 5, 0);
+		gm_AddTime(r, 0, 5, 0);
 		if (*(int *)(e + 0xd4) == 5) {
 			gm_ResolveEntityById(0, &q, 0, *(int *)(e + 0xac));
 			if ((unsigned short)gm_RandomMod(0x1e) > *(unsigned char *)(q + 0x12)) {
@@ -181,7 +181,7 @@ void __cdecl he_RunTransport(char *e)
 			*(int *)(e + 0xec) = -1;
 			gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
 			stamp = gm_GameTime;
-			fcn_00500bb0((char *)&stamp, 0, 0, 1);
+			gm_AddTime((char *)&stamp, 0, 0, 1);
 			r = (char *)gm_StartFilteredEntitySearch(1, 1, *(int *)(e + 0xb4));
 			v = *(int *)(r + 1);
 			fcn_004c5790(4, &v);
@@ -236,7 +236,7 @@ void __cdecl he_RunTransport(char *e)
 		}
 		r = e + 0x52;
 		*(pos14_7f4c00 *)r = gm_GameTime;
-		fcn_00500bb0(r, 0, 0xf, 0);
+		gm_AddTime(r, 0, 0xf, 0);
 		return;
 	case -2:
 		fcn_00549330(e, *gm_CityEntity);

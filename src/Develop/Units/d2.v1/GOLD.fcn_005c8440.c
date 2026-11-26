@@ -49,11 +49,11 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005c9090(char*, int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl fcn_005c8440(void)
@@ -96,7 +96,7 @@ void __cdecl fcn_005c8440(void)
 	d2_SetForm(dlg, 2);
 	for (i = 0; i < count; i++) {
 		fl = (int) (list[i].f1c * 100.0f);
-		h = fcn_0046f740(0x28, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2),
+		h = d2_AddElementToWindow(0x28, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2),
 			((House*)g_7f4ca0)[list[i].id].f54, d2_CurrentWindowId);
 		((Slot*)g_f8f080)[h].shown = 1;
 		((Slot*)g_f8f080)[h].style = 3;
@@ -115,7 +115,7 @@ void __cdecl fcn_005c8440(void)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_005c8440, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005c8440, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	fcn_0057e880(10, 0, 1, 0);
 }

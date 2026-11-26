@@ -9,8 +9,8 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00471f80(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetControlValue(int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 #include "d2_gui.h"
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -22,7 +22,7 @@ int __cdecl fcn_004f4860(char*, unsigned char, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_00525f60(char*, int);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 
 /* ADDRESS: GOLDTL 0x005d6540 */
 int __cdecl fcn_005d6540(char* a0, int* a1)
@@ -98,24 +98,24 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 	switch (*(unsigned char*) ((char*) rec + 1)) {
 	case 0:
 		id = io_AppendText(0x13d0, id, 0x13d3);
-		ctl = fcn_00472250(dlg, 1, id);
-		box = fcn_00472250(dlg, 1, id + 1);
+		ctl = d2_GetWindowListItem(dlg, 1, id);
+		box = d2_GetWindowListItem(dlg, 1, id + 1);
 		d2_SetElementValue(ctl, rec[1], rec[2], rec[6]);
 		break;
 	case 1:
 		id = io_AppendText(0x13da, id, 0x13dd, rec[6] + 0x13dd);
-		ctl = fcn_00472250(dlg, 1, id);
-		box = fcn_00472250(dlg, 1, id + 1);
+		ctl = d2_GetWindowListItem(dlg, 1, id);
+		box = d2_GetWindowListItem(dlg, 1, id + 1);
 		add = 0x13dd;
 		break;
 	case 2:
-		ctl = fcn_00472250(dlg, 1, io_AppendText(0x13e3, id, id, 0x13e7 - rec[6]));
+		ctl = d2_GetWindowListItem(dlg, 1, io_AppendText(0x13e3, id, id, 0x13e7 - rec[6]));
 		keep = 0;
 		break;
 	case 3:
 		id = io_AppendText(0x13e9, 0x13ec, rec[6] + 0x13ec);
-		ctl = fcn_00472250(dlg, 1, id);
-		box = fcn_00472250(dlg, 1, id + 1);
+		ctl = d2_GetWindowListItem(dlg, 1, id);
+		box = d2_GetWindowListItem(dlg, 1, id + 1);
 		add = 0x13ec;
 		break;
 	default:
@@ -124,7 +124,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 	g_100f1dc = -1;
 	do {
 		if (keep) {
-			if (fcn_00471f80(ctl) - add != rec[6] && box != -1) {
+			if (d2_GetControlValue(ctl) - add != rec[6] && box != -1) {
 				fcn_00472640(box, 1);
 			} else {
 				fcn_00472640(box, 0);
@@ -139,7 +139,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 					if (*(unsigned char*) ((char*) rec + 1) == 2) {
 						delta = 1 - rec[6];
 					} else {
-						delta = fcn_00471f80(ctl) - add;
+						delta = d2_GetControlValue(ctl) - add;
 					}
 					r = 0x80;
 					idx = fcn_004f4860(a0, *(unsigned char*) rec, delta);
@@ -156,7 +156,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005d6540, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005d6540, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

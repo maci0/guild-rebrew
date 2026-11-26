@@ -40,7 +40,7 @@ extern char g_868060[];
 
 void __cdecl d2_SetForm(int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl io_FormatTextBuffer(void*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
@@ -59,7 +59,7 @@ void __cdecl fcn_005a5760(Row* rows, int window, int form, int a4)
 		if (a4 != 0) {
 			rows[i].icon = fcn_00466ee0((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, 0x82, d2_CurrentWindowId);
 		} else {
-			rows[i].icon = fcn_0046f740((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, d2_CurrentWindowId);
+			rows[i].icon = d2_AddElementToWindow((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, d2_CurrentWindowId);
 			((D2_CONTROL_TL*) g_1015ea0)[rows[i].icon].value_05c = 1;
 		}
 		((D2_CONTROL_TL*) g_1015ea0)[rows[i].icon].value_054 = 1;

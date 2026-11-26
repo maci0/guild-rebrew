@@ -3,7 +3,7 @@
 extern int d2_CurrentWindowId;
 extern char* g_f8f080;
 
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 float __cdecl fcn_0050bb50(int, int);
 void __cdecl fcn_0050bc10(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -15,9 +15,9 @@ int __cdecl fcn_00599ee0(int x, int y, int layer, int a4, int a5)
 	int w;
 	float f;
 
-	fcn_0046f740(x, y, 0x525, layer);
-	r = fcn_0046f740(x + 2, y + 2, a4 + 0xdf, layer);
-	fcn_0046f740(x + 3, y + 0x35, 0x746, layer);
+	d2_AddElementToWindow(x, y, 0x525, layer);
+	r = d2_AddElementToWindow(x + 2, y + 2, a4 + 0xdf, layer);
+	d2_AddElementToWindow(x + 3, y + 0x35, 0x746, layer);
 	*(int*) (g_f8f080 + r * 748 + 0x4c) = 1;
 	f = fcn_0050bb50(a4, a5);
 	fcn_0050bc10((int) f, a5, text);

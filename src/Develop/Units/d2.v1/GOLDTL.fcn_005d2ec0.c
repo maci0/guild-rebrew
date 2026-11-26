@@ -36,7 +36,7 @@ void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 int __cdecl d2_RunWerbungDialog(unsigned short*);
 void __cdecl d2_SetGroupVisibility(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005d2ec0 */
@@ -91,7 +91,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 				}
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_005d2ec0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_005d2ec0, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return res;
 }

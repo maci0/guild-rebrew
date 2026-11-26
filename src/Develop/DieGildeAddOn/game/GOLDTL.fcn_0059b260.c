@@ -38,7 +38,7 @@ void __cdecl fcn_00533f40(int, int, int, int);
 void __cdecl fcn_00594340(void);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00529160(char*, char*, int, char*);
 void __cdecl fcn_005944d0(int);
 void __cdecl fcn_00594de0(int, int, int, char*);
@@ -195,7 +195,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 									k = fcn_004c5530((char*) &msg);
 									e = (char*) fcn_004c4450(k);
 									while (e == 0) {
-										fcn_005373e0(0, 0x20007);
+										main_RunFrameLoop(0, 0x20007);
 										e = (char*) fcn_004c4450(k);
 									}
 									p = fcn_004c4480(k);
@@ -228,7 +228,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 									k = fcn_004c5530((char*) &msg);
 									e = (char*) fcn_004c4450(k);
 									while (e == 0) {
-										fcn_005373e0(0, 0x20007);
+										main_RunFrameLoop(0, 0x20007);
 										e = (char*) fcn_004c4450(k);
 									}
 									p = fcn_004c4480(k);
@@ -366,7 +366,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 		fcn_00594de0(h, 2, count, p3);
 		fcn_00595e20((int) building, (int) p2);
 		fcn_005963f0(h, 1, 0, (int) building);
-	} while (fcn_005373e0(fcn_005944d0, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_005944d0, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_0052a2d0();
 	return 0;

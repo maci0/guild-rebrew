@@ -16,7 +16,7 @@ void __cdecl fcn_00533f40(int, int, int, int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005c5da0(int, int, int, int, int);
 void __cdecl fcn_00525ef0(void);
 int __cdecl fcn_005a7400(int, int, int);
@@ -49,7 +49,7 @@ void __cdecl fcn_00533a40(int);
 int __cdecl fcn_0046f9b0(int, int);
 int __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_004bfe00(int);
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050dfd0(int, int);
 int __cdecl fcn_00466ee0(int, int, int, int, int);
 int __cdecl fcn_0064d41a(int, int, int, int, int);
@@ -66,7 +66,7 @@ int __cdecl ob_TransportFromLager(int, int, int, int, int, float, int, int);
 void __cdecl fcn_004116d0(void);
 int __cdecl fcn_00526120(int, int);
 int __cdecl gm_CheckInventoryCapacity(char*, int, int);
-int __cdecl fcn_00500bb0(int, int, int, int);
+int __cdecl gm_AddTime(int, int, int, int);
 int __cdecl fcn_00500d60(int, int);
 int __cdecl fcn_004c5150(int, int, char, int);
 int __cdecl fcn_004c51f0(int, int, int, int, int, int);
@@ -91,7 +91,7 @@ int __cdecl gm_CheckEntityType(int);
 int __cdecl fcn_004c35f0(void);
 int __cdecl fcn_005ba0e0(int, int, int, int, int, float, int, int);
 void __cdecl fcn_0050de80(int, int*);
-int __cdecl fcn_005373e0(int, int);
+int __cdecl main_RunFrameLoop(int, int);
 
 /* One 0xf0-byte inventory entity slot. Only the eight bytes at +0x0c..+0x18
    and the two three-int arrays at +0xd8 are written by the native body so far;
@@ -476,14 +476,14 @@ l_after:
 	fcn_005c5da0(*(int*) 0x772514, 0x172, 0x64,
 	             *(unsigned short*) 0x774970, 0x1f3c);
 	d2_SetForm(f.v2c, 0);
-	f.v78 = fcn_0046f740(0x261, 0xd2, 0x528, *(int*) 0x772514);
+	f.v78 = d2_AddElementToWindow(0x261, 0xd2, 0x528, *(int*) 0x772514);
 	{
 		int k;
 		k = f.v78 * 0x2f4;
 		*(int*) (*(int*) 0x1015ea0 + k + 0x1d0) = 3;
 		*(int*) (*(int*) 0x1015ea0 + k + 0x58) = 1;
 	}
-	f.vB0 = fcn_0046f740(0x261, 0x104, 0x527, *(int*) 0x772514);
+	f.vB0 = d2_AddElementToWindow(0x261, 0x104, 0x527, *(int*) 0x772514);
 	f.v9c = f.vB0 * 0x2f4;
 	*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x1d0) = 3;
 	fcn_00525ef0();
@@ -637,12 +637,12 @@ l_next:
 		j = i * ((int) (*(short*) (*(int*) 0x772500 + 0x1ee7a)) + 0x16);
 		e = f.v6D8 + i;
 		e->f00 = f.v20;
-		e->f0c = fcn_0046f740(0x10, j + 0x16,
+		e->f0c = d2_AddElementToWindow(0x10, j + 0x16,
 		                      0x4ae + (int) (*(unsigned short*) f.v20),
 		                      *(int*) 0x772514);
 		f.v1c = j + 0x54;
-		e->f18 = fcn_0046f740(0x18, f.v1c, 0x5e8, *(int*) 0x772514);
-		e->f1c = fcn_0046f740(0xac, f.v1c, 0x5eb, *(int*) 0x772514);
+		e->f18 = d2_AddElementToWindow(0x18, f.v1c, 0x5e8, *(int*) 0x772514);
+		e->f1c = d2_AddElementToWindow(0xac, f.v1c, 0x5eb, *(int*) 0x772514);
 		f.v1c = e->f0c;
 		{
 			int k;
@@ -822,7 +822,7 @@ l_slot_handles:
 			if (f.v20 < f.v158) {
 				i = ((int*) ((char*) f.v6D8 + 0xd8))[f.v10 + f.v20];
 				f.v1c = ((int*) (f.v15C + 4))[f.v24];
-				j = fcn_00471f80(i);
+				j = d2_GetControlValue(i);
 				if (j > 0) {
 					f.v48 = 1;
 				}
@@ -879,7 +879,7 @@ l_da9:
 	if (*(int*) 0x6abb00 != -1) {
 		if (f.v38 == 0) {
 			f.v60 = fcn_005c5e70();
-			i = fcn_00471f80(f.v78);
+			i = d2_GetControlValue(f.v78);
 			if (f.v90 != i) {
 				if (i != 0) {
 					d2_SetSlotVisibility(*(int*) (0x10161bc + *(int*) 0x6abb00 * 0x3cc), 1);
@@ -982,7 +982,7 @@ l_da9:
 			do {
 				if (*(int*) (idx + 0xc) != -1) {
 					fcn_00473690(*(int*) (*(int*) 0x1015ea0 + *(int*) idx * 0x2f4 + 8),
-					             fcn_00471f80(*(int*) idx));
+					             d2_GetControlValue(*(int*) idx));
 				}
 				idx += 4;
 			} while (--j != 0);
@@ -1024,7 +1024,7 @@ l_da9:
 		} else {
 			/* 0x5bc131: the panel's own row, or the pending dialog refresh */
 			i = f.v78;
-			if (fcn_00471f80(i) != 0) {
+			if (d2_GetControlValue(i) != 0) {
 				fcn_00472380(i, 0);
 				f.v90 = 0;
 			} else if (d2_CanCloseWindowDuringTutorial() == 1) {
@@ -1157,7 +1157,7 @@ l_5bc453:
 				continue;
 			}
 			slot = (int) (*(unsigned short*) *(int*) (i + 4));
-			j = fcn_00471f80(*(int*) i);
+			j = d2_GetControlValue(*(int*) i);
 			if (j == 0) {
 				continue;
 			}
@@ -1253,7 +1253,7 @@ l_5bc700:
 			continue;
 		}
 		slot = (int) (*(unsigned short*) *(int*) (idx + 4));
-		j = fcn_00471f80(*(int*) idx);
+		j = d2_GetControlValue(*(int*) idx);
 		if (j == 0) {
 			continue;
 		}
@@ -1294,7 +1294,7 @@ l_5bc8d0:
 	    && fcn_00502cd0(*(int*) (f.v44 + 0x14), 1, 0, slot_value) == 0) {
 		idx = 0;
 	}
-	j = fcn_00471f80(*(int*) f.v30);
+	j = d2_GetControlValue(*(int*) f.v30);
 	if (idx == 0) {
 		goto l_5bca65;
 	}
@@ -1408,7 +1408,7 @@ l_5bcb82:
 		    && fcn_00502cd0(*(int*) (f.v44 + 0x14), 1, 0, slot_value) == 0) {
 			idx = 0;
 		}
-		i = fcn_00471f80(j);
+		i = d2_GetControlValue(j);
 		if (idx == 0 || i <= 0) {
 			continue;
 		}
@@ -1495,7 +1495,7 @@ l_5bcd9a:
 			if (*(int*) idx == -1) {
 				continue;
 			}
-			j = fcn_00471f80(*(int*) idx);
+			j = d2_GetControlValue(*(int*) idx);
 			if (j > 0) {
 				fcn_004c51f0(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
 				             (int) (g_773d75), 0);
@@ -1508,7 +1508,7 @@ l_5bcd9a:
 			if (*(int*) idx == -1) {
 				continue;
 			}
-			j = fcn_00471f80(*(int*) idx);
+			j = d2_GetControlValue(*(int*) idx);
 			if (j > 0) {
 				fcn_004c51f0(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
 				             (int) (g_773d75), 0);
@@ -1537,7 +1537,7 @@ l_5bcd9a:
 					continue;
 				}
 				slot_value = *(int*) (*(int*) 0x1015ea0 + j * 0x2f4 + 8) - 0xdf;
-				i = fcn_00471f80(j);
+				i = d2_GetControlValue(j);
 				if (i <= 0) {
 					continue;
 				}
@@ -1681,7 +1681,7 @@ l_5bd26b:
 		f.vC0 = *(int*) 0x7f4c08;
 		f.vB8 = *(int*) 0x7f4c00;
 		*(short*) &f.vC4 = *(short*) 0x7f4c0c;
-		fcn_00500bb0((int) &f.vB8, 0, f.vCC * 4, 0);
+		gm_AddTime((int) &f.vB8, 0, f.vCC * 4, 0);
 		fcn_00500d60((int) &f.vB8, (int) &f.vC8);
 		fcn_0051af00((int) (f.v210 + 0x348), 0xdd, f.v20, f.v24,
 		             (int) ((signed char*) &f.vC8)[0],
@@ -1715,7 +1715,7 @@ l_5bd26b:
 				*(int*) (f.v210 + 0x7c) = *(int*) 0x7f4c04;
 				*(int*) (f.v210 + 0x80) = *(int*) 0x7f4c08;
 				*(short*) (f.v210 + 0x84) = *(short*) 0x7f4c0c;
-				fcn_00500bb0((int) (f.v210 + 0x78), 0, 0, 0xa);
+				gm_AddTime((int) (f.v210 + 0x78), 0, 0, 0xa);
 				*(int*) (f.v210 + 0xa8) = *(int*) (e->f00 + 2);
 				*(int*) (f.v210 + 0xb4) = 4;
 				*(int*) (f.v210 + 0xd4) = 1;
@@ -1777,7 +1777,7 @@ l_5bd632:
 			d2_SetSlotVisibility(f.v58, 0);
 		}
 	}
-	if (fcn_00471f80(f.v78) != 0) {
+	if (d2_GetControlValue(f.v78) != 0) {
 		d2_SetSlotVisibility(*(int*) (0x10161bc + *(int*) 0x6abb00 * 0x3cc), 1);
 		d2_SetForm(f.v2c, 2);
 		d2_SetSlotVisibility(*(int*) (0x10161bc + *(int*) 0x772514 * 0x3cc), 0);
@@ -1791,7 +1791,7 @@ l_5bd632:
 	} else {
 		*(int*) 0x774698 = 0;
 	}
-	if (fcn_005373e0(0x5ba910, 0x657c7) != 0) {
+	if (main_RunFrameLoop(0x5ba910, 0x657c7) != 0) {
 		goto l_5bb193;
 	}
 	fcn_005c61c0();

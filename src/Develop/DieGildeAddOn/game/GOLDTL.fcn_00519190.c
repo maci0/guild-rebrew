@@ -21,7 +21,7 @@ char* __cdecl fcn_0064d530(char*, char*, unsigned);
 void* __cdecl fcn_0064d740(void*, const void*, unsigned);
 int __cdecl toupper(int);
 char* __cdecl fcn_00657a73(int, char*, int);
-long __cdecl fcn_0064eeec(char*);
+long __cdecl atoi(char*);
 
 /*
  * io_Text family markup expander.
@@ -640,7 +640,7 @@ fmt:
 		}
 		v14 = v08 - v18;
 		fcn_0064d530(rbuf, S.text + text_index + 3, v14);
-		v14 = fcn_0064eeec(rbuf);
+		v14 = atoi(rbuf);
 		v24 = *(int*)&format_selector;
 		v28 = *(int*)0x6b7f98;
 		for (v08 = v24; v08 < v28; v08++) {

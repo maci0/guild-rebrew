@@ -59,12 +59,12 @@ int __cdecl fcn_00517c00(int, int, int, char*);
 char* __cdecl fcn_0050dc90(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_CreateGauge(int, int, Row*);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl fcn_005b5eb0(int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_005b6130(int, char*);
 void __cdecl fcn_00535550(char*);
 void __cdecl fcn_00535560(char*);
@@ -89,7 +89,7 @@ extern unsigned char* lpGebaeudePROT;
 extern double dbl_128_0;
 extern double dbl_100_0;
 extern double dbl_0_00392156862745098;
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl d2_ClearRadioGroup(int);
@@ -99,7 +99,7 @@ float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl fcn_0051af00(char*, char*, ...);
 int __cdecl gm_CheckEntityType(int);
 int __cdecl d2_CreateRadioGroup(int, ...);
-void __cdecl fcn_00469470(int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 
 /* ADDRESS: GOLDTL 0x005b88b0 */
 void __cdecl fcn_005b88b0(char* building, int a1)
@@ -161,7 +161,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 	d2_SetForm(*(int*) (win + 0x228), 3);
 	io_AppendText((char*) 0x68beac);
 	io_AppendText((char*) 0x6ac33c);
-	hE = fcn_00472250(*(int*) (win + 0x228), 3,
+	hE = d2_GetWindowListItem(*(int*) (win + 0x228), 3,
 	                  io_AppendText((char*) 0x413e));
 	d2_SetForm(*(int*) (win + 0x228), 3);
 	for (i = 0; i < 4; i++) {
@@ -206,11 +206,11 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 		rows[i].x = tv;
 		rows[i].y = cnt / 2 * tv2 + 0x11;
 		tv = tv + 0x18;
-		rows[i].icon = fcn_0046f740(tv, rows[i].y, 0x5db, *(int*) 0x772514);
+		rows[i].icon = d2_AddElementToWindow(tv, rows[i].y, 0x5db, *(int*) 0x772514);
 		if (i == 0) {
 			hB = d2_CreateRadioGroup(1, rows[i].icon);
 		} else {
-			fcn_00469470(hB, rows[i].icon);
+			d2_AddToRadioGroup(hB, rows[i].icon);
 		}
 		tv -= 0x36;
 		rows[i].label = d2_ShowTxt(tv, rows[i].y - 0x11,
@@ -249,7 +249,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 	fcn_005b5eb0((int) win, building);
 	d2_SetOverlayAnimation(0, 0);
 
-	while (fcn_005373e0((void*) 0x5b88b0, 0x677c7)) {
+	while (main_RunFrameLoop((void*) 0x5b88b0, 0x677c7)) {
 		if (*(int*) 0x14ce8e0) {
 			*(int*) 0x774654 = 1;
 		}
@@ -329,7 +329,7 @@ after_gage:
 			sel = cnt;
 			if (gage.obj == 0 && gage.state != 2) {
 				d2_SetForm(gage.win, 2);
-				hD = fcn_00472250(gage.win, 2,
+				hD = d2_GetWindowListItem(gage.win, 2,
 				                  io_AppendText((char*) 0x1a22,
 				                                (int) fcn_005101e0(
 				                                    (unsigned char*) building, building[0],
@@ -339,7 +339,7 @@ after_gage:
 			if (gage.state == 1) {
 				d2_SetForm(gage.win, 2);
 				io_AppendText((char*) 0x6811b0);
-				hB = fcn_00472250(gage.win, 2,
+				hB = d2_GetWindowListItem(gage.win, 2,
 				                  io_AppendText((char*) 0x1a21,
 				                                *(unsigned short*) gage.obj));
 			}
@@ -481,7 +481,7 @@ after2:
 				if (r->obj != 0) {
 					if (r->x1c == -1) {
 						d2_SetForm(r->win, 3);
-						r->x1c = fcn_0046f740(
+						r->x1c = d2_AddElementToWindow(
 						    r->x + 0x1a, r->y,
 						    *(int*) (r->obj + 0x18c),
 						    *(int*) 0x772514);
@@ -560,7 +560,7 @@ after2:
 				if (rows[i].obj != 0 && rows[i].state == 1) {
 					d2_SetForm(rows[i].win, 2);
 					io_AppendText((char*) 0x6811b0);
-					hA = fcn_00472250(
+					hA = d2_GetWindowListItem(
 					    rows[i].win, 2,
 					    io_AppendText((char*) 0x413f,
 					                  *(unsigned short*) rows[i].obj));

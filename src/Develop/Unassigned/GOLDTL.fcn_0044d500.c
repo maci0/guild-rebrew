@@ -9,7 +9,7 @@ typedef struct Rec38 {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_0064f026(char* s, const char* delim);
-int __cdecl fcn_0064eeec(const char* s);
+int __cdecl atoi(const char* s);
 
 /* ADDRESS: GOLDTL 0x0044d500 */
 void __cdecl fcn_0044d500(int unused, char* s)
@@ -18,6 +18,6 @@ void __cdecl fcn_0044d500(int unused, char* s)
 
 	t = fcn_0064f026(0, " ");
 	(*(Rec38**) (s + 0x20))[*(int*) (s + 0x18)].a = -1;
-	(*(Rec38**) (s + 0x20))[*(int*) (s + 0x18)].b = fcn_0064eeec(t);
+	(*(Rec38**) (s + 0x20))[*(int*) (s + 0x18)].b = atoi(t);
 	*(int*) (s + 0x18) += 1;
 }

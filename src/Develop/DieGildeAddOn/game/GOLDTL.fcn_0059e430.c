@@ -7,7 +7,7 @@ extern int g_14ad268;
 extern int g_7746a0;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_IsTutorialActionAllowed(int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowLagerOptions(char*, int);
@@ -31,7 +31,7 @@ void __cdecl fcn_0059e430(char* e)
 	meister = 0;
 	personal = 0;
 	fcn_005338a0();
-	while (fcn_005373e0((void*) fcn_0059e430, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) fcn_0059e430, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			if (d2_IsTutorialActionAllowed(0x20) == 1) {
 				prod = RegisterStatusText("contact_PRODUKTION_SCHMIEDEN", g_14ad268, 0x13);

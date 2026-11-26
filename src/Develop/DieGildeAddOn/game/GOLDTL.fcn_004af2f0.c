@@ -7,7 +7,7 @@ extern unsigned char g_773d75;
 void* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_004ae080(char*, char*, int*, int*);
-int __cdecl fcn_0064eeec(char*);
+int __cdecl atoi(char*);
 int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
@@ -252,7 +252,7 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 		int rest;
 
 		fcn_004ae080(text, buf, &p, &rest);
-		if (rest != 1 || (sel = fcn_0064eeec(text + p)) < 0 || sel > 2) {
+		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
 	}
@@ -357,7 +357,7 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 		int rest;
 
 		fcn_004ae080(text, buf, &p, &rest);
-		if (rest != 1 || (sel = fcn_0064eeec(text + p)) < 0 || sel > 2) {
+		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
 	}
@@ -473,7 +473,7 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 		int rest;
 
 		fcn_004ae080(text, buf, &p, &rest);
-		if (rest != 1 || (sel = fcn_0064eeec(text + p)) < 0 || sel > 2) {
+		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
 	}
@@ -592,7 +592,7 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 		int rest;
 
 		fcn_004ae080(text, buf, &p, &rest);
-		if (rest != 1 || (sel = fcn_0064eeec(text + p)) < 0 || sel > 2) {
+		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
 	}
@@ -725,7 +725,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 		rep stosb
 	}
 	fcn_004ae080(a4, buf, &n, (int*) &p);
-	n = fcn_0064eeec(a4 + n);
+	n = atoi(a4 + n);
 	io_FormatTextBuffer((void*) a5, (int) buf,
 	    fcn_0050b710((int) (((float) n * 0.01f) * (float) r),
 	    g_773d75),
@@ -772,7 +772,7 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 		int rest;
 
 		fcn_004ae080(text, buf, &p, &rest);
-		if (rest != 1 || (sel = fcn_0064eeec(text + p)) < 0 || sel > 2) {
+		if (rest != 1 || (sel = atoi(text + p)) < 0 || sel > 2) {
 			sel = 1;
 		}
 	}
@@ -966,7 +966,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
 
-void __cdecl fcn_00500bb0(GAME_TIMESTAMP*, int, int, int);
+void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
 void __cdecl fcn_004c5980(Msg*);
 
 /* In this file for the same reason as fcn_004af2f0: with the bodies of
@@ -1044,7 +1044,7 @@ int __cdecl fcn_004b0780(int* pairs, int idx, char* text)
 		msg.count = (unsigned char) n;
 		msg.flags = 0x22;
 		msg.when = (*(GAME_TIMESTAMP*)&gm_GameTime);
-		fcn_00500bb0(&msg.when, 0x18, 0, 0);
+		gm_AddTime(&msg.when, 0x18, 0, 0);
 		msg.when.hour = 0xa;
 		fcn_004c5980(&msg);
 	}

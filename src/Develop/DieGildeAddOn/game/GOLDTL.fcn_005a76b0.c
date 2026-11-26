@@ -4,7 +4,7 @@ typedef unsigned short u16;
 
 int __cdecl gm_CanEnterGebaeude(char*);
 void __cdecl fcn_00525ef0(void);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00530510(void);
 void __cdecl fcn_005305a0(void);
 int __cdecl fcn_004234e0(int, void*, int, int, int, int, int);
@@ -12,7 +12,7 @@ int __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_004c3170(char*);
 int __cdecl fcn_00510c90(int);
 void __cdecl fcn_0043a9c0(int);
-int __cdecl fcn_004432d0(int, int);
+int __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0043aa30(int);
 int __cdecl d3_TraverseSceneObjects(void*, int, int, void*);
 void __cdecl fcn_005166a0(char*);
@@ -93,7 +93,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         return 0;
     }
     fcn_00525ef0();
-    fcn_005373e0((void*) 0x5a76b0, 0x20007);
+    main_RunFrameLoop((void*) 0x5a76b0, 0x20007);
     g_6a2520 = 0;
     fcn_00530510();
     fcn_005305a0();
@@ -126,8 +126,8 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 if (c == 0xff ||
                     *(signed char*) (0x1043695 + 0x3dc * (int) (signed char) c) != 0) {
                     d2_SuppressOverlay = 1;
-                    fcn_005373e0((void*) 0, 0x603c7);
-                    fcn_005373e0((void*) 0, 0x603c7);
+                    main_RunFrameLoop((void*) 0, 0x603c7);
+                    main_RunFrameLoop((void*) 0, 0x603c7);
                     fcn_00510c90((int) *(u16*) msg);
                     d2_SuppressOverlay = 0;
                 }
@@ -139,7 +139,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 g_67530c = *(int*) (o + 1);
                 g_675310 = *(int*) (msg + 2);
                 *(u16*) (o + 0x29) = *(u16*) msg;
-                fcn_004432d0((int) (signed char) ((u8*) &init_SceneContextIndices)[*(u16*) msg], 0);
+                d3_SelectSceneContext((int) (signed char) ((u8*) &init_SceneContextIndices)[*(u16*) msg], 0);
                 fcn_0043aa30(3);
                 d3_TraverseSceneObjects((void*) *(int*) &g_67a370, 0, 0xe0, (void*) 0x456df0);
                 fcn_005166a0(o);
@@ -347,13 +347,13 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 fcn_0043a9c0(3);
             }
         }
-    } while (fcn_005373e0((void*) 0x5a76b0, 0x67fff) != 0);
+    } while (main_RunFrameLoop((void*) 0x5a76b0, 0x67fff) != 0);
 
     fcn_00530510();
     fcn_005305a0();
     *(int*) &g_7ea360 = 0;
     fcn_004c34d0();
-    fcn_004432d0(x, 0);
+    d3_SelectSceneContext(x, 0);
     *(int*) &g_6791c8 = 0;
     g_67530c = -1;
     g_675310 = -1;

@@ -36,7 +36,7 @@ int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl fcn_004234e0(char*, char*, int, int, int, int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00500bb0(char*, int, int, int);
+void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_005ca560(SEL_54f600*);
 int __cdecl fcn_005caaa0(int, int, int, SEL_54f600*);
 void __cdecl fcn_004c5620(int, void*);
@@ -103,7 +103,7 @@ void __cdecl fcn_0054f600(char* o)
 				    (int) *(unsigned short*) v4);
 				*(pos14_7f4c00*) (o + 0x44) = gm_GameTime;
 				*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-				fcn_00500bb0(o + 0x52, 2, 0, 0);
+				gm_AddTime(o + 0x52, 2, 0, 0);
 				(*(int*) (o + 0x70))++;
 				return;
 			}

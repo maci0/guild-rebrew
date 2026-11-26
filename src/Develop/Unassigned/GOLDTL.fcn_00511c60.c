@@ -3,8 +3,8 @@ double __cdecl gm_RandomFloat01(void);
 void __cdecl gm_RandomizeIntArray(unsigned int n, int *arr);
 int __cdecl fcn_0047dd60(void *p);
 void __cdecl fcn_00511b70(int n, int *out, unsigned char *src);
-void __cdecl fcn_004c44a0(void);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_BeginCommandSync(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_004c3ff0(void);
 void __cdecl fcn_004c4940(void);
@@ -125,7 +125,7 @@ int __cdecl fcn_00511c60(void)
 	fcn_00511b70(0x1e - n, &v33[n], (unsigned char *) &shuffledIds[n]);
 	i = n;
 	while (i < 0x1e) {
-		fcn_004c44a0();
+		cm_BeginCommandSync();
 		if (m < 3 && i > 0xc) {
 			if ((gm_RandomMod(4) & 0xffff) == 0) {
 				k = fcn_004c4fc0(0x10, -1, -1, 0x10, -1, 0, 0, 0);
@@ -138,7 +138,7 @@ int __cdecl fcn_00511c60(void)
 			k = fcn_004c4fc0(3, -1, -1, 0x10, -1,
 					 (unsigned char) v33[i], 0, 2);
 		}
-		fcn_004c44b0();
+		cm_EndCommandSync();
 		while (fcn_004c44c0() == 0) {
 			fcn_004c3ff0();
 			fcn_004c4940();

@@ -8,21 +8,21 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CreateRadioGroup(int);
 int __cdecl fcn_0052dee0(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
-void __cdecl fcn_00469470(int, int);
+void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00476b60(void);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl fcn_00472830(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004116d0(void);
 void* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_005373e0(void* fn, int arg);
+int __cdecl main_RunFrameLoop(void* fn, int arg);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004bec20 */
 unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
@@ -59,7 +59,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 	d2_SetForm(g, 1);
 	io_AppendText("$Z%2N3$A%1G", *(unsigned short*) (a0 + 0x27), a0);
 	d2_SetForm(g, 4);
-	closeButton = fcn_00472250(g, 4, io_AppendText(0x7d));
+	closeButton = d2_GetWindowListItem(g, 4, io_AppendText(0x7d));
 	d2_SetForm(g, 3);
 	k = d2_CreateRadioGroup(0);
 	for (i = 0; i < 7; i++) {
@@ -67,7 +67,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 		handles[i] = v6;
 		v7 = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, *(int*) (ids + i));
 		*(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v6].associated_object) = v7;
-		fcn_00469470(k, v6);
+		d2_AddToRadioGroup(k, v6);
 	}
 	d2_SelectRadioGroup(k, 0);
 	fcn_00476b60();
@@ -93,7 +93,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 			if (p != 0) {
 				p2 = fcn_00502cd0(*(unsigned int*) (p + 0x14), 1, 5, 0);
 				while (p2 != 0) {
-					v6 = fcn_0046f740((i % 4) * 0x40, (i / 4) * 0x40, *(unsigned short*) p2 + 0xdf, d2_CurrentWindowId);
+					v6 = d2_AddElementToWindow((i % 4) * 0x40, (i / 4) * 0x40, *(unsigned short*) p2 + 0xdf, d2_CurrentWindowId);
 					list[i] = v6;
 					((D2_CONTROL_TL*) (g_1015ea0))[v6].value_05c = 1;
 					((D2_CONTROL_TL*) (g_1015ea0))[v6].flags_1d0 = 3;
@@ -104,7 +104,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 				}
 			}
 			items[i] = 0;
-			v6 = fcn_0046f740((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527, d2_CurrentWindowId);
+			v6 = d2_AddElementToWindow((i % 4) * 0x40 + 7, (i / 4) * 0x40 + 7, 0x527, d2_CurrentWindowId);
 			list[i] = v6;
 			v2 = 0;
 			((D2_CONTROL_TL*) (g_1015ea0))[v6].value_05c = 1;
@@ -119,7 +119,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 				}
 			}
 		}
-		if (!fcn_005373e0((void*) 0x4bec20, 0x657c7)) {
+		if (!main_RunFrameLoop((void*) 0x4bec20, 0x657c7)) {
 			d2_ClearRadioGroup(k);
 			fcn_00471e30(g);
 			fcn_004116d0();

@@ -46,17 +46,17 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl fcn_00468df0(int, int, int, char*, int);
 void __cdecl fcn_00469110(int, int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 char* __cdecl fcn_004ee160(char*);
 void __cdecl fcn_00471af0(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 int __cdecl fcn_005865f0(char*, int*, int);
 int __cdecl d2_RunDomizilSkillDialog(char*, int*);
@@ -103,13 +103,13 @@ void __cdecl fcn_00585910(char* e)
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (fcn_005373e0((void*) fcn_00585030, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) fcn_00585030, 0x677c7) != 0);
 		fcn_00471e30(ids[0]);
 		return;
 	}
 	d2_SetForm(ids[0], 2);
-	fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
-	fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
+	d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
+	d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
 	ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 	d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 	io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
@@ -152,7 +152,7 @@ void __cdecl fcn_00585910(char* e)
 	d2_SetElementFont(ids[8], 0x54);
 	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
 	d2_SetForm(ids[0], 3);
-	ids[3] = fcn_00472250(ids[0], 3, io_AppendText(0x4049));
+	ids[3] = d2_GetWindowListItem(ids[0], 3, io_AppendText(0x4049));
 	do {
 		sel = fcn_004ecf00(e, &owner, &frac, 0);
 		d2_SetForm(ids[0], 4);
@@ -176,14 +176,14 @@ void __cdecl fcn_00585910(char* e)
 			data = fcn_004ec7d0((unsigned char*) e);
 			if (data == 0) {
 				g_774654 = 1;
-				fcn_005373e0((void*) fcn_00585910, 0x20007);
+				main_RunFrameLoop((void*) fcn_00585910, 0x20007);
 				fcn_00471e30(ids[0]);
 				return;
 			}
 			d2_SetForm(ids[0], 2);
 			io_AppendText(0x6811b0);
-			fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
-			fcn_0046f740(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
+			d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
+			d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
 			ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 			io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
@@ -249,7 +249,7 @@ void __cdecl fcn_00585910(char* e)
 				fcn_00471af0(ids[0], 1);
 			}
 		}
-	} while (fcn_005373e0((void*) fcn_00585910, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_00585910, 0x677c7) != 0);
 	fcn_00471e30(ids[0]);
 	fcn_00532ef0();
 }

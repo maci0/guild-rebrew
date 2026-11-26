@@ -21,7 +21,7 @@ extern char g_7f4ca2[];
 extern unsigned char g_773d75;
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00508da0(unsigned char* e);
-int __cdecl fcn_0050cf50(int, int);
+int __cdecl gm_CalculateGebaeudeValue(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 char* __cdecl gm_GetEntityTableEntry(char*);
@@ -75,7 +75,7 @@ void __cdecl fcn_00487470(char* actor)
 		return;
 	}
 	if (fcn_00508da0((unsigned char*) p) < gm_RandomMod(0x14) + 0x4b) {
-		amountf = (float) fcn_0050cf50(*(int*)(actor + 0x16c), 100) * g_664138 * g_664138;
+		amountf = (float) gm_CalculateGebaeudeValue(*(int*)(actor + 0x16c), 100) * g_664138 * g_664138;
 		if (g_662a7c > amountf) {
 			amountf = 128.0f;
 		}

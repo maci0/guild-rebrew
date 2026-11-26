@@ -7,7 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl fcn_0055c1f0(char* o)
 {
@@ -16,8 +16,8 @@ void __cdecl fcn_0055c1f0(char* o)
 	t = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) (o + 0xac)]);
 	*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 	if (g_774800 != 0) {
-		fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
+		gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 0, 1);
 	} else {
-		fcn_00500bb0((pos14_7f4c00*) (o + 0x52), 0, *(int *)&((OBJECT_PROTOTYPE *)t)->value_022, 0);
+		gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, *(int *)&((OBJECT_PROTOTYPE *)t)->value_022, 0);
 	}
 }

@@ -1,4 +1,4 @@
-void __cdecl fcn_00476210(int, int, int, int, int);
+void __cdecl d2_Plot(int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x004764e0 */
 void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int red, int green, int blue)
@@ -10,17 +10,17 @@ void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int red, int green, int 
 
     if (y == y1) {
         if (x1 < x) { t = x - x1;
-            for (; t > 0; t--) { fcn_00476210(x1++, y, red, green, blue); }
+            for (; t > 0; t--) { d2_Plot(x1++, y, red, green, blue); }
         } else { t = x1 - x;
-            for (; t > 0; t--) { fcn_00476210(x++, y, red, green, blue); }
+            for (; t > 0; t--) { d2_Plot(x++, y, red, green, blue); }
         }
         return;
     }
     if (x == x1) {
         if (y1 < y) { t = y - y1;
-            for (; t > 0; t--) { fcn_00476210(x, y1++, red, green, blue); }
+            for (; t > 0; t--) { d2_Plot(x, y1++, red, green, blue); }
         } else { t = y1 - y;
-            for (; t > 0; t--) { fcn_00476210(x, y++, red, green, blue); }
+            for (; t > 0; t--) { d2_Plot(x, y++, red, green, blue); }
         }
         return;
     }
@@ -28,7 +28,7 @@ void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int red, int green, int 
     else { dx = x; sx = -1; dx -= x1; }
     if (y < y1) { sy = 1; dy = y1; dy -= y; }
     else { dy = y; sy = -1; dy -= y1; }
-    fcn_00476210(x, y, red, green, blue);
+    d2_Plot(x, y, red, green, blue);
     if (dx > dy) {
         diagonal = dy - dx;
         straight = dy + dy;
@@ -37,7 +37,7 @@ void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int red, int green, int 
             x += sx;
             if (error >= 0) { y += sy; error += diagonal; }
             else error += straight;
-            fcn_00476210(x, y, red, green, blue);
+            d2_Plot(x, y, red, green, blue);
         } while (x != x1);
     } else {
         diagonal = dx - dy;
@@ -47,7 +47,7 @@ void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int red, int green, int 
             y += sy;
             if (error >= 0) { x += sx; error += diagonal; }
             else error += straight;
-            fcn_00476210(x, y, red, green, blue);
+            d2_Plot(x, y, red, green, blue);
         } while (y != y1);
     }
 }

@@ -13,7 +13,7 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_004c3030(int, int, char*, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_00500cb0(void*, void*);
-void __cdecl fcn_00500bb0(void*, int, int, int);
+void __cdecl gm_AddTime(void*, int, int, int);
 
 extern pos14_7f4c00 gm_GameTime;
 extern float g_6628a0;
@@ -51,7 +51,7 @@ void __cdecl fcn_0054b450(char* a0)
 		io_AppendText(0x1763, *(unsigned short*) v4, *(unsigned short*) entityA);
 		*(pos14_7f4c00*) (a + 0x44) = gm_GameTime;
 		*(pos14_7f4c00*) (a + 0x52) = gm_GameTime;
-		fcn_00500bb0(a + 0x52, 0x18, 0, 0);
+		gm_AddTime(a + 0x52, 0x18, 0, 0);
 		fcn_004c3030(-7, 0, (char*) 0x6a59fc, 0);
 		(*(int*) (a + 0x70))++;
 		return;

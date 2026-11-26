@@ -7,7 +7,7 @@ void __cdecl fcn_004f2a10(void *, void *, int, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl fcn_004c5f60(int, int, int);
-int __cdecl fcn_0050cf50(void *, int);
+int __cdecl gm_CalculateGebaeudeValue(void *, int);
 void __cdecl fcn_004c5530(void *);
 void *__cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_SumTreasury(void *);
@@ -73,7 +73,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 			*(int *) (pkt + 0xc) = -1;
 			pkt[0x36] = 2;
 			*(int *) (pkt + 0x58) = *(int *) ((char *) ent + 1);
-			*(int *) (pkt + 0x5c) = fcn_0050cf50(ent, *((signed char *) ent + 0x5c));
+			*(int *) (pkt + 0x5c) = gm_CalculateGebaeudeValue(ent, *((signed char *) ent + 0x5c));
 			fcn_004c5530(pkt);
 			it = (void *) 0x7f4ca4;
 			do {

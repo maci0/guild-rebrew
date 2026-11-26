@@ -7,7 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_00557f00(char*);
 char* __cdecl fcn_00557f70(char*);
 int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
@@ -27,13 +27,13 @@ void __cdecl fcn_00557fe0(char* u)
 			goto kill;
 		}
 		t = d3_CurrentContextIndex;
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		if (*(unsigned short*) (u + 0xc2) == 0x177) {
 			*(char**) (u + 0xb0) = fcn_00557f00(x);
 		} else if (*(unsigned short*) (u + 0xc2) == 0x178) {
 			*(char**) (u + 0xb0) = fcn_00557f70(x);
 		}
-		fcn_004432d0(t, 1);
+		d3_SelectSceneContext(t, 1);
 		*(int*) (u + 0x70) = *(char**) (u + 0xb0) != 0 ? 1 : -1;
 		break;
 	case 1:
@@ -56,9 +56,9 @@ void __cdecl fcn_00557fe0(char* u)
 		gm_ResolveEntityById((void**) (&x), 0, 0, *(int*) (u + 0xac));
 		if (*(char**) (u + 0xb0) != 0 && m_is_tracked(*(char**) (u + 0xb0)) != 0) {
 			t = d3_CurrentContextIndex;
-			fcn_004432d0(0, 1);
+			d3_SelectSceneContext(0, 1);
 			fcn_00452420(*(char**) (u + 0xb0));
-			fcn_004432d0(t, 1);
+			d3_SelectSceneContext(t, 1);
 		}
 kill:
 		he_FreeAction(u);

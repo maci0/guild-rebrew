@@ -14,12 +14,12 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, char*);
+int __cdecl d2_GetWindowListItem(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
-int __cdecl fcn_005373e0(void*, int);
-char* __cdecl fcn_00471f80(int);
+int __cdecl main_RunFrameLoop(void*, int);
+char* __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(char*, unsigned char);
 void __cdecl fcn_00471e30(int);
 
@@ -67,12 +67,12 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 	d2_SetForm(dlg, 0);
 	t = io_AppendText(0x1aa6, g_773d75);
 	io_AppendText(0x1aa7);
-	w = fcn_00472250(dlg, 0, t);
+	w = d2_GetWindowListItem(dlg, 0, t);
 	d2_SetElementValue(w, lo, hi, lo);
 	bar = fcn_004677e0((*(int*) (g_77255c + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(bar, 0x5dc, 1);
 	g_100f1dc = -1;
-	while (fcn_005373e0(fcn_004e3de0, cut_EventLoopFlags) != 0) {
+	while (main_RunFrameLoop(fcn_004e3de0, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(bar, 0, 0) == 0) {
 			g_774654 = 1;
 		} else {
@@ -81,7 +81,7 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 				g_774654 = 1;
 				if (x != 1 && x == 2) {
 					*(int*) (a + 0x98) = 1;
-					*(int*) (a + 0x94) = fcn_0050b750(fcn_00471f80(w), g_773d75);
+					*(int*) (a + 0x94) = fcn_0050b750(d2_GetControlValue(w), g_773d75);
 				}
 			}
 		}

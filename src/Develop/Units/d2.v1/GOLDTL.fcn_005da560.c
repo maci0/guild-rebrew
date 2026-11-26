@@ -32,11 +32,11 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c91c0(int, int, int, int, int);
 int __cdecl fcn_004f4830(int, Stat5da5*);
-int __cdecl fcn_0046f740(int x, int y, int id, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl fcn_004fa5b0(int, unsigned short*, int*);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl fcn_005d9ca0(unsigned short*, unsigned short*, int, int);
 
@@ -87,7 +87,7 @@ int __cdecl fcn_005da560(unsigned short* viewer, unsigned short* subject)
 		fcn_005c91c0(g_14aa314[rows[k].x1c].name, 10, k * 0x28 + 10, 0x13b, 0x55);
 		if (fcn_004f4830(rows[k].x1c, &st) != 0 && st.count != 0) {
 			for (i = 0; i < st.count; i++) {
-				fcn_0046f740(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, d2_CurrentWindowId);
+				d2_AddElementToWindow(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, d2_CurrentWindowId);
 			}
 		}
 	}
@@ -95,7 +95,7 @@ int __cdecl fcn_005da560(unsigned short* viewer, unsigned short* subject)
 
 	q[0] = 1;
 	d2_SetForm(dlg, 3);
-	sel = fcn_00472250(dlg, 3, io_AppendText(0x1745));
+	sel = d2_GetWindowListItem(dlg, 3, io_AppendText(0x1745));
 	if ((fcn_004fa5b0(0x16, subject, q) & 2) != 0 || flag == 0) {
 		fcn_00472640(sel, 0);
 	}
@@ -110,7 +110,7 @@ int __cdecl fcn_005da560(unsigned short* viewer, unsigned short* subject)
 				g_774654 = 3;
 			}
 		}
-	} while (fcn_005373e0(fcn_005da560, 0x657c7) != 0);
+	} while (main_RunFrameLoop(fcn_005da560, 0x657c7) != 0);
 	fcn_00471e30(dlg);
 	return result;
 }

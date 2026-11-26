@@ -49,7 +49,7 @@ extern float g_774694;
 extern unsigned char g_6b8304;
 
 void __cdecl fcn_00516de0(int, int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 #include "client_scene_loader.h"
 void __cdecl ch_SetLowPolyMode(unsigned char);
 void __cdecl d3_SetCameraHeightFraction(int);
@@ -95,9 +95,9 @@ void __cdecl d3_ApplyGraphicsOptions(void)
 	if (depth != d3_LODMode) {
 		saved = d3_CurrentContextIndex;
 		d3_LODMode = depth;
-		fcn_004432d0(0, 0);
+		d3_SelectSceneContext(0, 0);
 		fcn_0043ac00(0x40, 3, 0);
-		fcn_004432d0(saved, 0);
+		d3_SelectSceneContext(saved, 0);
 	}
 	fcn_00439690(g_776668, 0, 2 - g_776665, hi * width, 0);
 	if ((*(int*)&g_7746c4) == 0 && (*(int*)&g_7746c8) == 0) {
@@ -118,14 +118,14 @@ void __cdecl d3_ApplyGraphicsOptions(void)
 		fcn_0043bbf0(g_776668);
 	}
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	fcn_00598510();
 	if ((*(unsigned char*)&g_776664) == 0) {
 		fcn_0043ace0(0);
 	} else {
 		fcn_0043ace0(1);
 	}
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 	s = (g_77667c + 0.5f) * 0.5f;
 	for (i = 0; i < 3; i++) {
 		a[i] = s + g_776670[i] - 0.5f;

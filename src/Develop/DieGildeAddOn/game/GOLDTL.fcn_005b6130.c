@@ -4,7 +4,7 @@ extern int d2_CurrentWindowId; extern int d2_CurrentElementId;     /* 0x67d370 *
 extern int g_100f1dc;    /* 0x100f1dc */
 extern int g_14abc14;    /* 0x14abc14 */
 
-int __cdecl fcn_0046f740(int x, int y, int id, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 void __cdecl fcn_0046f940(int element, char* text);
 void __cdecl fcn_0046f9b0(int element, int a2);
 void __cdecl d2_SetElementFont(int element, int a2);
@@ -50,7 +50,7 @@ void __cdecl fcn_005b6130(int a0, char* a1)
                 fcn_0046f940(v3, label);
                 if (a1 != v2 &&
                     *(int*) (v4 * 4 + 0x777cd0) == -1) {
-                    v3 = fcn_0046f740(0, v7, 5, d2_CurrentWindowId);
+                    v3 = d2_AddElementToWindow(0, v7, 5, d2_CurrentWindowId);
                     *(int*) (v4 * 4 + 0x777cd0) = v3;
                     *(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v3].value_05c) = 1;
                     *(char**) (&((D2_CONTROL_TL*) g_1015ea0)[

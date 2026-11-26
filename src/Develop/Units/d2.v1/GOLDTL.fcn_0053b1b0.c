@@ -15,14 +15,14 @@ extern char s_6a3bc4[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0046f740(int, int, int, int);
+int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00534160(int, int, int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0053b1b0 */
 int __cdecl fcn_0053b1b0(void)
@@ -58,7 +58,7 @@ int __cdecl fcn_0053b1b0(void)
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
 	io_AppendText(0x1ae2);
-	if (fcn_005373e0((void*) fcn_0053b1b0, 0x12d6) != 0) {
+	if (main_RunFrameLoop((void*) fcn_0053b1b0, 0x12d6) != 0) {
 		do {
 			if (g_14ce8e0 != 0)
 				g_774654 = 1;
@@ -70,18 +70,18 @@ int __cdecl fcn_0053b1b0(void)
 				for (; i < 5; i++, y += 0x25) {
 					io_AppendText((int) s_6a3bc4, i + 0x16b7);
 					fcn_00534160(0xd2, y, st[6 + i], 0x4d9);
-					id = fcn_0046f740(*(int*) (g_77255c + 0xc) - 0x2c, y, 0x519, d2_CurrentWindowId);
+					id = d2_AddElementToWindow(*(int*) (g_77255c + 0xc) - 0x2c, y, 0x519, d2_CurrentWindowId);
 					ids[2 * i] = id;
 					((D2_CONTROL_TL*) (g_1015ea0))[id].value_05c = 1;
 					((D2_CONTROL_TL*) (g_1015ea0))[id].flags_1d0 = 3;
-					id = fcn_0046f740(*(int*) (g_77255c + 0xc) - 0x18, y, 0x51a, d2_CurrentWindowId);
+					id = d2_AddElementToWindow(*(int*) (g_77255c + 0xc) - 0x18, y, 0x51a, d2_CurrentWindowId);
 					ids[2 * i + 1] = id;
 					((D2_CONTROL_TL*) (g_1015ea0))[id].value_05c = 1;
 					((D2_CONTROL_TL*) (g_1015ea0))[id].flags_1d0 = 3;
 				}
 				io_AppendText(0x1ae3);
 				fcn_00534160(0xd2, 0xec, v_len, 0x4d9);
-				v_id = fcn_00472250(dlg, 1, io_AppendText(0x1ae4));
+				v_id = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1ae4));
 				for (i = 0; i < 5; i++) {
 					if (st[6 + i] > ((int*)0x7e1fd8)[i]) {
 						id = ids[2 * i];
@@ -170,7 +170,7 @@ int __cdecl fcn_0053b1b0(void)
 					}
 				}
 			}
-		} while (fcn_005373e0((void*) fcn_0053b1b0, 0x12d6) != 0);
+		} while (main_RunFrameLoop((void*) fcn_0053b1b0, 0x12d6) != 0);
 	}
 	fcn_00471e30(dlg);
 	return v_ret;

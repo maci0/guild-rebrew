@@ -28,15 +28,15 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_00471f80(int);
+int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
 void __cdecl fcn_004eeb50(char*, float);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
 int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
@@ -67,18 +67,18 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 	d2_SetForm(h, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
-	line = fcn_00472250(h, 1, io_AppendText(0x403a, 0x182, g_773d75));
+	line = d2_GetWindowListItem(h, 1, io_AppendText(0x403a, 0x182, g_773d75));
 	d2_SetElementValue(line, fcn_0050b710(tenth, g_773d75), fcn_0050b710(n, g_773d75), fcn_0050b710(tenth, g_773d75));
 	d2_SetForm(h, 2);
 	s = io_AppendText(0x403b);
-	ok = fcn_00472250(h, 2, s);
-	cancel = fcn_00472250(h, 2, s + 1);
+	ok = d2_GetWindowListItem(h, 2, s);
+	cancel = d2_GetWindowListItem(h, 2, s + 1);
 	g_100f1dc = -1;
 	do {
 		p = fcn_004ec7d0(e);
 		if (p == 0) {
 			g_774654 = 1;
-			fcn_005373e0(d2_RunDomizilSkillDialog, 0x20007);
+			main_RunFrameLoop(d2_RunDomizilSkillDialog, 0x20007);
 			fcn_00471e30(h);
 			return 0;
 		}
@@ -86,7 +86,7 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				c = fcn_0050b750(fcn_00471f80(line), g_773d75);
+				c = fcn_0050b750(d2_GetControlValue(line), g_773d75);
 				if (fcn_00526010(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), c, g_773d75) != 0) {
 					fcn_004eeb50(p, (float) c / n * f * 0.75f);
 					r = 1;
@@ -97,7 +97,7 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(d2_RunDomizilSkillDialog, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_RunDomizilSkillDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	return r;
 }

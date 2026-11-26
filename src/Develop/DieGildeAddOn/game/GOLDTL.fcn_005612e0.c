@@ -4,7 +4,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00500bb0(pos14_7f4c00*, int, int, int);
+void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
 
@@ -13,7 +13,7 @@ void __cdecl he_ScheduleSabotage(char* e)
 	char* t;
 
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-	fcn_00500bb0((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
+	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
 	if (*(int*) (e + 0x10) == -1) {
 		t = gm_StartFilteredEntitySearch(1, 5, 0x16);
 		if (t != 0 || (t = gm_StartFilteredEntitySearch(1, 5, 0xf)) != 0) {

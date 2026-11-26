@@ -19,7 +19,7 @@ extern char* g_143c860[];
 typedef struct GOLD_PRICE_PROTO { unsigned char unknown00[0x233]; unsigned char costs[2]; char unknown235[0x18]; } GOLD_PRICE_PROTO;
 
 /* ADDRESS: GOLD 0x00508820 */
-float __cdecl fcn_00508820(int id, int percentage)
+float __cdecl eval_ObjektPreis2Credits(int id, int percentage)
 {
     GOLD_PRICE_RECORD* record;
     GOLD_PRICE_PROTO* prototype;
@@ -64,7 +64,7 @@ float __cdecl fcn_00508820(int id, int percentage)
             break;
         }
         if (child != 0xffff) {
-            price = fcn_00508820(child, percentage) * children[-4] /
+            price = eval_ObjektPreis2Credits(child, percentage) * children[-4] /
                 record->divisor + price;
         } else {
             sprintf(error, "eval_ObjektPreis2Credits:Unterobjekt f\xfcr '%s' nicht vorhanden!!!",

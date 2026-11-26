@@ -68,8 +68,8 @@ void __cdecl d3_TransformPoint(char *, char *, char *);
 void __cdecl fcn_004c3ff0(void);
 int __cdecl fcn_004c4450(int);
 int __cdecl fcn_004c4480(int);
-void __cdecl fcn_004c44a0(void);
-void __cdecl fcn_004c44b0(void);
+void __cdecl cm_BeginCommandSync(void);
+void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_004c4510(char *, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char *);
@@ -91,7 +91,7 @@ int __cdecl gm_FindNearestEligibleEntity(unsigned char *, int);
 int __cdecl gm_CheckEntityType(unsigned char *);
 int __cdecl fcn_005072c0(int);
 int __cdecl fcn_0050b750(int, char);
-int __cdecl fcn_0050cf50(unsigned char *, int);
+int __cdecl gm_CalculateGebaeudeValue(unsigned char *, int);
 int __cdecl fcn_0050d170(int);
 void __cdecl fcn_00511c60(int);
 void __cdecl init_Betrieb(unsigned char *);
@@ -103,7 +103,7 @@ void __cdecl fcn_005470a0(void);
 void __cdecl fcn_00547130(void);
 void __cdecl fcn_005471c0(void);
 int __cdecl fcn_00597ff0(int, char *);
-int __cdecl fcn_00598150(char *, char **);
+int __cdecl d3_CollectUnusedSceneObjects(char *, char **);
 void __cdecl fcn_00598740(float *, int);
 
 /* ADDRESS: GOLDTL 0x00512ee0 */
@@ -184,7 +184,7 @@ void __cdecl fcn_00512ee0(void)
 		if (!done) {
 			kind = fcn_005072c0(*(unsigned char *)(e + 0x164));
 			if (fcn_00597ff0(kind, name)
-					&& (res = fcn_00598150(name, (char **)list)) != 0) {
+					&& (res = d3_CollectUnusedSceneObjects(name, (char **)list)) != 0) {
 				j = 0;
 				if (res >= 1) {
 					do {
@@ -259,7 +259,7 @@ void __cdecl fcn_00512ee0(void)
 		e = (char *)gm_StartFilteredEntitySearch(2, 4, 0xffff, 5, k);
 		if (e == 0)
 			continue;
-		count = fcn_0050cf50((unsigned char *)e, 100);
+		count = gm_CalculateGebaeudeValue((unsigned char *)e, 100);
 		fcn_004c4510(e, *(int *)(e + 1));
 		cm_AppendPacketFieldDelta(4, 1, 0x65, (char *)&count);
 		count = count * 2;
@@ -302,7 +302,7 @@ void __cdecl fcn_00512ee0(void)
 			if (kinds[kind] != 1 || counts[kind] >= 2)
 				continue;
 			slot = 0;
-			fcn_004c44a0();
+			cm_BeginCommandSync();
 			for (j = 5; j >= 0; j--) {
 				if (o->worker_kind[j]) {
 					slot = o->worker_kind[j];
@@ -336,7 +336,7 @@ void __cdecl fcn_00512ee0(void)
 				fcn_004c5150(*(int *)(q + 4), -1, g_773d75, count);
 			}
 			init_Betrieb((unsigned char *)p);
-			fcn_004c44b0();
+			cm_EndCommandSync();
 			counts[o->category]++;
 		}
 		while (fcn_004c44c0() == 0) {
@@ -387,7 +387,7 @@ handles_done:
 	{
 	Msg msg;
 
-	fcn_004c44a0();
+	cm_BeginCommandSync();
 	for (inner = 0; inner < 0xa900; inner += 0xa9) {
 		p = (Player *)(lpGebaeudeINST + inner);
 		o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office];
@@ -419,7 +419,7 @@ handles_done:
 			fcn_004c5f60(p->id, *(int *)(gm_CityEntity + 4),
 					*(int *)(gm_CityEntity + 4));
 	}
-	fcn_004c44b0();
+	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_004c3ff0();
 		fcn_004c4940();
@@ -435,7 +435,7 @@ handles_done:
 			msg.fc = -1;
 			msg.b36 = 2;
 			msg.f58 = *(int *)(e + 1);
-			msg.f5c = fcn_0050cf50((unsigned char *)e, (char)e[0x5c]);
+			msg.f5c = gm_CalculateGebaeudeValue((unsigned char *)e, (char)e[0x5c]);
 			fcn_004c5f60(*(int *)(e + 1), *(int *)(gm_CityEntity + 4),
 					*(int *)(gm_CityEntity + 4));
 			fcn_004c5530(&msg);

@@ -82,7 +82,7 @@ void __cdecl fcn_005b1b30(Estate*);
 void __cdecl fcn_00505c80(Estate*);
 Figure* __cdecl fcn_0050dc90(Estate*);
 int __cdecl d3_GetContextIndex(int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00402aa0(Model*);
 void __cdecl SelectTextureSet(Model*, int, int, int);
 void __cdecl fcn_0052dd80(Estate*);
@@ -148,26 +148,26 @@ void __cdecl fcn_005059b0(Estate* s, unsigned short owner, int slot)
 			} else {
 				sc = 0;
 			}
-			fcn_004432d0(d3_GetContextIndex(m->res), 1);
+			d3_SelectSceneContext(d3_GetContextIndex(m->res), 1);
 			if (m->body->visible == 0) {
 				fcn_00402aa0(m);
 			}
 			SelectTextureSet(*m->parts, (*m->parts)->visible, sc, 1);
-			fcn_004432d0(saved, 1);
+			d3_SelectSceneContext(saved, 1);
 		}
 		q++;
 	}
 	e = &((Entity*)g_7f4ca0)[slot];
 	if (e != ((Entity*)gm_CityEntity) && s->placed != 0 && (e->type == 6 || e->type == 7 || e->type == 5)) {
 		saved = d3_CurrentContextIndex;
-		fcn_004432d0(0, 1);
+		d3_SelectSceneContext(0, 1);
 		fcn_0052dd80(s);
 		fcn_0052d9d0(s);
-		fcn_004432d0(saved, 1);
+		d3_SelectSceneContext(saved, 1);
 		return;
 	}
 	saved = d3_CurrentContextIndex;
-	fcn_004432d0(0, 1);
+	d3_SelectSceneContext(0, 1);
 	fcn_0052dd80(s);
-	fcn_004432d0(saved, 1);
+	d3_SelectSceneContext(saved, 1);
 }

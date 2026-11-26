@@ -32,7 +32,7 @@ int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl fcn_00505370(unsigned char*);
 void __cdecl init_LoadGebaeudeScene(int);
 void __cdecl fcn_00510c90(int);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_005167c0(unsigned char*, unsigned int);
 void __cdecl fcn_0043aa30(char);
 
@@ -95,7 +95,7 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 					    g_1043695[init_SceneContextIndices[sceneId] * 0x3dc]) {
 						fcn_00510c90(sceneId);
 					}
-					fcn_004432d0(init_SceneContextIndices[sceneId], 0);
+					d3_SelectSceneContext(init_SceneContextIndices[sceneId], 0);
 					fcn_005167c0(entity, sceneId);
 				}
 			}
@@ -105,7 +105,7 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 					    g_1043695[g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category] * 0x3dc]) {
 						init_LoadGebaeudeScene(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category);
 					}
-					fcn_004432d0(g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category], 0);
+					d3_SelectSceneContext(g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*entity].category], 0);
 					fcn_005167c0(entity, 0xfd);
 				}
 			}

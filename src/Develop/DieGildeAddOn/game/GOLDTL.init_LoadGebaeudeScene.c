@@ -18,7 +18,7 @@ int __cdecl fcn_0042df30(void*, int);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_00473150(unsigned char*);
 int __cdecl init_GetGebaeudeSceneName(int idx, char* out);
-void __cdecl fcn_004432d0(int a, int b);
+void __cdecl d3_SelectSceneContext(int a, int b);
 char __cdecl d3_LoadScene(const char* filename, void* stream, int progress);
 void __cdecl fcn_00516de0(char* a1, unsigned char a2);
 int __cdecl fcn_004026f0(char* p);
@@ -31,7 +31,7 @@ void __cdecl ch_SetPosition(int, void*, int);
 char* __cdecl ch_SelectRandomDummy(void);
 int __cdecl fcn_00413160(void);
 void __cdecl ReportClientMessage(const char* msg);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl fcn_00445600(int, int, int, char*);
 
 /* lpGebaeudePROT row (0x24d bytes); only the leading type byte is read here. */
@@ -69,7 +69,7 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 			flags = (main_LoopFlags & 0xfffffff7) | 0x80;
 			mode = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x32, 1);
 			while (!(*mode & 4)) {
-				fcn_005373e0(0, flags);
+				main_RunFrameLoop(0, flags);
 			}
 			fcn_00473150(mode);
 			progress = 0x526bf0;
@@ -78,24 +78,24 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 		if (v == -1) {
 			ReportClientMessage("init_LoadGebaeudeScene:Could not find a free universe...");
 		}
-		fcn_004432d0(v, 0);
+		d3_SelectSceneContext(v, 0);
 		init_GetGebaeudeSceneName(prototypeIndex, tmp);
 		sprintf(name, "scenes/*gb_%s.ed3", tmp);
 		strupr(name);
 		sprintf(tmp, "init_LoadGebaeudeScene: %s", name);
 		if (!d3_LoadScene(name, 0, progress)) {
-			fcn_004432d0(saved, 0);
+			d3_SelectSceneContext(saved, 0);
 			goto done;
 		}
-		fcn_004432d0(v, 0);
+		d3_SelectSceneContext(v, 0);
 		if (g_6b8300 != 0) {
 			fcn_00516de0(g_6b8300, 1);
 		}
-		fcn_004432d0(d3_CurrentContextIndex, 0);
+		d3_SelectSceneContext(d3_CurrentContextIndex, 0);
 		d3_TraverseSceneObjects((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
 		d3_TraverseSceneObjects((char*) g_67a370, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
 		*p = (char) v;
-		fcn_004432d0(saved, 0);
+		d3_SelectSceneContext(saved, 0);
 		goto done;
 	}
 	if (!*(char*) (*p * 0x3dc + 0x1043695)) {
@@ -105,24 +105,24 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 		flags = (main_LoopFlags & 0xfffffff7) | 0x80;
 		mode = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x32, 1);
 		while (!(*mode & 4)) {
-			fcn_005373e0(0, flags);
+			main_RunFrameLoop(0, flags);
 		}
 		fcn_00473150(mode);
 		progress = 0x526bf0;
 	}
 	obj = *p;
-	fcn_004432d0(obj, 0);
+	d3_SelectSceneContext(obj, 0);
 	init_GetGebaeudeSceneName(prototypeIndex, scene);
 	sprintf(name, "scenes/*gb_%s.ed3", scene);
 	strupr(name);
 	if (!d3_LoadScene(name, 0, progress)) {
-		fcn_004432d0(saved, 0);
+		d3_SelectSceneContext(saved, 0);
 		goto done;
 	}
 	if (g_6b8300 != 0) {
 		fcn_00516de0(g_6b8300, 1);
 	}
-	fcn_004432d0(d3_CurrentContextIndex, 0);
+	d3_SelectSceneContext(d3_CurrentContextIndex, 0);
 	gv_Free3Fields(*(int*) (g_67a370 + 0xb0));
 	*(int*) (g_67a370 + 0xb0) = 0;
 	fcn_004026f0((char*) g_67a370);
@@ -149,7 +149,7 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 		}
 	}
 	*(char*) (*p * 0x3dc + 0x1043695) = 0;
-	fcn_004432d0(saved, 0);
+	d3_SelectSceneContext(saved, 0);
 done:
 	if ((g_7747b0 & 8) != 0 && restore != 0) {
 		fcn_0042df30((void*) 0x538060, 0);

@@ -25,9 +25,9 @@ extern char s_68b0f4[];
 extern char s_675908[];
 extern char s_68b1e0[];
 
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00473150(char*);
-void __cdecl fcn_004432d0(int, int);
+void __cdecl d3_SelectSceneContext(int, int);
 char __cdecl d3_LoadScene(const char*, void*, SCENE_PROGRESS);
 void __cdecl gv_Free3Fields(int*);
 int __cdecl fcn_004026f0(char*);
@@ -73,7 +73,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		flags = (main_LoopFlags & 0xfffffff7) | 0x100080;
 		ch = (unsigned char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x32, 1);
 		while ((*ch & 4) == 0) {
-			fcn_005373e0(0, flags);
+			main_RunFrameLoop(0, flags);
 		}
 		fcn_00473150((char*) ch);
 		progress = (int) d2_UpdateProgressOverlay;
@@ -87,25 +87,25 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		if (type == -1) {
 			ReportClientMessage(s_6a1c30);
 		}
-		fcn_004432d0(type, 0);
+		d3_SelectSceneContext(type, 0);
 		sprintf(path, s_6a1c1c, name + 1);
 		strupr(path);
 		if (d3_LoadScene(path, 0, (SCENE_PROGRESS) progress)) {
-			fcn_004432d0(d3_CurrentContextIndex, 0);
+			d3_SelectSceneContext(d3_CurrentContextIndex, 0);
 			d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
 			d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
 			init_SceneContextIndices[objectTypeIndex] = (char) type;
-			fcn_004432d0(saved, 0);
+			d3_SelectSceneContext(saved, 0);
 		}
 	} else {
 		type = (signed char) init_SceneContextIndices[objectTypeIndex];
 		if (g_10432c0[type * 0xf7 * 4 + 0x3d5] != 0) {
 			slot = type * 0xf7;
-			fcn_004432d0(type, 0);
+			d3_SelectSceneContext(type, 0);
 			sprintf(path, s_6a1c1c, name + 1);
 			strupr(path);
 			if (d3_LoadScene(path, 0, (SCENE_PROGRESS) progress)) {
-				fcn_004432d0(d3_CurrentContextIndex, 0);
+				d3_SelectSceneContext(d3_CurrentContextIndex, 0);
 				gv_Free3Fields((int*) *(int*) (g_67a370 + 0xb0));
 				*(int*) (g_67a370 + 0xb0) = 0;
 				fcn_004026f0((char*) g_67a370);
@@ -134,7 +134,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 					p++;
 				} while ((int) p < 0x14d0c20);
 				g_10432c0[(signed char) init_SceneContextIndices[objectTypeIndex] * 0x3dc + 0x3d5] = 0;
-				fcn_004432d0(saved, 0);
+				d3_SelectSceneContext(saved, 0);
 			}
 		}
 	}

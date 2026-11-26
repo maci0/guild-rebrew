@@ -46,9 +46,9 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472250(int, int, int);
+int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_005373e0(void*, int);
+int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c5530(struct msg*);
@@ -83,8 +83,8 @@ int __cdecl fcn_005865f0(char* e, int* who, int kind)
 	}
 	d2_SetForm(h, 2);
 	s = io_AppendText(0x4047);
-	yes = fcn_00472250(h, 2, s);
-	no = fcn_00472250(h, 2, s + 1);
+	yes = d2_GetWindowListItem(h, 2, s);
+	no = d2_GetWindowListItem(h, 2, s + 1);
 	fcn_00472640(yes, ok);
 	g_100f1dc = -1;
 	do {
@@ -107,7 +107,7 @@ int __cdecl fcn_005865f0(char* e, int* who, int kind)
 				g_774654 = 1;
 			}
 		}
-	} while (fcn_005373e0(fcn_005865f0, 0x677c7) != 0);
+	} while (main_RunFrameLoop(fcn_005865f0, 0x677c7) != 0);
 	fcn_00471e30(h);
 	return 1;
 }

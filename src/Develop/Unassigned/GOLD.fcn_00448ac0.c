@@ -6,12 +6,12 @@
 extern float g_662d40[3];
 
 void __cdecl fcn_00455540(char* o, float* v, float* out);
-void __cdecl fcn_00458a10(char* src, char* pos, float* out);
+void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl d3_NormalizeVector(float* v);
 
 
 /* ADDRESS: GOLD 0x00448ac0 */
-float __cdecl fcn_00448ac0(char* obj, float* target)
+float __cdecl d3_ComputeYawToTarget(char* obj, float* target)
 {
 	float pos[4];
 	float td[4];
@@ -24,7 +24,7 @@ float __cdecl fcn_00448ac0(char* obj, float* target)
 	float rotated_x;
 
 	fcn_00455540(obj, g_662d40, a);
-	fcn_00458a10(obj, obj + 0x4c, pos);
+	d3_TransformPoint(obj, obj + 0x4c, pos);
 	a[0] -= pos[0];
 	a[2] -= pos[2];
 	a[1] = 0.0f;

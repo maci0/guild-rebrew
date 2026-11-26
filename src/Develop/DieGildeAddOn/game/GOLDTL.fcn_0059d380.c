@@ -41,11 +41,11 @@ extern void __cdecl d2_CenterDialogWindows(int);
 extern void __cdecl d2_SetOverlayAnimation(int, int);
 extern void __cdecl d2_SetForm(int, int);
 extern int __cdecl io_AppendText(int, ...);
-extern int __cdecl fcn_00472250(int, int, int);
+extern int __cdecl d2_GetWindowListItem(int, int, int);
 extern void __cdecl fcn_004c35f0(void);
 extern void __cdecl fcn_004c5530(Msg_59d380*);
 extern void __cdecl sv_ClearObjectSelection(void);
-extern int __cdecl fcn_005373e0(void*, int);
+extern int __cdecl main_RunFrameLoop(void*, int);
 extern void __cdecl fcn_00471e30(int);
 
 
@@ -95,8 +95,8 @@ int __cdecl fcn_0059d380(int a0, char* object)
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
 	text = io_AppendText(0x1a8b, object);
-	item1 = fcn_00472250(dlg, 1, text);
-	item2 = fcn_00472250(dlg, 1, text + 1);
+	item1 = d2_GetWindowListItem(dlg, 1, text);
+	item2 = d2_GetWindowListItem(dlg, 1, text + 1);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -140,7 +140,7 @@ int __cdecl fcn_0059d380(int a0, char* object)
 		} else if (d2_CurrentElementId == item2) {
 			g_774654 = 1;
 		}
-	} while (fcn_005373e0((void*) fcn_0059d380, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) fcn_0059d380, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return 0;
 }
