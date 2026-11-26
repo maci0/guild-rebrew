@@ -25,9 +25,9 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_00529160(int, int, int, int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-int __cdecl fcn_00529670(int, int);
+int __cdecl gm_IsEntityAtBuilding(int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
-int __cdecl fcn_0055be70(int*);
+int __cdecl he_DetectNearbyPatrolAction(int*);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 void __cdecl fcn_004c5ed0(int, char*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
@@ -49,7 +49,7 @@ void __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl gm_GetScaledEntitySkill(char*, int);
 void __cdecl gm_EvalEntityInventoryValue(char*, int*);
 float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_0055c050(char*);
+int __cdecl he_HasNoActiveAction0x62(char*);
 int __cdecl _ftol(void);
 int* __cdecl fcn_00502cd0(int, ...);
 int* __cdecl gm_NextEntityQueryMatch(void);
@@ -116,7 +116,7 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 		for (;;) {
 			if (*(int*) (actionRecord + 0x8c + i * 4) != -1) {
 				e = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + i * 4));
-				if (e != 0 && *(int*) (e + 0x184) != 0 && fcn_00529670(e, rec1) == 0) {
+				if (e != 0 && *(int*) (e + 0x184) != 0 && gm_IsEntityAtBuilding(e, rec1) == 0) {
 					break;
 				}
 			}
@@ -142,7 +142,7 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 		req[1] = 0x451c4000;
 		req[2] = (int) actionRecord;
 		req[3] = 0;
-		if (fcn_0055be70(req) != 0) {
+		if (he_DetectNearbyPatrolAction(req) != 0) {
 			h = req[3];
 			*(int*) (actionRecord + 0xb4) = fcn_004f4f60(0x17, 1,
 			    *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4),
@@ -277,7 +277,7 @@ label_1bc:
 		} else {
 			val = 0;
 		}
-		if (fcn_0055c050((char*) row) == 0 || val == 0) {
+		if (he_HasNoActiveAction0x62((char*) row) == 0 || val == 0) {
 			goto label_fa92;
 		}
 		msg[0] = g_6b5c60[0];

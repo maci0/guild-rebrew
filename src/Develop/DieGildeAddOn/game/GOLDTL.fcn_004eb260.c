@@ -5,7 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int kind);
 
-int __cdecl amt_CheckZunftLevel2Eligibility(unsigned char* obj)
+int __cdecl amt_CanUpgradeBuildingTier2(unsigned char* obj)
 {
 	unsigned char* building;
 	int kind;

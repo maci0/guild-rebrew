@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *__cdecl gm_FindPublicBuilding(int);
+char *__cdecl gm_GetGuildHall(int);
 void *__cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_004c51a0(int, int, unsigned char, int);
 extern char *g_item_def_table;
@@ -46,7 +46,7 @@ int __cdecl fcn_004b0220(int a1, int a2, char *a3)
 		if ((int) a3 <= 0) {
 			return 1;
 		}
-		e = gm_FindPublicBuilding(1);
+		e = gm_GetGuildHall(1);
 		if (e == 0) {
 			return 0;
 		}

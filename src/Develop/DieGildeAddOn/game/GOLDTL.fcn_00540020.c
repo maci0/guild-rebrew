@@ -126,7 +126,7 @@ int __cdecl fcn_00472830(int, int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 int __cdecl fcn_00519190(int, ...);
 void __cdecl fcn_004c57e0(int, int);
-int __cdecl fcn_00546fe0(int);
+int __cdecl he_SumEventCostsForSubject(int);
 void __cdecl fcn_00516f60(void);
 void __cdecl fcn_005270c0(int);
 void __cdecl fcn_00528fd0(void);
@@ -379,7 +379,7 @@ void __cdecl fcn_00540020(void)
 		fcn_00469e70();
 	}
 	fcn_004c51a0(-1, SLOT4(g_774970 & 0xffff), g_773d75,
-		     -fcn_00546fe0(g_774970 & 0xffff));
+		     -he_SumEventCostsForSubject(g_774970 & 0xffff));
 	fcn_004bbc30(3, SLOT4(g_774970 & 0xffff));
 	fcn_004c5790(1, 0);
 	if (g_7747b0 & 4) {

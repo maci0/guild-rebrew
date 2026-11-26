@@ -49,7 +49,7 @@ float __cdecl fcn_00507540(int, int*);
 void __cdecl fcn_004c5530(Msg*);
 void __cdecl fcn_005100f0(int, int);
 
-void __cdecl fcn_00541ff0(int index)
+void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 {
 	float grade;
 	int info[4];

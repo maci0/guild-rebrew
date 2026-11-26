@@ -71,6 +71,7 @@ int __cdecl sim_IsUnrelated(unsigned char* entity)
  * compatible parents for stat inheritance. */
 
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 unsigned short __cdecl sim_FindAndMatchParents(unsigned int param)
 {
 	int weights[6];
@@ -157,6 +158,7 @@ done2:
 		(int) param,
 		0, 0, 0, 2);
 }
+#endif
 
 /* Client-only: whether an entity is younger than its adult age (discarded). */
 int __cdecl sim_IsUnderage(int slot)

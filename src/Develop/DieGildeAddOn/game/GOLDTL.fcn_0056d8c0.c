@@ -14,7 +14,7 @@ int __cdecl fcn_00505340(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 #include "client_scene_transform.h"
 
-void __cdecl fcn_0056d8c0(char* u)
+void __cdecl he_StartWeatherStorm(char* u)
 {
 	int i;
 	unsigned short k;

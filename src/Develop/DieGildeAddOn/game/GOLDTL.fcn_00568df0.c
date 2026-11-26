@@ -11,7 +11,7 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_00568df0(char* o)
+void __cdecl he_StartEntfuehren(char* o)
 {
 	char* p;
 	char* e;

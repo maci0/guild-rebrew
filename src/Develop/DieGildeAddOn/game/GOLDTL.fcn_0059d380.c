@@ -33,7 +33,7 @@ extern char s_6aa4b8[];
 
 extern char* __cdecl he_StartHandlungSearch(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
-extern int __cdecl fcn_0055c050(char*);
+extern int __cdecl he_HasNoActiveAction0x62(char*);
 extern void __cdecl io_FormatTextBuffer(char*, char*, ...);
 extern int __cdecl fcn_00526120(char*, int);
 extern int __cdecl fcn_00470820(int, int, char*);
@@ -85,7 +85,7 @@ int __cdecl fcn_0059d380(int a0, char* object)
 		fcn_00526120((char*) g_14abd04, 0);
 		return 0;
 	}
-	if (fcn_0055c050(object) == 0) {
+	if (he_HasNoActiveAction0x62(object) == 0) {
 		io_FormatTextBuffer(buf, (char*) 0x1a89, *(unsigned short*) (object + 0x27), object);
 		fcn_00526120(buf, 0);
 		return 0;

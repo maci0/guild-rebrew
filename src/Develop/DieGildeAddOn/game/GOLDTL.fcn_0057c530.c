@@ -1,4 +1,4 @@
-void __cdecl fcn_0057c530(char*, char*);
+void __cdecl he_SendZigeunerMsg9f(char*, char*);
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -29,7 +29,7 @@ void __cdecl fcn_004c5530(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 
-void __cdecl fcn_0057c530(char* a, char* b)
+void __cdecl he_SendZigeunerMsg9f(char* a, char* b)
 {
 	struct msg m;
 	char tag[100];

@@ -32,8 +32,8 @@ void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_00529160(char*, int, int, int);
-int __cdecl fcn_00529670(char*, char*);
-int __cdecl fcn_0055be70(int*);
+int __cdecl gm_IsEntityAtBuilding(char*, char*);
+int __cdecl he_DetectNearbyPatrolAction(int*);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -49,7 +49,7 @@ double __cdecl gm_RandomFloat01(void);
 int __cdecl _ftol(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_0055c050(char*);
+int __cdecl he_HasNoActiveAction0x62(char*);
 float __cdecl fcn_004ff210(short, int);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
 int __cdecl gm_GetMsgField(char*, char*);
@@ -134,7 +134,7 @@ void __cdecl fcn_00569ff0(char* e)
 				if (*p != -1) {
 					o = (char*) fcn_00508e40(*p);
 					if (o != 0 && *(int*) (o + 0x184) != 0) {
-						if (fcn_00529670(o, pa) == 0) {
+						if (gm_IsEntityAtBuilding(o, pa) == 0) {
 							MSG_COPY(e + 0x52);
 							gm_AddTime(e + 0x52, 0, 4, 0);
 							return;
@@ -156,7 +156,7 @@ void __cdecl fcn_00569ff0(char* e)
 			s.owner = e;
 			s.found = 0;
 			px = (char*) (0x7f4ca0 + *(unsigned short*) (pa + 0x27) * 0x21c);
-			if (fcn_0055be70((int*) &s) != 0) {
+			if (he_DetectNearbyPatrolAction((int*) &s) != 0) {
 				*(int*) (e + 0xb4) = fcn_004f4f60(0x17, 1,
 				        *(int*) (0x7f4ca4 + *(unsigned short*) (e + 8) * 0x21c),
 				        *(int*) (px + 4), *(int*) (pa + 1));
@@ -328,7 +328,7 @@ void __cdecl fcn_00569ff0(char* e)
 				flag = 0;
 			}
 		}
-		if (fcn_0055c050(pa) == 0) {
+		if (he_HasNoActiveAction0x62(pa) == 0) {
 			flag = 0;
 		}
 		fcn_004f4f60(0x17, 1,

@@ -16,7 +16,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c57e0(int, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_0056e170(char* u)
+void __cdecl he_RunDeathAnimation(char* u)
 {
 	char* h;
 

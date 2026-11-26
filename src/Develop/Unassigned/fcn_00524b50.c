@@ -1,5 +1,5 @@
 extern int he_LastEventSlot, g_7749d8, g_7dc424;
-void __cdecl fcn_00545510(void);
+void __cdecl he_FreeAllActions(void);
 int __cdecl ls_ReadVfsDataChecked(void *, int, int, void *);
 #include "Develop/Units/m_alloc/m_alloc.h"
 extern int ls_SaveVersion;
@@ -10,7 +10,7 @@ int __cdecl fcn_00524b50(unsigned char *S)
     unsigned char *rec, *p;
     int cnt, c2, i, j;
 
-    fcn_00545510();
+    he_FreeAllActions();
     if (!ls_ReadVfsDataChecked(&cnt, 4, 1, S))
         return 0;
     if (!ls_ReadVfsDataChecked(&c2, 4, 1, S))

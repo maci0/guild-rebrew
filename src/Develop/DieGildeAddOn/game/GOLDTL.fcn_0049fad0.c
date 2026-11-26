@@ -20,7 +20,7 @@ typedef struct F8 {
 extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl amt_CheckZunftLevel2Eligibility(char* e);
+int __cdecl amt_CanUpgradeBuildingTier2(char* e);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_0050d320(char* e, char k);
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
@@ -41,7 +41,7 @@ int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 	if (a1 != 0) {
 		return 0;
 	}
-	if (amt_CheckZunftLevel2Eligibility(e) != 1) {
+	if (amt_CanUpgradeBuildingTier2(e) != 1) {
 		return 0;
 	}
 	v = (int) max(gm_WalkEntityChain(*(unsigned short*) e) * 0.01f, 160.0f);

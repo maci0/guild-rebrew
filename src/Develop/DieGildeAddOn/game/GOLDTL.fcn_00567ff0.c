@@ -8,7 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_00567ff0(char* o)
+void __cdecl he_StartMarktSupervisor(char* o)
 {
 	pos14_7f4c00* p;
 

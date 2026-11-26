@@ -48,7 +48,7 @@ extern int d2_CurrentElementId;
 extern int g_14abc98;
 extern char s_6ab1b8[];
 
-int __cdecl fcn_0055c050(void*);
+int __cdecl he_HasNoActiveAction0x62(void*);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl fcn_00526120(char* buf, int zero);
 int __cdecl fcn_00502cd0(int val, int a, int b, int c);
@@ -90,7 +90,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 	cnt = 0;
 	ret = 0;
 	if (obj != 0 && *(unsigned short*) (obj + 0x27) != 0xffff) {
-		if (fcn_0055c050(obj) == 0) {
+		if (he_HasNoActiveAction0x62(obj) == 0) {
 			io_FormatTextBuffer(buf_b, 0x1a92, *(unsigned short*) (obj + 0x27), obj);
 			fcn_00526120(buf_b, 0);
 		} else {

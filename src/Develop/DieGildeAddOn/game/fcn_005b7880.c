@@ -115,7 +115,7 @@ void __cdecl fcn_00535550(char*);
 void __cdecl fcn_00535560(char*);
 int __cdecl fcn_005b5750(void);
 int __cdecl fcn_0050b750(int, int);
-int __cdecl fcn_00526010(void*, int, int);
+int __cdecl gm_CheckEntityStock(void*, int, int);
 void __cdecl fcn_004c4eb0(int);
 void __cdecl fcn_004c5150(int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
@@ -276,7 +276,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 			}
 			perRow = n / f.nSlots;
 			y = perRow / 3;
-			if (fcn_00526010(
+			if (gm_CheckEntityStock(
 			        (void*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
 						]),
 			        fcn_0050b750(n, g_773d75),

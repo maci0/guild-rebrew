@@ -1,7 +1,7 @@
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
 /* ADDRESS: GOLDTL 0x00508c30 */
-void __cdecl gm_GenerateShuffledByteIndices(unsigned char count, unsigned char* arr)
+void __cdecl gm_ShuffleBytes(unsigned char count, unsigned char* arr)
 {
 	unsigned char i;
 	int half_swaps;

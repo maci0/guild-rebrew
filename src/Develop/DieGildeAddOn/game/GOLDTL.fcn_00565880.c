@@ -27,7 +27,7 @@ int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00565880(char* u)
+void __cdecl he_RunAction0x27(char* u)
 {
 	char text[0x400];
 	char* e;

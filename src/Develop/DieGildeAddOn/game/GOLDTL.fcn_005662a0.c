@@ -12,7 +12,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-void __cdecl fcn_005662a0(char* o)
+void __cdecl he_StartBefoerdern(char* o)
 {
 	char* p;
 	char* e;

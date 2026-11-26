@@ -21,7 +21,7 @@ void __cdecl fcn_004c5620(int, char*);
 int __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_004c5b00(int, struct target7);
 
-void __cdecl fcn_0054a5a0(char* u)
+void __cdecl he_AllocPredigt(char* u)
 {
 	char* found;
 	struct target7 t;

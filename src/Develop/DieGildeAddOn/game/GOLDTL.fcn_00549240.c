@@ -36,19 +36,19 @@ char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 void __cdecl he_FreeAction(char*);
 void __cdecl fcn_004c5530(struct msg*);
 
-void __cdecl fcn_00549240(void)
+void __cdecl he_RestartAction0xa6(void)
 {
-	struct msg m;
-	char* p;
+	struct msg req_msg;
+	char* existing;
 
-	p = he_StartHandlungSearch(1, 0, 0xa6);
-	if (p != 0) {
-		he_FreeAction(p);
+	existing = he_StartHandlungSearch(1, 0, 0xa6);
+	if (existing != 0) {
+		he_FreeAction(existing);
 	}
-	m.b4 = (char) 0xa6;
-	m.fc = -1;
-	m.b36 = 1;
-	m.f8 = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id;
-	m.pos = gm_GameTime;
-	fcn_004c5530(&m);
+	req_msg.b4 = (char) 0xa6;
+	req_msg.fc = -1;
+	req_msg.b36 = 1;
+	req_msg.f8 = ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id;
+	req_msg.pos = gm_GameTime;
+	fcn_004c5530(&req_msg);
 }

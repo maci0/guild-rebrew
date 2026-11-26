@@ -13,7 +13,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_00507400(int, int);
 int __cdecl fcn_004c4fc0(int, int, int, short, int, int, int, int);
 
-void __cdecl fcn_0056de60(char* o)
+void __cdecl he_StartInitBetrieb(char* o)
 {
 	int x;
 	unsigned char* t;

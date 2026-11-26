@@ -1,6 +1,6 @@
 #include "client_packet_builder.h"
 
-void __cdecl fcn_00541ff0(int);
+void __cdecl gm_UpdateEntityAgingAndTraining(int);
 
 // SIZE 0x21c
 struct s_7f4ca0 {
@@ -32,24 +32,24 @@ void __cdecl fcn_004c5360(void);
 void __cdecl gm_ApplyHourlyEntityUpdates(void)
 {
 	int i;
-	char* k;
-	struct s_7f4ca0* r;
-	char c;
+	char* cursor;
+	struct s_7f4ca0* rec;
+	char flag_val;
 
 	i = 0;
-	for (k = &((struct s_7f4ca0*)g_7f4ca0)[0].kind; (int) k < (int) &((struct s_7f4ca0*)g_7f4ca0)[768].kind; k += sizeof(struct s_7f4ca0)) {
-		r = (struct s_7f4ca0*) (k - 2);
-		if (r->id != 0xffff) {
-			if (r->b164 != 0 || r->b165 != 0) {
-				fcn_00541ff0(i);
+	for (cursor = &((struct s_7f4ca0*)g_7f4ca0)[0].kind; (int) cursor < (int) &((struct s_7f4ca0*)g_7f4ca0)[768].kind; cursor += sizeof(struct s_7f4ca0)) {
+		rec = (struct s_7f4ca0*) (cursor - 2);
+		if (rec->id != 0xffff) {
+			if (rec->b164 != 0 || rec->b165 != 0) {
+				gm_UpdateEntityAgingAndTraining(i);
 			}
-			if ((r->kind == 2 || r->kind == 5 || r->kind == 4) && gm_CheckAndCollectEntityDebt(r, 0) != 0) {
-				fcn_004ff210(r->id, (int) -(r->f1c + 5.0f));
+			if ((rec->kind == 2 || rec->kind == 5 || rec->kind == 4) && gm_CheckAndCollectEntityDebt(rec, 0) != 0) {
+				fcn_004ff210(rec->id, (int) -(rec->f1c + 5.0f));
 			}
-			if (r->b1b1 > 0) {
-				c = -1;
-				cm_BeginPacketFieldDelta((char*) r, r->f4);
-				fcn_004c4670(1, 1, k - g_aed32c + 0x1af, &c);
+			if (rec->b1b1 > 0) {
+				flag_val = -1;
+				cm_BeginPacketFieldDelta((char*) rec, rec->f4);
+				fcn_004c4670(1, 1, cursor - g_aed32c + 0x1af, &flag_val);
 				fcn_004c5360();
 			}
 		}

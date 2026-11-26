@@ -14,7 +14,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_005492e0(char*);
 void __cdecl fcn_004c6040(int, int, int, int);
 
-void __cdecl fcn_0055bc40(char* h)
+void __cdecl he_ClearEntityActions(char* h)
 {
 	char* e;
 

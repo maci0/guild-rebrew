@@ -29,7 +29,7 @@ Figure* __cdecl fcn_004c4480(int);
 int __cdecl fcn_004c4700(unsigned char, unsigned char, short, void*);
 void __cdecl fcn_004c53a0(void);
 
-void __cdecl fcn_00511900(int count, int size, int* faces)
+void __cdecl cm_DistributeStartingWares(int count, int size, int* faces)
 {
 	int face;
 	int price[5];

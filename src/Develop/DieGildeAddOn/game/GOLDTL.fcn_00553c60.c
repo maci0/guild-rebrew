@@ -8,7 +8,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
-void __cdecl fcn_00553c60(char* e)
+void __cdecl he_AllocBetriebsPruefung(char* e)
 {
 	char* t;
 

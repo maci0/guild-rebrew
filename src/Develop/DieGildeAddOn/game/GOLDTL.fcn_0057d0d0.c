@@ -5,7 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_00529160(int, int, int, char*);
-int __cdecl fcn_00529670(char*, char*);
+int __cdecl gm_IsEntityAtBuilding(char*, char*);
 void __cdecl he_FreeAction(char* unit);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
@@ -14,8 +14,8 @@ int __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 void __cdecl fcn_004c5ed0(int, char*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl fcn_0057ceb0(char* entity);
-int __cdecl fcn_0057d7e0(char* e);
-void __cdecl fcn_0057d830(char* u, int count);
+int __cdecl he_FindNextTargetBuilding0a1(char* e);
+void __cdecl he_AccumulateEvent0a1Yield(char* u, int count);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0057d0d0 */
@@ -64,7 +64,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 	if (v == 0) {
 	mode = -1;
 	if (*(int*) (entity + 0xb0) > 0) {
-		found = fcn_0057d7e0(entity);
+		found = he_FindNextTargetBuilding0a1(entity);
 		flag = 1;
 		*(int*) (entity + 0xbc) = *(int*) (entity + 0xbc) + 1;
 	}
@@ -116,7 +116,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 			};
 
 			for (i = 0; i < n; i++) {
-				if (fcn_00529670((char*) objs[i], (char*) found) == 0) {
+				if (gm_IsEntityAtBuilding((char*) objs[i], (char*) found) == 0) {
 					*(int*) (entity + 0x70) = 1;
 					*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 					gm_AddTime(entity + 0x52, 0, 5, 0);
@@ -153,7 +153,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 			for (i = 0; i < n; i++) {
 				fcn_004c5c80(*(int*) (objs[i] + 4));
 			}
-			fcn_0057d830(entity, n);
+			he_AccumulateEvent0a1Yield(entity, n);
 			*(int*) (entity + 0xb0) = *(int*) (entity + 0xb0) - 0x78;
 			*(pos14_7f4c00*) (entity + 0x52) = gm_GameTime;
 			*(int*) (entity + 0x70) = 0;

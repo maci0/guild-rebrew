@@ -17,7 +17,7 @@ extern int g_14abbf4;
 extern int g_14ce8e0;
 extern char s_68d704[];
 
-int __cdecl fcn_00526010(Player*, int, char);
+int __cdecl gm_CheckEntityStock(Player*, int, char);
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -39,7 +39,7 @@ int __cdecl fcn_005b5750(void)
 
 	r = 0;
 	timer = main_LoopFlags;
-	if (fcn_00526010(((Player *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), 0x140, (*(char*)&g_773d75)) == 0) {
+	if (gm_CheckEntityStock(((Player *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), 0x140, (*(char*)&g_773d75)) == 0) {
 		return 0;
 	}
 	dlg = fcn_00470820(0, 0, s_68d704);

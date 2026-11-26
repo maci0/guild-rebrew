@@ -25,7 +25,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CheckActionBlocker(void*, int);
-int __cdecl fcn_00526010(void*, int, char);
+int __cdecl gm_CheckEntityStock(void*, int, char);
 int __cdecl gm_AccumulateTyped2(char*);
 
 typedef struct {
@@ -87,7 +87,7 @@ int __cdecl fcn_005d52d0(char* p)
 	for (;;) {
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (d2_CheckActionBlocker(p, 8) == 0 || fcn_00526010(p, s.n, g_773d75) == 0) {
+				if (d2_CheckActionBlocker(p, 8) == 0 || gm_CheckEntityStock(p, s.n, g_773d75) == 0) {
 					goto tail;
 				}
 				fcn_004c6ae0(*(int*) (p + 4), -8);

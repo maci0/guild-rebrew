@@ -29,7 +29,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00529160(unsigned char*, char*, unsigned int, unsigned char*);
-int __cdecl fcn_00529670(char*, char*);
+int __cdecl gm_IsEntityAtBuilding(char*, char*);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(int);
@@ -116,7 +116,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			if (*(int*) (hs + 0x184) == 0) {
 				continue;
 			}
-			if (fcn_00529670(hs, ent2) == 0) {
+			if (gm_IsEntityAtBuilding(hs, ent2) == 0) {
 				goto used;
 			}
 		}

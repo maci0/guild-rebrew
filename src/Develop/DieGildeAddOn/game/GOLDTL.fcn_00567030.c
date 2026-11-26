@@ -5,7 +5,7 @@ int __cdecl gm_CheckEntityType(char*);
 char* __cdecl fcn_005049a0(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 
-int __cdecl fcn_00567030(char* h, int* out1, int* out2)
+int __cdecl he_GetEntityReturnTarget(char* h, int* out1, int* out2)
 {
 	int id;
 	char* q;

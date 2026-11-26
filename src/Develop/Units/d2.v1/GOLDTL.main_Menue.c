@@ -67,7 +67,7 @@ void __cdecl fcn_005e2b60(void);
 int __cdecl d2_ShowLoadGameMenu(void);
 int __cdecl fcn_0053a160(void);
 int __cdecl d2_ChooseTutorial(void);
-void __cdecl fcn_00584530(void);
+void __cdecl d2_InitDefaultMenueProfile(void);
 void __cdecl fcn_00469e70(void);
 void __cdecl fcn_004acee0(void);
 int __cdecl fcn_0053f460(void);
@@ -213,7 +213,7 @@ void __cdecl main_Menue(void)
 			} else if (d2_CurrentElementId == b[10]) {
 				d2_SetSlotVisibility(v5, 0);
 				if (d2_ChooseTutorial()) {
-					fcn_00584530();
+					d2_InitDefaultMenueProfile();
 					*(unsigned char*) &g_6a375c = 1;
 					*(int*) g_7e1d00 = *(int *)0x6a3ad0;
 					*(int *)0x7e1d04 = *(int *)0x6a3ad4;

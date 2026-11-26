@@ -11,7 +11,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 int __cdecl fcn_004c5620(int, char*);
 
-void __cdecl fcn_005502d0(char* u)
+void __cdecl he_StartAction0x4b(char* u)
 {
 	char text[0x400];
 	char* a;

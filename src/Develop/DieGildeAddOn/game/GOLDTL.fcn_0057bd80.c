@@ -15,7 +15,7 @@ int __cdecl fcn_004c4450(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_0057c630(ENTITY_RECORD*, int);
+void __cdecl he_ChargeOrCurseZigeuner(ENTITY_RECORD*, int);
 void __cdecl fcn_0057bed0(ENTITY_RECORD*, char*, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -49,7 +49,7 @@ void __cdecl fcn_0057bd80(char* u)
 			*(int*) (u + 0x84) = fcn_004c5620(1, u);
 			break;
 		case 1:
-			fcn_0057c630(h, *(int*) (u + 0xac));
+			he_ChargeOrCurseZigeuner(h, *(int*) (u + 0xac));
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 			break;
 		}

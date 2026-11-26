@@ -21,7 +21,7 @@ void __cdecl fcn_0059b0b0(void*);
 void __cdecl fcn_0059b140(void*);
 void __cdecl fcn_0059c760(void*);
 void __cdecl fcn_0059cd20(void*);
-void __cdecl fcn_00590330(void*);
+void __cdecl d2_RunFriedhofInteriorHud(void*);
 void __cdecl fcn_0058ff00(void*);
 void __cdecl fcn_005e6840(void*);
 void __cdecl fcn_005e68e0(void*);
@@ -113,7 +113,7 @@ void __cdecl fcn_005a86a0(void* a0)
 		fcn_0059cd20(*(void**) &g_7746c8);
 		break;
 	case 0x211:
-		fcn_00590330(*(void**) &g_7746c8);
+		d2_RunFriedhofInteriorHud(*(void**) &g_7746c8);
 		break;
 	case 0x21b:
 		fcn_0058ff00(*(void**) &g_7746c8);

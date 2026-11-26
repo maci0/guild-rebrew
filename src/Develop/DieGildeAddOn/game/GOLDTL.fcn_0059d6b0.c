@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 extern int g_14abaac;
-int __cdecl fcn_0055c050(char* obj); void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+int __cdecl he_HasNoActiveAction0x62(char* obj); void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
@@ -45,7 +45,7 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 	if (*(unsigned short*) (obj + 0x27) == 0xffff) {
 		return;
 	}
-	if (fcn_0055c050(obj) == 0) {
+	if (he_HasNoActiveAction0x62(obj) == 0) {
 		io_FormatTextBuffer(msg, 0x1a92, *(unsigned short*) (obj + 0x27), obj);
 		fcn_00526120(msg, 0);
 		return;

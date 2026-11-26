@@ -40,7 +40,7 @@ int __cdecl gm_CalculateGebaeudeValue(char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c5530(struct msg*);
 
-void __cdecl fcn_00548d50(void)
+void __cdecl he_TriggerAction0x67(void)
 {
 	char* cand[3];
 	struct stats info;

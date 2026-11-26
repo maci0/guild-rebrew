@@ -18,7 +18,7 @@ extern char g_6a97d4[];
 extern char g_68b3f8[];
 extern char g_6a97b8[];
 
-void __cdecl fcn_0058e4a0(int n, int* a, int* b, int base);
+void __cdecl d2_RollSeanceAudioPairs(int n, int* a, int* b, int base);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int a1, int idx);
 void __cdecl fcn_00471db0(int, int);
@@ -53,7 +53,7 @@ int __cdecl d2_RunSeance(int a1, S58* scriptSubject)
 	int j;
 	int k;
 
-	fcn_0058e4a0(8, snd, ids, 0x40d7);
+	d2_RollSeanceAudioPairs(8, snd, ids, 0x40d7);
 	w = fcn_00470820(0, 0, g_6a97f8);
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00471db0(w, 1);

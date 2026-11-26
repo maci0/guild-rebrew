@@ -57,7 +57,7 @@ void __cdecl fcn_00471e30(int);
 void* __cdecl fcn_004ec7d0(unsigned char*);
 int __cdecl fcn_004ecf00(char*, int*, float*, int);
 int __cdecl fcn_004ecc20(int);
-int __cdecl fcn_00585760(char*, int*, int);
+int __cdecl he_SendEvent096(char*, int*, int);
 int __cdecl fcn_00585850(char*, int*);
 void __cdecl fcn_00526120(int, int);
 void __cdecl fcn_00532ef0(void);
@@ -210,7 +210,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 						continue;
 					}
 					if (fcn_004ecc20((int) data) != 0) {
-						fcn_00585760(e, records, i);
+						he_SendEvent096(e, records, i);
 					} else {
 						fcn_00526120(g_14b59e0, 0);
 					}

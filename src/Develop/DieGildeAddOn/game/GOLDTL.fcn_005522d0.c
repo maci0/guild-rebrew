@@ -21,7 +21,7 @@ float __cdecl gm_ApplyPlagueInfection(char* entity);
 void* __cdecl gm_LookupEntityRecordById(unsigned int slot_id);
 void __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int id);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
-int __cdecl fcn_00529670(char* a, char* b);
+int __cdecl gm_IsEntityAtBuilding(char* a, char* b);
 void __cdecl he_FreeAction(void* ev);
 void __cdecl fcn_005498b0(char* a1, char* a2, char* a3, char* a4, int a5, float a6);
 void __cdecl fcn_00551f90(void* ev);
@@ -145,7 +145,7 @@ void __cdecl he_RunPlagueEvent(char* ev)
 		}
 		for (i = 0; i < 4; i++) {
 			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
-			if (p && !fcn_00529670((char*) p, (char*) rec)) {
+			if (p && !gm_IsEntityAtBuilding((char*) p, (char*) rec)) {
 				*(unsigned int*) (ev + 0x70) = 2;
 				gm_AddTime(ev + 0x52, 0, 5, 0);
 				*(unsigned int*) (ev + 0x84) = fcn_004c5620(2, ev);
@@ -248,7 +248,7 @@ after_scan:
 		}
 		for (i = 0; i < 4; i++) {
 			p = gm_LookupEntityRecordById(*(unsigned int*) (ev + 0xbc + i * 4));
-			if (p && !fcn_00529670((char*) p, (char*) rec)) {
+			if (p && !gm_IsEntityAtBuilding((char*) p, (char*) rec)) {
 				*(unsigned int*) (ev + 0x70) = 3;
 				gm_AddTime(ev + 0x52, 0, 5, 0);
 				*(unsigned int*) (ev + 0x84) = fcn_004c5620(3, ev);

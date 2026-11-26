@@ -47,7 +47,7 @@ int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 void __cdecl fcn_0050f900(void);
 void __cdecl fcn_0050ee80(char*, char*);
 float __cdecl eval_ObjektPreis2Credits(int, int);
-int __cdecl fcn_00526010(char*, int, char);
+int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl d2_CheckFundsAndNotify(char*, int, int, char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526920(char*, int, char*);
@@ -150,7 +150,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 							n = (int) eval_ObjektPreis2Credits(sel, 100);
 							amount = (int) (n * f);
 							if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
-								if (fcn_00526010((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970], amount, (char) g_773d75))
+								if (gm_CheckEntityStock((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970], amount, (char) g_773d75))
 									ok = 1;
 								io_FormatTextBuffer(buf, 0x1a, amount, a0, sel * 2 + 0x9a8);
 							} else {

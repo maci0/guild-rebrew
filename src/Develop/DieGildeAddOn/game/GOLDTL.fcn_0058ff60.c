@@ -38,7 +38,7 @@ int __cdecl fcn_00526120(char*, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_004c5530(Packet*);
 
-int __cdecl fcn_0058ff60(char* a1, unsigned short* a2, int a3)
+int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char* a1, unsigned short* a2, int a3)
 {
 	Packet pkt;
 	char buf[0x400];

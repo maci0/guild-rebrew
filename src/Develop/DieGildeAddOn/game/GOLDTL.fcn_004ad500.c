@@ -1,5 +1,5 @@
 float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
-int __cdecl amt_GetOfficeRank(int);
+int __cdecl amt_GetRoleLevel(int);
 int __cdecl fcn_004e6f10(int);
 float __cdecl amt_GetOfficeAffinityScore(unsigned char*, int);
 
@@ -19,8 +19,8 @@ float __cdecl fcn_004ad500(unsigned char* subjectEntity, unsigned short* otherEn
 		d = d + d;
 	w = (subjectEntity[0xd] + 1) * 0.1f;
 	w = w + w;
-	r1 = (float) amt_GetOfficeRank(subjectEntity[0x166]) / amt_GetOfficeRank(0x1b);
-	r2 = (float) amt_GetOfficeRank(subjectEntity[0x167]) / amt_GetOfficeRank(0x1b);
+	r1 = (float) amt_GetRoleLevel(subjectEntity[0x166]) / amt_GetRoleLevel(0x1b);
+	r2 = (float) amt_GetRoleLevel(subjectEntity[0x167]) / amt_GetRoleLevel(0x1b);
 	s1 = 0.0f;
 	if (subjectEntity[0x166] != 0)
 		s1 = amt_GetOfficeAffinityScore(subjectEntity, fcn_004e6f10(subjectEntity[0x166]));

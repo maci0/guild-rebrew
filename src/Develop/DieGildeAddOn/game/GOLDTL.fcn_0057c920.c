@@ -10,7 +10,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
-void __cdecl fcn_0057c920(char* o)
+void __cdecl he_InitEvent0a0(char* o)
 {
 	if (o[0x78] & 4) {
 		return;

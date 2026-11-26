@@ -27,7 +27,7 @@ void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 void __cdecl fcn_004c5480(int, int, float);
 void __cdecl he_FreeAction(char*);
-void __cdecl fcn_0054c720(char*, char*, char*);
+void __cdecl he_RollTripletEventScores(char*, char*, char*);
 int __cdecl fcn_004c4fa0(void*);
 int __cdecl fcn_004f25d0(int, unsigned char**, void**);
 int __cdecl fcn_004ef6b0(int, void*);
@@ -137,7 +137,7 @@ void __cdecl fcn_00544a90(char* e)
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0x18, 0, 0);
 			*(unsigned short*) (e + 0x56) = 8;
 			e[0xba] = 1;
-			fcn_0054c720(e, a, b);
+			he_RollTripletEventScores(e, a, b);
 			*(int*) (e + 0x84) = -1;
 			fcn_004c5620(0, e);
 			return;

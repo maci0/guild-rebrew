@@ -8,7 +8,7 @@ int __cdecl amt_FindOfficeSlotsByKind(int, int, void *);
 int __cdecl fcn_004e4ae0(char *, int);
 int __cdecl fcn_004e4e90(int);
 void __cdecl fcn_004e4de0(int, ...);
-int __cdecl fcn_005358e0(int);
+int __cdecl cm_WaitNetworkSyncBanner(int);
 int __cdecl fcn_004ea130(int);
 int __cdecl fcn_004e99e0(int, int, void *);
 
@@ -195,7 +195,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         s0C = k;
     }
 
-    fcn_005358e0(0x6b5c60);
+    cm_WaitNetworkSyncBanner(0x6b5c60);
     if (fcn_004ea130(s20) == 0) {
         unsigned short v = g_774970;
         if (*(int *)((char *)a0 + 0xc) == *(int *)(0x7f4ca4 + (unsigned int)v * 0x21c)) {
@@ -254,7 +254,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         } while (pt < ptEnd);
     }
     /* native 0x4dac46: scene handle, per-entity text packets */
-    fcn_005358e0(0x6b5c60);
+    cm_WaitNetworkSyncBanner(0x6b5c60);
     s14 = fcn_00470820((char *)0x68c1ec, 0, 0);
     fcn_00471af0(s14, 0);
     fcn_00471d80(s14, 3);
@@ -287,7 +287,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         fcn_0051af00((char *)&mid[0x2a8], (char *)0x68c140, flug[s30]);
         fcn_004e44f0(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x2a8]));
         s3C = 1;
-        fcn_005358e0(0x6b5c60);
+        cm_WaitNetworkSyncBanner(0x6b5c60);
     }
     s40 = 0;
 
@@ -485,7 +485,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 fcn_00471e30(s60);
                 fcn_00471e30(s5C);
                 fcn_004e4de0(0x3e8);
-                fcn_005358e0(0x6b5c60);
+                cm_WaitNetworkSyncBanner(0x6b5c60);
             }
             s40 += 1;
             s00 += 0x18;
@@ -521,7 +521,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
             }
             fcn_0051af00((char *)&mid[0x1a8], (char *)0x68c140, flug[s30]);
             fcn_004e44f0(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x1a8]));
-            fcn_005358e0(0x6b5c60);
+            cm_WaitNetworkSyncBanner(0x6b5c60);
             s3C = 1;
     }
     if (s28 > 0) {
@@ -796,7 +796,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     fcn_00471e30(s14);
                     fcn_00471e30(s50);
                     fcn_004e4de0(0x3e8);
-                    fcn_005358e0(0x6b5c60);
+                    cm_WaitNetworkSyncBanner(0x6b5c60);
                 }
             }
             s40 += 1;

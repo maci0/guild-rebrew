@@ -14,7 +14,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunFriedhofUpgradeWorkerDialog(int);
 void __cdecl fcn_0058dbe0(int);
 
-void __cdecl fcn_00590330(int a)
+void __cdecl d2_RunFriedhofInteriorHud(int a)
 {
 	int x;
 	int y;
@@ -22,7 +22,7 @@ void __cdecl fcn_00590330(int a)
 	x = 0;
 	y = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop(fcn_00590330, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunFriedhofInteriorHud, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			x = RegisterStatusText(g_6a99a8, g_14b57fc, 0x28);
 			y = RegisterStatusText(g_6a998c, g_14b55f0, 0x13);

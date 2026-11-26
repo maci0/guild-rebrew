@@ -9,7 +9,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_00526920(char*, int, char*);
 
-void __cdecl fcn_0057fd60(int a)
+void __cdecl d2_FocusTutorialBuilding0x12(int a)
 {
 	char* e;
 	char* r;

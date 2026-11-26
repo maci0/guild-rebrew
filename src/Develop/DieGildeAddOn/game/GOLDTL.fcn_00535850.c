@@ -13,13 +13,13 @@ void __cdecl main_RunFrameLoop(int, int);
 void __cdecl cm_SaveGameAndWait(int flags, char* name)
 {
 	char buf[0x7c];
-	int s;
+	int cmd_slot;
 
 	memset(buf, 0, sizeof(buf));
 	strcpy(buf, name);
-	s = fcn_004c5790(0xe, buf);
+	cmd_slot = fcn_004c5790(0xe, buf);
 	flags |= 0x300000;
-	while (fcn_004c4450(s) == 0) {
+	while (fcn_004c4450(cmd_slot) == 0) {
 		fcn_00533a40(name);
 		main_RunFrameLoop(0, flags);
 	}

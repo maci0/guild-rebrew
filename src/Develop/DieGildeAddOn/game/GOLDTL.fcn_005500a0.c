@@ -12,7 +12,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c6090(unsigned char*, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_005500a0(char* o)
+void __cdecl he_AllocRndGeselle(char* o)
 {
 	unsigned char* e;
 	BUILDING_PROTOTYPE* t;

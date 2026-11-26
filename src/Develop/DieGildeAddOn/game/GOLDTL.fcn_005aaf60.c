@@ -30,7 +30,7 @@ void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl fcn_0050b750(int, unsigned char);
-int __cdecl fcn_00526010(void*, int, unsigned char);
+int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
 void __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00526120(char*, int);
@@ -114,7 +114,7 @@ void __cdecl fcn_005aaf60(char* gebaeude)
 			if (d2_CurrentElementId == a) {
 				d = d2_GetControlValue(c);
 				d = fcn_0050b750(d, g_773d75);
-				if (fcn_00526010((char*) (g_774970 * 0x21c + (int) g_7f4ca0), d,
+				if (gm_CheckEntityStock((char*) (g_774970 * 0x21c + (int) g_7f4ca0), d,
 					g_773d75) != 0) {
 					fcn_004c5150(*(int*) (h + 2), *(int*) (g_774970 * 0x21c + (int) g_7f4ca4),
 						g_773d75, d);

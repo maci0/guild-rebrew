@@ -5,7 +5,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl fcn_00507910(unsigned char typ);
 int __cdecl gm_CheckStatLevel(int a0, int typ);
-int __cdecl fcn_005903d0(void* geb, void* a1, void* a2);
+int __cdecl gm_GetBuildingUiFlags(void* geb, void* a1, void* a2);
 int __cdecl gm_MapEntityStatRange(int typ);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -27,7 +27,7 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 (unsigned int) *a1]));
 		found = gm_CheckStatLevel(playerIndex, fcn_00507910(*rec));
 		if (*rec == 0x1d)
-			return fcn_005903d0((void*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex])), a1, a2);
+			return gm_GetBuildingUiFlags((void*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex])), a1, a2);
 		switch (*rec) {
 		case 33:
 				if (*(unsigned short*) (a1 + 0x25) == playerIndex)

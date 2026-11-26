@@ -31,7 +31,7 @@ extern int g_773d48;
 extern int g_99f7ac;
 
 void __cdecl fcn_004f4830(int kind, Offer* o);
-char* __cdecl gm_FindPublicBuilding(int n);
+char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 void __cdecl fcn_004c51a0(int a, int b, int c, int d);
 
@@ -47,7 +47,7 @@ int __cdecl gm_CalcLaw0x0cTaxSlot(unsigned short id, Slots* s, unsigned char fla
 
 	fcn_004f4830(0xc, &offer);
 	amt = offer.amount;
-	p = gm_FindPublicBuilding(1);
+	p = gm_GetGuildHall(1);
 	fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 	n = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].value_1a0) + (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].value_1a4);
 	f = n * (amt * 0.01f);
@@ -68,7 +68,7 @@ int __cdecl gm_CalcLaw0x0cTaxSlot(unsigned short id, Slots* s, unsigned char fla
 		s->amount[i] = amt;
 		s->value[i] = v;
 		if (flags & 1) {
-			p = gm_FindPublicBuilding(1);
+			p = gm_GetGuildHall(1);
 			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 			fcn_004c51a0(*(int*) (p + 2), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), 0, v);
 			g_773d48++;

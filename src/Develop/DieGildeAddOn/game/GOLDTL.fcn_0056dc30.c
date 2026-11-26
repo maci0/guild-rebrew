@@ -25,7 +25,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_0056dc30(char* u)
+void __cdecl he_RunHeilen(char* u)
 {
 	float x;
 	char text[0x200];

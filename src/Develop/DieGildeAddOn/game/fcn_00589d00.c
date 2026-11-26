@@ -27,7 +27,7 @@ typedef struct {
 
 int __cdecl gm_WalkEntityChain(unsigned short);
 void* __cdecl fcn_005cd440(void*, int, int, int);
-int __cdecl amt_GetOfficeRank(int);
+int __cdecl amt_GetRoleLevel(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -43,7 +43,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00526010(char*, int, char);
+int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl fcn_005898f0(void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
@@ -85,7 +85,7 @@ void __cdecl fcn_00589d00(int a0)
 	if (selectedEntity == 0)
 		return;
 	total += gm_WalkEntityChain(*(unsigned short*) selectedEntity);
-	n = amt_GetOfficeRank(*(unsigned char*) (selectedEntity + 0x166)) / 3 + 2;
+	n = amt_GetRoleLevel(*(unsigned char*) (selectedEntity + 0x166)) / 3 + 2;
 	amt[0] = (int) (float) n;
 	amt[1] = (int) (1.5f * (float) n);
 	amt[2] = (int) ((float) n + (float) n);
@@ -125,7 +125,7 @@ void __cdecl fcn_00589d00(int a0)
 			if (pick == no) {
 				char* p;
 
-				if (fcn_00526010(
+				if (gm_CheckEntityStock(
 				        (char*) (0x7f4ca0 +
 				                 (unsigned int) g_774970 *
 				                     0x21c),

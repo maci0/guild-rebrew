@@ -26,7 +26,7 @@ char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_00526920(char*, int, char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_005703b0(char* u)
+void __cdecl he_RunEvent0x85(char* u)
 {
 	char* list[0x40];
 	int n;

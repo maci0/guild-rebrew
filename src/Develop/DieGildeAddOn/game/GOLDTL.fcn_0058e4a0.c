@@ -3,7 +3,7 @@
 
 unsigned short __cdecl gm_RandomMod(int);
 
-void __cdecl fcn_0058e4a0(int n, int* a, int* b, int base)
+void __cdecl d2_RollSeanceAudioPairs(int n, int* a, int* b, int base)
 {
 	int i;
 	int v;

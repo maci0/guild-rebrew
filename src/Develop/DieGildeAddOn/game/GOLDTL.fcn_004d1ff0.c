@@ -22,7 +22,7 @@ void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 int __cdecl fcn_00445600(int, int, int, char *);
 void __cdecl fcn_00442c00(int, int);
-void __cdecl gm_GenerateShuffledByteIndices(int, void *);
+void __cdecl gm_ShuffleBytes(int, void *);
 void __cdecl d3_SetSubtreeVisible(int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl gm_FindRecordById(int);
@@ -271,7 +271,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 		slots[0] = 0;
 		slots[1] = 0;
 		slots[2] = 0;
-		gm_GenerateShuffledByteIndices(9, ids);
+		gm_ShuffleBytes(9, ids);
 		i++;
 		fcn_0064d41a(buf, "dummy_KARREN_0%i", i);
 		h = fcn_00445600(0, 0x100, 0, buf);

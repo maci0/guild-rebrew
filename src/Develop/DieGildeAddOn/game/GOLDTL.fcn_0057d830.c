@@ -14,7 +14,7 @@ int __cdecl gm_GetBuildingTechEffect(int, int, int);
 float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl fcn_005b5660(int, unsigned short*);
 
-void __cdecl fcn_0057d830(char* u, int count)
+void __cdecl he_AccumulateEvent0a1Yield(char* u, int count)
 {
 	int found;
 	float sq;

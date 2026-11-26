@@ -22,7 +22,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_0055c050(char*);
+int __cdecl he_HasNoActiveAction0x62(char*);
 int __cdecl fcn_004fa6f0(int, int*, int*);
 int __cdecl fcn_0050c4e0(unsigned char*);
 int __cdecl fcn_0050d0c0(char*, int);
@@ -102,7 +102,7 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 			if (kind != 0x13 && kind != 4 && kind != 0x10) {
 				continue;
 			}
-			if (fcn_0055c050(p) == 0) {
+			if (he_HasNoActiveAction0x62(p) == 0) {
 				continue;
 			}
 			if (*(int*) (p + 0x61) != 0 && fcn_004fa6f0(*(int*) (p + 0x61) + 0x4c, &a, &b) != 0) {

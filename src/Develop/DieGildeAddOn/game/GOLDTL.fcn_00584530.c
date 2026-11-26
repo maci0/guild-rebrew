@@ -31,7 +31,7 @@ char* __cdecl strcpy(char*, const char*);
 int __cdecl fcn_004fdec0(char*);
 Name6 __cdecl fcn_00506d50(int);
 
-void __cdecl fcn_00584530(void)
+void __cdecl d2_InitDefaultMenueProfile(void)
 {
 	Name6 r;
 

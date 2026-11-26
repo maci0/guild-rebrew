@@ -22,7 +22,7 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl gm_CheckInventoryCapacity(char*, int, int);
 int __cdecl fcn_0050e170(int, int, int);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
-int __cdecl fcn_00526010(void*, int, int);
+int __cdecl gm_CheckEntityStock(void*, int, int);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 void __cdecl fcn_0057e880(int, int, int, int);
@@ -89,7 +89,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 				countf = (float)count;
 				prod = countf * unitPrice;
 				scale = flt_1 / a5;
-				if (fcn_00526010(g_slot_table + g_774970 * 0x21c,
+				if (gm_CheckEntityStock(g_slot_table + g_774970 * 0x21c,
 				                 (int)(scale * prod), a6) && stockSlot[0xc] >= 0) {
 					n = fcn_0050b750(1, a6);
 					if (abs((int)(scale * countf * unitPrice - prod)) < n) {
@@ -153,7 +153,7 @@ next:
 				countf = (float)count;
 				prod = countf * unitPrice;
 				scale = flt_1 / a5;
-				if (fcn_00526010(g_slot_table + g_774970 * 0x21c,
+				if (gm_CheckEntityStock(g_slot_table + g_774970 * 0x21c,
 				                 (int)(scale * prod), a6) && stockSlot[0xc] >= 0) {
 					n = fcn_0050b750(1, a6);
 					if (abs((int)(scale * countf * unitPrice - prod)) < n) {

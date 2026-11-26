@@ -45,33 +45,33 @@ int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 void __cdecl gm_InitStartingBuildingsAndWorkers(void)
 {
 	int i;
-	ENTITY_RECORD* e;
-	Player* p;
+	ENTITY_RECORD* ent;
+	Player* inst;
 
-	e = ((ENTITY_RECORD*)g_7f4ca0);
+	ent = ((ENTITY_RECORD*)g_7f4ca0);
 	for (i = 0; i < 0x300; i++) {
-		if (e->entity_state == 6) {
+		if (ent->entity_state == 6) {
 			break;
 		}
-		e++;
+		ent++;
 	}
-	for (p = ((Player*)lpGebaeudeINST);; p++) {
-		if (p->office == 0) {
+	for (inst = ((Player*)lpGebaeudeINST);; inst++) {
+		if (inst->office == 0) {
 			continue;
 		}
-		if (gm_GetBuildingTypeCategory(p->office) == 1 || gm_GetBuildingTypeCategory(p->office) == 4 || gm_GetBuildingTypeCategory(p->office) == 2
-			|| ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category == 0x13 || ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category == 4
-			|| ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category == 0x10 || ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category == 5
-			|| ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category == 9) {
-			if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].category != 0xb) {
+		if (gm_GetBuildingTypeCategory(inst->office) == 1 || gm_GetBuildingTypeCategory(inst->office) == 4 || gm_GetBuildingTypeCategory(inst->office) == 2
+			|| ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].category == 0x13 || ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].category == 4
+			|| ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].category == 0x10 || ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].category == 5
+			|| ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].category == 9) {
+			if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].category != 0xb) {
 				int value = 0xfa00;
 
-				cm_BeginPacketFieldDelta((char*) p, p->id);
-				cm_AppendPacketFieldDelta(4, 1, (char*) p - g_aed32c + 0x39, &value);
+				cm_BeginPacketFieldDelta((char*) inst, inst->id);
+				cm_AppendPacketFieldDelta(4, 1, (char*) inst - g_aed32c + 0x39, &value);
 				fcn_004c5360();
-				fcn_004c5f60(p->id, e->entity_id, e->entity_id);
-				fcn_004c6090(p, 1, 0, ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p->office].worker_kind[0]);
-				fcn_004c51f0(p->id, -1, 0x135, 1, (*(char*)&g_773d75), 0);
+				fcn_004c5f60(inst->id, ent->entity_id, ent->entity_id);
+				fcn_004c6090(inst, 1, 0, ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[inst->office].worker_kind[0]);
+				fcn_004c51f0(inst->id, -1, 0x135, 1, (*(char*)&g_773d75), 0);
 			}
 		}
 	}

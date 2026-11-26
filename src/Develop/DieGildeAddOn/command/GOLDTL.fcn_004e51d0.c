@@ -53,7 +53,7 @@ int __cdecl cut_GetRandSeed(void);
 void __cdecl fcn_004e4f10(unsigned char*);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c5790(int, void*);
-void __cdecl fcn_005358e0(int);
+void __cdecl cm_WaitNetworkSyncBanner(int);
 int __cdecl fcn_00533a40(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -101,7 +101,7 @@ void __cdecl fcn_004e51d0(unsigned char* s, int id)
 		}
 label_4e526f:
 		if (g_772f3c == 0) {
-			fcn_005358e0(g_14ac5e8);
+			cm_WaitNetworkSyncBanner(g_14ac5e8);
 		}
 	}
 	fcn_00533a40((int) &g_6b5c60);

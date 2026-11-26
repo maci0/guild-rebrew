@@ -30,7 +30,7 @@ void __cdecl fcn_0047da70(void);
 void __cdecl ai_EvaluateMeister(char*);
 void __cdecl fcn_0047da10(void);
 void __cdecl fcn_005c6310(void);
-void __cdecl fcn_00531b80(void);
+void __cdecl gm_UpdateGraveyardFlags(void);
 
 int __cdecl fcn_004c9440(char* x, char* out)
 {
@@ -57,7 +57,7 @@ int __cdecl fcn_004c9440(char* x, char* out)
 			fcn_0047da10();
 		}
 		fcn_005c6310();
-		fcn_00531b80();
+		gm_UpdateGraveyardFlags();
 	}
 	if (out != 0)
 		*out = 1;

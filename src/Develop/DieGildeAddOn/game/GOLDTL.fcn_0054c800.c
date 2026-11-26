@@ -10,7 +10,7 @@ int __cdecl fcn_004c5620(int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl he_StartHandlungSearch(int, int, int);
-void __cdecl fcn_0054c720(char*, unsigned short*, unsigned short*);
+void __cdecl he_RollTripletEventScores(char*, unsigned short*, unsigned short*);
 int __cdecl fcn_005d2a40(int, int);
 
 /* ADDRESS: GOLDTL 0x0054c800 */
@@ -63,7 +63,7 @@ void __cdecl fcn_0054c800(char* e)
 	*(short*) (e + 0x56) = 8;
 	e[0xb9] = (char) fcn_005d2a40(*(int*) (e + 0xac), *(int*) (e + 0xb0));
 	e[0xba] = 0;
-	fcn_0054c720(e, (unsigned short*) a, (unsigned short*) b);
+	he_RollTripletEventScores(e, (unsigned short*) a, (unsigned short*) b);
 	e[0xbb] = 0;
 	*(int*) (e + 0x84) = -1;
 	fcn_004c5620(0, e);

@@ -24,7 +24,7 @@ extern unsigned short g_7f4c04;
 
 struct obj* __cdecl gm_LookupEntityRecordById(int);
 
-int __cdecl fcn_00529670(struct obj*, int);
+int __cdecl gm_IsEntityAtBuilding(struct obj*, int);
 void __cdecl fcn_004c6a40(int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
@@ -54,7 +54,7 @@ int __cdecl he_ReturnPoliticianFromJob(struct slot* s)
 			s->fb = 0;
 			return 0;
 		}
-		if (fcn_00529670(o, r) == 0 && g_7f4c04 < 0x16) {
+		if (gm_IsEntityAtBuilding(o, r) == 0 && g_7f4c04 < 0x16) {
 			return 2;
 		}
 		if (o->shown != 0) {

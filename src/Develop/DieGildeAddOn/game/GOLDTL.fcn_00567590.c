@@ -19,7 +19,7 @@ int __cdecl fcn_00500e20(int*);
 void __cdecl he_FreeAction(void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl sim_SetSyncParams(int*, int, int, int);
-int __cdecl fcn_00567030(char*, int*, int*);
+int __cdecl he_GetEntityReturnTarget(char*, int*, int*);
 int __cdecl gm_CheckEntityType(char*);
 char* __cdecl gm_SearchTable67(int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
@@ -34,7 +34,7 @@ int __cdecl gm_RandomMod(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_00567170(char*, int*, int*, int*);
-int __cdecl fcn_00567410(char*, int, char**, int*, int*);
+int __cdecl he_PickNearestWirtshaus(char*, int, char**, int*, int*);
 
 /* ADDRESS: GOLDTL 0x00567590 */
 void __cdecl fcn_00567590(char* action)
@@ -72,7 +72,7 @@ void __cdecl fcn_00567590(char* action)
 			}
 			if ((p[-7] != 0 || p[-8] != 0) && *(int*) p != 0 && *(int*) (p + 0x18) != 0
 			    && (*(unsigned int*) (p + 0x5c) & 0x1000) == 0
-			    && fcn_00567030(p - 0x16c, &out1, &out2) != 0) {
+			    && he_GetEntityReturnTarget(p - 0x16c, &out1, &out2) != 0) {
 				if (out1 != *(int*) (*(int*) (p + 0x18) + 0x2c)) {
 					v18 = *(int*) p;
 					if (gm_CheckEntityType((char*) v18) != 0 || *(int*) (*(int*) p + 0x61) == 0) {
@@ -132,7 +132,7 @@ next0:
 		while ((int) p < 0x85a204) {
 			if ((p[1] != 0 || p[0] != 0) && *(int*) (p + 8) != 0 && *(int*) (p + 0x20) != 0
 			    && (*(unsigned int*) (p + 0x64) & 0x1000) == 0
-			    && fcn_00567030(p - 0x164, &out2, &out1) != 0) {
+			    && he_GetEntityReturnTarget(p - 0x164, &out2, &out1) != 0) {
 				if (out2 != *(int*) (*(int*) (p + 0x20) + 0x2c)) {
 					fcn_004c6650(*(int*) (p - 0x160));
 					cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");
@@ -190,7 +190,7 @@ next0:
 						fcn_004c6650(*(int*) (p - 0x180));
 						if (count != 0 && gm_AccumulateTyped2(p - 0x184) > 0xc80
 						    && gm_RandomMod(2) != 0) {
-							if (fcn_00567410(p - 0x184, count, list, &out1, &out2) != 0) {
+							if (he_PickNearestWirtshaus(p - 0x184, count, list, &out1, &out2) != 0) {
 								fcn_004c5da0(*(int*) (p - 0x180), out1, out2, 0, 0, "Go to wirtshaus");
 							}
 						}
@@ -232,7 +232,7 @@ after1:
 			    && (*(unsigned int*) (p + 0x5c) & 0x800) == 0) {
 				fcn_004c6650(*(int*) (p - 0x168));
 				if (count != 0 && gm_AccumulateTyped2(p - 0x16c) > 0xc80 && gm_RandomMod(2) != 0) {
-					if (fcn_00567410(p - 0x16c, count, list, &out1, &out2) != 0) {
+					if (he_PickNearestWirtshaus(p - 0x16c, count, list, &out1, &out2) != 0) {
 						fcn_004c5da0(*(int*) (p - 0x168), out1, out2, 0, 0, "Go to wirtshaus");
 					}
 				}
@@ -275,7 +275,7 @@ after1:
 			    && (*(unsigned int*) (p + 0x64) & 0x800) == 0) {
 				fcn_004c6650(*(int*) (p - 0x160));
 				if (count != 0 && gm_AccumulateTyped2(p - 0x164) > 0xc80 && gm_RandomMod(2) != 0) {
-					if (fcn_00567410(p - 0x164, count, list, &out2, &out1) != 0) {
+					if (he_PickNearestWirtshaus(p - 0x164, count, list, &out2, &out1) != 0) {
 						cm_RequestChrMoveToUniverse(*(int*) (p - 0x160), out2, out1, "dummy_EINGANG");
 						fcn_004c5ba0(*(int*) (p - 0x160), out2, out1, g_6b5c60);
 					}

@@ -4,7 +4,7 @@
 extern char g_675908[];
 extern char g_6b5c60[];
 
-int __cdecl fcn_00567030(char* slot, int* out1, int* out2);
+int __cdecl he_GetEntityReturnTarget(char* slot, int* out1, int* out2);
 void __cdecl cm_RequestChrMoveToUniverse(int h, int a, int b, char* tag);
 void __cdecl fcn_004c5ba0(int h, int a, int b, char* tag);
 
@@ -39,7 +39,7 @@ void __cdecl fcn_0057f9a0(int a0)
 	if (slot == 0) {
 		return;
 	}
-	if (fcn_00567030(slot, &v1, &v2)) {
+	if (he_GetEntityReturnTarget(slot, &v1, &v2)) {
 		cm_RequestChrMoveToUniverse(*(int*) (slot + 4), v1, v2, g_675908);
 		fcn_004c5ba0(*(int*) (slot + 4), v1, v2, g_6b5c60);
 	}

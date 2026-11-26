@@ -74,7 +74,7 @@ int __cdecl fcn_004c5ba0(int, int, int, int);
 int __cdecl fcn_004c5530(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl fcn_004234e0(int, int, int, int, int, int, int);
-int __cdecl fcn_00526010(int, int, int);
+int __cdecl gm_CheckEntityStock(int, int, int);
 int __cdecl fcn_00471e30(int);
 void __cdecl fcn_005c61c0(void);
 int __cdecl fcn_005b9cb0(int, int);
@@ -1690,7 +1690,7 @@ l_5bd26b:
 		if (fcn_00526120((int) (f.v210 + 0x348), 0x101) == 0) {
 			goto l_5bd632;
 		}
-		if (fcn_00526010((int) (0x7f4ca0
+		if (gm_CheckEntityStock((int) (0x7f4ca0
 		                       + *(unsigned short*) 0x774970 * 0x21c),
 		                f.v20, (int) g_773d75) == 0) {
 			goto l_5bd632;

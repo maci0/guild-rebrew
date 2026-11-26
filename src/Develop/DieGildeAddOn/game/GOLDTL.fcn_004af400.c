@@ -9,7 +9,7 @@ extern unsigned char g_773d75;
 
 /* Callees of this translation unit; see src/GOLDTL.fcn_004af2f0.c, the
  * sibling in the same address family. */
-void* __cdecl gm_FindPublicBuilding(int);
+void* __cdecl gm_GetGuildHall(int);
 void* __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl fcn_004ae080(char*, char*, int*, char**);
@@ -40,7 +40,7 @@ int __cdecl hst_HandleStadtkasse(int unused1, int unused2, int unused3, char* to
 	void* e;
 	unsigned short k;
 
-	e = gm_FindPublicBuilding(1);
+	e = gm_GetGuildHall(1);
 	if (e == 0)
 		return 0;
 	e = fcn_00502cd0(*(int*) ((char*) e + 0x5d), 2, 6, 0, 0x115);

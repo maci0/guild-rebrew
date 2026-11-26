@@ -5,7 +5,7 @@ int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_RandomMod(unsigned short);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_CountBuildingExtensions(char*);
-int __cdecl amt_GetOfficeRank(int);
+int __cdecl amt_GetRoleLevel(int);
 int __cdecl fcn_004a58d0(char*, int, char**, int, float, unsigned short*);
 int __cdecl fcn_004a61d0(char*, int, char*, float, float, int, unsigned short*);
 typedef struct GOLD_ACTION_PROTO { unsigned char kind; unsigned char unknown01[0x24c]; } GOLD_ACTION_PROTO;
@@ -54,14 +54,14 @@ int __cdecl fcn_004ab3e0_gold(int action, char* actor, int busy, char* first, ch
     if (!fcn_004a58d0(actor, 1, &candidate, 0,
             (float) (gm_RandomMod(0x20) & 0xffff) + 25.0f, &target_id)) return 0;
     target = (char*) g_slot_table + target_id * 0x21c;
-    total = amt_GetOfficeRank((unsigned char) target[0x166]) / 3 + 2;
+    total = amt_GetRoleLevel((unsigned char) target[0x166]) / 3 + 2;
     if (total + 2 > *(int*) (actor + 0x194)) return 0;
     count = fcn_004a61d0(actor, 4, candidate, 25.0f, 75.0f, best_score, ids);
     if (!count) return 0;
     i = 0;
     chosen = 0;
     for (; i < count; i++) {
-        level = amt_GetOfficeRank((unsigned char) ((char*) g_slot_table)[ids[i] * 0x21c + 0x166]) / 3 + 2;
+        level = amt_GetRoleLevel((unsigned char) ((char*) g_slot_table)[ids[i] * 0x21c + 0x166]) / 3 + 2;
         if (level + total >= *(int*) (actor + 0x194)) {
             selected[chosen++] = (char*) g_slot_table + ids[i] * 0x21c;
             total += level;

@@ -5,12 +5,12 @@ int __cdecl gm_QueryEntitySum(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int  __cdecl fcn_00526120(void*, int);
 
-int __cdecl fcn_00526010(void* a1, int amount, int a3)
+int __cdecl gm_CheckEntityStock(void* entity, int amount, int item_id)
 {
 	char buf[0x40];
 
-	if (gm_QueryEntitySum(*(int*) ((char*) a1 + 0x178), a3) < amount && amount != 0) {
-		io_FormatTextBuffer(buf, 0x75, (unsigned char) a3);
+	if (gm_QueryEntitySum(*(int*) ((char*) entity + 0x178), item_id) < amount && amount != 0) {
+		io_FormatTextBuffer(buf, 0x75, (unsigned char) item_id);
 		fcn_00526120(buf, 0);
 		return 0;
 	}

@@ -44,13 +44,13 @@ extern unsigned char g_773d75;
 
 void __cdecl gm_InitCityOfficialsAndCitizens(int);
 void __cdecl fcn_0053abe0(int);
-void __cdecl fcn_00511900(int, int, int*);
+void __cdecl cm_DistributeStartingWares(int, int, int*);
 void __cdecl fcn_00512ee0(void);
-Player* __cdecl gm_FindPublicBuilding(int);
+Player* __cdecl gm_GetGuildHall(int);
 Unit* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004c51a0(int, int, char, int);
 
-int __cdecl fcn_00514b50(int variant)
+int __cdecl gm_InitCityAndTradeState(int variant)
 {
 	int wares[8];
 	int* p;
@@ -119,10 +119,10 @@ int __cdecl fcn_00514b50(int variant)
 				}
 			}
 		}
-		fcn_00511900(((Variant*)g_868060)[k].count - g_6a375c, 8, wares);
+		cm_DistributeStartingWares(((Variant*)g_868060)[k].count - g_6a375c, 8, wares);
 	}
 	fcn_00512ee0();
-	pl = gm_FindPublicBuilding(1);
+	pl = gm_GetGuildHall(1);
 	if (pl != 0) {
 		u = fcn_00502cd0(pl->home, 2, 6, 0, 0x115);
 		if (u != 0) {

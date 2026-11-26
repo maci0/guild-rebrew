@@ -40,7 +40,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
+int __cdecl gm_CheckEntityStock(ENTITY_RECORD*, int, unsigned char);
 int __cdecl d2_IsTutorialInactive(void);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -84,7 +84,7 @@ void __cdecl fcn_005a92c0(char* p)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (g_100f1dc == 2 && fcn_00526010(ent, 0x3e80, g_773d75) != 0) {
+			if (g_100f1dc == 2 && gm_CheckEntityStock(ent, 0x3e80, g_773d75) != 0) {
 				char msg[0xf8];
 				char text[0x200];
 

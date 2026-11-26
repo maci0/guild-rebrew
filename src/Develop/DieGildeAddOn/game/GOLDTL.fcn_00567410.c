@@ -6,7 +6,7 @@
 char* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 
-int __cdecl fcn_00567410(char* h, int n, char** list, int* out1, int* out2)
+int __cdecl he_PickNearestWirtshaus(char* h, int n, char** list, int* out1, int* out2)
 {
 	float dist[0x20];
 	float hi;

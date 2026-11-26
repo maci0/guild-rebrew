@@ -40,7 +40,7 @@ void __cdecl fcn_0052a0c0(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl fcn_00472640(int, int);
-int __cdecl fcn_0058ff60(char*, ENTITY_RECORD*, int);
+int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char*, ENTITY_RECORD*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_0052a2d0(void);
 void __cdecl sv_ClearObjectSelection(void);
@@ -127,7 +127,7 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 			}
 			if (hh == 0) {
 				fcn_00526120(g_14b556c, 0);
-			} else if (fcn_0058ff60(who, hh, k) != 0) {
+			} else if (d2_SendFriedhofUpgradeWorkerCmd(who, hh, k) != 0) {
 				g_774654 = 1;
 			}
 		}

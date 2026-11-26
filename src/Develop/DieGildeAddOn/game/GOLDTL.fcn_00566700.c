@@ -29,7 +29,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, ch
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00566700(char* u)
+void __cdecl he_RunWorkerQuitAction(char* u)
 {
 	int v;
 	int a;

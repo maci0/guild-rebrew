@@ -17,7 +17,7 @@ void __cdecl fcn_004c5c80(int a);
 void __cdecl fcn_004c5da0(int a, int b, int c, int d, int e, char* s);
 void __cdecl he_FreeAction(char* dlg);
 void __cdecl fcn_005015e0(int* out, int a, int b, int c);
-int __cdecl fcn_00529670(char* e, char* h);
+int __cdecl gm_IsEntityAtBuilding(char* e, char* h);
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 int __cdecl fcn_00500cb0(char* a, char* b);
 void __cdecl gm_AddTime(int* r, int a, int b, int c);
@@ -136,7 +136,7 @@ void __cdecl fcn_00557460(char* dlg)
 			*(int*) (dlg + 0x84) = fcn_004c5620(-1, dlg);
 			return;
 		}
-		if (fcn_00529670(e, (char*) hit) == 0) {
+		if (gm_IsEntityAtBuilding(e, (char*) hit) == 0) {
 			*(int*) (dlg + 0x70) = 2;
 			gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
 			*(int*) (dlg + 0x84) = fcn_004c5620(2, dlg);
@@ -191,7 +191,7 @@ void __cdecl fcn_00557460(char* dlg)
 			goto fail;
 		}
 		e = gm_LookupEntityRecordById(*(int*) (dlg + 0xac));
-		if (e != 0 && fcn_00529670(e, (char*) hit) == 0) {
+		if (e != 0 && gm_IsEntityAtBuilding(e, (char*) hit) == 0) {
 			*(int*) (dlg + 0x70) = 3;
 			gm_AddTime((int*) (dlg + 0x52), 0, 5, 0);
 			*(int*) (dlg + 0x84) = fcn_004c5620(3, dlg);

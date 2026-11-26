@@ -3,7 +3,7 @@
 
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 
-void* __cdecl gm_FindPublicBuilding(int building_slot)
+void* __cdecl gm_GetGuildHall(int building_slot)
 {
 	void* building;
 

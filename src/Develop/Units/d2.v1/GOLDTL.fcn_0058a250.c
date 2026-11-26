@@ -37,7 +37,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern char g_7f4ca4[];
 
 void* __cdecl fcn_005cd440(void*, char*, int, int);
-int __cdecl amt_GetOfficeRank(int);
+int __cdecl amt_GetRoleLevel(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -94,7 +94,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 		fcn_00532ef0();
 		return;
 	}
-	n = amt_GetOfficeRank(*(unsigned char*) (targetEntity + 0x166)) / 3 + 2;
+	n = amt_GetRoleLevel(*(unsigned char*) (targetEntity + 0x166)) / 3 + 2;
 	ids[0] = n + 3;
 	ids[1] = n + 5;
 	ids[2] = n + 8;

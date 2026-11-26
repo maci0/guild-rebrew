@@ -23,11 +23,11 @@ int __cdecl fcn_0050b750(int, unsigned char);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-int __cdecl fcn_00567030(char*, int*, int*);
+int __cdecl he_GetEntityReturnTarget(char*, int*, int*);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_0056df50(char* u)
+void __cdecl he_RunInitBetrieb(char* u)
 {
 	int site;
 	int target;
@@ -64,7 +64,7 @@ void __cdecl fcn_0056df50(char* u)
 			fcn_004c5150(h->entity_id, -1, g_773d75, *(int*) (u + 0xbc));
 		}
 		fcn_004c5f60(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
-		if (fcn_00567030(p, &site, &target) != 0) {
+		if (he_GetEntityReturnTarget(p, &site, &target) != 0) {
 			fcn_004c5da0(*(int*) (p + 4), site, target, 0, 0, g_6a6b70);
 		}
 	case -2:

@@ -4,7 +4,7 @@
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
-int __cdecl fcn_0055c140(unsigned short* e, char* b, int* out)
+int __cdecl he_CountEntityActions(unsigned short* e, char* b, int* out)
 {
 	int n;
 	char* r;

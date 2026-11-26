@@ -36,7 +36,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(House*, int);
-int __cdecl fcn_00526010(House*, int, char);
+int __cdecl gm_CheckEntityStock(House*, int, char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -102,7 +102,7 @@ int __cdecl fcn_005d8af0(House* e)
 					n = 0;
 					rank = e->b84;
 					who = e->bc;
-					if (d2_CheckActionBlocker(e, 6) && fcn_00526010(e, money, g_773d75)) {
+					if (d2_CheckActionBlocker(e, 6) && gm_CheckEntityStock(e, money, g_773d75)) {
 						fcn_004c5150(-1, e->f4, g_773d75, money);
 						fcn_004c6ae0(e->f4, -6);
 						for (i = 0; i < 768; i++) {

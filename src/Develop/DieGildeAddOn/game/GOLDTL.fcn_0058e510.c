@@ -36,7 +36,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl evt_RequestScriptExit(char*);
 
-void __cdecl fcn_0058e510(char* e, char* res)
+void __cdecl d2_RunSeanceDialog(char* e, char* res)
 {
 	char* m;
 	int list[4];
@@ -85,7 +85,7 @@ void __cdecl fcn_0058e510(char* e, char* res)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop(fcn_0058e510, 0x777c7) != 0);
+	} while (main_RunFrameLoop(d2_RunSeanceDialog, 0x777c7) != 0);
 	fcn_00471e30(h);
 	if (m != 0) {
 		evt_RequestScriptExit(m);

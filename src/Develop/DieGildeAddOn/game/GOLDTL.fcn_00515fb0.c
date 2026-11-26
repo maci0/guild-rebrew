@@ -7,7 +7,7 @@ void __cdecl fcn_00500e20(char*);
 int __cdecl gm_CheckEntityType(unsigned char*);
 void __cdecl fcn_00515f60(const char*, int, int);
 
-void __cdecl fcn_00515fb0(unsigned char* e)
+void __cdecl d3snd_PlayBuildingAmbient(unsigned char* e)
 {
 	fcn_00500e20(((char*)&gm_GameTime));
 	if (e != 0 && gm_CheckEntityType(e) && *(short*) (e + 0x29) == 0xfd && *e == 0x1e) {

@@ -2,7 +2,7 @@
 
 void __cdecl fcn_004e8b40(int, void*);
 
-int __cdecl amt_GetOfficeRank(int office_id)
+int __cdecl amt_GetRoleLevel(int office_id)
 {
 	char buf[0x18];
 

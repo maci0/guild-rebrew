@@ -30,7 +30,7 @@ extern char* txt_TextEntries[];
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_005700d0(char* u)
+void __cdecl he_RunEvent0x83TextQueue(char* u)
 {
 	int t;
 

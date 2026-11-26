@@ -30,7 +30,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl fcn_004f4f60(int, int, int, int, int);
 
-void __cdecl fcn_005649d0(char* e)
+void __cdecl he_AllocKredit(char* e)
 {
 	char* o;
 	char buf[0x200];

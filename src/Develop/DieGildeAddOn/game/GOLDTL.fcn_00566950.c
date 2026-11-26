@@ -27,7 +27,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00566950(char* e)
+void __cdecl he_RunWorkerStealAction(char* e)
 {
 	char* q;
 	char* o;

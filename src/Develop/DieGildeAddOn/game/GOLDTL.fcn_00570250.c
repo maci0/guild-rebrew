@@ -23,7 +23,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00570250(char* u)
+void __cdecl he_RunEvent0x84Rumors(char* u)
 {
 	switch (*(int*) (u + 0x70)) {
 	case -2:

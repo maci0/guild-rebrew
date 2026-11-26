@@ -3,7 +3,7 @@
 
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 
-int __cdecl fcn_0057d7e0(char* e)
+int __cdecl he_FindNextTargetBuilding0a1(char* e)
 {
 	int idx;
 	int n;

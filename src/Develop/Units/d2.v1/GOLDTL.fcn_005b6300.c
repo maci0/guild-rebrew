@@ -159,7 +159,7 @@ int __cdecl fcn_005b5750(void);
 int __cdecl fcn_0050b750(int, char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 float __cdecl fcn_0050b8d0(unsigned char*, int, int, int);
-int __cdecl fcn_00526010(int, int);
+int __cdecl gm_CheckEntityStock(int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_005462a0(void);
@@ -397,7 +397,7 @@ L69b6:
 			x = y % 3;
 			trec = *(unsigned short*) 0x774970 * 0x21c;
 			t = fcn_0050b750((int) e, *(char*) 0x773d75);
-			if (fcn_00526010((int) (trec + 0x7f4ca0), t) == 0)
+			if (gm_CheckEntityStock((int) (trec + 0x7f4ca0), t) == 0)
 				goto L6cb7;
 			if (f.v30 > 0) {
 				f.v38 = f.v30;

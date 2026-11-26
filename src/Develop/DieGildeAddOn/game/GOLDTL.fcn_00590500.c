@@ -14,7 +14,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(int, int, int, int, int);
 
-void __cdecl fcn_00590500(void)
+void __cdecl d3_TriggerFriedhofChatScript(void)
 {
 	int va;
 	char* list[32];

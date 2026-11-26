@@ -9,7 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
-void __cdecl fcn_00552220(char* o)
+void __cdecl he_AllocPlagueEvent(char* o)
 {
 	char* p;
 

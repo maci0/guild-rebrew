@@ -31,7 +31,7 @@ void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl gm_ResolveEntityById(void**, int, int, int);
 int __cdecl fcn_00500cb0(void*, void*);
-int __cdecl fcn_00529670(void*, void*);
+int __cdecl gm_IsEntityAtBuilding(void*, void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 
 /* ADDRESS: GOLDTL 0x005624a0 */
@@ -148,7 +148,7 @@ void __cdecl fcn_005624a0(char* ctx)
 			*(int*) (ctx + 0x84) = fcn_004c5620(-1, ctx);
 			return;
 		}
-		if (fcn_00529670(ent, hit) == 0) {
+		if (gm_IsEntityAtBuilding(ent, hit) == 0) {
 			*(int*) (ctx + 0x70) = 2;
 			gm_AddTime(ctx + 0x52, 0, 5, 0);
 			*(int*) (ctx + 0x84) = fcn_004c5620(2, ctx);
@@ -173,7 +173,7 @@ void __cdecl fcn_005624a0(char* ctx)
 		gm_ResolveEntityById((void**) &hit, 0, 0, *(int*) (ctx + 0xac));
 		if (hit != 0 && *(unsigned short*) (hit + 0x27) != 0xffff) {
 			ent = gm_LookupEntityRecordById(*(int*) (ctx + 0xd8));
-			if (ent != 0 && fcn_00529670(ent, hit) == 0) {
+			if (ent != 0 && gm_IsEntityAtBuilding(ent, hit) == 0) {
 				*(int*) (ctx + 0x70) = 3;
 				gm_AddTime(ctx + 0x52, 0, 5, 0);
 				*(int*) (ctx + 0x84) = fcn_004c5620(3, ctx);

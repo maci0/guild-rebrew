@@ -19,7 +19,7 @@ void __cdecl fcn_004c5530(char* a);
 void __cdecl fcn_004c5150(int a1, int a2, char a3, int a4);
 int __cdecl fcn_004c5620(char a1, unsigned char* e);
 void __cdecl gm_AddTime(char*, int, int, int);
-int __cdecl fcn_00526010(char*, int, char);
+int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005d2ec0(char*, int*);
 
@@ -141,7 +141,7 @@ int __cdecl fcn_005d3120(int entity, int* request)
 				}
 			}
 			if (i < 3) {
-				if (fcn_00526010(g_7f4ca0 + g_774970 * 540, lv[i], g_773d75) != 0) {
+				if (gm_CheckEntityStock(g_7f4ca0 + g_774970 * 540, lv[i], g_773d75) != 0) {
 					n = 0;
 					p = gm_LookupEntityRecordById(id);
 					q = lv[i];

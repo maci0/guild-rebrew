@@ -5,7 +5,7 @@ char* __cdecl fcn_00445600(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "client_scene_transform.h"
 
-int __cdecl fcn_00529670(char* a, char* b)
+int __cdecl gm_IsEntityAtBuilding(char* a, char* b)
 {
 	float pos[4];
 	char* d;

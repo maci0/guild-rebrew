@@ -35,7 +35,7 @@ void __cdecl fcn_00442c00(Contact*, int);
 void __cdecl fcn_00515c60(Player*, void*);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl d3snd_PlayNamedSceneSound(void);
-void __cdecl fcn_00515fb0(Player*);
+void __cdecl d3snd_PlayBuildingAmbient(Player*);
 int __cdecl gm_CheckEntityType(Player*);
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, Player*);
 void __cdecl fcn_005165f0(void);
@@ -78,7 +78,7 @@ void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 		fcn_00515c60(p, unit);
 	}
 	d3_TraverseSceneObjects(g_67a370, 0, 0x20, d3snd_PlayNamedSceneSound);
-	fcn_00515fb0(p);
+	d3snd_PlayBuildingAmbient(p);
 	if (gm_CheckEntityType(p) == 0) {
 		d3_VisitSceneObjects(g_67a370, 0, 0xc0, fcn_005165f0, p);
 	}

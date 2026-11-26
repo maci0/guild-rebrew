@@ -26,32 +26,32 @@ void __cdecl fcn_004c5530(struct msg*);
 void __cdecl fcn_004c6470(int, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00564fc0(char* u)
+void __cdecl he_RunDelayedEntityDemotion(char* action)
 {
-	struct msg m;
-	char* h;
+	struct msg msg;
+	char* entity;
 
-	switch (*(int*) (u + 0x70)) {
+	switch (*(int*) (action + 0x70)) {
 	case -2:
 	case -1:
-		he_FreeAction(u);
+		he_FreeAction(action);
 		break;
 	case 0:
-		(*(int*) (u + 0xb8))--;
-		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
-		if (*(int*) (u + 0xb8) < 0 && h != 0) {
-			if (h[2] == 6 || h[2] == 7) {
-				memset(&m, 0, sizeof(m));
-				m.kind = 0x26;
-				m.target = -1;
-				m.code = 9;
-				m.owner = *(int*) (u + 0xac);
-				m.when = gm_GameTime;
-				m.who = *(int*) (u + 0xac);
-				fcn_004c5530(&m);
+		(*(int*) (action + 0xb8))--;
+		entity = gm_LookupEntityRecordById(*(int*) (action + 0xac));
+		if (*(int*) (action + 0xb8) < 0 && entity != 0) {
+			if (entity[2] == 6 || entity[2] == 7) {
+				memset(&msg, 0, sizeof(msg));
+				msg.kind = 0x26;
+				msg.target = -1;
+				msg.code = 9;
+				msg.owner = *(int*) (action + 0xac);
+				msg.when = gm_GameTime;
+				msg.who = *(int*) (action + 0xac);
+				fcn_004c5530(&msg);
 			}
-			fcn_004c6470(*(int*) (h + 4), *(unsigned char*) (h + 0x164) - 1);
-			he_FreeAction(u);
+			fcn_004c6470(*(int*) (entity + 4), *(unsigned char*) (entity + 0x164) - 1);
+			he_FreeAction(action);
 		}
 		break;
 	}

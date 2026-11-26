@@ -4,7 +4,7 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_00526010(int, int, char);
+int __cdecl gm_CheckEntityStock(int, int, char);
 int __cdecl he_HasNoActiveEvent04b(unsigned short*, int);
 int __cdecl he_HasNoActiveAction0x2e(unsigned short*, int);
 int __cdecl fcn_00579640(unsigned short*, int);
@@ -61,7 +61,7 @@ int __cdecl fcn_005bf9e0(unsigned short* entity)
 		}
 		query = he_fn_Handlung();
 	}
-	if (!fcn_00526010(*(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0, timeout, *(char*) &g_773d75)) {
+	if (!gm_CheckEntityStock(*(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0, timeout, *(char*) &g_773d75)) {
 		return 0;
 	}
 	if (!he_HasNoActiveEvent04b(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {

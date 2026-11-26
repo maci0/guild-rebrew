@@ -1183,6 +1183,7 @@ int __cdecl amt_ListRolesOfLevel(int level, int max, int* out)
 	return n;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl amt_GetRoleLevel(int role)
 {
 	OFFICE_ROLE_TEMPLATE tmpl;
@@ -1190,6 +1191,7 @@ int __cdecl amt_GetRoleLevel(int role)
 	amt_GetRoleTemplate(role, &tmpl);
 	return tmpl.f8 & 0xff;
 }
+#endif
 
 int __cdecl amt_GetGroupVacancyFlags(int group)
 {
@@ -1353,6 +1355,7 @@ int __cdecl amt_CanUpgradeBuildingTier1(char* building)
 	return 1;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl amt_CanUpgradeBuildingTier2(unsigned char* building)
 {
 
@@ -1391,6 +1394,7 @@ int __cdecl amt_CanUpgradeBuildingTier2(unsigned char* building)
 	}
 	return *(int*) (building + 0x194) < 5 ? -2 : 1;
 }
+#endif
 
 int __cdecl amt_CanUpgradeBuildingTier3(unsigned char* building)
 {

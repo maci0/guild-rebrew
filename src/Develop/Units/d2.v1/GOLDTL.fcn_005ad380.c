@@ -39,7 +39,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6aa464[];
 
-int __cdecl fcn_0055c050(char*);
+int __cdecl he_HasNoActiveAction0x62(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_0050c550(char*, char*);
@@ -73,7 +73,7 @@ int __cdecl d2_ConfirmEinbruch(int unused, char* e)
 		return 0;
 	}
 	p = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 0x27)]);
-	if (fcn_0055c050(e) == 0) {
+	if (he_HasNoActiveAction0x62(e) == 0) {
 		io_FormatTextBuffer(buf, 0x1a92, *(unsigned short*) (e + 0x27), e);
 		fcn_00526120(buf, 0);
 		return 0;

@@ -24,7 +24,7 @@ extern void __cdecl fcn_004c5c80(int a1);
 extern void __cdecl fcn_004c5da0(int, int, int, char*, int, char*);
 extern void __cdecl fcn_00529160(char*, char*, unsigned int, char*);
 extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-extern int __cdecl fcn_00529670(char*, char*);
+extern int __cdecl gm_IsEntityAtBuilding(char*, char*);
 extern int __cdecl gm_GetScaledEntitySkill(char*, int);
 extern int __cdecl fcn_0050c4e0(unsigned char*);
 extern void __cdecl he_FreeAction(char*);
@@ -95,7 +95,7 @@ void __cdecl fcn_0056aef0(char* action)
 		for (n = 0; n < 8; n++) {
 			e = (char*)gm_LookupEntityRecordById(((int*)(action + 0x8c))[n]);
 			if (e != 0 && *(int*)(e + 0x184) != 0) {
-				if (fcn_00529670(e, h) == 0) {
+				if (gm_IsEntityAtBuilding(e, h) == 0) {
 					e = *(char**)(e + 0x184);
 					if (*(int*)(e + 0x128) != 0) {
 						v = 0;

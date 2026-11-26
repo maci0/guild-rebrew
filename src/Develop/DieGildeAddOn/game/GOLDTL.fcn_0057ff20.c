@@ -35,7 +35,7 @@ extern short g_7f4c0c;
 int __cdecl fcn_004e9ee0(void);
 void __cdecl fcn_004c5980(Msg*);
 
-void __cdecl fcn_0057ff20(int a)
+void __cdecl d2_SendTutorialTownMsgA0(int a)
 {
 	Msg msg;
 	int i;

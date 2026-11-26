@@ -42,7 +42,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00476b60(void);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00526120(int, int);
-int __cdecl fcn_00526010(void*, int, unsigned char);
+int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
 char* __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c4ef0(char*);
@@ -169,7 +169,7 @@ void __cdecl fcn_005c2a40(unsigned char* productionBuilding)
 					val = (int) (eval_ObjektPreis2Credits(slots[sel * 3], 100) * scale);
 					if (total + others >= (int) (unsigned char) *(base + 0x21)) {
 						fcn_00526120(*(int*) 0x14ab260, 0);
-					} else if (fcn_00526010((void*) (g_7f4ca0 +
+					} else if (gm_CheckEntityStock((void*) (g_7f4ca0 +
 					                                 (int) g_774970 * 0x21c),
 					                        val, g_773d75) != 0) {
 						memset(msg, 0, 0xf8);

@@ -15,8 +15,8 @@ void __cdecl he_AllocProduktion(char*);
 void __cdecl he_RunProduktion(char*);
 void __cdecl fcn_00572760(char*);
 void __cdecl fcn_00572770(char*);
-void __cdecl fcn_00572780(char*);
-void __cdecl fcn_005727f0(char*);
+void __cdecl he_StartSuchen(char*);
+void __cdecl he_RunSuchen(char*);
 void __cdecl fcn_005729e0(char*);
 void __cdecl fcn_00572a50(char*);
 void __cdecl fcn_00572d90(char*);
@@ -24,7 +24,7 @@ void __cdecl fcn_00572da0(char*);
 void __cdecl fcn_00572e40(char*);
 void __cdecl fcn_00572ff0(char*);
 void __cdecl fcn_00573a10(char*);
-void __cdecl fcn_00573a80(char*);
+void __cdecl he_RunAction0x0c(char*);
 void __cdecl he_AllocGebaeudeBauen(char*);
 void __cdecl gm_HandleHausbau(char*);
 void __cdecl fcn_00575450(char*);
@@ -47,7 +47,7 @@ int __cdecl fcn_00575710(void)
 	if (he_RegisterHandler(5, fcn_00572760, fcn_00572770) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(8, fcn_00572780, fcn_005727f0) != 0) {
+	if (he_RegisterHandler(8, he_StartSuchen, he_RunSuchen) != 0) {
 		return 1;
 	}
 	fcn_00530ab0(8, g_6a7df0, 1, 0x500, 0xac);
@@ -61,7 +61,7 @@ int __cdecl fcn_00575710(void)
 	if (he_RegisterHandler(0xb, fcn_00572e40, fcn_00572ff0) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(0xc, fcn_00573a10, fcn_00573a80) != 0) {
+	if (he_RegisterHandler(0xc, fcn_00573a10, he_RunAction0x0c) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(0xd, he_AllocGebaeudeBauen, gm_HandleHausbau) != 0) {

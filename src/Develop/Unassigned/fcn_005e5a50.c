@@ -47,7 +47,7 @@ int __cdecl gm_GetBuildingSlotCapacity(char*);
 int __cdecl d2_GetControlValue(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00526010(char*, int, unsigned char);
+int __cdecl gm_CheckEntityStock(char*, int, unsigned char);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 void __cdecl fcn_004c5530(void*);
@@ -119,7 +119,7 @@ void __cdecl fcn_005e5a50(char* entity)
 		} else if (g_100f1dc != -1) {
 			int clicked = *(int*) 0x67d370;
 			if (clicked == ids[0]) {
-				if (fcn_00526010((char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970], val, g_773d75) != 0) {
+				if (gm_CheckEntityStock((char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970], val, g_773d75) != 0) {
 					fcn_004c5420(((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id, 0x1cc, 4, 0x10, 0);
 					if (g_774970 != *(unsigned short*) (entity + 0x27)) {
 						fcn_004c51a0(-1, ((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id,

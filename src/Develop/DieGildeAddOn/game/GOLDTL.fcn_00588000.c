@@ -37,7 +37,7 @@ void __cdecl fcn_00471af0(int, int);
 
 int __cdecl io_AppendText(int, ...);
 
-void __cdecl fcn_00588000(char* w)
+void __cdecl d2_UpdateDealSummaryLog(char* w)
 {
 	int i;
 	int cnt;

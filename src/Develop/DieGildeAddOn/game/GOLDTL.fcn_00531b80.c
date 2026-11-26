@@ -18,7 +18,7 @@ extern char g_7f4ca0[];
 
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 
-void __cdecl fcn_00531b80(void)
+void __cdecl gm_UpdateGraveyardFlags(void)
 {
 	char* e;
 	int i;

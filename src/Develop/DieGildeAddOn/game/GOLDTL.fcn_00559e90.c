@@ -21,7 +21,7 @@ int __cdecl he_TryDispatchNpcAction(struct job*, int, int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00559e90(char* u)
+void __cdecl he_RunPoliticians(char* u)
 {
 	int n;
 	int i;

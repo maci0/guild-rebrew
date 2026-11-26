@@ -22,7 +22,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_0050b750(int, char);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_00526010(char*, int, char);
+int __cdecl gm_CheckEntityStock(char*, int, char);
 void __cdecl fcn_004c5530(void*);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 
@@ -65,7 +65,7 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 
 
 
-			if (fcn_00526010((char*) (0x7f4ca0 +
+			if (gm_CheckEntityStock((char*) (0x7f4ca0 +
 			                          g_774970 * 0x21c),
 			                 fcn_0050b750(d2_GetControlValue(ctl), g_773d75), g_773d75)) {
 				*(char*) (pkt + 4) = 0x21;

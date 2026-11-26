@@ -41,7 +41,7 @@ int __cdecl fcn_00500e20(int);
 void __cdecl fcn_005015e0(void*, int, int, int);
 int __cdecl fcn_00509570(int);
 int __cdecl fcn_0050cad0(int*, int*);
-int __cdecl fcn_0050f910(int);
+int __cdecl gm_CreditCityTreasury(int);
 int __cdecl fcn_00510820(int, void*, int);
 void __cdecl fcn_005165b0(int);
 void __cdecl fcn_0052d9d0(void*);
@@ -114,7 +114,7 @@ LfailB:
 			}
 		}
 		else {
-			*(int*) (buildAction + 0xcc) = fcn_0050f910(*(int*) (buildAction + 0xb4));
+			*(int*) (buildAction + 0xcc) = gm_CreditCityTreasury(*(int*) (buildAction + 0xb4));
 		}
 		*(int*) (buildAction + 0x84) = fcn_004c5620(*(int*) (buildAction + 0x70) + 1, (void*) buildAction);
 		return;

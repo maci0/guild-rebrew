@@ -10,7 +10,7 @@ int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl main_RunFrameLoop(int, int);
 
-void __cdecl fcn_005358e0(char* name)
+void __cdecl cm_WaitNetworkSyncBanner(char* name)
 {
 	char buf[0x7c];
 	int s;

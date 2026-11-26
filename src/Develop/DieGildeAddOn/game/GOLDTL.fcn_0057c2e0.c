@@ -18,7 +18,7 @@ void __cdecl fcn_004c6ba0(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 
-void __cdecl fcn_0057c2e0(struct house* a, struct house* b)
+void __cdecl he_SwapZigeunerMoods(struct house* a, struct house* b)
 {
 	char name[0x64];
 	char text1[0x400];

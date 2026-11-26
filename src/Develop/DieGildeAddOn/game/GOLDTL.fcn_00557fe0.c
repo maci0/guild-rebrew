@@ -15,53 +15,53 @@ int __cdecl fcn_00500cb0(pos14_7f4c00*, char*);
 void __cdecl fcn_00452420(char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00557fe0(char* u)
+void __cdecl he_RunTimedEffectAction(char* action)
 {
-	char* x;
-	int t;
+	char* target;
+	int saved_ctx;
 
-	switch (*(int*) (u + 0x70)) {
+	switch (*(int*) (action + 0x70)) {
 	case 0:
-		gm_ResolveEntityById((void**) (&x), 0, 0, *(int*) (u + 0xac));
-		if (x == 0 || *(char**) (x + 0x61) == 0) {
+		gm_ResolveEntityById((void**) (&target), 0, 0, *(int*) (action + 0xac));
+		if (target == 0 || *(char**) (target + 0x61) == 0) {
 			goto kill;
 		}
-		t = d3_CurrentContextIndex;
+		saved_ctx = d3_CurrentContextIndex;
 		d3_SelectSceneContext(0, 1);
-		if (*(unsigned short*) (u + 0xc2) == 0x177) {
-			*(char**) (u + 0xb0) = fcn_00557f00(x);
-		} else if (*(unsigned short*) (u + 0xc2) == 0x178) {
-			*(char**) (u + 0xb0) = fcn_00557f70(x);
+		if (*(unsigned short*) (action + 0xc2) == 0x177) {
+			*(char**) (action + 0xb0) = fcn_00557f00(target);
+		} else if (*(unsigned short*) (action + 0xc2) == 0x178) {
+			*(char**) (action + 0xb0) = fcn_00557f70(target);
 		}
-		d3_SelectSceneContext(t, 1);
-		*(int*) (u + 0x70) = *(char**) (u + 0xb0) != 0 ? 1 : -1;
+		d3_SelectSceneContext(saved_ctx, 1);
+		*(int*) (action + 0x70) = *(char**) (action + 0xb0) != 0 ? 1 : -1;
 		break;
 	case 1:
-		if (fcn_00500cb0(&gm_GameTime, u + 0xb4) == 1) {
-			if (*(char**) (u + 0xb0) != 0 && m_is_tracked(*(char**) (u + 0xb0)) != 0) {
-				*(int*) (*(char**) (u + 0xb0) + 0x24) = 0;
+		if (fcn_00500cb0(&gm_GameTime, action + 0xb4) == 1) {
+			if (*(char**) (action + 0xb0) != 0 && m_is_tracked(*(char**) (action + 0xb0)) != 0) {
+				*(int*) (*(char**) (action + 0xb0) + 0x24) = 0;
 			}
-			*(int*) (u + 0x70) = 2;
-		} else if (*(char**) (u + 0xb0) == 0) {
-			*(int*) (u + 0x70) = 0;
+			*(int*) (action + 0x70) = 2;
+		} else if (*(char**) (action + 0xb0) == 0) {
+			*(int*) (action + 0x70) = 0;
 		}
 		break;
 	case 2:
-		if (*(char**) (u + 0xb0) == 0 || (*(*(char**) (u + 0xb0) + 0x20) & 2) != 0) {
-			*(int*) (u + 0x70) = -1;
+		if (*(char**) (action + 0xb0) == 0 || (*(*(char**) (action + 0xb0) + 0x20) & 2) != 0) {
+			*(int*) (action + 0x70) = -1;
 		}
 		break;
 	case -2:
 	case -1:
-		gm_ResolveEntityById((void**) (&x), 0, 0, *(int*) (u + 0xac));
-		if (*(char**) (u + 0xb0) != 0 && m_is_tracked(*(char**) (u + 0xb0)) != 0) {
-			t = d3_CurrentContextIndex;
+		gm_ResolveEntityById((void**) (&target), 0, 0, *(int*) (action + 0xac));
+		if (*(char**) (action + 0xb0) != 0 && m_is_tracked(*(char**) (action + 0xb0)) != 0) {
+			saved_ctx = d3_CurrentContextIndex;
 			d3_SelectSceneContext(0, 1);
-			fcn_00452420(*(char**) (u + 0xb0));
-			d3_SelectSceneContext(t, 1);
+			fcn_00452420(*(char**) (action + 0xb0));
+			d3_SelectSceneContext(saved_ctx, 1);
 		}
 kill:
-		he_FreeAction(u);
+		he_FreeAction(action);
 		break;
 	}
 }

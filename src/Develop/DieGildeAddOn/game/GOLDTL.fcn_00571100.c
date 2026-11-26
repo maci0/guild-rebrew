@@ -5,7 +5,7 @@ char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_005492e0(char*);
 
-void __cdecl fcn_00571100(char* a)
+void __cdecl he_CancelEntityActions0x23(char* a)
 {
 	char* u;
 

@@ -30,7 +30,7 @@ extern int g_773d48;
 extern int g_99f724;
 
 void __cdecl fcn_004f4830(int kind, Offer* o);
-char* __cdecl gm_FindPublicBuilding(int n);
+char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 void __cdecl fcn_004c51a0(int a, int b, int c, int d);
 
@@ -63,7 +63,7 @@ int __cdecl gm_ApplySteuerLaw0aToSlots(unsigned short id, Slots* slots, unsigned
 		slots->value[i] = tax_amount;
 		slots->amount[i] = offer.amount;
 		if (flags & 1) {
-			treasury = gm_FindPublicBuilding(1);
+			treasury = gm_GetGuildHall(1);
 			treasury = fcn_00502cd0(*(int*) (treasury + 0x5d), 2, 6, 0, 0x115);
 			fcn_004c51a0(*(int*) (treasury + 2), (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), 0, tax_amount);
 			g_773d48++;

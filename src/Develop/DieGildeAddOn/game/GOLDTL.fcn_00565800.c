@@ -10,7 +10,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_GetBuildingTechEffect(char*, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_00565800(char* o)
+void __cdecl he_StartAction0x27(char* o)
 {
 	char* e;
 

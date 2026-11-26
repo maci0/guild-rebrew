@@ -6,7 +6,7 @@
 extern char g_7f4ca0[];
 
 
-char* __cdecl gm_FindPublicBuilding(int k);
+char* __cdecl gm_GetGuildHall(int k);
 void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
 
 void* __cdecl gm_FindBuildingTreasury(unsigned char* e)
@@ -21,13 +21,13 @@ void* __cdecl gm_FindBuildingTreasury(unsigned char* e)
 	if (t == 5) {
 		c = ((unsigned char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])[0x169];
 		if (c == 0x1e) {
-			o = gm_FindPublicBuilding(2);
+			o = gm_GetGuildHall(2);
 		} else if (c == 0x1f) {
-			o = gm_FindPublicBuilding(3);
+			o = gm_GetGuildHall(3);
 		} else if (c == 0x20) {
-			o = gm_FindPublicBuilding(4);
+			o = gm_GetGuildHall(4);
 		} else if (c == 0x21) {
-			o = gm_FindPublicBuilding(5);
+			o = gm_GetGuildHall(5);
 		} else {
 			o = 0;
 		}
@@ -35,7 +35,7 @@ void* __cdecl gm_FindBuildingTreasury(unsigned char* e)
 			r = fcn_00502cd0(*(int*) (o + 0x5d), 2, 6, 0, 0x142);
 		}
 	} else if (t == 3) {
-		o = gm_FindPublicBuilding(1);
+		o = gm_GetGuildHall(1);
 		r = fcn_00502cd0(*(int*) (o + 0x5d), 2, 6, 0, 0x115);
 	}
 	return r;

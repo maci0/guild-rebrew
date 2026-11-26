@@ -6,7 +6,7 @@ extern unsigned char g_773d75;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int __cdecl fcn_00526010(void*, int, char);
+int __cdecl gm_CheckEntityStock(void*, int, char);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_004c5150(int, int, char, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -26,7 +26,7 @@ void __cdecl fcn_005a4360(char* e, char* s)
 	if (e == 0) {
 		return;
 	}
-	if (fcn_00526010(g, *(int*) (s + 0xb4), (*(char*)&g_773d75)) == 0) {
+	if (gm_CheckEntityStock(g, *(int*) (s + 0xb4), (*(char*)&g_773d75)) == 0) {
 		return;
 	}
 	if (fcn_00526120(msg, 1) == 0) {

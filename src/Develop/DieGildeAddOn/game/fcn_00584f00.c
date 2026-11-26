@@ -3,7 +3,7 @@ typedef unsigned short u16;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_004ec7d0(int a1);
-int __cdecl fcn_00526010(void* tbl, int a2, char a3);
+int __cdecl gm_CheckEntityStock(void* tbl, int a2, char a3);
 int __cdecl fcn_00526120(void* buf, int a2);
 void __cdecl io_FormatTextBuffer(void* buf, int id, ...);
 int __cdecl fcn_004ee220(int a1, int a2);
@@ -20,7 +20,7 @@ int __cdecl fcn_00584f00(int a1, char* a2, int cost)
     int r;
 
     h = fcn_004ec7d0(a1);
-    if (fcn_00526010((void*) (540 * g_774970 + 0x7f4ca0), cost,
+    if (gm_CheckEntityStock((void*) (540 * g_774970 + 0x7f4ca0), cost,
                      g_773d75) != 0) {
         if (h != 0) {
             fcn_00526120((void*) *(int*) 0x14b5440, 0x100);

@@ -15,7 +15,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00545d40(int a0, int a1, char* buf, int a3, int a4, char* text);
 int __cdecl fcn_004f4f60(int a0, int a1, int a2, int a3, int a4);
 void __cdecl fcn_004c54c0(int a0, int a1, int a2, int a3);
-int __cdecl fcn_0055be70(int* a0);
+int __cdecl he_DetectNearbyPatrolAction(int* a0);
 int __cdecl he_StartHandlungSearch(int a0, int a1, int a2);
 int __cdecl fcn_004c58b0(int a0, int a1);
 void __cdecl fcn_004c57e0(int a0, int a1);
@@ -95,7 +95,7 @@ void __cdecl fcn_00562ba0(int eventCursor)
 			v10[1] = 0x457a0000;
 			v10[2] = eventBase;
 			v10[3] = 0;
-			if (fcn_0055be70(v10) != 0) {
+			if (he_DetectNearbyPatrolAction(v10) != 0) {
 				*(int*) (eventBase + 0xcc) = fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (v4 + 4), *(int*) (v6 + 1));
 				eventCursor += 0x52;
 				*(int*) (eventCursor + 0x1e) = 8;

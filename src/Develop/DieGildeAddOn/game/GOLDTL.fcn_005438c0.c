@@ -107,7 +107,7 @@ void __cdecl fcn_0053fa80(void);
 void __cdecl fcn_0053f720(void);
 void __cdecl fcn_00538220(void);
 void __cdecl fcn_00512500(void);
-void __cdecl fcn_00514b50(unsigned char);
+void __cdecl gm_InitCityAndTradeState(unsigned char);
 void __cdecl init_LocalData(void);
 void __cdecl fcn_00515340(unsigned char);
 void __cdecl gm_InitStartingBuildingsAndWorkers(void);
@@ -127,8 +127,8 @@ void __cdecl cm_EndCommandSync(void);
 int __cdecl fcn_004c44c0(void);
 void __cdecl fcn_005490e0(void);
 void __cdecl he_RestartAction03b(void);
-void __cdecl fcn_00549240(void);
-void __cdecl fcn_005491c0(void);
+void __cdecl he_RestartAction0xa6(void);
+void __cdecl he_ClearActivePlayerActions(void);
 void __cdecl fcn_005459a0(int);
 void __cdecl fcn_0059a340(void);
 void __cdecl fcn_0042df30(void*, int);
@@ -167,7 +167,7 @@ void __cdecl init_LoadObjektScene(int);
 void __cdecl init_LoadGebaeudeScene(int);
 void __cdecl fcn_00526920(void*, int, void*);
 void __cdecl fcn_004c5530(void*);
-void* __cdecl fcn_00527000(void);
+void* __cdecl d2_GetHudThemeResourceId(void);
 void __cdecl fcn_00526db0(void*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl main_RundenBeginn(void);
@@ -320,7 +320,7 @@ void __cdecl fcn_005438c0(int a0)
 				return;
 			}
 			gm_CreateSetupFamily();
-			fcn_00514b50(g_773d75);
+			gm_InitCityAndTradeState(g_773d75);
 			init_LocalData();
 			fcn_00515340(g_773d75);
 			d2_SetProgressPercent(0, 100);
@@ -397,7 +397,7 @@ void __cdecl fcn_005438c0(int a0)
 	main_PumpWindowMessages();
 	fcn_0053f720();
 	d2_SuppressOverlay = 0;
-	fcn_00526db0(fcn_00527000());
+	fcn_00526db0(d2_GetHudThemeResourceId());
 	d3_SelectSceneContext(0, 0);
 	if ((g_7747b0 & 1) && (!(g_7747b0 & 0x40))) {
 		fcn_00514f10();
@@ -513,9 +513,9 @@ void __cdecl fcn_005438c0(int a0)
 			    ((g_14cbca0 != -1) && (g_77494c & 8))) {
 				fcn_005490e0();
 				he_RestartAction03b();
-				fcn_00549240();
+				he_RestartAction0xa6();
 			}
-			fcn_005491c0();
+			he_ClearActivePlayerActions();
 			cm_EndCommandSync();
 			while (fcn_004c44c0() == 0) {
 				fcn_00535960();

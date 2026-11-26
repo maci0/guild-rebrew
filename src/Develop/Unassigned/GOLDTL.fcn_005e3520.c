@@ -26,7 +26,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_005e2510(void);
 void __cdecl fcn_00527420(void);
 void __cdecl fcn_00526db0(char *);
-int __cdecl fcn_00527000(void);
+int __cdecl d2_GetHudThemeResourceId(void);
 void __cdecl d2_EnterMenuScreen(void);
 
 /* ADDRESS: GOLDTL 0x005e3520 */
@@ -135,7 +135,7 @@ void __cdecl fcn_005e3520(void)
         fcn_00471af0(v3,0);
         if (*(unsigned char *)0x774964) {
           fcn_00527420();
-          fcn_00526db0((char *)fcn_00527000());
+          fcn_00526db0((char *)d2_GetHudThemeResourceId());
           d2_EnterMenuScreen();
           *(unsigned int *)0x774714 = 1;
         }

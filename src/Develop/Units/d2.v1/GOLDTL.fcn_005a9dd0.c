@@ -37,7 +37,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int slot);
 int __cdecl fcn_0050b750(int a, unsigned char k);
-int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
+int __cdecl gm_CheckEntityStock(ENTITY_RECORD*, int, unsigned char);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00532ef0(void);
@@ -101,7 +101,7 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 			if (d2_CurrentElementId == h1) {
 				v = d2_GetControlValue(d2_GetWindowListItem(d, 1, b));
 				v = fcn_0050b750(v, g_773d75);
-				if (fcn_00526010(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), v, g_773d75) != 0) {
+				if (gm_CheckEntityStock(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), v, g_773d75) != 0) {
 					fcn_004c5150(*(int*) (obj + 2), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, v);
 					g_774654 = 1;
 				}

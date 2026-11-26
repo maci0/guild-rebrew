@@ -24,7 +24,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(unsigned char*, int);
-int __cdecl fcn_00526010(unsigned char*, int, char);
+int __cdecl gm_CheckEntityStock(unsigned char*, int, char);
 void __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl fcn_004c4450(int);
 void __cdecl fcn_00535960(void);
@@ -73,7 +73,7 @@ int __cdecl fcn_005d4fa0(unsigned char* e)
 	do {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				if (d2_CheckActionBlocker(e, 2) && fcn_00526010(e, money, g_773d75)) {
+				if (d2_CheckActionBlocker(e, 2) && gm_CheckEntityStock(e, money, g_773d75)) {
 					fcn_004c6ae0(*(int*) (e + 4), -2);
 					io_FormatTextBuffer(text, 0x1d3c);
 					if (gm_RandomMod(2)) {

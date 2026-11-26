@@ -13,7 +13,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta);
 void __cdecl he_FreeAction(char* p);
 
-void __cdecl fcn_0056da20(char* p)
+void __cdecl he_RunWeatherStorm(char* p)
 {
 	int i;
 	char* e;

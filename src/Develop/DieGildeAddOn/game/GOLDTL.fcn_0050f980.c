@@ -2,7 +2,7 @@ extern unsigned char* g_entity_ptr;
 extern unsigned char* lpGebaeudePROT;
 int __cdecl gm_GetBuildingTechEffect(void*, int, int);
 int __cdecl fcn_004e8b40(int, void*);
-int __cdecl gm_FindPublicBuilding(int);
+int __cdecl gm_GetGuildHall(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl fcn_004e7990(void*, void*, int, unsigned int);
 int __cdecl fcn_005c6270(void*, int);
@@ -45,7 +45,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
         fcn_004e8b40(*(unsigned char*) (firstOffset + 0x7f4e06), q);
         v16 = *(int*) (q + 4);
         if (v16 == 4) {
-            v3 = gm_FindPublicBuilding(1);
+            v3 = gm_GetGuildHall(1);
             if (v3) {
                 score = (float) gm_GetBuildingTechEffect((void*) v3, 4, 1) + score;
             }

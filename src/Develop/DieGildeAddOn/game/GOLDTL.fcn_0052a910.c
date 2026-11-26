@@ -6,7 +6,7 @@ extern double g_665de0;
 
 double __cdecl gm_RandomFloat01(void);
 
-char __cdecl fcn_0052a910(char* e, int flag)
+char __cdecl d3_ToggleSceneObjFlag(char* e, int flag)
 {
 	float v;
 

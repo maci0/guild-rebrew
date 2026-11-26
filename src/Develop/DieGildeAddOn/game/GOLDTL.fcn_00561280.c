@@ -12,7 +12,7 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00561280(char* e)
+void __cdecl he_RunAction0x17(char* e)
 {
 	switch (*(int*) (e + 0x70)) {
 	case 3:

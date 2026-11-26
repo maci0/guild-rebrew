@@ -32,7 +32,7 @@ void __cdecl fcn_00471d80(int dlg, int a);
 void __cdecl fcn_004e44f0(int a);
 void __cdecl fcn_004e51d0(int arg, int* ids);
 void __cdecl cut_WaitTicks(int a);
-int __cdecl gm_FindPublicBuilding(int a);
+int __cdecl gm_GetGuildHall(int a);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl fcn_004c5f60(int a, int b, int c);
 void __cdecl fcn_004e48b0(void);
@@ -292,7 +292,7 @@ void __cdecl cut_RunAuction(int* arg)
 			fcn_004c5f60(*(int*) ((char*) building + 1),
 			    *(int*) (gm_CityEntity + 4),
 			    *(int*) ((char*) bidders[besti] + 4));
-			other = (int) gm_FindPublicBuilding(1);
+			other = (int) gm_GetGuildHall(1);
 			other = fcn_00502cd0(*(int*) ((char*) other + 0x5d), 2, 6, 0, 0x115);
 			if (found == bidders[besti]) {
 				fcn_004c51a0(*(int*) ((char*) other + 2),

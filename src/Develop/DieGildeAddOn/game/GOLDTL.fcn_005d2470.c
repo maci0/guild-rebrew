@@ -9,7 +9,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 int __cdecl fcn_0050b710(int, unsigned char);
 int __cdecl fcn_0050b750(int, int);
-int __cdecl fcn_00526010(void*, int, int);
+int __cdecl gm_CheckEntityStock(void*, int, int);
 void __cdecl fcn_004c5150(int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
@@ -98,7 +98,7 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 		if (d2_CurrentElementId == confirm) {
 			hv = d2_GetControlValue(slider);
 			uv = fcn_0050b750(hv, *(unsigned char*) &g_773d75);
-			if (fcn_00526010((void*) ((unsigned long)((char*)&((ENTITY_RECORD*)g_7f4ca0)[
+			if (gm_CheckEntityStock((void*) ((unsigned long)((char*)&((ENTITY_RECORD*)g_7f4ca0)[
 *(unsigned short*) &g_774970])), uv,
 				*(unsigned char*) &g_773d75) != 0) {
 				flags = *(unsigned int*) ((char*) arg2 + 0x1c8) | 0x20;

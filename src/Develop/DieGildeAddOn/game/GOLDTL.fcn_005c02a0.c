@@ -26,7 +26,7 @@ int __cdecl fcn_0050b710(int, unsigned char);
 void __cdecl fcn_005c9220(int*);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
-int __cdecl fcn_00526010(void*, int, unsigned char);
+int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
 void __cdecl fcn_004c5150(int, int, char, int);
 /* The native caller consumes the command queue index returned in EAX. */
 int __cdecl fcn_004c54c0(int, int, int, int);
@@ -91,7 +91,7 @@ int __cdecl fcn_005c02a0(char* entity)
             if (d2_CurrentElementId == accept) {
                 amount = d2_GetControlValue(edit);
                 amount = fcn_0050b750(amount, g_773d75);
-                if (fcn_00526010(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), amount, g_773d75)) {
+                if (gm_CheckEntityStock(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), amount, g_773d75)) {
                     stats = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
                     if (stats != 0)
                         *(int*)((char*)stats + 0x28) += amount;

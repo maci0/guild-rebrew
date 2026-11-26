@@ -43,9 +43,9 @@ int __cdecl fcn_0058edc0(int, char*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_004c5420(int, int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
-void __cdecl fcn_0058e510(char*, char*);
-void __cdecl fcn_0058ea60(char*, char*);
-void __cdecl fcn_0058e790(char*, char*);
+void __cdecl d2_RunSeanceDialog(char*, char*);
+void __cdecl d2_RunSeanceItemsDialog(char*, char*);
+void __cdecl d2_RunSeanceTreasureDialog(char*, char*);
 void __cdecl fcn_00526120(int, int);
 
 /* ADDRESS: GOLDTL 0x0058ee70 */
@@ -78,13 +78,13 @@ void __cdecl fcn_0058ee70(char* e)
 			}
 			switch (result.kind) {
 			case 1:
-				fcn_0058e510(e, (char*) &result);
+				d2_RunSeanceDialog(e, (char*) &result);
 				break;
 			case 2:
-				fcn_0058ea60(e, (char*) &result);
+				d2_RunSeanceItemsDialog(e, (char*) &result);
 				break;
 			case 3:
-				fcn_0058e790(e, (char*) &result);
+				d2_RunSeanceTreasureDialog(e, (char*) &result);
 				break;
 			}
 		}

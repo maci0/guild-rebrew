@@ -3,12 +3,12 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_0057dc30(char*);
-void __cdecl fcn_0057dd40(char*);
-void __cdecl fcn_0057dd70(char*);
+void __cdecl he_RewardRandomItemOrGold0a4(char*);
+void __cdecl he_GrantSmallSkillOrFavor0a4(char*);
+void __cdecl he_GrantScaledGold0a4(char*);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_0057dba0(char* o)
+void __cdecl he_UpdateEvent0a4(char* o)
 {
 	char* x;
 	float r;
@@ -17,11 +17,11 @@ void __cdecl fcn_0057dba0(char* o)
 	if (*(int*) (o + 0x70) != -1 && *(int*) (o + 0x70) != -2 && x != 0) {
 		r = gm_RandomFloat01();
 		if (r > 0.8f) {
-			fcn_0057dc30(x);
+			he_RewardRandomItemOrGold0a4(x);
 		} else if (r > 0.4f) {
-			fcn_0057dd40(x);
+			he_GrantSmallSkillOrFavor0a4(x);
 		} else {
-			fcn_0057dd70(x);
+			he_GrantScaledGold0a4(x);
 		}
 	}
 	he_FreeAction(o);

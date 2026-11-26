@@ -39,7 +39,7 @@ void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00526010(void*, int, unsigned char);
+int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
 void __cdecl fcn_004c4eb0(char*);
 void __cdecl fcn_004c4ef0(char*);
 void __cdecl fcn_004c5530(void*);
@@ -119,7 +119,7 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 			io_AppendText(0x42b8, n, *(unsigned short*) rec);
 			if (g_100f1dc != -1) {
 				if (d2_CurrentElementId == sel[0]
-					&& fcn_00526010(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), n, g_773d75) != 0) {
+					&& gm_CheckEntityStock(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), n, g_773d75) != 0) {
 					pkt[4] = 0x18;
 					*(int*) (pkt + 8) = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 					*(int*) (pkt + 0xc) = -1;

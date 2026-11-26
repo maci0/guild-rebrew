@@ -4,7 +4,7 @@
 extern char g_7f4ca4[];
 
 
-void* __cdecl gm_FindPublicBuilding(int);
+void* __cdecl gm_GetGuildHall(int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl atoi(char*);
 int __cdecl fcn_004ae130(int);
@@ -18,7 +18,7 @@ int __cdecl hst_HandleVermoegenSteuer(int sel, int id, char* arg)
 	float scale;
 	int i;
 
-	city = gm_FindPublicBuilding(1);
+	city = gm_GetGuildHall(1);
 	if (city == 0)
 		return 0;
 	obj = fcn_00502cd0(*(int*) ((char*) city + 0x5d), 2, 6, 0, 0x115);

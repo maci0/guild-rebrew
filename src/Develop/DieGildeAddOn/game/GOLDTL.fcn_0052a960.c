@@ -45,7 +45,7 @@ double __cdecl fabs(double);
 int __cdecl abs(int);
 #pragma intrinsic(fabs, abs)
 
-char __cdecl fcn_0052a910(char* e, int flag);
+char __cdecl d3_ToggleSceneObjFlag(char* e, int flag);
 void __cdecl fcn_004463f0(int a, int b, float v);
 void __cdecl d3_VisitSceneObjects(int list, int a, int mask, char (__cdecl* fn)(char*, int), int arg);
 void __cdecl fcn_00445f50(int idx, float frac, float w, int changed);
@@ -109,10 +109,10 @@ void __cdecl fcn_0052a960(Stamp* now)
 	idx = v % 7;
 	if (g_6a2bd8 != idx && ((Slot_52a960*)g_1043340)[d3_CurrentContextIndex].f2c != 0) {
 		if (idx >= 0 && g_7746fc == 0) {
-			d3_VisitSceneObjects(g_67a370, 0, 6, fcn_0052a910, 0);
+			d3_VisitSceneObjects(g_67a370, 0, 6, d3_ToggleSceneObjFlag, 0);
 			g_7746fc++;
 		} else if (idx >= 3 && g_7746fc == 1) {
-			d3_VisitSceneObjects(g_67a370, 0, 6, fcn_0052a910, 1);
+			d3_VisitSceneObjects(g_67a370, 0, 6, d3_ToggleSceneObjFlag, 1);
 			g_7746fc++;
 		}
 		g_6a2bd8 = idx;

@@ -7,7 +7,7 @@ extern Rec7dc6e0 g_7dc6e0[64];
 
 void __cdecl fcn_005467e0(Rec7dc6e0*);
 
-void __cdecl fcn_00546b80(int k)
+void __cdecl d3_ReleaseSceneSlotById(int k)
 {
 	int i;
 

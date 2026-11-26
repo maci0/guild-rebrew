@@ -26,7 +26,7 @@ float __cdecl fcn_0050bb50(int, unsigned char);
 void __cdecl fcn_004c51a0(int, int, unsigned char, int);
 int __cdecl fcn_004c51f0(int, int, int, int, unsigned char, int);
 
-void __cdecl fcn_0057dc30(char* h)
+void __cdecl he_RewardRandomItemOrGold0a4(char* h)
 {
 	struct level lv;
 	struct offer o;

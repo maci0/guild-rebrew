@@ -11,7 +11,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl fcn_005c61e0(int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_00557e50(char* o)
+void __cdecl he_AllocSmokeEffect(char* o)
 {
 	char* e;
 	char* t;

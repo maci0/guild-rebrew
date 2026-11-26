@@ -37,7 +37,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, ch
 void __cdecl fcn_00529160(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_005727f0(char* e)
+void __cdecl he_RunSuchen(char* e)
 {
 	char* r;
 	char buf[0x200];

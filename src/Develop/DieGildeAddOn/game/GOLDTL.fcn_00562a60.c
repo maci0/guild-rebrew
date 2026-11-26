@@ -22,32 +22,32 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c64b0(int, int, int, int, int, int, char*);
 int __cdecl fcn_004a5e60(ENTITY_RECORD* p, int kind, F8 f, int c, float r, int* out);
 
-void __cdecl fcn_00562a60(char* e)
+void __cdecl he_AllocPruegelAction(char* action)
 {
-	char* h;
-	char* t;
+	char* actor;
+	char* target;
 	int found;
 
-	gm_LookupEntityRecordById(*(int*) (e + 0xb4));
-	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
-	if (*(int*) (e + 0x10) == -1) {
-		t = gm_StartFilteredEntitySearch(1, 5, 0x16);
-		if (t != 0 || (t = gm_StartFilteredEntitySearch(1, 5, 0xf)) != 0) {
-			*(int*) (e + 0x10) = *(int*) (t + 1);
+	gm_LookupEntityRecordById(*(int*) (action + 0xb4));
+	*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
+	if (*(int*) (action + 0x10) == -1) {
+		target = gm_StartFilteredEntitySearch(1, 5, 0x16);
+		if (target != 0 || (target = gm_StartFilteredEntitySearch(1, 5, 0xf)) != 0) {
+			*(int*) (action + 0x10) = *(int*) (target + 1);
 		}
 	}
-	*(int*) (e + 0xc8) = -1;
-	*(int*) (e + 0xcc) = fcn_004c64b0(0x11, *(int*) (e + 0x10), -1, 0, 2, 0x154, "PRUEGEL");
-	h = gm_LookupEntityRecordById(*(int*) (e + 0xb4));
-	if (*(char**) (h + 0x170) != 0) {
-		t = *(char**) (h + 0x170);
+	*(int*) (action + 0xc8) = -1;
+	*(int*) (action + 0xcc) = fcn_004c64b0(0x11, *(int*) (action + 0x10), -1, 0, 2, 0x154, "PRUEGEL");
+	actor = gm_LookupEntityRecordById(*(int*) (action + 0xb4));
+	if (*(char**) (actor + 0x170) != 0) {
+		target = *(char**) (actor + 0x170);
 	} else {
-		t = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) h);
+		target = gm_StartFilteredEntitySearch(1, 4, *(unsigned short*) actor);
 	}
-	if (t == 0) {
-		if (fcn_004a5e60(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 8)]), 6, (*(F8*)&g_666018), 0, 100.0f, &found) != 0) {
-			t = gm_StartFilteredEntitySearch(1, 1, found);
+	if (target == 0) {
+		if (fcn_004a5e60(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (action + 8)]), 6, (*(F8*)&g_666018), 0, 100.0f, &found) != 0) {
+			target = gm_StartFilteredEntitySearch(1, 1, found);
 		}
 	}
-	*(int*) (e + 0xd0) = *(int*) (t + 1);
+	*(int*) (action + 0xd0) = *(int*) (target + 1);
 }

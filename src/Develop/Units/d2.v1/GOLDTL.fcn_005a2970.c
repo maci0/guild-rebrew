@@ -34,7 +34,7 @@ void __cdecl fcn_005ca740(int x, int y, int a, int b, struct sel* s, int c);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_005c91c0(char* buf, int x, int y, int a, int b);
 void __cdecl fcn_00526120(char* text, int value);
-int __cdecl fcn_00526010(char* record, unsigned int value, char flag);
+int __cdecl gm_CheckEntityStock(char* record, unsigned int value, char flag);
 void __cdecl fcn_004c4eb0(char* text);
 void __cdecl fcn_004c4ef0(char* text);
 void __cdecl fcn_004c68c0(void* msg);
@@ -126,7 +126,7 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 			if (3 > j) {
 				for (i = 0; i < 3; i++) {
 					if (*(int*) (a1 + 0x1c + i * 4) == seen[j]) {
-						if (fcn_00526010((char*) (g_774970 * 0x21c + 0x7f4ca0),
+						if (gm_CheckEntityStock((char*) (g_774970 * 0x21c + 0x7f4ca0),
 							vals[j], (char) g_773d75)) {
 							out2[1] = 0x62757920;
 							out2[2] = *(unsigned int*) (g_774970 * 0x21c + 0x7f4ca4);

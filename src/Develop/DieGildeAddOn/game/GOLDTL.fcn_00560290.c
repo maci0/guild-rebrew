@@ -20,7 +20,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004c5c80(int);
 void __cdecl fcn_004c5da0(int, int, int, int, int, char*);
-int __cdecl fcn_00529670(int, int);
+int __cdecl gm_IsEntityAtBuilding(int, int);
 void __cdecl fcn_00529160(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
@@ -113,7 +113,7 @@ void __cdecl fcn_00560290(char* a0)
 			}
 			for (i = 0; i < *(unsigned char*) (a0 + 0xac); i++) {
 				rec = gm_LookupEntityRecordById(((int*) (a0 + 0x8c))[i]);
-				if (rec && !fcn_00529670(rec, (int) v9)) {
+				if (rec && !gm_IsEntityAtBuilding(rec, (int) v9)) {
 					*(int*) (a0 + 0x70) = 2;
 					gm_AddTime((int) (a0 + 0x52), 0, 5, 0);
 					return;
@@ -158,7 +158,7 @@ void __cdecl fcn_00560290(char* a0)
 			}
 			for (i = 0; i < *(unsigned char*) (a0 + 0xac); i++) {
 				rec = gm_LookupEntityRecordById(((int*) (a0 + 0x8c))[i]);
-				if (rec && !fcn_00529670(rec, (int) v9)) {
+				if (rec && !gm_IsEntityAtBuilding(rec, (int) v9)) {
 					*(int*) (a0 + 0x70) = 4;
 					gm_AddTime((int) (a0 + 0x52), 0, 5, 0);
 					return;

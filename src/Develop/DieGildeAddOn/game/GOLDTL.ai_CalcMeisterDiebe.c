@@ -63,7 +63,7 @@ int __cdecl fcn_0050d0c0(unsigned char*, int);
 int __cdecl gm_AccumulateTyped2(unsigned char*);
 int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl gm_GetBuildingTypeCategory(unsigned int);
-int __cdecl fcn_0055c050(unsigned char*);
+int __cdecl he_HasNoActiveAction0x62(unsigned char*);
 void __cdecl fcn_004c5530(GOLDTL_Msg481*);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
@@ -271,7 +271,7 @@ L176c:
 				    && hid != *gm_CityEntity
 				    && gm_CheckEntityType(e) == 0
 				    && *bld != '!'
-				    && fcn_0055c050(e) != 0) {
+				    && he_HasNoActiveAction0x62(e) != 0) {
 					int node = *(int*) (e + 0x61);
 					if (node == 0 || fcn_004fa6f0(node + 0x4c, &cx, &cy) == 0) {
 						factor = 0;

@@ -25,7 +25,7 @@ void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c5da0(int, int, int, int, int, char *);
 void *__cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AddTime(void *, int, int, int);
-int __cdecl fcn_0055be70(void *);
+int __cdecl he_DetectNearbyPatrolAction(void *);
 void __cdecl fcn_004c5ed0(int, char *, int);
 int __cdecl fcn_004f4f60(int, int, int, int, int);
 int __cdecl fcn_00500cb0(void *, int *);
@@ -139,7 +139,7 @@ void __cdecl fcn_00561380(void *action)
 			pos[1] = 4000.0f;
 			*(void **)(pos + 2) = p;
 			pos[3] = 0.0f;
-			if (fcn_0055be70(pos) != 0) {
+			if (he_DetectNearbyPatrolAction(pos) != 0) {
 				q = (unsigned char *)(p + 0x52);
 				*(int *)(p + 0xc8) = fcn_004f4f60(0x18, 1,
 					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4),

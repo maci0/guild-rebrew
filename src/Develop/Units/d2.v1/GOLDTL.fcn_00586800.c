@@ -33,7 +33,7 @@ int __cdecl fcn_0050b710(int, unsigned char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
-int __cdecl fcn_00526010(ENTITY_RECORD*, int, unsigned char);
+int __cdecl gm_CheckEntityStock(ENTITY_RECORD*, int, unsigned char);
 void __cdecl ahm_SendSetFloatValue(char*, float);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -87,7 +87,7 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
 				c = fcn_0050b750(d2_GetControlValue(line), g_773d75);
-				if (fcn_00526010(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), c, g_773d75) != 0) {
+				if (gm_CheckEntityStock(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), c, g_773d75) != 0) {
 					ahm_SendSetFloatValue(p, (float) c / n * f * 0.75f);
 					r = 1;
 					g_774654 = 1;

@@ -57,7 +57,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
-int __cdecl fcn_00526010(char*, int, char);
+int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl fcn_005898f0(void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl fcn_004c51a0(int, int, char, int);
@@ -121,7 +121,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 			*(int*) 0x774654 = 1;
 		} else if (*(int*) &g_100f1dc != -1) {
 			if (d2_CurrentElementId == act.no) {
-				if (fcn_00526010(
+				if (gm_CheckEntityStock(
 				        (char*) (unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970]
 
 ,

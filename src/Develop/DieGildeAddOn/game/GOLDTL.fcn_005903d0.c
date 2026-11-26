@@ -7,7 +7,7 @@ extern int g_774800;
 int __cdecl fcn_00507910(int);
 int __cdecl gm_CheckStatLevel(int, int);
 
-int __cdecl fcn_005903d0(unsigned short* who, unsigned char* p, short* cmd)
+int __cdecl gm_GetBuildingUiFlags(unsigned short* who, unsigned char* p, short* cmd)
 {
 	unsigned char* t;
 	int lvl;

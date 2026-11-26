@@ -9,16 +9,16 @@ extern pos14_7f4c00 gm_GameTime;
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
-void __cdecl fcn_0055a860(char* o)
+void __cdecl he_RunCountdownAction(char* action)
 {
-	if (*(int*) (o + 0x70) < 0 || *(int*) (o + 0xac) <= 0) {
-		he_FreeAction(o);
+	if (*(int*) (action + 0x70) < 0 || *(int*) (action + 0xac) <= 0) {
+		he_FreeAction(action);
 		return;
 	}
-	if ((o[0x78] & 4) == 0) {
-		(*(int*) (o + 0xac))--;
-		*(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
-		gm_AddTime((pos14_7f4c00*) (o + 0x52), 0x18, 0, 0);
-		*(int*) (o + 0x84) = fcn_004c5620(0, o);
+	if ((action[0x78] & 4) == 0) {
+		(*(int*) (action + 0xac))--;
+		*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
+		gm_AddTime((pos14_7f4c00*) (action + 0x52), 0x18, 0, 0);
+		*(int*) (action + 0x84) = fcn_004c5620(0, action);
 	}
 }

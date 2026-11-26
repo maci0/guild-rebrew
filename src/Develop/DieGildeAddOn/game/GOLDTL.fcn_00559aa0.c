@@ -25,14 +25,14 @@ extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern int __cdecl gm_RandomMod(unsigned short range);
 extern double __cdecl gm_RandomFloat01(void);
 extern void __cdecl gm_ResolveEntityById(void** out, int a, int b, int item);
-extern int __cdecl fcn_00529670(void* entity, void* record);
+extern int __cdecl gm_IsEntityAtBuilding(void* entity, void* record);
 extern int __cdecl fcn_004c5420(unsigned int handle, int a, int b, int c, int d);
 extern void __cdecl fcn_004c6650(unsigned int handle);
 extern void __cdecl fcn_004c5c80(unsigned int handle);
 extern void __cdecl fcn_004c5da0(int house, int item, int a, int b, int c, char* name);
 extern void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 extern void* __cdecl gm_FindNextFilteredEntity(void);
-extern int __cdecl fcn_00567410(char* entity, int count, void** list, int* out, int* flag);
+extern int __cdecl he_PickNearestWirtshaus(char* entity, int count, void** list, int* out, int* flag);
 extern void __cdecl gm_SearchTable67(int value);
 extern void __cdecl ch_PlayRandomGesture(char* entity);
 
@@ -68,7 +68,7 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 	if (record != 0) {
 		divisor = (gm_RandomMod(6) & 0xffff) + 2 + (g_7e453c != 0)
 			+ (g_7e4538 != 0 ? 2 : 0);
-		if (fcn_00529670(entity, record) == 0)
+		if (gm_IsEntityAtBuilding(entity, record) == 0)
 			return;
 		candidate = *(char**) (entity + 0x184);
 		if (candidate != 0 && *(int*) (candidate + 0x2c) != -1
@@ -145,7 +145,7 @@ void __cdecl gm_SimulatePoliticians(struct job* job)
 				candidate = (char*) gm_FindNextFilteredEntity();
 			} while (candidate != 0);
 			if (count != 0
-				&& fcn_00567410(entity, count, (void**) list, &divisor, &found) != 0)
+				&& he_PickNearestWirtshaus(entity, count, (void**) list, &divisor, &found) != 0)
 				gm_SearchTable67(divisor);
 		}
 	}

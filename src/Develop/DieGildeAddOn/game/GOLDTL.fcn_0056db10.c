@@ -10,7 +10,7 @@ int __cdecl gm_FindRecordById(int);
 void __cdecl fcn_00529160(char*, int, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_0056db10(char* u)
+void __cdecl he_StartHeilen(char* u)
 {
 	char* h;
 	char* t;

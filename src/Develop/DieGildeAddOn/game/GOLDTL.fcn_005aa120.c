@@ -34,7 +34,7 @@ extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_00526010(Ent5aa1*, int, unsigned char);
+int __cdecl gm_CheckEntityStock(Ent5aa1*, int, unsigned char);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -57,7 +57,7 @@ int __cdecl fcn_005aa120(int unused, char* p)
 	int w1;
 
 	cost = (int) MAX5AA1(gm_WalkEntityChain((*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_index)) * 0.01f, g_664388);
-	if (fcn_00526010(((Ent5aa1*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), cost, g_773d75) == 0) {
+	if (gm_CheckEntityStock(((Ent5aa1*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), cost, g_773d75) == 0) {
 		return 0;
 	}
 	h = fcn_00470820(0, 0, g_6aaf58);
@@ -82,7 +82,7 @@ int __cdecl fcn_005aa120(int unused, char* p)
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			if (d2_CurrentElementId == w1 && fcn_00526010(((Ent5aa1*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), cost, g_773d75) != 0) {
+			if (d2_CurrentElementId == w1 && gm_CheckEntityStock(((Ent5aa1*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), cost, g_773d75) != 0) {
 				req.kind = 2;
 				req.who = *(int*) (p + 1);
 				req.cost = cost;

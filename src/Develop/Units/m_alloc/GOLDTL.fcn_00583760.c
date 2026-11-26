@@ -36,13 +36,13 @@ extern int g_1040494;
 int __cdecl fcn_004c3100(char*, int);
 int* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00580cf0(int*);
-void __cdecl fcn_0057fac0(void);
+void __cdecl d2_GrantTutorialLumber(void);
 void __cdecl fcn_0057fb20(void);
 void __cdecl fcn_0057fb60(void);
-void __cdecl fcn_0057fdd0(void);
+void __cdecl d2_FocusTutorialBuilding0x02(void);
 void __cdecl fcn_0057fe50(void);
 void __cdecl fcn_0057fea0(void);
-void __cdecl fcn_0057ff20(void);
+void __cdecl d2_SendTutorialTownMsgA0(void);
 
 int* __cdecl d2_CreateTutorialChapter5(void)
 {
@@ -87,7 +87,7 @@ int* __cdecl d2_CreateTutorialChapter5(void)
 	p[0x8] = 0;
 	p[0xb] = -1;
 	p[0xc] = 0x8e;
-	p[0xd] = (int) fcn_0057fdd0;
+	p[0xd] = (int) d2_FocusTutorialBuilding0x02;
 	p[0xe] = 0;
 	p[0x10] = 0;
 	p[0x11] = 0;
@@ -233,7 +233,7 @@ int* __cdecl d2_CreateTutorialChapter5(void)
 	p[0xb] = 0x429;
 	p[0xc] = 0xd5;
 	p[0xe] = 0;
-	p[0xd] = (int) fcn_0057fac0;
+	p[0xd] = (int) d2_GrantTutorialLumber;
 	p[0xf] = (int) fcn_0057fb20;
 	p[0x10] = 0x17;
 	p[0x11] = 0x58c;
@@ -494,7 +494,7 @@ int* __cdecl d2_CreateTutorialChapter5(void)
 	p[0x8] = 0;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xd] = (int) fcn_0057ff20;
+	p[0xd] = (int) d2_SendTutorialTownMsgA0;
 	p[0xe] = 0;
 	p[0x10] = 0x30;
 	p[0x11] = 0;

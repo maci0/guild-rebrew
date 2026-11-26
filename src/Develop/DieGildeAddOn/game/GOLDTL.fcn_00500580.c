@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-int __cdecl gm_SpawnPopulationChild(int);
+int __cdecl sim_FindAndMatchParents(int);
 int __cdecl fcn_0050a7e0(int, int, int, int, int, int, int, int);
 char* __cdecl sim_StartEntityQueryByType(char*);
 int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
@@ -14,7 +14,7 @@ char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
 	char* s;
 
 	if (flags & 1) {
-		i = gm_SpawnPopulationChild(a3) & 0xffff;
+		i = sim_FindAndMatchParents(a3) & 0xffff;
 		if (i != 0xffff && (flags & 2)) {
 			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].active = (char) a5;
 			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].stat_category = (char) a4;

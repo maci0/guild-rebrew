@@ -37,7 +37,7 @@ void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_004c5fd0(int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00564210(char* e)
+void __cdecl he_UpdateGebAbreissen(char* e)
 {
 	int a;
 	int b;

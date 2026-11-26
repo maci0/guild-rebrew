@@ -12,7 +12,7 @@ extern int __cdecl gm_GetBuildingTypeCategory(int type);
 extern int __cdecl gm_AssignBuildingOwner(void* record, int a, int b);
 extern int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 extern void __cdecl he_FreeActionsByKind(void* entity);
-extern void __cdecl fcn_0055bc40(void* entity);
+extern void __cdecl he_ClearEntityActions(void* entity);
 extern void __cdecl fcn_004e8940(void* entity);
 extern int __cdecl gm_MapEntityStatRange(int age);
 extern void* __cdecl gm_GetEntityTableEntry(void* entity);
@@ -71,8 +71,8 @@ int __cdecl fcn_00509620(int sourceId, int targetId)
 	if (q == 0)
 		return -2;
 	he_FreeActionsByKind(p);
-	fcn_0055bc40(p);
-	fcn_0055bc40(q);
+	he_ClearEntityActions(p);
+	he_ClearEntityActions(q);
 	q_slot = q->entity_index;
 	if (p->max_hp != q->max_hp)
 		q->max_hp = p->max_hp;

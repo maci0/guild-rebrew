@@ -29,7 +29,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00526010(void*, int, char);
+int __cdecl gm_CheckEntityStock(void*, int, char);
 int __cdecl fcn_004c51a0(int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
@@ -86,7 +86,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 			}
 			if (g_100f1dc != -1) {
 				if (d2_CurrentElementId == firstButton) {
-					if (fcn_00526010(&((struct house*) g_7f4ca0)[g_774970], d, (char) g_773d75) != 0) {
+					if (gm_CheckEntityStock(&((struct house*) g_7f4ca0)[g_774970], d, (char) g_773d75) != 0) {
 						x = 1 - p->state;
 						fcn_004c51a0(-1, p->handle, 0, d);
 						cm_BeginPacketFieldDelta((char*) p, p->handle);
@@ -147,7 +147,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 			}
 			if (g_100f1dc != -1) {
 				if (d2_CurrentElementId == firstButton) {
-					if (fcn_00526010(&((struct house*) g_7f4ca0)[g_774970], t, (char) g_773d75) != 0) {
+					if (gm_CheckEntityStock(&((struct house*) g_7f4ca0)[g_774970], t, (char) g_773d75) != 0) {
 						x = q->state;
 						fcn_004c51a0(q->handle, p->handle, 0, t);
 						cm_BeginPacketFieldDelta((char*) p, p->handle);

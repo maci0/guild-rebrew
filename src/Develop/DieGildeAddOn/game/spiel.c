@@ -4499,6 +4499,7 @@ int __cdecl gm_GetKindRecord(int kind, KIND_REC* out)
 	return 1;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only (TL 0x508c30, discarded): fills arr with 0..n-1 and swaps n/2 + max(n/4, 1) random
  * distinct pairs. */
 void __cdecl gm_ShuffleBytes(unsigned char n, unsigned char* arr)
@@ -4530,6 +4531,7 @@ void __cdecl gm_ShuffleBytes(unsigned char n, unsigned char* arr)
 		}
 	}
 }
+#endif
 
 /* Generates a random stat modifier. Produces a random
  * delta value for stat variation during entity creation
@@ -6976,6 +6978,7 @@ int __cdecl gm_CheckInventoryCapacity(char* obj, int entity_index, int requested
 
 /* Client-only guild, wealth-ranking and relationship helpers (discarded). */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 char* __cdecl gm_GetGuildHall(int guild)
 {
 	char* hall;
@@ -7006,6 +7009,7 @@ char* __cdecl gm_GetGuildHall(int guild)
 	}
 	return hall;
 }
+#endif
 
 int __cdecl gm_GetTypeGuild(int type_index, int* guild)
 {

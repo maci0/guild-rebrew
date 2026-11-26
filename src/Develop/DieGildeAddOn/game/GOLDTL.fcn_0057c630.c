@@ -7,7 +7,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
 void __cdecl fcn_0057bed0(char*, char*, int);
 
-void __cdecl fcn_0057c630(char* o, int lvl)
+void __cdecl he_ChargeOrCurseZigeuner(char* o, int lvl)
 {
 	char buf[0x200];
 	int n;

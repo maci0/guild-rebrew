@@ -48,7 +48,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00532ef0(void);
-int __cdecl fcn_00526010(Player*, int, char);
+int __cdecl gm_CheckEntityStock(Player*, int, char);
 void __cdecl fcn_00526920(char*, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
@@ -111,7 +111,7 @@ void __cdecl d2_OpenRathausGebInfo(void)
 		if (g_100f1dc != -1) {
 			for (i = 0; i < n; i++) {
 				if (d2_CurrentElementId == rows[i].btn && *(unsigned short*) (rows[i].obj + 0x27) != g_774970 &&
-				    fcn_00526010(((Player*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), *(int*) (rows[i].rel + 0xb0), (*(char*)&g_773d75)) != 0) {
+				    gm_CheckEntityStock(((Player*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), *(int*) (rows[i].rel + 0xb0), (*(char*)&g_773d75)) != 0) {
 					fcn_00526920(rows[i].obj, -1, s_6b5c60);
 				}
 			}

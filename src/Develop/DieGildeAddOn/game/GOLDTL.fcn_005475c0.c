@@ -22,7 +22,7 @@ void __cdecl fcn_004c4eb0(char* s);
 void __cdecl fcn_004c4ef0(char* s);
 void __cdecl fcn_004c68c0(Msg* msg);
 
-void __cdecl fcn_005475c0(void)
+void __cdecl he_ClearDunkleEcke(void)
 {
 	char* e;
 	char* w;

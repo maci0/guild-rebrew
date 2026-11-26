@@ -5,7 +5,7 @@
 
 extern HE_AP_EVENT g_7dcae0[256];
 
-int __cdecl fcn_00546fe0(int k)
+int __cdecl he_SumEventCostsForSubject(int k)
 {
 	int sum;
 	int i;

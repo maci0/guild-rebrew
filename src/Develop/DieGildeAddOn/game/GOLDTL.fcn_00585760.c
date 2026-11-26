@@ -37,7 +37,7 @@ int __cdecl fcn_004ecf00(char*, int*, int*, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_004c5530(Msg*);
 
-int __cdecl fcn_00585760(char* e, int* list, int idx)
+int __cdecl he_SendEvent096(char* e, int* list, int idx)
 {
 	int x;
 	int y;

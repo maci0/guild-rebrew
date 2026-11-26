@@ -4,7 +4,7 @@ void __cdecl fcn_00549b50(void);
 void __cdecl fcn_00549b80(void);
 void __cdecl fcn_00549b90(void);
 void __cdecl fcn_0054a210(void);
-void __cdecl fcn_0054a5a0(void);
+void __cdecl he_AllocPredigt(void);
 void __cdecl fcn_0054a6a0(void);
 void __cdecl fcn_0054aa70(void);
 void __cdecl fcn_0054b130(void);
@@ -17,10 +17,10 @@ void __cdecl fcn_0054b820(void);
 void __cdecl he_UpdateFest(void);
 void __cdecl fcn_0054bc40(void);
 void __cdecl fcn_0054bc90(void);
-void __cdecl fcn_0054c500(void);
+void __cdecl he_RunAction53(void);
 void __cdecl fcn_0054c800(void);
 void __cdecl fcn_0054ca10(void);
-void __cdecl fcn_0054d7b0(void);
+void __cdecl he_StartAction0x42EntityMsg(void);
 void __cdecl he_InitStreife(void);
 void __cdecl fcn_0054da10(void);
 void __cdecl he_StartRazzia(void);
@@ -30,9 +30,9 @@ void __cdecl fcn_0054f0c0(void);
 void __cdecl fcn_0054f340(void);
 void __cdecl fcn_0054f600(void);
 void __cdecl fcn_0054fd60(void);
-void __cdecl fcn_005500a0(void);
-void __cdecl fcn_00550150(void);
-void __cdecl fcn_005502d0(void);
+void __cdecl he_AllocRndGeselle(void);
+void __cdecl he_RunHireJourneymanAction(void);
+void __cdecl he_StartAction0x4b(void);
 void __cdecl he_HandleAction0x4b(void);
 void __cdecl fcn_005504f0(void);
 void __cdecl fcn_00550540(void);
@@ -43,7 +43,7 @@ void __cdecl fcn_00550940(void);
 void __cdecl fcn_00550980(void);
 void __cdecl fcn_00550ba0(void);
 void __cdecl fcn_00550be0(void);
-void __cdecl fcn_00550da0(void);
+void __cdecl he_AllocSellObjekt(void);
 void __cdecl fcn_00551010(void);
 void __cdecl fcn_00551050(void);
 void __cdecl fcn_00551160(void);
@@ -55,23 +55,23 @@ void __cdecl fcn_005513c0(void);
 void __cdecl fcn_005513d0(void);
 void __cdecl fcn_00551650(void);
 void __cdecl fcn_005516e0(void);
-void __cdecl fcn_005519a0(void);
+void __cdecl he_AllocApTraitAction(void);
 void __cdecl fcn_00551a20(void);
 void __cdecl fcn_00551c20(void);
 void __cdecl fcn_00551d50(void);
-void __cdecl fcn_00552220(void);
+void __cdecl he_AllocPlagueEvent(void);
 void __cdecl he_RunPlagueEvent(void);
 void __cdecl he_StartTaschendieb(void);
 void __cdecl fcn_00552a60(void);
 void __cdecl he_InitSchutzgeld(void);
 void __cdecl fcn_00553490(void);
-void __cdecl fcn_00553c60(void);
+void __cdecl he_AllocBetriebsPruefung(void);
 void __cdecl fcn_00553cd0(void);
-void __cdecl fcn_005540d0(void);
+void __cdecl he_AllocMultiActorAction(void);
 void __cdecl fcn_00554170(void);
 void __cdecl fcn_00554770(void);
 void __cdecl RunSimUnfall(void);
-void __cdecl fcn_00554b20(void);
+void __cdecl he_StartAction0x67(void);
 void __cdecl fcn_00554b90(void);
 void __cdecl fcn_00554ed0(void);
 void __cdecl fcn_00554f00(void);
@@ -88,15 +88,15 @@ void __cdecl fcn_00556e30(void);
 void __cdecl RunSimKrankheiten(void);
 void __cdecl he_InitDunkleEcke(void);
 void __cdecl fcn_00557460(void);
-void __cdecl fcn_00557e50(void);
-void __cdecl fcn_00557fe0(void);
-void __cdecl fcn_00558180(void);
+void __cdecl he_AllocSmokeEffect(void);
+void __cdecl he_RunTimedEffectAction(void);
+void __cdecl he_AllocUnkendunk(void);
 void __cdecl fcn_00558220(void);
 void __cdecl fcn_00558d10(void);
 void __cdecl fcn_005591c0(void);
 void __cdecl fcn_00559200(void);
 void __cdecl fcn_005595e0(void);
-void __cdecl fcn_00559e90(void);
+void __cdecl he_RunPoliticians(void);
 void __cdecl fcn_0055a020(void);
 void __cdecl fcn_0055a040(void);
 void __cdecl fcn_0055a0b0(void);
@@ -105,10 +105,10 @@ void __cdecl fcn_0055a3d0(void);
 void __cdecl fcn_0055a540(void);
 void __cdecl fcn_0055a5b0(void);
 void __cdecl fcn_0055a820(void);
-void __cdecl fcn_0055a860(void);
+void __cdecl he_RunCountdownAction(void);
 void __cdecl fcn_0055a8e0(void);
 void __cdecl fcn_0055a920(void);
-void __cdecl fcn_0055ab40(void);
+void __cdecl he_StartAction0x82SkillModifier(void);
 void __cdecl he_HandleAction0x82SkillModifier(void);
 void __cdecl fcn_0055ac00(void);
 void __cdecl fcn_0055aca0(void);
@@ -129,7 +129,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(42, (void*) fcn_00549b90, (void*) fcn_0054a210) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(43, (void*) fcn_0054a5a0, (void*) fcn_0054a6a0) != 0) {
+	if (he_RegisterHandler(43, (void*) he_AllocPredigt, (void*) fcn_0054a6a0) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(44, (void*) fcn_0054aa70, (void*) 0x0054ac70) != 0) {
@@ -153,13 +153,13 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(54, (void*) fcn_0054bc40, (void*) fcn_0054bc90) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(53, (void*) 0x0054c240, (void*) fcn_0054c500) != 0) {
+	if (he_RegisterHandler(53, (void*) 0x0054c240, (void*) he_RunAction53) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(65, (void*) fcn_0054c800, (void*) fcn_0054ca10) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(66, (void*) fcn_0054d7b0, (void*) 0x0054d810) != 0) {
+	if (he_RegisterHandler(66, (void*) he_StartAction0x42EntityMsg, (void*) 0x0054d810) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(67, (void*) he_InitStreife, (void*) fcn_0054da10) != 0) {
@@ -178,10 +178,10 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(71, (void*) 0x0054f910, (void*) fcn_0054fd60) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(74, (void*) fcn_005500a0, (void*) fcn_00550150) != 0) {
+	if (he_RegisterHandler(74, (void*) he_AllocRndGeselle, (void*) he_RunHireJourneymanAction) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(75, (void*) fcn_005502d0, (void*) he_HandleAction0x4b) != 0) {
+	if (he_RegisterHandler(75, (void*) he_StartAction0x4b, (void*) he_HandleAction0x4b) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(81, (void*) 0x550480, (void*) 0x5504c0) != 0) {
@@ -202,7 +202,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(86, (void*) fcn_00550ba0, (void*) fcn_00550be0) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(87, (void*) fcn_00550da0, (void*) 0x00550de0) != 0) {
+	if (he_RegisterHandler(87, (void*) he_AllocSellObjekt, (void*) 0x00550de0) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(88, (void*) fcn_00551010, (void*) fcn_00551050) != 0) {
@@ -223,13 +223,13 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(94, (void*) fcn_00551650, (void*) fcn_005516e0) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(95, (void*) fcn_005519a0, (void*) fcn_00551a20) != 0) {
+	if (he_RegisterHandler(95, (void*) he_AllocApTraitAction, (void*) fcn_00551a20) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(96, (void*) fcn_00551c20, (void*) fcn_00551d50) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(89, (void*) fcn_00552220, (void*) he_RunPlagueEvent) != 0) {
+	if (he_RegisterHandler(89, (void*) he_AllocPlagueEvent, (void*) he_RunPlagueEvent) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(97, (void*) he_StartTaschendieb, (void*) fcn_00552a60) != 0) {
@@ -243,18 +243,18 @@ int __cdecl he_RegisterEventHandlers(void)
 		return 1;
 	}
 	fcn_00530ab0(98, 0, 0, 1294, -1);
-	if (he_RegisterHandler(100, (void*) fcn_00553c60, (void*) fcn_00553cd0) != 0) {
+	if (he_RegisterHandler(100, (void*) he_AllocBetriebsPruefung, (void*) fcn_00553cd0) != 0) {
 		return 1;
 	}
 	fcn_00530ab0(100, 0, 0, 1287, -1);
-	if (he_RegisterHandler(101, (void*) fcn_005540d0, (void*) fcn_00554170) != 0) {
+	if (he_RegisterHandler(101, (void*) he_AllocMultiActorAction, (void*) fcn_00554170) != 0) {
 		return 1;
 	}
 	fcn_00530ab0(101, 0, 0, 1287, -1);
 	if (he_RegisterHandler(102, (void*) fcn_00554770, (void*) RunSimUnfall) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(103, (void*) fcn_00554b20, (void*) fcn_00554b90) != 0) {
+	if (he_RegisterHandler(103, (void*) he_StartAction0x67, (void*) fcn_00554b90) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(104, (void*) fcn_00555440, (void*) gm_SimulateWirtshaus) != 0) {
@@ -281,10 +281,10 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(116, (void*) he_InitDunkleEcke, (void*) fcn_00557460) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(118, (void*) fcn_00557e50, (void*) fcn_00557fe0) != 0) {
+	if (he_RegisterHandler(118, (void*) he_AllocSmokeEffect, (void*) he_RunTimedEffectAction) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(119, (void*) fcn_00558180, (void*) fcn_00558220) != 0) {
+	if (he_RegisterHandler(119, (void*) he_AllocUnkendunk, (void*) fcn_00558220) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(120, (void*) fcn_00558d10, (void*) 0x00558e80) != 0) {
@@ -293,7 +293,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(121, (void*) fcn_005591c0, (void*) fcn_00559200) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(122, (void*) fcn_005595e0, (void*) fcn_00559e90) != 0) {
+	if (he_RegisterHandler(122, (void*) fcn_005595e0, (void*) he_RunPoliticians) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(123, (void*) fcn_0055a020, (void*) 0x55a030) != 0) {
@@ -308,13 +308,13 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(127, (void*) fcn_0055a540, (void*) fcn_0055a5b0) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(128, (void*) fcn_0055a820, (void*) fcn_0055a860) != 0) {
+	if (he_RegisterHandler(128, (void*) fcn_0055a820, (void*) he_RunCountdownAction) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(129, (void*) fcn_0055a8e0, (void*) fcn_0055a920) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(130, (void*) fcn_0055ab40, (void*) he_HandleAction0x82SkillModifier) != 0) {
+	if (he_RegisterHandler(130, (void*) he_StartAction0x82SkillModifier, (void*) he_HandleAction0x82SkillModifier) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(134, (void*) fcn_0055ac00, (void*) fcn_0055aca0) != 0) {

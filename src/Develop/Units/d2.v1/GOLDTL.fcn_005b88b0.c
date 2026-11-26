@@ -70,7 +70,7 @@ void __cdecl fcn_00535550(char*);
 void __cdecl fcn_00535560(char*);
 int __cdecl fcn_005b8760(void);
 int __cdecl fcn_0050b750(int, int);
-int __cdecl fcn_00526010(void*, int, int);
+int __cdecl gm_CheckEntityStock(void*, int, int);
 void __cdecl fcn_004c4eb0(int);
 void __cdecl fcn_004c5150(int, int, char, int);
 void __cdecl fcn_004c54c0(int, int, int, int);
@@ -270,7 +270,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 			tv = ret / nSlots;
 			thirds = tv / 3;
 			tv3 = fcn_0050b750(ret, *(unsigned char*) 0x773d75);
-			if (fcn_00526010((void*) (0x7f4ca0
+			if (gm_CheckEntityStock((void*) (0x7f4ca0
 			                          + *(unsigned short*) 0x774970 * 0x21c),
 			                 tv3, *(unsigned char*) 0x773d75)) {
 				for (i = 0; i < tv2; i++) {

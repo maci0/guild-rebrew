@@ -55,7 +55,7 @@ void __cdecl evt_RequestScriptExit(char*);
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-void __cdecl fcn_0058e790(char* e, char* res)
+void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 {
 	float f;
 	int t;
@@ -109,7 +109,7 @@ void __cdecl fcn_0058e790(char* e, char* res)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop(fcn_0058e790, 0x777c7) != 0);
+	} while (main_RunFrameLoop(d2_RunSeanceTreasureDialog, 0x777c7) != 0);
 	fcn_00471e30(h);
 	if (m != 0) {
 		evt_RequestScriptExit(m);

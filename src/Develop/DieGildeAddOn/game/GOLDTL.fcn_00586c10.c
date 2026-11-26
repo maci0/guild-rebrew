@@ -32,7 +32,7 @@ void __cdecl he_SetGfxInfoEnabledByKey(int, int);
 void __cdecl fcn_00587f40(char*);
 void __cdecl fcn_005875c0(char*, float);
 void __cdecl fcn_00587a50(char*);
-void __cdecl fcn_00588000(char*);
+void __cdecl d2_UpdateDealSummaryLog(char*);
 void __cdecl fcn_00588710(int, int, int, int, int);
 int __cdecl fcn_00587f90(char*);
 int __cdecl fcn_00588aa0(void*, char*);
@@ -228,7 +228,7 @@ void __cdecl fcn_00586c10(char* obj)
             fcn_005875c0((char*) S, dt);
             fcn_00587a50((char*) S);
             fcn_00588200(obj, (char*) S, res);
-            fcn_00588000((char*) S);
+            d2_UpdateDealSummaryLog((char*) S);
             if (*(int*) (res + 4) == 0) {
                 if (g_100f1dc != -1) {
                     if (d2_CurrentElementId == *(int*) ((char*) S + 0xc8))

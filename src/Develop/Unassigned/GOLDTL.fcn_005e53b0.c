@@ -45,7 +45,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005ca560(ITEM *);
 void __cdecl fcn_005ca740(int, int, int, int, ITEM *, int);
 void __cdecl fcn_00472640(int, int);
-int __cdecl amt_GetOfficeRank(int);
+int __cdecl amt_GetRoleLevel(int);
 int __cdecl d2_CheckActionBlocker(char *, int);
 int __cdecl io_FormatTextBuffer(char *, int, ...);
 float __cdecl fcn_00507e70(char *, char *, int);
@@ -122,7 +122,7 @@ void __cdecl fcn_005e53b0(void *arg)
                 } else {
                     ((D2_CONTROL_TL*) g_1015ea0)[items[i].control].value_060 = 1;
                 }
-                cost += (items[i].entity && i) ? (amt_GetOfficeRank((unsigned char)items[i].entity[0x166]) / 3 + 2) : 0;
+                cost += (items[i].entity && i) ? (amt_GetRoleLevel((unsigned char)items[i].entity[0x166]) / 3 + 2) : 0;
             }
             d2_SetForm(window, 2);
             io_AppendText((int)g_6811b0, cost);

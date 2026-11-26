@@ -1,12 +1,12 @@
 
 // fcn_0050d350 — fcn_0053ee40(a); if([0x6f1c28]) fcn_00458770(a, [0x6f1c28]).
 
-int __cdecl fcn_00546b80(int);
+int __cdecl d3_ReleaseSceneSlotById(int);
 int __cdecl fcn_004550b0(int, int);
 
 void __cdecl fcn_0050d350(int a)
 {
-	fcn_00546b80(a);
+	d3_ReleaseSceneSlotById(a);
 	if (*(int*) 0x6f1c28 != 0) {
 		fcn_004550b0(a, *(int*) 0x6f1c28);
 	}

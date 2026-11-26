@@ -1330,3 +1330,100 @@ date	module_va	old_name	new_name	basis	confidence	twins	evidence
 2026-11-26	GOLDTL.0x00507ab0	fcn_00507ab0	gm_FindPublicTreasury	inferred	medium	GOLD.0x00504a80	Queries town hall (0x115) or church (0x142) treasury stock object via gm_FindPublicBuilding and fcn_00502cd0
 2026-11-26	GOLDTL.0x00508c30	fcn_00508c30	gm_GenerateShuffledByteIndices	inferred	medium	GOLD.0x00505be0	Fills unsigned char array 0..count-1 and shuffles with random swaps via gm_RandomMod
 2026-11-26	GOLDTL.0x0050d430	fcn_0050d430	gm_ResolveEntityOwnerBuilding	inferred	medium	GOLD.0x00509ff0	Resolves entity by *(entity+5) or falls back to g_7f4ca0[dynamic_ent+0x25] owning building
+2026-11-26	GOLDTL.0x0050f910	fcn_0050f910	gm_CreditCityTreasury	inferred	high	GOLD.0x0050c4e0	Finds town hall (type 1), queries treasury 0x115, credits amount via fcn_004c51a0; a->amount.
+2026-11-26	GOLDTL.0x00511900	fcn_00511900	cm_DistributeStartingWares	inferred	high	GOLD.0x0050e330	Grants starting wares from faces[size] via cm_BeginCommandSync/fcn_004c4700/cm_EndCommandSync.
+2026-11-26	GOLDTL.0x00515fb0	fcn_00515fb0	d3snd_PlayBuildingAmbient	inferred	high	GOLD.0x00512870	Picks ambient sound by day quarter (fcn_00500e20) and entity kind; queues via fcn_00515f60.
+2026-11-26	GOLDTL.0x00527000	fcn_00527000	d2_GetHudThemeResourceId	inferred	high	GOLD.0x00522080	Returns HUD backdrop ID (0x534..0x540) from g_776708 theme or player building archetype.
+2026-11-26	GOLDTL.0x0052a910	fcn_0052a910	d3_ToggleSceneObjFlag	inferred	high	GOLD.0x00525ac0	Traversal callback toggling object visibility/light bit via fcn_00442d50 on kind 6.
+2026-11-26	GOLDTL.0x005358e0	fcn_005358e0	cm_WaitNetworkSyncBanner	inferred	high	GOLD.0x0052fdb0	Enqueues sync cmd 0xe and pumps main_RunFrameLoop (0x300000) updating banner via fcn_00533a40.
+2026-11-26	GOLDTL.0x00545510	fcn_00545510	he_FreeAllActions	inferred	high	GOLD.0x0053d7f0	Loops active slots 0..he_LastEventSlot (<0x400) in g_77e980 and calls he_FreeAction.
+2026-11-26	GOLDTL.0x00546fe0	fcn_00546fe0	he_SumEventCostsForSubject	inferred	high	GOLD.0x0053f210	Sums g_7dcae0[i].value_0c across 0x100 slots for subject_id == k (called by fcn_00540020).
+2026-11-26	GOLDTL.0x00548d50	fcn_00548d50	he_TriggerAction0x67	inferred	high	GOLD.0x00540ef0	Checks time >=8 and no 0x67, picks random 0x20/0x1e/0x1f city candidate, queries law 7, posts 0x67.
+2026-11-26	GOLDTL.0x0054a5a0	fcn_0054a5a0	he_AllocPredigt	inferred	high	GOLD.0x005426d0	Action 43 (0x2b church sermon) start handler paired with 0x54a6a0 in he_RegisterEventHandlers.
+2026-11-26	GOLDTL.0x0054d7b0	fcn_0054d7b0	he_StartAction0x42EntityMsg	inferred	high	GOLD.0x00545830	Action 66 (0x42) start handler paired with 0x54d810; schedules gm_DispatchEntityMessage.
+2026-11-26	GOLDTL.0x005502d0	fcn_005502d0	he_StartAction0x4b	inferred	high	GOLD.0x00548360	Action 75 (0x4b) start handler paired with he_HandleAction0x4b; posts _NACHRICHTEN_HS_20.
+2026-11-26	GOLDTL.0x00552220	fcn_00552220	he_AllocPlagueEvent	inferred	high	GOLD.0x0054a1c0	Action 89 (0x59 plague) start handler paired with he_RunPlagueEvent in he_RegisterEventHandlers.
+2026-11-26	GOLDTL.0x00554b20	fcn_00554b20	he_StartAction0x67	inferred	high	GOLD.0x0054cac0	Action 103 (0x67) start handler paired with 0x554b90 in he_RegisterEventHandlers.
+2026-11-26	GOLDTL.0x00558180	fcn_00558180	he_AllocUnkendunk	inferred	high	GOLD.0x005500d0	Action 119 (0x77 Unkendunk) start handler paired with 0x558220 in he_RegisterEventHandlers.
+2026-11-26	GOLDTL.0x0055ab40	fcn_0055ab40	he_StartAction0x82SkillModifier	inferred	high	GOLD.0x00552a10	Action 130 (0x82) start handler paired with he_HandleAction0x82SkillModifier.
+2026-11-26	GOLDTL.0x0055c050	fcn_0055c050	he_HasNoActiveAction0x62	inferred	high	GOLD.0x00553f10	Scans action 0x62 slots for subject (+0xb0) and state 1 (+0xb8); twin of 0x55c0a0.
+2026-11-26	GOLDTL.0x005601e0	fcn_005601e0	he_StartKraeuter	inferred	high	GOLD.0x00557fc0	Action 20 (0x14 Kraeuter) start handler paired with 0x560290; twin of he_StartGetier.
+2026-11-26	GOLDTL.0x005633e0	fcn_005633e0	he_StartAction0x1b	inferred	high	GOLD.0x0055b1c0	Action 0x1b start handler registered at 0x570960 with 0x5635b0; sends _NACHRICHTEN_HS_43.
+2026-11-26	GOLDTL.0x005413d0	fcn_005413d0	gm_ResetDynastySlot	inferred	medium	GOLD.0x00539880	Resets inactive type==6 dynasty slot to active type==5 with fresh name/slots and clears actions/cutscenes; called by GOLDTL.fcn_00541620.c:358; client twin GOLD.0x00539880.
+2026-11-26	GOLDTL.0x00546b40	fcn_00546b40	d3_PruneEventGfxSlots	inferred	high	GOLD.0x0053ee00	Frees stale g_7dc6e0 event D3 slots via fcn_005467e0; called by GOLDTL.fcn_00546d10.c:28; client twin GOLD.0x0053ee00.
+2026-11-26	GOLDTL.0x005474f0	fcn_005474f0	he_PruneStammtischSeats	inferred	medium	GOLD.0x0053f690	Sends 'leav' (0x6c656176) for invalid/absent holders in tavern (0x16) 0x120/0x12d slots; called by GOLDTL.fcn_005490a0.c:18; client twin GOLD.0x0053f690.
+2026-11-26	GOLDTL.0x00549130	fcn_00549130	he_RestartAction03b	inferred	medium	GOLD.0x005412c0	Clears pending action 0x3b and dispatches fresh m.b4=0x3b via fcn_004c5530; called by GOLDTL.fcn_005438c0.c:515; client twin GOLD.0x005412c0.
+2026-11-26	GOLDTL.0x0054b940	fcn_0054b940	he_UpdateFest	inferred	high	GOLD.0x00543a10	Event 55 update callback in he_RegisterEventHandlers paired with "locations\\wohnsitz\\fest"; client twin GOLD.0x00543a10.
+2026-11-26	GOLDTL.0x0054f3b0	fcn_0054f3b0	he_AcceptDuell	inferred	high	GOLD.0x00547430	Accepts duel when g_100f1dc==2 on "_DUELL_INTRO_EVENT_DUELLANTEN_HS_00" in GOLDTL.fcn_0054f600.c:77; client twin GOLD.0x00547430.
+2026-11-26	GOLDTL.0x00550560	fcn_00550560	he_InitEvent053	inferred	medium	GOLD.0x005485b0	Event 83 (0x53) init callback in he_RegisterEventHandlers (GOLDTL.fcn_0055b3e0.c:193); client twin GOLD.0x005485b0.
+2026-11-26	GOLDTL.0x00553420	fcn_00553420	he_InitSchutzgeld	attested	high	GOLD.0x0054b3c0	Event 98 init callback in he_RegisterEventHandlers paired with "Schutzgeld" update fcn_00553490; client twin GOLD.0x0054b3c0.
+2026-11-26	GOLDTL.0x00557270	fcn_00557270	he_InitDunkleEcke	attested	high	GOLD.0x0054f1c0	Event 116 init callback in he_RegisterEventHandlers containing "Dunkle Ecke"; client twin GOLD.0x0054f1c0.
+2026-11-26	GOLDTL.0x00559760	fcn_00559760	he_TryDispatchNpcAction	inferred	medium	GOLD.0x00551690	Dispatches action job (9 or 0x29) between character and building targets via fcn_004c5d60 in GOLDTL.fcn_00559e90.c:64; client twin GOLD.0x00551690.
+2026-11-26	GOLDTL.0x0055af40	fcn_0055af40	he_UpdateTutorialEvent	inferred	high	GOLD.0x00552e10	Event 135 update callback in he_RegisterEventHandlers calling d2_OpenTutorialMainDialog; client twin GOLD.0x00552e10.
+2026-11-26	GOLDTL.0x0055c0f0	fcn_0055c0f0	he_HasNoActiveEvent04b	inferred	high	GOLD.0x00553fb0	Returns 0 if active action 0x4b pairs (b, a) via he_StartHandlungSearch(1, 0, 0x4b); called by fcn_005bf0d0 and beatup handler fcn_005bf9e0; client twin GOLD.0x00553fb0.
+2026-11-26	GOLDTL.0x00560d30	fcn_00560d30	he_InitTrainieren	attested	high	GOLD.0x00558b10	Action 0x16 init callback in GOLDTL.fcn_00570960.c:44 next to "Trainieren"; client twin GOLD.0x00558b10.
+2026-11-26	GOLDTL.0x00564210	fcn_00564210	he_UpdateGebAbreissen	attested	high	GOLD.0x0055bfd0	Action 0x20 update callback in GOLDTL.fcn_00570960.c:69 containing "GebAbreissen"; client twin GOLD.0x0055bfd0.
+2026-11-26	GOLDTL.0x0057c170	fcn_0057c170	he_ApplyZigeunerBetrothal	inferred	medium	GOLD.0x00573c30	Zigeuner event callback (k=2 in fcn_0057bed0); client twin GOLD.0x00573c30.
+2026-11-26	GOLDTL.0x0057c2e0	fcn_0057c2e0	he_SwapZigeunerMoods	inferred	medium	GOLD.0x00573da0	Zigeuner event callback (k=3 in fcn_0057bed0); client twin GOLD.0x00573da0.
+2026-11-26	GOLDTL.0x0057c420	fcn_0057c420	he_SendZigeunerMsg9e	inferred	medium	GOLD.0x00573ee0	Zigeuner event callback (k=4 in fcn_0057bed0); client twin GOLD.0x00573ee0.
+2026-11-26	GOLDTL.0x0057c530	fcn_0057c530	he_SendZigeunerMsg9f	inferred	medium	GOLD.0x00573ff0	Zigeuner event callback (k=5 in fcn_0057bed0); client twin GOLD.0x00573ff0.
+2026-11-26	GOLDTL.0x0057c630	fcn_0057c630	he_ChargeOrCurseZigeuner	inferred	medium	GOLD.0x005740f0	Zigeuner event callback (case 1 in fcn_0057bd80); client twin GOLD.0x005740f0.
+2026-11-26	GOLDTL.0x0057c720	fcn_0057c720	he_InitEvent09e	inferred	high	GOLD.0x005741e0	Event 0x9e init callback registered in GOLDTL.fcn_0057bbc0.c (paired with update fcn_0057c7b0); client twin GOLD.0x005741e0.
+2026-11-26	GOLDTL.0x0057c920	fcn_0057c920	he_InitEvent0a0	inferred	high	GOLD.0x005743e0	Event 0xa0 init callback registered in GOLDTL.fcn_0057bbc0.c; client twin GOLD.0x005743e0.
+2026-11-26	GOLDTL.0x0057cd50	fcn_0057cd50	he_InitEvent0a1	inferred	high	GOLD.0x00574810	Event 0xa1 init callback registered in GOLDTL.fcn_0057bbc0.c (paired with update fcn_0057d0d0); client twin GOLD.0x00574810.
+2026-11-26	GOLDTL.0x0057d7e0	fcn_0057d7e0	he_FindNextTargetBuilding0a1	inferred	medium	GOLD.0x005752a0	Event 0xa1 helper called by update fcn_0057d0d0; client twin GOLD.0x005752a0.
+2026-11-26	GOLDTL.0x0057d830	fcn_0057d830	he_AccumulateEvent0a1Yield	inferred	medium	GOLD.0x005752f0	Event 0xa1 helper called by update fcn_0057d0d0; client twin GOLD.0x005752f0.
+2026-11-26	GOLDTL.0x0057d950	fcn_0057d950	he_InitEvent0a3	inferred	high	GOLD.0x00575410	Event 0xa3 init callback registered in GOLDTL.fcn_0057bbc0.c (paired with update fcn_0057d9e0); client twin GOLD.0x00575410.
+2026-11-26	GOLDTL.0x0057db20	fcn_0057db20	he_InitEvent0a4	inferred	high	GOLD.0x005755e0	Event 0xa4 init callback registered in GOLDTL.fcn_0057bbc0.c; client twin GOLD.0x005755e0.
+2026-11-26	GOLDTL.0x0057dba0	fcn_0057dba0	he_UpdateEvent0a4	inferred	high	GOLD.0x00575660	Event 0xa4 update callback registered in GOLDTL.fcn_0057bbc0.c; calls reward helpers; client twin GOLD.0x00575660.
+2026-11-26	GOLDTL.0x0057dc30	fcn_0057dc30	he_RewardRandomItemOrGold0a4	inferred	medium	GOLD.0x005756f0	Event 0xa4 reward helper called by he_UpdateEvent0a4; client twin GOLD.0x005756f0.
+2026-11-26	GOLDTL.0x0057dd40	fcn_0057dd40	he_GrantSmallSkillOrFavor0a4	inferred	medium	GOLD.0x00575800	Event 0xa4 reward helper called by he_UpdateEvent0a4; client twin GOLD.0x00575800.
+2026-11-26	GOLDTL.0x0057dd70	fcn_0057dd70	he_GrantScaledGold0a4	inferred	medium	GOLD.0x00575830	Event 0xa4 reward helper called by he_UpdateEvent0a4; client twin GOLD.0x00575830.
+2026-11-26	GOLDTL.0x0057fac0	fcn_0057fac0	d2_GrantTutorialLumber	inferred	medium	GOLD.0x005774f0	Tutorial Chapter 5 helper called by GOLDTL.fcn_00583760.c; client twin GOLD.0x005774f0.
+2026-11-26	GOLDTL.0x0057fd60	fcn_0057fd60	d2_FocusTutorialBuilding0x12	inferred	medium	GOLD.0x00577790	Tutorial Chapter 4 helper called by GOLDTL.fcn_00583330.c; client twin GOLD.0x00577790.
+2026-11-26	GOLDTL.0x0057fdd0	fcn_0057fdd0	d2_FocusTutorialBuilding0x02	inferred	medium	GOLD.0x00577800	Tutorial Chapter 5 helper called by GOLDTL.fcn_00583760.c; client twin GOLD.0x00577800.
+2026-11-26	GOLDTL.0x0057ff20	fcn_0057ff20	d2_SendTutorialTownMsgA0	inferred	medium	GOLD.0x00577950	Tutorial Chapter 5 helper called by GOLDTL.fcn_00583760.c; client twin GOLD.0x00577950.
+2026-11-26	GOLDTL.0x0050e380	fcn_0050e380	gm_BuildDealSummary	inferred	high	GOLD.0x0050af00	aggregates sorted building deal summary; callers 00540020, main_RundenBeginn, 005c4d00	GOLDTL.fcn_0050e380.c
+2026-11-26	GOLDTL.0x00510470	fcn_00510470	gm_GetBuildingSlotCapacity	inferred	high	GOLD.0x0050cfd0	returns remaining capacity across building slots; callers 004ab910, 005e5a50	GOLDTL.fcn_00510470.c
+2026-11-26	GOLDTL.0x00514b50	fcn_00514b50	gm_InitCityAndTradeState	inferred	high	GOLD.0x00511430	initializes city trade wares/buildings/officials; callers 005438c0, 005145a0	GOLDTL.fcn_00514b50.c
+2026-11-26	GOLDTL.0x00526010	fcn_00526010	gm_CheckEntityStock	inferred	high	GOLD.0x00521070	checks entity inventory/gold sum >= amount for item_id and prompts text 0x75 on shortfall; 42 callers	GOLDTL.fcn_00526010.c
+2026-11-26	GOLDTL.0x00529670	fcn_00529670	gm_IsEntityAtBuilding	inferred	high	GOLD.0x005247b0	checks whether entity is inside target building; 11 callers	GOLDTL.fcn_00529670.c
+2026-11-26	GOLDTL.0x00531b80	fcn_00531b80	gm_UpdateGraveyardFlags	inferred	medium	GOLD.0x0052c450	updates graveyard (0x1d) active flag bit 1 when active kind-1 entity matches; caller 004c9440	GOLDTL.fcn_00531b80.c
+2026-11-26	GOLDTL.0x00541ff0	fcn_00541ff0	gm_UpdateEntityAgingAndTraining	inferred	high	GOLD.0x0053a4b0	updates hourly entity aging and training; caller gm_ApplyHourlyEntityUpdates	GOLDTL.fcn_00541ff0.c
+2026-11-26	GOLDTL.0x00546b80	fcn_00546b80	d3_ReleaseSceneSlotById	inferred	high	GOLD.0x0053ee40	releases scene node found by d3_FindSceneSlot; callers GOLD.0050d350, 005107f0	GOLDTL.fcn_00546b80.c
+2026-11-26	GOLDTL.0x005475c0	fcn_005475c0	he_ClearDunkleEcke	attested	high	GOLD.0x0053f760	clears action tagged "clear dunkle ecke"; caller 005490a0	GOLDTL.fcn_005475c0.c
+2026-11-26	GOLDTL.0x005491c0	fcn_005491c0	he_ClearActivePlayerActions	inferred	high	GOLD.0x00541350	clears pending Handlung entries for active player g_774970; caller 005438c0	GOLDTL.fcn_005491c0.c
+2026-11-26	GOLDTL.0x0054c500	fcn_0054c500	he_RunAction53	inferred	medium	GOLD.0x00544580	he_RegisterEventHandlers #83 (0x53) run callback	GOLDTL.fcn_0054c500.c
+2026-11-26	GOLDTL.0x005500a0	fcn_005500a0	he_AllocRndGeselle	attested	high	GOLD.0x00548130	he_RegisterEventHandlers #74 alloc callback paired with "RndGeselle" runner 00550150	GOLDTL.fcn_005500a0.c
+2026-11-26	GOLDTL.0x00550da0	fcn_00550da0	he_AllocSellObjekt	attested	high	GOLD.0x00548dc0	he_RegisterEventHandlers #87 alloc callback paired with cm_RequestSellObjekt 00550de0	GOLDTL.fcn_00550da0.c
+2026-11-26	GOLDTL.0x00553c60	fcn_00553c60	he_AllocBetriebsPruefung	attested	high	GOLD.0x0054bc00	he_RegisterEventHandlers #100 alloc callback paired with "BetriebsPr" runner 00553cd0	GOLDTL.fcn_00553c60.c
+2026-11-26	GOLDTL.0x00557e50	fcn_00557e50	he_AllocSmokeEffect	inferred	high	GOLD.0x0054fda0	he_RegisterEventHandlers #118 alloc callback paired with "Rauch" smoke-effect runner 00557fe0	GOLDTL.fcn_00557e50.c
+2026-11-26	GOLDTL.0x00559e90	fcn_00559e90	he_RunPoliticians	inferred	high	GOLD.0x00551dc0	he_RegisterEventHandlers #122 run callback driving gm_SimulatePoliticians	GOLDTL.fcn_00559e90.c
+2026-11-26	GOLDTL.0x0055bc40	fcn_0055bc40	he_ClearEntityActions	inferred	high	GOLD.0x00553b00	clears active Handlung entries for target entity; callers 00509620, 00506a70	GOLDTL.fcn_0055bc40.c
+2026-11-26	GOLDTL.0x0055c140	fcn_0055c140	he_CountEntityActions	inferred	high	GOLD.0x00554000	counts active Handlung entries for entityId; callers 004aa6a0, 005c0d90	GOLDTL.fcn_0055c140.c
+2026-11-26	GOLDTL.0x00561280	fcn_00561280	he_RunAction0x17	inferred	medium	GOLD.0x00559060	he_RegisterActionHandlers 0x17 run callback	GOLDTL.fcn_00561280.c
+2026-11-26	GOLDTL.0x005649d0	fcn_005649d0	he_AllocKredit	attested	high	GOLD.0x0055c790	he_RegisterHandler(0x23) alloc callback paired with he_RunKredit 00564b90	GOLDTL.fcn_005649d0.c
+2026-11-26	GOLDTL.0x004ffd90	fcn_004ffd90	sim_FindAndMatchParents	attested	high	GOLD.0x004fd5c0,SERVER.0x100151e0	client twin of SERVER 0x100151e0 sim_FindAndMatchParents (sim.c); caller 00500580	GOLDTL.fcn_004ffd90.c
+2026-11-26	GOLDTL.0x0050e4a0	fcn_0050e4a0	gm_GetGuildHall	attested	high	GOLD.0x0050b010	Client twin of spiel.c gm_GetGuildHall mapping guild 1..5 to 0xf/0x17..0x1a via gm_StartFilteredEntitySearch
+2026-11-26	GOLDTL.0x00511580	fcn_00511580	gm_InitCityOfficialsAndCitizens	inferred	medium	GOLD.0x0050e0d0	Initializes initial entity gold, Catholic/Evangelical judges, and 16 citizens in game startup; called by gm_InitCityAndTradeState
+2026-11-26	GOLDTL.0x005153f0	fcn_005153f0	gm_InitStartingBuildingsAndWorkers	inferred	medium	GOLD.0x00511ca0	Populates initial building funds, owner, and first worker across lpGebaeudeINST at game start
+2026-11-26	GOLDTL.0x00526070	fcn_00526070	d2_CheckFundsAndNotify	inferred	medium	GOLD.0x005210d0	Checks gm_QueryEntitySum against limit and shows insufficient-funds alert 0x75..0x77 for treasury 0x115/0x142/default
+2026-11-26	GOLDTL.0x00529710	fcn_00529710	ch_IsEntityNearBuildingDoor	inferred	medium	GOLD.0x00524850	Checks actor figure proximity to building dummy_TUER (or matching target building id) via CompareVector3WithinTolerance
+2026-11-26	GOLDTL.0x00535850	fcn_00535850	cm_SaveGameAndWait	inferred	medium	GOLD.0x0052fd20	Dispatches save command 0xe and waits on fcn_004c4450 while pumping main_RunFrameLoop
+2026-11-26	GOLDTL.0x005421f0	fcn_005421f0	gm_ApplyHourlyEntityUpdates	inferred	medium	GOLD.0x0053a6b0	Iterates g_7f4ca0[768] for periodic status, debt collection, and flag clearing updates
+2026-11-26	GOLDTL.0x00546ce0	fcn_00546ce0	he_FreeActionsByKind	inferred	medium	GOLD.0x0053efa0	Iterates he_StartHandlungSearch(1, 2, *record) and frees all matching action entries via fcn_00546be0
+2026-11-26	GOLDTL.0x00547670	fcn_00547670	gm_ReplenishAiBuildingFunds	inferred	medium	GOLD.0x0053f810	Period-gated loop replenishing gold on type 2/4/5 entities up to (g_7747b4*5+20)*1600 via fcn_004c5150
+2026-11-26	GOLDTL.0x00549240	fcn_00549240	he_RestartAction0xa6	inferred	medium	GOLD.0x005413d0	Frees existing action 0xa6 if present and posts new action message 0xa6 via fcn_004c5530
+2026-11-26	GOLDTL.0x0054c720	fcn_0054c720	he_RollTripletEventScores	inferred	medium	GOLD.0x005447a0	Draws 3 shuffled offsets via gm_RandomizeIntArray and computes wealth-scaled event scores in action+0xbc/+0xc0
+2026-11-26	GOLDTL.0x00550150	fcn_00550150	he_RunHireJourneymanAction	inferred	medium	GOLD.0x005481e0	Registered at he_RegisterHandler(74) run; spawns RndGeselle journeyman and posts _NACHRICHTEN_HS_00 quickjump notification
+2026-11-26	GOLDTL.0x005519a0	fcn_005519a0	he_AllocApTraitAction	inferred	medium	GOLD.0x00549940	Registered at he_RegisterHandler(95) alloc; checks duplicate action 0x5f for target before AP/trait run handler
+2026-11-26	GOLDTL.0x005540d0	fcn_005540d0	he_AllocMultiActorAction	inferred	medium	GOLD.0x0054c070	Registered at he_RegisterHandler(101) alloc; initializes timestamps and dispatches multi-actor action via fcn_004c5620
+2026-11-26	GOLDTL.0x00557fe0	fcn_00557fe0	he_RunTimedEffectAction	inferred	medium	GOLD.0x0054ff30	Registered at he_RegisterHandler(118) run; creates and cleans up 0x177/0x178 3D scene effect on timer or flag
+2026-11-26	GOLDTL.0x0055a860	fcn_0055a860	he_RunCountdownAction	inferred	medium	GOLD.0x00552770	Registered at he_RegisterHandler(128) run; decrements counter every 0x18 ticks and reschedules via fcn_004c5620 until expiry
+2026-11-26	GOLDTL.0x0055be70	fcn_0055be70	he_DetectNearbyPatrolAction	inferred	medium	GOLD.0x00553d30	Searches active action 0x43 patrol participants within range, cancels patrol, and triggers Detected/gestik reactions
+2026-11-26	GOLDTL.0x0055f1f0	fcn_0055f1f0	he_AllocTimedFlagAction	inferred	medium	GOLD.0x00557010	Registered at he_RegisterHandler(0x10) alloc; sets subentity flag 0x20 via fcn_004c5420, timestamps, and score <= 100
+2026-11-26	GOLDTL.0x00562a60	fcn_00562a60	he_AllocPruegelAction	attested	high	GOLD.0x0055a840	Registered at he_RegisterHandler(0x1a) alloc; dispatches "PRUEGEL" script via fcn_004c64b0 and selects target building
+2026-11-26	GOLDTL.0x00564fc0	fcn_00564fc0	he_RunDelayedEntityDemotion	inferred	medium	GOLD.0x0055cd50	Registered at he_RegisterHandler(0x24) run; decrements timer and invokes fcn_004c6470(id, rank-1) plus kind 0x26 notice
+2026-11-26	GOLDTL.0x004e99c0	amt_GetOfficeRank	amt_GetRoleLevel	attested	high	GOLD.0x004e7c40	Aligned client twin to aemter.c amt_GetRoleLevel (tmpl.f8 & 0xff)
+2026-11-26	GOLDTL.0x004eb260	amt_CheckZunftLevel2Eligibility	amt_CanUpgradeBuildingTier2	attested	high	GOLD.0x004e94e0	Aligned client twin to aemter.c amt_CanUpgradeBuildingTier2
+2026-11-26	GOLDTL.0x00508c30	gm_GenerateShuffledByteIndices	gm_ShuffleBytes	attested	high	GOLD.0x00505be0	Aligned client twin to spiel.c gm_ShuffleBytes

@@ -46,8 +46,8 @@ void __cdecl gm_InitCityOfficialsAndCitizens(void)
 	int money;
 	int figures[16];
 	int i;
-	int a;
-	int b;
+	int catholic_judge_cmd;
+	int evang_judge_cmd;
 
 	fcn_0064d3f8();
 	for (i = 0; i < 16; i++) {
@@ -59,16 +59,16 @@ void __cdecl gm_InitCityOfficialsAndCitizens(void)
 		}
 	}
 	cm_BeginCommandSync();
-	a = fcn_004c4fc0(0xc, -1, -1, 0x12, -1, 0, 0, 0);
-	b = fcn_004c4fc0(0xc, -1, -1, 0x12, -1, 0, 0, 0);
+	catholic_judge_cmd = fcn_004c4fc0(0xc, -1, -1, 0x12, -1, 0, 0, 0);
+	evang_judge_cmd = fcn_004c4fc0(0xc, -1, -1, 0x12, -1, 0, 0, 0);
 	cm_EndCommandSync();
 	while (fcn_004c44c0() == 0) {
 		fcn_004c3ff0();
 		fcn_004c4940();
 		ls_ID2Ptr();
 	}
-	gm_RichterKatholisch = (char*) fcn_004c4480(a);
-	gm_RichterEvangelisch = (char*) fcn_004c4480(b);
+	gm_RichterKatholisch = (char*) fcn_004c4480(catholic_judge_cmd);
+	gm_RichterEvangelisch = (char*) fcn_004c4480(evang_judge_cmd);
 	cm_BeginCommandSync();
 	flag = 0;
 	cm_BeginPacketFieldDelta(gm_RichterKatholisch, ((Figure*) gm_RichterKatholisch)->owner);

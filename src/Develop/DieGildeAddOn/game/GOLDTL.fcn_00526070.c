@@ -5,17 +5,17 @@ int __cdecl gm_QueryEntitySum(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00526120(char*, int);
 
-int __cdecl d2_CheckFundsAndNotify(short* p, int a, int lim, int b)
+int __cdecl d2_CheckFundsAndNotify(short* container, int account_id, int lim, int player_idx)
 {
 	char buf[0x200];
 
-	if (gm_QueryEntitySum(a, b) < lim && lim != 0) {
-		if (p != 0 && *p == 0x142) {
-			io_FormatTextBuffer(buf, 0x76, (unsigned char) b);
-		} else if (p != 0 && *p == 0x115) {
-			io_FormatTextBuffer(buf, 0x77, (unsigned char) b);
+	if (gm_QueryEntitySum(account_id, player_idx) < lim && lim != 0) {
+		if (container != 0 && *container == 0x142) {
+			io_FormatTextBuffer(buf, 0x76, (unsigned char) player_idx);
+		} else if (container != 0 && *container == 0x115) {
+			io_FormatTextBuffer(buf, 0x77, (unsigned char) player_idx);
 		} else {
-			io_FormatTextBuffer(buf, 0x75, (unsigned char) b);
+			io_FormatTextBuffer(buf, 0x75, (unsigned char) player_idx);
 		}
 		fcn_00526120(buf, 4);
 		return 0;

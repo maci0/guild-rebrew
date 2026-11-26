@@ -66,7 +66,7 @@ void __cdecl fcn_0046f940(int, const char*);
 int __cdecl d2_ClearWindowChildren(int, int);
 char* __cdecl gm_FindPublicTreasury(int);
 int __cdecl d2_CheckFundsAndNotify(int, int, int, int);
-int __cdecl fcn_00526010(void*, int, int);
+int __cdecl gm_CheckEntityStock(void*, int, int);
 void __cdecl fcn_00471af0(int, int);
 int __cdecl lc_GebaeudeAusrichten(int, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
@@ -231,7 +231,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 				}
 			} else {
 				txt = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
-				if (!fcn_00526010(g_7f4ca0 + g_774970 * 0x21c, txt, g_773d75)) {
+				if (!gm_CheckEntityStock(g_7f4ca0 + g_774970 * 0x21c, txt, g_773d75)) {
 					goto skip_place;
 				}
 			}

@@ -9,7 +9,7 @@ extern Slot7f4ca2 g_7f4ca2[768];
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-int __cdecl fcn_00527000(void)
+int __cdecl d2_GetHudThemeResourceId(void)
 {
 	int r;
 	int i;

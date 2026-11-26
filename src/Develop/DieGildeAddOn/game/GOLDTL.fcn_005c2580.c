@@ -23,7 +23,7 @@ char* __cdecl gm_FindBuildingTreasury(char*);
 int __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 int __cdecl io_AppendText(int, char*, int, int, int);
-int __cdecl fcn_00526010(char*, int, char);
+int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl d2_CheckFundsAndNotify(char*, int, int, char);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -120,7 +120,7 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 						fcn_004c4ef0("renovieren");
 						g_774654 = 1;
 					}
-				} else if (fcn_00526010((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970], val, (char) g_773d75) != 0) {
+				} else if (gm_CheckEntityStock((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970], val, (char) g_773d75) != 0) {
 					char* q;
 
 					q = gm_GetEntityTableEntry((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970]);

@@ -18,7 +18,7 @@ extern int* g_664448;
 extern int g_7728bc;
 extern int g_7747b4;
 
-int __cdecl amt_GetOfficeRank(int c);
+int __cdecl amt_GetRoleLevel(int c);
 int __cdecl fcn_004e8b40(int idx, Rec18* out);
 int __cdecl amt_CollectOfficeSlotsByGroup(int group, int max, Rec18* out);
 int __cdecl amt_CollectOfficeCandidates(int k, int max, char** out);
@@ -52,7 +52,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 	if (0 == *(unsigned char*) (subjectEnt + 0x166)) {
 		cnt = amt_CollectOfficeSlotsByGroup(1, 6, out);
 		for (i = 0; i < cnt; i++) {
-			if (amt_GetOfficeRank(out[i].x8) >= 3)
+			if (amt_GetRoleLevel(out[i].x8) >= 3)
 				continue;
 			e = gm_LookupEntityRecordById(out[i].id);
 			if (!e || e == subjectEnt)
@@ -64,7 +64,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 		}
 		cnt = amt_CollectOfficeSlotsByGroup(2, 6, out);
 		for (i = 0; i < cnt; i++) {
-			if (amt_GetOfficeRank(out[i].x8) >= 3)
+			if (amt_GetRoleLevel(out[i].x8) >= 3)
 				continue;
 			e = gm_LookupEntityRecordById(out[i].id);
 			if (!e || e == subjectEnt)
@@ -76,7 +76,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 		}
 		cnt = amt_CollectOfficeSlotsByGroup(3, 6, out);
 		for (i = 0; i < cnt; i++) {
-			if (amt_GetOfficeRank(out[i].x8) >= 3)
+			if (amt_GetRoleLevel(out[i].x8) >= 3)
 				continue;
 			e = gm_LookupEntityRecordById(out[i].id);
 			if (!e || e == subjectEnt)
@@ -95,7 +95,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 		arr[2] = 0;
 		arr[3] = 0;
 		arr[4] = 0;
-		cls = amt_GetOfficeRank(*(unsigned char*) (subjectEnt + 0x166));
+		cls = amt_GetRoleLevel(*(unsigned char*) (subjectEnt + 0x166));
 		fcn_004e8b40(*(unsigned char*) (subjectEnt + 0x166), &r);
 		x10 = r.id;
 		if (x10 > 0 && x10 < 4) {
@@ -167,7 +167,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			for (i = 0; i < cnt; i++) {
 				if (n >= 32)
 					break;
-				if (abs(amt_GetOfficeRank(out[i].x8) - cls) > 1)
+				if (abs(amt_GetRoleLevel(out[i].x8) - cls) > 1)
 					continue;
 				e = gm_LookupEntityRecordById(out[i].id);
 				if (!e || e == subjectEnt)
@@ -181,7 +181,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			for (i = 0; i < cnt; i++) {
 				if (n >= 32)
 					break;
-				if (abs(amt_GetOfficeRank(out[i].x8) - cls) > 1)
+				if (abs(amt_GetRoleLevel(out[i].x8) - cls) > 1)
 					continue;
 				e = gm_LookupEntityRecordById(out[i].id);
 				if (!e || e == subjectEnt)
@@ -197,7 +197,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			for (i = 0; i < cnt; i++) {
 				if (n >= 32)
 					break;
-				if (abs(amt_GetOfficeRank(out[i].x8) - cls) > 1)
+				if (abs(amt_GetRoleLevel(out[i].x8) - cls) > 1)
 					continue;
 				e = gm_LookupEntityRecordById(out[i].id);
 				if (!e || e == subjectEnt)
@@ -211,7 +211,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			for (i = 0; i < cnt; i++) {
 				if (n >= 32)
 					break;
-				if (abs(amt_GetOfficeRank(out[i].x8) - cls) > 1)
+				if (abs(amt_GetRoleLevel(out[i].x8) - cls) > 1)
 					continue;
 				e = gm_LookupEntityRecordById(out[i].id);
 				if (!e || e == subjectEnt)
@@ -225,7 +225,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			for (i = 0; i < cnt; i++) {
 				if (n >= 32)
 					break;
-				if (abs(amt_GetOfficeRank(out[i].x8) - cls) > 1)
+				if (abs(amt_GetRoleLevel(out[i].x8) - cls) > 1)
 					continue;
 				e = gm_LookupEntityRecordById(out[i].id);
 				if (!e || e == subjectEnt)

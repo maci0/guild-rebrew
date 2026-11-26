@@ -16,7 +16,7 @@ __declspec(dllimport) int __stdcall WritePrivateProfileStringA(const char *sec, 
 __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 
 void __cdecl fcn_00514570(unsigned int a0);
-void __cdecl fcn_00514b50(char a0);
+void __cdecl gm_InitCityAndTradeState(char a0);
 void __cdecl init_LocalData(void);
 void __cdecl fcn_00515340(char a0);
 int __cdecl ls_SendGame(char *path);
@@ -148,7 +148,7 @@ int __cdecl fcn_005145a0(char *path)
     }
     if (flag != 0) {
         fcn_00514570(*(unsigned int *) 0x14ac5f8);
-        fcn_00514b50(*(unsigned char *) &g_773d75);
+        gm_InitCityAndTradeState(*(unsigned char *) &g_773d75);
     }
     sv_WaitForNetworkSync(0x24087);
     fcn_00514570(*(unsigned int *) 0x14ac5fc);

@@ -33,7 +33,7 @@ void __cdecl fcn_0057f700(void);
 void __cdecl fcn_0057f770(void);
 void __cdecl fcn_0057f8b0(void);
 void __cdecl fcn_0057f930(void);
-void __cdecl fcn_0057fd60(void);
+void __cdecl d2_FocusTutorialBuilding0x12(void);
 
 int* __cdecl d2_CreateTutorialChapter4(void)
 {
@@ -78,7 +78,7 @@ int* __cdecl d2_CreateTutorialChapter4(void)
 	p[0x8] = 0;
 	p[0xb] = -1;
 	p[0xc] = 0x8e;
-	p[0xd] = (int) fcn_0057fd60;
+	p[0xd] = (int) d2_FocusTutorialBuilding0x12;
 	p[0xe] = 0;
 	p[0x10] = 0;
 	p[0x11] = 0;

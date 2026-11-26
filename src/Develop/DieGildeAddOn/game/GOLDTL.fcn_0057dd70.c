@@ -8,7 +8,7 @@ float __cdecl fcn_0050bb50(int, unsigned char);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_004c51a0(int, int, char, int);
 
-void __cdecl fcn_0057dd70(char* e)
+void __cdecl he_GrantScaledGold0a4(char* e)
 {
 	float v;
 

@@ -44,7 +44,7 @@ int __cdecl fcn_00507400();
 int __cdecl gm_CalculateGebaeudeValue();
 int __cdecl fcn_0050d170();
 int __cdecl fcn_00535960();
-int __cdecl fcn_00547670();
+int __cdecl gm_ReplenishAiBuildingFunds();
 
 #define REC_SIZE 0xa9
 
@@ -104,7 +104,7 @@ void __cdecl fcn_00547770(void)
         wi = 0;
     a = gm_GameTime / 4 + 1;
     thr = (float)a / ((float)a + *(float *)(wi * 4 + 0x665e68));
-    fcn_00547670();
+    gm_ReplenishAiBuildingFunds();
     memset(cnt, 0, 0x84);
     memset(cnt2, 0, 0x84);
     rp = (u8*) lpGebaeudeINST;

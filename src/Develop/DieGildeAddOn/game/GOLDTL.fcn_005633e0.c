@@ -36,7 +36,7 @@ int __cdecl fcn_0050d270(int);
 void __cdecl fcn_004c5150(int, int, unsigned char, int);
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_005633e0(char* u)
+void __cdecl he_StartAction0x1b(char* u)
 {
 	struct BUILDING_PROTOTYPE * gd;
 	char text[0x800];

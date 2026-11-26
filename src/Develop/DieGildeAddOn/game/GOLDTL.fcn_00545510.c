@@ -6,7 +6,7 @@
 
 void __cdecl he_FreeAction(char*);
 
-void __cdecl fcn_00545510(void)
+void __cdecl he_FreeAllActions(void)
 {
 	int i;
 

@@ -30,7 +30,7 @@ extern unsigned char g_773d75;
 extern int g_99f768;
 
 void __cdecl fcn_004f4830(int kind, Offer* o);
-char* __cdecl gm_FindPublicBuilding(int n);
+char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 void __cdecl fcn_004c51a0(int a, int b, char c, int d);
 int __cdecl gm_AccumulateTyped2(Obj* o);
@@ -47,7 +47,7 @@ int __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, Slots* s, unsigned char fla
 
 	fcn_004f4830(0xd, &offer);
 	amt = offer.amount;
-	p = gm_FindPublicBuilding(1);
+	p = gm_GetGuildHall(1);
 	fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 	for (i = 0; i < 6; i++) {
 		if (s->used[i] == 0) {
@@ -68,7 +68,7 @@ int __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, Slots* s, unsigned char fla
 		s->value[i] = v;
 		s->amount[i] = amt;
 		if (flags & 1) {
-			p = gm_FindPublicBuilding(1);
+			p = gm_GetGuildHall(1);
 			p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);
 			if (gm_AccumulateTyped2(&((Obj*)g_7f4ca0)[id]) >= v) {
 				fcn_004c51a0(*(int*) (p + 2), ((Obj*)g_7f4ca0)[id].owner, (*(char*)&g_773d75), v);

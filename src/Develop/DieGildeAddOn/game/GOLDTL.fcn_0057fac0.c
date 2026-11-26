@@ -9,7 +9,7 @@ char* __cdecl fcn_00503d10(int);
 void __cdecl fcn_004c51a0(int, int, int, int);
 int __cdecl fcn_004c51f0(int, int, int, int, char, int);
 
-void __cdecl fcn_0057fac0(int a)
+void __cdecl d2_GrantTutorialLumber(int a)
 {
 	char* e;
 

@@ -13,7 +13,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "client_scene_transform.h"
 
-void __cdecl fcn_0056c8f0(char* u)
+void __cdecl he_StartFireEvent(char* u)
 {
 	unsigned short n;
 	unsigned short m;

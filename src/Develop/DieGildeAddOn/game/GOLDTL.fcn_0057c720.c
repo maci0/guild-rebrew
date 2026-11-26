@@ -8,7 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
-void __cdecl fcn_0057c720(char* o)
+void __cdecl he_InitEvent09e(char* o)
 {
 	*(int*) (o + 0x70) = 0;
 	*(pos14_7f4c00*) (o + 0x44) = gm_GameTime;

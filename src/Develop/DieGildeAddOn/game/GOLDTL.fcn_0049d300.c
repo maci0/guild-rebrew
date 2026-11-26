@@ -6,7 +6,7 @@ extern unsigned char g_773d75;
 extern double g_664360;
 extern float g_664198;
 
-int __cdecl gm_FindPublicBuilding(int);
+int __cdecl gm_GetGuildHall(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_0050b810(int, unsigned char);
 float __cdecl fcn_004fc460(char*);
@@ -41,7 +41,7 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 	if (a0 != 0 || a2 != 0 || *(unsigned char*) &a1[0xb3] != 0x0f) {
 		return 0;
 	}
-	r = gm_FindPublicBuilding(1);
+	r = gm_GetGuildHall(1);
 	if (r == 0) {
 		return 0;
 	}

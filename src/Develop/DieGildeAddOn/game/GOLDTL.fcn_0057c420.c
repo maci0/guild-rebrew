@@ -35,7 +35,7 @@ void __cdecl fcn_004c5530(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
 
-void __cdecl fcn_0057c420(struct house* a, struct house* b)
+void __cdecl he_SendZigeunerMsg9e(struct house* a, struct house* b)
 {
 	struct msg m;
 	char name[0x64];

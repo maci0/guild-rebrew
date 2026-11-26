@@ -34,7 +34,7 @@ extern int g_6b5c60;
 extern int d2_CurrentElementId;
 
 
-int __cdecl gm_FindPublicBuilding(int a);
+int __cdecl gm_GetGuildHall(int a);
 int __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl d2_CenterDialogWindows(int dlg);
 int __cdecl fcn_0050d200(int a, int b);
@@ -81,7 +81,7 @@ void __cdecl fcn_00599b00(void)
 	cats[2] = 10;
 	cats[3] = 1;
 	cats[4] = 0;
-	raw = gm_FindPublicBuilding(1);
+	raw = gm_GetGuildHall(1);
 	raw = *(int*) (raw + 0x5d);
 	query = fcn_00502cd0(raw, 2, 6, 0, 0x115);
 	dlg = fcn_00470820(0, 0, (char*) 0x6aa2a8);
