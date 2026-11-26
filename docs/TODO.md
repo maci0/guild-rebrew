@@ -1,6 +1,6 @@
 # Current work
 
-## 2026-11-25 snapshot (UTC)
+## 2026-11-26 snapshot (UTC)
 
 `uv run --frozen rebrew status --all-targets --json` reads stored function
 verdicts and compares the configured raw builds with the references. The client
@@ -9,21 +9,21 @@ builds are under `build/consolidation-baseline-pp/`.
 | Target | C matches / game functions | Accounted `.text` | Raw bytes equal at original offsets |
 | --- | ---: | ---: | ---: |
 | server.dll | 251 / 251 | 100.0% | 286,720 |
-| GoldTL | 4,334 / 5,260 | 60.9% | 136,920 |
-| Gold | 2,127 / 4,429 | 23.8% | 27,503 |
+| GoldTL | 4,334 / 5,260 | 60.9% | 136,917 |
+| Gold | 2,179 / 4,430 | 24.0% | 27,114 |
 
-C matches count `EXACT` and `RELOC` and exclude six Gold whole-function assembly
+C matches count `EXACT` and `RELOC` and exclude seven Gold whole-function assembly
 matches. Code accounting includes libraries and padding. Inventory totals
 include functions without source and can change when native extents or
 attribution change.
 
 The existing server build matches the reference byte for byte. A read-only
 verification of that image also passed all 652 data comparisons and all
-whole-binary checks. The [1.17.0 release](releases/1.17.0.md#validation) records
+whole-binary checks. The [1.18.0 release](releases/1.18.0.md#validation) records
 the full gate, including compilation and Wine. Both client images still differ
 and use placeholders. Rebuild before reporting a new working-tree result. [Server gate](build.md) · [Client comparison](../stubs/README.md)
 
-`uv run --frozen rebrew lint --all-targets --json` (Rebrew 6.79.0) reported
+`uv run --frozen rebrew lint --all-targets --json` (Rebrew 6.81.1) reported
 5,427 files passed per target and zero lint findings. The binding loader
 separately logged retired Gold anchors.
 

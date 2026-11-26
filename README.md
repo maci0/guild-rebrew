@@ -19,7 +19,7 @@ shared source tree and reproduce the raw MSVC6 builds of `server.dll`,
 <a id="data-verification"></a>
 
 The existing server build matches its reference. The most recent release gate
-passed at the [1.17.0 checkpoint](docs/releases/1.17.0.md#validation). Both client
+passed at the [1.18.0 checkpoint](docs/releases/1.18.0.md#validation). Both client
 builds use placeholders and differ from their references. The charts show stored
 verdicts and measurements of existing builds. [Current measurements and open work](docs/TODO.md)
 

@@ -39,7 +39,7 @@
 - See [unfinished reviews](HANDOFF.md) for source questions and the [provenance ledger](provenance.md) for recorded decisions.
 - Find archived notebooks and local receipts in [research history](goal-history.md). Historical claims describe the inputs at the time.
 - Model benchmark: [guild-bench](guild-bench.md).
-- Source checkpoints: [1.17.0](releases/1.17.0.md), [1.16.0](releases/1.16.0.md), [1.15.0](releases/1.15.0.md), [1.14.0](releases/1.14.0.md), [1.13.0](releases/1.13.0.md), [1.12.0](releases/1.12.0.md), [1.11.0](releases/1.11.0.md), [1.10.0](releases/1.10.0.md).
+- Source checkpoints: [1.18.0](releases/1.18.0.md), [1.17.0](releases/1.17.0.md), [1.16.0](releases/1.16.0.md), [1.15.0](releases/1.15.0.md), [1.14.0](releases/1.14.0.md), [1.13.0](releases/1.13.0.md), [1.12.0](releases/1.12.0.md), [1.11.0](releases/1.11.0.md), [1.10.0](releases/1.10.0.md).
 
 Add new results to the page that covers their topic. Keep attachments in
 `docs/assets/` and local Obsidian settings in `.obsidian/` outside Git.
