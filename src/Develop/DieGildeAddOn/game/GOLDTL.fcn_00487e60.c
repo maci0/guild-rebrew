@@ -23,7 +23,7 @@ typedef struct Ent {
 
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-void __cdecl fcn_00529160(char* o, int a, int id, int b);
+void __cdecl he_AssignActionSlot(char* o, int a, int id, int b);
 
 void __cdecl ai_CancelBlockedActions(char* e, int k)
 {
@@ -55,7 +55,7 @@ void __cdecl ai_CancelBlockedActions(char* e, int k)
 		if (found) {
 			for (i = 0; i < 768; i++) {
 				if ((*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index) != 0xffff && (*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == q) {
-					fcn_00529160(*(char**) (e + 0x16c), 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
+					he_AssignActionSlot(*(char**) (e + 0x16c), 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
 				}
 			}
 		}

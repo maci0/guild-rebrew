@@ -1,13 +1,13 @@
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-char* __cdecl gm_LookupEntityRecordById(int a1);
-int __cdecl fcn_005d3120(int a1, int* a2);
-char* __cdecl he_StartHandlungSearch(int a1, int a2, int a3);
+char* __cdecl gm_LookupEntityRecordById(int entityId);
+int __cdecl fcn_005d3120(int entity, int* request);
+char* __cdecl he_StartHandlungSearch(int mode, int ownerId, int actionType);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, int arg);
 
 /* ADDRESS: GOLDTL 0x004f7210 */
-int __cdecl fcn_004f7210(int entity, int* command)
+int __cdecl gm_HandleCourtshipCommand(int entity, int* command)
 {
 	char* e;
 	char* s;

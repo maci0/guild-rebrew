@@ -9,7 +9,7 @@ int __cdecl fcn_0053ed60(int, int);
 void __cdecl fcn_00476970(int);
 void __cdecl fcn_00469e30(int);
 
-int __cdecl fcn_0053f460(void)
+int __cdecl d2_StartSinglePlayerChooseCity(void)
 {
 	int r;
 

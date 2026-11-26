@@ -23,7 +23,7 @@ typedef union
 #include "client_data.h"
 extern float g_664168;
 extern char* __cdecl gm_LookupEntityRecordById(int);
-extern void __cdecl fcn_00529160(int, int, int, char*);
+extern void __cdecl he_AssignActionSlot(int, int, int, char*);
 extern int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 extern int __cdecl fcn_004c5620(int, char*);
 extern int __cdecl cm_GetCommandStatus(int);
@@ -45,11 +45,11 @@ extern char* __cdecl fcn_00502cd0(int, ...);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl cut_FindCutscene(int, int);
 extern int __cdecl gm_RandomMod(unsigned short);
-extern void __cdecl fcn_004d1d40(char*, unsigned char);
+extern void __cdecl gm_EquipDuelist(char*, unsigned char);
 extern int __cdecl fcn_004c5980(void*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x0056b700 */
-void __cdecl fcn_0056b700(char* obj)
+void __cdecl he_RunUeberfall(char* obj)
 {
 	int count;
 	int i;
@@ -86,7 +86,7 @@ void __cdecl fcn_0056b700(char* obj)
 				if (*(int*) iter != -1) {
 					rec = gm_LookupEntityRecordById(*(int*) iter);
 					if (rec != 0) {
-						fcn_00529160(0, 0, *(unsigned short*) rec, obj);
+						he_AssignActionSlot(0, 0, *(unsigned short*) rec, obj);
 						ch_StartMovement(*(int*) iter, -1, -1, obj + 0xac, 1, (char*) 0x6a6aa0);
 						*(int*) (obj + 0xe4) += *(unsigned char*) (rec + 0x82);
 						count++;
@@ -142,7 +142,7 @@ void __cdecl fcn_0056b700(char* obj)
 					if (rec != 0) {
 						if (ent != 0)
 							ch_StartMovement(*(int*) (rec + 4), *(int*) (ent + 1), -1, 0, 0, (char*) 0x6a6aa0);
-						fcn_00529160(0, 0, *(unsigned short*) rec, 0);
+						he_AssignActionSlot(0, 0, *(unsigned short*) rec, 0);
 					}
 				}
 				iter += 4;
@@ -280,10 +280,10 @@ label_56b858:
 				for (i = 0; i < count; i++) {
 					mode = *(unsigned char*) (list[i] + 0x28);
 					if (mode == 2 && count == 1) {
-						fcn_004d1d40((char*) buf.msg, mode);
-						fcn_004d1d40((char*) buf.msg, 1);
+						gm_EquipDuelist((char*) buf.msg, mode);
+						gm_EquipDuelist((char*) buf.msg, 1);
 					} else {
-						fcn_004d1d40((char*) buf.msg, mode);
+						gm_EquipDuelist((char*) buf.msg, mode);
 					}
 				}
 				*(int*) (buf.msg + 0x10c) = *(int*) (slot + 1);

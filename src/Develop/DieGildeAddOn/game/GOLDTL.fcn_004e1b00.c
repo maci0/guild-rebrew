@@ -11,7 +11,7 @@ void __cdecl fcn_004e4730(char*);
 void __cdecl fcn_004e4b60(char*);
 void __cdecl fcn_004e4e90(char*);
 void __cdecl fcn_004e4c40(int);
-int __cdecl fcn_004fda30(int);
+int __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl gm_FindOrAllocHeadSet(int, int);
 int __cdecl fcn_004e44b0(char*, char*);
 void __cdecl fcn_004e44f0(int);
@@ -72,18 +72,18 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 		fcn_004e4c40(500);
 	}
 	if (q != 0) {
-		id = fcn_004fda30(*q);
+		id = gm_SelectEntityHeadSet(*q);
 	} else {
 		id = gm_FindOrAllocHeadSet(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
 	sprintf(buf, (char*) 0x68cad8, id + 4);
 
 	r_dst = buf + strlen(buf);
-	sprintf(r_dst, (char*) 0x68cad8, fcn_004fda30(*p) + 4);
+	sprintf(r_dst, (char*) 0x68cad8, gm_SelectEntityHeadSet(*p) + 4);
 
 	r_dst = buf + strlen(buf);
 	if (r != 0) {
-		id = fcn_004fda30(*r);
+		id = gm_SelectEntityHeadSet(*r);
 	} else {
 		id = gm_FindOrAllocHeadSet(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
@@ -91,7 +91,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 
 	s_dst = buf + strlen(buf);
 	if (s != 0) {
-		id = fcn_004fda30(*s);
+		id = gm_SelectEntityHeadSet(*s);
 	} else {
 		id = gm_FindOrAllocHeadSet(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}

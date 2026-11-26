@@ -49,7 +49,7 @@ void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(int);
 void __cdecl fcn_00573e10(int);
 int __cdecl fcn_00574150();
-int __cdecl fcn_005742e0(void*, void*, void*, void*, void*);
+int __cdecl he_CreateGebaeudeSceneModel(void*, void*, void*, void*, void*);
 void __cdecl d3_ReleaseUnusedSceneObjects();
 int __cdecl fcn_005985f0(void*, int);
 int __cdecl fcn_00508e40(int);
@@ -174,7 +174,7 @@ LfailB:
 			*(int*) (buildAction + 0x70) = -1;
 			return;
 		}
-		v8 = fcn_005742e0((void*) (buildAction + 0xe4), (void*) (buildAction + 0xd4), (void*) v15,
+		v8 = he_CreateGebaeudeSceneModel((void*) (buildAction + 0xe4), (void*) (buildAction + 0xd4), (void*) v15,
 			(void*) (buildAction + 0xf0), (void*) buildAction);
 		if (!v8) {
 			*(int*) (buildAction + 0x84) = fcn_004c5620(-1, (void*) buildAction);

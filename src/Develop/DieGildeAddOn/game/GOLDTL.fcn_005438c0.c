@@ -96,14 +96,14 @@ void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00402220(int);
 void __cdecl nt_ConnectTcp(int, int);
 void __cdecl cm_ResetCommandQueue(void);
-int __cdecl fcn_005926f0(void);
+int __cdecl d2_RunNetLobbySetup(void);
 void __cdecl fcn_0053f4c0(void);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetProgressPercent(int, int);
 void __cdecl main_PumpWindowMessages(void);
 void __cdecl gm_InitGameSession(void);
 void __cdecl gm_CreateSetupFamily(void);
-void __cdecl fcn_0053fa80(void);
+void __cdecl gm_ShutdownGameRuntime(void);
 void __cdecl fcn_0053f720(void);
 void __cdecl fcn_00538220(void);
 void __cdecl init_AllocateKind0bSceneSlot(void);
@@ -130,7 +130,7 @@ void __cdecl he_RestartAction03b(void);
 void __cdecl he_RestartAction0xa6(void);
 void __cdecl he_ClearActivePlayerActions(void);
 void __cdecl fcn_005459a0(int);
-void __cdecl fcn_0059a340(void);
+void __cdecl d2_RunWorldHudLoop(void);
 void __cdecl tb_SetCallbackPaused(void*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl sim_SetSyncParams(void*, int, int, int);
@@ -285,7 +285,7 @@ void __cdecl fcn_005438c0(int a0)
 	cm_ResetCommandQueue();
 	if (g_7747b0 & 0x44) {
 		d2_SuppressOverlay = 0;
-		if (fcn_005926f0() != 0) {
+		if (d2_RunNetLobbySetup() != 0) {
 			if (g_7e2500 != 0) {
 				Sleep(1000);
 				FreeLibrary((void*) g_7e2500);
@@ -331,7 +331,7 @@ void __cdecl fcn_005438c0(int a0)
 		} else {
 			if (g_14cbca0 == -1) {
 				fcn_00526120(g_14ac5d0, 0);
-				fcn_0053fa80();
+				gm_ShutdownGameRuntime();
 				fcn_0053f720();
 				return;
 			}
@@ -346,7 +346,7 @@ void __cdecl fcn_005438c0(int a0)
 		g_7747b4 = 2;
 		if (g_14cbca0 == -1) {
 			fcn_00526120(g_14ac5d0, 0);
-			fcn_0053fa80();
+			gm_ShutdownGameRuntime();
 			fcn_0053f720();
 			return;
 		}
@@ -357,7 +357,7 @@ void __cdecl fcn_005438c0(int a0)
 			main_LoopFlags = 0x46086;
 			fcn_00526120(g_14ac630, 0);
 			g_774954 = 1;
-			fcn_0053fa80();
+			gm_ShutdownGameRuntime();
 			fcn_0053f720();
 			return;
 		}
@@ -565,7 +565,7 @@ void __cdecl fcn_005438c0(int a0)
 		fcn_005459a0(g_774970 & 0xffff);
 		g_fb5744 = 0;
 		g_774960 = 0;
-		fcn_0059a340();
+		d2_RunWorldHudLoop();
 		if (g_774954 != 0) {
 			goto l_inc;
 		}
@@ -674,7 +674,7 @@ l_step:
 	if (g_7747b0 & 0x80) {
 		d2_ShutdownTutorial();
 	}
-	fcn_0053fa80();
+	gm_ShutdownGameRuntime();
 }
 unsigned char _dpad_6f0d88[5744] = {
     0x00,

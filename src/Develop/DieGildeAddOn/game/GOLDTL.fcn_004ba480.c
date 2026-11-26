@@ -25,8 +25,8 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
-char* __cdecl fcn_005049a0(unsigned char*);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
+char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 void __cdecl cm_SendCopyEntityData(void*);
 
 
@@ -66,7 +66,7 @@ int __cdecl fcn_004ba480(int* a1)
 	for (i = 0; i < 768; i++) {
 		rec = g_7f4ca0 + i * 540;
 		if (rec[2] == 0 && *(unsigned char**) (rec + 0x16c) == chosen) {
-			if (fcn_0050f980(*e, i, 1) < lim)
+			if (gm_CalcEntityFavor(*e, i, 1) < lim)
 				goto fail;
 			cnt++;
 			if (cnt >= kind->slots_b + kind->slots_a)
@@ -74,7 +74,7 @@ int __cdecl fcn_004ba480(int* a1)
 		}
 	}
 	if (cnt >= 2) {
-		p = fcn_005049a0(chosen);
+		p = gm_FindBuildingPrimarySlot(chosen);
 		memset(message, 0, sizeof(message));
 		v = *(int*) (chosen + 1);
 		message[4] = 0x4a;

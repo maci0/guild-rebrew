@@ -49,7 +49,7 @@ void __cdecl ai_PlanMeisterSupplies(int, int, int);
 void __cdecl fcn_00489010(int, int);
 void __cdecl fcn_00489250(int);
 void __cdecl fcn_00489a70(int, int);
-void __cdecl fcn_00487000(int);
+void __cdecl ai_ManageMeisterWorkers(int);
 void __cdecl fcn_00487970(int, int, int);
 void __cdecl fcn_00487c00(int, int, int);
 void __cdecl fcn_00487470(int);
@@ -140,7 +140,7 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 	fcn_00489250((int) rec);
 	fcn_00489a70((int) rec, saved);
 common:
-	fcn_00487000((int) rec);
+	ai_ManageMeisterWorkers((int) rec);
 	fcn_00487970(saved, (int) rec, 10);
 	fcn_00487c00(saved, (int) rec, 10);
 	fcn_00487470((int) rec);

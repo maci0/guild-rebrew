@@ -15,7 +15,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(char, char*);
 
 /* ADDRESS: GOLDTL 0x0055a920 */
-void __cdecl fcn_0055a920(char* rec)
+void __cdecl he_RunAction0x81(char* rec)
 {
 	int cnt;
 	int flag;

@@ -5,7 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 
-void __cdecl fcn_004acf60(void);
+void __cdecl amt_RetireExpiredRulers(void);
 void __cdecl amt_SpawnHistoricalOfficeHolders(void);
 void __cdecl fcn_004ad2e0(void);
 void __cdecl amt_VacateSpecialOffice(void);
@@ -20,7 +20,7 @@ void __cdecl fcn_0057baa0(char* o)
 	}
 	switch (*(int*) (o + 0x70)) {
 	case 0:
-		fcn_004acf60();
+		amt_RetireExpiredRulers();
 		gm_AddTime((pos14_7f4c00*) (o + 0x52), 2, 0, 0);
 		fcn_004c5620(1, o);
 		break;

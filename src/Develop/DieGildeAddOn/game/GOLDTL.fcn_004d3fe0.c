@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned short* g_772e9c;
 
-float* __cdecl fcn_004d3c60(char*);
+float* __cdecl cut_GetCombatActionWeights(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 float __cdecl fcn_004d3e90(void*, unsigned int);
 float __cdecl cut_RandFloat(void);
@@ -29,7 +29,7 @@ void __cdecl fcn_004d3fe0(char* a0)
 	n = 0;
 	auswahl = 0;
 	rec = 0;
-	w = fcn_004d3c60(a0);
+	w = cut_GetCombatActionWeights(a0);
 	for (i = 0; i < ((unsigned char*) g_772eb4)[0x30]; i++) {
 		if (*(int*) (g_772eb4 + 0x34 + i * 4) == *(int*) (a0 + 4)) {
 			rec = g_9b0e20 + i * 0x35c;

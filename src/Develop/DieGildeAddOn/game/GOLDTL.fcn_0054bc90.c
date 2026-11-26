@@ -10,7 +10,7 @@ extern void __cdecl cm_RequestChangeAttribute(void);
 extern int __cdecl fcn_004c5620(int, char*);
 extern int __cdecl gm_CompareGameTime(char*, char*);
 extern void __cdecl fcn_00545780(char*);
-extern int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
+extern int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 extern int __cdecl fcn_00545670(char*, int, int, char*, int);
 extern int __cdecl d2_SetForm(int, int);
 extern void __cdecl io_AppendText(int, ...);
@@ -141,7 +141,7 @@ void __cdecl fcn_0054bc90(char* action)
 			}
 			io_FormatTextBuffer(text, 0x1786, *v3);
 		}
-		fcn_00545d40(*(int*) (v7 + 2), -1, text, 0, 0x5ec, 0);
+		he_PostEntityMessage(*(int*) (v7 + 2), -1, text, 0, 0x5ec, 0);
 		he_FreeAction(action);
 		return;
 	case 1:
@@ -170,7 +170,7 @@ void __cdecl fcn_0054bc90(char* action)
 			}
 			if (idx < 4) {
 				io_FormatTextBuffer(text, 0x1785, *v3);
-				fcn_00545d40(*(int*) (v7 + 2), -1, text, 0, 0x5ec, 0);
+				he_PostEntityMessage(*(int*) (v7 + 2), -1, text, 0, 0x5ec, 0);
 			}
 		} else if (*(int*) &g_100f1dc == 1) {
 			v16 = *(int*) (v3 + 2);
@@ -196,7 +196,7 @@ void __cdecl fcn_0054bc90(char* action)
 			}
 			if (idx < 4) {
 				io_FormatTextBuffer(text, 0x1786, *v3);
-				fcn_00545d40(*(int*) (v7 + 2), -1, text, 0, 0x5ec, 0);
+				he_PostEntityMessage(*(int*) (v7 + 2), -1, text, 0, 0x5ec, 0);
 			}
 		}
 		fcn_00545780(action);

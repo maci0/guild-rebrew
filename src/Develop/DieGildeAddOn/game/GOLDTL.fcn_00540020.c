@@ -104,7 +104,7 @@ void __cdecl fcn_00469e30(int);
 void __cdecl fcn_00469e70(void);
 void __cdecl fcn_00473150(void*);
 void __cdecl sv_WaitForNetworkSync(int);
-void __cdecl fcn_005355f0(void);
+void __cdecl d2_DestroyScrollPerga(void);
 void __cdecl gm_BuildDealSummary(int, void*);
 void __cdecl fcn_004fd400(short*, int*);
 void* __cdecl cm_RequestSysMessage(int, void*);
@@ -143,7 +143,7 @@ unsigned short __cdecl fcn_0042e410(int);
 int __cdecl gm_GetEntityMood(void*);
 int __cdecl gm_CalculateGebaeudeValue(void*, int);
 int __cdecl gm_IsNpcEntityState(void*);
-int __cdecl fcn_00567170(void*, int*, int*, int*);
+int __cdecl he_GetEntityHomeTarget(void*, int*, int*, int*);
 void* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
 void __cdecl fcn_00406120(void*);
@@ -375,7 +375,7 @@ void __cdecl fcn_00540020(void)
 		while (!(*(unsigned char*) hp & 4)) {
 			main_RunFrameLoop(0, *(int*) 0x7e46ac | 0x80);
 		}
-		fcn_005355f0();
+		d2_DestroyScrollPerga();
 		fcn_00469e70();
 	}
 	cm_RequestTransferCurrencyNoKill(-1, SLOT4(g_774970 & 0xffff), g_773d75,
@@ -577,7 +577,7 @@ next2:
 	for (i = 0; i < 0x300; i++) {
 
 		if (*(char**) (SLOTPTR(i) + 0x184) != 0
-		    && fcn_00567170(SLOTPTR(i), &cand, &agebits, &left) != 0
+		    && he_GetEntityHomeTarget(SLOTPTR(i), &cand, &agebits, &left) != 0
 		    && (cand != *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x2c)
 			|| agebits != *(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x30))) {
 			if (*(int*) (*(char**) (SLOTPTR(i) + 0x184) + 0x28) != -1) {

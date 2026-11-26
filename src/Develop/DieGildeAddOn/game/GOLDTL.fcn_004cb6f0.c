@@ -4,7 +4,7 @@ typedef struct Kind {
 } Kind;
 // SIZE 0x24d
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-struct cap_4cb6f0 {
+struct BUILDING_SLOT_LIMITS {
 	unsigned short cap;
 	short pad2;
 	int pad4;
@@ -15,13 +15,13 @@ extern unsigned char* lpGebaeudePROT;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl gm_GetBuildingSlotLimits(int, struct cap_4cb6f0*);
+void __cdecl gm_GetBuildingSlotLimits(int, struct BUILDING_SLOT_LIMITS*);
 
 
 /* ADDRESS: GOLDTL 0x004cb6f0 */
 int __cdecl fcn_004cb6f0(char* a1, char* out)
 {
-	struct cap_4cb6f0 info;
+	struct BUILDING_SLOT_LIMITS info;
 	unsigned char* e;
 	unsigned char* old;
 	char* p;

@@ -40,7 +40,7 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl ch_UpdateAttachedModelPosition(char*, int);
 void __cdecl fcn_00516550(void);
 void __cdecl fcn_005165b0(void);
-void __cdecl fcn_005156a0(void);
+void __cdecl d3_UpdateBuildingSlotVisibility(void);
 void __cdecl fcn_00515ef0(void);
 
 /* ADDRESS: GOLDTL 0x005167c0 */
@@ -108,7 +108,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 	}
 	g_7f3ee0 = (char*) building;
 	ch_CollectContextCharacters((char*) building);
-	d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, fcn_005156a0);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, d3_UpdateBuildingSlotVisibility);
 	d3_TraverseSceneObjects(g_67a370, 0, 0x20, fcn_00515ef0);
 	gm_UpdateResidenceOwnerDecor((char*) building);
 	i = 0;

@@ -3,7 +3,7 @@ int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
 char* __cdecl gm_LookupEntityRecordById(int id);
 
 /* ADDRESS: GOLDTL 0x004a93a0 */
-int __cdecl fcn_004a93a0(int a1, char* e, int a3, int a4, char* out)
+int __cdecl ai_PreparePriv0x03(int unused1, char* actor, int unused2, int unused3, char* out)
 {
 	int d[32];
 	int ids[32];
@@ -14,10 +14,10 @@ int __cdecl fcn_004a93a0(int a1, char* e, int a3, int a4, char* out)
 	char* candidate;
 
 	thr = gm_RandomMod(8) + 5;
-	if (e[0x166] == 0xd) {
+	if (actor[0x166] == 0xd) {
 		return 0;
 	}
-	count = fcn_004f6040(ids, d, *(unsigned short*) e);
+	count = fcn_004f6040(ids, d, *(unsigned short*) actor);
 	if (count <= 0) {
 		return 0;
 	}

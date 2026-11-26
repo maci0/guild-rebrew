@@ -22,7 +22,7 @@ extern int g_7e2a9c;
 
 #include "client_scene_transform.h"
 void __cdecl d3_FreeObjectAnimation(View* v);
-void __cdecl fcn_00438b40(View* v, float* p);
+void __cdecl d3_SetNodePosition(View* v, float* p);
 void __cdecl d3_SetObjectRotation(View* v, float* r);
 void __cdecl d3_AnimateCameraToStoredTransform(void);
 void __cdecl fcn_00530510(void);
@@ -39,7 +39,7 @@ void __cdecl fcn_00532ef0(void)
 			d3_ActiveCameraAnimation = 0;
 			d3_CameraAnimating = 0;
 			done = 1;
-			fcn_00438b40(((View*)d3_ActiveCamera), g_7e3a40);
+			d3_SetNodePosition(((View*)d3_ActiveCamera), g_7e3a40);
 			d3_SetObjectRotation(((View*)d3_ActiveCamera), d3_CameraTargetRotation);
 		} else {
 			d3_FreeObjectAnimation(((View*)d3_ActiveCamera));

@@ -6,7 +6,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_WalkEntityChain(unsigned short);
-float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
+float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004a5340(unsigned short*, unsigned int, unsigned int*, float, float, unsigned short*);
 int __cdecl amt_CollectOfficeCandidates(int, int, unsigned char**);
@@ -69,7 +69,7 @@ int __cdecl fcn_00496810(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* o
             if (count <= 0) return 0;
             for (i = 0; i < count; i++) {
                 if (list[i] != (unsigned char*)g_77261c) {
-                    value = fcn_0050f980(*(unsigned short*)ent, *(unsigned short*)list[i], 1);
+                    value = gm_CalcEntityFavor(*(unsigned short*)ent, *(unsigned short*)list[i], 1);
                     if (value < best_value) {
                         best_value = value;
                         best = i;

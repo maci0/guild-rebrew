@@ -21,7 +21,7 @@ extern void* g_14cb8f0;
 void __cdecl fcn_00429d30(Ctx* c);
 void __cdecl m_FreeTracked(void* p);
 
-void __cdecl fcn_00429800(void)
+void __cdecl evt_ShutdownScripts(void)
 {
 	int i;
 

@@ -27,7 +27,7 @@ int __cdecl fcn_004a5340(char* e, int a, int* p, float lo, float hi,
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048f4f0 */
-int __cdecl fcn_0048f4f0(char* e, char* q, Blk24* b1, Blk24* b2)
+int __cdecl ai_FindGraveyardTargets(char* e, char* q, Blk24* b1, Blk24* b2)
 {
 	char* p;
 	int* h;

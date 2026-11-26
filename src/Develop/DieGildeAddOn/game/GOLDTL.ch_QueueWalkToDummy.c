@@ -1,7 +1,7 @@
 
 
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
-char* __cdecl fcn_004026f0(char* p);
+char* __cdecl d3sm_GetSceneSuperMap(char* p);
 char __cdecl fcn_0045b990(char* g, float* v, int* a, int* b, int* c);
 int __cdecl d3_GetContextIndex(char* p);
 char* __cdecl ch_CreateAction(char* e, int kind, int a, int b, int c);
@@ -19,7 +19,7 @@ char* __cdecl ch_QueueWalkToDummy(char* owner, char* e)
 	d3_TransformPoint(e, e + 0x4c, v);
 	g = *(char**) (*(char**) (e + 0x20c) + 0xb0);
 	if (g == 0) {
-		g = fcn_004026f0(*(char**) (e + 0x20c));
+		g = d3sm_GetSceneSuperMap(*(char**) (e + 0x20c));
 	}
 	if (fcn_0045b990(g, v, &a, &b, &c)) {
 		result = ch_CreateAction(owner, 0x2d, a, b, d3_GetContextIndex(*(char**) (e + 0x20c)));

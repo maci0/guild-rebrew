@@ -19,7 +19,7 @@ int __cdecl io_AppendText(int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_00526920(char*, int, char*);
 
-void __cdecl fcn_00565100(char* u)
+void __cdecl he_RunMeisterpruefungNotice(char* u)
 {
 	char* h;
 	int lvl;

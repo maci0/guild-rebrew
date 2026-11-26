@@ -9,7 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_00529160(char*, char*, int, char*);
+void __cdecl he_AssignActionSlot(char*, char*, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl he_StartGrabpflege(char* o)
@@ -23,7 +23,7 @@ void __cdecl he_StartGrabpflege(char* o)
 		r = gm_SearchTable67(*(int*) (o + 0x10));
 		if (r != 0) {
 			q = fcn_00502cd0(*(int*) (r + 0x5d), 1, 0, 0xfd);
-			fcn_00529160(r, q, *x, o);
+			he_AssignActionSlot(r, q, *x, o);
 			*(int*) (o + 0xac) = 0;
 			*(int*) (o + 0xb8) = 0x1fe;
 			*(pos14_7f4c00*) (o + 0xbc) = gm_GameTime;

@@ -6,7 +6,7 @@ void __cdecl io_AppendText(int, int, int, int, int);
 void __cdecl fcn_00545780(int);
 void __cdecl he_FreeAction(int);
 void __cdecl io_FormatTextBuffer(char*, int, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl fcn_004c6b20(int, int, int);
 int __cdecl fcn_0050e720(int, int, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -54,11 +54,11 @@ void __cdecl fcn_00566d00(int action)
 		}
 		if (selection == 2) {
 			io_FormatTextBuffer(buf, 0x19b3, *b);
-			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
+			he_PostEntityMessage(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 			fcn_004c6b20(*(int*) (a + 2), -(unsigned int) *(unsigned char*) ((char*) a + 0x1b1), 0);
 		} else if (selection == 1) {
 			io_FormatTextBuffer(buf, 0x19b4, *b, *(int*) (action + 0xb4));
-			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
+			he_PostEntityMessage(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 		}
 		fcn_00545780(action);
 		he_FreeAction(action);
@@ -74,11 +74,11 @@ void __cdecl fcn_00566d00(int action)
 
 		if (fcn_0050e720(*a, *b, *(int*) (action + 0xb4), *(unsigned char*) ((char*) a + 0x1b1) * 16000)) {
 			io_FormatTextBuffer(buf, 0x19b3, *b);
-			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
+			he_PostEntityMessage(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 			fcn_004c6b20(*(int*) (a + 2), -(unsigned int) *(unsigned char*) ((char*) a + 0x1b1), 0);
 		} else {
 			io_FormatTextBuffer(buf, 0x19b4, *b, *(int*) (action + 0xb4));
-			fcn_00545d40(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
+			he_PostEntityMessage(*(int*) (a + 2), *(int*) (a + 2), buf, 0, 0x5fa, 0);
 			cm_RequestCopyEntityData(*(int*) (a + 2), *(int*) (b + 2), 10, 1);
 		}
 		he_FreeAction(action);

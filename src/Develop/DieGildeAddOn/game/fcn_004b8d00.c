@@ -6,7 +6,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 unsigned short __cdecl fcn_0042e410(int a);
 int __cdecl fcn_0050b750(int a, char b);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
-void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
+void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
 void __cdecl fcn_005100f0(int a, int b);
 
 /* ADDRESS: GOLDTL 0x004b8d00 */
@@ -23,7 +23,7 @@ int __cdecl fcn_004b8d00(int* request)
 	io_FormatTextBuffer(buf, 0x12e7 + *(unsigned short*) ((char*) request + 4),
 		fcn_0050b750(1, g_773d75),
 		n = (unsigned short) fcn_0042e410(3) + 3);
-	fcn_00545d40(*(int*) (p + 4), *(int*) (p + 4), buf,
+	he_PostEntityMessage(*(int*) (p + 4), *(int*) (p + 4), buf,
 		strlen(buf) > 0x100, 0x603, 0);
 	fcn_005100f0(*(int*) (p + 4), n);
 	return 0;

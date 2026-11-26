@@ -15,7 +15,7 @@ typedef struct {
 
 int __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
@@ -31,10 +31,10 @@ void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SetupEntityQuery(char*);
-void __cdecl fcn_00529160(char*, int, int, int);
+void __cdecl he_AssignActionSlot(char*, int, int, int);
 int __cdecl gm_IsEntityAtBuilding(char*, char*);
 int __cdecl he_DetectNearbyPatrolAction(int*);
-int __cdecl fcn_004f4f60(int, int, int, int, int);
+int __cdecl gm_TryRecordCrime(int, int, int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
@@ -69,7 +69,7 @@ void* __cdecl fcn_00509570(char*);
 
 /* Advances the active message of the player object through its states. */
 /* ADDRESS: GOLDTL 0x00569ff0 */
-void __cdecl fcn_00569ff0(char* e)
+void __cdecl he_RunEinbruch(char* e)
 {
 	int flag;
 	char* px;
@@ -108,7 +108,7 @@ void __cdecl fcn_00569ff0(char* e)
 				if (*p != -1) {
 					o = (char*) fcn_00508e40(*p);
 					if (o != 0) {
-						fcn_00529160(pa, 0, *(unsigned short*) o, e);
+						he_AssignActionSlot(pa, 0, *(unsigned short*) o, e);
 						cm_SendCancelCharacterActions(*p);
 						ch_StartMovement(*p, *(int*) (pa + 1), -1, 0, 1, "Einbruch");
 					}
@@ -157,7 +157,7 @@ void __cdecl fcn_00569ff0(char* e)
 			s.found = 0;
 			px = (char*) (0x7f4ca0 + *(unsigned short*) (pa + 0x27) * 0x21c);
 			if (he_DetectNearbyPatrolAction((int*) &s) != 0) {
-				*(int*) (e + 0xb4) = fcn_004f4f60(0x17, 1,
+				*(int*) (e + 0xb4) = gm_TryRecordCrime(0x17, 1,
 				        *(int*) (0x7f4ca4 + *(unsigned short*) (e + 8) * 0x21c),
 				        *(int*) (px + 4), *(int*) (pa + 1));
 				*(int*) (e + 0xb8) = *(int*) ((char*) s.found + 4);
@@ -215,10 +215,10 @@ void __cdecl fcn_00569ff0(char* e)
 			if (px != 0 && pc != 0) {
 				num = fcn_0050b750((gm_RandomMod(0xc8) & 0xffff) + 0x226, (char) g_773d75);
 				io_FormatTextBuffer(b200, 0x19ea, pa, num, *(unsigned short*) px);
-				fcn_00545d40(*(int*) (pc + 4), *(int*) (pc + 4), b200, 1, 0x5f0,
+				he_PostEntityMessage(*(int*) (pc + 4), *(int*) (pc + 4), b200, 1, 0x5f0,
 				        "_NACHRICHTEN_HS_76");
 				io_FormatTextBuffer(b200, 0x19eb, pa, num);
-				fcn_00545d40(*(int*) (px + 4), *(int*) (px + 4), b200, 1, 0x5f0,
+				he_PostEntityMessage(*(int*) (px + 4), *(int*) (px + 4), b200, 1, 0x5f0,
 				        "_NACHRICHTEN_HS_77");
 				cm_RequestTransferCurrencyNoKill(*(int*) (pc + 4), *(int*) (px + 4), (char) g_773d75, num);
 			}
@@ -295,7 +295,7 @@ void __cdecl fcn_00569ff0(char* e)
 							        0, "Einbruch");
 							hits++;
 							gm_GetScaledEntitySkill(o, 2);
-							fcn_00529160(pb, 0, *(unsigned short*) o, 0);
+							he_AssignActionSlot(pb, 0, *(unsigned short*) o, 0);
 						}
 					}
 					p++;
@@ -331,7 +331,7 @@ void __cdecl fcn_00569ff0(char* e)
 		if (he_HasNoActiveAction0x62(pa) == 0) {
 			flag = 0;
 		}
-		fcn_004f4f60(0x17, 1,
+		gm_TryRecordCrime(0x17, 1,
 		        *(int*) (0x7f4ca4 + *(unsigned short*) (pb + 0x27) * 0x21c),
 		        *(int*) (px + 4), *(int*) (pa + 1));
 		if (flag != 0) {
@@ -457,7 +457,7 @@ void __cdecl fcn_00569ff0(char* e)
 						} else {
 							ch_StartMovement(*p, -1, -1, 0, 0, "Einbruch");
 						}
-						fcn_00529160(0, 0, *(unsigned short*) o, 0);
+						he_AssignActionSlot(0, 0, *(unsigned short*) o, 0);
 					}
 				}
 				p++;

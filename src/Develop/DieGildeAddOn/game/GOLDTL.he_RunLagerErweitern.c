@@ -14,7 +14,7 @@ int __cdecl cm_AppendPacketFieldValue(unsigned char, unsigned char, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl fcn_0050dc90(int);
-int __cdecl fcn_005049a0(void*);
+int __cdecl gm_FindBuildingPrimarySlot(void*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 
@@ -61,7 +61,7 @@ void __cdecl he_RunLagerErweitern(char* action)
 			info = (char*) fcn_0050dc90(ent);
 			if (info != 0 && (*(unsigned char*) (info + 0x1b4) & 1))
 				msg = 0x60b;
-			cat = fcn_005049a0((void*) ent);
+			cat = gm_FindBuildingPrimarySlot((void*) ent);
 			io_FormatTextBuffer(buf, 0x1bbb, ent);
 
 

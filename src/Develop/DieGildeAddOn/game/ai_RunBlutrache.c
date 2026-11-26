@@ -38,7 +38,7 @@ int __cdecl ai_RunBlutrache(int actor, char *a2, char *a3)
 	fcn_005100f0(*(int *) (actor + 4), -h);
 	cm_RequestChangeBits(*(int *) (actor + 4), 0x1cc, 4, 8, 0);
 	for (i = 0; i < count; i++) {
-		t = 0x32 - (int) (fcn_00507e70((char *) actor, (char *) participants[i], 4) * -50.0f);
+		t = 0x32 - (int) (gm_CalcSkillDuelScore((char *) actor, (char *) participants[i], 4) * -50.0f);
 		cm_RequestCopyEntityData(*(unsigned short *) entity, *(unsigned short *) participants[i], -t, 1);
 	}
 	he_ShowZigeunerGroupMessage(entity, count, participants);

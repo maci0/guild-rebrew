@@ -20,21 +20,21 @@ int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl fcn_0050d320(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(void*);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
 int __cdecl fcn_004c6090(unsigned char*, int, int, int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
-char* __cdecl fcn_005049a0(char*);
+char* __cdecl gm_FindBuildingPrimarySlot(char*);
 int __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_0050dc90(char*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x0055c740 */
-void __cdecl fcn_0055c740(char* ctx)
+void __cdecl he_RunHireWorkerJob(char* ctx)
 {
 	char text[0x400];
 	char* rec;
@@ -95,7 +95,7 @@ void __cdecl fcn_0055c740(char* ctx)
 		}
 		ent = cm_GetCommandResult(*(int*) (ctx + 0xe4));
 		if (ent == 0) {
-			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)
+			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)
 			    [*(unsigned short*) (ctx + 8)].entity_id,
 			    -1, s_6a625c, 0, 0x5f2, 0);
 			he_FreeAction(ctx);
@@ -107,7 +107,7 @@ void __cdecl fcn_0055c740(char* ctx)
 			break;
 		}
 		if (*(int*) (ctx + 0xe0) == -1) {
-			h = fcn_005049a0(rec);
+			h = gm_FindBuildingPrimarySlot(rec);
 			if (h != 0) {
 				*(int*) (ctx + 0xe0) = *(int*) (h + 2);
 			}

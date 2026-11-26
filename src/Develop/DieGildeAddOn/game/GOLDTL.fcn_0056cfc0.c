@@ -55,7 +55,7 @@ void __cdecl cm_RequestChangePlayerHe(int, int, int);
 void __cdecl cm_RequestPlayAnimation(int, char *, int);
 
 /* ADDRESS: GOLDTL 0x0056cfc0 */
-void __cdecl fcn_0056cfc0(char *a0)
+void __cdecl he_RunHausbrand(char *a0)
 {
 	char *e;
 	char *r;

@@ -23,7 +23,7 @@ extern int __cdecl fcn_00428340(char* handle, int a, ...);
 extern void __cdecl SelectTextureSet(char* record, int target, char mode, int flag);
 
 /* ADDRESS: GOLDTL 0x005156a0 */
-void __cdecl fcn_005156a0(char* record)
+void __cdecl d3_UpdateBuildingSlotVisibility(char* record)
 {
 	char* list;
 	unsigned char* entry;
@@ -73,12 +73,12 @@ void __cdecl fcn_005156a0(char* record)
 					if (gm_IsRawItem(*(unsigned short*) slot) != 0) {
 						item = (unsigned short*) fcn_00502cd0((int) list, 1, 4, *entry);
 						while (item != 0) {
-							unsigned short v1;
-							unsigned short v2;
+							unsigned short itemId;
+							unsigned short slotId;
 
-							v1 = *item;
-							v2 = *(unsigned short*) slot;
-							if (v1 != v2) {
+							itemId = *item;
+							slotId = *(unsigned short*) slot;
+							if (itemId != slotId) {
 								BUILDING_PROTOTYPE* row;
 								int best;
 								int second;
@@ -91,9 +91,9 @@ void __cdecl fcn_005156a0(char* record)
 								count = row->component_count;
 								for (i = 0; i < count; i++) {
 									if ((row->components[i] & 0x7fff) != 0) {
-										if (v1 == (row->components[i] & 0x7fff))
+										if (itemId == (row->components[i] & 0x7fff))
 											best = i;
-										else if (v2 == (row->components[i] & 0x7fff))
+										else if (slotId == (row->components[i] & 0x7fff))
 											second = i;
 									}
 								}

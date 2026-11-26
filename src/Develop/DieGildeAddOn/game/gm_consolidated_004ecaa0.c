@@ -27,7 +27,7 @@ int __cdecl ahm_FindRecipeSlot(int p, int id);
 
 /* ADDRESS: GOLD 0x004ead20 */
 /* ADDRESS: GOLDTL 0x004ecaa0 */
-void __cdecl fcn_004ecaa0(int reseed)
+void __cdecl ahm_ResetAlchemyState(int reseed)
 {
 	if (reseed) {
 		*(unsigned short*) &g_772f8c = (unsigned short) (timeGetTime() % 0x7fff + 1);
@@ -67,13 +67,13 @@ void __cdecl ahm_ShufflePlayerPrototypes(void)
 
 /* ADDRESS: GOLD 0x004eaea0 */
 /* ADDRESS: GOLDTL 0x004ecc20 */
-ALCHEMY_RECIPE_PROTOTYPE* __cdecl fcn_004ecc20(int p)
+ALCHEMY_RECIPE_PROTOTYPE* __cdecl ahm_PickRandomUnknownRecipe(int player)
 {
 	int step;
 	int idx;
 	int n;
 
-	if (ahm_HasRecipeSlotCapacity(p)) {
+	if (ahm_HasRecipeSlotCapacity(player)) {
 		step = gm_RandomMod((unsigned short) g_772fe0) + 1;
 		while (step % g_772fe0 == 0) {
 			step++;
@@ -81,7 +81,7 @@ ALCHEMY_RECIPE_PROTOTYPE* __cdecl fcn_004ecc20(int p)
 		idx = gm_RandomMod((unsigned short) g_772fe0);
 		n = g_772fe0;
 		while (n != 0) {
-			if (!ahm_FindRecipeSlot(p, g_772fe4[idx].key)) {
+			if (!ahm_FindRecipeSlot(player, g_772fe4[idx].key)) {
 				return &g_772fe4[idx];
 			}
 			n--;

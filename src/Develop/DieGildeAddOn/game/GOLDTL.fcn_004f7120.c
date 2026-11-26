@@ -2,7 +2,7 @@ int __cdecl FindStraftatIndexById(int a);
 int __cdecl fcn_004f4830(int idx, void* dst);
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_00508eb0(unsigned short a0, int a1);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x004f7120 */
 int __cdecl fcn_004f7120(int id, short* referenceId, int* a2, short* outEntityId, int* outCode)
@@ -24,7 +24,7 @@ int __cdecl fcn_004f7120(int id, short* referenceId, int* a2, short* outEntityId
 					if (o != 0) {
 						*outEntityId = *(short*) o;
 						extra = fcn_00508eb0(*(unsigned short*) o, 1);
-						f = fcn_0050f980(*(unsigned short*) o, *(unsigned short*) referenceId, 1);
+						f = gm_CalcEntityFavor(*(unsigned short*) o, *(unsigned short*) referenceId, 1);
 						*a2 = (int) ((f * 0.005f + 0.5f) * (extra + sum) * 1600.0f);
 						*outCode = rec[0] & 0xff;
 						return 1;

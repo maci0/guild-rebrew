@@ -5,7 +5,7 @@ extern int g_77261c;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
-float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
+float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl amt_GetRoleLevel(int);
 
 /* ADDRESS: GOLDTL 0x004a5c40 */
@@ -58,7 +58,7 @@ unsigned int __cdecl fcn_004a5c40(unsigned short* source, unsigned int count, un
 				}
 				if (fcn_005cf720(*source, cand, query, 0) != 0) {
 					if (flag != 0) {
-						f = fcn_0050f980(cand, *source, 1);
+						f = gm_CalcEntityFavor(cand, *source, 1);
 						if (f < lo || f > hi) {
 							continue;
 						}

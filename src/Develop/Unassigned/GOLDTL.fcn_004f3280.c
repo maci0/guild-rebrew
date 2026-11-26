@@ -19,7 +19,7 @@ typedef struct
 extern char* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-void __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
+void __cdecl gm_TryRecordCrime(int a, int b, int c, int d, int e);
 int __cdecl fcn_004c6cb0(Msg1c* m);
 
 int __cdecl fcn_004f3280(char* obj, int a2, int a3, int a4, int a5)
@@ -34,6 +34,6 @@ int __cdecl fcn_004f3280(char* obj, int a2, int a3, int a4, int a5)
 	m.x10 = (char) a3;
 	m.x11 = a4;
 	m.x15 = a5;
-	fcn_004f4f60(0x1b, 1, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (obj + 0x27)].entity_id, -1, *(int*) (obj + 1));
+	gm_TryRecordCrime(0x1b, 1, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (obj + 0x27)].entity_id, -1, *(int*) (obj + 1));
 	return fcn_004c6cb0(&m);
 }

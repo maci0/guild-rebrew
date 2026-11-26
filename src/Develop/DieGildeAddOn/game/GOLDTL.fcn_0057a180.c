@@ -8,7 +8,7 @@ float __cdecl fcn_004ff210(unsigned short id, int delta);
 
 /* Releases every played sound of the behaviour when its counter ran out. */
 /* ADDRESS: GOLDTL 0x0057a180 */
-void __cdecl fcn_0057a180(char* action)
+void __cdecl he_RunDeathPactCollection(char* action)
 {
 	char* entity;
 	char* sound;

@@ -12,7 +12,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 
-void __cdecl fcn_005652f0(char* e)
+void __cdecl he_InitMeisterpruefungPassed(char* e)
 {
 	char* r;
 

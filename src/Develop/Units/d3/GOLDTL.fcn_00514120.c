@@ -70,7 +70,7 @@ void __cdecl gm_AssignBuildingOwner(void*, int, int);
 void* __cdecl gm_AddObjekt(void);
 void __cdecl fcn_005016c0(void);
 void __cdecl fcn_005016f0(int);
-void __cdecl fcn_005017a0(int);
+void __cdecl gm_UpdateMarketStockSlots(int);
 int __cdecl fcn_0045b700(Device*, int, int);
 
 int __cdecl gm_LoadCityMap(char* map)
@@ -158,7 +158,7 @@ int __cdecl gm_LoadCityMap(char* map)
 		fcn_005016f0(i);
 	}
 	cm_BeginCommandSync();
-	fcn_005017a0((unsigned char) (*(char*)&g_773d75));
+	gm_UpdateMarketStockSlots((unsigned char) (*(char*)&g_773d75));
 	cm_EndCommandSync();
 	while (cm_AreQueuedCommandsDone() == 0) {
 		fcn_00535960();

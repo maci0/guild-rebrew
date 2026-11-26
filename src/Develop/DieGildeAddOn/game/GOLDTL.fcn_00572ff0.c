@@ -50,7 +50,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x00572ff0 */
-void __cdecl fcn_00572ff0(char* a)
+void __cdecl he_RunHandelsrouteTrade(char* a)
 {
 	Msg572ff0 msg;
 	char buf[0x70];

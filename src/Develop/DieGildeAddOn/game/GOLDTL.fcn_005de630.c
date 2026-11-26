@@ -37,7 +37,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
 int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
@@ -86,19 +86,19 @@ int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
 	fcn_004ff210(e->entity_index, -0x32 - gm_RandomMod(0x40));
 	if (e->entity_state == 6 || e->entity_state == 7) {
 		io_FormatTextBuffer(text, 0x100d, picks[0]->entity_index, picks[0]->entity_index, picks[1]->entity_index, picks[2]->entity_index);
-		fcn_00545d40(e->entity_id, -1, text, 1, 0x5fb, 0);
+		he_PostEntityMessage(e->entity_id, -1, text, 1, 0x5fb, 0);
 	}
 	if (picks[0]->entity_state == 6 || picks[0]->entity_state == 7) {
 		io_FormatTextBuffer(text, 0x100e, e->entity_index, picks[1]->entity_index, picks[2]->entity_index);
-		fcn_00545d40(picks[0]->entity_id, -1, text, 1, 0x5fb, 0);
+		he_PostEntityMessage(picks[0]->entity_id, -1, text, 1, 0x5fb, 0);
 	}
 	if (picks[1]->entity_state == 6 || picks[1]->entity_state == 7) {
 		io_FormatTextBuffer(text, 0x100f, e->entity_index, picks[0]->entity_index, picks[2]->entity_index);
-		fcn_00545d40(picks[1]->entity_id, -1, text, 1, 0x5fb, 0);
+		he_PostEntityMessage(picks[1]->entity_id, -1, text, 1, 0x5fb, 0);
 	}
 	if (picks[2]->entity_state == 6 || picks[2]->entity_state == 7) {
 		io_FormatTextBuffer(text, 0x100f, e->entity_index, picks[0]->entity_index, picks[1]->entity_index);
-		fcn_00545d40(picks[2]->entity_id, -1, text, 1, 0x5fb, 0);
+		he_PostEntityMessage(picks[2]->entity_id, -1, text, 1, 0x5fb, 0);
 	}
 	arg[4] = 1;
 	if (obj->entity_state == 6) {

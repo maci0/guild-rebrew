@@ -1,8 +1,8 @@
-char* __cdecl fcn_00402610(char*);
+char* __cdecl d3sm_GetObjectSuperMap(char*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 void __cdecl fcn_00441720(int, float*, int, int*, int*, float*);
 int __cdecl d3_GetContextIndex(int);
-void __cdecl fcn_00438b40(char*, float*);
+void __cdecl d3_SetNodePosition(char*, float*);
 
 
 /* Eases a character's height towards the ground of its map cell; returns
@@ -20,7 +20,7 @@ int __cdecl ch_AdjustHeightToGround(char* ev)
 	float height;
 	float pos[4];
 
-	map = fcn_00402610(*(char**) (ev + 0x14));
+	map = d3sm_GetObjectSuperMap(*(char**) (ev + 0x14));
 	obj = *(char**) (ev + 0x14);
 	cell = 0;
 	node = *(char**) (obj + 0x34);
@@ -42,7 +42,7 @@ int __cdecl ch_AdjustHeightToGround(char* ev)
 					height += 3.0f;
 				}
 				*(float*) (node + 0x50) = (height - *(float*) (node + 0x50)) * 0.25f + *(float*) (node + 0x50);
-				fcn_00438b40(node, (float*) (node + 0x4c));
+				d3_SetNodePosition(node, (float*) (node + 0x4c));
 			}
 		}
 	}

@@ -70,13 +70,13 @@ int __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_QueryEntitySum(int, int);
 
 /* ADDRESS: GOLDTL 0x0048c5b0 */
-int __cdecl fcn_0048c5b0(char* o, char* req)
+int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 {
 	int i;
 	int n;
 	int currency;
 	int k;
-	char* q;
+	char* cargo;
 	int tmp;
 	int i2;
 	char* ent;
@@ -91,7 +91,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 	if (g_100b0e0 <= 0.0f || g_100b0f4 == 0) {
 		return 0;
 	}
-	gm_CollectBuildingStock(*(char**) (o + 0x16c), &st2, 0);
+	gm_CollectBuildingStock(*(char**) (meister + 0x16c), &st2, 0);
 	for (i2 = 0; i2 < g_100e74c; i2++) {
 		if (k > 3) {
 			__asm { int 3 }
@@ -101,8 +101,8 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		if (*(unsigned char*) (ent + 0x12) < 0x21) {
 			m.type = 0x10;
 			m.state = *(int*) (0x7f4ca4
-			    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c);
-			m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
+			    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c);
+			m.f0c = *(int*) (*(int*) (meister + 0x16c) + 1);
 			m.p28 = gm_GameTime;
 			m.p2c = g_7f4c04;
 			m.p30 = g_7f4c08;
@@ -128,14 +128,14 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			m.slots[i + 3] = -1;
 		}
 		gm_CalcEntityInventoryStats(ent, &st);
-		q = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0x1dd);
+		cargo = fcn_00502cd0(*(int*) (ent + 0x14), 1, 0, 0x1dd);
 		i = 0;
 		if (st.x0 > 0) {
 			for (; i < st.x0; i++) {
 				if (st.x48[i] == 0) {
 					continue;
 				}
-				sprintf(line, (char*) 0x67e918, *(int*) (o + 0x16c) + 5,
+				sprintf(line, (char*) 0x67e918, *(int*) (meister + 0x16c) + 5,
 				    st.x68[i], st.x48[i] * 0x41 + 1 + lpObjektePROT);
 				for (tmp = 0x100b0c0; tmp < 0x100d0c0; tmp += 0x40) {
 					if (*(int*) tmp == (int) st.x48[i]) {
@@ -145,16 +145,16 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 				if (st.x68[i] == 0) {
 					continue;
 				}
-				sprintf(line, (char*) 0x67e8c0, *(int*) (o + 0x16c) + 5,
+				sprintf(line, (char*) 0x67e8c0, *(int*) (meister + 0x16c) + 5,
 				    st.x68[i], st.x48[i] * 0x41 + 1 + lpObjektePROT);
 				tmp = (int) fcn_0050bb50((int) st.x48[i], g_773d75);
-				sprintf(line, (char*) 0x67e358, -1, *(int*) (q + 2),
+				sprintf(line, (char*) 0x67e358, -1, *(int*) (cargo + 2),
 				    (int) st.x48[i], st.x68[i], g_773d75, (double) tmp);
-				cm_SendSellObjekt(-1, *(int*) (q + 2), (short) st.x48[i],
+				cm_SendSellObjekt(-1, *(int*) (cargo + 2), (short) st.x48[i],
 				    st.x68[i], (char) g_773d75,
 				    (int) fcn_0050bb50((int) st.x48[i], g_773d75));
-				*(int*) (o + 0x1b8) = (int) (fcn_0050bb50((int) st.x48[i],
-				    g_773d75) + *(int*) (o + 0x1b8));
+				*(int*) (meister + 0x1b8) = (int) (fcn_0050bb50((int) st.x48[i],
+				    g_773d75) + *(int*) (meister + 0x1b8));
 				st.x48[i] = 0;
 				st.x68[i] = 0;
 			}
@@ -166,7 +166,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		n = 0;
 		i = 0;
 		if (*(int*) 0x100b0c0 != 0) {
-			tmp = gm_GetStorageSlotCapacity(q, *(int*) 0x100b0c0);
+			tmp = gm_GetStorageSlotCapacity(cargo, *(int*) 0x100b0c0);
 			m.ids[3] = *(unsigned short*) 0x100b0c0;
 			m.slots[3] = *(int*) (*(int*) 0x100b0c8 + 1);
 			if (tmp > g_100b0f4) {
@@ -186,7 +186,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 			if (*(int*) (0x100b0c0 + i * 0x40 + 0x34) == 0) {
 				continue;
 			}
-			tmp = gm_GetStorageSlotCapacity(q, *(int*) (0x100b0c0 + i * 0x40));
+			tmp = gm_GetStorageSlotCapacity(cargo, *(int*) (0x100b0c0 + i * 0x40));
 			if (*(int*) (0x100b0c0 + i * 0x40 + 8) == 0) {
 				continue;
 			}
@@ -209,25 +209,25 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		{
 			for (currency = 1; currency < 4; currency++) {
 				tmp = gm_QueryEntitySum(*(int*) (0x7f4e18
-				    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c), currency);
+				    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c), currency);
 				if (sums[currency] > tmp) {
 					i = sums[currency] * 9 / 8;
 					cm_SendLogAction((char*) 0x67e8b0);
 					cm_RequestMoveCredits(*(int*) (0x7f4ca4
-					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
+					    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c),
 					    -1, (char) currency, i);
 					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4
-					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
+					    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c),
 					    (char) g_773d75, (int) ((double) i * 1.03));
 					cm_SendTraceEnd((char*) 0x67e8b0);
 				} else if (sums[currency] * 2 < tmp) {
 					i = tmp - sums[currency] * 9 / 8;
 					cm_SendLogAction((char*) 0x67e8b0);
 					cm_RequestMoveCredits(*(int*) (0x7f4ca4
-					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
+					    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c),
 					    -1, (char) g_773d75, i);
 					cm_RequestMoveCredits(-1, *(int*) (0x7f4ca4
-					    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c),
+					    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c),
 					    (char) currency, (int) ((double) i * 1.03));
 					cm_SendTraceEnd((char*) 0x67e8b0);
 				}
@@ -246,7 +246,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 				if (*(int*) (0x100d0c0 + i * 0x58 + 0x4c) == 0) {
 					continue;
 				}
-				tmp = gm_GetStorageSlotCapacity(q, *(int*) (0x100d0c0 + i * 0x58));
+				tmp = gm_GetStorageSlotCapacity(cargo, *(int*) (0x100d0c0 + i * 0x58));
 				k = 0;
 				if (st.x0 <= 0) {
 					continue;
@@ -255,12 +255,12 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 					if (st.x48[k] != 0) {
 						continue;
 					}
-					sprintf(line, (char*) 0x67e358, *(int*) (q + 2),
-					    *(int*) (req + 2), *(int*) (0x100d0c0 + i * 0x58),
+					sprintf(line, (char*) 0x67e358, *(int*) (cargo + 2),
+					    *(int*) (warehouse + 2), *(int*) (0x100d0c0 + i * 0x58),
 					    *(int*) (0x100d0c0 + i * 0x58 + 0x4c) > tmp
 					    ? tmp : *(int*) (0x100d0c0 + i * 0x58 + 0x4c),
 					    g_773d75, 0);
-					cm_SendSellObjekt(*(int*) (q + 2), *(int*) (req + 2),
+					cm_SendSellObjekt(*(int*) (cargo + 2), *(int*) (warehouse + 2),
 					    *(short*) (0x100d0c0 + i * 0x58),
 					    *(int*) (0x100d0c0 + i * 0x58 + 0x4c) > tmp
 					    ? tmp : *(int*) (0x100d0c0 + i * 0x58 + 0x4c),
@@ -282,8 +282,8 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		}
 		m.type = 0x0b;
 		m.state = *(int*) (0x7f4ca4
-		    + *(unsigned short*) (*(int*) (o + 0x16c) + 0x27) * 0x21c);
-		m.f0c = *(int*) (*(int*) (o + 0x16c) + 1);
+		    + *(unsigned short*) (*(int*) (meister + 0x16c) + 0x27) * 0x21c);
+		m.f0c = *(int*) (*(int*) (meister + 0x16c) + 1);
 		m.p28 = gm_GameTime;
 		m.p2c = g_7f4c04;
 		m.p30 = g_7f4c08;
@@ -291,7 +291,7 @@ int __cdecl fcn_0048c5b0(char* o, char* req)
 		m.flag2 = 1;
 		m.f58 = *(int*) (ent + 2);
 		m.f5c = tmp;
-		m.f60 = *(int*) (o + 4);
+		m.f60 = *(int*) (meister + 4);
 		if (*(int*) 0x100b0a4 == 0) {
 			cm_SendCopyEntityData(&m);
 			g_772620++;

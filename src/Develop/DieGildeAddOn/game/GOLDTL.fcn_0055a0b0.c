@@ -13,7 +13,7 @@ unsigned char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char*, unsigned char*, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl he_FreeAction(void*);
@@ -43,7 +43,7 @@ void __cdecl he_RunOfficeAudit(char* action)
 		p = (unsigned char*) 0x7f4ca2;
 		do {
 			if (*p == 6 || *p == 7) {
-				fcn_00545d40(*(unsigned int*) (p + 2), -1, buf, 0x20, 0x600, (void*) 0x6b5c60);
+				he_PostEntityMessage(*(unsigned int*) (p + 2), -1, buf, 0x20, 0x600, (void*) 0x6b5c60);
 			}
 			p += 0x21c;
 		} while ((int) p < 0x85a0a2);
@@ -80,10 +80,10 @@ void __cdecl he_RunOfficeAudit(char* action)
 								if ((*(unsigned char*) (v3 + 2) == 6 || *(unsigned char*) (v3 + 2) == 7)) {
 									if (!(*(int*) (action + 0xac) != 0)) {
 										io_FormatTextBuffer(buf, 0x10bd, *(unsigned short*) v3);
-										fcn_00545d40(*(int*) (v3 + 4), -1, buf, 1, 0x5fd, (void*) 0x6b5c60);
+										he_PostEntityMessage(*(int*) (v3 + 4), -1, buf, 1, 0x5fd, (void*) 0x6b5c60);
 									} else {
 										io_FormatTextBuffer(buf, 0x10bf, *(unsigned short*) v3);
-										fcn_00545d40(*(int*) (v3 + 4), -1, (buf), 1, 0x5fd, (void*) 0x6b5c60);
+										he_PostEntityMessage(*(int*) (v3 + 4), -1, (buf), 1, 0x5fd, (void*) 0x6b5c60);
 									}
 								}
 							}

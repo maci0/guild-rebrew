@@ -6,7 +6,7 @@
 unsigned short __cdecl gm_RandomMod(int n);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 char* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 int __cdecl ai_CheckAction035Predicate(char* unused, char* entity, char* ctx, char* unused2, char* out)
 {
@@ -44,7 +44,7 @@ int __cdecl ai_CheckAction035Predicate(char* unused, char* entity, char* ctx, ch
 	for (tries = 6; tries != 0;) {
 		c = cands[k];
 		if (c != 0 && id != *(int*) (c + 4)) {
-			score = fcn_0050f980(*(unsigned short*) c, *(unsigned short*) entity, 1);
+			score = gm_CalcEntityFavor(*(unsigned short*) c, *(unsigned short*) entity, 1);
 			if (gm_RandomMod(0x10) + 16.0f > score) {
 				c = cands[k];
 				if (c == 0 || *(int*) (entity + 0x5c) == *(int*) (c + 4)) {

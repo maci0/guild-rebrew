@@ -55,7 +55,7 @@ extern int __cdecl fcn_005941e0(void);
 extern int __cdecl fcn_0064d41a(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x005926f0 */
-int __cdecl fcn_005926f0(void)
+int __cdecl d2_RunNetLobbySetup(void)
 {
 	char v11[0x100];
 	char profileText[0x100];
@@ -101,7 +101,7 @@ int __cdecl fcn_005926f0(void)
 				fcn_00471e30(h);
 				return 0;
 			}
-		} while (main_RunFrameLoop((void*)fcn_005926f0, 0x24087) != 0);
+		} while (main_RunFrameLoop((void*)d2_RunNetLobbySetup, 0x24087) != 0);
 		fcn_00471e30(h);
 		return 0;
 	}
@@ -160,7 +160,7 @@ int __cdecl fcn_005926f0(void)
 				fcn_00471e30(h);
 				return 0;
 			}
-		} while (main_RunFrameLoop((void*)fcn_005926f0, 0x24087) != 0);
+		} while (main_RunFrameLoop((void*)d2_RunNetLobbySetup, 0x24087) != 0);
 		fcn_00471e30(h);
 		return 0;
 	}
@@ -297,7 +297,7 @@ int __cdecl fcn_005926f0(void)
 		}
 	last:
 		;
-	} while (main_RunFrameLoop((void*)fcn_005926f0, 0x24087) != 0);
+	} while (main_RunFrameLoop((void*)d2_RunNetLobbySetup, 0x24087) != 0);
 
 	fcn_00471e30(g_6a9b9c);
 	*(unsigned char*)0x7e23e2 = 0x12;

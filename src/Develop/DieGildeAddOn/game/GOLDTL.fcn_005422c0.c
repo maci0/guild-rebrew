@@ -44,7 +44,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_00505d00(char*, int*);
 float __cdecl fcn_0050b8d0(unsigned char*, int, int, int);
 void* __cdecl sim_StartEntityQueryByType(unsigned char*);
-unsigned char* __cdecl fcn_005049a0(unsigned char*);
+unsigned char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl fcn_00535960(void);
@@ -257,7 +257,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 									}
 								}
 								else {
-									q = fcn_005049a0(p);
+									q = gm_FindBuildingPrimarySlot(p);
 									if (q != 0 && *(int*) (q + 2) != -1) {
 										count++;
 										init_SpawnBuildingCharacter(*(int*) (tile2 + 4), *(int*) (p + 1), *(int*) (q + 2), 0, 0);

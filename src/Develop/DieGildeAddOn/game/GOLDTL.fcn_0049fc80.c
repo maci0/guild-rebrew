@@ -20,7 +20,7 @@ typedef struct Rec18 {
 int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl amt_CollectOfficeCandidates(int k, int max, ENTITY_RECORD** out);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_004a5340(ENTITY_RECORD* e, int a, int* b, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0049fc80 */
@@ -44,9 +44,9 @@ ENTITY_RECORD* __cdecl fcn_0049fc80(ENTITY_RECORD* subject)
 			if (candidate->unk_165[1] != 0 && srv_GetEntityOfficeSlot((unsigned char*) candidate, &q, &r) != 0 && q.x8 <= 1) {
 				if (best == 0) {
 					best = candidate;
-					bd = fcn_0050f980(subject->entity_index, candidate->entity_index, 1);
+					bd = gm_CalcEntityFavor(subject->entity_index, candidate->entity_index, 1);
 				} else {
-					d = fcn_0050f980(subject->entity_index, candidate->entity_index, 1);
+					d = gm_CalcEntityFavor(subject->entity_index, candidate->entity_index, 1);
 					if (d < bd) {
 						bd = d;
 						best = candidate;
@@ -65,9 +65,9 @@ ENTITY_RECORD* __cdecl fcn_0049fc80(ENTITY_RECORD* subject)
 					if (list[i] != subject) {
 						if (best == 0) {
 							best = list[i];
-							bd = fcn_0050f980(subject->entity_index, best->entity_index, 1);
+							bd = gm_CalcEntityFavor(subject->entity_index, best->entity_index, 1);
 						} else {
-							d = fcn_0050f980(subject->entity_index, list[i]->entity_index, 1);
+							d = gm_CalcEntityFavor(subject->entity_index, list[i]->entity_index, 1);
 							if (d < bd) {
 								best = list[i];
 								bd = d;

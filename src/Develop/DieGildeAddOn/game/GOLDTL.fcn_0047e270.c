@@ -61,11 +61,11 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004849b0(Bld*, int, int);
-void __cdecl fcn_00487000(Bld*);
+void __cdecl ai_ManageMeisterWorkers(Bld*);
 void __cdecl fcn_00487970(int, Bld*, int);
 void __cdecl fcn_00487c00(int, Bld*, int);
 void __cdecl fcn_00487470(Bld*);
-int __cdecl fcn_00486640(Bld*, PRODUCTION_GOODS_RECORD*, int);
+int __cdecl ai_CanProduceGood(Bld*, PRODUCTION_GOODS_RECORD*, int);
 void __cdecl fcn_004868d0(Bld*, PRODUCTION_GOODS_RECORD*);
 int __cdecl fcn_005b1e40(int);
 int __cdecl gm_FindCityItemHolder(int);
@@ -74,7 +74,7 @@ int __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0047e220(int);
 void __cdecl ai_PlanResourceRestock(Bld*, int);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl ai_CancelBlockedActions(Bld*, int);
 void __cdecl fcn_00487f90(Req*);
 void __cdecl ai_MeisterCollectTrans(Bld*);
@@ -84,7 +84,7 @@ void __cdecl ai_MeisterTrade(Bld*, int);
 /* Starts the production of the current goods if any producer in the building
  * table can run it in the current town. */
 /* ADDRESS: GOLDTL 0x0047e270 */
-void __cdecl fcn_0047e270(Bld* bld)
+void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 {
 	char name[0x100];
 	int order[0x20];
@@ -106,7 +106,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 	if (craft == 0)
 		return;
 	fcn_004849b0(bld, prod, craft);
-	fcn_00487000(bld);
+	ai_ManageMeisterWorkers(bld);
 	fcn_00487970(craft, bld, 0x4b);
 	fcn_00487c00(craft, bld, 0x19);
 	fcn_00487470(bld);
@@ -116,7 +116,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id != (int) bld->id)
 				continue;
 			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 >= (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 &&
-			    fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
+			    ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
 				((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
 				fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
 				bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
@@ -137,7 +137,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id != (int) bld->id)
 				continue;
 			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 >= (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 &&
-			    fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
+			    ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
 				((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
 				fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
 				bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
@@ -164,8 +164,8 @@ void __cdecl fcn_0047e270(Bld* bld)
 				if (gm_eval_SlotVoll(n, ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id, 1000000) >=
 				    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 +
 				           ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_3c)) {
-					if (!fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
-						if (fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 0)) {
+					if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
+						if (ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 0)) {
 							fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
 							bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
 							fcn_0064d41a(name, "Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will",
@@ -210,7 +210,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 		    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id].value_036 +
 		           ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_3c))
 			continue;
-		if (!fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]], 1))
+		if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]], 1))
 			continue;
 		((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].flags |= 8;
 		fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]]);
@@ -235,7 +235,7 @@ void __cdecl fcn_0047e270(Bld* bld)
 		    (int) ((unsigned short) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id].value_036 +
 		           ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].unk_3c))
 			continue;
-		if (!fcn_00486640(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]], 0))
+		if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]], 0))
 			continue;
 		fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]]);
 		bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id;
@@ -281,7 +281,7 @@ done:
 			continue;
 		if (*(int*) (*(int*) (n + 0x182) + 0x2c) != *(int*) (*(int*) (n + 0x16a) + 1))
 			continue;
-		fcn_00529160(bld->x16c, 0, (int) *(unsigned short*) (n - 2), 0);
+		he_AssignActionSlot(bld->x16c, 0, (int) *(unsigned short*) (n - 2), 0);
 		put.count = put.count + 1;
 	}
 	if (g_100dc20 == bld->x16c)

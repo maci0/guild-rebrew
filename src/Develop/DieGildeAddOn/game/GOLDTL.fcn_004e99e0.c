@@ -7,7 +7,7 @@
 
 #include "GOLDTL.fcn_004e99e0_gconf.h"
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004aacb0(unsigned short*, unsigned short*, unsigned short*, int*);
+int __cdecl ai_CompareOfficeCandidates(unsigned short*, unsigned short*, unsigned short*, int*);
 int __cdecl fcn_004aae50(unsigned char, unsigned short*, int*, int*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -17,7 +17,7 @@ void __cdecl fcn_00535960(void);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x004e99e0 */
-void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
+void __cdecl amt_ResolveOfficeApplications(int office, int count, OFFICE_SLOT* list)
 {
 	int remain;
 	int i;
@@ -65,7 +65,7 @@ void __cdecl fcn_004e99e0(int office, int count, OFFICE_SLOT* list)
 			ent = gm_LookupEntityRecordById(list[k].mplayerid);
 			if (ent != 0 && *(char*) (ent + 0x166) != 0
 			    && *(char*) (ent + 0x1b1) == 0) {
-				held = fcn_004aacb0((unsigned short*) ent,
+				held = ai_CompareOfficeCandidates((unsigned short*) ent,
 				    (unsigned short*) self, (unsigned short*) other,
 				    &work.relation);
 				work.score[k] = held;

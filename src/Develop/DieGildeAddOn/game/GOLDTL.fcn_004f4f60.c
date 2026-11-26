@@ -23,14 +23,14 @@ typedef struct {
 	int g;
 	int h;
 	int i;
-} msg_4f4f60;
+} CRIME_REPORT_MSG;
 #pragma pack()
 
 /* ADDRESS: GOLDTL 0x004f4f60 */
-int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5)
+int __cdecl gm_TryRecordCrime(int idx, int id, int a3, int a4, int a5)
 {
 	char rec[36];
-	msg_4f4f60 msg;
+	CRIME_REPORT_MSG msg;
 	char* h1;
 	int v3;
 

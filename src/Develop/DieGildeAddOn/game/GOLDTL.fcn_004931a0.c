@@ -4,7 +4,7 @@ float __cdecl gm_RandomFloat01(void);
 
 
 /* ADDRESS: GOLDTL 0x004931a0 */
-int __cdecl fcn_004931a0(char* a, char* b)
+int __cdecl gm_RollSkill3Contest(char* a, char* b)
 {
 	double da;
 	float p;

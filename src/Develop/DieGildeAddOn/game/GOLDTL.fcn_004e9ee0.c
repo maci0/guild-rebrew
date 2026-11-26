@@ -6,7 +6,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_004e99e0(int, int, OFFICE_SLOT*);
+void __cdecl amt_ResolveOfficeApplications(int, int, OFFICE_SLOT*);
 
 /* ADDRESS: GOLDTL 0x004e9ee0 */
 int __cdecl fcn_004e9ee0(void)
@@ -74,7 +74,7 @@ int __cdecl fcn_004e9ee0(void)
 		if (flags[i] & 2) {
 			result = 1;
 		} else if ((flags[i] & 1) && result == 0) {
-			fcn_004e99e0(order[i], n, recs);
+			amt_ResolveOfficeApplications(order[i], n, recs);
 		}
 	}
 	return result;

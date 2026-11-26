@@ -58,7 +58,7 @@ void __cdecl d2_ShowBuildingMenu(void);
 int __cdecl fcn_00506380(int a, int b, int c, int d);
 int __cdecl gm_CheckEntityType(void* a0);
 int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d);
-void __cdecl fcn_005a80d0(int a0);
+void __cdecl d2_EnterGebaeudeInterior(int a0);
 int __cdecl gm_IsWarehouse(void* a0);
 void __cdecl gm_RunGebaeudeVisit(int a, int b);
 void __cdecl fcn_005a3b30(int a0);
@@ -69,7 +69,7 @@ void __cdecl fcn_00530510(void);
 void __cdecl fcn_004125c0(int x, int y);
 
 /* ADDRESS: GOLDTL 0x0059a340 */
-void __cdecl fcn_0059a340(void)
+void __cdecl d2_RunWorldHudLoop(void)
 {
 	int v7;
 	int savedRight;
@@ -196,7 +196,7 @@ void __cdecl fcn_0059a340(void)
 				&& !(*(unsigned char*) (v9 + 0x5a) & 1)) {
 				v11 = gm_CheckEntityType((void*) v9);
 				if (v11 && d2_DispatchTutorialEvent(0x1b, v9, 0, 0) == 1)
-					fcn_005a80d0(v9);
+					d2_EnterGebaeudeInterior(v9);
 				else if (!gm_IsWarehouse((void*) v9)
 					&& d2_DispatchTutorialEvent(0x19, v9, 0,
 						*(unsigned short*) (v9 + 0x29)) == 1)
@@ -217,7 +217,7 @@ void __cdecl fcn_0059a340(void)
 						&& !gm_IsWarehouse((void*) v9))
 						fcn_0052cf20(v9);
 					if (gm_CheckEntityType((void*) v9)) {
-						fcn_005a80d0(v9);
+						d2_EnterGebaeudeInterior(v9);
 						goto label_59a83a;
 					}
 					if (!gm_IsWarehouse((void*) v9)) {

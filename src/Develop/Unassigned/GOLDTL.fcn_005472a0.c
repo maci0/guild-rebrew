@@ -28,7 +28,7 @@ struct msg {
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
-void __cdecl fcn_005472a0(void)
+void __cdecl he_EnsureCityAction0x86And0xa2(void)
 {
 	struct msg m;
 

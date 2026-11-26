@@ -2,7 +2,7 @@
 #include <string.h>
 
 extern void __cdecl fcn_00443030(void*);
-extern void __cdecl fcn_00438b40(int, void*);
+extern void __cdecl d3_SetNodePosition(int, void*);
 extern void __cdecl d3_SetObjectRotation(int, void*);
 extern void __cdecl fcn_00439c60(int);
 extern void __cdecl fcn_0045b290(int, int);
@@ -218,7 +218,7 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 			g_1041d0c = CTX_TABLE[contextIndex].f88;
 		g_6b8484 = CTX_TABLE[contextIndex].f88;
 		if (g_6b8484 != 0) {
-			fcn_00438b40(g_6b8484, &CTX_TABLE[contextIndex].f8c);
+			d3_SetNodePosition(g_6b8484, &CTX_TABLE[contextIndex].f8c);
 			d3_SetObjectRotation(g_6b8484, &CTX_TABLE[contextIndex].f98);
 			fcn_00439c60(g_6b8484);
 		}

@@ -89,7 +89,7 @@ extern float g_773e1c;
 
 void __cdecl fcn_004125c0(int, int);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-void __cdecl fcn_00438b40(void*, void*);
+void __cdecl d3_SetNodePosition(void*, void*);
 void __cdecl d3_SetObjectRotation(void*, void*);
 char* __cdecl fcn_00509570(void*);
 void __cdecl d3_SetCameraHeightFraction(float);
@@ -216,7 +216,7 @@ main:
 	rot.y = g_77476c - ((int) g_14cf900 - g_774644) * g_665e00;
 	if (CompareVector3WithinTolerance((float*) &cam->pos, (float*) &pos, 0.1f) == 0
 	    || CompareVector3WithinTolerance((float*) &cam->rot, (float*) &rot, 0.001f) == 0) {
-		fcn_00438b40((void*) d3_ActiveCamera, &pos);
+		d3_SetNodePosition((void*) d3_ActiveCamera, &pos);
 		d3_SetObjectRotation((void*) d3_ActiveCamera, &rot);
 		ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
 		if (ent != 0) {
@@ -316,7 +316,7 @@ predict:
 				v.z = t;
 			}
 		}
-		fcn_00438b40((void*) d3_ActiveCamera, &v);
+		d3_SetNodePosition((void*) d3_ActiveCamera, &v);
 		ent = fcn_00509570(((Entity *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
 		if (ent != 0) {
 			*(int*) (ent + 0x8c) = *(int*) &((View*) d3_ActiveCamera)->pos.x;

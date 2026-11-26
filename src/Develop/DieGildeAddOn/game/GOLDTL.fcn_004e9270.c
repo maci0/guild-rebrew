@@ -25,7 +25,7 @@ int __cdecl amt_GetRoleTemplate(int, rec18*);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004e9180(unsigned char*, int);
 
-int __cdecl fcn_004e9270(int k)
+int __cdecl amt_HasIdleSuperior(int k)
 {
 	rec18 a;
 	OFFICE_SLOT list[6];

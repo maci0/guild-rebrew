@@ -9,7 +9,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 void __cdecl gm_GenerateShuffledIndices(int, char*);
 
-void __cdecl fcn_005701d0(char* o)
+void __cdecl he_InitEvent0x84Rumors(char* o)
 {
 	pos14_7f4c00* p;
 

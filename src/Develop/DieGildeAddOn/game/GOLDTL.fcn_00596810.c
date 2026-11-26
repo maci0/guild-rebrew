@@ -37,7 +37,7 @@ int __cdecl gm_GetMsgField(char*, unsigned short*);
 int __cdecl gm_GetStorageSlotCapacity(char*, int);
 int __cdecl d2_GetControlValue(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_00596810(char* msg, char* src)
+int __cdecl d2_BuildProduktionSlotGrid(char* msg, char* src)
 {
 	int tbl[17][4];
 	unsigned short* p;

@@ -1,7 +1,7 @@
 int __cdecl amt_FindOfficeSlotByKey(int, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 
@@ -34,7 +34,7 @@ int __cdecl fcn_004aae50(int a1, unsigned short* referenceId, int* candidateIds,
 		e = gm_LookupEntityRecordById(candidateIds[i]);
 		ents[i] = e;
 		if (e != 0 && amt_GetOfficeAffinity((unsigned char*) e, info.kind, &bonus) != 0) {
-			score[i] = fcn_0050f980(*(unsigned short*) e, *referenceId, 1) + bonus;
+			score[i] = gm_CalcEntityFavor(*(unsigned short*) e, *referenceId, 1) + bonus;
 			if (gm_HasActiveSpecialObject(e, 0x2be) != 0)
 				score[i] += 0.2f;
 			if ((*(int*) (e + 0x1cc) & 0x400000) != 0)

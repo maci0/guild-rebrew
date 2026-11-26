@@ -18,13 +18,13 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendCopyEntityData(char* msg);
-void __cdecl fcn_004c6ae0(int id, int k);
+void __cdecl cm_RequestModifyHealth(int id, int k);
 void __cdecl cm_SendTraceEnd(char* s);
 extern char s_67fb50[];
 
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendCopyEntityData(char* msg);
-void __cdecl fcn_004c6ae0(int id, int k);
+void __cdecl cm_RequestModifyHealth(int id, int k);
 void __cdecl cm_SendTraceEnd(char* s);
 
 /* ADDRESS: GOLDTL 0x004aaa60 */
@@ -72,7 +72,7 @@ int __cdecl fcn_004aab30(char* actor, int a2, char* x)
 		return 0;
 	}
 	cm_SendLogAction(s_67fb40);
-	f = fcn_00507e70(actor, target, 4);
+	f = gm_CalcSkillDuelScore(actor, target, 4);
 	if (gm_RandomFloat01() + f >= 1.0f) {
 		msg[4] = 0x2e;
 		*(int*) (msg + 8) = *(int*) (target + 4);
@@ -82,7 +82,7 @@ int __cdecl fcn_004aab30(char* actor, int a2, char* x)
 		*(int*) (msg + 0x58) = *(int*) (target + 4);
 		cm_SendCopyEntityData(msg);
 	}
-	fcn_004c6ae0(*(int*) (actor + 4), -2);
+	cm_RequestModifyHealth(*(int*) (actor + 4), -2);
 	cm_SendTraceEnd(s_67fb40);
 	return 1;
 }
@@ -105,7 +105,7 @@ int __cdecl aip_ExecAnschwaerzen(char* actor, int a2, char* x)
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	cm_SendLogAction(s_67fb50);
 	cm_SendCopyEntityData(msg);
-	fcn_004c6ae0(*(int*) (actor + 4), -3);
+	cm_RequestModifyHealth(*(int*) (actor + 4), -3);
 	cm_SendTraceEnd(s_67fb50);
 	return 1;
 }

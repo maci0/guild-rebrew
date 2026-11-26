@@ -9,15 +9,15 @@ int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLD 0x00578760 */
-int* __cdecl fcn_00580d50(void)
+int* __cdecl d2_InitTutorialMainIntro(void)
 {
-	int* p;
+	int* intro;
 	char* fdest;
 	int flen;
 
-	p = m_alloc(0x74, "FTInitMainIntro");
-	fdest = (char*) p;
-	if (p == 0) {
+	intro = m_alloc(0x74, "FTInitMainIntro");
+	fdest = (char*) intro;
+	if (intro == 0) {
 		fcn_00580cf0(0);
 		return 0;
 	}
@@ -39,26 +39,26 @@ int* __cdecl fcn_00580d50(void)
 		add ecx, ebx
 		rep stosb
 	}
-	p[0] = 0;
-	p[1] = 0x494e5452;
-	p[2] = 4;
-	p[3] = 0x3f24;
-	p[4] = (int) "TUTORIAL_MAIN_INTRO";
-	p[5] = 0;
-	p[6] = 0;
-	p[7] = 0;
-	p[8] = 0;
-	p[0xb] = -1;
-	p[0xc] = 0x8e;
-	p[0xd] = 0;
-	p[0xe] = 0;
-	p[0x10] = 0;
-	p[0x11] = 0;
-	p[0x12] = 0xb;
-	p[0x1a] = 0;
-	p[0x1b] = 0;
-	p[0x1c] = 0;
+	intro[0] = 0;
+	intro[1] = 0x494e5452;
+	intro[2] = 4;
+	intro[3] = 0x3f24;
+	intro[4] = (int) "TUTORIAL_MAIN_INTRO";
+	intro[5] = 0;
+	intro[6] = 0;
+	intro[7] = 0;
+	intro[8] = 0;
+	intro[0xb] = -1;
+	intro[0xc] = 0x8e;
+	intro[0xd] = 0;
+	intro[0xe] = 0;
+	intro[0x10] = 0;
+	intro[0x11] = 0;
+	intro[0x12] = 0xb;
+	intro[0x1a] = 0;
+	intro[0x1b] = 0;
+	intro[0x1c] = 0;
 	(*(int*)g_7749f8) = sb_LoadLocalizedSampleBank("TUTORIAL_INTRO_OUTRO.sbf", 0);
-	return p;
+	return intro;
 }
 #pragma optimize("", on)

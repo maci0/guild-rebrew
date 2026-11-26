@@ -27,7 +27,7 @@ extern int d3_ActiveCameraAnimation;
 extern float g_774730;
 
 float __cdecl fcn_00413d10(float* p);
-void __cdecl fcn_00438b40(View* v, Vec4* p);
+void __cdecl d3_SetNodePosition(View* v, Vec4* p);
 
 void __cdecl d3_AdjustCameraHeight(void)
 {
@@ -56,7 +56,7 @@ void __cdecl d3_AdjustCameraHeight(void)
 			p.z = v->z;
 			p.y = p.y + step;
 			if (d3_ActiveCameraAnimation == 0) {
-				fcn_00438b40(v, &p);
+				d3_SetNodePosition(v, &p);
 			}
 			g_774730 = step;
 		} else {

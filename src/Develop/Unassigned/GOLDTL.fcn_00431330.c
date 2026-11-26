@@ -7,7 +7,7 @@ struct AnimFrame {
 };
 // SIZE 0xc0
 
-void __cdecl fcn_00438b40(char* node, float* v);
+void __cdecl d3_SetNodePosition(char* node, float* v);
 
 #define FRAMES_431330(an) (*(struct AnimFrame**) (*(char**) ((an) + 0x68) + 0x15c))
 
@@ -68,7 +68,7 @@ void __cdecl d3_AccumulateAnimDelta(char* node, char* an, int t, int key, int fl
 		d[0] += *(float*) (node + 0x4c);
 		d[1] += *(float*) (node + 0x50);
 		d[2] += *(float*) (node + 0x54);
-		fcn_00438b40(node, d);
+		d3_SetNodePosition(node, d);
 	}
 	*(int*) (an + 0xc) = key;
 	*(int*) (an + 0x10) = t;

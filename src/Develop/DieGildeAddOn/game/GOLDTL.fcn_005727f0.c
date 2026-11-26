@@ -34,7 +34,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00529160(char*, int, int, int);
+void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_RunSuchen(char* e)
@@ -70,7 +70,7 @@ void __cdecl he_RunSuchen(char* e)
 		    "_NACHRICHTEN_HS_08");
 		for (i = 0; i < 768; i++) {
 			if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == e) {
-				fcn_00529160(r, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
+				he_AssignActionSlot(r, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
 			}
 		}
 		he_FreeAction(e);
@@ -79,7 +79,7 @@ void __cdecl he_RunSuchen(char* e)
 	case -1:
 		for (i = 0; i < 768; i++) {
 			if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == e) {
-				fcn_00529160(0, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
+				he_AssignActionSlot(0, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), 0);
 			}
 		}
 		break;

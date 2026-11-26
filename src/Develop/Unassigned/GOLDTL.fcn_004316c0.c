@@ -23,7 +23,7 @@ typedef struct Edge {
 void __cdecl d3_LerpVec3(float* a, float* b, float t, float* out);
 void __cdecl d3_BuildEulerRotationMatrix(float* a, float* out);
 void __cdecl d3_MatrixToEulerAngles(float* a, float* b);
-void __cdecl fcn_00438b40(int obj, float* v);
+void __cdecl d3_SetNodePosition(int obj, float* v);
 void __cdecl d3_SetObjectRotation(int obj, float* v);
 int __cdecl strcmp(const char* a, const char* b);
 char* __cdecl strcpy(char* a, const char* b);
@@ -176,7 +176,7 @@ void __cdecl fcn_004316c0(int obj)
 				}
 			}
 			if (k < names[0x2a0]) {
-				fcn_00438b40(nblock, (float*) (names + k * 0x58 + 0xb4));
+				d3_SetNodePosition(nblock, (float*) (names + k * 0x58 + 0xb4));
 				d3_SetObjectRotation(nblock, (float*) (names + k * 0x58 + 0xc0));
 			}
 		}
@@ -192,7 +192,7 @@ void __cdecl fcn_004316c0(int obj)
 			for (nblock = *(int*) (obj + 0x200); nblock != 0; nblock = *(int*) (nblock + 0x1f4)) {
 				if (*(int*) (nblock + 0x1ec) != 0
 				    && strcmp(rec[i].name, (char*) (*(int*) (nblock + 0x1ec) + 0xb4)) == 0) {
-					fcn_00438b40(nblock, rec[i].target);
+					d3_SetNodePosition(nblock, rec[i].target);
 					d3_SetObjectRotation(nblock, q);
 				}
 			}

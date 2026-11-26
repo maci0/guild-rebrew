@@ -28,7 +28,7 @@ void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 void __cdecl fcn_004ff490(char*);
@@ -85,7 +85,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 				                 *(unsigned short*) (e + 0x27) * 0x21c);
 				if (kind == 6 || kind == 7) {
 					io_FormatTextBuffer(nb, 0x414a, *(unsigned short*) entity, e);
-					fcn_00545d40(*(int*) (g_7f4ca4 +
+					he_PostEntityMessage(*(int*) (g_7f4ca4 +
 					                      *(unsigned short*) (*(int*) (entity + 0x16c) +
 					                                          0x27) * 0x21c), -1, nb, 0, 0x60a,
 					             g_6b5c60);
@@ -202,7 +202,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 				                 *(unsigned short*) (e + 0x27) * 0x21c);
 				if (kind == 6 || kind == 7) {
 					io_FormatTextBuffer(nb, 0x1c51, e, *(unsigned short*) entity);
-					fcn_00545d40(*(int*) (g_7f4ca4 +
+					he_PostEntityMessage(*(int*) (g_7f4ca4 +
 					                      *(unsigned short*) (*(int*) (entity + 0x16c) +
 					                                          0x27) * 0x21c), -1, nb, 0, 0x60a,
 					             g_6b5c60);
@@ -273,13 +273,13 @@ double __cdecl fcn_004fe5f0(char* entity)
 				if ((*(unsigned char*) (entity + 0x1cc) & 4) != 0) {
 					io_FormatTextBuffer(nb, 0x4080, entity + 0x30, entity + 0x40,
 					             *(unsigned short*) (entity + 0xa));
-					fcn_00545d40(*(int*) (g_7f4ca4 +
+					he_PostEntityMessage(*(int*) (g_7f4ca4 +
 					                      *(unsigned short*) (*(int*) (entity + 0x16c) +
 					                                          0x27) * 0x21c), -1, nb, 0, 0x60a,
 					             g_6964f0);
 				} else {
 					io_FormatTextBuffer(nb, 0x1c51, e, *(unsigned short*) entity);
-					fcn_00545d40(*(int*) (g_7f4ca4 +
+					he_PostEntityMessage(*(int*) (g_7f4ca4 +
 					                      *(unsigned short*) (*(int*) (entity + 0x16c) +
 					                                          0x27) * 0x21c), -1, nb, 0, 0x60a,
 					             g_6b5c60);

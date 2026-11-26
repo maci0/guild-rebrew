@@ -22,7 +22,7 @@ int __cdecl io_FormatTextBuffer(char* dst, int id, ...);
 int __cdecl cm_SendSellObjekt(int a1, int a2, short a3, int a4, char a5, int a6);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a1, int a2, char a3, int a4);
 float __cdecl fcn_0050bb50(int id, unsigned char a);
-int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
+int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
 /* ADDRESS: GOLDTL 0x0057ceb0 */
 void __cdecl fcn_0057ceb0(char* entity)
@@ -99,5 +99,5 @@ next:
 	}
 	cm_RequestTransferCurrencyNoKill(*(int*) (ownerRec + 4), -1, g_773d75, *(unsigned int*) (entity + 0xac));
 	io_FormatTextBuffer(buf, 0x41f0, resolvedTarget, msg);
-	fcn_00545d40(*(int*) (ownerRec + 4), -1, buf, 0, 0x5ff, 0);
+	he_PostEntityMessage(*(int*) (ownerRec + 4), -1, buf, 0, 0x5ff, 0);
 }

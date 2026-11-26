@@ -14,7 +14,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float, int*);
 void __cdecl gm_ResolveEntityById(void**, void**, void**, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 
@@ -47,7 +47,7 @@ void __cdecl he_RunEvent053(int a)
 				gm_ResolveEntityById((void**) &id, 0, 0, found);
 			}
 			if (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7) {
-				fcn_00545d40(*(int*) (p + 4), -1, buf, 0x20, 0x601, 0);
+				he_PostEntityMessage(*(int*) (p + 4), -1, buf, 0x20, 0x601, 0);
 			}
 			if (id != 0) {
 				n = (int) ((double) gm_WalkEntityChain(*(unsigned short*) p) * g_662910);
@@ -55,7 +55,7 @@ void __cdecl he_RunEvent053(int a)
 				cm_RequestTransferCurrencyNoKill(*(int*) (p + 4), -1, (unsigned char) g_773d75, n);
 				if (*(char*) (p + 2) == 6 || *(char*) (p + 2) == 7) {
 					io_FormatTextBuffer(msg, 0x10c3, id, n);
-					fcn_00545d40(*(int*) (p + 4), -1, msg, 0, 0x5ff, 0);
+					he_PostEntityMessage(*(int*) (p + 4), -1, msg, 0, 0x5ff, 0);
 				}
 			}
 		}

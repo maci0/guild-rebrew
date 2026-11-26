@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl fcn_005d9000(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -24,7 +24,7 @@ int __cdecl gm_HandleWunder(char* e)
 		if (*(int*) (e + 0x194) < 4) {
 			return 0x20;
 		}
-		fcn_004c6ae0(*(int*) (e + 4), -4);
+		cm_RequestModifyHealth(*(int*) (e + 4), -4);
 		fcn_005d9000(e, gm_RandomMod(6));
 		return 0x10;
 	}
@@ -40,7 +40,7 @@ int __cdecl gm_HandleWunder(char* e)
 			if (g_100f1dc != -1) {
 				if (g_100f1dc == 0) {
 					if (d2_CheckActionBlocker(e, 4) != 0) {
-						fcn_004c6ae0(*(int*) (e + 4), -4);
+						cm_RequestModifyHealth(*(int*) (e + 4), -4);
 						fcn_005d9000(e, gm_RandomMod(6));
 						r = 1;
 						g_774654 = 1;

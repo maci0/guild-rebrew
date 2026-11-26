@@ -3,7 +3,7 @@ extern char s_6a6ed8[];
 extern char s_6a6ed0[];
 
 unsigned int __cdecl he_RegisterHandler(int, unsigned int, unsigned int);
-unsigned int __cdecl fcn_00530ab0(unsigned int, char *, unsigned int, unsigned int, unsigned int);
+unsigned int __cdecl he_RegisterActionMeta(unsigned int, char *, unsigned int, unsigned int, unsigned int);
 void __cdecl gm_GenerateShuffledIndices(unsigned int, unsigned int);
 
 /* ADDRESS: GOLDTL 0x00570960 */
@@ -36,15 +36,15 @@ unsigned int __cdecl he_RegisterActionHandlers(void)
 	if (he_RegisterHandler(0x14, 0x5601e0, 0x560290)) {
 		return 1;
 	}
-	fcn_00530ab0(0x14, 0, 1, 0x500, 0xae);
+	he_RegisterActionMeta(0x14, 0, 1, 0x500, 0xae);
 	if (he_RegisterHandler(0x15, 0x560940, 0x5609c0)) {
 		return 1;
 	}
-	fcn_00530ab0(0x15, s_6a6510, 1, 0x500, 0xae);
+	he_RegisterActionMeta(0x15, s_6a6510, 1, 0x500, 0xae);
 	if (he_RegisterHandler(0x16, 0x560d30, 0x560eb0)) {
 		return 1;
 	}
-	fcn_00530ab0(0x16, s_6a6ed8, 0, 0x509, -1);
+	he_RegisterActionMeta(0x16, s_6a6ed8, 0, 0x509, -1);
 	if (he_RegisterHandler(0x17, 0x561250, 0x561280)) {
 		return 1;
 	}
@@ -93,7 +93,7 @@ unsigned int __cdecl he_RegisterActionHandlers(void)
 	if (he_RegisterHandler(0x28, 0x565980, 0x565ab0)) {
 		return 1;
 	}
-	fcn_00530ab0(0x28, 0, 1, 0x4ff, 0xbc);
+	he_RegisterActionMeta(0x28, 0, 1, 0x4ff, 0xbc);
 	if (he_RegisterHandler(0x31, 0x5660d0, 0x566110)) {
 		return 1;
 	}
@@ -121,7 +121,7 @@ unsigned int __cdecl he_RegisterActionHandlers(void)
 	if (he_RegisterHandler(0x3c, 0x568df0, 0x568ed0)) {
 		return 1;
 	}
-	fcn_00530ab0(0x3c, 0, 0, 0x504, -1);
+	he_RegisterActionMeta(0x3c, 0, 0, 0x504, -1);
 	if (he_RegisterHandler(0x3d, 0x569700, 0x569760)) {
 		return 1;
 	}
@@ -131,19 +131,19 @@ unsigned int __cdecl he_RegisterActionHandlers(void)
 	if (he_RegisterHandler(0x3f, 0x569f70, 0x569ff0)) {
 		return 1;
 	}
-	fcn_00530ab0(0x3f, 0, 0, 0x50a, -1);
+	he_RegisterActionMeta(0x3f, 0, 0, 0x50a, -1);
 	if (he_RegisterHandler(0x40, 0x56aeb0, 0x56aef0)) {
 		return 1;
 	}
-	fcn_00530ab0(0x40, 0, 0, 0x503, -1);
+	he_RegisterActionMeta(0x40, 0, 0, 0x503, -1);
 	if (he_RegisterHandler(0x48, 0x56b680, 0x56b700)) {
 		return 1;
 	}
-	fcn_00530ab0(0x48, 0, 0, 0x502, -1);
+	he_RegisterActionMeta(0x48, 0, 0, 0x502, -1);
 	if (he_RegisterHandler(0x49, 0x56bf90, 0x56bfd0)) {
 		return 1;
 	}
-	fcn_00530ab0(0x49, 0, 0, 0x50a, -1);
+	he_RegisterActionMeta(0x49, 0, 0, 0x50a, -1);
 	if (he_RegisterHandler(0x4e, 0x56c8f0, 0x56caf0)) {
 		return 1;
 	}
@@ -156,7 +156,7 @@ unsigned int __cdecl he_RegisterActionHandlers(void)
 	if (he_RegisterHandler(0x6c, 0x56db10, 0x56dc30)) {
 		return 1;
 	}
-	fcn_00530ab0(0x6c, s_6a6ed0, 0, 0x505, -1);
+	he_RegisterActionMeta(0x6c, s_6a6ed0, 0, 0x505, -1);
 	if (he_RegisterHandler(0x6e, 0x56de60, 0x56df50)) {
 		return 1;
 	}
@@ -172,7 +172,7 @@ unsigned int __cdecl he_RegisterActionHandlers(void)
 	if (he_RegisterHandler(0x75, 0x56ee40, 0x56ee80)) {
 		return 1;
 	}
-	fcn_00530ab0(0x75, 0, 0, 0x502, -1);
+	he_RegisterActionMeta(0x75, 0, 0, 0x502, -1);
 	if (he_RegisterHandler(0x7c, 0x56fc70, 0x56fcb0)) {
 		return 1;
 	}

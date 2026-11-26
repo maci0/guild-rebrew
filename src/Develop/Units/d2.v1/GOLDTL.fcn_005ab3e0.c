@@ -10,7 +10,7 @@ int __cdecl fcn_004f39b0(int a);
 int __cdecl fcn_004f5dd0(int a);
 void __cdecl fcn_004f5e20(int a, int b);
 int __cdecl gm_WalkEntityChain(unsigned short);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -62,7 +62,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 		scale = (float) gm_WalkEntityChain(g_774970) * 0.005f;
 		factor = 1.5f;
 		if (*(unsigned short*) (churchBuilding + 0x27) != g_774970)
-			factor = (200.0f - fcn_0050f980(g_774970, *(unsigned short*) (churchBuilding + 0x27), 1)) * 0.01f;
+			factor = (200.0f - gm_CalcEntityFavor(g_774970, *(unsigned short*) (churchBuilding + 0x27), 1)) * 0.01f;
 		cost = (int) ((float) kind * factor * scale);
 		scaledPrice = (double) cost * 0.1;
 		cost = (int) (320000.0 < (scaledPrice > 3200.0 ? scaledPrice : 3200.0) ? 320000.0 : (scaledPrice > 3200.0 ? scaledPrice : 3200.0));

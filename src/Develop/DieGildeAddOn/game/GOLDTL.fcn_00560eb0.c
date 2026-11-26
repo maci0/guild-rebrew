@@ -34,13 +34,13 @@ char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
-void __cdecl fcn_00529160(char*, int, int, int);
+void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
 
 /* Query state machine: state 0 rolls a random increase of the entity record
  * selected at e+0xb0, state 1 sends the request to the selected entity. */
 /* ADDRESS: GOLDTL 0x00560eb0 */
-void __cdecl fcn_00560eb0(char* e)
+void __cdecl he_RunTrainierenSkill(char* e)
 {
 	char* who;
 	char* q;
@@ -114,7 +114,7 @@ void __cdecl fcn_00560eb0(char* e)
 			    g_6b5c60, "_NACHRICHTEN_HS_81");
 		}
 	tail:
-		fcn_00529160(q, 0, *(unsigned short*) who, 0);
+		he_AssignActionSlot(q, 0, *(unsigned short*) who, 0);
 		he_FreeAction(e);
 		return;
 	case -2:

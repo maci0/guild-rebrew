@@ -2,7 +2,7 @@
 
 extern float g_66291c;
 
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 void __cdecl d2_BuildPersonStatusDesc(void*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
@@ -21,7 +21,7 @@ int __cdecl fcn_005cb670(char* sourceRecord, int n, char* results, int a3)
 		while ((int) h < 0x85a0a0) {
 			if (h != sourceRecord && *(unsigned short*) h != 0xffff
 			    && *(unsigned char*) (h + 2) >= 2 && *(unsigned char*) (h + 2) <= 7) {
-				d = fcn_0050f980(*(unsigned short*) sourceRecord, *(unsigned short*) h, 1);
+				d = gm_CalcEntityFavor(*(unsigned short*) sourceRecord, *(unsigned short*) h, 1);
 				if (d >= g_66291c && *(int*) (h + 0x210) != *(int*) (sourceRecord + 4)) {
 					count++;
 				}
@@ -35,7 +35,7 @@ int __cdecl fcn_005cb670(char* sourceRecord, int n, char* results, int a3)
 	while ((int) h < 0x85a0a0) {
 		if (h != sourceRecord && *(unsigned short*) h != 0xffff
 		    && *(unsigned char*) (h + 2) >= 2 && *(unsigned char*) (h + 2) <= 7) {
-			d = fcn_0050f980(*(unsigned short*) sourceRecord, *(unsigned short*) h, 1);
+			d = gm_CalcEntityFavor(*(unsigned short*) sourceRecord, *(unsigned short*) h, 1);
 			if (d >= g_66291c && *(int*) (h + 0x210) != *(int*) (sourceRecord + 4)) {
 				if ((float) *(int*) (results + n * 0x38 - 0xc) < d) {
 					*(int*) (results + n * 0x38 - 0x38) = (int) h;

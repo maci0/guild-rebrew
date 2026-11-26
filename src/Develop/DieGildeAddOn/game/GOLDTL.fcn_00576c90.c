@@ -12,7 +12,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl gm_ApplyAssassinDamage(char*, char*, int);
 int __cdecl gm_RecordAssassinEvidence(char*, char*, int);
 int __cdecl gm_GetElapsedMinutes(char*, char*);
@@ -21,13 +21,13 @@ void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl he_TryTriggerAction0x9b(int, char*);
 char* __cdecl he_FindNearestAction0x18(char*, char*, int);
-int __cdecl fcn_00577e70(char*, char*, char*);
+int __cdecl he_RunSpyKillerCheck(char*, char*, char*);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl fcn_004a5e60(unsigned short*, int, int, int, float, float, int*);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x00576c90 */
-void __cdecl fcn_00576c90(char* e)
+void __cdecl he_RunAssassinAction(char* e)
 {
 	char text[0x100];
 	char* h;
@@ -106,23 +106,23 @@ void __cdecl fcn_00576c90(char* e)
 			case 1:
 				if (gm_ApplyAssassinDamage(h, q, *(int*) (e + 0xc0)) != 0) {
 					io_FormatTextBuffer(text, (char*) 0x4004, *(unsigned short*) q);
-					fcn_00545d40(*(int*) (h + 4), -1, text, 1, 0x5fa, (char*) 0x6a7e78);
+					he_PostEntityMessage(*(int*) (h + 4), -1, text, 1, 0x5fa, (char*) 0x6a7e78);
 					io_FormatTextBuffer(text, (char*) 0x4006, *(int*) (e + 0xc0) + 0x4007);
-					fcn_00545d40(*(int*) (q + 4), -1, text, 1, 0x5fb, (char*) 0x6a7e60);
+					he_PostEntityMessage(*(int*) (q + 4), -1, text, 1, 0x5fb, (char*) 0x6a7e60);
 				} else {
 					io_FormatTextBuffer(text, (char*) 0x4005, *(unsigned short*) q);
-					fcn_00545d40(*(int*) (h + 4), -1, text, 1, 0x5fa, (char*) 0x6a7e48);
+					he_PostEntityMessage(*(int*) (h + 4), -1, text, 1, 0x5fa, (char*) 0x6a7e48);
 					io_FormatTextBuffer(text, (char*) 0x400a);
-					fcn_00545d40(*(int*) (q + 4), -1, text, 1, 0x5fb, (char*) 0x6a7e60);
+					he_PostEntityMessage(*(int*) (q + 4), -1, text, 1, 0x5fb, (char*) 0x6a7e60);
 				}
 				break;
 			case 2:
 				if (gm_RecordAssassinEvidence(h, q, *(int*) (e + 0xc0)) != 0) {
 					io_FormatTextBuffer(text, (char*) 0x4019, (char*) 0x400c, *(unsigned short*) q, *(unsigned short*) q);
-					fcn_00545d40(*(int*) (h + 4), -1, text, 1, 0x5fa, 0);
+					he_PostEntityMessage(*(int*) (h + 4), -1, text, 1, 0x5fa, 0);
 				} else {
 					io_FormatTextBuffer(text, (char*) 0x401a, (char*) 0x400c, *(unsigned short*) q, *(unsigned short*) q);
-					fcn_00545d40(*(int*) (h + 4), -1, text, 1, 0x5fa, 0);
+					he_PostEntityMessage(*(int*) (h + 4), -1, text, 1, 0x5fa, 0);
 				}
 				break;
 			case 3:
@@ -225,7 +225,7 @@ void __cdecl fcn_00576c90(char* e)
 			goto done;
 		}
 		r = he_StartHandlungSearch(2, 0, 0x18, 1, *(int*) (e + 0xc4));
-		if (fcn_00577e70(q, e, r) != 0) {
+		if (he_RunSpyKillerCheck(q, e, r) != 0) {
 			*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 			*(int*) (e + 0x84) = fcn_004c5620(6, e);
 			goto done;
@@ -243,7 +243,7 @@ state_minus:
 			cm_RequestKillSpieler(*(int*) (e + 0xb8), 1);
 		}
 		if (*(int*) (e + 0x70) == -1) {
-			fcn_00545d40(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, g_14b5304, 1, 0x5fa, (char*) 0x6a7e24);
+			he_PostEntityMessage(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, g_14b5304, 1, 0x5fa, (char*) 0x6a7e24);
 		}
 	}
 	he_FreeAction(e);

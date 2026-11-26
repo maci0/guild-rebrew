@@ -37,7 +37,7 @@ extern float g_7e3a54;
 extern float g_7e3a58;
 
 float __cdecl fcn_00413d10(Vec3* p);
-void __cdecl fcn_00438b40(View* v, Vec4* p);
+void __cdecl d3_SetNodePosition(View* v, Vec4* p);
 void __cdecl d3_SetObjectRotation(View* v, Vec3* r);
 
 void __cdecl d3_SetCameraHeightFraction(float t)
@@ -54,7 +54,7 @@ void __cdecl d3_SetCameraHeightFraction(float t)
 		p.y = ((View*)d3_ActiveCamera)->pos.y;
 		p.z = ((View*)d3_ActiveCamera)->pos.z;
 		p.y = (g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558 + h;
-		fcn_00438b40(((View*)d3_ActiveCamera), &p);
+		d3_SetNodePosition(((View*)d3_ActiveCamera), &p);
 		r.x = ((View*)d3_ActiveCamera)->rot.x;
 		r.y = ((View*)d3_ActiveCamera)->rot.y;
 		r.z = ((View*)d3_ActiveCamera)->rot.z;

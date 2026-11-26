@@ -44,13 +44,13 @@ int __cdecl gm_IsWarehouse(char*);
 void __cdecl fcn_004c5d20(int, int);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-char* __cdecl fcn_005049a0(char*);
+char* __cdecl gm_FindBuildingPrimarySlot(char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_005ba910(void*, int);
 
-void __cdecl fcn_0055d770(char* e)
+void __cdecl he_StepTransportCart(char* e)
 {
 	char* s44;
 	Level* lv;
@@ -113,7 +113,7 @@ void __cdecl fcn_0055d770(char* e)
 					}
 				}
 				if (!(r[0x20] & 1) && e[0xf2] == 0) {
-					h = fcn_005049a0(c);
+					h = gm_FindBuildingPrimarySlot(c);
 					if (h != 0) {
 						he_MessageBoxQuickjump(g_7f4ca0[*(unsigned short*) (e + 8)].id, *(int*) (r + 2), buf, 0, 0x608,
 						             *(int*) (c + 1), *(int*) (h + 2), 0, 0);

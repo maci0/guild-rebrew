@@ -69,7 +69,7 @@ void __cdecl fcn_004e6c60(int);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x004e51d0 */
-void __cdecl fcn_004e51d0(unsigned char* s, int id)
+void __cdecl cut_RunTurnRound(unsigned char* cutscene, int id)
 {
 	rec35c c1;
 	rec35c c2;
@@ -88,15 +88,15 @@ void __cdecl fcn_004e51d0(unsigned char* s, int id)
 	int* ids;
 
 	saved = cut_GetRandSeed();
-	fcn_004e4f10(s);
+	fcn_004e4f10(cutscene);
 	if (g_7747b0 & 4) {
-		if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
+		if (*(int*) (cutscene + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
 			if (g_772f3c != 0) {
 				goto label_4e526f;
 			}
 			memset(&msg, 0, sizeof(msg));
-			msg.head = *(int*) s;
-			sprintf(msg.text, s_68d580, s[8]);
+			msg.head = *(int*) cutscene;
+			sprintf(msg.text, s_68d580, cutscene[8]);
 			cm_RequestSysMessage(0x11, &msg);
 		}
 label_4e526f:
@@ -106,36 +106,36 @@ label_4e526f:
 	}
 	fcn_00533a40((int) &g_6b5c60);
 	if (g_7747b0 & 8) {
-		for (i = 0; i < (int) s[0x30]; i++) {
+		for (i = 0; i < (int) cutscene[0x30]; i++) {
 			g_772f28 = i;
-			if (*(int*) (s + 0x34 + i * 4) == -1) {
+			if (*(int*) (cutscene + 0x34 + i * 4) == -1) {
 				continue;
 			}
-			g_772f24 = gm_LookupEntityRecordById(*(int*) (s + 0x34 + i * 4));
+			g_772f24 = gm_LookupEntityRecordById(*(int*) (cutscene + 0x34 + i * 4));
 			if (g_772f24 == 0) {
-				*(int*) (s + 0x34 + i * 4) = -1;
+				*(int*) (cutscene + 0x34 + i * 4) = -1;
 				continue;
 			}
 			rec = &((rec35c*) g_9b0e20)[i];
 			if (*(unsigned char*) (g_772f24 + 2) == 6) {
 				cut_ClockDeadline = g_68bfbc + cut_CurrentTick;
 				cut_ClockExpired = 0;
-				((cmd_entry*) g_9b0844)[s[8]].f0(rec, id);
-			} else if (((cmd_entry*) g_9b0844)[s[8]].f4 != 0) {
-				((cmd_entry*) g_9b0844)[s[8]].f4(rec, id);
+				((cmd_entry*) g_9b0844)[cutscene[8]].f0(rec, id);
+			} else if (((cmd_entry*) g_9b0844)[cutscene[8]].f4 != 0) {
+				((cmd_entry*) g_9b0844)[cutscene[8]].f4(rec, id);
 			}
-			d2_SetForm(*(int*) (s + 0x2c), 0);
+			d2_SetForm(*(int*) (cutscene + 0x2c), 0);
 			io_AppendText((int) ((char*) rec + 0x14));
 			io_AppendText((int) s_68b300);
 		}
 	} else if (g_7747b0 & 4) {
 		g_772f24 = (unsigned int) g_774970 * 0x21c + 0x7f4ca0;
-		kind = *(unsigned char*) ((unsigned int) s[8] * 0x14 + 0x9b084c);
+		kind = *(unsigned char*) ((unsigned int) cutscene[8] * 0x14 + 0x9b084c);
 		if (kind == 1) {
-			if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
+			if (*(int*) (cutscene + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
 				rec = (rec35c*) g_9b0e20;
-				ids = (int*) (s + 0x34);
-				for (i = 0; i < (int) s[0x30]; i++, ids++) {
+				ids = (int*) (cutscene + 0x34);
+				for (i = 0; i < (int) cutscene[0x30]; i++, ids++) {
 					ent = gm_LookupEntityRecordById(*ids);
 					if (ent != 0
 							&& *(unsigned char*) (ent + 2) != 6
@@ -143,17 +143,17 @@ label_4e526f:
 							&& rec->f8 == 0) {
 						c1 = *rec;
 						g_772f24 = ent;
-						if (((cmd_entry*) g_9b0844)[s[8]].f4 != 0) {
-							((cmd_entry*) g_9b0844)[s[8]].f4(&c1, id);
+						if (((cmd_entry*) g_9b0844)[cutscene[8]].f4 != 0) {
+							((cmd_entry*) g_9b0844)[cutscene[8]].f4(&c1, id);
 						}
 						c1.f8 = 1;
 						c1.fc = 0;
 						cm_StageRawPacketPayload(0x35c, &c1);
-						h = cm_RequestSendCutInfo(*(int*) (ent + 4), *(int*) s);
+						h = cm_RequestSendCutInfo(*(int*) (ent + 4), *(int*) cutscene);
 						while (cm_GetCommandStatus(h) == 0) {
 							fcn_00535960();
 						}
-						d2_AppendPendingPlayerNames(s);
+						d2_AppendPendingPlayerNames(cutscene);
 						main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 					}
 					rec++;
@@ -161,80 +161,80 @@ label_4e526f:
 			}
 			g_772f24 = (unsigned int) g_774970 * 0x21c + 0x7f4ca0;
 			ent = *(int*) (g_772f24 + 4);
-			for (i = 0; i < (int) s[0x30]; i++) {
-				if (*(int*) (s + 0x34 + i * 4) == ent) {
+			for (i = 0; i < (int) cutscene[0x30]; i++) {
+				if (*(int*) (cutscene + 0x34 + i * 4) == ent) {
 					c1 = ((rec35c*) g_9b0e20)[i];
 					cut_ClockDeadline = g_68bfbc + cut_CurrentTick;
 					cut_ClockExpired = 0;
-					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
+					((cmd_entry*) g_9b0844)[cutscene[8]].f0(&c1, id);
 					c1.f8 = 1;
 					c1.fc = 0;
 					cm_StageRawPacketPayload(0x35c, &c1);
-					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) s);
+					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) cutscene);
 					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
 					break;
 				}
 			}
-			while (fcn_004e4fc0(s) == 0) {
-				d2_AppendPendingPlayerNames(s);
+			while (fcn_004e4fc0(cutscene) == 0) {
+				d2_AppendPendingPlayerNames(cutscene);
 				fcn_00533a40(g_14ac5ec);
 				main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 			}
 		} else if (kind == 0) {
 			pos = -1;
 			found = -1;
-			for (i = 0; i < (int) s[0x30]; i++) {
-				if (*(int*) (s + 0x34 + i * 4) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
+			for (i = 0; i < (int) cutscene[0x30]; i++) {
+				if (*(int*) (cutscene + 0x34 + i * 4) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
 					pos = i;
 					if (pos != -1) {
-						found = fcn_004e51a0(s, pos);
+						found = fcn_004e51a0(cutscene, pos);
 					}
 					break;
 				}
 			}
-			while (fcn_004e4fc0(s) == 0) {
-				d2_AppendPendingPlayerNames(s);
+			while (fcn_004e4fc0(cutscene) == 0) {
+				d2_AppendPendingPlayerNames(cutscene);
 				main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 				if (pos != -1
 						&& (pos == 0 || ((rec35c*) g_9b0e20)[found].f8 == 1)
 						&& ((rec35c*) g_9b0e20)[pos].f8 == 0) {
 					g_772f28 = pos;
 					c1 = ((rec35c*) g_9b0e20)[pos];
-					g_772f24 = gm_LookupEntityRecordById(*(int*) (s + 0x34 + pos * 4));
-					d2_AppendPendingPlayerNames(s);
+					g_772f24 = gm_LookupEntityRecordById(*(int*) (cutscene + 0x34 + pos * 4));
+					d2_AppendPendingPlayerNames(cutscene);
 					cut_ClockDeadline = g_68bfbc + cut_CurrentTick;
 					cut_ClockExpired = 0;
-					((cmd_entry*) g_9b0844)[s[8]].f0(&c1, id);
+					((cmd_entry*) g_9b0844)[cutscene[8]].f0(&c1, id);
 					c1.f8 = 1;
 					c1.fc = 0;
 					cm_StageRawPacketPayload(0x35c, &c1);
-					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) s);
+					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) cutscene);
 					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
-					d2_AppendPendingPlayerNames(s);
+					d2_AppendPendingPlayerNames(cutscene);
 					main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 				}
-				if (*(int*) (s + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
-					for (i = 0; i < (int) s[0x30]; i++) {
-						ent = gm_LookupEntityRecordById(*(int*) (s + 0x34 + i * 4));
+				if (*(int*) (cutscene + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
+					for (i = 0; i < (int) cutscene[0x30]; i++) {
+						ent = gm_LookupEntityRecordById(*(int*) (cutscene + 0x34 + i * 4));
 						if (ent != 0
 								&& *(unsigned char*) (ent + 2) != 6
 								&& *(unsigned char*) (ent + 2) != 7
-								&& (i == 0 || ((rec35c*) g_9b0e20)[fcn_004e51a0(s, i)].f8 == 1)
+								&& (i == 0 || ((rec35c*) g_9b0e20)[fcn_004e51a0(cutscene, i)].f8 == 1)
 								&& ((rec35c*) g_9b0e20)[i].f8 == 0) {
 							g_772f28 = i;
 							c2 = ((rec35c*) g_9b0e20)[i];
 							g_772f24 = ent;
-							if (((cmd_entry*) g_9b0844)[s[8]].f4 != 0) {
-								((cmd_entry*) g_9b0844)[s[8]].f4(&c2, id);
+							if (((cmd_entry*) g_9b0844)[cutscene[8]].f4 != 0) {
+								((cmd_entry*) g_9b0844)[cutscene[8]].f4(&c2, id);
 							}
 							c2.f8 = 1;
 							c2.fc = 0;
 							cm_StageRawPacketPayload(0x35c, &c2);
-							h = cm_RequestSendCutInfo(*(int*) (ent + 4), *(int*) s);
+							h = cm_RequestSendCutInfo(*(int*) (ent + 4), *(int*) cutscene);
 							while (cm_GetCommandStatus(h) == 0) {
 								fcn_00535960();
 							}
@@ -243,7 +243,7 @@ label_4e526f:
 					}
 				}
 			}
-			d2_AppendPendingPlayerNames(s);
+			d2_AppendPendingPlayerNames(cutscene);
 			main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 		}
 	}

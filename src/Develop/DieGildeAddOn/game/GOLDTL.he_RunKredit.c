@@ -6,7 +6,7 @@ int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AccumulateTyped2(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl fcn_004c5620(int, int);
 int __cdecl fcn_005c4ec0(int, int, int, char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -46,7 +46,7 @@ void __cdecl he_RunKredit(int loanEvent)
 			       (unsigned short) *(unsigned short*) (obj + 0x27) * 0x21c;
 			if (!n) {
 				io_FormatTextBuffer(buf, 0x18e7, *(int*) (loanEvent + 0xb4));
-				fcn_00545d40(*(int*) (slot + 4), -1, buf, 0, 0x5ff, 0);
+				he_PostEntityMessage(*(int*) (slot + 4), -1, buf, 0, 0x5ff, 0);
 				*(int*) (loanEvent + 0x84) = fcn_004c5620(-1, loanEvent);
 				return;
 			}
@@ -60,7 +60,7 @@ void __cdecl he_RunKredit(int loanEvent)
 				*(int*) ((char*) obj + 0x55) += n;
 				if (*(unsigned char*) (slot + 2) == 6 ||
 				    *(unsigned char*) (slot + 2) == 7) {
-					fcn_00545d40(*(int*) (loanEvent + 0xb0), -1, msg, 0, 0x5ff, 0);
+					he_PostEntityMessage(*(int*) (loanEvent + 0xb0), -1, msg, 0, 0x5ff, 0);
 				}
 			} else {
 				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) obj + 1), *(int*) (loanEvent + 0xb0),
@@ -92,14 +92,14 @@ void __cdecl he_RunKredit(int loanEvent)
 				fcn_005c4ec0(*(int*) ((char*) obj + 1), n,
 				           *(int*) (loanEvent + 0xb4), buf);
 				if (time < *(int*) (loanEvent + 0xb4))
-					fcn_00545d40(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x699a88);
+					he_PostEntityMessage(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x699a88);
 				else
-					fcn_00545d40(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x6b5c60);
+					he_PostEntityMessage(*(int*) (loanEvent + 0xb0), -1, buf, 0, 0x5ff, (char*) 0x6b5c60);
 				if (*(unsigned char*) (slot + 2) == 6 ||
 				    *(unsigned char*) (slot + 2) == 7) {
 					io_FormatTextBuffer(msg, 0x18d8, *(unsigned short*) n, obj,
 					           *(int*) (loanEvent + 0xb4));
-					fcn_00545d40(*(int*) (slot + 4), -1, msg, 0, 0x5ff, 0);
+					he_PostEntityMessage(*(int*) (slot + 4), -1, msg, 0, 0x5ff, 0);
 				}
 			}
 		}
@@ -111,7 +111,7 @@ void __cdecl he_RunKredit(int loanEvent)
 			       (unsigned short) *(unsigned short*) (obj + 0x27) * 0x21c;
 			if (!n) {
 				io_FormatTextBuffer(msg, 0x18e7, *(int*) (loanEvent + 0xb4));
-				fcn_00545d40(*(int*) (slot + 4), -1, msg, 0, 0x5ff, 0);
+				he_PostEntityMessage(*(int*) (slot + 4), -1, msg, 0, 0x5ff, 0);
 			}
 		}
 	}

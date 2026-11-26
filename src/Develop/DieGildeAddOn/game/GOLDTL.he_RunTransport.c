@@ -43,12 +43,12 @@ char *__cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_GetBuildingTechEffect(char *, int, int);
 void __cdecl gm_ChangeObjektZustand(char *, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
-void __cdecl fcn_00545d40(int, int, char *, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char *, int, int, int);
 void __cdecl he_FreeAction(char *);
 void __cdecl fcn_00549330(char *, int);
-void __cdecl fcn_0055d770(char *);
-void __cdecl fcn_0055dab0(char *);
-void __cdecl fcn_0055e4a0(char *);
+void __cdecl he_StepTransportCart(char *);
+void __cdecl he_StepTransportCarrier(char *);
+void __cdecl he_StepTransportEntry(char *);
 void __cdecl he_TransportStadtStadt(char *);
 void __cdecl ReportClientMessage(char *);
 void __cdecl sb_PlayVoice(int, char *, int, int, int, int, int);
@@ -116,13 +116,13 @@ void __cdecl he_RunTransport(char *e)
 		n = *(int *)(e + 0xc8);
 		*(int *)(e + 0xec) = -1;
 		if (n == 2) {
-			fcn_0055d770(e);
+			he_StepTransportCart(e);
 		} else if (n == 1) {
-			fcn_0055dab0(e);
+			he_StepTransportCarrier(e);
 		} else if (n == 3) {
 			he_TransportStadtStadt(e);
 		} else if (n == 4) {
-			fcn_0055e4a0(e);
+			he_StepTransportEntry(e);
 		} else {
 			ReportClientMessage(g_6a63ec);
 		}
@@ -135,7 +135,7 @@ void __cdecl he_RunTransport(char *e)
 			gm_ResolveEntityById(0, &q, 0, *(int *)(e + 0xac));
 			if ((unsigned short)gm_RandomMod(0x1e) > *(unsigned char *)(q + 0x12)) {
 				io_FormatTextBuffer(buf, 0x1c46, *(unsigned short *)q * 2 + 0x9a8);
-				fcn_00545d40(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x5ec, 0);
+				he_PostEntityMessage(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x5ec, 0);
 				fcn_004c6530(*(int *)(q + 2));
 				*(int *)(e + 0x84) = fcn_004c5620(-1, e);
 				return;
@@ -164,7 +164,7 @@ void __cdecl he_RunTransport(char *e)
 		if (n > (f * 0.01) * *(unsigned char *)(q + 0x12)) {
 			if ((g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].kind == 6 || g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].kind == 7) && (*(unsigned char *)(q + 0x20) & 1) == 0) {
 				io_FormatTextBuffer(buf, 0x1c45);
-				fcn_00545d40(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x608, 0);
+				he_PostEntityMessage(g_7f4ca0[(unsigned short)*(unsigned short *)(e + 8)].id, -1, buf, 0, 0x608, 0);
 			}
 			gm_ChangeObjektZustand(*(char **)(q + 2), -0xa);
 			*(char *)(e + 0xf1) = 2;

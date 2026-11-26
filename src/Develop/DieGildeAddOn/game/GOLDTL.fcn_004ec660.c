@@ -7,7 +7,7 @@ extern char g_68deb8[];
 
 int __cdecl amt_SelectOfficeCandidates(void*, int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 void __cdecl amt_NotifyLowRankEligibility(void* entity)
 {
@@ -31,5 +31,5 @@ void __cdecl amt_NotifyLowRankEligibility(void* entity)
 			    *(int*) (items + i * 0xc) + 0x253);
 		}
 	}
-	fcn_00545d40(*(int*) ((char*) entity + 4), -1, buf, 1, 0x5ec, (void*) 0);
+	he_PostEntityMessage(*(int*) ((char*) entity + 4), -1, buf, 1, 0x5ec, (void*) 0);
 }

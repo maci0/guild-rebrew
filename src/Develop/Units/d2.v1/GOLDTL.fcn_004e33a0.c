@@ -24,13 +24,13 @@ void __cdecl SelectTextureSet(int a, int b, int c, int d);
 void __cdecl d3_TransformPoint(int a, int b, int* c);
 void* __cdecl fcn_004e4a80(char* name, int* b);
 void __cdecl ch_SetToDummy(int a, int b);
-int __cdecl fcn_004fda30(unsigned short a);
+int __cdecl gm_SelectEntityHeadSet(unsigned short a);
 void* __cdecl fcn_004e44b0(char* name, int a);
 void __cdecl fcn_004e4b40(int id, int bank, char* label, int a, int b);
 void __cdecl fcn_00471af0(int dlg, int a);
 void __cdecl fcn_00471d80(int dlg, int a);
 void __cdecl fcn_004e44f0(int a);
-void __cdecl fcn_004e51d0(int arg, int* ids);
+void __cdecl cut_RunTurnRound(int arg, int* ids);
 void __cdecl cut_WaitTicks(int a);
 int __cdecl gm_GetGuildHall(int a);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
@@ -165,7 +165,7 @@ void __cdecl cut_RunAuction(int* arg)
 		npc2 = fcn_00445600(0, 0x100, 0, temp);
 		if (npc2 != 0)
 			d3_TransformPoint((int) npc2, (int) npc2 + 0x4c, bid);
-		foundName = bidders[i] != 0 ? fcn_004fda30(*(unsigned short*) (char*) bidders[i]) : 0;
+		foundName = bidders[i] != 0 ? gm_SelectEntityHeadSet(*(unsigned short*) (char*) bidders[i]) : 0;
 		if (bidders[i] != 0 && foundName != 0) {
 			fcn_0064d41a(temp, (char*) 0x679060,
 			    (char*) (foundName + 4));
@@ -212,7 +212,7 @@ void __cdecl cut_RunAuction(int* arg)
 			break;
 		best = 0;
 		bestFrom = start;
-		fcn_004e51d0((int) arg, states);
+		cut_RunTurnRound((int) arg, states);
 		if (start > 6 && cut_RandMod(3) != 0)
 			fcn_004e4b40(cut_RandMod(4) != 0 ? -4 : -2,
 			    bank_comments, "_VERSTEIGERUNG_KOMMENTARE",

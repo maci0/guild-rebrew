@@ -12,7 +12,7 @@ extern int g_772f8c;
 extern ALCHEMY_DRAW_SLOT g_772f90[3];
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
-void __cdecl fcn_004ecaa0(int v);
+void __cdecl ahm_ResetAlchemyState(int v);
 
 int __cdecl ls_LoadAlchemyDrawSlots(void* file)
 {
@@ -50,6 +50,6 @@ int __cdecl ls_LoadAlchemyDrawSlots(void* file)
 		if (!ls_ReadVfsDataChecked(&g_772f90[i].v.f, 4, 1, file))
 			return 0;
 	}
-	fcn_004ecaa0(0);
+	ahm_ResetAlchemyState(0);
 	return 1;
 }

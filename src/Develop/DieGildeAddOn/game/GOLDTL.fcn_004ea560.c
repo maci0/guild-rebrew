@@ -4,7 +4,7 @@ extern char g_7f4ca4[];
 
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 void __cdecl amt_NotifyOfficeLost(void* entity, char* role)
 {
@@ -22,9 +22,9 @@ void __cdecl amt_NotifyOfficeLost(void* entity, char* role)
 		slot = g_7f4ca4;
 		do {
 			if (*(char*) (slot - 2) == 6) {
-				fcn_00545d40(*(int*) slot, -1, buf, 0, 0x5fd, g_6b5c60);
+				he_PostEntityMessage(*(int*) slot, -1, buf, 0, 0x5fd, g_6b5c60);
 			} else if (*(char*) (slot - 2) == 7) {
-				fcn_00545d40(*(int*) slot, -1, buf, 0, 0x5fe, g_6b5c60);
+				he_PostEntityMessage(*(int*) slot, -1, buf, 0, 0x5fe, g_6b5c60);
 			}
 			slot += 0x21c;
 		} while ((int) slot < (int) (g_7f4ca4 + 0x65400));

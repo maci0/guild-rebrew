@@ -27,7 +27,7 @@ void __cdecl he_FreeAction(char* t);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004c5620(int a1, char* e);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl gm_IncreaseEntitySkill(ENTITY_RECORD* e, int v);
@@ -73,7 +73,7 @@ void __cdecl he_RunApTraitAction(char* t)
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x1a9f, e->entity_index);
-		fcn_00545d40(*(int*) (p + 4), *(int*) (p + 4), buf, 0, 0x5f4, 0);
+		he_PostEntityMessage(*(int*) (p + 4), *(int*) (p + 4), buf, 0, 0x5f4, 0);
 		q = (char*) gm_GetEntityTableEntry((char*) (p));
 		if (q != 0) {
 			(*(int*) (q + 0x64))++;

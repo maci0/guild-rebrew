@@ -22,7 +22,7 @@ extern int __cdecl gm_ResolveEntityById(void **a0, void **a1, void **a2, int a3)
 extern int __cdecl gm_SumQueryEntryValues(int a0, unsigned char a1);
 extern unsigned short __cdecl gm_RandomMod(int a0);
 extern int __cdecl ai_SelectBestMethod(int a0, int a1, int a2, void *a3, void *a4);
-extern int __cdecl fcn_004a4fb0(void *a0, void *a1, char *a2, int a3);
+extern int __cdecl ai_FindMissingBuildingUpgrade(void *a0, void *a1, char *a2, int a3);
 extern float __cdecl gm_GetCityStatsSummary(float *a0);
 extern int __cdecl fcn_0050d170(int a0);
 
@@ -75,7 +75,7 @@ int __cdecl ai_StartBuergermeisterKerker(int a0, unsigned short *a1, int a2, Msg
                 goto label_49df97;
         }
     }
-    v6 = fcn_004a4fb0(&v14, &v13, targetEntity, 0);
+    v6 = ai_FindMissingBuildingUpgrade(&v14, &v13, targetEntity, 0);
     if (v6 != 0)
     {
         v12.type = 2;

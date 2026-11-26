@@ -57,9 +57,9 @@ void __cdecl fcn_004e8700(int);
 void __cdecl fcn_004e8730(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddObjekt(int a, int b, int c);
-char* __cdecl fcn_004ad130(int, int*);
+char* __cdecl gm_LookupHistoricalEntry(int, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl fcn_004ae040(void);
 int __cdecl fcn_004ae060(void);
 void __cdecl fcn_004adf80(void);
@@ -116,9 +116,9 @@ void __cdecl fcn_004adcd0(int mode, int unused, unsigned short owner, Guild4adc*
 		int tmp;
 
 		if (mode == 0x15) {
-			p = fcn_004ad130(g_7728cc, &tmp);
+			p = gm_LookupHistoricalEntry(g_7728cc, &tmp);
 		} else {
-			p = fcn_004ad130(g_7728c4, &tmp);
+			p = gm_LookupHistoricalEntry(g_7728c4, &tmp);
 		}
 	}
 	strcpy(g->name, p + 0xc);
@@ -126,14 +126,14 @@ void __cdecl fcn_004adcd0(int mode, int unused, unsigned short owner, Guild4adc*
 	if (mode == 0x15) {
 		if ((*(int*)&gm_GameTime) > 0 && k != 0xffff) {
 			io_FormatTextBuffer(buf, 0x42b3, g->id);
-			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_01");
+			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_01");
 		}
 		g->f18c = fcn_004ae040();
 		fcn_004adf80();
 	} else {
 		if ((*(int*)&gm_GameTime) > 0 && k != 0xffff) {
 			io_FormatTextBuffer(buf, 0x42b5, g->id);
-			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_03");
+			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_03");
 		}
 		g->f18c = fcn_004ae060();
 		fcn_004adfe0();

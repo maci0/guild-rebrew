@@ -33,7 +33,7 @@ void __cdecl fcn_004c5980(void*);
 int __cdecl fcn_004c5620(int, char*);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00554b90 */
 void __cdecl he_RunAction0x67(char* e)
@@ -67,7 +67,7 @@ void __cdecl he_RunAction0x67(char* e)
 		for (i = 0; i < 768; i++) { h = &g_7f4ca0[i];
 
 			if ((h->type == 6 || h->type == 7) && h->level > 0) {
-				fcn_00545d40(h->handle, h->handle, buf, 0, 0x601, 0);
+				he_PostEntityMessage(h->handle, h->handle, buf, 0, 0x601, 0);
 			}
 		}
 		(*(int*) (e + 0x52))++;

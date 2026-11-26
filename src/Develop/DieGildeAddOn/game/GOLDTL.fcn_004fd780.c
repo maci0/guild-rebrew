@@ -5,7 +5,7 @@ void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl fcn_00535960(void);
-int __cdecl fcn_004f4f60(int, int, int, int, int);
+int __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
 extern int gm_GameTime;
 extern int g_773d48;
@@ -70,7 +70,7 @@ void __cdecl gm_TickObjectTable(void)
 				if (*(int*) (p + 0x16e) != 0) {
 					arg = *(int*) (*(int*) (p + 0x16e) + 1);
 				}
-				if (fcn_004f4f60(2, mode == 0, *(int*) (p + 2), -1, arg) != -1) {
+				if (gm_TryRecordCrime(2, mode == 0, *(int*) (p + 2), -1, arg) != -1) {
 					g_773d48++;
 				}
 				if (*(float*) (p + 0x1ce) > 0.1f) {

@@ -79,7 +79,7 @@ void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 int __cdecl fcn_0046fac0(int, int, char*, int);
 void __cdecl d2_SetElementFont(int, int);
@@ -207,7 +207,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 							d2_AddToRadioGroup(holder, btn);
 						}
 					}
-					progress = (int) fcn_0050f980(g_774970,
+					progress = (int) gm_CalcEntityFavor(g_774970,
 					                              (unsigned short) s->id, 1);
 					s->label = d2_AddElementToWindow(0x98, y + 1,
 					                        ((GOLDTL_House5cff*) g_7f4ca0)[s->id].f18c,

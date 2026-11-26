@@ -28,7 +28,7 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_004727a0(int, int);
 int __cdecl fcn_00519190(int, ...);
 void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
-void __cdecl fcn_00545c50(int);
+void __cdecl d2_HighlightSelectedControl(int);
 int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl sb_StopVoice(void*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -122,7 +122,7 @@ done:
         if (g_774964 != 2)
             sb_PlayVoice((int) g_7747b8, "NeueMessage_s_01", 1, 0x3f, 0x7f, 0, 0);
         if (*(unsigned char*) (e + 0xf0) & 8)
-            fcn_00545c50(*(int*) (e + 0x74));
+            d2_HighlightSelectedControl(*(int*) (e + 0x74));
         if (*(unsigned char*) (e + 0xf0) & 0x10) {
             str = *(char**) (e + 0x7c);
             str = str + strlen(str) + 1;

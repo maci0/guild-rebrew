@@ -16,7 +16,7 @@ struct house {
 
 void __cdecl cm_RequestModifyEntityLevel(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 
 void __cdecl he_SwapZigeunerMoods(struct house* a, struct house* b)
 {
@@ -58,5 +58,5 @@ void __cdecl he_SwapZigeunerMoods(struct house* a, struct house* b)
 	}
 	io_FormatTextBuffer(text1, 0x41e1, loi + 0x16b7, hii + 0x16b7);
 	io_FormatTextBuffer(text2, id, text1);
-	fcn_00545d40(b->owner, -1, text2, 1, 0x5fb, name);
+	he_PostEntityMessage(b->owner, -1, text2, 1, 0x5fb, name);
 }

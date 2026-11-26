@@ -14,7 +14,7 @@ extern int g_6b5c30;
 extern unsigned int g_67529c;
 extern int g_67a370;
 
-extern int __cdecl fcn_00402610(char*);
+extern int __cdecl d3sm_GetObjectSuperMap(char*);
 extern void __cdecl d3_RemoveObjectAnim(char*);
 extern int __cdecl d3_GetContextIndex(int);
 extern int __cdecl fcn_0041db70(int, const char*);
@@ -53,7 +53,7 @@ void __cdecl fcn_0040aa00(char* obj)
 	char buf[0x100];
 	char name[0x80];
 
-	v = fcn_00402610(*(char**) (obj + 0x14));
+	v = d3sm_GetObjectSuperMap(*(char**) (obj + 0x14));
 	inst = *(char**) (obj + 0x14);
 	if (*(int*) (obj + 0x154) != -1) {
 		if (ch_UpdateTime < *(int*) (obj + 0x154) + 200) {

@@ -15,11 +15,11 @@ extern int g_7747ac;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d2_SetGroupVisibility(int, int);
-void __cdecl fcn_00535560(Panel*);
+void __cdecl d2_TurnBookPagesBack(Panel*);
 void __cdecl fcn_00535550(Panel*);
 void __cdecl fcn_00471490(int);
 
-void __cdecl fcn_005350d0(Panel* p)
+void __cdecl d2_UpdatePagedPanel(Panel* p)
 {
 	int i;
 
@@ -32,7 +32,7 @@ void __cdecl fcn_005350d0(Panel* p)
 		}
 	}
 	if (p->owner1 != -1 && d2_CurrentElementId == p->owner1 && g_14ce8cc != 0) {
-		fcn_00535560(p);
+		d2_TurnBookPagesBack(p);
 	}
 	if (p->owner2 != -1 && d2_CurrentElementId == p->owner2 && g_14ce8cc != 0) {
 		fcn_00535550(p);

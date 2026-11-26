@@ -63,11 +63,11 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004849b0(Bld*, int, int);
-void __cdecl fcn_00487000(Bld*);
+void __cdecl ai_ManageMeisterWorkers(Bld*);
 void __cdecl fcn_00487970(int, Bld*, int);
 void __cdecl fcn_00487c00(int, Bld*, int);
 void __cdecl fcn_00487470(Bld*);
-int __cdecl fcn_00486640(Bld*, PRODUCTION_GOODS_RECORD*, int);
+int __cdecl ai_CanProduceGood(Bld*, PRODUCTION_GOODS_RECORD*, int);
 void __cdecl fcn_004868d0(Bld*, PRODUCTION_GOODS_RECORD*);
 int __cdecl fcn_005b1e40(int);
 int __cdecl gm_FindCityItemHolder(int);
@@ -75,7 +75,7 @@ int __cdecl gm_eval_SlotVoll(int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_0047e220(int);
 void __cdecl ai_PlanResourceRestock(Bld*, int);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl ai_CancelBlockedActions(Bld*, int);
 void __cdecl fcn_00487f90(Req*);
 void __cdecl fcn_00489250(Bld*);
@@ -108,7 +108,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 	if (craft == 0)
 		return;
 	fcn_004849b0(bld, prod, craft);
-	fcn_00487000(bld);
+	ai_ManageMeisterWorkers(bld);
 	fcn_00487970(craft, bld, 0x4b);
 	fcn_00487c00(craft, bld, 0x19);
 	fcn_00487470(bld);
@@ -118,7 +118,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 			if (rec->goods_id != (int) bld->id)
 				continue;
 			if ((int) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36) <= rec->unk_40 &&
-			    fcn_00486640(bld, rec, 1)) {
+			    ai_CanProduceGood(bld, rec, 1)) {
 				rec->flags = rec->flags | 8;
 				fcn_004868d0(bld, rec);
 				bld->id = (unsigned short) rec->goods_id;
@@ -137,7 +137,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 				if (rec->goods_id != (int) bld->id)
 					continue;
 				if ((int) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36) <= rec->unk_40 &&
-				    fcn_00486640(bld, rec, 1)) {
+				    ai_CanProduceGood(bld, rec, 1)) {
 					rec->flags = rec->flags | 8;
 					fcn_004868d0(bld, rec);
 					bld->id = (unsigned short) rec->goods_id;
@@ -167,14 +167,14 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 				if (val == 0)
 					break;
 				if ((int) ((unsigned short) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36) + rec->unk_3c) <= gm_eval_SlotVoll(val, rec->goods_id, 1000000)) {
-					if (fcn_00486640(bld, rec, 1)) {
+					if (ai_CanProduceGood(bld, rec, 1)) {
 						rec->flags = rec->flags | 8;
 						fcn_004868d0(bld, rec);
 						bld->id = (unsigned short) rec->goods_id;
 						sprintf(name, "Produktion von %s starten, da Humanplayer es so will.", (((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 1);
 						goto done;
 					}
-					if (fcn_00486640(bld, rec, 0)) {
+					if (ai_CanProduceGood(bld, rec, 0)) {
 						fcn_004868d0(bld, rec);
 						bld->id = (unsigned short) rec->goods_id;
 						sprintf(name, "Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will", (((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 1);
@@ -210,7 +210,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 			continue;
 		if ((int) ((unsigned short) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36) + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
 			continue;
-		if (!fcn_00486640(bld, rec, 1))
+		if (!ai_CanProduceGood(bld, rec, 1))
 			continue;
 		rec->flags = rec->flags | 8;
 		fcn_004868d0(bld, rec);
@@ -235,7 +235,7 @@ void __cdecl ai_StartMeisterProduction(Bld* bld)
 			continue;
 		if ((int) ((unsigned short) *(unsigned short*) ((((char*)&((OBJECT_PROTOTYPE*)lpObjektePROT)[rec->goods_id])) + 0x36) + rec->unk_3c) > gm_eval_SlotVoll(n, rec->goods_id, 1000000))
 			continue;
-		if (!fcn_00486640(bld, rec, 0))
+		if (!ai_CanProduceGood(bld, rec, 0))
 			continue;
 		fcn_004868d0(bld, rec);
 		bld->id = (unsigned short) rec->goods_id;
@@ -314,7 +314,7 @@ done:
 			if (*(unsigned char*) (*(int*) (n + 0x17a)) == 0x15)
 				continue;
 		}
-		fcn_00529160(bld->x16c, 0, (int) *(unsigned short*) (n - 2), 0);
+		he_AssignActionSlot(bld->x16c, 0, (int) *(unsigned short*) (n - 2), 0);
 		put.count = put.count + 1;
 	}
 	if (g_100dc20 == bld->x16c)

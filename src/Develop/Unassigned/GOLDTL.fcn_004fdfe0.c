@@ -28,7 +28,7 @@ extern char g_696488[];
 char* __cdecl fcn_0064d1a0(char* s, int c);
 int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...);
 int __cdecl fcn_0065f220(const char* a, const char* b);
-HEAD_SET* __cdecl fcn_004fda30(int id);
+HEAD_SET* __cdecl gm_SelectEntityHeadSet(int id);
 
 /* ADDRESS: GOLDTL 0x004fdfe0 */
 void __cdecl fcn_004fdfe0(Figure* f)
@@ -84,7 +84,7 @@ void __cdecl fcn_004fdfe0(Figure* f)
 		char kind[0x80];
 		char* p;
 
-		hs = fcn_004fda30(f->id);
+		hs = gm_SelectEntityHeadSet(f->id);
 		n = 0;
 		if (hs->head[0] == 0xff) {
 			strcpy(base, hs->name);

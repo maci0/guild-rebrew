@@ -49,7 +49,7 @@ extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, 
  * up, reports it to the action handler and advances the entity's queue. */
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0055c270 */
-void __cdecl fcn_0055c270(char* o)
+void __cdecl he_RunCartBuySellObjekt(char* o)
 {
 	unsigned char* rec;
 	unsigned char* e;

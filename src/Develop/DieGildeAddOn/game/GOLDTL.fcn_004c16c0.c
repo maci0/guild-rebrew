@@ -3,7 +3,7 @@ extern int gm_GetSeason(int *p);
 extern int *sb_PlayVoice(char *bank, char *name, int loop, int pan, int vol,
     int a, int b);
 extern void sb_SetVoiceVolume(int *voice, int vol);
-extern void sb_StopVoice(int *voice, int a2);
+extern void sb_StopVoice(int *voice, int flag);
 extern void fcn_0064d41a();
 extern int fcn_0064d3f8(void);
 extern int ch_CountCharacters(int a, int b);
@@ -58,11 +58,11 @@ extern char s_68a124[];
 #define flt_time_scale (0.0005f)
 
 /* ADDRESS: GOLDTL 0x004c16c0 */
-int __cdecl fcn_004c16c0(void)
+int __cdecl gm_UpdateAmbientAudio(void)
 {
 	char buf[16];
-	int v2;
-	int v5;
+	int tickOrOffset;
+	int metric;
 	int offset;
 	int i;
 	float f;
@@ -71,8 +71,8 @@ int __cdecl fcn_004c16c0(void)
 	unsigned char *p;
 
 	if (g_6b8300 != 0 && g_772d10 != 0) {
-		v5 = 0;
-		v2 = (g_6b7fac + g_6b7fac * 2) * 4
+		metric = 0;
+		tickOrOffset = (g_6b7fac + g_6b7fac * 2) * 4
 		    + g_6b7fac;
 		if (g_772d4c != gm_GetSeason((int *) 0x7f4c00)) {
 			g_772d4c = gm_GetSeason((int *) 0x7f4c00);
@@ -90,13 +90,13 @@ int __cdecl fcn_004c16c0(void)
 		f = (2000.0f - *(float *) (d3_ActiveCamera + 0x50)
 		    - fcn_00413d10((float *) (d3_ActiveCamera + 0x4c))) * flt_time_scale;
 		if (g_7e4538 != 0) {
-			v5 = *g_7e4538;
+			metric = *g_7e4538;
 		}
 		offset = g_772d4c * 100;
-		if ((unsigned) (v2 - *(int *) (offset + 0x681830)) >
+		if ((unsigned) (tickOrOffset - *(int *) (offset + 0x681830)) >
 		    (unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x68182c))) {
-			if (v5 < 0x15e) {
-				*(int *) (offset + 0x681830) = v2;
+			if (metric < 0x15e) {
+				*(int *) (offset + 0x681830) = tickOrOffset;
 				offset = g_772d4c * 100;
 				if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
 				    + *(float *) (offset + 0x681820)) {
@@ -116,9 +116,9 @@ int __cdecl fcn_004c16c0(void)
 			}
 		}
 		offset = g_772d4c * 100;
-		if ((unsigned) (v2 - *(int *) (offset + 0x681844)) <=
-		    (unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x681840)) || v5 >= 100) {
-			if (v5 > 0x64 || g_772d4c == 3) {
+		if ((unsigned) (tickOrOffset - *(int *) (offset + 0x681844)) <=
+		    (unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x681840)) || metric >= 100) {
+			if (metric > 0x64 || g_772d4c == 3) {
 				if (g_772d44 != 0) {
 					fcn_0064d41a(&g_772b10, s_689f48, g_772d44);
 					sb_StopVoice(g_772d44, 0);
@@ -147,7 +147,7 @@ int __cdecl fcn_004c16c0(void)
 			}
 		}
 		else {
-			*(int *) (offset + 0x681844) = v2;
+			*(int *) (offset + 0x681844) = tickOrOffset;
 			if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
 			    + *(float *) (g_772d4c * 100 + 0x681834)) {
 				if (g_772d48 != 0) {
@@ -192,8 +192,8 @@ join:
 		}
 		offset = g_772d4c * 100;
 		if ((unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x68187c)) <
-		    (unsigned) (v2 - *(int *) (offset + 0x681880))) {
-			*(int *) (offset + 0x681880) = v2;
+		    (unsigned) (tickOrOffset - *(int *) (offset + 0x681880))) {
+			*(int *) (offset + 0x681880) = tickOrOffset;
 			offset = g_772d4c * 100;
 			if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
 			    + *(float *) (offset + 0x681820)) {
@@ -204,8 +204,8 @@ join:
 		}
 		offset = g_772d4c * 100;
 		if ((unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x681868)) <
-		    (unsigned) (v2 - *(int *) (offset + 0x68186c))) {
-			*(int *) (offset + 0x68186c) = v2;
+		    (unsigned) (tickOrOffset - *(int *) (offset + 0x68186c))) {
+			*(int *) (offset + 0x68186c) = tickOrOffset;
 			if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
 			    + *(float *) (g_772d4c * 100 + 0x68185c)) {
 				p = s_689ed4;
@@ -219,8 +219,8 @@ join:
 		}
 		offset = g_772d4c * 100;
 		if ((unsigned) (fcn_0064d3f8() % 2000 + *(int *) (offset + 0x681854)) <
-		    (unsigned) (v2 - *(int *) (offset + 0x681858))) {
-			*(int *) (offset + 0x681858) = v2;
+		    (unsigned) (tickOrOffset - *(int *) (offset + 0x681858))) {
+			*(int *) (offset + 0x681858) = tickOrOffset;
 			offset = g_772d4c * 100;
 			if (1.0f < (float) fcn_0064d3f8() * 3.0518509447574615e-05f
 			    + *(float *) (offset + 0x681848)) {
@@ -242,7 +242,7 @@ join:
 		}
 	}
 	else {
-		v5 = (g_6b7fac + g_6b7fac * 2) * 4
+		metric = (g_6b7fac + g_6b7fac * 2) * 4
 		    + g_6b7fac;
 		if (g_772d4c != gm_GetSeason((int *) 0x7f4c00)) {
 			g_772d4c = gm_GetSeason((int *) 0x7f4c00);
@@ -259,12 +259,12 @@ join:
 			*(int *) ((char *) g_772d48 + 0x18) = 0;
 			g_772d48 = 0;
 		}
-		v2 = g_772d4c * 100;
-		*(int *) (v2 + 0x681830) = v5;
-		*(int *) (v2 + 0x681844) = v5;
-		*(int *) (v2 + 0x68186c) = v5;
-		*(int *) (v2 + 0x681858) = v5;
-		*(int *) (v2 + 0x681880) = v5;
+		tickOrOffset = g_772d4c * 100;
+		*(int *) (tickOrOffset + 0x681830) = metric;
+		*(int *) (tickOrOffset + 0x681844) = metric;
+		*(int *) (tickOrOffset + 0x68186c) = metric;
+		*(int *) (tickOrOffset + 0x681858) = metric;
+		*(int *) (tickOrOffset + 0x681880) = metric;
 	}
 	if (g_7746c4 != 0 && g_772d10 != 0) {
 		c = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned) *g_7746c4].category;

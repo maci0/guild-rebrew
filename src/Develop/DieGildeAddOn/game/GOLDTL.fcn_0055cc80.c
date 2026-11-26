@@ -32,7 +32,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c6090(char*, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
@@ -41,7 +41,7 @@ void __cdecl gm_AddTime(char*, int, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct S55cc80Proto { unsigned char bytes[0x24d]; } S55cc80Proto;
 /* ADDRESS: GOLDTL 0x0055cc80 */
-void __cdecl fcn_0055cc80(char* self)
+void __cdecl he_RunHireGuardJob(char* self)
 {
 	char buf[0x400];
 	S55cc80Packet* packet;
@@ -100,7 +100,7 @@ void __cdecl fcn_0055cc80(char* self)
 		}
 		answer = (unsigned short*) cm_GetCommandResult(*(int*) (self + 0xb8));
 		if (answer == 0) {
-			fcn_00545d40(*(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), -1, (char*) 0x6a628c, 0, 0x5f8, 0);
+			he_PostEntityMessage(*(int*) ((unsigned long)&g_7f4ca4 + (*(unsigned short*) (self + 8)) * 0x21c), -1, (char*) 0x6a628c, 0, 0x5f8, 0);
 			he_FreeAction(self);
 			return;
 		}

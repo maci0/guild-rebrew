@@ -9,7 +9,7 @@ void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl cm_RequestChangeAttribute(void);
 void* __cdecl gm_GetEquippedCombatGear(void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 
@@ -50,7 +50,7 @@ char __cdecl fcn_004ce740(char* entity)
 					if (r != 0) {
 						io_FormatTextBuffer(buf, 0x1bca, r * 2 + 0x9a8,
 						    *(unsigned short*) entity, *(int*) (entity + 0x16c));
-						fcn_00545d40(*(int*)&((ENTITY_RECORD_VIEW*)p)->entity_id, -1, buf, 0, 0x5f2, 0);
+						he_PostEntityMessage(*(int*)&((ENTITY_RECORD_VIEW*)p)->entity_id, -1, buf, 0, 0x5f2, 0);
 					}
 				}
 			}

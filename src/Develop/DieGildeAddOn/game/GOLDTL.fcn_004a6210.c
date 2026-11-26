@@ -41,7 +41,7 @@ extern float g_662cf8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x004a6210 */
-int __cdecl fcn_004a6210(char* actor, char* a1, int a2)
+int __cdecl gm_ComputeCannonShot(char* actor, char* building, int targetEnt)
 {
 	int col;
 	int row;
@@ -71,14 +71,14 @@ int __cdecl fcn_004a6210(char* actor, char* a1, int a2)
 
 	g_772848 = -1;
 	g_77284c = -1;
-	p = (int*) fcn_004efd30(*(int*) (a1 + 1));
+	p = (int*) fcn_004efd30(*(int*) (building + 1));
 	if (p == 0) return 0;
-	if (fcn_004a6160(a1, origin, a2, target) != 0) return 0;
-	gm_GetArtilleryLimits(a1, &row, &col);
+	if (fcn_004a6160(building, origin, targetEnt, target) != 0) return 0;
+	gm_GetArtilleryLimits(building, &row, &col);
 	col = gm_RandomMod(col + 1) & 0xffff;
 	fcn_004f0f60(col, profile);
 	if (*(int*) (actor + 0x194) < profile[1]) return 0;
-	value.level = gm_GetCannonPowerScale(a1);
+	value.level = gm_GetCannonPowerScale(building);
 	row = gm_RandomMod(row + 1) & 0xffff;
 	fcn_005e8de0(g_6660f4, *(float*) (col * 0xc + 0x665290), entry);
 	off = col * 0xc;
@@ -109,7 +109,7 @@ int __cdecl fcn_004a6210(char* actor, char* a1, int a2)
 	g_772874 = normal[1];
 	g_772878 = normal[2];
 	g_772848 = *(int*) (actor + 4);
-	g_77284c = *(int*) (a1 + 1);
+	g_77284c = *(int*) (building + 1);
 	g_7728b8 = res.amount;
 	g_7728b4 = res.cost;
 	g_772894 = row + 1;

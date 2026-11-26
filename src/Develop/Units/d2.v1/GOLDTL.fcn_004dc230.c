@@ -13,7 +13,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
-int __cdecl fcn_004aacb0(unsigned short*, unsigned short*, unsigned short*, int*);
+int __cdecl ai_CompareOfficeCandidates(unsigned short*, unsigned short*, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -39,7 +39,7 @@ int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short*
 	b2 = d2_GetWindowListItem(h, 0, t + 2);
 	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(w, 0x5dc, 1);
-	res = fcn_004aacb0(a1, a2, a3, &aux);
+	res = ai_CompareOfficeCandidates(a1, a2, a3, &aux);
 	g_100f1dc = -1;
 	while (main_RunFrameLoop(fcn_004dc230, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(w, 0, 0) == 0) {

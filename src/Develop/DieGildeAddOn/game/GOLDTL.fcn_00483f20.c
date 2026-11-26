@@ -55,11 +55,11 @@ extern unsigned short g_7f4c04;
 
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004849b0(Ent483f20*, void*, void*);
-void __cdecl fcn_00487000(Ent483f20*);
+void __cdecl ai_ManageMeisterWorkers(Ent483f20*);
 void __cdecl fcn_00487970(void*, Ent483f20*, int);
 void __cdecl fcn_00487c00(void*, Ent483f20*, int);
 void __cdecl fcn_00487470(Ent483f20*);
-int __cdecl fcn_00486640(Ent483f20*, PRODUCTION_GOODS_RECORD*, int);
+int __cdecl ai_CanProduceGood(Ent483f20*, PRODUCTION_GOODS_RECORD*, int);
 void __cdecl fcn_004868d0(Ent483f20*, PRODUCTION_GOODS_RECORD*);
 int __cdecl fcn_005b1e40(int);
 void* __cdecl gm_FindCityItemHolder(int);
@@ -68,7 +68,7 @@ int __cdecl gm_RandomMod(int);
 void __cdecl fcn_0047e220(void*);
 void __cdecl ai_PlanResourceRestock(Ent483f20*, void*);
 void __cdecl ai_CancelBlockedActions(Ent483f20*, int);
-void __cdecl fcn_00529160(int, int, unsigned short, int);
+void __cdecl he_AssignActionSlot(int, int, unsigned short, int);
 void __cdecl ai_MeisterCollectTrans(Ent483f20*);
 void __cdecl ai_MeisterTrade(Ent483f20*, void*);
 void __cdecl fcn_00487f90(Plan483f20*);
@@ -108,7 +108,7 @@ static __inline int can_start(Ent483f20* e, void* rec, PRODUCTION_GOODS_RECORD* 
 	if (amount < ((OBJECT_PROTOTYPE *)type_entry(p->goods_id))->value_036 + p->unk_3c) {
 		return 0;
 	}
-	return fcn_00486640(e, p, human);
+	return ai_CanProduceGood(e, p, human);
 }
 
 static __inline void start_production(Ent483f20* e, PRODUCTION_GOODS_RECORD* p, char* fmt, char* msg)
@@ -153,7 +153,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 		return;
 	}
 	fcn_004849b0(e, rec, stk);
-	fcn_00487000(e);
+	ai_ManageMeisterWorkers(e);
 	fcn_00487970(stk, e, 0x4b);
 	fcn_00487c00(stk, e, 0x19);
 	fcn_00487470(e);
@@ -168,7 +168,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 					continue;
 				}
 				if (g_100d0c0[i].unk_40 >= ((OBJECT_PROTOTYPE *)type_entry(g_100d0c0[i].goods_id))->value_036 &&
-				    fcn_00486640(e, &g_100d0c0[i], 1) != 0) {
+				    ai_CanProduceGood(e, &g_100d0c0[i], 1) != 0) {
 					start_production(e, &g_100d0c0[i], 0, msg);
 					goto after_start;
 				}
@@ -182,7 +182,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 				continue;
 			}
 			if (g_100d0c0[i].unk_40 >= ((OBJECT_PROTOTYPE *)type_entry(g_100d0c0[i].goods_id))->value_036 &&
-			    fcn_00486640(e, &g_100d0c0[i], 1) != 0) {
+			    ai_CanProduceGood(e, &g_100d0c0[i], 1) != 0) {
 				start_production(e, &g_100d0c0[i], 0, msg);
 				found = 1;
 			}
@@ -203,7 +203,7 @@ void __cdecl fcn_00483f20(Ent483f20* e)
 					start_production(e, scan, (char*) 0x67dcc0, msg);
 					goto after_start;
 				}
-				if (fcn_00486640(e, scan, 0) != 0) {
+				if (ai_CanProduceGood(e, scan, 0) != 0) {
 					start_production(e, scan, (char*) 0x67dc88, msg);
 					goto after_start;
 				}
@@ -321,7 +321,7 @@ after_start:
 		if (p != 0 && *p != 4) {
 			continue;
 		}
-		fcn_00529160(e->root, 0, *(unsigned short*) slot, 0);
+		he_AssignActionSlot(e->root, 0, *(unsigned short*) slot, 0);
 		built++;
 	}
 	if (g_100dc20 == e->root) {

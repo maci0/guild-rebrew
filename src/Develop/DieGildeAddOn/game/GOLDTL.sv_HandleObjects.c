@@ -47,7 +47,7 @@ extern int g_6a256c;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char* __cdecl fcn_00445600(int, int, int, char*);
 extern int __cdecl fcn_0064d41a(char*, char*, ...);
-extern void __cdecl fcn_00412e50(char*, int);
+extern void __cdecl d3_AnimateCameraToNode(char*, int);
 extern int __cdecl fcn_00506380(int, int, int, void*);
 extern void __cdecl sv_ClearObjectSelection(void);
 extern void __cdecl d3snd_PlayObjectClickSound(char*);
@@ -169,7 +169,7 @@ L744:
 	g_7746b8 = g_7746bc;
 	g_7746a0 = selected;
 	if ((*(unsigned char*) (selected + 0x214) & 0x40) != 0 && match == 0) {
-		fcn_00412e50(selected, g_6a256c);
+		d3_AnimateCameraToNode(selected, g_6a256c);
 		g_7746a8 = g_7746a4;
 		selected = g_7746a4;
 		if (selected != 0) {

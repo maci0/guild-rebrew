@@ -6,7 +6,7 @@ void __cdecl gm_ChangeObjektZustand(int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_SearchTable67(int);
-int __cdecl fcn_005049a0(unsigned char*);
+int __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -18,7 +18,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 /* One stage of the message-box tick; state lives at +0x70 of the caller's record. */
 /* ADDRESS: GOLDTL 0x0055f300 */
-void __cdecl fcn_0055f300(char* e)
+void __cdecl he_RunObjektUpgrade(char* e)
 {
 	void* item;
 	char ch;
@@ -54,7 +54,7 @@ void __cdecl fcn_0055f300(char* e)
 		gm_ResolveEntityById(0, &item, 0, *(int*) (e + 0xac));
 		if (*(int*) (e + 0xd8) != 0) {
 			io_FormatTextBuffer(buf, 0x1c49, (*(unsigned short*) item) * 2 + 0x9a8);
-			p = (int*) fcn_005049a0((unsigned char*) gm_SearchTable67(*(int*) (e + 0x10)));
+			p = (int*) gm_FindBuildingPrimarySlot((unsigned char*) gm_SearchTable67(*(int*) (e + 0x10)));
 			if (p != 0) {
 				he_MessageBoxQuickjump(*(int*) ((*(unsigned short*) (e + 8)) * 0x21c + 0x7f4ca4), -1, buf, 0, 0x5ec, *(int*) (e + 0x10), *(int*) ((char*) p + 2), 0, "_NACHRICHTEN_HS_55");
 			} else {

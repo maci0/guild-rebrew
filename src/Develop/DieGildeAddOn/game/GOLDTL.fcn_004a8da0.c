@@ -12,14 +12,14 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl fcn_004a5340(int a, int n, int* lim, int a4, float r, unsigned short* ids);
 
 /* ADDRESS: GOLDTL 0x004a8da0 */
-int __cdecl fcn_004a8da0(int a1, int a2, int a3, int a4, char* out)
+int __cdecl ai_CheckAction025Predicate(int unused1, int actor, int unused3, int unused4, char* out)
 {
 	unsigned short ids[2];
 	int lim[2];
 
 	lim[0] = 0xf00500;
 	lim[1] = 0xf00500;
-	if (!fcn_004a5340(a2, 2, lim, 0, (float) gm_RandomMod(0x40), ids)) {
+	if (!fcn_004a5340(actor, 2, lim, 0, (float) gm_RandomMod(0x40), ids)) {
 		return 0;
 	}
 	out[0] = 7;

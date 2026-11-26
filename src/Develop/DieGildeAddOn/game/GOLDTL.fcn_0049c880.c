@@ -5,7 +5,7 @@
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 int __cdecl ai_SelectBestMethod(int who, int idx, int arg, int* out1, int* out2);
 int __cdecl fcn_004aa7c0(char* e, int* a, int* b);
-float __cdecl fcn_00507e70(char* a, char* b, int c);
+float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c);
 double __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x0049c880 */
@@ -64,7 +64,7 @@ retry:
 	if (fcn_004aa7c0(p, v7, v8) == 0) {
 		return 0;
 	}
-	v9 = fcn_00507e70(p, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[v8[4]]), 4);
+	v9 = gm_CalcSkillDuelScore(p, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[v8[4]]), 4);
 	if (gm_RandomFloat01() + v9 >= 1.0f) {
 		method = 0x28;
 		goto copy_result;

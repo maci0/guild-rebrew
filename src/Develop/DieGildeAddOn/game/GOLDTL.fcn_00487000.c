@@ -34,9 +34,9 @@ void __cdecl cm_SendCopyEntityData(char*);
  * slots already bound to the entity's owner, and either reports the pending
  * offer or asks for a new builder. */
 /* ADDRESS: GOLDTL 0x00487000 */
-void __cdecl fcn_00487000(char* e)
+void __cdecl ai_ManageMeisterWorkers(char* meister)
 {
-	char m[0xf8];
+	char msg[0xf8];
 	char* ent;
 	int p;
 	char* rec;
@@ -48,26 +48,26 @@ void __cdecl fcn_00487000(char* e)
 	int i;
 
 	if ((*(short*) &g_7f4c04) != 7 && (*(short*) &g_7f4c04) != 0xc && (*(short*) &g_7f4c04) != 0x12) {
-		*(unsigned int*) (e + 0x1b4) &= 0xffffffbf;
+		*(unsigned int*) (meister + 0x1b4) &= 0xffffffbf;
 		return;
 	}
-	if (*(unsigned int*) (e + 0x1b4) & 0x40) {
+	if (*(unsigned int*) (meister + 0x1b4) & 0x40) {
 		return;
 	}
-	*(unsigned int*) (e + 0x1b4) |= 0x40;
+	*(unsigned int*) (meister + 0x1b4) |= 0x40;
 	if ((*(unsigned char*) ((char*) 0x7f4ca0
-	                        + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c + 2) == 6
-	     || *(unsigned char*) ((char*) 0x7f4ca0 + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c + 2) == 7)
-	    && !(*(unsigned int*) (e + 0x1b4) & 2)) {
+	                        + *(unsigned short*) (*(char**) (meister + 0x16c) + 0x27) * 0x21c + 2) == 6
+	     || *(unsigned char*) ((char*) 0x7f4ca0 + *(unsigned short*) (*(char**) (meister + 0x16c) + 0x27) * 0x21c + 2) == 7)
+	    && !(*(unsigned int*) (meister + 0x1b4) & 2)) {
 		return;
 	}
-	ent = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) (*(char**) (e + 0x16c))];
+	ent = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) (*(char**) (meister + 0x16c))];
 	for (p = 0x7f4e05; p < 0x85a205; p += 0x21c) {
 		rec = (char*) (p - 0x165);
 		if (*(unsigned short*) rec == 0xffff) {
 			continue;
 		}
-		if (*(char**) (rec + 0x16c) != *(char**) (e + 0x16c)) {
+		if (*(char**) (rec + 0x16c) != *(char**) (meister + 0x16c)) {
 			continue;
 		}
 		if (*(char*) (rec + 0x165) == 0) {
@@ -79,25 +79,25 @@ void __cdecl fcn_00487000(char* e)
 		if (*(int*) (rec + 0x174) < 4) {
 			continue;
 		}
-		memset(m, 0, sizeof(m));
-		m[4] = 0x32;
-		*(int*) (m + 8) = *(int*) (g_7f4ca4
-		                           + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
-		*(int*) (m + 0xc) = *(int*) (*(char**) (e + 0x16c) + 1);
-		*(int*) (m + 0x28) = gm_GameTime.a;
-		*(int*) (m + 0x2c) = g_7f4c04;
-		*(int*) (m + 0x30) = g_7f4c08;
-		m[0x36] = 2;
-		*(short*) (m + 0x34) = g_7f4c0c;
-		*(int*) (m + 0x58) = *(int*) (rec + 4);
-		cm_SendCopyEntityData(m);
+		memset(msg, 0, sizeof(msg));
+		msg[4] = 0x32;
+		*(int*) (msg + 8) = *(int*) (g_7f4ca4
+		                           + *(unsigned short*) (*(char**) (meister + 0x16c) + 0x27) * 0x21c);
+		*(int*) (msg + 0xc) = *(int*) (*(char**) (meister + 0x16c) + 1);
+		*(int*) (msg + 0x28) = gm_GameTime.a;
+		*(int*) (msg + 0x2c) = g_7f4c04;
+		*(int*) (msg + 0x30) = g_7f4c08;
+		msg[0x36] = 2;
+		*(short*) (msg + 0x34) = g_7f4c0c;
+		*(int*) (msg + 0x58) = *(int*) (rec + 4);
+		cm_SendCopyEntityData(msg);
 	}
 	n = 0;
 	for (q = 0x7f4e0c; q < 0x85a20c; q += 0x21c) {
 		if (*(unsigned short*) (q - 0x16c) == 0xffff) {
 			continue;
 		}
-		if (*(char**) q != *(char**) (e + 0x16c)) {
+		if (*(char**) q != *(char**) (meister + 0x16c)) {
 			continue;
 		}
 		if (*(unsigned char*) (q - 7) == 0) {
@@ -105,7 +105,7 @@ void __cdecl fcn_00487000(char* e)
 		}
 		n++;
 	}
-	slot = he_StartHandlungSearch(2, 0, 6, 3, *(int*) (*(char**) (e + 0x16c) + 1));
+	slot = he_StartHandlungSearch(2, 0, 6, 3, *(int*) (*(char**) (meister + 0x16c) + 1));
 	if (slot != 0) {
 		sp = slot + 0xb0;
 		for (i = 0xc; i != 0; i--) {
@@ -116,19 +116,19 @@ void __cdecl fcn_00487000(char* e)
 		}
 	}
 	if (n >= (int) (((BUILDING_PROTOTYPE*)lpGebaeudePROT)
-	                                    [*(unsigned char*) (*(char**) (e + 0x16c))].capacity_231
+	                                    [*(unsigned char*) (*(char**) (meister + 0x16c))].capacity_231
 	                + ((BUILDING_PROTOTYPE*)lpGebaeudePROT)
-	                                     [*(unsigned char*) (*(char**) (e + 0x16c))].capacity_232)) {
+	                                     [*(unsigned char*) (*(char**) (meister + 0x16c))].capacity_232)) {
 		return;
 	}
 	tick = (int) fcn_005101e0((unsigned char*) ((char*) 0x7f4ca0
-	                                           + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c),
-	                          *(unsigned char*) (*(char**) (e + 0x16c)), -1, 1);
+	                                           + *(unsigned short*) (*(char**) (meister + 0x16c) + 0x27) * 0x21c),
+	                          *(unsigned char*) (*(char**) (meister + 0x16c)), -1, 1);
 	if (n != 0) {
-		if (*(unsigned int*) (e + 0x1c8) & 8) {
+		if (*(unsigned int*) (meister + 0x1c8) & 8) {
 			return;
 		}
-		if (*(int*) (e + 0x1b8) < tick) {
+		if (*(int*) (meister + 0x1b8) < tick) {
 			return;
 		}
 		if ((int) (gm_RandomMod(0x48) & 0xffff) < (0x12 - n) * 2) {
@@ -138,22 +138,22 @@ void __cdecl fcn_00487000(char* e)
 	if (slot != 0) {
 		return;
 	}
-	memset(m, 0, sizeof(m));
-	m[4] = 6;
-	*(int*) (m + 8) = *(int*) (g_7f4ca4
-	                           + *(unsigned short*) (*(char**) (e + 0x16c) + 0x27) * 0x21c);
-	*(int*) (m + 0xc) = *(int*) (*(char**) (e + 0x16c) + 1);
-	*(int*) (m + 0x28) = gm_GameTime.a;
-	*(int*) (m + 0x2c) = g_7f4c04;
-	m[0x36] = 1;
-	*(int*) (m + 0x30) = g_7f4c08;
-	*(short*) (m + 0x34) = g_7f4c0c;
-	*(int*) (m + 0x5c) = 1;
-	gm_CheckEntityType((unsigned char*) *(char**) (e + 0x16c));
-	*(int*) (m + 0x8c) = -1;
-	m[0x59] = 1;
-	m[0x58] = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)
-	                             [*(unsigned char*) (*(char**) (e + 0x16c))].role_230;
-	cm_SendCopyEntityData(m);
-	*(int*) (e + 0x1b8) -= tick;
+	memset(msg, 0, sizeof(msg));
+	msg[4] = 6;
+	*(int*) (msg + 8) = *(int*) (g_7f4ca4
+	                           + *(unsigned short*) (*(char**) (meister + 0x16c) + 0x27) * 0x21c);
+	*(int*) (msg + 0xc) = *(int*) (*(char**) (meister + 0x16c) + 1);
+	*(int*) (msg + 0x28) = gm_GameTime.a;
+	*(int*) (msg + 0x2c) = g_7f4c04;
+	msg[0x36] = 1;
+	*(int*) (msg + 0x30) = g_7f4c08;
+	*(short*) (msg + 0x34) = g_7f4c0c;
+	*(int*) (msg + 0x5c) = 1;
+	gm_CheckEntityType((unsigned char*) *(char**) (meister + 0x16c));
+	*(int*) (msg + 0x8c) = -1;
+	msg[0x59] = 1;
+	msg[0x58] = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)
+	                             [*(unsigned char*) (*(char**) (meister + 0x16c))].role_230;
+	cm_SendCopyEntityData(msg);
+	*(int*) (meister + 0x1b8) -= tick;
 }

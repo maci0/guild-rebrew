@@ -73,7 +73,7 @@ void __cdecl fcn_00416980(void);
 void __cdecl fcn_0047d9d0(void);
 void __cdecl fcn_004eb480(int);
 void __cdecl fcn_004ac440(void);
-void __cdecl fcn_004acbb0(void);
+void __cdecl gm_LoadHistoricalTable(void);
 void __cdecl fcn_004d27a0(void);
 void __cdecl fcn_004758e0(int);
 unsigned char* __cdecl fcn_004767c0(int, int, int, int, char*, int, int);
@@ -159,7 +159,7 @@ int __cdecl main_OpenEngine(void)
 		fcn_004ac440();
 	}
 	g_6f246c = 0;
-	fcn_004acbb0();
+	gm_LoadHistoricalTable();
 	fcn_004d27a0();
 	fcn_004758e0(screen);
 	fade = fcn_004767c0(0, 0, g_fb9072, g_fb9070, "BLACK", 0x5a, 1);

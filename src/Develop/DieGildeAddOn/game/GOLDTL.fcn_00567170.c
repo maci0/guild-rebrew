@@ -9,7 +9,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl sim_StartEntityQueryByType(char*);
 
 /* ADDRESS: GOLDTL 0x00567170 */
-int __cdecl fcn_00567170(char* h, int* out1, int* out2, int* out3)
+int __cdecl he_GetEntityHomeTarget(char* h, int* out1, int* out2, int* out3)
 {
 	char* q;
 	char* t;

@@ -10,7 +10,7 @@ extern char g_699af0[];
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int off, char* v);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-void __cdecl fcn_00545d40(int h, int a, char* text, int b, int c, char* snd);
+void __cdecl he_PostEntityMessage(int h, int a, char* text, int b, int c, char* snd);
 void __cdecl cm_RequestDestroyBuilding(int h);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta)
@@ -38,10 +38,10 @@ void __cdecl gm_AdjustGebaeudeCondition(char* o, int delta)
 				if (*(unsigned char*) (p - 2) == 6 || *(unsigned char*) (p - 2) == 7) {
 					if (*(unsigned short*) (p - 4) != *(unsigned short*) (o + 0x27)) {
 						io_FormatTextBuffer(other, 0x1c52, *(unsigned short*) (o + 0x27), o);
-						fcn_00545d40(*(int*) p, -1, other, 0, 0x5fe, g_699af0);
+						he_PostEntityMessage(*(int*) p, -1, other, 0, 0x5fe, g_699af0);
 					} else {
 						io_FormatTextBuffer(same, 0x1c53, o);
-						fcn_00545d40(*(int*) p, -1, same, 0, 0x5fe, g_699adc);
+						he_PostEntityMessage(*(int*) p, -1, same, 0, 0x5fe, g_699adc);
 					}
 				}
 			}

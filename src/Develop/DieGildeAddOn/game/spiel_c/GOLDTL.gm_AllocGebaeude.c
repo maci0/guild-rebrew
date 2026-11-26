@@ -30,7 +30,7 @@ void __cdecl gm_SetBuildingWorkerLimits(char*);
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl gm_InitBuildingStartingGoods(char*);
 char* __cdecl gv_AllocGraveyardField(char*);
-void __cdecl fcn_004f1ad0(char*, int);
+void __cdecl gm_AssignBuildingResidents(char*, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_005b1b30(char*);
 char* __cdecl m_alloc(int, char*);
@@ -279,7 +279,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	case 0x49:
 	case 0x4a:
 		*(int*) (geb + 0x65) = (int) gv_AllocGraveyardField(geb);
-		fcn_004f1ad0(geb, 3);
+		gm_AssignBuildingResidents(geb, 3);
 		break;
 	case 0x4b:
 	case 0x4c:

@@ -38,7 +38,7 @@ unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 int __cdecl fcn_004b9530(Cmd* cmd)
 {
@@ -97,7 +97,7 @@ int __cdecl fcn_004b9530(Cmd* cmd)
 		} else {
 			io_FormatTextBuffer(text, cmd->text + 0x12e7, ((Player*)g_868060)[*(int*) (work + 0x65)].name, amount);
 		}
-		fcn_00545d40(e->handle, e->handle, text, 0x100 < strlen(text), 0x5ef, 0);
+		he_PostEntityMessage(e->handle, e->handle, text, 0x100 < strlen(text), 0x5ef, 0);
 	}
 	return 0;
 }

@@ -10,7 +10,7 @@ int __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void* __cdecl gm_FindNextFilteredEntity(void);
 
@@ -57,7 +57,7 @@ int __cdecl gm_ApplyType16PercentDebit(void* request)
 		io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, r);
 		cm_RequestTransferCurrencyNoKill(*(int*) request, -1, g_773d75, r);
 		len = strlen(buf);
-		fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
+		he_PostEntityMessage(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 		    0x100 < len, 0x603, 0);
 		return 0;
 	}

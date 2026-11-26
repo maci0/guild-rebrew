@@ -59,7 +59,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl fcn_00526120(int, int);
-void __cdecl fcn_00529160(int, int, int, char*);
+void __cdecl he_AssignActionSlot(int, int, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -131,7 +131,7 @@ int __cdecl fcn_005add40(int unused, char* e)
 					g_774654 = 2;
 					for (i = 0; i < 32; i++) {
 						if (((Player**)ch_ContextCharacters)[i] != 0 && ((Player**)ch_ContextCharacters)[i]->x188 != 0) {
-							fcn_00529160(0, 0, ((Player**)ch_ContextCharacters)[i]->x0, p);
+							he_AssignActionSlot(0, 0, ((Player**)ch_ContextCharacters)[i]->x0, p);
 						}
 					}
 				}

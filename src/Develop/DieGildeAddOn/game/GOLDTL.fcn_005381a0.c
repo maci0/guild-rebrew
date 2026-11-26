@@ -3,7 +3,7 @@
 void __cdecl fcn_005e12d0(void);
 void __cdecl gm_FreeBuffer773d44(void);
 void __cdecl d3_FreeTable7e1d60(void);
-void __cdecl fcn_00429800(void);
+void __cdecl evt_ShutdownScripts(void);
 void __cdecl fcn_00520f40(void);
 void __cdecl d3snd_Shutdown(void);
 void __cdecl d3_FreeBuffer6b5d08(void);
@@ -29,7 +29,7 @@ void __cdecl fcn_005381a0(void)
 	fcn_005e12d0();
 	gm_FreeBuffer773d44();
 	d3_FreeTable7e1d60();
-	fcn_00429800();
+	evt_ShutdownScripts();
 	fcn_00520f40();
 	if (g_774934 != 0) {
 		d3snd_Shutdown();

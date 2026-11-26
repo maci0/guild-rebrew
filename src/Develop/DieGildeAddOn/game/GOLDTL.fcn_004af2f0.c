@@ -39,7 +39,7 @@ unsigned short __cdecl gm_RandomMod(int);
  * `w` to a callee-saved register (object 267 bytes instead of 264). */
 /* ADDRESS: GOLD 0x004adff0 */
 /* ADDRESS: GOLDTL 0x004ae130 */
-int __cdecl fcn_004ae130(unsigned short a1)
+int __cdecl gm_IsSlotActivePerson(unsigned short a1)
 {
 	int o;
 
@@ -118,7 +118,7 @@ int __cdecl fcn_004ae2a0(int mode, int* pairs, int idx, char* text, void* out)
 			if (i >= 768) {
 				return 0;
 			}
-			if (fcn_004ae130((unsigned short) i) != 0 && ((Rec21c*)g_7f4ca0)[i].kind == 0xf) {
+			if (gm_IsSlotActivePerson((unsigned short) i) != 0 && ((Rec21c*)g_7f4ca0)[i].kind == 0xf) {
 				break;
 			}
 		}
@@ -177,7 +177,7 @@ int __cdecl fcn_004ae3c0(int mode, int* pairs, int idx, char* text, void* out)
 			if (i >= 768) {
 				return 0;
 			}
-			if ((fcn_004ae130((unsigned short) i) != 0 && ((Rec21c*)g_7f4ca0)[i].kind == 0x1a) || ((Rec21c*)g_7f4ca0)[i].kind == 0x15) {
+			if ((gm_IsSlotActivePerson((unsigned short) i) != 0 && ((Rec21c*)g_7f4ca0)[i].kind == 0x1a) || ((Rec21c*)g_7f4ca0)[i].kind == 0x15) {
 				break;
 			}
 		}
@@ -268,7 +268,7 @@ int __cdecl fcn_004ae4e0(int mode, int* pairs, int idx, char* text, void* out)
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (fcn_004ae130((unsigned short) j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
+			if (gm_IsSlotActivePerson((unsigned short) j) != 0 && ((Rec21c*)g_7f4ca0)[j].grade >= 0x1e && ((Rec21c*)g_7f4ca0)[j].grade <= 0x21) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
 			}
@@ -373,7 +373,7 @@ int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (((Rec21c*)g_7f4ca0)[j].side == 1 && fcn_004ae130((unsigned short) j) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0
+			if (((Rec21c*)g_7f4ca0)[j].side == 1 && gm_IsSlotActivePerson((unsigned short) j) != 0 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a && ((Rec21c*)g_7f4ca0)[j].kind != 0x15) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
@@ -489,7 +489,7 @@ int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (((Rec21c*)g_7f4ca0)[j].side == 0 && fcn_004ae130((unsigned short) j) != 0
+			if (((Rec21c*)g_7f4ca0)[j].side == 0 && gm_IsSlotActivePerson((unsigned short) j) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
 			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
@@ -611,7 +611,7 @@ int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (fcn_004ae130((unsigned short) j) != 0
+			if (gm_IsSlotActivePerson((unsigned short) j) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].kind > 0 && ((Rec21c*)g_7f4ca0)[j].kind != 0xf && ((Rec21c*)g_7f4ca0)[j].kind != 0x1a
 			        && ((Rec21c*)g_7f4ca0)[j].kind != 0x15 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
@@ -697,7 +697,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 		return 0;
 	}
 	w = *(unsigned short*) e;
-	if (fcn_004ae130(w) == 0) {
+	if (gm_IsSlotActivePerson(w) == 0) {
 		return 0;
 	}
 	r = gm_WalkEntityChain(w);
@@ -788,7 +788,7 @@ int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
 		j = gm_RandomMod(0x300);
 		left = 0x300;
 		do {
-			if (fcn_004ae130((unsigned short) j) != 0
+			if (gm_IsSlotActivePerson((unsigned short) j) != 0
 			    && ((Rec21c*)g_7f4ca0)[j].cls >= 0xd && ((Rec21c*)g_7f4ca0)[j].cls <= 0x12 && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[j].key) != 0) {
 				r = &((Rec21c*)g_7f4ca0)[j];
 				break;
@@ -983,7 +983,7 @@ int __cdecl hst_HandleStrafeHinrichtung(int* pairs, int idx, char* text)
 	int key;
 
 	e = (unsigned short*) gm_LookupEntityRecordById(pairs[idx * 2 + 1]);
-	if (e == 0 || fcn_004ae130(*e) == 0) {
+	if (e == 0 || gm_IsSlotActivePerson(*e) == 0) {
 		return 0;
 	}
 	{

@@ -18,7 +18,7 @@ extern float g_675308;
 extern char g_675504[]; /* "%s_%s" */
 extern char g_6753fc[]; /* "bewegung/gehen" */
 
-int __cdecl fcn_00402610(char*);
+int __cdecl d3sm_GetObjectSuperMap(char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 int __cdecl ch_AdjustHeightToGround(char*);
 int __cdecl fcn_004094c0(char*, int);
@@ -28,7 +28,7 @@ int __cdecl ch_UpdateWalkOnPath(char*, int);
 void __cdecl ch_FinishAni(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl d3_FreeObjectAnimation(void*);
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl m_FreeTracked(void*);
 void __cdecl vfs_ToSlashes(char*);
@@ -44,7 +44,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 	int cell;
 	float speed;
 
-	res = fcn_00402610(*(char**) (obj + 0x14));
+	res = d3sm_GetObjectSuperMap(*(char**) (obj + 0x14));
 	inst = *(char**) (obj + 0x14);
 	if ((*(unsigned char*) (obj + 0x160) & 0x80) != 0) {
 		anim = *(char**) (inst + 0x7c);
@@ -170,7 +170,7 @@ void __cdecl ch_WalkOnPath(char* obj)
 					*(unsigned short*) (*(char**) (obj + 0x14) + 0x8c) |= 8;
 				}
 				*(unsigned int*) (obj + 0x160) |= 0x80;
-				fcn_00438b40(*(char**) (inst + 0x34), (int*) (obj + 0x144));
+				d3_SetNodePosition(*(char**) (inst + 0x34), (int*) (obj + 0x144));
 				ch_PlaceOnGround(inst, d3_CurrentContextIndex != 0);
 				return;
 			}

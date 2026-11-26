@@ -10,7 +10,7 @@ void __cdecl fcn_005015e0(void*, void*, void*, int);
 int __cdecl fcn_00505370(char*);
 unsigned short __cdecl fcn_0042e410(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b9320 */
 int __cdecl fcn_004b9320(char* request)
@@ -83,6 +83,6 @@ int __cdecl fcn_004b9320(char* request)
 		             g_868060 + ((k << 6) - k) * 3 * 4, g_868060 + ((k << 6) - k) * 3 * 4);
 	}
 	len = (int) strlen(buf);
-	fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), buf, (unsigned int) len > 0x100 ? 1 : 0, 0x5ef, 0);
+	he_PostEntityMessage(*(int*) (e + 4), *(int*) (e + 4), buf, (unsigned int) len > 0x100 ? 1 : 0, 0x5ef, 0);
 	return 0;
 }

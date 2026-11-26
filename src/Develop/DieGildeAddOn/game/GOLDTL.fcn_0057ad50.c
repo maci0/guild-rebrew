@@ -8,7 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_0057aab0(char*, int, int, int);
+void __cdecl he_ApplyBuildingAura(char*, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl he_RunAction0x90(char* o)
@@ -33,7 +33,7 @@ void __cdecl he_RunAction0x90(char* o)
 		return;
 	}
 	if (*(int*) (o + 0xb8) < 4) {
-		fcn_0057aab0(e, *(int*) (o + 0xb0), *(int*) (o + 0xb4), *(int*) (o + 0xb8));
+		he_ApplyBuildingAura(e, *(int*) (o + 0xb0), *(int*) (o + 0xb4), *(int*) (o + 0xb8));
 		gm_AddTime(p, 0, 0x1e, 0);
 		(*(int*) (o + 0xb8))++;
 		fcn_004c5620(0, o);

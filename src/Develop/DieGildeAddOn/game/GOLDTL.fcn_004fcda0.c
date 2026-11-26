@@ -44,7 +44,7 @@ char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 
 /* ADDRESS: GOLDTL 0x004fcda0 */
 int __cdecl fcn_004fcda0(unsigned short id, int pay, Income* out)
@@ -109,7 +109,7 @@ int __cdecl fcn_004fcda0(unsigned short id, int pay, Income* out)
 			if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_type) == 3) {
 				amount = (gm_RandomMod((unsigned short) (q.x8 + 2)) + q.x8) * 6400;
 				cm_RequestTransferCurrencyNoKill((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), -1, 0, amount);
-				fcn_004c6ae0((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), q.x8);
+				cm_RequestModifyHealth((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), q.x8);
 				g_773d48 += 2;
 			}
 		}

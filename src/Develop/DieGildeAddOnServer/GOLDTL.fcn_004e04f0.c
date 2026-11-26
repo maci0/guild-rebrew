@@ -4,7 +4,7 @@ float __cdecl gm_GetEntitySkill(char* entity, int idx);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char* entity, void* role_out, void* slot_out);
 int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
-int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
+int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
 void __cdecl fcn_004e04f0(char* a0)
 {
@@ -28,7 +28,7 @@ void __cdecl fcn_004e04f0(char* a0)
 					do {
 						if (*p == 6 || *p == 7) {
 							io_FormatTextBuffer(buf, 0x10c7, *(unsigned short*) w, (*(unsigned char*) (w + 9) != 0) + 0x10c8);
-							fcn_00545d40(*(int*) (p + 2), -1, buf, 0, 0x5fe, (char*) 0x6b5c60);
+							he_PostEntityMessage(*(int*) (p + 2), -1, buf, 0, 0x5fe, (char*) 0x6b5c60);
 						}
 						p += 0x21c;
 					} while ((int) p < 0x85a0a2);

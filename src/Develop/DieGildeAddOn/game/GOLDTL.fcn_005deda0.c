@@ -38,7 +38,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCopyEntityData(Msg*);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
@@ -82,7 +82,7 @@ int __cdecl fcn_005deda0(char* e, char* request)
 			send_hit(*(int*) (r + 4));
 			if (r[2] == 6 || r[2] == 7) {
 				io_FormatTextBuffer(msg, 0xffb);
-				fcn_00545d40(*(int*) (r + 4), -1, msg, 0, 0x5fb, 0);
+				he_PostEntityMessage(*(int*) (r + 4), -1, msg, 0, 0x5fb, 0);
 			}
 			p = gm_LookupSpecialObjectRecord(**(unsigned short**) request, &out);
 			*(int*) (request + 0x10) = 1;
@@ -96,7 +96,7 @@ int __cdecl fcn_005deda0(char* e, char* request)
 			send_hit(*(int*) (r + 4));
 			if (r[2] == 6 || r[2] == 7) {
 				io_FormatTextBuffer(msg, 0xffb);
-				fcn_00545d40(*(int*) (r + 4), -1, msg, 0, 0x5fb, 0);
+				he_PostEntityMessage(*(int*) (r + 4), -1, msg, 0, 0x5fb, 0);
 			}
 			return 1;
 		}

@@ -19,7 +19,7 @@ typedef struct {
 } Msg_531320;
 
 char* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_00529160(char*, int, int, int);
+void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
@@ -97,7 +97,7 @@ void __cdecl fcn_00531320(void)
 					break;
 				}
 			}
-			fcn_00529160((char*) g_7e4318, 0, *(unsigned short*) (row - 0x16c), 0);
+			he_AssignActionSlot((char*) g_7e4318, 0, *(unsigned short*) (row - 0x16c), 0);
 			cm_SendCancelCharacterActions(*(int*) (row - 0x168));
 			ch_StartMovement(*(int*) (row - 0x168), *(int*) (g_7e4318 + 1), *(int*) (r + 2), 0, 0, 0);
 			g = g_7e4318;
@@ -128,7 +128,7 @@ void __cdecl fcn_00531320(void)
 					break;
 				}
 			}
-			fcn_00529160((char*) g_7e4318, 0, *(unsigned short*) (row - 0x16c), 0);
+			he_AssignActionSlot((char*) g_7e4318, 0, *(unsigned short*) (row - 0x16c), 0);
 			cm_SendCancelCharacterActions(*(int*) (row - 0x168));
 			ch_StartMovement(*(int*) (row - 0x168), *(int*) (g_7e4318 + 1), *(int*) (r + 2), 0, 0, 0);
 			g = g_7e4318;

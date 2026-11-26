@@ -27,7 +27,7 @@ extern float g_6628a8;
 int __cdecl fcn_00449600(int a);
 int __cdecl fcn_00448cc0(int self, float* dir, float* view, int pos,
 	float* outA, float* outB);
-void __cdecl fcn_00438b40(int h, float* p);
+void __cdecl d3_SetNodePosition(int h, float* p);
 void __cdecl d3_SetObjectRotation(int h, float* p);
 void __cdecl UpdateSceneLighting(int a);
 int __cdecl fcn_00448b10(void);
@@ -188,7 +188,7 @@ call:
 	dirty = (char) (ok & 1);
 	changed = (char) (ok >> 1);
 	if (dirty != 0)
-		fcn_00438b40(g_1041d0c, p44);
+		d3_SetNodePosition(g_1041d0c, p44);
 	if (changed != 0 && g_1041d0c != g_6b8478
 		&& g_1041d0c != g_6b847c && g_1041d0c != g_6b8480)
 		d3_SetObjectRotation(g_1041d0c, a18);

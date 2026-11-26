@@ -15,7 +15,7 @@ int __cdecl fcn_004f4830(int, void*);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004a5340(char*, int, int*, int, float, unsigned short*);
-float __cdecl fcn_00507e70(char*, char*, int);
+float __cdecl gm_CalcSkillDuelScore(char*, char*, int);
 int __cdecl he_HasNoActiveEvent04b(char*, char*);
 int __cdecl he_HasNoActiveAction0x2e(char*, char*);
 
@@ -116,7 +116,7 @@ main:
 	if (*(int*) (entry + 0x194) < 2) {
 		goto fail;
 	}
-	v = fcn_00507e70(e, entry, 3);
+	v = gm_CalcSkillDuelScore(e, entry, 3);
 	if (gm_RandomFloat01() + v < 1.0f) {
 		msg0.type = 0x0e;
 		msg0.a = 3;

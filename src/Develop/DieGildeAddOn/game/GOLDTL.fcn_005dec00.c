@@ -19,7 +19,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(int*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
@@ -58,7 +58,7 @@ int __cdecl gm_ObjBefriendOppositeGender(char* ent, int* arg)
 	cm_RequestCopyEntityData(*(int*) (ent + 4), *(int*) (obj + 4), 0x19, ok);
 	if (obj[2] == 6 || obj[2] == 7) {
 		io_FormatTextBuffer(text, 0xffa, *(unsigned short*) ent);
-		fcn_00545d40(*(int*) (obj + 4), -1, text, 0, 0x5ec, 0);
+		he_PostEntityMessage(*(int*) (obj + 4), -1, text, 0, 0x5ec, 0);
 	}
 	if (ent[2] == 6) {
 		rec = gm_LookupSpecialObjectRecord(**(unsigned short**) arg, &tmp);

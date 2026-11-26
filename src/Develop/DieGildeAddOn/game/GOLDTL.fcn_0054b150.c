@@ -17,8 +17,8 @@ int __cdecl fcn_004c5620(char a1, unsigned char* e);
 void __cdecl gm_AddTime(SIM_CLOCK* clock, int arg2, int arg3, int arg4);
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 int __cdecl io_FormatTextBuffer(char* dst, int id, ...);
-int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
-void __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
+int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
+void __cdecl gm_TryRecordCrime(int a, int b, int c, int d, int e);
 
 /* ADDRESS: GOLDTL 0x0054b150 */
 void __cdecl fcn_0054b150(char* entity)
@@ -45,7 +45,7 @@ void __cdecl fcn_0054b150(char* entity)
 	cm_RequestCopyEntityData(*(int*) (secondEntity + 4), *(int*) (firstEntity + 4), -0x14, 1);
 	if (firstEntity[2] == 6 || firstEntity[2] == 7) {
 		io_FormatTextBuffer(buf, 0x175a, *(unsigned short*) secondEntity, *(unsigned short*) secondEntity);
-		fcn_00545d40(*(int*) (firstEntity + 4), -1, buf, 0, 0x5fb, (char*) 0x6b5c60);
+		he_PostEntityMessage(*(int*) (firstEntity + 4), -1, buf, 0, 0x5fb, (char*) 0x6b5c60);
 	}
 	v4 = -1;
 	p = *(char**) (secondEntity + 0x170);
@@ -58,5 +58,5 @@ void __cdecl fcn_0054b150(char* entity)
 			v4 = *(int*) (p + 1);
 		}
 	}
-	fcn_004f4f60(0x13, 1, *(int*) (entity + 0xb0), *(int*) (entity + 0xac), v4);
+	gm_TryRecordCrime(0x13, 1, *(int*) (entity + 0xb0), *(int*) (entity + 0xac), v4);
 }

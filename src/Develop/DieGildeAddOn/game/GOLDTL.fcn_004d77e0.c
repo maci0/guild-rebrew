@@ -39,7 +39,7 @@ Ent* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_FindRecordById(int);
 void __cdecl gm_CalcEntityInventoryStats(int, Query*);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
-float __cdecl fcn_004ce8b0(Ent*);
+float __cdecl gm_CalcCombatStrength(Ent*);
 void __cdecl fcn_004ce740(Ent*);
 int __cdecl _ftol(void);
 unsigned short __cdecl gm_RandomMod(int);
@@ -51,7 +51,7 @@ void __cdecl cut_RunGfxCutscene(ShiftDlg*);
 void __cdecl fcn_0052a960(void*);
 void __cdecl fcn_00445f50(int, int, float, int);
 void __cdecl fcn_004d5940(ShiftDlg*);
-void __cdecl fcn_004e51d0(ShiftDlg*, int);
+void __cdecl cut_RunTurnRound(ShiftDlg*, int);
 void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_004d6170(ShiftDlg*);
 void __cdecl cut_RunCombatFlightOutro(ShiftDlg*);
@@ -60,7 +60,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowMessageBox(char*, unsigned int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl gm_TransferAndSellAssets(int, int, int, int);
-void __cdecl fcn_004d52a0(ShiftDlg*, int, int, int, float);
+void __cdecl cut_PlunderBuildingCarts(ShiftDlg*, int, int, int, float);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x004d77e0 */
 void __cdecl fcn_004d77e0(ShiftDlg* p)
@@ -129,9 +129,9 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		fcn_004e6c60(saved);
 		fcn_004d1a80();
 		fcn_004d1a80();
-		fcn_004e51d0(p, 0);
+		cut_RunTurnRound(p, 0);
 		if (*(int*) &g_772ea4 == 0 && *(int*) &g_772ea8 == 0) {
-			fcn_004e51d0(p, 0);
+			cut_RunTurnRound(p, 0);
 		}
 		if (*(int*) &g_772ea8 == 0) {
 			for (t = 0x9b4908; t < 0x9b4a48; t += 0x14) {
@@ -172,7 +172,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		if (p->list_a[i] != -1) {
 			ep = gm_LookupEntityRecordById(p->list_a[i]);
 			if (ep != 0 && ep->live != 0 && ep->live != 4) {
-				changed = (int) (fcn_004ce8b0(ep) + changed);
+				changed = (int) (gm_CalcCombatStrength(ep) + changed);
 				fcn_004ff210(ep->id, gm_RandomMod(10) * -20);
 			}
 		}
@@ -181,7 +181,7 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 		if (p->list_b[i] != -1) {
 			ep = gm_LookupEntityRecordById(p->list_b[i]);
 			if (ep != 0 && ep->live != 0 && ep->live != 4) {
-				saved = (int) (fcn_004ce8b0(ep) + saved);
+				saved = (int) (gm_CalcCombatStrength(ep) + saved);
 				fcn_004ff210(ep->id, gm_RandomMod(10) * -20);
 			}
 		}
@@ -219,6 +219,6 @@ void __cdecl fcn_004d77e0(ShiftDlg* p)
 	}
 	if (changed == *(int*) &g_772e9c) {
 		v = gm_StartFilteredEntitySearch(1, 1, p->owner);
-		fcn_004d52a0(p, v, *(int*) &g_772e9c, *(int*) 0x772e98, 100.0f);
+		cut_PlunderBuildingCarts(p, v, *(int*) &g_772e9c, *(int*) 0x772e98, 100.0f);
 	}
 }

@@ -2,7 +2,7 @@
 #include <math.h>
 extern void* g_6b5c5c; extern int g_67a370; extern char* g_6b8300;
 extern double g_662908; extern float g_662914;  extern float g_6628cc; extern const float g_6628a0;
-int __cdecl fcn_00402610();
+int __cdecl d3sm_GetObjectSuperMap();
 int __cdecl ch_RestoreGridRegion();
 int __cdecl fcn_00405a50();
 int __cdecl ch_DownsamplePath();
@@ -65,7 +65,7 @@ int __cdecl ch_ReplanBlockedPath(int a0,int a1,int *a2)
   v37 = v6;
   if (*(char *)(v28 + 9) != '-')
     return -1;
-  v35 = fcn_00402610(v27);
+  v35 = d3sm_GetObjectSuperMap(v27);
   fcn_00408250(((int)g_6b5c5c),v35);
   v36 = (int)(0.5 + (g_662914 / *(float *)(v35 + 0x10)));
   if (v36 > 10)

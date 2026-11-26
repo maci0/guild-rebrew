@@ -13,7 +13,7 @@ int __cdecl gm_GetBuildingTechEffect(int a1, int a2, int a3);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl he_SumEventValuesForSubject(int id);
-void __cdecl fcn_004c6ae0(int a1, int a2);
+void __cdecl cm_RequestModifyHealth(int a1, int a2);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00420bf0(void);
 void __cdecl nt_ResetPacketStats(void);
@@ -127,7 +127,7 @@ void __cdecl main_RundenBeginn(void)
 		}
 		tmp = *(int*) (disp + 0x31) + 4;
 		tmp += he_SumEventValuesForSubject(*(unsigned short*) slot);
-		fcn_004c6ae0(*(int*) (slot + 4), tmp);
+		cm_RequestModifyHealth(*(int*) (slot + 4), tmp);
 next:
 		slot2 += 0x21c;
 	} while ((int) slot2 < (int) 0x85a0a2);

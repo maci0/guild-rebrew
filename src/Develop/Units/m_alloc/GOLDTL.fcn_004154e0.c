@@ -2,14 +2,14 @@
 
 void __cdecl m_FreeTracked(void*);
 
-void __cdecl fcn_004154e0(char* p)
+void __cdecl d3_DestroyRain(char* rain)
 {
-	if (p == 0) {
+	if (rain == 0) {
 		return;
 	}
-	if (*(int*) (p + 0x10) != 0) {
-		m_FreeTracked((void*) *(int*) (p + 0x10));
-		*(int*) (p + 0x10) = 0;
+	if (*(int*) (rain + 0x10) != 0) {
+		m_FreeTracked((void*) *(int*) (rain + 0x10));
+		*(int*) (rain + 0x10) = 0;
 	}
-	m_FreeTracked(p);
+	m_FreeTracked(rain);
 }

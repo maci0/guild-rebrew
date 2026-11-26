@@ -4,7 +4,7 @@
 int __cdecl cm_ResolveSpecialEntityId(unsigned char* msg, int serial);
 
 
-int __cdecl fcn_004c8a30(unsigned char* msg, char* done)
+int __cdecl cm_ApplyFieldDeltaPacket(unsigned char* msg, char* done)
 {
 	char* a;
 	char* b;

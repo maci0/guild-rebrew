@@ -107,7 +107,7 @@ extern void d2_ProcessMouseInput();
 extern void fcn_00533090();
 extern void ReportClientMessage();
 extern void fcn_00545aa0();
-extern void fcn_00546d90();
+extern void he_RunQueuedActions();
 extern void cm_RequestUpdateGameTime();
 extern int cut_UpdateCutscenes();
 extern void cm_FlushCommandQueue();
@@ -120,7 +120,7 @@ extern void d3_UpdateFrustumCellVisibility();
 extern void fcn_00413380();
 extern void fcn_00444190();
 extern void ch_CollectContextCharacters();
-extern void fcn_00530c60();
+extern void d3_UpdateBuildingSceneScripts();
 extern void fcn_00529890();
 extern void ch_UpdatePendingPositions();
 extern void ch_Update();
@@ -129,7 +129,7 @@ extern void gm_UpdateWeatherWave();
 extern void fcn_004efde0();
 extern void fcn_00536bb0();
 extern void fcn_004c0cd0();
-extern void fcn_004c16c0();
+extern void gm_UpdateAmbientAudio();
 extern void fcn_004c0b40();
 extern void fcn_004c2860();
 extern void d3_UpdateLightningAndThunder();
@@ -146,7 +146,7 @@ extern void d2_SetOverlayAnimation();
 extern void sv_HandleObjects();
 extern void fcn_00531620();
 extern void d2_UpdateHoverTooltip();
-extern void fcn_00590670();
+extern void d2_UpdateSceneTooltip();
 extern void fcn_00527f60();
 extern void fcn_0046a110();
 extern void fcn_004da1b0();
@@ -268,7 +268,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		if (flags & 0x100) {
 			fcn_00545aa0();
 		}
-		fcn_00546d90();
+		he_RunQueuedActions();
 		if (g_14cbca0 == -1 && g_6b7fac > g_aecde4 && g_774964 != 0) {
 			cm_RequestUpdateGameTime(g_7e1f70);
 		}
@@ -315,7 +315,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		ch_CollectContextCharacters(i);
 	}
 	if (i != 0 && !(flags & 0x10000)) {
-		fcn_00530c60(i);
+		d3_UpdateBuildingSceneScripts(i);
 		fcn_00529890(i);
 		g_67530c = *(int *) (i + 1);
 	} else {
@@ -338,7 +338,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		fcn_004c0cd0();
 	}
 	if (g_774934 != 0) {
-		fcn_004c16c0();
+		gm_UpdateAmbientAudio();
 		fcn_004c0b40();
 	}
 	if (msx_MusicEnabled != 0 && (flags & 0x40000)) {
@@ -398,7 +398,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		}
 	}
 	if (flags & 0x400) {
-		fcn_00590670();
+		d2_UpdateSceneTooltip();
 	}
 	if (g_774670 == 0 && (flags & 0x80)) {
 		f = flags & 0x1000;

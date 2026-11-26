@@ -69,8 +69,8 @@ int __cdecl fcn_0053a160(void);
 int __cdecl d2_ChooseTutorial(void);
 void __cdecl d2_InitDefaultMenueProfile(void);
 void __cdecl fcn_00469e70(void);
-void __cdecl fcn_004acee0(void);
-int __cdecl fcn_0053f460(void);
+void __cdecl gm_ResetHistoricalCursors(void);
+int __cdecl d2_StartSinglePlayerChooseCity(void);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00471e30(int);
 void __cdecl msx_StopTrack(int, int);
@@ -203,8 +203,8 @@ void __cdecl main_Menue(void)
 			if (d2_CurrentElementId == b[4]) {
 				d2_SetSlotVisibility(v5, 0);
 				fcn_00469e70();
-				fcn_004acee0();
-				if (fcn_0053f460()) {
+				gm_ResetHistoricalCursors();
+				if (d2_StartSinglePlayerChooseCity()) {
 					*(int*) &g_7747b0 |= 1;
 					g_774654 = 1;
 				} else {

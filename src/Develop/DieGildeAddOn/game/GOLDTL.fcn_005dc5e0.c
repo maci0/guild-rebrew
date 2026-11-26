@@ -15,7 +15,7 @@ int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 static __inline void fill0_5dc5e0(char* dst, int size)
 {
@@ -125,7 +125,7 @@ int __cdecl fcn_005dc5e0(char* entity, int* target)
 
 			io_FormatTextBuffer(text, 0xff2, pkt);
 			ent = *(unsigned short*) (pkt + 0x27);
-			fcn_00545d40(*(int*) (&g_7f4ca4[ent * 0x87]), -1, text, 0, 0x5fb, 0);
+			he_PostEntityMessage(*(int*) (&g_7f4ca4[ent * 0x87]), -1, text, 0, 0x5fb, 0);
 		}
 	}
 	res = 1;

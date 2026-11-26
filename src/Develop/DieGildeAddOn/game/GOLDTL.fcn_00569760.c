@@ -6,8 +6,8 @@ extern float flt_665ecc;
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
-int __cdecl fcn_00567170(char*, int*, int*, int);
+int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
+int __cdecl he_GetEntityHomeTarget(char*, int*, int*, int);
 int __cdecl ch_StartMovement(int, int, int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
@@ -23,7 +23,7 @@ void __cdecl cm_SendCopyEntityData(int);
 /* Entity event handler: state 0 builds and posts the event message, state -1
  * clears the entity's event flag and frees its track. */
 /* ADDRESS: GOLDTL 0x00569760 */
-void __cdecl fcn_00569760(char* eventTrack)
+void __cdecl he_RunEntfuehrungHostage(char* eventTrack)
 {
 	float f;
 	char* p;
@@ -61,9 +61,9 @@ void __cdecl fcn_00569760(char* eventTrack)
 			idx = -1;
 			if ((*(unsigned char*) (eventTrack + 0x78) & 2) != 0) {
 				io_FormatTextBuffer(b.text, (char*) 0x19da);
-				fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), b.text, 0, 0x5fb, 0);
+				he_PostEntityMessage(*(int*) (e + 4), *(int*) (e + 4), b.text, 0, 0x5fb, 0);
 				if (*(int*) (e + 0x184) != 0) {
-					if (fcn_00567170(e, &n, (int*) &f, 0) != 0) {
+					if (he_GetEntityHomeTarget(e, &n, (int*) &f, 0) != 0) {
 						ch_StartMovement(*(int*) (e + 4), n, *(int*) &f, 0, 0, (int) 0x6a69c8);
 					}
 				}
@@ -82,7 +82,7 @@ void __cdecl fcn_00569760(char* eventTrack)
 		}
 		he_RegisterApEvent(*(unsigned short*) p, (char*) g_14b5280, -2, 0);
 		io_FormatTextBuffer(b.text, (char*) 0x19c2, eventTrack + 0xb4);
-		fcn_00545d40(*(int*) (e + 4), *(int*) (e + 4), b.text, 0, 0x5f0, 0);
+		he_PostEntityMessage(*(int*) (e + 4), *(int*) (e + 4), b.text, 0, 0x5f0, 0);
 		if (pl == 0) {
 			return;
 		}

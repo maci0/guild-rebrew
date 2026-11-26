@@ -27,7 +27,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl amt_AdjustOfficeHoldersFavor(ENTITY_RECORD*, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 
 void __cdecl he_ApplyZigeunerFavorPenalty(ENTITY_RECORD* a, ENTITY_RECORD* b)
 {
@@ -58,5 +58,5 @@ void __cdecl he_ApplyZigeunerFavorPenalty(ENTITY_RECORD* a, ENTITY_RECORD* b)
 	}
 	io_FormatTextBuffer(text1, 0x41df);
 	io_FormatTextBuffer(text2, id, text1);
-	fcn_00545d40(b->entity_id, -1, text2, 1, 0x5fb, 0);
+	he_PostEntityMessage(b->entity_id, -1, text2, 1, 0x5fb, 0);
 }

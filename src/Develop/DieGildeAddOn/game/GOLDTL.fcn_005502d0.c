@@ -8,7 +8,7 @@ extern char g_6a59fc[];
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 int __cdecl fcn_004c5620(int, char*);
 
 void __cdecl he_StartAction0x4b(char* u)
@@ -33,7 +33,7 @@ void __cdecl he_StartAction0x4b(char* u)
 		}
 		if (b[2] == 6 || b[2] == 7) {
 			io_FormatTextBuffer(text, 0x1d64, *(unsigned short*) a, (pos14_7f4c00*) (u + 0x52), *(unsigned short*) a);
-			fcn_00545d40(*(int*) (b + 4), -1, text, 0, 0x5fb, g_6a59fc);
+			he_PostEntityMessage(*(int*) (b + 4), -1, text, 0, 0x5fb, g_6a59fc);
 		}
 	}
 	fcn_004c5620(0, u);

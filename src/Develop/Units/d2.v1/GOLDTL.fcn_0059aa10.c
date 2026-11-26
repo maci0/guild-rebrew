@@ -56,7 +56,7 @@ void __cdecl cm_SendLogAction(char*);
 void __cdecl cm_SendTraceEnd(char*);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_GetEntityTableEntry(char*);
@@ -186,7 +186,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 									fcn_00526120(buf, 0);
 								} else {
 									cm_SendLogAction(s_6aa328);
-									fcn_004c6ae0(*(int*) (house + 4), -req);
+									cm_RequestModifyHealth(*(int*) (house + 4), -req);
 									s = cm_SendCopyEntityData(msg);
 									cm_SendTraceEnd(s_6aa328);
 									goto wait;

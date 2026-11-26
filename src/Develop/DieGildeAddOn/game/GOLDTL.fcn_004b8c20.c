@@ -4,7 +4,7 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 
 
@@ -24,7 +24,7 @@ int __cdecl fcn_004b8c20(int* request)
 	if (*(int*) (e + 0xca) < n)
 		return 0x400;
 	io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, n);
-	fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
+	he_PostEntityMessage(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	fcn_005100f0(*(int*) (e + 2), -n);
 	return 0;
 }

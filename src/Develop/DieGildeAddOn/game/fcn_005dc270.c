@@ -14,7 +14,7 @@ void __cdecl fcn_00508280(char* slot, int a, int b);
 int __cdecl gm_HasActiveSpecialObject(char* slot, int mode);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00503fe0(int a, int b, int c);
-void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
+void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
 
 /* Handles the two result kinds of a diebesgilde spionage dialog: report the
  * outcome packet and tear the slot down. Native body: 869 bytes. */
@@ -65,7 +65,7 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 		    || ((char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c))[2] == 7) {
 			io_FormatTextBuffer(line, 0xff1);
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
-			fcn_00545d40(*(int*) (slot + 4), -1, line, 0, 0x5fb, 0);
+			he_PostEntityMessage(*(int*) (slot + 4), -1, line, 0, 0x5fb, 0);
 		}
 		return 1;
 	}
@@ -97,7 +97,7 @@ int __cdecl fcn_005dc270(char* cmd, char* arg2)
 	    || ((char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c))[2] == 7) {
 		io_FormatTextBuffer(line, 0xff1);
 		slot = (char*) (0x7f4ca0 + *(unsigned short*) (esi + 0x27) * 0x21c);
-		fcn_00545d40(*(int*) (slot + 4), -1, line, 0, 0x5fb, 0);
+		he_PostEntityMessage(*(int*) (slot + 4), -1, line, 0, 0x5fb, 0);
 	}
 	return 1;
 }

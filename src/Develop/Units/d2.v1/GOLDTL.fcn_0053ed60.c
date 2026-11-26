@@ -24,7 +24,7 @@ extern int d2_CurrentWindowId;
 void __cdecl fcn_00533880(void);
 void __cdecl fcn_005338a0(void);
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl fcn_00445f50(int, int, float, int);
 int __cdecl sprintf(char*, const char*, ...);
@@ -101,7 +101,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	fcn_00533880();
 	fcn_005338a0();
 	d3_SelectSceneContext(0, 0);
-	fcn_00438b40(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x5c));
+	d3_SetNodePosition(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x5c));
 	d3_SetObjectRotation(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x90));
 	fcn_00445f50(0, 0, 1.0f, 0);
 	if (network == 0) {

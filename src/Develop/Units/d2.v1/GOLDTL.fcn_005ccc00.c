@@ -9,10 +9,10 @@ typedef struct {
 	int pad[11];
 } Match;
 
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-void __cdecl fcn_005ccc00(unsigned short* self, unsigned int n, Match* arr)
+void __cdecl d2_UpdateMatchAttitudeBars(unsigned short* self, unsigned int n, Match* arr)
 {
 	unsigned int i;
 	unsigned short* other;
@@ -26,7 +26,7 @@ void __cdecl fcn_005ccc00(unsigned short* self, unsigned int n, Match* arr)
 					d2_SetElementValue(arr->h, 0, 100, 0);
 				}
 				else {
-					d2_SetElementValue(arr->h, 0, 100, (int) fcn_0050f980(*self, *other, 1));
+					d2_SetElementValue(arr->h, 0, 100, (int) gm_CalcEntityFavor(*self, *other, 1));
 				}
 			}
 		}

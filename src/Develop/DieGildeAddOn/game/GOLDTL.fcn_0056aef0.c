@@ -22,7 +22,7 @@ extern unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 extern char* __cdecl gm_LookupEntityRecordById(int id);
 extern void __cdecl cm_SendCancelCharacterActions(int a1);
 extern void __cdecl ch_StartMovement(int, int, int, char*, int, char*);
-extern void __cdecl fcn_00529160(char*, char*, unsigned int, char*);
+extern void __cdecl he_AssignActionSlot(char*, char*, unsigned int, char*);
 extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 extern int __cdecl gm_IsEntityAtBuilding(char*, char*);
 extern int __cdecl gm_GetScaledEntitySkill(char*, int);
@@ -38,12 +38,12 @@ extern int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 extern void __cdecl fcn_004c6be0(char*, char*);
 extern char* __cdecl fcn_0050dc90(char*);
 extern unsigned short* __cdecl gm_SetupEntityQuery(unsigned char*);
-extern int __cdecl fcn_005049a0(unsigned char*);
+extern int __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
 
 /* ADDRESS: GOLDTL 0x0056aef0 */
-void __cdecl fcn_0056aef0(char* action)
+void __cdecl he_RunGebSpionage(char* action)
 {
 	char* e;
 	char* q;
@@ -77,7 +77,7 @@ void __cdecl fcn_0056aef0(char* action)
 			if (e != 0) {
 				cm_SendCancelCharacterActions(*(int*)(e + 4));
 				ch_StartMovement(*(int*)(e + 4), *(int*)(h + 1), -1, 0, 1, "GebSpionage");
-				fcn_00529160(h, 0, *(unsigned short*)e, action);
+				he_AssignActionSlot(h, 0, *(unsigned short*)e, action);
 			}
 		}
 		*(pos14_7f4c00*)(action + 0x52) = gm_GameTime;
@@ -157,7 +157,7 @@ void __cdecl fcn_0056aef0(char* action)
 				u = e;
 				cm_SendCancelCharacterActions(((int*)(action + 0x8c))[n]);
 				ch_StartMovement(((int*)(action + 0x8c))[n], *(int*)(h + 1), *(int*)(q + 2), 0, 0, "GebSpionage");
-				fcn_00529160(h, 0, *(unsigned short*)e, 0);
+				he_AssignActionSlot(h, 0, *(unsigned short*)e, 0);
 				k++;
 			}
 		}
@@ -208,7 +208,7 @@ void __cdecl fcn_0056aef0(char* action)
 			if (u != 0) {
 				if (e == 0 || (e[0x1b4] & 1) == 0) {
 					io_FormatTextBuffer(buf, 0x19f8, *(unsigned short*)u, *(unsigned short*)r, h2);
-					i = fcn_005049a0((unsigned char*)h);
+					i = gm_FindBuildingPrimarySlot((unsigned char*)h);
 					he_MessageBoxQuickjump(*(int*)(ent + 4), *(int*)(ent + 4), buf, 1, 0x5f0,
 						*(int*)(action + 0xb0), *(int*)((char*)i + 2), 0, "_NACHRICHTEN_HS_78");
 				}
@@ -230,7 +230,7 @@ void __cdecl fcn_0056aef0(char* action)
 				if (h != 0) {
 					ch_StartMovement(((int*)(action + 0x8c))[n], *(int*)(h + 1), *(int*)(q + 2), 0, 0, "GebSpionage");
 				}
-				fcn_00529160(0, 0, *(unsigned short*)e, 0);
+				he_AssignActionSlot(0, 0, *(unsigned short*)e, 0);
 			}
 		}
 		he_FreeAction(action);

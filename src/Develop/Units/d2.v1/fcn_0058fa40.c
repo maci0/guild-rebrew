@@ -18,7 +18,7 @@ int __cdecl fcn_004f1790(char* a, Elem* e);
 int __cdecl fcn_004f46e0(int a, unsigned char** out1, void** out2);
 void __cdecl io_FormatTextBuffer(void* dest, int id, ...);
 int __cdecl d2_CreateRentAGraveDialog(View* view, char* text);
-void __cdecl fcn_0058cc90(unsigned char* a1, View* view);
+void __cdecl d2_RunRentAGraveMenu(unsigned char* a1, View* view);
 void __cdecl fcn_00471e30(int a);
 void __cdecl d2_OpenRentAGraveDialog(unsigned char* a1);
 int __cdecl fcn_00526120(int a, int b);
@@ -42,7 +42,7 @@ void __cdecl fcn_0058fa40(unsigned char* input)
 			(Elem*) obj);
 		io_FormatTextBuffer(text, 0x4107, ((char**) 0x665f78)[*(int*) obj]);
 		if (d2_CreateRentAGraveDialog(&view, (char*) text) != 0) {
-			fcn_0058cc90(input, &view);
+			d2_RunRentAGraveMenu(input, &view);
 			fcn_00471e30(view.x0);
 			fcn_00532ef0();
 			return;

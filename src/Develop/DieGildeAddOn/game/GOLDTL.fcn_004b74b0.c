@@ -8,7 +8,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b74b0 */
@@ -28,6 +28,6 @@ int __cdecl fcn_004b74b0(int* a1)
 		return 0;
 	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, amount);
 	cm_RequestTransferCurrencyNoKill(-1, a1[0], g_773d75, amount);
-	fcn_00545d40(*(int*) (entity + 2), *(int*) (entity + 2), buf, strlen(buf) > 0x100, 0x603, 0);
+	he_PostEntityMessage(*(int*) (entity + 2), *(int*) (entity + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

@@ -15,7 +15,7 @@ int __cdecl ai_CheckLawActionPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction01cPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction01dPredicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a8d40(char*, char*, int, char*, int);
-int __cdecl fcn_004a8da0(char*, char*, int, char*, int);
+int __cdecl ai_CheckAction025Predicate(char*, char*, int, char*, int);
 int __cdecl fcn_004a8e40(char*, char*, int, char*, int);
 int __cdecl fcn_004a8ed0(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction029Predicate(char*, char*, int, char*, int);
@@ -31,7 +31,7 @@ int __cdecl ai_SelectAction037Target(char*, char*, int, char*, int);
 int __cdecl fcn_004a8d30(char*, char*, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x004a9b20 */
-int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
+int __cdecl ai_SelectPrivilegeAction(char* unused0, char* actorEntity, int unused2, char* ctx, int unused4)
 {
 	sel_ctx c;
 	int ids1[19];
@@ -56,7 +56,7 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 			e = he_fn_Handlung();
 		}
 	}
-	if (*a3 == 0) {
+	if (*ctx == 0) {
 		*(int*) c.text = 1;
 		n1 = 0;
 		for (p = (int*) 0x67fa58; (int) p < (int) 0x67faa4; p++) {
@@ -101,20 +101,20 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 				return 0;
 			}
 		}
-		*a3 = 0x10;
-		*(int*) (a3 + 4) = id;
-		*(int*) (a3 + 8) = sel;
-	} else if (*a3 == 0x10) {
-		id = *(int*) (a3 + 4);
+		*ctx = 0x10;
+		*(int*) (ctx + 4) = id;
+		*(int*) (ctx + 8) = sel;
+	} else if (*ctx == 0x10) {
+		id = *(int*) (ctx + 4);
 		*(int*) c.text = 1;
 		if (gm_CheckPrivilege(id, actorEntity, (int) &c) & 2) {
-			*(int*) (a3 + 8) = 3;
+			*(int*) (ctx + 8) = 3;
 		} else {
 			*(int*) c.text = 2;
 			if (!(gm_CheckPrivilege(id, actorEntity, (int) &c) & 2)) {
 				return 0;
 			}
-			*(int*) (a3 + 8) = 4;
+			*(int*) (ctx + 8) = 4;
 		}
 	} else {
 		return 0;
@@ -122,59 +122,59 @@ int __cdecl fcn_004a9b20(char* a0, char* actorEntity, int a2, char* a3, int a4)
 	r = 0;
 	switch (id) {
 	case 0x12:
-		r = fcn_004a8880(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8880(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x13:
 	case 0x14:
-		r = ai_CheckLawActionPredicate(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckLawActionPredicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x1c:
-		r = ai_CheckAction01cPredicate(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction01cPredicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x1d:
-		r = ai_CheckAction01dPredicate(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction01dPredicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x21:
-		r = fcn_004a8d30(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8d30(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x24:
-		r = fcn_004a8d40(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8d40(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x25:
-		r = fcn_004a8da0(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction025Predicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x27:
-		r = fcn_004a8e40(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8e40(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x28:
-		r = fcn_004a8ed0(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a8ed0(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x29:
-		r = ai_CheckAction029Predicate(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction029Predicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x2a:
-		r = ai_CheckAction02aPredicate(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction02aPredicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x2b:
-		r = ai_CheckAction02bPredicate(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction02bPredicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x2c:
-		r = ai_CheckAction02cPredicate(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction02cPredicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x2d:
-		r = ai_CheckAction02dPredicate(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction02dPredicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x31:
-		r = fcn_004a96f0(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a96f0(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x32:
-		r = fcn_004a9780(a0, actorEntity, (int) &c, a3, a4);
+		r = fcn_004a9780(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x35:
-		r = ai_CheckAction035Predicate(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_CheckAction035Predicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x37:
-		r = ai_SelectAction037Target(a0, actorEntity, (int) &c, a3, a4);
+		r = ai_SelectAction037Target(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	}
 	return r;

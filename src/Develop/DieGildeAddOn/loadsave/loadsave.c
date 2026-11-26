@@ -642,6 +642,7 @@ int __cdecl ls_SaveBuildingEntityState(void* file)
 	return 1;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl ls_SaveDynamicEntities(void* f)
 {
 	extern unsigned int __cdecl vfs_fwrite(void* buf, int size, int count, char* stream);
@@ -741,6 +742,7 @@ int __cdecl ls_SaveDynamicEntities(void* f)
 	}
 	return 1;
 }
+#endif
 
 /* Client-only (TL 0x51f480, discarded): writes the player slots that ls_LoadEntities reads back, after
  * the slot count and the ids of the records the header pointers name (-1 for none). Two fields follow

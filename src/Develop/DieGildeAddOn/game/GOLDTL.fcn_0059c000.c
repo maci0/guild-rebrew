@@ -35,12 +35,12 @@ int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00529160(char*, int, int, int);
+void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl gm_CollectTradeItemsByKind(char*);
 void __cdecl fcn_00532ef0(void);
 int __cdecl gm_GetMsgField(int, int);
 void __cdecl fcn_0046f940(int, char*);
-void __cdecl fcn_00595330(int, int, int, int, int);
+void __cdecl d2_RenderProduktionStockRows(int, int, int, int, int);
 void __cdecl fcn_00595e20(char*, int);
 void __cdecl fcn_005963f0(int, int, int, char*);
 void __cdecl fcn_00471e30(int);
@@ -72,7 +72,7 @@ typedef struct {
 } Req_59c000;
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0059c000 */
-int __cdecl fcn_0059c000(char* building)
+int __cdecl d2_RunMetalProduktionDialog(char* building)
 {
 	Req_59c000 req;
 	char buf[8];
@@ -187,7 +187,7 @@ located:
 									j = g_7746cc;
 									if (!j)
 										j = fcn_00502cd0(*(unsigned int*) (building + 0x5d), 1, 0, 0xfd);
-									fcn_00529160(building, j, *p, found);
+									he_AssignActionSlot(building, j, *p, found);
 									*(char*) (*p * 0x21c + 0x7f4e28) = 0;
 								}
 								p += 10;
@@ -297,7 +297,7 @@ nextcand:
 		}
 		itoa(count, buf, 10);
 		fcn_0046f940(item, buf);
-		fcn_00595330(h, 2, count, q, 2);
+		d2_RenderProduktionStockRows(h, 2, count, q, 2);
 		fcn_00595e20(building, q);
 		fcn_005963f0(h, 1, 0, building);
 	} while (main_RunFrameLoop(0x59c000, 0x677c7));

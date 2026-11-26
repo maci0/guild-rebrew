@@ -21,11 +21,11 @@ void __cdecl fcn_005100f0(int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 void __cdecl fcn_00526120(char*, int);
 
 /* ADDRESS: GOLDTL 0x004eb780 */
-int __cdecl fcn_004eb780(char* e, int* msg)
+int __cdecl gm_ExecZunftAufruhr(char* e, int* msg)
 {
 	char* h;
 	int cnt;
@@ -71,7 +71,7 @@ int __cdecl fcn_004eb780(char* e, int* msg)
 	for (i = 0; i < 0x300; i++) {
 		if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 7 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type == 6) && *(int*) (e + 4) != ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id
 		    && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id != ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].entity_id) {
-			fcn_00545d40(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, buf, 0, 0x5fd, "");
+			he_PostEntityMessage(((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id, -1, buf, 0, 0x5fd, "");
 		}
 	}
 	if (e[2] == 6) {

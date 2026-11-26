@@ -12,7 +12,7 @@ extern float g_662d40[3];
 extern float g_662b08;
 
 extern void __cdecl d3_SetObjectRotation(void*, float*);
-extern void __cdecl fcn_00438b40(void*, float*);
+extern void __cdecl d3_SetNodePosition(void*, float*);
 extern void __cdecl d3_NormalizeVector(float*);
 extern float __cdecl d3_WrapYawDelta(int, int);
 extern void* __cdecl fcn_005e8850(void);
@@ -100,7 +100,7 @@ void __cdecl fcn_00587a50(char* o)
 	v[5] = u * *(float*) (o + 0x28) + s;
 	v[4] = v[4] + u * *(float*) (o + 0x24);
 	v[6] = v[6] + u * z;
-	fcn_00438b40(d3_ActiveCamera, v + 4);
+	d3_SetNodePosition(d3_ActiveCamera, v + 4);
 	d3_SetObjectRotation(d3_ActiveCamera, v);
 
 	if (*(int*) (o + 0x7c) == 0) {
@@ -132,16 +132,16 @@ void __cdecl fcn_00587a50(char* o)
 		v[0] = *(float*) o - u * v[0];
 		v[1] = *(float*) (o + 4) - u * v[1];
 		v[2] = *(float*) (o + 8) - u * v[2];
-		fcn_00438b40(*(void**) (o + 0x98), v);
+		d3_SetNodePosition(*(void**) (o + 0x98), v);
 		v[4] = -70.0f + u * g_662d40[0];
 		v[5] = -50.0f + u * g_662d40[1];
 		v[6] = 120.0f + u * g_662d40[2];
-		fcn_00438b40(*(void**) (o + 0x9c), v + 4);
+		d3_SetNodePosition(*(void**) (o + 0x9c), v + 4);
 		return;
 	}
 	*(int*) (o + 0x7c) = 0;
 	*(int*) (o + 0x78) = 0;
-	fcn_00438b40(*(void**) (o + 0x9c), (float*) 0x665f28);
+	d3_SetNodePosition(*(void**) (o + 0x9c), (float*) 0x665f28);
 tail:
-	fcn_00438b40(*(void**) (o + 0x98), (float*) o);
+	d3_SetNodePosition(*(void**) (o + 0x98), (float*) o);
 }

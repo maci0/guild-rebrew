@@ -49,13 +49,13 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 
 unsigned short __cdecl gm_RandomMod(int);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int firstId, unsigned int secondId, unsigned int flags);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl cm_SendCopyEntityData(Packet*);
 
 /* ADDRESS: GOLDTL 0x004ba080 */
-int __cdecl fcn_004ba080(Req* r)
+int __cdecl gm_HandleMsg2aSendAction31(Req* r)
 {
 	char* o;
 	float dist;
@@ -111,13 +111,13 @@ int __cdecl fcn_004ba080(Req* r)
 	if (building == 0 || player == 0) {
 		return 0x400;
 	}
-	dist = fcn_0050f980(*(unsigned short*) o, *(unsigned short*) player, 1);
+	dist = gm_CalcEntityFavor(*(unsigned short*) o, *(unsigned short*) player, 1);
 	if (!((float) gm_RandomMod(50) > dist)) {
 		return 0x400;
 	}
 	io_FormatTextBuffer(buf, r->x4 + 0x12e7, (player[9] ? 0x230 : 0x20d) + *(unsigned char*) (player + 0x165),
 		*(unsigned short*) player, building);
-	fcn_00545d40(*(int*) (o + 4), *(int*) (o + 4), buf, strlen(buf) > 0x100, 0x603, 0);
+	he_PostEntityMessage(*(int*) (o + 4), *(int*) (o + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	{
 		Packet msg;
 

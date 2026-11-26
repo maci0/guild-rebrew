@@ -17,7 +17,7 @@ int __cdecl fcn_005c6770(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(char, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl cm_SendLogAction(char*);
 void __cdecl cm_SendTraceEnd(char*);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
@@ -77,7 +77,7 @@ void __cdecl fcn_00544a90(char* e)
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 			io_FormatTextBuffer(text, 0x42f6, *(unsigned short*) b);
-			fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), text, 1, 0x5f4, 0);
+			he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), text, 1, 0x5f4, 0);
 			return;
 		}
 		if (v == -0x406) {
@@ -85,7 +85,7 @@ void __cdecl fcn_00544a90(char* e)
 			gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 2, 0);
 			*(int*) (e + 0x84) = fcn_004c5620(-1, e);
 			io_FormatTextBuffer(text, 0x42f7, *(unsigned short*) b);
-			fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), text, 1, 0x5f4, 0);
+			he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), text, 1, 0x5f4, 0);
 			return;
 		}
 		if (v == -0x400 || v == -0x401 || v == -0x402) {
@@ -108,7 +108,7 @@ void __cdecl fcn_00544a90(char* e)
 						io_FormatTextBuffer(line + strlen(line), 0x1ced);
 						io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) b);
 					}
-					fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
+					he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
 				}
 				*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 				goto Lsend;
@@ -127,7 +127,7 @@ void __cdecl fcn_00544a90(char* e)
 				io_FormatTextBuffer(line, 0x1cf3);
 				io_FormatTextBuffer(line + strlen(line), 0x1cf4, *(unsigned short*) b, 0x5d,
 				    (int) e[0xb9] - (int) e[0xb8], 0x5d);
-				fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 0, 0x5f4, 0);
+				he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), line, 0, 0x5f4, 0);
 			} else if (a[2] == 5) {
 				e[0xb8] = e[0xb8] + (char) gm_RandomMod(2) + 1;
 			} else if (gm_RandomMod(4) == 0) {
@@ -160,7 +160,7 @@ void __cdecl fcn_00544a90(char* e)
 			io_FormatTextBuffer(line + strlen(line), 0x1cef, *(unsigned short*) pb);
 			io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) b);
 		}
-		fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
+		he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
 		goto Lneg;
 	case 1:
 		cm_SendLogAction(g_6a5a48);
@@ -195,7 +195,7 @@ void __cdecl fcn_00544a90(char* e)
 				pb = b;
 			}
 			io_FormatTextBuffer(buf, 0x1d31, *(unsigned short*) b);
-			fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), buf, 0, 0x5f4, 0);
+			he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), buf, 0, 0x5f4, 0);
 			cm_RequestChangeFloat(*(int*) (pb + 4), 0x7c, g_664174 - *(float*) (pb + 0x7c));
 		}
 		if (fcn_004f25d0((int) b, &rec, &hit) != 0) {
@@ -265,7 +265,7 @@ void __cdecl fcn_00544a90(char* e)
 			io_FormatTextBuffer(line + strlen(line), 0x1cef, *(unsigned short*) pb);
 			io_FormatTextBuffer(line + strlen(line), 0x1cf0, *(unsigned short*) b);
 		}
-		fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
+		he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), line, 1, 0x5f4, 0);
 		goto Lneg;
 	default:
 		return;

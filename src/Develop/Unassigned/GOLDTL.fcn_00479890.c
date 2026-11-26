@@ -5,12 +5,12 @@
 
 #pragma intrinsic(memcpy, memset)
 
-int __cdecl fcn_00479890(char* p, char* src)
+int __cdecl d2_SetShapeBankPalette(char* bank, char* palette)
 {
-	if (p == 0) {
+	if (bank == 0) {
 		return 0;
 	}
-	memcpy(p + 0x445, src, 0x400);
+	memcpy(bank + 0x445, palette, 0x400);
 	return 1;
 }
 
@@ -43,35 +43,35 @@ extern char g_100eb80[];
 /* fcn_00479890 must stay in this file: msvc6's same-TU callee analysis sees
  * that it leaves edx alone, so `b` stays in edx across the call. */
 /* ADDRESS: GOLDTL 0x004798c0 */
-int __cdecl fcn_004798c0(Shape* s, Bank* b)
+int __cdecl d2_AppendShapeToBank(Shape* shape, Bank* bank)
 {
 	char magic[9];
 
 	memcpy(magic, s_67d8bc, 9);
-	if (b->count >= 0xff) {
+	if (bank->count >= 0xff) {
 		return 0;
 	}
-	if (b->size == 0 || b->count == 0) {
-		b->size = 0x845;
-		memcpy(b->magic, magic, 8);
-		b->ver = 1;
-		b->type = s->type;
-		if (!b->type) {
-			fcn_00479890((char*) b, g_100eb80);
+	if (bank->size == 0 || bank->count == 0) {
+		bank->size = 0x845;
+		memcpy(bank->magic, magic, 8);
+		bank->ver = 1;
+		bank->type = shape->type;
+		if (!bank->type) {
+			d2_SetShapeBankPalette((char*) bank, g_100eb80);
 		}
 	}
-	if (b->type != s->type) {
+	if (bank->type != shape->type) {
 		return 0;
 	}
-	memcpy((char*) b + b->size, s, s->len);
-	*(unsigned int*) ((char*) b + 0x45 + b->count * 4) = b->size;
-	b->size += s->len;
-	if (s->w > b->maxw) {
-		b->maxw = s->w;
+	memcpy((char*) bank + bank->size, shape, shape->len);
+	*(unsigned int*) ((char*) bank + 0x45 + bank->count * 4) = bank->size;
+	bank->size += shape->len;
+	if (shape->w > bank->maxw) {
+		bank->maxw = shape->w;
 	}
-	if (s->h > b->maxh) {
-		b->maxh = s->h;
+	if (shape->h > bank->maxh) {
+		bank->maxh = shape->h;
 	}
-	b->count++;
+	bank->count++;
 	return 1;
 }

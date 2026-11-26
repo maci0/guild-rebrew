@@ -18,7 +18,7 @@ void __cdecl ch_CheckAniMorph(char* e);
 void __cdecl d3_RemoveObjectAnimation(char* a, char* b);
 #include "Develop/DieGildeAddOn/game/ch_action.h"
 int __cdecl ch_FindNearbyCharacters(char* self, char** out, float range);
-char* __cdecl fcn_00402610(char* obj);
+char* __cdecl d3sm_GetObjectSuperMap(char* obj);
 void __cdecl ch_SelectNearbyPosition(char* src, float* dst);
 char __cdecl fcn_0045b990(char* map, float* pos, int* col, int* row, float* height);
 char* __cdecl ch_CreateAction(char* e, int kind, int a, int b, int c);
@@ -70,7 +70,7 @@ int __cdecl ch_Update(void)
 		} else if (*(char**) (*p + 0x88) == (char*) g_67a370 && (f = *(unsigned short*) (*p + 0x8c), (f & 0x32) == 0) &&
 			   (f & 0x8000) == 0 && *(int*) (*p + 0x124) == 0) {
 			if (ch_FindNearbyCharacters(*p, list, 20.0f) != 0) {
-				map = fcn_00402610(*p);
+				map = d3sm_GetObjectSuperMap(*p);
 				ch_SelectNearbyPosition(*(char**) (*p + 0x34) + 0x4c, pos);
 				if (fcn_0045b990(map, pos, &col, &row, &height)) {
 					ch_CreateAction(*p, 0x2d, col, row, d3_CurrentContextIndex);

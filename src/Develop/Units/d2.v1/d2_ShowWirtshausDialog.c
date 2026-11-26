@@ -10,7 +10,7 @@ extern int d2_CurrentWindowId; extern unsigned char g_773d75; extern unsigned sh
 
 float __cdecl fcn_0042e450(void);
 int __cdecl d3_FreeObjectAnimation();
-int __cdecl fcn_00438b40();
+int __cdecl d3_SetNodePosition();
 int __cdecl d3_SetObjectRotation();
 int __cdecl CompareVector3WithinTolerance();
 int __cdecl d2_ClearWindowChildren();

@@ -68,7 +68,7 @@ extern char g_6b859b;
 
 int __cdecl gm_GetSeason(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_00438b40(Camera*, char*);
+void __cdecl d3_SetNodePosition(Camera*, char*);
 void __cdecl d3_SetCameraHeightFraction(float);
 void __cdecl d3_SetObjectRotation(Camera*, char*);
 int __cdecl d3_GetContextIndex(int);
@@ -96,7 +96,7 @@ void __cdecl fcn_00516f60(void)
 	}
 	v = (View*) gm_GetEntityTableEntry((char*) (&((Entity*)g_7f4ca0)[g_774970]));
 	if (v != 0 && v->zoom != -1.0f) {
-		fcn_00438b40(((Camera*)d3_ActiveCamera), v->pos);
+		d3_SetNodePosition(((Camera*)d3_ActiveCamera), v->pos);
 		d3_SetCameraHeightFraction(v->zoom);
 		((Camera*)d3_ActiveCamera)->angle = v->angle;
 		d3_SetObjectRotation(((Camera*)d3_ActiveCamera), ((Camera*)d3_ActiveCamera)->pos);

@@ -7,7 +7,7 @@ struct unit* __cdecl he_StartHandlungSearch(int, ...);
 struct unit* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_SendCmdMessage(int*, char*, char*, char*);
-int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 void __cdecl cm_RequestUpdateStraftatState(int, int, int, int);
 extern char g_6b5c60[];
 
@@ -197,17 +197,17 @@ int __cdecl fcn_004dc7d0(char* cmd)
         break;
     }
     if (a != 0 && a != bad && (a[2] == 6 || a[2] == 7))
-        fcn_00545d40(*(int*) (a + 4), -1, text, 0, 0x5f5, 0);
+        he_PostEntityMessage(*(int*) (a + 4), -1, text, 0, 0x5f5, 0);
     if (b != 0 && b != bad && (b[2] == 6 || b[2] == 7))
-        fcn_00545d40(*(int*) (b + 4), -1, text, 0, 0x5f5, 0);
+        he_PostEntityMessage(*(int*) (b + 4), -1, text, 0, 0x5f5, 0);
     if (c != 0 && c != bad && (c[2] == 6 || c[2] == 7))
-        fcn_00545d40(*(int*) (c + 4), -1, text, 0, 0x5f5, 0);
+        he_PostEntityMessage(*(int*) (c + 4), -1, text, 0, 0x5f5, 0);
     if (d != 0 && d != bad && (d[2] == 6 || d[2] == 7))
-        fcn_00545d40(*(int*) (d + 4), -1, text, 0, 0x5f5, 0);
+        he_PostEntityMessage(*(int*) (d + 4), -1, text, 0, 0x5f5, 0);
     if (e != 0 && e != bad && (e[2] == 6 || e[2] == 7))
-        fcn_00545d40(*(int*) (e + 4), -1, text, 0, 0x5f5, 0);
+        he_PostEntityMessage(*(int*) (e + 4), -1, text, 0, 0x5f5, 0);
     if (f != 0 && f != bad && (f[2] == 6 || f[2] == 7))
-        fcn_00545d40(*(int*) (f + 4), -1, text, 0, 0x5f5, 0);
+        he_PostEntityMessage(*(int*) (f + 4), -1, text, 0, 0x5f5, 0);
     cm_RequestUpdateStraftatState(*(int*) (cmd + 0x34), *(int*) (cmd + 0x34), *(int*) (cmd + 0x7c), 0);
     return 0;
 }

@@ -14,7 +14,7 @@ int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl he_FreeAction(void* u);
 void __cdecl cm_RequestModifyEntityLevel(int a1, int a2, int a3);
 void __cdecl io_FormatTextBuffer(char* out, int a2, int a3, int a4);
-void __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
+void __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 void __cdecl cm_SendCopyEntityData(void* packet);
 void __cdecl cm_RequestUpdateResidenceDecor(int id);
 int __cdecl sprintf(char*, const char*, ...);
@@ -89,7 +89,7 @@ void __cdecl he_RunTalentBoost(char* actionRecord)
 				sprintf(msg, s_6a5b74, byte);
 				io_FormatTextBuffer(buf, 0x67728c, 0x16f2, *(unsigned char*) (actionRecord + 0xae) + 0x16f3);
 				id = ((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(actionRecord + 8)].entity_id;
-				fcn_00545d40(id, id, buf, 0, 0x5fd, msg);
+				he_PostEntityMessage(id, id, buf, 0, 0x5fd, msg);
 			}
 		}
 		cm_RequestUpdateResidenceDecor(*(int*) (row + 4));

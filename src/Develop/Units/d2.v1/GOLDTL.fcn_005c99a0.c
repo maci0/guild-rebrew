@@ -19,7 +19,7 @@ int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_005c9090();
 int __cdecl fcn_004677e0();
 int __cdecl fcn_00472380();
-float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
+float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl fcn_00472640();
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -143,7 +143,7 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, Item_5c99a
 				if (*(char*) ((int) item->obj + 2) == 7) {
 					fcn_00472380(item->win2, 0, 100, 0, 1);
 				} else {
-					fcn_00472380(item->win2, 0, 100, (int) fcn_0050f980(*(unsigned short*) owner, *(unsigned short*) item->obj, 1));
+					fcn_00472380(item->win2, 0, 100, (int) gm_CalcEntityFavor(*(unsigned short*) owner, *(unsigned short*) item->obj, 1));
 				}
 				fcn_00472640(item->win2, 1);
 				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win2].value_05c = 1;

@@ -66,10 +66,10 @@ void __cdecl ai_CalcMeisterWache(Master47de*);
 void __cdecl ai_CalcMeisterDiebe(Master47de*);
 void __cdecl ai_CalcMeisterRaeuber(Master47de*);
 void __cdecl ai_CalcMeisterBank(Master47de*);
-void __cdecl fcn_00482f20(Master47de*);
+void __cdecl ai_CalcMeisterLager(Master47de*);
 void __cdecl fcn_00483480(Master47de*);
 void __cdecl fcn_00483f20(Master47de*);
-void __cdecl fcn_0047e270(Master47de*);
+void __cdecl ai_UpdateMeisterBuilding(Master47de*);
 void __cdecl ai_StartMeisterProduction(Master47de*);
 
 void __cdecl ai_EvaluateMeister(Master47de* m)
@@ -109,7 +109,7 @@ void __cdecl ai_EvaluateMeister(Master47de* m)
 		} else if (k == 0x1f) {
 			fcn_00483f20(m);
 		} else {
-			fcn_0047e270(m);
+			ai_UpdateMeisterBuilding(m);
 		}
 	} else if (gm_GetBuildingTypeCategory(m->bld->office) == 2) {
 		fcn_0047f6b0(m);
@@ -124,7 +124,7 @@ void __cdecl ai_EvaluateMeister(Master47de* m)
 		} else if (k == 5) {
 			ai_CalcMeisterBank(m);
 		} else if (k == 9) {
-			fcn_00482f20(m);
+			ai_CalcMeisterLager(m);
 		}
 	}
 }

@@ -22,13 +22,13 @@ extern char s_68bea4[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl gm_IsEntityAtBuilding(int, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl he_DetectNearbyPatrolAction(int*);
-int __cdecl fcn_004f4f60(int, int, int, int, int);
+int __cdecl gm_TryRecordCrime(int, int, int, int, int);
 void __cdecl cm_RequestPlayAnimation(int, char*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 char* __cdecl he_StartHandlungSearch(int, int, int);
@@ -40,7 +40,7 @@ void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_0050b750(int, unsigned char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, int, char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 float __cdecl fcn_004ff210(int, int);
@@ -60,7 +60,7 @@ int __cdecl gm_GetMsgField(int, int*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x0056ee80 */
-void __cdecl fcn_0056ee80(char* actionRecord)
+void __cdecl he_RunRaubzug(char* actionRecord)
 {
 	char msg[0x400];
 	char str[0x100];
@@ -97,7 +97,7 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 			if (*(int*) (actionRecord + 0x8c + cnt * 4) != -1) {
 				e = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + cnt * 4));
 				if (e != 0) {
-					fcn_00529160(rec1, 0, *(unsigned short*) e, (int) actionRecord);
+					he_AssignActionSlot(rec1, 0, *(unsigned short*) e, (int) actionRecord);
 					cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + cnt * 4));
 					ch_StartMovement(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 1, s_6a6dc4);
 				}
@@ -144,7 +144,7 @@ void __cdecl fcn_0056ee80(char* actionRecord)
 		req[3] = 0;
 		if (he_DetectNearbyPatrolAction(req) != 0) {
 			h = req[3];
-			*(int*) (actionRecord + 0xb4) = fcn_004f4f60(0x17, 1,
+			*(int*) (actionRecord + 0xb4) = gm_TryRecordCrime(0x17, 1,
 			    *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4),
 			    *(int*) (row + 4), *(int*) (rec1 + 1));
 			*(int*) (actionRecord + 0xb8) = *(int*) (h + 4);
@@ -161,7 +161,7 @@ label_1bc:
 			if (*(int*) (actionRecord + 0x8c + cnt * 4) != -1) {
 				e = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + cnt * 4));
 				if (e != 0) {
-					fcn_00529160(rec1, 0, *(unsigned short*) e, (int) actionRecord);
+					he_AssignActionSlot(rec1, 0, *(unsigned short*) e, (int) actionRecord);
 					cm_SendCancelCharacterActions(*(int*) (actionRecord + 0x8c + cnt * 4));
 					ch_StartMovement(*(int*) (actionRecord + 0x8c + cnt * 4), *(int*) (rec1 + 1), -1, 0, 0, s_6a6dc4);
 					cm_RequestPlayAnimation(*(int*) (actionRecord + 0x8c + cnt * 4), gestik[gm_RandomMod(3)], 1);
@@ -211,9 +211,9 @@ label_1bc:
 			if (row != 0 && val != 0) {
 				ent = fcn_0050b750(gm_RandomMod(200) + 0x226, g_773d75);
 				io_FormatTextBuffer(buf, 0x19ea, rec1, ent, *(unsigned short*) row);
-				fcn_00545d40(*(int*) (val + 4), *(int*) (val + 4), buf, 1, 0x5f0, s_6a6a60);
+				he_PostEntityMessage(*(int*) (val + 4), *(int*) (val + 4), buf, 1, 0x5f0, s_6a6a60);
 				io_FormatTextBuffer(buf, 0x19eb, rec1, ent);
-				fcn_00545d40(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, (char*) 0x6a6a4c);
+				he_PostEntityMessage(*(int*) (row + 4), *(int*) (row + 4), buf, 1, 0x5f0, (char*) 0x6a6a4c);
 				cm_RequestTransferCurrencyNoKill(*(int*) (row + 4), *(int*) (val + 4), g_773d75, ent);
 			}
 			q = (int) gm_StartFilteredEntitySearch(1, 1, *(int*) (actionRecord + 0xbc));
@@ -265,13 +265,13 @@ label_1bc:
 						ch_StartMovement(*(int*) (actionRecord + 0x8c + (8 - cnt) * 4), *(int*) (h + 1), *(int*) (q + 2), 0, 0, s_6a6dc4);
 						count++;
 						gm_GetScaledEntitySkill((char*) val, 2);
-						fcn_00529160(h, 0, *(unsigned short*) val, 0);
+						he_AssignActionSlot(h, 0, *(unsigned short*) val, 0);
 					}
 				}
 				cnt--;
 			} while (cnt != 0);
 			val = 1;
-			fcn_004f4f60(0x17, 1,
+			gm_TryRecordCrime(0x17, 1,
 			    *(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4),
 			    *(int*) (row + 4), *(int*) (h + 1));
 		} else {
@@ -364,7 +364,7 @@ label_fa92:
 						val = -1;
 					}
 					ch_StartMovement(*(int*) (actionRecord + 0x8c + i * 4), val, row, 0, 0, s_6a6dc4);
-					fcn_00529160(0, 0, *(unsigned short*) ent, 0);
+					he_AssignActionSlot(0, 0, *(unsigned short*) ent, 0);
 				}
 			}
 		}

@@ -36,9 +36,9 @@ unsigned short __cdecl gm_RandomMod(int a);
 int __cdecl fcn_0050f950(int a, int i);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
-void __cdecl fcn_004c6ae0(int a, int b);
+void __cdecl cm_RequestModifyHealth(int a, int b);
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
-void __cdecl fcn_00545d40(int a, int b, char* text, int c, int d, char* file);
+void __cdecl he_PostEntityMessage(int a, int b, char* text, int c, int d, char* file);
 int __cdecl fcn_005cd440(Query* q, char* text, int a, void* b);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
@@ -103,14 +103,14 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 		cm_RequestCopyEntityData(firstEntity->handle, secondEntity->handle, bw1 - bd1 - 0x7f, 1);
 		cm_RequestCopyEntityData(secondEntity->handle, firstEntity->handle, bw2 - bd2 - 0x7f, 1);
 		cm_RequestMoveCredits(-1, *(int*) (a0 + 4), *(char*) &g_773d75, bv);
-		fcn_004c6ae0(*(int*) (a0 + 4), -4);
+		cm_RequestModifyHealth(*(int*) (a0 + 4), -4);
 		if (firstEntity->type == 6 || firstEntity->type == 7) {
 			io_FormatTextBuffer(buf, 0x1dd3, secondEntity->id, secondEntity->id);
-			fcn_00545d40(firstEntity->handle, firstEntity->handle, buf, 0, 0x5fb, (char*) 0x6a59fc);
+			he_PostEntityMessage(firstEntity->handle, firstEntity->handle, buf, 0, 0x5fb, (char*) 0x6a59fc);
 		}
 		if (secondEntity->type == 6 || secondEntity->type == 7) {
 			io_FormatTextBuffer(buf, 0x1dd3, firstEntity->id, firstEntity->id);
-			fcn_00545d40(secondEntity->handle, secondEntity->handle, buf, 0, 0x5fb, (char*) 0x6a59fc);
+			he_PostEntityMessage(secondEntity->handle, secondEntity->handle, buf, 0, 0x5fb, (char*) 0x6a59fc);
 		}
 		return 0x10;
 	}
@@ -155,17 +155,17 @@ int __cdecl fcn_005d78e0(char* a0, char* a1)
 						     w2 - d2 - 0x7f, 1);
 					cm_RequestMoveCredits(-1, *(int*) (a0 + 4),
 						     *(char*) &g_773d75, v);
-					fcn_004c6ae0(*(int*) (a0 + 4), -4);
+					cm_RequestModifyHealth(*(int*) (a0 + 4), -4);
 					io_FormatTextBuffer(buf, 0x1dd2, firstEntity->id, secondEntity->id);
 					fcn_00526120(buf, 0);
 					if (firstEntity->type == 6 || firstEntity->type == 7) {
 						io_FormatTextBuffer(buf, 0x1dd3, secondEntity->id, secondEntity->id);
-						fcn_00545d40(firstEntity->handle, firstEntity->handle, buf,
+						he_PostEntityMessage(firstEntity->handle, firstEntity->handle, buf,
 							     0, 0x5fb, (char*) 0x6a59fc);
 					}
 					if (secondEntity->type == 6 || secondEntity->type == 7) {
 						io_FormatTextBuffer(buf, 0x1dd3, firstEntity->id, firstEntity->id);
-						fcn_00545d40(secondEntity->handle, secondEntity->handle, buf,
+						he_PostEntityMessage(secondEntity->handle, secondEntity->handle, buf,
 							     0, 0x5fb, (char*) 0x6a59fc);
 					}
 					g_774654 = 1;

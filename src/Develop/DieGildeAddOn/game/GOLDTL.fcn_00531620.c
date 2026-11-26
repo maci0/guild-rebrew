@@ -66,7 +66,7 @@ void __cdecl cm_RequestWalkOnPath(int, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl cm_RequestUseGate(int, int, int);
 int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl fcn_00531320(void);
 int __cdecl init_EnsureObjektSceneContext(char*);
@@ -207,7 +207,7 @@ L6d3:
 			break;
 		}
 		if (s->f16c != 0) {
-			fcn_00529160(s->f16c, 0, s->id, 0);
+			he_AssignActionSlot(s->f16c, 0, s->id, 0);
 		}
 		f = s->owner;
 		w = *(int*) (f + 0x28);
@@ -242,7 +242,7 @@ L192f:
 		}
 		cm_SendCancelCharacterActions(*(int*) (e + 4));
 		if (*(int*) (e + 0x16c) != 0) {
-			fcn_00529160(*(int*) (e + 0x16c), 0, *(unsigned short*) e, 0);
+			he_AssignActionSlot(*(int*) (e + 0x16c), 0, *(unsigned short*) e, 0);
 		}
 		if (*(unsigned short*) g_7746b8 == 0xfd) {
 			if (g_7746c8 != 0) {

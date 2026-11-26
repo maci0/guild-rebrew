@@ -33,7 +33,7 @@ int __cdecl gm_FindFallbackPublicBuilding(struct house*, int*, int*);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl cm_RequestDestroyBuilding(int);
 void __cdecl he_FreeAction(char*);
 
@@ -75,7 +75,7 @@ void __cdecl he_UpdateGebAbreissen(char* e)
 			for (i = 0; i < 768; i++) {
 				if ((((struct house*)g_7f4ca0)[i].type == 6 || ((struct house*)g_7f4ca0)[i].type == 7) && ((struct house*)g_7f4ca0)[i].id != *(unsigned short*) (t + 0x27)) {
 					io_FormatTextBuffer(buf, 0x1c52, *(unsigned short*) (t + 0x27), t);
-					fcn_00545d40(((struct house*)g_7f4ca0)[i].handle, -1, buf, 0, 0x5ed, "_NACHRICHTEN_HS_67");
+					he_PostEntityMessage(((struct house*)g_7f4ca0)[i].handle, -1, buf, 0, 0x5ed, "_NACHRICHTEN_HS_67");
 				}
 			}
 			cm_RequestDestroyBuilding(*(int*) (t + 1));

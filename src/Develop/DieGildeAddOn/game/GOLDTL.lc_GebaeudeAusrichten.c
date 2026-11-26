@@ -96,7 +96,7 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 void* __cdecl fcn_004488e0(char*, int, int);
 int __cdecl vfs_ResolvePath(char*, int, int, char*);
 char __cdecl fcn_004143b0(char*, int, int);
-void __cdecl fcn_00438b40(char*, float*);
+void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl fcn_00414960(float*, float*, char*);
 void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
@@ -208,7 +208,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		pTemp = (char*) fcn_004488e0(f.cBafPfad, 0, 0);
 		f.pObjekte[i] = pTemp;
 		fcn_00415300(pTemp);
-		fcn_00438b40(pTemp, f.fPos);
+		d3_SetNodePosition(pTemp, f.fPos);
 		*(unsigned char*) (pTemp + 0x214) &= 0x7f;
 		memset(&f.key, 0, sizeof(f.key));
 		f.key.f.b0 = 1;
@@ -252,7 +252,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 				goto laden_fehlgeschlagen;
 			}
 			*(unsigned char*) (pAktuell + 0x214) &= 0x7f;
-			fcn_00438b40(pAktuell, f.fPos);
+			d3_SetNodePosition(pAktuell, f.fPos);
 			fcn_004143b0(pAktuell, f.iRot, 0);
 			pNaechster = (char*) d3_FindNearestSceneObject(f.fPos, (void**) f.pListe);
 			f.pPrev = pNaechster;
@@ -328,7 +328,7 @@ platzieren:
 		else {
 			d3_TransformPoint(pNaechster, (float*) (pNaechster + 0x4c), f.fPos);
 			f.pPrev = pNaechster;
-			fcn_00438b40(pAktuell, f.fPos);
+			d3_SetNodePosition(pAktuell, f.fPos);
 			d3_ComputeObjectYawToTarget(f.fAusrichtung, pNaechster);
 			d3_SetObjectRotation(pAktuell, f.fAusrichtung);
 		}
@@ -360,7 +360,7 @@ platzieren:
 		if (d3_UpdateCameraController() == 0) {
 			fcn_0045bad0((int) f.pKontext, g_14ce8c0, g_14ce8c2, (int*) &f.fAbstand, &f.iKennung2);
 			if (d3_GridPointToWorld(f.pKontext, f.iKennung2, *(int*) &f.fAbstand, f.fPos) != 0) {
-				fcn_00438b40(pAktuell, f.fPos);
+				d3_SetNodePosition(pAktuell, f.fPos);
 				fcn_004143b0(pAktuell, 1, 0);
 			}
 			f.fVec[0] = *(float*) (pAktuell + 0x84);

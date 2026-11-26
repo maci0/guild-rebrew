@@ -15,7 +15,7 @@ void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_HandleErnten(char*, int);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
-void __cdecl fcn_0059c000(char*);
+void __cdecl d2_RunMetalProduktionDialog(char*);
 void __cdecl fcn_005c5b10(char*);
 void __cdecl fcn_005c79a0(char*);
 void __cdecl ob_HandleBepflanzung(char*);
@@ -55,7 +55,7 @@ void __cdecl d2_RunHolzfaellerInteriorHud(char* e)
 			} else if (g_7746a0 == lager) {
 				d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
 			} else if (g_7746a0 == holz) {
-				fcn_0059c000(e);
+				d2_RunMetalProduktionDialog(e);
 			} else if (g_7746a0 == gelage) {
 				fcn_005c5b10(e);
 			} else if (g_7746a0 == zs) {

@@ -4,7 +4,7 @@
 int __cdecl gm_FindMatchingLawEntry(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_004f4f60(int, int, int, int, int);
+void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
 int __cdecl gm_RecordAssassinEvidence(char* a, char* b, int c)
 {
@@ -25,7 +25,7 @@ int __cdecl gm_RecordAssassinEvidence(char* a, char* b, int c)
 			} else {
 				id = -1;
 			}
-			fcn_004f4f60(k, 1, *(int*) (b + 4), *(int*) (a + 4), id);
+			gm_TryRecordCrime(k, 1, *(int*) (b + 4), *(int*) (a + 4), id);
 			return 1;
 		}
 	}

@@ -19,7 +19,7 @@ void __cdecl fcn_005cd440(Query*, char*, int, void*);
 void __cdecl d2_RunSpionageDialog(void);
 void __cdecl fcn_00532ef0(void);
 
-void __cdecl fcn_005a0630(void)
+void __cdecl d2_OpenSpionageTargetPicker(void)
 {
 	Query q;
 	char buf[0x80];

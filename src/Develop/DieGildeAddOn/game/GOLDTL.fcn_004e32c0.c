@@ -11,27 +11,27 @@ extern char* g_14a9a20;
 extern char g_6b5c60[];
 
 /* ADDRESS: GOLDTL 0x004e32c0 */
-int __cdecl fcn_004e32c0(char* p)
+int __cdecl cut_BroadcastCutsceneNotice(char* cutscene)
 {
 	char buf[0x200];
-	void* t;
-	char* q;
+	void* info;
+	char* player;
 	int i;
 
-	t = gm_SearchTable67(*(int*) (p + 0x7c));
-	if (t == 0) {
+	info = gm_SearchTable67(*(int*) (cutscene + 0x7c));
+	if (info == 0) {
 		return 0;
 	}
-	io_FormatTextBuffer(buf, 0x3fd9, t, *(int*) (p + 0x80));
+	io_FormatTextBuffer(buf, 0x3fd9, info, *(int*) (cutscene + 0x80));
 	if ((g_7747b0 & 4)) {
         strcat(buf, g_14a9a20);
     } else {
         strcat(buf, g_14a9a1c);
     }
-	for (i = 0; i < *(unsigned char*) (p + 0x30); i++) {
-		q = gm_LookupEntityRecordById(*(int*) (p + 0x34 + i * 4));
-		if (q != 0 && (*(unsigned char*) (q + 2) == 6 || *(unsigned char*) (q + 2) == 7)) {
-			he_SendCmdMessage((int*) q, p, buf, g_6b5c60);
+	for (i = 0; i < *(unsigned char*) (cutscene + 0x30); i++) {
+		player = gm_LookupEntityRecordById(*(int*) (cutscene + 0x34 + i * 4));
+		if (player != 0 && (*(unsigned char*) (player + 2) == 6 || *(unsigned char*) (player + 2) == 7)) {
+			he_SendCmdMessage((int*) player, cutscene, buf, g_6b5c60);
 		}
 	}
 	return 1;

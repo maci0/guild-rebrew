@@ -51,7 +51,7 @@ void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005a92c0(char* p)
+void __cdecl d2_RunBuergerrechtDialog(char* p)
 {
 	ENTITY_RECORD* ent;
 	char* q;
@@ -173,7 +173,7 @@ void __cdecl fcn_005a92c0(char* p)
 			}
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop(fcn_005a92c0, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_RunBuergerrechtDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	fcn_00532ef0();
 	if (ok) {

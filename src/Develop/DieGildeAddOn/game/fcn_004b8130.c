@@ -8,7 +8,7 @@ extern void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 extern int __cdecl gm_WalkEntityChain(unsigned short v);
 extern void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, char c, int d);
 extern void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c);
-extern void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
+extern void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
 extern double g_6629c8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
@@ -69,7 +69,7 @@ int __cdecl fcn_004b8130(int* arg)
     }
     io_FormatTextBuffer(buf, *(unsigned short*) ((char*) arg + 4) + 0x12e7,
                  mode + 0x2a3, r);
-    fcn_00545d40(*(int*) (rec + 4), *(int*) (rec + 4), buf,
+    he_PostEntityMessage(*(int*) (rec + 4), *(int*) (rec + 4), buf,
                  strlen(buf) > 0x100, 0x603, 0);
     return 0;
 }

@@ -20,7 +20,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_GetCommandStatus(unsigned int);
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char*);
 void __cdecl he_FreeAction(void*);
-void __cdecl fcn_00529160(char*, int, int, int);
+void __cdecl he_AssignActionSlot(char*, int, int, int);
 char* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(char*);
 char* __cdecl evt_LoadScript(char*);
@@ -184,7 +184,7 @@ void __cdecl he_UpdateErnten(char* ev)
 									break;
 								}
 							}
-							fcn_00529160(v4, 0, *(unsigned short*) v15, 0);
+							he_AssignActionSlot(v4, 0, *(unsigned short*) v15, 0);
 							he_FreeAction(ev);
 							return;
 						}
@@ -201,7 +201,7 @@ void __cdecl he_UpdateErnten(char* ev)
 			}
 		}
 		if (v15 != 0) {
-			fcn_00529160(v4, 0, *(unsigned short*) v15, 0);
+			he_AssignActionSlot(v4, 0, *(unsigned short*) v15, 0);
 		}
 	}
 	he_FreeAction(ev);

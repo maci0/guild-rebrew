@@ -24,7 +24,7 @@ extern char s_6acdcc[];
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_AccumulateTyped2(House*);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, unsigned int*);
@@ -61,7 +61,7 @@ int __cdecl gm_HandleBekehren(House* e)
 			return 0x20;
 		}
 		cm_RequestMoveCredits(-1, e->f4, g_773d75, money);
-		fcn_004c6ae0(e->f4, -6);
+		cm_RequestModifyHealth(e->f4, -6);
 		for (i = 0; i < 768; i++) {
 			if (((House*)g_7f4ca0)[i].id != 0xffff && ((House*)g_7f4ca0)[i].b2 < 10 && ((House*)g_7f4ca0)[i].b2 != 6 && ((House*)g_7f4ca0)[i].b2 != 7 &&
 				((House*)g_7f4ca0)[i].bc != e->bc) {
@@ -104,7 +104,7 @@ int __cdecl gm_HandleBekehren(House* e)
 					who = e->bc;
 					if (d2_CheckActionBlocker(e, 6) && gm_CheckEntityStock(e, money, g_773d75)) {
 						cm_RequestMoveCredits(-1, e->f4, g_773d75, money);
-						fcn_004c6ae0(e->f4, -6);
+						cm_RequestModifyHealth(e->f4, -6);
 						for (i = 0; i < 768; i++) {
 							h = &((House*)g_7f4ca0)[i];
 							/* the redundant b2 test keeps the loop pointer on b2, as in the original */

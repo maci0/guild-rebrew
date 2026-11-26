@@ -21,11 +21,11 @@ extern int g_100f1dc;
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl fcn_00471af0(int, int);
-int __cdecl fcn_0058c670(char*, int, unsigned char);
+int __cdecl d2_ShowGraveyardConfirm(char*, int, unsigned char);
 int __cdecl d2_RunRentGraveDialog(char*, int, unsigned char);
 int __cdecl main_RunFrameLoop(void*, int);
 
-void __cdecl fcn_0058cc90(char* input, Req* s)
+void __cdecl d2_RunRentAGraveMenu(char* input, Req* s)
 {
 	int ids[2];
 	int ok;
@@ -44,7 +44,7 @@ void __cdecl fcn_0058cc90(char* input, Req* s)
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
 				fcn_00471af0(s->x0, 0);
-				if (fcn_0058c670(input, s->x20, s->x24) == 1) {
+				if (d2_ShowGraveyardConfirm(input, s->x20, s->x24) == 1) {
 					g_774654 = 1;
 				}
 				fcn_00471af0(s->x0, 1);
@@ -56,5 +56,5 @@ void __cdecl fcn_0058cc90(char* input, Req* s)
 				fcn_00471af0(s->x0, 1);
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_0058cc90, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunRentAGraveMenu, 0x677c7) != 0);
 }

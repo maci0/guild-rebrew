@@ -11,7 +11,7 @@ extern char s_679060[];
 #include "client_dialog_state.h"
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
@@ -52,7 +52,7 @@ int __cdecl d2_ShowMedicusDialog(unsigned char* e)
 		}
 		half = abs(*(int*) (e + 0x24)) / 2;
 		money = (int) (gm_WalkEntityChain(*(unsigned short*) e) * 0.02f);
-		fcn_004c6ae0(*(int*) (e + 4), -2);
+		cm_RequestModifyHealth(*(int*) (e + 4), -2);
 		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x40, 0);
 		if (gm_RandomMod(2)) {
 			cm_RequestMoveCredits(-1, *(int*) (e + 4), g_773d75, money);
@@ -74,7 +74,7 @@ int __cdecl d2_ShowMedicusDialog(unsigned char* e)
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
 				if (d2_CheckActionBlocker(e, 2) && gm_CheckEntityStock(e, money, g_773d75)) {
-					fcn_004c6ae0(*(int*) (e + 4), -2);
+					cm_RequestModifyHealth(*(int*) (e + 4), -2);
 					io_FormatTextBuffer(text, 0x1d3c);
 					if (gm_RandomMod(2)) {
 						io_FormatTextBuffer(tmp, s_679060, 0x1d3d);

@@ -23,7 +23,7 @@ int __cdecl ai_StartBildung(void);
 int __cdecl fcn_00495f80(void);
 int __cdecl fcn_00495fe0(void);
 int __cdecl fcn_00496480(void);
-int __cdecl fcn_004964e0(void);
+int __cdecl ai_ScoreBestechung(void);
 int __cdecl fcn_00496810(void);
 int __cdecl ai_RunBestechung(void);
 int __cdecl fcn_00496dc0(void);
@@ -34,7 +34,7 @@ int __cdecl fcn_004973a0(void);
 int __cdecl am_StartBuyObjektAP(void);
 int __cdecl fcn_004974d0(void);
 int __cdecl fcn_004974e0(void);
-int __cdecl fcn_00497670(void);
+int __cdecl ai_RunRaumKaufen(void);
 int __cdecl fcn_004976e0(void);
 int __cdecl fcn_004978d0(void);
 int __cdecl fcn_00497990(void);
@@ -47,7 +47,7 @@ int __cdecl ai_StartBetriebBauen(void);
 int __cdecl ai_RunBetriebBauen(void);
 int __cdecl fcn_00498e00(void);
 int __cdecl fcn_00498e10(void);
-int __cdecl fcn_00498e20(void);
+int __cdecl ai_StartBetriebUpgraden(void);
 int __cdecl fcn_00498f40(void);
 int __cdecl ai_StartMedicusAufsuchen(void);
 int __cdecl ai_RunMedicusAufsuchen(void);
@@ -61,11 +61,11 @@ int __cdecl PrepareBuergerrecht(void*, char*, int, char*);
 int __cdecl fcn_00499ad0(void);
 int __cdecl fcn_00499cc0(void);
 int __cdecl cm_RunApsSparen(void);
-int __cdecl fcn_00499dc0(void);
+int __cdecl ai_StartUseObjectMilitary(void);
 int __cdecl fcn_00499fe0(void);
 int __cdecl fcn_0049a0c0(void);
 int __cdecl ai_RunUseObjectAnsehen(void);
-int __cdecl fcn_0049a590(void);
+int __cdecl ai_StartUseObjectAps(void);
 int __cdecl fcn_0049a7b0(void);
 int __cdecl ai_StartEducationObject(void);
 int __cdecl fcn_0049aa80(void);
@@ -73,13 +73,13 @@ int __cdecl fcn_0049ab50(void);
 int __cdecl fcn_0049ace0(void);
 int __cdecl fcn_0049adb0(void);
 int __cdecl fcn_0049b120(void);
-int __cdecl fcn_0049b1f0(void);
+int __cdecl ai_StartUseObjectGemeinheit(void);
 int __cdecl fcn_0049b680(void);
 int __cdecl fcn_0049b7c0(void);
 int __cdecl ai_RunSecurityObject(void);
 int __cdecl ai_ScoreUseParfuem(void);
 int __cdecl ai_StartUseParfuem(void);
-int __cdecl fcn_0049bbc0(void);
+int __cdecl ai_RunUseParfuem(void);
 int __cdecl fcn_0049bd50(void);
 int __cdecl cm_StartUseTrank(void);
 int __cdecl fcn_0049be10(void);
@@ -451,7 +451,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x9;
 	strcpy(d.name, "Bestechung");
-	d.score = fcn_004964e0;
+	d.score = ai_ScoreBestechung;
 	d.start = fcn_00496810;
 	d.run = ai_RunBestechung;
 	d.flags = 0x19;
@@ -589,7 +589,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Raum kaufen");
 	d.score = fcn_004a4410;
 	d.start = fcn_004974e0;
-	d.run = fcn_00497670;
+	d.run = ai_RunRaumKaufen;
 	d.flags = 0xff;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -826,7 +826,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x15;
 	strcpy(d.name, "Betrieb upgraden (Credits)");
 	d.score = fcn_004a4410;
-	d.start = fcn_00498e20;
+	d.start = ai_StartBetriebUpgraden;
 	d.run = fcn_00498f40;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -1030,7 +1030,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x1b;
 	strcpy(d.name, "UseObject (Military)");
 	d.score = fcn_004a4410;
-	d.start = fcn_00499dc0;
+	d.start = ai_StartUseObjectMilitary;
 	d.run = fcn_00499fe0;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -1098,7 +1098,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x1d;
 	strcpy(d.name, "UseObject (APS)");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049a590;
+	d.start = ai_StartUseObjectAps;
 	d.run = fcn_0049a7b0;
 	d.flags = 0x39;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -1234,7 +1234,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x21;
 	strcpy(d.name, "UseObject (Gemeinheit)");
 	d.score = fcn_004a4410;
-	d.start = fcn_0049b1f0;
+	d.start = ai_StartUseObjectGemeinheit;
 	d.run = fcn_0049b680;
 	d.flags = 0xc9;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -1303,7 +1303,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Use Parfuem");
 	d.score = ai_ScoreUseParfuem;
 	d.start = ai_StartUseParfuem;
-	d.run = fcn_0049bbc0;
+	d.run = ai_RunUseParfuem;
 	d.flags = 0xff;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;

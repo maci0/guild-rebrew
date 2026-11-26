@@ -3,18 +3,18 @@
 extern float g_664320;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-float __cdecl fcn_00507e70(char* a, char* b, int c);
+float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_CheckPrivilege(int a1, char* a2, int a3);
 
 /* ADDRESS: GOLDTL 0x00494740 */
-int __cdecl fcn_00494740(int a0, int entity, int* level_out, int unused)
+int __cdecl gm_EvalSkill3PrivilegeCheck(int actor, int entity, int* level_out, int unused)
 {
 	float v;
 	float w;
 	int level;
 
-	v = fcn_00507e70((char*) a0, (char*) entity, 3);
+	v = gm_CalcSkillDuelScore((char*) actor, (char*) entity, 3);
 	w = gm_RandomFloat01() + v;
 	{
 		float f = 0.0f;

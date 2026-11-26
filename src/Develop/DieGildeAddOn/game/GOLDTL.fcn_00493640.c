@@ -21,46 +21,46 @@ typedef struct Unit {
 
 unsigned int __cdecl gm_CalcTrialTortureRounds(Plan* p);
 Unit* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x00493640 */
-int __cdecl fcn_00493640(Plan* p)
+int __cdecl ai_ShouldConfessTrialTorture(Plan* trial)
 {
-	unsigned int n;
-	Unit* a;
-	Unit* b;
-	Unit* c;
-	float v;
+	unsigned int rounds;
+	Unit* accused;
+	Unit* judge;
+	Unit* plaintiff;
+	float stamina;
 	float r;
-	float t;
+	float threshold;
 	float d1;
 	float d2;
 
-	if (p->level <= 3.0f) {
+	if (trial->level <= 3.0f) {
 		return 0;
 	}
-	if (p->level >= 18.0f) {
+	if (trial->level >= 18.0f) {
 		return 1;
 	}
-	n = gm_CalcTrialTortureRounds(p);
-	a = gm_LookupEntityRecordById(p->a);
-	b = gm_LookupEntityRecordById(p->b);
-	c = gm_LookupEntityRecordById(p->c);
-	v = a->base + a->bonus;
-	r = a->mood - 2.0f;
+	rounds = gm_CalcTrialTortureRounds(trial);
+	accused = gm_LookupEntityRecordById(trial->a);
+	judge = gm_LookupEntityRecordById(trial->b);
+	plaintiff = gm_LookupEntityRecordById(trial->c);
+	stamina = accused->base + accused->bonus;
+	r = accused->mood - 2.0f;
 	if (r > 0.66f) {
-		t = (float)(n * 190);
+		threshold = (float)(rounds * 190);
 	} else if (r > 0.33f) {
-		t = (float)(n * 90);
+		threshold = (float)(rounds * 90);
 	} else {
-		t = (float)(n * 70);
+		threshold = (float)(rounds * 70);
 	}
-	if (t > v) {
+	if (threshold > stamina) {
 		return 1;
 	}
-	d1 = fcn_0050f980(a->id, b->id, 1) * 0.01f;
-	d2 = fcn_0050f980(c->id, b->id, 1) * 0.01f;
+	d1 = gm_CalcEntityFavor(accused->id, judge->id, 1) * 0.01f;
+	d2 = gm_CalcEntityFavor(plaintiff->id, judge->id, 1) * 0.01f;
 	if (d1 * 1.1f > d2 * 0.9f && d1 < d2) {
 		return 0;
 	}

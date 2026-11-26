@@ -8,7 +8,7 @@ int __cdecl fcn_00504bd0(int type);
 char* __cdecl fcn_00503e80(void);
 void __cdecl cm_RequestModifyEntityLevel(int a, int id, int off);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, int a, int b, int c, int d);
-void __cdecl fcn_00545d40(int a, int b, char* buf, int overflow, int msg, int zero);
+void __cdecl he_PostEntityMessage(int a, int b, char* buf, int overflow, int msg, int zero);
 
 /* ADDRESS: GOLDTL 0x004ba830 */
 int __cdecl fcn_004ba830(unsigned short* request)
@@ -63,7 +63,7 @@ int __cdecl fcn_004ba830(unsigned short* request)
 						cm_RequestModifyEntityLevel(*(int*) (slot + 2), 1, -(int) (signed char) v);
 						io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 						    *slot, pick, *slot, 0x16b8);
-						fcn_00545d40(*(int*) (rec + 2), *(int*) (rec + 2), buf,
+						he_PostEntityMessage(*(int*) (rec + 2), *(int*) (rec + 2), buf,
 						    0x100 < strlen(buf), 0x603, 0);
 						return 0;
 					}

@@ -25,7 +25,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 void __cdecl d2_UpdateScrollPerga(void);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_005355f0(void);
+void __cdecl d2_DestroyScrollPerga(void);
 
 /* ADDRESS: GOLDTL 0x004b3810 */
 void __cdecl fcn_004b3810(int arg)
@@ -170,5 +170,5 @@ void __cdecl fcn_004b3810(int arg)
 			}
 		}
 	} while (main_RunFrameLoop(fcn_004b3810, 0x66087) != 0);
-	fcn_005355f0();
+	d2_DestroyScrollPerga();
 }

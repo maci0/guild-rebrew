@@ -6,7 +6,7 @@ int __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void *, int, ...);
-void __cdecl fcn_00545d40(int, int, void *, int, int, void *);
+void __cdecl he_PostEntityMessage(int, int, void *, int, int, void *);
 
 /* Coefficients follow native operands; helper organization is inferred. */
 static __inline int RandomMoneyTransfer(void *a1, double increment, double scale)
@@ -30,7 +30,7 @@ static __inline int RandomMoneyTransfer(void *a1, double increment, double scale
     io_FormatTextBuffer(buf, *(unsigned short *)((char *)a1 + 4) + 0x12e7, amount);
     cm_RequestTransferCurrencyNoKill(*(int *)a1, -1, g_773d75, amount);
     len = strlen(buf);
-    fcn_00545d40(*(int *)((char *)entity + 4), *(int *)((char *)entity + 4), buf, 0x100 < len, 0x603, 0);
+    he_PostEntityMessage(*(int *)((char *)entity + 4), *(int *)((char *)entity + 4), buf, 0x100 < len, 0x603, 0);
     return 0;
 }
 

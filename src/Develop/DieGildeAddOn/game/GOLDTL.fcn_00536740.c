@@ -15,7 +15,7 @@ char __cdecl d3_GridPointToWorld(int, int, int, char*);
 void __cdecl fcn_004cf110(char*);
 void __cdecl fcn_00412830(int);
 
-void __cdecl fcn_00536740(void)
+void __cdecl gm_HandleCannonAimInput(void)
 {
 	int a;
 	int b;

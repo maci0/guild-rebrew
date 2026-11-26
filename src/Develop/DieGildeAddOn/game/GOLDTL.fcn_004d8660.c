@@ -14,19 +14,19 @@ char* __cdecl ch_CreateQueuedAction(int, void*, int, int, int);
 void __cdecl fcn_004d4ee0(void);
 
 /* ADDRESS: GOLD 0x004d7000 */
-void __cdecl fcn_004d8660(int* a)
+void __cdecl gm_StartGroundCollectAction(int* args)
 {
 	char* e;
 	unsigned short* s;
 	char* p;
 	char* o;
 
-	if (a[1] == 0 || a[0] == -1)
+	if (args[1] == 0 || args[0] == -1)
 		return;
-	e = gm_LookupEntityRecordIn32SlotTable(a[0]);
+	e = gm_LookupEntityRecordIn32SlotTable(args[0]);
 	s = *(unsigned short**) (e + 0x16c);
 	ch_CancelActionQueue((char*) *(int*) (e + 0x184));
-	p = fcn_00445600(0, 0x40, 0, a + 4);
+	p = fcn_00445600(0, 0x40, 0, args + 4);
 	if (p == 0)
 		return;
 #ifdef REBREW_GOLD

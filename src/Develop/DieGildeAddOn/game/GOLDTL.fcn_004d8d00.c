@@ -20,7 +20,7 @@ extern int g_772ea4;		/* 0x00772ea4 */
 extern int g_67a370, g_68b79c, g_772f24; extern double g_6640e8, g_664128; extern float g_664144;
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
-int __cdecl fcn_004c6940(void*, int, void*);
+int __cdecl cm_SendCutCommand55(void*, int, void*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, void*);
 int __cdecl fcn_004cec00(int, int, int*, int*);
 void __cdecl d3_GridPointToWorld(int, int, int, float*);
@@ -127,7 +127,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 			p->timer = -1;
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			fcn_004c6940(obj, 7, msg.f);
+			cm_SendCutCommand55(obj, 7, msg.f);
 			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			break;
 		case 1:
@@ -139,7 +139,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 					break;
 				sprintf(be8, (char*)0x68b85c, *(int*)(obj + 4));
 				p->c0c = 1;
-				fcn_004c6940(obj, 6, msg.f);
+				cm_SendCutCommand55(obj, 6, msg.f);
 				p->timer = cm_RequestChTalkAction(be8, v10, v14, 0);
 			} else {
 				d3_GridPointToWorld((int)base, p->f10, p->f14, vec);
@@ -148,7 +148,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 					break;
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
-				fcn_004c6940(obj, 6, msg.f);
+				cm_SendCutCommand55(obj, 6, msg.f);
 
 
 				p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
@@ -165,7 +165,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 				    || obj == 0 || *((unsigned char*)obj + 8) == 0) {
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
-					fcn_004c6940(obj, 6, msg.f);
+					cm_SendCutCommand55(obj, 6, msg.f);
 					p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 					break;
 				}
@@ -175,7 +175,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 				if (n && *(int*)(n + 0x20) < 1) {
 					msg.f[0] = *(int*)(obj + 4);
 					msg.f[1] = 0;
-					fcn_004c6940(obj, 6, msg.f);
+					cm_SendCutCommand55(obj, 6, msg.f);
 					p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 					break;
 				}
@@ -332,7 +332,7 @@ lvl3:
 			if (*(int*)(ent + 0x58) != 2 || !p->f20)
 				goto tail2;
 			cm_RequestChangeBits(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
-			fcn_004c6940(obj, 2, p);
+			cm_SendCutCommand55(obj, 2, p);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
 			if (!fcn_0045b990(base, (float*)(ent34(obj) + 0x4c),
@@ -345,7 +345,7 @@ lvl3:
 			goto after2;
 tail2:
 			cm_RequestChangeBits(*(int*)(obj + 4), 0x1c8, 4, 0x20000000, 0);
-			p->timer = fcn_004c6940(obj, 2, p);
+			p->timer = cm_SendCutCommand55(obj, 2, p);
 tail1_body:
 			if (*(int*)ent != 0x16e && *(int*)ent != 0x172)
 				break;
@@ -371,7 +371,7 @@ tail1_body:
 					if (fcn_004cec00(p->f10, p->f14, &v10, &v14)) {
 						sprintf(bb8, (char*)0x68b85c, *(int*)(obj + 4));
 						p->c0c = 1;
-						p->timer = fcn_004c6940(obj, 6, msg.f);
+						p->timer = cm_SendCutCommand55(obj, 6, msg.f);
 						p->timer = cm_RequestChTalkAction(bb8, v10, v14, 0);
 					}
 				}
@@ -382,7 +382,7 @@ tail1_body:
 				break;
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
-			fcn_004c6940(obj, 1, msg.f);
+			cm_SendCutCommand55(obj, 1, msg.f);
 			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			break;
 		case 6:
@@ -390,7 +390,7 @@ tail1_body:
 				break;
 			p->timer = -1;
 			if (!fcn_00445600(0, 0x40, 0, (char*)&p->f10)) {
-				fcn_004c6940(obj, 6, msg.f);
+				cm_SendCutCommand55(obj, 6, msg.f);
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
 				p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
@@ -398,7 +398,7 @@ tail1_body:
 			if (!*((unsigned char*)p + 0x22)) {
 				if (*(int*)(*(int*)(obj + 0x184) + 0x128) == 0) {
 					p->c0c = 1;
-					fcn_004c6940(obj, 6, msg.f);
+					cm_SendCutCommand55(obj, 6, msg.f);
 					if (!fcn_004cec00(*((unsigned char*)p + 0x20),
 						*((unsigned char*)p + 0x21), &v10, &v14))
 						break;
@@ -410,7 +410,7 @@ tail1_body:
 					if (!CompareVector3WithinTolerance(vec,
 						(float*)((*(int*)(*(int*)(obj + 0x184) + 0x34)) + 0x4c), 50.0f))
 						break;
-					fcn_004c6940(obj, 4, msg.f);
+					cm_SendCutCommand55(obj, 4, msg.f);
 					*((unsigned char*)msg.f + 0x22) = 1;
 					p->timer = fcn_004c6820(*(int*)(context + 0x10), msg.f);
 				}
@@ -437,7 +437,7 @@ tail1_body:
 				if (!CompareVector3WithinTolerance(vec,
 					(float*)(ent34(obj) + 0x4c), 50.0f))
 					break;
-				fcn_004c6940(obj, 5, msg.f);
+				cm_SendCutCommand55(obj, 5, msg.f);
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
 				p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
@@ -467,7 +467,7 @@ tail1_body:
 						p->c0c = 1;
 						p->f20 = v10;
 						p->f24 = v14;
-						fcn_004c6940(obj, 6, msg.f);
+						cm_SendCutCommand55(obj, 6, msg.f);
 						p->timer = cm_RequestChTalkAction((char*)(*(int*)(*(int*)(obj + 0x184) + 0x34)), v10, v14, 0);
 						goto after2;
 					}
@@ -483,7 +483,7 @@ tail1_body:
 			if (!CompareVector3WithinTolerance(vec,
 				(float*)(ent34(obj) + 0x4c), 49.5f))
 				break;
-			fcn_004c6940(obj, 3, msg.f);
+			cm_SendCutCommand55(obj, 3, msg.f);
 			msg.f[0] = *(int*)(obj + 4);
 			msg.f[1] = 0;
 			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
@@ -514,7 +514,7 @@ case4b:
 					break;
 				sprintf(b118, (char*)0x68b85c, *(int*)(obj + 4));
 				p->c0c = 1;
-				fcn_004c6940(obj, 6, msg.f);
+				cm_SendCutCommand55(obj, 6, msg.f);
 				p->timer = cm_RequestChTalkAction(b118, v10, v14, 0);
 			} else {
 				d3_GridPointToWorld((int)base, p->f10, p->f14, vec);
@@ -523,7 +523,7 @@ case4b:
 					break;
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
-				fcn_004c6940(obj, 6, msg.f);
+				cm_SendCutCommand55(obj, 6, msg.f);
 				p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
 			}
 			break;
@@ -534,7 +534,7 @@ case4b:
 			if (p->c0c)
 				break;
 			p->c0c = 1;
-			p->timer = fcn_004c6940(obj, 6, msg.f);
+			p->timer = cm_SendCutCommand55(obj, 6, msg.f);
 			break;
 after2:
 			;

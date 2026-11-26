@@ -30,7 +30,7 @@ int __cdecl fcn_00449b60(int id);
 void __cdecl fcn_0044c200(int a, int b);
 void __cdecl fcn_00449f90(Obj0442910* o, int z, int id);
 void __cdecl fcn_0045ce90(int* t);
-void __cdecl fcn_00438b40(Obj0442910* o, int a);
+void __cdecl d3_SetNodePosition(Obj0442910* o, int a);
 void __cdecl d3_SetObjectRotation(Obj0442910* o, int a);
 void __cdecl fcn_00439aa0(Obj0442910* o);
 void __cdecl d3_DisposeObject(Obj0442910* o);
@@ -69,7 +69,7 @@ Obj0442910* __cdecl fcn_00442910(Obj0442910* parent, int a, int b, int id)
 			}
 			ov = o->ov;
 		}
-		fcn_00438b40(o, a);
+		d3_SetNodePosition(o, a);
 		d3_SetObjectRotation(o, b);
 		if (parent == 0) {
 			fcn_00439aa0(o);

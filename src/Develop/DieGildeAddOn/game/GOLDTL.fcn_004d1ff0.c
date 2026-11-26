@@ -29,7 +29,7 @@ void __cdecl gm_FindRecordById(int);
 int __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl d3_TransformPoint(int, int, void *);
 int __cdecl fcn_004488e0(char *, int, int);
-void __cdecl fcn_00438b40(int, void *);
+void __cdecl d3_SetNodePosition(int, void *);
 void __cdecl fcn_0045b290(int, int);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl gm_CheckEntityType(void *);
@@ -308,7 +308,7 @@ void __cdecl fcn_004d1ff0(void *arg)
 						break;
 					}
 					e = fcn_004488e0(buf, 0, 0);
-					fcn_00438b40(e, pathbuf);
+					d3_SetNodePosition(e, pathbuf);
 					*(int *) (e + 0x204) = ent;
 					for (j = 0; j < 3; j++) {
 						fcn_0064d41a(buf, "WARE_0%i", ids[j] + 1);

@@ -27,7 +27,7 @@ void __cdecl gm_FormatLawName(char *, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_004f4830(int, Law *);
 void __cdecl d2_RunGesetzbuchInfoDialog(int, int);
-void __cdecl fcn_005350d0(Book *);
+void __cdecl d2_UpdatePagedPanel(Book *);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_00534f30(Book *);
 void __cdecl fcn_00532ef0(void);
@@ -120,7 +120,7 @@ void __cdecl fcn_005ce460(int cmd)
 				}
 			}
 		}
-		fcn_005350d0(w);
+		d2_UpdatePagedPanel(w);
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

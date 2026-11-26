@@ -47,7 +47,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
-void __cdecl fcn_004f4f60(int, int, int, int, int);
+void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005dbe90(char*);
@@ -109,9 +109,9 @@ int __cdecl gm_UseSpecialObject(Ent* ent, Cmd* cmd)
 		}
 		if (d->action != -1) {
 			if (ent->home) {
-				fcn_004f4f60(d->action, 1, ent->handle, -1, *(int*) (ent->home + 1));
+				gm_TryRecordCrime(d->action, 1, ent->handle, -1, *(int*) (ent->home + 1));
 			} else {
-				fcn_004f4f60(d->action, 1, ent->handle, -1, -1);
+				gm_TryRecordCrime(d->action, 1, ent->handle, -1, -1);
 			}
 		}
 		if (ent->kind == 6 && cmd->done == 0) {

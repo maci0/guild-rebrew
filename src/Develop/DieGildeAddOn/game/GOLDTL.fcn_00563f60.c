@@ -35,7 +35,7 @@ void __cdecl gm_AddTime(pos14_7f4c00* t, int a, int b, int c);
 int __cdecl cm_RequestSysMessage(int kind, Req* r);
 void __cdecl he_FreeAction(char* o);
 
-void __cdecl fcn_00563f60(char* o)
+void __cdecl he_RunSellGebaeudeObjekt(char* o)
 {
 	int kind;
 	unsigned char* e;

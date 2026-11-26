@@ -9,7 +9,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c5620(char, unsigned char*);
 
 /* ADDRESS: GOLDTL 0x00578e10 */
-void __cdecl fcn_00578e10(char* action)
+void __cdecl he_StartDeathPact(char* action)
 {
 	int flag;
 	int zero;

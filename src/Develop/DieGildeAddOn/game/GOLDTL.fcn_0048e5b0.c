@@ -25,7 +25,7 @@ void __cdecl cm_SendSlotAddNCta(void*);
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_004a5e60(char*, int, F8, int, float, int*);
 void __cdecl gm_ResolveEntityById(void**, int, int, int);
-int __cdecl fcn_004a6210(char*, char*, int);
+int __cdecl gm_ComputeCannonShot(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x0048e5b0 */
 int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* firstAction, char* a4)
@@ -80,7 +80,7 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* firstAction, cha
 	if (a1 == 0) {
 		return 0;
 	}
-	if (fcn_004a6210(p, e, a1) == 0) {
+	if (gm_ComputeCannonShot(p, e, a1) == 0) {
 		return 0;
 	}
 	*(char*) firstAction = 4;

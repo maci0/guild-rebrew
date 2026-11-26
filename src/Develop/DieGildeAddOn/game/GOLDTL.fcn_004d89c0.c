@@ -30,7 +30,7 @@ unsigned char __cdecl fcn_0045b990(int, int, int*, int*, int*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl cm_RequestChTalkAction(int, int, int, int);
-int __cdecl fcn_004c6940(int, int, Ev_4d89c0*);
+int __cdecl cm_SendCutCommand55(int, int, Ev_4d89c0*);
 int __cdecl gm_GetEquippedCombatGear(int);
 int __cdecl gm_FindEntityActiveItem(int);
 int __cdecl gm_FindOrCreateEntitySlot(int, int);
@@ -122,7 +122,7 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 		}
 	}
 	cm_RequestChangeBits(*(unsigned int*) (actor + 4), 0x1c8, 4, 0x20000000, 0);
-	return fcn_004c6940(actor, 2, &ev);
+	return cm_SendCutCommand55(actor, 2, &ev);
 fail:
 	return 0xffffffff;
 }

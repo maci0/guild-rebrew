@@ -39,8 +39,8 @@ void __cdecl fcn_00594340(void);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00529160(char*, char*, int, char*);
-void __cdecl fcn_005944d0(int);
+void __cdecl he_AssignActionSlot(char*, char*, int, char*);
+void __cdecl d2_RunProduktionDialog(int);
 void __cdecl fcn_00594de0(int, int, int, char*);
 int __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
@@ -242,7 +242,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 										break;
 									}
 									if (*(int*) (q + 0x10) != 0) {
-										fcn_00529160(building, g_7746cc, n, p);
+										he_AssignActionSlot(building, g_7746cc, n, p);
 										*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[n] + 0x188) = 0;
 									}
 									q += 0x28;
@@ -366,7 +366,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 		fcn_00594de0(h, 2, count, p3);
 		fcn_00595e20((int) building, (int) p2);
 		fcn_005963f0(h, 1, 0, (int) building);
-	} while (main_RunFrameLoop(fcn_005944d0, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_RunProduktionDialog, 0x677c7) != 0);
 	fcn_00471e30(h);
 	d2_RestoreHudAfterDialog();
 	return 0;

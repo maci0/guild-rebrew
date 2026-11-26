@@ -4,10 +4,10 @@ extern int g_774650;
 extern unsigned short *__cdecl gm_StartFilteredEntitySearch(int, ...);
 extern void *__cdecl gm_FindRecordById(int);
 extern int __cdecl gm_IsWarehouse(unsigned char *);
-extern char *__cdecl fcn_0055d630(char *);
+extern char *__cdecl he_PickRandomSceneObject(char *);
 extern void __cdecl fcn_0055d6e0(char *, char *);
 extern void *__cdecl fcn_00502cd0(int, int, ...);
-extern char *__cdecl fcn_00402610(char *);
+extern char *__cdecl d3sm_GetObjectSuperMap(char *);
 extern char __cdecl fcn_0045b990(char *, float *, int *, int *, float *);
 extern void __cdecl d3_SelectSceneContext(int, int);
 extern void __cdecl d3_TransformPoint(char *, char *, float *);
@@ -17,7 +17,7 @@ extern int __cdecl cm_RequestMoveObjekt(int, int, int);
 extern void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 extern int __cdecl fcn_004c5620(int, char *);
 extern int __cdecl CompareVector3WithinTolerance(float *, float *, float);
-extern char *__cdecl fcn_005049a0(unsigned char *);
+extern char *__cdecl gm_FindBuildingPrimarySlot(unsigned char *);
 extern void __cdecl io_FormatTextBuffer(char *, int, ...);
 extern void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int,
 					   int, int);
@@ -50,7 +50,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 	if (*(int *)(transportEvent + 0xc4) == *(int *)(v4 + 1) && !*(char *)(transportEvent + 0xd0)) {
 		l_saved = *(int *)0x6b8010;
 		d3_SelectSceneContext(0, 1);
-		v6 = fcn_0055d630(*(char **)(v5 + 0x61));
+		v6 = he_PickRandomSceneObject(*(char **)(v5 + 0x61));
 		if (!v6)
 			v6 = *(char **)(v5 + 0x61);
 		d3_TransformPoint(v6, v6 + 0x4c, l_pos);
@@ -64,7 +64,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 		if (v6) {
 			v19 = *(int *)(v6 + 0x3b);
 			fcn_0055d6e0(transportEvent, v6);
-			v7 = (int)fcn_00402610((char *)v19);
+			v7 = (int)d3sm_GetObjectSuperMap((char *)v19);
 			*(char *)(transportEvent + 0xd0) = 1;
 			fcn_0045b990((char *)v7, l_pos, &l_a, &l_b, &l_c);
 			*(int *)(transportEvent + 0xd8) = *(int *)&l_pos[0];
@@ -72,7 +72,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 			*(int *)(transportEvent + 0xe0) = *(int *)&l_pos[2];
 			if (!gm_IsWarehouse((unsigned char *)v4)) {
 				if (*(int *)(v4 + 0x61)) {
-					v8 = fcn_0055d630(*(char **)(v4 + 0x61));
+					v8 = he_PickRandomSceneObject(*(char **)(v4 + 0x61));
 					if (!(v8)) {
 						v8 = *(char **)(v5 + 0x61);
 						*(int *)&l_v13[0] = *(int *)(v8 + 0x4c);
@@ -138,7 +138,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 			   (v1 < 0x92 || v1 > 0x97) && v1 != 0x2db))))))) &&
 		    !(*(unsigned char *)(v4 + 0x20) & 1) &&
 		    !*(char *)(transportEvent + 0xf2)) {
-			v8 = fcn_005049a0((unsigned char *)v5);
+			v8 = gm_FindBuildingPrimarySlot((unsigned char *)v5);
 			if (v8)
 				he_MessageBoxQuickjump(*(int *)(0x7f4ca4 +
 								*(unsigned short *)(transportEvent + 8) * 0x21c),

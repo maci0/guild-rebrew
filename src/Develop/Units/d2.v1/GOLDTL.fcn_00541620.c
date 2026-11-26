@@ -28,7 +28,7 @@ char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl fcn_00473150(unsigned char*);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_00509570(int);
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_DestroyHudOverlay(void);
@@ -52,7 +52,7 @@ void __cdecl fcn_00469e30(int);
 void __cdecl fcn_0046e830(int, int, int, int, int);
 void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 void __cdecl d2_UpdateScrollPerga(void);
-void __cdecl fcn_005355f0(void);
+void __cdecl d2_DestroyScrollPerga(void);
 int __cdecl gm_CheckAndCollectEntityDebt(char*, int);
 void __cdecl cut_ExecuteCutscene(void*);
 void __cdecl gm_ResetDynastySlot(int);
@@ -106,7 +106,7 @@ void __cdecl fcn_00541620(void)
 	sel = (int) fcn_00509570((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0);
 	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
 	*(int*) (sel + 0x3c) += *(int*) (k + 0x7f4e44) + *(int*) (k + 0x7f4e40);
-	fcn_00438b40((char*) d3_ActiveCamera, (int*) (sel + 0x8c));
+	d3_SetNodePosition((char*) d3_ActiveCamera, (int*) (sel + 0x8c));
 	d3_SetObjectRotation((char*) d3_ActiveCamera, (int*) (sel + 0x9c));
 	if (g_6a3420 == 0) {
 		goto fold;
@@ -318,7 +318,7 @@ void __cdecl fcn_00541620(void)
 		}
 		i = main_RunFrameLoop((int) fcn_00541620, 0x24087);
 	}
-	fcn_005355f0();
+	d2_DestroyScrollPerga();
 fold:
 	*(int*) (sel + 0x2c) += *(int*) (sel + 0x14) + *(int*) (sel + 0x18);
 	*(int*) (sel + 0x14) = 0;

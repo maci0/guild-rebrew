@@ -1,8 +1,8 @@
-int __cdecl fcn_004154e0(int value);
+int __cdecl d3_DestroyRain(int value);
 
 /* ADDRESS: GOLDTL 0x0040f9b0 */
 int __cdecl DeleteRain(int* arg)
 {
-	fcn_004154e0(*arg);
+	d3_DestroyRain(*arg);
 	return 0;
 }

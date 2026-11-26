@@ -23,7 +23,7 @@ int __cdecl atoi(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_004ae0f0(int);
 
-int __cdecl fcn_004ae130(unsigned short a1);
+int __cdecl gm_IsSlotActivePerson(unsigned short a1);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLD 0x4aef10 */
@@ -96,7 +96,7 @@ int __cdecl fcn_004af050(int mode, int* pairs, int idx, char* text, void* out)
 		goto send;
 	}
 	for (i = 0; i < 768; i++) {
-		if (fcn_004ae130((unsigned short) i) != 0 && (n == 0 || (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].gender) == want)) {
+		if (gm_IsSlotActivePerson((unsigned short) i) != 0 && (n == 0 || (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].gender) == want)) {
 			v = gm_WalkEntityChain((unsigned short) i);
 			if (v > best && fcn_004ae0f0((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id)) != 0) {
 				best = v;

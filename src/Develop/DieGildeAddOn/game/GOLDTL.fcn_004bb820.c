@@ -4,23 +4,23 @@ unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(unsigned short*, int);
 int __cdecl fcn_005086f0(unsigned short*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bb820 */
-int __cdecl fcn_004bb820(int* a1)
+int __cdecl gm_HandleMsg3fCheckState(int* request)
 {
 	char buf[0x400];
 	unsigned short* entity;
 
-	entity = gm_LookupEntityRecordById(a1[0]);
+	entity = gm_LookupEntityRecordById(request[0]);
 	if (entity == 0)
 		return 1;
 	if (gm_HasActiveSpecialObject(entity, 0x290) != 0)
 		return 0x400;
 	if (fcn_005086f0(entity) == 0)
 		return 0x400;
-	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7);
-	fcn_00545d40(*(int*) (entity + 2), *(int*) (entity + 2), buf, strlen(buf) > 0x100, 0x603, 0);
+	io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7);
+	he_PostEntityMessage(*(int*) (entity + 2), *(int*) (entity + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

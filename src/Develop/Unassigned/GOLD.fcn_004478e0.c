@@ -2,7 +2,7 @@
 #include "Develop/Units/d3/d3_d3d.h"
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_004475f0(char*);
-void __cdecl fcn_00438b40(char*, float*);
+void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl fcn_00439c60(char*);
 void __cdecl d3sm_Destroy(void*);
@@ -180,7 +180,7 @@ char __cdecl d3_SelectSceneContext(int index, char force)
         I32(0x6338c4) = I32(next + 0x88);
         camera = (char*)I32(0x6338c4);
         if (camera != 0) {
-            fcn_00438b40(camera, (float*)(next + 0x8c));
+            d3_SetNodePosition(camera, (float*)(next + 0x8c));
             d3_SetObjectRotation((char*)I32(0x6338c4), (float*)(next + 0x98));
             fcn_00439c60((char*)I32(0x6338c4));
         }

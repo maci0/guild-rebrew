@@ -26,10 +26,10 @@ int __cdecl atoi(char*);
 int __cdecl fcn_004ae0f0(int);
 unsigned short __cdecl gm_RandomMod(int);
 
-int __cdecl fcn_004ae130(unsigned short a1);
+int __cdecl gm_IsSlotActivePerson(unsigned short entityId);
 
 #pragma optimize("y", off)
-int __cdecl fcn_004afb60(int mode, int* pairs, int idx, char* text, void* out)
+int __cdecl hst_HandleRndHandelsherr(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
 	int score[5];
@@ -100,7 +100,7 @@ int __cdecl fcn_004afb60(int mode, int* pairs, int idx, char* text, void* out)
 		    && (((Rec21c*)g_7f4ca0)[i].cls < 0x1f || ((Rec21c*)g_7f4ca0)[i].cls > 0x21)
 		    && (((Rec21c*)g_7f4ca0)[i].cls < 0x28 || ((Rec21c*)g_7f4ca0)[i].cls > 0x2d)
 		    && (((Rec21c*)g_7f4ca0)[i].cls < 0x34 || ((Rec21c*)g_7f4ca0)[i].cls > 0x39)
-		    && fcn_004ae130((unsigned short) i) != 0) {
+		    && gm_IsSlotActivePerson((unsigned short) i) != 0) {
 			v = gm_WalkEntityChain((unsigned short) i);
 			if (v > score[4] && fcn_004ae0f0(((Rec21c*)g_7f4ca0)[i].key) != 0) {
 				score[4] = v;

@@ -6,7 +6,7 @@
 void __cdecl d2_CreateScrollPerga(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateScrollPerga(void);
-void __cdecl fcn_005355f0(void);
+void __cdecl d2_DestroyScrollPerga(void);
 
 void __cdecl d2_RunScrollPerga(void)
 {
@@ -17,5 +17,5 @@ void __cdecl d2_RunScrollPerga(void)
 			g_774654 = 1;
 		}
 	}
-	fcn_005355f0();
+	d2_DestroyScrollPerga();
 }

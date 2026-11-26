@@ -27,7 +27,7 @@ struct msg {
 
 void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
 void __cdecl he_SendZigeunerMsg9f(char* a, char* b)
 {
@@ -53,5 +53,5 @@ void __cdecl he_SendZigeunerMsg9f(char* a, char* b)
 	}
 	io_FormatTextBuffer(buf1, 0x41e3);
 	io_FormatTextBuffer(buf2, id, buf1);
-	fcn_00545d40(*(int*) (b + 4), -1, buf2, 1, 0x5fb, tag);
+	he_PostEntityMessage(*(int*) (b + 4), -1, buf2, 1, 0x5fb, tag);
 }

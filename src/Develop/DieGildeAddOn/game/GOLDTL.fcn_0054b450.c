@@ -1,12 +1,12 @@
 #include "client_types.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
-float __cdecl fcn_00507e70(char*, char*, int);
+float __cdecl gm_CalcSkillDuelScore(char*, char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl he_FreeAction(char*);
 void __cdecl fcn_00545780(char*);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 void __cdecl io_FormatTextBuffer(int, int, ...);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_SetForm(int, int);
@@ -66,12 +66,12 @@ void __cdecl fcn_0054b450(char* a0)
 			if (*(int*) 0x100f1dc == 2) {
 				io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) entityC,
 				             *(unsigned short*) entityA);
-				fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
+				he_PostEntityMessage(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
 				cm_RequestCopyEntityData(*(int*) (entityA + 2), *(int*) (entityC + 2), -0x14, 1);
 			} else if (*(int*) 0x100f1dc == 1) {
 				io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) entityC,
 				             *(unsigned short*) entityA);
-				fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
+				he_PostEntityMessage(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
 				cm_RequestCopyEntityData(*(int*) (v4 + 2), *(int*) (entityC + 2), -0xf, 1);
 				cm_RequestCopyEntityData(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
 			}
@@ -81,15 +81,15 @@ void __cdecl fcn_0054b450(char* a0)
 		}
 		return;
 	case 2:
-		dist = fcn_00507e70((char*) v4, (char*) entityA, 4);
+		dist = gm_CalcSkillDuelScore((char*) v4, (char*) entityA, 4);
 		if (1.0f <= gm_RandomFloat01() + dist) {
 			io_FormatTextBuffer((int) buf, 0x1764, *(unsigned short*) entityC, *(unsigned short*) entityA);
 			v4 = (unsigned short*) *(int*) (v4 + 2);
-			fcn_00545d40((int) v4, (int) v4, buf, 0, 0x5fa, 0);
+			he_PostEntityMessage((int) v4, (int) v4, buf, 0, 0x5fa, 0);
 			cm_RequestCopyEntityData(*(int*) (entityA + 2), *(int*) (entityC + 2), -0x14, 1);
 		} else {
 			io_FormatTextBuffer((int) buf, 0x1765, *(unsigned short*) entityC, *(unsigned short*) entityA);
-			fcn_00545d40(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
+			he_PostEntityMessage(*(int*) (v4 + 2), *(int*) (v4 + 2), buf, 0, 0x5fa, 0);
 			cm_RequestCopyEntityData(*(int*) (v4 + 2), *(int*) (entityC + 2), -0xf, 1);
 			cm_RequestCopyEntityData(*(int*) (entityC + 2), *(int*) (v4 + 2), -0xf, 1);
 		}

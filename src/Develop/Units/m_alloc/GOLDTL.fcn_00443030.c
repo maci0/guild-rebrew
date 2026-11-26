@@ -62,7 +62,7 @@ extern char g_1043060;
 extern char g_1040960[];
 
 Ent* __cdecl d3_SpawnObject(int, const char*);
-void __cdecl fcn_00438b40(Ent*, Vec3*);
+void __cdecl d3_SetNodePosition(Ent*, Vec3*);
 void __cdecl d3_SetObjectRotation(Ent*, Vec3*);
 
 
@@ -82,7 +82,7 @@ char __cdecl fcn_00443030(Level* lv)
 	lv->pos.x = 0.0f;
 	lv->pos.y = 0.0f;
 	lv->pos.z = -256.0f;
-	fcn_00438b40(e, &lv->pos);
+	d3_SetNodePosition(e, &lv->pos);
 	lv->rot.y = 0.0f;
 	lv->rot.x = 0.0f;
 	lv->rot.z = 0.0f;

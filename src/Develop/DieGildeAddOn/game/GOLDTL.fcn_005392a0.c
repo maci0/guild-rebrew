@@ -13,7 +13,7 @@ void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl gm_ResetAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
-void __cdecl fcn_00510930(void);
+void __cdecl d3_ClearAllSceneContexts(void);
 int __cdecl fcn_0051e070(void);
 #include "client_scene_loader.h"
 
@@ -36,7 +36,7 @@ void __cdecl main_LoadCitySelectionScene(char* name, int net)
 	gm_KillAllSpieler();
 	gm_ResetAllEntities();
 	gm_CleanupObjectEntities();
-	fcn_00510930();
+	d3_ClearAllSceneContexts();
 	d3_SelectSceneContext(0, 0);
 	fcn_00442e30();
 	if (fcn_0051e070() == 0) {

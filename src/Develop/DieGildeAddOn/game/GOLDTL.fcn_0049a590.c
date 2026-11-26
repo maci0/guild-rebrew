@@ -29,7 +29,7 @@ void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt)
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
 /* ADDRESS: GOLDTL 0x0049a590 */
-int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
+int __cdecl ai_StartUseObjectAps(int kind, char* actor, int busy, Msg* out1, Msg* out2)
 {
 	int action = kind;
 	Counts cnt;
@@ -46,7 +46,7 @@ int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 		memset(slot, 0, sizeof(slot));
 		slot[0].id = 0x173;
 		slot[1].id = 0x15b;
-		gm_CheckEntityObjectSlots(e, 2, slot, &cnt);
+		gm_CheckEntityObjectSlots(actor, 2, slot, &cnt);
 		if ((cnt.total != 6 || cnt.free != 0) && cnt.blocked != 2) {
 			if (cnt.total < 6 && cnt.free == 0) {
 				i = gm_RandomMod(2);
@@ -58,9 +58,9 @@ int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				a.b = 1;
 				a.f = 0.05f;
 				b.type = 7;
-				b.a = *(int*) (e + 4);
+				b.a = *(int*) (actor + 4);
 				b.b = 1;
-				r = ai_SelectBestMethod(action, *(unsigned short*) e, 2, &a, &b);
+				r = ai_SelectBestMethod(action, *(unsigned short*) actor, 2, &a, &b);
 				if (r != 0) {
 					*out1 = a;
 					*out2 = b;
@@ -80,7 +80,7 @@ int __cdecl fcn_0049a590(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				a.b = -1;
 				a.d = 0x1d;
 				if (i == 0) {
-					r = ai_SelectBestMethod(action, *(unsigned short*) e, 4, &b, &a);
+					r = ai_SelectBestMethod(action, *(unsigned short*) actor, 4, &b, &a);
 					if (r != 0) {
 						*out1 = b;
 						*out2 = a;

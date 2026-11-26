@@ -9,7 +9,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_CheckEntityType(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b97d0 */
@@ -57,7 +57,7 @@ int __cdecl fcn_004b97d0(int* request)
 	gm_ResolveEntityById((void**) (&x1), 0, 0, *(int*) (s + 0xb4));
 	if (x2 != 0 && x1 != 0) {
 		io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, x2, x1, cnt);
-		fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x5ef, 0);
+		he_PostEntityMessage(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x5ef, 0);
 	}
 	return 0;
 }

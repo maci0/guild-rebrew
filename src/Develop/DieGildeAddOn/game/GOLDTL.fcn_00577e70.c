@@ -8,10 +8,10 @@ int __cdecl ch_StartMovement(int who, int key, int target, char* name, int mode,
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
 int __cdecl fcn_004c5620(char a1, unsigned char* e);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
-void __cdecl fcn_00545d40();
+void __cdecl he_PostEntityMessage();
 
 /* ADDRESS: GOLDTL 0x00577e70 */
-unsigned int __cdecl fcn_00577e70(char* a0, char* a1, char* a2)
+unsigned int __cdecl he_RunSpyKillerCheck(char* a0, char* a1, char* a2)
 {
 	char message[1024];
 	char* v3;
@@ -43,9 +43,9 @@ unsigned int __cdecl fcn_00577e70(char* a0, char* a1, char* a2)
 				if (gm_GetEntitySkill((char*) v1, 2) + t0 < gm_GetEntitySkill((char*) v8, 2) + t1) {
 					*(unsigned int*) (a2 + 0x84) = fcn_004c5620(-1, (unsigned char*) a2);
 					io_FormatTextBuffer(message, (char*) 0x4028, *(unsigned short*) v8);
-					fcn_00545d40(*(unsigned int*) (v1 + 4), -1, message, 1, 0x5fb, (char*) 0x6a7ea8);
+					he_PostEntityMessage(*(unsigned int*) (v1 + 4), -1, message, 1, 0x5fb, (char*) 0x6a7ea8);
 					io_FormatTextBuffer(message, (char*) 0x4029, *(unsigned short*) v1);
-					fcn_00545d40(*(unsigned int*) (v8 + 4), -1, message, 1, 0x5fb, (char*) 0x6a7ea8);
+					he_PostEntityMessage(*(unsigned int*) (v8 + 4), -1, message, 1, 0x5fb, (char*) 0x6a7ea8);
 					return 1;
 				}
 				} else {

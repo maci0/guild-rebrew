@@ -24,7 +24,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 unsigned int __cdecl fcn_004a55c0(void *, unsigned int, unsigned int *, float, float, unsigned short *);
 int __cdecl srv_GetEntityOfficeSlot(void *, void *, void *);
 void __cdecl amt_SendOfficeCommand(void *, int, int, int, int);
-void __cdecl fcn_00545d40(int, int, char *, int, int, char *);
+void __cdecl he_PostEntityMessage(int, int, char *, int, int, char *);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -82,13 +82,13 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 						cm_AppendPacketFieldDelta(4, 1, 0x24, &a);
 						cm_RequestChangeAttribute();
 						if (best->entity_state == 6 || best->entity_state == 7)
-							fcn_00545d40(best->entity_id, -1, t3, 1, 0x601, 0);
+							he_PostEntityMessage(best->entity_id, -1, t3, 1, 0x601, 0);
 					} else {
 						if (best->entity_state == 6 || best->entity_state == 7)
-							fcn_00545d40(best->entity_id, -1, t4, 1, 0x601, 0);
+							he_PostEntityMessage(best->entity_id, -1, t4, 1, 0x601, 0);
 					}
 				} else if (best->entity_state == 6 || best->entity_state == 7) {
-					fcn_00545d40(best->entity_id, -1, msg, 1, 0x601, 0);
+					he_PostEntityMessage(best->entity_id, -1, msg, 1, 0x601, 0);
 				}
 			}
 		}
@@ -189,6 +189,6 @@ void __cdecl fcn_005d9000(unsigned char *e, int mode)
 	strcat(msg, t1);
 	for (i = 0; i < 768; i++) {
 		if (((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 6 || ((ENTITY_RECORD*)g_7f4ca0)[i].entity_state == 7)
-			fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[i].entity_id, -1, msg, 1, 0x5fe, 0);
+			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[i].entity_id, -1, msg, 1, 0x5fe, 0);
 	}
 }

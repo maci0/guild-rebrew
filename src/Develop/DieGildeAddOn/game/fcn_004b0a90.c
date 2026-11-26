@@ -2,7 +2,7 @@
 
 extern unsigned char g_773d75;
 
-int __cdecl fcn_004ae130(unsigned short);
+int __cdecl gm_IsSlotActivePerson(unsigned short);
 int __cdecl fcn_0064fcaf(char*);
 int __cdecl gm_FindObjektPrototypeByName(char*);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
@@ -29,7 +29,7 @@ int __cdecl fcn_004b0a90(int a0, int a1, char* arg)
 		return 0;
 	}
 	for (i = 0, e = (char*) 0x7f4e09; (int) e < (int) 0x85a209; e += 0x21c, i++) {
-		if (fcn_004ae130((unsigned short) i) != 0) {
+		if (gm_IsSlotActivePerson((unsigned short) i) != 0) {
 			if (*(char*) (e - 3) != 0 || *e != 0) {
 				cm_SendSellObjekt(*(int*) (e - 0x165), -1, r, 1, g_773d75, 0);
 			}

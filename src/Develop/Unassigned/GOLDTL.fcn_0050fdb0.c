@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 float __cdecl fcn_0050fdb0(int k, int n, int* ids)
 {
@@ -19,7 +19,7 @@ float __cdecl fcn_0050fdb0(int k, int n, int* ids)
 		if (ids[i] != -1) {
 			e = gm_LookupEntityRecordById(ids[i]);
 			if (e != 0) {
-				sum = fcn_0050f980(k, *e, 0) + sum;
+				sum = gm_CalcEntityFavor(k, *e, 0) + sum;
 				cnt++;
 			}
 		}

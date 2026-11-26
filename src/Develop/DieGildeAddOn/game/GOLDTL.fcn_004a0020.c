@@ -23,7 +23,7 @@ typedef struct
 int __cdecl amt_GetRoleTemplate(int idx, fcn_004a0020_Rec* out);
 int __cdecl amt_CollectOfficeSlotsByGroup(int k, int max, fcn_004a0020_Rec* out);
 fcn_004a0020_Ent* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004a0020 */
@@ -95,8 +95,8 @@ int __cdecl fcn_004a0020(fcn_004a0020_Ent* e)
 						if (list[k].id != e->h && list[k].id != -1) {
 							d2 = gm_LookupEntityRecordById(list[k].id);
 							if (d2 != 0) {
-								sum += fcn_0050f980(d->id, d2->id, 1);
-								sum += fcn_0050f980(d2->id, d->id, 1);
+								sum += gm_CalcEntityFavor(d->id, d2->id, 1);
+								sum += gm_CalcEntityFavor(d2->id, d->id, 1);
 								cnt += 2;
 							}
 						}

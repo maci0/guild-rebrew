@@ -70,7 +70,7 @@ typedef struct Frame {
 
 int __cdecl fcn_004321a0(ClampBlk flags, int v, int lo, int hi, int max);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
-void __cdecl fcn_00438b40(char*, float*);
+void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl d3_ApplyAnimDelta(char*, char*, int, int, int);
 void __cdecl d3_AccumulateAnimDelta(char*, char*, int, int, int);
@@ -391,7 +391,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 						fs->vec[2] = fs->vec[2] * SF(nd + 0x1b4) +
 							fs->vec[1] * SF(nd + 0x1a4) +
 							fs->vec[0] * SF(nd + 0x194) + SF(slot + 0x28);
-						fcn_00438b40(o, fs->vec);
+						d3_SetNodePosition(o, fs->vec);
 					}
 				}
 
@@ -466,7 +466,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 			fs->vec[0] += SF(st + 0x14);
 			fs->vec[1] += SF(st + 0x18);
 			fs->vec[2] += SF(st + 0x1c);
-			fcn_00438b40(o, fs->vec);
+			d3_SetNodePosition(o, fs->vec);
 			if (SI(o + 0x218) < 5) {
 				fs->neg[0] = -SF(WR(cur) + 0x40);
 				fs->neg[1] = -SF(WR(cur) + 0x44);
@@ -504,7 +504,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 			fs->vec[0] += SF(st + 0x14);
 			fs->vec[1] += SF(st + 0x18);
 			fs->vec[2] += SF(st + 0x1c);
-			fcn_00438b40(o, fs->vec);
+			d3_SetNodePosition(o, fs->vec);
 			if (SI(o + 0x218) < 5) {
 				fs->vec[0] = fcn_004517e0(SF(WR(cur) + 0x14),
 					SF(WR(prev) + 0x14),
@@ -537,7 +537,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 			fs->vec[0] += SF(st + 0x14);
 			fs->vec[1] += SF(st + 0x18);
 			fs->vec[2] += SF(st + 0x1c);
-			fcn_00438b40(o, fs->vec);
+			d3_SetNodePosition(o, fs->vec);
 		}
 		if (SI(o + 0x218) < 5) {
 			fs->vec[0] = SF(WR(prev) + 0x14) * fs->f18 +
@@ -722,7 +722,7 @@ place2:
 		fs->vec[0] = SF(frames + 4) + SF(st + 0x14);
 		fs->vec[1] = SF(frames + 8) + SF(st + 0x18);
 		fs->vec[2] = SF(frames + 0xc) + SF(st + 0x1c);
-		fcn_00438b40(o, fs->vec);
+		d3_SetNodePosition(o, fs->vec);
 		fs->vec[0] = SF(frames + 0x14) + SF(st + 0x20);
 		fs->vec[1] = SF(frames + 0x18) + SF(st + 0x24);
 		fs->vec[2] = SF(frames + 0x1c) + SF(st + 0x28);

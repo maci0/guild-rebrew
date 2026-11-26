@@ -40,7 +40,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CheckActionBlocker(char*, int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -67,7 +67,7 @@ int __cdecl d2_ShowIntimidationDialog(unsigned short* target)
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
 				if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 2) != 0) {
-					fcn_004c6ae0(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);
+					cm_RequestModifyHealth(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 0x4b;
 					pkt.x8 = *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;

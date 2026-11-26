@@ -7,7 +7,7 @@ void __cdecl d3_TraverseSceneObjects(int list, char* p, int mask, void(__cdecl* 
 void __cdecl d3_ClearAuxSlotState(void);
 
 /* ADDRESS: GOLDTL 0x00438b40 */
-void __cdecl fcn_00438b40(char* p, int* v)
+void __cdecl d3_SetNodePosition(char* p, int* v)
 {
 	if (p == ((char*)d3_ActiveCamera)) {
 		fcn_00438af0(1);

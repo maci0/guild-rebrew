@@ -45,7 +45,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_005ba910(void*, int);
 
 /* ADDRESS: GOLDTL 0x0055dab0 */
-void __cdecl fcn_0055dab0(char* e)
+void __cdecl he_StepTransportCarrier(char* e)
 {
 	char* s44;
 	char* b;

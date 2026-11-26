@@ -18,7 +18,7 @@ unsigned int __cdecl cut_RandMod(unsigned int);
 int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl cm_RequestChTalkAction(char*, int, int, char*);
-void __cdecl fcn_004d4950(void);
+void __cdecl gm_ResolveDuelHit(void);
 void __cdecl fcn_004d4e30(void);
 int __cdecl gm_RandomMod(unsigned short);
 
@@ -100,10 +100,10 @@ make_task:
 		             1);
 	} else {
 		if (*(int*) r == 0) {
-			if (i != 0) task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 8, 0x2e, 1);
-			else task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 2, 0x2e, 1);
-		} else if (i != 0) task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 6, 0x2e, 1);
-		else task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) fcn_004d4950, 2, 0x2e, 1);
+			if (i != 0) task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) gm_ResolveDuelHit, 8, 0x2e, 1);
+			else task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) gm_ResolveDuelHit, 2, 0x2e, 1);
+		} else if (i != 0) task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) gm_ResolveDuelHit, 6, 0x2e, 1);
+		else task = ch_CreateQueuedAction(*(char**) ((char*) rec + 0x184), (void (__cdecl*)(int)) gm_ResolveDuelHit, 2, 0x2e, 1);
 		*(float*) (task + 0x178) = 1.4f;
 		*(int**) (task + 0x17c) = ent;
 		*(unsigned short**) (task + 0x180) = rec;

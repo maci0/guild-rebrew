@@ -3,7 +3,7 @@ int __cdecl sprintf(char* buf, const char* fmt, ...);
 
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl fcn_004e9180(char* a1, int a2);
-int __cdecl fcn_004aacb0(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* a4);
+int __cdecl ai_CompareOfficeCandidates(unsigned short* a1, unsigned short* a2, unsigned short* a3, int* a4);
 int __cdecl fcn_004aae50(char a1, unsigned short* a2, int* a3, int* a4);
 
 /* ADDRESS: GOLDTL 0x004dc6e0 */
@@ -36,7 +36,7 @@ void __cdecl fcn_004dc6e0(char* obj, int* request)
 		if (firstEntity == 0 || secondEntity == 0) {
 			return;
 		}
-		r = fcn_004aacb0((unsigned short*) entity, (unsigned short*) firstEntity, (unsigned short*) secondEntity, &tmp);
+		r = ai_CompareOfficeCandidates((unsigned short*) entity, (unsigned short*) firstEntity, (unsigned short*) secondEntity, &tmp);
 		*(int*) (obj + 0x98) = tmp;
 		*(int*) (obj + 0x94) = r;
 		obj += 0x14;

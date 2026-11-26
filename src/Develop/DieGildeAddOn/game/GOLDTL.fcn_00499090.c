@@ -37,7 +37,7 @@ int __cdecl he_HasNoActiveAction0x88(char* obj, char* e);
 int __cdecl gm_CalculateGebaeudeValue(int* p, int n);
 int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl gm_CheckPrivilege(int a, char* e, void* buf);
-float __cdecl fcn_00507e70(char* a, char* b, int i);
+float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int i);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl he_HasNoActiveEvent04b(char* obj, char* e);
 int __cdecl he_HasNoActiveAction0x2e(char* obj, char* e);
@@ -119,7 +119,7 @@ int __cdecl fcn_00499090(int who, char* e, int arg, Msg* o1, Msg* o2)
 							v4 = v4 / 2;
 						}
 						if (!((float)v8 * 0.44f < (float)v4)) {
-							if (!(fcn_00507e70(e, owner, 2) + gm_RandomFloat01() >= 1.0f)) {
+							if (!(gm_CalcSkillDuelScore(e, owner, 2) + gm_RandomFloat01() >= 1.0f)) {
 								b1.kind = 0xe;
 								b1.a = 2;
 								b1.b = 1;

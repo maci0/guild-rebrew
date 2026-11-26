@@ -8,7 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern float g_662924;
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
 float __cdecl gm_GetEntitySkill(char*, int);
@@ -34,7 +34,7 @@ void __cdecl he_DeclineDuell(char* a0, char* firstEntity, unsigned char* secondE
 			textId = 0x1d68;
 		}
 		io_FormatTextBuffer(buf, 0x1d81, *(unsigned short*) secondEntity, *(unsigned short*) secondEntity, textId);
-		fcn_00545d40(*(int*) (firstEntity + 4), *(int*) (firstEntity + 4), buf, 0, 0x5fb, 0);
+		he_PostEntityMessage(*(int*) (firstEntity + 4), *(int*) (firstEntity + 4), buf, 0, 0x5fb, 0);
 		cm_RequestChangeBits(*(int*) (firstEntity + 4), 0x1c8, 4, 0, 0x400);
 		cm_RequestChangeBits(*(int*) (secondEntity + 4), 0x1c8, 4, 0, 0x400);
 	}

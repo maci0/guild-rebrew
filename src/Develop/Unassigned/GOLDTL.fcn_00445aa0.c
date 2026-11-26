@@ -1,4 +1,4 @@
-char __cdecl fcn_00438b40(char*, float*);
+char __cdecl d3_SetNodePosition(char*, float*);
 char __cdecl d3_SetObjectRotation(char*, float*);
 
 /* ADDRESS: GOLDTL 0x00445aa0 */
@@ -59,7 +59,7 @@ L:
 		*(float*) (interpObj + 0x5c + i) = (*(float*) (nextFrame + 0x18 + i) - *(float*) (firstFrame + 0x18 + i)) * t + *(float*) (firstFrame + 0x18 + i);
 		*(float*) ((char*) newRotation + i) = (*(float*) (nextFrame + 0xc + i) - *(float*) (firstFrame + 0xc + i)) * t + *(float*) (firstFrame + 0xc + i);
 	}
-	fcn_00438b40(interpObj, newPosition);
+	d3_SetNodePosition(interpObj, newPosition);
 	d3_SetObjectRotation(interpObj, newRotation);
 	return 1;
 }

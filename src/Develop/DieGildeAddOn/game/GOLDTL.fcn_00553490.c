@@ -23,7 +23,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00529160(char*, int, int, int);
+void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 void __cdecl cm_SendCopyEntityData(char*);
@@ -33,7 +33,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00553490 */
@@ -78,7 +78,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 	}
 	switch (*(int*) (self + 0x70)) {
 	case 1:
-		fcn_00529160(p, 0, *(unsigned short*) ent, self);
+		he_AssignActionSlot(p, 0, *(unsigned short*) ent, self);
 		cm_SendCancelCharacterActions(*(int*) (ent + 4));
 		ch_StartMovement(*(int*) (ent + 4), *(int*) (p + 1), -1, 0, 1, (char*) 0x6a5c24);
 		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
@@ -148,7 +148,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
 			io_FormatTextBuffer(buf, 0x1a8d, *(unsigned short*) (p + 0x27), p, *(int*) (self + 0xb4));
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
-			fcn_00545d40(i, i, buf, 0, 0x5f3, (char*) 0x6a5c10);
+			he_PostEntityMessage(i, i, buf, 0, 0x5f3, (char*) 0x6a5c10);
 			return;
 		}
 		if (*(int*) (self + 0xb8) != 0) {
@@ -158,7 +158,7 @@ void __cdecl he_RunSchutzgeld(char* self)
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
 			io_FormatTextBuffer(buf, 0x1a8f, *(unsigned short*) (p + 0x27), p);
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
-			fcn_00545d40(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
+			he_PostEntityMessage(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
 			return;
 		} else {
 			*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);
@@ -167,18 +167,18 @@ void __cdecl he_RunSchutzgeld(char* self)
 			*(int*) (self + 0x84) = fcn_004c5620(step, self);
 			io_FormatTextBuffer(buf, 0x1a8e, *(unsigned short*) (p + 0x27), p);
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
-			fcn_00545d40(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
+			he_PostEntityMessage(i, i, buf, 0, 0x5f3, (char*) 0x6a5bfc);
 			return;
 		}
 	case 4:
 		if (*(int*) (self + 0xb8) == 1) {
 			io_FormatTextBuffer(buf, 0x1a90, p);
 			i = *(int*) (*(unsigned short*) (self + 8) * 0x21c + (unsigned long)&g_7f4ca4);
-			fcn_00545d40(i, i, buf, 0, 0x5f3, 0);
+			he_PostEntityMessage(i, i, buf, 0, 0x5f3, 0);
 			i = *(int*) (*(unsigned short*) (p + 0x27) * 0x21c + (unsigned long)&g_7f4ca4);
-			fcn_00545d40(i, i, buf, 0, 0x5f3, 0);
+			he_PostEntityMessage(i, i, buf, 0, 0x5f3, 0);
 		}
-		fcn_00529160(p, 0, *(unsigned short*) ent, 0);
+		he_AssignActionSlot(p, 0, *(unsigned short*) ent, 0);
 		cm_SendCancelCharacterActions(*(int*) (ent + 4));
 		ch_StartMovement(*(int*) (ent + 4), *(int*) (self + 0xbc), *(int*) (self + 0xc0), 0, 0, (char*) 0x6a5c24);
 		*(pos14_7f4c00*) (self + 0x52) = (*(pos14_7f4c00*) &gm_GameTime);

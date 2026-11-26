@@ -14,7 +14,7 @@ void __cdecl fcn_0043aa30(int a0);
 void __cdecl d3_UpdateBuildingView(unsigned char* a0, int a1);
 void __cdecl d3_SetupInteriorScene(int a0, unsigned char* a1);
 int __cdecl gm_GetBuildingTypeCategory(int a0);
-void __cdecl fcn_00438b40(char* p, int* v);
+void __cdecl d3_SetNodePosition(char* p, int* v);
 void __cdecl d3_SetObjectRotation(int a0, int a1);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl fcn_0058f700(int a0);
@@ -36,7 +36,7 @@ void __cdecl d2_RunZigeunerInteriorHud(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_774658, d3_CameraHorizontalIndex, d3_CameraVerticalStep, d2_SuppressOverlay, g_67530c, g_675310;
 /* ADDRESS: GOLDTL 0x005a80d0 */
-void __cdecl fcn_005a80d0(unsigned char* a0)
+void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 {
 	unsigned char* buildingPtr;
 	int n;
@@ -54,15 +54,15 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	unsigned char* p;
 	int c;
 
-	buildingPtr = a0;
+	buildingPtr = building;
 	id = -1;
-	n = gm_CanEnterGebaeude(a0);
+	n = gm_CanEnterGebaeude(building);
 	if (n == 0) {
 		*(int*) &g_7e2700 = 0;
 		return;
 	}
 	g_774658 = g_774650 + 1;
-	a0 = (unsigned char*) *(int*) &d3_CurrentContextIndex;
+	building = (unsigned char*) *(int*) &d3_CurrentContextIndex;
 	*(int*) 0x6a2520 = 0;
 	fcn_00530510();
 	sv_ClearObjectSelection();
@@ -114,7 +114,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 		}
 		id = *(int*) &evt_LastGfxScriptId;
 		if (*(unsigned short*) (buildingPtr + 0x27) == *(unsigned short*) &g_774970) {
-			fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x5c));
+			d3_SetNodePosition((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x5c));
 			v10 = *(int*) &d3_ActiveCamera + 0x90;
 			v11 = *(int*) &d3_ActiveCamera;
 			d3_SetObjectRotation(v11, v10);
@@ -124,18 +124,18 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 			rec = *(int*) &lpGebaeudePROT + c + c * 0x24c;
 			if (v10 != 2) {
 				if (*(char*) rec == 0x1c) {
-					fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x5c));
+					d3_SetNodePosition((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x5c));
 					v10 = *(int*) &d3_ActiveCamera + 0x90;
 					d3_SetObjectRotation(*(int*) &d3_ActiveCamera, v10);
 				} else if (CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x114), (float*) &g_662d70, 0.1f) == 0
 				           && CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x120), (float*) &g_662d70, 0.1f) == 0) {
-					fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x114));
+					d3_SetNodePosition((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x114));
 					v10 = *(int*) &d3_ActiveCamera + 0x120;
 					d3_SetObjectRotation(*(int*) &d3_ActiveCamera, v10);
 				}
 			} else if (CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x114), (float*) &g_662d70, 0.1f) == 0
 			           && CompareVector3WithinTolerance((float*) (*(int*) &d3_ActiveCamera + 0x120), (float*) &g_662d70, 0.1f) == 0) {
-				fcn_00438b40((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x114));
+				d3_SetNodePosition((char*) *(int*) &d3_ActiveCamera, (int*) (*(int*) &d3_ActiveCamera + 0x114));
 				v10 = *(int*) &d3_ActiveCamera + 0x120;
 				d3_SetObjectRotation(*(int*) &d3_ActiveCamera, v10);
 			}
@@ -207,7 +207,7 @@ void __cdecl fcn_005a80d0(unsigned char* a0)
 	d3snd_FreeObjectSoundBanks();
 	fcn_00516ed0(*(int*) &g_7746c8);
 	fcn_0043a9c0(3);
-	d3_SelectSceneContext((int) a0, 0);
+	d3_SelectSceneContext((int) building, 0);
 	*(int*) &g_7ea360 = 0;
 	*(int*) &g_7746c8 = 0;
 	*(int*) &g_6791c8 = 0;

@@ -24,7 +24,7 @@ int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl gm_ResolveEntityById(void** out, int a, int b, int c);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int a, unsigned char b);
-int __cdecl fcn_004a4fb0(int* a, int* b, char* q, int c);
+int __cdecl ai_FindMissingBuildingUpgrade(int* a, int* b, char* q, int c);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 float __cdecl gm_GetCityStatsSummary(char* p);
 unsigned short __cdecl gm_RandomMod(int n);
@@ -81,7 +81,7 @@ int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, B
 			}
 		}
 	}
-	if (fcn_004a4fb0(&v0, &v1, q, 0) != 0) {
+	if (ai_FindMissingBuildingUpgrade(&v0, &v1, q, 0) != 0) {
 		b1.kind = 2;
 		b1.a = v0;
 		b1.b = 1;

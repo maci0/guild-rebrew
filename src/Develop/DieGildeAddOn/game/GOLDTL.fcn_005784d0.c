@@ -8,7 +8,7 @@ int __cdecl ch_StartMovement(unsigned int, unsigned int, int, int, int, char*);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl he_FreeAction(char*);
 void __cdecl he_NotifyHeimsuchung(char*, char*, char*);
 
@@ -16,7 +16,7 @@ void __cdecl he_NotifyHeimsuchung(char*, char*, char*);
 /* Runs the plague-heimsuchung action message through its states and updates
  * the action duration it reports back to the caller. */
 /* ADDRESS: GOLDTL 0x005784d0 */
-void __cdecl fcn_005784d0(char* obj)
+void __cdecl he_RunHeimsuchung(char* obj)
 {
 	unsigned short* lager;
 	int state;
@@ -30,7 +30,7 @@ void __cdecl fcn_005784d0(char* obj)
 	}
 	state = *(int*) (obj + 0x70);
 	if (state == -1 || state == -2) {
-		fcn_00529160(0, 0, *lager, (int) obj);
+		he_AssignActionSlot(0, 0, *lager, (int) obj);
 		he_FreeAction(obj);
 		return;
 	}
@@ -48,7 +48,7 @@ void __cdecl fcn_005784d0(char* obj)
 		if (cm_GetCommandStatus(-1) == 0) {
 			return;
 		}
-		fcn_00529160(0, 0, *lager, (int) obj);
+		he_AssignActionSlot(0, 0, *lager, (int) obj);
 		res = gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0xac));
 		if (res == 0) {
 			*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
@@ -103,7 +103,7 @@ void __cdecl fcn_005784d0(char* obj)
 			return;
 		}
 		*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
-		fcn_00529160(0, 0, *lager, 0);
+		he_AssignActionSlot(0, 0, *lager, 0);
 		*(int*) (obj + 0x84) = fcn_004c5620(5, obj);
 		h = *(int*) (obj + 0xb8) >> 1;
 		if (h < 1) {

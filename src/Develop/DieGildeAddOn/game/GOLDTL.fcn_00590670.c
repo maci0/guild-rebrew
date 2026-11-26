@@ -6,11 +6,11 @@ int __cdecl d2_OpenObjektUpgradeTooltip(int);
 int __cdecl d2_ShowObjectTooltip(int);
 int __cdecl d2_CreateGebaeudeTooltip(int);
 int __cdecl d2_ShowContactTooltip(int);
-int __cdecl fcn_00591490(int*);
+int __cdecl d2_ShowPersonTooltip(int*);
 void __cdecl fcn_004707d0(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00590670 */
-void __cdecl fcn_00590670(void)
+void __cdecl d2_UpdateSceneTooltip(void)
 {
 	unsigned short* p;
 	unsigned short* q;
@@ -129,7 +129,7 @@ void __cdecl fcn_00590670(void)
 			g_6a99e8 = tooltipWindow;
 		}
 		else if (p != 0) {
-			tooltipWindow = fcn_00591490((int*) p);
+			tooltipWindow = d2_ShowPersonTooltip((int*) p);
 			v3 = g_100f888;
 			g_6a99e8 = tooltipWindow;
 		}

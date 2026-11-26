@@ -18,7 +18,7 @@ int __cdecl fcn_004011d0(void*, void*);
 void __cdecl vfs_ReadVec3(void*, void*);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl fcn_0043a6f0(float, float, int);
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl fcn_00439c60(char*);
 void __cdecl fcn_0043c7a0(char*);
@@ -173,7 +173,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 			if (*(int*) (obj + 0x218) == 3 && _strcmpi(name, obj) == 0) {
 				g_6338c4 = obj;
 				if ((obj[0x211] & 1) != 0) {
-					fcn_00438b40(obj, (int*) (obj + 0x5c));
+					d3_SetNodePosition(obj, (int*) (obj + 0x5c));
 					d3_SetObjectRotation(obj, (int*) (obj + 0x90));
 				}
 				fcn_00439c60(obj);

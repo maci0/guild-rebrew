@@ -17,7 +17,7 @@ void __cdecl fcn_004f2a10(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
-int __cdecl fcn_0058c670(int a1, int a2, unsigned char a3)
+int __cdecl d2_ShowGraveyardConfirm(int building, int itemId, unsigned char slotIndex)
 {
 	int dlg;
 	int id;
@@ -43,14 +43,14 @@ int __cdecl fcn_0058c670(int a1, int a2, unsigned char a3)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				fcn_004f2a10(0, a1, a2, a3);
+				fcn_004f2a10(0, building, itemId, slotIndex);
 				r = 1;
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == cancel) {
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_0058c670, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowGraveyardConfirm, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return r;
 }

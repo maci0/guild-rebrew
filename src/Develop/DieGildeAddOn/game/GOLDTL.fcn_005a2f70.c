@@ -10,7 +10,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_00597ec0(char*);
-void __cdecl fcn_005944d0(char*);
+void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
@@ -49,7 +49,7 @@ void __cdecl d2_RunBrauenMenu(char* e)
 			} else if (g_7746a0 == meister) {
 				d2_OpenMeisterbriefDialog(e);
 			} else if (g_7746a0 == prod) {
-				fcn_005944d0(e);
+				d2_RunProduktionDialog(e);
 			} else if (g_7746a0 == transport) {
 				d2_OpenTransportPanel(e);
 			}

@@ -36,7 +36,7 @@ void __cdecl ai_PlanMeisterSupplies(char*, char*, int);
 void __cdecl fcn_00489010(char*, char*);
 void __cdecl ai_MeisterCollectTrans(char*);
 void __cdecl ai_MeisterTrade(char*, char*);
-void __cdecl fcn_00487000(char*);
+void __cdecl ai_ManageMeisterWorkers(char*);
 void __cdecl fcn_00487970(char*, char*, int);
 void __cdecl fcn_00487c00(char*, char*, int);
 void __cdecl fcn_00487470(char*);
@@ -88,7 +88,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 		ai_MeisterCollectTrans(meister);
 		ai_MeisterTrade(meister, res);
 	}
-	fcn_00487000(meister);
+	ai_ManageMeisterWorkers(meister);
 	fcn_00487970(res, meister, 10);
 	fcn_00487c00(res, meister, 10);
 	fcn_00487470(meister);

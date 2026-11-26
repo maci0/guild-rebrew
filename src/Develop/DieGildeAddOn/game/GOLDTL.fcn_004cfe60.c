@@ -9,48 +9,48 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00533a40(char*);
 
 /* ADDRESS: GOLDTL 0x004cfe60 */
-void __cdecl fcn_004cfe60(int a, char* b)
+void __cdecl d2_ShowCombatSlotStatus(int slotId, char* entity)
 {
 	char buf[0x100];
 	char* rec;
-	char* ent;
-	char* slot;
+	char* gear;
+	char* opponent;
 	int top;
-	int x;
-	int p;
-	int q;
-	int r;
+	int sceneObj;
+	int col;
+	int row;
+	int height;
 
 	top = *(int*) (g_67a370 + 0xb0);
-	rec = gm_FindOrCreateEntitySlot(a, b);
-	ent = gm_GetEquippedCombatGear(b);
+	rec = gm_FindOrCreateEntitySlot(slotId, entity);
+	gear = gm_GetEquippedCombatGear(entity);
 	if (rec == 0) {
 		return;
 	}
 	switch (*(int*) (rec + 4)) {
 	case 1:
-		io_FormatTextBuffer(buf, 0x1174, *(int*) (ent + 0x54), *(unsigned short*) b);
+		io_FormatTextBuffer(buf, 0x1174, *(int*) (gear + 0x54), *(unsigned short*) entity);
 		fcn_00533a40(buf);
 		return;
 	case 2:
-		slot = gm_LookupEntityRecordIn32SlotTable(*(int*) (rec + 0x10));
-		x = *(int*) (*(int*) (slot + 0x184) + 0x34);
-		if (fcn_0045b990(top, x + 0x4c, &p, &q, &r)) {
-			fcn_00414be0(x, 0xff, 0, 0);
+		opponent = gm_LookupEntityRecordIn32SlotTable(*(int*) (rec + 0x10));
+		sceneObj = *(int*) (*(int*) (opponent + 0x184) + 0x34);
+		if (fcn_0045b990(top, sceneObj + 0x4c, &col, &row, &height)) {
+			fcn_00414be0(sceneObj, 0xff, 0, 0);
 		}
 		{
-			char* t = gm_GetEquippedCombatGear(slot);
-			io_FormatTextBuffer(buf, 0x1177, *(int*) (ent + 0x54), *(unsigned short*) b,
-				*(int*) (t + 0x54), *(unsigned short*) slot);
+			char* oppGear = gm_GetEquippedCombatGear(opponent);
+			io_FormatTextBuffer(buf, 0x1177, *(int*) (gear + 0x54), *(unsigned short*) entity,
+				*(int*) (oppGear + 0x54), *(unsigned short*) opponent);
 		}
 		fcn_00533a40(buf);
 		return;
 	case 3:
-		io_FormatTextBuffer(buf, 0x1175, *(int*) (ent + 0x54), *(unsigned short*) b);
+		io_FormatTextBuffer(buf, 0x1175, *(int*) (gear + 0x54), *(unsigned short*) entity);
 		fcn_00533a40(buf);
 		return;
 	case 4:
-		io_FormatTextBuffer(buf, 0x117c, *(int*) (ent + 0x54), *(unsigned short*) b);
+		io_FormatTextBuffer(buf, 0x117c, *(int*) (gear + 0x54), *(unsigned short*) entity);
 		fcn_00533a40(buf);
 		return;
 	}

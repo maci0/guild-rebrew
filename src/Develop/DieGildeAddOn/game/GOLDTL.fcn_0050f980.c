@@ -11,7 +11,7 @@ int __cdecl gm_HasActiveSpecialObject(void*, int);
    plus the material/quality modifiers carried by both slots, scaled by the
    GUI percent constant and clamped to 0..100. */
 /* ADDRESS: GOLDTL 0x0050f980 */
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
+float __cdecl gm_CalcEntityFavor(unsigned int entityId, unsigned int targetId, unsigned int flags)
 {
     unsigned int v1;
     unsigned char* entity;
@@ -30,13 +30,13 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
     int firstOffset;
 
     score = 0.0f;
-    if (a0 == a1) {
+    if (entityId == targetId) {
         return *(float*) 0x662cf8;
     }
-    if (a0 == 0xffff || a1 == 0xffff) {
+    if (entityId == 0xffff || targetId == 0xffff) {
         return *(float*) 0x662914;
     }
-    firstOffset = a0 * 0x21c;
+    firstOffset = entityId * 0x21c;
     v3 = *(int*) (firstOffset + 0x7f4e10);
     if (v3) {
         score = (float) gm_GetBuildingTechEffect((void*) v3, 4, 1);
@@ -73,7 +73,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
             score = (float) gm_GetBuildingTechEffect((void*) v3, 4, 1) + score;
         }
     }
-    v13 = (float) (*(char*) (a0 * 0x300 + 0x869480 + a1) + 0x7f) *
+    v13 = (float) (*(char*) (entityId * 0x300 + 0x869480 + targetId) + 0x7f) *
           *(float*) 0x662c30;
     score = v13 * *(float*) 0x662cf8 + score;
     entityIndex = 0;
@@ -97,28 +97,28 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
         entity = entity + 0xa9;
     } while (entityIndex < 0x100);
     v3 = firstOffset + 0x7f4ca0;
-    secondOffset = a1 * 0x21c;
-    score = fcn_004e7990((void*) v3, (void*) (secondOffset + 0x7f4ca0), qual, a2) + score;
+    secondOffset = targetId * 0x21c;
+    score = fcn_004e7990((void*) v3, (void*) (secondOffset + 0x7f4ca0), qual, flags) + score;
     if (*(char*) (secondOffset + 0x7f4e06)) {
         amt_GetRoleTemplate(*(unsigned char*) (secondOffset + 0x7f4e06), q);
         v17 = *(unsigned char*) (q + 8);
         if (v17 > 0 && v17 < 4) {
-            a1 = gm_HasActiveSpecialObject((void*) v3, 0x155);
-            score = (float) (int) a1 * *(float*) 0x6640cc + score;
-            a1 = gm_HasActiveSpecialObject((void*) v3, 0x15d);
-            score = (float) (int) a1 * *(float*) 0x6640cc + score;
+            targetId = gm_HasActiveSpecialObject((void*) v3, 0x155);
+            score = (float) (int) targetId * *(float*) 0x6640cc + score;
+            targetId = gm_HasActiveSpecialObject((void*) v3, 0x15d);
+            score = (float) (int) targetId * *(float*) 0x6640cc + score;
         } else if (v17 > 3 && v17 < 8) {
-            a1 = gm_HasActiveSpecialObject((void*) v3, 0x157);
-            score = (float) (int) a1 * *(float*) 0x6640cc + score;
-            a1 = gm_HasActiveSpecialObject((void*) v3, 0x15f);
-            score = (float) (int) a1 * *(float*) 0x662924 + score;
+            targetId = gm_HasActiveSpecialObject((void*) v3, 0x157);
+            score = (float) (int) targetId * *(float*) 0x6640cc + score;
+            targetId = gm_HasActiveSpecialObject((void*) v3, 0x15f);
+            score = (float) (int) targetId * *(float*) 0x662924 + score;
         } else if (v17 > 7 && v17 < 10) {
-            a1 = gm_HasActiveSpecialObject((void*) v3, 0x159);
-            score = (float) (int) a1 * *(float*) 0x664170 + score;
-            a1 = gm_HasActiveSpecialObject((void*) v3, 0x165);
-            score = (float) (int) a1 * *(float*) 0x664170 + score;
-            a1 = gm_HasActiveSpecialObject((void*) v3, 0x166);
-            score = (float) (int) a1 * *(float*) 0x662938 + score;
+            targetId = gm_HasActiveSpecialObject((void*) v3, 0x159);
+            score = (float) (int) targetId * *(float*) 0x664170 + score;
+            targetId = gm_HasActiveSpecialObject((void*) v3, 0x165);
+            score = (float) (int) targetId * *(float*) 0x664170 + score;
+            targetId = gm_HasActiveSpecialObject((void*) v3, 0x166);
+            score = (float) (int) targetId * *(float*) 0x662938 + score;
         }
     }
     if (gm_HasActiveSpecialObject((void*) v3, 0x2b6)) {
@@ -130,7 +130,7 @@ float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2)
         }
     }
     if (*(int*) (secondOffset + 0x7f4e0c) &&
-        *(unsigned short*) (*(int*) (secondOffset + 0x7f4e0c) + 0x27) == a0) {
+        *(unsigned short*) (*(int*) (secondOffset + 0x7f4e0c) + 0x27) == entityId) {
         score = (float) gm_HasActiveSpecialObject((void*) v3, 0x16b) * *(float*) 0x664170 + score;
     }
     v4 = *(unsigned int*) (firstOffset + 0x7f4ccc) >> 0xe & 7;

@@ -18,7 +18,7 @@ int __cdecl gm_HasActiveSpecialObject(void*, int);
 float __cdecl cut_RandFloat(void);
 int __cdecl cut_RandMod(int);
 void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
-int __cdecl fcn_004dfe40(char*, int);
+int __cdecl gm_CheckDuelKnockout(char*, int);
 void __cdecl fcn_00417b50(char*, int, float, float, float, float);
 int __cdecl ch_QueuePlayAnimation(char*, char*, int);
 int __cdecl fcn_004de610(int);
@@ -74,7 +74,7 @@ void __cdecl fcn_004dff50(char* task)
 
 
 	sb_PlayVoice(0, (char*) 0x68cbf4, 1, 0x3f, 0x7f, 0, 0);
-	if (fcn_004dfe40(foe, n) == 0) {
+	if (gm_CheckDuelKnockout(foe, n) == 0) {
 		if (hit) {
 			fcn_00417b50(*(char**) (*(char**) (foe + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
 			if (*(int*) (*(char**) (foe + 0x184) + 0x128) == 0) {

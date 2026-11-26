@@ -12,7 +12,7 @@ extern char g_7f4ca4[];
 void* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_SendCmdMessage(void*, void*, char*, char*);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 int __cdecl gm_NotifyHochzeit(char* event)
@@ -37,7 +37,7 @@ int __cdecl gm_NotifyHochzeit(char* event)
 					if ((*(char*) (p - 2) == 6 || *(char*) (p - 2) == 7) &&
 					    *(int*) p != *(int*) ((char*) e1 + 4) &&
 					    *(int*) p != *(int*) ((char*) e2 + 4)) {
-						fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fe, g_68cfc0);
+						he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, g_68cfc0);
 					}
 				}
 			}

@@ -81,7 +81,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_ApplySceneLightingPreset(void);
 void __cdecl fcn_0052a960(GAME_TIMESTAMP*);
 int* __cdecl fcn_00415310(int);
-void __cdecl fcn_004154e0(int);
+void __cdecl d3_DestroyRain(int);
 int* __cdecl d3_CreateSnowEffect(int);
 void __cdecl fcn_004162c0(int);
 void __cdecl fcn_00416300(int*, int, ...);
@@ -152,7 +152,7 @@ void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 	if (g_7e4530 != 0) {
 		if (g_7e4530 == 1) {
 			if (g_7e4538 != 0) {
-				fcn_004154e0(g_7e4538);
+				d3_DestroyRain(g_7e4538);
 				g_7e4538 = 0;
 			}
 		} else if (g_7e4538 == 0) {

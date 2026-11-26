@@ -9,7 +9,7 @@ void* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_005b22d0(void* a1);
 void __cdecl gm_AddTime(void* clock, int a2, int a3, int a4);
 void __cdecl fcn_005100f0(int id, int amount);
-int __cdecl fcn_004f4f60(int idx, int id, int a3, int a4, int a5);
+int __cdecl gm_TryRecordCrime(int idx, int id, int a3, int a4, int a5);
 int __cdecl gm_RandomMod(int);
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
 int __cdecl gm_HasActiveSpecialObject(char* a1, int a2);
@@ -67,7 +67,7 @@ void __cdecl fcn_0054c240(u8* o)
             id2 = *((u32*)(p + 1));
         else
             id2 = -1;
-        fcn_004f4f60(3, 1, *((u32*)(0x7f4ca4 + 540 * (u32)*(u16*)(o + 8))),
+        gm_TryRecordCrime(3, 1, *((u32*)(0x7f4ca4 + 540 * (u32)*(u16*)(o + 8))),
                      *((u32*)(o + 0xbc)), id2);
     }
 

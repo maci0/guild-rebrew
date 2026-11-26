@@ -25,7 +25,7 @@ int __cdecl fcn_004a9600(int a1, char* e, int a3, int a4, char* out)
 	if (*(int*) (e + 0x194) >= 3 && !(*(int*) (e + 0x1c8) & 0x400)) {
 		lim = 0xf00500;
 		if (fcn_004a5340(e, 1, &lim, 0.0f, (float) gm_RandomMod(0x20) + 18.0f, &id) && !(((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id])->flags & 0x400)) {
-			f = fcn_00507e70(e, (char*) &((Ent*)g_7f4ca0)[id], 3);
+			f = gm_CalcSkillDuelScore(e, (char*) &((Ent*)g_7f4ca0)[id], 3);
 			if (gm_RandomFloat01() + f >= 1.0f) {
 				out[0] = 7;
 				*(int*) (out + 4) = ((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[id])->seed;

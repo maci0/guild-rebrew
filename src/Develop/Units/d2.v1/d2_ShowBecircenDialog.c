@@ -19,7 +19,7 @@ int __cdecl fcn_00471e30(int dlg);
 int __cdecl d2_GetControlValue(int h);
 int __cdecl d2_CheckActionBlocker(void* tbl, int player);
 int __cdecl gm_CalcBecircenFavor(void* tbl, int a0, int player);
-void __cdecl fcn_004c6ae0(int a, int b);
+void __cdecl cm_RequestModifyHealth(int a, int b);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005d6ea0 */
@@ -60,7 +60,7 @@ int __cdecl d2_ShowBecircenDialog(int entity)
                     t = gm_CalcBecircenFavor((void*) (0x7f4ca0 +
                                               540 * *(u16*) 0x774970),
                                      entity, player);
-                    fcn_004c6ae0(*(int*) (0x7f4ca4 + 540 * *(u16*) 0x774970),
+                    cm_RequestModifyHealth(*(int*) (0x7f4ca4 + 540 * *(u16*) 0x774970),
                                  -player);
                     cm_RequestCopyEntityData(*(int*) (0x7f4ca4 +
                                           540 * *(u16*) 0x774970),

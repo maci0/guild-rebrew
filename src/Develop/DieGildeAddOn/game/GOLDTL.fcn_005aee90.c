@@ -8,14 +8,14 @@ float __cdecl gm_GetEntitySkill(char*, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl fcn_004c6b20(int, int, int);
-int __cdecl fcn_00567170(char*, int*, int*, int*);
+int __cdecl he_GetEntityHomeTarget(char*, int*, int*, int*);
 int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 int __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004c5620(int, char*);
-void __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 void __cdecl fcn_00532ef0(void);
 float __cdecl gm_RandomFloat01(void);
 
@@ -46,7 +46,7 @@ void __cdecl fcn_005aee90(char* rec)
 	f = gm_GetEntitySkill(ent, 3) + f;
 	f = gm_GetEntitySkill(ent, 2) + f;
 	f = f * *(float*) 0x6629d0 + *(float*) 0x664328;
-	fcn_004c6ae0(*(int*) (ent + 4), -(int) *(unsigned char*) (ent + 0x1b1) * 2);
+	cm_RequestModifyHealth(*(int*) (ent + 4), -(int) *(unsigned char*) (ent + 0x1b1) * 2);
 	if (gm_RandomFloat01() < f) {
 		int flags = -1;
 
@@ -55,7 +55,7 @@ void __cdecl fcn_005aee90(char* rec)
 		cm_RequestChangeAttribute();
 		fcn_004c6b20(*(int*) (ent + 4), -(int) *(unsigned char*) (ent + 0x1b1), 0);
 		if (*(int*) (ent + 0x184) != 0) {
-			if (fcn_00567170(ent, &a, &b, 0) != 0) {
+			if (he_GetEntityHomeTarget(ent, &a, &b, 0) != 0) {
 				ch_StartMovement(*(int*) (ent + 4), a, b, 0, 0,
 				    (char*) 0x6a69c8);
 			}
@@ -72,16 +72,16 @@ void __cdecl fcn_005aee90(char* rec)
 			*(int*) (act + 0x84) = fcn_004c5620(-1, act);
 		}
 		io_FormatTextBuffer(line, 0x3feb);
-		fcn_00545d40(*(int*) (ent + 4), -1, line, 0, 0x5f3, 0);
+		he_PostEntityMessage(*(int*) (ent + 4), -1, line, 0, 0x5f3, 0);
 		io_FormatTextBuffer(line, 0x3fed, *(unsigned short*) ent);
-		fcn_00545d40(*(int*) (ent2 + 4), -1, line, 0, 0x5f3, 0);
+		he_PostEntityMessage(*(int*) (ent2 + 4), -1, line, 0, 0x5f3, 0);
 		fcn_00532ef0();
 		return;
 	}
 	io_FormatTextBuffer(text, 0x3fec);
-	fcn_00545d40(*(int*) (ent + 4), -1, text, 0, 0x5f3, 0);
+	he_PostEntityMessage(*(int*) (ent + 4), -1, text, 0, 0x5f3, 0);
 	io_FormatTextBuffer(text, 0x3fee, *(unsigned short*) ent);
-	fcn_00545d40(*(int*) (ent2 + 4), -1, text, 0, 0x5f3, 0);
+	he_PostEntityMessage(*(int*) (ent2 + 4), -1, text, 0, 0x5f3, 0);
 done:
 	fcn_00532ef0();
 }

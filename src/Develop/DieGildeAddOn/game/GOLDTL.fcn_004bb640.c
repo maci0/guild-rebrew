@@ -12,7 +12,7 @@ unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_PackGameTime(pos14_7f4c00*, void*);
 int __cdecl gm_GetSeasonFromDate(void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 struct date_4bb640 {
 	int a;
@@ -38,6 +38,6 @@ int __cdecl fcn_004bb640(int* a1)
 	st = (*(pos14_7f4c00*)&gm_GameTime);
 	gm_PackGameTime(&st, &d);
 	io_FormatTextBuffer(buf, *(unsigned short*) (a1 + 1) + 0x12e7, gm_GetSeasonFromDate(&d) + 0x4c);
-	fcn_00545d40(*(int*) (entity + 4), *(int*) (entity + 4), buf, strlen(buf) > 0x100, 0x603, 0);
+	he_PostEntityMessage(*(int*) (entity + 4), *(int*) (entity + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

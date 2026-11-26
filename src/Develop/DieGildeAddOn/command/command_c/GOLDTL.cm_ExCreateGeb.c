@@ -6,7 +6,7 @@ int __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_AllocGebaeude(char typ, unsigned short id);
 int __cdecl vfs_ResolvePath(char* path, int a, int b, char* out);
 int __cdecl fcn_004488e0(char* path, int a, int b);
-void __cdecl fcn_00438b40(int h, void* p);
+void __cdecl d3_SetNodePosition(int h, void* p);
 void __cdecl d3_SetObjectRotation(int h, void* p);
 void __cdecl d3_SetObjectGroundPosition(int h, void* p);
 void __cdecl d3_BindEntitySceneObject(int h, void* p, int n);
@@ -82,7 +82,7 @@ load:
 		goto destroy;
 	}
 	memset(shortname, 0, sizeof shortname);
-	fcn_00438b40(handle, &pos[0]);
+	d3_SetNodePosition(handle, &pos[0]);
 	d3_SetObjectRotation(handle, request + 0x29);
 	d3_SetObjectGroundPosition(handle, pos);
 	d3_BindEntitySceneObject(handle, geb, 2);

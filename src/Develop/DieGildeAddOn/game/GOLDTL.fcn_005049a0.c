@@ -7,7 +7,7 @@ int __cdecl fcn_00502cd0(int, int, int, int);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 /* ADDRESS: GOLDTL 0x005049a0 */
-int __cdecl fcn_005049a0(unsigned char* building)
+int __cdecl gm_FindBuildingPrimarySlot(unsigned char* building)
 {
 	BUILDING_PROTOTYPE* type;
 	unsigned short* slot;

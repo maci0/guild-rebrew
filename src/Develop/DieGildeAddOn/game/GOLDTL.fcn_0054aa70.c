@@ -7,7 +7,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 int __cdecl cm_RequestUpdateStraftatState(int, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
@@ -40,7 +40,7 @@ void __cdecl fcn_0054aa70(char* u)
 		}
 		if (*(int*) (p + 0xac) == *(int*) (u + 0xac)) {
 			io_FormatTextBuffer(buf, 0x1bbe, *(unsigned short*) r2, *(unsigned short*) r1);
-			fcn_00545d40(*(int*) (r2 + 4), *(int*) (r2 + 4), buf, 0, 0x5f5, 0);
+			he_PostEntityMessage(*(int*) (r2 + 4), *(int*) (r2 + 4), buf, 0, 0x5f5, 0);
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 			*(int*) (u + 0x84) = fcn_004c5620(-1, u);
 			return;

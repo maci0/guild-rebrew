@@ -40,7 +40,7 @@ void __cdecl fcn_00471e30(int);
 void __cdecl d2_DestroyElement(int);
 char __cdecl d3_DestroyObject(int);
 void __cdecl fcn_00533a40(char*);
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl fcn_00516de0(int, int);
 void __cdecl fcn_00443230(int);
@@ -185,7 +185,7 @@ void __cdecl fcn_00586c10(char* obj)
     *(char**) ((char*) S + 0x8c) = fcn_00442910((int) *(char**) ((char*) S + 0x98), (float*) 0x662d70, (float*) 0x662d80, (char*) 0x6a945c);
     *(char**) ((char*) S + 0x90) = fcn_00442910((int) *(char**) ((char*) S + 0x98), (float*) 0x662d70, (float*) 0x662d80, (char*) 0x6a9444);
     *(char**) ((char*) S + 0x94) = fcn_00442910((int) *(char**) ((char*) S + 0x98), (float*) 0x662d70, (float*) 0x662d80, (char*) 0x6a942c);
-    fcn_00438b40(*(char**) ((char*) S + 0x98), (int*) S);
+    d3_SetNodePosition(*(char**) ((char*) S + 0x98), (int*) S);
     d3_SetObjectRotation(*(char**) ((char*) S + 0x98), (int*) ((char*) S + 0x10));
     *(int*) ((char*) S + 0xa0) = g_9a9200[7];
     *(int*) ((char*) S + 0x20) = 0;
@@ -286,7 +286,7 @@ void __cdecl fcn_00586c10(char* obj)
     d3_SelectSceneContext(g28, 0);
     if (g_6b89c0 != 0)
         fcn_00459710((char*) g_6b89c0, 1);
-    fcn_00438b40((char*) d3_ActiveCamera, p);
+    d3_SetNodePosition((char*) d3_ActiveCamera, p);
     d3_SetObjectRotation((char*) d3_ActiveCamera, v);
     fcn_00516de0(g_6b8300, 0);
     fcn_00443230(1);

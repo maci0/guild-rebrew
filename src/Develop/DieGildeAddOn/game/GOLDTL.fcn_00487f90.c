@@ -11,9 +11,9 @@ extern char g_7f4ca4[];
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl fcn_004bcc50(char*, int);
-char* __cdecl fcn_005049a0(unsigned char*);
+char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
-void __cdecl fcn_00529160(int, int, unsigned int, int);
+void __cdecl he_AssignActionSlot(int, int, unsigned int, int);
 void __cdecl cm_SendCopyEntityData(char*);
 
 /* Message layout (0xf8 bytes).  The type byte at +4 selects the payload:
@@ -111,7 +111,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 		m[0x36] = 1;
 		*(short*) (m + 0x5a) = *(short*) actionCtx[2];
 		*(int*) (m + 0x5c) =
-		    *(int*) (fcn_005049a0((unsigned char*) *(int*) (actionCtx[1] + 0x16c)) + 2);
+		    *(int*) (gm_FindBuildingPrimarySlot((unsigned char*) *(int*) (actionCtx[1] + 0x16c)) + 2);
 		for (e = (char*) 0x7f4e05;
 		     actionCtx[8] < n && (int) e < 0x85a205; e += 0x21c) {
 			if (*(short*) (e - 0x165) != -1 &&
@@ -163,7 +163,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 		if (rec != 0) {
 			*(int*) (m + 0x60) = *(int*) (rec + 2);
 		} else {
-			rec = fcn_005049a0((unsigned char*) *(int*) (actionCtx[1] + 0x16c));
+			rec = gm_FindBuildingPrimarySlot((unsigned char*) *(int*) (actionCtx[1] + 0x16c));
 			if (rec != 0) {
 				*(int*) (m + 0x60) = *(int*) (rec + 2);
 			} else {
@@ -304,7 +304,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 		v = (int) fcn_00502cd0(*(int*) (*(int*) (actionCtx[1] + 0x16c) + 0x5d), 1,
 		                       0, 0x37);
 	} else if (actionCtx[0] == 4) {
-		v = (int) fcn_005049a0((unsigned char*) *(int*) (actionCtx[1] + 0x16c));
+		v = (int) gm_FindBuildingPrimarySlot((unsigned char*) *(int*) (actionCtx[1] + 0x16c));
 	}
 	for (e = (char*) 0x7f4e05;
 	     actionCtx[8] < n && (int) e < 0x85a205; e += 0x21c) {
@@ -312,7 +312,7 @@ void __cdecl fcn_00487f90(int* actionCtx)
 		if (id != 0xffff &&
 		    *(int*) (e + 7) == *(int*) (actionCtx[1] + 0x16c) &&
 		    *e != 0 && *(int*) (e + 0x17) == 0) {
-			fcn_00529160(*(int*) (actionCtx[1] + 0x16c), v,
+			he_AssignActionSlot(*(int*) (actionCtx[1] + 0x16c), v,
 			             id, (int) rec);
 			actionCtx[8] = actionCtx[8] + 1;
 		}

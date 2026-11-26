@@ -10,7 +10,7 @@ void __cdecl d3_TransformPoint(char*, char*, float*);
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
 void __cdecl d3_SetObjectRotation(void*, float*);
-void __cdecl fcn_00438b40(void*, float*);
+void __cdecl d3_SetNodePosition(void*, float*);
 
 
 /* CreateCharacterAtDummy(): loads a character at a dummy object, facing
@@ -38,7 +38,7 @@ char* __cdecl CreateCharacterAtDummy(char** file, char** dummy, char** name)
 		fcn_00455140(*dummy, g_662d40, dir);
 		rot[1] = fcn_00451380(g_662d40, dir);
 		d3_SetObjectRotation(*(void**) (ch + 0x34), rot);
-		fcn_00438b40(*(void**) (ch + 0x34), pos);
+		d3_SetNodePosition(*(void**) (ch + 0x34), pos);
 		*(int*) (ch + 0x30) = *(int*) (evt_CurrentScript + 0x104);
 	} else {
 		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "CreateCharacterAtDummy(): Could not load character");

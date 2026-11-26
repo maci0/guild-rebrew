@@ -11,7 +11,7 @@ extern float g_662a70;
 
 float* __stdcall D3DXMatrixTranspose(float*, const float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
-void __cdecl fcn_00438b40(char*, float*);
+void __cdecl d3_SetNodePosition(char*, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 
 /* ADDRESS: GOLDTL 0x0052b230 */
@@ -124,7 +124,7 @@ int __cdecl fcn_0052b230(void)
 	}
 	r = CompareVector3WithinTolerance((float*) 0x773e04, v, 0.1f);
 	if (r == 0) {
-		fcn_00438b40(d3_ActiveCamera, v);
+		d3_SetNodePosition(d3_ActiveCamera, v);
 		if (g_774650 == g_774658 && (*(int*) &g_7746c4 == 0 || *(int*) &g_7746c8 != 0)) {
 			p = d3_ActiveCamera;
 			*(int*) &d3_CameraTargetRotation = *(int*) (p + 0x84);

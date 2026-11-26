@@ -37,7 +37,7 @@ void __cdecl cm_RequestSetEntityLevel(int, int);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004c5620(int a1, char* e);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl he_RegisterApEvent(int, char*, int, int);
 
 /* ADDRESS: GOLDTL 0x005516e0 */
@@ -79,7 +79,7 @@ void __cdecl he_RunLevelTraining(char* t)
 		}
 		io_FormatTextBuffer(buf, 0x1a9c, e->entity_index, (e->gender ? 0x18f : 0x130) + *(unsigned char*) (t + 0xb0));
 		h = *(int*) (p + 4);
-		fcn_00545d40(h, h, buf, 0, 0x5f4, 0);
+		he_PostEntityMessage(h, h, buf, 0, 0x5f4, 0);
 		*(pos14_7f4c00*) (t + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
 		fcn_004c5620(-1, t);
 		return;

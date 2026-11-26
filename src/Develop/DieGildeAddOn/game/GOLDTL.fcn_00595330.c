@@ -49,7 +49,7 @@ typedef struct Stock {
 #define g_id_field(row, ofs) (*(unsigned short*) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[g_row_type(row)] + (ofs)))
 
 /* ADDRESS: GOLDTL 0x00595330 */
-void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4)
+void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount, int filterId, int mode)
 {
 	char numbuf[32];
 	char* slot;
@@ -249,8 +249,8 @@ void __cdecl fcn_00595330(int windowId, int formId, int rowCount, int a3, int a4
 		key = g_row_sel(row);
 		if (key <= -1) {
 			d2_CurrentWindowId = g_row_last(row);
-			if (a4 != 0) {
-				if (a4 != 1) {
+			if (mode != 0) {
+				if (mode != 1) {
 					io_AppendText(0x6aa164, delta, 0x51e, 0xbb, g_row_type(row) * 2 + 0x9a8);
 				} else {
 					io_AppendText(0x6aa17c, delta, 0x51e, 0xba, g_row_type(row) * 2 + 0x9a8);

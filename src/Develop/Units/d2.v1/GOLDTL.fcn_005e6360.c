@@ -28,7 +28,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -87,7 +87,7 @@ void __cdecl fcn_005e6360(char* entity)
                     cm_RequestCopyEntityData(((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id, *(int*) (target + 4), amount * 5, 1);
                     if (target[2] == 6 || target[2] == 7) {
                         io_FormatTextBuffer(text, 0x420e, g_774970);
-                        fcn_00545d40(*(int*) (target + 4), -1, text, 0, 0x5f0, "_NACHRICHTEN_ZIGEUNER_04");
+                        he_PostEntityMessage(*(int*) (target + 4), -1, text, 0, 0x5f0, "_NACHRICHTEN_ZIGEUNER_04");
                     }
                     g_774654 = 1;
                 }

@@ -9,7 +9,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl fcn_0047dca0(char*);
 void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
 extern char g_7f4ca0[];
 extern int g_775320;
@@ -61,7 +61,7 @@ void __cdecl fcn_005c6310(void)
 								*(int*) (rec + 0x21) = 0;
 								if (*(char*) (g_7f4ca0 + 2 + off) == 6) {
 									io_FormatTextBuffer(text, 0x1bc9, *item * 2 + 0x9a8);
-									fcn_00545d40(*(int*) (g_7f4ca0 + 4 + off),
+									he_PostEntityMessage(*(int*) (g_7f4ca0 + 4 + off),
 										-1, text, 0, 0x5ec, (char*) 0x6ac758);
 								}
 								if (*item == 0x178) {

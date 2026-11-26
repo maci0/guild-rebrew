@@ -32,7 +32,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern __int64 g_666018;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005cd440(Req*, char*, int, void*);
@@ -56,7 +56,7 @@ int __cdecl fcn_005d63e0(unsigned char* obj, char* arg)
 		{
 			struct msg m;
 
-			fcn_004c6ae0(*(int*) (obj + 4), -2);
+			cm_RequestModifyHealth(*(int*) (obj + 4), -2);
 			memset(&m, 0, sizeof(m));
 			m.b4 = 0x4b;
 			m.f8 = *(int*) (obj + 4);

@@ -7,11 +7,11 @@ extern int g_9b9e40[];
 extern int g_9b43e0[];
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-float __cdecl fcn_004ce8b0(char*);
+float __cdecl gm_CalcCombatStrength(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
 /* ADDRESS: GOLDTL 0x004d3c60 */
-int __cdecl fcn_004d3c60(int id)
+int __cdecl cut_GetCombatActionWeights(int id)
 {
 	char* e;
 	unsigned char flags;
@@ -46,7 +46,7 @@ int __cdecl fcn_004d3c60(int id)
 		if (ent != -1) {
 			e = gm_LookupEntityRecordIn32SlotTable(ent);
 			if (e[8] != 0 && e[8] != 4) {
-				sum_lo = (float) (fcn_004ce8b0(e) + sum_lo);
+				sum_lo = (float) (gm_CalcCombatStrength(e) + sum_lo);
 			}
 		}
 	}
@@ -56,7 +56,7 @@ int __cdecl fcn_004d3c60(int id)
 		if (ent != -1) {
 			e = gm_LookupEntityRecordIn32SlotTable(ent);
 			if (e[8] != 0 && e[8] != 4) {
-				sum_hi = (float) (fcn_004ce8b0(e) + sum_hi);
+				sum_hi = (float) (gm_CalcCombatStrength(e) + sum_hi);
 			}
 		}
 	}

@@ -22,7 +22,7 @@ int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, u
 void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl fcn_004fe5f0(void*);
 void __cdecl cm_SendSwapEntityModel(int a1, char* a2);
-void __cdecl fcn_004ff8f0(void);
+void __cdecl gm_MaintainNpcPopulation(void);
 
 /* ADDRESS: GOLDTL 0x004ff0f0 */
 void __cdecl fcn_004ff0f0(void)
@@ -73,6 +73,6 @@ void __cdecl fcn_004ff0f0(void)
 		}
 		p++;
 	} while ((int) p < (int) &g_7f4ca2[768]);
-	fcn_004ff8f0();
+	gm_MaintainNpcPopulation();
 	g_773d48 = 0;
 }

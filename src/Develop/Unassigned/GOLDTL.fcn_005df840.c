@@ -22,7 +22,7 @@ typedef struct {
 
 void __cdecl cm_SendCopyEntityData(Msg*);
 
-int __cdecl fcn_005df840(char* subject)
+int __cdecl gm_ObjAdjustSkills(char* subject)
 {
 	Msg msg;
 

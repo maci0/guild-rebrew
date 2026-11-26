@@ -55,7 +55,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 Handle* __cdecl cm_GetCommandResult(int);
 int __cdecl gm_CheckEntityType(Player*);
-Site* __cdecl fcn_005049a0(Player*);
+Site* __cdecl gm_FindBuildingPrimarySlot(Player*);
 void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl init_Betrieb(Player*);
 
@@ -92,7 +92,7 @@ void __cdecl init_SetupBetriebWorkers(Player* p)
 		}
 		q = cm_GetCommandResult(h);
 		if (gm_CheckEntityType(p) == 0) {
-			s = fcn_005049a0(p);
+			s = gm_FindBuildingPrimarySlot(p);
 			if (s != 0) {
 				cm_RequestChrMoveToUniverse(q->id, p->id, s->id, "dummy_EINGANG");
 			}

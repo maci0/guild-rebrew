@@ -37,18 +37,18 @@ void __cdecl hst_ResetHistoryState(void);
 void __cdecl gm_ClearMissionJobs(void);
 void __cdecl he_FreeAllActions(void);
 void __cdecl d2_ClearActionPopupSlots(void);
-void __cdecl fcn_00545550(void);
+void __cdecl he_ShutdownEventSystem(void);
 void __cdecl fcn_00527420(void);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl gm_ResetAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
 void __cdecl ch_DestroyCharacter(int p);
 void __cdecl fcn_004162c0(int p);
-void __cdecl fcn_004154e0(int p);
+void __cdecl d3_DestroyRain(int p);
 void __cdecl fcn_004597f0(int a, int b);
 void __cdecl fcn_00459b40(int a);
 void __cdecl fcn_00418ae0(int p);
-void __cdecl fcn_00510930(void);
+void __cdecl d3_ClearAllSceneContexts(void);
 void __cdecl fcn_005c80d0(void);
 void __cdecl fcn_004bbd50(void);
 void __cdecl fcn_004c3e30(void);
@@ -57,7 +57,7 @@ void __cdecl nt_CloseClientConnection(void);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 
 /* ADDRESS: GOLDTL 0x0053fa80 */
-void __cdecl fcn_0053fa80(void)
+void __cdecl gm_ShutdownGameRuntime(void)
 {
     register int _dummy_reg_88 = 0;
     register int _dummy_reg_63 = 0;
@@ -96,7 +96,7 @@ void __cdecl fcn_0053fa80(void)
 	gm_ClearMissionJobs();
 	he_FreeAllActions();
 	d2_ClearActionPopupSlots();
-	fcn_00545550();
+	he_ShutdownEventSystem();
 	fcn_00527420();
 	gm_KillAllSpieler();
 	gm_ResetAllEntities();
@@ -111,7 +111,7 @@ void __cdecl fcn_0053fa80(void)
 		g_7e453c = 0;
 	}
 	if (g_7e4538 != 0) {
-		fcn_004154e0(g_7e4538);
+		d3_DestroyRain(g_7e4538);
 		g_7e4538 = 0;
 	}
 	if (g_6b89c0 != 0) {
@@ -132,7 +132,7 @@ void __cdecl fcn_0053fa80(void)
 		g_6b5cf8 = 0;
 	}
 	d3_ActiveCameraAnimation = 0;
-	fcn_00510930();
+	d3_ClearAllSceneContexts();
 	fcn_005c80d0();
 	fcn_004bbd50();
 	fcn_004c3e30();

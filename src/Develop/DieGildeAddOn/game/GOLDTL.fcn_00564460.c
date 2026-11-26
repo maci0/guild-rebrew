@@ -22,7 +22,7 @@ int __cdecl gm_CompareGameTime(int* pos, int base);
 int __cdecl gm_CalculateGebaeudeValue(char* e, int n);
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id, int c, int d);
 int __cdecl gm_FindNextFilteredEntity(void);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, int h);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
@@ -31,7 +31,7 @@ void __cdecl cm_SendSetGebBesitzer(int a, int b, int c);
 void __cdecl fcn_00545780(char* e);
 
 /* ADDRESS: GOLDTL 0x00564460 */
-void __cdecl fcn_00564460(char* e)
+void __cdecl he_RunGebaeudeKaufangebot(char* e)
 {
 	float f;
 	int n;
@@ -97,7 +97,7 @@ void __cdecl fcn_00564460(char* e)
 				f = 1.6f;
 			}
 		}
-		if ((double)n * ((double)f * (g_662a08 - (double)fcn_0050f980(*q, *(unsigned short*) (p + 0x25), 1) * g_662910)) < (double) *(int*) (e + 0xb0)) {
+		if ((double)n * ((double)f * (g_662a08 - (double)gm_CalcEntityFavor(*q, *(unsigned short*) (p + 0x25), 1) * g_662910)) < (double) *(int*) (e + 0xb0)) {
 			io_FormatTextBuffer(buf, 0x17e9, *(unsigned short*) (p + 0x27), p);
 			he_MessageBoxQuickjump(*(int*) (q + 2), -1, buf, 0, 0x5ec, *(int*) (p + 1), -1, 0, 0);
 			cm_RequestChangeBits(*(int*) (p + 1), 0x5a, 2, 2, 0x200);

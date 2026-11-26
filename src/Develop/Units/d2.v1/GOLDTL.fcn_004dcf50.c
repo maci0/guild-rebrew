@@ -24,11 +24,11 @@ int __cdecl sb_CheckVoicePlaying(int a1);
 void __cdecl cut_WaitTicks(int dur);
 void __cdecl d2_SetForm(int k, int i);
 int __cdecl fcn_00493dc0(unsigned short* a, unsigned short* b);
-unsigned int* __cdecl fcn_004fda30(unsigned int a0);
+unsigned int* __cdecl gm_SelectEntityHeadSet(unsigned int a0);
 int __cdecl io_AppendText(int fmt, ...);
 int __cdecl sprintf(char*, const char*, ...);
 unsigned int __cdecl strlen(const char*);
-float __cdecl fcn_0050f980(unsigned int a, unsigned int b, unsigned int c);
+float __cdecl gm_CalcEntityFavor(unsigned int a, unsigned int b, unsigned int c);
 int __cdecl fcn_004e4b40(int a1, int a2, char* s, int a4, int a5);
 
 int __cdecl gm_CalcTrialTortureFee(int a, int b);
@@ -56,7 +56,7 @@ typedef struct S2d {
 
 int __cdecl fcn_004f56b0(int a, S2d s, int c);
 int __cdecl fcn_004f5f30(int a, int b, int* c);
-void __cdecl fcn_004e51d0(unsigned int* a0, int a1);
+void __cdecl cut_RunTurnRound(unsigned int* a0, int a1);
 void* __cdecl memcpy(void*, const void*, unsigned int);
 
 typedef struct CMsg {
@@ -206,15 +206,15 @@ int __cdecl cut_RunProzess(int a0)
 	}
 	h2 = fcn_004e4ae0("ADDON\\PROZESS_NEU.sbf", 0);
 	msg.pad[0] = fcn_00493dc0((unsigned short*) p34, (unsigned short*) p38);
-	sprintf(str, "%s ", (char*) fcn_004fda30(*(unsigned short*) p3c) + 4);
+	sprintf(str, "%s ", (char*) gm_SelectEntityHeadSet(*(unsigned short*) p3c) + 4);
 	end = str + strlen(str);
-	sprintf(end, "%s ", (char*) fcn_004fda30(*(unsigned short*) p34) + 4);
+	sprintf(end, "%s ", (char*) gm_SelectEntityHeadSet(*(unsigned short*) p34) + 4);
 	end = str + strlen(str);
-	sprintf(end, "%s ", (char*) fcn_004fda30(*(unsigned short*) p38) + 4);
+	sprintf(end, "%s ", (char*) gm_SelectEntityHeadSet(*(unsigned short*) p38) + 4);
 	end = str + strlen(str);
-	sprintf(end, "%s ", (char*) fcn_004fda30(*(unsigned short*) p40) + 4);
+	sprintf(end, "%s ", (char*) gm_SelectEntityHeadSet(*(unsigned short*) p40) + 4);
 	end = str + strlen(str);
-	sprintf(end, "%s", (char*) fcn_004fda30(*(unsigned short*) p44) + 4);
+	sprintf(end, "%s", (char*) gm_SelectEntityHeadSet(*(unsigned short*) p44) + 4);
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-create2.esc", (int) str);
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "2");
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "2");
@@ -322,7 +322,7 @@ int __cdecl cut_RunProzess(int a0)
 		int id;
 		int idx;
 
-		fcn_004e51d0((unsigned int*) a0, (int) &msg);
+		cut_RunTurnRound((unsigned int*) a0, (int) &msg);
 		id = *(int*) (a0 + 0xc);
 		idx = g_774970;
 		if (id == *(int*) (0x7f4ca4 + idx * 540)) {
@@ -356,7 +356,7 @@ int __cdecl cut_RunProzess(int a0)
 		if (v1 == 1) {
 			float fm;
 
-			fm = (float) fcn_0050f980(*(unsigned short*) p38, *(unsigned short*) p34, 1);
+			fm = (float) gm_CalcEntityFavor(*(unsigned short*) p38, *(unsigned short*) p34, 1);
 			msg.i08 = v1;
 			fm *= fsum;
 			fm *= g_662b28;
@@ -391,7 +391,7 @@ int __cdecl cut_RunProzess(int a0)
 		d2_SetForm(g_68bfc0, 0);
 		io_AppendText(0x6811b0);
 		fcn_004e4450(g_68bfc0, 0);
-		fcn_004e51d0((unsigned int*) a0, (int) &msg);
+		cut_RunTurnRound((unsigned int*) a0, (int) &msg);
 		fcn_004e44f0(h);
 		{
 			int cnt2;
@@ -468,7 +468,7 @@ int __cdecl cut_RunProzess(int a0)
 			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "0");
 			msg.state = 2;
 			fcn_004e4450(g_68bfc0, 0);
-			fcn_004e51d0((unsigned int*) a0, (int) &msg);
+			cut_RunTurnRound((unsigned int*) a0, (int) &msg);
 			st = 0;
 			{
 				int cnt2;
@@ -513,7 +513,7 @@ int __cdecl cut_RunProzess(int a0)
 			fcn_004e44f0(h);
 			msg.state = 3;
 			fcn_004e4450(g_68bfc0, 0);
-			fcn_004e51d0((unsigned int*) a0, (int) &msg);
+			cut_RunTurnRound((unsigned int*) a0, (int) &msg);
 			st = 0;
 			{
 				int cnt2;
@@ -528,7 +528,7 @@ int __cdecl cut_RunProzess(int a0)
 			}
 			msg.pad[5] = *(int*) (g_9b0eb4 + i * 0x35c);
 			end = str + strlen(str);
-			nam = (char*) fcn_004fda30(*(unsigned short*) pent);
+			nam = (char*) gm_SelectEntityHeadSet(*(unsigned short*) pent);
 			if (nam != 0) {
 				sprintf(end, " %s", nam + 4);
 			} else {
@@ -646,7 +646,7 @@ int __cdecl cut_RunProzess(int a0)
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
 	fcn_004e4450(g_68bfc0, 0);
-	fcn_004e51d0((unsigned int*) a0, (int) &msg);
+	cut_RunTurnRound((unsigned int*) a0, (int) &msg);
 	fcn_004e4b00(hAnk);
 	st = 0;
 	{
@@ -717,7 +717,7 @@ int __cdecl cut_RunProzess(int a0)
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
 		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 		fcn_004e4450(g_68bfc0, 0);
-		fcn_004e51d0((unsigned int*) a0, (int) &msg);
+		cut_RunTurnRound((unsigned int*) a0, (int) &msg);
 		st = 0;
 		cnt = *(unsigned char*) (a0 + 0x30);
 		if (cnt > 0) {

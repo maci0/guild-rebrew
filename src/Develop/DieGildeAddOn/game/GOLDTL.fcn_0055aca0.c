@@ -41,7 +41,7 @@ int __cdecl fcn_004e9530(int);
 int __cdecl fcn_004e9730(int);
 short __cdecl gm_RandomMod(int);
 
-void __cdecl fcn_0055aca0(Ent *e)
+void __cdecl he_RunDailyCouncilEvent(Ent *e)
 {
 	int n;
 	int r;

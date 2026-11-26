@@ -23,7 +23,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunTalenteDialog(char*, int, int);
 void __cdecl fcn_005c0020(char*);
 void __cdecl fcn_005a02b0(char*);
-void __cdecl fcn_005a0630(char*);
+void __cdecl d2_OpenSpionageTargetPicker(char*);
 void __cdecl d2_ShowWeinkellerDialog(char*);
 void __cdecl fcn_0059fe60(char*);
 
@@ -65,7 +65,7 @@ void __cdecl d2_RunCharacterActionsHud(char* e, int mode)
 			} else if (g_7746a0 == spionage) {
 				fcn_005a02b0(e);
 			} else if (g_7746a0 == meister) {
-				fcn_005a0630(e);
+				d2_OpenSpionageTargetPicker(e);
 			} else if (g_7746a0 == suicide) {
 				d2_ShowWeinkellerDialog(e);
 			}

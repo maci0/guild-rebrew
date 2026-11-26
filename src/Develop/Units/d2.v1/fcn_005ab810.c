@@ -37,7 +37,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void __cdecl fcn_00532ef0(void);
@@ -106,7 +106,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 						io_FormatTextBuffer(buf, 0x1978, p->id, e, 2 * (0x75 <= gm_GameTime) + 0x197a + x);
 						for (i = 0x7f4ca4; i < 0x85a0a4; i += 0x21c) {
 							if (*(int*) i != p->handle && (*(char*) (i - 2) == 6 || *(char*) (i - 2) == 7)) {
-								fcn_00545d40(*(int*) i, -1, buf, 0, 0x5fe, 0);
+								he_PostEntityMessage(*(int*) i, -1, buf, 0, 0x5fe, 0);
 							}
 						}
 						io_FormatTextBuffer(buf, 0x1979, 2 * (0x75 <= gm_GameTime) + 0x197a + x);
@@ -155,7 +155,7 @@ void __cdecl fcn_005ab810(char* e, int unused)
 						cm_RequestChangeAttribute();
 						if (q->type == 6 || q->type == 7) {
 							io_FormatTextBuffer(buf, 0x1974, p->id, t);
-							fcn_00545d40(q->handle, -1, buf, 0, 0x5ff, 0);
+							he_PostEntityMessage(q->handle, -1, buf, 0, 0x5ff, 0);
 						}
 						io_FormatTextBuffer(buf, 0x1973, 2 * (0x75 <= gm_GameTime) + 0x197a + q->state);
 						fcn_00526120(buf, 0);

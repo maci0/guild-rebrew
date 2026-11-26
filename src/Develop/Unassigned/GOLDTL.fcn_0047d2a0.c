@@ -10,7 +10,7 @@ extern char g_7f4ca0[];
 
 int __cdecl gm_IsNpcEntityState(void*);
 int __cdecl fcn_00508eb0(int, int);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
@@ -52,7 +52,7 @@ int __cdecl fcn_0047d2a0(char* e)
 			d = abs(fcn_00508eb0(i, 0) - fcn_00508eb0(*(unsigned short*) e, 0));
 			f = (10.0f - (float) d * 0.5f) * 0.1f;
 			if ((float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f < bestscore) {
-				if (fcn_0050f980(i, (int) *(unsigned short*) e, 1) < 34.0f) {
+				if (gm_CalcEntityFavor(i, (int) *(unsigned short*) e, 1) < 34.0f) {
 					bestscore = (float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f;
 					best = i;
 				}

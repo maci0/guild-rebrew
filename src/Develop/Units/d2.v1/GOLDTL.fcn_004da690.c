@@ -10,14 +10,14 @@ int __cdecl fcn_004e4e90(int);
 void __cdecl fcn_004e4de0(int, ...);
 int __cdecl cm_WaitNetworkSyncBanner(int);
 int __cdecl fcn_004ea130(int);
-int __cdecl fcn_004e99e0(int, int, void *);
+int __cdecl amt_ResolveOfficeApplications(int, int, void *);
 
 int __cdecl fcn_00470820(char *, int, int);
 void __cdecl fcn_00471af0(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_004e4730(char *);
 int __cdecl msx_StartAmbientTrack(char *, int);
-int __cdecl fcn_004fda30(int);
+int __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 int __cdecl fcn_004e44b0(char *, char *);
 int __cdecl fcn_0051af00(char *, char *, char *);
@@ -31,7 +31,7 @@ int __cdecl fcn_004e4b40(int, ...);
 int __cdecl io_AppendText(char *, ...);
 unsigned int __cdecl cut_RandMod(unsigned int, ...);
 int __cdecl d2_ClearWindowChildren(int, int);
-int __cdecl fcn_004e51d0(unsigned int *, void *);
+int __cdecl cut_RunTurnRound(unsigned int *, void *);
 int __cdecl fcn_004e9180(void *, int);
 int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char *, unsigned char *, int, int);
 int __cdecl cm_GetCommandStatus(int);
@@ -199,7 +199,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     if (fcn_004ea130(s20) == 0) {
         unsigned short v = g_774970;
         if (*(int *)((char *)a0 + 0xc) == *(int *)(0x7f4ca4 + (unsigned int)v * 0x21c)) {
-            fcn_004e99e0(s20, s28, (char *)&mid[0x38]);
+            amt_ResolveOfficeApplications(s20, s28, (char *)&mid[0x38]);
         }
     } else {
     if (s28 < 6)
@@ -271,7 +271,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         if (s2C == 0)
             s2C = msx_StartAmbientTrack((char *)0x68c1d0, 0x40);
         for (i = 0; i < s44; i++) {
-            s04 = fcn_004fda30((int)*(unsigned short *)blkA.s84[i]);
+            s04 = gm_SelectEntityHeadSet((int)*(unsigned short *)blkA.s84[i]);
             if (s04 != 0)
                 fcn_0064d41a((char *)&mid[0x2a8], (char *)0x68c1c8,
                              blkB.sD0[i], (char *)(s04 + 4));
@@ -362,7 +362,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 blkC.sE4 = *(int *)s00;
                 blkC.sE8 = *(int *)(s00 + 0x10);
                 fcn_00471af0(s38, 0);
-                fcn_004e51d0(a0, (void *)&blkC);
+                cut_RunTurnRound(a0, (void *)&blkC);
                 fcn_004e4de0(0x3e8);
                 fcn_00471af0(s38, 1);
                 if (s0C > 0) {
@@ -507,7 +507,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
             if (s2C == 0)
                 s2C = msx_StartAmbientTrack((char *)0x68c1d0, 0x40);
             for (i = 0; i < s44; i++) {
-                s04 = fcn_004fda30((int)*(unsigned short *)blkA.s84[i]);
+                s04 = gm_SelectEntityHeadSet((int)*(unsigned short *)blkA.s84[i]);
                 if (s04 != 0)
                     fcn_0064d41a((char *)&mid[0x1a8], (char *)0x68c1c8,
                                  blkB.sD0[i], (char *)(s04 + 4));
@@ -670,7 +670,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 } else {
                     /* native 0x4dbce1: count > 1, scan the 0x9b0eb4 packets */
                     fcn_00471af0(s14, 0);
-                    fcn_004e51d0(a0, (void *)&blkA.blkD);
+                    cut_RunTurnRound(a0, (void *)&blkA.blkD);
                     fcn_004e4de0(0x3e8);
                     fcn_00471af0(s14, 1);
                     if (s0C > 0) {

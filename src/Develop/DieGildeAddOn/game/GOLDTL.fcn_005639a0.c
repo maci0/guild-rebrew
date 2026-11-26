@@ -15,7 +15,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(void*);
 
 /* ADDRESS: GOLDTL 0x005639a0 */
-void __cdecl fcn_005639a0(int a)
+void __cdecl he_RunGebaeudeReparieren(int a)
 {
 	char buf[0x100];
 	char* r;

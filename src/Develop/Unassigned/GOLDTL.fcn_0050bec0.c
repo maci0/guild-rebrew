@@ -1,10 +1,10 @@
 #pragma pack(push, 1)
-typedef struct Kind50bec0 {
+typedef struct BUILDING_SLOT_PROTO {
 	char pad0[0x22];
 	unsigned char cnt;
 	unsigned short slot[0x40];
 	char pad[0x24d - 0xa3];
-} Kind50bec0;
+} BUILDING_SLOT_PROTO;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 typedef struct {
 	char kind;
@@ -17,15 +17,15 @@ extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 
 /* ADDRESS: GOLDTL 0x0050bec0 */
-int __cdecl fcn_0050bec0(unsigned char* s, int* out)
+int __cdecl gm_CollectBuildingSlotObjects(unsigned char* s, int* out)
 {
-	Kind50bec0* k;
+	BUILDING_SLOT_PROTO* k;
 	int n;
 	int i;
 	int w;
 
 	n = 0;
-	k = &((Kind50bec0*)lpGebaeudePROT)[*s];
+	k = &((BUILDING_SLOT_PROTO*)lpGebaeudePROT)[*s];
 	for (i = 0; i < 0x40; i++) {
 		if (k->slot[i] == 0) {
 			break;
@@ -43,16 +43,16 @@ int __cdecl fcn_0050bec0(unsigned char* s, int* out)
 
 /* ADDRESS: GOLD 0x00508cf0 */
 /* ADDRESS: GOLDTL 0x0050bf30 */
-int __cdecl fcn_0050bf30(unsigned char* s, unsigned short* key, int* out)
+int __cdecl gm_CollectBuildingSubObjects(unsigned char* s, unsigned short* key, int* out)
 {
-	Kind50bec0* k;
+	BUILDING_SLOT_PROTO* k;
 	OBJECT_PROTOTYPE* o;
 	int n;
 	int i;
 	int w;
 
 	n = 0;
-	k = &((Kind50bec0*)lpGebaeudePROT)[*s];
+	k = &((BUILDING_SLOT_PROTO*)lpGebaeudePROT)[*s];
 	for (i = 0; i < k->cnt; i++) {
 		if ((unsigned short) (k->slot[i] & 0x7fff) == *key) {
 			break;

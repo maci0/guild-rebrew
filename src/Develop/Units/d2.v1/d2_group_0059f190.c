@@ -8,7 +8,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_00597ec0(char*);
-void __cdecl fcn_005944d0(char*);
+void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
@@ -20,7 +20,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_00597ec0(char*);
-void __cdecl fcn_005944d0(char*);
+void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
@@ -29,7 +29,7 @@ void __cdecl d2_OpenMeisterbriefDialog(char*);
 
 /* ADDRESS: GOLD 0x00595fb0 */
 /* ADDRESS: GOLDTL 0x0059f190 */
-void __cdecl fcn_0059f190(char* e, int a2)
+void __cdecl d2_RunParfumerieProductionMenu(char* building, int searchArg)
 {
 	int prod;
 	int sammeln;
@@ -45,7 +45,7 @@ void __cdecl fcn_0059f190(char* e, int a2)
 	sammeln = 0;
 	personal = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop((void*) fcn_0059f190, 0x67fff) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunParfumerieProductionMenu, 0x67fff) != 0) {
 		if (g_7746d8 & 0x200) {
 			sammeln = RegisterStatusText("contact_SAMMELN", g_14ab314, 0x16);
 			prod = RegisterStatusText("contact_PRODUKTION_PARFUMERIE", g_14ad1f8, 0x13);
@@ -56,20 +56,20 @@ void __cdecl fcn_0059f190(char* e, int a2)
 			meister = RegisterStatusText("ob_MEISTERBRIEF", g_14a7d28, 0x16);
 			personal = RegisterStatusText("ob_PERSONALBUCH", g_14a7b50, 0xc);
 		}
-		fcn_00597ec0(e);
+		fcn_00597ec0(building);
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == prod) {
-				fcn_005944d0(e);
+				d2_RunProduktionDialog(building);
 			} else if (g_7746a0 == transport) {
-				d2_OpenTransportPanel(e);
+				d2_OpenTransportPanel(building);
 			} else if (g_7746a0 == personal) {
-				d2_ShowPersonalbuch(e, "ob_PERSONALBUCH");
+				d2_ShowPersonalbuch(building, "ob_PERSONALBUCH");
 			} else if (g_7746a0 == lager) {
-				d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
+				d2_ShowLagerOptions(building, *(int*) (building + 0x5d));
 			} else if (g_7746a0 == sammeln) {
-				d2_ShowHandelSearch(e, a2);
+				d2_ShowHandelSearch(building, searchArg);
 			} else if (g_7746a0 == meister) {
-				d2_OpenMeisterbriefDialog(e);
+				d2_OpenMeisterbriefDialog(building);
 			}
 		}
 	}
@@ -107,7 +107,7 @@ void __cdecl d2_RunMixingProductionMenu(char* e, int a2)
 		fcn_00597ec0(e);
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == prod) {
-				fcn_005944d0(e);
+				d2_RunProduktionDialog(e);
 			} else if (g_7746a0 == transport) {
 				d2_OpenTransportPanel(e);
 			} else if (g_7746a0 == personal) {

@@ -29,7 +29,7 @@ void __cdecl gm_SpawnAmbientCat(AMBIENT_ANIMAL_SLOT*);
 void __cdecl ch_SpawnAmbientDog(AMBIENT_ANIMAL_SLOT*);
 void __cdecl gm_SpawnAmbientSheep(AMBIENT_ANIMAL_SLOT*);
 void __cdecl ch_SpawnAmbientCow(AMBIENT_ANIMAL_SLOT*);
-void __cdecl fcn_004bc410(AMBIENT_ANIMAL_SLOT*, int);
+void __cdecl ch_SpawnAmbientLivestock(AMBIENT_ANIMAL_SLOT*, int);
 void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT*);
 void __cdecl fcn_004bc6b0(AMBIENT_ANIMAL_SLOT*);
 
@@ -70,10 +70,10 @@ void __cdecl gm_UpdateAmbientAnimals(void)
 					ch_SpawnAmbientCow(s);
 					break;
 				case 6:
-					fcn_004bc410(s, 6);
+					ch_SpawnAmbientLivestock(s, 6);
 					break;
 				case 7:
-					fcn_004bc410(s, 7);
+					ch_SpawnAmbientLivestock(s, 7);
 					break;
 				}
 			}

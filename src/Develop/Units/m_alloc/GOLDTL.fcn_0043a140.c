@@ -28,7 +28,7 @@ typedef struct Obj {
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl fcn_00439e70(Obj* o);
 void __cdecl fcn_00439fa0(Obj* o);
-void __cdecl fcn_00438b40(Obj* o, V8* v);
+void __cdecl d3_SetNodePosition(Obj* o, V8* v);
 void __cdecl d3_SetObjectRotation(Obj* o, V6* v);
 void __cdecl fcn_00449f90(Obj* o, int a, int id);
 
@@ -165,7 +165,7 @@ Obj* __cdecl d3_CloneObject(Obj* src)
 		o->flags[1] = b & 0xef;
 		p[0] = (a & 0xfc) | 4;
 	}
-	fcn_00438b40(o, &o->a);
+	d3_SetNodePosition(o, &o->a);
 	d3_SetObjectRotation(o, &o->c);
 	r = o;
 	}

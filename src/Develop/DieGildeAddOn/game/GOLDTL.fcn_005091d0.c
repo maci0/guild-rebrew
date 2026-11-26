@@ -14,7 +14,7 @@ struct StatRow {
 
 int __cdecl amt_GetRoleTemplate(int, int*);
 int __cdecl gm_WalkEntityChain(unsigned short);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x005091d0 */
@@ -80,7 +80,7 @@ void __cdecl fcn_005091d0(int* pn, StatRow* rows)
 				continue;
 			}
 			if (*p == 6 || *p == 7 || *p == 5 || *p == 4) {
-				fsum += fcn_0050f980(r->id, j, 1);
+				fsum += gm_CalcEntityFavor(r->id, j, 1);
 				cnt++;
 			}
 		}

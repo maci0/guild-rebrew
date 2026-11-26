@@ -3,7 +3,7 @@
 extern unsigned char g_773d75;
 
 int __cdecl fcn_004f0c90(int);
-void __cdecl fcn_004f4f60(int, int, int, int, int);
+void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl fcn_005100f0(int, int);
 int __cdecl fcn_004c6de0(void*);
@@ -35,7 +35,7 @@ int __cdecl fcn_004f0a30(char* a0, char* payer, unsigned int* firstPayload,
 		}
 		memset(pkt, 0, sizeof(pkt));
 		if (firstPayload != 0) {
-			fcn_004f4f60(8, 1, *(int*) (payer + 4), -1, -1);
+			gm_TryRecordCrime(8, 1, *(int*) (payer + 4), -1, -1);
 			fcn_005100f0(*(int*) (payer + 4), -a6);
 			cm_RequestTransferCurrencyNoKill(-1, *(int*) (payer + 4), (char) g_773d75, a7);
 			pkt[0] = *(unsigned int*) (a0 + 1);

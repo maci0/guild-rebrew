@@ -1,4 +1,4 @@
-int __cdecl fcn_00530ab0(int key, char* name, int a, int v, int w);
+int __cdecl he_RegisterActionMeta(int key, char* name, int a, int v, int w);
 
 // SIZE 0x20
 struct s_7e2ac0 {
@@ -17,7 +17,7 @@ extern s_7e2ac0 g_7e2ac0[48];
 
 #include <string.h>
 
-int __cdecl fcn_00530ab0(int key, char* name, int a, int v, int w)
+int __cdecl he_RegisterActionMeta(int key, char* name, int a, int v, int w)
 {
 	int i;
 

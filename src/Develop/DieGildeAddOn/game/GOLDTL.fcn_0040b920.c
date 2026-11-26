@@ -1,7 +1,7 @@
 
 
 extern float g_662d40[3];
-char* __cdecl fcn_00402610(char* p);
+char* __cdecl d3sm_GetObjectSuperMap(char* p);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl fcn_00455140(char* src, float* v, float* out);
 float __cdecl fcn_00451380(float* a, float* b);
@@ -20,7 +20,7 @@ void __cdecl ch_QueueWalkToDummyRotate(char* owner, char* e)
 	int z;
 	float ang;
 
-	g = fcn_00402610(owner);
+	g = d3sm_GetObjectSuperMap(owner);
 	d3_TransformPoint(e, e + 0x4c, a);
 	fcn_00455140(e, g_662d40, b);
 	ang = fcn_00451380(g_662d40, b);

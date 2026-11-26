@@ -28,7 +28,7 @@ int __cdecl fcn_00428340(char*, int, ...);
 void __cdecl init_GetGebaeudeSceneName(int, char*);
 
 /* ADDRESS: GOLDTL 0x00530c60 */
-void __cdecl fcn_00530c60(unsigned char* building)
+void __cdecl d3_UpdateBuildingSceneScripts(unsigned char* building)
 {
 	int mode;
 	int id;

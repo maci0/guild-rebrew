@@ -11,7 +11,7 @@ void __cdecl cm_RequestChangeBits(int handle, int a, int b, int c, int d);
 int __cdecl cm_RequestCopyEntityData(int a, int b, int value, int flag);
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-void __cdecl fcn_00545d40(int id, int arg, char* text1, int flags, int value, char* text2);
+void __cdecl he_PostEntityMessage(int id, int arg, char* text1, int flags, int value, char* text2);
 int __cdecl fcn_00526120(char* text, int arg);
 int __cdecl srv_GetEntityOfficeSlot(char* entity, void* role_out, void* slot_out);
 int __cdecl amt_SendOfficeCommand(int id, char* ea, char* eb, int x1, int x2);
@@ -60,13 +60,13 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 		if (f > 0.3f) {
 			if (7 == h[2] || 6 == h[2]) {
 				io_FormatTextBuffer(buf, 0x1684);
-				fcn_00545d40(*(int*) (h + 4), -1, buf, 0, 0x5fb, g_6b5c60);
+				he_PostEntityMessage(*(int*) (h + 4), -1, buf, 0, 0x5fb, g_6b5c60);
 			}
 			io_FormatTextBuffer(buf, 0x1682, *(unsigned short*) h, *(unsigned short*) h);
 			p = g_7f4ca4;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (h + 4) && *(int*) p != *(int*) (e + 4))
-					fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
@@ -76,13 +76,13 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 		} else {
 			if (7 == h[2] || 6 == h[2]) {
 				io_FormatTextBuffer(buf, 0x1685);
-				fcn_00545d40(*(int*) (h + 4), -1, buf, 0, 0x5fb, g_6b5c60);
+				he_PostEntityMessage(*(int*) (h + 4), -1, buf, 0, 0x5fb, g_6b5c60);
 			}
 			io_FormatTextBuffer(buf, 0x1683, *(unsigned short*) h, *(unsigned short*) h);
 			p = g_7f4ca4;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (h + 4) && *(int*) p != *(int*) (e + 4))
-					fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
@@ -118,7 +118,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 			p = g_7f4ca4;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
-					fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fd, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fd, g_6b5c60);
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
@@ -130,7 +130,7 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 			p = g_7f4ca4;
 			do {
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4))
-					fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, g_6b5c60);
 				p += 0x21c;
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
@@ -173,11 +173,11 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4)) {
 					for (k = 0; k < n; k++) {
 						if (arr[k].mplayerid == *(int*) p) {
-							fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fb, g_6b5c60);
+							he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fb, g_6b5c60);
 							goto next_p1;
 						}
 					}
-					fcn_00545d40(*(int*) p, -1, buf2, 0, 0x5fe, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf2, 0, 0x5fe, g_6b5c60);
 				}
 			next_p1:
 				p += 0x21c;
@@ -195,11 +195,11 @@ unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
 				if ((7 == p[-2] || 6 == p[-2]) && *(int*) p != *(int*) (e + 4)) {
 					for (k = 0; k < n; k++) {
 						if (arr[k].mplayerid == *(int*) p) {
-							fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fb, g_6b5c60);
+							he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fb, g_6b5c60);
 							goto next_p2;
 						}
 					}
-					fcn_00545d40(*(int*) p, -1, buf2, 0, 0x5fe, g_6b5c60);
+					he_PostEntityMessage(*(int*) p, -1, buf2, 0, 0x5fe, g_6b5c60);
 				}
 			next_p2:
 				p += 0x21c;

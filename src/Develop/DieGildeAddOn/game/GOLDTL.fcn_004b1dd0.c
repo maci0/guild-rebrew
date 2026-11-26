@@ -6,7 +6,7 @@
 extern unsigned char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004ae130(unsigned short);
+int __cdecl gm_IsSlotActivePerson(unsigned short);
 int __cdecl fcn_0064fcaf(char*);
 int __cdecl gm_FindObjektPrototypeByName(char*);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
@@ -18,7 +18,7 @@ int __cdecl hst_CmdInventarPlus(char* tbl, int idx, char* arg)
 	int r;
 
 	e = gm_LookupEntityRecordById(*(int*) (tbl + idx * 8 + 4));
-	if (e != 0 && fcn_004ae130(*(unsigned short*) e) != 0 && *arg == '-') {
+	if (e != 0 && gm_IsSlotActivePerson(*(unsigned short*) e) != 0 && *arg == '-') {
 		s = arg + 1;
 		if (strlen(s) >= 4) {
 			s += 3;

@@ -30,7 +30,7 @@ int __cdecl fcn_00513d00(char* name, int* list);
 char* __cdecl d3_SpawnObject(int kind, char* name);
 void __cdecl fcn_00439aa0(char* o);
 char __cdecl d3_ReparentObject(char* e, char* parent);
-void __cdecl fcn_00438b40(char* o, float* pos);
+void __cdecl d3_SetNodePosition(char* o, float* pos);
 void __cdecl d3_SetObjectRotation(char* o, float* rot);
 void __cdecl fcn_004442be0(char* o);
 
@@ -89,7 +89,7 @@ void __cdecl fcn_00513d40(char* name)
 		e = d3_SpawnObject(2, name);
 		fcn_00439aa0(e);
 		d3_ReparentObject(e, *(char**) (oo + 0x1fc));
-		fcn_00438b40(e, (float*) (oo + 0x4c));
+		d3_SetNodePosition(e, (float*) (oo + 0x4c));
 		d3_SetObjectRotation(e, (float*) (oo + 0x84));
 		c = *(char**) (oo + 0x200);
 		while (c != 0) {

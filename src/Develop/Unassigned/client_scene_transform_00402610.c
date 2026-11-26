@@ -17,74 +17,74 @@ void __cdecl fcn_0043a9c0(int flags);
 
 /* ADDRESS: GOLD 0x00402140 */
 /* ADDRESS: GOLDTL 0x00402610 */
-int __cdecl fcn_00402610(char* obj)
+int __cdecl d3sm_GetObjectSuperMap(char* obj)
 {
 	int saved;
 	int flags;
-	int x;
-	int r;
-	char* p;
+	int ctx_flags;
+	int supermap;
+	char* scene;
 
 	saved = d3_CurrentContextIndex;
-	p = *(char**) (obj + 0x88);
+	scene = *(char**) (obj + 0x88);
 	flags = 0;
-	r = *(int*) (p + 0xb0);
-	if (r == 0) {
-		x = g_6b8058;
-		if (p != (*(char**)&g_67a370)) {
-			x = *(int*) (p + 0x3d8);
+	supermap = *(int*) (scene + 0xb0);
+	if (supermap == 0) {
+		ctx_flags = g_6b8058;
+		if (scene != (*(char**)&g_67a370)) {
+			ctx_flags = *(int*) (scene + 0x3d8);
 		}
-		if (*(p + 0x3d5) == 0 && x != 0) {
-			d3_SelectSceneContext(d3_GetContextIndex(p), 1);
-			flags = x & ~2;
+		if (*(scene + 0x3d5) == 0 && ctx_flags != 0) {
+			d3_SelectSceneContext(d3_GetContextIndex(scene), 1);
+			flags = ctx_flags & ~2;
 			fcn_0043aa30(flags);
 		}
 		*(int*) (*(char**) (obj + 0x88) + 0xb0) =
 			fcn_0045b700(g_6b8300, *(int*) (*(char**) (obj + 0x88) + 0xb4), 2);
-		p = *(char**) (obj + 0x88);
-		r = *(int*) (p + 0xb0);
-		if (p != g_10432c0 && (*(char**)&g_67a370) == p && r != 0) {
-			ch_BackupGrid(r);
+		scene = *(char**) (obj + 0x88);
+		supermap = *(int*) (scene + 0xb0);
+		if (scene != g_10432c0 && (*(char**)&g_67a370) == scene && supermap != 0) {
+			ch_BackupGrid(supermap);
 		}
 		if (flags != 0) {
 			fcn_0043a9c0(flags);
 			d3_SelectSceneContext(saved, 1);
 		}
 	}
-	return r;
+	return supermap;
 }
 
 /* ADDRESS: GOLD 0x00402220 */
 /* ADDRESS: GOLDTL 0x004026f0 */
-int __cdecl fcn_004026f0(char* p)
+int __cdecl d3sm_GetSceneSuperMap(char* scene)
 {
-	int r;
-	int x;
+	int supermap;
+	int ctx_flags;
 	int flags;
 	int saved;
 
 	saved = d3_CurrentContextIndex;
 	flags = 0;
-	r = *(int*) (p + 0xb0);
-	if (r == 0) {
-		x = g_6b8058;
-		if (p != (*(char**)&g_67a370)) {
-			x = *(int*) (p + 0x3d8);
+	supermap = *(int*) (scene + 0xb0);
+	if (supermap == 0) {
+		ctx_flags = g_6b8058;
+		if (scene != (*(char**)&g_67a370)) {
+			ctx_flags = *(int*) (scene + 0x3d8);
 		}
-		if (*(p + 0x3d5) == 0 && x != 0) {
-			d3_SelectSceneContext(d3_GetContextIndex(p), 1);
-			flags = x & ~2;
+		if (*(scene + 0x3d5) == 0 && ctx_flags != 0) {
+			d3_SelectSceneContext(d3_GetContextIndex(scene), 1);
+			flags = ctx_flags & ~2;
 			fcn_0043aa30(flags);
 		}
-		r = fcn_0045b700(g_6b8300, *(int*) (p + 0xb4), 2);
-		*(int*) (p + 0xb0) = r;
-		if (p != g_10432c0 && (*(char**)&g_67a370) == p && r != 0) {
-			ch_BackupGrid(r);
+		supermap = fcn_0045b700(g_6b8300, *(int*) (scene + 0xb4), 2);
+		*(int*) (scene + 0xb0) = supermap;
+		if (scene != g_10432c0 && (*(char**)&g_67a370) == scene && supermap != 0) {
+			ch_BackupGrid(supermap);
 		}
 		if (flags != 0) {
 			fcn_0043a9c0(flags);
 			d3_SelectSceneContext(saved, 1);
 		}
 	}
-	return r;
+	return supermap;
 }

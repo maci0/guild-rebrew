@@ -50,7 +50,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_00472640(int i, int flag);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005caaa0 */
 int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
@@ -75,7 +75,7 @@ int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
 			if (selection->e[2] == 7)
 				d2_SetElementValue(b, 0, 0x64, 0, 1);
 			else
-				d2_SetElementValue(selection->bar, 0, 0x64, (int) fcn_0050f980(g_774970, *(unsigned short*) selection->e, 1));
+				d2_SetElementValue(selection->bar, 0, 0x64, (int) gm_CalcEntityFavor(g_774970, *(unsigned short*) selection->e, 1));
 			fcn_00472640(selection->bar, 0);
 		}
 		if (*(int*) (selection->e + 0x210) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id)

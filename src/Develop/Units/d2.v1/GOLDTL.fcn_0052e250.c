@@ -39,7 +39,7 @@ void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 unsigned short* __cdecl gm_ResolveParentEntity(unsigned short* e);
 int __cdecl fcn_00506380(int id, unsigned char* store, int a, int b);
-int __cdecl fcn_0050bf30(unsigned char* store, unsigned short* item, int a);
+int __cdecl gm_CollectBuildingSubObjects(unsigned char* store, unsigned short* item, int a);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 
 void __cdecl fcn_0052e250(unsigned short* item)
@@ -84,7 +84,7 @@ void __cdecl fcn_0052e250(unsigned short* item)
 		if (*parent != g_774970 && !(fl & 0x10)) {
 			g_6a25e0 = fcn_0052dee0(0, 0xa6, g_14ad0dc);
 		} else {
-			if (fcn_0050bf30(store, item, 0)) {
+			if (gm_CollectBuildingSubObjects(store, item, 0)) {
 				g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0d8);
 			}
 			g_6a25e0 = fcn_0052dee0(0, 0xa6, g_14ad0dc);

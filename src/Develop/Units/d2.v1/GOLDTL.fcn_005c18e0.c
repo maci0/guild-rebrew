@@ -15,7 +15,7 @@ typedef struct {
 extern pos14_7f4c00 gm_GameTime;
 extern int g_100f1dc, g_14ce8e0, d2_CurrentElementId; extern int g_666018, g_66601c, d2_CurrentWindowId, g_774654; extern unsigned short g_774970;
 int __cdecl d3_FreeObjectAnimation();
-int __cdecl fcn_00438b40();
+int __cdecl d3_SetNodePosition();
 int __cdecl d3_SetObjectRotation();
 int __cdecl CompareVector3WithinTolerance();
 int __cdecl fcn_00470820();
@@ -25,7 +25,7 @@ int __cdecl d2_GetWindowListItem();
 int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
-int __cdecl fcn_00494470();
+int __cdecl gm_ResolveDinnerParty();
 int __cdecl cm_BeginPacketFieldDelta();
 int __cdecl cm_AppendPacketFieldDelta();
 int __cdecl cm_RequestChangeAttribute();
@@ -160,7 +160,7 @@ label_5c221e:
     io_AppendText(0x1782,v13 + 0x1773);
     if (v37)
       io_AppendText(0x1783,v5 + 0x177a);
-    fcn_00494470(&party,0);
+    gm_ResolveDinnerParty(&party,0);
     io_AppendText(0x1784,party.text);
     g_100f1dc = -1;
     do {
@@ -309,7 +309,7 @@ label_5c221e:
               }
               v12 += 4;
             } while (v12 < 0x10);
-            fcn_00494470(&party,0);
+            gm_ResolveDinnerParty(&party,0);
             d2_SetForm(v9,2);
             io_AppendText(0x6811b0);
             v11 = io_AppendText(0x176b,party.text);

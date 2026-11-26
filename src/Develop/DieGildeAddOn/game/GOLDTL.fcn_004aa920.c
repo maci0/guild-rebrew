@@ -29,7 +29,7 @@ int __cdecl ai_SelectAnschwaerzenTargets(short* entity, int unused, char* result
 		return 0;
 	result[0] = 7;
 	*(int*) (result + 4) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[src]) + 4);
-	f = fcn_00507e70((char*) entity, ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[src]), 4);
+	f = gm_CalcSkillDuelScore((char*) entity, ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[src]), 4);
 	if (!(gm_RandomFloat01() + f >= 1.0f))
 		return 0;
 	*(int*) (result + 8) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[dst]) + 4);

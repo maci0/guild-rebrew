@@ -19,7 +19,7 @@ int __cdecl fcn_00507400(int, int);
 int __cdecl gm_IsNpcEntityState(void*);
 
 /* ADDRESS: GOLDTL 0x004ff8f0 */
-void __cdecl fcn_004ff8f0(void)
+void __cdecl gm_MaintainNpcPopulation(void)
 {
 	unsigned char* s;
 	unsigned char* e;
@@ -31,9 +31,9 @@ void __cdecl fcn_004ff8f0(void)
 	int passes;
 	int rnd2;
 	int handle;
-	int v10;
-	int v11;
-	int v12;
+	int val;
+	int syncVal;
+	int initFlag;
 
 	active = 0;
 	count = 0;
@@ -49,8 +49,8 @@ void __cdecl fcn_004ff8f0(void)
 		if ((((gm_RandomMod(4) & 0xffff) + 0x2c <= *(unsigned short*) (s + 8)) || 652.8f <= (float) active)
 		    && !s[0x164] && !s[0x166] && !s[0x167]) {
 			if (gm_IsEntityOrphaned(e)) {
-				v10 = (int) (-(*(float*) (s + 0x1a) + 1.0f));
-				fcn_004ff210(*(unsigned short*) e, v10);
+				val = (int) (-(*(float*) (s + 0x1a) + 1.0f));
+				fcn_004ff210(*(unsigned short*) e, val);
 				active--;
 			}
 		}
@@ -65,8 +65,8 @@ void __cdecl fcn_004ff8f0(void)
 				q = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0x64));
 				if ((!p || p[2] == 0x0f) && (!q || q[2] == 0x0f)) {
 					if (gm_IsEntityOrphaned(e)) {
-						v10 = (int) (-(*(float*) (s + 0x1a) + 1.0f));
-						fcn_004ff210(*(unsigned short*) e, v10);
+						val = (int) (-(*(float*) (s + 0x1a) + 1.0f));
+						fcn_004ff210(*(unsigned short*) e, val);
 						active--;
 					}
 					continue;
@@ -78,15 +78,15 @@ void __cdecl fcn_004ff8f0(void)
 			q = (unsigned char*) gm_LookupEntityRecordById(*(int*) (e + 0x64));
 			if ((p && p[2] != 0x0f) || (q && q[2] != 0x0f))
 				continue;
-			v11 = 3;
-			v12 = 2;
+			syncVal = 3;
+			initFlag = 2;
 			cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
-			cm_AppendCommandSyncField(1, 1, (short) ((int) s - g_aed32c), &v11);
+			cm_AppendCommandSyncField(1, 1, (short) ((int) s - g_aed32c), &syncVal);
 			if (s[0xb] < 2)
-				cm_AppendCommandSyncField(1, 1, (short) ((int) s - g_aed32c + 0xb), &v12);
+				cm_AppendCommandSyncField(1, 1, (short) ((int) s - g_aed32c + 0xb), &initFlag);
 			cm_SendSetAttribute();
 			cm_RequestTransferCurrencyNoKill(*(int*) (e + 4), -1, g_773d75,
-				((gm_RandomMod(0x800) & 0xffff) + 0x800) * v12 * 0x20);
+				((gm_RandomMod(0x800) & 0xffff) + 0x800) * initFlag * 0x20);
 			count++;
 			continue;
 		}
@@ -106,18 +106,18 @@ void __cdecl fcn_004ff8f0(void)
 		if (cm_GetCommandStatus(handle) == 1) {
 			count++;
 			handle = (int) cm_GetCommandResult(handle);
-			v10 = ((gm_RandomMod(0x2000) & 0xffff) + 10000) * 0x40;
-			cm_RequestTransferCurrencyNoKill(*(int*) (handle + 4), -1, g_773d75, v10);
+			val = ((gm_RandomMod(0x2000) & 0xffff) + 10000) * 0x40;
+			cm_RequestTransferCurrencyNoKill(*(int*) (handle + 4), -1, g_773d75, val);
 		}
 	}
 	if ((float) active <= 652.8f) {
 		if (count < 0x1e)
-			v10 = (0x28 - count) / 2;
+			val = (0x28 - count) / 2;
 		else if (count < 0x28)
-			v10 = (gm_RandomMod(2) & 0xffff) + 1;
+			val = (gm_RandomMod(2) & 0xffff) + 1;
 		else
-			v10 = 0;
-		while (v10 > 0) {
+			val = 0;
+		while (val > 0) {
 			rnd2 = gm_RandomMod(2);
 			passes = gm_RandomMod(0xc);
 			handle = cm_RequestAllocSpieler(3, -1, -1, 0x14, -1,
@@ -128,16 +128,16 @@ void __cdecl fcn_004ff8f0(void)
 				}
 			}
 			if (cm_GetCommandStatus(handle) == 1) {
-				v11 = (gm_RandomMod(0xc) & 0xffff) + 10;
+				syncVal = (gm_RandomMod(0xc) & 0xffff) + 10;
 				handle = (int) cm_GetCommandResult(handle);
 				passes = gm_RandomMod(0x400);
 				cm_RequestTransferCurrencyNoKill(*(int*) (handle + 4), -1, g_773d75,
 					((passes & 0xffff) + 0x400) * 0x40);
 				cm_BeginPacketFieldDelta(handle, *(int*) (handle + 4));
-				cm_AppendCommandSyncField(1, 1, (short) (handle - g_aed32c + 0x167), &v11);
+				cm_AppendCommandSyncField(1, 1, (short) (handle - g_aed32c + 0x167), &syncVal);
 				cm_SendSetAttribute();
 			}
-			v10--;
+			val--;
 		}
 	}
 }

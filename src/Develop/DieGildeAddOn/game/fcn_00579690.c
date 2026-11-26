@@ -3,7 +3,7 @@
 int __cdecl fcn_00503fe0(int a, int b, int c);
 void* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_00529160(int a, int b, int c, void* d);
+void __cdecl he_AssignActionSlot(int a, int b, int c, void* d);
 void __cdecl he_FreeAction(void* p);
 void __cdecl gm_AddTime(void* p, int a, int b, int c);
 
@@ -27,7 +27,7 @@ void __cdecl fcn_00579690(char* event)
 		q = gm_LookupEntityRecordById(*p);
 		if (q != 0) {
 			found++;
-			fcn_00529160(obj, (int) h, *(unsigned short*) q, event);
+			he_AssignActionSlot(obj, (int) h, *(unsigned short*) q, event);
 		}
 		p++;
 	}

@@ -27,7 +27,7 @@ void __cdecl d2_AddToRadioGroup(int a, int b);
 int __cdecl d2_CreateRadioGroup(int a, ...);
 int __cdecl fcn_00441ab0(char* a, int b, int c, float d, float* out);
 float* __stdcall D3DXMatrixTranspose(float* a, const float* b);
-void __cdecl fcn_00438b40(int h, float* p);
+void __cdecl d3_SetNodePosition(int h, float* p);
 int __cdecl plt_CheckZoneAvailability(int a, int b, int c, unsigned int d);
 void __cdecl d3_SetSubtreeColor(int a, int b, int c, int d);
 int __cdecl fcn_004c5aa0(int a, int b, int c, int d, int e, int f);
@@ -185,7 +185,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			world[0] += *(float*) (d3_ActiveCamera + 0x4c);
 			world[1] += *(float*) (d3_ActiveCamera + 0x50);
 			world[2] += *(float*) (d3_ActiveCamera + 0x54);
-			fcn_00438b40(v6, world);
+			d3_SetNodePosition(v6, world);
 			if (*(unsigned char*) (*(int*) g_6b8300 * v16
 					+ *(int*) (g_6b8300 + 0x14) + v19) == v36
 				&& (v16 = plt_CheckZoneAvailability(v40, v19, v16,
@@ -233,7 +233,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 					place[0] = world[0];
 					place[1] = world[1] - 60.0;
 					place[2] = world[2];
-					fcn_00438b40(v17, place);
+					d3_SetNodePosition(v17, place);
 					d3_AnimateObjectTransform(v17, world, v17 + 0x84, 0x32, 0x20);
 				}
 			}

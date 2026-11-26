@@ -59,31 +59,31 @@ void __cdecl fcn_0054ac70(char* e)
 				io_FormatTextBuffer(text, 0x1bc0, *(unsigned short*) b, e + 0x52,
 							 *(unsigned short*) (e + 0x56), *(unsigned short*) c,
 							 *(unsigned short*) d, *(unsigned short*) f);
-				fcn_00545d40(*(int*) (a + 4), *(int*) (a + 4), text, 0, 0x5f5,
+				he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), text, 0, 0x5f5,
 							 (char*) 0x6a59e8);
 			}
 			if (b[2] == 6 || a[2] == 7) {
 				io_FormatTextBuffer(text, 0x1bbf, *(unsigned short*) a, e + 0x52,
 							 *(unsigned short*) (e + 0x56), *(unsigned short*) c,
 							 *(unsigned short*) d, *(unsigned short*) f);
-				fcn_00545d40(*(int*) (b + 4), *(int*) (b + 4), text, 1, 0x5f5,
+				he_PostEntityMessage(*(int*) (b + 4), *(int*) (b + 4), text, 1, 0x5f5,
 							 (char*) 0x6a59d4);
 			}
 			io_FormatTextBuffer(text, 0x1bc1, *(unsigned short*) b, *(unsigned short*) a,
 						 e + 0x52, *(unsigned short*) (e + 0x56));
 			if (d[2] == 6 || d[2] == 7)
-				fcn_00545d40(*(int*) (d + 4), *(int*) (d + 4), text, 0, 0x5f5,
+				he_PostEntityMessage(*(int*) (d + 4), *(int*) (d + 4), text, 0, 0x5f5,
 							 (char*) 0x6a59c0);
 			if (f[2] == 6 || f[2] == 7)
-				fcn_00545d40(*(int*) (f + 4), *(int*) (f + 4), text, 0, 0x5f5,
+				he_PostEntityMessage(*(int*) (f + 4), *(int*) (f + 4), text, 0, 0x5f5,
 							 (char*) 0x6a59c0);
 			io_FormatTextBuffer(text, 0x1bc2, *(unsigned short*) b, *(unsigned short*) a,
 						 e + 0x52, *(unsigned short*) (e + 0x56));
 			if (c[2] == 6 || c[2] == 7)
-				fcn_00545d40(*(int*) (c + 4), *(int*) (c + 4), text, 0, 0x5f5,
+				he_PostEntityMessage(*(int*) (c + 4), *(int*) (c + 4), text, 0, 0x5f5,
 							 (char*) 0x6a59ac);
 			if (g != 0 && (g[2] == 6 || g[2] == 7))
-				fcn_00545d40(*(int*) (g + 4), *(int*) (g + 4), text, 0, 0x5f5,
+				he_PostEntityMessage(*(int*) (g + 4), *(int*) (g + 4), text, 0, 0x5f5,
 							 (char*) 0x6a59ac);
 			fcn_004c5620(1, e);
 			return;
@@ -92,7 +92,7 @@ void __cdecl fcn_0054ac70(char* e)
 			return;
 		if (b[2] == 6 || a[2] == 7) {
 			io_FormatTextBuffer(text, 0x1bbe, *(unsigned short*) a);
-			fcn_00545d40(*(int*) (b + 4), *(int*) (b + 4), text, 0, 0x5f5, 0);
+			he_PostEntityMessage(*(int*) (b + 4), *(int*) (b + 4), text, 0, 0x5f5, 0);
 		}
 		*(pos14_7f4c00*) (e + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
 		*(int*) (e + 0x58) = *(int*) (e + 0x58) + 2;

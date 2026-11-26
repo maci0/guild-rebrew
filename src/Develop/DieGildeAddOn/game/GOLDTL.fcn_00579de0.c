@@ -36,7 +36,7 @@ extern float g_696550[];
 int __cdecl gm_GetSeason(int* pos);
 void __cdecl gm_AddTime(pos14_7f4c00* pos, int a, int b, int c);
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_00529160(int a, int b, int id, int d);
+void __cdecl he_AssignActionSlot(int a, int b, int id, int d);
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl gv_GetSlotEntry(int a, int b, unsigned char c);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00* a, pos14_7f4c00* b);
@@ -81,7 +81,7 @@ void __cdecl he_RunGrabpflege(char* a0)
 	}
 	entity = gm_LookupEntityRecordById(place->x8c);
 	if (entity) {
-		fcn_00529160(0, 0, *(unsigned short*) entity, (int) place);
+		he_AssignActionSlot(0, 0, *(unsigned short*) entity, (int) place);
 	} else {
 		place->status = -1;
 	}
@@ -136,7 +136,7 @@ void __cdecl he_RunGrabpflege(char* a0)
 		}
 	}
 	if (entity) {
-		fcn_00529160(0, 0, *(unsigned short*) entity, 0);
+		he_AssignActionSlot(0, 0, *(unsigned short*) entity, 0);
 	}
 end:
 	he_FreeAction(a0);

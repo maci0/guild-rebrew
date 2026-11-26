@@ -30,7 +30,7 @@ void __cdecl fcn_00471c80(int, int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0046f280(int);
 
-void __cdecl fcn_005d7cf0(void)
+void __cdecl d2_ShowCreditsScreen(void)
 {
 	unsigned char* fade;
 	int speed;
@@ -52,7 +52,7 @@ void __cdecl fcn_005d7cf0(void)
 	(*(GOLD_GUI_WINDOW**)&g_77255c)->scroll = -g_fb9070;
 	i = 0;
 	d2_SuppressOverlay = 1;
-	while (main_RunFrameLoop(fcn_005d7cf0, 0x24087)) {
+	while (main_RunFrameLoop(d2_ShowCreditsScreen, 0x24087)) {
 		if (g_14ce8e0 || g_14cf950) {
 			g_774654 = 1;
 		}

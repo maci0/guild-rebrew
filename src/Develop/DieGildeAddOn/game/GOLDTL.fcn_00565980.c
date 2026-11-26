@@ -6,12 +6,12 @@ void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl fcn_004bcc50(int a, int b);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d);
-void __cdecl fcn_00529160(char* obj, int a, int id, int b);
+void __cdecl he_AssignActionSlot(char* obj, int a, int id, int b);
 int __cdecl fcn_004c5aa0(int a, char b, char c, short d, char e, int f);
 void __cdecl he_FreeAction(char* obj);
 
 /* ADDRESS: GOLDTL 0x00565980 */
-void __cdecl fcn_00565980(char* obj)
+void __cdecl he_StartErnten(char* obj)
 {
 	char* e;
 	char* t;
@@ -29,7 +29,7 @@ void __cdecl fcn_00565980(char* obj)
 			if (pal != 0) {
 				if (*(unsigned char*) ((char*) pal + 0x180) != 0x28) {
 					v = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0xfd);
-					fcn_00529160(e, v, (int) *pal, (int) obj);
+					he_AssignActionSlot(e, v, (int) *pal, (int) obj);
 					v = *(int*) (obj + 4);
 					*(int*) (obj + 0xc0) = fcn_004c5aa0(*(int*) (obj + 0xac),
 						*(char*) (t + 8),
@@ -42,7 +42,7 @@ void __cdecl fcn_00565980(char* obj)
 			}
 		}
 		else if (pal != 0) {
-			fcn_00529160(e, 0, (int) *pal, 0);
+			he_AssignActionSlot(e, 0, (int) *pal, 0);
 		}
 	}
 	he_FreeAction(obj);

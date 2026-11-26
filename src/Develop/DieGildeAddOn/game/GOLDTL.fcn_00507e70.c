@@ -5,7 +5,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x00507e70 */
-float __cdecl fcn_00507e70(char* a, char* b, int c)
+float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c)
 {
 	float x;
 	float y;

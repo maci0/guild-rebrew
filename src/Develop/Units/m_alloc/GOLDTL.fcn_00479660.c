@@ -5,7 +5,7 @@ extern char s_67da58[];
 extern void* __cdecl m_alloc(int, char*);
 extern void __cdecl m_FreeTracked(void*);
 extern void* __cdecl fcn_00479620(char*, int);
-extern void __cdecl fcn_004798c0(void*, void*);
+extern void __cdecl d2_AppendShapeToBank(void*, void*);
 
 
 /* Clones a packed record tree. a1 == 1 selects the copy path; the record
@@ -33,7 +33,7 @@ void* __cdecl fcn_00479660(char* bank, int mode, int keepOriginal)
 		*(unsigned short*) (n + 0x2a) = 0;
 		for (total = 0; total < *(unsigned short*) (bank + 0x2a); total++) {
 			p = (char*) fcn_00479620(bank + ((int*) (bank + 0x45))[total], 1);
-			fcn_004798c0(p, n);
+			d2_AppendShapeToBank(p, n);
 			if (p)
 				m_FreeTracked(p);
 		}
@@ -55,7 +55,7 @@ void* __cdecl fcn_00479660(char* bank, int mode, int keepOriginal)
 	*(unsigned short*) (n + 0x2a) = 0;
 	for (total = 0; total < *(unsigned short*) (bank + 0x2a); total++) {
 		p = (char*) fcn_00479620(bank + ((int*) (bank + 0x45))[total], 1);
-		fcn_004798c0(p, n);
+		d2_AppendShapeToBank(p, n);
 		if (p)
 			m_FreeTracked(p);
 	}

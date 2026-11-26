@@ -12,11 +12,11 @@ int __cdecl fcn_0051e490(void* stream, int flags);
 int __cdecl fcn_0051eb20(void* stream);
 int __cdecl ls_fio_SaveObjekteINST(void* stream);
 int __cdecl fcn_0051ecf0(void* stream);
-int __cdecl fcn_0051f170(void* stream);
+int __cdecl ls_SaveDynamicEntities(void* stream);
 int __cdecl ls_SaveEntities(void* stream);
 int __cdecl fcn_0051ffc0(void* stream);
 int __cdecl fcn_00520310(void* stream);
-int __cdecl fcn_00520860(void* stream);
+int __cdecl ls_SaveRelationMatrices(void* stream);
 int __cdecl fcn_005208e0(void* stream);
 int __cdecl fcn_00520d80(void* stream);
 int __cdecl he_SaveEvents(void* stream);
@@ -68,7 +68,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 		fcn_0051ea70();
 		return 0;
 	}
-	if (fcn_0051f170(stream) == 0) {
+	if (ls_SaveDynamicEntities(stream) == 0) {
 		CloseVfsStream(stream);
 		fcn_0051ea70();
 		return 0;
@@ -99,7 +99,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 			fcn_0051ea70();
 			return 0;
 		}
-		if (fcn_00520860(stream) == 0) {
+		if (ls_SaveRelationMatrices(stream) == 0) {
 			CloseVfsStream(stream);
 			fcn_0051ea70();
 			return 0;

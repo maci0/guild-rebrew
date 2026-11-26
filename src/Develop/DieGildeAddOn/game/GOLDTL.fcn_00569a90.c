@@ -9,7 +9,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, int, char*, int, int);
+void __cdecl he_PostEntityMessage(int, int, int, char*, int, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
@@ -18,7 +18,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 int __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl fcn_004c6b20(int, int, int);
-int __cdecl fcn_00567170(unsigned short*, int*, int*, int);
+int __cdecl he_GetEntityHomeTarget(unsigned short*, int*, int*, int);
 int __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl fcn_004c5620(int, void*);
 void __cdecl he_FreeAction(char*);
@@ -63,7 +63,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 				pkt = gm_StartFilteredEntitySearch(1, 1, *(int*) (action + 0x10));
 				io_FormatTextBuffer(buf, 0x19d4, *(unsigned short*) v3,
 				    *(int*) (action + 0xb4), *(unsigned short*) v3);
-				fcn_00545d40(*(int*) ((char*) v4 + 4), *(int*) ((char*) v4 + 4),
+				he_PostEntityMessage(*(int*) ((char*) v4 + 4), *(int*) ((char*) v4 + 4),
 				    buf, 0, 0x5fa, 0);
 				if (pkt != 0) {
 					cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
@@ -76,7 +76,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) v4 + 4), *(int*) ((char*) v3 + 4),
 				    (char) g_773d75, *(int*) (action + 0xb4));
 				if (*(int*) ((char*) v3 + 0x184) != 0
-				    && fcn_00567170(v3, &v[1], &v[0], 0) != 0)
+				    && he_GetEntityHomeTarget(v3, &v[1], &v[0], 0) != 0)
 					ch_StartMovement(*(int*) ((char*) v3 + 4), v[1], v[0], 0, 0,
 					    "L\xf6segeld");
 				if (pkt != 0) {
@@ -111,7 +111,7 @@ done_case1:
 					break;
 				io_FormatTextBuffer(buf, 0x19d4, *(unsigned short*) v3,
 				    *(int*) (action + 0xb4), *(unsigned short*) v3);
-				fcn_00545d40(*(int*) ((char*) v4 + 4), *(int*) (action + 0x10),
+				he_PostEntityMessage(*(int*) ((char*) v4 + 4), *(int*) (action + 0x10),
 				    buf, 0, 0x5fa, 0);
 				cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
 				cm_AppendPacketFieldDelta(4, 1, (pkt - g_aed32c) + 0x65, (void*) &v[1]);
@@ -121,7 +121,7 @@ done_case1:
 				cm_RequestTransferCurrencyNoKill(*(int*) ((char*) v4 + 4), *(int*) ((char*) v3 + 4),
 				    (char) g_773d75, *(int*) (action + 0xb4));
 				if (*(int*) ((char*) v3 + 0x184) != 0
-				    && fcn_00567170(v3, &v[2], &v[0], 0) != 0)
+				    && he_GetEntityHomeTarget(v3, &v[2], &v[0], 0) != 0)
 					ch_StartMovement(*(int*) ((char*) v3 + 4), v[2], v[0], 0, 0,
 					    "L\xf6segeld");
 				cm_BeginPacketFieldDelta((char*) pkt, *(int*) (pkt + 1));
@@ -136,7 +136,7 @@ done_case1:
 			}
 			io_FormatTextBuffer(buf, 0x19d5, *(unsigned short*) v3);
 			entity = *(int*) ((char*) v4 + 4);
-			fcn_00545d40(entity, entity, buf, 0, 0x5fb, 0);
+			he_PostEntityMessage(entity, entity, buf, 0, 0x5fb, 0);
 			he_FreeAction(action);
 			return;
 		case 3:

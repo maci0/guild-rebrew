@@ -4,7 +4,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short n);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl amt_GetRoleTemplate(int kind, int* out);
 int __cdecl amt_FindOfficeSlotsByKind(int kind, int max, void* out);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int a1, unsigned int* a2,
 				  float a3, float a4, unsigned short* a5);
 void __cdecl cm_BeginPacketFieldDelta(char* obj, int id);
@@ -56,7 +56,7 @@ int __cdecl fcn_00493200(char* actorEntity, char* a2)
 			if (*(int*) (actorEntity + 4) != r) {
 				pick = gm_LookupEntityRecordById(r);
 				if (pick != 0) {
-					f = fcn_0050f980(*(unsigned short*) actorEntity, *(unsigned short*) pick, 1);
+					f = gm_CalcEntityFavor(*(unsigned short*) actorEntity, *(unsigned short*) pick, 1);
 					r = gm_RandomMod(0x1e);
 					if ((float) r + g_662c98 > f) {
 						break;

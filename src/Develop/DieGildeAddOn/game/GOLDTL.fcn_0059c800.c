@@ -15,7 +15,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
-void __cdecl fcn_0059c000(char*);
+void __cdecl d2_RunMetalProduktionDialog(char*);
 void __cdecl fcn_005c5b10(char*);
 void __cdecl fcn_005c79a0(char*);
 
@@ -56,7 +56,7 @@ void __cdecl d2_RunSchmiedeInteriorHud(char* e)
 			} else if (g_7746a0 == c) {
 				d2_ShowLagerOptions(e, 0);
 			} else if (g_7746a0 == a) {
-				fcn_0059c000(e);
+				d2_RunMetalProduktionDialog(e);
 			} else if (g_7746a0 == d) {
 				fcn_005c5b10(e);
 			} else if (g_7746a0 == g || g_7746a0 == f) {

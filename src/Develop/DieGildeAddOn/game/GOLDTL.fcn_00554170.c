@@ -4,7 +4,7 @@
 
 extern void __cdecl he_FreeAction(char*);
 extern char* __cdecl gm_LookupEntityRecordById(int);
-extern void __cdecl fcn_00529160(int, int, int, char*);
+extern void __cdecl he_AssignActionSlot(int, int, int, char*);
 extern void __cdecl cm_SendCancelCharacterActions(int);
 extern int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 extern int __cdecl fcn_004c5620(int, char*);
@@ -61,7 +61,7 @@ void __cdecl he_RunMultiActorAction(char* obj)
 		for (count = 6; count != 0; count--) {
 			rec = gm_LookupEntityRecordById(*(int*) iter);
 			if (rec != 0 && *(int*) (rec + 0x184) != 0) {
-				fcn_00529160(0, 0, *(unsigned short*) rec, obj);
+				he_AssignActionSlot(0, 0, *(unsigned short*) rec, obj);
 				cm_SendCancelCharacterActions(*(int*) (rec + 4));
 				ch_StartMovement(*(int*) (rec + 4), -1, -1, obj + 0xac, 1, (char*) 0x6a5c7c);
 			}
@@ -188,7 +188,7 @@ void __cdecl he_RunMultiActorAction(char* obj)
 		for (count = 6; count != 0; count--) {
 			rec = gm_LookupEntityRecordById(*(int*) iter);
 			if (rec != 0 && *(int*) (rec + 0x184) != 0) {
-				fcn_00529160(0, 0, *(unsigned short*) rec, 0);
+				he_AssignActionSlot(0, 0, *(unsigned short*) rec, 0);
 				cm_SendCancelCharacterActions(*(int*) (rec + 4));
 				ch_StartMovement(*(int*) (rec + 4), *(int*) (obj + 0xcc), *(int*) (obj + 0xd0), 0, 0,
 					     (char*) 0x6a5c7c);

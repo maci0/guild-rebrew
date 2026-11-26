@@ -19,7 +19,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 void __cdecl fcn_00532ef0(void);
 void __cdecl fcn_00533a40(int);
-void __cdecl fcn_00545c50(int);
+void __cdecl d2_HighlightSelectedControl(int);
 int __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00580140(void);
 int __cdecl fcn_00580290(void);
@@ -111,7 +111,7 @@ int __cdecl fcn_0057e0a0(void)
 		if (cb != 0) {
 			cb(0);
 		}
-		fcn_00545c50(*(int *)((int)g_665f08[7] + 0x74));
+		d2_HighlightSelectedControl(*(int *)((int)g_665f08[7] + 0x74));
 		d2_SetOverlayAnimation(0, 0);
 		return 0;
 	case 2:
@@ -122,7 +122,7 @@ int __cdecl fcn_0057e0a0(void)
 		g_665f08[2] = ((unsigned int) g_6b7fac);
 		g_665f08[3] = ((unsigned int) g_6b7fac);
 		g_665f08[4] = 0;
-		fcn_00545c50(0);
+		d2_HighlightSelectedControl(0);
 		return 0;
 	case 3:
 		if (fcn_00580290() != 1) {
@@ -131,7 +131,7 @@ int __cdecl fcn_0057e0a0(void)
 		g_665f08[0] = g_665f08[1];
 		goto ret0;
 ret0:
-		fcn_00545c50(0);
+		d2_HighlightSelectedControl(0);
 		return 0;
 	case 4:
 		if (*(int *)((int)g_665f08[6] + 0x40) == 3) {

@@ -9,7 +9,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AddTime(int*, int, int, int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl io_FormatTextBuffer(int*, unsigned int, ...);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, char*, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -28,7 +28,7 @@ int __cdecl cut_FindCutsceneById(int);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x0056e3c0 */
-void __cdecl fcn_0056e3c0(char* eventState)
+void __cdecl he_RunCharacterDeath(char* eventState)
 {
 	char* s;
 	char* obj;
@@ -67,7 +67,7 @@ void __cdecl fcn_0056e3c0(char* eventState)
 		if (*(int*) (obj + 0x28) != -1) {
 			evt_RequestScriptExit(evt_FindScriptById(*(int*) (obj + 0x28)));
 		}
-		fcn_00529160(0, 0, *(unsigned short*) s, 0);
+		he_AssignActionSlot(0, 0, *(unsigned short*) s, 0);
 		if ((*(unsigned char*) (eventState + 0x78) & 2) != 0) {
 			if (*(char**) (s + 0x16c) != 0) {
 				c = *(char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (*(char**) (s + 0x16c) + 0x27)].entity_state;

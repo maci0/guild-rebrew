@@ -4,7 +4,7 @@ extern char g_774a80[];
 
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, void*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
 void __cdecl he_NotifyFeudEscalated(void* entity, void* recipient)
 {
@@ -18,6 +18,6 @@ void __cdecl he_NotifyFeudEscalated(void* entity, void* recipient)
 		    gm_RandomMod(3) +
 		        (*(char*) ((char*) recipient + 9) != 0 ? 0x1347 : 0x1344),
 		    *(unsigned short*) recipient, buf);
-		fcn_00545d40(*(int*) ((char*) recipient + 4), -1, g_774a80, 1, 0x5ec, 0);
+		he_PostEntityMessage(*(int*) ((char*) recipient + 4), -1, g_774a80, 1, 0x5ec, 0);
 	}
 }

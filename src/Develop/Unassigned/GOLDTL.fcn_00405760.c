@@ -6,7 +6,7 @@ extern float g_662d78;
 void __cdecl d3_NormalizeVector(float* v);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl d3_SetObjectPosition(char* o, float* v);
-void __cdecl fcn_00438b40(char* p, float* v);
+void __cdecl d3_SetNodePosition(char* p, float* v);
 
 /* ADDRESS: GOLDTL 0x00405760 */
 void __cdecl fcn_00405760(unsigned char* e)
@@ -55,5 +55,5 @@ void __cdecl fcn_00405760(unsigned char* e)
 	*(float*) (e + 0x118) = g_662d74;
 	*(float*) (e + 0x11c) = g_662d78;
 	d3_SetObjectPosition(*(char**) (e + 0x34), &g_662d70);
-	fcn_00438b40(*(char**) (e + 0x34), v);
+	d3_SetNodePosition(*(char**) (e + 0x34), v);
 }

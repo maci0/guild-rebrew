@@ -2,7 +2,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl fcn_004f6040(int* ids, int* d, unsigned short id);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl he_HasNoActiveAction0x2e(char* a, char* b);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x004aa7c0 */
 int __cdecl fcn_004aa7c0(char* entity, char* res, char* out)
@@ -33,7 +33,7 @@ int __cdecl fcn_004aa7c0(char* entity, char* res, char* out)
 		if (!he_HasNoActiveAction0x2e(entity, target)) {
 			return 0;
 		}
-		*(double*) vb = fcn_0050f980(*(unsigned short*) entity, *(unsigned short*) target, 1);
+		*(double*) vb = gm_CalcEntityFavor(*(unsigned short*) entity, *(unsigned short*) target, 1);
 		r = gm_RandomMod(0x3d) & 0xffff;
 		if ((double) r + 20.0 > *(double*) vb) {
 			r = gm_RandomMod(4) & 0xffff;

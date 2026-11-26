@@ -12,11 +12,11 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004ba9f0 */
-int __cdecl fcn_004ba9f0(int* noticeRequest)
+int __cdecl gm_DamageRandomBuilding(int* noticeRequest)
 {
 	char buf[0x100];
 	char* ents[16];
-	unsigned short* e;
+	unsigned short* entity;
 	char* chosen;
 	char* found;
 	unsigned char* it;
@@ -30,11 +30,11 @@ int __cdecl fcn_004ba9f0(int* noticeRequest)
 	int cat;
 
 	n = 0; found = 0; k = 0;
-	e = gm_LookupEntityRecordById(noticeRequest[0]);
-	if (e == 0)
+	entity = gm_LookupEntityRecordById(noticeRequest[0]);
+	if (entity == 0)
 		return 1;
 
-	for (it = gm_StartFilteredEntitySearch(1, 3, *e); it != 0;
+	for (it = gm_StartFilteredEntitySearch(1, 3, *entity); it != 0;
 	    it = gm_FindNextFilteredEntity()) {
 		if (n >= 8)
 			break;
@@ -77,7 +77,7 @@ int __cdecl fcn_004ba9f0(int* noticeRequest)
 		    g_773d75, 0);
 		io_FormatTextBuffer(buf, *(unsigned short*) (noticeRequest + 1) + 0x12e7,
 		    *(unsigned short*) found);
-		he_MessageBoxQuickjump(*(int*) (e + 2), *(int*) (e + 2), buf,
+		he_MessageBoxQuickjump(*(int*) (entity + 2), *(int*) (entity + 2), buf,
 		    strlen(buf) > 0x100, 0x603, *(int*) (chosen + 1), -1, 0, 0);
 		return 0;
 	}

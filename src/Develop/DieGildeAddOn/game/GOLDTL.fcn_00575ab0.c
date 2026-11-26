@@ -12,7 +12,7 @@ int __cdecl ahm_CheckFlag(char*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_005b3200(char*, char*, int, int);
 void __cdecl ahm_UnlockSlotRecipe(char*, int);
-void __cdecl fcn_00529160(char*, int, int, char*);
+void __cdecl he_AssignActionSlot(char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
 int __cdecl ahm_HasActiveLabFeature(char*, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -41,7 +41,7 @@ void __cdecl he_RunAhmUnlockRecipe(char* u)
 					fcn_005b3200(o, h, q, *(int*) (u + 0xb0));
 				}
 				ahm_UnlockSlotRecipe(h, *(int*) (u + 0xb0));
-				fcn_00529160(0, 0, *(unsigned short*) h, 0);
+				he_AssignActionSlot(0, 0, *(unsigned short*) h, 0);
 				he_FreeAction(u);
 				return;
 			}

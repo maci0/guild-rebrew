@@ -10,7 +10,7 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004ba2e0 */
@@ -57,6 +57,6 @@ int __cdecl fcn_004ba2e0(int* input)
 	x = (sel[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (sel + 0x165);
 	io_FormatTextBuffer(buf, *(unsigned short*) (input + 1) + 0x12e7, x,
 	    *(unsigned short*) sel, *(unsigned short*) sel, x);
-	fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
+	he_PostEntityMessage(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

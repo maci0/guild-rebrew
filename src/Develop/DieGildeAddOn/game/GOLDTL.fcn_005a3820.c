@@ -22,7 +22,7 @@ extern int g_14abb60;
  * localized name, then pumps the frame delay and dispatches the active dialog. */
 
 /* ADDRESS: GOLDTL 0x005a3820 */
-void __cdecl fcn_005a3820(char* app)
+void __cdecl d2_RunWirtshausTableMenu(char* app)
 {
 	char name[0x100];
 	char* obj;

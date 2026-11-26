@@ -1,7 +1,7 @@
 extern unsigned short* g_772f24;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00493640(int*);
+int __cdecl ai_ShouldConfessTrialTorture(int*);
 int __cdecl IsRandomSecondChoice(int*);
 int __cdecl ai_SelectRandomTorture(int*);
 int __cdecl fcn_00493800(int*);
@@ -22,7 +22,7 @@ void __cdecl fcn_004dfba0(char* context, int* ev)
 		if (*(int*) (context + 0x10) == ev[6]) {
 			e = gm_LookupEntityRecordById(ev[6]);
 			*(float*) (context + 0x98) = *(int*) (e + 0x24) + *(float*) (e + 0x1c);
-			*(int*) (context + 0x94) = fcn_00493640(ev);
+			*(int*) (context + 0x94) = ai_ShouldConfessTrialTorture(ev);
 		}
 		break;
 	case 1:

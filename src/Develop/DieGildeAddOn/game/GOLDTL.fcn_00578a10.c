@@ -13,12 +13,12 @@ extern char g_7f4ca0[];
 #include "game_data.h"
 typedef struct CrimeProto { char pad0[0x247]; unsigned char field247; char tail[5]; } CrimeProto;
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00529160(int, int, unsigned int, int);
+void __cdecl he_AssignActionSlot(int, int, unsigned int, int);
 int __cdecl he_FreeAction(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl ch_StartMovement(int, unsigned int, int, int, int, int);
 int __cdecl gm_AddTime(int*, int, int, int);
-float __cdecl fcn_00507e70(char*, char*, int);
+float __cdecl gm_CalcSkillDuelScore(char*, char*, int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl gm_RandomMod(unsigned short);
 void __cdecl fcn_005782f0(char*, int, int);
@@ -52,7 +52,7 @@ int __cdecl he_RunHauchDesVerfalls(char* event)
 	}
 	switch (*(int*) (event + 0x70)) {
 	case 0:
-		fcn_00529160(0, 0, *(unsigned short*) p, (int) event);
+		he_AssignActionSlot(0, 0, *(unsigned short*) p, (int) event);
 		*(int*) (event + 0x84) = s;
 		return *(int*) (event + 0x70) = *(int*) (event + 0x70) + 1;
 	case 1:
@@ -79,7 +79,7 @@ int __cdecl he_RunHauchDesVerfalls(char* event)
 		gm_AddTime((int*) (event + 0x52), 1, 0, 0);
 		n = gm_LookupEntityRecordById(*(int*) (event + 0xb0));
 		m = gm_LookupEntityRecordById(*(int*) (event + 0xb4));
-		t = fcn_00507e70(m, n, 2);
+		t = gm_CalcSkillDuelScore(m, n, 2);
 		if (n != 0) {
 			if (t + gm_RandomFloat01() > g_6629c8) {
 				o = *(char**) (m + 0x16c);
@@ -133,7 +133,7 @@ int __cdecl he_RunHauchDesVerfalls(char* event)
 	return;
 tail1:
 	if (p != 0) {
-		fcn_00529160(0, 0, *(unsigned short*) p, 0);
+		he_AssignActionSlot(0, 0, *(unsigned short*) p, 0);
 	}
 tail2:
 	return he_FreeAction(event);

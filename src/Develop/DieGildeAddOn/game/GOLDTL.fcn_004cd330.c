@@ -5,7 +5,7 @@ void __cdecl fcn_004cd2a0(char*, float*, float*, int);
 void __cdecl fcn_004d8200(int*);
 void __cdecl gm_CancelEntityActionQueue(int*);
 void __cdecl cut_QueueHideCharacter(int*);
-void __cdecl fcn_004d8660(int*);
+void __cdecl gm_StartGroundCollectAction(int*);
 void __cdecl gm_StartGroundPickupAnimation(int*);
 void __cdecl cut_CancelActorActions(int*);
 void __cdecl fcn_004d87f0(int*);
@@ -38,7 +38,7 @@ int __cdecl fcn_004cd330(unsigned char* command, char* result)
 		break;
 	case 4:
 		if (e[8] != 0)
-			fcn_004d8660((int*) (command + 0x35));
+			gm_StartGroundCollectAction((int*) (command + 0x35));
 		break;
 	case 5:
 		if (e[8] != 0)

@@ -5,14 +5,14 @@ extern char* g_9b0dc0[];
 int __cdecl fcn_0064d41a(char*, char*, ...);
 char* __cdecl fcn_00445600(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char* __cdecl fcn_004fda30(int);
+char* __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl cut_RandMod(int);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl ch_SetToDummy(char*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004da2b0 */
-char* __cdecl fcn_004da2b0(unsigned short* entity, char* prefix, int idx)
+char* __cdecl cut_SpawnCutsceneSpectator(unsigned short* entity, char* prefix, int idx)
 {
 	float pos[4];
 	char name[0x80];
@@ -30,7 +30,7 @@ char* __cdecl fcn_004da2b0(unsigned short* entity, char* prefix, int idx)
 	if (w == 0)
 		goto fail;
 	d3_TransformPoint(w, w + 0x4c, pos);
-	r = fcn_004fda30(*entity);
+	r = gm_SelectEntityHeadSet(*entity);
 	if (r == 0) {
 		k = cut_RandMod(3);
 		if (k == 1)

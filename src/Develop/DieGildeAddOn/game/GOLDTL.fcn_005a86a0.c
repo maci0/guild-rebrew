@@ -7,7 +7,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0043aa30(int);
 void __cdecl d3_UpdateBuildingView(void*, int);
 void __cdecl d3_SetupInteriorScene(void*, void*);
-void __cdecl fcn_00438b40(void*, void*);
+void __cdecl d3_SetNodePosition(void*, void*);
 void __cdecl d3_SetObjectRotation(void*, void*);
 void __cdecl fcn_005338a0(void);
 void* __cdecl evt_FindScriptById(int);
@@ -31,7 +31,7 @@ void __cdecl d2_RunTheaterInteriorHud(void*);
 /* Saves the current render/scene state, notifies the game of the incoming
  * message id, dispatches it to its handler and then restores the state. */
 /* ADDRESS: GOLDTL 0x005a86a0 */
-void __cdecl fcn_005a86a0(void* a0)
+void __cdecl d2_EnterObjektInterior(void* objMessage)
 {
 	void* message;
 	int save10;
@@ -41,7 +41,7 @@ void __cdecl fcn_005a86a0(void* a0)
 	void* t;
 	int sub;
 
-	message = a0;
+	message = objMessage;
 	sub = -1;
 	save10 = *(int*) &d3_CurrentContextIndex;
 	*(void**) &g_7746cc = message;
@@ -77,7 +77,7 @@ void __cdecl fcn_005a86a0(void* a0)
 			}
 		}
 		sub = *(int*) &evt_LastGfxScriptId;
-		fcn_00438b40(*(void**) &d3_ActiveCamera, (char*) *(void**) &d3_ActiveCamera + 0x5c);
+		d3_SetNodePosition(*(void**) &d3_ActiveCamera, (char*) *(void**) &d3_ActiveCamera + 0x5c);
 		d3_SetObjectRotation(*(void**) &d3_ActiveCamera, (char*) *(void**) &d3_ActiveCamera + 0x90);
 		saved688 = (char*)d3_CameraHorizontalIndex;
 		*(int*) &g_7e3a40 = *(int*) ((char*) *(void**) &d3_ActiveCamera + 0x4c);
@@ -86,11 +86,11 @@ void __cdecl fcn_005a86a0(void* a0)
 		*(int*) &d3_CameraTargetRotation = *(int*) ((char*) *(void**) &d3_ActiveCamera + 0x84);
 		*(int*) &g_7e3a54 = *(int*) ((char*) *(void**) &d3_ActiveCamera + 0x88);
 		*(int*) &g_7e3a58 = *(int*) ((char*) *(void**) &d3_ActiveCamera + 0x8c);
-		a0 = *(void**)&d3_CameraVerticalStep;
+		objMessage = *(void**)&d3_CameraVerticalStep;
 		*(void**)&d3_CameraHorizontalIndex = 0;
 		*(void**)&d3_CameraVerticalStep = 0;
 	} else {
-		saved688 = a0;
+		saved688 = objMessage;
 	}
 	*(char*) &g_772d10 = 0;
 	switch (*(unsigned short*)message) {
@@ -163,7 +163,7 @@ void __cdecl fcn_005a86a0(void* a0)
 	save10 = *(int*) (*(int*) &g_7746c8 + 0x5d);
 	g_675310 = *(int*) ((char*) fcn_00502cd0(save10, 2, 6, 0, 0xfd) + 2);
 	g_774658 = g_774650;
-	*(void**)&d3_CameraVerticalStep = a0;
+	*(void**)&d3_CameraVerticalStep = objMessage;
 	*(int*) &g_7e3a40 = save[0];
 	*(int*) &g_7e3a44 = save[1];
 	*(int*) &g_7e3a48 = save[2];

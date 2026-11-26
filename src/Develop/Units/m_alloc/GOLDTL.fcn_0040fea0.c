@@ -1,10 +1,10 @@
 
 
-typedef struct Buf40fea0 Buf40fea0;
+typedef struct EMITTER_CONFIG EMITTER_CONFIG;
 
 /* 0xa4 bytes at g_14cfb60. */
 // SIZE 0xa4
-struct Buf40fea0 {
+struct EMITTER_CONFIG {
 	int head;
 	char pad4[0x30];
 	float f10;
@@ -28,13 +28,13 @@ struct Buf40fea0 {
 	unsigned char pada1[3];
 };
 
-extern Buf40fea0 g_14cfb60;
+extern EMITTER_CONFIG g_14cfb60;
 extern int g_662d60;
 extern int g_662d64;
 extern int g_662d68;
 extern float g_662d70[4];
 
-void __cdecl fcn_00454460(int a, float* b, int c, int d, int tag, float e, Buf40fea0* buf);
+void __cdecl fcn_00454460(int a, float* b, int c, int d, int tag, float e, EMITTER_CONFIG* buf);
 
 /* The 24-byte fill is the hand-written alignment prelude (lea ecx,[edi+edi*2]
  * / and 3 / sub ebx,ecx / jle / rep stosb / rep stosd / rep stosb). A plain
@@ -46,7 +46,7 @@ union word4 {
 };
 
 #pragma optimize("y", off)
-void __cdecl fcn_0040fea0(union word4 u, int* a1, int* a2, int* a3, int* a4, unsigned char* a5, unsigned char* a6)
+void __cdecl CreateEmitter(union word4 u, int* emitterKind, int* count, int* scale, int* parentNode, unsigned char* tagLow, unsigned char* tagFlag)
 {
 	int len;
 
@@ -85,11 +85,11 @@ void __cdecl fcn_0040fea0(union word4 u, int* a1, int* a2, int* a3, int* a4, uns
 	g_14cfb60.b9c = 0xff;
 	g_14cfb60.b9f = 0;
 	g_14cfb60.flags |= 0x20;
-	/* Blend bit 0 of byte 2 with *a6, then set bit 1. The xor form keeps
+	/* Blend bit 0 of byte 2 with *tagFlag, then set bit 1. The xor form keeps
 	 * the old byte in al so it cannot rise above the 0xff stores. */
-	u.b[2] = (unsigned char) (((u.b[2] ^ *a6) & 1) ^ u.b[2]);
+	u.b[2] = (unsigned char) (((u.b[2] ^ *tagFlag) & 1) ^ u.b[2]);
 	u.b[2] = (unsigned char) (u.b[2] | 2);
-	u.b[0] = *a5;
-	fcn_00454460(*a1, g_662d70, *a2, *a4, u.bits, (float) *a3, &g_14cfb60);
+	u.b[0] = *tagLow;
+	fcn_00454460(*emitterKind, g_662d70, *count, *parentNode, u.bits, (float) *scale, &g_14cfb60);
 }
 #pragma optimize("", on)

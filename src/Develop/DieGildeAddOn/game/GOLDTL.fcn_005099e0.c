@@ -18,7 +18,7 @@ void __cdecl cm_AppendPacketFieldValue(int, int, int, void *);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
-void __cdecl fcn_00545d40(int, int, int, int, int, char *);
+void __cdecl he_PostEntityMessage(int, int, int, int, int, char *);
 
 extern int gm_CityEntity;
 extern int gm_GameTime;
@@ -123,7 +123,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 				if ((*((unsigned char *) it - 2) == 6 || *((unsigned char *) it - 2) == 7)
 					&& *(int *) it != *(int *) ((char *) arg1 + 4)) {
 					io_FormatTextBuffer(buf, 0x1c4d, *(unsigned short *) arg1);
-					fcn_00545d40(*(int *) it, -1, (int) buf, 0, 0x5fe, "_NACHRICHTEN_HS_70");
+					he_PostEntityMessage(*(int *) it, -1, (int) buf, 0, 0x5fe, "_NACHRICHTEN_HS_70");
 				}
 				it = (void *) ((char *) it + 0x21c);
 			} while ((int) it < (int) 0x85a0a4);
@@ -137,7 +137,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 					 || *(unsigned char *) (i * 0x21c + 0x7f4ca2) == 7)
 					&& *(int *) ((i * 0x87 + j) * 4 + 0x7f4cfc) == *(int *) ((char *) arg1 + 4)) {
 					io_FormatTextBuffer(buf, 0x1c4e, *(unsigned short *) arg1);
-					fcn_00545d40(*(int *) (i * 0x21c + 0x7f4ca4), -1, (int) buf, 0, 0x5f4,
+					he_PostEntityMessage(*(int *) (i * 0x21c + 0x7f4ca4), -1, (int) buf, 0, 0x5f4,
 								 "_NACHRICHTEN_HS_63");
 					i = 0x300;
 				}
@@ -168,5 +168,5 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 	val = gm_SumTreasury(arg1);
 	io_FormatTextBuffer(buf, 0x1c4c, val);
 	strcat(out, buf);
-	fcn_00545d40(*(int *) ((char *) arg2 + 4), -1, (int) out, 1, 0x5ff, "_NACHRICHTEN_HS_63");
+	he_PostEntityMessage(*(int *) ((char *) arg2 + 4), -1, (int) out, 1, 0x5ff, "_NACHRICHTEN_HS_63");
 }

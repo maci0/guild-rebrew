@@ -44,7 +44,7 @@ float __cdecl gm_GetEntityHealth(char*);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
 /* ADDRESS: GOLD 0x5524c0 */
 void __cdecl he_RunAction0x7f(char* u)
@@ -85,12 +85,12 @@ void __cdecl he_RunAction0x7f(char* u)
 			d = (int) (a * f * 0.06f);
 			cm_RequestTransferCurrencyNoKill(*(int*) (u + 0xac), -1, g_773d75, d);
 			io_FormatTextBuffer(buf, 0x10ba, d);
-			fcn_00545d40(*(int*) (u + 0xac), -1, buf, 0x20, 0x5fd, g_6b5c60);
+			he_PostEntityMessage(*(int*) (u + 0xac), -1, buf, 0x20, 0x5fd, g_6b5c60);
 			he_FreeAction(u);
 			return;
 		}
 		io_FormatTextBuffer(buf, 0x10bb);
-		fcn_00545d40(*(int*) (u + 0xac), -1, buf, 0x20, 0x5fd, g_6b5c60);
+		he_PostEntityMessage(*(int*) (u + 0xac), -1, buf, 0x20, 0x5fd, g_6b5c60);
 	}
 	he_FreeAction(u);
 }

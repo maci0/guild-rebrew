@@ -35,10 +35,10 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472640(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl cm_RequestLinkEvidence(int, int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl fcn_00471e30(int);
 
 void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
@@ -85,18 +85,18 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 				for (i = 0; i < count; i++) {
 					cm_RequestLinkEvidence(list[i], ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id);
 				}
-				fcn_004c6ae0(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1);
-				fcn_004c6ae0(other->entity_id, -1);
+				cm_RequestModifyHealth(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1);
+				cm_RequestModifyHealth(other->entity_id, -1);
 				cm_RequestChangeBits(me->entity_id, 0x1cc, 4, 0x20000, 0);
 				io_FormatTextBuffer(text, 0x422f, other->entity_index);
-				fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1, text, 0, 0x5ec, 0);
+				he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -1, text, 0, 0x5ec, 0);
 				if (other->entity_state == 6 || other->entity_state == 7) {
 					io_FormatTextBuffer(text, 0x4230, g_774970, 1);
-					fcn_00545d40(other->entity_id, -1, text, 0, 0x5ec, s_6ad3a8);
+					he_PostEntityMessage(other->entity_id, -1, text, 0, 0x5ec, s_6ad3a8);
 				}
 				g_774654 = 3;
 			} else {
-				fcn_004c6ae0(other->entity_id, -1);
+				cm_RequestModifyHealth(other->entity_id, -1);
 				g_774654 = 3;
 			}
 		}

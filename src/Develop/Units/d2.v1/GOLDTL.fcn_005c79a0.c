@@ -241,7 +241,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 								}
 								pkt.x5c = ((Player*) g_7f4ca0)[j].x4;
 								*(char*) &pkt.x58 = (i != 0) + 2;
-								fcn_00529160(obj, 0, ((Player*) g_7f4ca0)[j].x0, 0);
+								he_AssignActionSlot(obj, 0, ((Player*) g_7f4ca0)[j].x0, 0);
 								cm_SendCopyEntityData(&pkt);
 								sum++;
 							}
@@ -265,7 +265,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 								else {
 									pkt.x70 = -1;
 								}
-								fcn_00529160(obj, 0, ((Player*) g_7f4ca0)[j].x0, 0);
+								he_AssignActionSlot(obj, 0, ((Player*) g_7f4ca0)[j].x0, 0);
 								cm_SendCopyEntityData(&pkt);
 								sum++;
 							}

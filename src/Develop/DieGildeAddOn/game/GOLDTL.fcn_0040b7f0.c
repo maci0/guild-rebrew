@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_00402610(char*);
+char* __cdecl d3sm_GetObjectSuperMap(char*);
 int __cdecl d3_GetContextIndex(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl d3_SelectSceneContext(int, int);
@@ -29,7 +29,7 @@ void __cdecl ch_RunWalkToRandomDummy(char* ev)
 	if (*(int*) (ev + 0xc) != 0) {
 		return;
 	}
-	map = fcn_00402610(*(char**) (ev + 0x14));
+	map = d3sm_GetObjectSuperMap(*(char**) (ev + 0x14));
 	saved = d3_CurrentContextIndex;
 	room = d3_GetContextIndex(*(int*) (*(char**) (ev + 0x14) + 0x88));
 	if (room != *(int*) (ev + 0x30)) {

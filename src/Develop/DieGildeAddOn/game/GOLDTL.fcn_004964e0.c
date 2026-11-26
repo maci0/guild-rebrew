@@ -52,7 +52,7 @@ extern char* gm_RichterEvangelisch;
 extern char* g_77261c;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 char* __cdecl he_StartHandlungSearch(int type, int a, int b);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl fcn_004f4830(int idx, void* dst);
@@ -64,13 +64,13 @@ int __cdecl fcn_004a4680(float* a0, float* a1, int idx, Actor* e, int* rec);
    cheapest one as action type 7; otherwise falls back to the plain
    building-deal calculators. */
 /* ADDRESS: GOLDTL 0x004964e0 */
-int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
-	char* resultData, int a6)
+int __cdecl ai_ScoreBestechung(float* firstScore, float* secondScore, int idx, Actor* actor, int busy,
+	char* resultData, int extra)
 {
-	AM_METHOD* t;
-	Entry* p;
+	AM_METHOD* method;
+	Entry* entry;
 	char* sv[3];
-	char* s;
+	char* chosen;
 	float fv[3];
 	float best;
 	int bi;
@@ -79,26 +79,26 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 	int w;
 	int rec[9];
 
-	if (a4 != 0) {
-		*a0 = -1e30f;
-		*a1 = -1e30f;
+	if (busy != 0) {
+		*firstScore = -1e30f;
+		*secondScore = -1e30f;
 		return 0;
 	}
-	*a0 = 0.0f;
-	*a1 = 0.0f;
-	t = &g_1008540[idx];
-	if (e->f168 != 0) {
+	*firstScore = 0.0f;
+	*secondScore = 0.0f;
+	method = &g_1008540[idx];
+	if (actor->f168 != 0) {
 		goto calc;
 	}
-	if (e->kind166 != 0xd) {
+	if (actor->kind166 != 0xd) {
 		v = gm_RichterKatholisch != 0 ? *(int*) (gm_RichterKatholisch + 4) : -1;
 		w = gm_RichterEvangelisch != 0 ? *(int*) (gm_RichterEvangelisch + 4) : -1;
-		for (p = (Entry*) he_StartHandlungSearch(1, 0, 0x2c); p != 0;
-			p = (Entry*) he_fn_Handlung()) {
-			if (p->id != e->id4) {
+		for (entry = (Entry*) he_StartHandlungSearch(1, 0, 0x2c); entry != 0;
+			entry = (Entry*) he_fn_Handlung()) {
+			if (entry->id != actor->id4) {
 				continue;
 			}
-			if (p->val == v || p->val == w) {
+			if (entry->val == v || entry->val == w) {
 				break;
 			}
 			fv[0] = 100.0f;
@@ -106,17 +106,17 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 			fv[2] = 100.0f;
 			best = 100.0f;
 			bi = -1;
-			sv[0] = gm_LookupEntityRecordById(p->val);
-			sv[1] = gm_LookupEntityRecordById(p->ref1);
-			sv[2] = gm_LookupEntityRecordById(p->ref2);
+			sv[0] = gm_LookupEntityRecordById(entry->val);
+			sv[1] = gm_LookupEntityRecordById(entry->ref1);
+			sv[2] = gm_LookupEntityRecordById(entry->ref2);
 			if (sv[0] != 0 && sv[0] != g_77261c) {
-				fv[0] = fcn_0050f980(e->w0, *(unsigned short*) sv[0], 1);
+				fv[0] = gm_CalcEntityFavor(actor->w0, *(unsigned short*) sv[0], 1);
 			}
 			if (sv[1] != 0 && sv[1] != g_77261c) {
-				fv[1] = fcn_0050f980(e->w0, *(unsigned short*) sv[1], 1);
+				fv[1] = gm_CalcEntityFavor(actor->w0, *(unsigned short*) sv[1], 1);
 			}
 			if (sv[2] != 0 && sv[2] != g_77261c) {
-				fv[2] = fcn_0050f980(e->w0, *(unsigned short*) sv[2], 1);
+				fv[2] = gm_CalcEntityFavor(actor->w0, *(unsigned short*) sv[2], 1);
 			}
 			for (i = 0; i < 3; i++) {
 				if (fv[i] < best) {
@@ -125,9 +125,9 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 				}
 			}
 			if (bi != -1) {
-				s = sv[bi];
+				chosen = sv[bi];
 				resultData[0] = 7;
-				*(int*) (resultData + 4) = *(int*) (s + 4);
+				*(int*) (resultData + 4) = *(int*) (chosen + 4);
 				*(int*) (resultData + 8) = 1;
 				goto calc;
 			}
@@ -137,22 +137,22 @@ int __cdecl fcn_004964e0(float* a0, float* a1, int idx, Actor* e, int a4,
 fallback:
 	fcn_004f4830(0x10, rec);
 	if (rec[6] == 0) {
-		return fcn_004a4410(a0, a1, idx, e, 0, resultData, a6);
+		return fcn_004a4410(firstScore, secondScore, idx, actor, 0, resultData, extra);
 	}
-	return fcn_004a4680(a0, a1, idx, e, rec);
+	return fcn_004a4680(firstScore, secondScore, idx, actor, rec);
 calc:
 	for (i = 0; i < 4; i++) {
-		if (t->effects[i].value > 0.0f) {
-			*a0 += t->effects[i].type == e->kind
-				? e->rate[t->effects[i].type].f * t->effects[i].value * 0.02f
-				: e->rate[t->effects[i].type].f * t->effects[i].value * 0.01f;
+		if (method->effects[i].value > 0.0f) {
+			*firstScore += method->effects[i].type == actor->kind
+				? actor->rate[method->effects[i].type].f * method->effects[i].value * 0.02f
+				: actor->rate[method->effects[i].type].f * method->effects[i].value * 0.01f;
 
 		}
-		if (t->other_effects[i].value > 0.0f) {
-			if (t->other_effects[i].type == e->kind) {
-				*a1 += e->rate[t->other_effects[i].type].f * t->other_effects[i].value * 0.02f;
+		if (method->other_effects[i].value > 0.0f) {
+			if (method->other_effects[i].type == actor->kind) {
+				*secondScore += actor->rate[method->other_effects[i].type].f * method->other_effects[i].value * 0.02f;
 			} else {
-				*a1 += e->rate[t->other_effects[i].type].f * t->other_effects[i].value * 0.01f;
+				*secondScore += actor->rate[method->other_effects[i].type].f * method->other_effects[i].value * 0.01f;
 			}
 
 		}

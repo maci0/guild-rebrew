@@ -34,7 +34,7 @@ void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 void __cdecl fcn_005100f0(int a1, int a2);
 int __cdecl gm_RandomMod(int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-void __cdecl fcn_00545d40(int a1, int a2, void* p, int a4, int a5, void* p6);
+void __cdecl he_PostEntityMessage(int a1, int a2, void* p, int a4, int a5, void* p6);
 int __cdecl fcn_00526120(void* a1, int a2);
 extern unsigned char* lpGebaeudePROT;
 extern unsigned char g_773d75;
@@ -160,7 +160,7 @@ found:
 		for (q = (unsigned char*) 0x7f4ca4; (int) q < (int) 0x85a0a4; q += 0x21c) {
 			if ((*(unsigned char*) (q - 2) == 7 || *(unsigned char*) (q - 2) == 6) &&
 			    *(int*) (self + 4) != *(int*) q)
-				fcn_00545d40(*(int*) q, -1, buf2, 1, 0x5ec, (void*) 0x6b5c60);
+				he_PostEntityMessage(*(int*) q, -1, buf2, 1, 0x5ec, (void*) 0x6b5c60);
 		}
 		if (*(unsigned char*) (self + 2) == 6)
 			fcn_00526120(buf2, 0x10);

@@ -7,7 +7,7 @@ int __cdecl gm_RandomMod(int);
 void __cdecl fcn_004a7af0(void*, int);
 
 /* ADDRESS: GOLDTL 0x004a7900 */
-void __cdecl fcn_004a7900(void)
+void __cdecl ai_PlayCardGameTurn(void)
 {
 	char* p;
 	char* q;

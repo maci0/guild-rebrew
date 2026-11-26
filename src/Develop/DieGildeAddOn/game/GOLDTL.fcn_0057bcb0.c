@@ -7,7 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004f4f60(int, int, int, int, int);
+void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
 void __cdecl he_StartAction0x9d(char* o)
 {
@@ -30,6 +30,6 @@ void __cdecl he_StartAction0x9d(char* o)
 	} else {
 		id = -1;
 	}
-	fcn_004f4f60(0x1c, 1, *(int*) (o + 0xc), *(int*) (x + 4), id);
+	gm_TryRecordCrime(0x1c, 1, *(int*) (o + 0xc), *(int*) (x + 4), id);
 	*(int*) (o + 0x84) = fcn_004c5620(0, o);
 }

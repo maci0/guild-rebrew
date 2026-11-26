@@ -9,7 +9,7 @@ void __cdecl cm_SendCopyEntityData(int a1);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00488e10 */
-void __cdecl fcn_00488e10(char* e)
+void __cdecl ai_SendAction0x8f(char* e)
 {
 	char s[0xf8];
 	char* p;

@@ -19,7 +19,7 @@ void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_RunDomizilKabinettDialog(char*, char*);
 int __cdecl he_GetActionProgress(char*, int*, int*, int);
 void __cdecl fcn_00526120(int, int);
-void __cdecl fcn_005944d0(char*);
+void __cdecl d2_RunProduktionDialog(char*);
 #ifdef REBREW_GOLD
 #define fcn_00585030 fcn_0057c950
 #endif
@@ -73,7 +73,7 @@ void __cdecl d2_RunAlchemistMenu(char* a, char* b)
 				if (r != 0) {
 					fcn_00526120(g_14b59d0[r], 0x100);
 				} else {
-					fcn_005944d0(a);
+					d2_RunProduktionDialog(a);
 				}
 			} else if (g_7746a0 == alch) {
 				fcn_00585030(a);

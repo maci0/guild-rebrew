@@ -7,7 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl he_FreeAction(char*);
@@ -38,7 +38,7 @@ void __cdecl he_HandleAction0x2e(char* u)
 		}
 		if (u[0x78] & 2) {
 			io_FormatTextBuffer(text, 0x175d, *(unsigned short*) a);
-			fcn_00545d40(*(int*) (b + 4), -1, text, 0, 0x5fa, 0);
+			he_PostEntityMessage(*(int*) (b + 4), -1, text, 0, 0x5fa, 0);
 		}
 		*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 1, 0);

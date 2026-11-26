@@ -5,7 +5,7 @@
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_00445600(int, int, int, int*);
 void __cdecl d3_TransformPoint(char*, char*, int*);
-int __cdecl fcn_004fda30(int);
+int __cdecl gm_SelectEntityHeadSet(int);
 char* __cdecl ch_CreateAtPosition(char*, float*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d3_SetObjectRotation(char*, int*);
@@ -59,7 +59,7 @@ have:
 	if (transformed != 0) {
 		d3_TransformPoint((char*) v5, (char*) v5 + 0x4c, (int*) opt);
 	}
-	v5 = fcn_004fda30(*(unsigned short*) a0);
+	v5 = gm_SelectEntityHeadSet(*(unsigned short*) a0);
 	if (v5 != 0) {
 		v6 = (char*) (v5 + 4);
 		*(char**) (a0 + 0x184) = ch_CreateAtPosition(v6, opt);

@@ -23,7 +23,7 @@ void __cdecl d2_ShowCabinetSpyDialog(int);
 void __cdecl fcn_0058a6b0(int);
 void __cdecl fcn_00589d00(int);
 
-void __cdecl fcn_0058af00(int a, char* b)
+void __cdecl d2_RunDomizilKabinettMenu(int entityId, char* msg)
 {
 	int k1;
 	int k2;
@@ -35,7 +35,7 @@ void __cdecl fcn_0058af00(int a, char* b)
 	k3 = 0;
 	k4 = 0;
 	fcn_005338a0();
-	while (main_RunFrameLoop(fcn_0058af00, 0x67fff) != 0) {
+	while (main_RunFrameLoop(d2_RunDomizilKabinettMenu, 0x67fff) != 0) {
 		if (g_7746d8 & 0x400) {
 			k1 = RegisterStatusText(g_6a9640, g_14b5308, 0x16);
 			k2 = RegisterStatusText(g_6a9624, g_14b538c, 0x16);
@@ -46,16 +46,16 @@ void __cdecl fcn_0058af00(int a, char* b)
 			g_774654 = 1;
 		}
 		if (g_7746a0 != 0) {
-			if (*(int*) (b + 0x1c) != 0) {
-				d2_RunDomizilKabinettDialog(a, b);
+			if (*(int*) (msg + 0x1c) != 0) {
+				d2_RunDomizilKabinettDialog(entityId, msg);
 			} else if (g_7746a0 == k1) {
-				d2_RunSpyCabinetDialog(a);
+				d2_RunSpyCabinetDialog(entityId);
 			} else if (g_7746a0 == k2) {
-				d2_ShowCabinetSpyDialog(a);
+				d2_ShowCabinetSpyDialog(entityId);
 			} else if (g_7746a0 == k3) {
-				fcn_0058a6b0(a);
+				fcn_0058a6b0(entityId);
 			} else if (g_7746a0 == k4) {
-				fcn_00589d00(a);
+				fcn_00589d00(entityId);
 			}
 		}
 	}

@@ -15,7 +15,7 @@
 #include "client_types.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl gm_ResolveEntityById(void*, void*, int, int);
-void __cdecl fcn_00529160(char*, int, int, int);
+void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -37,7 +37,7 @@ extern double g_6629c8;
 extern double g_662908;
 
 /* ADDRESS: GOLDTL 0x00571240 */
-void __cdecl fcn_00571240(char* self)
+void __cdecl he_RunAbbau(char* self)
 {
 	char* node;
 	float total;
@@ -57,7 +57,7 @@ void __cdecl fcn_00571240(char* self)
 	if (node == 0) {
 		for (i = 0; i < 768; i++) {
 			if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
-				fcn_00529160(0, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
+				he_AssignActionSlot(0, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
 		}
 		he_FreeAction(self);
 		return;
@@ -115,7 +115,7 @@ skip_map:
 						-1, buf, 0, 0x5f1, *(int*) (node + 1), -1, 0, "_NACHRICHTEN_HS_07");
 					for (i = 0; i < 768; i++) {
 						if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
-							fcn_00529160(node, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
+							he_AssignActionSlot(node, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
 					}
 					he_FreeAction(self);
 					return;
@@ -144,7 +144,7 @@ skip_map:
 		}
 		for (i = 0; i < 768; i++) {
 			if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
-				fcn_00529160(node, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
+				he_AssignActionSlot(node, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
 		}
 		he_FreeAction(self);
 		return;
@@ -152,7 +152,7 @@ skip_map:
 	case -1:
 		for (i = 0; i < 768; i++) {
 			if (*(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x17c) == self)
-				fcn_00529160(0, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
+				he_AssignActionSlot(0, 0, *(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])), 0);
 		}
 		he_FreeAction(self);
 		return;

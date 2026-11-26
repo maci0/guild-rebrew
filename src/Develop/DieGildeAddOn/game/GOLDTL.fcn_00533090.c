@@ -42,7 +42,7 @@ void __cdecl fcn_005de62f(void);
 void __cdecl fcn_00412830(unsigned char mask);
 void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 void __cdecl d3_FreeObjectAnimation(void*);
-void __cdecl fcn_00438b40(char*, float*);
+void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl gm_UpdateAmbientAnimals(void);
@@ -53,7 +53,7 @@ void __cdecl d3_AnimateCameraToStoredTransform(void);
 void __cdecl fcn_0052f7b0(void);
 void __cdecl fcn_00530510(void);
 void __cdecl fcn_005338a0(void);
-void __cdecl fcn_00545c50(int);
+void __cdecl d2_HighlightSelectedControl(int);
 void __cdecl fcn_0057e0a0(void);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 void __cdecl d2_HandleEntityChooser(void);
@@ -87,10 +87,10 @@ void __cdecl fcn_00533090(unsigned int flags)
 			} else if (**g_7749e4 == 0x87) {
 				fcn_0057e0a0();
 			} else {
-				fcn_00545c50(0);
+				d2_HighlightSelectedControl(0);
 			}
 		} else {
-			fcn_00545c50(0);
+			d2_HighlightSelectedControl(0);
 		}
 		fcn_00412830(0x10);
 		if (g_14cf950 != 0x1c) {
@@ -127,7 +127,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 				sb_PlayVoice((char*) g_7747c8, "RaumWechseln_s", 1, 0x3f, 0x7f, 0, 0);
 				*(unsigned short*) (g_7746c4 + 0x29) = *(unsigned short*) g_7746b8;
 				g_774654 = (g_774650 - g_774658) + 1;
-				fcn_00438b40(d3_ActiveCamera, g_7e3a40);
+				d3_SetNodePosition(d3_ActiveCamera, g_7e3a40);
 				d3_SetObjectRotation(d3_ActiveCamera, d3_CameraTargetRotation);
 				d3_CameraHorizontalIndex = 0;
 				d3_CameraVerticalStep = 0;
@@ -135,7 +135,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 		} else if (g_7746c8 != 0 && g_7746cc != 0 && g_7746b8 != 0
 		    && g_7746f0 == 0 && g_7746f4 == 0) {
 			g_774654 = (g_774650 - g_774658) + 1;
-			fcn_00438b40(d3_ActiveCamera, g_7e3a40);
+			d3_SetNodePosition(d3_ActiveCamera, g_7e3a40);
 			d3_SetObjectRotation(d3_ActiveCamera, d3_CameraTargetRotation);
 			d3_CameraHorizontalIndex = 0;
 			d3_CameraVerticalStep = 0;
@@ -163,7 +163,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 				d3_ActiveCameraAnimation = 0;
 				d3_CameraAnimating = 0;
 				v2 = 1;
-				fcn_00438b40(d3_ActiveCamera, g_7e3a40);
+				d3_SetNodePosition(d3_ActiveCamera, g_7e3a40);
 				d3_SetObjectRotation(d3_ActiveCamera, d3_CameraTargetRotation);
 			} else {
 				d3_FreeObjectAnimation(d3_ActiveCamera);
@@ -212,7 +212,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 				if (g_7746c4 != 0 && g_7746cc == 0) {
 					g_7746c4 = 0;
 				}
-				fcn_00438b40(d3_ActiveCamera, g_7e3a40);
+				d3_SetNodePosition(d3_ActiveCamera, g_7e3a40);
 				d3_SetObjectRotation(d3_ActiveCamera, d3_CameraTargetRotation);
 				d3_CameraHorizontalIndex = 0;
 				d3_CameraVerticalStep = 0;

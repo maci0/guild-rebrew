@@ -57,7 +57,7 @@ char* __cdecl ch_CreateAction(char* e, int kind, int p);
 char* __cdecl ch_CreateQueuedAction(char* e, int a, int b, int c, int d);
 int __cdecl d3snd_PlaySoundEffect(int a, int b, int c, int d);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
-void __cdecl fcn_004e51d0(unsigned int* a0, int a1);
+void __cdecl cut_RunTurnRound(unsigned int* a0, int a1);
 int __cdecl fcn_004e6a70(int a1);
 int __cdecl fcn_004de610(int v);
 float __cdecl gm_GetEntityHealthRatio(char* p);
@@ -67,7 +67,7 @@ void __cdecl fcn_004e0210(char* a, char* b, char* c);
 int __cdecl srv_GetEntityOfficeSlot(char* ent, int* role, int* slot);
 int __cdecl amt_SendOfficeCommand(int id, int ea, int eb, int x1, int x2);
 void __cdecl io_FormatTextBuffer(char* out, int id, int a, int b);
-int __cdecl fcn_00545d40(int id, int arg, char* t1, int flags, int value, char* t2);
+int __cdecl he_PostEntityMessage(int id, int arg, char* t1, int flags, int value, char* t2);
 int __cdecl fcn_004e4aa0(int a);
 void __cdecl fcn_004e4610(int a);
 void __cdecl fcn_004e45c0(int a);
@@ -191,7 +191,7 @@ void __cdecl cut_MainDuell(char* a0)
     io_AppendText(0x6811b0);
     d3snd_PlaySoundEffect(-7, 0, (int) 0x68cd18, -1);
 
-    fcn_004e51d0((unsigned int*) a0, 0);
+    cut_RunTurnRound((unsigned int*) a0, 0);
     e = (char*) fcn_004e6a70(sB.idx);
     if (*(unsigned char*) (e + 0x94) == 1)
         p = fcn_00445600(0, 0x100, 0, (char*) 0x68cd00);
@@ -237,7 +237,7 @@ void __cdecl cut_MainDuell(char* a0)
     while (j < 3) {
         if (g_772f44 != 0)
             break;
-        fcn_004e51d0((unsigned int*) a0, (int) a0);
+        cut_RunTurnRound((unsigned int*) a0, (int) a0);
         e = (char*) fcn_004e6a70(sA.idx);
         g_772f5a = 0;
         g_772f5b = 0;
@@ -329,7 +329,7 @@ void __cdecl cut_MainDuell(char* a0)
                         if (*q == 6 || *q == 7) {
                             io_FormatTextBuffer(buf2, 0x10c7, *(unsigned short*) p,
                                 (*(unsigned char*) (p + 9) != 0) + 0x10c8);
-                            fcn_00545d40(*(int*) (q + 2), -1, buf2, 0, 0x5fe,
+                            he_PostEntityMessage(*(int*) (q + 2), -1, buf2, 0, 0x5fe,
                                 (char*) 0x6b5c60);
                         }
                         q += 0x21c;

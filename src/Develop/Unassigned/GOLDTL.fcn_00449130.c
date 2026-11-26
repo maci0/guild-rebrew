@@ -37,7 +37,7 @@ void __cdecl fcn_004127a0(int flag);
 void __cdecl fcn_004125c0(int x, int y);
 char __cdecl fcn_00448cc0(int obj, float* a1, float* a2, int g, char* a5,
 	char* a6);
-void __cdecl fcn_00438b40(int h, char* p);
+void __cdecl d3_SetNodePosition(int h, char* p);
 void __cdecl d3_SetObjectRotation(int h, char* p);
 void __cdecl UpdateSceneLighting(int a);
 char __cdecl fcn_00448b10(void);
@@ -189,7 +189,7 @@ int __cdecl fcn_00449130(void)
 		v15 = (char) ((unsigned char) v3 >> 1);
 		v14 = v3 & 1;
 		if (v14 != 0)
-			fcn_00438b40(g_1041d0c, v8);
+			d3_SetNodePosition(g_1041d0c, v8);
 		if (v15 != 0)
 			d3_SetObjectRotation(g_1041d0c, v7);
 	}

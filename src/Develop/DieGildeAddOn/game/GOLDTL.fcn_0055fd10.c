@@ -24,13 +24,13 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 char* __cdecl fcn_0050dc90(unsigned char*);
-char* __cdecl fcn_005049a0(unsigned char*);
+char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x0055fd10 */
-void __cdecl fcn_0055fd10(char* u)
+void __cdecl he_RunBuildingExpansion(char* u)
 {
 	char* h;
 	int v;
@@ -99,7 +99,7 @@ void __cdecl fcn_0055fd10(char* u)
 		if (r != 0 && (*(unsigned char*) (r + 0x1b4) & 1)) {
 			msg = 0x60b;
 		}
-		w = fcn_005049a0(p);
+		w = gm_FindBuildingPrimarySlot(p);
 		io_FormatTextBuffer(text, 0x1bba, p);
 		if (w != 0) {
 			he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, msg, *(int*) (p + 1), *(int*) (w + 2), 0, 0);

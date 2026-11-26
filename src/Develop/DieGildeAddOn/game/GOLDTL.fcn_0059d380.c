@@ -52,7 +52,7 @@ extern void __cdecl fcn_00471e30(int);
 /* Oeffnet den Jahrmarkt-Dialog eines Objekts, bietet seine zwei Eintraege an
  * und schickt beim Anklicken das Nachrichtenpaket 0x62. */
 /* ADDRESS: GOLDTL 0x0059d380 */
-int __cdecl fcn_0059d380(int a0, char* object)
+int __cdecl d2_RunRaeuberlagerTargetDialog(int unusedFlags, char* object)
 {
 	Msg_59d380 message;
 	char buf[512];
@@ -140,7 +140,7 @@ int __cdecl fcn_0059d380(int a0, char* object)
 		} else if (d2_CurrentElementId == item2) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_0059d380, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunRaeuberlagerTargetDialog, 0x677c7) != 0);
 	fcn_00471e30(dlg);
 	return 0;
 }

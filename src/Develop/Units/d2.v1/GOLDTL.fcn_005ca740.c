@@ -3,7 +3,7 @@ extern int __cdecl d2_AddElementToWindow(int x, int y, int id, int ctx);
 extern int __cdecl io_FormatTextBuffer(char* dst, const char* fmt, ...);
 extern int __cdecl fcn_005c9090(char* text, int x, int y, int color, int flags);
 extern int __cdecl fcn_004677e0(int x, int y, int w, int a, int b, int c, int d, int ctx);
-extern float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
+extern float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 #include "d2_gui.h"
 extern int __cdecl fcn_00472640(int element, int a);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -56,7 +56,7 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* row, int a5)
 			                  0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
 			row[2] = v6;
 			if (*(unsigned char*) (row[0] + 2) != 7) {
-				d2_SetElementValue(row[2], 0, 100, (int)fcn_0050f980(*(unsigned short*) &g_774970,
+				d2_SetElementValue(row[2], 0, 100, (int)gm_CalcEntityFavor(*(unsigned short*) &g_774970,
 				             *(unsigned short*) row[0], 1));
 			} else {
 				d2_SetElementValue(v6, 0, 100, 0, 1);

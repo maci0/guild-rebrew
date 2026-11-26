@@ -44,10 +44,10 @@ extern char* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char g_6b5c60[];
 
-int __cdecl fcn_0057a890(Unit57aa*, float, int, int*);
+int __cdecl he_InflictAffliction(Unit57aa*, float, int, int*);
 void __cdecl fcn_005498b0(int, Unit57aa*, Unit57aa*, Bld57aa*, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
 // SIZE 0x10
 typedef struct {
@@ -73,7 +73,7 @@ static __inline float v3len(Vec57aa* v)
 }
 
 /* ADDRESS: GOLDTL 0x0057aab0 */
-void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
+void __cdecl he_ApplyBuildingAura(Bld57aa* self, int mode, int who, int side)
 {
 	float range;
 	float d;
@@ -147,7 +147,7 @@ void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 			} else {
 				continue;
 			}
-			v = fcn_0057a890(u, (1.0f - d / range) * 0.5f + 0.25f, who, &tmp);
+			v = he_InflictAffliction(u, (1.0f - d / range) * 0.5f + 0.25f, who, &tmp);
 			if (v == 0) {
 				continue;
 			}
@@ -155,7 +155,7 @@ void __cdecl fcn_0057aab0(Bld57aa* self, int mode, int who, int side)
 				fcn_005498b0(0, u, house, b, v, tmp);
 			} else if (role == 1 && (u->type == 6 || u->type == 7)) {
 				io_FormatTextBuffer(buf, 0x163c, v + 0x1632);
-				fcn_00545d40(u->owner, -1, buf, 0, 0x5f7, g_6b5c60);
+				he_PostEntityMessage(u->owner, -1, buf, 0, 0x5f7, g_6b5c60);
 			}
 		}
 	}

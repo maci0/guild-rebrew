@@ -10,12 +10,12 @@ unsigned char* __cdecl gm_AddObjekt(void);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 float __cdecl fcn_004ff210(unsigned short, int);
 
 
 /* ADDRESS: GOLDTL 0x004b8860 */
-int __cdecl fcn_004b8860(int* request)
+int __cdecl gm_HandleMsg1eDamageWorker(int* request)
 {
 	char* ents[8];
 	char buf[0x200];
@@ -68,7 +68,7 @@ int __cdecl fcn_004b8860(int* request)
 		io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, chosen,
 		    (sel[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (sel + 0x165),
 		    *(unsigned short*) sel, *(unsigned short*) sel);
-		fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
+		he_PostEntityMessage(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 		fcn_004ff210(*(unsigned short*) sel, (int) -(*(float*) (sel + 0x1c) + 1.0f));
 	}
 	return 0;

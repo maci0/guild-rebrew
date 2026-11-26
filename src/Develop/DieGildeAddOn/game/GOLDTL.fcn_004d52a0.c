@@ -16,11 +16,12 @@ void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 
 /* ADDRESS: GOLDTL 0x004d52a0 */
-int __cdecl fcn_004d52a0(int* a0, char* a1, int* a2, int a3, float scale)
+int __cdecl cut_PlunderBuildingCarts(int* cutscene, char* building, int* attacker,
+    int unusedDefender, float scale)
 {
 	int total;
 	int i;
-	int q;
+	int soldQty;
 	float v;
 	char* rec;
 	char* ent;
@@ -30,8 +31,8 @@ int __cdecl fcn_004d52a0(int* a0, char* a1, int* a2, int a3, float scale)
 	if (g_772e9c == 0 || g_772e98 == 0) {
 		return 0;
 	}
-	rec = fcn_00502cd0(*(int*) (a1 + 0x5d), 2, 6, 0, 0x116);
-	p = (int*) ((char*) a0 + 0x100);
+	rec = fcn_00502cd0(*(int*) (building + 0x5d), 2, 6, 0, 0x116);
+	p = (int*) ((char*) cutscene + 0x100);
 	for (i = 3; i != 0; i--) {
 		if (*p != -1) {
 			ent = fcn_00502cd0(0, 2, 7, 1, *p);
@@ -43,21 +44,21 @@ int __cdecl fcn_004d52a0(int* a0, char* a1, int* a2, int a3, float scale)
 				if (1.0f > v) {
 					v = 1.0f;
 				}
-				q = (int) v;
+				soldQty = (int) v;
 				if (rec != 0) {
 					cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (ent + 6),
-					    *(unsigned short*) ent, q, g_773d75, 0);
+					    *(unsigned short*) ent, soldQty, g_773d75, 0);
 				} else {
 					cm_SendSellObjekt(-1, *(int*) (ent + 6),
-					    *(unsigned short*) ent, q, g_773d75, 0);
+					    *(unsigned short*) ent, soldQty, g_773d75, 0);
 				}
 				total = (int) (fcn_0050bb50(*(unsigned short*) ent, g_773d75)
-				    * (float) q + (float) total);
+				    * (float) soldQty + (float) total);
 				ent = gm_NextEntityQueryMatch();
 			}
 			if (rec == 0) {
 				total = (int) ((double) total * 0.5);
-				cm_RequestMoveCredits(a2[1], -1, g_773d75, total);
+				cm_RequestMoveCredits(attacker[1], -1, g_773d75, total);
 			}
 			ent = gm_GetEntityTableEntry(g_772e9c);
 			if (ent != 0) {

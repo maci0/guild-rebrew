@@ -2,13 +2,13 @@
 extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_AddTime(char* sel, int a, int b, int c);
-int __cdecl fcn_004f4f60(int a, int b, int c, int d, int e);
-float __cdecl fcn_00507e70(char* a, char* b, int c);
+int __cdecl gm_TryRecordCrime(int a, int b, int c, int d, int e);
+float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 int __cdecl fcn_004c5620(int a, char* e);
 int __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
-int __cdecl fcn_00545d40(int a, int b, char* s, int c, int d, int e);
+int __cdecl he_PostEntityMessage(int a, int b, char* s, int c, int d, int e);
 int __cdecl fcn_004e7b70(char* e, void* a, void* b);
 int __cdecl fcn_0042e410(int code);
 float __cdecl gm_GetEntitySkill(char* e, int a);
@@ -64,12 +64,12 @@ void __cdecl fcn_0054f910(char* ent)
 	if (w != 0) {
 		v = *(int*) (w + 1);
 	}
-	fcn_004f4f60(4, 1, *(int*) (e1 + 4), *(int*) (e2 + 4), v);
+	gm_TryRecordCrime(4, 1, *(int*) (e1 + 4), *(int*) (e2 + 4), v);
 	if (*(unsigned char*) (e2 + 2) == 6
 	    || *(unsigned char*) (e2 + 2) == 7) {
 		goto big;
 	}
-	f = fcn_00507e70(e2, e1, 3);
+	f = gm_CalcSkillDuelScore(e2, e1, 3);
 	f = f + gm_RandomFloat01();
 	if (f >= 1.0f) {
 		cm_RequestChangeBits(*(int*) (e1 + 4), 0x1c8, 4, 0x400, 0);
@@ -87,7 +87,7 @@ void __cdecl fcn_0054f910(char* ent)
 			io_FormatTextBuffer(text, 0x1d83,
 			    *(unsigned short*) (e2), ent + 0x52,
 			    *(unsigned short*) (e2));
-			fcn_00545d40(*(int*) (e1 + 4), *(int*) (e1 + 4),
+			he_PostEntityMessage(*(int*) (e1 + 4), *(int*) (e1 + 4),
 			    text, 0, 0x5fa, (int) (char*) 0x6a5b08);
 		}
 		*(int*) (ent + 0x84) = fcn_004c5620(2, ent);
@@ -100,7 +100,7 @@ void __cdecl fcn_0054f910(char* ent)
 		io_FormatTextBuffer(text, 0x1d81,
 		    *(unsigned short*) (e2), *(unsigned short*) (e2),
 		    (*(unsigned char*) (e2 + 9) != 0) + 0x1d68);
-		fcn_00545d40(*(int*) (e1 + 4), *(int*) (e1 + 4),
+		he_PostEntityMessage(*(int*) (e1 + 4), *(int*) (e1 + 4),
 		    text, 0, 0x5fa, 0);
 	}
 	if (*(unsigned char*) (e2 + 0x166) != 0) {

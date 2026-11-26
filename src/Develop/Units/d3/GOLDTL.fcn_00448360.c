@@ -27,7 +27,7 @@ int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl vfs_ReadVec3(void* stream, void* dst);
 void __cdecl ReportClientMessage(const char* msg);
 void __cdecl d3_SetFog(float a, float b, int c);
-void __cdecl fcn_00438b40(char* object, int* vector);
+void __cdecl d3_SetNodePosition(char* object, int* vector);
 void __cdecl d3_SetObjectRotation(char* object, int* vector);
 char* __cdecl fcn_00437890(char* object);
 void __cdecl d3_DisposeObject(char* object);
@@ -183,7 +183,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 			if (*(int*) (obj + 0x218) == 3 && _strcmpi(name, obj) == 0) {
 				g_6b8484 = obj;
 				if ((obj[0x214] & 0x40) != 0) {
-					fcn_00438b40(obj, (int*) (obj + 0x5c));
+					d3_SetNodePosition(obj, (int*) (obj + 0x5c));
 					d3_SetObjectRotation(obj, (int*) (obj + 0x90));
 				}
 				fcn_00439c60(obj);

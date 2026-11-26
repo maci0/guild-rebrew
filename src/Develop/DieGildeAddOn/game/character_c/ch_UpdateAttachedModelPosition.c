@@ -1,7 +1,7 @@
 #ifndef REBREW_SERVER
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #endif
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
 void __cdecl fcn_00453270(char*);
@@ -30,7 +30,7 @@ void __cdecl evt_LogScriptError(char*, int, const char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include <math.h>
 
-char* __cdecl fcn_00402610(char*);
+char* __cdecl d3sm_GetObjectSuperMap(char*);
 #include "../client_scene_transform.h"
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
@@ -44,7 +44,7 @@ extern char g_10432c0[];
 
 char __cdecl d3_SetObjectVisible(char*, char);
 
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl vfs_ToSlashes(char*);
 int __cdecl d3_RemoveObjectAnim(char*);
@@ -90,7 +90,7 @@ void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force)
 	int cell;
 
 	model = *(char**) (obj + 0x34);
-	map = fcn_00402610(obj);
+	map = d3sm_GetObjectSuperMap(obj);
 	if (*(char**) (obj + 0x124) == 0) {
 		return;
 	}
@@ -128,7 +128,7 @@ void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force)
 	position[0] = *(float*) (model + 0x4c) - relative[0];
 	position[1] = *(float*) (model + 0x50) - relative[1];
 	position[2] = *(float*) (model + 0x54) - relative[2];
-	fcn_00438b40(attachment, (int*) position);
+	d3_SetNodePosition(attachment, (int*) position);
 	angle = -(6.2831855f - d3_ComputeYawToTarget(attachment, (float*) (model + 0x4c)));
 	*(int*) &rotation[0] = *(int*) (attachment + 0x84);
 	*(int*) &rotation[1] = *(int*) (attachment + 0x88);
@@ -156,7 +156,7 @@ void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force)
 			*(float*) (attachment + 0x50) += (height - *(float*) (attachment + 0x50)) * 0.25f;
 		}
 	}
-	fcn_00438b40(attachment, (int*) (attachment + 0x4c));
+	d3_SetNodePosition(attachment, (int*) (attachment + 0x4c));
 cache_position:
 	*(int*) (*(char**) (obj + 0x124) + 4) = *(int*) (model + 0x4c);
 	*(int*) (*(char**) (obj + 0x124) + 8) = *(int*) (model + 0x50);

@@ -4,7 +4,7 @@ extern int g_77261c;
 
 int __cdecl gm_RandomMod(int);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
-float __cdecl fcn_0050f980(unsigned short, unsigned short, int);
+float __cdecl gm_CalcEntityFavor(unsigned short, unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x004a55c0 */
 unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int requestedCount, unsigned int* a2,
@@ -59,7 +59,7 @@ unsigned int __cdecl fcn_004a55c0(unsigned short* a0, unsigned int requestedCoun
 			id = *a0;
 			if (fcn_005cf720(id, (unsigned short) pos, v12, 0) != 0) {
 				if (flag == 0 ||
-				    (f = fcn_0050f980((unsigned short) pos, *a0, 1), !(f < minimumScore) && !(f > maximumScore))) {
+				    (f = gm_CalcEntityFavor((unsigned short) pos, *a0, 1), !(f < minimumScore) && !(f > maximumScore))) {
 					hit = 1;
 					outIds[idx] = (unsigned short) pos;
 				}

@@ -21,7 +21,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_ShowProductionSelection(char*);
 void __cdecl d2_SelectPatrolTarget(char*);
-void __cdecl fcn_005afca0(char*);
+void __cdecl d2_StartZollkasseTargetSelect(char*);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 
 void __cdecl d2_RunZollamtMenu(char* building)
@@ -63,7 +63,7 @@ void __cdecl d2_RunZollamtMenu(char* building)
 					d2_SelectPatrolTarget(building);
 				}
 				else if (g_7746a0 == e) {
-					fcn_005afca0(building);
+					d2_StartZollkasseTargetSelect(building);
 				}
 				else if (g_7746a0 == d) {
 					d2_OpenMeisterbriefDialog(building);

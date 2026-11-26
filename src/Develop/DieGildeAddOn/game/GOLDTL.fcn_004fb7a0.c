@@ -27,7 +27,7 @@ extern short g_7f4c0c;
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x004fb7a0 */
-void __cdecl fcn_004fb7a0(void)
+void __cdecl gm_UpdateDisasterState(void)
 {
 	int st[9];
 	int sel[16];

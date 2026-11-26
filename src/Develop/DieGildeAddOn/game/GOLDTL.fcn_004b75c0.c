@@ -10,7 +10,7 @@ int  __cdecl gm_HasActiveSpecialObject(void*, int);
 
 void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
-void __cdecl fcn_00545d40(int, int, void*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
 int __cdecl gm_ApplyEntityPercentCredit(void* record)
 {
@@ -36,7 +36,7 @@ int __cdecl gm_ApplyEntityPercentCredit(void* record)
 	    0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) record + 4) + 0x12e7, amount);
 	cm_RequestTransferCurrencyNoKill(-1, *(int*) record, (*(char*)&g_773d75), amount);
-	fcn_00545d40(*(int*) ((char*) entity + 4), *(int*) ((char*) entity + 4), buf,
+	he_PostEntityMessage(*(int*) ((char*) entity + 4), *(int*) ((char*) entity + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

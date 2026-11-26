@@ -19,7 +19,7 @@ extern char g_677640[];
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
 void *__cdecl gm_GetEntityTableEntry(void *);
-void __cdecl fcn_00529160(int, int, int, void *);
+void __cdecl he_AssignActionSlot(int, int, int, void *);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl ch_StartMovement(int, int, int, int, int, char *);
@@ -27,16 +27,16 @@ void *__cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_AddTime(void *, int, int, int);
 int __cdecl he_DetectNearbyPatrolAction(void *);
 void __cdecl cm_RequestPlayAnimation(int, char *, int);
-int __cdecl fcn_004f4f60(int, int, int, int, int);
+int __cdecl gm_TryRecordCrime(int, int, int, int, int);
 int __cdecl gm_CompareGameTime(void *, int *);
-float __cdecl fcn_00507e70(void *, void *, int);
+float __cdecl gm_CalcSkillDuelScore(void *, void *, int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_HasActiveSpecialObject(void *, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, char *);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
-void __cdecl fcn_00545d40(int, int, char *, int, int, char *);
+void __cdecl he_PostEntityMessage(int, int, char *, int, int, char *);
 void *__cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl cm_RequestLinkEvidence(int, int);
 void __cdecl cm_RequestKillSpieler(int, int);
@@ -62,7 +62,7 @@ typedef struct {
 #pragma pack(pop)
 
 /* ADDRESS: GOLDTL 0x00561380 */
-void __cdecl fcn_00561380(void *action)
+void __cdecl he_RunSabotage(void *action)
 {
 	unsigned char *p;
 	char text[0x400];
@@ -86,7 +86,7 @@ void __cdecl fcn_00561380(void *action)
 				if (e != 0)
 					*(int *)(e + 0x28) = *(int *)(e + 0x28) + *(int *)(p + 0xd0);
 				*(int *)(p + 0xc4) = *(int *)(hand + 4);
-				fcn_00529160(0, 0, *(unsigned short *)hand, p);
+				he_AssignActionSlot(0, 0, *(unsigned short *)hand, p);
 				cm_RequestTransferCurrencyNoKill(-1, *(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4), g_773d75, *(int *)(p + 0xd0));
 				*(int *)(p + 0xc8) = -1;
 				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
@@ -141,7 +141,7 @@ void __cdecl fcn_00561380(void *action)
 			pos[3] = 0.0f;
 			if (he_DetectNearbyPatrolAction(pos) != 0) {
 				q = (unsigned char *)(p + 0x52);
-				*(int *)(p + 0xc8) = fcn_004f4f60(0x18, 1,
+				*(int *)(p + 0xc8) = gm_TryRecordCrime(0x18, 1,
 					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4),
 					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)] + 4),
 					*(int *)(p + 0xac));
@@ -213,7 +213,7 @@ void __cdecl fcn_00561380(void *action)
 				goto label_56148f;
 			recA = (unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)];
 			recB = (unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)];
-			dist = fcn_00507e70(recB, recA, 2);
+			dist = gm_CalcSkillDuelScore(recB, recA, 2);
 			if (!(gm_RandomFloat01() + dist >= 1.0f))
 				goto label_561a7a;
 			if (gm_HasActiveSpecialObject(recA, 0x2c0) == 0) {
@@ -226,7 +226,7 @@ void __cdecl fcn_00561380(void *action)
 					io_FormatTextBuffer(text, 0x1736, r);
 					he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, g_6a654c);
 				}
-				fcn_004f4f60(0x18, 1,
+				gm_TryRecordCrime(0x18, 1,
 					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4),
 					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)] + 4),
 					*(int *)(r + 1));
@@ -253,11 +253,11 @@ void __cdecl fcn_00561380(void *action)
 				fcn_005100f0(*(int *)(recB + 4), -1);
 				if (*(unsigned char *)(recB + 2) == 6 || *(unsigned char *)(recB + 2) == 7) {
 					io_FormatTextBuffer(text, 0x1013, *(unsigned short *)recA, r);
-					fcn_00545d40(*(int *)(recB + 4), -1, text, 0, 0x5fa, 0);
+					he_PostEntityMessage(*(int *)(recB + 4), -1, text, 0, 0x5fa, 0);
 				}
 				if (*(unsigned char *)(recA + 2) == 6 || *(unsigned char *)(recA + 2) == 7) {
 					io_FormatTextBuffer(text, 0x1011, r);
-					fcn_00545d40(*(int *)(recA + 4), -1, text, 0, 0x5fb, g_6a6538);
+					he_PostEntityMessage(*(int *)(recA + 4), -1, text, 0, 0x5fb, g_6a6538);
 				}
 			label_561b4d:
 				*(int *)(p + 0x70) = *(int *)(p + 0x70) + 1;
@@ -268,7 +268,7 @@ void __cdecl fcn_00561380(void *action)
 			if (*(unsigned short *)(r + 0x27) != 0xffff) {
 				io_FormatTextBuffer(text, 0x1739, r);
 				he_MessageBoxQuickjump(*(int *)(recA + 4), -1, text, 0, 0x5f0, *(int *)(r + 1), -1, 0, 0);
-				fcn_004f4f60(0x18, 1,
+				gm_TryRecordCrime(0x18, 1,
 					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4),
 					*(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)] + 4),
 					*(int *)(r + 1));

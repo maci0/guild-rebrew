@@ -23,7 +23,7 @@ void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 Obj* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl d3_ApplyObjectAnimation(Obj*, char*, int);
 
-Obj* __cdecl fcn_005a3580(char* name)
+Obj* __cdecl d3_SpawnCityMarkerObject(char* name)
 {
 	float pos[4];
 	char low[0x100];

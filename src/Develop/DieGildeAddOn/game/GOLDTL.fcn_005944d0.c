@@ -29,7 +29,7 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl cm_GetCommandResult(int);
 void __cdecl fcn_004c35f0(void);
-void __cdecl fcn_00529160(void*, int, int, int);
+void __cdecl he_AssignActionSlot(void*, int, int, int);
 void __cdecl fcn_00526120(int, int);
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
 void __cdecl fcn_00532ef0(void);
@@ -37,14 +37,14 @@ int __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(int, int);
 void __cdecl fcn_00657a73(int, int*, int);
 void __cdecl fcn_0046f940(int, int*);
-void __cdecl fcn_00595330(int, int, int, int, int);
+void __cdecl d2_RenderProduktionStockRows(int, int, int, int, int);
 void __cdecl fcn_00595e20(void*, int);
 void __cdecl fcn_005963f0(int, int, int, void*);
 void __cdecl fcn_00471e30(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 
 /* ADDRESS: GOLDTL 0x005944d0 */
-unsigned int __cdecl fcn_005944d0(unsigned char* a0)
+unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 {
 	unsigned char* p;
 	int window;
@@ -70,9 +70,9 @@ unsigned int __cdecl fcn_005944d0(unsigned char* a0)
 	char tmpl[0xf8];
 	unsigned short v3;
 
-	p = a0;
+	p = building;
 	idx = 1;
-	item = d2_CheckOwnerBlocked(a0);
+	item = d2_CheckOwnerBlocked(building);
 	if (item) {
 		return 0;
 	}
@@ -270,7 +270,7 @@ found_row:
 											break;
 										}
 										if (r[4]) {
-											fcn_00529160(p, *(int*) 0x7746cc, *r, found);
+											he_AssignActionSlot(p, *(int*) 0x7746cc, *r, found);
 											*(unsigned char*) (*r * 0x21c + 0x7f4e28) = 0;
 										}
 										r += 10;
@@ -413,19 +413,19 @@ after_input:
 			window = saved;
 			*(unsigned int*) ((int) g_1015ea0 + 0x6c + listControl * 0x2f4) = 1;
 			*(unsigned int*) ((int) g_1015ea0 + 0x18 + listControl * 0x2f4) = 0x30;
-			fcn_00595330(saved, 2, count, entry, 0);
+			d2_RenderProduktionStockRows(saved, 2, count, entry, 0);
 			if (idx) {
 				d2_SetForm(saved, 2);
 				idx = 0;
 				*(int*) (d2_CurrentWindowId * 0x3cc + 0x1016198) =
 				    *(int*) (d2_CurrentWindowId * 0x3cc + 0x10161b4) *
-				    (signed char) a0[0x59];
+				    (signed char) building[0x59];
 			}
-			fcn_00595e20(a0, entry);
-			fcn_005963f0(saved, 1, 0, a0);
+			fcn_00595e20(building, entry);
+			fcn_005963f0(saved, 1, 0, building);
 			if (!main_RunFrameLoop((void*) 0x5944d0, 0x677c7)) {
 				d2_SetForm(saved, 2);
-				a0[0x59] = (unsigned char) ((*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161a0) +
+				building[0x59] = (unsigned char) ((*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161a0) +
 				                             *(int*) (d2_CurrentWindowId * 0x3cc + 0x1016198)) /
 				                            *(int*) (d2_CurrentWindowId * 0x3cc + 0x10161b4));
 				fcn_00471e30(saved);

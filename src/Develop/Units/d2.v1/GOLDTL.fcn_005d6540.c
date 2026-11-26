@@ -16,7 +16,7 @@ void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl fcn_004f4830(int, void*);
 int __cdecl fcn_004f4860(char*, unsigned char, int);
 int __cdecl io_AppendText(int, ...);
@@ -75,7 +75,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 			return 0x60;
 		}
 		fcn_004f4860(a0, *(unsigned char*) rec, a1[2]);
-		fcn_004c6ae0(*(int*) (a0 + 4), -2);
+		cm_RequestModifyHealth(*(int*) (a0 + 4), -2);
 		cm_RequestChangeBits(*(int*) (recp + 4), 0x1c8, 4, limit, 0);
 		if (a0[2] != 6) {
 			return 0;
@@ -147,7 +147,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 						while (cm_GetCommandStatus(idx) == 0) {
 							fcn_00535960();
 						}
-						fcn_004c6ae0(*(int*) (a0 + 4), -2);
+						cm_RequestModifyHealth(*(int*) (a0 + 4), -2);
 						cm_RequestChangeBits(*(int*) (recp + 4), 0x1c8, 4, limit, 0);
 					}
 					g_774654 = 1;

@@ -10,7 +10,7 @@ extern double g_6629a0;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl cm_SendSetAttribute(void);
 int __cdecl cm_RequestMoveCredits(int, int, char, int);
@@ -57,7 +57,7 @@ int __cdecl fcn_005d52d0(char* p)
 			return 0x22;
 		}
 		obj = gm_LookupEntityRecordById(*(int*) (p + 0x5c));
-		fcn_004c6ae0(*(int*) (p + 4), -8);
+		cm_RequestModifyHealth(*(int*) (p + 4), -8);
 		cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
 		cm_AppendCommandSyncField(4, 1, 0x5c, &s.sel);
 		cm_RequestChangeAttribute();
@@ -90,7 +90,7 @@ int __cdecl fcn_005d52d0(char* p)
 				if (d2_CheckActionBlocker(p, 8) == 0 || gm_CheckEntityStock(p, s.n, g_773d75) == 0) {
 					goto tail;
 				}
-				fcn_004c6ae0(*(int*) (p + 4), -8);
+				cm_RequestModifyHealth(*(int*) (p + 4), -8);
 				cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
 				cm_AppendCommandSyncField(4, 1, 0x5c, &s.sel);
 				x = cm_SendSetAttribute();

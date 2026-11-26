@@ -6,7 +6,7 @@ extern char g_6811b0[];
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_IncrementMissionActionCount(char*, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-char* __cdecl fcn_004fda30(int);
+char* __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl fcn_004e4ae0(char*, int);
 void __cdecl fcn_004e4730(char*);
 void __cdecl fcn_004e4e90(char*);
@@ -55,8 +55,8 @@ void __cdecl fcn_004e2090(int event)
 	d2_SuppressOverlay = 1;
 	cm_RequestChangeBits(*(int*) &entity1[2], 0x1c8, 4, 0, 0x40000);
 	cm_RequestChangeBits(*(int*) &entity2[2], 0x1c8, 4, 0, 0x40000);
-	value = (int) fcn_004fda30(*entity1);
-	otherName = (int) fcn_004fda30(*entity2);
+	value = (int) gm_SelectEntityHeadSet(*entity1);
+	otherName = (int) gm_SelectEntityHeadSet(*entity2);
 	if (((char*) entity1)[9] == 0) {
 		sprintf(text, "%s %s %i", (char*) (value + 4), (char*) (otherName + 4), 1);
 	} else {

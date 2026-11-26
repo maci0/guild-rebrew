@@ -16,10 +16,10 @@
 extern int g_86805c;
 
 int __cdecl fcn_00503a70(int type);
-int __cdecl fcn_00486640(char* a0, int* a1, int a2);
+int __cdecl ai_CanProduceGood(char* bld, int* goodsPlan, int directOnly);
 
 /* ADDRESS: GOLDTL 0x00486640 */
-int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
+int __cdecl ai_CanProduceGood(char* bld, int* goodsPlan, int directOnly)
 {
 	int* p;
 	int ingredient;
@@ -48,7 +48,7 @@ int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
 		seg = &g_100b0c0[*p];
 		word = ((OBJECT_PROTOTYPE*) lpObjektePROT)[goodsPlan[0]].ingredient_amounts[ingredient];
 		if (seg->stock < word) {
-			if (a2 != 0) {
+			if (directOnly != 0) {
 				return 0;
 			}
 			if (seg->capacity == 0) {
@@ -61,7 +61,7 @@ int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
 			    && seg->goods_id != 0x1c1 && seg->goods_id != 0x1c2
 			    && seg->goods_id != 0x1c3) {
 				if (seg->parent_index != -1) {
-					if (!fcn_00486640(a0, (int*) &g_100d0c0[seg->parent_index], 0)) {
+					if (!ai_CanProduceGood(bld, (int*) &g_100d0c0[seg->parent_index], 0)) {
 						return 0;
 					}
 				} else {
@@ -74,13 +74,13 @@ int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
 						if (idx >= g_86805c) {
 							return 0;
 						}
-						if (rec->entity != *(char**) (a0 + 0x16c)
+						if (rec->entity != *(char**) (bld + 0x16c)
 						    && gm_GetBuildingTypeCategory((unsigned char) *rec->entity) != 2
 						    && rec->unk_08 != 0) {
 							lim = rec->limit;
 							w = ((OBJECT_PROTOTYPE*) lpObjektePROT)[goodsPlan[0]].ingredient_amounts[ingredient];
 							if (lim >= w) {
-								if (*(short*) (rec->entity + 0x27) == *(short*) (*(int*) (a0 + 0x16c) + 0x27)) {
+								if (*(short*) (rec->entity + 0x27) == *(short*) (*(int*) (bld + 0x16c) + 0x27)) {
 									found = 1;
 								} else {
 									sc = *(int*) ((char*) goodsPlan + 0x40) >> 1;
@@ -97,7 +97,7 @@ int __cdecl fcn_00486640(char* a0, int* goodsPlan, int a2)
 									if (t > n) {
 										t = n;
 									}
-									ratio = (float) *(int*) (a0 + 0x1b8) / seg->price;
+									ratio = (float) *(int*) (bld + 0x1b8) / seg->price;
 									fl = (float) t;
 									n = (int) (ratio < fl ? ratio : fl);
 									if (n > lim) {

@@ -41,7 +41,7 @@ float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_WalkEntityChain(unsigned short id);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl cm_RequestChangeFloat(int a1, int a2, float a3);
-float __cdecl fcn_00507e70(fcn_004fd4f0_Ent* a, fcn_004fd4f0_Ent* b, int k);
+float __cdecl gm_CalcSkillDuelScore(fcn_004fd4f0_Ent* a, fcn_004fd4f0_Ent* b, int k);
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x004fd4f0 */
@@ -100,7 +100,7 @@ int __cdecl fcn_004fd4f0(char* building, fcn_004fd4f0_Out* out)
 		if (ent->mood < 0.95f && ent->mood > 0.05f)
 			cm_RequestChangeFloat(ent->h, 0x1d0, sign);
 		if (out->who != 0) {
-			n = (int) (fcn_00507e70(me, ent, 4) * 10.0f + 1.0f);
+			n = (int) (gm_CalcSkillDuelScore(me, ent, 4) * 10.0f + 1.0f);
 			cm_RequestCopyEntityData(*(int*) (out->who + 4), ent->h, n, 1);
 		}
 	}

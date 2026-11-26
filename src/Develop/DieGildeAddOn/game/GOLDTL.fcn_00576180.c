@@ -12,8 +12,8 @@ int __cdecl ahm_CheckFlag(char*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl he_NotifyAlchemistEssence(char*, char*, int, int);
 float __cdecl ahm_GetEssenceValue(char*, int);
-void __cdecl fcn_004ee6d0(char*, int, float);
-void __cdecl fcn_00529160(char*, int, int, char*);
+void __cdecl ahm_RequestApplyColorComponent(char*, int, float);
+void __cdecl he_AssignActionSlot(char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
 int __cdecl ahm_HasActiveLabFeature(char*, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -43,8 +43,8 @@ void __cdecl he_RunAhmBoostEssence(char* u)
 				if (o != 0) {
 					he_NotifyAlchemistEssence(o, h, q, *(int*) (u + 0xb0));
 				}
-				fcn_004ee6d0(h, *(int*) (u + 0xb0), f + *(float*) (u + 0xb4));
-				fcn_00529160(0, 0, *(unsigned short*) h, 0);
+				ahm_RequestApplyColorComponent(h, *(int*) (u + 0xb0), f + *(float*) (u + 0xb4));
+				he_AssignActionSlot(0, 0, *(unsigned short*) h, 0);
 				he_FreeAction(u);
 				return;
 			}

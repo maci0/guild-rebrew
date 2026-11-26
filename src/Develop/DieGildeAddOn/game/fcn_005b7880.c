@@ -102,7 +102,7 @@ extern unsigned char g_773d75;
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 void* __cdecl fcn_00534c40(unsigned int, int, int, ...);
-void __cdecl fcn_005350d0(char*);
+void __cdecl d2_UpdatePagedPanel(char*);
 void __cdecl d2_HandleBookPageButton(char*);
 int __cdecl fcn_00517c00(int, int, int, char*);
 char* __cdecl fcn_0050dc90(int);
@@ -112,7 +112,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00535550(char*);
-void __cdecl fcn_00535560(char*);
+void __cdecl d2_TurnBookPagesBack(char*);
 int __cdecl fcn_005b5750(void);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
@@ -162,7 +162,7 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 	f.ent = (unsigned char*) ((int) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[building[0]]);
 	f.win = (char*) fcn_00534c40(a1, 0x6a42c8, 4, 0x6ac340, 0x6ac300,
 	                           0x6ac314, 0x6ac328);
-	fcn_005350d0(f.win);
+	d2_UpdatePagedPanel(f.win);
 	fcn_00517c00(*(unsigned short*) (building + 0x27), 1, 2, f.numA);
 	fcn_00517c00(*(unsigned short*) (building + 0x25), 1, 2, f.numB);
 	p = fcn_0050dc90((int) building);
@@ -257,13 +257,13 @@ void __cdecl fcn_005b7880(unsigned char* building, int a1)
 		if (*(int*) 0x14ce8e0) {
 			*(int*) 0x774654 = 1;
 		}
-		fcn_005350d0(f.win);
+		d2_UpdatePagedPanel(f.win);
 		d2_HandleBookPageButton(f.win);
 		if (*(unsigned char*) 0x14cf950 == 0xcd) {
 			fcn_00535550(f.win);
 		}
 		if (*(unsigned char*) 0x14cf950 == 0xcb) {
-			fcn_00535560(f.win);
+			d2_TurnBookPagesBack(f.win);
 		}
 		if (*(char*) (f.win + 0x270)) {
 			goto L7e3d;

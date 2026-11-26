@@ -3,7 +3,7 @@ int __cdecl d2_AddElementToWindow();
 #include "d2_gui.h"
 extern char g_679060[];
 int __cdecl fcn_00472640();
-float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
+float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_005c9090();
 int __cdecl fcn_005cf720();
@@ -125,7 +125,7 @@ label_5ca044:
 				v5 = fcn_004677e0(v6 - 0x23, (int) *(short*) ((int) g_772500 + 0x1ebda) + 5 + v10, 0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
 				v15[-4] = v5;
 				if (*(char*) &((unsigned short*) v15[-6])[1] != 7) {
-					v5 = (int) fcn_0050f980(*v3, *(unsigned short*) v15[-6], 1);
+					v5 = (int) gm_CalcEntityFavor(*v3, *(unsigned short*) v15[-6], 1);
 					d2_SetElementValue(v15[-4], 0, 100, v5);
 				} else {
 					d2_SetElementValue(v5, 0, 100, 0);

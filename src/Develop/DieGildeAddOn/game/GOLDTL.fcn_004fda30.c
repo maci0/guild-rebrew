@@ -11,7 +11,7 @@ int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl fcn_004fdd70(HEAD_SET* hs);
 
 /* ADDRESS: GOLDTL 0x004fda30 */
-HEAD_SET* __cdecl fcn_004fda30(unsigned int entityIndex)
+HEAD_SET* __cdecl gm_SelectEntityHeadSet(unsigned int entityIndex)
 {
 	char* v4;
 	HEAD_SET* headSet;

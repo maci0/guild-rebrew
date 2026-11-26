@@ -11,7 +11,7 @@ int __cdecl fcn_004a55c0(char *, int, int *, int, float, int *);
 int __cdecl gm_RandomMod(unsigned short);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
-void __cdecl fcn_00545d40(int, int, char *, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char *, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004b82f0 */
 int __cdecl fcn_004b82f0(int *obj)
@@ -47,6 +47,6 @@ int __cdecl fcn_004b82f0(int *obj)
 	io_FormatTextBuffer(s, *(unsigned short *) ((char *) obj + 4) + 0x12e7,
 		*(unsigned short *) t, *(unsigned short *) t, *(unsigned short *) t);
 	clamp = strlen(s) > 0x100;
-	fcn_00545d40(h->f4, h->f4, s, clamp, 0x603, 0);
+	he_PostEntityMessage(h->f4, h->f4, s, clamp, 0x603, 0);
 	return 0;
 }

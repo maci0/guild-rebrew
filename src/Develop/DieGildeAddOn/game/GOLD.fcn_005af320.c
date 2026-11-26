@@ -44,11 +44,11 @@ void __cdecl fcn_005c5da0(int, int, int, int, int);
 void __cdecl fcn_00525ef0(void);
 int __cdecl gm_IsGebaeudeOpen(int, int, int);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
-int __cdecl fcn_00596810(int, int);
+int __cdecl d2_BuildProduktionSlotGrid(int, int);
 int __cdecl fcn_00596b10(int, int, int, int);
 int __cdecl fcn_00595e20(int, int);
 int __cdecl fcn_005963f0(int, int, int, int);
-int __cdecl fcn_005974e0(int, int);
+int __cdecl d2_SyncProduktionSlotGrid(int, int);
 int __cdecl fcn_00597940(int, int, int, int, int);
 int __cdecl gm_IsWarehouse(int);
 int __cdecl gm_CanTradeWithObject(int, int);
@@ -104,7 +104,7 @@ int __cdecl d2_SellObjectsDialog(int, int);
 int __cdecl cm_DispatchCartTransfer(int, int, int, int);
 void __cdecl cm_CompleteAction0x0f(int);
 int __cdecl d2_ShowNewCartDialog(int);
-void __cdecl fcn_005af160(int, float, int);
+void __cdecl d2_CalcTradeCartCost(int, float, int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
@@ -556,7 +556,7 @@ l_sel:
 	/* 0x5bb287: hand the selected packet to the matching dialog module */
 	if (*(char*) f.v74 == 0xa) {
 		if (f.v18 != 0) {
-			f.v38 = (int) fcn_00596810(f.v18, f.v44);
+			f.v38 = (int) d2_BuildProduktionSlotGrid(f.v18, f.v44);
 			fcn_00596b10(f.v2c, 1, 1, f.v14);
 		}
 	} else if (f.v18 != 0) {
@@ -564,7 +564,7 @@ l_sel:
 			f.v38 = (int) fcn_00595e20(f.v14, f.v18);
 			fcn_005963f0(f.v2c, 1, 1, f.v14);
 		} else if (*(char*) f.v94 == 0x11) {
-			f.v38 = (int) fcn_005974e0(f.v14, f.v18);
+			f.v38 = (int) d2_SyncProduktionSlotGrid(f.v14, f.v18);
 			fcn_00597940(f.v2c, 1, 1, f.v14, f.v18);
 		}
 	}
@@ -1727,7 +1727,7 @@ l_5bd26b:
 			f.v38 = fcn_00595e20(f.v14, f.v18);
 			fcn_005963f0(f.v2c, 1, 1, f.v14);
 		} else if (*(unsigned char*) f.v94 == 0x11) {
-			f.v38 = fcn_005974e0(f.v14, f.v18);
+			f.v38 = d2_SyncProduktionSlotGrid(f.v14, f.v18);
 			fcn_00597940(f.v2c, 1, 1, f.v14, f.v18);
 		}
 	} else if (f.vD0 == f.v58 && (signed char) g_7747b0 >= 0) {
@@ -1777,7 +1777,7 @@ l_5bd632:
 		d2_SetSlotVisibility(g_00f8f120[d2_CurrentWindowId].id, 1);
 	}
 	if (f.v3c != 0 && f.v38 != 0) {
-		fcn_005af160(f.v14, f.v50, flags);
+		d2_CalcTradeCartCost(f.v14, f.v50, flags);
 	} else {
 		g_774698 = 0;
 	}

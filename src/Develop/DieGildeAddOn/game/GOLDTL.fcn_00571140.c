@@ -10,11 +10,11 @@ extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 double __cdecl fcn_0050fdb0(int, int, void*);
 int __cdecl gm_SearchTable67(int);
-void __cdecl fcn_00529160(int, int, int, void*);
+void __cdecl he_AssignActionSlot(int, int, int, void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00571140 */
-void __cdecl fcn_00571140(char* obj)
+void __cdecl he_StartAbbau(char* obj)
 {
 	int value;
 	int id;
@@ -37,7 +37,7 @@ void __cdecl fcn_00571140(char* obj)
 	id = gm_SearchTable67(*(int*) (obj + 0xb8));
 	for (p = (char*) 0x7f4ca0; (int) p < 0x85a0a0; p += 0x21c) {
 		if (*(int*) (p + 0x17c) == (int) obj) {
-			fcn_00529160(id, 0, *(unsigned short*) p, obj);
+			he_AssignActionSlot(id, 0, *(unsigned short*) p, obj);
 		}
 	}
 	gm_AddTime(dst, 0, 0, 1);

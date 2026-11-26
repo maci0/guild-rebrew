@@ -39,7 +39,7 @@ void __cdecl fcn_0059d020(char*);
 void __cdecl d2_SelectPickpocketTarget(char*);
 void __cdecl fcn_0059d630(char*);
 void __cdecl d2_SelectBriberyTarget(char*);
-void __cdecl fcn_0059dc50(char*);
+void __cdecl d2_StartRaubzugTargetSelect(char*);
 
 void __cdecl d2_RunRaeuberInteriorHud(char* e)
 {
@@ -121,7 +121,7 @@ void __cdecl d2_RunRaeuberInteriorHud(char* e)
 					d2_SelectBriberyTarget(e);
 				}
 				else if (g_7746a0 == m) {
-					fcn_0059dc50(e);
+					d2_StartRaubzugTargetSelect(e);
 				}
 			}
 		} while (main_RunFrameLoop((void*) d2_RunRaeuberInteriorHud, 0x67fff) != 0);

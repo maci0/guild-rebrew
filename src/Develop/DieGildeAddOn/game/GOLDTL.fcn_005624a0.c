@@ -19,7 +19,7 @@ int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl fcn_0050d320(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(void*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 int __cdecl cm_GetCommandStatus(int);
@@ -35,7 +35,7 @@ int __cdecl gm_IsEntityAtBuilding(void*, void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 
 /* ADDRESS: GOLDTL 0x005624a0 */
-void __cdecl fcn_005624a0(char* ctx)
+void __cdecl he_RunSpionage(char* ctx)
 {
 	char text[0x400];
 	unsigned char* rec;
@@ -77,7 +77,7 @@ void __cdecl fcn_005624a0(char* ctx)
 			*(int*) (ctx + 0xd8) = *(int*) (ent + 4);
 			cm_RequestTransferCurrencyNoKill(-1, *(int*) (g_7f4ca0
 			    + *(unsigned short*) (ctx + 8) * 0x21c + 4), g_773d75, *(int*) (ctx + 0xe4));
-			fcn_00529160(0, 0, *(unsigned short*) ent, ctx);
+			he_AssignActionSlot(0, 0, *(unsigned short*) ent, ctx);
 			*(pos14_7f4c00*)(ctx + 0x52) = gm_GameTime;
 			*(int*) (ctx + 0x84) = fcn_004c5620(1, ctx);
 			return;
@@ -182,7 +182,7 @@ void __cdecl fcn_005624a0(char* ctx)
 			rec = gm_LookupEntityRecordById(*(int*) (ctx + 0xc4));
 			if (rec != 0) {
 				io_FormatTextBuffer(text, 0x1734, *(unsigned short*) rec);
-				fcn_00545d40(*(int*) (g_7f4ca0
+				he_PostEntityMessage(*(int*) (g_7f4ca0
 				    + *(unsigned short*) (ctx + 8) * 0x21c + 4),
 				    -1, text, 0, 0x5fa, 0);
 			}

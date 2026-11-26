@@ -22,7 +22,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 int __cdecl gm_ObjCreateMutualRivalry(char* e, char* request)
 {
@@ -64,11 +64,11 @@ int __cdecl gm_ObjCreateMutualRivalry(char* e, char* request)
 		cm_RequestCopyEntityData(*(int*) (b + 4), *(int*) (a + 4), -0x19, result);
 		if (a[2] == 6 || a[2] == 7) {
 			io_FormatTextBuffer(msg, 0xfee, *(unsigned short*) b);
-			fcn_00545d40(*(int*) (a + 4), -1, msg, 0, 0x5fb, 0);
+			he_PostEntityMessage(*(int*) (a + 4), -1, msg, 0, 0x5fb, 0);
 		}
 		if (b[2] == 6 || b[2] == 7) {
 			io_FormatTextBuffer(msg, 0xfee, *(unsigned short*) a);
-			fcn_00545d40(*(int*) (b + 4), -1, msg, 0, 0x5fb, 0);
+			he_PostEntityMessage(*(int*) (b + 4), -1, msg, 0, 0x5fb, 0);
 		}
 	}
 done:

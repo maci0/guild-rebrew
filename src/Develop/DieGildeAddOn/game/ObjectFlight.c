@@ -1,6 +1,6 @@
 int __cdecl evt_LogScriptError(void*, int, char*);
 int __cdecl fcn_00445600(int, int, int, int);
-void __cdecl fcn_00414fb0(int, int, int, int*);
+void __cdecl d3_CreateFlightAnimation(int, int, int, int*);
 int __cdecl ObjectFlight(int*, int*, int*, int*, int*, int*, int*);
 
 /* ADDRESS: GOLDTL 0x0040f7c0 */
@@ -39,6 +39,6 @@ int __cdecl ObjectFlight(int* a1, int* a2, int* a3, int* a4, int* a5, int* a6, i
 		if (values[i] != 0)
 			count++;
 	}
-	fcn_00414fb0(*a1, *a2 / 0xe, count, values);
+	d3_CreateFlightAnimation(*a1, *a2 / 0xe, count, values);
 	return 1;
 }

@@ -36,7 +36,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x4ad7a0 */
-void __cdecl fcn_004ad8c0(void)
+void __cdecl gm_ReplenishOfficeCandidates(void)
 {
 	int cnt;
 	int seven;
@@ -52,7 +52,7 @@ void __cdecl fcn_004ad8c0(void)
 	int x;
 	int v;
 	int mask;
-	char *o;
+	char *candidate;
 	ENTITY_RECORD *p;
 
 	ids[0] = 1;
@@ -116,9 +116,9 @@ void __cdecl fcn_004ad8c0(void)
 			seven = 7;
 			v = (int) (g_6653bc * ((gm_RandomFloat01() + 1.0f) * 0.5f));
 			kind = kinds[j];
-			o = cm_GetCommandResult(h);
-			cm_RequestMoveCredits(*(int *) (o + 4), -1, g_773d75, v);
-			cm_BeginPacketFieldDelta(o, *(int *) (o + 4));
+			candidate = cm_GetCommandResult(h);
+			cm_RequestMoveCredits(*(int *) (candidate + 4), -1, g_773d75, v);
+			cm_BeginPacketFieldDelta(candidate, *(int *) (candidate + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, &seven);
 			cm_AppendPacketFieldDelta(1, 1, 0x167, &kind);
 			cm_RequestChangeAttribute();
@@ -126,7 +126,7 @@ void __cdecl fcn_004ad8c0(void)
 			if (j == 2) {
 				mask |= g_664e1c[(unsigned short) gm_RandomMod(j)];
 			}
-			cm_RequestChangeBits(*(int *) (o + 4), 0x1cc, 4, mask, 0);
+			cm_RequestChangeBits(*(int *) (candidate + 4), 0x1cc, 4, mask, 0);
 		}
 	}
 }

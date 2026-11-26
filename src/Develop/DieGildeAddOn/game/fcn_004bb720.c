@@ -7,7 +7,7 @@ int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl fcn_00508540(int *);
 int __cdecl gm_HasActiveSpecialObject(void *, int);
 void __cdecl io_FormatTextBuffer(void *, int, ...);
-void __cdecl fcn_00545d40(int, int, void *, int, int, void *);
+void __cdecl he_PostEntityMessage(int, int, void *, int, int, void *);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x004bb720 */
@@ -34,7 +34,7 @@ unsigned int __cdecl fcn_004bb720(void *a0)
     }
     io_FormatTextBuffer(buf, *(unsigned short *)((char *)a0 + 4) + 0x12e7, h);
     len = strlen(buf);
-    fcn_00545d40(*(int *)((char *)entity + 4), *(int *)((char *)entity + 4), buf, 0x100 < len, 0x603, 0);
+    he_PostEntityMessage(*(int *)((char *)entity + 4), *(int *)((char *)entity + 4), buf, 0x100 < len, 0x603, 0);
     cm_RequestTransferCurrencyNoKill(-1, *(int *)a0, g_773d75, h);
     return 0;
 }

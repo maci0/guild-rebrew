@@ -32,14 +32,14 @@ extern char s_6a5960[];
 extern char s_6a5968[];
 extern char s_6a597c[];
 
-void __cdecl fcn_00529160(int a, int b, int id, int c);
+void __cdecl he_AssignActionSlot(int a, int b, int id, int c);
 int __cdecl evt_FindScriptById(int a);
 void __cdecl evt_RequestScriptExit(int a);
 int __cdecl cm_SendCopyEntityData(GOLDTL_Msg549* msg);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 int __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* text);
 float __cdecl gm_GetEntityMaxHealth(unsigned short* e);
-int __cdecl fcn_00567170(unsigned short* e, int* a, int* b, int c);
+int __cdecl he_GetEntityHomeTarget(unsigned short* e, int* a, int* b, int c);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 int __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d,
                                    int e, int f, int g, void* h);
@@ -57,7 +57,7 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 
 	p = subject;
 	if (a4 <= 0.0f) {
-		fcn_00529160(0, 0, *(unsigned short*) p, 0);
+		he_AssignActionSlot(0, 0, *(unsigned short*) p, 0);
 		t = *(int*) (p + 0x184);
 		if (t != 0) {
 			t = *(int*) (t + 0x28);
@@ -98,9 +98,9 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 		return;
 	}
 	if (gm_GetEntityMaxHealth((unsigned short*) p) * g_6628cc > a4) {
-		if (fcn_00567170((unsigned short*) p, &v9, &v8, 0)) {
+		if (he_GetEntityHomeTarget((unsigned short*) p, &v9, &v8, 0)) {
 			if (*(int*) (p + 0x184) != 0) {
-				fcn_00529160(0, 0, *(unsigned short*) p, 0);
+				he_AssignActionSlot(0, 0, *(unsigned short*) p, 0);
 				t = *(int*) (*(int*) (p + 0x184) + 0x28);
 				if (t != -1) {
 					evt_RequestScriptExit(evt_FindScriptById(t));

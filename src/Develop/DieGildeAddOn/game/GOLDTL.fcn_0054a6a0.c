@@ -32,7 +32,7 @@ void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl fcn_004fd4f0(int, Out54a6a0*);
 int __cdecl io_FormatTextBuffer(char*, int, int, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl fcn_00493200(Rec54a6a0*, int);
 
@@ -99,7 +99,7 @@ void __cdecl fcn_0054a6a0(int a0)
 				v1 = g_7f4ca0[*(unsigned short*) (entity + 0x27)].kind;
 				if (v1 == 6 || v1 == 7) {
 					io_FormatTextBuffer(message, 0x19a7, pair.a, pair.b);
-					fcn_00545d40(g_7f4ca0[*(unsigned short*) (entity + 0x27)].h,
+					he_PostEntityMessage(g_7f4ca0[*(unsigned short*) (entity + 0x27)].h,
 					             0xffffffff, message, 0, 0x5ff, (char*) 0x6b5c60);
 				}
 				cm_RequestMoveCredits(g_7f4ca0[*(unsigned short*) (entity + 0x27)].h,

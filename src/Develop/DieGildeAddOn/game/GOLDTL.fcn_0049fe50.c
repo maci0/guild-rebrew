@@ -19,7 +19,7 @@ typedef struct Rec18 {
 int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 int __cdecl amt_CollectOfficeSlotsByGroup(int k, int max, Rec18* out);
 Ent* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x0049fe50 */
@@ -78,7 +78,7 @@ int __cdecl fcn_0049fe50(Ent* e)
 		if (n >= 3) {
 			sum = 0;
 			for (j = 0; j < n; j++) {
-				sum += fcn_0050f980(e->id, gm_LookupEntityRecordById(list[j].id)->id, 1);
+				sum += gm_CalcEntityFavor(e->id, gm_LookupEntityRecordById(list[j].id)->id, 1);
 			}
 			if (sum / n < 66.0f) {
 				return ord[i];

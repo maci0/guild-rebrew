@@ -10,7 +10,7 @@ int __cdecl fcn_004acc00(int*);
 extern int g_67fbac;
 
 /* ADDRESS: GOLDTL 0x004acbb0 */
-int __cdecl fcn_004acbb0(void)
+int __cdecl gm_LoadHistoricalTable(void)
 {
 	int r;
 
@@ -28,7 +28,7 @@ int __cdecl fcn_004acbb0(void)
 }
 
 /* ADDRESS: GOLDTL 0x004acee0 */
-void __cdecl fcn_004acee0(void)
+void __cdecl gm_ResetHistoricalCursors(void)
 {
 	g_7728c4 = g_67fbb0->key;
 	g_7728cc = g_67fbb4->key;
@@ -36,7 +36,7 @@ void __cdecl fcn_004acee0(void)
 
 /* ADDRESS: GOLD 0x004ad010 */
 /* ADDRESS: GOLDTL 0x004ad130 */
-char* __cdecl fcn_004ad130(int id, int* kind)
+char* __cdecl gm_LookupHistoricalEntry(int id, int* kind)
 {
 	int i;
 

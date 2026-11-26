@@ -11,7 +11,7 @@ extern pagefn g_6a81f0[5];
 extern int* g_665f08;
 extern volatile int g_6b7fac;
 
-char* __cdecl fcn_00580d50(void);
+char* __cdecl d2_InitTutorialMainIntro(void);
 char* __cdecl d2_InitTutorialMainOutro(void);
 void __cdecl d2_ShutdownTutorial(void);
 int __cdecl fcn_00470820(int, int, char*);
@@ -36,7 +36,7 @@ int __cdecl d2_StartTutorial(void)
 	if (n == 0) {
 		return -2;
 	}
-	g_774a10 = fcn_00580d50();
+	g_774a10 = d2_InitTutorialMainIntro();
 	if (g_774a10 == 0) {
 		goto fail;
 	}

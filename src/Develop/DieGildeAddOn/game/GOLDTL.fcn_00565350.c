@@ -18,7 +18,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int, ...);
 void __cdecl cm_RequestSetEntityLevel(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl sb_FindBankByName(char*);
 void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl fcn_00545780(int);
@@ -78,7 +78,7 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 			p = (char*) 0x7f4ca4; do {
 				kind = *(char*) (p - 2);
 				if ((kind == 6 || kind == 7) && *(int*) p != *(int*) (ent + 4))
-					fcn_00545d40(*(int*) p, -1, buf, 0, 0x5fe, 0);
+					he_PostEntityMessage(*(int*) p, -1, buf, 0, 0x5fe, 0);
 			} while (p += 0x21c, (int) p < 0x85a0a4);
 			*(unsigned int*) (ent + 0x1c8) &= 0x7fffffff;
 		}

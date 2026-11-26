@@ -503,3 +503,7 @@ impl = ""
 
 [specials.amt_GetRoleTemplate]
 impl = ""
+
+# command.c defines it for every target again (the n06 guard was wrong).
+[specials.cm_ExSetWohnsitz]
+impl = ""

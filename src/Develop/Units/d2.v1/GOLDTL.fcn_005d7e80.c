@@ -20,10 +20,10 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl fcn_00526120(char*, int);
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -61,12 +61,12 @@ int __cdecl gm_HandleDrainTargetAP(unsigned char* actor, unsigned char* action)
 		if (o == 0) {
 			return 0x60;
 		}
-		fcn_004c6ae0(*(int*) (actor + 4), -2);
-		fcn_004c6ae0(*(int*) (o + 4), -3);
+		cm_RequestModifyHealth(*(int*) (actor + 4), -2);
+		cm_RequestModifyHealth(*(int*) (o + 4), -3);
 		cm_RequestChangeBits(*(int*) (actor + 4), 0x1c8, 4, 0x8000, 0);
 		if (o[2] == 6 || o[2] == 7) {
 			io_FormatTextBuffer(text, 0x1dda, *(unsigned short*) actor, 3);
-			fcn_00545d40(*(int*) (o + 4), *(int*) (o + 4), text, 0, 0x5fb, s_6a59fc);
+			he_PostEntityMessage(*(int*) (o + 4), *(int*) (o + 4), text, 0, 0x5fb, s_6a59fc);
 		}
 		return 0x10;
 	}
@@ -97,8 +97,8 @@ int __cdecl gm_HandleDrainTargetAP(unsigned char* actor, unsigned char* action)
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
 				if (d2_CheckActionBlocker(actor, 2)) {
-					fcn_004c6ae0(*(int*) (actor + 4), -2);
-					fcn_004c6ae0(*(int*) (o + 4), -3);
+					cm_RequestModifyHealth(*(int*) (actor + 4), -2);
+					cm_RequestModifyHealth(*(int*) (o + 4), -3);
 					h = cm_RequestChangeBits(*(int*) (actor + 4), 0x1c8, 4, 0x8000, 0);
 					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
@@ -108,7 +108,7 @@ int __cdecl gm_HandleDrainTargetAP(unsigned char* actor, unsigned char* action)
 					fcn_00526120(text, 0);
 					if (o[2] == 6 || o[2] == 7) {
 						io_FormatTextBuffer(text, 0x1dda, *(unsigned short*) actor, 3);
-						fcn_00545d40(*(int*) (o + 4), *(int*) (o + 4), text, 0, 0x5fb, s_6a59fc);
+						he_PostEntityMessage(*(int*) (o + 4), *(int*) (o + 4), text, 0, 0x5fb, s_6a59fc);
 					}
 					g_774654 = 1;
 					result = 0x81;

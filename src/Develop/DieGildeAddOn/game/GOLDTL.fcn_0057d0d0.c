@@ -4,7 +4,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_00529160(int, int, int, char*);
+void __cdecl he_AssignActionSlot(int, int, int, char*);
 int __cdecl gm_IsEntityAtBuilding(char*, char*);
 void __cdecl he_FreeAction(char* unit);
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
@@ -56,7 +56,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 	v = *(int*) (entity + 0x70);
 	if (v == -1 || v == -2 || n == 0) {
 		for (i = 0; i < n; i++) {
-			fcn_00529160(0, 0, *(unsigned short*) objs[i], 0);
+			he_AssignActionSlot(0, 0, *(unsigned short*) objs[i], 0);
 		}
 		he_FreeAction(entity);
 		return;
@@ -86,7 +86,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 	*(int*) (entity + 0xd0) = *(int*) (found + 1);
 	for (i = 0; i < n; i++) {
 		o = (char*) objs[i];
-		fcn_00529160(0, 0, *(unsigned short*) o, entity);
+		he_AssignActionSlot(0, 0, *(unsigned short*) o, entity);
 		cm_SendCancelCharacterActions(*(int*) (o + 4));
 		ch_StartMovement(*(int*) (o + 4), *(int*) (found + 1), mode, 0, flag, "Bettler");
 	}
@@ -125,7 +125,7 @@ void __cdecl fcn_0057d0d0(char* entity)
 			}
 			if (*(int*) (entity + 0xb0) <= 0) {
 				for (i = 0; i < n; i++) {
-					fcn_00529160(0, 0, *(unsigned short*) objs[i], 0);
+					he_AssignActionSlot(0, 0, *(unsigned short*) objs[i], 0);
 				}
 				fcn_0057ceb0(entity);
 				*(int*) (entity + 0x70) = -1;

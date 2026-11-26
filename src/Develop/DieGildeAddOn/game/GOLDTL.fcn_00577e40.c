@@ -2,7 +2,7 @@
 
 char* __cdecl he_fn_Handlung(void);
 
-char* __cdecl fcn_00577e40(char* b)
+char* __cdecl he_FindAction0x18ByActor(char* b)
 {
 	char* r;
 

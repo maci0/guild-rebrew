@@ -12,7 +12,7 @@ void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
 char __cdecl fcn_0045b990(int, float*, int*, int*, float*);
 void __cdecl d3_NormalizeVector(float*);
-void __cdecl fcn_00438b40(char*, float*);
+void __cdecl d3_SetNodePosition(char*, float*);
 int __cdecl gm_GetGameSpeedSetting(void);
 
 /* ADDRESS: GOLDTL 0x00558680 */
@@ -94,7 +94,7 @@ int __cdecl he_StepSensenmannMove(char* action)
 						*(float*) (action + 0xd0) = pos1[0];
 						*(float*) (action + 0xd4) = pos1[1];
 						*(float*) (action + 0xd8) = pos1[2];
-						fcn_00438b40((char*) rec, pos1);
+						d3_SetNodePosition((char*) rec, pos1);
 done:
 						d3_SelectSceneContext(saved, 1);
 						return ret;

@@ -1,6 +1,6 @@
 #include <string.h>
 
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl d2_BuildPersonStatusDesc(void*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 
@@ -27,7 +27,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int maxCount, int* a2, voi
 				continue;
 			if ((unsigned char) (c[2] - 2) > 5)
 				continue;
-			d = fcn_0050f980((unsigned short) *a0, *(unsigned short*) c, 1);
+			d = gm_CalcEntityFavor((unsigned short) *a0, *(unsigned short*) c, 1);
 			if (d <= 33.0f || *(int*) (c + 0x210) == *(int*) ((char*) a0 + 4))
 				found++;
 		}
@@ -44,7 +44,7 @@ unsigned int __cdecl fcn_005cb860(short* a0, unsigned int maxCount, int* a2, voi
 		if ((unsigned char) (c[2] - 2) > 5)
 			continue;
 		if (*(int*) (c + 0x210) != *(int*) ((char*) a0 + 4)) {
-			d = fcn_0050f980((unsigned short) *a0, *(unsigned short*) c, 1);
+			d = gm_CalcEntityFavor((unsigned short) *a0, *(unsigned short*) c, 1);
 			if (d > 33.0f)
 				continue;
 		} else {

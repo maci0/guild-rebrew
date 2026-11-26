@@ -12,7 +12,7 @@ extern ALCHEMY_DRAW_SLOT g_772f90[3];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern ALCHEMY_PLAYER_PROTOTYPE* g_772fdc;
 
-void __cdecl fcn_004ecaa0(int a);
+void __cdecl ahm_ResetAlchemyState(int a);
 
 void __cdecl fcn_004ec9e0(void)
 {
@@ -31,6 +31,6 @@ void __cdecl fcn_004ec9e0(void)
 		g_772f78 = (g_772f7c + g_772f78) % 25;
 	}
 	if (g_772f88 >= ahm_PlayerPrototypeCount) {
-		fcn_004ecaa0(1);
+		ahm_ResetAlchemyState(1);
 	}
 }

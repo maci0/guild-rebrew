@@ -34,7 +34,7 @@ int __cdecl d3_TransformPoint(char*, char*, int*);
 int __cdecl fcn_004488e0(char*, int, int);
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_00451380(float*, float*);
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl d3_SetObjectGroundPosition(int, void*);
 void __cdecl fcn_004550b0(int, int);
@@ -130,7 +130,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		angles[1] = 0;
 		angles[2] = 0;
 		angles[1] = fcn_00451380(g_662d40, direction);
-		fcn_00438b40((char*) obj, (int*) vec);
+		d3_SetNodePosition((char*) obj, (int*) vec);
 		d3_SetObjectRotation((char*) obj, (int*) angles);
 		d3_SetObjectGroundPosition(obj, vec);
 		if (g_773dd8 != 0) {

@@ -33,11 +33,11 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl gm_RandomMod(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_00567170(char*, int*, int*, int*);
+int __cdecl he_GetEntityHomeTarget(char*, int*, int*, int*);
 int __cdecl he_PickNearestWirtshaus(char*, int, char**, int*, int*);
 
 /* ADDRESS: GOLDTL 0x00567590 */
-void __cdecl fcn_00567590(char* action)
+void __cdecl he_RunDailyRoutine(char* action)
 {
 	char* p;
 	char* q;
@@ -181,7 +181,7 @@ next0:
 			    && (kind = *(unsigned char*) (lpGebaeudePROT
 			                + (unsigned char) ** (char**) (p - 0x18) * 0x24d)) != 4
 			    && kind != 0x10 && kind != 0x13
-			    && fcn_00567170(p - 0x184, &out1, &out2, 0) != 0
+			    && he_GetEntityHomeTarget(p - 0x184, &out1, &out2, 0) != 0
 			    && (out1 != *(int*) (*(int*) p + 0x2c) || out2 != *(int*) (*(int*) p + 0x30))) {
 				if ((*(unsigned int*) (p + 0x44) & 0x800) == 0) {
 					c2 = *(unsigned char*) (0x7f4ca2
@@ -226,7 +226,7 @@ after1:
 			    && (kind = *(unsigned char*) (lpGebaeudePROT
 			                + (unsigned char) ** (char**) p * 0x24d)) != 4
 			    && kind != 0x10 && kind != 0x13
-			    && fcn_00567170(p - 0x16c, &out1, &out2, 0) != 0
+			    && he_GetEntityHomeTarget(p - 0x16c, &out1, &out2, 0) != 0
 			    && (out1 != *(int*) (*(int*) (p + 0x18) + 0x2c)
 			        || out2 != *(int*) (*(int*) (p + 0x18) + 0x30))
 			    && (*(unsigned int*) (p + 0x5c) & 0x800) == 0) {
@@ -269,7 +269,7 @@ after1:
 			    && (kind = *(unsigned char*) (lpGebaeudePROT
 			                + (unsigned char) ** (char**) (p + 8) * 0x24d)) != 4
 			    && kind != 0x10 && kind != 0x13
-			    && fcn_00567170(p - 0x164, &out2, &out1, 0) != 0
+			    && he_GetEntityHomeTarget(p - 0x164, &out2, &out1, 0) != 0
 			    && (out2 != *(int*) (*(int*) (p + 0x20) + 0x2c)
 			        || out1 != *(int*) (*(int*) (p + 0x20) + 0x30))
 			    && (*(unsigned int*) (p + 0x64) & 0x800) == 0) {

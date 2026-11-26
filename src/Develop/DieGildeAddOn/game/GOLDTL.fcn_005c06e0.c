@@ -29,8 +29,8 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_005c9220(int*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl cm_SendCopyEntityData(char* msg);
-void __cdecl fcn_004c6ae0(int id, int k);
-float __cdecl fcn_00507e70(void*, unsigned short*, int);
+void __cdecl cm_RequestModifyHealth(int id, int k);
+float __cdecl gm_CalcSkillDuelScore(void*, unsigned short*, int);
 void __cdecl fcn_00471e30(int);
 
 /* ADDRESS: GOLDTL 0x005c06e0 */
@@ -92,8 +92,8 @@ int __cdecl fcn_005c06e0(unsigned short* entityRecord)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == h1) {
-				fcn_004c6ae0(me->f4, -2);
-				f = fcn_00507e70(me, entityRecord, 4);
+				cm_RequestModifyHealth(me->f4, -2);
+				f = gm_CalcSkillDuelScore(me, entityRecord, 4);
 				if (gm_RandomFloat01() + f >= 1.0f) {
 					ev[4] = 0x2e;
 					*(int*) (ev + 8) = *(int*) (entityRecord + 2);

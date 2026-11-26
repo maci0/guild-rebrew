@@ -12,7 +12,7 @@ typedef struct Msg {
 
 extern int __cdecl fcn_004fef00(char* p);
 extern int __cdecl amt_SelectOfficeCandidates(void* p, int n, void* out);
-extern int __cdecl fcn_004a9b20(int a1, char* e, int a3, Msg* in, Msg* out);
+extern int __cdecl ai_SelectPrivilegeAction(int a1, char* e, int a3, Msg* in, Msg* out);
 extern int __cdecl ai_SelectBestMethod(int kind, unsigned short id, int a3, Msg* b, Msg* a);
 extern unsigned short __cdecl gm_RandomMod(unsigned short n);
 
@@ -79,7 +79,7 @@ int __cdecl fcn_00496e60(int a1, char* e, int y, Msg* out1, Msg* out2)
 		a.type = 0x10;
 		a.a = 0x12;
 		a.b = 0;
-		if (fcn_004a9b20(a1, e, 0, &a, &b)) {
+		if (ai_SelectPrivilegeAction(a1, e, 0, &a, &b)) {
 			*out1 = a;
 			*out2 = b;
 			return 0x27;

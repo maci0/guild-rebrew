@@ -42,7 +42,7 @@ int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
 int __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl fcn_00595e20(int, int);
 int __cdecl fcn_005963f0(int, int, int, int);
-int __cdecl fcn_005974e0(int, int);
+int __cdecl d2_SyncProduktionSlotGrid(int, int);
 int __cdecl fcn_00597940(int, int, int, int, int);
 int __cdecl d2_GetControlValue(int);
 int* __cdecl fcn_004ce590(int);
@@ -135,7 +135,7 @@ label_5c7466:
 			fcn_005963f0(win, 1, 1, v7);
 		}
 	} else {
-		v15 = fcn_005974e0(objectArg, (int) p);
+		v15 = d2_SyncProduktionSlotGrid(objectArg, (int) p);
 		fcn_00597940(win, 1, 1, v7, (int) p);
 	}
 	if (g_100f1dc != -1 && v15 != 0) {

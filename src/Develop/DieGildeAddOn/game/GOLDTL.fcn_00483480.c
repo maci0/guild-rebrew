@@ -10,9 +10,9 @@ void __cdecl fcn_00487970(int, int, int);
 void __cdecl fcn_00487c00(int, int, int);
 void __cdecl fcn_00487470(int);
 void __cdecl ai_FlagWorkerTrainingNeeded(int);
-void __cdecl fcn_00488e10(int);
+void __cdecl ai_SendAction0x8f(int);
 void __cdecl fcn_004833a0(int);
-int __cdecl fcn_00486640(int, void *, int);
+int __cdecl ai_CanProduceGood(int, void *, int);
 void __cdecl fcn_004868d0(int, void *);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_005b1e40(int);
@@ -22,7 +22,7 @@ void __cdecl fcn_0064d41a(char *, char *, ...);
 void __cdecl fcn_0047e220(int);
 void __cdecl ai_PlanResourceRestock(int, int);
 void __cdecl ai_CancelBlockedActions(int, int);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl fcn_004831f0(int);
 void __cdecl ai_MeisterCollectTrans(int);
 void __cdecl ai_MeisterTrade(int, int);
@@ -74,7 +74,7 @@ void __cdecl fcn_00483480(int entityRecord)
 	fcn_00487c00((int) rec1, entityRecord, 0x19);
 	fcn_00487470(entityRecord);
 	ai_FlagWorkerTrainingNeeded(entityRecord);
-	fcn_00488e10(entityRecord);
+	ai_SendAction0x8f(entityRecord);
 	fcn_004833a0(entityRecord);
 	mode = (short) g_7f4c04;
 	if (mode == 8 || mode == 0xd) {
@@ -91,7 +91,7 @@ void __cdecl fcn_00483480(int entityRecord)
 					if (*(int *) sp == (int) *(unsigned short *) (entityRecord + 0x1bc)) {
 						if (*(int *) ((char *) sp + 0x40) >=
 							    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
-						    fcn_00486640(entityRecord, sp, 1) != 0) {
+						    ai_CanProduceGood(entityRecord, sp, 1) != 0) {
 							*(unsigned int *) ((char *) sp + 0x54) |= 8;
 							fcn_004868d0(entityRecord, sp);
 							*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
@@ -112,7 +112,7 @@ void __cdecl fcn_00483480(int entityRecord)
 			if (*(int *) sp == (int) *(unsigned short *) (entityRecord + 0x1bc)) {
 				if (*(int *) ((char *) sp + 0x40) >=
 					    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
-				    fcn_00486640(entityRecord, sp, 1) != 0) {
+				    ai_CanProduceGood(entityRecord, sp, 1) != 0) {
 					*(unsigned int *) ((char *) sp + 0x54) |= 8;
 					fcn_004868d0(entityRecord, sp);
 					*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
@@ -144,7 +144,7 @@ type6:
 						have = gm_eval_SlotVoll(res, *(int *) sp, 1000000);
 						if ((int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) +
 							    *(int *) ((char *) sp + 0x3c) <= have) {
-							if (fcn_00486640(entityRecord, sp, 1) != 0) {
+							if (ai_CanProduceGood(entityRecord, sp, 1) != 0) {
 								*(unsigned int *) ((char *) sp + 0x54) |= 8;
 								fcn_004868d0(entityRecord, sp);
 								*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
@@ -153,7 +153,7 @@ type6:
 									*(int *) sp * 0x41 + 1 + *(int *) 0x99ec10);
 								goto tail;
 							}
-							if (fcn_00486640(entityRecord, sp, 0) != 0) {
+							if (ai_CanProduceGood(entityRecord, sp, 0) != 0) {
 								fcn_004868d0(entityRecord, sp);
 								*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
 								fcn_0064d41a(msg,
@@ -207,7 +207,7 @@ shuffle:
 			have = gm_eval_SlotVoll(res, typ, 1000000);
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
 				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
-			    fcn_00486640(entityRecord, (void *) (off + (int) g_100d0c0), 1) != 0) {
+			    ai_CanProduceGood(entityRecord, (void *) (off + (int) g_100d0c0), 1) != 0) {
 				*(unsigned int *) (off + ((int) g_100d0c0 + 0x54)) |= 8;
 				fcn_004868d0(entityRecord, (void *) (off + (int) g_100d0c0));
 				*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
@@ -241,7 +241,7 @@ shuffle:
 			have = gm_eval_SlotVoll(res, typ, 1000000);
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
 				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
-			    fcn_00486640(entityRecord, (void *) (off + (int) g_100d0c0), 0) != 0) {
+			    ai_CanProduceGood(entityRecord, (void *) (off + (int) g_100d0c0), 0) != 0) {
 				fcn_004868d0(entityRecord, (void *) (off + (int) g_100d0c0));
 				*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
 				fcn_0064d41a(msg, "Produktion von %s starten obwohl Rohstoffe fehlen",
@@ -346,7 +346,7 @@ tail:
 				    *(int *) (*(int *) ((char *) sp + 0x16a) + 1) &&
 			    (*(char **) ((char *) sp + 0x17a) == 0 ||
 			     **(char **) ((char *) sp + 0x17a) == 4)) {
-				fcn_00529160(*(int *) (entityRecord + 0x16c), 0, *(short *) ((char *) sp - 2), 0);
+				he_AssignActionSlot(*(int *) (entityRecord + 0x16c), 0, *(short *) ((char *) sp - 2), 0);
 				arg.cur++;
 			}
 		}

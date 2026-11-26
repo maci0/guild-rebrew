@@ -20,13 +20,13 @@ extern pos14_7f4c00 gm_GameTime;
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x00491270 */
-int __cdecl fcn_00491270(Ent* e, int a2, int* out)
+int __cdecl ai_EvaluateLaw0x0e(Ent* entity, int unused, int* out)
 {
 	Stat st;
 	int r;
 	int d;
 
-	r = gm_MapEntityStatRange(e->job);
+	r = gm_MapEntityStatRange(entity->job);
 	if ((*(int*)&gm_GameTime) < 4) {
 		return 0;
 	}

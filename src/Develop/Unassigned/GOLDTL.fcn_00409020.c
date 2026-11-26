@@ -1,4 +1,4 @@
-char* __cdecl fcn_00402610(char*);
+char* __cdecl d3sm_GetObjectSuperMap(char*);
 
 /* ADDRESS: GOLDTL 0x00409020 */
 int __cdecl fcn_00409020(char* obj)
@@ -14,7 +14,7 @@ int __cdecl fcn_00409020(char* obj)
 	int result;
 
 	task = *(char**) (obj + 0x128);
-	map = fcn_00402610(obj);
+	map = d3sm_GetObjectSuperMap(obj);
 	count = *(int*) (task + 0xf0);
 	result = 1;
 	if (count <= 1) {

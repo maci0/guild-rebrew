@@ -5,18 +5,18 @@ typedef struct
 	int f04;
 	int f08;
 	short f0c;
-} S54b820_Clock;
+} FEST_CLOCK;
 #pragma pack(pop)
 
-extern S54b820_Clock gm_GameTime;
+extern FEST_CLOCK gm_GameTime;
 
-void __cdecl gm_AddTime(S54b820_Clock* clock, int arg2, int arg3, int arg4);
-void __cdecl cm_SendCopyEntityData(int a1);
-void __cdecl fcn_004c5620(int a1, char* e);
-char* __cdecl gm_LookupEntityRecordById(int a1);
+void __cdecl gm_AddTime(FEST_CLOCK* clock, int days, int hours, int mins);
+void __cdecl cm_SendCopyEntityData(int packet);
+void __cdecl fcn_004c5620(int mode, char* e);
+char* __cdecl gm_LookupEntityRecordById(int entityId);
 
 /* ADDRESS: GOLDTL 0x0054b820 */
-void __cdecl fcn_0054b820(char* e)
+void __cdecl he_StartFest(char* e)
 {
 	char buf[0xf8];
 	char* found;
@@ -26,8 +26,8 @@ void __cdecl fcn_0054b820(char* e)
 	if ((e[0x78] & 4) != 0) {
 		return;
 	}
-	*(S54b820_Clock*) (e + 0x52) = gm_GameTime;
-	gm_AddTime((S54b820_Clock*) (e + 0x52), 0x18, 0, 0);
+	*(FEST_CLOCK*) (e + 0x52) = gm_GameTime;
+	gm_AddTime((FEST_CLOCK*) (e + 0x52), 0x18, 0, 0);
 	*(short*) (e + 0x56) = 0x14;
 	*(int*) (e + 0x58) = 0;
 	if (*(int*) (e + 0xc0) == 1) {
@@ -38,7 +38,7 @@ void __cdecl fcn_0054b820(char* e)
 				*(int*) (buf + 8) = *(int*) (found + 4);
 				*(int*) (buf + 0xc) = -1;
 				*(int*) (buf + 0x68) = 1;
-				*(S54b820_Clock*) (buf + 0x58) = *(S54b820_Clock*) (e + 0x52);
+				*(FEST_CLOCK*) (buf + 0x58) = *(FEST_CLOCK*) (e + 0x52);
 				*(int*) (buf + 0x6c) = *(int*) (e + 4);
 				if (found[2] == 6 || found[2] == 7) {
 					buf[0x36] = 9;

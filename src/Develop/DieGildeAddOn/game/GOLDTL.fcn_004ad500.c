@@ -1,4 +1,4 @@
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl amt_GetRoleLevel(int);
 int __cdecl fcn_004e6f10(int);
 float __cdecl amt_GetOfficeAffinityScore(unsigned char*, int);
@@ -14,7 +14,7 @@ float __cdecl fcn_004ad500(unsigned char* subjectEntity, unsigned short* otherEn
 	float s1;
 	float s2;
 
-	d = fcn_0050f980(*(unsigned short*) subjectEntity, *otherEntity, 1) * 0.01f;
+	d = gm_CalcEntityFavor(*(unsigned short*) subjectEntity, *otherEntity, 1) * 0.01f;
 	if (a4 != 0)
 		d = d + d;
 	w = (subjectEntity[0xd] + 1) * 0.1f;

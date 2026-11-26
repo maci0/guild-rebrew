@@ -13,7 +13,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl fcn_0058d5f0(int);
 void __cdecl d2_OpenTransportPanel(int);
-void __cdecl fcn_005944d0(int);
+void __cdecl d2_RunProduktionDialog(int);
 void __cdecl d2_ShowLagerOptions(int, int);
 void __cdecl d2_OpenMeisterbriefDialog(int);
 void __cdecl d2_OpenBlutracheDialog(int);
@@ -57,7 +57,7 @@ void __cdecl d2_RunZigeunerInteriorHud(int a)
 				} else if (g_7746a0 == trans) {
 					d2_OpenTransportPanel(a);
 				} else if (g_7746a0 == prod) {
-					fcn_005944d0(a);
+					d2_RunProduktionDialog(a);
 				} else if (g_7746a0 == lager) {
 					d2_ShowLagerOptions(a, 0);
 				} else if (g_7746a0 == meister) {

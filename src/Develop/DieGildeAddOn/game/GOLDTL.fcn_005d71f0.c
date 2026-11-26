@@ -48,7 +48,7 @@ extern char s_6acd1c[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 Obj* __cdecl he_StartHandlungSearch(int, int, int);
 Obj* __cdecl he_fn_Handlung(void);
 void __cdecl fcn_004c5620(int, Obj*);
@@ -89,7 +89,7 @@ int __cdecl gm_HandleGegenspionage(unsigned char* e)
 		m.fc = *(int*) (e + 4);
 		m.b36 = 2;
 		m.pos = gm_GameTime;
-		fcn_004c6ae0(*(int*) (e + 4), -4);
+		cm_RequestModifyHealth(*(int*) (e + 4), -4);
 		for (p = he_StartHandlungSearch(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {
 			if (p->fc4 == *(int*) (e + 4)) {
 				result |= 0x10;
@@ -123,7 +123,7 @@ int __cdecl gm_HandleGegenspionage(unsigned char* e)
 					m.fc = *(int*) (e + 4);
 					m.b36 = 2;
 					m.pos = gm_GameTime;
-					fcn_004c6ae0(*(int*) (e + 4), -4);
+					cm_RequestModifyHealth(*(int*) (e + 4), -4);
 					for (p = he_StartHandlungSearch(1, 0, 0x18); p != 0; p = he_fn_Handlung()) {
 						if (p->fc4 == *(int*) (e + 4)) {
 							p->pos52 = gm_GameTime;

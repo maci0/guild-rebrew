@@ -25,7 +25,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534210(int, int, char*, int, int);
 void __cdecl fcn_0057e880(int, char*, int, int);
 
-int __cdecl fcn_00591490(char* w)
+int __cdecl d2_ShowPersonTooltip(char* w)
 {
 	int h;
 	struct sel info;

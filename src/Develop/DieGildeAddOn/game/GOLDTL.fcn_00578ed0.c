@@ -1,5 +1,5 @@
 extern char* __cdecl gm_LookupEntityRecordById(int);
-extern void __cdecl fcn_00529160(int, int, int, int);
+extern void __cdecl he_AssignActionSlot(int, int, int, int);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 extern int __cdecl fcn_004a57a0(char*, int, int, char*, int, int, unsigned int*);
@@ -46,7 +46,7 @@ typedef struct Msg578 {
 /* Death-pact action state machine; resolves the target entity and reports the
  * chosen announcement to the message queue. */
 /* ADDRESS: GOLDTL 0x00578ed0 */
-void __cdecl fcn_00578ed0(char* event)
+void __cdecl he_RunDeathPact(char* event)
 {
 	Msg578 msg;
 	Req578 req;
@@ -68,7 +68,7 @@ void __cdecl fcn_00578ed0(char* event)
 		if (*(unsigned char*) (ent + 8) != 0) {
 			switch (state) {
 			case 0:
-				fcn_00529160(0, 0, *(unsigned short*) ent, (int) event);
+				he_AssignActionSlot(0, 0, *(unsigned short*) ent, (int) event);
 				*(int*) (event + 0x84) = -1;
 				*(int*) (event + 0x70) += 1;
 				return;
@@ -171,6 +171,6 @@ found_one:
 		}
 	}
 	if (ent != 0)
-		fcn_00529160(0, 0, *(unsigned short*) ent, 0);
+		he_AssignActionSlot(0, 0, *(unsigned short*) ent, 0);
 	he_FreeAction(event);
 }

@@ -1,7 +1,7 @@
 #ifndef REBREW_SERVER
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #endif
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
 void __cdecl fcn_00453270(char*);
@@ -30,7 +30,7 @@ void __cdecl evt_LogScriptError(char*, int, const char*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include <math.h>
 
-char* __cdecl fcn_00402610(char*);
+char* __cdecl d3sm_GetObjectSuperMap(char*);
 #include "client_scene_transform.h"
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
@@ -44,7 +44,7 @@ extern char g_10432c0[];
 
 char __cdecl d3_SetObjectVisible(char*, char);
 
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl vfs_ToSlashes(char*);
 int __cdecl d3_RemoveObjectAnim(char*);
@@ -240,7 +240,7 @@ int __cdecl ch_PlaceOnGround(void* object, int force)
 	float pos[4];
 
 	obj = (char*) object;
-	map = fcn_00402610(obj);
+	map = d3sm_GetObjectSuperMap(obj);
 	node = *(char**) (obj + 0x34);
 	result = 0;
 	if (map != 0) {
@@ -258,7 +258,7 @@ int __cdecl ch_PlaceOnGround(void* object, int force)
 				} else {
 					pos[1] = height;
 				}
-				fcn_00438b40(node, (int*) pos);
+				d3_SetNodePosition(node, (int*) pos);
 			}
 			result = cell;
 		} else {

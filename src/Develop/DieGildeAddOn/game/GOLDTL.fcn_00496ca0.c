@@ -12,7 +12,7 @@ void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
 
 /* ADDRESS: GOLD 0x004972c0 */
@@ -48,7 +48,7 @@ int __cdecl ai_RunBestechung(int obj, char* target_desc, int bribe_data)
 	cm_RequestChangeBits(*(int*) ((char*) obj + 4), 0x1e8, 4, 0x400, 0);
 	if (*(char*) ((char*) e + 2) == 6 || *(char*) ((char*) e + 2) == 7) {
 		io_FormatTextBuffer(buf, 0x1751, *(unsigned short*) obj, *(int*) ((char*) bribe_data + 8));
-		fcn_00545d40(*(int*) ((char*) e + 4), -1, buf, 0, 0x5fb, g_67eab0);
+		he_PostEntityMessage(*(int*) ((char*) e + 4), -1, buf, 0, 0x5fb, g_67eab0);
 	}
 	return 9;
 }

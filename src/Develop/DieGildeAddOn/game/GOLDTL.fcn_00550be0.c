@@ -4,7 +4,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl io_FormatTextBuffer(char* dst, int id, ...);
-int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
+int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 int __cdecl he_FreeAction(char* entity);
 
@@ -26,14 +26,14 @@ void __cdecl he_RunGambleBet(char* entity)
 	        0.5 + 64.0) {
 
 		io_FormatTextBuffer(buf, 0x10b5, *(unsigned int*) (entity + 0xb0) * 2);
-		fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
+		he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             buf, 0, 0x5ff, 0);
 		cm_RequestMoveCredits(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             -1, g_773d75, *(unsigned int*) (entity + 0xb0) * 2);
 	} else {		io_FormatTextBuffer(buf, 0x10b6,
 		             (int) (*(unsigned int*) (entity + 0xb0) * 0.5f));
-		fcn_00545d40(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
+		he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             ((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,
 		             buf, 0, 0x5ff, 0);
 		cm_RequestMoveCredits(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 8)].entity_id,

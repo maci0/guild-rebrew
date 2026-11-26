@@ -33,11 +33,11 @@ int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00529160(char*, int, int, int);
+void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl fcn_00532ef0(void);
 int __cdecl gm_GetMsgField(int, int);
 void __cdecl fcn_0046f940(int, char*);
-void __cdecl fcn_00595330(int, int, int, int, int);
+void __cdecl d2_RenderProduktionStockRows(int, int, int, int, int);
 void __cdecl fcn_00595e20(char*, int);
 void __cdecl fcn_005963f0(int, int, int, char*);
 void __cdecl fcn_00471e30(int);
@@ -177,7 +177,7 @@ located:
 								if (*p == 0xffff)
 									break;
 								if (p[4]) {
-									fcn_00529160(building, g_7746cc, *p, found);
+									he_AssignActionSlot(building, g_7746cc, *p, found);
 									*(char*) &((ENTITY_RECORD_VIEW*) 0x7f4ca0)[*p].selected = 0;
 								}
 								p += 10;
@@ -257,7 +257,7 @@ located:
 		}
 		itoa(count, buf, 10);
 		fcn_0046f940(item, buf);
-		fcn_00595330(h, 2, count, r, 1);
+		d2_RenderProduktionStockRows(h, 2, count, r, 1);
 		fcn_00595e20(building, r);
 		fcn_005963f0(h, 1, 0, building);
 	} while (main_RunFrameLoop((int) d2_RunProductionTradeDialog, 0x677c7));

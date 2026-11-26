@@ -16,7 +16,7 @@ int __cdecl d2_GetControlValue(int);
    message records into the 0x38-byte slot rows, then resolve each slot
    reference to its field values. */
 /* ADDRESS: GOLDTL 0x005974e0 */
-int __cdecl fcn_005974e0(int a0, char* a1)
+int __cdecl d2_SyncProduktionSlotGrid(int ctx, char* panel)
 {
     unsigned int layoutValues[68];
     unsigned int* v13;
@@ -31,7 +31,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
     unsigned short v2;
     char* v3;
 
-    v3 = a1;
+    v3 = panel;
     layoutValues[0] = 2;
     layoutValues[1] = 0;
     layoutValues[2] = 0;
@@ -133,7 +133,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
                     if (*(unsigned short*) v3 != 0x1db && *(unsigned short*) v3 != 0x1dc) {
                         goto store_slot;
                     }
-                    v8 = (int) gm_FindSlotById(*(unsigned int*) ((char*) a0 + 0x65),
+                    v8 = (int) gm_FindSlotById(*(unsigned int*) ((char*) ctx + 0x65),
                                                (unsigned int) *v5);
                     if (!v8 || *(int*) (v8 + 4)) {
                         goto store_slot;
@@ -167,7 +167,7 @@ int __cdecl fcn_005974e0(int a0, char* a1)
                 v2 = *v9;
                 v13[1] = gm_GetStorageSlotCapacity(v3, v2);
             } else {
-                v10 = (int) gm_FindSlotById(*(unsigned int*) ((char*) a0 + 0x65), *v9);
+                v10 = (int) gm_FindSlotById(*(unsigned int*) ((char*) ctx + 0x65), *v9);
                 if (v10 && *(int*) (v10 + 4)) {
                     *v13 = gm_GetMsgField(v3, (char*) v9);
                     v2 = *v9;

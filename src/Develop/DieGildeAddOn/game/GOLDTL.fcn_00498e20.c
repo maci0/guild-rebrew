@@ -15,45 +15,45 @@ typedef struct F8 {
 /* SIZE 0x8 */
 
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
-int __cdecl fcn_004a4fb0(int* a, int* b, char* q, int c);
+int __cdecl ai_FindMissingBuildingUpgrade(int* a, int* b, char* q, int c);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 void __cdecl gm_ResolveEntityById(void** out, int, int, int id);
 
 extern float g_66417c;
 
 /* ADDRESS: GOLDTL 0x00498e20 */
-int __cdecl fcn_00498e20(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
+int __cdecl ai_StartBetriebUpgraden(int actionKind, char* actor, int busy, Blk24* out1, Blk24* out2)
 {
 	Blk24 b2;
 	Blk24 b1;
 	int v0;
 	int v1;
 	int found;
-	char* q;
+	char* building;
 	int one;
 	int r;
 	F8 f;
 
-	if (a1 != 0 || e[2] == 3) {
+	if (actionKind != 0 || actor[2] == 3) {
 		return 0;
 	}
-	if (a3 == 0) {
-		if (o1->kind != 0) {
+	if (busy == 0) {
+		if (out1->kind != 0) {
 			return 0;
 		}
 	} else {
-		if (o1->kind != 0) {
+		if (out1->kind != 0) {
 			return 0;
 		}
 	}
 	one = 1;
 	f.mask = 0xa07d7bb0;
 	f.b = one;
-	if (fcn_004a5e60(e, 4, f, 0, 100.0f, &found) == 0) {
+	if (fcn_004a5e60(actor, 4, f, 0, 100.0f, &found) == 0) {
 		return 0;
 	}
-	gm_ResolveEntityById((void**) (&q), 0, 0, found);
-	if (fcn_004a4fb0(&v0, &v1, q, 0) == 0) {
+	gm_ResolveEntityById((void**) (&building), 0, 0, found);
+	if (ai_FindMissingBuildingUpgrade(&v0, &v1, building, 0) == 0) {
 		return 0;
 	}
 	b1.kind = 2;
@@ -65,15 +65,15 @@ int __cdecl fcn_00498e20(int a1, char* e, int a3, Blk24* o1, Blk24* o2)
 		b2.a = v1;
 	} else {
 		b2.kind = 4;
-		b2.a = *(int*) (q + 1);
+		b2.a = *(int*) (building + 1);
 	}
 	b2.b = one;
 	b2.f = b1.f;
-	r = ai_SelectBestMethod(0x15, *(unsigned short*) e, one, &b1, &b2);
+	r = ai_SelectBestMethod(0x15, *(unsigned short*) actor, one, &b1, &b2);
 	if (r == 0) {
 		return 0;
 	}
-	*o1 = b1;
-	*o2 = b2;
+	*out1 = b1;
+	*out2 = b2;
 	return r;
 }

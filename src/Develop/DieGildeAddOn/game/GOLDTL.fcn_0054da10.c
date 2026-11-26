@@ -16,7 +16,7 @@ void __cdecl gm_AddTime(char*, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl cm_RequestPlayAnimation(int, char*, int);
-void __cdecl fcn_00529160(int, int, int, char*);
+void __cdecl he_AssignActionSlot(int, int, int, char*);
 void __cdecl he_FreeAction(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
@@ -102,7 +102,7 @@ void __cdecl fcn_0054da10(char* a)
 					cm_SendCancelCharacterActions(*(int*) p);
 					ch_StartMovement(*(int*) p, *(int*) (ent + 1), *(int*) (q + 2),
 					    0, 0, (char*) 0x6a5ad0);
-					fcn_00529160(0, 0, *(unsigned short*) e, a);
+					he_AssignActionSlot(0, 0, *(unsigned short*) e, a);
 				} else {
 					*(int*) p = -1;
 				}
@@ -140,7 +140,7 @@ ent0:
 			if (*(int*) p != -1) {
 				e = gm_LookupEntityRecordById(*(int*) p);
 				if (e != 0 && *(int*) (e + 0x184) != 0) {
-					fcn_00529160(0, 0, *(unsigned short*) e, a);
+					he_AssignActionSlot(0, 0, *(unsigned short*) e, a);
 					cm_SendCancelCharacterActions(*(int*) p);
 					ch_StartMovement(*(int*) p, *(int*) (ent + 1), -1, 0, 1,
 					    (char*) 0x6a5ad0);
@@ -222,7 +222,7 @@ ent0:
 							"gestik/kinn_kratzen"
 						};
 
-						fcn_00529160(0, 0, *(unsigned short*) e, a);
+						he_AssignActionSlot(0, 0, *(unsigned short*) e, a);
 						cm_SendCancelCharacterActions(*(int*) p);
 						ch_StartMovement(*(int*) p, *(int*) (ent + 1),
 						    -1, 0, 1, (char*) 0x6a5ad0);

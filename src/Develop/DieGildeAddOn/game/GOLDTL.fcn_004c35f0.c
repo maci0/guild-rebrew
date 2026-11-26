@@ -5,7 +5,7 @@ extern int g_772e6c;
 double __cdecl gm_RandomFloat01(void);
 int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 void __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* Aggregates the city records by vote state, averages a weighted random score
  * over them and posts one of three localized messages for the winning side, or
@@ -42,11 +42,11 @@ void __cdecl fcn_004c35f0(void)
 		if (*(char*) (*p + 9) == 0) {
 			quiet++;
 			quietId = *(unsigned short*) *p;
-			average = (int) (fcn_0050f980(g_774970, quietId, 1) + average);
+			average = (int) (gm_CalcEntityFavor(g_774970, quietId, 1) + average);
 		} else {
 			loud++;
 			loudId = *(unsigned short*) *p;
-			average = (int) (fcn_0050f980(g_774970, loudId, 1) + average);
+			average = (int) (gm_CalcEntityFavor(g_774970, loudId, 1) + average);
 		}
 	}
 	if (quiet + loud != 0) {

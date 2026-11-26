@@ -18,7 +18,7 @@ extern unsigned char g_773d75;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0050f950(int, int);
 char* __cdecl fcn_00502cd0();
-char* __cdecl fcn_005049a0(char*);
+char* __cdecl gm_FindBuildingPrimarySlot(char*);
 char* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl fcn_0050bb50(int, unsigned char);
@@ -60,7 +60,7 @@ void __cdecl he_RunFriedhofStealAction(char* e)
 	if (r == 0) {
 		r = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, r, 0x116);
 	}
-	q = fcn_005049a0(p);
+	q = gm_FindBuildingPrimarySlot(p);
 	if (r != 0) {
 		n = 0;
 		memset(list, 0, sizeof(list));

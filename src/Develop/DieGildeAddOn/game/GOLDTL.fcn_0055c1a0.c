@@ -3,7 +3,7 @@
 char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 
-int __cdecl fcn_0055c1a0(unsigned short* e, char* b)
+int __cdecl he_HasNoActiveBuildingAction0x18(unsigned short* e, char* b)
 {
 	char* r;
 

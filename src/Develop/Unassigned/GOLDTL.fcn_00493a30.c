@@ -4,8 +4,8 @@
 extern float g_6628a8;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(int a, int b, int c);
-float __cdecl fcn_00507e70(char* a, char* b, int c);
+float __cdecl gm_CalcEntityFavor(int a, int b, int c);
+float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c);
 int __cdecl gm_HasActiveSpecialObject(char* a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00493a30 */
@@ -28,8 +28,8 @@ int __cdecl fcn_00493a30(unsigned short* key, char* e)
 	}
 	p1 = gm_LookupEntityRecordById(*(int*) (e + 0x18));
 	p2 = gm_LookupEntityRecordById(*(int*) (e + 0x14));
-	f1 = fcn_0050f980(*(unsigned short*) p1, *key, 1) * 0.01f;
-	f2 = fcn_0050f980(*(unsigned short*) p2, *key, 1) * 0.01f;
+	f1 = gm_CalcEntityFavor(*(unsigned short*) p1, *key, 1) * 0.01f;
+	f2 = gm_CalcEntityFavor(*(unsigned short*) p2, *key, 1) * 0.01f;
 	if (gm_HasActiveSpecialObject(p1, 0x22e) != 0) {
 		f1 = f1 + 0.1f;
 		f2 = f2 - 0.1f;
@@ -42,8 +42,8 @@ int __cdecl fcn_00493a30(unsigned short* key, char* e)
 
 
 
-	g1 = fcn_00507e70(p1, (char*) key, 4);
-	g2 = fcn_00507e70(p2, (char*) key, 4);
+	g1 = gm_CalcSkillDuelScore(p1, (char*) key, 4);
+	g2 = gm_CalcSkillDuelScore(p2, (char*) key, 4);
 	v = *(float*) (e + 4);
 	s = g2 + v * v * 0.0025f;
 	if (*(int*) (e + 0x44) != 0) {

@@ -38,7 +38,7 @@ unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, void*);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* One result variable set on every path keeps the two arms' tails apart (no
    cross-jump). Each arm has its own message struct: with one shared struct,
@@ -75,7 +75,7 @@ int __cdecl fcn_005dc990(unsigned char* obj, int* arg)
 			cm_SendCopyEntityData(&m);
 			if (e[2] == 6 || e[2] == 7) {
 				io_FormatTextBuffer(text2, 0xff8);
-				fcn_00545d40(*(int*) (e + 4), -1, text2, 0, 0x5fb, 0);
+				he_PostEntityMessage(*(int*) (e + 4), -1, text2, 0, 0x5fb, 0);
 			}
 			result = 1;
 		} else {
@@ -98,7 +98,7 @@ int __cdecl fcn_005dc990(unsigned char* obj, int* arg)
 			cm_SendCopyEntityData(&m);
 			if (e[2] == 6 || e[2] == 7) {
 				io_FormatTextBuffer(text2, 0xff8);
-				fcn_00545d40(*(int*) (e + 4), -1, text2, 0, 0x5fb, 0);
+				he_PostEntityMessage(*(int*) (e + 4), -1, text2, 0, 0x5fb, 0);
 			}
 			result = 1;
 		} else {

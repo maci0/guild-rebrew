@@ -4,7 +4,7 @@ extern char g_7f4ca0[];
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl atoi(char*);
-int __cdecl fcn_004ae130(int);
+int __cdecl gm_IsSlotActivePerson(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 
@@ -41,7 +41,7 @@ int __cdecl hst_HandleAnsehenBeiAmtstraegern(int* record, int index, char* text)
 		n = atoi(text) * sign[i] * 2;
 	}
 	for (i = 0; i < 768; i++) {
-		if (fcn_004ae130(i) != 0
+		if (gm_IsSlotActivePerson(i) != 0
 		    && (g_7f4ca0[i * 540 + 0x166] != 0 || g_7f4ca0[i * 540 + 0x169] != 0))
 			cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (g_7f4ca0 + i * 540 + 4), n, 1);
 	}

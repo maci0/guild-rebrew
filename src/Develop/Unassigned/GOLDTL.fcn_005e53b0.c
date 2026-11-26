@@ -48,7 +48,7 @@ void __cdecl fcn_00472640(int, int);
 int __cdecl amt_GetRoleLevel(int);
 int __cdecl d2_CheckActionBlocker(char *, int);
 int __cdecl io_FormatTextBuffer(char *, int, ...);
-float __cdecl fcn_00507e70(char *, char *, int);
+float __cdecl gm_CalcSkillDuelScore(char *, char *, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl fcn_005100f0(int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -139,7 +139,7 @@ void __cdecl fcn_005e53b0(void *arg)
                     n = 0;
                     for (i = 1; i < 5; ++i) {
                         if (items[i].entity) {
-                            j = 50 - (int)(fcn_00507e70((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], items[i].entity, 4) * -50.0f);
+                            j = 50 - (int)(gm_CalcSkillDuelScore((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], items[i].entity, 4) * -50.0f);
                             cm_RequestCopyEntityData(*(unsigned short *)items[0].entity, *(unsigned short *)items[i].entity, -j, 1);
                             selected[n++] = items[i].entity;
                         }

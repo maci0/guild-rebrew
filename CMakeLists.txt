@@ -445,6 +445,9 @@ if(REBREW_BUILD_GOLD)
   # no body under the new name (generated from that day's link log).
   rebrew_append_scaffold(GOLD_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_naming.c")
+  # The same for the 2026-11-27 naming batch n06 (generated from that day's link log).
+  rebrew_append_scaffold(GOLD_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_naming2.c")
 
   if(GOLD_SOURCES)
     add_executable(europa1400gold WIN32 ${GOLD_SOURCES})

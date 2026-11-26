@@ -83,10 +83,10 @@ extern char g_6b5c60[];
 Group* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl fcn_004c5620(int, Order*);
 Entity* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00494470(Party*, int);
+int __cdecl gm_ResolveDinnerParty(Party*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned short __cdecl gm_RandomMod(int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(Order*);
 
 void __cdecl he_UpdateFest(Order* o)
@@ -174,14 +174,14 @@ void __cdecl he_UpdateFest(Order* o)
 			}
 		}
 		party.count = (unsigned char) n;
-		if (fcn_00494470(&party, 1) == 0 && (party.ent->type == 6 || party.ent->type == 7)) {
+		if (gm_ResolveDinnerParty(&party, 1) == 0 && (party.ent->type == 6 || party.ent->type == 7)) {
 			io_FormatTextBuffer(msg, 0x1787, party.text);
 			for (i = 0; i < party.count; i++) {
 				k = party.members[i].value * 3 + 0x178f + gm_RandomMod(3);
 				io_FormatTextBuffer(line, 0x1788, party.members[i].ent->slot, k);
 				strcat(msg, line);
 			}
-			fcn_00545d40(party.ent->id, -1, msg, 0x20, 0x5fd, g_6b5c60);
+			he_PostEntityMessage(party.ent->id, -1, msg, 0x20, 0x5fd, g_6b5c60);
 		}
 		o->stamp = (*(pos14_7f4c00*)&gm_GameTime);
 		fcn_004c5620(-1, o);

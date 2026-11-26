@@ -27,9 +27,9 @@ int __cdecl fcn_004c5620(char, char*);
 int __cdecl fcn_004c5980(void*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*, char*);
-void __cdecl fcn_00529160(char*, char*, unsigned int, char*);
+void __cdecl he_AssignActionSlot(char*, char*, unsigned int, char*);
 void __cdecl he_FreeAction(char*);
 
 /* ADDRESS: GOLDTL 0x0054e390 */
@@ -74,7 +74,7 @@ void __cdecl he_RunRazzia(char* e)
 				if (*(int*) p != -1) {
 					u = gm_LookupEntityRecordById(*(int*) p);
 					if (u != 0) {
-						fcn_00529160(own, 0, *(unsigned short*) u, e);
+						he_AssignActionSlot(own, 0, *(unsigned short*) u, e);
 						cm_SendCancelCharacterActions(*(int*) p);
 						ch_StartMovement(*(int*) p, *(int*) (own + 1), -1, 0, 0,
 						             (char*) 0x6a5ad8);
@@ -115,7 +115,7 @@ void __cdecl he_RunRazzia(char* e)
 						cm_SendCancelCharacterActions(*(int*) p);
 						ch_StartMovement(*(int*) p, *(int*) (own + 1), *(int*) (slot + 2), 0, 0,
 						             (char*) 0x6a5ad8);
-						fcn_00529160(own, 0, *(unsigned short*) u, e);
+						he_AssignActionSlot(own, 0, *(unsigned short*) u, e);
 					} else {
 						*(int*) p = -1;
 					}
@@ -267,7 +267,7 @@ label_54e6a1:
 				kc = *(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_state;
 				if (kc == 6 || kc == 7) {
 					io_FormatTextBuffer(text, 0x1c55, *(unsigned short*) (own + 0x27), own, m);
-					fcn_00545d40(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
+					he_PostEntityMessage(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
 				}
 				*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 				gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
@@ -277,7 +277,7 @@ label_54e6a1:
 			other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
 			m = fcn_004d5450(other) + 0x1125;
 			io_FormatTextBuffer(text, 0x114b, m, *(unsigned short*) (own + 0x27), own, m);
-			fcn_00545d40(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
+			he_PostEntityMessage(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
 			kc = *(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_state;
 			if (kc == 6 || kc == 7) {
 				io_FormatTextBuffer(text, 0x1c56, own);
@@ -327,7 +327,7 @@ label_54e6a1:
 						cm_SendCancelCharacterActions(*(int*) p);
 						ch_StartMovement(*(int*) p, *(int*) (own + 1), *(int*) (slot + 2), 0, 0,
 						             (char*) 0x6a5ad8);
-						fcn_00529160(own, 0, *(unsigned short*) u, 0);
+						he_AssignActionSlot(own, 0, *(unsigned short*) u, 0);
 					}
 				}
 				p += 4;

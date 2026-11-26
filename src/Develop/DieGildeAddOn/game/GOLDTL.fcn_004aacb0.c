@@ -1,11 +1,11 @@
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_HasActiveSpecialObject(void*, int);
 int __cdecl abs(int);
 
 
 /* ADDRESS: GOLDTL 0x004aacb0 */
-int __cdecl fcn_004aacb0(unsigned short* subjectEntity, unsigned short* candidateA, unsigned short* candidateB, int* comparisonOut)
+int __cdecl ai_CompareOfficeCandidates(unsigned short* subjectEntity, unsigned short* candidateA, unsigned short* candidateB, int* comparisonOut)
 {
 	float d2;
 	float q2;
@@ -19,9 +19,9 @@ int __cdecl fcn_004aacb0(unsigned short* subjectEntity, unsigned short* candidat
 		return 0;
 	if (subjectEntity == candidateA)
 		return 1;
-	d2 = (float)(fcn_0050f980(*candidateA, *subjectEntity, 1));
+	d2 = (float)(gm_CalcEntityFavor(*candidateA, *subjectEntity, 1));
 	q2 = gm_GetEntitySkill((char*) candidateA, 4);
-	d3 = (float)(fcn_0050f980(*candidateB, *subjectEntity, 1));
+	d3 = (float)(gm_CalcEntityFavor(*candidateB, *subjectEntity, 1));
 	q3 = gm_GetEntitySkill((char*) candidateB, 4);
 	s2 = (float)(q2 * 0.34 + d2 * 0.66);
 	s3 = (float)(q3 * 0.34 + d3 * 0.66);

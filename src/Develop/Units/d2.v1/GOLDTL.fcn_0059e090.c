@@ -60,7 +60,7 @@ void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
-void __cdecl fcn_005974e0(char*, int);
+void __cdecl d2_SyncProduktionSlotGrid(char*, int);
 void __cdecl fcn_00597940(int, int, int, char*, int);
 
 /* Transport dialog: shows the export/import pick for building b and
@@ -140,7 +140,7 @@ void __cdecl fcn_0059e090(char* b)
 			d = 0.25;
 		}
 		slot->alpha = (float) d;
-		fcn_005974e0(b, grp);
+		d2_SyncProduktionSlotGrid(b, grp);
 		fcn_00597940(h, 1, 0, b, grp);
 		if (g_100f1dc == 2) {
 			if (d2_CurrentElementId == a) {

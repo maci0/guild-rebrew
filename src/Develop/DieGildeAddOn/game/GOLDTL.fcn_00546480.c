@@ -7,7 +7,7 @@ extern float g_6628c8;
 
 void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl d3_GetObjectVerticalBounds(char*, float*, float*);
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 
 /* ADDRESS: GOLDTL 0x00546480 */
 void __cdecl fcn_00546480(char* entity)
@@ -47,6 +47,6 @@ void __cdecl fcn_00546480(char* entity)
 		out[0] = (float) sin(angle) * t + pos[0];
 		out[1] = (hi - lo) * 0.5 + pos[1];
 		out[2] = (float) cos(angle) * t + pos[2];
-		fcn_00438b40((char*) slot->d, (int*) out);
+		d3_SetNodePosition((char*) slot->d, (int*) out);
 	}
 }

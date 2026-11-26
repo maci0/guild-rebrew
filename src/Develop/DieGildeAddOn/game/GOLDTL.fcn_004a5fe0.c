@@ -3,7 +3,7 @@ extern unsigned char* g_entity_ptr;
 
 unsigned short __cdecl gm_RandomMod(int a0);
 int __cdecl fcn_005cfb00(unsigned short* a0, int* a1, int a2);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x004a5fe0 */
 int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, float a5, int maxCount, int* entityIds)
@@ -44,7 +44,7 @@ int __cdecl fcn_004a5fe0(unsigned short* a0, int a1, int a2, int a3, float a4, f
 				goto next;
 			}
 			if (flag != 0) {
-				f = fcn_0050f980(*(unsigned short*) (ent + 0x27), *a0, 1);
+				f = gm_CalcEntityFavor(*(unsigned short*) (ent + 0x27), *a0, 1);
 				if (f < *(float*) (buf + 0x11) || f > *(float*) (buf + 0x11)) {
 					goto next;
 				}

@@ -31,7 +31,7 @@ int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 int __cdecl fcn_004a48a0(char*, int);
-int __cdecl fcn_004a4fb0(int* a, int* b, char* q, int c);
+int __cdecl ai_FindMissingBuildingUpgrade(int* a, int* b, char* q, int c);
 int __cdecl fcn_0050d170(int);
 int __cdecl fcn_0050d320(char*, unsigned char);
 float __cdecl fcn_0050bb50(int, unsigned char);
@@ -103,7 +103,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 			goto sell;
 		}
 	}
-	if (fcn_004a4fb0(&a2, &a0, w, 0)) {
+	if (ai_FindMissingBuildingUpgrade(&a2, &a0, w, 0)) {
 		flag = 1;
 		c.kind = 2;
 		c.a = a2;

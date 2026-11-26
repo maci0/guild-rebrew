@@ -110,7 +110,7 @@ typedef struct {
 } FRAME;
 
 int __cdecl fcn_00534c40(int, int, int, int, int, int, int);
-void __cdecl fcn_005350d0(int);
+void __cdecl d2_UpdatePagedPanel(int);
 int __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00517c00(int, int, int, void*);
 char* __cdecl fcn_0050dc90(char*);
@@ -127,7 +127,7 @@ int __cdecl d2_CanCloseWindowDuringTutorial(void);
 void __cdecl fcn_005b6130(int, int);
 void __cdecl d2_HandleBookPageButton(int);
 void __cdecl fcn_00535550(int);
-void __cdecl fcn_00535560(int);
+void __cdecl d2_TurnBookPagesBack(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
@@ -215,7 +215,7 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 		book = (char*) fcn_00534c40(a2, 0x6a42c8, 4, 0x6ac2cc, 0x6ac300, 0x6ac314, 0x6ac328);
 	}
 	f.book = book;
-	fcn_005350d0((int) book);
+	d2_UpdatePagedPanel((int) book);
 	fcn_0057e880(0x21, (int) book, 0, 0);
 	fcn_00517c00(*(unsigned short*) (rec + 0x27), 1, 2, f.txt7a0);
 	fcn_00517c00(*(unsigned short*) (rec + 0x25), 1, 2, f.txt740);
@@ -314,12 +314,12 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 		if (G(0x14ce8e0) != 0 && d2_CanCloseWindowDuringTutorial() == 1)
 			G(0x774654) = 1;
 		fcn_005b6130((int) f.book, (int) a1);
-		fcn_005350d0((int) f.book);
+		d2_UpdatePagedPanel((int) f.book);
 		d2_HandleBookPageButton((int) f.book);
 		if (*(unsigned char*) 0x14cf950 == 0xcd)
 			fcn_00535550((int) f.book);
 		if (*(unsigned char*) 0x14cf950 == 0xcb)
-			fcn_00535560((int) f.book);
+			d2_TurnBookPagesBack((int) f.book);
 		if (*(char*) (f.book + 0x270) != 0)
 			goto L6fa2;
 		if (f.v50 != -1) {

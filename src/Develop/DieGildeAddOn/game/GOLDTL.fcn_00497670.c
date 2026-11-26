@@ -5,7 +5,7 @@ float __cdecl fcn_0050bb50(int id, unsigned char k);
 int __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char k, int n);
 
 /* ADDRESS: GOLDTL 0x00497670 */
-int __cdecl fcn_00497670(int a1, char* it, char* x)
+int __cdecl ai_RunRaumKaufen(int unused, char* it, char* x)
 {
 	char* t;
 

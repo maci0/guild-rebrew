@@ -31,8 +31,8 @@ extern char g_6b5c60[];
 Ent* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl gm_GetEntityHealthRatio(Ent*);
 void __cdecl he_SendCmdMessage(Ent*, Cmd*, char*, char*);
-void __cdecl fcn_004f4f60(int, int, int, int, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl gm_TryRecordCrime(int, int, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 
 int __cdecl fcn_004e1330(char* event)
@@ -54,22 +54,22 @@ int __cdecl fcn_004e1330(char* event)
 	}
 	if (b->busy != 0 || a->busy != 0) {
 		if (b->kind == 6 || b->kind == 7) {
-			fcn_00545d40((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[b->id].entity_id), -1, g_14a9a5c, 0, 0x5ec, 0);
+			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[b->id].entity_id), -1, g_14a9a5c, 0, 0x5ec, 0);
 		}
 		if (a->kind == 6 || a->kind == 7) {
-			fcn_00545d40((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[a->id].entity_id), -1, g_14a9a5c, 0, 0x5ec, 0);
+			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[a->id].entity_id), -1, g_14a9a5c, 0, 0x5ec, 0);
 		}
 		return 0;
 	}
 	if (gm_GetEntityHealthRatio(a) <= 0.0f) {
 		if (b->kind == 6 || b->kind == 7) {
-			fcn_00545d40((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[b->id].entity_id), -1, g_14a9a58, 0, 0x5ec, 0);
+			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[b->id].entity_id), -1, g_14a9a58, 0, 0x5ec, 0);
 		}
 		return 0;
 	}
 	if (gm_GetEntityHealthRatio(b) <= 0.0f) {
 		if (a->kind == 6 || a->kind == 7) {
-			fcn_00545d40((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[a->id].entity_id), -1, g_14a9a58, 0, 0x5ec, 0);
+			he_PostEntityMessage((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[a->id].entity_id), -1, g_14a9a58, 0, 0x5ec, 0);
 		}
 		return 0;
 	}
@@ -94,7 +94,7 @@ int __cdecl fcn_004e1330(char* event)
 		if (link != 0) {
 			n = *(int*) (link + 1);
 		}
-		fcn_004f4f60(0x14, 1, a->handle, b->handle, n);
+		gm_TryRecordCrime(0x14, 1, a->handle, b->handle, n);
 	}
 	return result;
 }

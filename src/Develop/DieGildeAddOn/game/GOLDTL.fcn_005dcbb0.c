@@ -45,7 +45,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 Obj* __cdecl fcn_005cd440(Req*, char*, int, int);
 Obj* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCopyEntityData(Msg*);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 static __inline void send_hit(int id)
 {
@@ -86,7 +86,7 @@ int __cdecl fcn_005dcbb0(char* e, char* a2)
 			send_hit(r->id);
 			if (r->kind == 6 || r->kind == 7) {
 				io_FormatTextBuffer(msg, 0xff6);
-				fcn_00545d40(r->id, -1, msg, 0, 0x5fb, 0);
+				he_PostEntityMessage(r->id, -1, msg, 0, 0x5fb, 0);
 			}
 			return 1;
 		}
@@ -95,7 +95,7 @@ int __cdecl fcn_005dcbb0(char* e, char* a2)
 		if (r != 0) {
 			if (r->kind == 6 || r->kind == 7) {
 				io_FormatTextBuffer(msg, 0xff6);
-				fcn_00545d40(r->id, -1, msg, 0, 0x5fb, 0);
+				he_PostEntityMessage(r->id, -1, msg, 0, 0x5fb, 0);
 			}
 			return 1;
 		}

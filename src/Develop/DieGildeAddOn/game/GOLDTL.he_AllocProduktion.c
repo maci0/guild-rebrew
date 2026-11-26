@@ -37,7 +37,7 @@ extern char* lpObjektePROT;
 char* __cdecl gm_SearchTable67(int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl gm_AddTime(struct pos14*, int, int, int);
-void __cdecl fcn_00529160(char*, int, int, char*);
+void __cdecl he_AssignActionSlot(char*, int, int, char*);
 float __cdecl fcn_0050fdb0(int, int, char*);
 
 void __cdecl he_AllocProduktion(char* e)
@@ -65,7 +65,7 @@ void __cdecl he_AllocProduktion(char* e)
 	*(int*) (e + 0xc8) = 0;
 	for (i = 0; i < 768; i++) {
 		if ((*(char**)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].ptr_17c) == e) {
-			fcn_00529160(r, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), e);
+			he_AssignActionSlot(r, 0, (*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index), e);
 		}
 	}
 	*(float*) (e + 0xcc) = (fcn_0050fdb0(*(unsigned short*) (e + 8), 8, e + 0x8c) - 0.5) * 0.25;

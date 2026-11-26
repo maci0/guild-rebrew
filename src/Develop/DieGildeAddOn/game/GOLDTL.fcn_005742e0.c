@@ -21,7 +21,7 @@ extern struct modelent g_6a6ee8[];
 
 void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl fcn_004488e0(char* name, int a, int b);
-void __cdecl fcn_00438b40(char*, struct vec3*);
+void __cdecl d3_SetNodePosition(char*, struct vec3*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl fcn_00514d80(char*);
 void __cdecl fcn_004143b0(char*, int, int);
@@ -29,7 +29,7 @@ void __cdecl d3_SetSubtreeVisible(char*, int);
 void __cdecl fcn_00573e10(char*);
 void __cdecl d3_BindEntitySceneObject(char*, unsigned char*, int);
 
-char* __cdecl fcn_005742e0(float* rot, struct vec3* pos, unsigned char* kind, char* model, char* u)
+char* __cdecl he_CreateGebaeudeSceneModel(float* rot, struct vec3* pos, unsigned char* kind, char* model, char* u)
 {
 	int saved;
 	char name[0x100];
@@ -62,7 +62,7 @@ char* __cdecl fcn_005742e0(float* rot, struct vec3* pos, unsigned char* kind, ch
 		d3_SelectSceneContext(saved, 1);
 		return 0;
 	}
-	fcn_00438b40(h, pos);
+	d3_SetNodePosition(h, pos);
 	d3_SetObjectRotation(h, rot);
 	h[0x215] &= 0xfe;
 	h[0x214] |= 0x80;
@@ -72,7 +72,7 @@ char* __cdecl fcn_005742e0(float* rot, struct vec3* pos, unsigned char* kind, ch
 		d3_SelectSceneContext(saved, 1);
 		return 0;
 	}
-	fcn_00438b40(h, pos);
+	d3_SetNodePosition(h, pos);
 	d3_SetObjectRotation(h, rot);
 	fcn_00514d80(h);
 	fcn_004143b0(h, 1, 0);

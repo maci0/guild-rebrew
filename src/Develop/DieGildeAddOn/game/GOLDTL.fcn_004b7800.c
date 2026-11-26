@@ -16,7 +16,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl io_FormatTextBuffer(char* buf, int id, int a, int b);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char c, int d);
-int __cdecl fcn_00545d40(int a, int b, char* s, int flag, int c, int d);
+int __cdecl he_PostEntityMessage(int a, int b, char* s, int flag, int c, int d);
 
 /* Builds a chat line for the owner of the record named by a0. */
 /* ADDRESS: GOLDTL 0x004b7800 */
@@ -49,6 +49,6 @@ int __cdecl fcn_004b7800(int* request)
 	io_FormatTextBuffer(buf, w + 0x12e7, y, r);
 	cm_RequestTransferCurrencyNoKill(-1, *request, g_773d75, r);
 	e = (char*) *(int*) (h + 4);
-	fcn_00545d40((int) e, (int) e, buf, strlen(buf) > 0x100, 0x603, 0);
+	he_PostEntityMessage((int) e, (int) e, buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

@@ -33,8 +33,8 @@ int __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
-int __cdecl fcn_004f4f60(int, int, int, int, int);
+int __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
+int __cdecl gm_TryRecordCrime(int, int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -106,9 +106,9 @@ int __cdecl fcn_005c02a0(char* entity)
                         fcn_00535960();
                     if (entity[2] == 6 || entity[2] == 7) {
                         io_FormatTextBuffer(text, 0x1751, g_774970, amount);
-                        fcn_00545d40(*(int*)(entity + 4), -1, text, 0, 0x5fb, g_67eab0);
+                        he_PostEntityMessage(*(int*)(entity + 4), -1, text, 0, 0x5fb, g_67eab0);
                     }
-                    fcn_004f4f60(0x10, 1, *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*)(entity + 4), -1);
+                    gm_TryRecordCrime(0x10, 1, *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*)(entity + 4), -1);
                     g_774654 = 1;
                     result = 1;
                 }

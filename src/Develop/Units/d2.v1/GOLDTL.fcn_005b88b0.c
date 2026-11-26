@@ -53,7 +53,7 @@ typedef struct
 #define GUI(i) (((Ctl*) *(void**) 0x1015ea0)[i])
 
 void* __cdecl fcn_00534c40(unsigned int, int, char, ...);
-void __cdecl fcn_005350d0(char*);
+void __cdecl d2_UpdatePagedPanel(char*);
 void __cdecl d2_HandleBookPageButton(char*);
 int __cdecl fcn_00517c00(int, int, int, char*);
 char* __cdecl fcn_0050dc90(int);
@@ -67,7 +67,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_005b6130(int, char*);
 void __cdecl fcn_00535550(char*);
-void __cdecl fcn_00535560(char*);
+void __cdecl d2_TurnBookPagesBack(char*);
 int __cdecl fcn_005b8760(void);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
@@ -148,7 +148,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 
 	win = (char*) fcn_00534c40(a1, 0x6a42c8, 4, 0x6ac340, 0x6ac300, 0x6ac314,
 	                          0x6ac328);
-	fcn_005350d0(win);
+	d2_UpdatePagedPanel(win);
 	fcn_00517c00(*(unsigned short*) (building + 0x27), 1, 2, numA);
 	fcn_00517c00(*(unsigned short*) (building + 0x25), 1, 2, numB);
 	p = fcn_0050dc90((int) building);
@@ -253,14 +253,14 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 		if (*(int*) 0x14ce8e0) {
 			*(int*) 0x774654 = 1;
 		}
-		fcn_005350d0(win);
+		d2_UpdatePagedPanel(win);
 		d2_HandleBookPageButton(win);
 		fcn_005b6130((int) win, building);
 		if (*(unsigned char*) 0x14cf950 == 0xcd) {
 			fcn_00535550(win);
 		}
 		if (*(unsigned char*) 0x14cf950 == 0xcb) {
-			fcn_00535560(win);
+			d2_TurnBookPagesBack(win);
 		}
 		if (*(char*) (win + 0x270)) {
 			goto packet2;

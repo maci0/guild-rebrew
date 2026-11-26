@@ -7,7 +7,7 @@ int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl vfs_ReadVec3(void* stream, void* dst);
 void __cdecl ReportClientMessage(const char* msg);
-void __cdecl fcn_00438b40(char* object, void* vector);
+void __cdecl d3_SetNodePosition(char* object, void* vector);
 void __cdecl d3_SetObjectRotation(char* object, void* vector);
 char* __cdecl d3_SpawnObject(int kind, char* name);
 void __cdecl fcn_00439aa0(char* object);
@@ -318,7 +318,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			break;
 		}
 		d3_SetObjectRotation(object, object + 0x84);
-		fcn_00438b40(object, object + 0x4c);
+		d3_SetNodePosition(object, object + 0x4c);
 		object[0x214] = (char) (object[0x214] | 0x80);
 		if (marker != 0) {
 			d3_SetObjectVisible(object, 0);

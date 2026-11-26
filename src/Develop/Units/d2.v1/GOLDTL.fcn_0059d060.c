@@ -53,7 +53,7 @@ int __cdecl he_fn_Handlung(void);
 int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl fcn_004c35f0(void);
 int __cdecl io_FormatTextBuffer(char*, int, int);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl he_AssignActionSlot(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -142,7 +142,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 					for (p = (char*) 0x7e4260; (int) p < 0x7e42e0; p += 4) {
 						player = *(Player**) p;
 						if (player != 0 && player->x188 != 0)
-							fcn_00529160(0, 0, *(unsigned short*) player, dlg2);
+							he_AssignActionSlot(0, 0, *(unsigned short*) player, dlg2);
 					}
 				}
 			}

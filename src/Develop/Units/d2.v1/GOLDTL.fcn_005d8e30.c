@@ -6,7 +6,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_004f5e20(int, int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -39,7 +39,7 @@ int __cdecl gm_HandleAbbitte(char* e, char* o)
 			return 0x60;
 		}
 		fcn_004f5e20(*(int*) (e + 4), n);
-		fcn_004c6ae0(*(int*) (e + 4), -*(int*) (o + 4));
+		cm_RequestModifyHealth(*(int*) (e + 4), -*(int*) (o + 4));
 	}
 	if (e[2] == 6) {
 		r = 0;
@@ -58,7 +58,7 @@ int __cdecl gm_HandleAbbitte(char* e, char* o)
 				if (d2_CurrentElementId == ok) {
 					v = d2_GetControlValue(sl);
 					if (d2_CheckActionBlocker(e, v) != 0) {
-						fcn_004c6ae0(*(int*) (e + 4), -v);
+						cm_RequestModifyHealth(*(int*) (e + 4), -v);
 						io_FormatTextBuffer(buf, 0x1deb, fcn_004f5e20(*(int*) (e + 4), v));
 						fcn_00526120(buf, 0);
 						r = 1;

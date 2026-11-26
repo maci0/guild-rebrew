@@ -19,7 +19,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowLagerOptions(char*, int);
-void __cdecl fcn_005944d0(char*);
+void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
@@ -61,7 +61,7 @@ void __cdecl d2_RunSchneiderMenu(char* obj, int arg)
 			if (g_7746a0 == stats) {
 				d2_ShowLagerOptions(obj, *(int*) (obj + 0x5d));
 			} else if (g_7746a0 == info) {
-				fcn_005944d0(obj);
+				d2_RunProduktionDialog(obj);
 			} else if (g_7746a0 == family) {
 				d2_OpenTransportPanel(obj);
 			} else if (g_7746a0 == title) {

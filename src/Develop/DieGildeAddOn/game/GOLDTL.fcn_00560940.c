@@ -12,7 +12,7 @@ struct pos14 {
 #pragma pack()
 
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00529160(int, int, int, char*);
+void __cdecl he_AssignActionSlot(int, int, int, char*);
 void __cdecl gm_AddTime(struct pos14*, int, int, int);
 
 void __cdecl he_StartGetier(char* e)
@@ -23,7 +23,7 @@ void __cdecl he_StartGetier(char* e)
 	for (i = 0; i < *(unsigned char*) (e + 0xac); i++) {
 		p = gm_LookupEntityRecordById(((int*) (e + 0x8c))[i]);
 		if (p != 0) {
-			fcn_00529160(0, 0, *(unsigned short*) p, e);
+			he_AssignActionSlot(0, 0, *(unsigned short*) p, e);
 		}
 	}
 	*(struct pos14*) (e + 0x52) = *(struct pos14*) (e + 0x44);

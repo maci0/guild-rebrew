@@ -1,4 +1,4 @@
-extern void __cdecl fcn_004c6ae0(int, int);
+extern void __cdecl cm_RequestModifyHealth(int, int);
 extern void __cdecl cm_SendCopyEntityData(void *);
 
 typedef struct tagS495F80 {
@@ -19,7 +19,7 @@ int __cdecl fcn_00495f80(int *p, int *q)
 {
     S495F80 s;
 
-    fcn_004c6ae0(p[1], -q[4]);
+    cm_RequestModifyHealth(p[1], -q[4]);
     s.f36 = 1;
     s.f04 = 0x60;
     s.f08 = p[1];

@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 // SIZE 0x3dc
-struct s_1043370 {
+struct SCENE_CONTEXT_SLOT {
 	int p;
 	char pad[0x3d8];
 };
@@ -15,7 +15,7 @@ void __cdecl fcn_00454560(int);
 void __cdecl fcn_00442e30(void);
 void __cdecl gv_Free3Fields(int);
 
-void __cdecl fcn_00510930(void)
+void __cdecl d3_ClearAllSceneContexts(void)
 {
 	int i;
 
@@ -40,9 +40,9 @@ void __cdecl fcn_00510930(void)
 		}
 	}
 	for (i = 0; i < 64; i++) {
-		if (((struct s_1043370*)g_1043370)[i].p != 0) {
-			gv_Free3Fields(((struct s_1043370*)g_1043370)[i].p);
-			((struct s_1043370*)g_1043370)[i].p = 0;
+		if (((struct SCENE_CONTEXT_SLOT*)g_1043370)[i].p != 0) {
+			gv_Free3Fields(((struct SCENE_CONTEXT_SLOT*)g_1043370)[i].p);
+			((struct SCENE_CONTEXT_SLOT*)g_1043370)[i].p = 0;
 		}
 	}
 }

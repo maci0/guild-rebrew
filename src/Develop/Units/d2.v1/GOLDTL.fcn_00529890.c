@@ -22,7 +22,7 @@ void d3snd_PlayObjectClickSound(char* entity);
 float gm_GetEntityHealthRatio(char* entity);
 int fcn_00507c30(int key);
 void fcn_00517c00(int id, int a, int b, char* out);
-void fcn_00529160(char* obj, int a, int id, int b);
+void he_AssignActionSlot(char* obj, int a, int id, int b);
 int fcn_00529800(char* entity, int* out);
 void sv_ClearObjectSelection(void);
 void fcn_00534210(int a, int b, char* entity, int c, int d);
@@ -318,7 +318,7 @@ label_529fe5:
 			v14 = (unsigned int*) 0x7e30d0;
 			do {
 				if (v14[4]) {
-					fcn_00529160(building, 0, *v14, 0);
+					he_AssignActionSlot(building, 0, *v14, 0);
 				}
 				v14 = &v14[10];
 			} while ((int) v14 < 0x7e35d0);

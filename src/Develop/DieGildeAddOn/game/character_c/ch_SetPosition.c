@@ -1,7 +1,7 @@
 #ifndef REBREW_SERVER
 #include "Develop/DieGildeAddOn/game/ch_script.h"
 #endif
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
 void __cdecl fcn_00453270(char*);
@@ -30,7 +30,7 @@ void __cdecl evt_LogScriptError(char*, int, const char*);
 extern void* ch_CharacterSlots[];
 #include <math.h>
 
-char* __cdecl fcn_00402610(char*);
+char* __cdecl d3sm_GetObjectSuperMap(char*);
 #include "../client_scene_transform.h"
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
@@ -47,7 +47,7 @@ extern char g_10432c0[];
 
 char __cdecl d3_SetObjectVisible(char*, char);
 
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl vfs_ToSlashes(char*);
 int __cdecl d3_RemoveObjectAnim(char*);
@@ -74,7 +74,7 @@ void __cdecl ch_Updatelowpoly(char* obj);
 void __cdecl ch_UpdateAttachedModelPosition(char* obj, unsigned char force);
 void __cdecl ch_SetPosition(char* obj, float* pos, int flag)
 {
-	fcn_00438b40(*(char**) (obj + 0x34), (int*) pos);
+	d3_SetNodePosition(*(char**) (obj + 0x34), (int*) pos);
 #ifdef REBREW_GOLD
 	if (flag != 0) {
 		fcn_00453270(*(char**) (obj + 0x34));

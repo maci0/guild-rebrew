@@ -71,7 +71,7 @@ int __cdecl main_RunFrameLoop(void* fn, int a);
 void __cdecl fcn_0057e880(int a, int b, int c, int d);
 void __cdecl gm_AddTime(Tbebe*, int, int, int);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
-void __cdecl fcn_004c6ae0(int a, int b);
+void __cdecl cm_RequestModifyHealth(int a, int b);
 void __cdecl cm_SendCopyEntityData(MsgBebe* msg);
 
 /* ADDRESS: GOLDTL 0x005bebe0 */
@@ -186,7 +186,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 		}
 		if (g_100f1dc == 2) {
 			if (flag) {
-				fcn_004c6ae0(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 4), -color);
+				cm_RequestModifyHealth(*(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 4), -color);
 				msg.b36 = 1;
 				msg.b4 = 0x60;
 				msg.b5a = (unsigned char) broadcastSlot;

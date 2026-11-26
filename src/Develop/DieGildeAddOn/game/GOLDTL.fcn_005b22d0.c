@@ -4,7 +4,7 @@ extern char g_6b5c60[];
 
 
 void __cdecl io_FormatTextBuffer(void*, int);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 /* ADDRESS: GOLD 0x005a8e50 */
 void __cdecl fcn_005b22d0(void* noticeEntity)
@@ -14,6 +14,6 @@ void __cdecl fcn_005b22d0(void* noticeEntity)
 	entityKind = *(char*) ((char*) noticeEntity + 2);
 	if (entityKind == 6 || entityKind == 7) {
 		io_FormatTextBuffer(g_774a80, 0x20bd);
-		fcn_00545d40(*(int*) ((char*) noticeEntity + 4), -1, g_774a80, 0, 0x5ec, g_6b5c60);
+		he_PostEntityMessage(*(int*) ((char*) noticeEntity + 4), -1, g_774a80, 0, 0x5ec, g_6b5c60);
 	}
 }

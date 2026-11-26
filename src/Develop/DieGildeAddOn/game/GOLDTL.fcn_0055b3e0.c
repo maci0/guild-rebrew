@@ -1,5 +1,5 @@
 int __cdecl he_RegisterHandler(int, void*, void*);
-int __cdecl fcn_00530ab0(int, char*, int, int, int);
+int __cdecl he_RegisterActionMeta(int, char*, int, int, int);
 void __cdecl fcn_00549b50(void);
 void __cdecl fcn_00549b80(void);
 void __cdecl he_StartElectionCampaign(void);
@@ -13,7 +13,7 @@ void __cdecl he_HandleAction0x2e(void);
 void __cdecl fcn_0054b420(void);
 void __cdecl fcn_0054b450(void);
 void __cdecl fcn_0054b800(void);
-void __cdecl fcn_0054b820(void);
+void __cdecl he_StartFest(void);
 void __cdecl he_UpdateFest(void);
 void __cdecl fcn_0054bc40(void);
 void __cdecl fcn_0054bc90(void);
@@ -107,11 +107,11 @@ void __cdecl he_RunAction0x7f(void);
 void __cdecl fcn_0055a820(void);
 void __cdecl he_RunCountdownAction(void);
 void __cdecl fcn_0055a8e0(void);
-void __cdecl fcn_0055a920(void);
+void __cdecl he_RunAction0x81(void);
 void __cdecl he_StartAction0x82SkillModifier(void);
 void __cdecl he_HandleAction0x82SkillModifier(void);
-void __cdecl fcn_0055ac00(void);
-void __cdecl fcn_0055aca0(void);
+void __cdecl he_AllocDailyCouncilEvent(void);
+void __cdecl he_RunDailyCouncilEvent(void);
 void __cdecl fcn_0055af10(void);
 void __cdecl he_UpdateTutorialEvent(void);
 void __cdecl fcn_0055afb0(void);
@@ -147,7 +147,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(48, (void*) fcn_0054b800, (void*) 0x54b810) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(55, (void*) fcn_0054b820, (void*) he_UpdateFest) != 0) {
+	if (he_RegisterHandler(55, (void*) he_StartFest, (void*) he_UpdateFest) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(54, (void*) fcn_0054bc40, (void*) fcn_0054bc90) != 0) {
@@ -165,7 +165,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(67, (void*) he_InitStreife, (void*) fcn_0054da10) != 0) {
 		return 1;
 	}
-	fcn_00530ab0(67, 0, 0, 1287, -1);
+	he_RegisterActionMeta(67, 0, 0, 1287, -1);
 	if (he_RegisterHandler(68, (void*) he_StartRazzia, (void*) he_RunRazzia) != 0) {
 		return 1;
 	}
@@ -235,22 +235,22 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(97, (void*) he_StartTaschendieb, (void*) he_RunTaschendieb) != 0) {
 		return 1;
 	}
-	fcn_00530ab0(97, 0, 0, 1287, -1);
+	he_RegisterActionMeta(97, 0, 0, 1287, -1);
 	if (he_RegisterHandler(99, (void*) 0x005530d0, (void*) 0x00553110) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(98, (void*) he_InitSchutzgeld, (void*) he_RunSchutzgeld) != 0) {
 		return 1;
 	}
-	fcn_00530ab0(98, 0, 0, 1294, -1);
+	he_RegisterActionMeta(98, 0, 0, 1294, -1);
 	if (he_RegisterHandler(100, (void*) he_AllocBetriebsPruefung, (void*) he_RunBetriebsPruefung) != 0) {
 		return 1;
 	}
-	fcn_00530ab0(100, 0, 0, 1287, -1);
+	he_RegisterActionMeta(100, 0, 0, 1287, -1);
 	if (he_RegisterHandler(101, (void*) he_AllocMultiActorAction, (void*) he_RunMultiActorAction) != 0) {
 		return 1;
 	}
-	fcn_00530ab0(101, 0, 0, 1287, -1);
+	he_RegisterActionMeta(101, 0, 0, 1287, -1);
 	if (he_RegisterHandler(102, (void*) fcn_00554770, (void*) RunSimUnfall) != 0) {
 		return 1;
 	}
@@ -311,13 +311,13 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(128, (void*) fcn_0055a820, (void*) he_RunCountdownAction) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(129, (void*) fcn_0055a8e0, (void*) fcn_0055a920) != 0) {
+	if (he_RegisterHandler(129, (void*) fcn_0055a8e0, (void*) he_RunAction0x81) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(130, (void*) he_StartAction0x82SkillModifier, (void*) he_HandleAction0x82SkillModifier) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(134, (void*) fcn_0055ac00, (void*) fcn_0055aca0) != 0) {
+	if (he_RegisterHandler(134, (void*) he_AllocDailyCouncilEvent, (void*) he_RunDailyCouncilEvent) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(135, (void*) fcn_0055af10, (void*) he_UpdateTutorialEvent) != 0) {

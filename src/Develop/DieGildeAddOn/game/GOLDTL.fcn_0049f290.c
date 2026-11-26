@@ -29,7 +29,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 float __cdecl gm_RandomFloat01(void);
 char* __cdecl fcn_00502cd0(int id, int a, int b, int c, int d);
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 int __cdecl ai_StartStammtisch(int busy, unsigned short* self, int pending, Act* out)
 {
@@ -102,7 +102,7 @@ int __cdecl ai_StartStammtisch(int busy, unsigned short* self, int pending, Act*
 			o = gm_LookupEntityRecordById(*p);
 			if (o != 0 && o != self) {
 				cnt++;
-				sum += fcn_0050f980(*self, *o, 1);
+				sum += gm_CalcEntityFavor(*self, *o, 1);
 			}
 			p++;
 		}

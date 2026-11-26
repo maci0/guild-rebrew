@@ -6,7 +6,7 @@ extern float g_6628a8;
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 float __cdecl amt_GetOfficeAffinityScore(unsigned short* p, int kind)
 {
@@ -27,7 +27,7 @@ float __cdecl amt_GetOfficeAffinityScore(unsigned short* p, int kind)
 		if (recs[i].mplayerid != *(int*) (p + 2) && recs[i].mplayerid != -1) {
 			q = gm_LookupEntityRecordById(recs[i].mplayerid);
 			if (q != 0) {
-				sum += fcn_0050f980(*p, *q, 1) * 0.01f;
+				sum += gm_CalcEntityFavor(*p, *q, 1) * 0.01f;
 				count++;
 			}
 		}

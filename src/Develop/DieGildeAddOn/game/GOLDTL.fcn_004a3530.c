@@ -23,11 +23,11 @@ int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 int __cdecl amt_CollectOfficeSlotsByGroup(int group, int max, Rec18* out);
 int __cdecl amt_CollectOfficeCandidates(int k, int max, char** out);
 char* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004a3530 */
-void __cdecl fcn_004a3530(char* subjectEnt)
+void __cdecl ai_BuildActionCandidates(char* subjectEnt)
 {
 	Rec18 out[6];
 	Rec18 r;
@@ -58,7 +58,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 0x40;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+			g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -70,7 +70,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 0x40;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+			g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -82,7 +82,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 0x40;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+			g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -134,7 +134,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 0x10;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+			g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -146,7 +146,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 1;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+			g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -158,7 +158,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			if (!e || e == subjectEnt)
 				continue;
 			g_10082a0[n].flags = 1;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+			g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -173,7 +173,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 				if (!e || e == subjectEnt)
 					continue;
 				g_10082a0[n].flags = 0x40;
-				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+				g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 				g_10082a0[n].entity = e;
 				n++;
 			}
@@ -187,7 +187,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 				if (!e || e == subjectEnt)
 					continue;
 				g_10082a0[n].flags = 0x40;
-				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+				g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 				g_10082a0[n].entity = e;
 				n++;
 			}
@@ -203,7 +203,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 				if (!e || e == subjectEnt)
 					continue;
 				g_10082a0[n].flags = 0x80;
-				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+				g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 				g_10082a0[n].entity = e;
 				n++;
 			}
@@ -217,7 +217,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 				if (!e || e == subjectEnt)
 					continue;
 				g_10082a0[n].flags = 0x80;
-				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+				g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 				g_10082a0[n].entity = e;
 				n++;
 			}
@@ -231,7 +231,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 				if (!e || e == subjectEnt)
 					continue;
 				g_10082a0[n].flags = 0x80;
-				g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+				g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 				g_10082a0[n].entity = e;
 				n++;
 			}
@@ -256,7 +256,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			if (n >= 32)
 				continue;
 			g_10082a0[n].flags = 2;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
+			g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) e, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = e;
 			n++;
 		}
@@ -288,7 +288,7 @@ void __cdecl fcn_004a3530(char* subjectEnt)
 			if (n >= 32)
 				continue;
 			g_10082a0[n].flags = flag;
-			g_10082a0[n].score = fcn_0050f980(*(unsigned short*) q, *(unsigned short*) subjectEnt, 1);
+			g_10082a0[n].score = gm_CalcEntityFavor(*(unsigned short*) q, *(unsigned short*) subjectEnt, 1);
 			g_10082a0[n].entity = q;
 			n++;
 		}

@@ -21,7 +21,7 @@ extern char* __cdecl ls_ReadCharacterRecord(void*);
 extern char* __cdecl gm_LookupEntityRecordById(int);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 extern int __cdecl ch_GetQueueEntryByIndex(int);
-extern int __cdecl fcn_004fda30(int);
+extern int __cdecl gm_SelectEntityHeadSet(int);
 extern int __cdecl vfs_ResolvePath(char*, void*, void*, char*);
 extern int __cdecl ch_CreateMesh(void*, char*, void*);
 extern void __cdecl ch_SetBodyAttachment(void*, int, void*);
@@ -123,7 +123,7 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 				p = *(char**) (rec + 0x12c);
 				template_id = *(unsigned short*) p;
 				p[0x1f4] = 0;
-				strcpy(rec + 0x170, (char*) (fcn_004fda30(template_id) + 4));
+				strcpy(rec + 0x170, (char*) (gm_SelectEntityHeadSet(template_id) + 4));
 				p = strchr(rec + 0x170, '_');
 				if (p != 0) {
 					strcpy(rec + 0x130, p + 1);

@@ -20,7 +20,7 @@ void __cdecl he_NotifyAlchemistDiscovery(char* slot, int a, char* object, void* 
 void __cdecl he_NotifyDomizilSkillGain(char* slot, int a, char* object, int id);
 
 /* ADDRESS: GOLDTL 0x00576750 */
-void __cdecl fcn_00576750(int city, char* owner, char* object, int mode)
+void __cdecl he_TriggerAhmLabEvent(int city, char* owner, char* object, int mode)
 {
 	int flags[5];
 	void* found[3];

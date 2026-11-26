@@ -21,7 +21,7 @@ extern float g_6628a8;
 extern float g_6628b8;
 
 struct link_403ce0* __cdecl m_alloc(int size, const char* tag);
-void __cdecl fcn_00438b40(struct node_403ce0*, float*);
+void __cdecl d3_SetNodePosition(struct node_403ce0*, float*);
 void __cdecl d3_SetObjectRotation(struct node_403ce0*, char*);
 
 
@@ -38,7 +38,7 @@ struct link_403ce0* __cdecl ch_AttachTransport(char* obj, struct node_403ce0* no
 	pos[0] = (*(float*) (n + 0x19c) + *(float*) (n + 0x18c)) * g_6628a8 - *(float*) (n + 0x1ac) * 70.0f + *(float*) (n + 0x1bc);
 	pos[1] = (*(float*) (n + 0x1a0) + *(float*) (n + 0x190)) * g_6628a8 - *(float*) (n + 0x1b0) * 70.0f + *(float*) (n + 0x1c0);
 	pos[2] = (*(float*) (n + 0x1a4) + *(float*) (n + 0x194)) * g_6628a8 - *(float*) (n + 0x1b4) * 70.0f + *(float*) (n + 0x1c4);
-	fcn_00438b40(node, pos);
+	d3_SetNodePosition(node, pos);
 	d3_SetObjectRotation(node, *(char**) (obj + 0x34) + 0x84);
 	node->moving = 0;
 	node->attached = 1;

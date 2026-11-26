@@ -14,7 +14,7 @@ int __cdecl gm_GetMsgField(char* objekt, char* eintrag);
 void __cdecl io_FormatTextBuffer(char* text, int format, ...);
 int __cdecl cm_GetCommandStatus(int id);
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
-char* __cdecl fcn_005049a0(char* objekt);
+char* __cdecl gm_FindBuildingPrimarySlot(char* objekt);
 char* __cdecl fcn_0050dc90(int objekt);
 int __cdecl gm_eval_SlotVoll(char* objekt, int ware, int menge);
 void __cdecl gm_AddTime(pos14_7f4c00* zeit, int a, int b, int c);
@@ -38,7 +38,7 @@ int __cdecl cm_SendProdObjekt(int objekt, unsigned short ware, int menge);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text, unsigned char flags,
     int typ, int x, int y, char* name, char* bild);
 void __cdecl cm_RequestUpdateBuildingSmoke(int id);
-void __cdecl fcn_00529160(char* objekt, int a, int besitzer, char* ereignis);
+void __cdecl he_AssignActionSlot(char* objekt, int a, int besitzer, char* ereignis);
 
 /* Field offsets and names below are inferred from the complete native body.
  * The original event type and its complete allocation remain unresolved. */
@@ -105,7 +105,7 @@ void __cdecl he_RunProduktion(char* e)
                     goto warten;
                 }
                 gm_ResolveEntityById(0, (void**) &lager, 0, *(int*) (e + 0xc0));
-                haushalt = fcn_005049a0(gebaeude);
+                haushalt = gm_FindBuildingPrimarySlot(gebaeude);
                 if (fcn_00502cd0(*(int*) (lager + 0x14), 1, 0, *(unsigned short*) (e + 0xac)) != 0 &&
                     !gm_eval_SlotVoll(lager, *(unsigned short*) (e + 0xac), 1)) {
                     io_FormatTextBuffer(text, 0x1bb3, gebaeude, *(unsigned short*) (e + 0xac) * 2 + 0x9a8);
@@ -303,7 +303,7 @@ lager_done:
             return;
         }
 mangel:
-        haushalt = fcn_005049a0(gebaeude);
+        haushalt = gm_FindBuildingPrimarySlot(gebaeude);
         if (!*(int*) (e + 0xc8) &&
             (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 2) == 6 ||
              *(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 2) == 7)) {
@@ -345,7 +345,7 @@ mangel:
         }
         for (arbeiter = g_7f4ca0; (int) arbeiter < (int) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[768]); arbeiter += sizeof(ENTITY_RECORD)) {
             if (*(char**) (arbeiter + 0x17c) == e) {
-                fcn_00529160(gebaeude, 0, *(unsigned short*) arbeiter, 0);
+                he_AssignActionSlot(gebaeude, 0, *(unsigned short*) arbeiter, 0);
             }
         }
         if (gebaeude != 0) {
@@ -361,7 +361,7 @@ mangel:
         }
         for (arbeiter = g_7f4ca0; (int) arbeiter < (int) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[768]); arbeiter += sizeof(ENTITY_RECORD)) {
             if (*(char**) (arbeiter + 0x17c) == e) {
-                fcn_00529160(0, 0, *(unsigned short*) arbeiter, 0);
+                he_AssignActionSlot(0, 0, *(unsigned short*) arbeiter, 0);
             }
         }
         break;

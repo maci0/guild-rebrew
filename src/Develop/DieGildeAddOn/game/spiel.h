@@ -24,7 +24,7 @@ int __cdecl gm_GetBuildingTypeCategory(int type);
 #ifndef REBREW_SERVER
 float __cdecl gm_GetEntitySkill(char* entity, int index);
 int __cdecl gm_GetScaledEntitySkill(char* entity, int index);
-float __cdecl fcn_00507e70(char* first, char* second, int index);
+float __cdecl gm_CalcSkillDuelScore(char* first, char* second, int index);
 #endif
 
 #endif

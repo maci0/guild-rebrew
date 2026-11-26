@@ -34,13 +34,13 @@ int __cdecl gm_IsWarehouse(unsigned char* rec);
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* rec);
 void __cdecl io_FormatTextBuffer(char* text, int format, ...);
 int __cdecl ch_IsEntityNearBuildingDoor(char* a, unsigned char* b);
-char* __cdecl fcn_0055d630(char* o);
+char* __cdecl he_PickRandomSceneObject(char* o);
 void __cdecl fcn_0055d6e0(char* a, char* b);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags,
 	int value, int x, int y, char* name, char* text2);
 
 /* ADDRESS: GOLDTL 0x0055e4a0 */
-void __cdecl fcn_0055e4a0(char* ev)
+void __cdecl he_StepTransportEntry(char* ev)
 {
 	char buf[1024];
 	char key[260];
@@ -82,7 +82,7 @@ void __cdecl fcn_0055e4a0(char* ev)
 		cm_RequestChrMoveToUniverse(*(int*) (e + 2), *(int*) (v8 + 1), 0xffffffff, s_68b1e0);
 		n7 = init_AllocateGebaeudeSceneSlot(v8);
 		d3_SelectSceneContext(n7, 1);
-		if (fcn_0055d630(0)) {
+		if (he_PickRandomSceneObject(0)) {
 			idx = g_1043370[n7 * 247];
 			if (idx != 0 && fcn_0045b990(idx, position, (int*) &cellX, (int*) &cellY, (float*) v10)) {
 				cm_RequestWalkOnPath(*(int*) (e + 2), cellX, cellY, n7);

@@ -10,7 +10,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 typedef struct { unsigned char kind; char rest[0x24c]; } GRAVE_BUILDING_ROW;
 extern int __cdecl gm_ResolveEntityById(void** dynamic, void** existing, void** static_ptr, int entity_id);
-extern int __cdecl fcn_004f1ad0(void* entity, int cmd_arg);
+extern int __cdecl gm_AssignBuildingResidents(void* entity, int cmd_arg);
 
 int __cdecl gv_ValidateEntityAction(void* cmd)
 {
@@ -31,7 +31,7 @@ int __cdecl gv_ValidateEntityAction(void* cmd)
 				if (*(void**) ((char*) entity + 0x65) == 0) {
 					return -3;
 				}
-				v = fcn_004f1ad0(entity, *(int*) ((char*) cmd + 0x13));
+				v = gm_AssignBuildingResidents(entity, *(int*) ((char*) cmd + 0x13));
 				return v <= 0 ? -4 : 0;
 			}
 		}

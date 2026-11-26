@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl gm_GetEquippedCombatGear(char*);
-int __cdecl fcn_00402610(char*);
+int __cdecl d3sm_GetObjectSuperMap(char*);
 float __cdecl fcn_004cefb0(char*, unsigned int);
 unsigned short* __cdecl gm_FindEntityActiveItem(char*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
@@ -25,7 +25,7 @@ void __cdecl fcn_00533a40(char*);
    the reply text by message kind, then lay out the portrait, the speaker and
    the page counter. */
 /* ADDRESS: GOLDTL 0x004d4950 */
-void __cdecl fcn_004d4950(int a0)
+void __cdecl gm_ResolveDuelHit(int ctx)
 {
     char* v3;
     unsigned short* v4;
@@ -38,13 +38,13 @@ void __cdecl fcn_004d4950(int a0)
     int v8;
     int r;
 
-    v3 = *(char**) (a0 + 0x180);
-    v4 = *(unsigned short**) (a0 + 0x17c);
-    v22 = *(int*) (a0 + 0x184);
+    v3 = *(char**) (ctx + 0x180);
+    v4 = *(unsigned short**) (ctx + 0x17c);
+    v22 = *(int*) (ctx + 0x184);
     v5 = 1;
     v9 = gm_GetEquippedCombatGear((char*) v4);
     v7 = (int*) gm_GetEquippedCombatGear(v3);
-    fcn_00402610((char*) *(int*) ((char*) v4 + 0x184));
+    d3sm_GetObjectSuperMap((char*) *(int*) ((char*) v4 + 0x184));
     if (!v7 ||
         *(float*) ((char*) v7 + 0xc) <
             fcn_004cefb0(v3,
@@ -71,7 +71,7 @@ void __cdecl fcn_004d4950(int a0)
             fcn_004cfc40((char*) v4, v22, 2);
         }
         if (r > 8) {
-            if (*(int*) (a0 + 0x188) != *(int*) ((int)g_772e9c + 4)) {
+            if (*(int*) (ctx + 0x188) != *(int*) ((int)g_772e9c + 4)) {
                 d3snd_QueueSound(*v4, *(int*) 0x772ef4, (char*) 0x68be54, -1, 500);
             } else {
                 d3snd_QueueSound(*v4, *(int*) 0x772ef8, (char*) 0x68be54, -1, 500);

@@ -45,7 +45,7 @@ typedef struct {
 int __cdecl amt_GetRoleTemplate(int idx, Rec* out);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 Ent* __cdecl gm_LookupEntityRecordById(int id);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
 
 int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
@@ -105,7 +105,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 	}
 	i = gm_RandomMod(6);
 	for (tries = 6; tries != 0; i = (i + 1) % 6) {
-		if (list[i] != 0 && h != list[i]->h && fcn_0050f980(list[i]->id, e->id, 1) < 33.0f &&
+		if (list[i] != 0 && h != list[i]->h && gm_CalcEntityFavor(list[i]->id, e->id, 1) < 33.0f &&
 			recs[i].status == 1) {
 			found = list[i];
 			break;
@@ -131,7 +131,7 @@ int __cdecl fcn_004a8880(int a1, Ent* e, Req* req, int a4, Order* out)
 				return 0;
 			}
 			if (other.x8 > info.x8 && recs[i].status == 1) {
-				score = fcn_0050f980(p->id, e->id, 1);
+				score = gm_CalcEntityFavor(p->id, e->id, 1);
 				if (gm_RandomMod(0x20) + 40.0f > score) {
 					found = list[i];
 					break;

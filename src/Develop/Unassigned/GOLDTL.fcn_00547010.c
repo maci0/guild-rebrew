@@ -44,7 +44,7 @@ struct msg_547010 {
 int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl cm_SendCopyEntityData(struct msg_547010*);
 
-void __cdecl fcn_00547010(void)
+void __cdecl he_EnsureAction0x6d(void)
 {
 	struct msg_547010 m;
 

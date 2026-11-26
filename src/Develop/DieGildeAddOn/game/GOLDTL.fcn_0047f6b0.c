@@ -96,9 +96,9 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl plt_FindPlantInfo(int);
 void* __cdecl gm_FindCityItemHolder(int);
 void __cdecl fcn_004849b0(char*, char*, char*);
-int __cdecl fcn_00486640(char*, int*, int);
+int __cdecl ai_CanProduceGood(char*, int*, int);
 void __cdecl fcn_004868d0(char*, int*);
-void __cdecl fcn_00487000(char*);
+void __cdecl ai_ManageMeisterWorkers(char*);
 void __cdecl fcn_00487470(char*);
 void __cdecl fcn_00487970(char*, char*, int);
 void __cdecl fcn_00487c00(char*, char*, int);
@@ -108,7 +108,7 @@ void __cdecl ai_MeisterCollectTrans(char*);
 void __cdecl ai_MeisterTrade(char*, char*);
 void __cdecl fcn_0047e220(char*);
 void __cdecl cm_SendCopyEntityData(char*);
-void __cdecl fcn_00529160(char*, int, int, int);
+void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl fcn_004c5aa0(int, int, int, int, int, int);
 void* __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
@@ -166,7 +166,7 @@ int __cdecl fcn_0047f6b0(char* a)
 		}
 	}
 
-	fcn_00487000(a);
+	ai_ManageMeisterWorkers(a);
 	fcn_00487970(t2, a, 0xa);
 	fcn_00487c00(t2, a, 0x19);
 	fcn_00487470(a);
@@ -215,7 +215,7 @@ done_m:
 		s = he_StartHandlungSearch(2, 0, 9, 3, *(int*) (*(char**) (a + 0x16c) + 1));
 		if (s != 0) {
 			if (*(int*) (a + 0x17c) != (int) s) {
-				fcn_00529160(*(char**) (a + 0x16c), 0, *(unsigned short*) a, (int) s);
+				he_AssignActionSlot(*(char**) (a + 0x16c), 0, *(unsigned short*) a, (int) s);
 			}
 			flag = 1;
 		}
@@ -261,10 +261,10 @@ found:
 		}
 		g_100d0c0[i].flags |= 8;
 		fcn_004868d0(a, (int*) &g_100d0c0[i]);
-	} else if (fcn_00486640(a, (int*) &g_100d0c0[i], 1)) {
+	} else if (ai_CanProduceGood(a, (int*) &g_100d0c0[i], 1)) {
 		g_100d0c0[i].flags |= 8;
 		fcn_004868d0(a, (int*) &g_100d0c0[i]);
-	} else if (fcn_00486640(a, (int*) &g_100d0c0[i], 0)) {
+	} else if (ai_CanProduceGood(a, (int*) &g_100d0c0[i], 0)) {
 		fcn_004868d0(a, (int*) &g_100d0c0[i]);
 	} else {
 		goto scan;
@@ -304,7 +304,7 @@ scan:
 			g_100d0c0[i].flags |= 8;
 			fcn_004868d0(a, (int*) &g_100d0c0[i]);
 			goto after;
-		} else if (fcn_00486640(a, (int*) &g_100d0c0[i], 1)) {
+		} else if (ai_CanProduceGood(a, (int*) &g_100d0c0[i], 1)) {
 			g_100d0c0[i].flags |= 8;
 			fcn_004868d0(a, (int*) &g_100d0c0[i]);
 			goto after;
@@ -340,7 +340,7 @@ after:
 			g_100d0c0[i].flags |= 0x10;
 			break;
 		}
-		if (fcn_00486640(a, (int*) &g_100d0c0[i], 0)) {
+		if (ai_CanProduceGood(a, (int*) &g_100d0c0[i], 0)) {
 			fcn_004868d0(a, (int*) &g_100d0c0[i]);
 			break;
 		}
@@ -385,7 +385,7 @@ after:
 		    && *(int*) (g_7f4ca0[j].f184 + 0x2c) == *(int*) (*(char**) (a + 0x16c) + 1)
 		    && (g_7f4ca0[j].host == 0 || *(unsigned char*) g_7f4ca0[j].host != 0x28)
 		    && !(flag != 0 && (char*) a == (char*) &g_7f4ca0[j])) {
-			fcn_00529160(*(char**) (a + 0x16c), 0, g_7f4ca0[j].id, 0);
+			he_AssignActionSlot(*(char**) (a + 0x16c), 0, g_7f4ca0[j].id, 0);
 			st.avail++;
 		}
 	}

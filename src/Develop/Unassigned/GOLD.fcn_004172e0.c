@@ -8,7 +8,7 @@ extern int SonnenstrahlenAktiv;
 extern int SonnenstrahlenStartZeit;
 
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-void __cdecl fcn_00438b40(char*, float*);
+void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char* __cdecl fcn_00449690(char*, int, char*, char*);
 float __cdecl d3_Smoothstep(float, float, float);
@@ -36,7 +36,7 @@ void __cdecl fcn_004172e0(char* object)
 	a = *(float*) (d3_ActiveCamera + 0x54);
 	position[2] = a;
 	if (!CompareVector3WithinTolerance(position, (float*) (object + 0x4c), 0.0001f)) {
-		fcn_00438b40(object, position);
+		d3_SetNodePosition(object, position);
 	}
 	{
 		char* light;

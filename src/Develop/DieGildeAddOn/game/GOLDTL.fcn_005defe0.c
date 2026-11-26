@@ -23,8 +23,8 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 char* __cdecl fcn_005cd440(int*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
-void __cdecl fcn_004f4f60(int, int, int, int, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl gm_TryRecordCrime(int, int, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
@@ -74,20 +74,20 @@ int __cdecl gm_ObjTriggerRandomCrime(char* ent, int* arg)
 	}
 	if (n == 0) {
 		io_FormatTextBuffer(text, 0xffe);
-		fcn_00545d40(*(int*) (obj + 4), -1, text, 0, 0x5fa, 0);
+		he_PostEntityMessage(*(int*) (obj + 4), -1, text, 0, 0x5fa, 0);
 		return 0;
 	}
 	r = rand() % n;
-	fcn_004f4f60(list[r], 1, *(int*) (obj + 4), *(int*) (ent + 4),
+	gm_TryRecordCrime(list[r], 1, *(int*) (obj + 4), *(int*) (ent + 4),
 	    *(char**) (ent + 0x170) ? *(int*) (*(char**) (ent + 0x170) + 1) : -1);
 	if (twice) {
 		r = rand() % n;
-		fcn_004f4f60(list[r], 1, *(int*) (obj + 4), *(int*) (ent + 4),
+		gm_TryRecordCrime(list[r], 1, *(int*) (obj + 4), *(int*) (ent + 4),
 		    *(char**) (ent + 0x170) ? *(int*) (*(char**) (ent + 0x170) + 1) : -1);
 	}
 	if (obj[2] == 6 || obj[2] == 7) {
 		io_FormatTextBuffer(text, 0xffe);
-		fcn_00545d40(*(int*) (obj + 4), -1, text, 0, 0x5fb, 0);
+		he_PostEntityMessage(*(int*) (obj + 4), -1, text, 0, 0x5fb, 0);
 	}
 	if (ent[2] == 6) {
 		rec = gm_LookupSpecialObjectRecord(**(unsigned short**) arg, &tmp);

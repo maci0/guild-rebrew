@@ -10,7 +10,7 @@ extern double g_665ed0;
 extern char g_6a40b0[];
 
 char* __cdecl fcn_00445600(int, int, int, char*);
-void __cdecl fcn_00412e50(int, int);
+void __cdecl d3_AnimateCameraToNode(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -48,7 +48,7 @@ void __cdecl fcn_005a31b0(char* building)
 	}
 	p = (int) fcn_00445600(0, 0x100, 0, g_6a40b0);
 	if (p != 0) {
-		fcn_00412e50(p, g_6a256c);
+		d3_AnimateCameraToNode(p, g_6a256c);
 	}
 	object = (int) fcn_00445600(0, 0x40, 0, "ob_KARTENTISCH");
 	idx = -1;
@@ -124,6 +124,6 @@ void __cdecl fcn_005a31b0(char* building)
 		}
 	}
 	if (object != 0) {
-		fcn_00412e50(object, g_6a256c);
+		d3_AnimateCameraToNode(object, g_6a256c);
 	}
 }

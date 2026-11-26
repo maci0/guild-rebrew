@@ -2,18 +2,18 @@
 int __cdecl cm_GetCommandStatus(int a0); int __cdecl cm_GetCommandResult(int a0);
 int __cdecl gm_GetEntityTableEntry(int a0);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a0, int a1, unsigned char a2, int a3);
-void __cdecl fcn_00529160(int a0, int a1, int a2, int a3);
+void __cdecl he_AssignActionSlot(int a0, int a1, int a2, int a3);
 int __cdecl gm_StartFilteredEntitySearch(int a0, int a1, int a2);
 int __cdecl ch_StartMovement(int a0, int a1, int a2, int a3, int a4, int a5);
 int __cdecl gm_LookupEntityRecordById(int a0);
 void __cdecl gm_AddTime(int* p, int a1, int a2, int a3);
 int __cdecl gm_CompareGameTime(int a0, int a1);
-int __cdecl fcn_00494740(int a0, int a1, int a2);
+int __cdecl gm_EvalSkill3PrivilegeCheck(int a0, int a1, int a2);
 int __cdecl gm_HasActiveSpecialObject(int a0, int a1);
 void __cdecl fcn_005100f0(int a0, int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-void __cdecl fcn_00545d40(int a0, int a1, char* buf, int a3, int a4, char* text);
-int __cdecl fcn_004f4f60(int a0, int a1, int a2, int a3, int a4);
+void __cdecl he_PostEntityMessage(int a0, int a1, char* buf, int a3, int a4, char* text);
+int __cdecl gm_TryRecordCrime(int a0, int a1, int a2, int a3, int a4);
 void __cdecl cm_RequestCopyEntityData(int a0, int a1, int a2, int a3);
 int __cdecl he_DetectNearbyPatrolAction(int* a0);
 int __cdecl he_StartHandlungSearch(int a0, int a1, int a2);
@@ -22,7 +22,7 @@ void __cdecl cm_RequestKillSpieler(int a0, int a1);
 void __cdecl he_FreeAction(int a0);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00562ba0 */
-void __cdecl fcn_00562ba0(int eventCursor)
+void __cdecl he_RunPruegel(int eventCursor)
 {
 	int eventBase;
 	int v6;
@@ -55,7 +55,7 @@ void __cdecl fcn_00562ba0(int eventCursor)
 			}
 			*(int*) (eventBase + 0xc8) = *(int*) (v7 + 4);
 			cm_RequestTransferCurrencyNoKill(-1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(unsigned char*) &g_773d75, *(int*) (eventBase + 0xd8));
-			fcn_00529160(0, 0, *(unsigned short*) v7, eventBase);
+			he_AssignActionSlot(0, 0, *(unsigned short*) v7, eventBase);
 			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 			*(int*) (eventBase + 0xcc) = -1;
 			return;
@@ -96,7 +96,7 @@ void __cdecl fcn_00562ba0(int eventCursor)
 			v10[2] = eventBase;
 			v10[3] = 0;
 			if (he_DetectNearbyPatrolAction(v10) != 0) {
-				*(int*) (eventBase + 0xcc) = fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (v4 + 4), *(int*) (v6 + 1));
+				*(int*) (eventBase + 0xcc) = gm_TryRecordCrime(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (v4 + 4), *(int*) (v6 + 1));
 				eventCursor += 0x52;
 				*(int*) (eventCursor + 0x1e) = 8;
 				*(int*) (eventCursor + 0x82) = *(int*) (v10[3] + 4);
@@ -155,23 +155,23 @@ label_562e74:
 			*(int*) (eventBase + 0x70) = -1;
 			return;
 		}
-		v4 = fcn_00494740((int*) ep, v7, (int) v11);
+		v4 = gm_EvalSkill3PrivilegeCheck((int*) ep, v7, (int) v11);
 		if (gm_HasActiveSpecialObject(v7, 0x2c0)) {
 			fcn_005100f0(*(int*) (ep + 4), -1);
 			if (*(char*) (ep + 2) == 6 || *(char*) (ep + 2) == 7) {
 				io_FormatTextBuffer(buf, 0x1012, *(unsigned short*) v7, 2);
-				fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
+				he_PostEntityMessage(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 			}
 			if (*(char*) (v7 + 2) == 6 || *(char*) (v7 + 2) == 7) {
 				io_FormatTextBuffer(buf, 0x1010);
-				fcn_00545d40(*(int*) (v7 + 4), -1, buf, 0, 0x5fb, (char*) 0x6a6538);
+				he_PostEntityMessage(*(int*) (v7 + 4), -1, buf, 0, 0x5fb, (char*) 0x6a6538);
 			}
 			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 			return;
 		} else if (gm_HasActiveSpecialObject(v7, 0x17c) != 0) {
 			if (*(char*) (ep + 2) == 6 || *(char*) (ep + 2) == 7) {
 				io_FormatTextBuffer(buf, 0xff3);
-				fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
+				he_PostEntityMessage(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 			}
 			*(int*) (eventBase + 0x70) = *(int*) (eventBase + 0x70) + 1;
 			return;
@@ -180,11 +180,11 @@ label_562e74:
 			if (v4 != 0) {
 				if (targetType == 6 || targetType == 7) {
 					io_FormatTextBuffer(buf, 0x173b, 2);
-					fcn_00545d40(*(int*) (v7 + 4), -1, buf, 0, 0x5fb, (char*) 0x6a6538);
+					he_PostEntityMessage(*(int*) (v7 + 4), -1, buf, 0, 0x5fb, (char*) 0x6a6538);
 				}
 				if (*(char*) (ep + 2) == 6 || *(char*) (ep + 2) == 7) {
 					io_FormatTextBuffer(buf, 0x173a, *(unsigned short*) v7);
-					fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
+					he_PostEntityMessage(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 				}
 				if (gm_HasActiveSpecialObject(v7, 0x2b4)) {
 					fcn_005100f0(*(int*) (eventBase + 0xb4), -1);
@@ -194,14 +194,14 @@ label_562e74:
 			} else {
 				if (targetType == 6 || targetType == 7) {
 					io_FormatTextBuffer(buf, 0x173d);
-					fcn_00545d40(*(int*) (v7 + 4), -1, buf, 0, 0x5fb, 0);
+					he_PostEntityMessage(*(int*) (v7 + 4), -1, buf, 0, 0x5fb, 0);
 				}
 				if (*(char*) (ep + 2) == 6 || *(char*) (ep + 2) == 7) {
 					io_FormatTextBuffer(buf, 0x173c, *(unsigned short*) v7);
-					fcn_00545d40(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
+					he_PostEntityMessage(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 				}
 			}
-			fcn_004f4f60(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (eventBase + 0xb4), *(int*) (eventBase + 0xac));
+			gm_TryRecordCrime(0x15, 1, *(int*) (*(unsigned short*) (eventBase + 8) * 0x21c + (unsigned long)&g_7f4ca4), *(int*) (eventBase + 0xb4), *(int*) (eventBase + 0xac));
 			targetType = *(char*) (v7 + 2);
 			if (targetType != 6 && targetType != 7) {
 				cm_RequestCopyEntityData(*(int*) (ep + 4), *(int*) (v7 + 4), -0x19, 1);

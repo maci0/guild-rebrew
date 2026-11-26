@@ -68,7 +68,7 @@ void __cdecl fcn_004186c0(void);
 void __cdecl fcn_0047ce90(void);
 void __cdecl fcn_004ed200(int);
 void __cdecl fcn_004ac560(void);
-void __cdecl fcn_004acbb0(void);
+void __cdecl gm_LoadHistoricalTable(void);
 void __cdecl fcn_004d3800(void);
 void __cdecl fcn_00471e30(int);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);

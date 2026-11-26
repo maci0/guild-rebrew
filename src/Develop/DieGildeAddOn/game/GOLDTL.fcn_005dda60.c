@@ -19,7 +19,7 @@ extern char g_7f4ca0[];
 int __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl fcn_005dbe90(char*);
 
@@ -74,7 +74,7 @@ int __cdecl gm_ObjBefriendThreeRivals(Ent* ent, int* arg)
 	io_FormatTextBuffer(text, 0xfef, ent->id);
 	for (i = 0; i < 3; i++) {
 		if (picks[i]->kind == 6 || picks[i]->kind == 7) {
-			fcn_00545d40(picks[i]->handle, -1, text, 0, 0x5ec, 0);
+			he_PostEntityMessage(picks[i]->handle, -1, text, 0, 0x5ec, 0);
 		}
 	}
 	if (ent->kind == 6) {

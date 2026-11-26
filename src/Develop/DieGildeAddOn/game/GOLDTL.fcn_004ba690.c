@@ -20,7 +20,7 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl cm_RequestModifyEntityLevel(int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004ba690 */
@@ -62,6 +62,6 @@ int __cdecl gm_BoostRandomBuildingLevel(int* request)
 	cm_RequestModifyEntityLevel(*(int*) (rec + 4), 1,
 	    (char) (amount < gm_RandomMod(10) + 5 ? amount : gm_RandomMod(10) + 5));
 	io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, 0x16b8, *(unsigned short*) rec, chosen);
-	fcn_00545d40(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
+	he_PostEntityMessage(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

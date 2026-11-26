@@ -18,14 +18,14 @@ int __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl gm_SetupEntityQuery(int);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl ch_StartMovement(int, int, int, int, int, char*);
-int __cdecl fcn_00529160(int, int, int, int);
+int __cdecl he_AssignActionSlot(int, int, int, int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 int __cdecl gm_GetEntityTableEntry(int);
 int __cdecl fcn_0050dc90(int);
 int __cdecl io_FormatTextBuffer(char*, ...);
-int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl gm_AccumulateTyped2(int);
 int __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl he_FreeAction(int);
@@ -116,7 +116,7 @@ void __cdecl he_RunTaschendieb(int event)
 						    *(int*) ((char*) v4 + 1),
 						    *(int*) ((char*) v5 + 2), 0, 0,
 						    (char*) 0x6a5bbc);
-						fcn_00529160(0, 0, *v14, 0);
+						he_AssignActionSlot(0, 0, *v14, 0);
 					}
 					v16 += 1;
 					v17 -= 1;
@@ -137,7 +137,7 @@ void __cdecl he_RunTaschendieb(int event)
 					if (v4 == 0
 					    || (*(unsigned char*) (v4 + 0x1b4) & 1) == 0) {
 						io_FormatTextBuffer(v12, 0x19f4, v5);
-						fcn_00545d40(*(int*) (v18 + 4),
+						he_PostEntityMessage(*(int*) (v18 + 4),
 						    *(int*) (v18 + 4), v12, 0, 0x5f0,
 						    (char*) 0x6b5c60);
 					}
@@ -192,7 +192,7 @@ void __cdecl he_RunTaschendieb(int event)
 						if (*(char*) (v4 + 2) == 6
 						    || *(char*) (v4 + 2) == 7) {
 							io_FormatTextBuffer(v12, 0x19f2, v5);
-							fcn_00545d40(
+							he_PostEntityMessage(
 							    *(int*) (v4 + 4),
 							    *(int*) (v4 + 4), v12,
 							    0, 0x5f0,
@@ -201,7 +201,7 @@ void __cdecl he_RunTaschendieb(int event)
 					} else if (*(char*) (v4 + 2) == 6
 					    || *(char*) (v4 + 2) == 7) {
 						io_FormatTextBuffer(v12, 0x19f3);
-						fcn_00545d40(*(int*) (v4 + 4),
+						he_PostEntityMessage(*(int*) (v4 + 4),
 						    *(int*) (v4 + 4), v12, 0, 0x5f0, 0);
 					}
 				}
@@ -226,7 +226,7 @@ void __cdecl he_RunTaschendieb(int event)
 		} else {
 			v9 = gm_StartFilteredEntitySearch(1, 5, 10);
 		}
-		fcn_00529160(v9, 0, *v14, event);
+		he_AssignActionSlot(v9, 0, *v14, event);
 		cm_SendCancelCharacterActions(*(int*) (v14 + 2));
 		ch_StartMovement(*(int*) (v14 + 2), *(int*) ((char*) v9 + 1),
 		    -1, 0, 1, (char*) 0x6a5bbc);

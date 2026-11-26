@@ -5,23 +5,23 @@ typedef struct {
 	char pad3;
 	int id;
 	char pad8[0x214];
-} Ent494470;
+} BANQUET_ENTITY;
 
 // SIZE 0x8
 typedef struct {
-	Ent494470* ent;
+	BANQUET_ENTITY* ent;
 	int value;
-} Member494470;
+} BANQUET_GUEST;
 
 // SIZE 0x34
 typedef struct {
-	Ent494470* ent;
-	Member494470 members[4];
+	BANQUET_ENTITY* ent;
+	BANQUET_GUEST members[4];
 	unsigned a;
 	unsigned b;
 	int text;
 	unsigned char count;
-} Party494470;
+} BANQUET_PARTY;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
@@ -33,7 +33,7 @@ void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00494470 */
-int __cdecl fcn_00494470(Party494470* p, int flag)
+int __cdecl gm_ResolveDinnerParty(BANQUET_PARTY* p, int flag)
 {
 	int i;
 	int n;

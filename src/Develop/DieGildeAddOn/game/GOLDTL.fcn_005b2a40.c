@@ -6,7 +6,7 @@ extern char* g_14b5a18;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 /* ADDRESS: GOLDTL 0x005b2a40 */
 void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, char** arr)
@@ -26,7 +26,7 @@ void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, ch
 	for (i = 0; i < n; i++) {
 		e = arr[i];
 		if (e[2] == 6 || e[2] == 7) {
-			fcn_00545d40(*(int*) (e + 4), -1, g_774a80, 1, 0x5fb, (void*) 0x6ab480);
+			he_PostEntityMessage(*(int*) (e + 4), -1, g_774a80, 1, 0x5fb, (void*) 0x6ab480);
 		}
 	}
 	e = g_14b5a08;
@@ -66,5 +66,5 @@ void __cdecl he_ShowZigeunerGroupMessage(unsigned short* senderEntity, int n, ch
 		}
 		strcat(g_774a80, g_14b5a14);
 	}
-	fcn_00545d40(*(int*) (senderEntity + 2), -1, g_774a80, 1, 0x5fb, (void*) 0x6ab464);
+	he_PostEntityMessage(*(int*) (senderEntity + 2), -1, g_774a80, 1, 0x5fb, (void*) 0x6ab464);
 }

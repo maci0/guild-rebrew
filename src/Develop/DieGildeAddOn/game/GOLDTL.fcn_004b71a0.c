@@ -5,9 +5,9 @@ unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl io_FormatTextBuffer(void*, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
-void __cdecl fcn_00545d40(int, int, void*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
-int __cdecl fcn_004b71a0(void* a1)
+int __cdecl gm_HandleMsg0bGrantBonus(void* request)
 {
 	char buf[0x100];
 	double d;
@@ -15,7 +15,7 @@ int __cdecl fcn_004b71a0(void* a1)
 	void* p;
 	int n;
 
-	p = gm_LookupEntityRecordById(*(int*) a1);
+	p = gm_LookupEntityRecordById(*(int*) request);
 	if (p == 0) {
 		return 1;
 	}
@@ -23,9 +23,9 @@ int __cdecl fcn_004b71a0(void* a1)
 	d = (double) v + *(double*) 0x662a48;
 	n = (int) (((double) gm_WalkEntityChain(*(unsigned short*) p) * d) *
 	    *(double*) 0x664e58);
-	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) a1 + 4) + 0x12e7, n);
-	cm_RequestTransferCurrencyNoKill(*(int*) a1, -1, *(char*) 0x773d75, n);
-	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
+	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, *(char*) 0x773d75, n);
+	he_PostEntityMessage(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

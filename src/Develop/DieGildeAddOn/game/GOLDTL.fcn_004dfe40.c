@@ -14,7 +14,7 @@ void __cdecl fcn_00417b50(char*, int, float, float, float, float);
 char* __cdecl ch_CreateQueuedAction(char*, void*, int, int, int);
 void __cdecl fcn_004dfd10(char*);
 
-int __cdecl fcn_004dfe40(char* e)
+int __cdecl gm_CheckDuelKnockout(char* e)
 {
 	char* o;
 

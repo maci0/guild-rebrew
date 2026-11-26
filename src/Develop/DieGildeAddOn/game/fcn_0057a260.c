@@ -1,7 +1,7 @@
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_00529160(char*, int, int, char*);
+int __cdecl he_AssignActionSlot(char*, int, int, char*);
 int __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl he_FreeAction(char*);
 
@@ -26,9 +26,9 @@ int __cdecl fcn_0057a260(char* p)
 		*(pos14_7f4c00*) (p + 0x52) = gm_GameTime;
 		*(pos14_7f4c00*) (p + 0x44) = gm_GameTime;
 		if (v)
-			fcn_00529160(e, v, *(unsigned short*)s, p);
+			he_AssignActionSlot(e, v, *(unsigned short*)s, p);
 		else
-			fcn_00529160(e, 0, *(unsigned short*)s, p);
+			he_AssignActionSlot(e, 0, *(unsigned short*)s, p);
 		*(pos14_7f4c00*) (p + 0x60) = gm_GameTime;
 		gm_AddTime(p + 0x52, 0, 0x1e, 0);
 		*(pos14_7f4c00*) (p + 0xb8) = *(pos14_7f4c00*) (p + 0x52);

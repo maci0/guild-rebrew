@@ -15,7 +15,7 @@ void __cdecl fcn_004fcda0(u16 id, int a, void* out);
 int __cdecl gm_RandomMod(int a);
 int __cdecl _ftol(void);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
-void __cdecl fcn_004c6ae0(int a, int b);
+void __cdecl cm_RequestModifyHealth(int a, int b);
 int __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 int __cdecl cm_GetCommandStatus(int a);
 void __cdecl fcn_00535960(void);
@@ -62,7 +62,7 @@ int __cdecl fcn_005d6c50(int actor, int a1)
         if (*(int*) (actor + 0x194) < 4)
             return 0x20;
         cm_RequestTransferCurrencyNoKill(*(int*) (actor + 4), -1, 0, h2);
-        fcn_004c6ae0(*(int*) (actor + 4), -4);
+        cm_RequestModifyHealth(*(int*) (actor + 4), -4);
         cm_RequestChangeBits(*(int*) (p + 2), 0x1c8, 4, 0x400000, 0);
         return *(int*) (frame + 0);
     }
@@ -78,7 +78,7 @@ int __cdecl fcn_005d6c50(int actor, int a1)
             if (g_100f1dc == 2) {
                 if (d2_CheckActionBlocker(actor, 4) != 0) {
                     cm_RequestTransferCurrencyNoKill(*(int*) (actor + 4), -1, 0, h2);
-                    fcn_004c6ae0(*(int*) (actor + 4), -4);
+                    cm_RequestModifyHealth(*(int*) (actor + 4), -4);
                     dlg = cm_RequestChangeBits(*(int*) (p + 2), 0x1c8, 4, 0x400000,
                                      0);
                     while (cm_GetCommandStatus(dlg) == 0)

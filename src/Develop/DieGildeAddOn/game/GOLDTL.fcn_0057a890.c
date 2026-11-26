@@ -7,7 +7,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl fcn_004ff210(unsigned short id, int v);
 
 /* ADDRESS: GOLDTL 0x0057a890 */
-int __cdecl fcn_0057a890(char* off, float chance, int kind, float* out)
+int __cdecl he_InflictAffliction(char* off, float chance, int kind, float* out)
 {
 	int type;
 	int other;

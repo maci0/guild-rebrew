@@ -44,7 +44,7 @@ int __cdecl gm_HasActiveSpecialObject(char*, int);
 int __cdecl fcn_00556e80(unsigned short*);
 void __cdecl fcn_005498b0(char*, char*, char*, char*, int, float);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
 
 /* One step of the disease simulation: walks twelve towns in a pseudo-random
@@ -125,7 +125,7 @@ void __cdecl RunSimKrankheiten(char* s)
 						if (g < gm_GetEntityHealth((char*) p)
 						    && (g_7f4ca0[idx].type == 6 || g_7f4ca0[idx].type == 7)) {
 							io_FormatTextBuffer(buf, (char*) 0x163c, (char*) (r + 0x1632));
-							fcn_00545d40(g_7f4ca0[idx].handle, -1, buf, 0, 0x5f7, g_6b5c60);
+							he_PostEntityMessage(g_7f4ca0[idx].handle, -1, buf, 0, 0x5f7, g_6b5c60);
 						}
 					}
 				}

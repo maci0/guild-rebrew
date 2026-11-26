@@ -7,7 +7,7 @@ int  __cdecl fcn_004a55c0(void*, int, int*, float, float, unsigned short*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, int, int);
-void __cdecl fcn_00545d40(int, int, void*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 
 int __cdecl gm_HandleEntityMsg17(void* request)
 {
@@ -31,7 +31,7 @@ int __cdecl gm_HandleEntityMsg17(void* request)
 	cm_RequestCopyEntityData(*(int*) ((char*) p + 4), *(int*) ((char*) e + 4), n, 1);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
 	    *(unsigned short*) e, *(unsigned short*) e);
-	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
+	he_PostEntityMessage(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

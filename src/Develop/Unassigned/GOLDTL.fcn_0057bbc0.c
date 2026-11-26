@@ -16,7 +16,7 @@ void __cdecl he_InitEvent0a3(void);
 void __cdecl fcn_0057d9e0(void);
 void __cdecl he_InitEvent0a4(void);
 void __cdecl he_UpdateEvent0a4(void);
-int __cdecl fcn_00530ab0(int, char*, int, int, int);
+int __cdecl he_RegisterActionMeta(int, char*, int, int, int);
 
 int __cdecl fcn_0057bbc0(void)
 {
@@ -29,6 +29,6 @@ int __cdecl fcn_0057bbc0(void)
 	    he_RegisterHandler(0xa4, (void*) he_InitEvent0a4, (void*) he_UpdateEvent0a4) != 0) {
 		return 1;
 	}
-	fcn_00530ab0(0xa1, 0, 0, 0x50f, -1);
+	he_RegisterActionMeta(0xa1, 0, 0, 0x50f, -1);
 	return 0;
 }

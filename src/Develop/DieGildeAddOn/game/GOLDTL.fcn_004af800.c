@@ -24,7 +24,7 @@ int __cdecl atoi(char*);
 int __cdecl fcn_004ae0f0(int);
 unsigned short __cdecl gm_RandomMod(int);
 
-int __cdecl fcn_004ae130(unsigned short a1);
+int __cdecl gm_IsSlotActivePerson(unsigned short a1);
 int __cdecl fcn_004ae1c0(int a1);
 int __cdecl fcn_004ae210(int a1);
 
@@ -94,7 +94,7 @@ int __cdecl fcn_004af800(int mode, int* pairs, int idx, char* text, void* out)
 			sel = 1;
 		}
 		if (sel == 0) {
-			test = (int (__cdecl*)(int)) fcn_004ae130;
+			test = (int (__cdecl*)(int)) gm_IsSlotActivePerson;
 		} else if (sel == 1) {
 			test = fcn_004ae1c0;
 		} else {

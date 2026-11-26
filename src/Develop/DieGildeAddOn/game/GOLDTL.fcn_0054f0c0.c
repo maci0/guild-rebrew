@@ -40,7 +40,7 @@ Entity_54f0c0* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, Order_54f0c0*);
 void __cdecl he_FreeAction(Order_54f0c0*);
@@ -82,22 +82,22 @@ void __cdecl he_RunDuellChallenge(Order_54f0c0* o)
 				if (o->mode == 1) {
 					if (b->type == 6 || b->type == 7) {
 						io_FormatTextBuffer(buf, 0x1e19, a->slot);
-						fcn_00545d40(b->id, -1, buf, 0, 0x5fb, 0);
+						he_PostEntityMessage(b->id, -1, buf, 0, 0x5fb, 0);
 					}
 				} else if (o->mode == 2) {
 					if (b->type == 6 || b->type == 7) {
 						io_FormatTextBuffer(buf, 0x1e20, a->slot);
-						fcn_00545d40(b->id, -1, buf, 0, 0x5fb, 0);
+						he_PostEntityMessage(b->id, -1, buf, 0, 0x5fb, 0);
 					}
 				} else {
 					cm_RequestCopyEntityData(a->id, b->id, -0x68, 1);
 					if (b->type == 6 || b->type == 7) {
 						io_FormatTextBuffer(buf, 0x1d5d, a->slot);
-						fcn_00545d40(b->id, b->id, buf, 0, 0x5fb, 0);
+						he_PostEntityMessage(b->id, b->id, buf, 0, 0x5fb, 0);
 					}
 					if (a->type == 6 || a->type == 7) {
 						io_FormatTextBuffer(buf, 0x1d5c, b->slot);
-						fcn_00545d40(b->id, b->id, buf, 0, 0x5fb, 0);
+						he_PostEntityMessage(b->id, b->id, buf, 0, 0x5fb, 0);
 					}
 				}
 			}

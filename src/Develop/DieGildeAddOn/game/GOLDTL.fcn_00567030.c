@@ -2,7 +2,7 @@
 
 
 int __cdecl gm_CheckEntityType(char*);
-char* __cdecl fcn_005049a0(char*);
+char* __cdecl gm_FindBuildingPrimarySlot(char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 
 int __cdecl he_GetEntityReturnTarget(char* h, int* out1, int* out2)
@@ -25,7 +25,7 @@ int __cdecl he_GetEntityReturnTarget(char* h, int* out1, int* out2)
 	}
 	if (gm_CheckEntityType(*(char**) (h + 0x16c)) == 0) {
 		if (*(int*) (*(char**) (h + 0x184) + 0x2c) == *(int*) (*(char**) (h + 0x16c) + 1)
-		    || (q = fcn_005049a0(*(char**) (h + 0x16c))) == 0) {
+		    || (q = gm_FindBuildingPrimarySlot(*(char**) (h + 0x16c))) == 0) {
 			return 0;
 		}
 	} else {

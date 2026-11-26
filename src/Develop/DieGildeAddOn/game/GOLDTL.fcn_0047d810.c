@@ -37,7 +37,7 @@ extern char g_7f4ca0[];
 
 int __cdecl fcn_0047d240(Ent47d*);
 Ent47d* __cdecl fcn_0047d2a0(Ent47d*);
-void __cdecl fcn_004a3530(Ent47d*);
+void __cdecl ai_BuildActionCandidates(Ent47d*);
 void __cdecl fcn_004c6090(Bld47d*, int, int, int);
 int __cdecl fcn_00495180(int);
 void __cdecl fcn_00495690(int);
@@ -110,7 +110,7 @@ void __cdecl fcn_0047d810(Ent47d* e)
 		return;
 	}
 	*(int*) 0x77261c = (int) fcn_0047d2a0(e);
-	fcn_004a3530(e);
+	ai_BuildActionCandidates(e);
 	state = *((unsigned char*) e + 0x132);
 	if (!*((char*) e + 0x1b1) && fcn_00495180(e->id)) {
 		if (*((unsigned char*) e + 0x132) != state

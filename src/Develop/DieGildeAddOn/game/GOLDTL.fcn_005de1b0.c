@@ -51,7 +51,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 float __cdecl gm_RandomFloat01(void);
 float __cdecl fcn_004ff210(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 void __cdecl fcn_005dbe90(char*);
 
 int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
@@ -101,7 +101,7 @@ int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 	}
 	if (e[2] == 6 || e[2] == 7) {
 		io_FormatTextBuffer(text, 0x100b, q->w27, q->w27, q);
-		fcn_00545d40(*(int*) (e + 4), -1, text, 0, 0x5fb, 0);
+		he_PostEntityMessage(*(int*) (e + 4), -1, text, 0, 0x5fb, 0);
 	}
 	if (obj[2] == 6) {
 		io_FormatTextBuffer(text2, 0x109b, *(unsigned short*) e, q->w27, q);

@@ -23,7 +23,7 @@ int __cdecl _ftol(void);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, char *);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
-void __cdecl fcn_00545d40(int, int, char *, int, int, int);
+void __cdecl he_PostEntityMessage(int, int, char *, int, int, int);
 
 int __cdecl gm_SabotageHandlungItem(int *msg)
 {
@@ -78,6 +78,6 @@ int __cdecl gm_SabotageHandlungItem(int *msg)
 	} else {
 		io_FormatTextBuffer(buf, *(unsigned short *) ((char *) msg + 4) + 0x12e7, ((Dyn*)g_868060)[0].name, ((Dyn*)g_868060)[*(int *) (a + 0x65)].name);
 	}
-	fcn_00545d40(*(int *) (p + 4), *(int *) (p + 4), buf, strlen(buf) > 0x100, 0x603, 0);
+	he_PostEntityMessage(*(int *) (p + 4), *(int *) (p + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

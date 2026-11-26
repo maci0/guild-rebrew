@@ -23,7 +23,7 @@ extern char g_14cf7c8;
 float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 float __cdecl d3_WrapYawDelta(int a, int b);
-void __cdecl fcn_00438b40(char* p, int* v);
+void __cdecl d3_SetNodePosition(char* p, int* v);
 
 /* ADDRESS: GOLDTL 0x0052b720 */
 int __cdecl fcn_0052b720(void)
@@ -270,7 +270,7 @@ done:
 				v[2] = t;
 			}
 		}
-		fcn_00438b40((char*) d3_ActiveCamera, (int*) v);
+		d3_SetNodePosition((char*) d3_ActiveCamera, (int*) v);
 		ret = 1;
 	}
 	*(float*) 0x773e24 = q[0];

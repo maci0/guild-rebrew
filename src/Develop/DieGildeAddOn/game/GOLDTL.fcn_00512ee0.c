@@ -98,9 +98,9 @@ void __cdecl init_Betrieb(unsigned char *);
 void __cdecl init_SetupBetriebWorkers(unsigned char *);
 void __cdecl fcn_00535960(void);
 void __cdecl d2_SetProgressPercent(int, int);
-void __cdecl fcn_00547010(void);
-void __cdecl fcn_005470a0(void);
-void __cdecl fcn_00547130(void);
+void __cdecl he_EnsureAction0x6d(void);
+void __cdecl he_EnsureAction0x6b(void);
+void __cdecl he_EnsureAction0x7a(void);
 void __cdecl he_EnsureCityBuilding0x2bActions(void);
 int __cdecl lc_GetBauplatzPrefix(int, char *);
 int __cdecl d3_CollectUnusedSceneObjects(char *, char **);
@@ -459,9 +459,9 @@ handles_done:
 		msg.b36 = 1;
 		cm_SendCopyEntityData(&msg);
 	}
-	fcn_00547010();
-	fcn_005470a0();
-	fcn_00547130();
+	he_EnsureAction0x6d();
+	he_EnsureAction0x6b();
+	he_EnsureAction0x7a();
 	he_EnsureCityBuilding0x2bActions();
 	outer = 0;
 	for (e = g_7f4ca0 + 2; e < g_7f4ca0 + 0x651e6; e += sizeof(ENTITY_RECORD)) {

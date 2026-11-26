@@ -7,7 +7,7 @@ extern float g_662cf8;
 /* Scores an entity's slot chain: matching slot types 2 and 6, plus links of the
  * queried chain that repeat with the same type, scaled by g_662cf8. */
 /* ADDRESS: GOLDTL 0x0050bff0 */
-int __cdecl fcn_0050bff0(unsigned char* building)
+int __cdecl gm_ScoreBuildingSlotChain(unsigned char* building)
 {
 	unsigned char* base;
 	unsigned short* slot;

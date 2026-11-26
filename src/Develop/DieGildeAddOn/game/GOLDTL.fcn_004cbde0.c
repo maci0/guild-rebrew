@@ -15,7 +15,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl sim_CreateCitizen(char, uint, int, uchar, uchar, ushort*);
 char* __cdecl sim_StartEntityQueryByType(uchar*);
-char* __cdecl fcn_005049a0(ushort*);
+char* __cdecl gm_FindBuildingPrimarySlot(ushort*);
 void __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 int* __cdecl ahm_QueryEntityBuildingType(char*);
 char* __cdecl gm_AllocObjekt(int, int, int);
@@ -92,7 +92,7 @@ int __cdecl fcn_004cbde0(int cmd, char* result)
 				init_SpawnBuildingCharacter(*(int*) (citizen_entity + 4), *(int*) ((char*) workplace_entity + 1), *(int*) (q + 2), 0, 0);
 		}
 		else {
-			q = fcn_005049a0(building_entity);
+			q = gm_FindBuildingPrimarySlot(building_entity);
 			if (q != 0 && *(int*) (q + 2) != -1)
 				init_SpawnBuildingCharacter(*(int*) (citizen_entity + 4), *(int*) ((char*) building_entity + 1), *(int*) (q + 2), 0, 0);
 		}

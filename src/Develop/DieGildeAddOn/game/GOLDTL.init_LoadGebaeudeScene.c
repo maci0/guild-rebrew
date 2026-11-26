@@ -21,7 +21,7 @@ int __cdecl init_GetGebaeudeSceneName(int idx, char* out);
 void __cdecl d3_SelectSceneContext(int a, int b);
 char __cdecl d3_LoadScene(const char* filename, void* stream, int progress);
 void __cdecl fcn_00516de0(char* a1, unsigned char a2);
-int __cdecl fcn_004026f0(char* p);
+int __cdecl d3sm_GetSceneSuperMap(char* p);
 void __cdecl gv_Free3Fields(int);
 void __cdecl fcn_0045b290(int, int);
 char __cdecl d3_TraverseSceneObjects(char* scene, char* node, unsigned int flags, void (__cdecl* cb)(char*));
@@ -125,7 +125,7 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 	d3_SelectSceneContext(d3_CurrentContextIndex, 0);
 	gv_Free3Fields(*(int*) (g_67a370 + 0xb0));
 	*(int*) (g_67a370 + 0xb0) = 0;
-	fcn_004026f0((char*) g_67a370);
+	d3sm_GetSceneSuperMap((char*) g_67a370);
 	fcn_0045b290(*(int*) (g_67a370 + 0xb0), (int) g_6b8300);
 	d3_TraverseSceneObjects((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
 	d3_TraverseSceneObjects((char*) g_67a370, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);

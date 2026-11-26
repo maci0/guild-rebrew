@@ -30,7 +30,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl d2_IsTutorialActionAllowed(int);
 void __cdecl fcn_005ce460(int);
-void __cdecl fcn_005a92c0(int);
+void __cdecl d2_RunBuergerrechtDialog(int);
 void __cdecl d2_ShowOfficeApplicationDialog(void);
 
 void __cdecl d2_RunRathausCouncilMenu(int building)
@@ -77,7 +77,7 @@ void __cdecl d2_RunRathausCouncilMenu(int building)
 					fcn_005ce460(0x113);
 				}
 				else if (g_7746a0 == d) {
-					fcn_005a92c0(building);
+					d2_RunBuergerrechtDialog(building);
 				}
 				else if (g_7746a0 == e) {
 					d2_ShowOfficeApplicationDialog();

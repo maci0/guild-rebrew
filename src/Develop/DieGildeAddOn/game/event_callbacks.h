@@ -39,7 +39,7 @@ int __cdecl cut_NotifyHinrichtung(char* event);
 int __cdecl gm_NotifyHochzeit(char* event);
 int __cdecl fcn_004e27b0(char* event);
 int __cdecl fcn_004e2b40(char* event);
-int __cdecl fcn_004e32c0(char* event);
+int __cdecl cut_BroadcastCutsceneNotice(char* event);
 
 /* Declaration only: complete allocation extent and storage owner remain unresolved. */
 /* ADDRESS: GOLDTL 0x009b0840 */

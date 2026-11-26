@@ -9,7 +9,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 #include "client_scene_transform.h"
 #include "client_placement.h"
 
-void __cdecl fcn_005983d0(char* e)
+void __cdecl lc_UpdateBuildingVegetation(char* e)
 {
 	float pa[4];
 	float pb[4];

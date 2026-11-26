@@ -15,7 +15,7 @@ int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
 int __cdecl fcn_00476970();
 int __cdecl fcn_00495890();
-int __cdecl fcn_004ad8c0();
+int __cdecl gm_ReplenishOfficeCandidates();
 int __cdecl hst_ShowDueHistoryScroll();
 int __cdecl plt_UpdatePlantStages();
 int __cdecl d3snd_QueueSound();
@@ -28,12 +28,12 @@ int __cdecl fcn_004f5830();
 int __cdecl gm_UpdateAllBuildingLevels();
 int __cdecl fcn_004facb0();
 int __cdecl fcn_004fb390();
-int __cdecl fcn_004fb630();
+int __cdecl gm_GetDisasterState();
 void __cdecl fcn_004fb650(int, int, int, float);
-int __cdecl fcn_004fb7a0();
+int __cdecl gm_UpdateDisasterState();
 int __cdecl fcn_004fcc20();
 int __cdecl gm_CollectAllTaxes();
-int __cdecl fcn_004fd280();
+int __cdecl gm_AdvanceRoundCounters();
 int __cdecl fcn_004ff0f0();
 int __cdecl gm_PackGameTime();
 int __cdecl fcn_005016c0();
@@ -54,7 +54,7 @@ int __cdecl he_DispatchFlaggedEvents();
 int __cdecl fcn_0053f100();
 int __cdecl fcn_00546f80();
 int __cdecl fcn_00547770();
-int __cdecl fcn_005490a0();
+int __cdecl he_RunDailyActionMaintenance();
 int __cdecl fcn_005490d0();
 int __cdecl io_FormatTextBuffer();
 int __cdecl d2_CreateScrollPerga();
@@ -178,7 +178,7 @@ void __cdecl fcn_00543080(void)
 		fcn_004fd0a0();
 		fcn_00535960();
 		Sleep(100);
-		fcn_004fd280(3);
+		gm_AdvanceRoundCounters(3);
 		fcn_004fcc20();
 		fcn_00535960();
 		Sleep(100);
@@ -186,7 +186,7 @@ void __cdecl fcn_00543080(void)
 		fcn_004eafe0();
 		fcn_00535960();
 		Sleep(100);
-		fcn_005490a0();
+		he_RunDailyActionMaintenance();
 		fcn_005490d0();
 		fcn_00535960();
 		Sleep(100);
@@ -197,11 +197,11 @@ void __cdecl fcn_00543080(void)
 		fcn_00535960();
 		Sleep(100);
 		fcn_004fb390();
-		fcn_004fb630(&st);
+		gm_GetDisasterState(&st);
 		if (st.head == -1) {
 			fcn_004fb650(1, 0x3f800000, 0x3f000000, (float)(10.0 - (double)(4 - g_7747b4) * g_662cc0));
 		} else {
-			fcn_004fb7a0();
+			gm_UpdateDisasterState();
 		}
 		fcn_00547770();
 		fcn_00535960();
@@ -212,9 +212,9 @@ void __cdecl fcn_00543080(void)
 			v4 = &v4[0x87];
 		} while ((int) v4 < 0x85a0a4);
 		cm_RequestCopyEntityData(0xffffffff, 0xffffffff, 0, 4);
-		fcn_004ad8c0();
+		gm_ReplenishOfficeCandidates();
 	} else {
-		fcn_004fd280(2);
+		gm_AdvanceRoundCounters(2);
 	}
 	v4 = (unsigned int*) 0x7f4e8c;
 	do {

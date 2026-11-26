@@ -6,7 +6,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_004c5620(int, char*);
 
 /* ADDRESS: GOLDTL 0x0055ac00 */
-void __cdecl fcn_0055ac00(char* e)
+void __cdecl he_AllocDailyCouncilEvent(char* e)
 {
 	if ((e[0x78] & 4) != 0) {
 		return;

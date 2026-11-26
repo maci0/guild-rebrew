@@ -40,7 +40,7 @@ void __cdecl fcn_00535960(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -102,7 +102,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 					g_774654 = 1;
 				} else {
 					cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (o + 4), -0x1a, 1);
-					fcn_004c6ae0(*(int*) (e + 4), -2);
+					cm_RequestModifyHealth(*(int*) (e + 4), -2);
 					io_FormatTextBuffer(text, 0x1d59, *(unsigned short*) o);
 					fcn_00526120(text, 0);
 					result = 0;

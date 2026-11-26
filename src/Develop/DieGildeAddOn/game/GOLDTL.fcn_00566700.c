@@ -23,10 +23,10 @@ void __cdecl cm_SendSetAttribute(void);
 int __cdecl gm_FindFallbackPublicBuilding(char*, int*, int*);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-char* __cdecl fcn_005049a0(char*);
+char* __cdecl gm_FindBuildingPrimarySlot(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
-int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_RunWorkerQuitAction(char* u)
@@ -60,14 +60,14 @@ void __cdecl he_RunWorkerQuitAction(char* u)
 		}
 		v = -5;
 		cm_RequestCopyEntityData(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)])->entity_id, *(int*) (h + 4), v, 1);
-		q = fcn_005049a0(*(char**) (h + 0x16c));
+		q = gm_FindBuildingPrimarySlot(*(char**) (h + 0x16c));
 		io_FormatTextBuffer(text, 0x1bac, *(unsigned short*) h, *(char**) (h + 0x16c));
 		if (q != 0) {
 			h = *(char**) (h + 0x16c);
 			he_MessageBoxQuickjump(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (h + 0x27)])->entity_id, -1, text, 0, 0x5f2, *(int*) (h + 1), *(int*) (q + 2), 0,
 			    "_NACHRICHTEN_HS_01");
 		} else {
-			fcn_00545d40(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)])->entity_id, -1, text, 0, 0x5f2, "_NACHRICHTEN_HS_01");
+			he_PostEntityMessage(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (*(char**) (h + 0x16c) + 0x27)])->entity_id, -1, text, 0, 0x5f2, "_NACHRICHTEN_HS_01");
 		}
 		he_FreeAction(u);
 		return;

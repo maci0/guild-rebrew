@@ -21,9 +21,9 @@ extern char s_6acdac[];
 unsigned short __cdecl gm_RandomMod(int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -66,14 +66,14 @@ int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 		}
 		cm_RequestCopyEntityData(*(int*) (o1 + 4), *(int*) (o2 + 4), a, 1);
 		cm_RequestCopyEntityData(*(int*) (o2 + 4), *(int*) (o1 + 4), b, 1);
-		fcn_004c6ae0(*(int*) (e + 4), -3);
+		cm_RequestModifyHealth(*(int*) (e + 4), -3);
 		if (o1[2] == 6 || o1[2] == 7) {
 			io_FormatTextBuffer(text, 0x1de8, *(unsigned short*) o2, *(unsigned short*) e);
-			fcn_00545d40(*(int*) (o1 + 4), *(int*) (o1 + 4), text, 0, 0x5ec, g_6b5c60);
+			he_PostEntityMessage(*(int*) (o1 + 4), *(int*) (o1 + 4), text, 0, 0x5ec, g_6b5c60);
 		}
 		if (o2[2] == 6 || o2[2] == 7) {
 			io_FormatTextBuffer(text, 0x1de8, *(unsigned short*) o1, *(unsigned short*) e);
-			fcn_00545d40(*(int*) (o2 + 4), *(int*) (o2 + 4), text, 0, 0x5ec, g_6b5c60);
+			he_PostEntityMessage(*(int*) (o2 + 4), *(int*) (o2 + 4), text, 0, 0x5ec, g_6b5c60);
 		}
 		return 0x10;
 	}
@@ -108,16 +108,16 @@ int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 					b = gm_RandomMod(0x28) + 0xf;
 					cm_RequestCopyEntityData(*(int*) (o1 + 4), *(int*) (o2 + 4), a, 1);
 					cm_RequestCopyEntityData(*(int*) (o2 + 4), *(int*) (o1 + 4), b, 1);
-					fcn_004c6ae0(*(int*) (e + 4), -3);
+					cm_RequestModifyHealth(*(int*) (e + 4), -3);
 					io_FormatTextBuffer(text, 0x1de7, *(unsigned short*) o1, *(unsigned short*) o2);
 					fcn_00526120(text, 0);
 					if (o1[2] == 6 || o1[2] == 7) {
 						io_FormatTextBuffer(text, 0x1de8, *(unsigned short*) o2, *(unsigned short*) e);
-						fcn_00545d40(*(int*) (o1 + 4), *(int*) (o1 + 4), text, 0, 0x5ec, 0);
+						he_PostEntityMessage(*(int*) (o1 + 4), *(int*) (o1 + 4), text, 0, 0x5ec, 0);
 					}
 					if (o2[2] == 6 || o2[2] == 7) {
 						io_FormatTextBuffer(text, 0x1de8, *(unsigned short*) o1, *(unsigned short*) e);
-						fcn_00545d40(*(int*) (o2 + 4), *(int*) (o2 + 4), text, 0, 0x5ec, 0);
+						he_PostEntityMessage(*(int*) (o2 + 4), *(int*) (o2 + 4), text, 0, 0x5ec, 0);
 					}
 					g_774654 = 1;
 					result = 1;

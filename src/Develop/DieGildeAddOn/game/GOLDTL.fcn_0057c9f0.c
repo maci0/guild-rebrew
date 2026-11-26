@@ -6,9 +6,9 @@ int __cdecl gm_ResolveEntityById(char**, int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00510500(int);
 unsigned short __cdecl gm_RandomMod(int);
-float __cdecl fcn_0050f980(unsigned int, unsigned int, unsigned int);
+float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl io_FormatTextBuffer(char*, int, int, int, int);
-int __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 
 /* ADDRESS: GOLDTL 0x0057c9f0 */
@@ -73,7 +73,7 @@ void __cdecl fcn_0057c9f0(char* action)
 	for (p = g_7f4ca0; (int) p < (int) (g_7f4ca0 + 0x65400); p += 0x21c) {
 		if (*(unsigned short*) p != 0xffff && p != (char*) ent
 			&& *(unsigned char*) (p + 2) < 0xa) {
-			if (radius < fcn_0050f980(*ent, *(unsigned short*) p, 1)) {
+			if (radius < gm_CalcEntityFavor(*ent, *(unsigned short*) p, 1)) {
 				found++;
 			}
 		}
@@ -81,6 +81,6 @@ void __cdecl fcn_0057c9f0(char* action)
 	found += bonus;
 	bonus = found * count;
 	io_FormatTextBuffer(buf, 0x41fa, handle, found, bonus);
-	fcn_00545d40(*(int*) (ent + 2), -1, buf, 1, 0x5fa, 0);
+	he_PostEntityMessage(*(int*) (ent + 2), -1, buf, 1, 0x5fa, 0);
 	cm_RequestTransferCurrencyNoKill(*(int*) (ent + 2), -1, g_773d75, bonus);
 }

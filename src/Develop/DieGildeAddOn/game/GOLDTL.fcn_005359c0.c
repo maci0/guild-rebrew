@@ -17,7 +17,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_004ff210(unsigned short, int);
 int __cdecl ai_StartGraveyardOwner(int, char*, int, Blk24*, Blk24*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_004a6210(char*, char*, int);
+int __cdecl gm_ComputeCannonShot(char*, char*, int);
 int __cdecl fcn_004a6550(char*, char*);
 void __cdecl d2_OpenBlutracheDialog(char*);
 void __cdecl fcn_005e5a50(int);
@@ -87,7 +87,7 @@ int __cdecl fcn_005359c0(void)
 		if (e == 0) {
 			return;
 		}
-		if (fcn_004a6210((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o, (int) e) == 0) {
+		if (gm_ComputeCannonShot((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o, (int) e) == 0) {
 			return;
 		}
 		fcn_004a6550((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], o);

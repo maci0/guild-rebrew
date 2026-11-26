@@ -37,7 +37,7 @@ int __cdecl d2_CanCloseWindowDuringTutorial();
 int __cdecl fcn_00594340();
 int __cdecl fcn_00595e20();
 int __cdecl fcn_005963f0();
-int __cdecl fcn_005974e0();
+int __cdecl d2_SyncProduktionSlotGrid();
 int __cdecl fcn_00597940();
 int __cdecl fcn_005bdfc0();
 
@@ -369,7 +369,7 @@ label_5bea6c:
       v29 = -1;
     }
     if (*v4 == 0x116) {
-      fcn_005974e0(v2,v4);
+      d2_SyncProduktionSlotGrid(v2,v4);
       fcn_00597940(dialogId,1,1,v2,v4);
     } else { // branch-flip
       fcn_00595e20(v2,v4);

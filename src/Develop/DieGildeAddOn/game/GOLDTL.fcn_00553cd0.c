@@ -21,7 +21,7 @@ extern double g_6628f0;
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl he_FreeAction(char* e);
-void __cdecl fcn_00529160(char* e, int a, int id, char* rec);
+void __cdecl he_AssignActionSlot(char* e, int a, int id, char* rec);
 void __cdecl cm_SendCancelCharacterActions(int owner);
 void __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* tag);
 void __cdecl gm_AddTime(int* pos, int a, int b, int c);
@@ -30,7 +30,7 @@ char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CalculateGebaeudeValue(char* e, int n);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
-void __cdecl fcn_00545d40(int a, int b, char* text, int c, int d, char* tag);
+void __cdecl he_PostEntityMessage(int a, int b, char* text, int c, int d, char* tag);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g,
 	char* tag);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
@@ -60,7 +60,7 @@ void __cdecl he_RunBetriebsPruefung(char* event)
 	}
 	switch (state) {
 	case 0:
-		fcn_00529160(e, 0, *record, event);
+		he_AssignActionSlot(e, 0, *record, event);
 		cm_SendCancelCharacterActions(*(int*) (record + 2));
 		ch_StartMovement(*(int*) (record + 2), *(int*) (e + 1), -1, 0, 1, "BetriebsPr");
 		*(pos14_7f4c00*) (event + 0x52) = *(pos14_7f4c00*) &gm_GameTime;
@@ -87,7 +87,7 @@ void __cdecl he_RunBetriebsPruefung(char* event)
 		if (!(f > 0.2) && found == 0) {
 			io_FormatTextBuffer(buf, 0x1a76, *(unsigned short*) (e + 0x27), e);
 			a = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id);
-			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_88");
+			he_PostEntityMessage(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_88");
 			io_FormatTextBuffer(buf, 0x1a78, *(unsigned short*) (event + 8), e);
 			b = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id);
 			he_MessageBoxQuickjump(b, b, buf, 0, 0x5f0, *(int*) (e + 1), -1, 0,
@@ -102,7 +102,7 @@ void __cdecl he_RunBetriebsPruefung(char* event)
 		if (type == 6 || type == 7) {
 			io_FormatTextBuffer(buf, 0x1a75, x, *(unsigned short*) (e + 0x27), e);
 			a = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (event + 8)].entity_id);
-			fcn_00545d40(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_87");
+			he_PostEntityMessage(a, a, buf, 0, 0x5f0, "_NACHRICHTEN_HS_87");
 		}
 		type = (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_type);
 		if (type == 6 || type == 7) {
@@ -114,7 +114,7 @@ void __cdecl he_RunBetriebsPruefung(char* event)
 		*(int*) (event + 0x70) = 2;
 		return;
 	case 2:
-		fcn_00529160(e, 0, *record, 0);
+		he_AssignActionSlot(e, 0, *record, 0);
 		cm_SendCancelCharacterActions(*(int*) (record + 2));
 		ch_StartMovement(*(int*) (record + 2), *(int*) (event + 0xb4), *(int*) (event + 0xb8), 0,
 			0, "BetriebsPr");

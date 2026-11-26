@@ -10,20 +10,20 @@ int __cdecl gm_CompareGameTime(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
-int __cdecl fcn_005049a0(int);
+int __cdecl gm_FindBuildingPrimarySlot(int);
 int __cdecl fcn_0050dc90(int);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 int __cdecl io_FormatTextBuffer(char*, int, int, int);
 int __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl he_FreeAction(int);
 int __cdecl strcat(char*, char*);
 int __cdecl strlen(char*);
 
 /* ADDRESS: GOLDTL 0x005609c0 */
-void __cdecl fcn_005609c0(char* jobState)
+void __cdecl he_RunGetier(char* jobState)
 {
 	char text[256];
 	char name[256];
@@ -64,7 +64,7 @@ void __cdecl fcn_005609c0(char* jobState)
 			while (i < *(unsigned char*) (jobState + 0xac)) {
 				ent = gm_LookupEntityRecordById(*(int*) (jobState + 0x8c + i * 4));
 				if (ent != 0) {
-					fcn_00529160(*(int*) ((unsigned short*) ent + 0xb6), 0,
+					he_AssignActionSlot(*(int*) ((unsigned short*) ent + 0xb6), 0,
 						*(unsigned short*) ent, 0);
 				}
 				i += 1;
@@ -86,7 +86,7 @@ void __cdecl fcn_005609c0(char* jobState)
 	}
 	v19 = fcn_00502cd0(*(int*) (rec + 0x5d), 1, 0, 0xdd);
 	if (v19 == 0) {
-		v19 = fcn_005049a0(rec);
+		v19 = gm_FindBuildingPrimarySlot(rec);
 	}
 	ent = fcn_00502cd0(*(int*) (rec + 0x5d), 2, 6, 0, 0x2a);
 	if (ent != 0) {

@@ -8,7 +8,7 @@ unsigned short __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 extern int __cdecl io_FormatTextBuffer(char*, int, int);
 extern void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
-extern void __cdecl fcn_00545d40(int, int, void*, int, int, int);
+extern void __cdecl he_PostEntityMessage(int, int, void*, int, int, int);
 extern void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* Collects the entity ids in the given building's filter chain, drops repeated
@@ -71,7 +71,7 @@ int __cdecl fcn_004b7f70(unsigned int* request)
 	n = (int) (((double) gm_WalkEntityChain(*ent) * d) *
 	    g_6640e8);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7, n);
-	fcn_00545d40(*(int*) ((char*) ent + 4), *(int*) ((char*) ent + 4), buf,
+	he_PostEntityMessage(*(int*) ((char*) ent + 4), *(int*) ((char*) ent + 4), buf,
 	    (unsigned) strlen(buf) > 0x100, 0x603, 0);
 	cm_RequestTransferCurrencyNoKill(-1, *(int*) request, (char) g_773d75, n);
 	return 0;

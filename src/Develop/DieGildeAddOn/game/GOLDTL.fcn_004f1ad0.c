@@ -8,11 +8,11 @@ extern char* g_14a5dbc[];
 extern char* gm_FemaleNames[];
 
 int __cdecl gm_RandomMod(int n);
-char* __cdecl FindSlotEntryFiltered(int a0, void* a1, int a2, void* filter, int a4);
-char* __cdecl gm_FindOrAllocHeadSet(int a0, int a1);
+char* __cdecl FindSlotEntryFiltered(int mode, void* table, int flags, void* filter, int extra);
+char* __cdecl gm_FindOrAllocHeadSet(int gender, int age);
 
 /* ADDRESS: GOLDTL 0x004f1ad0 */
-int __cdecl fcn_004f1ad0(void* building, int count)
+int __cdecl gm_AssignBuildingResidents(void* building, int count)
 {
 	char* hit;
 	char* tbl;

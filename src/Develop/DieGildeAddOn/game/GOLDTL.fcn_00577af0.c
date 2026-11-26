@@ -34,7 +34,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
 int __cdecl he_TryTriggerAction0x9b(int id, ENTITY_RECORD* me)
@@ -60,14 +60,14 @@ int __cdecl he_TryTriggerAction0x9b(int id, ENTITY_RECORD* me)
 			if (a - b * 0.5f + gm_RandomFloat01() * 0.5 < 0.7) {
 refuse:
 				io_FormatTextBuffer(text, 0x4032, me->entity_index, me->entity_index);
-				fcn_00545d40(h->entity_id, -1, text, 1, 0x5fa, "_NACHRICHTEN_DOMIZIL_07");
+				he_PostEntityMessage(h->entity_id, -1, text, 1, 0x5fa, "_NACHRICHTEN_DOMIZIL_07");
 				io_FormatTextBuffer(text, 0x4034);
-				fcn_00545d40(me->entity_id, -1, text, 1, 0x5fb, "_NACHRICHTEN_DOMIZIL_09");
+				he_PostEntityMessage(me->entity_id, -1, text, 1, 0x5fb, "_NACHRICHTEN_DOMIZIL_09");
 			} else {
 				io_FormatTextBuffer(text, 0x4031, me->entity_index);
-				fcn_00545d40(h->entity_id, -1, text, 1, 0x5fa, "_NACHRICHTEN_DOMIZIL_06");
+				he_PostEntityMessage(h->entity_id, -1, text, 1, 0x5fa, "_NACHRICHTEN_DOMIZIL_06");
 				io_FormatTextBuffer(text, 0x4033);
-				fcn_00545d40(me->entity_id, -1, text, 1, 0x5fb, "_NACHRICHTEN_DOMIZIL_09");
+				he_PostEntityMessage(me->entity_id, -1, text, 1, 0x5fb, "_NACHRICHTEN_DOMIZIL_09");
 				memset(&m, 0, sizeof(m));
 				m.kind = 0x9b;
 				m.owner = h->entity_id;

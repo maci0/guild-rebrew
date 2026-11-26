@@ -49,7 +49,7 @@ int __cdecl fcn_005e9870(Sefde0Entry*);
 int __cdecl fcn_005e9da0(Sefde0Entry*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl d3_DestroyObject(void*);
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl fcn_004efd70(int);
 void __cdecl fcn_004f01c0(int, int, int, int*);
 
@@ -111,7 +111,7 @@ void __cdecl fcn_004efde0(void)
 								*(unsigned char*) (SLOTS[slot].objects[i] + 0x216) |= 3;
 								*(unsigned char*) (SLOTS[slot].objects[i] + 0x215) &= ~2;
 							}
-							fcn_00438b40(SLOTS[slot].objects[i], &SLOTS[slot].entry[i].obj);
+							d3_SetNodePosition(SLOTS[slot].objects[i], &SLOTS[slot].entry[i].obj);
 						}
 						if (SLOTS[slot].entry[i].state == 3) {
 							if (SLOTS[slot].objects[i] != 0) {

@@ -20,7 +20,7 @@ extern char g_7f4ca0[];
 
 int __cdecl d2_UpdateWindowDrag(char*);
 int __cdecl fcn_005b10e0(char*);
-void __cdecl fcn_005918f0(char*);
+void __cdecl d2_RunPersonDialog(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl fcn_00469c30(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
@@ -77,7 +77,7 @@ void __cdecl fcn_005b11f0(int* state)
 				w = *(unsigned short*) (*(int*) p + 0x27);
 				if (w != 0xffff
 				    && *(unsigned char*) (w * 0x21c + 0x7f4ca2) < 10) {
-					fcn_005918f0((char*) (w * 0x21c + 0x7f4ca0));
+					d2_RunPersonDialog((char*) (w * 0x21c + 0x7f4ca0));
 					i = d2_CurrentElementId;
 				}
 			}

@@ -42,7 +42,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_004eb780(ZUNFT_ENTITY_VIEW*, ZUNFT_LEVEL2_REQUEST*);
+void __cdecl gm_ExecZunftAufruhr(ZUNFT_ENTITY_VIEW*, ZUNFT_LEVEL2_REQUEST*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -86,7 +86,7 @@ int __cdecl d2_RunZunftLevel2Dialog(int unused, char* target)
 				req.kind = 2;
 				req.who = *(int*) (target + 1);
 				req.cost = cost;
-				fcn_004eb780(((ZUNFT_ENTITY_VIEW*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), &req);
+				gm_ExecZunftAufruhr(((ZUNFT_ENTITY_VIEW*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), &req);
 				g_774654 = 2;
 			} else if (d2_CurrentElementId == w2) {
 				g_774654 = 1;

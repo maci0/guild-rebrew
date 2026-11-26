@@ -23,20 +23,20 @@ void __cdecl d2_OpenRaubzugDialog(int, char*);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
 
-void __cdecl fcn_0059dc50(char* e)
+void __cdecl d2_StartRaubzugTargetSelect(char* building)
 {
 	Query q;
 	char buf[0x400];
 
-	if (d2_CheckOwnerBlocked(e) != 0) {
+	if (d2_CheckOwnerBlocked(building) != 0) {
 		return;
 	}
 	memset(&q, 0, sizeof(q));
 	q.x4 = 0x400;
-	if (e == 0) {
+	if (building == 0) {
 		return;
 	}
-	fcn_0052a0c0(e, 0);
+	fcn_0052a0c0(building, 0);
 	q.x4c = 0x727;
 	q.x10 = 6;
 	q.x8 = 0xa07443a0;

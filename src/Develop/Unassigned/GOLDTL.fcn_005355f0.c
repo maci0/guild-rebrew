@@ -6,7 +6,7 @@ int g_6a2c00 = 0xffffffff;
 
 void __cdecl fcn_00471e30(int);
 
-void __cdecl fcn_005355f0(void)
+void __cdecl d2_DestroyScrollPerga(void)
 {
 	if (g_6a2bf8 != -1) {
 		fcn_00471e30(g_6a2bf8);

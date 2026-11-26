@@ -4,7 +4,7 @@ int __cdecl fcn_004f4830(int idx, void* dst);
 char* __cdecl fcn_004e90d0(int a);
 int __cdecl gm_MapEntityStatRange(int a);
 float __cdecl gm_GetEntitySkill(char* entity, int index);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x00490580 */
 int __cdecl fcn_00490580(char* e, int a1, int* choice)
@@ -48,7 +48,7 @@ int __cdecl fcn_00490580(char* e, int a1, int* choice)
 	}
 	p = fcn_004e90d0(0x11);
 	if (p != 0) {
-		r = fcn_0050f980(*(unsigned short*) p, *(unsigned short*) e, 1);
+		r = gm_CalcEntityFavor(*(unsigned short*) p, *(unsigned short*) e, 1);
 		if (info[6] == 1) {
 			if (r > 0.75f) {
 				*choice = 0;

@@ -30,7 +30,7 @@ void __cdecl fcn_00473150(char*);
 void __cdecl d3_SelectSceneContext(int, int);
 char __cdecl d3_LoadScene(const char*, void*, SCENE_PROGRESS);
 void __cdecl gv_Free3Fields(int*);
-int __cdecl fcn_004026f0(char*);
+int __cdecl d3sm_GetSceneSuperMap(char*);
 void __cdecl fcn_0045b290(char*, int);
 char __cdecl d3_TraverseSceneObjects(int, void*, int, void (__cdecl*)(void));
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
@@ -108,7 +108,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 				d3_SelectSceneContext(d3_CurrentContextIndex, 0);
 				gv_Free3Fields((int*) *(int*) (g_67a370 + 0xb0));
 				*(int*) (g_67a370 + 0xb0) = 0;
-				fcn_004026f0((char*) g_67a370);
+				d3sm_GetSceneSuperMap((char*) g_67a370);
 				fcn_0045b290((char*) *(int*) (g_67a370 + 0xb0), g_6b8300);
 				d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
 				d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);

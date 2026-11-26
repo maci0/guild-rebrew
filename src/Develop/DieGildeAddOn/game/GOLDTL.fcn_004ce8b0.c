@@ -4,7 +4,7 @@ float __cdecl gm_GetEntityHealthRatio(char*);
 
 
 /* ADDRESS: GOLDTL 0x004ce8b0 */
-float __cdecl fcn_004ce8b0(char* e)
+float __cdecl gm_CalcCombatStrength(char* e)
 {
 	float mult;
 	float base;

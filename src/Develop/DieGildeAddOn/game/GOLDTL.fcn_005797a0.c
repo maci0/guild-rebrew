@@ -29,10 +29,10 @@ extern void __cdecl cm_SendSellObjekt(int a, int b, int c, int d, char e, int f)
 extern void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 extern void __cdecl he_MessageBoxQuickjump(int a, int b, char* c, int d, int e,
 	int f, int g, int h, char* i);
-extern void __cdecl fcn_00529160(int a, int b, int c, int d);
+extern void __cdecl he_AssignActionSlot(int a, int b, int c, int d);
 
 /* ADDRESS: GOLDTL 0x005797a0 */
-void __cdecl fcn_005797a0(char* event)
+void __cdecl he_RunRohstoffsuchen(char* event)
 {
 	char text[1024];
 	char name[152];
@@ -175,7 +175,7 @@ void __cdecl fcn_005797a0(char* event)
 	for (i = 0; i < 4; i++) {
 		entity = (char*) gm_LookupEntityRecordById(*p8c);
 		if (entity != 0)
-			fcn_00529160(0, 0, *(unsigned short*) entity, 0);
+			he_AssignActionSlot(0, 0, *(unsigned short*) entity, 0);
 		p8c++;
 	}
 	he_FreeAction(event);

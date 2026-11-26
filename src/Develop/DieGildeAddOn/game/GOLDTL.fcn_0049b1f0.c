@@ -40,7 +40,7 @@ int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
 /* ADDRESS: GOLDTL 0x0049b1f0 */
-int __cdecl fcn_0049b1f0(int kind, char* e, int busy, Msg* out1, Msg* out2)
+int __cdecl ai_StartUseObjectGemeinheit(int kind, char* e, int busy, Msg* out1, Msg* out2)
 {
 	Slot slot[12];
 	Counts cnt;

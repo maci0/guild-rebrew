@@ -21,7 +21,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 unsigned short __cdecl gm_RandomMod(int);
-char* __cdecl fcn_005049a0(char*);
+char* __cdecl gm_FindBuildingPrimarySlot(char*);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl fcn_00526920(char*, int, char*);
 void __cdecl he_FreeAction(char*);
@@ -55,7 +55,7 @@ void __cdecl he_RunEvent0x85(char* u)
 		list[n++] = g_773d78;
 		if (n != 0) {
 			p = list[gm_RandomMod(n)];
-			if (gm_RandomMod(4) != 0 && p != g_773d78 && ((e = fcn_005049a0(p)) != 0 || (e = gm_SetupEntityQuery(p)) != 0)) {
+			if (gm_RandomMod(4) != 0 && p != g_773d78 && ((e = gm_FindBuildingPrimarySlot(p)) != 0 || (e = gm_SetupEntityQuery(p)) != 0)) {
 				fcn_00526920(p, *(int*) (e + 2), g_6b5c60);
 			} else {
 				fcn_00526920(p, -1, g_6b5c60);

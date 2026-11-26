@@ -143,7 +143,7 @@ void __cdecl fcn_00545e80(int handle, int arg, char* text, int a, int b,
     int c, int d);
 
 /* Dialog line with two text slots. */
-int __cdecl fcn_00545d40(int id, int arg, char* text1, int flags, int value,
+int __cdecl he_PostEntityMessage(int id, int arg, char* text1, int flags, int value,
     char* text2);
 
 /* Entity float value. */

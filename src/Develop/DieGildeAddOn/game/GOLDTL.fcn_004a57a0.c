@@ -18,7 +18,7 @@ extern int gm_RandomSearchSteps[];
 
 int __cdecl fcn_005cf720(unsigned short, unsigned short, Query *, int);
 unsigned short __cdecl gm_RandomMod(int);
-float __cdecl fcn_0050f980(int, int, int);
+float __cdecl gm_CalcEntityFavor(int, int, int);
 
 /* ADDRESS: GOLDTL 0x004a57a0 */
 unsigned int __cdecl fcn_004a57a0(unsigned short *e, int filterFlags, int n, char *src, float lo, float hi, unsigned short *out)
@@ -67,7 +67,7 @@ unsigned int __cdecl fcn_004a57a0(unsigned short *e, int filterFlags, int n, cha
 			return 0;
 		}
 		if (fcn_005cf720(*e, (unsigned short) i, &q, 0) != 0) {
-			if (flag == 0 || (val = fcn_0050f980(i, *e, 1), !(val < lo) && !(val > hi))) {
+			if (flag == 0 || (val = gm_CalcEntityFavor(i, *e, 1), !(val < lo) && !(val > hi))) {
 				found = 1;
 				*out = (unsigned short) i;
 			}

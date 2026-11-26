@@ -10,7 +10,7 @@ int __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 int __cdecl gm_ApplyEntityPercentDebit(void* request)
 {
@@ -33,7 +33,7 @@ int __cdecl gm_ApplyEntityPercentDebit(void* request)
 	    (gm_RandomMod(6) & 0xffff) + 3, amount);
 	cm_RequestTransferCurrencyNoKill(*(int*) request, -1, g_773d75, amount);
 	len = strlen(buf);
-	fcn_00545d40(*(int*) ((char*) entity + 4), *(int*) ((char*) entity + 4), buf,
+	he_PostEntityMessage(*(int*) ((char*) entity + 4), *(int*) ((char*) entity + 4), buf,
 	    0x100 < len, 0x603, 0);
 	return 0;
 }

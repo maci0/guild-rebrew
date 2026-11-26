@@ -27,7 +27,7 @@ extern short g_7f4c0c;
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_ResolveParentEntity(char*);
-void __cdecl fcn_004d1d40(char*, char);
+void __cdecl gm_EquipDuelist(char*, char);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl fcn_004c5980(void* data);
 
@@ -72,11 +72,11 @@ void __cdecl fcn_005b54b0(char* p)
 		}
 	}
 	if (p[0x28] == 2) {
-		fcn_004d1d40(msg, 2);
-		fcn_004d1d40(msg, 1);
+		gm_EquipDuelist(msg, 2);
+		gm_EquipDuelist(msg, 1);
 	}
 	else {
-		fcn_004d1d40(msg, p[0x28]);
+		gm_EquipDuelist(msg, p[0x28]);
 	}
 	*(int*) (msg + 0x10c) = *(int*) (e + 1);
 	n = 0;

@@ -28,9 +28,9 @@ char* __cdecl gm_SearchTable67(int);
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00529160(unsigned char*, char*, unsigned int, unsigned char*);
+void __cdecl he_AssignActionSlot(unsigned char*, char*, unsigned int, unsigned char*);
 int __cdecl gm_IsEntityAtBuilding(char*, char*);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(int);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
@@ -56,7 +56,7 @@ typedef struct {
 /* Runs the three-step trade window: open it, wait until a scene slot reports
  * the matching partner, then queue the packet for the selected house. */
 /* ADDRESS: GOLDTL 0x00568ed0 */
-void __cdecl fcn_00568ed0(char* a1)
+void __cdecl he_RunEntfuehren(char* a1)
 {
 	char buf[0x200];
 	char* obj;
@@ -91,7 +91,7 @@ void __cdecl fcn_00568ed0(char* a1)
 		do {
 			if (*(int*) p != -1) {
 				hs = (char*) gm_LookupEntityRecordById(*(int*) p);
-				fcn_00529160(0, 0, *(unsigned short*) hs, (unsigned char*) a1);
+				he_AssignActionSlot(0, 0, *(unsigned short*) hs, (unsigned char*) a1);
 				cm_SendCancelCharacterActions(*(int*) p);
 				ch_StartMovement(*(int*) p, *(int*) (obj + 1), *(int*) (ent + 2), 0, 1,
 				             (char*) 0x6a69bc);
@@ -168,7 +168,7 @@ void __cdecl fcn_00568ed0(char* a1)
 		if (gm_HasActiveSpecialObject(obj, 0x17c) != 0) {
 			if (*(unsigned char*) (hs + 2) == 6 || *(unsigned char*) (hs + 2) == 7) {
 				io_FormatTextBuffer(buf, 0xff4);
-				fcn_00545d40(*(int*) (hs + 4), -1, buf, 0, 0x5fa, 0);
+				he_PostEntityMessage(*(int*) (hs + 4), -1, buf, 0, 0x5fa, 0);
 			}
 			*(int*) (a1 + 0x70) = -1;
 			return;
@@ -192,7 +192,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			}
 			if (*(unsigned char*) (obj + 2) == 6 || *(unsigned char*) (obj + 2) == 7) {
 				io_FormatTextBuffer(buf, 0x19be);
-				fcn_00545d40(*(int*) (obj + 4), *(int*) (obj + 4), buf, 0, 0x5fb,
+				he_PostEntityMessage(*(int*) (obj + 4), *(int*) (obj + 4), buf, 0, 0x5fb,
 				             (char*) 0x6a6980);
 			}
 			if (*(unsigned char*) (obj + 2) == 6 || *(unsigned char*) (obj + 2) == 5) {
@@ -206,7 +206,7 @@ void __cdecl fcn_00568ed0(char* a1)
 						continue;
 					}
 					io_FormatTextBuffer(buf, 0x19c0, *(unsigned short*) obj);
-					fcn_00545d40(*(int*) n, -1, buf, 0, 0x5ec, (char*) 0x6a696c);
+					he_PostEntityMessage(*(int*) n, -1, buf, 0, 0x5ec, (char*) 0x6a696c);
 				}
 			}
 			cm_BeginPacketFieldDelta(ent, *(int*) (ent + 1));
@@ -229,12 +229,12 @@ void __cdecl fcn_00568ed0(char* a1)
 		} else {
 			if (*(unsigned char*) (hs + 2) == 6 || *(unsigned char*) (hs + 2) == 7) {
 				io_FormatTextBuffer(buf, 0x19bd, *(unsigned short*) obj, 0x19c1);
-				fcn_00545d40(*(int*) (hs + 4), *(int*) (hs + 4), buf, 1, 0x5f0,
+				he_PostEntityMessage(*(int*) (hs + 4), *(int*) (hs + 4), buf, 1, 0x5f0,
 				             (char*) 0x6a6958);
 			}
 			if (*(unsigned char*) (obj + 2) == 6 || *(unsigned char*) (obj + 2) == 7) {
 				io_FormatTextBuffer(buf, 0x19bf, *(unsigned short*) hs);
-				fcn_00545d40(*(int*) (obj + 4), *(int*) (obj + 4), buf, 1, 0x5fa, 0);
+				he_PostEntityMessage(*(int*) (obj + 4), *(int*) (obj + 4), buf, 1, 0x5fa, 0);
 			}
 			i = 8;
 			p = a1 + 0x8c;
@@ -254,7 +254,7 @@ void __cdecl fcn_00568ed0(char* a1)
 			if (*(int*) p != -1) {
 				r = (char*) gm_LookupEntityRecordById(*(int*) p);
 				if (r != 0) {
-					fcn_00529160((unsigned char*) ent, 0, *(unsigned short*) r, 0);
+					he_AssignActionSlot((unsigned char*) ent, 0, *(unsigned short*) r, 0);
 				}
 			}
 			p += 4;
@@ -279,7 +279,7 @@ void __cdecl fcn_00568ed0(char* a1)
 							ch_StartMovement(*(int*) p, *(int*) (obj + 1),
 							             *(int*) (i + 2), 0, 0, (char*) 0x6a69bc);
 						}
-						fcn_00529160((unsigned char*) obj, 0, *(unsigned short*) hs, 0);
+						he_AssignActionSlot((unsigned char*) obj, 0, *(unsigned short*) hs, 0);
 					}
 				}
 			}

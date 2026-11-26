@@ -28,7 +28,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
-void __cdecl fcn_004f4f60(int, int, int, int, int);
+void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
 void __cdecl he_AllocKredit(char* e)
 {
@@ -62,5 +62,5 @@ void __cdecl he_AllocKredit(char* e)
 	}
 	io_FormatTextBuffer(buf, 0x18d7, *(unsigned short*) o, q, *(int*) (e + 0xb4), *(int*) (e + 0xc0), *(int*) (e + 0xb8), 0x5d, v);
 	he_MessageBoxQuickjump(h->entity_id, -1, buf, 0, 0x5ec, *(int*) (q + 1), -1, 0, 0);
-	fcn_004f4f60(0xe, *(int*) (e + 0xc0), h->entity_id, *(int*) (e + 0xb0), *(int*) (q + 1));
+	gm_TryRecordCrime(0xe, *(int*) (e + 0xc0), h->entity_id, *(int*) (e + 0xb0), *(int*) (q + 1));
 }

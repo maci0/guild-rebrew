@@ -15,7 +15,7 @@ typedef struct D3_ANIMATION_OPTIONS {
 void __cdecl d3_SetObjectVisible(char*, int);
 void __cdecl fcn_00453270(char*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-void __cdecl fcn_00438b40(char*, float*);
+void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 int __cdecl d3_FindAnimByName(char*);
 void __cdecl fcn_0044e4a0(char*, char*, int);
@@ -80,7 +80,7 @@ void __cdecl fcn_00402ba0(char* character)
             }
             if (I32(*(char**)(character + 0x22c) + 0x218) != 1 && I32(*(char**)(character + 0x22c) + 0x1cc) &&
                 !CompareVector3WithinTolerance((float*)(*(char**)(character + 0x22c) + 0x4c), (float*)(*(char**)(character + 0x34) + 0x4c), 2.0f))
-                fcn_00438b40(*(char**)(character + 0x22c), (float*)(*(char**)(character + 0x34) + 0x4c));
+                d3_SetNodePosition(*(char**)(character + 0x22c), (float*)(*(char**)(character + 0x34) + 0x4c));
             if (I32(*(char**)(character + 0x34) + 0x1cc) &&
                 !CompareVector3WithinTolerance((float*)(*(char**)(character + 0x22c) + 0x84), (float*)(*(char**)(character + 0x34) + 0x84), 0.05f))
                 d3_SetObjectRotation(*(char**)(character + 0x22c), (float*)(*(char**)(character + 0x34) + 0x84));

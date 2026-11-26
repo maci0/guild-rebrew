@@ -48,7 +48,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl fcn_00535960(void);
-void __cdecl fcn_004c6ae0(int, int);
+void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 
@@ -109,7 +109,7 @@ int __cdecl fcn_005d5d70(unsigned char* e)
 					while (cm_GetCommandStatus(h) == 0) {
 						fcn_00535960();
 					}
-					fcn_004c6ae0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);
+					cm_RequestModifyHealth(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);
 					io_FormatTextBuffer(text, 0x1d6a, b, *(unsigned short*) e, a);
 					fcn_00526120(text, 0);
 					g_774654 = 3;

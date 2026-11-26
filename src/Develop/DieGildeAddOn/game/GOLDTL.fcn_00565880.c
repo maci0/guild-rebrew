@@ -23,7 +23,7 @@ extern unsigned char g_773d75;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00545d40(int, int, char*, unsigned char, int, char*);
+int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl he_FreeAction(char*);
 
@@ -37,7 +37,7 @@ void __cdecl he_RunAction0x27(char* u)
 		e = gm_StartFilteredEntitySearch(1, 1, *(int*) (u + 0xac));
 		if (e != 0) {
 			io_FormatTextBuffer(text, 0x190b, ((struct player*)g_868060)[*(unsigned char*) (u + 0xb0)].name, *(int*) (u + 0xb4));
-			fcn_00545d40(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, 0x5ff, 0);
+			he_PostEntityMessage(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -1, text, 0, 0x5ff, 0);
 			cm_SendSellObjekt(*(int*) (e + 1), -1, ((struct player*)g_868060)[*(unsigned char*) (u + 0xb0)].id, *(int*) (u + 0xb4), g_773d75, 0);
 		}
 		he_FreeAction(u);

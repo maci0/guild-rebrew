@@ -964,6 +964,7 @@ int __cdecl amt_IsNextRoleStep(unsigned char* entity, int role)
 	return 0;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl amt_HasIdleSuperior(int role)
 {
 	OFFICE_ROLE_TEMPLATE tmpl;
@@ -987,6 +988,7 @@ int __cdecl amt_HasIdleSuperior(int role)
 	}
 	return 0;
 }
+#endif
 
 int __cdecl amt_ListSuperiors(int role, int max, unsigned char** out)
 {

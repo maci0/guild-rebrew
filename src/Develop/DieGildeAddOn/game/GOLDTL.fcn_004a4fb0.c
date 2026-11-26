@@ -6,90 +6,90 @@ unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 
 /* ADDRESS: GOLDTL 0x004a4fb0 */
-unsigned int __cdecl fcn_004a4fb0(unsigned int* outItem, unsigned int* a1, unsigned char* building)
+unsigned int __cdecl ai_FindMissingBuildingUpgrade(unsigned int* outItem, unsigned int* outContainer, unsigned char* building)
 {
 	unsigned char* rec;
-	unsigned char* v6;
-	unsigned short* v11;
-	unsigned short* v10;
-	unsigned short* v12;
-	unsigned short* v5;
-	unsigned char v1;
+	unsigned char* bld;
+	unsigned short* parentItem;
+	unsigned short* compSlot;
+	unsigned short* reqSlot;
+	unsigned short* match;
+	unsigned char objKind;
 	int container;
-	int v7;
-	int v4;
+	int usedCount;
+	int hasParent;
 	int idx;
 
 	container = *(int*) (building + 0x5d);
 	rec = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building];
-	v11 = 0;
+	parentItem = 0;
 	idx = 0;
 	if ((unsigned char) ((BUILDING_PROTOTYPE*)rec)->component_count <= 0) {
 		return 0;
 	}
-	v12 = (unsigned short*) (rec + 0xa5);
-	v10 = (unsigned short*) (rec + 0x23);
-	v6 = building;
+	reqSlot = (unsigned short*) (rec + 0xa5);
+	compSlot = (unsigned short*) (rec + 0x23);
+	bld = building;
 	do {
-		v1 = *(unsigned char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(*v10 & 0x7fff)]));
-		if (v1 != '!') {
-			if (v1 != 2 && v1 != 6) {
+		objKind = *(unsigned char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(*compSlot & 0x7fff)]));
+		if (objKind != '!') {
+			if (objKind != 2 && objKind != 6) {
 label:
-				if (!fcn_00502cd0(container, 1, 0, *v10 & 0x7fff)) {
-					if (!*(unsigned short*) ((char*) v12 - 2) ||
-					    fcn_00502cd0(container, 1, 0, *(unsigned short*) ((char*) v12 - 2))) {
-						if (!*v12 || fcn_00502cd0(container, 1, 0, *v12)) {
+				if (!fcn_00502cd0(container, 1, 0, *compSlot & 0x7fff)) {
+					if (!*(unsigned short*) ((char*) reqSlot - 2) ||
+					    fcn_00502cd0(container, 1, 0, *(unsigned short*) ((char*) reqSlot - 2))) {
+						if (!*reqSlot || fcn_00502cd0(container, 1, 0, *reqSlot)) {
 							*outItem = *(unsigned short*) (rec + 0x23 + idx * 2) & 0x7fff;
-							if (v11 != 0) {
-								*a1 = *(unsigned int*) ((char*) v11 + 2);
+							if (parentItem != 0) {
+								*outContainer = *(unsigned int*) ((char*) parentItem + 2);
 								return 1;
 							}
-							*a1 = 0xffffffff;
+							*outContainer = 0xffffffff;
 							return 1;
 						}
 					}
 				}
 			} else {
-				v4 = 0;
-				v7 = 0;
-				v11 = 0;
-				v5 = fcn_00502cd0(*(int*) (v6 + 0x5d), 1, 4, 2);
-				while (v5 != 0) {
-					if (*v5 != 0xfd) {
-						v7 += 1;
+				hasParent = 0;
+				usedCount = 0;
+				parentItem = 0;
+				match = fcn_00502cd0(*(int*) (bld + 0x5d), 1, 4, 2);
+				while (match != 0) {
+					if (*match != 0xfd) {
+						usedCount += 1;
 					}
-					if (*v5 == (*v10 & 0x7fff)) {
-						container = *(int*) ((char*) v5 + 0x14);
-						v4 = 1;
-						v11 = v5;
+					if (*match == (*compSlot & 0x7fff)) {
+						container = *(int*) ((char*) match + 0x14);
+						hasParent = 1;
+						parentItem = match;
 						break;
 					}
-					v5 = gm_NextEntityQueryMatch();
+					match = gm_NextEntityQueryMatch();
 				}
-				if (v7 < (int) (unsigned char) ((BUILDING_PROTOTYPE*)rec)->count_021 && !v4) {
-					v5 = fcn_00502cd0(*(int*) (building + 0x5d), 1, 4, 6);
+				if (usedCount < (int) (unsigned char) ((BUILDING_PROTOTYPE*)rec)->count_021 && !hasParent) {
+					match = fcn_00502cd0(*(int*) (building + 0x5d), 1, 4, 6);
 					do {
-						if (!v5) {
+						if (!match) {
 							break;
 						}
-						if (*v5 == (*v10 & 0x7fff)) {
-							container = *(int*) ((char*) v5 + 0x14);
-							v4 = 1;
-							v11 = v5;
+						if (*match == (*compSlot & 0x7fff)) {
+							container = *(int*) ((char*) match + 0x14);
+							hasParent = 1;
+							parentItem = match;
 							break;
 						}
-						v5 = gm_NextEntityQueryMatch();
+						match = gm_NextEntityQueryMatch();
 					} while (1);
-					if (v7 < (int) (unsigned char) ((BUILDING_PROTOTYPE*)rec)->count_021 && !v4) {
+					if (usedCount < (int) (unsigned char) ((BUILDING_PROTOTYPE*)rec)->count_021 && !hasParent) {
 						goto label;
 					}
 				}
 			}
-			v6 = building;
+			bld = building;
 		}
 		idx += 1;
-		v12 += 2;
-		v10 += 1;
+		reqSlot += 2;
+		compSlot += 1;
 		if (idx >= (int) (unsigned char) ((BUILDING_PROTOTYPE*)rec)->component_count) {
 			return 0;
 		}

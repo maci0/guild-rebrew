@@ -5,7 +5,7 @@
 
 unsigned int __cdecl vfs_fwrite(void*, int, int, int);
 
-int __cdecl fcn_00520860(int x)
+int __cdecl ls_SaveRelationMatrices(int x)
 {
 	int i;
 	int j;

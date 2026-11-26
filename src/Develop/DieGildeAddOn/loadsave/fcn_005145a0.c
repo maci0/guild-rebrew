@@ -24,7 +24,7 @@ int __cdecl fcn_00525b40(void);
 void __cdecl main_PumpWindowMessages(void);
 void __cdecl fcn_00535960(void);
 void __cdecl sv_WaitForNetworkSync(int id);
-void __cdecl fcn_005017a0(int i);
+void __cdecl gm_UpdateMarketStockSlots(int i);
 void __cdecl cm_SendRandomMarktSlotDelta(int i);
 int __cdecl fcn_0050b750(int timeout, char who);
 int __cdecl fcn_00413160(void);
@@ -161,7 +161,7 @@ int __cdecl fcn_005145a0(char *path)
         do {
             if (*p == 0)
                 break;
-            fcn_005017a0(i);
+            gm_UpdateMarketStockSlots(i);
             cm_SendRandomMarktSlotDelta(i);
             p += 0x2f4;
             i++;

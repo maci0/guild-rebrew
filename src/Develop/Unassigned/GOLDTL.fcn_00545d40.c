@@ -22,7 +22,7 @@ struct msg {
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004c5580(struct msg*, int, char*);
 
-int __cdecl fcn_00545d40(int id, int arg, char* text1, unsigned char flags, int value, char* text2)
+int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2)
 {
 	struct msg m;
 	char text[0x1fa0];

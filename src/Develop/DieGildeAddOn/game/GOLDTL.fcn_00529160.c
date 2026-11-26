@@ -40,7 +40,7 @@ typedef struct {
 	char* shown;		/* +0x17c */
 	char pad180[4];
 	char* owner;		/* +0x184 */
-} Slot_529160;
+} ACTION_SLOT_VIEW;
 
 /* SIZE 0x24d */
 typedef struct {
@@ -49,17 +49,17 @@ typedef struct {
 	int object;		/* +0x28 */
 	char pad2c[0x5c];
 	int field88;		/* +0x88 */
-} Rec_529160;
+} ACTION_CONTEXT_REC;
 
 
 /* Shows one entity of the scene slot and queues the matching action; the
  * object type selects one of two scene-hook paths, then the shown object is
  * replaced by a4. */
 /* ADDRESS: GOLDTL 0x00529160 */
-void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index, unsigned char* newShown)
+void __cdecl he_AssignActionSlot(unsigned char* activeRec, char* sceneObj, unsigned int index, unsigned char* newShown)
 {
-	Slot_529160* slot;
-	Rec_529160* rec;
+	ACTION_SLOT_VIEW* slot;
+	ACTION_CONTEXT_REC* rec;
 	unsigned char* old;
 	char* r;
 	void* o;
@@ -73,7 +73,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 	if ((int) index >= 0x300) {
 		return;
 	}
-	slot = (Slot_529160*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[index]));
+	slot = (ACTION_SLOT_VIEW*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[index]));
 	old = *(unsigned char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[index]) + 0x17c);
 	if (newShown == old) {
 		return;
@@ -81,10 +81,10 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 	if (activeRec == 0) {
 		activeRec = (unsigned char*) slot->active;
 	}
-	if (a2 != 0) {
-		rec = (Rec_529160*) ((unsigned char*) g_entity_type_table + (unsigned int) *activeRec * 0x24d);
-		if (*(short*) a2 != 0xfd) {
-			contextIdx = init_EnsureObjektSceneContext(a2);
+	if (sceneObj != 0) {
+		rec = (ACTION_CONTEXT_REC*) ((unsigned char*) g_entity_type_table + (unsigned int) *activeRec * 0x24d);
+		if (*(short*) sceneObj != 0xfd) {
+			contextIdx = init_EnsureObjektSceneContext(sceneObj);
 		} else {
 			contextIdx = init_AllocateGebaeudeSceneSlot(activeRec);
 		}
@@ -93,8 +93,8 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		if ((((float) (int) tick < g_696550[cls] && g_696540[cls] <= (float) (int) tick)
 		     || rec->type == 4 || rec->type == 0x13 || rec->type == 0x1d)
 		    && contextIdx >= 0 && slot->owner != 0
-		    && contextIdx * 0x3dc + 0x10432c0 != ((Rec_529160*) slot->owner)->field88) {
-			r = ch_CreateAction(slot->owner, 0x33, contextIdx, *(int*) (activeRec + 1), *(int*) (a2 + 2));
+		    && contextIdx * 0x3dc + 0x10432c0 != ((ACTION_CONTEXT_REC*) slot->owner)->field88) {
+			r = ch_CreateAction(slot->owner, 0x33, contextIdx, *(int*) (activeRec + 1), *(int*) (sceneObj + 2));
 			strcpy(r + 0x70, "sv_ChangePlayerHE");
 
 
@@ -106,7 +106,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 
 
 
-			obj = ((Rec_529160*) slot->owner)->object;
+			obj = ((ACTION_CONTEXT_REC*) slot->owner)->object;
 			if (obj != -1) {
 				o = evt_FindScriptById(obj);
 				if (o != 0) {
@@ -128,7 +128,7 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 		case 21:
 		case 140:
 			if (slot->owner != 0) {
-				obj = ((Rec_529160*) slot->owner)->object;
+				obj = ((ACTION_CONTEXT_REC*) slot->owner)->object;
 				if (obj != -1) {
 					evt_RequestScriptExit((char*) evt_FindScriptById(obj));
 				}
@@ -161,8 +161,8 @@ void __cdecl fcn_00529160(unsigned char* activeRec, char* a2, unsigned int index
 			he_FreeAction((char*) old);
 			break;
 		}
-	} else if (slot->owner != 0 && ((Rec_529160*) slot->owner)->object != -1) {
-		obj = ((Rec_529160*) slot->owner)->object;
+	} else if (slot->owner != 0 && ((ACTION_CONTEXT_REC*) slot->owner)->object != -1) {
+		obj = ((ACTION_CONTEXT_REC*) slot->owner)->object;
 		o = evt_FindScriptById(obj);
 		if (o != 0 && (strstr((char*) o, s_6a2e70) != 0 || strstr((char*) o, s_6a2e68) != 0)) {
 			evt_RequestScriptExit((char*) o);

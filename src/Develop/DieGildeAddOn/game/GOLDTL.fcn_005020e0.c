@@ -60,7 +60,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl gm_PackGameTime(char*, Stamp*);
-void __cdecl fcn_005017a0(int);
+void __cdecl gm_UpdateMarketStockSlots(int);
 void __cdecl cm_SendRandomMarktSlotDelta(int);
 int __cdecl fcn_00502450(int, int);
 int __cdecl fcn_005024e0(int, int);
@@ -148,7 +148,7 @@ void __cdecl fcn_005020e0(int townRow, char* timeSource)
 		g_85ab80[townRow].slots[i].unk_18 = 0;
 	}
 	if (g_14cbca0 == -1) {
-		fcn_005017a0(townRow);
+		gm_UpdateMarketStockSlots(townRow);
 		cm_SendRandomMarktSlotDelta(townRow);
 	}
 }

@@ -4,7 +4,7 @@ extern void* gm_CityEntity;
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CheckEntityAgeLimit(unsigned int);
 int __cdecl gm_IsNpcEntityState(void*);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005cf720 */
 int __cdecl fcn_005cf720(unsigned int self, unsigned int candidate, unsigned char* p)
@@ -117,7 +117,7 @@ int __cdecl fcn_005cf720(unsigned int self, unsigned int candidate, unsigned cha
 	}
 	if (!*(int*) (p + 0x40))
 		goto ret1;
-	f = fcn_0050f980((int) (self & 0xffff), (int) (candidate & 0xffff), 1);
+	f = gm_CalcEntityFavor((int) (self & 0xffff), (int) (candidate & 0xffff), 1);
 	if (f < *(float*) (p + 0x44))
 		return 0;
 	if (f <= *(float*) (p + 0x48))

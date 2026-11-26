@@ -8,7 +8,7 @@ typedef struct {
 
 extern char g_7f4ca0[];
 
-int __cdecl fcn_00509620(int a, int b);
+int __cdecl gm_TransferDynastyEstate(int a, int b);
 int __cdecl gm_LookupEntityRecordById(int h);
 int __cdecl fcn_004f4650(int h, char** obj, int** val);
 unsigned char __cdecl fcn_004f1790(int a, int* b);
@@ -19,7 +19,7 @@ int __cdecl fcn_004c79b0(char* o, char* out)
 	int idx;
 	int h;
 
-	idx = fcn_00509620(*(int*) (o + 0x10), *(int*) (o + 0x14));
+	idx = gm_TransferDynastyEstate(*(int*) (o + 0x10), *(int*) (o + 0x14));
 	if (out != 0) {
 		out[0] = 1;
 		if (idx >= 0) {

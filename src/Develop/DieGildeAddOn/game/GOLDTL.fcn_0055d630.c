@@ -14,7 +14,7 @@ void __cdecl d3_VisitSceneObjects(int, char*, int, void*, struct list_55d630*);
 char __cdecl fcn_0055d5e0(char*, struct list_55d630*);
 unsigned short __cdecl gm_RandomMod(int);
 
-char* __cdecl fcn_0055d630(char* o)
+char* __cdecl he_PickRandomSceneObject(char* o)
 {
 	struct list_55d630 l;
 	int saved;

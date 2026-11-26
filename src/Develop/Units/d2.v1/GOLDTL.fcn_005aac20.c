@@ -33,7 +33,7 @@ void __cdecl fcn_005aa9a0(int);
 void __cdecl fcn_005aaae0(int);
 void __cdecl fcn_00532ef0(void);
 
-void __cdecl fcn_005aac20(void)
+void __cdecl d2_RunHighOfficePrivilegeDialog(void)
 {
 	Query q;
 	int r;

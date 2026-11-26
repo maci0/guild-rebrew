@@ -7,7 +7,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_004c5620(int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00545d40(int, int, char*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, void*);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl gm_PickRandomGedicht(short);
 unsigned short __cdecl fcn_004ac290(int);
@@ -74,7 +74,7 @@ void __cdecl he_RunBardeEvent(char* obj)
 			if (*(char*) j != 6 && *(char*) j != 7) {
 				continue;
 			}
-			fcn_00545d40(*(int*) (j + 2), *(int*) (obj + 4), buf, 0,
+			he_PostEntityMessage(*(int*) (j + 2), *(int*) (obj + 4), buf, 0,
 				     0x601, (void*) 0x6b5c60);
 		}
 		gm_AddTime(obj + 0x52, 0, 5, 0);

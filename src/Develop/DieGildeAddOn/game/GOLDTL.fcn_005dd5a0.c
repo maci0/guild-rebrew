@@ -10,7 +10,7 @@ int __cdecl fcn_005cd440(int*, char*, int, int);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned int __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_00545d40(int, int, char*, int, int, char*);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl gm_LookupSpecialObjectRecord(int, char*);
 void __cdecl fcn_005dbe90(char*);
 
@@ -100,13 +100,13 @@ unsigned int __cdecl fcn_005dd5a0(ENTITY_RECORD_VIEW* a0, unsigned int* a1)
 	if (v4->entity_type == 6 || v4->entity_type == 7) {
 		io_FormatTextBuffer(messageText, 0xfec, v12[0]->entity_index,
 		                    v12[1]->entity_index, v12[2]->entity_index);
-		fcn_00545d40(v4->entity_id, 0xffffffff, messageText, 1, 0x5fb, 0);
+		he_PostEntityMessage(v4->entity_id, 0xffffffff, messageText, 1, 0x5fb, 0);
 	}
 	io_FormatTextBuffer(messageText, 0xfed, v4->entity_index);
 	for (v6 = 0; v6 < 3; v6++) {
 		v2 = v12[v6]->entity_type;
 		if (v2 == 6 || v2 == 7) {
-			fcn_00545d40(v12[v6]->entity_id, 0xffffffff, messageText, 0,
+			he_PostEntityMessage(v12[v6]->entity_id, 0xffffffff, messageText, 0,
 			             0x5fb, 0);
 		}
 	}

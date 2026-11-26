@@ -7,7 +7,7 @@ struct rec9c760 {
     int d[3];
 };
 
-extern int __cdecl fcn_004a9b20(int, int, int, void *, void *);
+extern int __cdecl ai_SelectPrivilegeAction(int, int, int, void *, void *);
 
 /* ADDRESS: GOLDTL 0x0049c760 */
 int __cdecl ai_StartUseAmt(int a, int b, int c, int *o1, int *o2)
@@ -22,7 +22,7 @@ int __cdecl ai_StartUseAmt(int a, int b, int c, int *o1, int *o2)
     first.tag = 0;
     first.a = 0;
     first.b = 0;
-    if (fcn_004a9b20(0, b, 0, &first, &second) == 0)
+    if (ai_SelectPrivilegeAction(0, b, 0, &first, &second) == 0)
         return 0;
     memcpy(o1, &first, sizeof(first));
     memcpy(o2, &second, sizeof(second));

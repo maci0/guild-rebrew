@@ -10,7 +10,7 @@ extern char s_7e1ae0[];
 extern void* __cdecl plt_FindPlantInfo(int);
 extern void* __cdecl fcn_004488e0(char*, int, int);
 extern void __cdecl ReportClientMessage(char*);
-extern void __cdecl fcn_00438b40(void*, float*);
+extern void __cdecl d3_SetNodePosition(void*, float*);
 
 
 /* Loads the 3D object named by the plant info record, appends the caller's
@@ -72,5 +72,5 @@ void __cdecl init_SetPflanzenMap(char* a0, int a1)
 	pos[2] += (float) *(unsigned char*) (*(int*) mat * (unsigned char) a0[9] +
 					     *(int*) (mat + 0x10) + (unsigned char) a0[8]) *
 		  *(float*) (mat + 0x88);
-	fcn_00438b40(obj, pos);
+	d3_SetNodePosition(obj, pos);
 }

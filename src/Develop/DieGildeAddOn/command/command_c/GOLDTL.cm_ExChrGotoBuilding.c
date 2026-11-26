@@ -33,7 +33,7 @@ char* __cdecl fcn_004456e0(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 char* __cdecl ch_CreateAction(char*, int, ...);
-char* __cdecl fcn_0055d630(char*);
+char* __cdecl he_PickRandomSceneObject(char*);
 char* __cdecl strupr(char*);
 void __cdecl ReportClientMessage(char*);
 
@@ -212,7 +212,7 @@ after:
 		u = fcn_00445600(0, 0x100, 0, e + 0x1d);
 	} else if (*(int*) (B + 0x61) != 0) {
 		if (*(int*) (o + 0x124) != 0) {
-			u = fcn_0055d630(*(char**) (B + 0x61));
+			u = he_PickRandomSceneObject(*(char**) (B + 0x61));
 		} else {
 			u = fcn_00445600(*(int*) (B + 0x61), 0x100, 0,
 			    (char*) &g_68149c);

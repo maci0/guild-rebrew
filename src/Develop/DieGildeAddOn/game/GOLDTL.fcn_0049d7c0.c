@@ -21,7 +21,7 @@ typedef struct F8 {
 
 int __cdecl fcn_004a5e60(char* p, int kind, F8 f, int c, float r, int* out);
 
-int __cdecl fcn_004a4fb0(int* a, int* b, char* q, int c);
+int __cdecl ai_FindMissingBuildingUpgrade(int* a, int* b, char* q, int c);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 
 int __cdecl ai_StartBuergermeisterUpgrade(int kind, char* e, int busy, Blk24* o1, Blk24* o2)
@@ -47,7 +47,7 @@ int __cdecl ai_StartBuergermeisterUpgrade(int kind, char* e, int busy, Blk24* o1
 	do {
 		if (fcn_004a5e60(e, 2, f, 0, 100.0f, &found) != 0) {
 			gm_ResolveEntityById((void**) (&target), 0, 0, found);
-			if (target != 0 && fcn_004a4fb0(&v[0], &v[1], target, 0) != 0) {
+			if (target != 0 && ai_FindMissingBuildingUpgrade(&v[0], &v[1], target, 0) != 0) {
 				b1.kind = 2;
 				b1.a = v[0];
 				b1.b = 1;

@@ -56,7 +56,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00471e30(int);
 void* __cdecl fcn_004ec7d0(unsigned char*);
 int __cdecl he_GetActionProgress(char*, int*, float*, int);
-int __cdecl fcn_004ecc20(int);
+int __cdecl ahm_PickRandomUnknownRecipe(int);
 int __cdecl he_SendEvent096(char*, int*, int);
 int __cdecl d2_SendAlchemyResearch(char*, int*);
 void __cdecl fcn_00526120(int, int);
@@ -209,7 +209,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 					if (g_102cbc8[list].n != i) {
 						continue;
 					}
-					if (fcn_004ecc20((int) data) != 0) {
+					if (ahm_PickRandomUnknownRecipe((int) data) != 0) {
 						he_SendEvent096(e, records, i);
 					} else {
 						fcn_00526120(g_14b59e0, 0);

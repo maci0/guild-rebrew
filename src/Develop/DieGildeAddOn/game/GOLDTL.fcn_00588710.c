@@ -4,7 +4,7 @@
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00588200(int, int, int);
 void __cdecl d3_NormalizeVector(float*);
-void __cdecl fcn_00438b40(char*, int*);
+void __cdecl d3_SetNodePosition(char*, int*);
 char __cdecl d3_SetObjectVisible(char*, char);
 
 /* ADDRESS: GOLDTL 0x00588710 */
@@ -39,7 +39,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 			vec[0] = *(float*) a1 - vec[0];
 			vec[1] = *(float*) (a1 + 4) - vec[1];
 			vec[2] = *(float*) (a1 + 8) - vec[2];
-			fcn_00438b40((char*) *(int*) (a1 + 0x98), (int*) vec);
+			d3_SetNodePosition((char*) *(int*) (a1 + 0x98), (int*) vec);
 			t0 = *(float*) 0x662d40; t1 = *(float*) 0x662d44; pos[2] = *(float*) 0x662d48;
 			factor = *(float*) 0x665f40;
 			factor *= f;
@@ -47,7 +47,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 			pos[0] = *(float*) 0x665f28 + pos[0];
 			pos[1] = *(float*) 0x665f2c + t1;
 			pos[2] = *(float*) 0x665f30 + pos[2];
-			fcn_00438b40((char*) *(int*) (a1 + 0x9c), (int*) pos);
+			d3_SetNodePosition((char*) *(int*) (a1 + 0x9c), (int*) pos);
 		}
 	}
 	for (i = 0; i != 3; i++) {
@@ -75,7 +75,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 			vec[0] = *(float*) a1 - vec[0];
 			vec[1] = *(float*) (a1 + 4) - vec[1];
 			vec[2] = *(float*) (a1 + 8) - vec[2];
-			fcn_00438b40((char*) *(int*) (a1 + 0x98), (int*) vec);
+			d3_SetNodePosition((char*) *(int*) (a1 + 0x98), (int*) vec);
 			t0 = *(float*) 0x662d40; t1 = *(float*) 0x662d44; pos[2] = *(float*) 0x662d48;
 			factor = *(float*) 0x665f40;
 			factor *= f;
@@ -83,7 +83,7 @@ void __cdecl fcn_00588710(int a0, int a1, int a2, int selectedIndex, int a4)
 			pos[0] = *(float*) 0x665f28 + pos[0];
 			pos[1] = *(float*) 0x665f2c + t1;
 			pos[2] = *(float*) 0x665f30 + pos[2];
-			fcn_00438b40((char*) *(int*) (a1 + 0x9c), (int*) pos);
+			d3_SetNodePosition((char*) *(int*) (a1 + 0x9c), (int*) pos);
 		}
 	}
 	*(int*) (a1 + 0x6c) = *(int*) 0x6b7fac;

@@ -15,34 +15,34 @@ float* __cdecl fcn_005c61e0(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049bbc0 */
-int __cdecl fcn_0049bbc0(char* e, int* p, int* q)
+int __cdecl ai_RunUseParfuem(char* actor, int* itemArgs, int* animData)
 {
-	float* d;
-	unsigned short* s;
-	Req r;
+	float* props;
+	unsigned short* slot;
+	Req req;
 
-	s = fcn_00502cd0(*(int*) (e + 0x178), 1, 1, p[1]);
-	if (!s) {
+	slot = fcn_00502cd0(*(int*) (actor + 0x178), 1, 1, itemArgs[1]);
+	if (!slot) {
 		return 0;
 	}
-	d = fcn_005c61e0(*s);
-	if (d) {
-		r.s = s;
-		r.id = q[1];
-		r.arg = q[2];
-		if (gm_UseSpecialObject(e, &r) == 1) {
-			if (r.dir == 1) {
-				g_10099d0[0] = g_1008574[q[4] * 37 + 0] * d[3];
-				g_10099d0[2] = g_1008574[q[4] * 37 + 2] * d[3];
-				g_10099d0[4] = g_1008574[q[4] * 37 + 4] * d[3];
-				g_10099d0[6] = g_1008574[q[4] * 37 + 6] * d[3];
+	props = fcn_005c61e0(*slot);
+	if (props) {
+		req.s = slot;
+		req.id = animData[1];
+		req.arg = animData[2];
+		if (gm_UseSpecialObject(actor, &req) == 1) {
+			if (req.dir == 1) {
+				g_10099d0[0] = g_1008574[animData[4] * 37 + 0] * props[3];
+				g_10099d0[2] = g_1008574[animData[4] * 37 + 2] * props[3];
+				g_10099d0[4] = g_1008574[animData[4] * 37 + 4] * props[3];
+				g_10099d0[6] = g_1008574[animData[4] * 37 + 6] * props[3];
 				return 0x23;
 			}
-			if (r.dir == -1) {
-				g_10099d0[0] = -(g_1008574[q[4] * 37 + 0] * d[3] * 0.5f);
-				g_10099d0[2] = -(g_1008574[q[4] * 37 + 2] * d[3] * 0.5f);
-				g_10099d0[4] = -(g_1008574[q[4] * 37 + 4] * d[3] * 0.5f);
-				g_10099d0[6] = -(g_1008574[q[4] * 37 + 6] * d[3] * 0.5f);
+			if (req.dir == -1) {
+				g_10099d0[0] = -(g_1008574[animData[4] * 37 + 0] * props[3] * 0.5f);
+				g_10099d0[2] = -(g_1008574[animData[4] * 37 + 2] * props[3] * 0.5f);
+				g_10099d0[4] = -(g_1008574[animData[4] * 37 + 4] * props[3] * 0.5f);
+				g_10099d0[6] = -(g_1008574[animData[4] * 37 + 6] * props[3] * 0.5f);
 			}
 			return 0x23;
 		}

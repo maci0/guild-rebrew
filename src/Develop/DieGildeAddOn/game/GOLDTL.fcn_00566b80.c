@@ -9,7 +9,7 @@ void __cdecl he_FreeAction(char* u);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags, int value, int x, int y, char* name, char* text2);
 
 /* ADDRESS: GOLDTL 0x00566b80 */
-void __cdecl fcn_00566b80(char* obj)
+void __cdecl he_RunWorkerBonus(char* obj)
 {
 	char buf[0x100];
 	char* e;

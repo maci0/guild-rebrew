@@ -13,14 +13,14 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl gm_CollectTradeItemsByKind(int);
 void __cdecl io_FormatTextBuffer(char*, int, int, int, int);
-void __cdecl fcn_00529160(int, int, int, int);
+void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 /* Advances a message action through its states, resolves the sender entity
  * and updates the message-table entry it belongs to. */
 /* ADDRESS: GOLDTL 0x00572a50 */
-void __cdecl fcn_00572a50(char* obj)
+void __cdecl he_RunResourceSuchen(char* obj)
 {
 	int ref1;
 	int ref2;
@@ -104,7 +104,7 @@ void __cdecl fcn_00572a50(char* obj)
 			for (p = (unsigned short*) 0x7f4ca0; (int) p < 0x85a0a0;
 				p += 0x10e) {
 				if (*(int*) ((char*) p + 0x17c) == (int) obj) {
-					fcn_00529160(ref1, 0, *p, 0);
+					he_AssignActionSlot(ref1, 0, *p, 0);
 				}
 			}
 			he_FreeAction(obj);
@@ -116,7 +116,7 @@ void __cdecl fcn_00572a50(char* obj)
 		for (p = (unsigned short*) 0x7f4ca0; (int) p < 0x85a0a0;
 			p += 0x10e) {
 			if (*(int*) ((char*) p + 0x17c) == (int) obj) {
-				fcn_00529160(0, 0, *p, 0);
+				he_AssignActionSlot(0, 0, *p, 0);
 			}
 		}
 		break;

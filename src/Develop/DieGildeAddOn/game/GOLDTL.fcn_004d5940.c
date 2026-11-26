@@ -27,7 +27,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004d5490(int, int, int);
 void __cdecl fcn_004d5740(char*, int, int);
 int __cdecl d2_ShowMessageBox(char*, unsigned int);
-int __cdecl fcn_004d52a0(int, int, char*, char*, float);
+int __cdecl cut_PlunderBuildingCarts(int, int, char*, char*, float);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -267,7 +267,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 						g_774654 = 1;
 						answer = 0;
 						g_772ea8 = 1;
-						g_772eac = fcn_004d52a0((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * 0.01);
+						g_772eac = cut_PlunderBuildingCarts((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * 0.01);
 					} else {
 						io_FormatTextBuffer(str, 0x1143);
 						d2_ShowMessageBox(str, 0);
@@ -304,7 +304,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 				rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x10c));
 				answer = 0;
 				g_772ea8 = 1;
-				g_772eac = fcn_004d52a0((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * 0.01);
+				g_772eac = cut_PlunderBuildingCarts((int) g_772eb4, rec, (char*) g_772e9c, (char*) g_772e98, (float) count * 0.01);
 			} else {
 				g_772eac = -1;
 				answer = 1;

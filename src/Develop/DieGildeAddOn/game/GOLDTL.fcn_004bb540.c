@@ -8,7 +8,7 @@ int __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00545d40(int, int, void*, int, int, void*);
+void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
 
 /* ADDRESS: GOLDTL 0x004bb540 */
@@ -34,7 +34,7 @@ int __cdecl fcn_004bb540(void* record)
 	r = (int) (((double) n * d) * 0.01);
 	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) record + 4) + 0x12e7, r);
 	len = strlen(buf);
-	fcn_00545d40(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
+	he_PostEntityMessage(*(int*) ((char*) p + 4), *(int*) ((char*) p + 4), buf,
 	    0x100 < len, 0x603, 0);
 	cm_RequestTransferCurrencyNoKill(-1, *(int*) record, g_773d75, r);
 	return 0;

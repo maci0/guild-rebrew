@@ -12,7 +12,7 @@ int __cdecl fcn_00502850(void);
 float __cdecl fcn_0042e450(void);
 void __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char e, int f);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-void __cdecl fcn_00545d40(int a, int b, char* buf, int c, int d, int e);
+void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
 void __cdecl fcn_005dbe90(char* buf);
 
 /* ADDRESS: GOLDTL 0x005de420 */
@@ -69,7 +69,7 @@ int __cdecl fcn_005de420(char* a0, char* a1)
 
 	if (base[2] == 6 || base[2] == 7) {
 		io_FormatTextBuffer(text, 0x100c, recordAddr);
-		fcn_00545d40(*(int*) (base + 4), -1, text, 0, 0x5fb, 0);
+		he_PostEntityMessage(*(int*) (base + 4), -1, text, 0, 0x5fb, 0);
 	}
 	if (a0[2] == 6) {
 		io_FormatTextBuffer(detail, 0x109d,

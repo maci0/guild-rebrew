@@ -8,7 +8,7 @@ extern void __cdecl ch_FinishAni(void *);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 extern void __cdecl fcn_004090d0(void *);
 extern void __cdecl m_FreeTracked(void *);
-extern void __cdecl fcn_00438b40(int, void *);
+extern void __cdecl d3_SetNodePosition(int, void *);
 extern float __cdecl d3_ComputeYawToTarget(int, float *);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 extern char __cdecl d3_GridPointToWorld(void *, int, int, float *);
@@ -145,7 +145,7 @@ Lafter:
                 ++*(unsigned char *)(eventEntry + 0x158);
                 return 0;
             }
-            fcn_00438b40(*(int *)(character + 0x34), (void *)(eventEntry + 0x144));
+            d3_SetNodePosition(*(int *)(character + 0x34), (void *)(eventEntry + 0x144));
             ch_PlaceOnGround(character, 1);
         }
         ch_FinishAni(character);

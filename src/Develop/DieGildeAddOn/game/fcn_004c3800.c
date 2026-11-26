@@ -2,7 +2,7 @@ extern int g_772e7c;
 extern unsigned short g_774970;
 
 unsigned short __cdecl gm_RandomMod(int);
-float __cdecl fcn_0050f980(unsigned int a0, unsigned int a1, unsigned int a2);
+float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_CollectBuildingStock(void *, void *, int);
 int __cdecl gm_CollectStockEntries(void *, void *, int);
 void __cdecl d3snd_PlaySoundEffect(int, int, int, int);
@@ -24,7 +24,7 @@ void __cdecl fcn_004c3800(void *arg)
 	if (obj == 0)
 		return;
 	ent = *(unsigned char **) ((char *) obj + 0x16c);
-	score = (int) fcn_0050f980(g_774970, *(unsigned short *) (ent + 0x27), 1) / 33;
+	score = (int) gm_CalcEntityFavor(g_774970, *(unsigned short *) (ent + 0x27), 1) / 33;
 	if (*ent == 0x20 || *ent == 0x1f || *ent == 0x1e)
 		ret = gm_CollectStockEntries(ent, slot, 0);
 	else
