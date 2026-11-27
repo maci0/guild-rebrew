@@ -23,10 +23,10 @@ typedef struct {
 
 int* __cdecl fcn_004524e0(int a0, char* a1, Bytes4 a2, float a3, char* a4, void (__cdecl* a5)(void));
 void __cdecl d3_SetEffectPosition(int* a0, float* a1);
-void __cdecl fcn_00417bf0(void);
+void __cdecl d3_UpdateExplosionParticles(void);
 
 /* ADDRESS: GOLDTL 0x00417d00 */
-int* __cdecl fcn_00417d00(char* a0, float* pos, int n, float a3, float a4, float a5, float a6, int a7)
+int* __cdecl d3_CreateExplosionEmitter(char* a0, float* pos, int n, float a3, float a4, float a5, float a6, int a7)
 {
 	Bytes4 f;
 	Explosion417d00* s;
@@ -43,7 +43,7 @@ int* __cdecl fcn_00417d00(char* a0, float* pos, int n, float a3, float a4, float
 	memset(&f, 0, sizeof(f));
 	f.c |= 1;
 	f.a = 0xff;
-	s = (Explosion417d00*) fcn_004524e0(n, "Explosion", f, a6, a0, fcn_00417bf0);
+	s = (Explosion417d00*) fcn_004524e0(n, "Explosion", f, a6, a0, d3_UpdateExplosionParticles);
 	if (s != 0) {
 		count = s->count;
 		n6 = count / 6;

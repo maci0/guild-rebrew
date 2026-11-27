@@ -46,7 +46,7 @@ int __cdecl gm_RandomMod(unsigned short n);
 void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
 int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Msg* out1, Msg* out2);
 int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
-int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, unsigned short* out);
+int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, float c, float r, unsigned short* out);
 
 /* ADDRESS: GOLDTL 0x0049a0c0 */
 int __cdecl ai_StartUseObjectAnsehen(int kind, char* entity, int busy, Msg* out1, Msg* out2)
@@ -146,7 +146,7 @@ pick_used:
 		unsigned short picked;
 		int mask;
 		mask = (((Ent*) entity)->x9 ? 1 : 2) | 0xf00500;
-		if (fcn_004a5340(entity, 1, &mask, 10.0f, (gm_RandomMod(0x20) & 0xffff) + 40.0f, &picked) == 0) {
+		if (ai_SelectRankedCandidates(entity, 1, &mask, 10.0f, (gm_RandomMod(0x20) & 0xffff) + 40.0f, &picked) == 0) {
 			return 0;
 		}
 		b.type = 7;
@@ -156,7 +156,7 @@ pick_used:
 		int mask;
 		unsigned short picked;
 		mask = (((Ent*) entity)->x9 == 1 ? 2 : 1) | 0xf00500;
-		if (fcn_004a5340(entity, 1, &mask, 10.0f, (gm_RandomMod(0x20) & 0xffff) + 40.0f, &picked) == 0) {
+		if (ai_SelectRankedCandidates(entity, 1, &mask, 10.0f, (gm_RandomMod(0x20) & 0xffff) + 40.0f, &picked) == 0) {
 			return 0;
 		}
 		b.type = 7;

@@ -2,7 +2,7 @@ extern int __cdecl d2_LoadForm(int a, int b, char *name);
 void __cdecl d2_CenterDialogWindows(int obj);
 void __cdecl d2_SetForm(int obj, int a);
 int __cdecl io_AppendText(int id, ...);
-void __cdecl fcn_005c4d00(int win, int sub, int idx, int flag);
+void __cdecl d2_PopulateDealSummaryList(int win, int sub, int idx, int flag);
 int __cdecl d2_GetControlValue(int key);
 int __cdecl main_RunFrameLoop(void *proc, int msg);
 void __cdecl d2_DestroyForm(int obj);
@@ -20,7 +20,7 @@ void __cdecl d2_ShowApPanel(void)
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1ef9);
-	fcn_005c4d00(dlg, 0, *(unsigned short *) 0x774970, 0);
+	d2_PopulateDealSummaryList(dlg, 0, *(unsigned short *) 0x774970, 0);
 	*(int *) 0x100f1dc = -1;
 	do {
 		if (*(int *) 0x14ce8e0 != 0) {
@@ -35,7 +35,7 @@ void __cdecl d2_ShowApPanel(void)
 					*(int *) (p[i * 2] + 8) = d2_GetControlValue(q[i * 2]);
 					d2_SetForm(dlg, 0);
 					io_AppendText(0x6811b0);
-					fcn_005c4d00(dlg, 0, *(unsigned short *) 0x774970, 0);
+					d2_PopulateDealSummaryList(dlg, 0, *(unsigned short *) 0x774970, 0);
 					break;
 				}
 			}

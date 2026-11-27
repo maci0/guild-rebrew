@@ -8,8 +8,8 @@ struct CUTSCENE_EVENT_SLOT {
 
 extern char cut_Cutscenes[];
 
-void __cdecl fcn_004da170(void);
-void __cdecl fcn_004dc5f0(void);
+void __cdecl cut_SkipCombatCutscene(void);
+void __cdecl cut_HandleOfficeSessionStep(void);
 void __cdecl cut_HandleOfficeSessionEvent(void);
 void __cdecl cut_HandleProzessEvent(void);
 void __cdecl cut_SelectDuellResponse(void);
@@ -41,9 +41,9 @@ void __cdecl cut_InitCutsceneRegistry(void)
 	for (i = 0; i < 96; i++)
 		((struct CUTSCENE_EVENT_SLOT*)cut_Cutscenes)[i].id = -1;
 	cut_RegisterEventCallbacks(0, cut_RunTobyCutscene, (void*) fcn_004e1950, 0, 0, 0);
-	cut_RegisterEventCallbacks(1, cut_RunOfficeSessions, (void*) fcn_004dc5f0, (void*) cut_HandleOfficeSessionEvent, 0, 0);
+	cut_RegisterEventCallbacks(1, cut_RunOfficeSessions, (void*) cut_HandleOfficeSessionStep, (void*) cut_HandleOfficeSessionEvent, 0, 0);
 	cut_RegisterEventCallbacks(2, cut_RunProzess, (void*) cut_PromptProzessChoice, (void*) cut_HandleProzessEvent, cut_NotifyProzess, 0);
-	cut_RegisterEventCallbacks(3, cut_RunCombatCutscene, (void*) fcn_004da170, 0, cut_NotifyCombatCutscene, 1);
+	cut_RegisterEventCallbacks(3, cut_RunCombatCutscene, (void*) cut_SkipCombatCutscene, 0, cut_NotifyCombatCutscene, 1);
 	cut_RegisterEventCallbacks(4, cut_MainDuell, (void*) fcn_004e1900, (void*) cut_SelectDuellResponse, cut_NotifyDuell, 0);
 	cut_RegisterEventCallbacks(5, cut_PlayHinrichtung, 0, 0, cut_NotifyHinrichtung, 0);
 	cut_RegisterEventCallbacks(6, fcn_004e2090, 0, 0, gm_NotifyHochzeit, 0);

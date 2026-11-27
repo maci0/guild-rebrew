@@ -33,7 +33,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e6360 */
-void __cdecl fcn_005e6360(char* entity)
+void __cdecl d2_RunEhrerbietungDialog(char* entity)
 {
     int ids[2];
     int query[20];
@@ -95,7 +95,7 @@ void __cdecl fcn_005e6360(char* entity)
                 g_774654 = 1;
             }
         }
-    } while (main_RunFrameLoop((void*) fcn_005e6360, 0x677c7) != 0);
+    } while (main_RunFrameLoop((void*) d2_RunEhrerbietungDialog, 0x677c7) != 0);
     d2_DestroyForm(dialog);
     d3_EndCameraAndUiMode();
 }

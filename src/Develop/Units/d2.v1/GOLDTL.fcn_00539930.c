@@ -33,7 +33,7 @@ extern char s_6a3a54[]; /* "Gamedata\\network\\%s.SAV" */
 extern char s_6a3a6c[]; /* "Menu\\SEARCH_NETWORK" */
 
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471db0(int, int);
+void __cdecl d2_PositionFormWindows(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_InitWindowBounds(int);
@@ -113,7 +113,7 @@ unsigned int __cdecl d2_ShowServerBrowser(int a0)
 	v36 = g_6b7fac;
 	group = -1;
 	dialog = d2_LoadForm(0, 0, s_6a3a6c);
-	fcn_00471db0(dialog, 1);
+	d2_PositionFormWindows(dialog, 1);
 	fcn_00471d80(dialog, 2);
 	d2_SetForm(dialog, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);

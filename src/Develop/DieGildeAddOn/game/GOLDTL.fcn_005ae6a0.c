@@ -22,7 +22,7 @@ int __cdecl d2_GetWindowListItem(int a1, int a2, int a3);
 int __cdecl main_RunFrameLoop(void* a1, int a2);
 void __cdecl d2_DestroyForm(int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-int __cdecl fcn_00526120(void* a1, int a2);
+int __cdecl d2_ShowModalMessageBox(void* a1, int a2);
 void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_RequestModifyHealth(int a1, int a2);
 void __cdecl gm_TryRecordCrime(int a1, int a2, int a3, int a4, int a5);
@@ -53,7 +53,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 	     *(unsigned short*) (*(int*) ((char*) a0 + 0x16c) + 0x27) != *(unsigned short*) a0)) {
 	if (*(unsigned char*) ((char*) a0 + 0x1b1) != 0) {
 		io_FormatTextBuffer(text, 0x19ba, *(unsigned short*) a0);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
 	p = *(void**) ((char*) a0 + 0x170);
@@ -105,7 +105,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 					res = 1;
 					g_774654 = 3;
 				} else {
-					fcn_00526120((void*) g_14abaac, 0);
+					d2_ShowModalMessageBox((void*) g_14abaac, 0);
 					*(int*) &g_100f1dc = -1;
 				}
 			} else if (d2_CurrentElementId == v9)

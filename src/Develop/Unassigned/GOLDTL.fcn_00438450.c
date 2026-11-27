@@ -5,12 +5,12 @@ extern float g_662a34;
 extern int g_10432a8;
 extern int g_1042a04;
 
-int __cdecl fcn_004382e0(unsigned int a0);
+int __cdecl d3_SelectObjectLod(unsigned int a0);
 void __cdecl d3_UpdateObjectCameraTransform(unsigned int a0, char* a1, int a2);
-char __cdecl fcn_00438270(unsigned int a0, int a1, int a2);
+char __cdecl d3_TestObjectFrustum(unsigned int a0, int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00438450 */
-unsigned char __cdecl fcn_00438450(char* o)
+unsigned char __cdecl d3_UpdateSceneObjectLodAndBounds(char* o)
 {
 	unsigned char result;
 	unsigned char sel;
@@ -24,7 +24,7 @@ unsigned char __cdecl fcn_00438450(char* o)
 
 	result = *(unsigned char*) &o | 0x40;
 	g_6b8050 = g_6b8050 + 1;
-	transformObject = fcn_004382e0((unsigned int) o);
+	transformObject = d3_SelectObjectLod((unsigned int) o);
 	if (transformObject != 0) {
 		g_10432a8 = g_10432a8 + *(int*) (transformObject + 0x314);
 		g_1042a04 = g_1042a04 + *(int*) (transformObject + 0x310);
@@ -40,7 +40,7 @@ unsigned char __cdecl fcn_00438450(char* o)
 		}
 		if (sel != 0 || (flags & 0x10) != 0) {
 			d3_UpdateObjectCameraTransform((unsigned int) o, d3_ActiveCamera, 0);
-			*(unsigned char*) (p + 0x163d) = (unsigned char) fcn_00438270((unsigned int) o, transformObject, *(int*) (o + 0x1ec) + 0x48);
+			*(unsigned char*) (p + 0x163d) = (unsigned char) d3_TestObjectFrustum((unsigned int) o, transformObject, *(int*) (o + 0x1ec) + 0x48);
 			*(int*) (transformObject + 0x300) = 0;
 			*(int*) (transformObject + 0x304) = 0;
 			*(int*) (transformObject + 0x308) = 0;

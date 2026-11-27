@@ -18,7 +18,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x005e0140 */
-void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, int mode)
+void __cdecl d2_PopulateSaveSlotList(int a, int b, void *items, void *records, char *path, int mode)
 {
     int i, count, file, index, element, x, y;
     char header[0xfc], empty[0x210], text[64];

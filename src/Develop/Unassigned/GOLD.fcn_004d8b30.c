@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-void __cdecl fcn_004d8b30(void)
+void __cdecl cut_ResetCharacterSlots(void)
 {
 	memset((void*) 0x92ca80, 0, 0x40);
 }

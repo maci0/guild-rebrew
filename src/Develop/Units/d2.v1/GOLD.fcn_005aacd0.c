@@ -94,7 +94,7 @@ typedef struct {
 } FRAME;
 
 /* ADDRESS: GOLD 0x005aacd0 */
-int __cdecl fcn_005aacd0(unsigned char* buildingRec, int modelId, int a3)
+int __cdecl d2_OpenWorkerRosterBook(unsigned char* buildingRec, int modelId, int a3)
 {
 	FRAME f;
 	char* tbl;

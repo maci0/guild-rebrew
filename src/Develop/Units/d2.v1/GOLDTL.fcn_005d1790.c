@@ -40,7 +40,7 @@ int __cdecl gm_AccumulateTyped2(char *);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl io_AppendText();
 void __cdecl io_FormatTextBuffer();
-int __cdecl fcn_00526120(char *, int);
+int __cdecl d2_ShowModalMessageBox(char *, int);
 void __cdecl d2_CreateButtonRow(int, int, int *, int, char *, char *);
 void __cdecl d2_DrawSkillBar(int, int, char *, int, int);
 int __cdecl main_RunFrameLoop(int, int);
@@ -48,7 +48,7 @@ char *__cdecl he_StartHandlungSearch(int, ...);
 char *__cdecl he_fn_Handlung(void);
 int __cdecl d2_ShowGiftDialog(void *, void *);
 int __cdecl d2_ShowChooseProfessionDialog2(void *, void *);
-int __cdecl fcn_005dbb60(void *, void *);
+int __cdecl d2_RunStudiumOfferDialog(void *, void *);
 int __cdecl _ftol(void);
 int __cdecl d2_ShowTxt(int, int, char *, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -332,7 +332,7 @@ label_2281:
 			d2_SetFormVisibility(h, 0);
 			if (d2_CurrentElementId == r5) {
 				io_FormatTextBuffer(bufB, 0x1f51, *person, *person);
-				if (fcn_00526120(bufB, 1) != 0) {
+				if (d2_ShowModalMessageBox(bufB, 1) != 0) {
 					cm_SendChangePlayerIdentity(*(int *)(g_7f4ca0 + 540 * g_774970 + 4),
 					    *(int *)((char *)person + 4));
 					g_774654 = 2;
@@ -346,7 +346,7 @@ label_2281:
 					d2_SetElementEnabled(r2, 0);
 				}
 			} else if (d2_CurrentElementId == r4) {
-				if (fcn_005dbb60(g_7f4ca0 + 540 * g_774970, person) != 0) {
+				if (d2_RunStudiumOfferDialog(g_7f4ca0 + 540 * g_774970, person) != 0) {
 					d2_SetElementEnabled(r4, 0);
 				}
 			} else if (d2_CurrentElementId == r3) {

@@ -1,0 +1,24 @@
+int __cdecl d3_FindSceneObject(int, int, int, int);
+void __cdecl d3_AnimateCameraToNode(int, int);
+
+/* ADDRESS: GOLDTL 0x0040f910 */
+int __cdecl ecmd_ZoomOnObject(int* a0, int* a1)
+{
+	int handle;
+
+	if (*(int*) 0x6b7ebc != 0 && *(int*) (*(int*) 0x6b7ebc + 0x44) == (int) ecmd_ZoomOnObject) {
+		if (*(int*) 0x6b5cbc != 0 || *(int*) 0x6b5cc0 != 0) {
+			*(int*) (*(int*) 0x6b7e98 + 0xc60) = (int) ecmd_ZoomOnObject;
+			return 0;
+		}
+		return 0;
+	}
+	if (*(int*) (*(int*) 0x6b7e98 + 0xc84) == 1) {
+		*(int*) (*(int*) 0x6b7e98 + 0xc60) = (int) ecmd_ZoomOnObject;
+	}
+	handle = d3_FindSceneObject(0, 0x160, 0, *a1);
+	if (handle != 0) {
+		d3_AnimateCameraToNode(handle, *a0 / 17);
+	}
+	return 1;
+}

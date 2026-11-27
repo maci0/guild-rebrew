@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0047ce50 */
-void __cdecl fcn_0047ce50(int arg0, int arg1, int arg2, int arg3, char* arg4)
+void __cdecl d2_BlitClippedRegion(int arg0, int arg1, int arg2, int arg3, char* arg4)
 {
 	void __cdecl sub_47d950(int, int, int);
 	extern int g_005fed64;

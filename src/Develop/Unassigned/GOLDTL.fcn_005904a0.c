@@ -5,7 +5,7 @@ char* __cdecl gm_FindBuildingOwner(int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 
-void __cdecl fcn_005904a0(char* obj, unsigned int flag)
+void __cdecl he_SetEntityScriptFlag(char* obj, unsigned int flag)
 {
 	int id;
 	int h;

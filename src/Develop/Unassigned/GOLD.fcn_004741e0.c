@@ -11,7 +11,7 @@ char* __cdecl vfs_Tfopen(char*, const char*, void*);
 unsigned int __cdecl vfs_ReadData(void*, unsigned int, unsigned int, char*);
 int __cdecl vfs_fseek(char*, int, int);
 void __cdecl CloseVfsStream(char*);
-int __cdecl fcn_00472380(short, short, short, short, unsigned int);
+int __cdecl d2_CreateGuiWindow(short, short, short, short, unsigned int);
 int __cdecl d2_CreateChildWindow(short, short, short, short, unsigned int, int);
 void __cdecl fcn_004721d0(char*, int);
 int __cdecl fcn_00468880(char*);
@@ -21,7 +21,7 @@ int __cdecl txt_FindEntryIndex(char*);
 int __cdecl d2_ShowTxt(short, short, char*, int);
 int __cdecl fcn_0046a350(int, int, int, int, unsigned char, int);
 int __cdecl d2_AddWindowSlider(int, int, unsigned char, int, int, int, unsigned char, int);
-void __cdecl fcn_0046cd90(short, short, int);
+void __cdecl d2_MoveElement(short, short, int);
 #define I32(p) (*(int*)(p))
 #define S16(p) (*(short*)(p))
 #define U8(p) (*(unsigned char*)(p))
@@ -123,7 +123,7 @@ int __cdecl d2_LoadForm(short x, short y, char* name)
                         (short)(S16(v1 + 2) - S16(parent + 6)), S16(v1 + 4), S16(v1 + 6),
                         I32(v1 + 8), parentID);
                 } else {
-                    *winSlot = fcn_00472380(S16(v1), S16(v1 + 2), S16(v1 + 4), S16(v1 + 6), I32(v1 + 8));
+                    *winSlot = d2_CreateGuiWindow(S16(v1), S16(v1 + 2), S16(v1 + 4), S16(v1 + 6), I32(v1 + 8));
                 }
             } else if (ver == 2) {
                 if (I32(v2)) {
@@ -133,7 +133,7 @@ int __cdecl d2_LoadForm(short x, short y, char* name)
                         (short)(S16(v2 - 0xece) - S16(parent + 6)), S16(v2 - 0xecc), S16(v2 - 0xeca),
                         I32(v2 - 0xec8), parentID);
                 } else {
-                    windowID = fcn_00472380(S16(record), S16(v2 - 0xece), S16(v2 - 0xecc), S16(v2 - 0xeca), I32(v2 - 0xec8));
+                    windowID = d2_CreateGuiWindow(S16(record), S16(v2 - 0xece), S16(v2 - 0xecc), S16(v2 - 0xeca), I32(v2 - 0xec8));
                 }
                 *winSlot = windowID;
                 if (v2[0x7c]) {
@@ -253,10 +253,10 @@ int __cdecl d2_LoadForm(short x, short y, char* name)
     strcpy((char*)(dialogOff + 0xfb124c), name);
     window = (char*)&g_00f8f120[I32(dialogOff + 0xfb1024)];
     if (x != 0 && y != 0) {
-        fcn_0046cd90(x, y, I32(window + 0x26c));
+        d2_MoveElement(x, y, I32(window + 0x26c));
     }
     if ((int)S16(window + 4) + S16(window + 8) > (int)S16(0xfb9072)) {
-        fcn_0046cd90((short)(S16(0xfb9072) - S16(window + 8)), S16(window + 6), I32(window + 0x26c));
+        d2_MoveElement((short)(S16(0xfb9072) - S16(window + 8)), S16(window + 6), I32(window + 0x26c));
     }
     return slot;
 }

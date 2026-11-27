@@ -23,7 +23,7 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl d2_ShowCityTradeInfoDialog(char*, int);
 
-void __cdecl fcn_00533880(void);
+void __cdecl d3_ClearSceneObjectCache(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d3_SelectTavernCardTableCity(void)
@@ -74,6 +74,6 @@ void __cdecl d3_SelectTavernCardTableCity(void)
 			d3_DestroyObject((D3_OBJECT*) (items[i]));
 		}
 	}
-	fcn_00533880();
+	d3_ClearSceneObjectCache();
 	d3_EndCameraAndUiMode();
 }

@@ -33,7 +33,7 @@ char *__cdecl gm_LookupEntityRecordById(int);
 void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 unsigned short *__cdecl d2_OpenTargetPicker(int *, char *, char *, int);
-int __cdecl fcn_00526120(char *, int);
+int __cdecl d2_ShowModalMessageBox(char *, int);
 void __cdecl cm_SendCopyEntityData(char *);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl fcn_0059fa80(D2_RESIDENCE_ENTITY *, char *, char *);
@@ -134,7 +134,7 @@ void __cdecl d2_ShowGeliebteDialog(char *building)
 					} else {
 						io_FormatTextBuffer(text_c, 0x1a56, *sel);
 					}
-					if (fcn_00526120(text_c, 1) != 0) {
+					if (d2_ShowModalMessageBox(text_c, 1) != 0) {
 						memset(msg, 0, sizeof(msg));
 						msg[4] = 0x6f;
 						msg[0x36] = 2;

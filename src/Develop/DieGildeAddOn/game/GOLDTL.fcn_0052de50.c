@@ -18,7 +18,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl fcn_0052dd80(char*);
-void __cdecl fcn_0052d9d0(char*);
+void __cdecl d3_CreateEntityFlagPennant(char*);
 
 void __cdecl d3_RefreshBuildingPennants(void)
 {
@@ -36,7 +36,7 @@ void __cdecl d3_RefreshBuildingPennants(void)
 		if (r != 0 && r != ((struct s_7f4ca0*)gm_CityEntity) && (r->kind == 6 || r->kind == 7 || r->kind == 5) &&
 		    (e[0x5a] & 1) == 0) {
 			fcn_0052dd80(e);
-			fcn_0052d9d0(e);
+			d3_CreateEntityFlagPennant(e);
 		}
 	}
 	d3_SelectSceneContext(save, 1);

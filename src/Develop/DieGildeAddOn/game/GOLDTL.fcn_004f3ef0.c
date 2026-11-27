@@ -33,7 +33,7 @@ extern void __cdecl he_NotifyContractBatch(int slot, int record, int count, int 
 extern void __cdecl he_NotifyContractDefault(int slot, int record);
 
 extern char g_7f4ca0[];
-extern int __cdecl fcn_004f1850();
+extern int __cdecl gm_IsSlotEntryValid();
 extern int __cdecl cm_SendCopyEntityData(void* msg);
 
 /* ADDRESS: GOLDTL 0x004f3ef0 */
@@ -66,7 +66,7 @@ void __cdecl gv_UpdateGraveyardPlots(char* entity)
 	    && *(unsigned short*) (entity + 0x27) != *(unsigned short*) gm_CityEntity) {
 		home = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (entity + 0x27)]);
 	}
-	entry = (int*) FindSlotEntryFiltered(0, entity, 0, (void*) fcn_004f1850, 0xff);
+	entry = (int*) FindSlotEntryFiltered(0, entity, 0, (void*) gm_IsSlotEntryValid, 0xff);
 	if (entry != 0) {
 		do {
 			if (n >= 0x40 && handle != -1) {
@@ -162,7 +162,7 @@ void __cdecl gv_UpdateGraveyardPlots(char* entity)
 			n++;
 next_entry:
 			;
-		} while ((entry = (int*) FindSlotEntryFiltered(0, entity, entry, (void*) fcn_004f1850, 0xff)) != 0);
+		} while ((entry = (int*) FindSlotEntryFiltered(0, entity, entry, (void*) gm_IsSlotEntryValid, 0xff)) != 0);
 	}
 	if (cm_CountOccupiedBuildingStats(entity) < 4)
 		gv_SendSpawnEntities(entity, gm_RandomMod(2) + 1);

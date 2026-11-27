@@ -13,10 +13,10 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d3_TriggerFriedhofChatScript(char*);
-void __cdecl fcn_0058f020(char*);
+void __cdecl he_DispatchEntityInteractReturn(char*);
 void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
-void __cdecl fcn_005b88b0(char*, char*);
+void __cdecl d2_RunPersonalbuchDialog(char*, char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 
@@ -43,7 +43,7 @@ void __cdecl fcn_0058fdc0(char* e)
 			r3 = RegisterStatusText(g_6a9924, g_14a7d28, 0xc);
 			r4 = RegisterStatusText(g_6a9914, g_14a7b50, 0xc);
 			r5 = RegisterStatusText(g_6a9580, g_14ad0f0, 0xe);
-			fcn_0058f020(e);
+			he_DispatchEntityInteractReturn(e);
 		}
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == r1) {
@@ -53,7 +53,7 @@ void __cdecl fcn_0058fdc0(char* e)
 			} else if (g_7746a0 == r3) {
 				d2_OpenMeisterbriefDialog(e);
 			} else if (g_7746a0 == r4) {
-				fcn_005b88b0(e, g_6a9914);
+				d2_RunPersonalbuchDialog(e, g_6a9914);
 			} else if (g_7746a0 == r5) {
 				d2_ShowLagerOptions(e, *(int*) (e + 0x5d));
 			}

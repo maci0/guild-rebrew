@@ -1,14 +1,14 @@
 extern void __cdecl d2_SetForm(int, int);
 extern int __cdecl d2_AddElementToWindow(int, int, int, int);
 extern void __cdecl d2_SetElementImage(int, int);
-extern void __cdecl fcn_00469c40(int, int, int);
-extern void __cdecl fcn_00596d70(int, int, int *, int, int, int);
+extern void __cdecl d2_PositionControl(int, int, int);
+extern void __cdecl d2_UpdateProduktionSlotTile(int, int, int *, int, int, int);
 extern void __cdecl ResetDisplayCounters(void);
 extern int __cdecl d2_GetControlValue(int);
 extern void __cdecl d2_SetDisplayCounter(int, int);
 
 /* ADDRESS: GOLDTL 0x00597940 */
-void __cdecl d2_DrawProduktionSlotGrid(int a0, int a1, int a2, int a3, short *a4)
+void __cdecl d2_DrawProduktionSlotGrid(int win, int form, int refreshCounters, int extra, short *modePtr)
 {
     int *r;
     int width;
@@ -18,9 +18,9 @@ void __cdecl d2_DrawProduktionSlotGrid(int a0, int a1, int a2, int a3, short *a4
     int col;
     int value;
 
-    r = (int *)(*(int *)((a1 + a0 * 0xaf) * 4 + 0x1038144) * 0x3cc + 0x1015f40);
+    r = (int *)(*(int *)((form + win * 0xaf) * 4 + 0x1038144) * 0x3cc + 0x1015f40);
     width = r[3];
-    d2_SetForm(a0, a1);
+    d2_SetForm(win, form);
 
     p = (int *)0x778d50;
     do {
@@ -50,13 +50,13 @@ void __cdecl d2_DrawProduktionSlotGrid(int a0, int a1, int a2, int a3, short *a4
         col += 0x14;
     } while (col < 0x778d9c);
 
-    d2_SetForm(a0, a1);
+    d2_SetForm(win, form);
 
     p = (int *)0x778d50;
     do {
         if (p[-2] >= 2) {
             *(int *)(*(int *)0x1015ea0 + p[0] * 0x2f4 + 0x48) = 0;
-            fcn_00469c40(r[1] + p[-4], r[2] + p[-3], *p);
+            d2_PositionControl(r[1] + p[-4], r[2] + p[-3], *p);
         } else {
             *(int *)(*(int *)0x1015ea0 + p[0] * 0x2f4 + 0x48) = 1;
         }
@@ -76,16 +76,16 @@ void __cdecl d2_DrawProduktionSlotGrid(int a0, int a1, int a2, int a3, short *a4
         }
         p[2] = *(int *)(i * 0x14 + 0x778d40) - 0x44 + col * 0x44;
         p[3] = *(int *)(i * 0x14 + 0x778d44);
-        if (*a4 == 0x1db)
-            fcn_00596d70(a0, a1, p, a2, 1, a3);
-        else if (*a4 == 0x1dc)
-            fcn_00596d70(a0, a1, p, a2, 2, a3);
+        if (*modePtr == 0x1db)
+            d2_UpdateProduktionSlotTile(win, form, p, refreshCounters, 1, extra);
+        else if (*modePtr == 0x1dc)
+            d2_UpdateProduktionSlotTile(win, form, p, refreshCounters, 2, extra);
         else
-            fcn_00596d70(a0, a1, p, a2, 3, a3);
+            d2_UpdateProduktionSlotTile(win, form, p, refreshCounters, 3, extra);
         p = (int *)((char *)p + 0x38);
     } while ((int)p < 0x779120);
 
-    if (!a2)
+    if (!refreshCounters)
         return;
     ResetDisplayCounters();
 

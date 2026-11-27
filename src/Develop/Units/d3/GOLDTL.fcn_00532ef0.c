@@ -25,7 +25,7 @@ void __cdecl d3_FreeObjectAnimation(View* v);
 void __cdecl d3_SetNodePosition(View* v, float* p);
 void __cdecl d3_SetObjectRotation(View* v, float* r);
 void __cdecl d3_AnimateCameraToStoredTransform(void);
-void __cdecl fcn_00530510(void);
+void __cdecl sv_ResetSelectionState(void);
 
 void __cdecl d3_EndCameraAndUiMode(void)
 {
@@ -59,7 +59,7 @@ void __cdecl d3_EndCameraAndUiMode(void)
 				g_7746a8 = 0;
 			}
 			if (g_7e2a9c != 0) {
-				fcn_00530510();
+				sv_ResetSelectionState();
 			}
 		}
 	} else if ((!CompareVector3WithinTolerance(((View*)d3_ActiveCamera)->rot, d3_CameraTargetRotation, 0.1f) || !CompareVector3WithinTolerance(((View*)d3_ActiveCamera)->pos, g_7e3a40, 0.1f)) &&
@@ -74,6 +74,6 @@ void __cdecl d3_EndCameraAndUiMode(void)
 		}
 	}
 	if (g_7e2a9c != 0) {
-		fcn_00530510();
+		sv_ResetSelectionState();
 	}
 }

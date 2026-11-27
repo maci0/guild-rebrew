@@ -9,7 +9,7 @@ extern short g_7725f0;
 extern short g_7725f2;
 extern char g_67da68[];
 
-int __cdecl fcn_00478cb0(int a1, int a2, char* a3, char* e, int s);
+int __cdecl gfx_CreateSurface(int a1, int a2, char* a3, char* e, int s);
 int __cdecl d2_DrawScaledRleSprite(int a1, int a2, char* a3, char* e, int s);
 
 int __cdecl shp_ShowScaledShapeFromBank(int x, int y, char* surface, char* bank, int shapeIndex, char scale, int alt)
@@ -38,7 +38,7 @@ int __cdecl shp_ShowScaledShapeFromBank(int x, int y, char* surface, char* bank,
 		case 1:
 			if (scale < 0) {
 				if (alt != 0) {
-					result = fcn_00478cb0(x, y, surface, entry, abs(scale));
+					result = gfx_CreateSurface(x, y, surface, entry, abs(scale));
 				} else {
 					result = d2_DrawScaledRleSprite(x, y, surface, entry, abs(scale));
 				}

@@ -54,12 +54,12 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_00508640(int a, int b);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_0046f940(int, char*);
+void __cdecl d2_SetLabelText(int, char*);
 void __cdecl d2_DestroyElement(int);
 void __cdecl d2_AddDisplayCounter(int key, int amt);
 void __cdecl d2_LayoutEntityList(int);
 
-int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
+int __cdecl d2_PopulateInventoryGrid(int list, Row* rows, int a3, int a4, char sel)
 {
 	int changed;
 	int result;
@@ -124,7 +124,7 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 			amount = fcn_00508640(*(int*) (q + 0xe), r->key);
 			d2_SetElementValue(r->icon, 0, amount, ent);
 			io_FormatTextBuffer(buf, (int) g_6aac70, amount, g_14a79c0[r->key * 2]);
-			fcn_0046f940(r->label, buf);
+			d2_SetLabelText(r->label, buf);
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[r->label].width) = 0xbe;
 			r->count = amount;
 		} else {

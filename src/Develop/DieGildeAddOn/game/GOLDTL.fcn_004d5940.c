@@ -24,7 +24,7 @@ int __cdecl gm_FindRecordById(int);
 int __cdecl gm_CalcEntityInventoryStats(char*, int*);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_004d5490(int, int, int);
+int __cdecl d2_DrawPartyStoreItems(int, int, int);
 void __cdecl d2_DrawCombatParticipants(char*, int, int);
 int __cdecl d2_ShowMessageBox(char*, unsigned int);
 int __cdecl cut_PlunderBuildingCarts(int, int, char*, char*, float);
@@ -200,7 +200,7 @@ unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 		} else {
 			io_AppendText(0x113f);
 		}
-		fcn_004d5490(0x10, 0x96, 0);
+		d2_DrawPartyStoreItems(0x10, 0x96, 0);
 		p = (int*) (dialogState + 0x100);
 		i = 3;
 		do {

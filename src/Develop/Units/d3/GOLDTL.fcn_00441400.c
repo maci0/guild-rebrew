@@ -56,7 +56,7 @@ typedef struct Terrain441400 {
 
 float* __stdcall fcn_005ec410(float*, float, float, float);
 float* __stdcall fcn_005eb970(float*, float*, float*);
-void __cdecl fcn_004372d0(unsigned char, unsigned char, int, unsigned char, unsigned char);
+void __cdecl d3_SetRenderMaterialState(unsigned char, unsigned char, int, unsigned char, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00441400 */
 void __cdecl fcn_00441400(char* o)
@@ -78,7 +78,7 @@ void __cdecl fcn_00441400(char* o)
 	             t->pos[2] - *(float*) (((char*) d3_ActiveCamera) + 0x54));
 	fcn_005eb970(m, m, (float*) (((char*) d3_ActiveCamera) + 0x18c));
 	((Transform441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform)(((D3D_DEVICE_VIEW*)g_6b5de0), 0x100, m);
-	fcn_004372d0(0xff, 0, 0, 0, 0);
+	d3_SetRenderMaterialState(0xff, 0, 0, 0, 0);
 	for (k = 0; k < 8; k++) {
 		if (t->tex[k] != 0) {
 			((Texture441400Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, *(int*) ((char*) t->tex[k] + 0x50));

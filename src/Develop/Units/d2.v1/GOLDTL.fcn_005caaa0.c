@@ -3,7 +3,7 @@ typedef struct
 	char pad0[0x50];
 	short w;
 	short h;
-} fcn_005caaa0_Def;
+} D2_TILE_SPRITE_DEF;
 // SIZE 0x54
 
 // SIZE 0x21c
@@ -23,7 +23,7 @@ typedef struct
 	int f1d0;
 	char pad1d4[0x2f0 - 0x1d4];
 	char* owner;
-} fcn_005caaa0_Tile;
+} D2_TILE_CONTROL;
 
 typedef struct
 {
@@ -38,7 +38,7 @@ typedef struct
 	int f28;
 	char pad2c[4];
 	int f30;
-} fcn_005caaa0_Sel;
+} D2_PERSON_TILE_SEL;
 
 extern char* g_772500;
 extern int d2_CurrentWindowId;
@@ -53,24 +53,24 @@ void __cdecl d2_SetElementEnabled(int i, int flag);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005caaa0 */
-int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
+int __cdecl d2_DrawPersonTile(int x, int y, int win, D2_PERSON_TILE_SEL* selection)
 {
 	int cx;
 	int b;
 
-	cx = x + ((fcn_005caaa0_Def*)g_772500)[1498].w / 2;
+	cx = x + ((D2_TILE_SPRITE_DEF*)g_772500)[1498].w / 2;
 	selection->tile = d2_AddElementToWindow(x, y, 0x5da, d2_CurrentWindowId);
 	selection->bar = -1;
 	if (selection->e != 0) {
-		selection->icon = d2_AddElementToWindow(cx - ((fcn_005caaa0_Def*)g_772500)[*(int*) (selection->e + 0x18c)].w / 2 - 3, y + 1, *(int*) (selection->e + 0x18c), d2_CurrentWindowId);
+		selection->icon = d2_AddElementToWindow(cx - ((D2_TILE_SPRITE_DEF*)g_772500)[*(int*) (selection->e + 0x18c)].w / 2 - 3, y + 1, *(int*) (selection->e + 0x18c), d2_CurrentWindowId);
 		d2_AddElementToWindow(x + 3, y + 3, selection->f1c, d2_CurrentWindowId);
 		if (selection->f20 != 0)
-			d2_AddElementToWindow(x + 3, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, selection->f20, d2_CurrentWindowId);
+			d2_AddElementToWindow(x + 3, ((D2_TILE_SPRITE_DEF*)g_772500)[1498].h + y - 0x13, selection->f20, d2_CurrentWindowId);
 		if (selection->f24 != 0)
-			d2_AddElementToWindow(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, y + 3, selection->f24, d2_CurrentWindowId);
-		d2_AddElementToWindow(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, selection->f28, d2_CurrentWindowId);
+			d2_AddElementToWindow(((D2_TILE_SPRITE_DEF*)g_772500)[1498].w + x - 0x10, y + 3, selection->f24, d2_CurrentWindowId);
+		d2_AddElementToWindow(((D2_TILE_SPRITE_DEF*)g_772500)[1498].w + x - 0x10, ((D2_TILE_SPRITE_DEF*)g_772500)[1498].h + y - 0x13, selection->f28, d2_CurrentWindowId);
 		if (selection->e[2] != 6) {
-			b = d2_AddWindowValueGauge(cx - 0x23, ((fcn_005caaa0_Def*)g_772500)[1498].h + y + 2, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
+			b = d2_AddWindowValueGauge(cx - 0x23, ((D2_TILE_SPRITE_DEF*)g_772500)[1498].h + y + 2, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 			selection->bar = b;
 			if (selection->e[2] == 7)
 				d2_SetElementValue(b, 0, 0x64, 0, 1);
@@ -79,7 +79,7 @@ int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
 			d2_SetElementEnabled(selection->bar, 0);
 		}
 		if (*(int*) (selection->e + 0x210) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id)
-			d2_AddElementToWindow(((fcn_005caaa0_Def*)g_772500)[1498].w + x, y, 0x6d3, d2_CurrentWindowId);
+			d2_AddElementToWindow(((D2_TILE_SPRITE_DEF*)g_772500)[1498].w + x, y, 0x6d3, d2_CurrentWindowId);
 		if (selection->f30 != 0) {
 			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].value_05c = 1;
 			((D2_CONTROL_TL*) g_1015ea0)[selection->tile].flags_1d0 = 3;
@@ -88,7 +88,7 @@ int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
 		if (selection->e[2] == 5 || selection->e[2] == 6 || selection->e[2] == 7)
 			d2_AddElementToWindow(x - 0x20, y, *(int*) (selection->e + 0x54), d2_CurrentWindowId);
 	} else {
-		d2_AddElementToWindow(cx - ((fcn_005caaa0_Def*)g_772500)[1275].w / 2 - 3, y + 1, 0x4fb, d2_CurrentWindowId);
+		d2_AddElementToWindow(cx - ((D2_TILE_SPRITE_DEF*)g_772500)[1275].w / 2 - 3, y + 1, 0x4fb, d2_CurrentWindowId);
 	}
 	return 0;
 }

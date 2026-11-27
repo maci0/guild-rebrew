@@ -2,39 +2,39 @@
 
 extern char g_6b5c60;
 
-typedef struct Entry043a720 {
+typedef struct D3_ANIM_LIST_ENTRY {
 	char name[0x58];
-} Entry043a720;
+} D3_ANIM_LIST_ENTRY;
 
-typedef struct List043a720 {
+typedef struct D3_ANIM_LIST {
 	char pad0[0x74];
-	Entry043a720 items[6];
+	D3_ANIM_LIST_ENTRY items[6];
 	char pad284[0x2a0 - 0x284];
 	unsigned char count;
-} List043a720;
+} D3_ANIM_LIST;
 
-typedef struct Ov043a720 {
+typedef struct D3_ANIM_OV {
 	char pad0[0xb4];
 	char name[0x40];
 	char padf4[0x40c - 0xf4];
-	List043a720* list;
-} Ov043a720;
+	D3_ANIM_LIST* list;
+} D3_ANIM_OV;
 
-typedef struct Obj043a720 {
+typedef struct D3_ANIM_OBJ {
 	char pad0[0x1ec];
-	Ov043a720* ov;
+	D3_ANIM_OV* ov;
 	char pad1f0[0x1fc - 0x1f0];
-	struct Obj043a720* parent;
-} Obj043a720;
+	struct D3_ANIM_OBJ* parent;
+} D3_ANIM_OBJ;
 
-void __cdecl d3_BindAnimTrackNodes(Obj043a720* o);
-void __cdecl d3_UpdateObjectAnimPose(Obj043a720* o);
+void __cdecl d3_BindAnimTrackNodes(D3_ANIM_OBJ* o);
+void __cdecl d3_UpdateObjectAnimPose(D3_ANIM_OBJ* o);
 
 /* ADDRESS: GOLDTL 0x0043a720 */
-char __cdecl fcn_0043a720(Obj043a720* o, char* name)
+char __cdecl d3_StartChildAnimByName(D3_ANIM_OBJ* o, char* name)
 {
-	Obj043a720* p;
-	List043a720* l;
+	D3_ANIM_OBJ* p;
+	D3_ANIM_LIST* l;
 	int i;
 
 	if (o != 0 && name != 0 && o->parent != 0 && o->ov != 0) {

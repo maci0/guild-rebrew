@@ -3,7 +3,7 @@ extern char g_68d538[];
 
 void __cdecl fcn_0064d41a(void*, void*, void*, int, int, int);
 
-char __cdecl fcn_004e46e0(void* context)
+char __cdecl d3_FormatObjectLodDebugInfo(void* context)
 {
 	char buf[0x100];
 

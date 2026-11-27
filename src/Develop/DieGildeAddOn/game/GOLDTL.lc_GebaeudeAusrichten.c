@@ -85,7 +85,7 @@ int __cdecl gm_RandomMod(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 char* __cdecl _strupr(char*);
 int __cdecl lc_GetBauplatzPrefix(int, char*);
 int __cdecl d3_CollectUnusedSceneObjects(char*, void**);
@@ -95,19 +95,19 @@ void __cdecl d3_SetObjectGroundPosition(char*, float*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 void* __cdecl d3_LoadObjectFile(char*, int, int);
 int __cdecl vfs_ResolvePath(char*, int, int, char*);
-char __cdecl fcn_004143b0(char*, int, int);
+char __cdecl d3_AlignObjectToTerrain(char*, int, int);
 void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
-void __cdecl fcn_00414960(float*, float*, char*);
+void __cdecl d3_ComputeObjectWorldBounds(float*, float*, char*);
 void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
-void __cdecl fcn_00415300(char*);
+void __cdecl d3_ObjectNoopStub(char*);
 char __cdecl d3_DestroyObject(char*);
 void __cdecl d3_SetSubtreeColor(char*, unsigned char, unsigned char, unsigned char);
-void __cdecl fcn_0043a3f0(char*, char*, Key4_5988b0);
+void __cdecl d3_ChangeObjectTransparency(char*, char*, Key4_5988b0);
 void __cdecl fcn_00533a40(char*);
 void __cdecl ReportClientMessage(char*);
-void __cdecl fcn_00412830(char);
+void __cdecl io_ClearInputButtonFlags(char);
 void __cdecl UpdateSceneLighting(unsigned char);
 int __cdecl gm_CalcBuildingCost(int, int);
 char __cdecl d3sm_RaycastScreenPoint(int, int, int, int*, int*);
@@ -145,7 +145,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		while (pSuch != 0) {
 			if (*pSuch == gebaeudetyp) {
 				io_FormatTextBuffer((char*) f.pObjekte, 0x17f2, gebaeudetyp * 14 + 0x48e);
-				if (fcn_00526120((char*) f.pObjekte, 1) == 0) {
+				if (d2_ShowModalMessageBox((char*) f.pObjekte, 1) == 0) {
 					return 0;
 				}
 				break;
@@ -195,7 +195,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 	f.fObjektPos[1] = 0.0f;
 	f.fObjektPos[2] = 0.0f;
 	if (f.iTreffer <= 0) {
-		fcn_00526120((char*) g_14ab2e0, 0);
+		d2_ShowModalMessageBox((char*) g_14ab2e0, 0);
 		return 0;
 	}
 	for (i = 0; i < f.iTreffer; i++) {
@@ -207,13 +207,13 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		sprintf(f.cBafPfad, (char*) 0x6aa228, (char*) 0x7e1ae0);
 		pTemp = (char*) d3_LoadObjectFile(f.cBafPfad, 0, 0);
 		f.pObjekte[i] = pTemp;
-		fcn_00415300(pTemp);
+		d3_ObjectNoopStub(pTemp);
 		d3_SetNodePosition(pTemp, f.fPos);
 		*(unsigned char*) (pTemp + 0x214) &= 0x7f;
 		memset(&f.key, 0, sizeof(f.key));
 		f.key.f.b0 = 1;
 		f.key.id = 0x80;
-		fcn_0043a3f0(pTemp, *(char**) (pTemp + 0x1cc), f.key);
+		d3_ChangeObjectTransparency(pTemp, *(char**) (pTemp + 0x1cc), f.key);
 		d3_SetSubtreeColor(pTemp, 0xc0, 0xa0, 0x80);
 		dx = f.fPos[0] - *(float*) (d3_ActiveCamera + 0x4c);
 		dy = f.fPos[1] - *(float*) (d3_ActiveCamera + 0x50);
@@ -226,11 +226,11 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		d3_ApplyObjectAnimation(pTemp, (char*) 0x6a2eb8, 1);
 	}
 	if (f.pPrev == 0) {
-		fcn_00526120((char*) g_14ab2e0, 0);
+		d2_ShowModalMessageBox((char*) g_14ab2e0, 0);
 		return 0;
 	}
 	UpdateSceneLighting(1);
-	fcn_00412830(2);
+	io_ClearInputButtonFlags(2);
 	g_14cf950 = 0x32;
 	pAktuell = 0;
 	for (;;) {
@@ -253,13 +253,13 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 			}
 			*(unsigned char*) (pAktuell + 0x214) &= 0x7f;
 			d3_SetNodePosition(pAktuell, f.fPos);
-			fcn_004143b0(pAktuell, f.iRot, 0);
+			d3_AlignObjectToTerrain(pAktuell, f.iRot, 0);
 			pNaechster = (char*) d3_FindNearestSceneObject(f.fPos, (void**) f.pListe);
 			f.pPrev = pNaechster;
 			if (pNaechster != 0) {
 				d3_ComputeObjectYawToTarget(f.fObjektPos, pNaechster);
 				d3_SetObjectRotation(pAktuell, f.fObjektPos);
-				fcn_004143b0(pAktuell, f.iRot, 0);
+				d3_AlignObjectToTerrain(pAktuell, f.iRot, 0);
 				fcn_00533a40((char*) 0x677c94);
 				if (f.iRot != 1) {
 					d3_SetSubtreeColor(pAktuell, 0x40, 0xc0, 0x40);
@@ -279,7 +279,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 			*(int*) (pAktuell + 0x4c) = 0;
 			*(int*) (pAktuell + 0x50) = 0;
 			*(int*) (pAktuell + 0x54) = 0;
-			fcn_00414960(f.fMin, f.fMax, pAktuell);
+			d3_ComputeObjectWorldBounds(f.fMin, f.fMax, pAktuell);
 			*(float*) (pAktuell + 0x4c) = f.fPos[0];
 			*(float*) (pAktuell + 0x50) = f.fPos[1];
 			*(float*) (pAktuell + 0x54) = f.fPos[2];
@@ -341,7 +341,7 @@ platzieren:
 				memset(&f.key, 0, sizeof(f.key));
 				f.key.f.b0 = 1;
 				f.key.id = 0xdd;
-				fcn_0043a3f0(pAktuell, *(char**) (pAktuell + 0x1cc), f.key);
+				d3_ChangeObjectTransparency(pAktuell, *(char**) (pAktuell + 0x1cc), f.key);
 				*(unsigned char*) (pAktuell + 0x215) |= 0x80;
 				if (pNaechster != 0) {
 					if (f.iRot != 1) {
@@ -361,7 +361,7 @@ platzieren:
 			d3sm_RaycastScreenPoint((int) f.pKontext, g_14ce8c0, g_14ce8c2, (int*) &f.fAbstand, &f.iKennung2);
 			if (d3_GridPointToWorld(f.pKontext, f.iKennung2, *(int*) &f.fAbstand, f.fPos) != 0) {
 				d3_SetNodePosition(pAktuell, f.fPos);
-				fcn_004143b0(pAktuell, 1, 0);
+				d3_AlignObjectToTerrain(pAktuell, 1, 0);
 			}
 			f.fVec[0] = *(float*) (pAktuell + 0x84);
 			f.fVec[1] = *(float*) (pAktuell + 0x88);
@@ -373,7 +373,7 @@ platzieren:
 			i = gm_CalcBuildingCost((int) (g_7f4ca0 + g_774970 * 0x21c), gebaeudetyp);
 			io_FormatTextBuffer(f.cText, 0x17ef, i, gebaeudetyp * 14 + 0x48e,
 				*(int*) (lpGebaeudePROT + f.iTypOffset + 0x243));
-			if (fcn_00526120(f.cText, 1) != 0) {
+			if (d2_ShowModalMessageBox(f.cText, 1) != 0) {
 				f.iErgebnis = (int) f.pPrev;
 			}
 			else {

@@ -25,7 +25,7 @@ int __cdecl gm_CalculateGebaeudeValue(char*, int);
 int __cdecl io_AppendText(int, char*, int, int, int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl d2_CheckFundsAndNotify(char*, int, int, char);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 
 
@@ -57,7 +57,7 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 	x = (float) p;
 	n = 100 - (int) *(char*) (e + 0x5c);
 	if (n <= 0) {
-		fcn_00526120(g_14ab248, 4);
+		d2_ShowModalMessageBox(g_14ab248, 4);
 		return;
 	}
 	x = x * 0.005f;

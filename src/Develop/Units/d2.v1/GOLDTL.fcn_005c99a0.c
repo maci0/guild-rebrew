@@ -1,5 +1,5 @@
 /* Item cell used by the gold-trade grid. */
-typedef struct Item_5c99a0 {
+typedef struct D2_PERSON_CARD_ITEM {
 	int* obj;		/* +0x00 */
 	int win;		/* +0x04 */
 	int win2;		/* +0x08 */
@@ -12,21 +12,21 @@ typedef struct Item_5c99a0 {
 	int cw24;		/* +0x24 */
 	int cw28;		/* +0x28 */
 	int pad2c[3];		/* +0x2c */
-} Item_5c99a0;			/* SIZE 0x38 */
+} D2_PERSON_CARD_ITEM;			/* SIZE 0x38 */
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_AddElementToWindow();
 int __cdecl io_FormatTextBuffer();
-int __cdecl fcn_005c9090();
+int __cdecl d2_ShowCenteredText();
 int __cdecl d2_AddWindowValueGauge();
-int __cdecl fcn_00472380();
+int __cdecl d2_CreateGuiWindow();
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl d2_SetElementEnabled();
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005c99a0 */
-int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, Item_5c99a0* items, int owner)
+int __cdecl d2_DrawPersonCardGrid(int a0, int mode, int filter, int itemCount, D2_PERSON_CARD_ITEM* items, int owner)
 {
-	Item_5c99a0* item;
+	D2_PERSON_CARD_ITEM* item;
 	int counts[3];
 	int rows;
 	int row;
@@ -129,21 +129,21 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, Item_5c99a
 			d2_AddElementToWindow((int) *(short*) (g_772500 + 0x1ebd8) - 0x10 + (left), (int) *(short*) (g_772500 + 0x1ebda) - 0x13 + y, item->cw28, d2_CurrentWindowId);
 			if (mode == 7) {
 				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) item->obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) item->obj + 0xd), *(unsigned short*) item->obj);
-				fcn_005c9090(buf, x, item->y, 0xca, 0x56);
+				d2_ShowCenteredText(buf, x, item->y, 0xca, 0x56);
 				io_FormatTextBuffer(buf, 0x679060, (*(char*) ((int) item->obj + 9) ? 0x27b : 0x253) + (unsigned int) *(unsigned char*) ((int) item->obj + 0x169));
-				fcn_005c9090(buf, x, item->y + 0xf, 0xca, 0x56);
+				d2_ShowCenteredText(buf, x, item->y + 0xf, 0xca, 0x56);
 			} else {
 				io_FormatTextBuffer(buf, 0x6ac964, (*(char*) ((int) item->obj + 9) ? 0x11e : 0x114) + (unsigned int) *(unsigned char*) ((int) item->obj + 0xd), *(unsigned short*) item->obj);
-				fcn_005c9090(buf, x, item->y, 0xca, 0x56);
+				d2_ShowCenteredText(buf, x, item->y, 0xca, 0x56);
 				io_FormatTextBuffer(buf, 0x6ac95c, *(unsigned short*) item->obj);
-				fcn_005c9090(buf, x, item->y + 0xf, 0xca, 0x56);
+				d2_ShowCenteredText(buf, x, item->y + 0xf, 0xca, 0x56);
 			}
 			if (item->obj != (int*) owner && *(char*) ((int) item->obj + 2) != 6) {
 				item->win2 = d2_AddWindowValueGauge(x - 0x23, (int) *(short*) (g_772500 + 0x1ebda) + 5 + y, 0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
 				if (*(char*) ((int) item->obj + 2) == 7) {
-					fcn_00472380(item->win2, 0, 100, 0, 1);
+					d2_CreateGuiWindow(item->win2, 0, 100, 0, 1);
 				} else {
-					fcn_00472380(item->win2, 0, 100, (int) gm_CalcEntityFavor(*(unsigned short*) owner, *(unsigned short*) item->obj, 1));
+					d2_CreateGuiWindow(item->win2, 0, 100, (int) gm_CalcEntityFavor(*(unsigned short*) owner, *(unsigned short*) item->obj, 1));
 				}
 				d2_SetElementEnabled(item->win2, 1);
 				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win2].value_05c = 1;

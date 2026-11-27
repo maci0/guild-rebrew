@@ -24,7 +24,7 @@ void __cdecl d2_AddWindowFrame(int, int);
 void __cdecl d2_BringWindowToFront(int);
 int __cdecl io_AppendText(char*, ...);
 
-int __cdecl fcn_005b0dd0(MsgBox* m)
+int __cdecl d2_InitLandkarteDialog(MsgBox* m)
 {
 	m->dlg = d2_LoadForm(0, 0, s_6ab3e4);
 	fcn_00471d80(m->dlg, 3);

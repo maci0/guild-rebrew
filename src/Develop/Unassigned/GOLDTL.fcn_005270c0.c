@@ -27,7 +27,7 @@ extern int g_6a25a0;
 extern int g_6a25a4;
 
 void __cdecl d2_SetFormVisibility(int h, int v);
-void __cdecl fcn_00545a80(int v);
+void __cdecl d2_SetEventLeisteVisibility(int v);
 void __cdecl d2_SetSlotVisibility(int h, int v);
 
 void __cdecl d2_UpdateHudVisibility(int show)
@@ -38,7 +38,7 @@ void __cdecl d2_UpdateHudVisibility(int show)
 	if (g_6a25b8 != -1) {
 		d2_SetFormVisibility(g_6a25b8, show);
 	}
-	fcn_00545a80(show);
+	d2_SetEventLeisteVisibility(show);
 	if (g_6a25b8 != -1) {
 		d2_SetFormVisibility(g_6a25b8, show);
 	}

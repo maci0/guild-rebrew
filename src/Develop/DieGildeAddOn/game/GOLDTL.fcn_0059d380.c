@@ -35,7 +35,7 @@ extern char* __cdecl he_StartHandlungSearch(int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern int __cdecl he_HasNoActiveAction0x62(char*);
 extern void __cdecl io_FormatTextBuffer(char*, char*, ...);
-extern int __cdecl fcn_00526120(char*, int);
+extern int __cdecl d2_ShowModalMessageBox(char*, int);
 extern int __cdecl d2_LoadForm(int, int, char*);
 extern void __cdecl d2_CenterDialogWindows(int);
 extern void __cdecl d2_SetOverlayAnimation(int, int);
@@ -71,7 +71,7 @@ int __cdecl d2_RunRaeuberlagerTargetDialog(int unusedFlags, char* object)
 	while (event != 0) {
 		if (*(int*) (event + 0xb0) == *(int*) (object + 1)) {
 			io_FormatTextBuffer(buf, (char*) 0x1a91, *(unsigned short*) (object + 0x27), object);
-			fcn_00526120(buf, 0);
+			d2_ShowModalMessageBox(buf, 0);
 			return 0;
 		}
 		event = he_fn_Handlung();
@@ -82,12 +82,12 @@ int __cdecl d2_RunRaeuberlagerTargetDialog(int unusedFlags, char* object)
 		}
 	}
 	if (i >= 0x300) {
-		fcn_00526120((char*) g_14abd04, 0);
+		d2_ShowModalMessageBox((char*) g_14abd04, 0);
 		return 0;
 	}
 	if (he_HasNoActiveAction0x62(object) == 0) {
 		io_FormatTextBuffer(buf, (char*) 0x1a89, *(unsigned short*) (object + 0x27), object);
-		fcn_00526120(buf, 0);
+		d2_ShowModalMessageBox(buf, 0);
 		return 0;
 	}
 	dlg = d2_LoadForm(0, 0, s_6aa4b8);

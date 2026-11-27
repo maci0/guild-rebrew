@@ -18,7 +18,7 @@ struct DevData {
 /* Drain the keyboard device. The loop is a do/while on the HRESULT so
  * the failure path is a jl to the tail and GetDeviceData is emitted
  * once. */
-void __cdecl fcn_004124b0(void)
+void __cdecl io_PollKeyboardInput(void)
 {
 	DevData ev;
 	unsigned int n;

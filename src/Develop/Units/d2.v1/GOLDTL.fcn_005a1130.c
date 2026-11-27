@@ -21,14 +21,14 @@ int __cdecl d2_InitWindowBounds();
 int __cdecl main_RunFrameLoop();
 int __cdecl d2_ShowWirtshausRules();
 int __cdecl fcn_005a0cd0();
-int __cdecl fcn_005a1130();
+int __cdecl d2_ShowWirtshausRoundResult();
 int __cdecl d2_BuildPersonStatusDesc();
-int __cdecl fcn_005ca740();
+int __cdecl d2_DrawPersonCard();
 int __cdecl gm_LookupEntityRecordById();
 int __cdecl fcn_00591990();
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005a1130 */
-int __cdecl fcn_005a1130(char* a0, int window)
+int __cdecl d2_ShowWirtshausRoundResult(char* a0, int window)
 {
 	char* self;
 	int i;

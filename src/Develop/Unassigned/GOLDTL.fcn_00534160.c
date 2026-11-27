@@ -5,7 +5,7 @@ extern int d2_CurrentWindowId;
 
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 
-void __cdecl fcn_00534160(int x0, int y, int len, int t)
+void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t)
 {
 	int w;
 	int n;

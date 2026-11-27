@@ -39,7 +39,7 @@ extern char* g_77261c;
 
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
-int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
+int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* Slot chooser for the execution scene. A fifteen-entry slot table is matched
@@ -122,7 +122,7 @@ int __cdecl ai_StartAlchemistryItems(int kind, char* e, int busy, Msg* a, Msg* b
 		if (idx < 6) {
 			int picked; int mask;
 			mask = 0xf00500;
-			if (fcn_004a5340(e, 1, &mask, 0, (float) gm_RandomMod(0x20) + 10.0f, &picked)) {
+			if (ai_SelectRankedCandidates(e, 1, &mask, 0, (float) gm_RandomMod(0x20) + 10.0f, &picked)) {
 				b->type = 7;
 				b->a = *(int*) (g_7f4ca4 + (picked & 0xffff) * 0x21c);
 				b->b = -1;

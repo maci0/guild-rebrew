@@ -18,7 +18,7 @@ void __cdecl sb_PlayVoice(int a, char* s, int b, int c, int d, int e, int f);
 int __cdecl gm_CountChildren(void* p, void* buf);
 void __cdecl io_FormatTextBuffer(char* buf, ...);
 int __cdecl d2_ShowMessageBox(void* buf, int n);
-void __cdecl fcn_005d0660(int a, int b, int c, int d);
+void __cdecl d2_RunStammbaumDialog(int a, int b, int c, int d);
 void __cdecl cm_BeginPacketFieldDelta(void* a, int b);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* p);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -118,7 +118,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 		io_FormatTextBuffer(buf1, 0x40fb, 0x40f5, idxval);
 		if (d2_ShowMessageBox(buf1, 0x10) == 0) {
 		dialog_fallback:
-			fcn_005d0660(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, cut_EventLoopFlags);
+			d2_RunStammbaumDialog(*(int*) (0x7f4ca4 + 540 * (unsigned short) *(unsigned short*) 0x774970), 0xa, *(int*) 0x14abde8, cut_EventLoopFlags);
 		} else {
 			int alo;
 			alo = 0;

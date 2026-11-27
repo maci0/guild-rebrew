@@ -3,15 +3,15 @@ extern char* g_1015ea0; /* 0x1015ea0, GUI pool, stride 0x2f4 */
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 void __cdecl d2_SetElementImage(int element, int bild);
-int __cdecl fcn_00469c40(int x, int y, int a3);
-void __cdecl fcn_00596d70(int a0, int a1, int* rect, int w, int n,
+int __cdecl d2_PositionControl(int x, int y, int a3);
+void __cdecl d2_UpdateProduktionSlotTile(int a0, int a1, int* rect, int w, int n,
                           unsigned int a5);
 void __cdecl ResetDisplayCounters(void);
 int __cdecl d2_GetControlValue(int element);
 void __cdecl d2_SetDisplayCounter(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00596b10 */
-void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
+void __cdecl d2_LayoutProduktionSlotGrid(int a0, int a1, int a2, unsigned int a3)
 {
     int* r;
     int width;
@@ -60,7 +60,7 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
     do {
         if (p[-2] >= 2) {
             *(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[p[0]].value_048)) = 0;
-            fcn_00469c40(r[1] + p[-4], r[2] + p[-3], *p);
+            d2_PositionControl(r[1] + p[-4], r[2] + p[-3], *p);
         } else {
             *(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[p[0]].value_048)) = 1;
         }
@@ -82,7 +82,7 @@ void __cdecl fcn_00596b10(int a0, int a1, int a2, unsigned int a3)
         }
         p[2] = *(int*) (i * 0x14 + 0x778d40) - 0x44 + col * 0x44;
         p[3] = *(int*) (i * 0x14 + 0x778d44);
-        fcn_00596d70(a0, a1, p, a2, 3, a3);
+        d2_UpdateProduktionSlotTile(a0, a1, p, a2, 3, a3);
         p += 0xe;
         n += 0x38;
     } while (n < 0x77912c);

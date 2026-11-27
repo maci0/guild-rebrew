@@ -31,7 +31,7 @@ typedef struct {
 extern int g_1551f40[0x30];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_0043a3f0(char* node, char* m, Key4_4027b0 k);
+void __cdecl d3_ChangeObjectTransparency(char* node, char* m, Key4_4027b0 k);
 void __cdecl ch_SetVisible(char* obj, int shown);
 
 
@@ -62,17 +62,17 @@ void __cdecl ch_UpdateFades(void)
 			k.f.b0 = 0;
 			k.id = (unsigned char) a;
 			if (a != 255.0f && a != 0.0f) {
-				fcn_0043a3f0(*(char**) (obj + 0x34), *(char**) (*(char**) (obj + 0x34) + 0x1cc), k);
+				d3_ChangeObjectTransparency(*(char**) (obj + 0x34), *(char**) (*(char**) (obj + 0x34) + 0x1cc), k);
 				if (*(char***) (obj + 0x124) != 0) {
-					fcn_0043a3f0(**(char***) (obj + 0x124), *(char**) (*(char**) (obj + 0x34) + 0x1cc), k);
+					d3_ChangeObjectTransparency(**(char***) (obj + 0x124), *(char**) (*(char**) (obj + 0x34) + 0x1cc), k);
 				}
 			}
 			if (a == 0.0f || a == 255.0f) {
 				*(short*) (obj + 0x8c) &= ~0x40;
 				k.id = 0xff;
-				fcn_0043a3f0(*(char**) (obj + 0x34), *(char**) (*(char**) (obj + 0x34) + 0x1cc), k);
+				d3_ChangeObjectTransparency(*(char**) (obj + 0x34), *(char**) (*(char**) (obj + 0x34) + 0x1cc), k);
 				if (*(char***) (obj + 0x124) != 0) {
-					fcn_0043a3f0(**(char***) (obj + 0x124), *(char**) (**(char***) (obj + 0x124) + 0x1cc), k);
+					d3_ChangeObjectTransparency(**(char***) (obj + 0x124), *(char**) (**(char***) (obj + 0x124) + 0x1cc), k);
 				}
 				if (a == 0.0f) {
 					ch_SetVisible(obj, 0);

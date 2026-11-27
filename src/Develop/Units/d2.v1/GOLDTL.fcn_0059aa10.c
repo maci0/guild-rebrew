@@ -35,7 +35,7 @@ int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 void* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl d2_OpenDependencyDiagram(char*, char*, void*);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -44,8 +44,8 @@ void __cdecl gm_CollectGebaeudeUpgrades(char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ShowTechTreeEffects(char*);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
-void __cdecl fcn_0050f900(void);
-void __cdecl fcn_0050ee80(char*, char*);
+void __cdecl d2_CloseDependencyDiagram(void);
+void __cdecl d2_UpdateDependencyDiagram(char*, char*);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl d2_CheckFundsAndNotify(char*, int, int, char);
@@ -98,7 +98,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 	}
 	h = d2_OpenDependencyDiagram(s_6aa330, a0, q);
 	if (h < 0) {
-		fcn_00526120(g_14a5398, 0);
+		d2_ShowModalMessageBox(g_14a5398, 0);
 		return;
 	}
 	d2_CenterDialogWindows(h);
@@ -161,7 +161,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 							}
 
 
-							if (ok && fcn_00526120(buf, 1)) {
+							if (ok && d2_ShowModalMessageBox(buf, 1)) {
 								fcn_0057e880(0x2b, (int) a0, 0, sel);
 								cm_SendLogAction(s_6aa328);
 								if (*(unsigned short*) (a0 + 0x27) != *(unsigned short*) gm_CityEntity) {
@@ -180,10 +180,10 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 							}
 						} else {
 							io_FormatTextBuffer(buf, 0x1b, req, a0, sel * 2 + 0x9a8);
-							if (fcn_00526120(buf, 1)) {
+							if (d2_ShowModalMessageBox(buf, 1)) {
 								if (req > *(int*) (house + 0x194)) {
 									io_FormatTextBuffer(buf, 0x74, req);
-									fcn_00526120(buf, 0);
+									d2_ShowModalMessageBox(buf, 0);
 								} else {
 									cm_SendLogAction(s_6aa328);
 									cm_RequestModifyHealth(*(int*) (house + 4), -req);
@@ -219,9 +219,9 @@ wait_loop:
 			}
 		}
 tail:
-		fcn_0050ee80(a0, q);
+		d2_UpdateDependencyDiagram(a0, q);
 	}
-	fcn_0050f900();
+	d2_CloseDependencyDiagram();
 	g_7746f8 = 0;
 	if (a0 == g_7746c4)
 		fcn_0057e880(0x11, (int) a0, 1, a1);

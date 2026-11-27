@@ -10,7 +10,7 @@ int __cdecl cut_RandMod(int);
 void __cdecl fcn_004e4730(char*);
 void __cdecl d3_InitSkyLayer(char*);
 void __cdecl msx_StartMusicIfAllowed(char*);
-void __cdecl fcn_004e4c40(int);
+void __cdecl d3_CreateSceneRain(int);
 int __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl gm_FindOrAllocHeadSet(int, int);
 int __cdecl evt_StartGfxScript(char*, char*);
@@ -69,7 +69,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	}
 	msx_StartMusicIfAllowed((char*) 0x68cb08);
 	if (mode == 1) {
-		fcn_004e4c40(500);
+		d3_CreateSceneRain(500);
 	}
 	if (q != 0) {
 		id = gm_SelectEntityHeadSet(*q);

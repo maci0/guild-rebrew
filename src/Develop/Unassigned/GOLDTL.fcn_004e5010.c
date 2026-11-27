@@ -15,7 +15,7 @@ typedef struct
 
 void* __cdecl gm_LookupEntityRecordById(int);
 
-int __cdecl fcn_004e5010(unsigned char* a1)
+int __cdecl cut_AreAllPlayersReady(unsigned char* a1)
 {
 	int i;
 	int r;

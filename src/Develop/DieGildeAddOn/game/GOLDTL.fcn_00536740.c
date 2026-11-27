@@ -9,11 +9,11 @@ extern int g_67a370;
 
 void __cdecl fcn_004cf180(void);
 void __cdecl sb_PlayVoice(int, char*, int, int, int, int, int);
-void __cdecl fcn_00536640(int);
+void __cdecl cut_PlayHitReaction(int);
 char __cdecl d3sm_RaycastScreenPoint(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(int, int, int, char*);
 void __cdecl d3_SpawnBombObject(char*);
-void __cdecl fcn_00412830(int);
+void __cdecl io_ClearInputButtonFlags(int);
 
 void __cdecl gm_HandleCannonAimInput(void)
 {
@@ -28,7 +28,7 @@ void __cdecl gm_HandleCannonAimInput(void)
 		if (g_14ce8d8 != 0) {
 			sb_PlayVoice(0, "schuss_s", 1, 0x3f, 0x7f, 0, 0);
 			if ((*(int*)&g_7746b4) != 0) {
-				fcn_00536640((*(int*)&g_7746b4));
+				cut_PlayHitReaction((*(int*)&g_7746b4));
 			}
 			g_7ea360 = 0;
 		}
@@ -38,7 +38,7 @@ void __cdecl gm_HandleCannonAimInput(void)
 			    d3_GridPointToWorld(p, b, a, buf) != 0) {
 				d3_SpawnBombObject(buf);
 			}
-			fcn_00412830(0x10);
+			io_ClearInputButtonFlags(0x10);
 		}
 	}
 }

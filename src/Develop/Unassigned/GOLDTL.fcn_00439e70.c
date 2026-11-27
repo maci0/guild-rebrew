@@ -1,7 +1,7 @@
 typedef struct
 {
 	int v[6];
-} fcn_00439e70_Rec;
+} D3_OBJ_MORPH_SLOT;
 // SIZE 0x18
 
 typedef struct
@@ -9,39 +9,39 @@ typedef struct
 	float f;
 	int n;
 	char pad08[0x38 - 0x8];
-} fcn_00439e70_Lvl;
+} D3_ANIM_LEVEL_DESC;
 // SIZE 0x38
 
 typedef struct
 {
 	char pad000[0x30];
-	fcn_00439e70_Lvl lvl[7];
-} fcn_00439e70_Anim;
+	D3_ANIM_LEVEL_DESC lvl[7];
+} D3_OBJ_ANIM_BANK;
 // SIZE 0x1b8
 
 typedef struct
 {
 	char pad000[0x9c];
-	fcn_00439e70_Rec rec[10];
-} fcn_00439e70_Obj;
+	D3_OBJ_MORPH_SLOT rec[10];
+} D3_OBJ_INIT_VIEW;
 // SIZE 0x18c
 
 void __cdecl d3_SetObjectEulerRotation(char* o, int a, int b, int c);
-void __cdecl fcn_00438ba0(char* o, int a, int b, int c);
+void __cdecl d3_SetNodePositionXYZ(char* o, int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x00439e70 */
-void __cdecl fcn_00439e70(char* o)
+void __cdecl d3_InitSceneObject(char* o)
 {
 	int i;
 	unsigned int j;
 
 	for (i = 0; i < 10; i++) {
-		((fcn_00439e70_Obj*) o)->rec[i].v[0] = 0;
-		((fcn_00439e70_Obj*) o)->rec[i].v[1] = 0;
-		((fcn_00439e70_Obj*) o)->rec[i].v[2] = 0;
-		((fcn_00439e70_Obj*) o)->rec[i].v[3] = 0;
-		((fcn_00439e70_Obj*) o)->rec[i].v[4] = 0;
-		((fcn_00439e70_Obj*) o)->rec[i].v[5] = 0;
+		((D3_OBJ_INIT_VIEW*) o)->rec[i].v[0] = 0;
+		((D3_OBJ_INIT_VIEW*) o)->rec[i].v[1] = 0;
+		((D3_OBJ_INIT_VIEW*) o)->rec[i].v[2] = 0;
+		((D3_OBJ_INIT_VIEW*) o)->rec[i].v[3] = 0;
+		((D3_OBJ_INIT_VIEW*) o)->rec[i].v[4] = 0;
+		((D3_OBJ_INIT_VIEW*) o)->rec[i].v[5] = 0;
 	}
 	*(int*) (o + 0x1f8) = 0;
 	*(int*) (o + 0x1f4) = 0;
@@ -64,8 +64,8 @@ void __cdecl fcn_00439e70(char* o)
 		*(float*) (*(char**) (o + 0x1e8) + 0x198) = 0.3f;
 		*(int*) (*(char**) (o + 0x1e8) + 0x1a4) = 0;
 		for (j = 0; j < 7; j++) {
-			(*(fcn_00439e70_Anim**) (o + 0x1e8))->lvl[j].n = 15;
-			(*(fcn_00439e70_Anim**) (o + 0x1e8))->lvl[j].f = 0.3f;
+			(*(D3_OBJ_ANIM_BANK**) (o + 0x1e8))->lvl[j].n = 15;
+			(*(D3_OBJ_ANIM_BANK**) (o + 0x1e8))->lvl[j].f = 0.3f;
 		}
 	}
 	*(int*) (o + 0x6c) = 0;
@@ -75,5 +75,5 @@ void __cdecl fcn_00439e70(char* o)
 	*(int*) (o + 0x7c) = 0;
 	*(int*) (o + 0x80) = 0;
 	d3_SetObjectEulerRotation(o, 0, 0, 0);
-	fcn_00438ba0(o, 0, 0, 0);
+	d3_SetNodePositionXYZ(o, 0, 0, 0);
 }

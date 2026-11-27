@@ -30,7 +30,7 @@ extern int d2_CurrentWindowId;
 
 int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
-int __cdecl fcn_0052dee0(int x, int y, int z);
+int __cdecl d2_CreateWindowTextButton(int x, int y, int z);
 int __cdecl gm_GetEntityMood(unsigned char* s);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 void __cdecl io_AppendText(char* fmt, ...);
@@ -52,8 +52,8 @@ void __cdecl d2_OpenBuildingInfoPanel(void)
 		}
 		g_6a25b8 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2fac);
 		d2_SetForm(g_6a25b8, 0);
-		g_6a25dc = fcn_0052dee0(0, 0x8c, g_14ad0c8);
-		g_6a25e0 = fcn_0052dee0(0, 0xa6, g_14ad0dc);
+		g_6a25dc = d2_CreateWindowTextButton(0, 0x8c, g_14ad0c8);
+		g_6a25e0 = d2_CreateWindowTextButton(0, 0xa6, g_14ad0dc);
 		return;
 	}
 	if (*(unsigned short*) (g_7746c8 + 0x27) != g_774970) {
@@ -69,10 +69,10 @@ void __cdecl d2_OpenBuildingInfoPanel(void)
 	d2_AddElementToWindow(((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x4c, *g_7746c8 + 0x427, d2_CurrentWindowId);
 	d2_CurrentValueBar = d2_AddWindowValueGauge(0x15, 0x7a, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 	d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, pct);
-	g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0cc);
+	g_6a25ec = d2_CreateWindowTextButton(0, 0x8c, g_14ad0cc);
 	if (*g_7746c8 == 0x1e) {
-		g_6a25f0 = fcn_0052dee0(0, 0xa6, g_14ad0d0);
+		g_6a25f0 = d2_CreateWindowTextButton(0, 0xa6, g_14ad0d0);
 	} else {
-		g_6a25e0 = fcn_0052dee0(0, 0xa6, g_14ad0dc);
+		g_6a25e0 = d2_CreateWindowTextButton(0, 0xa6, g_14ad0dc);
 	}
 }

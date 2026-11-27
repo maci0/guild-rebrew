@@ -8,7 +8,7 @@ extern char* gm_CityEntity;
 #include <string.h>
 
 int sprintf(char*, const char*, ...);
-char* __cdecl fcn_0042b2f0(char*, int, int);
+char* __cdecl io_SelectDelimitedString(char*, int, int);
 
 /* genitive ending test on the last character of a name */
 #define ENDS_APOSTROPHE(x) ((x)[strlen(x) - 1] == 's' || (x)[strlen(x) - 1] == 'z' || (unsigned char) (x)[strlen(x) - 1] == -0x21 || (x)[strlen(x) - 1] == 'x')
@@ -61,7 +61,7 @@ int __cdecl io_FormatEntityNameMarkup(int entityIndex, unsigned char a2, unsigne
 		return 1;
 	case 2:
 		if (*(unsigned char*) (p + 0xd)) {
-			sprintf(out, "%s$A%s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30);
+			sprintf(out, "%s$A%s", io_SelectDelimitedString(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4), (char*) p + 0x30);
 		} else {
 			sprintf(out, "%s", (char*) p + 0x30);
 		}
@@ -69,9 +69,9 @@ int __cdecl io_FormatEntityNameMarkup(int entityIndex, unsigned char a2, unsigne
 	case 3:
 		if (*(unsigned char*) (p + 0x166)) {
 			if (p[0x40]) {
-				sprintf(out, "%s %s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
+				sprintf(out, "%s %s %s", io_SelectDelimitedString(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30, (char*) p + 0x40);
 			} else {
-				sprintf(out, "%s %s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30);
+				sprintf(out, "%s %s", io_SelectDelimitedString(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4), (char*) p + 0x30);
 			}
 		} else if (p[0x40]) {
 			sprintf(out, "%s %s", (char*) p + 0x30, (char*) p + 0x40);
@@ -89,9 +89,9 @@ int __cdecl io_FormatEntityNameMarkup(int entityIndex, unsigned char a2, unsigne
 		return 1;
 	case 4:
 		if (*(unsigned char*) (p + 0x164)) {
-			sprintf(out, "%s$A%s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x18f : 0x130) + *(unsigned char*) (p + 0x164)], 1, 4), (char*) p + 0x30);
+			sprintf(out, "%s$A%s", io_SelectDelimitedString(txt_TextEntries[(p[9] != 0 ? 0x18f : 0x130) + *(unsigned char*) (p + 0x164)], 1, 4), (char*) p + 0x30);
 		} else if (*(unsigned char*) (p + 0x165)) {
-			sprintf(out, "%s$A%s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (p + 0x165)], 1, 4), (char*) p + 0x30);
+			sprintf(out, "%s$A%s", io_SelectDelimitedString(txt_TextEntries[(p[9] != 0 ? 0x230 : 0x20d) + *(unsigned char*) (p + 0x165)], 1, 4), (char*) p + 0x30);
 		} else if (a2 == 2) {
 			if (ENDS_APOSTROPHE((char*) p + 0x30)) {
 				sprintf(out, "%s'", (char*) p + 0x30);
@@ -111,7 +111,7 @@ int __cdecl io_FormatEntityNameMarkup(int entityIndex, unsigned char a2, unsigne
 		}
 		return 1;
 	case 5:
-		sprintf(out, "%s", fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
+		sprintf(out, "%s", io_SelectDelimitedString(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
 		return 1;
 	case 6:
 		if (p[0x40]) {
@@ -141,10 +141,10 @@ int __cdecl io_FormatEntityNameMarkup(int entityIndex, unsigned char a2, unsigne
 		return 1;
 	case 8:
 		if (*(unsigned char*) (p + 0xd)) {
-			strcpy((char*) b3, fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4));
+			strcpy((char*) b3, io_SelectDelimitedString(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], 1, 4));
 		}
 		if (*(unsigned char*) (p + 0x166)) {
-			strcpy((char*) b2, fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
+			strcpy((char*) b2, io_SelectDelimitedString(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + *(unsigned char*) (p + 0x166)], 1, 4));
 		}
 		if (a2 == 2) {
 			if (ENDS_APOSTROPHE((char*) p + 0x30)) {
@@ -172,10 +172,10 @@ int __cdecl io_FormatEntityNameMarkup(int entityIndex, unsigned char a2, unsigne
 			i = *(unsigned char*) (p + 0x166);
 		}
 		if (*(unsigned char*) (p + 0xd)) {
-			strcpy((char*) b3, fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], a2, 4));
+			strcpy((char*) b3, io_SelectDelimitedString(txt_TextEntries[(p[9] != 0 ? 0x11e : 0x114) + *(unsigned char*) (p + 0xd)], a2, 4));
 		}
 		if (i != 0) {
-			strcpy((char*) b2, fcn_0042b2f0(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + i], a2, 4));
+			strcpy((char*) b2, io_SelectDelimitedString(txt_TextEntries[(p[9] != 0 ? 0x27b : 0x253) + i], a2, 4));
 		}
 		if (a2 == 2) {
 			if (ENDS_APOSTROPHE((char*) p + 0x30)) {

@@ -5,7 +5,7 @@ int __cdecl fcn_004ef710(void*, void*);
 void* __cdecl fcn_004ef7c0(void*, void*, void*, int (__cdecl*)(void*, void*), int);
 
 /* ADDRESS: GOLD 0x004f2540 */
-int __cdecl fcn_004f2540(int owner, unsigned char** out, int* result)
+int __cdecl gv_FindGraveyardFieldSlot(int owner, unsigned char** out, int* result)
 {
     unsigned char* entry;
     int i;

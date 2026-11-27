@@ -7,7 +7,7 @@ extern char* lpObjektePROT;
 int sprintf(char*, const char*, ...);
 void __cdecl d3_SetSubtreeVisible(char*, int);
 void __cdecl d3_ResolveSceneObjectProtoId(char*);
-void __cdecl fcn_005107f0(void);
+void __cdecl d3_DetachEntitySceneSubtree(void);
 
 void __cdecl d3_BindEntitySceneObject(char* obj, unsigned char* ent, int kind)
 {
@@ -38,6 +38,6 @@ void __cdecl d3_BindEntitySceneObject(char* obj, unsigned char* ent, int kind)
 	*(unsigned char**) (obj + 0x204) = ent;
 	p = *(void***) (obj + 0x1ec);
 	if (p != 0) {
-		*p = (void*) fcn_005107f0;
+		*p = (void*) d3_DetachEntitySceneSubtree;
 	}
 }

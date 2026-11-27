@@ -4,7 +4,7 @@
 
 void __cdecl d3_FreeObjectAnimation(void*);
 
-void __cdecl fcn_0040eea0(void)
+void __cdecl d3_StopCameraFlight(void)
 {
 	d3_FreeObjectAnimation(d3_ActiveCamera);
 	*(int*) 0x6310e8 = 0;

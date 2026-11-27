@@ -35,7 +35,7 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_StartEinbruchTargetSelect(unsigned char*);
 void __cdecl d2_StartThievesGuildSpyPicker(unsigned char*);
 void __cdecl d2_OpenAngriffDialog(unsigned char*);
-void __cdecl fcn_005ae000(unsigned char*);
+void __cdecl d2_ShowTaschendiebstahlDialog(unsigned char*);
 void __cdecl d2_ShowPersonalbuch(unsigned char*, char*);
 void __cdecl d2_RunDiebesgildeInfoDialog(unsigned char*);
 void __cdecl d2_OpenMeisterbriefDialog(unsigned char*);
@@ -99,7 +99,7 @@ void __cdecl d2_RunRaeuberlagerMenu(unsigned char* building)
 					d2_OpenAngriffDialog(building);
 				}
 				else if (g_7746a0 == d) {
-					fcn_005ae000(building);
+					d2_ShowTaschendiebstahlDialog(building);
 				}
 				else if (g_7746a0 == f) {
 					d2_ShowPersonalbuch(building, s_6aa34c);

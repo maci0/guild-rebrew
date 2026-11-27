@@ -1,4 +1,4 @@
-extern float fcn_00413d10(float *pos);
+extern float d3_SampleAverageTerrainHeight(float *pos);
 extern int gm_GetSeason(int *p);
 extern int *sb_PlayVoice(char *bank, char *name, int loop, int pan, int vol,
     int a, int b);
@@ -9,7 +9,7 @@ extern int fcn_0064d3f8(void);
 extern int ch_CountCharacters(int a, int b);
 extern int ch_CountCharactersNear(int a, int b, char *buf, int d);
 extern void d3_TransformPoint(int a, int b, char *buf);
-extern void fcn_004193c0(int a, int b);
+extern void d3snd_SetSourceVolume(int a, int b);
 extern int msx_SetTrackVolume(int handle, int value);
 extern int msx_StartAmbientTrack(char *name, int value);
 extern void msx_StopAmbientTrack(int handle);
@@ -88,7 +88,7 @@ int __cdecl gm_UpdateAmbientAudio(void)
 			}
 		}
 		f = (2000.0f - *(float *) (d3_ActiveCamera + 0x50)
-		    - fcn_00413d10((float *) (d3_ActiveCamera + 0x4c))) * flt_time_scale;
+		    - d3_SampleAverageTerrainHeight((float *) (d3_ActiveCamera + 0x4c))) * flt_time_scale;
 		if (g_7e4538 != 0) {
 			metric = *g_7e4538;
 		}
@@ -238,7 +238,7 @@ join:
 			if (i >= 0x7f) {
 				i = 0x7f;
 			}
-			fcn_004193c0(g_772d30, i);
+			d3snd_SetSourceVolume(g_772d30, i);
 		}
 	}
 	else {

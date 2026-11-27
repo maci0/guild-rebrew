@@ -38,9 +38,9 @@ extern unsigned char g_773d75;
 extern char g_868060[];
 extern int g_6b8300;
 
-void __cdecl fcn_00517250(char*, int);
+void __cdecl gm_LoadCityIniData(char*, int);
 void __cdecl d3_SelectSceneContext(int, int);
-char __cdecl fcn_00510b70(char*);
+char __cdecl d3_LoadCityScene(char*);
 void __cdecl srv_InitBuildingTypeTable(void);
 void __cdecl cm_InitCrimeRecords(void);
 int __cdecl fcn_0051e070(void);
@@ -68,8 +68,8 @@ void __cdecl cm_StepCommandQueue(void);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AssignBuildingOwner(void*, int, int);
 void* __cdecl gm_AddObjekt(void);
-void __cdecl fcn_005016c0(void);
-void __cdecl fcn_005016f0(int);
+void __cdecl gm_UpdateAllTownSeasonPrices(void);
+void __cdecl gm_InitTownGoodsTable(int);
 void __cdecl gm_UpdateMarketStockSlots(int);
 int __cdecl fcn_0045b700(Device*, int, int);
 
@@ -81,9 +81,9 @@ int __cdecl gm_LoadCityMap(char* map)
 	void* s;
 
 	gm_NextEntityId = 1;
-	fcn_00517250(map, 0);
+	gm_LoadCityIniData(map, 0);
 	d3_SelectSceneContext(0, 0);
-	if (fcn_00510b70(map) == 0) {
+	if (d3_LoadCityScene(map) == 0) {
 		return 1;
 	}
 	srv_InitBuildingTypeTable();
@@ -150,12 +150,12 @@ int __cdecl gm_LoadCityMap(char* map)
 	for (s = gm_StartFilteredEntitySearch(1, 5, 0x1c); s != 0; s = gm_FindNextFilteredEntity()) {
 		gm_AssignBuildingOwner(s, (*(Figure**)&gm_CityEntity)->slot, (*(Figure**)&gm_CityEntity)->slot);
 	}
-	fcn_005016c0();
+	gm_UpdateAllTownSeasonPrices();
 	for (i = 0; i < 4; i++) {
 		if (((Variant*)g_868060)[i].name[0] == 0) {
 			break;
 		}
-		fcn_005016f0(i);
+		gm_InitTownGoodsTable(i);
 	}
 	cm_BeginCommandSync();
 	gm_UpdateMarketStockSlots((unsigned char) (*(char*)&g_773d75));

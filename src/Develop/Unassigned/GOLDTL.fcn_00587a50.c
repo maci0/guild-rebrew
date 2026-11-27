@@ -18,7 +18,7 @@ extern float __cdecl d3_WrapYawDelta(int, int);
 extern void* __cdecl fcn_005e8850(void);
 extern void __stdcall D3DXMatrixTranspose(float*, float*);
 extern int __cdecl d2_GetControlValue(int);
-extern void __cdecl fcn_00587f40(char*);
+extern void __cdecl d3_UpdateCannonAimMatrices(char*);
 
 /* ADDRESS: GOLDTL 0x00587a50 */
 void __cdecl fcn_00587a50(char* o)
@@ -62,7 +62,7 @@ void __cdecl fcn_00587a50(char* o)
 	d3_SetObjectRotation(*(void**) (o + 0x9c), v + 2);
 
 	if (*(int*) (o + 0x7c) == 0) {
-		fcn_00587f40(o);
+		d3_UpdateCannonAimMatrices(o);
 	}
 
 	v[0] = g_662d40[0] * ((struct node98*) *(void**) (o + 0x98))->m[0] +
@@ -104,7 +104,7 @@ void __cdecl fcn_00587a50(char* o)
 	d3_SetObjectRotation(d3_ActiveCamera, v);
 
 	if (*(int*) (o + 0x7c) == 0) {
-		fcn_00587f40(o);
+		d3_UpdateCannonAimMatrices(o);
 		if (*(int*) (o + 0x7c) == 0) {
 			goto tail;
 		}

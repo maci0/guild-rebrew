@@ -23,7 +23,7 @@ typedef struct Cell {
 } Cell;
 
 int __cdecl d3_TransformBoundsCorners(Cell*, char*, char*);
-Res __cdecl fcn_00437ee0(int, char*, char*);
+Res __cdecl d3_TestBoxAgainstFrustum(int, char*, char*);
 
 void __cdecl d3_UpdateFrustumCellVisibility(Cell* c, char* e, int v)
 {
@@ -36,7 +36,7 @@ void __cdecl d3_UpdateFrustumCellVisibility(Cell* c, char* e, int v)
 		return;
 	}
 	t = d3_TransformBoundsCorners(c, e + 0x4c, e + 0x18c);
-	r = fcn_00437ee0(t, 0, 0);
+	r = d3_TestBoxAgainstFrustum(t, 0, 0);
 	if (r.b6) {
 		for (l = c->head; l != 0; l = l->next) {
 			if (*(char**) (l->e + 0x1ec) != 0) {

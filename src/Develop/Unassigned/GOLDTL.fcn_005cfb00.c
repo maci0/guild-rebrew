@@ -2,7 +2,7 @@ extern unsigned char* lpGebaeudePROT;
 extern short* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x005cfb00 */
-unsigned int __cdecl ai_MatchesBuildingFilter(short* a0, int* filterSpec, unsigned char* gebaeude)
+unsigned int __cdecl ai_MatchesBuildingFilter(short* requester, int* filterSpec, unsigned char* gebaeude)
 {
 	unsigned int hi;
 	unsigned int lo;
@@ -20,7 +20,7 @@ unsigned int __cdecl ai_MatchesBuildingFilter(short* a0, int* filterSpec, unsign
 		return 1;
 	if (!gebaeude)
 		return 0;
-	if (!a0)
+	if (!requester)
 		return 0;
 	if (!filterSpec[2] && !filterSpec[3] && !filterSpec[4])
 		return 1;
@@ -57,28 +57,28 @@ unsigned int __cdecl ai_MatchesBuildingFilter(short* a0, int* filterSpec, unsign
 			accept = *(unsigned short*) (gebaeude + 0x27) != 0xffff;
 			break;
 		case 3:
-			if ((*(short*) (gebaeude + 0x27)) == *a0 || *(unsigned short*) (gebaeude + 0x27) == 0xffff) {
+			if ((*(short*) (gebaeude + 0x27)) == *requester || *(unsigned short*) (gebaeude + 0x27) == 0xffff) {
 				accept = 1;
 				break;
 			}
 			goto zero;
 		case 4:
 			other = *(short*) (gebaeude + 0x27);
-			accept = other == *a0;
+			accept = other == *requester;
 			break;
 		case 5:
-			accept = (*(short*) (gebaeude + 0x27)) != *a0;
+			accept = (*(short*) (gebaeude + 0x27)) != *requester;
 			break;
 		case 6:
 			other = (*(short*) (gebaeude + 0x27));
 			goto compare;
 		case 7:
 			other = (*(short*) (gebaeude + 0x27));
-			if (other == *a0)
+			if (other == *requester)
 				goto zero;
-			a0 = gm_CityEntity;
+			requester = gm_CityEntity;
 		compare:
-			if (other != *a0 && other != -1) {
+			if (other != *requester && other != -1) {
 				accept = 1;
 				break;
 			}

@@ -17,7 +17,7 @@ int __cdecl d2_DestroyElement(int);
 void __cdecl d2_ClearPaintbox(void);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_PopulateOwnerBuildingList(int, int, int);
-int __cdecl fcn_005c9310(int, int, int, int, int);
+int __cdecl d2_PopulateKreditCards(int, int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl d2_DestroyForm(int);
 
@@ -110,7 +110,7 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
         }
         else if (edi == 2)
         {
-            r = fcn_005c9310((int)subjectRecord, 9, (int)arr, dialogWindow, edi);
+            r = d2_PopulateKreditCards((int)subjectRecord, 9, (int)arr, dialogWindow, edi);
             if (r == 0)
                 io_AppendText(0x18f3, *subjectRecord);
         }

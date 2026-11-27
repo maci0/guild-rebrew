@@ -13,7 +13,7 @@ typedef struct Rec {
 extern char* lpObjektePROT;
 
 /* ADDRESS: GOLDTL 0x0050b840 */
-float __cdecl fcn_0050b840(int id)
+float __cdecl gm_CalcGoodBaseValue(int id)
 {
 	unsigned char* base;
 	float acc;

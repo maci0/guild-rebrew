@@ -9,7 +9,7 @@ struct RGBA_COLOR {
 	unsigned char a;
 };
 
-void __cdecl fcn_00417180(int, char*, int, struct RGBA_COLOR, float*, int, int, float, float,
+void __cdecl d3_CreateObjectParticleEffect(int, char*, int, struct RGBA_COLOR, float*, int, int, float, float,
                           float, float, float);
 
 
@@ -25,5 +25,5 @@ void __cdecl he_SpawnTimedRauchEffect(char* o)
 	v[0] = 0.0f;
 	v[1] = 200.0f;
 	v[2] = 0.0f;
-	fcn_00417180(*(int*) (o + 0x61), "Rauch", 1, c, v, 0x12c, 1, 30.0f, 2.0f, 7.5f, 0.4f, 1.0f);
+	d3_CreateObjectParticleEffect(*(int*) (o + 0x61), "Rauch", 1, c, v, 0x12c, 1, 30.0f, 2.0f, 7.5f, 0.4f, 1.0f);
 }

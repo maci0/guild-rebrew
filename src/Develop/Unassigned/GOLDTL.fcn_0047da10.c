@@ -38,7 +38,7 @@ int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl ai_RepairMeisterObjects(AI_STEP_ENTITY* e);
 void __cdecl ai_UpdateEntityTurn(AI_STEP_ENTITY* e);
-int __cdecl fcn_0047dca0(AI_STEP_ENTITY* e);
+int __cdecl gm_IsLocalSimEntity(AI_STEP_ENTITY* e);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -87,7 +87,7 @@ void __cdecl ai_StepEntityTurns(void)
 			if ((*(GAME_TIMESTAMP*)&gm_GameTime).hour > 6 && (*(GAME_TIMESTAMP*)&gm_GameTime).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
 			    || ((e->id ^ (*(GAME_TIMESTAMP*)&gm_GameTime).hour) & 1) == 0))
 				ai_UpdateEntityTurn(e);
-			if ((fcn_0047dca0(e) != 0 && e->gold != 0) || (e->flags & 0x3000)) {
+			if ((gm_IsLocalSimEntity(e) != 0 && e->gold != 0) || (e->flags & 0x3000)) {
 				int v;
 
 				v = -e->gold - (int) (e->gold * -0.89f);

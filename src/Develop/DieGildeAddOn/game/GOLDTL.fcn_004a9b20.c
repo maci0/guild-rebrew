@@ -24,7 +24,7 @@ int __cdecl ai_CheckAction02bPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction02cPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction02dPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction031Predicate(char*, char*, int, char*, int);
-int __cdecl fcn_004a9780(char*, char*, int, char*, int);
+int __cdecl ai_CheckDunkleEckePredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction035Predicate(char*, char*, int, char*, int);
 int __cdecl ai_SelectAction037Target(char*, char*, int, char*, int);
 
@@ -168,7 +168,7 @@ int __cdecl ai_SelectPrivilegeAction(char* unused0, char* actorEntity, int unuse
 		r = ai_CheckAction031Predicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x32:
-		r = fcn_004a9780(unused0, actorEntity, (int) &c, ctx, unused4);
+		r = ai_CheckDunkleEckePredicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x35:
 		r = ai_CheckAction035Predicate(unused0, actorEntity, (int) &c, ctx, unused4);

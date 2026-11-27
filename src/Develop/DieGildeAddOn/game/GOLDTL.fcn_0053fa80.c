@@ -24,7 +24,7 @@ extern int g_7746cc;
 extern int g_7746c4;
 extern int g_7746c8;
 
-void __cdecl fcn_00533880(void);
+void __cdecl d3_ClearSceneObjectCache(void);
 void __cdecl d2_SetMouseTooltip(void* p);
 void __cdecl fcn_00533a40(void* p);
 void __cdecl tb_CloseFunction(void* p);
@@ -38,7 +38,7 @@ void __cdecl gm_ClearMissionJobs(void);
 void __cdecl he_FreeAllActions(void);
 void __cdecl d2_ClearActionPopupSlots(void);
 void __cdecl he_ShutdownEventSystem(void);
-void __cdecl fcn_00527420(void);
+void __cdecl d2_DestroyAllHudPanels(void);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl gm_ResetAllEntities(void);
 void __cdecl gm_CleanupObjectEntities(void);
@@ -47,11 +47,11 @@ void __cdecl fcn_004162c0(int p);
 void __cdecl d3_DestroyRain(int p);
 void __cdecl fcn_004597f0(int a, int b);
 void __cdecl fcn_00459b40(int a);
-void __cdecl fcn_00418ae0(int p);
+void __cdecl d3_DestroySunRayObject(int p);
 void __cdecl d3_ClearAllSceneContexts(void);
 void __cdecl fcn_005c80d0(void);
 void __cdecl fcn_004bbd50(void);
-void __cdecl fcn_004c3e30(void);
+void __cdecl cm_InitCommandQueue(void);
 void __cdecl nt_CloseBroadcastSocket(void);
 void __cdecl nt_CloseClientConnection(void);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
@@ -64,7 +64,7 @@ void __cdecl gm_ShutdownGameRuntime(void)
     register int _dummy_reg_14 = 0;
 	int* entry;
 
-	fcn_00533880();
+	d3_ClearSceneObjectCache();
 	d2_SetMouseTooltip(&g_6b5c60);
 	fcn_00533a40(&g_6b5c60);
 	d2_SuppressOverlay = 1;
@@ -97,7 +97,7 @@ void __cdecl gm_ShutdownGameRuntime(void)
 	he_FreeAllActions();
 	d2_ClearActionPopupSlots();
 	he_ShutdownEventSystem();
-	fcn_00527420();
+	d2_DestroyAllHudPanels();
 	gm_KillAllSpieler();
 	gm_ResetAllEntities();
 	gm_CleanupObjectEntities();
@@ -128,14 +128,14 @@ void __cdecl gm_ShutdownGameRuntime(void)
 	}
 	g_6b8061 = 0;
 	if (g_6b5cf8 != 0) {
-		fcn_00418ae0(g_6b5cf8);
+		d3_DestroySunRayObject(g_6b5cf8);
 		g_6b5cf8 = 0;
 	}
 	d3_ActiveCameraAnimation = 0;
 	d3_ClearAllSceneContexts();
 	fcn_005c80d0();
 	fcn_004bbd50();
-	fcn_004c3e30();
+	cm_InitCommandQueue();
 	nt_CloseBroadcastSocket();
 	nt_CloseClientConnection();
 	g_77497c = 0;

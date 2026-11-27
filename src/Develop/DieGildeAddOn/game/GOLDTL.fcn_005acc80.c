@@ -15,8 +15,8 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_005ac2d0(char*);
-void __cdecl fcn_005ab810(char*, int);
+void __cdecl d2_RunChurchSermonDialog(char*);
+void __cdecl d2_RunTaufeDialog(char*, int);
 void __cdecl d2_OpenBeichteDialog(char*);
 void __cdecl d2_RunKircheSpendenDialog(char*);
 
@@ -49,9 +49,9 @@ void __cdecl d2_RunKircheMenu(char* e, int msg)
 		if (g_7746a0 != 0) {
 			if (g_7746d8 & 0x200) {
 				if (g_7746a0 == predigt) {
-					fcn_005ac2d0(e);
+					d2_RunChurchSermonDialog(e);
 				} else if (g_7746a0 == weih) {
-					fcn_005ab810(e, msg);
+					d2_RunTaufeDialog(e, msg);
 				}
 			}
 			if (*(unsigned short*) (e + 0x27) != g_774970) {
@@ -62,7 +62,7 @@ void __cdecl d2_RunKircheMenu(char* e, int msg)
 					d2_RunKircheSpendenDialog(e);
 				}
 				if (g_7746a0 == weih) {
-					fcn_005ab810(e, msg);
+					d2_RunTaufeDialog(e, msg);
 				}
 			}
 		} else if (g_14cf950 == 0x30 && g_774800 != 0) {

@@ -3,7 +3,7 @@ void __cdecl cm_AppendCommandSyncField(int a, int b, int c, int* d);
 void __cdecl cm_SendSetAttribute(void);
 
 /* ADDRESS: GOLDTL 0x00507870 */
-int __cdecl fcn_00507870(char* e)
+int __cdecl gm_ApplyPromotionRoleChange(char* e)
 {
 	int v;
 

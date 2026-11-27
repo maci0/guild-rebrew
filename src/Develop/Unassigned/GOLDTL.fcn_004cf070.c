@@ -6,7 +6,7 @@ extern int g_67a370;
 
 void __cdecl d3_GridPointToWorld(int, int, int, float*);
 
-float __cdecl fcn_004cf070(int a, int b, int c, int d)
+float __cdecl d3_CalcGridPointDistance(int a, int b, int c, int d)
 {
 	float pointA[4];
 	float pointB[4];

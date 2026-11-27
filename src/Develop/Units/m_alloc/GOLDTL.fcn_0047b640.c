@@ -46,7 +46,7 @@ extern RGB_COLOR g_100f1a0;
 
 Tiles* __cdecl d2_AllocShapeBuffer(int, int);
 Tex* __cdecl fcn_004770a0(TexDesc* d, int fmt);
-void __cdecl fcn_00476620(int, int, int, int, Img*, int, int, Tex*);
+void __cdecl d2_BlitSurfaceToSurface(int, int, int, int, Img*, int, int, Tex*);
 int __cdecl d2_LockSurface(Tex*);
 void __cdecl d2_ReadSurfacePixel(int, int, Tex*, RGB_COLOR*);
 void __cdecl d2_WriteSurfacePixel(int, int, unsigned char, unsigned char, unsigned char, Tex*);
@@ -95,7 +95,7 @@ Tiles* __cdecl fcn_0047b640(int x, int y, int w, int h, Img* img, int size)
 		d.fmt = img->fmt;
 		t = fcn_004770a0(&d, 0);
 		g_77260c++;
-		fcn_00476620(i % cols * tile + x, i / cols * tile + y, tile, tile, img, 0, 0, t);
+		d2_BlitSurfaceToSurface(i % cols * tile + x, i / cols * tile + y, tile, tile, img, 0, 0, t);
 		if (g_100f1a0.r || g_100f1a0.g || g_100f1a0.b) {
 			RGB_COLOR px;
 

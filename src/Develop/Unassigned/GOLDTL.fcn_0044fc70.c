@@ -4,7 +4,7 @@
 extern void* g_6b7fdc;
 
 void* __cdecl vfs_Tfopen(char*, char*, void*);
-void __cdecl fcn_0044e190(void*, void*);
+void __cdecl d3_LoadFlInfoChunks(void*, void*);
 void __cdecl CloseVfsStream(void*);
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
@@ -164,7 +164,7 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 	if (stream == 0) {
 		return;
 	}
-	fcn_0044e190(stream, &info);
+	d3_LoadFlInfoChunks(stream, &info);
 	if (info.anzahl_pol <= 0 || info.anzahl_poi <= 0) {
 		CloseVfsStream(stream);
 		return;

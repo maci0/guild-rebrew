@@ -1,7 +1,7 @@
 int __cdecl d3_UnlockSurface(void* surface);
 
 /* ADDRESS: GOLD 0x004790d0 */
-int __cdecl fcn_004790d0(void* obj)
+int __cdecl d3_UnlockSurfaceHandle(void* obj)
 {
 	if (*(int*) ((char*) obj + 0x34) == 0) {
 		return 0;

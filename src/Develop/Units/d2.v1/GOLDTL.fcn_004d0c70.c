@@ -56,10 +56,10 @@ int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 void __cdecl d2_SetElementScale(int id, int a2);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_00534160(int x0, int y, int len, int t);
-void __cdecl fcn_004d0a20(void);
+void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t);
+void __cdecl d2_UpdateCombatUnitHud(void);
 
-void __cdecl fcn_004d0c70(void)
+void __cdecl d2_InitCombatUnitCards(void)
 {
 	char* unit;
 	char** name;
@@ -103,11 +103,11 @@ void __cdecl fcn_004d0c70(void)
 			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].text].width = 0x80;
 			((D2_CONTROL_TL*) g_1015ea0)[g_9b4840[k].text].value_06c = 1;
 			length = (float)(gm_GetScaledEntitySkill((char*) unit, 3));
-			fcn_00534160(0x24, 0x41, (int)length, 0x4df);
+			d2_DrawSegmentedBar(0x24, 0x41, (int)length, 0x4df);
 			k++;
 		}
 	}
-	fcn_004d0a20();
+	d2_UpdateCombatUnitHud();
 }
 unsigned char _dpad_92c500[16128] = {
     0x00,

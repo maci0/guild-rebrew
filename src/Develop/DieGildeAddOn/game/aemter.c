@@ -299,12 +299,12 @@ void __cdecl lc_GetBauplatzPrefix(int, char*);
 int __cdecl d3_CollectUnusedSceneObjects(char*, int*);
 char* __cdecl strupr(char*);
 void __cdecl ReportClientMessage(const char*);
-int __cdecl fcn_00507080(int k);
+int __cdecl gm_MapZunftToBuildingCategory(int k);
 void __cdecl gm_GenerateShuffledIndices(int a1, int* a2);
 slot80* __cdecl gm_FindSlotById(int a1, int a2);
 float __cdecl gm_CalcMarketSlotPriceByObjektId(int a1, int a2);
 int __cdecl cm_SendMarktSlotDelta(slot80* e, unsigned char kind);
-int __cdecl fcn_00526120(char* text, int arg);
+int __cdecl d2_ShowModalMessageBox(char* text, int arg);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 #endif
 
@@ -4143,7 +4143,7 @@ unsigned int __cdecl gm_ExecZunftPreismanipulation(char* self, int* packet)
 		return 0;
 	if ((unsigned int) packet[1] < 1 || (unsigned int) packet[1] > 7)
 		return 0;
-	found = fcn_00507080(packet[1]);
+	found = gm_MapZunftToBuildingCategory(packet[1]);
 	if (found == 0)
 		return 0;
 	e = (slot80*) gm_StartFilteredEntitySearch(1, 5, found);
@@ -4228,7 +4228,7 @@ found:
 				he_PostEntityMessage(*(int*) q, -1, buf2, 1, 0x5ec, (void*) 0x6b5c60);
 		}
 		if (*(unsigned char*) (self + 2) == 6)
-			fcn_00526120(buf2, 0x10);
+			d2_ShowModalMessageBox(buf2, 0x10);
 	}
 	return 0;
 }
@@ -4287,7 +4287,7 @@ int __cdecl gm_ExecZunftAufruhr(char* e, int* msg)
 	}
 	if (e[2] == 6) {
 		io_FormatTextBuffer(buf, 0x1661, *(unsigned short*) (h + 0x27), h);
-		fcn_00526120(buf, 0);
+		d2_ShowModalMessageBox(buf, 0);
 	}
 	return 1;
 }
@@ -4348,7 +4348,7 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x1680, *(unsigned short*) h, *(unsigned short*) h);
-				fcn_00526120(buf, 0);
+				d2_ShowModalMessageBox(buf, 0);
 			}
 		} else {
 			if (7 == h[2] || 6 == h[2]) {
@@ -4364,7 +4364,7 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x1681, *(unsigned short*) h, *(unsigned short*) h);
-				fcn_00526120(buf, 0);
+				d2_ShowModalMessageBox(buf, 0);
 			}
 		}
 		return sign;
@@ -4400,7 +4400,7 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x1678, target[1] + 0x1663);
-				fcn_00526120(buf, 0);
+				d2_ShowModalMessageBox(buf, 0);
 			}
 		} else {
 			io_FormatTextBuffer(buf, 0x167b, target[1] + 0x1663);
@@ -4412,7 +4412,7 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x1679, target[1] + 0x1663);
-				fcn_00526120(buf, 0);
+				d2_ShowModalMessageBox(buf, 0);
 			}
 		}
 	} else {
@@ -4461,7 +4461,7 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x166e, target[1] + 0x1663);
-				fcn_00526120(buf, 0);
+				d2_ShowModalMessageBox(buf, 0);
 				return sign;
 			}
 		} else {
@@ -4483,7 +4483,7 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 			} while ((int) p < (int) (g_7f4ca4 + 0x65400));
 			if (e[2] == 6) {
 				io_FormatTextBuffer(buf, 0x166f, target[1] + 0x1663);
-				fcn_00526120(buf, 0);
+				d2_ShowModalMessageBox(buf, 0);
 			}
 		}
 	}

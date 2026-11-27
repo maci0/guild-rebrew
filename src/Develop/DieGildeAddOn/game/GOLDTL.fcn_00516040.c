@@ -8,7 +8,7 @@ int __cdecl d3_ResolveTexturePath(char*);
 void __cdecl d3_ReloadFloorTextureSlot(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x00516040 */
-void __cdecl fcn_00516040(void)
+void __cdecl d3_UpdateTerrainSeasonTextures(void)
 {
 	char buf[0x80];
 	char name[0x80];

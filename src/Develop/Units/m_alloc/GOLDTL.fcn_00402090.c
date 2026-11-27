@@ -7,7 +7,7 @@ unsigned char* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 
 /* Averages the palette colour of an 8-bit image, weighted by pixel count. */
-char __cdecl fcn_00402090(const char* name, unsigned char* out)
+char __cdecl vfs_CalcBmpAverageColor(const char* name, unsigned char* out)
 {
 	char r;
 	int n;

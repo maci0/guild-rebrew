@@ -40,7 +40,7 @@ int __cdecl main_RunFrameLoop(int, int); void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00591ea0 */
-void __cdecl fcn_00591ea0(void)
+void __cdecl d2_RunGebHotkeysDialog(void)
 {
 	int clicks[2];
 	int v3;
@@ -151,7 +151,7 @@ void __cdecl fcn_00591ea0(void)
 		d2_SetElementEnabled(clicks[1], i);
 		d2_SetElementEnabled(clicks[0], *(int*) (y + (unsigned long)&g_102cbc8) != -1);
 		d2_FocusBookmarkSlot();
-	} while (main_RunFrameLoop((int) fcn_00591ea0, 0x657c7));
+	} while (main_RunFrameLoop((int) d2_RunGebHotkeysDialog, 0x657c7));
 	d2_ClearRadioGroup(last_win);
 	d2_DestroyForm(win);
 }

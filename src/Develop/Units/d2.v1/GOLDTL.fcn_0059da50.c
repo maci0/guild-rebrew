@@ -39,7 +39,7 @@ extern char s_6aa4e8[];
 
 int __cdecl he_HasNoActiveAction0x62(char*);
 void __cdecl io_FormatTextBuffer(char*, int, unsigned short, char*);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -69,7 +69,7 @@ void __cdecl d2_OpenRaubzugDialog(int unused, char* e)
 	}
 	if (he_HasNoActiveAction0x62(e) == 0) {
 		io_FormatTextBuffer(buf, 0x1a92, *(unsigned short*) (e + 0x27), e);
-		fcn_00526120(buf, 0);
+		d2_ShowModalMessageBox(buf, 0);
 		return;
 	}
 	dlg = d2_LoadForm(0, 0, s_6aa4e8);
@@ -107,7 +107,7 @@ void __cdecl d2_OpenRaubzugDialog(int unused, char* e)
 					cm_ExProdObjekt();
 				}
 				else {
-					fcn_00526120((char*) g_14abd04, 0);
+					d2_ShowModalMessageBox((char*) g_14abd04, 0);
 				}
 				g_774654 = 1;
 			}

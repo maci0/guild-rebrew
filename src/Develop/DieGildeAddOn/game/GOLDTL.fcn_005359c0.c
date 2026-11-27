@@ -20,11 +20,11 @@ char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_ComputeCannonShot(char*, char*, int);
 int __cdecl ai_FireCannonVolley(char*, char*);
 void __cdecl d2_OpenBlutracheDialog(char*);
-void __cdecl fcn_005e5a50(int);
+void __cdecl d2_RunBlutracheDialog(int);
 void __cdecl d2_ShowBlutracheDialog(int);
-void __cdecl fcn_005e6360(int);
+void __cdecl d2_RunEhrerbietungDialog(int);
 void __cdecl d2_RunKanoneUI(int);
-int __cdecl fcn_005e6e00(void);
+int __cdecl d2_RunCardGameDialog(void);
 
 /* ADDRESS: GOLDTL 0x005359c0 */
 int __cdecl gm_DispatchDebugActionKeys(void)
@@ -36,11 +36,11 @@ int __cdecl gm_DispatchDebugActionKeys(void)
 
 	switch (*(unsigned char*) 0x14cf950) {
 	case 0x1e:
-		return fcn_005e6e00();
+		return d2_RunCardGameDialog();
 	case 0x30:
 		o = g_7e2aa0;
 		if (o != 0) {
-			fcn_005e5a50((int) o);
+			d2_RunBlutracheDialog((int) o);
 		}
 		return;
 	case 0x2e:
@@ -52,7 +52,7 @@ int __cdecl gm_DispatchDebugActionKeys(void)
 	case 0x20:
 		o = g_7e2aa0;
 		if (o != 0) {
-			fcn_005e6360((int) o);
+			d2_RunEhrerbietungDialog((int) o);
 		}
 		return;
 	case 0x12:

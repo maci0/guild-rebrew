@@ -17,7 +17,7 @@ extern int d3_CameraAnimating;
 int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
 float* __stdcall D3DXMatrixTranspose(float*, const float*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-float __cdecl fcn_00413d10(float* p);
+float __cdecl d3_SampleAverageTerrainHeight(float* p);
 void __cdecl d3_FreeObjectAnimation(char* cam);
 void __cdecl d3_AnimateObjectTransform(char* cam, float* a, float* b, int d, int e);
 
@@ -54,7 +54,7 @@ void __cdecl d3_AnimateCameraToObject(char* entity)
 	w[0] = p[0] + r[0];
 	w[1] = p[1] + r[1];
 	w[2] = p[2] + r[2];
-	h = fcn_00413d10(w);
+	h = d3_SampleAverageTerrainHeight(w);
 	w[1] = h + ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558);
 	dir[1] = w[1] - p[1];
 	d3_GetObjectVerticalBounds(entity, &lo, &hi);
@@ -68,7 +68,7 @@ void __cdecl d3_AnimateCameraToObject(char* entity)
 	d3_FreeObjectAnimation(cam);
 	d3_ActiveCameraAnimation = 0;
 	d3_CameraAnimating = 0;
-	h = fcn_00413d10(w);
+	h = d3_SampleAverageTerrainHeight(w);
 	w[1] = h + ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558);
 	cam = (char*) d3_ActiveCamera;
 	dx = w[0] - *(float*) (cam + 0x4c);

@@ -41,7 +41,7 @@ void __cdecl vfs_WriteCString(void*, int);
 void __cdecl vfs_WriteInt32(void*, float);
 void __cdecl vfs_WriteVec3(void*, Vec3*);
 void __cdecl vfs_WriteByte(void*, char);
-void* __cdecl fcn_00437890(void*);
+void* __cdecl d3_NextVisibleSceneNode(void*);
 void __cdecl fcn_00446540(void*, void*);
 void __cdecl fcn_004469e0(void*, int);
 void __cdecl d3_WriteEventTable(void*, int);
@@ -83,11 +83,11 @@ void __cdecl d3_SaveScene(const char* name, void* stream)
 		}
 	}
 	n = 0;
-	for (p = ((void*)d3_ObjectListHead); p != &(*(char*)d3_SceneObjectSentinel); p = fcn_00437890(p)) {
+	for (p = ((void*)d3_ObjectListHead); p != &(*(char*)d3_SceneObjectSentinel); p = d3_NextVisibleSceneNode(p)) {
 		n++;
 	}
 	fcn_00401360(s, n);
-	for (p = ((void*)d3_ObjectListHead); p != &(*(char*)d3_SceneObjectSentinel); p = fcn_00437890(p)) {
+	for (p = ((void*)d3_ObjectListHead); p != &(*(char*)d3_SceneObjectSentinel); p = d3_NextVisibleSceneNode(p)) {
 		fcn_00446540(s, p);
 	}
 	vfs_WriteByte(s, g_6b8300 != 0);

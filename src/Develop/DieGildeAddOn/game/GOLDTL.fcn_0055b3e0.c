@@ -11,14 +11,14 @@ void __cdecl fcn_0054b130(void);
 void __cdecl he_StartAction0x2e(void);
 void __cdecl he_HandleAction0x2e(void);
 void __cdecl fcn_0054b420(void);
-void __cdecl fcn_0054b450(void);
-void __cdecl fcn_0054b800(void);
+void __cdecl he_RunSkillDuelEvent(void);
+void __cdecl he_StartFreeActionStub(void);
 void __cdecl he_StartFest(void);
 void __cdecl he_UpdateFest(void);
 void __cdecl fcn_0054bc40(void);
 void __cdecl he_RunInvitation(void);
 void __cdecl he_RunAction53(void);
-void __cdecl fcn_0054c800(void);
+void __cdecl he_StartCourtship(void);
 void __cdecl he_RunCourtship(void);
 void __cdecl he_StartAction0x42EntityMsg(void);
 void __cdecl he_InitStreife(void);
@@ -46,7 +46,7 @@ void __cdecl he_RunGambleBet(void);
 void __cdecl he_AllocSellObjekt(void);
 void __cdecl he_AllocBuildingDamageEvent(void);
 void __cdecl he_RunBuildingDamageEvent(void);
-void __cdecl fcn_00551160(void);
+void __cdecl he_ScheduleDelayedAction(void);
 void __cdecl he_RunAction0x5a(void);
 void __cdecl fcn_00551210(void);
 void __cdecl he_RunPeriodicStipend(void);
@@ -98,13 +98,13 @@ void __cdecl he_BroadcastLeaderboard(void);
 void __cdecl fcn_005595e0(void);
 void __cdecl he_RunPoliticians(void);
 void __cdecl fcn_0055a020(void);
-void __cdecl fcn_0055a040(void);
+void __cdecl he_InitOfficeAudit(void);
 void __cdecl he_RunOfficeAudit(void);
 void __cdecl fcn_0055a380(void);
-void __cdecl fcn_0055a3d0(void);
+void __cdecl he_RunMeisterpruefungNoticePrompt(void);
 void __cdecl he_AllocAction0x7f(void);
 void __cdecl he_RunAction0x7f(void);
-void __cdecl fcn_0055a820(void);
+void __cdecl he_StartCountdownAction(void);
 void __cdecl he_RunCountdownAction(void);
 void __cdecl fcn_0055a8e0(void);
 void __cdecl he_RunAction0x81(void);
@@ -112,7 +112,7 @@ void __cdecl he_StartAction0x82SkillModifier(void);
 void __cdecl he_HandleAction0x82SkillModifier(void);
 void __cdecl he_AllocDailyCouncilEvent(void);
 void __cdecl he_RunDailyCouncilEvent(void);
-void __cdecl fcn_0055af10(void);
+void __cdecl he_StartTutorialEvent(void);
 void __cdecl he_UpdateTutorialEvent(void);
 void __cdecl fcn_0055afb0(void);
 void __cdecl d2_ShowTitleAward(void);
@@ -141,10 +141,10 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(46, (void*) he_StartAction0x2e, (void*) he_HandleAction0x2e) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(47, (void*) fcn_0054b420, (void*) fcn_0054b450) != 0) {
+	if (he_RegisterHandler(47, (void*) fcn_0054b420, (void*) he_RunSkillDuelEvent) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(48, (void*) fcn_0054b800, (void*) 0x54b810) != 0) {
+	if (he_RegisterHandler(48, (void*) he_StartFreeActionStub, (void*) 0x54b810) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(55, (void*) he_StartFest, (void*) he_UpdateFest) != 0) {
@@ -156,7 +156,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(53, (void*) 0x0054c240, (void*) he_RunAction53) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(65, (void*) fcn_0054c800, (void*) he_RunCourtship) != 0) {
+	if (he_RegisterHandler(65, (void*) he_StartCourtship, (void*) he_RunCourtship) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(66, (void*) he_StartAction0x42EntityMsg, (void*) 0x0054d810) != 0) {
@@ -208,7 +208,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(88, (void*) he_AllocBuildingDamageEvent, (void*) he_RunBuildingDamageEvent) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(90, (void*) fcn_00551160, (void*) he_RunAction0x5a) != 0) {
+	if (he_RegisterHandler(90, (void*) he_ScheduleDelayedAction, (void*) he_RunAction0x5a) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(91, (void*) fcn_00551210, (void*) he_RunPeriodicStipend) != 0) {
@@ -299,16 +299,16 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(123, (void*) fcn_0055a020, (void*) 0x55a030) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(125, (void*) fcn_0055a040, (void*) he_RunOfficeAudit) != 0) {
+	if (he_RegisterHandler(125, (void*) he_InitOfficeAudit, (void*) he_RunOfficeAudit) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(126, (void*) fcn_0055a380, (void*) fcn_0055a3d0) != 0) {
+	if (he_RegisterHandler(126, (void*) fcn_0055a380, (void*) he_RunMeisterpruefungNoticePrompt) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(127, (void*) he_AllocAction0x7f, (void*) he_RunAction0x7f) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(128, (void*) fcn_0055a820, (void*) he_RunCountdownAction) != 0) {
+	if (he_RegisterHandler(128, (void*) he_StartCountdownAction, (void*) he_RunCountdownAction) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(129, (void*) fcn_0055a8e0, (void*) he_RunAction0x81) != 0) {
@@ -320,7 +320,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(134, (void*) he_AllocDailyCouncilEvent, (void*) he_RunDailyCouncilEvent) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(135, (void*) fcn_0055af10, (void*) he_UpdateTutorialEvent) != 0) {
+	if (he_RegisterHandler(135, (void*) he_StartTutorialEvent, (void*) he_UpdateTutorialEvent) != 0) {
 		return 1;
 	}
 	return he_RegisterHandler(165, (void*) fcn_0055afb0, (void*) d2_ShowTitleAward) != 0;

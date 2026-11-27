@@ -51,7 +51,7 @@ extern void __cdecl d3_AnimateCameraToNode(char*, int);
 extern int __cdecl gm_GetEntityUiFlags(int, int, int, void*);
 extern void __cdecl sv_ClearObjectSelection(void);
 extern void __cdecl d3snd_PlayObjectClickSound(char*);
-extern void __cdecl fcn_00530510(void);
+extern void __cdecl sv_ResetSelectionState(void);
 
 typedef int (__cdecl* Fn_5305d0)(char*, int, char*, int);
 
@@ -215,6 +215,6 @@ L744:
 			}
 		}
 	} else if (g_7746f4 == 0) {
-		fcn_00530510();
+		sv_ResetSelectionState();
 	}
 }

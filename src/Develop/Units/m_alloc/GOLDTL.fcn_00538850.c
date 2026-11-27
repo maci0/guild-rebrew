@@ -1,6 +1,6 @@
 #include <windows.h>
 #include <stdlib.h>
-extern void __cdecl fcn_005e1ca0(void);
+extern void __cdecl io_LoadIniSettings(void);
 extern void __cdecl main_PumpWindowMessages(void);
 extern int __cdecl d3_EnumerateDisplayAdapters(unsigned int, unsigned int, unsigned char);
 extern char __cdecl d3_CreateGraphicsDevice(HWND, void*, unsigned char, unsigned char);
@@ -8,12 +8,12 @@ extern void __cdecl ReportClientMessage(char*);
 extern void __cdecl d3_ClearDisplayAdapterList(void);
 extern void __cdecl m_ShutdownAllocator(void);
 extern void __cdecl ShutdownClientLogAndErrorHandler(void);
-extern char __cdecl fcn_00439020(void*, HWND, int);
+extern char __cdecl d3_Init(void*, HWND, int);
 extern void __cdecl d3_CreateSceneCameras(void);
 extern void __cdecl io_InitDirectInputMouse(HWND, int, int);
 extern void __cdecl io_SetMouseSensitivity(int);
 extern int __cdecl main_IsScreensaverActive(void);
-extern void __cdecl fcn_005386c0(int);
+extern void __cdecl main_SetScreensaverActive(int);
 extern void __cdecl gm_ApplyGameSettings(void);
 extern void __cdecl d3_ApplyGraphicsOptions(void);
 extern void __cdecl d3_SetTextureRootPath(char*);
@@ -94,7 +94,7 @@ int __cdecl fcn_00538850(int topmost)
 	g.f7c = 640.0f;
 	dx = 0;
 	dy = 0;
-	fcn_005e1ca0();
+	io_LoadIniSettings();
 	g_6a3764 = 0;
 	g_6a3768 = 0;
 	g_6a376c = g_6acf80 - 0x6a;
@@ -152,7 +152,7 @@ int __cdecl fcn_00538850(int topmost)
 		return 0;
 	}
 	d3_ClearDisplayAdapterList();
-	if (!fcn_00439020(&g, (HWND) g_774940, main_Instance))
+	if (!d3_Init(&g, (HWND) g_774940, main_Instance))
 		return 0;
 	d3_CreateSceneCameras();
 	while (ShowCursor(0) > 0)
@@ -161,7 +161,7 @@ int __cdecl fcn_00538850(int topmost)
 		if (*(int*) 0x7e246c == 0) {
 			*(int*) 0x774974 = main_IsScreensaverActive();
 			if (*(int*) 0x774974 != 0)
-				fcn_005386c0(0);
+				main_SetScreensaverActive(0);
 		}
 		io_InitDirectInputMouse((HWND) g_774940, main_Instance, 1);
 		io_SetMouseSensitivity(0x50);

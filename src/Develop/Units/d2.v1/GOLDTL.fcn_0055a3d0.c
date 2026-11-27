@@ -15,12 +15,12 @@ int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 char* __cdecl he_StartHandlungSearch(int, ...);
-int __cdecl fcn_00545670(char*, int, int, char*, int);
+int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 
-void __cdecl fcn_0055a3d0(char* u)
+void __cdecl he_RunMeisterpruefungNoticePrompt(char* u)
 {
 	char* o;
 
@@ -28,7 +28,7 @@ void __cdecl fcn_0055a3d0(char* u)
 		switch (*(int*) (u + 0x70)) {
 		case 0:
 			if (*(char**) (u + 0x74) == 0) {
-				fcn_00545670(u, 0, 0, g_6a5a10, 0x5ec);
+				d2_CreateActionPopupSlot(u, 0, 0, g_6a5a10, 0x5ec);
 			}
 			if (*(char**) (u + 0x74) == 0) {
 				he_FreeAction(u);

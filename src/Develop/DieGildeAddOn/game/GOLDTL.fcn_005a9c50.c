@@ -29,7 +29,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl d2_IsTutorialActionAllowed(int);
-void __cdecl fcn_005ce460(int);
+void __cdecl d2_RunGesetzbuchDialog(int);
 void __cdecl d2_RunBuergerrechtDialog(int);
 void __cdecl d2_ShowOfficeApplicationDialog(void);
 
@@ -68,13 +68,13 @@ void __cdecl d2_RunRathausCouncilMenu(int building)
 			}
 			if (g_7746a0 != 0) {
 				if (g_7746a0 == a) {
-					fcn_005ce460(0x112);
+					d2_RunGesetzbuchDialog(0x112);
 				}
 				else if (g_7746a0 == b) {
-					fcn_005ce460(0x111);
+					d2_RunGesetzbuchDialog(0x111);
 				}
 				else if (g_7746a0 == c) {
-					fcn_005ce460(0x113);
+					d2_RunGesetzbuchDialog(0x113);
 				}
 				else if (g_7746a0 == d) {
 					d2_RunBuergerrechtDialog(building);

@@ -2,7 +2,7 @@
 
 
 void __cdecl d3_DisposeObject(char*);
-char* __cdecl fcn_00437890(char*);
+char* __cdecl d3_NextVisibleSceneNode(char*);
 
 void __cdecl d3_LoadModel(int, int);
 void __cdecl fcn_00449f90(char*, int, int);
@@ -22,7 +22,7 @@ char __cdecl fcn_00442d90(char* o, int a2)
 	}
 	p = *(char**) (o + 0x1f4);
 	if (p != 0 && (p[0x214] & 1) == 0) {
-		n = fcn_00437890(o);
+		n = d3_NextVisibleSceneNode(o);
 		d3_DisposeObject(p);
 		*(char**) (o + 0x1f4) = n;
 	}

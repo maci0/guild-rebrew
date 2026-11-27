@@ -22,7 +22,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
-void __cdecl fcn_005c7170(int a1)
+void __cdecl d2_RunDiebesgildeTrainierenDialog(int a1)
 {
 	int dlg;
 	int i;
@@ -53,7 +53,7 @@ void __cdecl fcn_005c7170(int a1)
 			}
 			ResetDisplayCounters();
 		}
-	} while (main_RunFrameLoop((void*) fcn_005c7170, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunDiebesgildeTrainierenDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);
 	d3_EndCameraAndUiMode();
 }

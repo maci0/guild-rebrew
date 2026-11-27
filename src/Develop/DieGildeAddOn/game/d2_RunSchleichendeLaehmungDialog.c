@@ -32,7 +32,7 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 char *__cdecl d2_OpenTargetPicker(int *, int, int, int);
 int __cdecl he_HasNoActiveAction0x9b(char *);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
-int __cdecl fcn_00526120(char *, int);
+int __cdecl d2_ShowModalMessageBox(char *, int);
 int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -42,7 +42,7 @@ int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckEntityStock(KABINETT_ENTITY_SLOT *, int, unsigned char);
 int __cdecl d2_CheckActionBlocker(KABINETT_ENTITY_SLOT *, int);
-int __cdecl fcn_005898f0(char *);
+int __cdecl he_HasNoActiveAssassinAction(char *);
 char *__cdecl gm_GetEntityTableEntry(KABINETT_ENTITY_SLOT *);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl gm_ModifyHealth(int, int);
@@ -79,7 +79,7 @@ void __cdecl d2_RunSchleichendeLaehmungDialog(char *gebaeude)
     sel = d2_OpenTargetPicker(query, *(int *) 0x14b53d0, 0, 0);
     if (he_HasNoActiveAction0x9b(sel) == 0) {
         io_FormatTextBuffer(text, 0x4030, *(unsigned short *) sel);
-        fcn_00526120(text, 0);
+        d2_ShowModalMessageBox(text, 0);
         return;
     }
     if (sel == 0)
@@ -106,7 +106,7 @@ void __cdecl d2_RunSchleichendeLaehmungDialog(char *gebaeude)
             if (d2_CurrentElementId == h1) {
                 if (gm_CheckEntityStock(&g_7f4ca0[g_774970], price, g_773d75) != 0
                     && d2_CheckActionBlocker(&g_7f4ca0[g_774970], 0x10) == 1
-                    && fcn_005898f0(gebaeude) != 0) {
+                    && he_HasNoActiveAssassinAction(gebaeude) != 0) {
                     rec = gm_GetEntityTableEntry(&g_7f4ca0[g_774970]);
                     if (rec != 0)
                         *(int *) (rec + 0x28) += price;

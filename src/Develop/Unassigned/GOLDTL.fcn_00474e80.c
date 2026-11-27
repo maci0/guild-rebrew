@@ -23,7 +23,7 @@ int __cdecl d2_HitTestGui(int x, int y);
 void __cdecl d2_UpdateSelectedControl(void);
 void __cdecl d2_UpdateMouseHoverAndScroll(void);
 void __cdecl sb_PlayVoice(int handle, char* text, int a, int b, int c, int d, int e);
-void __cdecl fcn_00472380(int object, int selected);
+void __cdecl d2_CreateGuiWindow(int object, int selected);
 void __cdecl fcn_0046e790(int index);
 
 /* ADDRESS: GOLDTL 0x00474e80 */
@@ -99,9 +99,9 @@ void __cdecl d2_ProcessMouseInput(void)
 							for (v8 = 0; v8 < g_102cbc4[v4].count; v8++) {
 								v2 = g_102cbc4[v4].ids[v8];
 								if (v2 != v7) {
-									fcn_00472380(v2, 0);
+									d2_CreateGuiWindow(v2, 0);
 								} else {
-									fcn_00472380(v2, 1);
+									d2_CreateGuiWindow(v2, 1);
 									g_102cbc4[v4].sel = v8;
 								}
 								v7 = d2_CurrentElementId;

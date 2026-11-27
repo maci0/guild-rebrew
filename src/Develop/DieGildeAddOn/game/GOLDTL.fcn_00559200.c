@@ -11,7 +11,7 @@ extern char g_7f4ca0[];
 extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(char*, int, int, int);
-void __cdecl fcn_005091d0(int*, char*);
+void __cdecl gm_RankPlayers(int*, char*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
 char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
 void __cdecl nt_SendBroadcast(void*, int);
@@ -44,7 +44,7 @@ void __cdecl he_BroadcastLeaderboard(char* o)
 		*(int*) (o + 0x70) = 0;
 		return;
 	case 0:
-		fcn_005091d0(&n, rows[0]);
+		gm_RankPlayers(&n, rows[0]);
 		*(unsigned short*) (h + 0) = 1;
 		*(unsigned short*) (h + 2) = 3;
 		*(unsigned short*) (h + 4) = 0xcf;

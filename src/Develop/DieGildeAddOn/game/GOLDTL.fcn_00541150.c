@@ -39,7 +39,7 @@ void __cdecl io_AppendText(char*, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
-void __cdecl fcn_00541150(Player* p)
+void __cdecl d2_ShowGebaeudeRoundBalance(Player* p)
 {
 	int st[21];
 	Office* o;
@@ -103,7 +103,7 @@ void __cdecl fcn_00541150(Player* p)
 			io_AppendText((char*) 0x2047, st[20] + st[18]);
 		}
 	}
-	while (main_RunFrameLoop(fcn_00541150, 0x24087) != 0) {
+	while (main_RunFrameLoop(d2_ShowGebaeudeRoundBalance, 0x24087) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

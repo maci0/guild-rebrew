@@ -22,7 +22,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_InitWindowBounds(int);
@@ -33,7 +33,7 @@ int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
 void __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
@@ -98,7 +98,7 @@ void __cdecl d2_RunKircheSpendenDialog(char* gebaeude)
 			*(unsigned short*) (g_8680b4 + (unsigned char) g_773d75 * 0x2f4) * 2 + 0x9a8);
 		d2_ClampAmountToRange(cnt, v, 0x20, &b);
 		c = d2_GetWindowListItem(dlg, 1, c);
-		fcn_00472380(c, gm_AmountToUnits(cnt, g_773d75), gm_AmountToUnits(b, g_773d75),
+		d2_CreateGuiWindow(c, gm_AmountToUnits(cnt, g_773d75), gm_AmountToUnits(b, g_773d75),
 			gm_AmountToUnits(cnt, g_773d75));
 		d2_SetForm(dlg, 2);
 		n = io_AppendText(0x1989);
@@ -142,7 +142,7 @@ void __cdecl d2_RunKircheSpendenDialog(char* gebaeude)
 						cm_RequestCopyEntityData(*(int*) (g_7f4ca4 + g_774970 * 0x21c), d, (int) scale, 1);
 					}
 					io_FormatTextBuffer(buf, g_67728c, 0x1986, 0x198a);
-					fcn_00526120(buf, 0);
+					d2_ShowModalMessageBox(buf, 0);
 					g_774654 = 1;
 				}
 			} else if (d2_CurrentElementId == b) {

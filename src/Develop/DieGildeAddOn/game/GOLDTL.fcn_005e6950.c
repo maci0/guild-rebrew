@@ -12,7 +12,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowBlutracheDialog(int);
-int __cdecl fcn_005e6e00(void);
+int __cdecl d2_RunCardGameDialog(void);
 
 void __cdecl d2_RunTheaterInteriorHud(int a)
 {
@@ -31,7 +31,7 @@ void __cdecl d2_RunTheaterInteriorHud(int a)
 				d2_ShowBlutracheDialog(a);
 			}
 			else if (g_7746a0 == y) {
-				fcn_005e6e00();
+				d2_RunCardGameDialog();
 			}
 		}
 	}

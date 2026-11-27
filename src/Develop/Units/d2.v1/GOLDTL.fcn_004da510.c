@@ -19,7 +19,7 @@ void __cdecl d2_AddElementToWindow(int, int, int, int);
  * so one body cannot carry both markers; the file stays GOLDTL-only. */
 
 /* ADDRESS: GOLDTL 0x004da510 */
-void __cdecl fcn_004da510(int a1, int reset, int row)
+void __cdecl d2_UpdateVoteTallyIcons(int a1, int reset, int row)
 {
 	char buf[0x40];
 	int h;

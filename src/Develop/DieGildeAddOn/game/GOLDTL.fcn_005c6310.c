@@ -6,7 +6,7 @@ int __cdecl gm_LookupSpecialObject(int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-int __cdecl fcn_0047dca0(char*);
+int __cdecl gm_IsLocalSimEntity(char*);
 void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
@@ -70,7 +70,7 @@ void __cdecl gm_TickStampedItems(void)
 										cm_RequestChangeBits(*(int*) (obj + 1), 0x5a, 2, 0, 0x20);
 									}
 								}
-								obj = fcn_0047dca0(g_7f4ca0 + off);
+								obj = gm_IsLocalSimEntity(g_7f4ca0 + off);
 								if (obj != 0 && *(char*) (g_7f4ca0 + 2 + off) != 7) {
 									cm_SendSellObjekt(-1, *(int*) (rec + 6), *item, 1,
 										g_773d75, 0);

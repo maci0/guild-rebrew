@@ -33,7 +33,7 @@ System* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, char* e, 
 void __cdecl d3_SetEffectPosition(System* s, float* pos);
 void __cdecl d3_UpdateParticleSystem(void);
 
-System* __cdecl fcn_00417180(char* e, const char* name, unsigned char flag, int kind, V3* pos, int n, int unused, int a, int p0, int p1, int p2, int p3)
+System* __cdecl d3_CreateObjectParticleEffect(char* e, const char* name, unsigned char flag, int kind, V3* pos, int n, int unused, int a, int p0, int p1, int p2, int p3)
 {
 	System* s;
 	Bytes4 f;

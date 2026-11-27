@@ -23,7 +23,7 @@ typedef struct {
 	int f2c;
 	int f30;
 	int f34;
-} DlgRow_596d70;
+} PRODUKTION_SLOT_ROW;
 
 #include "Develop/Units/d2.v1/d2_win.h"
 
@@ -47,19 +47,19 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl d2_DestroyElement(int);
 void __cdecl d2_CloseWindow(int);
-void __cdecl fcn_0046f940(int, char*);
+void __cdecl d2_SetLabelText(int, char*);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
-void __cdecl fcn_0050bc10(int, unsigned char, char*);
+void __cdecl d2_FormatCurrencyString(int, unsigned char, char*);
 void* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl d2_GetControlValue(int);
 void __cdecl d2_SetElementValue(int, ...);
-void __cdecl fcn_00469c40(int, int, int);
+void __cdecl d2_PositionControl(int, int, int);
 int __cdecl sprintf(char*, const char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00596d70 */
-void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
+void __cdecl d2_UpdateProduktionSlotTile(int dialog, int form, PRODUKTION_SLOT_ROW* r, int makeIcon,
                           unsigned int flags, unsigned char* p)
 {
 	D2_WIN* w;
@@ -103,11 +103,11 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 			} else {
 				f = gm_GetSeasonPrice(r->id, g_773d75) * *(float*) (p + 0x49);
 			}
-			fcn_0050bc10((int) f, g_773d75, text);
+			d2_FormatCurrencyString((int) f, g_773d75, text);
 			if (r->text1 == -1) {
 				r->text1 = d2_ShowTxt(r->x + 0x10, r->y + 0x40, text, d2_CurrentWindowId);
 			} else {
-				fcn_0046f940(r->text1, text);
+				d2_SetLabelText(r->text1, text);
 			}
 			((D2_CONTROL_TL*) (g_1015ea0))[r->text1].width = 0x2d;
 			((D2_CONTROL_TL*) (g_1015ea0))[r->text1].font = 0x54;
@@ -119,11 +119,11 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 			} else {
 				f = gm_GetSeasonPrice(r->id, g_773d75) * 0.9;
 			}
-			fcn_0050bc10((int) f, g_773d75, text);
+			d2_FormatCurrencyString((int) f, g_773d75, text);
 			if (r->text2 == -1) {
 				r->text2 = d2_ShowTxt(r->x + 0x10, r->y + 0x49, text, d2_CurrentWindowId);
 			} else {
-				fcn_0046f940(r->text2, text);
+				d2_SetLabelText(r->text2, text);
 			}
 			((D2_CONTROL_TL*) (g_1015ea0))[r->text2].width = 0x2d;
 			((D2_CONTROL_TL*) (g_1015ea0))[r->text2].font = 0x54;
@@ -191,22 +191,22 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 		sprintf((char*) &((D2_CONTROL_TL*) g_1015ea0)[r->icon] + 0xcc, "%s~ %li %s",
 				((unsigned int*) g_14a79c0)[r->id * 2], r->f30, g_14b52c0);
 		if (r->icon >= 0) {
-			fcn_00469c40(w->left + r->x + 0xf, w->top + r->y + 6, r->icon);
+			d2_PositionControl(w->left + r->x + 0xf, w->top + r->y + 6, r->icon);
 		}
 		if (r->icon2 >= 0) {
-			fcn_00469c40(w->left + r->x + 0xf, w->top + r->y + 0x3a, r->icon2);
+			d2_PositionControl(w->left + r->x + 0xf, w->top + r->y + 0x3a, r->icon2);
 		}
 		if (r->text1 >= 0) {
-			fcn_00469c40(w->left + r->x + 0x12, w->top + r->y + 0x3f, r->text1);
+			d2_PositionControl(w->left + r->x + 0x12, w->top + r->y + 0x3f, r->text1);
 		}
 		if (r->text2 >= 0) {
-			fcn_00469c40(w->left + r->x + 0x12, w->top + r->y + 0x49, r->text2);
+			d2_PositionControl(w->left + r->x + 0x12, w->top + r->y + 0x49, r->text2);
 		}
 		if (r->title >= 0) {
-			fcn_00469c40(w->left + r->x + 6, w->top + r->y, r->title);
+			d2_PositionControl(w->left + r->x + 6, w->top + r->y, r->title);
 		}
 		if (r->obj >= 0) {
-			fcn_00469c40(w->left + r->x + 0xf, w->top + r->y + 6,
+			d2_PositionControl(w->left + r->x + 0xf, w->top + r->y + 6,
 					*(int*) (g_1015f40 + r->obj * 0x3cc + 0x27c));
 		}
 		return;

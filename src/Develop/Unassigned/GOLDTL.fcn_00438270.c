@@ -7,11 +7,11 @@ typedef struct Res {
 	unsigned char b7 : 1;
 } Res;
 
-typedef int (__cdecl* fcn_00438270_f)(char*, char*, int);
+typedef int (__cdecl* D3_BBOX_QUERY_FN)(char*, char*, int);
 
-Res __cdecl fcn_00437ee0(int, char*, char*);
+Res __cdecl d3_TestBoxAgainstFrustum(int, char*, char*);
 
-Res __cdecl fcn_00438270(char* a, char* b, int c)
+Res __cdecl d3_TestObjectFrustum(char* a, char* b, int c)
 {
 	Res r;
 	char* t;
@@ -24,11 +24,11 @@ Res __cdecl fcn_00438270(char* a, char* b, int c)
 	}
 	v = 0;
 	if (b != 0 && (t = *(char**) (b + 0x318)) != 0) {
-		v = (*(fcn_00438270_f*) (t + 0x1f0))(a, b, c);
+		v = (*(D3_BBOX_QUERY_FN*) (t + 0x1f0))(a, b, c);
 	}
 	if (v == 0) {
 		r.b6 = 1;
 		return r;
 	}
-	return fcn_00437ee0(v, *(char**) (a + 0x1ec) + 0x88, *(char**) (a + 0x1ec) + 0x8c);
+	return d3_TestBoxAgainstFrustum(v, *(char**) (a + 0x1ec) + 0x88, *(char**) (a + 0x1ec) + 0x8c);
 }

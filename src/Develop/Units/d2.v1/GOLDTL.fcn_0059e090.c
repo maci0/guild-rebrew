@@ -59,13 +59,13 @@ void __cdecl d2_CreateButtonRow(int, int, Pick*, int, int, char*, char*);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00594340(void);
+void __cdecl d2_ResetBuildingUiSlots(void);
 void __cdecl d2_SyncProduktionSlotGrid(char*, int);
 void __cdecl d2_DrawProduktionSlotGrid(int, int, int, char*, int);
 
 /* Transport dialog: shows the export/import pick for building b and
  * redraws whenever the direction changes. */
-void __cdecl fcn_0059e090(char* b)
+void __cdecl d2_RunTransportDialog(char* b)
 {
 	int grp;
 	int a;
@@ -90,7 +90,7 @@ void __cdecl fcn_0059e090(char* b)
 	h = -1;
 	sel = 1;
 	shown = -1;
-	while (main_RunFrameLoop(fcn_0059e090, 0x677c7) != 0) {
+	while (main_RunFrameLoop(d2_RunTransportDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
@@ -132,7 +132,7 @@ void __cdecl fcn_0059e090(char* b)
 			((D2_CONTROL_TL*)g_1015ea0)[a].value_060 = sel;
 			((D2_CONTROL_TL*)g_1015ea0)[c].disabled = sel == 0;
 			((D2_CONTROL_TL*)g_1015ea0)[c].value_060 = sel == 0;
-			fcn_00594340();
+			d2_ResetBuildingUiSlots();
 			shown = sel;
 		}
 		d = (*(unsigned int*)&g_6b7fac - t0) * 0.0013333333333333333;

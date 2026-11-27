@@ -8,7 +8,7 @@ void __cdecl d3_MatrixToEulerAngles(float*, float*);
 /* Samples a model's current animation blend: interpolated position and the
  * combined rotation angles. */
 /* ADDRESS: GOLDTL 0x004151d0 */
-int __cdecl fcn_004151d0(char* obj, float* pos, float* rot)
+int __cdecl d3_SampleAnimationBlend(char* obj, float* pos, float* rot)
 {
 	int* blend;
 	float rot0[3];

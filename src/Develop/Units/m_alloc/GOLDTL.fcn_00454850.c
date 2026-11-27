@@ -7,7 +7,7 @@ char* __cdecl d3_CollectObjectsInBounds(char* src, float* lo, float* hi);
 void __cdecl fcn_00454560(char** n);
 
 /* ADDRESS: GOLDTL 0x00454850 */
-void __cdecl fcn_00454850(unsigned int* node, unsigned int a1, unsigned int depth, unsigned int maxDepth)
+void __cdecl d3_SplitQuadtreeNode(unsigned int* node, unsigned int splitLimit, unsigned int depth, unsigned int maxDepth)
 {
 	float lo[4];
 	float hi[4];
@@ -59,7 +59,7 @@ void __cdecl fcn_00454850(unsigned int* node, unsigned int a1, unsigned int dept
 			}
 		}
 	}
-	if (depth < maxDepth && node[0xc] > a1) {
+	if (depth < maxDepth && node[0xc] > splitLimit) {
 		ok = 1;
 		d[0] = (*((float*) (node + 8)) - *((float*) (node + 4))) * 0.5f;
 		d[2] = (*((float*) (node + 10)) - *((float*) (node + 6))) * 0.5f;
@@ -102,7 +102,7 @@ void __cdecl fcn_00454850(unsigned int* node, unsigned int a1, unsigned int dept
 					fcn_00454560((char**) v);
 					node[i] = 0;
 				} else {
-					fcn_00454850((unsigned int*) v, a1, depth + 1, maxDepth);
+					d3_SplitQuadtreeNode((unsigned int*) v, splitLimit, depth + 1, maxDepth);
 				}
 			}
 		}

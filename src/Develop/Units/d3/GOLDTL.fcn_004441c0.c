@@ -1,9 +1,9 @@
 #include "client_lighting.h"
 extern int g_1041d0c;
-void __cdecl fcn_00438da0(float, float, float, float, int, int, int, unsigned int, unsigned int);
+void __cdecl d3_SetViewport(float, float, float, float, int, int, int, unsigned int, unsigned int);
 int __cdecl d3_SetActiveCamera(int);
 void __cdecl fcn_0043ad20(int, int);
-int __cdecl fcn_0043b170(int, int, int, int);
+int __cdecl d3_UpdateScene(int, int, int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004441c0 */
@@ -17,35 +17,35 @@ void __cdecl d3_RenderSceneCameras(void)
 	if (!*(char*) 0x6b85a1 && *(char*) 0x6b8018 && g_6b86d4 <= 0) {
 		*(char*) 0x6b85a1 = 1;
 		if (*(char*) 0x6b85a0) {
-			fcn_00438da0((float) ((*(unsigned int*) 0x10529e0 >> 1) - 1), (float) (*(unsigned int*) 0x10529e4 >> 1), 0, 0,
+			d3_SetViewport((float) ((*(unsigned int*) 0x10529e0 >> 1) - 1), (float) (*(unsigned int*) 0x10529e4 >> 1), 0, 0,
 				*(int*) 0x1052a2c, *(int*) 0x1052a30, *(int*) 0x1052a34, *(int*) 0x10529e0, *(int*) 0x10529e4);
 			d3_SetActiveCamera(*(int*) 0x6b8478);
 			fcn_0043ad20(0x17e, 0);
-			fcn_00438da0((float) (*(unsigned int*) 0x10529e0 >> 1), (float) (*(unsigned int*) 0x10529e4 >> 1),
+			d3_SetViewport((float) (*(unsigned int*) 0x10529e0 >> 1), (float) (*(unsigned int*) 0x10529e4 >> 1),
 				(float) (*(unsigned int*) 0x10529e0 >> 1), 0,
 				*(int*) 0x1052a2c, *(int*) 0x1052a30, *(int*) 0x1052a34, *(int*) 0x10529e0, *(int*) 0x10529e4);
 			d3_SetActiveCamera(*(int*) 0x6b847c);
 			fcn_0043ad20(0x17e, 0);
-			fcn_00438da0((float) (*(unsigned int*) 0x10529e0 >> 1), (float) ((*(unsigned int*) 0x10529e4 >> 1) - 1), 0,
+			d3_SetViewport((float) (*(unsigned int*) 0x10529e0 >> 1), (float) ((*(unsigned int*) 0x10529e4 >> 1) - 1), 0,
 				(float) ((*(unsigned int*) 0x10529e4 >> 1) + 1),
 				*(int*) 0x1052a2c, *(int*) 0x1052a30, *(int*) 0x1052a34, *(int*) 0x10529e0, *(int*) 0x10529e4);
 			d3_SetActiveCamera(*(int*) 0x6b8480);
 			fcn_0043ad20(0x17e, 0);
-			fcn_00438da0((float) (*(unsigned int*) 0x10529e0 >> 1), (float) ((*(unsigned int*) 0x10529e4 >> 1) - 1),
+			d3_SetViewport((float) (*(unsigned int*) 0x10529e0 >> 1), (float) ((*(unsigned int*) 0x10529e4 >> 1) - 1),
 				(float) (*(unsigned int*) 0x10529e0 >> 1), (float) ((*(unsigned int*) 0x10529e4 >> 1) + 1),
 				*(int*) 0x1052a2c, *(int*) 0x1052a30, *(int*) 0x1052a34, *(int*) 0x10529e0, *(int*) 0x10529e4);
 			d3_SetActiveCamera(*(int*) 0x6b8484);
 			fcn_0043ad20(0x17e, *(char*) 0x6b8488);
-			fcn_0043b170(0x17e, *(char*) 0x6b8488, 1, 1);
+			d3_UpdateScene(0x17e, *(char*) 0x6b8488, 1, 1);
 		} else {
-			fcn_00438da0((float) *(unsigned int*) 0x10529e0, (float) *(unsigned int*) 0x10529e4, 0, 0,
+			d3_SetViewport((float) *(unsigned int*) 0x10529e0, (float) *(unsigned int*) 0x10529e4, 0, 0,
 				*(int*) 0x1052a2c, *(int*) 0x1052a30, *(int*) 0x1052a34, *(int*) 0x10529e0, *(int*) 0x10529e4);
 			v4 = g_1041d0c;
 			if (g_1041d0c && *(int*) (g_1041d0c + 0x218) == 3) {
 				v4 = d3_SetActiveCamera(g_1041d0c);
 			}
 			fcn_0043ad20(0x17e, *(char*) 0x6b8488);
-			fcn_0043b170(0x17e, *(char*) 0x6b8488, 1, 1);
+			d3_UpdateScene(0x17e, *(char*) 0x6b8488, 1, 1);
 		}
 		p = (int*) g_1041d0c;
 		if (p) {

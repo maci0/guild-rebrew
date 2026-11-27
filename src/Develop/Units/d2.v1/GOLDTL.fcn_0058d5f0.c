@@ -22,20 +22,20 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0052a0c0(int, int);
-void __cdecl fcn_00594340(void);
+void __cdecl d2_InitPlayerBar(int, int);
+void __cdecl d2_ResetBuildingUiSlots(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetControlText(int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00595e20(int, int);
-void __cdecl fcn_005963f0(int, int, int, int);
+void __cdecl d2_SyncWareProduktionSlotGrid(int, int);
+void __cdecl d2_RefreshWorkshopInventoryGrids(int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl sv_ClearObjectSelection(void);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -58,12 +58,12 @@ typedef struct {
 	char pad48[0x10];
 	unsigned short good;	/* +0x58 */
 	char pad5a[0x9e];
-} Req_58d5f0;
+} RAW_MAT_SEARCH_REQ;
 
 /* ADDRESS: GOLDTL 0x0058d5f0 */
-void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
+void __cdecl d2_RunRohstoffsuchenDialog(unsigned char* gebaeude)
 {
-	Req_58d5f0 req;
+	RAW_MAT_SEARCH_REQ req;
 	unsigned int ids[4];
 	int counts[4];
 	int handles[4];
@@ -130,8 +130,8 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 	d2_SetForm(menu, 3);
 	screen = (((char)(((BUILDING_PROTOTYPE*)ents)->category)) != 0x1f) ? 0x4128 : 0x421e;
 	io_AppendText(screen);
-	fcn_0052a0c0((int) gebaeude, 0);
-	fcn_00594340();
+	d2_InitPlayerBar((int) gebaeude, 0);
+	d2_ResetBuildingUiSlots();
 	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 2);
 	if (n) {
@@ -153,12 +153,12 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 		menu = ids[3];
 	}
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00595e20((int) gebaeude, handles[3]);
-	fcn_005963f0(menu, 1, 0, (int) gebaeude);
+	d2_SyncWareProduktionSlotGrid((int) gebaeude, handles[3]);
+	d2_RefreshWorkshopInventoryGrids(menu, 1, 0, (int) gebaeude);
 	sel = main_RunFrameLoop(0x58d5f0, 0x677c7);
 	while (sel) {
-		fcn_00595e20((int) gebaeude, handles[3]);
-		fcn_005963f0(menu, 1, 0, (int) gebaeude);
+		d2_SyncWareProduktionSlotGrid((int) gebaeude, handles[3]);
+		d2_RefreshWorkshopInventoryGrids(menu, 1, 0, (int) gebaeude);
 		counts[0] = 0;
 		counts[1] = 0;
 		counts[2] = 0;
@@ -242,7 +242,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 					main_LoopFlags = 0x677c7;
 					sv_ClearObjectSelection();
 				} else {
-					fcn_00526120(g_14b556c, 4);
+					d2_ShowModalMessageBox(g_14b556c, 4);
 					sv_ClearObjectSelection();
 				}
 				goto next;

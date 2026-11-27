@@ -11,7 +11,7 @@ extern int __cdecl cm_SendSetHE(int, char*);
 extern int __cdecl gm_CompareGameTime(char*, char*);
 extern void __cdecl fcn_00545780(char*);
 extern int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
-extern int __cdecl fcn_00545670(char*, int, int, char*, int);
+extern int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 extern int __cdecl d2_SetForm(int, int);
 extern void __cdecl io_AppendText(int, ...);
 extern void __cdecl gm_AddTime(void*, int, int, int);
@@ -203,7 +203,7 @@ void __cdecl he_RunInvitation(char* action)
 		he_FreeAction(action);
 		return;
 	case 0:
-		fcn_00545670(action, 0, 0, (char*) 0x6a5a10, 0x5ec);
+		d2_CreateActionPopupSlot(action, 0, 0, (char*) 0x6a5a10, 0x5ec);
 		if (*(int*) (action + 0x74) == 0) {
 			he_FreeAction(action);
 			return;

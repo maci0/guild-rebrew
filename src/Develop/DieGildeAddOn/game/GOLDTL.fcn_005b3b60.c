@@ -29,7 +29,7 @@ void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl cm_SendCopyEntityData(void*);
-void __cdecl fcn_004c5980(void*);
+void __cdecl cm_EnqueueStagedPacket(void*);
 void __cdecl cut_ExecuteCutscene(void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl io_AppendText(char*);
@@ -110,7 +110,7 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 				}
 				*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
 				gm_AddTime(m + 0x18, 0, 0x1e, 0);
-				fcn_004c5980(m);
+				cm_EnqueueStagedPacket(m);
 			} else if (k == item[2]) {
 				r = gm_StartFilteredEntitySearch(1, 5, 7);
 				*(char*) (m + 8) = 6;
@@ -174,7 +174,7 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 					*(int*) (m + 0x7c) = *(int*) (r + 1);
 					*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
 					gm_AddTime(m + 0x18, 0, 0x1e, 0);
-					fcn_004c5980(m);
+					cm_EnqueueStagedPacket(m);
 				}
 				g_774954 = 0;
 			} else if (k == item[0]) {
@@ -252,7 +252,7 @@ weather_send:
 				*(char*) (m + 0x7c) = 0;
 				*(pos14_7f4c00*) &m[0x18] = *(pos14_7f4c00*) &gm_GameTime;
 				gm_AddTime(m + 0x18, 0, 0x1e, 0);
-				fcn_004c5980(m);
+				cm_EnqueueStagedPacket(m);
 				g_774654 = 2;
 			}
 		}

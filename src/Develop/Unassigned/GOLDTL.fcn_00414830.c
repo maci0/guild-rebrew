@@ -14,10 +14,10 @@ typedef struct {
 } Vtbl414830;
 
 void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int force);
-void __cdecl fcn_00414830(float* lo, float* hi, char* entity);
+void __cdecl d3_ExpandObjectWorldBounds(float* lo, float* hi, char* entity);
 
 /* ADDRESS: GOLDTL 0x00414830 */
-void __cdecl fcn_00414830(float* lo, float* hi, char* entity)
+void __cdecl d3_ExpandObjectWorldBounds(float* lo, float* hi, char* entity)
 {
 	P414830* p;
 	Vtbl414830* vt;
@@ -43,6 +43,6 @@ void __cdecl fcn_00414830(float* lo, float* hi, char* entity)
 		}
 	}
 	for (child = *(char**) (entity + 0x200); child != 0; child = *(char**) (child + 0x1f4)) {
-		fcn_00414830(lo, hi, child);
+		d3_ExpandObjectWorldBounds(lo, hi, child);
 	}
 }

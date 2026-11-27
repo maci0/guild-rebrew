@@ -31,15 +31,15 @@ int __cdecl d2_AddWindowInputIcon(int a, int b, int c, int d, int e, int f);
 int __cdecl d2_AddWindowValueGauge(int a, int b, int c, int d, int e, int f,
 	int g, int h);
 int __cdecl txt_FindEntryIndex(const char* name);
-int __cdecl fcn_0046fac0(int a, int b, int c, int d);
-void __cdecl fcn_00469c40(int x, int y, int slot);
+int __cdecl d2_EqualizeWindowButtonWidths(int a, int b, int c, int d);
+void __cdecl d2_PositionControl(int x, int y, int slot);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strcpy(char*, const char*);
 char* __cdecl strcat(char*, const char*);
 int __cdecl strcmp(const char*, const char*);
 
 /* ADDRESS: GOLDTL 0x00470820 */
-int __cdecl d2_LoadForm(int a0, int a1, char* formName)
+int __cdecl d2_LoadForm(int posX, int posY, char* formName)
 {
 	char v22[256];
 	char formPath[256];
@@ -280,7 +280,7 @@ int __cdecl d2_LoadForm(int a0, int a1, char* formName)
 							v13 = txt_FindEntryIndex(
 								(char*) v19);
 							if (v13 != -1) {
-								v12 = fcn_0046fac0(
+								v12 = d2_EqualizeWindowButtonWidths(
 									(short) *q,
 									(short) q[0x18],
 									*(int*) (v13 * 4
@@ -374,12 +374,12 @@ int __cdecl d2_LoadForm(int a0, int a1, char* formName)
 	g_772560 = 0;
 	strcpy((char*) (v15 + 0x1038374), formName);
 	v41 = *(int*) (v15 + 0x1038144) * 0x3cc + 0x1015f40;
-	if (a0 || a1)
-		fcn_00469c40(a0, a1,
+	if (posX || posY)
+		d2_PositionControl(posX, posY,
 			*(int*) (v41 + 0x27c));
 	if (*(int*) (v41 + 4) + *(int*) (v41 + 0xc)
 		> g_1040494)
-		fcn_00469c40(g_1040494 - *(int*) (v41 + 0xc),
+		d2_PositionControl(g_1040494 - *(int*) (v41 + 0xc),
 			*(int*) (v41 + 8),
 			*(int*) (v41 + 0x27c));
 	return v13;

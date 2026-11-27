@@ -29,7 +29,7 @@ void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl he_FreeAction(char*);
 void __cdecl he_RollTripletEventScores(char*, char*, char*);
 int __cdecl cm_SendAllocCutscene(void*);
-int __cdecl fcn_004f25d0(int, unsigned char**, void**);
+int __cdecl gv_FindGraveyardWorkerSlot(int, unsigned char**, void**);
 int __cdecl fcn_004ef6b0(int, void*);
 int __cdecl gv_SendSetGraveOwner(int*, char*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -198,7 +198,7 @@ void __cdecl he_StepCourtshipAction(char* e)
 			he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), buf, 0, 0x5f4, 0);
 			cm_RequestChangeFloat(*(int*) (pb + 4), 0x7c, g_664174 - *(float*) (pb + 0x7c));
 		}
-		if (fcn_004f25d0((int) b, &rec, &hit) != 0) {
+		if (gv_FindGraveyardWorkerSlot((int) b, &rec, &hit) != 0) {
 			v = fcn_004ef6b0(*(int*) (rec + 0x65), hit);
 			gv_SendSetGraveOwner(0, (char*) rec, *(int*) hit, v);
 		}

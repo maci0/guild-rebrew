@@ -9,7 +9,7 @@ extern int g_7746a0;
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_00597ec0(char*);
+void __cdecl d2_OpenContactEinkaufPanel(char*);
 void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
@@ -31,7 +31,7 @@ void __cdecl d2_RunSteinmetzMenu(char* e)
 	personal = 0;
 	fcn_005338a0();
 	while (main_RunFrameLoop((void*) d2_RunSteinmetzMenu, 0x67fff) != 0) {
-		fcn_00597ec0(e);
+		d2_OpenContactEinkaufPanel(e);
 		if (g_7746d8 & 0x200) {
 			prod = RegisterStatusText("contact_PRODUKTION_STEINMETZ", g_14ad270, 0x13);
 		}

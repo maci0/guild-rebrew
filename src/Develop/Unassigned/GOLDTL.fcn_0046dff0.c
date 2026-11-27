@@ -11,7 +11,7 @@ void __cdecl d2_RenderMarkupText(int, int);
 void __cdecl d2_UpdateWindowScroll(int);
 void __cdecl d2_DrawWindowBackground(int, int);
 void __cdecl d2_SetElementEnabled(int, int);
-void __cdecl fcn_0046f940(int, char*);
+void __cdecl d2_SetLabelText(int, char*);
 void __cdecl d2_FlushQueuedQuads(int, int, int);
 void __cdecl d2_SetClipRect(int, int, int, int);
 void __cdecl d2_DrawSpriteFromSet(int, int, int, int, int);
@@ -92,7 +92,7 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 		}
 		if (*(int*) (b + 0x3c0) != -1) {
 			itoa((int) ((double) *(int*) ((char*) g_1015f40 + x + 0x254) / (double) *(int*) ((char*) g_1015f40 + x + 0x274) + 0.5f), buf, 10);
-			fcn_0046f940(*(unsigned int*) (b + 0x3c0), buf);
+			d2_SetLabelText(*(unsigned int*) (b + 0x3c0), buf);
 		}
 	}
 	d2_UpdateWindowScroll(windowIndex);

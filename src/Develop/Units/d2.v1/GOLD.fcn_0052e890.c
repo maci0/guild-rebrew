@@ -48,7 +48,7 @@ extern char g_631090[];
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-int __cdecl fcn_0052e890(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3)
+int __cdecl d2_AddSpinControl(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3)
 {
 	GOLD_GUI_WINDOW* s;
 

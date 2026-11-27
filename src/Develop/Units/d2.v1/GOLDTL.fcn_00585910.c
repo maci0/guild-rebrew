@@ -50,7 +50,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl d2_SetElementFont(int, int);
-void __cdecl fcn_00534160(int, int, int, int);
+void __cdecl d2_DrawSegmentedBar(int, int, int, int);
 int __cdecl d2_AddWindowTextButton(int, int, int, char*, int);
 void __cdecl d2_SetElementWidth(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -65,7 +65,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl fcn_00585030(int);
 
 /* ADDRESS: GOLDTL 0x00585910 */
-void __cdecl fcn_00585910(char* e)
+void __cdecl d2_RunAlchemistryWorkshopDialog(char* e)
 {
 	char text[0x100];
 	char buf[0x100];
@@ -135,22 +135,22 @@ void __cdecl fcn_00585910(char* e)
 	ids[5] = d2_AddWindowTextButton(10, 0x64, 0xc5, buf, ids[1]);
 	d2_SetElementWidth(ids[5], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[5], 0x54);
-	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
+	d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
 	io_FormatTextBuffer(buf, "%s", g_14b58ec);
 	ids[6] = d2_AddWindowTextButton(10, 0x82, 0xc5, buf, ids[1]);
 	d2_SetElementWidth(ids[6], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[6], 0x54);
-	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
+	d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
 	io_FormatTextBuffer(buf, "%s", g_14b58f0);
 	ids[7] = d2_AddWindowTextButton(10, 0xa0, 0xc5, buf, ids[1]);
 	d2_SetElementWidth(ids[7], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[7], 0x54);
-	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
+	d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
 	io_FormatTextBuffer(buf, "%s", g_14b58f4);
 	ids[8] = d2_AddWindowTextButton(10, 0xbe, 0xc5, buf, ids[1]);
 	d2_SetElementWidth(ids[8], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[8], 0x54);
-	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
+	d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
 	d2_SetForm(ids[0], 3);
 	ids[3] = d2_GetWindowListItem(ids[0], 3, io_AppendText(0x4049));
 	do {
@@ -176,7 +176,7 @@ void __cdecl fcn_00585910(char* e)
 			data = ahm_GetWorkshopOwner((unsigned char*) e);
 			if (data == 0) {
 				g_774654 = 1;
-				main_RunFrameLoop((void*) fcn_00585910, 0x20007);
+				main_RunFrameLoop((void*) d2_RunAlchemistryWorkshopDialog, 0x20007);
 				d2_DestroyForm(ids[0]);
 				return;
 			}
@@ -209,22 +209,22 @@ void __cdecl fcn_00585910(char* e)
 			ids[5] = d2_AddWindowTextButton(10, 0x64, 0xc5, buf, ids[1]);
 			d2_SetElementWidth(ids[5], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[5], 0x54);
-			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
+			d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
 			io_FormatTextBuffer(buf, "%s", g_14b58ec);
 			ids[6] = d2_AddWindowTextButton(10, 0x82, 0xc5, buf, ids[1]);
 			d2_SetElementWidth(ids[6], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[6], 0x54);
-			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
+			d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
 			io_FormatTextBuffer(buf, "%s", g_14b58f0);
 			ids[7] = d2_AddWindowTextButton(10, 0xa0, 0xc5, buf, ids[1]);
 			d2_SetElementWidth(ids[7], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[7], 0x54);
-			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
+			d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
 			io_FormatTextBuffer(buf, "%s", g_14b58f4);
 			ids[8] = d2_AddWindowTextButton(10, 0xbe, 0xc5, buf, ids[1]);
 			d2_SetElementWidth(ids[8], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[8], 0x54);
-			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
+			d2_DrawSegmentedBar(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -249,7 +249,7 @@ void __cdecl fcn_00585910(char* e)
 				d2_SetFormVisibility(ids[0], 1);
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_00585910, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunAlchemistryWorkshopDialog, 0x677c7) != 0);
 	d2_DestroyForm(ids[0]);
 	d3_EndCameraAndUiMode();
 }

@@ -12,7 +12,7 @@ extern signed char g_7f3b00[];
 extern unsigned char* g_7746c8;
 extern char g_10432c0[];
 
-int __cdecl fcn_00413160(void);
+int __cdecl d3_FindFreeSceneContext(void);
 void __cdecl init_LoadGebaeudeScene(int);
 
 /* ADDRESS: GOLDTL 0x005155e0 */
@@ -26,7 +26,7 @@ int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* e)
 		if (e == g_7746c8 || *e == 0x1e) {
 			init_LoadGebaeudeScene(*e);
 		} else {
-			r = fcn_00413160();
+			r = d3_FindFreeSceneContext();
 			if (r == -1) {
 				return r;
 			}

@@ -52,7 +52,7 @@ extern int g_1040494;			/* 0x01040494 */
 extern char str_67d43c[];
 extern char str_67d444[];
 
-char* __cdecl fcn_0047b620(char* p, int i);
+char* __cdecl d2_GetBankEntry(char* p, int i);
 void __cdecl d2_SetClipRect(int, int, int, int);
 int __cdecl d2_DrawSpriteFromSet(int, int, int, char*, int);
 int __cdecl d2_DrawDimmedSpriteFrame(int, int, int, char*, int);
@@ -63,7 +63,7 @@ char* __cdecl d2_SelectFont(int idx);
 void __cdecl d2_GetValueGaugeStepLabel(int slot, int n, char* out);
 int __cdecl d2_MeasureTextWidth(char* text, int font);
 void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, unsigned char flags);
-int __cdecl fcn_0046bd20(int, int, int, int, int, int, int);
+int __cdecl d2_DrawWordWrappedText(int, int, int, int, int, int, int);
 void __cdecl d2_SetActiveTextColor(unsigned char r, unsigned char g, unsigned char b);
 int __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsigned char b);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
@@ -120,10 +120,10 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 	f.v2c = 0;
 	hs = (char*) *(int*) (&(*(D2_CONTROL_TL*) e).data);
 	f.v14 = (int) hs;
-	h1 = fcn_0047b620(hs, 1);
-	h0 = fcn_0047b620(hs, 0);
-	f.v1c = (int) fcn_0047b620(hs, 3);
-	f.v28 = (int) fcn_0047b620(hs, 6);
+	h1 = d2_GetBankEntry(hs, 1);
+	h0 = d2_GetBankEntry(hs, 0);
+	f.v1c = (int) d2_GetBankEntry(hs, 3);
+	f.v28 = (int) d2_GetBankEntry(hs, 6);
 	f.v30 = (*(D2_CONTROL_TL*) e).payload.fields.value_08c;
 	f.v10 = (*(D2_CONTROL_TL*) e).payload.fields.value_094;
 	f.v20 = (*(D2_CONTROL_TL*) e).payload.fields.value_098;
@@ -463,7 +463,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 				d2_SelectFont((*(D2_CONTROL_TL*) e).font ? (*(D2_CONTROL_TL*) e).font
 						     : d2_DefaultFont + 1);
 				f.v2c = GLYPH_W(H3);
-				fcn_0046bd20((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) - f.v2c / 2
+				d2_DrawWordWrappedText((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) - f.v2c / 2
 					     + f.v28,
 					     (*(D2_CONTROL_TL*) e).y + GLYPH_H(H3) / 2
 					     - d2_FontHeight / 2 + 1,
@@ -489,7 +489,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 				else {
 					sprintf(f.buf, str_67d444, f.v30);
 				}
-				fcn_0046bd20(f.v2c, f.v28, GLYPH_W(H3),
+				d2_DrawWordWrappedText(f.v2c, f.v28, GLYPH_W(H3),
 					     GLYPH_H(H3), (int) b, (int) f.buf, 8);
 			}
 		}
@@ -529,7 +529,7 @@ void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 				y = (*(D2_CONTROL_TL*) e).y;
 				n = 0x10;
 			}
-			fcn_0046bd20(x, y, (*(D2_CONTROL_TL*) e).width, 0x20, (int) b, (int) ((char*) e + 0xa8), n);
+			d2_DrawWordWrappedText(x, y, (*(D2_CONTROL_TL*) e).width, 0x20, (int) b, (int) ((char*) e + 0xa8), n);
 		}
 
 		(*(D2_CONTROL_TL*) e).value_074 = 0;

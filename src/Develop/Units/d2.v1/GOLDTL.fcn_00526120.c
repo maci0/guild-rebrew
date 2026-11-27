@@ -49,7 +49,7 @@ void __cdecl d2_DestroyForm(int);
  * 0x40 calls fcn_004707d0 each frame.
  * Returns the chosen entry + 1, or 0. */
 /* ADDRESS: GOLDTL 0x00526120 */
-int __cdecl fcn_00526120(char* text, int flags)
+int __cdecl d2_ShowModalMessageBox(char* text, int flags)
 {
 	int wait;
 	int result;
@@ -101,7 +101,7 @@ int __cdecl fcn_00526120(char* text, int flags)
 	if (bar) {
 		timer = d2_AddWindowValueGauge(0x1c, ((Screen*)g_77255c)->x10 - 0x18, ((Screen*)g_77255c)->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
 	}
-	while (main_RunFrameLoop((void*) fcn_00526120, wait) != 0) {
+	while (main_RunFrameLoop((void*) d2_ShowModalMessageBox, wait) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
 			d2_BringFormToFront(dlg);

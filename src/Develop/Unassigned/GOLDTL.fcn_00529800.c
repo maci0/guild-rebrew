@@ -8,7 +8,7 @@ extern s_7e2ac0 g_7e2ac0[48];
 
 
 /* ADDRESS: GOLDTL 0x00529800 */
-int __cdecl fcn_00529800(char* a, int* out)
+int __cdecl d2_GetEntityGearIcons(char* entity, int* out)
 {
 	int n;
 	int i;
@@ -16,7 +16,7 @@ int __cdecl fcn_00529800(char* a, int* out)
 	int* p;
 
 	n = 0;
-	s = *(unsigned char**) (a + 0x17c);
+	s = *(unsigned char**) (entity + 0x17c);
 	if (s != 0 && *s != 0) {
 		for (i = 0; i < 48; i++) {
 			if (g_7e2ac0[i].key == *s) {
@@ -28,7 +28,7 @@ int __cdecl fcn_00529800(char* a, int* out)
 			}
 		}
 	}
-	p = gm_GetEquippedCombatGear(a);
+	p = gm_GetEquippedCombatGear(entity);
 	if (p != 0 && *p != 0) {
 		out[n++] = *p + 0xdf;
 	}

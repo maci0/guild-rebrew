@@ -15,7 +15,7 @@ extern float g_662910;
 char* __cdecl gm_LookupEntityRecordById(int id);
 char* __cdecl gm_SearchTable67(int id);
 void __cdecl he_FreeAction(char* e);
-void __cdecl fcn_00545670(char* e, int a, int b, char* tag, int c);
+void __cdecl d2_CreateActionPopupSlot(char* e, int a, int b, char* tag, int c);
 void __cdecl d2_SetForm(int dlg, int page);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl gm_CompareGameTime(int* pos, int base);
@@ -54,7 +54,7 @@ void __cdecl he_RunGebaeudeKaufangebot(char* e)
 		}
 		type = *(unsigned char*) (*(unsigned short*) (p + 0x25) * 0x21c + 0x7f4ca2);
 		if (type == 6 || type == 7) {
-			fcn_00545670(e, 0, 0, "misc\\EventMessagebox_NULL", 0x5ec);
+			d2_CreateActionPopupSlot(e, 0, 0, "misc\\EventMessagebox_NULL", 0x5ec);
 			d2_SetForm(*(int*) (*(char**) (e + 0x74) + 8), 0);
 			io_AppendText(0x17e8, *q, p, *(int*) (e + 0xb0));
 			*(int*) (e + 0x70) = *(int*) (e + 0x70) + 1;

@@ -1,7 +1,7 @@
-void __cdecl fcn_0058b9c0(void*, void*);
-void __cdecl fcn_0058ba20(char*, char*);
-int __cdecl fcn_0046fac0(void*, int, void*, int);
-void __cdecl fcn_00534160(int, int, int, int);
+void __cdecl d2_FormatWorkerFullName(void*, void*);
+void __cdecl d2_FormatCandidateRolePair(char*, char*);
+int __cdecl d2_EqualizeWindowButtonWidths(void*, int, void*, int);
+void __cdecl d2_DrawSegmentedBar(int, int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d2_AddWindowTextButton(int, int, int, int, int);
 void __cdecl d2_SetElementWidth(int, int);
@@ -100,16 +100,16 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             v15[-1] = v14;
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_05c) = v17;
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-1]].flags_1d0) = 3;
-            fcn_0058b9c0((void*) *v15, v12);
-            fcn_0058ba20((char*) *v15, v13);
+            d2_FormatWorkerFullName((void*) *v15, v12);
+            d2_FormatCandidateRolePair((char*) *v15, v13);
             v7 = *(int*) (v2[3] * 0x3cc + 0x1015f50) * rowIndex + 0x38;
-            v14 = fcn_0046fac0(0, v7, v12, v2[3]);
+            v14 = d2_EqualizeWindowButtonWidths(0, v7, v12, v2[3]);
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_06c) = 1;
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].width) =
                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f4c);
             d2_SetElementFont(v14, 0x54);
             v7 += 0xd;
-            v14 = fcn_0046fac0(0, v7, v13, v2[3]);
+            v14 = d2_EqualizeWindowButtonWidths(0, v7, v13, v2[3]);
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].value_06c) = 1;
             *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v14].width) =
                 *(unsigned int*) (v2[3] * 0x3cc + 0x1015f4c);
@@ -118,10 +118,10 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
             v14 = 0;
             do {
                 io_FormatTextBuffer(v12, 0x6a9688, v14 + 0x16b7);
-                v8 = fcn_0046fac0((void*) 0x28, v7, v12, v2[3]);
+                v8 = d2_EqualizeWindowButtonWidths((void*) 0x28, v7, v12, v2[3]);
                 *(unsigned int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v8].width) = 300;
                 d2_SetElementFont(v8, 0x54);
-                fcn_00534160(0xa0, v7, *(unsigned char*) (*v15 + 0x24 + v14), 0x4df);
+                d2_DrawSegmentedBar(0xa0, v7, *(unsigned char*) (*v15 + 0x24 + v14), 0x4df);
                 v14 += 1;
                 v7 += 0xd;
             } while (v14 < 5);
@@ -147,7 +147,7 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
                 v4 = &v2[0x50];
                 do {
                     if (*(int*) *v4 == v1[1]) {
-                        fcn_0058b9c0((void*) v2[v14 * 3 + 0x50], v12);
+                        d2_FormatWorkerFullName((void*) v2[v14 * 3 + 0x50], v12);
                         break;
                     }
                     v14 += 1;

@@ -4,7 +4,7 @@ int __cdecl d2_AllocateElement(void);
 int __cdecl d2_ResolveResourceEntry(int, int*, int*);
 void __cdecl d2_AddRefcount(int);
 int __cdecl d2_AllocAnimationSlot(int, int, int, int);
-int __cdecl fcn_0047b620(int, int);
+int __cdecl d2_GetBankEntry(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x004699c0 */
 int __cdecl d2_CreateElementCore(unsigned int x, int y, int resourceId)
@@ -70,7 +70,7 @@ int __cdecl d2_CreateElementCore(unsigned int x, int y, int resourceId)
 	case 8:
 		*(int*) &((D2_CONTROL_TL*)slot)->value_088 = d2_ResourceOffset;
 		tp = (char*) *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data;
-		r = fcn_0047b620((int) tp, *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_088);
+		r = d2_GetBankEntry((int) tp, *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_088);
 		*(int*) &((D2_CONTROL_TL*)slot)->width = *(unsigned short*) (r + 2);
 		*(int*) &((D2_CONTROL_TL*)slot)->height = *(unsigned short*) (r + 6);
 		*(int*) &((D2_CONTROL_TL*)slot)->value_1dc = -1;

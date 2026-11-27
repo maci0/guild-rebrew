@@ -4,7 +4,7 @@
 int __cdecl tb_SetCallbackPaused(int, int);
 int __cdecl fcn_00404c20(void*, int);
 
-void __cdecl fcn_004e4020(void)
+void __cdecl gm_ResumeGameSimulation(void)
 {
 	int p;
 	tb_SetCallbackPaused(0x5315f0, 0);

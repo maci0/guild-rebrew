@@ -11,7 +11,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(char*, ...);
-void __cdecl fcn_0058bfd0(int*);
+void __cdecl d2_RenderCandidateStatCards(int*);
 
 int __cdecl d2_CreateRentAGraveDialog(int* s, int a2)
 {
@@ -35,6 +35,6 @@ int __cdecl d2_CreateRentAGraveDialog(int* s, int a2)
 	d2_SetForm(s[0], 4);
 	s[6] = d2_CurrentWindowId;
 	io_AppendText(g_6811b0);
-	fcn_0058bfd0(s);
+	d2_RenderCandidateStatCards(s);
 	return 1;
 }

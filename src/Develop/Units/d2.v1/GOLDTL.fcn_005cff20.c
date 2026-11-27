@@ -23,7 +23,7 @@ int __cdecl main_RunFrameLoop(void* handler, int screen_id);
  * d2_ClearRadioGroup and final teardown fcn_00471e30. No jump tables, no asm. */
 
 /* One lot/party record, stride 0x21c. */
-typedef struct GOLDTL_House5cff {
+typedef struct D2_LAW_HOUSE_SLOT {
 	unsigned short id;              /* 0x000 */
 	char pad2[0x16a];
 	int f16c;                       /* 0x16c */
@@ -31,16 +31,16 @@ typedef struct GOLDTL_House5cff {
 	char pad174[0x18];
 	int f18c;                       /* 0x18c */
 	char pad190[0x8c];
-} GOLDTL_House5cff;                     /* SIZE 0x21c */
+} D2_LAW_HOUSE_SLOT;                     /* SIZE 0x21c */
 
 /* Entity type record, stride 0x24d. */
-typedef struct GOLDTL_EntType5cff {
+typedef struct D2_LAW_ENT_INFO {
 	unsigned char type;             /* 0x000 */
 	char pad1[0x24c];
-} GOLDTL_EntType5cff;                   /* SIZE 0x24d */
+} D2_LAW_ENT_INFO;                   /* SIZE 0x24d */
 
 /* One selectable law row. */
-typedef struct GOLDTL_LawSlot {
+typedef struct D2_LAW_SLOT_ITEM {
 	int btn;                        /* 0x00 */
 	int label;                      /* 0x04 */
 	int name;                       /* 0x08 */
@@ -48,14 +48,14 @@ typedef struct GOLDTL_LawSlot {
 	int pad10;                      /* 0x10 */
 	int id;                         /* 0x14 */
 	int pad18[2];                   /* 0x18 */
-} GOLDTL_LawSlot;                       /* SIZE 0x20 */
+} D2_LAW_SLOT_ITEM;                       /* SIZE 0x20 */
 
 /* Screen geometry source (offsets 4/8 are the placement origin). */
-typedef struct GOLDTL_Screen5cff {
+typedef struct D2_LAW_SCREEN_INFO {
 	int pad0;
 	int x;                          /* 0x04 */
 	int y;                          /* 0x08 */
-} GOLDTL_Screen5cff;
+} D2_LAW_SCREEN_INFO;
 
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -81,18 +81,18 @@ int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
-int __cdecl fcn_0046fac0(int, int, char*, int);
+int __cdecl d2_EqualizeWindowButtonWidths(int, int, char*, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 void __cdecl d2_SetElementEnabled(int, int);
-void __cdecl fcn_00469c40(int, int, int);
+void __cdecl d2_PositionControl(int, int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005cff20 */
-int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
+int __cdecl d2_RunLawTargetSelectDialog(unsigned char* rec, unsigned char* a2, int a3,
                          void (__cdecl* cb)(int, int))
 {
 	int n;
@@ -111,13 +111,13 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 	int y;
 	int chosen;
 	char text[0x20];
-	GOLDTL_LawSlot slots[16];
+	D2_LAW_SLOT_ITEM slots[16];
 	register unsigned short u1;
 	register unsigned short u2;
 	unsigned char type;
 	BUILDING_PROTOTYPE * ent;
-	GOLDTL_House5cff* h;
-	GOLDTL_LawSlot* s;
+	D2_LAW_HOUSE_SLOT* h;
+	D2_LAW_SLOT_ITEM* s;
 	int i;
 
 	result = 0;
@@ -140,7 +140,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 	ent = &((BUILDING_PROTOTYPE *) lpGebaeudePROT)[*(unsigned char*) rec];
 	type = ent->category;
 	if (type == 1 || type == 2) {
-		h = (GOLDTL_House5cff*) g_7f4ca0;
+		h = (D2_LAW_HOUSE_SLOT*) g_7f4ca0;
 		do {
 			if (n >= 16) {
 				break;
@@ -154,7 +154,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 	}
 	if ((type > 3 && type < 10) || (type > 10 && type < 15) || type == 16
 	    || (type > 17 && type < 23)) {
-		h = (GOLDTL_House5cff*) g_7f4ca0;
+		h = (D2_LAW_HOUSE_SLOT*) g_7f4ca0;
 		do {
 			if (n >= 16) {
 				break;
@@ -210,10 +210,10 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 					progress = (int) gm_CalcEntityFavor(g_774970,
 					                              (unsigned short) s->id, 1);
 					s->label = d2_AddElementToWindow(0x98, y + 1,
-					                        ((GOLDTL_House5cff*) g_7f4ca0)[s->id].f18c,
+					                        ((D2_LAW_HOUSE_SLOT*) g_7f4ca0)[s->id].f18c,
 					                        d2_CurrentWindowId);
 					io_FormatTextBuffer(text, 0x6a9680, s->id);
-					name = fcn_0046fac0(0x96 - (0xa0 - width) / 2,
+					name = d2_EqualizeWindowButtonWidths(0x96 - (0xa0 - width) / 2,
 					                    dy + y - 0x46, text, d2_CurrentWindowId);
 					s->name = name;
 					((D2_CONTROL_TL*) (g_1015ea0))[name].value_06c = 1;
@@ -224,12 +224,12 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 					slider = d2_AddWindowValueGauge(0x8c, dy + y + 4, 0x40, 0, 0x64,
 					                      0x75, 0x442, d2_CurrentWindowId);
 					s->slider = slider;
-					fcn_00472380(slider, 0, 0x64, progress);
+					d2_CreateGuiWindow(slider, 0, 0x64, progress);
 					d2_SetElementEnabled(slider, 0);
-					fcn_00469c40(((GOLDTL_Screen5cff*) g_77255c)->x
+					d2_PositionControl(((D2_LAW_SCREEN_INFO*) g_77255c)->x
 					                 - (((D2_CONTROL_TL*) (g_1015ea0))[slider].width - width) / 2
 					                 + 0x96,
-					             ((GOLDTL_Screen5cff*) g_77255c)->y + y + 4 + dy,
+					             ((D2_LAW_SCREEN_INFO*) g_77255c)->y + y + 4 + dy,
 					             slider);
 					y += 0x5a;
 				}
@@ -243,7 +243,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 			for (i = 0; i < n; i++) {
 				if (d2_CurrentElementId == slots[i].btn) {
 					if (i > -1) {
-						chosen = (int) &((GOLDTL_House5cff*) g_7f4ca0)[slots[i].id];
+						chosen = (int) &((D2_LAW_HOUSE_SLOT*) g_7f4ca0)[slots[i].id];
 						result = chosen;
 						if (cb != 0) {
 							cb(chosen, (int) rec);
@@ -260,7 +260,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 				}
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005cff20, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunLawTargetSelectDialog, 0x677c7) != 0);
 	if (holder != -1) {
 		d2_ClearRadioGroup(holder);
 	}

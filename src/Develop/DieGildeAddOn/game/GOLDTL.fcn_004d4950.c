@@ -15,7 +15,7 @@ void __cdecl d3_ScheduleActionTimer(char*, int, int);
 int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void* __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 int __cdecl fcn_004d4790(char*);
-int* __cdecl fcn_00417b50(int, int, int, int, int, int);
+int* __cdecl d3_SpawnBlutEffect(int, int, int, int, int, int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl ch_NewAnimationAction(int, char*, int, float);
 int __cdecl io_FormatTextBuffer(void*, ...);
@@ -116,7 +116,7 @@ draw:
         return;
     }
     if (v22) {
-        fcn_00417b50(*(unsigned int*) (*(int*) ((char*) v4 + 0x184) + 0x34),
+        d3_SpawnBlutEffect(*(unsigned int*) (*(int*) ((char*) v4 + 0x184) + 0x34),
                      0x40, 0x3e800000, 0x3dcccccd, 0x3e0f5c29, 0x425c0000);
         v8 = *(int*) (*(int*)((char*)v4 + 0x184) + 0x128);
         if (!v8 || *(char*) (v8 + 9) == ';') {

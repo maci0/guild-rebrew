@@ -22,7 +22,7 @@ int __cdecl d2_CheckActionBlocker(void*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 unsigned short* __cdecl d2_OpenTargetPicker(int*, char*, int, int);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl d2_LoadForm(int, int, void*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -73,7 +73,7 @@ void __cdecl d2_ShowAnschwaerzenDialog(int selected_obj)
 	crime_count = CountMatchingStraftatEntries(*(int*) (accused + 2), g_774970);
 	if (crime_count <= 0) {
 		io_FormatTextBuffer(text, 0x1756, *accused);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		d3_EndCameraAndUiMode();
 		return;
 	}
@@ -108,7 +108,7 @@ void __cdecl d2_ShowAnschwaerzenDialog(int selected_obj)
 				cm_SendCopyEntityData(ev);
 				cm_RequestModifyHealth(((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id, -3);
 				io_FormatTextBuffer(text, 0x1762, *judge);
-				fcn_00526120(text, 0);
+				d2_ShowModalMessageBox(text, 0);
 				g_774654 = 1;
 			}
 			else if (d2_CurrentElementId == cancel_btn) {

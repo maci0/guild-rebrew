@@ -37,11 +37,11 @@ void __cdecl fcn_00533f40(int, int, int, int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl d2_AddElementToWindow(int, int, char*, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_0046fac0(int, int, char*, int);
+int __cdecl d2_EqualizeWindowButtonWidths(int, int, char*, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00476b60(void);
 char* __cdecl gm_SearchTable67(int);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
 char* __cdecl cm_SendLogAction(char*);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
@@ -50,7 +50,7 @@ void __cdecl cm_SendCopyEntityData(char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl gm_GetElapsedMinutes(char*, char*);
-void __cdecl fcn_0046f940(int, int);
+void __cdecl d2_SetLabelText(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c2a40 */
 void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
@@ -147,7 +147,7 @@ void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
 		((D2_CONTROL_TL*) g_1015ea0)[handle].value_1ec = -2;
 		io_FormatTextBuffer(msg, 0x17d3,
 		             *(int*) (id * 8 + 0x14a79c0), val);
-		slots[i * 3 + 2] = fcn_0046fac0(0x60, cnt + 10, msg, d2_CurrentWindowId);
+		slots[i * 3 + 2] = d2_EqualizeWindowButtonWidths(0x60, cnt + 10, msg, d2_CurrentWindowId);
 		cnt += 0x3c;
 	}
 	d2_SetOverlayAnimation(0, 0);
@@ -168,7 +168,7 @@ void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
 					scale = (float) ((double) g_7747b4 * 0.25 + 0.5);
 					val = (int) (eval_ObjektPreis2Credits(slots[sel * 3], 100) * scale);
 					if (total + others >= (int) (unsigned char) *(base + 0x21)) {
-						fcn_00526120(*(int*) 0x14ab260, 0);
+						d2_ShowModalMessageBox(*(int*) 0x14ab260, 0);
 					} else if (gm_CheckEntityStock((void*) (g_7f4ca0 +
 					                                 (int) g_774970 * 0x21c),
 					                        val, g_773d75) != 0) {
@@ -208,7 +208,7 @@ void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
 				if ((unsigned short) *(short*) (r + 0xb0) == slots[sel * 3]) {
 					handle = slots[sel * 3 + 1];
 					((D2_CONTROL_TL*) (g_1015ea0))[handle].value_05c = 0;
-					fcn_0046f940(slots[sel * 3 + 2], *(int*) 0x14ab264);
+					d2_SetLabelText(slots[sel * 3 + 2], *(int*) 0x14ab264);
 					lo = (float) gm_GetElapsedMinutes(r + 0x44, r + 0x52);
 					hi = (float) gm_GetElapsedMinutes(r + 0x44,
 					                          (char*) 0x7f4c00);
@@ -224,7 +224,7 @@ void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
 		for (i = 0; i < nslots; i++) {
 			if (fcn_00502cd0(*(int*) (productionBuilding + 0x5d), 1, 0, slots[i * 3]) != 0) {
 				((D2_CONTROL_TL*) (g_1015ea0))[slots[i * 3 + 1]].value_05c = 0;
-				fcn_0046f940(slots[i * 3 + 2], *(int*) 0x14ab268);
+				d2_SetLabelText(slots[i * 3 + 2], *(int*) 0x14ab268);
 				removed++;
 			}
 		}

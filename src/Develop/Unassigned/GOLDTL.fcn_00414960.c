@@ -3,10 +3,10 @@
 extern char* d3_ActiveCamera;
 
 void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, char force);
-int __cdecl fcn_00414830(void);
+int __cdecl d3_ExpandObjectWorldBounds(void);
 
 /* ADDRESS: GOLDTL 0x00414960 */
-void __cdecl fcn_00414960(float* minBounds, float* maxBounds, char* obj)
+void __cdecl d3_ComputeObjectWorldBounds(float* minBounds, float* maxBounds, char* obj)
 {
 	float* p;
 	char* node;
@@ -39,7 +39,7 @@ void __cdecl fcn_00414960(float* minBounds, float* maxBounds, char* obj)
 	}
 	node = *(char**) (obj + 0x200);
 	while (node != 0) {
-		fcn_00414830((char*) minBounds, (char*) maxBounds, node);
+		d3_ExpandObjectWorldBounds((char*) minBounds, (char*) maxBounds, node);
 		node = *(char**) (node + 0x1f4);
 	}
 }

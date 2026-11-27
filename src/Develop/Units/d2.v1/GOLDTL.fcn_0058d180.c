@@ -46,7 +46,7 @@ extern int g_14b556c;
 
 int __cdecl he_HasActiveGrabpflege(char*, int, int);
 void __cdecl fcn_005263d0(int, int, int);
-void __cdecl fcn_0052a0c0(char*, int);
+void __cdecl d2_InitPlayerBar(char*, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -54,7 +54,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -79,7 +79,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 		fcn_005263d0(g_14b5798, g_14b579c, 0);
 		return 0;
 	}
-	fcn_0052a0c0(who, 0);
+	d2_InitPlayerBar(who, 0);
 	h = d2_LoadForm(0, 0, "Locations\\Friedhof\\Friedhof");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
@@ -105,7 +105,7 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 					}
 				}
 				if (hh == 0) {
-					fcn_00526120(g_14b556c, 0);
+					d2_ShowModalMessageBox(g_14b556c, 0);
 				} else {
 					memset(&m, 0, sizeof(m));
 					m.kind = 0x8d;

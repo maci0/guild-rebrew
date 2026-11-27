@@ -24,7 +24,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl d2_EnterObjektInterior(int);
 void __cdecl d3_UpdateBuildingView(unsigned char*, int);
 void __cdecl d3_SetupInteriorScene(unsigned char*, int);
-void __cdecl fcn_00597ec0(unsigned char*);
+void __cdecl d2_OpenContactEinkaufPanel(unsigned char*);
 
 void __cdecl d3_UpdateBuildingInteriorState(void)
 {
@@ -63,6 +63,6 @@ void __cdecl d3_UpdateBuildingInteriorState(void)
 	e = g_7746c8;
 	r = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e];
 	if (*e == 0x20 || *e == 0x1f || *e == 0x1e || ((char)((BUILDING_PROTOTYPE*)r)->category) == 0x1f || ((char)((BUILDING_PROTOTYPE*)r)->category) == 0x1d) {
-		fcn_00597ec0(e);
+		d2_OpenContactEinkaufPanel(e);
 	}
 }

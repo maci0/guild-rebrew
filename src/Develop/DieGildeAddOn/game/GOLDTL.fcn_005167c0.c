@@ -28,7 +28,7 @@ char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 int __cdecl gm_CheckEntityType(char*);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
-void __cdecl fcn_004bd150(int);
+void __cdecl d3_ShowPflanzenMapEntries(int);
 void __cdecl ch_CollectContextCharacters(char*);
 void __cdecl gm_UpdateResidenceOwnerDecor(char*);
 int __cdecl d3_GetContextIndex(int);
@@ -104,7 +104,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, d3_ApplySeasonTextureSet);
 	}
 	if (*building == 0x1e && queryId == 0xfd) {
-		fcn_004bd150(*(int*) (building + 0x71));
+		d3_ShowPflanzenMapEntries(*(int*) (building + 0x71));
 	}
 	g_7f3ee0 = (char*) building;
 	ch_CollectContextCharacters((char*) building);

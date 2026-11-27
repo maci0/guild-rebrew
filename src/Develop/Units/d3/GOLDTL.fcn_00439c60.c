@@ -2,7 +2,7 @@
 
 
 
-void __cdecl fcn_00438af0(unsigned char);
+void __cdecl d3_InvalidateSceneRenderCache(unsigned char);
 
 void __cdecl d3_SetActiveCamera(char* camera)
 {
@@ -13,5 +13,5 @@ void __cdecl d3_SetActiveCamera(char* camera)
 		return;
 	}
 	d3_ActiveCamera = camera;
-	fcn_00438af0(0);
+	d3_InvalidateSceneRenderCache(0);
 }

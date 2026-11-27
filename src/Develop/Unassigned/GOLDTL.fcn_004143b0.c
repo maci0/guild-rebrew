@@ -32,12 +32,12 @@ typedef struct S143b0Box {
 char __cdecl d3_ReparentObject(char*, int);
 void __cdecl d3_SetObjectEulerRotation(char*, int, int, int);
 int __cdecl d3_GetObjectVerticalBounds(char*, float*, float*);
-int __cdecl fcn_00413480(char*, float, float*, float*, float*, float*);
-int __cdecl fcn_00413c40(char*, float*, float*, float*, float*, float*, float*);
+int __cdecl d3_ComputeObjectFootprintCorners(char*, float, float*, float*, float*, float*);
+int __cdecl d3_ComputeQuadHeightRange(char*, float*, float*, float*, float*, float*, float*);
 int __cdecl d3_AccumulateMeshHeightRange(S143b0Box*, char*);
 
 /* ADDRESS: GOLDTL 0x004143b0 */
-int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
+int __cdecl d3_AlignObjectToTerrain(char* self, int arg1, int arg2)
 {
 	S143b0Box box;
 	char* node;
@@ -60,11 +60,11 @@ int __cdecl fcn_004143b0(char* self, int arg1, int arg2)
 		goto fail;
 	}
 	box.level = (box.hi - box.lo) * 0.1f + box.lo;
-	if (fcn_00413480(self, box.level, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
+	if (d3_ComputeObjectFootprintCorners(self, box.level, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
 		goto fail;
 	}
 	if (g_6b8300 != 0) {
-		if (fcn_00413c40((char*) g_6b8300, &box.loAligned, &box.hiAligned, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
+		if (d3_ComputeQuadHeightRange((char*) g_6b8300, &box.loAligned, &box.hiAligned, box.pt[0], box.pt[1], box.pt[2], box.pt[3]) != 0) {
 			goto fail;
 		}
 		if (arg1 != 0) {

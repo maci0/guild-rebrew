@@ -12,7 +12,7 @@ typedef struct {
 	int fbc;
 	char padc0[1];
 	unsigned char fc1;
-} Ent5c1110;
+} D2_SCHWARZES_BRETT_ENTRY;
 #include "client_data.h"
 #include "client_dialog_state.h"
 int __cdecl d2_LoadForm(int, int, char*);
@@ -34,14 +34,14 @@ int __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl gm_ModifyHealth(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005c1110 */
-int __cdecl fcn_005c1110(void)
+int __cdecl d2_RunSchwarzesBrettDialog(void)
 {
 	int n;
 	unsigned int t;
 	unsigned short* p;
 	int a[4];
 	int b[4];
-	Ent5c1110* ent;
+	D2_SCHWARZES_BRETT_ENTRY* ent;
 	int h;
 	int k;
 	int i;
@@ -77,7 +77,7 @@ int __cdecl fcn_005c1110(void)
 			a[3] = -1;
 			b[2] = -1;
 			b[3] = -1;
-			ent = (Ent5c1110*) he_StartHandlungSearch(n, 0, 0x35);
+			ent = (D2_SCHWARZES_BRETT_ENTRY*) he_StartHandlungSearch(n, 0, 0x35);
 			if (ent != 0) {
 				i = 2;
 				k = 0;
@@ -104,7 +104,7 @@ int __cdecl fcn_005c1110(void)
 							i += 2; k += 4;
 						}
 					}
-					ent = (Ent5c1110*) he_fn_Handlung();
+					ent = (D2_SCHWARZES_BRETT_ENTRY*) he_fn_Handlung();
 				} while (ent != 0);
 			}
 			if (n < 5) {
@@ -150,7 +150,7 @@ done:;
 				}
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005c1110, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunSchwarzesBrettDialog, 0x677c7) != 0);
 	d2_DestroyForm(h);
 	return d3_EndCameraAndUiMode();
 }

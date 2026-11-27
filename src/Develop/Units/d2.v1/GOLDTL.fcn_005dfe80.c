@@ -39,7 +39,7 @@ void __cdecl d2_BringFormToFront(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005dfe80(int arg, unsigned int flags)
+int __cdecl d2_ConfirmTextIdMessageBox(int arg, unsigned int flags)
 {
 	int h;
 	int wflags;
@@ -80,7 +80,7 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 			d2_AddToRadioGroup(ctx, id);
 		}
 	}
-	while (main_RunFrameLoop(fcn_005dfe80, wflags)) {
+	while (main_RunFrameLoop(d2_ConfirmTextIdMessageBox, wflags)) {
 		d2_UpdateRadioGroup(ctx);
 		if (flags & 0x40) {
 			d2_BringFormToFront(h);

@@ -41,7 +41,7 @@ int __cdecl gm_GetEntityUiFlags(int a0, char* a1, unsigned short* a2, int a3);
 char* __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0065f220(char* a, char* b);
-int __cdecl fcn_00517c00(int a1, int a2, int a3, char* a4);
+int __cdecl gm_FormatEntityTitleAndName(int a1, int a2, int a3, char* a4);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl fcn_0064f170(char* a, char* b, unsigned int n);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
@@ -155,7 +155,8 @@ void __cdecl sv_UpdateSceneHover(void)
 	} else if (c == 3) {
 		g_7746b4 = *(char**) (cur + 0x204);
 		g_7746dc = gm_GetEntityUiFlags((int) g_774970, 0, 0, (int) g_7746b4);
-		if (g_7746b4 && (fcn_00517c00(*(unsigned short*) g_7746b4, 1, 4, g_100f8c0), *(char*) ((int) g_7746b4 + 0x165) == 0x1c) && ((*(unsigned char*) (g_7746b4 + 0x1b4) & 1) && ((g_7746dc & 0x800) &&
+		if (g_7746b4 && (gm_FormatEntityTitleAndName(*(unsigned short*) g_7746b4, 1, 4, g_100f8c0),
+		    *(char*) ((int) g_7746b4 + 0x165) == 0x1c) && ((*(unsigned char*) (g_7746b4 + 0x1b4) & 1) && ((g_7746dc & 0x800) &&
 		    d3_CurrentContextIndex))) {
 			io_FormatTextBuffer(g_100f8c0, 0x414c, *(unsigned short*) g_7746b4);
 			g_7725c4 = 0x2e;

@@ -34,7 +34,7 @@ void __cdecl gm_ModifyHealth(int, int);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 unsigned char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -90,7 +90,7 @@ int __cdecl gm_HandleVerhoer(unsigned char* e, unsigned char* action)
 	result = 2;
 	memset(&req, 0, sizeof(req));
 	if (*(int*) (e + 0x1cc) & 0x40000) {
-		fcn_00526120(((char*)g_14ac6a0), 0);
+		d2_ShowModalMessageBox(((char*)g_14ac6a0), 0);
 		return 0x81;
 	}
 	req.size = 0xc00;

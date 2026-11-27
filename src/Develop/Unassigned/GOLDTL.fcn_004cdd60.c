@@ -2,7 +2,7 @@ int __cdecl gm_AdjustSlot170Resource(char*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004cdd60 */
-int __cdecl fcn_004cdd60(char* a1, char* output)
+int __cdecl cm_ExAdjustResourceSlots(char* a1, char* output)
 {
 	int status;
 

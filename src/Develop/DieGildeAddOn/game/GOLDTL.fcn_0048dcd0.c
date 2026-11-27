@@ -14,7 +14,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
+int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl amt_GetRoleLevel(int k);
 
 int __cdecl ai_SetupSecretRoomMode1(char* e, char* action, char* target)
@@ -27,7 +27,7 @@ int __cdecl ai_SetupSecretRoomMode1(char* e, char* action, char* target)
 	int k;
 
 	mask = 0xf00500;
-	if (fcn_004a5340(e, 1, &mask, 0, gm_RandomMod(0x20) + 25.0f, &idx) == 0) {
+	if (ai_SelectRankedCandidates(e, 1, &mask, 0, gm_RandomMod(0x20) + 25.0f, &idx) == 0) {
 		return 0;
 	}
 	t = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]);

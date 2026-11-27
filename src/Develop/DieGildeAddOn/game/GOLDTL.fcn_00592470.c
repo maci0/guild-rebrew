@@ -9,7 +9,7 @@ extern char g_14cf950;
 
 
 
-void __cdecl fcn_00591ea0(void);
+void __cdecl d2_RunGebHotkeysDialog(void);
 void __cdecl d2_FocusBookmarkSlot(void);
 void __cdecl d2_SaveBookmarkSlot(int);
 
@@ -22,7 +22,7 @@ void __cdecl main_ProcessGameHotkeys(void)
 	c = *(char*) ((char*)&g_14cf950);
 	if (c != 0 && *(int*) ((char*)&g_7e2700) != 1) {
 		if (c == 0x58) {
-			fcn_00591ea0();
+			d2_RunGebHotkeysDialog();
 		}
 		d2_FocusBookmarkSlot();
 		i = 0;

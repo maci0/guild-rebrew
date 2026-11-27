@@ -10,7 +10,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_004758e0(int);
+void __cdecl d2_FreeWindowSlot(int);
 int __cdecl sb_CheckVoicePlaying(int*);
 void __cdecl sb_StopVoice(int*, int);
 
@@ -38,7 +38,7 @@ void __cdecl d2_ShowMissionBriefing(int id, int flags)
 			g_6f22a0 = 1;
 	}
 	if (window != -1)
-		fcn_004758e0(window);
+		d2_FreeWindowSlot(window);
 	if (sb_CheckVoicePlaying((int*) sound))
 		sb_StopVoice((int*) sound, 0x19);
 }

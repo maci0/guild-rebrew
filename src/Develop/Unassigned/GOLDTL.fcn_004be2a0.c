@@ -1,26 +1,26 @@
 typedef struct {
 	int v[6];
-} fcn_004be2a0_block;
+} ROUTE_BLOCK;
 // SIZE 0x18
 
-typedef struct fcn_004be2a0_node fcn_004be2a0_node;
-struct fcn_004be2a0_node {
+typedef struct ROUTE_NODE ROUTE_NODE;
+struct ROUTE_NODE {
 	int f0;
 	int f4;
-	fcn_004be2a0_block a;
-	fcn_004be2a0_block b;
-	fcn_004be2a0_node* prev;
-	fcn_004be2a0_node* next;
+	ROUTE_BLOCK a;
+	ROUTE_BLOCK b;
+	ROUTE_NODE* prev;
+	ROUTE_NODE* next;
 };
 
-fcn_004be2a0_node* __cdecl fcn_004be1f0(fcn_004be2a0_node*);
+ROUTE_NODE* __cdecl fcn_004be1f0(ROUTE_NODE*);
 
 
 /* ADDRESS: GOLDTL 0x004be2a0 */
-fcn_004be2a0_node* __cdecl fcn_004be2a0(fcn_004be2a0_node* src)
+ROUTE_NODE* __cdecl rt_CloneRoutePoints(ROUTE_NODE* src)
 {
-	fcn_004be2a0_node* q;
-	fcn_004be2a0_node* head;
+	ROUTE_NODE* q;
+	ROUTE_NODE* head;
 
 	q = 0;
 	head = 0;

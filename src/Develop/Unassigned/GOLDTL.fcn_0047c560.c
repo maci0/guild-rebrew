@@ -58,7 +58,7 @@ extern Device* g_6b5de0;
 
 void __cdecl d2_BindQuadVertexBuffer(void);
 void __cdecl d2_ResetQuadDeviceState(void);
-void __cdecl fcn_004372d0(int, int, int, int, int);
+void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0047c560 */
 int __cdecl d2_FlushQueuedQuads(int idx, Snd* snd, char* src)
@@ -90,7 +90,7 @@ int __cdecl d2_FlushQueuedQuads(int idx, Snd* snd, char* src)
 	d2_BindQuadVertexBuffer();
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 0);
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x88, 0);
-	fcn_004372d0(0xff, 0, 0, 1, 1);
+	d3_SetRenderMaterialState(0xff, 0, 0, 1, 1);
 	if (d2_QueuedQuadCount != 0) {
 		if (snd != 0) {
 			s.f0 = 0;

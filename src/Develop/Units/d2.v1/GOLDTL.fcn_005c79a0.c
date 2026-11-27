@@ -92,16 +92,16 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00526120(char*, int);
-void __cdecl fcn_0052a0c0(unsigned char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
+void __cdecl d2_InitPlayerBar(unsigned char*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 int __cdecl sv_ClearObjectSelection(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
-int __cdecl fcn_005c78f0(int, int, int*, int);
+int __cdecl d2_CreateItemRowControls(int, int, int*, int);
 
 /* ADDRESS: GOLDTL 0x005c79a0 */
-void __cdecl fcn_005c79a0(unsigned char* obj)
+void __cdecl d2_RunWorkerTrainingDialog(unsigned char* obj)
 {
 	char buf[0x800];
 	Packet pkt;
@@ -134,12 +134,12 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x72f, 0);
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x1a46);
-	fcn_0052a0c0(obj, 1);
+	d2_InitPlayerBar(obj, 1);
 	d2_SetForm(dlg, 2);
 	hwnd = d2_CurrentWindowId;
-	fcn_005c78f0(0, 0x762, out, hwnd);
-	fcn_005c78f0(1, 0x763, out + 3, hwnd);
-	fcn_005c78f0(2, 0x764, out + 6, hwnd);
+	d2_CreateItemRowControls(0, 0x762, out, hwnd);
+	d2_CreateItemRowControls(1, 0x763, out + 3, hwnd);
+	d2_CreateItemRowControls(2, 0x764, out + 6, hwnd);
 	d2_SetForm(dlg, 1);
 	if (t->category != 4 && t->category != 0x10) {
 		d2_SetBackgroundTexture(s_6ac7fc, *(int*) g_77255c);
@@ -272,14 +272,14 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 						}
 					}
 					if (sum == 0) {
-						fcn_00526120((char*) g_14abc44, 0);
+						d2_ShowModalMessageBox((char*) g_14abc44, 0);
 					}
 					else {
 						d3snd_PlayWorkerOrderVoice();
 						sv_ClearObjectSelection();
 						if (sum > 3) {
 							io_FormatTextBuffer(buf, 0x1a4a, 3);
-							fcn_00526120(buf, 0);
+							d2_ShowModalMessageBox(buf, 0);
 						}
 						i = 3;
 					}
@@ -312,7 +312,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 				}
 			}
 		}
-		if (main_RunFrameLoop((void*) fcn_005c79a0, 0x677c7) == 0) {
+		if (main_RunFrameLoop((void*) d2_RunWorkerTrainingDialog, 0x677c7) == 0) {
 			d2_RestoreHudAfterDialog();
 			d2_DestroyForm(dlg);
 			d3_EndCameraAndUiMode();

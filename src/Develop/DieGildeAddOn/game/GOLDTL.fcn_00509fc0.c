@@ -62,7 +62,7 @@ void __cdecl cm_SendSetGebBesitzer(int, int, int);
 float __cdecl gm_RandomQuadratic(void);
 
 /* ADDRESS: GOLDTL 0x00509fc0 */
-void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* reportText, int a2)
+void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* reportText, int resetAttributes)
 {
 	char buf[0x800];
 	Packet pkt;
@@ -160,7 +160,7 @@ void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* repor
 		p = gm_NextEntityQueryMatch();
 	}
 	cm_RequestMoveCredits(*(int*) (subjectRecord + 2), -1, g_773d75, fcn_0050b750(0x5dc, g_773d75));
-	if (a2 != 0) {
+	if (resetAttributes != 0) {
 		i = 100;
 		ui_f08 = 0x10;
 		ui_f14 = 3;

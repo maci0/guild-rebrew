@@ -13,7 +13,7 @@ void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl d2_SetForm(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00545670 */
-int __cdecl fcn_00545670(char* e, short a2, short a3, int a4, int a5)
+int __cdecl d2_CreateActionPopupSlot(char* e, short a2, short a3, int a4, int a5)
 {
 	int a;
 	int i;

@@ -3,7 +3,7 @@
 extern GOLD_GUI_WINDOW g_00f8f120[];
 extern int g_00f8f08c;
 extern int g_00f8f088;
-void __cdecl fcn_0046cd90(int, int, int);
+void __cdecl d2_MoveElement(int, int, int);
 
 /* ADDRESS: GOLD 0x004756a0 */
 void __cdecl d2_CenterWindowAxes(int index, unsigned char flags)
@@ -20,5 +20,5 @@ void __cdecl d2_CenterWindowAxes(int index, unsigned char flags)
         y = g_00f8f088 - window->height / 2;
     else
         y = window->y;
-    fcn_0046cd90(x, y, window->id);
+    d2_MoveElement(x, y, window->id);
 }

@@ -1,6 +1,6 @@
 
 
-typedef struct Surf004799d0 {
+typedef struct D2_PIXEL_SURFACE {
 	char pad0[0x10];
 	int pitch;
 	unsigned char bpp;
@@ -11,12 +11,12 @@ typedef struct Surf004799d0 {
 	int y0;
 	int x1;
 	int y1;
-} Surf004799d0;
+} D2_PIXEL_SURFACE;
 // SIZE 0x3c
 
 int __cdecl d3_PackSurfaceRgb(unsigned char r, unsigned char g, unsigned char b);
 
-int __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g, unsigned char b, Surf004799d0* s)
+int __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g, unsigned char b, D2_PIXEL_SURFACE* s)
 {
 	int c;
 	unsigned char n;

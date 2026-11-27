@@ -26,7 +26,7 @@ void __cdecl cm_RequestReduceLifespan(int, int, int);
 char* __cdecl gm_GetEquippedCombatGear(char*);
 int __cdecl gm_GetEntityControlMask(int, char*);
 unsigned char __cdecl d3_SetSubtreeVisible(int, unsigned char);
-void __cdecl fcn_0043a3f0(char*, char*, V43a3f0);
+void __cdecl d3_ChangeObjectTransparency(char*, char*, V43a3f0);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 float __cdecl gm_CalcEntityFlatDistance(char*, char*);
 char* __cdecl gm_FindEntitySlot(char*);
@@ -106,7 +106,7 @@ void __cdecl cut_UpdateCombatEffects(void)
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 				*(unsigned char*) (e34 + 0x215) &= 0x7f;
 				e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-				fcn_0043a3f0(e34, *(char**) (e34 + 0x1cc), c);
+				d3_ChangeObjectTransparency(e34, *(char**) (e34 + 0x1cc), c);
 			} else {
 				best = 999999.0f;
 				for (q = ch_ContextCharacters; (int) q < (int) &ch_ContextCharacters[32]; q++) {
@@ -140,7 +140,7 @@ void __cdecl cut_UpdateCombatEffects(void)
 					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
 					*(unsigned char*) (e34 + 0x215) &= 0x7f;
 					e34 = *(char**) (*(char**) (e + 0x184) + 0x34);
-					fcn_0043a3f0(e34, *(char**) (e34 + 0x1cc), c);
+					d3_ChangeObjectTransparency(e34, *(char**) (e34 + 0x1cc), c);
 				} else {
 					goto other_effect;
 				}

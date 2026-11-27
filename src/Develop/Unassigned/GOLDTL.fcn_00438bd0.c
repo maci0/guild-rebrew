@@ -5,7 +5,7 @@ void __cdecl d3_TraverseSceneObjects(int list, char* p, int mask, void(__cdecl* 
 void __cdecl d3_ClearAuxSlotState(void);
 
 /* ADDRESS: GOLDTL 0x00438bd0 */
-void __cdecl fcn_00438bd0(char* p, int* v)
+void __cdecl d3_SetNodeScale(char* p, int* v)
 {
 	d3_InvalidateSubTreeFlags(p, 1);
 	d3_TraverseSceneObjects(g_67a370, p, 0xc0, d3_ClearAuxSlotState);

@@ -26,7 +26,7 @@ void __cdecl amt_HandleOfficeAction(char*, Req*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
-void __cdecl fcn_005aaae0(int a1)
+void __cdecl d2_RunOfficeFeudDialog(int a1)
 {
 	Req s;
 	int dlg;
@@ -58,6 +58,6 @@ void __cdecl fcn_005aaae0(int a1)
 		} else if (g_100f1dc == 1) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005aaae0, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunOfficeFeudDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);
 }

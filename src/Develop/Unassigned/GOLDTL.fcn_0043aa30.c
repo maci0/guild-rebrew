@@ -11,7 +11,7 @@ void __cdecl d3_RebuildFloorMeshes(int);
 void __cdecl fcn_0043f6a0(int);
 void __cdecl d3sm_Rebuild(int, int);
 
-char __cdecl fcn_0043aa30(int flags)
+char __cdecl d3_InitUniverse(int flags)
 {
 	char buf[0x100];
 

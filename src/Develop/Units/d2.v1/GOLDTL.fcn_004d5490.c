@@ -44,12 +44,12 @@ extern unsigned char g_773d75;
 Group* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_0046f940(int, char*);
+void __cdecl d2_SetLabelText(int, char*);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 Item* __cdecl gm_NextEntityQueryMatch(void);
 
-int __cdecl fcn_004d5490(int x, int y, int mode)
+int __cdecl d2_DrawPartyStoreItems(int x, int y, int mode)
 {
 	int n;
 	int total;
@@ -85,13 +85,13 @@ int __cdecl fcn_004d5490(int x, int y, int mode)
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].value_06c) = 1;
 			sprintf(text, "%i ", e->count);
 			strcat(text, g_14b52c0);
-			fcn_0046f940(lbl, text);
+			d2_SetLabelText(lbl, text);
 			lbl = d2_ShowTxt(tx, py + 0x34, &(*(char*)g_6b5c60), d2_CurrentWindowId);
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].font) = 0x56;
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].width) = 0x50;
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].value_06c) = 1;
 			io_FormatTextBuffer(text, "%T", (int) gm_GetSeasonPrice(e->id, g_773d75) * e->count);
-			fcn_0046f940(lbl, text);
+			d2_SetLabelText(lbl, text);
 			total = (int)(gm_GetSeasonPrice(e->id, g_773d75) * e->count + total);
 			n++;
 		}

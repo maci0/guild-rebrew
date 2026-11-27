@@ -7,7 +7,7 @@ extern float g_6628a8;
 extern float g_1042a10;
 
 /* ADDRESS: GOLDTL 0x004382e0 */
-int __cdecl fcn_004382e0(char* obj)
+int __cdecl d3_SelectObjectLod(char* obj)
 {
 	float dx;
 	float dy;

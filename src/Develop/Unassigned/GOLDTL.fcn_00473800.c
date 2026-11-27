@@ -48,7 +48,7 @@ void __cdecl d2_DrawAnimationSlot(int, Ctx*);
 void __cdecl d2_SelectFont(int);
 int __cdecl d2_GetResourceData(int);
 int __cdecl d2_DrawScaledSpriteQuad(int, int, Ctx*, int, int, float, int);
-void __cdecl fcn_0046bd20(int, int, int, int, Ctx*, char*, int);
+void __cdecl d2_DrawWordWrappedText(int, int, int, int, Ctx*, char*, int);
 
 
 /* ADDRESS: GOLDTL 0x00473800 */
@@ -105,7 +105,7 @@ void __cdecl d2_DrawCursorAndCounters(Ctx* c, int x, int y)
 				} else {
 					sprintf(buf, "%i", v);
 				}
-				fcn_0046bd20(px - 8, py + 0x18, 0x28, d2_FontHeight, c, buf, 8);
+				d2_DrawWordWrappedText(px - 8, py + 0x18, 0x28, d2_FontHeight, c, buf, 8);
 			}
 			k++;
 		}

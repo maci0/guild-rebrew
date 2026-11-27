@@ -17,7 +17,7 @@ extern struct ref_fb5761 g_fb5761[0x8000];
 
 void __cdecl d3_SelectSceneContext(int, int);
 
-void __cdecl fcn_0051e9d0(void)
+void __cdecl ls_PrepareSavedSceneRefs(void)
 {
 	int save;
 	int i;

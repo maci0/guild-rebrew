@@ -54,12 +54,12 @@ extern float g_1040cc0[16];
 
 Mesh_451f80* __cdecl d3_GetObjectMesh(char* o, float* r);
 void __cdecl d3_UpdateObjectCameraTransform(char* e, char* cam, int force);
-unsigned char __cdecl fcn_00438270(char* e, char* o, char* world);
+unsigned char __cdecl d3_TestObjectFrustum(char* e, char* o, char* world);
 void* __cdecl m_PoolAlloc(int* pool, int size, int grow);
 void __stdcall fcn_005eb970(void* out, void* a, void* b);
 void __stdcall fcn_005ec410(Mat_451f80* out, float x, float y, float z);
 void __cdecl d3_SelectActiveObjectLights(float a, float b, char* c, Mat_451f80* d, Mat_451f80* e);
-void __cdecl fcn_004372d0(unsigned char a, unsigned char b, int c, unsigned char d, unsigned char e);
+void __cdecl d3_SetRenderMaterialState(unsigned char a, unsigned char b, int c, unsigned char d, unsigned char e);
 
 char __cdecl fcn_00451f80(char* e, void* parent)
 {
@@ -87,7 +87,7 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 		fcn_005ec410(&t, -*(float*) (d3_ActiveCamera + 0x4c), -*(float*) (d3_ActiveCamera + 0x50), -*(float*) (d3_ActiveCamera + 0x54));
 		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 0x15fc, &t);
 		fcn_005eb970(*(char**) (e + 0x1ec) + 0x15fc, *(char**) (e + 0x1ec) + 0x15fc, d3_ActiveCamera + 0x18c);
-		if (!(fcn_00438270(e, o, *(char**) (e + 0x1ec) + 0x15fc) & 0x40)) {
+		if (!(d3_TestObjectFrustum(e, o, *(char**) (e + 0x1ec) + 0x15fc) & 0x40)) {
 			detail = *(char**) (o + 0x318);
 			f += *(float*) (detail + 0x1dc);
 			g = *(float*) (*(char**) (e + 0x1ec) + 0x15f8);
@@ -122,7 +122,7 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 						set = 1;
 					}
 					((Texture451f80Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])((D3D_DEVICE_VIEW*)g_6b5de0, 0, *(int*) (mat + 0x50));
-					fcn_004372d0(mat[0x58], ((mat[0x54] & 1) << 1) | (mat[0x5a] & 1), *(int*) (mat + 0x6c), (mat[0x5a] >> 1) & 1, (mat[0x54] >> 3) & 1);
+					d3_SetRenderMaterialState(mat[0x58], ((mat[0x54] & 1) << 1) | (mat[0x5a] & 1), *(int*) (mat + 0x6c), (mat[0x5a] >> 1) & 1, (mat[0x54] >> 3) & 1);
 					mesh->vtbl->DrawSubset(mesh, i);
 				}
 			}

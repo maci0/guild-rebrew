@@ -46,7 +46,7 @@ extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void* __cdecl cut_FindCutscene(int, int);
 extern int __cdecl gm_RandomMod(unsigned short);
 extern void __cdecl gm_EquipDuelist(char*, unsigned char);
-extern int __cdecl fcn_004c5980(void*);
+extern int __cdecl cm_EnqueueStagedPacket(void*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x0056b700 */
 void __cdecl he_RunUeberfall(char* obj)
@@ -290,7 +290,7 @@ label_56b858:
 				memcpy(buf.msg + 0xc0, obj + 0x8c, 0x20);
 				*(pos14_7f4c00*) (buf.msg + 0x18) = gm_GameTime;
 				gm_AddTime((pos14_7f4c00*) (buf.msg + 0x18), 0xf, 0, 0);
-				*(int*) (obj + 0xdc) = fcn_004c5980(buf.msg);
+				*(int*) (obj + 0xdc) = cm_EnqueueStagedPacket(buf.msg);
 				*(pos14_7f4c00*) (obj + 0x52) = gm_GameTime;
 				*(int*) (obj + 0x70) = 2;
 				return;

@@ -20,7 +20,7 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00472380(int, char*);
+int __cdecl d2_CreateGuiWindow(int, char*);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00476b60(void);
 void __cdecl d2_DestroyForm(int);
@@ -89,8 +89,8 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 	*(unsigned int*) (d2_BildArgument2 + ((D2_CONTROL_TL*) g_1015ea0)[w3].value_088 * 0x160) = 0xc;
 	*(unsigned int*) (d2_BildArgument2 + ((D2_CONTROL_TL*) g_1015ea0)[w4].value_088 * 0x160) = 0xc;
 	if (g_7e23ea[0]) {
-		fcn_00472380(w3, g_7e23ea);
-		fcn_00472380(w4, g_7e240a);
+		d2_CreateGuiWindow(w3, g_7e23ea);
+		d2_CreateGuiWindow(w4, g_7e240a);
 		for (i = 0; i < 8; i++) {
 			if (((D2_CONTROL_TL*) g_1015ea0)[items[i]].value_008 == g_7e23e4) {
 				sel = items[i];

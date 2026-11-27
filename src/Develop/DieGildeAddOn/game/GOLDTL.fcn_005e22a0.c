@@ -55,7 +55,7 @@ void __cdecl ch_SetLowPolyMode(unsigned char);
 void __cdecl d3_SetCameraHeightFraction(int);
 void __cdecl fcn_0043bbf0(unsigned char);
 void __cdecl d3_ReleaseUnusedSceneObjects(void);
-void __cdecl fcn_0043ace0(int);
+void __cdecl d3_SetHighlightMode(int);
 void __cdecl d3_SetGammaParams(float*, float*, float*);
 
 void __cdecl d3_ApplyGraphicsOptions(void)
@@ -96,10 +96,10 @@ void __cdecl d3_ApplyGraphicsOptions(void)
 		saved = d3_CurrentContextIndex;
 		d3_LODMode = depth;
 		d3_SelectSceneContext(0, 0);
-		fcn_0043ac00(0x40, 3, 0);
+		d3_ReloadSceneResources(0x40, 3, 0);
 		d3_SelectSceneContext(saved, 0);
 	}
-	fcn_00439690(g_776668, 0, 2 - g_776665, hi * width, 0);
+	d3_ConfigureSceneRenderQuality(g_776668, 0, 2 - g_776665, hi * width, 0);
 	if ((*(int*)&g_7746c4) == 0 && (*(int*)&g_7746c8) == 0) {
 		g_67a964 = (float) (1.0 - (g_77666c & 0xff) * 0.01);
 	}
@@ -121,9 +121,9 @@ void __cdecl d3_ApplyGraphicsOptions(void)
 	d3_SelectSceneContext(0, 1);
 	d3_ReleaseUnusedSceneObjects();
 	if ((*(unsigned char*)&g_776664) == 0) {
-		fcn_0043ace0(0);
+		d3_SetHighlightMode(0);
 	} else {
-		fcn_0043ace0(1);
+		d3_SetHighlightMode(1);
 	}
 	d3_SelectSceneContext(saved, 1);
 	s = (g_77667c + 0.5f) * 0.5f;

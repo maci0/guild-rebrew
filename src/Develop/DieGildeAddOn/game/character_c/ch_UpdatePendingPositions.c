@@ -55,7 +55,7 @@ extern char g_6b5c60[];
 D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
-void __cdecl fcn_00404b60(char*, int, ...);
+void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);
 
 #include <stdarg.h>
 #include "../ch_queue.h"

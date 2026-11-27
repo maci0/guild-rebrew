@@ -26,7 +26,7 @@ int __cdecl d3_ScanMapRowMinMax(GOLDTL_TileMap* m, int* lo, int* hi, int x0, int
 	int y);
 
 /* ADDRESS: GOLDTL 0x00413870 */
-int __cdecl fcn_00413870(void* obj, void* a, void* b, void* c, void* d,
+int __cdecl d3_ComputeTriangleHeightRange(void* obj, void* a, void* b, void* c, void* d,
 	void* e)
 {
 	GOLDTL_TileMap* map;

@@ -21,7 +21,7 @@ int __cdecl d2_CreateRentAGraveDialog(View* view, char* text);
 void __cdecl d2_RunRentAGraveMenu(unsigned char* a1, View* view);
 void __cdecl d2_DestroyForm(int a);
 void __cdecl d2_OpenRentAGraveDialog(unsigned char* a1);
-int __cdecl fcn_00526120(int a, int b);
+int __cdecl d2_ShowModalMessageBox(int a, int b);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x0058fa40 */
@@ -55,5 +55,5 @@ void __cdecl d2_RunGraveyardDialog(unsigned char* input)
 		d3_EndCameraAndUiMode();
 		return;
 	}
-	fcn_00526120(*(int*) 0x14b5f00, 0);
+	d2_ShowModalMessageBox(*(int*) 0x14b5f00, 0);
 }

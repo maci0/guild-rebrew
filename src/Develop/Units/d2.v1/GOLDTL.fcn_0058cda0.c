@@ -34,7 +34,7 @@ int __cdecl gv_RequestRentGrave(ENTITY_RECORD*, char*, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_ConfirmRentAGrave(char* who, int k)
@@ -85,7 +85,7 @@ int __cdecl d2_ConfirmRentAGrave(char* who, int k)
 					if (cm_GetCommandStatus(id) == 2) {
 						io_FormatTextBuffer(buf, 0x411b, (*(unsigned short*) (who + 0x27) == g_774970) + 0x4108,
 						    g_665f78[k]);
-						fcn_00526120(buf, 0x100);
+						d2_ShowModalMessageBox(buf, 0x100);
 					} else {
 						g_774654 = 1;
 						r = 1;

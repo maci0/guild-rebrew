@@ -12,13 +12,13 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_005c9090(int, int, int, int, int);
+void __cdecl d2_ShowCenteredText(int, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl amt_HasOccupiedOfficeType7(void);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
-int __cdecl fcn_005cadc0(int, char*, char*, int, void*);
+int __cdecl d2_RunOfficeListDialog(int, char*, char*, int, void*);
 int __cdecl d2_ShowTabbedSelectionDialog(char*, char*, int, void*);
 
 /* ADDRESS: GOLDTL 0x005cd440 */
@@ -71,7 +71,7 @@ int __cdecl d2_OpenTargetPicker(char* query, int titleTextId, int unused, void* 
 		}
 		e = btn[i];
 		((D2_CONTROL_TL*)g_1015ea0)[e].font = 0x55;
-		fcn_005c9090(*(int*) (0x14a9de8 + order[i] * 4),
+		d2_ShowCenteredText(*(int*) (0x14a9de8 + order[i] * 4),
 			     ((D2_CONTROL_TL*)g_1015ea0)[e].x
 				 - *(int*) (g_77255c + 4) + 0x20,
 			     ((D2_CONTROL_TL*)g_1015ea0)[e].y
@@ -97,7 +97,7 @@ int __cdecl d2_OpenTargetPicker(char* query, int titleTextId, int unused, void* 
 			}
 			if (i < 9 && i > -1) {
 				d2_SetFormVisibility(dlg, 0);
-				result = fcn_005cadc0(order[i], query, (char*) titleTextId, 0, callback);
+				result = d2_RunOfficeListDialog(order[i], query, (char*) titleTextId, 0, callback);
 				d2_SetFormVisibility(dlg, 1);
 			} else if (d2_CurrentElementId == id) {
 				d2_SetFormVisibility(dlg, 0);

@@ -17,7 +17,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -60,7 +60,7 @@ int __cdecl gm_HandleAbbitte(char* e, char* o)
 					if (d2_CheckActionBlocker(e, v) != 0) {
 						cm_RequestModifyHealth(*(int*) (e + 4), -v);
 						io_FormatTextBuffer(buf, 0x1deb, gs_ClearTargetStraftaten(*(int*) (e + 4), v));
-						fcn_00526120(buf, 0);
+						d2_ShowModalMessageBox(buf, 0);
 						r = 1;
 						g_774654 = 1;
 					}

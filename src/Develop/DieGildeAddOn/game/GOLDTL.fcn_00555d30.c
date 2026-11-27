@@ -10,7 +10,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, void*);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl gm_PickRandomGedicht(short);
-unsigned short __cdecl fcn_004ac290(int);
+unsigned short __cdecl gm_PickRandomGedichtVariant(int);
 char* __cdecl fcn_004ac1e0(short);
 char* __cdecl evt_FindScriptById(int);
 char* __cdecl evt_LoadGfxScript(char*);
@@ -53,7 +53,7 @@ void __cdecl he_RunBardeEvent(char* obj)
 		}
 		id = gm_PickRandomGedicht(*(short*) (obj + 0xac));
 		*(short*) (obj + 0xac) = id;
-		*(short*) (obj + 0xae) = fcn_004ac290(id);
+		*(short*) (obj + 0xae) = gm_PickRandomGedichtVariant(id);
 		base = (int*) (obj + 0x52);
 		*(pos14_7f4c00*) base = gm_GameTime;
 		base[0] += gm_RandomMod(4) + 3;

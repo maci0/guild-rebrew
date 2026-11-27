@@ -5,22 +5,22 @@ typedef struct {
 	float g;
 	float b;
 	float a;
-} Color451150;
+} D3_D3DLIGHT_COLOR;
 
 typedef struct {
 	float x;
 	float y;
 	float z;
-} Vec451150;
+} D3_D3DLIGHT_VEC3;
 
 // SIZE 0x68
 typedef struct {
 	unsigned int Type;
-	Color451150 Diffuse;
-	Color451150 Specular;
-	Color451150 Ambient;
-	Vec451150 Position;
-	Vec451150 Direction;
+	D3_D3DLIGHT_COLOR Diffuse;
+	D3_D3DLIGHT_COLOR Specular;
+	D3_D3DLIGHT_COLOR Ambient;
+	D3_D3DLIGHT_VEC3 Position;
+	D3_D3DLIGHT_VEC3 Direction;
 	float Range;
 	float Falloff;
 	float Attenuation0;
@@ -28,10 +28,10 @@ typedef struct {
 	float Attenuation2;
 	float Theta;
 	float Phi;
-} Light451150;
+} D3_D3DLIGHT8;
 
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
-typedef int (__stdcall* Light451150Fn)(D3D_DEVICE_VIEW*, int, Light451150*);
+typedef int (__stdcall* D3D8_SET_LIGHT_FN)(D3D_DEVICE_VIEW*, int, D3_D3DLIGHT8*);
 
 
 
@@ -56,13 +56,13 @@ extern float g_67bc14;
 extern float g_67bc1c;
 extern float g_67bc20;
 
-void __stdcall fcn_005eb225(Vec451150*, Vec451150*, float*);
-void __stdcall fcn_005eb250(Vec451150*, Vec451150*, float*);
+void __stdcall fcn_005eb225(D3_D3DLIGHT_VEC3*, D3_D3DLIGHT_VEC3*, float*);
+void __stdcall fcn_005eb250(D3_D3DLIGHT_VEC3*, D3_D3DLIGHT_VEC3*, float*);
 
 /* ADDRESS: GOLDTL 0x00451150 */
-char __cdecl fcn_00451150(int index, char* e, float scale, float* m4, float* m7)
+char __cdecl d3_SetupD3DLight(int index, char* e, float scale, float* m4, float* m7)
 {
-	Light451150 light;
+	D3_D3DLIGHT8 light;
 	float power;
 
 	light.Ambient.b = 0.0f;
@@ -108,6 +108,6 @@ char __cdecl fcn_00451150(int index, char* e, float scale, float* m4, float* m7)
 	light.Diffuse.g = power * *(float*) (e + 0x60);
 	light.Diffuse.b = power * *(float*) (e + 0x64);
 	light.Diffuse.a = 1.0f;
-	((Light451150Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[6])(((D3D_DEVICE_VIEW*)g_6b5de0), index & 0x7fffffff, &light);
+	((D3D8_SET_LIGHT_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[6])(((D3D_DEVICE_VIEW*)g_6b5de0), index & 0x7fffffff, &light);
 	return 1;
 }

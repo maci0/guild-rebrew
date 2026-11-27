@@ -32,13 +32,13 @@ void __cdecl he_DeclineDuell(char*, char*, unsigned char*);
 void __cdecl he_AcceptDuell(char*, char*, char*);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_00545670(char*, int, int, char*, int);
+int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl d2_BuildPersonStatusDesc(SEL_54f600*);
-int __cdecl fcn_005caaa0(int, int, int, SEL_54f600*);
+int __cdecl d2_DrawPersonTile(int, int, int, SEL_54f600*);
 void __cdecl cm_SendSetHE(int, void*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0054f600 */
@@ -82,7 +82,7 @@ void __cdecl fcn_0054f600(char* o)
 			he_FreeAction(o);
 			return;
 		case 0:
-			fcn_00545670(o, 0, 0, "_DUELL_INTRO_EVENT_DUELLANTEN_HS_00", 0x5ec);
+			d2_CreateActionPopupSlot(o, 0, 0, "_DUELL_INTRO_EVENT_DUELLANTEN_HS_00", 0x5ec);
 			if (*(int*) (o + 0x74) != 0) {
 				if (g_774964 != 2) {
 					sb_PlayVoice(g_7747b8, "NeueMessage_s_01", 1, 0x3f, 0x7f, 0, 0);
@@ -92,7 +92,7 @@ void __cdecl fcn_0054f600(char* o)
 				d2_SetForm(*(int*) (*(int*) (o + 0x74) + 8), 2);
 				s.e = v4;
 				if (d2_BuildPersonStatusDesc(&s) != 0) {
-					fcn_005caaa0(*(int*) (g_77255c + 0xc) / 2 - 0x28, 0, d2_CurrentWindowId, &s);
+					d2_DrawPersonTile(*(int*) (g_77255c + 0xc) / 2 - 0x28, 0, d2_CurrentWindowId, &s);
 					((D2_CONTROL_TL*) g_1015ea0)[s.tile].value_05c = 1;
 					((D2_CONTROL_TL*) g_1015ea0)[s.tile].flags_1d0 = 3;
 					((D2_CONTROL_TL*) g_1015ea0)[s.tile].associated_object = s.e;

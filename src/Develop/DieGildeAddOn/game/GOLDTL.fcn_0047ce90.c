@@ -14,7 +14,7 @@ extern int g_100e728;
 extern int g_100e72c;
 
 void __cdecl sim_SetSyncParams(void* target, int type_id, int field_6, int field_10);
-int __cdecl fcn_00494820(void);
+int __cdecl am_InitMethods(void);
 
 /* ADDRESS: GOLDTL 0x0047ce90 */
 int __cdecl ai_InitContextAndGoodsLists(void)
@@ -23,7 +23,7 @@ int __cdecl ai_InitContextAndGoodsLists(void)
 	g_100dc04 = 0;
 	sim_SetSyncParams(&g_100dc04, 6, 0, 0);
 	g_100dc14 = 0;
-	if (!fcn_00494820())
+	if (!am_InitMethods())
 		return 0;
 	g_100e774 = 0;
 	g_100e730 = 0;

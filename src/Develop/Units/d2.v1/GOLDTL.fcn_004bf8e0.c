@@ -38,7 +38,7 @@ void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl d2_ClearRoutePointSlot(int);
-void __cdecl fcn_004be360(void);
+void __cdecl d2_ResetRouteRadioGroup(void);
 Node_4bf8e0* __cdecl fcn_004be1f0(Node_4bf8e0*);
 void __cdecl d2_AddRoutePointMarker(int, char*, Node_4bf8e0*, Node_4bf8e0*);
 void __cdecl d2_SelectRadioGroup(int, int);
@@ -93,7 +93,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 				}
 			}
 			g_772900 = 0;
-			fcn_004be360();
+			d2_ResetRouteRadioGroup();
 			g_772908 = fcn_004be1f0(0);
 			g_772908->f4 = *(int*) (p + 0x1c);
 			g_772908->f0 = *(int*) (p + 2);

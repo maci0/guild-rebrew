@@ -27,7 +27,7 @@ void __cdecl d2_SetElementValue(int, ...);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl io_FormatTextBuffer(char*, int, int);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d3_EndCameraAndUiMode(void);
 /* ADDRESS: GOLDTL 0x005a02b0 */
 int __cdecl fcn_005a02b0(void)
@@ -99,7 +99,7 @@ int __cdecl fcn_005a02b0(void)
 			if (mode == 2) {
 				if (*(int*) (slot + 0x194) < 4) {
 					io_FormatTextBuffer(text, 0x74, 4);
-					fcn_00526120(text, 4);
+					d2_ShowModalMessageBox(text, 4);
 				}
 				else {
 					gm_ModifyHealth(*(int*) (slot + 4), -4);

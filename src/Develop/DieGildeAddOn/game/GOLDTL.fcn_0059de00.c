@@ -33,8 +33,8 @@ void __cdecl d3_UpdateBuildingInteriorState(void);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl fcn_005c5b10(char*);
 void __cdecl d2_OpenTransportPanel(char*);
-void __cdecl fcn_005c72f0(char*);
-void __cdecl fcn_005c79a0(char*);
+void __cdecl d2_RunEquipmentDialog(char*);
+void __cdecl d2_RunWorkerTrainingDialog(char*);
 void __cdecl d2_OpenUeberfallDialog(char*);
 void __cdecl d2_SelectPickpocketTarget(char*);
 void __cdecl d2_SelectSchutzgeldTarget(char*);
@@ -103,10 +103,10 @@ void __cdecl d2_RunRaeuberInteriorHud(char* e)
 					d2_OpenTransportPanel(e);
 				}
 				else if (g_7746a0 == a) {
-					fcn_005c72f0(e);
+					d2_RunEquipmentDialog(e);
 				}
 				else if (g_7746a0 == f || g_7746a0 == d || g_7746a0 == g) {
-					fcn_005c79a0(e);
+					d2_RunWorkerTrainingDialog(e);
 				}
 				else if (g_7746a0 == b) {
 					d2_OpenUeberfallDialog(e);

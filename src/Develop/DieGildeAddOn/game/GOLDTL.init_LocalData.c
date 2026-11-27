@@ -23,10 +23,10 @@ extern char* gm_RichterEvangelisch;
 extern char* g_773db4[];
 
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_005016c0(void);
-void __cdecl fcn_005016f0(int);
+void __cdecl gm_UpdateAllTownSeasonPrices(void);
+void __cdecl gm_InitTownGoodsTable(int);
 #include "Develop/Units/Error/error_message.h"
-void __cdecl fcn_00515010(void);
+void __cdecl init_AssignBuildingNames(void);
 void __cdecl gm_ResetWarehouseStock(void);
 
 void __cdecl init_LocalData(void)
@@ -37,12 +37,12 @@ void __cdecl init_LocalData(void)
 
 	d3_SelectSceneContext(0, 0);
 	if ((g_7747b0 & 0x40) == 0) {
-		fcn_005016c0();
+		gm_UpdateAllTownSeasonPrices();
 		for (i = 0; i < 4; i++) {
 			if (((Variant*)g_868060)[i].name[0] == 0) {
 				break;
 			}
-			fcn_005016f0(i);
+			gm_InitTownGoodsTable(i);
 		}
 	}
 	n = 2;
@@ -73,7 +73,7 @@ void __cdecl init_LocalData(void)
 		ReportClientMessage("init_LocalData(): gm_RichterEvangelisch==NULL");
 	}
 	if ((g_7747b0 & 0x44) == 0) {
-		fcn_00515010();
+		init_AssignBuildingNames();
 	}
 	gm_ResetWarehouseStock();
 }

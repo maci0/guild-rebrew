@@ -51,7 +51,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
 void __cdecl d2_DestroyForm(int);
 int* __cdecl fcn_004b3d80(int a, int b, int c);
-void __cdecl fcn_004b5530(int a1, int flags);
+void __cdecl d2_ShowMissionSpecDialog(int a1, int flags);
 void __cdecl main_ExitToGameLoop(int flags);
 
 /* ADDRESS: GOLDTL 0x004b5df0 */
@@ -136,7 +136,7 @@ void __cdecl d2_RunMissionDialog(int flags)
 		while (cm_GetCommandStatus(h) == 0) {
 			cm_StepCommandQueue();
 		}
-		fcn_004b5530(*p, flags);
+		d2_ShowMissionSpecDialog(*p, flags);
 		return;
 	}
 	if (cancel) {

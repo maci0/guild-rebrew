@@ -967,7 +967,7 @@ extern char* gm_RichterKatholisch;
 extern char* gm_RichterEvangelisch;
 
 void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
-void __cdecl fcn_004c5980(Msg*);
+void __cdecl cm_EnqueueStagedPacket(Msg*);
 
 /* In this file for the same reason as fcn_004af2f0: with the bodies of
  * fcn_004ae130/1c0/210 in view, c2 keeps the zero in edx across the first
@@ -1046,7 +1046,7 @@ int __cdecl hst_HandleStrafeHinrichtung(int* pairs, int idx, char* text)
 		msg.when = (*(GAME_TIMESTAMP*)&gm_GameTime);
 		gm_AddTime(&msg.when, 0x18, 0, 0);
 		msg.when.hour = 0xa;
-		fcn_004c5980(&msg);
+		cm_EnqueueStagedPacket(&msg);
 	}
 	return 1;
 }

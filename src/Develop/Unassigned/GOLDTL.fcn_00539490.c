@@ -39,7 +39,7 @@ int __cdecl d2_ChoosePlayerCount(void);
 void __cdecl d2_ClearBackdropResource(void);
 int __cdecl d2_RunChooseCityDialog(int, int);
 int __cdecl sprintf(char*, const char*, ...);
-void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
+void __cdecl d3_SetViewport(float, float, float, float, int, int, int, int, int);
 void __cdecl d2_ClearSurface(int);
 void __cdecl d2_SetBackdropResource(int);
 
@@ -59,7 +59,7 @@ int __cdecl fcn_00539490(void)
 			strcpy(g_7e2520.name, g_7e1d00);
 			g_9baa70.info = g_7e2520;
 			g_9baa70.x = 0x3f;
-			fcn_00438da0((float) (g_6a376c - g_6a3764), (float) (g_6a3770 - g_6a3768), (float) g_6a3764,
+			d3_SetViewport((float) (g_6a376c - g_6a3764), (float) (g_6a3770 - g_6a3768), (float) g_6a3764,
 			    (float) g_6a3768, (*(int*)&g_10529c8), (*(int*)&g_10421a0), (*(int*)&g_10432a4), g_1040494, d2_ScreenHeight);
 			return 1;
 		}

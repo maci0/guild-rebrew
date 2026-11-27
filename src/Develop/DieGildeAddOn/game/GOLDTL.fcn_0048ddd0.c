@@ -11,7 +11,7 @@
 
 
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
+int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl amt_GetRoleLevel(int k);
 int __cdecl gm_SumQueryEntryValues(int a, char b);
 int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
@@ -30,7 +30,7 @@ int __cdecl ai_SetupSecretRoomMode2(char* actor, char* thresholdOut, char* resul
 	mask = 0xf00500;
 	{
 		int idx;
-		if (fcn_004a5340(actor, 1, &mask, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0) {
+		if (ai_SelectRankedCandidates(actor, 1, &mask, 0, gm_RandomMod(0x20) + 32.0f, &idx) == 0) {
 			return 0;
 		}
 		target = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);

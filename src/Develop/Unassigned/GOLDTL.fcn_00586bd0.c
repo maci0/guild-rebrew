@@ -8,7 +8,7 @@ extern char g_77dda0[];
 extern int g_774a1c;
 
 /* ADDRESS: GOLDTL 0x00586bd0 */
-int __cdecl fcn_00586bd0(struct DATENSATZ_KOPIE* datensatz)
+int __cdecl d2_OnKanoneSlotUpdate(struct DATENSATZ_KOPIE* datensatz)
 {
 	if (datensatz == 0) {
 		return 0;

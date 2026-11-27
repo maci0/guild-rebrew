@@ -30,7 +30,7 @@ char g_67a2ac = 1;
 
 void __cdecl d3_SetScaledMaterial(float a, char* b, int c, char d);
 
-void __cdecl fcn_004372d0(unsigned char alpha, unsigned char flags, int color, unsigned char test, unsigned char cull)
+void __cdecl d3_SetRenderMaterialState(unsigned char alpha, unsigned char flags, int color, unsigned char test, unsigned char cull)
 {
 	float f;
 	unsigned char b;

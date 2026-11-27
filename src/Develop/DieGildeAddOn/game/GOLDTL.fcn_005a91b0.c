@@ -14,8 +14,8 @@ int __cdecl d2_IsTutorialActionAllowed(int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowTaxStatistics(void);
 void __cdecl d2_OpenRathausGebInfo(void);
-void __cdecl fcn_005ce0f0(void);
-void __cdecl fcn_005cde30(void);
+void __cdecl d2_OpenTagesordnungDialog(void);
+void __cdecl d2_RunAmtCandidatesMenu(void);
 
 void __cdecl d2_RunRathausMenu(void)
 {
@@ -47,9 +47,9 @@ void __cdecl d2_RunRathausMenu(void)
 			if (g_7746a0 == kauf) {
 				d2_OpenRathausGebInfo();
 			} else if (g_7746a0 == tages) {
-				fcn_005ce0f0();
+				d2_OpenTagesordnungDialog();
 			} else if (g_7746a0 == amt) {
-				fcn_005cde30();
+				d2_RunAmtCandidatesMenu();
 			}
 		}
 	}

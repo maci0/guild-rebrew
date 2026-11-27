@@ -43,7 +43,7 @@ void __cdecl d2_DestroyForm(int);
 char* __cdecl d2_GetControlValue(int);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472380(int, ...);
+void __cdecl d2_CreateGuiWindow(int, ...);
 void __cdecl d2_SetBildArgument(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00476b60(void);
@@ -130,8 +130,8 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	}
 	d2_SetForm(dlg, 6);
 	v27 = d2_GetWindowListItem(dlg, 6, io_AppendText(0x7e));
-	fcn_00472380(firstNameField, g_7e23ea);
-	fcn_00472380(surnameField, g_7e240a);
+	d2_CreateGuiWindow(firstNameField, g_7e23ea);
+	d2_CreateGuiWindow(surnameField, g_7e240a);
 	for (j = 0; j < 8; j++) {
 		if (((D2_CONTROL_TL*)g_1015ea0)[sel[j]].value_008 == g_7e23e4) {
 			d2_SelectRadioGroup(list, j);

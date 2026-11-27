@@ -34,7 +34,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6aaebc[];
 
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_RunAmtsbewerbungDialog(ENTITY_RECORD*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl amt_RankAvailableOffices(ENTITY_RECORD*, int, Ent*, int*);
@@ -67,7 +67,7 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 	flag = 1;
 	p = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]);
 	if (p->unk_00d < 2) {
-		fcn_00526120(g_14abb2c, 0);
+		d2_ShowModalMessageBox(g_14abb2c, 0);
 		return;
 	}
 	if (p->unk_165[3] != 0) {
@@ -77,10 +77,10 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 	}
 	if (amt_RankAvailableOffices(p, 6, list, &cnt) == 0) {
 		if (cnt == 0) {
-			fcn_00526120(g_14abb28, 0);
+			d2_ShowModalMessageBox(g_14abb28, 0);
 		}
 		else {
-			fcn_00526120(g_14abb38, 0);
+			d2_ShowModalMessageBox(g_14abb38, 0);
 		}
 		return;
 	}
@@ -119,7 +119,7 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 			}
 			if (sel > -1 && sel < n) {
 				if (d2_RunAmtsbewerbungDialog(p, list[sel].x0) == 1) {
-					fcn_00526120(g_14abb54, 0);
+					d2_ShowModalMessageBox(g_14abb54, 0);
 					g_774654 = 1;
 				}
 			}

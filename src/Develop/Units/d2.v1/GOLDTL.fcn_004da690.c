@@ -25,8 +25,8 @@ int __cdecl cut_WaitForScript(int);
 int __cdecl amt_IsCandidateInOffice(int, char *);
 int __cdecl fcn_004727a0(int, int);
 int __cdecl d2_BuildPersonStatusDesc(void *);
-int __cdecl fcn_005ca740(int, int, int, int, int *, int);
-void __cdecl fcn_004da510(int, int, int);
+int __cdecl d2_DrawPersonCard(int, int, int, int, int *, int);
+void __cdecl d2_UpdateVoteTallyIcons(int, int, int);
 int __cdecl d3snd_QueueSoundIfAllowed(int, ...);
 int __cdecl io_AppendText(char *, ...);
 unsigned int __cdecl cut_RandMod(unsigned int, ...);
@@ -45,7 +45,7 @@ void __cdecl fcn_004da4d0(int, void *);
 
 
 int __cdecl amt_SyncAllOfficeSlots(void);
-int __cdecl fcn_004e4b00(int);
+int __cdecl cut_UnloadSampleBank(int);
 void __cdecl msx_StopAmbientTrack(int);
 int __cdecl fcn_004e4eb0(void);
 void __cdecl fcn_0057e880(int, int, int, int);
@@ -319,10 +319,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 *(int *)((char *)&mid + 0x4c) = 0;
                 *(int *)((char *)&mid + 0x68) = 0;
                 d2_BuildPersonStatusDesc((char *)&mid + 0x38);
-                fcn_005ca740(0x28, 0, *(int *)0x772514, 0x54,
+                d2_DrawPersonCard(0x28, 0, *(int *)0x772514, 0x54,
                              (int *)((char *)&mid + 0x38), 1);
                 fcn_004727a0(s60, 2);
-                fcn_004da510(*(int *)0x772514, 1, 0);
+                d2_UpdateVoteTallyIcons(*(int *)0x772514, 1, 0);
                 d3snd_QueueSoundIfAllowed(-8, s34, 0x68c0f0, s20 - 1, 0x32);
                 d2_SetFormVisibility((int)a0, 1);
                 fcn_004727a0((int)a0, 0);
@@ -346,7 +346,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             lane[5] = 0;
                             lane[12] = 0;
                             d2_BuildPersonStatusDesc((char *)lane);
-                            fcn_005ca740(*(short *)(g_772500 + 0x1ebd8) * i + acc, 0,
+                            d2_DrawPersonCard(*(short *)(g_772500 + 0x1ebd8) * i + acc, 0,
                                          *(int *)0x772514, 0x54, lane, 0);
                             acc += s08;
                             i += 1;
@@ -388,7 +388,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                 else if (*(int *)(s80 + 4) == 2)
                                     io_AppendText((char *)((int)cut_RandMod(2, *(unsigned short *)s18) + 0x12cf));
                                 fcn_004727a0(s60, 2);
-                                fcn_004da510(*(int *)0x772514, 0, 0);
+                                d2_UpdateVoteTallyIcons(*(int *)0x772514, 0, 0);
                                 break;
                             case 1:
                                 d3snd_QueueSoundIfAllowed(*(unsigned short *)s58, s34, 0x68c0d0,
@@ -400,14 +400,14 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                 else if (*(int *)(s80 + 4) == 2)
                                     io_AppendText((char *)((int)cut_RandMod(2, *(unsigned short *)s10) + 0x12d1));
                                 fcn_004727a0(s60, 2);
-                                fcn_004da510(*(int *)0x772514, 0, 1);
+                                d2_UpdateVoteTallyIcons(*(int *)0x772514, 0, 1);
                                 break;
                             default:
                                 d3snd_QueueSoundIfAllowed(*(unsigned short *)s58, s34, 0x68c0b8,
                                              (int)cut_RandMod(4), 0x64);
                                 io_AppendText((char *)0x12c9);
                                 fcn_004727a0(s60, 2);
-                                fcn_004da510(*(int *)0x772514, 0, 2);
+                                d2_UpdateVoteTallyIcons(*(int *)0x772514, 0, 2);
                                 break;
                             }
                             cut_WaitSeconds(0xfa0);
@@ -568,7 +568,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         lane[11] = 0;
                         lane[12] = 0;
                         d2_BuildPersonStatusDesc((char *)lane);
-                        fcn_005ca740((0xa0 - *(short *)(g_772500 + 0x1ebd8)) / 2,
+                        d2_DrawPersonCard((0xa0 - *(short *)(g_772500 + 0x1ebd8)) / 2,
                                      0, *(int *)0x772514, 0x54,
                                      lane, 1);
                         blkA.s98[i] = *(int *)(s80 + 4);
@@ -617,7 +617,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                     *(int *)((char *)&mid + 0x3bc + i * 0x38) = 0;
                                     *(int *)((char *)&mid + 0x3d8 + i * 0x38) = 0;
                                     d2_BuildPersonStatusDesc((char *)&mid + 0x3a8 + i * 0x38);
-                                    fcn_005ca740(*(short *)(g_772500 + 0x1ebd8) * i + acc,
+                                    d2_DrawPersonCard(*(short *)(g_772500 + 0x1ebd8) * i + acc,
                                                  0, *(int *)0x772514, 0x54,
                                                  (int *)((char *)&mid + 0x3a8 + i * 0x38), 0);
                                     acc += s08;
@@ -816,8 +816,8 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     /* native 0x4dc199..0x4dc221: epilogue */
     if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)g_774970 * 0x21c))
         amt_SyncAllOfficeSlots();
-    fcn_004e4b00(s34);
-    fcn_004e4b00(s38);
+    cut_UnloadSampleBank(s34);
+    cut_UnloadSampleBank(s38);
     if (s2C != 0)
         msx_StopAmbientTrack(s2C);
     fcn_004e4eb0();

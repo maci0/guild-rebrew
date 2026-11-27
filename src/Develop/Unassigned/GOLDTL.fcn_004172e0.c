@@ -11,7 +11,7 @@ extern double g_662ad0;
 
 int __cdecl rand(void);
 
-typedef struct fcn_004172e0_Particle {
+typedef struct LENS_FLARE_PARTICLE {
     float f00;
     float f04;
     float f08;
@@ -36,24 +36,24 @@ typedef struct fcn_004172e0_Particle {
     char pad50;
     char flags;
     char pad52[2];
-} fcn_004172e0_Particle; /* SIZE 0x54 */
+} LENS_FLARE_PARTICLE; /* SIZE 0x54 */
 
-typedef struct fcn_004172e0_Emitter {
+typedef struct LENS_FLARE_EMITTER {
     float f00;
     float f04;
     float f08;
     char pad0c[0x14];
     int f20;
     char pad24[4];
-    fcn_004172e0_Particle* particles;
+    LENS_FLARE_PARTICLE* particles;
     char pad2c[0xac];
     int count;
-} fcn_004172e0_Emitter; /* SIZE 0xdc */
+} LENS_FLARE_EMITTER; /* SIZE 0xdc */
 
 /* ADDRESS: GOLDTL 0x004172e0 */
-unsigned char __cdecl fcn_004172e0(fcn_004172e0_Emitter* e, unsigned int t)
+unsigned char __cdecl fcn_004172e0(LENS_FLARE_EMITTER* e, unsigned int t)
 {
-    fcn_004172e0_Particle* p;
+    LENS_FLARE_PARTICLE* p;
     int i;
     float dt;
 

@@ -3,7 +3,7 @@
 
 extern int* g_665f08;
 
-void __cdecl fcn_00535550(int);
+void __cdecl d2_TurnBookPagesForward(int);
 void __cdecl d2_TurnBookPagesBack(int);
 
 int __cdecl d2_AdvanceTutCh3BookCue(void)
@@ -12,7 +12,7 @@ int __cdecl d2_AdvanceTutCh3BookCue(void)
 
 	g = g_665f08;
 	if (g[16] == 2 && g[20] != 0) {
-		fcn_00535550(g[20]);
+		d2_TurnBookPagesForward(g[20]);
 		return 0;
 	}
 	if (g[16] == 3 && g[20] != 0) {

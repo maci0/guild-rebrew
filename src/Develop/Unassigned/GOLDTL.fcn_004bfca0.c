@@ -1,16 +1,16 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* g_772904;
 
-struct slot_4bfca0 {
+struct CITY_MAP_SLOT {
 	int id;
 	char* obj;
 	char pad8[0x10];
 };
 // SIZE 0x18
 
-struct panel_4bfca0 {
+struct CITY_MAP_PANEL {
 	char pad0[0xdc];
-	struct slot_4bfca0 slots[412];
+	struct CITY_MAP_SLOT slots[412];
 	char pad277c[0x28];
 	int count;
 };
@@ -18,7 +18,7 @@ struct panel_4bfca0 {
 
 
 /* ADDRESS: GOLDTL 0x004bfca0 */
-void __cdecl fcn_004bfca0(char* list, struct panel_4bfca0* panel)
+void __cdecl d2_UpdateRouteMapControlStates(char* list, struct CITY_MAP_PANEL* panel)
 {
 	char* out[8];
 	char** p;

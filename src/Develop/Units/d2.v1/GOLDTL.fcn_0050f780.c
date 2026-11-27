@@ -41,7 +41,7 @@ void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, int a, int b);
 int __cdecl d2_BuildDependencyDiagram(unsigned char* a, unsigned short* b, int w, int h);
 void __cdecl d2_DestroyForm(int h);
-void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b);
+void __cdecl d2_UpdateDependencyDiagram(unsigned char* a, unsigned short* b);
 void __cdecl d2_DrawDependencyLine(int a, int b, int c, int d);
 
 int __cdecl d2_OpenDependencyDiagram(int arg, unsigned char* a, unsigned short* b)
@@ -65,7 +65,7 @@ int __cdecl d2_OpenDependencyDiagram(int arg, unsigned char* a, unsigned short* 
 		d2_DestroyForm(g_7f4c10);
 		return -1;
 	}
-	fcn_0050ee80(a, b);
+	d2_UpdateDependencyDiagram(a, b);
 	for (i = 0; i < g_85ab60; i++) {
 		for (j = 0; j < i; j++) {
 			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a) {

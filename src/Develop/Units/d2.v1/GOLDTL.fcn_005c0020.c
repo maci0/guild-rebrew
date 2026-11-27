@@ -26,10 +26,10 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
-int __cdecl fcn_004f61c0(int*, int*, int*, unsigned short);
+int __cdecl gm_CollectEntityCrimesByGroup(int*, int*, int*, unsigned short);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl d2_BuildPersonStatusDesc(Rec38*);
-int __cdecl fcn_005ca740(int, int, int, int, Rec38*, int);
+int __cdecl d2_DrawPersonCard(int, int, int, int, Rec38*, int);
 void __cdecl d2_CreateRightAlignedText(char*, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -66,7 +66,7 @@ void __cdecl fcn_005c0020(void)
 	h2 = d2_CurrentWindowId;
 	d2_SetForm(dlg, 3);
 	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, h2, 0x767);
-	n = fcn_004f61c0(ids, v11, v10, *(unsigned short*) ent);
+	n = gm_CollectEntityCrimesByGroup(ids, v11, v10, *(unsigned short*) ent);
 	count = 0;
 	for (i = 0; i < n; i++) {
 		p = gm_LookupEntityRecordById(ids[i]);
@@ -91,7 +91,7 @@ void __cdecl fcn_005c0020(void)
 			    (rec->x2c != 1) + 0x1748);
 			rec->x10 = 0x32;
 			rec->x14 = y;
-			fcn_005ca740(0x32, y, d2_CurrentWindowId, 0x56, rec, 1);
+			d2_DrawPersonCard(0x32, y, d2_CurrentWindowId, 0x56, rec, 1);
 			d2_CreateRightAlignedText(buf,
 			    *(int*) (0x1015f4c + d2_CurrentWindowId * 0x3cc) - 0xf,
 			    y + 0x2d, 200, 0x55);

@@ -104,7 +104,7 @@ void __cdecl d3_InitSnowMipMaps(void)
 	}
 	goto allocate_source;
 release_texture:
-	fcn_0045fbb0(texture);
+	d3_ReleaseSceneResourceRef(texture);
 	texture = 0;
 allocate_source:
 	descriptor[0] = 124;
@@ -200,7 +200,7 @@ source_ready:
 			d3d_LogResultError("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xf36,
 				"snow_tex->surf->lpVtbl->Unlock(snow_tex->surf, NULL)");
 		}
-		fcn_0045fbb0(texture);
+		d3_ReleaseSceneResourceRef(texture);
 	} else {
 		m_FreeTracked((void*) descriptor[9]);
 		descriptor[9] = 0;

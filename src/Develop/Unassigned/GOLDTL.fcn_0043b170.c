@@ -10,19 +10,19 @@ extern char g_6b8018;
 void __cdecl d3_UpdateTextureScrollOffsets(unsigned int now);
 char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags, char (__cdecl* cb)(char*, void*), void* ctx);
 char __cdecl d3_UpdateSceneObjectAnimCallback(char* node, void* ctx);
-void __cdecl fcn_0043ad10(int mode);
+void __cdecl d3_IncrementScenePass(int mode);
 
 
 typedef struct {
 	char* node;
 	char pad[0x3d8];
-} Entry_1043340;
+} D3_SCENE_CTX_ENTRY;
 // SIZE 0x3dc
 
 /* Flushes cached timing and walks the scene tree, then refreshes both
  * frame-rate counters. Re-entrant calls only run the trailing mode hook. */
 /* ADDRESS: GOLDTL 0x0043b170 */
-void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, char deep)
+void __cdecl d3_UpdateScene(unsigned int flags, char force, unsigned int mode, char deep)
 {
 	if (g_6b86d4 < 0) {
 		g_6b86d4 = 0;
@@ -38,7 +38,7 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 		unsigned int scale;
 		unsigned int fl;
 		int i;
-		Entry_1043340* entry;
+		D3_SCENE_CTX_ENTRY* entry;
 		char* node;
 
 		now = g_6b7fac;
@@ -47,7 +47,7 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 		d3_VisitSceneObjects((char*) g_67a370, 0, fl, d3_UpdateSceneObjectAnimCallback, (void*) now);
 		if (deep) {
 			i = 0;
-			entry = (Entry_1043340*) 0x1043340;
+			entry = (D3_SCENE_CTX_ENTRY*) 0x1043340;
 			do {
 				if (i != d3_CurrentContextIndex) {
 					node = entry->node;
@@ -78,6 +78,6 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 			*(unsigned int*) 0x6b804c = frames * 1000 / (elapsed * scale);
 		}
 	}
-	fcn_0043ad10(mode);
+	d3_IncrementScenePass(mode);
 	g_6b86d4--;
 }

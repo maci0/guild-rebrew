@@ -17,7 +17,7 @@ extern char g_7728d4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
-void __cdecl fcn_004b1e60(void);
+void __cdecl hst_LoadHistoryText(void);
 
 int __cdecl ls_LoadHistoryState(void* file)
 {
@@ -27,7 +27,7 @@ int __cdecl ls_LoadHistoryState(void* file)
 
 	if (!ls_ReadVfsDataChecked(&(*(unsigned char*)&g_7728d4), 1, 1, file))
 		return 0;
-	fcn_004b1e60();
+	hst_LoadHistoryText();
 	if (!ls_ReadVfsDataChecked(&v, 4, 1, file))
 		return 0;
 	g_67fca8 = hst_HistoryTextBase + v;

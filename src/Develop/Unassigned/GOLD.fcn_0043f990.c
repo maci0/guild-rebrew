@@ -1,5 +1,5 @@
 #include "client_lighting.h"
-void __cdecl fcn_0045fbb0(void*);
+void __cdecl d3_ReleaseSceneResourceRef(void*);
 void __cdecl d3_InvalidateFloorChunks(void*);
 
 /* ADDRESS: GOLD 0x0043f990 */
@@ -19,7 +19,7 @@ void __cdecl d3_ResetFloorTileCache(void)
 		if (resource != 0) {
 			if (*resource == '*') {
 				while (*(int*) (resource + 0x40) > 0) {
-					fcn_0045fbb0(resource);
+					d3_ReleaseSceneResourceRef(resource);
 					base = *(char**) 0x63374c;
 					resource = *(char**) (base + offset);
 				}

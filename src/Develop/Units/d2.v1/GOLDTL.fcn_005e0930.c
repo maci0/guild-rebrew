@@ -28,7 +28,7 @@ extern int g_14ac644;
 extern char g_7e21a0[];
 
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00471db0(int, int);
+void __cdecl d2_PositionFormWindows(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
@@ -36,9 +36,9 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int);
 int __cdecl d2_GetFormWindow(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
-void __cdecl fcn_005e0140(int, int, void*, void*, char*, int);
+void __cdecl d2_PopulateSaveSlotList(int, int, void*, void*, char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_005dfe80(int, unsigned int);
+int __cdecl d2_ConfirmTextIdMessageBox(int, unsigned int);
 void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_RunLoadNetworkGameDialog(void)
@@ -56,7 +56,7 @@ int __cdecl d2_RunLoadNetworkGameDialog(void)
 	result = 0;
 	style = main_LoopFlags;
 	h = d2_LoadForm(0, 0, "menu\\loadgame_new");
-	fcn_00471db0(h, 1);
+	d2_PositionFormWindows(h, 1);
 	fcn_00471d80(h, 2);
 	d2_SetForm(h, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
@@ -65,7 +65,7 @@ int __cdecl d2_RunLoadNetworkGameDialog(void)
 	io_AppendText(0x1c57);
 	d2_SetForm(0, 0);
 	fcn_00533f40(0x214, 0x168, d2_CurrentWindowId, d2_GetFormWindow(h, 1), 0x82, &a, &b, &c);
-	fcn_005e0140(h, 1, items, buf, "gamedata/network", 1);
+	d2_PopulateSaveSlotList(h, 1, items, buf, "gamedata/network", 1);
 	while (main_RunFrameLoop(d2_RunLoadNetworkGameDialog, style) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -83,7 +83,7 @@ int __cdecl d2_RunLoadNetworkGameDialog(void)
 			}
 			continue;
 found:
-			if (g_774964 == 0 || fcn_005dfe80(g_14ac644, 0x101) != 0) {
+			if (g_774964 == 0 || d2_ConfirmTextIdMessageBox(g_14ac644, 0x101) != 0) {
 				strcpy(g_7e21a0, items[i].name);
 				g_774654 = 1;
 				result = 1;

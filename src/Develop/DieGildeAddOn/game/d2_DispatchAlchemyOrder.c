@@ -4,7 +4,7 @@ typedef unsigned short u16;
 
 int __cdecl ahm_GetWorkshopOwner(int a1);
 int __cdecl gm_CheckEntityStock(void* tbl, int a2, char a3);
-int __cdecl fcn_00526120(void* buf, int a2);
+int __cdecl d2_ShowModalMessageBox(void* buf, int a2);
 void __cdecl io_FormatTextBuffer(void* buf, int id, ...);
 int __cdecl ahm_DispatchAlchemistCommand(int a1, int a2);
 int __cdecl cm_GetCommandStatus(int a1);
@@ -23,12 +23,12 @@ int __cdecl d2_DispatchAlchemyOrder(int building, char* order, int cost)
     if (gm_CheckEntityStock((void*) (540 * g_774970 + 0x7f4ca0), cost,
                      g_773d75) != 0) {
         if (h != 0) {
-            fcn_00526120((void*) *(int*) 0x14b5440, 0x100);
+            d2_ShowModalMessageBox((void*) *(int*) 0x14b5440, 0x100);
         } else {
             io_FormatTextBuffer(buf, 0x4044,
                          *(int*) (0x14b5908 + *(int*) (order + 0x10) * 4),
                          *(int*) (0x14b596c + *(int*) (order + 0x14) * 4));
-            if (fcn_00526120(buf, 1) != 0) {
+            if (d2_ShowModalMessageBox(buf, 1) != 0) {
                 r = ahm_DispatchAlchemistCommand(building, (int) order);
                 if (r != -1) {
                     int q;

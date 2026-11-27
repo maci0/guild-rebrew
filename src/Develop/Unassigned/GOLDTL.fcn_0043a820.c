@@ -4,40 +4,40 @@
 
 #include <math.h>
 
-typedef struct Vec043a820 {
+typedef struct D3_BBOX_VEC4 {
 	float x;
 	float y;
 	float z;
 	float w;
-} Vec043a820;
+} D3_BBOX_VEC4;
 // SIZE 0x10
 
-typedef struct Box043a820 {
+typedef struct D3_BBOX_CORNER {
 	float x;
 	float y;
 	float z;
 	char padc[0x50 - 0xc];
-} Box043a820;
+} D3_BBOX_CORNER;
 
-typedef struct Obj043a820 Obj043a820;
+typedef struct D3_BBOX_OBJ D3_BBOX_OBJ;
 
-typedef struct Api043a820 {
+typedef struct D3_BBOX_API {
 	char pad0[0x1f0];
-	Box043a820*(__cdecl* query)(Obj043a820* o, void* ctx, char* data);
-} Api043a820;
+	D3_BBOX_CORNER*(__cdecl* query)(D3_BBOX_OBJ* o, void* ctx, char* data);
+} D3_BBOX_API;
 
-typedef struct Ctx043a820 {
+typedef struct D3_BBOX_CTX {
 	char pad0[0x318];
-	Api043a820* api;
-} Ctx043a820;
+	D3_BBOX_API* api;
+} D3_BBOX_CTX;
 
-struct Obj043a820 {
+struct D3_BBOX_OBJ {
 	char pad0[0x4c];
 	int x4c;
 	char pad50[0x68 - 0x50];
 	float radius;
 	char pad6c[0x1cc - 0x6c];
-	Ctx043a820* ctx;
+	D3_BBOX_CTX* ctx;
 	char pad1d0[0x1ec - 0x1d0];
 	char* ov;
 	char pad1f0[0x218 - 0x1f0];
@@ -45,15 +45,15 @@ struct Obj043a820 {
 };
 
 
-void __cdecl d3_TransformPointToRef(Obj043a820* o, char* arg, int* p, Vec043a820* out);
-void __cdecl d3_UpdateObjectCameraTransform(Obj043a820* o, char* arg, int z);
+void __cdecl d3_TransformPointToRef(D3_BBOX_OBJ* o, char* arg, int* p, D3_BBOX_VEC4* out);
+void __cdecl d3_UpdateObjectCameraTransform(D3_BBOX_OBJ* o, char* arg, int z);
 
-char __cdecl fcn_0043a820(Obj043a820* o, char* arg, Vec043a820* out, float* radius)
+char __cdecl d3_GetObjectBoundingSphere(D3_BBOX_OBJ* o, char* arg, D3_BBOX_VEC4* out, float* radius)
 {
-	Ctx043a820* ctx;
-	Box043a820* b;
-	Box043a820* q;
-	Vec043a820 c;
+	D3_BBOX_CTX* ctx;
+	D3_BBOX_CORNER* b;
+	D3_BBOX_CORNER* q;
+	D3_BBOX_VEC4 c;
 	float r;
 	float d;
 	float* pz;

@@ -14,7 +14,7 @@ extern int g_6b8300;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_ReleaseVertexBufferPtr(void);
-void __cdecl fcn_0043b8f0(int a);
+void __cdecl d3_ReleaseTerrainSurfaces(int a);
 void __cdecl d3_ReleaseSkyDomeBuffers(int a);
 void __cdecl d3_ResetSceneAuxSlots(void);
 void __cdecl d3_SelectSceneContext(int a, int b);
@@ -23,7 +23,7 @@ void __cdecl d3_InvalidateDeviceResources(void);
 void __cdecl d3_ResetGraphicsDevice(void);
 int __cdecl d3_TestCooperativeLevel(void);
 int __cdecl d3_RestoreDeviceResources(void);
-void __cdecl fcn_00436aa0(int a);
+void __cdecl d3_ResetRenderStates(int a);
 void __cdecl d3_AllocRenderVertexBuffer(void);
 void __cdecl d3_RebuildFloorMeshes(int a);
 void __cdecl d3_CreateSkyDomeBuffers(int a);
@@ -31,7 +31,7 @@ void __cdecl d3_AllocShadowTextures(void);
 #include "client_lighting.h"
 
 /* ADDRESS: GOLDTL 0x0043b360 */
-char __cdecl fcn_0043b360(void)
+char __cdecl d3_ResetDeviceObjects(void)
 {
 	char* o;
 	int saved;
@@ -47,7 +47,7 @@ char __cdecl fcn_0043b360(void)
 		}
 	}
 	if (g_6b8300 != 0) {
-		fcn_0043b8f0(g_6b8300);
+		d3_ReleaseTerrainSurfaces(g_6b8300);
 	}
 	if (g_6b89c0 != 0) {
 		d3_ReleaseSkyDomeBuffers(g_6b89c0);
@@ -58,7 +58,7 @@ char __cdecl fcn_0043b360(void)
 		if (i != saved) {
 			d3_SelectSceneContext(i, 1);
 			if (g_6b8300 != 0) {
-				fcn_0043b8f0(g_6b8300);
+				d3_ReleaseTerrainSurfaces(g_6b8300);
 			}
 			if (g_6b89c0 != 0) {
 				d3_ReleaseSkyDomeBuffers(g_6b89c0);
@@ -72,7 +72,7 @@ char __cdecl fcn_0043b360(void)
 	d3_ResetGraphicsDevice();
 	if (d3_TestCooperativeLevel() == 0) {
 		d3_RestoreDeviceResources();
-		fcn_00436aa0(0);
+		d3_ResetRenderStates(0);
 		d3_AllocRenderVertexBuffer();
 		if (g_6b8300 != 0) {
 			d3_RebuildFloorMeshes(g_6b8300);

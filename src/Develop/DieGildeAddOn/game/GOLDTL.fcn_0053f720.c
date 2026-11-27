@@ -14,7 +14,7 @@ void __cdecl d2_ClearBackdropResource(void);
 void __cdecl d2_ClearSurface(int);
 void __cdecl fcn_00473150(unsigned char*);
 
-void __cdecl fcn_0053f720(void)
+void __cdecl main_FadeOutToBlack(void)
 {
 	int flags;
 	unsigned char* p;

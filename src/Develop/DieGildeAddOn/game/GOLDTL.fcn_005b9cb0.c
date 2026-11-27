@@ -17,7 +17,7 @@ extern unsigned char g_773d75;
 float __cdecl eval_ObjektPreis2Credits(int, char);
 int __cdecl fcn_0051e070(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl gm_RemoveClientEntityLink(char*);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 
@@ -54,7 +54,7 @@ void __cdecl d2_SellObjectsDialog(int n, char** items)
 		}
 		break;
 	}
-	if (fcn_00526120(buf, 0x101) != 0) {
+	if (d2_ShowModalMessageBox(buf, 0x101) != 0) {
 		for (i = 0; i < n; i++) {
 			gm_RemoveClientEntityLink(items[i]);
 		}

@@ -5,19 +5,19 @@ typedef struct {
 // SIZE 0x14
 
 /* ADDRESS: GOLDTL 0x004f1790 */
-int __cdecl gm_GetEntitySlotIndex(char* a, SLOT_ENTRY* e)
+int __cdecl gm_GetEntitySlotIndex(char* owner, SLOT_ENTRY* entry)
 {
-	if (e->kind == 0) {
-		return e - *(SLOT_ENTRY**) (a + 8);
+	if (entry->kind == 0) {
+		return entry - *(SLOT_ENTRY**) (owner + 8);
 	}
-	if (e->kind == 1) {
-		return e - *(SLOT_ENTRY**) (a + 0xc);
+	if (entry->kind == 1) {
+		return entry - *(SLOT_ENTRY**) (owner + 0xc);
 	}
-	if (e->kind == 2) {
-		return e - *(SLOT_ENTRY**) (a + 0x10);
+	if (entry->kind == 2) {
+		return entry - *(SLOT_ENTRY**) (owner + 0x10);
 	}
-	if (e->kind == 3) {
-		return e - *(SLOT_ENTRY**) (a + 0x14);
+	if (entry->kind == 3) {
+		return entry - *(SLOT_ENTRY**) (owner + 0x14);
 	}
 	return -1;
 }

@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0047b620 */
-int __cdecl fcn_0047b620(char* p, int i)
+int __cdecl d2_GetBankEntry(char* p, int i)
 {
 	if (i >= *(unsigned short*) (p + 4)) {
 		return 0;

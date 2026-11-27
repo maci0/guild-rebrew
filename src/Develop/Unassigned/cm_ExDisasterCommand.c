@@ -1,0 +1,18 @@
+int __cdecl gm_DispatchDisasterCommand(void *);
+
+/* ADDRESS: GOLDTL 0x004cd460 */
+int __cdecl cm_ExDisasterCommand(void *a1, char *result)
+{
+	if (result != 0) {
+		result[0] = 2;
+		result[1] = 0;
+		*(int *) (result + 6) = 0;
+	}
+	if (gm_DispatchDisasterCommand((void *) ((char *) a1 + 0x10)) == 0) {
+		return 1;
+	}
+	if (result != 0) {
+		result[0] = 1;
+	}
+	return 0;
+}

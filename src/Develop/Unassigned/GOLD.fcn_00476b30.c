@@ -1,6 +1,6 @@
 #include "client_sprites.h"
 
-void __cdecl fcn_00476b30(void)
+void __cdecl d2_ClearOverlaySprites(void)
 {
     char** p;
     /* Native comparison treats the cursor addresses as signed 32-bit values. */

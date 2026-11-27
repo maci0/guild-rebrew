@@ -1,6 +1,6 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 
-void __cdecl fcn_0045fbb0(void*);
+void __cdecl d3_ReleaseSceneResourceRef(void*);
 void __cdecl d3_ResetFloorTileCache(void);
 
 #define SLOT(p, off) (*(void**) ((char*) (p) + (off)))
@@ -70,7 +70,7 @@ void __cdecl d3_DestroyFloor(char* scene)
 	}
 	if (SLOT(scene, 0x19e0) != 0) {
 		for (i = 0; i < *(unsigned char*) (scene + 0x1c6d); i++) {
-			fcn_0045fbb0(*(void**) ((char*) SLOT(scene, 0x19e0) + i * 0x158));
+			d3_ReleaseSceneResourceRef(*(void**) ((char*) SLOT(scene, 0x19e0) + i * 0x158));
 		}
 		m_FreeTracked(SLOT(scene, 0x19e0));
 		SLOT(scene, 0x19e0) = 0;

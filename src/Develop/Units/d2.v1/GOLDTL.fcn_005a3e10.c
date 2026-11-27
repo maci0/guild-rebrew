@@ -36,7 +36,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
-void __cdecl fcn_005a3e10(void)
+void __cdecl d2_RunWeinkellerDialog(void)
 {
 	int sl;
 	int dlg;
@@ -59,7 +59,7 @@ void __cdecl fcn_005a3e10(void)
 	      gm_AmountToUnits(stock, g_773d75) + gm_AmountToUnits(have, g_773d75) : gm_AmountToUnits(stock, g_773d75);
 	d2_SetElementValue(sl, 0, max, gm_AmountToUnits(stock, g_773d75));
 	d2_SetOverlayAnimation(0, 0);
-	if (main_RunFrameLoop((void*) fcn_005a3e10, 0x677c7) != 0) {
+	if (main_RunFrameLoop((void*) d2_RunWeinkellerDialog, 0x677c7) != 0) {
 		do {
 			if (g_14ce8e0 != 0 || g_100f1dc == 1) {
 				g_774654 = 1;
@@ -74,7 +74,7 @@ void __cdecl fcn_005a3e10(void)
 				}
 				g_774654 = 1;
 			}
-		} while (main_RunFrameLoop((void*) fcn_005a3e10, 0x677c7) != 0);
+		} while (main_RunFrameLoop((void*) d2_RunWeinkellerDialog, 0x677c7) != 0);
 	}
 	if (dlg != 0) {
 		d2_DestroyForm(dlg);

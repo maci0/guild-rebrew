@@ -28,7 +28,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_AddToRadioGroup(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
-int __cdecl fcn_004b3ec0(int, int);
+int __cdecl d2_ShowMissionBriefingDialog(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 
@@ -67,7 +67,7 @@ int __cdecl d2_ChooseMission(int missionKey)
 		if (g_100f1dc != -1 && ((struct list_4b3fe0*)g_102cbc8)[lst].sel != -1
 		    && d2_CurrentElementId == ((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel]) {
 			e = *(int**) (&((D2_CONTROL_TL*)g_1015ea0)[((struct list_4b3fe0*)g_102cbc8)[lst].items[((struct list_4b3fe0*)g_102cbc8)[lst].sel]].associated_object);
-			if (fcn_004b3ec0(*e, main_LoopFlags) != 0) {
+			if (d2_ShowMissionBriefingDialog(*e, main_LoopFlags) != 0) {
 				result = *e;
 				g_774654 = 1;
 			}

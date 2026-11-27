@@ -3,7 +3,7 @@
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-int __cdecl fcn_00508eb0(unsigned short, int);
+int __cdecl amt_GetEffectiveRoleLevel(unsigned short, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl gm_RandomizeIntArray(int, int*);
 
@@ -16,7 +16,7 @@ void __cdecl he_RollTripletEventScores(char* action, unsigned short* first_ent, 
 	int i;
 	float total_wealth;
 
-	half = fcn_00508eb0(*first_ent, 0) / 2;
+	half = amt_GetEffectiveRoleLevel(*first_ent, 0) / 2;
 	wealth_a = MAX(gm_WalkEntityChain(*first_ent), 32000);
 	wealth_b = MAX(gm_WalkEntityChain(*second_ent), 32000);
 	for (i = 0; i < 12; i++) {

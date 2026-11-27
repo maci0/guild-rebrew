@@ -24,13 +24,13 @@ extern int g_14aacf8;
 extern int g_14aacd0;
 
 int __cdecl amt_CheckHighOfficeEligibility(char*);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl d2_OpenTargetPicker(Query*, int, int, void*);
-void __cdecl fcn_005cde50(void*, int, int);
+void __cdecl d2_RunAmtChamberMenu(void*, int, int);
 int __cdecl fcn_005aa860(unsigned short*);
 void __cdecl d2_RunOfficeDiscordDialog(int);
-void __cdecl fcn_005aaae0(int);
+void __cdecl d2_RunOfficeFeudDialog(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d2_RunHighOfficePrivilegeDialog(void)
@@ -42,7 +42,7 @@ void __cdecl d2_RunHighOfficePrivilegeDialog(void)
 	r = amt_CheckHighOfficeEligibility((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]);
 	if (r != 1) {
 		if (r == -1) {
-			fcn_00526120(g_14aad38, 0);
+			d2_ShowModalMessageBox(g_14aad38, 0);
 			return;
 		}
 		d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 8);
@@ -56,9 +56,9 @@ void __cdecl d2_RunHighOfficePrivilegeDialog(void)
 		q.x18 = 1;
 		d2_OpenTargetPicker(&q, g_14aad18, 0, (void*) fcn_005aa860);
 	} else if (lvl == 0x1f || lvl == 0x21) {
-		fcn_005cde50((void*) d2_RunOfficeDiscordDialog, g_14aacd0, 0);
+		d2_RunAmtChamberMenu((void*) d2_RunOfficeDiscordDialog, g_14aacd0, 0);
 	} else if (lvl == 0x20) {
-		fcn_005cde50((void*) fcn_005aaae0, g_14aacf8, 0);
+		d2_RunAmtChamberMenu((void*) d2_RunOfficeFeudDialog, g_14aacf8, 0);
 	}
 	d3_EndCameraAndUiMode();
 }

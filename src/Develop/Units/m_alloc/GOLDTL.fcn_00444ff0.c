@@ -9,13 +9,13 @@ extern float g_1052c00[];
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* ptr);
 extern void __cdecl d3_UpdateObjectCameraTransform(int scene, char* data, int flag);
-extern void __cdecl fcn_00435910(int device, unsigned int* flags, void* bbox, int mode);
+extern void __cdecl d3_BlendMeshVertices(int device, unsigned int* flags, void* bbox, int mode);
 extern void __stdcall fcn_005eb225(float* dst, unsigned int* src, void* ctx);
 extern void __stdcall fcn_005eb2e4(float* dst, unsigned int* src, char* a, float* b,
 	float* c, void* ctx);
 
 /* ADDRESS: GOLDTL 0x00444ff0 */
-unsigned char __cdecl fcn_00444ff0(int sceneObject, int* selectionBounds)
+unsigned char __cdecl d3_CollectObjectScreenCorners(int sceneObject, int* selectionBounds)
 {
 	char* holder;
 	char* model;
@@ -81,7 +81,7 @@ unsigned char __cdecl fcn_00444ff0(int sceneObject, int* selectionBounds)
 		flags = (unsigned int*) m_alloc(total << 2, "!d3int:GetTextureBBoxRepeat");
 		for (i = 0; i < total; i++)
 			flags[i] = 1;
-		fcn_00435910(*(unsigned int*) (sceneObject + 0x1cc), flags, bbox, 0);
+		d3_BlendMeshVertices(*(unsigned int*) (sceneObject + 0x1cc), flags, bbox, 0);
 		m_FreeTracked(flags);
 		if (total > 0) {
 			for (i = 0; i < total; i++) {

@@ -19,7 +19,7 @@ extern char g_1041d80[];
 
 
 void __cdecl d3_VisitSceneObjects(char*, int, int, void*, void*);
-char __cdecl fcn_0052a320(char*);
+char __cdecl d3_ApplyLightingVectorsToObject(char*);
 
 void __cdecl d3_ApplySceneLightingPreset(void)
 {
@@ -27,7 +27,7 @@ void __cdecl d3_ApplySceneLightingPreset(void)
 	int i;
 
 	if (*(int*) (((char*)g_67a370) + 0xac) != 0) {
-		d3_VisitSceneObjects(((char*)g_67a370), 0, 8, (void*) fcn_0052a320, 0);
+		d3_VisitSceneObjects(((char*)g_67a370), 0, 8, (void*) d3_ApplyLightingVectorsToObject, 0);
 		if (g_7e4530 == 0) {
 			src = g_6a2a18;
 		} else {

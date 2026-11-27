@@ -54,7 +54,7 @@ extern D2_WIN g_1015f40[0x60];
 int __cdecl d2_GetResourceData(int);
 int __cdecl d2_SetTextColor(int, int, int);
 void __cdecl d2_SelectFont(int);
-int __cdecl fcn_0047b620(char*, int);
+int __cdecl d2_GetBankEntry(char*, int);
 int __cdecl d2_DrawSpriteFromSet(int, int, int, char*, int);
 int __cdecl d2_DrawHighlightSprite(int, int, int, char*, int);
 int __cdecl d2_DrawBankSpriteColored(int, int, int, char*, int);
@@ -187,7 +187,7 @@ void __cdecl d2_RenderMarkupLine(int unused, int y, int surf, int win, int flag,
 							c = rec->text[j];
 							lastc = (unsigned char) c;
 							if (c != '~') {
-								glyph = (D2_MARKUP_GLYPH*) fcn_0047b620(g_772524, (unsigned char) c);
+								glyph = (D2_MARKUP_GLYPH*) d2_GetBankEntry(g_772524, (unsigned char) c);
 								if (j != 0) {
 									x -= glyph->w;
 								}
@@ -208,7 +208,7 @@ void __cdecl d2_RenderMarkupLine(int unused, int y, int surf, int win, int flag,
 							c = rec->text[j];
 							lastc = (unsigned char) c;
 							if (c != '~') {
-								glyph = (D2_MARKUP_GLYPH*) fcn_0047b620(g_772524, (unsigned char) c);
+								glyph = (D2_MARKUP_GLYPH*) d2_GetBankEntry(g_772524, (unsigned char) c);
 								if (j != 0) {
 									x -= glyph->w;
 								}
@@ -226,7 +226,7 @@ void __cdecl d2_RenderMarkupLine(int unused, int y, int surf, int win, int flag,
 				}
 				hflag = 0;
 			} else {
-				glyph = (D2_MARKUP_GLYPH*) fcn_0047b620(tex, special);
+				glyph = (D2_MARKUP_GLYPH*) d2_GetBankEntry(tex, special);
 				if (d2_DrawSpriteFromSet(x, y, surf, tex, special)) {
 					x += glyph->adv + g_67d384;
 				}

@@ -40,7 +40,7 @@
 
 extern int g_86805c;
 
-int __cdecl fcn_00503a70(int type);
+int __cdecl gm_CollectItemSuppliers(int type);
 int __cdecl ai_PlanGoodIngredients(char* actor, int* goodsPlan);
 
 /* ADDRESS: GOLDTL 0x004868d0 */
@@ -97,7 +97,7 @@ int __cdecl ai_PlanGoodIngredients(char* actor, int* goodsPlan)
 		} else {
 			w = *(unsigned short*) (g_item_def_table + goodsPlan[0] * 0x41 + off);
 			if (seg->stock + seg->allocated < w * 4) {
-				fcn_00503a70(seg->goods_id);
+				gm_CollectItemSuppliers(seg->goods_id);
 				for (idx = 0, rec = g_868c40; idx < g_86805c; idx++, rec++) {
 					if (rec->entity != *(char**) (actor + 0x16c)
 					    && gm_GetBuildingTypeCategory((unsigned char) *rec->entity) != 2

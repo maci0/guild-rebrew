@@ -1,7 +1,7 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/Units/d2.v1/gold_window.h"
 extern GOLD_GUI_WINDOW g_00f8f120[];
-int __cdecl fcn_0046cd70(short, short, int);
+int __cdecl d2_CreateElementAt(short, short, int);
 void __cdecl fcn_004730d0(int, char*);
 void __cdecl d2_GetWindowBorderSize(void*, int*, int*);
 void __cdecl ReportClientMessage(const char*);
@@ -20,7 +20,7 @@ int __cdecl d2_AddElementToWindow(short x, short y, int image, int window)
         ReportClientMessage("Too many objects on window!");
         return -1;
     }
-    owner->list[owner->count] = fcn_0046cd70(
+    owner->list[owner->count] = d2_CreateElementAt(
         x + owner->x - *(short*) ((char*) owner + 0x258),
         y + owner->y - (short) owner->scroll, image);
     index = owner->list[owner->count];

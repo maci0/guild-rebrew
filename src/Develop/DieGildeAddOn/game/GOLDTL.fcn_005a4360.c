@@ -7,7 +7,7 @@ extern unsigned char g_773d75;
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl gm_CheckEntityStock(void*, int, char);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, int);
@@ -29,7 +29,7 @@ void __cdecl d2_AcceptLoanOffer(char* building, char* offer)
 	if (gm_CheckEntityStock(g, *(int*) (offer + 0xb4), (*(char*)&g_773d75)) == 0) {
 		return;
 	}
-	if (fcn_00526120(msg, 1) == 0) {
+	if (d2_ShowModalMessageBox(msg, 1) == 0) {
 		return;
 	}
 	slot = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (building + 0x27)]);

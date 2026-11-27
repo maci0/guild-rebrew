@@ -14,19 +14,19 @@
  */
 
 /* Same layout as the Col argument of fcn_0045c5b0. */
-typedef struct Col447e30 {
+typedef struct FLOOR_COLOR_BITS {
 	unsigned char a;
 	unsigned char b;
 	unsigned char c0 : 1;
 	unsigned char c1 : 1;
 	unsigned char c2 : 6;
 	unsigned char d;
-} Col447e30;
+} FLOOR_COLOR_BITS;
 
-typedef struct S447e30Rec {
+typedef struct FLOOR_WATER_REC {
 	int h0;
 	int h1;
-	Col447e30 bits;
+	FLOOR_COLOR_BITS bits;
 	float f0c;
 	float f10;
 	float f14;
@@ -34,9 +34,9 @@ typedef struct S447e30Rec {
 	int extra[4];
 	char pad[0x11c];
 	int tail;
-} S447e30Rec;
+} FLOOR_WATER_REC;
 
-typedef struct S447e30Desc {
+typedef struct FLOOR_DESC {
 	char name[0x40];
 	int listB;
 	int listD;
@@ -47,9 +47,9 @@ typedef struct S447e30Desc {
 	float height;
 	int count;
 	int listA;
-	S447e30Rec* recs;
+	FLOOR_WATER_REC* recs;
 	char strings[8][0x40];
-} S447e30Desc;
+} FLOOR_DESC;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl ReportClientMessage(char*);
@@ -62,14 +62,14 @@ int __cdecl vfs_ReadVec3(char*, void*);
 int __cdecl bio_rd_array_quick(char*, int, int*);
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
-int __cdecl d3_LoadOrReuseTexture(char*, Col447e30, unsigned int, unsigned int);
+int __cdecl d3_LoadOrReuseTexture(char*, FLOOR_COLOR_BITS, unsigned int, unsigned int);
 int __cdecl fcn_0045ce90(int);
 char* __cdecl fcn_0043fa10(char*);
 
 /* ADDRESS: GOLDTL 0x00447e30 */
 int __cdecl d3_int_io_LoadFloor(char* stream, unsigned int version)
 {
-	S447e30Desc desc;
+	FLOOR_DESC desc;
 	char recName[0x40];
 	char skip[0x100];
 	char flag;
@@ -85,7 +85,7 @@ int __cdecl d3_int_io_LoadFloor(char* stream, unsigned int version)
 
 	char b1;
 	char b2;
-	Col447e30 bits;
+	FLOOR_COLOR_BITS bits;
 	void* fill_dst;
 	int fill_size;
 
@@ -129,7 +129,7 @@ int __cdecl d3_int_io_LoadFloor(char* stream, unsigned int version)
 					if (version >= 0x3a6c00ad) {
 						bio_rd_array_quick(stream, desc.listA, &desc.listD);
 					}
-					desc.recs = (S447e30Rec*) m_alloc(desc.count * 0x158, (char*) 0x67ac08);
+					desc.recs = (FLOOR_WATER_REC*) m_alloc(desc.count * 0x158, (char*) 0x67ac08);
 					saved = 0;
 
 					while (saved < desc.count) {

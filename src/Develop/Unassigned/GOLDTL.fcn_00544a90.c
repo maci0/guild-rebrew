@@ -5,7 +5,7 @@
 typedef unsigned int (__cdecl* CheckProc)(void);
 
 #pragma optimize("", off)
-int __cdecl fcn_00544a90(void)
+int __cdecl main_RunRainierProtectionCheck(void)
 {
 	HMODULE hmod;
 	CheckProc proc;

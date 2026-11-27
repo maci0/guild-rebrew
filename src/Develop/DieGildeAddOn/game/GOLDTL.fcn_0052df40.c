@@ -58,7 +58,7 @@ int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 unsigned char __cdecl gm_GetEntityUiFlags(int, unsigned char*, int, int);
-int __cdecl fcn_0052dee0(int x, int y, int z);
+int __cdecl d2_CreateWindowTextButton(int x, int y, int z);
 
 /* ADDRESS: GOLDTL 0x0052df40 */
 void __cdecl d2_ShowBuildingInfoPanel(unsigned char* building)
@@ -107,13 +107,13 @@ void __cdecl d2_ShowBuildingInfoPanel(unsigned char* building)
 	t = (unsigned char*) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*building];
 	r = gm_GetEntityUiFlags(g_774970, building, 0, 0);
 	if (*(unsigned short*) (building + 0x27) == g_774970 || *(unsigned short*) (building + 0x25) == g_774970 || (r & 0x10) != 0) {
-		g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0cc);
+		g_6a25ec = d2_CreateWindowTextButton(0, 0x8c, g_14ad0cc);
 	} else {
-		g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0d4);
+		g_6a25ec = d2_CreateWindowTextButton(0, 0x8c, g_14ad0d4);
 	}
 	if ((kind == 1 || kind == 2 || kind == 4 || kind == 7 || kind == 8 || *t == 0x10 || *t == 0x1e || *t == 0x1f || *t == 0x1d) && *t != 5) {
 		if (g_7746c8 == 0) {
-			g_6a25e4 = fcn_0052dee0(0, 0xa6, (int) g_6a2f18);
+			g_6a25e4 = d2_CreateWindowTextButton(0, 0xa6, (int) g_6a2f18);
 		}
 		g_6a25c4[0] = -1;
 		return;

@@ -15,13 +15,13 @@ extern char g_68b844[];
 void __cdecl d3_ClearSelectionBox(void);
 void __cdecl d3_BeginSelectionBox(void);
 int __cdecl gm_GetEntityControlMask(int, char*);
-char __cdecl fcn_004d15c0(int, char*);
+char __cdecl cut_DispatchTacticalOrder(int, char*);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
-void __cdecl fcn_00414c30(int, int);
-void __cdecl fcn_004d1910(void);
+void __cdecl d3_SetObjectGreyTint(int, int);
+void __cdecl cut_ClearStatusOverlaySlots(void);
 
 /* ADDRESS: GOLDTL 0x004d1790 */
-void __cdecl fcn_004d1790(int a0)
+void __cdecl cut_UpdateCombatSelectionBox(int a0)
 {
 	char** q;
 	char* o;
@@ -33,7 +33,7 @@ void __cdecl fcn_004d1790(int a0)
 	}
 	if (g_14ce8d4 != 0 && g_14ce8e4 == 0) {
 		if (d3_SelectionBoxActive == 0 && g_6772c4 != 0 && d2_CurrentElementId == -1) {
-			fcn_004d1910();
+			cut_ClearStatusOverlaySlots();
 			d3_BeginSelectionBox();
 		}
 	} else {
@@ -50,7 +50,7 @@ void __cdecl fcn_004d1790(int a0)
 					continue;
 				if (*(char*) (o + 8) == 0)
 					continue;
-				if (!fcn_004d15c0(a0, o))
+				if (!cut_DispatchTacticalOrder(a0, o))
 					continue;
 				if (g_772f24 == g_772e9c)
 					d3snd_PlaySoundEffect(*(unsigned short*) o, g_772ee4, (int) g_68b844, -1);
@@ -69,12 +69,12 @@ void __cdecl fcn_004d1790(int a0)
 		p = (char*) *(int*) (*(int*) (o + 0x184) + 0x34);
 		if (*(char*) (o + 0x188)) {
 			if ((*(unsigned char*) (p + 0x215) & 0x80) == 0)
-				fcn_00414c30((int) p, 1);
+				d3_SetObjectGreyTint((int) p, 1);
 		} else {
 			if ((*(unsigned char*) (p + 0x215) & 0x80) == 0x80)
-				fcn_00414c30((int) p, 0);
+				d3_SetObjectGreyTint((int) p, 0);
 		}
 	}
 	if (g_14ce8e0 != 0)
-		fcn_004d1910();
+		cut_ClearStatusOverlaySlots();
 }

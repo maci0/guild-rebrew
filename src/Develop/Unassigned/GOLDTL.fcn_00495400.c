@@ -31,7 +31,7 @@ typedef struct {
 extern char g_1008540[];
 
 int __cdecl ai_IsMethodActive(int);
-void __cdecl fcn_00495120(int);
+void __cdecl ai_PushActiveMethod(int);
 void __cdecl ai_PopActiveMethod(void);
 
 int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
@@ -73,7 +73,7 @@ int __cdecl ai_SelectBestMethod(int who, int idx, int arg, Pos *out1, Pos *out2)
 		if (pl->type == 0 || pl->type == me->unk_132 || ai_IsMethodActive(pl->type) != 0) {
 			continue;
 		}
-		fcn_00495120(pl->type);
+		ai_PushActiveMethod(pl->type);
 		p1 = *out1;
 		p2 = *out2;
 		if (pl->score != 0) {

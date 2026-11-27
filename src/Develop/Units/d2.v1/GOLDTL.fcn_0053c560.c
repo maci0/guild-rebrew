@@ -37,7 +37,7 @@ typedef struct {
 typedef void (__cdecl *VirtFn)(int, int, int, int);
 
 
-int __cdecl fcn_00533880(void);
+int __cdecl d3_ClearSceneObjectCache(void);
 int __cdecl fcn_005338a0(void);
 int __cdecl d3_SelectSceneContext(int, int);
 Figure *__cdecl ch_CreateCharacterAtSceneObject(char *, char *, int);
@@ -53,7 +53,7 @@ void __cdecl d3_FreeObjectAnimation(void *);
 void __cdecl d3_AnimateObjectTransform(char *, Vec3 *, Vec3 *, int, int);
 char *__cdecl d3_FindSceneObject(char *, int, char *, char *);
 void __cdecl ch_QueueWalkToDummyRotate(char *, char *);
-int __cdecl fcn_0053b1b0(void);
+int __cdecl d2_RunChooseTalentDialog(void);
 int __cdecl d2_ShowChooseProfessionDialog(int);
 unsigned int __cdecl d2_ChooseCharacterModel(int);
 void __cdecl d2_SetFormVisibility(int, int);
@@ -103,7 +103,7 @@ int __cdecl d2_RunParentProfessionSelection(void)
 
 	memset((void *) 0x7e1fc0, 0, 0x2c);
 	memset((void *) 0x7e1fc0, -1, 0x18);
-	fcn_00533880();
+	d3_ClearSceneObjectCache();
 	fcn_005338a0();
 	d3_SelectSceneContext(1, 0);
 	base = g_67a370;
@@ -213,7 +213,7 @@ slot_found:
 				d3_AnimateObjectTransform(d3_ActiveCamera,
 				    (Vec3 *) (d3_ActiveCamera + 0x114),
 				    (Vec3 *) (d3_ActiveCamera + 0x120), 0x50, 8);
-				if (fcn_0053b1b0()) {
+				if (d2_RunChooseTalentDialog()) {
 					if (d2_ShowChooseProfessionDialog(0xc6) &&
 					    d2_ChooseCharacterModel((unsigned char) g_7e23e3)) {
 						g_774654 = 1;

@@ -19,7 +19,7 @@ extern int g_10432a8;
 extern int g_1042a04;
 
 extern unsigned int __cdecl d3_ProjectFloorCellBounds(int, int, int, int);
-extern unsigned char __cdecl fcn_00437ee0(void*, char*, char*);
+extern unsigned char __cdecl d3_TestBoxAgainstFrustum(void*, char*, char*);
 
 typedef int (__stdcall* D3_MESH_QUERY_FN)(void*);
 
@@ -80,7 +80,7 @@ int __cdecl d3_UpdateFloorVisibility(char* floor)
 	for (i = 0, w = floor + 0x280; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
 			p = (float*) d3_ProjectFloorCellBounds((int) floor, (int) (w - 0x1e0), j, i);
-			res = fcn_00437ee0(p, w, w + 4);
+			res = d3_TestBoxAgainstFrustum(p, w, w + 4);
 			*(unsigned char*) (w + 0x11) = res;
 			if ((res & 0x40) != 0) {
 				*(char*) (w + 0xe) = 0;

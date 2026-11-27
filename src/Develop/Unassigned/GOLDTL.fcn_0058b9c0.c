@@ -5,7 +5,7 @@ extern char g_6a22d8[];
 extern char g_68b3f8[];
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-void __cdecl fcn_0058b9c0(void* record, void* output)
+void __cdecl d2_FormatWorkerFullName(void* record, void* output)
 {
 	if (*(int*) ((char*) record + 0x2c) != 0) {
 		if (*(int*) ((char*) record + 0x38) == 0) {

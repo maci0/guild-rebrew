@@ -9,7 +9,7 @@ extern int g_7746a0;
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_00597ec0(char*);
+void __cdecl d2_OpenContactEinkaufPanel(char*);
 void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
@@ -40,7 +40,7 @@ void __cdecl d2_RunTischlereiInteriorHud(char* e)
 			meister = RegisterStatusText("ob_MEISTERBRIEF", g_14a7d28, 0xc);
 			personal = RegisterStatusText("ob_PERSONALBUCH", g_14a7b50, 0xc);
 		}
-		fcn_00597ec0(e);
+		d2_OpenContactEinkaufPanel(e);
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == prod) {
 				d2_RunProduktionDialog(e);

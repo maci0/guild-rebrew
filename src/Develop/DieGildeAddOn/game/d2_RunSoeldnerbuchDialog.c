@@ -104,16 +104,16 @@ extern unsigned char g_773d75;
 void* __cdecl fcn_00534c40(unsigned int, int, int, ...);
 void __cdecl d2_UpdatePagedPanel(char*);
 void __cdecl d2_HandleBookPageButton(char*);
-int __cdecl fcn_00517c00(int, int, int, char*);
+int __cdecl gm_FormatEntityTitleAndName(int, int, int, char*);
 char* __cdecl gm_FindBuildingOwner(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00535550(char*);
+void __cdecl d2_TurnBookPagesForward(char*);
 void __cdecl d2_TurnBookPagesBack(char*);
-int __cdecl fcn_005b5750(void);
+int __cdecl d2_PromptSoeldnerAmountDialog(void);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
 void __cdecl cm_SendLogAction(int);
@@ -125,14 +125,14 @@ void __cdecl d2_DestroyElement(int);
 int __cdecl gm_CollectBuildingObjectSlots(unsigned char*, int*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
-int __cdecl fcn_0046f940(int, char*);
-int __cdecl fcn_0046fac0(int, int, char*, int);
+int __cdecl d2_SetLabelText(int, char*);
+int __cdecl d2_EqualizeWindowButtonWidths(int, int, char*, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl fcn_0051af00(char*, char*, ...);
 int __cdecl gm_GetEntityRelation(int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 int __cdecl fcn_004693b0(int, int);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_ClearRadioGroup(int);
@@ -163,13 +163,13 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 	f.win = (char*) fcn_00534c40(buildingId, 0x6a42c8, 4, 0x6ac340, 0x6ac300,
 	                           0x6ac314, 0x6ac328);
 	d2_UpdatePagedPanel(f.win);
-	fcn_00517c00(*(unsigned short*) (building + 0x27), 1, 2, f.numA);
-	fcn_00517c00(*(unsigned short*) (building + 0x25), 1, 2, f.numB);
+	gm_FormatEntityTitleAndName(*(unsigned short*) (building + 0x27), 1, 2, f.numA);
+	gm_FormatEntityTitleAndName(*(unsigned short*) (building + 0x25), 1, 2, f.numB);
 	p = gm_FindBuildingOwner((int) building);
 	if (p == 0) {
 		strcpy(f.txtName, *(char**) 0x14abc28);
 	} else {
-		fcn_00517c00(*(unsigned short*) p, 1, 1, f.txtName);
+		gm_FormatEntityTitleAndName(*(unsigned short*) p, 1, 1, f.txtName);
 	}
 	d2_SetForm(*(int*) (f.win + 0x228), 3);
 	io_AppendText((char*) 0x68beac);
@@ -227,13 +227,13 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 			d2_AddToRadioGroup(f.hRadio, f.rows[i].icon);
 		}
 		f.tv -= 0x36;
-		f.rows[i].label = fcn_0046fac0(f.tv, f.rows[i].y - 0x11,
+		f.rows[i].label = d2_EqualizeWindowButtonWidths(f.tv, f.rows[i].y - 0x11,
 		                               *(char**) 0x14abc28,
 		                               *(int*) 0x772514);
 		GUI(f.rows[i].icon).value_05c = 1;
 		GUI(f.rows[i].label).width = 0xa0;
 		GUI(f.rows[i].label).value_06c = 1;
-		f.rows[i].value = fcn_0046fac0(f.tv, f.rows[i].y + 0x44,
+		f.rows[i].value = d2_EqualizeWindowButtonWidths(f.tv, f.rows[i].y + 0x44,
 		                               (char*) 0x6b5c60,
 		                               *(int*) 0x772514);
 		f.rows[i].obj = 0;
@@ -260,7 +260,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 		d2_UpdatePagedPanel(f.win);
 		d2_HandleBookPageButton(f.win);
 		if (*(unsigned char*) 0x14cf950 == 0xcd) {
-			fcn_00535550(f.win);
+			d2_TurnBookPagesForward(f.win);
 		}
 		if (*(unsigned char*) 0x14cf950 == 0xcb) {
 			d2_TurnBookPagesBack(f.win);
@@ -270,7 +270,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 		}
 		if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == f.hE
 		    && f.nSlots != 0) {
-			n = fcn_005b5750();
+			n = d2_PromptSoeldnerAmountDialog();
 			if (n == 0) {
 				goto L7e3d;
 			}
@@ -387,10 +387,10 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 						    r->x + 0x1a, r->y,
 						    *(int*) (r->obj + 0x18c),
 						    *(int*) 0x772514);
-						fcn_00517c00(
+						gm_FormatEntityTitleAndName(
 						    *(unsigned short*) r->obj, 1,
 						    1, f.txtNum);
-						fcn_0046f940(r->label, f.txtNum);
+						d2_SetLabelText(r->label, f.txtNum);
 						GUI(r->label).value_06c = 1;
 						GUI(r->label).width = 0xa0;
 						r->bar = d2_AddWindowValueGauge(
@@ -405,7 +405,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 						    *(unsigned short*) 0x774970,
 						    *(unsigned short*) r->obj);
 						percent = (f.tv + 128.0) * 100.0;
-						fcn_00472380(
+						d2_CreateGuiWindow(
 						    r->bar, 0, 0x64,
 						    (int) (percent * 0.00392156862745098));
 					}
@@ -415,7 +415,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 					strcpy(f.txtWorker,
 					       *(char**) 0x14abbb0);
 					r->state = 2;
-					fcn_0046f940(r->label, f.txtWorker);
+					d2_SetLabelText(r->label, f.txtWorker);
 					GUI(r->label).width = 0xa0;
 					GUI(r->label).height = 0x28;
 				} else {
@@ -436,10 +436,10 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 					strcpy(f.txtDefault,
 					       *(char**) 0x14abc28);
 					r->state = 0;
-					fcn_0046f940(r->label, f.txtDefault);
+					d2_SetLabelText(r->label, f.txtDefault);
 					GUI(r->label).width = 0xa0;
 					GUI(r->label).height = 0x28;
-					fcn_0046f940(r->value,
+					d2_SetLabelText(r->value,
 					             (char*) 0x6b5c60);
 				}
 				r++;
@@ -538,7 +538,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 			goto L870d;
 		}
 		if (*(int*) 0x67d370 == f.hB && f.hA != -1) {
-			if (fcn_00526120(*(char**) 0x14abbf8, 1) != 0) {
+			if (d2_ShowModalMessageBox(*(char**) 0x14abbf8, 1) != 0) {
 				for (i = 0; i < 3; i++) {
 					d2_SetForm(
 					    *(int*) (f.win + 0x228 + i * 4), 2);
@@ -565,7 +565,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 			p = (char*) f.rows[f.hA].obj;
 			if (*(int*) (p + 0x174) < 4) {
 				fcn_0051af00(f.text, (char*) 0x1a27, 4);
-				fcn_00526120(f.text, 0);
+				d2_ShowModalMessageBox(f.text, 0);
 			} else {
 				memset(&f.msg, 0, 0xf8);
 				f.msg.type = 0x32;

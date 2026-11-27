@@ -22,7 +22,7 @@ extern int g_100f1dc;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl amt_ApplyOfficeSupportEffect(char*, char*);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 unsigned short* __cdecl d2_OpenTargetPicker(Query*, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -61,7 +61,7 @@ int __cdecl amt_HandleOfficeSupport(char* e, char* o)
 	r = 2;
 	memset(&q, 0, sizeof(q));
 	if (*(int*) (e + 0x1cc) & 0x80000) {
-		fcn_00526120(g_14ac6a0, 0);
+		d2_ShowModalMessageBox(g_14ac6a0, 0);
 		return 0x81;
 	}
 	q.x10 = 6;

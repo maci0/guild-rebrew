@@ -1,5 +1,5 @@
 #include <string.h>
-char __cdecl fcn_0052dd40(char* name, int* list)
+char __cdecl d3_CollectWimpelNodes(char* name, int* list)
 {
 	if (strstr(name, "sp_WIMPEL")) {
 		list[list[0] + 1] = (int) name;

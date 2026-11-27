@@ -7,7 +7,7 @@ extern GuiObj g_00fb1020[]; /* 0x00fb1020 */
 extern GOLD_GUI_WINDOW g_00f8f120[]; /* 0x00f8f120 */
 extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 
-void __cdecl fcn_004754c0(int k, int flag)
+void __cdecl d2_SetFormVisible(int k, int flag)
 {
 	GuiObj* o;
 	GOLD_GUI_WINDOW* w;

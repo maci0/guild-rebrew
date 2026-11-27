@@ -6,7 +6,7 @@
 extern float g_662d40[3];
 extern char* evt_CurrentScript;
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
-void __cdecl fcn_00455140(char* src, float* v, float* out);
+void __cdecl d3_TransformDirection(char* src, float* v, float* out);
 float __cdecl d3_SignedPlanarAngle(float* a, float* b);
 void __cdecl d3_SetObjectRotation(char* h, float* v);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
@@ -26,7 +26,7 @@ int __cdecl SetCharacterToDummy(char** a, char** b)
 	v[0] = 0.0f;
 	v[1] = 0.0f;
 	v[2] = 0.0f;
-	fcn_00455140(*b, g_662d40, c);
+	d3_TransformDirection(*b, g_662d40, c);
 	v[1] = d3_SignedPlanarAngle(g_662d40, c);
 	d3_SetObjectRotation(*(char**) (*a + 0x34), v);
 	return 0;

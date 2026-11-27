@@ -88,7 +88,7 @@ int __cdecl gm_GetEntityMood(char* ent);
 void __cdecl fcn_004727a0(int a, int b);
 int __cdecl fcn_00519190(int id, ...);
 void __cdecl io_FormatTextBuffer(char* out, int id, ...);
-int __cdecl fcn_00526120(char* text, int mode);
+int __cdecl d2_ShowModalMessageBox(char* text, int mode);
 int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 void __cdecl d2_SetElementEnabled(int a, int b);
 void __cdecl d2_SetBildArgument(int a, int b);
@@ -368,7 +368,7 @@ after_build:
 		if (d2_CurrentElementId == v.h30 && g_7747b0 >= 0) {
 			io_FormatTextBuffer(text1, 0x17c7, (int) ent);
 			d2_SetFormVisibility(dlg, 0);
-			if (fcn_00526120(text1, 1) != 0) {
+			if (d2_ShowModalMessageBox(text1, 1) != 0) {
 				memset(&st, 0, sizeof(st));
 				st.f04 = 0x20;
 				st.f08 = *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
@@ -389,7 +389,7 @@ after_build:
 		if (d2_CurrentElementId == v.h54 && g_7747b0 >= 0) {
 			if (gm_CanBuildBuildingType((unsigned char) ent[0],
 				g_774970) != 1) {
-				fcn_00526120((char*) g_14ab294, 0);
+				d2_ShowModalMessageBox((char*) g_14ab294, 0);
 				goto loop_test;
 			}
 			d2_SetFormVisibility(dlg, 0);
@@ -400,7 +400,7 @@ after_build:
 				    (unsigned short) *(unsigned short*)
 					(ent + 0x25), (int) ent,
 				    *(int*) (v.other + 0xb0));
-				if (fcn_00526120(text2, 1) != 0) {
+				if (d2_ShowModalMessageBox(text2, 1) != 0) {
 					gm_BuyBuilding(*(int*) (ent + 1),
 					    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
 
@@ -432,7 +432,7 @@ after_build:
 			v.len = (int) ((double) v.len * 0.5);
 			io_FormatTextBuffer(text3, 0x17e3, (int) ent,
 			    (int) ent, v.len);
-			if (fcn_00526120(text3, 1) != 0) {
+			if (d2_ShowModalMessageBox(text3, 1) != 0) {
 				cm_RequestMoveCredits(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
 
 					+ 4), -1, g_773d75, v.len);

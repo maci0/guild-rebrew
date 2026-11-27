@@ -7,7 +7,7 @@ extern double g_662aa0;
 extern double g_6628d0;
 extern double g_664f08;
 
-char __cdecl fcn_004d36b0(char*);
+char __cdecl d3_CollectConquerNode(char*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 void __cdecl d3_VisitSceneObjects(char*, int, int, char(__cdecl*)(char*), char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
@@ -29,7 +29,7 @@ char* __cdecl d3_FindNearestConquerNode(char* e)
     best = 1000000.0f;
     res = 0; i = 0;
     g_772f10 = 0;
-    d3_VisitSceneObjects(((char*) g_67a370), 0, 0x40, fcn_004d36b0, e);
+    d3_VisitSceneObjects(((char*) g_67a370), 0, 0x40, d3_CollectConquerNode, e);
     c = *(char**) (*(char**) (e + 0x184) + 0x34);
     d3_TransformPoint(c, c + 0x4c, pos);
     for (; i < g_772f10; i++) {

@@ -13,7 +13,7 @@ extern char* lpObjektePROT;
 extern unsigned short* lpObjekteINST;
 
 void* __cdecl m_alloc(int, char*);
-void __cdecl fcn_00500e40(void);
+void __cdecl init_BuildObjectProducerTables(void);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl srv_SeedRandomWithTime(void);
 
@@ -79,7 +79,7 @@ int __cdecl gm_InitGameData(char* dir)
 	}
 	fread(lpObjektePROT, 0x41, 0x2dc, f);
 	fclose(f);
-	fcn_00500e40();
+	init_BuildObjectProducerTables();
 	gm_KillAllSpieler();
 	row = 0;
 	do {

@@ -6,7 +6,7 @@ extern int __cdecl fcn_005024e0(int a, int b);
 extern float __cdecl eval_ObjektPreis2Credits(int a, int b);
 
 /* ADDRESS: GOLDTL 0x005016f0 */
-void __cdecl fcn_005016f0(int which)
+void __cdecl gm_InitTownGoodsTable(int which)
 {
 	char* def;
 	char* dst;

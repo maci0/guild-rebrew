@@ -25,13 +25,13 @@ int __cdecl he_CountEntityActions(void*, unsigned short*, int*);
 int __cdecl he_HasNoActiveAction0x88(unsigned short*, void*);
 int __cdecl d2_CheckActionBlocker(void*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d2_LoadForm(int, int, void*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_005c9220(int*);
+void __cdecl d2_DrawLawCandidateStatus(int*);
 int __cdecl main_RunFrameLoop(void*, int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short __cdecl gm_RandomMod(int n);
@@ -58,17 +58,17 @@ int __cdecl d2_RunAction0x35Dialog(unsigned short* obj)
 	}
 	if (he_CountEntityActions(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), obj, &cnt) == 0) {
 		io_FormatTextBuffer(text, 0x190f, *obj);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
 	if (he_HasNoActiveAction0x88(obj, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970])) == 0) {
 		io_FormatTextBuffer(text, 0x409f, *obj);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
 	if (cnt > 3) {
 		io_FormatTextBuffer(text, 0x190e);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
 	if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1) == 0) {
@@ -86,7 +86,7 @@ int __cdecl d2_RunAction0x35Dialog(unsigned short* obj)
 	arr[1] = 2;
 	arr[2] = 3;
 	arr[5] = 3;
-	fcn_005c9220(arr);
+	d2_DrawLawCandidateStatus(arr);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {

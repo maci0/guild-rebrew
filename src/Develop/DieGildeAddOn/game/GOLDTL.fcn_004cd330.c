@@ -2,7 +2,7 @@ extern int* cut_ActiveCutscene;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl cut_SyncEntityTransform(char*, float*, float*, int);
-void __cdecl fcn_004d8200(int*);
+void __cdecl cut_StartCombatAttack(int*);
 void __cdecl gm_CancelEntityActionQueue(int*);
 void __cdecl cut_QueueHideCharacter(int*);
 void __cdecl gm_StartGroundCollectAction(int*);
@@ -23,7 +23,7 @@ int __cdecl cm_ExDispatchCutsceneAction(unsigned char* command, char* result)
 	case 2:
 		if (e[8] != 0) {
 			cut_SyncEntityTransform(e, (float*) (command + 0x15), (float*) (command + 0x25), *(int*) (command + 0x31));
-			fcn_004d8200((int*) (command + 0x35));
+			cut_StartCombatAttack((int*) (command + 0x35));
 		}
 		break;
 	case 6:

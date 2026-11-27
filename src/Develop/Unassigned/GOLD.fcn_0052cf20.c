@@ -1,5 +1,5 @@
 extern volatile int g_6b7fac;
-void __cdecl fcn_00476020(int);
+void __cdecl d2_SetCurrentFont(int);
 unsigned char __cdecl d3_GetObjectScreenRect(char*, int*);
 void __cdecl d2_RenderWrappedText(int, int, int, int, int, char*, int);
 void __cdecl d2_AddSlotDirtyRect(int, int, int, int);
@@ -25,7 +25,7 @@ void __cdecl d2_RenderFloatingMessages(void)
         if (slots[i].actor && (unsigned int) g_6b7fac > slots[i].time + 300u)
             slots[i].actor = 0;
     }
-    fcn_00476020(0x54);
+    d2_SetCurrentFont(0x54);
     for (i = 0; i < 0x40; i++) {
         if (!slots[i].actor)
             continue;

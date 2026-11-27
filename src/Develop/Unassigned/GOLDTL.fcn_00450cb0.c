@@ -21,7 +21,7 @@ extern int g_6b86f8;
 extern int g_67a370;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, int);
-void __cdecl fcn_00450d40(void);
+void __cdecl d3_ClassifySceneLightNode(void);
 
 void __cdecl d3_CollectSceneLights(int ctx, unsigned char mask)
 {
@@ -39,5 +39,5 @@ void __cdecl d3_CollectSceneLights(int ctx, unsigned char mask)
 	g_6b86f8 = 0;
 	g_6b86f4 = 0;
 	g_6b86f0 = 0;
-	d3_VisitSceneObjects(g_67a370, 0, (mask << 4) | 0x4e, fcn_00450d40, ctx);
+	d3_VisitSceneObjects(g_67a370, 0, (mask << 4) | 0x4e, d3_ClassifySceneLightNode, ctx);
 }

@@ -26,7 +26,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern IdGroup g_688118[];
 
 int __cdecl msx_FindActiveGroup(void);
-int __cdecl fcn_004c2820(int);
+int __cdecl msx_FindGroupByKey(int);
 int __cdecl gm_GetSeason(int*);
 void __cdecl fcn_004c2100(void);
 void __cdecl msx_SelectOutdoorTrack(void);
@@ -60,7 +60,7 @@ void __cdecl msx_StopOutdoorTrackOnSeason(void)
 	}
 	if (g_772e64 != gm_GetSeason((int*) &gm_GameTime)) {
 		if (g_772e64 != 0) {
-			slot = fcn_004c2820(0x2694);
+			slot = msx_FindGroupByKey(0x2694);
 			g_772e64 = gm_GetSeason((int*) &gm_GameTime);
 			if (slot < 0) {
 				return;

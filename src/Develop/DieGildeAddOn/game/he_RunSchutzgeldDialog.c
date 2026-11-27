@@ -24,7 +24,7 @@ int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl fcn_00545780(int a);
 void __cdecl he_FreeAction(int a);
 int __cdecl gm_CompareGameTime(void* sel, int* out);
-void __cdecl fcn_00545670(int a, int b, int c, char* caption, int d);
+void __cdecl d2_CreateActionPopupSlot(int a, int b, int c, char* caption, int d);
 int __cdecl fcn_0051e070(void);
 int __cdecl gm_AddTime(int* sel, int a, int b, int c);
 void __cdecl cm_SendSetHE(int a, int b);
@@ -101,7 +101,7 @@ void __cdecl he_RunSchutzgeldDialog(int dlg, int a1, int a2)
 		return;
 	}
 open:
-	fcn_00545670(dlg, 0, 0, "Berufe\\Messagebox_SCHUTZGELD", 0x5f3);
+	d2_CreateActionPopupSlot(dlg, 0, 0, "Berufe\\Messagebox_SCHUTZGELD", 0x5f3);
 	if (*(int*) (dlg + 0x74) == 0) {
 		he_FreeAction(dlg);
 		return;

@@ -20,7 +20,7 @@ void __cdecl d2_RunProductionTradeDialog(char*);
 void __cdecl d2_ShowProductionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_RunMetalProduktionDialog(char*);
-void __cdecl fcn_005c79a0(char*);
+void __cdecl d2_RunWorkerTrainingDialog(char*);
 
 void __cdecl d2_RunSteinbruchInteriorHud(char* e)
 {
@@ -72,7 +72,7 @@ void __cdecl d2_RunSteinbruchInteriorHud(char* e)
 			} else if (g_7746a0 == prod) {
 				d2_RunMetalProduktionDialog(e);
 			} else if (g_7746a0 == zs || g_7746a0 == sp) {
-				fcn_005c79a0(e);
+				d2_RunWorkerTrainingDialog(e);
 			}
 		}
 	}

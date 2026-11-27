@@ -22,8 +22,8 @@ extern int g_100f1dc;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl amt_SendAction0x45(char*, char*, int);
-void __cdecl fcn_00526120(int, int);
-unsigned short* __cdecl fcn_005cadc0(int, Query*, int, char*, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
+unsigned short* __cdecl d2_RunOfficeListDialog(int, Query*, int, char*, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -68,13 +68,13 @@ int __cdecl gm_HandleVerhoerMode2(char* e, char* o)
 	r = 2;
 	memset(&q, 0, sizeof(q));
 	if (*(int*) (e + 0x1c8) & 0x100) {
-		fcn_00526120(g_14ac6a0, 0);
+		d2_ShowModalMessageBox(g_14ac6a0, 0);
 		return 0x81;
 	}
 	q.x10 = 6;
 	q.x4 = 0xc00;
 	q.mask = g_666018;
-	g = fcn_005cadc0(5, &q, g_14acb94, "", 0);
+	g = d2_RunOfficeListDialog(5, &q, g_14acb94, "", 0);
 	if (g == 0) {
 		return 2;
 	}

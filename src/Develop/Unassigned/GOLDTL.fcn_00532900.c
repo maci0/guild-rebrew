@@ -10,11 +10,11 @@ extern s_7e46c0 g_7e46c0[32];
 
 void __cdecl d2_SelectFont(int);
 char __cdecl d3_GetObjectScreenRect(char*, int*);
-void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
+void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl d3_DrawBuildingUpgradeLabel(void);
 
-void __cdecl fcn_00532900(void)
+void __cdecl d2_DrawBuildingUpgradeLabels(void)
 {
 	int r[4];
 	s_7e46c0* p;
@@ -25,7 +25,7 @@ void __cdecl fcn_00532900(void)
 		e = p->e;
 		if (e != 0 && (*(int*) (e + 0x1cc) != 0 || *(int*) (e + 0x218) == 0) &&
 		    d3_GetObjectScreenRect(e, r) != 0) {
-			fcn_0046bd20(r[0] + (r[2] - r[0]) / 2 - 0x50, r[1], 0xa0, 0x60, g_77250c,
+			d2_DrawWordWrappedText(r[0] + (r[2] - r[0]) / 2 - 0x50, r[1], 0xa0, 0x60, g_77250c,
 			             p->name, 0x28);
 		}
 	}

@@ -6,7 +6,7 @@ extern short g_14ce8c2;
 extern int g_774a58;
 extern int g_774a4c;
 
-int __cdecl fcn_005b10e0(char* w)
+int __cdecl d2_ScrollMapViewport(char* w)
 {
 	int r;
 	int x;

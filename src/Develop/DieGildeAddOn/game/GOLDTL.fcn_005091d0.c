@@ -1,5 +1,5 @@
-typedef struct StatRow StatRow;
-struct StatRow {
+typedef struct PLAYER_RANK_ROW PLAYER_RANK_ROW;
+struct PLAYER_RANK_ROW {
 	unsigned short id;
 	short pad;
 	int count;
@@ -18,7 +18,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x005091d0 */
-void __cdecl fcn_005091d0(int* pn, StatRow* rows)
+void __cdecl gm_RankPlayers(int* pn, PLAYER_RANK_ROW* rows)
 {
 	int tmp[6];
 	char buf[0x100];
@@ -33,8 +33,8 @@ void __cdecl fcn_005091d0(int* pn, StatRow* rows)
 	float fpts;
 	float statValue;
 	unsigned char* p;
-	StatRow* q;
-	StatRow* r;
+	PLAYER_RANK_ROW* q;
+	PLAYER_RANK_ROW* r;
 	int off;
 
 	q = rows;

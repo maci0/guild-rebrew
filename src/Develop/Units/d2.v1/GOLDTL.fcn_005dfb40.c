@@ -53,7 +53,7 @@ int __cdecl vfs_ListFilesByExtension(int, int, Rec*);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_0046f940(int, char*);
+void __cdecl d2_SetLabelText(int, char*);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -104,7 +104,7 @@ int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, c
 		((D2_CONTROL_TL*) g_1015ea0)[recs[i].id].flags_1d0 = 3;
 	}
 	_itoa(count, buf, 10);
-	fcn_0046f940(field, buf);
+	d2_SetLabelText(field, buf);
 	d2_SetElementFont(field, 0x54);
 	while (main_RunFrameLoop((void*) d2_OpenFileSelector, wait) != 0) {
 		if (g_14ce8e0 != 0) {

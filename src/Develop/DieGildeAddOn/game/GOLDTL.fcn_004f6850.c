@@ -22,7 +22,7 @@ void __cdecl cm_SendBlockCharacter(int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_004c5980(void*);
+void __cdecl cm_EnqueueStagedPacket(void*);
 int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
 int __cdecl amt_SendOfficeCommand(unsigned char, int, int, int, int);
 
@@ -149,7 +149,7 @@ void __cdecl cut_ExecuteProzessPunishment(unsigned short* entity, int action)
 		if (((char*) entity)[2] == 6 || ((char*) entity)[2] == 7) {
 			*(char*) (pkt + 0x26) = 0xa2;
 		}
-		fcn_004c5980(pkt);
+		cm_EnqueueStagedPacket(pkt);
 		if (srv_GetEntityOfficeSlot((unsigned char*) entity, b9 + 0x12c, b9) == 0) {
 			return;
 		}

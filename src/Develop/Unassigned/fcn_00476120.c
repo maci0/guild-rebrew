@@ -1,7 +1,7 @@
 #include <string.h>
 extern void * g_6b5de0; extern int g_772614; extern int g_7725ec;
 int __cdecl d2_BuildQuadVertices(int a1, int a2, int a3, int a4, void* out);
-void __cdecl fcn_004372d0(int a1, int a2, int a3, int a4, int a5);
+void __cdecl d3_SetRenderMaterialState(int a1, int a2, int a3, int a4, int a5);
 
 typedef struct BlitSurf BlitSurf;
 typedef struct BlitSurf {
@@ -27,7 +27,7 @@ typedef struct BlitSurf {
 int __cdecl d2_LockSurface(BlitSurf* s);
 int __cdecl d2_UnlockSurface(BlitSurf* s);
 int __cdecl fcn_00476120(int x, int y, int w, int h, char* src, int sx, int sy, char* dst);
-int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused);
+int __cdecl d2_BlitSurface(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused);
 
 /* ADDRESS: GOLDTL 0x00476120 */
 int __cdecl fcn_00476120(int left, int top, int width, int height, char* src,
@@ -61,7 +61,7 @@ int __cdecl fcn_00476120(int left, int top, int width, int height, char* src,
 												*(int*) &g_772614, 0x1c);
 		(*(int (__stdcall**) (int, int))
 		 (*(char**) *(void**) &g_6b5de0 + 0x130))(*(int*) &g_6b5de0, 0x144);
-		fcn_004372d0(0xfe, 0, 0, 1, 1);
+		d3_SetRenderMaterialState(0xfe, 0, 0, 1, 1);
 		(*(int (__stdcall**) (int, int, int))
 		 (*(char**) *(void**) &g_6b5de0 + 0xc8))(*(int*) &g_6b5de0, 7, 0);
 		area[0] = 0;

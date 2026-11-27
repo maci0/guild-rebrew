@@ -11,7 +11,7 @@
 extern HEAD_SET g_6918e8[];
 
 
-void __cdecl fcn_004fdd70(HEAD_SET*);
+void __cdecl gm_ResolveHeadSetIcons(HEAD_SET*);
 
 HEAD_SET* __cdecl gm_FindOrAllocHeadSet(int which, int key)
 {
@@ -31,7 +31,7 @@ HEAD_SET* __cdecl gm_FindOrAllocHeadSet(int which, int key)
 			break;
 		}
 		if (base[i].key == key) {
-			fcn_004fdd70(&base[i]);
+			gm_ResolveHeadSetIcons(&base[i]);
 			return &base[i];
 		}
 	}

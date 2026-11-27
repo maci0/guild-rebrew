@@ -13,7 +13,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl d2_SetControlText(int, int);
-int __cdecl fcn_0057de80(int);
+int __cdecl d2_IsPrivilegeMessageEnabled(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_GetControlValue(int);
@@ -40,7 +40,7 @@ void __cdecl d2_RunMessageFilterDialog(void)
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_1d4)) = 0x78;
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_1dc)) = 0x1e;
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_1e0)) = 3;
-		d2_SetElementValue(b, fcn_0057de80(0x605 + i) == 0);
+		d2_SetElementValue(b, d2_IsPrivilegeMessageEnabled(0x605 + i) == 0);
 	}
 	while (main_RunFrameLoop(d2_RunMessageFilterDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0 || (*(unsigned char*)&g_14cf950) == 1) {

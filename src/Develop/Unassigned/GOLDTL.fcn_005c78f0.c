@@ -6,7 +6,7 @@ extern int g_10161cc[];
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 
-int __cdecl fcn_005c78f0(int row, int id, int* out, int layer)
+int __cdecl d2_CreateItemRowControls(int row, int id, int* out, int layer)
 {
 	out[1] = d2_AddElementToWindow(0, row * 120, 0x74c, layer);
 	out[0] = d2_AddElementToWindow(0xd, row * 120 + 5, id, layer);

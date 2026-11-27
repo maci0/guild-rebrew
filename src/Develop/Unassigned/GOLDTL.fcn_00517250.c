@@ -11,7 +11,7 @@ int __cdecl gm_FindGebaeudePrototypeByName(const char*);
 int __cdecl _isctype(int, int);
 
 /* ADDRESS: GOLDTL 0x00517250 */
-int __cdecl fcn_00517250(char* name, int idx)
+int __cdecl gm_LoadCityIniData(char* name, int idx)
 {
 	char staedte[8][0x40];
 	int werte[0x40];
@@ -63,7 +63,7 @@ int __cdecl fcn_00517250(char* name, int idx)
 			count++;
 		}
 		for (i = 0; i < count; i++) {
-			fcn_00517250(staedte[i], i + 1);
+			gm_LoadCityIniData(staedte[i], i + 1);
 		}
 	}
 	GetPrivateProfileStringA("A - ALLGEMEIN", "MaxPlayer", "4", buf, 0x100, datei);

@@ -55,7 +55,7 @@ typedef struct {
 Mesh* __cdecl d3_FindCachedModel(int);
 void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl d3_AddRefTexture(int, int);
-void* __cdecl fcn_004382e0(Ent*);
+void* __cdecl d3_SelectObjectLod(Ent*);
 
 /*
  * TODO: replace this inline-asm copy with proper C once a spelling is
@@ -126,7 +126,7 @@ void __cdecl fcn_00449ba0(Ent* e, Obj* o, int id)
 	if (o != &e->set->obj) {
 		e->set->count++;
 		if (e->cur == 0) {
-			e->cur = fcn_004382e0(e);
+			e->cur = d3_SelectObjectLod(e);
 			if (e->cur == 0) {
 				for (i = 0; e->cur == 0 && i < 3; i++) {
 					if (e->set->subs[i].x408 > 0 && e->set->subs[i].x404 > 0 && e->set->subs[i].x40c != 0) {

@@ -8,7 +8,7 @@ int __cdecl gm_CheckZunftPreismanipulation(char*);
 int __cdecl gm_ExecZunftPreismanipulation(int, int*);
 int __cdecl io_AppendText();
 int __cdecl d2_CheckActionBlocker(void*, int);
-int __cdecl fcn_00526120(void*, int);
+int __cdecl d2_ShowModalMessageBox(void*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 void __cdecl d2_InitWindowBounds(int);
@@ -39,7 +39,7 @@ void __cdecl d2_RunZunftPreismanipulationDialog(void)
 	n = gm_CheckZunftPreismanipulation((char*) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) &g_774970]));
 	if (n != 1) {
 		if (n == -1) {
-			fcn_00526120((void*) *(int*) 0x14aad38, 0);
+			d2_ShowModalMessageBox((void*) *(int*) 0x14aad38, 0);
 			return;
 		}
 		d2_CheckActionBlocker((void*) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) &g_774970]), 3);

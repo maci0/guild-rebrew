@@ -1,40 +1,40 @@
 typedef struct {
 	int id;
 	int b;
-} fcn_004b2070_pair;
+} HISTORY_BANK_ENTRY;
 
 typedef struct {
 	int a;
-	fcn_004b2070_pair e[8];
-} fcn_004b2070_group;
+	HISTORY_BANK_ENTRY e[8];
+} HISTORY_BANK_SLOT;
 // SIZE 0x44
 
 typedef struct {
 	char name[0x74];
-} fcn_004b2070_rec;
+} TXT_BANK_HEADER;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6808a4[];
 
 int __cdecl _strnicmp(char*, char*, int);
-void __cdecl txt_ReleaseTextBank(fcn_004b2070_rec*);
+void __cdecl txt_ReleaseTextBank(TXT_BANK_HEADER*);
 
 
 /* ADDRESS: GOLDTL 0x004b2070 */
-void __cdecl fcn_004b2070(void)
+void __cdecl txt_ResetHistoryTextBanks(void)
 {
 	int j;
 	int i;
 
 	for (j = 0; j < 4; j++) {
-		((fcn_004b2070_group*)g_1007bc0)[j].a = 1;
+		((HISTORY_BANK_SLOT*)g_1007bc0)[j].a = 1;
 		for (i = 0; i < 4; i++) {
-			((fcn_004b2070_group*)g_1007bc0)[j].e[i].id = -1;
-			((fcn_004b2070_group*)g_1007bc0)[j].e[i].b = 0xffff;
+			((HISTORY_BANK_SLOT*)g_1007bc0)[j].e[i].id = -1;
+			((HISTORY_BANK_SLOT*)g_1007bc0)[j].e[i].b = 0xffff;
 		}
 	}
 	for (i = 0; i < 128; i++) {
-		if (_strnicmp(((fcn_004b2070_rec*)txt_TextBanks)[i].name, g_6808a4, 9) == 0)
-			txt_ReleaseTextBank(&((fcn_004b2070_rec*)txt_TextBanks)[i]);
+		if (_strnicmp(((TXT_BANK_HEADER*)txt_TextBanks)[i].name, g_6808a4, 9) == 0)
+			txt_ReleaseTextBank(&((TXT_BANK_HEADER*)txt_TextBanks)[i]);
 	}
 }

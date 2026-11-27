@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00474d80 */
-void __cdecl d2_CaptureFormPageTextures(int slot, void* a1, void* a2)
+void __cdecl d2_CaptureFormPageTextures(int slot, void* upper, void* lower)
 {
 	/* Stub: native provider identity restored; body not recovered. */
 }

@@ -20,7 +20,7 @@ void __cdecl fcn_004437a0(int);
 #include "client_scene_loader.h"
 int __cdecl fcn_0045b700(struct D3_FLOOR_HEADER*, int, int);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
-void __cdecl fcn_005224b0(void);
+void __cdecl d3_BindBuildingSceneObjects(void);
 void __cdecl fcn_005224f0(void);
 
 int __cdecl d3_LoadSceneAndTerrain(void* stream)
@@ -45,7 +45,7 @@ int __cdecl d3_LoadSceneAndTerrain(void* stream)
 	if (((struct D3_FLOOR_HEADER*)g_6b8300) != 0) {
 		((struct D3_FLOOR_HEADER*)g_6b8300)->mode = g_699b08;
 	}
-	d3_TraverseSceneObjects(g_67a370, 0, 0x1c0, (void*) fcn_005224b0);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x1c0, (void*) d3_BindBuildingSceneObjects);
 	d3_TraverseSceneObjects(g_67a370, 0, 0xc0, (void*) fcn_005224f0);
 	d3_SelectSceneContext(save, 0);
 	return 1;

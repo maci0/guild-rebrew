@@ -5,7 +5,7 @@
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl fcn_00502cd0(int, int, ...);
 char __cdecl d3_GetObjectScreenRect(void*, int*);
-void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
+void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x00532750 */
 void __cdecl d3_DrawBuildingUpgradeLabel(char* sceneNode)
@@ -65,7 +65,7 @@ found:
 			*(char**) ((int) *hit * 8 + 0x14a79c0), *(char**) 0x14a552c);
 	}
 	if (d3_GetObjectScreenRect(sceneNode, rc)) {
-		fcn_0046bd20((rc[2] - rc[0]) / 2 + rc[0] - 0x50, rc[1], 0xa0, 0x60,
+		d2_DrawWordWrappedText((rc[2] - rc[0]) / 2 + rc[0] - 0x50, rc[1], 0xa0, 0x60,
 			g_77250c, value, 0x28);
 	}
 }

@@ -10,7 +10,7 @@ extern unsigned int g_7728bc;
 
 
 /* ADDRESS: GOLDTL 0x004a34d0 */
-ENTITY_CANDIDATE* __cdecl fcn_004a34d0(void)
+ENTITY_CANDIDATE* __cdecl gm_StepEntityCandidateRing(void)
 {
 	unsigned int n;
 	fcn_004a34d0_ring* r;

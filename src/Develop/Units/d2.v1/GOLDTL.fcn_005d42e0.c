@@ -37,10 +37,10 @@ void __cdecl d2_SetForm(char* dlg, int page);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl io_AppendText(int id, ...);
 float __cdecl gm_GetCityStatsSummary(Gfx* g);
-void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int rec);
+void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int rec);
 char* __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
-void __cdecl fcn_0046fac0(int a, int y, char* text, int rec);
-int __cdecl fcn_00472380(int id, int mask);
+void __cdecl d2_EqualizeWindowButtonWidths(int a, int y, char* text, int rec);
+int __cdecl d2_CreateGuiWindow(int id, int mask);
 void __cdecl fcn_00472c30(int x1, int y1, int x2, int y2, int r, int g, int b);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 int __cdecl d2_GetControlValue(int id);
@@ -48,7 +48,7 @@ int __cdecl main_RunFrameLoop(void* fn, int id);
 void __cdecl d2_DestroyForm(char* dlg);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d42e0 */
-void __cdecl fcn_005d42e0(void)
+void __cdecl d2_RunStadtStatistikDialog(void)
 {
 	unsigned char colors[15];
 	char* cp;
@@ -109,7 +109,7 @@ void __cdecl fcn_005d42e0(void)
 	n = (int) ((gfx.f[3] > 0.0 ? gfx.f[3] : 0.0) * g_662c38);
 	io_AppendText(0x1f22, n);
 	d2_SetForm(dlg, 3);
-	fcn_005d3d90((unsigned short) g_775340, gfx, d2_CurrentWindowId);
+	d2_DrawCityHistoryCharts((unsigned short) g_775340, gfx, d2_CurrentWindowId);
 	d2_SetForm(dlg, 4);
 	cp = (char*) &colors[1];
 	row = 0;
@@ -119,10 +119,10 @@ void __cdecl fcn_005d42e0(void)
 		n = d2_AddElementToWindow(5, i + 1, 2, d2_CurrentWindowId);
 		items[row] = n;
 		io_FormatTextBuffer(buf, row + 0x1f25);
-		fcn_0046fac0(0x19, i, buf, d2_CurrentWindowId);
+		d2_EqualizeWindowButtonWidths(0x19, i, buf, d2_CurrentWindowId);
 		((D2_CONTROL_TL*) g_1015ea0)[n].value_05c = 1;
 		((D2_CONTROL_TL*) g_1015ea0)[n].value_058 = 1;
-		fcn_00472380(n, mask);
+		d2_CreateGuiWindow(n, mask);
 		*(char*) &r = cp[-1];
 		*(char*) &g = cp[0];
 		*(char*) &b = cp[1];
@@ -140,12 +140,12 @@ void __cdecl fcn_005d42e0(void)
 				g_775340 |= d2_GetControlValue(items[i]) ? (1 << i) : 0;
 			}
 			d2_SetForm(dlg, 3);
-			fcn_005d3d90(g_775340, gfx, d2_CurrentWindowId);
+			d2_DrawCityHistoryCharts(g_775340, gfx, d2_CurrentWindowId);
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		if (!main_RunFrameLoop(fcn_005d42e0, 0x657c7)) {
+		if (!main_RunFrameLoop(d2_RunStadtStatistikDialog, 0x657c7)) {
 			break;
 		}
 	}

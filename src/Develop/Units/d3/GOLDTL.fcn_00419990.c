@@ -51,12 +51,12 @@ extern float flt_677684[];
 extern int int_67769c[];
 extern char str_6776b8[];
 
-float __cdecl fcn_00413d10(float* pos);
+float __cdecl d3_SampleAverageTerrainHeight(float* pos);
 unsigned char __cdecl d3_GetFloorHeight(int* world, float* pos, unsigned int flag, unsigned int* grid_x, unsigned int* grid_y, float* radius);
 int __cdecl d3_GetFloorWaterType(int* world, int x, int y);
 float* __stdcall D3DXMatrixTranspose(float* matrix, const float* camera);
 void __cdecl d3_NormalizeVector(float* v);
-char* __cdecl fcn_00419640(int id, int* which);
+char* __cdecl d3snd_AcquireAmbientVoice(int id, int* which);
 char* __cdecl sb_PlayVoice(char* bank, char* name, int loop, int pan, int vol, int a, int b);
 void __cdecl sb_StopVoice(int* handle, int fade);
 void __cdecl sb_SetVoicePan(int* handle, int value);
@@ -111,7 +111,7 @@ void __cdecl d3snd_UpdateAmbientSources(void)
 	center[0] = *(float*) (d3_ActiveCamera + 0x4c);
 	center[1] = *(float*) (d3_ActiveCamera + 0x50);
 	center[2] = *(float*) (d3_ActiveCamera + 0x54);
-	hint = (int) (*(float*) (d3_ActiveCamera + 0x50) - fcn_00413d10((float*) (d3_ActiveCamera + 0x4c)));
+	hint = (int) (*(float*) (d3_ActiveCamera + 0x50) - d3_SampleAverageTerrainHeight((float*) (d3_ActiveCamera + 0x4c)));
 	if (hint > 2000) {
 		hint = 2000;
 	}
@@ -246,7 +246,7 @@ fill_one:
 		}
 		return;
 	case 1:
-		voice = (Voice_419990*) fcn_00419640(entries[0].id, &state);
+		voice = (Voice_419990*) d3snd_AcquireAmbientVoice(entries[0].id, &state);
 		if (voice != 0) {
 			if (voice->handle != 0) {
 				sb_SetVoiceVolume((int*) voice->handle, entries[0].volume);
@@ -263,7 +263,7 @@ fill_one:
 	case 2:
 		state = -1;
 		for (i = 0; i < count; i++) {
-			voice = (Voice_419990*) fcn_00419640(entries[i].id, &state);
+			voice = (Voice_419990*) d3snd_AcquireAmbientVoice(entries[i].id, &state);
 			if (voice != 0) {
 				if (voice->handle != 0) {
 					sb_SetVoiceVolume((int*) voice->handle, entries[i].volume);

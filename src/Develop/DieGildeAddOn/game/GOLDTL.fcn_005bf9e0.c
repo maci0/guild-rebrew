@@ -3,7 +3,7 @@ int __cdecl gm_CheckPrivilege(int, int, void*);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl gm_CheckEntityStock(int, int, char);
 int __cdecl he_HasNoActiveEvent04b(unsigned short*, int);
 int __cdecl he_HasNoActiveAction0x2e(unsigned short*, int);
@@ -14,7 +14,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, int, int, int);
-void __cdecl fcn_005c9220(int*);
+void __cdecl d2_DrawLawCandidateStatus(int*);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl gm_SelectRandomEntityCandidate(unsigned short*);
@@ -56,7 +56,7 @@ int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 	while (query) {
 		if (*(int*) (query + 0xb4) == *(int*) (entity + 2)) {
 			io_FormatTextBuffer(text, 0x170a, *entity);
-			fcn_00526120(text, 4);
+			d2_ShowModalMessageBox(text, 4);
 			return 0;
 		}
 		query = he_fn_Handlung();
@@ -66,17 +66,17 @@ int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 	}
 	if (!he_HasNoActiveEvent04b(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
 		io_FormatTextBuffer((char*) evt, 0x170b, *entity);
-		fcn_00526120((char*) evt, 0);
+		d2_ShowModalMessageBox((char*) evt, 0);
 		return 0;
 	}
 	if (!he_HasNoActiveAction0x2e(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
 		io_FormatTextBuffer((char*) evt, 0x170c, *entity);
-		fcn_00526120((char*) evt, 0);
+		d2_ShowModalMessageBox((char*) evt, 0);
 		return 0;
 	}
 	if (!he_HasNoActiveAction0x88(entity, *(unsigned short*) &g_774970 * 0x21c + 0x7f4ca0)) {
 		io_FormatTextBuffer((char*) evt, 0x409f);
-		fcn_00526120((char*) evt, 0);
+		d2_ShowModalMessageBox((char*) evt, 0);
 		return 0;
 	}
 	hwnd = d2_LoadForm(0, 0, (char*) 0x6ac494);
@@ -96,7 +96,7 @@ int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 	t[3] = 4;
 	t[4] = 3;
 	t[5] = 0x15;
-	fcn_005c9220(t);
+	d2_DrawLawCandidateStatus(t);
 	while (main_RunFrameLoop(0x5bf9e0, 0x677c7)) {
 		if (g_14ce8e0 || *(int*) &g_100f1dc == 1) {
 			g_774654 = 1;
@@ -113,7 +113,7 @@ int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 			cm_SendCopyEntityData(evt);
 			cm_SendTraceEnd((char*) 0x6ac4c0);
 			io_FormatTextBuffer(text, 0x1709, *entity);
-			fcn_00526120(text, 0);
+			d2_ShowModalMessageBox(text, 0);
 			g_774654 = 1;
 			res = 1;
 		}

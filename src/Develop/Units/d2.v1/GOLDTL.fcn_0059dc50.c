@@ -16,7 +16,7 @@ typedef struct
 // SIZE 0x50
 
 int __cdecl d2_CheckOwnerBlocked(char*);
-void __cdecl fcn_0052a0c0(char*, int);
+void __cdecl d2_InitPlayerBar(char*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005bdc30(int, Query*, char*, void*, int);
 void __cdecl d2_OpenRaubzugDialog(int, char*);
@@ -36,7 +36,7 @@ void __cdecl d2_StartRaubzugTargetSelect(char* building)
 	if (building == 0) {
 		return;
 	}
-	fcn_0052a0c0(building, 0);
+	d2_InitPlayerBar(building, 0);
 	q.x4c = 0x727;
 	q.x10 = 6;
 	q.x8 = 0xa07443a0;

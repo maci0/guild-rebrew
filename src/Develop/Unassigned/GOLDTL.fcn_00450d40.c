@@ -8,44 +8,44 @@ extern int g_6b86f0;
 extern int g_6b86f4;
 extern float g_662d40[3];
 
-unsigned char __cdecl fcn_00438450(char* o);
+unsigned char __cdecl d3_UpdateSceneObjectLodAndBounds(char* o);
 void __cdecl d3_TransformDirectionToRef(char* o, char* a, float* v, char* m);
 void __cdecl d3_TransformPointToRef(char* o, char* a, char* v, char* m);
 
 /* ADDRESS: GOLDTL 0x00450d40 */
-char __cdecl fcn_00450d40(char* o, char* a)
+char __cdecl d3_ClassifySceneLightNode(char* node, char* cam)
 {
-	if (*(int*) (o + 0x218) == 4) {
-		if (!(fcn_00438450(o) & 0x40)) {
-			*(char**) (o + 0x1f0) = g_6b86ec;
-			g_6b86ec = o;
+	if (*(int*) (node + 0x218) == 4) {
+		if (!(d3_UpdateSceneObjectLodAndBounds(node) & 0x40)) {
+			*(char**) (node + 0x1f0) = g_6b86ec;
+			g_6b86ec = node;
 			return 1;
 		}
-		*(char**) (o + 0x1f0) = g_1041d00;
-		g_1041d00 = o;
+		*(char**) (node + 0x1f0) = g_1041d00;
+		g_1041d00 = node;
 		return 1;
 	}
-	if (*(int*) (o + 0x218) == 8) {
-		if ((o[0x215] & 1) && *(float*) (o + 0x94) > 0.0f && g_6b86f8 < 4) {
-			*(char**) (o + 0x1f0) = g_6b86e0;
-			g_6b86e0 = o;
+	if (*(int*) (node + 0x218) == 8) {
+		if ((node[0x215] & 1) && *(float*) (node + 0x94) > 0.0f && g_6b86f8 < 4) {
+			*(char**) (node + 0x1f0) = g_6b86e0;
+			g_6b86e0 = node;
 			g_6b86f8++;
 		}
 		return 1;
 	}
-	if (*(int*) (o + 0x218) == 7) {
-		if (*(float*) (o + 0x94) > 0.0f && !(o[0x215] & 4)) {
-			d3_TransformDirectionToRef(o, a, g_662d40, o + 0x1d8);
-			*(char**) (o + 0x1f0) = g_6b86e4;
-			g_6b86e4 = o;
+	if (*(int*) (node + 0x218) == 7) {
+		if (*(float*) (node + 0x94) > 0.0f && !(node[0x215] & 4)) {
+			d3_TransformDirectionToRef(node, cam, g_662d40, node + 0x1d8);
+			*(char**) (node + 0x1f0) = g_6b86e4;
+			g_6b86e4 = node;
 			g_6b86f0++;
 		}
 		return 1;
 	}
-	if (*(float*) (o + 0x94) > 0.0f) {
-		d3_TransformPointToRef(o, a, o + 0x4c, o + 0x1d8);
-		*(char**) (o + 0x1f0) = g_6b86e8;
-		g_6b86e8 = o;
+	if (*(float*) (node + 0x94) > 0.0f) {
+		d3_TransformPointToRef(node, cam, node + 0x4c, node + 0x1d8);
+		*(char**) (node + 0x1f0) = g_6b86e8;
+		g_6b86e8 = node;
 		g_6b86f4++;
 	}
 	return 1;

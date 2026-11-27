@@ -5,24 +5,24 @@ typedef struct {
 	int pad4[2];
 	int fc;
 	int pad10[3];
-} Tab5c84;
+} D2_GELD_INFO_TAB;
 // SIZE 0x1c
 
 typedef struct {
 	int bar;
 	int btn;
 	char* e;
-} Line5c84;
+} D2_GELD_INFO_LINE;
 // SIZE 0xc
 
 typedef struct {
 	char pad[0x178];
 	int f178;
 	char pad17c[0xa0];
-} Ent5c84;
+} D2_GELD_INFO_ENTITY;
 // SIZE 0x21c
 
-extern Tab5c84 g_776aa0[16];
+extern D2_GELD_INFO_TAB g_776aa0[16];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_6ac820[];
@@ -39,7 +39,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_005a5440(int, Tab5c84*, int, int, int);
+void __cdecl d2_PopulateInventoryGrid(int, D2_GELD_INFO_TAB*, int, int, int);
 void __cdecl d2_CloseWindow(int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl he_GetActiveKrediteByBorrower(int, int, char**);
@@ -49,7 +49,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);
 char* __cdecl gm_SearchTable67(int);
 
-int __cdecl fcn_005c8400(void)
+int __cdecl d2_RunGeldInfoDialog(void)
 {
 	int i;
 	int id2;
@@ -57,7 +57,7 @@ int __cdecl fcn_005c8400(void)
 	int id1;
 	int id3;
 	char* list[9];
-	Line5c84 lines[9];
+	D2_GELD_INFO_LINE lines[9];
 	int h;
 	int k;
 	int cy;
@@ -86,7 +86,7 @@ int __cdecl fcn_005c8400(void)
 	d2_SetForm(h, 5);
 	io_AppendText(0x1f40);
 	d2_SetForm(h, 1);
-	fcn_005a5440((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].object_list), g_776aa0, h, 1, 0);
+	d2_PopulateInventoryGrid((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].object_list), g_776aa0, h, 1, 0);
 	for (k = 0; k < 9; k++) {
 		if (lines[k].bar != -1) {
 			d2_CloseWindow(lines[k].bar);

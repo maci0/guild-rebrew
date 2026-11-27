@@ -2,7 +2,7 @@ int __cdecl d2_GetResourceData(int);
 extern char* g_772500;
 
 /* ADDRESS: GOLD 0x00476020 */
-int __cdecl fcn_00476020(int index)
+int __cdecl d2_SetCurrentFont(int index)
 {
 	int rec;
 	int slot;

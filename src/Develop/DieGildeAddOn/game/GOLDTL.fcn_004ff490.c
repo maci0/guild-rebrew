@@ -26,10 +26,10 @@ int __cdecl cm_GetCommandResult(int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_004c5980(void*);
+void __cdecl cm_EnqueueStagedPacket(void*);
 
 /* ADDRESS: GOLDTL 0x004ff490 */
-void __cdecl fcn_004ff490(char* entity)
+void __cdecl gm_UpdateEntityPregnancy(char* entity)
 {
 	char* ent;
 	char* other;
@@ -150,7 +150,7 @@ void __cdecl fcn_004ff490(char* entity)
 			cm_BeginPacketFieldDelta(handle, id);
 			cm_AppendPacketFieldDelta(1, 1, 2, &mode);
 			cm_RequestChangeAttribute();
-			fcn_004c5980(pkt);
+			cm_EnqueueStagedPacket(pkt);
 			g_773d48++;
 			return;
 		}

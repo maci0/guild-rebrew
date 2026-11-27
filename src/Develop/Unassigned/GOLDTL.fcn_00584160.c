@@ -6,7 +6,7 @@ extern volatile unsigned int g_6b7fac;
 void __cdecl d2_ReorderControlStack(int);
 int __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl d2_CreateElement(int, int, int);
-void __cdecl fcn_00469c40(int, int, int);
+void __cdecl d2_PositionControl(int, int, int);
 int __cdecl d2_DestroyElement(int);
 
 void __cdecl d2_EvalCubicBezier2D(float*, float*, float*, float*, float, float*);
@@ -72,7 +72,7 @@ void __cdecl fcn_00584160(int a0)
 			*(int*) (g_665f08 + 0x60) = d2_CreateElement((short) *(float*) frame, (short) *(float*) (frame + 4), 0x1d); o = g_665f08;
 		}
 		frame = *(char**) (*(char**) (o + 0x18) + 0x64) + *(int*) (o + 0x54) * 0x2c;
-		fcn_00469c40((short) *(float*) frame, (short) *(float*) (frame + 4), *(int*) (o + 0x60));
+		d2_PositionControl((short) *(float*) frame, (short) *(float*) (frame + 4), *(int*) (o + 0x60));
 		return;
 	}
 
@@ -92,13 +92,13 @@ void __cdecl fcn_00584160(int a0)
 				float f;
 				f = (float) ((double) (unsigned int) (g_6b7fac - *(unsigned int*) (o + 0x5c)) / *(float*) (frame + 0x24));
 				d2_EvalCubicBezier2D((float*) frame, (float*) (frame + 8), (float*) (frame + 0x10), (float*) (frame + 0x18), f, point);
-				fcn_00469c40((short) point[0], (short) point[1], *(int*) (o + 0x60));
+				d2_PositionControl((short) point[0], (short) point[1], *(int*) (o + 0x60));
 				return;
 			}
 			*(int*) (o + 0x58) = 4;
 			*(unsigned int*) (g_665f08 + 0x5c) = g_6b7fac;
 			frame = *(char**) (*(char**) (g_665f08 + 0x18) + 0x64) + *(int*) (g_665f08 + 0x54) * 0x2c;
-			fcn_00469c40((short) *(float*) (frame + 0x18), (short) *(float*) (frame + 0x1c), *(int*) (g_665f08 + 0x60));
+			d2_PositionControl((short) *(float*) (frame + 0x18), (short) *(float*) (frame + 0x1c), *(int*) (g_665f08 + 0x60));
 			o = g_665f08;
 		}
 		if (*(int*) (o + 0x58) == 4) {
@@ -108,7 +108,7 @@ void __cdecl fcn_00584160(int a0)
 			*(int*) (o + 0x58) = 2;
 			*(unsigned int*) (g_665f08 + 0x5c) = g_6b7fac;
 			frame = *(char**) (*(char**) (g_665f08 + 0x18) + 0x64) + *(int*) (g_665f08 + 0x54) * 0x2c;
-			fcn_00469c40((short) *(float*) frame, (short) *(float*) (frame + 4), *(int*) (g_665f08 + 0x60));
+			d2_PositionControl((short) *(float*) frame, (short) *(float*) (frame + 4), *(int*) (g_665f08 + 0x60));
 			return;
 		}
 	} else if (a0 == 2) {

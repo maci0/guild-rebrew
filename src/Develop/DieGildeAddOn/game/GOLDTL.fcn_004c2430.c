@@ -5,7 +5,7 @@
 
 int __cdecl gm_GetSeason(char*);
 int __cdecl msx_FindActiveGroup(void);
-int __cdecl fcn_004c2820(int);
+int __cdecl msx_FindGroupByKey(int);
 extern char g_772d58[];
 void* __cdecl msx_StartTrack(char*, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -26,7 +26,7 @@ void __cdecl msx_SelectOutdoorTrack(void)
 		*(short*) (0x688228 + idx) = (short) (*(short*) (0x688228 + idx) - 0x1e);
 		*(char*) (0x68822a + idx) = 0;
 	}
-	slot = fcn_004c2820(0x2694);
+	slot = msx_FindGroupByKey(0x2694);
 	if (slot < 0) {
 		return;
 	}

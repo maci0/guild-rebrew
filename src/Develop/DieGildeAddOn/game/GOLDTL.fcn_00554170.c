@@ -141,7 +141,7 @@ void __cdecl he_RunMultiActorAction(char* obj)
 				*(int*) (msg + 0x108) = -1;
 				*(int*) (msg + 0x10c) = *(int*) (obj + 0xcc);
 				gm_AddTime((pos14_7f4c00*) (msg + 0x18), 0x1e, 0, 0);
-				*(int*) (obj + 0xd8) = fcn_004c5980(msg);
+				*(int*) (obj + 0xd8) = cm_EnqueueStagedPacket(msg);
 				*(int*) (obj + 0x70) = 3;
 				gm_AddTime(time, 0, 0xa, 0);
 				*(int*) (obj + 0x84) = cm_SendSetHE(3, obj);

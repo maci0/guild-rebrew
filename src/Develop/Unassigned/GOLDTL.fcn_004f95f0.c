@@ -5,7 +5,7 @@ void __cdecl d2_ShowExpelWorkerDialog(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f95f0 */
-int __cdecl fcn_004f95f0(char* e, int* s)
+int __cdecl gm_ObjExpelWorker(char* e, int* s)
 {
 	char* p;
 

@@ -64,7 +64,7 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
 void __cdecl d2_InitWindowBounds(int i);
-void __cdecl fcn_00534160(int x0, int y, int len, int t);
+void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t);
 int __cdecl fcn_0051e070(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl main_RunFrameLoop(void* fn, int a);
@@ -133,7 +133,7 @@ void __cdecl d2_RunTalenteDialog(int a0, int a1, int broadcastSlot)
 		f = 5.0f;
 	}
 	found = d2_AddElementToWindow(x / 2 - 0x18, 4, (int) ((float) yoff[broadcastSlot] + f), d2_CurrentWindowId);
-	fcn_00534160(x / 2 - 0x23, 0x3c, *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot), 0x4df);
+	d2_DrawSegmentedBar(x / 2 - 0x23, 0x3c, *(unsigned char*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x80 + broadcastSlot), 0x4df);
 	d2_SetForm(h, 3);
 	if (slot != 0) {
 		io_AppendText(0x16b3, *(unsigned char*) (slot + 0xae) + 0x16b7, broadcastSlot + 0x16b7);

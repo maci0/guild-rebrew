@@ -46,7 +46,7 @@ extern char g_6a238c[];
 extern char g_6a238e[];
 
 int sprintf(char*, const char*, ...);
-int __cdecl fcn_0042b2f0(char*, int, int);
+int __cdecl io_SelectDelimitedString(char*, int, int);
 int __cdecl fcn_0064d530(char*, const char*, unsigned int);
 int __cdecl atoi(char*);
 int __cdecl io_CopyTrailingDigits(char*, int, char*);
@@ -196,9 +196,9 @@ body:
 			}
 			if (state == 1 || state == 2) {
 				if (buf[i - 1] == 's' && flag == 0) {
-					res = fcn_0042b2f0(g_14a540c[0], r, 4);
+					res = io_SelectDelimitedString(g_14a540c[0], r, 4);
 				} else {
-					res = fcn_0042b2f0(g_14a540c[0], r, 8);
+					res = io_SelectDelimitedString(g_14a540c[0], r, 8);
 				}
 				if (e < 0) {
 					sprintf(tmp, g_68b3f8, res, st.tmpl);
@@ -212,9 +212,9 @@ body:
 			}
 			if (state == 3 || state == 4) {
 				if (buf[i - 1] == 's' && flag == 0) {
-					res = fcn_0042b2f0(g_14a5400[0], r, 4);
+					res = io_SelectDelimitedString(g_14a5400[0], r, 4);
 				} else {
-					res = fcn_0042b2f0(g_14a5400[0], r, 8);
+					res = io_SelectDelimitedString(g_14a5400[0], r, 8);
 				}
 				if (e > -1) {
 					k = i - io_CopyTrailingDigits(buf, e, b1);
@@ -228,9 +228,9 @@ body:
 			}
 			if (state == 5 || state == 6) {
 				if (buf[i - 1] == 's' && flag == 0) {
-					res = fcn_0042b2f0(g_14a5418[0], r, 4);
+					res = io_SelectDelimitedString(g_14a5418[0], r, 4);
 				} else {
-					res = fcn_0042b2f0(g_14a5418[0], r, 8);
+					res = io_SelectDelimitedString(g_14a5418[0], r, 8);
 				}
 				if (e > -1) {
 					k = i - io_CopyTrailingDigits(buf, e, b2);
@@ -276,7 +276,7 @@ body:
 			i++;
 			break;
 		case 'w':
-			res = fcn_0042b2f0(g_14a7bb0[0], 1, 8);
+			res = io_SelectDelimitedString(g_14a7bb0[0], 1, 8);
 			strcpy(tmp, (char*) res);
 			k = strlen(buf) - i + 1;
 			goto wtail;
@@ -573,7 +573,7 @@ body:
 				p = txt_TextEntries[e];
 			}
 			if (r != -1) {
-				p = (char*) fcn_0042b2f0(p, r, 4);
+				p = (char*) io_SelectDelimitedString(p, r, 4);
 				i--;
 			}
 			if (p == 0) {
@@ -602,21 +602,21 @@ body:
 			}
 			if (state == 1 || state == 2) {
 				sprintf(tmp, g_68b3f8,
-					fcn_0042b2f0(g_14a540c[(*(int*) (num + 0xc))], r, 4),
+					io_SelectDelimitedString(g_14a540c[(*(int*) (num + 0xc))], r, 4),
 					s98);
 				if (fcn_0051e070() == 0 && state == 2) {
 					tmp[0] = (char) toupper((unsigned char) tmp[0]);
 				}
 			} else if (state == 3 || state == 4) {
 				sprintf(tmp, g_68b3f8,
-					fcn_0042b2f0(g_14a5400[(*(int*) (num + 0xc))], r, 4),
+					io_SelectDelimitedString(g_14a5400[(*(int*) (num + 0xc))], r, 4),
 					s98);
 				if (fcn_0051e070() == 0 && state == 4) {
 					tmp[0] = (char) toupper((unsigned char) tmp[0]);
 				}
 			} else {
 				sprintf(tmp, g_68b3f8,
-					fcn_0042b2f0(g_14a5418[(*(int*) (num + 0xc))], r, 4),
+					io_SelectDelimitedString(g_14a5418[(*(int*) (num + 0xc))], r, 4),
 					s98);
 				if (fcn_0051e070() == 0 && state == 6) {
 					tmp[0] = (char) toupper((unsigned char) tmp[0]);

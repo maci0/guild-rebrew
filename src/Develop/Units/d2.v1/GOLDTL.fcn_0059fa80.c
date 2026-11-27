@@ -28,13 +28,13 @@ void __cdecl io_AppendText(const char* text, int value);
 void __cdecl d2_CreateButtonRow(int screen, int a, int* out, int count, int b,
 	int c);
 void __cdecl d2_BuildPersonStatusDesc(void* desc);
-void __cdecl fcn_005ca740(int x, int y, int screen, int id, void* desc,
+void __cdecl d2_DrawPersonCard(int x, int y, int screen, int id, void* desc,
 	int flag);
 int __cdecl gm_LookupEntityRecordById(unsigned int id);
 int __cdecl he_StartHandlungSearch(int a, int b, int c);
 void __cdecl d2_SetElementEnabled(int value, int flag);
 char* __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-int __cdecl fcn_00526120(char* text, int flag);
+int __cdecl d2_ShowModalMessageBox(char* text, int flag);
 void* __cdecl d2_OpenTargetPicker(void* desc, int a, int b, int c);
 int __cdecl d2_CheckActionBlocker(void* p, int flag);
 int __cdecl cm_SendSetHE(int mode, int arg);
@@ -85,7 +85,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 	*(unsigned int*) cmd = (unsigned int) v6;
 	*(unsigned int*) (cmd + 0x30) = 0;
 	d2_BuildPersonStatusDesc(cmd);
-	fcn_005ca740(*(int*) (cmd + 0x10), *(int*) (cmd + 0x14), d2_CurrentWindowId, 0x54, cmd, 1);
+	d2_DrawPersonCard(*(int*) (cmd + 0x10), *(int*) (cmd + 0x14), d2_CurrentWindowId, 0x54, cmd, 1);
 	g_100f1dc = -1;
 	for (;;) {
 		v5 = gm_LookupEntityRecordById(v3) && he_StartHandlungSearch(1, 1, v4);
@@ -102,7 +102,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 					} else {
 						io_FormatTextBuffer(text, 0x1a58, *v6);
 					}
-					if (fcn_00526120(text, 1)) {
+					if (d2_ShowModalMessageBox(text, 1)) {
 						*(pos14_7f4c00*) (v7 + 0x52) = gm_GameTime;
 
 
@@ -127,7 +127,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 					if (v10 != 0) {
 						io_FormatTextBuffer(title, 0x1a5b, 2, *v6,
 							*v10);
-						if (fcn_00526120(title, 1) && (v11 = g_774970,
+						if (d2_ShowModalMessageBox(title, 1) && (v11 = g_774970,
 							d2_CheckActionBlocker((char*) (v11 * 0x21c + 0x7f4ca0), 2))) {
 							*(int*) (v7 + 0xbc) = gm_GameTime.a;
 							cm_SendSetHE(3, v7);

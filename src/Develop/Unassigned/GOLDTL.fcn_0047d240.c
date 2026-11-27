@@ -11,23 +11,23 @@ int __cdecl fcn_0047d220(char* a);
  * the modulo gates and both comparisons. The 96-byte extent also includes the
  * 10 nop bytes after the 86-byte body. */
 /* ADDRESS: GOLDTL 0x0047d240 */
-int __cdecl fcn_0047d240(char* p)
+int __cdecl ai_IsEntityTurnActive(char* entity)
 {
-	int sel;
-	unsigned int v;
+	int turn_slice;
+	unsigned int seed;
 
-	if (fcn_0047d220(p) == 0) {
+	if (fcn_0047d220(entity) == 0) {
 		return 0;
 	}
 	if (g_6a375c != 0) {
-		sel = g_14cbca0;
-		v = *(unsigned int*) (p + 4);
-		if (sel != -1) {
-			if (v % g_6a375c != g_14cbcb4) {
+		turn_slice = g_14cbca0;
+		seed = *(unsigned int*) (entity + 4);
+		if (turn_slice != -1) {
+			if (seed % g_6a375c != g_14cbcb4) {
 				return 0;
 			}
 		} else {
-			if (v % g_6a375c != main_PlayerTurnIndex) {
+			if (seed % g_6a375c != main_PlayerTurnIndex) {
 				return 0;
 			}
 		}

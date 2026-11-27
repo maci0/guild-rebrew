@@ -17,7 +17,7 @@ typedef struct
 // SIZE 0x50
 
 int __cdecl d2_CheckOwnerBlocked(char*);
-void __cdecl fcn_0052a0c0(char*, int);
+void __cdecl d2_InitPlayerBar(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
@@ -37,7 +37,7 @@ void __cdecl d2_StartEinbruchTargetSelect(char* building)
 	if (building == 0) {
 		return;
 	}
-	fcn_0052a0c0(building, 0);
+	d2_InitPlayerBar(building, 0);
 	io_FormatTextBuffer(text, 0x19e2);
 	req.id = 0x727;
 	req.kind = 7;

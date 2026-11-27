@@ -13,10 +13,10 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl gm_GetScaledEntitySkill(char*, int);
-void __cdecl fcn_00534160(int, int, int, int);
+void __cdecl d2_DrawSegmentedBar(int, int, int, int);
 float __cdecl gm_GetEntityHealthRatio(char*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
-void __cdecl fcn_0046f940(int, char*);
+void __cdecl d2_SetLabelText(int, char*);
 int* __cdecl gm_GetEquippedCombatGear(char*);
 void __cdecl d2_SetElementScale(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -51,14 +51,14 @@ void __cdecl d2_DrawCombatParticipants(char* ids, int originX, int originY)
 		d2_AddElementToWindow(x - 0x10, y, 0x5da, d2_CurrentWindowId);
 		d2_AddElementToWindow(x - 4, y, *(int*) (rec + 0x18c), d2_CurrentWindowId);
 		f = (float) gm_GetScaledEntitySkill(rec, 3);
-		fcn_00534160(x, y + 0x3c, (int) f, 0x4eb);
+		d2_DrawSegmentedBar(x, y + 0x3c, (int) f, 0x4eb);
 		h = d2_ShowTxt(x - 0x24, y - 0x11, g_6b5c60, d2_CurrentWindowId);
 		((D2_CONTROL_TL*) (g_1015ea0))[h].width = 0x78;
 		((D2_CONTROL_TL*) (g_1015ea0))[h].value_06c = 1;
 		((D2_CONTROL_TL*) (g_1015ea0))[h].font = 0x56;
 		io_FormatTextBuffer(buf, "%1N1 %i%", *(unsigned short*) rec,
 			     (int) (gm_GetEntityHealthRatio(rec) * 100.0));
-		fcn_0046f940(h, buf);
+		d2_SetLabelText(h, buf);
 		p = gm_GetEquippedCombatGear(rec);
 		if (p != 0 && *p != 0) {
 			v = d2_AddElementToWindow(x + 0x28, y + 0xf, *p + 0xdf, d2_CurrentWindowId);

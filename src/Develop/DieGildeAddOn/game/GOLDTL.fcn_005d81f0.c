@@ -46,7 +46,7 @@ extern int __cdecl d2_GetWindowListItem(int, int, int);
 extern int __cdecl d2_CheckActionBlocker(char*, int);
 extern int __cdecl cm_GetCommandStatus(int);
 extern void __cdecl cm_StepCommandQueue(void);
-extern void __cdecl fcn_00526120(char*, int);
+extern void __cdecl d2_ShowModalMessageBox(char*, int);
 extern int __cdecl gm_RandomMod(int);
 extern int __cdecl main_RunFrameLoop(int, int);
 extern void __cdecl d2_DestroyForm(int);
@@ -113,7 +113,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 	}
 	if ((*(unsigned char*) (other + 0x1c8) & 0x80) != 0) {
 		io_FormatTextBuffer(name, 0x1ce0);
-		fcn_00526120(name, 0);
+		d2_ShowModalMessageBox(name, 0);
 		return 0x81;
 	}
 	ret = 0;
@@ -147,7 +147,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 						cm_StepCommandQueue();
 					}
 					io_FormatTextBuffer(text, 0x1dde);
-					fcn_00526120(text, 0);
+					d2_ShowModalMessageBox(text, 0);
 					r = gm_RandomMod(0x300) & 0xffff;
 					ent = 0;
 					count = 0x300;

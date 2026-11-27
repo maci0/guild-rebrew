@@ -40,7 +40,7 @@ int __cdecl fcn_00442e30(void);
 int __cdecl fcn_0051e070(void);
 #include "client_scene_loader.h"
 void __cdecl ReportClientMessage(char *);
-void __cdecl fcn_00438da0(float, float, int, int, int, int, int, int, int);
+void __cdecl d3_SetViewport(float, float, int, int, int, int, int, int, int);
 void __cdecl d2_ClearScreen(void);
 int __cdecl d2_SetBackdropResource(int);
 int __cdecl d2_LoadForm(int, int, char *);
@@ -61,7 +61,7 @@ int __cdecl main_LoadCitySelectionScene(char *, int);
 int __cdecl d2_ShowCreditsScreen(void);
 void __cdecl msx_StartTrackInternal(int, int);
 void __cdecl d2_ShowAmountDialog(void);
-void __cdecl fcn_005e3520(void);
+void __cdecl d2_ShowGameOptions(void);
 void __cdecl d2_ShowSoundOptions(void);
 void __cdecl fcn_005e2b60(void);
 int __cdecl d2_ShowLoadGameMenu(void);
@@ -125,7 +125,7 @@ void __cdecl main_Menue(void)
 	if (!d3_LoadScene((char *)0x6a3b98, 0, 0)) {
 		ReportClientMessage((char *)0x6a3b70);
 	}
-	fcn_00438da0((float)g_1040494, (float)d2_ScreenHeight, 0, 0, g_10529c8, g_10421a0, g_10432a4, g_1040494, d2_ScreenHeight);
+	d3_SetViewport((float)g_1040494, (float)d2_ScreenHeight, 0, 0, g_10529c8, g_10421a0, g_10432a4, g_1040494, d2_ScreenHeight);
 	g_774658 = g_774650 + 1;
 	*(int*) &g_7747b0 = 0;
 	v28 = 0x8c;
@@ -268,7 +268,7 @@ label_53a8e3:
 				d2_SetSlotVisibility(v5, 1);
 			} else if (d2_CurrentElementId == b[8]) {
 				d2_SetSlotVisibility(v5, 0);
-				fcn_005e3520();
+				d2_ShowGameOptions();
 				d2_SetSlotVisibility(v5, 1);
 			} else if (d2_CurrentElementId == b[6]) {
 				g_774954 = 1;

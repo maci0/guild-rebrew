@@ -8,23 +8,23 @@ typedef struct {
 	float f4;
 	int f8;
 	int fc;
-} fcn_00589390_sub;
+} KANONE_HIT_SLOT;
 // SIZE 0x10
 
 typedef struct {
 	int head0;
 	int head4;
-	fcn_00589390_sub s[3];
-} fcn_00589390_rec;
+	KANONE_HIT_SLOT s[3];
+} KANONE_HIT_GROUP;
 // SIZE 0x38
 
-void __cdecl fcn_00589390(void)
+void __cdecl d2_ResetKanoneHitTable(void)
 {
-	fcn_00589390_rec* base;
+	KANONE_HIT_GROUP* base;
 	int i;
 	int j;
 
-	base = (fcn_00589390_rec*) g_77dda0;
+	base = (KANONE_HIT_GROUP*) g_77dda0;
 	for (i = 0; i < 3; i++) {
 		base[i].head0 = -1;
 		for (j = 0; j < 3; j++) {

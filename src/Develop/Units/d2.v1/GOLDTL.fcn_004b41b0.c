@@ -24,7 +24,7 @@ void __cdecl d2_DestroyForm(int);
 
 
 /* ADDRESS: GOLDTL 0x004b41b0 */
-int __cdecl fcn_004b41b0(void)
+int __cdecl d2_RunChooseMissionDialog(void)
 {
 	int b1;
 	int b2;
@@ -56,7 +56,7 @@ int __cdecl fcn_004b41b0(void)
 	lst = d2_CreateRadioGroup(6, b0, b1, b2, b3, b4, b5);
 	d2_SelectRadioGroup(lst, 0);
 	d2_AddToRadioGroup(lst, d2_GetWindowListItem(h, 0, io_AppendText(0x7e)));
-	while (main_RunFrameLoop(fcn_004b41b0, main_LoopFlags) != 0) {
+	while (main_RunFrameLoop(d2_RunChooseMissionDialog, main_LoopFlags) != 0) {
 		d2_UpdateRadioGroup(lst);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1) {
 			result = 0xff;

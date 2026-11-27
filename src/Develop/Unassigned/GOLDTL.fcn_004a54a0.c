@@ -22,7 +22,7 @@ extern char* g_77261c;
 extern unsigned int g_7728bc;
 
 int __cdecl fcn_005cf720(unsigned short a, unsigned short b, Query* q, int c);
-ENTITY_CANDIDATE* __cdecl fcn_004a34d0(void);
+ENTITY_CANDIDATE* __cdecl gm_StepEntityCandidateRing(void);
 
 int __cdecl gm_FindEntityCandidate(unsigned short* actor, int queryFlags, unsigned int excludedCount, char* excludedIds, float minScore, float maxScore, unsigned short* outId)
 {
@@ -47,7 +47,7 @@ int __cdecl gm_FindEntityCandidate(unsigned short* actor, int queryFlags, unsign
 		}
 	}
 	query.x40 = 0;
-	for (i = (*(int*)&g_7728bc); candidate = fcn_004a34d0(), i != 0 && candidate->entity != 0; i--) {
+	for (i = (*(int*)&g_7728bc); candidate = gm_StepEntityCandidateRing(), i != 0 && candidate->entity != 0; i--) {
 		if (!(candidate->score < minScore) && !(candidate->score > maxScore) && fcn_005cf720(*actor, *(unsigned short*)candidate->entity, &query, 0) != 0) {
 			*outId = *(unsigned short*)candidate->entity;
 			return 1;

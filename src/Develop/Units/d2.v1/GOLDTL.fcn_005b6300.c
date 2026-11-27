@@ -112,10 +112,10 @@ typedef struct {
 int __cdecl fcn_00534c40(int, int, int, int, int, int, int);
 void __cdecl d2_UpdatePagedPanel(int);
 int __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_00517c00(int, int, int, void*);
+int __cdecl gm_FormatEntityTitleAndName(int, int, int, void*);
 char* __cdecl gm_FindBuildingOwner(char*);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CreateGauge(void*, int, int);
@@ -126,7 +126,7 @@ void __cdecl d2_DestroyElement(int);
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
 void __cdecl d2_UpdateWorkerOverlaySlots(int, int);
 void __cdecl d2_HandleBookPageButton(int);
-void __cdecl fcn_00535550(int);
+void __cdecl d2_TurnBookPagesForward(int);
 void __cdecl d2_TurnBookPagesBack(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl cm_GetCommandStatus(int);
@@ -141,7 +141,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl fcn_004727a0(int, int);
 void __cdecl fcn_00519190(int, ...);
 int __cdecl fcn_0051af00(char*, int, ...);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl gm_CalcBuildingRoundBalance(int, int, void*);
 int __cdecl fcn_004693b0(void);
 void __cdecl d2_AddToRadioGroup(int, int);
@@ -155,7 +155,7 @@ void __cdecl fcn_00473a90(int, int);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_004c53b0(void);
 int __cdecl gm_CollectBuildingObjectSlots(int, void*);
-int __cdecl fcn_005b5750(void);
+int __cdecl d2_PromptSoeldnerAmountDialog(void);
 int __cdecl fcn_0050b750(int, char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 float __cdecl gm_GetWorkforceOutput(unsigned char*, int, int, int);
@@ -217,20 +217,20 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 	f.book = book;
 	d2_UpdatePagedPanel((int) book);
 	fcn_0057e880(0x21, (int) book, 0, 0);
-	fcn_00517c00(*(unsigned short*) (rec + 0x27), 1, 2, f.txt7a0);
-	fcn_00517c00(*(unsigned short*) (rec + 0x25), 1, 2, f.txt740);
+	gm_FormatEntityTitleAndName(*(unsigned short*) (rec + 0x27), 1, 2, f.txt7a0);
+	gm_FormatEntityTitleAndName(*(unsigned short*) (rec + 0x25), 1, 2, f.txt740);
 	r = gm_FindBuildingOwner(rec);
 	if (r == 0) {
 		strcpy(f.txt204, *(char**) 0x14abc28);
 	} else {
-		fcn_00517c00(*(unsigned short*) r, 1, 1, f.txt204);
+		gm_FormatEntityTitleAndName(*(unsigned short*) r, 1, 1, f.txt204);
 	}
 	d2_SetForm(*(int*) (book + 0x228), 3);
 	f.v50 = d2_GetWindowListItem(*(int*) (book + 0x228), 3, 2);
-	fcn_00472380(f.v50, 0x32, 0x96, *(int*) (rec + 0x3d));
+	d2_CreateGuiWindow(f.v50, 0x32, 0x96, *(int*) (rec + 0x3d));
 	if (f.row[0] != 4 && f.row[0] != 0x13 && f.row[0] != 0x10) {
 		el = f.v44 = d2_GetWindowListItem(*(int*) (book + 0x228), 3, 3);
-		fcn_00472380(el, 0, 4, *(int*) (rec + 0x41));
+		d2_CreateGuiWindow(el, 0, 4, *(int*) (rec + 0x41));
 		d2_SetValueGaugeStepLabels(el, 5, *(int*) 0x14abbd8, *(int*) 0x14abbdc,
 			*(int*) 0x14abbe0, *(int*) 0x14abbe4, *(int*) 0x14abbe8);
 	}
@@ -317,7 +317,7 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 		d2_UpdatePagedPanel((int) f.book);
 		d2_HandleBookPageButton((int) f.book);
 		if (*(unsigned char*) 0x14cf950 == 0xcd)
-			fcn_00535550((int) f.book);
+			d2_TurnBookPagesForward((int) f.book);
 		if (*(unsigned char*) 0x14cf950 == 0xcb)
 			d2_TurnBookPagesBack((int) f.book);
 		if (*(char*) (f.book + 0x270) != 0)
@@ -390,7 +390,7 @@ L69b6:
 			goto L6fa2;
 		if (G(0x67d370) == f.v58 && f.v38 != 0
 			&& *(signed char*) 0x7747b0 >= 0) {
-			e = (char*) fcn_005b5750();
+			e = (char*) d2_PromptSoeldnerAmountDialog();
 			if (e == 0)
 				goto L6cb7;
 			y = (int) e / f.v38;
@@ -460,7 +460,7 @@ L6cb7:
 			*(char*) &f.msg.f58 = 0;
 			cm_SendCopyEntityData(&f.msg);
 			fcn_0051af00(f.txt800, 0x1939, f.row[0x223] + 0x130);
-			fcn_00526120(f.txt800, 0);
+			d2_ShowModalMessageBox(f.txt800, 0);
 L6e44:
 			for (i = 0; i < 3; i++) {
 				fcn_004727a0(G(f.book + 0x228 + i * 4), 2);
@@ -471,7 +471,7 @@ L6e44:
 		}
 		if (c != f.v34 || f.sel.a08 == 0)
 			goto L6fa2;
-		if (fcn_00526120(*(char**) 0x14abbf8, 1) == 0)
+		if (d2_ShowModalMessageBox(*(char**) 0x14abbf8, 1) == 0)
 			goto L6fa2;
 		for (i = 0; i < 3; i++) {
 			fcn_004727a0(G(f.book + 0x228 + i * 4), 2);
@@ -625,7 +625,7 @@ L6fa2:
 			fcn_0057e880(0x22, 0, 0, 0);
 		} else if (c == f.v1c && f.v18 != -1
 			&& *(signed char*) 0x7747b0 >= 0) {
-			if (fcn_00526120(*(char**) 0x14abbf8, 1) == 0)
+			if (d2_ShowModalMessageBox(*(char**) 0x14abbf8, 1) == 0)
 				goto L77c4;
 			for (i = 0; i < 3; i++) {
 				fcn_004727a0(G(f.book + 0x228 + i * 4), 2);
@@ -647,10 +647,10 @@ L6fa2:
 			e = (char*) f.rows[f.v18].a08;
 			if (G(e + 0x184) != 0 && G(e + 0x184) + 0x2c != G(a1 + 1)) {
 				fcn_0051af00(f.txt124c, 0x42c4, *(unsigned short*) e);
-				fcn_00526120(f.txt124c, 4);
+				d2_ShowModalMessageBox(f.txt124c, 4);
 			} else if (G(0x774800) == 0 && G(e + 0x174) < 4) {
 				fcn_0051af00(f.txt164c, 0x1a27, 4);
-				fcn_00526120(f.txt164c, 4);
+				d2_ShowModalMessageBox(f.txt164c, 4);
 			} else {
 				t = (int) (gm_GetWorkforceOutput(
 					(unsigned char*) (*(unsigned short*) (a1 + 0x27) * 0x21c + 0x7f4ca0),
@@ -666,7 +666,7 @@ L6fa2:
 						*(unsigned short*) e,
 						(unsigned char) f.row[0x22f] + 0x20d);
 				}
-				if (fcn_00526120(f.txt9fc, 0) == 0)
+				if (d2_ShowModalMessageBox(f.txt9fc, 0) == 0)
 					goto L77c4;
 				memset(&f.msg, 0, 0xf8);
 				f.msg.type = 0x32;

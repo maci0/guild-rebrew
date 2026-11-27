@@ -9,7 +9,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x00493ce0 */
-int __cdecl fcn_00493ce0(unsigned short* home, char* p)
+int __cdecl ai_ChooseProzessSentence(unsigned short* home, char* p)
 {
 	Stat st;
 	int r;

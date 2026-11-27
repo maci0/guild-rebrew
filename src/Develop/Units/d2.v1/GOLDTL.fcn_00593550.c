@@ -29,7 +29,7 @@ extern char* g_779cb8;
 extern int g_779ce0;
 extern int g_779c40;
 
-char* __cdecl fcn_004ce190(int);
+char* __cdecl d3_GetSceneEntry(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl sprintf(char*, const char*, ...);
@@ -48,7 +48,7 @@ void __cdecl d2_PopulateNetLobbyPlayerList(void)
 	d2_SetForm(g_6a9b9c, 1);
 	io_AppendText((int) "$C");
 	for (i = 0; i < 8; i++) {
-		p = fcn_004ce190(g_774a34[i + 1]);
+		p = d3_GetSceneEntry(g_774a34[i + 1]);
 		if (p != 0) {
 			h = d2_AddElementToWindow(5, y, *(int*) (p + 0xc) + 0x59a, d2_CurrentWindowId);
 			sprintf(buf, "%s %s %s ", p[0x10] == 0 ? g_14a5774 : g_14a579c, p + 0x12, p + 0x22);

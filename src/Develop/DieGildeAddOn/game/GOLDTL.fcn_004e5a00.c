@@ -7,18 +7,18 @@ extern double dbl_6640e8;
 extern double dbl_6629c8;
 
 int __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_004cfe00(void);
+void __cdecl d3_ResetActionTimers(void);
 void __cdecl main_RunFrameLoop(int a, int b);
 int __cdecl fcn_004730c0(int a, int b, int c, int d, char* e, int f, int g);
-void __cdecl fcn_004e5980(void);
+void __cdecl cut_PauseWorldAndCharacters(void);
 void __cdecl tb_OpenFunction(char* a, int b);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl ResetDisplayCounters(void);
 void __cdecl d2_ResetUiInputAndBounds(void);
 void __cdecl d2_ClearBackdropResource(void);
-void __cdecl fcn_004da190(void);
-void __cdecl fcn_00438da0(float a, float b, float c, float d, int e, int f,
+void __cdecl cut_ResetCharacterSlots(void);
+void __cdecl d3_SetViewport(float a, float b, float c, float d, int e, int f,
     int g, int h, int i);
 void __cdecl d2_UpdateHudVisibility(int a);
 int __cdecl d2_LoadForm(int a, int b, char* c);
@@ -27,7 +27,7 @@ void __cdecl d2_SetFormVisibility(int a, int b);
 void __cdecl cut_SetRandSeed(int a);
 void __cdecl d2_DestroyForm(int a);
 void __cdecl cut_DestroyAllActiveCharacters(void);
-void __cdecl fcn_004e59c0(void);
+void __cdecl gm_ResumeGame(void);
 void __cdecl tb_CloseFunction(char* a);
 void __cdecl fcn_00528fd0(void);
 void __cdecl d3_SelectSceneContext(int a, int b);
@@ -89,7 +89,7 @@ void __cdecl cut_ExecuteCutscene(int* event)
     *(int*) 0x9a9648 = *(int*) 0x6b8010;
     *(int*) 0x9b0e00 = *(int*) 0x6791c8;
     *(int*) 0x772f2c = 0;
-    fcn_004cfe00();
+    d3_ResetActionTimers();
     a = 0x480;
     __asm {
         mov edi, 0x9b0940
@@ -168,7 +168,7 @@ fill_tail:
     s3a54 = *(int*) 0x7e3a54;
     s3a58 = *(int*) 0x7e3a58;
     if (*(unsigned char*) 0x7747b0 & 8)
-        fcn_004e5980();
+        cut_PauseWorldAndCharacters();
     tb_OpenFunction((char*) 0x4e4a60, 0x46);
     saved_6b8061 = *(unsigned char*) 0x6b8061;
     *(unsigned char*) 0x6b8061 = 0;
@@ -191,13 +191,13 @@ fill_tail:
         }
     }
     d2_ClearBackdropResource();
-    fcn_004da190();
+    cut_ResetCharacterSlots();
     if (e[0x26] & 0x20) {
         q = *(int*) 0x1040490;
         w = *(int*) 0x1040494;
         *(int*) 0x68bfb8 &= 0xfffffeff;
         t = *(float*) 0x67d368 * *(float*) 0x66291c;
-        fcn_00438da0((float) w,
+        d3_SetViewport((float) w,
             (float) q - *(float*) 0x67d368 * *(float*) 0x662d98, 0.0f, t,
             *(int*) 0x10529c8, *(int*) 0x10421a0, *(int*) 0x10432a4, w, q);
         t = *(float*) 0x67d368 * *(float*) 0x66291c;
@@ -244,7 +244,7 @@ display:
     cut_DestroyAllActiveCharacters();
     *(int*) 0x6b5c34 = saved_6b5c34;
     if (*(unsigned char*) 0x7747b0 & 8)
-        fcn_004e59c0();
+        gm_ResumeGame();
     *(int*) 0x68bfbc = 0xa;
     tb_CloseFunction((char*) 0x4e4a60);
     for (i = 0; i < count; i++) {
@@ -253,7 +253,7 @@ display:
     }
     if (e[0x26] & 0x20) {
         if (!(e[0x26] & 0x40) || (e[0x26] & 1)) {
-            fcn_00438da0((float) (*(int*) 0x6a376c - *(int*) 0x6a3764),
+            d3_SetViewport((float) (*(int*) 0x6a376c - *(int*) 0x6a3764),
                 (float) (*(int*) 0x6a3770 - *(int*) 0x6a3768),
                 (float) *(int*) 0x6a3764, (float) *(int*) 0x6a3768,
                 *(int*) 0x10529c8, *(int*) 0x10421a0, *(int*) 0x10432a4,

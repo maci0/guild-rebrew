@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00438a80 */
-char __cdecl fcn_00438a80(char* p, char clearBit)
+char __cdecl d3_InvalidateNodeRenderCacheCallback(char* p, char clearBit)
 {
 	*(unsigned char*) (p + 0x214) |= 4;
 	if (clearBit != 0) {

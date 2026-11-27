@@ -7,7 +7,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_PostEntityMessage(int slot, int entity, char* text, int flag, int size, int extra);
 
 /* ADDRESS: GOLD 0x004f9850 */
-void __cdecl fcn_004f9850(void)
+void __cdecl gm_BroadcastEconomyReport(void)
 {
 	float sum[3];
 	float sum3;

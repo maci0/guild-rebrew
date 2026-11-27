@@ -19,7 +19,7 @@ typedef struct
 extern int g_14abd48;
 
 int __cdecl d2_CheckOwnerBlocked(char*);
-void __cdecl fcn_0052a0c0(char*, int);
+void __cdecl d2_InitPlayerBar(char*, int);
 void __cdecl fcn_005bdc30(int, Req*, int, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
@@ -38,7 +38,7 @@ void __cdecl d2_SelectSchutzgeldTarget(char* building)
 	req.kind = 6;
 	req.c = 0xa07c43a0;
 	req.d = 1;
-	fcn_0052a0c0(building, 0);
+	d2_InitPlayerBar(building, 0);
 	fcn_005bdc30(1, &req, g_14abd48, (void*) d2_RunRaeuberlagerTargetDialog, 0);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();

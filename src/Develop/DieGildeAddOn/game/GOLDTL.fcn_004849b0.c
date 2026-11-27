@@ -66,7 +66,7 @@ int __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 void __cdecl cm_RequestClearLagerslot(int, int);
-void __cdecl fcn_00486500(PRODUCTION_GOODS_RECORD*);
+void __cdecl ai_CalcProductionGoodProfit(PRODUCTION_GOODS_RECORD*);
 
 /* ADDRESS: GOLDTL 0x004849b0 */
 void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
@@ -370,7 +370,7 @@ void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 	}
 
 	for (i = 0; i < g_100b0ac; i++) {
-		fcn_00486500(&g_100d0c0[i]);
+		ai_CalcProductionGoodProfit(&g_100d0c0[i]);
 	}
 
 	for (i = 0; i < g_100b0ac; i++) {

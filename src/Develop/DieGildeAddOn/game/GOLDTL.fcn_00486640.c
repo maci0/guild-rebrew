@@ -15,7 +15,7 @@
 
 extern int g_86805c;
 
-int __cdecl fcn_00503a70(int type);
+int __cdecl gm_CollectItemSuppliers(int type);
 int __cdecl ai_CanProduceGood(char* bld, int* goodsPlan, int directOnly);
 
 /* ADDRESS: GOLDTL 0x00486640 */
@@ -65,7 +65,7 @@ int __cdecl ai_CanProduceGood(char* bld, int* goodsPlan, int directOnly)
 						return 0;
 					}
 				} else {
-					fcn_00503a70(seg->goods_id);
+					gm_CollectItemSuppliers(seg->goods_id);
 					found = 0;
 					idx = 0;
 					i = 0x26;

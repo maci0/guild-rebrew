@@ -47,7 +47,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl cm_SendSetHE(int, Order_54fd60*);
 void __cdecl gm_AddTime(Stamp_54fd60*, int, int, int);
 void __cdecl he_FreeAction(Order_54fd60*);
-int __cdecl fcn_004c5980(void*);
+int __cdecl cm_EnqueueStagedPacket(void*);
 int __cdecl cm_GetCommandStatus(int);
 
 /* ADDRESS: GOLDTL 0x0054fd60 */
@@ -84,7 +84,7 @@ void __cdecl he_RunDuellCutscene(Order_54fd60* o)
                 *(int*) (msg + 0x20) = g_7f4c08;
                 *(short*) (msg + 0x24) = g_7f4c0c;
                 gm_AddTime((Stamp_54fd60*) (msg + 0x18), 0, 0x1e, 0);
-                fcn_004c5980(msg);
+                cm_EnqueueStagedPacket(msg);
             }
             cm_RequestChangeBits(a->id, 0x1c8, 4, 0, 0x400);
         }

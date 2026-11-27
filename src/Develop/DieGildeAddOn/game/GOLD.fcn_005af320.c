@@ -25,7 +25,7 @@ extern int g_14a79c0[];
 
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl d2_LoadForm(int, int, char*);
-int __cdecl fcn_0052dee0(int, int, int);
+int __cdecl d2_CreateWindowTextButton(int, int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_0057e880(int, char*, int, int);
 int __cdecl d2_SetForm(int, int);
@@ -37,7 +37,7 @@ int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 void __cdecl fcn_00533f40(int, int, int, int);
 void __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00594340(void);
+void __cdecl d2_ResetBuildingUiSlots(void);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005c5da0(int, int, int, int, int);
@@ -45,9 +45,9 @@ void __cdecl d2_ResetUiInputAndBounds(void);
 int __cdecl gm_IsGebaeudeOpen(int, int, int);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
 int __cdecl d2_BuildProduktionSlotGrid(int, int);
-int __cdecl fcn_00596b10(int, int, int, int);
-int __cdecl fcn_00595e20(int, int);
-int __cdecl fcn_005963f0(int, int, int, int);
+int __cdecl d2_LayoutProduktionSlotGrid(int, int, int, int);
+int __cdecl d2_SyncWareProduktionSlotGrid(int, int);
+int __cdecl d2_RefreshWorkshopInventoryGrids(int, int, int, int);
 int __cdecl d2_SyncProduktionSlotGrid(int, int);
 int __cdecl d2_DrawProduktionSlotGrid(int, int, int, int, int);
 int __cdecl gm_IsWarehouse(int);
@@ -61,7 +61,7 @@ int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 int __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_005462a0(void);
 int __cdecl fcn_00502850(void);
-int __cdecl fcn_00472380(int, ...);
+int __cdecl d2_CreateGuiWindow(int, ...);
 int __cdecl fcn_00466330(int, int);
 int __cdecl gm_CalcEscortCost(int, int);
 void __cdecl fcn_0051af00(int, int, ...);
@@ -87,7 +87,7 @@ float __cdecl gm_GetSeasonPrice(int, int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl ob_TransportFromLager(int, int, int, int, int, float, int, int);
 void __cdecl io_ClearInputState(void);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl gm_CheckInventoryCapacity(char*, int, int);
 int __cdecl gm_AddTime(int, int, int, int);
 int __cdecl gm_PackGameTime(int, int);
@@ -277,7 +277,7 @@ int __cdecl d2_RunTradeTransportPanel(int entity, int flags)
 		for (i = 0; i < 7; i++) {
 			int d;
 
-			d = f.vD4[i] = fcn_0052dee0(0, 0xc + i * 0x18, *tp);
+			d = f.vD4[i] = d2_CreateWindowTextButton(0, 0xc + i * 0x18, *tp);
 			tp = tp + 1;
 			if (*(unsigned short*) (int) g_7746cc == f.vF0[i]) {
 				int k;
@@ -487,7 +487,7 @@ l_after:
 	}
 
 	d2_SetForm(f.v2c, 2);
-	fcn_00594340();
+	d2_ResetBuildingUiSlots();
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(f.v2c, 0);
 
@@ -557,12 +557,12 @@ l_sel:
 	if (*(char*) f.v74 == 0xa) {
 		if (f.v18 != 0) {
 			f.v38 = (int) d2_BuildProduktionSlotGrid(f.v18, f.v44);
-			fcn_00596b10(f.v2c, 1, 1, f.v14);
+			d2_LayoutProduktionSlotGrid(f.v2c, 1, 1, f.v14);
 		}
 	} else if (f.v18 != 0) {
 		if (*(char*) f.v94 == 5) {
-			f.v38 = (int) fcn_00595e20(f.v14, f.v18);
-			fcn_005963f0(f.v2c, 1, 1, f.v14);
+			f.v38 = (int) d2_SyncWareProduktionSlotGrid(f.v14, f.v18);
+			d2_RefreshWorkshopInventoryGrids(f.v2c, 1, 1, f.v14);
 		} else if (*(char*) f.v94 == 0x11) {
 			f.v38 = (int) d2_SyncProduktionSlotGrid(f.v14, f.v18);
 			d2_DrawProduktionSlotGrid(f.v2c, 1, 1, f.v14, f.v18);
@@ -752,7 +752,7 @@ l_slot:
 		io_AppendText(0xde, "$Z%s");
 	}
 	if (e->f14 != -1) {
-		fcn_00472380(e->f14, 0, 0x64, (int) (*(unsigned char*) (idx + 0x12)));
+		d2_CreateGuiWindow(e->f14, 0, 0x64, (int) (*(unsigned char*) (idx + 0x12)));
 	}
 	if (e->f18 == -1) {
 		goto l_slot_handles;
@@ -847,8 +847,8 @@ l_slot_handles:
 				if (j > 0) {
 					f.v48 = 1;
 				}
-				fcn_00472380(i, 0, ((int*) (f.v15C + 0x64))[f.v24], j);
-				fcn_00472380(((int*) ((char*) f.v6D8 + 0xe4))[f.v10 + f.v20], 0, f.v1c,
+				d2_CreateGuiWindow(i, 0, ((int*) (f.v15C + 0x64))[f.v24], j);
+				d2_CreateGuiWindow(((int*) ((char*) f.v6D8 + 0xe4))[f.v10 + f.v20], 0, f.v1c,
 				             ((int*) (f.v15C + 0x64))[f.v24] - j);
 				{
 					int k;
@@ -1007,24 +1007,24 @@ l_da9:
 				if (e->f00 != 0) {
 					for (j = 0; j < 3; j++) {
 						if (e->fD8[j] != -1) {
-							fcn_00472380(e->fD8[j], 0, 0, 0);
+							d2_CreateGuiWindow(e->fD8[j], 0, 0, 0);
 						}
 					}
 				}
 			}
 			for (idx = 0x6f58b0; idx < 0x6f5a70; idx += 0x38) {
 				if (*(int*) idx != -1) {
-					fcn_00472380(*(int*) idx, 0, 0, 0);
+					d2_CreateGuiWindow(*(int*) idx, 0, 0, 0);
 				}
 			}
 			for (idx = 0x6f4f70; idx < 0x6f52f0; idx += 0x38) {
 				if (*(int*) idx != -1) {
-					fcn_00472380(*(int*) idx, 0, 0, 0);
+					d2_CreateGuiWindow(*(int*) idx, 0, 0, 0);
 				}
 			}
 			for (idx = (int) g_776c60; idx < (int) (g_776c60 + 12); idx += 8) {
 				if (*(int*) (idx + 4) != 0) {
-					fcn_00472380(*(int*) idx, 0, 0, 0);
+					d2_CreateGuiWindow(*(int*) idx, 0, 0, 0);
 				}
 			}
 			f.v48 = 0;
@@ -1035,7 +1035,7 @@ l_da9:
 			/* 0x5bc131: the panel's own row, or the pending dialog refresh */
 			i = f.v78;
 			if (d2_GetControlValue(i) != 0) {
-				fcn_00472380(i, 0);
+				d2_CreateGuiWindow(i, 0);
 				f.v90 = 0;
 			} else if (d2_CanCloseWindowDuringTutorial() == 1) {
 				g_774654 = 1;
@@ -1176,14 +1176,14 @@ l_5bc253:
 			fcn_00533a40((int) (f.v210 + 0x240));
 			sb_PlayVoice(0, (int) "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
 		}
-		fcn_00472380(*(int*) f.v30, 0, 0x64, 0);
+		d2_CreateGuiWindow(*(int*) f.v30, 0, 0x64, 0);
 		continue;
 	l_5bca65:
 		if (j <= 0) {
 			continue;
 		}
 		fcn_0051af00((int) (f.v210 + 0x238), 0xeb, slot_value + slot_value + 0x9a8);
-		fcn_00526120((int) (f.v210 + 0x238), 0x100);
+		d2_ShowModalMessageBox((int) (f.v210 + 0x238), 0x100);
 	}
 l_5bcab6:
 	f.v24 += 0xf0;
@@ -1196,12 +1196,12 @@ l_5bcacf:
 	ResetDisplayCounters();
 	for (idx = 0x6f58b0; idx < 0x6f5a70; idx += 0x38) {
 		if (*(int*) idx != -1) {
-			fcn_00472380(*(int*) idx, 0, 0, 0);
+			d2_CreateGuiWindow(*(int*) idx, 0, 0, 0);
 		}
 	}
 	for (idx = 0x6f4f70; idx < 0x6f52f0; idx += 0x38) {
 		if (*(int*) idx != -1) {
-			fcn_00472380(*(int*) idx, 0, 0, 0);
+			d2_CreateGuiWindow(*(int*) idx, 0, 0, 0);
 		}
 	}
 	io_ClearInputState();
@@ -1265,13 +1265,13 @@ l_5bc453:
 			cm_SendSellObjekt(*(int*) (f.v18 + 2),
 			             *(int*) (*(int*) 0x6f2f60 + 4), slot, j, f.v34,
 			             (int) (*(float*) &f.v84));
-			fcn_00472380(*(int*) i, 0, 0x64, 0);
+			d2_CreateGuiWindow(*(int*) i, 0, 0x64, 0);
 		}
 		goto l_5bc1d3;
 	}
 	/* 0x5bc5a2: no trade entry, refresh the pick slot text */
 	fcn_0051af00((int) (f.v210 + 0x348), 0xef);
-	fcn_00526120((int) (f.v210 + 0x348), 0x100);
+	d2_ShowModalMessageBox((int) (f.v210 + 0x348), 0x100);
 	goto l_5bc1d3;
 
 l_5bc5ce:
@@ -1303,7 +1303,7 @@ l_5bc632:
 		if (*(int*) (idx + 4) == 0) {
 			continue;
 		}
-		fcn_00472380(*(int*) idx, 0, 0, 0);
+		d2_CreateGuiWindow(*(int*) idx, 0, 0, 0);
 	}
 	io_ClearInputState();
 	goto l_5bc1d7;
@@ -1355,7 +1355,7 @@ l_5bc700:
 		cm_SendSellObjekt(*(int*) (f.vA4 + 2),
 		             *(int*) (*(int*) 0x6f2f60 + 4), slot, j, f.v34,
 		             (int) (*(float*) &f.v84));
-		fcn_00472380(*(int*) idx, 0, 0x64, 0);
+		d2_CreateGuiWindow(*(int*) idx, 0, 0x64, 0);
 	}
 	goto l_5bc1d7;
 
@@ -1411,7 +1411,7 @@ l_5bcb82:
 		cm_SendSellObjekt(*(int*) (g_7f4ca4
 		                      + g_774970 * 0x21c),
 		             slot_value, *(int*) (h + 2), f.v38, f.v24, 0);
-		fcn_00472380(j, 0, 0x64, 0);
+		d2_CreateGuiWindow(j, 0, 0x64, 0);
 	}
 l_5bcc9f:
 	f.v10 += 0xf0;
@@ -1421,12 +1421,12 @@ l_5bcc9f:
 	ResetDisplayCounters();
 	for (idx = 0x6f58b0; idx < 0x6f5a70; idx += 0x38) {
 		if (*(int*) idx != -1) {
-			fcn_00472380(*(int*) idx, 0, 0, 0);
+			d2_CreateGuiWindow(*(int*) idx, 0, 0, 0);
 		}
 	}
 	for (idx = 0x6f4f70; idx < 0x6f52f0; idx += 0x38) {
 		if (*(int*) idx != -1) {
-			fcn_00472380(*(int*) idx, 0, 0, 0);
+			d2_CreateGuiWindow(*(int*) idx, 0, 0, 0);
 		}
 	}
 	io_ClearInputState();
@@ -1471,7 +1471,7 @@ l_5bcd9a:
 	/* 0x5bcd9a: the dialog status of the current trade row */
 	switch (g_100f1dc) {
 	case 0x527:
-		if (fcn_00526120(*(int*) 0x143a5a4, 0x101) == 0) {
+		if (d2_ShowModalMessageBox(*(int*) 0x143a5a4, 0x101) == 0) {
 			goto l_5bd632;
 		}
 		if (f.v38 == 0) {
@@ -1489,7 +1489,7 @@ l_5bcd9a:
 			if (j > 0) {
 				cm_SendSellObjekt(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
 				             (int) (g_773d75), 0);
-				fcn_00472380(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
+				d2_CreateGuiWindow(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
 			} else if (j < 0) {
 				cm_RequestClearLagerslot(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
 			}
@@ -1502,7 +1502,7 @@ l_5bcd9a:
 			if (j > 0) {
 				cm_SendSellObjekt(-1, *(int*) (f.v18 + 2), *(int*) (idx - 0x10), j,
 				             (int) (g_773d75), 0);
-				fcn_00472380(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
+				d2_CreateGuiWindow(*(int*) idx, 0, *(int*) (idx + 0x20), 0);
 			} else if (j < 0) {
 				cm_RequestClearLagerslot(*(int*) (f.v18 + 2), *(int*) (idx - 0x10));
 			}
@@ -1532,7 +1532,7 @@ l_5bcd9a:
 				}
 				cm_SendSellObjekt(-1, *(int*) (f.vA4 + 2), slot_value, j,
 				             (int) (g_773d75), 0);
-				fcn_00472380(*(int*) f.v30, 0,
+				d2_CreateGuiWindow(*(int*) f.v30, 0,
 				             ((int*) (f.v15C + 0x64))[f.v24], 0);
 			}
 		}
@@ -1581,7 +1581,7 @@ l_5bcf9f:
 			}
 			if (*(char*) idx == 0x47 && *(short*) e->f00 != 0x136) {
 				fcn_0051af00((int) (f.v210 + 0x138), 0xe9);
-				fcn_00526120((int) (f.v210 + 0x138), 0x100);
+				d2_ShowModalMessageBox((int) (f.v210 + 0x138), 0x100);
 				continue;
 			}
 			if (g_7746c4 != 0 || g_7746c8 != 0) {
@@ -1610,7 +1610,7 @@ l_5bd177:
 			}
 			if (*(char*) idx == 0x47 && *(short*) e->f00 != 0x136) {
 				fcn_0051af00((int) (f.v210 + 0x138), 0xe9);
-				fcn_00526120((int) (f.v210 + 0x138), 0x100);
+				d2_ShowModalMessageBox((int) (f.v210 + 0x138), 0x100);
 				continue;
 			}
 			if (g_7746c4 != 0 || g_7746c8 != 0) {
@@ -1676,7 +1676,7 @@ l_5bd26b:
 		             (int) ((signed char*) &f.vC8)[0],
 		             (int) ((signed char*) &f.vC8)[1],
 		             (int) *(short*) ((char*) &f.vC8 + 2));
-		if (fcn_00526120((int) (f.v210 + 0x348), 0x101) == 0) {
+		if (d2_ShowModalMessageBox((int) (f.v210 + 0x348), 0x101) == 0) {
 			goto l_5bd632;
 		}
 		if (gm_CheckEntityStock((int) (g_7f4ca0
@@ -1724,8 +1724,8 @@ l_5bd26b:
 			goto l_5bd632;
 		}
 		if (*(unsigned char*) f.v94 == 5) {
-			f.v38 = fcn_00595e20(f.v14, f.v18);
-			fcn_005963f0(f.v2c, 1, 1, f.v14);
+			f.v38 = d2_SyncWareProduktionSlotGrid(f.v14, f.v18);
+			d2_RefreshWorkshopInventoryGrids(f.v2c, 1, 1, f.v14);
 		} else if (*(unsigned char*) f.v94 == 0x11) {
 			f.v38 = d2_SyncProduktionSlotGrid(f.v14, f.v18);
 			d2_DrawProduktionSlotGrid(f.v2c, 1, 1, f.v14, f.v18);

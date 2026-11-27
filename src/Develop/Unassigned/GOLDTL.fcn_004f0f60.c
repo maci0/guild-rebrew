@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x004f0f60 */
-void __cdecl fcn_004f0f60(int value, int* out)
+void __cdecl gm_ComputeCannonShotStats(int value, int* out)
 {
 	float p;
 	int i;

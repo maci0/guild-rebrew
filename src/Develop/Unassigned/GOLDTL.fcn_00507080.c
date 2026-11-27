@@ -1,8 +1,8 @@
 
 /* ADDRESS: GOLDTL 0x00507080 */
-int __cdecl fcn_00507080(int k)
+int __cdecl gm_MapZunftToBuildingCategory(int zunft)
 {
-	switch (k) {
+	switch (zunft) {
 	case 11:
 		return 0x4;
 	case 9:

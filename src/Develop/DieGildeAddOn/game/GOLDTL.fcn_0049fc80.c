@@ -21,7 +21,7 @@ int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl amt_CollectOfficeCandidates(int k, int max, ENTITY_RECORD** out);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
-int __cdecl fcn_004a5340(ENTITY_RECORD* e, int a, int* b, int c, float r, int* out);
+int __cdecl ai_SelectRankedCandidates(ENTITY_RECORD* e, int a, int* b, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0049fc80 */
 ENTITY_RECORD* __cdecl ai_PickOfficeRival(ENTITY_RECORD* subject)
@@ -87,7 +87,7 @@ ENTITY_RECORD* __cdecl ai_PickOfficeRival(ENTITY_RECORD* subject)
 			int idx;
 
 			mask = 0xc00;
-			if (fcn_004a5340(subject, 1, &mask, 0, 25.0f, &idx) != 0) {
+			if (ai_SelectRankedCandidates(subject, 1, &mask, 0, 25.0f, &idx) != 0) {
 				return ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);
 			}
 		}

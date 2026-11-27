@@ -14,7 +14,7 @@
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl d2_RunStammtischDialog(char*, char*);
-void __cdecl fcn_005a2080(char*, char*);
+void __cdecl d2_RunPlayerStammtischDialog(char*, char*);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d2_OpenStammtischDialog(char* building, char* room)
@@ -27,7 +27,7 @@ void __cdecl d2_OpenStammtischDialog(char* building, char* room)
 			d2_RunStammtischDialog(building, table);
 		}
 		else {
-			fcn_005a2080(building, table);
+			d2_RunPlayerStammtischDialog(building, table);
 		}
 	}
 	d3_EndCameraAndUiMode();

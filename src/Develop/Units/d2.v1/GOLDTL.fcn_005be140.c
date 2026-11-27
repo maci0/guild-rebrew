@@ -24,7 +24,7 @@ int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
 int __cdecl d2_CheckOwnerBlocked();
 int __cdecl gm_CheckEntityStock();
-int __cdecl fcn_00526120();
+int __cdecl d2_ShowModalMessageBox();
 int __cdecl d3_EndCameraAndUiMode();
 int __cdecl d2_CreateButtonRow();
 int __cdecl d2_DrawPanelFrame();
@@ -34,9 +34,9 @@ int __cdecl he_fn_Handlung();
 int __cdecl he_StartHandlungSearch();
 int __cdecl fcn_0057e880();
 int __cdecl d2_CanCloseWindowDuringTutorial();
-int __cdecl fcn_00594340();
-int __cdecl fcn_00595e20();
-int __cdecl fcn_005963f0();
+int __cdecl d2_ResetBuildingUiSlots();
+int __cdecl d2_SyncWareProduktionSlotGrid();
+int __cdecl d2_RefreshWorkshopInventoryGrids();
 int __cdecl d2_SyncProduktionSlotGrid();
 int __cdecl d2_DrawProduktionSlotGrid();
 int __cdecl d2_RunRoomSlotDialog();
@@ -144,7 +144,7 @@ void __cdecl d2_ShowLagerOptions(unsigned char *a0,int a1)
   v28 = v30;
   if ((*(signed char *)0x7747b0) < 0)
     d2_SetElementEnabled(v30,0);
-  fcn_00594340();
+  d2_ResetBuildingUiSlots();
   d2_SetOverlayAnimation(0,0);
   do {
     v3 = he_StartHandlungSearch(2,0,0x12,3,*(unsigned int *)&v2[1]);
@@ -282,7 +282,7 @@ label_5be970:
         if ((((*(int *)0x67d370) == v28) && (0 <= (*(signed char *)0x7747b0))) && (v11 = g_773d75,
              v15 = (unsigned int)g_774970, gm_CheckEntityStock(v15 * 0x21c + 0x7f4ca0,0x3200,v11))) {
           io_FormatTextBuffer(v26,0x113,0x3200);
-          v13 = fcn_00526120(v26,0x101);
+          v13 = d2_ShowModalMessageBox(v26,0x101);
           if (v13) {
             v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,0x3200);
             v12 = cm_GetCommandStatus(v11);
@@ -372,8 +372,8 @@ label_5bea6c:
       d2_SyncProduktionSlotGrid(v2,v4);
       d2_DrawProduktionSlotGrid(dialogId,1,1,v2,v4);
     } else { // branch-flip
-      fcn_00595e20(v2,v4);
-      fcn_005963f0(dialogId,1,0,v2);
+      d2_SyncWareProduktionSlotGrid(v2,v4);
+      d2_RefreshWorkshopInventoryGrids(dialogId,1,0,v2);
     }
     if (((*(int *)0x14ce8e0)) && (d2_CanCloseWindowDuringTutorial() == 1))
       (*(int *)0x774654) = 1;

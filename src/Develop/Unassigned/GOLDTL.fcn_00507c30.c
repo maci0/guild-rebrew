@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00507c30 */
-int __cdecl fcn_00507c30(unsigned int k)
+int __cdecl gm_MapEntityToCategorySlot(unsigned int k)
 {
 	switch (k) {
 	case 0:

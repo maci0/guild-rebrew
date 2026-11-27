@@ -44,7 +44,7 @@ void __cdecl gm_AddTime(void* p, int a, int b, int c);
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 int __cdecl d2_AddWindowImage(int x, int y, int z, int owner, int flag);
 void __cdecl d2_DestroyElement(int element);
-int __cdecl fcn_00529800(char* s, int* out);
+int __cdecl d2_GetEntityGearIcons(char* s, int* out);
 float __cdecl gm_GetEntityHealthRatio(char* e);
 int __cdecl d2_ClearWindowChildren(int win, int keep);
 void __cdecl fcn_004bfe00(char* e);
@@ -191,7 +191,7 @@ no_header:
 	}
 	d2_SetForm(g_6a25b8, 0);
 	x = (((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1;
-	n = fcn_00529800(s, kinds);
+	n = d2_GetEntityGearIcons(s, kinds);
 	if (n > 0) {
 		y = 0x38;
 		for (i = 0; i < n; i++) {

@@ -4,7 +4,7 @@ char* __cdecl gm_FindOrCreateEntitySlot(int, char*);
 char* __cdecl gm_GetEquippedCombatGear(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char __cdecl d3sm_SampleHeight(int, int, void*, void*, void*);
-void __cdecl fcn_00414be0(int, int, int, int);
+void __cdecl d3_SetObjectColorRgb(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00533a40(char*);
 
@@ -36,7 +36,7 @@ void __cdecl d2_ShowCombatSlotStatus(int slotId, char* entity)
 		opponent = gm_LookupEntityRecordIn32SlotTable(*(int*) (rec + 0x10));
 		sceneObj = *(int*) (*(int*) (opponent + 0x184) + 0x34);
 		if (d3sm_SampleHeight(top, sceneObj + 0x4c, &col, &row, &height)) {
-			fcn_00414be0(sceneObj, 0xff, 0, 0);
+			d3_SetObjectColorRgb(sceneObj, 0xff, 0, 0);
 		}
 		{
 			char* oppGear = gm_GetEquippedCombatGear(opponent);

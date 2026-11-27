@@ -8,7 +8,7 @@ int __cdecl ai_ShouldSpareTrialTorture(int*);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl ai_ShouldAcquitTrial(char*, int*);
-int __cdecl fcn_00493ce0(char*, int*);
+int __cdecl ai_ChooseProzessSentence(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004dfba0 */
@@ -53,7 +53,7 @@ void __cdecl cut_HandleProzessEvent(char* context, int* ev)
 	case 5:
 		if (*(int*) (context + 0x10) == ev[7]) {
 			e = gm_LookupEntityRecordById(ev[7]);
-			*(int*) (context + 0x94) = fcn_00493ce0(e, ev);
+			*(int*) (context + 0x94) = ai_ChooseProzessSentence(e, ev);
 		}
 		break;
 	}

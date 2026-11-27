@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00498660 */
-int __cdecl fcn_00498660(void)
+int __cdecl ai_RunWohnsitzUpgraden(void)
 {
 	return 0;
 }

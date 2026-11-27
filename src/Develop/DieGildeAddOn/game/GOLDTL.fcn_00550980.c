@@ -38,7 +38,7 @@ int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_00545670(char*, int, int, char*, int);
+int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
@@ -66,7 +66,7 @@ void __cdecl he_RunMeisterpruefungExam(char* u)
 		v = (int) (t * 0.05f);
 		*(int*) (u + 0xb0) = v;
 		if (*(char**) (u + 0x74) == 0) {
-			fcn_00545670(u, 0, 0, "Berufe\\Messagebox_Meisterpruef", 0x5ec);
+			d2_CreateActionPopupSlot(u, 0, 0, "Berufe\\Messagebox_Meisterpruef", 0x5ec);
 		}
 		if (*(char**) (u + 0x74) == 0) {
 			he_FreeAction(u);

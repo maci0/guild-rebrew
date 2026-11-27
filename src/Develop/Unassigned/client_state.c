@@ -8,8 +8,8 @@ struct cam_412610 {
 	int v[0x13];
 };
 
-void __cdecl fcn_004124b0(void);
-void __cdecl fcn_004124b0(void);
+void __cdecl io_PollKeyboardInput(void);
+void __cdecl io_PollKeyboardInput(void);
 
 /* ADDRESS: GOLDTL 0x004125c0 */
 void __cdecl fcn_004125c0(int x, int y)
@@ -31,7 +31,7 @@ void __cdecl fcn_00412610(void)
 {
 	io_PollMouseInput();
 	(*(struct cam_412610*)&g_14ce8c0) = (*(struct cam_412610*)g_14cf900);
-	fcn_004124b0();
+	io_PollKeyboardInput();
 }
 
 /* ADDRESS: GOLDTL 0x00412630 */
@@ -74,9 +74,9 @@ void __cdecl fcn_00412630(void)
 			*(short*) 0x14ce8c8 = *(short*) (rec + 2);
 			*(short*) 0x14ce8ca = *(short*) (rec + 4);
 			*(int*) (0x14ce9c8 + i * 0x4c) = 0;
-			fcn_004124b0();
+			io_PollKeyboardInput();
 			return;
 		}
 	}
-	fcn_004124b0();
+	io_PollKeyboardInput();
 }

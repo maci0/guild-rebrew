@@ -7,9 +7,9 @@ extern char g_67a42c[];
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl fcn_0043f690(int);
-void __cdecl fcn_0043b8f0(int);
+void __cdecl d3_ReleaseTerrainSurfaces(int);
 
-char __cdecl fcn_0043a9c0(int flags)
+char __cdecl d3_DeinitUniverse(int flags)
 {
 	char buf[0x100];
 
@@ -18,7 +18,7 @@ char __cdecl fcn_0043a9c0(int flags)
 		if ((flags & 2) != 0) {
 			fcn_0043f690(g_6b8300);
 		}
-		fcn_0043b8f0(g_6b8300);
+		d3_ReleaseTerrainSurfaces(g_6b8300);
 	}
 	g_6b8058 = flags;
 	return 1;

@@ -31,7 +31,7 @@ typedef struct {
  * position and the two extrusion points of every record (stride 0x28) in the
  * emitter's track list. */
 /* ADDRESS: GOLDTL 0x00416540 */
-void __cdecl fcn_00416540(Ctx_416540* self, float dt)
+void __cdecl d3_UpdateSnowFlakes(Ctx_416540* self, float dt)
 {
 	float in[4]; float dv[4];
 	float out[16];

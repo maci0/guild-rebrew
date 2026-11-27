@@ -41,11 +41,11 @@ void __cdecl d2_DestroyElementTriple(int*);
 void __cdecl d2_ResetElementTriple(char*);
 int __cdecl m_UnlinkAndFreeNode(char*);
 int __cdecl rt_CountRoutePoints(char*);
-void __cdecl fcn_004be360(void);
-void __cdecl fcn_004be380(void);
+void __cdecl d2_ResetRouteRadioGroup(void);
+void __cdecl d2_BuildRadioGroupFromSlots(void);
 void __cdecl d2_AddRoutePointMarker(int*, char*, int, int);
-int __cdecl fcn_004bea00(char*, int);
-unsigned int __cdecl fcn_004be560(char*, int, unsigned int);
+int __cdecl d2_RunChooseRoutingGoodDialog(char*, int);
+unsigned int __cdecl d2_ShowRoutingChooseGoodDialog(char*, int, unsigned int);
 unsigned int __cdecl d2_ChooseRoutingGood(char*, int, unsigned int);
 int __cdecl d2_FindRadioSlotByValue(int*);
 void __cdecl d2_ClearRoutePointSlot(int);
@@ -200,7 +200,7 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 						k = (int) d2_ChooseRoutingGood(tbl, 1, n);
 					}
 					else {
-						k = (int) fcn_004be560(tbl, 1, n);
+						k = (int) d2_ShowRoutingChooseGoodDialog(tbl, 1, n);
 					}
 					*cur = k;
 					if (n != k) {
@@ -208,7 +208,7 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 					}
 				}
 				else {
-					*cur = fcn_004bea00(rec, (int) g_772908);
+					*cur = d2_RunChooseRoutingGoodDialog(rec, (int) g_772908);
 				}
 				d2_SetGroupVisibility(h, 1);
 				cur = 0;
@@ -218,8 +218,8 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 				if (k != -1) {
 					d2_ClearRoutePointSlot(k);
 				}
-				fcn_004be360();
-				fcn_004be380();
+				d2_ResetRouteRadioGroup();
+				d2_BuildRadioGroupFromSlots();
 				if (route_point == (int*) g_772908) {
 					g_772908 = route_point[0xf];
 				}
@@ -230,7 +230,7 @@ void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 					}
 				}
 				g_772900 = 0;
-				fcn_004be360();
+				d2_ResetRouteRadioGroup();
 				route_point = (int*) g_772908;
 				while (route_point != 0) {
 					d2_AddRoutePointMarker(uiContext, rec, g_772908, (int) route_point);

@@ -4,7 +4,7 @@ extern unsigned char* lpGebaeudePROT;
 
 #include <string.h>
 
-char __cdecl fcn_00514e80(char* o)
+char __cdecl d3_ClassifyBuildingSceneObject(char* o)
 {
 	unsigned char* t;
 

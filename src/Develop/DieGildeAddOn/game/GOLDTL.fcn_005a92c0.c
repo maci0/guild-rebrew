@@ -33,7 +33,7 @@ extern char g_6aae78[];
 int __cdecl gm_AccumulateTyped2(ENTITY_RECORD*);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -69,7 +69,7 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 		char text[0x100];
 
 		io_FormatTextBuffer(text, 0x1a00);
-		fcn_00526120(text, ok);
+		d2_ShowModalMessageBox(text, ok);
 		d3_EndCameraAndUiMode();
 		return;
 	}
@@ -169,7 +169,7 @@ void __cdecl d2_RunBuergerrechtDialog(char* p)
 				io_FormatTextBuffer(text, 0x19ff);
 				fcn_0057e880(0x2e, 0, 0, 0);
 				ok = 1;
-				fcn_00526120(text, 0);
+				d2_ShowModalMessageBox(text, 0);
 			}
 			g_774654 = 1;
 		}

@@ -16,7 +16,7 @@ typedef struct tag7 {
 /* SIZE 0x7 */
 
 /* packet body built for fcn_004c5530: church sermon (type 0x2b) */
-typedef struct msg005ac2d0 {
+typedef struct SERMON_ACTION_PKT {
 	int f0;
 	char b4;
 	char pad5[3];
@@ -28,11 +28,11 @@ typedef struct msg005ac2d0 {
 	char pad37[0x25];
 	char b5c;
 	char pad5d[0x9b];
-} msg005ac2d0;
+} SERMON_ACTION_PKT;
 /* SIZE 0xf8 */
 
 /* picture/text description passed to fcn_005ca560 and fcn_005ca740 */
-typedef struct sel005ac2d0 {
+typedef struct SERMON_TARGET_SEL {
 	char* e;
 	char pad4[0xc];
 	int x;
@@ -40,7 +40,7 @@ typedef struct sel005ac2d0 {
 	char pad18[0x18];
 	int f30;
 	char pad34[4];
-} sel005ac2d0;
+} SERMON_TARGET_SEL;
 /* SIZE 0x38 */
 
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -65,7 +65,7 @@ int __cdecl cm_FlushCommandQueue(void);
 int __cdecl cm_PollCommandQueue(void);
 void __cdecl cm_ExecCommand(void);
 int __cdecl cm_RequestAllocThemaPredigt(int entity_id, tag7 key);
-int __cdecl cm_SendCopyEntityData(msg005ac2d0* m);
+int __cdecl cm_SendCopyEntityData(SERMON_ACTION_PKT* m);
 int __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_BeginPacketFieldDelta(char* base, int entity_id);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
@@ -84,20 +84,20 @@ int __cdecl io_AppendText(int id, ...);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl d2_CheckActionBlocker(char* house, int mode);
 void __cdecl gm_ModifyHealth(int id, int amount);
-int __cdecl d2_BuildPersonStatusDesc(sel005ac2d0* sel);
-int __cdecl fcn_005ca740(int x, int y, int win, int id, sel005ac2d0* sel, int flag);
+int __cdecl d2_BuildPersonStatusDesc(SERMON_TARGET_SEL* sel);
+int __cdecl d2_DrawPersonCard(int x, int y, int win, int id, SERMON_TARGET_SEL* sel, int flag);
 int __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 char* __cdecl d2_OpenTargetPicker(void* m, char* text, int a2, int a3);
 int __cdecl gm_RandomMod(unsigned short range);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005ac2d0 */
-void __cdecl fcn_005ac2d0(char* building)
+void __cdecl d2_RunChurchSermonDialog(char* building)
 {
-	msg005ac2d0 pkt;
+	SERMON_ACTION_PKT pkt;
 	char text[0x20];
 	char pkt2[0x50];
-	sel005ac2d0 sel;
+	SERMON_TARGET_SEL sel;
 	int prev;
 	int btnState2;
 	int btnState1;
@@ -240,7 +240,7 @@ void __cdecl fcn_005ac2d0(char* building)
 			sel.y = 0xc3;
 			sel.f30 = 1;
 			d2_BuildPersonStatusDesc(&sel);
-			fcn_005ca740(sel.x, sel.y, d2_CurrentWindowId, 0x54, &sel, 1);
+			d2_DrawPersonCard(sel.x, sel.y, d2_CurrentWindowId, 0x54, &sel, 1);
 			d2_SetForm(dlg, 2);
 			d2_ClearWindowChildren(d2_CurrentWindowId, 1);
 			io_AppendText((int) g_6811b0);
@@ -322,7 +322,7 @@ void __cdecl fcn_005ac2d0(char* building)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005ac2d0, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunChurchSermonDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);
 	d3_EndCameraAndUiMode();
 }

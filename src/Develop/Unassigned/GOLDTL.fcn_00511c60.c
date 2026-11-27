@@ -30,7 +30,7 @@ int __cdecl fcn_0050b750(int, int);
 void __cdecl amt_SpawnHistoricalOfficeHolders(void);
 extern unsigned char g_773d75;
 /* ADDRESS: GOLDTL 0x00511c60 */
-int __cdecl fcn_00511c60(void)
+int __cdecl amt_InitOfficeHolders(void)
 {
 	int v36;
 	int v42;

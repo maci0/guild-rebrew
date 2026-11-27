@@ -42,7 +42,7 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
-void __cdecl fcn_0052a0c0(char*, int);
+void __cdecl d2_InitPlayerBar(char*, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -50,7 +50,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -67,7 +67,7 @@ void __cdecl d2_OpenBlutracheDialog(char* e)
 	int n;
 	int i;
 
-	fcn_0052a0c0(e, 0);
+	d2_InitPlayerBar(e, 0);
 	dlg = d2_LoadForm(0, 0, s_6ad434);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
@@ -106,7 +106,7 @@ void __cdecl d2_OpenBlutracheDialog(char* e)
 					cm_SendCopyEntityData(&m);
 					g_774654 = 1;
 				} else {
-					fcn_00526120(g_14b5ac8, 0);
+					d2_ShowModalMessageBox(g_14b5ac8, 0);
 				}
 			} else if (d2_CurrentElementId == ids[1]) {
 				g_774654 = 1;

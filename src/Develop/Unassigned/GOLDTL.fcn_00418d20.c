@@ -4,7 +4,7 @@ void* __cdecl d3_FindSceneObject(int a, int b, int c, int d);
 void* __cdecl sb_PrepareVoice(int a, int b);
 int __cdecl d3snd_AttachSoundSource(void* a, void* b, int c, int d);
 
-int __cdecl fcn_00418d20(int a1, int a2, int a3, int a4)
+int __cdecl d3snd_AttachNamedObjectSound(int a1, int a2, int a3, int a4)
 {
 	void* p;
 	void* q;

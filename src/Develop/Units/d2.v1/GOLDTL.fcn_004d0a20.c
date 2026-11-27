@@ -27,7 +27,7 @@ void __cdecl d2_AddDisplayCounter(int, int);
 void __cdecl d2_SetElementValue(int, ...);
 float __cdecl gm_GetEntityHealthRatio(char*);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-void __cdecl fcn_0046f940(int, char*);
+void __cdecl d2_SetLabelText(int, char*);
 int __cdecl gm_GetUnitWeaponSpec(char*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetElementScale(int, int);
@@ -36,7 +36,7 @@ void __cdecl d2_DestroyElement(int);
 void __cdecl d2_SetSlotVisibility(int, int);
 
 /* ADDRESS: GOLDTL 0x004d0a20 */
-void __cdecl fcn_004d0a20(void)
+void __cdecl d2_UpdateCombatUnitHud(void)
 {
 	char buf[0x100];
 	GUI_ENTRY* q;
@@ -75,7 +75,7 @@ void __cdecl fcn_004d0a20(void)
 				}
 				io_FormatTextBuffer(buf, (char*) 0x68b838, *(unsigned short*) q->unit,
 					(int) (gm_GetEntityHealthRatio(q->unit) * g_662c38));
-				fcn_0046f940(q->text, buf);
+				d2_SetLabelText(q->text, buf);
 				r = (int*) gm_GetUnitWeaponSpec(q->unit);
 				if (r != 0 && *r != 0) {
 					if (q->name != -1) {
@@ -96,12 +96,12 @@ relabel:
 							v = gm_FindEntityActiveItem(q->unit);
 							if (v != 0) {
 								sprintf(buf, "%i", *(int*) (v + 0x20));
-								fcn_0046f940(q->label, buf);
+								d2_SetLabelText(q->label, buf);
 								goto next;
 							}
 						}
 						if (q->label != -1) {
-							fcn_0046f940(q->label, g_6b5c60);
+							d2_SetLabelText(q->label, g_6b5c60);
 						}
 					}
 				}

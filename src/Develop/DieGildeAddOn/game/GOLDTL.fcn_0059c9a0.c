@@ -17,7 +17,7 @@ void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_RunMetalProduktionDialog(char*);
 void __cdecl fcn_005c5b10(char*);
-void __cdecl fcn_005c79a0(char*);
+void __cdecl d2_RunWorkerTrainingDialog(char*);
 void __cdecl ob_HandleBepflanzung(char*);
 
 void __cdecl d2_RunHolzfaellerInteriorHud(char* e)
@@ -59,9 +59,9 @@ void __cdecl d2_RunHolzfaellerInteriorHud(char* e)
 			} else if (g_7746a0 == gelage) {
 				fcn_005c5b10(e);
 			} else if (g_7746a0 == zs) {
-				fcn_005c79a0(e);
+				d2_RunWorkerTrainingDialog(e);
 			} else if (g_7746a0 == sp) {
-				fcn_005c79a0(e);
+				d2_RunWorkerTrainingDialog(e);
 			}
 		}
 		if (g_100f1dc != -1 && d2_CurrentElementId == g_6a25f0) {

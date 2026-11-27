@@ -9,7 +9,7 @@ extern short g_7f4c0c;
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x0048fa60 */
-int __cdecl fcn_0048fa60(char* a1, char* a2, int a3, char* p)
+int __cdecl ai_SendHauchDesVerfalls(char* a1, char* a2, int a3, char* p)
 {
 	char msg[0xf8];
 

@@ -41,7 +41,7 @@ int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_005c9090(char*, int, int, int, int);
+void __cdecl d2_ShowCenteredText(char*, int, int, int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -57,7 +57,7 @@ typedef struct TreeRec {
 } TreeRec;
 
 /* ADDRESS: GOLDTL 0x005d0660 */
-void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned int a3)
+void __cdecl d2_RunStammbaumDialog(unsigned int a0, unsigned char a1, int a2, unsigned int a3)
 {
 	char buf[768];
 	TreeRec tabC[5];
@@ -523,7 +523,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 						    *(unsigned short*) p);
 						nb = *(unsigned short*) (p + 8);
 						t0 = *(unsigned short*) (p + 0xa);
-						fcn_005c9090(buf + 0x100, nb, t0 + rows2 + 3,
+						d2_ShowCenteredText(buf + 0x100, nb, t0 + rows2 + 3,
 						    0x50, 0x56);
 						if (*(short*) p == *(short*) ent) {
 							d2_AddElementToWindow(nb - n3 - 0xa,
@@ -544,7 +544,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 						    *(unsigned short*) p);
 						nb = *(unsigned short*) (p + 8);
 						t0 = *(unsigned short*) (p + 0xa);
-						fcn_005c9090(buf, nb, t0 + rows2 + 3,
+						d2_ShowCenteredText(buf, nb, t0 + rows2 + 3,
 						    0x50, 0x56);
 						if (*(short*) p == *(short*) ent) {
 							d2_AddElementToWindow(nb - n3 - 0xa,
@@ -569,7 +569,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 						    *(unsigned short*) p);
 						nb = *(unsigned short*) (p + 8);
 						t0 = *(unsigned short*) (p + 0xa);
-						fcn_005c9090(buf + 0x200, nb, t0 + rows2 + 3,
+						d2_ShowCenteredText(buf + 0x200, nb, t0 + rows2 + 3,
 						    0x50, 0x56);
 						if (*(short*) p == *(short*) ent) {
 							d2_AddElementToWindow(nb - n3 - 0xa,

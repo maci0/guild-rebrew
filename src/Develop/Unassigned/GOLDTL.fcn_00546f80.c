@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00546f80 */
-void __cdecl fcn_00546f80(void)
+void __cdecl he_TickApEvents(void)
 {
 	int a;
 	signed char* p;

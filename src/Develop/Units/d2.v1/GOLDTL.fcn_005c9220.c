@@ -11,7 +11,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(char*, ...);
 void __cdecl d2_DrawSkillBar(int, int, char*, int, int);
 
-void __cdecl fcn_005c9220(int* o)
+void __cdecl d2_DrawLawCandidateStatus(int* o)
 {
 	int info[9];
 	int i;

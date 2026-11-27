@@ -49,7 +49,7 @@ void __cdecl d3_SetObjectRotation(Ent*, void*);
 void __cdecl d3_ComposeObserverMatrix(Ent*, char*, int, Mat*);
 
 void __cdecl fcn_00439aa0(Ent*);
-void __cdecl fcn_00439c00(Ent*, Ent*);
+void __cdecl d3_AttachSceneNode(Ent*, Ent*);
 void __cdecl d3_ApplyWorldTransformToObject(Ent*, Vec4*, Mat*);
 void __cdecl d3_TransformWorldToParent(Ent*, Vec4*, Mat*, Slot*, char*);
 
@@ -95,7 +95,7 @@ char __cdecl d3_ReparentObject(Ent* e, Ent* parent)
 	if (parent == 0) {
 		fcn_00439aa0(e);
 	} else {
-		fcn_00439c00(parent, e);
+		d3_AttachSceneNode(parent, e);
 	}
 	d3_ApplyWorldTransformToObject(e, &wpos, &wm);
 	if (e->kind >= 5 && e->slots != 0) {

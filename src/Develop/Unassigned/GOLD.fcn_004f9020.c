@@ -1,8 +1,8 @@
 extern unsigned char g_slot_table[];
-int __cdecl fcn_004f9850(void);
+int __cdecl gm_BroadcastEconomyReport(void);
 extern float g_773d4c, g_773d50;
 /* ADDRESS: GOLD 0x004f9020 */
-int __cdecl fcn_004f9020(char* src)
+int __cdecl gm_UnpackEconomyStats(char* src)
 {
     int totals[5] = {0};
     int count;
@@ -44,5 +44,5 @@ int __cdecl fcn_004f9020(char* src)
     for (i = 0; i < 5; i++)
         ((unsigned char*) 0x91b460)[i] = (unsigned char) (int) ((float) totals[i] / count);
     *(unsigned char*) 0x91b465 = (unsigned char) (int) ((float) sum / count);
-    return fcn_004f9850();
+    return gm_BroadcastEconomyReport();
 }

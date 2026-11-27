@@ -9,7 +9,7 @@ extern int g_100f884;
 extern char g_7749e8;
 extern int g_7749e4;
 
-int __cdecl fcn_00545670(char*, short, short, char*, int);
+int __cdecl d2_CreateActionPopupSlot(char*, short, short, char*, int);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -73,9 +73,9 @@ void __cdecl d2_ShowTitleAward(char* o)
 	}
 	if (*(int*) (o + 0x74) == 0) {
 		if (g == (char*) slot)
-			fcn_00545670(o, 0, 0, "SPECIAL\\TITEL", 0x5fd);
+			d2_CreateActionPopupSlot(o, 0, 0, "SPECIAL\\TITEL", 0x5fd);
 		else
-			fcn_00545670(o, 0, 0, "SPECIAL\\TITEL_ANDERE", 0x5fe);
+			d2_CreateActionPopupSlot(o, 0, 0, "SPECIAL\\TITEL_ANDERE", 0x5fe);
 	}
 	if (*(int*) (o + 0x74) == 0) {
 		he_FreeAction(o);

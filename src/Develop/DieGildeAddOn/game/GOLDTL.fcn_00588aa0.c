@@ -55,12 +55,12 @@ extern float g_662914, g_662c98, g_662a98, g_664450, g_66444c, g_6660f4;
 #include "GOLDTL.fcn_00588aa0_gconf.h"
 
 int __cdecl d2_GetControlValue(int slot);
-int __cdecl fcn_004f0ff0(char* a0, int a1, int a2, int a3, int* o1, int* o2);
+int __cdecl gm_CanFireCannonShot(char* a0, int a1, int a2, int a3, int* o1, int* o2);
 void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2);
 float __cdecl gm_GetCannonPowerScale(char* p);
 int __cdecl gm_SendCannonVolleys(char* a0, char* a1, unsigned int* a2,
 	unsigned int* a3, unsigned int* a4, float a5, int a6, unsigned int a7);
-float __cdecl fcn_004f0eb0(int level, int percent, int count);
+float __cdecl gm_CalcArtilleryVolleyCost(int level, int percent, int count);
 int __cdecl fcn_005e8e80(Particle* o, Vec3* pos, Vec3* dir, float speed,
 	float b, float a);
 int __cdecl d3_PerturbParticleVelocity(float* p, float spread, float* dir, float lift,
@@ -71,7 +71,7 @@ int __cdecl evt_LoadGfxScript(const char* name);
 int __cdecl evt_CallScriptFunction(int h, int a, int b, int c, int d, int e);
 int __cdecl sb_PlayPrioritizedVoice(char* bank, const char* name, int prio, int loop,
 	int pan, int vol, int a);
-void __cdecl fcn_00589390(void);
+void __cdecl d2_ResetKanoneHitTable(void);
 
 /* ADDRESS: GOLDTL 0x00588aa0 */
 int __cdecl d2_FireKanone(Emitter* emitter, char* building)
@@ -111,7 +111,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 	ez = 0;
 	slot0 = d2_GetControlValue(emitter->slot0);
 	slot1 = d2_GetControlValue(emitter->slot1);
-	if (!fcn_004f0ff0((char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
+	if (!gm_CanFireCannonShot((char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			slot0, slot1, emitter->mode + 1, &o1, &o2)) {
 		return 0;
 	}
@@ -122,7 +122,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 			- ((CANNON_ROW_588AA0*)0x665288)[slot0].f00)
 		* ((float) slot1 * 0.01f)
 		+ ((CANNON_ROW_588AA0*)0x665288)[slot0].f00;
-	fcn_00589390();
+	d2_ResetKanoneHitTable();
 	dir1 = emitter->dir1; dir2 = emitter->dir2; dir3 = emitter->dir3;
 	if (emitter->mode == 0) {
 		pos0.x = dir1.x * 50.0f; pos0.y = dir1.y * 50.0f; pos0.z = dir1.z * 50.0f;
@@ -134,7 +134,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 		h = gm_SendCannonVolleys(building,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			(unsigned int*) &p0, 0, 0,
-			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);
+			gm_CalcArtilleryVolleyCost(slot0, slot1, 1), o1, (unsigned int) o2);
 		sel = 1;
 	} else if (emitter->mode == 1) {
 		px = dir1.x * 40.0f + emitter->pos.x;
@@ -155,7 +155,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 		h = gm_SendCannonVolleys(building,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			(unsigned int*) &p1, (unsigned int*) &p0, 0,
-			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);
+			gm_CalcArtilleryVolleyCost(slot0, slot1, 1), o1, (unsigned int) o2);
 		sel = 2;
 		dx = -5;
 		dy = 0;
@@ -191,7 +191,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 		h = gm_SendCannonVolleys(building,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			(unsigned int*) &p2, (unsigned int*) &p0, (unsigned int*) &p1,
-			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);
+			gm_CalcArtilleryVolleyCost(slot0, slot1, 1), o1, (unsigned int) o2);
 		sel = 3;
 		dx = -5;
 		dy = -3;

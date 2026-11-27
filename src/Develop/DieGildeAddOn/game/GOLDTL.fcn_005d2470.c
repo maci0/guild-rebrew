@@ -6,7 +6,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
@@ -81,7 +81,7 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 		hv = io_AppendText(0x1f4e);
 		confirm = d2_GetWindowListItem(dlg, 1, hv);
 		vc = d2_GetWindowListItem(dlg, 1, hv + 1);
-		fcn_00472380(slider,
+		d2_CreateGuiWindow(slider,
 		    gm_AmountToUnits(v14, *(unsigned char*) &g_773d75),
 		    gm_AmountToUnits(ebp, *(unsigned char*) &g_773d75),
 		    gm_AmountToUnits(v14, *(unsigned char*) &g_773d75));

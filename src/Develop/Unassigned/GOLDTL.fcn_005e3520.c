@@ -1,7 +1,7 @@
 extern int g_100f1dc;
 int __cdecl d2_LoadForm(int, int, char *);
-void __cdecl fcn_00537320(int);
-void __cdecl fcn_00471db0(int, int);
+void __cdecl d2_UpdateViewportCenter(int);
+void __cdecl d2_PositionFormWindows(int, int);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
@@ -20,25 +20,25 @@ void __cdecl fcn_005e2660(void);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
-void __cdecl fcn_005e1ca0(void);
+void __cdecl io_LoadIniSettings(void);
 void __cdecl d2_DestroyForm(int);
 
 void __cdecl gm_ApplyGameSettings(void);
-void __cdecl fcn_00527420(void);
+void __cdecl d2_DestroyAllHudPanels(void);
 void __cdecl fcn_00526db0(char *);
 int __cdecl d2_GetHudThemeResourceId(void);
 void __cdecl d2_EnterMenuScreen(void);
 
 /* ADDRESS: GOLDTL 0x005e3520 */
-void __cdecl fcn_005e3520(void)
+void __cdecl d2_ShowGameOptions(void)
 {
   int v1, sel0, sel1, selection[2];
   unsigned int v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16;
   v1 = 0;
   v16 = *(unsigned int *)0x7e46ac & ~0x2000;
   v3 = d2_LoadForm(0,0,(char *)0x6ad30c);
-  fcn_00537320(v16);
-  fcn_00471db0(v3,1);
+  d2_UpdateViewportCenter(v16);
+  d2_PositionFormWindows(v3,1);
   fcn_00471d80(v3,2);
   d2_SetForm(v3,0);
   d2_InitWindowBounds(*(unsigned int *)0x772514);
@@ -103,7 +103,7 @@ void __cdecl fcn_005e3520(void)
   d2_CreateButtonRow(*(unsigned int *)0x772514,0,&selection[0],2,*(unsigned int *)0x14ac5a8,*(unsigned int *)0x14ac5ac);
   sel0 = selection[0];
   sel1 = selection[1];
-  if (main_RunFrameLoop((void *)fcn_005e3520,v16)) {
+  if (main_RunFrameLoop((void *)d2_ShowGameOptions,v16)) {
     do {
       if ((*(unsigned int *)0x14ce8e0) || (*(unsigned char *)0x14cf950 == 1))
         *(unsigned int *)0x774654 = 1;
@@ -117,7 +117,7 @@ void __cdecl fcn_005e3520(void)
           *(unsigned int *)0x774654 = 1;
         }
       }
-    } while (main_RunFrameLoop((void *)fcn_005e3520,v16));
+    } while (main_RunFrameLoop((void *)d2_ShowGameOptions,v16));
     if (v1) {
       *(unsigned int *)0x7766a8 = d2_GetControlValue(v4);
       *(unsigned char *)0x7766ac = (unsigned char)d2_GetControlValue(v7);
@@ -134,7 +134,7 @@ void __cdecl fcn_005e3520(void)
         *(unsigned char *)0x776708 = (unsigned char)d2_GetControlValue(v11);
         d2_SetFormVisibility(v3,0);
         if (*(unsigned char *)0x774964) {
-          fcn_00527420();
+          d2_DestroyAllHudPanels();
           fcn_00526db0((char *)d2_GetHudThemeResourceId());
           d2_EnterMenuScreen();
           *(unsigned int *)0x774714 = 1;

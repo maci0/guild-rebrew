@@ -15,7 +15,7 @@ __declspec(dllimport) int __stdcall WritePrivateProfileStringA(const char *sec, 
                                                               const char *value, const char *file);
 __declspec(dllimport) unsigned long __stdcall timeGetTime(void);
 
-void __cdecl fcn_00514570(unsigned int a0);
+void __cdecl d2_ShowNetworkLoadStatus(unsigned int a0);
 void __cdecl gm_InitCityAndTradeState(char a0);
 void __cdecl init_LocalData(void);
 void __cdecl gm_RestockTownMarket(char a0);
@@ -27,7 +27,7 @@ void __cdecl sv_WaitForNetworkSync(int id);
 void __cdecl gm_UpdateMarketStockSlots(int i);
 void __cdecl cm_SendRandomMarktSlotDelta(int i);
 int __cdecl fcn_0050b750(int timeout, char who);
-int __cdecl fcn_00413160(void);
+int __cdecl d3_FindFreeSceneContext(void);
 int __cdecl d3_SelectSceneContext(int a0, int a1);
 int __cdecl fcn_00442e30(void);
 int __cdecl d3_LoadScene(char *name, int a1, int a2);
@@ -62,7 +62,7 @@ int __cdecl ls_StartNetworkGame(char *path)
     char *p;
 
     sprintf(text, *(char **) 0x14ac600, *(unsigned char *) &g_6a375c);
-    fcn_00514570((unsigned int) text);
+    d2_ShowNetworkLoadStatus((unsigned int) text);
     *(int *) &g_77494c = 0;
     do {
         main_PumpWindowMessages();
@@ -71,12 +71,12 @@ int __cdecl ls_StartNetworkGame(char *path)
     if (*(int *) &g_77494c & 1) {
         if (*path == 0)
             sprintf(path, "%s/AUGSBURG.NET", "gamedata/cities");
-        fcn_00514570(*(unsigned int *) 0x14ac5f0);
+        d2_ShowNetworkLoadStatus(*(unsigned int *) 0x14ac5f0);
         if (ls_SendGame(path) == 0)
             return 1;
     }
     flag = *(int *) &g_77494c & 1;
-    fcn_00514570(*(unsigned int *) 0x14ac5f4);
+    d2_ShowNetworkLoadStatus(*(unsigned int *) 0x14ac5f4);
     if (fcn_00525b40() == 0)
         return 2;
     GetModuleFileNameA(*(void **) 0x7e1f80, file, 0x104);
@@ -84,7 +84,7 @@ int __cdecl ls_StartNetworkGame(char *path)
     strcpy(p, "\\game.INI");
     engine = d3_CurrentContextIndex;
     *(int *) 0x7725c8 = 0;
-    d3_SelectSceneContext(fcn_00413160(), 0);
+    d3_SelectSceneContext(d3_FindFreeSceneContext(), 0);
     d3_LoadScene("scenes/*network.ed3", 0, 0);
     d2_SetFormVisibility(*(int *) 0x7e1d40, 0);
     *(int *) 0x7725c8 = 1;
@@ -147,11 +147,11 @@ int __cdecl ls_StartNetworkGame(char *path)
         cm_StepCommandQueue();
     }
     if (flag != 0) {
-        fcn_00514570(*(unsigned int *) 0x14ac5f8);
+        d2_ShowNetworkLoadStatus(*(unsigned int *) 0x14ac5f8);
         gm_InitCityAndTradeState(*(unsigned char *) &g_773d75);
     }
     sv_WaitForNetworkSync(0x24087);
-    fcn_00514570(*(unsigned int *) 0x14ac5fc);
+    d2_ShowNetworkLoadStatus(*(unsigned int *) 0x14ac5fc);
     init_LocalData();
     sv_WaitForNetworkSync(0x24087);
     if (flag != 0) {
@@ -171,7 +171,7 @@ int __cdecl ls_StartNetworkGame(char *path)
     *(int *) 0x7725c8 = 0;
     if (*(signed char *) &g_6a3440 > -1 && *(signed char *) &g_6a3440 < 6) {
         engine = d3_CurrentContextIndex;
-        d3_SelectSceneContext(fcn_00413160(), 0);
+        d3_SelectSceneContext(d3_FindFreeSceneContext(), 0);
         d3_LoadScene("scenes/*network.ed3", 0, 0);
         d2_ShowMissionForEntity(*(int *) (handle + 4));
         fcn_00442e30();

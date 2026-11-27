@@ -51,7 +51,7 @@ int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-void __cdecl fcn_00534160(int, int, int, int);
+void __cdecl d2_DrawSegmentedBar(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void* __cdecl ahm_GetWorkshopOwner(unsigned char*);
@@ -59,7 +59,7 @@ int __cdecl he_GetActionProgress(char*, int*, float*, int);
 int __cdecl ahm_PickRandomUnknownRecipe(int);
 int __cdecl he_SendEvent096(char*, int*, int);
 int __cdecl d2_SendAlchemyResearch(char*, int*);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -143,7 +143,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		item = d2_ShowTxt(x + 0x3c, y + 5, buf, wnd);
 		((D2_CONTROL_TL*) g_1015ea0)[item].width = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
 		d2_SetElementFont(item, 0x54);
-		fcn_00534160(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
+		d2_DrawSegmentedBar(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 		count++;
 		ids++;
 	}
@@ -194,7 +194,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 				item = d2_ShowTxt(x + 0x3c, y + 5, buf2, wnd);
 				((D2_CONTROL_TL*) g_1015ea0)[item].width = ((D2_WIN*)g_1015f40)[wnd].width / 2 - 10;
 				d2_SetElementFont(item, 0x54);
-				fcn_00534160(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
+				d2_DrawSegmentedBar(x + 0x3c, y + 0x19, (int) (*(float*) (src + 1) * g_66413c), 0x4df);
 				count++;
 				ids++;
 			}
@@ -212,7 +212,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 					if (ahm_PickRandomUnknownRecipe((int) data) != 0) {
 						he_SendEvent096(e, records, i);
 					} else {
-						fcn_00526120(g_14b59e0, 0);
+						d2_ShowModalMessageBox(g_14b59e0, 0);
 					}
 				}
 			} else if (d2_CurrentElementId == btn0) {

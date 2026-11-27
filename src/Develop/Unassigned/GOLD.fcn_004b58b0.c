@@ -11,7 +11,7 @@ void __cdecl d2_CenterTopLevelWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00515990(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_004758e0(int);
+void __cdecl d2_FreeWindowSlot(int);
 
 void __cdecl d2_ShowMissionDeclineDialog(int flags)
 {
@@ -31,5 +31,5 @@ void __cdecl d2_ShowMissionDeclineDialog(int flags)
 		else if (g_f8a668 == 0)
 			g_6f22a0 = 1;
 	}
-	fcn_004758e0(h);
+	d2_FreeWindowSlot(h);
 }

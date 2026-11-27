@@ -38,7 +38,7 @@ void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl sprintf(char *, char *, ...);
 int __cdecl evt_FindScriptByName(char *);
 int __cdecl evt_RequestScriptExit(char *);
-void __cdecl fcn_00418f90(int);
+void __cdecl d3snd_StopSourceVoiceSafe(int);
 void __cdecl he_FreeAction(char *);
 void __cdecl d3_SelectSceneContext(int, int);
 char *__cdecl sb_PrepareVoice(int, char *);
@@ -299,7 +299,7 @@ inc_step:
 		}
 		if (e != 0 && *(int *)(e + 0x61) != 0 &&
 		    (n = *(int *)(*(int *)(e + 0x61) + 0x210)) != 0)
-			fcn_00418f90(n);
+			d3snd_StopSourceVoiceSafe(n);
 		he_FreeAction(action);
 		break;
 	}

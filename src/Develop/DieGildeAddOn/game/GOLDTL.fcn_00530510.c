@@ -5,7 +5,7 @@ void* __cdecl fcn_00502cd0(int, int, ...);
 extern char* g_7746c4; extern unsigned char* g_7746c8; extern int* g_7e2a9c;
 extern char* g_7e2aa0; extern char* g_7746c0; extern char g_7746f4;
 /* ADDRESS: GOLDTL 0x00530510 */
-void __cdecl fcn_00530510(void)
+void __cdecl sv_ResetSelectionState(void)
 {
 	unsigned short* entity;
 	unsigned short id; int mode; char *table;

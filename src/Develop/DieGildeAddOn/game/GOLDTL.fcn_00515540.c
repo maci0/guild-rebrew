@@ -18,7 +18,7 @@ extern char g_10432c0[];
 #define fcn_00413160 fcn_00411bb0
 #define init_LoadObjektScene fcn_0050d7f0
 #endif
-int __cdecl fcn_00413160(void);
+int __cdecl d3_FindFreeSceneContext(void);
 void __cdecl init_LoadObjektScene(int object_type);
 
 /* ADDRESS: GOLDTL 0x00515540 */
@@ -30,7 +30,7 @@ int __cdecl init_EnsureObjektSceneContext(char* object)
         if (object == g_7746cc) {
             init_LoadObjektScene(*(unsigned short*) object);
         } else {
-            index = fcn_00413160();
+            index = d3_FindFreeSceneContext();
             if (index == -1) {
                 return index;
             }

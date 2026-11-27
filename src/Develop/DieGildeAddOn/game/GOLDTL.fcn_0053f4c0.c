@@ -29,12 +29,12 @@ extern Page_1038144 g_1038144[];
 extern struct ctlinfo g_1015f50[];
 
 void __cdecl d2_ClearScreen(void);
-void __cdecl fcn_00537320(int);
+void __cdecl d2_UpdateViewportCenter(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl d2_SetBackdropResource(int);
-void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
+void __cdecl d3_SetViewport(float, float, float, float, int, int, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00469c40(int, int, int);
+void __cdecl d2_PositionControl(int, int, int);
 void __cdecl d2_PositionWindow(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
@@ -46,19 +46,19 @@ void __cdecl d2_ShowLoadingScreen(void)
 {
 	d2_SuppressOverlay = 1;
 	d2_ClearScreen();
-	fcn_00537320(0x24087);
+	d2_UpdateViewportCenter(0x24087);
 	d2_SetBackdropResource(gm_RandomMod(2) == 1 ? 0x78e : 0x791);
 	g_1040480 = -1;
 	g_1040488 = -1;
 	g_1040484 = -1;
 	g_104048c = -1;
-	fcn_00438da0((float) g_1040494, (float) d2_ScreenHeight, 0.0f, 0.0f, (*(int*)&g_10529c8), (*(int*)&g_10421a0), (*(int*)&g_10432a4), g_1040494, d2_ScreenHeight);
+	d3_SetViewport((float) g_1040494, (float) d2_ScreenHeight, 0.0f, 0.0f, (*(int*)&g_10529c8), (*(int*)&g_10421a0), (*(int*)&g_10432a4), g_1040494, d2_ScreenHeight);
 	if (g_7747b0 & 4) {
 		g_7e1d40 = d2_LoadForm(0, 0, g_6a41d4);
 	} else {
 		g_7e1d40 = d2_LoadForm(0, 0, g_6a41c0);
 	}
-	fcn_00469c40(0, d2_ScreenHeight - g_1015f50[((struct dlgslot*)g_1038144)[g_7e1d40].ctl].y - 0x30, g_1015f50[((struct dlgslot*)g_1038144)[g_7e1d40].ctl].h);
+	d2_PositionControl(0, d2_ScreenHeight - g_1015f50[((struct dlgslot*)g_1038144)[g_7e1d40].ctl].y - 0x30, g_1015f50[((struct dlgslot*)g_1038144)[g_7e1d40].ctl].h);
 	d2_PositionWindow(((struct dlgslot*)g_1038144)[g_7e1d40].ctl, 1);
 	d2_SetForm(g_7e1d40, 1);
 	d2_AddWindowValueGauge(0, 0, 0x246, 0, 0x246, 0x83, 0x42, d2_CurrentWindowId);

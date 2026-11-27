@@ -40,7 +40,7 @@ int __cdecl gm_FindRecordById(int);
 void __cdecl gm_CalcEntityInventoryStats(int, Query*);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl gm_CalcCombatStrength(Ent*);
-void __cdecl fcn_004ce740(Ent*);
+void __cdecl gm_CheckCombatGearWear(Ent*);
 int __cdecl _ftol(void);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
@@ -48,12 +48,12 @@ void __cdecl cut_SetupBattleArena(COMBAT_CUTSCENE_DLG*);
 void __cdecl cut_RefreshCombatContextCharacters(void);
 void __cdecl cut_PlaceCombatTeamAtDummies(int*, int);
 void __cdecl cut_RunGfxCutscene(COMBAT_CUTSCENE_DLG*);
-void __cdecl fcn_0052a960(void*);
+void __cdecl d3_UpdateDaylightPhase(void*);
 void __cdecl d3_BlendSceneLightingPreset(int, int, float, int);
 void __cdecl cut_RunCombatStartDialog(COMBAT_CUTSCENE_DLG*);
 void __cdecl cut_RunTurnRound(COMBAT_CUTSCENE_DLG*, int);
 void __cdecl d2_DestroyElement(int);
-void __cdecl fcn_004d6170(COMBAT_CUTSCENE_DLG*);
+void __cdecl d2_ShowCombatEndCutscene(COMBAT_CUTSCENE_DLG*);
 void __cdecl cut_RunCombatFlightOutro(COMBAT_CUTSCENE_DLG*);
 void __cdecl cut_CleanupCombatScene(COMBAT_CUTSCENE_DLG*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -120,7 +120,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 		if (*(int*) 0x774804 != 0) {
 			d3_BlendSceneLightingPreset(2, 0, 1.0f, 1);
 		} else {
-			fcn_0052a960((void*) &gm_GameTime);
+			d3_UpdateDaylightPhase((void*) &gm_GameTime);
 		}
 		*(int*) &g_772ea4 = 0;
 		*(int*) &g_772ea8 = 0;
@@ -142,7 +142,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 				*(int*) (t - 4) = 0;
 				*(int*) (t + 4) = 0;
 			}
-			fcn_004d6170(p);
+			d2_ShowCombatEndCutscene(p);
 			cut_RunCombatFlightOutro(p);
 		} else if (*(int*) &g_772eac != 0 && *(char*) (*(int*) &g_772e9c + 2) == 6) {
 			v = 0;
@@ -195,12 +195,12 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 	}
 	for (i = 0; i < 0x10; i++) {
 		if (p->list_a[i] != -1 && (ep = gm_LookupEntityRecordById(p->list_a[i])) != 0) {
-			fcn_004ce740(ep);
+			gm_CheckCombatGearWear(ep);
 		}
 	}
 	for (i = 0; i < 0x10; i++) {
 		if (p->list_b[i] != -1 && (ep = gm_LookupEntityRecordById(p->list_a[i])) != 0) {
-			fcn_004ce740(ep);
+			gm_CheckCombatGearWear(ep);
 		}
 	}
 	if (p->flags & 2) {

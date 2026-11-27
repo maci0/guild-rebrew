@@ -34,7 +34,7 @@ void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_ConfirmUseObjekt(char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl d2_CloseInventoryPanel(void);
 void __cdecl d2_DestroyForm(int);
@@ -74,7 +74,7 @@ void __cdecl d2_ShowInventoryPanel(void)
 							d2_SetFormVisibility(dlg, 1);
 						}
 						else {
-							fcn_00526120(g_14a92bc, 0);
+							d2_ShowModalMessageBox(g_14a92bc, 0);
 						}
 					}
 				}

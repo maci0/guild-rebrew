@@ -1,7 +1,7 @@
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-int __cdecl fcn_0043a9c0();
-int __cdecl fcn_0043aa30();
+int __cdecl d3_DeinitUniverse();
+int __cdecl d3_InitUniverse();
 int __cdecl d3_SelectSceneContext();
 int __cdecl d2_RenderAndPresentFrame();
 int __cdecl d2_SetBackdropResource();
@@ -10,7 +10,7 @@ int __cdecl d2_LoadForm();
 int __cdecl fcn_00471d80();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
-int __cdecl fcn_00472380();
+int __cdecl d2_CreateGuiWindow();
 int __cdecl d2_SetElementEnabled();
 int __cdecl d2_SetForm();
 int __cdecl d2_ClearSurface();
@@ -26,7 +26,7 @@ int __cdecl srv_FormatStatEntity();
 int __cdecl amt_UpdateAllOffices();
 int __cdecl fcn_004f5830();
 int __cdecl gm_UpdateAllBuildingLevels();
-int __cdecl fcn_004facb0();
+int __cdecl gm_PushCityHistorySample();
 int __cdecl fcn_004fb390();
 int __cdecl gm_GetDisasterState();
 void __cdecl gm_InitDisasterState(int, int, int, float);
@@ -36,13 +36,13 @@ int __cdecl gm_CollectAllTaxes();
 int __cdecl gm_AdvanceRoundCounters();
 int __cdecl gm_UpdateActiveEntities();
 int __cdecl gm_PackGameTime();
-int __cdecl fcn_005016c0();
+int __cdecl gm_UpdateAllTownSeasonPrices();
 int __cdecl gm_FindNextFilteredEntity();
 int __cdecl gm_StartFilteredEntitySearch();
 int __cdecl init_AllocateGebaeudeSceneSlot();
 int __cdecl io_AppendText();
 int __cdecl fcn_00522c0();
-int __cdecl fcn_00526120();
+int __cdecl d2_ShowModalMessageBox();
 int __cdecl main_ExitToFrameHandler();
 int __cdecl sv_WaitForNetworkSync();
 int __cdecl main_RunFrameLoop();
@@ -52,7 +52,7 @@ int __cdecl fcn_005435d0();
 int __cdecl main_PlayOutroMovie();
 int __cdecl he_DispatchFlaggedEvents();
 int __cdecl fcn_0053f100();
-int __cdecl fcn_00546f80();
+int __cdecl he_TickApEvents();
 int __cdecl fcn_00547770();
 int __cdecl he_RunDailyActionMaintenance();
 int __cdecl fcn_005490d0();
@@ -103,7 +103,7 @@ void __cdecl gm_RunRoundUpdate(void)
 			d2_SuppressOverlay = 0;
 			*(int*) &main_LoopFlags = 0x24087;
 			io_FormatTextBuffer(messageText, 0x79);
-			if (!fcn_00526120(messageText, 1)) {
+			if (!d2_ShowModalMessageBox(messageText, 1)) {
 				g_774954 = 1;
 				main_ExitToFrameHandler(0x5438c0);
 				return;
@@ -127,7 +127,7 @@ void __cdecl gm_RunRoundUpdate(void)
 		d2_SetBackdropResource(0x79d);
 	}
 	fcn_0053f100();
-	fcn_00546f80();
+	he_TickApEvents();
 	if (g_6a3420) {
 		tmpVal = d2_LoadForm(0, 0, 0x6a43ac);
 		fcn_00471d80(tmpVal, 3);
@@ -145,9 +145,9 @@ void __cdecl gm_RunRoundUpdate(void)
 			if (tmpIdx != -1) {
 				tmpVal = d3_CurrentContextIndex;
 				d3_SelectSceneContext((int) *(char*) (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*bldPtr].category + (unsigned long)&g_7f3b00), 1);
-				fcn_0043aa30(3);
+				d3_InitUniverse(3);
 				plt_UpdatePlantStages(*(unsigned int*) &bldPtr[0x71]);
-				fcn_0043a9c0(3);
+				d3_DeinitUniverse(3);
 				d3_SelectSceneContext(tmpVal, 1);
 			}
 		} else if (proto->category == 7) {
@@ -156,8 +156,8 @@ void __cdecl gm_RunRoundUpdate(void)
 		bldPtr = (unsigned char*) gm_FindNextFilteredEntity();
 	}
 	tmpIdx = 0;
-	fcn_005016c0();
-	fcn_004facb0();
+	gm_UpdateAllTownSeasonPrices();
+	gm_PushCityHistorySample();
 	if ((*(int*) &g_77494c & 8) || g_14cbca0 == -1) {
 		fcn_004f5830();
 		cm_StepCommandQueue();
@@ -175,7 +175,7 @@ void __cdecl gm_RunRoundUpdate(void)
 		gm_UpdateActiveEntities();
 		cm_StepCommandQueue();
 		Sleep(100);
-		fcn_004fd0a0();
+		gm_RefreshEntityChainStats();
 		cm_StepCommandQueue();
 		Sleep(100);
 		gm_AdvanceRoundCounters(3);

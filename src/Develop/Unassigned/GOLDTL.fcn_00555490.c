@@ -1,4 +1,4 @@
-int __cdecl fcn_0047dca0(char*);
+int __cdecl gm_IsLocalSimEntity(char*);
 
 // SIZE 0xc
 struct ent_555490 {
@@ -14,7 +14,7 @@ int __cdecl fcn_00555490(char* o, struct ent_555490* tab, int* out)
 	int i;
 
 	if (*(unsigned short*) o != 0xffff && o[8] != 0 && o[2] == 0 && *(char**) (o + 0x184) != 0 &&
-	    fcn_0047dca0(o) != 0) {
+	    gm_IsLocalSimEntity(o) != 0) {
 		for (i = 0; i < 16; i++) {
 			if (tab[i].e == 0) {
 				return 0;

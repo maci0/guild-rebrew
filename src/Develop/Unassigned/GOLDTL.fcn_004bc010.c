@@ -13,7 +13,7 @@ extern volatile int g_6b7fac;
 
 
 /* ADDRESS: GOLDTL 0x004bc010 */
-AMBIENT_ANIMAL_SLOT* __cdecl fcn_004bc010(void)
+AMBIENT_ANIMAL_SLOT* __cdecl gm_AllocAmbientAnimalSlot(void)
 {
 	int i;
 

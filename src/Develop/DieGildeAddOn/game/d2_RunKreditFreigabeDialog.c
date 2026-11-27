@@ -18,7 +18,7 @@ int __cdecl main_RunFrameLoop(void* a, int b);
 int __cdecl d2_GetControlValue(int a);
 int __cdecl gm_QueryEntitySum(int a, unsigned char b);
 int __cdecl gm_AccumulateTyped2(int a);
-void __cdecl fcn_00472380(int a, ...);
+void __cdecl d2_CreateGuiWindow(int a, ...);
 void __cdecl cm_RequestMoveCredits(int a, int b, char c, int d);
 void __cdecl cm_BeginPacketFieldDelta(void* a, int b);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* d);
@@ -47,9 +47,9 @@ void __cdecl d2_RunKreditFreigabeDialog(char* o)
     txt = io_AppendText((void*)0x18e6, (void*)(2 * *(u16*)(g_773d75 * 0x2f4 + 0x8680b4) + 0x9a8));
     it1 = d2_GetWindowListItem((int)dlg, 2, txt);
     it2 = d2_GetWindowListItem((int)dlg, 2, txt + 1);
-    fcn_00472380(it1, 5, 0x28, *(int*)(o + 0x65));
+    d2_CreateGuiWindow(it1, 5, 0x28, *(int*)(o + 0x65));
     sval = gm_AccumulateTyped2(*(u16*)(o + 0x27) * 0x21c + 0x7f4ca0);
-    fcn_00472380(it2, 0, gm_AmountToUnits(sval, g_773d75), gm_AmountToUnits(have, g_773d75));
+    d2_CreateGuiWindow(it2, 0, gm_AmountToUnits(sval, g_773d75), gm_AmountToUnits(have, g_773d75));
     d2_SetOverlayAnimation(0, 0);
     while (main_RunFrameLoop((void*)0x5a4bb0, 0x677c7) != 0) {
         if (g_14ce8e0 != 0 || g_100f1dc == 1)

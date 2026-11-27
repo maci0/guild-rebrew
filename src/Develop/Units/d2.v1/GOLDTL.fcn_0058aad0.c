@@ -18,14 +18,14 @@ void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_RunDomizilKabinettDialog(char*, char*);
 int __cdecl he_GetActionProgress(char*, int*, int*, int);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_RunProduktionDialog(char*);
 #ifdef REBREW_GOLD
 #define fcn_00585030 fcn_0057c950
 #endif
 
 void __cdecl fcn_00585030(char*);
-void __cdecl fcn_00585910(char*);
+void __cdecl d2_RunAlchemistryWorkshopDialog(char*);
 void __cdecl d2_RunAlchemyDialog(char*);
 
 void __cdecl d2_RunAlchemistMenu(char* a, char* b)
@@ -71,14 +71,14 @@ void __cdecl d2_RunAlchemistMenu(char* a, char* b)
 			} else if (g_7746a0 == book) {
 				r = he_GetActionProgress(a, &y, &x, 0);
 				if (r != 0) {
-					fcn_00526120(g_14b59d0[r], 0x100);
+					d2_ShowModalMessageBox(g_14b59d0[r], 0x100);
 				} else {
 					d2_RunProduktionDialog(a);
 				}
 			} else if (g_7746a0 == alch) {
 				fcn_00585030(a);
 			} else if (g_7746a0 == alchcontract) {
-				fcn_00585910(a);
+				d2_RunAlchemistryWorkshopDialog(a);
 			} else if (g_7746a0 == contract) {
 				d2_RunAlchemyDialog(a);
 			}

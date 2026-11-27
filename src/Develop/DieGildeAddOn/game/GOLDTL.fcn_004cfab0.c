@@ -7,10 +7,10 @@ void __cdecl gm_FindOrCreateEntitySlot(int, int);
 int __cdecl d2_CreateWindow(int, int, int, int, int);
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl gm_GetScaledEntitySkill(int, int, int);
-void __cdecl fcn_00534160(int, int, int);
+void __cdecl d2_DrawSegmentedBar(int, int, int);
 float __cdecl gm_GetEntityHealthRatio(int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004cfab0 */
 void __cdecl d2_OpenEntityStatusPopup(int owner, int targetEntity)
@@ -39,8 +39,8 @@ void __cdecl d2_OpenEntityStatusPopup(int owner, int targetEntity)
 			d2_AddElementToWindow(0, 0, 0x7b0, d2_CurrentWindowId);
 			d2_AddElementToWindow(w - 0x18, 0, 0x7b1, d2_CurrentWindowId);
 			*(int*) (0x10161cc + d2_CurrentWindowId * 0x3cc) = 0x54;
-			fcn_00534160(4, 4, gm_GetScaledEntitySkill(targetEntity, 3, 0x4df));
-			fcn_00472380(d2_AddWindowValueGauge(0, 0xe, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId), 0, 0x64,
+			d2_DrawSegmentedBar(4, 4, gm_GetScaledEntitySkill(targetEntity, 3, 0x4df));
+			d2_CreateGuiWindow(d2_AddWindowValueGauge(0, 0xe, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId), 0, 0x64,
 			    (int) (gm_GetEntityHealthRatio(targetEntity) * 100.0));
 			return;
 		}

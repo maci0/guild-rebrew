@@ -3,7 +3,7 @@
 #include <string.h>
 
 void __cdecl ReportClientMessage(char*);
-int __cdecl fcn_0042b2f0(char*, int, int);
+int __cdecl io_SelectDelimitedString(char*, int, int);
 int __cdecl gm_RandomMod(int);
 void __cdecl d2_RenderAndPresentFrame(void);
 void __cdecl d2_DrawWindow(int, int);
@@ -12,8 +12,8 @@ void __cdecl d2_RenderFormToTextures(int);
 void __cdecl d2_SetForm(char*, int, int);
 int __cdecl gm_PackGameTime(int, char*);
 int __cdecl gm_GetSeasonFromDate(char*, int);
-int __cdecl fcn_0050bc10(int, int, char*);
-int __cdecl fcn_00517c00(int, unsigned char, int, char*);
+int __cdecl d2_FormatCurrencyString(int, int, char*);
+int __cdecl gm_FormatEntityTitleAndName(int, unsigned char, int, char*);
 int __cdecl io_CopyTrailingDigits(char*, int, char*);
 int __cdecl fcn_0051e070(void);
 char* __cdecl fcn_0064d41a(char*, char*, ...);
@@ -159,9 +159,9 @@ fmt:
 				digit = 1;
 			}
 			if (*(char*)(v0c + text_index) == 's' && v32 == 0) {
-				v18 = fcn_0042b2f0((char*)v18, digit, 4);
+				v18 = io_SelectDelimitedString((char*)v18, digit, 4);
 			} else {
-				v18 = fcn_0042b2f0((char*)v18, digit, 8);
+				v18 = io_SelectDelimitedString((char*)v18, digit, 8);
 			}
 		} else if (v18 == 0) {
 			v18 = *(int*)(v24 * 4 + 0x14a5320);
@@ -195,7 +195,7 @@ fmt:
 			if (*(char*)(v0c + text_index) == 's' && v32 == 0) {
 				v08 = 4;
 			}
-			v24 = fcn_0042b2f0((char*)*(int*)(v1c * 4 + 0x14a540c), digit, v08);
+			v24 = io_SelectDelimitedString((char*)*(int*)(v1c * 4 + 0x14a540c), digit, v08);
 			if (v20 >= 0) {
 				v20 = io_CopyTrailingDigits(S.text, v20, abuf[6]);
 				fcn_0064d41a(S.work, (char*)0x6a22d8, (char*)v24,
@@ -214,7 +214,7 @@ fmt:
 			if (*(char*)(v0c + text_index) == 's' && v32 == 0) {
 				v08 = 4;
 			}
-			v24 = fcn_0042b2f0((char*)*(int*)(v1c * 4 + 0x14a5400), digit, v08);
+			v24 = io_SelectDelimitedString((char*)*(int*)(v1c * 4 + 0x14a5400), digit, v08);
 			if (v20 >= 0) {
 				v20 = io_CopyTrailingDigits(S.text, v20, abuf[5]);
 				fcn_0064d41a(S.work, (char*)0x6a22d8, (char*)v24,
@@ -233,7 +233,7 @@ fmt:
 			if (*(char*)(v0c + text_index) == 's' && v32 == 0) {
 				v08 = 4;
 			}
-			v24 = fcn_0042b2f0((char*)*(int*)(v1c * 4 + 0x14a5418), digit, v08);
+			v24 = io_SelectDelimitedString((char*)*(int*)(v1c * 4 + 0x14a5418), digit, v08);
 			if (v20 >= 0) {
 				v20 = io_CopyTrailingDigits(S.text, v20, abuf[4]);
 				fcn_0064d41a(S.work, (char*)0x6a22d8, (char*)v24,
@@ -274,7 +274,7 @@ fmt:
 		}
 		v08 = *(int*)ap;
 		ap += 4;
-		fcn_0050bc10(v08, *(unsigned char*)0x773d75, S.work);
+		d2_FormatCurrencyString(v08, *(unsigned char*)0x773d75, S.work);
 		v24 = (int)strlen(S.work);
 		v18 = (int)strlen(S.text) - text_index + 1;
 		memcpy(S.text + text_index + v24 - 1, S.text + text_index + 1, v18);
@@ -286,7 +286,7 @@ fmt:
 		v28 = *(int*)ap;
 		ap += 4;
 		v08 = *(short*)(v28 * 189 * 4 + 0x8680b4);
-		v18 = fcn_0042b2f0((char*)*(int*)(v08 * 8 + 0x14a79c0), 1, 8);
+		v18 = io_SelectDelimitedString((char*)*(int*)(v08 * 8 + 0x14a79c0), 1, 8);
 		strcpy(S.work, (char*)v18);
 		v08 = (int)strlen(S.text) - text_index + 1;
 		memmove(S.text + text_index + strlen(S.work) - 1,
@@ -601,7 +601,7 @@ fmt:
 		v28 = *(int*)ap;
 		ap += 4;
 		v08 = S.text[text_index] - 0x30;
-		fcn_00517c00(v28, digit, v08, S.work);
+		gm_FormatEntityTitleAndName(v28, digit, v08, S.work);
 		v24 = (int)strlen(S.work);
 		memmove(S.text + text_index + v24 - 1, S.text + text_index,
 			strlen(S.text) - text_index + 2);
@@ -689,7 +689,7 @@ fmt:
 			v24 = *(int*)(v08 * 4 + 0x14a5320);
 		}
 		if (digit != -1) {
-			v24 = fcn_0042b2f0((char*)v24, digit, 4);
+			v24 = io_SelectDelimitedString((char*)v24, digit, 4);
 			text_index--;
 		}
 		if (v24 == 0) {
@@ -720,7 +720,7 @@ fmt:
 			       strlen(abuf[0]));
 		} else {
 			if (v10 == 1 || v10 == 2) {
-				v24 = fcn_0042b2f0(
+				v24 = io_SelectDelimitedString(
 					(char*)*(int*)(v1c * 4 + 0x14a540c),
 					digit, 4);
 				fcn_0064d41a(S.work, (char*)0x68b3f8,
@@ -730,7 +730,7 @@ fmt:
 				}
 			}
 			if (v10 == 3 || v10 == 4) {
-				v24 = fcn_0042b2f0(
+				v24 = io_SelectDelimitedString(
 					(char*)*(int*)(v1c * 4 + 0x14a5400),
 					digit, 4);
 				fcn_0064d41a(S.work, (char*)0x68b3f8,
@@ -740,7 +740,7 @@ fmt:
 				}
 			}
 			if (v10 == 5 || v10 == 6) {
-				v24 = fcn_0042b2f0(
+				v24 = io_SelectDelimitedString(
 					(char*)*(int*)(v1c * 4 + 0x14a5418),
 					digit, 4);
 				fcn_0064d41a(S.work, (char*)0x68b3f8,

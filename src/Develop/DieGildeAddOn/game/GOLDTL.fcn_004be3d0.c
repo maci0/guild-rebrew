@@ -19,7 +19,7 @@ char* __cdecl gm_SearchTable67(unsigned int);
 int __cdecl fcn_004be300(char*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
-void __cdecl fcn_005b00f0(char*, int, int);
+void __cdecl d2_ProjectMapCoordToScreen(char*, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
@@ -55,7 +55,7 @@ int __cdecl d2_AddRoutePointMarker(int* town, char* building, char* routeHead, c
 	if (!d3sm_SampleHeight(map, out, &p.col, &p.row, (float*) &point)) {
 		return -1;
 	}
-	fcn_005b00f0((char*) &p, a, b);
+	d2_ProjectMapCoordToScreen((char*) &p, a, b);
 	v = fcn_004be300(routeHead, rec) + 0x7bb;
 	v = d2_AddElementToWindow((int) p.x - 0x20, (int) p.y - 0x20, v, town[2]);
 	n = g_772900;

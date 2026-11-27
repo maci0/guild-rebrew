@@ -5,7 +5,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_14cf732;
 
-int __cdecl fcn_00587f90(char* o)
+int __cdecl d2_CheckKanoneFireInput(char* o)
 {
 	if (*(int*) (o + 0x7c) == 0 && !(*(float*) (o + 0x20) > 0.01f)) {
 		if (g_100f1dc != -1 && d2_CurrentElementId == *(int*) (o + 0xb8)) {

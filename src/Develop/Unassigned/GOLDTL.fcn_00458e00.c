@@ -1,4 +1,4 @@
-void __cdecl fcn_004372d0(unsigned char, unsigned char, int, unsigned char, unsigned char);
+void __cdecl d3_SetRenderMaterialState(unsigned char, unsigned char, int, unsigned char, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00458e00 */
 char __cdecl d3_RenderSkyLayer(char* dome, char* layer)
@@ -26,7 +26,7 @@ char __cdecl d3_RenderSkyLayer(char* dome, char* layer)
 		vt = (char*) *(int*) obj;
 		(*(void (__stdcall**) (void*, int, int)) (vt + 0xf4))(obj, 0,
 			*(int*) (*(int*) (layer + 0x1c) + 0x50));
-		fcn_004372d0(((unsigned char*) layer)[0x2a],
+		d3_SetRenderMaterialState(((unsigned char*) layer)[0x2a],
 			((unsigned char*) layer)[0x26] & 1, 0,
 			(((unsigned char*) layer)[0x26] >> 1) & 1, 0);
 		if (((unsigned char*) layer)[0x26] & 1) {

@@ -40,7 +40,7 @@ typedef struct {
 extern float g_662d40[3];
 extern double g_6628f0;
 
-void __cdecl fcn_00455140(char*, float*, float*);
+void __cdecl d3_TransformDirection(char*, float*, float*);
 float __cdecl d3_SignedPlanarAngle(float*, float*);
 char* __cdecl ch_AttachAni(char*, char*, unsigned char);
 int __cdecl d3_CreateObjectAnimation(char*, D3_OBJ_ANIM_FLAGS, int, D3_OBJ_ANIM_FRAME*);
@@ -71,7 +71,7 @@ void __cdecl ch_ExecuteTurn90(char* task)
 	if (*(int*) (task + 0xc) == 0) {
 		angle = (float) *(int*) (task + 0x30) * 0.017453292f;
 		if (*(int*) (task + 0x34) != 0) {
-			fcn_00455140(*(char**) (owner + 0x34), g_662d40, dir.v);
+			d3_TransformDirection(*(char**) (owner + 0x34), g_662d40, dir.v);
 			angle = -d3_SignedPlanarAngle(g_662d40, dir.v) - angle;
 			if (angle > 3.1415927f) {
 				angle -= 6.2831855f;

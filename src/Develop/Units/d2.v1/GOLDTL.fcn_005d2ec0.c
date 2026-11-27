@@ -32,15 +32,15 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d2_BuildPersonStatusDesc(Item*);
 int __cdecl gm_CalcWerbungSteps(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
-void __cdecl fcn_005c9090(int, int, int, int, int);
+void __cdecl d2_DrawPersonCard(int, int, int, int, Item*, int);
+void __cdecl d2_ShowCenteredText(int, int, int, int, int);
 int __cdecl d2_RunWerbungDialog(unsigned short*);
 void __cdecl d2_SetGroupVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005d2ec0 */
-int __cdecl fcn_005d2ec0(char* a0)
+int __cdecl d2_RunWerbungSelectDialog(char* a0)
 {
 	int count;
 	int res;
@@ -69,8 +69,8 @@ int __cdecl fcn_005d2ec0(char* a0)
 		d2_BuildPersonStatusDesc(&items[i]);
 		items[i].val = gm_CalcWerbungSteps(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id, *(int*) (items[i].e + 4));
 		io_FormatTextBuffer(buf, 0x1ce4, items[i].val);
-		fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);
-		fcn_005c9090((int) buf, items[i].x + *(short*) (g_772500 + 0x1ebd8) / 2,
+		d2_DrawPersonCard(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);
+		d2_ShowCenteredText((int) buf, items[i].x + *(short*) (g_772500 + 0x1ebd8) / 2,
 		             *(short*) (g_772500 + 0x1ebda) + items[i].y + 0x2b, 0xca, 0x56);
 	}
 	g_100f1dc = -1;
@@ -91,7 +91,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 				}
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005d2ec0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunWerbungSelectDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);
 	return res;
 }

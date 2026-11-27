@@ -1,11 +1,11 @@
 extern char g_679060[];
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int __cdecl fcn_005d6c50(char*, int*);
+int __cdecl d2_RunUnterschlagungDialog(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f8f30 */
-int __cdecl fcn_004f8f30(char* e, int* s)
+int __cdecl gm_HandleUnterschlagungPrivilege(char* e, int* s)
 {
 	int r;
 	char* p;
@@ -21,7 +21,7 @@ int __cdecl fcn_004f8f30(char* e, int* s)
 		if (*(int*) (e + 0x1c8) & 0x400000)
 			return 1;
 		if (*s == 3)
-			r = fcn_005d6c50(e, s);
+			r = d2_RunUnterschlagungDialog(e, s);
 		return r | 2;
 	}
 	if (*s == 4 || *s == 2) {
@@ -32,7 +32,7 @@ int __cdecl fcn_004f8f30(char* e, int* s)
 		if (*(int*) (p + 0x1c8) & 0x400000)
 			return 1;
 		if (*s == 4)
-			r = fcn_005d6c50(e, s);
+			r = d2_RunUnterschlagungDialog(e, s);
 		else if (e[2] == 6)
 			io_FormatTextBuffer((char*) s + 0x14, (int) "%s", 0x1dc1);
 		return r | 10;

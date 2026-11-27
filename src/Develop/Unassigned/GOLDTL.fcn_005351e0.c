@@ -4,7 +4,7 @@ extern char g_6b5c60[];
 
 void __cdecl d2_SetFormTextures(int, char*, char*);
 
-int __cdecl fcn_005351e0(char* o, char n)
+int __cdecl d2_SetBookPageTextures(char* o, char n)
 {
 	int i;
 

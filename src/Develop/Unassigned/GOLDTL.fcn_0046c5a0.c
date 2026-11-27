@@ -32,7 +32,7 @@ int __cdecl d2_MeasureTextWidth(char* text, int font);
 void __cdecl d2_RenderMarkupLine(int x, int y, int a0, int a1, int last, int color,
     int xr, int yr);
 void __cdecl d2_ResizeWindow(int x, int y, int a1);
-void __cdecl fcn_00469c40(int a, int b, int c);
+void __cdecl d2_PositionControl(int a, int b, int c);
 void __cdecl d2_SetClipRect(int a, int b, int c, int d);
 void __cdecl d2_DrawSpriteFromSet(int x, int y, int a0, int text);
 void __cdecl d2_NormalizeWindowButtonWidths(int a1);
@@ -406,7 +406,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				*(int*) (slot + nImg * 4 + 0x298) = tmp;
 				textLen = (int) strlen(*(char**) (slot + 0x3c));
 				*(int*) (tmp * 0x160 + 0x102d294) = *(int*) (slot + 0x3c) + i;
-				fcn_00469c40(g_102d020, g_102d024,
+				d2_PositionControl(g_102d020, g_102d024,
 				    *(int*) (tmp * 0x160 + 0x102d274));
 				nImg += 2;
 				continue;
@@ -773,7 +773,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				len = ((d2_ScreenHeight - d2_FontHeight) - g_102d024) + *(int*) (slot + 8) - 8;
 				span = *(int*) (slot + 4);
 			}
-			fcn_00469c40(span, len, tmp);
+			d2_PositionControl(span, len, tmp);
 		}
 		d2_ResizeWindow(*(short*) (slot + 0xc),
 		    (short) ((d2_FontHeight - *(short*) (slot + 8)) + g_102d024), a1);

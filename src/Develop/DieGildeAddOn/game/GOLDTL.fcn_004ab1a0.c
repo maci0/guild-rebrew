@@ -30,7 +30,7 @@ void* __cdecl fcn_00502cd0(int, ...);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl amt_GetRoleTemplate(int, Rec18*);
-int __cdecl fcn_004f7120(unsigned int, void*, void*, void*, void*);
+int __cdecl gm_GetStraftatEvidenceOffer(unsigned int, void*, void*, void*, void*);
 
 /* ADDRESS: GOLDTL 0x004ab1a0 */
 unsigned int __cdecl ai_FindDunkleEckeStraftat(int* subject, Msg* firstMessage, Msg* secondMessage)
@@ -81,7 +81,7 @@ unsigned int __cdecl ai_FindDunkleEckeStraftat(int* subject, Msg* firstMessage, 
 					obj = (unsigned char*) pair[1];
 					tries = 3;
 					do {
-						if (fcn_004f7120(*(unsigned int*) (obj + 0x1c + i * 4),
+						if (gm_GetStraftatEvidenceOffer(*(unsigned int*) (obj + 0x1c + i * 4),
 								 (void*) ((unsigned int) *(unsigned short*) (ent + 0x27) * 0x21c + 0x7f4ca0),
 								 &val, &out2, &out1) != 0 &&
 						    !((float) total * *(float*) 0x662b10 < (float) val)) {

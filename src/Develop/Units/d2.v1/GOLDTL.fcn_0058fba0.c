@@ -7,7 +7,7 @@ void __cdecl d2_RunGraveyardPickerDialog(int, char*, int, int, void*);
 int __cdecl d2_ShowFriedhofGehilfenDialog();
 void __cdecl d3_EndCameraAndUiMode(void);
 
-void __cdecl fcn_0058fba0(char* e)
+void __cdecl d2_OpenFriedhofGehilfenDialog(char* e)
 {
 	if (d2_CheckOwnerBlocked(e) == 0) {
 		d2_RunGraveyardPickerDialog(0, e, g_14b57e4, 0, d2_ShowFriedhofGehilfenDialog);

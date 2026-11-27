@@ -21,7 +21,7 @@ void __cdecl d3_DestroyEffect(char* object)
 		d3_UnlinkEffect(object);
 	}
 	if (*(SCENE_RESOURCE**) (object + 0xd4) != 0)
-		fcn_0045fbb0(*(SCENE_RESOURCE**) (object + 0xd4));
+		d3_ReleaseSceneResourceRef(*(SCENE_RESOURCE**) (object + 0xd4));
 	m_FreeTracked(*(void**) (object + 0x28));
 	*(void**) (object + 0x28) = 0;
 	m_FreeTracked(*(void**) (object + 0xdc));

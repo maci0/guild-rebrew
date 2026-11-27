@@ -10,7 +10,7 @@
 
 int __cdecl gm_FindStraftatIndex(unsigned int, int);
 
-int __cdecl fcn_004f5c40(unsigned int key, int start, int* out)
+int __cdecl gm_FindStraftatId(unsigned int key, int start, int* out)
 {
 	int i;
 

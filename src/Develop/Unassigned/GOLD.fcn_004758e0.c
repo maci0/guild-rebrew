@@ -5,7 +5,7 @@ int __cdecl fcn_00472cd0(int);
 void __cdecl d2_DestroySurface(int);
 
 /* ADDRESS: GOLD 0x004758e0 */
-void __cdecl fcn_004758e0(int index)
+void __cdecl d2_FreeWindowSlot(int index)
 {
     GuiObj* object;
     int i;

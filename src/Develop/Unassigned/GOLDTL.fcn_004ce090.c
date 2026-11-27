@@ -8,7 +8,7 @@ extern unsigned char g_9baa96;
 extern Rec9baa20 g_9baa20;
 extern int g_9baa24[8];
 
-char* __cdecl fcn_004ce190(int);
+char* __cdecl d3_GetSceneEntry(int);
 
 int __cdecl gm_AreAllMultiplayerReady(void)
 {
@@ -26,7 +26,7 @@ int __cdecl gm_AreAllMultiplayerReady(void)
 	cnt = 0;
 	for (i = 0; i < 8; i++) {
 		if (g_9baa24[i] != 0) {
-			r = fcn_004ce190(g_9baa24[i]);
+			r = d3_GetSceneEntry(g_9baa24[i]);
 			if (r == 0)
 				return 0;
 			if (*(int*) (r + 4) == 1)

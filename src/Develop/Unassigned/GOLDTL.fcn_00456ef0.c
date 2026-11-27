@@ -33,17 +33,17 @@ typedef struct D3_SHADOW_CAMERA {
 	float tz;
 } D3_SHADOW_CAMERA;
 
-typedef struct Api456ef0 {
+typedef struct D3_SHADOW_QUERY_API {
 	char pad0[0x1f0];
 	float* (__cdecl* query)(char*, char*, char*);
-} Api456ef0;
+} D3_SHADOW_QUERY_API;
 
 void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
 void __cdecl d3_TransformPoint(char*, char*, D3_SHADOW_PROJ_VEC4*);
-void __cdecl fcn_00455140(char*, float*, D3_SHADOW_PROJ_VEC4*);
-float __cdecl fcn_00457140(char*, char*, char*);
-unsigned char __cdecl fcn_00437ee0(float*, int, int);
-void __cdecl fcn_00457290(char*, char*, int, float);
+void __cdecl d3_TransformDirection(char*, float*, D3_SHADOW_PROJ_VEC4*);
+float __cdecl d3_GetShadowPlaneHeight(char*, char*, char*);
+unsigned char __cdecl d3_TestBoxAgainstFrustum(float*, int, int);
+void __cdecl d3_UpdateNodeShadowMap(char*, char*, int, float);
 
 /* ADDRESS: GOLDTL 0x00456ef0 */
 void __cdecl d3_ProjectNodeShadows(char* node)
@@ -77,9 +77,9 @@ void __cdecl d3_ProjectNodeShadows(char* node)
 			break;
 		}
 		d3_TransformPoint(s, s + 0x4c, &position);
-		fcn_00455140(s, g_662d40, &direction);
-		h = fcn_00457140(node, ctx, s);
-		base = ((Api456ef0*) *(char**) (ctx + 0x318))->query(
+		d3_TransformDirection(s, g_662d40, &direction);
+		h = d3_GetShadowPlaneHeight(node, ctx, s);
+		base = ((D3_SHADOW_QUERY_API*) *(char**) (ctx + 0x318))->query(
 		    node, ctx, *(char**) (node + 0x1ec) + 8);
 		q = base;
 		i = 8;
@@ -108,9 +108,9 @@ void __cdecl d3_ProjectNodeShadows(char* node)
 			q += 0x14;
 			i--;
 		} while (i != 0);
-		if (!(fcn_00437ee0(base, 0, 0) & 0x40)) {
+		if (!(d3_TestBoxAgainstFrustum(base, 0, 0) & 0x40)) {
 			*(unsigned char*) (node + 0x216) |= 0x80;
-			fcn_00457290(node, s, g_6b8300, h);
+			d3_UpdateNodeShadowMap(node, s, g_6b8300, h);
 		}
 	}
 }

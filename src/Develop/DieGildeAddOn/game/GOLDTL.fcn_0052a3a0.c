@@ -79,7 +79,7 @@ void __cdecl fcn_004597f0(int, int);
 void __cdecl gm_InitWeatherWave(int, int, Vec24*, Vec24*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_ApplySceneLightingPreset(void);
-void __cdecl fcn_0052a960(GAME_TIMESTAMP*);
+void __cdecl d3_UpdateDaylightPhase(GAME_TIMESTAMP*);
 int* __cdecl fcn_00415310(int);
 void __cdecl d3_DestroyRain(int);
 int* __cdecl d3_CreateSnowEffect(int);
@@ -204,7 +204,7 @@ void __cdecl gm_UpdateWeatherAndSky(GAME_TIMESTAMP* now, int flag)
 	d3_SelectSceneContext(player, 1);
 	g_7e4380 = -100;
 	g_7746fc = 0;
-	fcn_0052a960(now);
+	d3_UpdateDaylightPhase(now);
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_7e43a8[400];

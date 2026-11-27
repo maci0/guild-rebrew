@@ -4,7 +4,7 @@ extern int g_772574;
 
 
 /* ADDRESS: GOLDTL 0x00526b70 */
-void __cdecl fcn_00526b70(void)
+void __cdecl d2_UpdateMouseCursorOffset(void)
 {
 	int a;
 	int b;

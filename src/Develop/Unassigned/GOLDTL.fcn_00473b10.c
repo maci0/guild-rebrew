@@ -46,7 +46,7 @@ extern int g_67d38c;
 extern int g_14ce900;
 extern int g_14ce904;
 
-void __cdecl fcn_00412830(unsigned char mask);
+void __cdecl io_ClearInputButtonFlags(unsigned char mask);
 char* __cdecl d2_SelectFont(int idx);
 void __cdecl d2_ScrollWindow(int delta, int step, int k);
 
@@ -84,7 +84,7 @@ void __cdecl d2_UpdateMouseHoverAndScroll(void)
 		g_67d8e0 = d2_MouseX;
 		g_67d8e4 = d2_MouseY;
 		g_7725d8 = btn;
-		fcn_00412830(0x10);
+		io_ClearInputButtonFlags(0x10);
 	}
 done:
 	g_100f1c0 = d2_MouseX;

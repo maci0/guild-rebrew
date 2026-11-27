@@ -6,11 +6,11 @@ typedef struct
 {
 	char pad00[0x52];
 	short f52;
-} fcn_0046bdf0_Def;
+} D2_RES_DEF;
 // SIZE 0x54
 
 extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
-extern fcn_0046bdf0_Def* g_006ed918; /* 0x006ed918 */
+extern D2_RES_DEF* g_006ed918; /* 0x006ed918 */
 extern short g_00fb9070; /* 0x00fb9070 */
 extern short g_00fb9072; /* 0x00fb9072 */
 extern short g_005fe73c; /* 0x005fe73c */

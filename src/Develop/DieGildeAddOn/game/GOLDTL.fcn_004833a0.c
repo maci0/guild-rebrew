@@ -17,7 +17,7 @@ extern char g_7f4ca0[];
 extern unsigned short g_7f4c04;
 
 float __cdecl gm_RandomFloat01(void);
-void __cdecl fcn_005904a0(Ent* e, int a2);
+void __cdecl he_SetEntityScriptFlag(Ent* e, int a2);
 
 /* ADDRESS: GOLDTL 0x004833a0 */
 void __cdecl gm_UpdateWorkerArrival(Ent* entity)
@@ -41,6 +41,6 @@ void __cdecl gm_UpdateWorkerArrival(Ent* entity)
 		}
 	}
 	if (found && gm_RandomFloat01() > 0.75f) {
-		fcn_005904a0(found, 0);
+		he_SetEntityScriptFlag(found, 0);
 	}
 }

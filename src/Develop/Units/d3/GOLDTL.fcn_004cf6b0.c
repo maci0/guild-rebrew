@@ -6,7 +6,7 @@ typedef struct {
 	int d;
 	int x;
 	int z;
-} Ent4cf6b0;
+} D3_MINE_SLOT;
 
 extern int g_67a370;
 extern int g_6b8300;
@@ -14,12 +14,12 @@ extern int g_772e9c;
 extern int g_772ec4;
 
 int __cdecl gm_LookupWeaponSpec(int a1);
-int __cdecl fcn_00418000(int a1, float* v, int n, float f1, float f2,
+int __cdecl d3_CreateSmokeEmitter(int a1, float* v, int n, float f1, float f2,
     float f3, float f4, float f5, float f6, float* out, int a11, int a12,
     int a13);
 int* __cdecl d3_SpawnRockDebrisEffect(int a1, float* pos, int n, float f1, float f2,
     float f3, float f4, float f5, float f6, float f7, float f8, int a12);
-int __cdecl fcn_00417d00(int a1, float* v, int n, float f1, float f2,
+int __cdecl d3_CreateExplosionEmitter(int a1, float* v, int n, float f1, float f2,
     float f3, float f4, int a8);
 int __cdecl sb_PlayVoice(char* bank, const char* name, int loop, int pan,
     int vol, int a, int b);
@@ -33,7 +33,7 @@ int __cdecl d3_BuildFloorGeometry(int m);
 int __cdecl d3_UpdateFloorLighting(int m);
 
 /* ADDRESS: GOLDTL 0x004cf6b0 */
-int __cdecl fcn_004cf6b0(void)
+int __cdecl d3_UpdateMineExplosions(void)
 {
 	int count;
 	int obj;
@@ -45,7 +45,7 @@ int __cdecl fcn_004cf6b0(void)
 	int map;
 	char* e;
 	int other;
-	Ent4cf6b0* p;
+	D3_MINE_SLOT* p;
 	int* q;
 	float position[4];
 	float v7[4];
@@ -54,7 +54,7 @@ int __cdecl fcn_004cf6b0(void)
 	world = *(int*) (((char*) g_67a370) + 0xb0);
 	count = 0;
 	obj = gm_LookupWeaponSpec(0x176);
-	p = (Ent4cf6b0*) 0x9b9ec0;
+	p = (D3_MINE_SLOT*) 0x9b9ec0;
 	do {
 		int p0;
 		p0 = p->o;
@@ -76,11 +76,11 @@ int __cdecl fcn_004cf6b0(void)
 				color[1] = 0xc0;
 				color[0] = 0xc0;
 				color[3] = 0x3f;
-				fcn_00418000(0, position, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f,
+				d3_CreateSmokeEmitter(0, position, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f,
 				    140.0f, 35.0f, v7, 0x190, 6, *(int*) color);
 				d3_SpawnRockDebrisEffect(0, position, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f,
 				    4.0f, 7.0f, 8.0f, *(int*) color);
-				fcn_00417d00(0, position, 0x1e, 70.0f, 50.0f, 20.0f, 60.0f,
+				d3_CreateExplosionEmitter(0, position, 0x1e, 70.0f, 50.0f, 20.0f, 60.0f,
 				    0x3c);
 				map = g_6b8300;
 				n = p->x + p->z * *(int*) map;

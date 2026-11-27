@@ -13,7 +13,7 @@ extern char g_6aa668[];
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_0059ecc0(int, int);
+void __cdecl d2_RunHandelSuchenDialog(int, int);
 
 void __cdecl d2_RunAlchemistCreatureHud(int entity, int mode)
 {
@@ -26,7 +26,7 @@ void __cdecl d2_RunAlchemistCreatureHud(int entity, int mode)
 			RegisterStatusText(g_6aa674, g_14a80d8, 0x16);
 			option = RegisterStatusText(g_6aa668, g_14a80b0, 0x16);
 			if (g_7746a0 == option) {
-				fcn_0059ecc0(entity, mode);
+				d2_RunHandelSuchenDialog(entity, mode);
 			}
 		}
 	}

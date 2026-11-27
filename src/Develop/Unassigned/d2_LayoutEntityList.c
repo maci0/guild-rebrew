@@ -2,7 +2,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_77255c;
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00469c40(int, int, int);
+void __cdecl d2_PositionControl(int, int, int);
 
 /* Slot scan + descending name sort + exit-loop render.
  * Return contract: int, returns 0. Native leaves EAX as leftover (no
@@ -108,9 +108,9 @@ int __cdecl d2_LayoutEntityList(unsigned char* entity)
 		if (owner != -1) {
 			gbase = (int*) g_77255c;
 			obj_tbl = (int*) g_1015ea0;
-			fcn_00469c40(*(int*)&((D2_CONTROL_TL*)obj_tbl)[owner].x, *(int*) ((char*) gbase + 8) + off, owner);
+			d2_PositionControl(*(int*)&((D2_CONTROL_TL*)obj_tbl)[owner].x, *(int*) ((char*) gbase + 8) + off, owner);
 			gbase = (int*) g_77255c; obj_tbl = (int*) g_1015ea0; rec1 = p[1];
-			fcn_00469c40(*(int*)&((D2_CONTROL_TL*)obj_tbl)[rec1].x, *(int*) ((char*) gbase + 8) + off + 0x30, rec1);
+			d2_PositionControl(*(int*)&((D2_CONTROL_TL*)obj_tbl)[rec1].x, *(int*) ((char*) gbase + 8) + off + 0x30, rec1);
 			off += 0x4c;
 		}
 		p = (int*) ((char*) p + 0x1c);

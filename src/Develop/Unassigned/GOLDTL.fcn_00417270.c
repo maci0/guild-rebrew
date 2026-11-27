@@ -24,7 +24,7 @@ typedef struct {
 	int count;
 } System;
 
-void __cdecl fcn_00417270(System* s, float a, float b, float c)
+void __cdecl d3_InitLensFlareParticles(System* s, float a, float b, float c)
 {
 	int i;
 	Particle* p;

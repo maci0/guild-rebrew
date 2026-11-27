@@ -4,14 +4,14 @@ typedef struct
 	int anims[8];
 	char pad0050[0x7e24 - 0x50];
 	char names[8][0x40];
-} fcn_0043f9d0_Floor;
+} D3_FLOOR_TEXTURES;
 // SIZE 0x8024
 
 void __cdecl d3_InvalidateFloorChunks(char*);
-int __cdecl d3_LoadFloorTexture(fcn_0043f9d0_Floor*, char* name, int slot);
+int __cdecl d3_LoadFloorTexture(D3_FLOOR_TEXTURES*, char* name, int slot);
 
 /* ADDRESS: GOLDTL 0x0043f9d0 */
-void __cdecl fcn_0043f9d0(fcn_0043f9d0_Floor* o)
+void __cdecl fcn_0043f9d0(D3_FLOOR_TEXTURES* o)
 {
 	int i;
 

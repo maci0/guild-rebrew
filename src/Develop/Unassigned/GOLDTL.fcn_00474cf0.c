@@ -2,7 +2,7 @@ int __cdecl CountDisplayCounters(void);
 int __cdecl d2_MeasureTextWidth(char*, int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl d2_CreateElement(int, int, int);
-void __cdecl fcn_00469c40(int, int, int);
+void __cdecl d2_PositionControl(int, int, int);
 typedef struct List0474cf0 {
 	char pad0[0x28];
 	int* ids;
@@ -98,7 +98,7 @@ void __cdecl d2_SelectControl(int slot)
 			    g_67d3b0 + 8);
 			return;
 		}
-		fcn_00469c40(g_100f898, y, g_67d8ec);
+		d2_PositionControl(g_100f898, y, g_67d8ec);
 		return;
 	}
 	if (g_67d8ec != -1) {

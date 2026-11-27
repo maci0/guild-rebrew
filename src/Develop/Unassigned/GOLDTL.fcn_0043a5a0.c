@@ -2,7 +2,7 @@ extern char g_67a370[];
 
 void __cdecl d3_VisitSceneObjects(int, int, int, int, int);
 
-void __cdecl fcn_0043a5a0(int a1, int a2)
+void __cdecl d3_VisitObjectAttachments(int a1, int a2)
 {
 	if (a1 == 0) {
 		return;

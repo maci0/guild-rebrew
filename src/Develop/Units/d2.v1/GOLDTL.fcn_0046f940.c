@@ -3,7 +3,7 @@
 int __cdecl d2_MeasureTextWidth(const char* s, int a);
 
 /* ADDRESS: GOLDTL 0x0046f940 */
-void __cdecl fcn_0046f940(int i, const char* s)
+void __cdecl d2_SetLabelText(int i, const char* s)
 {
 	const char* p;
 	char* d;

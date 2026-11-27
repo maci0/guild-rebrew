@@ -22,7 +22,7 @@ extern char s_6a96d8[];
 
 int __cdecl gv_CanHireGraveyardWorker(int, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d2_LoadForm(int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -58,7 +58,7 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 	if (status != 1) {
 		if (status == 0) {
 			io_FormatTextBuffer(buf, 0x4135, info, 0x229, a1);
-			fcn_00526120(buf, 0);
+			d2_ShowModalMessageBox(buf, 0);
 		}
 		return 0;
 	}

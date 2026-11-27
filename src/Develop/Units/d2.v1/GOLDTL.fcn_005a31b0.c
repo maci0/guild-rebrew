@@ -21,7 +21,7 @@ void __cdecl d2_SetBackgroundTexture(const char* name, int win);
 char* __cdecl fcn_00502cd0(int, ...);
 char* __cdecl gm_FindSlotById(int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_005a30c0(int x, int y, int layer, int a4, int a5);
+int __cdecl d2_DrawPricedItemSlot(int x, int y, int layer, int a4, int a5);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x005a31b0 */
@@ -94,7 +94,7 @@ void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 				while (it != 0) {
 					p = (int) gm_FindSlotById(*(int*) (building + 0x65), *it);
 					if (p != 0 && *(int*) (p + 4) != 0) {
-						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, d2_CurrentWindowId, *it, *(int*) (building + 0x65));
+						d2_DrawPricedItemSlot((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, d2_CurrentWindowId, *it, *(int*) (building + 0x65));
 						n++;
 					}
 					it = gm_NextEntityQueryMatch();
@@ -106,7 +106,7 @@ void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 				while (it != 0) {
 					p = (int) gm_FindSlotById(*(int*) (building + 0x65), *it);
 					if (p != 0 && *(int*) (p + 4) != 0) {
-						fcn_005a30c0((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, d2_CurrentWindowId, *it, *(int*) (building + 0x65));
+						d2_DrawPricedItemSlot((n % 4) * 0x3c + 0xe, (n / 4) * 0x50 + 0x1e, d2_CurrentWindowId, *it, *(int*) (building + 0x65));
 						n++;
 					}
 					it = gm_NextEntityQueryMatch();

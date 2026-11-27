@@ -9,7 +9,7 @@ extern int g_7747b4;
 extern char g_7f4ca0[];
 
 int __cdecl gm_IsNpcEntityState(void*);
-int __cdecl fcn_00508eb0(int, int);
+int __cdecl amt_GetEffectiveRoleLevel(int, int);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
@@ -49,7 +49,7 @@ int __cdecl ai_UpdateEntityFeud(char* entity)
 					continue;
 				}
 			}
-			d = abs(fcn_00508eb0(i, 0) - fcn_00508eb0(*(unsigned short*) entity, 0));
+			d = abs(amt_GetEffectiveRoleLevel(i, 0) - amt_GetEffectiveRoleLevel(*(unsigned short*) entity, 0));
 			f = (10.0f - (float) d * 0.5f) * 0.1f;
 			if ((float) (signed char) g_90e0a0[i][*(unsigned short*) entity] * f < bestscore) {
 				if (gm_CalcEntityFavor(i, (int) *(unsigned short*) entity, 1) < 34.0f) {

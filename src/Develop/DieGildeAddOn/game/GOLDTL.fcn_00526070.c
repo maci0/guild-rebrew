@@ -3,7 +3,7 @@
 
 int __cdecl gm_QueryEntitySum(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 
 int __cdecl d2_CheckFundsAndNotify(short* container, int account_id, int lim, int player_idx)
 {
@@ -17,7 +17,7 @@ int __cdecl d2_CheckFundsAndNotify(short* container, int account_id, int lim, in
 		} else {
 			io_FormatTextBuffer(buf, 0x75, (unsigned char) player_idx);
 		}
-		fcn_00526120(buf, 4);
+		d2_ShowModalMessageBox(buf, 4);
 		return 0;
 	}
 	return 1;

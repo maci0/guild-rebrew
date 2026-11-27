@@ -2,7 +2,7 @@
  * compares the two three-byte groups, later states sum the byte arrays and
  * compare the totals with the thresholds. */
 /* ADDRESS: GOLDTL 0x00493000 */
-void __cdecl fcn_00493000(unsigned char* o)
+void __cdecl fcn_00493000(unsigned char* bj)
 {
 	int state;
 	int s2 = 0;
@@ -11,52 +11,52 @@ void __cdecl fcn_00493000(unsigned char* o)
 	int i = 0;
 	int a = 0;
 
-	state = *(int*) (o + 8);
+	state = *(int*) (bj + 8);
 	if (state == 1) {
-		*(int*) (o + 8) = 2;
+		*(int*) (bj + 8) = 2;
 		return;
 	}
 	if (state == 2) {
-		if (o[0x18] == o[0x19] && o[0x18] == o[0x1a]) {
-			a = o[0x18] + o[0x19] + o[0x1a];
+		if (bj[0x18] == bj[0x19] && bj[0x18] == bj[0x1a]) {
+			a = bj[0x18] + bj[0x19] + bj[0x1a];
 		}
-		if (o[0x3c] == o[0x3d] && o[0x3c] == o[0x3e]) {
-			b = o[0x3c] + o[0x3d] + o[0x3e];
+		if (bj[0x3c] == bj[0x3d] && bj[0x3c] == bj[0x3e]) {
+			b = bj[0x3c] + bj[0x3d] + bj[0x3e];
 		}
 		if (a > b) {
 			goto win;
 
 		}
 		if (b > 0) {
-			*(int*) (o + 8) = 6;
+			*(int*) (bj + 8) = 6;
 			return;
 		}
-		if (*(int*) (o + 0x28) == 4) {
-			*(int*) (o + 8) = 6;
+		if (*(int*) (bj + 0x28) == 4) {
+			*(int*) (bj + 8) = 6;
 			return;
 		}
-		*(int*) (o + 8) = (*(int*) (o + 0x4c) == 4) ? 5 : 3;
+		*(int*) (bj + 8) = (*(int*) (bj + 0x4c) == 4) ? 5 : 3;
 		return;
 	}
-	while (i < o[0x10]) {
-		s1 += o[0x18 + i];
+	while (i < bj[0x10]) {
+		s1 += bj[0x18 + i];
 		i++;
 	}
-	for (i = 0; i < o[0x34]; i++) {
-		s2 += o[0x3c + i];
+	for (i = 0; i < bj[0x34]; i++) {
+		s2 += bj[0x3c + i];
 	}
 	if (state == 3) {
 		if (s1 > 0x11) {
 			goto lose;
 		}
-		if (*(int*) (o + 0x28) == 4) {
+		if (*(int*) (bj + 0x28) == 4) {
 			goto lose;
 		}
-		if (*(int*) (o + 0x28) != 3 || *(int*) (o + 0x4c) != 3) {
-			*(int*) (o + 8) = 4;
+		if (*(int*) (bj + 0x28) != 3 || *(int*) (bj + 0x4c) != 3) {
+			*(int*) (bj + 8) = 4;
 			return;
 		}
-		*(int*) (o + 8) = (s1 <= s2) ? 6 : 5;
+		*(int*) (bj + 8) = (s1 <= s2) ? 6 : 5;
 		return;
 	}
 	if (state == 4) {
@@ -64,21 +64,21 @@ void __cdecl fcn_00493000(unsigned char* o)
 			goto win;
 
 		}
-		if (*(int*) (o + 0x4c) == 4) {
+		if (*(int*) (bj + 0x4c) == 4) {
 			goto win;
 
 		}
-		if (*(int*) (o + 0x28) != 3 || *(int*) (o + 0x4c) != 3) {
-			*(int*) (o + 8) = 3;
+		if (*(int*) (bj + 0x28) != 3 || *(int*) (bj + 0x4c) != 3) {
+			*(int*) (bj + 8) = 3;
 			return;
 		}
-		*(int*) (o + 8) = (s1 <= s2) ? 6 : 5;
+		*(int*) (bj + 8) = (s1 <= s2) ? 6 : 5;
 		return;
 	}
 	return;
 lose:
-	*(int*) (o + 8) = 6;
+	*(int*) (bj + 8) = 6;
 	return;
 win:
-	*(int*) (o + 8) = 5;
+	*(int*) (bj + 8) = 5;
 }

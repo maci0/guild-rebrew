@@ -31,7 +31,7 @@ int __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
-void __cdecl fcn_004ff490(char*);
+void __cdecl gm_UpdateEntityPregnancy(char*);
 
 /* ADDRESS: GOLDTL 0x004fe5f0 */
 double __cdecl gm_AgeAndUpdateEntity(char* entity)
@@ -289,7 +289,7 @@ double __cdecl gm_AgeAndUpdateEntity(char* entity)
 		}
 		return g_6628a8;
 	}
-	fcn_004ff490(entity);
+	gm_UpdateEntityPregnancy(entity);
 	if (v15 > 0.0) {
 		v11 = v15;
 	} else {

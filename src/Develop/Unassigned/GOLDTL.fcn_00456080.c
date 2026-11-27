@@ -15,7 +15,7 @@ extern int g_1040624;
 
 extern void __cdecl d3_SetupLeftEdgeStep(int i, int j);
 extern void __cdecl d3_SetupRightEdgeStep(int i, int j);
-extern void __cdecl fcn_00455d30(int count, int size, unsigned char flags, int arg3, int y);
+extern void __cdecl d3_RasterizeTriangleSpans(int count, int size, unsigned char flags, int arg3, int y);
 
 /* ADDRESS: GOLDTL 0x00456080 */
 void __cdecl d3_RasterizeHeightTriangle(float* v, unsigned char* colors, int base, int size,
@@ -118,7 +118,7 @@ void __cdecl d3_RasterizeHeightTriangle(float* v, unsigned char* colors, int bas
 	y1 = g_1043040[lower1];
 	flip = y1 < y2;
 	count = (((flip ? y1 : y2) + 0xffff) >> 16) - ymin;
-	fcn_00455d30(count, size, flags, 1, ymin);
+	d3_RasterizeTriangleSpans(count, size, flags, 1, ymin);
 	if (g_1043040[lower1] == g_1043040[lower2])
 		return;
 	ymid = ymin + count;
@@ -130,5 +130,5 @@ void __cdecl d3_RasterizeHeightTriangle(float* v, unsigned char* colors, int bas
 		d3_SetupRightEdgeStep(lower2, lower1);
 		count = ((y1 + 0xffff) >> 16) - ((y2 + 0xffff) >> 16);
 	}
-	fcn_00455d30(count, size, flags, 0, ymid);
+	d3_RasterizeTriangleSpans(count, size, flags, 0, ymid);
 }

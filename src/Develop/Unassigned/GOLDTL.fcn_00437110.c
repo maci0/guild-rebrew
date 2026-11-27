@@ -6,7 +6,7 @@ extern unsigned long g_14ce728;
 int __stdcall fcn_00610011(void* dev, int a, int b, int c, int d, int e, int f, void** out);
 
 /* ADDRESS: GOLDTL 0x00437110 */
-int __cdecl fcn_00437110(int size, int a2, int a3, void** out, unsigned char levels)
+int __cdecl d3_CreateDeviceTexture(int size, int a2, int a3, void** out, unsigned char levels)
 {
 	if (*out != 0) {
 		(*(int*)&g_14ce728) = ((Fn1) (*(void***) *out)[2])(*out);

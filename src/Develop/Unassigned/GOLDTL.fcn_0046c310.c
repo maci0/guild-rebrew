@@ -34,7 +34,7 @@ typedef struct
 extern Win_1015f40 g_1015f40[0x60];
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-void __cdecl fcn_00469c40(int x, int y, int slot);
+void __cdecl d2_PositionControl(int x, int y, int slot);
 
 /* ADDRESS: GOLDTL 0x0046c310 */
 void __cdecl d2_UpdateWindowScroll(int win)
@@ -96,7 +96,7 @@ y_axis:
 		while (i < w->count) {
 			slot = w->ids[i];
 			ent = (D2_SCROLL_STEP_ENT*)&((D2_CONTROL_TL*)g_1015ea0)[slot];
-			fcn_00469c40(((*(int*)&((D2_CONTROL_TL*)ent)->x) - w->y) + w->prevy,
+			d2_PositionControl(((*(int*)&((D2_CONTROL_TL*)ent)->x) - w->y) + w->prevy,
 				((*(int*)&((D2_CONTROL_TL*)ent)->y) - w->x) + w->prevx, slot);
 			if ((*(int*)&((D2_CONTROL_TL*)ent)->kind) == 0x11) {
 				(*(int*)&((D2_CONTROL_TL*)ent)->value_088) = 2;

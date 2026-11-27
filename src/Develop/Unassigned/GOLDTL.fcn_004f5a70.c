@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004f5a70 */
-void __cdecl fcn_004f5a70(int mask)
+void __cdecl gm_ClearPersonActionFlags(int mask)
 {
 	int cursor;
 

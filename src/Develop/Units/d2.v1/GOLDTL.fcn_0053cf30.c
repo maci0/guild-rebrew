@@ -16,9 +16,9 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_004b5530(int, int);
+void __cdecl d2_ShowMissionSpecDialog(int, int);
 
-int __cdecl fcn_0053cf30(void)
+int __cdecl d2_RunChooseMissionWarning(void)
 {
 	int r;
 	int h;
@@ -31,7 +31,7 @@ int __cdecl fcn_0053cf30(void)
 		d2_SetForm(h, 0);
 		io_AppendText(0x1adc);
 		io_AppendText(0x1add);
-		while (main_RunFrameLoop((void*) fcn_0053cf30, 0xc6) != 0) {
+		while (main_RunFrameLoop((void*) d2_RunChooseMissionWarning, 0xc6) != 0) {
 			if (g_100f1dc == 2) {
 				g_774654 = 1;
 			} else if (g_100f1dc == 1) {
@@ -48,7 +48,7 @@ int __cdecl fcn_0053cf30(void)
 		}
 	}
 	if (r != 0) {
-		fcn_004b5530(r, 0xc6);
+		d2_ShowMissionSpecDialog(r, 0xc6);
 	}
 	g_7e242c = r;
 	return r;

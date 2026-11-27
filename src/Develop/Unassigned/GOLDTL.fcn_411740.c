@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00411740 */
-void __cdecl fcn_005de62f(void)
+void __cdecl io_ClearMouseAndKeyState(void)
 {
 	*(int*) 0x14ce8ec = 0;
 	*(int*) 0x14cf92c = 0;

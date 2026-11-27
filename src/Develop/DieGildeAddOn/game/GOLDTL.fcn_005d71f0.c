@@ -61,7 +61,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(unsigned char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -138,7 +138,7 @@ int __cdecl gm_HandleGegenspionage(unsigned char* e)
 					if (!found) {
 						io_FormatTextBuffer(text, 0x1dba);
 					}
-					fcn_00526120(text, 0);
+					d2_ShowModalMessageBox(text, 0);
 					g_774654 = 1;
 				}
 			} else if (d2_CurrentElementId == cancel) {

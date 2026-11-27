@@ -1,7 +1,7 @@
 char* __cdecl ahm_FindRecipePrototypeByKey(int id);
 
 /* ADDRESS: GOLDTL 0x004ee0b0 */
-int __cdecl fcn_004ee0b0(char* p)
+int __cdecl ahm_CalcRecipeScore(char* p)
 {
 	char* q;
 	float s;

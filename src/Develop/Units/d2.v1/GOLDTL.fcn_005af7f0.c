@@ -54,7 +54,7 @@ extern char* g_7746c4;
 extern char* g_7746cc;
 extern char s_6ab348[];
 
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -85,7 +85,7 @@ int __cdecl d2_ConfirmPatrol(int unused, char* str)
 		}
 	}
 	if (i >= 768) {
-		fcn_00526120(g_14abc98, 0);
+		d2_ShowModalMessageBox(g_14abc98, 0);
 		return 0;
 	}
 	dlg = d2_LoadForm(0, 0, s_6ab348);

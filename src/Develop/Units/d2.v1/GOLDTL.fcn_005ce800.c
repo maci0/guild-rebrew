@@ -6,17 +6,17 @@
  *   Callers 0x5cefa0, 0x5cf000, 0x5cf320 push twelve dwords.
  */
 
-typedef struct fcn_005ce800_Config {
+typedef struct D2_PROD_OPTION_CONFIG {
     unsigned int flags;
     int pad4;
     int pad8;
     int padc;
-} fcn_005ce800_Config;
+} D2_PROD_OPTION_CONFIG;
 
-typedef struct fcn_005ce800_Source {
+typedef struct D2_PROD_OPTION_SOURCE {
     char pad00[0x38];
     float value38;
-} fcn_005ce800_Source;
+} D2_PROD_OPTION_SOURCE;
 
 extern char* g_entity_type_table; /* 0x868050, BSS pointer */
 extern unsigned char g_773d75;    /* 0x773d75, BSS */
@@ -31,10 +31,10 @@ int __cdecl d2_AddWindowValueGauge(int x, int y, int a3, int a4, int a5, int a6,
                          int a7, int win);
 
 /* ADDRESS: GOLDTL 0x005ce800 */
-void __cdecl fcn_005ce800(int id, int* out, int* value, int* slots,
+void __cdecl d2_InitProdSettingControls(int id, int* out, int* value, int* slots,
                           unsigned char* type, int text,
                           unsigned int flags, int pad7, int pad8, int pad9,
-                          int* handle, fcn_005ce800_Source* source)
+                          int* handle, D2_PROD_OPTION_SOURCE* source)
 {
     unsigned char* entry;
     int bit;

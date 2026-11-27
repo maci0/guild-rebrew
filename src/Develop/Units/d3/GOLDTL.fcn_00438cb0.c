@@ -5,7 +5,7 @@ extern int g_67a370;
 #include "Develop/Units/d3/d3_camera.h"
 
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
-void __cdecl fcn_00438af0(unsigned char);
+void __cdecl d3_InvalidateSceneRenderCache(unsigned char);
 void __cdecl d3_BuildEulerRotationMatrix(float*, char*);
 void __cdecl d3_TraverseSceneObjects(int, char*, int, void*);
 void __cdecl d3_ClearAuxSlotState(void);
@@ -26,7 +26,7 @@ void __cdecl d3_SetObjectRotation(char* o, int* v)
 		return;
 	}
 	if (o == ((char*)d3_ActiveCamera)) {
-		fcn_00438af0(0);
+		d3_InvalidateSceneRenderCache(0);
 	}
 	n[0] = -p[0];
 	n[1] = -*(float*) (o + 0x88);

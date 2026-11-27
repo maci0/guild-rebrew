@@ -1,9 +1,9 @@
 int __cdecl gm_GetBuildingCategorySlot(int k, int* out);
 int __cdecl fcn_005cff10(char* s);
-int __cdecl fcn_005cff20(char* s, int a2, int a3, int a4);
+int __cdecl d2_RunLawTargetSelectDialog(char* s, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x005d0460 */
-int __cdecl fcn_005d0460(char* s, int a2, int a3, int a4)
+int __cdecl d2_DispatchLawTargetDialog(char* s, int a2, int a3, int a4)
 {
 	char* p;
 	int r;
@@ -15,5 +15,5 @@ int __cdecl fcn_005d0460(char* s, int a2, int a3, int a4)
 	if (r != 0) {
 		return fcn_005cff10(p);
 	}
-	return fcn_005cff20(s, a2, a3, a4);
+	return d2_RunLawTargetSelectDialog(s, a2, a3, a4);
 }

@@ -14,7 +14,7 @@ void __cdecl he_RollTripletEventScores(char*, unsigned short*, unsigned short*);
 int __cdecl gm_CalcWerbungSteps(int, int);
 
 /* ADDRESS: GOLDTL 0x0054c800 */
-void __cdecl fcn_0054c800(char* e)
+void __cdecl he_StartCourtship(char* e)
 {
 	char* a;
 	char* b;

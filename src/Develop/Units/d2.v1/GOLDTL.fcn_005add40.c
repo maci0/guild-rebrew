@@ -58,7 +58,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl cm_ExProdObjekt(void);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl he_AssignActionSlot(int, int, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -117,7 +117,7 @@ int __cdecl d2_OpenTaschendiebstahlDialog(int unused, char* e)
 						}
 					}
 					if (n == 0) {
-						fcn_00526120(g_14abc44, 0);
+						d2_ShowModalMessageBox(g_14abc44, 0);
 					}
 					else {
 						r = 1;

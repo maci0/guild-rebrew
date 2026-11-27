@@ -1,7 +1,7 @@
 extern int *g_665f08;
 
 /* ADDRESS: GOLDTL 0x0057f180 */
-int __cdecl fcn_0057f180(int* msg)
+int __cdecl d2_CheckTutCh2RathausStepDone(int* msg)
 {
 	short* e;
 

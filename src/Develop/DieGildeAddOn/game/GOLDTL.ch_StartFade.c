@@ -19,7 +19,7 @@ typedef struct {
 extern int g_1551f40[0x30];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl ch_SetVisible(char* e, int on);
-void __cdecl fcn_0043a3f0(char* o, int v, V402950 c);
+void __cdecl d3_ChangeObjectTransparency(char* o, int v, V402950 c);
 
 void __cdecl ch_StartFade(char* e, char b)
 {
@@ -43,10 +43,10 @@ void __cdecl ch_StartFade(char* e, char b)
 	v.r = 0xff;
 	v.f0 = 0;
 	o = *(char**) (e + 0x34);
-	fcn_0043a3f0(o, *(int*) (o + 0x1cc), v);
+	d3_ChangeObjectTransparency(o, *(int*) (o + 0x1cc), v);
 	if (*(char***) (e + 0x124) != 0) {
 		o = **(char***) (e + 0x124);
-		fcn_0043a3f0(o, *(int*) (o + 0x1cc), v);
+		d3_ChangeObjectTransparency(o, *(int*) (o + 0x1cc), v);
 	}
 	*(short*) (e + 0x8c) |= 0x40;
 }

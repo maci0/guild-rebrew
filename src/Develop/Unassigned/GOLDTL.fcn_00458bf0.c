@@ -42,7 +42,7 @@ extern char* g_1041d00;
 
 Mat* __stdcall fcn_005ec410(Mat*, float, float, float);
 Mat* __stdcall fcn_005eb970(Mat*, Mat*, Mat*);
-void __cdecl fcn_004372d0(int, int, int, int, int);
+void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 void __cdecl d3_DrawObjectShadowPatches(Ent*);
 
 
@@ -56,7 +56,7 @@ void __cdecl d3_RenderShadowPatches(Ent* n)
 	fcn_005eb970(&m, &m, &n->world);
 	((Device*)g_6b5de0)->vtbl->SetTransform(((Device*)g_6b5de0), 0x100, &m);
 	((Device*)g_6b5de0)->vtbl->SetVertexShader(((Device*)g_6b5de0), 0x142);
-	fcn_004372d0(0x7f, 0, 0, 1, 0);
+	d3_SetRenderMaterialState(0x7f, 0, 0, 1, 0);
 	if (!(*(char *)&g_6b89bc)) {
 		((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x13, 1);
 		((Device*)g_6b5de0)->vtbl->SetRenderState(((Device*)g_6b5de0), 0x14, 4);

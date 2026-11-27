@@ -1,8 +1,8 @@
 #include "client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int, int, char *);
-void __cdecl fcn_00537320(int);
-void __cdecl fcn_00471db0(int, int);
+void __cdecl d2_UpdateViewportCenter(int);
+void __cdecl d2_PositionFormWindows(int, int);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
@@ -29,8 +29,8 @@ void __cdecl fcn_005e2660(void)
     flags = *(int *)0x7e46ac & ~0x2000;
     accepted = 0;
     dialog = d2_LoadForm(0, 0, (char *)0x6ad2b0);
-    fcn_00537320(flags);
-    fcn_00471db0(dialog, 1);
+    d2_UpdateViewportCenter(flags);
+    d2_PositionFormWindows(dialog, 1);
     fcn_00471d80(dialog, 2);
     d2_SetForm(dialog, 0);
     d2_InitWindowBounds(*(int *)0x772514);

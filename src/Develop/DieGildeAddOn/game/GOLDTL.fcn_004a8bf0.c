@@ -11,7 +11,7 @@
 
 
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
+int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, int c, float r, int* out);
 
 #define max(a, b) ((a) > (b) ? (a) : (b))
 #define min(a, b) ((a) < (b) ? (a) : (b))
@@ -25,7 +25,7 @@ int __cdecl ai_CheckAction01cPredicate(char* unused1, char* actor, char* ctx, ch
 		return 0;
 	}
 	mask = actor[9] ? 0xf00501 : 0xf00502;
-	if (fcn_004a5340(actor, 1, &mask, 0, gm_RandomMod(0x40), &idx) == 0) {
+	if (ai_SelectRankedCandidates(actor, 1, &mask, 0, gm_RandomMod(0x40), &idx) == 0) {
 		return 0;
 	}
 	out[0] = 7;

@@ -10,7 +10,7 @@ int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl fcn_004011f0(void* stream, void* dst);
 #endif
 char* __cdecl vfs_ReadCString(void* stream, char* text);
-int __cdecl fcn_0043b500(char*);
+int __cdecl d3_FindSceneEventId(char*);
 char __cdecl d3e_RegisterSceneEvent(char*, int, int, char*);
 
 /* ADDRESS: GOLD 0x0043ea10 */
@@ -29,7 +29,7 @@ void __cdecl fcn_0043b850(void* r)
 #endif
 	for (i = 0; i < n; i++) {
 		vfs_ReadCString(r, name);
-		id = fcn_0043b500(name);
+		id = d3_FindSceneEventId(name);
 		vfs_ReadCString(r, val);
 		d3e_RegisterSceneEvent(((char*)g_67a370), id, (*(fcn_0043b850_f*)&g_67a590)(((char*)g_67a370), id, val), val);
 	}

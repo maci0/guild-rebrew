@@ -10,7 +10,7 @@ extern int g_772ed8;
 
 int __cdecl gm_GetEntityControlMask(int, char*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
-void __cdecl fcn_004d1910(void);
+void __cdecl cut_ClearStatusOverlaySlots(void);
 int* __cdecl d3snd_QueueSound(int, int, char*, int, int);
 
 #ifdef REBREW_GOLD
@@ -44,7 +44,7 @@ void __cdecl fcn_004d0f00(void)
 		t = *(char**) (x + OBJ_TITLE_OFF);
 		if ((gm_GetEntityControlMask(*me, t) & 0x800) != 0 && g_14cf736 == 0
 		    && (e == 0 || gm_EntitiesDifferByOwnerPtr(e, t) == 0)) {
-			fcn_004d1910();
+			cut_ClearStatusOverlaySlots();
 			t[0x188] = 1;
 			if (*(int*) (t + 0x16c) == (*(int*)&g_772e9c))
 				d3snd_QueueSound(*(unsigned short*) t, g_772ed4, "_ARBEITER_KOMMENTARE_KLICK", -1, 0);

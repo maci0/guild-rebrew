@@ -33,7 +33,7 @@ void __cdecl d2_DestroySelectionPanel(void);
 void __cdecl d2_OpenTransporterInfoPanel(unsigned short*);
 void __cdecl d2_OpenPersonInfoPanel(char*);
 void __cdecl d2_OpenBuildingInfoPanel(void);
-void __cdecl fcn_0052e250(unsigned short*);
+void __cdecl d2_ShowGebaeudeItemInfoPanel(unsigned short*);
 void __cdecl d2_ShowBuildingInfoPanel(unsigned char*);
 
 /* Dispatch selection actions, then refresh changed panel state. */
@@ -187,12 +187,12 @@ snapshot:
     if ((item != 0 || record != 0) && g_6a25b8 == -1) {
         *(char**)0x774648 = g_7746c0;
         if (item != 0) {
-            fcn_0052e250(item);
+            d2_ShowGebaeudeItemInfoPanel(item);
             fcn_0052ea30();
             return;
         }
         if (record != 0) {
-            fcn_0052e250((unsigned short*)record);
+            d2_ShowGebaeudeItemInfoPanel((unsigned short*)record);
             fcn_0052ea30();
         }
         return;

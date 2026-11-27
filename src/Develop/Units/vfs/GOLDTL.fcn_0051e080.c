@@ -6,7 +6,7 @@ extern int __cdecl CloseVfsStream(void* stream);
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned int __cdecl vfs_fwrite(const void* data, int size, int count, void* stream);
-void __cdecl fcn_0051e9d0(void);
+void __cdecl ls_PrepareSavedSceneRefs(void);
 void __cdecl ls_RebindSavedSceneRefs(void);
 int __cdecl fcn_0051e490(void* stream, int flags);
 int __cdecl fcn_0051eb20(void* stream);
@@ -42,7 +42,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 	if (stream == 0)
 		return 0;
 	strcpy((char*) 0x7e2480, slot);
-	fcn_0051e9d0();
+	ls_PrepareSavedSceneRefs();
 	if (fcn_0051e490(stream, flags) == 0) {
 		goto failure;
 	}

@@ -7,7 +7,7 @@ extern float g_10432a4;
 extern int g_67a370;
 
 extern void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
-extern int __cdecl fcn_00444ff0(int, int*);
+extern int __cdecl d3_CollectObjectScreenCorners(int, int*);
 
 typedef struct {
 	int x;
@@ -76,7 +76,7 @@ unsigned char __cdecl d3_PickObjectSurfaceUV(float x, float y, int obj, int inde
 	fr.ctx.edge[3].x = 0;
 	fr.ctx.edge[3].y = 0;
 	fr.ctx.found = 0;
-	d3_VisitSceneObjects(g_67a370, obj, 0x40, (void*) fcn_00444ff0, &fr.ctx);
+	d3_VisitSceneObjects(g_67a370, obj, 0x40, (void*) d3_CollectObjectScreenCorners, &fr.ctx);
 	if (!fr.ctx.found)
 		return 0;
 

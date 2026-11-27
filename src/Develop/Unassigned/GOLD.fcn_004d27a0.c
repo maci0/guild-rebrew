@@ -1,7 +1,7 @@
 #include <string.h>
 /* DATA TODO: 0x9300a0, .data virtual tail, 0x2d0 zero-filled bytes. */
 /* ADDRESS: GOLD 0x004d27a0 */
-void __cdecl fcn_004d27a0(void)
+void __cdecl gm_InitCombatWeightTable(void)
 {
     float *p, *q, scaled;
     int rows, column, group, row, start, remain;

@@ -13,7 +13,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 void __stdcall fcn_0060fa6b(char*, int, int, int, int);
 
-void __cdecl fcn_00592400(void)
+void __cdecl d2_SaveScreenshot(void)
 {
 	char buf[0x80];
 

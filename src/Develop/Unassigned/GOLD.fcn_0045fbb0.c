@@ -3,7 +3,7 @@ extern unsigned int g_fb91a8;
 void __cdecl d3_ReleaseSceneResourceData(SCENE_RESOURCE*);
 
 /* ADDRESS: GOLD 0x0045fbb0 */
-void __cdecl fcn_0045fbb0(SCENE_RESOURCE* p)
+void __cdecl d3_ReleaseSceneResourceRef(SCENE_RESOURCE* p)
 {
     SCENE_RESOURCE* q;
     unsigned int i, j;
@@ -14,7 +14,7 @@ void __cdecl fcn_0045fbb0(SCENE_RESOURCE* p)
         q = g_104049c;
         for (i = 0; i < g_10404a0; ++i, ++q) {
             if (q->level > 0 && q->id == p->id && q->byte71 > 0)
-                fcn_0045fbb0(q);
+                d3_ReleaseSceneResourceRef(q);
         }
     }
     --p->level;

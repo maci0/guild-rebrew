@@ -13,7 +13,7 @@ int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl d2_ClearWindowChildren(int a, int b);
 int __cdecl io_AppendText();
 void __cdecl d2_BuildPersonStatusDesc(void* slot);
-void __cdecl fcn_005ca740(int x, int y, int a, int b, void* slot, int c);
+void __cdecl d2_DrawPersonCard(int x, int y, int a, int b, void* slot, int c);
 int __cdecl main_RunFrameLoop(void (*fn)(void), int code);
 void __cdecl d2_DestroyForm(void* dlg);
 
@@ -73,7 +73,7 @@ void __cdecl d2_RunStammtischDialog(int gebaeude, int* objekt)
 					p[4] = (i % 2 + 1) * third + remainder_half + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 2) - 10;
 					p[5] = (i / 2) * 0x82 + 100;
 					d2_BuildPersonStatusDesc(p);
-					fcn_005ca740(p[4], p[5], d2_CurrentWindowId, 0x54, p, 1);
+					d2_DrawPersonCard(p[4], p[5], d2_CurrentWindowId, 0x54, p, 1);
 					p += 0xe;
 				}
 			}

@@ -6,7 +6,7 @@ extern char g_6b5c60[];
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_SearchTable67(int);
-int __cdecl fcn_00507870(char*);
+int __cdecl gm_ApplyPromotionRoleChange(char*);
 int __cdecl cm_SendSetHE(int, char*);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
@@ -57,7 +57,7 @@ void __cdecl he_RunBefoerdern(char* action)
 	switch (*(int*) (o + 0x70)) {
 	case 0:
 		if ((unsigned char) o[0x78] & 2) {
-			*(int*) (o + 0xb0) = fcn_00507870(ent);
+			*(int*) (o + 0xb0) = gm_ApplyPromotionRoleChange(ent);
 		}
 		*(int*) (o + 0x70) = *(int*) (o + 0x70) + 1;
 		return;

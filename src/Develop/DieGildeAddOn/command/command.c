@@ -4717,7 +4717,7 @@ int __cdecl cm_ExSetGebUpgrade(int cmd, char* result)
 extern int d3_CurrentContextIndex;
 extern char* g_7e2aa0;
 extern int g_773dd8;
-void __cdecl fcn_00530510(void);
+void __cdecl sv_ResetSelectionState(void);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl gm_RemoveClientEntityLink(char*);
 void __cdecl d3_SelectSceneContext(int, int);
@@ -4757,7 +4757,7 @@ int __cdecl cm_ExDestroyBuilding(int cmd, char* result)
 
 #ifndef REBREW_SERVER
 	if ((char*) building == g_7e2aa0) {
-		fcn_00530510();
+		sv_ResetSelectionState();
 	}
 #endif
 
@@ -5087,7 +5087,7 @@ int __cdecl lc_GetGebaeudeBauplatz(char* name, void* p);
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, int d, void* out);
 void __cdecl fcn_005982d0(void);
 void __cdecl ReportClientMessage(char* msg);
-void __cdecl fcn_0052d9d0(void* p);
+void __cdecl d3_CreateEntityFlagPennant(void* p);
 void __cdecl rd_ConnectBuildingToSupermap(int a, int b);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
@@ -5173,7 +5173,7 @@ load:
 	} else {
 		ReportClientMessage("cm_ExCreateGeb(): could not lc_GetGebaeudeBauplatz()...");
 	}
-	fcn_0052d9d0(geb);
+	d3_CreateEntityFlagPennant(geb);
 	rd_ConnectBuildingToSupermap(*(int*) (geb + 0x61), *geb);
 destroy:
 	d3_SelectSceneContext(saved, 1);

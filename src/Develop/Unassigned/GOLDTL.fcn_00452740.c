@@ -10,7 +10,7 @@ extern unsigned int g_6b8714;
 extern volatile unsigned int g_6b7fac; void __cdecl d3_FreeMeshObject(void*);
 int __cdecl d3_FindTextureVariant(int, char);
 void __cdecl d3_ComposeObserverMatrix(char*, char*, int, float*);
-void __cdecl fcn_004372d0(unsigned char, unsigned char, int, unsigned char, unsigned char);
+void __cdecl d3_SetRenderMaterialState(unsigned char, unsigned char, int, unsigned char, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00452740 */
 void __cdecl d3_UpdateAndRenderEffect(void *arg)
@@ -70,7 +70,7 @@ void __cdecl d3_UpdateAndRenderEffect(void *arg)
 				vidx = (int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl;
 				(*(int (__stdcall **) (int, int, int)) (vidx + 0xf4))((int) g_6b5de0, 0, *(int*) (item + 0x50));
 				color = (*(unsigned char *) (item + 0x5a) >> 1) & 1;
-				fcn_004372d0(*(unsigned char*) (item + 0x58),
+				d3_SetRenderMaterialState(*(unsigned char*) (item + 0x58),
 							 *(unsigned char*) (item + 0x5a) & 1,
 							 *(int *) (item + 0x6c), color, 1);
 				if (g_67bc4c - g_6b8718 < cnt - k)

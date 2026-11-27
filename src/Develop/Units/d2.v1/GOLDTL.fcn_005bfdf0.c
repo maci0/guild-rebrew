@@ -43,7 +43,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_005c91c0(int, int, int, int, int);
+void __cdecl d2_ShowWrappedText(int, int, int, int, int);
 int __cdecl gm_GetLawEntry(int, Stat5bfd*);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl gm_CheckPrivilege(int, unsigned short*, int*);
@@ -84,7 +84,7 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 	io_AppendText(0x1742, *e);
 	d2_SetForm(h, 2);
 	for (k = 0; k < n; k++) {
-		fcn_005c91c0(g_14aa314[recs[k].kind].name, 10, k * 0x28 + 10, 0x13b, 0x55);
+		d2_ShowWrappedText(g_14aa314[recs[k].kind].name, 10, k * 0x28 + 10, 0x13b, 0x55);
 		if (gm_GetLawEntry(recs[k].kind, &st) != 0 && st.count != 0) {
 			for (i = 0; i < st.count; i++) {
 				d2_AddElementToWindow(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, d2_CurrentWindowId);

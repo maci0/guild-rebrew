@@ -8,7 +8,7 @@ extern int g_100e760[];
 extern int g_86805c;
 
 char* __cdecl fcn_00502cd0(void* id, int a, int b, int c);
-int __cdecl fcn_00503a70(int id);
+int __cdecl gm_CollectItemSuppliers(int id);
 
 /* ADDRESS: GOLDTL 0x00486c40 */
 void __cdecl ai_PlanMeisterSupplies(ENTITY_RECORD* entity, unsigned int unused, int budget)
@@ -105,7 +105,7 @@ void __cdecl ai_PlanMeisterSupplies(ENTITY_RECORD* entity, unsigned int unused, 
 				}
 			}
 			if (g_100b0c0[i].requested != 0) {
-				fcn_00503a70(g_100b0c0[i].goods_id);
+				gm_CollectItemSuppliers(g_100b0c0[i].goods_id);
 				found = 0;
 				for (k = 0; !found && k < g_86805c; k++) {
 					if (g_868c40[k].unk_08 != 0 && g_868c40[k].limit >= 1) {

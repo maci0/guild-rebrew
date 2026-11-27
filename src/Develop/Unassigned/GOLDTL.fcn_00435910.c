@@ -58,11 +58,11 @@ typedef struct Vertex {
 	int id[2];
 } Vertex;
 
-int* __cdecl d3_SelectBaseMorphSlot(int a0);
-void __cdecl fcn_004357b0(unsigned char* blend, float* w1, float* w0);
+int* __cdecl d3_SelectBaseMorphSlot(int entity);
+void __cdecl d3_CalcMorphFrameWeights(unsigned char* blend, float* w1, float* w0);
 
 /* ADDRESS: GOLDTL 0x00435910 */
-void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bounds)
+void __cdecl d3_BlendMeshVertices(int entity, int* vertexCounts, Vertex* vertices, float* bounds)
 {
 	unsigned char* layout;
 	unsigned char* grid;
@@ -91,12 +91,12 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 	Vertex* v;
 	float *p0, *p1, *p2, *p3, *p4, *p5;
 
-	first = (unsigned char*) d3_SelectBaseMorphSlot(a0);
-	layout = (unsigned char*) *(int*) ((unsigned char*) a0 + 0x318);
+	first = (unsigned char*) d3_SelectBaseMorphSlot(entity);
+	layout = (unsigned char*) *(int*) ((unsigned char*) entity + 0x318);
 	grid = (unsigned char*) *(int*) (layout + 0x294);
 	ids = (int*) grid;
 	count = 1;
-	layer = (unsigned char*) a0 + LAYER_BASE;
+	layer = (unsigned char*) entity + LAYER_BASE;
 	layers = 3;
 
 	/* ---- layer walk: blend both records of every visible layer ---- */
@@ -134,7 +134,7 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 			t11 = *(float*) (layer + 0x3c) * r1->b[2];
 			wC[ei][1][2] = t11;
 
-			fcn_004357b0(b, &m[ei][1], &m[ei][0]);
+			d3_CalcMorphFrameWeights(b, &m[ei][1], &m[ei][0]);
 
 			wA[ei][0][0] = m[ei][0] * t0;
 			wA[ei][0][1] = m[ei][0] * t1;
@@ -170,7 +170,7 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 	/* ---- emission: one unrolled block per visible layer count ---- */
 	switch (count) {
 	case 3:
-		n = *(int*) ((unsigned char*) a0 + 0x310);
+		n = *(int*) ((unsigned char*) entity + 0x310);
 		if (n <= 0) {
 			return;
 		}
@@ -237,7 +237,7 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 		return;
 
 	case 2:
-		n = *(int*) ((unsigned char*) a0 + 0x310);
+		n = *(int*) ((unsigned char*) entity + 0x310);
 		if (n <= 0) {
 			return;
 		}
@@ -298,7 +298,7 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 		return;
 
 	case 1:
-		n = *(int*) ((unsigned char*) a0 + 0x310);
+		n = *(int*) ((unsigned char*) entity + 0x310);
 		if (n <= 0) {
 			return;
 		}

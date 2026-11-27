@@ -119,7 +119,7 @@ int __cdecl d2_ClearWindowChildren(int win, int keep);
 void* __cdecl d2_LoadForm(short a, short b, char* name);
 void __cdecl d2_SetForm(int dlg, int stage);
 int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
-void __cdecl fcn_00472380(int a, int b, int c, int d, int e);
+void __cdecl d2_CreateGuiWindow(int a, int b, int c, int d, int e);
 int __cdecl io_AppendText(void* id, ...);
 int __cdecl main_RunFrameLoop(void* fn, int message);
 void __cdecl d2_DestroyForm(int handle);

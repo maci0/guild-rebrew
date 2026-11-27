@@ -34,14 +34,14 @@ extern char* g_774a68;
 extern char g_10161bc[];
 
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_005b0dd0(MsgCtx*);
+void __cdecl d2_InitLandkarteDialog(MsgCtx*);
 void __cdecl d2_BuildCityScrollMap(MsgCtx*);
 void __cdecl d2_UpdateCityScrollMap(MsgCtx*);
 void __cdecl fcn_0057e880(int, int, int, int);
 void __cdecl fcn_005b18c0(int*);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
-int __cdecl fcn_005d0460(char*, int, int, int);
+int __cdecl d2_DispatchLawTargetDialog(char*, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005bdc30 */
 int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(int, int))
@@ -61,7 +61,7 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 	else {
 		ctx.text[0] = g_6b5c60[0];
 	}
-	fcn_005b0dd0(&ctx);
+	d2_InitLandkarteDialog(&ctx);
 	d2_BuildCityScrollMap(&ctx);
 	while (main_RunFrameLoop((void*) fcn_005bdc30, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
@@ -110,7 +110,7 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 					}
 					d2_SetFormVisibility(ctx.dlg, 0);
 					d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
-					v = fcn_005d0460((char*) ctx.queue[i].value, (int) state, (int) name, (int) cb);
+					v = d2_DispatchLawTargetDialog((char*) ctx.queue[i].value, (int) state, (int) name, (int) cb);
 					d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
 					d2_SetFormVisibility(ctx.dlg, 1);
 				}

@@ -3,7 +3,7 @@
 int __cdecl io_OpenRegistryKey(const char* sub, int mode);
 void __cdecl io_WriteRegistryDword(int, const char*, int);
 void __cdecl io_WriteRegistryString(int, const char*, char*);
-void __cdecl fcn_00410430(int);
+void __cdecl io_CloseRegistryKey(int);
 
 
 /* Writes the Direct3D display options to the registry. */
@@ -36,5 +36,5 @@ void __cdecl d3_SaveDisplayOptions(unsigned char flags, int fill, const char* ke
 	io_WriteRegistryDword(h, "d3_mirrors", flags & 1);
 	io_WriteRegistryDword(h, "d3d_shadows", (flags >> 2) & 7);
 	io_WriteRegistryDword(h, "d3d_registry_version", 3);
-	fcn_00410430(h);
+	io_CloseRegistryKey(h);
 }

@@ -1,0 +1,22 @@
+void __cdecl d2_PositionWindow(int, int);
+
+/* ADDRESS: GOLDTL 0x00471db0 */
+void __cdecl d2_PositionFormWindows(int groupIndex, int a1)
+{
+	char* base;
+	int i;
+	int id;
+	int t;
+
+	i = 0;
+	base = (char*) (0x1038140 + groupIndex * 0x2bc);
+	if (*(int*) (base + 0x184) <= 0)
+		return;
+	for (; i < *(int*) (base + 0x184); i++) {
+		id = *(int*) (base + 4 + i * 4);
+		t = *(int*) (0x10161bc + id * 0x3cc);
+		if (*(int*) (*(int*) 0x1015ea0 + t * 756 + 0x40) == 0) {
+			d2_PositionWindow(id, a1);
+		}
+	}
+}

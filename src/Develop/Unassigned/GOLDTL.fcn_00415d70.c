@@ -75,11 +75,11 @@ extern VBuf *g_6b5cb4;
 extern volatile int g_6b7fac;
 
 void __cdecl d3_UpdateRain(Lines *, float);
-void __cdecl fcn_00437160(int, int, int);
-void __cdecl fcn_004372d0(int, int, int, int, int);
-void __cdecl fcn_00437270(void);
+void __cdecl d3_BeginScenePass(int, int, int);
+void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
+void __cdecl d3_EndScenePass(void);
 
-void __cdecl fcn_00415d70(Lines *l)
+void __cdecl d3_RenderRainLines(Lines *l)
 {
 	int span;
 	int rem;
@@ -124,8 +124,8 @@ void __cdecl fcn_00415d70(Lines *l)
 		return;
 	}
 	d3_UpdateRain(l, dt);
-	fcn_00437160(0, 0, 0);
-	fcn_004372d0(0x80, 0, 0, 0, 0);
+	d3_BeginScenePass(0, 0, 0);
+	d3_SetRenderMaterialState(0x80, 0, 0, 0, 0);
 	((Device*)g_6b5de0)->vtbl->SetVertexShader(((Device*)g_6b5de0), 0x44);
 	((Device*)g_6b5de0)->vtbl->SetStreamSource(((Device*)g_6b5de0), 0, g_6b5cb4, 0x14);
 	n = l->count;
@@ -162,5 +162,5 @@ void __cdecl fcn_00415d70(Lines *l)
 		g_6b5cb4->vtbl->Unlock(g_6b5cb4);
 		((Device*)g_6b5de0)->vtbl->DrawPrimitive(((Device*)g_6b5de0), 2, 0, k / 2);
 	}
-	fcn_00437270();
+	d3_EndScenePass();
 }

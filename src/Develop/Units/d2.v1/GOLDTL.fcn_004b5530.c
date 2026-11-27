@@ -19,7 +19,7 @@ void __cdecl d2_DestroyForm(int);
 int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 
-void __cdecl fcn_004b5530(int a1, int flags)
+void __cdecl d2_ShowMissionSpecDialog(int a1, int flags)
 {
 	char buf[0x100];
 	char* r;
@@ -35,7 +35,7 @@ void __cdecl fcn_004b5530(int a1, int flags)
 	io_AppendText(0x7d);
 	fcn_0064d41a(buf, g_681110, *(int*) (r + 0xc));
 	x = d3snd_PlaySoundEffect(-7, 0, buf, -1);
-	while (main_RunFrameLoop(fcn_004b5530, flags) != 0) {
+	while (main_RunFrameLoop(d2_ShowMissionSpecDialog, flags) != 0) {
 		if (g_14ce8e0 != 0)
 			g_774654 = 1;
 		if (g_100f1dc == 2)

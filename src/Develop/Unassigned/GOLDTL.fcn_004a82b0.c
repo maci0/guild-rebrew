@@ -4,7 +4,7 @@ int __cdecl fcn_004a8070(int, int*, int*, int*, int*);
 int __cdecl gm_GetHighestCard(int*, int);
 
 /* ADDRESS: GOLDTL 0x004a82b0 */
-int __cdecl fcn_004a82b0(void)
+int __cdecl gm_ResolveCardGameWinner(void)
 {
 	int a[3];
 	int b[3];

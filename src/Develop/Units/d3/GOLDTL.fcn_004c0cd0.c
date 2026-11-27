@@ -23,7 +23,7 @@ extern int g_1005848;
 extern short g_100584c;
 extern short g_7f4c0c;
 extern int gm_GameTime, g_7f4c04, g_7f4c08;
-float __cdecl fcn_00413d10(float* pos);
+float __cdecl d3_SampleAverageTerrainHeight(float* pos);
 int __cdecl gm_GetSeason(int* p);
 int* __cdecl sb_PlayVoice(char* bank, char* name, int loop, int pan, int vol,
     int a, int b);
@@ -66,7 +66,7 @@ void __cdecl fcn_004c0cd0(void)
         && g_772d3c == gm_GetSeason((int*) 0x7f4c00)) {
         scaled = 0;
         d = *(float*) (d3_ActiveCamera + 0x50)
-            - fcn_00413d10((float*) (d3_ActiveCamera + 0x4c));
+            - d3_SampleAverageTerrainHeight((float*) (d3_ActiveCamera + 0x4c));
         g_1005840 = gm_GameTime;
         g_1005844 = g_7f4c04;
         g_1005848 = g_7f4c08;

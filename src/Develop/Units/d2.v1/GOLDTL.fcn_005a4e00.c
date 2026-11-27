@@ -21,7 +21,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_SortEntitiesByName(int, int*, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_RunKreditFreigabeDialog(char*);
-void __cdecl fcn_005a4960(char*, int);
+void __cdecl d2_RunBorrowerKrediteDialog(char*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
@@ -131,7 +131,7 @@ void __cdecl fcn_005a4e00(char* building)
 			else {
 				for (i = 0; i < count; i++) {
 					if (d2_CurrentElementId == items[i][1]) {
-						fcn_005a4960(building, ids[i]);
+						d2_RunBorrowerKrediteDialog(building, ids[i]);
 						first = 1;
 					}
 				}

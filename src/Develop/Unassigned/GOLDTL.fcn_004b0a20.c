@@ -6,7 +6,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 
 
 /* ADDRESS: GOLDTL 0x004b0a20 */
-int __cdecl fcn_004b0a20(int* a1, int slot, char* arg)
+int __cdecl hst_HandleStrafeKerker(int* record, int slot, char* arg)
 {
 	char c = 0;
 	char* e;
@@ -14,9 +14,9 @@ int __cdecl fcn_004b0a20(int* a1, int slot, char* arg)
 	if (*arg != '-')
 		return 0;
 	c = (char) atoi(arg + 1);
-	if (a1 == 0 || slot >= 8)
+	if (record == 0 || slot >= 8)
 		return 0;
-	e = gm_LookupEntityRecordById(a1[slot * 2 + 1]);
+	e = gm_LookupEntityRecordById(record[slot * 2 + 1]);
 	if (e == 0)
 		return 0;
 	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));

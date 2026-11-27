@@ -10,11 +10,11 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_004ad190(void);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_005ce0f0(void);
+void __cdecl d2_OpenTagesordnungDialog(void);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005ce110 */
-void __cdecl fcn_005ce110(int a0, int a1, int level)
+void __cdecl d2_RunTagesordnungDialog(int a0, int a1, int level)
 {
 	char rec[0x90];
 	char* s;
@@ -144,6 +144,6 @@ void __cdecl fcn_005ce110(int a0, int a1, int level)
 		if (*(int*) 0x14ce8e0 != 0) {
 			*(int*) 0x774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005ce0f0, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_OpenTagesordnungDialog, 0x657c7) != 0);
 	d2_DestroyForm(dialog);
 }

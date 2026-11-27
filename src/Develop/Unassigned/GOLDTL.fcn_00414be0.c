@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00414be0 */
-void __cdecl fcn_00414be0(char* p, unsigned char r, unsigned char g, unsigned char b)
+void __cdecl d3_SetObjectColorRgb(char* p, unsigned char r, unsigned char g, unsigned char b)
 {
 	char* q;
 

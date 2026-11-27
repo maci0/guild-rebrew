@@ -1,7 +1,7 @@
 /* Round-begin HUD refresh: walks the entity slot table and attaches the role,
  * action, office and building icons of each visible entity. */
 
-int __cdecl fcn_0047dca0(void* slot);
+int __cdecl gm_IsLocalSimEntity(void* slot);
 int __cdecl gm_GetEntityTableEntry(void* slot);
 int __cdecl gm_CheckStatLevel(int id, int index);
 int __cdecl gm_GetOppositeStatIndex(int kind);
@@ -54,7 +54,7 @@ void __cdecl main_RundenBeginn(void)
 		if (*(unsigned char*) slot2 < 1 || *(unsigned char*) slot2 > 8)
 			goto next;
 		if (*(int*) 0x14cbca0 != -1) {
-			if (fcn_0047dca0(slot) == 0)
+			if (gm_IsLocalSimEntity(slot) == 0)
 				goto next;
 			if (*(int*) 0x14cbca0 != -1 && *(unsigned char*) slot2 == 7)
 				goto next;

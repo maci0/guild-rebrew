@@ -23,7 +23,7 @@ extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
 int __cdecl d2_LoadForm(int, int, char*);
-int __cdecl fcn_004f65a0(ENTITY_RECORD*, int, int*, int*);
+int __cdecl gm_FindMostWantedCrimeTarget(ENTITY_RECORD*, int, int*, int*);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl d2_GetFormWindow(int, int);
 void __cdecl d2_InitWindowBounds(int);
@@ -55,7 +55,7 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 
 	me = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 	dlg = d2_LoadForm(0, 0, s_6ad3c4);
-	found = fcn_004f65a0(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 4, list, &count);
+	found = gm_FindMostWantedCrimeTarget(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 4, list, &count);
 	if ((*(int*)&g_7746c4)) {
 		max = gm_GetBuildingTechEffect((*(int*)&g_7746c4), 0x24, 1);
 	} else {

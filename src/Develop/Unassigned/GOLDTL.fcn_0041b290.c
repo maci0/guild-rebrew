@@ -9,7 +9,7 @@ int __cdecl io_OpenRegistryKey(const char* sub, int mode);
 int __cdecl io_ReadRegistryString(int, const char*, char*);
 char __cdecl d3_ParseGuid(char*, unsigned long*);
 char __cdecl d3_ParseDisplayMode(char*, int*);
-void __cdecl fcn_00410430(int);
+void __cdecl io_CloseRegistryKey(int);
 
 
 /* Reads the saved display adapter and mode from the registry; returns 1
@@ -38,7 +38,7 @@ char __cdecl d3_LoadSavedDisplayConfig(unsigned int* adapter, int* mode)
 				}
 			}
 		}
-		fcn_00410430(h);
+		io_CloseRegistryKey(h);
 	}
 	return found;
 }

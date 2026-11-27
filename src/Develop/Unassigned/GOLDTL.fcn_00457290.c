@@ -1,32 +1,32 @@
-typedef struct Item0457290 Item0457290;
-typedef struct Master0457290 Master0457290;
-typedef struct Node0457290 Node0457290;
-typedef struct Sub0457290 Sub0457290;
-typedef struct Ent0457290 Ent0457290;
-typedef struct Tex0457290 Tex0457290;
+typedef struct D3_SHADOW_MAP_ITEM D3_SHADOW_MAP_ITEM;
+typedef struct D3_SHADOW_MAP_MASTER D3_SHADOW_MAP_MASTER;
+typedef struct D3_SHADOW_MAP_NODE D3_SHADOW_MAP_NODE;
+typedef struct D3_SHADOW_MAP_SUB D3_SHADOW_MAP_SUB;
+typedef struct D3_SHADOW_MAP_ENT D3_SHADOW_MAP_ENT;
+typedef struct D3_SHADOW_MAP_TEX D3_SHADOW_MAP_TEX;
 
 /* SIZE 0x70 */
-struct Tex0457290 {
+struct D3_SHADOW_MAP_TEX {
 	char name[0x50];
 	int f50;
 };
 
-struct Ent0457290 {
+struct D3_SHADOW_MAP_ENT {
 	char pad000[0x1d8];
 	int f1d8;
 };
 
 /* SIZE 0x4a4 */
-struct Sub0457290 {
+struct D3_SHADOW_MAP_SUB {
 	char pad000[0x318];
-	Ent0457290* p318;
+	D3_SHADOW_MAP_ENT* p318;
 	char pad31c[0x4a0 - 0x31c];
 	unsigned char f4a0;
 };
 
 /* SIZE 0x9c */
-struct Item0457290 {
-	Tex0457290* f0;
+struct D3_SHADOW_MAP_ITEM {
+	D3_SHADOW_MAP_TEX* f0;
 	int f4;
 	char* f8;
 	char* fc;
@@ -46,57 +46,57 @@ struct Item0457290 {
 	char pad99[0x9c - 0x99];
 };
 
-struct Master0457290 {
+struct D3_SHADOW_MAP_MASTER {
 	char pad000[0x11f0];
 	int f11f0;
 	int f11f4;
 	char pad11f8[0x1384 - 0x11f8];
-	Item0457290 items[4];
+	D3_SHADOW_MAP_ITEM items[4];
 };
 
 /* SIZE 0x21c */
-struct Node0457290 {
+struct D3_SHADOW_MAP_NODE {
 	char pad000[0x94];
 	float f94;
 	char pad098[0x1cc - 0x98];
-	Sub0457290* p1cc;
+	D3_SHADOW_MAP_SUB* p1cc;
 	char pad1d0[0x1ec - 0x1d0];
-	Master0457290* p1ec;
+	D3_SHADOW_MAP_MASTER* p1ec;
 	char pad1f0[0x215 - 0x1f0];
 	unsigned char f215;
 	char pad216[2];
 	int f218;
 };
 
-typedef struct Col0457290 {
+typedef struct D3_SHADOW_MAP_COLOR {
 	unsigned char a;
 	unsigned char b;
 	unsigned char c0 : 1;
 	unsigned char c1 : 1;
 	unsigned char c2 : 6;
 	unsigned char d;
-} Col0457290;
+} D3_SHADOW_MAP_COLOR;
 
-Tex0457290* __cdecl d3_LoadOrReuseTexture(char* name, Col0457290 c, unsigned int flags,
+D3_SHADOW_MAP_TEX* __cdecl d3_LoadOrReuseTexture(char* name, D3_SHADOW_MAP_COLOR c, unsigned int flags,
                                  unsigned int flags2);
-void __cdecl fcn_0045ce90(Tex0457290* t);
+void __cdecl fcn_0045ce90(D3_SHADOW_MAP_TEX* t);
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
-void __cdecl fcn_00455140(char* node, float* in, float* out);
+void __cdecl d3_TransformDirection(char* node, float* in, float* out);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 int __cdecl fcn_00456630(void* obj, char b, unsigned int key,
                          unsigned int stamp, int unused);
 int __cdecl d3_RenderProjectedShadow(char* a0, char* p2, char* p1, char* a2, float* va,
-                         float* vb, char* a1, Item0457290* rec, char* a3);
-int __cdecl d3_SubmitShadowPatch(Item0457290* rec, unsigned int map);
+                         float* vb, char* a1, D3_SHADOW_MAP_ITEM* rec, char* a3);
+int __cdecl d3_SubmitShadowPatch(D3_SHADOW_MAP_ITEM* rec, unsigned int map);
 
 #include <string.h>
 
 /* ADDRESS: GOLDTL 0x00457290 */
-char __cdecl fcn_00457290(Node0457290* node, Node0457290* other, char* a2, char* a3)
+char __cdecl d3_UpdateNodeShadowMap(D3_SHADOW_MAP_NODE* node, D3_SHADOW_MAP_NODE* other, char* a2, char* a3)
 {
-	Master0457290* m;
-	Item0457290* rec;
-	Sub0457290* q;
+	D3_SHADOW_MAP_MASTER* m;
+	D3_SHADOW_MAP_ITEM* rec;
+	D3_SHADOW_MAP_SUB* q;
 	float tol;
 	char* p1;
 	float va[4];
@@ -141,8 +141,8 @@ alloc:
 			rec->f20 = 0;
 			rec->f24 = 0;
 			if (rec->f98 != 0) {
-				Col0457290 c;
-				Tex0457290* t;
+				D3_SHADOW_MAP_COLOR c;
+				D3_SHADOW_MAP_TEX* t;
 
 				memset(&c, 0, sizeof(c));
 				c.a = 0x7f;
@@ -153,7 +153,7 @@ alloc:
 					fcn_0045ce90(t);
 				}
 			} else {
-				Ent0457290* e;
+				D3_SHADOW_MAP_ENT* e;
 				unsigned int lim;
 				unsigned int off;
 				float v;
@@ -175,7 +175,7 @@ alloc:
 						lim = *(unsigned int*) 0x10405fc;
 					}
 				}
-				rec->f0 = (Tex0457290*) fcn_00456630(rec,
+				rec->f0 = (D3_SHADOW_MAP_TEX*) fcn_00456630(rec,
 				    *(char*) 0x1040601, lim, *(unsigned int*) 0x6b8008,
 				    (int) &rec->fc);
 			}
@@ -194,14 +194,14 @@ alloc:
 		}
 		m = node->p1ec;
 		p1 = (char*) node->p1cc;
-		q = (Sub0457290*) p1;
+		q = (D3_SHADOW_MAP_SUB*) p1;
 		if (m->f11f4 > 0 && m->f11f0 > 0) {
 			p1 = (char*) m + 0xee0;
 		}
 		d3_TransformPoint((char*) other, (float*) ((char*) other + 0x4c), vb);
 		if ((other->f215 & 4) != 0) {
 			tol = 0.01f;
-			fcn_00455140((char*) other, (float*) 0x662d40, va);
+			d3_TransformDirection((char*) other, (float*) 0x662d40, va);
 		} else {
 			tol = 1.0f;
 			d3_TransformPoint((char*) node, (float*) ((char*) node + 0x4c), vc);

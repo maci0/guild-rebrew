@@ -14,8 +14,8 @@ extern float g_10529c4;
 extern float g_10529d4;
 extern float g_10529d8;
 
-void __cdecl fcn_00438da0(float, float, float, float, float, float, float, float, float);
-void __cdecl fcn_00438af0(unsigned char);
+void __cdecl d3_SetViewport(float, float, float, float, float, float, float, float, float);
+void __cdecl d3_InvalidateSceneRenderCache(unsigned char);
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
 typedef long (__stdcall* FloatRenderStateFn)(D3D_DEVICE_VIEW*, int, float);
 
@@ -32,7 +32,7 @@ extern float g_10425fc;
 extern float g_104329c;
 
 void __cdecl d3_SetFogRange(float, float);
-void __cdecl fcn_00438da0(float, float, float, float, float, float, float, float, float);
+void __cdecl d3_SetViewport(float, float, float, float, float, float, float, float, float);
 
 /* ADDRESS: GOLD 0x0043a610 */
 /* ADDRESS: GOLDTL 0x00438840 */
@@ -54,9 +54,9 @@ void __cdecl d3_SetFogRange(float a, float b)
 		lim = g_10421a0;
 	}
 	if (b < lim) {
-		fcn_00438da0(g_10529d8, g_10529d4, g_10529c4, g_1043288, g_10529c8, b, g_10432a4, g_1042a28, g_1042a24);
+		d3_SetViewport(g_10529d8, g_10529d4, g_10529c4, g_1043288, g_10529c8, b, g_10432a4, g_1042a28, g_1042a24);
 	}
-	fcn_00438af0(0);
+	d3_InvalidateSceneRenderCache(0);
 }
 
 /* ADDRESS: GOLDTL 0x00438920 */
@@ -74,7 +74,7 @@ void __cdecl d3_SetFog(float fog_start, float fog_end, int fog_color)
 	} else {
 		on = 0;
 		if (g_6b8060 != 0) {
-			fcn_00438da0(g_10529d8, g_10529d4, g_10529c4, g_1043288, g_10529c8, g_10529d0, g_10432a4, g_1042a28, g_1042a24);
+			d3_SetViewport(g_10529d8, g_10529d4, g_10529c4, g_1043288, g_10529c8, g_10529d0, g_10432a4, g_1042a28, g_1042a24);
 		}
 		g_10425fc = fog_start;
 		g_104329c = fog_end;

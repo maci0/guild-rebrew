@@ -14,7 +14,7 @@ extern char g_7f4ca0[];
 void __cdecl d3_VisitSceneObjects(int, char*, int, void*, char*);
 char __cdecl d3_CreatePennantAtFlagDummy(char*, char*);
 
-void __cdecl fcn_0052d9d0(char* e)
+void __cdecl d3_CreateEntityFlagPennant(char* e)
 {
 	char* o;
 	int saved;

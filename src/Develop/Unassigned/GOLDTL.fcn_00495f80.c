@@ -12,19 +12,19 @@ typedef struct tagS495F80 {
     unsigned char gap_37[0x23];
     unsigned char f5a;
     unsigned char gap_5b[0x9d];
-} S495F80;
+} AI_BILDUNG_MSG;
 
 /* ADDRESS: GOLDTL 0x00495f80 */
-int __cdecl fcn_00495f80(int *p, int *q)
+int __cdecl ai_RunBildung(int *actor, int *req)
 {
-    S495F80 s;
+    AI_BILDUNG_MSG s;
 
-    cm_RequestModifyHealth(p[1], -q[4]);
+    cm_RequestModifyHealth(actor[1], -req[4]);
     s.f36 = 1;
     s.f04 = 0x60;
-    s.f08 = p[1];
+    s.f08 = actor[1];
     s.f0c = -1;
-    s.f5a = *((unsigned char *)q + 4);
+    s.f5a = *((unsigned char *)req + 4);
     cm_SendCopyEntityData(&s);
     return 4;
 }

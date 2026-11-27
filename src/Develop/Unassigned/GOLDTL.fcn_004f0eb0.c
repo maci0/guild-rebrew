@@ -6,7 +6,7 @@ extern float g_662a3c;
 extern float g_662b28;
 
 /* ADDRESS: GOLDTL 0x004f0eb0 */
-float __cdecl fcn_004f0eb0(int level, int percent, int count)
+float __cdecl gm_CalcArtilleryVolleyCost(int level, int percent, int count)
 {
 	float step;
 	float sum;

@@ -4,7 +4,7 @@ extern unsigned char g_773d75;
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CompareGameTime(void*, void*);
-int __cdecl fcn_00545670(char*, int, int, char*, int);
+int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -48,7 +48,7 @@ void __cdecl gm_HandleLoesegeld(char* action)
 		}
 		switch (*(int*) (action + 0x70)) {
 		case 0:
-			fcn_00545670(action, 0, 0, "locations\\diebesgilde\\Diebesgilde_Loesegeld_Msg", 0x5ec);
+			d2_CreateActionPopupSlot(action, 0, 0, "locations\\diebesgilde\\Diebesgilde_Loesegeld_Msg", 0x5ec);
 			d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 0);
 			io_AppendText(0x19cb, *(int*) (action + 0xb4));
 			(*(int*) (action + 0x70))++;

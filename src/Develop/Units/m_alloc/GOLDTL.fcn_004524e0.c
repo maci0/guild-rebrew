@@ -6,7 +6,7 @@ extern char g_1040640[];
 int __cdecl d3_LoadOrReuseTexture(char* name, int flags, int a3, int a4);
 void __cdecl fcn_0045ce90(int h);
 void* __cdecl m_alloc(unsigned int size, const char* tag);
-void __cdecl fcn_00439e70(char* o);
+void __cdecl d3_InitSceneObject(char* o);
 
 /* ADDRESS: GOLDTL 0x004524e0 */
 char* __cdecl fcn_004524e0(unsigned int entryCount, char* assetName, int a2, float a3, int a4, int a5)
@@ -57,7 +57,7 @@ char* __cdecl fcn_004524e0(unsigned int entryCount, char* assetName, int a2, flo
 				*(int*) (*(char**) (s + 0x28) + i * 0x54 + 0x4c) = -1;
 			}
 			*(unsigned char*) (s + 0x2ff) |= 2;
-			fcn_00439e70(s + 0xe8);
+			d3_InitSceneObject(s + 0xe8);
 			*(int*) (s + 0x2e4) = a4;
 			*(int*) (s + 0x2f4) = g_67a370;
 			*(char**) (s + 0x318) = g_1040958;

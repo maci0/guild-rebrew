@@ -14,7 +14,7 @@ extern char g_6a9b98[];
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_CreateButtonRow(int, int, char*, int, ...);
 
-void __cdecl fcn_00593110(void)
+void __cdecl d2_InitNetLobbyButtons(void)
 {
 	d2_SetForm(g_6a9b9c, 4);
 	d2_CreateButtonRow(d2_CurrentWindowId, 0, g_6a9b90, 2, g_14b5d48, g_14b5d4c);

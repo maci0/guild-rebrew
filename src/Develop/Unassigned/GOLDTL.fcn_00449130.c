@@ -33,7 +33,7 @@ extern int g_6b847c;
 extern int g_6b8480;
 extern int d3_ActiveCamera;
 
-void __cdecl fcn_004127a0(int flag);
+void __cdecl d2_ToggleMouseClipBounds(int flag);
 void __cdecl fcn_004125c0(int x, int y);
 char __cdecl d3_StepObjectBasisTransform(int obj, float* a1, float* a2, int g, char* a5,
 	char* a6);
@@ -90,7 +90,7 @@ int __cdecl d3_UpdateFreeCameraInput(void)
 		&& g_1041d0c != g_6b8480) {
 		if (g_6772c4 != 0) {
 			g_6772c4 = 0;
-			fcn_004127a0(0);
+			d2_ToggleMouseClipBounds(0);
 		}
 		if (g_67ab48 != 0) {
 			v15 = 1;
@@ -118,7 +118,7 @@ int __cdecl d3_UpdateFreeCameraInput(void)
 	else if (g_14ce8e4 != 0) {
 		if (g_6772c4 != 0) {
 			g_6772c4 = 0;
-			fcn_004127a0(0);
+			d2_ToggleMouseClipBounds(0);
 		}
 		if (g_67ab48 != 0) {
 			v14 = 1;
@@ -153,7 +153,7 @@ int __cdecl d3_UpdateFreeCameraInput(void)
 	}
 	if (g_14ce8e4 == 0 && g_14ce8d0 == 0 && g_6772c4 == 0) {
 		g_6772c4 = 1;
-		fcn_004127a0(1);
+		d2_ToggleMouseClipBounds(1);
 		fcn_004125c0((int) g_14ce8c0, (int) g_14ce8c2);
 	}
 	if (g_14ce904 != 0) {

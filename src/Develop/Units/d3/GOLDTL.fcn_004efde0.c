@@ -46,7 +46,7 @@ extern float g_6652c4;
 int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_StepBallisticProjectile(Sefde0Entry*);
-int __cdecl fcn_005e9da0(Sefde0Entry*);
+int __cdecl d3_StepProjectileHeun(Sefde0Entry*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl d3_DestroyObject(void*);
 void __cdecl d3_SetNodePosition(char*, int*);
@@ -102,7 +102,7 @@ void __cdecl fcn_004efde0(void)
 						if (SLOTS[slot].mode == 0) {
 							runs = d3_StepBallisticProjectile(&SLOTS[slot].entry[i]);
 						} else {
-							runs = fcn_005e9da0(&SLOTS[slot].entry[i]);
+							runs = d3_StepProjectileHeun(&SLOTS[slot].entry[i]);
 						}
 						if (runs != 0) {
 							if (SLOTS[slot].objects[i] == 0) {

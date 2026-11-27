@@ -13,7 +13,7 @@ int __cdecl d3_FindSceneObject(int, int, int, char*);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenTransportPanel(char*);
 
-void __cdecl fcn_00597ec0(char* e)
+void __cdecl d2_OpenContactEinkaufPanel(char* e)
 {
 	int r;
 

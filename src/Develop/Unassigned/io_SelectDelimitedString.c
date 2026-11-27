@@ -1,0 +1,41 @@
+/* ADDRESS: GOLDTL 0x0042b2f0 */
+char* __cdecl io_SelectDelimitedString(char* base, int count, int mode)
+{
+	char c;
+	char* sel;
+	char* p;
+	int n;
+	int i;
+
+	c = (char) mode;
+	p = base;
+	n = 0;
+	sel = (char*) mode;
+	if (c == 8) {
+		count += 4;
+		sel = base;
+	}
+	while (n < count - 1) {
+		i = 0;
+		while (p[i++] != 0) {
+
+		}
+		p = p + i - 1;
+		if (p == 0) {
+			return base;
+		}
+		p++;
+		n++;
+		if (n == 4 || (n == 6 && *p != 0)) {
+			sel = p;
+		}
+	}
+	if (*p == 0) {
+		if (c == 4) {
+			p = base;
+		} else if (c == 8) {
+			p = sel;
+		}
+	}
+	return p;
+}

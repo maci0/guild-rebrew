@@ -7,7 +7,7 @@ extern int g_7746a0;
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_00597ec0(char*);
+void __cdecl d2_OpenContactEinkaufPanel(char*);
 void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
@@ -19,7 +19,7 @@ extern int g_14ad1f0;
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_00597ec0(char*);
+void __cdecl d2_OpenContactEinkaufPanel(char*);
 void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
@@ -56,7 +56,7 @@ void __cdecl d2_RunParfumerieProductionMenu(char* building, int searchArg)
 			meister = RegisterStatusText("ob_MEISTERBRIEF", g_14a7d28, 0x16);
 			personal = RegisterStatusText("ob_PERSONALBUCH", g_14a7b50, 0xc);
 		}
-		fcn_00597ec0(building);
+		d2_OpenContactEinkaufPanel(building);
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == prod) {
 				d2_RunProduktionDialog(building);
@@ -104,7 +104,7 @@ void __cdecl d2_RunMixingProductionMenu(char* e, int a2)
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 			transport = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 		}
-		fcn_00597ec0(e);
+		d2_OpenContactEinkaufPanel(e);
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == prod) {
 				d2_RunProduktionDialog(e);

@@ -6,7 +6,7 @@
 typedef struct {
 	int w;
 	char* p;
-} Btn5c4d;
+} D2_DEAL_SUMMARY_BTN;
 // SIZE 0x8
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -16,7 +16,7 @@ typedef struct {
 
 
 
-extern Btn5c4d g_776ca0[256];
+extern D2_DEAL_SUMMARY_BTN g_776ca0[256];
 
 
 void __cdecl d2_SetForm(int, int);
@@ -25,7 +25,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-void __cdecl fcn_005c4d00(int win, int sub, int idx, int unused)
+void __cdecl d2_PopulateDealSummaryList(int win, int sub, int idx, int unused)
 {
 	char buf[0x220];
 	int k;

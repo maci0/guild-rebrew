@@ -10,7 +10,7 @@ extern char g_7f4ca0[];
 
 int __cdecl gm_TransferDynastyEstate(int a, int b);
 int __cdecl gm_LookupEntityRecordById(int h);
-int __cdecl fcn_004f4650(int h, char** obj, int** val);
+int __cdecl gv_FindEntityGraveyardSlot(int h, char** obj, int** val);
 unsigned char __cdecl gm_GetEntitySlotIndex(int a, int* b);
 void __cdecl gv_RequestAddCandidateToOfficePool(int h, char* obj, int v, int flag);
 
@@ -27,7 +27,7 @@ int __cdecl cm_ExChangePlayerIdentity(char* cmd, char* result)
 			int* val;
 
 			h = gm_LookupEntityRecordById(*(int*) (cmd + 0x14));
-			if (fcn_004f4650(h, &obj, &val) != 0) {
+			if (gv_FindEntityGraveyardSlot(h, &obj, &val) != 0) {
 				gv_RequestAddCandidateToOfficePool(h, obj, *val, gm_GetEntitySlotIndex(*(int*) (obj + 0x65), val));
 			}
 			result[1] = 1;

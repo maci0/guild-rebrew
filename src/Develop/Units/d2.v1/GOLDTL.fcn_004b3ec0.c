@@ -19,7 +19,7 @@ void __cdecl sb_StopVoice(int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b3ec0 */
-int __cdecl fcn_004b3ec0(int a1, int flags)
+int __cdecl d2_ShowMissionBriefingDialog(int a1, int flags)
 {
 	char buf[0x100];
 	char* r;
@@ -39,7 +39,7 @@ int __cdecl fcn_004b3ec0(int a1, int flags)
 	io_AppendText(0x7e);
 	fcn_0064d41a(buf, g_681110, *(int*) (r + 0xc));
 	w = d3snd_PlaySoundEffect(-7, 0, buf, -1);
-	while (main_RunFrameLoop(fcn_004b3ec0, flags) != 0) {
+	while (main_RunFrameLoop(d2_ShowMissionBriefingDialog, flags) != 0) {
 		if (g_14ce8e0 != 0 || g_100f1dc == 1)
 			g_774654 = 1;
 		if (g_100f1dc == 2) {

@@ -25,7 +25,7 @@ void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
 void __cdecl d2_ShowHandelSearch(char*, int);
 void __cdecl d2_SelectPlauschTarget(char*, int);
-void __cdecl fcn_00597ec0(char*);
+void __cdecl d2_OpenContactEinkaufPanel(char*);
 
 void __cdecl d2_RunSchneiderMenu(char* obj, int arg)
 {
@@ -74,7 +74,7 @@ void __cdecl d2_RunSchneiderMenu(char* obj, int arg)
 				d2_SelectPlauschTarget(obj, arg);
 			}
 		}
-		fcn_00597ec0(obj);
+		d2_OpenContactEinkaufPanel(obj);
 	}
 	fcn_005338a0();
 }

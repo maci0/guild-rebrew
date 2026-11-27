@@ -3,7 +3,7 @@
 
 void* __cdecl gm_FindRecordById(int);
 void __cdecl rt_FreeRoutePoints(void*);
-void* __cdecl fcn_004be2a0(void*);
+void* __cdecl rt_CloneRoutePoints(void*);
 
 /* ADDRESS: GOLDTL 0x004cdda0 */
 int __cdecl cm_ExSetEntityRoute(char* command, unsigned char* response, unsigned char* unused)
@@ -38,7 +38,7 @@ int __cdecl cm_ExSetEntityRoute(char* command, unsigned char* response, unsigned
 		node += 0x40;
 	}
 	*(int*) (buf + i * 0x40 - 4) = 0;
-	*(void**) ((char*) p + 0x29) = fcn_004be2a0(buf);
+	*(void**) ((char*) p + 0x29) = rt_CloneRoutePoints(buf);
 	if (response != 0)
 		response[0] = 1;
 	return 0;

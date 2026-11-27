@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_0043b320(int, int, int);
+void __cdecl d3_RenderFrame(int, int, int);
 
 void __cdecl d3_RenderDefaultFrame(void)
 {
@@ -10,5 +10,5 @@ void __cdecl d3_RenderDefaultFrame(void)
 	if (*(int*) 0x6b86d4 > 0) {
 		return;
 	}
-	fcn_0043b320(0x40, 1, 1);
+	d3_RenderFrame(0x40, 1, 1);
 }

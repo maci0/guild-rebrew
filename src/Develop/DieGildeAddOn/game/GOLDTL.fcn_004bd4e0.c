@@ -27,7 +27,7 @@ int __cdecl d3_TransformPoint(char* object, char* pos, float* result);
 char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags, char (__cdecl* cb)(char*, char*), char* ctx);
 char* __cdecl rd_GetBKSize(char* name);
 void __cdecl rd_ProjectWorldToSupermap(float* ox, float* oy, float* position, char* object, char** context);
-int __cdecl fcn_004bdbe0(int obj, int x, int y, int i, int j);
+int __cdecl ai_FindPathFromNearestWalkable(int obj, int x, int y, int i, int j);
 char* __cdecl d3_FindSceneObject(char* o, int flags, char* ptr, char* name);
 char __cdecl d3sm_SampleHeight(char* map, float* pos, int* x, int* y, int* z);
 char __cdecl d3_MatchObjectByNameAndPos(char* e, char* obj);
@@ -124,7 +124,7 @@ int __cdecl rd_ConnectBuildingToSupermap(int sceneObjectArg, int typeIdArg)
 	pos[1] = *(float*) (box + 0x44);
 	pos[2] = *(float*) (g_1005900 + 0x1e) + *(float*) (box + 0x48);
 	rd_ProjectWorldToSupermap(&oy2, &ox2, pos, *(char**)(ctx + 0x50), (char**) &g_1005900);
-	if (fcn_004bdbe0((int)&g_1005900, (int)oy1, (int)ox1, -1, -1) == 0) {
+	if (ai_FindPathFromNearestWalkable((int)&g_1005900, (int)oy1, (int)ox1, -1, -1) == 0) {
         gv_Free3Fields(g_1005904);
         return 0;
     }
@@ -138,7 +138,7 @@ int __cdecl rd_ConnectBuildingToSupermap(int sceneObjectArg, int typeIdArg)
 
 
 	g_1006110 = g_1006914;
-	if (fcn_004bdbe0((int) &g_1005900, (int) oy2, (int) ox2, -1, -1) == 0) {
+	if (ai_FindPathFromNearestWalkable((int) &g_1005900, (int) oy2, (int) ox2, -1, -1) == 0) {
 		gv_Free3Fields(g_1005904);
 		return 0;
 	}
@@ -193,7 +193,7 @@ int __cdecl rd_ConnectBuildingToSupermap(int sceneObjectArg, int typeIdArg)
 	i = 0;
 	j = 0;
 	if (d3sm_SampleHeight(g_1005904, pos, &i, &j, 0) != 0) {
-		if (fcn_004bdbe0((int) &g_1005900, i, j, -1, -1) != 0) {
+		if (ai_FindPathFromNearestWalkable((int) &g_1005900, i, j, -1, -1) != 0) {
 			gv_Free3Fields(g_1005904);
 			if (g_778d24 >= 0x780) {
 					for (n = 0; n < g_1006110; n++) {

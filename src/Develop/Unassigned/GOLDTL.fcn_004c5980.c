@@ -3,7 +3,7 @@
 int __cdecl cm_EnqueueClientPacket(char*);
 void __cdecl cm_StageRawPacketPayload(int, void*);
 
-int __cdecl fcn_004c5980(void* data)
+int __cdecl cm_EnqueueStagedPacket(void* data)
 {
 	char buf[0x9c];
 

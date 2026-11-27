@@ -30,14 +30,14 @@ typedef struct {
 
 void __cdecl d2_ClearPaintbox(void);
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
-int __cdecl fcn_0046fac0(int, int, char *, int);
+int __cdecl d2_EqualizeWindowButtonWidths(int, int, char *, int);
 int __cdecl d2_MeasureTextWidth(char *, int);
 void __cdecl gm_PackGameTime(int *, char *);
 int __cdecl d2_DrawHistoryGraph(Arg, int, int);
 void __cdecl io_FormatTextBuffer(char *, char *, ...);
 
 /* ADDRESS: GOLDTL 0x005d3d90 */
-void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
+void __cdecl d2_DrawCityHistoryCharts(unsigned short flags, Gfx g, int win)
 {
 	unsigned char saved;
 	int m;
@@ -82,7 +82,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	}
 	for (i = 0, n = 0x64; n > 0; i++, n -= 0x19) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x6acbec, n);
-		id = fcn_0046fac0(3, (int) ((float) i * g_6628bc * y + 5.0f), loc.buf, d2_CurrentWindowId);
+		id = d2_EqualizeWindowButtonWidths(3, (int) ((float) i * g_6628bc * y + 5.0f), loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = 0x23;
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_070)) = 1;
 	}
@@ -94,11 +94,11 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		fcn_00472c30(x2, (h - 0x1e) / 2 + 8, x1, (h - 0x1e) / 2 + 8, 0x10, 0x10, 0x10);
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m);
 		d = d2_MeasureTextWidth(loc.buf, 0x55) + 2;
-		id = fcn_0046fac0(x1, 5, loc.buf, d2_CurrentWindowId);
+		id = d2_EqualizeWindowButtonWidths(x1, 5, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_070)) = 1;
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m / 2);
-		id = fcn_0046fac0(x1, (h - 0x1e) / 2 + 5, loc.buf, d2_CurrentWindowId);
+		id = d2_EqualizeWindowButtonWidths(x1, (h - 0x1e) / 2 + 5, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_070)) = 1;
 	}
@@ -110,7 +110,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	if (loc.out[1] == 1) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = d2_MeasureTextWidth(loc.buf, 0x55);
-		id = fcn_0046fac0(step * 16 + 0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
+		id = d2_EqualizeWindowButtonWidths(step * 16 + 0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 	}
 	loc.src[0]--;
@@ -121,7 +121,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		if (loc.out[1] == 1) {
 			io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 			d = d2_MeasureTextWidth(loc.buf, 0x55);
-			id = fcn_0046fac0(n, h - 0xd, loc.buf, d2_CurrentWindowId);
+			id = d2_EqualizeWindowButtonWidths(n, h - 0xd, loc.buf, d2_CurrentWindowId);
 			*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 			fcn_00472c30(n, h - 0x13, n, h - 0xd, 0x10, 0x10, 0x10);
 		}
@@ -131,7 +131,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	if (loc.out[1] == 1) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
 		d = d2_MeasureTextWidth(loc.buf, 0x55);
-		id = fcn_0046fac0(0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
+		id = d2_EqualizeWindowButtonWidths(0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 	}
 	d2_PlotRadius = saved;

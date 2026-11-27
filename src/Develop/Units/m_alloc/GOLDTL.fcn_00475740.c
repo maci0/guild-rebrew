@@ -6,7 +6,7 @@ unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3);
 
 
 /* ADDRESS: GOLDTL 0x00475740 */
-void* __cdecl fcn_00475740(void* src)
+void* __cdecl d2_LoadBitmap8(void* src)
 {
 	unsigned int dim;
 	void* p;

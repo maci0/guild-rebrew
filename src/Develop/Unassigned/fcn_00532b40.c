@@ -1,5 +1,5 @@
 int __cdecl d2_SelectFont(int);
-int __cdecl fcn_0046bd20(int, int, int, int, int, int, int);
+int __cdecl d2_DrawWordWrappedText(int, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00532b40 */
 void __cdecl fcn_00532b40(void)
@@ -20,7 +20,7 @@ void __cdecl fcn_00532b40(void)
 		if (tbl[v * 189 + 18] != 0) {
 			continue;
 		}
-		fcn_0046bd20(*(int*) (0x1015f44 + idx), *(int*) (0x1015f48 + idx) - 0x14,
+		d2_DrawWordWrappedText(*(int*) (0x1015f44 + idx), *(int*) (0x1015f48 + idx) - 0x14,
 			0xa0, 0x60, *(int*) 0x77250c, rec + 0x230, 0x20);
 	}
 }

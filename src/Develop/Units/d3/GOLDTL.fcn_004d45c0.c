@@ -8,7 +8,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_UpdateCameraAtScreenEdges(void);
 void __cdecl cut_UpdateCombatHoverTarget(void);
 void __cdecl fcn_004cf180(void);
-void __cdecl fcn_004cf6b0(void);
+void __cdecl d3_UpdateMineExplosions(void);
 void __cdecl cut_UpdateCombatEffects(void);
 
 void __cdecl fcn_004d45c0(int dur)
@@ -21,7 +21,7 @@ void __cdecl fcn_004d45c0(int dur)
 			d3_UpdateCameraAtScreenEdges();
 			cut_UpdateCombatHoverTarget();
 			fcn_004cf180();
-			fcn_004cf6b0();
+			d3_UpdateMineExplosions();
 			if (g_14ce8e0 != 0 || cut_CurrentTick >= start + dur)
 				g_774654 = 1;
 			cut_UpdateCombatEffects();

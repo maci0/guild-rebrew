@@ -3,7 +3,7 @@
 
 int __cdecl d3_CreateRain(int);
 
-void __cdecl fcn_004e33d0(int a)
+void __cdecl d3_CreateRainIfAllowed(int a)
 {
 	if (*(int*) 0x6f0d8c == 0) {
 		*(int*) 0x6f0dbc = d3_CreateRain(a);

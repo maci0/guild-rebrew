@@ -33,7 +33,7 @@ int __cdecl d2_CheckTutorialCueClicked(void);
 void __cdecl fcn_00584160(int);
 
 /* ADDRESS: GOLDTL 0x0057e0a0 */
-int __cdecl fcn_0057e0a0(void)
+int __cdecl d2_StepTutorialStateMachine(void)
 {
 	void (__cdecl *cb)(int); int* cues; unsigned int deadline; int cue_ready;
 	unsigned int cue_time;

@@ -2,7 +2,7 @@
 #include <string.h>
 
 void* __cdecl d2_GetResourceData(int idx);
-char* __cdecl fcn_0047b620(char* p, int i);
+char* __cdecl d2_GetBankEntry(char* p, int i);
 
 /* ADDRESS: GOLDTL 0x0046b520 */
 int __cdecl d2_MeasureTextWidth(char* inputText, int fontId)
@@ -20,7 +20,7 @@ int __cdecl d2_MeasureTextWidth(char* inputText, int fontId)
 	for (i = 0; i < len; i++) {
 		c = inputText[i];
 		if (c != '~') {
-			entry = fcn_0047b620((char*) tbl, (unsigned char) c);
+			entry = d2_GetBankEntry((char*) tbl, (unsigned char) c);
 			if (i != 0 && inputText[i - 1] != ' ')
 				total -= *(unsigned short*) (entry + 0x11);
 			if (c != ' ')

@@ -3,7 +3,7 @@
    fcn_005373e0 keeps the loop alive. */
 int __cdecl amt_FindOfficeSlotByType(int, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void* __cdecl d2_LoadForm(int, int, void*);
@@ -11,7 +11,7 @@ void __cdecl d2_CenterDialogWindows(void*);
 void __cdecl d2_DestroyForm(void*);
 void __cdecl d2_SetForm(void*, int);
 int __cdecl d2_GetWindowListItem(void*, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl gm_SumSlotTreasury(int);
@@ -49,13 +49,13 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 	}
 	obj = gm_LookupEntityRecordById(*(int*) (msg.pkt + 4));
 	if (obj == 0) {
-		fcn_00526120(*(int*) 0x14ab9f4, 0);
+		d2_ShowModalMessageBox(*(int*) 0x14ab9f4, 0);
 		d3_EndCameraAndUiMode();
 		return;
 	}
 	if (he_StartHandlungSearch(2, 0, 0x39, 2, *(unsigned short*) &g_774970) != 0) {
 		io_FormatTextBuffer(msg.pkt + 0x110, 0x19b6, *(unsigned short*) obj);
-		fcn_00526120((int) (msg.pkt + 0x110), 0);
+		d2_ShowModalMessageBox((int) (msg.pkt + 0x110), 0);
 		d3_EndCameraAndUiMode();
 		return;
 	}
@@ -68,7 +68,7 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 	ctl2 = d2_GetWindowListItem(dlg, 1, id + 1);
 	msg.ctl = ctl2;
 	h = gm_SumSlotTreasury(*(unsigned short*) &g_774970);
-	fcn_00472380(ctl1, 0x96,
+	d2_CreateGuiWindow(ctl1, 0x96,
 	             gm_AmountToUnits(h, *(unsigned char*) &g_773d75), 0xfa);
 	d2_SetOverlayAnimation(0, 0);
 	do {

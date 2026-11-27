@@ -6,7 +6,7 @@
 extern GOLD_GUI_WINDOW g_00f8f120[]; /* 0x00f8f120 */
 extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 
-int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
+int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 
 void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id)
 {

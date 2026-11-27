@@ -6,7 +6,7 @@ int __cdecl fcn_004011f0(void* stream, void* dst);
 void __cdecl CloseVfsStream(void* f);
 char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsigned char resources);
 void __cdecl d3_AppendObjectSibling(char* object, char* sibling);
-void __cdecl fcn_00439c00(char* object, char* child);
+void __cdecl d3_AttachSceneNode(char* object, char* child);
 
 /* Reads one object, or a list of objects, and attaches them under the parent. */
 /* ADDRESS: GOLDTL 0x004488e0 */
@@ -48,7 +48,7 @@ int __cdecl d3_LoadObjectFile(char* path, void* stream, char* parent)
 			CloseVfsStream(s);
 		}
 		if (result != 0 && parent != 0) {
-			fcn_00439c00(parent, result);
+			d3_AttachSceneNode(parent, result);
 		}
 	}
 	return (int) result;

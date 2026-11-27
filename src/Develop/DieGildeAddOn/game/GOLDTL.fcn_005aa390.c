@@ -13,7 +13,7 @@ extern int g_14aac9c;
 extern char g_7d4190[];
 
 int __cdecl amt_CanUpgradeBuildingTier2(ZUNFT_UPGRADE_ENTITY_VIEW* e);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_CheckActionBlocker(ZUNFT_UPGRADE_ENTITY_VIEW* e, int);
 void __cdecl d2_RunZunftLevel2Dialog(void);
 void __cdecl fcn_005bdc30(int, char*, int, void (__cdecl*)(void), int);
@@ -29,7 +29,7 @@ void __cdecl d2_StartZunftLevel2Action(void)
 	r = amt_CanUpgradeBuildingTier2(&((ZUNFT_UPGRADE_ENTITY_VIEW*)g_7f4ca0)[g_774970]);
 	if (r != 1) {
 		if (r == -1) {
-			fcn_00526120(g_14aad38, 0);
+			d2_ShowModalMessageBox(g_14aad38, 0);
 			return;
 		}
 		d2_CheckActionBlocker(&((ZUNFT_UPGRADE_ENTITY_VIEW*)g_7f4ca0)[g_774970], 5);

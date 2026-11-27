@@ -3,7 +3,7 @@
 extern char g_67a3e4[];
 
 void* __cdecl m_alloc(int, void*);
-void __cdecl fcn_00439e10(char*, char*);
+void __cdecl d3_ResetMorphExt(char*, char*);
 
 void __cdecl d3_AddObjectDrawData(char* o)
 {
@@ -12,7 +12,7 @@ void __cdecl d3_AddObjectDrawData(char* o)
 	if (*(char**) (o + 0x1ec) == 0) {
 		*(char**) (o + 0x1ec) = (char*) m_alloc(0x1640, g_67a3e4);
 		for (i = 0; i <= 3; i++) {
-			fcn_00439e10(*(char**) (o + 0x1ec) + i * 0x4a4 + 0xf4, o);
+			d3_ResetMorphExt(*(char**) (o + 0x1ec) + i * 0x4a4 + 0xf4, o);
 		}
 		for (i = 0; i < 4; i++) {
 			*(int*) (*(char**) (o + 0x1ec) + i * 0x9c + 0x13a0) = 0;

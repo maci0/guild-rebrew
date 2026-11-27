@@ -6,7 +6,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 
 /* ADDRESS: GOLDTL 0x004fa3b0 */
-int __cdecl fcn_004fa3b0(void* obj, void* request)
+int __cdecl gm_HandleVerhoerMode2Privilege(void* obj, void* request)
 {
 	int r;
 

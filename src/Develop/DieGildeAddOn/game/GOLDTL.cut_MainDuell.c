@@ -38,7 +38,7 @@ void __cdecl d3_UpdateSeasonTextures(void);
 int __cdecl gm_GetSeason(int* p);
 int __cdecl d3_BlendSceneLightingPreset(unsigned int a0, float t, float scale, int a3);
 char __cdecl d3_InterpolateSceneFog(unsigned int a, unsigned int b, float t);
-void __cdecl fcn_004cfe00(void);
+void __cdecl d3_ResetActionTimers(void);
 void __cdecl msx_StartMusicIfAllowed(char* s);
 void* __cdecl sb_LoadSampleBank(char* name, int init);
 int __cdecl sb_LoadLocalizedSampleBank(char* name, int x);
@@ -59,7 +59,7 @@ int __cdecl d3snd_PlaySoundEffect(int a, int b, int c, int d);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 void __cdecl cut_RunTurnRound(unsigned int* a0, int a1);
 int __cdecl gm_FindPlayerById(int a1);
-int __cdecl fcn_004de610(int v);
+int __cdecl gm_NextCyclicShuffledIndex(int v);
 float __cdecl gm_GetEntityHealthRatio(char* p);
 float __cdecl gm_ApplyEntityHealthDelta(int a, int b);
 int __cdecl cut_RandMod(int n);
@@ -136,7 +136,7 @@ void __cdecl cut_MainDuell(char* a0)
         sel = 2;
     d3_BlendSceneLightingPreset(sel, 0.0f, 1.0f, 1);
     d3_InterpolateSceneFog(0, 1, 0.0f);
-    fcn_004cfe00();
+    d3_ResetActionTimers();
     if (sel == 0)
         msx_StartMusicIfAllowed((char*) 0x68ce24);
     else if (sel == 1)
@@ -200,7 +200,7 @@ void __cdecl cut_MainDuell(char* a0)
     ch_QueueWalkToDummy((char*) sB.entity, p);
     ch_CreateAction((char*) sB.entity, 0x35, *(int*) (sA.entity + 0x34));
     if (*(unsigned char*) (e + 0x94) == 1) {
-        t = fcn_004de610(6);
+        t = gm_NextCyclicShuffledIndex(6);
         d2_SetForm(g_68bfc0, 0);
         io_AppendText(t + 0x10df);
         io_AppendText(0x68b300);
@@ -220,7 +220,7 @@ void __cdecl cut_MainDuell(char* a0)
     ch_QueueWalkToDummy((char*) sA.entity, p);
     ch_CreateAction((char*) sA.entity, 0x35, *(int*) (sB.entity + 0x34));
     if (*(unsigned char*) (e + 0x94) == 1) {
-        t = fcn_004de610(6);
+        t = gm_NextCyclicShuffledIndex(6);
         d2_SetForm(g_68bfc0, 0);
         io_AppendText(t + 0x10df);
         d3snd_PlaySoundEffect(sel0, bank, (int) 0x68cce4, t);

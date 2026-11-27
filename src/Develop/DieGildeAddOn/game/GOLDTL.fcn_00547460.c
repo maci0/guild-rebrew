@@ -43,7 +43,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, ...);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 
-void __cdecl fcn_00547460(void)
+void __cdecl he_TriggerCathedralEvent(void)
 {
 	struct msg m;
 	char* e;

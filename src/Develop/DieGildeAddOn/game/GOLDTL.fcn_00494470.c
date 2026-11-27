@@ -27,7 +27,7 @@ typedef struct {
 extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_RandomMod(unsigned short range);
-int __cdecl fcn_00508eb0(unsigned short id, int a2);
+int __cdecl amt_GetEffectiveRoleLevel(unsigned short id, int a2);
 int __cdecl gm_WalkEntityChain(unsigned short id);
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
@@ -61,13 +61,13 @@ int __cdecl gm_ResolveDinnerParty(BANQUET_PARTY* p, int flag)
 	}
 	yb = 5 - p->b;
 	ya = 5 - p->a;
-	n = fcn_00508eb0(p->ent->slot, 0);
+	n = amt_GetEffectiveRoleLevel(p->ent->slot, 0);
 	sum = n / -3 - n / 4 + n + ya + yb;
 	for (i = 0; i < p->count; i++) {
 		if (p->members[i].ent == 0) {
 			return -6;
 		}
-		value = sum - fcn_00508eb0(p->members[i].ent->slot, 0);
+		value = sum - amt_GetEffectiveRoleLevel(p->members[i].ent->slot, 0);
 		if (2 <= value) {
 			value = 2;
 		}

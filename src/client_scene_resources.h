@@ -33,7 +33,7 @@ extern unsigned int g_10404a0;
 /* ADDRESS: GOLD 0x00633f00 */
 extern int g_6b8af0;
 
-void __cdecl fcn_0045fbb0(SCENE_RESOURCE* resource);
+void __cdecl d3_ReleaseSceneResourceRef(SCENE_RESOURCE* resource);
 SCENE_RESOURCE* __cdecl d3_LoadTexture(const char* name, unsigned int style,
     unsigned char flags, unsigned char control);
 void __cdecl d3_ReleaseSceneResource(SCENE_RESOURCE* resource);

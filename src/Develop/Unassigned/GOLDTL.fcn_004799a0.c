@@ -24,20 +24,20 @@ typedef struct Bank {
 // SIZE 0x35
 
 /* ADDRESS: GOLDTL 0x004799a0 */
-void __cdecl fcn_004799a0(Shape* s, Bank* b, int idx)
+void __cdecl d2_InsertShapeIntoBank(Shape* shape, Bank* bank, int idx)
 {
 	unsigned int* p;
 
-	p = (unsigned int*) ((char*) b + 0x45 + idx * 4);
-	memmove((char*) b + 0x49 + idx * 4, p, (b->count - idx) * 4);
-	*p = b->size;
-	memcpy((char*) b + b->size, s, s->len);
-	b->size += s->len;
-	b->count++;
-	if (s->w > b->maxw) {
-		b->maxw = s->w;
+	p = (unsigned int*) ((char*) bank + 0x45 + idx * 4);
+	memmove((char*) bank + 0x49 + idx * 4, p, (bank->count - idx) * 4);
+	*p = bank->size;
+	memcpy((char*) bank + bank->size, shape, shape->len);
+	bank->size += shape->len;
+	bank->count++;
+	if (shape->w > bank->maxw) {
+		bank->maxw = shape->w;
 	}
-	if (s->h > b->maxh) {
-		b->maxh = s->h;
+	if (shape->h > bank->maxh) {
+		bank->maxh = shape->h;
 	}
 }

@@ -32,7 +32,7 @@ typedef struct {
 extern int g_67a370;
 
 void __cdecl ch_SetVisible(char*, int);
-void __cdecl fcn_0043a3f0(char*, int, Col);
+void __cdecl d3_ChangeObjectTransparency(char*, int, Col);
 int __cdecl ch_FindNearbyCharacters(char* self, char** out, float range);
 
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -63,12 +63,12 @@ void __cdecl ch_UpdateFade(Fade* f)
 		memset(&col, 0, sizeof(col));
 		col.c &= 0xfe;
 		col.a = 0xff;
-		fcn_0043a3f0(*(char**) (e + 0x34), *(int*) (*(char**) (e + 0x34) + 0x1cc), col);
+		d3_ChangeObjectTransparency(*(char**) (e + 0x34), *(int*) (*(char**) (e + 0x34) + 0x1cc), col);
 		if (*(char***) (e + 0x124) != 0) {
-			fcn_0043a3f0(**(char***) (e + 0x124), *(int*) (**(char***) (e + 0x124) + 0x1cc), col);
+			d3_ChangeObjectTransparency(**(char***) (e + 0x124), *(int*) (**(char***) (e + 0x124) + 0x1cc), col);
 		}
 		if (*(char**) (e + 0x22c) != 0) {
-			fcn_0043a3f0(*(char**) (e + 0x22c), *(int*) (*(char**) (e + 0x22c) + 0x1cc), col);
+			d3_ChangeObjectTransparency(*(char**) (e + 0x22c), *(int*) (*(char**) (e + 0x22c) + 0x1cc), col);
 		}
 		f->start = (float) (ch_UpdateTime - 1);
 		*(unsigned short*) (e + 0x8c) = (*(unsigned short*) (e + 0x8c) & 0xbfff) | 0x40;
@@ -93,24 +93,24 @@ void __cdecl ch_UpdateFade(Fade* f)
 	col.c &= 0xfe;
 	col.a = (unsigned char) alpha;
 	if (alpha != 255.0f && alpha != 0.0f) {
-		fcn_0043a3f0(*(char**) (e + 0x34), *(int*) (*(char**) (e + 0x34) + 0x1cc), col);
+		d3_ChangeObjectTransparency(*(char**) (e + 0x34), *(int*) (*(char**) (e + 0x34) + 0x1cc), col);
 		if (*(char***) (e + 0x124) != 0) {
-			fcn_0043a3f0(**(char***) (e + 0x124), *(int*) (**(char***) (e + 0x124) + 0x1cc), col);
+			d3_ChangeObjectTransparency(**(char***) (e + 0x124), *(int*) (**(char***) (e + 0x124) + 0x1cc), col);
 		}
 		if (*(char**) (e + 0x22c) != 0) {
-			fcn_0043a3f0(*(char**) (e + 0x22c), *(int*) (*(char**) (e + 0x22c) + 0x1cc), col);
+			d3_ChangeObjectTransparency(*(char**) (e + 0x22c), *(int*) (*(char**) (e + 0x22c) + 0x1cc), col);
 		}
 	}
 	if (alpha == 0.0f || alpha == 255.0f) {
 		*(unsigned short*) (e + 0x8c) &= 0xffbf;
 		col.c &= 0xfe;
 		col.a = 0xff;
-		fcn_0043a3f0(*(char**) (e + 0x34), *(int*) (*(char**) (e + 0x34) + 0x1cc), col);
+		d3_ChangeObjectTransparency(*(char**) (e + 0x34), *(int*) (*(char**) (e + 0x34) + 0x1cc), col);
 		if (*(char***) (e + 0x124) != 0) {
-			fcn_0043a3f0(**(char***) (e + 0x124), *(int*) (**(char***) (e + 0x124) + 0x1cc), col);
+			d3_ChangeObjectTransparency(**(char***) (e + 0x124), *(int*) (**(char***) (e + 0x124) + 0x1cc), col);
 		}
 		if (*(char**) (e + 0x22c) != 0) {
-			fcn_0043a3f0(*(char**) (e + 0x22c), *(int*) (*(char**) (e + 0x22c) + 0x1cc), col);
+			d3_ChangeObjectTransparency(*(char**) (e + 0x22c), *(int*) (*(char**) (e + 0x22c) + 0x1cc), col);
 		}
 		if (alpha == 0.0f) {
 			ch_SetVisible(e, 0);

@@ -15,11 +15,11 @@ extern DuelActionAnim g_68cc34;
 unsigned char* __cdecl gm_FindPlayerById(int);
 int __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
-int __cdecl fcn_004de610(int);
+int __cdecl gm_NextCyclicShuffledIndex(int);
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl cut_WaitTicks(int);
 char* __cdecl ch_CreateQueuedAction(char*, void*, int, int, int);
-void __cdecl fcn_004dff50(void);
+void __cdecl cut_ResolveDuelShot(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl cut_RandFloat(void);
 int __cdecl ch_QueuePlayAnimation(char*, const char*, int);
@@ -42,12 +42,12 @@ void __cdecl cut_PlayDuelIntroMove(char* e, char* foe)
 		switch (d[0x94]) {
 		case 4:
 			d2_SetForm(g_68bfc0, 0);
-			t = fcn_004de610(7);
+			t = gm_NextCyclicShuffledIndex(7);
 			io_AppendText(t + 0x10fa, *(unsigned short*) e);
 			d3snd_PlaySoundEffect(*(unsigned short*) e, 0, "_DUELL_INTRO_C2_AUSWAHL_SCHIESSEN", t);
 			cut_WaitTicks(2);
 			io_AppendText((int) "$N");
-			o = ch_CreateQueuedAction(*(char**) (e + 0x184), (void*) fcn_004dff50, 6, 0x2e, 1);
+			o = ch_CreateQueuedAction(*(char**) (e + 0x184), (void*) cut_ResolveDuelShot, 6, 0x2e, 1);
 			*(char**) (o + 0x17c) = foe;
 			*(char**) (o + 0x180) = e;
 			*(DuelActionAnim*) (o + 0xf0) = g_68cc34;
@@ -78,7 +78,7 @@ void __cdecl cut_PlayDuelIntroMove(char* e, char* foe)
 		case 2:
 			d2_SetForm(g_68bfc0, 0);
 			io_AppendText(0x10e8, *(unsigned short*) e);
-			t = fcn_004de610(8);
+			t = gm_NextCyclicShuffledIndex(8);
 			io_AppendText(t + 0x10e9);
 			d3snd_PlaySoundEffect(*(unsigned short*) e, 0, "_DUELL_INTRO_C2_AUSWAHL_LAESTERN", t);
 			io_AppendText((int) "$N");

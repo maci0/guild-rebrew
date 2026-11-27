@@ -64,7 +64,7 @@ int __cdecl d2_GetWindowListItem(int h, int a, int b);
 void __cdecl d2_SetFormVisibility(int h, int v);
 int __cdecl d2_AddWindowImage(int a, int b, int c, int d, int e);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_0052a0c0(int unused, char arg)
+void __cdecl d2_InitPlayerBar(int unused, char arg)
 {
 	int owner;
 	int id;

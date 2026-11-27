@@ -11,10 +11,10 @@ typedef struct Msg {
 // SIZE 0x18
 
 
-int __cdecl fcn_0048f660(char* e, char* home, Msg* m, Msg* out);
-int __cdecl fcn_0048f850(char* e, char* home, Msg* m, Msg* out);
-int __cdecl fcn_0048fa60(char* e, char* home, Msg* m, Msg* out);
-int __cdecl fcn_0048fba0(char* e, char* home, Msg* m, Msg* out);
+int __cdecl ai_SendHeimsuchung(char* e, char* home, Msg* m, Msg* out);
+int __cdecl ai_SendNecromancerFog(char* e, char* home, Msg* m, Msg* out);
+int __cdecl ai_SendHauchDesVerfalls(char* e, char* home, Msg* m, Msg* out);
+int __cdecl ai_RunDeathPact(char* e, char* home, Msg* m, Msg* out);
 
 /* ADDRESS: GOLDTL 0x0048fdd0 */
 int __cdecl ai_RunGraveyardOwner(char* e, Msg* m, Msg* out)
@@ -26,13 +26,13 @@ int __cdecl ai_RunGraveyardOwner(char* e, Msg* m, Msg* out)
 		if (home != 0) {
 			switch (m->d) {
 			case 0:
-				return fcn_0048f660(e, home, m, out);
+				return ai_SendHeimsuchung(e, home, m, out);
 			case 1:
-				return fcn_0048f850(e, home, m, out);
+				return ai_SendNecromancerFog(e, home, m, out);
 			case 2:
-				return fcn_0048fa60(e, home, m, out);
+				return ai_SendHauchDesVerfalls(e, home, m, out);
 			case 3:
-				return fcn_0048fba0(e, home, m, out);
+				return ai_RunDeathPact(e, home, m, out);
 			}
 		}
 	}

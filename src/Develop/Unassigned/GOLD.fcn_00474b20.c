@@ -8,12 +8,12 @@
 extern GOLD_GUI_WINDOW g_1015f40[0x60];
 
 int __cdecl d2_LoadForm(int, int, char*);
-int __cdecl fcn_00478cb0(void*, int);
+int __cdecl gfx_CreateSurface(void*, int);
 
 /* Opens a screen page: creates it, flags its window and every child GUI entity
  * (+0x38), and builds the two 0x40-byte descriptors stored at +0x1a4/+0x1a8. */
 /* ADDRESS: GOLD 0x00474b20 */
-int __cdecl d2_CreateRenderableForm(int a0, int a1, char* formName)
+int __cdecl d2_CreateRenderableForm(int x, int y, char* formName)
 {
 	int buf[0x10];
 	int r;
@@ -22,7 +22,7 @@ int __cdecl d2_CreateRenderableForm(int a0, int a1, char* formName)
 	int i;
 	int j;
 
-	r = d2_LoadForm(a0, a1, formName);
+	r = d2_LoadForm(x, y, formName);
 	if (r != 0) {
 		rec = (char*) 0xfb1020 + r * 0x2ac;
 		for (i = 0; i < *(int*) (rec + 0x184); i++) {
@@ -37,11 +37,11 @@ int __cdecl d2_CreateRenderableForm(int a0, int a1, char* formName)
 		memset(buf, 0, sizeof(buf));
 		buf[1] = w->width;
 		buf[2] = w->height;
-		*(int*) (rec + 0x1a4) = fcn_00478cb0(buf, 3);
+		*(int*) (rec + 0x1a4) = gfx_CreateSurface(buf, 3);
 		memset(buf, 0, sizeof(buf));
 		buf[1] = w->width;
 		buf[2] = w->height;
-		*(int*) (rec + 0x1a8) = fcn_00478cb0(buf, 3);
+		*(int*) (rec + 0x1a8) = gfx_CreateSurface(buf, 3);
 		return r;
 	}
 	return 0;

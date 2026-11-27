@@ -1,6 +1,6 @@
 #include <string.h>
 
-int __cdecl fcn_004f4650(void *, void **, void **);
+int __cdecl gv_FindEntityGraveyardSlot(void *, void **, void **);
 int __cdecl gm_GetEntitySlotIndex(void *, void *);
 void __cdecl gv_RequestAddCandidateToOfficePool(void *, void *, int, int);
 void __cdecl gv_SendSetGraveOwner(void *, void *, int, int);
@@ -47,7 +47,7 @@ void __cdecl gm_TransferEntityBuildings(void *fromEntity, void *toEntity)
 
 	cnt = 0;
 	flag = 0;
-	if (fcn_004f4650(fromEntity, &ent, &found)) {
+	if (gv_FindEntityGraveyardSlot(fromEntity, &ent, &found)) {
 		gv_RequestAddCandidateToOfficePool(fromEntity, ent, *(int *) found,
 					 gm_GetEntitySlotIndex(*(void **) ((char *) ent + 0x65), found));
 		if (toEntity != 0 && toEntity != (void *) gm_CityEntity

@@ -12,7 +12,7 @@ void __cdecl d3_SetObjectRotation(char* object, void* vector);
 char* __cdecl d3_SpawnObject(int kind, char* name);
 void __cdecl fcn_00439aa0(char* object);
 void __cdecl d3_AppendObjectSibling(char* object, char* sibling);
-void __cdecl fcn_00439c00(char* object, char* child);
+void __cdecl d3_AttachSceneNode(char* object, char* child);
 void __cdecl d3_AddObjectDrawData(char* object);
 void __cdecl d3_ReadObjectEvents(void* stream, char* object);
 char __cdecl d3_SetObjectVisible(char* object, char on);
@@ -339,7 +339,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 	}
 	vfs_ReadByte(stream, &b);
 	if (b != 0) {
-		fcn_00439c00(object, rd_object(stream, object, version, resources));
+		d3_AttachSceneNode(object, rd_object(stream, object, version, resources));
 	}
 	if (*(char**) (object + 0x1fc) == 0 && placeholder == 0) {
 		fcn_00439aa0(object);

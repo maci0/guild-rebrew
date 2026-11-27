@@ -12,7 +12,7 @@ typedef struct {
 int __cdecl d3_DetachAndReleaseTexture(int h, int flag);
 int __cdecl d3_CloneTextureWithColorKey(int h, V43a3f0 c, int flag);
 
-void __cdecl fcn_0043a3f0(char* a, char* b, V43a3f0 c)
+void __cdecl d3_ChangeObjectTransparency(char* a, char* b, V43a3f0 c)
 {
 	int i;
 	int x;

@@ -9,7 +9,7 @@ extern int d2_CurrentWindowId;
 extern char g_1016198[];
 extern char s_6811b0[];
 
-int __cdecl fcn_005cc240(int dlg, int sel, int alt)
+int __cdecl d2_ClearAndScrollSubform(int dlg, int sel, int alt)
 {
 	int prev;
 	int old;

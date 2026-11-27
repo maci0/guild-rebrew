@@ -3,9 +3,9 @@
 
 int __cdecl gm_GenerateShuffledIndices(int, int);
 
-void __cdecl fcn_004de5e0(int a)
+void __cdecl gm_InitShuffledIndexPool(int count)
 {
-	gm_GenerateShuffledIndices(a, 0x92bcc0);
-	*(int*) 0x60d350 = a;
+	gm_GenerateShuffledIndices(count, 0x92bcc0);
+	*(int*) 0x60d350 = count;
 	*(int*) 0x6f0db0 = 0;
 }

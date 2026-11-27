@@ -28,7 +28,7 @@ extern char s_68a130[];
 
 int __cdecl gm_GetSeason(int*);
 int __cdecl msx_FindActiveGroup(void);
-int __cdecl fcn_004c2820(int);
+int __cdecl msx_FindGroupByKey(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -76,7 +76,7 @@ void __cdecl fcn_004c2100(void)
 			g_688118[i].score -= 0x1e;
 		}
 	}
-	n = fcn_004c2820(kind);
+	n = msx_FindGroupByKey(kind);
 	if (n < 0) {
 		return;
 	}

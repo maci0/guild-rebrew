@@ -10,7 +10,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl gm_AddTime(char*, int, int, int);
-int __cdecl fcn_004c5980(void*);
+int __cdecl cm_EnqueueStagedPacket(void*);
 int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
@@ -54,7 +54,7 @@ void __cdecl he_RunChildBirth(char* action)
 				*(int*) (msg + 0x20) = g_7f4c08;
 				*(short*) (msg + 0x24) = g_7f4c0c;
 				gm_AddTime(msg + 0x18, 0, 0x1e, 0);
-				fcn_004c5980(msg);
+				cm_EnqueueStagedPacket(msg);
 			}
 			*(float*) (action + 0xac) = 0;
 			if (*(int*) (entry + 0x170) != 0)

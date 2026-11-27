@@ -5,13 +5,13 @@ extern int d2_CurrentWindowId;
 void __cdecl ls_CaptureSavePreview(void);
 void __cdecl d2_EnterMenuScreen(void);
 int __cdecl d2_LoadForm(int, int, char *);
-void __cdecl fcn_00537320(int);
-void __cdecl fcn_00471db0(int, int);
+void __cdecl d2_UpdateViewportCenter(int);
+void __cdecl d2_PositionFormWindows(int, int);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_ResetUiInputAndBounds(void);
-int __cdecl fcn_005e3b10(int, int, int);
+int __cdecl d2_AddMenuOptionButton(int, int, int);
 int __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_PauseTutorialUpdates(void);
 int __cdecl d2_CreateRadioGroup(int, ...);
@@ -24,19 +24,19 @@ int __cdecl d2_ShowLoadGameMenu(void);
 int __cdecl d2_RunSaveGameDialog(void *);
 int __cdecl d2_ShowNetworkLoadGame(void *);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
-int __cdecl fcn_005dfe80(char *, int);
+int __cdecl d2_ConfirmTextIdMessageBox(char *, int);
 int __cdecl cm_SendQuitGameCommand(void);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
 void __cdecl main_ExitToFrameHandler(int);
-void __cdecl fcn_005e3520(void);
+void __cdecl d2_ShowGameOptions(void);
 void __cdecl fcn_005e2b60(void);
 void __cdecl d2_ShowSoundOptions(void);
 void __cdecl d2_RestoreHudAfterPause(void);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_004c39b0(void);
-void __cdecl fcn_0057e870(void);
+void __cdecl d2_ResumeTutorialUpdates(void);
 
 /* ADDRESS: GOLDTL 0x005e43f0 */
 void __cdecl d2_RunPauseOptionsMenu(void)
@@ -49,15 +49,15 @@ void __cdecl d2_RunPauseOptionsMenu(void)
     memcpy(preview, (void *)0x7ea3c0, 0x9600);
     d2_EnterMenuScreen();
     dialog = d2_LoadForm(0, 0, (char *)0x6ad384);
-    fcn_00537320(0x24087);
-    fcn_00471db0(dialog, 1);
+    d2_UpdateViewportCenter(0x24087);
+    d2_PositionFormWindows(dialog, 1);
     fcn_00471d80(dialog, 2);
     d2_SetForm(dialog, 0);
     d2_InitWindowBounds(d2_CurrentWindowId);
     d2_ResetUiInputAndBounds();
     d2_SetForm(0, 0);
-    a = fcn_005e3b10(0, *(int *)0x14ac490, d2_CurrentWindowId);
-    b = fcn_005e3b10(1, *(int *)0x14ac494, d2_CurrentWindowId);
+    a = d2_AddMenuOptionButton(0, *(int *)0x14ac490, d2_CurrentWindowId);
+    b = d2_AddMenuOptionButton(1, *(int *)0x14ac494, d2_CurrentWindowId);
     if (*(unsigned char *)0x7747b0 & 4) {
         d2_SetElementEnabled(a, 0);
         if (!(*(unsigned char *)0x7747b0 & 0x10)) d2_SetElementEnabled(b, 0);
@@ -68,12 +68,12 @@ void __cdecl d2_RunPauseOptionsMenu(void)
         d2_SetElementEnabled(b, 0);
     }
     *(unsigned char *)0x774966 = 1;
-    c = fcn_005e3b10(2, *(int *)0x14ac498, d2_CurrentWindowId);
-    d = fcn_005e3b10(3, *(int *)0x14ac49c, d2_CurrentWindowId);
-    e = fcn_005e3b10(4, *(int *)0x14ac4a0, d2_CurrentWindowId);
-    f = fcn_005e3b10(5, *(int *)0x14ac4a4, d2_CurrentWindowId);
+    c = d2_AddMenuOptionButton(2, *(int *)0x14ac498, d2_CurrentWindowId);
+    d = d2_AddMenuOptionButton(3, *(int *)0x14ac49c, d2_CurrentWindowId);
+    e = d2_AddMenuOptionButton(4, *(int *)0x14ac4a0, d2_CurrentWindowId);
+    f = d2_AddMenuOptionButton(5, *(int *)0x14ac4a4, d2_CurrentWindowId);
     if (!(*(unsigned char *)0x7747b0 & 4)) *(int *)0x6b7fc0 = 1;
-    g = fcn_005e3b10(7, *(int *)0x14ac4a8, d2_CurrentWindowId);
+    g = d2_AddMenuOptionButton(7, *(int *)0x14ac4a8, d2_CurrentWindowId);
     group = d2_CreateRadioGroup(7, a, b, c, d, e, f, g);
     fcn_004c3140(0);
     saved = *(unsigned char *)0x772d10;
@@ -100,7 +100,7 @@ void __cdecl d2_RunPauseOptionsMenu(void)
                 } else if (current == f) {
                     d2_SetFormVisibility(dialog, 0);
                     io_FormatTextBuffer(message, 0x1ca4);
-                    if (fcn_005dfe80(message, 1)) {
+                    if (d2_ConfirmTextIdMessageBox(message, 1)) {
                         handle = cm_SendQuitGameCommand();
                         while (handle != -1) {
                             if (cm_GetCommandStatus(handle)) {
@@ -112,7 +112,7 @@ void __cdecl d2_RunPauseOptionsMenu(void)
                         main_ExitToFrameHandler(0x5438c0);
                     } else d2_SetFormVisibility(dialog, 1);
                 } else if (current == c) {
-                    d2_SetFormVisibility(dialog, 0); fcn_005e3520(); d2_SetFormVisibility(dialog, 1);
+                    d2_SetFormVisibility(dialog, 0); d2_ShowGameOptions(); d2_SetFormVisibility(dialog, 1);
                 } else if (current == d) {
                     d2_SetFormVisibility(dialog, 0); fcn_005e2b60(); d2_SetFormVisibility(dialog, 1);
                 } else if (current == e) {
@@ -129,5 +129,5 @@ void __cdecl d2_RunPauseOptionsMenu(void)
     fcn_004c3140((void *)(unsigned int)*(unsigned char *)0x7766a1);
     *(unsigned char *)0x772d10 = saved;
     fcn_004c39b0();
-    if ((*(signed char *)0x7747b0 & 0x80) && !*(int *)0x774954) fcn_0057e870();
+    if ((*(signed char *)0x7747b0 & 0x80) && !*(int *)0x774954) d2_ResumeTutorialUpdates();
 }

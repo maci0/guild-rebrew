@@ -27,7 +27,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl he_FreeAction(char*);
 void __cdecl he_RollTripletEventScores(char*, char*, char*);
-int __cdecl fcn_004c5980(void*);
+int __cdecl cm_EnqueueStagedPacket(void*);
 int __cdecl gv_FindEntityGraveSlot(int, unsigned char**, void**);
 int __cdecl gm_GetEntitySlotIndex(int, void*);
 int __cdecl gv_SendSetGraveOwner(int*, char*, int, int);
@@ -224,7 +224,7 @@ void __cdecl he_RunCourtship(char* e)
 		*(pos14_7f4c00*) (e + 0x52) = *(pos14_7f4c00*) (msg + 0x18);
 		*(int*) (e + 0x84) = -1;
 		cm_SendSetHE(4, e);
-		fcn_004c5980(msg);
+		cm_EnqueueStagedPacket(msg);
 		return;
 		}
 		if (a[2] != 6) {

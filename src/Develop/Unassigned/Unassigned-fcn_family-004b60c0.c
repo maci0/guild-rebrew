@@ -1,9 +1,9 @@
 extern signed char g_6a3440;
 
-int __cdecl fcn_004b5b40(void);
+int __cdecl d2_RunActiveHistoryMissionDialog(void);
 int __cdecl d2_RunMissionDialog(void);
 
-int __cdecl fcn_004b60e0(void);
+int __cdecl d2_WaitHistoryMissionDialog(void);
 int __cdecl d2_ShowMissionDialog(void);
 extern int g_14cbca0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -12,13 +12,13 @@ extern int g_6a3760;
 
 int __cdecl fcn_004b60c0(void);
 int __cdecl fcn_004b62c0(void);
-int __cdecl fcn_004b62e0(void);
+int __cdecl d2_FinishHistoryMissionDialog(void);
 
 /* ADDRESS: GOLDTL 0x004b60c0 */
 int __cdecl fcn_004b60c0(void)
 {
 	if (g_6a3440 == 5)
-		return fcn_004b5b40();
+		return d2_RunActiveHistoryMissionDialog();
 	return d2_RunMissionDialog();
 }
 
@@ -26,7 +26,7 @@ int __cdecl fcn_004b60c0(void)
 int __cdecl fcn_004b62c0(void)
 {
 	if (g_6a3440 == 5)
-		return fcn_004b60e0();
+		return d2_WaitHistoryMissionDialog();
 	return d2_ShowMissionDialog();
 }
 
@@ -38,5 +38,5 @@ int __cdecl fcn_004b6470(void)
 			return fcn_004b60c0();
 		return fcn_004b62c0();
 	}
-	return fcn_004b62e0();
+	return d2_FinishHistoryMissionDialog();
 }

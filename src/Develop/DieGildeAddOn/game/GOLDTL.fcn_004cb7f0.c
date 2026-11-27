@@ -32,7 +32,7 @@ int __cdecl vfs_ResolvePath(char*, int, int, char*);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_TransformPoint(char*, char*, int*);
 int __cdecl d3_LoadObjectFile(char*, int, int);
-void __cdecl fcn_00455140(char*, float*, float*);
+void __cdecl d3_TransformDirection(char*, float*, float*);
 float __cdecl d3_SignedPlanarAngle(float*, float*);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
@@ -43,7 +43,7 @@ char __cdecl d3_ComputeObjectBoundingSphere(char*, char*, float*, float*);
 char* __cdecl evt_LoadGfxScript(int);
 void __cdecl evt_CallScriptFunction(char*, int, ...);
 void __cdecl d3_BindEntitySceneObject(int, void*, int);
-void __cdecl fcn_0052d9d0(void*);
+void __cdecl d3_CreateEntityFlagPennant(void*);
 int __cdecl gm_GetSeason(char*);
 void __cdecl d3_ApplySeasonTextureSet(int);
 char __cdecl d3_TraverseSceneObjects(char*, char*, unsigned int, void (__cdecl*)(char*));
@@ -125,7 +125,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		ReportClientMessage(name);
 		goto restore;
 	} else {
-		fcn_00455140((char*) *(int*)(upgradeBuilding + 0x61), g_662d40, direction);
+		d3_TransformDirection((char*) *(int*)(upgradeBuilding + 0x61), g_662d40, direction);
 		angles[0] = 0;
 		angles[1] = 0;
 		angles[2] = 0;
@@ -148,7 +148,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		}
 		d3_BindEntitySceneObject(obj, upgradeBuilding, 2);
 	}
-	fcn_0052d9d0(upgradeBuilding);
+	d3_CreateEntityFlagPennant(upgradeBuilding);
 	h = *(int*) (upgradeBuilding + 0x61);
 	if (h != 0) {
 		float f;

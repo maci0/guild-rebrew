@@ -50,7 +50,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_CheckActionBlocker(char*, int);
-int __cdecl fcn_005898f0(void*);
+int __cdecl he_HasNoActiveAssassinAction(void*);
 void __cdecl gm_ModifyHealth(int, int);
 int __cdecl ai_FindEntityInFavorRange(unsigned short*, int, F8, int, float, int*);
 int __cdecl cm_SendCopyEntityData(void*);
@@ -127,7 +127,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == confirmButton) {
-				if (d2_CheckActionBlocker(g_slot_table + g_774970 * 0x21c, cost) == 1 && fcn_005898f0((void*) a0) != 0) {
+				if (d2_CheckActionBlocker(g_slot_table + g_774970 * 0x21c, cost) == 1 && he_HasNoActiveAssassinAction((void*) a0) != 0) {
 					gm_ModifyHealth(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -cost);
 					memset(&req, 0, sizeof(req));
 					req.kind = 0x99;

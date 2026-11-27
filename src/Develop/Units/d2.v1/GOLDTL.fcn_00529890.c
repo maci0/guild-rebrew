@@ -11,7 +11,7 @@ int d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);
 void d2_CloseWindow(int id);
 int d2_AddElementToWindow(int x, int y, int id, int win);
 int d2_AddWindowImage(int x, int y, int id, int win, int a5);
-void fcn_0046f940(int id, char* text);
+void d2_SetLabelText(int id, char* text);
 int d2_ShowTxt(int x, int y, char* text, int win);
 void d2_SetElementValue(int id, ...);
 void d2_SetElementEnabled(int id, int flag);
@@ -20,15 +20,15 @@ void d2_AddDisplayCounter(int key, int amount);
 void ResetDisplayCounters(void);
 void d3snd_PlayObjectClickSound(char* entity);
 float gm_GetEntityHealthRatio(char* entity);
-int fcn_00507c30(int key);
-void fcn_00517c00(int id, int a, int b, char* out);
+int gm_MapEntityToCategorySlot(int key);
+void gm_FormatEntityTitleAndName(int id, int a, int b, char* out);
 void he_AssignActionSlot(char* obj, int a, int id, int b);
-int fcn_00529800(char* entity, int* out);
+int d2_GetEntityGearIcons(char* entity, int* out);
 void sv_ClearObjectSelection(void);
 void d2_DrawSkillBar(int a, int b, char* entity, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00529890 */
-void __cdecl fcn_00529890(char* building)
+void __cdecl d2_UpdateBuildingWorkerSlots(char* building)
 {
 	unsigned char* v2;
 	char* v11;
@@ -89,7 +89,7 @@ void __cdecl fcn_00529890(char* building)
 					}
 				}
 				else if ((unsigned char) g_774724 == 1) {
-					v6 = fcn_00507c30((unsigned char) *v11);
+					v6 = gm_MapEntityToCategorySlot((unsigned char) *v11);
 					if (v11[-1] || (v6 != 10 && v6 != 0xb && v6 != 0xc)) {
 						goto label_529c64;
 					}
@@ -118,7 +118,7 @@ void __cdecl fcn_00529890(char* building)
 				if (0x20 < v6) {
 					break;
 				}
-				fcn_00517c00(v3, 1, 1, v8);
+				gm_FormatEntityTitleAndName(v3, 1, 1, v8);
 				d2_SetForm(g_6a25b4, 1);
 				v5 = v6 * 0x4e;
 				v6 *= 0x28;
@@ -224,11 +224,11 @@ label_529d30:
 						* *(double*) 0x662c38);
 					sprintf(v9, "%s %i%%",
 						(char*) (v13[2] * 0x21c + 0x7f4cd0), v16);
-					fcn_0046f940(v13[3], v9);
+					d2_SetLabelText(v13[3], v9);
 					*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
 						[v13[3]].width) = 0x5f;
 				}
-				v5 = fcn_00529800((char*) (v13[2] * 0x21c + 0x7f4ca0),
+				v5 = d2_GetEntityGearIcons((char*) (v13[2] * 0x21c + 0x7f4ca0),
 					out);
 				if (v5) {
 					v15 = -1;

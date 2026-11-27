@@ -3,7 +3,7 @@ extern unsigned char* lpGebaeudeINST;
 
 void __cdecl d3_BindEntitySceneObject(char*, char*, int);
 
-char __cdecl fcn_005224b0(char* e)
+char __cdecl d3_BindBuildingSceneObjects(char* e)
 {
 	int i;
 	char* r;

@@ -43,7 +43,7 @@ void __cdecl d2_CreateButtonRow(int, int, int *, int, ...);
 int __cdecl gm_CountBuildingExtensions(char *);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_BuildPersonStatusDesc(ITEM *);
-void __cdecl fcn_005ca740(int, int, int, int, ITEM *, int);
+void __cdecl d2_DrawPersonCard(int, int, int, int, ITEM *, int);
 void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl amt_GetRoleLevel(int);
 int __cdecl d2_CheckActionBlocker(char *, int);
@@ -53,14 +53,14 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl gm_ModifyHealth(int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_ShowZigeunerGroupMessage(unsigned short *, int, char **);
-void __cdecl fcn_00526120(char *, int);
+void __cdecl d2_ShowModalMessageBox(char *, int);
 char *__cdecl d2_OpenTargetPicker(REQUEST *, char *, int, int);
 int __cdecl main_RunFrameLoop(void (__cdecl *)(void *), int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005e53b0 */
-void __cdecl fcn_005e53b0(void *arg)
+void __cdecl d2_RunZigeunerBlutracheDialog(void *arg)
 {
     ITEM items[5];
     REQUEST request;
@@ -112,7 +112,7 @@ void __cdecl fcn_005e53b0(void *arg)
             for (i = 0; i < 5; ++i) {
                 if (i >= count) { items[i].entity = 0; cache[i] = -1; }
                 d2_BuildPersonStatusDesc(&items[i]);
-                fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x54, &items[i], 1);
+                d2_DrawPersonCard(items[i].x, items[i].y, d2_CurrentWindowId, 0x54, &items[i], 1);
                 if (i < count) {
                     d2_SetElementEnabled(items[i].control, 1);
                     ((D2_CONTROL_TL*) g_1015ea0)[items[i].control].value_05c = 1;
@@ -148,7 +148,7 @@ void __cdecl fcn_005e53b0(void *arg)
                     cm_RequestChangeBits(*(int *)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4), 0x1cc, 4, 8, 0);
                     he_ShowZigeunerGroupMessage((unsigned short *)p, n, selected);
                     io_FormatTextBuffer(text, 0x41b9, 0x41b2);
-                    fcn_00526120(text, 0);
+                    d2_ShowModalMessageBox(text, 0);
                     g_774654 = 1;
                 }
             } else if (d2_CurrentElementId == buttons[1]) g_774654 = 1;
@@ -181,7 +181,7 @@ void __cdecl fcn_005e53b0(void *arg)
             }
             refresh = 1;
         }
-    } while (main_RunFrameLoop(fcn_005e53b0, 0x677c7));
+    } while (main_RunFrameLoop(d2_RunZigeunerBlutracheDialog, 0x677c7));
     d2_DestroyForm(window);
     d3_EndCameraAndUiMode();
 }

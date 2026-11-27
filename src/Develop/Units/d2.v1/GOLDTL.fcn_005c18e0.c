@@ -38,7 +38,7 @@ int __cdecl gm_LookupEntityRecordById();
 int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
 int __cdecl d3_AnimateCameraToStoredTransform();
-int __cdecl fcn_00530510();
+int __cdecl sv_ResetSelectionState();
 int __cdecl d3_EndCameraAndUiMode();
 int __cdecl d2_CreateButtonRow();
 int __cdecl d2_InitWindowBounds();

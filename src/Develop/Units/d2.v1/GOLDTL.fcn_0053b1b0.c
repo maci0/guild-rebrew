@@ -21,11 +21,11 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_InitWindowBounds(int);
-void __cdecl fcn_00534160(int, int, int, int);
+void __cdecl d2_DrawSegmentedBar(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0053b1b0 */
-int __cdecl fcn_0053b1b0(void)
+int __cdecl d2_RunChooseTalentDialog(void)
 {
 	int v_len;
 	int v_id;
@@ -58,7 +58,7 @@ int __cdecl fcn_0053b1b0(void)
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
 	io_AppendText(0x1ae2);
-	if (main_RunFrameLoop((void*) fcn_0053b1b0, 0x12d6) != 0) {
+	if (main_RunFrameLoop((void*) d2_RunChooseTalentDialog, 0x12d6) != 0) {
 		do {
 			if (g_14ce8e0 != 0)
 				g_774654 = 1;
@@ -69,7 +69,7 @@ int __cdecl fcn_0053b1b0(void)
 				y = 0x1c;
 				for (; i < 5; i++, y += 0x25) {
 					io_AppendText((int) s_6a3bc4, i + 0x16b7);
-					fcn_00534160(0xd2, y, st[6 + i], 0x4d9);
+					d2_DrawSegmentedBar(0xd2, y, st[6 + i], 0x4d9);
 					id = d2_AddElementToWindow(*(int*) (g_77255c + 0xc) - 0x2c, y, 0x519, d2_CurrentWindowId);
 					ids[2 * i] = id;
 					((D2_CONTROL_TL*) (g_1015ea0))[id].value_05c = 1;
@@ -80,7 +80,7 @@ int __cdecl fcn_0053b1b0(void)
 					((D2_CONTROL_TL*) (g_1015ea0))[id].flags_1d0 = 3;
 				}
 				io_AppendText(0x1ae3);
-				fcn_00534160(0xd2, 0xec, v_len, 0x4d9);
+				d2_DrawSegmentedBar(0xd2, 0xec, v_len, 0x4d9);
 				v_id = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1ae4));
 				for (i = 0; i < 5; i++) {
 					if (st[6 + i] > ((int*)0x7e1fd8)[i]) {
@@ -170,7 +170,7 @@ int __cdecl fcn_0053b1b0(void)
 					}
 				}
 			}
-		} while (main_RunFrameLoop((void*) fcn_0053b1b0, 0x12d6) != 0);
+		} while (main_RunFrameLoop((void*) d2_RunChooseTalentDialog, 0x12d6) != 0);
 	}
 	d2_DestroyForm(dlg);
 	return v_ret;

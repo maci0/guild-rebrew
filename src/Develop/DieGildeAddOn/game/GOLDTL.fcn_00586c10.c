@@ -14,11 +14,11 @@ void __cdecl sv_ClearObjectSelection(void);
 void __cdecl ResetDisplayCounters(void);
 void __cdecl d2_ResetUiInputAndBounds(void);
 void* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
-void __cdecl fcn_00438da0(float, float, float, float, float, float, float, int, int);
+void __cdecl d3_SetViewport(float, float, float, float, float, float, float, int, int);
 void __cdecl d2_UpdateHudVisibility(int);
 void __cdecl d3_SelectSceneContext(int, char);
 void __cdecl d3_ResetSkyDomeNormals(char*, char);
-void __cdecl fcn_00414960(float*, float*, char*);
+void __cdecl d3_ComputeObjectWorldBounds(float*, float*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
 int __cdecl d3_ApplyObjectAnimation(char*, char*, int);
@@ -29,12 +29,12 @@ void __cdecl fcn_00588200(char*, char*, char*);
 char __cdecl d3_SetObjectVisible(char*, char);
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl he_SetGfxInfoEnabledByKey(int, int);
-void __cdecl fcn_00587f40(char*);
+void __cdecl d3_UpdateCannonAimMatrices(char*);
 void __cdecl d2_UpdateKanoneCamera(char*, float);
 void __cdecl fcn_00587a50(char*);
 void __cdecl d2_UpdateDealSummaryLog(char*);
 void __cdecl d2_SwitchKanoneMode(int, int, int, int, int);
-int __cdecl fcn_00587f90(char*);
+int __cdecl d2_CheckKanoneFireInput(char*);
 int __cdecl d2_FireKanone(void*, char*);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_DestroyElement(int);
@@ -139,7 +139,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
         }
     }
 
-    fcn_00438da0((float) g_1040494,
+    d3_SetViewport((float) g_1040494,
                  (float) d2_ScreenHeight - 150.0f,
                  0.0f, 75.0f,
                  *(float*) 0x10529c8, *(float*) 0x10421a0, *(float*) 0x10432a4,
@@ -161,7 +161,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
     if (g_6b89c0 != 0)
         d3_ResetSkyDomeNormals((char*) g_6b89c0, 1);
 
-    fcn_00414960(f0, f1, (char*) *(int*) (obj + 0x61));
+    d3_ComputeObjectWorldBounds(f0, f1, (char*) *(int*) (obj + 0x61));
     if (g_9a9200[0] != *(int*) (obj + 1)) {
         g_9a9200[0] = *(int*) (obj + 1);
         g_9a9200[5] = 0;
@@ -210,7 +210,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
     d3_SetSubtreeVisible(*(int*) (obj + 0x61), 0);
     he_SetGfxInfoEnabledByKey(*(int*) (obj + 0x61), 0);
     g_100f1dc = -1;
-    fcn_00587f40((char*) S);
+    d3_UpdateCannonAimMatrices((char*) S);
     *(int*)(g_77dda0 + 0x70) = -1;
     *(int*)(g_77dda0 + 0x38) = -1;
     *(int*)(g_77dda0 + 0x0) = -1;
@@ -238,7 +238,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
                     else if (d2_CurrentElementId == *(int*) ((char*) S + 0xd0))
                         d2_SwitchKanoneMode((int) obj, (int) S, (int) res, 2, 0x2656c7);
                 }
-                if (*(int*) (res + 4) == 0 && fcn_00587f90((char*) S)) {
+                if (*(int*) (res + 4) == 0 && d2_CheckKanoneFireInput((char*) S)) {
                     d2_FireKanone(S, obj);
                     *(int*)(g_77dda0 + 0x70) = -1;
                     *(int*)(g_77dda0 + 0x38) = -1;
@@ -272,7 +272,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
     he_SetGfxInfoEnabledByKey(*(int*) (obj + 0x61), 1);
     for (i = 0; i < count; i++)
         ((D2_CONTROL_TL*)g_1015ea0)[idx[i]].value_048 = 0;
-    fcn_00438da0((float) (g_6a376c - g_6a3764),
+    d3_SetViewport((float) (g_6a376c - g_6a3764),
                  (float) (g_6a3770 - g_6a3768),
                  (float) g_6a3764, (float) g_6a3768,
                  *(float*) 0x10529c8, *(float*) 0x10421a0, *(float*) 0x10432a4,

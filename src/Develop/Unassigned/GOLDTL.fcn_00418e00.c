@@ -20,7 +20,7 @@ void __cdecl d3snd_SetVoiceFlag0x10(char*, int);
 void __cdecl d3_UpdateSoundSourceVolume(struct snd_418e00*);
 void __cdecl d3_UpdateSoundSourcePan(struct snd_418e00*);
 int __cdecl sb_CheckVoicePlaying(char*);
-void __cdecl fcn_00418d70(struct snd_418e00*);
+void __cdecl d3snd_StopSourceVoice(struct snd_418e00*);
 
 /* ADDRESS: GOLD 0x00417840 */
 
@@ -61,7 +61,7 @@ void __cdecl d3snd_UpdateSoundSources(void)
 		((struct snd_418e00*)tp_SoundSources)[i].idle++;
 		if (((struct snd_418e00*)tp_SoundSources)[i].idle > 500 && ((struct snd_418e00*)tp_SoundSources)[i].keep == 0) {
 			if (((struct snd_418e00*)tp_SoundSources)[i].fade != 0) {
-				fcn_00418d70(&((struct snd_418e00*)tp_SoundSources)[i]);
+				d3snd_StopSourceVoice(&((struct snd_418e00*)tp_SoundSources)[i]);
 			} else {
 				d3snd_SetVoiceFlag0x10(((struct snd_418e00*)tp_SoundSources)[i].voice, 0);
 				*(unsigned int*) (((struct snd_418e00*)tp_SoundSources)[i].voice + 0x14) |= 8;

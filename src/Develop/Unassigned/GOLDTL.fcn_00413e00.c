@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00413e00 */
-int __cdecl fcn_00413e00(float *pointA, float *pointB, float *pointC, float *boxMin,
+int __cdecl d3_TestTriangleBoxOverlap(float *pointA, float *pointB, float *pointC, float *boxMin,
                          float *boxMax)
 {
 	float v[8];

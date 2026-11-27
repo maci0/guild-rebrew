@@ -9,7 +9,7 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0058c4f0(char*, int, int, int*, int*);
+void __cdecl d2_RefreshRentAGraveOptions(char*, int, int, int*, int*);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_DestroyForm(int);
@@ -33,7 +33,7 @@ void __cdecl d2_OpenRentAGraveDialog(char* a0)
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x410a, 0x4108);
-	fcn_0058c4f0(a0, dlg, 2, ids, &sel);
+	d2_RefreshRentAGraveOptions(a0, dlg, 2, ids, &sel);
 	d2_SetForm(dlg, 3);
 	task = d2_GetWindowListItem(dlg, 3, io_AppendText(0x6a4078, 0x4117));
 	selected = sel; g_100f1dc = -1;
@@ -51,7 +51,7 @@ void __cdecl d2_OpenRentAGraveDialog(char* a0)
 				for (i = 0; i < 4; i++) {
 					if (d2_CurrentElementId == ids[i] && i != selected) {
 						sel = i;
-						fcn_0058c4f0(a0, dlg, 2, ids, &sel); selected = sel;
+						d2_RefreshRentAGraveOptions(a0, dlg, 2, ids, &sel); selected = sel;
 						break;
 					}
 				}

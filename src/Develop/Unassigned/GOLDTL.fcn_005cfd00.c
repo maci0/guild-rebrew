@@ -8,7 +8,7 @@ extern char* gm_CityEntity;
 #define g_action_class_hi (*(unsigned int*) 0x666034)
 
 /* ADDRESS: GOLDTL 0x005cfd00 */
-int __cdecl fcn_005cfd00(unsigned short* self, int* action, unsigned char* entity)
+int __cdecl gm_IsActionAllowedForEntity(unsigned short* self, int* action, unsigned char* entity)
 {
 	unsigned char type;
 	unsigned int lo;

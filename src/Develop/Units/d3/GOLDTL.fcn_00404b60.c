@@ -7,7 +7,7 @@
 void __cdecl vfs_ToSlashes(char*);
 
 /* ADDRESS: GOLDTL 0x00404b60 */
-void __cdecl fcn_00404b60(char* obj, int n, ...)
+void __cdecl d3_PreloadLowPolyAnims(char* obj, int n, ...)
 {
 	D3_ANIMATION_OPTIONS opt;
 	int i;

@@ -10,7 +10,7 @@ extern char s_67d474[];
 
 int __cdecl d2_FindResourceByName(char* name);
 char* __cdecl d2_GetResourceData(int id);
-char* __cdecl fcn_0047b620(char* font, int c);
+char* __cdecl d2_GetBankEntry(char* font, int c);
 void __cdecl d2_DrawHighlightSprite(int x, int y, int surf, char* font, int c);
 void __cdecl d2_DrawDimmedSpriteFrame(int x, int y, int surf, char* font, int c);
 void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, char* font, int c);
@@ -30,7 +30,7 @@ void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, unsigned
 	d2_FontHeight = *(unsigned short*) (g_772524 + 8);
 	for (i = 0; i < (int) strlen(text); i++) {
 		c = text[i];
-		g = fcn_0047b620(g_772524, c);
+		g = d2_GetBankEntry(g_772524, c);
 		x -= *(unsigned short*) (g + 0x11);
 		if (c != '~') {
 			if (c != ' ') {

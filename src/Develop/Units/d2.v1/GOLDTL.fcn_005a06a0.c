@@ -6,7 +6,7 @@ void __cdecl io_AppendText(int a);
 int __cdecl main_RunFrameLoop(void* p, int a);
 float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int delta);
 int __cdecl gm_CountChildren(char* e, int* out_count);
-int __cdecl fcn_00526120(char* text, int flags);
+int __cdecl d2_ShowModalMessageBox(char* text, int flags);
 int __cdecl d2_DestroyForm(int k);
 
 /* ADDRESS: GOLDTL 0x005a06a0 */
@@ -37,7 +37,7 @@ void __cdecl d2_ShowWeinkellerDialog(void)
 				gm_ApplyEntityHealthDelta(*(unsigned short*) slot, -2000);
 			}
 			else {
-				fcn_00526120((char*) *(int*) (0x14a5320 + (n != 0 ? 0x42d3 : 0x42d2) * 4), 0);
+				d2_ShowModalMessageBox((char*) *(int*) (0x14a5320 + (n != 0 ? 0x42d3 : 0x42d2) * 4), 0);
 				*(int*) 0x774654 = 1;
 			}
 		}

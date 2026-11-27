@@ -1,37 +1,37 @@
 #include <math.h>
 
 // SIZE 0xc0
-struct frame_4357b0 {
+struct D3_MORPH_FRAME {
 	char pad0[4];
 	int length;
 	char pad8[0xb8];
 };
 
 // SIZE 0x160
-struct anim_4357b0 {
+struct D3_MORPH_ANIM {
 	char pad0[0x148];
 	int count;
 	char pad14c[0x10];
-	struct frame_4357b0* frames;
+	struct D3_MORPH_FRAME* frames;
 };
 
 // SIZE 0x70
-struct blend_4357b0 {
+struct D3_MORPH_BLEND {
 	int cur;
 	int next;
 	int time;
 	char padc[0x58];
 	float weight;
-	struct anim_4357b0* anim;
+	struct D3_MORPH_ANIM* anim;
 	char pad6c;
 	unsigned char flags;
 	char pad6e[2];
 };
 
 /* ADDRESS: GOLDTL 0x004357b0 */
-void __cdecl fcn_004357b0(struct blend_4357b0* b, float* w0, float* w1)
+void __cdecl d3_CalcMorphFrameWeights(struct D3_MORPH_BLEND* b, float* w0, float* w1)
 {
-	struct anim_4357b0* an;
+	struct D3_MORPH_ANIM* an;
 	float step;
 	float f;
 	float a;

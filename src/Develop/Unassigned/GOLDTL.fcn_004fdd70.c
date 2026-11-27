@@ -14,7 +14,7 @@ int __cdecl fcn_0064d41a(char* buf, const char* fmt, ...);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
 /* ADDRESS: GOLDTL 0x004fdd70 */
-void __cdecl fcn_004fdd70(HEAD_SET* hs)
+void __cdecl gm_ResolveHeadSetIcons(HEAD_SET* hs)
 {
 	char base[0x80];
 	char kind[0x80];

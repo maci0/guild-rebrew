@@ -17,10 +17,10 @@ typedef struct Glyph {
 } Glyph;
 
 void __cdecl d2_SelectFont(int font);
-Glyph* __cdecl fcn_0047b620(char* font, int c);
+Glyph* __cdecl d2_GetBankEntry(char* font, int c);
 void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, char* font, int c);
 void __cdecl d2_SetClipRect(int a, int b, int c, int d);
-void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
+void __cdecl d2_DrawWordWrappedText(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x00468e40 */
 void __cdecl d2_DrawTextButton(int slotIndex, int surface)
@@ -58,9 +58,9 @@ void __cdecl d2_DrawTextButton(int slotIndex, int surface)
 	}
 	d2_SelectFont(*(int*) &((D2_CONTROL_TL*)slot)->font);
 	font = *(char**) &((D2_CONTROL_TL*)slot)->data;
-	leftGlyph = fcn_0047b620(font, 0);
-	rightGlyph = fcn_0047b620(font, 1);
-	middleGlyph = fcn_0047b620(font, 2);
+	leftGlyph = d2_GetBankEntry(font, 0);
+	rightGlyph = d2_GetBankEntry(font, 1);
+	middleGlyph = d2_GetBankEntry(font, 2);
 	innerWidth = (*(int*) &((D2_CONTROL_TL*)slot)->width - rightGlyph->w) - leftGlyph->w;
 	if (*(int*) &((D2_CONTROL_TL*)slot)->value_03c != 0) {
 		glyphBase = 3;
@@ -78,7 +78,7 @@ void __cdecl d2_DrawTextButton(int slotIndex, int surface)
 			i++;
 		} while ((double) i < (double) (innerWidth / middleGlyph->w) + 0.5);
 	}
-	fcn_0046bd20(*(int*) &((D2_CONTROL_TL*)slot)->x,
+	d2_DrawWordWrappedText(*(int*) &((D2_CONTROL_TL*)slot)->x,
 	    ((leftGlyph->h >> 1) - d2_FontHeight / 2) + 1 + *(int*) &((D2_CONTROL_TL*)slot)->y,
 	    *(int*) &((D2_CONTROL_TL*)slot)->width, *(int*) &((D2_CONTROL_TL*)slot)->height, surface, slot + 0x8c, color);
 }

@@ -3,7 +3,7 @@ extern int g_67a370;
 void __cdecl fcn_00454560(int* n);
 char __cdecl fcn_004545c0(void* p, int* n);
 void __cdecl d3_VisitSceneObjects(int list, int a, int mask, char(__cdecl* fn)(void*, int*), int* arg);
-void __cdecl fcn_00454850(int* n, int a, int b, int c);
+void __cdecl d3_SplitQuadtreeNode(int* n, int a, int b, int c);
 
 /* ADDRESS: GOLDTL 0x004550e0 */
 void __cdecl fcn_004550e0(int a1, int* n)
@@ -15,6 +15,6 @@ void __cdecl fcn_004550e0(int a1, int* n)
 			fcn_00454560((int*) n[i]);
 		}
 		d3_VisitSceneObjects(g_67a370, a1, n[0x11] | 0x200, fcn_004545c0, n);
-		fcn_00454850(n, n[0xd], 1, n[0xe]);
+		d3_SplitQuadtreeNode(n, n[0xd], 1, n[0xe]);
 	}
 }

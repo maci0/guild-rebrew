@@ -1,7 +1,7 @@
 /* fcn_00515f30 — tail-call the notifier when the record is present. */
 
 int __cdecl fcn_0064f170(int, int, int);
-void __cdecl fcn_00418f90(int);
+void __cdecl d3snd_StopSourceVoiceSafe(int);
 
 /* ADDRESS: GOLDTL 0x00515f30 */
 void __cdecl fcn_00515f30(int record)
@@ -12,5 +12,5 @@ void __cdecl fcn_00515f30(int record)
 	if (*(int*) (record + 0x210) == 0) {
 		return;
 	}
-	fcn_00418f90(*(int*) (record + 0x210));
+	d3snd_StopSourceVoiceSafe(*(int*) (record + 0x210));
 }

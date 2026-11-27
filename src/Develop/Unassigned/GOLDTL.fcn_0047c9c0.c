@@ -59,7 +59,7 @@ extern int g_772614;
 int __cdecl d2_BuildQuadVertices(int, int, int, int, Quad*);
 void __cdecl d2_SetQuadAlpha(Quad*, int);
 void __cdecl d2_BindQuadVertexBuffer(void);
-void __cdecl fcn_004372d0(int, int, int, int, int);
+void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x0047c9c0 */
@@ -88,7 +88,7 @@ void __cdecl d2_DrawTexturedQuad(int a1, int a2, int a3, int a4, int tex, float 
 	}
 	((VB*)g_772614)->vtbl->Unlock(((VB*)g_772614));
 	d2_BindQuadVertexBuffer();
-	fcn_004372d0(0xfe, 0, 0, 1, 1);
+	d3_SetRenderMaterialState(0xfe, 0, 0, 1, 1);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 7, 0);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x88, 0);
 	if (((Scene47c9c0Fn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x88 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0)) >= 0) {

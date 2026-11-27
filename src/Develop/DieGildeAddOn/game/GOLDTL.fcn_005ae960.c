@@ -26,11 +26,11 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_SendSetHE(int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_0052a0c0(char*, int);
+void __cdecl d2_InitPlayerBar(char*, int);
 int __cdecl d2_OpenTargetPicker(Req*, char*, int, void*);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl d3_EndCameraAndUiMode(void);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_RunEntfuehrungDialog(void);
 
 void __cdecl d2_StartEntfuehrungDialog(char* building)
@@ -45,7 +45,7 @@ void __cdecl d2_StartEntfuehrungDialog(char* building)
 	}
 	for (p = he_StartHandlungSearch(1, 0, 0x3c); p != 0; p = he_fn_Handlung()) {
 		if (*(int*) (p + 0xb4) == *(int*) (building + 1)) {
-			fcn_00526120(g_14aba0c, 0);
+			d2_ShowModalMessageBox(g_14aba0c, 0);
 			return;
 		}
 	}
@@ -53,7 +53,7 @@ void __cdecl d2_StartEntfuehrungDialog(char* building)
 		if (*(int*) (p + 0xb0) == *(int*) (building + 1)) {
 			q = gm_LookupEntityRecordById(*(int*) (p + 0xac));
 			if (q != 0 && (unsigned char) q[0x1b1] > 0) {
-				fcn_00526120(g_14aba0c, 0);
+				d2_ShowModalMessageBox(g_14aba0c, 0);
 				return;
 			}
 			*(int*) (p + 0x84) = cm_SendSetHE(-1, p);
@@ -67,7 +67,7 @@ void __cdecl d2_StartEntfuehrungDialog(char* building)
 	req.c = (*(int*)&g_666018);
 	req.d = g_66601c;
 	io_FormatTextBuffer(text, 0x19b8);
-	fcn_0052a0c0(building, 0);
+	d2_InitPlayerBar(building, 0);
 	d2_OpenTargetPicker(&req, text, 0, (void*) d2_RunEntfuehrungDialog);
 	d2_RestoreHudAfterDialog();
 	d3_EndCameraAndUiMode();

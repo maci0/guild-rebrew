@@ -1,5 +1,5 @@
 void* __cdecl d3_CreateObjectMesh(char* e);
-void __cdecl fcn_00435910(char* a0, int a1, int a2, int* a3);
+void __cdecl d3_BlendMeshVertices(char* a0, int a1, int a2, int* a3);
 
 /* ADDRESS: GOLDTL 0x00436930 */
 void* __cdecl d3_GetObjectMesh(char* sceneObject, int* out)
@@ -28,7 +28,7 @@ void* __cdecl d3_GetObjectMesh(char* sceneObject, int* out)
 			v1 = *(char**) (sceneObject + 0x318); v2 = *(char**) (v1 + 0x268);
 			if (v2 != 0) {
 				if (((int (__stdcall*) (void*, int, void**)) *(void**) (*(int*) v2 + 0x38)) (v2, 0x2000, (void**) &buf) >= 0) {
-					fcn_00435910(sceneObject, *(int*) (v1 + 0x29c), buf, out);
+					d3_BlendMeshVertices(sceneObject, *(int*) (v1 + 0x29c), buf, out);
 					((void (__stdcall*) (void*)) *(void**) (*(int*) v2 + 0x3c)) (v2);
 				}
 				r = v2;

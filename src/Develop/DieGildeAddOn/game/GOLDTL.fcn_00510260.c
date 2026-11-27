@@ -8,7 +8,7 @@ float __cdecl gm_GetEntityHealthRatio(char* e);
 float __cdecl gm_CalcAvgEntityFavor(int k, int n, int* ids);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x00510260 */
-float __cdecl fcn_00510260(unsigned char* buildingData, int countArg, int idsAddress)
+float __cdecl gm_CalcBuildingProductivity(unsigned char* buildingData, int countArg, int idsAddress)
 {
 	float a;
 	float f;

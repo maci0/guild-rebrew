@@ -7,7 +7,7 @@ int __cdecl fcn_0051e070(void);
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(int, int);
 char* __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_00597ec0(char*);
+void __cdecl d2_OpenContactEinkaufPanel(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
@@ -75,7 +75,7 @@ ready:
 
 
 	for (;;) {
-		fcn_00597ec0(app);
+		d2_OpenContactEinkaufPanel(app);
 		if ((g_7746d8 & 0x200) != 0) {
 			first = RegisterStatusText(g_6a956c, g_14ad100, 0x15);
 			second = RegisterStatusText(g_6a9580, g_14ad0f0, 0xe);

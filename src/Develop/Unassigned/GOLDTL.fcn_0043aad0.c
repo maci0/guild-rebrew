@@ -11,7 +11,7 @@ void __cdecl fcn_00449f90(char* o, int a, char* name);
 void __cdecl d3_InvalidateSubTreeFlags(char* o, int a);
 
 /* ADDRESS: GOLDTL 0x0043aad0 */
-char __cdecl fcn_0043aad0(char* o, SCENE_PROGRESS_CONTEXT* cb)
+char __cdecl d3_ReloadObjectResourcesCallback(char* o, SCENE_PROGRESS_CONTEXT* cb)
 {
 	char* ext;
 	int len;

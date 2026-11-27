@@ -20,15 +20,15 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DestroyElement(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00534160(int, int, int, int);
+void __cdecl d2_DrawSegmentedBar(int, int, int, int);
 int __cdecl d2_AddWindowField(int, int, int, int, int);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_00507c30(int);
+int __cdecl gm_MapEntityToCategorySlot(int);
 void __cdecl d2_AddDisplayCounter(int, int);
 float __cdecl gm_GetEntityHealthRatio(int);
 
@@ -84,9 +84,9 @@ unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int for
 		io_AppendText(0x6ac790, *(unsigned short*) g_7774a0[i].entity,
 			(int) (gm_GetEntityHealthRatio(g_7774a0[i].entity) * 100.0));
 		io_AppendText(0x16ac);
-		fcn_00534160(0x50, 0x16, *(unsigned char*) (g_7774a0[i].entity + 0x83), 0x4f1);
+		d2_DrawSegmentedBar(0x50, 0x16, *(unsigned char*) (g_7774a0[i].entity + 0x83), 0x4f1);
 		io_AppendText(0x16ad);
-		fcn_00534160(0x50, 0x25, *(unsigned char*) (g_7774a0[i].entity + 0x82), 0x4f1);
+		d2_DrawSegmentedBar(0x50, 0x25, *(unsigned char*) (g_7774a0[i].entity + 0x82), 0x4f1);
 		item = fcn_00502cd0(*(int*) (g_7774a0[i].entity + 0x178), 1, 5);
 		while (item) {
 			if ((char)((OBJECT_PROTOTYPE*)lpObjektePROT)[*item].kind != '\t') {
@@ -106,7 +106,7 @@ unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int for
 				g_7774a0[i].item[j].objekt_id = *item;
 			present:
 				v = d2_GetControlValue(g_7774a0[i].item[j].button);
-				fcn_00472380(g_7774a0[i].item[j].button, 0, *(int*) ((char*) item + 0xe), v);
+				d2_CreateGuiWindow(g_7774a0[i].item[j].button, 0, *(int*) ((char*) item + 0xe), v);
 			}
 			item = gm_NextEntityQueryMatch();
 		}
@@ -114,7 +114,7 @@ unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int for
 	for (list = (int*) 0x7e4260; (int) list < 0x7e42e0; list++) {
 		if (!*list)
 			continue;
-		k = fcn_00507c30(*(unsigned char*) (*list + 0x165));
+		k = gm_MapEntityToCategorySlot(*(unsigned char*) (*list + 0x165));
 		if (k < 10 || k > 12)
 			continue;
 		for (i = 0; i < 32; i++) {

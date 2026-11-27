@@ -8,7 +8,7 @@ int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_CountBuildingExtensions(char*);
 int __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_004a5340(int*, int, int*, int, float, unsigned short*);
+int __cdecl ai_SelectRankedCandidates(int*, int, int*, int, float, unsigned short*);
 int __cdecl ai_CollectEligibleEntities(int*, int, int, float, float, int, unsigned short*);
 int __cdecl amt_GetRoleLevel(unsigned char);
 
@@ -65,7 +65,7 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 		if (v12 != 0 && v6 != 0) {
 			v4 = (unsigned int*) 0xf00500;
 
-			if (fcn_004a5340((int*) entity, 1, (int*) &v4, 0,
+			if (ai_SelectRankedCandidates((int*) entity, 1, (int*) &v4, 0,
 			                 (float) (gm_RandomMod(0x20) & 0xffff) + 25.0f,
 			                 (unsigned short*) &v8) != 0) {
 				a2 = (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[v8 & 0xffff]));

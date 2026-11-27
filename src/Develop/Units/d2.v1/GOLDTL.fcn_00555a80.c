@@ -25,7 +25,7 @@ extern int g_100f1dc;
 int __cdecl gm_CompareGameTime(char* name, char* list);
 void __cdecl fcn_00545780(Panel* p);
 void __cdecl he_FreeAction(Panel* p);
-void __cdecl fcn_00545670(Panel* p, int a1, int a2, char* fmt, int a4);
+void __cdecl d2_CreateActionPopupSlot(Panel* p, int a1, int a2, char* fmt, int a4);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a1);
 void __cdecl io_AppendText(int a0);
@@ -87,7 +87,7 @@ void __cdecl d2_HandleTalentLevelDialog(Panel* p)
 	return;
 open:
 	if (p->handle == 0) {
-		fcn_00545670(p, 0, 0, (char*) 0x6a5ec4, 0x5ec);
+		d2_CreateActionPopupSlot(p, 0, 0, (char*) 0x6a5ec4, 0x5ec);
 	}
 	if (p->handle == 0) {
 		he_FreeAction(p);

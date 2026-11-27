@@ -7,7 +7,7 @@ extern int g_1042a20;
 extern int g_1043290;
 
 /* ADDRESS: GOLDTL 0x00456400 */
-void __cdecl d3_SetupLeftEdgeStep(int i, int j)
+void __cdecl d3_SetupLeftEdgeStep(int topIdx, int botIdx)
 {
 	int y0;
 	int x0;
@@ -18,18 +18,18 @@ void __cdecl d3_SetupLeftEdgeStep(int i, int j)
 	int sz;
 	int span;
 
-	x0 = g_1043030[i];
-	y0 = g_1043040[i];
+	x0 = g_1043030[topIdx];
+	y0 = g_1043040[topIdx];
 
-	dy = g_1043040[j] - y0;
+	dy = g_1043040[botIdx] - y0;
 	if (dy < 0x10000) {
-		slope = 0x40000000 / dy; z0 = g_10425f0[i];
-		sx = (g_1043030[j] - x0 * slope) >> 14;
-		g_1042a1c = sx; sz = (g_10425f0[j] - z0 * slope) >> 14;
+		slope = 0x40000000 / dy; z0 = g_10425f0[topIdx];
+		sx = (g_1043030[botIdx] - x0 * slope) >> 14;
+		g_1042a1c = sx; sz = (g_10425f0[botIdx] - z0 * slope) >> 14;
 	}
 	else {
-		sx = (int) (((__int64) g_1043030[j] - x0) * 0x10000 / dy);
-		z0 = g_10425f0[i]; g_1042a1c = sx; sz = (int) (((__int64) g_10425f0[j] - z0) * 0x10000 / dy);
+		sx = (int) (((__int64) g_1043030[botIdx] - x0) * 0x10000 / dy);
+		z0 = g_10425f0[topIdx]; g_1042a1c = sx; sz = (int) (((__int64) g_10425f0[botIdx] - z0) * 0x10000 / dy);
 	}
 
 	g_1042a0c = sz;

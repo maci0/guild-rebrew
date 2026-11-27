@@ -56,7 +56,7 @@ extern char* g_7746c0;
 int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
 float* __stdcall D3DXMatrixTranspose(float* out, float* in);
 void __cdecl d3_TransformPoint(char* src, char* pos, Vec3* out);
-float __cdecl fcn_00413d10(Vec3* p);
+float __cdecl d3_SampleAverageTerrainHeight(Vec3* p);
 void __cdecl d3_FreeObjectAnimation(View* v);
 void __cdecl d3_SetNodePosition(View* v, Vec3* p);
 void __cdecl d3_SetObjectRotation(View* v, Vec3* r);
@@ -94,7 +94,7 @@ void __cdecl d3_SnapCameraToEntity(Ent* entity)
 	q.x = p.x + off.x;
 	q.y = p.y + off.y;
 	q.z = p.z + off.z;
-	h = fcn_00413d10((Vec3*) &q);
+	h = d3_SampleAverageTerrainHeight((Vec3*) &q);
 	q.y = ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558) + h;
 	d.y = q.y - p.y;
 	d3_GetObjectVerticalBounds(obj, &lo, &hi);
@@ -107,7 +107,7 @@ void __cdecl d3_SnapCameraToEntity(Ent* entity)
 	d3_FreeObjectAnimation((View*)d3_ActiveCamera);
 	d3_ActiveCameraAnimation = 0;
 	d3_CameraAnimating = 0;
-	h2 = fcn_00413d10((Vec3*) &q);
+	h2 = d3_SampleAverageTerrainHeight((Vec3*) &q);
 	q.y = ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558) + h2;
 	d3_CameraTargetRotation[0] = rot.x;
 	d3_CameraTargetRotation[1] = rot.y;

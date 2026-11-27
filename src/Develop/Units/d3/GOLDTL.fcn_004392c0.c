@@ -1,8 +1,8 @@
 #include "client_types.h"
-typedef Slot_1043340 Slot_4392c0;
+typedef Slot_1043340 D3_SCENE_CONTEXT_SLOT;
 // SIZE 0x3dc
 
-typedef void (__cdecl* node_fn_4392c0)(char* node);
+typedef void (__cdecl* D3_NODE_CLEANUP_FN)(char* node);
 
 extern char g_6b8018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -23,7 +23,7 @@ void __cdecl d3_InitRenderVertexBuffer(void);
 void __cdecl d3_ShutdownTextures(void);
 
 /* ADDRESS: GOLDTL 0x004392c0 */
-void __cdecl fcn_004392c0(void)
+void __cdecl d3_ResetScene(void)
 {
 	int saved;
 	int i;
@@ -77,7 +77,7 @@ void __cdecl fcn_004392c0(void)
 	d3_ReleaseRenderVertexBuffer();
 	d3_InitRenderVertexBuffer();
 	while (g_1042c38 != g_1042d00) {
-		(*(node_fn_4392c0*) (g_1042c38 + 0x1ec))(g_1042c38);
+		(*(D3_NODE_CLEANUP_FN*) (g_1042c38 + 0x1ec))(g_1042c38);
 	}
 	while (g_1042320 != g_1052a40) {
 		d3_ReleaseAnim(g_1042320, 1);

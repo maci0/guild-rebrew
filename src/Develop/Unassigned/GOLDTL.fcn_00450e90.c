@@ -7,8 +7,8 @@ typedef struct {
 	int pad;
 } D3_LIGHT_SORT_ENTRY;
 
-typedef struct SceneLight450e90 SceneLight450e90;
-struct SceneLight450e90 {
+typedef struct D3_SCENE_LIGHT_NODE D3_SCENE_LIGHT_NODE;
+struct D3_SCENE_LIGHT_NODE {
 	char pad0[0x5c];
 	float r;
 	float g;
@@ -22,7 +22,7 @@ struct SceneLight450e90 {
 	float y;
 	float z;
 	char pad3[0xc];
-	SceneLight450e90* next;
+	D3_SCENE_LIGHT_NODE* next;
 };
 
 typedef struct {
@@ -30,10 +30,10 @@ typedef struct {
 	float y;
 	float z;
 	float w;
-} Probe450e90;
+} D3_LIGHT_PROBE_VEC;
 
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
-typedef int (__stdcall* Device450e90Fn)(D3D_DEVICE_VIEW*, int, int);
+typedef int (__stdcall* D3D8_ENABLE_LIGHT_FN)(D3D_DEVICE_VIEW*, int, int);
 
 
 
@@ -53,14 +53,14 @@ extern void* g_6b86e8;
 extern int g_6b8704;
 extern int g_6b8708;
 
-int __cdecl fcn_00451120(float*, float*);
-void __cdecl fcn_00451150(int, char*, float, float*, float*);
+int __cdecl d3_CompareLightWeightDesc(float*, float*);
+void __cdecl d3_SetupD3DLight(int, char*, float, float*, float*);
 
 /* ADDRESS: GOLDTL 0x00450e90 */
 void __cdecl d3_SelectActiveObjectLights(float radius, float scale, char* probes, float* dirMat, float* posMat)
 {
-	SceneLight450e90* light;
-	Probe450e90* probe;
+	D3_SCENE_LIGHT_NODE* light;
+	D3_LIGHT_PROBE_VEC* probe;
 	float acc;
 	float dist;
 	float dx;
@@ -79,14 +79,14 @@ void __cdecl d3_SelectActiveObjectLights(float radius, float scale, char* probes
 		return;
 	}
 	g_6b8708 = 0;
-	for (light = (SceneLight450e90*) g_6b86e4; light != 0 && g_6b8708 < g_6b8704; light = light->next) {
+	for (light = (D3_SCENE_LIGHT_NODE*) g_6b86e4; light != 0 && g_6b8708 < g_6b8704; light = light->next) {
 		((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].e = (char*) light;
 		((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].value = g_67bc1c * light->power * scale + 3.402823466e+38F;
 		((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].pad = 0;
 		g_6b8708++;
 	}
-	probe = (Probe450e90*) probes;
-	for (light = (SceneLight450e90*) g_6b86e8; light != 0 && g_6b8708 < g_6b8704; light = light->next) {
+	probe = (D3_LIGHT_PROBE_VEC*) probes;
+	for (light = (D3_SCENE_LIGHT_NODE*) g_6b86e8; light != 0 && g_6b8708 < g_6b8704; light = light->next) {
 		acc = 0.0f;
 		for (i = 0; i < 9; i++) {
 			dx = probe[i].x - light->x;
@@ -115,18 +115,18 @@ void __cdecl d3_SelectActiveObjectLights(float radius, float scale, char* probes
 			g_6b8708++;
 		}
 	}
-	qsort((D3_LIGHT_SORT_ENTRY*) g_1041d04, g_6b8708, 0xc, (int (__cdecl*)(const void*, const void*)) fcn_00451120);
+	qsort((D3_LIGHT_SORT_ENTRY*) g_1041d04, g_6b8708, 0xc, (int (__cdecl*)(const void*, const void*)) d3_CompareLightWeightDesc);
 	if (g_6b8708 < d3_MaxActiveLights) {
 		n = g_6b8708;
 	} else {
 		n = d3_MaxActiveLights;
 	}
 	for (i = n; i < d3_MaxActiveLights; i++) {
-		((Device450e90Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[8])((D3D_DEVICE_VIEW*)g_6b5de0, i, 0);
+		((D3D8_ENABLE_LIGHT_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[8])((D3D_DEVICE_VIEW*)g_6b5de0, i, 0);
 	}
 	for (i = 0; i < n; i++) {
-		fcn_00451150(sign + i, ((D3_LIGHT_SORT_ENTRY*) g_1041d04)[i].e, scale, dirMat, posMat);
-		((Device450e90Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[8])((D3D_DEVICE_VIEW*)g_6b5de0, i, 1);
+		d3_SetupD3DLight(sign + i, ((D3_LIGHT_SORT_ENTRY*) g_1041d04)[i].e, scale, dirMat, posMat);
+		((D3D8_ENABLE_LIGHT_FN) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[8])((D3D_DEVICE_VIEW*)g_6b5de0, i, 1);
 	}
 }
 unsigned char _dpad_1041d04[1180];

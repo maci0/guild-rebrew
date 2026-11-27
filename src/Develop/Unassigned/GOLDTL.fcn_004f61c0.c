@@ -1,7 +1,7 @@
 int __cdecl FindStraftatIndexById(int key);
 
 /* ADDRESS: GOLDTL 0x004f61c0 */
-int __cdecl fcn_004f61c0(int* groupIds, int* flagCounts, int* totals, unsigned int entityIndex)
+int __cdecl gm_CollectEntityCrimesByGroup(int* groupIds, int* flagCounts, int* totals, unsigned int entityIndex)
 {
 	int found[0x200];
 	int* vp;

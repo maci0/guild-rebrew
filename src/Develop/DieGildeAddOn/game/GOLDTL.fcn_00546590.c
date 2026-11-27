@@ -35,8 +35,8 @@ extern float g_662d70[4];
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
 char* __cdecl fcn_00442910(int parent, float* pos, float* dir, char* name);
-void __cdecl fcn_0043a3f0(char* a, char* b, COLOR546590 c);
-void __cdecl fcn_00414be0(char* p, unsigned char r, unsigned char g, unsigned char b);
+void __cdecl d3_ChangeObjectTransparency(char* a, char* b, COLOR546590 c);
+void __cdecl d3_SetObjectColorRgb(char* p, unsigned char r, unsigned char g, unsigned char b);
 int __cdecl d3_CreateObjectAnimation(char* obj, FLAGS546590 fl, int n, FRAME546590* frames);
 int __cdecl he_ArrangeEntityMarkers(char* entity);
 
@@ -66,8 +66,8 @@ char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char*
 		color.f1 = 0;
 		color.f0 = 1;
 		color.r = 0x80;
-		fcn_0043a3f0(obj, *(char**) (obj + 0x1cc), color);
-		fcn_00414be0(obj, 0xc0, 0xa0, 0x80);
+		d3_ChangeObjectTransparency(obj, *(char**) (obj + 0x1cc), color);
+		d3_SetObjectColorRgb(obj, 0xc0, 0xa0, 0x80);
 		memset(&flags, 0, sizeof(flags));
 		flags.e = 1;
 		frames[0].id = 0x8c0;

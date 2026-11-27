@@ -5,7 +5,7 @@ extern unsigned char g_773d75;
 int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x004f0ff0 */
-int __cdecl fcn_004f0ff0(char* obj, int a1, int a2, int a3, int* out1, int* out2)
+int __cdecl gm_CanFireCannonShot(char* obj, int a1, int a2, int a3, int* out1, int* out2)
 {
 	int c1;
 	int c2;

@@ -42,7 +42,7 @@ int __cdecl gm_ApplyRandomDisease(char*, int*, float*);
 float __cdecl gm_GetEntityHealth(char*);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
 int __cdecl he_IsEntityEligibleForIllness(unsigned short*);
-void __cdecl fcn_005498b0(char*, char*, char*, char*, int, float);
+void __cdecl he_ResolveAccidentOutcome(char*, char*, char*, char*, int, float);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_FreeAction(char*);
@@ -120,7 +120,7 @@ void __cdecl RunSimKrankheiten(char* s)
 					home2 = g_7f4ca0[idx].home2;
 					if (home2 != 0 && *(unsigned short*) (home2 + 0x27) != 0xffff
 					    && (q = (unsigned char*) &g_7f4ca0[*(unsigned short*) (home2 + 0x27)]) != 0) {
-						fcn_005498b0(s, (char*) p, (char*) q, home2, r, g);
+						he_ResolveAccidentOutcome(s, (char*) p, (char*) q, home2, r, g);
 					} else {
 						if (g < gm_GetEntityHealth((char*) p)
 						    && (g_7f4ca0[idx].type == 6 || g_7f4ca0[idx].type == 7)) {

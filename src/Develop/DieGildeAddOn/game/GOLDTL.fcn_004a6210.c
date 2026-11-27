@@ -24,16 +24,16 @@ extern float g_6660f4;
 extern unsigned char g_773d75;
 
 int __cdecl gm_LookupSlot170ByKey(int);
-int __cdecl fcn_004a6160(char*, void*, int, void*);
+int __cdecl gm_GetCannonShotEndpoints(char*, void*, int, void*);
 void __cdecl gm_GetArtilleryLimits(char*, int*, int*);
-void __cdecl fcn_004f0f60(int, void*);
+void __cdecl gm_ComputeCannonShotStats(int, void*);
 float __cdecl gm_GetCannonPowerScale(char*);
 int __cdecl fcn_005e8de0(float, float, float*);
 void __cdecl d3_CalcSpeedRangeFromMass(float, float, char*, float*);
-int __cdecl fcn_005ea4d0(void*, void*, void*, void*, void*, void*, void*, void*, void*);
+int __cdecl gm_SolveBallisticTrajectory(void*, void*, void*, void*, void*, void*, void*, void*, void*);
 int __cdecl _ftol(void);
-float __cdecl fcn_004f0eb0(int, int, int);
-int __cdecl fcn_004f0ff0(int, int, int, int, void*, void*);
+float __cdecl gm_CalcArtilleryVolleyCost(int, int, int);
+int __cdecl gm_CanFireCannonShot(int, int, int, int, void*, void*);
 int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 
@@ -73,10 +73,10 @@ int __cdecl gm_ComputeCannonShot(char* actor, char* building, int targetEnt)
 	g_77284c = -1;
 	p = (int*) gm_LookupSlot170ByKey(*(int*) (building + 1));
 	if (p == 0) return 0;
-	if (fcn_004a6160(building, origin, targetEnt, target) != 0) return 0;
+	if (gm_GetCannonShotEndpoints(building, origin, targetEnt, target) != 0) return 0;
 	gm_GetArtilleryLimits(building, &row, &col);
 	col = gm_RandomMod(col + 1) & 0xffff;
-	fcn_004f0f60(col, profile);
+	gm_ComputeCannonShotStats(col, profile);
 	if (*(int*) (actor + 0x194) < profile[1]) return 0;
 	value.level = gm_GetCannonPowerScale(building);
 	row = gm_RandomMod(row + 1) & 0xffff;
@@ -88,12 +88,12 @@ int __cdecl gm_ComputeCannonShot(char* actor, char* building, int targetEnt)
 	bounds[1] = range[1];
 	bounds[2] = -0.2617994f;
 	bounds[3] = 0.7853982f;
-	if (fcn_005ea4d0(origin, target, bounds, &angle, &other, &trajectory,
+	if (gm_SolveBallisticTrajectory(origin, target, bounds, &angle, &other, &trajectory,
 		velocity, direction, normal) != 0) return 0;
 	state = (int) ((trajectory - bounds[0]) * 100.0f / (bounds[1] - bounds[0]));
-	spread = fcn_004f0eb0(col, state, row + 1);
+	spread = gm_CalcArtilleryVolleyCost(col, state, row + 1);
 	if (spread > *(float*) (p + 2 + row)) return 0;
-	if (fcn_004f0ff0((int) actor, col, state, row + 1, &res.amount, &res.cost) == 0) return 0;
+	if (gm_CanFireCannonShot((int) actor, col, state, row + 1, &res.amount, &res.cost) == 0) return 0;
 	value.cash = gm_SumQueryEntryValues(*(int*) (actor + 0x178), g_773d75);
 	if ((int) (value.cash * 0.25f) < res.cost) return 0;
 	g_772850 = origin[0];

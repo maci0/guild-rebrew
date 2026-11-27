@@ -20,14 +20,14 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, int, int, int);
-int __cdecl fcn_005c8400(void);
+int __cdecl d2_RunGeldInfoDialog(void);
 int __cdecl d2_CreateGebaeudeListPanel(void);
 int __cdecl d2_RunMeisterListeDialog(void);
 int __cdecl d2_CreateRadioGroup(int, int, int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetFormVisibility(int, int);
-void __cdecl fcn_005a5440(int, char*, int, int, int);
+void __cdecl d2_PopulateInventoryGrid(int, char*, int, int, int);
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d2_ShowBuildingStatsDetail(int);
 int __cdecl d2_GetFormWindow(int, int);
@@ -74,7 +74,7 @@ void __cdecl d2_OpenPlayerStats(void)
 	d2_InitWindowBounds(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(save, 3);
 	d2_CreateButtonRow(*(int*) &d2_CurrentWindowId, 0, out, 3, *(int*) 0x14b5294, *(int*) 0x14b5298, *(int*) 0x14b529c);
-	firstWindow = fcn_005c8400();
+	firstWindow = d2_RunGeldInfoDialog();
 	v3 = d2_CreateGebaeudeListPanel();
 	v4 = d2_RunMeisterListeDialog();
 	idx = d2_CreateRadioGroup(3, out[0], out[1], out[2]);
@@ -104,7 +104,7 @@ void __cdecl d2_OpenPlayerStats(void)
 		}
 		if (firstWindow != -1) {
 			d2_SetForm(firstWindow, 1);
-			fcn_005a5440(*(int*) (0x7f4e18 + (*(unsigned short*) &g_774970) * 0x21c), (char*) 0x776aa0, firstWindow, 1, 0);
+			d2_PopulateInventoryGrid(*(int*) (0x7f4e18 + (*(unsigned short*) &g_774970) * 0x21c), (char*) 0x776aa0, firstWindow, 1, 0);
 		}
 		if (v3 != -1 && *(int*) &g_100f1dc != -1) {
 			for (i = 0; i < g_775338; i++) {

@@ -6,7 +6,7 @@ void __cdecl gm_AdvanceGameClock(void);
 #include "client_timer.h"
 void __cdecl ch_SetAnimationPaused(char*, int);
 
-void __cdecl fcn_004e5980(void)
+void __cdecl cut_PauseWorldAndCharacters(void)
 {
 	char** p;
 

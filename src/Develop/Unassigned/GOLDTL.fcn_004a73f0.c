@@ -16,7 +16,7 @@ typedef struct Hand {
 #include "client_types.h"
 extern Card_1007ce0 g_1007ce0[24];
 
-int __cdecl fcn_004a73f0(Hand* in, Hand* out, int disabled)
+int __cdecl gm_FindCardHighStraight(Hand* in, Hand* out, int disabled)
 {
 	int swapped;
 	int k;

@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004f17f0 */
-int __cdecl fcn_004f17f0(char* a1, char* a2)
+int __cdecl gv_MatchEntityGraveyardSlot(char* a1, char* a2)
 {
 	unsigned short v;
 

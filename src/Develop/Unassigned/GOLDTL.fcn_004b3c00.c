@@ -10,18 +10,18 @@ typedef struct {
 	int f18;
 	int f1c;
 	char f20;
-} fcn_004b3c00_rec;
+} MISSION_RECORD;
 
 
 extern pos14_7f4c00 gm_GameTime;
 
-fcn_004b3c00_rec* __cdecl gm_FindMissionByEntityId(int);
+MISSION_RECORD* __cdecl gm_FindMissionByEntityId(int);
 
 
 /* ADDRESS: GOLDTL 0x004b3c00 */
-fcn_004b3c00_rec* __cdecl fcn_004b3c00(int a)
+MISSION_RECORD* __cdecl gm_ResetMissionEntry(int a)
 {
-	fcn_004b3c00_rec* p;
+	MISSION_RECORD* p;
 
 	p = gm_FindMissionByEntityId(a);
 	if (p != 0) {

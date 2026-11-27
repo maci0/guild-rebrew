@@ -4,7 +4,7 @@ typedef struct
 {
 	char used;
 	char pad[0x2f3];
-} Rec2f4;
+} TOWN_RECORD_2F4;
 // SIZE 0x2f4
 
 extern char g_868060[];
@@ -13,12 +13,12 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_UpdateTownSeasonPrices(int, char*);
 
-void __cdecl fcn_005016c0(void)
+void __cdecl gm_UpdateAllTownSeasonPrices(void)
 {
 	int i;
 
 	for (i = 0; i < 4; i++) {
-		if (((Rec2f4*)g_868060)[i].used == 0) {
+		if (((TOWN_RECORD_2F4*)g_868060)[i].used == 0) {
 			break;
 		}
 		gm_UpdateTownSeasonPrices(i, ((char*)&gm_GameTime));

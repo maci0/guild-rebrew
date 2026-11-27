@@ -30,7 +30,7 @@ int __cdecl d3_AcquireModel(char*, char*);
 int __cdecl sb_LoadSampleBank(char*, int);
 void __cdecl msx_SetFadeDuration(int);
 void __cdecl d2_CreateEventBar(void);
-void __cdecl fcn_00533880(void);
+void __cdecl d3_ClearSceneObjectCache(void);
 void __cdecl fcn_005338a0(void);
 void __cdecl fcn_005c80c0(void);
 void __cdecl gm_AllocAmbientAnimals(void);
@@ -66,7 +66,7 @@ void __cdecl gm_InitGameSession(void)
 	}
 	msx_SetFadeDuration(3000);
 	d2_CreateEventBar();
-	fcn_00533880();
+	d3_ClearSceneObjectCache();
 	fcn_005338a0();
 	g_774978 = 0;
 	(*(int*)&g_7e2aa0) = 0;

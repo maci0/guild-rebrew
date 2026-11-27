@@ -18,7 +18,7 @@ void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(void*, ...);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_SetGroupVisibility(int, int);
 int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl gm_GetRangeStatId(int, int);
@@ -117,7 +117,7 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
                              (*(char*) (entOffset + 0x7f4ca9) ? 0x18f : 0x130)
                                  + *(unsigned char*) (entOffset + 0x7f4e04)
                                  - 1);
-                fcn_00526120((int) buf, 4);
+                d2_ShowModalMessageBox((int) buf, 4);
             } else {
                 d2_SetGroupVisibility(dialog, 0);
                 for (idx = 0; idx <= 0xf; idx++) {
@@ -142,7 +142,7 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
                                 padOrProf = gm_GetRangeStatId(idx + 1, 1);
                             }
                             io_FormatTextBuffer(promptBuf, 0x1d37, -apDelta, padOrProf + textBase);
-                            if (fcn_00526120((int) promptBuf, 1)) {
+                            if (d2_ShowModalMessageBox((int) promptBuf, 1)) {
                                 cm_RequestSetEntityLevel(*(int*) ((char*) actor + 4), padOrProf);
                                 cm_RequestModifyHealth(*(int*) ((char*) actor + 4), apDelta);
                                 g_774654 = 1;

@@ -19,14 +19,14 @@ int __cdecl d2_CheckActionBlocker(void*, int);
 int __cdecl he_HasNoActiveAction0x88(void*, void*);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d2_LoadForm(int, int, void*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_005c9220(int*);
+int __cdecl d2_DrawLawCandidateStatus(int*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_RequestModifyHealth(int id, int k);
@@ -59,14 +59,14 @@ int __cdecl d2_RunStraftatAccuseDialog(unsigned short* entityRecord)
 		return 0;
 	if (!he_HasNoActiveAction0x88(entityRecord, &g_7f4ca0[g_774970])) {
 		io_FormatTextBuffer(text, 0x409f, *entityRecord);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
 	me = &g_7f4ca0[g_774970];
 	r = CountMatchingStraftatEntries(*(int*) (entityRecord + 2), g_774970);
 	if (r <= 0) {
 		io_FormatTextBuffer(text, 0x1756, *entityRecord);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
 	if (!d2_CheckActionBlocker(&g_7f4ca0[g_774970], 2))
@@ -85,7 +85,7 @@ int __cdecl d2_RunStraftatAccuseDialog(unsigned short* entityRecord)
 	ids[3] = 4;
 	ids[4] = 4;
 	ids[5] = 0x13;
-	fcn_005c9220(ids);
+	d2_DrawLawCandidateStatus(ids);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -106,7 +106,7 @@ int __cdecl d2_RunStraftatAccuseDialog(unsigned short* entityRecord)
 				} else {
 					io_FormatTextBuffer(text, 0x175c, *entityRecord, *entityRecord);
 				}
-				fcn_00526120(text, 0);
+				d2_ShowModalMessageBox(text, 0);
 				g_774654 = 1;
 				result = 1;
 			} else if (d2_CurrentElementId == h2) {

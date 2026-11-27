@@ -25,7 +25,7 @@ struct IDev {
 };
 
 void __cdecl d3_NormalizeVector(float* v);
-void __cdecl fcn_004372d0(int, int, int, int, int);
+void __cdecl d3_SetRenderMaterialState(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00440870 */
 void __cdecl d3_RenderFloorCellWater(char* o, char* c)
@@ -178,7 +178,7 @@ void __cdecl d3_RenderFloorCellWater(char* o, char* c)
 	for (i = 0; i < *(int*) (c + 0x1a8); i++) {
 		ent = *(char**) (*(char**) (c + 0x1b4) + i * 0x14 + 0x10);
 		obj = *(char**) (ent + 4);
-		fcn_004372d0(*((unsigned char*) ent + 8), *((unsigned char*) ent + 0xa) & 1, 0,
+		d3_SetRenderMaterialState(*((unsigned char*) ent + 8), *((unsigned char*) ent + 0xa) & 1, 0,
 		             (*((unsigned char*) ent + 0xa) >> 1) & 1, 0);
 		((IDev*) *(void**) 0x6b5de0)->v->f_c8((IDev*) *(void**) 0x6b5de0, 0x2f, 0);
 		((IDev*) *(void**) 0x6b5de0)->v->f_f4((IDev*) *(void**) 0x6b5de0, 0, *(int*) (obj + 0x50));

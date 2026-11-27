@@ -34,14 +34,14 @@ extern char g_6a2e8c[];
 int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 int __cdecl gm_GetEntityRelation(int a, int b);
-int __cdecl fcn_00507c30(int k);
+int __cdecl gm_MapEntityToCategorySlot(int k);
 float __cdecl gm_GetEntityHealthRatio(char* e);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 int __cdecl d2_AddWindowValueGauge(int a, int b, int c, int d, int e, int f, int g, int h);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00534160(int x, int y, int v, int kind);
+void __cdecl d2_DrawSegmentedBar(int x, int y, int v, int kind);
 
 void __cdecl d2_OpenPersonInfoPanel(char* e)
 {
@@ -61,7 +61,7 @@ void __cdecl d2_OpenPersonInfoPanel(char* e)
 		rel = gm_GetEntityRelation(g_774970, *(unsigned short*) e);
 		kind = 0;
 		if (*(unsigned char*) (e + 0x165) != 0) {
-			kind = fcn_00507c30(*(unsigned char*) (e + 0x165));
+			kind = gm_MapEntityToCategorySlot(*(unsigned char*) (e + 0x165));
 		}
 		pct = (int) (gm_GetEntityHealthRatio(e) * 100.0);
 		io_FormatEntityNameMarkup(*(unsigned short*) e, 1, 4, buf);
@@ -76,9 +76,9 @@ void __cdecl d2_OpenPersonInfoPanel(char* e)
 		if (kind == 0xb || kind == 0xc || kind == 0xa) {
 			v = *(unsigned char*) (e + 0x82);
 			d2_AddElementToWindow(0x19, 0x7e, 0x5df, d2_CurrentWindowId);
-			fcn_00534160(0x29, 0x7e, v, 0x4f1);
+			d2_DrawSegmentedBar(0x29, 0x7e, v, 0x4f1);
 			d2_AddElementToWindow(0x19, 0x8c, 0x5e0, d2_CurrentWindowId);
-			fcn_00534160(0x29, 0x8c, *(unsigned char*) (e + 0x83), 0x4f1);
+			d2_DrawSegmentedBar(0x29, 0x8c, *(unsigned char*) (e + 0x83), 0x4f1);
 		}
 	}
 	else {

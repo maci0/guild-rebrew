@@ -46,7 +46,7 @@ char* __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_UpdateRadioGroup(int);
-int __cdecl fcn_004ce190(int);
+int __cdecl d3_GetSceneEntry(int);
 int __cdecl cm_RequestClearSceneEntries(void);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl fcn_004ce180(void);
@@ -148,7 +148,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 	for (p = 1; p < 9; p++) {
 		ent = (int*) g_774a34[p];
 		if (ent != 0) {
-			n = fcn_004ce190((int) ent);
+			n = d3_GetSceneEntry((int) ent);
 			if (n != 0) {
 				if (*(int*) n != 0 && (int*) n != g_779cb8) {
 					((D2_CONTROL_TL*)g_1015ea0)[ids[*(int*) (n + 0xc)]].disabled = 1;
@@ -173,7 +173,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 			for (p = 1; p < 9; p++) {
 				ent = (int*) g_774a34[p];
 				if (ent != 0) {
-					n = fcn_004ce190((int) ent);
+					n = d3_GetSceneEntry((int) ent);
 					if (n != 0) {
 						if (*(int*) n != 0 && (int*) n != g_779cb8) {
 							((D2_CONTROL_TL*)g_1015ea0)[ids[*(int*) (n + 0xc)]].disabled = 1;

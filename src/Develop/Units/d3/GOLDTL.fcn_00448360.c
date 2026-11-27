@@ -29,7 +29,7 @@ void __cdecl ReportClientMessage(const char* msg);
 void __cdecl d3_SetFog(float a, float b, int c);
 void __cdecl d3_SetNodePosition(char* object, int* vector);
 void __cdecl d3_SetObjectRotation(char* object, int* vector);
-char* __cdecl fcn_00437890(char* object);
+char* __cdecl d3_NextVisibleSceneNode(char* object);
 void __cdecl d3_DisposeObject(char* object);
 void __cdecl fcn_00439aa0(char* object);
 void __cdecl d3_SetActiveCamera(char* object);
@@ -210,7 +210,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 				fcn_00439aa0(clone);
 				break;
 			}
-			obj = fcn_00437890(obj);
+			obj = d3_NextVisibleSceneNode(obj);
 		}
 	}
 	if (g_6b8300 == 0) {

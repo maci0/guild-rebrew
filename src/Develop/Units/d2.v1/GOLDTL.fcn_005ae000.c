@@ -4,14 +4,14 @@ extern int g_100f1dc, g_14abaac, g_14ce8e0;
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl d2_CheckOwnerBlocked(char* obj);
-void __cdecl fcn_0052a0c0(char* obj, int a);
+void __cdecl d2_InitPlayerBar(char* obj, int a);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00529890(char* obj);
-void __cdecl fcn_00526120(int a, int b);
+void __cdecl d2_UpdateBuildingWorkerSlots(char* obj);
+void __cdecl d2_ShowModalMessageBox(int a, int b);
 void __cdecl cm_SendCopyEntityData(int a1);
 void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl sv_ClearObjectSelection(void);
@@ -21,7 +21,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 int __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x005ae000 */
-int __cdecl fcn_005ae000(char* obj)
+int __cdecl d2_ShowTaschendiebstahlDialog(char* obj)
 {
 	char packet[0xf8];
 	int* ids;
@@ -36,7 +36,7 @@ int __cdecl fcn_005ae000(char* obj)
 	if (r != 0) {
 		return r;
 	}
-	fcn_0052a0c0(obj, 0);
+	d2_InitPlayerBar(obj, 0);
 	dlg = d2_LoadForm(0, 0, "locations\\diebesgilde\\taschendiebstahl");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
@@ -48,7 +48,7 @@ int __cdecl fcn_005ae000(char* obj)
 	}
 	n = 0;
 	do {
-		fcn_00529890(obj);
+		d2_UpdateBuildingWorkerSlots(obj);
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
@@ -79,7 +79,7 @@ int __cdecl fcn_005ae000(char* obj)
 					sv_ClearObjectSelection();
 					g_774654 = 1;
 				} else {
-					fcn_00526120(g_14abaac, 0);
+					d2_ShowModalMessageBox(g_14abaac, 0);
 				}
 			} else if (g_100f1dc == 1) {
 				g_774654 = 1;

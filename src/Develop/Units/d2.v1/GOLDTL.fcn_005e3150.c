@@ -26,8 +26,8 @@ extern int g_100f1dc;
 extern char* g_7747b8;
 
 int __cdecl d2_LoadForm(int, int, char*);
-void __cdecl fcn_00537320(int);
-void __cdecl fcn_00471db0(int, int);
+void __cdecl d2_UpdateViewportCenter(int);
+void __cdecl d2_PositionFormWindows(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
@@ -70,8 +70,8 @@ void __cdecl d2_ShowSoundOptions(void)
 	playing = 0;
 	wait = main_LoopFlags & ~0x2000;
 	dlg = d2_LoadForm(0, 0, s_6ad2f8);
-	fcn_00537320(wait);
-	fcn_00471db0(dlg, 1);
+	d2_UpdateViewportCenter(wait);
+	d2_PositionFormWindows(dlg, 1);
 	fcn_00471d80(dlg, 2);
 	d2_SetForm(dlg, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);

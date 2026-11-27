@@ -11,10 +11,10 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl d3sm_SampleHeight(float*, float*, int*, int*, float*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_005b00f0(char*, int, int);
+void __cdecl d2_ProjectMapCoordToScreen(char*, int, int);
 void __cdecl fcn_005b00d0(int, int);
-void __cdecl fcn_00469c40(int, int, int);
-int __cdecl fcn_005cfd00(unsigned short*, int*, unsigned char*);
+void __cdecl d2_PositionControl(int, int, int);
+int __cdecl gm_IsActionAllowedForEntity(unsigned short*, int*, unsigned char*);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d2_UpdateWindowScroll(int);
@@ -135,7 +135,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 				d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
 				slot->x = bld_x;
 				slot->y = bld_y;
-				fcn_005b00f0((char*) slot, base_x, base_y);
+				d2_ProjectMapCoordToScreen((char*) slot, base_x, base_y);
 			} else {
 				g_cur_dir = g_town_dir(town);
 				g_cur_building = (char*) &g_1015f40[g_cur_dir];
@@ -160,7 +160,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 				((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_1cc = 0x56;
 				slot->x = bld_x - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].width / 2;
 				slot->y = bld_y - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].height / 2;
-				fcn_00469c40(*(int*) (g_cur_building + 4) + bld_x,
+				d2_PositionControl(*(int*) (g_cur_building + 4) + bld_x,
 				             *(int*) (g_cur_building + 8) + bld_y, slot->handle);
 				if (*obj == 'G') {
 					p = (char*) (*(int*) (obj + 0x65) * 0x2f4 + 0x868060);
@@ -236,9 +236,9 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 				}
 				slot->x = bld_x - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].width / 2;
 				slot->y = bld_y - ((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].height / 2;
-				fcn_00469c40(*(int*) (g_cur_building + 4) + bld_x,
+				d2_PositionControl(*(int*) (g_cur_building + 4) + bld_x,
 				             *(int*) (g_cur_building + 8) + bld_y, slot->handle);
-				if (!fcn_005cfd00((unsigned short*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]),
+				if (!gm_IsActionAllowedForEntity((unsigned short*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]),
 				                  (int*) (town + 0xc), (unsigned char*) slot->ent)) {
 					((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].value_05c = 0;
 					((D2_CONTROL_TL*) (g_1015ea0))[slot->handle].flags_1d0 = 0;
@@ -282,7 +282,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 				d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
 				tmp.x = bld_x;
 				tmp.y = bld_y;
-				fcn_005b00f0((char*) &tmp, base_x, base_y);
+				d2_ProjectMapCoordToScreen((char*) &tmp, base_x, base_y);
 				bld_x = (int) tmp.fx;
 				bld_y = (int) tmp.fy;
 				handle = d2_AddElementToWindow(bld_x, bld_y, 0x550, g_cur_dir);
@@ -309,7 +309,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 				d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
 				tmp.x = bld_x;
 				tmp.y = bld_y;
-				fcn_005b00f0((char*) &tmp, base_x, base_y);
+				d2_ProjectMapCoordToScreen((char*) &tmp, base_x, base_y);
 				bld_x = (int) tmp.fx;
 				bld_y = (int) tmp.fy;
 				*tab = d2_AddElementToWindow(bld_x, bld_y, 0x54f, g_cur_dir);
@@ -338,7 +338,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 	d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
 	tmp.x = bld_x;
 	tmp.y = bld_y;
-	fcn_005b00f0((char*) &tmp, base_x, base_y);
+	d2_ProjectMapCoordToScreen((char*) &tmp, base_x, base_y);
 	g_cur_dir = g_town_dir(town);
 	g_cur_building = (char*) &g_1015f40[g_town_dir(town)];
 	bld_x = (int) tmp.fx - *(int*) (g_cur_building + 0xc) / 2;

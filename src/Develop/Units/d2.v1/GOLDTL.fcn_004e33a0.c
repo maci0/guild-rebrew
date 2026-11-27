@@ -40,7 +40,7 @@ void __cdecl evt_StopScriptIfActive(int a);
 void __cdecl cut_DestroyActiveCharacter(int a);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl d3snd_StopTrackedVoices(void);
-void __cdecl fcn_004e4b00(int a);
+void __cdecl cut_UnloadSampleBank(int a);
 void __cdecl fcn_004e4eb0(void);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char kind, int amount);
 
@@ -331,8 +331,8 @@ void __cdecl cut_RunAuction(int* arg)
 		cut_DestroyActiveCharacter(auctioneer);
 	cut_CleanupCutscene();
 	d3snd_StopTrackedVoices();
-	fcn_004e4b00(bank_intro);
-	fcn_004e4b00(bank_bids);
-	fcn_004e4b00(bank_comments);
+	cut_UnloadSampleBank(bank_intro);
+	cut_UnloadSampleBank(bank_bids);
+	cut_UnloadSampleBank(bank_comments);
 	fcn_004e4eb0();
 }

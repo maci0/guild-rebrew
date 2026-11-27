@@ -31,7 +31,7 @@ extern unsigned char* lpGebaeudePROT;
 
 void __cdecl fcn_004f0930(int id);
 
-void __cdecl fcn_004f0da0(void)
+void __cdecl gm_PruneInvalidEntitySlots(void)
 {
 	int i;
 	unsigned char* r;

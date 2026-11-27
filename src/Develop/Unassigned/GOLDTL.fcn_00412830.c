@@ -4,7 +4,7 @@ extern int g_6b5c94;
 extern short g_14ce8c0;
 extern int g_14cf900[];
 
-void __cdecl fcn_00412830(unsigned char mask)
+void __cdecl io_ClearInputButtonFlags(unsigned char mask)
 {
 	if (g_6b5c94 != 0) {
 		if (mask & 0x1) {

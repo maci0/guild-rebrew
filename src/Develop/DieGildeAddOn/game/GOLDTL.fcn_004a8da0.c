@@ -9,7 +9,7 @@
 
 
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004a5340(int a, int n, int* lim, int a4, float r, unsigned short* ids);
+int __cdecl ai_SelectRankedCandidates(int a, int n, int* lim, int a4, float r, unsigned short* ids);
 
 /* ADDRESS: GOLDTL 0x004a8da0 */
 int __cdecl ai_CheckAction025Predicate(int unused1, int actor, int unused3, int unused4, char* out)
@@ -19,7 +19,7 @@ int __cdecl ai_CheckAction025Predicate(int unused1, int actor, int unused3, int 
 
 	lim[0] = 0xf00500;
 	lim[1] = 0xf00500;
-	if (!fcn_004a5340(actor, 2, lim, 0, (float) gm_RandomMod(0x40), ids)) {
+	if (!ai_SelectRankedCandidates(actor, 2, lim, 0, (float) gm_RandomMod(0x40), ids)) {
 		return 0;
 	}
 	out[0] = 7;

@@ -41,7 +41,7 @@ extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
-void __cdecl fcn_005091d0(int*, Entry*);
+void __cdecl gm_RankPlayers(int*, Entry*);
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
@@ -50,13 +50,13 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_005c9090(char*, int, int, int, int);
+void __cdecl d2_ShowCenteredText(char*, int, int, int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
-void __cdecl fcn_005c8440(void)
+void __cdecl d2_RunCompareDialog(void)
 {
 	int count;
 	int dlg;
@@ -76,7 +76,7 @@ void __cdecl fcn_005c8440(void)
 	cols[5] = 0xad;
 	cols[6] = 0xb3;
 	cols[7] = 0xb9;
-	fcn_005091d0(&count, list);
+	gm_RankPlayers(&count, list);
 	if (count == 0) {
 		return;
 	}
@@ -102,20 +102,20 @@ void __cdecl fcn_005c8440(void)
 		((Slot*)g_f8f080)[h].style = 3;
 		((Slot*)g_f8f080)[h].house = &((House*)g_7f4ca0)[list[i].id];
 		sprintf(text, s_6a9680, list[i].id);
-		fcn_005c9090(text, 0x36, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 0x22, 0x12c, 0x56);
+		d2_ShowCenteredText(text, 0x36, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 0x22, 0x12c, 0x56);
 		v = MIN(MAX(((House*)g_7f4ca0)[list[i].id].f54 - 0x59a, 0), 7);
 		h = d2_AddWindowValueGauge(0x5a, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 7, 0x12c, 0, 0x64,
 			cols[v], 0x42, d2_CurrentWindowId);
 		d2_SetElementValue(h, 0, 0x64, fl);
 		sprintf(text, s_67d444, list[i].f20);
-		fcn_005c9090(text, 0x1f4, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2), 0xc8, 0x55);
+		d2_ShowCenteredText(text, 0x1f4, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2), 0xc8, 0x55);
 	}
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005c8440, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunCompareDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);
 	fcn_0057e880(10, 0, 1, 0);
 }

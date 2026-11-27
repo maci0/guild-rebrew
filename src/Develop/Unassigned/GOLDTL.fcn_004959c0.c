@@ -1,9 +1,9 @@
 
 /* ADDRESS: GOLDTL 0x004959c0 */
-int __cdecl fcn_004959c0(int a1, int a2, int a3)
+int __cdecl ai_StartDummyFortpflanzung(int action, int entity, int phase)
 {
-	if (a1 != 0) {
+	if (action != 0) {
 		return 0;
 	}
-	return (a3 != 0) ? 0 : 8;
+	return (phase != 0) ? 0 : 8;
 }

@@ -21,7 +21,7 @@ typedef struct {
 	int f58;
 	int f5c;
 	char pad60[0x98];
-} Msg_5d5930;
+} D2_ERPRESSUNG_MSG;
 
 // SIZE 0x38
 typedef struct {
@@ -34,34 +34,34 @@ typedef struct {
 	int x2c;
 	int x30;
 	unsigned int x34;
-} Rec_5d5930;
+} D2_ERPRESSUNG_CRIME_REC;
 
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gs_CollectEvidenceForTarget(int, int*, unsigned short);
-int __cdecl fcn_004f61c0(int*, int*, int*, unsigned short);
+int __cdecl gm_CollectEntityCrimesByGroup(int*, int*, int*, unsigned short);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-int __cdecl cm_SendCopyEntityData(Msg_5d5930*);
+int __cdecl cm_SendCopyEntityData(D2_ERPRESSUNG_MSG*);
 int __cdecl d2_LoadForm(int, int, char*);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
-void __cdecl d2_BuildPersonStatusDesc(Rec_5d5930*);
-void __cdecl fcn_005ca740(int, int, int, int, Rec_5d5930*, int);
+void __cdecl d2_BuildPersonStatusDesc(D2_ERPRESSUNG_CRIME_REC*);
+void __cdecl d2_DrawPersonCard(int, int, int, int, D2_ERPRESSUNG_CRIME_REC*, int);
 void __cdecl d2_CreateRightAlignedText(char*, int, int, int, int);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d2_CheckActionBlocker(void*, int);
-int __cdecl fcn_005d5670(unsigned char*, unsigned char*);
+int __cdecl gm_HandleErpressung(unsigned char*, unsigned char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 
 /* ADDRESS: GOLDTL 0x005d5930 */
-int __cdecl fcn_005d5930(unsigned char* p, int* q)
+int __cdecl d2_RunErpressungDialog(unsigned char* p, int* q)
 {
-	Rec_5d5930 recs[0x20];
+	D2_ERPRESSUNG_CRIME_REC recs[0x20];
 	char buf[0x200];
 	int c[0x20];
 	int ids[0x20];
@@ -77,7 +77,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 	int k;
 	int result;
 	int* rp;
-	Rec_5d5930* r;
+	D2_ERPRESSUNG_CRIME_REC* r;
 
 	if (*(unsigned char*) (p + 2) != 6 && *(unsigned char*) (p + 2) != 7) {
 		e = gm_LookupEntityRecordById(q[0x85]);
@@ -86,7 +86,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 		}
 		b[0] = gs_CollectEvidenceForTarget(*(int*) (e + 4), ids, *(unsigned short*) p);
 		if (b[0] >= gm_RandomMod(8)) {
-			Msg_5d5930 m;
+			D2_ERPRESSUNG_MSG m;
 			pos14_7f4c00 pos;
 			int sender;
 			pos = gm_GameTime;
@@ -117,7 +117,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 	k = d2_CurrentWindowId;
 	d2_SetForm(dlg, 3);
 	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, k, 0x767);
-	n = fcn_004f61c0(ids, b, c, *(unsigned short*) p);
+	n = gm_CollectEntityCrimesByGroup(ids, b, c, *(unsigned short*) p);
 	cnt = i = 0;
 	for (; i < n; i++) {
 		obj = gm_LookupEntityRecordById(ids[i]);
@@ -140,7 +140,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 				io_FormatTextBuffer(text, (int) "%i (%i) %s", r->x2c, r->x34, (r->x2c != 1) + 0x1748);
 				r->x10 = 0x32;
 				r->x14 = y;
-				fcn_005ca740(0x32, y, d2_CurrentWindowId, 0x56, r, 1);
+				d2_DrawPersonCard(0x32, y, d2_CurrentWindowId, 0x56, r, 1);
 				d2_CreateRightAlignedText(text, *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0xf, y + 0x2d, 200, 0x55);
 				r++;
 				y += 0x69;
@@ -158,12 +158,12 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 					if (d2_CheckActionBlocker(p, 2) != 0) {
 						if ((*(unsigned int*) (recs[i].p0 + 0x1c8) & 0x200) != 0) {
 							io_FormatTextBuffer(buf, 0x1d52, *(unsigned short*) recs[i].p0);
-							fcn_00526120(buf, 0);
+							d2_ShowModalMessageBox(buf, 0);
 						} else if (recs[i].x34 < 3) {
-							fcn_00526120(*(char**) 0x14ac864, 0);
+							d2_ShowModalMessageBox(*(char**) 0x14ac864, 0);
 						} else {
 							obj = gm_LookupEntityRecordById(ids[i]);
-							if (fcn_005d5670(p, (unsigned char*) obj) != 0) {
+							if (gm_HandleErpressung(p, (unsigned char*) obj) != 0) {
 								g_774654 = 1;
 							}
 							result = 0x92;
@@ -176,7 +176,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005d5930, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunErpressungDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);
 	return result;
 }

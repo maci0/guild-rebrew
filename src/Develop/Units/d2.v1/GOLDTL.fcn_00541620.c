@@ -32,7 +32,7 @@ void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_DestroyHudOverlay(void);
-void __cdecl fcn_00537320(int);
+void __cdecl d2_UpdateViewportCenter(int);
 int __cdecl d2_CreateScrollPerga(void);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -61,7 +61,7 @@ void __cdecl gm_ResetDynastySlot(int);
 /* Black editor panel for the current 0x7f4ca0 entity: prints the building
  * and unit counters, then runs the modal 0x24087 message loop. */
 /* ADDRESS: GOLDTL 0x00541620 */
-void __cdecl fcn_00541620(void)
+void __cdecl d2_RunRoundSummaryDialog(void)
 {
 	unsigned char panel[0x114];
 	struct { unsigned char names[6]; int vals[6]; int vals2[6]; } revenue;
@@ -114,7 +114,7 @@ void __cdecl fcn_00541620(void)
 	d1f8 = 0;
 	d2_SetOverlayAnimation(0, 0);
 	d2_DestroyHudOverlay();
-	fcn_00537320(0x24087);
+	d2_UpdateViewportCenter(0x24087);
 	dlg = d2_CreateScrollPerga();
 	d2_CenterDialogWindows(dlg);
 	if (g1f4 != 0) {
@@ -310,13 +310,13 @@ void __cdecl fcn_00541620(void)
 	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, k, 0x767);
 	*(int*) (k * 0x3cc + 0x10161b4) = 0x18;
 	sb_PlayVoice(0, "RollenKurz_s_01", 1, 0x3f, 0x7f, 0, 0);
-	i = main_RunFrameLoop((int) fcn_00541620, 0x24087);
+	i = main_RunFrameLoop((int) d2_RunRoundSummaryDialog, 0x24087);
 	while (i != 0) {
 		d2_UpdateScrollPerga();
 		if (g_100f1dc == 2 || g_14cf950 == 0x1c) {
 			g_774654 = 1;
 		}
-		i = main_RunFrameLoop((int) fcn_00541620, 0x24087);
+		i = main_RunFrameLoop((int) d2_RunRoundSummaryDialog, 0x24087);
 	}
 	d2_DestroyScrollPerga();
 fold:

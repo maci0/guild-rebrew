@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004cfe00 */
-void __cdecl fcn_004cfe00(void)
+void __cdecl d3_ResetActionTimers(void)
 {
 	int a;
 

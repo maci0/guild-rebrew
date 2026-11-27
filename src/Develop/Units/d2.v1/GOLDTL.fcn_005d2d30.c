@@ -44,7 +44,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_00412830(int);
+void __cdecl io_ClearInputButtonFlags(int);
 
 int __cdecl d2_RunWerbungDialog(unsigned short* target)
 {
@@ -88,6 +88,6 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 	} while (main_RunFrameLoop((void*) d2_RunWerbungDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);
 	g_100f1dc = -1;
-	fcn_00412830(0x11);
+	io_ClearInputButtonFlags(0x11);
 	return r;
 }

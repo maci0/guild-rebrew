@@ -1,6 +1,6 @@
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
-typedef int (__stdcall* Texture47c520Fn)(D3D_DEVICE_VIEW*, int, int);
-typedef int (__stdcall* Stream47c520Fn)(D3D_DEVICE_VIEW*, int, int, int);
+typedef int (__stdcall* D2_SET_TEXTURE_FN)(D3D_DEVICE_VIEW*, int, int);
+typedef int (__stdcall* D2_SET_STREAM_SOURCE_FN)(D3D_DEVICE_VIEW*, int, int, int);
 
 
 
@@ -18,8 +18,8 @@ extern int g_772618;
 void __cdecl d2_ResetQuadDeviceState(void)
 {
 	if (g_772618 != 0) {
-		((Stream47c520Fn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x14c / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0, 0);
-		((Texture47c520Fn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0xf4 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0);
+		((D2_SET_STREAM_SOURCE_FN) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x14c / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0, 0);
+		((D2_SET_TEXTURE_FN) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0xf4 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0);
 		g_772618 = 0;
 	}
 }

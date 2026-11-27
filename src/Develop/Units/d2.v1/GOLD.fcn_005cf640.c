@@ -74,7 +74,7 @@ void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005cf640(int unused, unsigned short* p)
+int __cdecl d2_RunStudiumDialog(int unused, unsigned short* p)
 {
 	int dlg;
 	int ids[4];
@@ -108,7 +108,7 @@ int __cdecl fcn_005cf640(int unused, unsigned short* p)
 	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = -1;
 	result = 0;
-	while (main_RunFrameLoop((void*) fcn_005cf640, main_LoopFlags) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunStudiumDialog, main_LoopFlags) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}

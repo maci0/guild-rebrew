@@ -21,7 +21,7 @@ extern char g_6a97b8[];
 void __cdecl d2_RollSeanceAudioPairs(int n, int* a, int* b, int base);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int a1, int idx);
-void __cdecl fcn_00471db0(int, int);
+void __cdecl d2_PositionFormWindows(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl evt_LoadGfxScript(char* name);
 char* __cdecl gm_FindOrAllocHeadSet(int, int);
@@ -56,7 +56,7 @@ int __cdecl d2_RunSeance(int a1, S58* scriptSubject)
 	d2_RollSeanceAudioPairs(8, snd, ids, 0x40d7);
 	w = d2_LoadForm(0, 0, g_6a97f8);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00471db0(w, 1);
+	d2_PositionFormWindows(w, 1);
 	d2_SetForm(w, 0);
 	h = evt_LoadGfxScript(g_6a97d4);
 	if (h != 0) {

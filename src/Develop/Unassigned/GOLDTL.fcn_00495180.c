@@ -7,13 +7,13 @@ typedef struct {
 	int (__cdecl* pick)(int, unsigned char*, int, int*, int*);
 	char pad2c[0x64];
 	unsigned int flags : 8;
-} Plan495180;
+} AI_METHOD_PLAN;
 
 extern char g_1008540[];
 #include "GOLDTL.fcn_00495180_gconf.h"
 
 /* ADDRESS: GOLDTL 0x00495180 */
-int __cdecl fcn_00495180(int a0)
+int __cdecl ai_SelectEntityMethod(int entityId)
 {
 	int posA[6];
 	int posB[6];
@@ -30,11 +30,11 @@ int __cdecl fcn_00495180(int a0)
 	int kindY;
 	int valY;
 	unsigned char* p;
-	Plan495180* plan;
+	AI_METHOD_PLAN* plan;
 	int res2;
 	int i;
 
-	p = g_slot_table + a0 * 0x21c;
+	p = g_slot_table + entityId * 0x21c;
 	bx = -1.0e30f;
 	by = -1.0e30f;
 	kindX = 0;
@@ -46,7 +46,7 @@ int __cdecl fcn_00495180(int a0)
 	*(unsigned char*) bestYx = 0;
 	*(unsigned char*) bestYy = 0;
 	i = 0;
-	plan = (Plan495180*) g_1008540;
+	plan = (AI_METHOD_PLAN*) g_1008540;
 	do {
 		if (plan->kind == 0) {
 			continue;

@@ -6,7 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c5310(int a1, unsigned short a2, char* data)
+void __cdecl cm_SendAllocObjekt(int a1, unsigned short a2, char* data)
 {
 	char buf[0x9c];
 

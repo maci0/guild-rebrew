@@ -2,15 +2,15 @@
 
 int __cdecl d2_SetForm(int win, int layer);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
-int __cdecl fcn_00469c40(int x, int y, int slot);
+int __cdecl d2_PositionControl(int x, int y, int slot);
 int __cdecl d2_GetControlValue(int element);
 void __cdecl d2_SetDisplayCounter(int id, int value);
 void __cdecl ResetDisplayCounters(void);
-void __cdecl fcn_00596d70(int a0, int a1, int* rect, int w, int n,
+void __cdecl d2_UpdateProduktionSlotTile(int a0, int a1, int* rect, int w, int n,
                           unsigned int a5);
 
 /* ADDRESS: GOLDTL 0x005963f0 */
-void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
+void __cdecl d2_RefreshWorkshopInventoryGrids(int dialog, int form, int a2, unsigned int a3)
 {
 	int idx;
 	int v1;
@@ -78,7 +78,7 @@ void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 	for (v = (int*) 0x778d50; (int) v < 0x778da0; v += 5) {
 		if (v[-2] > 1) {
 			((D2_CONTROL_TL*) (g_1015ea0))[*v].value_048 = 0;
-			fcn_00469c40(v[-4] + p[1], v[-3] + p[2], *v);
+			d2_PositionControl(v[-4] + p[1], v[-3] + p[2], *v);
 		} else {
 			((D2_CONTROL_TL*) (g_1015ea0))[*v].value_048 = 1;
 		}
@@ -97,7 +97,7 @@ void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 		}
 		v[-1] = *(int*) ((char*) 0x778d40 + k * 0x14) + n * 0x44 - 0x44;
 		*v = *(int*) ((char*) 0x778d44 + k * 0x14);
-		fcn_00596d70(dialog, form, v - 3, a2, 2, a3);
+		d2_UpdateProduktionSlotTile(dialog, form, v - 3, a2, 2, a3);
 		v += 0xe;
 	} while ((int) v < 0x77912c);
 
@@ -110,7 +110,7 @@ void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 		v[-1] = *v;
 		if (*v >= 2) {
 			((D2_CONTROL_TL*) (g_1015ea0))[v[1]].value_048 = 0;
-			fcn_00469c40(v[-3] + p[1], v[-2] + p[2], v[1]);
+			d2_PositionControl(v[-3] + p[1], v[-2] + p[2], v[1]);
 		} else {
 			((D2_CONTROL_TL*) (g_1015ea0))[v[1]].value_048 = 1;
 		}
@@ -129,7 +129,7 @@ void __cdecl fcn_005963f0(int dialog, int form, int a2, unsigned int a3)
 		}
 		v[-1] = *(int*) ((char*) 0x779120 + k * 0x14) + n * 0x44 - 0x44;
 		*v = *(int*) ((char*) 0x779124 + k * 0x14);
-		fcn_00596d70(dialog, form, v - 3, a2, 2, a3);
+		d2_UpdateProduktionSlotTile(dialog, form, v - 3, a2, 2, a3);
 		v += 0xe;
 	} while ((int) v < 0x7798ac);
 

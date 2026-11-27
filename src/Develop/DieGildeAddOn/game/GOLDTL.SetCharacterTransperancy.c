@@ -13,7 +13,7 @@ typedef struct {
 } Bytes4;
 
 extern char* evt_CurrentScript;
-void __cdecl fcn_0043a3f0(int a, int b, Bytes4 c);
+void __cdecl d3_ChangeObjectTransparency(int a, int b, Bytes4 c);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
 int __cdecl SetCharacterTransperancy(char** a, unsigned char* v)
@@ -29,10 +29,10 @@ int __cdecl SetCharacterTransperancy(char** a, unsigned char* v)
 	memset(&col, 0, sizeof(col));
 	col.c &= 0xfe;
 	col.a = *v;
-	fcn_0043a3f0(o, *(int*) (o + 0x1cc), col);
+	d3_ChangeObjectTransparency(o, *(int*) (o + 0x1cc), col);
 	if (*(int*) (*a + 0x124) != 0) {
 		o = **(int**) (*a + 0x124);
-		fcn_0043a3f0(o, *(int*) (o + 0x1cc), col);
+		d3_ChangeObjectTransparency(o, *(int*) (o + 0x1cc), col);
 	}
 	return 0;
 }

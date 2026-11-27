@@ -9,7 +9,7 @@ void __cdecl d3snd_PlaySource(int, int, int, int);
 
 void __cdecl SetSoundControlValue(int stream, unsigned int value);
 void __cdecl d3snd_StopObjectVoice(int, int);
-void __cdecl fcn_00418d70(int);
+void __cdecl d3snd_StopSourceVoice(int);
 
 /* ADDRESS: GOLDTL 0x004c39b0 */
 void __cdecl fcn_004c39b0(void)
@@ -36,7 +36,7 @@ void __cdecl fcn_004c3a10(void)
 	if (g_772d30 != 0) {
 		SetSoundControlValue(g_772d30, 0);
 		d3snd_StopObjectVoice(g_772d30, 1);
-		fcn_00418d70(g_772d30);
+		d3snd_StopSourceVoice(g_772d30);
 		g_772d30 = 0;
 	}
 }

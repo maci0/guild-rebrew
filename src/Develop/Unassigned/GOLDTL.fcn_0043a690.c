@@ -5,7 +5,7 @@ extern int g_67a370;
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
 char __cdecl d3_AccumulateObjectBounds(char*, float*);
 
-void __cdecl fcn_0043a690(float* mn, float* mx)
+void __cdecl d3_ComputeSceneBoundingBox(float* mn, float* mx)
 {
 	float bb[8];
 

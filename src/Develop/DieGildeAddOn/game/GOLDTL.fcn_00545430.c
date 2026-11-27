@@ -11,7 +11,7 @@ extern Rec7dc6e0 g_7dc6e0[64];
 int __cdecl he_RegisterHandler(int, void*, void*);
 void __cdecl he_AllocNone(void*);
 void __cdecl he_RunNone(void);
-void __cdecl fcn_00545410(void);
+void __cdecl he_AllocDummyEvent(void);
 void __cdecl fcn_00545420(void);
 int __cdecl he_RegisterEventHandlers(void);
 int __cdecl he_RegisterActionHandlers(void);
@@ -27,7 +27,7 @@ int __cdecl he_InitEventSystem(void)
 	if (he_RegisterHandler(0, (void*) he_AllocNone, (void*) he_RunNone) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(1, (void*) fcn_00545410, (void*) fcn_00545420) != 0) {
+	if (he_RegisterHandler(1, (void*) he_AllocDummyEvent, (void*) fcn_00545420) != 0) {
 		return 1;
 	}
 	if (he_RegisterEventHandlers() != 0) {

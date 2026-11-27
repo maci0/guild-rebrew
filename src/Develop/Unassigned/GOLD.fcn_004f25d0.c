@@ -3,7 +3,7 @@ extern char* g_889f74;
 void* __cdecl fcn_004ef7c0(void* a0, void* a1, void* a2, void* a3, int a4);
 
 /* ADDRESS: GOLD 0x004f25d0 */
-int __cdecl fcn_004f25d0(void* a0, void** out_slot, void** out_val)
+int __cdecl gv_FindGraveyardWorkerSlot(void* a0, void** out_slot, void** out_val)
 {
 	char* slot;
 	void* res;

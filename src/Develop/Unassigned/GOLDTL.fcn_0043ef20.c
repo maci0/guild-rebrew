@@ -18,7 +18,7 @@ extern float g_1040d00[0x400];
 extern int g_67a370;
 
 void __cdecl d3_InvalidateFloorChunks(char* a);
-void __cdecl fcn_00455140(char* node, float* in, float* out);
+void __cdecl d3_TransformDirection(char* node, float* in, float* out);
 char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags,
                           char (__cdecl* cb)(char*, void*), void* ctx);
 char __cdecl d3_CollectFloorLightCallback(char* node, void* ctx);
@@ -113,7 +113,7 @@ void __cdecl d3_UpdateFloorLighting(char* a0)
 			*(float*) (self + 0x90) = *(float*) (e + 0x5c) * 0.003921569f;
 			*(float*) (self + 0x94) = *(float*) (e + 0x60) * 0.003921569f;
 			*(float*) (self + 0x98) = *(float*) (e + 0x64) * 0.003921569f;
-			fcn_00455140(e, g_662d40, u);
+			d3_TransformDirection(e, g_662d40, u);
 			grad = *(float*) (self + 0x78) * *(float*) (self + 0x84);
 			grad += grad;
 			lum = *(char**) (self + 0x10);

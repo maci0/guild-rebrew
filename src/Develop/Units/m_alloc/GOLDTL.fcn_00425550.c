@@ -21,7 +21,7 @@ void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* pointer);
 
 /* ADDRESS: GOLDTL 0x00425550 */
-int __cdecl fcn_00425550(char* name, char* ext)
+int __cdecl sbs_PlaySample(char* name, char* ext)
 {
 	char path[0x104];
 	int result;
@@ -101,7 +101,7 @@ fail:
 			found = *(char**) (found + 0x104);
 		}
 		if (found != 0) {
-			result = fcn_00425550(found, ext);
+			result = sbs_PlaySample(found, ext);
 		}
 		return result;
 	}

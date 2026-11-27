@@ -59,8 +59,8 @@ extern char s_6ac79c[];
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00526120(char*, int);
-void __cdecl fcn_0052a0c0(unsigned char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
+void __cdecl d2_InitPlayerBar(unsigned char*, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -103,10 +103,10 @@ void __cdecl d2_ShowTrainingDialog(unsigned char* obj, char* sceneObj, int targe
 	}
 	if (cnt >= 3) {
 		io_FormatTextBuffer(buf, 0x1a4a, cnt);
-		fcn_00526120(buf, 0);
+		d2_ShowModalMessageBox(buf, 0);
 		return;
 	}
-	fcn_0052a0c0(obj, 1);
+	d2_InitPlayerBar(obj, 1);
 	dlg = d2_LoadForm(0, 0, s_6ac79c);
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
@@ -146,13 +146,13 @@ void __cdecl d2_ShowTrainingDialog(unsigned char* obj, char* sceneObj, int targe
 					}
 				}
 				if (n == 0) {
-					fcn_00526120((char*) g_14abc44, 0);
+					d2_ShowModalMessageBox((char*) g_14abc44, 0);
 				}
 				else {
 					cm_ExProdObjekt();
 					if (n > 3) {
 						io_FormatTextBuffer(buf, 0x1a4a, 3);
-						fcn_00526120(buf, 0);
+						d2_ShowModalMessageBox(buf, 0);
 					}
 					g_774654 = 1;
 				}

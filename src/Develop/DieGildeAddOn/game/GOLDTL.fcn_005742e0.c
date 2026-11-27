@@ -24,7 +24,7 @@ char* __cdecl d3_LoadObjectFile(char* name, int a, int b);
 void __cdecl d3_SetNodePosition(char*, struct vec3*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl fcn_00514d80(char*);
-void __cdecl fcn_004143b0(char*, int, int);
+void __cdecl d3_AlignObjectToTerrain(char*, int, int);
 void __cdecl d3_SetSubtreeVisible(char*, int);
 void __cdecl d3_UpdateBuildStageMeshes(char*);
 void __cdecl d3_BindEntitySceneObject(char*, unsigned char*, int);
@@ -75,7 +75,7 @@ char* __cdecl he_CreateGebaeudeSceneModel(float* rot, struct vec3* pos, unsigned
 	d3_SetNodePosition(h, pos);
 	d3_SetObjectRotation(h, rot);
 	fcn_00514d80(h);
-	fcn_004143b0(h, 1, 0);
+	d3_AlignObjectToTerrain(h, 1, 0);
 	if (*(float*) (h + 0x50) < pos->y) {
 		*(float*) (h + 0x4c) = pos->x;
 		*(float*) (h + 0x50) = pos->y;

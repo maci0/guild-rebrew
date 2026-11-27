@@ -4,12 +4,12 @@ extern unsigned char* lpGebaeudeINST;
 extern unsigned char* lpGebaeudePROT;
 
 void* __cdecl FindSlotEntryFiltered(int a, unsigned char* rec, void* prev, void* filter, int mask);
-int __cdecl fcn_004f17f0(void);
+int __cdecl gv_MatchEntityGraveyardSlot(void);
 
-int __cdecl fcn_004f4650(int a, unsigned char** out1, void** out2)
+int __cdecl gv_FindEntityGraveyardSlot(int entity, unsigned char** out1, void** out2)
 {
 	unsigned char* rec;
-	void* r;
+	void* slot;
 	int i;
 
 	*out1 = 0;
@@ -17,10 +17,10 @@ int __cdecl fcn_004f4650(int a, unsigned char** out1, void** out2)
 	rec = lpGebaeudeINST;
 	for (i = 0; i < 256; i++, rec += 0xa9) {
 		if (rec[0] != 0 && ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[rec[0]].category == 0x1d) {
-			r = FindSlotEntryFiltered(a, rec, 0, (void*) fcn_004f17f0, 0xff);
-			if (r != 0) {
+			slot = FindSlotEntryFiltered(entity, rec, 0, (void*) gv_MatchEntityGraveyardSlot, 0xff);
+			if (slot != 0) {
 				*out1 = rec;
-				*out2 = r;
+				*out2 = slot;
 				return 1;
 			}
 		}

@@ -5,7 +5,7 @@
 extern float g_10432a4;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char __cdecl fcn_0043a820(char*, char*, float*, float*);
+char __cdecl d3_GetObjectBoundingSphere(char*, char*, float*, float*);
 
 char __cdecl d3_PickClosestObjectCallback(char* e, char* ctx)
 {
@@ -28,7 +28,7 @@ char __cdecl d3_PickClosestObjectCallback(char* e, char* ctx)
 	if (*(int*) (e + 0x218) == 4 && d == 0) {
 		return 1;
 	}
-	if (fcn_0043a820(e, *(char**) (ctx + 0x48), v, &w)) {
+	if (d3_GetObjectBoundingSphere(e, *(char**) (ctx + 0x48), v, &w)) {
 		inv = 1.0f / v[2];
 		slot = (float*) (ctx + *(int*) (e + 0x218) * 8);
 		w = g_10432a4 * inv * w;

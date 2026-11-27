@@ -20,7 +20,7 @@ extern int g_14b5e18;
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl cm_SendSetHE(char, unsigned char*);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -30,10 +30,10 @@ void __cdecl d2_InitWindowBounds(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
-int __cdecl fcn_0046fac0(int, int, int, int);
+int __cdecl d2_EqualizeWindowButtonWidths(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int, int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int, int);
 void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, int, int);
 int __cdecl d2_GetControlValue(int);
@@ -70,7 +70,7 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 		for (;;) {
 			if (*(int*) (q + 0xc4) == *(int*) (rec + 4)) {
 				io_FormatTextBuffer(buf, 0x42c1, *(unsigned short*) rec);
-				if (fcn_00526120(buf, 0x101) != 0) {
+				if (d2_ShowModalMessageBox(buf, 0x101) != 0) {
 					*(pos14_7f4c00*) (q + 0x52) = gm_GameTime;
 					*(int*) (q + 0x84) = cm_SendSetHE(-1, (unsigned char*) q);
 				}
@@ -84,7 +84,7 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 		}
 		if (tries >= 5) {
 			io_FormatTextBuffer(buf, 0x42c0, 5);
-			fcn_00526120(buf, 0x104);
+			d2_ShowModalMessageBox(buf, 0x104);
 			return 0;
 		}
 	}
@@ -94,12 +94,12 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 	d2_SetForm((int) h, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm((int) h, 2);
-	row = fcn_0046fac0(0, 3, g_14b5e18, d2_CurrentWindowId);
+	row = d2_EqualizeWindowButtonWidths(0, 3, g_14b5e18, d2_CurrentWindowId);
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[row].value_06c)) = 1;
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[row].width)) = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width;
 	d2_SetElementFont(row, 0x54);
 	row2 = d2_AddWindowValueGauge(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 0x82, d2_CurrentWindowId);
-	fcn_00472380(row2, 0, 2, 0, 1);
+	d2_CreateGuiWindow(row2, 0, 2, 0, 1);
 	d2_SetValueGaugeStepLabels(row2, 3, g_14b5e0c, g_14b5e10, g_14b5e14);
 	d2_SetForm((int) h, 3);
 	d2_CreateButtonRow(d2_CurrentWindowId, 0, sel, 2, g_14b5e04, g_14b5e08);
@@ -133,7 +133,7 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 					cm_SendCopyEntityData(pkt);
 					cm_SendTraceEnd("spionage");
 					io_FormatTextBuffer(buf, 0x42bf, *(unsigned short*) rec);
-					fcn_00526120(buf, 0x100);
+					d2_ShowModalMessageBox(buf, 0x100);
 					g_774654 = 1;
 					ret = 1;
 				} else if (d2_CurrentElementId == sel[1]) {

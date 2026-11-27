@@ -9,7 +9,7 @@ extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 extern int g_00f8f088; /* 0x00f8f088 */
 extern int g_00f8f08c; /* 0x00f8f08c */
 
-void __cdecl fcn_0046cd90(int x, int y, int slot);
+void __cdecl d2_MoveElement(int x, int y, int slot);
 
 void __cdecl d2_CenterTopLevelWindows(int k)
 {
@@ -21,7 +21,7 @@ void __cdecl d2_CenterTopLevelWindows(int k)
 	for (i = 0; i < o->count; i++) {
 		w = &g_00f8f120[o->wins[i]];
 		if (g_00f8f080[w->id].parent == 0) {
-			fcn_0046cd90(g_00f8f08c - w->width / 2, g_00f8f088 - w->height / 2, w->id);
+			d2_MoveElement(g_00f8f08c - w->width / 2, g_00f8f088 - w->height / 2, w->id);
 		}
 	}
 }

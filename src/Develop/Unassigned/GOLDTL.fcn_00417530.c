@@ -17,7 +17,7 @@ typedef struct {
 } Owner;
 // SIZE 0xdc
 
-void __cdecl fcn_00417530(Owner *o, float f, int v)
+void __cdecl d3_ResetParticleEmitter(Owner *o, float f, int v)
 {
 	int i;
 	Item *p;

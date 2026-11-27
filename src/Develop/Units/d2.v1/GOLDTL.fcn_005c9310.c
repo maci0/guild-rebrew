@@ -39,7 +39,7 @@ int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 void* __cdecl gm_SearchTable67(int);
 int __cdecl io_AppendText(int, ...);
 
-void __cdecl fcn_005c9310(unsigned short* who, int max, Row* rows, int dlg, int n)
+void __cdecl d2_PopulateKreditCards(unsigned short* who, int max, Row* rows, int dlg, int n)
 {
 	char* list[9];
 	int w;

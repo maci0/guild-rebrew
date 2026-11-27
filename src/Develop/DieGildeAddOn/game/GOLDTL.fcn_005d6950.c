@@ -35,10 +35,10 @@ int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl cm_SendTraceEnd(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-unsigned short* __cdecl fcn_005cadc0(int, Req*, char*, char*, int);
+unsigned short* __cdecl d2_RunOfficeListDialog(int, Req*, char*, char*, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 
 int __cdecl d2_ShowAbsetzenDialog(unsigned char* e, int* o)
 {
@@ -97,7 +97,7 @@ int __cdecl d2_ShowAbsetzenDialog(unsigned char* e, int* o)
 	req.cd = g_666018;
 	io_FormatTextBuffer(text1, 0x1d98);
 	io_FormatTextBuffer(text2, 0x1d99);
-	g = fcn_005cadc0(info.f4, &req, text1, text2, 0);
+	g = d2_RunOfficeListDialog(info.f4, &req, text1, text2, 0);
 	if (g != 0) {
 		if (!srv_GetEntityOfficeSlot((unsigned char*) g, &y, &x)) {
 			return 0x60;
@@ -116,14 +116,14 @@ int __cdecl d2_ShowAbsetzenDialog(unsigned char* e, int* o)
 		if (cm_GetCommandStatus(h) == 2) {
 		refused:
 			io_FormatTextBuffer(text3, 0x1d9a, *g);
-			fcn_00526120(text3, 0);
+			d2_ShowModalMessageBox(text3, 0);
 			return 0x20;
 		}
 		while (cm_GetCommandStatus(h1) == 0) {
 			cm_StepCommandQueue();
 		}
 		io_FormatTextBuffer(text3, 0x1d9b, *g, *g);
-		fcn_00526120(text3, 0);
+		d2_ShowModalMessageBox(text3, 0);
 		return 0x90;
 	}
 	return 0x20;

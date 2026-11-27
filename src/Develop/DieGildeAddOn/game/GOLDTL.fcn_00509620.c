@@ -7,7 +7,7 @@ extern char* lpObjektePROT;
 extern unsigned char* g_entity_ptr;
 
 extern void* __cdecl gm_LookupEntityRecordById(int id);
-extern void* __cdecl fcn_004b3c00(void* entity);
+extern void* __cdecl gm_ResetMissionEntry(void* entity);
 extern int __cdecl gm_GetBuildingTypeCategory(int type);
 extern int __cdecl gm_AssignBuildingOwner(void* record, int a, int b);
 extern int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
@@ -47,7 +47,7 @@ int __cdecl gm_TransferDynastyEstate(int sourceId, int targetId)
 	p = (EntityStruct*) gm_LookupEntityRecordById(sourceId);
 	if (p == 0)
 		return -1;
-	fcn_004b3c00(p);
+	gm_ResetMissionEntry(p);
 
 	i = 0;
 	counter = 0x100;

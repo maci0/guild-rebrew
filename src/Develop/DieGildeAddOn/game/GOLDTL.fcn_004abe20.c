@@ -11,7 +11,7 @@ extern char g_7f4ca0[];
 int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_004a5340(unsigned short* e, int n, int* lim, float a4, float r, unsigned short* ids);
+int __cdecl ai_SelectRankedCandidates(unsigned short* e, int n, int* lim, float a4, float r, unsigned short* ids);
 
 
 /* ADDRESS: GOLDTL 0x004abe20 */
@@ -41,7 +41,7 @@ int __cdecl ai_StartEhrerbietung(int a1, unsigned short* entity, int a3, char* r
 		    && ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[e[0]].category == 0x1f
 		    && fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x276) != 0) {
 			lim = 0xf00500;
-			if (fcn_004a5340(entity, 1, &lim, 0.0f, gm_RandomMod(0x20) + 25.0f, &id) == 0)
+			if (ai_SelectRankedCandidates(entity, 1, &lim, 0.0f, gm_RandomMod(0x20) + 25.0f, &id) == 0)
 				return 0;
 			p = g_7f4ca0 + id * 540;
 			n = *(int*) ((char*) entity + 0x194);

@@ -13,8 +13,8 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_ShowLagerOptions(char*, int);
 void __cdecl d2_OpenTransportPanel(char*);
-void __cdecl fcn_005c72f0(char*);
-void __cdecl fcn_005c79a0(char*);
+void __cdecl d2_RunEquipmentDialog(char*);
+void __cdecl d2_RunWorkerTrainingDialog(char*);
 
 void __cdecl d2_RunWachstubeMenu(char* e)
 {
@@ -43,9 +43,9 @@ void __cdecl d2_RunWachstubeMenu(char* e)
 			} else if (g_7746a0 == transport) {
 				d2_OpenTransportPanel(e);
 			} else if (g_7746a0 == ausruesten) {
-				fcn_005c72f0(e);
+				d2_RunEquipmentDialog(e);
 			} else if (g_7746a0 == regen) {
-				fcn_005c79a0(e);
+				d2_RunWorkerTrainingDialog(e);
 			}
 		}
 	}

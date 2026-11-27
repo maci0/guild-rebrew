@@ -9,7 +9,7 @@ extern char g_6a3658[];
 extern int g_7747d4;
 
 void __cdecl fcn_00422d60(void);
-int __cdecl fcn_0041e680(char*, int, int, int, int, int, int, int);
+int __cdecl OpenMovieWindow(char*, int, int, int, int, int, int, int);
 void __cdecl PlayVideo(int);
 void __cdecl main_PumpWindowMessages(void);
 
@@ -20,22 +20,22 @@ void __cdecl main_PlayIntroMovies(void)
 	Sleep(400);
 	fcn_00422d60();
 	sprintf(path, "%sjowood.mpg", g_6a3658);
-	g_7747d4 = fcn_0041e680(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
+	g_7747d4 = OpenMovieWindow(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
 	Sleep(100);
 	PlayVideo(g_7747d4);
 	Sleep(400);
 	sprintf(path, "%s4head.mpg", g_6a3658);
-	g_7747d4 = fcn_0041e680(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
+	g_7747d4 = OpenMovieWindow(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
 	main_PumpWindowMessages();
 	Sleep(100);
 	PlayVideo(g_7747d4);
 	Sleep(400);
 	sprintf(path, "%sintro.mpg", g_6a3658);
-	g_7747d4 = fcn_0041e680(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
+	g_7747d4 = OpenMovieWindow(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
 	Sleep(100);
 	PlayVideo(g_7747d4);
 	sprintf(path, "%sintro_addon.mpg", g_6a3658);
-	g_7747d4 = fcn_0041e680(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
+	g_7747d4 = OpenMovieWindow(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
 	Sleep(100);
 	PlayVideo(g_7747d4);
 	main_PumpWindowMessages();

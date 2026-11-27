@@ -3,7 +3,7 @@
 int __cdecl d2_AddWindowTextButton(int, int, int, int, int);
 void __cdecl d2_SetElementWidth(int, int);
 
-int __cdecl fcn_005e3b10(int a, int b, int c)
+int __cdecl d2_AddMenuOptionButton(int a, int b, int c)
 {
 	int idx;
 

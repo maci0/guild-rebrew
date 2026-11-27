@@ -40,9 +40,9 @@ int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 unsigned short* __cdecl gm_ResolveParentEntity(unsigned short* e);
 int __cdecl gm_GetEntityUiFlags(int id, unsigned char* store, int a, int b);
 int __cdecl gm_CollectBuildingSubObjects(unsigned char* store, unsigned short* item, int a);
-int __cdecl fcn_0052dee0(int x, int y, int z);
+int __cdecl d2_CreateWindowTextButton(int x, int y, int z);
 
-void __cdecl fcn_0052e250(unsigned short* item)
+void __cdecl d2_ShowGebaeudeItemInfoPanel(unsigned short* item)
 {
 	unsigned char* store;
 	unsigned short* parent;
@@ -82,12 +82,12 @@ void __cdecl fcn_0052e250(unsigned short* item)
 		parent = gm_ResolveParentEntity(item);
 		fl = gm_GetEntityUiFlags(g_774970, store, 0, 0);
 		if (*parent != g_774970 && !(fl & 0x10)) {
-			g_6a25e0 = fcn_0052dee0(0, 0xa6, g_14ad0dc);
+			g_6a25e0 = d2_CreateWindowTextButton(0, 0xa6, g_14ad0dc);
 		} else {
 			if (gm_CollectBuildingSubObjects(store, item, 0)) {
-				g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0d8);
+				g_6a25ec = d2_CreateWindowTextButton(0, 0x8c, g_14ad0d8);
 			}
-			g_6a25e0 = fcn_0052dee0(0, 0xa6, g_14ad0dc);
+			g_6a25e0 = d2_CreateWindowTextButton(0, 0xa6, g_14ad0dc);
 		}
 	}
 }

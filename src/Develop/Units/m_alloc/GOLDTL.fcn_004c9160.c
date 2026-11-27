@@ -12,7 +12,7 @@ extern int g_14cbca0;
 extern int g_7749d0;
 
 char *__cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_0057de80(int);
+int __cdecl d2_IsPrivilegeMessageEnabled(int);
 char *__cdecl he_CreateEventFromRequest(Msg *);
 char *__cdecl m_alloc(int, char *);
 
@@ -40,7 +40,7 @@ int __cdecl fcn_004c9160(char *packet, char *reply)
 		}
 		g_7749d0 = *(int *) (packet + 0x10);
 	}
-	if (m.type == 0x11 && fcn_0057de80(m.f58) != 0) {
+	if (m.type == 0x11 && d2_IsPrivilegeMessageEnabled(m.f58) != 0) {
 		return 0;
 	}
 	w = he_CreateEventFromRequest(&m);

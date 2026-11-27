@@ -16,7 +16,7 @@ extern int g_7747ac;
 
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d2_TurnBookPagesBack(Panel*);
-void __cdecl fcn_00535550(Panel*);
+void __cdecl d2_TurnBookPagesForward(Panel*);
 void __cdecl d2_RenderFormToTextures(int);
 
 void __cdecl d2_UpdatePagedPanel(Panel* panel)
@@ -35,7 +35,7 @@ void __cdecl d2_UpdatePagedPanel(Panel* panel)
 		d2_TurnBookPagesBack(panel);
 	}
 	if (panel->owner2 != -1 && d2_CurrentElementId == panel->owner2 && g_14ce8cc != 0) {
-		fcn_00535550(panel);
+		d2_TurnBookPagesForward(panel);
 	}
 	for (i = panel->first + (unsigned char) g_7747ac; i < panel->count; i++) {
 		if (i > panel->first + (unsigned char) g_7747ac) {

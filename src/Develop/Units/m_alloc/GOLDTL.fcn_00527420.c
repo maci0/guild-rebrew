@@ -19,7 +19,7 @@ void __cdecl d2_DestroyHudOverlay(void);
 void __cdecl d2_CloseWindow(int h);
 void __cdecl d2_DestroySelectionPanel(void);
 
-void __cdecl fcn_00527420(void)
+void __cdecl d2_DestroyAllHudPanels(void)
 {
 	int i;
 

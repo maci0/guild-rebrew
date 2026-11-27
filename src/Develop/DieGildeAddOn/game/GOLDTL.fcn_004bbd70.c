@@ -22,8 +22,8 @@ int __cdecl gm_GetSeason(char*);
 void __cdecl d3_SelectSceneContext(int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
-AMBIENT_ANIMAL_SLOT* __cdecl fcn_004bc010(void);
-void __cdecl fcn_004bc060(AMBIENT_ANIMAL_SLOT*);
+AMBIENT_ANIMAL_SLOT* __cdecl gm_AllocAmbientAnimalSlot(void);
+void __cdecl gm_DestroyAmbientAnimal(AMBIENT_ANIMAL_SLOT*);
 void __cdecl gm_InitAmbientBirds(AMBIENT_ANIMAL_SLOT*);
 void __cdecl gm_SpawnAmbientCat(AMBIENT_ANIMAL_SLOT*);
 void __cdecl ch_SpawnAmbientDog(AMBIENT_ANIMAL_SLOT*);
@@ -54,7 +54,7 @@ void __cdecl gm_UpdateAmbientAnimals(void)
 	}
 	if (g_6b7fac > g_7728f0 + 0x15e) {
 		if ((int) gm_RandomMod(lim * 2) - lim > g_7728e4 && r != 3) {
-			s = fcn_004bc010();
+			s = gm_AllocAmbientAnimalSlot();
 			if (s != 0) {
 				switch (gm_RandomMod(100) > 30 ? gm_RandomMod(5) + 3 : gm_RandomMod(2)) {
 				case 1:
@@ -109,7 +109,7 @@ void __cdecl gm_UpdateAmbientAnimals(void)
 		if (s->done != 0 &&
 		    ((*(unsigned char*) (*(char**) (*(char**) (s->objekt + 0x34) + 0x1ec) + 0x163d) & 0x40) || r == 3 ||
 		     g_7728e4 > lim)) {
-			fcn_004bc060(s);
+			gm_DestroyAmbientAnimal(s);
 		}
 	}
 	d3_SelectSceneContext(saved, 1);

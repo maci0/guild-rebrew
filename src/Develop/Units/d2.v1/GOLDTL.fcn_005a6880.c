@@ -34,27 +34,27 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_DrawPanelFrame(int, int, int);
-int __cdecl fcn_0046fac0(int, int, void*, int);
+int __cdecl d2_EqualizeWindowButtonWidths(int, int, void*, int);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl gm_SumContainerCredits(int);
-void __cdecl fcn_005a5760(void*, int, int, int);
+void __cdecl d2_PopulateGeldleiheRows(void*, int, int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 void __cdecl ResetDisplayCounters(void);
-int __cdecl fcn_005a5440(int, ListRow*, int, int, char);
+int __cdecl d2_PopulateInventoryGrid(int, ListRow*, int, int, char);
 int __cdecl d2_FindSelectedListRow(ListRow*);
 int __cdecl fcn_005a66b0(char*, int, int, unsigned char);
 void __cdecl d2_ClearSelectedControl(void);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 int __cdecl d2_CountActiveListRows(ListRow*);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00657a73(int, void*, int);
-void __cdecl fcn_0046f940(int, void*);
+void __cdecl d2_SetLabelText(int, void*);
 void __cdecl d2_ScrollWindow(int, int, int);
-void __cdecl fcn_005a6570(char*);
+void __cdecl d2_RunWechselGebuehrenDialog(char*);
 void __cdecl d2_ShowMoneyExchangeDialog(char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005a6880 */
@@ -107,12 +107,12 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 	cy = ((D2_CONTROL_TL*) (g_1015ea0))[w1].height -
 	     *(int*) (g_77255c + 8) + ((D2_CONTROL_TL*) (g_1015ea0))[w1].y +
 	     2;
-	cb = fcn_0046fac0(cx, cy, g_6b5c60, d2_CurrentWindowId);
+	cb = d2_EqualizeWindowButtonWidths(cx, cy, g_6b5c60, d2_CurrentWindowId);
 	cx = ((D2_CONTROL_TL*) (g_1015ea0))[w2].x - *(int*) (g_77255c + 4) + 2;
 	cy = ((D2_CONTROL_TL*) (g_1015ea0))[w2].height -
 	     *(int*) (g_77255c + 8) + ((D2_CONTROL_TL*) (g_1015ea0))[w2].y +
 	     2;
-	label2 = fcn_0046fac0(cx, cy, g_6b5c60, d2_CurrentWindowId);
+	label2 = d2_EqualizeWindowButtonWidths(cx, cy, g_6b5c60, d2_CurrentWindowId);
 	((D2_CONTROL_TL*) (g_1015ea0))[cb].font = 0x54;
 	((D2_CONTROL_TL*) (g_1015ea0))[label2].font = 0x54;
 	d2_SetForm(h, 0);
@@ -131,7 +131,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 		d2_SetForm(h, 5);
 		io_AppendText(0x190a, obj);
 	}
-	fcn_005a5760(list1, h, 4, 0);
+	d2_PopulateGeldleiheRows(list1, h, 4, 0);
 	for (i = 0; i < 16; i++) {
 		if (list1[i].sel != -1)
 			d2_SetElementEnabled(list1[i].sel, 0);
@@ -153,7 +153,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 			g_774654 = 1;
 		ResetDisplayCounters();
 		if (cur == 0) {
-			selected = fcn_005a5440(*(int*) (obj + 0x5d), list2, h, 5, 1);
+			selected = d2_PopulateInventoryGrid(*(int*) (obj + 0x5d), list2, h, 5, 1);
 		}
 		sel2 = d2_FindSelectedListRow(list1);
 		if (cur == 0 && sel2 != -1 && selected != -1) {
@@ -163,7 +163,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 				d2_ClearSelectedControl();
 				for (i = 0; i < 16; i++) {
 					if (list2[i].sel != -1)
-						fcn_00472380(list2[i].sel, 0, 0, 0);
+						d2_CreateGuiWindow(list2[i].sel, 0, 0, 0);
 				}
 			}
 		}
@@ -183,7 +183,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 			d2_SetSlotVisibility(w0, 1);
 			d2_SetSlotVisibility(cb, 1);
 			fcn_00657a73(sel1, text, 0xa);
-			fcn_0046f940(cb, text);
+			d2_SetLabelText(cb, text);
 		}
 		if (sel2 <= 4) {
 			d2_SetSlotVisibility(w2, 0);
@@ -194,7 +194,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 			d2_SetSlotVisibility(w3, 1);
 			d2_SetSlotVisibility(label2, 1);
 			fcn_00657a73(sel2, text, 0xa);
-			fcn_0046f940(label2, text);
+			d2_SetLabelText(label2, text);
 		}
 		if (g_100f1dc == 3 || g_100f1dc == 4) {
 			cur = d2_CurrentElementId;
@@ -215,7 +215,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 		if (g_100f1dc == 2) {
 			cur = d2_CurrentElementId;
 			if (cur == buttons[0])
-				fcn_005a6570(obj);
+				d2_RunWechselGebuehrenDialog(obj);
 			else if (cur == buttons[1])
 				d2_ShowMoneyExchangeDialog(obj);
 		}

@@ -6,7 +6,7 @@ int __cdecl gm_RemoveObjectByType(char*, int);
 
 
 /* ADDRESS: GOLDTL 0x004c8920 */
-int __cdecl fcn_004c8920(char* request, char* result)
+int __cdecl cm_ExClearStorageSlot(char* request, char* result)
 {
 	char* f;
 	char* e;

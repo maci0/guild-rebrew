@@ -7,7 +7,7 @@ extern char g_7f4ca4[];
    fcn_004c5530 while fcn_005373e0 keeps the loop alive. */
 
 int __cdecl gm_CanBuildBuildingType(int, int);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 void* __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(void*);
 void __cdecl d2_DestroyForm(void*);
@@ -16,7 +16,7 @@ int __cdecl gm_AmountToUnits(int, char);
 int __cdecl d2_SetForm(void*, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(void*, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
@@ -37,7 +37,7 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 	void* dlg; int id;
 
 	id = *(int*) (e + 1); if (gm_CanBuildBuildingType(*(unsigned char*) e, g_774970) != 1) {
-		fcn_00526120(*(int*) 0x14ab29c, 0);
+		d2_ShowModalMessageBox(*(int*) 0x14ab29c, 0);
 		return;
 	}
 	dlg = d2_LoadForm(0, 0, (char*) 0x6ac5d8);
@@ -50,7 +50,7 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 	                                g_773d75));
 	x = (int) ((double) w * 10.0);
 	y = (int) ((double) w * 0.5);
-	fcn_00472380(ctl, y, x, w);
+	d2_CreateGuiWindow(ctl, y, x, w);
 	d2_SetOverlayAnimation(0, 0);
 	main_RunFrameLoop(0, 0x677c7);
 	do {

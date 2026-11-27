@@ -6,7 +6,7 @@ int __cdecl sprintf(char*, const char*, ...);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
 void __cdecl fcn_00510bd0(void);
 
-char __cdecl fcn_00510b70(const char* name)
+char __cdecl d3_LoadCityScene(const char* name)
 {
 	char path[256];
 

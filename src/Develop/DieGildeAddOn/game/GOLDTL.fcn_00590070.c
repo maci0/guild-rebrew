@@ -27,7 +27,7 @@ int __cdecl gm_GetSeason(pos14_7f4c00*);
 int __cdecl d2_CheckOwnerBlocked(char*);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -36,7 +36,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_0052a0c0(char*, int);
+void __cdecl d2_InitPlayerBar(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl d2_SetElementEnabled(int, int);
@@ -65,13 +65,13 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 	}
 	if (g_774800 == 0 && st != 2) {
 		io_FormatTextBuffer(buf, 0x413b);
-		fcn_00526120((int) buf, 4);
+		d2_ShowModalMessageBox((int) buf, 4);
 		d3_EndCameraAndUiMode();
 		return;
 	}
 	if (he_StartHandlungSearch(2, 0, 0x8f, 3, *(int*) (who + 1)) != 0) {
 		io_FormatTextBuffer(buf, 0x413c);
-		fcn_00526120((int) buf, 4);
+		d2_ShowModalMessageBox((int) buf, 4);
 		d3_EndCameraAndUiMode();
 		return;
 	}
@@ -87,7 +87,7 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 	b1 = d2_GetWindowListItem(h, 3, s);
 	b2 = d2_GetWindowListItem(h, 3, s + 1);
 	b4 = d2_GetWindowListItem(h, 3, s + 2);
-	fcn_0052a0c0(who, 0);
+	d2_InitPlayerBar(who, 0);
 	while (main_RunFrameLoop(d2_RunFriedhofUpgradeWorkerDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -126,7 +126,7 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 				continue;
 			}
 			if (hh == 0) {
-				fcn_00526120(g_14b556c, 0);
+				d2_ShowModalMessageBox(g_14b556c, 0);
 			} else if (d2_SendFriedhofUpgradeWorkerCmd(who, hh, k) != 0) {
 				g_774654 = 1;
 			}

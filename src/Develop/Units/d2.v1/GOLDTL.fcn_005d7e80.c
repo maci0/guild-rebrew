@@ -24,7 +24,7 @@ void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 unsigned char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -74,7 +74,7 @@ int __cdecl gm_HandleDrainTargetAP(unsigned char* actor, unsigned char* action)
 	memset(&req, 0, sizeof(req));
 	if (*(int*) (actor + 0x1c8) & 0x8000) {
 		io_FormatTextBuffer(text, 0x1ce0);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0x81;
 	}
 	req.size = 0x400;
@@ -105,7 +105,7 @@ int __cdecl gm_HandleDrainTargetAP(unsigned char* actor, unsigned char* action)
 					}
 					io_FormatTextBuffer(text, 0x1dd9, *(unsigned short*) o, *(unsigned short*) o, 3,
 						*(unsigned short*) o, 3);
-					fcn_00526120(text, 0);
+					d2_ShowModalMessageBox(text, 0);
 					if (o[2] == 6 || o[2] == 7) {
 						io_FormatTextBuffer(text, 0x1dda, *(unsigned short*) actor, 3);
 						he_PostEntityMessage(*(int*) (o + 4), *(int*) (o + 4), text, 0, 0x5fb, s_6a59fc);

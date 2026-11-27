@@ -11,7 +11,7 @@ int __cdecl gm_CompareGameTime(void*, void*);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_GetOppositeStatIndex(int);
-void __cdecl fcn_00545670(char*, int, int, char*, int);
+void __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl he_FreeAction(char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -56,7 +56,7 @@ void __cdecl he_RunMeisterpruefungPassed(int action)
 	}
 	switch (*(int*) (action + 0x70)) {
 	case 0:
-		fcn_00545670((char*) action, 0, 0, "Berufe\\Meisterpruefung_BESTANDEN", 0x5ec);
+		d2_CreateActionPopupSlot((char*) action, 0, 0, "Berufe\\Meisterpruefung_BESTANDEN", 0x5ec);
 		if (!*(int*) (action + 0x74)) {
 			he_FreeAction((char*) action);
 			return;

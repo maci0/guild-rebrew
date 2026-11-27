@@ -30,7 +30,7 @@ struct track_417bf0 {
 };
 
 /* ADDRESS: GOLDTL 0x00417bf0 */
-int __cdecl fcn_00417bf0(struct track_417bf0* tr, unsigned int t)
+int __cdecl d3_UpdateExplosionParticles(struct track_417bf0* tr, unsigned int t)
 {
 	struct key_417bf0* k;
 	float f;

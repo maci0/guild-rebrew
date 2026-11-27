@@ -24,7 +24,7 @@ void __cdecl d3_ShutdownFloorTileCache(void)
         if (record != 0) {
             if (record[0] == 0x2a) {
                 while (*(int*) (record + 0x40) > 0) {
-                    fcn_0045fbb0((SCENE_RESOURCE*) record);
+                    d3_ReleaseSceneResourceRef((SCENE_RESOURCE*) record);
                     table = *(SLOT_44**) 0x63374c;
                     record = table[i].record;
                 }

@@ -55,7 +55,7 @@ typedef struct
 void* __cdecl fcn_00534c40(unsigned int, int, char, ...);
 void __cdecl d2_UpdatePagedPanel(char*);
 void __cdecl d2_HandleBookPageButton(char*);
-int __cdecl fcn_00517c00(int, int, int, char*);
+int __cdecl gm_FormatEntityTitleAndName(int, int, int, char*);
 char* __cdecl gm_FindBuildingOwner(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*, ...);
@@ -66,9 +66,9 @@ int __cdecl d2_InitWorkerOverlaySlots(int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateWorkerOverlaySlots(int, char*);
-void __cdecl fcn_00535550(char*);
+void __cdecl d2_TurnBookPagesForward(char*);
 void __cdecl d2_TurnBookPagesBack(char*);
-int __cdecl fcn_005b8760(void);
+int __cdecl d2_RunBonusAmountDialog(void);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
 void __cdecl cm_SendLogAction(int);
@@ -78,13 +78,13 @@ void __cdecl cm_SendTraceEnd(int);
 void __cdecl d2_UpdateGauge(unsigned char*, Row*, int);
 void __cdecl d2_ClearGauge(Row*);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl gm_CollectBuildingObjectSlots(unsigned char*, int*);
 void __cdecl d2_DestroyElement(int);
 void* __cdecl he_StartHandlungSearch(int, ...);
 void* __cdecl he_fn_Handlung(void);
 int __cdecl gm_GetEntityRelation(int, int);
-void __cdecl fcn_0046f940(int, const char*);
+void __cdecl d2_SetLabelText(int, const char*);
 extern unsigned char* lpGebaeudePROT;
 extern double dbl_128_0;
 extern double dbl_100_0;
@@ -102,7 +102,7 @@ int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
 
 /* ADDRESS: GOLDTL 0x005b88b0 */
-void __cdecl fcn_005b88b0(char* building, int a1)
+void __cdecl d2_RunPersonalbuchDialog(char* building, int winCtx)
 {
 	int cnt;
 	int pg;
@@ -146,16 +146,16 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 	hC = -1;
 	hD = -1;
 
-	win = (char*) fcn_00534c40(a1, 0x6a42c8, 4, 0x6ac340, 0x6ac300, 0x6ac314,
+	win = (char*) fcn_00534c40(winCtx, 0x6a42c8, 4, 0x6ac340, 0x6ac300, 0x6ac314,
 	                          0x6ac328);
 	d2_UpdatePagedPanel(win);
-	fcn_00517c00(*(unsigned short*) (building + 0x27), 1, 2, numA);
-	fcn_00517c00(*(unsigned short*) (building + 0x25), 1, 2, numB);
+	gm_FormatEntityTitleAndName(*(unsigned short*) (building + 0x27), 1, 2, numA);
+	gm_FormatEntityTitleAndName(*(unsigned short*) (building + 0x25), 1, 2, numB);
 	p = gm_FindBuildingOwner((int) building);
 	if (p == 0) {
 		strcpy(txtName, *(char**) 0x14abc28);
 	} else {
-		fcn_00517c00(*(unsigned short*) p, 1, 1, txtName);
+		gm_FormatEntityTitleAndName(*(unsigned short*) p, 1, 1, txtName);
 	}
 
 	d2_SetForm(*(int*) (win + 0x228), 3);
@@ -257,7 +257,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 		d2_HandleBookPageButton(win);
 		d2_UpdateWorkerOverlaySlots((int) win, building);
 		if (*(unsigned char*) 0x14cf950 == 0xcd) {
-			fcn_00535550(win);
+			d2_TurnBookPagesForward(win);
 		}
 		if (*(unsigned char*) 0x14cf950 == 0xcb) {
 			d2_TurnBookPagesBack(win);
@@ -266,7 +266,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 			goto packet2;
 		}
 		if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == hE && nSlots != 0
-		    && (ret = fcn_005b8760()) != 0) {
+		    && (ret = d2_RunBonusAmountDialog()) != 0) {
 			tv = ret / nSlots;
 			thirds = tv / 3;
 			tv3 = fcn_0050b750(ret, *(unsigned char*) 0x773d75);
@@ -384,7 +384,7 @@ after_gage:
 		*(unsigned char*) (pkt + 0x58) = 0;
 		cm_SendCopyEntityData(pkt);
 		fcn_0051af00(textA, (char*) 0x1939, (((BUILDING_PROTOTYPE*)ent)->worker_kind[0]) + 0x130);
-		fcn_00526120(textA, 0);
+		d2_ShowModalMessageBox(textA, 0);
 
 packet2:
 		if (*(int*) 0x100f1dc == -1 || *(int*) 0x67d370 != hE) {
@@ -393,7 +393,7 @@ packet2:
 		if (gage.obj == 0) {
 			goto after2;
 		}
-		if (fcn_00526120(*(char**) 0x14abbf8, 1) == 0) {
+		if (d2_ShowModalMessageBox(*(char**) 0x14abbf8, 1) == 0) {
 			goto after2;
 		}
 		for (i = 0; i < 3; i++) {
@@ -485,9 +485,9 @@ after2:
 						    r->x + 0x1a, r->y,
 						    *(int*) (r->obj + 0x18c),
 						    *(int*) 0x772514);
-						fcn_00517c00(*(unsigned short*) r->obj, 1, 1,
+						gm_FormatEntityTitleAndName(*(unsigned short*) r->obj, 1, 1,
 						             txtNum);
-						fcn_0046f940(r->label, txtNum);
+						d2_SetLabelText(r->label, txtNum);
 						GUI(r->label).f6c = 1;
 						GUI(r->label).w = 0xa0;
 						r->value = d2_AddWindowValueGauge(
@@ -509,7 +509,7 @@ after2:
 				           && *pIt != 0) {
 					strcpy(txtWorker, *(char**) 0x14abbb0);
 					r->state = 2;
-					fcn_0046f940(r->label, txtWorker);
+					d2_SetLabelText(r->label, txtWorker);
 					GUI(r->label).w = 0xa0;
 					GUI(r->label).h = 0x28;
 				} else {
@@ -528,10 +528,10 @@ after2:
 						}
 					}
 					strcpy(txtDefault, *(char**) 0x14abc28);
-					fcn_0046f940(r->label, txtDefault);
+					d2_SetLabelText(r->label, txtDefault);
 					GUI(r->label).w = 0xa0;
 					GUI(r->label).h = 0x28;
-					fcn_0046f940(r->value, (char*) 0x6b5c60);
+					d2_SetLabelText(r->value, (char*) 0x6b5c60);
 				}
 				r++;
 				pIt++;
@@ -569,7 +569,7 @@ after2:
 			if (*(int*) 0x67d370 == hA && sel != -1) {
 				fcn_0051af00(textB, (char*) 0x4140,
 				             *(unsigned short*) rows[sel].obj);
-				if (fcn_00526120(textB, 1) != 0) {
+				if (d2_ShowModalMessageBox(textB, 1) != 0) {
 					for (i = 0; i < 3; i++) {
 						d2_SetForm(*(int*) (win + 0x228 + i * 4), 2);
 						io_AppendText((char*) 0x6811b0);

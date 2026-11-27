@@ -8,7 +8,7 @@ typedef struct { unsigned char unknown00[0x243]; unsigned int period; unsigned c
 #pragma pack(pop)
 extern char* gm_CityEntity;
 char __cdecl d3_ComputeObjectBoundingSphere(int, int, void*, void*);
-int __cdecl fcn_00415300(int);
+int __cdecl d3_ObjectNoopStub(int);
 int __cdecl sb_PlayVoice(int, int, int, int, int, int, int);
 int __cdecl evt_FindScriptById(int);
 int __cdecl evt_LoadGfxScript(char*);
@@ -44,7 +44,7 @@ int __cdecl gm_CalcWorkMinutesBetween(int*, int*);
 int __cdecl gm_CreditCityTreasury(int);
 int __cdecl d3_BindEntitySceneObject(int, void*, int);
 void __cdecl d3_ApplySeasonTextureSet(int);
-void __cdecl fcn_0052d9d0(void*);
+void __cdecl d3_CreateEntityFlagPennant(void*);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(int);
 void __cdecl d3_UpdateBuildStageMeshes(int);
@@ -373,7 +373,7 @@ LfailB:
 				*(int*) (buildAction + 0xbc) = -1;
 			}
 			if (savedContext) {
-				fcn_00415300(*(int*) (v15 + 0x61));
+				d3_ObjectNoopStub(*(int*) (v15 + 0x61));
 				*(unsigned char*) (*(int*) (v15 + 0x61) + 0x217) |= 1;
 			}
 			d3_UpdateBuildStageMeshes(buildAction);
@@ -402,7 +402,7 @@ LfailB:
 			}
 			v9 = g_7f4ca2[*(unsigned short*) (v15 + 0x27)].kind;
 			if (v9 == 6 || v9 == 5 || v9 == 7) {
-				fcn_0052d9d0((void*) v15);
+				d3_CreateEntityFlagPennant((void*) v15);
 			}
 			d3_ReleaseUnusedSceneObjects();
 			if (*(int*) (*(int*) (v15 + 0x61) + 0x1ec)) {

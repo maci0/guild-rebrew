@@ -14,7 +14,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
-void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel);
+void __cdecl d2_RefreshRentAGraveOptions(char* a, int dlg, int mode, int* ids, int* sel);
 int __cdecl d2_UpdateRentGraveOptions(char* a1, int a2, int a3, int* a4, int* a5);
 int __cdecl d2_RunFriedhofDialog(char* a1, int a2, int a3, int a4);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -41,7 +41,7 @@ int __cdecl d2_RunRentGraveDialog(char* p, int a1, int a2)
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(d, 1);
 	io_AppendText(0x4113, 0x4112);
-	fcn_0058c4f0(p, d, 2, ids, &sel);
+	d2_RefreshRentAGraveOptions(p, d, 2, ids, &sel);
 	d2_SetForm(d, 3);
 	back = d2_GetWindowListItem(d, 3, io_AppendText(g_6a4078, 0x4119));
 	d2_SetElementEnabled(back, d2_UpdateRentGraveOptions(p, a1, a2, ids, &sel));
@@ -68,7 +68,7 @@ int __cdecl d2_RunRentGraveDialog(char* p, int a1, int a2)
 				continue;
 found:
 				sel = i;
-				fcn_0058c4f0(p, d, 2, ids, &sel);
+				d2_RefreshRentAGraveOptions(p, d, 2, ids, &sel);
 				d2_SetElementEnabled(back, d2_UpdateRentGraveOptions(p, a1, a2, ids, &sel));
 			}
 		}

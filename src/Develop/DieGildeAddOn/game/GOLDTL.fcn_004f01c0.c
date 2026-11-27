@@ -38,14 +38,14 @@ typedef struct CANNON_VEC3 {
 } CANNON_VEC3;
 
 int __cdecl d3_TransformPoint(char* src, char* pos, float* out);
-void __cdecl fcn_00414ab0(float* a, float* b, char* ent);
-int __cdecl fcn_00418000(int a1, float* pos, int n, float a4, float a5,
+void __cdecl d3_CalcObjectWorldBounds(float* a, float* b, char* ent);
+int __cdecl d3_CreateSmokeEmitter(int a1, float* pos, int n, float a4, float a5,
                          float a6, float a7, float a8, float a9, float* a10,
                          int a11, int a12, int a13);
 int __cdecl d3_SpawnRockDebrisEffect(int a1, float* pos, int n, float a4, float a5,
                          float a6, float a7, float a8, float a9, float a10,
                          float a11, int a12);
-int* __cdecl fcn_00417d00(int a1, float* pos, int n, float a4, float a5,
+int* __cdecl d3_CreateExplosionEmitter(int a1, float* pos, int n, float a4, float a5,
                           float a6, float a7, int a8);
 int __cdecl sb_PrepareVoice(int a1, char* name);
 void __cdecl d3snd_PlayObjectSound(int a1, int a2, int a3, float a4);
@@ -138,7 +138,7 @@ void __cdecl gm_ApplyCannonImpact(int applyDamage, int impactId, int projectileP
 		s2 = 1.0f /
 		     ((dist * *(float*) 0x662b30 + *(float*) 0x664138) * dist +
 		      1.0f);
-		fcn_00414ab0(&va.x, &vb.x, *(char**) (rec + 0x61));
+		d3_CalcObjectWorldBounds(&va.x, &vb.x, *(char**) (rec + 0x61));
 		vb.x = (vb.x - va.x) * 0.5f;
 		vb.y = (vb.y - va.y) * 0.5f;
 		vb.z = (vb.z - va.z) * 0.5f;
@@ -207,7 +207,7 @@ void __cdecl gm_ApplyCannonImpact(int applyDamage, int impactId, int projectileP
 	zhi = f1 * *(float*) (in + 0x48);
 	yhi = 0.0f;
 	cy = cy + *(float*) 0x6640cc;
-	fcn_00418000(0, &cx, 200, 25.0f, 70.0f,
+	d3_CreateSmokeEmitter(0, &cx, 200, 25.0f, 70.0f,
 	             rr * *(float*) 0x6628bc, 900.0f, 100.0f, 70.0f, &xhi,
 	             0x5dc, 7, *(int*) &col);
 	d3_SpawnRockDebrisEffect(0, &cx, 100, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f,
@@ -221,7 +221,7 @@ void __cdecl gm_ApplyCannonImpact(int applyDamage, int impactId, int projectileP
 		f2 = rr * *(float*) 0x66414c;
 		f3 = rr * *(float*) 0x662a3c;
 	}
-	fcn_00417d00(0, &cx, 0x96, f3, f2, f1, 80.0f, 200);
+	d3_CreateExplosionEmitter(0, &cx, 0x96, f3, f2, f1, 80.0f, 200);
 	p = (char*) sb_PrepareVoice(0, g_677640);
 	if (p != 0) {
 		d3snd_PlayObjectSound((int) p, *(int*) (best + 0x61), 0x6b, 12200.0f);

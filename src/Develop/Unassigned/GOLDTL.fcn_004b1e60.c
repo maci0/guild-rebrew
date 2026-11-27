@@ -31,7 +31,7 @@ int __cdecl fcn_0042d630(const char* name);
 int __cdecl txt_ReloadTextFile(const char* name);
 
 /* ADDRESS: GOLDTL 0x004b1e60 */
-void __cdecl fcn_004b1e60(void)
+void __cdecl hst_LoadHistoryText(void)
 {
 	char buf[0x40];
 	int n;

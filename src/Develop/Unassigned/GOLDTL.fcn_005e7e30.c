@@ -14,7 +14,7 @@ int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e7e30 */
-void __cdecl fcn_005e7e30(void)
+void __cdecl d2_ShowPokerHandsDialog(void)
 {
   int *v1, v2, v3, v4, v5, v6, v7, v8;
   v2 = d2_LoadForm(0,0,(char *)0x6ad604);
@@ -146,6 +146,6 @@ void __cdecl fcn_005e7e30(void)
       (*(int *)0x774654) = 1;
     if ((g_100f1dc != -1) && ((*(int *)0x67d370) == v4))
       (*(int *)0x774654) = 1;
-  } while (main_RunFrameLoop((void *)fcn_005e7e30,0x777c7));
+  } while (main_RunFrameLoop((void *)d2_ShowPokerHandsDialog,0x777c7));
   d2_DestroyForm(v2);
 }

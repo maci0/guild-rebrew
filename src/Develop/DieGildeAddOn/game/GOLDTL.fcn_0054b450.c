@@ -5,7 +5,7 @@ float __cdecl gm_CalcSkillDuelScore(char*, char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl he_FreeAction(char*);
 void __cdecl fcn_00545780(char*);
-int __cdecl fcn_00545670(char*, int, int, char*, int);
+int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 void __cdecl io_FormatTextBuffer(int, int, ...);
 int __cdecl io_AppendText(int, ...);
@@ -18,7 +18,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 extern pos14_7f4c00 gm_GameTime;
 extern float g_6628a0;
 /* ADDRESS: GOLDTL 0x0054b450 */
-void __cdecl fcn_0054b450(char* a0)
+void __cdecl he_RunSkillDuelEvent(char* a0)
 {
 	float dist;
 	char buf[0x100];
@@ -42,7 +42,7 @@ void __cdecl fcn_0054b450(char* a0)
 		*(int*) (a + 0x70) = 2;
 	switch (*(int*) (a + 0x70)) {
 	case 0:
-		fcn_00545670(a, 0, 0, (char*) 0x6a5a10, 0x5ec);
+		d2_CreateActionPopupSlot(a, 0, 0, (char*) 0x6a5a10, 0x5ec);
 		if (*(int*) (a + 0x74) == 0) {
 			he_FreeAction(a);
 			return;

@@ -2,15 +2,15 @@ typedef void (__cdecl* Cb5a80d0a)(int a0, int a1, int a2, int a3);
 typedef void (__cdecl* Cb5a80d0b)(int a0, int a1, int a2, int a3);
 
 int __cdecl gm_CanEnterGebaeude(unsigned char* a0);
-void __cdecl fcn_00530510(void);
+void __cdecl sv_ResetSelectionState(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* a0);
-void __cdecl fcn_004c3170(unsigned char* b);
+void __cdecl sb_LoadBuildingVoiceBanks(unsigned char* b);
 int __cdecl main_RunFrameLoop(int a0, int a1);
 void __cdecl init_LoadGebaeudeScene(int a0);
 int __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3, int a4);
 int __cdecl d3_SelectSceneContext(int a0, int a1);
-void __cdecl fcn_0043aa30(int a0);
+void __cdecl d3_InitUniverse(int a0);
 void __cdecl d3_UpdateBuildingView(unsigned char* a0, int a1);
 void __cdecl d3_SetupInteriorScene(int a0, unsigned char* a1);
 int __cdecl gm_GetBuildingTypeCategory(int a0);
@@ -23,7 +23,7 @@ void __cdecl evt_RequestScriptExit(void* p);
 void __cdecl evt_WaitForScriptExit(int a0);
 void __cdecl d3snd_FreeObjectSoundBanks(void);
 void __cdecl d3_CleanupBuildingScene(int a0);
-void __cdecl fcn_0043a9c0(int a0);
+void __cdecl d3_DeinitUniverse(int a0);
 void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl d2_RunSchmiedeInteriorHud(int a0);
 void __cdecl d2_RunHolzfaellerInteriorHud(int a0);
@@ -64,7 +64,7 @@ void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 	g_774658 = g_774650 + 1;
 	building = (unsigned char*) *(int*) &d3_CurrentContextIndex;
 	*(int*) 0x6a2520 = 0;
-	fcn_00530510();
+	sv_ResetSelectionState();
 	sv_ClearObjectSelection();
 	s0 = *(int*) &g_7e3a40;
 	s1 = *(int*) &g_7e3a44;
@@ -79,7 +79,7 @@ void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 	w = n * 0x3dc;
 	*(int*) (w + 0x1043378) = *(int*) 0x1043378;
 	if (n != 0) {
-		fcn_004c3170(buildingPtr);
+		sb_LoadBuildingVoiceBanks(buildingPtr);
 		if (n == -1 || *(char*) (w + 0x1043695) != 0) {
 			d2_SuppressOverlay = 1;
 			main_RunFrameLoop(0, 0x603c7);
@@ -96,7 +96,7 @@ void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 		}
 		g_675310 = *(int*) (p + 2);
 		d3_SelectSceneContext(n, 0);
-		fcn_0043aa30(3);
+		d3_InitUniverse(3);
 		if (*(int*) &g_6b8300 != 0) {
 			if (*(unsigned char*) 0x77666a == 2) {
 				*(unsigned char*) (*(int*) &g_6b8300 + 0x8036) = (*(unsigned char*) (*(int*) &g_6b8300 + 0x8036) & 0xe7) | 4;
@@ -184,7 +184,7 @@ void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 		*(int*) (w + 0x1043378) = 0;
 		*(int*) 0x6b89c0 = 0;
 	}
-	fcn_00530510();
+	sv_ResetSelectionState();
 	sv_ClearObjectSelection();
 	d3_CameraHorizontalIndex = 0;
 	d3_CameraVerticalStep = 0;
@@ -206,7 +206,7 @@ void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 	}
 	d3snd_FreeObjectSoundBanks();
 	d3_CleanupBuildingScene(*(int*) &g_7746c8);
-	fcn_0043a9c0(3);
+	d3_DeinitUniverse(3);
 	d3_SelectSceneContext((int) building, 0);
 	*(int*) &g_7ea360 = 0;
 	*(int*) &g_7746c8 = 0;

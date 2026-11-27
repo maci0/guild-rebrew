@@ -17,7 +17,7 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00469c40(int x, int y, int slot);
+void __cdecl d2_PositionControl(int x, int y, int slot);
 
 void __cdecl d2_PositionWindow(int k, unsigned char center)
 {
@@ -36,5 +36,5 @@ void __cdecl d2_PositionWindow(int k, unsigned char center)
 	} else {
 		y = w->top;
 	}
-	fcn_00469c40(x, y, w->slot);
+	d2_PositionControl(x, y, w->slot);
 }

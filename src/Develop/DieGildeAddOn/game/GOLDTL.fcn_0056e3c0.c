@@ -23,7 +23,7 @@ int __cdecl gm_CanDeleteEntity(char*);
 void __cdecl cm_RequestKillSpieler(int, int);
 int __cdecl cm_GetCommandStatus(int);
 int* __cdecl cm_GetCommandResult(int);
-int __cdecl fcn_004c5980(int);
+int __cdecl cm_EnqueueStagedPacket(int);
 int __cdecl cut_FindCutsceneById(int);
 void __cdecl he_FreeAction(char*);
 
@@ -125,7 +125,7 @@ void __cdecl he_RunCharacterDeath(char* eventState)
 		*(char*) (buf + 0x30) = 1;
 		*(int*) (buf + 0x0c) = (int) s;
 		*(int*) (buf + 0x34) = (int) s;
-		*(int*) (eventState + 0xb4) = fcn_004c5980((int) buf);
+		*(int*) (eventState + 0xb4) = cm_EnqueueStagedPacket((int) buf);
 		gm_AddTime((int*) (eventState + 0x52), 0, 1, 0);
 		*(int*) (eventState + 0x70) = 6;
 		return;

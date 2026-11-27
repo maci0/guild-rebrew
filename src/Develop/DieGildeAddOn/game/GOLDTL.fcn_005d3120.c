@@ -20,8 +20,8 @@ void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 int __cdecl cm_SendSetHE(char a1, unsigned char* e);
 void __cdecl gm_AddTime(char*, int, int, int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
-int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_005d2ec0(char*, int*);
+int __cdecl d2_ShowModalMessageBox(char*, int);
+int __cdecl d2_RunWerbungSelectDialog(char*, int*);
 
 extern float g_6628a8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -90,7 +90,7 @@ int __cdecl d2_RunCourtshipDialog(int entity, int* request)
 		return 0x10;
 	}
 	if (mode == 1) {
-		return fcn_005d2ec0((char*) entity, request);
+		return d2_RunWerbungSelectDialog((char*) entity, request);
 	}
 	h = d2_LoadForm(0, 0, (char*) 0x6acbbc);
 	d2_CenterDialogWindows(h);
@@ -180,7 +180,7 @@ int __cdecl d2_RunCourtshipDialog(int entity, int* request)
 					*(char*) (e + 0xba) = 0;
 					*(int*) (e + 0x84) = cm_SendSetHE(0, (unsigned char*) e);
 					cm_RequestMoveCredits(-1, *(int*) (entity + 4), g_773d75, q);
-					fcn_00526120(buf2, 0);
+					d2_ShowModalMessageBox(buf2, 0);
 					mode = mode;
 					g_774654 = 1;
 				}
@@ -189,7 +189,7 @@ int __cdecl d2_RunCourtshipDialog(int entity, int* request)
 				io_FormatTextBuffer(buf3, 0x1cfa, *(unsigned short*) p);
 				*(char*) (e + 0xba) = 0;
 				*(int*) (e + 0x84) = cm_SendSetHE(0, (unsigned char*) e);
-				fcn_00526120(buf3, 0);
+				d2_ShowModalMessageBox(buf3, 0);
 				g_774654 = 1;
 			}
 		}

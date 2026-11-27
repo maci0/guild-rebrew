@@ -3,11 +3,11 @@ void __cdecl d2_SetQuadVertexColor(int, unsigned char, unsigned char, unsigned c
 
 
 /* ADDRESS: GOLDTL 0x0047cc80 */
-int __cdecl d2_DrawScaledSpriteQuad(int a1, int a2, int a3, void* s, int idx, float scale, int tint)
+int __cdecl d2_DrawScaledSpriteQuad(int x, int y, int surf, void* shapeBank, int idx, float scale, int tint)
 {
 	int result;
 
-	result = d2_DrawBankSpriteScaled(a1, a2, a3, s, idx, scale);
+	result = d2_DrawBankSpriteScaled(x, y, surf, shapeBank, idx, scale);
 	if (tint != 0)
 		d2_SetQuadVertexColor(result, 0xff, 0xff, 0xff);
 	return 1;

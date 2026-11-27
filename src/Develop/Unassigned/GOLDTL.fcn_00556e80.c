@@ -1,8 +1,8 @@
 
 
 
-int __cdecl fcn_0047dcf0(unsigned short*);
-int __cdecl fcn_0047dca0(unsigned short*);
+int __cdecl gm_IsEntityHomeInLocalShard(unsigned short*);
+int __cdecl gm_IsLocalSimEntity(unsigned short*);
 
 int __cdecl he_IsEntityEligibleForIllness(unsigned short* e)
 {
@@ -15,8 +15,8 @@ int __cdecl he_IsEntityEligibleForIllness(unsigned short* e)
 	if (((unsigned char*) e)[2] >= 10) {
 		return 0;
 	}
-	if (fcn_0047dcf0(e)) {
+	if (gm_IsEntityHomeInLocalShard(e)) {
 		return 1;
 	}
-	return fcn_0047dca0(e) != 0;
+	return gm_IsLocalSimEntity(e) != 0;
 }

@@ -49,7 +49,7 @@ int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl gm_CanBuildBuildingType(int, int);
 int __cdecl gm_GetTypeProductValue(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00526120(void*, int);
+int __cdecl d2_ShowModalMessageBox(void*, int);
 int __cdecl gm_CheckEntityStock(void*, int, char);
 int __cdecl gm_SearchTable67(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -79,7 +79,7 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 	id = *(int*) (buildingEntry + 1);
 	if (rec->level >= rec->level_limit) {
 		io_FormatTextBuffer(buf, 0x17d7);
-		fcn_00526120(buf, 0);
+		d2_ShowModalMessageBox(buf, 0);
 		return;
 	}
 	kind = gm_GetBuildingTypeCategory(*(unsigned char*) buildingEntry);
@@ -87,13 +87,13 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 		if (kind == 1 || kind == 4 || kind == 8) {
 			if (gm_CanBuildBuildingType(*(unsigned char*) buildingEntry + 1, g_774970) != 1) {
 				io_FormatTextBuffer(buf, 0x17d6);
-				fcn_00526120(buf, 0);
+				d2_ShowModalMessageBox(buf, 0);
 				return;
 			}
 		} else {
 			if (gm_CanBuildBuildingType(*(unsigned char*) buildingEntry + 1, g_774970) != 1) {
 				io_FormatTextBuffer(buf, 0x17d9);
-				fcn_00526120(buf, 0);
+				d2_ShowModalMessageBox(buf, 0);
 				return;
 			}
 		}
@@ -103,21 +103,21 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 		lc_GetBauplatzPrefix(*(unsigned char*) buildingEntry + 1, (char*) &msg);
 		if (strstr((char*) &msg, bp.node) == 0) {
 			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) buildingEntry * 14 + 0x49c);
-			fcn_00526120(buf, 0);
+			d2_ShowModalMessageBox(buf, 0);
 			return;
 		}
 	} else {
 		lc_GetBauplatzPrefix(*(unsigned char*) buildingEntry + 1, (char*) &msg);
 		if (fcn_0065f220((char*) &msg, bp.name) != 0) {
 			io_FormatTextBuffer(buf, 0x17d8, *(unsigned char*) buildingEntry * 14 + 0x49c);
-			fcn_00526120(buf, 0);
+			d2_ShowModalMessageBox(buf, 0);
 			return;
 		}
 	}
 	quotedCost = (int) (gm_GetTypeProductValue(*(unsigned char*) buildingEntry + 1) * g_664e60);
 	io_FormatTextBuffer(buf, 0x17d5, quotedCost, buildingEntry, *(unsigned char*) buildingEntry * 14 + 0x49c);
 	if (kind != 3 && kind != 5) {
-		if (fcn_00526120(buf, 0x11) == 0) {
+		if (d2_ShowModalMessageBox(buf, 0x11) == 0) {
 			return;
 		}
 		if (gm_CheckEntityStock(&((ENTITY_RECORD*) g_7f4ca0)[g_774970], quotedCost,
@@ -147,18 +147,18 @@ void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 		cm_SendCopyEntityData((char*) &msg);
 		cm_SendTraceEnd(g_67e968);
 		io_FormatTextBuffer(text, 0x17da, *(unsigned char*) buildingEntry * 14 + 0x49c);
-		fcn_00526120(text, 4);
+		d2_ShowModalMessageBox(text, 4);
 		return;
 	}
 	if (kind == 3) {
 		id = *(int*) ((char*) gm_GetGuildHall(1) + 0x5d);
 		m = fcn_00502cd0(id, 2, 6, 0, 0x115);
-		if (fcn_00526120(buf, 0x11) == 0) {
+		if (d2_ShowModalMessageBox(buf, 0x11) == 0) {
 			return;
 		}
 	} else {
 		m = gm_FindBuildingTreasury(buildingEntry);
-		if (fcn_00526120(buf, 0x11) == 0) {
+		if (d2_ShowModalMessageBox(buf, 0x11) == 0) {
 			return;
 		}
 		if (m == 0) {

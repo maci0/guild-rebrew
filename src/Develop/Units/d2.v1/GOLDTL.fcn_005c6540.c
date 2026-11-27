@@ -55,7 +55,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_ResetUiInputAndBounds(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_SetFormVisibility(int, int);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -101,7 +101,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 				} else if (g_100f1dc == 1 && ((*(char*)&g_7747b0) & 0x80) == 0) {
 					io_FormatTextBuffer(text, 0xfe6, *item * 2 + 0x9a8, *item * 2 + 0x9a8);
 					d2_SetFormVisibility(dlg, 0);
-					if (fcn_00526120(text, 1) != 0) {
+					if (d2_ShowModalMessageBox(text, 1) != 0) {
 						for (i = 0; i < 6; i++) {
 							if (((Btn*)g_776c60)[i].item != 0 && (id = d2_GetControlValue(((Btn*)g_776c60)[i].btn)) != 0) {
 								cm_SendSellObjekt(-1, ((Player*)g_775318)->handle, *((Btn*)g_776c60)[i].item, id, g_773d75, 0);

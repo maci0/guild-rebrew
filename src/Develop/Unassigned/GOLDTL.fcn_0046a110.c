@@ -46,7 +46,7 @@ int __cdecl d2_DrawMouseCursor(int x, int y);
 void __cdecl d2_FlushQueuedQuads(int a, int b, int c);
 void __cdecl fcn_004732c0(void);
 void __cdecl d2_SelectFont(int font);
-void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
+void __cdecl d2_DrawWordWrappedText(int x, int y, int w, int h, int surf, char* text, int flags);
 void __cdecl d2_SetSurfaceClipRect(int a, int b, int c, int d, char* e);
 void __cdecl d2_DrawValueGauge(int a0, int a1);
 void __cdecl d2_DrawTextButton(int a0, int a1);
@@ -242,7 +242,7 @@ label_46a7ab:
 							f = (float) g_6629c8;
 						sprintf(u.buf, (char*) 0x67d43c, (int) (f * 100.0));
 						d2_SelectFont(d2_DefaultFont + 1);
-						fcn_0046bd20(dx, dy + ((D2_CONTROL_TL*) ent)->height - 0xf,
+						d2_DrawWordWrappedText(dx, dy + ((D2_CONTROL_TL*) ent)->height - 0xf,
 						             *(unsigned short*) (*(char**) &((D2_CONTROL_TL*) ent)->data + 6),
 						             ((D2_CONTROL_TL*) ent)->height, g_77250c, u.buf, 0x28);
 					}
@@ -272,7 +272,7 @@ label_46a7ab:
 						v = dy + ((D2_CONTROL_TL*) ent)->value_1e0;
 					else
 						v = dy - 1;
-					fcn_0046bd20(t, v, ((D2_CONTROL_TL*) ent)->width, ((D2_CONTROL_TL*) ent)->height,
+					d2_DrawWordWrappedText(t, v, ((D2_CONTROL_TL*) ent)->width, ((D2_CONTROL_TL*) ent)->height,
 					             g_77250c, ent + 0x8c, flags);
 				}
 				if (*(char*) (ent + 0xcc)) {
@@ -321,7 +321,7 @@ label_46a7ab:
 					flags |= 0x10;
 				if (((D2_CONTROL_TL*) ent)->value_054)
 					flags |= 4;
-				fcn_0046bd20(dx, dy, ((D2_CONTROL_TL*) ent)->width, ((D2_CONTROL_TL*) ent)->height,
+				d2_DrawWordWrappedText(dx, dy, ((D2_CONTROL_TL*) ent)->width, ((D2_CONTROL_TL*) ent)->height,
 				             g_77250c, (char*) ((D2_CONTROL_TL*) ent)->value_088, flags);
 				((D2_CONTROL_TL*) ent)->height = g_772548;
 				d2_SelectFont(d2_CurrentFont);

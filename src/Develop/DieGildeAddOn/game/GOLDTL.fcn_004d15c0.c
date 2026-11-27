@@ -17,7 +17,7 @@ typedef struct {
 	int f10;
 	int f14;
 	char rest[0x14];
-} pkt2c;
+} TACTICAL_SLOT_PKT;
 /* SIZE 0x2c */
 
 char __cdecl d3sm_RaycastScreenPoint(int, int, int, int*, int*);
@@ -26,15 +26,15 @@ int __cdecl gm_IssueEscapeOrder(char*, char*, char*);
 int __cdecl cut_AssignConquerTarget(char*, char*, char*);
 int __cdecl he_QueueTradeWareCommand(char*, char*, char*);
 int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
-pkt2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
-int __cdecl cm_SendUpdateCutsceneEntitySlot(int, pkt2c*);
+TACTICAL_SLOT_PKT* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
+int __cdecl cm_SendUpdateCutsceneEntitySlot(int, TACTICAL_SLOT_PKT*);
 void __cdecl fcn_00533a40(char*);
 
 /* ADDRESS: GOLDTL 0x004d15c0 */
-char __cdecl fcn_004d15c0(char* context, char* targetEntity)
+char __cdecl cut_DispatchTacticalOrder(char* context, char* targetEntity)
 {
-	pkt2c l;
-	pkt2c* e;
+	TACTICAL_SLOT_PKT l;
+	TACTICAL_SLOT_PKT* e;
 	int v13;
 	int v12;
 	int obj;

@@ -73,7 +73,7 @@ extern char g_6a2354[];
 extern char g_699a68[];
 extern char g_773d75[];
 
-int __cdecl fcn_0042b2f0(char*, int, int);
+int __cdecl io_SelectDelimitedString(char*, int, int);
 int __cdecl fcn_0064d530(char*, const char*, unsigned int);
 int __cdecl atoi(char*);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
@@ -82,8 +82,8 @@ int __cdecl io_CopyTrailingDigits(char*, int, char*);
 int __cdecl fcn_0051e070(void);
 void __cdecl gm_PackGameTime(void*, void*);
 int __cdecl gm_GetSeasonFromDate(char*, int);
-int __cdecl fcn_0050bc10(int, int, char*);
-int __cdecl fcn_00517c00(int, int, int, char*);
+int __cdecl d2_FormatCurrencyString(int, int, char*);
+int __cdecl gm_FormatEntityTitleAndName(int, int, int, char*);
 int __cdecl fcn_00657a73(int, char*, int);
 int __cdecl ReportClientMessage(char*);
 int __cdecl gm_RandomMod(int);
@@ -189,9 +189,9 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					r = 1;
 				}
 				if (text.buf[i - 1] == 's' && flag == 0) {
-					p = (char*) fcn_0042b2f0(p, r, 4);
+					p = (char*) io_SelectDelimitedString(p, r, 4);
 				} else {
-					p = (char*) fcn_0042b2f0(p, r, 8);
+					p = (char*) io_SelectDelimitedString(p, r, 8);
 				}
 			} else if (p == 0) {
 				p = txt_TextEntries[j];
@@ -226,9 +226,9 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			}
 			if (grammar_state == 1 || grammar_state == 2) {
 				if (text.buf[i - 1] == 's' && flag == 0) {
-					res = fcn_0042b2f0(g_14a540c[kind], r, 4);
+					res = io_SelectDelimitedString(g_14a540c[kind], r, 4);
 				} else {
-					res = fcn_0042b2f0(g_14a540c[kind], r, 8);
+					res = io_SelectDelimitedString(g_14a540c[kind], r, 8);
 				}
 				if (e > -1) {
 					k = io_CopyTrailingDigits(text.buf, e, slot258);
@@ -241,9 +241,9 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				}
 			} else if (grammar_state == 3 || grammar_state == 4) {
 				if (text.buf[i - 1] == 's' && flag == 0) {
-					res = fcn_0042b2f0(g_14a5400[kind], r, 4);
+					res = io_SelectDelimitedString(g_14a5400[kind], r, 4);
 				} else {
-					res = fcn_0042b2f0(g_14a5400[kind], r, 8);
+					res = io_SelectDelimitedString(g_14a5400[kind], r, 8);
 				}
 				if (e > -1) {
 					k = io_CopyTrailingDigits(text.buf, e, slot198);
@@ -256,9 +256,9 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				}
 			} else if (grammar_state == 5 || grammar_state == 6) {
 				if (text.buf[i - 1] == 's' && flag == 0) {
-					res = fcn_0042b2f0(g_14a5418[kind], r, 4);
+					res = io_SelectDelimitedString(g_14a5418[kind], r, 4);
 				} else {
-					res = fcn_0042b2f0(g_14a5418[kind], r, 8);
+					res = io_SelectDelimitedString(g_14a5418[kind], r, 8);
 				}
 				if (e > -1) {
 					k = io_CopyTrailingDigits(text.buf, e, slot218);
@@ -391,7 +391,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			}
 			cursor += 4;
 			res = *(int*) (cursor - 4);
-			fcn_0050bc10(res, g_773d75[0], text.tmp);
+			d2_FormatCurrencyString(res, g_773d75[0], text.tmp);
 			cp_src = text.tmp;
 			cp_n = (int) strlen(cp_src);
 			cp_dst = text.buf + i - 1;
@@ -401,7 +401,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 		case 'w':
 			cursor += 4;
 			res = *(int*) (cursor - 4);
-			res = (int) fcn_0042b2f0(
+			res = (int) io_SelectDelimitedString(
 				g_14a79c0[*(unsigned short*) (0x8680b4 + res * 189 * 4) * 2],
 				1, 8);
 			strcpy(text.tmp, (char*) res);
@@ -527,7 +527,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				break;
 			}
 			cursor += 4;
-			fcn_00517c00(*(int*) (cursor - 4), r,
+			gm_FormatEntityTitleAndName(*(int*) (cursor - 4), r,
 				(text.buf[i] - '0'), text.tmp);
 			cp_src = text.tmp;
 			cp_n = (int) strlen(cp_src);
@@ -585,7 +585,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 			} else {
 				k = 3;
 			}
-			p = (char*) fcn_0042b2f0(p, r, 4);
+			p = (char*) io_SelectDelimitedString(p, r, 4);
 			if (p == 0) {
 				p = txt_TextEntries[j];
 			}
@@ -623,7 +623,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 				e--;
 			}
 			if (grammar_state == 1 || grammar_state == 2) {
-				res = fcn_0042b2f0(g_14a540c[kind], r, 4);
+				res = io_SelectDelimitedString(g_14a540c[kind], r, 4);
 				if (e > -1) {
 					k = io_CopyTrailingDigits(text.buf, e, slot1d8);
 					sprintf(text.tmp, g_6a22d8, res, slot1d8, slot98);
@@ -634,7 +634,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			} else if (grammar_state == 3 || grammar_state == 4) {
-				res = fcn_0042b2f0(g_14a5400[kind], r, 4);
+				res = io_SelectDelimitedString(g_14a5400[kind], r, 4);
 				if (e > -1) {
 					k = io_CopyTrailingDigits(text.buf, e, slot118);
 					sprintf(text.tmp, g_6a22d8, res, slot118, slot98);
@@ -645,7 +645,7 @@ void __cdecl io_FormatTextBuffer(char* output, int format_selector, ...)
 					text.tmp[0] = (char) toupper(text.tmp[0]);
 				}
 			} else if (grammar_state == 5 || grammar_state == 6) {
-				res = fcn_0042b2f0(g_14a5418[kind], r, 4);
+				res = io_SelectDelimitedString(g_14a5418[kind], r, 4);
 				if (e > -1) {
 					k = io_CopyTrailingDigits(text.buf, e, slot158);
 					sprintf(text.tmp, g_6a22d8, res, slot158, slot98);

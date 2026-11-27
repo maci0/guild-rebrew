@@ -37,7 +37,7 @@ void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00475f80(void* o);
 void __cdecl fcn_00477550(void);
 void __cdecl d3_SafeReleaseSceneResource(int a1);
-void __cdecl fcn_0047c4b0(void);
+void __cdecl d2_DestroyQuadVertexBuffer(void);
 void __cdecl d2_ReleaseRenderToSurface(void);
 
 /* Shuts the resource system down: drops the animation tracks, every entry of
@@ -133,6 +133,6 @@ void __cdecl fcn_00465c60(void)
 		m_FreeTracked((void*) g_7725ac);
 		g_7725ac = 0;
 	}
-	fcn_0047c4b0();
+	d2_DestroyQuadVertexBuffer();
 	d2_ReleaseRenderToSurface();
 }

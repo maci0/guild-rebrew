@@ -10,7 +10,7 @@ int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl gm_GetTypeProductValue(int);
 int __cdecl gm_JobToBuildingType(int);
 int __cdecl gm_MapEntityStatRange(int);
-int __cdecl fcn_00507080(int);
+int __cdecl gm_MapZunftToBuildingCategory(int);
 int __cdecl gm_CalculateGebaeudeValue(unsigned char *, int);
 int __cdecl gm_CalcBuildingCost(short *, int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -240,7 +240,7 @@ use_slot:
 		int e;
 
 		v = gm_MapEntityStatRange(*(unsigned char *) ((char *) ent + 0x164));
-		t = fcn_00507080(v);
+		t = gm_MapZunftToBuildingCategory(v);
 		type2 = gm_GetOppositeStatIndex(*(unsigned char *) ((char *) ent + 0x164));
 		limit = type2 % 2 + type2 / 2;
 		if (t == 0x10) {

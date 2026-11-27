@@ -3,12 +3,12 @@
 #include "client_method_registry.h"
 
 int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, char* e);
-int __cdecl fcn_00495960(void);
+int __cdecl am_StartDummyRechtschaffenheit(void);
 int __cdecl am_RunDummyRechtschaffenheit(void);
 int __cdecl am_StartDummySicherheit(void);
-int __cdecl fcn_004959b0(void);
-int __cdecl fcn_004959c0(void);
-int __cdecl fcn_004959e0(void);
+int __cdecl am_RunDummySicherheit(void);
+int __cdecl ai_StartDummyFortpflanzung(void);
+int __cdecl am_RunDummyFortpflanzung(void);
 #ifdef REBREW_GOLD
 int __cdecl fcn_00496020(int cmd, int dummy, int result);
 #else
@@ -17,10 +17,10 @@ int __cdecl cm_TestCommandResult(int cmd, int dummy, char* result);
 int __cdecl cm_RunDummyUnversehrtheit(void);
 int __cdecl ai_StartDummyBeruf(void);
 int __cdecl cm_RunDummyBeruf(void);
-int __cdecl fcn_00495a50(void);
+int __cdecl ai_StartDummyVergnuegen(void);
 int __cdecl fcn_00495a70(void);
 int __cdecl ai_StartBildung(void);
-int __cdecl fcn_00495f80(void);
+int __cdecl ai_RunBildung(void);
 int __cdecl ai_StartBildungBeruf(void);
 int __cdecl fcn_00496480(void);
 int __cdecl ai_ScoreBestechung(void);
@@ -42,11 +42,11 @@ int __cdecl fcn_00497e60(void);
 int __cdecl fcn_00497ec0(void);
 int __cdecl ai_RunWohnsitzBauen(void);
 int __cdecl ai_StartWohnsitzUpgraden(void);
-int __cdecl fcn_00498660(void);
+int __cdecl ai_RunWohnsitzUpgraden(void);
 int __cdecl ai_StartBetriebBauen(void);
 int __cdecl ai_RunBetriebBauen(void);
-int __cdecl fcn_00498e00(void);
-int __cdecl fcn_00498e10(void);
+int __cdecl am_StartBetriebUpgradenAP(void);
+int __cdecl ai_RunBetriebUpgradenAP(void);
 int __cdecl ai_StartBetriebUpgraden(void);
 int __cdecl fcn_00498f40(void);
 int __cdecl ai_StartMedicusAufsuchen(void);
@@ -59,7 +59,7 @@ int __cdecl ai_StartBeatUp(void);
 int __cdecl ai_RunBeatUp(void);
 int __cdecl PrepareBuergerrecht(void*, char*, int, char*);
 int __cdecl ai_RunBuergerrecht(void);
-int __cdecl fcn_00499cc0(void);
+int __cdecl ai_StartApsSparen(void);
 int __cdecl cm_RunApsSparen(void);
 int __cdecl ai_StartUseObjectMilitary(void);
 int __cdecl ai_RunUseObjectMilitary(void);
@@ -248,7 +248,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x3;
 	strcpy(d.name, "DummyVergnuegen");
 	d.score = ai_ComputeBaseActionScore;
-	d.start = fcn_00495a50;
+	d.start = ai_StartDummyVergnuegen;
 	d.run = fcn_00495a70;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -283,7 +283,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Bildung");
 	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBildung;
-	d.run = fcn_00495f80;
+	d.run = ai_RunBildung;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -350,7 +350,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x6;
 	strcpy(d.name, "DummyRechtschaffenheit");
 	d.score = ai_ComputeBaseActionScore;
-	d.start = fcn_00495960;
+	d.start = am_StartDummyRechtschaffenheit;
 	d.run = am_RunDummyRechtschaffenheit;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -385,7 +385,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "DummySicherheit");
 	d.score = ai_ComputeBaseActionScore;
 	d.start = am_StartDummySicherheit;
-	d.run = fcn_004959b0;
+	d.run = am_RunDummySicherheit;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -418,8 +418,8 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x8;
 	strcpy(d.name, "DummyFortpflanzung");
 	d.score = ai_ComputeBaseActionScore;
-	d.start = fcn_004959c0;
-	d.run = fcn_004959e0;
+	d.start = ai_StartDummyFortpflanzung;
+	d.run = am_RunDummyFortpflanzung;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -725,7 +725,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Wohnsitz upgraden (Credits)");
 	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartWohnsitzUpgraden;
-	d.run = fcn_00498660;
+	d.run = ai_RunWohnsitzUpgraden;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -792,8 +792,8 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x14;
 	strcpy(d.name, "Betrieb upgraden (AP)");
 	d.score = ai_ComputeBaseActionScore;
-	d.start = fcn_00498e00;
-	d.run = fcn_00498e10;
+	d.start = am_StartBetriebUpgradenAP;
+	d.run = ai_RunBetriebUpgradenAP;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -996,7 +996,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0x1a;
 	strcpy(d.name, "ApsSparen");
 	d.score = ai_ComputeBaseActionScore;
-	d.start = fcn_00499cc0;
+	d.start = ai_StartApsSparen;
 	d.run = cm_RunApsSparen;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {

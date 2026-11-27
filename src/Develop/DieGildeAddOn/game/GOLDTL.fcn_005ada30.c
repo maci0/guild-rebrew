@@ -39,7 +39,7 @@ int __cdecl gm_EvalEntityInventoryValue(unsigned char* o, int* out);
 void __cdecl cm_RequestFreeEntity(int);
 int __cdecl d2_CreateRadioGroup(int n, ...);
 void __cdecl d2_AddToRadioGroup(int g, int id);
-int __cdecl fcn_0046c690(int a);
+int __cdecl d2_GetRadioGroupSelection(int a);
 int __cdecl cm_SendRemoveLinkedObject(int a1, int a2, int a3);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
@@ -129,7 +129,7 @@ void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 			refresh = 0;
 		}
 		if (g_100f1dc != -1 && d2_CurrentElementId == back && grp != -1) {
-			i = fcn_0046c690(grp);
+			i = d2_GetRadioGroupSelection(grp);
 			if (i >= 0) {
 				r = cm_SendRemoveLinkedObject(*(int*) (p + 1), -1, *(int*) (carts[i] + 2));
 				while (cm_GetCommandStatus(r) == 0) {

@@ -8,7 +8,7 @@ float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004a5340(unsigned short*, unsigned int, unsigned int*, float, float, unsigned short*);
+int __cdecl ai_SelectRankedCandidates(unsigned short*, unsigned int, unsigned int*, float, float, unsigned short*);
 int __cdecl amt_CollectOfficeCandidates(int, int, unsigned char**);
 extern char* g_77261c;
 extern float g_662910;
@@ -81,7 +81,7 @@ int __cdecl ai_StartBestechung(int targetSlot, short* ent, int mode, Cmd* out1, 
         } else {
             if ((*(unsigned int*)((char*)ent + 0x1cc) & 0x1c000) != 0) return 0;
             mode = 0x10000500;
-            if (fcn_004a5340((unsigned short*)ent, 1, (unsigned int*)&mode, 0.0f, (float)(unsigned short)gm_RandomMod(0x19) + g_662aa0, (unsigned short*)&targetSlot) == 0) return 0;
+            if (ai_SelectRankedCandidates((unsigned short*)ent, 1, (unsigned int*)&mode, 0.0f, (float)(unsigned short)gm_RandomMod(0x19) + g_662aa0, (unsigned short*)&targetSlot) == 0) return 0;
             e = (unsigned char*)0x7f4ca0 + *(unsigned short*)&targetSlot * 0x21c;
         }
         if (e == 0) return 0;

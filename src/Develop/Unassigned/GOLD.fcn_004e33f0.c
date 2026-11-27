@@ -3,7 +3,7 @@
 
 int __cdecl d3_DestroyRain(int);
 
-void __cdecl fcn_004e33f0(void)
+void __cdecl d3_DestroyRainIfAllowed(void)
 {
 	if (*(int*) 0x6f0d8c == 0) {
 		d3_DestroyRain(*(int*) 0x6f0dbc);

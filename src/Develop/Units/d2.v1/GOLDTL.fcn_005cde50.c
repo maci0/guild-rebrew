@@ -12,14 +12,14 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_005c9090(int, int, int, int, int);
+void __cdecl d2_ShowCenteredText(int, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005cde50 */
-void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
+void __cdecl d2_RunAmtChamberMenu(void (*cb)(int), int textId, int enableFirst)
 {
 	int btn[14];
 	int dlg;
@@ -57,7 +57,7 @@ void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 		}
 		id = btn[i];
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].font)) = 0x55;
-		fcn_005c9090(*(int*) (0x14a9de8 + btn[i + 7] * 4),
+		d2_ShowCenteredText(*(int*) (0x14a9de8 + btn[i + 7] * 4),
 			     *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].x)) - *(int*) (g_77255c + 4) + 0x20,
 			     *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].y)) - *(int*) (g_77255c + 8) - 0x19,
 			     200, 0x55);
@@ -81,6 +81,6 @@ void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 				d2_SetFormVisibility(dlg, 1);
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005cde50, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunAmtChamberMenu, 0x657c7) != 0);
 	d2_DestroyForm(dlg);
 }

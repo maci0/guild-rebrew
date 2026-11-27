@@ -1,0 +1,75 @@
+int __cdecl fcn_00503fe0(int, int, int);
+char* __cdecl gm_FindBuildingOwner(char*);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
+void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
+void __cdecl cm_SendSetGebUpgrade(int);
+void __cdecl cm_RequestChangeBits(int, int, int, int, int);
+void __cdecl he_FreeAction(char*);
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+/* ADDRESS: GOLDTL 0x00563cc0 */
+void __cdecl he_RunSetGebUpgrade(char* action)
+{
+	char buf[0x400];
+	char* rec;
+	int i;
+	char* ent;
+	char* p;
+	char* e;
+	int mode;
+	int state;
+
+	state = *(int*) (action + 0x70);
+	mode = 0x5f6;
+	if (state < -2) {
+		return;
+	}
+	if (state >= 0) {
+		if (state != 0) {
+			return;
+		}
+		ent = (char*) fcn_00503fe0(1, 1, *(int*) (action + 0xac));
+		if (ent != 0) {
+			p = gm_FindBuildingOwner(ent);
+			if (p != 0) {
+				if (*(unsigned char*) (p + 0x1b4) & 1) {
+					mode = 0x60b;
+				}
+			}
+			rec = (char*) (0x7f4ca0 + (unsigned short) (*(unsigned short*) (action + 8)) * 0x21c);
+			if (*(unsigned char*) (rec + 2) == 6) {
+				io_FormatTextBuffer(buf, 0x17e7, ent);
+				fcn_00545e80(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (action + 8)].entity_id, buf, 0, mode,
+					*(int*) (ent + 1), -1, 0, 0x6a65e0);
+			}
+			if (*(unsigned char*) (rec + 2) == 5 || *(unsigned char*) (rec + 2) == 6) {
+				i = 0;
+				e = (char*) 0x7f4ca2;
+				do {
+					int c;
+
+					if ((*e == 6 || *e == 7) && i != *(unsigned short*) rec) {
+						c = (int) (*(unsigned char*) ent) * 14 + 0x49c;
+						io_FormatTextBuffer(buf, 0x1c32,
+							(int) (*(unsigned short*) (action + 8)),
+							(int) (*(unsigned short*) (action + 8)), c);
+						fcn_00545e80(*(int*) (e + 2), -1, buf, 0, 0x607,
+							*(int*) (ent + 1), -1, 0, 0x6a65cc);
+					}
+					e += 0x21c;
+					i++;
+				} while ((int) e < 0x85a0a2);
+			}
+			cm_SendSetGebUpgrade(*(int*) (ent + 1));
+			cm_RequestChangeBits(*(int*) (ent + 1), 0x5a, 2, 0, 0x40);
+		}
+		he_FreeAction(action);
+	} else {
+		char* ne;
+
+		ne = (char*) fcn_00503fe0(1, 1, *(int*) (action + 0xac));
+		if (ne != 0) {
+			cm_RequestChangeBits(*(int*) (ne + 1), 0x5a, 2, 0, 0x40);
+		}
+		he_FreeAction(action);
+	}
+}

@@ -16,7 +16,7 @@ extern struct s_7e6060 g_7e6060[64];
 
 void __cdecl d2_SelectFont(int);
 char __cdecl d3_GetObjectScreenRect(void*, int*);
-void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
+void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x00532650 */
 void __cdecl d2_RenderHoverTooltips(void)
@@ -66,7 +66,7 @@ void __cdecl d2_RenderHoverTooltips(void)
 		} else {
 			name = txt_TextEntries[((int*) s)[-2]];
 		}
-		fcn_0046bd20(x, y, 0xa0, 0x60,
+		d2_DrawWordWrappedText(x, y, 0xa0, 0x60,
 			g_77250c, name, 0x28);
 	}
 }

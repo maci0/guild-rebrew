@@ -86,7 +86,7 @@ char* __cdecl m_alloc(int size, const char* tag);
 int __cdecl ReportClientMessage(const char* text);
 int __cdecl d2_FindResourceByName(const char* name);
 int __cdecl d2_Show(int idx, char* path);
-void __cdecl fcn_00477450(void);
+void __cdecl d2_CreateRenderToSurface(void);
 void __cdecl d2_InitQuadVertexBuffer(void);
 int __cdecl d2_SetClipRect(int a0, int a1, int a2, int a3);
 int __cdecl shp_InitRenderState(int a0, int a1);
@@ -132,7 +132,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	if (!(g_14ce798 < g_14ce79c)) {
 		g_67d920 = g_14ce79c;
 	}
-	fcn_00477450();
+	d2_CreateRenderToSurface();
 	d2_InitQuadVertexBuffer();
 	memset(g_1015f40, 0, 0x16c80);
 	*(int*) g_1015ea0 = 0;

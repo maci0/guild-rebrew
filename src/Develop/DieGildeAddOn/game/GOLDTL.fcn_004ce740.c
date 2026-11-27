@@ -14,7 +14,7 @@ void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004ce740 */
-char __cdecl fcn_004ce740(char* entity)
+char __cdecl gm_CheckCombatGearWear(char* entity)
 {
 	char buf[0x800];
 	char c;

@@ -50,7 +50,7 @@ extern char s_6ab1b8[];
 
 int __cdecl he_HasNoActiveAction0x62(void*);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-int __cdecl fcn_00526120(char* buf, int zero);
+int __cdecl d2_ShowModalMessageBox(char* buf, int zero);
 int __cdecl fcn_00502cd0(int val, int a, int b, int c);
 int __cdecl fcn_00502850(void);
 int __cdecl he_StartHandlungSearch(int a, int b, int idx, int c, int d);
@@ -92,7 +92,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 	if (obj != 0 && *(unsigned short*) (obj + 0x27) != 0xffff) {
 		if (he_HasNoActiveAction0x62(obj) == 0) {
 			io_FormatTextBuffer(buf_b, 0x1a92, *(unsigned short*) (obj + 0x27), obj);
-			fcn_00526120(buf_b, 0);
+			d2_ShowModalMessageBox(buf_b, 0);
 		} else {
 			rec = 0;
 			n = 0;
@@ -125,7 +125,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 			n = n + cnt;
 			if (n >= (int) (typerec->maxcount * 2)) {
 				io_FormatTextBuffer(buf_a, 0x19fa, n, g_7746c4);
-				fcn_00526120(buf_a, 0);
+				d2_ShowModalMessageBox(buf_a, 0);
 			} else {
 				ent = &g_7f4ca0[*(unsigned short*) (obj + 0x27)];
 				dlg = d2_LoadForm(0, 0, s_6ab1b8);
@@ -168,7 +168,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 								d3snd_PlayWorkerOrderVoice();
 								g_774654 = 1;
 							} else {
-								fcn_00526120((char*) g_14abc98, 0);
+								d2_ShowModalMessageBox((char*) g_14abc98, 0);
 								g_774654 = 1;
 							}
 						} else if (d2_CurrentElementId == r1) {

@@ -1,7 +1,7 @@
 
 
 
-int  __cdecl fcn_005d5930(void*, void*);
+int  __cdecl d2_RunErpressungDialog(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
@@ -17,7 +17,7 @@ int __cdecl he_HandleErpressungRequest(void* entity, void* request)
 		return 1;
 	}
 	if (mode == 3) {
-		fcn_005d5930(entity, request);
+		d2_RunErpressungDialog(entity, request);
 		return 2;
 	}
 	if (mode == 1 && *(char*) ((char*) entity + 2) == 6) {

@@ -16,13 +16,13 @@ extern float g_1042fa4;
 
 void __cdecl d3_UpdateViewFrustum(void);
 void __cdecl fcn_00436df0(float fov, float aspect, float width, float height, float x, float y, float znear, float zfar);
-void __cdecl fcn_00438af0(unsigned char);
+void __cdecl d3_InvalidateSceneRenderCache(unsigned char);
 
 
 /* Sets the 3D viewport (size, origin, depth range, view distance, screen
  * mode) and rebuilds the projection when anything changed. */
 /* ADDRESS: GOLDTL 0x00438da0 */
-void __cdecl fcn_00438da0(float w, float h, float x, float y, float znear, float zfar, float dist, int sw, int sh)
+void __cdecl d3_SetViewport(float w, float h, float x, float y, float znear, float zfar, float dist, int sw, int sh)
 {
 	int left;
 	int top;
@@ -59,6 +59,6 @@ void __cdecl fcn_00438da0(float w, float h, float x, float y, float znear, float
 	}
 	d3_UpdateViewFrustum();
 	fcn_00436df0(g_1042fa4 + g_1042fa4, w / h, w, h, x, y, znear, zfar);
-	fcn_00438af0(0);
+	d3_InvalidateSceneRenderCache(0);
 }
 unsigned char _dpad_10529c8[484];

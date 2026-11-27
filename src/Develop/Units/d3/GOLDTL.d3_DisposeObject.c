@@ -14,7 +14,7 @@ void __cdecl d3_FreeObjectAnimation(char* obj);
 void __cdecl d3_ClearMatchingAuxSlot(void);
 void __cdecl d3_VisitSceneObjects(char* u, int b, int c, void (__cdecl* cb)(void), char* obj);
 
-void __cdecl fcn_00418f90(int a);
+void __cdecl d3snd_StopSourceVoiceSafe(int a);
 
 
 
@@ -78,7 +78,7 @@ void __cdecl d3_DisposeObject(char* obj)
 	if (*(char**) (obj + 0x1f4) != 0 && !(*(unsigned char*) (*(char**) (obj + 0x1f4) + 0x214) & 1)) {
 		d3_DisposeObject(*(char**) (obj + 0x1f4));
 	}
-	fcn_00418f90(*(int*) (obj + 0x210));
+	d3snd_StopSourceVoiceSafe(*(int*) (obj + 0x210));
 	d3_CleanupObjectDrawData((D3_OBJECT*) (obj));
 	m_FreeTracked(obj);
 	if (idx != -1) {

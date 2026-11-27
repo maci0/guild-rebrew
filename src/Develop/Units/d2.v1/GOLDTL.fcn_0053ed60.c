@@ -21,7 +21,7 @@ extern int g_14b5e50;
 extern int g_14b5e54;
 extern int d2_CurrentWindowId;
 
-void __cdecl fcn_00533880(void);
+void __cdecl d3_ClearSceneObjectCache(void);
 void __cdecl fcn_005338a0(void);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_SetNodePosition(char*, int*);
@@ -45,10 +45,10 @@ int __cdecl fcn_004e4470(char*);
 void __cdecl cut_WaitForScript(int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
-void __cdecl fcn_00471db0(int, int);
+void __cdecl d2_PositionFormWindows(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
+void __cdecl d3_SetViewport(float, float, float, float, int, int, int, int, int);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int);
@@ -56,8 +56,8 @@ int __cdecl fcn_0064f170(char*, char*, int);
 void __cdecl fcn_0053eb60(int);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl d2_RunChooseIntroMenu(void);
-int __cdecl fcn_0053dc20(void);
-int __cdecl fcn_004130b0(char*, char*);
+int __cdecl d2_RunChooseHistoryDialog(void);
+int __cdecl d3_ClearSlotAnimation(char*, char*);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_DestroyObject(char*);
 void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
@@ -98,7 +98,7 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 	obj = 0;
 	prev = 0;
 	highlight = -1;
-	fcn_00533880();
+	d3_ClearSceneObjectCache();
 	fcn_005338a0();
 	d3_SelectSceneContext(0, 0);
 	d3_SetNodePosition(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x5c));
@@ -157,13 +157,13 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 	cut_WaitForScript(fcn_004e4470((char*) 0x6a4024));
 	win1 = d2_LoadForm(0, 0, (char*) 0x6a3dd4);
 	fcn_00471d80(win1, 3);
-	fcn_00471db0(win1, 1);
+	d2_PositionFormWindows(win1, 1);
 	d2_SetForm(win1, 0);
 	io_AppendText(0x1abb);
-	fcn_00438da0((float) g_1040494, (float) d2_ScreenHeight, 0.0f, 0.0f, g_10529c8, g_10421a0, g_10432a4, g_1040494, d2_ScreenHeight);
+	d3_SetViewport((float) g_1040494, (float) d2_ScreenHeight, 0.0f, 0.0f, g_10529c8, g_10421a0, g_10432a4, g_1040494, d2_ScreenHeight);
 	win2 = d2_LoadForm(0, 0, (char*) 0x6a4194);
 	fcn_00471d80(win2, 3);
-	fcn_00471db0(win2, 1);
+	d2_PositionFormWindows(win2, 1);
 	d2_SetForm(win2, 2);
 	d2_CreateButtonRow(d2_CurrentWindowId, 0, tmp_ids, 2, g_14b5e50, g_14b5e54);
 	ok_id = tmp_ids[0];
@@ -242,7 +242,7 @@ accepted:
 			g_774654 = 1;
 			result = 1;
 		} else {
-			if (d2_RunChooseIntroMenu() != 0 && fcn_0053dc20() != 0) {
+			if (d2_RunChooseIntroMenu() != 0 && d2_RunChooseHistoryDialog() != 0) {
 				g_774654 = 1;
 				result = 1;
 				d2_SetFormVisibility(win2, 1);
@@ -258,7 +258,7 @@ accepted:
 		d2_DestroyForm(win1);
 	}
 	if (obj != 0) {
-		fcn_004130b0(obj, (char*) 0x6a415c);
+		d3_ClearSlotAnimation(obj, (char*) 0x6a415c);
 		d3_DestroyObject(obj);
 	}
 	for (i = 0; i < count; i++) {

@@ -43,8 +43,8 @@ void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_005cc240(int, int, int);
-void __cdecl fcn_005ccbe0(void);
+void __cdecl d2_ClearAndScrollSubform(int, int, int);
+void __cdecl d2_ClearTabGroups(void);
 void __cdecl d2_UpdateMatchAttitudeBars(int, int, void*);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005ccca0 */
@@ -68,7 +68,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 
 	sel = 0;
 	time0 = g_6b7fac;
-	fcn_005ccbe0();
+	d2_ClearTabGroups();
 	if (tab > -1 && tab < 8) {
 		g_775344 = tab;
 	}
@@ -153,7 +153,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 				}
 				d2_UpdateMatchAttitudeBars(cur, g_6ac8a8[g_775344].count, rows);
 			} else {
-				fcn_005cc240(h, 2, 3);
+				d2_ClearAndScrollSubform(h, 2, 3);
 				cur = (char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970];
 			}
 		} else if (state == 1) {

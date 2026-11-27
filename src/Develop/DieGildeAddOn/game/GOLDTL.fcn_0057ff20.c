@@ -33,7 +33,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 
 int __cdecl amt_ProcessOfficeElections(void);
-void __cdecl fcn_004c5980(Msg*);
+void __cdecl cm_EnqueueStagedPacket(Msg*);
 
 void __cdecl d2_SendTutorialTownMsgA0(int a)
 {
@@ -65,6 +65,6 @@ void __cdecl d2_SendTutorialTownMsgA0(int a)
 		msg.timestamp.b = (*(int*)&g_7f4c04);
 		msg.timestamp.c = g_7f4c08;
 		msg.timestamp.d = g_7f4c0c;
-		fcn_004c5980(&msg);
+		cm_EnqueueStagedPacket(&msg);
 	}
 }

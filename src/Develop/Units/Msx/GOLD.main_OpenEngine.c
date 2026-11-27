@@ -47,7 +47,7 @@ void __cdecl fcn_004b1f30(void);
 void __cdecl fcn_0046e980(void);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterWindowAxes(int, int);
-void __cdecl fcn_0046cd90(int, short, int);
+void __cdecl d2_MoveElement(int, short, int);
 void __cdecl fcn_00515990(int, char*);
 void __cdecl nt_ConnectToHost(int, int);
 void __cdecl fcn_004c3480(void);
@@ -70,12 +70,12 @@ void __cdecl main_InitFrameRateTimer(void);
 void __cdecl fcn_0050d460(void);
 void __cdecl fcn_0040afb0(void);
 void __cdecl d3_InitSnowMipMaps(void);
-void __cdecl fcn_0047d9d0(void);
+void __cdecl ai_InitGoodsAndContext(void);
 void __cdecl fcn_004eb480(int);
 void __cdecl hmt_CreateBinaryFile(void);
 void __cdecl gm_LoadHistoricalTable(void);
-void __cdecl fcn_004d27a0(void);
-void __cdecl fcn_004758e0(int);
+void __cdecl gm_InitCombatWeightTable(void);
+void __cdecl d2_FreeWindowSlot(int);
 unsigned char* __cdecl d2_CreateOverlaySprite(int, int, int, int, char*, int, int);
 void __cdecl main_RunFrameLoop(int, int);
 #include "client_sprites.h"
@@ -110,7 +110,7 @@ int __cdecl main_OpenEngine(void)
 	fcn_0046e980();
 	screen = d2_LoadForm(0, 0, "Misc\\Loading_main");
 	d2_CenterWindowAxes(g_fb1024[screen].image, 3);
-	fcn_0046cd90(0, g_fb9070 - ((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_fb1024[screen].window].height - 0x30,
+	d2_MoveElement(0, g_fb9070 - ((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_fb1024[screen].window].height - 0x30,
 		((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_fb1024[screen].window].id);
 	d2_CenterWindowAxes(g_fb1024[screen].window, 1);
 	fcn_00515990(0x73, g_75e760);
@@ -153,15 +153,15 @@ int __cdecl main_OpenEngine(void)
 	fcn_0050d460();
 	fcn_0040afb0();
 	d3_InitSnowMipMaps();
-	fcn_0047d9d0();
+	ai_InitGoodsAndContext();
 	fcn_004eb480(g_6f2468);
 	if (g_6f246c != 0) {
 		hmt_CreateBinaryFile();
 	}
 	g_6f246c = 0;
 	gm_LoadHistoricalTable();
-	fcn_004d27a0();
-	fcn_004758e0(screen);
+	gm_InitCombatWeightTable();
+	d2_FreeWindowSlot(screen);
 	fade = d2_CreateOverlaySprite(0, 0, g_fb9072, g_fb9070, "BLACK", 0x5a, 1);
 	while ((*fade & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);

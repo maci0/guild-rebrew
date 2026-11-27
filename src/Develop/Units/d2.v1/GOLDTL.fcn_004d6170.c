@@ -17,14 +17,14 @@ extern unsigned char g_773d75;
 extern int d2_CurrentWindowId;
 extern int g_aed32c;
 extern char* g_14a79c0[];
-typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } Building4d6170;
+typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } COMBAT_BUILDING_STUB;
 
 void __cdecl d2_SetMouseTooltip(char*);
 void __cdecl fcn_00533a40(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004ce740(char*);
+void __cdecl gm_CheckCombatGearWear(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
@@ -33,7 +33,7 @@ void __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
 void __cdecl d2_DrawCombatParticipants(char*, int, int);
-int __cdecl fcn_004d5490(int, int, int);
+int __cdecl d2_DrawPartyStoreItems(int, int, int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl fcn_0050d490(char*);
 void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
@@ -43,7 +43,7 @@ void __cdecl gm_IncrementMissionActionCount(char*, int);
 void __cdecl cm_SendSetGebBesitzer(int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl d2_ShowMessageBox(char*, unsigned int);
-void __cdecl fcn_00412830(int);
+void __cdecl io_ClearInputButtonFlags(int);
 int __cdecl d2_DestroyForm(int);
 int __cdecl cut_RandMod(int);
 int __cdecl gm_AccumulateTyped2(char*);
@@ -51,7 +51,7 @@ void __cdecl cm_RequestMoveCredits(int, int, int, int);
 int __cdecl gm_MapEntityStatRange(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_00534160(int, int, int, int);
+void __cdecl d2_DrawSegmentedBar(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendCommandSyncField(int, int, int, int*);
@@ -63,7 +63,7 @@ int __cdecl gm_RandomMod(unsigned short);
 void __cdecl gm_AdjustGebaeudeCondition(char*, int);
 
 /* ADDRESS: GOLDTL 0x004d6170 */
-int __cdecl fcn_004d6170(char* ctx)
+int __cdecl d2_ShowCombatEndCutscene(char* ctx)
 {
 	int mode;
 	char* side;
@@ -115,7 +115,7 @@ int __cdecl fcn_004d6170(char* ctx)
 			if (*id != -1) {
 				ent = gm_LookupEntityRecordById(*id);
 				if (ent != 0) {
-					fcn_004ce740(ent);
+					gm_CheckCombatGearWear(ent);
 				}
 			}
 		}
@@ -123,7 +123,7 @@ int __cdecl fcn_004d6170(char* ctx)
 			if (*id != -1) {
 				ent = gm_LookupEntityRecordById(*id);
 				if (ent != 0) {
-					fcn_004ce740(ent);
+					gm_CheckCombatGearWear(ent);
 				}
 			}
 		}
@@ -189,7 +189,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	} else {
 		io_AppendText(0x118f, *(unsigned short*) g_772e9c, *(unsigned short*) g_772e98);
 	}
-	while (main_RunFrameLoop(fcn_004d6170, 0x7d6c6) != 0) {
+	while (main_RunFrameLoop(d2_ShowCombatEndCutscene, 0x7d6c6) != 0) {
 		if (g_14ce8e0 != 0 || g_100f1dc == 2) {
 			g_774654 = 1;
 		}
@@ -224,7 +224,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	io_AppendText((int) "$7A");
 	io_AppendText(0x1193, *(unsigned short*) g_772e98, mode + 0x1125);
 	d2_DrawCombatParticipants(self + 0x80, 0, 0x12c);
-	while (main_RunFrameLoop(fcn_004d6170, 0x7d6c6) != 0) {
+	while (main_RunFrameLoop(d2_ShowCombatEndCutscene, 0x7d6c6) != 0) {
 		if (g_14ce8e0 != 0 || g_100f1dc == 2) {
 			g_774654 = 1;
 		}
@@ -235,9 +235,9 @@ int __cdecl fcn_004d6170(char* ctx)
 	flags = (unsigned char) self[0x7c];
 	if (flags & 1) {
 		if (*(unsigned short*) g_772e98 == g_774970) {
-			fcn_004d5490(0x24, 0x32, 2);
+			d2_DrawPartyStoreItems(0x24, 0x32, 2);
 		} else if (*(unsigned short*) g_772e9c == g_774970) {
-			pay = fcn_004d5490(0x24, 0x32, side == g_772e9c ? 0 : 1);
+			pay = d2_DrawPartyStoreItems(0x24, 0x32, side == g_772e9c ? 0 : 1);
 			cur = gm_GetEntityTableEntry(g_772e9c);
 			if (cur != 0) {
 				*(int*) (cur + 0x1c) += pay;
@@ -270,7 +270,7 @@ int __cdecl fcn_004d6170(char* ctx)
 			}
 		}
 sync:
-		while (main_RunFrameLoop(fcn_004d6170, 0x7d6c6) != 0) {
+		while (main_RunFrameLoop(d2_ShowCombatEndCutscene, 0x7d6c6) != 0) {
 			if (g_14ce8e0 != 0 || g_100f1dc == 2) {
 				g_774654 = 1;
 			}
@@ -377,7 +377,7 @@ reduce:
 				line = (i / 4 + 1) * 100;
 				d2_AddElementToWindow(col, line, 0x5db, d2_CurrentWindowId);
 				d2_AddElementToWindow(col + 2, line, *(int*) (cur + 0x18c), d2_CurrentWindowId);
-				fcn_00534160(col, line + 0x3c, *(unsigned char*) (cur + 0x83), 0x4eb);
+				d2_DrawSegmentedBar(col, line + 0x3c, *(unsigned char*) (cur + 0x83), 0x4eb);
 				bonus = 0;
 				if (cur[8] == 0) {
 					bonus = (int) (*(unsigned char*) (cur + 0x83) * (1.0f / 42.0f) + 1.0f);
@@ -488,7 +488,7 @@ settle:
 	}
 	goto sync;
 done:
-	fcn_00412830(0x10);
+	io_ClearInputButtonFlags(0x10);
 	return d2_DestroyForm(screen);
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)

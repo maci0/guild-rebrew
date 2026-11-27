@@ -4,7 +4,7 @@ extern char* g_77253c;
 void __cdecl d2_SelectFont(int font);
 void __cdecl d2_FlushQueuedQuads(int a, int b, int c);
 void __cdecl d2_DrawTexturedQuad(int x, int y, int w, int h, int color, float alpha);
-void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
+void __cdecl d2_DrawWordWrappedText(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x00469fd0 */
 void __cdecl d2_DrawElementTooltip(char* e)
@@ -45,9 +45,9 @@ void __cdecl d2_DrawElementTooltip(char* e)
 			d2_DrawTexturedQuad(*(int*) (e + 0x10), *(int*) (e + 0x14), *(int*) (e + 0x1d4), *(int*) (e + 0x1d8), *(int*) (g_77253c + 0x50), 0.5f);
 		}
 		if (*(int*) (e + 0x1d0) & 4) {
-			fcn_0046bd20(*(int*) (e + 0x10) - 0x30, *(int*) (e + 0x14) + *(int*) (e + 0x1c), *(int*) (e + 0x1d4) + 0x60, *(int*) (e + 0x1c), g_77250c, name, fl);
+			d2_DrawWordWrappedText(*(int*) (e + 0x10) - 0x30, *(int*) (e + 0x14) + *(int*) (e + 0x1c), *(int*) (e + 0x1d4) + 0x60, *(int*) (e + 0x1c), g_77250c, name, fl);
 		} else {
-			fcn_0046bd20(x - 0x30, y, *(int*) (e + 0x1d4) + 0x60, *(int*) (e + 0x1c), g_77250c, name, fl);
+			d2_DrawWordWrappedText(x - 0x30, y, *(int*) (e + 0x1d4) + 0x60, *(int*) (e + 0x1c), g_77250c, name, fl);
 		}
 	}
 }

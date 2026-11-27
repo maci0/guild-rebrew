@@ -18,22 +18,22 @@ void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl io_AppendText(char *, ...);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_DestroyForm(int);
-int __cdecl fcn_005e6ba0(void);
+int __cdecl d2_OpenPokerDialog(void);
 int __cdecl gm_InitCardGame(char *, void *);
-void __cdecl fcn_005e6dd0(void);
+void __cdecl d2_DestroyCardGameForm(void);
 unsigned short __cdecl gm_StepCardGameRound(void);
 void __cdecl d2_SetElementEnabled(int, int);
-void __cdecl fcn_005e6d10(int);
-int __cdecl fcn_00526120(char *, int);
+void __cdecl d2_UpdateCardGameBetGauge(int);
+int __cdecl d2_ShowModalMessageBox(char *, int);
 void __cdecl d2_SetFormVisibility(int, int);
-int __cdecl fcn_005e7e30(void);
+int __cdecl d2_ShowPokerHandsDialog(void);
 void __cdecl d2_LayoutCardGameRow(int, int, void *);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_004a8750(int);
+int __cdecl gm_ReplaceActivePlayerCardSlot(int);
 
 /* ADDRESS: GOLDTL 0x005e6e00 */
-int __cdecl fcn_005e6e00(void)
+int __cdecl d2_RunCardGameDialog(void)
 {
     char text[256], prompt[256];
     char *entry;
@@ -47,9 +47,9 @@ int __cdecl fcn_005e6e00(void)
     if (gm_RandomFloat01() < *(float *)(entry + 0x60) && W(0x7f4c04) > 11 && money >= 10000) {
     *(float *)(entry + 0x60) = *(float *)(entry + 0x60) * F(0x664178) - g_662a3c;
     B(0x14cf71e) = 0;
-    if (!fcn_005e6ba0()) return 0;
+    if (!d2_OpenPokerDialog()) return 0;
     if (!gm_InitCardGame(g_7f4ca0 + g_774970 * 0x21c, (void *)0x7765a0)) {
-        fcn_005e6dd0();
+        d2_DestroyCardGameForm();
         return 0;
     }
     flags = gm_StepCardGameRound();
@@ -59,15 +59,15 @@ int __cdecl fcn_005e6e00(void)
         d2_SetElementEnabled(D(0x6ad56c), flags & 1);
         d2_SetElementEnabled(D(0x6ad570), flags & 8);
         d2_SetElementEnabled(D(0x6ad578), flags & 0x10);
-        fcn_005e6d10((flags & 1) && (flags & 0x20));
+        d2_UpdateCardGameBetGauge((flags & 1) && (flags & 0x20));
         if (g_100f1dc != -1) {
             if (D(0x6ad570) == D(0x67d370)) {
                 io_FormatTextBuffer(prompt, 0x4263);
-                if (fcn_00526120(prompt, 0x101)) g_774654 = 1;
+                if (d2_ShowModalMessageBox(prompt, 0x101)) g_774654 = 1;
             }
             if (D(0x6ad57c) == D(0x67d370)) {
                 d2_SetFormVisibility(D(0x6ad568), 0);
-                fcn_005e7e30();
+                d2_ShowPokerHandsDialog();
                 d2_SetFormVisibility(D(0x6ad568), 1);
             }
         }
@@ -178,8 +178,8 @@ int __cdecl fcn_005e6e00(void)
                     else d2_SetElementEnabled(D(0x6ad574), 0);
                 } else if (D(0x6ad574) == clk) {
                     d2_SetElementEnabled(D(0x6ad574), 0);
-                    if (D(D(0x1015ea0) + 0x38 + D(0x6ad588) * 0x2f4)) fcn_004a8750(0);
-                    else if (D(D(0x1015ea0) + 0x38 + D(0x6ad58c) * 0x2f4)) fcn_004a8750(1);
+                    if (D(D(0x1015ea0) + 0x38 + D(0x6ad588) * 0x2f4)) gm_ReplaceActivePlayerCardSlot(0);
+                    else if (D(D(0x1015ea0) + 0x38 + D(0x6ad58c) * 0x2f4)) gm_ReplaceActivePlayerCardSlot(1);
                     flags = gm_StepCardGameRound();
                     d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
                     d2_LayoutCardGameRow(1, 4, (void *)0x7765e0);
@@ -254,8 +254,8 @@ int __cdecl fcn_005e6e00(void)
             if (g_100f1dc != -1 && D(0x6ad578) == D(0x67d370)) g_774654 = 1;
             break;
         }
-    } while (main_RunFrameLoop((void *)fcn_005e6e00, 0x777c7));
-    fcn_005e6dd0();
+    } while (main_RunFrameLoop((void *)d2_RunCardGameDialog, 0x777c7));
+    d2_DestroyCardGameForm();
     return 1;
     }
     dialog = d2_LoadForm(0, 0, (char *)0x6ad5f4);
@@ -263,7 +263,7 @@ int __cdecl fcn_005e6e00(void)
     d2_CenterDialogWindows(D(0x6ad568));
     io_FormatTextBuffer(text, 0x4239, 0x4238);
     io_AppendText(text);
-    while (main_RunFrameLoop((void *)fcn_005e6e00, 0x777c7)) {
+    while (main_RunFrameLoop((void *)d2_RunCardGameDialog, 0x777c7)) {
         if (g_14ce8e0 || B(0x14cf701)) g_774654 = 1;
     }
     d2_DestroyForm(dialog);

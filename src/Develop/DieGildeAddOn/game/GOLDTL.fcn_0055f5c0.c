@@ -22,7 +22,7 @@ extern Slot7f4ca2 g_7f4ca2[768];
 extern int g_7f4ca4;
 
 int __cdecl gm_CompareGameTime(void*, void*);
-int __cdecl fcn_00545670(char*, int, int, char*, int);
+int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl he_FreeAction(char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl fcn_004727a0(int, int);
@@ -70,9 +70,9 @@ void __cdecl fcn_0055f5c0(char* e)
         if (*(unsigned char*) (e + 0xf0) & 2) {
             win = 0;
             if (*(unsigned char*) (e + 0xf0) & 1)
-                fcn_00545670(e, 0, 0, "misc\\EventMessagebox_QJ_BIG", *(int*) (e + 0xac));
+                d2_CreateActionPopupSlot(e, 0, 0, "misc\\EventMessagebox_QJ_BIG", *(int*) (e + 0xac));
             else
-                fcn_00545670(e, 0, 0, "misc\\EventMessagebox_QJ", *(int*) (e + 0xac));
+                d2_CreateActionPopupSlot(e, 0, 0, "misc\\EventMessagebox_QJ", *(int*) (e + 0xac));
             if (*(int*) (e + 0x74) == 0) {
                 he_FreeAction(e);
                 return;
@@ -89,23 +89,23 @@ void __cdecl fcn_0055f5c0(char* e)
                 fcn_00519190(0x1ba1);
             }
         } else if (*(unsigned char*) (e + 0xf0) & 1) {
-            fcn_00545670(e, 0, 0, "misc\\EventMessagebox_BIG", *(int*) (e + 0xac));
+            d2_CreateActionPopupSlot(e, 0, 0, "misc\\EventMessagebox_BIG", *(int*) (e + 0xac));
             if (*(int*) (e + 0x74) == 0)
                 goto done;
             fcn_004727a0(*(int*) (*(int*) (e + 0x74) + 8), 1);
             fcn_00519190(0x1ba3);
         } else if (*(unsigned char*) (e + 0xf0) & 0x20) {
-            fcn_00545670(e, 0, 0, "misc\\EventMsgbox_History", *(int*) (e + 0xac));
+            d2_CreateActionPopupSlot(e, 0, 0, "misc\\EventMsgbox_History", *(int*) (e + 0xac));
             if (*(int*) (e + 0x74) == 0)
                 goto done;
             fcn_004727a0(*(int*) (*(int*) (e + 0x74) + 8), 1);
             fcn_00519190(0x1ba3);
         } else if (*(unsigned char*) (e + 0xf0) & 4) {
-            fcn_00545670(e, 0, 0, "misc\\EventMessagebox_Cutscenes", *(int*) (e + 0xac));
+            d2_CreateActionPopupSlot(e, 0, 0, "misc\\EventMessagebox_Cutscenes", *(int*) (e + 0xac));
         } else if (*(unsigned char*) (e + 0xf0) & 0x40) {
-            fcn_00545670(e, 0, 0, "misc\\EventMessagebox_Help", *(int*) (e + 0xac));
+            d2_CreateActionPopupSlot(e, 0, 0, "misc\\EventMessagebox_Help", *(int*) (e + 0xac));
         } else {
-            fcn_00545670(e, 0, 0, "misc\\EventMessagebox", *(int*) (e + 0xac));
+            d2_CreateActionPopupSlot(e, 0, 0, "misc\\EventMessagebox", *(int*) (e + 0xac));
             if (*(int*) (e + 0x74) == 0)
                 goto done;
             fcn_004727a0(*(int*) (*(int*) (e + 0x74) + 8), 1);

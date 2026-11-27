@@ -8,7 +8,7 @@ extern D2_ACTION_POPUP_SLOT g_77e8c0[16];
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DestroyElement(int slot);
 void __cdecl d2_DestroyForm(int h);
-void __cdecl fcn_00469c40(int x, int y, int slot);
+void __cdecl d2_PositionControl(int x, int y, int slot);
 
 /* ADDRESS: GOLDTL 0x00545780 */
 void __cdecl fcn_00545780(char* obj)
@@ -55,7 +55,7 @@ void __cdecl fcn_00545780(char* obj)
                 }
             }
             if (g_77e8c0[i].h != -1) {
-                fcn_00469c40(
+                d2_PositionControl(
                     ((D2_CONTROL_TL*) g_1015ea0)[g_77e8c0[i].h].x - 0x20,
                     ((D2_CONTROL_TL*) g_1015ea0)[g_77e8c0[i].h].y,
                     g_77e8c0[i].h);

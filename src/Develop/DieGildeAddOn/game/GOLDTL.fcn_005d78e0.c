@@ -49,7 +49,7 @@ int __cdecl d2_GetWindowListItem(int h, int a, int b);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl d2_CheckActionBlocker(char* e, int a);
 int __cdecl gm_CheckEntityStock(void* e, int a, char b);
-void __cdecl fcn_00526120(char* text, int a);
+void __cdecl d2_ShowModalMessageBox(char* text, int a);
 int __cdecl main_RunFrameLoop(void* fn, int a);
 
 /* ADDRESS: GOLDTL 0x005d78e0 */
@@ -157,7 +157,7 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 						     *(char*) &g_773d75, v);
 					cm_RequestModifyHealth(*(int*) (actor + 4), -4);
 					io_FormatTextBuffer(buf, 0x1dd2, firstEntity->id, secondEntity->id);
-					fcn_00526120(buf, 0);
+					d2_ShowModalMessageBox(buf, 0);
 					if (firstEntity->type == 6 || firstEntity->type == 7) {
 						io_FormatTextBuffer(buf, 0x1dd3, secondEntity->id, secondEntity->id);
 						he_PostEntityMessage(firstEntity->handle, firstEntity->handle, buf,

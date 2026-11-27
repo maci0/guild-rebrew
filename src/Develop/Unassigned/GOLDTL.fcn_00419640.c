@@ -10,7 +10,7 @@ int __cdecl sb_PrepareVoice(int, char*);
 char* __cdecl fcn_0064d530(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x00419640 */
-unsigned int __cdecl fcn_00419640(int sampleIndex, int* cacheSlot)
+unsigned int __cdecl d3snd_AcquireAmbientVoice(int sampleIndex, int* cacheSlot)
 {
 	unsigned int r;
 	int which;

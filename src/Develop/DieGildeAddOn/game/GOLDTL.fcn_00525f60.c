@@ -2,7 +2,7 @@
 
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int  __cdecl fcn_00526120(void*, int);
+int  __cdecl d2_ShowModalMessageBox(void*, int);
 
 int __cdecl d2_CheckActionBlocker(void* obj, int value)
 {
@@ -10,7 +10,7 @@ int __cdecl d2_CheckActionBlocker(void* obj, int value)
 
 	if (*(int*) ((char*) obj + 0x194) < value && value != 0) {
 		io_FormatTextBuffer(buf, 0x74, value);
-		fcn_00526120(buf, 0);
+		d2_ShowModalMessageBox(buf, 0);
 		return 0;
 	}
 	return 1;

@@ -67,11 +67,11 @@ extern char g_679060[];
 
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
-void __cdecl fcn_00517c00(int, int, int, char*);
-void __cdecl fcn_0046f940(int, char*);
+void __cdecl gm_FormatEntityTitleAndName(int, int, int, char*);
+void __cdecl d2_SetLabelText(int, char*);
 int __cdecl d2_AddWindowValueGauge(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-void __cdecl fcn_00534160(int x0, int y, int len, int t);
+void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t);
 int __cdecl gm_GetEntityRelation(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x005b58a0 */
@@ -109,8 +109,8 @@ void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 	rec = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[**(unsigned char**) (e + 0x16c)];
 	d2_SetForm(g->win, 3);
 	g->x1c = d2_AddElementToWindow(g->x + 2, g->y, *(int*) (e + 0x18c), d2_CurrentWindowId);
-	fcn_00517c00(*(unsigned short*) e, 1, 1, buf);
-	fcn_0046f940(g->label, buf);
+	gm_FormatEntityTitleAndName(*(unsigned short*) e, 1, 1, buf);
+	d2_SetLabelText(g->label, buf);
 	((D2_CONTROL_TL*) g_1015ea0)[g->label].value_06c = 1;
 	((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
 	g->bar = d2_AddWindowValueGauge(g->x - 8, g->y + 0x32, 0x40, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
@@ -122,7 +122,7 @@ void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 			io_FormatTextBuffer(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a39);
 		else if (g->obj[0x165] == rec->role_22f)
 			io_FormatTextBuffer(buf, g_68c1c8, *(int*) (e + 0x174), 0x1a3a);
-		fcn_0046f940(g->value, buf);
+		d2_SetLabelText(g->value, buf);
 		((D2_CONTROL_TL*) g_1015ea0)[g->value].value_06c = 1;
 		((D2_CONTROL_TL*) g_1015ea0)[g->value].width = 0xa0;
 	} else if (e[0x164] == 0) {
@@ -130,13 +130,13 @@ void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 			io_FormatTextBuffer(buf, "%s", 0x1a3b);
 		else if (g->obj[0x165] == rec->role_22f)
 			io_FormatTextBuffer(buf, "%s", 0x1a3c);
-		fcn_0046f940(g->value, buf);
+		d2_SetLabelText(g->value, buf);
 		((D2_CONTROL_TL*) g_1015ea0)[g->value].value_06c = 1;
 		((D2_CONTROL_TL*) g_1015ea0)[g->value].width = 0xa0;
 	}
 	if (full != 0) {
-		fcn_00534160(g->x, g->y + 0x64, e[0x83], 0x4df);
-		fcn_00534160(g->x, g->y + 0x74, e[0x82], 0x4df);
+		d2_DrawSegmentedBar(g->x, g->y + 0x64, e[0x83], 0x4df);
+		d2_DrawSegmentedBar(g->x, g->y + 0x74, e[0x82], 0x4df);
 	}
 	if (g->bar != -1)
 		d2_SetElementValue(g->bar, 0, 0x64, (int) ((float) ((gm_GetEntityRelation(g_774970, *(unsigned short*) g->obj) + 128.0) * 100.0) / 255.0));

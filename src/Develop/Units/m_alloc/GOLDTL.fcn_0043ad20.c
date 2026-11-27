@@ -1,13 +1,13 @@
 int __cdecl m_pool_clear();
-int __cdecl fcn_00437270();
-int __cdecl fcn_004372d0();
+int __cdecl d3_EndScenePass();
+int __cdecl d3_SetRenderMaterialState();
 void __cdecl d3_SetFogRange(float a, float b);
 int __cdecl fcn_004385e0();
 int __cdecl fcn_00440f70();
 int __cdecl fcn_00441400();
 int __cdecl d3_UpdateFloorVisibility();
 float __cdecl d3_CalcFloorFogDistance();
-int __cdecl fcn_00437160();
+int __cdecl d3_BeginScenePass();
 void __cdecl d3_CollectSceneLights(int ctx, unsigned char mask);
 void __cdecl fcn_004509c0(void);
 int __cdecl d3_SelectActiveObjectLights();
@@ -97,7 +97,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 			DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x25, *(int*) 0x1042a14);
 		}
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x8b, -1);
-		fcn_00437160(g_6b8060, *(int*) 0x6b805c, 1);
+		d3_BeginScenePass(g_6b8060, *(int*) 0x6b805c, 1);
 		if (g_6b89c0) {
 			d3_UpdateAndRenderSky(g_6b89c0);
 		}
@@ -125,7 +125,9 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 				v3 = drawNode[3];
 				DEV_43ad20->vtbl->SetTexture(DEV_43ad20, 0, *(int*) (v3 + 0x50));
 				drawFlags = *(unsigned char*) ((int) drawNode + 0x1e);
-				fcn_004372d0(*(unsigned char*) ((int) drawNode + 0x1c), (*(unsigned char*) (v3 + 0x54) & 1) * 2 | (drawFlags & 1), drawNode[8], (*(unsigned char*) (v3 + 0x54) >> 3) & 1, (drawFlags >> 1) & 1);
+				d3_SetRenderMaterialState(*(unsigned char*) ((int) drawNode + 0x1c),
+					(*(unsigned char*) (v3 + 0x54) & 1) * 2 | (drawFlags & 1), drawNode[8],
+					(*(unsigned char*) (v3 + 0x54) >> 3) & 1, (drawFlags >> 1) & 1);
 				if (!(*(unsigned char*) (v3 + 0x54) & 8) && ((unsigned int) drawNode[6] >> 0x1b & 1) != (unsigned int) (v10 == 2)) {
 					v10 = (~drawNode[6] & 0x8000000U | 0x10000000) >> 0x1b;
 					DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x16, v10);
@@ -145,7 +147,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		m_pool_clear(0x6b8064);
 		g_6b8068 = 0;
 		d3_RenderSceneList();
-		fcn_00437270();
+		d3_EndScenePass();
 		if (g_10432a0 == g_662c94) {
 			*(int*) 0x10432a0 = 0;
 		}

@@ -61,11 +61,11 @@ int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d);
 void __cdecl d2_EnterGebaeudeInterior(int a0);
 int __cdecl gm_IsWarehouse(void* a0);
 void __cdecl gm_RunGebaeudeVisit(int a, int b);
-void __cdecl fcn_005a3b30(int a0);
+void __cdecl d2_HandleMarketSquareObjects(int a0);
 void __cdecl fcn_004c3a10(void);
 void __cdecl d2_SetMouseTooltip(char* a);
 void __cdecl fcn_00533a40(char* a);
-void __cdecl fcn_00530510(void);
+void __cdecl sv_ResetSelectionState(void);
 void __cdecl fcn_004125c0(int x, int y);
 
 /* ADDRESS: GOLDTL 0x0059a340 */
@@ -205,7 +205,7 @@ void __cdecl d2_RunWorldHudLoop(void)
 			}
 		}
 		if (g_773d78)
-			fcn_005a3b30(g_773d78);
+			d2_HandleMarketSquareObjects(g_773d78);
 		v9 = g_7e2704;
 		if (g_7e2700) {
 			if (g_7e2708) {
@@ -245,7 +245,7 @@ label_59a83a:
 	fcn_004c3a10();
 	d2_SetMouseTooltip(g_6b5c60);
 	fcn_00533a40(g_6b5c60);
-	fcn_00530510();
+	sv_ResetSelectionState();
 	g_7725c4 = 0;
 	d2_SuppressOverlay = 0;
 	g_6772c4 = 1;

@@ -79,9 +79,9 @@ void __cdecl d3_TraverseSceneObjects(Scene*, int, int, void (__cdecl*)(void));
 void __cdecl d3_ApplyVegetationTextureSet(void);
 void __cdecl d3_ApplySeasonTextureSet(void);
 void __cdecl fcn_00516be0(void);
-void __cdecl fcn_00516040(void);
+void __cdecl d3_UpdateTerrainSeasonTextures(void);
 void __cdecl d3_UpdateSceneDetailLevel(int, int);
-void __cdecl fcn_0052a960(char*);
+void __cdecl d3_UpdateDaylightPhase(char*);
 #include "Develop/Units/d3/d3_d3d.h"
 
 void __cdecl d3_ResetWorldSceneState(void)
@@ -128,12 +128,12 @@ void __cdecl d3_ResetWorldSceneState(void)
 	if ((*(Scene**)&g_67a370) != 0 && (*(Scene**)&g_67a370)->hook != 0 && (*(Scene**)&g_67a370)->hook->notify != 0) {
 		(*(Scene**)&g_67a370)->hook->notify((*(Scene**)&g_67a370), 4, (*(Scene**)&g_67a370)->hook->arg, 0);
 	}
-	fcn_00516040();
+	d3_UpdateTerrainSeasonTextures();
 	d3_UpdateSceneDetailLevel(g_6b8300, 0);
 	g_6b8061 = 1;
 	g_6791c8 = 0;
 	g_67a964 = 1.0f - (unsigned char) g_77666c * 0.01f;
-	fcn_0052a960(&(*(char*)&gm_GameTime));
+	d3_UpdateDaylightPhase(&(*(char*)&gm_GameTime));
 	if (g_6b859b != 0) {
 		fcn_00443230(0);
 	} else {

@@ -5,7 +5,7 @@ extern char* tp_SoundSources;
 
 
 
-void __cdecl fcn_00418d70(char*);
+void __cdecl d3snd_StopSourceVoice(char*);
 
 /* ADDRESS: GOLD 0x00417990 */
 void __cdecl d3snd_StopAllObjectSounds(void)
@@ -16,7 +16,7 @@ void __cdecl d3snd_StopAllObjectSounds(void)
 	for (i = 0; i < d3snd_SourceCount; i++) {
 		source = tp_SoundSources + i * 0x54;
 		if (*(int*) (source + 0x38) != 0) {
-			fcn_00418d70(source);
+			d3snd_StopSourceVoice(source);
 		}
 	}
 }

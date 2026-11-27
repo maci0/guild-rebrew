@@ -106,7 +106,7 @@ extern void fcn_00533a40();
 extern void d2_ProcessMouseInput();
 extern void d2_UpdateBuildingCameraAndUi();
 extern void ReportClientMessage();
-extern void fcn_00545aa0();
+extern void d2_UpdateActionPopupFocus();
 extern void he_RunQueuedActions();
 extern void cm_RequestUpdateGameTime();
 extern int cut_UpdateCutscenes();
@@ -115,13 +115,13 @@ extern void cm_PollCommandQueue();
 extern void cm_ExecCommand();
 extern void ProcessActiveContexts();
 extern void fcn_465fe0();
-extern void fcn_0052a960();
+extern void d3_UpdateDaylightPhase();
 extern void d3_UpdateFrustumCellVisibility();
-extern void fcn_00413380();
+extern void d3_UpdateCameraAnimAndSunRays();
 extern void d3_RenderDefaultFrame();
 extern void ch_CollectContextCharacters();
 extern void d3_UpdateBuildingSceneScripts();
-extern void fcn_00529890();
+extern void d2_UpdateBuildingWorkerSlots();
 extern void ch_UpdatePendingPositions();
 extern void ch_Update();
 extern void ch_UpdateCharacterObjectPositions();
@@ -133,7 +133,7 @@ extern void gm_UpdateAmbientAudio();
 extern void fcn_004c0b40();
 extern void msx_StopOutdoorTrackOnSeason();
 extern void d3_UpdateLightningAndThunder();
-extern void fcn_00415d70();
+extern void d3_RenderRainLines();
 extern void d3_UpdateSelectionBoxCharacters();
 extern void d3_UpdateCharacterBoxSelection();
 extern void d3_DrawSelectionBox();
@@ -149,38 +149,38 @@ extern void d2_UpdateHoverTooltip();
 extern void d2_UpdateSceneTooltip();
 extern void fcn_00527f60();
 extern void d2_RenderAllElements();
-extern void fcn_004da1b0();
+extern void d2_DrawElapsedTimer();
 extern void d2_RenderHoverTooltips();
-extern void fcn_00532900();
+extern void d2_DrawBuildingUpgradeLabels();
 extern void d2_DrawBuildingItemLabels();
 extern void fcn_4d03e0();
 extern void d2_DrawCameraScrollArrows();
 extern void fcn_005337a0();
-extern void fcn_005337f0();
-extern void fcn_00526b70();
+extern void d2_DrawStatusBannerText();
+extern void d2_UpdateMouseCursorOffset();
 extern void d2_FlushQueuedQuads();
 extern void d2_ResetDrawState();
 extern void d2_SweepFadeOverlays();
 extern void io_PollMouseInput();
-extern void fcn_00537320();
+extern void d2_UpdateViewportCenter();
 extern void d3_PresentFrame();
 extern void SetMasterVolume();
 extern void sb_SetMasterVolume();
 extern void fcn_5e43f0();
-extern void fcn_00536b10();
+extern void d2_UpdateQuickChatOverlay();
 extern void d2_RunChatConsole();
 extern void main_RunAdvanceGameDialog();
 extern void main_ExitToFrameHandler();
 extern void fcn_005e4c50();
-extern void fcn_005924d0();
+extern void main_HandleHotkeyAction();
 extern void main_ProcessGameHotkeys();
 extern void d2_ShowPrivilegien();
-extern void fcn_005d46d0();
+extern void d2_RunPlayerRankingDialog();
 extern void d2_ShowInventoryDialog();
 extern void d2_OpenPlayerStats();
 extern void d2_RunMessageFilterDialog();
-extern void fcn_005d42e0();
-extern void fcn_005d0660();
+extern void d2_RunStadtStatistikDialog();
+extern void d2_RunStammbaumDialog();
 extern void tb_SetCallbackPaused();
 extern void d2_RunMessageBox();
 extern void fcn_004b6470();
@@ -266,7 +266,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 	}
 	if ((flags & 1) && g_774954 == 0) {
 		if (flags & 0x100) {
-			fcn_00545aa0();
+			d2_UpdateActionPopupFocus();
 		}
 		he_RunQueuedActions();
 		if (g_14cbca0 == -1 && g_6b7fac > g_aecde4 && g_774964 != 0) {
@@ -297,12 +297,12 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		}
 		if (g_774670 == 0 && (flags & 0x40) && g_6a2c08 != 0) {
 			if (!(flags & 0x10000) && (flags & 0x40000)) {
-				fcn_0052a960(gm_GameTime);
+				d3_UpdateDaylightPhase(gm_GameTime);
 			}
 			if (d3_CurrentContextIndex == 0) {
 				d3_UpdateFrustumCellVisibility(g_773dd8, d3_ActiveCamera, g_6b8008);
 			}
-			fcn_00413380();
+			d3_UpdateCameraAnimAndSunRays();
 			d3_RenderDefaultFrame();
 		}
 	}
@@ -316,7 +316,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 	}
 	if (i != 0 && !(flags & 0x10000)) {
 		d3_UpdateBuildingSceneScripts(i);
-		fcn_00529890(i);
+		d2_UpdateBuildingWorkerSlots(i);
 		g_67530c = *(int *) (i + 1);
 	} else {
 		g_67530c = -1;
@@ -350,7 +350,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		}
 		if (g_774670 == 0) {
 			if ((flags & 0x10000) && g_772f6c != 0) {
-				fcn_00415d70(g_772f6c);
+				d3_RenderRainLines(g_772f6c);
 			}
 			if (g_774670 == 0 && d3_SelectionBoxActive != 0) {
 				if (z != 0) {
@@ -416,12 +416,12 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		}
 		d2_RenderAllElements((~flags >> 6) & 1);
 		if (g_772f54 != 0) {
-			fcn_004da1b0();
+			d2_DrawElapsedTimer();
 		}
 		if (f != 0 && g_774650 == g_774658 && g_7749e4 == 0) {
 			d2_RenderHoverTooltips();
 			if (g_14cf71d != 0) {
-				fcn_00532900();
+				d2_DrawBuildingUpgradeLabels();
 			} else if (g_14cf738 != 0) {
 				d2_DrawBuildingItemLabels();
 			}
@@ -435,8 +435,8 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 			d3_SelectionBoxActive == 0 && d2_SuppressOverlay == 0 && g_7749e4 == 0) {
 			fcn_005337a0();
 		}
-		fcn_005337f0();
-		fcn_00526b70();
+		d2_DrawStatusBannerText();
+		d2_UpdateMouseCursorOffset();
 		d2_FlushQueuedQuads(0, 0, 0);
 		(*(void (__stdcall **) (int, int)) (*(int *) g_6b5de0 + 0xa0))(g_6b5de0, (int) g_1052be0);
 		d2_ResetDrawState();
@@ -448,7 +448,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		d2_MouseX = g_14cf900;
 		d2_MouseY = g_14cf902;
 	}
-	fcn_00537320(flags);
+	d2_UpdateViewportCenter(flags);
 	if (g_774670 == 0 && (flags & 0x80)) {
 		d3_PresentFrame();
 	}
@@ -461,7 +461,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		SetMasterVolume((int) ((float) *((unsigned char *) &g_7766a0 + 2) * t));
 		sb_SetMasterVolume((int) ((float) *((unsigned char *) &g_7766a0 + 1) * t));
 	}
-	fcn_00536b10();
+	d2_UpdateQuickChatOverlay();
 	if (g_774964 != 0) {
 		if ((g_7747b0 & 4) && tp_d2_SelectedControl == 0 && g_14cf950 == 0x1c && (flags & 0x2000)) {
 			d2_RunChatConsole();
@@ -482,7 +482,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 					fcn_005e4c50();
 				}
 				if (g_774964 != 0 && !(flags & 0x300000)) {
-					fcn_005924d0();
+					main_HandleHotkeyAction();
 				}
 			}
 		}
@@ -498,7 +498,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 				if (i == g_6a25a0) {
 					d2_ShowPrivilegien();
 				} else if (i == g_6a257c) {
-					fcn_005d46d0();
+					d2_RunPlayerRankingDialog();
 				} else if (i == g_6a2584) {
 					d2_ShowInventoryDialog();
 				} else if (i == g_6a2588) {
@@ -506,9 +506,9 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 				} else if (i == g_6a258c) {
 					d2_RunMessageFilterDialog();
 				} else if (i == g_6a2580) {
-					fcn_005d42e0();
+					d2_RunStadtStatistikDialog();
 				} else if (i == g_6a2578) {
-					fcn_005d0660(*(int *) (g_7f4ca0 + (unsigned short) g_774970 * 540 + 4),
+					d2_RunStammbaumDialog(*(int *) (g_7f4ca0 + (unsigned short) g_774970 * 540 + 4),
 						0x11, 0, 0x657c7);
 				}
 			}

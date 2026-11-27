@@ -27,7 +27,7 @@ int __cdecl cm_RequestMoveCredits(int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl he_NotifyAblassPurchase(char*, char*, char*, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl cm_StepCommandQueue(void);
@@ -38,7 +38,7 @@ void __cdecl d2_ShowKircheTop5(void);
 /* Church indulgence ("Ablass") dialog: offers the indulgence for the current
  * player and, once bought, continues with the results screen. */
 /* ADDRESS: GOLDTL 0x005ab3e0 */
-void __cdecl fcn_005ab3e0(char* churchBuilding)
+void __cdecl d2_RunAblassDialog(char* churchBuilding)
 {
 	char text[0x200];
 	char* rec;
@@ -108,11 +108,11 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 			while (sel != -1 && cm_GetCommandStatus(sel) == 0)
 				cm_StepCommandQueue();
 			io_FormatTextBuffer(text, 0x1964, *(int*) (rec + 0x1ac), gm_GetKircheRank(g_774970, 0));
-			fcn_00526120(text, 0x100);
+			d2_ShowModalMessageBox(text, 0x100);
 			changed = 1;
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005ab3e0, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunAblassDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);
 	if (changed)
 		d2_ShowKircheTop5();

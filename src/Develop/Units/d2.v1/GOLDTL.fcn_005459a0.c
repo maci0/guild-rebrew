@@ -17,7 +17,7 @@ extern s_1015f4c g_1015f4c[];
 
 
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00469c40(int, int, int);
+void __cdecl d2_PositionControl(int, int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 
 void __cdecl d2_ToggleActionPopupBar(int a)
@@ -31,7 +31,7 @@ void __cdecl d2_ToggleActionPopupBar(int a)
 			}
 		}
 		d2_SetForm(g_77e8a0, 0);
-		fcn_00469c40(g_1040494 - 0x7d, d2_ScreenHeight - 0x21, g_1015f4c[d2_CurrentWindowId].f270);
+		d2_PositionControl(g_1040494 - 0x7d, d2_ScreenHeight - 0x21, g_1015f4c[d2_CurrentWindowId].f270);
 		d2_SetFormVisibility(g_77e8a0, 0);
 	}
 	if (a != 0xffff) {

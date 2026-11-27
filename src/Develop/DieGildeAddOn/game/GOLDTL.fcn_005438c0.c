@@ -83,10 +83,10 @@ extern char g_6a33dc[];			/* 0x006a33dc */
 extern char gm_GameTime[];			/* 0x007f4c00 */
 
 void __cdecl srv_InitBuildingTypeTable(void);
-void __cdecl fcn_004b20d0(int);
+void __cdecl hst_SetHistoryScrollModeFlag(int);
 int __cdecl fcn_005435d0(void);
 void __cdecl io_FormatTextBuffer(void*, int);
-int __cdecl fcn_00526120(void*, int);
+int __cdecl d2_ShowModalMessageBox(void*, int);
 void __cdecl d2_RenderAndPresentFrame(void);
 int __cdecl d2_LoadForm(int, int, const char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -104,7 +104,7 @@ void __cdecl main_PumpWindowMessages(void);
 void __cdecl gm_InitGameSession(void);
 void __cdecl gm_CreateSetupFamily(void);
 void __cdecl gm_ShutdownGameRuntime(void);
-void __cdecl fcn_0053f720(void);
+void __cdecl main_FadeOutToBlack(void);
 void __cdecl main_ShutdownEngine(void);
 void __cdecl init_AllocateKind0bSceneSlot(void);
 void __cdecl gm_InitCityAndTradeState(unsigned char);
@@ -135,10 +135,10 @@ void __cdecl tb_SetCallbackPaused(void*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl sim_SetSyncParams(void*, int, int, int);
 int __cdecl cm_RequestUpdateGameTime(void*);
-void __cdecl fcn_00541620(void);
+void __cdecl d2_RunRoundSummaryDialog(void);
 int __cdecl amt_ProcessOfficeElections(void);
 void __cdecl amt_SyncAllOfficeSlots(void);
-int __cdecl fcn_004c5980(void*);
+int __cdecl cm_EnqueueStagedPacket(void*);
 void __cdecl gm_RunRoundUpdate(void);
 void __cdecl cm_RequestMoveCredits(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
@@ -160,7 +160,7 @@ void __cdecl d2_InitDefaultBookmarks(void);
 void __cdecl d3_RebuildWorldScene(void);
 void __cdecl fcn_00514fc0(void);
 void __cdecl gm_ApplyGameSettings(void);
-void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
+void __cdecl d3_SetViewport(float, float, float, float, int, int, int, int, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);
 void __cdecl init_LoadObjektScene(int);
@@ -206,7 +206,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 	g_7e2500 = 0;
 	if (g_7747b0 & 4) {
 		h = -1;
-		fcn_004b20d0(0);
+		hst_SetHistoryScrollModeFlag(0);
 		if (g_7747b0 & 0x10) {
 			if (fcn_005435d0() != 1) {
 				int r;
@@ -214,7 +214,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				do {
 					main_LoopFlags = 0x24087;
 					io_FormatTextBuffer(buf, 0x79);
-					r = fcn_00526120(buf, 1);
+					r = d2_ShowModalMessageBox(buf, 1);
 					if (r != 0) {
 						d2_RenderAndPresentFrame();
 						Sleep(1000);
@@ -227,7 +227,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			g_7e2500 = (int) LoadLibraryA(g_7e1be0);
 			if (g_7e2500 == 0) {
 				main_LoopFlags = 0x66087;
-				fcn_00526120(g_14ac5cc, 0x100);
+				d2_ShowModalMessageBox(g_14ac5cc, 0x100);
 				g_774958 = 0;
 				g_774954 = 1;
 				return;
@@ -242,7 +242,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				g_7e2500 = 0;
 				main_LoopFlags = 0x66087;
 				d2_DestroyForm(h);
-				fcn_00526120(g_14ac5cc, 0x100);
+				d2_ShowModalMessageBox(g_14ac5cc, 0x100);
 				g_774958 = 0;
 				g_774954 = 1;
 				return;
@@ -252,7 +252,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				g_7e2500 = 0;
 				main_LoopFlags = 0x66087;
 				d2_DestroyForm(h);
-				fcn_00526120(g_14ac5cc, 0x100);
+				d2_ShowModalMessageBox(g_14ac5cc, 0x100);
 				g_774958 = 0;
 				g_774954 = 1;
 				return;
@@ -270,7 +270,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				d2_SuppressOverlay = 0;
 				main_LoopFlags = 0x24087;
 				io_FormatTextBuffer(buf, 0x79);
-				if (fcn_00526120(buf, 1) == 0) {
+				if (d2_ShowModalMessageBox(buf, 1) == 0) {
 					break;
 				}
 				d2_SuppressOverlay = 1;
@@ -330,9 +330,9 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			}
 		} else {
 			if (g_14cbca0 == -1) {
-				fcn_00526120(g_14ac5d0, 0);
+				d2_ShowModalMessageBox(g_14ac5d0, 0);
 				gm_ShutdownGameRuntime();
-				fcn_0053f720();
+				main_FadeOutToBlack();
 				return;
 			}
 			if (g_7747b0 & 0x40) {
@@ -345,9 +345,9 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 	} else if (g_7747b0 & 0x40) {
 		g_7747b4 = 2;
 		if (g_14cbca0 == -1) {
-			fcn_00526120(g_14ac5d0, 0);
+			d2_ShowModalMessageBox(g_14ac5d0, 0);
 			gm_ShutdownGameRuntime();
-			fcn_0053f720();
+			main_FadeOutToBlack();
 			return;
 		}
 		ls_LoadNetworkGame(g_7e21a0);
@@ -355,10 +355,10 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 		g_7747b4 = g_77670a;
 		if (ls_LoadSavegame(g_7e21a0, 1) == 0) {
 			main_LoopFlags = 0x46086;
-			fcn_00526120(g_14ac630, 0);
+			d2_ShowModalMessageBox(g_14ac630, 0);
 			g_774954 = 1;
 			gm_ShutdownGameRuntime();
-			fcn_0053f720();
+			main_FadeOutToBlack();
 			return;
 		}
 		gm_UpdateDaylightSchedule(gm_GameTime);
@@ -389,13 +389,13 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			} while (p < 0x85a0a2);
 		}
 		if (g_7747b0 & 1) {
-			fcn_004b1e60();
+			hst_LoadHistoryText();
 		}
 	}
 	main_PumpWindowMessages();
 	fcn_005bd820();
 	main_PumpWindowMessages();
-	fcn_0053f720();
+	main_FadeOutToBlack();
 	d2_SuppressOverlay = 0;
 	fcn_00526db0(d2_GetHudThemeResourceId());
 	d3_SelectSceneContext(0, 0);
@@ -405,7 +405,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 		d2_InitDefaultBookmarks();
 	}
 	gm_ApplyGameSettings();
-	fcn_00438da0((float) (g_6a376c - g_6a3764),
+	d3_SetViewport((float) (g_6a376c - g_6a3764),
 	    (float) (g_6a3770 - g_6a3768), (float) g_6a3764,
 	    (float) g_6a3768, g_10529c8, g_10421a0, g_10432a4,
 	    g_1040494, d2_ScreenHeight);
@@ -583,7 +583,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				}
 			}
 		}
-		fcn_00541620();
+		d2_RunRoundSummaryDialog();
 		if (g_774954 != 0) {
 			goto l_inc;
 		}
@@ -642,7 +642,7 @@ l_gate:
 				msg[8] = 1;
 				*(int*) (msg + 0x14) = -1;
 				msg[0x26] = 0x61;
-				x = fcn_004c5980(msg);
+				x = cm_EnqueueStagedPacket(msg);
 				while (cm_GetCommandStatus(x) == 0) {
 					cm_StepCommandQueue();
 				}
@@ -665,10 +665,10 @@ l_step:
 		if (g_68a9dc != -1) {
 			if (g_68a9dc !=
 			    *(int*) ((g_774970 & 0xffff) * 0x21c + 0x7f4ca4)) {
-				fcn_00526120(g_6a4420, 0);
+				d2_ShowModalMessageBox(g_6a4420, 0);
 			}
 		} else {
-			fcn_00526120(g_6a43d0, 0);
+			d2_ShowModalMessageBox(g_6a43d0, 0);
 		}
 	}
 	if (g_7747b0 & 0x80) {

@@ -5,7 +5,7 @@ extern GOLD_GUI_WINDOW g_1015f40[];
 
 void __cdecl fcn_004222b0(char*);
 int __cdecl d2_LockSurface(void*);
-int __cdecl fcn_004790d0(void*);
+int __cdecl d3_UnlockSurfaceHandle(void*);
 int __cdecl d2_WriteSurfacePixel(int, int, unsigned char, unsigned char, unsigned char, void*);
 
 /* ADDRESS: GOLD 0x00476210 */
@@ -54,5 +54,5 @@ void __cdecl d2_Plot(int x, int y, int r, int g, int b)
 		d2_WriteSurfacePixel(x + 1, y - 1, r, g, b, (void*) win->unk_028);
 		break;
 	}
-	fcn_004790d0((void*) win->unk_028);
+	d3_UnlockSurfaceHandle((void*) win->unk_028);
 }

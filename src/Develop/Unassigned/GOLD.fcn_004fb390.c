@@ -11,14 +11,14 @@ typedef struct {
     int id;
     char name[0x30];
     int value[4];
-} ENTRY_4fb390;
+} CHARACTER_PORTRAIT_SPEC;
 
 /* ADDRESS: GOLD 0x004fb390 */
-ENTRY_4fb390* __cdecl fcn_004fb390(unsigned int player)
+CHARACTER_PORTRAIT_SPEC* __cdecl gm_LookupPortraitSpec(unsigned int player)
 {
-    ENTRY_4fb390* table;
-    ENTRY_4fb390* current;
-    ENTRY_4fb390* result;
+    CHARACTER_PORTRAIT_SPEC* table;
+    CHARACTER_PORTRAIT_SPEC* current;
+    CHARACTER_PORTRAIT_SPEC* result;
     unsigned char kind;
     int i;
     int value;
@@ -31,13 +31,13 @@ ENTRY_4fb390* __cdecl fcn_004fb390(unsigned int player)
     if (!kind && (float) *(unsigned short*) (g_7f4caa + off)
         < *(float*) (g_7f4cc0 + off)) {
         if (g_770b80[off + 9])
-            return (ENTRY_4fb390*) 0x6118d0;
-        return (ENTRY_4fb390*) 0x611888;
+            return (CHARACTER_PORTRAIT_SPEC*) 0x6118d0;
+        return (CHARACTER_PORTRAIT_SPEC*) 0x611888;
     }
     if (g_770b80[off + 0x1f4] && *(int*) (g_770b80 + off + 0x18c) != -1) {
         value = *(int*) (g_770b80 + off + 0x18c);
         *(int*) 0x6f1bb0 = (*(int*) 0x6f1bb0 + 1) % 8;
-        result = (ENTRY_4fb390*) 0x91ac40 + *(int*) 0x6f1bb0;
+        result = (CHARACTER_PORTRAIT_SPEC*) 0x91ac40 + *(int*) 0x6f1bb0;
         strcpy(result->name, g_770b80 + off + 0x1f4);
         value -= 0x639;
         result->value[0] = value;
@@ -47,12 +47,12 @@ ENTRY_4fb390* __cdecl fcn_004fb390(unsigned int player)
         return result;
     }
     if (g_770b80[off + 2] == 0x11)
-        return (ENTRY_4fb390*) 0x617378 + (unsigned short) gm_RandomMod(3);
+        return (CHARACTER_PORTRAIT_SPEC*) 0x617378 + (unsigned short) gm_RandomMod(3);
     if (kind) {
         if (g_770b80[off + 9] == 0)
-            table = (ENTRY_4fb390*) 0x612bb8;
+            table = (CHARACTER_PORTRAIT_SPEC*) 0x612bb8;
         else if (g_770b80[off + 9] == 1)
-            table = (ENTRY_4fb390*) 0x6144f8;
+            table = (CHARACTER_PORTRAIT_SPEC*) 0x6144f8;
         current = table;
         do {
             if (!current->id)
@@ -70,9 +70,9 @@ ENTRY_4fb390* __cdecl fcn_004fb390(unsigned int player)
     kind = *(unsigned char*) (g_770b80 + off + 0x165);
     if (kind) {
         if (g_770b80[off + 9] == 0)
-            table = (ENTRY_4fb390*) 0x611918;
+            table = (CHARACTER_PORTRAIT_SPEC*) 0x611918;
         else if (g_770b80[off + 9] == 1)
-            table = (ENTRY_4fb390*) 0x612268;
+            table = (CHARACTER_PORTRAIT_SPEC*) 0x612268;
         current = table;
         do {
             if (!current->id) {
@@ -90,8 +90,8 @@ ENTRY_4fb390* __cdecl fcn_004fb390(unsigned int player)
         } while (i < 0x23);
     }
     if (g_770b80[off + 9] == 0)
-        table = (ENTRY_4fb390*) 0x611918;
+        table = (CHARACTER_PORTRAIT_SPEC*) 0x611918;
     else if (g_770b80[off + 9] == 1)
-        table = (ENTRY_4fb390*) 0x612268;
+        table = (CHARACTER_PORTRAIT_SPEC*) 0x612268;
     return table;
 }

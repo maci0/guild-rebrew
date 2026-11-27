@@ -6,7 +6,7 @@ extern void __cdecl m_FreeTracked(void* ptr);
 void* __cdecl vfs_Tfopen(const char*, const char*, void*);
 void __cdecl CloseVfsStream(void*);
 void __cdecl fcn_0044a770(void*, int);
-void __cdecl fcn_0044e190(void*, void*);
+void __cdecl d3_LoadFlInfoChunks(void*, void*);
 char __cdecl fcn_0044f0e0(char*);
 void __cdecl d3_AddFLChunk(char*, char);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
@@ -186,7 +186,7 @@ BGF_OBJ* __cdecl d3_LoadAGF(char* name, char* objectName, char* nametab, int nam
 	if (stream == 0) {
 		goto done;
 	}
-	fcn_0044e190(stream, &hdr);
+	d3_LoadFlInfoChunks(stream, &hdr);
 	CloseVfsStream(stream);
 	if (hdr.anzahl_pol <= 0 || hdr.anzahl_poi <= 0) {
 		goto cleanup;

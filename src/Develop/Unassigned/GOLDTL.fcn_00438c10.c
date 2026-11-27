@@ -1,13 +1,13 @@
 
 
-void __cdecl fcn_00438bd0(int, void*);
+void __cdecl d3_SetNodeScale(int, void*);
 
-void __cdecl fcn_00438c10(int a1, int a2, int a3, int a4)
+void __cdecl d3_SetNodeScaleXYZ(int a1, int a2, int a3, int a4)
 {
 	int buf[4];
 
 	buf[0] = a2;
 	buf[1] = a3;
 	buf[2] = a4;
-	fcn_00438bd0(a1, buf);
+	d3_SetNodeScale(a1, buf);
 }

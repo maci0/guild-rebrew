@@ -33,7 +33,7 @@ int __cdecl d3snd_QueueSoundIfAllowed(int a1, int a2, char* s, int a4, int a5);
 
 int __cdecl gm_CalcTrialTortureFee(int a, int b);
 int __cdecl gm_CalcTrialTortureRounds(void* m);
-void __cdecl fcn_00493920(void* m);
+void __cdecl cut_EvaluateTortureStep(void* m);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char c, int d);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 float __cdecl gm_ApplyEntityHealthDelta(int a, int b);
@@ -48,7 +48,7 @@ void __cdecl msx_RestoreMusicIfAllowed(void);
 void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl msx_StopAmbientTrack(int a);
 void __cdecl d3_SelectSceneContext(int a, int b);
-void __cdecl fcn_004e4b00(int a);
+void __cdecl cut_UnloadSampleBank(int a);
 
 typedef struct S2d {
 	char b[0x2d];
@@ -563,7 +563,7 @@ int __cdecl cut_RunProzess(int a0)
 			io_AppendText(0x14ec, tbl.i[msg.pad[3]] + rnd);
 			cut_WaitTicks(5);
 			d2_SetFormVisibilityIfAllowed(g_68bfc0, 0);
-			fcn_00493920(&msg);
+			cut_EvaluateTortureStep(&msg);
 			cut_WaitForScript(h);
 			d2_SetFormVisibilityIfAllowed(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
@@ -647,7 +647,7 @@ int __cdecl cut_RunProzess(int a0)
 	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
 	d2_SetFormVisibilityIfAllowed(g_68bfc0, 0);
 	cut_RunTurnRound((unsigned int*) a0, (int) &msg);
-	fcn_004e4b00(hAnk);
+	cut_UnloadSampleBank(hAnk);
 	st = 0;
 	{
 		int cnt2;
@@ -706,8 +706,8 @@ int __cdecl cut_RunProzess(int a0)
 		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "2");
 	}
 	/* 0x4deb1c */
-	fcn_004e4b00(hStrafe);
-	fcn_004e4b00(h0);
+	cut_UnloadSampleBank(hStrafe);
+	cut_UnloadSampleBank(h0);
 	h14 = fcn_004e4ae0("PROZESS_8.sbf", 0);
 	if ((unsigned int) acc < 2) {
 		/* 0x4deb4a: guilty verdict */
@@ -833,34 +833,34 @@ int __cdecl cut_RunProzess(int a0)
 	msx_RestoreMusicIfAllowed();
 	d3snd_StopTrackedVoices();
 	if (h2 != 0) {
-		fcn_004e4b00(h2);
+		cut_UnloadSampleBank(h2);
 	}
 	if (h0 != 0) {
-		fcn_004e4b00(h0);
+		cut_UnloadSampleBank(h0);
 	}
 	if (hStrafe != 0) {
-		fcn_004e4b00(hStrafe);
+		cut_UnloadSampleBank(hStrafe);
 	}
 	if (h14 != 0) {
-		fcn_004e4b00(h14);
+		cut_UnloadSampleBank(h14);
 	}
 	if (msg.hnd[4] != 0) {
-		fcn_004e4b00(msg.hnd[4]);
+		cut_UnloadSampleBank(msg.hnd[4]);
 	}
 	if (msg.hnd[3] != 0) {
-		fcn_004e4b00(msg.hnd[3]);
+		cut_UnloadSampleBank(msg.hnd[3]);
 	}
 	if (msg.hnd[1] != 0) {
-		fcn_004e4b00(msg.hnd[1]);
+		cut_UnloadSampleBank(msg.hnd[1]);
 	}
 	if (msg.hnd[2] != 0) {
-		fcn_004e4b00(msg.hnd[2]);
+		cut_UnloadSampleBank(msg.hnd[2]);
 	}
 	if (msg.hnd[5] != 0) {
-		fcn_004e4b00(msg.hnd[5]);
+		cut_UnloadSampleBank(msg.hnd[5]);
 	}
 	if (msg.hnd[0] != 0) {
-		fcn_004e4b00(msg.hnd[5]); /* Native tests slot 0, then passes slot 5. */
+		cut_UnloadSampleBank(msg.hnd[5]); /* Native tests slot 0, then passes slot 5. */
 	}
 
 	return;

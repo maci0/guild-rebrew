@@ -17,7 +17,7 @@ extern char g_67d67c[];
 
 typedef void(__cdecl* hook_4e4730)(char*, int, char*, int);
 
-int __cdecl fcn_00413160(void);
+int __cdecl d3_FindFreeSceneContext(void);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 #include "client_scene_loader.h"
@@ -42,7 +42,7 @@ void __cdecl fcn_004e4730(char* sceneName)
 	{
 		int s;
 
-		s = fcn_00413160();
+		s = d3_FindFreeSceneContext();
 		d3_SelectSceneContext(s, 0);
 		fcn_0064d41a(buf, "scenes/*%s", sceneName);
 		d3_LoadScene(buf, 0, 0);

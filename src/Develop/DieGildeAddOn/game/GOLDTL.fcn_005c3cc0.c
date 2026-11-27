@@ -20,7 +20,7 @@ int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl gm_ModifyHealth(int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 double __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl cm_SendSetHE(int, int);
@@ -82,7 +82,7 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 						do {
 							if (*(int*) (ent + 0xac) == *(int*) (e + 1)) {
 								*(int*) (ent + 0x84) = cm_SendSetHE(-1, (int) ent);
-								fcn_00526120((*(int*) 0x14ab2fc), 4);
+								d2_ShowModalMessageBox((*(int*) 0x14ab2fc), 4);
 								goto done;
 							}
 							ent = he_fn_Handlung();
@@ -92,7 +92,7 @@ done:
 					g_774654 = 1;
 					d2_SetFormVisibility(win, 1);
 				} else {
-					fcn_00526120((*(int*) 0x14ab300), 4);
+					d2_ShowModalMessageBox((*(int*) 0x14ab300), 4);
 					d2_SetFormVisibility(win, 1);
 				}
 			}

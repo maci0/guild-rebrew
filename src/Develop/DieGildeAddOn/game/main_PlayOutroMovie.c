@@ -6,10 +6,10 @@ void __cdecl fcn_004c2d90(float, int);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl main_RunFrameLoop(int, int);
 void __cdecl main_PumpWindowMessages(void);
-void __cdecl fcn_004124b0(void);
+void __cdecl io_PollKeyboardInput(void);
 void __cdecl io_AcquireKeyboard(int);
 void __cdecl io_AcquireMouse(int);
-int __cdecl fcn_0041e680(char*, void*, void*, int, int, int, int, int);
+int __cdecl OpenMovieWindow(char*, void*, void*, int, int, int, int, int);
 int __cdecl PlayVideo(int);
 void __cdecl fcn_00473150(unsigned char*);
 
@@ -48,13 +48,13 @@ void __cdecl main_PlayOutroMovie(void)
 	g_772d10 = 0;
 	sprintf(b, (char*) 0x6a4538, (char*) 0x6a3658);
 	*(int*) 0x6b5c90 = 1;
-	fcn_004124b0();
+	io_PollKeyboardInput();
 	*(int*) 0x6b5c90 = 0;
 	io_AcquireKeyboard(0);
 	io_AcquireMouse(0);
 	main_PumpWindowMessages();
 	Sleep(0x1f4);
-	g_7747d4 = fcn_0041e680(b, 0, (void*) main_Instance, 0, 0, 0, 0, 0x8a);
+	g_7747d4 = OpenMovieWindow(b, 0, (void*) main_Instance, 0, 0, 0, 0, 0x8a);
 	Sleep(0xc8);
 	PlayVideo(g_7747d4);
 	fcn_00473150(h);
@@ -63,7 +63,7 @@ void __cdecl main_PlayOutroMovie(void)
 	io_AcquireKeyboard(1);
 	io_AcquireMouse(1);
 	*(int*) 0x6b5c90 = 1;
-	fcn_004124b0();
+	io_PollKeyboardInput();
 	vol = (float) *(unsigned char*) 0x7766a2;
 	*(int*) 0x6b5c90 = 0;
 	g_14cf950 = 0;

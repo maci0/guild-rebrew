@@ -44,7 +44,7 @@ int __cdecl plt_FindPlantInfo(int a);
 void __cdecl d3_DestroyObject(int a);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 int __cdecl d3_LoadObjectFile(char* a, int b, int c);
-void __cdecl fcn_0043a5a0(int a, int p);
+void __cdecl d3_VisitObjectAttachments(int a, int p);
 void __cdecl ReportClientMessage(char* a);
 void __cdecl d2_ClearRadioGroup(int a);
 void __cdecl d2_DestroyForm(int a);
@@ -288,7 +288,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 				color[0] = 0xdc;
 				*(unsigned char*) ((char*) v6 + 0x215) =
 					*(unsigned char*) ((char*) v6 + 0x215) & 0x7f;
-				fcn_0043a5a0(v6, (int) color);
+				d3_VisitObjectAttachments(v6, (int) color);
 				*(unsigned char*) ((char*) v6 + 0x215) =
 					*(unsigned char*) ((char*) v6 + 0x215) | 0x80;
 			}

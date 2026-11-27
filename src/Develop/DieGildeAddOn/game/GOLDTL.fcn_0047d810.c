@@ -35,12 +35,12 @@ typedef struct AI_TURN_PROTO {
 extern unsigned char* lpGebaeudePROT;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_0047d240(AI_TURN_ENTITY*);
+int __cdecl ai_IsEntityTurnActive(AI_TURN_ENTITY*);
 AI_TURN_ENTITY* __cdecl ai_UpdateEntityFeud(AI_TURN_ENTITY*);
 void __cdecl ai_BuildActionCandidates(AI_TURN_ENTITY*);
 void __cdecl fcn_004c6090(AI_TURN_BUILDING*, int, int, int);
-int __cdecl fcn_00495180(int);
-void __cdecl fcn_00495690(int);
+int __cdecl ai_SelectEntityMethod(int);
+void __cdecl ai_RunSelectedMethod(int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl sprintf(char*, char*, ...);
 
@@ -59,7 +59,7 @@ void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 	int x223;
 	int x230;
 
-	if (!fcn_0047d240(entity)) {
+	if (!ai_IsEntityTurnActive(entity)) {
 		return;
 	}
 	if (*(unsigned int*) ((char*) entity + 0x1cc) & 0x3000) {
@@ -112,10 +112,10 @@ void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 	*(int*) 0x77261c = (int) ai_UpdateEntityFeud(entity);
 	ai_BuildActionCandidates(entity);
 	state = *((unsigned char*) entity + 0x132);
-	if (!*((char*) entity + 0x1b1) && fcn_00495180(entity->id)) {
+	if (!*((char*) entity + 0x1b1) && ai_SelectEntityMethod(entity->id)) {
 		if (*((unsigned char*) entity + 0x132) != state
 		 || (*(unsigned int*) (0x10085d0 + *((unsigned char*) entity + 0x132) * 0x94) & 0x200)) {
-			fcn_00495690(entity->id);
+			ai_RunSelectedMethod(entity->id);
 		}
 	}
 	*(int*) 0x77261c = 0;

@@ -8,7 +8,7 @@ extern int d2_CurrentWindowId;
 extern s_1015f4c g_1015f4c[];
 extern int g_14a79c0[];
 
-typedef struct Req_59ecc0 {
+typedef struct D2_HANDEL_SUCHEN_REQ {
 	int f00;                    /* 0x00 */
 	unsigned char kind;         /* 0x04 */
 	unsigned char pad05[3];
@@ -29,7 +29,7 @@ typedef struct Req_59ecc0 {
 	unsigned char pad5c[4];
 	int f60;                    /* 0x60 */
 	unsigned char pad64[0x94];
-} Req_59ecc0;
+} D2_HANDEL_SUCHEN_REQ;
 
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl d2_CheckOwnerBlocked(int);
@@ -40,14 +40,14 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0052a0c0(int, int);
-void __cdecl fcn_00594340(void);
+void __cdecl d2_InitPlayerBar(int, int);
+void __cdecl d2_ResetBuildingUiSlots(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetControlText(int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00595e20(int, int);
-void __cdecl fcn_005963f0(int, int, int, int);
+void __cdecl d2_SyncWareProduktionSlotGrid(int, int);
+void __cdecl d2_RefreshWorkshopInventoryGrids(int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl d3snd_PlayWorkerOrderVoice(void);
@@ -55,13 +55,13 @@ void __cdecl sv_ClearObjectSelection(void);
 int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x0059ecc0 */
-void __cdecl fcn_0059ecc0(int gebaeude, int a1)
+void __cdecl d2_RunHandelSuchenDialog(int gebaeude, int a1)
 {
 	int i;
 	int h;
@@ -73,7 +73,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 	int y;
 	int total;
 	int handles[3];
-	Req_59ecc0 req;
+	D2_HANDEL_SUCHEN_REQ req;
 	char text[256];
 
 	ids[0] = 0x1c1;
@@ -103,8 +103,8 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(total, 3);
 	io_AppendText(0x1806);
-	fcn_0052a0c0(gebaeude, 0);
-	fcn_00594340();
+	d2_InitPlayerBar(gebaeude, 0);
+	d2_ResetBuildingUiSlots();
 	d2_CenterDialogWindows(total);
 	d2_SetForm(total, 2);
 	y = -0x80 + *(int*) ((char*) g_1015f4c + d2_CurrentWindowId * 0x3cc) / 2;
@@ -120,12 +120,12 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 		d2_SetElementEnabled(h, 1);
 	}
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00595e20(gebaeude, ids[6]);
-	fcn_005963f0(total, 1, 0, gebaeude);
+	d2_SyncWareProduktionSlotGrid(gebaeude, ids[6]);
+	d2_RefreshWorkshopInventoryGrids(total, 1, 0, gebaeude);
 	sel = main_RunFrameLoop(0x59ecc0, 0x677c7);
 	while (sel) {
-		fcn_00595e20(gebaeude, ids[6]);
-		fcn_005963f0(total, 1, 0, gebaeude);
+		d2_SyncWareProduktionSlotGrid(gebaeude, ids[6]);
+		d2_RefreshWorkshopInventoryGrids(total, 1, 0, gebaeude);
 		for (i = 3; i < 6; i++) {
 			ids[i] = 0;
 		}
@@ -199,7 +199,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 					cm_GetCommandResult(sel);
 				}
 				else {
-					fcn_00526120(*(int*) 0x14ab324, 4);
+					d2_ShowModalMessageBox(*(int*) 0x14ab324, 4);
 				}
 			}
 		skip_req: ;

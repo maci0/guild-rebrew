@@ -2,14 +2,14 @@ extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_6b8300;
 
-char __cdecl fcn_00438a80(void* p, int arg);
+char __cdecl d3_InvalidateNodeRenderCacheCallback(void* p, int arg);
 void __cdecl d3_VisitSceneObjects(int list, int a, int mask, char(__cdecl* fn)(void*, int), int arg);
 void __cdecl d3_ResetSkyDomeNormals(int a, int b);
 
 /* ADDRESS: GOLDTL 0x00438af0 */
-void __cdecl fcn_00438af0(unsigned char a)
+void __cdecl d3_InvalidateSceneRenderCache(unsigned char a)
 {
-	d3_VisitSceneObjects(g_67a370, 0, 0x1ff, fcn_00438a80, a);
+	d3_VisitSceneObjects(g_67a370, 0, 0x1ff, d3_InvalidateNodeRenderCacheCallback, a);
 	if (g_6b89c0 != 0) {
 		d3_ResetSkyDomeNormals(g_6b89c0, 0);
 	}

@@ -47,10 +47,10 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
-int __cdecl fcn_0046fac0(int, int, int, int);
+int __cdecl d2_EqualizeWindowButtonWidths(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int, int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int, int);
 void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -58,7 +58,7 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
-int __cdecl fcn_005898f0(void*);
+int __cdecl he_HasNoActiveAssassinAction(void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 int __cdecl ai_FindEntityInFavorRange(unsigned short*, int, int, int, float, float,
@@ -94,7 +94,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	d2_SetForm(dlg, 0);
 	d2_InitWindowBounds(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
-	i = fcn_0046fac0(0, 3, *(int*) 0x14b53a0, *(int*) &d2_CurrentWindowId);
+	i = d2_EqualizeWindowButtonWidths(0, 3, *(int*) 0x14b53a0, *(int*) &d2_CurrentWindowId);
 	((D2_CONTROL_TL*)g_1015ea0)[i].value_06c = 1;
 	((D2_CONTROL_TL*)g_1015ea0)[i].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c);
@@ -102,7 +102,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	lst = d2_AddWindowValueGauge(0x57, 0x14, 200, 0, 100, 0x7b, 2,
 	                   *(int*) &d2_CurrentWindowId);
 	act.item = lst;
-	fcn_00472380(lst, 0, 2, 0, 1);
+	d2_CreateGuiWindow(lst, 0, 2, 0, 1);
 	d2_SetValueGaugeStepLabels(lst, 3, *(int*) 0x14b53a4, *(int*) 0x14b53a8,
 	             *(int*) 0x14b53ac);
 	d2_SetForm(dlg, 3);
@@ -126,7 +126,7 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 
 ,
 				        amt, *(char*) &g_773d75) &&
-				    fcn_005898f0(building)) {
+				    he_HasNoActiveAssassinAction(building)) {
 					p = gm_GetEntityTableEntry(
 					    (char*) (unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)&g_774970]
 

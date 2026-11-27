@@ -8,9 +8,9 @@ extern volatile int g_6b7fac;
 
 
 void __cdecl d2_SelectFont(int);
-void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
+void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
-void __cdecl fcn_005337f0(void)
+void __cdecl d2_DrawStatusBannerText(void)
 {
 	int x;
 	int y;
@@ -24,7 +24,7 @@ void __cdecl fcn_005337f0(void)
 			x = d2_CenterX - 0x12c;
 			y = (int) (d2_UiScale * 575.0f);
 		}
-		fcn_0046bd20(x, y, 0x258, 0x18, g_77250c, g_7e5fc0, 0x28);
+		d2_DrawWordWrappedText(x, y, 0x258, 0x18, g_77250c, g_7e5fc0, 0x28);
 		if ((*(unsigned int*)&g_6b7fac) >= (unsigned int)(g_6a251c + 0x15e)) {
 			g_7e5fc0[0] = 0;
 		}

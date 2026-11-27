@@ -6,7 +6,7 @@ extern int g_778d24;
 extern float g_6ab3e0;
 
 /* ADDRESS: GOLDTL 0x005b00f0 */
-void __cdecl fcn_005b00f0(char* obj, int offsetX, int offsetY)
+void __cdecl d2_ProjectMapCoordToScreen(char* obj, int offsetX, int offsetY)
 {
 	double t;
 	float a;

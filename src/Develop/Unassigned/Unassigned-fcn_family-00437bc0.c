@@ -117,7 +117,7 @@ void __cdecl d3_UpdateViewFrustum(void)
  * depths. Returns the plane mask; bit 6 marks a corner outside every plane.
  * When the ray set is not culled, stores the extreme depths. */
 /* ADDRESS: GOLDTL 0x00437ee0 */
-unsigned char __cdecl fcn_00437ee0(float* p, float* pmin, float* pmax)
+unsigned char __cdecl d3_TestBoxAgainstFrustum(float* p, float* pmin, float* pmax)
 {
 	Mask f;
 	Mask common;

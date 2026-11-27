@@ -11,7 +11,7 @@ extern char g_7f4ca4[];
 
 int __cdecl cm_GetCommandStatus(int id);
 int __cdecl cm_SendSetHE(int a, char* unit);
-void __cdecl fcn_004c5980(void* msg);
+void __cdecl cm_EnqueueStagedPacket(void* msg);
 void __cdecl gm_AddTime(pos14_7f4c00* when, int h, int m, int s);
 void __cdecl he_FreeAction(char* unit);
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -122,7 +122,7 @@ void __cdecl he_RunAction0x2c(char* action)
 		*(unsigned short*) (msg + 0x24) = g_7f4c0c;
 		*(int*) (msg + 0x34) = waitId;
 		gm_AddTime((pos14_7f4c00*) (msg + 0x18), 0, 0x2d, 0);
-		fcn_004c5980(pkt);
+		cm_EnqueueStagedPacket(pkt);
 		gm_AddTime((pos14_7f4c00*) (action + 0x52), 0, 2, 0);
 		*(int*) (action + 0x84) = cm_SendSetHE(-1, action);
 		return;

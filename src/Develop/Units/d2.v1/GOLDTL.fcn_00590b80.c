@@ -20,7 +20,7 @@ extern char s_6a9a38[]; /* "ToolTip\\ToolTip_Objekte_Handelsgut" */
 extern char s_6a9a5c[]; /* "ToolTip\\ToolTip_Objekte_Waffen" */
 
 int* __cdecl gm_LookupWeaponSpec(int);
-void __cdecl fcn_00469c40(int, int, int);
+void __cdecl d2_PositionControl(int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -31,7 +31,7 @@ float __cdecl eval_ObjektPreis2Credits(int, int);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl gm_FindBuildingOwner(int);
-float __cdecl fcn_00510260(int, int, int*);
+float __cdecl gm_CalcBuildingProductivity(int, int, int*);
 
 /* ADDRESS: GOLDTL 0x00590b80 */
 int __cdecl d2_ShowObjectTooltip(int itemId)
@@ -62,7 +62,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 	n = g_1038144[win].i[0];
 	val = ((D2_WIN*) g_1015f40)[n].width;
 	if (((D2_WIN*) g_1015f40)[n].left + val > g_1040494 - 0x10) {
-		fcn_00469c40(g_1040494 - 0x10 - val,
+		d2_PositionControl(g_1040494 - 0x10 - val,
 				((D2_WIN*) g_1015f40)[n].top,
 				((D2_WIN*) g_1015f40)[n].slot);
 	}
@@ -100,7 +100,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 			}
 			count += 0x21c;
 		}
-		quality = fcn_00510260((int) ent, slot, arr);
+		quality = gm_CalcBuildingProductivity((int) ent, slot, arr);
 		p = (char*) gm_FindBuildingOwner((int) ent);
 		if (p == 0) {
 			p = (char*) (0x7f4ca0 + *(unsigned short*) ((char*) ent + 0x27) * 0x21c);

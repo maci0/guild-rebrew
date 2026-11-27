@@ -20,7 +20,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 
 /* ADDRESS: GOLDTL 0x00536b10 */
-void __cdecl fcn_00536b10(void)
+void __cdecl d2_UpdateQuickChatOverlay(void)
 {
 	if (g_7e35c0[g_774650].fn != d2_RunChatConsole &&
 	    g_6a2c1c > g_6b7fac - 0x23a &&

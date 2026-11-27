@@ -12,10 +12,10 @@ typedef struct Seq {
 
 void __cdecl fcn_004a8770(void);
 void __cdecl gm_DealInitialCards(void);
-void __cdecl fcn_004a7be0(void);
+void __cdecl gm_EvaluateCardGameBoard(void);
 void __cdecl gm_PickCardGameBet(void);
 void __cdecl ai_EvaluateCardGameFold(void);
-void __cdecl fcn_004a86b0(void);
+void __cdecl gm_DealFourthCard(void);
 void __cdecl fcn_004a7b40(void);
 void __cdecl ai_PlayCardGameTurn(void);
 void __cdecl gm_DealFifthCard(void);
@@ -31,22 +31,22 @@ short __cdecl gm_StepCardGameRound(void)
 		fcn_004a8770();
 		((Seq*)g_1007cd4)->state++;
 		gm_DealInitialCards();
-		fcn_004a7be0();
+		gm_EvaluateCardGameBoard();
 		gm_PickCardGameBet();
 		return 0;
 	case 2:
 		((Seq*)g_1007cd4)->state = 3;
 		return (((Seq*)g_1007cd4)->xb0 ? 0 : 0x20) | 9;
 	case 3:
-		fcn_004a7be0();
+		gm_EvaluateCardGameBoard();
 		ai_EvaluateCardGameFold();
 		((Seq*)g_1007cd4)->state++;
-		fcn_004a86b0();
+		gm_DealFourthCard();
 		fcn_004a7b40();
 		return 0;
 	case 4:
 		((Seq*)g_1007cd4)->state = 5;
-		fcn_004a7be0();
+		gm_EvaluateCardGameBoard();
 		gm_PickCardGameBet();
 		return (((Seq*)g_1007cd4)->xb0 ? 0 : 0x20) | 9;
 	case 5:
@@ -63,7 +63,7 @@ short __cdecl gm_StepCardGameRound(void)
 		((Seq*)g_1007cd4)->state++;
 		break;
 	case 8:
-		fcn_004a7be0();
+		gm_EvaluateCardGameBoard();
 		((Seq*)g_1007cd4)->state++;
 		return (((Seq*)g_1007cd4)->xb0 ? 0 : 0x20) | 9;
 	case 9:

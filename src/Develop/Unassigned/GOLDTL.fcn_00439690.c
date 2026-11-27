@@ -28,7 +28,7 @@ void __cdecl d3_AllocShadowTextures(void);
 void __cdecl fcn_0043bbf0(unsigned char);
 #include "client_scene_loader.h"
 
-void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3, unsigned int a4, SCENE_PROGRESS progress)
+void __cdecl d3_ConfigureSceneRenderQuality(unsigned char a1, int a2, unsigned char a3, unsigned int a4, SCENE_PROGRESS progress)
 {
 	int save;
 	unsigned int i;

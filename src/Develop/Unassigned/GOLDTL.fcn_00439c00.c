@@ -13,7 +13,7 @@ void __cdecl d3_AppendObjectSibling(Node* a, Node* b);
 void __cdecl fcn_00439aa0(Node* b);
 
 /* ADDRESS: GOLDTL 0x00439c00 */
-void __cdecl fcn_00439c00(Node* a, Node* b)
+void __cdecl d3_AttachSceneNode(Node* a, Node* b)
 {
 	b->root = a == 0;
 	if (a != 0) {

@@ -5,7 +5,7 @@ extern int g_774654;
 void __cdecl io_FormatTextBuffer(char*, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl d3snd_QueueSound(int, int, char*, int, int);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl fcn_005bdc30(int, int*, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -14,7 +14,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 void __cdecl d2_SetValueGaugeFlags(int, int);
 void __cdecl d2_SetValueGaugeLabel(int, int);
 void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int);
@@ -50,7 +50,7 @@ void __cdecl d2_OpenFriedhofFogDialog(int building)
 	io_FormatTextBuffer(text, 0x40c8, 0x40b6);
 	if (he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (building + 1))) {
 		d3snd_QueueSound(0xffffffff, 0, (char*) 0x6a9780, 0, 100);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return;
 	}
 	fill_n = 0x50;
@@ -96,14 +96,14 @@ void __cdecl d2_OpenFriedhofFogDialog(int building)
 	io_AppendText(0x40b7, 0x40b6, *(unsigned short*) (rec + 0x27), rec);
 	firstControl = d2_AddWindowValueGauge(100, 0xa0, 200, 0, 2, 0x7b, 0x82,
 	                  *(int*) &d2_CurrentWindowId);
-	fcn_00472380(firstControl, 0, 2, 0);
+	d2_CreateGuiWindow(firstControl, 0, 2, 0);
 	d2_SetValueGaugeFlags(firstControl, 0x82);
 	d2_SetValueGaugeLabel(firstControl, *(int*) 0x14b561c);
 	d2_SetValueGaugeStepLabels(firstControl, 3, *(int*) 0x14b5620, *(int*) 0x14b5624,
 	             *(int*) 0x14b5628);
 	secondControl = d2_AddWindowValueGauge(100, 0xbe, 200, 0, 2, 0x7b, 0x82,
 	                  *(int*) &d2_CurrentWindowId);
-	fcn_00472380(secondControl, 0, 2, 0);
+	d2_CreateGuiWindow(secondControl, 0, 2, 0);
 	d2_SetValueGaugeFlags(secondControl, 0x82);
 	d2_SetValueGaugeLabel(secondControl, *(int*) 0x14b562c);
 	d2_SetValueGaugeStepLabels(secondControl, 3, *(int*) 0x14b5630, *(int*) 0x14b5634,

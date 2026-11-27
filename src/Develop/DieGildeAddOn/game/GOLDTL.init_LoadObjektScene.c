@@ -39,7 +39,7 @@ char* __cdecl ch_SelectRandomDummy(void);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 void __cdecl ch_SetPosition(char*, float*, int);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
-int __cdecl fcn_00413160(void);
+int __cdecl d3_FindFreeSceneContext(void);
 void __cdecl ReportClientMessage(const char*);
 int __cdecl d3_ResolveSceneObjectProtoId(char*);
 void __cdecl fcn_00510bd0(char*);
@@ -83,7 +83,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		paused = 1;
 	}
 	if (init_SceneContextIndices[objectTypeIndex] == -1) {
-		type = fcn_00413160();
+		type = d3_FindFreeSceneContext();
 		if (type == -1) {
 			ReportClientMessage(s_6a1c30);
 		}

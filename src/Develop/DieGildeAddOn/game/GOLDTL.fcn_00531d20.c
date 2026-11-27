@@ -20,7 +20,7 @@ unsigned short __cdecl fcn_0042e410(int a);
 int __cdecl he_StartHandlungSearch(int n, ...);
 int __cdecl gm_GetEntityUiFlags(int a, int b, int c, int d);
 int __cdecl ch_FindCharacterByKey(int a, ...);
-int __cdecl fcn_00507c30(int a);
+int __cdecl gm_MapEntityToCategorySlot(int a);
 int __cdecl gm_MapEntityStatRange(int a);
 int __cdecl gm_SearchTable67(int a);
 int __cdecl gm_LookupEntityRecordById(int a);
@@ -86,7 +86,7 @@ void __cdecl d2_UpdateHoverTooltip(void)
 		if (*(unsigned char*) (g_7746b4 + 0x164) != 0)
 			i = gm_MapEntityStatRange(*(unsigned char*) (g_7746b4 + 0x164));
 		else if (*(unsigned char*) (g_7746b4 + 0x165) != 0)
-			i = fcn_00507c30(*(unsigned char*) (g_7746b4 + 0x165));
+			i = gm_MapEntityToCategorySlot(*(unsigned char*) (g_7746b4 + 0x165));
 		else
 			goto set_idx_00531d20;
 		if (i == 0x0b || i == 0x0c) {

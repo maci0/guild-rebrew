@@ -17,7 +17,7 @@ extern struct s_fd7ba0 g_fd7ba0[];
 
 #include <string.h>
 
-int __cdecl fcn_00413160(void);
+int __cdecl d3_FindFreeSceneContext(void);
 void __cdecl fcn_0050dc30(int);
 
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* e)
@@ -30,7 +30,7 @@ int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* e)
 		if (e == g_6f230c || *e == 0x1e) {
 			fcn_0050dc30(*e);
 		} else {
-			r = fcn_00413160();
+			r = d3_FindFreeSceneContext();
 			if (r == -1) {
 				return r;
 			}

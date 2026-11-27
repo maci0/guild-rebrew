@@ -54,7 +54,7 @@ extern short g_14ce8c0;
 extern short g_14ce8c2;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00414c30(int, int);
+void __cdecl d3_SetObjectGreyTint(int, int);
 void* __cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(char*);
 int __cdecl d3_FindSceneObject(char*, int, char*, char*);
@@ -286,9 +286,9 @@ La5d:
 			c = s->flag;
 			if (c != g_7e2760[idx] && (*(unsigned char*) (e + 0x8c) & 0x40) == 0) {
 				if (c != 0) {
-					fcn_00414c30(*(int*) (e + 0x34), 1);
+					d3_SetObjectGreyTint(*(int*) (e + 0x34), 1);
 				} else {
-					fcn_00414c30(*(int*) (e + 0x34), 0);
+					d3_SetObjectGreyTint(*(int*) (e + 0x34), 0);
 				}
 			}
 			c = s->flag;

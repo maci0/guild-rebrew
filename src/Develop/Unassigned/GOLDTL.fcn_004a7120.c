@@ -11,7 +11,7 @@ typedef struct Card {
 #include "client_types.h"
 extern Card_1007ce0 g_1007ce0[24];
 
-int __cdecl fcn_004a7120(int* h, int* out, int skipFirst)
+int __cdecl gm_FindCardPair(int* h, int* out, int skipFirst)
 {
 	int i;
 	int j;

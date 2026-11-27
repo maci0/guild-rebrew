@@ -20,7 +20,7 @@ void __cdecl d3_SetNodePosition(char*, float*);
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 float __cdecl d3_Smoothstep(float, float, float);
-void __cdecl fcn_00418ae0(char*);
+void __cdecl d3_DestroySunRayObject(char*);
 /* Light colour word passed by value; byte layout from fcn_0043a3f0. */
 typedef struct SUNRAY_COLOR {
 	unsigned char a;
@@ -29,7 +29,7 @@ typedef struct SUNRAY_COLOR {
 	unsigned char d;
 } SUNRAY_COLOR;
 
-void __cdecl fcn_0043a3f0(char*, char*, SUNRAY_COLOR);
+void __cdecl d3_ChangeObjectTransparency(char*, char*, SUNRAY_COLOR);
 
 /* ADDRESS: GOLDTL 0x00418860 */
 void __cdecl d3_UpdateSunRays(char* obj)
@@ -90,7 +90,7 @@ void __cdecl d3_UpdateSunRays(char* obj)
 		a = flt_1 - (float) (((double) (unsigned int) g_6b7fac - SonnenstrahlenStartZeit) * g_662b28);
 		if (a <= 0.0) {
 			g_6b5cfc = 0;
-			fcn_00418ae0(obj);
+			d3_DestroySunRayObject(obj);
 			g_6b5cf8 = 0;
 			return;
 		}
@@ -103,6 +103,6 @@ void __cdecl d3_UpdateSunRays(char* obj)
 		memset(&color, 0, sizeof(color));
 		color.c = 1;
 		color.a = (unsigned char) (a * result * x * g_662a7c);
-		fcn_0043a3f0(obj, *(char**) (obj + 0x1cc), color);
+		d3_ChangeObjectTransparency(obj, *(char**) (obj + 0x1cc), color);
 	}
 }

@@ -38,13 +38,13 @@ int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
 void __cdecl cm_StepCommandQueue(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
+int __cdecl gm_HandleErpressung(unsigned char* e, unsigned char* o)
 {
 	int chance;
 	int dlg;
@@ -96,7 +96,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 					}
 					if (*(int*) (e + 0x1c8) & 0x100) {
 						io_FormatTextBuffer(text, 0x1d5a, *(unsigned short*) o, &pos);
-						fcn_00526120(text, 0);
+						d2_ShowModalMessageBox(text, 0);
 					}
 					result = 1;
 					g_774654 = 1;
@@ -104,7 +104,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 					cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (o + 4), -0x1a, 1);
 					cm_RequestModifyHealth(*(int*) (e + 4), -2);
 					io_FormatTextBuffer(text, 0x1d59, *(unsigned short*) o);
-					fcn_00526120(text, 0);
+					d2_ShowModalMessageBox(text, 0);
 					result = 0;
 					g_774654 = 1;
 				}
@@ -116,7 +116,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop((void*) fcn_005d5670, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) gm_HandleErpressung, 0x657c7) != 0);
 	d2_DestroyForm(dlg);
 	return result;
 }

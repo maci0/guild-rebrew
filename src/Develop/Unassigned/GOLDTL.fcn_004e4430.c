@@ -1,13 +1,13 @@
 
 
-void __cdecl fcn_0043a9c0(void*);
+void __cdecl d3_DeinitUniverse(void*);
 
-void __cdecl fcn_004e4430(void)
+void __cdecl d3_ApplyDisplayFlags(void)
 {
 	void* p;
 
 	p = *(void**) 0x772f48;
 	if (p != 0) {
-		fcn_0043a9c0(p);
+		d3_DeinitUniverse(p);
 	}
 }

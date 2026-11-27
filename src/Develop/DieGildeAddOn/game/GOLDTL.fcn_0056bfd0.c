@@ -12,7 +12,7 @@ int __cdecl fcn_0042e410(int code);
 int __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 int __cdecl fcn_00545e80(int a, int b, char* s, int c, int d, int e, int f,
     int g, int h);
-int __cdecl fcn_004c5980(void* p);
+int __cdecl cm_EnqueueStagedPacket(void* p);
 void __cdecl cm_SendRemoveLinkedObject(int a, int b, int c);
 int __cdecl cm_GetCommandStatus(int h);
 int* __cdecl cm_GetCommandResult(int h);
@@ -183,7 +183,7 @@ void __cdecl he_RunAngriff(char* ent)
 
 
 				gm_AddTime((char*) msg + 0x18, 0, 0x1e, 0);
-				*(int*) (ent + 0xb4) = fcn_004c5980(msg);
+				*(int*) (ent + 0xb4) = cm_EnqueueStagedPacket(msg);
 				*(pos14_7f4c00*) (ent + 0x52) = gm_GameTime;
 
 

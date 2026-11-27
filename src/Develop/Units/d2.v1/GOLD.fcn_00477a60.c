@@ -1,6 +1,6 @@
 
 
-typedef struct Spin00477a60 {
+typedef struct D2_SLIDER_STATE {
 	char pad0[0x18];
 	int max;
 	int min;
@@ -9,10 +9,10 @@ typedef struct Spin00477a60 {
 	unsigned char flags;
 	char pad29[0x12c - 0x29];
 	int value;
-} Spin00477a60;
+} D2_SLIDER_STATE;
 // SIZE 0x130
 
-extern Spin00477a60* g_006ed9dc; /* 0x006ed9dc */
+extern D2_SLIDER_STATE* g_006ed9dc; /* 0x006ed9dc */
 extern int g_0146739c; /* 0x0146739c */
 extern int g_01467390; /* 0x01467390 */
 extern int g_006ed9f4; /* 0x006ed9f4 */
@@ -26,12 +26,12 @@ extern int g_006ed9e8; /* 0x006ed9e8 */
 extern int g_006ed9ec; /* 0x006ed9ec */
 
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00477490(Spin00477a60* p, int v, int a3, int a4);
+void __cdecl fcn_00477490(D2_SLIDER_STATE* p, int v, int a3, int a4);
 
-void __cdecl fcn_00477a60(void)
+void __cdecl d2_HandleSliderDrag(void)
 {
 	int step;
-	Spin00477a60* spin;
+	D2_SLIDER_STATE* spin;
 
 	if (g_006ed9dc == 0 || !(g_006ed9dc->flags & 2)) {
 		return;

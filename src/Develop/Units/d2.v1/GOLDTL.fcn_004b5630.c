@@ -16,7 +16,7 @@ extern void __cdecl main_RunFrameLoop(int a, int b);
 extern void __cdecl d2_DestroyForm(void *obj);
 
 /* ADDRESS: GOLDTL 0x004b5630 */
-void __cdecl d2_RunMissionBriefingDialog(int a0, unsigned loopFlags)
+void __cdecl d2_RunMissionBriefingDialog(int mission, unsigned loopFlags)
 {
 	char buf[256];
 	void *obj;
@@ -115,10 +115,10 @@ void __cdecl d2_RunMissionBriefingDialog(int a0, unsigned loopFlags)
 	d2_SetForm(obj, 1);
 	io_AppendText(0x6811b0);
 	io_AppendText(0x1b9e);
-	io_AppendText(*(int *) (a0 + 8) + 2);
+	io_AppendText(*(int *) (mission + 8) + 2);
 	b = loopFlags | 0x80;
 	if (sbs_IsReady()) {
-		sprintf(buf, (const char *) 0x681180, *(unsigned *) (a0 + 0x10));
+		sprintf(buf, (const char *) 0x681180, *(unsigned *) (mission + 0x10));
 		node = d3snd_PlaySoundEffect(-7, 0, buf, -1);
 		if (sb_CheckVoicePlaying(node)) {
 			while (main_RunFrameLoop(0, b), g_100f1dc == -1 || d2_CurrentElementId != tab) {

@@ -34,7 +34,7 @@ void __cdecl init_LoadGebaeudeScene(int);
 void __cdecl fcn_00510c90(int);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_UpdateBuildingView(unsigned char*, unsigned int);
-void __cdecl fcn_0043aa30(char);
+void __cdecl d3_InitUniverse(char);
 
 /* ADDRESS: GOLDTL 0x004e4180 */
 void __cdecl fcn_004e4180(char* event)
@@ -113,7 +113,7 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 		flags = g_6b8058;
 		if (flags) {
 			g_772f48 = flags;
-			fcn_0043aa30(flags & 0xfd);
+			d3_InitUniverse(flags & 0xfd);
 			g_772f48 &= 0xfffffffd;
 		}
 		if (*((unsigned char*) cut_ActiveCutscene + 0x26) & 0x20) {

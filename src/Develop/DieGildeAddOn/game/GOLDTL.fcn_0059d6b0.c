@@ -9,7 +9,7 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-void __cdecl fcn_00526120(char* buf, int flag);
+void __cdecl d2_ShowModalMessageBox(char* buf, int flag);
 int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
@@ -47,7 +47,7 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 	}
 	if (he_HasNoActiveAction0x62(obj) == 0) {
 		io_FormatTextBuffer(msg, 0x1a92, *(unsigned short*) (obj + 0x27), obj);
-		fcn_00526120(msg, 0);
+		d2_ShowModalMessageBox(msg, 0);
 		return;
 	}
 	count = 0;
@@ -78,7 +78,7 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 	count += extra;
 	if (count >= *(unsigned char*) (profile + 0x247) * 2) {
 		io_FormatTextBuffer(msg2, 0x19fa, count, g_7746c8);
-		fcn_00526120(msg2, 0);
+		d2_ShowModalMessageBox(msg2, 0);
 		return;
 	}
 	choice = (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*)(obj + 0x27)];
@@ -118,7 +118,7 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 					g_774654 = 1;
 				}
 				else {
-					fcn_00526120((char*) g_14abaac, 0);
+					d2_ShowModalMessageBox((char*) g_14abaac, 0);
 					g_774654 = 1;
 				}
 			}

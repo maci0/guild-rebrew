@@ -29,7 +29,7 @@ extern char g_1052bd0[];
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x00436aa0 */
-void __cdecl fcn_00436aa0(unsigned char* flags)
+void __cdecl d3_ResetRenderStates(unsigned char* flags)
 {
     float m[16];
     int copy_size;

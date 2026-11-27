@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00413160 */
-int __cdecl fcn_00413160(void)
+int __cdecl d3_FindFreeSceneContext(void)
 {
 	int i;
 	int a;

@@ -3,7 +3,7 @@ extern int g_100f1dc;
 
 
 
-void __cdecl fcn_00535550(void);
+void __cdecl d2_TurnBookPagesForward(void);
 void __cdecl d2_TurnBookPagesBack(void);
 
 void __cdecl d2_HandleBookPageButton(void)
@@ -12,7 +12,7 @@ void __cdecl d2_HandleBookPageButton(void)
 
 	v = *(int*) ((char*)&g_100f1dc);
 	if (v == 0x767) {
-		fcn_00535550();
+		d2_TurnBookPagesForward();
 	} else if (v == 0x768) {
 		d2_TurnBookPagesBack();
 	}

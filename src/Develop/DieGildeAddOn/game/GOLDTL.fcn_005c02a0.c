@@ -23,7 +23,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl gm_AmountToUnits(int, unsigned char);
-void __cdecl fcn_005c9220(int*);
+void __cdecl d2_DrawLawCandidateStatus(int*);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
@@ -82,7 +82,7 @@ int __cdecl d2_RunPaymentTargetDialog(char* entity)
     ids[3] = 4;
     ids[4] = 2;
     ids[5] = 0x10;
-    fcn_005c9220(ids);
+    d2_DrawLawCandidateStatus(ids);
     g_100f1dc = -1;
     do {
         if (g_14ce8e0 != 0)

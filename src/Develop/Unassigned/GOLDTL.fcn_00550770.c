@@ -4,11 +4,11 @@ typedef struct {
 	int b;
 	int c;
 	unsigned short d;
-} F00550770;
+} HE_TIMESTAMP_14;
 #pragma pack(pop)
 
 /* ADDRESS: GOLDTL 0x00550770 */
-void __cdecl fcn_00550770(char* object)
+void __cdecl he_StartMeisterpruefungPrompt(char* object)
 {
-	*(F00550770*) (object + 0x52) = *(F00550770*) (object + 0x44);
+	*(HE_TIMESTAMP_14*) (object + 0x52) = *(HE_TIMESTAMP_14*) (object + 0x44);
 }

@@ -2,7 +2,7 @@ int __cdecl FindStraftatIndexById(int);
 extern char g_7f4ca4[];
 
 /* ADDRESS: GOLD 0x004f3c50 */
-int __cdecl fcn_004f3c50(int* ids, int* counts, int id)
+int __cdecl gm_CollectTopStraftaten(int* ids, int* counts, int id)
 {
 	int list[0x200];
 	int* w;

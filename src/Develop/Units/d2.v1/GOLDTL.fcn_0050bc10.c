@@ -8,7 +8,7 @@ int __cdecl gm_AmountToUnits(int, unsigned char);
 char* __cdecl itoa(int, char*, int);
 
 /* ADDRESS: GOLDTL 0x0050bc10 */
-void __cdecl fcn_0050bc10(int value, unsigned char mode, char* dst)
+void __cdecl d2_FormatCurrencyString(int value, unsigned char mode, char* dst)
 {
 	char digits[0x40];
 	char text[0x80];

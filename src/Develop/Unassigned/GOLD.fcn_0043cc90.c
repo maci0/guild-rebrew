@@ -32,7 +32,7 @@ void __cdecl d3_ClearObjectDrawRecord(char* record)
         if (*(char**) (record + 0x10) != 0) {
             for (i = 0; i < *(int*) (*(char**) (record + 0x10) + 0x1e0); i++) {
                 if ((*(void***) (record + 0x14))[i] != 0) {
-                    fcn_0045fbb0((*(void***) (record + 0x14))[i]);
+                    d3_ReleaseSceneResourceRef((*(void***) (record + 0x14))[i]);
                 }
             }
         }

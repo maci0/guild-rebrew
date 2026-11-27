@@ -2,20 +2,20 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 #pragma pack(push, 1)
-typedef struct Rec500e {
+typedef struct OBJ_PRODUCER_PROTO {
 	char kind;
 	char pad1[0x20];
 	unsigned char x21;
 	char pad22[0x41 - 0x22];
-} Rec500e;
+} OBJ_PRODUCER_PROTO;
 /* SIZE 0x41 */
 
-typedef struct Bld500e {
+typedef struct BLD_PRODUCER_PROTO {
 	unsigned char kind;
 	char pad1[0x22 - 1];
 	unsigned char n;
 	unsigned short items[0x100];
-} Bld500e;
+} BLD_PRODUCER_PROTO;
 /* SIZE 0x24d */
 #pragma pack(pop)
 
@@ -23,7 +23,7 @@ extern unsigned char* lpGebaeudePROT;
 extern char* lpObjektePROT;
 
 /* ADDRESS: GOLDTL 0x00500e40 */
-void __cdecl fcn_00500e40(void)
+void __cdecl init_BuildObjectProducerTables(void)
 {
 	int kind;
 	int i;

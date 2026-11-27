@@ -12,13 +12,13 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_0050c7d0(int, int);
+int __cdecl gm_SumBuildingComponentValues(int, int);
 int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetControlText(int, char*);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-int __cdecl fcn_00526120(void*, int);
+int __cdecl d2_ShowModalMessageBox(void*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d2_DestroyForm(int);
@@ -65,7 +65,7 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 	count = 0;
 	if (entry != 0) {
 		for (i = 0; table[i] != 0; i++) {
-			if (fcn_0050c7d0(building[0], table[i]) != 0) {
+			if (gm_SumBuildingComponentValues(building[0], table[i]) != 0) {
 				count++;
 			}
 		}
@@ -73,7 +73,7 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 	step = (int) (10.0f / count * 24.0f);
 	height = (*(int*) (g_77255c + 0x10) - step * count) / 2 + 0xe;
 	for (i = 0; table[i] != 0; i++) {
-		if (fcn_0050c7d0(building[0], table[i]) != 0) {
+		if (gm_SumBuildingComponentValues(building[0], table[i]) != 0) {
 			label = d2_AddElementToWindow(0, height, 2, d2_CurrentWindowId);
 			wins[i] = label;
 			((D2_CONTROL_TL*) (g_1015ea0))[label].flags_1d0 = 3;
@@ -88,7 +88,7 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 				type = 4;
 			}
 			else {
-				type = fcn_0050c7d0(building[0], table[i]);
+				type = gm_SumBuildingComponentValues(building[0], table[i]);
 			}
 			gauge = d2_AddWindowValueGauge(0x140, height, 0x82, 0, type, 0x6f, 0x56, d2_CurrentWindowId);
 			elems[i] = gauge;
@@ -114,13 +114,13 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 					io_FormatTextBuffer(buf, "$Z$[%s$]$N%s", table[i] * 2 + 0xf98,
 					    table[i] * 2 + 0xf99);
 					d2_SetGroupVisibility(window, 0);
-					fcn_00526120(buf, 0x10);
+					d2_ShowModalMessageBox(buf, 0x10);
 					d2_SetGroupVisibility(window, 1);
 				}
 			}
 		}
 		for (i = 0; table[i] != 0; i++) {
-			if (fcn_0050c7d0(building[0], table[i]) != 0 && elems[i] != -1) {
+			if (gm_SumBuildingComponentValues(building[0], table[i]) != 0 && elems[i] != -1) {
 				if (table[i] == 3) {
 					type = 6;
 				}
@@ -128,7 +128,7 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 					type = 4;
 				}
 				else {
-					type = fcn_0050c7d0(building[0], table[i]);
+					type = gm_SumBuildingComponentValues(building[0], table[i]);
 				}
 					{
 						int v0;

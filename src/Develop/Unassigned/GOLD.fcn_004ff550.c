@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl gm_PackGameTime(int*, char*);
-void __cdecl fcn_004fec10(int);
+void __cdecl gm_UpdateCityMarketStock(int);
 void __cdecl cm_SendRandomMarktSlotDelta(int);
 int __cdecl fcn_004ff8c0(int, int);
 int __cdecl fcn_004ff950(int, int);
@@ -9,7 +9,7 @@ float __cdecl fcn_004ffa10(int, int);
  * city outputs0x7d6a60 stride0x2a90, item records through0x2a90;
  * 0x6f1bc5 current city byte, 0x1460ae0 state int. */
 /* ADDRESS: GOLD 0x004ff550 */
-void __cdecl fcn_004ff550(int city, int* date)
+void __cdecl gm_UpdateCityMarketAndPrices(int city, int* date)
 {
     char calendar[10];
     int year, month, tableOffset, count, index, lo, hi, value, previousYear, i;
@@ -104,7 +104,7 @@ void __cdecl fcn_004ff550(int city, int* date)
         p[-6] = 0;
     }
     if (*(int*) 0x1460ae0 == -1) {
-        fcn_004fec10(city);
+        gm_UpdateCityMarketStock(city);
         cm_SendRandomMarktSlotDelta(city);
     }
 }

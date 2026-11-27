@@ -19,7 +19,7 @@ extern void __cdecl io_AppendText(int);
 extern int __cdecl d2_DestroyForm(void*);
 extern int __cdecl d2_GetControlValue(void*);
 extern int __cdecl d2_GetWindowListItem(void*, int, int);
-extern int __cdecl fcn_00472380(void*, char*);
+extern int __cdecl d2_CreateGuiWindow(void*, char*);
 extern int __cdecl d2_SetBildArgument(void*, int);
 extern int __cdecl fcn_004727a0(void*, int);
 extern int __cdecl d2_SelectControl(void*);
@@ -29,7 +29,7 @@ extern int __cdecl fcn_004ce080(void);
 extern int __cdecl gm_AreAllMultiplayerReady(void);
 extern void* __cdecl fcn_004ce180(void);
 extern int __cdecl fcn_004ce1a0(void);
-extern void* __cdecl fcn_004ce1c0(void);
+extern void* __cdecl d3_GetSceneState(void);
 extern int __cdecl cm_RequestClearSceneEntries(void);
 extern int __cdecl fcn_004ce210(int);
 extern int __cdecl lb_RequestLeaveLobby(void);
@@ -40,18 +40,18 @@ extern int __cdecl cm_GetCommandStatus(int);
 extern int __cdecl gm_GetRangeStatId(int, int);
 extern int __cdecl fcn_00507b00(int);
 extern int __cdecl fcn_0051af00(char*, int);
-extern int __cdecl fcn_00526120(char*, int);
+extern int __cdecl d2_ShowModalMessageBox(char*, int);
 extern int __cdecl cm_StepCommandQueue(void);
 extern int __cdecl main_RunFrameLoop(void*, int);
-extern int __cdecl fcn_00593110(void);
+extern int __cdecl d2_InitNetLobbyButtons(void);
 extern int __cdecl d2_InitNetLobbyScrollbar(void);
-extern int __cdecl fcn_00593200(void);
+extern int __cdecl d2_DrawCityCoatOfArms(void);
 extern int __cdecl fcn_00593360(void);
 extern int __cdecl d3_FlushLoadAndPreloadQueue(void);
 extern int __cdecl d2_PopulateNetLobbyPlayerList(void);
 extern int __cdecl fcn_005936f0(int, int);
 extern int __cdecl d2_ChooseProfession(int);
-extern int __cdecl fcn_005941e0(void);
+extern int __cdecl d2_RefreshNetLobbyChatLog(void);
 extern int __cdecl fcn_0064d41a(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x005926f0 */
@@ -89,7 +89,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 	}
 	g_774a34 = (unsigned*)0;
 	g_779c40 = -1;
-	g_779ce4 = (int*)fcn_004ce1c0();
+	g_779ce4 = (int*)d3_GetSceneState();
 	if (g_779ce4 == 0) {
 		h = (void*)d2_LoadForm(0, 0, (char*)0x68d714);
 		d2_CenterDialogWindows(h);
@@ -139,7 +139,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 		cm_StepCommandQueue();
 	if (cm_GetCommandStatus(d) == 2) {
 		fcn_0051af00(v11, 0x88);
-		fcn_00526120(v11, 0x100);
+		d2_ShowModalMessageBox(v11, 0x100);
 		return -1;
 	}
 	d = cm_RequestClearSceneEntries();
@@ -168,8 +168,8 @@ int __cdecl d2_RunNetLobbySetup(void)
 	g_6a9b9c = (void*)d2_LoadForm(0x3c, 0, (char*)0x6a9ba0);
 	d2_CenterDialogWindows(g_6a9b9c);
 	d2_InitNetLobbyScrollbar();
-	fcn_00593110();
-	fcn_00593200();
+	d2_InitNetLobbyButtons();
+	d2_DrawCityCoatOfArms();
 	d3_FlushLoadAndPreloadQueue();
 	fcn_00593360();
 	d2_PopulateNetLobbyPlayerList();
@@ -177,7 +177,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 	h = (void*)d2_GetWindowListItem(g_6a9b9c, 0, 0);
 	d2_SetBildArgument(h, 0x40);
 	flag = 0;
-	fcn_00472380(h, (char*)0x6b5c60);
+	d2_CreateGuiWindow(h, (char*)0x6b5c60);
 	*(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x18) = 0x26c;
 	*(int*)((char*)0x102d168 + *(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x88) * 0x220) |= 0x200;
 	*(int*)((char*)0x102d150 + *(int*)((char*)g_1015ea0 + (int)h * 0x2f4 + 0x88) * 0x220) = 0x26c;
@@ -196,7 +196,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 			if (*(int*)0x7725d0 == 0 || *(char*)0x14cf950 == 0x1c) {
 				flag = 0;
 				strcpy(inputText, (char*)d2_GetControlValue(h));
-				fcn_00472380(h, (char*)0x6b5c60);
+				d2_CreateGuiWindow(h, (char*)0x6b5c60);
 				if (strlen(inputText) != 0) {
 					if (g_779c40 != -1)
 						cm_SendChatMessage(g_779c40, inputText);
@@ -291,7 +291,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 				g_774a34 = (unsigned*)fcn_004ce180();
 				fcn_00593360();
 				d2_PopulateNetLobbyPlayerList();
-				fcn_005941e0();
+				d2_RefreshNetLobbyChatLog();
 				g_779ce4[1] = 0;
 			}
 		}

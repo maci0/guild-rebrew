@@ -2,7 +2,7 @@ extern char* g_aed32c;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d2_CheckActionBlocker(char*, int);
 float __cdecl gm_GetEntitySkill(char*, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
@@ -36,7 +36,7 @@ void __cdecl d2_AttemptThiefRescue(char* rec)
 	    + (unsigned int) *(unsigned short*) (rec + 0x27) * 540);
 	d2_SetOverlayAnimation(0, 0);
 	io_FormatTextBuffer(text, 0x3fea, *(unsigned char*) (ent + 0x1b1) * 2);
-	if (fcn_00526120(text, 0x11) == 0) {
+	if (d2_ShowModalMessageBox(text, 0x11) == 0) {
 		goto done;
 	}
 	if (d2_CheckActionBlocker(ent, *(unsigned char*) (ent + 0x1b1) * 2) == 0) {

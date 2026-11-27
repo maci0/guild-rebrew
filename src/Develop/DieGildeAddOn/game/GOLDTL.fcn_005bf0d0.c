@@ -21,14 +21,14 @@ int __cdecl he_HasNoActiveAction0x2e(void* a, void* b);
 int __cdecl he_HasNoActiveAction0x62(void* a);
 int __cdecl he_HasNoActiveAction0x88(void* a, void* b);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-void __cdecl fcn_00526120(char* buf, int flag);
+void __cdecl d2_ShowModalMessageBox(char* buf, int flag);
 int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int flag);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
-int __cdecl fcn_005c9220(unsigned int* ids);
+int __cdecl d2_DrawLawCandidateStatus(unsigned int* ids);
 int __cdecl main_RunFrameLoop(void* fn, int key);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendCopyEntityData(char* msg);
@@ -69,29 +69,29 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 	while (entity != 0) {
 		if (*(int*) ((char*) entity + 0xac) == *(int*) (record + 1)) {
 			io_FormatTextBuffer(text, 0x1702, *(unsigned short*) (record + 0x27), record);
-			fcn_00526120(text, 0);
+			d2_ShowModalMessageBox(text, 0);
 			return 0;
 		}
 		entity = he_fn_Handlung();
 	}
 	if (he_HasNoActiveEvent04b(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
 		io_FormatTextBuffer(text, 0x1703, *(unsigned short*) (record + 0x27), record);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
 	if (he_HasNoActiveAction0x2e(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
 		io_FormatTextBuffer(text, 0x1704, *(unsigned short*) obj);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
 	if (he_HasNoActiveAction0x62(record) == 0) {
 		io_FormatTextBuffer(ev, 0x1705, record);
-		fcn_00526120(ev, 0);
+		d2_ShowModalMessageBox(ev, 0);
 		return 0;
 	}
 	if (he_HasNoActiveAction0x88(obj, (void*) (0x7f4ca0 + *(unsigned short*) 0x774970 * 0x21c)) == 0) {
 		io_FormatTextBuffer(text, 0x409f, *(unsigned short*) obj);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
 	dlg = d2_LoadForm(0, 0, (char*) 0x6ac494);
@@ -110,7 +110,7 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 	ids[3] = 4;
 	ids[4] = 2;
 	ids[5] = 0x18;
-	fcn_005c9220(ids);
+	d2_DrawLawCandidateStatus(ids);
 	while (main_RunFrameLoop((void*) d2_RunSabotageDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0 || g_100f1dc == 1) {
 			g_774654 = 1;
@@ -127,7 +127,7 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 			cm_SendTraceEnd((char*) 0x67eac4);
 			io_FormatTextBuffer(text2, 0x1701, *(unsigned short*) (record + 0x25),
 				*(unsigned char*) record * 0xe + 0x48e);
-			fcn_00526120(text2, 0);
+			d2_ShowModalMessageBox(text2, 0);
 			g_774654 = 1;
 			count = 1;
 		}

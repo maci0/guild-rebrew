@@ -93,7 +93,7 @@ int __cdecl gm_JobToBuildingType(int);
 int __cdecl fcn_0050b750(int, char);
 int __cdecl gm_CalculateGebaeudeValue(unsigned char *, int);
 int __cdecl gm_GetTypeProductValue(int);
-void __cdecl fcn_00511c60(int);
+void __cdecl amt_InitOfficeHolders(int);
 void __cdecl init_Betrieb(unsigned char *);
 void __cdecl init_SetupBetriebWorkers(unsigned char *);
 void __cdecl cm_StepCommandQueue(void);
@@ -425,7 +425,7 @@ handles_done:
 		cm_PollCommandQueue();
 		cm_ExecCommand();
 	}
-	fcn_00511c60(0);
+	amt_InitOfficeHolders(0);
 	fcn_004fb390();
 	e = (char *)gm_StartFilteredEntitySearch(1, 6);
 	while (e) {

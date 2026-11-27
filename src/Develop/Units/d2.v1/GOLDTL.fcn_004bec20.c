@@ -10,7 +10,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CreateRadioGroup(int);
-int __cdecl fcn_0052dee0(int, int, int);
+int __cdecl d2_CreateWindowTextButton(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
@@ -63,7 +63,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 	d2_SetForm(g, 3);
 	k = d2_CreateRadioGroup(0);
 	for (i = 0; i < 7; i++) {
-		v6 = fcn_0052dee0(0, 4 + i * 0x1e, *(int*) (0x14a56e8 + i * 4));
+		v6 = d2_CreateWindowTextButton(0, 4 + i * 0x1e, *(int*) (0x14a56e8 + i * 4));
 		handles[i] = v6;
 		v7 = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, *(int*) (ids + i));
 		*(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[v6].associated_object) = v7;

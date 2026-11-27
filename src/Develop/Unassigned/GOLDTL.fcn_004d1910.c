@@ -1,5 +1,5 @@
 #include "client_types.h"
-struct ent_4d1910 {
+struct CUT_STATUS_SLOT {
 	int f0;
 	char* obj;
 	unsigned char flag;
@@ -7,16 +7,16 @@ struct ent_4d1910 {
 };
 // SIZE 0x21c
 
-extern struct ent_4d1910 g_9b4bc0[32];
+extern struct CUT_STATUS_SLOT g_9b4bc0[32];
 
-void __cdecl fcn_00414be0(char*, int, int, int);
+void __cdecl d3_SetObjectColorRgb(char*, int, int, int);
 
 void __cdecl d2_CloseAllEntityStatusPopups(void);
-void __cdecl fcn_004d0050(void);
+void __cdecl d2_DestroyHudForm(void);
 
 
 /* ADDRESS: GOLDTL 0x004d1910 */
-void __cdecl fcn_004d1910(void)
+void __cdecl cut_ClearStatusOverlaySlots(void)
 {
 	int i;
 
@@ -25,9 +25,9 @@ void __cdecl fcn_004d1910(void)
 			g_9b4bc0[i].flag = 0;
 		if (g_9b4bc0[i].obj != 0
 		    && (*(unsigned char*) (*(char**) (g_9b4bc0[i].obj + 0x34) + 0x215) & 0x80) == 0x80)
-			fcn_00414be0(*(char**) (g_9b4bc0[i].obj + 0x34), 0, 0, 0);
+			d3_SetObjectColorRgb(*(char**) (g_9b4bc0[i].obj + 0x34), 0, 0, 0);
 	}
 	ResetDisplayCounters();
 	d2_CloseAllEntityStatusPopups();
-	fcn_004d0050();
+	d2_DestroyHudForm();
 }

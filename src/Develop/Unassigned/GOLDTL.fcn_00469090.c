@@ -24,7 +24,7 @@ typedef struct D2_CENTER_ELEMENT_SLOT {
 extern char* g_1015ea0;
 extern int g_1040494;
 
-void __cdecl fcn_00469c40(int x, int y, int slot);
+void __cdecl d2_PositionControl(int x, int y, int slot);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_CenterElement(int slot)
 {
@@ -43,6 +43,6 @@ void __cdecl d2_CenterElement(int slot)
 			x = g_1040494 / 2 - ((D2_CONTROL_TL*) s)->width / 2;
 			y = ((D2_CONTROL_TL*) s)->y;
 		}
-		fcn_00469c40(x, y, slot);
+		d2_PositionControl(x, y, slot);
 	}
 }

@@ -5,7 +5,7 @@ float* __stdcall D3DXMatrixTranspose(float* out, const float* in);
 /* 0x24 bytes between the camera vector and the matrix keep the matrix
  * at [esp+0x30] inside a 0x70-byte frame. */
 // SIZE 0x64
-struct CamPad131e0 {
+struct D3_CAMERA_TRANSPOSE_BLK {
 	char hole[0x24];
 	float m[16];
 };
@@ -14,10 +14,10 @@ struct CamPad131e0 {
  * (scale, scale, -amount), with scale = -amount * the float at 0x6628a8. */
 /* ADDRESS: GOLDTL 0x004131e0 */
 
-void __cdecl fcn_004131e0(float* out, float amount)
+void __cdecl d3_CalcCameraViewOffset(float* out, float amount)
 {
 	float cam[3];
-	struct CamPad131e0 blk;
+	struct D3_CAMERA_TRANSPOSE_BLK blk;
 	float neg;
 	float scale;
 	float a, x, y;

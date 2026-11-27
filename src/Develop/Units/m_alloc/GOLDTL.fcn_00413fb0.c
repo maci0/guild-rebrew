@@ -1,7 +1,7 @@
 extern char* d3_ActiveCamera;
 extern void* __cdecl m_alloc(unsigned int, const char*);
 extern void __cdecl m_FreeTracked(void*);
-extern int __cdecl fcn_00413e00(float*, float*, float*, float*, float*);
+extern int __cdecl d3_TestTriangleBoxOverlap(float*, float*, float*, float*, float*);
 extern int __cdecl d3_UpdateObjectCameraTransform(void*, char*, char);
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -122,7 +122,7 @@ int __cdecl d3_AccumulateMeshHeightRange(A* bounds, B* b)
             for (i = 0; i < itf->count; i++) {
                 V3* point;
                 point = (V3*) &buf[itf->idx[i * 3 + 0] * 3];
-                if (fcn_00413e00((float*) point,
+                if (d3_TestTriangleBoxOverlap((float*) point,
                                  &buf[itf->idx[i * 3 + 1] * 3],
                                  &buf[itf->idx[i * 3 + 2] * 3],
                                  &bounds->f58, &bounds->f68)) {

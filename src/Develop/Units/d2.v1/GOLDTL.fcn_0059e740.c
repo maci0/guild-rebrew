@@ -20,13 +20,13 @@ void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int flag);
 void __cdecl d2_DrawPanelFrame(int ctx, int a, int b);
 int __cdecl io_AppendText(int id, ...);
-void __cdecl fcn_0052a0c0(void* obj, int flag);
-void __cdecl fcn_00594340(void);
+void __cdecl d2_InitPlayerBar(void* obj, int flag);
+void __cdecl d2_ResetBuildingUiSlots(void);
 int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 void __cdecl d2_SetControlText(int handle, char* name);
 void __cdecl d2_SetElementEnabled(int handle, int flag);
-void __cdecl fcn_00595e20(void* obj, int packet);
-void __cdecl fcn_005963f0(int dlg, int a, int b, void* obj);
+void __cdecl d2_SyncWareProduktionSlotGrid(void* obj, int packet);
+void __cdecl d2_RefreshWorkshopInventoryGrids(int dlg, int a, int b, void* obj);
 int __cdecl main_RunFrameLoop(void* fn, int key);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_RestoreHudAfterDialog(void);
@@ -36,7 +36,7 @@ void __cdecl d3snd_PlayWorkerOrderVoice(void);
 int __cdecl cm_GetCommandStatus(int handle);
 void __cdecl cm_GetCommandResult(int handle);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-void __cdecl fcn_00526120(char* buf, int flag);
+void __cdecl d2_ShowModalMessageBox(char* buf, int flag);
 void __cdecl d3_EndCameraAndUiMode(void);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x0059e740 */
@@ -105,8 +105,8 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70f, 0x741);
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x17fe);
-	fcn_0052a0c0(targetBuilding, 0);
-	fcn_00594340();
+	d2_InitPlayerBar(targetBuilding, 0);
+	d2_ResetBuildingUiSlots();
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 2);
 	if (count > 0) {
@@ -126,11 +126,11 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 		}
 	}
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00595e20(targetBuilding, ids[6]);
-	fcn_005963f0(dlg, 1, 0, targetBuilding);
+	d2_SyncWareProduktionSlotGrid(targetBuilding, ids[6]);
+	d2_RefreshWorkshopInventoryGrids(dlg, 1, 0, targetBuilding);
 	while (main_RunFrameLoop((void*) d2_ShowHandelSearch, 0x677c7) != 0) {
-		fcn_00595e20(targetBuilding, ids[6]);
-		fcn_005963f0(dlg, 1, 0, targetBuilding);
+		d2_SyncWareProduktionSlotGrid(targetBuilding, ids[6]);
+		d2_RefreshWorkshopInventoryGrids(dlg, 1, 0, targetBuilding);
 		memset(ids + 3, 0, 3 * sizeof(int));
 		entity = he_StartHandlungSearch(2, 0, 0x14, 3, *(int*) (targetBuilding + 1));
 		while (entity != 0) {
@@ -197,7 +197,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 						}
 						cm_GetCommandResult(h);
 					} else {
-						fcn_00526120((char*) *(int*) 0x14ab324, 4);
+						d2_ShowModalMessageBox((char*) *(int*) 0x14ab324, 4);
 					}
 					break;
 				}

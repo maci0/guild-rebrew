@@ -15,26 +15,26 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
-typedef struct RouteItem {
+typedef struct D2_ROUTE_ITEM {
 	int value;                  /* 0x00 */
 	int weight;                 /* 0x04 */
-} RouteItem;
+} D2_ROUTE_ITEM;
 
-typedef struct RouteNode {
+typedef struct D2_ROUTE_NODE {
 	char pad_00[0x08];
-	RouteItem items[3];         /* 0x08 */
+	D2_ROUTE_ITEM items[3];         /* 0x08 */
 	char pad_20[0x1c];
-	struct RouteNode* next;     /* 0x3c */
-} RouteNode;
+	struct D2_ROUTE_NODE* next;     /* 0x3c */
+} D2_ROUTE_NODE;
 
 /* Builds the "choose good routing" dialog: one button per routed target of
  * every list node, plus an OK button, then pumps the frame delay until the
  * dialog closes and returns the picked target. */
 
 /* ADDRESS: GOLDTL 0x004bea00 */
-int __cdecl fcn_004bea00(int ctx, RouteNode* list)
+int __cdecl d2_RunChooseRoutingGoodDialog(int ctx, D2_ROUTE_NODE* list)
 {
-	RouteNode* node;
+	D2_ROUTE_NODE* node;
 	int entries[10];
 	int values[24];
 	int result;
@@ -44,7 +44,7 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 	int entry;
 	int active;
 
-	RouteItem* item;
+	D2_ROUTE_ITEM* item;
 
 
 	result = 0;

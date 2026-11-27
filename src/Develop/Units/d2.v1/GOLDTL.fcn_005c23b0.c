@@ -28,14 +28,14 @@ int __cdecl gm_AmountToUnits(int, unsigned char);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, void*, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
 void __cdecl cm_SendCopyEntityData(Msg5c23b0*);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005c23b0 */
@@ -57,7 +57,7 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 	v = gm_AmountToUnits(p, g_773d75);
 	d2_SetForm(win, 2);
 	h = d2_GetWindowListItem(win, 2, io_AppendText(0x17c5, e, *(unsigned short*) (g_773d75 * 0x2f4 + 0x8680b4) * 2 + 0x9a8));
-	fcn_00472380(h, (int) (v * 0.5), (int) (v * 1.5), v);
+	d2_CreateGuiWindow(h, (int) (v * 0.5), (int) (v * 1.5), v);
 	d2_SetOverlayAnimation(0, 0);
 	main_RunFrameLoop(0, 0x677c7);
 	do {
@@ -77,7 +77,7 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 			m.other = *(int*) (e + 1);
 			m.extra = fcn_0050b750(d2_GetControlValue(h), g_773d75);
 			cm_SendCopyEntityData(&m);
-			fcn_00526120(*(int*) 0x14ab238, 0);
+			d2_ShowModalMessageBox(*(int*) 0x14ab238, 0);
 			g_774654 = 1;
 		}
 		else if (g_100f1dc == 1) {

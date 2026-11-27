@@ -36,7 +36,7 @@ extern float d3_CameraTargetRotation[3];
 extern float g_7e3a54;
 extern float g_7e3a58;
 
-float __cdecl fcn_00413d10(Vec3* p);
+float __cdecl d3_SampleAverageTerrainHeight(Vec3* p);
 void __cdecl d3_SetNodePosition(View* v, Vec4* p);
 void __cdecl d3_SetObjectRotation(View* v, Vec3* r);
 
@@ -49,7 +49,7 @@ void __cdecl d3_SetCameraHeightFraction(float t)
 	if (d3_CurrentContextIndex == 0) {
 		d3_CameraHeightFraction = t;
 		g_774694 = t;
-		h = fcn_00413d10(&((View*)d3_ActiveCamera)->pos);
+		h = d3_SampleAverageTerrainHeight(&((View*)d3_ActiveCamera)->pos);
 		p.x = ((View*)d3_ActiveCamera)->pos.x;
 		p.y = ((View*)d3_ActiveCamera)->pos.y;
 		p.z = ((View*)d3_ActiveCamera)->pos.z;

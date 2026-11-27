@@ -5,15 +5,15 @@ typedef unsigned short u16;
 int __cdecl gm_CanEnterGebaeude(char*);
 void __cdecl d2_ResetUiInputAndBounds(void);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00530510(void);
+void __cdecl sv_ResetSelectionState(void);
 void __cdecl fcn_005305a0(void);
 int __cdecl sb_PlayVoice(int, void*, int, int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_004c3170(char*);
+void __cdecl sb_LoadBuildingVoiceBanks(char*);
 int __cdecl fcn_00510c90(int);
-void __cdecl fcn_0043a9c0(int);
+void __cdecl d3_DeinitUniverse(int);
 int __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_0043aa30(int);
+void __cdecl d3_InitUniverse(int);
 int __cdecl d3_TraverseSceneObjects(void*, int, int, void*);
 void __cdecl ch_PreloadBuildingMotions(char*);
 void __cdecl d3_UpdateBuildingView(char*, int);
@@ -53,7 +53,7 @@ void __cdecl d2_RunRaeuberlagerMenu(int, void*);
 void __cdecl d2_RunIdleBuildingInterior0x4d(int, void*);
 void __cdecl d2_RunWachstubeMenu(int, void*);
 void __cdecl d2_RunWachstubeRegenMenu(int, void*);
-void __cdecl fcn_005af140(int, void*);
+void __cdecl d2_RunKerkerZelleMenu(int, void*);
 void __cdecl d2_RunBeichtstuhlMenu(int, void*);
 void __cdecl d2_RunParfumerieProductionMenu(int, void*);
 void __cdecl d2_RunWirtshausContactMenu(int, void*);
@@ -95,7 +95,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
     d2_ResetUiInputAndBounds();
     main_RunFrameLoop((void*) 0x5a76b0, 0x20007);
     g_6a2520 = 0;
-    fcn_00530510();
+    sv_ResetSelectionState();
     fcn_005305a0();
     x = *(int*) &d3_CurrentContextIndex;
     *(int*) 0x7746d0 = 0;
@@ -115,7 +115,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
     strcpy(g_6752a8, "normal_s");
 
     fcn_00502cd0(*(int*) (o + 0x5d), 1, 0, (int) *(u16*) (o + 0x29));
-    fcn_004c3170(o);
+    sb_LoadBuildingVoiceBanks(o);
 
     do {
         g_774658 = g_774650 + 1;
@@ -132,7 +132,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                     d2_SuppressOverlay = 0;
                 }
                 if (*(int*) &d3_CurrentContextIndex != 0)
-                    fcn_0043a9c0(3);
+                    d3_DeinitUniverse(3);
                 *(int*) &g_7746c4 = (int) o;
                 *(int*) &g_7746cc = (int) msg;
                 *(int*) &g_6791c8 = *(int*) (msg + 2);
@@ -140,7 +140,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
                 g_675310 = *(int*) (msg + 2);
                 *(u16*) (o + 0x29) = *(u16*) msg;
                 d3_SelectSceneContext((int) (signed char) ((u8*) &init_SceneContextIndices)[*(u16*) msg], 0);
-                fcn_0043aa30(3);
+                d3_InitUniverse(3);
                 d3_TraverseSceneObjects((void*) *(int*) &g_67a370, 0, 0xe0, (void*) 0x456df0);
                 ch_PreloadBuildingMotions(o);
                 t = *(int*) &g_7746c4;
@@ -258,7 +258,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         d2_RunWachstubeRegenMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x65:
-        fcn_005af140(*(int*)&g_7746c4, msg);
+        d2_RunKerkerZelleMenu(*(int*)&g_7746c4, msg);
         break;
     case 0xf2:
         d2_RunBeichtstuhlMenu(*(int*)&g_7746c4, msg);
@@ -344,12 +344,12 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
             g_774670 = 1;
             if (*(int*) &g_7746c4 == 0) {
                 g_774654 = 1;
-                fcn_0043a9c0(3);
+                d3_DeinitUniverse(3);
             }
         }
     } while (main_RunFrameLoop((void*) 0x5a76b0, 0x67fff) != 0);
 
-    fcn_00530510();
+    sv_ResetSelectionState();
     fcn_005305a0();
     *(int*) &g_7ea360 = 0;
     d3snd_FreeObjectSoundBanks();

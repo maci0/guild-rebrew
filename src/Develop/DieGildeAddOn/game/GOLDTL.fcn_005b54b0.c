@@ -29,7 +29,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 char* __cdecl gm_ResolveParentEntity(char*);
 void __cdecl gm_EquipDuelist(char*, char);
 void __cdecl gm_AddTime(char*, int, int, int);
-int __cdecl fcn_004c5980(void* data);
+int __cdecl cm_EnqueueStagedPacket(void* data);
 
 void __cdecl d2_BroadcastCutscene0xa2(char* p)
 {
@@ -94,5 +94,5 @@ void __cdecl d2_BroadcastCutscene0xa2(char* p)
 	*(int*) (msg + 0x20) = g_7f4c08;
 	*(short*) (msg + 0x24) = g_7f4c0c;
 	gm_AddTime(msg + 0x18, 0, 0xf, 0);
-	fcn_004c5980(msg);
+	cm_EnqueueStagedPacket(msg);
 }

@@ -14,7 +14,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004a5340(char* e, int a, int* b, int c, float r, int* out);
+int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, int c, float r, int* out);
 int __cdecl gm_SumQueryEntryValues(int a, char b);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
@@ -30,7 +30,7 @@ int __cdecl ai_PrepareSecretRoomAction0(char* actor, char* action_out, char* tar
 		return 0;
 	}
 	mask = 0xf00500;
-	if (fcn_004a5340(actor, 1, &mask, 0, gm_RandomMod(0x20) + 25.0f, &idx) == 0) {
+	if (ai_SelectRankedCandidates(actor, 1, &mask, 0, gm_RandomMod(0x20) + 25.0f, &idx) == 0) {
 		return 0;
 	}
 	t = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[(unsigned short) idx]);

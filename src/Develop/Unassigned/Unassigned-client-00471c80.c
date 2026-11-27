@@ -1,4 +1,4 @@
-void __cdecl fcn_00469c40(int, int, int);
+void __cdecl d2_PositionControl(int, int, int);
 #include "client_types.h"
 typedef D2_FORM_RECORD Obj;
 
@@ -62,7 +62,7 @@ void __cdecl fcn_00471c80(int idx, unsigned char flags)
 	if ((float) t < bound) {
 		bound = (float) t;
 	}
-	fcn_00469c40((int) value, (int) bound, *(int*) ((char*) p + 0x27c));
+	d2_PositionControl((int) value, (int) bound, *(int*) ((char*) p + 0x27c));
 }
 
 /* ADDRESS: GOLDTL 0x00471d80 */

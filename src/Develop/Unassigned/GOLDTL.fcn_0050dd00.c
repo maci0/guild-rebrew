@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-void __cdecl fcn_00517c00(int id, int a, int b, char* out);
+void __cdecl gm_FormatEntityTitleAndName(int id, int a, int b, char* out);
 
 void __cdecl gm_SortEntitiesByName(int n, int* arr, int flag)
 {
@@ -18,8 +18,8 @@ void __cdecl gm_SortEntitiesByName(int n, int* arr, int flag)
 	}
 	for (i = 0; i < n - 1; i++) {
 		for (j = i + 1; j < n; j++) {
-			fcn_00517c00(arr[i], 1, 1, a);
-			fcn_00517c00(arr[j], 1, 1, b);
+			gm_FormatEntityTitleAndName(arr[i], 1, 1, a);
+			gm_FormatEntityTitleAndName(arr[j], 1, 1, b);
 			if (strcmp(a, b) == 1) {
 				t = arr[i];
 				arr[i] = arr[j];

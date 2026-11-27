@@ -32,10 +32,10 @@ extern float g_6628a8;
 
 int __cdecl d2_MeasureTextWidth(char* s, int font);
 void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, int flags);
-void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
+void __cdecl d2_DrawWordWrappedText(int x, int y, int w, int h, int surf, char* text, int flags);
 void __cdecl d2_SelectFont(int font);
 void __cdecl d2_SetClipRect(int a, int b, int c, int d);
-fcn_00466550_Glyph* __cdecl fcn_0047b620(char* font, int c);
+fcn_00466550_Glyph* __cdecl d2_GetBankEntry(char* font, int c);
 void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, char* font, int c);
 void __cdecl d2_DrawDimmedSpriteFrame(int x, int y, int surf, char* font, int c);
 
@@ -112,9 +112,9 @@ void __cdecl d2_DrawField(int idx, int surf)
 		e = (fcn_00466550_Ent*) &((D2_CONTROL_TL*) g_1015ea0)[f->ent];
 		if (f->def == -1) {
 			font = (char*) d2_GetResourceData(g_67d39c);
-			g0 = fcn_0047b620(font, 0);
-			g1 = fcn_0047b620(font, 1);
-			g2 = fcn_0047b620(font, 2);
+			g0 = d2_GetBankEntry(font, 0);
+			g1 = d2_GetBankEntry(font, 1);
+			g2 = d2_GetBankEntry(font, 2);
 			((D2_CONTROL_TL*) e)->width = f->w = g0->w + f->digits * 14 + g2->w;
 			((D2_CONTROL_TL*) e)->x = f->x;
 			v = f->w - g0->w - g1->w;
@@ -131,7 +131,7 @@ void __cdecl d2_DrawField(int idx, int surf)
 				} while ((double) i < (double) (v / g2->w) + 0.5);
 			}
 			d2_SelectFont(d2_DefaultFont);
-			fcn_0046bd20(f->x, ((D2_CONTROL_TL*) e)->y + 1, v, ((D2_CONTROL_TL*) e)->height,
+			d2_DrawWordWrappedText(f->x, ((D2_CONTROL_TL*) e)->y + 1, v, ((D2_CONTROL_TL*) e)->height,
 			    surf, buf, 0x10);
 		} else {
 			font = (char*) d2_GetResourceData(f->def);
@@ -157,7 +157,7 @@ void __cdecl d2_DrawField(int idx, int surf)
 					    : ((D2_CONTROL_TL*) (g_1015ea0))[f->ent].value_1f4.real) * *(double*) 0x662c38);
 					sprintf(buf3, (char*) 0x67d43c, width);
 					d2_SelectFont(d2_DefaultFont + 1);
-					fcn_0046bd20(f->x,
+					d2_DrawWordWrappedText(f->x,
 					    ((D2_CONTROL_TL*) e)->y + ((D2_CONTROL_TL*) e)->height - 0xf,
 					    *(unsigned short*) (font + 6), f->h, surf,
 					    buf3, 0x28);

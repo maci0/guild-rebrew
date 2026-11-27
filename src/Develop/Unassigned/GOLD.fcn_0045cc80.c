@@ -13,7 +13,7 @@ void __cdecl d3_ReleaseResourceSlot(int* holder)
         p[0] = 0;
         p[3] = 0;
     }
-    fcn_0045fbb0((SCENE_RESOURCE*) *holder);
+    d3_ReleaseSceneResourceRef((SCENE_RESOURCE*) *holder);
     holder[0] = 0;
     holder[2] = 0;
 }

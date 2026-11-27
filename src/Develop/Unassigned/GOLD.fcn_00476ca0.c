@@ -2,18 +2,18 @@
 #include <string.h>
 
 int __cdecl d2_LockSurface(void*);
-int __cdecl fcn_004790d0(void*);
+int __cdecl d3_UnlockSurfaceHandle(void*);
 int __cdecl d2_SetClipRect(int, int, int, int);
 void __cdecl d2_DrawShapeFrame(int, int, void*, int, unsigned char);
 void __cdecl fcn_0047cda0(int, void*);
-void __cdecl fcn_00476020(int);
+void __cdecl d2_SetCurrentFont(int);
 int __cdecl d2_GetResourceData(int);
 int __cdecl d2_DrawOrMeasureSpriteFrame(int, int, char*, char*, unsigned char, char, int);
 void __cdecl d2_RenderWrappedText(int, int, int, int, void*, char*, int);
 void __cdecl d2_AddSlotDirtyRect(int, int, int, int);
 
 /* ADDRESS: GOLD 0x00476ca0 */
-void __cdecl fcn_00476ca0(char* obj, int x, int y)
+void __cdecl d2_DrawSpriteGridSlot(char* obj, int x, int y)
 {
     int had_surface;
     int old_x;
@@ -49,7 +49,7 @@ void __cdecl fcn_00476ca0(char* obj, int x, int y)
         fcn_0047cda0(selected, obj);
     }
     old_font = *(int*) 0x5fe718;
-    fcn_00476020(*(int*) 0x5fe73c + 1);
+    d2_SetCurrentFont(*(int*) 0x5fe73c + 1);
     index = 0;
     for (cur = 0xf8ab80; cur < 0xf8abc8; cur += 12) {
         entry = (int*) cur;
@@ -71,8 +71,8 @@ void __cdecl fcn_00476ca0(char* obj, int x, int y)
         index++;
     }
     d2_AddSlotDirtyRect(x, y, 128, 128);
-    fcn_00476020(old_font);
+    d2_SetCurrentFont(old_font);
     d2_SetClipRect(old_x, old_y, old_width, old_height);
     if (had_surface == 0)
-        fcn_004790d0(obj);
+        d3_UnlockSurfaceHandle(obj);
 }

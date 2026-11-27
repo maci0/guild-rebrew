@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00437890 */
-char* __cdecl fcn_00437890(char* a)
+char* __cdecl d3_NextVisibleSceneNode(char* a)
 {
 	int c;
 

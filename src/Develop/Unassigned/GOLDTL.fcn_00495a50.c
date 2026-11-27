@@ -1,9 +1,9 @@
 
 /* ADDRESS: GOLDTL 0x00495a50 */
-int __cdecl fcn_00495a50(int a1, int a2, int a3)
+int __cdecl ai_StartDummyVergnuegen(int mode, int unused, int flag)
 {
-	if (a1 != 0) {
+	if (mode != 0) {
 		return 0;
 	}
-	return (a3 != 0) ? 0 : 3;
+	return (flag != 0) ? 0 : 3;
 }

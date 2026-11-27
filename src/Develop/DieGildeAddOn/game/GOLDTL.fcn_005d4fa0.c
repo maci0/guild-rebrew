@@ -28,7 +28,7 @@ int __cdecl gm_CheckEntityStock(unsigned char*, int, char);
 void __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -92,7 +92,7 @@ int __cdecl d2_ShowMedicusDialog(unsigned char* e)
 					while (cm_GetCommandStatus(h) == 0) {
 						cm_StepCommandQueue();
 					}
-					fcn_00526120(text, 0);
+					d2_ShowModalMessageBox(text, 0);
 					g_774654 = 1;
 				}
 			} else if (d2_CurrentElementId == cancel) {

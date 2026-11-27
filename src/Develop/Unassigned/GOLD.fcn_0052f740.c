@@ -40,7 +40,7 @@ extern char* g_6f240c;
 char* __cdecl StripPathAndExt(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl d2_UpdateFormPageTextures(int, char*, char*);
-void __cdecl fcn_004754c0(int, int);
+void __cdecl d2_SetFormVisible(int, int);
 void __cdecl d3_AttachObjectAnim(Model*, char*, int);
 void __cdecl d2_HandleBookPageButton(Book*);
 void* __cdecl fcn_00426fa0(char*, const char*, int, int, int, int, int);
@@ -93,10 +93,10 @@ int __cdecl d2_TurnBookPages(Book* book, signed char dir)
 			sprintf(top, "Buch_Seite%i_oben_ns_nm", (i & 3) + 1);
 			sprintf(bottom, "Buch_Seite%i_unten_ns_nm", (i & 3) + 1);
 			d2_UpdateFormPageTextures(book->widgets[i], top, bottom);
-			fcn_004754c0(book->widgets[i], 1);
+			d2_SetFormVisible(book->widgets[i], 1);
 		} else {
 			d2_UpdateFormPageTextures(book->widgets[i], &(*(char*)g_631090), &(*(char*)g_631090));
-			fcn_004754c0(book->widgets[i], 0);
+			d2_SetFormVisible(book->widgets[i], 0);
 		}
 	}
 	if (dir > 0) {

@@ -4,7 +4,7 @@ int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_DestroyObject(int);
 int* __cdecl fcn_00442910(int, float*, float*, char*);
-void __cdecl fcn_0043a720(int*, char*);
+void __cdecl d3_StartChildAnimByName(int*, char*);
 
 /* ADDRESS: GOLDTL 0x00407800 */
 void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name)
@@ -48,17 +48,17 @@ void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name)
 		*(unsigned char*) ((char*) *slot + 0x217) &= 0xfe;
 		*(int*) ((char*) *slot + 0x220) = 5;
 		if (mode == 1) {
-			fcn_0043a720((int*) *slot, "d3_LeftHand");
+			d3_StartChildAnimByName((int*) *slot, "d3_LeftHand");
 			d3_SelectSceneContext(saved_mode, 1);
 			return;
 		}
 		if (mode == 2) {
-			fcn_0043a720((int*) *slot, "d3_RightHand");
+			d3_StartChildAnimByName((int*) *slot, "d3_RightHand");
 			d3_SelectSceneContext(saved_mode, 1);
 			return;
 		}
 		if (mode == 3) {
-			fcn_0043a720((int*) *slot, "d3_Head");
+			d3_StartChildAnimByName((int*) *slot, "d3_Head");
 		}
 		d3_SelectSceneContext(saved_mode, 1);
 	} else {

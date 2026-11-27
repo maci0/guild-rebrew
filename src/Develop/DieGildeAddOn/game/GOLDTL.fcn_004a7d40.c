@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl gm_CountBoardCardRanksAndSuits(int* h, int* rank_n, int* rank, int* suit_n, int* suit);
-int __cdecl fcn_004a7770(int* h, int a2, int skip, int* out);
+int __cdecl gm_FindCardRankGroup(int* h, int a2, int skip, int* out);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x004a7d40 */
@@ -47,13 +47,13 @@ void __cdecl ai_EvaluateCardGameFold(void)
 					break;
 				case 1:
 					if (*(int*) (p + 0x20) != 0) {
-						if (fcn_004a7770((int*) (p + 8), 0, 7, &unused_rank) < rank_n
+						if (gm_FindCardRankGroup((int*) (p + 8), 0, 7, &unused_rank) < rank_n
 						    && *(int*) g_1007cd4 >= 6
 						    && *(unsigned char*) (g_1007cd4 + 0xb5) >= 5) {
 							goto set_g;
 						}
 					} else {
-						n = fcn_004a7770((int*) (p + 8), 0, 7, &suit_rank);
+						n = gm_FindCardRankGroup((int*) (p + 8), 0, 7, &suit_rank);
 						if (*(int*) g_1007cd4 >= 6 && n <= rank_n && (n < rank_n || suit_rank < rank)) {
 							goto set_g;
 						}
@@ -61,7 +61,7 @@ void __cdecl ai_EvaluateCardGameFold(void)
 					break;
 				case 2:
 					if (*(int*) (p + 0x20) == 0
-					    && (n = fcn_004a7770((int*) (p + 8), 0, 7, &unused_rank), *(unsigned char*) (g_1007cd4 + 0xb5) < 5)
+					    && (n = gm_FindCardRankGroup((int*) (p + 8), 0, 7, &unused_rank), *(unsigned char*) (g_1007cd4 + 0xb5) < 5)
 					    && n == 3
 					    && (unsigned short) gm_RandomMod(4) == 1) {
 						goto set_g;
@@ -69,7 +69,7 @@ void __cdecl ai_EvaluateCardGameFold(void)
 					break;
 				case 3:
 					if (*(int*) (p + 0x20) == 0
-					    && (n = fcn_004a7770((int*) (p + 8), 0, 7, &unused_rank), *(unsigned char*) (g_1007cd4 + 0xb5) < 5)
+					    && (n = gm_FindCardRankGroup((int*) (p + 8), 0, 7, &unused_rank), *(unsigned char*) (g_1007cd4 + 0xb5) < 5)
 					    && n == 3
 					    && (unsigned short) gm_RandomMod(5) == 1) {
 						goto set_g;

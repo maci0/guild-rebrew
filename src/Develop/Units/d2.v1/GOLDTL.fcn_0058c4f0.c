@@ -30,7 +30,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel)
+void __cdecl d2_RefreshRentAGraveOptions(char* a, int dlg, int mode, int* ids, int* sel)
 {
 	char* s;
 	int i;

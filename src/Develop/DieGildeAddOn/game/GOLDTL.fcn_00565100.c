@@ -7,7 +7,7 @@ extern char g_6a5a10[];
 extern char g_6b5c60[];
 
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
-int __cdecl fcn_00545670(char*, int, int, char*, int);
+int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl he_FreeAction(char*);
 void __cdecl fcn_00545780(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -33,7 +33,7 @@ void __cdecl he_RunMeisterpruefungNotice(char* u)
 	}
 	switch (*(int*) (u + 0x70)) {
 	case 0:
-		fcn_00545670(u, 0, 0, g_6a5a10, 0x5fd);
+		d2_CreateActionPopupSlot(u, 0, 0, g_6a5a10, 0x5fd);
 		if (*(char**) (u + 0x74) == 0) {
 			he_FreeAction(u);
 			return;

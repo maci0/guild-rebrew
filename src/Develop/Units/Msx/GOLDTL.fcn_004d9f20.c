@@ -59,9 +59,9 @@ Ent* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cut_AssignCombatTeamOrders(Ent*);
 void __cdecl cut_ResolveCombatWinner(Party*);
 void __cdecl gm_UpdateTaskProgress(Slot*);
-void __cdecl fcn_004d7f70(void);
+void __cdecl d2_DestroyCombatHud(void);
 
-void __cdecl fcn_004d9f20(int arg)
+void __cdecl cut_RunTacticalCombat(int arg)
 {
 	unsigned int last;
 	int r;
@@ -80,7 +80,7 @@ void __cdecl fcn_004d9f20(int arg)
 		g_772efc = msx_StartAmbientTrack("Athmos\\Kampfathmo_2.mp3", 0xb);
 	}
 	g_772e94 = 0;
-	while (main_RunFrameLoop(fcn_004d9f20, 0xfd6c6) != 0) {
+	while (main_RunFrameLoop(cut_RunTacticalCombat, 0xfd6c6) != 0) {
 		if (g_772ea8 != 0) {
 			break;
 		}
@@ -126,5 +126,5 @@ void __cdecl fcn_004d9f20(int arg)
 			}
 		}
 	}
-	fcn_004d7f70();
+	d2_DestroyCombatHud();
 }

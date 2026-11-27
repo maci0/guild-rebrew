@@ -30,7 +30,7 @@ typedef struct {
 #include "client_types.h"
 extern slot_1007ce8 g_1007ce8[];
 
-short __cdecl fcn_004a82b0(void);
+short __cdecl gm_ResolveCardGameWinner(void);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 
 /* ADDRESS: GOLDTL 0x004a8770 */
@@ -45,7 +45,7 @@ void __cdecl fcn_004a87b0(void)
 {
 	int i;
 
-	((fcn_004a87b0_game*)g_1007cd4)->fb8 = fcn_004a82b0();
+	((fcn_004a87b0_game*)g_1007cd4)->fb8 = gm_ResolveCardGameWinner();
 	if (((fcn_004a87b0_game*)g_1007cd4)->fb8 == 0)
 		cm_RequestTransferCurrencyNoKill(((fcn_004a87b0_game*)g_1007cd4)->f4[1], -1, (*(char*)&g_773d75), ((fcn_004a87b0_game*)g_1007cd4)->fa0);
 	for (i = 0; i < 24; i++) {

@@ -12,7 +12,7 @@ typedef struct
 
 
 #include "Develop/DieGildeAddOn/auxillary/plant.h"
-void __cdecl fcn_004bd150(fcn_004bceb0_Entry* tab);
+void __cdecl d3_ShowPflanzenMapEntries(fcn_004bceb0_Entry* tab);
 
 /* ADDRESS: GOLDTL 0x004bceb0 */
 void __cdecl plt_UpdatePlantStages(fcn_004bceb0_Entry* tab)
@@ -37,5 +37,5 @@ void __cdecl plt_UpdatePlantStages(fcn_004bceb0_Entry* tab)
 				tab[i].state = c + 1;
 		}
 	}
-	fcn_004bd150(tab);
+	d3_ShowPflanzenMapEntries(tab);
 }

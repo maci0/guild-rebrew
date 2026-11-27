@@ -5,7 +5,7 @@ extern SCENE_EVENT_ENTRY g_67a470[8];
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
 /* ADDRESS: GOLDTL 0x0043b500 */
-int __cdecl fcn_0043b500(const char* name)
+int __cdecl d3_FindSceneEventId(const char* name)
 {
 	unsigned int i;
 

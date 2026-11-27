@@ -32,7 +32,7 @@ extern void* g_6b5de0;
 extern void* g_6b5de4;
 extern void* g_6b5df4;
 long __stdcall D3DXCreateFont(Device* dev, HFONT font, Font** out);
-int __cdecl fcn_0041b870(void);
+int __cdecl d3_ApplyGammaRamp(void);
 
 int __cdecl d3_RestoreDeviceResources(void)
 {
@@ -43,5 +43,5 @@ int __cdecl d3_RestoreDeviceResources(void)
 		(*(Font**)&g_6b5de4)->vtbl->OnResetDevice((*(Font**)&g_6b5de4));
 	}
 	((Device*)g_6b5de0)->vtbl->CreateVertexBuffer(((Device*)g_6b5de0), 0x500, 0x208, 0x44, 0, &g_6b5df4);
-	return fcn_0041b870();
+	return d3_ApplyGammaRamp();
 }

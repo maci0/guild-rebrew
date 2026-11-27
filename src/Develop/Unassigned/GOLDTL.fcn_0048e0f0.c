@@ -21,23 +21,23 @@ typedef struct F8 {
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048e0f0 */
-int __cdecl fcn_0048e0f0(char* a1, char* a2, char* a3)
+int __cdecl ai_RunSecretRoomDomizilAttack(char* actor, char* ctx, char* entry)
 {
 	int found;
 	char msg[0xf8];
 	char* p;
 	F8 f;
 
-	p = gm_LookupEntityRecordById(*(int*) (a2 + 0xc));
+	p = gm_LookupEntityRecordById(*(int*) (ctx + 0xc));
 	if (p == 0) {
 		return 0;
 	}
-	cm_RequestTransferCurrencyNoKill(-1, *(int*) (a1 + 4), (*(char*)&g_773d75), *(int*) (a3 + 8));
-	gm_ModifyHealth(*(int*) (a1 + 4), -16);
+	cm_RequestTransferCurrencyNoKill(-1, *(int*) (actor + 4), (*(char*)&g_773d75), *(int*) (entry + 8));
+	gm_ModifyHealth(*(int*) (actor + 4), -16);
 	memset(msg, 0, sizeof(msg));
 	msg[4] = (char) 0x99;
-	*(int*) (msg + 8) = *(int*) (a1 + 4);
-	*(int*) (msg + 0xc) = *(int*) (a2 + 0xc);
+	*(int*) (msg + 8) = *(int*) (actor + 4);
+	*(int*) (msg + 0xc) = *(int*) (ctx + 0xc);
 	*(int*) (msg + 0x28) = (*(int*)&gm_GameTime);
 	*(int*) (msg + 0x2c) = (*(int*)&g_7f4c04);
 	*(int*) (msg + 0x30) = g_7f4c08;
@@ -45,7 +45,7 @@ int __cdecl fcn_0048e0f0(char* a1, char* a2, char* a3)
 	msg[0x36] = 2;
 	*(int*) (msg + 0x60) = *(int*) (p + 4);
 	*(int*) (msg + 0x64) = -1;
-	*(int*) (msg + 0x5c) = *(int*) (a2 + 0xc);
+	*(int*) (msg + 0x5c) = *(int*) (ctx + 0xc);
 	*(int*) (msg + 0x68) = 4;
 	*(int*) (msg + 0x6c) = 0;
 	if (*(char**) (p + 0x170) != 0) {

@@ -1,6 +1,6 @@
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CompareGameTime(void*, int);
-void __cdecl fcn_00545670(int, int, int, int, int);
+void __cdecl d2_CreateActionPopupSlot(int, int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, int, int, int, int);
 void __cdecl fcn_00545780(int);
@@ -38,7 +38,7 @@ void __cdecl fcn_00566d00(int action)
 	state = *(int*) (action + 0x70);
 	switch (state) {
 	case 0:
-		fcn_00545670(action, 0, 0, 0x6a5a10, 0x5ec);
+		d2_CreateActionPopupSlot(action, 0, 0, 0x6a5a10, 0x5ec);
 		d2_SetForm(*(int*) (*(int*) (action + 0x74) + 8), 0);
 		entityId = *a;
 		io_AppendText(0x19b2, entityId, *(int*) (action + 0xb4), entityId, entityId);

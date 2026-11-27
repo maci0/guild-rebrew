@@ -4,7 +4,7 @@ extern float g_665ea0;
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl gm_ResolveEntityById(int*, int, int, int);
 void __cdecl d3_TransformPoint(void*, void*, float*);
-void __cdecl fcn_00455140(void*, void*, float*);
+void __cdecl d3_TransformDirection(void*, void*, float*);
 float __cdecl d3_WrapYawDelta(float*, float*);
 void __cdecl d3_AnimateObjectTransform(void*, float*, float*, int, int);
 
@@ -64,7 +64,7 @@ unsigned int __cdecl he_PlaceSensenmannCamera(char* eventRecord)
 	delta[0] = from[0] - to[0];
 	delta[1] = from[1] - to[1];
 	delta[2] = from[2] - to[2];
-	fcn_00455140(*(char**) (eventRecord + 0xc8), (char*) 0x662d40, aim);
+	d3_TransformDirection(*(char**) (eventRecord + 0xc8), (char*) 0x662d40, aim);
 	angle = d3_WrapYawDelta(aim, delta);
 	view = *(char**) (eventRecord + 0xc8);
 	if (view == 0) {

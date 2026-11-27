@@ -3,10 +3,10 @@ void __cdecl d3_FillDiamondAreaIfHeight(int value, int unused, int storeval, int
 	unsigned char* p, int base, int centerX, int centerY, int stride, int areaRadius)
 {
 	int v;
-	int v2;
-	int v5;
-	int local0;
-	int edi;
+	int row;
+	int rowOffset;
+	int maxRow;
+	int dy;
 	int i;
 	int end;
 
@@ -16,22 +16,22 @@ void __cdecl d3_FillDiamondAreaIfHeight(int value, int unused, int storeval, int
 	v = value >> 16;
 	do {
 		if ((unsigned char) v >= *p) {
-			v2 = centerY - areaRadius;
-			v2 = v2 < 0 ? 0 : v2;
-			v5 = v2 * stride;
-			local0 = centerY + areaRadius;
-			edi = centerY - v2;
-			while (v2 <= (local0 < stride - 1 ? local0 : stride - 1)) {
-				end = centerX + (areaRadius - (edi < 0 ? -edi : edi));
-				i = centerX - (areaRadius - (edi < 0 ? -edi : edi));
+			row = centerY - areaRadius;
+			row = row < 0 ? 0 : row;
+			rowOffset = row * stride;
+			maxRow = centerY + areaRadius;
+			dy = centerY - row;
+			while (row <= (maxRow < stride - 1 ? maxRow : stride - 1)) {
+				end = centerX + (areaRadius - (dy < 0 ? -dy : dy));
+				i = centerX - (areaRadius - (dy < 0 ? -dy : dy));
 				i = i < 0 ? 0 : i;
 				while (i <= (end < stride - 1 ? end : stride - 1)) {
-					((int*) base)[(v5 + i) * 7] = storeval;
+					((int*) base)[(rowOffset + i) * 7] = storeval;
 					i++;
 				}
-				v2++;
-				edi--;
-				v5 += stride;
+				row++;
+				dy--;
+				rowOffset += stride;
 			}
 		}
 		p++;

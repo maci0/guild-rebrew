@@ -23,7 +23,7 @@ void __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int id);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 int __cdecl gm_IsEntityAtBuilding(char* a, char* b);
 void __cdecl he_FreeAction(void* ev);
-void __cdecl fcn_005498b0(char* a1, char* a2, char* a3, char* a4, int a5, float a6);
+void __cdecl he_ResolveAccidentOutcome(char* a1, char* a2, char* a3, char* a4, int a5, float a6);
 void __cdecl he_RunPlagueSpread(void* ev);
 void __cdecl he_NotifyPlagueInfection(char* a1, char* a2);
 typedef struct { unsigned char kind; char unknown[0x24c]; } BUILDING_PROT_5522;
@@ -208,12 +208,12 @@ void __cdecl he_RunPlagueEvent(char* ev)
 			}
 			for (n = 0; n < count; n++) {
 				if (scores[n] < g_6640b4) {
-					fcn_005498b0(ev, (char*) g_slot_table + picks[n] * 0x21c,
+					he_ResolveAccidentOutcome(ev, (char*) g_slot_table + picks[n] * 0x21c,
 						slot, (char*) rec, 1, scores[n]);
 				}
 			}
 			if (best < g_6640b4) {
-				fcn_005498b0(ev, (char*) found, slot, (char*) rec, 1, best);
+				he_ResolveAccidentOutcome(ev, (char*) found, slot, (char*) rec, 1, best);
 			}
 		}
 after_scan:

@@ -24,7 +24,7 @@ int __cdecl cm_GetCommandResult(int);
 void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 int __cdecl cm_SendSetHE(char, char*);
-int __cdecl fcn_004c5980(void*);
+int __cdecl cm_EnqueueStagedPacket(void*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
@@ -248,7 +248,7 @@ label_54e6a1:
 				if (m != 0 && i != 0) {
 					*(pos14_7f4c00*) (pkt + 0x18) = gm_GameTime;
 					gm_AddTime((pos14_7f4c00*) (pkt + 0x18), 0, 0x1e, 0);
-					*(int*) (e + 0xb4) = fcn_004c5980(pkt);
+					*(int*) (e + 0xb4) = cm_EnqueueStagedPacket(pkt);
 					*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 					gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 0, 1);
 					*(int*) (e + 0x70) = 4;

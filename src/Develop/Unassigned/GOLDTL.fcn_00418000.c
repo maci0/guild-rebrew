@@ -12,12 +12,12 @@ typedef struct {
 int __cdecl fcn_0064d3f8(void);
 int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, int b, void (__cdecl* cb)(void));
 void __cdecl d3_SetEffectPosition(int* s, float* pos);
-void __cdecl fcn_00417f00(void);
+void __cdecl d3_UpdateSmokeParticles(void);
 extern volatile int g_6b7fac;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00418000 */
-int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, float f6,
+int* __cdecl d3_CreateSmokeEmitter(int a1, float* pos, int n, int a4, int a5, int v0, float f6,
     int v2, float f8, float* p, int v3, int timeStep, Bytes4 color)
 {
     Bytes4 f;
@@ -33,7 +33,7 @@ int* __cdecl fcn_00418000(int a1, float* pos, int n, int a4, int a5, int v0, flo
     memset(&f, 0, sizeof(f));
     f.a = 0x7f;
     f.c |= 2;
-    s = fcn_004524e0(n, "Rauch", f, a4, a1, fcn_00417f00);
+    s = fcn_004524e0(n, "Rauch", f, a4, a1, d3_UpdateSmokeParticles);
     if (s != 0) {
         k = g_6b7fac;
         mask = color.d;

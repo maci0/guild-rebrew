@@ -1,12 +1,12 @@
 
 
-void __cdecl fcn_00414be0(int, int, int, int);
+void __cdecl d3_SetObjectColorRgb(int, int, int, int);
 
-void __cdecl fcn_00414c30(int a1, int enabled)
+void __cdecl d3_SetObjectGreyTint(int a1, int enabled)
 {
 	if (enabled != 0) {
-		fcn_00414be0(a1, 0x80, 0x80, 0x80);
+		d3_SetObjectColorRgb(a1, 0x80, 0x80, 0x80);
 	} else {
-		fcn_00414be0(a1, 0, 0, 0);
+		d3_SetObjectColorRgb(a1, 0, 0, 0);
 	}
 }

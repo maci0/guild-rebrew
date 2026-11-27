@@ -30,8 +30,8 @@ extern char* g_14abbb0;
 extern char* g_14abc28;
 
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
-void __cdecl fcn_0046f940(int, char*);
-void __cdecl fcn_00517c00(int, int, int, char*);
+void __cdecl d2_SetLabelText(int, char*);
+void __cdecl gm_FormatEntityTitleAndName(int, int, int, char*);
 void __cdecl d2_ClearGauge(Gauge*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
@@ -48,15 +48,15 @@ void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 		while ((*dst++ = *src++) != 0) {
 		}
 		g->state = 2;
-		fcn_0046f940(g->label, buf);
+		d2_SetLabelText(g->label, buf);
 		((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
 		((D2_CONTROL_TL*) g_1015ea0)[g->label].height = 0x28;
 		g->state = 2;
 		return;
 	}
 	if (g->obj != 0 && ((char*) g->obj)[8] != 0) {
-		fcn_00517c00(*g->obj, 1, 1, buf);
-		fcn_0046f940(g->label, buf);
+		gm_FormatEntityTitleAndName(*g->obj, 1, 1, buf);
+		d2_SetLabelText(g->label, buf);
 		((D2_CONTROL_TL*) g_1015ea0)[g->label].value_06c = 1;
 		((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
 		g->state = 1;
@@ -68,10 +68,10 @@ void __cdecl fcn_005b5ce0(char* e, Gauge* g, int a3, int a4)
 	while ((*dst++ = *src++) != 0) {
 	}
 	g->state = 0;
-	fcn_0046f940(g->label, buf);
+	d2_SetLabelText(g->label, buf);
 	((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
 	((D2_CONTROL_TL*) g_1015ea0)[g->label].height = 0x28;
-	fcn_0046f940(g->value, "");
+	d2_SetLabelText(g->value, "");
 	g->state = 0;
 	*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[g->icon].associated_object) = 0;
 }

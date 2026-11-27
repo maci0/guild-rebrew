@@ -11,7 +11,7 @@
 
 
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, int* out);
+int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, float c, float r, int* out);
 int __cdecl he_CountEntityActions(char* e, ENTITY_RECORD* t, int* cnt);
 int __cdecl he_HasNoActiveAction0x88(ENTITY_RECORD* t, char* e);
 double __cdecl gm_RandomFloat01(void);
@@ -27,7 +27,7 @@ int __cdecl ai_SelectPamphletTarget(char* actor, char* unused, char* out)
 		return 0;
 	}
 	mask = 0xf00500;
-	if (fcn_004a5340(actor, 1, &mask, 0, gm_RandomMod(0x40), &idx) == 0) {
+	if (ai_SelectRankedCandidates(actor, 1, &mask, 0, gm_RandomMod(0x40), &idx) == 0) {
 		return 0;
 	}
 	if (he_CountEntityActions(actor, ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[(unsigned short) idx]), &cnt) == 0) {

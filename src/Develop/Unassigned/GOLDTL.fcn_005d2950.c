@@ -4,7 +4,7 @@
 int __cdecl abs(int);
 #pragma intrinsic(abs)
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00508eb0(unsigned short, int);
+int __cdecl amt_GetEffectiveRoleLevel(unsigned short, int);
 
 int __cdecl gm_CanCourtEntity(int actorId, int targetId)
 {
@@ -34,5 +34,5 @@ int __cdecl gm_CanCourtEntity(int actorId, int targetId)
 	if (target[0x1b1] > 0) {
 		return -0x406;
 	}
-	return abs(fcn_00508eb0(*(unsigned short*) actor, 0) - fcn_00508eb0(*(unsigned short*) target, 0)) < 6;
+	return abs(amt_GetEffectiveRoleLevel(*(unsigned short*) actor, 0) - amt_GetEffectiveRoleLevel(*(unsigned short*) target, 0)) < 6;
 }

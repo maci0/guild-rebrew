@@ -10,14 +10,14 @@ extern int main_LoopFlags;
 extern unsigned char g_7747b0;
 extern int g_14a5538;
 
-void __cdecl fcn_00592400(void);
+void __cdecl d2_SaveScreenshot(void);
 void __cdecl ls_QuickSave(void);
 void __cdecl cm_RequestIncreaseGameSpeed(void);
 void __cdecl cm_SendDecreaseGameSpeed(void);
 void __cdecl gm_ApplyGameSettings(void);
 void __cdecl fcn_00533a40(int);
 
-void __cdecl fcn_005924d0(void)
+void __cdecl main_HandleHotkeyAction(void)
 {
 	int lvl;
 
@@ -26,7 +26,7 @@ void __cdecl fcn_005924d0(void)
 		return;
 	}
 	if (g_14cf950 == 0x1f) {
-		fcn_00592400();
+		d2_SaveScreenshot();
 	}
 	if (g_14cf950 == 0x10 && tp_d2_SelectedControl == 0 && (main_LoopFlags & 0x10000) == 0) {
 		ls_QuickSave();

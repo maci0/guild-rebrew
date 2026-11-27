@@ -19,11 +19,11 @@ extern int g_778d24;
 extern char g_7f4ca0[];
 
 int __cdecl d2_UpdateWindowDrag(char*);
-int __cdecl fcn_005b10e0(char*);
+int __cdecl d2_ScrollMapViewport(char*);
 void __cdecl d2_RunPersonDialog(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl d2_CreateElement(int, int, int);
-void __cdecl fcn_00469c40(int, int, int);
+void __cdecl d2_PositionControl(int, int, int);
 void __cdecl d2_DestroyElement(int);
 void __cdecl d2_ScrollWindow(int, int, int);
 char* __cdecl fcn_0050d490(char*);
@@ -62,7 +62,7 @@ void __cdecl d2_UpdateCityScrollMap(int* state)
 	if (g_6ab3dc) {
 		state[0x9e7] = 0;
 		state[0x9e7] = d2_UpdateWindowDrag((char*) (state[2] * 0x3cc + 0x1015f40));
-		state[0x9e7] |= fcn_005b10e0((char*) (state[2] * 0x3cc + 0x1015f40));
+		state[0x9e7] |= d2_ScrollMapViewport((char*) (state[2] * 0x3cc + 0x1015f40));
 		if (state[0x9e7] != 0) {
 			state[0x9e8] = g_6b7fac;
 		}
@@ -175,7 +175,7 @@ void __cdecl d2_UpdateCityScrollMap(int* state)
 			if (*(int*) (e + 0x218) == 1 && *(int*) (obj + 0x124) == 0) {
 				goto check;
 			}
-			fcn_00469c40(*(int*) (g_77255c + 4) - *(int*) (g_77255c + 0x268) + sx,
+			d2_PositionControl(*(int*) (g_77255c + 4) - *(int*) (g_77255c + 0x268) + sx,
 			    *(int*) (g_77255c + 8) - *(int*) (t + 0x258) + sy, *slot);
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_left)) = *(int*) (g_77255c + 4);
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[*slot].clip_right)) = *(int*) (g_77255c + 0xc) + *(int*) (g_77255c + 4);

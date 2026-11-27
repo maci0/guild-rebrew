@@ -10,7 +10,7 @@ void __cdecl d3_UpdateObjectLighting(char*);
 int __cdecl d2_CreateRenderableForm(int, int, int);
 void __cdecl d2_CaptureFormPageTextures(int, void*, void*);
 void __cdecl d2_RenderFormToTextures(int);
-void __cdecl fcn_004754c0(int, int);
+void __cdecl d2_SetFormVisible(int, int);
 void __cdecl d3_SetZEnable(int);
 SOUND_VOICE* __cdecl sb_PlayVoice(char*, const char*, int, int, int, int, int);
 
@@ -63,7 +63,7 @@ char* __cdecl d2_OpenBook(int model, char* parent, signed char count, ...)
         d2_CaptureFormPageTextures(((int*)(book + 0x228))[i], upper, lower);
         d2_RenderFormToTextures(((int*)(book + 0x228))[i]);
         if (i > 2) {
-            fcn_004754c0(((int*)(book + 0x228))[i], 0);
+            d2_SetFormVisible(((int*)(book + 0x228))[i], 0);
         }
     }
     va_end(ap);

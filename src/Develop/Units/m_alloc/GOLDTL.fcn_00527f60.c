@@ -65,7 +65,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 int __cdecl d2_CreateElement(int, int, int);
 int __cdecl fcn_0046fcd0(int, int, char*);
-void __cdecl fcn_005279f0(int);
+void __cdecl d2_UpdateBuildingGroundplan(int);
 char* __cdecl d2_SelectFont(int);
 void __cdecl gm_PackGameTime(int*, char*);
 int __cdecl fcn_0051e070(void);
@@ -73,11 +73,11 @@ int __cdecl gm_GetSeasonFromDate(char*, int);
 void __cdecl d2_DrawDefaultFontText(int, int, int, char*, int);
 void* __cdecl d2_GetResourceData(int);
 int __cdecl d2_DrawSpriteFromSet(int, int, int, void*, int);
-int __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
+int __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 void __cdecl d2_SetSlotVisibility(int, int);
-void __cdecl fcn_00469c40(int, int, int);
-void __cdecl fcn_0046f940(int, const char*);
-int __cdecl fcn_00517c00(int, int, int, char*);
+void __cdecl d2_PositionControl(int, int, int);
+void __cdecl d2_SetLabelText(int, const char*);
+int __cdecl gm_FormatEntityTitleAndName(int, int, int, char*);
 char* __cdecl gm_FindPublicTreasury(int);
 int __cdecl gm_SumContainerCredits(int);
 int __cdecl gm_QueryEntitySum(int, int);
@@ -261,7 +261,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 		}
 	}
 
-	fcn_005279f0(a1);
+	d2_UpdateBuildingGroundplan(a1);
 	d2_SelectFont(0x55);
 	gm_PackGameTime((int*) 0x7f4c00, (char*) &fr.pos);
 	if (fcn_0051e070() == 2) {
@@ -297,7 +297,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 		sprintf(fr.text, (char*) 0x6a2e50, *(int*) 0x7f4c04 & 0xffff,
 			*(int*) 0x7f4c06);
 		d2_SelectFont(0x54);
-		fcn_0046bd20(g_1040494 - 0x50, 2, 0x2e, 0x14, g_77250c,
+		d2_DrawWordWrappedText(g_1040494 - 0x50, 2, 0x2e, 0x14, g_77250c,
 			     fr.text, 0x28);
 		d2_SelectFont(0x55);
 	}
@@ -324,16 +324,16 @@ hidden:
 	d2_SelectFont(0x55);
 
 	if (g_6a25a0 != -1) {
-		fcn_00517c00(g_774970, 1, 2, fr.name);
+		gm_FormatEntityTitleAndName(g_774970, 1, 2, fr.name);
 		strcpy(fr.text, fr.name);
-		fcn_0046f940(g_6a25a0, fr.text);
+		d2_SetLabelText(g_6a25a0, fr.text);
 	}
 	sprintf(fr.text, (char*) 0x67d444,
 		*(int*) (0x7f4e34 + g_774970 * 0x21c));
 	d2_DrawDefaultFontText(*(int*) (0x1015f44 + g_6a2598 * 0x3cc) + 0x23a, 0x17,
 		     g_77250c, fr.text, 0);
 	if (g_6a257c != -1) {
-		fcn_00469c40(*(int*) (0x1015f44 + g_6a2598 * 0x3cc)
+		d2_PositionControl(*(int*) (0x1015f44 + g_6a2598 * 0x3cc)
 			     + g_772544 + 0x23d, 0x18, g_6a257c);
 	}
 
@@ -368,7 +368,7 @@ hidden:
 		}
 		d2_SelectFont(0x56);
 		strcpy(fr.name, (char*) (0x868080 + g_773d75 * 0x2f4));
-		fcn_0046bd20(g_1040494 - 0x70, 0x5d, 0x68, 0x14, g_77250c,
+		d2_DrawWordWrappedText(g_1040494 - 0x70, 0x5d, 0x68, 0x14, g_77250c,
 			     fr.name, 8);
 	}
 	d2_SelectFont(0x54);
@@ -392,9 +392,9 @@ hidden:
 			fr.tmp = gm_AmountToUnits(val, si);
 			fcn_0051af00(fr.text, (int) 0x6a2e48,
 				     (int) (double) fr.tmp, si);
-			fcn_0046f940(g_6a25a4, fr.text);
+			d2_SetLabelText(g_6a25a4, fr.text);
 		} else {
-			fcn_0046f940(g_6a25a4,
+			d2_SetLabelText(g_6a25a4,
 				     (char*) *(int*) 0x14acf20);
 		}
 	}
@@ -434,17 +434,17 @@ hidden:
 	}
 	if (val) {
 		d2_SetForm(g_77e8a0, 0);
-		fcn_00469c40(g_1040494 - g_6a4768 * 0x20 - 0x1d,
+		d2_PositionControl(g_1040494 - g_6a4768 * 0x20 - 0x1d,
 			     *(int*) (0x1015f48 + d2_CurrentWindowId * 0x3cc),
 			     *(int*) (0x10161bc + d2_CurrentWindowId * 0x3cc));
-		fcn_00469c40(g_1040494 - g_6a4768 * 0x20 - 0x4d,
+		d2_PositionControl(g_1040494 - g_6a4768 * 0x20 - 0x4d,
 			     d2_ScreenHeight - 0x21, g_6a25fc);
 	} else {
 		d2_SetForm(g_77e8a0, 0);
-		fcn_00469c40(g_1040494 - 0x7d,
+		d2_PositionControl(g_1040494 - 0x7d,
 			     *(int*) (0x1015f48 + d2_CurrentWindowId * 0x3cc),
 			     *(int*) (0x10161bc + d2_CurrentWindowId * 0x3cc));
-		fcn_00469c40(g_1040494 - 0xad, d2_ScreenHeight - 0x21, g_6a25fc);
+		d2_PositionControl(g_1040494 - 0xad, d2_ScreenHeight - 0x21, g_6a25fc);
 	}
 stored:
 	g_6a2be8 = g_6a4768;

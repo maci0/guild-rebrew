@@ -11,7 +11,7 @@ typedef struct {
 } Bytes4;
 
 int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, float a, int b, void (__cdecl* cb)(void));
-void __cdecl fcn_00417870(void);
+void __cdecl d3_UpdateBloodSprayParticles(void);
 
 int* __cdecl d3_SpawnBlutEffect(int unused, int mode, int v0, int v1, int v2, int v3)
 {
@@ -22,7 +22,7 @@ int* __cdecl d3_SpawnBlutEffect(int unused, int mode, int v0, int v1, int v2, in
 	memset(&flags, 0, sizeof(flags));
 	flags.c |= 2;
 	flags.a = 0x7f;
-	result = fcn_004524e0(200, "Blut", flags, 1.0f, unused, fcn_00417870);
+	result = fcn_004524e0(200, "Blut", flags, 1.0f, unused, d3_UpdateBloodSprayParticles);
 	if (result != 0) {
 		result[8] = mode * 2 | 1;
 		result[0] = v0;

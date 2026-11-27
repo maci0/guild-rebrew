@@ -9,7 +9,7 @@ extern int g_7746a0;
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_00597ec0(char*);
+void __cdecl d2_OpenContactEinkaufPanel(char*);
 void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
@@ -40,7 +40,7 @@ void __cdecl d2_RunBrauenMenu(char* e)
 			transport = RegisterStatusText("contact_TRANSPORT", g_14ad100, 0x15);
 			lager = RegisterStatusText("contact_LAGER", g_14ad0f0, 0xe);
 		}
-		fcn_00597ec0(e);
+		d2_OpenContactEinkaufPanel(e);
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == personal) {
 				d2_ShowPersonalbuch(e, "ob_PERSONALBUCH");

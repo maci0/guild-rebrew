@@ -5,7 +5,7 @@ int __cdecl cm_StageRawPacketPayload(unsigned short n, void *src);
 int __cdecl cm_EnqueueClientPacket(void *buf);
 
 /* ADDRESS: GOLDTL 0x004c6e20 */
-void __cdecl fcn_004c6e20(char *record, char *head)
+void __cdecl cm_SendSetObjektRoute(char *record, char *head)
 {
     char buf[0x9c];
     char items[0x200];

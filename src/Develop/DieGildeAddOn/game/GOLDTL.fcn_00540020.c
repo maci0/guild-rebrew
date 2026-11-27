@@ -134,11 +134,11 @@ int __cdecl fcn_0050d2a0(void*);
 void* __cdecl fcn_00503fe0(int, int, int);
 void* __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl fcn_00502850(void);
-int __cdecl fcn_0047dca0(void*);
+int __cdecl gm_IsLocalSimEntity(void*);
 void __cdecl ch_SetVisible(int, int);
 void* __cdecl fcn_00503e80(void);
 int __cdecl fcn_00504bd0(int);
-int __cdecl fcn_0047d240(void*);
+int __cdecl ai_IsEntityTurnActive(void*);
 unsigned short __cdecl fcn_0042e410(int);
 int __cdecl gm_GetEntityMood(void*);
 int __cdecl gm_CalculateGebaeudeValue(void*, int);
@@ -432,7 +432,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 				p = fcn_00503fe0(1, 1, *(int*) ((char*) obj + 0x1c));
 				if (p != 0
 				    && (s = SLOTPTR(*(unsigned short*) (p + 0x27))) != 0
-				    && fcn_0047dca0(s) != 0)
+				    && gm_IsLocalSimEntity(s) != 0)
 					ch_SetVisible(ent, 1);
 				else
 					ch_SetVisible(ent, 0);
@@ -469,7 +469,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 						n += 8;
 					}
 				}
-				if (fcn_0047d240(SLOTPTR(i)) != 0 || *(unsigned char*) (SLOTPTR(i) + 2) == 1) {
+				if (ai_IsEntityTurnActive(SLOTPTR(i)) != 0 || *(unsigned char*) (SLOTPTR(i) + 2) == 1) {
 					if (gm_GetEntityMood(obj) < fcn_0042e410(0x5a)) {
 						int ent;
 

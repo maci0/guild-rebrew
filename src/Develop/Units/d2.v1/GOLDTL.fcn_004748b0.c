@@ -2,7 +2,7 @@
 extern void __cdecl d2_ClearSelectedControl(void);
 extern void __cdecl d2_DestroyElement(int a);
 extern int __cdecl CountDisplayCounters(void);
-extern void __cdecl fcn_00469c40(int a, int b, int c);
+extern void __cdecl d2_PositionControl(int a, int b, int c);
 extern int __cdecl d2_CreateElement(short a, short b, int c);
 extern void __cdecl d2_HandleTextInput(void);
 extern int __cdecl d2_UpdateSelectedControlDrag(void);
@@ -10,7 +10,7 @@ extern void __cdecl d2_SetFieldTextId(int a, int b);
 extern void __cdecl d2_HandleSliderInput(void);
 extern void __cdecl d2_SetMouseTooltip(void *p);
 extern int __cdecl d2_GetValueStep(void *p);
-extern void __cdecl fcn_00412830(int a);
+extern void __cdecl io_ClearInputButtonFlags(int a);
 extern int __cdecl d2_MeasureTextWidth(void *p, int a);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1cc;
@@ -94,7 +94,7 @@ int __cdecl d2_UpdateSelectedControl(void)
 					g_100f898 += p[1];
 					g_100f89c = p[2];
 					if (g_67d8ec != -1) {
-						fcn_00469c40(g_100f898, g_100f89c - 7,
+						d2_PositionControl(g_100f898, g_100f89c - 7,
 						    g_67d8ec);
 					} else {
 						g_67d8ec = d2_CreateElement(
@@ -139,7 +139,7 @@ label_474b96:
 			goto label_474ca4;
 		}
 		if (*(unsigned char *) ((char *) p + 0x28) & 1) {
-			fcn_00412830(0x10);
+			io_ClearInputButtonFlags(0x10);
 			p = *(unsigned int **) &tp_d2_SelectedControl;
 		}
 		((D2_CONTROL_TL*) *(int *)&g_1015ea0)[p[0x4d]].value_03c = 0;

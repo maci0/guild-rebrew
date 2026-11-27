@@ -3,7 +3,7 @@
 extern Pair_99f800 g_99f800[0x800];
 unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 /* ADDRESS: GOLDTL 0x004f65a0 */
-void* __cdecl fcn_004f65a0(unsigned char* a1, int cap, int* out, int* out_count)
+void* __cdecl gm_FindMostWantedCrimeTarget(unsigned char* a1, int cap, int* out, int* out_count)
 {
 	int counts[0x300];
 	unsigned char* groups[0x300];

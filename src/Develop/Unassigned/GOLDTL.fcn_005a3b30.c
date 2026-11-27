@@ -18,10 +18,10 @@ extern int g_14a7860;
 
 char* __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_OpenMarktstandPanel(int, int);
-void __cdecl fcn_005c1110(void);
+void __cdecl d2_RunSchwarzesBrettDialog(void);
 void __cdecl d2_ShowBardPoemDialog(void);
 
-void __cdecl fcn_005a3b30(int arg)
+void __cdecl d2_HandleMarketSquareObjects(int arg)
 {
 	char* c;
 	char* a;
@@ -70,7 +70,7 @@ void __cdecl fcn_005a3b30(int arg)
 		d2_OpenMarktstandPanel(arg, 0x2db);
 	}
 	else if (strcmp(((char*)g_7746a0), "contact_ob_SCHWARZES_BRETT") == 0 || strcmp(((char*)g_7746a0), "ob_SCHWARZES_BRETT") == 0) {
-		fcn_005c1110();
+		d2_RunSchwarzesBrettDialog();
 	}
 	else if (strcmp(((char*)g_7746a0), "ob_TRIBUENE") == 0) {
 		d2_ShowBardPoemDialog();

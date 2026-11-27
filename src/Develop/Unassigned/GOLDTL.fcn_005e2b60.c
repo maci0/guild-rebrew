@@ -1,7 +1,7 @@
 extern int g_100f1dc;
 int __cdecl d2_LoadForm(int, int, char *);
-void __cdecl fcn_00537320(int);
-void __cdecl fcn_00471db0(int, int);
+void __cdecl d2_UpdateViewportCenter(int);
+void __cdecl d2_PositionFormWindows(int, int);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
@@ -20,7 +20,7 @@ void __cdecl fcn_005e2660(void);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
-void __cdecl fcn_005e1ca0(void);
+void __cdecl io_LoadIniSettings(void);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005e2b60 */
@@ -32,8 +32,8 @@ void __cdecl fcn_005e2b60(void)
   v14 = *(unsigned int *)0x7e46ac & ~0x2000;
   v1 = 0;
   v4 = d2_LoadForm(0,0,(char *)0x6ad2d4);
-  fcn_00537320(v14);
-  fcn_00471db0(v4,1);
+  d2_UpdateViewportCenter(v14);
+  d2_PositionFormWindows(v4,1);
   fcn_00471d80(v4,2);
   d2_SetForm(v4,0);
   d2_InitWindowBounds(*(unsigned int *)0x772514);
@@ -145,7 +145,7 @@ void __cdecl fcn_005e2b60(void)
     *(unsigned int *)0x774958 = 0;
     *(unsigned int *)0x774954 = 1;
     *(unsigned int *)0x77495c = 1;
-    fcn_005e1ca0();
+    io_LoadIniSettings();
   }
   d2_DestroyForm(v4);
 }

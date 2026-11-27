@@ -29,19 +29,19 @@ extern char s_6ac7b0[];        /* 0x006ac7b0 */
 
 int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_ResetTrainingRows(int);
 int __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_00594340(void);
+int __cdecl d2_ResetBuildingUiSlots(void);
 int __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
 int __cdecl fcn_00533f40(int, int, int, int);
-int __cdecl fcn_00595e20(int, int);
-int __cdecl fcn_005963f0(int, int, int, int);
+int __cdecl d2_SyncWareProduktionSlotGrid(int, int);
+int __cdecl d2_RefreshWorkshopInventoryGrids(int, int, int, int);
 int __cdecl d2_SyncProduktionSlotGrid(int, int);
 int __cdecl d2_DrawProduktionSlotGrid(int, int, int, int, int);
 int __cdecl d2_GetControlValue(int);
@@ -49,7 +49,7 @@ int* __cdecl gm_LookupWeaponSpec(int);
 int* __cdecl gm_GetEquippedCombatGear(int);
 int __cdecl gm_CheckBuildingCategoryForItem(int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
-int __cdecl fcn_00472380(int, int, int, int, int);
+int __cdecl d2_CreateGuiWindow(int, int, int, int, int);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl cm_AreQueuedCommandsDone(void);
@@ -57,7 +57,7 @@ void __cdecl cm_StepCommandQueue(void);
 void __cdecl d2_ClearSelectedControl(void);
 int __cdecl ch_UpdateHeldObjectAttachment(int);
 int __cdecl d2_UpdateTrainingRows(int, int);
-int __cdecl fcn_0046f940(int, char*);
+int __cdecl d2_SetLabelText(int, char*);
 int __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -66,7 +66,7 @@ void __cdecl ResetDisplayCounters(void);
 int __cdecl __itoa(int, char*, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005c72f0 */
-int __cdecl fcn_005c72f0(int objectArg)
+int __cdecl d2_RunEquipmentDialog(int objectArg)
 {
 	int v7;
 	int v8;
@@ -110,7 +110,7 @@ int __cdecl fcn_005c72f0(int objectArg)
 		p = (unsigned short*) fcn_00502cd0(*(int*) (v7 + 0x5d), 2, 0, 0x116, 6);
 	}
 	if (p == 0) {
-		v15 = fcn_00526120(g_14aba98, 0);
+		v15 = d2_ShowModalMessageBox(g_14aba98, 0);
 		return v15;
 	}
 	win = d2_LoadForm(0, 0, s_6ac7b0);
@@ -119,7 +119,7 @@ int __cdecl fcn_005c72f0(int objectArg)
 	io_AppendText(0x19db);
 	d2_ResetTrainingRows(v7);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00594340();
+	d2_ResetBuildingUiSlots();
 	d2_SetForm(win, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x72f, 0);
 	fcn_00533f40(0x270, 0x15c, d2_CurrentWindowId,
@@ -131,8 +131,8 @@ label_5c7466:
 	v7 = objectArg;
 	if (*p != 0x116 && *def != 0x11) {
 		if (*def == 0x05) {
-			v15 = fcn_00595e20(objectArg, (int) p);
-			fcn_005963f0(win, 1, 1, v7);
+			v15 = d2_SyncWareProduktionSlotGrid(objectArg, (int) p);
+			d2_RefreshWorkshopInventoryGrids(win, 1, 1, v7);
 		}
 	} else {
 		v15 = d2_SyncProduktionSlotGrid(objectArg, (int) p);
@@ -168,7 +168,7 @@ label_5c752a:
 			v5 = rec[-4];
 			if (gm_LookupWeaponSpec(v5) != 0) {
 				if (*(int*) gm_GetEquippedCombatGear(selected) != 0) {
-					fcn_00526120(g_14aba9c, 4);
+					d2_ShowModalMessageBox(g_14aba9c, 4);
 					goto label_5c7572;
 				}
 				v7 *= 0x38;
@@ -178,7 +178,7 @@ label_5c752a:
 					cm_SendSellObjekt(*(int*) (selected + 4), *(int*) &p[1], v13, 1,
 							g_773d75, 0);
 					v5 = d2_GetControlValue(*(int*) (v7 + ((int) g_778da0 + 0x10)));
-					fcn_00472380(*(int*) (v7 + ((int) g_778da0 + 0x10)), 0,
+					d2_CreateGuiWindow(*(int*) (v7 + ((int) g_778da0 + 0x10)), 0,
 							*(int*) (v7 + ((int) g_778da0 + 0x30)), v5 - 1, 0);
 					break;
 				}
@@ -188,7 +188,7 @@ label_5c752a:
 				v14 = 0;
 				v13 = g_14aba94;
 			}
-			fcn_00526120(v13, v14);
+			d2_ShowModalMessageBox(v13, v14);
 			break;
 		}
 label_5c7572:
@@ -210,7 +210,7 @@ label_5c7572:
 					cm_SendSellObjekt(*(int*) (selected + 4), *(int*) &p[1], v13, 1,
 							g_773d75, 0);
 					v5 = d2_GetControlValue(*(int*) (v7 + ((int) g_7796e0 + 0x10)));
-					fcn_00472380(*(int*) (v7 + ((int) g_7796e0 + 0x10)), 0,
+					d2_CreateGuiWindow(*(int*) (v7 + ((int) g_7796e0 + 0x10)), 0,
 							*(int*) (v7 + ((int) g_7796e0 + 0x30)), v5 - 1, 0);
 					break;
 				}
@@ -218,7 +218,7 @@ label_5c7572:
 			} else {
 				v13 = g_14aba94;
 			}
-			fcn_00526120(v13, 0);
+			d2_ShowModalMessageBox(v13, 0);
 			break;
 		}
 		rec += 0xe;
@@ -270,7 +270,7 @@ label_5c76eb:
 		} while ((int) p4 < ((int) g_7774a0 + 0x800));
 	}
 	__itoa(g_775334, v11, 10);
-	fcn_0046f940(v8, v11);
+	d2_SetLabelText(v8, v11);
 	if (g_14ce8e0 != 0) {
 		if (CountDisplayCounters() == 0) {
 			g_774654 = 1;
@@ -281,7 +281,7 @@ label_5c76eb:
 			do {
 				v7 = *q;
 				if (v7 != -1 && d2_GetControlValue(v7) != 0) {
-					fcn_00472380(*q, 0, q[8], 0, 0);
+					d2_CreateGuiWindow(*q, 0, q[8], 0, 0);
 				}
 				q += 0xe;
 			} while ((int) q < ((int) g_778da0 + 0x390));
@@ -289,7 +289,7 @@ label_5c76eb:
 			do {
 				v7 = *q;
 				if (v7 != -1 && d2_GetControlValue(v7) != 0) {
-					fcn_00472380(*q, 0, q[8], 0, 0);
+					d2_CreateGuiWindow(*q, 0, q[8], 0, 0);
 				}
 				q += 0xe;
 			} while ((int) q < ((int) g_7796e0 + 0x1d0));
@@ -302,7 +302,7 @@ label_5c76eb:
 					q2 = p4;
 					do {
 						if (*q2 != -1) {
-							fcn_00472380(*q2, 0, 0, 0, 0);
+							d2_CreateGuiWindow(*q2, 0, 0, 0, 0);
 						}
 						q2 += 2;
 						v7 -= 1;

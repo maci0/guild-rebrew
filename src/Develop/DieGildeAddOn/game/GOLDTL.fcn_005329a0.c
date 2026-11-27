@@ -42,7 +42,7 @@ extern int g_14a79c0[];
 void* __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl d2_SelectFont(int);
 char __cdecl d3_GetObjectScreenRect(void*, int*);
-void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
+void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 Unit* __cdecl gm_NextEntityQueryMatch(void);
 
 void __cdecl d2_DrawBuildingItemLabels(void)
@@ -71,7 +71,7 @@ void __cdecl d2_DrawBuildingItemLabels(void)
 		w = &((OBJECT_PROTOTYPE*)lpObjektePROT)[u->slot];
 		if (u->model != 0 && w->kind != 6 && w->kind != 2
 			&& d3_GetObjectScreenRect(u->model, r)) {
-			fcn_0046bd20((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, g_77250c,
+			d2_DrawWordWrappedText((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, g_77250c,
 				((WareName*)g_14a79c0)[u->slot].name, 0x28);
 		}
 	}
@@ -84,7 +84,7 @@ void __cdecl d2_DrawBuildingItemLabels(void)
 		w = &((OBJECT_PROTOTYPE*)lpObjektePROT)[u->slot];
 		if (u->model != 0 && (w->kind == 6 || w->kind == 2)
 			&& d3_GetObjectScreenRect(u->model, r)) {
-			fcn_0046bd20((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, g_77250c,
+			d2_DrawWordWrappedText((r[2] - r[0]) / 2 + r[0] - 0x50, r[1], 0xa0, 0x60, g_77250c,
 				((WareName*)g_14a79c0)[u->slot].name, 0x28);
 		}
 	}

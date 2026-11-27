@@ -26,7 +26,7 @@ extern int g_14b5bc0;
 extern char* g_14b5bc8;
 extern char g_6b5c60[];
 
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 int __cdecl d2_OpenTargetPicker(Req*, char*, char*, void*);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -42,7 +42,7 @@ void __cdecl d2_SelectPlauschTarget(void)
 	int n;
 
 	if ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].flags_1cc) & 0x20000) {
-		fcn_00526120(g_14b5bc0, 4);
+		d2_ShowModalMessageBox(g_14b5bc0, 4);
 		return;
 	}
 	if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1)) {

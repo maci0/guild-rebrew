@@ -19,7 +19,7 @@ extern char g_7f4ca4[];
 
 void* __cdecl d2_OpenTargetPicker(void*, char*, int, int);
 int __cdecl d3_EndCameraAndUiMode(void);
-void __cdecl fcn_0052a0c0(char*, int);
+void __cdecl d2_InitPlayerBar(char*, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -27,10 +27,10 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472380(int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_CheckActionBlocker(char*, int);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 typedef struct F8 {
 	int mask;
 	int b;
@@ -75,7 +75,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 	if (v == 0) {
 		return d3_EndCameraAndUiMode();
 	}
-	fcn_0052a0c0(subject, 0);
+	d2_InitPlayerBar(subject, 0);
 	h = d2_LoadForm(0, 0, (char*) 0x6a96d8);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
@@ -88,7 +88,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 	n = io_AppendText(0x4099);
 	b2 = d2_GetWindowListItem(h, 2, n);
 	b3 = d2_GetWindowListItem(h, 2, n + 1);
-	fcn_00472380(b1, 4, 0xc, 4);
+	d2_CreateGuiWindow(b1, 4, 0xc, 4);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -109,7 +109,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 					}
 				}
 				if (hh == 0) {
-					fcn_00526120(g_14b556c, 0);
+					d2_ShowModalMessageBox(g_14b556c, 0);
 				} else if (flag == 0) {
 					for (i = 0; i < 0x3e; i++) {
 						*(int*) (req + i * 4) = 0;
@@ -145,7 +145,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 					}
 					main_LoopFlags = 0x677c7;
 					g_774654 = 1;
-					fcn_00526120(g_14b5588, 0);
+					d2_ShowModalMessageBox(g_14b5588, 0);
 				}
 			} else if (d2_CurrentElementId == b3) {
 				g_774654 = 1;

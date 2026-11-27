@@ -18,10 +18,10 @@ typedef struct SCENE_PROGRESS_CONTEXT {
 } SCENE_PROGRESS_CONTEXT;
 
 void __cdecl fcn_0045cfa0(SCENE_PROGRESS progress);
-void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3,
+void __cdecl d3_ConfigureSceneRenderQuality(unsigned char a1, int a2, unsigned char a3,
     unsigned int a4, SCENE_PROGRESS progress);
-void __cdecl fcn_0043ac00(int mask, int id, SCENE_PROGRESS progress);
-char __cdecl fcn_0043aad0(char* object, SCENE_PROGRESS_CONTEXT* context);
+void __cdecl d3_ReloadSceneResources(int mask, int id, SCENE_PROGRESS progress);
+char __cdecl d3_ReloadObjectResourcesCallback(char* object, SCENE_PROGRESS_CONTEXT* context);
 char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS progress);
 #endif
 

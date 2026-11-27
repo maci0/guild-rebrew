@@ -14,7 +14,7 @@ extern Timer14 g_9b4900[16];
 
 char __cdecl d3_GetObjectScreenRect(void*, int*);
 int __cdecl fcn_0046fcd0(int x, int y, char* name);
-void __cdecl fcn_00469c40(int x, int y, int slot);
+void __cdecl d2_PositionControl(int x, int y, int slot);
 void __cdecl d2_DestroyElement(int slot);
 void __cdecl d2_SetSlotVisibility(int slot, int flag);
 
@@ -51,7 +51,7 @@ void __cdecl fcn_004cfca0(void)
 			}
 			g_9b4900[i].handle = fcn_0046fcd0(px, (int) ((float) py + g_9b4900[i].speed), buf);
 		} else {
-			fcn_00469c40(px, (int) ((float) py + g_9b4900[i].speed), g_9b4900[i].handle);
+			d2_PositionControl(px, (int) ((float) py + g_9b4900[i].speed), g_9b4900[i].handle);
 		}
 		if (g_9b4900[i].handle != -1) {
 			d2_SetSlotVisibility(g_9b4900[i].handle, 1);

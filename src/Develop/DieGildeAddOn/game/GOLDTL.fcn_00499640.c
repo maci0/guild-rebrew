@@ -14,7 +14,7 @@ int __cdecl ai_SelectBestMethod(int, unsigned short, int, void*, void*);
 int __cdecl gm_GetLawEntry(int, void*);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_004a5340(char*, int, int*, int, float, unsigned short*);
+int __cdecl ai_SelectRankedCandidates(char*, int, int*, int, float, unsigned short*);
 float __cdecl gm_CalcSkillDuelScore(char*, char*, int);
 int __cdecl he_HasNoActiveEvent04b(char*, char*);
 int __cdecl he_HasNoActiveAction0x2e(char*, char*);
@@ -107,7 +107,7 @@ main:
 		goto fail;
 	}
 	mask = 0xf00500;
-	if (fcn_004a5340(e, 1, &mask, 0,
+	if (ai_SelectRankedCandidates(e, 1, &mask, 0,
 			(float) (gm_RandomMod(0x20) & 0xffff) + 32.0f,
 			(unsigned short*) &idx) == 0) {
 		goto fail;

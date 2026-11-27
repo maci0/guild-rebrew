@@ -23,7 +23,7 @@ extern int g_772504;
 extern int g_67d8c8;
 
 int __cdecl d2_GetResourceKind(char* p);
-int __cdecl fcn_0047b620(char* p, int i);
+int __cdecl d2_GetBankEntry(char* p, int i);
 int __cdecl d2_Show(int idx, char* path);
 
 /* Loads one entry from the named resource file into the shared entry table,
@@ -49,7 +49,7 @@ int __cdecl d2_LoadResourceFile(char* path, char* name)
 	i = ((VfsEntry*) g_772500)[index].kind;
 	if (i == 1 || i == 5 || i == 4 || i == 8) {
 		char* p;
-		p = (char*) fcn_0047b620(buf, 0);
+		p = (char*) d2_GetBankEntry(buf, 0);
 		((VfsEntry*) g_772500)[index].w50 = *(short*) (p + 2);
 		((VfsEntry*) g_772500)[index].w52 = *(short*) (p + 6);
 		((VfsEntry*) g_772500)[index].parent = index;
@@ -70,7 +70,7 @@ int __cdecl d2_LoadResourceFile(char* path, char* name)
 			i++;
 			((VfsEntry*) g_772500)[index].offset = 0;
 			*(int*) ((VfsEntry*) g_772500)[index].name = g_67d8c8;
-			p = (char*) fcn_0047b620(buf, i);
+			p = (char*) d2_GetBankEntry(buf, i);
 			((VfsEntry*) g_772500)[index].w50 = *(short*) (p + 2);
 			((VfsEntry*) g_772500)[index].w52 = *(short*) (p + 6);
 			((VfsEntry*) g_772500)[index].kind = ((VfsEntry*) g_772500)[save].kind;

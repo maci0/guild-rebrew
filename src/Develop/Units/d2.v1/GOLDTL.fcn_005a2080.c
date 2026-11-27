@@ -19,7 +19,7 @@ char* __cdecl fcn_00502cd0(int, ...);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_BuildPersonStatusDesc(void*);
-void __cdecl fcn_005ca740(int, int, int, int, void*, int);
+void __cdecl d2_DrawPersonCard(int, int, int, int, void*, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl cm_SendLogAction(char*);
 int __cdecl cm_RequestJoinLeaveElection(int*);
@@ -27,11 +27,11 @@ void __cdecl cm_SendTraceEnd(char*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_FormatTextBuffer(char*, int, int);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005a2080 */
-void __cdecl fcn_005a2080(int building, int table)
+void __cdecl d2_RunPlayerStammtischDialog(int building, int table)
 {
 	int sel[4][0xe];
 	int join[3];
@@ -127,7 +127,7 @@ void __cdecl fcn_005a2080(int building, int table)
 					p[4] = (i % 2 + 1) * (x0 / 3) + -10 + (x0 % 3) / 2 + (*(short*) (g_772500 + 0x1ebd8) + 10) * (i % 2);
 					p[5] = (i / 2) * 0x82 + 100;
 					d2_BuildPersonStatusDesc(p);
-					fcn_005ca740(p[4], p[5], d2_CurrentWindowId, 0x54, p, 1);
+					d2_DrawPersonCard(p[4], p[5], d2_CurrentWindowId, 0x54, p, 1);
 					p += 0xe;
 				}
 			}
@@ -169,7 +169,7 @@ void __cdecl fcn_005a2080(int building, int table)
 				}
 			}
 			if (buf[0] != 0) {
-				fcn_00526120(buf, 0);
+				d2_ShowModalMessageBox(buf, 0);
 			}
 		}
 		if (!main_RunFrameLoop((void*) 0x5a1e40, 0x677c7)) {

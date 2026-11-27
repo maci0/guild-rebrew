@@ -41,7 +41,7 @@ void __cdecl cut_FadeToBlack(void);
 void __cdecl evt_StopScriptIfActive(int);
 void __cdecl cut_WaitForScript(int);
 void __cdecl d3snd_StopTrackedVoices(void);
-void __cdecl fcn_004e4b00(int);
+void __cdecl cut_UnloadSampleBank(int);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
 
@@ -150,7 +150,7 @@ void __cdecl cut_PlayBirthCutscene(char* event)
 	evt_StopScriptIfActive(esc);
 	cut_WaitForScript(esc);
 	d3snd_StopTrackedVoices();
-	fcn_004e4b00(snd);
+	cut_UnloadSampleBank(snd);
 	g_772f54 = 0;
 	cut_CleanupCutscene();
 	msx_RestoreMusicIfAllowed();

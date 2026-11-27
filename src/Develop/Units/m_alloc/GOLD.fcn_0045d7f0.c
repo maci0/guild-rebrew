@@ -24,6 +24,6 @@ void __cdecl fcn_0045d7f0(char* owner, char* n)
 			*(char**) (p + 0x28) = *(char**) (n + 0x28);
 		}
 	}
-	fcn_0045fbb0(*(SCENE_RESOURCE**) (n + 0x1c));
+	d3_ReleaseSceneResourceRef(*(SCENE_RESOURCE**) (n + 0x1c));
 	m_FreeTracked(n);
 }

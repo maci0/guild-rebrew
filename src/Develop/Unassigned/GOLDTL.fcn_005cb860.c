@@ -5,7 +5,7 @@ int __cdecl d2_BuildPersonStatusDesc(void*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 
 /* ADDRESS: GOLDTL 0x005cb860 */
-unsigned int __cdecl fcn_005cb860(short* a0, unsigned int maxCount, int* a2, void* a3)
+unsigned int __cdecl d2_CollectHostilePersonList(short* a0, unsigned int maxCount, int* a2, void* a3)
 {
 	unsigned char* c;
 	int* e;

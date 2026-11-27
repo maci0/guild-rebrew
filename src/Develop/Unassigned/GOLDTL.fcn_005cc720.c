@@ -22,10 +22,10 @@ extern int g_14aad98;
 extern int g_14aad9c[];
 extern char s_6a9680[];
 
-int __cdecl fcn_005cc240(int, int, int);
+int __cdecl d2_ClearAndScrollSubform(int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_005c9090(int, int, int, int, int);
-void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
+void __cdecl d2_ShowCenteredText(int, int, int, int, int);
+void __cdecl d2_DrawPersonCard(int, int, int, int, Item*, int);
 void __cdecl d2_CreateRightAlignedText(int, int, int, int, int);
 void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
@@ -39,17 +39,17 @@ int __cdecl fcn_005cc720(int dialogId, int formId, int altFormId, unsigned int n
 	if (n == 0) {
 		return 0;
 	}
-	y = fcn_005cc240(dialogId, formId, altFormId);
+	y = d2_ClearAndScrollSubform(dialogId, formId, altFormId);
 	half = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width / 2;
 	io_FormatTextBuffer(buf, (int) s_6a9680, *items[0].x0);
-	fcn_005c9090((int) buf, half, 8, half * 2, 0x55);
-	fcn_005c9090(g_14aad98, half, 0x20, half * 2, 0x55);
+	d2_ShowCenteredText((int) buf, half, 8, half * 2, 0x55);
+	d2_ShowCenteredText(g_14aad98, half, 0x20, half * 2, 0x55);
 	io_FormatTextBuffer(buf, (int) s_6a9680, *items[1].x0);
-	fcn_005c9090((int) buf, half, 0x38, half * 2, 0x55);
+	d2_ShowCenteredText((int) buf, half, 0x38, half * 2, 0x55);
 	for (i = 0; i < n; i++) {
 		items[i].x10 = 0x4b;
 		items[i].x14 = i * 0x70 + 0x52;
-		fcn_005ca740(0x4b, i * 0x70 + 0x52, d2_CurrentWindowId, 0x56, &items[i], 1);
+		d2_DrawPersonCard(0x4b, i * 0x70 + 0x52, d2_CurrentWindowId, 0x56, &items[i], 1);
 		d2_CreateRightAlignedText(g_14aad9c[items[i].x2c], 0x14a, i * 0x70 + 0x52 + 0x1e, 200, 0x55);
 	}
 	d2_EnableDialogItems(n, items);

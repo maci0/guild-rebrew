@@ -14,9 +14,9 @@ typedef struct Slot {
 	int rest[30];
 } Slot;
 
-typedef void (__cdecl* fcn_00439c90_f)(char*);
+typedef void (__cdecl* D3_MODEL_RELEASE_FN)(char*);
 
-void __cdecl fcn_0043a3f0(int, char*, Col);
+void __cdecl d3_ChangeObjectTransparency(int, char*, Col);
 void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 #include "Develop/Units/d3/d3_animation.h"
@@ -31,7 +31,7 @@ void __cdecl fcn_00439c90(char* o)
 		*(int*) &col = 0;
 		col.c = 0;
 		col.a = 0xff;
-		fcn_0043a3f0(*(int*) (o + 0x320), o, col);
+		d3_ChangeObjectTransparency(*(int*) (o + 0x320), o, col);
 	}
 	*(int*) (o + 0x310) = 0;
 	*(int*) (o + 0x314) = 0;
@@ -47,7 +47,7 @@ void __cdecl fcn_00439c90(char* o)
 		*(int**) (o + 0x31c) = 0;
 	}
 	if (*(char**) (o + 0x318) != 0) {
-		(*(fcn_00439c90_f*) (*(char**) (o + 0x318) + 0x1ec))(*(char**) (o + 0x318));
+		(*(D3_MODEL_RELEASE_FN*) (*(char**) (o + 0x318) + 0x1ec))(*(char**) (o + 0x318));
 		*(char**) (o + 0x318) = 0;
 	}
 	slots = (Slot*) (o + 0x390);

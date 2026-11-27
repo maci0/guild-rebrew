@@ -43,14 +43,14 @@ int __cdecl io_AppendText();
 void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_BuildPersonStatusDesc(Item5a96* s);
-void __cdecl fcn_005ca740(int, int, int, int, Item5a96*, int);
+void __cdecl d2_DrawPersonCard(int, int, int, int, Item5a96*, int);
 void __cdecl d2_SetElementEnabled(int i, int flag);
 int __cdecl amt_ApplyForOffice(char*, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl amt_GetOfficeGroup(int a);
-void __cdecl fcn_005cadc0(int, int, int, int, void*);
+void __cdecl d2_RunOfficeListDialog(int, int, int, int, void*);
 void __cdecl fcn_0052f7a0(void);
 void __cdecl d2_ShowAmtInfo(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -126,7 +126,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 						items[i].y = i / 2 * 0x41 * 2 + 0x28;
 						items[i].house = houses[i];
 						d2_BuildPersonStatusDesc(&items[i]);
-						fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);
+						d2_DrawPersonCard(items[i].x, items[i].y, d2_CurrentWindowId, 0x56, &items[i], 1);
 					}
 				}
 				if (n < 4 && who[0x168] == 0) {
@@ -158,7 +158,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 			}
 			else if (d2_CurrentElementId == hb) {
 				r = amt_GetOfficeGroup(id);
-				fcn_005cadc0(r, 0, 0, 0, fcn_0052f7a0);
+				d2_RunOfficeListDialog(r, 0, 0, 0, fcn_0052f7a0);
 			}
 			else if (d2_CurrentElementId == hc) {
 				d2_ShowAmtInfo(id, 0);

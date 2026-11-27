@@ -24,7 +24,7 @@ void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl gm_AdjustOfficeHoldersFavor(unsigned short, int);
-int __cdecl fcn_00545670(char*, int, int, char*, int);
+int __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 
@@ -40,7 +40,7 @@ void __cdecl he_RunMeisterpruefungPrompt(char* u)
 		case 0:
 			v = (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8);
 			if (*(char**) (u + 0x74) == 0) {
-				fcn_00545670(u, 0, 0, g_6a5a10, 0x5ec);
+				d2_CreateActionPopupSlot(u, 0, 0, g_6a5a10, 0x5ec);
 			}
 			d2_SetForm(*(int*) (*(char**) (u + 0x74) + 8), 0);
 			io_AppendText((int) g_6811b0);

@@ -4,7 +4,7 @@ extern char g_6b8004;
 extern int g_67a370;
 
 char* __cdecl m_alloc(int size, char* tag);
-void __cdecl fcn_00439e70(char* o);
+void __cdecl d3_InitSceneObject(char* o);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 
 /* ADDRESS: GOLDTL 0x00439750 */
@@ -17,7 +17,7 @@ char* __cdecl d3_SpawnObject(int kind, char* name)
 		*(char**) (o + 0x1e8) = m_alloc(0x1ac, s_67a384);
 		*(float*) (*(char**) (o + 0x1e8) + 0x1a0) = 1.0f;
 	}
-	fcn_00439e70(o);
+	d3_InitSceneObject(o);
 	if (kind >= 5) {
 		switch (name[0]) {
 		case 'p':

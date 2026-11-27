@@ -12,7 +12,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunSoeldnerbuchDialog(int, char*);
-void __cdecl fcn_005c72f0(int);
+void __cdecl d2_RunEquipmentDialog(int);
 
 void __cdecl d2_RunWacheInteriorHud(int a)
 {
@@ -32,7 +32,7 @@ void __cdecl d2_RunWacheInteriorHud(int a)
 				d2_RunSoeldnerbuchDialog(a, g_6aa370);
 			}
 			else if (g_7746a0 == y) {
-				fcn_005c72f0(a);
+				d2_RunEquipmentDialog(a);
 			}
 		}
 	}

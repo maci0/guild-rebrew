@@ -26,7 +26,7 @@ typedef struct {
 extern int d3_ActiveCameraAnimation;
 extern float g_774730;
 
-float __cdecl fcn_00413d10(float* p);
+float __cdecl d3_SampleAverageTerrainHeight(float* p);
 void __cdecl d3_SetNodePosition(View* v, Vec4* p);
 
 void __cdecl d3_AdjustCameraHeight(void)
@@ -37,7 +37,7 @@ void __cdecl d3_AdjustCameraHeight(void)
 	View* v;
 
 	if (((View*)d3_ActiveCamera) != 0) {
-		d = fcn_00413d10(&((View*)d3_ActiveCamera)->x);
+		d = d3_SampleAverageTerrainHeight(&((View*)d3_ActiveCamera)->x);
 		v = ((View*)d3_ActiveCamera);
 		d = d + ((g_6a2560 - g_6a2558) * d3_CameraHeightFraction + g_6a2558) - (v->height + v->y);
 		if (fabs(d) > 5.0) {

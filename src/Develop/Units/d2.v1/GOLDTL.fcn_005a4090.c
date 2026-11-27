@@ -55,7 +55,7 @@ void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 int __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl d2_SetGroupVisibility(int k, int flag);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_ChooseNewLoan(char* p)
@@ -125,7 +125,7 @@ found:
 				main_RunFrameLoop(0, 0x677c7);
 			}
 			d2_SetGroupVisibility(h, 0);
-			fcn_00526120(g_14ab670, 4);
+			d2_ShowModalMessageBox(g_14ab670, 4);
 			d2_SetGroupVisibility(h, 1);
 			*(int*) (p + list[i].slot * 0xc + 0x71) = -1;
 			g_774654 = 1;

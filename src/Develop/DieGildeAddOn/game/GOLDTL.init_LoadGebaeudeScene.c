@@ -29,7 +29,7 @@ int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl ch_SetPosition(int, void*, int);
 char* __cdecl ch_SelectRandomDummy(void);
-int __cdecl fcn_00413160(void);
+int __cdecl d3_FindFreeSceneContext(void);
 void __cdecl ReportClientMessage(const char* msg);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
@@ -74,7 +74,7 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 			fcn_00473150(mode);
 			progress = 0x526bf0;
 		}
-		v = fcn_00413160();
+		v = d3_FindFreeSceneContext();
 		if (v == -1) {
 			ReportClientMessage("init_LoadGebaeudeScene:Could not find a free universe...");
 		}

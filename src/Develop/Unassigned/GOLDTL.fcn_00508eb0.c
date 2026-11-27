@@ -4,7 +4,7 @@ int __cdecl amt_GetRoleTemplate(int idx, Rec18_68da68* out);
 char* __cdecl gm_LookupEntityRecordById(int a1);
 
 /* ADDRESS: GOLDTL 0x00508eb0 */
-int __cdecl fcn_00508eb0(unsigned short id, int a1)
+int __cdecl amt_GetEffectiveRoleLevel(unsigned short id, int a1)
 {
 	Rec18_68da68 rec;
 	int level;
@@ -23,9 +23,9 @@ int __cdecl fcn_00508eb0(unsigned short id, int a1)
 		return level;
 	entity = gm_LookupEntityRecordById(*(int*) (0x7f4d00 + idx));
 	if (entity != 0) {
-		if (level > fcn_00508eb0(*(unsigned short*) entity, 1))
+		if (level > amt_GetEffectiveRoleLevel(*(unsigned short*) entity, 1))
 			return level;
-		return fcn_00508eb0(*(unsigned short*) entity, 1);
+		return amt_GetEffectiveRoleLevel(*(unsigned short*) entity, 1);
 	}
 	return level;
 }

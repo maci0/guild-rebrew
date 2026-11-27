@@ -3,7 +3,7 @@
 void __cdecl sb_StopVoice(char*, int);
 void __cdecl d3snd_SetVoiceFlag0x10(char*, int);
 
-void __cdecl fcn_00418d70(char* p)
+void __cdecl d3snd_StopSourceVoice(char* p)
 {
 	if (*(char**) (p + 0x34) != 0) {
 		sb_StopVoice(*(char**) (p + 0x34), 0);

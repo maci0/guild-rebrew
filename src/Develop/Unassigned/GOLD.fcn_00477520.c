@@ -3,7 +3,7 @@ extern void* g_006ed9dc;
 extern int g_005f323c, g_006310b4, g_00f8a664, g_00f8a66c;
 
 /* ADDRESS: GOLD 0x00477520 */
-void __cdecl fcn_00477520(void)
+void __cdecl d2_ResetSelectedControl(void)
 {
     int idx;
     char *base;

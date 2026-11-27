@@ -35,7 +35,7 @@ extern char g_7f4ca4[];
 
 int __cdecl gm_RandomMod(int n);
 void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt);
-int __cdecl fcn_004a5340(char* e, int a, unsigned int* colors, int c, float r, unsigned short* ids);
+int __cdecl ai_SelectRankedCandidates(char* e, int a, unsigned int* colors, int c, float r, unsigned short* ids);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
@@ -145,7 +145,7 @@ occupied:
 			}
 		}
 	} else {
-		if (fcn_004a5340(e, ncolors, colors, 0,
+		if (ai_SelectRankedCandidates(e, ncolors, colors, 0,
 			(float) (gm_RandomMod(0x40) & 0xffff), ids) == 0) {
 			return 0;
 		}

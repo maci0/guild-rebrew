@@ -11,10 +11,10 @@ int __cdecl d2_CheckOwnerBlocked(void*);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
-void __cdecl fcn_0052a0c0(void*, unsigned int);
+void __cdecl d2_InitPlayerBar(void*, unsigned int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00594340(void);
+void __cdecl d2_ResetBuildingUiSlots(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl d2_GetFormWindow(int, int);
@@ -30,16 +30,16 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl cm_GetCommandResult(int);
 void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl he_AssignActionSlot(void*, int, int, int);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_GetMsgField(int, int);
 void __cdecl fcn_00657a73(int, int*, int);
-void __cdecl fcn_0046f940(int, int*);
+void __cdecl d2_SetLabelText(int, int*);
 void __cdecl d2_RenderProduktionStockRows(int, int, int, int, int);
-void __cdecl fcn_00595e20(void*, int);
-void __cdecl fcn_005963f0(int, int, int, void*);
+void __cdecl d2_SyncWareProduktionSlotGrid(void*, int);
+void __cdecl d2_RefreshWorkshopInventoryGrids(int, int, int, void*);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 
@@ -81,13 +81,13 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 	saved = window;
 	d2_CenterDialogWindows(window);
 	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*p].category == 0x1e) {
-		fcn_0052a0c0(p, 2);
+		d2_InitPlayerBar(p, 2);
 	} else {
-		fcn_0052a0c0(p, 0);
+		d2_InitPlayerBar(p, 0);
 	}
 	d2_SetForm(window, 3);
 	io_AppendText(0xb7);
-	fcn_00594340();
+	d2_ResetBuildingUiSlots();
 	count = 0;
 	d2_SetForm(window, 0);
 	id = 0x70b;
@@ -184,9 +184,9 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 
 								kind = *(unsigned char*) (handle + rec);
 								if (kind != '%' && kind != 0x17) {
-									fcn_00526120(*(int*) 0x14a561c, 0);
+									d2_ShowModalMessageBox(*(int*) 0x14a561c, 0);
 								} else {
-									fcn_00526120(*(int*) 0x14a5618, 0);
+									d2_ShowModalMessageBox(*(int*) 0x14a5618, 0);
 								}
 							} else {
 								int k;
@@ -214,7 +214,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 									q++;
 								} while (k < 4);
 								if (!(ok)) {
-									fcn_00526120(*(int*) 0x14a5620, 0);
+									d2_ShowModalMessageBox(*(int*) 0x14a5620, 0);
 								} else {
 									int found;
 
@@ -409,7 +409,7 @@ after_input:
 				} while (rows);
 			}
 			fcn_00657a73(count, list, 10);
-			fcn_0046f940(listControl, list);
+			d2_SetLabelText(listControl, list);
 			window = saved;
 			*(unsigned int*) ((int) g_1015ea0 + 0x6c + listControl * 0x2f4) = 1;
 			*(unsigned int*) ((int) g_1015ea0 + 0x18 + listControl * 0x2f4) = 0x30;
@@ -421,8 +421,8 @@ after_input:
 				    *(int*) (d2_CurrentWindowId * 0x3cc + 0x10161b4) *
 				    (signed char) building[0x59];
 			}
-			fcn_00595e20(building, entry);
-			fcn_005963f0(saved, 1, 0, building);
+			d2_SyncWareProduktionSlotGrid(building, entry);
+			d2_RefreshWorkshopInventoryGrids(saved, 1, 0, building);
 			if (!main_RunFrameLoop((void*) 0x5944d0, 0x677c7)) {
 				d2_SetForm(saved, 2);
 				building[0x59] = (unsigned char) ((*(int*) (d2_CurrentWindowId * 0x3cc + 0x10161a0) +

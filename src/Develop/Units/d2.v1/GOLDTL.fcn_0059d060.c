@@ -41,7 +41,7 @@ extern int g_14ce8e0;
 extern pos14_7f4c00 gm_GameTime;
 extern char s_6aa490[];
 
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -117,7 +117,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 						}
 					}
 					if (n == 0) {
-						fcn_00526120(g_14abc44, 0);
+						d2_ShowModalMessageBox(g_14abc44, 0);
 					}
 					else {
 						flag = 1;
@@ -131,7 +131,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 						}
 						if (count > 6) {
 							io_FormatTextBuffer(buf, 0x19ef, 6);
-							fcn_00526120((int) buf, 0);
+							d2_ShowModalMessageBox((int) buf, 0);
 						}
 						g_774654 = 2;
 					}

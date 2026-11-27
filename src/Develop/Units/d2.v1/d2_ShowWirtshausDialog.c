@@ -36,12 +36,12 @@ int __cdecl fcn_0050dac0(unsigned short a);
 int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
 int __cdecl d3_AnimateCameraToStoredTransform();
-int __cdecl fcn_00530510();
+int __cdecl sv_ResetSelectionState();
 int __cdecl d2_InitWindowBounds();
 int __cdecl main_RunFrameLoop();
 int __cdecl d2_ShowWirtshausRules();
 int __cdecl fcn_005a0cd0();
-int __cdecl fcn_005a1130();
+int __cdecl d2_ShowWirtshausRoundResult();
 void __cdecl d3_EndCameraAndUiMode(void);
 
 #define v13 ((int *)(frame + 0x04))
@@ -339,7 +339,7 @@ label_5a1b81:
                   } while (main_RunFrameLoop(0x5a1430,0x777c7));
                 }
                 if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
-                  fcn_005a1130(&v14,windowId);
+                  d2_ShowWirtshausRoundResult(&v14,windowId);
                   if (((v13[1] == 5 && v3 == v13[2]) || (v13[1] == 6 && v3 == v21[0])))
                     cm_RequestTransferCurrencyNoKill(*(unsigned int *)(v3 + 4),0xffffffff,0,v34);
                   do {

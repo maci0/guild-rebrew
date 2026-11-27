@@ -10,9 +10,9 @@ extern int __cdecl main_RunFrameLoop(int proc, int a);
 extern void __cdecl d2_ClearRadioGroup(int obj);
 extern void __cdecl d2_DestroyForm(int obj);
 extern void __cdecl d2_UpdateRadioGroup(int obj);
-extern void __cdecl fcn_004b20d0(int a);
+extern void __cdecl hst_SetHistoryScrollModeFlag(int a);
 extern void __cdecl d2_SetFormVisibility(int obj, int a);
-extern int __cdecl fcn_004b41b0(void);
+extern int __cdecl d2_RunChooseMissionDialog(void);
 extern int __cdecl fcn_004e4470(const char *name);
 extern void __cdecl cut_WaitForScript(int a);
 extern int __cdecl gm_FindHeadIconIndex(const char *name);
@@ -32,7 +32,7 @@ extern int g_7e2468;
 extern int main_LoopFlags;
 
 /* ADDRESS: GOLDTL 0x0053dc20 */
-int __cdecl fcn_0053dc20(void)
+int __cdecl d2_RunChooseHistoryDialog(void)
 {
 	char buf[8];
 	int retry;
@@ -108,12 +108,12 @@ label_53dd68:
 				}
 				if (d2_CurrentElementId == lastOption || g_14cf950 == 0x1c) {
 					mode = 0;
-					fcn_004b20d0(mode);
+					hst_SetHistoryScrollModeFlag(mode);
 				}
 			} else {
 				mode = 1;
 label_53de0b:
-				fcn_004b20d0(mode);
+				hst_SetHistoryScrollModeFlag(mode);
 			}
 			*(int *) 0x7766fc = *(int *) 0x7728d4;
 			if (*(int *) 0x7766fc == 0) {
@@ -128,7 +128,7 @@ label_53de37:
 				d2_SelectRadioGroup(dlg, mode);
 			}
 			d2_SetFormVisibility(obj, 0);
-			v13 = fcn_004b41b0();
+			v13 = d2_RunChooseMissionDialog();
 			d2_SetFormVisibility(obj, 1);
 label_53de5c:
 			d2_SetFormVisibility(obj, 0);

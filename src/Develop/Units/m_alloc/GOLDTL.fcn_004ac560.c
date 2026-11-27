@@ -24,10 +24,10 @@ typedef struct HistPair {
 } HistPair;
 /* SIZE 0x10 */
 
-int __cdecl fcn_004ac9c0(HistPair* p);
+int __cdecl hmt_WriteHistoricalDfn(HistPair* p);
 
 /* ADDRESS: GOLDTL 0x004ac560 */
-unsigned int __cdecl fcn_004ac560(void)
+unsigned int __cdecl hmt_CreateBinaryFile(void)
 {
 	char path[0x104];
 	char buf[0x100];
@@ -91,7 +91,7 @@ unsigned int __cdecl fcn_004ac560(void)
 		GetPrivateProfileStringA(key, "end", "-1", buf, 0x100, path);
 		hist.r0[i].end = atoi(buf);
 	}
-	if (fcn_004ac9c0(&hist) != 0) {
+	if (hmt_WriteHistoricalDfn(&hist) != 0) {
 		goto err;
 	}
 	m_FreeTracked(hist.r1);

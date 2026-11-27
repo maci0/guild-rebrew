@@ -32,7 +32,7 @@ int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_00534f30(Book *);
 void __cdecl d3_EndCameraAndUiMode(void);
 
-void __cdecl fcn_005ce460(int cmd)
+void __cdecl d2_RunGesetzbuchDialog(int cmd)
 {
 	int base;
 	int first;
@@ -124,7 +124,7 @@ void __cdecl fcn_005ce460(int cmd)
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop(fcn_005ce460, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_RunGesetzbuchDialog, 0x677c7) != 0);
 	fcn_00534f30(w);
 	d3_EndCameraAndUiMode();
 }

@@ -1,11 +1,11 @@
 #include <string.h>
 #include "Develop/Units/d3/d3_camera.h"
 extern char g_14cf950; extern unsigned char g_1040600; extern char* d3_ObjectListHead;
-int __cdecl fcn_00436aa0(void *flags);
+int __cdecl d3_ResetRenderStates(void *flags);
 int __cdecl fcn_00436f70(int enable);
-void *__cdecl fcn_00437890(void *node);
+void *__cdecl d3_NextVisibleSceneNode(void *node);
 int __cdecl d3_TraverseSceneObjects(int a, int b, int c, const char *s);
-int __cdecl fcn_00438af0(int a);
+int __cdecl d3_InvalidateSceneRenderCache(int a);
 
 /* ADDRESS: GOLDTL 0x00448b10 */
 char __cdecl d3_HandleDebugCameraHotkeys(void)
@@ -43,8 +43,8 @@ char __cdecl d3_HandleDebugCameraHotkeys(void)
 			flags[0] = value ^
 			           ((unsigned char) (~(value >> 1) << 1 ^ value) &
 			            2);
-			fcn_00438af0(0);
-			fcn_00436aa0(flags);
+			d3_InvalidateSceneRenderCache(0);
+			d3_ResetRenderStates(flags);
 			return 0;
 		case 0x2e:
 			node = d3_ActiveCamera;
@@ -53,7 +53,7 @@ char __cdecl d3_HandleDebugCameraHotkeys(void)
 				while (*(int *) (node + 0x218) != 4) {
 					if (node == (char *) 0x1042340)
 						return 0;
-					node = (char *) fcn_00437890(node);
+					node = (char *) d3_NextVisibleSceneNode(node);
 				}
 				if (node == (char *) 0x1042340)
 					return 0;
@@ -72,8 +72,8 @@ char __cdecl d3_HandleDebugCameraHotkeys(void)
 			}
 			d3_TraverseSceneObjects(*(int *) 0x67a370, 0, 0x1ff,
 			             (const char *) 0x456df0);
-			fcn_00438af0(0);
-			fcn_00436aa0(flags);
+			d3_InvalidateSceneRenderCache(0);
+			d3_ResetRenderStates(flags);
 			return 0;
 		case 0x14:
 			*(char *) 0x6b8019 = !*(char *) 0x6b8019;

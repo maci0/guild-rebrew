@@ -15,7 +15,7 @@ void __cdecl d2_RunProduktionDialog(char*);
 void __cdecl d2_OpenTransportPanel(char*);
 void __cdecl d2_ShowPersonalbuch(char*, char*);
 void __cdecl d2_OpenMeisterbriefDialog(char*);
-void __cdecl fcn_00597ec0(char*);
+void __cdecl d2_OpenContactEinkaufPanel(char*);
 
 void __cdecl d2_RunTutorialSchmiedeHud(char* e)
 {
@@ -74,7 +74,7 @@ void __cdecl d2_RunTutorialSchmiedeHud(char* e)
 				d2_OpenMeisterbriefDialog(e);
 			}
 		}
-		fcn_00597ec0(e);
+		d2_OpenContactEinkaufPanel(e);
 	}
 	fcn_005338a0();
 }

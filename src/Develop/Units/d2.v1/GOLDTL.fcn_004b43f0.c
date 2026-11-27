@@ -17,10 +17,10 @@ void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl d2_ChooseMission(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
-int __cdecl fcn_004b41b0(void);
+int __cdecl d2_RunChooseMissionDialog(void);
 
 /* ADDRESS: GOLDTL 0x004b43f0 */
-int __cdecl fcn_004b43f0(int n)
+int __cdecl d2_RunChooseHistoryLevelDialog(int n)
 {
 	int b0;
 	int b1;
@@ -70,7 +70,7 @@ int __cdecl fcn_004b43f0(int n)
 		sel = 0;
 	}
 	d2_SelectRadioGroup(list, sel);
-	if (main_RunFrameLoop(fcn_004b41b0, main_LoopFlags) != 0) {
+	if (main_RunFrameLoop(d2_RunChooseMissionDialog, main_LoopFlags) != 0) {
 		do {
 			d2_UpdateRadioGroup(list);
 			if (g_100f1dc == 2) {
@@ -101,7 +101,7 @@ int __cdecl fcn_004b43f0(int n)
 					}
 				}
 			}
-		} while (main_RunFrameLoop(fcn_004b41b0, main_LoopFlags) != 0);
+		} while (main_RunFrameLoop(d2_RunChooseMissionDialog, main_LoopFlags) != 0);
 	}
 	d2_ClearRadioGroup(list);
 	d2_DestroyForm(dlg);

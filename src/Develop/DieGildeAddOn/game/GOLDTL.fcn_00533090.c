@@ -38,8 +38,8 @@ extern unsigned char** g_7749e4;
 extern char g_7749e8;
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl io_ClearInputState(void);
-void __cdecl fcn_005de62f(void);
-void __cdecl fcn_00412830(unsigned char mask);
+void __cdecl io_ClearMouseAndKeyState(void);
+void __cdecl io_ClearInputButtonFlags(unsigned char mask);
 void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 void __cdecl d3_FreeObjectAnimation(void*);
 void __cdecl d3_SetNodePosition(char*, float*);
@@ -51,10 +51,10 @@ int __cdecl gm_GetEntityUiFlags(int, void*, void*, int);
 void __cdecl d3_UpdateCameraAtScreenEdges(void);
 void __cdecl d3_AnimateCameraToStoredTransform(void);
 void __cdecl d2_UpdateSelectionPanels(void);
-void __cdecl fcn_00530510(void);
+void __cdecl sv_ResetSelectionState(void);
 void __cdecl fcn_005338a0(void);
 void __cdecl d2_HighlightSelectedControl(int);
-void __cdecl fcn_0057e0a0(void);
+void __cdecl d2_StepTutorialStateMachine(void);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 void __cdecl d2_HandleEntityChooser(void);
 void __cdecl gm_ChangeBuildingRoom(int, int);
@@ -85,14 +85,14 @@ void __cdecl d2_UpdateBuildingCameraAndUi(unsigned int flags)
 			if (**g_7749e4 == 0x11 || **g_7749e4 == 0x26 || **g_7749e4 == 0x69) {
 				g_7749e8 = 1;
 			} else if (**g_7749e4 == 0x87) {
-				fcn_0057e0a0();
+				d2_StepTutorialStateMachine();
 			} else {
 				d2_HighlightSelectedControl(0);
 			}
 		} else {
 			d2_HighlightSelectedControl(0);
 		}
-		fcn_00412830(0x10);
+		io_ClearInputButtonFlags(0x10);
 		if (g_14cf950 != 0x1c) {
 			return;
 		}
@@ -119,7 +119,7 @@ void __cdecl d2_UpdateBuildingCameraAndUi(unsigned int flags)
 		gm_UpdateAmbientAnimals();
 		if (g_14ce8e0 && g_7e2aa0
 		    && *(int*) (g_774650 * 8 + 0x7e35c0) == 0x59a340) {
-			fcn_00530510();
+			sv_ResetSelectionState();
 			goto done;
 		}
 		if (g_7746c4 != 0) {
@@ -142,13 +142,13 @@ void __cdecl d2_UpdateBuildingCameraAndUi(unsigned int flags)
 		}
 		if (g_14ce8e0 && (g_7746f4 != 0 || (g_7e2a9c != 0
 		    && g_item_def_table[*(unsigned short*) g_7e2a9c * 0x41] == 0x1d))) {
-			fcn_00530510();
-			fcn_00412830(0x10);
+			sv_ResetSelectionState();
+			io_ClearInputButtonFlags(0x10);
 		}
 		if ((g_7746c4 != 0
 		    && d2_DispatchTutorialEvent(0x1a, (int) g_7746c4, 0, *(unsigned short*) g_7746cc) == 0)
 		    || (g_7746c8 != 0 && d2_DispatchTutorialEvent(0x1c, (int) g_7746c8, 0, 0) == 0)) {
-			fcn_005de62f();
+			io_ClearMouseAndKeyState();
 		}
 		if (g_7746f0 || g_7746f4 || g_14ce8e0 == 0) {
 			goto done;
@@ -176,7 +176,7 @@ void __cdecl d2_UpdateBuildingCameraAndUi(unsigned int flags)
 			    || CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0x4c), g_7e3a40, 0.1f) || v2) {
 				if (g_7746c4 == 0 && g_7746c8 == 0 && g_7746cc == 0) {
 					if (g_774650 == g_774658 && g_7e2a9c) {
-						fcn_00530510();
+						sv_ResetSelectionState();
 					}
 					goto done;
 				}
@@ -239,7 +239,7 @@ void __cdecl d2_UpdateBuildingCameraAndUi(unsigned int flags)
 			}
 			g_7746a8 = 0;
 		}
-		fcn_00530510();
+		sv_ResetSelectionState();
 	}
 done:
 	if (flags & 0x100) {

@@ -1,10 +1,10 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_675310, g_67530c, g_774658, g_774650, d2_SuppressOverlay, d3_CameraHorizontalIndex, d3_CameraVerticalStep;
 extern unsigned int g_6a2520;
-void __cdecl fcn_00530510(void); void __cdecl sv_ClearObjectSelection(void);
+void __cdecl sv_ResetSelectionState(void); void __cdecl sv_ClearObjectSelection(void);
 void __cdecl init_LoadObjektScene(int);
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_0043aa30(int);
+void __cdecl d3_InitUniverse(int);
 void __cdecl d3_UpdateBuildingView(void*, int);
 void __cdecl d3_SetupInteriorScene(void*, void*);
 void __cdecl d3_SetNodePosition(void*, void*);
@@ -13,7 +13,7 @@ void __cdecl fcn_005338a0(void);
 void* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
 void __cdecl evt_WaitForScriptExit(int);
-void __cdecl fcn_0043a9c0(int);
+void __cdecl d3_DeinitUniverse(int);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_0058f700(void*);
 void __cdecl fcn_0058fdc0(void*);
@@ -55,7 +55,7 @@ void __cdecl d2_EnterObjektInterior(void* objMessage)
 	save[4] = *(int*) &d3_CameraTargetRotation;
 	save[5] = *(int*) &g_7e3a54;
 	save[6] = *(int*) &g_7e3a58;
-	fcn_00530510();
+	sv_ResetSelectionState();
 	sv_ClearObjectSelection();
 	v1 = *(char*) (*(unsigned short*) message + (unsigned long)&init_SceneContextIndices);
 	if (v1 != (char) 0xfe) {
@@ -66,7 +66,7 @@ void __cdecl d2_EnterObjektInterior(void* objMessage)
 		}
 		*(unsigned short*) (*(int*) &g_7746c8 + 0x29) = *(unsigned short*)message;
 		d3_SelectSceneContext(*(char*) (*(unsigned short*)message + (unsigned long)&init_SceneContextIndices), 0);
-		fcn_0043aa30(3);
+		d3_InitUniverse(3);
 		d3_UpdateBuildingView(*(void**) &g_7746c8, *(unsigned short*)message);
 		d3_SetupInteriorScene(*(void**) &g_7746c8, message);
 		if (*(void**) &g_67a370 != 0) {
@@ -133,7 +133,7 @@ void __cdecl d2_EnterObjektInterior(void* objMessage)
 		break;
 	}
 	*(char*) &g_772d10 = 1;
-	fcn_00530510();
+	sv_ResetSelectionState();
 	sv_ClearObjectSelection();
 	fcn_005338a0();
 	*(void**) &g_7ea360 = 0;
@@ -154,7 +154,7 @@ void __cdecl d2_EnterObjektInterior(void* objMessage)
 	if (*(int*) &evt_LastGfxScriptId != -1) {
 		evt_WaitForScriptExit(*(int*) &evt_LastGfxScriptId);
 	}
-	fcn_0043a9c0(3);
+	d3_DeinitUniverse(3);
 	d3_SelectSceneContext(save10, 0);
 	*(void**) &g_7746cc = 0;
 	*(unsigned short*) (*(int*) &g_7746c8 + 0x29) = 0xfd;

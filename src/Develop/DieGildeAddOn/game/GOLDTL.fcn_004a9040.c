@@ -13,7 +13,7 @@ extern float g_664458;
 extern float g_6629e8;
 
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, unsigned short* out);
+int __cdecl ai_SelectRankedCandidates(char* e, int a, int* b, float c, float r, unsigned short* out);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 int __cdecl ai_CheckAction02aPredicate(char* unused1, char* e, char* ctx, char* unused2, char* out)
@@ -25,7 +25,7 @@ int __cdecl ai_CheckAction02aPredicate(char* unused1, char* e, char* ctx, char* 
 
 	mask[0] = 0xf00500;
 	mask[1] = 0xf00500;
-	if (fcn_004a5340(e, 2, mask, 33.0f, gm_RandomMod(0x18) + g_664458, idx) == 0) {
+	if (ai_SelectRankedCandidates(e, 2, mask, 33.0f, gm_RandomMod(0x18) + g_664458, idx) == 0) {
 		return 0;
 	}
 	d1 = gm_CalcEntityFavor(idx[0], idx[1], 1);

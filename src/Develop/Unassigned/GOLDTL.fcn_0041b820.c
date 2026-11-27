@@ -2,7 +2,7 @@ extern float g_6b5df8[3];
 extern float g_6777b0[3];
 extern float g_6777bc[3];
 
-void __cdecl fcn_0041b870(void);
+void __cdecl d3_ApplyGammaRamp(void);
 
 /* ADDRESS: GOLDTL 0x0041b820 */
 void __cdecl d3_SetGammaParams(float* brightness, float* contrast, float* gamma)
@@ -14,7 +14,7 @@ void __cdecl d3_SetGammaParams(float* brightness, float* contrast, float* gamma)
 		g_6777b0[i] = contrast[i];
 		g_6777bc[i] = gamma[i];
 	}
-	fcn_0041b870();
+	d3_ApplyGammaRamp();
 }
 unsigned char _dpad_677674[316] = {
     0x70, 0x4c, 0x69, 0x63, 0x68, 0x74, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0a, 0x00, 0x00, 0x00,

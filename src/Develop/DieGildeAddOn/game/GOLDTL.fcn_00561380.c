@@ -47,9 +47,9 @@ void __cdecl d3snd_PlayObjectSound(int, int, int, int);
 void *__cdecl d3_FindSceneObject(void *, int, int, char *);
 void __cdecl d3_TransformPoint(char *, char *, float *);
 void __cdecl cm_SendCopyEntityData(void *);
-void __cdecl fcn_00418000(int, float *, int, float, float, float, float, float, float, float *, int, int, int);
+void __cdecl d3_CreateSmokeEmitter(int, float *, int, float, float, float, float, float, float, float *, int, int, int);
 void __cdecl d3_SpawnRockDebrisEffect(int, float *, int, float, float, float, float, float, float, float, float, int);
-void __cdecl fcn_00417d00(int, float *, int, float, float, float, float, int);
+void __cdecl d3_CreateExplosionEmitter(int, float *, int, float, float, float, float, int);
 int __cdecl gm_RandomMod(unsigned short);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #pragma pack(push, 1)
@@ -348,11 +348,11 @@ void __cdecl he_RunSabotage(void *action)
 			color[2] = 0xc0;
 			color[1] = 0xc0;
 			color[0] = 0xc0;
-			fcn_00418000(v10, pos, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f, 140.0f, 35.0f,
+			d3_CreateSmokeEmitter(v10, pos, 0x1e, 15.0f, 50.0f, 100.0f, 150.0f, 140.0f, 35.0f,
 				pos + 4, 400, 6, *(int *)color);
 			d3_SpawnRockDebrisEffect(v10, pos, 0x1e, 5.0f, 2.5f, 1.0f, 3.0f, -3.0f, 4.0f, 7.0f, 8.0f,
 				*(int *)color);
-			fcn_00417d00(v10, pos, (int)(v24 * 40.0f), v24 * 140.0f, v24 * 100.0f,
+			d3_CreateExplosionEmitter(v10, pos, (int)(v24 * 40.0f), v24 * 140.0f, v24 * 100.0f,
 				20.0f, 60.0f, 0x50);
 		label_562049:
 			*(MSGCOLOR *)(p + 0x52) = *(MSGCOLOR *)&gm_GameTime;

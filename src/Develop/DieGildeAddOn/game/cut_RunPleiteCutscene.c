@@ -26,7 +26,7 @@ void __cdecl d3_InitSkyLayer(char* s);
 int __cdecl evt_StartGfxScript(char* s, char* buf);
 int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
 void __cdecl d3snd_QueueSoundIfAllowed(int a, int b, char* s, int c, int d);
-void __cdecl fcn_004e4c40(int a);
+void __cdecl d3_CreateSceneRain(int a);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl d2_ShowMessageBox(void* buf, int n);
 void __cdecl cut_FadeToBlack(void);
@@ -90,7 +90,7 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 		d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d2d8, 2, 500);
 		r = cut_WaitForTimeoutOrInput(0x3e80, 0, 0);
 		if (r == 0) {
-			fcn_004e4c40(250);
+			d3_CreateSceneRain(250);
 			r = cut_WaitForTimeoutOrInput(0x2af8, 0, 0);
 			if (r == 0) {
 				d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d2d8, 3, 0x251c);

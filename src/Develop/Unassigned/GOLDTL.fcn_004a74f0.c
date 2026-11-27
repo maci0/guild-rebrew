@@ -12,7 +12,7 @@ typedef struct {
 extern Card_1007ce0 g_1007ce0[24];
 
 int __cdecl gm_FindCardThreeOfAKind(int* ids, int* out, int flag);
-int __cdecl fcn_004a7770(int* ids, int zero, int kind, int* found);
+int __cdecl gm_FindCardRankGroup(int* ids, int zero, int kind, int* found);
 
 int __cdecl gm_CheckCardFullHouse(int* ids, int* out, int kind)
 {
@@ -30,7 +30,7 @@ int __cdecl gm_CheckCardFullHouse(int* ids, int* out, int kind)
 		return 0;
 	}
 	v = ((Slot10*)g_1007ce0)[out[0]].a;
-	if (fcn_004a7770(ids, 0, v, &kind) != 2) {
+	if (gm_FindCardRankGroup(ids, 0, v, &kind) != 2) {
 		return 0;
 	}
 	n = 3;

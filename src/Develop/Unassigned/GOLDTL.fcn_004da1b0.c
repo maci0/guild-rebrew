@@ -4,15 +4,15 @@ extern char g_68bfd0[];
 
 void __cdecl d2_SelectFont(int c);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
-void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
+void __cdecl d2_DrawWordWrappedText(int, int, int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x004da1b0 */
-void __cdecl fcn_004da1b0(void)
+void __cdecl d2_DrawElapsedTimer(void)
 {
 	char buf[0x80];
 
 	d2_SelectFont(0x54);
 	fcn_0064d41a(buf, g_68bfd0, (((unsigned int)g_6b7fac) - (*(unsigned int*)&g_772f54)) * 14 / 60000,
 	    (((unsigned int)g_6b7fac) - (*(unsigned int*)&g_772f54)) * 14 / 1000 % 60, (((unsigned int)g_6b7fac) - (*(unsigned int*)&g_772f54)) * 14 % 1000);
-	fcn_0046bd20(0, 10, 200, 0x18, g_77250c, buf, 0x30);
+	d2_DrawWordWrappedText(0, 10, 200, 0x18, g_77250c, buf, 0x30);
 }

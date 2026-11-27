@@ -6,19 +6,19 @@ typedef struct {
 	unsigned int color;
 	float u;
 	float v;
-} Vtx47bdd0;
+} D2_VERTEX;
 
 typedef struct {
-	Vtx47bdd0 v[6];
+	D2_VERTEX v[6];
 	int tex;
-} Quad47bdd0;
+} D2_QUAD;
 
 typedef struct {
 	char pad_0[0x20];
 	int handle;
 	char pad_24[0x54 - 0x24];
 	int size;
-} Tex47bdd0;
+} D2_TEX;
 
 typedef struct {
 	unsigned short field_0;
@@ -29,27 +29,27 @@ typedef struct {
 	int count2;
 	int *cells;
 	int size;
-} Sprite47bdd0;
+} D2_SPRITE;
 
 typedef struct {
 	float u;
 	float v;
-	Tex47bdd0 *tex;
-} Cell47bdd0;
+	D2_TEX *tex;
+} D2_SPRITE_CELL;
 
-void __cdecl d2_SetQuadVertexColor(Quad47bdd0 *q, unsigned char r, unsigned char g,
+void __cdecl d2_SetQuadVertexColor(D2_QUAD *q, unsigned char r, unsigned char g,
                           unsigned char b);
 int __cdecl d2_QueueScaledQuad(int x, int y, char *sprite, float scale);
-Quad47bdd0 *__cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex,
+D2_QUAD *__cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex,
                                  void *src);
-Quad47bdd0 *__cdecl d2_QueueClippedTexturedQuad(float u, float v, int w, int h,
-                                 Tex47bdd0 *tex, int x, int y);
+D2_QUAD *__cdecl d2_QueueClippedTexturedQuad(float u, float v, int w, int h,
+                                 D2_TEX *tex, int x, int y);
 
 /* ADDRESS: GOLDTL 0x0047bdd0 */
-int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
+int __cdecl d2_DrawTintedSprite(int x, int y, D2_SPRITE *sprite, float scale,
                          unsigned char r, unsigned char g, unsigned char b)
 {
-	Quad47bdd0 *q;
+	D2_QUAD *q;
 	int tile;
 	int whole;
 	int count;
@@ -59,7 +59,7 @@ int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
 
 	count = sprite->count;
 	if (count == 1 && sprite->count2 == 1) {
-		q = (Quad47bdd0 *) d2_QueueScaledQuad(x, y, (char *) sprite, scale);
+		q = (D2_QUAD *) d2_QueueScaledQuad(x, y, (char *) sprite, scale);
 		if (q)
 			d2_SetQuadVertexColor(q, r, g, b);
 		return (int) q;
@@ -89,10 +89,10 @@ int __cdecl fcn_0047bdd0(int x, int y, Sprite47bdd0 *sprite, float scale,
 			do {
 				whole = sprite->size;
 				q = d2_QueueClippedTexturedQuad(
-				    ((Cell47bdd0 *) ((char *) sprite->cells + off))->u,
-				    ((Cell47bdd0 *) ((char *) sprite->cells + off))->v,
+				    ((D2_SPRITE_CELL *) ((char *) sprite->cells + off))->u,
+				    ((D2_SPRITE_CELL *) ((char *) sprite->cells + off))->v,
 				    whole, whole,
-				    ((Cell47bdd0 *) ((char *) sprite->cells + off))->tex,
+				    ((D2_SPRITE_CELL *) ((char *) sprite->cells + off))->tex,
 				    (i % n) * whole + x, (i / n) * whole + y);
 				if (q)
 					d2_SetQuadVertexColor(q, r, g, b);

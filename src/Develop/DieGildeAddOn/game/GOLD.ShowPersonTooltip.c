@@ -16,7 +16,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 int __cdecl d2_BuildPersonStatusDesc(struct sel*);
-void __cdecl fcn_005caaa0(int, int, int, struct sel*);
+void __cdecl d2_DrawPersonTile(int, int, int, struct sel*);
 float __cdecl fcn_00505e30(unsigned short);
 int __cdecl gm_GetOppositeStatIndex(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -51,7 +51,7 @@ void __cdecl ShowPersonTooltip(char* w)
 	memset(&info, 0, sizeof(info));
 	info.who = w;
 	if (d2_BuildPersonStatusDesc(&info) != 0) {
-		fcn_005caaa0(0xa6, 5, d2_CurrentWindowId, &info);
+		d2_DrawPersonTile(0xa6, 5, d2_CurrentWindowId, &info);
 	}
 	d2_SetForm(0, 2);
 	if (w[2] != 0x14) {

@@ -32,7 +32,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(unsigned char*, int);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -110,7 +110,7 @@ int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 					cm_RequestCopyEntityData(*(int*) (o2 + 4), *(int*) (o1 + 4), b, 1);
 					cm_RequestModifyHealth(*(int*) (e + 4), -3);
 					io_FormatTextBuffer(text, 0x1de7, *(unsigned short*) o1, *(unsigned short*) o2);
-					fcn_00526120(text, 0);
+					d2_ShowModalMessageBox(text, 0);
 					if (o1[2] == 6 || o1[2] == 7) {
 						io_FormatTextBuffer(text, 0x1de8, *(unsigned short*) o2, *(unsigned short*) e);
 						he_PostEntityMessage(*(int*) (o1 + 4), *(int*) (o1 + 4), text, 0, 0x5ec, 0);

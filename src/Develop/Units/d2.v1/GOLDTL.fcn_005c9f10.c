@@ -5,12 +5,12 @@ extern char g_679060[];
 int __cdecl d2_SetElementEnabled();
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl io_FormatTextBuffer();
-int __cdecl fcn_005c9090();
+int __cdecl d2_ShowCenteredText();
 int __cdecl fcn_005cf720();
 
 extern char * g_1015ea0; extern char * g_772500; extern int d2_CurrentWindowId; extern unsigned short g_774970;
 /* ADDRESS: GOLDTL 0x005c9f10 */
-int __cdecl fcn_005c9f10(int a0, int a1, int a2, int a3, int a4, unsigned short* a5)
+int __cdecl d2_DrawOfficeCandidateGrid(int a0, int a1, int a2, int a3, int a4, unsigned short* a5)
 {
 	char v1;
 	int v2;
@@ -110,15 +110,15 @@ label_5ca044:
 					v12 = -(unsigned int) ((v12 & 0x200) != 0) & 0x23;
 				}
 				io_FormatTextBuffer(caption, 0x6ac96c, *(unsigned short*) v15[-6]);
-				fcn_005c9090(caption, v6, v15[-1], 0xca, 0x56);
+				d2_ShowCenteredText(caption, v6, v15[-1], 0xca, 0x56);
 				io_FormatTextBuffer(caption, "%s", (-(unsigned int) (*(char*) (v15[-6] + 9) != 0) & 0x28) + 0x253 + v12);
-				fcn_005c9090(caption, v6, v15[-1] + 0xf, 0xca, 0x56);
+				d2_ShowCenteredText(caption, v6, v15[-1] + 0xf, 0xca, 0x56);
 			} else {
 				v3 = (unsigned short*) v15[-6];
 				io_FormatTextBuffer(caption, 0x6ac964, (-(unsigned int) (*(char*) ((int) v3 + 9) != 0) & 10) + 0x114 + (unsigned int) *(unsigned char*) ((int) v3 + 0xd), *v3);
-				fcn_005c9090(caption, v6, v15[-1], 0xca, 0x56);
+				d2_ShowCenteredText(caption, v6, v15[-1], 0xca, 0x56);
 				io_FormatTextBuffer(caption, 0x6ac95c, *(unsigned short*) v15[-6]);
-				fcn_005c9090(caption, v6, v15[-1] + 0xf, 0xca, 0x56);
+				d2_ShowCenteredText(caption, v6, v15[-1] + 0xf, 0xca, 0x56);
 			}
 			v3 = a5;
 			if ((unsigned short*) v15[-6] != a5 && *(char*) &((unsigned short*) v15[-6])[1] != 6) {
@@ -144,7 +144,7 @@ label_5ca044:
 		} else {
 			d2_AddElementToWindow((v6 - (int) *(short*) ((int) g_772500 + 0x1a2ac) / 2) - 3, v10 + 1, 0x4fb, d2_CurrentWindowId);
 			io_FormatTextBuffer(caption, "%s", v15[-3] + 0x253);
-			fcn_005c9090(caption, v6, v15[-1], 0xca, 0x56);
+			d2_ShowCenteredText(caption, v6, v15[-1], 0xca, 0x56);
 			((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].value_05c = 1;
 			*(int*) (&((D2_CONTROL_TL*) ((int) g_1015ea0))[v15[-5]].associated_object) = 0;
 			d2_SetElementEnabled(v15[-5], 0);

@@ -35,7 +35,7 @@ extern const double g_662b40;
 void __cdecl d3snd_SetVoiceFlag0x10(int* voice, int enabled);
 SOUND_SOURCE* __cdecl d3snd_FindFreeSource(void);
 SOUND_SOURCE* __cdecl d3snd_AttachSoundSource(char* voice, char* objekt, int volume, float range);
-void __cdecl fcn_00418d70(SOUND_SOURCE* source);
+void __cdecl d3snd_StopSourceVoice(SOUND_SOURCE* source);
 void __cdecl d3_UpdateSoundSourcePan(SOUND_SOURCE* source);
 void __cdecl d3_UpdateSoundSourceVolume(SOUND_SOURCE* source);
 

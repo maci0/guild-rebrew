@@ -45,7 +45,7 @@ extern int g_102d02c;
 extern short g_14ce8c0;
 extern short g_14ce8c2;
 
-Glyph* __cdecl fcn_0047b620(char* font, int c);
+Glyph* __cdecl d2_GetBankEntry(char* font, int c);
 
 void __cdecl d2_HandleSliderInput(void)
 {
@@ -79,10 +79,10 @@ void __cdecl d2_HandleSliderInput(void)
 	}
 	if (g_14ce8d0 != 0) {
 		font = (*(char**)&s->data);
-		g = fcn_0047b620(font, 0);
-		fcn_0047b620(font, 1);
-		fcn_0047b620(font, 3);
-		bar = fcn_0047b620(font, 6);
+		g = d2_GetBankEntry(font, 0);
+		d2_GetBankEntry(font, 1);
+		d2_GetBankEntry(font, 3);
+		bar = d2_GetBankEntry(font, 6);
 		s = &((D2_CONTROL_TL*)g_1015ea0)[d2_CurrentElementId];
 		flags = s->payload.fields.value_098;
 		max = s->payload.fields.value_094;

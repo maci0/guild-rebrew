@@ -46,7 +46,7 @@ int __cdecl ls_LoadCrimeRecords(void* stream);
 int __cdecl ls_LoadGameMatrices(void* stream);
 int __cdecl ls_LoadStatsAndCrimeGrid(unsigned int stream);
 int __cdecl fcn_00524b40(void* stream);
-int __cdecl fcn_00524b50(void* stream);
+int __cdecl ls_LoadActionsAndEvents(void* stream);
 int __cdecl ls_LoadCutscenes(void* stream);
 int __cdecl ls_LoadHistoryState(void* stream);
 int __cdecl ls_LoadCommandQueue(void* stream);
@@ -178,7 +178,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	if (ls_SaveVersion >= 0x1002a && fcn_00524b40(stream) == 0) {
 		goto fail;
 	}
-	if (fcn_00524b50(stream) == 0) {
+	if (ls_LoadActionsAndEvents(stream) == 0) {
 		goto fail;
 	}
 	if (ls_LoadCutscenes(stream) == 0) {

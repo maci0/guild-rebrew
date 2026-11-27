@@ -2,7 +2,7 @@
 
 void __cdecl d3_SetNodePosition(char*, void*);
 
-void __cdecl fcn_00438ba0(int a1, int a2, int a3, int a4)
+void __cdecl d3_SetNodePositionXYZ(int a1, int a2, int a3, int a4)
 {
 	int buf[4];
 

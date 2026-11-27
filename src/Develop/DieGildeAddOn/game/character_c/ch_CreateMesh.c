@@ -57,7 +57,7 @@ extern char g_6b5c60[];
 D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
-void __cdecl fcn_00404b60(char*, int, ...);
+void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);
 
 #include <stdarg.h>
 #include "../ch_queue.h"
@@ -151,7 +151,7 @@ int __cdecl ch_CreateMesh(char* model, char* resource, float* position)
     }
     ch_PreloadCharacterMotions(model, 2, "bewegung/gehen", "stehen/stehen_newnoise");
     if (ch_LowPolyMode != 0 && *(int*) (model + 0x22c) != 0) {
-        fcn_00404b60(model, 1, "gehen");
+        d3_PreloadLowPolyAnims(model, 1, "gehen");
         ch_Updatelowpoly(model);
     }
     *(unsigned short*) (model + 0x8c) |= 0x1000;

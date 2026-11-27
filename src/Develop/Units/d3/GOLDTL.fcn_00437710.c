@@ -5,20 +5,20 @@ typedef struct {
 	unsigned char pad05 : 3;
 	char pad1[3];
 	int fill;
-} D3dCfg_437710;
+} D3_DISPLAY_CONFIG;
 // SIZE 0x8
 
 int __cdecl io_OpenRegistryKey(const char* sub, int mode);
 int __cdecl io_ReadRegistryDword(int h, const char* name);
 int __cdecl io_TryReadRegistryDword(int h, const char* name, int* out);
 int __cdecl io_ReadRegistryString(int h, const char* name, char* out);
-void __cdecl fcn_00410430(int h);
+void __cdecl io_CloseRegistryKey(int h);
 int __cdecl _strcmpi(const char* a, const char* b);
 
 
 /* Reads the Direct3D display options from the registry over the defaults. */
 /* ADDRESS: GOLDTL 0x00437710 */
-char __cdecl fcn_00437710(D3dCfg_437710* cfg, const char* key, D3dCfg_437710* def)
+char __cdecl d3_LoadDisplayConfigFromRegistry(D3_DISPLAY_CONFIG* cfg, const char* key, D3_DISPLAY_CONFIG* def)
 {
 	int v;
 	int n;
@@ -26,7 +26,7 @@ char __cdecl fcn_00437710(D3dCfg_437710* cfg, const char* key, D3dCfg_437710* de
 	char mode[0x100];
 
 	if (cfg != def) {
-		n = sizeof(D3dCfg_437710);
+		n = sizeof(D3_DISPLAY_CONFIG);
 		/*
 		 * TODO: replace this inline-asm copy with proper C once a spelling is
 		 * found; recorded C fill/copy probes did not emit the prelude
@@ -54,7 +54,7 @@ char __cdecl fcn_00437710(D3dCfg_437710* cfg, const char* key, D3dCfg_437710* de
 	if (h != -1) {
 		v = io_ReadRegistryDword(h, "d3d_registry_version");
 		if (v != 3) {
-			fcn_00410430(h);
+			io_CloseRegistryKey(h);
 		} else {
 			if (io_TryReadRegistryDword(h, "d3d_beautiful", &v) != 0) {
 				cfg->beautiful = v;
@@ -76,7 +76,7 @@ char __cdecl fcn_00437710(D3dCfg_437710* cfg, const char* key, D3dCfg_437710* de
 			if (io_TryReadRegistryDword(h, "d3d_shadows", &v) != 0) {
 				cfg->shadows = v;
 			}
-			fcn_00410430(h);
+			io_CloseRegistryKey(h);
 			return 1;
 		}
 	}

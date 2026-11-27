@@ -14,7 +14,7 @@ void __cdecl ReportClientMessage(char* text);
 void __cdecl d2_ClearOwnerDirtyRects(char* base);
 void __cdecl d2_DrawField(int idx, int surf);
 void __cdecl d2_DrawValueGauge(int idx, int surf);
-void __cdecl fcn_0046bd20(int x, int y, int w, int h, char* surf, char* text, int flags);
+void __cdecl d2_DrawWordWrappedText(int x, int y, int w, int h, char* surf, char* text, int flags);
 void __cdecl d2_DrawWindow(int idx, char* surf);
 int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h);
 void __cdecl d2_SelectFont(int idx);
@@ -150,7 +150,7 @@ void __cdecl d2_RenderFormToTextures(int k)
 						} else {
 							sy = ybase - *(int*) (base + 0x18c) + (*(D2_CONTROL_TL*) obj).y - 1;
 						}
-						fcn_0046bd20(sx, sy, top, (*(D2_CONTROL_TL*) obj).height, surf,
+						d2_DrawWordWrappedText(sx, sy, top, (*(D2_CONTROL_TL*) obj).height, surf,
 						             obj + 0x8c, flags);
 						break;
 					case 0x41:
@@ -172,7 +172,7 @@ void __cdecl d2_RenderFormToTextures(int k)
 							if ((*(D2_CONTROL_TL*) obj).value_070) {
 								flags |= 0x10;
 							}
-							fcn_0046bd20(sx, sy, (*(D2_CONTROL_TL*) obj).width, (*(D2_CONTROL_TL*) obj).height,
+							d2_DrawWordWrappedText(sx, sy, (*(D2_CONTROL_TL*) obj).width, (*(D2_CONTROL_TL*) obj).height,
 							             surf, *(char**) (&(*(D2_CONTROL_TL*) obj).value_088), flags);
 							d2_SelectFont(d2_CurrentFont);
 						}

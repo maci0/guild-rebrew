@@ -6,7 +6,7 @@
  * `call dword [0x...]` rather than a direct rel32. */
 typedef void (__stdcall *thunk_t)(int);
 
-void __cdecl fcn_00410430(int value)
+void __cdecl io_CloseRegistryKey(int value)
 {
     ((thunk_t) *(void**) 0x00662010)(value);
 }

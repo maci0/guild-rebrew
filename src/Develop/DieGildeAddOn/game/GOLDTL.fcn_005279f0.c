@@ -3,7 +3,7 @@
 typedef struct {
     unsigned char kind, unknown001[0x22];
     short entries[0x40]; unsigned char unknown0a3[0x1aa];
-} BuildingProto5279f0;
+} GROUNDPLAN_BLD_PROTO;
 #pragma pack(pop)
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
@@ -69,7 +69,7 @@ int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strupr(char*);
 
 /* ADDRESS: GOLDTL 0x005279f0 */
-void __cdecl fcn_005279f0(unsigned int inputFlags)
+void __cdecl d2_UpdateBuildingGroundplan(unsigned int inputFlags)
 {
 	int v9;
 	int v6;

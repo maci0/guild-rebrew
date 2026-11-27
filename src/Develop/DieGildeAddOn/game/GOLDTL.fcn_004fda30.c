@@ -8,7 +8,7 @@ extern HEAD_SET g_6918e8[];
 
 
 int __cdecl gm_RandomMod(unsigned short n);
-void __cdecl fcn_004fdd70(HEAD_SET* hs);
+void __cdecl gm_ResolveHeadSetIcons(HEAD_SET* hs);
 
 /* ADDRESS: GOLDTL 0x004fda30 */
 HEAD_SET* __cdecl gm_SelectEntityHeadSet(unsigned int entityIndex)
@@ -69,7 +69,7 @@ HEAD_SET* __cdecl gm_SelectEntityHeadSet(unsigned int entityIndex)
 				break;
 			}
 			if (*headEntry == roleId) {
-				fcn_004fdd70(&headSet[idx]);
+				gm_ResolveHeadSetIcons(&headSet[idx]);
 				return &headSet[idx];
 			}
 			idx++;
@@ -94,7 +94,7 @@ HEAD_SET* __cdecl gm_SelectEntityHeadSet(unsigned int entityIndex)
 				break;
 			}
 			if (*headEntry == *(unsigned char*) (entOff + 0x7f4e05)) {
-				fcn_004fdd70(&headSet[idx]);
+				gm_ResolveHeadSetIcons(&headSet[idx]);
 				return &headSet[idx];
 			}
 			idx++;

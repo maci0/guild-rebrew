@@ -46,7 +46,7 @@ void __cdecl gm_ModifyHealth(int, int);
 void __cdecl d2_RunSeanceDialog(char*, char*);
 void __cdecl d2_RunSeanceItemsDialog(char*, char*);
 void __cdecl d2_RunSeanceTreasureDialog(char*, char*);
-void __cdecl fcn_00526120(int, int);
+void __cdecl d2_ShowModalMessageBox(int, int);
 
 /* ADDRESS: GOLDTL 0x0058ee70 */
 void __cdecl d2_RunSeanceAction(char* e)
@@ -90,6 +90,6 @@ void __cdecl d2_RunSeanceAction(char* e)
 		}
 		d3_EndCameraAndUiMode();
 	} else {
-		fcn_00526120(g_14b5674, 0);
+		d2_ShowModalMessageBox(g_14b5674, 0);
 	}
 }

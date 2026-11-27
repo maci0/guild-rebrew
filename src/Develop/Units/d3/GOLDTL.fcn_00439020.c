@@ -23,10 +23,10 @@ typedef struct
 	int f4c;
 	int f50;
 	int f54;
-} fcn_00439020_Cfg;
+} D3_INIT_CONFIG;
 // SIZE 0x58
 
-extern fcn_00439020_Cfg g_10529e0;
+extern D3_INIT_CONFIG g_10529e0;
 extern char g_6b8004;
 extern char g_1042fc4;
 extern char g_1042fc5;
@@ -55,19 +55,19 @@ extern float g_1052bb4;
 extern float g_1052bb8;
 extern char g_10432c0[];
 
-void __cdecl fcn_00439e70(char* o);
+void __cdecl d3_InitSceneObject(char* o);
 void __cdecl fcn_00450a30(int nlist, int nactive);
 void __cdecl d3_InitTextures(unsigned int n, int a2);
-void __cdecl fcn_00436aa0(int* a);
+void __cdecl d3_ResetRenderStates(int* a);
 void __cdecl fcn_00436f70(char on);
 void __cdecl fcn_0043bc00(char a, char b);
 void __cdecl d3_SelectShadowTextureFormat(int, int, int, int, int, int, int);
 void __cdecl InitColorTable(void);
-void __cdecl fcn_00438da0(float, float, float, float, int, int, int, unsigned int, unsigned int);
+void __cdecl d3_SetViewport(float, float, float, float, int, int, int, unsigned int, unsigned int);
 void __cdecl d3_InitRenderVertexBuffer(void);
 
 /* ADDRESS: GOLDTL 0x00439020 */
-char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
+char __cdecl d3_Init(D3_INIT_CONFIG* cfg)
 {
 	unsigned int n;
 
@@ -104,8 +104,8 @@ char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 	g_1042fc0 = 6;
 	g_1042557 |= 2;
 	g_1043277 |= 2;
-	fcn_00439e70(((char*)&g_1043060));
-	fcn_00439e70(d3_SceneObjectSentinel);
+	d3_InitSceneObject(((char*)&g_1043060));
+	d3_InitSceneObject(d3_SceneObjectSentinel);
 	n = g_14ce7e0;
 	d3_ObjectListHead = d3_SceneObjectSentinel;
 	g_1042538 = ((char*)&g_1043060);
@@ -124,7 +124,7 @@ char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 	fcn_00450a30(0x200, n);
 	g_6b8008 = 0;
 	d3_InitTextures(g_10529e0.a18, g_10529e0.a1c);
-	fcn_00436aa0(&g_67a374);
+	d3_ResetRenderStates(&g_67a374);
 	fcn_00436f70(1);
 	d3_FogColor = 0;
 	g_6b7ff8 = g_10529e0.b34;
@@ -132,7 +132,7 @@ char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 	d3_SelectShadowTextureFormat(g_10529e0.bpp, 0x80, 0x100, 0x20, 0, 1, 0x20);
 	InitColorTable();
 	g_6b8018 = 1;
-	fcn_00438da0(g_10529e0.x, g_10529e0.y, g_10529e0.cw, g_10529e0.ch, g_10529e0.f4c, g_10529e0.f50, g_10529e0.f54, g_10529e0.w, g_10529e0.h);
+	d3_SetViewport(g_10529e0.x, g_10529e0.y, g_10529e0.cw, g_10529e0.ch, g_10529e0.f4c, g_10529e0.f50, g_10529e0.f54, g_10529e0.w, g_10529e0.h);
 	d3_CurrentContextIndex = 0;
 	g_1052bc4 = (float) atan2(g_1052bbc, g_10432a4);
 	g_1052bb8 = (float) atan2(g_1052bb4, d3_ProjectionScaleY);

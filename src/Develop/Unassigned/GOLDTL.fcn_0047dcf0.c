@@ -13,7 +13,7 @@ extern unsigned int g_14cbcb4;
 extern unsigned char g_6a375c;
 
 /* ADDRESS: GOLDTL 0x0047dcf0 */
-int __cdecl fcn_0047dcf0(char* e)
+int __cdecl gm_IsEntityHomeInLocalShard(char* e)
 {
 	char* o;
 	char* p;

@@ -1,7 +1,7 @@
 #include <string.h>
 
 int __cdecl d2_LockSurface(void* surface);
-int __cdecl fcn_004790d0(void* surface);
+int __cdecl d3_UnlockSurfaceHandle(void* surface);
 
 /* ADDRESS: GOLD 0x004796b0 */
 int __cdecl d2_ClearSurface(char* surface)
@@ -21,7 +21,7 @@ int __cdecl d2_ClearSurface(char* surface)
 			*(unsigned int*) (surface + 0xc) * *(unsigned int*) (surface + 8));
 	} else {
 		if (saved != 0) {
-			fcn_004790d0(surface);
+			d3_UnlockSurfaceHandle(surface);
 		}
 		memset(effects, 0, sizeof(effects));
 		effects[20] = 0;
@@ -33,7 +33,7 @@ int __cdecl d2_ClearSurface(char* surface)
 	if (saved != 0) {
 		d2_LockSurface(surface);
 	} else {
-		fcn_004790d0(surface);
+		d3_UnlockSurfaceHandle(surface);
 	}
 	return 1;
 }

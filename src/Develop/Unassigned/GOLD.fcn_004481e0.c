@@ -4,6 +4,6 @@
 void __cdecl d3_ReleaseSceneResource(SCENE_RESOURCE* resource)
 {
 	if (resource != 0) {
-		fcn_0045fbb0(resource);
+		d3_ReleaseSceneResourceRef(resource);
 	}
 }

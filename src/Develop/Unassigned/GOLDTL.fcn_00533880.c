@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00533880 */
-void __cdecl fcn_00533880(void)
+void __cdecl d3_ClearSceneObjectCache(void)
 {
 	int a;
 

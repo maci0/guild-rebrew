@@ -19,10 +19,10 @@ extern char* g_77261c;
 extern unsigned int g_7728bc;
 
 int __cdecl fcn_005cf720(unsigned short, unsigned short, Query*, int);
-ENTITY_CANDIDATE* __cdecl fcn_004a34d0(void);
+ENTITY_CANDIDATE* __cdecl gm_StepEntityCandidateRing(void);
 
 /* ADDRESS: GOLDTL 0x004a5340 */
-int __cdecl fcn_004a5340(unsigned short* e, unsigned int n, unsigned int* ids,
+int __cdecl ai_SelectRankedCandidates(unsigned short* e, unsigned int n, unsigned int* ids,
 	float lo, float hi, unsigned short* out)
 {
 	Query q;
@@ -58,7 +58,7 @@ int __cdecl fcn_004a5340(unsigned short* e, unsigned int n, unsigned int* ids,
 		}
 		found = 0;
 		i = *(int*) &g_7728bc;
-		t = fcn_004a34d0();
+		t = gm_StepEntityCandidateRing();
 		while (i != 0) {
 			if (t->entity == 0) {
 				return 0;
@@ -69,7 +69,7 @@ int __cdecl fcn_004a5340(unsigned short* e, unsigned int n, unsigned int* ids,
 				found = 1;
 			}
 			i--;
-			t = fcn_004a34d0();
+			t = gm_StepEntityCandidateRing();
 			if (!found) {
 				continue;
 			}

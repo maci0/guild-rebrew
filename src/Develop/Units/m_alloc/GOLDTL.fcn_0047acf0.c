@@ -32,7 +32,7 @@ void __cdecl d2_UnlockSurface(char*);
 void __cdecl d2_UpdateTextureBytes(char*);
 void __cdecl fcn_00475f80(char*);
 int __cdecl d2_NextPowerOfTwo(int);
-char* __cdecl fcn_0047b620(char*, int);
+char* __cdecl d2_GetBankEntry(char*, int);
 long __stdcall fcn_006114ff(int, int, int*, int, int, int*, int, unsigned int);
 
 
@@ -299,7 +299,7 @@ char* __cdecl fcn_0047acf0(char* list)
 					for (k = firstShape; k < x; k++) {
 						char* sn;
 
-						sn = fcn_0047b620(bank, k);
+						sn = d2_GetBankEntry(bank, k);
 						*(int*) (*(int*) (sn + 0x28)) = (int) base;
 						*(int*) (*(int*) (sn + 0x28) + 0x48) = *(int*) (*(int*) (sn + 0x28) + 0x48) + 1;
 					}

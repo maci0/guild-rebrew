@@ -25,11 +25,11 @@ int __cdecl gm_AccumulateTyped2(Player*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005b5750(void)
+int __cdecl d2_PromptSoeldnerAmountDialog(void)
 {
 	int timer;
 	int r;
@@ -50,7 +50,7 @@ int __cdecl fcn_005b5750(void)
 	}
 	d2_SetElementValue(ctl, 0xa, v / 32, 0xa);
 	d2_CenterDialogWindows(dlg);
-	if (main_RunFrameLoop((void*) fcn_005b5750, timer) != 0) {
+	if (main_RunFrameLoop((void*) d2_PromptSoeldnerAmountDialog, timer) != 0) {
 		do {
 			if (g_100f1dc != 2) {
 				if (g_100f1dc == 1 || g_14cf950 == 1) {
@@ -59,14 +59,14 @@ int __cdecl fcn_005b5750(void)
 				}
 			}
 			else {
-				fcn_00526120(g_14abbf4, 4);
+				d2_ShowModalMessageBox(g_14abbf4, 4);
 				g_774654 = 1;
 				r = d2_GetControlValue(ctl);
 			}
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
 			}
-		} while (main_RunFrameLoop((void*) fcn_005b5750, timer) != 0);
+		} while (main_RunFrameLoop((void*) d2_PromptSoeldnerAmountDialog, timer) != 0);
 	}
 	d2_DestroyForm(dlg);
 	return r;

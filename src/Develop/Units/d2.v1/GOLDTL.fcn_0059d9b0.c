@@ -16,7 +16,7 @@ typedef struct {
 } Req;
 
 int __cdecl d2_CheckOwnerBlocked(int);
-void __cdecl fcn_0052a0c0(int, int);
+void __cdecl d2_InitPlayerBar(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowBriberyDialog(void);
 void __cdecl fcn_005bdc30(int, Req*, char*, void*, int);
@@ -32,7 +32,7 @@ void __cdecl d2_SelectBriberyTarget(int e)
 		memset(&req, 0, sizeof(req));
 		req.size = 0x400;
 		if (e != 0) {
-			fcn_0052a0c0(e, 0);
+			d2_InitPlayerBar(e, 0);
 			req.id = 0x727;
 			req.kind = 6;
 			req.c = 0;

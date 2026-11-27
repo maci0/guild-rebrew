@@ -26,7 +26,7 @@ typedef struct Obj {
 // SIZE 0x228
 
 void* __cdecl m_alloc(int size, char* tag);
-void __cdecl fcn_00439e70(Obj* o);
+void __cdecl d3_InitSceneObject(Obj* o);
 void __cdecl d3_AddObjectDrawData(Obj* o);
 void __cdecl d3_SetNodePosition(Obj* o, V8* v);
 void __cdecl d3_SetObjectRotation(Obj* o, V6* v);
@@ -45,7 +45,7 @@ Obj* __cdecl d3_CloneObject(Obj* src)
 	if (*(int*) ((char*) src + 0x218) >= 5) {
 		o->light = m_alloc(0x1ac, "d3:CloneObject(lightinfo)");
 	}
-	fcn_00439e70(o);
+	d3_InitSceneObject(o);
 	strcpy(o->name, src->name);
 	strcat(o->name, "_");
 	o->a.v[0] = src->a.v[0];

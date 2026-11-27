@@ -8,7 +8,7 @@ extern unsigned char g_773d75;
 
 int __cdecl gm_RandomMod(int a0);
 int __cdecl gm_GetSeasonTreasury(short* ent, unsigned char player);
-int __cdecl fcn_004a5340(short* a0, int a1, int* a2, int a3, float a4, int* a5);
+int __cdecl ai_SelectRankedCandidates(short* a0, int a1, int* a2, int a3, float a4, int* a5);
 int __cdecl gm_WalkEntityChain(unsigned short a0);
 int __cdecl he_StartHandlungSearch(int a0, int a1, int a2, int a3, int a4);
 
@@ -29,7 +29,7 @@ int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char
 	if (zero != 0) {
 		return 0;
 	}
-	if (fcn_004a5340(target, 1, &mask, 0, (float) ((double) (gm_RandomMod(0x19) & 0xffff) + 10.0), &idx) == 0) {
+	if (ai_SelectRankedCandidates(target, 1, &mask, 0, (float) ((double) (gm_RandomMod(0x19) & 0xffff) + 10.0), &idx) == 0) {
 		return 0;
 	}
 	p = (char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) idx];

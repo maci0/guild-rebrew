@@ -2,7 +2,7 @@
 
 extern int g_7749f4;
 
-void __cdecl fcn_0057de50(int mask, int on)
+void __cdecl io_SetMessageFilterMask(int mask, int on)
 {
 	if (on) {
 		g_7749f4 |= mask;

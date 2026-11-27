@@ -1,11 +1,11 @@
 
 
-void __cdecl fcn_00418d70(int);
+void __cdecl d3snd_StopSourceVoice(int);
 
-void __cdecl fcn_00418f90(int a1)
+void __cdecl d3snd_StopSourceVoiceSafe(int a1)
 {
 	if (a1 == 0) {
 		return;
 	}
-	fcn_00418d70(a1);
+	d3snd_StopSourceVoice(a1);
 }

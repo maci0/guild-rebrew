@@ -27,7 +27,7 @@ void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2);
 float __cdecl gm_GetCannonPowerScale(char* p);
 int __cdecl fcn_005e8e80(char* o, float* pos, float* dir, float speed, float b, float a);
 int __cdecl d3_PerturbParticleVelocity(float* p, float spread, float* dir, float lift, float* up, float scale);
-float __cdecl fcn_004f0eb0(int level, int percent, int count);
+float __cdecl gm_CalcArtilleryVolleyCost(int level, int percent, int count);
 int __cdecl gm_SendCannonVolleys(char* a0, char* a1, float* a2, float* a3, float* a4, float a5, int a6, unsigned int a7);
 
 typedef struct {
@@ -95,7 +95,7 @@ int __cdecl ai_FireCannonVolley(char* actor, char* cannon)
 		d3_PerturbParticleVelocity((float*) buf1, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
 		gm_SendCannonVolleys(cannon, actor, (float*) buf1, 0, 0,
-			fcn_004f0eb0(g_77289c, g_772898, 1), p2, (unsigned int) p1);
+			gm_CalcArtilleryVolleyCost(g_77289c, g_772898, 1), p2, (unsigned int) p1);
 		return 1;
 	}
 	if (kind == 2) {
@@ -126,7 +126,7 @@ int __cdecl ai_FireCannonVolley(char* actor, char* cannon)
 		d3_PerturbParticleVelocity((float*) buf1, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
 		gm_SendCannonVolleys(cannon, actor, (float*) buf2, (float*) buf1, 0,
-			fcn_004f0eb0(g_77289c, g_772898, 2), p2, (unsigned int) p1);
+			gm_CalcArtilleryVolleyCost(g_77289c, g_772898, 2), p2, (unsigned int) p1);
 		return 1;
 	}
 	if (kind == 3) {
@@ -176,7 +176,7 @@ int __cdecl ai_FireCannonVolley(char* actor, char* cannon)
 		d3_PerturbParticleVelocity((float*) buf2, ss[0], (float*) 0x772870, ss[0],
 			(float*) 0x772880, ss[1]);
 		gm_SendCannonVolleys(cannon, actor, (float*) buf3, (float*) buf1, (float*) buf2,
-			fcn_004f0eb0(g_77289c, g_772898, 3), p2, (unsigned int) p1);
+			gm_CalcArtilleryVolleyCost(g_77289c, g_772898, 3), p2, (unsigned int) p1);
 		return 1;
 	}
 	return 0;

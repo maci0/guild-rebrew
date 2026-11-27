@@ -5,32 +5,32 @@ void __cdecl gm_HandleGegenspionage(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f8bb0 */
-int __cdecl fcn_004f8bb0(char* e, int* s)
+int __cdecl gm_HandleGegenspionagePrivilege(char* entity, int* request)
 {
-	char* p;
+	char* target;
 
-	if (*s == 3 || *s == 1) {
-		if (e[2] == 6)
-			io_FormatTextBuffer((char*) s + 0x14, (int) "%s", 0x1db6);
-		if (e[0x166] != 0x13 && e[0x166] != 0x14 && e[0x166] != 0x18 && e[0x166] != 0x1a)
+	if (*request == 3 || *request == 1) {
+		if (entity[2] == 6)
+			io_FormatTextBuffer((char*) request + 0x14, (int) "%s", 0x1db6);
+		if (entity[0x166] != 0x13 && entity[0x166] != 0x14 && entity[0x166] != 0x18 && entity[0x166] != 0x1a)
 			return 1;
-		if (*(int*) (e + 0x1c8) & 0x200)
+		if (*(int*) (entity + 0x1c8) & 0x200)
 			return 9;
-		if (*s == 3)
-			gm_HandleGegenspionage(e, s);
+		if (*request == 3)
+			gm_HandleGegenspionage(entity, request);
 		return 2;
 	}
-	if (*s == 4 || *s == 2) {
-		if ((*(int*) (e + 0x1c8) & 0x100) == 0 || (p = *(char**) ((char*) s + 0x21c)) == 0)
+	if (*request == 4 || *request == 2) {
+		if ((*(int*) (entity + 0x1c8) & 0x100) == 0 || (target = *(char**) ((char*) request + 0x21c)) == 0)
 			return 1;
-		if (p[0x166] != 0x13 && p[0x166] != 0x14 && p[0x166] != 0x18 && p[0x166] != 0x1a)
+		if (target[0x166] != 0x13 && target[0x166] != 0x14 && target[0x166] != 0x18 && target[0x166] != 0x1a)
 			return 1;
-		if (*s == 4) {
-			gm_HandleGegenspionage(e, s);
+		if (*request == 4) {
+			gm_HandleGegenspionage(entity, request);
 			return 10;
 		}
-		if (e[2] == 6)
-			io_FormatTextBuffer((char*) s + 0x14, (int) "%s", 0x1db6);
+		if (entity[2] == 6)
+			io_FormatTextBuffer((char*) request + 0x14, (int) "%s", 0x1db6);
 		return 10;
 	}
 	return 1;

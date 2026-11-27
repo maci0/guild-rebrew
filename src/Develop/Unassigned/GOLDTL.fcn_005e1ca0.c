@@ -4,9 +4,9 @@ __declspec(dllimport) unsigned int __stdcall GetPrivateProfileIntA(const char *,
 __declspec(dllimport) unsigned int __stdcall GetPrivateProfileStringA(const char *, const char *, const char *, char *, unsigned int, const char *);
 
 /* ADDRESS: GOLDTL 0x005e1ca0 */
-void __cdecl fcn_005e1ca0(void)
+void __cdecl io_LoadIniSettings(void)
 {
-    unsigned char v2;
+    unsigned char resIndex;
     unsigned int off;
     *(unsigned char *)0x776665 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad298,0,(char *)0x7e22c0);
     *(unsigned char *)0x776664 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad290,0,(char *)0x7e22c0);
@@ -30,8 +30,8 @@ void __cdecl fcn_005e1ca0(void)
     *(float *)0x776698 = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad190,100,(char *)0x7e22c0) * g_662910);
     *(float *)0x77669c = (float)(GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad188,100,(char *)0x7e22c0) * g_662910);
     *(unsigned char *)0x776660 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6ad254,0,(char *)0x7e22c0);
-    v2 = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6a4654,0,(char *)0x7e22c0);
-    *(unsigned char *)0x77534c = v2;
+    resIndex = GetPrivateProfileIntA((char *)0x6a471c,(char *)0x6a4654,0,(char *)0x7e22c0);
+    *(unsigned char *)0x77534c = resIndex;
     off = (*(unsigned int *)0x77534c & 255) * 8;
     *(unsigned int *)0x6acf80 = *(unsigned int *)((char *)0x6acf68 + off);
     *(unsigned int *)0x6acf84 = *(unsigned int *)((char *)0x6acf6c + off);

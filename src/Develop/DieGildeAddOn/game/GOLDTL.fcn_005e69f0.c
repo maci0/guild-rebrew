@@ -11,7 +11,7 @@ extern int g_14b5ab4;
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_0058d5f0(int);
+void __cdecl d2_RunRohstoffsuchenDialog(int);
 void __cdecl d2_OpenTransportPanel(int);
 void __cdecl d2_RunProduktionDialog(int);
 void __cdecl d2_ShowLagerOptions(int, int);
@@ -53,7 +53,7 @@ void __cdecl d2_RunZigeunerInteriorHud(int a)
 		if (g_7746a0 != 0) {
 			if (g_7746d8 & 0x200) {
 				if (g_7746a0 == zig) {
-					fcn_0058d5f0(a);
+					d2_RunRohstoffsuchenDialog(a);
 				} else if (g_7746a0 == trans) {
 					d2_OpenTransportPanel(a);
 				} else if (g_7746a0 == prod) {

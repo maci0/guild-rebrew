@@ -4,7 +4,7 @@ extern IdGroup g_688118[];
 
 
 /* ADDRESS: GOLDTL 0x004c2820 */
-int __cdecl fcn_004c2820(int key)
+int __cdecl msx_FindGroupByKey(int key)
 {
 	int i;
 	int j;

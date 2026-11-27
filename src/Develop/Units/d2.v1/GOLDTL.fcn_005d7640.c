@@ -28,7 +28,7 @@ extern int g_14ce8e0;
 
 int __cdecl amt_SendAndWaitOfficeCommand(ENTITY_RECORD*, ENTITY_RECORD*, ENTITY_RECORD*);
 void __cdecl io_FormatTextBuffer(char*, ...);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -97,7 +97,7 @@ int __cdecl d2_RunGegenspionageDialog(ENTITY_RECORD* ent, Cmd* cmd)
 	}
 	if (left > 0) {
 		io_FormatTextBuffer(text, s_6a2f5c, 0x1dcb);
-		fcn_00526120(text, 0);
+		d2_ShowModalMessageBox(text, 0);
 		return 0;
 	}
 	h = d2_LoadForm(0, 0, s_6acd38);
@@ -117,7 +117,7 @@ int __cdecl d2_RunGegenspionageDialog(ENTITY_RECORD* ent, Cmd* cmd)
 					} else {
 						io_FormatTextBuffer(text, s_6a2f5c, 0x1dcb);
 					}
-					fcn_00526120(text, 0);
+					d2_ShowModalMessageBox(text, 0);
 					g_774654 = 1;
 				}
 			} else if (d2_CurrentElementId == no) {

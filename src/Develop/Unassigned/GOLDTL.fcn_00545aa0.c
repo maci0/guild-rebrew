@@ -26,7 +26,7 @@ extern volatile int g_6b7fc0;
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_BringFormToFront(int);
 
-void __cdecl fcn_00545aa0(void)
+void __cdecl d2_UpdateActionPopupFocus(void)
 {
 	int i;
 	unsigned char* o;

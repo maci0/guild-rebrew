@@ -1,7 +1,7 @@
 char __cdecl d3sm_SampleHeight(char* map, float* pos, int* col, int* row, float* height);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00413d10 */
-float __cdecl fcn_00413d10(float* pos)
+float __cdecl d3_SampleAverageTerrainHeight(float* pos)
 {
 	char* world;
 	char* map;

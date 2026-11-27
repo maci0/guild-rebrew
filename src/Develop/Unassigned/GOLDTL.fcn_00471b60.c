@@ -38,7 +38,7 @@ extern D2_FORM_RECORD g_1038140[];
 #include "Develop/Units/d2.v1/d2_gui.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00469c40(int x, int y, int slot);
+void __cdecl d2_PositionControl(int x, int y, int slot);
 
 /* ADDRESS: GOLDTL 0x00471b60 */
 void __cdecl d2_CenterDialogWindows(int k)
@@ -51,7 +51,7 @@ void __cdecl d2_CenterDialogWindows(int k)
 	for (i = 0; i < o->count; i++) {
 		w = &((D2_WIN*)g_1015f40)[o->wins[i]];
 		if ((*(void**)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].parent) == 0) {
-			fcn_00469c40(d2_CenterX - w->width / 2, d2_DialogCenterY - w->height / 2, w->slot);
+			d2_PositionControl(d2_CenterX - w->width / 2, d2_DialogCenterY - w->height / 2, w->slot);
 		}
 	}
 }

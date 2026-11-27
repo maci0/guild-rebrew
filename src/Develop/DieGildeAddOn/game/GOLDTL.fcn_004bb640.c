@@ -14,7 +14,7 @@ int __cdecl gm_GetSeasonFromDate(void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
-struct date_4bb640 {
+struct PACKED_DATE_MSG {
 	int a;
 	int b;
 	int c;
@@ -23,10 +23,10 @@ struct date_4bb640 {
 
 
 /* ADDRESS: GOLDTL 0x004bb640 */
-int __cdecl fcn_004bb640(int* a1)
+int __cdecl gm_HandlePostSpouseSeasonMsg(int* a1)
 {
 	pos14_7f4c00 st;
-	struct date_4bb640 d;
+	struct PACKED_DATE_MSG d;
 	char buf[0x100];
 	unsigned char* entity;
 

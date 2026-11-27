@@ -3,7 +3,7 @@
 
 void* __cdecl he_StartHandlungSearch(int, int, int);
 void* __cdecl he_fn_Handlung(void);
-void  __cdecl fcn_005da250(void*, void*);
+void  __cdecl d2_RunBeweiseSichtenDialog(void*, void*);
 void  __cdecl io_FormatTextBuffer(void*, int, int);
 extern char g_679060[];
 
@@ -25,7 +25,7 @@ int __cdecl he_HandleBeweiseSichtenRequest(void* entity, void* request)
 		p = he_fn_Handlung();
 	}
 	if (*(int*) request == 3) {
-		fcn_005da250(entity, request);
+		d2_RunBeweiseSichtenDialog(entity, request);
 		return 2;
 	}
 	if (*(int*) request == 1 && *(char*) ((char*) entity + 2) == 6) {

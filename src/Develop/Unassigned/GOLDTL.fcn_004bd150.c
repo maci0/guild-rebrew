@@ -3,15 +3,15 @@ typedef struct {
 	unsigned char state;
 	char padE[0x6];
 	void* obj;
-} fcn_004bd150_entry;
+} D3_PFLANZEN_MAP_ENTRY;
 // SIZE 0x18
 
-void __cdecl init_SetPflanzenMap(fcn_004bd150_entry*, void*);
+void __cdecl init_SetPflanzenMap(D3_PFLANZEN_MAP_ENTRY*, void*);
 void __cdecl d3_SetSubtreeVisible(void*, int);
 
 
 /* ADDRESS: GOLDTL 0x004bd150 */
-void __cdecl fcn_004bd150(fcn_004bd150_entry* tab)
+void __cdecl d3_ShowPflanzenMapEntries(D3_PFLANZEN_MAP_ENTRY* tab)
 {
 	int i;
 

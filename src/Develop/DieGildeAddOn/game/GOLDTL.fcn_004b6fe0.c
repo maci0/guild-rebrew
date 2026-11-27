@@ -11,7 +11,7 @@ int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
-int __cdecl fcn_004b6fe0(void* noticeRequest)
+int __cdecl gm_HandleDebitPercentMsg(void* noticeRequest)
 {
 	int n;
 	double d;

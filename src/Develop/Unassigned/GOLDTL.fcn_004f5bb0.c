@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004f5bb0 */
-void __cdecl fcn_004f5bb0(int mask)
+void __cdecl gm_ClearPlayerEntityViewMask(int mask)
 {
 	int cursor;
 

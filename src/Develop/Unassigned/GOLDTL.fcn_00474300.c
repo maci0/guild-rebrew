@@ -45,7 +45,7 @@ extern int g_100f950;
 
 void __cdecl d2_DestroyElement(int id);
 int __cdecl d2_MeasureTextWidth(char* s, int font);
-void __cdecl fcn_00469c40(int x, int y, int slot);
+void __cdecl d2_PositionControl(int x, int y, int slot);
 int __cdecl d2_CreateElement(int x, int y, int a3);
 char __cdecl io_TranslateKeyCode(int shift, int ctrl, int alt, char key);
 
@@ -102,7 +102,7 @@ common_tail:
 		}
 		g_100f898 = d2_MeasureTextWidth((*(Combo**) &tp_d2_SelectedControl)->text, (*(Combo**) &tp_d2_SelectedControl)->text_px) + (*(Combo**) &tp_d2_SelectedControl)->f4;
 		if (g_67d8ec != -1) {
-			fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
+			d2_PositionControl(g_100f898, g_100f89c - 7, g_67d8ec);
 		}
 		return;
 	case 15:
@@ -152,7 +152,7 @@ tail15:
 			if (g_67d8ec == -1) {
 				g_67d8ec = d2_CreateElement((short) g_100f898, (short) (g_100f89c - 7), g_67d3b0 + 8);
 			} else {
-				fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
+				d2_PositionControl(g_100f898, g_100f89c - 7, g_67d8ec);
 			}
 		}
 		g_14cf950 = 0;

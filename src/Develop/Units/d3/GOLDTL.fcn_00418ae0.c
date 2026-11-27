@@ -5,7 +5,7 @@ int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SelectSceneContext(int, int);
 
 
-void __cdecl fcn_00418ae0(char* p)
+void __cdecl d3_DestroySunRayObject(char* p)
 {
 	int k;
 	int save;

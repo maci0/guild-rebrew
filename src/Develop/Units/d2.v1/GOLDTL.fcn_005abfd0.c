@@ -33,7 +33,7 @@ int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 void __cdecl gm_ModifyHealth(int, int);
 void __cdecl he_NotifyConfession(ENTITY_RECORD*, ENTITY_RECORD*, unsigned char*);
 void __cdecl gs_ClearTargetStraftaten(int, int);
-int __cdecl fcn_00526120(int, int);
+int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_DestroyForm(int);
@@ -90,7 +90,7 @@ void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 						he_NotifyConfession(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)]), e);
 					}
 					gs_ClearTargetStraftaten(me->entity_id, v / 2);
-					fcn_00526120(g_14ab930, 0);
+					d2_ShowModalMessageBox(g_14ab930, 0);
 					g_774654 = 1;
 				}
 			}

@@ -26,14 +26,14 @@ void __cdecl d2_CenterDialogWindows(int handle);
 void __cdecl d2_SetForm(int handle, int page);
 void __cdecl d2_InitWindowBounds(int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
-int __cdecl fcn_004f7120(int id, char* record, int* out1, int* out2, int* idx);
+int __cdecl gm_GetStraftatEvidenceOffer(int id, char* record, int* out1, int* out2, int* idx);
 void __cdecl d2_ClearWindowChildren(int a, int b);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl d2_BuildPersonStatusDesc(struct sel* s);
-void __cdecl fcn_005ca740(int x, int y, int a, int b, struct sel* s, int c);
+void __cdecl d2_DrawPersonCard(int x, int y, int a, int b, struct sel* s, int c);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-void __cdecl fcn_005c91c0(char* buf, int x, int y, int a, int b);
-void __cdecl fcn_00526120(char* text, int value);
+void __cdecl d2_ShowWrappedText(char* buf, int x, int y, int a, int b);
+void __cdecl d2_ShowModalMessageBox(char* text, int value);
 int __cdecl gm_CheckEntityStock(char* record, unsigned int value, char flag);
 void __cdecl cm_SendLogAction(char* text);
 void __cdecl cm_SendTraceEnd(char* text);
@@ -42,7 +42,7 @@ void __cdecl cm_RequestLinkEvidence(int a, unsigned int b);
 void __cdecl cm_RequestTransferCurrencyNoKill(unsigned int a, unsigned int b, int c, unsigned int d);
 int __cdecl main_RunFrameLoop(void* fn, int id);
 void __cdecl d2_DestroyForm(int handle);
-void __cdecl fcn_005a2580(char* a, char* b, char* c);
+void __cdecl d2_RunDunkleEckeOwnerDialog(char* a, char* b, char* c);
 
 /* ADDRESS: GOLDTL 0x005a2970 */
 void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
@@ -82,7 +82,7 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 	do {
 		for (j = 0; j < 3; j++) {
 			q = (int*) (a1 + 0x1c + j * 4);
-			if (fcn_004f7120(*q, (char*) ((*(unsigned short*) (building + 0x27)) * 0x21c + 0x7f4ca0),
+			if (gm_GetStraftatEvidenceOffer(*q, (char*) ((*(unsigned short*) (building + 0x27)) * 0x21c + 0x7f4ca0),
 				&out1, out2, &idx[j])) {
 				if (seen[j] != *q)
 					changed = 1;
@@ -108,12 +108,12 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 				sel[j].x10 = (x - height) - 0x28;
 				sel[j].used = (sel[j].who != 0);
 				d2_BuildPersonStatusDesc(&sel[j]);
-				fcn_005ca740(sel[j].x10, sel[j].x14, d2_CurrentWindowId, 0x54, &sel[j], 1);
+				d2_DrawPersonCard(sel[j].x10, sel[j].x14, d2_CurrentWindowId, 0x54, &sel[j], 1);
 				if (seen[j] != -1)
 					io_FormatTextBuffer(buf, 0x18a5, idx[j] * 5 + 0x13fd, vals[j]);
 				else
 					io_FormatTextBuffer(buf, 0x18a6);
-				fcn_005c91c0(buf, x, line, 0xf0, 0x54);
+				d2_ShowWrappedText(buf, x, line, 0xf0, 0x54);
 				line += 0x69;
 			}
 			changed = 0;
@@ -146,11 +146,11 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 					}
 				}
 				if (j == 3)
-					fcn_00526120("$Z$NDiese Information steht nicht mehr zum verkauf!", 0);
+					d2_ShowModalMessageBox("$Z$NDiese Information steht nicht mehr zum verkauf!", 0);
 			}
 		} else if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-	} while (main_RunFrameLoop(fcn_005a2580, 0x677c7) != 0);
+	} while (main_RunFrameLoop(d2_RunDunkleEckeOwnerDialog, 0x677c7) != 0);
 	d2_DestroyForm(handle);
 }

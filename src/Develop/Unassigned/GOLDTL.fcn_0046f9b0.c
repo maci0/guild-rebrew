@@ -7,7 +7,7 @@ typedef struct
 extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_0047b620(int p, int i);
+char* __cdecl d2_GetBankEntry(int p, int i);
 int __cdecl d2_MeasureTextWidth(char* s, int font);
 int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
@@ -25,8 +25,8 @@ void __cdecl d2_SetControlText(int idx, char* text)
 	e = (D2_CTRL_TEXT_ENT*) &((D2_CONTROL_TL*) g_1015ea0)[idx];
 	if (((D2_CONTROL_TL*) e)->kind == 9) {
 		c = *(int*) &((D2_CONTROL_TL*) e)->data;
-		p0 = fcn_0047b620(c, 0);
-		p1 = fcn_0047b620(c, 1);
+		p0 = d2_GetBankEntry(c, 0);
+		p1 = d2_GetBankEntry(c, 1);
 		w = d2_MeasureTextWidth(text, d2_DefaultFont) + *(unsigned short*) (p1 + 2) + *(unsigned short*) (p0 + 2) + 4;
 		fcn_0064d530((char*) e + 0x8c, text, 0x3f);
 		((D2_CONTROL_TL*) g_1015ea0)[idx].width = w;

@@ -4,21 +4,21 @@ typedef struct {
 	int (*f0)(void);
 	int (*f1)(void);
 	int (__stdcall* release)(void*);
-} fcn_00418640_vtbl;
+} D3_VBUF_VTBL;
 // SIZE 0xc
 
-void __cdecl fcn_00418640(void)
+void __cdecl d3_ReleaseRenderVertexBuffers(void)
 {
 	void** p;
 
 	p = (void**) *(int*) 0x6b5cb4;
 	if (p != 0) {
-		*(int*) 0x14ce728 = ((fcn_00418640_vtbl*) p[0])->release(p);
+		*(int*) 0x14ce728 = ((D3_VBUF_VTBL*) p[0])->release(p);
 		*(int*) 0x6b5cb4 = 0;
 	}
 	p = (void**) *(int*) 0x6b5cb8;
 	if (p != 0) {
-		*(int*) 0x14ce728 = ((fcn_00418640_vtbl*) p[0])->release(p);
+		*(int*) 0x14ce728 = ((D3_VBUF_VTBL*) p[0])->release(p);
 		*(int*) 0x6b5cb8 = 0;
 	}
 }

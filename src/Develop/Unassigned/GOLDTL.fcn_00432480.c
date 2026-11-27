@@ -76,7 +76,7 @@ void __cdecl d3_ApplyAnimDelta(char*, char*, int, int, int);
 void __cdecl d3_AccumulateAnimDelta(char*, char*, int, int, int);
 void __cdecl d3_EvalAnimSlotPosition(char*, char*, int, int, float*);
 void __cdecl d3_LerpVec3(float*, float*, float, float*);
-void __cdecl fcn_00455140(char*, float*, float*);
+void __cdecl d3_TransformDirection(char*, float*, float*);
 float __cdecl d3_EvalHermiteSpline(float, float, float, float, float);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl d3_ComputeSplineTangents(void*, void*, void*);
@@ -380,7 +380,7 @@ char __cdecl d3_UpdateSceneObjectAnimCallback(char* o, void* ctx)
 							SI(slot + 0x1c) * 0x18 + 0x58) - fs->vec[1];
 						fs->tan[2] = SF(BF(SI(slot + 0x14)) +
 							SI(slot + 0x1c) * 0x18 + 0x5c) - fs->vec[2];
-						fcn_00455140(o, fs->tan, fs->vec);
+						d3_TransformDirection(o, fs->tan, fs->vec);
 						nd = SP(slot + 0x30);
 						fs->vec[0] = fs->vec[2] * SF(nd + 0x1ac) +
 							fs->vec[1] * SF(nd + 0x19c) +

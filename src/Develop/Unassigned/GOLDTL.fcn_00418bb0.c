@@ -1,8 +1,8 @@
 
 
-int __cdecl fcn_00418640(void);
+int __cdecl d3_ReleaseRenderVertexBuffers(void);
 
-int __cdecl fcn_00418bb0(void)
+int __cdecl d3_FreeRenderVertexBuffers(void)
 {
-	return fcn_00418640();
+	return d3_ReleaseRenderVertexBuffers();
 }

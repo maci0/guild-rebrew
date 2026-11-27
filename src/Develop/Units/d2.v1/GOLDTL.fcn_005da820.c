@@ -36,19 +36,19 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
-int __cdecl fcn_004f61c0(int* ids, int* b, int* c, short kind);
+int __cdecl gm_CollectEntityCrimesByGroup(int* ids, int* b, int* c, short kind);
 int __cdecl d2_BuildPersonStatusDesc(Row* r);
-void __cdecl fcn_005ca740(int, int, int, int, Row*, int);
+void __cdecl d2_DrawPersonCard(int, int, int, int, Row*, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl d2_CreateRightAlignedText(char*, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_005d9f70(char* e, char* who);
+int __cdecl d2_RunBeweiseDetailsTrialDialog(char* e, char* who);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
-int __cdecl fcn_005da250(char*, char*);
+int __cdecl d2_RunBeweiseSichtenDialog(char*, char*);
 
 /* ADDRESS: GOLDTL 0x005da820 */
-int __cdecl fcn_005da820(char* e, char* request)
+int __cdecl d2_RunBeweiseSichtenAltDialog(char* e, char* request)
 {
 	int result;
 	int count;
@@ -87,7 +87,7 @@ int __cdecl fcn_005da820(char* e, char* request)
 	win = d2_CurrentWindowId;
 	d2_SetForm(dlg, 3);
 	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, win, 0x767);
-	n = fcn_004f61c0(ids, b, c, *(short*) e);
+	n = gm_CollectEntityCrimesByGroup(ids, b, c, *(short*) e);
 	for (i = 0, count = 0; i < n; i++) {
 		who = gm_LookupEntityRecordById(ids[i]);
 		if (who != 0) {
@@ -105,7 +105,7 @@ int __cdecl fcn_005da820(char* e, char* request)
 			io_FormatTextBuffer(text, "%i (%i) %s", rows[i].a, rows[i].b, (rows[i].a != 1) + 0x1748);
 			rows[i].x = 0x32;
 			rows[i].y = i * 0x69 + 10;
-			fcn_005ca740(0x32, i * 0x69 + 10, d2_CurrentWindowId, 0x56, &rows[i], 1);
+			d2_DrawPersonCard(0x32, i * 0x69 + 10, d2_CurrentWindowId, 0x56, &rows[i], 1);
 			d2_CreateRightAlignedText(text, ((struct s_1015f4c*) g_1015f4c)[d2_CurrentWindowId].x - 0xf, i * 0x69 + 10 + 0x2d, 0xc8, 0x55);
 		}
 	} else {
@@ -125,10 +125,10 @@ int __cdecl fcn_005da820(char* e, char* request)
 				}
 			}
 			if (sel > -1) {
-				result = fcn_005d9f70(e, rows[sel].who);
+				result = d2_RunBeweiseDetailsTrialDialog(e, rows[sel].who);
 			}
 		}
-	} while (main_RunFrameLoop(fcn_005da250, 0x657c7));
+	} while (main_RunFrameLoop(d2_RunBeweiseSichtenDialog, 0x657c7));
 	d2_DestroyForm(dlg);
 	return result;
 }

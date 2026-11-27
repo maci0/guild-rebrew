@@ -25,7 +25,7 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 
 int __cdecl d2_RunFriedhofDialog(char* entity, int a2, unsigned char a3, int choice)
 {
@@ -70,7 +70,7 @@ int __cdecl d2_RunFriedhofDialog(char* entity, int a2, unsigned char a3, int cho
 					main_LoopFlags = 0x677c7;
 					if (cm_GetCommandStatus(h) == 2) {
 						io_FormatTextBuffer(buf, 0x411b, 0x4112, g_665f78[choice]);
-						fcn_00526120(buf, 0x100);
+						d2_ShowModalMessageBox(buf, 0x100);
 					} else {
 						g_774654 = 1;
 						r = 1;

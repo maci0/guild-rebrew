@@ -17,7 +17,7 @@ int __cdecl d3_TraceTerrainSegment(int, float*, float*, int, int, int*, int*);
  * States: obj+0x5c 1 flying, 2 impact, 3 expired.
  */
 /* ADDRESS: GOLDTL 0x005e9da0 */
-int __cdecl fcn_005e9da0(char* obj)
+int __cdecl d3_StepProjectileHeun(char* obj)
 {
 	float step;
 	float inv;

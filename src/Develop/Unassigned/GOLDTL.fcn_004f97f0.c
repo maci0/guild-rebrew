@@ -2,7 +2,7 @@ void __cdecl io_FormatTextBuffer(void* buffer, int format, ...);
 void __cdecl gm_HandleFriedenStiften(void* rec, void* ctx);
 
 /* ADDRESS: GOLDTL 0x004f97f0 */
-int __cdecl fcn_004f97f0(char* rec, int* ctx)
+int __cdecl gm_HandleFriedenStiftenPrivilege(char* rec, int* ctx)
 {
 	int action;
 

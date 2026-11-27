@@ -27,7 +27,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl gm_CompareGameTime(char*, char*);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00545670(char*, int, int, char*, int);
+void __cdecl d2_CreateActionPopupSlot(char*, int, int, char*, int);
 void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -101,7 +101,7 @@ void __cdecl fcn_00554f00(char* obj)
 state_zero:
 
 	if (*(char**) (obj + 0x74) == 0) {
-		fcn_00545670(obj, 0, 0, (p == rec) ? g_6a5e78 : g_6a5e60, (p == rec) ? 0x5fd : 0x5fe);
+		d2_CreateActionPopupSlot(obj, 0, 0, (p == rec) ? g_6a5e78 : g_6a5e60, (p == rec) ? 0x5fd : 0x5fe);
 	}
 
 	if (*(char**) (obj + 0x74) == 0) {

@@ -33,10 +33,10 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_InitWindowBounds(int);
-int __cdecl fcn_0046fac0(int, int, int, int);
+int __cdecl d2_EqualizeWindowButtonWidths(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472380(int, int, int, int, int);
+void __cdecl d2_CreateGuiWindow(int, int, int, int, int);
 void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -45,7 +45,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl d2_CheckActionBlocker(char*, int);
-int __cdecl fcn_005898f0(void*);
+int __cdecl he_HasNoActiveAssassinAction(void*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl gm_ModifyHealth(int, int);
@@ -98,13 +98,13 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 	d2_SetForm(dlg, 0);
 	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
-	elem = fcn_0046fac0(0, 3, *(int*) 0x14b5360, d2_CurrentWindowId);
+	elem = d2_EqualizeWindowButtonWidths(0, 3, *(int*) 0x14b5360, d2_CurrentWindowId);
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[elem].value_06c)) = 1;
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[elem].width)) =
 	    *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c);
 	d2_SetElementFont(elem, 0x54);
 	elem = d2_AddWindowValueGauge(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);
-	fcn_00472380(elem, 0, 2, 0, 1);
+	d2_CreateGuiWindow(elem, 0, 2, 0, 1);
 	d2_SetValueGaugeStepLabels(elem, 3, *(int*) 0x14b5364, *(int*) 0x14b5368,
 	             *(int*) 0x14b536c);
 	d2_SetForm(dlg, 3);
@@ -135,7 +135,7 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 				                 (unsigned int) g_774970 *
 				                     0x21c),
 				        amt[sel]) == 1 &&
-				    fcn_005898f0((void*) building) != 0) {
+				    he_HasNoActiveAssassinAction((void*) building) != 0) {
 					p = gm_GetEntityTableEntry(
 					    (char*) (0x7f4ca0 +
 					             (unsigned int) g_774970 *

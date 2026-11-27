@@ -23,7 +23,7 @@ extern void __cdecl gm_AddTime(void*, int, int, int);
 
 
 /* ADDRESS: GOLD 0x004f4970 */
-void __cdecl fcn_004f4970(unsigned int packedId)
+void __cdecl gm_CheckWealthRankMilestone(unsigned int packedId)
 {
 	char text[0x200];
 	char msg[0xf8];

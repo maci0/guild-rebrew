@@ -34,7 +34,7 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_SendSetHE(int, char *);
 char *__cdecl gm_GetChainNodeAtIndex(int, int);
 int __cdecl he_LoadTransportCargoAtStop(void *, char);
-int __cdecl fcn_004c0460(void *, char);
+int __cdecl he_BuyTransportCargoAtStop(void *, char);
 void __cdecl cm_RequestSysMessage(int, void *);
 void __cdecl cm_SendKillTransporter(int);
 int __cdecl gm_AddTime(char *, int, int, int);
@@ -230,7 +230,7 @@ void __cdecl he_RunTransport(char *e)
 			if (*q == 'G') {
 				c = *(unsigned char *)(q + 0x65);
 			}
-			fcn_004c0460(pB0, c);
+			he_BuyTransportCargoAtStop(pB0, c);
 			*(int *)(e + 0x84) = cm_SendSetHE(-1, e);
 			return;
 		}

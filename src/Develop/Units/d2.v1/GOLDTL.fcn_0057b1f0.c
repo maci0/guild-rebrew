@@ -4,7 +4,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl fcn_00545780(char* a);
 void __cdecl he_FreeAction(char* a);
-int __cdecl fcn_00545670(char* a, int b, int c, char* d, int e);
+int __cdecl d2_CreateActionPopupSlot(char* a, int b, int c, char* d, int e);
 void __cdecl he_ApplyAction0x92Favor(char* a);
 void __cdecl he_RemoveAction0x92Favor(char* a);
 void __cdecl d2_CenterDialogWindows(int id);
@@ -52,7 +52,7 @@ void __cdecl fcn_0057b1f0(char* a)
 		return;
 	case 0:
 		if (*(int*) (a + 0x74) == 0)
-			fcn_00545670(a, 0, 0, (char*) 0x6a5a10, 0x5ec);
+			d2_CreateActionPopupSlot(a, 0, 0, (char*) 0x6a5a10, 0x5ec);
 	if (*(int*) (a + 0x74) == 0) {
 		he_FreeAction(a);
 		return;

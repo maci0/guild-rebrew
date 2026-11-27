@@ -31,7 +31,7 @@ typedef struct Cell {
 
 extern unsigned long g_14ce728;
 
-void __cdecl fcn_0043b8f0(char* o)
+void __cdecl d3_ReleaseTerrainSurfaces(char* o)
 {
 	Cell (*cells)[8];
 	int a;

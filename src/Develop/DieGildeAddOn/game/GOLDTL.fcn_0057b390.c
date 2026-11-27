@@ -37,7 +37,7 @@ char* __cdecl gm_FindBuildingOwner(char* e);
 float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 int __cdecl gm_GetEntityRelation(int a, int b);
-void __cdecl fcn_005904a0(char* s, int v);
+void __cdecl he_SetEntityScriptFlag(char* s, int v);
 void __cdecl cm_SendCopyEntityData(Msg5* m);
 void __cdecl gm_AddTime(GAME_TIMESTAMP* t, int a, int b, int c);
 void __cdecl he_FreeAction(char* e);
@@ -78,7 +78,7 @@ void __cdecl he_RunAction0x93(char* e)
 						    (*(unsigned char*) (s + 0x180) == 4 ||
 						     *(unsigned char*) (s + 0x180) == 0x8c ||
 						     *(unsigned char*) (s + 0x180) == 0x8d)) {
-							fcn_005904a0(s, 1);
+							he_SetEntityScriptFlag(s, 1);
 						}
 					} else if (r > 0.5) {
 						s = list[k];
@@ -121,10 +121,10 @@ void __cdecl he_RunAction0x93(char* e)
 				     *(unsigned char*) (s + 0x180) == 0) &&
 				    (cur == 0 || cur != s)) {
 					if (gm_RandomFloat01() > 0.75f) {
-						fcn_005904a0(s, 0);
+						he_SetEntityScriptFlag(s, 0);
 					} else if (cur != 0 && (*(unsigned char*) (cur + 0x1b4) & 1) &&
 						   *(int*) (s + 0x184) != 0) {
-						fcn_005904a0(s, 0);
+						he_SetEntityScriptFlag(s, 0);
 					}
 				}
 			}

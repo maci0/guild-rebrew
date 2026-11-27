@@ -4,7 +4,7 @@
 extern GOLD_GUI_WINDOW g_1015f40[0x60];
 
 /* ADDRESS: GOLD 0x0046cd90 */
-void __cdecl fcn_0046cd90(short x, short y, int id)
+void __cdecl d2_MoveElement(short x, short y, int id)
 {
 	int kind;
 	GuiEnt* rec;
@@ -62,7 +62,7 @@ void __cdecl fcn_0046cd90(short x, short y, int id)
 		}
 		for (i = 0; i < win->count; i++) {
 			child = win->list[i];
-			fcn_0046cd90(
+			d2_MoveElement(
 				(short) (g_00f8f080[child].x - old_x + win->x),
 				(short) (g_00f8f080[child].y - old_y + win->y),
 				child);

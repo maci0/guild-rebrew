@@ -10,7 +10,7 @@ extern int g_100f1dc;
 extern char* g_772904;
 #include <string.h>
 
-void *__cdecl fcn_004be2a0(void *);
+void *__cdecl rt_CloneRoutePoints(void *);
 void *__cdecl fcn_004be1f0(void *);
 int __cdecl rt_CountRoutePoints(void *);
 void __cdecl rt_FreeRoutePoints(void *);
@@ -19,20 +19,20 @@ void __cdecl fcn_004be530(void);
 void __cdecl d2_EditRoutePointDialog(int, void *);
 void __cdecl fcn_004bf8e0(void *, void *);
 void __cdecl fcn_004bfc10(void);
-void __cdecl fcn_004bfca0(void *, void *);
+void __cdecl d2_UpdateRouteMapControlStates(void *, void *);
 int __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl cm_AppendCommandSyncField(int, int, int, char *);
 void __cdecl cm_SendSetAttribute(void);
-void __cdecl fcn_004c6e20(int, void *);
+void __cdecl cm_SendSetObjektRoute(int, void *);
 void __cdecl cm_SendClearObjektResources(int);
 int __cdecl gm_SearchTable67(int);
 void __cdecl fcn_00533bb0(int, int, void *, int, int, int, int);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_BuildCityScrollMap(void *);
-int __cdecl fcn_005b0dd0(void *);
+int __cdecl d2_InitLandkarteDialog(void *);
 void __cdecl d2_UpdateCityScrollMap(void *);
 void __cdecl fcn_005b18c0(void *);
 
@@ -54,7 +54,7 @@ int __cdecl fcn_004bfe00(char *obj)
 	if (obj == 0) {
 		return 0;
 	}
-	g_772908 = (int) fcn_004be2a0(*(void **) (obj + 0x29));
+	g_772908 = (int) rt_CloneRoutePoints(*(void **) (obj + 0x29));
 	memset(town + 0xc, 0, 0x50);
 	*(int *) (town + 0x10) = 0x400;
 	*(int *) (town + 0x1c) = 0;
@@ -63,7 +63,7 @@ int __cdecl fcn_004bfe00(char *obj)
 	*(int *) (town + 0x4) = 0x10;
 	*(int *) (town + 0x58) = 0x723;
 	strcpy(town + 0x5c, *(char **) 0x14b5e84);
-	fcn_005b0dd0(town);
+	d2_InitLandkarteDialog(town);
 	d2_BuildCityScrollMap(town);
 	g_772900 = 0;
 	for (i = 0; i < 8; i++) {
@@ -142,13 +142,13 @@ int __cdecl fcn_004bfe00(char *obj)
 			d2_SetElementEnabled(form1, 0);
 			d2_SetElementEnabled(form0, 1);
 		}
-		fcn_004bfca0((void *) g_772908, town);
+		d2_UpdateRouteMapControlStates((void *) g_772908, town);
 		fcn_004bfc10();
 		fcn_004be530();
 	}
 	n = rt_CountRoutePoints((void *) g_772908);
 	if (n >= 2) {
-		fcn_004c6e20((int) obj, (void *) g_772908);
+		cm_SendSetObjektRoute((int) obj, (void *) g_772908);
 	} else {
 		changed = 0; cm_SendClearObjektResources((int) obj);
 		cm_BeginPacketFieldDelta(obj, *(int *) (obj + 2));

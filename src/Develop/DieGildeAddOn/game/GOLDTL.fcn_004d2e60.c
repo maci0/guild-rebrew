@@ -15,7 +15,7 @@ extern char g_68bcec[];
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl msx_OverrideMusicTrack(char*);
 void __cdecl d3_UpdateWeatherAndSkyBlend(void);
-void __cdecl fcn_0052a960(char*);
+void __cdecl d3_UpdateDaylightPhase(char*);
 char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl evt_RunScript(char*);
 void __cdecl evt_WaitAndCancelScript(int);
@@ -41,7 +41,7 @@ void __cdecl cut_RunGfxCutscene(void)
 	}
 	main_LoopFlags = 0x7d6c6;
 	d3_UpdateWeatherAndSkyBlend();
-	fcn_0052a960(((char*)&gm_GameTime));
+	d3_UpdateDaylightPhase(((char*)&gm_GameTime));
 	p = evt_LoadGfxScript(g_68bcec);
 	if (p != 0) {
 		evt_RunScript(p);

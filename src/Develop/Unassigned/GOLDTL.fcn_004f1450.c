@@ -9,7 +9,7 @@ typedef struct
 } Rec44;
 // SIZE 0x44
 
-int __cdecl fcn_004f1450(Rec44* arr, int n)
+int __cdecl gv_PickMaxFieldEntry(Rec44* arr, int n)
 {
 	Rec44* best;
 	int bestsum;

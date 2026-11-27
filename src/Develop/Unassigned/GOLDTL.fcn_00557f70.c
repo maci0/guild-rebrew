@@ -9,7 +9,7 @@ struct EFFECT_RGBA {
 	unsigned char a;
 };
 
-void __cdecl fcn_00417180(int, char*, int, struct EFFECT_RGBA, float*, int, int, float, float,
+void __cdecl d3_CreateObjectParticleEffect(int, char*, int, struct EFFECT_RGBA, float*, int, int, float, float,
                           float, float, float);
 
 
@@ -25,5 +25,5 @@ void __cdecl he_SpawnTimedPunkteEffect(char* o)
 	v[0] = 0.0f;
 	v[1] = 50.0f;
 	v[2] = 0.0f;
-	fcn_00417180(*(int*) (o + 0x61), "punkte_nm_2", 1, c, v, 0x12c, 1, 50.0f, 1.0f, 2.0f, 0.5f, 0.5f);
+	d3_CreateObjectParticleEffect(*(int*) (o + 0x61), "punkte_nm_2", 1, c, v, 0x12c, 1, 50.0f, 1.0f, 2.0f, 0.5f, 0.5f);
 }

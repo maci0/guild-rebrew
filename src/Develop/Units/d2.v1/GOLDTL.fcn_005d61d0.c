@@ -44,7 +44,7 @@ void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_00526120(char*, int);
+void __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -80,7 +80,7 @@ int __cdecl d2_ShowIntimidationDialog(unsigned short* target)
 					nm = (*(pos14_7f4c00*)&gm_GameTime);
 					gm_AddTime(&nm, 0x18, 0, 0);
 					io_FormatTextBuffer(buf, 0x1d63, &nm, *target);
-					fcn_00526120(buf, 0);
+					d2_ShowModalMessageBox(buf, 0);
 					g_774654 = 4;
 					r = 1;
 				}

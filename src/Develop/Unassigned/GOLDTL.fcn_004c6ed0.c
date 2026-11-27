@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x004c6ed0 */
-int __cdecl fcn_004c6ed0(void)
+int __cdecl cm_ExNoop(void)
 {
 	return 0;
 }

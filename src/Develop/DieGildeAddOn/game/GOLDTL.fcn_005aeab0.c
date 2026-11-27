@@ -15,7 +15,7 @@ extern char g_6ab2e0[];
 
 int __cdecl d2_CheckOwnerBlocked(char*);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00526120(char*, int);
+int __cdecl d2_ShowModalMessageBox(char*, int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -62,14 +62,14 @@ void __cdecl d2_RunLoesegeldDialog(char* rec)
 	}
 	ent = gm_LookupEntityRecordById(*(int*) (rec + 0x65));
 	if (ent == 0) {
-		fcn_00526120((char*) g_14aba40, 0);
+		d2_ShowModalMessageBox((char*) g_14aba40, 0);
 		return;
 	}
 	act = he_StartHandlungSearch(1, 0, 0x3e);
 	while (act != 0) {
 		if (*(int*) (act + 0xac) == *(int*) (ent + 4)) {
 			io_FormatTextBuffer(text, 0x19c9, *(unsigned short*) ent);
-			fcn_00526120(text, 0);
+			d2_ShowModalMessageBox(text, 0);
 			return;
 		}
 		act = he_fn_Handlung();
@@ -82,7 +82,7 @@ void __cdecl d2_RunLoesegeldDialog(char* rec)
 		act = he_fn_Handlung();
 	}
 	if (act == 0) {
-		fcn_00526120((char*) g_14aba48, 0);
+		d2_ShowModalMessageBox((char*) g_14aba48, 0);
 		return;
 	}
 	cls = *(unsigned char*) (ent + 0x1b1);
@@ -130,7 +130,7 @@ void __cdecl d2_RunLoesegeldDialog(char* rec)
 				*(int*) (pkt + 0x64) = cnt;
 				cm_SendCopyEntityData(pkt);
 				io_FormatTextBuffer(note, 0x19c5, cnt, *(unsigned short*) ent);
-				fcn_00526120(note, 0);
+				d2_ShowModalMessageBox(note, 0);
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == b2) {
 				flags = -1;
@@ -141,11 +141,11 @@ void __cdecl d2_RunLoesegeldDialog(char* rec)
 				cm_SendBlockCharacter(*(int*) (ent + 4),
 				    -(int) *(unsigned char*) (ent + 0x1b1), 0);
 				io_FormatTextBuffer(line, 0x19c6, *(unsigned short*) ent);
-				fcn_00526120(line, 0);
+				d2_ShowModalMessageBox(line, 0);
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == b3) {
 				io_FormatTextBuffer(text, 0x19c7, *(unsigned short*) ent);
-				fcn_00526120(text, 0);
+				d2_ShowModalMessageBox(text, 0);
 				g_774654 = 1;
 			}
 		}

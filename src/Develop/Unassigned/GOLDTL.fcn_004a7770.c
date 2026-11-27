@@ -5,7 +5,7 @@ typedef Card_1007ce0 Card;
 extern Card_1007ce0 g_1007ce0[24];
 
 /* ADDRESS: GOLDTL 0x004a7770 */
-int __cdecl fcn_004a7770(int* h, int requireOwner, int skip, int* out)
+int __cdecl gm_FindCardRankGroup(int* h, int requireOwner, int skip, int* out)
 {
 	int counts[6];
 	int k;

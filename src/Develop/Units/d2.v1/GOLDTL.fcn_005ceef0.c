@@ -31,12 +31,12 @@ void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl gm_AmountToUnits(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
-void __cdecl fcn_005ced80(int dlg, int* list, int* bars, int* icons);
-void __cdecl fcn_005ce800(int id, int* out, int* value, int* slots,
+void __cdecl d2_PopulateProdSettingBars(int dlg, int* list, int* bars, int* icons);
+void __cdecl d2_InitProdSettingControls(int id, int* out, int* value, int* slots,
 	unsigned char* type, int text, Ce800Config cfg, int* handle, int source);
 void __cdecl d2_CreateButtonRow(int a, int b, int* c, int d, int e, int f);
 int __cdecl d2_GetControlValue(int a);
-void __cdecl fcn_00472380(int a, int b, int c, int d);
+void __cdecl d2_CreateGuiWindow(int a, int b, int c, int d);
 void __cdecl d2_SetElementEnabled(int a, int b);
 void __cdecl cm_BeginPacketFieldDelta(void* p, unsigned int value);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, unsigned int* value);
@@ -95,10 +95,10 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 	cfgp = (Ce800Config*) &actor[0xda];
 	cfg = *cfgp;
 	if (!g_775348) {
-		fcn_005ce800(v28, &v16, &v15, v14, (unsigned char*) building, *actor,
+		d2_InitProdSettingControls(v28, &v16, &v15, v14, (unsigned char*) building, *actor,
 			*cfgp, &v13, (int) v27);
 	} else {
-		fcn_005ced80(v28, v27, v12, v17);
+		d2_PopulateProdSettingBars(v28, v27, v12, v17);
 	}
 	if (v20) {
 		d2_SetForm(v28, 3);
@@ -125,7 +125,7 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 							v26 = (unsigned char*) v27 + 4;
 							do {
 								if (v12[v23] != -1) {
-									fcn_00472380(v12[v23], 0, 100,
+									d2_CreateGuiWindow(v12[v23], 0, 100,
 										*v26);
 								}
 								v23 += 1;
@@ -162,7 +162,7 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 		if (g_100f1dc != -1) {
 			if (g_775348 == 1) {
 				if (v23 == v29) {
-					fcn_005ce800(v28, &v16, &v15, v14,
+					d2_InitProdSettingControls(v28, &v16, &v15, v14,
 						(unsigned char*) building, *actor, cfg, &v13, (int) v27);
 					g_775348 = 0;
 					d2_CurrentElementId = -1;
@@ -178,7 +178,7 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 								v26 = (unsigned char*) v27 + 4;
 								do {
 									if (v12[v23] != -1) {
-										fcn_00472380(v12[v23], 0, 100,
+										d2_CreateGuiWindow(v12[v23], 0, 100,
 											*v26);
 									}
 									v23 += 1;
@@ -193,7 +193,7 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 			} else if (!g_775348) {
 				v15 = d2_GetControlValue(v16);
 				if (d2_CurrentElementId == v30) {
-					fcn_005ced80(v28, v27, v12, v17);
+					d2_PopulateProdSettingBars(v28, v27, v12, v17);
 					g_775348 = 1;
 					d2_CurrentElementId = -1;
 				} else {
@@ -247,7 +247,7 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 								(int) ((char*) building + 0x99 - g_aed32c),
 								&cfg.flags);
 							cm_RequestChangeAttribute();
-							fcn_005ce800(v28, &v16, &v15, v14,
+							d2_InitProdSettingControls(v28, &v16, &v15, v14,
 								(unsigned char*) building, *actor, cfg, &v13, (int) v27);
 							v23 = -1;
 							d2_CurrentElementId = -1;

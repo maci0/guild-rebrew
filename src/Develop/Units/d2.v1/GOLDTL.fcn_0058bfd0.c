@@ -7,18 +7,18 @@ extern float g_662cf8; extern int g_6652f8[];
 
 int __cdecl d2_SetForm(int win, int layer);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
-int __cdecl fcn_0046fac0(int x, int y, char* text, int win);
+int __cdecl d2_EqualizeWindowButtonWidths(int x, int y, char* text, int win);
 void __cdecl d2_SetElementFont(int element, int value);
 int __cdecl io_AppendText();
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
 void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5,
                            int* id2, int* id1, int* id3);
-void __cdecl fcn_00534160(int x0, int y, int len, int t);
-void __cdecl fcn_0058b9c0(void* a1, void* a2);
-void __cdecl fcn_0058ba20(char* o, char* buf);
+void __cdecl d2_DrawSegmentedBar(int x0, int y, int len, int t);
+void __cdecl d2_FormatWorkerFullName(void* a1, void* a2);
+void __cdecl d2_FormatCandidateRolePair(char* o, char* buf);
 
 /* ADDRESS: GOLDTL 0x0058bfd0 */
-void __cdecl fcn_0058bfd0(int* ctx)
+void __cdecl d2_RenderCandidateStatCards(int* ctx)
 {
 	int i;
 	int saved;
@@ -88,16 +88,16 @@ void __cdecl fcn_0058bfd0(int* ctx)
 			r[-1] = h;
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c)) = 1;
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[r[-1]].flags_1d0)) = 3;
-			fcn_0058b9c0((void*) *r, buf);
-			fcn_0058ba20((char*) *r, buf2);
+			d2_FormatWorkerFullName((void*) *r, buf);
+			d2_FormatCandidateRolePair((char*) *r, buf2);
 			y = *(int*) (ctx[2] * 0x3cc + 0x1015f50) * i + 0x38;
-			h = fcn_0046fac0(0, y, buf, ctx[2]);
+			h = d2_EqualizeWindowButtonWidths(0, y, buf, ctx[2]);
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_06c)) = 1;
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].width)) =
 			    *(int*) (ctx[2] * 0x3cc + 0x1015f4c);
 			d2_SetElementFont(h, 0x54);
 			y += 0xd;
-			h = fcn_0046fac0(0, y, buf2, ctx[2]);
+			h = d2_EqualizeWindowButtonWidths(0, y, buf2, ctx[2]);
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_06c)) = 1;
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].width)) =
 			    *(int*) (ctx[2] * 0x3cc + 0x1015f4c);
@@ -106,10 +106,10 @@ void __cdecl fcn_0058bfd0(int* ctx)
 			j = 0;
 			do {
 				io_FormatTextBuffer(buf, "%s:", 0x16b7 + j);
-				h = fcn_0046fac0(0x28, y, buf, ctx[2]);
+				h = d2_EqualizeWindowButtonWidths(0x28, y, buf, ctx[2]);
 				*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h].width)) = 0x12c;
 				d2_SetElementFont(h, 0x54);
-				fcn_00534160(0xa0, y,
+				d2_DrawSegmentedBar(0xa0, y,
 				             *(unsigned char*) (*r + 0x24 + j), 0x4df);
 				j++;
 				y += 0xd;

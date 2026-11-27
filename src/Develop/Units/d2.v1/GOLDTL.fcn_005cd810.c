@@ -19,8 +19,8 @@ int __cdecl he_StartHandlungSearch(int, int, ...);
 int __cdecl he_fn_Handlung(void);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 float __cdecl gm_GetEntityHealth(char*);
-int __cdecl fcn_005c9f10(int, int, int, int, int, short*);
-int __cdecl fcn_005c99a0(int, int, int, int, int, int);
+int __cdecl d2_DrawOfficeCandidateGrid(int, int, int, int, int, short*);
+int __cdecl d2_DrawPersonCardGrid(int, int, int, int, int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_ShowAmtInfo(int, int);
@@ -42,14 +42,14 @@ typedef struct {
 	int pad2c;
 	int pad30;
 	int pad34;
-} Rec_5cd810;
+} D2_AMT_CANDIDATE_REC;
 
 /* ADDRESS: GOLDTL 0x005cd810 */
-void __cdecl fcn_005cd810(int office)
+void __cdecl d2_RunAmtCandidatesDialog(int office)
 {
 	char src1[0x90];
 	char src2[0x90];
-	Rec_5cd810 rec[8];
+	D2_AMT_CANDIDATE_REC rec[8];
 	short* sel2;
 	int sel;
 	int dlg;
@@ -155,12 +155,12 @@ void __cdecl fcn_005cd810(int office)
 				p = (char*) sel2;
 				if (!p)
 					p = (char*) (g_774970 * 0x21c + 0x7f4ca0);
-				fcn_005c9f10(d2_CurrentWindowId, office, 0, count, (int) rec, (short*) p);
+				d2_DrawOfficeCandidateGrid(d2_CurrentWindowId, office, 0, count, (int) rec, (short*) p);
 			} else {
 				p = (char*) sel2;
 				if (!p)
 					p = (char*) (g_774970 * 0x21c + 0x7f4ca0);
-				fcn_005c99a0(d2_CurrentWindowId, office, 0, count, (int) rec, (int) p);
+				d2_DrawPersonCardGrid(d2_CurrentWindowId, office, 0, count, (int) rec, (int) p);
 			}
 			for (i = 0; i < count; i++) {
 				d2_SetElementEnabled(rec[i].h1, 1);
@@ -217,7 +217,7 @@ void __cdecl fcn_005cd810(int office)
 			}
 		}
 loopend:
-		if (!main_RunFrameLoop((int) fcn_005cd810, 0x657c7)) {
+		if (!main_RunFrameLoop((int) d2_RunAmtCandidatesDialog, 0x657c7)) {
 			d2_DestroyForm(dlg);
 			return;
 		}

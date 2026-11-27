@@ -7,7 +7,7 @@ void __cdecl d2_BuildPersonStatusDesc(void*);
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 
 /* ADDRESS: GOLDTL 0x005cb670 */
-int __cdecl fcn_005cb670(char* sourceRecord, int n, char* results, int a3)
+int __cdecl d2_CollectHighFavorEntities(char* sourceRecord, int n, char* results, int a3)
 {
 	char* h;
 	int count;

@@ -17,7 +17,7 @@ extern unsigned long g_14ce728;
 
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 void* __cdecl d3_GetObjectMesh(char* o, float* r);
-void __cdecl fcn_00436fd0(int a);
+void __cdecl d3_FilterTextureMipMaps(int a);
 void __stdcall fcn_005edf4a(float* plane, float* point, float* normal);
 void __stdcall fcn_005ed44c(float* out, float* light, float* plane);
 void __stdcall fcn_005eb970(float* out, float* a, float* b);
@@ -239,5 +239,5 @@ void __cdecl d3_RenderProjectedShadow(char* object, char* subObj, char* renderOb
     }
     g_14ce728 = (*(unsigned long (__stdcall**) (void*)) (*(char**) surf + 8))(surf);
     if (*(unsigned char*) ((char*) rec[3] + 0x10) != 0)
-        fcn_00436fd0(*(int*) (tex + 0x50));
+        d3_FilterTextureMipMaps(*(int*) (tex + 0x50));
 }

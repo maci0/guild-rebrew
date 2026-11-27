@@ -29,7 +29,7 @@ extern Pos_554b90 gm_GameTime;
 void __cdecl he_FreeAction(char*);
 int __cdecl gm_AccumulateTyped2(House_554b90*);
 void __cdecl gm_AddTime(void*, int, int, int);
-void __cdecl fcn_004c5980(void*);
+void __cdecl cm_EnqueueStagedPacket(void*);
 int __cdecl cm_SendSetHE(int, char*);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -136,7 +136,7 @@ put:
 			*(int*) (msg + 0x84) = 0;
 			*(Pos_554b90*) (msg + 0x18) = gm_GameTime;
 			gm_AddTime(msg + 0x18, 0, 0x1e, 0);
-			fcn_004c5980(msg);
+			cm_EnqueueStagedPacket(msg);
 		}
 		*(Pos_554b90*) (e + 0x52) = gm_GameTime;
 		gm_AddTime(e + 0x52, 0x18, 0, 0);

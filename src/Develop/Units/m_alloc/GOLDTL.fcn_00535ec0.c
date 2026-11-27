@@ -23,10 +23,10 @@ void __cdecl ch_SetBodyAttachment(char*, int, char*);
 void __cdecl m_FreeTracked(void*);
 int __cdecl gm_RandomMod(int);
 void __cdecl d3_DestroyObject(int);
-void __cdecl fcn_004b3b30(void);
+void __cdecl gm_SetMissionOverrideFlag(void);
 void __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_RequestSysMessage(int, void*);
-void __cdecl fcn_004c5980(void*);
+void __cdecl cm_EnqueueStagedPacket(void*);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
 int __cdecl cm_RequestSetEntityLevel(int, int);
@@ -76,7 +76,7 @@ void __cdecl fcn_00535ec0(void)
 		*(pos14_7f4c00*) (slot_buf + 0x18) = gm_GameTime;
 		slot_buf[0x7c] = 0;
 		gm_AddTime((pos14_7f4c00*) (slot_buf + 0x18), 0, 0x1e, 0);
-		fcn_004c5980(slot_buf);
+		cm_EnqueueStagedPacket(slot_buf);
 		return;
 	}
 	case 0x19:
@@ -146,7 +146,7 @@ void __cdecl fcn_00535ec0(void)
 		return;
 	}
 	case 0x17:
-		fcn_004b3b30();
+		gm_SetMissionOverrideFlag();
 		return;
 	case 0x11: {
 		char* p;
@@ -233,7 +233,7 @@ void __cdecl fcn_00535ec0(void)
 		*(int*) (slot_buf + 0x38) = *(int*) (n * 0x21c + 0x7f4ca4);
 		*(pos14_7f4c00*) (slot_buf + 0x18) = gm_GameTime;
 		gm_AddTime((pos14_7f4c00*) (slot_buf + 0x18), 0, 0x1e, 0);
-		fcn_004c5980(slot_buf);
+		cm_EnqueueStagedPacket(slot_buf);
 		return;
 	}
 	case 0x1e: {

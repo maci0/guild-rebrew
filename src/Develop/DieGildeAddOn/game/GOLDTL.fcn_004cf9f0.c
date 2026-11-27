@@ -15,7 +15,7 @@ extern unsigned short* g_772e98;
 
 void* __cdecl gm_GetEquippedCombatGear(char*);
 float __cdecl gm_GetEntityHealthRatio(char*);
-void __cdecl fcn_00417b50(int, int, float, float, float, float);
+void __cdecl d3_SpawnBlutEffect(int, int, float, float, float, float);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 int __cdecl fcn_004d4700(void);
 char* __cdecl ch_CreateQueuedAction(char*, int (__cdecl*)(void), int, int, int);
@@ -36,7 +36,7 @@ int __cdecl fcn_004d4790(char* e)
 
 	gm_GetEquippedCombatGear(e);
 	if (gm_GetEntityHealthRatio(e) < 0.05) {
-		fcn_00417b50(*(int*) (*(char**) (e + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
+		d3_SpawnBlutEffect(*(int*) (*(char**) (e + 0x184) + 0x34), 0x40, 0.25f, 0.1f, 0.14f, 55.0f);
 		ch_CancelActionQueue(*(char**) (e + 0x184));
 		p = ch_CreateQueuedAction(*(char**) (e + 0x184), fcn_004d4700, 0x14, 0x36, 1);
 		strcpy(p + 0xf0, "kampf/todumfallen");

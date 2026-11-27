@@ -6,7 +6,7 @@ extern GuiEnt* g_00f8f080;
 extern short g_005fe73c;
 extern int d2_CurrentWindowId;
 void* __cdecl m_alloc(unsigned int, const char*);
-int __cdecl fcn_00478cb0(int*, int);
+int __cdecl gfx_CreateSurface(int*, int);
 void __cdecl d2_ClearSurface(int);
 int __cdecl fcn_0046c9e0(void);
 int __cdecl d2_AddElementToWindow(short, short, int, int);
@@ -15,7 +15,7 @@ int __cdecl d2_AddElementToWindow(short, short, int, int);
 #define U8(p) (*(unsigned char*)(p))
 
 /* ADDRESS: GOLD 0x00472380 */
-int __cdecl fcn_00472380(short x, short y, short width, short height, unsigned int flags)
+int __cdecl d2_CreateGuiWindow(short x, short y, short width, short height, unsigned int flags)
 {
     int index;
     char* window;
@@ -62,7 +62,7 @@ int __cdecl fcn_00472380(short x, short y, short width, short height, unsigned i
         memset(descriptor, 0, sizeof(descriptor));
         descriptor[1] = width;
         descriptor[2] = height;
-        I32(window + 0x20) = fcn_00478cb0(descriptor, 0xb);
+        I32(window + 0x20) = gfx_CreateSurface(descriptor, 0xb);
         if (I32(window + 0x20) == 0) {
             return 0;
         }
@@ -71,7 +71,7 @@ int __cdecl fcn_00472380(short x, short y, short width, short height, unsigned i
         memset(descriptor, 0, sizeof(descriptor));
         descriptor[1] = *(short*)(window + 8);
         descriptor[2] = *(short*)(window + 0xa);
-        I32(window + 0x24) = fcn_00478cb0(descriptor, 0xb);
+        I32(window + 0x24) = gfx_CreateSurface(descriptor, 0xb);
         if (I32(window + 0x24) == 0) {
             return 0;
         }
@@ -80,7 +80,7 @@ int __cdecl fcn_00472380(short x, short y, short width, short height, unsigned i
         memset(descriptor, 0, sizeof(descriptor));
         descriptor[1] = *(short*)(window + 8);
         descriptor[2] = *(short*)(window + 0xa);
-        I32(window + 0x28) = fcn_00478cb0(descriptor, 0xb);
+        I32(window + 0x28) = gfx_CreateSurface(descriptor, 0xb);
         d2_ClearSurface(I32(window + 0x28));
         if (I32(window + 0x28) == 0) {
             return 0;
