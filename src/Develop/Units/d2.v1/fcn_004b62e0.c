@@ -42,7 +42,7 @@ int __cdecl fcn_004b43f0(int n);
 int __cdecl fcn_004b3e10(int a1, int a2, int a3);
 int __cdecl cm_RequestSysMessage(int, Req*);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl fcn_004b5b20(int flags);
 
 /* ADDRESS: GOLDTL 0x004b62e0 */
@@ -77,7 +77,7 @@ void __cdecl fcn_004b62e0(int flags)
 		m.x10 = 0;
 		h = cm_RequestSysMessage(10, &m);
 		while (cm_GetCommandStatus(h) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 	} else if (r == 0xff) {
 		g_6a3440 = -1;
@@ -85,7 +85,7 @@ void __cdecl fcn_004b62e0(int flags)
 		m.x10 = 1;
 		h = cm_RequestSysMessage(10, &m);
 		while (cm_GetCommandStatus(h) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 		fcn_004b5b20(flags);
 	} else {
@@ -94,7 +94,7 @@ void __cdecl fcn_004b62e0(int flags)
 		m.x10 = 0;
 		h = cm_RequestSysMessage(10, &m);
 		while (cm_GetCommandStatus(h) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 	}
 }

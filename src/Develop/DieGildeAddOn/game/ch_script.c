@@ -93,7 +93,7 @@ void __cdecl ch_RegisterScriptCommands(void)
     evt_ImportCommand("StopCharacter", (void*) StopCharacter, 5, 1, 1);
     evt_ImportCommand("KillCharacterAnimations", (void*) KillCharacterAnimations, 5, 1, 1);
     evt_ImportCommand("DummyBlocked", (void*) DummyBlocked, 1, 2, 1, 1);
-    evt_ImportCommand("CharacterCount", (void*) fcn_0040cd70, 1, 0);
+    evt_ImportCommand("CharacterCount", (void*) CharacterCount, 1, 0);
     evt_ImportCommand("LookAtCharacter", (void*) LookAtCharacter, 5, 2, 1, 1);
     evt_ImportCommand("LookAtObject", (void*) LookAtObject, 5, 2, 1, 1);
     evt_ImportCommand("SetCharacterToDummy", (void*) SetCharacterToDummy, 5, 2, 1, 1);

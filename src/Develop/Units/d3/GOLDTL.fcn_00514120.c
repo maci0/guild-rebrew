@@ -44,7 +44,7 @@ char __cdecl fcn_00510b70(char*);
 void __cdecl srv_LogWinsockError(void);
 void __cdecl cm_InitCrimeRecords(void);
 int __cdecl fcn_0051e070(void);
-void* __cdecl fcn_00445600(int, int, int, char*);
+void* __cdecl d3_FindSceneObject(int, int, int, char*);
 
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl fcn_005109f0(void);
@@ -64,7 +64,7 @@ Figure* __cdecl cm_GetCommandResult(int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl fcn_00512680(void);
 void __cdecl gm_InitializeShopInventory(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl gm_AssignBuildingOwner(void*, int, int);
 void* __cdecl gm_AddObjekt(void);
@@ -89,9 +89,9 @@ int __cdecl gm_LoadCityMap(char* map)
 	srv_LogWinsockError();
 	cm_InitCrimeRecords();
 	if (fcn_0051e070() != 0) {
-		folder = fcn_00445600(0, 0x100, 0, "ordner_CITIES_GER");
+		folder = d3_FindSceneObject(0, 0x100, 0, "ordner_CITIES_GER");
 	} else {
-		folder = fcn_00445600(0, 0x100, 0, "ordner_CITIES_INT");
+		folder = d3_FindSceneObject(0, 0x100, 0, "ordner_CITIES_INT");
 	}
 	if (folder != 0) {
 		d3_DestroyObject((D3_OBJECT*) (folder));
@@ -145,7 +145,7 @@ int __cdecl gm_LoadCityMap(char* map)
 	gm_InitializeShopInventory();
 	cm_EndCommandSync();
 	while (cm_AreQueuedCommandsDone() == 0) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	for (s = gm_StartFilteredEntitySearch(1, 5, 0x1c); s != 0; s = gm_FindNextFilteredEntity()) {
 		gm_AssignBuildingOwner(s, (*(Figure**)&gm_CityEntity)->slot, (*(Figure**)&gm_CityEntity)->slot);
@@ -161,7 +161,7 @@ int __cdecl gm_LoadCityMap(char* map)
 	gm_UpdateMarketStockSlots((unsigned char) (*(char*)&g_773d75));
 	cm_EndCommandSync();
 	while (cm_AreQueuedCommandsDone() == 0) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	d3_SelectSceneContext(1, 0);
 	d3_SelectSceneContext(0, 0);

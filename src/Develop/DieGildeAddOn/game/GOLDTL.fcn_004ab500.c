@@ -9,7 +9,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_CountBuildingExtensions(char*);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_004a5340(int*, int, int*, int, float, unsigned short*);
-int __cdecl fcn_004a5c40(int*, int, int, float, float, int, unsigned short*);
+int __cdecl ai_CollectEligibleEntities(int*, int, int, float, float, int, unsigned short*);
 int __cdecl amt_GetRoleLevel(unsigned char);
 
 /* ADDRESS: GOLDTL 0x004ab500 */
@@ -71,7 +71,7 @@ unsigned int __cdecl ai_StartBlutrache(unsigned int a0, unsigned short* entity, 
 				a2 = (int) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[v8 & 0xffff]));
 				v5 = amt_GetRoleLevel(*(unsigned char*) (a2 + 0x166)) / 3 + 2;
 				if (v5 + 2 <= *(int*) ((char*) entity + 0x194) &&
-				    (a0 = fcn_004a5c40((int*) entity, 4, (int) v4, 25.0f,
+				    (a0 = ai_CollectEligibleEntities((int*) entity, 4, (int) v4, 25.0f,
 				                       75.0f, v6, v9)) != 0) {
 					v7 = 0;
 					v6 = 0;

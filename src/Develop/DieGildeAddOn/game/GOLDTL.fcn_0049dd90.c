@@ -24,7 +24,7 @@ extern unsigned short __cdecl gm_RandomMod(int a0);
 extern int __cdecl ai_SelectBestMethod(int a0, int a1, int a2, void *a3, void *a4);
 extern int __cdecl ai_FindMissingBuildingUpgrade(void *a0, void *a1, char *a2, int a3);
 extern float __cdecl gm_GetCityStatsSummary(float *a0);
-extern int __cdecl fcn_0050d170(int a0);
+extern int __cdecl gm_GetTypeProductValue(int a0);
 
 /* ADDRESS: GOLDTL 0x0049dd90 */
 int __cdecl ai_StartBuergermeisterKerker(int a0, unsigned short *a1, int a2, Msg_49dd90 *a3, Msg_49dd90 *a4)
@@ -119,7 +119,7 @@ label_49df97:
             if ((float)rv + v15[6] < 5000.0f)
                 return 0;
         }
-        if ((float)fcn_0050d170(v19) * 0.4f <= (float)v7)
+        if ((float)gm_GetTypeProductValue(v19) * 0.4f <= (float)v7)
         {
             a3->type = 4;
             a3->a = v19;

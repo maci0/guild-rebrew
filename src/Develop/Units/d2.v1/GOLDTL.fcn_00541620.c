@@ -44,7 +44,7 @@ int __cdecl gm_CalcBuildingRoundBalance(char*, int, int*);
 int __cdecl he_GetActiveKrediteByLender(int, int, int, int*);
 int __cdecl he_GetActiveKrediteByBorrower(int, char*, int*);
 int __cdecl fcn_0050d2a0(int);
-int __cdecl fcn_004fcda0(unsigned short, int, int*);
+int __cdecl amt_ProcessPrivilegeIncome(unsigned short, int, int*);
 int __cdecl fcn_004fcb50(unsigned short, int*, int);
 void __cdecl fcn_005459a0(int);
 void __cdecl fcn_00476970(int);
@@ -236,7 +236,7 @@ void __cdecl fcn_00541620(void)
 	}
 	k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
 	if (*(char*) (k + 0x7f4e06) != 0 || *(char*) (k + 0x7f4e09) != 0) {
-		fcn_004fcda0(((unsigned short)g_774970), 0, v1d0);
+		amt_ProcessPrivilegeIncome(((unsigned short)g_774970), 0, v1d0);
 		k = (((unsigned short)g_774970) & 0xffff) * 0x21c;
 		h1f0 = (-(*(char*) (k + 0x7f4ca9) != 0) & 0x28) + 0x253;
 		b = *(unsigned char*) (k + 0x7f4e06);

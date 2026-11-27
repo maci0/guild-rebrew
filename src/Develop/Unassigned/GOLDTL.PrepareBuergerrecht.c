@@ -1,6 +1,6 @@
 extern unsigned char g_773d75;
 
-int __cdecl fcn_0050d320(char*, char);
+int __cdecl gm_GetSeasonTreasury(char*, char);
 
 int __cdecl PrepareBuergerrecht(void* kontext, char* objekt, int modus, char* ergebnis)
 {
@@ -16,7 +16,7 @@ int __cdecl PrepareBuergerrecht(void* kontext, char* objekt, int modus, char* er
         return 0;
     if ((*(unsigned int*)(objekt + 0x1c8) & 0x4000) == 0)
         return 0;
-    modus = fcn_0050d320(objekt, g_773d75);
+    modus = gm_GetSeasonTreasury(objekt, g_773d75);
     if (modus < 0)
         return 0;
     if (modus * 0.44f < 16000.0f)

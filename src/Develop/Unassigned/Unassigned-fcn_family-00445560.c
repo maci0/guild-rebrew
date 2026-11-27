@@ -2,48 +2,48 @@
 extern int g_67a370;
 
 void __cdecl d3_VisitSceneObjects(int, char*, int, void*, void*);
-int __cdecl fcn_00445560(char*, char**);
+int __cdecl d3_MatchSceneObjectCallback(char*, char**);
 
 /* ADDRESS: GOLD 0x004495f0 */
 /* ADDRESS: GOLDTL 0x00445560 */
-int __cdecl fcn_00445560(char* s, char** st)
+int __cdecl d3_MatchSceneObjectCallback(char* obj, char** state)
 {
-	char* p;
+	char* trimmedName;
 
-	if (st[0] != 0) {
-		p = s[0] == '!' ? s + 1 : s;
-		if (st[1] != 0) {
-			if (strcmp(p, st[0]) == 0 && st[1] == s) {
-				st[2] = s;
+	if (state[0] != 0) {
+		trimmedName = obj[0] == '!' ? obj + 1 : obj;
+		if (state[1] != 0) {
+			if (strcmp(trimmedName, state[0]) == 0 && state[1] == obj) {
+				state[2] = obj;
 			}
-		} else if (strcmp(p, st[0]) == 0) {
-			st[2] = s;
+		} else if (strcmp(trimmedName, state[0]) == 0) {
+			state[2] = obj;
 		}
-	} else if (st[1] == s) {
-		st[2] = s;
+	} else if (state[1] == obj) {
+		state[2] = obj;
 	}
-	return st[2] != s;
+	return state[2] != obj;
 }
 
 /* ADDRESS: GOLDTL 0x00445600 */
-char* __cdecl fcn_00445600(char* o, int flags, char* ptr, char* name)
+char* __cdecl d3_FindSceneObject(char* rootObj, int flags, char* matchPtr, char* matchName)
 {
-	char* st[3];
+	char* state[3];
 	int saved;
 
-	if (ptr == 0 && name == 0) {
+	if (matchPtr == 0 && matchName == 0) {
 		return 0;
 	}
-	st[1] = ptr;
-	st[0] = name;
-	st[2] = 0;
-	if (o != 0) {
-		saved = *(int*) (o + 0x1f4);
-		*(int*) (o + 0x1f4) = 0;
+	state[1] = matchPtr;
+	state[0] = matchName;
+	state[2] = 0;
+	if (rootObj != 0) {
+		saved = *(int*) (rootObj + 0x1f4);
+		*(int*) (rootObj + 0x1f4) = 0;
 	}
-	d3_VisitSceneObjects(g_67a370, o, flags | 0x200, fcn_00445560, st);
-	if (o != 0) {
-		*(int*) (o + 0x1f4) = saved;
+	d3_VisitSceneObjects(g_67a370, rootObj, flags | 0x200, d3_MatchSceneObjectCallback, state);
+	if (rootObj != 0) {
+		*(int*) (rootObj + 0x1f4) = saved;
 	}
-	return st[2];
+	return state[2];
 }

@@ -16,7 +16,7 @@ extern int g_772624;
 int __cdecl gm_StartFilteredEntitySearch(int a, int b, int c, int d, int id);
 
 /* ADDRESS: GOLDTL 0x0048d610 */
-int __cdecl fcn_0048d610(ENTITY_RECORD* e, int* out)
+int __cdecl gm_CheckDomizilActionState(ENTITY_RECORD* entity, int* out)
 {
 	int i;
 	int r;
@@ -30,20 +30,20 @@ int __cdecl fcn_0048d610(ENTITY_RECORD* e, int* out)
 		}
 		g_67e964 = (*(int*)&gm_GameTime);
 	}
-	if (e->entity_state == 3) {
+	if (entity->entity_state == 3) {
 		return 0;
 	}
-	r = gm_StartFilteredEntitySearch(2, 5, 0x1e, 4, e->entity_index);
+	r = gm_StartFilteredEntitySearch(2, 5, 0x1e, 4, entity->entity_index);
 	if (out) {
 		*out = r;
 	}
 	if (r) {
 		return 2;
 	}
-	if (e->entity_state == 5) {
+	if (entity->entity_state == 5) {
 		return 1;
 	}
-	if ((e->entity_state == 2 || e->entity_state == 4) && e->unk_00d > 6) {
+	if ((entity->entity_state == 2 || entity->entity_state == 4) && entity->unk_00d > 6) {
 		return 1;
 	}
 	return 0;

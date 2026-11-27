@@ -15,7 +15,7 @@ void __cdecl fcn_005091d0(int*, char*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
 char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
 void __cdecl nt_SendBroadcast(void*, int);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 
 #pragma pack(push, 1)
 typedef struct {
@@ -64,7 +64,7 @@ void __cdecl he_BroadcastLeaderboard(char* o)
 			*(unsigned short*) (g + 4) = 0xb9;
 			e = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) rows[i]]);
 			*(int*) (g + 6) = *(int*) (e + 4);
-			*(int*) (g + 0xa) = fcn_0050b710(*(int*) (rows[i] + 4), g_773d75);
+			*(int*) (g + 0xa) = gm_AmountToUnits(*(int*) (rows[i] + 4), g_773d75);
 			*(int*) (g + 0xe) = *(int*) (rows[i] + 0x20);
 			g[0x12] = (char) n;
 			if (e[2] == 6 || e[2] == 7)

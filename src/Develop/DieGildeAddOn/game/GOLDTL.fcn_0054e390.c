@@ -17,7 +17,7 @@ char* __cdecl gm_SetupEntityQuery(char*);
 char* __cdecl cut_FindCutsceneById(int);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_004d5450(char*);
+int __cdecl cut_GetBuildingCombatType(char*);
 int __cdecl gm_TransferAndSellAssets(char*, char*, char*, char*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
@@ -275,7 +275,7 @@ label_54e6a1:
 				return;
 			}
 			other = gm_StartFilteredEntitySearch(1, 1, *(int*) (e + 0xb0));
-			m = fcn_004d5450(other) + 0x1125;
+			m = cut_GetBuildingCombatType(other) + 0x1125;
 			io_FormatTextBuffer(text, 0x114b, m, *(unsigned short*) (own + 0x27), own, m);
 			he_PostEntityMessage(((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (e + 8)].entity_id, -1, text, 0, 0x5f0, 0);
 			kc = *(unsigned char*) &((ENTITY_RECORD*) g_7f4ca0)[*(unsigned short*) (own + 0x27)].entity_state;

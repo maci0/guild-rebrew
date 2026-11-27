@@ -60,7 +60,7 @@ int __cdecl CountDisplayCounters(void);
 void __cdecl d2_ClearSelectedControl(void);
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
 void __cdecl d3_EndCameraAndUiMode(void);
-float __cdecl fcn_0050bb50(int, int);
+float __cdecl gm_GetSeasonPrice(int, int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl ob_TransportFromLager(int, int, int, int, int, float, int, int);
 void __cdecl io_ClearInputState(void);
@@ -1092,7 +1092,7 @@ l_5bc295:
 	if (f.v68 == 0) {
 		goto l_5bc887;
 	}
-	i = (int) (fcn_0050bb50(slot_value, f.v34) * 0.9);
+	i = (int) (gm_GetSeasonPrice(slot_value, f.v34) * 0.9);
 	goto l_5bc89d;
 
 l_5bc2f8:
@@ -1165,9 +1165,9 @@ l_5bc453:
 				*(float*) &f.v8c = 0.0f;
 			} else if (f.v68 == 0) {
 				*(float*) &f.v8c =
-				    fcn_0050bb50(slot, f.v34) * *(float*) (f.v14 + 0x49);
+				    gm_GetSeasonPrice(slot, f.v34) * *(float*) (f.v14 + 0x49);
 			} else {
-				*(float*) &f.v8c = fcn_0050bb50(slot, f.v34) * 0.9;
+				*(float*) &f.v8c = gm_GetSeasonPrice(slot, f.v34) * 0.9;
 			}
 			idx = 1;
 			if (f.v44 != 0
@@ -1261,9 +1261,9 @@ l_5bc700:
 			*(float*) &f.v84 = 0.0f;
 		} else if (f.v68 == 0) {
 			*(float*) &f.v84 =
-			    fcn_0050bb50(slot, f.v34) * *(float*) (f.v14 + 0x49);
+			    gm_GetSeasonPrice(slot, f.v34) * *(float*) (f.v14 + 0x49);
 		} else {
-			*(float*) &f.v84 = fcn_0050bb50(slot, f.v34) * 0.9;
+			*(float*) &f.v84 = gm_GetSeasonPrice(slot, f.v34) * 0.9;
 		}
 		j = gm_eval_SlotVoll(h, slot, j);
 		if (j == 0) {
@@ -1277,11 +1277,11 @@ l_5bc700:
 	goto l_5bc1d7;
 
 l_5bc887:
-	i = (int) (fcn_0050bb50(slot_value, f.v34) * *(float*) (f.v14 + 0x49));
+	i = (int) (gm_GetSeasonPrice(slot_value, f.v34) * *(float*) (f.v14 + 0x49));
 l_5bc89d:
 	f.v10 = i;
 	if (modeFlags == 2 || modeFlags == 4) {
-		i = (int) fcn_0050bb50(slot_value, (int) (*(unsigned char*) (f.v14 + 0x65)));
+		i = (int) gm_GetSeasonPrice(slot_value, (int) (*(unsigned char*) (f.v14 + 0x65)));
 		goto l_5bc8cc;
 	}
 	goto l_5bc8d0;

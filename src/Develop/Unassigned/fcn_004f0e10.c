@@ -1,4 +1,4 @@
-int __cdecl fcn_004f0c90(int a);
+int __cdecl gm_FindSlot170Entry(int a);
 
 /* ADDRESS: GOLDTL 0x004f0e10 */
 int __cdecl fcn_004f0e10(int a, int b)
@@ -7,7 +7,7 @@ int __cdecl fcn_004f0e10(int a, int b)
 
     r = a;
     if (a != -1) {
-        r = fcn_004f0c90(a);
+        r = gm_FindSlot170Entry(a);
         if (r != 0) {
             if (b == 0 || b == 1) {
                 *(int *) (r + 0x14) = b;

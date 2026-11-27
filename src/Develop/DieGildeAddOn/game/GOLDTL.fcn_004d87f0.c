@@ -2,7 +2,7 @@ extern int g_772f08;
 extern char* g_9b9e40[];
 extern char g_6b5c60[];
 
-char* __cdecl fcn_00445600(char*, int, char*, char*);
+char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl fcn_00533a40(char*);
@@ -29,7 +29,7 @@ void __cdecl d3_UpdateConquerFlag(int* orderRecord)
 	if (orderRecord[1] == 0) {
 		return;
 	}
-	info = fcn_00445600(0, 0x40, 0, (char*) orderRecord + 0x10);
+	info = d3_FindSceneObject(0, 0x40, 0, (char*) orderRecord + 0x10);
 	if (orderRecord[0] != -1) {
 		ent = gm_LookupEntityRecordIn32SlotTable(orderRecord[0]);
 		*(unsigned char*) (*(int*) (ent + 0x184) + 0x8d) |= 4;

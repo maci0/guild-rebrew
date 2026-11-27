@@ -7,7 +7,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
 int __cdecl gm_RandomMod(int a0);
-int __cdecl fcn_0050d320(short* ent, unsigned char player);
+int __cdecl gm_GetSeasonTreasury(short* ent, unsigned char player);
 int __cdecl fcn_004a5340(short* a0, int a1, int* a2, int a3, float a4, int* a5);
 int __cdecl gm_WalkEntityChain(unsigned short a0);
 int __cdecl he_StartHandlungSearch(int a0, int a1, int a2, int a3, int a4);
@@ -25,7 +25,7 @@ int __cdecl ai_StartSpionage(int code, short* target, int zero, char* out1, char
 
 	mask = 0xf00500;
 	rnd = gm_RandomMod(3) & 0xffff;
-	thr = fcn_0050d320(target, g_773d75);
+	thr = gm_GetSeasonTreasury(target, g_773d75);
 	if (zero != 0) {
 		return 0;
 	}

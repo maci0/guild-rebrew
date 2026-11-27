@@ -3,7 +3,7 @@
 
 int __cdecl amt_SwapOfficeOccupants(char*);
 
-int __cdecl fcn_004cd750(char* input, char* response)
+int __cdecl cm_ExSimCommand(char* input, char* response)
 {
 	int r;
 

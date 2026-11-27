@@ -34,7 +34,7 @@ extern void __cdecl cm_RequestModifyHealth(int, int);
 extern int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
-extern void __cdecl fcn_005099e0(char*, int);
+extern void __cdecl gm_TransferEntityBuildings(char*, int);
 extern void __cdecl cm_RequestKillSpieler(int, int);
 extern char* __cdecl fcn_005bdc30(int, int*, char*, int, int);
 extern int __cdecl fcn_00470820(int, int, char*);
@@ -45,7 +45,7 @@ extern int __cdecl io_AppendText(int, int, int, int);
 extern int __cdecl d2_GetWindowListItem(int, int, int);
 extern int __cdecl d2_CheckActionBlocker(char*, int);
 extern int __cdecl cm_GetCommandStatus(int);
-extern void __cdecl fcn_00535960(void);
+extern void __cdecl cm_StepCommandQueue(void);
 extern void __cdecl fcn_00526120(char*, int);
 extern int __cdecl gm_RandomMod(int);
 extern int __cdecl main_RunFrameLoop(int, int);
@@ -99,7 +99,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 			he_PostEntityMessage(*(unsigned short*) (rec + 0x27), *(unsigned short*) (rec + 0x27),
 				text, 0, 0x5fb, (char*) 0x6a59fc);
 		}
-		fcn_005099e0(ent, (int) gm_CityEntity);
+		gm_TransferEntityBuildings(ent, (int) gm_CityEntity);
 		cm_RequestKillSpieler(*(int*) (ent + 4), 1);
 		return 0x10;
 	}
@@ -144,7 +144,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 					cm_RequestModifyHealth(*(int*) (entity + 4), -5);
 					thr = cm_RequestChangeBits(*(int*) (other + 4), 0x1c8, 4, 0x80, 0);
 					while (cm_GetCommandStatus(thr) == 0) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 					io_FormatTextBuffer(text, 0x1dde);
 					fcn_00526120(text, 0);
@@ -169,7 +169,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 							he_PostEntityMessage(*(int*) (state_ptr + 4), *(int*) (state_ptr + 4),
 								text, 0, 0x5fb, (char*) 0x6a59fc);
 						}
-						fcn_005099e0(ent, (int) gm_CityEntity);
+						gm_TransferEntityBuildings(ent, (int) gm_CityEntity);
 						cm_RequestKillSpieler(*(int*) (ent + 4), 1);
 					}
 					ret = 0x81;

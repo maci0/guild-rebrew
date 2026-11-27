@@ -21,7 +21,7 @@ int __cdecl fcn_005208e0(void* stream);
 int __cdecl fcn_00520d80(void* stream);
 int __cdecl he_SaveEvents(void* stream);
 int __cdecl ls_SaveCutscenes(void* stream);
-int __cdecl fcn_00521420(void* stream);
+int __cdecl ls_SaveHistoryState(void* stream);
 int __cdecl fcn_00521530(void* stream);
 int __cdecl ls_SaveWeatherAndSlots(void* stream);
 int __cdecl amt_fio_SaveAemter(void* stream);
@@ -31,7 +31,7 @@ int __cdecl ls_SaveAlchemyDrawSlots(void* stream);
 int __cdecl ls_SaveHighOfficeTargets(void* stream);
 int __cdecl fcn_004c0740(void* stream);
 int __cdecl ls_SaveSlot779d00(void* stream);
-int __cdecl fcn_005b1f10(void* stream);
+int __cdecl ls_SaveList774a78(void* stream);
 
 /* ADDRESS: GOLDTL 0x0051e080 */
 int __cdecl ls_SaveGame(char* name, char* slot, int flags)
@@ -124,7 +124,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 			fcn_0051ea70();
 			return 0;
 		}
-		if (fcn_00521420(stream) == 0) {
+		if (ls_SaveHistoryState(stream) == 0) {
 			CloseVfsStream(stream);
 			fcn_0051ea70();
 			return 0;
@@ -154,7 +154,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 			fcn_0051ea70();
 			return 0;
 		}
-		if (fcn_005b1f10(stream) == 0) {
+		if (ls_SaveList774a78(stream) == 0) {
 			CloseVfsStream(stream);
 			fcn_0051ea70();
 			return 0;

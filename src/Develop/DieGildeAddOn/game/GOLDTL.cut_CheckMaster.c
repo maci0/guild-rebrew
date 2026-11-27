@@ -3,7 +3,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl cm_RequestSetCutsceneMaster(int*, char*);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 
 
 /* ADDRESS: GOLDTL 0x004e63e0 */
@@ -32,7 +32,7 @@ int __cdecl cut_CheckMaster(int* event)
 			fcn_0064d41a(buf, "cut_CheckMaster(): new master for id %i => %i", event[0], *(int*) (e + 4));
 			r = cm_RequestSetCutsceneMaster(event, e);
 			while (cm_GetCommandStatus(r) == 0)
-				fcn_00535960();
+				cm_StepCommandQueue();
 			return 0;
 		}
 	}

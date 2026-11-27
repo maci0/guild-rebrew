@@ -1,7 +1,7 @@
 int __cdecl cm_SendRemoveStraftat(int id, int v);
 char* __cdecl he_StartHandlungSearch(int a1, int a2, int a3);
 int __cdecl cm_GetCommandStatus(int i);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 
 /* ADDRESS: GOLDTL 0x004f5830 */
 void __cdecl fcn_004f5830(void)
@@ -28,7 +28,7 @@ void __cdecl fcn_004f5830(void)
 					if (cm_GetCommandStatus(handle) != 0) {
 						break;
 					}
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 			}
 			handle = -1;

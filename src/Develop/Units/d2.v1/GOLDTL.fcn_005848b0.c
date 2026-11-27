@@ -7,7 +7,7 @@ extern int g_774654;
 
 extern unsigned char g_773d75;
 int __cdecl gm_FindOrAllocHeadSet(int, int);
-void * __cdecl fcn_004ee060(int);
+void * __cdecl ahm_GetDrawSlot(int);
 int __cdecl fcn_004ee0b0(void *);
 void * __cdecl fcn_00470820(int, int, void *);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -60,7 +60,7 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 	count = 0;
 	pt[0] = (unsigned int)gm_FindOrAllocHeadSet(0, 0x52);
 	for (i = 0; i < 3; i++) {
-		r = fcn_004ee060(i);
+		r = ahm_GetDrawSlot(i);
 		if (*(int *)r != 0) {
 			rec[count] = r;
 			val[count] = fcn_004ee0b0(r);

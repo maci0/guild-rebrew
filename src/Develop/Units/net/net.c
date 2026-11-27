@@ -14,8 +14,8 @@
 #include <winsock2.h>
 
 #if !defined(REBREW_SERVER)
-void __cdecl fcn_0041da60(char* module, unsigned int line, char* msg, int severity);
-#define LogMessageInternal fcn_0041da60
+void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity);
+#define LogMessageInternal LogMessageInternal
 #endif
 
 #if defined(REBREW_SERVER)

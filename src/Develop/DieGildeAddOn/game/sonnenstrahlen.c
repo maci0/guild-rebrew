@@ -10,7 +10,7 @@ extern volatile int g_6b7fac;
 int SonnenstrahlenAktiv = 0;
 int SonnenstrahlenStartZeit = 0xffffffff;
 int SonnenstrahlenPhase = 0;
-char* __cdecl fcn_00445600(char*, int, char*, char*);
+char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char* __cdecl fcn_00442910(char*, float*, float*, char*);
 void __cdecl StopSonnenstrahlen(char* objekt, int phase)
 {
@@ -39,7 +39,7 @@ char* __cdecl CreateSonnenstrahlen(void)
 	char* licht;
 	float value;
 
-	licht = fcn_00445600(0, 8, 0, "pLicht");
+	licht = d3_FindSceneObject(0, 8, 0, "pLicht");
 	rotation[0] = 0.0f;
 	value = *(float*) (licht + 0x88);
 	rotation[2] = 0.0f;

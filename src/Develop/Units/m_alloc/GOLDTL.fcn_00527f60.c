@@ -81,7 +81,7 @@ int __cdecl fcn_00517c00(int, int, int, char*);
 char* __cdecl gm_FindPublicTreasury(int);
 int __cdecl gm_SumContainerCredits(int);
 int __cdecl gm_QueryEntitySum(int, int);
-int __cdecl fcn_0050b710(int, int);
+int __cdecl gm_AmountToUnits(int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl fcn_00465950(const char*);
 int __cdecl d2_SetForm(int, int);
@@ -389,7 +389,7 @@ hidden:
 	}
 	if (g_6a25a4 != -1) {
 		if (val != 0) {
-			fr.tmp = fcn_0050b710(val, si);
+			fr.tmp = gm_AmountToUnits(val, si);
 			fcn_0051af00(fr.text, (int) 0x6a2e48,
 				     (int) (double) fr.tmp, si);
 			fcn_0046f940(g_6a25a4, fr.text);

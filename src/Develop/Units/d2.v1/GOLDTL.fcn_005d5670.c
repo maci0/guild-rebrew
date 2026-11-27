@@ -36,7 +36,7 @@ void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -88,11 +88,11 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 					m.f5c = *(int*) (o + 4);
 					h = cm_SendCopyEntityData(&m);
 					while (h != -1 && cm_GetCommandStatus(h) == 0) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 					p = cm_GetCommandResult(h);
 					while (!(*(int*) (e + 0x1c8) & 0x100) && *(int*) (p + 0x70) != -1) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 					if (*(int*) (e + 0x1c8) & 0x100) {
 						io_FormatTextBuffer(text, 0x1d5a, *(unsigned short*) o, &pos);

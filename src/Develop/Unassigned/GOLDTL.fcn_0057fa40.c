@@ -4,7 +4,7 @@
 extern int* g_665f08;
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_0057ed10(int* m);
+int __cdecl d2_CheckTutMsg1aNotCat12Node74(int* m);
 
 int __cdecl fcn_0057fa40(int* m)
 {
@@ -19,5 +19,5 @@ int __cdecl fcn_0057fa40(int* m)
 		}
 		return 0;
 	}
-	return fcn_0057ed10(m);
+	return d2_CheckTutMsg1aNotCat12Node74(m);
 }

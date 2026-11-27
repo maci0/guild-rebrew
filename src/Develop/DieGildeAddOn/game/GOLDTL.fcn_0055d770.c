@@ -35,7 +35,7 @@ extern unsigned short* g_7746cc;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_FindRecordById(int);
-void __cdecl fcn_0055d6e0(char* e, char* r);
+void __cdecl he_ApplyTransportSpeedModifiers(char* e, char* r);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl cm_RequestMoveObjekt(int, int, int);
@@ -74,7 +74,7 @@ void __cdecl he_StepTransportCart(char* e)
 	if (r == 0) {
 		return;
 	}
-	fcn_0055d6e0(e, r);
+	he_ApplyTransportSpeedModifiers(e, r);
 	if (e[0xd0] == 0) {
 		cm_SendCancelCharacterActions(*(int*) (r + 2));
 		ch_StartMovement(*(int*) (r + 2), *(int*) (c + 1), -1, 0, 1, "Trans");

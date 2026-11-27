@@ -13,7 +13,7 @@ extern char g_1043370[];
 int __cdecl d3_GetContextIndex(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl d3_SelectSceneContext(int, int);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 
@@ -47,7 +47,7 @@ void __cdecl UsingGate(char* ev)
 		return;
 	}
 	d3_SelectSceneContext(room, 1);
-	door = fcn_00445600(0, 0x120, 0, ev + 0x130);
+	door = d3_FindSceneObject(0, 0x120, 0, ev + 0x130);
 	if (door != 0) {
 		map = ((struct room_4066d0*)g_1043370)[room].map;
 		d3_TransformPoint(door, door + 0x4c, pos);

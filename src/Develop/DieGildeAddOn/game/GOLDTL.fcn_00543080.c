@@ -20,10 +20,10 @@ int __cdecl hst_ShowDueHistoryScroll();
 int __cdecl plt_UpdatePlantStages();
 int __cdecl d3snd_QueueSound();
 int __cdecl cm_RequestCopyEntityData();
-int __cdecl fcn_004e4f10();
+int __cdecl cut_ResetEventSlots();
 char __cdecl cut_RunPendingCutscenes(int);
 int __cdecl srv_FormatStatEntity();
-int __cdecl fcn_004eafe0();
+int __cdecl amt_UpdateAllOffices();
 int __cdecl fcn_004f5830();
 int __cdecl gm_UpdateAllBuildingLevels();
 int __cdecl fcn_004facb0();
@@ -34,7 +34,7 @@ int __cdecl gm_UpdateDisasterState();
 int __cdecl fcn_004fcc20();
 int __cdecl gm_CollectAllTaxes();
 int __cdecl gm_AdvanceRoundCounters();
-int __cdecl fcn_004ff0f0();
+int __cdecl gm_UpdateActiveEntities();
 int __cdecl gm_PackGameTime();
 int __cdecl fcn_005016c0();
 int __cdecl gm_FindNextFilteredEntity();
@@ -58,7 +58,7 @@ int __cdecl he_RunDailyActionMaintenance();
 int __cdecl fcn_005490d0();
 int __cdecl io_FormatTextBuffer();
 int __cdecl d2_CreateScrollPerga();
-int __cdecl fcn_00535960();
+int __cdecl cm_StepCommandQueue();
 int __cdecl gm_RandomMod(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
@@ -84,7 +84,7 @@ void __cdecl gm_RunRoundUpdate(void)
 
 	tmpIdx = -1;
 	savedSpeed = *(unsigned char*) &g_772d10;
-	fcn_004fa750();
+	gm_UpdateBuildingGridStats();
 	loopStat = 0;
 	do {
 		srv_FormatStatEntity(&((ENTITY_RECORD*) g_7f4ca0)[loopStat]);
@@ -117,7 +117,7 @@ void __cdecl gm_RunRoundUpdate(void)
 	if (g_7747b0 & 4) {
 		sv_WaitForNetworkSync(0x24087);
 	}
-	fcn_004e4f10(0);
+	cut_ResetEventSlots(0);
 	if (cut_RunPendingCutscenes(tmpIdx) && g_6a3420) {
 		g_1040488 = 0;
 		g_1040480 = g_1040494;
@@ -160,7 +160,7 @@ void __cdecl gm_RunRoundUpdate(void)
 	fcn_004facb0();
 	if ((*(int*) &g_77494c & 8) || g_14cbca0 == -1) {
 		fcn_004f5830();
-		fcn_00535960();
+		cm_StepCommandQueue();
 		Sleep(100);
 		entPtr = (char*) 0x7f4ca8;
 		do {
@@ -170,31 +170,31 @@ void __cdecl gm_RunRoundUpdate(void)
 			entPtr = &entPtr[0x21c];
 			tmpIdx += 1;
 		} while ((int) entPtr < 0x85a0a8);
-		fcn_00535960();
+		cm_StepCommandQueue();
 		Sleep(100);
-		fcn_004ff0f0();
-		fcn_00535960();
+		gm_UpdateActiveEntities();
+		cm_StepCommandQueue();
 		Sleep(100);
 		fcn_004fd0a0();
-		fcn_00535960();
+		cm_StepCommandQueue();
 		Sleep(100);
 		gm_AdvanceRoundCounters(3);
 		fcn_004fcc20();
-		fcn_00535960();
+		cm_StepCommandQueue();
 		Sleep(100);
 		gm_CollectAllTaxes();
-		fcn_004eafe0();
-		fcn_00535960();
+		amt_UpdateAllOffices();
+		cm_StepCommandQueue();
 		Sleep(100);
 		he_RunDailyActionMaintenance();
 		fcn_005490d0();
-		fcn_00535960();
+		cm_StepCommandQueue();
 		Sleep(100);
 		gm_UpdateAllBuildingLevels();
-		fcn_00535960();
+		cm_StepCommandQueue();
 		Sleep(100);
 		fcn_00495890();
-		fcn_00535960();
+		cm_StepCommandQueue();
 		Sleep(100);
 		fcn_004fb390();
 		gm_GetDisasterState(&st);
@@ -204,7 +204,7 @@ void __cdecl gm_RunRoundUpdate(void)
 			gm_UpdateDisasterState();
 		}
 		fcn_00547770();
-		fcn_00535960();
+		cm_StepCommandQueue();
 		Sleep(100);
 		ptr = (unsigned int*) &g_7f4ca4;
 		do {

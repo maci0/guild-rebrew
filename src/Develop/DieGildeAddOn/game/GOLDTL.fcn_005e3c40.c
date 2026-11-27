@@ -20,7 +20,7 @@ void __cdecl fcn_00473150(unsigned char*);
 void __cdecl fcn_005270c0(int);
 void __cdecl fcn_00528fd0(void);
 
-void __cdecl fcn_005e3c40(void)
+void __cdecl d2_RestoreHudAfterPause(void)
 {
 	unsigned char* p;
 

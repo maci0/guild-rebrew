@@ -220,7 +220,7 @@ LfailB:
 				v17[2] = v17[2] - *(float*) (v16 + 0x48);
 				v29 = (float) sqrt(v17[2] * v17[2] + v17[1] * v17[1] + v17[0] * v17[0]);
 				if (v29 < v21
-					&& fcn_00445600(*(int*) (v11 + (int) lpGebaeudeINST + 0x61),
+					&& d3_FindSceneObject(*(int*) (v11 + (int) lpGebaeudeINST + 0x61),
 						0x100, 0, 0x68149c)) {
 					v13 = v11 + (int) lpGebaeudeINST;
 					v21 = v29;
@@ -243,7 +243,7 @@ LfailB:
 			v11 = 0;
 			do {
 				v8 = v18[v11];
-				v14 = (unsigned char*) fcn_00445600(*(int*) (v13 + 0x61), 0x100, 0, 0x68149c);
+				v14 = (unsigned char*) d3_FindSceneObject(*(int*) (v13 + 0x61), 0x100, 0, 0x68149c);
 				if (v8 && *(int*) (v8 + 0x218) != 1 && v14) {
 					v24 = evt_LoadGfxScript((char*) 0x6a7dd4);
 					if (v24) {
@@ -317,7 +317,7 @@ LfailB:
 		if (*(int*) (buildAction + 0xbc) == -1 && *(int*) (buildAction + 0xc8) >= 2) {
 			d3_SelectSceneContext(0, 1);
 			fcn_0064d41a(v19, (char*) 0x6a7d60, *(int*) (buildAction + 4));
-			v8 = fcn_00445600(0, 0x1c0, 0, v19);
+			v8 = d3_FindSceneObject(0, 0x1c0, 0, v19);
 			d3_TransformPoint((char*) v8, (char*) (v8 + 0x4c), (float*) v20);
 			v21 = 1e+35f;
 			v13 = 0;
@@ -331,7 +331,7 @@ LfailB:
 					v17[2] = v17[2] - *(float*) (v20 + 8);
 					v29 = (float) sqrt(v17[2] * v17[2] + v17[1] * v17[1] + v17[0] * v17[0]);
 					if (v29 < v21
-						&& (v24 = fcn_00445600(*(int*) (v11 + (int) lpGebaeudeINST + 0x61),
+						&& (v24 = d3_FindSceneObject(*(int*) (v11 + (int) lpGebaeudeINST + 0x61),
 							0x100, 0, 0x68149c)) != 0) {
 						v21 = v29;
 						v13 = v24;

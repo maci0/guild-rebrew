@@ -57,7 +57,7 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl fcn_00502cd0(int container, int a, ...);
 char* __cdecl gm_FindSlotById(int a, int b);
 int __cdecl gm_GetBuildingTypeCategory(int a);
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 float __cdecl eval_ObjektPreis2Credits(int id, int a);
 int __cdecl gm_GetMsgObjektField(int a, int b);
 int __cdecl gm_eval_SlotVoll(int a, int b, int c);
@@ -109,7 +109,7 @@ void __cdecl ai_CollectThiefGoodsResources(char* actor, int building, int skipSe
 					id = *(unsigned short*) slot;
 					obj = gm_FindSlotById(*(int*) (ent + 0x65), id);
 					if (obj && *(int*) (obj + 4)) {
-						f1 = fcn_0050bb50(id, (unsigned char) *(char*) (ent + 0x65));
+						f1 = gm_GetSeasonPrice(id, (unsigned char) *(char*) (ent + 0x65));
 						f0 = eval_ObjektPreis2Credits(id, 100) - f1;
 						idx = 0;
 						while (idx < ai_ResourceCount) {
@@ -155,7 +155,7 @@ label_485b77:
 						obj = gm_FindSlotById(*(int*) (ent + 0x65), id);
 						if (obj && *(int*) (obj + 4)) {
 							f0 = eval_ObjektPreis2Credits(id, 100);
-							f1 = fcn_0050bb50(id, (unsigned char) *(char*) (ent + 0x65)) - f0;
+							f1 = gm_GetSeasonPrice(id, (unsigned char) *(char*) (ent + 0x65)) - f0;
 							idx = 0;
 							if (1 <= g_100b0ac) {
 								while (idx < g_100b0ac) {
@@ -213,7 +213,7 @@ label_485d61:
 			id = *(unsigned short*) slot;
 			obj = gm_FindSlotById(g_773d75, id);
 			if (obj && *(int*) (obj + 4)) {
-				f1 = fcn_0050bb50(id, (unsigned char) g_773d75) * (float) *(int*) (rec + 0x45)
+				f1 = gm_GetSeasonPrice(id, (unsigned char) g_773d75) * (float) *(int*) (rec + 0x45)
 				    * 0.01f;
 				f0 = eval_ObjektPreis2Credits(id, 100) - f1;
 				idx = 0;
@@ -279,7 +279,7 @@ label_485f7e:
 					pb[i].obj = obj;
 					pb[i].f44 = 0;
 					pb[i].f24 = 0;
-					pb[i].f34 = fcn_0050bb50(pa[idx].id, (unsigned char) g_773d75) - f0;
+					pb[i].f34 = gm_GetSeasonPrice(pa[idx].id, (unsigned char) g_773d75) - f0;
 					pb[i].f38 = 0;
 					pb[i].f48 = 0x21;
 					pb[i].f54 = 0;

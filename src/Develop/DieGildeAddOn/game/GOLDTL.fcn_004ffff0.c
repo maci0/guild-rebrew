@@ -8,7 +8,7 @@ void __cdecl d3_TransformPoint(int, int, float*);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x004ffff0 */
-char* __cdecl fcn_004ffff0(int a0, int a1)
+char* __cdecl gm_FindAvailableResidence(int unused, int nearEntity)
 {
 	char* e;
 	char* best;
@@ -35,9 +35,9 @@ char* __cdecl fcn_004ffff0(int a0, int a1)
 			n = current.word[0];
 			if ((unsigned short) *(unsigned char*) (e + 0x65) < (unsigned short) current.word[0]
 			    && (*(unsigned char*) (e + 0x5a) & 1) == 0) {
-				if (a1 != 0 && *(int*) (a1 + 0x61) != 0 && *(int*) (e + 0x61) != 0) {
+				if (nearEntity != 0 && *(int*) (nearEntity + 0x61) != 0 && *(int*) (e + 0x61) != 0) {
 					d3_TransformPoint(*(int*) (e + 0x61), *(int*) (e + 0x61) + 0x4c, p1);
-					d3_TransformPoint(*(int*) (a1 + 0x61), *(int*) (a1 + 0x61) + 0x4c, p2);
+					d3_TransformPoint(*(int*) (nearEntity + 0x61), *(int*) (nearEntity + 0x61) + 0x4c, p2);
 					p1[0] = p1[0] - p2[0];
 					p1[1] = p1[1] - p2[1];
 					p1[2] = p1[2] - p2[2];

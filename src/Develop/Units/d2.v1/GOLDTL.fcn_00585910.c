@@ -38,7 +38,7 @@ extern char g_6a93c0[];
 void* __cdecl memset(void*, int, unsigned int);
 #pragma intrinsic(memset)
 
-void* __cdecl fcn_004ec7d0(unsigned char*);
+void* __cdecl ahm_GetWorkshopOwner(unsigned char*);
 int __cdecl he_GetActionProgress(char*, int*, float*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -81,7 +81,7 @@ void __cdecl fcn_00585910(char* e)
 	char* data;
 	int* src;
 
-	data = fcn_004ec7d0((unsigned char*) e);
+	data = ahm_GetWorkshopOwner((unsigned char*) e);
 	src = *(int**) (e + 0x65);
 	prev = he_GetActionProgress(e, &owner, &frac, 0);
 	stamp = g_6b7fac;
@@ -173,7 +173,7 @@ void __cdecl fcn_00585910(char* e)
 			d2_SetElementValue(ids[9], 0, 0x64, (int) (frac * 100.0f));
 		}
 		if (sel != prev || g_6b7fac > (unsigned int) (stamp + 0x32)) {
-			data = fcn_004ec7d0((unsigned char*) e);
+			data = ahm_GetWorkshopOwner((unsigned char*) e);
 			if (data == 0) {
 				g_774654 = 1;
 				main_RunFrameLoop((void*) fcn_00585910, 0x20007);

@@ -1,5 +1,5 @@
 int __cdecl amt_CheckHighOfficeEligibility(char* e);
-char* __cdecl fcn_0049fc80(char* e);
+char* __cdecl ai_PickOfficeRival(char* e);
 int __cdecl ai_SelectZunftPrivilege0x20Target(char* e);
 int __cdecl fcn_004a0020(char* e);
 
@@ -21,7 +21,7 @@ int __cdecl ai_StartZunftLevel3(int a1, char* e, int a3, char* out)
 	}
 	c = e[0x169];
 	if (c == 0x1e) {
-		p = fcn_0049fc80(e);
+		p = ai_PickOfficeRival(e);
 		if (!p) {
 			return 0;
 		}

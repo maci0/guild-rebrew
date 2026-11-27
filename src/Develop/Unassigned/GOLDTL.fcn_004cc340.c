@@ -2,7 +2,7 @@
 
 void __cdecl fcn_004fb4e0(void*);
 
-int __cdecl fcn_004cc340(char* p, char* out)
+int __cdecl cm_ExUpdateCityEconomy(char* p, char* out)
 {
 	fcn_004fb4e0(p + 0x10);
 	if (out != 0) {

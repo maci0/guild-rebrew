@@ -33,7 +33,7 @@ typedef struct
 extern fcn_004fd4f0_Ent g_7f4ca0[];
 extern char g_773d75;
 
-void __cdecl fcn_004fd400(int* a, int* b);
+void __cdecl gm_FindRichestEntity(int* a, int* b);
 float __cdecl gm_GetEntitySkill(fcn_004fd4f0_Ent* e, int k);
 int __cdecl fcn_004f4830(int idx, fcn_004fd4f0_Stat* dst);
 int __cdecl gm_GetBuildingTechEffect(char* a, int b, int c);
@@ -64,7 +64,7 @@ int __cdecl fcn_004fd4f0(char* building, fcn_004fd4f0_Out* out)
 
 	total = 0;
 	count = 0;
-	fcn_004fd400((int*) &mult, &base);
+	gm_FindRichestEntity((int*) &mult, &base);
 	if (*(unsigned short*) (building + 0x27) == 0xffff)
 		return 0;
 	me = &g_7f4ca0[*(unsigned short*) (building + 0x27)];

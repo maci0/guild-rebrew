@@ -8,7 +8,7 @@ struct vec4 {
 	float w;
 };
 
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 char* __cdecl fcn_00442910(int, struct vec4*, char*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 
@@ -23,8 +23,8 @@ char* __cdecl d3_CreateMapTableTowerMarker(float tx, float tz)
 	v.y = 0.0f;
 	v.z = 0.0f;
 	v.w = 0.0f;
-	p = fcn_00445600(0, 0x140, 0, "dummy_Kartentisch_LINKS_OBEN");
-	q = fcn_00445600(0, 0x140, 0, "dummy_Kartentisch_RECHTS_UNTEN");
+	p = d3_FindSceneObject(0, 0x140, 0, "dummy_Kartentisch_LINKS_OBEN");
+	q = d3_FindSceneObject(0, 0x140, 0, "dummy_Kartentisch_RECHTS_UNTEN");
 	if (p == 0 || q == 0) {
 		return 0;
 	}

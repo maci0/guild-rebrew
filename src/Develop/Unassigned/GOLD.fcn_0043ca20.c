@@ -7,7 +7,7 @@ void __cdecl d3_SetActiveCamera(char*);
 void __cdecl d3_SetObjectRotation(char*, char*);
 
 /* ADDRESS: GOLD 0x0043ca20 */
-void __cdecl fcn_0043ca20(char* o)
+void __cdecl d3_RegisterSceneObject(char* o)
 {
 	if (*(int*) (o + 0x218) == 3 && d3_ActiveCamera == 0) {
 		d3_SetActiveCamera(o);

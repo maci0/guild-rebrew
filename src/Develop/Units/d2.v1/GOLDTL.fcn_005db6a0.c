@@ -32,7 +32,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(char*, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -91,7 +91,7 @@ int __cdecl gm_HandleVerhoerMode2(char* e, char* o)
 			if (d2_CurrentElementId == ok && d2_CheckActionBlocker(e, 4) != 0) {
 				h = amt_SendAction0x45(e, (char*) g, 2);
 				while (h != -1 && cm_GetCommandStatus(h) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 				g_774654 = 1;
 				r = 0x91;

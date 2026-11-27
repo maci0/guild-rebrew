@@ -51,7 +51,7 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d3_FreeObjectAnimation(void *);
 void __cdecl d3_AnimateObjectTransform(char *, Vec3 *, Vec3 *, int, int);
-char *__cdecl fcn_00445600(char *, int, char *, char *);
+char *__cdecl d3_FindSceneObject(char *, int, char *, char *);
 void __cdecl ch_QueueWalkToDummyRotate(char *, char *);
 int __cdecl fcn_0053b1b0(void);
 int __cdecl d2_ShowChooseProfessionDialog(int);
@@ -63,7 +63,7 @@ void *__cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(char *);
 void __cdecl evt_WaitForScriptExit(int);
 void __cdecl gv_Free3Fields(void *);
-void __cdecl fcn_004e4c00(void);
+void __cdecl d3_DestroySkyLayer(void);
 void __cdecl fcn_00473150(char *);
 
 /* ADDRESS: GOLDTL 0x0053c560 */
@@ -195,7 +195,7 @@ int __cdecl d2_RunParentProfessionSelection(void)
 slot_found:
 							((int *) 0x7e1fc0)[i] = mode;
 							obj2->slot = i;
-							found = fcn_00445600(0, 0x100, 0, buf[i]);
+							found = d3_FindSceneObject(0, 0x100, 0, buf[i]);
 							if (found != 0)
 								ch_QueueWalkToDummyRotate((char *) obj2, found);
 						}
@@ -265,7 +265,7 @@ slot_found:
 		gv_Free3Fields((void *) *(int *) (g_67a370 + 0xb0));
 		*(int *) (g_67a370 + 0xb0) = 0;
 	}
-	fcn_004e4c00();
+	d3_DestroySkyLayer();
 	base = g_67a370;
 	if (base != 0) {
 		sub = *(int *) (base + 0x3c8);

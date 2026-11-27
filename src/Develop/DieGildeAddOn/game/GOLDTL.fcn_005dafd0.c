@@ -44,7 +44,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(unsigned char*, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -118,7 +118,7 @@ int __cdecl gm_HandleVerhoer(unsigned char* e, unsigned char* action)
 				fcn_005100f0(*(int*) (e + 4), -8);
 				h = cm_RequestChangeBits(*(int*) (e + 4), 0x1cc, 4, 0x40000, 0);
 				while (h != -1 && cm_GetCommandStatus(h) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 				g_774654 = 1;
 				result = 0x91;

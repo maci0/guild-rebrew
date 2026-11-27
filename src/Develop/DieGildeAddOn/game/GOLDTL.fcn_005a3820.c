@@ -1,7 +1,7 @@
 #include <string.h>
 extern char g_6a956c[], g_6a9580[], g_6a9924[];
 
-char* __cdecl fcn_00445600(char*, int, char*, char*);
+char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 void __cdecl d3_SetSubtreeVisible(void*, int);
 int __cdecl fcn_0051e070(void);
 void __cdecl fcn_005338a0(void);
@@ -34,20 +34,20 @@ void __cdecl d2_RunWirtshausTableMenu(char* app)
 
 
 	fourth = 0; second = 0; first = 0; third = 0;
-	obj = fcn_00445600(0, 0xc0, 0, (char*) 0x6aaa48);
+	obj = d3_FindSceneObject(0, 0xc0, 0, (char*) 0x6aaa48);
 	if (obj != 0) {
 		d3_SetSubtreeVisible(obj, 0);
 	}
-	obj = fcn_00445600(0, 0xc0, 0, (char*) 0x6aaa38);
+	obj = d3_FindSceneObject(0, 0xc0, 0, (char*) 0x6aaa38);
 	if (obj != 0) {
 		d3_SetSubtreeVisible(obj, 0);
 	}
 
 	if (fcn_0051e070() == 0) {
 		strcpy(name, "ob_KARTENTISCH_germ");
-		obj = fcn_00445600(0, 0xc0, 0, (char*) 0x6aaa48);
+		obj = d3_FindSceneObject(0, 0xc0, 0, (char*) 0x6aaa48);
 		if (obj == 0) {
-			obj = fcn_00445600(0, 0xc0, 0, (char*) 0x6aaa38);
+			obj = d3_FindSceneObject(0, 0xc0, 0, (char*) 0x6aaa38);
 			if (obj == 0) {
 				goto ready;
 			}
@@ -59,7 +59,7 @@ void __cdecl d2_RunWirtshausTableMenu(char* app)
 
 
 
-		obj = fcn_00445600(0, 0xc0, 0, (char*) 0x6aaa38);
+		obj = d3_FindSceneObject(0, 0xc0, 0, (char*) 0x6aaa38);
 		if (obj != 0) {
 			d3_SetSubtreeVisible(obj, 1);
 		}

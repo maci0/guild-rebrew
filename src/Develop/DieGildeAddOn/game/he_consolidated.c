@@ -12,7 +12,7 @@ void __cdecl fcn_004da170(void);
 void __cdecl fcn_004dc5f0(void);
 void __cdecl fcn_004dc6e0(void);
 void __cdecl cut_HandleProzessEvent(void);
-void __cdecl fcn_004e1890(void);
+void __cdecl cut_SelectDuellResponse(void);
 void __cdecl fcn_004e1900(void);
 void __cdecl fcn_004e1950(void);
 void __cdecl fcn_004e3de0(void);
@@ -44,7 +44,7 @@ void __cdecl fcn_004e71a0(void)
 	cut_RegisterEventCallbacks(1, cut_RunOfficeSessions, (void*) fcn_004dc5f0, (void*) fcn_004dc6e0, 0, 0);
 	cut_RegisterEventCallbacks(2, cut_RunProzess, (void*) fcn_004df1b0, (void*) cut_HandleProzessEvent, fcn_004dc7d0, 0);
 	cut_RegisterEventCallbacks(3, cut_RunCombatCutscene, (void*) fcn_004da170, 0, fcn_004d74b0, 1);
-	cut_RegisterEventCallbacks(4, cut_MainDuell, (void*) fcn_004e1900, (void*) fcn_004e1890, fcn_004e1330, 0);
+	cut_RegisterEventCallbacks(4, cut_MainDuell, (void*) fcn_004e1900, (void*) cut_SelectDuellResponse, fcn_004e1330, 0);
 	cut_RegisterEventCallbacks(5, cut_PlayHinrichtung, 0, 0, cut_NotifyHinrichtung, 0);
 	cut_RegisterEventCallbacks(6, fcn_004e2090, 0, 0, gm_NotifyHochzeit, 0);
 	cut_RegisterEventCallbacks(7, cut_PlayBirthCutscene, 0, 0, gm_NotifyGeburt, 0);
@@ -52,5 +52,5 @@ void __cdecl fcn_004e71a0(void)
 	cut_RegisterEventCallbacks(9, cut_RunPleiteCutscene, 0, 0, 0, 0);
 	cut_RegisterEventCallbacks(10, cut_RunAuction, (void*) fcn_004e3de0, (void*) fcn_004e3ff0, cut_BroadcastCutsceneNotice, 1);
 	cut_RegisterEventCallbacks(11, fcn_004e4180, 0, 0, 0, 0);
-	fcn_004e4f10(0);
+	cut_ResetEventSlots(0);
 }

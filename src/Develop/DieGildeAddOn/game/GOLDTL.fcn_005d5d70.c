@@ -47,7 +47,7 @@ int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -107,7 +107,7 @@ int __cdecl d2_ShowDuelChallengeDialog(unsigned char* e)
 					m.f58 = ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id;
 					h = cm_SendCopyEntityData(&m);
 					while (cm_GetCommandStatus(h) == 0) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 					cm_RequestModifyHealth(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -2);
 					io_FormatTextBuffer(text, 0x1d6a, b, *(unsigned short*) e, a);

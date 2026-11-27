@@ -13,7 +13,7 @@ extern int g_6b8300;
 extern int g_772e9c;
 extern int g_772ec4;
 
-int __cdecl fcn_004ce590(int a1);
+int __cdecl gm_LookupWeaponSpec(int a1);
 int __cdecl fcn_00418000(int a1, float* v, int n, float f1, float f2,
     float f3, float f4, float f5, float f6, float* out, int a11, int a12,
     int a13);
@@ -25,7 +25,7 @@ int __cdecl sb_PlayVoice(char* bank, const char* name, int loop, int pan,
     int vol, int a, int b);
 void __cdecl d3_GridPointToWorld(int g, int x, int z, float* out);
 unsigned int __cdecl cut_RandMod(unsigned int n);
-void __cdecl fcn_004cfc40(int a1, int a2, int a3);
+void __cdecl d3_ScheduleActionTimer(int a1, int a2, int a3);
 int __cdecl fcn_004d4790(char* e);
 int __cdecl ch_QueuePlayAnimation(char* e, const char* name, int param);
 void __cdecl d3_DestroyObject(int p);
@@ -53,7 +53,7 @@ int __cdecl fcn_004cf6b0(void)
 
 	world = *(int*) (((char*) g_67a370) + 0xb0);
 	count = 0;
-	obj = fcn_004ce590(0x176);
+	obj = gm_LookupWeaponSpec(0x176);
 	p = (Ent4cf6b0*) 0x9b9ec0;
 	do {
 		int p0;
@@ -109,9 +109,9 @@ int __cdecl fcn_004cf6b0(void)
 								dmg2 = (int) ((double) dmg * (1.0 - d * 0.01f));
 								*(int*) (*(char**) q + 0x24) -= dmg2;
 								if (*(int*) (*(char**) q + 0x16c) == g_772e9c) {
-									fcn_004cfc40(*q, dmg2, 1);
+									d3_ScheduleActionTimer(*q, dmg2, 1);
 								} else {
-									fcn_004cfc40(*q, dmg2, 2);
+									d3_ScheduleActionTimer(*q, dmg2, 2);
 								}
 								if (!fcn_004d4790(e)) {
 									ch_QueuePlayAnimation((char*) other, "kampf/arm_greifen", 1);

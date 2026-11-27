@@ -9,7 +9,7 @@ extern char g_868060[];
 extern double g_665ed0;
 extern char g_6a40b0[];
 
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_AnimateCameraToNode(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -46,11 +46,11 @@ void __cdecl fcn_005a31b0(char* building)
 	if (building[0] != 'G') {
 		return;
 	}
-	p = (int) fcn_00445600(0, 0x100, 0, g_6a40b0);
+	p = (int) d3_FindSceneObject(0, 0x100, 0, g_6a40b0);
 	if (p != 0) {
 		d3_AnimateCameraToNode(p, g_6a256c);
 	}
-	object = (int) fcn_00445600(0, 0x40, 0, "ob_KARTENTISCH");
+	object = (int) d3_FindSceneObject(0, 0x40, 0, "ob_KARTENTISCH");
 	idx = -1;
 	k = -1;
 	if (main_RunFrameLoop((void*) fcn_005a31b0, 0x677c7)) {

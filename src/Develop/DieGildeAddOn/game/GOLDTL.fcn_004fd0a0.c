@@ -8,12 +8,12 @@ extern double g_6629c8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern double g_6640f0;
 
-void __cdecl fcn_004fd400(short*, int*);
+void __cdecl gm_FindRichestEntity(short*, int*);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl cm_BeginSecondaryPacketDelta(int*);
 int __cdecl cm_AppendDesireDelta(unsigned char, float);
@@ -36,11 +36,11 @@ void __cdecl fcn_004fd0a0(void)
 
 	char* e;
 
-	fcn_004fd400(&flag, &n);
+	gm_FindRichestEntity(&flag, &n);
 	g_773d48 = 0;
 	for (e = (char*) g_slot_table; (int) e < (int) g_slot_table + 0x65400; e += 0x21c) {
 		if (g_773d48 > 0x40) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 			g_773d48 = 0;
 		}
 		if (*(short*) e == -1) {

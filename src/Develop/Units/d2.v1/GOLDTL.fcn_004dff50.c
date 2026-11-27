@@ -25,7 +25,7 @@ int __cdecl fcn_004de610(int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 float __cdecl fcn_004ff210(unsigned short, int);
-void __cdecl fcn_004cfc40(char*, int, int);
+void __cdecl d3_ScheduleActionTimer(char*, int, int);
 
 /* Resolves the shot of a duel action: the challenger's skill decides whether
  * the bullet hits, the victim takes damage and the matching gesture and log
@@ -66,7 +66,7 @@ void __cdecl fcn_004dff50(char* task)
 		} else {
 			g_772f59 = g_772f59 + n;
 		}
-		fcn_004cfc40(foe, (int) (*(float*) (foe + 0x1c) * 0.01 * n), 0);
+		d3_ScheduleActionTimer(foe, (int) (*(float*) (foe + 0x1c) * 0.01 * n), 0);
 	} else {
 		hit = 0;
 		n = 0;

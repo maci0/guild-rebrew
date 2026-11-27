@@ -4,7 +4,7 @@ extern int g_7e4538;
 
 /* ADDRESS: GOLD 0x00555510 */
 /* ADDRESS: GOLDTL 0x0055d6e0 */
-void __cdecl fcn_0055d6e0(char* a, char* b)
+void __cdecl he_ApplyTransportSpeedModifiers(char* a, char* b)
 {
 	char* d;
 

@@ -5,7 +5,7 @@ int __cdecl fcn_00536bb0(void);
 void __cdecl fcn_00459710(int, int);
 int __cdecl sb_LoadSampleBank(char *, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_004d5450(void *);
+int __cdecl cut_GetBuildingCombatType(void *);
 int __cdecl sb_LoadLocalizedSampleBank(char *, int);
 int __cdecl fcn_0044c310(char *, char *);
 int __cdecl fcn_0045b700(int, int, int);
@@ -15,12 +15,12 @@ void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl cm_AreQueuedCommandsDone(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl cut_SpawnCombatActor(int, char *);
 void __cdecl SelectTextureSet(int, int, int, int);
 void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
-int __cdecl fcn_00445600(int, int, int, char *);
+int __cdecl d3_FindSceneObject(int, int, int, char *);
 void __cdecl d3_SetObjectVisible(int, int);
 void __cdecl gm_ShuffleBytes(int, void *);
 void __cdecl d3_SetSubtreeVisible(int, int);
@@ -149,7 +149,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 	*(int *) 0x772ed0 = sb_LoadSampleBank("kampf\\schwerter.sbf", 1);
 	first = (int) gm_StartFilteredEntitySearch(1, 1, *(int *) (o + 0x10c));
 	if (first != 0)
-		*(int *) 0x772f00 = fcn_004d5450((void *) first);
+		*(int *) 0x772f00 = cut_GetBuildingCombatType((void *) first);
 	switch (*(int *) 0x772f00) {
 	case 2:
 		*(int *) 0x772ed4 = sb_LoadLocalizedSampleBank("ARBEITER_KOMMENTARE_KLICK_DIEBE.sbf", 0);
@@ -177,7 +177,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 	}
 	first = (int) gm_StartFilteredEntitySearch(1, 1, *(int *) (o + 0x14));
 	if (first != 0)
-		*(int *) 0x772f04 = fcn_004d5450((void *) first);
+		*(int *) 0x772f04 = cut_GetBuildingCombatType((void *) first);
 	if (*(int *) 0x772f04 == *(int *) 0x772f00) {
 		*(int *) 0x772ed8 = *(int *) 0x772ed4;
 		*(int *) 0x772ee0 = *(int *) 0x772edc;
@@ -224,7 +224,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 		}
 		cm_EndCommandSync();
 		while (cm_AreQueuedCommandsDone() == 0)
-			fcn_00535960();
+			cm_StepCommandQueue();
 	}
 	for (p = (int *) (o + 0xc0), i = 0x10; i != 0; i--, p++) {
 		if (*p != -1) {
@@ -261,7 +261,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 	}
 	for (i = 1; i < 9; i++) {
 		fcn_0064d41a(buf, "WARE_0%i", i);
-		h = fcn_00445600(0, 0x40, 0, buf);
+		h = d3_FindSceneObject(0, 0x40, 0, buf);
 		if (h != 0)
 			d3_SetObjectVisible(h, 0);
 	}
@@ -274,7 +274,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 		gm_ShuffleBytes(9, ids);
 		i++;
 		fcn_0064d41a(buf, "dummy_KARREN_0%i", i);
-		h = fcn_00445600(0, 0x100, 0, buf);
+		h = d3_FindSceneObject(0, 0x100, 0, buf);
 		if (h != 0) {
 			if (*p == -1) {
 				d3_SetSubtreeVisible(h, 0);
@@ -312,7 +312,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 					*(int *) (e + 0x204) = ent;
 					for (j = 0; j < 3; j++) {
 						fcn_0064d41a(buf, "WARE_0%i", ids[j] + 1);
-						h = fcn_00445600(0, 0xc0, 0, buf);
+						h = d3_FindSceneObject(0, 0xc0, 0, buf);
 						if (h != 0) {
 							if (n - 1 < j)
 								d3_SetObjectVisible(h, 0);

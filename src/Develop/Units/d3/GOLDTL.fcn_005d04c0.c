@@ -19,7 +19,7 @@ extern float g_665e64;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 char* __cdecl fcn_00442910(int, float*, char*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -41,8 +41,8 @@ void __cdecl fcn_005d04c0(void)
 	pos[1] = 0.0f;
 	pos[2] = 0.0f;
 	pos[3] = 0.0f;
-	a = fcn_00445600(0, 0x140, 0, g_6a40d0);
-	b = fcn_00445600(0, 0x140, 0, g_6a40b0);
+	a = d3_FindSceneObject(0, 0x140, 0, g_6a40d0);
+	b = d3_FindSceneObject(0, 0x140, 0, g_6a40b0);
 	if (a == 0 || b == 0) {
 		return;
 	}

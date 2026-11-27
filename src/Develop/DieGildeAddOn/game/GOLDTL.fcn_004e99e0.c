@@ -13,7 +13,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char*, unsigned char*, int, int);
 int __cdecl fcn_004e9180(char*, int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x004e99e0 */
@@ -93,7 +93,7 @@ void __cdecl amt_ResolveOfficeApplications(int office, int count, OFFICE_SLOT* l
 					if (cm_GetCommandStatus(version) != 0) {
 						break;
 					}
-					fcn_00535960();
+					cm_StepCommandQueue();
 				} while (1);
 			}
 		} else {
@@ -116,7 +116,7 @@ void __cdecl amt_ResolveOfficeApplications(int office, int count, OFFICE_SLOT* l
 					if (cm_GetCommandStatus(version) != 0) {
 						break;
 					}
-					fcn_00535960();
+					cm_StepCommandQueue();
 				} while (1);
 			}
 		}
@@ -167,7 +167,7 @@ void __cdecl amt_ResolveOfficeApplications(int office, int count, OFFICE_SLOT* l
 					if (cm_GetCommandStatus(version) != 0) {
 						break;
 					}
-					fcn_00535960();
+					cm_StepCommandQueue();
 				} while (1);
 			}
 		} else {
@@ -218,7 +218,7 @@ void __cdecl amt_ResolveOfficeApplications(int office, int count, OFFICE_SLOT* l
 						if (cm_GetCommandStatus(version) != 0) {
 							break;
 						}
-						fcn_00535960();
+						cm_StepCommandQueue();
 					} while (1);
 				}
 			} else {
@@ -237,7 +237,7 @@ void __cdecl amt_ResolveOfficeApplications(int office, int count, OFFICE_SLOT* l
 						if (cm_GetCommandStatus(version) != 0) {
 							break;
 						}
-						fcn_00535960();
+						cm_StepCommandQueue();
 					} while (1);
 				}
 			}

@@ -116,7 +116,7 @@ char* __cdecl fcn_00502cd0(int, int, int, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_FindCityItemHolder(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_AccumulateTyped2(void*);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
@@ -185,7 +185,7 @@ int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
 					}
 				}
 				fr = eval_ObjektPreis2Credits(t->id, 100);
-				fr = fr / fcn_0050bb50(t->id, g_773d75);
+				fr = fr / gm_GetSeasonPrice(t->id, g_773d75);
 				if (!(fr < g_6628a0)) {
 					continue;
 				}
@@ -228,7 +228,7 @@ int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld)
 					if ((t->flags54 & 6) != 0) {
 						continue;
 					}
-					price = (int) fcn_0050bb50(t->id,
+					price = (int) gm_GetSeasonPrice(t->id,
 					    g_773d75);
 					tmp = 0x7d00 / price;
 					if (tmp < 1) {
@@ -466,20 +466,20 @@ next_request:
 					    lpObjektePROT +
 					    (int) v.ids[j] * 0x40 +
 					    (int) v.ids[j] + 1);
-					tmp = (int) fcn_0050bb50(
+					tmp = (int) gm_GetSeasonPrice(
 					    (int) v.ids[j], g_773d75);
 					price = tmp;
 					sprintf(v.line, (char*) 0x67e358,
 					    -1, *(int*) (bld + 2),
 					    (int) v.ids[j], v.a2[j],
 					    g_773d75, (double) price);
-					tmp = (int) fcn_0050bb50(
+					tmp = (int) gm_GetSeasonPrice(
 					    (int) v.ids[j], g_773d75);
 					cm_SendSellObjekt(-1,
 					    *(int*) (bld + 2),
 					    (int) v.ids[j], v.a2[j],
 					    g_773d75, tmp);
-					price = (int) (fcn_0050bb50(
+					price = (int) (gm_GetSeasonPrice(
 					    (int) v.ids[j], g_773d75) +
 					    *(int*) (o + 0x1b8));
 					*(int*) (o + 0x1b8) = price;
@@ -515,16 +515,16 @@ fake_auto:
 				    *(char**) (o + 0x16c) + 5, *p,
 				    lpObjektePROT +
 				    (int) *ip * 0x40 + (int) *ip + 1);
-				price = (int) fcn_0050bb50((int) *ip,
+				price = (int) gm_GetSeasonPrice((int) *ip,
 				    g_773d75);
 				sprintf(v.line, (char*) 0x67e358, -1,
 				    *(int*) (bld + 2), (int) *ip, *p,
 				    g_773d75, (double) price);
-				tmp = (int) fcn_0050bb50((int) *ip,
+				tmp = (int) gm_GetSeasonPrice((int) *ip,
 				    g_773d75);
 				cm_SendSellObjekt(-1, *(int*) (bld + 2),
 				    (int) *ip, *p, g_773d75, tmp);
-				price = (int) (fcn_0050bb50((int) *ip,
+				price = (int) (gm_GetSeasonPrice((int) *ip,
 				    g_773d75) + *(int*) (o + 0x1b8));
 				*ip = 0;
 				*p = 0;
@@ -656,14 +656,14 @@ next_collect:
 					    w->qty18,
 					    lpObjektePROT +
 					    w->id * 0x40 + w->id + 1);
-					tmp = (int) fcn_0050bb50(w->id,
+					tmp = (int) gm_GetSeasonPrice(w->id,
 					    g_773d75);
 					price = tmp;
 					sprintf(v.line,
 					    (char*) 0x67e358, -1,
 					    *(int*) (bld + 2), w->id,
 					    w->qty18, g_773d75, price);
-					tmp = (int) fcn_0050bb50(w->id,
+					tmp = (int) gm_GetSeasonPrice(w->id,
 					    g_773d75);
 					cm_SendSellObjekt(-1,
 					    *(int*) (bld + 2), w->id,

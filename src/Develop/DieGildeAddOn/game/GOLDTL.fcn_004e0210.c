@@ -12,7 +12,7 @@ extern char g_772f5c;
 extern char g_772f5d;
 extern DuelActionAnim g_68cc34;
 
-unsigned char* __cdecl fcn_004e6a70(int);
+unsigned char* __cdecl gm_FindPlayerById(int);
 int __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl fcn_004de610(int);
@@ -36,7 +36,7 @@ void __cdecl cut_PlayDuelIntroMove(char* e, char* foe)
 	float b;
 
 	if (g_772f44 == 0) {
-		d = fcn_004e6a70(*(int*) (e + 4));
+		d = gm_FindPlayerById(*(int*) (e + 4));
 		d2_SetForm(g_68bfc0, 0);
 		io_AppendText((int) "$C");
 		switch (d[0x94]) {

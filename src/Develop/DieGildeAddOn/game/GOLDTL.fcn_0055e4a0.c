@@ -35,7 +35,7 @@ int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* rec);
 void __cdecl io_FormatTextBuffer(char* text, int format, ...);
 int __cdecl ch_IsEntityNearBuildingDoor(char* a, unsigned char* b);
 char* __cdecl he_PickRandomSceneObject(char* o);
-void __cdecl fcn_0055d6e0(char* a, char* b);
+void __cdecl he_ApplyTransportSpeedModifiers(char* a, char* b);
 int __cdecl he_MessageBoxQuickjump(int id, int arg, char* text1, unsigned char flags,
 	int value, int x, int y, char* name, char* text2);
 
@@ -67,7 +67,7 @@ void __cdecl he_StepTransportEntry(char* ev)
 	if (!e) {
 		return;
 	}
-	fcn_0055d6e0(ev, e);
+	he_ApplyTransportSpeedModifiers(ev, e);
 	if (!*(char*) (ev + 0xd0)) {
 		cm_SendCancelCharacterActions(*(unsigned int*) (e + 2));
 		ch_StartMovement(*(unsigned int*) (e + 2), *(unsigned int*) (v8 + 1),

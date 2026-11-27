@@ -23,7 +23,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl d3_UpdateBuildingView(void* ent, int v);
-void __cdecl fcn_0052a3a0(void* t, int flag);
+void __cdecl gm_UpdateWeatherAndSky(void* t, int flag);
 void __cdecl d3_UpdateBuildingWimpelTextures(int idx);
 void __cdecl fcn_00533a40(void* p);
 void __cdecl gm_ApplyGameSettings(void);
@@ -51,7 +51,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 		memset(&t, 0, sizeof t);
 		t.day = *(int*) (buf + 0x11);
 		srv_SeedRandom(*(int*) (buf + 0x15));
-		fcn_0052a3a0(&t, 1);
+		gm_UpdateWeatherAndSky(&t, 1);
 		break;
 	}
 	case 2:

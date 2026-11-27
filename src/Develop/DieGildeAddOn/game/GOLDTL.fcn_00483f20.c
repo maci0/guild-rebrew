@@ -56,12 +56,12 @@ extern unsigned short g_7f4c04;
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004849b0(AI_MASTER_ENTITY*, void*, void*);
 void __cdecl ai_ManageMeisterWorkers(AI_MASTER_ENTITY*);
-void __cdecl fcn_00487970(void*, AI_MASTER_ENTITY*, int);
+void __cdecl gm_TryAutoUpgradeBuildingSlots(void*, AI_MASTER_ENTITY*, int);
 void __cdecl ai_RequestAusbauUpgrade(void*, AI_MASTER_ENTITY*, int);
-void __cdecl fcn_00487470(AI_MASTER_ENTITY*);
+void __cdecl ai_BuyStallGoods(AI_MASTER_ENTITY*);
 int __cdecl ai_CanProduceGood(AI_MASTER_ENTITY*, PRODUCTION_GOODS_RECORD*, int);
 void __cdecl fcn_004868d0(AI_MASTER_ENTITY*, PRODUCTION_GOODS_RECORD*);
-int __cdecl fcn_005b1e40(int);
+int __cdecl hp_PickWeightedProdItem(int);
 void* __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(void*, int, int);
 int __cdecl gm_RandomMod(int);
@@ -154,9 +154,9 @@ void __cdecl ai_RunWorkshopMaster(AI_MASTER_ENTITY* e)
 	}
 	fcn_004849b0(e, rec, stk);
 	ai_ManageMeisterWorkers(e);
-	fcn_00487970(stk, e, 0x4b);
+	gm_TryAutoUpgradeBuildingSlots(stk, e, 0x4b);
 	ai_RequestAusbauUpgrade(stk, e, 0x19);
-	fcn_00487470(e);
+	ai_BuyStallGoods(e);
 
 	if (g_7f4c04 == 8 || g_7f4c04 == 0xd) {
 		if ((e->flags & 0x100) == 0) {
@@ -196,7 +196,7 @@ void __cdecl ai_RunWorkshopMaster(AI_MASTER_ENTITY* e)
 
 	slot = slot_at(*(unsigned short*) ((char*) e->root + 0x27));
 	if (*(char*) (slot + 2) == 6 &&
-	    (id = fcn_005b1e40(e->root)) != 0) {
+	    (id = hp_PickWeightedProdItem(e->root)) != 0) {
 		for (scan = g_100d0c0, i = 0; (char*) scan < (char*) 0x100dbc0; scan = (PRODUCTION_GOODS_RECORD*) ((char*) scan + 0x58), i++) {
 			if (scan->goods_id == id) {
 				if (can_start(e, stk, scan, 1)) {

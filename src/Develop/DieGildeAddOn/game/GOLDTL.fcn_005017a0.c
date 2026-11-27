@@ -34,7 +34,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 void __cdecl cm_SendUpdateSlot80(char*, char);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 
 /* ADDRESS: GOLDTL 0x005017a0 */
 void __cdecl gm_UpdateMarketStockSlots(int player)
@@ -101,7 +101,7 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 				if (ent2 == 0) {
 					v = cm_SendSellObjekt(*(int*) (ent + 2), -1, 0xff, 1, (char) g_773d75, 0);
 					while (cm_GetCommandStatus(v) == 0) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 					ent2 = cm_GetCommandResult(v);
 				}
@@ -109,7 +109,7 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 					if (fcn_00502cd0(*(int*) (ent2 + 0x14), 1, 0, p->objekt_id) == 0) {
 						v = cm_SendSellObjekt(*(int*) (ent2 + 2), -1, p->objekt_id, 1, (char) g_773d75, 0);
 						while (cm_GetCommandStatus(v) == 0) {
-							fcn_00535960();
+							cm_StepCommandQueue();
 						}
 					}
 				} else {
@@ -118,7 +118,7 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 						v = cm_SendSellObjekt(-1, *(int*) (ent2 + 2), p->objekt_id,
 								 *(int*) (o + 0xe), (char) g_773d75, 0);
 						while (cm_GetCommandStatus(v) == 0) {
-							fcn_00535960();
+							cm_StepCommandQueue();
 						}
 					}
 				}
@@ -186,7 +186,7 @@ void __cdecl gm_UpdateMarketStockSlots(int player)
 		}
 		cm_EndCommandSync();
 		while (cm_AreQueuedCommandsDone() == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 	}
 }

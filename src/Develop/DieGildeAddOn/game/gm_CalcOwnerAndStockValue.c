@@ -10,7 +10,7 @@ typedef struct {
 int __cdecl fcn_0050d2a0(void*);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl fcn_00502850(void);
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 
 /* ADDRESS: GOLDTL 0x0050d0c0 */
 int __cdecl gm_CalcOwnerAndStockValue(char* bld, int flag)
@@ -33,7 +33,7 @@ int __cdecl gm_CalcOwnerAndStockValue(char* bld, int flag)
 			slot = (char*) fcn_00502cd0(*(int*) (slot + 0x14), 1, 5);
 			if (slot != 0) {
 				do {
-					val = (int) (fcn_0050bb50(*(unsigned short*) slot,
+					val = (int) (gm_GetSeasonPrice(*(unsigned short*) slot,
 					                          g_773d75)
 					             + (float) val);
 					slot = (char*) fcn_00502850();

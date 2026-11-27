@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-char* __cdecl fcn_005b1a80(int id);
+char* __cdecl hp_FindProdSettingNode(int id);
 
 /* ADDRESS: GOLDTL 0x005b1ce0 */
 void __cdecl gm_AdjustProductionShare(char* building, int entryKey, unsigned char requestedShare)
@@ -14,7 +14,7 @@ void __cdecl gm_AdjustProductionShare(char* building, int entryKey, unsigned cha
 	int delta;
 	int step;
 
-	p = fcn_005b1a80(*(int*) (building + 1));
+	p = hp_FindProdSettingNode(*(int*) (building + 1));
 	avail = 100;
 	if (entryKey == 0) {
 		return;

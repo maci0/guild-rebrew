@@ -10,7 +10,7 @@ int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 
 /* ADDRESS: GOLDTL 0x004ea350 */
 void __cdecl fcn_004ea350(void)
@@ -47,7 +47,7 @@ void __cdecl fcn_004ea350(void)
 				if (cm_GetCommandStatus(res) != 0) {
 					break;
 				}
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 	}

@@ -12,7 +12,7 @@ struct fsm {
 extern int* g_665f08;
 extern volatile int g_6b7fac;
 
-int __cdecl fcn_0057ef30(int* ev)
+int __cdecl d2_UpdateTutCh1FocusStep(int* ev)
 {
 	char* p;
 

@@ -9,7 +9,7 @@ extern char* g_14a6554;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
-void __cdecl fcn_004e7660(char* x, char* out)
+void __cdecl srv_FormatStatFamily(char* x, char* out)
 {
 	char buf[0x100];
 	int* p;

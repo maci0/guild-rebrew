@@ -5,7 +5,7 @@
 
 void __cdecl cm_SendLogAction(char* name);
 void __cdecl cm_SendTraceEnd(char* name);
-int __cdecl fcn_0050d170(int id);
+int __cdecl gm_GetTypeProductValue(int id);
 void __cdecl cm_RequestMoveCredits(int a, int b, char c, int preis);
 void __cdecl cm_SendCopyEntityData(char* paket);
 int __cdecl amt_ExecGebaeudeBauen(char* kontext, char* ziel, char* aktion);
@@ -32,7 +32,7 @@ int __cdecl RunBuergermeister(char* objekt, char* ziel, char* aktion)
         *(int*) (paket + 0x58) = *(int*) (aktion + 4);
         cm_SendLogAction("upgr_arbeiter_unterk");
         cm_RequestMoveCredits(-1, *(int*) (spieler + 2), (char) g_773d75,
-            (int) (fcn_0050d170(*(int*) (ziel + 4)) * 0.3f));
+            (int) (gm_GetTypeProductValue(*(int*) (ziel + 4)) * 0.3f));
         cm_SendCopyEntityData(paket);
         cm_SendTraceEnd("upgr_arbeiter_unterk");
         return 0x2e;
@@ -40,7 +40,7 @@ int __cdecl RunBuergermeister(char* objekt, char* ziel, char* aktion)
         cm_SendLogAction("bau_arbeiter_unterk");
         if (amt_ExecGebaeudeBauen(gm_CityEntity, ziel, aktion)) {
             cm_RequestMoveCredits(-1, *(int*) (spieler + 2), (char) g_773d75,
-                fcn_0050d170(*(int*) (ziel + 4)));
+                gm_GetTypeProductValue(*(int*) (ziel + 4)));
             cm_SendTraceEnd("bau_arbeiter_unterk");
             return 0x2e;
         } else {

@@ -58,7 +58,7 @@ int __cdecl d2_GetControlValue(int slot);
 int __cdecl fcn_004f0ff0(char* a0, int a1, int a2, int a3, int* o1, int* o2);
 void __cdecl gm_CalcArtillerySpread(char* p, float* o1, float* o2);
 float __cdecl gm_GetCannonPowerScale(char* p);
-int __cdecl fcn_004f0a30(char* a0, char* a1, unsigned int* a2,
+int __cdecl gm_SendCannonVolleys(char* a0, char* a1, unsigned int* a2,
 	unsigned int* a3, unsigned int* a4, float a5, int a6, unsigned int a7);
 float __cdecl fcn_004f0eb0(int level, int percent, int count);
 int __cdecl fcn_005e8e80(Particle* o, Vec3* pos, Vec3* dir, float speed,
@@ -131,7 +131,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 		fcn_005e8e80(&p0, &pos0, &emitter->dir1, speed, b, 7874.0f);
 		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		h = fcn_004f0a30(building,
+		h = gm_SendCannonVolleys(building,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			(unsigned int*) &p0, 0, 0,
 			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);
@@ -152,7 +152,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 			scale);
 		d3_PerturbParticleVelocity((float*) &p0, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		h = fcn_004f0a30(building,
+		h = gm_SendCannonVolleys(building,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			(unsigned int*) &p1, (unsigned int*) &p0, 0,
 			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);
@@ -188,7 +188,7 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 			scale);
 		d3_PerturbParticleVelocity((float*) &p1, spread, &emitter->dir2, spread, &emitter->dir3,
 			scale);
-		h = fcn_004f0a30(building,
+		h = gm_SendCannonVolleys(building,
 			(char*) (g_slot_table + (unsigned int) g_774970 * 0x21c),
 			(unsigned int*) &p2, (unsigned int*) &p0, (unsigned int*) &p1,
 			fcn_004f0eb0(slot0, slot1, 1), o1, (unsigned int) o2);

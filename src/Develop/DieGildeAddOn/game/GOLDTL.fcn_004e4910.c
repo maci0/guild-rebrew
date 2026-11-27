@@ -11,7 +11,7 @@ typedef void(__cdecl* hook_4e4910)(char*, int, char*, int);
 char* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(char*);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_004e4640(void);
+void __cdecl cut_ExitPendingEvtScripts(void);
 void __cdecl fcn_004e4680(void);
 void __cdecl gv_Free3Fields(int);
 void __cdecl d3_FreeObjectAnimation(void*);
@@ -42,7 +42,7 @@ void __cdecl cut_CleanupCutscene(void)
 		for (w = evt_FindScriptById(evt_LastGfxScriptId); w != 0 && (w[0x124] & 1) != 0; w = evt_FindScriptById(evt_LastGfxScriptId))
 			main_RunFrameLoop(0, cut_EventLoopFlags | 0x80);
 	}
-	fcn_004e4640();
+	cut_ExitPendingEvtScripts();
 	fcn_004e4680();
 	if (g_68bfc4 != -1) {
 		for (w = evt_FindScriptById(g_68bfc4); w != 0 && (w[0x124] & 1) != 0; w = evt_FindScriptById(g_68bfc4))

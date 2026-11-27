@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_SelectSceneContext(int, int);
-int __cdecl fcn_00445600(int, int, int, int*);
+int __cdecl d3_FindSceneObject(int, int, int, int*);
 void __cdecl d3_TransformPoint(char*, char*, int*);
 int __cdecl gm_SelectEntityHeadSet(int);
 char* __cdecl ch_CreateAtPosition(char*, float*);
@@ -43,7 +43,7 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 	}
 	d3_SelectSceneContext(a1, 1);
 	if (a5 != 0) {
-		v5 = fcn_00445600(a4, 0x100, 0, a5);
+		v5 = d3_FindSceneObject(a4, 0x100, 0, a5);
 		if (v5 != 0) {
 			transformed = 1;
 			goto have;

@@ -3,7 +3,7 @@ extern int g_7728f4;
 
 char* __cdecl fcn_0044c310(char* key, char* val);
 
-void __cdecl fcn_0044c440(char*);
+void __cdecl gv_SpawnIfPending(char*);
 extern char g_6813e8[];
 extern char g_6813dc[];
 extern char g_68140c[];
@@ -35,7 +35,7 @@ void __cdecl fcn_004bcae0(void)
 
 	for (i = 0; i < g_7728f4; i++) {
 		if (g_1006920[i] != 0)
-			fcn_0044c440(g_1006920[i]);
+			gv_SpawnIfPending(g_1006920[i]);
 		g_1006920[i] = 0;
 	}
 }

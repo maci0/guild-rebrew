@@ -109,7 +109,7 @@ extern char* g_100e748; extern char* lpObjektePROT;
 int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld);
 int __cdecl gm_GetStorageSlotCapacity(char* pkt, int item_id);
 float __cdecl eval_ObjektPreis2Credits(int id, int n);
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 float __cdecl fcn_005a8a30(char* a);
 int __cdecl gm_AccumulateTyped2(void* m);
 void* __cdecl fcn_00502cd0(int list, int mode, ...);
@@ -201,7 +201,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 				    *(unsigned short*) (tp + 0x27) *
 				    0x21c) == 6) {
 					fr = fcn_005a8a30(tp);
-					if (fr <= fcn_0050bb50(t->id,
+					if (fr <= gm_GetSeasonPrice(t->id,
 					    g_773d75) /
 					    eval_ObjektPreis2Credits(t->id, 100)) {
 						t->qty44 = t->qty3c;
@@ -215,7 +215,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 					}
 				} else {
 					fr = eval_ObjektPreis2Credits(t->id, 100) /
-					    fcn_0050bb50(t->id, g_773d75);
+					    gm_GetSeasonPrice(t->id, g_773d75);
 					if (fr < g_6628a0
 					    && fr <= gm_RandomFloat01() *
 					    g_664144 + 0.25) {
@@ -260,7 +260,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 				if ((t->flags54 & 6) != 0) {
 					continue;
 				}
-				price = (int) fcn_0050bb50(t->id, g_773d75);
+				price = (int) gm_GetSeasonPrice(t->id, g_773d75);
 				slot = price;
 				j = 0x7d00 / price;
 				if (j < 1) {
@@ -513,14 +513,14 @@ next_request:
 			    *(char**) (o + 0x16c) + 5,
 			    v.s1.vals[j],
 			    ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]) + 1);
-			price = (int) fcn_0050bb50(id, g_773d75);
+			price = (int) gm_GetSeasonPrice(id, g_773d75);
 			sprintf(v.line, (char*) 0x67e358, -1,
 			    *(int*) (bld + 2), id, v.s1.vals[j],
 			    g_773d75, (double) price);
-			tmp = (int) fcn_0050bb50(id, g_773d75);
+			tmp = (int) gm_GetSeasonPrice(id, g_773d75);
 			cm_SendSellObjekt(-1, *(int*) (bld + 2), id,
 			    v.s1.vals[j], g_773d75, tmp);
-			price = (int) fcn_0050bb50(id, g_773d75) +
+			price = (int) gm_GetSeasonPrice(id, g_773d75) +
 			    *(int*) (o + 0x1b8);
 			*(int*) (o + 0x1b8) = price;
 			v.s1.ids[j] = 0;
@@ -548,14 +548,14 @@ no_market:
 			sprintf(v.line, (char*) 0x67e540,
 			    *(char**) (o + 0x16c) + 5, v.s2.vals[i],
 			    ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id]) + 1);
-			price = (int) fcn_0050bb50(id, g_773d75);
+			price = (int) gm_GetSeasonPrice(id, g_773d75);
 			sprintf(v.line, (char*) 0x67e358, -1,
 			    *(int*) (bld + 2), id, v.s2.vals[i], g_773d75,
 			    (double) price);
-			tmp = (int) fcn_0050bb50(id, g_773d75);
+			tmp = (int) gm_GetSeasonPrice(id, g_773d75);
 			cm_SendSellObjekt(-1, *(int*) (bld + 2), id,
 			    v.s2.vals[i], g_773d75, tmp);
-			price = (int) fcn_0050bb50(id, g_773d75) +
+			price = (int) gm_GetSeasonPrice(id, g_773d75) +
 			    *(int*) (o + 0x1b8);
 			*(int*) (o + 0x1b8) = price;
 			v.s2.ids[i] = 0;
@@ -729,12 +729,12 @@ next_auto:
 				    *(char**) (o + 0x16c) + 5, pr->qty18,
 				    (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[
 				    pr->id] + 1);
-				price = (int) fcn_0050bb50(pr->id,
+				price = (int) gm_GetSeasonPrice(pr->id,
 				    g_773d75);
 				sprintf(v.line, (char*) 0x67e358, -1,
 				    *(int*) (bld + 2), pr->id, pr->qty18,
 				    g_773d75, (double) price);
-				tmp = (int) fcn_0050bb50(pr->id,
+				tmp = (int) gm_GetSeasonPrice(pr->id,
 				    g_773d75);
 				cm_SendSellObjekt(-1, *(int*) (bld + 2),
 				    pr->id, pr->qty18, g_773d75, tmp);

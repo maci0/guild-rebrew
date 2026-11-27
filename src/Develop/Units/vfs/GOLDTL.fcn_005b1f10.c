@@ -8,7 +8,7 @@ extern struct Node* g_774a78;
 int __cdecl vfs_fwrite(void*, int, int, int);
 
 /* ADDRESS: GOLD 0x5a8a90 */
-int __cdecl fcn_005b1f10(int fh)
+int __cdecl ls_SaveList774a78(int fh)
 {
 	int n;
 	char* p;

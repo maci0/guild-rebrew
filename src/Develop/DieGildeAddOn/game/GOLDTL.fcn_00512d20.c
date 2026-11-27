@@ -52,7 +52,7 @@ void __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl gv_AssignGraveyardField(Player*);
 int __cdecl fcn_004c6090(Player*, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 Handle* __cdecl cm_GetCommandResult(int);
 int __cdecl gm_CheckEntityType(Player*);
 Site* __cdecl gm_FindBuildingPrimarySlot(Player*);
@@ -88,7 +88,7 @@ void __cdecl init_SetupBetriebWorkers(Player* p)
 			h = fcn_004c6090(p, 0, o->role_230, 0);
 		}
 		while (cm_GetCommandStatus(h) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 		q = cm_GetCommandResult(h);
 		if (gm_CheckEntityType(p) == 0) {

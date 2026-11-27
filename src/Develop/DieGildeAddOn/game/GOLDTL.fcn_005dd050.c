@@ -4,7 +4,7 @@ int __cdecl gm_LookupEntityRecordById(int value);
 int __cdecl gm_IncreaseEntitySkill(int value, int mode);
 
 /* ADDRESS: GOLDTL 0x005dd050 */
-int __cdecl fcn_005dd050(void *entity, void *a2)
+int __cdecl gm_BoostEntitySkill1(void *entity, void *request)
 {
     char buf[0x100];
     int r;
@@ -18,7 +18,7 @@ int __cdecl fcn_005dd050(void *entity, void *a2)
         }
         return 0;
     }
-    r = gm_LookupEntityRecordById(*(int *)((char *)a2 + 4));
+    r = gm_LookupEntityRecordById(*(int *)((char *)request + 4));
     if (r) {
         gm_IncreaseEntitySkill(r, 1);
         return 1;

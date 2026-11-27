@@ -24,7 +24,7 @@ char* __cdecl gm_FindRecordById(int);
 int __cdecl gm_CalcEntityInventoryStats(char* e, Stats* s);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
-int __cdecl fcn_004d5450(int);
+int __cdecl cut_GetBuildingCombatType(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_SendCmdMessage(char*, char*, char*, char*);
 
@@ -79,7 +79,7 @@ int __cdecl fcn_004d74b0(char* x)
 		strcat(buf, g_14a9aa8);
 		he_SendCmdMessage(b, x, buf, g_6b5c60);
 	} else if (flags & 2) {
-		t = fcn_004d5450(gm_SearchTable67(*(int*) (x + 0x10c))) + 0x1125;
+		t = cut_GetBuildingCombatType(gm_SearchTable67(*(int*) (x + 0x10c))) + 0x1125;
 		io_FormatTextBuffer(buf, 0x11e3, t, *(unsigned short*) b, t67);
 		strcat(buf, g_14a9ab4);
 		he_SendCmdMessage(a, x, buf, g_6b5c60);

@@ -17,7 +17,7 @@ extern char* g_aed32c;
 extern char g_6b5c60[];
 extern char g_6964f0[];
 
-int __cdecl fcn_0050a710(char*);
+int __cdecl gm_CanDeleteEntity(char*);
 int __cdecl fcn_004f3770(char*);
 void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
@@ -53,7 +53,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 		return g_662a94;
 	}
 	if (*(char*) (entity + 2) == 0x0f) {
-		v4 = fcn_0050a710(entity);
+		v4 = gm_CanDeleteEntity(entity);
 		if (v4 != 0) {
 			cm_RequestKillSpieler(*(int*) (entity + 4), 1);
 			g_773d48 += 1;

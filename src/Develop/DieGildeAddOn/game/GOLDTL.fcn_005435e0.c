@@ -58,7 +58,7 @@ void __cdecl cm_BeginCommandSync(void);
 int __cdecl cm_SendAllocClientSpieler(int, int, int, unsigned char, int, unsigned char, unsigned char, char*, char*);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl cm_AreQueuedCommandsDone(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 Figure* __cdecl cm_GetCommandResult(int);
 int __cdecl cm_RequestAllocSpieler(int, int, int, short, int, unsigned char, int, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -88,7 +88,7 @@ void __cdecl gm_CreateSetupFamily(void)
 		(*(Setup*)g_7e23e0).name, (*(Setup*)g_7e23e0).family);
 	cm_EndCommandSync();
 	while (cm_AreQueuedCommandsDone() == 0) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	p = cm_GetCommandResult(h);
 	cm_BeginCommandSync();
@@ -96,7 +96,7 @@ void __cdecl gm_CreateSetupFamily(void)
 	i = cm_RequestAllocSpieler(9, -1, -1, gm_RandomMod(4) + 0x20, -1, (*(Setup*)g_7e23e0).spouse_look, 0, 0);
 	cm_EndCommandSync();
 	while (cm_AreQueuedCommandsDone() == 0) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	child = cm_GetCommandResult(h);
 	spouse = cm_GetCommandResult(i);

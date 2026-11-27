@@ -6,7 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004ce320(void* payload)
+void __cdecl cm_SendSyncStamp0x5f(void* payload)
 {
 	char buf[0x9c];
 

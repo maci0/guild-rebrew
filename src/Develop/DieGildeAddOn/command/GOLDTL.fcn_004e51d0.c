@@ -50,7 +50,7 @@ extern char s_68d580[]; /* "cut_type:%i" */
 extern char s_68b300[]; /* 0x0068b300 */
 
 int __cdecl cut_GetRandSeed(void);
-void __cdecl fcn_004e4f10(unsigned char*);
+void __cdecl cut_ResetEventSlots(unsigned char*);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_RequestSysMessage(int, void*);
 void __cdecl cm_WaitNetworkSyncBanner(int);
@@ -60,8 +60,8 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl cm_StageRawPacketPayload(int, rec35c*);
 int __cdecl cm_RequestSendCutInfo(int, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
-int __cdecl fcn_004e4fc0(unsigned char*);
+void __cdecl cm_StepCommandQueue(void);
+int __cdecl cut_AreAllPlayersDone(unsigned char*);
 void __cdecl d2_AppendPendingPlayerNames(unsigned char*);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_004e51a0(unsigned char*, int);
@@ -88,7 +88,7 @@ void __cdecl cut_RunTurnRound(unsigned char* cutscene, int id)
 	int* ids;
 
 	saved = cut_GetRandSeed();
-	fcn_004e4f10(cutscene);
+	cut_ResetEventSlots(cutscene);
 	if (g_7747b0 & 4) {
 		if (*(int*) (cutscene + 0xc) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
 			if (g_772f3c != 0) {
@@ -151,7 +151,7 @@ label_4e526f:
 						cm_StageRawPacketPayload(0x35c, &c1);
 						h = cm_RequestSendCutInfo(*(int*) (ent + 4), *(int*) cutscene);
 						while (cm_GetCommandStatus(h) == 0) {
-							fcn_00535960();
+							cm_StepCommandQueue();
 						}
 						d2_AppendPendingPlayerNames(cutscene);
 						main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
@@ -172,12 +172,12 @@ label_4e526f:
 					cm_StageRawPacketPayload(0x35c, &c1);
 					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) cutscene);
 					while (cm_GetCommandStatus(h) == 0) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 					break;
 				}
 			}
-			while (fcn_004e4fc0(cutscene) == 0) {
+			while (cut_AreAllPlayersDone(cutscene) == 0) {
 				d2_AppendPendingPlayerNames(cutscene);
 				fcn_00533a40(g_14ac5ec);
 				main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
@@ -194,7 +194,7 @@ label_4e526f:
 					break;
 				}
 			}
-			while (fcn_004e4fc0(cutscene) == 0) {
+			while (cut_AreAllPlayersDone(cutscene) == 0) {
 				d2_AppendPendingPlayerNames(cutscene);
 				main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
 				if (pos != -1
@@ -212,7 +212,7 @@ label_4e526f:
 					cm_StageRawPacketPayload(0x35c, &c1);
 					h = cm_RequestSendCutInfo(*(int*) (g_772f24 + 4), *(int*) cutscene);
 					while (cm_GetCommandStatus(h) == 0) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 					d2_AppendPendingPlayerNames(cutscene);
 					main_RunFrameLoop(0, cut_EventLoopFlags | 0x8000);
@@ -236,7 +236,7 @@ label_4e526f:
 							cm_StageRawPacketPayload(0x35c, &c2);
 							h = cm_RequestSendCutInfo(*(int*) (ent + 4), *(int*) cutscene);
 							while (cm_GetCommandStatus(h) == 0) {
-								fcn_00535960();
+								cm_StepCommandQueue();
 							}
 							break;
 						}

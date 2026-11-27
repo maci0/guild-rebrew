@@ -32,7 +32,7 @@ int __cdecl gm_IsNpcEntityState(unsigned char* p);
 void __cdecl gm_CalcStudiumOffers(char* e, Share* out);
 Rec6 __cdecl gm_GetStatRecord(int idx);
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_0050d320(char* e, unsigned char b);
+int __cdecl gm_GetSeasonTreasury(char* e, unsigned char b);
 
 /* r[] is block-scoped so it shares the slot of the Rec6 return temporary.
  * `p[8] > 0` on the unsigned byte gives the reference's jbe. */
@@ -94,7 +94,7 @@ int __cdecl ai_StartStudium(int a1, char* actor, int a3, Blk24* o1, Blk24* o2)
 			}
 		}
 	}
-	if (fcn_0050d320(actor, g_773d75) < sh[k].amount * 10) {
+	if (gm_GetSeasonTreasury(actor, g_773d75) < sh[k].amount * 10) {
 		return 0;
 	}
 	o1->kind = 7;

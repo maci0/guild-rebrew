@@ -51,7 +51,7 @@ extern char* g_14a62d8[];
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl gm_FindHeadIconIndex(char* name);
 int __cdecl gm_SumQueryEntryValues(int a, unsigned char b);
-int __cdecl fcn_0050b710(int a, unsigned char b);
+int __cdecl gm_AmountToUnits(int a, unsigned char b);
 int __cdecl fcn_0050b750(int a, unsigned char b);
 int __cdecl gm_ResetCardGameRound(Game* s);
 
@@ -71,7 +71,7 @@ int __cdecl fcn_004a6bb0(char* owner, Game* game)
 	g_1007cd4 = (char*) game;
 	memset(game, 0, sizeof(Game));
 	((Game*) g_1007cd4)->owner = owner;
-	money = fcn_0050b710(gm_SumQueryEntryValues(*(int*) (owner + 0x178), g_773d75), g_773d75);
+	money = gm_AmountToUnits(gm_SumQueryEntryValues(*(int*) (owner + 0x178), g_773d75), g_773d75);
 	d = MAXV(10000.0, money);
 	((Game*) g_1007cd4)->pot = fcn_0050b750((int) (d / (log10(d) + 1.0) * 0.1f), g_773d75);
 	((Game*) g_1007cd4)->limit = ((Game*) g_1007cd4)->pot / (gm_RandomMod(3) + 7);

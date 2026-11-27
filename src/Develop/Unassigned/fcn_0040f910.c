@@ -1,4 +1,4 @@
-int __cdecl fcn_00445600(int, int, int, int);
+int __cdecl d3_FindSceneObject(int, int, int, int);
 void __cdecl d3_AnimateCameraToNode(int, int);
 
 /* ADDRESS: GOLDTL 0x0040f910 */
@@ -16,7 +16,7 @@ int __cdecl fcn_0040f910(int* a0, int* a1)
 	if (*(int*) (*(int*) 0x6b7e98 + 0xc84) == 1) {
 		*(int*) (*(int*) 0x6b7e98 + 0xc60) = (int) fcn_0040f910;
 	}
-	handle = fcn_00445600(0, 0x160, 0, *a1);
+	handle = d3_FindSceneObject(0, 0x160, 0, *a1);
 	if (handle != 0) {
 		d3_AnimateCameraToNode(handle, *a0 / 17);
 	}

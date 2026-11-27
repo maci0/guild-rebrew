@@ -35,7 +35,7 @@ typedef struct
 #include "client_types.h"
 extern Rec2d_9a3800 g_9a3800[512];
 
-int __cdecl fcn_0050a710(unsigned char* p)
+int __cdecl gm_CanDeleteEntity(unsigned char* p)
 {
 	int id;
 	int i;

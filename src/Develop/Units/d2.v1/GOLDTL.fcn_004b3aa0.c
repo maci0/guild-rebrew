@@ -8,7 +8,7 @@ extern char g_7728d4;
 
 __declspec(dllimport) unsigned long __stdcall GetTickCount(void);
 void __cdecl cm_RequestSysMessage(int, int*);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl fcn_004b3490(void);
 void __cdecl fcn_004b3810(int);
 
@@ -21,7 +21,7 @@ void __cdecl hst_ShowDueHistoryScroll(int mode)
 		cm_RequestSysMessage(5, buf);
 	}
 	while (g_1007cd0 != 0 && g_14cbcb0 == 0)
-		fcn_00535960();
+		cm_StepCommandQueue();
 	if (g_14cbcb0 == 0 && g_7728d4 != 0) {
 		if (g_7728d4 == 1)
 			fcn_004b3490();

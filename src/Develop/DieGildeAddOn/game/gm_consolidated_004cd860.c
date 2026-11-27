@@ -11,7 +11,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl gm_AllocObjekt(int, int, int);
 
-int __cdecl fcn_004f2350(char*);
+int __cdecl gv_AddCandidateToOfficePool(char*);
 int __cdecl fcn_004f25a0(char*);
 int __cdecl fcn_004f2880(char*);
 int __cdecl fcn_004f2a80(char*);
@@ -79,7 +79,7 @@ int __cdecl fcn_004cd990(char* input, char* response)
 	p = input + 0x10;
 	switch (*(int*) p) {
 	case 0:
-		r = fcn_004f2350(p);
+		r = gv_AddCandidateToOfficePool(p);
 		break;
 	case 1:
 		r = fcn_004f25a0(p);

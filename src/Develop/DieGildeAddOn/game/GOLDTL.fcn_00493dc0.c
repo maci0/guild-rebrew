@@ -5,18 +5,18 @@
 extern unsigned char g_773d75;
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_0050b710(int a, unsigned char b);
+int __cdecl gm_AmountToUnits(int a, unsigned char b);
 
 /* ADDRESS: GOLDTL 0x00493dc0 */
-int __cdecl fcn_00493dc0(unsigned short* a, unsigned short* b)
+int __cdecl gm_CalcTrialCourtFee(unsigned short* accuser, unsigned short* accused)
 {
 	int x;
 	int y;
 	double v;
 
-	x = gm_WalkEntityChain(*a);
-	y = gm_WalkEntityChain(*b);
-	v = fcn_0050b710(y, g_773d75) + fcn_0050b710(x, g_773d75);
+	x = gm_WalkEntityChain(*accuser);
+	y = gm_WalkEntityChain(*accused);
+	v = gm_AmountToUnits(y, g_773d75) + gm_AmountToUnits(x, g_773d75);
 	if (10000.0 > v) {
 		v = 10000.0;
 	}

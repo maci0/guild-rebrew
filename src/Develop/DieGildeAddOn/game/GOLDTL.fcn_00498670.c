@@ -7,12 +7,12 @@ extern float g_66414c;
 int __cdecl fcn_00507910(int);
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
-int __cdecl fcn_0050d170(int);
-int __cdecl fcn_005072c0(int);
+int __cdecl gm_GetTypeProductValue(int);
+int __cdecl gm_JobToBuildingType(int);
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl fcn_00507080(int);
 int __cdecl gm_CalculateGebaeudeValue(unsigned char *, int);
-int __cdecl fcn_0050d200(short *, int);
+int __cdecl gm_CalcBuildingCost(short *, int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
@@ -60,7 +60,7 @@ int __cdecl ai_StartBetriebBauen(int target_action, short *ent, int mode, Cmd *o
 	} else if (mode == 1 && out1->kind != 5) {
 		return 0;
 	}
-	v = fcn_0050d320(ent, g_773d75);
+	v = gm_GetSeasonTreasury(ent, g_773d75);
 	ratio = (int) ((float) v * 0.660000026f);
 	o1.kind = 0;
 	o1.f1 = 0;
@@ -160,7 +160,7 @@ int __cdecl ai_StartBetriebBauen(int target_action, short *ent, int mode, Cmd *o
 					type = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(int) *p].level;
 					t = t / 2 + t % 2;
 					if (type < t && v != 7) {
-						tmp = fcn_0050d170(*p + 1);
+						tmp = gm_GetTypeProductValue(*p + 1);
 						tmp = (int) ((float) tmp * 0.3f);
 						if (tmp <= ratio) {
 							out1->kind = 5;
@@ -210,7 +210,7 @@ int __cdecl ai_StartBetriebBauen(int target_action, short *ent, int mode, Cmd *o
 			return 0;
 		}
 use_slot:
-		slot = fcn_005072c0(*(unsigned char *) ((char *) ent + 0x164));
+		slot = gm_JobToBuildingType(*(unsigned char *) ((char *) ent + 0x164));
 		if (slot == 0) {
 			return 0;
 		}
@@ -223,7 +223,7 @@ use_slot:
 	c2.f2 = 0;
 	act = ai_PrepareBuildSite(0, ent, mode, &c1, &c2, 1);
 	if (act != 0) {
-		v = fcn_0050d200(ent, c1.f1);
+		v = gm_CalcBuildingCost(ent, c1.f1);
 		if (ratio >= v) {
 			goto accept;
 		}

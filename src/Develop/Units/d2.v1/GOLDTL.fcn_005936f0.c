@@ -50,7 +50,7 @@ int __cdecl fcn_004ce190(int);
 int __cdecl cm_RequestClearSceneEntries(void);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl fcn_004ce180(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 char* __cdecl itoa(int, char*, int);
 
@@ -165,7 +165,7 @@ int __cdecl fcn_005936f0(int msg, int param)
 			g_779ce4[1] = 0;
 			p = cm_RequestClearSceneEntries();
 			while (!cm_GetCommandStatus(p)) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 			g_774a34 = (int*) fcn_004ce180();
 			for (i = 0; i < 8; i++)

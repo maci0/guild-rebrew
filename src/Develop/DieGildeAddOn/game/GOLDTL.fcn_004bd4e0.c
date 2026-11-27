@@ -28,7 +28,7 @@ char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags, c
 char* __cdecl rd_GetBKSize(char* name);
 void __cdecl fcn_004bdfb0(float* ox, float* oy, float* position, char* object, char** context);
 int __cdecl fcn_004bdbe0(int obj, int x, int y, int i, int j);
-char* __cdecl fcn_00445600(char* o, int flags, char* ptr, char* name);
+char* __cdecl d3_FindSceneObject(char* o, int flags, char* ptr, char* name);
 char __cdecl fcn_0045b990(char* map, float* pos, int* x, int* y, int* z);
 char __cdecl d3_MatchObjectByNameAndPos(char* e, char* obj);
 /* ADDRESS: GOLDTL 0x004bd4e0 */
@@ -185,7 +185,7 @@ int __cdecl fcn_004bd4e0(int sceneObjectArg, int typeIdArg)
 			} while ((int) ox1 != (int) ox2);
 		}
 	}
-	dst = fcn_00445600((char*) sceneObjectArg, 0x100, 0, s_68149c);
+	dst = d3_FindSceneObject((char*) sceneObjectArg, 0x100, 0, s_68149c);
 	if (dst == 0) {
 		dst = (char*) sceneObjectArg;
 	}

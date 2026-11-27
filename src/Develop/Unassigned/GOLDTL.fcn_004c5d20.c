@@ -3,12 +3,12 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl cm_SendCreateAction0x38(int a1, int a2)
+void __cdecl cm_SendCreateAction0x38(int actor_id, int target_id)
 {
 	char buf[0x9c];
 
 	buf[0] = 0x33;
-	*(int*) (buf + 0x10) = a1;
-	*(int*) (buf + 0x14) = a2;
+	*(int*) (buf + 0x10) = actor_id;
+	*(int*) (buf + 0x14) = target_id;
 	cm_EnqueueClientPacket(buf);
 }

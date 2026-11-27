@@ -22,7 +22,7 @@ extern unsigned char g_773d75;
 unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl amt_CanUpgradeBuildingTier2(char* e);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_0050d320(char* e, char k);
+int __cdecl gm_GetSeasonTreasury(char* e, char k);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 
@@ -45,7 +45,7 @@ int __cdecl ai_StartZunftAufruhr(int a1, char* e, int a3, char* out)
 		return 0;
 	}
 	v = (int) max(gm_WalkEntityChain(*(unsigned short*) e) * 0.01f, 160.0f);
-	if (v > (int) (fcn_0050d320(e, (*(char*)&g_773d75)) * 0.22f)) {
+	if (v > (int) (gm_GetSeasonTreasury(e, (*(char*)&g_773d75)) * 0.22f)) {
 		return 0;
 	}
 	f.mask = 0x807d4190;

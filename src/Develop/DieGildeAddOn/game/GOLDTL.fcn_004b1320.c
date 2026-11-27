@@ -20,7 +20,7 @@ extern char* lpObjektePROT;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl atoi(char*);
-char* __cdecl fcn_004ce590(int);
+char* __cdecl gm_LookupWeaponSpec(int);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 void __cdecl cm_SendUpdateSlot80(char*, char);
 
@@ -76,7 +76,7 @@ int __cdecl hst_AdjustMarketCategoryPrices(int unused1, int unused2, char* argum
 						continue;
 					if (((MARKET_STOCK_SLOT*)row)->active == 0)
 						continue;
-					p = fcn_004ce590(((MARKET_STOCK_SLOT*)row)->objekt_id);
+					p = gm_LookupWeaponSpec(((MARKET_STOCK_SLOT*)row)->objekt_id);
 					if (p == 0 || *(int*) p == 0)
 						continue;
 					f = factor + 1.0f;

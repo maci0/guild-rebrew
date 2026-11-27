@@ -5,7 +5,7 @@
 extern float g_fc5348;
 extern float g_fc2944;
 
-char __cdecl fcn_0043d860(char*, int, float*, float*);
+char __cdecl d3_GetObjectBoundingSphere(char*, int, float*, float*);
 
 char __cdecl fcn_00448540(char* e, char* ctx)
 {
@@ -28,7 +28,7 @@ char __cdecl fcn_00448540(char* e, char* ctx)
 	if (*(int*) (e + 0x218) == 4 && d == 0) {
 		return 1;
 	}
-	if (fcn_0043d860(e, *(int*) (ctx + 0x48), v, &w)) {
+	if (d3_GetObjectBoundingSphere(e, *(int*) (ctx + 0x48), v, &w)) {
 		inv = 1.0f / v[2];
 		slot = (float*) (ctx + *(int*) (e + 0x218) * 8);
 		w = g_fc5348 * inv * w;

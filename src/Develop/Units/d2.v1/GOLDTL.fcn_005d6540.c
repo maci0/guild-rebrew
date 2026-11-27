@@ -21,7 +21,7 @@ int __cdecl fcn_004f4830(int, void*);
 int __cdecl fcn_004f4860(char*, unsigned char, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CheckActionBlocker(char*, int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void*, int);
 
 /* ADDRESS: GOLDTL 0x005d6540 */
@@ -145,7 +145,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 					idx = fcn_004f4860(a0, *(unsigned char*) rec, delta);
 					if (idx != -1) {
 						while (cm_GetCommandStatus(idx) == 0) {
-							fcn_00535960();
+							cm_StepCommandQueue();
 						}
 						cm_RequestModifyHealth(*(int*) (a0 + 4), -2);
 						cm_RequestChangeBits(*(int*) (recp + 4), 0x1c8, 4, limit, 0);

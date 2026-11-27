@@ -49,8 +49,8 @@ int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 int* __cdecl m_alloc(int size, char* tag);
 void __cdecl d2_FreeTutorialNodes(int*);
 void __cdecl d2_IsTutorialStepAllowed(void);
-void __cdecl fcn_0057ef30(void);
-void __cdecl fcn_0057f030(void);
+void __cdecl d2_UpdateTutCh1FocusStep(void);
+void __cdecl d2_UpdateTutCh1Cat0aStep(void);
 
 int* __cdecl d2_CreateTutorialChapter1(void)
 {
@@ -300,7 +300,7 @@ int* __cdecl d2_CreateTutorialChapter1(void)
 	p[0xc] = 0x8e;
 	p[0xf] = (int) d2_IsTutorialStepAllowed;
 	p[0xd] = 0;
-	p[0xe] = (int) fcn_0057ef30;
+	p[0xe] = (int) d2_UpdateTutCh1FocusStep;
 	p[0x10] = 1;
 	p[0x11] = 0x2148;
 	p[0x12] = 9;
@@ -543,7 +543,7 @@ int* __cdecl d2_CreateTutorialChapter1(void)
 	p[0xc] = 0x163;
 	p[0xf] = (int) d2_IsTutorialStepAllowed;
 	p[0xd] = 0;
-	p[0xe] = (int) fcn_0057f030;
+	p[0xe] = (int) d2_UpdateTutCh1Cat0aStep;
 	p[0x10] = 0xd;
 	p[0x11] = 0x2148;
 	p[0x12] = 0xa;

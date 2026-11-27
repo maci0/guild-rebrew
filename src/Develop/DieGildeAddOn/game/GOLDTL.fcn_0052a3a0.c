@@ -64,7 +64,7 @@ extern float g_6a28f4;
 extern float g_6a28f8;
 
 void __cdecl gm_PackGameTime(int*, char*);
-int __cdecl fcn_0052a310(int*);
+int __cdecl gm_QuerySeason(int*);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl rand(void);
 float __cdecl gm_RandomFloat01(void);
@@ -88,7 +88,7 @@ void __cdecl fcn_00416300(int*, int, ...);
 void __cdecl d3_SetRainEffectOptions(int*, int, ...);
 
 /* ADDRESS: GOLDTL 0x0052a3a0 */
-void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
+void __cdecl gm_UpdateWeatherAndSky(GAME_TIMESTAMP* now, int flag)
 {
 	char buf[12];
 	float step;
@@ -100,7 +100,7 @@ void __cdecl fcn_0052a3a0(GAME_TIMESTAMP* now, int flag)
 	Col col;
 
 	gm_PackGameTime((int*) now, buf);
-	mode = fcn_0052a310((int*) now);
+	mode = gm_QuerySeason((int*) now);
 	g_7e43a0 = ((int*) ((char*) g_868060 + 0x108))[g_773d75 * 189 + mode];
 	g_7e43a4 = ((int*) ((char*) g_868060 + 0x118))[g_773d75 * 189 + mode];
 	if (flag != 0) {

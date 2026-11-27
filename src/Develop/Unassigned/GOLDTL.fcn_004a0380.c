@@ -1,4 +1,4 @@
-void __cdecl fcn_004eba60(int, int*);
+void __cdecl amt_HandleOfficeAction(int, int*);
 
 
 /* ADDRESS: GOLDTL 0x004a0380 */
@@ -11,6 +11,6 @@ int __cdecl ai_RunZunftLevel3(int a, char* e)
 	msg[0] = *(int*) (e + 0x10);
 	msg[1] = *(int*) (e + 4);
 	msg[2] = 0;
-	fcn_004eba60(a, msg);
+	amt_HandleOfficeAction(a, msg);
 	return 0x38;
 }

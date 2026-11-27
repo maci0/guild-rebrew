@@ -23,9 +23,9 @@ typedef struct {
 } BldProt_497ec0;
 
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
-int __cdecl fcn_0050d320(short*, unsigned char);
-int __cdecl fcn_0050d200(short*, int);
-int __cdecl fcn_0050d170(int);
+int __cdecl gm_GetSeasonTreasury(short*, unsigned char);
+int __cdecl gm_CalcBuildingCost(short*, int);
+int __cdecl gm_GetTypeProductValue(int);
 int __cdecl ai_PrepareBuildSite(int, short*, int, Cmd*, Cmd*, int);
 int __cdecl ai_StartKreditNehmen(int, short*, int, Cmd*, Cmd*);
 
@@ -79,7 +79,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 
 				/* scan address and money value share one stack slot in the
 				 * native body; every hit path returns before the scan resumes */
-				p = fcn_0050d320(entity, g_773d75);
+				p = gm_GetSeasonTreasury(entity, g_773d75);
 				p = (int) ((float) p * 0.66f);
 				out.kind = 0;
 				out.f1 = 0;
@@ -109,7 +109,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 								out.f2 = 1;
 								if (!ai_PrepareBuildSite(a0, entity, a2, &cmd, &out, 0))
 									return 0;
-								need = fcn_0050d200(entity, cmd.f1);
+								need = gm_CalcBuildingCost(entity, cmd.f1);
 								if (p < need) {
 									rem = need - p;
 									if ((float) rem / (float) need < 0.25f) {
@@ -131,7 +131,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 					cmd.f1 = 6;
 					cmd.f2 = 1;
 					if (ai_PrepareBuildSite(a0, entity, a2, &cmd, &out, 1)) {
-						need = fcn_0050d200(entity, cmd.f1);
+						need = gm_CalcBuildingCost(entity, cmd.f1);
 						if (p < need) {
 							rem = need - p;
 							if ((float) rem / (float) need < 0.25f) {
@@ -150,7 +150,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 					cmd.f2 = 1;
 					if (!ai_PrepareBuildSite(a0, entity, a2, &cmd, &out, 1))
 						return 0;
-					a0 = fcn_0050d200(entity, cmd.f1);
+					a0 = gm_CalcBuildingCost(entity, cmd.f1);
 					if (p < a0) {
 						rem = a0 - p;
 						if ((float) rem / (float) a0 < 0.25f) {
@@ -182,7 +182,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 					out.kind = 4;
 					out.f1 = *(int*) (q + 1);
 					out.f2 = 1;
-					need = (int) ((float) fcn_0050d170(v) * 0.3f);
+					need = (int) ((float) gm_GetTypeProductValue(v) * 0.3f);
 					if (!ai_PrepareBuildSite(a0, entity, a2, &cmd, &out, 0))
 						return 0;
 					if (p < need) {
@@ -204,7 +204,7 @@ int __cdecl fcn_00497ec0(int a0, short* entity, int a2, Cmd* request, Cmd* a4)
 					return 0;
 				if (*(char*) ((char*) entity + 2) != 5)
 					return 0;
-				need = fcn_0050d200(entity, cmd.f1);
+				need = gm_CalcBuildingCost(entity, cmd.f1);
 				if (p < need) {
 					rem = need - p;
 					if ((float) rem / (float) need < 0.25f) {

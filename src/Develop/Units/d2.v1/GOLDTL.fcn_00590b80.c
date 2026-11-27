@@ -19,7 +19,7 @@ extern char s_6a9a30[]; /* "%i %s$N" */
 extern char s_6a9a38[]; /* "ToolTip\\ToolTip_Objekte_Handelsgut" */
 extern char s_6a9a5c[]; /* "ToolTip\\ToolTip_Objekte_Waffen" */
 
-int* __cdecl fcn_004ce590(int);
+int* __cdecl gm_LookupWeaponSpec(int);
 void __cdecl fcn_00469c40(int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -28,7 +28,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_0046f7e0(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 float __cdecl eval_ObjektPreis2Credits(int, int);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl fcn_0050dc90(int);
 float __cdecl fcn_00510260(int, int, int*);
@@ -51,7 +51,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 	int val;
 	float quality;
 
-	rec = fcn_004ce590(itemId);
+	rec = gm_LookupWeaponSpec(itemId);
 	def = g_item_def_table + itemId * 0x41;
 	if (rec != 0 && *rec != 0) {
 		win = fcn_00470820(0, 0, s_6a9a5c);
@@ -75,7 +75,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 	if (def[0x40] != 0) {
 		io_AppendText(0x21, (unsigned char) def[0x40]);
 	} else {
-		io_AppendText(0x1f, (int) fcn_0050bb50(itemId, g_773d75),
+		io_AppendText(0x1f, (int) gm_GetSeasonPrice(itemId, g_773d75),
 				(int) eval_ObjektPreis2Credits(itemId, 100));
 	}
 	ent = (int*) g_7746c4;

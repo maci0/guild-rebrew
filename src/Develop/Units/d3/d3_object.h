@@ -131,7 +131,7 @@ void __cdecl d3_CleanupObjectAuxSlots(D3_OBJECT* object);
 extern char g_fc2700[];
 /* ADDRESS: GOLD 0x00fc28f4 */
 extern char* g_fc28f4;
-void __cdecl fcn_0043ca20(char* object);
+void __cdecl d3_RegisterSceneObject(char* object);
 #endif
 
 #endif

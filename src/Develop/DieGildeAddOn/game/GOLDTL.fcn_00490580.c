@@ -7,7 +7,7 @@ float __cdecl gm_GetEntitySkill(char* entity, int index);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x00490580 */
-int __cdecl fcn_00490580(char* e, int a1, int* choice)
+int __cdecl ai_EvaluateLaw0x01(char* e, int unused, int* choice)
 {
 	float y;
 	int n;

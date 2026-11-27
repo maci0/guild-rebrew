@@ -41,7 +41,7 @@ char* __cdecl StripPathAndExt(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 void __cdecl fcn_00474c90(int, char*, char*);
 void __cdecl fcn_004754c0(int, int);
-void __cdecl fcn_00411960(Model*, char*, int);
+void __cdecl d3_AttachObjectAnim(Model*, char*, int);
 void __cdecl d2_HandleBookPageButton(Book*);
 void* __cdecl fcn_00426fa0(char*, const char*, int, int, int, int, int);
 
@@ -100,9 +100,9 @@ int __cdecl fcn_0052f740(Book* b, signed char dir)
 		}
 	}
 	if (dir > 0) {
-		fcn_00411960(b->model, "buch\\Buch_vorblaettern.baf", 0x12);
+		d3_AttachObjectAnim(b->model, "buch\\Buch_vorblaettern.baf", 0x12);
 	} else {
-		fcn_00411960(b->model, "buch\\Buch_zurueckblaettern.baf", 0x12);
+		d3_AttachObjectAnim(b->model, "buch\\Buch_zurueckblaettern.baf", 0x12);
 	}
 	b->page += dir;
 	d2_HandleBookPageButton(b);

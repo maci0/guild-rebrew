@@ -43,7 +43,7 @@ struct Ent {
 	int kind;
 };
 
-int __cdecl fcn_00445600(Ent*, int, Ent*, int);
+int __cdecl d3_FindSceneObject(Ent*, int, Ent*, int);
 void __cdecl d3_TransformPoint(Ent*, void*, Vec4*);
 void __cdecl d3_SetObjectRotation(Ent*, void*);
 void __cdecl fcn_004557c0(Ent*, char*, int, Mat*);
@@ -74,7 +74,7 @@ char __cdecl d3_ReparentObject(Ent* e, Ent* parent)
 				return 1;
 			}
 		}
-		if (fcn_00445600(e, 0x1ff, parent, 0) != 0) {
+		if (d3_FindSceneObject(e, 0x1ff, parent, 0) != 0) {
 			return 0;
 		}
 	}

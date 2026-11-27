@@ -27,7 +27,7 @@ void __cdecl fcn_005016c0(void);
 void __cdecl fcn_005016f0(int);
 #include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_00515010(void);
-void __cdecl fcn_00510100(void);
+void __cdecl gm_ResetWarehouseStock(void);
 
 void __cdecl init_LocalData(void)
 {
@@ -75,5 +75,5 @@ void __cdecl init_LocalData(void)
 	if ((g_7747b0 & 0x44) == 0) {
 		fcn_00515010();
 	}
-	fcn_00510100();
+	gm_ResetWarehouseStock();
 }

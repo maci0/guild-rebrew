@@ -9,27 +9,27 @@ void __cdecl fcn_004e48b0(void);
 void __cdecl sb_StopVoice(int, int);
 void __cdecl fcn_004230e0(int);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_004e4610(int);
+void __cdecl evt_StopScriptIfActive(int);
 int __cdecl fcn_004e44b0(char*, char*);
-void __cdecl fcn_004e44f0(int);
+void __cdecl cut_WaitForScript(int);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
 
-int __cdecl fcn_004e1ff0(int* x)
+int __cdecl cut_ReleaseSceneContexts(int* scene)
 {
 	fcn_004e48b0();
-	if (x[3] != 0)
-		sb_StopVoice(x[3], 0);
-	x[3] = 0;
-	fcn_004230e0(x[2]);
-	if (x[1] != -1)
-		d2_DestroyForm(x[1]);
-	if (x[0] != -1)
-		fcn_004e4610(x[0]);
-	x[0] = fcn_004e44b0(g_68d00c, g_6b5c60);
-	fcn_004e44f0(x[0]);
-	x[0] = -1;
-	x[1] = -1;
+	if (scene[3] != 0)
+		sb_StopVoice(scene[3], 0);
+	scene[3] = 0;
+	fcn_004230e0(scene[2]);
+	if (scene[1] != -1)
+		d2_DestroyForm(scene[1]);
+	if (scene[0] != -1)
+		evt_StopScriptIfActive(scene[0]);
+	scene[0] = fcn_004e44b0(g_68d00c, g_6b5c60);
+	cut_WaitForScript(scene[0]);
+	scene[0] = -1;
+	scene[1] = -1;
 	g_772f54 = 0;
 	cut_CleanupCutscene();
 	msx_RestoreMusicIfAllowed();

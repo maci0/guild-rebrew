@@ -4,7 +4,7 @@
 int __cdecl fcn_0047dcf0(unsigned short*);
 int __cdecl fcn_0047dca0(unsigned short*);
 
-int __cdecl fcn_00556e80(unsigned short* e)
+int __cdecl he_IsEntityEligibleForIllness(unsigned short* e)
 {
 	if (*e == 0xffff) {
 		return 0;

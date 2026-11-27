@@ -15,7 +15,7 @@ int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
 void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
 void __cdecl main_RunFrameLoop(int a, int b);
 void __cdecl sb_PlayVoice(int a, char* s, int b, int c, int d, int e, int f);
-int __cdecl fcn_005095d0(void* p, void* buf);
+int __cdecl gm_CountChildren(void* p, void* buf);
 void __cdecl io_FormatTextBuffer(char* buf, ...);
 int __cdecl d2_ShowMessageBox(void* buf, int n);
 void __cdecl fcn_005d0660(int a, int b, int c, int d);
@@ -26,9 +26,9 @@ void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl main_ExitToFrameHandler(int p);
 void __cdecl fcn_00509fc0(void* a, void* b, int c);
 void __cdecl fcn_004e48b0(void);
-void __cdecl fcn_004e4610(void* h);
-void __cdecl fcn_004e44f0(void* h);
-void __cdecl fcn_004e4c00(void);
+void __cdecl evt_StopScriptIfActive(void* h);
+void __cdecl cut_WaitForScript(void* h);
+void __cdecl d3_DestroySkyLayer(void);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl fcn_004230e0(void* h);
@@ -108,7 +108,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 	}
 	sb_PlayVoice(0, (char*) 0x68d288, 1, 0x3f, 0x7f, 0, 0);
 	*(int*) 0x7725c8 = 0;
-	r = fcn_005095d0(obj, &yslot);
+	r = gm_CountChildren(obj, &yslot);
 	if (r != 0) {
 		if ((*(int*) ((char*) obj + 0x1cc) & 1) == 0)
 			goto dialog_fallback;
@@ -162,9 +162,9 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 		}
 	}
 	fcn_004e48b0();
-	fcn_004e4610((void*) xslot);
-	fcn_004e44f0((void*) xslot);
-	fcn_004e4c00();
+	evt_StopScriptIfActive((void*) xslot);
+	cut_WaitForScript((void*) xslot);
+	d3_DestroySkyLayer();
 	cut_CleanupCutscene();
 	d3snd_StopTrackedVoices();
 	fcn_004230e0((void*) handle);

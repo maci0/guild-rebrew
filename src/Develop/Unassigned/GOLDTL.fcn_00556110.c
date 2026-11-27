@@ -11,7 +11,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 int __cdecl cm_SendSetHE(int, char*);
 
-void __cdecl fcn_00556110(char* e)
+void __cdecl he_InitAction0x6d(char* e)
 {
 	if ((e[0x78] & 4) == 0) {
 		*(pos14_7f4c00*) (e + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);

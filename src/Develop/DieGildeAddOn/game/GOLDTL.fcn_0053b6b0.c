@@ -12,7 +12,7 @@ void* __cdecl ch_CreateAtPosition(char* name, void* pos);
 void __cdecl ch_CreateAction(void* obj, int mode, int value);
 void* __cdecl evt_LoadGfxScript(char* script);
 void __cdecl fcn_00428340(void* obj, int argc, ...);
-void* __cdecl fcn_00445600(void* dev, int flags, void* ptr, char* name);
+void* __cdecl d3_FindSceneObject(void* dev, int flags, void* ptr, char* name);
 void __cdecl d3_TransformPoint(void* dev, void* pos, void* out);
 int __cdecl fcn_00469c30(int x, int y, int a3);
 void __cdecl d2_DestroyElement(int kind);
@@ -54,7 +54,7 @@ unsigned int __cdecl fcn_0053b6b0(int jobCode)
 
 	idx = gm_MapEntityStatRange(jobCode);
 
-	dev = fcn_00445600(0, 0x100, 0, "dummy_SPIELER");
+	dev = d3_FindSceneObject(0, 0x100, 0, "dummy_SPIELER");
 	if (dev != 0) {
 		d3_TransformPoint(dev, (char*) dev + 0x4c, pos);
 	}

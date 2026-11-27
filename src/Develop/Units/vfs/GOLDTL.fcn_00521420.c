@@ -18,7 +18,7 @@ extern char g_7728d4;
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, void* file);
 
-int __cdecl fcn_00521420(void* file)
+int __cdecl ls_SaveHistoryState(void* file)
 {
 	int v;
 	int i;

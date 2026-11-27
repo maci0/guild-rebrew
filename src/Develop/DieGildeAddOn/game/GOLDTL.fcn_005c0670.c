@@ -21,7 +21,7 @@ typedef struct
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_005cd440(Req*, char*, int, void*);
 void __cdecl d3_EndCameraAndUiMode(void);
-void __cdecl fcn_005c02a0(void);
+void __cdecl d2_RunPaymentTargetDialog(void);
 
 void __cdecl d2_OpenPaymentTargetPicker(void)
 {
@@ -34,6 +34,6 @@ void __cdecl d2_OpenPaymentTargetPicker(void)
 	req.d = g_66601c;
 	req.c = 0;
 	io_FormatTextBuffer(text, 0x174f);
-	fcn_005cd440(&req, text, 0, (void*) fcn_005c02a0);
+	fcn_005cd440(&req, text, 0, (void*) d2_RunPaymentTargetDialog);
 	d3_EndCameraAndUiMode();
 }

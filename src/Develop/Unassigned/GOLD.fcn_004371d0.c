@@ -46,7 +46,7 @@ void __cdecl fcn_004371d0(void* tex, unsigned int* back)
 		ddsd_back[0] = 0x7c;
 		d3d_LastResult = ((int (__stdcall*)(void*, int, void*, int, int)) TEX_VTBL(surf)[25])(surf, 0, ddsd_back, 1, 0);
 		if (d3d_LastResult != 0) {
-			fcn_00418e90((char*) 0x5f944c, 0x30e, (char*) 0x5fa450);
+			d3d_LogResultError((char*) 0x5f944c, 0x30e, (char*) 0x5fa450);
 		}
 		locked = 1;
 		back = ddsd_back;
@@ -73,18 +73,18 @@ void __cdecl fcn_004371d0(void* tex, unsigned int* back)
 	ddsd2[0] = 0x7c;
 	d3d_LastResult = ((int (__stdcall*)(void*, int, void*, int, int)) TEX_VTBL(tex)[25])(tex, 0, ddsd2, 1, 0);
 	if (d3d_LastResult != 0) {
-		fcn_00418e90((char*) 0x5f944c, 0x316, (char*) 0x5fa418);
+		d3d_LogResultError((char*) 0x5f944c, 0x316, (char*) 0x5fa418);
 	}
 	fcn_00420140(ddsd2, back);
 	fcn_004371d0(tex, ddsd2);
 	d3d_LastResult = ((int (__stdcall*)(void*, int)) TEX_VTBL(tex)[32])(tex, 0);
 	if (d3d_LastResult != 0) {
-		fcn_00418e90((char*) 0x5f944c, 0x31b, (char*) 0x5fa3f4);
+		d3d_LogResultError((char*) 0x5f944c, 0x31b, (char*) 0x5fa3f4);
 	}
 	if (locked) {
 		d3d_LastResult = ((int (__stdcall*)(void*, int)) TEX_VTBL(surf)[32])(surf, 0);
 		if (d3d_LastResult != 0) {
-			fcn_00418e90((char*) 0x5f944c, 0x31e, (char*) 0x5fa3d4);
+			d3d_LogResultError((char*) 0x5f944c, 0x31e, (char*) 0x5fa3d4);
 		}
 	}
 }

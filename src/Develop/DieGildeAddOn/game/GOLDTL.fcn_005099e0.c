@@ -29,7 +29,7 @@ extern unsigned char g_773d75;
 extern int g_aed32c;
 
 /* ADDRESS: GOLDTL 0x005099e0 */
-void __cdecl fcn_005099e0(void *arg1, void *arg2)
+void __cdecl gm_TransferEntityBuildings(void *fromEntity, void *toEntity)
 {
 	void *ent;
 	int cnt;
@@ -47,27 +47,27 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 
 	cnt = 0;
 	flag = 0;
-	if (fcn_004f4650(arg1, &ent, &found)) {
-		fcn_004f22e0(arg1, ent, *(int *) found,
+	if (fcn_004f4650(fromEntity, &ent, &found)) {
+		fcn_004f22e0(fromEntity, ent, *(int *) found,
 					 fcn_004f1790(*(void **) ((char *) ent + 0x65), found));
-		if (arg2 != 0 && arg2 != (void *) gm_CityEntity
-			&& *(int *) ((char *) arg1 + 4) == *(int *) ((char *) found + 4)) {
-			fcn_004f2a10(arg2, ent, *(int *) found,
+		if (toEntity != 0 && toEntity != (void *) gm_CityEntity
+			&& *(int *) ((char *) fromEntity + 4) == *(int *) ((char *) found + 4)) {
+			fcn_004f2a10(toEntity, ent, *(int *) found,
 						 fcn_004f1790(*(void **) ((char *) ent + 0x65), found));
 		}
 	}
-	ent = gm_StartFilteredEntitySearch(1, 4, *(unsigned short *) arg1);
+	ent = gm_StartFilteredEntitySearch(1, 4, *(unsigned short *) fromEntity);
 	while (ent != 0) {
 		type = gm_GetBuildingTypeCategory(*(unsigned char *) ent);
 		if (type == 2) {
 			cm_SendSetGebBesitzer(*(int *) ((char *) ent + 1), *(int *) ((char *) gm_CityEntity + 4),
 						 *(int *) ((char *) gm_CityEntity + 4));
 		} else {
-			cm_SendSetGebBesitzer(*(int *) ((char *) ent + 1), *(int *) ((char *) arg2 + 4),
-						 *(int *) ((char *) arg2 + 4));
+			cm_SendSetGebBesitzer(*(int *) ((char *) ent + 1), *(int *) ((char *) toEntity + 4),
+						 *(int *) ((char *) toEntity + 4));
 			flag = 1;
 		}
-		if (arg2 == (void *) gm_CityEntity && type != 2 && (((unsigned char *) ent)[0x5a] & 1) == 0) {
+		if (toEntity == (void *) gm_CityEntity && type != 2 && (((unsigned char *) ent)[0x5a] & 1) == 0) {
 			pkt[4] = 0x1b;
 			*(int *) (pkt + 8) = *(int *) ((char *) gm_CityEntity + 4);
 			*(int *) (pkt + 0xc) = -1;
@@ -79,7 +79,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 			do {
 				if (*(int *) ((char *) it + 0x168) == (int) ent) {
 					int recipient = *(int *) it;
-					if (recipient != *(int *) ((char *) arg1 + 4)) {
+					if (recipient != *(int *) ((char *) fromEntity + 4)) {
 						memset(pkt, 0, 0xf8);
 						pkt[4] = 0x31;
 						*(int *) (pkt + 8) = *(int *) ((char *) gm_CityEntity + 4);
@@ -100,29 +100,29 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 		cnt++;
 		ent = gm_FindNextFilteredEntity();
 	}
-	if (arg2 != (void *) gm_CityEntity) {
-		val = gm_SumTreasury(arg1);
-		i = 4 + (*((unsigned char *) arg1 + 2) == 5);
-		cm_RequestMoveCredits(*(int *) ((char *) arg2 + 4), -1, g_773d75, val);
-		type = gm_WalkEntityChain(*(unsigned short *) arg1);
-		cm_BeginPacketFieldDelta(arg2, *(int *) ((char *) arg2 + 4));
-		cm_AppendPacketFieldValue(4, 1, (int) arg2 - g_aed32c + 0x1a8, &type);
+	if (toEntity != (void *) gm_CityEntity) {
+		val = gm_SumTreasury(fromEntity);
+		i = 4 + (*((unsigned char *) fromEntity + 2) == 5);
+		cm_RequestMoveCredits(*(int *) ((char *) toEntity + 4), -1, g_773d75, val);
+		type = gm_WalkEntityChain(*(unsigned short *) fromEntity);
+		cm_BeginPacketFieldDelta(toEntity, *(int *) ((char *) toEntity + 4));
+		cm_AppendPacketFieldValue(4, 1, (int) toEntity - g_aed32c + 0x1a8, &type);
 		if (flag != 0
-			&& (*((unsigned char *) arg2 + 2) == 3 || *((unsigned char *) arg2 + 2) == 8
-				|| *((unsigned char *) arg2 + 2) == 9)) {
-			cm_AppendPacketFieldDelta(1, 1, (int) arg2 - g_aed32c + 2, &i);
+			&& (*((unsigned char *) toEntity + 2) == 3 || *((unsigned char *) toEntity + 2) == 8
+				|| *((unsigned char *) toEntity + 2) == 9)) {
+			cm_AppendPacketFieldDelta(1, 1, (int) toEntity - g_aed32c + 2, &i);
 		}
 		cm_RequestChangeAttribute();
 	}
-	if (*((unsigned char *) arg2 + 2) != 6 && *((unsigned char *) arg2 + 2) != 7) {
-		if ((*((unsigned char *) arg1 + 2) == 5 || *((unsigned char *) arg1 + 2) == 6
-			 || *((unsigned char *) arg1 + 2) == 7)
-			&& arg2 == (void *) gm_CityEntity) {
+	if (*((unsigned char *) toEntity + 2) != 6 && *((unsigned char *) toEntity + 2) != 7) {
+		if ((*((unsigned char *) fromEntity + 2) == 5 || *((unsigned char *) fromEntity + 2) == 6
+			 || *((unsigned char *) fromEntity + 2) == 7)
+			&& toEntity == (void *) gm_CityEntity) {
 			it = (void *) 0x7f4ca4;
 			do {
 				if ((*((unsigned char *) it - 2) == 6 || *((unsigned char *) it - 2) == 7)
-					&& *(int *) it != *(int *) ((char *) arg1 + 4)) {
-					io_FormatTextBuffer(buf, 0x1c4d, *(unsigned short *) arg1);
+					&& *(int *) it != *(int *) ((char *) fromEntity + 4)) {
+					io_FormatTextBuffer(buf, 0x1c4d, *(unsigned short *) fromEntity);
 					he_PostEntityMessage(*(int *) it, -1, (int) buf, 0, 0x5fe, "_NACHRICHTEN_HS_70");
 				}
 				it = (void *) ((char *) it + 0x21c);
@@ -135,8 +135,8 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 			do {
 				if ((*(unsigned char *) (i * 0x21c + 0x7f4ca2) == 6
 					 || *(unsigned char *) (i * 0x21c + 0x7f4ca2) == 7)
-					&& *(int *) ((i * 0x87 + j) * 4 + 0x7f4cfc) == *(int *) ((char *) arg1 + 4)) {
-					io_FormatTextBuffer(buf, 0x1c4e, *(unsigned short *) arg1);
+					&& *(int *) ((i * 0x87 + j) * 4 + 0x7f4cfc) == *(int *) ((char *) fromEntity + 4)) {
+					io_FormatTextBuffer(buf, 0x1c4e, *(unsigned short *) fromEntity);
 					he_PostEntityMessage(*(int *) (i * 0x21c + 0x7f4ca4), -1, (int) buf, 0, 0x5f4,
 								 "_NACHRICHTEN_HS_63");
 					i = 0x300;
@@ -147,7 +147,7 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 		} while (i < 0x300);
 		return;
 	}
-	io_FormatTextBuffer(out, 0x1c4a, *(unsigned short *) arg1);
+	io_FormatTextBuffer(out, 0x1c4a, *(unsigned short *) fromEntity);
 	if (cnt != 0) {
 		io_FormatTextBuffer(buf, 0x1c4b);
 		strcat(out, buf);
@@ -165,8 +165,8 @@ void __cdecl fcn_005099e0(void *arg1, void *arg2)
 			strcat(out, buf);
 		}
 	}
-	val = gm_SumTreasury(arg1);
+	val = gm_SumTreasury(fromEntity);
 	io_FormatTextBuffer(buf, 0x1c4c, val);
 	strcat(out, buf);
-	he_PostEntityMessage(*(int *) ((char *) arg2 + 4), -1, (int) out, 1, 0x5ff, "_NACHRICHTEN_HS_63");
+	he_PostEntityMessage(*(int *) ((char *) toEntity + 4), -1, (int) out, 1, 0x5ff, "_NACHRICHTEN_HS_63");
 }

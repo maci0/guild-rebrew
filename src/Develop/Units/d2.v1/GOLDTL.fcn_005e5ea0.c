@@ -80,7 +80,7 @@ int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 #include "d2_gui.h"
 int __cdecl fcn_00510550(char*);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
-int __cdecl fcn_0057c9d0(char*);
+int __cdecl he_HasActiveAction0xa0(char*);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetControlValue(int);
@@ -132,7 +132,7 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 	for (;;) {
 		if ((unsigned int) g_6b7fac > last + 0x8c || d2_GetControlValue(timer2) != idx) {
 			last = g_6b7fac;
-			entity = (char*) fcn_0057c9d0(participant);
+			entity = (char*) he_HasActiveAction0xa0(participant);
 			if (entity != 0) {
 				st = *(GAME_TIMESTAMP*) (entity + 0x52);
 				st.hour += *(int*) (entity + 0x70) ? 0 : 2;

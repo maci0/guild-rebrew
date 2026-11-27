@@ -24,7 +24,7 @@ extern char g_7f4ca4[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl gm_CalculateGebaeudeValue(void*, int);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, void*, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -54,7 +54,7 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Verkaufen_pergament");
 	d2_CenterDialogWindows(win);
 	p = gm_CalculateGebaeudeValue(e, *(char*) (e + 0x5c));
-	v = fcn_0050b710(p, g_773d75);
+	v = gm_AmountToUnits(p, g_773d75);
 	d2_SetForm(win, 2);
 	h = d2_GetWindowListItem(win, 2, io_AppendText(0x17c5, e, *(unsigned short*) (g_773d75 * 0x2f4 + 0x8680b4) * 2 + 0x9a8));
 	fcn_00472380(h, (int) (v * 0.5), (int) (v * 1.5), v);

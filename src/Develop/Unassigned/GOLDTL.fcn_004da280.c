@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_004e4aa0(int);
+void __cdecl cut_DestroyActiveCharacter(int);
 
 void __cdecl fcn_004da280(void)
 {
@@ -10,7 +10,7 @@ void __cdecl fcn_004da280(void)
 	for (a = 0x9b0dc0; a < 0x9b0e00; a += 4) {
 		v = *(int*) a;
 		if (v != 0) {
-			fcn_004e4aa0(v);
+			cut_DestroyActiveCharacter(v);
 		}
 	}
 }

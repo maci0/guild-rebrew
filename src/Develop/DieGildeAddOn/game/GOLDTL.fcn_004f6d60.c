@@ -27,7 +27,7 @@ extern unsigned char g_6a375c;
 /* Erhoeht den Diebstahls-Zaehler eines Objekts und schickt je nach
  * Objektart ein Aendern-Paket 0x69 oder die Quickjump-Meldung. */
 /* ADDRESS: GOLDTL 0x004f6d60 */
-void __cdecl fcn_004f6d60(unsigned int entityIndex)
+void __cdecl gm_AdvanceTheftCounter(unsigned int entityIndex)
 {
 	char text[0x200];
 	char msg[0xf8];

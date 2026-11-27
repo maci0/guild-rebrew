@@ -3,7 +3,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_DestroyObject(void*);
 char* __cdecl fcn_00446e10(int, float*, float*, int);
 void __cdecl fcn_00453270(char*);
-void __cdecl fcn_0043d6c0(char*, char*);
+void __cdecl d3_AttachObjectBone(char*, char*);
 extern int g_633444;
 /* ADDRESS: GOLD 0x00406c60 */
 void __cdecl ch_SetAttachedObject(char* owner, int selector, int id)
@@ -33,9 +33,9 @@ void __cdecl ch_SetAttachedObject(char* owner, int selector, int id)
         (*slot)[0x213] &= ~4;
         *(int*) (*slot + 0x220) = 5;
         fcn_00453270(*slot);
-        if (selector == 1) fcn_0043d6c0(*slot, "d3_LeftHand");
-        else if (selector == 2) fcn_0043d6c0(*slot, "d3_RightHand");
-        else if (selector == 3) fcn_0043d6c0(*slot, "d3_Head");
+        if (selector == 1) d3_AttachObjectBone(*slot, "d3_LeftHand");
+        else if (selector == 2) d3_AttachObjectBone(*slot, "d3_RightHand");
+        else if (selector == 3) d3_AttachObjectBone(*slot, "d3_Head");
         d3_SelectSceneContext(previous, 1);
         return;
     }

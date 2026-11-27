@@ -42,7 +42,7 @@ char* __cdecl fcn_00442910(int, void*, void*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 char __cdecl d3_SetObjectVisible(char*, char);
 int __cdecl fcn_004e4470(char*);
-void __cdecl fcn_004e44f0(int);
+void __cdecl cut_WaitForScript(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471db0(int, int);
@@ -154,7 +154,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	d3_SetObjectVisible(city, 0);
 	main_LoopFlags = 0x12d6;
 	cut_EventLoopFlags = 0x12d6;
-	fcn_004e44f0(fcn_004e4470((char*) 0x6a4024));
+	cut_WaitForScript(fcn_004e4470((char*) 0x6a4024));
 	win1 = fcn_00470820(0, 0, (char*) 0x6a3dd4);
 	fcn_00471d80(win1, 3);
 	fcn_00471db0(win1, 1);

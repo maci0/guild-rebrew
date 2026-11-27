@@ -3,8 +3,8 @@
 
 extern int g_773d48;
 
-void __cdecl fcn_004fcda0(int, int, int*);
-void __cdecl fcn_00535960(void);
+void __cdecl amt_ProcessPrivilegeIncome(int, int, int*);
+void __cdecl cm_StepCommandQueue(void);
 
 void __cdecl gm_CollectAllTaxes(void)
 {
@@ -13,9 +13,9 @@ void __cdecl gm_CollectAllTaxes(void)
 
 	g_773d48 = 0;
 	for (i = 0; i < 0x300; i++) {
-		fcn_004fcda0(i, 1, buf);
+		amt_ProcessPrivilegeIncome(i, 1, buf);
 		if (g_773d48 > 0x40) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 			g_773d48 = 0;
 		}
 	}

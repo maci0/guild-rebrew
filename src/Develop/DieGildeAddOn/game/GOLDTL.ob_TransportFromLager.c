@@ -17,11 +17,11 @@ void __cdecl ReportClientMessage(const char*);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl cm_AreQueuedCommandsDone(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl d2_GetControlValue(int);
 int __cdecl gm_CheckInventoryCapacity(char*, int, int);
 int __cdecl gm_GetFreeStorageSlotCapacity(int, int, int);
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl gm_CheckEntityStock(void*, int, int);
 int __cdecl fcn_0050b750(int, int);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
@@ -76,12 +76,12 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 			if (count > 0) {
 				if (a3) {
 					if (*type == '\n') {
-						unitPrice = fcn_0050bb50(*stockSlot, a6) * *(double*)0x664ef8;
+						unitPrice = gm_GetSeasonPrice(*stockSlot, a6) * *(double*)0x664ef8;
 					} else {
-						unitPrice = fcn_0050bb50(*stockSlot, a6) * *(float*)(a2 + 0x49);
+						unitPrice = gm_GetSeasonPrice(*stockSlot, a6) * *(float*)(a2 + 0x49);
 					}
 					if (a7 == 2 || a7 == 4) {
-						unitPrice = fcn_0050bb50(*stockSlot, *(char*)(a2 + 0x65));
+						unitPrice = gm_GetSeasonPrice(*stockSlot, *(char*)(a2 + 0x65));
 					}
 				} else {
 					unitPrice = 0.0f;
@@ -146,7 +146,7 @@ next:
 			}
 			if (count > 0) {
 				if (a3) {
-					unitPrice = fcn_0050bb50(*stockSlot, a6) * *(float*)(a2 + 0x49);
+					unitPrice = gm_GetSeasonPrice(*stockSlot, a6) * *(float*)(a2 + 0x49);
 				} else {
 					unitPrice = 0.0f;
 				}
@@ -202,7 +202,7 @@ next2:
 	}
 	cm_EndCommandSync();
 	while (!cm_AreQueuedCommandsDone()) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	return 1;
 }

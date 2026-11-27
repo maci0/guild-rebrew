@@ -29,7 +29,7 @@ int d3_CameraAnimating = 0;
 extern int d3_ActiveCameraAnimation;
 extern void* d3_ActiveCamera;
 
-int __cdecl fcn_00445600(int a1, int a2, int a3, char* name);
+int __cdecl d3_FindSceneObject(int a1, int a2, int a3, char* name);
 int __cdecl d3_CreateObjectAnimation(char* obj, Flags4cf450 fl, int n, void* ents);
 
 /* ADDRESS: GOLDTL 0x00414d20 */
@@ -127,7 +127,7 @@ int __cdecl d3_StartCameraFlight(int duration, int count, ...)
 			s = va_arg(ap, char*);
 			strcpy(name, s);
 			if (name[0] != 0) {
-				m = fcn_00445600(0, 0x160, 0, name);
+				m = d3_FindSceneObject(0, 0x160, 0, name);
 				h[n] = m;
 				if (m == 0) {
 					return 0;

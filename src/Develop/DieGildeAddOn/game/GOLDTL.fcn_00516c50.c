@@ -30,9 +30,9 @@ extern int g_67a370;
 extern int g_6b8300;
 
 void* __cdecl fcn_00502cd0(int, int, int, ...);
-Contact* __cdecl fcn_00445600(int, int, int, char*);
+Contact* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_SetObjectVisible(Contact*, int);
-void __cdecl fcn_00515c60(Player*, void*);
+void __cdecl evt_StartShopIntroScript(Player*, void*);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl d3snd_PlayNamedSceneSound(void);
 void __cdecl d3snd_PlayBuildingAmbient(Player*);
@@ -53,29 +53,29 @@ void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 	if (unit == 0) {
 		unit = fcn_00502cd0(p->home, 2, 6, 0, 0xfd);
 	}
-	c = fcn_00445600(0, 0xa0, 0, "contact_EINKAUF");
+	c = d3_FindSceneObject(0, 0xa0, 0, "contact_EINKAUF");
 	if (c == 0) {
-		c = fcn_00445600(0, 0xa0, 0, "contact_EINKAUF_METALL");
+		c = d3_FindSceneObject(0, 0xa0, 0, "contact_EINKAUF_METALL");
 	}
 	if (c == 0) {
-		c = fcn_00445600(0, 0xa0, 0, "contact_EINKAUF_SKRIPTE");
+		c = d3_FindSceneObject(0, 0xa0, 0, "contact_EINKAUF_SKRIPTE");
 	}
 	if (c == 0) {
-		c = fcn_00445600(0, 0xa0, 0, "contact_EINKAUF_HOLZ");
+		c = d3_FindSceneObject(0, 0xa0, 0, "contact_EINKAUF_HOLZ");
 	}
 	if (c == 0) {
-		c = fcn_00445600(0, 0xa0, 0, "contact_EINKAUF_STEIN");
+		c = d3_FindSceneObject(0, 0xa0, 0, "contact_EINKAUF_STEIN");
 	}
 	if (c != 0) {
 		if (p->slot == g_774970) {
 			d3_SetObjectVisible(c, 0);
 		} else {
 			d3_SetObjectVisible(c, 1);
-			fcn_00515c60(p, unit);
+			evt_StartShopIntroScript(p, unit);
 		}
 		c->shown = 1;
 	} else if (o->kind == 5 && p->slot != g_774970) {
-		fcn_00515c60(p, unit);
+		evt_StartShopIntroScript(p, unit);
 	}
 	d3_TraverseSceneObjects(g_67a370, 0, 0x20, d3snd_PlayNamedSceneSound);
 	d3snd_PlayBuildingAmbient(p);

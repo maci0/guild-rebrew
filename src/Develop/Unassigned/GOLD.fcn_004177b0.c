@@ -2,7 +2,7 @@ void __cdecl sb_StopVoice(int*, int);
 void __cdecl d3snd_SetVoiceFlag0x10(int*, int);
 
 /* ADDRESS: GOLD 0x004177b0 */
-void __cdecl fcn_004177b0(char* p)
+void __cdecl d3snd_StopSourceVoice(char* p)
 {
 	if (*(void**) (p + 0x34) != 0) {
 		sb_StopVoice(*(int**) (p + 0x34), 0);

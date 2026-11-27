@@ -21,7 +21,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl cm_GetCommandResult(int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
@@ -126,7 +126,7 @@ void __cdecl fcn_004ff490(char* entity)
 
 		id = cm_RequestAllocSpieler(8, *(int*) (ent + 4), *(int*) (entity + 4), 0, id, 0, 0, extra);
 		while (cm_GetCommandStatus(id) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 		if (cm_GetCommandStatus(id) == 2) {
 			return;

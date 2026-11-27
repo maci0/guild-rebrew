@@ -57,7 +57,7 @@ extern short g_14ce8c2;
 void __cdecl fcn_00414c30(int, int);
 void* __cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(char*);
-int __cdecl fcn_00445600(char*, int, char*, char*);
+int __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
 void __cdecl fcn_00473690(int, int);
 void __cdecl ResetDisplayCounters(void);
@@ -228,7 +228,7 @@ L192f:
 		goto La50;
 	}
 	fcn_0064d41a(u.buf, (char*) 0x68143c, (char*) g_7746a0 + 8);
-	if (fcn_00445600((char*) g_7746a0, 0x100, 0, u.buf) == 0) {
+	if (d3_FindSceneObject((char*) g_7746a0, 0x100, 0, u.buf) == 0) {
 		strcpy(u.buf, (char*) g_7746a0);
 	}
 	ei = -1;

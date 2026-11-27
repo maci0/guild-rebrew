@@ -16,7 +16,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl gm_BuyBuilding(int, int, int, char*, int);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
-int __cdecl fcn_0050d170(int k);
+int __cdecl gm_GetTypeProductValue(int k);
 void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
 void __cdecl cm_SendCopyEntityData(char* msg);
 int __cdecl amt_ExecGebaeudeBauen(char* actor, char* building_spec, char* target_arg);
@@ -47,7 +47,7 @@ int __cdecl ai_RunBetriebBauen(char* actor, char* building_spec, char* target_ar
 		*(short*) (msg + 0x34) = g_7f4c0c;
 		*(int*) (msg + 0x58) = *(int*) (target_arg + 4);
 		cm_SendLogAction(g_67e968);
-		cm_RequestMoveCredits(-1, *(int*) (actor + 4), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (building_spec + 4)) * 0.3f));
+		cm_RequestMoveCredits(-1, *(int*) (actor + 4), (*(char*)&g_773d75), (int) (gm_GetTypeProductValue(*(int*) (building_spec + 4)) * 0.3f));
 		cm_SendCopyEntityData(msg);
 		cm_SendTraceEnd(g_67e968);
 		return 0x13;

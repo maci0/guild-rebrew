@@ -44,7 +44,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 
 void __cdecl fcn_004760a0(int, int);
 int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyForm(int);
@@ -93,7 +93,7 @@ int __cdecl fcn_005bcb10(void)
 				io_FormatTextBuffer(buf, g_68be7c, *(int*) (m + 0x1b8));
 				g_777d00[n].value_text = d2_ShowTxt(0x180, n * 0x3e + 0x14, buf, d2_CurrentWindowId);
 				g_777d00[n].bar = fcn_00467480(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, d2_CurrentWindowId);
-				d2_SetElementValue(g_777d00[n].bar, 0x3e8, 0x2328, fcn_0050b710(*(int*) (e + 0x39), g_773d75));
+				d2_SetElementValue(g_777d00[n].bar, 0x3e8, 0x2328, gm_AmountToUnits(*(int*) (e + 0x39), g_773d75));
 				g_777d00[n].value = d2_GetControlValue(g_777d00[n].bar);
 				g_777d00[n].e = e;
 				n++;

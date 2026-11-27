@@ -109,7 +109,7 @@ void __cdecl fcn_00533a40(char*);
 void __cdecl ReportClientMessage(char*);
 void __cdecl fcn_00412830(char);
 void __cdecl UpdateSceneLighting(unsigned char);
-int __cdecl fcn_0050d200(int, int);
+int __cdecl gm_CalcBuildingCost(int, int);
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(char*, int, int, float*);
 void __cdecl d3_AnimateCameraToObject(char*);
@@ -370,7 +370,7 @@ platzieren:
 			d3_BuildEulerRotationMatrix(f.fVec, f.fMatrix);
 		}
 		if (g_14ce8cc != 0 && pNaechster != 0) {
-			i = fcn_0050d200((int) (g_7f4ca0 + g_774970 * 0x21c), gebaeudetyp);
+			i = gm_CalcBuildingCost((int) (g_7f4ca0 + g_774970 * 0x21c), gebaeudetyp);
 			io_FormatTextBuffer(f.cText, 0x17ef, i, gebaeudetyp * 14 + 0x48e,
 				*(int*) (lpGebaeudePROT + f.iTypOffset + 0x243));
 			if (fcn_00526120(f.cText, 1) != 0) {

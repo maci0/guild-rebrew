@@ -20,22 +20,22 @@ float __cdecl gm_RandomFloat01(void);
 void __cdecl fcn_005904a0(Ent* e, int a2);
 
 /* ADDRESS: GOLDTL 0x004833a0 */
-void __cdecl fcn_004833a0(Ent* e)
+void __cdecl gm_UpdateWorkerArrival(Ent* entity)
 {
 	Ent* found;
 	int i;
 
 	found = 0;
 	if ((*(short*)&g_7f4c04) != 7 && (*(short*)&g_7f4c04) != 0xc && (*(short*)&g_7f4c04) != 0x12) {
-		e->flags &= ~0x1000;
+		entity->flags &= ~0x1000;
 		return;
 	}
-	if (e->flags & 0x1000) {
+	if (entity->flags & 0x1000) {
 		return;
 	}
-	e->flags |= 0x1000;
+	entity->flags |= 0x1000;
 	for (i = 0; found == 0 && i < 768; i++) {
-		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].home == e->home && ((Ent*)g_7f4ca0)[i].role == 0x1c && ((Ent*)g_7f4ca0)[i].kind == 0x14
+		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].home == entity->home && ((Ent*)g_7f4ca0)[i].role == 0x1c && ((Ent*)g_7f4ca0)[i].kind == 0x14
 		    && (((Ent*)g_7f4ca0)[i].flags & 1) && ((Ent*)g_7f4ca0)[i].job && *(int*) (((Ent*)g_7f4ca0)[i].job + 0x2c) == *(int*) (((Ent*)g_7f4ca0)[i].home + 1)) {
 			found = &((Ent*)g_7f4ca0)[i];
 		}

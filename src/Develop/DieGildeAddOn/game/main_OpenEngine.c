@@ -48,7 +48,7 @@ void __cdecl nt_ConnectTcp(int, int);
 void __cdecl cm_ResetCommandQueue(void);
 void __cdecl fcn_00590650(void);
 void __cdecl fcn_00501040(char*);
-void __cdecl fcn_004efc50(void);
+void __cdecl gm_ResetSlot170Table(void);
 void __cdecl init_LoadCharacterNames(void);
 void __cdecl ls_FreeList774a78(void);
 float __cdecl eval_ObjektPreis2Credits(int, int);
@@ -66,7 +66,7 @@ void __cdecl fcn_00510900(void);
 void __cdecl ch_InitActionQueue(void);
 void __cdecl fcn_004186c0(void);
 void __cdecl ai_InitContextAndGoodsLists(void);
-void __cdecl fcn_004ed200(int);
+void __cdecl ahm_ReloadAlchemyPrototypes(int);
 void __cdecl fcn_004ac560(void);
 void __cdecl gm_LoadHistoricalTable(void);
 void __cdecl fcn_004d3800(void);
@@ -157,7 +157,7 @@ int __cdecl main_OpenEngine(void)
 	fcn_00590650();
 	sprintf(path, "%sdata\\", g_6a3550);
 	fcn_00501040(path);
-	fcn_004efc50();
+	gm_ResetSlot170Table();
 	init_LoadCharacterNames();
 	ls_FreeList774a78();
 	eval_ObjektPreis2Credits(0x1d5, 100);
@@ -192,7 +192,7 @@ int __cdecl main_OpenEngine(void)
 	ch_InitActionQueue();
 	fcn_004186c0();
 	ai_InitContextAndGoodsLists();
-	fcn_004ed200(g_774820);
+	ahm_ReloadAlchemyPrototypes(g_774820);
 	if (g_774824 != 0) {
 		fcn_004ac560();
 	}

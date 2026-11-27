@@ -5,16 +5,16 @@ extern unsigned char* lpGebaeudePROT;
 extern char g_773d75;
 
 int __cdecl gm_GetEntityTableEntry(int);
-int __cdecl fcn_0050d320(int, signed char);
+int __cdecl gm_GetSeasonTreasury(int, signed char);
 int __cdecl he_StartHandlungSearch(int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl fcn_00507910(int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_GetRangeStatId(int, int);
-int __cdecl fcn_005072c0(int);
+int __cdecl gm_JobToBuildingType(int);
 int __cdecl ai_PrepareBuildSite(int, int, int, int*, int*, int);
-int __cdecl fcn_0050d170(int);
+int __cdecl gm_GetTypeProductValue(int);
 
 /* ADDRESS: GOLDTL 0x0049f000 */
 unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3, int* a4)
@@ -41,7 +41,7 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 	if (v7 == 0) {
 		return 0;
 	}
-	v8 = fcn_0050d320((int) a1, g_773d75);
+	v8 = gm_GetSeasonTreasury((int) a1, g_773d75);
 	if (v8 / 0x20 < 5000) {
 		return 0;
 	}
@@ -78,7 +78,7 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 				return 0;
 			}
 			v7 = gm_GetRangeStatId(v10, 1);
-			v10 = fcn_005072c0(v7);
+			v10 = gm_JobToBuildingType(v7);
 			if (v10 == 0) {
 				return 0;
 			}
@@ -92,7 +92,7 @@ unsigned int __cdecl ai_StartChangeProfession(int a0, char* a1, int a2, int* a3,
 			if (v9 == 0) {
 				return 0;
 			}
-			if (v8 < fcn_0050d170(v15[1])) {
+			if (v8 < gm_GetTypeProductValue(v15[1])) {
 				return 0;
 			}
 			memcpy(a3, v15, 0x18);

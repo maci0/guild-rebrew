@@ -13,31 +13,31 @@ typedef struct {
 	char pad22[0x182 - 0x22];
 	int flag;
 	char pad186[0x21c - 0x186];
-} Slot4ff0f0;
+} ENTITY_UPDATE_SLOT;
 #pragma pack()
 
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl cm_BeginPacketFieldDelta(char* base, int entity_id);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
 void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl fcn_004fe5f0(void*);
-void __cdecl cm_SendSwapEntityModel(int a1, char* a2);
+void __cdecl cm_SendSwapEntityModel(int entity_id, char* model_name);
 void __cdecl gm_MaintainNpcPopulation(void);
 
 /* ADDRESS: GOLDTL 0x004ff0f0 */
-void __cdecl fcn_004ff0f0(void)
+void __cdecl gm_UpdateActiveEntities(void)
 {
-	Slot4ff0f0* p;
+	ENTITY_UPDATE_SLOT* p;
 
 	int v;
 	int id;
 
 
 	g_773d48 = 0;
-	p = (Slot4ff0f0*) g_7f4ca2;
+	p = (ENTITY_UPDATE_SLOT*) g_7f4ca2;
 	do {
 		if (g_773d48 > 0x40) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 			g_773d48 = 0;
 		}
 		if (p->kind == 0x12) {
@@ -50,10 +50,10 @@ void __cdecl fcn_004ff0f0(void)
 		}
 		p++;
 	} while ((int) p < (int) &g_7f4ca2[768]);
-	p = (Slot4ff0f0*) g_7f4ca2;
+	p = (ENTITY_UPDATE_SLOT*) g_7f4ca2;
 	do {
 		if (g_773d48 > 0x40) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 			g_773d48 = 0;
 		}
 		if ((p->kind < 10 || p->kind == 0x14)

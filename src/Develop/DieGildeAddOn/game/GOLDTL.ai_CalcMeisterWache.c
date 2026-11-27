@@ -13,9 +13,9 @@ void __cdecl fcn_00489010(char *, char *);
 void __cdecl ai_MeisterCollectTrans(char *);
 void __cdecl ai_MeisterTrade(char *, char *);
 void __cdecl ai_ManageMeisterWorkers(char *);
-void __cdecl fcn_00487970(char *, char *, int);
+void __cdecl gm_TryAutoUpgradeBuildingSlots(char *, char *, int);
 void __cdecl ai_RequestAusbauUpgrade(char *, char *, int);
-void __cdecl fcn_00487470(char *);
+void __cdecl ai_BuyStallGoods(char *);
 void __cdecl fcn_004888a0(char *);
 void __cdecl ai_DispatchWorkerRecovery(char *);
 char *__cdecl ai_CalcAngriff(char *, int);
@@ -63,9 +63,9 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 		ai_MeisterTrade(meister, res);
 	}
 	ai_ManageMeisterWorkers(meister);
-	fcn_00487970(res, meister, 10);
+	gm_TryAutoUpgradeBuildingSlots(res, meister, 10);
 	ai_RequestAusbauUpgrade(res, meister, 10);
-	fcn_00487470(meister);
+	ai_BuyStallGoods(meister);
 	fcn_004888a0(meister);
 	ai_DispatchWorkerRecovery(meister);
 	if (((unsigned short) gm_GameTime.b <= 6)

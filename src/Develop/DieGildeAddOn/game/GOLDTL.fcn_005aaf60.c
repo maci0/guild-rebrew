@@ -28,7 +28,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005340f0(int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
 void __cdecl d2_ClampAmountToRange(int, int, int, int*);
@@ -98,8 +98,8 @@ void __cdecl d2_RunKircheSpendenDialog(char* gebaeude)
 			*(unsigned short*) (g_8680b4 + (unsigned char) g_773d75 * 0x2f4) * 2 + 0x9a8);
 		d2_ClampAmountToRange(cnt, v, 0x20, &b);
 		c = d2_GetWindowListItem(dlg, 1, c);
-		fcn_00472380(c, fcn_0050b710(cnt, g_773d75), fcn_0050b710(b, g_773d75),
-			fcn_0050b710(cnt, g_773d75));
+		fcn_00472380(c, gm_AmountToUnits(cnt, g_773d75), gm_AmountToUnits(b, g_773d75),
+			gm_AmountToUnits(cnt, g_773d75));
 		d2_SetForm(dlg, 2);
 		n = io_AppendText(0x1989);
 		a = d2_GetWindowListItem(dlg, 2, n);

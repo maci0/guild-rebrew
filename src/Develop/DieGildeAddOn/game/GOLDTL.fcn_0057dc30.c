@@ -22,7 +22,7 @@ extern unsigned char g_773d75;
 
 unsigned short __cdecl gm_PickRandomOfferId(int, int);
 void __cdecl gm_CheckEntityObjectSlots(char*, int, struct offer*, struct level*);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 
@@ -36,12 +36,12 @@ void __cdecl he_RewardRandomItemOrGold0a4(char* h)
 	gm_CheckEntityObjectSlots(h, 1, &o, &lv);
 	if (o.seller != 0) {
 		if (*(int*) (o.seller + 0xe) >= 3) {
-			cm_RequestTransferCurrencyNoKill(*(int*) (h + 4), -1, g_773d75, (int) fcn_0050bb50((unsigned short) o.good, g_773d75));
+			cm_RequestTransferCurrencyNoKill(*(int*) (h + 4), -1, g_773d75, (int) gm_GetSeasonPrice((unsigned short) o.good, g_773d75));
 		} else {
 			cm_SendSellObjekt(*(int*) (h + 4), -1, o.good, 1, g_773d75, 0);
 		}
 	} else if (lv.value >= 6) {
-		cm_RequestTransferCurrencyNoKill(*(int*) (h + 4), -1, g_773d75, (int) fcn_0050bb50(o.good, g_773d75));
+		cm_RequestTransferCurrencyNoKill(*(int*) (h + 4), -1, g_773d75, (int) gm_GetSeasonPrice(o.good, g_773d75));
 	} else {
 		cm_SendSellObjekt(*(int*) (h + 4), -1, o.good, 1, g_773d75, 0);
 	}

@@ -21,7 +21,7 @@ void __cdecl he_NotifyFriedhofEvent08(char*, void*, void*, int, int, int);
 #define MINV(a, b) (((a) < (b)) ? (a) : (b))
 
 double __cdecl log10(double x);
-int __cdecl fcn_0050b710(int a, unsigned char k);
+int __cdecl gm_AmountToUnits(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 
 /* ADDRESS: GOLDTL 0x004f25a0 */
@@ -94,7 +94,7 @@ int __cdecl fcn_004f45b0(unsigned short* e)
 	double x;
 	int pr;
 
-	pr = fcn_0050b710(gm_WalkEntityChain(*e), g_773d75);
+	pr = gm_AmountToUnits(gm_WalkEntityChain(*e), g_773d75);
 	x = pr;
 	x = MAXV(MINV(100000.0, x), 10000.0);
 	x = x / (log10(x) + 1.0) * 0.1f;

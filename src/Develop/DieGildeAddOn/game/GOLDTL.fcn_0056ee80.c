@@ -48,7 +48,7 @@ char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl gm_GetScaledEntitySkill(char*, int);
 void __cdecl gm_EvalEntityInventoryValue(char*, int*);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl he_HasNoActiveAction0x62(char*);
 int __cdecl _ftol(void);
 int* __cdecl fcn_00502cd0(int, ...);
@@ -305,7 +305,7 @@ label_1bc:
 						fcn_0064d41a(str, s_68be9c, cnt, *(int*) (*(unsigned short*) q * 8 + 0x14a79c0));
 						strcat(msg, str);
 						cm_SendSellObjekt(*(int*) (i + 2), *(int*) (h + 2), *(unsigned short*) q, cnt, g_773d75, 0);
-						val = (int) ((double) fcn_0050bb50(*(unsigned short*) q, g_773d75) * cnt + val);
+						val = (int) ((double) gm_GetSeasonPrice(*(unsigned short*) q, g_773d75) * cnt + val);
 					}
 					q = (int) gm_NextEntityQueryMatch();
 				}

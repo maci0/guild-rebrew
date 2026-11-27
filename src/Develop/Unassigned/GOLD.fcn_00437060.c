@@ -11,7 +11,7 @@ void __cdecl fcn_00437060(unsigned char mode)
 		*(int*) 0xfe79a0 = value;
 		d3d_LastResult = ((int (__stdcall*)(void*, int, int)) (*(int**) obj)[0x58 / 4])(obj, 7, value);
 		if (d3d_LastResult != 0) {
-			fcn_00418e90((char*) 0x5f944c, 0x2bb, (char*) 0x5fa1b8);
+			d3d_LogResultError((char*) 0x5f944c, 0x2bb, (char*) 0x5fa1b8);
 		}
 		*(unsigned char*) 0x63342d = mode;
 	}

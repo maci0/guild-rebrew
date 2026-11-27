@@ -42,8 +42,8 @@ int __cdecl cm_RequestMoveCredits();
 int __cdecl cm_RequestChangeAttribute();
 int __cdecl gm_GetRangeStatId();
 int __cdecl gm_CalculateGebaeudeValue();
-int __cdecl fcn_0050d170();
-int __cdecl fcn_00535960();
+int __cdecl gm_GetTypeProductValue();
+int __cdecl cm_StepCommandQueue();
 int __cdecl gm_ReplenishAiBuildingFunds();
 
 #define REC_SIZE 0xa9
@@ -181,7 +181,7 @@ void __cdecl fcn_00547770(void)
         if ((msk & sel) != 0) {
             if (sel == 1) {
                 if (cnt[4] < 3) {
-                    e2 = fcn_0050d170(0xb) * 2;
+                    e2 = gm_GetTypeProductValue(0xb) * 2;
                     lvl = 6;
                 } else {
                     FIND_REC(4);
@@ -193,7 +193,7 @@ void __cdecl fcn_00547770(void)
                 }
             } else if (sel == 2) {
                 if (cnt[19] < 3) {
-                    e2 = fcn_0050d170(0x2c) * 2;
+                    e2 = gm_GetTypeProductValue(0x2c) * 2;
                     lvl = 0x39;
                 } else {
                     FIND_REC(0x13);
@@ -204,13 +204,13 @@ void __cdecl fcn_00547770(void)
                     lvl = gm_GetRangeStatId(0xa, (u32)((Building547770*) q)->level * 2 - 1);
                 }
             } else {
-                e2 = fcn_0050d170(0x27) * 2;
+                e2 = gm_GetTypeProductValue(0x27) * 2;
                 lvl = 0x2d;
             }
             u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0, 0);
             if (u != -1) {
                 while (cm_GetCommandStatus(u) == 0) {
-                    fcn_00535960();
+                    cm_StepCommandQueue();
                 }
             }
             if (cm_GetCommandStatus(u) == 1) {
@@ -293,7 +293,7 @@ void __cdecl fcn_00547770(void)
             }
             if (j == 0) {
                 if (cnt[18] < 3) {
-                    e2 = fcn_0050d170(0x29) * 2;
+                    e2 = gm_GetTypeProductValue(0x29) * 2;
                     lvl = gm_GetRangeStatId(1, 1);
                 } else {
                     FIND_REC(0x12);
@@ -305,7 +305,7 @@ void __cdecl fcn_00547770(void)
                 }
             } else if (j == 1) {
                 if (cnt[21] < 3) {
-                    e2 = fcn_0050d170(0x32) * 2;
+                    e2 = gm_GetTypeProductValue(0x32) * 2;
                     lvl = gm_GetRangeStatId(3, 1);
                 } else {
                     FIND_REC(0x15);
@@ -317,7 +317,7 @@ void __cdecl fcn_00547770(void)
                 }
             } else if (j == 2) {
                 if (cnt[20] < 3) {
-                    e2 = fcn_0050d170(0x2f) * 2;
+                    e2 = gm_GetTypeProductValue(0x2f) * 2;
                     lvl = gm_GetRangeStatId(2, 1);
                 } else {
                     FIND_REC(0x14);
@@ -329,7 +329,7 @@ void __cdecl fcn_00547770(void)
                 }
             } else {
                 if (cnt[14] < 3) {
-                    e2 = fcn_0050d170(0x21) * 2;
+                    e2 = gm_GetTypeProductValue(0x21) * 2;
                     lvl = gm_GetRangeStatId(5, 1);
                 } else {
                     FIND_REC(0xe);
@@ -344,7 +344,7 @@ void __cdecl fcn_00547770(void)
                              fcn_0042e410(2));
             if (u != -1) {
                 while (cm_GetCommandStatus(u) == 0) {
-                    fcn_00535960();
+                    cm_StepCommandQueue();
                 }
             }
             if (cm_GetCommandStatus(u) == 1) {
@@ -403,7 +403,7 @@ void __cdecl fcn_00547770(void)
             }
             if (j == 0) {
                 if (cnt[8] < 3) {
-                    e2 = fcn_0050d170(0x17) * 2;
+                    e2 = gm_GetTypeProductValue(0x17) * 2;
                     lvl = gm_GetRangeStatId(6, 1);
                 } else {
                     FIND_REC(8);
@@ -415,7 +415,7 @@ void __cdecl fcn_00547770(void)
                 }
             } else {
                 if (cnt[22] < 3) {
-                    e2 = fcn_0050d170(0x35) * 2;
+                    e2 = gm_GetTypeProductValue(0x35) * 2;
                     lvl = gm_GetRangeStatId(4, 1);
                 } else {
                     FIND_REC(0x16);
@@ -430,7 +430,7 @@ void __cdecl fcn_00547770(void)
                              fcn_0042e410(2));
             if (u != -1) {
                 while (cm_GetCommandStatus(u) == 0) {
-                    fcn_00535960();
+                    cm_StepCommandQueue();
                 }
             }
             if (cm_GetCommandStatus(u) == 1) {
@@ -496,7 +496,7 @@ void __cdecl fcn_00547770(void)
             }
             if (j == 0) {
                 if (cnt[9] < 2) {
-                    e2 = fcn_0050d170(0x1a) * 2;
+                    e2 = gm_GetTypeProductValue(0x1a) * 2;
                     lvl = gm_GetRangeStatId(8, 1);
                 } else {
                     FIND_REC(9);
@@ -517,15 +517,15 @@ void __cdecl fcn_00547770(void)
                     e2 = gm_CalculateGebaeudeValue(rp, 0x64) * 2;
                     lvl = gm_GetRangeStatId(7, (u32)((Building547770*) q)->level * 2 - 1);
                 } else if (cnt[7] < 2) {
-                    e2 = fcn_0050d170(0x14) * 2;
+                    e2 = gm_GetTypeProductValue(0x14) * 2;
                     lvl = gm_GetRangeStatId(7, 1);
                 } else {
-                    e2 = fcn_0050d170(0x15) * 2;
+                    e2 = gm_GetTypeProductValue(0x15) * 2;
                     lvl = gm_GetRangeStatId(7, 3);
                 }
             } else {
                 if (cnt[5] < 1) {
-                    e2 = fcn_0050d170(0xe) * 2;
+                    e2 = gm_GetTypeProductValue(0xe) * 2;
                     lvl = gm_GetRangeStatId(9, 1);
                 } else {
                     FIND_REC(5);
@@ -540,7 +540,7 @@ void __cdecl fcn_00547770(void)
                              fcn_0042e410(2));
             if (u != -1) {
                 while (cm_GetCommandStatus(u) == 0) {
-                    fcn_00535960();
+                    cm_StepCommandQueue();
                 }
             }
             if (cm_GetCommandStatus(u) == 1) {
@@ -612,7 +612,7 @@ void __cdecl fcn_00547770(void)
             if (j == 0) {
                 v = (u2)fcn_0042e410(2);
                 if (cnt[32] < 3) {
-                    e2 = fcn_0050d170(0x51) * 2;
+                    e2 = gm_GetTypeProductValue(0x51) * 2;
                     lvl = gm_GetRangeStatId(0xf, 1);
                 } else {
                     FIND_REC(0x20);
@@ -624,7 +624,7 @@ void __cdecl fcn_00547770(void)
                 }
             } else if (j == 1) {
                 if (cnt[31] < 3) {
-                    e2 = fcn_0050d170(0x4e) * 2;
+                    e2 = gm_GetTypeProductValue(0x4e) * 2;
                     lvl = gm_GetRangeStatId(0xe, 1);
                 } else {
                     FIND_REC(0x1f);
@@ -636,7 +636,7 @@ void __cdecl fcn_00547770(void)
                 }
             } else {
                 if (cnt[29] < 3) {
-                    e2 = fcn_0050d170(0x48) * 2;
+                    e2 = gm_GetTypeProductValue(0x48) * 2;
                     lvl = gm_GetRangeStatId(0xd, 1);
                 } else {
                     FIND_REC(0x1d);
@@ -650,7 +650,7 @@ void __cdecl fcn_00547770(void)
             u = cm_RequestAllocSpieler(4, -1, -1, fcn_0042e410(4) + 0xf, -1, lvl, 0, v);
             if (u != -1) {
                 while (cm_GetCommandStatus(u) == 0) {
-                    fcn_00535960();
+                    cm_StepCommandQueue();
                 }
             }
             if (cm_GetCommandStatus(u) == 1) {

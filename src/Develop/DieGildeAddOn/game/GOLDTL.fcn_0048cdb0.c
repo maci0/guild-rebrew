@@ -58,7 +58,7 @@ int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetStorageSlotCapacity(char*, int);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl ai_GetMaxActiveTradeActions(void);
 int __cdecl he_CountActiveTradeActions(void);
 int __cdecl cm_SendCopyEntityData(void*);
@@ -71,7 +71,7 @@ int __cdecl gm_QueryEntitySum(int, int);
 
 
 /* ADDRESS: GOLDTL 0x0048cdb0 */
-unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
+unsigned int __cdecl ai_RebalanceCityStock(char* o, char* req)
 {
 	Msg m;
 	Stats st;
@@ -142,9 +142,9 @@ unsigned int __cdecl fcn_0048cdb0(char* o, char* req)
 					if (st.x68[j] == 0)
 						continue;
 					sprintf(line, (char*) 0x67e8c0, *(int*) (o + 0x16c) + 5, st.x68[j], (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[st.x48[j]] + 1);
-					sprintf(line, (char*) 0x67e358, -1, *(int*) (q + 2), (int) st.x48[j], st.x68[j], g_773d75, (double) (int) fcn_0050bb50((int) st.x48[j], g_773d75));
-					cm_SendSellObjekt(-1, *(int*) (q + 2), (short) st.x48[j], st.x68[j], (char) g_773d75, (int) fcn_0050bb50((int) st.x48[j], g_773d75));
-					*(int*) (o + 0x1b8) = (int) (fcn_0050bb50((int) st.x48[j], g_773d75) + *(int*) (o + 0x1b8));
+					sprintf(line, (char*) 0x67e358, -1, *(int*) (q + 2), (int) st.x48[j], st.x68[j], g_773d75, (double) (int) gm_GetSeasonPrice((int) st.x48[j], g_773d75));
+					cm_SendSellObjekt(-1, *(int*) (q + 2), (short) st.x48[j], st.x68[j], (char) g_773d75, (int) gm_GetSeasonPrice((int) st.x48[j], g_773d75));
+					*(int*) (o + 0x1b8) = (int) (gm_GetSeasonPrice((int) st.x48[j], g_773d75) + *(int*) (o + 0x1b8));
 					st.x48[j] = 0;
 					st.x68[j] = 0;
 				}

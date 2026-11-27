@@ -14,13 +14,13 @@ void __cdecl fcn_004e4c40(int);
 int __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl gm_FindOrAllocHeadSet(int, int);
 int __cdecl fcn_004e44b0(char*, char*);
-void __cdecl fcn_004e44f0(int);
+void __cdecl cut_WaitForScript(int);
 int __cdecl gm_RandomMod(unsigned short);
 float __cdecl fcn_004ff210(unsigned short, int);
-void __cdecl fcn_004e4de0(int);
+void __cdecl cut_WaitSeconds(int);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004e4c60(void);
-void __cdecl fcn_004e4c00(void);
+void __cdecl d3_DestroySkyLayer(void);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
 int __cdecl fcn_00445f50(int, float, float, int);
@@ -97,7 +97,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	}
 	sprintf(s_dst, (char*) 0x679060, id + 4);
 	fcn_004e44b0((char*) 0x68cf80, buf);
-	fcn_004e44f0(fcn_004e44b0((char*) 0x68cf54, (char*) 0x6b5c60));
+	cut_WaitForScript(fcn_004e44b0((char*) 0x68cf54, (char*) 0x6b5c60));
 	if (*(int*) (eventRecord + 0xc) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
 		fcn_004ff210(*p, (int) -(*(float*) ((char*) p + 0x1c) + *(float*) 0x662a98));
 	}
@@ -116,13 +116,13 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 		fcn_004e44b0((char*) 0x68ce98, (char*) 0x6b5c60);
 		break;
 	}
-	fcn_004e4de0(ranges[*(char*) (eventRecord + 0x7c)]);
+	cut_WaitSeconds(ranges[*(char*) (eventRecord + 0x7c)]);
 	fcn_004e48b0();
-	fcn_004e44f0(fcn_004e44b0((char*) 0x68ce6c, (char*) 0x6b5c60));
+	cut_WaitForScript(fcn_004e44b0((char*) 0x68ce6c, (char*) 0x6b5c60));
 	if (mode != 0) {
 		fcn_004e4c60();
 	}
-	fcn_004e4c00();
+	d3_DestroySkyLayer();
 	g_772f54 = 0;
 	cut_CleanupCutscene();
 	d2_SuppressOverlay = 0;

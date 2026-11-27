@@ -42,7 +42,7 @@ void __cdecl d2_AddToRadioGroup(int g, int id);
 int __cdecl fcn_0046c690(int a);
 int __cdecl cm_SendRemoveLinkedObject(int a1, int a2, int a3);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_DestroyForm(int);
@@ -133,7 +133,7 @@ void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 			if (i >= 0) {
 				r = cm_SendRemoveLinkedObject(*(int*) (p + 1), -1, *(int*) (carts[i] + 2));
 				while (cm_GetCommandStatus(r) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 				refresh = 1;
 			}

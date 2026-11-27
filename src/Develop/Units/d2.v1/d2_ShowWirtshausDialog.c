@@ -31,7 +31,7 @@ int __cdecl fcn_00502850();
 int __cdecl fcn_00502cd0();
 int __cdecl fcn_00503fe0();
 int __cdecl fcn_00509570();
-int __cdecl fcn_0050b710(int a,unsigned char b);
+int __cdecl gm_AmountToUnits(int a,unsigned char b);
 int __cdecl fcn_0050dac0(unsigned short a);
 int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
@@ -109,7 +109,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
   v28 = -1;
   v30 = -1;
   v29 = -1;
-  v11 = fcn_0050b710(fcn_0050dac0((unsigned short)playerSlot),(*(unsigned char *)&g_773d75));
+  v11 = gm_AmountToUnits(fcn_0050dac0((unsigned short)playerSlot),(*(unsigned char *)&g_773d75));
   v7 = fcn_00509570(v3);
   windowId = fcn_00470820(0,0,(char *)0x6aa908);
   d2_SetForm(windowId,0);

@@ -13,7 +13,7 @@ int __cdecl ai_EvalBlackjackAction();
 int __cdecl fcn_00493000();
 int __cdecl cm_RequestTransferCurrencyNoKill();
 int __cdecl gm_LookupEntityRecordById();
-int __cdecl fcn_0050b710();
+int __cdecl gm_AmountToUnits();
 int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
 int __cdecl d3_EndCameraAndUiMode();

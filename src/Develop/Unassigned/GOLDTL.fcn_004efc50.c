@@ -24,7 +24,7 @@ extern pos14_7f4c00 g_772fe8;
 extern pos14_7f4c00 gm_GameTime;
 extern int g_9a9200[8];
 
-void __cdecl fcn_004efc50(void)
+void __cdecl gm_ResetSlot170Table(void)
 {
 	int i;
 

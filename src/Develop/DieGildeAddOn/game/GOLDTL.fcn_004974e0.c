@@ -6,8 +6,8 @@ typedef struct { char x00[0x21]; unsigned char x21; char x22[0x22b]; } BUILDING_
 char* __cdecl gm_SearchTable67(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_0050d320(char*, unsigned char);
-float __cdecl fcn_0050bb50(int, unsigned char);
+int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 struct unit;
 struct unit* __cdecl he_StartHandlungSearch(int, ...);
 struct unit* __cdecl he_fn_Handlung(void);
@@ -37,11 +37,11 @@ int __cdecl fcn_004974e0(int unused, char* e, int unused2, char* out, char* out2
 		return 0;
 	if (*(unsigned short*) (r + 0x27) == 0xffff)
 		return 0;
-	amount = fcn_0050d320(g_slot_table + *(unsigned short*) (r + 0x27) * 0x21c, g_773d75);
+	amount = gm_GetSeasonTreasury(g_slot_table + *(unsigned short*) (r + 0x27) * 0x21c, g_773d75);
 	if (*(float*) (out + 0x14) > 0.0f && *(float*) (out + 0x14) < 1.0f)
 		amount = (int) ((float) amount * *(float*) (out + 0x14));
 	who = g_773d75;
-	if (amount < (int) fcn_0050bb50(*(int*) (out + 4), who))
+	if (amount < (int) gm_GetSeasonPrice(*(int*) (out + 4), who))
 		return 0;
 	i = 0;
 	limit = &((BUILDING_LIMIT_VIEW*) lpGebaeudePROT)[*(unsigned char*) r];

@@ -20,7 +20,7 @@ extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_004ee160(char*);
-char* __cdecl fcn_004ec7d0(char*);
+char* __cdecl ahm_GetWorkshopOwner(char*);
 float __cdecl ahm_GetEssenceValue(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -29,7 +29,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
@@ -56,7 +56,7 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 	r = 0;
 	n = fcn_004ee160(e);
 	tenth = n / 10;
-	p = fcn_004ec7d0(e);
+	p = ahm_GetWorkshopOwner(e);
 	if (p == 0) {
 		return 0;
 	}
@@ -68,14 +68,14 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	line = d2_GetWindowListItem(h, 1, io_AppendText(0x403a, 0x182, g_773d75));
-	d2_SetElementValue(line, fcn_0050b710(tenth, g_773d75), fcn_0050b710(n, g_773d75), fcn_0050b710(tenth, g_773d75));
+	d2_SetElementValue(line, gm_AmountToUnits(tenth, g_773d75), gm_AmountToUnits(n, g_773d75), gm_AmountToUnits(tenth, g_773d75));
 	d2_SetForm(h, 2);
 	s = io_AppendText(0x403b);
 	ok = d2_GetWindowListItem(h, 2, s);
 	cancel = d2_GetWindowListItem(h, 2, s + 1);
 	g_100f1dc = -1;
 	do {
-		p = fcn_004ec7d0(e);
+		p = ahm_GetWorkshopOwner(e);
 		if (p == 0) {
 			g_774654 = 1;
 			main_RunFrameLoop(d2_RunDomizilSkillDialog, 0x20007);

@@ -9,7 +9,7 @@ unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_AccumulateTyped2(char*);
 void __cdecl d2_ClampAmountToRange(int, int, int, int*);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -57,8 +57,8 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 		return;
 	cap = gm_AccumulateTyped2(o);
 	d2_ClampAmountToRange(val, cap, 0x20, &max);
-	lo = fcn_0050b710(val, g_773d75);
-	hi = fcn_0050b710(max, g_773d75);
+	lo = gm_AmountToUnits(val, g_773d75);
+	hi = gm_AmountToUnits(max, g_773d75);
 	if (cap < val)
 		return;
 	dlg = fcn_00470820(0, 0, "cutscenes\\pacht");

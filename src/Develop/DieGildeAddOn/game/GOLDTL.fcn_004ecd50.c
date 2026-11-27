@@ -4,7 +4,7 @@ extern float g_6628a8;
 
 float __cdecl ahm_GetEssenceValue(char*, int);
 int* __cdecl ahm_FindRecipeSlot(char*, unsigned int);
-int __cdecl fcn_004eccd0(char*, char*);
+int __cdecl ahm_CalcResearchDuration(char*, char*);
 
 /* ADDRESS: GOLDTL 0x004ecd50 */
 float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
@@ -28,7 +28,7 @@ float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
 	if (requested <= 0) {
 		return 0.0f;
 	}
-	v4 = fcn_004eccd0(a0, (char*) a1);
+	v4 = ahm_CalcResearchDuration(a0, (char*) a1);
 	adjusted = (int) ((float) v4 * (1.0f - x * 0.5f) * (1.0f - *((float*) obj + 1)));
 	if (adjusted <= 0) {
 		return 0.0f;

@@ -53,8 +53,8 @@ extern unsigned char g_773d75;
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_004e8700(int);
-void __cdecl fcn_004e8730(int);
+void __cdecl amt_SetType26OfficeHolder(int);
+void __cdecl amt_SetOfficeType0x27Handle(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddObjekt(int a, int b, int c);
 char* __cdecl gm_LookupHistoricalEntry(int, int*);
@@ -75,10 +75,10 @@ void __cdecl fcn_004adcd0(int mode, int unused, unsigned short owner, Guild4adc*
 
 	if (mode == 0x15) {
 		g->flags |= 0x1000;
-		fcn_004e8700(g->handle);
+		amt_SetType26OfficeHolder(g->handle);
 	} else {
 		g->flags |= 0x2000;
-		fcn_004e8730(g->handle);
+		amt_SetOfficeType0x27Handle(g->handle);
 	}
 	g->owner = owner;
 	g->bc = 0;

@@ -2,7 +2,7 @@
 
 
 int __cdecl fcn_004f0960(int);
-int __cdecl fcn_004f09c0(int);
+int __cdecl d3_ReleaseSlot170(int);
 
 int __cdecl cm_ExDispatchSlotNCt(char* request, char* response)
 {
@@ -18,7 +18,7 @@ int __cdecl cm_ExDispatchSlotNCt(char* request, char* response)
 	if (code == 0x6154436e) {
 		result = fcn_004f0960(*(int*) (request + 0x14));
 	} else if (code == 0x6454436e) {
-		result = fcn_004f09c0(*(int*) (request + 0x14));
+		result = d3_ReleaseSlot170(*(int*) (request + 0x14));
 	} else {
 		return -1;
 	}

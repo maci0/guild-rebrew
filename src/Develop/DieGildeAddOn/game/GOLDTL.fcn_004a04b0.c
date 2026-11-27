@@ -32,9 +32,9 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 int __cdecl fcn_004a48a0(char*, int);
 int __cdecl ai_FindMissingBuildingUpgrade(int* a, int* b, char* q, int c);
-int __cdecl fcn_0050d170(int);
-int __cdecl fcn_0050d320(char*, unsigned char);
-float __cdecl fcn_0050bb50(int, unsigned char);
+int __cdecl gm_GetTypeProductValue(int);
+int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x004a04b0 */
 int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
@@ -120,7 +120,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 		}
 		d.b = flag;
 		d.e = 0;
-		val = (int) fcn_0050bb50(a2, g_773d75);
+		val = (int) gm_GetSeasonPrice(a2, g_773d75);
 		if (val < price) {
 			goto sell;
 		}
@@ -140,7 +140,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 		return 0;
 	}
 	flag = *(unsigned char*) w + 1;
-	t = (int) (fcn_0050d170(flag) * 0.4f);
+	t = (int) (gm_GetTypeProductValue(flag) * 0.4f);
 	if (t < price) {
 		o1->kind = 4;
 		o1->a = flag;
@@ -151,7 +151,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 		o2->b = 1;
 		return 0x39;
 	}
-	r = fcn_0050d320(e, g_773d75);
+	r = gm_GetSeasonTreasury(e, g_773d75);
 	if (r < 80000) {
 		return 0;
 	}
@@ -166,7 +166,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 	o2->kind = 0x12;
 	return 0x39;
 sell:
-	r = fcn_0050d320(e, g_773d75);
+	r = gm_GetSeasonTreasury(e, g_773d75);
 	if (r < 80000) {
 		return 0;
 	}

@@ -19,7 +19,7 @@ int __cdecl ch_ExecuteAttachAnimation();
 int __cdecl ch_Move2Universe();
 int __cdecl ch_ExecuteTurn90();
 int __cdecl ch_WalkOnPath();
-int __cdecl fcn_0040aa00();
+int __cdecl ch_WalkOnPath58();
 int __cdecl ch_RunWalkToRandomDummy();
 int __cdecl ch_DequeueIfIdle();
 int __cdecl ch_UpdateFade();
@@ -43,7 +43,7 @@ int __cdecl ch_InitActionQueue(void)
 	ch_DeclareAction(0, ch_ExecFinishAnimation, 1, &(*(char*)g_6b5c60), 0);
 	ch_DeclareAction(23, ch_ExecPlayAnimation, 1, &(*(char*)g_6b5c60), 0);
 	ch_DeclareAction(45, ch_WalkOnPath, 1, "bewegung/gehen", 3);
-	ch_DeclareAction(58, fcn_0040aa00, 1, "bewegung/gehen", 3);
+	ch_DeclareAction(58, ch_WalkOnPath58, 1, "bewegung/gehen", 3);
 	ch_DeclareAction(57, ch_RunWalkToRandomDummy, 1, &(*(char*)g_6b5c60), 1);
 	ch_DeclareAction(46, ch_ExecPlayAnimation, 1, &(*(char*)g_6b5c60), 1);
 	ch_DeclareAction(47, ch_RunAnimationEvent, 1, &(*(char*)g_6b5c60), 0);

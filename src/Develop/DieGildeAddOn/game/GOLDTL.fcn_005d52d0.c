@@ -15,7 +15,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl cm_SendSetAttribute(void);
 int __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
@@ -68,7 +68,7 @@ int __cdecl d2_RunDivorceAction(char* p)
 		m = (int) (w * g_664ee8);
 		x = cm_RequestMoveCredits(*(int*) (obj + 4), *(int*) (p + 4), g_773d75, m);
 		while (cm_GetCommandStatus(x) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 		return 0x11;
 	}
@@ -95,18 +95,18 @@ int __cdecl d2_RunDivorceAction(char* p)
 				cm_AppendCommandSyncField(4, 1, 0x5c, &s.sel);
 				x = cm_SendSetAttribute();
 				while (cm_GetCommandStatus(x) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 				cm_BeginPacketFieldDelta(obj, *(int*) (obj + 4));
 				cm_AppendCommandSyncField(4, 1, 0x5c, &s.sel);
 				cm_AppendCommandSyncField(2, 1, 0x50, &s.sel);
 				x = cm_SendSetAttribute();
 				while (cm_GetCommandStatus(x) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 				x = cm_RequestMoveCredits(*(int*) (obj + 4), *(int*) (p + 4), g_773d75, s.n);
 				while (cm_GetCommandStatus(x) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 				io_AppendText((int) g_6811b0);
 				io_AppendText(0x1d90);

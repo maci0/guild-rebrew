@@ -41,11 +41,11 @@ void __cdecl he_SetActionSubject(char*, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_CanTradeWithObject(char*, char*);
 char* __cdecl gm_FindCityItemHolder(int);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl gm_GetStorageSlotCapacity(char*, int);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
-int __cdecl fcn_0050d320(char*, unsigned char);
+int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
 void __cdecl he_FreeAction(char*);
 int __cdecl sprintf(char*, const char*, ...);
 
@@ -209,7 +209,7 @@ void __cdecl he_RunHandelsrouteTrade(char* a)
 			}
 			t = gm_GetMsgField(q, r2);
 			m = gm_eval_SlotVoll(e2, *(unsigned short*) r2, t);
-			d = (int) (fcn_0050bb50(*(unsigned short*) r2, g_773d75)
+			d = (int) (gm_GetSeasonPrice(*(unsigned short*) r2, g_773d75)
 			    * 0.9);
 			if (t < m) {
 				m = t;
@@ -220,7 +220,7 @@ void __cdecl he_RunHandelsrouteTrade(char* a)
 				*(int*) (itm + 0x1b8) = *(int*) (itm + 0x1b8) + d * m;
 			}
 			if ((t -= m) != 0) {
-				d = (int) (fcn_0050bb50(*(unsigned short*) r2,
+				d = (int) (gm_GetSeasonPrice(*(unsigned short*) r2,
 				    g_773d75) * 0.8);
 				*(int*) (a + 0xe8) = cm_SendSellObjekt(-1,
 				    *(int*) (q + 2), *(unsigned short*) r2, t,
@@ -235,7 +235,7 @@ i1next:
 		goto done;
 	}
 	if (itm != 0 && *(int*) (itm + 0x16c) != 0) {
-		left = fcn_0050d320(g_7f4ca0
+		left = gm_GetSeasonTreasury(g_7f4ca0
 		    + *(unsigned short*) (*(int*) (itm + 0x16c) + 0x27) * 0x21c,
 		    g_773d75);
 		if (left >= *(int*) (itm + 0x1b8)) {
@@ -269,10 +269,10 @@ i1next:
 			goto i2advance;
 		}
 		if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) pktB].category != '\n') {
-			amt = (int) (fcn_0050bb50(*(unsigned short*) r2, g_773d75)
+			amt = (int) (gm_GetSeasonPrice(*(unsigned short*) r2, g_773d75)
 			    * *(float*) (pktB + 0x49));
 		} else {
-			amt = (int) (fcn_0050bb50(*(unsigned short*) r2, g_773d75)
+			amt = (int) (gm_GetSeasonPrice(*(unsigned short*) r2, g_773d75)
 			    * 1.1);
 		}
 		lim = pi[6];

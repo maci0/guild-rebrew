@@ -6,7 +6,7 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_00506fd0(int);
+int __cdecl gm_JobToBuildingCategory(int);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -39,7 +39,7 @@ int __cdecl gm_HasThreeFullyEquippedBuildings(unsigned short* a1)
 	char* row;
 	unsigned short v;
 
-	x = fcn_00506fd0(*((unsigned char*) a1 + 0x164));
+	x = gm_JobToBuildingCategory(*((unsigned char*) a1 + 0x164));
 	if (x == 0)
 		return 0;
 	cnt = 0;

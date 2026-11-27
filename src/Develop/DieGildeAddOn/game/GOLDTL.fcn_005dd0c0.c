@@ -4,22 +4,22 @@ int __cdecl gm_LookupEntityRecordById(int value);
 int __cdecl gm_IncreaseEntitySkill(int value, int mode);
 
 /* ADDRESS: GOLDTL 0x005dd0c0 */
-int __cdecl fcn_005dd0c0(void *a1, void *a2)
+int __cdecl gm_BoostEntitySkill3(void *actor, void *request)
 {
     char buf[0x100];
     int r;
 
-    if (*(char *)((char *)a1 + 2) == 6) {
+    if (*(char *)((char *)actor + 2) == 6) {
         io_FormatTextBuffer(buf, 0x9d);
     } else {
-        r = gm_LookupEntityRecordById(*(int *)((char *)a2 + 4));
+        r = gm_LookupEntityRecordById(*(int *)((char *)request + 4));
         if (r != 0) {
             gm_IncreaseEntitySkill(r, 3);
             return 1;
         }
         return 0;
     }
-    r = d2_OpenEntityPicker(a1, buf);
+    r = d2_OpenEntityPicker(actor, buf);
     if (r != 0) {
         gm_IncreaseEntitySkill(r, 3);
         return 1;

@@ -18,7 +18,7 @@ extern void* g_14cb8e0;
 extern void* g_6b7ea0;
 extern void* g_6b7ea4;
 extern void* g_14cb8f0;
-void __cdecl fcn_00429d30(Ctx* c);
+void __cdecl evt_FreeScript(Ctx* c);
 void __cdecl m_FreeTracked(void* p);
 
 void __cdecl evt_ShutdownScripts(void)
@@ -27,7 +27,7 @@ void __cdecl evt_ShutdownScripts(void)
 
 	for (i = 0; i < 0x80; i++) {
 		if ((*(Ctx**)&g_6b7e94)[i].used != 0) {
-			fcn_00429d30(&(*(Ctx**)&g_6b7e94)[i]);
+			evt_FreeScript(&(*(Ctx**)&g_6b7e94)[i]);
 		}
 	}
 	for (i = 0; i < 0x100; i++) {

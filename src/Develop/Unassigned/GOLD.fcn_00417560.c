@@ -6,7 +6,7 @@ char __cdecl d3_SelectSceneContext(int, char);
 void __cdecl d3_DestroyObject(void*);
 
 /* ADDRESS: GOLD 0x00417560 */
-void __cdecl fcn_00417560(void* obj)
+void __cdecl d3_DestroySonnenstrahlen(void* obj)
 {
 	int found;
 	int handle;

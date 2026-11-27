@@ -5,16 +5,16 @@ extern float g_6628a8;
 extern float g_6628a0;
 extern float g_665284;
 
-float __cdecl ahm_GetEssenceValue(int p, int which);
+float __cdecl ahm_GetEssenceValue(int entityId, int which);
 
-float __cdecl fcn_004ece30(int p, int which, int* cap)
+float __cdecl ahm_ConsumeEssenceCapacity(int entityId, int which, int* cap)
 {
 	float v;
 	float d;
 	int n;
 	int m;
 
-	v = ahm_GetEssenceValue(p, which);
+	v = ahm_GetEssenceValue(entityId, which);
 	if (v < g_6628a8 || v >= g_6628a0) {
 		return g_6628a8;
 	}

@@ -9,9 +9,9 @@ extern float g_7e3a54;
 extern float g_7e3a58;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00412b10(char* a, float b, float c, float d, float e, float f, float g, int h, int i);
+int __cdecl d3_AnimateObjectToTransform(char* a, float b, float c, float d, float e, float f, float g, int h, int i);
 
 void __cdecl d3_AnimateCameraToStoredTransform(void)
 {
-	fcn_00412b10(d3_ActiveCamera, g_7e3a40[0], g_7e3a44, g_7e3a48, d3_CameraTargetRotation[0], g_7e3a54, g_7e3a58, g_6a256c, 8);
+	d3_AnimateObjectToTransform(d3_ActiveCamera, g_7e3a40[0], g_7e3a44, g_7e3a48, d3_CameraTargetRotation[0], g_7e3a54, g_7e3a58, g_6a256c, 8);
 }

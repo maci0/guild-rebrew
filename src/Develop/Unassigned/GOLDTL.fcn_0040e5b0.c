@@ -2,7 +2,7 @@ extern char g_676694[];
 
 
 
-int __cdecl fcn_00445600(int, int, int, int);
+int __cdecl d3_FindSceneObject(int, int, int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 extern char* evt_CurrentScript;
 void __cdecl evt_LogScriptError(void*, int, char*);
@@ -12,7 +12,7 @@ int __cdecl GetObjectHandle(int* id)
 	char buf[0x200];
 	int r;
 
-	r = fcn_00445600(0, 0x140, 0, *id);
+	r = d3_FindSceneObject(0, 0x140, 0, *id);
 	if (r == 0) {
 		fcn_0064d41a(buf, g_676694, *id);
 		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), buf);

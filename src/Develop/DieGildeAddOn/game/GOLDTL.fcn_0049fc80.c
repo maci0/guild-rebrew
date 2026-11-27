@@ -24,31 +24,31 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 int __cdecl fcn_004a5340(ENTITY_RECORD* e, int a, int* b, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0049fc80 */
-ENTITY_RECORD* __cdecl fcn_0049fc80(ENTITY_RECORD* subject)
+ENTITY_RECORD* __cdecl ai_PickOfficeRival(ENTITY_RECORD* subject)
 {
 	ENTITY_RECORD* list[5];
-	Rec18 q;
-	Rec18 r;
+	Rec18 roleTmpl;
+	Rec18 rivalTmpl;
 	ENTITY_RECORD* best;
 	ENTITY_RECORD* candidate;
-	float d;
+	float favor;
 	int i;
 
 	best = 0;
 	if (subject->unk_165[1] == 0) {
-		float bd;
+		float bestFavor;
 
-		amt_GetRoleTemplate(subject->unk_165[2], &q);
+		amt_GetRoleTemplate(subject->unk_165[2], &roleTmpl);
 		for (i = 0; i < 768; i++) {
 			candidate = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[i]);
-			if (candidate->unk_165[1] != 0 && srv_GetEntityOfficeSlot((unsigned char*) candidate, &q, &r) != 0 && q.x8 <= 1) {
+			if (candidate->unk_165[1] != 0 && srv_GetEntityOfficeSlot((unsigned char*) candidate, &roleTmpl, &rivalTmpl) != 0 && roleTmpl.x8 <= 1) {
 				if (best == 0) {
 					best = candidate;
-					bd = gm_CalcEntityFavor(subject->entity_index, candidate->entity_index, 1);
+					bestFavor = gm_CalcEntityFavor(subject->entity_index, candidate->entity_index, 1);
 				} else {
-					d = gm_CalcEntityFavor(subject->entity_index, candidate->entity_index, 1);
-					if (d < bd) {
-						bd = d;
+					favor = gm_CalcEntityFavor(subject->entity_index, candidate->entity_index, 1);
+					if (favor < bestFavor) {
+						bestFavor = favor;
 						best = candidate;
 					}
 				}
@@ -56,27 +56,27 @@ ENTITY_RECORD* __cdecl fcn_0049fc80(ENTITY_RECORD* subject)
 		}
 	} else {
 		if (subject->unk_165[3] != 0) {
-			int n;
-			float bd;
+			int candidateCount;
+			float bestFavor;
 
-			n = amt_CollectOfficeCandidates(subject->unk_165[3], 5, list);
-			if (n != 0) {
-				for (i = 0; i < n; i++) {
+			candidateCount = amt_CollectOfficeCandidates(subject->unk_165[3], 5, list);
+			if (candidateCount != 0) {
+				for (i = 0; i < candidateCount; i++) {
 					if (list[i] != subject) {
 						if (best == 0) {
 							best = list[i];
-							bd = gm_CalcEntityFavor(subject->entity_index, best->entity_index, 1);
+							bestFavor = gm_CalcEntityFavor(subject->entity_index, best->entity_index, 1);
 						} else {
-							d = gm_CalcEntityFavor(subject->entity_index, list[i]->entity_index, 1);
-							if (d < bd) {
+							favor = gm_CalcEntityFavor(subject->entity_index, list[i]->entity_index, 1);
+							if (favor < bestFavor) {
 								best = list[i];
-								bd = d;
+								bestFavor = favor;
 							}
 						}
 					}
 				}
 				if (best != 0) {
-					if (n * 8.0f + 52.0f < bd) {
+					if (candidateCount * 8.0f + 52.0f < bestFavor) {
 						best = 0;
 					}
 				}

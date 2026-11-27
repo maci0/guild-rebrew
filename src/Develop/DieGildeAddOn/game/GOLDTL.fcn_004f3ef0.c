@@ -23,7 +23,7 @@ extern int __cdecl gm_CalcBribeOrPriceScore(int slot, int byte, int item, int ze
 extern int __cdecl cm_CountOccupiedBuildingStats(char* record);
 extern void __cdecl fcn_004f2e80(char* record, int value);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
-extern int __cdecl fcn_0050d320(char* slot, char mode);
+extern int __cdecl gm_GetSeasonTreasury(char* slot, char mode);
 extern int __cdecl cm_GetCommandStatus(int handle);
 extern void __cdecl cm_FlushCommandQueue(void);
 extern void __cdecl cm_PollCommandQueue(void);
@@ -131,7 +131,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 				handle = fcn_004f2810((int) slot, (int) entity, entry[0],
 					fcn_004f1790((char*) *(int*) (entity + 0x65), entry), 10, 0);
 			} else if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
-				value = fcn_0050d320(slot, (char) g_773d75);
+				value = gm_GetSeasonTreasury(slot, (char) g_773d75);
 				if ((int) (value * g_66417c) > result) {
 					handle = fcn_004f2810((int) slot, (int) entity, entry[0],
 						fcn_004f1790((char*) *(int*) (entity + 0x65), entry), 10, result);

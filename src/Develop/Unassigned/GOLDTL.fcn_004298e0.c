@@ -2,7 +2,7 @@
 
 
 
-void __cdecl fcn_00429d30(void*);
+void __cdecl evt_FreeScript(void*);
 
 void __cdecl evt_CloseAllScripts(void)
 {
@@ -12,7 +12,7 @@ void __cdecl evt_CloseAllScripts(void)
 	for (o = 0; o < 0x64c00; o += 0xc98) {
 		p = (char*) (*(int*) ((char*)&g_6b7e94) + o);
 		if (*(unsigned char*) p != 0 || *(int*) (p + 0x100) != -1) {
-			fcn_00429d30(p);
+			evt_FreeScript(p);
 		}
 	}
 }

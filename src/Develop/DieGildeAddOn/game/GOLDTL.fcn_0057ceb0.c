@@ -21,7 +21,7 @@ void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot57ceb0* slots, Counts
 int __cdecl io_FormatTextBuffer(char* dst, int id, ...);
 int __cdecl cm_SendSellObjekt(int a1, int a2, short a3, int a4, char a5, int a6);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a1, int a2, char a3, int a4);
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
 /* ADDRESS: GOLDTL 0x0057ceb0 */
@@ -73,7 +73,7 @@ void __cdecl he_AwardEvent0a1Yield(char* entity)
 						cm_SendSellObjekt(*(int*) (ownerRec + 4), -1, (short) id, 1, g_773d75, 0);
 						goto next;
 					}
-					*(int*) (entity + 0xac) += (int) fcn_0050bb50(id, g_773d75);
+					*(int*) (entity + 0xac) += (int) gm_GetSeasonPrice(id, g_773d75);
 					goto next;
 				}
 				if (counts.total < 6) {
@@ -82,7 +82,7 @@ void __cdecl he_AwardEvent0a1Yield(char* entity)
 					cm_SendSellObjekt(*(int*) (ownerRec + 4), -1, (short) id, 1, g_773d75, 0);
 					goto next;
 				}
-				*(int*) (entity + 0xac) += (int) fcn_0050bb50(id, g_773d75);
+				*(int*) (entity + 0xac) += (int) gm_GetSeasonPrice(id, g_773d75);
 			}
 next:
 			p++;

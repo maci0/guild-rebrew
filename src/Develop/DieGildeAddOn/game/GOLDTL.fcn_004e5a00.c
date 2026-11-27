@@ -218,7 +218,7 @@ mark:
     *(int*) 0x772f3c = 1;
 resume:
     if (*(int*) 0x772f40 == 0)
-        fcn_004e4f10(event);
+        cut_ResetEventSlots(event);
 display:
     saved_68bfc0 = *(int*) 0x68bfc0;
     if (e[8] == 2)
@@ -294,7 +294,7 @@ tail:
         fcn_004730c0(0, 0, w, q, (char*) 0x67d67c, 0x5a, 0xa);
     }
 post_cleanup:
-    fcn_004e4f10(event);
+    cut_ResetEventSlots(event);
     n = *(unsigned short*) 0x774970;
     if (*(int*) (e + 0xc) == ((int*) 0x7f4ca0)[n * 135 + 1]) {
         unit = (int*) (e + 0x34);

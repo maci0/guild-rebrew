@@ -19,13 +19,13 @@ typedef struct {
 	int f4;
 	unsigned char tier;
 	char pad[15];
-} TierSrc;
+} OFFICE_TIER_ENTRY;
 
-int __cdecl amt_GetRoleTemplate(int id, TierSrc* src);
+int __cdecl amt_GetRoleTemplate(int id, OFFICE_TIER_ENTRY* src);
 
-int __cdecl fcn_004e9580(int id, TierInfo* out)
+int __cdecl amt_GetRankLimits(int id, TierInfo* out)
 {
-	TierSrc src;
+	OFFICE_TIER_ENTRY src;
 
 	if (amt_GetRoleTemplate(id, &src) == 0) {
 		return 0;

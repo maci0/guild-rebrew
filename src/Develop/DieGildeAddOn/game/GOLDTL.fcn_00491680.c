@@ -6,7 +6,7 @@ int __cdecl gm_MapEntityStatRange(int raw_idx);
 void __cdecl fcn_004f4830(int idx, Stat* st);
 
 /* ADDRESS: GOLDTL 0x00491680 */
-int __cdecl fcn_00491680(char* e, int unused, int* out)
+int __cdecl ai_EvaluateLaw0x12(char* entity, int unused, int* out)
 {
 	Stat st;
 	float w;
@@ -14,10 +14,10 @@ int __cdecl fcn_00491680(char* e, int unused, int* out)
 	float z;
 	int job;
 
-	job = gm_MapEntityStatRange(*(unsigned char*) (e + 0x164));
-	w = (float) (*(float*) (e + 0x100) - 2.0);
-	y = (*(float*) (e + 0xf4) - 2.0) * *(float*) (e + 0xfc);
-	z = (*(float*) (e + 0x10c) - 2.0) * *(float*) (e + 0x114);
+	job = gm_MapEntityStatRange(*(unsigned char*) (entity + 0x164));
+	w = (float) (*(float*) (entity + 0x100) - 2.0);
+	y = (*(float*) (entity + 0xf4) - 2.0) * *(float*) (entity + 0xfc);
+	z = (*(float*) (entity + 0x10c) - 2.0) * *(float*) (entity + 0x114);
 	if (job == 5 || job == 6) {
 		w = w * 1.5f;
 	} else if (job == 7) {

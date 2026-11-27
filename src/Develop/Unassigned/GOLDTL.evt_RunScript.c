@@ -11,7 +11,7 @@ extern int g_6b7eb0;
 extern void* g_14cb8f0;
 
 int __cdecl evt_ParseScript(char*);
-void __cdecl fcn_00429d30(char*);
+void __cdecl evt_FreeScript(char*);
 int __cdecl evt_FindDefinition(char*, const char*);
 void __cdecl evt_LogScriptError(char*, int, const char*);
 void __cdecl evt_EnterFunction(char*, int);
@@ -28,7 +28,7 @@ int __cdecl evt_RunScript(char* script)
 		return 0;
 	}
 	if (evt_ParseScript(script) == 0) {
-		fcn_00429d30(script);
+		evt_FreeScript(script);
 		return 0;
 	}
 	entry = evt_FindDefinition(script, "main");

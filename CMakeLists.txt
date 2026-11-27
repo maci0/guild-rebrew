@@ -451,6 +451,9 @@ if(REBREW_BUILD_GOLD)
   # Naming batch n07: names shared callers use that no Gold body defines yet (from its link log).
   rebrew_append_scaffold(GOLD_SOURCES
     "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_naming_n07.c")
+  # Naming batch n08: names shared callers use that no Gold body defines yet (from its link log).
+  rebrew_append_scaffold(GOLD_SOURCES
+    "${PROJECT_SOURCE_DIR}/stubs/gold/symbol_stubs_naming_n08.c")
 
   if(GOLD_SOURCES)
     add_executable(europa1400gold WIN32 ${GOLD_SOURCES})

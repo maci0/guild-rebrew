@@ -29,7 +29,7 @@ void __cdecl gm_AdjustGebaeudeCondition(char *, int);
 int __cdecl d3snd_QueueSound(int, int, char *, int, int);
 void __cdecl gm_AddTime(char *, int, int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
-char *__cdecl fcn_00445600(char *, int, int, char *);
+char *__cdecl d3_FindSceneObject(char *, int, int, char *);
 void __cdecl d3_TransformPoint(char *, char *, float *);
 int __cdecl CompareVector3WithinTolerance(float *, float *, float);
 int __cdecl ch_StartMovement(int, int, int, char *, int, char *);
@@ -112,12 +112,12 @@ void __cdecl he_RunHausbrand(char *action)
 							}
 						}
 					}
-					r = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
+					r = d3_FindSceneObject((char *)*(int *)(e + 0x61), 0x100, 0,
 							 &names[(unsigned char)*(unsigned char *)(action + 0xb4)][0]);
 					if (r != 0) {
 						d3_TransformPoint(r, r + 0x4c, pos);
 					} else {
-						r = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
+						r = d3_FindSceneObject((char *)*(int *)(e + 0x61), 0x100, 0,
 								 g_6a2edc);
 					}
 					if (r != 0) {
@@ -252,7 +252,7 @@ inc_step:
 						    (m = *(char **)(r + 0x184)) != 0 &&
 						    *(int *)(m + 0x2c) == -1 &&
 						    *(int *)(m + 0x128) == 0 &&
-						    (m = fcn_00445600((char *)*(int *)(e + 0x61), 0x100, 0,
+						    (m = d3_FindSceneObject((char *)*(int *)(e + 0x61), 0x100, 0,
 								      g_68149c)) != 0) {
 							d3_TransformPoint(m, m + 0x4c, pos);
 							if (!(CompareVector3WithinTolerance(

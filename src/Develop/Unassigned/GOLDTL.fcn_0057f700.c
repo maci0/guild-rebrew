@@ -4,7 +4,7 @@
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-int __cdecl fcn_0057ed10(int* m);
+int __cdecl d2_CheckTutMsg1aNotCat12Node74(int* m);
 
 int __cdecl fcn_0057f700(int* m)
 {
@@ -12,5 +12,5 @@ int __cdecl fcn_0057f700(int* m)
 	    *(short*) (m[1] + 0x27) == (*(short*)&g_774970) && (m[3] == 0x79 || m[3] == 0x7a || m[3] == 0x78)) {
 		return 1;
 	}
-	return fcn_0057ed10(m);
+	return d2_CheckTutMsg1aNotCat12Node74(m);
 }

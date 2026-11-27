@@ -23,8 +23,8 @@ extern char* lpGebaeudePROT;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-float __cdecl fcn_0050b8d0(unsigned char* p, int k, int a, int b);
-void* __cdecl fcn_004ec7d0(unsigned char* e);
+float __cdecl gm_GetWorkforceOutput(unsigned char* p, int k, int a, int b);
+void* __cdecl ahm_GetWorkshopOwner(unsigned char* e);
 int __cdecl fcn_004ee160(char* e);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, unsigned char b);
@@ -55,7 +55,7 @@ int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* 
 	}
 	slot = (int) &((ENTITY_RECORD*) g_7f4ca0)[ownerIdx];
 	if (*row == 0x1e) {
-		if (fcn_004ec7d0(bld) != 0) {
+		if (ahm_GetWorkshopOwner(bld) != 0) {
 			val = fcn_004ee160((char*) bld);
 			*(int*) (out + 0x18) = val;
 			total = val;
@@ -71,7 +71,7 @@ int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* 
 		for (i = 0; i < 6; i++) {
 			if (row[i + 0x223] != 0 && row[i + 0x223] == ent->unk_164 &&
 			    ent->entity_state != 0x14) {
-				val = (int) (fcn_0050b8d0((unsigned char*) slot, *bld, i, -1) *
+				val = (int) (gm_GetWorkforceOutput((unsigned char*) slot, *bld, i, -1) *
 					     ((double) *(int*) (bld + 0x3d) * 0.01));
 				*(int*) (out + 0x18 + i * 4) += val;
 				total += val;
@@ -81,7 +81,7 @@ int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* 
 		for (i = 0; i < 2; i++) {
 			if (row[i + 0x22f] != 0 && row[i + 0x22f] == ent->unk_165[0] &&
 			    ent->entity_state != 0x14) {
-				val = (int) (fcn_0050b8d0((unsigned char*) slot, *bld, -1, i) *
+				val = (int) (gm_GetWorkforceOutput((unsigned char*) slot, *bld, -1, i) *
 					     ((double) *(int*) (bld + 0x3d) * 0.01));
 				*(int*) (out + 0x10 + i * 4) += val;
 				total += val;
@@ -89,7 +89,7 @@ int __cdecl gm_CalcBuildingRoundBalance(unsigned char* bld, int ownerIdx, char* 
 			}
 		}
 		if (found == 0 && ent->entity_state != 0x14) {
-			val = (int) (fcn_0050b8d0((unsigned char*) slot, *bld, -1, 0) *
+			val = (int) (gm_GetWorkforceOutput((unsigned char*) slot, *bld, -1, 0) *
 				     ((double) *(int*) (bld + 0x3d) * 0.01));
 			*(int*) (out + 0x10) += val;
 			total += val;

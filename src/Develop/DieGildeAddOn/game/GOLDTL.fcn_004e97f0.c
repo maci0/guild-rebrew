@@ -12,7 +12,7 @@ typedef struct {
 } TierInfo;
 
 int __cdecl gm_RandomMod(unsigned short n);
-int __cdecl fcn_004e9580(int id, TierInfo* out);
+int __cdecl amt_GetRankLimits(int id, TierInfo* out);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a1, int a2, char a3, int a4);
 void __cdecl cm_BeginPacketFieldDelta(char* a1, int a2);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
@@ -31,7 +31,7 @@ int __cdecl amt_PurchaseOfficeApplication(unsigned char* entity, int office_id)
 	if (entity[2] != 0x13) {
 		return 0;
 	}
-	if (fcn_004e9580(office_id, &info) == 0) {
+	if (amt_GetRankLimits(office_id, &info) == 0) {
 		return 0;
 	}
 	lo = info.min_cost;

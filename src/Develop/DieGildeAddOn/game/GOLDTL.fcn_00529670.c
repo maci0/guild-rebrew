@@ -1,7 +1,7 @@
 
 
 
-char* __cdecl fcn_00445600(char*, int, int, char*);
+char* __cdecl d3_FindSceneObject(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "client_scene_transform.h"
 
@@ -16,7 +16,7 @@ int __cdecl gm_IsEntityAtBuilding(char* a, char* b)
 		if (d == 0) {
 			return 0;
 		}
-		x = fcn_00445600(*(char**) (b + 0x61), 0x100, 0, "dummy_TUER");
+		x = d3_FindSceneObject(*(char**) (b + 0x61), 0x100, 0, "dummy_TUER");
 		if (x != 0) {
 			d3_TransformPoint(x, x + 0x4c, pos);
 		} else {

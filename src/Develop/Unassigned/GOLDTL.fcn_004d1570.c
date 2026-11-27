@@ -8,21 +8,21 @@ typedef struct
 	int c;
 	char flag;
 	char pad[0x1f];
-} Rec2c;
+} CUT_ENTITY_SLOT_MSG;
 // SIZE 0x2c
 
-Rec2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
-void __cdecl cm_SendUpdateCutsceneEntitySlot(int, Rec2c*);
+CUT_ENTITY_SLOT_MSG* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
+void __cdecl cm_SendUpdateCutsceneEntitySlot(int, CUT_ENTITY_SLOT_MSG*);
 
-void __cdecl fcn_004d1570(char* a1, char* a2)
+void __cdecl cut_SendExitSlotCommand(char* ctx, char* entity)
 {
-	Rec2c* s;
-	Rec2c r;
+	CUT_ENTITY_SLOT_MSG* s;
+	CUT_ENTITY_SLOT_MSG r;
 
-	s = gm_FindOrCreateEntitySlot(a1, a2);
+	s = gm_FindOrCreateEntitySlot(ctx, entity);
 	s->flag = 0;
 	r = *s;
-	r.a = *(int*) (a2 + 4);
+	r.a = *(int*) (entity + 4);
 	r.b = 8;
-	cm_SendUpdateCutsceneEntitySlot(*(int*) (a1 + 0x10), &r);
+	cm_SendUpdateCutsceneEntitySlot(*(int*) (ctx + 0x10), &r);
 }

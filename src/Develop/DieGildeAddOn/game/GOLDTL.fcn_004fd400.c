@@ -3,7 +3,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl gm_WalkEntityChain(int idx);
 
 /* ADDRESS: GOLDTL 0x004fd400 */
-int __cdecl fcn_004fd400(short* out, int* value)
+int __cdecl gm_FindRichestEntity(short* out, int* value)
 {
 	int* rec;
 	int now;

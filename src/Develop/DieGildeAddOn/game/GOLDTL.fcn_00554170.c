@@ -15,7 +15,7 @@ extern unsigned short __cdecl gm_RandomMod(unsigned short);
 extern int __cdecl cm_GetCommandStatus(int);
 extern char* __cdecl cm_GetCommandResult(int);
 extern int __cdecl cut_FindCutsceneById(int);
-extern char* __cdecl fcn_00445600(int, int, int, char*);
+extern char* __cdecl d3_FindSceneObject(int, int, int, char*);
 extern void __cdecl d3_TransformPoint(char*, char*, float*);
 extern void __cdecl he_CharacterBehavior(char*, int);
 extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -151,7 +151,7 @@ void __cdecl he_RunMultiActorAction(char* obj)
 	not_found:
 		gm_AddTime(time, 0, 0xa, 0);
 		if (d3_CurrentContextIndex == 0) {
-			rec = fcn_00445600(0, 0x140, 0, obj + 0xac);
+			rec = d3_FindSceneObject(0, 0x140, 0, obj + 0xac);
 			if (rec != 0) {
 				float pos[4];
 

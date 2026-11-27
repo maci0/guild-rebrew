@@ -80,7 +80,7 @@ int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl fcn_00473a90(int a, int b);
 int __cdecl gm_CalculateGebaeudeValue(char* ent, int kind);
-int __cdecl fcn_00504f30(int a, int b);
+int __cdecl gm_CanBuildBuildingType(int a, int b);
 int __cdecl he_StartHandlungSearch(int a, int b, int c);
 int __cdecl fcn_005462a0(void);
 void* __cdecl gm_SearchTable67(int a);
@@ -109,15 +109,15 @@ void __cdecl d2_RunTechTreeDialog(int a, int b);
 void __cdecl d2_ShowSellGebaeudeDialog(int a);
 void __cdecl d2_ShowRenovationDialog(int a);
 void __cdecl d2_ShowGebaeudeSaleDialog(int a);
-void __cdecl fcn_005c2a40(int a);
-void __cdecl fcn_005c30e0(int a);
+void __cdecl d2_RunRoomUpgradeDialog(int a);
+void __cdecl d2_RunBuildingUpgradeDialog(int a);
 void __cdecl d2_RunSellGebaeudeDialog(int a);
 void __cdecl d2_ShowTechTreeEffects(int a);
 void __cdecl d2_RunFireExtinguishDialog(int a);
 int __cdecl main_RunFrameLoop(void* fn, int message);
 
 /* ADDRESS: GOLDTL 0x005c3f10 */
-void __cdecl fcn_005c3f10(char* ent)
+void __cdecl d2_RunGebaeudeOptionenDialog(char* ent)
 {
 	Vars v;
 	Msg st;
@@ -169,7 +169,7 @@ void __cdecl fcn_005c3f10(char* ent)
 	d2_CenterDialogWindows(dlg);
 	fcn_00473a90(0, 0);
 	v.ptr = gm_CalculateGebaeudeValue(ent, ent[0x5c]);
-	fcn_00504f30((unsigned char) ent[0], g_774970);
+	gm_CanBuildBuildingType((unsigned char) ent[0], g_774970);
 	if ((*(unsigned char*) (ent + 0x5a) & 2) != 0
 	    && *(unsigned short*) (ent + 0x25) != g_774970) {
 		v.other = he_StartHandlungSearch(1, 0, 0x1b);
@@ -348,7 +348,7 @@ after_build:
 		}
 		if (d2_CurrentElementId == v.h28 && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
-			fcn_005c2a40((int) ent);
+			d2_RunRoomUpgradeDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h4c) {
@@ -362,7 +362,7 @@ after_build:
 		}
 		if (d2_CurrentElementId == v.h18 && g_7747b0 >= 0) {
 			fcn_00471af0(dlg, 0);
-			fcn_005c30e0((int) ent);
+			d2_RunBuildingUpgradeDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h30 && g_7747b0 >= 0) {
@@ -387,7 +387,7 @@ after_build:
 			goto tail_changed;
 		}
 		if (d2_CurrentElementId == v.h54 && g_7747b0 >= 0) {
-			if (fcn_00504f30((unsigned char) ent[0],
+			if (gm_CanBuildBuildingType((unsigned char) ent[0],
 				g_774970) != 1) {
 				fcn_00526120((char*) g_14ab294, 0);
 				goto loop_test;

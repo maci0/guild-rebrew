@@ -5,7 +5,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_IsNpcEntityState(char*);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
-int __cdecl fcn_0050d320(char*, char);
+int __cdecl gm_GetSeasonTreasury(char*, char);
 unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl gm_MapEntityStatRange(int);
@@ -64,7 +64,7 @@ int __cdecl ai_StartBerufsausbildung(int busy, char* ent, int pending, char* out
 		return 0;
 	}
 	scale = (int) ((float) gm_WalkEntityChain(*(unsigned short*) ent) * g_664150);
-	if (fcn_0050d320(ent, (char) g_773d75) < scale * 6) {
+	if (gm_GetSeasonTreasury(ent, (char) g_773d75) < scale * 6) {
 		return 0;
 	}
 	w = (unsigned short) gm_RandomMod(0xf);

@@ -4,7 +4,7 @@ extern char g_10432c0[];
 
 
 
-char* __cdecl fcn_00445600(char*, int, int, char*);
+char* __cdecl d3_FindSceneObject(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 #include "client_scene_transform.h"
 
@@ -25,7 +25,7 @@ int __cdecl ch_IsEntityNearBuildingDoor(char* actor, unsigned char* building)
 			return 0;
 		}
 		if (*(char**) (fig + 0x88) == g_10432c0) {
-			door = fcn_00445600(*(char**) (building + 0x61), 0x100, 0, "dummy_TUER");
+			door = d3_FindSceneObject(*(char**) (building + 0x61), 0x100, 0, "dummy_TUER");
 			if (door != 0) {
 				d3_TransformPoint(door, door + 0x4c, pos);
 			} else {

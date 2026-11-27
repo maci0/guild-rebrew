@@ -844,6 +844,7 @@ void __cdecl ReportMessage(char* msg)
  * severity level (1=error, 8=info, etc.). */
 
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity)
 {
 	unsigned char flags;
@@ -862,6 +863,7 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 		DispatchLogOutput((char*) &g_log_message_buffer, *(int*) &g_log_mode_flags, severity);
 	}
 }
+#endif
 
 /* Writes a message to the log outputs as it is, without a source location.
  * Client-only code (TL 0x41daf0, unreferenced there and absent from

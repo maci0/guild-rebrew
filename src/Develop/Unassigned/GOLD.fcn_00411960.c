@@ -8,7 +8,7 @@ int __cdecl fcn_00435550(char*, unsigned int, GOLD_ATTACH_OPTIONS);
 char* __cdecl fcn_0044e2e0(char*, char*, int);
 
 /* ADDRESS: GOLD 0x00411960 */
-int __cdecl fcn_00411960(char* object, char* name, unsigned int flags)
+int __cdecl d3_AttachObjectAnim(char* object, char* name, unsigned int flags)
 {
 	char key[256];
 	char path[512];

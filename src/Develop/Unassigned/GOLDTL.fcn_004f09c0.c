@@ -12,7 +12,7 @@ typedef struct
 #include "client_types.h"
 extern Slot170_7731b8 g_7731b8[8];
 
-int __cdecl fcn_004f09c0(int id)
+int __cdecl d3_ReleaseSlot170(int id)
 {
 	int i;
 	int j;

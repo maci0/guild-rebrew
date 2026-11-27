@@ -11,7 +11,7 @@ extern unsigned char* lpGebaeudeINST;
 
 int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-int __cdecl fcn_0057c9d0(unsigned char*);
+int __cdecl he_HasActiveAction0xa0(unsigned char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 
 
@@ -42,7 +42,7 @@ int __cdecl ai_StartTheater(int a1, unsigned short* entity, int a3, char* action
 			continue;
 		if (fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x27f) == 0)
 			continue;
-		if (fcn_0057c9d0(e) != 0)
+		if (he_HasActiveAction0xa0(e) != 0)
 			continue;
 		if (found == 0) {
 			best = kind->level == 2 ? 7 : 4;

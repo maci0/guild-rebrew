@@ -17,7 +17,7 @@ int __cdecl fcn_0057de80(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_0057df50(int, int);
+void __cdecl d2_ToggleMessageFilterFlag(int, int);
 void __cdecl d2_DestroyForm(int);
 
 void __cdecl d2_RunMessageFilterDialog(void)
@@ -46,7 +46,7 @@ void __cdecl d2_RunMessageFilterDialog(void)
 		if (g_14ce8e0 != 0 || (*(unsigned char*)&g_14cf950) == 1) {
 			g_774654 = 1;
 			for (i = 0; i < 9; i++) {
-				fcn_0057df50(0x605 + i, d2_GetControlValue(btn[i]) == 0);
+				d2_ToggleMessageFilterFlag(0x605 + i, d2_GetControlValue(btn[i]) == 0);
 			}
 		}
 	}

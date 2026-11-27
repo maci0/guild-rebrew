@@ -2,7 +2,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c6ea0(char* source)
+void __cdecl cm_SendClearObjektResources(char* source)
 {
 	char buf[0x9c];
 

@@ -31,7 +31,7 @@ extern void __cdecl he_FreeAction(char*);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 extern int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 extern int __cdecl gm_GetMsgField(char*, char*);
-extern float __cdecl fcn_0050bb50(int, unsigned char);
+extern float __cdecl gm_GetSeasonPrice(int, unsigned char);
 extern void* __cdecl gm_NextEntityQueryMatch(void);
 extern int __cdecl gm_RandomMod(int);
 extern int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
@@ -184,7 +184,7 @@ void __cdecl he_RunGebSpionage(char* action)
 			e = (char*)fcn_00502cd0(*(int*)(q + 0x14), 1, 5);
 			while (e != 0) {
 				amount = (float)gm_GetMsgField(q, e);
-				amount = fcn_0050bb50(*(unsigned short*)e, g_773d75) * amount;
+				amount = gm_GetSeasonPrice(*(unsigned short*)e, g_773d75) * amount;
 				v = (int)(amount + v);
 				e = (char*)gm_NextEntityQueryMatch();
 			}

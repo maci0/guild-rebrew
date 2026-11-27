@@ -4,7 +4,7 @@
 
 void* __cdecl fcn_00502cd0(int, int, int, ...);
 
-int __cdecl fcn_0050d320(char* entity, char season)
+int __cdecl gm_GetSeasonTreasury(char* entity, char season)
 {
 	int result;
 	char* r;

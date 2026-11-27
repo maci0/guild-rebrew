@@ -37,7 +37,7 @@ extern int d2_CurrentElementId;
 int __cdecl gm_GetGuildHall(int a);
 int __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl d2_CenterDialogWindows(int dlg);
-int __cdecl fcn_0050d200(int a, int b);
+int __cdecl gm_CalcBuildingCost(int a, int b);
 int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 int __cdecl fcn_0046fac0(int a, int b, int c, int d);
 void __cdecl d2_SetElementFont(int a, int b);
@@ -106,7 +106,7 @@ void __cdecl fcn_00599b00(void)
 			row += 0x50;
 			ofs = 0;
 		}
-		cost = fcn_0050d200((int)&((ENTITY_RECORD*)g_7f4ca0)[
+		cost = gm_CalcBuildingCost((int)&((ENTITY_RECORD*)g_7f4ca0)[
 		    (unsigned short)g_774970], cat);
 		last = rec->kind;
 		raw = d2_AddElementToWindow(ofs + 0x30, row - 0x30, cat + 0x427,
@@ -138,7 +138,7 @@ void __cdecl fcn_00599b00(void)
 			}
 			selected = d2_CurrentElementId;
 			ent = d2_CheckFundsAndNotify(query, *(int*) (query + 0x14),
-			    fcn_0050d200((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i), g_773d75);
+			    gm_CalcBuildingCost((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i), g_773d75);
 			if (ent != 0) {
 				fcn_00471af0(dlg, 0);
 				ent = lc_GebaeudeAusrichten(i, name);
@@ -153,7 +153,7 @@ void __cdecl fcn_00599b00(void)
 					msg.pos.d = g_7f4c0c;
 					msg.owner = *(int*)(gm_CityEntity + 4);
 					msg.category = i;
-					msg.cost = fcn_0050d200((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i);
+					msg.cost = gm_CalcBuildingCost((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i);
 					d3_TransformPoint(ent, ent + 0x4c, msg.location);
 					d3_ComputeObjectYawToTarget(msg.rotation, ent);
 					{

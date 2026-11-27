@@ -5,7 +5,7 @@
 
 float __cdecl eval_ObjektPreis2Credits(int, int);
 
-float __cdecl fcn_0050bb50(int id, unsigned char a)
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a)
 {
 	int i;
 

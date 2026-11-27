@@ -7,7 +7,7 @@ int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl amt_FindOfficeSlotsByKind(int, int, void *);
 int __cdecl fcn_004e4ae0(char *, int);
 int __cdecl msx_StartMusicIfAllowed(int);
-void __cdecl fcn_004e4de0(int, ...);
+void __cdecl cut_WaitSeconds(int, ...);
 int __cdecl cm_WaitNetworkSyncBanner(int);
 int __cdecl fcn_004ea130(int);
 int __cdecl amt_ResolveOfficeApplications(int, int, void *);
@@ -21,7 +21,7 @@ int __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
 int __cdecl fcn_004e44b0(char *, char *);
 int __cdecl fcn_0051af00(char *, char *, char *);
-int __cdecl fcn_004e44f0(int);
+int __cdecl cut_WaitForScript(int);
 int __cdecl amt_IsCandidateInOffice(int, char *);
 int __cdecl fcn_004727a0(int, int);
 int __cdecl d2_BuildPersonStatusDesc(void *);
@@ -35,10 +35,10 @@ int __cdecl cut_RunTurnRound(unsigned int *, void *);
 int __cdecl fcn_004e9180(void *, int);
 int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char *, unsigned char *, int, int);
 int __cdecl cm_GetCommandStatus(int);
-int __cdecl fcn_00535960(void);
+int __cdecl cm_StepCommandQueue(void);
 int __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl fcn_004e48b0(void);
-int __cdecl fcn_004e45c0(int);
+int __cdecl cut_WaitForScriptExit(int);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_004da4d0(int, void *);
@@ -285,7 +285,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
             fcn_004e44b0((char *)0x68c158, (char *)&mid[0x2a8]);
         }
         fcn_0051af00((char *)&mid[0x2a8], (char *)0x68c140, flug[s30]);
-        fcn_004e44f0(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x2a8]));
+        cut_WaitForScript(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x2a8]));
         s3C = 1;
         cm_WaitNetworkSyncBanner(0x6b5c60);
     }
@@ -330,7 +330,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 io_AppendText((char *)0x12c4);
                 io_AppendText((char *)0x12c5, (char *)s20 + 0x12a9, (char *)s20 + 0x12bb,
                               *(unsigned short *)s18, *(unsigned short *)s10);
-                fcn_004e4de0(0x9c4);
+                cut_WaitSeconds(0x9c4);
                 fcn_004727a0(s5C, 0);
                 d2_ClearWindowChildren(*(int *)0x772514, 1);
                 if (k > 0) {
@@ -355,7 +355,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         lane = (int *)((char *)lane + 0x38);
                     }
                 }
-                fcn_004e4de0(0x9c4);
+                cut_WaitSeconds(0x9c4);
                 sDC = *(unsigned char *)(s00 - 4);
                 blkC.sD8 = 1;
                 blkC.sE0 = *(unsigned char *)(s00 + 4);
@@ -363,7 +363,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 blkC.sE8 = *(int *)(s00 + 0x10);
                 fcn_00471af0(s38, 0);
                 cut_RunTurnRound(a0, (void *)&blkC);
-                fcn_004e4de0(0x3e8);
+                cut_WaitSeconds(0x3e8);
                 fcn_00471af0(s38, 1);
                 if (s0C > 0) {
                     i = 0;
@@ -376,7 +376,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             *(int *)(*(int *)0x1015ea0 + *(int *)((char *)&mid + 0x3ac + i * 0x38) * 0x2f4 + 0x3c) = 1;
                             io_AppendText((char *)0x6811b0);
                             io_AppendText((char *)0x12c7, *(unsigned short *)s58);
-                            fcn_004e4de0(0x3e8);
+                            cut_WaitSeconds(0x3e8);
                             fcn_004727a0(s14, 0);
                             switch (*(int *)s80) {
                             case 0:
@@ -410,9 +410,9 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                 fcn_004da510(*(int *)0x772514, 0, 2);
                                 break;
                             }
-                            fcn_004e4de0(0xfa0);
+                            cut_WaitSeconds(0xfa0);
                             *(int *)(*(int *)0x1015ea0 + *(int *)((char *)&mid + 0x3ac + i * 0x38) * 0x2f4 + 0x3c) = 0;
-                            fcn_004e4de0(0x3e8);
+                            cut_WaitSeconds(0x3e8);
                         }
                         i += 1;
                     } while (i < s0C);
@@ -424,7 +424,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12d6, (char *)v1[0], (char *)v1[1],
                                   *(unsigned short *)s10);
-                    fcn_004e4de0(0xfa0);
+                    cut_WaitSeconds(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
                                           (unsigned int)g_774970 * 0x21c)) {
                         int s70;
@@ -440,7 +440,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         s70 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 4), 0, 0, 3, 0xff);
                         if (cm_GetCommandStatus(s70) == 0) {
                             do {
-                                fcn_00535960();
+                                cm_StepCommandQueue();
                             } while (cm_GetCommandStatus(s70) == 0);
                         }
                     }
@@ -452,7 +452,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12d7, (char *)v1[0], (char *)v1[1],
                                   *(unsigned short *)s10, *(unsigned short *)s10);
-                    fcn_004e4de0(0xfa0);
+                    cut_WaitSeconds(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
                                           (unsigned int)g_774970 * 0x21c)) {
                         if (s0C > 0) {
@@ -474,7 +474,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             s24 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 4), 0, 0, 4, 0xff);
                         if (cm_GetCommandStatus(s24) == 0) {
                             do {
-                                fcn_00535960();
+                                cm_StepCommandQueue();
                             } while (cm_GetCommandStatus(s24) == 0);
                         }
                     }
@@ -484,7 +484,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 io_AppendText((char *)0x6811b0);
                 d2_DestroyForm(s60);
                 d2_DestroyForm(s5C);
-                fcn_004e4de0(0x3e8);
+                cut_WaitSeconds(0x3e8);
                 cm_WaitNetworkSyncBanner(0x6b5c60);
             }
             s40 += 1;
@@ -520,7 +520,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 fcn_004e44b0((char *)0x68c158, (char *)&mid[0x1a8]);
             }
             fcn_0051af00((char *)&mid[0x1a8], (char *)0x68c140, flug[s30]);
-            fcn_004e44f0(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x1a8]));
+            cut_WaitForScript(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x1a8]));
             cm_WaitNetworkSyncBanner(0x6b5c60);
             s3C = 1;
     }
@@ -603,7 +603,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                       *(unsigned short *)(blkA.sel[i]));
                         i += 1;
                     }
-                    fcn_004e4de0(0x9c4);
+                    cut_WaitSeconds(0x9c4);
                     fcn_004727a0(s38, 0);
                     d2_ClearWindowChildren(*(int *)0x772514, 1);
                     if (rs20 > 0) {
@@ -626,7 +626,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             } while (i < s0C);
                         }
                     }
-                    fcn_004e4de0(0x9c4);
+                    cut_WaitSeconds(0x9c4);
                 }
                 if (numSel == 1) {
                     fcn_004e4b40(-8, s38, 0x68c038, 0, 0x64);
@@ -635,12 +635,12 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12e0, *(unsigned short *)blkA.sel[0],
                                   *(unsigned char *)s00 + 0x253);
-                    fcn_004e4de0(0xfa0);
+                    cut_WaitSeconds(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)g_774970 * 0x21c)) {
                         s5C = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0, (unsigned char *)blkA.sel[0], numSel, 0xff);
                         if (cm_GetCommandStatus(s5C) == 0) {
                             do {
-                                fcn_00535960();
+                                cm_StepCommandQueue();
                             } while (cm_GetCommandStatus(s5C) == 0);
                         }
                     }
@@ -652,18 +652,18 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12e1);
-                    fcn_004e4de0(0x3e8);
+                    cut_WaitSeconds(0x3e8);
                     s58 = blkA.sel[s68];
                     s70 = *(int *)((char *)&mid + 0xcc + s68 * 0x38);
                     *(int *)(*(int *)0x1015ea0 + s70 * 0x2f4 + 0x3c) = 1;
                     io_AppendText((char *)0x12e2, *(unsigned short *)s58);
-                    fcn_004e4de0(0xfa0);
+                    cut_WaitSeconds(0xfa0);
                     if (a0[3] == *(int *)(0x7f4ca4 +
                                           (unsigned int)g_774970 * 0x21c)) {
                         s70 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0, (unsigned char *)s58, 1, 0xff);
                         if (cm_GetCommandStatus(s70) == 0) {
                             do {
-                                fcn_00535960();
+                                cm_StepCommandQueue();
                             } while (cm_GetCommandStatus(s70) == 0);
                         }
                     }
@@ -671,7 +671,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     /* native 0x4dbce1: count > 1, scan the 0x9b0eb4 packets */
                     fcn_00471af0(s14, 0);
                     cut_RunTurnRound(a0, (void *)&blkA.blkD);
-                    fcn_004e4de0(0x3e8);
+                    cut_WaitSeconds(0x3e8);
                     fcn_00471af0(s14, 1);
                     if (s0C > 0) {
                         int s4C, curId;
@@ -691,7 +691,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                         io_AppendText((char *)0x12de,
                                                       *(unsigned short *)blkA.s84[s4C]);
                                         v2[jc] += 1;
-                                        fcn_004e4de0(0x3e8);
+                                        cut_WaitSeconds(0x3e8);
                                         pq = (int *)((char *)&mid + 0xcc + jc * 0x38);
                                         *(int *)(*(int *)0x1015ea0 + *pq * 0x2f4 + 0x3c) = 1;
                                         fcn_004727a0(s50, jc + 1);
@@ -700,7 +700,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                         fcn_004727a0(s14, 0);
                                         io_AppendText((char *)0x12df,
                                                       *(unsigned short *)blkA.sel[jc]);
-                                        fcn_004e4de0(0xfa0);
+                                        cut_WaitSeconds(0xfa0);
                                         *(int *)(*(int *)0x1015ea0 + *(int *)s60 * 0x2f4 + 0x3c) = 0;
                                         *(int *)(*(int *)0x1015ea0 + *pq * 0x2f4 + 0x3c) = 0;
                                         break;
@@ -741,14 +741,14 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             io_AppendText((char *)0x12e5,
                                           *(unsigned short *)blkA.sel[s6C],
                                           *(unsigned char *)s00 + 0x253);
-                            fcn_004e4de0(0xfa0);
+                            cut_WaitSeconds(0xfa0);
                             if (a0[3] == *(int *)(0x7f4ca4 +
                                                   (unsigned int)g_774970 * 0x21c)) {
                                 s78 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0,
                                                    (unsigned char *)blkA.sel[s6C], 1, 0xff);
                                 if (cm_GetCommandStatus(s78) == 0) {
                                     do {
-                                        fcn_00535960();
+                                        cm_StepCommandQueue();
                                     } while (cm_GetCommandStatus(s78) == 0);
                                 }
                             }
@@ -771,19 +771,19 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             fcn_004727a0(s14, 0);
                             io_AppendText((char *)0x6811b0);
                             io_AppendText((char *)0x12e3);
-                            fcn_004e4de0(0x3e8);
+                            cut_WaitSeconds(0x3e8);
                             *(int *)(*(int *)0x1015ea0 +
                                      *(int *)((char *)&mid + 0xcc + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
                             io_AppendText((char *)0x12e4,
                                           *(unsigned short *)blkA.sel[s6C]);
-                            fcn_004e4de0(0xfa0);
+                            cut_WaitSeconds(0xfa0);
                             if (a0[3] == *(int *)(0x7f4ca4 +
                                                   (unsigned int)g_774970 * 0x21c)) {
                                 s78 = amt_SendOfficeCommand(*(unsigned char *)(s00 - 8), 0,
                                                    (unsigned char *)blkA.sel[s6C], 1, 0xff);
                                 if (cm_GetCommandStatus(s78) == 0) {
                                     do {
-                                        fcn_00535960();
+                                        cm_StepCommandQueue();
                                     } while (cm_GetCommandStatus(s78) == 0);
                                 }
                             }
@@ -795,7 +795,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     fcn_00471af0(s14, 0);
                     d2_DestroyForm(s14);
                     d2_DestroyForm(s50);
-                    fcn_004e4de0(0x3e8);
+                    cut_WaitSeconds(0x3e8);
                     cm_WaitNetworkSyncBanner(0x6b5c60);
                 }
             }
@@ -805,8 +805,8 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     }
     if (s3C != 0) {
         fcn_004e48b0();
-        fcn_004e4de0(0x3e8);
-        fcn_004e45c0(fcn_004e44b0((char *)0x6b5c60, (char *)0x68c010));
+        cut_WaitSeconds(0x3e8);
+        cut_WaitForScriptExit(fcn_004e44b0((char *)0x6b5c60, (char *)0x68c010));
         cut_CleanupCutscene();
     }
     d2_DestroyForm(s14);

@@ -2,11 +2,11 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004ec7d0(int a1);
+int __cdecl ahm_GetWorkshopOwner(int a1);
 int __cdecl gm_CheckEntityStock(void* tbl, int a2, char a3);
 int __cdecl fcn_00526120(void* buf, int a2);
 void __cdecl io_FormatTextBuffer(void* buf, int id, ...);
-int __cdecl fcn_004ee220(int a1, int a2);
+int __cdecl ahm_DispatchAlchemistCommand(int a1, int a2);
 int __cdecl cm_GetCommandStatus(int a1);
 int __cdecl main_RunFrameLoop(int a1, int a2);
 void __cdecl fcn_004ee080(int a1);
@@ -19,7 +19,7 @@ int __cdecl fcn_00584f00(int a1, char* a2, int cost)
     int h;
     int r;
 
-    h = fcn_004ec7d0(a1);
+    h = ahm_GetWorkshopOwner(a1);
     if (gm_CheckEntityStock((void*) (540 * g_774970 + 0x7f4ca0), cost,
                      g_773d75) != 0) {
         if (h != 0) {
@@ -29,7 +29,7 @@ int __cdecl fcn_00584f00(int a1, char* a2, int cost)
                          *(int*) (0x14b5908 + *(int*) (a2 + 0x10) * 4),
                          *(int*) (0x14b596c + *(int*) (a2 + 0x14) * 4));
             if (fcn_00526120(buf, 1) != 0) {
-                r = fcn_004ee220(a1, (int) a2);
+                r = ahm_DispatchAlchemistCommand(a1, (int) a2);
                 if (r != -1) {
                     int q;
 

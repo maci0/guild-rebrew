@@ -13,7 +13,7 @@ typedef struct {
 extern char g_690560[];
 extern char g_679060[];
 
-void __cdecl fcn_004fcda0(short, int, Info*);
+void __cdecl amt_ProcessPrivilegeIncome(short, int, Info*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl d2_ShowPrivilegMessage(void*, int, int);
 
@@ -30,7 +30,7 @@ int __cdecl fcn_004f7e70(unsigned char* entity, int* context)
 	if (entity[0x166] == 0 && entity[0x169] == 0 && (*(int*) (entity + 0x1cc) & 0xe00) == 0)
 		return 1;
 	if (*context == 3 && entity[2] == 6) {
-		fcn_004fcda0(*(short*) entity, 0, &info);
+		amt_ProcessPrivilegeIncome(*(short*) entity, 0, &info);
 		memset(buf, 0, sizeof(buf));
 		base = (entity[9] != 0 ? 0x28 : 0) + 0x253;
 		io_FormatTextBuffer(buf, (int) g_690560, 0x1d96);

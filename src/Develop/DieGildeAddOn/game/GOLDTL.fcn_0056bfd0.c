@@ -19,7 +19,7 @@ int* __cdecl cm_GetCommandResult(int h);
 char* __cdecl cut_FindCutsceneById(int h);
 char* __cdecl fcn_00504b30(char* p);
 void __cdecl he_FreeAction(char* e);
-int __cdecl fcn_004d5450(char* e);
+int __cdecl cut_GetBuildingCombatType(char* e);
 int __cdecl gm_TransferAndSellAssets(char* a, char* b, char* c, char* d);
 int __cdecl memset(void* dst, int c, unsigned int n);
 extern pos14_7f4c00 gm_GameTime;
@@ -229,7 +229,7 @@ tail:
 		}
 		e2 = fcn_00503fe0(1, 1, *(int*) (ent + 0xb0));
 		target = fcn_00503fe0(1, 1, *(int*) (ent + 0xac));
-		j = fcn_004d5450(e2) + 0x1125;
+		j = cut_GetBuildingCombatType(e2) + 0x1125;
 		io_FormatTextBuffer(text, 0x114b, j,
 		    (int) *(unsigned short*) (target + 0x27), target, j);
 		fcn_00545e80(*(int*) (0x7f4ca4

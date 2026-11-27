@@ -14,7 +14,7 @@ void __cdecl fcn_004e4730(char* scene);
 int __cdecl fcn_004f5740(int key, int* out);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_004e44b0(int a1, int a2);
-void __cdecl fcn_004e44f0(int a1);
+void __cdecl cut_WaitForScript(int a1);
 int __cdecl fcn_004e4ae0(char* name, int a2);
 int __cdecl fcn_004e4b20(int a1, int a2, char* name, int mode);
 int __cdecl msx_StartAmbientTrack(char* snd, int flag);
@@ -23,7 +23,7 @@ void __cdecl msx_StartMusicIfAllowed(char* snd);
 int __cdecl sb_CheckVoicePlaying(int a1);
 void __cdecl cut_WaitTicks(int dur);
 void __cdecl d2_SetForm(int k, int i);
-int __cdecl fcn_00493dc0(unsigned short* a, unsigned short* b);
+int __cdecl gm_CalcTrialCourtFee(unsigned short* a, unsigned short* b);
 unsigned int* __cdecl gm_SelectEntityHeadSet(unsigned int a0);
 int __cdecl io_AppendText(int fmt, ...);
 int __cdecl sprintf(char*, const char*, ...);
@@ -205,7 +205,7 @@ int __cdecl cut_RunProzess(int a0)
 		msx_StartMusicIfAllowed("cd2\\ImKerker.mp3");
 	}
 	h2 = fcn_004e4ae0("ADDON\\PROZESS_NEU.sbf", 0);
-	msg.pad[0] = fcn_00493dc0((unsigned short*) p34, (unsigned short*) p38);
+	msg.pad[0] = gm_CalcTrialCourtFee((unsigned short*) p34, (unsigned short*) p38);
 	sprintf(str, "%s ", (char*) gm_SelectEntityHeadSet(*(unsigned short*) p3c) + 4);
 	end = str + strlen(str);
 	sprintf(end, "%s ", (char*) gm_SelectEntityHeadSet(*(unsigned short*) p34) + 4);
@@ -219,7 +219,7 @@ int __cdecl cut_RunProzess(int a0)
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "2");
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "2");
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "2");
-	fcn_004e44f0(fcn_004e44b0((int) "cutscenes\\prozess\\prozess-intro.esc", (int) ""));
+	cut_WaitForScript(fcn_004e44b0((int) "cutscenes\\prozess\\prozess-intro.esc", (int) ""));
 	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 	fcn_004e4450(g_68bfc0, 1);
 	d2_SetForm(g_68bfc0, 0);
@@ -244,7 +244,7 @@ int __cdecl cut_RunProzess(int a0)
 		cut_WaitTicks(1);
 	}
 	cut_WaitTicks(1);
-	fcn_004e44f0(h);
+	cut_WaitForScript(h);
 	{
 		int flags[0x20];
 
@@ -297,7 +297,7 @@ int __cdecl cut_RunProzess(int a0)
 				cut_WaitTicks(1);
 				cut_RandMod(0x1e);
 				io_AppendText(0x6811b0);
-				fcn_004e44f0(h);
+				cut_WaitForScript(h);
 			}
 		}
 	}
@@ -392,7 +392,7 @@ int __cdecl cut_RunProzess(int a0)
 		io_AppendText(0x6811b0);
 		fcn_004e4450(g_68bfc0, 0);
 		cut_RunTurnRound((unsigned int*) a0, (int) &msg);
-		fcn_004e44f0(h);
+		cut_WaitForScript(h);
 		{
 			int cnt2;
 			cnt2 = *(unsigned char*) (a0 + 0x30);
@@ -427,7 +427,7 @@ int __cdecl cut_RunProzess(int a0)
 			msg.pad[6] = 0;
 		}
 		cut_WaitTicks(4);
-		fcn_004e44f0(h);
+		cut_WaitForScript(h);
 		if (msg.pad[6] != 0) {
 			char folterFile[7][0x10] = {
 				"dschraube.esc", "stiefel.esc", "peitsche.esc",
@@ -481,7 +481,7 @@ int __cdecl cut_RunProzess(int a0)
 					}
 				}
 			}
-			fcn_004e44f0(h);
+			cut_WaitForScript(h);
 			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
 			st = *(int*) (g_9b0eb4 + i * 0x35c) & 0xf;
 			if (st < 6) {
@@ -510,7 +510,7 @@ int __cdecl cut_RunProzess(int a0)
 			io_AppendText(0x6811b0);
 			fcn_004e4450(g_68bfc0, 0);
 			cut_WaitTicks(2);
-			fcn_004e44f0(h);
+			cut_WaitForScript(h);
 			msg.state = 3;
 			fcn_004e4450(g_68bfc0, 0);
 			cut_RunTurnRound((unsigned int*) a0, (int) &msg);
@@ -564,7 +564,7 @@ int __cdecl cut_RunProzess(int a0)
 			cut_WaitTicks(5);
 			fcn_004e4450(g_68bfc0, 0);
 			fcn_00493920(&msg);
-			fcn_004e44f0(h);
+			cut_WaitForScript(h);
 			fcn_004e4450(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
 			if (msg.pad[7] != 0) {
@@ -609,7 +609,7 @@ int __cdecl cut_RunProzess(int a0)
 		cut_WaitTicks(4);
 		h = fcn_004e44b0((int) "cutscenes\\prozess\\folterexit.esc", (int) "");
 		if (h != 0) {
-			fcn_004e44f0(h);
+			cut_WaitForScript(h);
 		}
 		if (g_772f3c == 0 && msg.hnd[6] != -1) {
 			d3_SelectSceneContext(msg.hnd[6], 0);
@@ -824,9 +824,9 @@ int __cdecl cut_RunProzess(int a0)
 	/* 0x4df09b cleanup ladder */
 	fcn_004e48b0();
 	h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-ende.esc", (int) "");
-	fcn_004e44f0(h);
+	cut_WaitForScript(h);
 	h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-exit.esc", (int) "");
-	fcn_004e44f0(h);
+	cut_WaitForScript(h);
 	if (msg.hnd[7] != 0) {
 		msx_StopAmbientTrack(msg.hnd[7]);
 	}

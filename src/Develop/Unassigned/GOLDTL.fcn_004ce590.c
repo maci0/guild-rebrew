@@ -2,7 +2,7 @@ extern char g_68b400[];
 
 /* ADDRESS: GOLD 0x004cd9d0 */
 /* ADDRESS: GOLDTL 0x004ce590 */
-int __cdecl fcn_004ce590(int value)
+int __cdecl gm_LookupWeaponSpec(int value)
 {
 	int index;
 	int cursor;

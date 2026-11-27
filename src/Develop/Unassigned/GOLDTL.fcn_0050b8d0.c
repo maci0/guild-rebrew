@@ -5,7 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 extern int g_7747b4;
 extern float g_6628a8;
 
-float __cdecl fcn_0050b8d0(unsigned char* p, int k, int a, int b)
+float __cdecl gm_GetWorkforceOutput(unsigned char* p, int k, int a, int b)
 {
 	float r;
 	unsigned char* t;

@@ -1,4 +1,4 @@
-void __cdecl fcn_00418e90(char*, int, char*);
+void __cdecl d3d_LogResultError(char*, int, char*);
 
 typedef struct Vec4Words {
 	int a;
@@ -40,7 +40,7 @@ void __cdecl d3_ClearViewport(void)
 		r = ((ObjFn) *(void**) (*(int*) obj + 0x50))(obj, 1, &v, mask, *(int*) 0x6334a0, 1.0f, 0);
 		*(int*) 0x14661a4 = r;
 		if (r != 0) {
-			fcn_00418e90((char*) 0x5f944c, 0x145, (char*) 0x5f9570);
+			d3d_LogResultError((char*) 0x5f944c, 0x145, (char*) 0x5f9570);
 		}
 	}
 	*(unsigned char*) 0x631222 = 1;

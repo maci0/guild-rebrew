@@ -7,7 +7,7 @@ extern unsigned char* lpGebaeudePROT;
 char* __cdecl gm_FindPublicTreasury(int a);
 int __cdecl fcn_004f4830(int idx, void* dst);
 int __cdecl fcn_0050b750(int a, unsigned char b);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_AccumulateTyped2(char* rec);
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 float __cdecl fcn_004ff210(int a, int b);
@@ -34,7 +34,7 @@ void __cdecl fcn_004fcc20(void)
 	do {
 		rec = q - 0x170;
 		if (g_773d48 > 0x40) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 			g_773d48 = 0;
 		}
 		if (*(unsigned short*) rec != 0xffff && *(unsigned char*) (rec + 8) != 0 && *(unsigned char*) (rec + 2) == 0 && *(int*) (rec + 0x170) != 0) {

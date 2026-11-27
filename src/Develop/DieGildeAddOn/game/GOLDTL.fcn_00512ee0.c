@@ -89,14 +89,14 @@ int __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl gm_FindNearestEligibleEntity(unsigned char *, int);
 int __cdecl gm_CheckEntityType(unsigned char *);
-int __cdecl fcn_005072c0(int);
+int __cdecl gm_JobToBuildingType(int);
 int __cdecl fcn_0050b750(int, char);
 int __cdecl gm_CalculateGebaeudeValue(unsigned char *, int);
-int __cdecl fcn_0050d170(int);
+int __cdecl gm_GetTypeProductValue(int);
 void __cdecl fcn_00511c60(int);
 void __cdecl init_Betrieb(unsigned char *);
 void __cdecl init_SetupBetriebWorkers(unsigned char *);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl d2_SetProgressPercent(int, int);
 void __cdecl he_EnsureAction0x6d(void);
 void __cdecl he_EnsureAction0x6b(void);
@@ -168,7 +168,7 @@ void __cdecl fcn_00512ee0(void)
 						h = cm_SendSetGebBesitzer(p->id, *(int *)(e + 4),
 								*(int *)(e + 4));
 						while (cm_GetCommandStatus(h) == 0) {
-							fcn_00535960();
+							cm_StepCommandQueue();
 						}
 						init_SetupBetriebWorkers((unsigned char *)p);
 						done = 1;
@@ -182,7 +182,7 @@ void __cdecl fcn_00512ee0(void)
 			inner += 0xa9;
 		} while (inner < 0xa900);
 		if (!done) {
-			kind = fcn_005072c0(*(unsigned char *)(e + 0x164));
+			kind = gm_JobToBuildingType(*(unsigned char *)(e + 0x164));
 			if (lc_GetBauplatzPrefix(kind, name)
 					&& (res = d3_CollectUnusedSceneObjects(name, (char **)list)) != 0) {
 				j = 0;
@@ -198,7 +198,7 @@ void __cdecl fcn_00512ee0(void)
 				h = cm_RequestCreateGeb(*(int *)(e + 4), kind, path, pos3);
 				if (h != -1) {
 					while (cm_GetCommandStatus(h) == 0) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 				}
 				h = cm_GetCommandResult(h);
@@ -250,7 +250,7 @@ void __cdecl fcn_00512ee0(void)
 		cm_RequestSetWohnsitz(*(int *)(e + 4), *(int *)(q + 1));
 		h = cm_SendSetGebBesitzer(*(int *)(q + 1), *(int *)(e + 4), *(int *)(e + 4));
 		while (cm_GetCommandStatus(h) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 	}
 
@@ -281,7 +281,7 @@ void __cdecl fcn_00512ee0(void)
 		o = &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char *)e];
 		h = fcn_004c6090((unsigned char *)e, 2, o->role_230, 0x2d);
 		while (cm_GetCommandStatus(h) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 		h = *(int *)(cm_GetCommandResult(h) + 4);
 		cm_SendSetGebBesitzer(*(int *)(e + 1), h, h);
@@ -311,7 +311,7 @@ void __cdecl fcn_00512ee0(void)
 			}
 			h = fcn_004c6090((unsigned char *)p, 2, o->role_230, slot);
 			while (cm_GetCommandStatus(h) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 			q = cm_GetCommandResult(h);
 			cm_SendSetGebBesitzer(p->id, *(int *)(q + 4), *(int *)(q + 4));
@@ -368,7 +368,7 @@ void __cdecl fcn_00512ee0(void)
 			h = cm_SendSetGebBesitzer(*(int *)(q + 1), *(int *)(e + 4),
 					*(int *)(e + 4));
 			while (cm_GetCommandStatus(h) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 		goto handles_done;
@@ -377,7 +377,7 @@ release_handles:
 			e = (char *)handles[i];
 			if (e) {
 				cm_RequestMoveCredits(*(int *)(e + 4), -1, g_773d75,
-						fcn_0050d170(4));
+						gm_GetTypeProductValue(4));
 			}
 		}
 handles_done:
@@ -479,7 +479,7 @@ handles_done:
 					total += 2;
 					if (res != -1 && total % 10 == 0) {
 						while (cm_GetCommandStatus(res) == 0) {
-							fcn_00535960();
+							cm_StepCommandQueue();
 						}
 					}
 				}

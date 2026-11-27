@@ -14,7 +14,7 @@ void __cdecl fcn_004c6090(char* e, int a, int b, int c);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 char* __cdecl cm_AreQueuedCommandsDone(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 
 /* ADDRESS: GOLDTL 0x0053abe0 */
 void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
@@ -51,7 +51,7 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 			cm_SendSellObjekt(*(int*) (slot + 2), -1, 0x1d0, 0x19, g_773d75, 0);
 			cm_EndCommandSync();
 			while (!cm_AreQueuedCommandsDone()) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 	}
@@ -67,7 +67,7 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 			cm_SendSellObjekt(*(int*) (slot + 2), -1, 0x158, 10, g_773d75, 0);
 			cm_EndCommandSync();
 			while (!cm_AreQueuedCommandsDone()) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 	}
@@ -99,7 +99,7 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 			cm_SendSellObjekt(*(int*) (slot + 2), -1, 0x1d0, 10, g_773d75, 0);
 			cm_EndCommandSync();
 			while (!cm_AreQueuedCommandsDone()) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 	}
@@ -124,7 +124,7 @@ void __cdecl gm_InitCivicBuildings(unsigned int ownerSlot)
 			cm_SendSellObjekt(*(int*) (slot + 2), -1, 0x1d0, 10, g_773d75, 0);
 			cm_EndCommandSync();
 			while (!cm_AreQueuedCommandsDone()) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 	}

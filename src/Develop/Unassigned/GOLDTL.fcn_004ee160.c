@@ -1,4 +1,4 @@
-char* __cdecl fcn_004ec7d0(char*);
+char* __cdecl ahm_GetWorkshopOwner(char*);
 float __cdecl ahm_GetEssenceValue(char*, int);
 char* __cdecl fcn_004ecbe0(int);
 
@@ -15,7 +15,7 @@ int __cdecl fcn_004ee160(char* a0)
 	int n;
 
 	sum = 0;
-	p = fcn_004ec7d0(a0);
+	p = ahm_GetWorkshopOwner(a0);
 	if (p == 0) {
 		return -1;
 	}

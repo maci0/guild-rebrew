@@ -22,21 +22,21 @@ typedef struct
 // SIZE 0x24
 
 int __cdecl fcn_004ecbe0(int id);
-int __cdecl fcn_004c6cf0(Msg24* m);
+int __cdecl cm_SendAllocAlchemist(Msg24* m);
 
-int __cdecl fcn_004ee220(char* a, char* p)
+int __cdecl ahm_DispatchAlchemistCommand(char* building, char* order)
 {
 	Msg24 m;
-	char* q;
+	char* recipe;
 
-	q = (char*) fcn_004ecbe0(*(int*) (p + 0xc));
-	if (q == 0) {
+	recipe = (char*) fcn_004ecbe0(*(int*) (order + 0xc));
+	if (recipe == 0) {
 		return -1;
 	}
-	m.x8 = *(int*) (a + 1);
-	m.v = *(V12*) (p + 4);
-	m.x18 = *(int*) (p + 0x10);
-	m.x1c = *(int*) (p + 0x14);
-	m.x20 = *(int*) (q + 8);
-	return fcn_004c6cf0(&m);
+	m.x8 = *(int*) (building + 1);
+	m.v = *(V12*) (order + 4);
+	m.x18 = *(int*) (order + 0x10);
+	m.x1c = *(int*) (order + 0x14);
+	m.x20 = *(int*) (recipe + 8);
+	return cm_SendAllocAlchemist(&m);
 }

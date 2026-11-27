@@ -2643,6 +2643,7 @@ LAB_1000e0e7:
  * to another. Validates source and destination entities, then
  * transfers the object via gm_SubObjekt + gm_AddObjekt. */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ExProdObjekt(int msg, char* result)
 {
 	int quantity;
@@ -2806,6 +2807,7 @@ int __cdecl cm_ExProdObjekt(int msg, char* result)
 	}
 	return 0;
 }
+#endif
 
 int __cdecl cm_ExMoveObjekt(int cmd, char* result)
 {
@@ -4771,6 +4773,7 @@ int __cdecl cm_ExModifyStamina(int cmd)
  * delegating to amt_SwapOfficeHolders. Returns 1 if the
  * swap failed (result == 0), 0 on success. */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl cm_ExSimCommand(void* cmd, char* result)
 {
 	int swap_result;
@@ -4780,6 +4783,7 @@ int __cdecl cm_ExSimCommand(void* cmd, char* result)
 	swap_result = amt_SwapOfficeHolders((int*) ((int) cmd + 0x10));
 	return (unsigned int) (swap_result == 0);
 }
+#endif
 
 /* 0x100256cc: stat lower bound, 0.0 */
 

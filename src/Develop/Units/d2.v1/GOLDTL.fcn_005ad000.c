@@ -15,7 +15,7 @@ void __cdecl fcn_00472380(int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl gm_SumSlotTreasury(int);
-int __cdecl fcn_0050b710(int, char);
+int __cdecl gm_AmountToUnits(int, char);
 int __cdecl fcn_0050b750(int, char);
 int __cdecl d2_GetControlValue(int);
 void __cdecl cm_SendLogAction(void*);
@@ -69,7 +69,7 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 	msg.ctl = ctl2;
 	h = gm_SumSlotTreasury(*(unsigned short*) &g_774970);
 	fcn_00472380(ctl1, 0x96,
-	             fcn_0050b710(h, *(unsigned char*) &g_773d75), 0xfa);
+	             gm_AmountToUnits(h, *(unsigned char*) &g_773d75), 0xfa);
 	d2_SetOverlayAnimation(0, 0);
 	do {
 		if (g_14ce8e0 != 0) {

@@ -29,7 +29,7 @@ void __cdecl fcn_00475220(void* p);
 void __cdecl fcn_00533a40(void* p);
 void __cdecl fcn_0042def0(void* p);
 void __cdecl evt_CloseAllScripts(void);
-void __cdecl fcn_0044c440(int p);
+void __cdecl gv_SpawnIfPending(int p);
 void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl d3snd_StopAllObjectSounds(void);
 void __cdecl fcn_004230e0(int p);
@@ -72,7 +72,7 @@ void __cdecl gm_ShutdownGameRuntime(void)
 	g_772f3c = 0;
 	evt_CloseAllScripts();
 	if (g_7749cc != 0) {
-		fcn_0044c440(g_7749cc);
+		gv_SpawnIfPending(g_7749cc);
 	}
 	if (g_774934 != 0) {
 		d3snd_StopTrackedVoices();

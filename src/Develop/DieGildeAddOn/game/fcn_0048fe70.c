@@ -3,7 +3,7 @@ int __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_0047d220(char* p);
 void* __cdecl fcn_004f18d0(char* a1, char* a2, int a3, int a4, int a5);
 int __cdecl fcn_004f4550(int a, int b, int c, int* out);
-int __cdecl fcn_0050d320(int a, char b);
+int __cdecl gm_GetSeasonTreasury(int a, char b);
 int __cdecl gm_CalcBribeOrPriceScore(char* a1, int a2, int a3, int a4, int* out);
 int __cdecl fcn_004f1790(int a, int* b);
 int __cdecl fcn_0042e410(int a);
@@ -87,7 +87,7 @@ int __cdecl fcn_0048fe70(int a0, char* actorEntity, int a2, int* a3, int* a4, in
 		} while (v > *v9);
 		if (v4 != 0) {
 			out = fcn_004f4550((int) actorEntity, *v9, *v4, &a2);
-			m = fcn_0050d320((int) actorEntity, g_773d75);
+			m = gm_GetSeasonTreasury((int) actorEntity, g_773d75);
 			if ((int) ((float) m * g_664160) <= out) {
 				return 0;
 			}
@@ -106,7 +106,7 @@ int __cdecl fcn_0048fe70(int a0, char* actorEntity, int a2, int* a3, int* a4, in
 		if (v4 != 0) {
 			int t, r;
 			t = gm_CalcBribeOrPriceScore((int) actorEntity, 0xff, *v4, 1, &r);
-			m = fcn_0050d320((int) actorEntity, g_773d75);
+			m = gm_GetSeasonTreasury((int) actorEntity, g_773d75);
 			if ((int) ((float) m * g_664160) < t) {
 				return 0;
 			}

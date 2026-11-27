@@ -11,14 +11,14 @@ void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a);
 int __cdecl io_AppendText(int id, ...);
-void __cdecl fcn_004fcda0(u16 id, int a, void* out);
+void __cdecl amt_ProcessPrivilegeIncome(u16 id, int a, void* out);
 int __cdecl gm_RandomMod(int a);
 int __cdecl _ftol(void);
 int __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
 void __cdecl cm_RequestModifyHealth(int a, int b);
 int __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 int __cdecl cm_GetCommandStatus(int a);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl io_FormatTextBuffer(char* out, int id, ...);
 int __cdecl fcn_00526120(char* text, int a);
 int __cdecl d2_DestroyForm(int dlg);
@@ -55,7 +55,7 @@ int __cdecl fcn_005d6c50(int actor, int a1)
     } else {
         return 0x60;
     }
-    fcn_004fcda0(*p, 0, frame + 4);
+    amt_ProcessPrivilegeIncome(*p, 0, frame + 4);
     v = gm_RandomMod(0xb0) & 0xffff;
     h2 = (int) ((double) (v + 0x19) * g_664138 * *(int*) (frame + 0x8));
     if (((u8*) actor)[2] != 6) {
@@ -82,7 +82,7 @@ int __cdecl fcn_005d6c50(int actor, int a1)
                     dlg = cm_RequestChangeBits(*(int*) (p + 2), 0x1c8, 4, 0x400000,
                                      0);
                     while (cm_GetCommandStatus(dlg) == 0)
-                        fcn_00535960();
+                        cm_StepCommandQueue();
                     io_FormatTextBuffer(frame + 0x14, 0x1dc3, h2);
                     fcn_00526120(frame + 0x14, 0);
                     dlg = *(int*) (frame + 0x8);

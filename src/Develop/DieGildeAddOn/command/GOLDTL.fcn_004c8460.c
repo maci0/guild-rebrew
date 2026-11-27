@@ -15,7 +15,7 @@ int __cdecl gm_eval_SlotVoll(char*, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004c8460 */
-int __cdecl fcn_004c8460(int msg, char* result)
+int __cdecl cm_ExProdObjekt(int msg, char* result)
 {
 	int quantity;
 	int loop_count;

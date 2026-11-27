@@ -1,5 +1,5 @@
 int __cdecl evt_LogScriptError(void*, int, char*);
-int __cdecl fcn_00445600(int, int, int, int);
+int __cdecl d3_FindSceneObject(int, int, int, int);
 void __cdecl d3_CreateFlightAnimation(int, int, int, int*);
 int __cdecl ObjectFlight(int*, int*, int*, int*, int*, int*, int*);
 
@@ -30,11 +30,11 @@ int __cdecl ObjectFlight(int* a1, int* a2, int* a3, int* a4, int* a5, int* a6, i
 		evt_LogScriptError((void*) o, *(int*) ((int) o + 0x118), (char*) 0x676958);
 		return 0;
 	}
-	values[0] = fcn_00445600(0, 0x140, 0, *a3);
-	values[1] = fcn_00445600(0, 0x140, 0, *a4);
-	values[2] = fcn_00445600(0, 0x140, 0, *a5);
-	values[3] = fcn_00445600(0, 0x140, 0, *a6);
-	values[4] = fcn_00445600(0, 0x140, 0, *a7);
+	values[0] = d3_FindSceneObject(0, 0x140, 0, *a3);
+	values[1] = d3_FindSceneObject(0, 0x140, 0, *a4);
+	values[2] = d3_FindSceneObject(0, 0x140, 0, *a5);
+	values[3] = d3_FindSceneObject(0, 0x140, 0, *a6);
+	values[4] = d3_FindSceneObject(0, 0x140, 0, *a7);
 	for (i = 0; i < 5; i++) {
 		if (values[i] != 0)
 			count++;

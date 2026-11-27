@@ -7,7 +7,7 @@ typedef Rec18_68da68 Rec18;
 
 extern Rec18_68da68 amt_OfficeSlots[42];
 
-void __cdecl fcn_004e8730(int v)
+void __cdecl amt_SetOfficeType0x27Handle(int v)
 {
 	int i;
 

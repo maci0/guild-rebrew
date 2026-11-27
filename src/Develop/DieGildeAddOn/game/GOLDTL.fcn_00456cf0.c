@@ -2,7 +2,7 @@ typedef struct
 {
 	void* pad[2];
 	int (__stdcall* Release)(void*);
-} fcn_00456cf0_Vtbl;
+} D3S_CACHE_VTBL;
 // SIZE 0xc
 
 extern unsigned long g_14ce728;
@@ -14,7 +14,7 @@ void __cdecl fcn_00456560(void);
 void __cdecl gv_Free3Fields(int* slot);
 
 /* ADDRESS: GOLDTL 0x00456cf0 */
-void __cdecl fcn_00456cf0(void)
+void __cdecl d3s_ReleaseCache(void)
 {
 	int a;
 	void* o;
@@ -22,7 +22,7 @@ void __cdecl fcn_00456cf0(void)
 	for (a = 0x1040610; a <= 0x1040618; a += 4) {
 		o = *(void**) a;
 		if (o != 0) {
-			(*(int*)&g_14ce728) = (*(fcn_00456cf0_Vtbl**) o)->Release(o);
+			(*(int*)&g_14ce728) = (*(D3S_CACHE_VTBL**) o)->Release(o);
 			*(void**) a = 0;
 		}
 	}

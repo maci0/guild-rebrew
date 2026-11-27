@@ -20,7 +20,7 @@ int __cdecl gm_CheckStatLevel(int id, int kind);
 int __cdecl fcn_00504ef0(int kind, int* out);
 
 /* ADDRESS: GOLDTL 0x00504f30 */
-unsigned int __cdecl fcn_00504f30(int buildingType, int playerIndex)
+unsigned int __cdecl gm_CanBuildBuildingType(int buildingType, int playerIndex)
 {
 	Loc* rec;
 	unsigned char* rb;

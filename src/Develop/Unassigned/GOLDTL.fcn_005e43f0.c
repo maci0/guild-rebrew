@@ -27,12 +27,12 @@ void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_005dfe80(char *, int);
 int __cdecl cm_SendQuitGameCommand(void);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl main_ExitToFrameHandler(int);
 void __cdecl fcn_005e3520(void);
 void __cdecl fcn_005e2b60(void);
 void __cdecl d2_ShowSoundOptions(void);
-void __cdecl fcn_005e3c40(void);
+void __cdecl d2_RestoreHudAfterPause(void);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_004c39b0(void);
@@ -106,7 +106,7 @@ void __cdecl fcn_005e43f0(void)
                             if (cm_GetCommandStatus(handle)) {
                                 break;
                             }
-                            fcn_00535960();
+                            cm_StepCommandQueue();
                         }
                         *(int *)0x774954 = 1;
                         main_ExitToFrameHandler(0x5438c0);
@@ -121,7 +121,7 @@ void __cdecl fcn_005e43f0(void)
             }
         }
     }
-    fcn_005e3c40();
+    d2_RestoreHudAfterPause();
     if (!(*(unsigned char *)0x7747b0 & 4)) *(int *)0x6b7fc0 = 0;
     *(unsigned char *)0x774966 = 0;
     d2_ClearRadioGroup(group);

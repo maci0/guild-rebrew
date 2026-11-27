@@ -6,7 +6,7 @@ extern char* lpObjektePROT;
 
 float __cdecl eval_ObjektPreis2Credits(int k, int n);
 
-int __cdecl fcn_0050d170(int k)
+int __cdecl gm_GetTypeProductValue(int k)
 {
 	unsigned char* t;
 	int total;

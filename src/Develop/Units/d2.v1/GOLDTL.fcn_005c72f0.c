@@ -45,7 +45,7 @@ int __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl d2_SyncProduktionSlotGrid(int, int);
 int __cdecl fcn_00597940(int, int, int, int, int);
 int __cdecl d2_GetControlValue(int);
-int* __cdecl fcn_004ce590(int);
+int* __cdecl gm_LookupWeaponSpec(int);
 int* __cdecl gm_GetEquippedCombatGear(int);
 int __cdecl fcn_005c7270(int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
@@ -53,7 +53,7 @@ int __cdecl fcn_00472380(int, int, int, int, int);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
 int __cdecl cm_AreQueuedCommandsDone(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl d2_ClearSelectedControl(void);
 int __cdecl ch_UpdateHeldObjectAttachment(int);
 int __cdecl d2_UpdateTrainingRows(int, int);
@@ -166,7 +166,7 @@ label_5c752a:
 		v5 = *rec;
 		if (v5 != -1 && d2_GetControlValue(v5) != 0) {
 			v5 = rec[-4];
-			if (fcn_004ce590(v5) != 0) {
+			if (gm_LookupWeaponSpec(v5) != 0) {
 				if (*(int*) gm_GetEquippedCombatGear(selected) != 0) {
 					fcn_00526120(g_14aba9c, 4);
 					goto label_5c7572;
@@ -203,7 +203,7 @@ label_5c7572:
 		if (v5 != -1 && d2_GetControlValue(v5) != 0) {
 			v7 *= 0x38;
 			v13 = *(int*) (v7 + ((int) g_7796e0 + 0x0));
-			if (fcn_004ce590(v13) != 0) {
+			if (gm_LookupWeaponSpec(v13) != 0) {
 				v13 = *(int*) (v7 + ((int) g_7796e0 + 0x0));
 				v5 = fcn_005c7270(selected, v13);
 				if (v5 != 0) {
@@ -227,7 +227,7 @@ label_5c7572:
 	cm_EndCommandSync();
 	v7 = cm_AreQueuedCommandsDone();
 	while (v7 == 0) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 		v7 = cm_AreQueuedCommandsDone();
 	}
 	ch_UpdateHeldObjectAttachment(selected);
@@ -258,7 +258,7 @@ label_5c76eb:
 		cm_EndCommandSync();
 		v7 = cm_AreQueuedCommandsDone();
 		while (v7 == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 			v7 = cm_AreQueuedCommandsDone();
 		}
 		p4 = (int*) ((int) g_7774a0 + 0x0);

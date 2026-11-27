@@ -14,7 +14,7 @@ void* __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl hst_SplitFormatPrefix(char*, char*, int*, char**);
 int __cdecl atoi(char*);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 
@@ -84,7 +84,7 @@ int __cdecl hst_HandleStadtkasse(int unused1, int unused2, int unused3, char* to
 		hst_SplitFormatPrefix(token_text, buf, &n, &p);
 		n = atoi(token_text + n);
 		io_FormatTextBuffer((void*) text_out, (int) buf,
-		    fcn_0050b710((int) (((float) n * 0.01f) * (float) v),
+		    gm_AmountToUnits((int) (((float) n * 0.01f) * (float) v),
 		    g_773d75),
 		    g_773d75);
 	}

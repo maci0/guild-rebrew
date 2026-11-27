@@ -18,7 +18,7 @@ int __cdecl amt_SendOfficeCommand(int id, char* ea, char* eb, int x1, int x2);
 int __cdecl amt_FindOfficeSlotsByKind(int kind, int max, OFFICE_SLOT* out);
 
 /* ADDRESS: GOLDTL 0x004eba60 */
-unsigned int __cdecl fcn_004eba60(char* e, unsigned int* target)
+unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 {
 	float f;
 	int sign;

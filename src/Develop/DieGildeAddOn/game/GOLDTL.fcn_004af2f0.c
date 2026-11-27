@@ -8,7 +8,7 @@ void* __cdecl gm_LookupEntityRecordById(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl hst_SplitFormatPrefix(char*, char*, int*, int*);
 int __cdecl atoi(char*);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 // SIZE 0x21c
@@ -727,7 +727,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 	hst_SplitFormatPrefix(a4, buf, &n, (int*) &p);
 	n = atoi(a4 + n);
 	io_FormatTextBuffer((void*) a5, (int) buf,
-	    fcn_0050b710((int) (((float) n * 0.01f) * (float) r),
+	    gm_AmountToUnits((int) (((float) n * 0.01f) * (float) r),
 	    g_773d75),
 	    g_773d75);
 	return 1;

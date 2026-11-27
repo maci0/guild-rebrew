@@ -17,7 +17,7 @@ void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *p);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl cm_GetCommandStatus(int h);
 int __cdecl amt_FindOfficeSlotByKey(unsigned char c, void *out);
 int __cdecl amt_GetRoleTemplate(int i, void *out);
@@ -202,7 +202,7 @@ int __cdecl fcn_00511c60(void)
 		k = amt_AssignOfficeHolder((unsigned char) shuffledIds[i], p, 0xff);
 		if (k != -1) {
 			while (cm_GetCommandStatus(k) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 		if (*(unsigned char *) (p + 0x166) == 0x18 ||
@@ -218,7 +218,7 @@ int __cdecl fcn_00511c60(void)
 		}
 		if (k != -1) {
 			while (cm_GetCommandStatus(k) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 		if (*(unsigned char *) (p + 0x166) == 0x1b) {
@@ -277,7 +277,7 @@ int __cdecl fcn_00511c60(void)
 					 v42, -1, k, 0, 2);
 			if (k != -1) {
 				while (cm_GetCommandStatus(k) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 			}
 			p = cm_GetCommandResult(k);
@@ -297,7 +297,7 @@ int __cdecl fcn_00511c60(void)
 				 (k & 0xffff) + 0x60, 0);
 		if (k != -1) {
 			while (cm_GetCommandStatus(k) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 	} while (v36 != 0);
@@ -310,7 +310,7 @@ int __cdecl fcn_00511c60(void)
 		k = cm_RequestAllocSpieler(3, -1, -1, gm_RandomMod(4) + 0xf, -1, k, 0, 0);
 		if (k != -1) {
 			while (cm_GetCommandStatus(k) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 		p = cm_GetCommandResult(k);
@@ -326,7 +326,7 @@ int __cdecl fcn_00511c60(void)
 		k = cm_RequestAllocSpieler(3, -1, -1, gm_RandomMod(4) + 0xe, -1, k, 0, 0);
 		if (k != -1) {
 			while (cm_GetCommandStatus(k) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 		p = cm_GetCommandResult(k);

@@ -19,7 +19,7 @@ extern unsigned short __cdecl gm_RandomMod(unsigned short n);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00496e60 */
-int __cdecl fcn_00496e60(int a1, char* e, int y, Msg* out1, Msg* out2)
+int __cdecl ai_StartAmtsbewerbung(int actorKind, char* actor, int busy, Msg* out1, Msg* out2)
 {
 	Msg b;
 	char items[0x18];
@@ -27,21 +27,21 @@ int __cdecl fcn_00496e60(int a1, char* e, int y, Msg* out1, Msg* out2)
 	int r;
 	int v;
 
-	if (y) {
+	if (busy) {
 		return 0;
 	}
-	if (*(unsigned char*) (e + 0xd) < 2) {
-		char* entity = e;
+	if (*(unsigned char*) (actor + 0xd) < 2) {
+		char* entity = actor;
 		b.type = 0xd;
 		b.a = 2;
 		b.b = 1;
 		b.f = 0.44f;
-		y = sizeof(a);
-		e = (char*) &a;
+		busy = sizeof(a);
+		actor = (char*) &a;
 		/* Native fill core at 0x496ea7-0x496ec7. */
 		__asm {
-			mov edi, e
-			mov ebx, y
+			mov edi, actor
+			mov ebx, busy
 			xor eax, eax
 			lea ecx, [edi+edi*2]
 			and ecx, 3
@@ -67,19 +67,19 @@ int __cdecl fcn_00496e60(int a1, char* e, int y, Msg* out1, Msg* out2)
 	if (*(unsigned short*) 0x7f4c04 < 0xd) {
 		return 0;
 	}
-	if (*(unsigned char*) (e + 0x168)) {
+	if (*(unsigned char*) (actor + 0x168)) {
 		return 0;
 	}
-	if (fcn_004fef00(e) - *(unsigned short*) (e + 0xa) < 3) {
+	if (fcn_004fef00(actor) - *(unsigned short*) (actor + 0xa) < 3) {
 		return 0;
 	}
-	r = amt_SelectOfficeCandidates(e, 2, items);
+	r = amt_SelectOfficeCandidates(actor, 2, items);
 	if (r == 0) {
 		if (gm_RandomMod(4) != 0) return 0;
 		a.type = 0x10;
 		a.a = 0x12;
 		a.b = 0;
-		if (ai_SelectPrivilegeAction(a1, e, 0, &a, &b)) {
+		if (ai_SelectPrivilegeAction(actorKind, actor, 0, &a, &b)) {
 			*out1 = a;
 			*out2 = b;
 			return 0x27;

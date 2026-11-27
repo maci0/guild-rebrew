@@ -25,7 +25,7 @@ void __cdecl d2_RunGildeInfoHud(void*);
 void __cdecl d2_RunFriedhofInteriorHud(void*);
 void __cdecl d2_RunFriedhofSeanceMenu(void*);
 void __cdecl fcn_005e6840(void*);
-void __cdecl fcn_005e68e0(void*);
+void __cdecl d2_RunFortuneTellerHud(void*);
 void __cdecl d2_RunTheaterInteriorHud(void*);
 
 /* Saves the current render/scene state, notifies the game of the incoming
@@ -126,7 +126,7 @@ void __cdecl d2_EnterObjektInterior(void* objMessage)
 		d2_RunTheaterInteriorHud(*(void**) &g_7746c8);
 		break;
 	case 0x28a:
-		fcn_005e68e0(*(void**) &g_7746c8);
+		d2_RunFortuneTellerHud(*(void**) &g_7746c8);
 		break;
 	default:
 		fcn_0058f700(message);

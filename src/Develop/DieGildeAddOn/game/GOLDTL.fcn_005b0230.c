@@ -15,7 +15,7 @@ void __cdecl fcn_005b00f0(char*, int, int);
 void __cdecl fcn_005b00d0(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 int __cdecl fcn_005cfd00(unsigned short*, int*, unsigned char*);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_0046c310(int);
 
@@ -276,7 +276,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 		g_cur_building = (char*) &g_1015f40[g_town_dir(town)];
 		p = (char*) 0x6a4770;
 		while (p < (char*) 0x6a4870) {
-			obj = fcn_00445600(0, 0x100, 0, p);
+			obj = d3_FindSceneObject(0, 0x100, 0, p);
 			if (obj != 0) {
 				d3_TransformPoint(obj, (float*) (obj + 0x4c), pos);
 				fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);

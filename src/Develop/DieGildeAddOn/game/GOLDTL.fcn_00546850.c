@@ -16,7 +16,7 @@ extern char g_6a57d8[];
 
 char* __cdecl gm_SearchTable67(int id);
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_00445600(int a, int b, int c, char* name);
+int __cdecl d3_FindSceneObject(int a, int b, int c, char* name);
 void __cdecl he_CreateGfxInfo(unsigned char* p, char* fmt, int v);
 
 void __cdecl he_CreateEventGfxInfo(unsigned char* p)
@@ -68,7 +68,7 @@ void __cdecl he_CreateEventGfxInfo(unsigned char* p)
 	case 0x35:
 		o = gm_LookupEntityRecordById(*(int*) (p + 0xbc));
 		if (o != 0 && *o == g_774970 && d3_CurrentContextIndex == 0) {
-			v = fcn_00445600(0, 0x40, 0, g_6a5804);
+			v = d3_FindSceneObject(0, 0x40, 0, g_6a5804);
 			if (v != 0) {
 				he_CreateGfxInfo(p, g_6a57d8, v);
 			}
@@ -76,7 +76,7 @@ void __cdecl he_CreateEventGfxInfo(unsigned char* p)
 		break;
 	case 0x6b:
 		if (*(int*) (p + 0x70) == 2 && d3_CurrentContextIndex == 0 && (g_7f4e68[g_774970 * 135] & 0x20000) == 0) {
-			v = fcn_00445600(0, 0x40, 0, g_6a57f8);
+			v = d3_FindSceneObject(0, 0x40, 0, g_6a57f8);
 			if (v != 0) {
 				he_CreateGfxInfo(p, g_6a57d8, v);
 			}

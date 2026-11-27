@@ -24,7 +24,7 @@ typedef struct Figure {
 extern float g_662d40[3];
 extern int g_14abee0[];
 
-char* __cdecl fcn_00445600(char*, int, char*, char*);
+char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00455140(char*, char*, float*);
@@ -41,7 +41,7 @@ Figure* __cdecl ch_CreateCharacterAtSceneObject(char* res, char* kind, int anim)
 	char* h;
 	Figure* f;
 
-	h = fcn_00445600(0, 0x100, 0, res);
+	h = d3_FindSceneObject(0, 0x100, 0, res);
 	if (h == 0) {
 		return 0;
 	}

@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_VisitSceneObjectsUntilStopped(int, char*, int, void*, void*);
-int __cdecl fcn_00445560(char*, char**);
+int __cdecl d3_MatchSceneObjectCallback(char*, char**);
 
 /* Finds the child of o named name (and equal to ptr when ptr is given);
  * GOLDTL 0x445600 is the counterpart. */
@@ -22,7 +22,7 @@ char* __cdecl fcn_00449690(char* o, int flags, char* ptr, char* name)
 		saved = *(int*) (o + 0x1f0);
 		*(int*) (o + 0x1f0) = 0;
 	}
-	d3_VisitSceneObjectsUntilStopped((int) g_5fb5b0, o, flags | 0x200, fcn_00445560, st);
+	d3_VisitSceneObjectsUntilStopped((int) g_5fb5b0, o, flags | 0x200, d3_MatchSceneObjectCallback, st);
 	if (o != 0) {
 		*(int*) (o + 0x1f0) = saved;
 	}

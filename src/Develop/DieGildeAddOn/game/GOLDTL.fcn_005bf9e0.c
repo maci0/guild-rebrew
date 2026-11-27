@@ -26,7 +26,7 @@ extern int g_14ce8e0;
 extern int d2_CurrentElementId;
 extern int g_774654;
 /* ADDRESS: GOLDTL 0x005bf9e0 */
-int __cdecl fcn_005bf9e0(unsigned short* entity)
+int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 {
 	unsigned int data[136];
 	unsigned char evt[0x100];

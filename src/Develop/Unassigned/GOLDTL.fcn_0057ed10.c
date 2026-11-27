@@ -4,7 +4,7 @@
 extern unsigned char* lpGebaeudePROT;
 extern char* g_7746cc;
 
-int __cdecl fcn_0057ed10(int* msg)
+int __cdecl d2_CheckTutMsg1aNotCat12Node74(int* msg)
 {
 	unsigned char* e;
 

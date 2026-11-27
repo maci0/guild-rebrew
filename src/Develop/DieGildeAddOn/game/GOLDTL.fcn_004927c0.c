@@ -25,7 +25,7 @@ double __cdecl log10(double x);
 
 int __cdecl gm_PickWirtshausGuest(int kind);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_0050b710(int a, unsigned char k);
+int __cdecl gm_AmountToUnits(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 float __cdecl gm_RandomFloat01(void);
 
@@ -47,7 +47,7 @@ int __cdecl gm_ResolveWirtshausOffer(unsigned char* e, Deal* o, int kind)
 	o->price = 0;
 	k = gm_PickWirtshausGuest(kind);
 	o->x54 = 0;
-	pr = fcn_0050b710(gm_WalkEntityChain(*(unsigned short*) e), g_773d75);
+	pr = gm_AmountToUnits(gm_WalkEntityChain(*(unsigned short*) e), g_773d75);
 	x = pr;
 	if (10000.0 > x) {
 		x = 10000.0;

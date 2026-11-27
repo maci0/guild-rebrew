@@ -6,7 +6,7 @@ int __cdecl fcn_00502cd0(int, ...);
 int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl gm_GetMsgField(int, int);
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 
 /* ADDRESS: GOLDTL 0x00503a70 */
 int __cdecl fcn_00503a70(int itemId)
@@ -101,7 +101,7 @@ add:
 	if (*(int*) 0x86805c > 0) {
 		p = (char*) 0x868c50;
 		do {
-			f = fcn_0050bb50(itemId, *(unsigned char*) 0x773d75);
+			f = gm_GetSeasonPrice(itemId, *(unsigned char*) 0x773d75);
 			v6++;
 			*(float*) p = f * *(float*) (*(int*) (p - 0x10) + 0x49);
 			p += 0x18;

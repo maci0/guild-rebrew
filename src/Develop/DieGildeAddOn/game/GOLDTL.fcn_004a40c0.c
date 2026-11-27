@@ -26,7 +26,7 @@ typedef struct Calc {
 extern Rec15_699058 g_699058[37];
 extern unsigned char g_773d75;
 
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 float __cdecl eval_ObjektPreis2Credits(int id, int k);
 
 int __cdecl ai_EvalRecipePriceRatios(Calc* p)
@@ -59,7 +59,7 @@ int __cdecl ai_EvalRecipePriceRatios(Calc* p)
 	p->worst = 0;
 	sum = 0;
 	for (k = 0; k < p->count; k++) {
-		p->price[k] = (int) fcn_0050bb50(p->goods[k], (*(char*)&g_773d75));
+		p->price[k] = (int) gm_GetSeasonPrice(p->goods[k], (*(char*)&g_773d75));
 		p->need[k] = (int) eval_ObjektPreis2Credits(p->goods[k], 100);
 		p->ratio[k] = (float) p->price[k] / p->need[k];
 		sum += p->ratio[k];

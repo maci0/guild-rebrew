@@ -18,7 +18,7 @@ void __cdecl fcn_00536bb0(void);
 void __cdecl fcn_0052a960(char*);
 char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl evt_RunScript(char*);
-void __cdecl fcn_004cfa00(int);
+void __cdecl evt_WaitAndCancelScript(int);
 
 void __cdecl cut_RunGfxCutscene(void)
 {
@@ -45,7 +45,7 @@ void __cdecl cut_RunGfxCutscene(void)
 	p = evt_LoadGfxScript(g_68bcec);
 	if (p != 0) {
 		evt_RunScript(p);
-		fcn_004cfa00(*(int*) (p + 0x100));
+		evt_WaitAndCancelScript(*(int*) (p + 0x100));
 	}
 	d2_SuppressOverlay = 0;
 }

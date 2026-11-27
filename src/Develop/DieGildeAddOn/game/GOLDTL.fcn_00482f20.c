@@ -42,7 +42,7 @@ extern float g_100d0f4;
 extern LightState g_100dc20;
 
 char *__cdecl fcn_00502cd0(int, int, int, int, int, ...);
-void __cdecl fcn_00487970(char *, char *, int);
+void __cdecl gm_TryAutoUpgradeBuildingSlots(char *, char *, int);
 void __cdecl ai_RequestAusbauUpgrade(char *, char *, int);
 char *__cdecl gm_NextEntityQueryMatch(void);
 char *__cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -50,7 +50,7 @@ char *__cdecl he_fn_Handlung(void);
 void __cdecl ai_MeisterCollectTrans(char *);
 void __cdecl ai_CollectThiefGoodsResources(char *, char *, int);
 void __cdecl ai_MeisterTradeFernEinkauf(char *, char *);
-void __cdecl fcn_0048cdb0(char *, char *);
+void __cdecl ai_RebalanceCityStock(char *, char *);
 
 void __cdecl ai_CalcMeisterLager(char *meister)
 {
@@ -72,7 +72,7 @@ void __cdecl ai_CalcMeisterLager(char *meister)
 		if (warehouse == 0) {
 			return;
 		}
-		fcn_00487970(warehouse, meister, 0x14);
+		gm_TryAutoUpgradeBuildingSlots(warehouse, meister, 0x14);
 		ai_RequestAusbauUpgrade(warehouse, meister, 0x32);
 		flag = 1;
 		s = (Slot*) lpObjekteINST;
@@ -119,13 +119,13 @@ void __cdecl ai_CalcMeisterLager(char *meister)
 				if (g_100b0f4 * g_100b0e0 * f > (1.0f - f) * g_100d10c * g_100d0f4) {
 					ai_MeisterTradeFernEinkauf(meister, warehouse);
 				} else {
-					fcn_0048cdb0(meister, warehouse);
+					ai_RebalanceCityStock(meister, warehouse);
 				}
 			} else {
 				ai_MeisterTradeFernEinkauf(meister, warehouse);
 			}
 		} else if (g_100b0ac != 0) {
-			fcn_0048cdb0(meister, warehouse);
+			ai_RebalanceCityStock(meister, warehouse);
 		}
 		if (g_100dc20.owner == *(char **) (meister + 0x16c)) {
 			for (i = 0; g_100dc20.count < 4 && i < ai_ResourceCount; i++) {

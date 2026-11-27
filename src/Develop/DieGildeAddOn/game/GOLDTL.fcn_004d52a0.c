@@ -11,7 +11,7 @@ char* __cdecl fcn_00502cd0(int, ...);
 short* __cdecl gm_ResolveParentEntity(short*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 short* __cdecl gm_GetEntityTableEntry(char*);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 
@@ -52,7 +52,7 @@ int __cdecl cut_PlunderBuildingCarts(int* cutscene, char* building, int* attacke
 					cm_SendSellObjekt(-1, *(int*) (ent + 6),
 					    *(unsigned short*) ent, soldQty, g_773d75, 0);
 				}
-				total = (int) (fcn_0050bb50(*(unsigned short*) ent, g_773d75)
+				total = (int) (gm_GetSeasonPrice(*(unsigned short*) ent, g_773d75)
 				    * (float) soldQty + (float) total);
 				ent = gm_NextEntityQueryMatch();
 			}

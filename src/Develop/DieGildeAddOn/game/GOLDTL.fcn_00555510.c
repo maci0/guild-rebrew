@@ -13,7 +13,7 @@ char* __cdecl fcn_00502cd0(int, ...);
 char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl he_FreeAction(char*);
 int __cdecl fcn_00555490(short*, int*, int*);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_AccumulateTyped2(int);
 void __cdecl cm_SendLogAction(unsigned int);
@@ -92,8 +92,8 @@ void __cdecl gm_SimulateWirtshaus(char* action)
 	end = i + 0x180;
 	for (; i < end; i++) {
 		if (fcn_00555490((short*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i]), (int*) ent, &idx) != 0) {
-			x1 = (int) (fcn_0050bb50(0x179, g_773d75) * g_662a08);
-			y1 = (int) (fcn_0050bb50(0x17a, g_773d75) * g_662a08);
+			x1 = (int) (gm_GetSeasonPrice(0x179, g_773d75) * g_662a08);
+			y1 = (int) (gm_GetSeasonPrice(0x17a, g_773d75) * g_662a08);
 			v = gm_RandomMod(4) + 3;
 			w = gm_AccumulateTyped2((int) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[i]));
 			mx = x1;

@@ -9,7 +9,7 @@ extern float g_696550[];
 
 int __cdecl gm_GetSeason(int*);
 void __cdecl d3_SelectSceneContext(int, int);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void* __cdecl evt_LoadGfxScript(char*);
 void* __cdecl evt_FindScriptById(int);
 char __cdecl evt_RequestScriptExit(char*);
@@ -56,7 +56,7 @@ void __cdecl fcn_0052db70(char* buildingRecord)
 				return;
 			}
 			h = d3_CurrentContextIndex; d3_SelectSceneContext(0, 1);
-			obj = fcn_00445600(*(int*) (buildingRecord + 0x61), 0x100, 0, "dummy_RAUCH_0");
+			obj = d3_FindSceneObject(*(int*) (buildingRecord + 0x61), 0x100, 0, "dummy_RAUCH_0");
 			if (obj == 0) {
 				goto unlock;
 			}

@@ -2,7 +2,7 @@ void* __cdecl d3_SelectObjectLod(void*);
 int __cdecl fcn_00458d90(void*, int, int, void*);
 extern int d3_ActiveCamera;
 
-void __cdecl fcn_0043d7c0(void *obj)
+void __cdecl d3_UpdateObjectLodMesh(void *obj)
 {
 	void *r;
 	char buf1[0x40];

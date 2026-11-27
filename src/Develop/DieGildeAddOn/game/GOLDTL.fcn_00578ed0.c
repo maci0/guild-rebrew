@@ -5,7 +5,7 @@ extern void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 extern int __cdecl fcn_004a57a0(char*, int, int, char*, int, int, unsigned int*);
 extern int __cdecl fcn_004f45b0(char*);
 extern int __cdecl gm_WalkEntityChain(int);
-extern int __cdecl fcn_0050b710(int, unsigned char);
+extern int __cdecl gm_AmountToUnits(int, unsigned char);
 extern int __cdecl gm_RandomMod(int);
 extern void __cdecl he_AcceptDeathPactPayment(char*, char*);
 extern void __cdecl he_DeclineDeathPactPayment(char*, char*);
@@ -103,7 +103,7 @@ void __cdecl he_RunDeathPact(char* event)
 				return;
 found_one:
 				ref = fcn_004f45b0((char*) ((found & 0xffff) * 0x21c + (unsigned long)&g_7f4ca0));
-				k = fcn_0050b710(gm_WalkEntityChain(found), g_773d75);
+				k = gm_AmountToUnits(gm_WalkEntityChain(found), g_773d75);
 				*(unsigned short*) (event + 0xc8 + *(int*) (event + 0xb0) * 2) = (unsigned short) found;
 				if (k > ref &&
 				    (*(unsigned char*) ((found & 0xffff) * 0x21c + 0x7f4e6c) & 1) == 0) {

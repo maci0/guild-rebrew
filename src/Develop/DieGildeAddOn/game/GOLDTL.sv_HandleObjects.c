@@ -45,7 +45,7 @@ extern char s_6a3004[];
 extern char s_6a301c[];
 extern int g_6a256c;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-extern char* __cdecl fcn_00445600(int, int, int, char*);
+extern char* __cdecl d3_FindSceneObject(int, int, int, char*);
 extern int __cdecl fcn_0064d41a(char*, char*, ...);
 extern void __cdecl d3_AnimateCameraToNode(char*, int);
 extern int __cdecl fcn_00506380(int, int, int, void*);
@@ -105,7 +105,7 @@ void __cdecl sv_HandleObjects(void)
 	}
 L66a:
 	if (g_7e2714[0] != 0) {
-		p = fcn_00445600(0, 0x60, 0, g_7e2714);
+		p = d3_FindSceneObject(0, 0x60, 0, g_7e2714);
 		if (p != 0) {
 			selected = p;
 			g_7746a4 = p;
@@ -128,7 +128,7 @@ L6d3:
 		goto L744;
 	}
 	if (g_7e2714[0] != 0) {
-		p = fcn_00445600(0, 0x60, 0, g_7e2714);
+		p = d3_FindSceneObject(0, 0x60, 0, g_7e2714);
 		if (p != 0) {
 			selected = p;
 			created = 1;

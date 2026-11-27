@@ -48,7 +48,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl cm_RequestSysMessage(int, Req*);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl d2_DestroyForm(int);
 int* __cdecl fcn_004b3d80(int a, int b, int c);
 void __cdecl fcn_004b5530(int a1, int flags);
@@ -111,7 +111,7 @@ void __cdecl fcn_004b5df0(int flags)
 				m1.x10 = 0;
 				h = cm_RequestSysMessage(10, &m1);
 				while (cm_GetCommandStatus(h) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == b_quit) {
@@ -121,7 +121,7 @@ void __cdecl fcn_004b5df0(int flags)
 				m2.x10 = 1;
 				h = cm_RequestSysMessage(10, &m2);
 				while (cm_GetCommandStatus(h) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 				g_774654 = 1;
 			}
@@ -134,7 +134,7 @@ void __cdecl fcn_004b5df0(int flags)
 		m2.x10 = 0;
 		h = cm_RequestSysMessage(10, &m2);
 		while (cm_GetCommandStatus(h) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 		fcn_004b5530(*p, flags);
 		return;

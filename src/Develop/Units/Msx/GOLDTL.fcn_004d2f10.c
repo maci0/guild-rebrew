@@ -9,7 +9,7 @@ extern char g_68bd78[];
 #include "Develop/Units/Msx/msx.h"
 char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl evt_RunScript(char*);
-void __cdecl fcn_004cfa00(int);
+void __cdecl evt_WaitAndCancelScript(int);
 
 void __cdecl cut_RunCombatFlightOutro(void)
 {
@@ -23,7 +23,7 @@ void __cdecl cut_RunCombatFlightOutro(void)
 	p = evt_LoadGfxScript(g_68bd78);
 	if (p != 0) {
 		evt_RunScript(p);
-		fcn_004cfa00(*(int*) (p + 0x100));
+		evt_WaitAndCancelScript(*(int*) (p + 0x100));
 	}
 	d2_SuppressOverlay = 0;
 }

@@ -36,6 +36,6 @@ int __cdecl evt_RequestScriptExit(char* c)
 		*(int*) (t + 0x28) = -1;
 	}
 	evt_LogScriptError(c, 0, "Script done...");
-	fcn_00429d30(c);
+	evt_FreeScript(c);
 	return 1;
 }

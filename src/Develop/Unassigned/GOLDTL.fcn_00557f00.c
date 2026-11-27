@@ -14,7 +14,7 @@ void __cdecl fcn_00417180(int, char*, int, struct rgba_00557f00, float*, int, in
 
 
 /* ADDRESS: GOLDTL 0x00557f00 */
-void __cdecl fcn_00557f00(char* o)
+void __cdecl he_SpawnTimedRauchEffect(char* o)
 {
 	struct rgba_00557f00 c;
 	float v[4];

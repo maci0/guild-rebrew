@@ -57,9 +57,9 @@ void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
-unsigned int __cdecl fcn_00504f30(int, int);
+unsigned int __cdecl gm_CanBuildBuildingType(int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
-int __cdecl fcn_0050d200(unsigned char*, int);
+int __cdecl gm_CalcBuildingCost(unsigned char*, int);
 void __cdecl fcn_0050bc10(int, unsigned char, char*);
 int __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_0046f940(int, const char*);
@@ -184,7 +184,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 			do {
 				if (gm_GetBuildingTypeCategory(idx) == g_6aa0a8) {
 					p = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[idx];
-					avail = fcn_00504f30(idx, g_774970);
+					avail = gm_CanBuildBuildingType(idx, g_774970);
 					if (avail == 1) {
 						if (p->category != 0x0f && p->category != 6) {
 							id = d2_AddElementToWindow((count % 3) * 0x46 + 0x30, (count / 3) * 0x5a + 0x0f, idx + 0x427, d2_CurrentWindowId);
@@ -192,7 +192,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 							strcpy((char*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id] + 0x0cc)), *(char**) rec);
 							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].flags_1d0)) = 3;
 							*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_1cc)) = 0x54;
-							txt = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), idx);
+							txt = gm_CalcBuildingCost((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), idx);
 							fcn_0050bc10(txt, g_773d75, buf);
 							txt = d2_ShowTxt((count % 3) * 0x46 + 2, (count / 3) * 0x5a + 0x3f, g_6b5c60, d2_CurrentWindowId);
 							d2_SetElementFont(txt, 0x54);
@@ -225,12 +225,12 @@ void __cdecl d2_ShowBuildingMenu(void)
 			}
 			prevIdx = d2_CurrentElementId;
 			if (mode != 0) {
-				txt = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
+				txt = gm_CalcBuildingCost((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
 				if (!d2_CheckFundsAndNotify((int) mode, *(int*) (mode + 0x14), txt, g_773d75)) {
 					goto skip_place;
 				}
 			} else {
-				txt = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
+				txt = gm_CalcBuildingCost((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
 				if (!gm_CheckEntityStock(g_7f4ca0 + g_774970 * 0x21c, txt, g_773d75)) {
 					goto skip_place;
 				}
@@ -253,7 +253,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 					msg.f58 = id;
 				}
 				msg.f5c = i;
-				msg.f60 = fcn_0050d200((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
+				msg.f60 = gm_CalcBuildingCost((unsigned char*) (g_7f4ca0 + g_774970 * 0x21c), i);
 				d3_TransformPoint(obj, (float*) (obj + 0x4c), msg.pos);
 				d3_ComputeObjectYawToTarget(msg.rot, (int) obj);
 				strncpy(msg.name, path, 0x3f);

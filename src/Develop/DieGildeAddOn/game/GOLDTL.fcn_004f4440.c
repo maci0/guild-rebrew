@@ -5,7 +5,7 @@ extern unsigned char g_773d75;
 extern float g_6652d8[];
 
 int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
-int __cdecl fcn_0050b710(int a, unsigned char k);
+int __cdecl gm_AmountToUnits(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 
 /* ADDRESS: GOLDTL 0x004f4440 */
@@ -16,7 +16,7 @@ int __cdecl gm_CalcBribeOrPriceScore(int handle, int value, int mode, int flag, 
 	double bright;
 	int r;
 
-	v = (double) fcn_0050b710(gm_WalkEntityChain(*(unsigned short*) handle), g_773d75);
+	v = (double) gm_AmountToUnits(gm_WalkEntityChain(*(unsigned short*) handle), g_773d75);
 	v = __max(__min(1000000.0, v), 10000.0);
 
 

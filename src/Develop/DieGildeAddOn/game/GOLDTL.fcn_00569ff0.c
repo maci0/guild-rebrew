@@ -51,7 +51,7 @@ int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl he_FreeAction(char*);
 int __cdecl he_HasNoActiveAction0x62(char*);
 float __cdecl fcn_004ff210(short, int);
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_GetMsgField(char*, char*);
 unsigned char* __cdecl fcn_00508e40(int);
@@ -399,7 +399,7 @@ void __cdecl he_RunEinbruch(char* e)
 						cm_SendSellObjekt(*(int*) (pb + 2), *(int*) (q + 2),
 						        *(unsigned short*) cnt2, *(int*) (cnt2 + 2),
 						        (char) g_773d75);
-						flag = (int) (fcn_0050bb50(*(unsigned short*) cnt2,
+						flag = (int) (gm_GetSeasonPrice(*(unsigned short*) cnt2,
 						        (char) g_773d75) * (float) num + (float) flag);
 					}
 					cnt2 = (char*) gm_NextEntityQueryMatch();

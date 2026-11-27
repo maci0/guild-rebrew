@@ -83,7 +83,7 @@ int __cdecl io_OpenRegistryKey(const char *sub, int mode);
 void __cdecl io_WriteRegistryString(int key, int name, char *value);
 void __cdecl io_CloseRegistryKey(int key);
 char *__cdecl d3_FormatGuid(GUID *guid, char *out);
-int __stdcall fcn_0041c460(int a1, int a2, int a3, int a4, int a5, int a6);
+int __stdcall dd_EnumDevicesCallback(int a1, int a2, int a3, int a4, int a5, int a6);
 
 /* ADDRESS: GOLD 0x0041c830 */
 BOOL __stdcall fcn_0041c830(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -114,19 +114,19 @@ BOOL __stdcall fcn_0041c830(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 				d3d_LastResult = ddraw1->lpVtbl->QueryInterface(ddraw1, &IID_IDirectDraw4, (void **) &ddraw4);
 				if (d3d_LastResult != 0) {
-					fcn_00418e90("D:\\develop\\Units\\dd_vesa\\Dd_vesa.c", 939,
+					d3d_LogResultError("D:\\develop\\Units\\dd_vesa\\Dd_vesa.c", 939,
 						"ddraw1->lpVtbl->QueryInterface(ddraw1, &IID_IDirectDraw4, &ddraw4)");
 				}
 				if (d3d_LastResult == 0) {
 					d3d_LastResult = ddraw4->lpVtbl->QueryInterface(ddraw4, &IID_IDirect3D3, (void **) &d3d3);
 					if (d3d_LastResult != 0) {
-						fcn_00418e90("D:\\develop\\Units\\dd_vesa\\Dd_vesa.c", 944,
+						d3d_LogResultError("D:\\develop\\Units\\dd_vesa\\Dd_vesa.c", 944,
 							"ddraw4->lpVtbl->QueryInterface(ddraw4, &IID_IDirect3D3, &d3d3)");
 					}
 					if (d3d_LastResult == 0) {
-						d3d_LastResult = d3d3->lpVtbl->EnumDevices(d3d3, fcn_0041c460, (void *) DialogArgument1);
+						d3d_LastResult = d3d3->lpVtbl->EnumDevices(d3d3, dd_EnumDevicesCallback, (void *) DialogArgument1);
 						if (d3d_LastResult != 0) {
-							fcn_00418e90("D:\\develop\\Units\\dd_vesa\\Dd_vesa.c", 947,
+							d3d_LogResultError("D:\\develop\\Units\\dd_vesa\\Dd_vesa.c", 947,
 								"d3d3->lpVtbl->EnumDevices(d3d3, d3d_EnumDeviceCallback, (void *)dd_BitPlanes)");
 						}
 						dd_ComResult = (int) d3d3->lpVtbl->Release(d3d3);
@@ -181,9 +181,9 @@ BOOL __stdcall fcn_0041c830(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			SendMessageA(dd_DeviceCombo, CB_RESETCONTENT, 0, 0);
 			d3d = (IDirect3D3 *) DialogArgument5;
 			dd_DeviceCount = 0;
-			d3d_LastResult = d3d->lpVtbl->EnumDevices(d3d, fcn_0041c460, (void *) DialogArgument1);
+			d3d_LastResult = d3d->lpVtbl->EnumDevices(d3d, dd_EnumDevicesCallback, (void *) DialogArgument1);
 			if (d3d_LastResult != 0) {
-				fcn_00418e90("D:\\develop\\Units\\dd_vesa\\Dd_vesa.c", 889,
+				d3d_LogResultError("D:\\develop\\Units\\dd_vesa\\Dd_vesa.c", 889,
 					"dd_D3D3->lpVtbl->EnumDevices(dd_D3D3, d3d_EnumDeviceCallback, (void *)dd_BitPlanes)");
 			}
 			for (i = 0; i < dd_DeviceCount; i++) {

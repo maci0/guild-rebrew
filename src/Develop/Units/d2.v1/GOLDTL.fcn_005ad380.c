@@ -42,7 +42,7 @@ extern char s_6aa464[];
 int __cdecl he_HasNoActiveAction0x62(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_0050c550(char*, char*);
+int __cdecl gm_HasLevelFor(char*, char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -78,7 +78,7 @@ int __cdecl d2_ConfirmEinbruch(int unused, char* e)
 		fcn_00526120(buf, 0);
 		return 0;
 	}
-	if (fcn_0050c550(g_7746c4, e) == 0) {
+	if (gm_HasLevelFor(g_7746c4, e) == 0) {
 		fcn_00526120((char*) g_14abab4, 0);
 		return 0;
 	}

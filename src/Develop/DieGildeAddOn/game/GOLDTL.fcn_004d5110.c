@@ -7,7 +7,7 @@ char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_AccumulateTyped2(char* entity);
 int __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 int __cdecl cm_SendSellObjekt(int a1, int a2, int a3, int a4, char a5, int a6);
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 unsigned int __cdecl cut_RandMod(unsigned int n);
 int __cdecl _ftol(void);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -39,7 +39,7 @@ int __cdecl gm_TransferAndSellAssets(char* bld1, char* bld2, char* entity, char*
 				delay = 1;
 			}
 			cm_SendSellObjekt(*(int*) (p1 + 2), *(int*) (p2 + 2), (unsigned int) (unsigned short) *(short*) match, delay, g_773d75, 0);
-			v = (int) (fcn_0050bb50(*(unsigned short*) match, g_773d75) * delay + v);
+			v = (int) (gm_GetSeasonPrice(*(unsigned short*) match, g_773d75) * delay + v);
 			match = gm_NextEntityQueryMatch();
 		}
 	}

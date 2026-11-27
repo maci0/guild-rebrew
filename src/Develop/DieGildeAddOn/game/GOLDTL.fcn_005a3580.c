@@ -18,7 +18,7 @@ extern float g_662d70[4];
 
 char* __cdecl _strupr(char*);
 int __cdecl sprintf(char*, const char*, ...);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 Obj* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl d3_ApplyObjectAnimation(Obj*, char*, int);
@@ -43,7 +43,7 @@ Obj* __cdecl d3_SpawnCityMarkerObject(char* name)
 	}
 	_strupr(low);
 	sprintf(buf, "dummy_%s", low);
-	e = fcn_00445600(0, 0x140, 0, buf);
+	e = d3_FindSceneObject(0, 0x140, 0, buf);
 	if (e == 0) {
 		return 0;
 	}

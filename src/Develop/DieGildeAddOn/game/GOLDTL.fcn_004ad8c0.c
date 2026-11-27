@@ -26,7 +26,7 @@ int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl gm_IsInRange(int);
 int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 float __cdecl gm_RandomFloat01(void);
 char *__cdecl cm_GetCommandResult(int);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
@@ -107,7 +107,7 @@ void __cdecl gm_ReplenishOfficeCandidates(void)
 					if (cm_GetCommandStatus(h) != 0) {
 						break;
 					}
-					fcn_00535960();
+					cm_StepCommandQueue();
 				} while (1);
 			}
 			if (cm_GetCommandStatus(h) != 1) {

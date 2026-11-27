@@ -10,7 +10,7 @@ int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 void __cdecl io_ClearInputState(void);
 
-void __cdecl fcn_004cfa00(int id)
+void __cdecl evt_WaitAndCancelScript(int id)
 {
 	int r;
 

@@ -45,7 +45,7 @@ Group* __cdecl fcn_00502cd0(int a, int b, int c, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0046f940(int, char*);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 Item* __cdecl gm_NextEntityQueryMatch(void);
 
@@ -90,9 +90,9 @@ int __cdecl fcn_004d5490(int x, int y, int mode)
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].font) = 0x56;
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].width) = 0x50;
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[lbl].value_06c) = 1;
-			io_FormatTextBuffer(text, "%T", (int) fcn_0050bb50(e->id, g_773d75) * e->count);
+			io_FormatTextBuffer(text, "%T", (int) gm_GetSeasonPrice(e->id, g_773d75) * e->count);
 			fcn_0046f940(lbl, text);
-			total = (int)(fcn_0050bb50(e->id, g_773d75) * e->count + total);
+			total = (int)(gm_GetSeasonPrice(e->id, g_773d75) * e->count + total);
 			n++;
 		}
 	}

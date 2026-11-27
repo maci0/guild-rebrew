@@ -13,7 +13,7 @@ typedef struct Seq {
 void __cdecl fcn_004a8770(void);
 void __cdecl fcn_004a8640(void);
 void __cdecl fcn_004a7be0(void);
-void __cdecl fcn_004a8810(void);
+void __cdecl gm_PickCardGameBet(void);
 void __cdecl fcn_004a7d40(void);
 void __cdecl fcn_004a86b0(void);
 void __cdecl fcn_004a7b40(void);
@@ -32,7 +32,7 @@ short __cdecl gm_StepCardGameRound(void)
 		((Seq*)g_1007cd4)->state++;
 		fcn_004a8640();
 		fcn_004a7be0();
-		fcn_004a8810();
+		gm_PickCardGameBet();
 		return 0;
 	case 2:
 		((Seq*)g_1007cd4)->state = 3;
@@ -47,7 +47,7 @@ short __cdecl gm_StepCardGameRound(void)
 	case 4:
 		((Seq*)g_1007cd4)->state = 5;
 		fcn_004a7be0();
-		fcn_004a8810();
+		gm_PickCardGameBet();
 		return (((Seq*)g_1007cd4)->xb0 ? 0 : 0x20) | 9;
 	case 5:
 		fcn_004a7d40();

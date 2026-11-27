@@ -5,16 +5,16 @@ extern Mult664260 g_664260[7];
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x00493ee0 */
-int __cdecl fcn_00493ee0(unsigned short* a, unsigned short* b, int key)
+int __cdecl gm_CalcTortureCost(unsigned short* entityA, unsigned short* entityB, int key)
 {
-	int v;
+	int baseCost;
 	int i;
 
-	v = (int) ((gm_WalkEntityChain(*a) + gm_WalkEntityChain(*b)) * 0.0005f);
+	baseCost = (int) ((gm_WalkEntityChain(*entityA) + gm_WalkEntityChain(*entityB)) * 0.0005f);
 	for (i = 0; i < 7; i++) {
 		if (g_664260[i].key == key) {
-			return g_664260[i].mult * v;
+			return g_664260[i].mult * baseCost;
 		}
 	}
-	return v * 10;
+	return baseCost * 10;
 }

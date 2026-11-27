@@ -13,7 +13,7 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-void __cdecl fcn_005b1c90(int h);
+void __cdecl hp_RemoveProdEntry(int h);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl gv_FreeFieldAllocs(int* slot);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -29,7 +29,7 @@ int __cdecl gm_FreeGebaeude(unsigned char* o)
 		return -2;
 	}
 	if (*(unsigned short*) (o + 0x27) != 0xffff && (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (o + 0x27)].entity_type) == 6) {
-		fcn_005b1c90(*(int*) (o + 1));
+		hp_RemoveProdEntry(*(int*) (o + 1));
 	}
 	switch (*o) {
 	case 0x1e:

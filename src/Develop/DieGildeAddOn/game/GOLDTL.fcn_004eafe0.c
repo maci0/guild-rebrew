@@ -16,14 +16,14 @@ unsigned char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl amt_NotifyOfficeLost(Rec* r, int type);
 int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned char* eb, int x1, int x2);
 int __cdecl cm_GetCommandStatus(int v);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl amt_calc_zuenfte(int n);
 void __cdecl fcn_004ea620(void);
 void __cdecl amt_FillOffice0x22FromRichest(void);
 
 /* ADDRESS: GOLDTL 0x004eafe0 */
-void __cdecl fcn_004eafe0(void)
+void __cdecl amt_UpdateAllOffices(void)
 {
 	Rec out[7];
 	unsigned char* q;
@@ -92,7 +92,7 @@ void __cdecl fcn_004eafe0(void)
 			amt_NotifyOfficeLost((Rec*) q, tt);
 			v = amt_SendOfficeCommand(out[i].id, 0, 0, 4, 0xff);
 			while (v != -1 && cm_GetCommandStatus(v) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		skip:
 			;

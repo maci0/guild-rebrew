@@ -24,7 +24,7 @@ int __cdecl gm_GetBuildingTypeCategory(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl fcn_00516b70(void);
 void __cdecl fcn_00516be0(void);
-char* __cdecl fcn_00445600(char*, int, char*, char*);
+char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 int __cdecl gm_CheckEntityType(char*);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void (__cdecl*)(void));
@@ -73,7 +73,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 	    || (g_7746c8 != 0 && (unsigned char*) g_7746c8 != building)) {
 		return;
 	}
-	obj = (unsigned char*) fcn_00445600(0, 0x180, 0, s_6a1fdc);
+	obj = (unsigned char*) d3_FindSceneObject(0, 0x180, 0, s_6a1fdc);
 	if (obj != 0) {
 		if (!g_776664) {
 			d3_SetSubtreeVisible((int) obj, 0);

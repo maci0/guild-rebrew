@@ -46,8 +46,8 @@ extern pos14_7f4c00 gm_GameTime;
 extern double g_664e60;
 
 int __cdecl gm_GetBuildingTypeCategory(int);
-int __cdecl fcn_00504f30(int, int);
-int __cdecl fcn_0050d170(int);
+int __cdecl gm_CanBuildBuildingType(int, int);
+int __cdecl gm_GetTypeProductValue(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(void*, int);
 int __cdecl gm_CheckEntityStock(void*, int, char);
@@ -63,7 +63,7 @@ void __cdecl cm_SendTraceEnd(char*);
 int __cdecl fcn_0065f220(const char*, const char*);
 
 /* ADDRESS: GOLDTL 0x005c30e0 */
-void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
+void __cdecl d2_RunBuildingUpgradeDialog(unsigned char* buildingEntry)
 {
 	int quotedCost;
 	GOLDTL_Msg5c30 msg;
@@ -85,13 +85,13 @@ void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 	kind = gm_GetBuildingTypeCategory(*(unsigned char*) buildingEntry);
 	if (g_774800 == 0) {
 		if (kind == 1 || kind == 4 || kind == 8) {
-			if (fcn_00504f30(*(unsigned char*) buildingEntry + 1, g_774970) != 1) {
+			if (gm_CanBuildBuildingType(*(unsigned char*) buildingEntry + 1, g_774970) != 1) {
 				io_FormatTextBuffer(buf, 0x17d6);
 				fcn_00526120(buf, 0);
 				return;
 			}
 		} else {
-			if (fcn_00504f30(*(unsigned char*) buildingEntry + 1, g_774970) != 1) {
+			if (gm_CanBuildBuildingType(*(unsigned char*) buildingEntry + 1, g_774970) != 1) {
 				io_FormatTextBuffer(buf, 0x17d9);
 				fcn_00526120(buf, 0);
 				return;
@@ -114,7 +114,7 @@ void __cdecl fcn_005c30e0(unsigned char* buildingEntry)
 			return;
 		}
 	}
-	quotedCost = (int) (fcn_0050d170(*(unsigned char*) buildingEntry + 1) * g_664e60);
+	quotedCost = (int) (gm_GetTypeProductValue(*(unsigned char*) buildingEntry + 1) * g_664e60);
 	io_FormatTextBuffer(buf, 0x17d5, quotedCost, buildingEntry, *(unsigned char*) buildingEntry * 14 + 0x49c);
 	if (kind != 3 && kind != 5) {
 		if (fcn_00526120(buf, 0x11) == 0) {

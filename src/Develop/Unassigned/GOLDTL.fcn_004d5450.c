@@ -10,11 +10,11 @@ typedef struct
 
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_004d5450(unsigned char* a1)
+int __cdecl cut_GetBuildingCombatType(unsigned char* building)
 {
 	BUILDING_PROTOTYPE * tile;
 
-	tile = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[a1[0]];
+	tile = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[building[0]];
 	if (((char) tile->category) == 0x13) {
 		return 0;
 	}

@@ -65,7 +65,7 @@ static __inline void send_hit(int id)
 
 
 /* ADDRESS: GOLDTL 0x005dcbb0 */
-int __cdecl fcn_005dcbb0(char* e, char* a2)
+int __cdecl gm_UseSkillModifier82Stats0And4(char* e, char* request)
 {
 	Req req;
 	char text[0x100];
@@ -91,7 +91,7 @@ int __cdecl fcn_005dcbb0(char* e, char* a2)
 			return 1;
 		}
 	} else {
-		r = gm_LookupEntityRecordById(*(int*) (a2 + 4));
+		r = gm_LookupEntityRecordById(*(int*) (request + 4));
 		if (r != 0) {
 			if (r->kind == 6 || r->kind == 7) {
 				io_FormatTextBuffer(msg, 0xff6);

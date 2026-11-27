@@ -24,7 +24,7 @@ extern int g_100e720[];
 extern int g_100e760[];
 extern unsigned char g_773d75;
 
-float __cdecl fcn_0050bb50(int id, unsigned char k);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char k);
 int __cdecl gm_GetMsgObjektField(char* b, int id);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -58,7 +58,7 @@ void __cdecl ai_CollectGoodsResources(char* a, char* b)
 			g_100b0c0[ai_ResourceCount].unk_10 = 0;
 			g_100b0c0[ai_ResourceCount].requested = 0;
 			g_100b0c0[ai_ResourceCount].unk_18 = 0;
-			g_100b0c0[ai_ResourceCount].price = fcn_0050bb50(g_100e760[j], g_773d75);
+			g_100b0c0[ai_ResourceCount].price = gm_GetSeasonPrice(g_100e760[j], g_773d75);
 			g_100b0c0[ai_ResourceCount].allocated = 0;
 			g_100b0c0[ai_ResourceCount].stock = 0;
 			g_100b0c0[ai_ResourceCount].state_30 = 0x81;
@@ -81,7 +81,7 @@ void __cdecl ai_CollectGoodsResources(char* a, char* b)
 			g_100b0c0[ai_ResourceCount].unk_10 = 0;
 			g_100b0c0[ai_ResourceCount].requested = 0;
 			g_100b0c0[ai_ResourceCount].unk_18 = 0;
-			g_100b0c0[ai_ResourceCount].price = fcn_0050bb50(g_100e760[j], g_773d75);
+			g_100b0c0[ai_ResourceCount].price = gm_GetSeasonPrice(g_100e760[j], g_773d75);
 			g_100b0c0[ai_ResourceCount].allocated = 0;
 			g_100b0c0[ai_ResourceCount].stock = 0;
 			g_100b0c0[ai_ResourceCount].state_30 = 0x81;

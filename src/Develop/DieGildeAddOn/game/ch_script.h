@@ -31,7 +31,7 @@ int __cdecl CharacterIdle(int** charakter_argument);
 int __cdecl StopCharacter(void* a1);
 int __cdecl KillCharacterAnimations(char** a1);
 char* __cdecl DummyBlocked(char** a, int* range);
-int __cdecl fcn_0040cd70(void);
+int __cdecl CharacterCount(void);
 int __cdecl LookAtCharacter(char** a, char** b);
 int __cdecl LookAtObject(char** a, char** b);
 int __cdecl SetCharacterToDummy(char** a, char** b);

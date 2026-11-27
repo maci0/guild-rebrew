@@ -3,7 +3,7 @@
 extern char* g_9b0dc0[];
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char* __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl cut_RandMod(int);
@@ -26,7 +26,7 @@ char* __cdecl cut_SpawnCutsceneSpectator(unsigned short* entity, char* prefix, i
 	pos[2] = 0.0f;
 	pos[3] = 0.0f;
 	fcn_0064d41a(name, "%s_%02i", prefix, idx + 1);
-	w = fcn_00445600(0, 0x100, 0, name);
+	w = d3_FindSceneObject(0, 0x100, 0, name);
 	if (w == 0)
 		goto fail;
 	d3_TransformPoint(w, w + 0x4c, pos);

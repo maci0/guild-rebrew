@@ -12,7 +12,7 @@ int __cdecl fcn_004f1790(char* a, void* e);
 void __cdecl cm_SendCopyEntityData(int a1);
 
 /* ADDRESS: GOLDTL 0x004831f0 */
-void __cdecl fcn_004831f0(char* obj)
+void __cdecl ai_StartGrabpflege(char* obj)
 {
 	ENTITY_RECORD* p;
 	char* e;

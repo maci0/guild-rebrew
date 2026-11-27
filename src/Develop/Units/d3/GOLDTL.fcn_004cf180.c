@@ -6,7 +6,7 @@ extern float g_664ed0;           /* 1/170 */
 extern float g_664ed4;           /* 170.0 */
 extern double g_6629c8;          /* 1.0 */
 
-int __cdecl fcn_004ce590(int a1);
+int __cdecl gm_LookupWeaponSpec(int a1);
 int* __cdecl sb_PlayVoice(char* bank, const char* name, int loop, int pan,
                           int vol, int a, int b);
 int __cdecl fcn_00418000(int a1, float* pos, int n, float a4, float a5,
@@ -18,7 +18,7 @@ int __cdecl d3_SpawnRockDebrisEffect(int a1, float* pos, int n, float a4, float 
 int __cdecl fcn_00417d00(int a1, float* pos, int n, float a4, float a5,
                          float a6, float a7, int a8);
 unsigned int __cdecl cut_RandMod(unsigned int n);
-void __cdecl fcn_004cfc40(char* a1, int a2, int a3);
+void __cdecl d3_ScheduleActionTimer(char* a1, int a2, int a3);
 int __cdecl fcn_004d4790(char* e);
 int __cdecl ch_QueuePlayAnimation(char* e, const char* name, int param);
 char __cdecl d3_DestroyObject(void* object);
@@ -41,7 +41,7 @@ int __cdecl fcn_004cf180(void)
     unsigned char color[4];
 
     count = 0;
-    r = (char*) fcn_004ce590(0x174);
+    r = (char*) gm_LookupWeaponSpec(0x174);
     p = (int*) 0x9ba1c0;
     do {
         if (*p != 0) {
@@ -95,9 +95,9 @@ int __cdecl fcn_004cf180(void)
                                            (1.0 - dist * (1.0f / 170.0f)));
                                 *(int*) (*q + 0x24) -= t;
                                 if (*(int*) (*q + 0x16c) == *(int*) &g_772e9c)
-                                    fcn_004cfc40((char*) *q, t, 1);
+                                    d3_ScheduleActionTimer((char*) *q, t, 1);
                                 else
-                                    fcn_004cfc40((char*) *q, t, 2);
+                                    d3_ScheduleActionTimer((char*) *q, t, 2);
                                 if (!fcn_004d4790((char*) e)) {
                                     ch_QueuePlayAnimation((char*) m, "Explosion_s", 1);
                                 }

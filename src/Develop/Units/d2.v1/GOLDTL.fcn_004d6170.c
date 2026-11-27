@@ -37,7 +37,7 @@ int __cdecl fcn_004d5490(int, int, int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl fcn_0050d490(char*);
 void __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 char* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl gm_IncrementMissionActionCount(char*, int);
 void __cdecl cm_SendSetGebBesitzer(int, int, int);
@@ -264,7 +264,7 @@ int __cdecl fcn_004d6170(char* ctx)
 						cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 6), *(unsigned short*) cur,
 							*(int*) (cur + 0xe), g_773d75, 0);
 					}
-					fcn_0050bb50(*(unsigned short*) cur, g_773d75);
+					gm_GetSeasonPrice(*(unsigned short*) cur, g_773d75);
 				}
 				cur = gm_NextEntityQueryMatch();
 			}
@@ -337,7 +337,7 @@ sync:
 					if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
 						cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) ent, n, g_773d75, 0);
 					}
-					sum = (int) (fcn_0050bb50(*(unsigned short*) ent, g_773d75) * (double) n + (double) sum);
+					sum = (int) (gm_GetSeasonPrice(*(unsigned short*) ent, g_773d75) * (double) n + (double) sum);
 					ent = gm_NextEntityQueryMatch();
 				}
 			}
@@ -448,7 +448,7 @@ reduce:
 							if (g_68b79c == *(int*) (g_7f4ca4 + g_774970 * 0x21c)) {
 								cm_SendSellObjekt(*(int*) (rec + 2), *(int*) (cur + 2), *(unsigned short*) p, n, g_773d75, 0);
 							}
-							sum = (int) (fcn_0050bb50(*(unsigned short*) p, g_773d75) * (double) n + (double) sum);
+							sum = (int) (gm_GetSeasonPrice(*(unsigned short*) p, g_773d75) * (double) n + (double) sum);
 							p = gm_NextEntityQueryMatch();
 						}
 					}

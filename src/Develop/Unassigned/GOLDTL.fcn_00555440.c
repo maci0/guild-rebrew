@@ -9,7 +9,7 @@
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_00555440(char* e)
+void __cdecl he_InitSimulateWirtshaus(char* e)
 {
 	*(pos14_7f4c00*) (e + 0x52) = (*(pos14_7f4c00*)&gm_GameTime);
 	*(short*) (e + 0x56) = 0x16;

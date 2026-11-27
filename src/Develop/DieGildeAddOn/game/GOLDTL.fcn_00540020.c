@@ -95,9 +95,9 @@ extern unsigned char g_14cf950[];
 
 int __cdecl fcn_00509570(void*);
 int __cdecl gm_GetSeason(int*);
-int __cdecl fcn_0052a310(pos14_7f4c00*);
+int __cdecl gm_QuerySeason(pos14_7f4c00*);
 void __cdecl gm_UpdateDaylightSchedule(pos14_7f4c00*);
-int __cdecl fcn_004ec9e0(void);
+int __cdecl ahm_DealPlayerPrototypes(void);
 void* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00469e30(int);
@@ -106,10 +106,10 @@ void __cdecl fcn_00473150(void*);
 void __cdecl sv_WaitForNetworkSync(int);
 void __cdecl d2_DestroyScrollPerga(void);
 void __cdecl gm_BuildDealSummary(int, void*);
-void __cdecl fcn_004fd400(short*, int*);
+void __cdecl gm_FindRichestEntity(short*, int*);
 void* __cdecl cm_RequestSysMessage(int, void*);
 int __cdecl cm_GetCommandStatus(void*);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl tb_SetCallbackPaused(int, int);
 int __cdecl he_StartHandlungSearch(int, ...);
 void __cdecl cm_SendCopyEntityData(void*);
@@ -186,8 +186,8 @@ void __cdecl fcn_00540020(void)
 	if ((g_7747b0 & 4) && (g_774950 > 1)) {
 		pos.clock.a++;
 	}
-	season = fcn_0052a310((pos14_7f4c00*) &pos);
-	fcn_004ec9e0();
+	season = gm_QuerySeason((pos14_7f4c00*) &pos);
+	ahm_DealPlayerPrototypes();
 	*(float*) (v5 + 0x58) = 0.5f;
 	*(float*) (v5 + 0x5c) = 1.0f;
 	*(float*) (v5 + 0x60) = 1.0f;
@@ -213,14 +213,14 @@ void __cdecl fcn_00540020(void)
 
 	gm_BuildDealSummary(g_774970 & 0xffff, arr);
 	gm_UpdateDaylightSchedule((pos14_7f4c00*) &pos);
-	g_7e4314 = fcn_0052a310((pos14_7f4c00*) &pos);
-	fcn_004fd400(&pos.out, &i);
+	g_7e4314 = gm_QuerySeason((pos14_7f4c00*) &pos);
+	gm_FindRichestEntity(&pos.out, &i);
 	i = 0;
 	tm.stamp = pos.clock.a;
 	tm.now = (*(int (__stdcall **) (void)) 0x662318) ();
 	wait = cm_RequestSysMessage(0, &tm);
 	while (cm_GetCommandStatus(wait) == 0) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	tb_SetCallbackPaused(0x538060, 1);
 

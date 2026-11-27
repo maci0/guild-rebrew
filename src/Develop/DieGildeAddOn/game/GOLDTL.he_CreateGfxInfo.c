@@ -5,7 +5,7 @@
 extern Rec7dc6e0 g_7dc6e0[64];
 
 void __cdecl d3_SelectSceneContext(int, int);
-char* __cdecl fcn_00445600(char*, int, char*, char*);
+char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char* __cdecl he_CreateAnimatedEntityMarker(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x00546720 */
@@ -28,7 +28,7 @@ void __cdecl he_CreateGfxInfo(unsigned char* p, char* name, char* entity)
 		goto done;
 	slot = &g_7dc6e0[i];
 	d3_SelectSceneContext(0, 1);
-	created = fcn_00445600(0, 0x40, entity, 0);
+	created = d3_FindSceneObject(0, 0x40, entity, 0);
 	if (created == 0) {
 		sprintf(buf, "he_CreateGfxInfo(): invalid parent :%s", entity);
 		d3_SelectSceneContext(saved, 1);

@@ -8,7 +8,7 @@ extern pos14_7f4c00 gm_GameTime;
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 void* __cdecl he_StartHandlungSearch(int, ...);
-void* __cdecl fcn_004ec7d0(unsigned char*);
+void* __cdecl ahm_GetWorkshopOwner(unsigned char*);
 
 #pragma pack(push, 2)
 typedef struct {
@@ -38,7 +38,7 @@ void __cdecl fcn_005473a0(void)
 		return;
 	}
 	do {
-		if (he_StartHandlungSearch(2, 0, 0x98, 3, *(int*) ((char*) h + 1)) == 0 && (slot = fcn_004ec7d0((unsigned char*) h)) != 0) {
+		if (he_StartHandlungSearch(2, 0, 0x98, 3, *(int*) ((char*) h + 1)) == 0 && (slot = ahm_GetWorkshopOwner((unsigned char*) h)) != 0) {
 			memset(&msg, 0, sizeof(msg));
 			msg.type = 0x98;
 			msg.seed = *(int*) (slot + 4);

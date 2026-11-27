@@ -15,7 +15,7 @@ extern unsigned char g_773d75;
 char* __cdecl gm_FindRecordById(int);
 char* __cdecl gm_SearchTable67(int);
 char* __cdecl gm_LookupEntityRecordById(int);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
@@ -55,7 +55,7 @@ int __cdecl ai_RunBuyObject(int unused, Msg* m, Msg* ev)
 		return 0;
 	}
 	if (m->d == 0x39) {
-		n = (int) fcn_0050bb50(m->a, g_773d75);
+		n = (int) gm_GetSeasonPrice(m->a, g_773d75);
 		gm_ResolveEntityById(0, (void**) (&home), 0, m->c);
 		if (home == 0) {
 			return 0;
@@ -64,6 +64,6 @@ int __cdecl ai_RunBuyObject(int unused, Msg* m, Msg* ev)
 		cm_SendSellObjekt(id, -1, m->a, m->b, g_773d75, 0);
 		return 0x39;
 	}
-	cm_SendSellObjekt(id, -1, m->a, m->b, g_773d75, (int) fcn_0050bb50(m->a, g_773d75));
+	cm_SendSellObjekt(id, -1, m->a, m->b, g_773d75, (int) gm_GetSeasonPrice(m->a, g_773d75));
 	return 0xb;
 }

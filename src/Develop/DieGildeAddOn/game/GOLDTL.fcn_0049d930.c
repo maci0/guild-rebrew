@@ -28,7 +28,7 @@ int __cdecl ai_FindMissingBuildingUpgrade(int* a, int* b, char* q, int c);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
 float __cdecl gm_GetCityStatsSummary(char* p);
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_0050d170(int n);
+int __cdecl gm_GetTypeProductValue(int n);
 
 /* ADDRESS: GOLDTL 0x0049d930 */
 int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, Blk24* o2)
@@ -116,7 +116,7 @@ int __cdecl ai_StartBuergermeisterRathaus(int a1, char* e, char* q, Blk24* o1, B
 	} else {
 		return 0;
 	}
-		if (!((float) fcn_0050d170(kind) * 0.4f > (float) val)) {
+		if (!((float) gm_GetTypeProductValue(kind) * 0.4f > (float) val)) {
 			o1->kind = 4;
 			o1->a = kind;
 			o1->b = 1;

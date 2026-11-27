@@ -8,7 +8,7 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_CheckEntityType(char*);
 int __cdecl gm_IsWarehouse(char*);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
 int __cdecl gm_PickRandomBuildingPoint(float* out)
@@ -24,7 +24,7 @@ int __cdecl gm_PickRandomBuildingPoint(float* out)
 			list[n++] = e;
 	}
 	e = list[gm_RandomMod(n)];
-	r = fcn_00445600(*(int*) (e + 0x61), 0x300, 0, g_68149c);
+	r = d3_FindSceneObject(*(int*) (e + 0x61), 0x300, 0, g_68149c);
 	if (r != 0) {
 		d3_TransformPoint(r, r + 0x4c, out);
 	} else {

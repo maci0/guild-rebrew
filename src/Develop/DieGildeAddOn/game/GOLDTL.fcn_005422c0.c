@@ -29,7 +29,7 @@ void __cdecl fcn_004c6090(char*, int, int, int);
 void __cdecl fcn_004f3ef0(char*);
 void __cdecl gm_AdjustGebaeudeCondition(char*, int);
 unsigned char* __cdecl fcn_0050dc90(unsigned char*);
-unsigned char* __cdecl fcn_004ec7d0(unsigned char*);
+unsigned char* __cdecl ahm_GetWorkshopOwner(unsigned char*);
 int __cdecl fcn_004ee160(char*);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl gm_SearchTable67(int);
@@ -42,12 +42,12 @@ void __cdecl gm_HasGuildHall(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl fcn_00505d00(char*, int*);
-float __cdecl fcn_0050b8d0(unsigned char*, int, int, int);
+float __cdecl gm_GetWorkforceOutput(unsigned char*, int, int, int);
 void* __cdecl sim_StartEntityQueryByType(unsigned char*);
 unsigned char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_CalcBuildingRoundBalance(unsigned char*, int, int*);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_SumQueryEntryValues(int, char);
@@ -229,7 +229,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 		if (*(unsigned short*) (p + 0x27) == (unsigned short) arg) {
 			tile = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(*(unsigned short*) (p + 0x27))]);
 			if (*(((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p])) == 0x1e) {
-				r = (unsigned char*) fcn_004ec7d0(p);
+				r = (unsigned char*) ahm_GetWorkshopOwner(p);
 				if (r != 0) {
 					v = fcn_004ee160((char*) p);
 					cm_RequestTransferCurrencyNoKill(*(int*) (r + 4), *(int*) (tile + 4), g_773d75, v);
@@ -239,7 +239,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 				if (fcn_00505d00((char*) p, (int*) msg)) {
 					for (a = 0; a < 2; a++) {
 						for (j = 0; j < 12; j++) {
-							f = fcn_0050b8d0(tile, *p, -1, a);
+							f = gm_GetWorkforceOutput(tile, *p, -1, a);
 							v = (int) (((double) *(int*) (p + 0x3d) * 0.01) * f);
 							id2 = ((int*) msg)[1 + a * 12 + j];
 							if (id2 == 0xffff) {
@@ -355,7 +355,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 						}
 					}
 					for (j = 0; j < 12; j++) {
-						f = fcn_0050b8d0(tile, *p, -1, 0);
+						f = gm_GetWorkforceOutput(tile, *p, -1, 0);
 						v = (int) (((double) *(int*) (p + 0x3d) * 0.01) * f);
 						id2 = ((int*) msg)[0x19 + j];
 						if (id2 != 0xffff) {
@@ -375,7 +375,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 	}
 
 	if (count > 0x20) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 		g_662068(0x14);
 		count = 0;
 	}
@@ -405,7 +405,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 		}
 		p = (unsigned char*) gm_FindNextFilteredEntity();
 		if (count > 0x20) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 			g_662068(0x14);
 			count = 0;
 		}

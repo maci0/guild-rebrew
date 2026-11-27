@@ -7,7 +7,7 @@ void __cdecl he_StartAction0x88(void);
 void __cdecl he_RunHeimsuchung(void);
 void __cdecl he_StartHauchDesVerfalls(void);
 void __cdecl he_RunHauchDesVerfalls(void);
-void __cdecl fcn_00579690(void);
+void __cdecl he_StartRohstoffsuchen(void);
 void __cdecl he_RunRohstoffsuchen(void);
 void __cdecl he_StartGrabpflege(void);
 void __cdecl he_RunGrabpflege(void);
@@ -17,7 +17,7 @@ void __cdecl fcn_00579320(void);
 void __cdecl fcn_00579460(void);
 void __cdecl he_StartAction0x8e(void);
 void __cdecl he_RunDeathPactCollection(void);
-void __cdecl fcn_0057a260(void);
+void __cdecl he_StartUpgraden(void);
 void __cdecl he_RunUpgraden(void);
 void __cdecl he_StartAction0x90(void);
 void __cdecl he_RunAction0x90(void);
@@ -33,10 +33,10 @@ void __cdecl fcn_0057b1f0(void);
 int __cdecl he_RegisterFriedhofHandlers(void)
 {
 	if (he_RegisterHandler(0x88, he_StartAction0x88, he_RunHeimsuchung) || he_RegisterHandler(0x89, he_StartHauchDesVerfalls, he_RunHauchDesVerfalls)
-	    || he_RegisterHandler(0x8c, fcn_00579690, he_RunRohstoffsuchen) || he_RegisterHandler(0x8d, he_StartGrabpflege, he_RunGrabpflege)
+	    || he_RegisterHandler(0x8c, he_StartRohstoffsuchen, he_RunRohstoffsuchen) || he_RegisterHandler(0x8d, he_StartGrabpflege, he_RunGrabpflege)
 	    || he_RegisterHandler(0x8a, he_StartDeathPact, he_RunDeathPact) || he_RegisterHandler(0x8b, fcn_00579320, fcn_00579460)
 	    || he_RegisterHandler(0x8d, he_StartGrabpflege, he_RunGrabpflege) || he_RegisterHandler(0x8e, he_StartAction0x8e, he_RunDeathPactCollection)
-	    || he_RegisterHandler(0x8f, fcn_0057a260, he_RunUpgraden) || he_RegisterHandler(0x90, he_StartAction0x90, he_RunAction0x90)
+	    || he_RegisterHandler(0x8f, he_StartUpgraden, he_RunUpgraden) || he_RegisterHandler(0x90, he_StartAction0x90, he_RunAction0x90)
 	    || he_RegisterHandler(0x91, fcn_0057ae40, he_UpdateNecromancerFog) || he_RegisterHandler(0x93, he_StartAction0x93, he_RunAction0x93)
 	    || he_RegisterHandler(0x94, fcn_0057b770, he_RunFriedhofStealAction) || he_RegisterHandler(0x92, fcn_0057b000, fcn_0057b1f0)) {
 		return 1;

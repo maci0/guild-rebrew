@@ -8,7 +8,7 @@ int __cdecl fcn_004f39b0(int);
 unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
-int __cdecl fcn_0050d320(char*, unsigned char);
+int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
@@ -49,7 +49,7 @@ int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char*
 				if (n != 0) {
 					t = list[gm_RandomMod(n)];
 					if (*(int*) (e + 0x194) < 4) {
-						funds = fcn_0050d320(e, g_773d75);
+						funds = gm_GetSeasonTreasury(e, g_773d75);
 						f1 = gm_WalkEntityChain(*(unsigned short*) e) * 0.005f;
 						amt = (int) (v1 * ((200.0f - gm_CalcEntityFavor(*(unsigned short*) e,
 							*(unsigned short*) (t + 0x27), 1)) * 0.01f) * f1);

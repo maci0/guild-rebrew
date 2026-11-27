@@ -9,41 +9,41 @@ float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl amt_GetRoleLevel(int);
 
 /* ADDRESS: GOLDTL 0x004a5c40 */
-unsigned int __cdecl fcn_004a5c40(unsigned short* source, unsigned int count, unsigned int a2,
-				  float lo, float hi, int range, unsigned short* out)
+unsigned int __cdecl ai_CollectEligibleEntities(unsigned short* source, unsigned int count, unsigned int actionKind,
+				  float minFavor, float maxFavor, int range, unsigned short* out)
 {
 	unsigned int query[20];
 	int step;
 	int base;
-	int flag;
+	int checkFavor;
 	unsigned int have;
 	unsigned int tries;
 	int cand;
 	int hit;
 	int diff;
-	float f;
+	float favor;
 
 	step = *(int*) ((gm_RandomMod(0x10) & 0xffff) * 4 + 0x664398);
 	memset(query, 0, 0x50);
 	memset((char*) query + 0x1c, 0xff, 0x20);
 	*(int*) ((char*) query + 0x14) = 2;
-	flag = 0;
+	checkFavor = 0;
 	have = 0;
 	if (g_77261c != 0) {
-		query[1] = a2;
+		query[1] = actionKind;
 		query[16] = 0;
 		if (fcn_005cf720(*source, *(unsigned short*) g_77261c, query, 0) != 0) {
 			have = 1;
 			*out = *(unsigned short*) g_77261c;
 		}
 	}
-	if ((lo > *(double*) 0x662950 || hi < *(double*) 0x662c38) && lo < hi) {
-		flag = 1;
+	if ((minFavor > *(double*) 0x662950 || maxFavor < *(double*) 0x662c38) && minFavor < maxFavor) {
+		checkFavor = 1;
 	}
 	base = amt_GetRoleLevel(*(unsigned char*) ((char*) source + 0x166));
 	if (have < count) {
 		do {
-			query[1] = a2;
+			query[1] = actionKind;
 			if (have != 0) {
 				*(unsigned short*) ((char*) query + 0x1c + have * 2) = out[have - 1];
 			} else {
@@ -57,9 +57,9 @@ unsigned int __cdecl fcn_004a5c40(unsigned short* source, unsigned int count, un
 					break;
 				}
 				if (fcn_005cf720(*source, cand, query, 0) != 0) {
-					if (flag != 0) {
-						f = gm_CalcEntityFavor(cand, *source, 1);
-						if (f < lo || f > hi) {
+					if (checkFavor != 0) {
+						favor = gm_CalcEntityFavor(cand, *source, 1);
+						if (favor < minFavor || favor > maxFavor) {
 							continue;
 						}
 					}

@@ -1,7 +1,7 @@
 char *__cdecl gm_LookupEntityRecordById(int); void __cdecl io_FormatTextBuffer(char *, int, ...);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, char *);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 #include "client_data.h"
@@ -75,8 +75,8 @@ void __cdecl gm_HandleAllianceCommand(int cmd, int obj, int arr, int id, int ext
 	} case 0x65786563: {
 			char *e;
 
-			fh = fcn_0050bb50(0x17a, g_773d75);
-			fy = fcn_0050bb50(0x179, g_773d75);
+			fh = gm_GetSeasonPrice(0x17a, g_773d75);
+			fy = gm_GetSeasonPrice(0x179, g_773d75);
 			step = (int) (fh + fy);
 			total = 0;
 			io_FormatTextBuffer(text1, 0x189a, obj, step);

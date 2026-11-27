@@ -3,7 +3,7 @@
 // fcn_0040cd70 — count nodes with [n+0x88]==[0x67a370].
 
 /* ADDRESS: GOLDTL 0x0040dca0 */
-int __cdecl fcn_0040cd70(void)
+int __cdecl CharacterCount(void)
 {
 	int i;
 	int n;

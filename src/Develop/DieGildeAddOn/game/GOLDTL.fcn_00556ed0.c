@@ -41,7 +41,7 @@ int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 int __cdecl fcn_00508280(char*, int*, float*);
 float __cdecl gm_GetEntityHealth(char*);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
-int __cdecl fcn_00556e80(unsigned short*);
+int __cdecl he_IsEntityEligibleForIllness(unsigned short*);
 void __cdecl fcn_005498b0(char*, char*, char*, char*, int, float);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
@@ -100,7 +100,7 @@ void __cdecl RunSimKrankheiten(char* s)
 	count = 12;
 	do {
 		p = &g_7f4ca0[idx];
-		if (fcn_00556e80((unsigned short*) p) != 0) {
+		if (he_IsEntityEligibleForIllness((unsigned short*) p) != 0) {
 			f = gm_RandomFloat01() * g_662cf8;
 			home = g_7f4ca0[idx].home;
 			y = 0.0f;

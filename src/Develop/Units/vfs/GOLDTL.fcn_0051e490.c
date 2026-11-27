@@ -23,7 +23,7 @@ void __cdecl m_FreeTracked(void*);
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
 void __cdecl fcn_0041bb70(unsigned int, char*, char*, char*);
 int __cdecl gm_WalkEntityChain(unsigned short);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x0051e490 */
 int __cdecl fcn_0051e490(void* outputStream, int a1)
@@ -124,7 +124,7 @@ int __cdecl fcn_0051e490(void* outputStream, int a1)
 		if (vfs_fwrite(&((ENTITY_RECORD*)g_7f4ca0)[g_774970].unk_00d, 1, 1, outputStream) <= 0) {
 			goto fail;
 		}
-		tmp = fcn_0050b710(gm_WalkEntityChain(g_774970), g_773d75);
+		tmp = gm_AmountToUnits(gm_WalkEntityChain(g_774970), g_773d75);
 		if (vfs_fwrite(&tmp, 4, 1, outputStream) <= 0) {
 			goto fail;
 		}

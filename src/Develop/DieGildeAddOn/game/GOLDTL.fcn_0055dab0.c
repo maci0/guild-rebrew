@@ -31,7 +31,7 @@ extern int d3_CurrentContextIndex;
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindRecordById(int);
-void __cdecl fcn_0055d6e0(char*, char*);
+void __cdecl he_ApplyTransportSpeedModifiers(char*, char*);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl cm_RequestMoveObjekt(int, int, int);
@@ -66,7 +66,7 @@ void __cdecl he_StepTransportCarrier(char* e)
 	if (r == 0) {
 		return;
 	}
-	fcn_0055d6e0(e, r);
+	he_ApplyTransportSpeedModifiers(e, r);
 	if (e[0xd0] == 0) {
 		cm_SendCancelCharacterActions(*(int*) (r + 2));
 		if (!gm_IsWarehouse(b)) {

@@ -5,7 +5,7 @@ extern unsigned short *__cdecl gm_StartFilteredEntitySearch(int, ...);
 extern void *__cdecl gm_FindRecordById(int);
 extern int __cdecl gm_IsWarehouse(unsigned char *);
 extern char *__cdecl he_PickRandomSceneObject(char *);
-extern void __cdecl fcn_0055d6e0(char *, char *);
+extern void __cdecl he_ApplyTransportSpeedModifiers(char *, char *);
 extern void *__cdecl fcn_00502cd0(int, int, ...);
 extern char *__cdecl d3sm_GetObjectSuperMap(char *);
 extern char __cdecl fcn_0045b990(char *, float *, int *, int *, float *);
@@ -63,7 +63,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 			v6 = (char *)gm_FindRecordById(*(int *)(transportEvent + 0xac));
 		if (v6) {
 			v19 = *(int *)(v6 + 0x3b);
-			fcn_0055d6e0(transportEvent, v6);
+			he_ApplyTransportSpeedModifiers(transportEvent, v6);
 			v7 = (int)d3sm_GetObjectSuperMap((char *)v19);
 			*(char *)(transportEvent + 0xd0) = 1;
 			fcn_0045b990((char *)v7, l_pos, &l_a, &l_b, &l_c);
@@ -103,7 +103,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 		v4 = (char *)fcn_00502cd0(0, 2, 7, 1, *(int *)(transportEvent + 0xac));
 	if (v4) {
 		v6 = *(char **)(v4 + 0x3b);
-		fcn_0055d6e0(transportEvent, v4);
+		he_ApplyTransportSpeedModifiers(transportEvent, v4);
 		v8 = *(char **)(v6 + 0x128);
 		if (v8 && v8[9] == '-') {
 			*(int *)(transportEvent + 0xd8) = *(int *)(v8 + 0x134);

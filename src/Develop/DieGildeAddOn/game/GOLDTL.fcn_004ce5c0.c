@@ -3,7 +3,7 @@
 
 unsigned short* __cdecl fcn_00502cd0(int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_004ce590(int);
+int __cdecl gm_LookupWeaponSpec(int);
 
 int __cdecl gm_GetUnitWeaponSpec(char* obj)
 {
@@ -11,10 +11,10 @@ int __cdecl gm_GetUnitWeaponSpec(char* obj)
 	int r;
 
 	for (p = fcn_00502cd0(*(int*) (obj + 0x178), 1, 5); p != 0; p = gm_NextEntityQueryMatch()) {
-		r = fcn_004ce590(*p);
+		r = gm_LookupWeaponSpec(*p);
 		if (r != 0) {
 			return r;
 		}
 	}
-	return fcn_004ce590(0);
+	return gm_LookupWeaponSpec(0);
 }

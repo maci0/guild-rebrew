@@ -2,7 +2,7 @@
 
 void __cdecl gv_SpawnEntities(void*);
 
-void __cdecl fcn_0044c440(char* p)
+void __cdecl gv_SpawnIfPending(char* p)
 {
 	if (p == 0) {
 		return;

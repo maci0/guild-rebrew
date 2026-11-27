@@ -10,7 +10,7 @@ extern blk24 g_68bef4;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-char* __cdecl fcn_00445600(int, int, int, int*);
+char* __cdecl d3_FindSceneObject(int, int, int, int*);
 void __cdecl d3_ApplyWorldTransformToObject(int, char*, char*);
 void __cdecl d3_SetObjectVisible(int, int);
 char* __cdecl ch_CreateAction(int, int, int);
@@ -26,7 +26,7 @@ void __cdecl gm_StartGroundPickupAnimation(int* a)
 		return;
 	e = gm_LookupEntityRecordIn32SlotTable(a[0]);
 	ch_CancelActionQueue((char*) *(int*) (e + 0x184));
-	fcn_00445600(0, 0x40, 0, a + 4);
+	d3_FindSceneObject(0, 0x40, 0, a + 4);
 	h = *(int*) (e + 0x1ac);
 	if (h != 0) {
 		q = *(char**) (*(char**) (e + 0x184) + 0x34);

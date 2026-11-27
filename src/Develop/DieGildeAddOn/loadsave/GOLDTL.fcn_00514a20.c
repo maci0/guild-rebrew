@@ -20,7 +20,7 @@ extern char* g_14ac5fc;
 
 void __cdecl fcn_00514570(char* s);
 void __cdecl main_PumpWindowMessages(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl ls_SendGame(char* s);
 void __cdecl cm_RequestSysMessage(int kind, Msg* m);
 void __cdecl ls_LoadSavegame(char* s, int n);
@@ -40,7 +40,7 @@ int __cdecl ls_LoadNetworkGame(char* name)
 	g_77494c = 0;
 	do {
 		main_PumpWindowMessages();
-		fcn_00535960();
+		cm_StepCommandQueue();
 	} while (g_77494c == 0);
 	if (g_77494c & 1) {
 		sprintf(save, g_6a1e8c, name);
@@ -55,7 +55,7 @@ int __cdecl ls_LoadNetworkGame(char* name)
 	}
 	while (!(g_77494c & 4)) {
 		main_PumpWindowMessages();
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	ls_LoadSavegame(path, 5);
 	sv_WaitForNetworkSync(0x24087);

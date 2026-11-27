@@ -36,7 +36,7 @@ void __cdecl cm_SendTraceEnd(char* s);
 void __cdecl d2_DestroyForm(int dlg);
 
 /* ADDRESS: GOLDTL 0x005bf0d0 */
-int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
+int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 {
 	unsigned int count;
 	unsigned int ids[6];
@@ -111,7 +111,7 @@ int __cdecl fcn_005bf0d0(unsigned short* obj, unsigned char* record)
 	ids[4] = 2;
 	ids[5] = 0x18;
 	fcn_005c9220(ids);
-	while (main_RunFrameLoop((void*) fcn_005bf0d0, 0x677c7) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunSabotageDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0 || g_100f1dc == 1) {
 			g_774654 = 1;
 		}

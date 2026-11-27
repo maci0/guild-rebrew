@@ -11,7 +11,7 @@ extern unsigned char g_773d75;
 char* __cdecl gm_FindPublicTreasury(int k);
 void __cdecl cm_SendLogAction(char* s);
 void __cdecl cm_SendTraceEnd(char* s);
-int __cdecl fcn_0050d170(int k);
+int __cdecl gm_GetTypeProductValue(int k);
 void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
@@ -47,7 +47,7 @@ int __cdecl ai_RunBuergermeisterRathaus(unsigned char* rec, unsigned char* obj, 
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	*(int*) (msg + 0x58) = *(int*) (out + 4);
 	cm_SendLogAction((char*) 0x67eb10);
-	cm_RequestMoveCredits(-1, *(int*) (dialog + 2), (*(char*)&g_773d75), (int) (fcn_0050d170(*(int*) (obj + 4)) * 0.3f));
+	cm_RequestMoveCredits(-1, *(int*) (dialog + 2), (*(char*)&g_773d75), (int) (gm_GetTypeProductValue(*(int*) (obj + 4)) * 0.3f));
 	cm_SendCopyEntityData(msg);
 	cm_SendTraceEnd((char*) 0x67eb10);
 	return 0x31;

@@ -209,7 +209,7 @@ char __cdecl d3_SelectSceneContext(int index, char force)
         ddraw = (void*)I32(0x633414);
         d3d_LastResult = (*(int(__stdcall**)(void*))(*(char**)ddraw + 0x2c))(ddraw);
         if (d3d_LastResult != 0) {
-            fcn_00418e90("D:\\develop\\Units\\d3\\d3_interface.c", 0x2aa, "d3d_D3D->lpVtbl->EvictManagedTextures(d3d_D3D)");
+            d3d_LogResultError("D:\\develop\\Units\\d3\\d3_interface.c", 0x2aa, "d3d_D3D->lpVtbl->EvictManagedTextures(d3d_D3D)");
         }
     }
     U8(0x6339db) = 1;

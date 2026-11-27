@@ -6,7 +6,7 @@ extern unsigned short g_774970;
 void __cdecl fcn_004e48b0(void);
 void __cdecl d3_DestroyObject(int);
 void __cdecl fcn_004230e0(int);
-void __cdecl fcn_0044c440(int);
+void __cdecl gv_SpawnIfPending(int);
 char* __cdecl gm_LookupEntityRecordById(int);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl ch_DestroyCharacter(int);
@@ -51,7 +51,7 @@ void __cdecl fcn_004d2a60(int a0)
 	}
 	v = *(int*) 0x772f0c;
 	if (v) {
-		fcn_0044c440(v);
+		gv_SpawnIfPending(v);
 		*(int*) 0x772f0c = 0;
 	}
 	q = (int*) 0x9b4bc4;

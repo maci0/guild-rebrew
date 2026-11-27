@@ -71,7 +71,7 @@ void __cdecl fcn_00416980(void)
 		d3d_LastResult = ((int (__stdcall*)(void*, void*, void*, int, void*)) (*(int**) surface)[25])
 			(surface, 0, descriptor, 0x11, 0);
 		if (d3d_LastResult != 0) {
-			fcn_00418e90("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xea5,
+			d3d_LogResultError("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xea5,
 				"snow_tex->surf->lpVtbl->Lock(snow_tex->surf, 0, &snow_ddsd, DDLOCK_WAIT|DDLOCK_READONLY, NULL)");
 			if (d3d_LastResult != 0) {
 				goto release_texture;
@@ -81,13 +81,13 @@ void __cdecl fcn_00416980(void)
 			surface = texture->com60;
 			d3d_LastResult = ((int (__stdcall*)(void*, void**)) (*(int**) surface)[20])(surface, &palette_object);
 			if (d3d_LastResult != 0) {
-				fcn_00418e90("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xeae,
+				d3d_LogResultError("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xeae,
 					"snow_tex->surf->lpVtbl->GetPalette(snow_tex->surf, &lppal)");
 				if (d3d_LastResult != 0) {
 					surface = texture->com60;
 					d3d_LastResult = ((int (__stdcall*)(void*, void*)) (*(int**) surface)[32])(surface, 0);
 					if (d3d_LastResult != 0) {
-						fcn_00418e90("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xeb2,
+						d3d_LogResultError("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xeb2,
 							"snow_tex->surf->lpVtbl->Unlock(snow_tex->surf, NULL)");
 					}
 					goto release_texture;
@@ -96,7 +96,7 @@ void __cdecl fcn_00416980(void)
 			d3d_LastResult = ((int (__stdcall*)(void*, int, int, int, void*)) (*(int**) palette_object)[4])
 				(palette_object, 0, 0, 256, palette);
 			if (d3d_LastResult != 0) {
-				fcn_00418e90("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xeb8,
+				d3d_LogResultError("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xeb8,
 					"lppal->lpVtbl->GetEntries(lppal, 0, 0, 256, pal)");
 			}
 		}
@@ -197,7 +197,7 @@ source_ready:
 		surface = texture->com60;
 		d3d_LastResult = ((int (__stdcall*)(void*, void*)) (*(int**) surface)[32])(surface, 0);
 		if (d3d_LastResult != 0) {
-			fcn_00418e90("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xf36,
+			d3d_LogResultError("D:\\develop\\Units\\d3_tools\\d3_tools.c", 0xf36,
 				"snow_tex->surf->lpVtbl->Unlock(snow_tex->surf, NULL)");
 		}
 		fcn_0045fbb0(texture);

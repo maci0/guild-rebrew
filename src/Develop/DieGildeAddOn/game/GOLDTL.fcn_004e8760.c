@@ -14,7 +14,7 @@ typedef struct {
 // SIZE 0x18
 
 #include "Develop/DieGildeAddOn/game/aemter.h"
-int __cdecl fcn_004c6b60(char*);
+int __cdecl cm_SendSwapOfficeOccupants(char*);
 
 int __cdecl amt_SendSameOfficeCommand(char* x, unsigned char* firstEntity, unsigned char* secondEntity)
 {
@@ -36,5 +36,5 @@ int __cdecl amt_SendSameOfficeCommand(char* x, unsigned char* firstEntity, unsig
 	message[4] = a2.c0;
 	message[5] = b2.c0;
 	*(int*) (message + 6) = 6;
-	return fcn_004c6b60(message);
+	return cm_SendSwapOfficeOccupants(message);
 }

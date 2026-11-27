@@ -15,108 +15,108 @@ int __cdecl gm_LookupSpecialObjectRecord(int, char*);
 void __cdecl fcn_005dbe90(char*);
 
 /* ADDRESS: GOLDTL 0x005dd5a0 */
-unsigned int __cdecl fcn_005dd5a0(ENTITY_RECORD_VIEW* a0, unsigned int* a1)
+unsigned int __cdecl gm_LowerTargetStandingWithPeers(ENTITY_RECORD_VIEW* actor, unsigned int* request)
 {
-	char v10[256];
+	char pickerTitle[256];
 	char messageText[2048];
-	unsigned int v8[20];
-	ENTITY_RECORD_VIEW* v12[3];
-	char v13[4];
-	int v14;
-	ENTITY_RECORD_VIEW* v4;
-	int v5;
-	int v6;
-	unsigned char v2;
+	unsigned int query[20];
+	ENTITY_RECORD_VIEW* peers[3];
+	char itemSlot[4];
+	int remaining;
+	ENTITY_RECORD_VIEW* target;
+	int slotIdx;
+	int idxOrDelta;
+	unsigned char entityType;
 
-	a1[4] = 1;
-	v2 = a0->entity_type;
-	if (v2 == 6) {
-		for (v6 = 0; v6 < 0x14; v6++) {
-			v8[v6] = 0;
+	request[4] = 1;
+	entityType = actor->entity_type;
+	if (entityType == 6) {
+		for (idxOrDelta = 0; idxOrDelta < 0x14; idxOrDelta++) {
+			query[idxOrDelta] = 0;
 		}
-		for (v6 = 0; v6 < 8; v6++) {
-			v8[v6 + 7] = 0xffffffff;
+		for (idxOrDelta = 0; idxOrDelta < 8; idxOrDelta++) {
+			query[idxOrDelta + 7] = 0xffffffff;
 		}
-		io_FormatTextBuffer(v10, 0x9c);
-		v8[2] = *(unsigned int*) &g_666018;
-		v8[0] = 0;
-		v8[1] = 0x400;
-		v8[4] = 6;
-		v8[3] = g_66601c;
-		v4 = (ENTITY_RECORD_VIEW*) fcn_005cd440((int*) v8, v10, 0, 0);
+		io_FormatTextBuffer(pickerTitle, 0x9c);
+		query[2] = *(unsigned int*) &g_666018;
+		query[0] = 0;
+		query[1] = 0x400;
+		query[4] = 6;
+		query[3] = g_66601c;
+		target = (ENTITY_RECORD_VIEW*) fcn_005cd440((int*) query, pickerTitle, 0, 0);
 	} else {
-		v4 = (ENTITY_RECORD_VIEW*) gm_LookupEntityRecordById(a1[1]);
+		target = (ENTITY_RECORD_VIEW*) gm_LookupEntityRecordById(request[1]);
 	}
-	if (!v4) {
+	if (!target) {
 		return 0;
 	}
-	v6 = (gm_HasActiveSpecialObject((void*) a0, 0x2c5) != 0) + 1;
-	v5 = gm_RandomMod(0x300) & 0xffff;
-	v14 = 0x300;
+	idxOrDelta = (gm_HasActiveSpecialObject((void*) actor, 0x2c5) != 0) + 1;
+	slotIdx = gm_RandomMod(0x300) & 0xffff;
+	remaining = 0x300;
 	do {
-		if (v5 != v4->entity_index && v5 != a0->entity_index) {
-			if (((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5].entity_index != 0xffff &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5].entity_type < 10 &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5].class_166 != 0) {
-				v12[0] = &((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5];
+		if (slotIdx != target->entity_index && slotIdx != actor->entity_index) {
+			if (((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_index != 0xffff &&
+			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_type < 10 &&
+			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].class_166 != 0) {
+				peers[0] = &((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx];
 				break;
 			}
 		}
-		v14 -= 1;
-		v5 = (v5 + 1) % 0x300;
-	} while (v14);
-	v5 = gm_RandomMod(0x300) & 0xffff;
-	v14 = 0x300;
+		remaining -= 1;
+		slotIdx = (slotIdx + 1) % 0x300;
+	} while (remaining);
+	slotIdx = gm_RandomMod(0x300) & 0xffff;
+	remaining = 0x300;
 	do {
-		if (v5 != v4->entity_index && v5 != a0->entity_index &&
-		    v5 != v12[0]->entity_index) {
-			if (((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5].entity_index != 0xffff &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5].entity_type < 10 &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5].class_166 != 0) {
-				v12[1] = &((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5];
+		if (slotIdx != target->entity_index && slotIdx != actor->entity_index &&
+		    slotIdx != peers[0]->entity_index) {
+			if (((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_index != 0xffff &&
+			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_type < 10 &&
+			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].class_166 != 0) {
+				peers[1] = &((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx];
 				break;
 			}
 		}
-		v5 = (v5 + 7) % 0x300;
-		v14 -= 1;
-	} while (v14);
-	v5 = gm_RandomMod(0x300) & 0xffff;
-	for (v14 = 0x300; v14 != 0; v14--) {
-		if (v5 != v4->entity_index && v5 != a0->entity_index &&
-		    v5 != v12[0]->entity_index && v5 != v12[1]->entity_index) {
-			if (((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5].entity_index != 0xffff &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5].entity_type < 10 &&
-			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5].class_166 != 0) {
-				v12[2] = &((ENTITY_RECORD_VIEW*) g_7f4ca0)[v5];
+		slotIdx = (slotIdx + 7) % 0x300;
+		remaining -= 1;
+	} while (remaining);
+	slotIdx = gm_RandomMod(0x300) & 0xffff;
+	for (remaining = 0x300; remaining != 0; remaining--) {
+		if (slotIdx != target->entity_index && slotIdx != actor->entity_index &&
+		    slotIdx != peers[0]->entity_index && slotIdx != peers[1]->entity_index) {
+			if (((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_index != 0xffff &&
+			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].entity_type < 10 &&
+			    ((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx].class_166 != 0) {
+				peers[2] = &((ENTITY_RECORD_VIEW*) g_7f4ca0)[slotIdx];
 				break;
 			}
 		}
-		v5 = (v5 + 0xd) % 0x300;
+		slotIdx = (slotIdx + 0xd) % 0x300;
 	}
-	v6 *= -0x14;
-	cm_RequestCopyEntityData(v4->entity_id, v12[0]->entity_id, v6, 1);
-	cm_RequestCopyEntityData(v4->entity_id, v12[1]->entity_id, v6, 1);
-	cm_RequestCopyEntityData(v4->entity_id, v12[2]->entity_id, v6, 1);
-	if (v4->entity_type == 6 || v4->entity_type == 7) {
-		io_FormatTextBuffer(messageText, 0xfec, v12[0]->entity_index,
-		                    v12[1]->entity_index, v12[2]->entity_index);
-		he_PostEntityMessage(v4->entity_id, 0xffffffff, messageText, 1, 0x5fb, 0);
+	idxOrDelta *= -0x14;
+	cm_RequestCopyEntityData(target->entity_id, peers[0]->entity_id, idxOrDelta, 1);
+	cm_RequestCopyEntityData(target->entity_id, peers[1]->entity_id, idxOrDelta, 1);
+	cm_RequestCopyEntityData(target->entity_id, peers[2]->entity_id, idxOrDelta, 1);
+	if (target->entity_type == 6 || target->entity_type == 7) {
+		io_FormatTextBuffer(messageText, 0xfec, peers[0]->entity_index,
+		                    peers[1]->entity_index, peers[2]->entity_index);
+		he_PostEntityMessage(target->entity_id, 0xffffffff, messageText, 1, 0x5fb, 0);
 	}
-	io_FormatTextBuffer(messageText, 0xfed, v4->entity_index);
-	for (v6 = 0; v6 < 3; v6++) {
-		v2 = v12[v6]->entity_type;
-		if (v2 == 6 || v2 == 7) {
-			he_PostEntityMessage(v12[v6]->entity_id, 0xffffffff, messageText, 0,
+	io_FormatTextBuffer(messageText, 0xfed, target->entity_index);
+	for (idxOrDelta = 0; idxOrDelta < 3; idxOrDelta++) {
+		entityType = peers[idxOrDelta]->entity_type;
+		if (entityType == 6 || entityType == 7) {
+			he_PostEntityMessage(peers[idxOrDelta]->entity_id, 0xffffffff, messageText, 0,
 			             0x5fb, 0);
 		}
 	}
-	if (a0->entity_type != 6) {
+	if (actor->entity_type != 6) {
 		return 1;
 	}
-	v6 = gm_LookupSpecialObjectRecord((int) *(unsigned short*) *a1, v13);
-	io_FormatTextBuffer(messageText, 0xfe8, *(unsigned short*) (v6 + 0x18) + 1,
-	                    v12[0]->entity_index, v12[1]->entity_index,
-	                    v12[2]->entity_index);
+	idxOrDelta = gm_LookupSpecialObjectRecord((int) *(unsigned short*) *request, itemSlot);
+	io_FormatTextBuffer(messageText, 0xfe8, *(unsigned short*) (idxOrDelta + 0x18) + 1,
+	                    peers[0]->entity_index, peers[1]->entity_index,
+	                    peers[2]->entity_index);
 	fcn_005dbe90(messageText);
 	return 1;
 }

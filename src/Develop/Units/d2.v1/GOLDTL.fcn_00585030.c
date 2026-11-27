@@ -54,7 +54,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
-void* __cdecl fcn_004ec7d0(unsigned char*);
+void* __cdecl ahm_GetWorkshopOwner(unsigned char*);
 int __cdecl he_GetActionProgress(char*, int*, float*, int);
 int __cdecl ahm_PickRandomUnknownRecipe(int);
 int __cdecl he_SendEvent096(char*, int*, int);
@@ -93,7 +93,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 	int dlg;
 
 	e = (char*) alchemyObjectArg;
-	data = fcn_004ec7d0((unsigned char*) alchemyObjectArg);
+	data = ahm_GetWorkshopOwner((unsigned char*) alchemyObjectArg);
 	records = *(int**) (e + 0x65);
 	prev = he_GetActionProgress(e, &owner, &frac, 0);
 	stamp = g_6b7fac;

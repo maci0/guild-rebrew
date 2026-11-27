@@ -7,26 +7,26 @@ void __cdecl m_FreeTracked(void*);
 
 extern struct Node* g_774a78;
 
-int __cdecl fcn_005b1c90(int id)
+int __cdecl hp_RemoveProdEntry(int id)
 {
 	Node* prev;
-	Node* n;
+	Node* node;
 
 	prev = 0;
-	for (n = g_774a78; n != 0; n = n->next) {
-		if (n->id == id) {
+	for (node = g_774a78; node != 0; node = node->next) {
+		if (node->id == id) {
 			break;
 		}
-		prev = n;
+		prev = node;
 	}
-	if (n == 0) {
+	if (node == 0) {
 		return -1;
 	}
 	if (prev != 0) {
-		prev->next = n->next;
+		prev->next = node->next;
 	} else {
-		g_774a78 = n->next;
+		g_774a78 = node->next;
 	}
-	m_FreeTracked(n);
+	m_FreeTracked(node);
 	return 0;
 }

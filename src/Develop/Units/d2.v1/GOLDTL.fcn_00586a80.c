@@ -7,7 +7,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-char* __cdecl fcn_004ec7d0(char*);
+char* __cdecl ahm_GetWorkshopOwner(char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -30,7 +30,7 @@ int __cdecl d2_ConfirmFireAlchemist(char* a, int* unused)
 	char* p;
 
 	result = 0;
-	if (fcn_004ec7d0(a) == 0) {
+	if (ahm_GetWorkshopOwner(a) == 0) {
 		return 0;
 	}
 	h = fcn_00470820(0, 0, g_6a93e0);
@@ -46,7 +46,7 @@ int __cdecl d2_ConfirmFireAlchemist(char* a, int* unused)
 	b2 = d2_GetWindowListItem(h, 2, s + 1);
 	g_100f1dc = -1;
 	do {
-		p = fcn_004ec7d0(a);
+		p = ahm_GetWorkshopOwner(a);
 		if (p == 0) {
 			g_774654 = 1;
 			main_RunFrameLoop(d2_ConfirmFireAlchemist, 0x20007);

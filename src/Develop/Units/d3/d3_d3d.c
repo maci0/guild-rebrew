@@ -14,7 +14,7 @@ void __cdecl d3d_PrecacheTexture(void* t)
         device, 0, t);
     d3d_LastResult = result;
     if (result != 0) {
-        fcn_00418e90("D:\\develop\\Units\\d3\\d3_d3d.c", 0x167,
+        d3d_LogResultError("D:\\develop\\Units\\d3\\d3_d3d.c", 0x167,
             "d3d_Device->lpVtbl->SetTexture(d3d_Device, 0, t)");
     }
     device = d3d_Device;
@@ -22,7 +22,7 @@ void __cdecl d3d_PrecacheTexture(void* t)
         device, 4, 0x1c4, (void*) d3d_PrecacheBuffer, 3, 0);
     d3d_LastResult = result;
     if (result != 0) {
-        fcn_00418e90("D:\\develop\\Units\\d3\\d3_d3d.c", 0x168,
+        d3d_LogResultError("D:\\develop\\Units\\d3\\d3_d3d.c", 0x168,
             "d3d_Device->lpVtbl->DrawPrimitive(d3d_Device, D3DPT_TRIANGLELIST, D3D_VERTEX_STRUCT, (void*)d3d_PrecacheBuffer, 3, 0)");
     }
 }
@@ -37,7 +37,7 @@ void __cdecl fcn_00438780(void)
     result = ((int (__stdcall*)(void*)) (*(void***) device)[10])(device);
     d3d_LastResult = result;
     if (result != 0) {
-        fcn_00418e90("D:\\develop\\Units\\d3\\d3_d3d.c", 0x4f0,
+        d3d_LogResultError("D:\\develop\\Units\\d3\\d3_d3d.c", 0x4f0,
             "d3d_Device->lpVtbl->EndScene(d3d_Device)");
     }
 }

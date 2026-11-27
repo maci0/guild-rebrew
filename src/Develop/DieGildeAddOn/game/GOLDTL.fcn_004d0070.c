@@ -20,7 +20,7 @@ extern double g_6640e8;
 extern double g_664ee8;
 extern double g_662ad8;
 
-char* __cdecl fcn_004ce590(int);
+char* __cdecl gm_LookupWeaponSpec(int);
 unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl cm_RequestReduceLifespan(int, int, int);
 char* __cdecl gm_GetEquippedCombatGear(char*);
@@ -75,7 +75,7 @@ void __cdecl fcn_004d0070(void)
 					*(unsigned char*) (e + 8) = 100;
 					continue;
 				}
-				d = fcn_004ce590(0x16e);
+				d = gm_LookupWeaponSpec(0x16e);
 				num = cut_RandMod((unsigned int) ((unsigned char) d[6] - (unsigned char) d[5]));
 				num += (unsigned char) d[5];
 				cm_RequestReduceLifespan(*(int*) (e + 4), (int) ((double) num * *(float*) (e + 0x1c) * 0.01), (int) *(unsigned char*) (e + 8));

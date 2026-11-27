@@ -12,7 +12,7 @@ extern char* lpGebaeudeINST;
 
 void* __cdecl fcn_0064d740(void* dst, const void* src, unsigned int n);
 int __cdecl fcn_004fcb50(unsigned short id, int* out, int c);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_TickObjectTable(void);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
@@ -45,7 +45,7 @@ void __cdecl gm_AdvanceRoundCounters(int flag)
 		do {
 			fcn_004fcb50((unsigned short) i, out, flag); *(int*) (p + 4) = 0; *(int*) p = 0;
 			if (g_773d48 > 0x40) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 				g_773d48 = 0;
 			}
 

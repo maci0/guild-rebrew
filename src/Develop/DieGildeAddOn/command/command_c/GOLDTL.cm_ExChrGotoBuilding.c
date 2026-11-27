@@ -28,7 +28,7 @@ int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 int __cdecl ch_QueueStandUpAnimation(char*, char*);
 char* __cdecl ch_UseGate(char*, char*, char*, int, int, int);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 char* __cdecl fcn_004456e0(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
@@ -120,7 +120,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			if (k < 0)
 				goto end;
 			d3_SelectSceneContext(k, 1);
-			u = fcn_00445600(0, 0x100, 0, g_68b1e0);
+			u = d3_FindSceneObject(0, 0x100, 0, g_68b1e0);
 			if (u != 0) {
 				m = g_1043370[k * 247];
 				d3_TransformPoint(u, u + 0x4c, pos);
@@ -142,7 +142,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			strcpy(r + 0x70, e + 0x3d);
 			if (*(int*) (C + 0x61) != 0) {
 				d3_SelectSceneContext(0, 1);
-				u = fcn_00445600(*(int*) (C + 0x61), 0x100, 0,
+				u = d3_FindSceneObject(*(int*) (C + 0x61), 0x100, 0,
 				    (char*) &g_68149c);
 				if (u == 0)
 					u = fcn_004456e0(*(int*) (B + 0x61), 0x100, 0,
@@ -165,7 +165,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			if (k < 0)
 				goto end;
 			ch_QueueStandUpAnimation(o, g_6756b8);
-			u = fcn_00445600(0, 0x100, 0, g_675908);
+			u = d3_FindSceneObject(0, 0x100, 0, g_675908);
 			if (u != 0) {
 				m = g_1043370[k * 247];
 				d3_TransformPoint(u, u + 0x4c, pos);
@@ -186,7 +186,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			*(TLBLK11*) (r + 0xf0) = g_68149c;
 			if (C == 0)
 				goto after;
-			u = fcn_00445600(*(int*) (C + 0x61), 0x100, 0,
+			u = d3_FindSceneObject(*(int*) (C + 0x61), 0x100, 0,
 			    (char*) &g_68149c);
 			if (u != 0) {
 				d3_TransformPoint(u, u + 0x4c, pos);
@@ -209,12 +209,12 @@ after:
 		goto b3;
 	d3_SelectSceneContext(0, 1);
 	if (e[0x1d] != 0) {
-		u = fcn_00445600(0, 0x100, 0, e + 0x1d);
+		u = d3_FindSceneObject(0, 0x100, 0, e + 0x1d);
 	} else if (*(int*) (B + 0x61) != 0) {
 		if (*(int*) (o + 0x124) != 0) {
 			u = he_PickRandomSceneObject(*(char**) (B + 0x61));
 		} else {
-			u = fcn_00445600(*(int*) (B + 0x61), 0x100, 0,
+			u = d3_FindSceneObject(*(int*) (B + 0x61), 0x100, 0,
 			    (char*) &g_68149c);
 			if (u == 0) {
 				u = fcn_004456e0(*(int*) (B + 0x61), 0x100, 0,
@@ -269,7 +269,7 @@ b3:
 	/* chunk 8: native ins 800-899 */
 	if (*(int*) (B + 1) != *(int*) (o + 0x2c)) {
 		d3_SelectSceneContext(0, 1);
-		u = fcn_00445600(*(int*) (B + 0x61), 0x100, 0,
+		u = d3_FindSceneObject(*(int*) (B + 0x61), 0x100, 0,
 		    (char*) &g_68149c);
 		if (u == 0)
 			u = fcn_004456e0(*(int*) (B + 0x61), 0x100, 0,
@@ -327,9 +327,9 @@ b3:
 		ch_CreateAction(o, 0x38, 1);
 		d3_SelectSceneContext(k, 1);
 		if (*(int*) (o + 0x124) != 0)
-			u = fcn_00445600(0, 0x100, 0, (char*) &g_68b0f4);
+			u = d3_FindSceneObject(0, 0x100, 0, (char*) &g_68b0f4);
 		else
-			u = fcn_00445600(0, 0x100, 0, g_675908);
+			u = d3_FindSceneObject(0, 0x100, 0, g_675908);
 		if (u == 0)
 			goto saved_exit;
 		m = g_1043370[k * 247];

@@ -28,7 +28,7 @@ int __cdecl fcn_00526120();
 int __cdecl d3_EndCameraAndUiMode();
 int __cdecl fcn_00533a60();
 int __cdecl d2_DrawPanelFrame();
-int __cdecl fcn_00535960();
+int __cdecl cm_StepCommandQueue();
 int __cdecl main_RunFrameLoop();
 int __cdecl he_fn_Handlung();
 int __cdecl he_StartHandlungSearch();
@@ -39,7 +39,7 @@ int __cdecl fcn_00595e20();
 int __cdecl fcn_005963f0();
 int __cdecl d2_SyncProduktionSlotGrid();
 int __cdecl fcn_00597940();
-int __cdecl fcn_005bdfc0();
+int __cdecl d2_RunRoomSlotDialog();
 
 #define v23 (*(int *)(frame + 0x1c))
 #define v28 (*(int *)(frame + 0x0))
@@ -193,14 +193,14 @@ label_5be43c:
         v8 = (unsigned int)*(unsigned char *)((int)v4 + 0x1d);
         if (v6)
           v8 += *(int *)(v6 + 0xb4);
-        v9 = fcn_005bdfc0(v4,v2,v15,v8);
+        v9 = d2_RunRoomSlotDialog(v4,v2,v15,v8);
         gm_SumQueryEntryValues(*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4e18),g_773d75);
         if (v9 != 1) { // branch-flip
           if ((v9 == 2) && (v11 = g_773d75, v15 = (unsigned int)g_774970, gm_CheckEntityStock(v15 * 0x21c + 0x7f4ca0,8000,v11))) {
             v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);
             v12 = cm_GetCommandStatus(v11);
             while (!v12) {
-              fcn_00535960();
+              cm_StepCommandQueue();
               v12 = cm_GetCommandStatus(v11);
             }
             if (cm_GetCommandStatus(v11) == 1) {
@@ -241,7 +241,7 @@ label_5be43c:
             v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,8000);
             v12 = cm_GetCommandStatus(v11);
             while (!v12) {
-              fcn_00535960();
+              cm_StepCommandQueue();
               v12 = cm_GetCommandStatus(v11);
             }
             if (cm_GetCommandStatus(v11) == 1) {
@@ -287,7 +287,7 @@ label_5be970:
             v11 = cm_RequestMoveCredits(0xffffffff,*(unsigned int *)((unsigned int)g_774970 * 0x21c + 0x7f4ca4),g_773d75,0x3200);
             v12 = cm_GetCommandStatus(v11);
             while (!v12) {
-              fcn_00535960();
+              cm_StepCommandQueue();
               v12 = cm_GetCommandStatus(v11);
             }
             if (cm_GetCommandStatus(v11) == 1) {

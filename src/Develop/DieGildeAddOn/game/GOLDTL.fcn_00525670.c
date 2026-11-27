@@ -23,7 +23,7 @@ extern int __cdecl cut_FindCutsceneById(int);
 extern void __cdecl d3_SelectSceneContext(int, int);
 extern void __cdecl gm_CountBuildingWorkers(char*);
 extern void __cdecl fcn_00573e10(char*);
-extern void __cdecl fcn_00510100(void);
+extern void __cdecl gm_ResetWarehouseStock(void);
 extern char *gm_CityEntity, *g_773d78;
 extern int ls_SaveVersion, g_773d8c;
 /* Reload the whole world state after a new game starts.  Every master record
@@ -180,6 +180,6 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 				*(int*) rec = cut_FindCutsceneById(*(int*)rec);
 		}
 	}
-	fcn_00510100();
+	gm_ResetWarehouseStock();
 	return 1;
 }

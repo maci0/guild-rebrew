@@ -8,7 +8,7 @@ typedef struct {
 	float y;
 	float z;
 	char pad[0x44];
-} P411eb0;
+} GOLD_BBOX_CORNER;
 
 // SIZE 0x10
 typedef struct {
@@ -16,9 +16,9 @@ typedef struct {
 	float y;
 	float z;
 	float w;
-} P411eb0c;
+} GOLD_SPHERE_RESULT;
 
-typedef P411eb0* (__cdecl* Corners411eb0)(char* obj, char* m, char* p);
+typedef GOLD_BBOX_CORNER* (__cdecl* GOLD_GET_CORNERS_FN)(char* obj, char* m, char* p);
 
 extern float g_6628a8;
 void __cdecl fcn_00439870(char* obj, char* cam, int flag);
@@ -27,9 +27,9 @@ char __cdecl fcn_00411eb0(char* obj, char* cam, float* center, float* radius)
 {
 	char r;
 	char* m;
-	P411eb0* p;
-	P411eb0* q;
-	P411eb0c c;
+	GOLD_BBOX_CORNER* p;
+	GOLD_BBOX_CORNER* q;
+	GOLD_SPHERE_RESULT c;
 	float d;
 	float dx;
 	float dy;
@@ -40,7 +40,7 @@ char __cdecl fcn_00411eb0(char* obj, char* cam, float* center, float* radius)
 	if (obj != 0 && (center != 0 || radius != 0) && *(int*) (*(char**) (obj + 0x1ec) + 0x104) != 0) {
 		m = *(char**) (obj + 0x1ec) + 0xf4;
 		fcn_00439870(obj, cam, 0);
-		p = (*(Corners411eb0*) (*(char**) (m + 0x10) + 0x1f4))(obj, m, *(char**) (obj + 0x1ec) + 8);
+		p = (*(GOLD_GET_CORNERS_FN*) (*(char**) (m + 0x10) + 0x1f4))(obj, m, *(char**) (obj + 0x1ec) + 8);
 		if (p != 0) {
 			c.x = p[0].x;
 			c.y = p[0].y;

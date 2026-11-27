@@ -12,7 +12,7 @@ void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char* __cdecl fcn_00449690(char*, int, char*, char*);
 float __cdecl d3_Smoothstep(float, float, float);
-void __cdecl fcn_00417560(char*);
+void __cdecl d3_DestroySonnenstrahlen(char*);
 typedef struct SUNRAY_COLOR {
 	unsigned char a, b, c, d;
 } SUNRAY_COLOR;
@@ -77,7 +77,7 @@ void __cdecl fcn_004172e0(char* object)
 		a = 1.0f - (float) ((double) (unsigned int) g_6b7fac - SonnenstrahlenStartZeit) * 0.002f;
 		if (a <= 0.0f) {
 			SonnenstrahlenAktiv = 0;
-			fcn_00417560(object);
+			d3_DestroySonnenstrahlen(object);
 			g_6b5cf8 = 0;
 			return;
 		}

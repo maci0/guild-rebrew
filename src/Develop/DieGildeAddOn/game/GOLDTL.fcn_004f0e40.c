@@ -34,7 +34,7 @@ typedef struct
 extern Slot170_7731b8 g_7731b8[8];
 extern Set g_772ff8[8];
 
-Slot170* __cdecl fcn_004f0c90(int id);
+Slot170* __cdecl gm_FindSlot170Entry(int id);
 int __cdecl gm_NotifyDomizilCallback(Set* p);
 
 void __cdecl gm_SetSlotCallback(int id, void* fn, void* ctx)
@@ -44,7 +44,7 @@ void __cdecl gm_SetSlotCallback(int id, void* fn, void* ctx)
 	if (id == -1) {
 		return;
 	}
-	slot = fcn_004f0c90(id);
+	slot = gm_FindSlot170Entry(id);
 	if (slot == 0) {
 		return;
 	}

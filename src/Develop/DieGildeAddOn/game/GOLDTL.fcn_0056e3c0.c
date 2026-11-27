@@ -15,11 +15,11 @@ void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 char* __cdecl ch_CreateAction(int, int, int);
 char* __cdecl gm_SelectEntityHeir(char*);
-void __cdecl fcn_005099e0(char*, char*);
+void __cdecl gm_TransferEntityBuildings(char*, char*);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-int __cdecl fcn_0050a710(char*);
+int __cdecl gm_CanDeleteEntity(char*);
 void __cdecl cm_RequestKillSpieler(int, int);
 int __cdecl cm_GetCommandStatus(int);
 int* __cdecl cm_GetCommandResult(int);
@@ -135,19 +135,19 @@ void __cdecl he_RunCharacterDeath(char* eventState)
 			*(int*) (eventState + 0x70) = 5;
 			return;
 		}
-		fcn_005099e0(s, p);
+		gm_TransferEntityBuildings(s, p);
 		c = *(char*) (s + 2);
 		if ((c == 6 || c == 7 || c == 5) && *(unsigned char*) (s + 0xd) > *(unsigned char*) (p + 0xd)) {
 			cm_BeginPacketFieldDelta((int) p, *(int*) (p + 4));
 			cm_AppendPacketFieldDelta(1, 1, 0xd, (int*) (s + 0xd));
 			cm_RequestChangeAttribute();
 		}
-		cm_RequestKillSpieler(*(int*) (s + 4), fcn_0050a710(s));
+		cm_RequestKillSpieler(*(int*) (s + 4), gm_CanDeleteEntity(s));
 		he_FreeAction(eventState);
 		return;
 	case 5:
-		fcn_005099e0(s, (char*) gm_CityEntity);
-		cm_RequestKillSpieler(*(int*) (s + 4), fcn_0050a710(s));
+		gm_TransferEntityBuildings(s, (char*) gm_CityEntity);
+		cm_RequestKillSpieler(*(int*) (s + 4), gm_CanDeleteEntity(s));
 		he_FreeAction(eventState);
 		return;
 	case 6:

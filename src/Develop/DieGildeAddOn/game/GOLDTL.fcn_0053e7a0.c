@@ -13,7 +13,7 @@ struct vec4 {
 extern float g_662d70[4];
 
 int __cdecl sprintf(char*, const char*, ...);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, struct vec4*);
 char* __cdecl fcn_00442910(int, struct vec4*, struct vec4*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
@@ -33,7 +33,7 @@ char* __cdecl fcn_0053e7a0(char* name)
 	strcpy(upper, name);
 	_strupr(upper);
 	sprintf(dummy, "dummy_%s", upper);
-	p = fcn_00445600(0, 0x140, 0, dummy);
+	p = d3_FindSceneObject(0, 0x140, 0, dummy);
 	if (p == 0) {
 		return 0;
 	}

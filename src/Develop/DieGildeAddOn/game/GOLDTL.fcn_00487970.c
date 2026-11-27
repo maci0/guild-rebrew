@@ -39,7 +39,7 @@ void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e, int f, int g, int h);
 
 /* ADDRESS: GOLD 0x4884a0 */
-void __cdecl fcn_00487970(char* src, char* e, int chance)
+void __cdecl gm_TryAutoUpgradeBuildingSlots(char* building, char* owner, int chance)
 {
 	char msg[0xf8];
 	char buf[0x400];
@@ -52,29 +52,29 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	int dy;
 	int n;
 
-	if (src == 0) {
+	if (building == 0) {
 		return;
 	}
-	if (*(int*) (e + 0x1c8) & 8) {
+	if (*(int*) (owner + 0x1c8) & 8) {
 		return;
 	}
 	if (gm_RandomMod(100) < chance) {
 		return;
 	}
-	x = *(unsigned char*) (src + 0x1c);
-	y = *(unsigned char*) (src + 0x1d);
-	for (it = he_StartHandlungSearch(2, 0, 0x12, 3, *(int*) (*(char**) (e + 0x16c) + 1)); it != 0; it = he_fn_Handlung()) {
+	x = *(unsigned char*) (building + 0x1c);
+	y = *(unsigned char*) (building + 0x1d);
+	for (it = he_StartHandlungSearch(2, 0, 0x12, 3, *(int*) (*(char**) (owner + 0x16c) + 1)); it != 0; it = he_fn_Handlung()) {
 		x += *(int*) (it + 0xb0);
 		y += *(int*) (it + 0xb4);
 	}
-	h = *(char**) (e + 0x16c);
+	h = *(char**) (owner + 0x16c);
 	r = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) h];
 	dy = r->dimension_241 - y;
 	dx = r->dimension_240 - x;
 	if (dx <= 0 && dy <= 0) {
 		return;
 	}
-	if (*(int*) (e + 0x1b8) < 24000) {
+	if (*(int*) (owner + 0x1b8) < 24000) {
 		return;
 	}
 	memset(msg, 0, sizeof(msg));
@@ -87,34 +87,34 @@ void __cdecl fcn_00487970(char* src, char* e, int chance)
 	*(short*) (msg + 0x34) = g_7f4c0c;
 	msg[0x36] = 1;
 	*(int*) (msg + 0x64) = 1;
-	*(int*) (msg + 0x58) = *(int*) (src + 2);
+	*(int*) (msg + 0x58) = *(int*) (building + 2);
 	*(int*) (msg + 0x5c) = dx != 0;
 	*(int*) (msg + 0x60) = dy != 0;
 	n = *(int*) (msg + 0x5c) + *(int*) (msg + 0x60);
 	cm_SendLogAction(g_67e33c);
 	cm_SendCopyEntityData(msg);
-	cm_RequestMoveCredits(-1, ((Ent*)g_7f4ca0)[*(unsigned short*) (*(char**) (e + 0x16c) + 0x27)].handle, (*(char*)&g_773d75), 0x1f40);
+	cm_RequestMoveCredits(-1, ((Ent*)g_7f4ca0)[*(unsigned short*) (*(char**) (owner + 0x16c) + 0x27)].handle, (*(char*)&g_773d75), 0x1f40);
 	switch (fcn_0051e070()) {
 	case 0:
 		if (n == 1) {
-			io_FormatTextBuffer(buf, 0x1bbc, *(unsigned short*) e, *(char**) (e + 0x16c));
+			io_FormatTextBuffer(buf, 0x1bbc, *(unsigned short*) owner, *(char**) (owner + 0x16c));
 		}
 		else {
-			io_FormatTextBuffer(buf, 0x1bbd, *(unsigned short*) e, *(char**) (e + 0x16c), n);
+			io_FormatTextBuffer(buf, 0x1bbd, *(unsigned short*) owner, *(char**) (owner + 0x16c), n);
 		}
 		break;
 	case 1:
 		if (n == 1) {
-			io_FormatTextBuffer(buf, 0x1bbc, *(unsigned short*) e, *(char**) (e + 0x16c));
+			io_FormatTextBuffer(buf, 0x1bbc, *(unsigned short*) owner, *(char**) (owner + 0x16c));
 		}
 		else {
-			io_FormatTextBuffer(buf, 0x1bbd, *(unsigned short*) e, *(char**) (e + 0x16c), n);
+			io_FormatTextBuffer(buf, 0x1bbd, *(unsigned short*) owner, *(char**) (owner + 0x16c), n);
 		}
 		break;
 	}
-	h = *(char**) (e + 0x16c);
+	h = *(char**) (owner + 0x16c);
 	he_MessageBoxQuickjump(((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle, ((Ent*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].handle, buf, 0, 0x60b, *(int*) (h + 1), -1, 0, 0);
-	*(int*) (e + 0x1b8) -= n * 8000;
+	*(int*) (owner + 0x1b8) -= n * 8000;
 	cm_SendTraceEnd(g_67e33c);
-	*(int*) (e + 0x1c8) |= 8;
+	*(int*) (owner + 0x1c8) |= 8;
 }

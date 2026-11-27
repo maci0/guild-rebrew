@@ -2,7 +2,7 @@
 
 extern int g_67a370;
 
-int __cdecl fcn_004ceba0(int x, int y);
+int __cdecl gm_IsMapTileWalkable(int x, int y);
 
 /* ADDRESS: GOLDTL 0x004cec00 */
 int __cdecl fcn_004cec00(int x, int y, int *out_x, int *out_y)
@@ -27,7 +27,7 @@ int __cdecl fcn_004cec00(int x, int y, int *out_x, int *out_y)
 			dx = radius - abs(y - row);
 			col_hi = (max - 1 < x + dx) ? max - 1 : x + dx;
 			for (col = (x - dx < 0) ? 0 : x - dx; col <= col_hi; col++) {
-				if (fcn_004ceba0(col, row)) {
+				if (gm_IsMapTileWalkable(col, row)) {
 					*out_x = col;
 					*out_y = row;
 					return 1;

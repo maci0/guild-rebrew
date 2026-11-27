@@ -113,14 +113,14 @@ void __cdecl gm_RestockTownMarket(unsigned char);
 void __cdecl gm_InitStartingBuildingsAndWorkers(void);
 int __cdecl ls_LoadSavegame(void*, int);
 void __cdecl gm_UpdateDaylightSchedule(void*);
-int __cdecl fcn_0052a310(void*);
-void __cdecl fcn_0052a3a0(void*, int);
+int __cdecl gm_QuerySeason(void*);
+void __cdecl gm_UpdateWeatherAndSky(void*, int);
 void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl fcn_00528fd0(void);
 void __cdecl fcn_00540020(void);
 int __cdecl cm_RequestSysMessage(int, void*);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl sv_WaitForNetworkSync(int);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_EndCommandSync(void);
@@ -362,7 +362,7 @@ void __cdecl fcn_005438c0(int a0)
 			return;
 		}
 		gm_UpdateDaylightSchedule(gm_GameTime);
-		g_7e4314 = fcn_0052a310(gm_GameTime);
+		g_7e4314 = gm_QuerySeason(gm_GameTime);
 	}
 	init_AllocateKind0bSceneSlot();
 	if (g_7747b0 & 1) {
@@ -371,7 +371,7 @@ void __cdecl fcn_005438c0(int a0)
 			sim_SetSyncParams(&r3, 6, 0, 0);
 			x = cm_RequestSysMessage(3, &r3);
 			while (cm_GetCommandStatus(x) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 			if (g_7747fc != 0) {
 				n = 750000;
@@ -410,7 +410,7 @@ void __cdecl fcn_005438c0(int a0)
 	    (float) g_6a3768, g_10529c8, g_10421a0, g_10432a4,
 	    g_1040494, d2_ScreenHeight);
 	if (g_7747b0 & 2) {
-		fcn_0052a3a0(gm_GameTime, 0);
+		gm_UpdateWeatherAndSky(gm_GameTime, 0);
 		if (g_7f3a30 != -1) {
 			base = (void*) gm_SearchTable67(g_7f3a30);
 			x = gm_FindRecordById(g_7f3a34);
@@ -492,7 +492,7 @@ void __cdecl fcn_005438c0(int a0)
 			sim_SetSyncParams(&r3, 6, 0, 0);
 			x = cm_RequestSysMessage(3, &r3);
 			while (cm_GetCommandStatus(x) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 		if (!(g_7747b0 & 0x42)) {
@@ -518,7 +518,7 @@ void __cdecl fcn_005438c0(int a0)
 			he_ClearActivePlayerActions();
 			cm_EndCommandSync();
 			while (cm_AreQueuedCommandsDone() == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 		if ((!(g_7747b0 & 0x42)) && (g_6a342c != 0) &&
@@ -557,7 +557,7 @@ void __cdecl fcn_005438c0(int a0)
 					buf[0xc] = g_6a33dc[8];
 					x = cm_RequestSysMessage(15, buf);
 					while (cm_GetCommandStatus(x) == 0) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 				}
 			}
@@ -579,7 +579,7 @@ void __cdecl fcn_005438c0(int a0)
 				gm_AddTime(&r2, 0, 0x1e, 0);
 				x = cm_RequestUpdateGameTime(&r2);
 				while (cm_GetCommandStatus(x) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 			}
 		}
@@ -609,7 +609,7 @@ l_gate:
 				gm_AddTime(&r1, 0, 0x1e, 0);
 				x = cm_RequestUpdateGameTime(&r1);
 				while (cm_GetCommandStatus(x) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 			}
 			gm_AddTime(&r1, 0x18, 0, 0);
@@ -644,7 +644,7 @@ l_gate:
 				msg[0x26] = 0x61;
 				x = fcn_004c5980(msg);
 				while (cm_GetCommandStatus(x) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 			} else {
 				fcn_004ea350();

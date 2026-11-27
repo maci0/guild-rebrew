@@ -19,9 +19,9 @@ typedef struct Ce800Config {
 	int padc;
 } Ce800Config;
 
-int* __cdecl fcn_005b1b10(int a);
-int* __cdecl fcn_005b1b30(int a);
-void __cdecl fcn_005b1e20(int a);
+int* __cdecl hp_FindProdSetting(int a);
+int* __cdecl hp_AddProdSetting(int a);
+void __cdecl hp_SyncProdSetting(int a);
 void __cdecl gm_AdjustProductionShare(int a, unsigned int b, unsigned int c);
 void __cdecl hp_SetProdSettingScale(int a, float v);
 int __cdecl fcn_00470820(int a, int b, char* name);
@@ -29,7 +29,7 @@ void __cdecl d2_SetForm(int a, int b);
 void __cdecl fcn_005340f0(int a);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
-int __cdecl fcn_0050b710(int a, unsigned char k);
+int __cdecl gm_AmountToUnits(int a, unsigned char k);
 int __cdecl fcn_0050b750(int a, unsigned char k);
 void __cdecl fcn_005ced80(int dlg, int* list, int* bars, int* icons);
 void __cdecl fcn_005ce800(int id, int* out, int* value, int* slots,
@@ -75,23 +75,23 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 	v29 = -1;
 	v30 = -1;
 	v13 = -1;
-	v27 = fcn_005b1b10(*(unsigned int*) ((char*) a0 + 1));
+	v27 = hp_FindProdSetting(*(unsigned int*) ((char*) a0 + 1));
 	memset(v12, -1, sizeof(v12));
 	if (!v27) {
-		v27 = fcn_005b1b30(a0);
+		v27 = hp_AddProdSetting(a0);
 	}
 	if (!v27) {
 		g_775348 = 0;
 		v20 = 0;
 	} else {
-		fcn_005b1e20(a0);
+		hp_SyncProdSetting(a0);
 	}
 	v28 = fcn_00470820(0, 0, (char*) 0x6aca84);
 	d2_SetForm(v28, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_CenterDialogWindows(v28);
 	d2_SetOverlayAnimation(0, 0);
-	v15 = fcn_0050b710(*(unsigned int*) ((char*) a0 + 0x39), g_773d75);
+	v15 = gm_AmountToUnits(*(unsigned int*) ((char*) a0 + 0x39), g_773d75);
 	cfgp = (Ce800Config*) &a1[0xda];
 	cfg = *cfgp;
 	if (!g_775348) {

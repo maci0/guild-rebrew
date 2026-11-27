@@ -17,7 +17,7 @@ void __cdecl gm_AddTime(void*, int, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
-int __cdecl fcn_0050d320(char*, int);
+int __cdecl gm_GetSeasonTreasury(char*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);

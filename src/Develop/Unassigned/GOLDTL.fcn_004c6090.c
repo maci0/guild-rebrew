@@ -1,5 +1,5 @@
 int __cdecl gm_FindAndReserveEntity(int a, int b, int c);
-void* __cdecl fcn_004ffff0(int a, int b);
+void* __cdecl gm_FindAvailableResidence(int a, int b);
 int __cdecl cm_EnqueueClientPacket(void* req);
 
 /* ADDRESS: GOLDTL 0x004c6090 */
@@ -20,10 +20,10 @@ int __cdecl fcn_004c6090(int a0, char a1, int a2, int a3)
 		if (*(int*) (t + 0x170) != 0) {
 			goto skip;
 		}
-		q = (char*) fcn_004ffff0(*(unsigned short*) t, a0);
+		q = (char*) gm_FindAvailableResidence(*(unsigned short*) t, a0);
 	} else {
 		*(int*) (buf + 0x19) = -1;
-		q = (char*) fcn_004ffff0(0xffff, a0);
+		q = (char*) gm_FindAvailableResidence(0xffff, a0);
 	}
 	if (q != 0) {
 		*(int*) (buf + 0x14) = *(int*) (q + 1);

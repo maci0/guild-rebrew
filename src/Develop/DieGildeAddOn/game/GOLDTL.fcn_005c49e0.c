@@ -21,8 +21,8 @@ void __cdecl fcn_00472640(int i, int flag);
 void __cdecl fcn_00471af0(int k, int flag);
 void __cdecl d2_RunTechTreeDialog(unsigned char*, int);
 void __cdecl d2_ShowRenovationDialog(unsigned char*);
-void __cdecl fcn_005c2a40(unsigned char*);
-void __cdecl fcn_005c30e0(unsigned char*);
+void __cdecl d2_RunRoomUpgradeDialog(unsigned char*);
+void __cdecl d2_RunBuildingUpgradeDialog(unsigned char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -121,13 +121,13 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 			}
 			else if (d2_CurrentElementId == h3) {
 				fcn_00471af0(d, 0);
-				fcn_005c2a40(p);
+				d2_RunRoomUpgradeDialog(p);
 				fcn_00471af0(d, 1);
 				redraw = 1;
 			}
 			else if (d2_CurrentElementId == h4) {
 				fcn_00471af0(d, 0);
-				fcn_005c30e0(p);
+				d2_RunBuildingUpgradeDialog(p);
 				fcn_00471af0(d, 1);
 				redraw = 1;
 			}

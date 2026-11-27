@@ -32,7 +32,7 @@ char* __cdecl cm_GetCommandResult(int);
 int __cdecl cm_RequestSetEntityLevel(int, int);
 int __cdecl cm_SendAllocCharacter(int, int, int, int, int, int, char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 
 /* ADDRESS: GOLDTL 0x00535ec0 */
 void __cdecl fcn_00535ec0(void)
@@ -166,7 +166,7 @@ void __cdecl fcn_00535ec0(void)
 		    g_6b5c60);
 		if (cm_GetCommandStatus(n) == 0) {
 			do {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			} while (cm_GetCommandStatus(n) == 0);
 		}
 		p = cm_GetCommandResult(n);

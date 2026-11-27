@@ -14,7 +14,7 @@ int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
 void __cdecl fcn_00428340(int, int, int, int);
 /* ADDRESS: GOLDTL 0x00515c60 */
-void __cdecl fcn_00515c60(unsigned char* a0, unsigned char* a1)
+void __cdecl evt_StartShopIntroScript(unsigned char* building, unsigned char* visitor)
 {
 	int zv[2];
 	char v7[48];
@@ -28,7 +28,7 @@ void __cdecl fcn_00515c60(unsigned char* a0, unsigned char* a1)
 	zv[0] = 0;
 	v9 = 0;
 	v8 = 0;
-	v3 = fcn_0050dc90(a0);
+	v3 = fcn_0050dc90(building);
 	p = (int*) ch_ContextCharacters;
 loop:
 	if (v9) {
@@ -49,15 +49,15 @@ found:
 	if (*(unsigned char*) (v9 + 8) <= 1) {
 		return;
 	}
-	if (a1 && *(int*) (*(int*) (v9 + 0x184) + 0x30) != *(int*) (a1 + 2)) {
+	if (visitor && *(int*) (*(int*) (v9 + 0x184) + 0x30) != *(int*) (visitor + 2)) {
 		return;
 	}
-	if (gm_CheckEntityType(a0)) {
-		v3 = (int) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*a0];
+	if (gm_CheckEntityType(building)) {
+		v3 = (int) &((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building];
 		goto fmt;
 	}
 	else {
-		v3 = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) a1]);
+		v3 = (int) ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) visitor]);
 		if (!v3) {
 			v3 = zv[0];
 fmt:

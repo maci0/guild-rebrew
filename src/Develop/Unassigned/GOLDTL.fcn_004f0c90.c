@@ -4,7 +4,7 @@ extern Slot170_7731b8 g_7731b8[8];
 
 /* ADDRESS: GOLD 0x004eedd0 */
 /* ADDRESS: GOLDTL 0x004f0c90 */
-int __cdecl fcn_004f0c90(int value)
+int __cdecl gm_FindSlot170Entry(int value)
 {
 	int i;
 	int cursor;

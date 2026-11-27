@@ -58,7 +58,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_AccumulateTyped2(Player*);
-int __cdecl fcn_0050b710(int, char);
+int __cdecl gm_AmountToUnits(int, char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, char);
@@ -201,7 +201,7 @@ void __cdecl fcn_005c5b10(char* a)
 	s = io_AppendText(0x19aa, g_773d75);
 	sl = d2_GetWindowListItem(dlg, 2, s);
 	btn2 = d2_GetWindowListItem(dlg, 2, s + 1);
-	v = fcn_0050b710(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75) > 1000 ? 1000 : fcn_0050b710(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75);
+	v = gm_AmountToUnits(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75) > 1000 ? 1000 : gm_AmountToUnits(gm_AccumulateTyped2(&((Player*)g_7f4ca0)[g_774970]), g_773d75);
 	d2_SetElementValue(sl, 0x64, v, 0x64);
 	if (main_RunFrameLoop((void*) fcn_005c5b10, 0x677c7) != 0) {
 		do {

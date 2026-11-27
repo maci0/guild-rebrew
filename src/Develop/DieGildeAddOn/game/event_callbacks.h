@@ -27,7 +27,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action);
 
 /* Existing event helpers use word and unsigned-byte access views. */
 void __cdecl cut_ExecuteCutscene(int* event);
-void __cdecl fcn_004e4f10(int* event);
+void __cdecl cut_ResetEventSlots(int* event);
 int __cdecl cut_CutsceneReady(int* event);
 int __cdecl cut_IsParticipant(int participant, unsigned char* event);
 int __cdecl cut_CheckMaster(int* event);

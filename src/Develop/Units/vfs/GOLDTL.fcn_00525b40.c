@@ -32,7 +32,7 @@ extern int g_100dc00;
 
 
 void __cdecl main_PumpWindowMessages(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 #include "Develop/Units/vfs/vfs.h"
 void __cdecl m_FreeTracked(char*);
 
@@ -56,7 +56,7 @@ int __cdecl fcn_00525b40(void)
 
 	while (cm_LoadBuf == 0 || g_1005820 < g_aed328) {
 		main_PumpWindowMessages();
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	f = vfs_OpenStream((unsigned char*) cm_LoadBuf, g_aed328, "rb");
 	if (f == 0) {

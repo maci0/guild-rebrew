@@ -9,7 +9,7 @@ extern int g_772f68;
 void __cdecl fcn_004597f0(int, int);
 void __cdecl fcn_00459b40(int);
 
-void __cdecl fcn_004e4c00(void)
+void __cdecl d3_DestroySkyLayer(void)
 {
 	if (g_772f3c == 0) {
 		if (g_772f64 != 0) {

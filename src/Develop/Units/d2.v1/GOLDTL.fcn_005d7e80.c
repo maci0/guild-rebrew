@@ -34,7 +34,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(unsigned char*, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -101,7 +101,7 @@ int __cdecl gm_HandleDrainTargetAP(unsigned char* actor, unsigned char* action)
 					cm_RequestModifyHealth(*(int*) (o + 4), -3);
 					h = cm_RequestChangeBits(*(int*) (actor + 4), 0x1c8, 4, 0x8000, 0);
 					while (cm_GetCommandStatus(h) == 0) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 					io_FormatTextBuffer(text, 0x1dd9, *(unsigned short*) o, *(unsigned short*) o, 3,
 						*(unsigned short*) o, 3);

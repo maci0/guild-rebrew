@@ -50,9 +50,9 @@ void __cdecl fcn_00489010(int, int);
 void __cdecl fcn_00489250(int);
 void __cdecl fcn_00489a70(int, int);
 void __cdecl ai_ManageMeisterWorkers(int);
-void __cdecl fcn_00487970(int, int, int);
+void __cdecl gm_TryAutoUpgradeBuildingSlots(int, int, int);
 void __cdecl ai_RequestAusbauUpgrade(int, int, int);
-void __cdecl fcn_00487470(int);
+void __cdecl ai_BuyStallGoods(int);
 void __cdecl fcn_004888a0(int);
 void __cdecl ai_DispatchWorkerRecovery(int);
 void __cdecl ai_CalcAngriff(int, int);
@@ -141,9 +141,9 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 	fcn_00489a70((int) rec, saved);
 common:
 	ai_ManageMeisterWorkers((int) rec);
-	fcn_00487970(saved, (int) rec, 10);
+	gm_TryAutoUpgradeBuildingSlots(saved, (int) rec, 10);
 	ai_RequestAusbauUpgrade(saved, (int) rec, 10);
-	fcn_00487470((int) rec);
+	ai_BuyStallGoods((int) rec);
 	if (fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 2, 6, 0, 0x60) != 0) {
 		fcn_004888a0((int) rec);
 	}

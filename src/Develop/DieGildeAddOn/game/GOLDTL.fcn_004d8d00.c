@@ -38,7 +38,7 @@ char* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
 int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 int __cdecl cm_SendCutCommand51(int, void*);
@@ -389,7 +389,7 @@ tail1_body:
 			if (p->timer != 1 && !cm_GetCommandStatus(p->timer))
 				break;
 			p->timer = -1;
-			if (!fcn_00445600(0, 0x40, 0, (char*)&p->f10)) {
+			if (!d3_FindSceneObject(0, 0x40, 0, (char*)&p->f10)) {
 				cm_SendCutCommand55(obj, 6, msg.f);
 				msg.f[0] = *(int*)(obj + 4);
 				msg.f[1] = 0;
@@ -417,7 +417,7 @@ tail1_body:
 			} else if (*((unsigned char*)p + 0x22) == 1) {
 				if (*(int*)(*(int*)(obj + 0x184) + 0x128) != 0)
 					break;
-				n = (int)fcn_00445600(0, 0x100, 0,
+				n = (int)d3_FindSceneObject(0, 0x100, 0,
 				    (char*)(*(int*)(obj + 0x16c) == *(int*)0x772e9c
 					? 0x68bf70 : 0x68bf58));
 				d3_TransformPoint((char*)n, (float*)(n + 0x4c), vec);
@@ -447,7 +447,7 @@ tail1_body:
 			if (p->timer != 1 && !cm_GetCommandStatus(p->timer))
 				break;
 			p->timer = -1;
-			e = fcn_00445600(0, 0x40, 0, (char*)&p->f10);
+			e = d3_FindSceneObject(0, 0x40, 0, (char*)&p->f10);
 			if (!e)
 				goto case4b;
 			v68 = *(int*)(e + 0x204);

@@ -1,6 +1,6 @@
 extern unsigned char g_773d75;
 
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
 
@@ -11,7 +11,7 @@ int __cdecl ai_RunObjektKaufen(int* a, char* e, int* b)
 
 	if (*e != 2)
 		return 0;
-	n = (int) fcn_0050bb50(*(int*) (e + 4), (*(char*)&g_773d75));
+	n = (int) gm_GetSeasonPrice(*(int*) (e + 4), (*(char*)&g_773d75));
 	cm_SendSellObjekt(a[1], b[1], *(int*) (e + 4), *(int*) (e + 8), (*(char*)&g_773d75), n);
 	return 0xc;
 }

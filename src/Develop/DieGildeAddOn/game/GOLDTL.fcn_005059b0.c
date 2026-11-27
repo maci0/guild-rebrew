@@ -77,8 +77,8 @@ extern char g_7f4ca0[];
 extern char* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_005b1c90(int);
-void __cdecl fcn_005b1b30(Estate*);
+void __cdecl hp_RemoveProdEntry(int);
+void __cdecl hp_AddProdSetting(Estate*);
 void __cdecl gm_UpdateResidenceOwnerDecor(Estate*);
 Figure* __cdecl fcn_0050dc90(Estate*);
 int __cdecl d3_GetContextIndex(int);
@@ -106,10 +106,10 @@ void __cdecl gm_AssignBuildingOwner(Estate* building, unsigned short owner, int 
 	}
 	if (building->slot != slot) {
 		if (building->slot != 0xffff && ((Entity*)g_7f4ca0)[building->slot].type == 6) {
-			fcn_005b1c90(building->key);
+			hp_RemoveProdEntry(building->key);
 		}
 		if (((Entity*)g_7f4ca0)[slot].type == 6) {
-			fcn_005b1b30(building);
+			hp_AddProdSetting(building);
 		}
 	}
 	if (building->slot != 0xffff && ((Entity*)g_7f4ca0)[building->slot].best == building) {

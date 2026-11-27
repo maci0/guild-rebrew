@@ -3,7 +3,7 @@
 
 int __cdecl amt_SendSameOfficeCommand(char*, int, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 
 int __cdecl amt_SendAndWaitOfficeCommand(char* entity, int firstEntity, int secondEntity)
 {
@@ -13,7 +13,7 @@ int __cdecl amt_SendAndWaitOfficeCommand(char* entity, int firstEntity, int seco
 	if (handle != -1) {
 		if (entity[2] == 6) {
 			while (cm_GetCommandStatus(handle) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 			return cm_GetCommandStatus(handle) != 2;
 		}

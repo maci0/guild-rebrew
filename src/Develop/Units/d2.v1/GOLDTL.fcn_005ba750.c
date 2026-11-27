@@ -18,7 +18,7 @@ extern double g_664ef8;
 extern int g_774698;
 
 int __cdecl d2_GetControlValue(int);
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 
 void __cdecl d2_CalcTradeCartCost(unsigned char* building, int unused, int mode)
 {
@@ -41,12 +41,12 @@ void __cdecl d2_CalcTradeCartCost(unsigned char* building, int unused, int mode)
 			n = d2_GetControlValue(((TRADE_CART_SLOT*)g_7796e0)[i].h);
 			if (n != 0) {
 				if (rec->category == 10) {
-					v = (float) (fcn_0050bb50(((TRADE_CART_SLOT*)g_7796e0)[i].id, (char) kind) * g_664ef8);
+					v = (float) (gm_GetSeasonPrice(((TRADE_CART_SLOT*)g_7796e0)[i].id, (char) kind) * g_664ef8);
 				} else {
-					v = fcn_0050bb50(((TRADE_CART_SLOT*)g_7796e0)[i].id, (char) kind) * *(float*) (building + 0x49);
+					v = gm_GetSeasonPrice(((TRADE_CART_SLOT*)g_7796e0)[i].id, (char) kind) * *(float*) (building + 0x49);
 				}
 				if (mode == 2 || mode == 4) {
-					v = fcn_0050bb50(((TRADE_CART_SLOT*)g_7796e0)[i].id, building[0x65]);
+					v = gm_GetSeasonPrice(((TRADE_CART_SLOT*)g_7796e0)[i].id, building[0x65]);
 				}
 				sum += n * v;
 			}
@@ -57,12 +57,12 @@ void __cdecl d2_CalcTradeCartCost(unsigned char* building, int unused, int mode)
 			n = d2_GetControlValue(((TRADE_CART_SLOT*)g_778da0)[i].h);
 			if (n != 0) {
 				if (rec->category == 10) {
-					v = (float) (fcn_0050bb50(((TRADE_CART_SLOT*)g_778da0)[i].id, (char) kind) * g_664ef8);
+					v = (float) (gm_GetSeasonPrice(((TRADE_CART_SLOT*)g_778da0)[i].id, (char) kind) * g_664ef8);
 				} else {
-					v = fcn_0050bb50(((TRADE_CART_SLOT*)g_778da0)[i].id, (char) kind) * *(float*) (building + 0x49);
+					v = gm_GetSeasonPrice(((TRADE_CART_SLOT*)g_778da0)[i].id, (char) kind) * *(float*) (building + 0x49);
 				}
 				if (mode == 2 || mode == 4) {
-					v = fcn_0050bb50(((TRADE_CART_SLOT*)g_778da0)[i].id, building[0x65]);
+					v = gm_GetSeasonPrice(((TRADE_CART_SLOT*)g_778da0)[i].id, building[0x65]);
 				}
 				sum += n * v;
 			}

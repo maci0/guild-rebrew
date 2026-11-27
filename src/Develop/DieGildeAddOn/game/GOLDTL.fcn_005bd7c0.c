@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/aemter.h"
 int __cdecl gm_LookupEntityRecordById(int);
 
-int __cdecl fcn_005bd7c0(int max, int a, int* out)
+int __cdecl amt_CollectOfficeHolderRecords(int max, int a, int* out)
 {
 	int n;
 	int cnt;

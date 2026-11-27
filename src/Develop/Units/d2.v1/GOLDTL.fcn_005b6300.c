@@ -158,7 +158,7 @@ int __cdecl fcn_00505d00(int, void*);
 int __cdecl fcn_005b5750(void);
 int __cdecl fcn_0050b750(int, char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
-float __cdecl fcn_0050b8d0(unsigned char*, int, int, int);
+float __cdecl gm_GetWorkforceOutput(unsigned char*, int, int, int);
 int __cdecl gm_CheckEntityStock(int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -652,10 +652,10 @@ L6fa2:
 				fcn_0051af00(f.txt164c, 0x1a27, 4);
 				fcn_00526120(f.txt164c, 4);
 			} else {
-				t = (int) (fcn_0050b8d0(
+				t = (int) (gm_GetWorkforceOutput(
 					(unsigned char*) (*(unsigned short*) (a1 + 0x27) * 0x21c + 0x7f4ca0),
 					*a1, -1, 1) * ((double) *(int*) (a1 + 0x3d) * 0.01));
-				x = (int) (fcn_0050b8d0((unsigned char*) e, *a1, -1, 0) *
+				x = (int) (gm_GetWorkforceOutput((unsigned char*) e, *a1, -1, 0) *
 					((double) *(int*) (a1 + 0x3d) * 0.01));
 				if (*(char*) (e + 9)) {
 					fcn_0051af00(f.txt9fc, 0x1a29,

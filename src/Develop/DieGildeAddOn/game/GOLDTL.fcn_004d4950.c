@@ -11,7 +11,7 @@ void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 unsigned int __cdecl cut_RandMod(unsigned int);
-void __cdecl fcn_004cfc40(char*, int, int);
+void __cdecl d3_ScheduleActionTimer(char*, int, int);
 int __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void* __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 int __cdecl fcn_004d4790(char*);
@@ -66,9 +66,9 @@ void __cdecl gm_ResolveDuelHit(int ctx)
     if (v22) {
         r = cut_RandMod(10);
         if ((int) g_772e9c == *(int*) ((char*) v4 + 0x16c)) {
-            fcn_004cfc40((char*) v4, v22, 1);
+            d3_ScheduleActionTimer((char*) v4, v22, 1);
         } else {
-            fcn_004cfc40((char*) v4, v22, 2);
+            d3_ScheduleActionTimer((char*) v4, v22, 2);
         }
         if (r > 8) {
             if (*(int*) (ctx + 0x188) != *(int*) ((int)g_772e9c + 4)) {

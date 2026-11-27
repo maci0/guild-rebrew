@@ -48,7 +48,7 @@ int __cdecl fcn_0051e490(void* stream, int flags);
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 unsigned int __cdecl vfs_CalcCrc32(unsigned char*, unsigned int);
 int __cdecl cm_RequestSysMessage(int, void*);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl fcn_00533a40(char*);
 
@@ -102,7 +102,7 @@ void __cdecl ls_SaveNetworkGame(char* name, char* title)
 					n++;
 				}
 			}
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 		cm_SaveGameAndWait(main_LoopFlags, g_14ac60c);
 		sprintf(path, "Gamedata\\network\\%s.SRV", name);

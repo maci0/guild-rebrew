@@ -6,13 +6,13 @@ extern char g_7f4ca4[];
    fcn_00504f30, shows the dialog, then forwards the 0x39 packet to
    fcn_004c5530 while fcn_005373e0 keeps the loop alive. */
 
-int __cdecl fcn_00504f30(int, int);
+int __cdecl gm_CanBuildBuildingType(int, int);
 int __cdecl fcn_00526120(int, int);
 void* __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(void*);
 void __cdecl d2_DestroyForm(void*);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
-int __cdecl fcn_0050b710(int, char);
+int __cdecl gm_AmountToUnits(int, char);
 int __cdecl d2_SetForm(void*, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(void*, int, int);
@@ -36,14 +36,14 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 	int y;
 	void* dlg; int id;
 
-	id = *(int*) (e + 1); if (fcn_00504f30(*(unsigned char*) e, g_774970) != 1) {
+	id = *(int*) (e + 1); if (gm_CanBuildBuildingType(*(unsigned char*) e, g_774970) != 1) {
 		fcn_00526120(*(int*) 0x14ab29c, 0);
 		return;
 	}
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac5d8);
 	d2_CenterDialogWindows(dlg);
 	x = gm_CalculateGebaeudeValue(e, *(signed char*) (e + 0x5c));
-	w = fcn_0050b710(x, g_773d75);
+	w = gm_AmountToUnits(x, g_773d75);
 	d2_SetForm(dlg, 2);
 	ctl = d2_GetWindowListItem(dlg, 2,
 	                   io_AppendText(0x17de, *(unsigned short*) (e + 0x25), e,

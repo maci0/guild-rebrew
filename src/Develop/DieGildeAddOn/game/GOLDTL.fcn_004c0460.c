@@ -17,8 +17,8 @@ char* __cdecl gm_FindCityItemHolder(int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
-float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_0050d320(char*, char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
+int __cdecl gm_GetSeasonTreasury(char*, char);
 void __cdecl txt_GetCitySelectInfo(char*, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
@@ -84,15 +84,15 @@ void __cdecl fcn_004c0460(char* e, char who)
 		m = gm_eval_SlotVoll(b.obj, p[0], n);
 		if (*(short*) (q + 0x27) != *(short*) par) {
 			if (t->category == 10) {
-				val = (int) (fcn_0050bb50(*(unsigned short*) o, g_773d75) * 1.1f);
+				val = (int) (gm_GetSeasonPrice(*(unsigned short*) o, g_773d75) * 1.1f);
 			} else if (t->category == 0x1c) {
-				val = (int) (fcn_0050bb50(*(unsigned short*) o, q[0x65]) * 1.1f);
+				val = (int) (gm_GetSeasonPrice(*(unsigned short*) o, q[0x65]) * 1.1f);
 			} else {
-				val = (int) (fcn_0050bb50(*(unsigned short*) o, g_773d75) * *(float*) (q + 0x49));
+				val = (int) (gm_GetSeasonPrice(*(unsigned short*) o, g_773d75) * *(float*) (q + 0x49));
 			}
 		}
 		if (m > 0) {
-			if (fcn_0050d320(par, who) < m * val) {
+			if (gm_GetSeasonTreasury(par, who) < m * val) {
 				txt_GetCitySelectInfo(g_868060 + who * 756, name);
 				io_FormatTextBuffer(text, 0x42f0, name, 0xc14, name, who);
 				he_PostEntityMessage(*(int*) (par + 4), -1, text, 0, 0x5ef, "");

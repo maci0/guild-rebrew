@@ -5,7 +5,7 @@ extern int* g_774a34;
 
 int __cdecl cm_RequestClearSceneEntries(void);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int* __cdecl fcn_004ce180(void);
 int __cdecl cm_RequestPreloadSceneEntry(int);
 
@@ -17,7 +17,7 @@ void __cdecl d3_FlushLoadAndPreloadQueue(void)
 
 	h = cm_RequestClearSceneEntries();
 	while (cm_GetCommandStatus(h) == 0) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	g_774a34 = fcn_004ce180();
 	r = -1;
@@ -28,7 +28,7 @@ void __cdecl d3_FlushLoadAndPreloadQueue(void)
 	}
 	if (r != -1) {
 		while (cm_GetCommandStatus(r) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 	}
 }

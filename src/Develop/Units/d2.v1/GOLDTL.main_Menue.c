@@ -58,7 +58,7 @@ void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl d2_OpenFileSelector(int, int, char *, char *, char *, char *);
 int __cdecl fcn_0064d41a(char *, char *, char *, ...);
 int __cdecl main_LoadCitySelectionScene(char *, int);
-int __cdecl fcn_005e4970(void);
+int __cdecl d2_ShowCreditsScreen(void);
 void __cdecl msx_StartTrackInternal(int, int);
 void __cdecl d2_ShowAmountDialog(void);
 void __cdecl fcn_005e3520(void);
@@ -282,7 +282,7 @@ label_53a8e3:
 					msx_SetFadeDuration(1000);
 					msx_StartTrack((char *)0x6a3aa4, 1);
 				}
-				fcn_005e4970();
+				d2_ShowCreditsScreen();
 				d2_SetSlotVisibility(v5, 1);
 				if (msx_MusicEnabled != 0) {
 					msx_SetFadeDuration(1000);

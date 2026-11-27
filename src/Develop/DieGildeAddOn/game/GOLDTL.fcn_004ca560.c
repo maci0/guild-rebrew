@@ -13,7 +13,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004fdcf0(char*);
 char* __cdecl ch_CreateAction(char*, int, ...);
 void __cdecl d3_SelectSceneContext(int, int);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x004ca560 */
@@ -77,7 +77,7 @@ int __cdecl fcn_004ca560(char* x, char* out)
 			if (r != 0) {
 				saved = d3_CurrentContextIndex;
 				d3_SelectSceneContext(0, 1);
-				m = fcn_00445600(*(int*) (s + 0x61), 0x100, 0, x + 0x1c);
+				m = d3_FindSceneObject(*(int*) (s + 0x61), 0x100, 0, x + 0x1c);
 				if (m != 0) {
 					d3_TransformPoint(m, m + 0x4c, r + 0x180);
 					r[0x17c] = 1;

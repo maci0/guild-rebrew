@@ -45,7 +45,7 @@ void __cdecl fcn_00525ef0(void);
 int __cdecl cm_AppendCommandSyncField(int type, int count, int off, char* data);
 int __cdecl cm_SendSetAttribute(void);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl cm_RequestSysMessage(int, void*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ClearRadioGroup(int i);
@@ -115,7 +115,7 @@ void __cdecl d2_ChooseWappen(void)
 			cm_AppendCommandSyncField(4, 1, (char*) me_h - g_aed32c + 0x54, (char*) &district);
 			r = cm_SendSetAttribute();
 			while (cm_GetCommandStatus(r) == 0) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 			for (i = 8; i != 0; i--) {
 				for (j = 0; j < HOUSES; j++) {

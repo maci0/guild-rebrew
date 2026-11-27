@@ -34,7 +34,7 @@ int __cdecl d3sm_GetSceneSuperMap(char*);
 void __cdecl fcn_0045b290(char*, int);
 char __cdecl d3_TraverseSceneObjects(int, void*, int, void (__cdecl*)(void));
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-char* __cdecl fcn_00445600(char*, int, char*, char*);
+char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char* __cdecl ch_SelectRandomDummy(void);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 void __cdecl ch_SetPosition(char*, float*, int);
@@ -119,10 +119,10 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 					    && *(int*) (obj + 0x88) == (int) (g_10432c0 + slot * 4)) {
 						if (CompareVector3WithinTolerance((float*) (obj + 0x38), g_662d70, 0.5f) != 0) {
 							if ((*(int*) (obj + 0x124) != 0
-							     && (found = fcn_00445600(0, 0x100, 0, s_68b0f4)) != 0)
+							     && (found = d3_FindSceneObject(0, 0x100, 0, s_68b0f4)) != 0)
 							    || (found = ch_SelectRandomDummy()) != 0
-							    || ((found = fcn_00445600(0, 0x100, 0, s_675908)) != 0
-							        || (found = fcn_00445600(0, 0x100, 0, s_68b1e0)) != 0)) {
+							    || ((found = d3_FindSceneObject(0, 0x100, 0, s_675908)) != 0
+							        || (found = d3_FindSceneObject(0, 0x100, 0, s_68b1e0)) != 0)) {
 								d3_TransformPoint(found, (float*) (found + 0x4c), (float*) buf);
 								ch_SetPosition(obj, (float*) buf, 1);
 							}

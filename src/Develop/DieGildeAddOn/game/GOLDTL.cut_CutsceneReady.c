@@ -16,7 +16,7 @@ typedef struct {
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_RequestRemoveCutsceneParticipant(int, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl cm_SendLogAction(char*);
 int __cdecl cm_RequestCutsceneReady(Msg*);
 void __cdecl cm_SendTraceEnd(char*);
@@ -44,7 +44,7 @@ int __cdecl cut_CutsceneReady(int* c)
 			do {
 				if (cm_GetCommandStatus(h) != 0)
 					break;
-				fcn_00535960();
+				cm_StepCommandQueue();
 			} while (1);
 		}
 	} else {
@@ -64,6 +64,6 @@ int __cdecl cut_CutsceneReady(int* c)
 	h = cm_RequestCutsceneReady(&m);
 	cm_SendTraceEnd("cut_CutsceneReady");
 	while (cm_GetCommandStatus(h) == 0)
-		fcn_00535960();
+		cm_StepCommandQueue();
 	return cm_GetCommandStatus(h) != 2;
 }

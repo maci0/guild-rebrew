@@ -45,7 +45,7 @@ unsigned char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CalculateGebaeudeValue(int, int);
 int __cdecl gm_SumTreasury(unsigned short*);
 int __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);

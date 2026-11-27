@@ -56,7 +56,7 @@ void __cdecl ReportClientMessage(const char* msg)
 
 /* ADDRESS: GOLD 0x00422330 */
 /* ADDRESS: GOLDTL 0x0041da60 */
-void __cdecl fcn_0041da60(char* module, unsigned int line, char* msg, int severity)
+void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int severity)
 {
 	unsigned char flags;
 

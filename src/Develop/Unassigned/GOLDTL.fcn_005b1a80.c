@@ -4,7 +4,7 @@ extern Node* g_774a78;
 
 
 /* ADDRESS: GOLDTL 0x005b1a80 */
-char* __cdecl fcn_005b1a80(int key)
+char* __cdecl hp_FindProdSettingNode(int key)
 {
 	char* p;
 
@@ -22,11 +22,11 @@ void __cdecl hp_UpdateProdSetting(int a, char* o);
 
 
 /* ADDRESS: GOLDTL 0x005b1e20 */
-void __cdecl fcn_005b1e20(char* p)
+void __cdecl hp_SyncProdSetting(char* p)
 {
 	char* o;
 
-	o = fcn_005b1a80(*(int*) (p + 1));
+	o = hp_FindProdSettingNode(*(int*) (p + 1));
 	if (o != 0) {
 		hp_UpdateProdSetting((int) p, o);
 	}
@@ -37,7 +37,7 @@ extern float g_662cf8;
 
 
 /* ADDRESS: GOLDTL 0x005b1e40 */
-int __cdecl fcn_005b1e40(char* p)
+int __cdecl hp_PickWeightedProdItem(char* p)
 {
 	char* o;
 	int thr;
@@ -46,7 +46,7 @@ int __cdecl fcn_005b1e40(char* p)
 	int sum;
 	int* e;
 
-	o = fcn_005b1a80(*(int*) (p + 1));
+	o = hp_FindProdSettingNode(*(int*) (p + 1));
 	if (o == 0) {
 		return 0;
 	}

@@ -22,7 +22,7 @@ void __cdecl gm_RestockTownMarket(char a0);
 int __cdecl ls_SendGame(char *path);
 int __cdecl fcn_00525b40(void);
 void __cdecl main_PumpWindowMessages(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl sv_WaitForNetworkSync(int id);
 void __cdecl gm_UpdateMarketStockSlots(int i);
 void __cdecl cm_SendRandomMarktSlotDelta(int i);
@@ -66,7 +66,7 @@ int __cdecl fcn_005145a0(char *path)
     *(int *) &g_77494c = 0;
     do {
         main_PumpWindowMessages();
-        fcn_00535960();
+        cm_StepCommandQueue();
     } while (*(int *) &g_77494c == 0);
     if (*(int *) &g_77494c & 1) {
         if (*path == 0)
@@ -108,7 +108,7 @@ int __cdecl fcn_005145a0(char *path)
                            (char *) 0x7e23ea, (char *) 0x7e240a);
     while (session == -1) {
         main_PumpWindowMessages();
-        fcn_00535960();
+        cm_StepCommandQueue();
         session = cm_SendAllocClientSpieler(0xffff, 0xffff, *(unsigned char *) 0x7e23e2,
                                *(unsigned char *) 0x7e23e3,
                                *(int *) 0x7e23e4 + 0x59a,
@@ -118,7 +118,7 @@ int __cdecl fcn_005145a0(char *path)
     }
     while (cm_GetCommandStatus(session) == 0) {
         main_PumpWindowMessages();
-        fcn_00535960();
+        cm_StepCommandQueue();
     }
     handle = cm_GetCommandResult(session);
     if (*(int *) &g_77494c & 1) {
@@ -131,7 +131,7 @@ int __cdecl fcn_005145a0(char *path)
     }
     while (*(unsigned char *) &g_6a3440 == 0xfe) {
         main_PumpWindowMessages();
-        fcn_00535960();
+        cm_StepCommandQueue();
     }
     if (*(unsigned char *) &g_6a3440 != 0xff) {
         if (*(unsigned char *) &g_6a3440 != 5)
@@ -144,7 +144,7 @@ int __cdecl fcn_005145a0(char *path)
                  result);
     while ((*(int *) &g_77494c & 4) == 0) {
         main_PumpWindowMessages();
-        fcn_00535960();
+        cm_StepCommandQueue();
     }
     if (flag != 0) {
         fcn_00514570(*(unsigned int *) 0x14ac5f8);

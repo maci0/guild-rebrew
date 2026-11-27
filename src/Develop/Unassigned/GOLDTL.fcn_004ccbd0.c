@@ -7,7 +7,7 @@ char* __cdecl ch_FindCharacterByName(char*);
 int __cdecl d3_GetContextIndex(int);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
-int __cdecl fcn_004ccbd0(char* x, char* out)
+int __cdecl cm_ExCreateCutsceneCharAction(char* x, char* out)
 {
 	char* a;
 	char* b;

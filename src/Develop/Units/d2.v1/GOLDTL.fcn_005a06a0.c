@@ -5,7 +5,7 @@ int __cdecl d2_SetForm(int k, int i);
 void __cdecl io_AppendText(int a);
 int __cdecl main_RunFrameLoop(void* p, int a);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
-int __cdecl fcn_005095d0(char* e, int* out_count);
+int __cdecl gm_CountChildren(char* e, int* out_count);
 int __cdecl fcn_00526120(char* text, int flags);
 int __cdecl d2_DestroyForm(int k);
 
@@ -33,7 +33,7 @@ void __cdecl d2_ShowWeinkellerDialog(void)
 		}
 		else if ((mode = *(int*) 0x100f1dc) == 2) {
 			n = 0;
-			if (fcn_005095d0(slot, &n) != 0) {
+			if (gm_CountChildren(slot, &n) != 0) {
 				fcn_004ff210(*(unsigned short*) slot, -2000);
 			}
 			else {

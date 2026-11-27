@@ -34,7 +34,7 @@ float __cdecl gm_CalcSkillDuelScore(void*, unsigned short*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005c06e0 */
-int __cdecl fcn_005c06e0(unsigned short* entityRecord)
+int __cdecl d2_RunStraftatAccuseDialog(unsigned short* entityRecord)
 {
 	int result;
 	int h1;
@@ -113,7 +113,7 @@ int __cdecl fcn_005c06e0(unsigned short* entityRecord)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005c06e0, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunStraftatAccuseDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);
 	return result;
 none:

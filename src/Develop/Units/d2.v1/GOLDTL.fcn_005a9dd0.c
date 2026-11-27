@@ -32,7 +32,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl d2_ClampAmountToRange(int, int, int, int*);
-int __cdecl fcn_0050b710(int a, unsigned char b);
+int __cdecl gm_AmountToUnits(int a, unsigned char b);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int slot);
@@ -88,7 +88,7 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 
 		b = io_AppendText(0x1a1b, *(unsigned short*) (((char(*)[0x2f4])g_868060)[g_773d75] + 0x54) * 2 + 0x9a8);
 		d2_ClampAmountToRange(0x640, acc, 0x20, &col);
-		d2_SetElementValue(d2_GetWindowListItem(d, 1, b), fcn_0050b710(0x640, g_773d75), fcn_0050b710(col, g_773d75), fcn_0050b710(0x640, g_773d75));
+		d2_SetElementValue(d2_GetWindowListItem(d, 1, b), gm_AmountToUnits(0x640, g_773d75), gm_AmountToUnits(col, g_773d75), gm_AmountToUnits(0x640, g_773d75));
 		h1 = d2_GetWindowListItem(d, 1, b + 1);
 		h2 = d2_GetWindowListItem(d, 1, b + 2);
 	}

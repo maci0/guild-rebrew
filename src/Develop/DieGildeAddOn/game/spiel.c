@@ -1966,7 +1966,7 @@ int __cdecl gm_FreeObjectListRecursive(LinkedNode** head)
 extern int d3_CurrentContextIndex;
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char*);
 void __cdecl d3_SelectSceneContext(int, int);
-char* __cdecl fcn_00445600(char*, int, char*, char*);
+char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
@@ -2156,9 +2156,9 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 		saved_mode = d3_CurrentContextIndex;
 		d3_SelectSceneContext(universe, 1);
 		if (gm_CheckEntityType((unsigned char*) existing) != 0)
-			found = fcn_00445600(NULL, 0x100, NULL, "dummy_TRANSPORTER");
+			found = d3_FindSceneObject(NULL, 0x100, NULL, "dummy_TRANSPORTER");
 		else
-			found = fcn_00445600(*(char**) ((char*) existing + 0x61), 0x100, NULL, "dummy_TRANSPORTER");
+			found = d3_FindSceneObject(*(char**) ((char*) existing + 0x61), 0x100, NULL, "dummy_TRANSPORTER");
 		if (found != NULL) {
 			d3_TransformPoint(found, (float*) (found + 0x4c), position);
 		} else if (*(char**) ((char*) existing + 0x61) != NULL) {
@@ -4831,6 +4831,7 @@ short* __cdecl gm_GetEntityTableEntry(char* param)
 }
 #endif
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only: number of living children; non-zero when one is of age
  * (discarded). */
 int __cdecl gm_CountChildren(char* entity, int* count_out)
@@ -4858,6 +4859,7 @@ int __cdecl gm_CountChildren(char* entity, int* count_out)
 	}
 	return adult;
 }
+#endif
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 int __cdecl gm_ChangePlayerIdentityImpl(int from_id, int to_id, int unused)
 {
@@ -5587,6 +5589,7 @@ draw_tail:
  * amount per trade unit is g_spiel_space_fill[id - 61], 16 entries of 32 for item ids 61..76; the
  * client addresses the table as 0x6995bc, 61 dwords below it, and nothing else reads it. */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_AmountToUnits(int amount, unsigned char type)
 {
 	extern int g_spiel_space_fill[16];
@@ -5595,6 +5598,7 @@ int __cdecl gm_AmountToUnits(int amount, unsigned char type)
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_AmountToUnits(): enter", 1);
 	return (int) ((float) amount / g_spiel_space_fill[*(unsigned short*) &g_entity_slot_table[type * 189] - 61] + 0.5);
 }
+#endif
 
 int __cdecl gm_UnitsToAmount(int units, unsigned char type)
 {
@@ -5815,6 +5819,7 @@ double __cdecl eval_ObjektPreis2Credits(int entity_index, int param2)
 }
 #pragma optimize("", on)
 #endif
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only (TL 0x50bb50, discarded): the season's price of item id from the season's 0x55-entry
  * table in g_slot_array (gm_FindSlotById's records), else its production value. */
 float __cdecl gm_GetSeasonPrice(int id, unsigned char season)
@@ -5830,6 +5835,7 @@ float __cdecl gm_GetSeasonPrice(int id, unsigned char season)
 	}
 	return eval_ObjektPreis2Credits(id, 100);
 }
+#endif
 
 /* Client-only mood, store and building-level helpers (discarded). */
 
@@ -6046,6 +6052,7 @@ int __cdecl gm_GetBuildingLevel(unsigned char* building)
 	return type[0x247];
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_HasLevelFor(unsigned char* building, unsigned char* other)
 {
 	unsigned char* type;
@@ -6066,6 +6073,7 @@ int __cdecl gm_HasLevelFor(unsigned char* building, unsigned char* other)
 	}
 	return level >= need;
 }
+#endif
 
 /* Client-only (TL 0x50c5d0, discarded): out[0] is a building's chain value (gm_WalkEntityChain of its
  * +0x27 link, capped at 2048000) times 0.07 for type kind 2 or 0.03 otherwise, at least 0; out[1] sums
@@ -6397,6 +6405,7 @@ int __cdecl gm_SumBuildingProductionValues(char* obj, int param2)
 	return (int) ((param2 * g_const_0_01) * total);
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only (TL 0x50d170, discarded): a building type's +0x249 count times 0xf00 plus the production
  * value of each of its products flagged 0x8000. */
 int __cdecl gm_GetTypeProductValue(int type_index)
@@ -6421,6 +6430,7 @@ int __cdecl gm_GetTypeProductValue(int type_index)
 	}
 	return total;
 }
+#endif
 
 int __cdecl gm_AccumulateTyped2(char* entity)
 {
@@ -6462,6 +6472,7 @@ int __cdecl gm_SumTreasury(char* entity)
 	return sum;
 }
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 int __cdecl gm_GetSeasonTreasury(char* entity, char season)
 {
 	char* r;
@@ -6476,6 +6487,7 @@ int __cdecl gm_GetSeasonTreasury(char* entity, char season)
 	}
 	return result;
 }
+#endif
 
 int __cdecl gm_SumSlotTreasury(int slot)
 {

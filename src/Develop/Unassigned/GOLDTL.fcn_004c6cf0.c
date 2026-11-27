@@ -9,7 +9,7 @@ typedef struct
 } Body9;
 // SIZE 0x24
 
-void __cdecl fcn_004c6cf0(Body9* source)
+void __cdecl cm_SendAllocAlchemist(Body9* source)
 {
 	char buf[0x9c];
 

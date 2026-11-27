@@ -37,7 +37,7 @@ void __cdecl cm_PollCommandQueue(void);
 void __cdecl ls_ID2Ptr(void);
 Figure* __cdecl cm_GetCommandResult(int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 
 void __cdecl gm_InitCityOfficialsAndCitizens(void)
@@ -90,7 +90,7 @@ void __cdecl gm_InitCityOfficialsAndCitizens(void)
 	}
 	cm_EndCommandSync();
 	while (cm_AreQueuedCommandsDone() == 0) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	cm_BeginCommandSync();
 	for (i = 0; i < 8; i++) {
@@ -99,6 +99,6 @@ void __cdecl gm_InitCityOfficialsAndCitizens(void)
 	}
 	cm_EndCommandSync();
 	while (cm_AreQueuedCommandsDone() == 0) {
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 }

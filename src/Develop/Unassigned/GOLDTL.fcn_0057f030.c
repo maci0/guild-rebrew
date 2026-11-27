@@ -21,7 +21,7 @@ extern int* g_665f08;
 extern volatile int g_6b7fac;
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_0057f030(int* ev)
+int __cdecl d2_UpdateTutCh1Cat0aStep(int* ev)
 {
 	if (ev[0] == 0xd && ev[1] != 0 && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) ev[1]].category == 0xa) {
 		((struct fsm*)g_665f08)->state = 0xb;

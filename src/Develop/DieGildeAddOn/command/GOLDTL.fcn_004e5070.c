@@ -16,7 +16,7 @@ typedef struct {
 void __cdecl cm_StageRawPacketPayload(int, void*);
 int __cdecl cm_RequestSendCutInfo(int, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 
 void __cdecl cut_ResetParticipantState(unsigned char* s, int id)
 {
@@ -35,7 +35,7 @@ void __cdecl cut_ResetParticipantState(unsigned char* s, int id)
 			cm_StageRawPacketPayload(0x35c, &copy);
 			h = cm_RequestSendCutInfo(id, *(int*) s);
 			while (cm_GetCommandStatus(h) == 0)
-				fcn_00535960();
+				cm_StepCommandQueue();
 		}
 	}
 }

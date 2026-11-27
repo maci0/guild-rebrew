@@ -15,7 +15,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_GetBuildingTypeCategory(int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 void* __cdecl fcn_00502cd0(int, int, ...);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl gm_GetMsgField(void*, void*);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
@@ -71,7 +71,7 @@ int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int 
 					while (sub != 0 && remaining > 0) {
 						if ((*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) != 0x17
 							&& (*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) != 0x25) {
-							div = (int) (fcn_0050bb50(*sub, g_773d75) * 0.5);
+							div = (int) (gm_GetSeasonPrice(*sub, g_773d75) * 0.5);
 							if (div != 0) {
 								amount = remaining / div;
 								if (amount <= 1) {
@@ -120,7 +120,7 @@ int __cdecl gm_CollectPaymentOrLiquidate(int receiverId, char* ownerEntity, int 
 					while (sub != 0 && remaining > 0) {
 						if ((*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) == 0x17
 							|| (*(char *)&((OBJECT_PROTOTYPE*) lpObjektePROT)[*sub].kind) == 0x25) {
-							div = (int) (fcn_0050bb50(*sub, g_773d75) * 0.5);
+							div = (int) (gm_GetSeasonPrice(*sub, g_773d75) * 0.5);
 							if (div != 0) {
 								amount = remaining / div;
 								if (amount <= 1) {

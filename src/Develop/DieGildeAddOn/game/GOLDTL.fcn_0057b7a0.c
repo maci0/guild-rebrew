@@ -21,7 +21,7 @@ char* __cdecl fcn_00502cd0();
 char* __cdecl gm_FindBuildingPrimarySlot(char*);
 char* __cdecl gm_NextEntityQueryMatch(void);
 unsigned short __cdecl gm_RandomMod(int);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -70,7 +70,7 @@ void __cdecl he_RunFriedhofStealAction(char* e)
 		if (n != 0) {
 			sel = list[gm_RandomMod(n)];
 			if (sel != 0) {
-				fcn_0050bb50(*(unsigned short*) sel, g_773d75);
+				gm_GetSeasonPrice(*(unsigned short*) sel, g_773d75);
 				cm_SendSellObjekt(-1, *(int*) (r + 2), *(unsigned short*) sel, 1, g_773d75, 0);
 				switch (fcn_0051e070()) {
 				case 0:

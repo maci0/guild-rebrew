@@ -16,7 +16,7 @@ typedef struct
 
 int __cdecl amt_FindOfficeSlotByType(int, Rec18*);
 
-int __cdecl fcn_004e9530(int n)
+int __cdecl amt_FindHighestOccupiedOffice(int n)
 {
 	Rec18 r;
 

@@ -32,7 +32,7 @@ char* __cdecl ch_SelectRandomDummy(void);
 int __cdecl fcn_00413160(void);
 void __cdecl ReportClientMessage(const char* msg);
 int __cdecl main_RunFrameLoop(void*, int);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 
 /* lpGebaeudePROT row (0x24d bytes); only the leading type byte is read here. */
 typedef struct {
@@ -136,10 +136,10 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 			if (CompareVector3WithinTolerance((float*) (e + 0x38), (float*) 0x662d70, 0.5f)) {
 				char* d;
 
-				if ((*(int*) (e + 0x124) == 0 || (d = fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER")) == 0)
+				if ((*(int*) (e + 0x124) == 0 || (d = d3_FindSceneObject(0, 0x100, 0, "dummy_TRANSPORTER")) == 0)
 					&& (d = ch_SelectRandomDummy()) == 0
-					&& (d = fcn_00445600(0, 0x100, 0, "dummy_EINGANG")) == 0
-					&& (d = fcn_00445600(0, 0x100, 0, "dummy_TRANSPORTER_ENTRY")) == 0)
+					&& (d = d3_FindSceneObject(0, 0x100, 0, "dummy_EINGANG")) == 0
+					&& (d = d3_FindSceneObject(0, 0x100, 0, "dummy_TRANSPORTER_ENTRY")) == 0)
 					continue;
 				d3_TransformPoint(d, d + 0x4c, (float*) pos);
 				ch_SetPosition((int) e, pos, 1);

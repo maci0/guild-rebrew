@@ -30,9 +30,9 @@ void __cdecl fcn_004e4c40(int a);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl d2_ShowMessageBox(void* buf, int n);
 void __cdecl fcn_004e48b0(void);
-void __cdecl fcn_004e4610(void* h);
-void __cdecl fcn_004e44f0(void* h);
-void __cdecl fcn_004e4c00(void);
+void __cdecl evt_StopScriptIfActive(void* h);
+void __cdecl cut_WaitForScript(void* h);
+void __cdecl d3_DestroySkyLayer(void);
 void __cdecl fcn_004e4c60(void);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl d3snd_StopTrackedVoices(void);
@@ -109,9 +109,9 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 	}
 	d2_ShowMessageBox(f.msg, 0);
 	fcn_004e48b0();
-	fcn_004e4610((void*) h2);
-	fcn_004e44f0((void*) h2);
-	fcn_004e4c00();
+	evt_StopScriptIfActive((void*) h2);
+	cut_WaitForScript((void*) h2);
+	d3_DestroySkyLayer();
 	fcn_004e4c60();
 	cut_CleanupCutscene();
 	d3snd_StopTrackedVoices();

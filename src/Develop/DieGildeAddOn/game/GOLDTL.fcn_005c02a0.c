@@ -22,7 +22,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl d2_ClampAmountToRange(int, int, int, int*);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 void __cdecl fcn_005c9220(int*);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, unsigned char);
@@ -31,7 +31,7 @@ void __cdecl cm_RequestMoveCredits(int, int, char, int);
 /* The native caller consumes the command queue index returned in EAX. */
 int __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl gm_TryRecordCrime(int, int, int, int, int);
@@ -42,7 +42,7 @@ void __cdecl d2_DestroyForm(int);
 extern float g_664330;
 
 /* ADDRESS: GOLDTL 0x005c02a0 */
-int __cdecl fcn_005c02a0(char* entity)
+int __cdecl d2_RunPaymentTargetDialog(char* entity)
 {
     int result;
     int dlg;
@@ -72,8 +72,8 @@ int __cdecl fcn_005c02a0(char* entity)
     amount = (int)(abs(amount + gm_WalkEntityChain(*(unsigned short*)entity)) * 0.0007843137136660516f);
     command = gm_AccumulateTyped2(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
     d2_ClampAmountToRange(amount, command, 0x20, &limit);
-    d2_SetElementValue(edit, fcn_0050b710(amount, g_773d75),
-        fcn_0050b710(limit, g_773d75), fcn_0050b710(amount, g_773d75));
+    d2_SetElementValue(edit, gm_AmountToUnits(amount, g_773d75),
+        gm_AmountToUnits(limit, g_773d75), gm_AmountToUnits(amount, g_773d75));
     cancel = d2_GetWindowListItem(dlg, 1, io_AppendText(0x174e));
     memset(ids, 0xff, sizeof(ids));
     ids[0] = dlg;
@@ -103,7 +103,7 @@ int __cdecl fcn_005c02a0(char* entity)
                     command = (int)(duration / command);
                     command = cm_RequestCopyEntityData(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*)(entity + 4), command, 1);
                     while (!cm_GetCommandStatus(command))
-                        fcn_00535960();
+                        cm_StepCommandQueue();
                     if (entity[2] == 6 || entity[2] == 7) {
                         io_FormatTextBuffer(text, 0x1751, g_774970, amount);
                         he_PostEntityMessage(*(int*)(entity + 4), -1, text, 0, 0x5fb, g_67eab0);
@@ -115,7 +115,7 @@ int __cdecl fcn_005c02a0(char* entity)
             } else if (d2_CurrentElementId == cancel)
                 g_774654 = 1;
         }
-    } while (main_RunFrameLoop((void*)fcn_005c02a0, 0x677c7));
+    } while (main_RunFrameLoop((void*)d2_RunPaymentTargetDialog, 0x677c7));
     d2_DestroyForm(dlg);
     return result;
 }

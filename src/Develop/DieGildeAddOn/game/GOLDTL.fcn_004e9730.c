@@ -9,7 +9,7 @@ typedef struct {
 	int d;
 } TierInfo;
 
-int __cdecl fcn_004e9580(int, TierInfo*);
+int __cdecl amt_GetRankLimits(int, TierInfo*);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl cm_RequestAllocSpieler(char, int, int, short, int, char, char, char);
@@ -23,7 +23,7 @@ unsigned int __cdecl fcn_004e9730(unsigned int a0)
 	int x;
 
 
-	if (fcn_004e9580((int) a0, &t) == 0) {
+	if (amt_GetRankLimits((int) a0, &t) == 0) {
 		return 0xffffffff;
 	}
 	if (*(int*) 0x68de28 == 2) {

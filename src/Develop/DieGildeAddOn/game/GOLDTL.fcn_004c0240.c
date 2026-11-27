@@ -17,8 +17,8 @@ char* __cdecl gm_FindCityItemHolder(int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
-float __cdecl fcn_0050bb50(int, unsigned char);
-int __cdecl fcn_0050d320(char*, int);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
+int __cdecl gm_GetSeasonTreasury(char*, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004c0240 */
@@ -74,14 +74,14 @@ void __cdecl he_LoadTransportCargoAtStop(char* route, int difficulty)
 					val = 0;
 					if (*(unsigned short*) (pkt + 0x27) != *(unsigned short*) v4) {
 						if (((char)(((BUILDING_PROTOTYPE*)t)->category)) == 0xa) {
-							val = (int) (fcn_0050bb50(*(unsigned short*) item, g_773d75) *
+							val = (int) (gm_GetSeasonPrice(*(unsigned short*) item, g_773d75) *
 								     g_664174);
 						} else {
-							val = (int) (fcn_0050bb50(*(unsigned short*) item, g_773d75) *
+							val = (int) (gm_GetSeasonPrice(*(unsigned short*) item, g_773d75) *
 								     *(float*) (pkt + 0x49));
 						}
 					}
-					if (fcn_0050d320(v4, difficulty) >= val * c) {
+					if (gm_GetSeasonTreasury(v4, difficulty) >= val * c) {
 						cm_SendSellObjekt(*(int*) (src + 2), *(int*) (stats.obj + 2),
 							     *(int*) rec, c, difficulty, val);
 					}

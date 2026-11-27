@@ -41,7 +41,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl cm_SendCopyEntityData(Packet*);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_00412830(int);
@@ -77,7 +77,7 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 				pkt.x58 = pkt.x8;
 				h = cm_SendCopyEntityData(&pkt);
 				while (cm_GetCommandStatus(h) == 0) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 				r = 1;
 				g_774654 = 1;

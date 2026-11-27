@@ -8,11 +8,11 @@ char* __cdecl gm_FindRecordById(unsigned int);
 char* __cdecl gm_SearchTable67(unsigned int);
 char* __cdecl gm_LookupEntityRecordById(int);
 short* __cdecl gm_ResolveEntityOwnerBuilding(short*);
-int __cdecl fcn_0050d320(char*, char);
-float __cdecl fcn_0050bb50(int, unsigned char);
+int __cdecl gm_GetSeasonTreasury(char*, char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00497030 */
-int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
+int __cdecl ai_StartBuyObjekt(int actionKind, int unused, int argCount, char* itemCmd, char* targetCmd)
 {
 	char* rec;
 	unsigned char* ent;
@@ -23,13 +23,13 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 	int cnt;
 	int owner;
 
-	if (a2 != 1) {
+	if (argCount != 1) {
 		goto fail;
 	}
-	if (*a3 != 2) {
+	if (*itemCmd != 2) {
 		goto fail;
 	}
-	id = *(unsigned int*) (a3 + 4);
+	id = *(unsigned int*) (itemCmd + 4);
 	if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].value_040) != 0) {
 		goto fail;
 	}
@@ -39,8 +39,8 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 	ent = 0;
 	rec = 0;
 	owner = 0;
-	if (*a4 == 1) {
-		rec = (char*) gm_FindRecordById(*(unsigned int*) (a4 + 4));
+	if (*targetCmd == 1) {
+		rec = (char*) gm_FindRecordById(*(unsigned int*) (targetCmd + 4));
 		if (rec == 0) {
 			goto fail;
 		}
@@ -48,7 +48,7 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		if (kind != 2 && kind != 6) {
 			goto done;
 		}
-		if (fcn_00502cd0(*(int*) (rec + 0x14), 1, 0, *(unsigned int*) (a3 + 4)) != 0) {
+		if (fcn_00502cd0(*(int*) (rec + 0x14), 1, 0, *(unsigned int*) (itemCmd + 4)) != 0) {
 			goto fail;
 		}
 		ent = (unsigned char*) gm_SearchTable67(*(unsigned int*) (rec + 6));
@@ -68,7 +68,7 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		if (i >= cnt) {
 			goto fail;
 		}
-		while (i < cnt && (*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) != *(unsigned int*) (a3 + 4)) {
+		while (i < cnt && (*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) != *(unsigned int*) (itemCmd + 4)) {
 			i++;
 		}
 		if (i >= cnt) {
@@ -84,18 +84,18 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 				goto fail;
 			}
 		}
-	} else if (*a4 == 4) {
-		ent = (unsigned char*) gm_SearchTable67(*(unsigned int*) (a4 + 4));
+	} else if (*targetCmd == 4) {
+		ent = (unsigned char*) gm_SearchTable67(*(unsigned int*) (targetCmd + 4));
 		if (ent == 0) {
 			goto fail;
 		}
-		if (fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, *(unsigned int*) (a3 + 4)) != 0) {
+		if (fcn_00502cd0(*(int*) (ent + 0x5d), 1, 0, *(unsigned int*) (itemCmd + 4)) != 0) {
 			goto fail;
 		}
 		tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned int) *ent];
 		cnt = ((BUILDING_PROTOTYPE*)tbl)->component_count;
 		i = 0;
-		while (i < cnt && (*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) != *(unsigned int*) (a3 + 4)) {
+		while (i < cnt && (*(unsigned short*) (tbl + 0x23 + i * 2) & 0x7fff) != *(unsigned int*) (itemCmd + 4)) {
 			i++;
 		}
 		if (i >= cnt) {
@@ -111,8 +111,8 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 				goto fail;
 			}
 		}
-	} else if (*a4 == 7) {
-		owner = (int) gm_LookupEntityRecordById(*(unsigned int*) (a4 + 4));
+	} else if (*targetCmd == 7) {
+		owner = (int) gm_LookupEntityRecordById(*(unsigned int*) (targetCmd + 4));
 		if (owner == 0) {
 			return 0;
 		}
@@ -120,9 +120,9 @@ int __cdecl fcn_00497030(int a0, int a1, int a2, char* a3, char* a4)
 		goto fail;
 	}
 done:
-	if (a0 == 0x39) {
-		i = *(int*) (a4 + 0x10);
-		*(int*) (a3 + 0x10) = 0x39;
+	if (actionKind == 0x39) {
+		i = *(int*) (targetCmd + 0x10);
+		*(int*) (itemCmd + 0x10) = 0x39;
 	} else {
 		if (rec != 0) {
 			owner = (int) gm_ResolveEntityOwnerBuilding((short*) rec);
@@ -137,13 +137,13 @@ done:
 		if (owner == 0) {
 			goto fail;
 		}
-		i = fcn_0050d320((char*) owner, g_773d75);
-		*(int*) (a3 + 0x10) = 0;
+		i = gm_GetSeasonTreasury((char*) owner, g_773d75);
+		*(int*) (itemCmd + 0x10) = 0;
 	}
-	if (*(float*) (a3 + 0x14) > 0.0f && *(float*) (a3 + 0x14) < 1.0f) {
-		i = (int) ((float) i * *(float*) (a3 + 0x14));
+	if (*(float*) (itemCmd + 0x14) > 0.0f && *(float*) (itemCmd + 0x14) < 1.0f) {
+		i = (int) ((float) i * *(float*) (itemCmd + 0x14));
 	}
-	return ((i < (int) fcn_0050bb50(*(int*) (a3 + 4), g_773d75)) - 1U) & 0xb;
+	return ((i < (int) gm_GetSeasonPrice(*(int*) (itemCmd + 4), g_773d75)) - 1U) & 0xb;
 
 fail:
 	return 0;

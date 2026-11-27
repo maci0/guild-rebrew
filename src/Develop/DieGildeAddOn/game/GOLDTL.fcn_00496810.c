@@ -60,7 +60,7 @@ int __cdecl fcn_00496810(int targetSlot, short* ent, int mode, Cmd* out1, Cmd* o
         r = ai_SelectBestMethod(9, *(unsigned short*)ent, 1, &c1, &c2);
         goto sent;
     }
-    strength = (int)((float)fcn_0050d320(ent, g_773d75) * 0.33f);
+    strength = (int)((float)gm_GetSeasonTreasury(ent, g_773d75) * 0.33f);
     if (out1->kind == 0) {
         if (*((unsigned char*)ent + 0x168) != 0) {
             best = -1;

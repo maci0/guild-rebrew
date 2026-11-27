@@ -16,7 +16,7 @@ typedef struct
 
 void __cdecl evt_RequestScriptExit(Obj*);
 
-int __cdecl fcn_004e4640(void)
+int __cdecl cut_ExitPendingEvtScripts(void)
 {
 	int i;
 	Obj* o;

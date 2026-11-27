@@ -1,5 +1,5 @@
 char* __cdecl d3_SelectObjectLod(char* object);
-void __cdecl fcn_0043d7c0(void* obj);
+void __cdecl d3_UpdateObjectLodMesh(void* obj);
 void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* out);
 
 /* ADDRESS: GOLD 0x00452ee0 */
@@ -24,7 +24,7 @@ void __cdecl fcn_00452ee0(char* o)
 	}
 	*(float*) (o + 0x1e4) = len * len;
 	if (o[0x210] & 4) {
-		fcn_0043d7c0(o);
+		d3_UpdateObjectLodMesh(o);
 	}
 	if (o[0x210] & 0x20) {
 		rec = *(char**) (o + 0x1cc);

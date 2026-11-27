@@ -147,7 +147,7 @@ int __cdecl he_PostEntityMessage(int id, int arg, char* text1, int flags, int va
     char* text2);
 
 /* Entity float value. */
-float __cdecl fcn_0050bb50(int id, unsigned char kind);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char kind);
 
 /* AI action selection and scoring. fcn_00497ec0 picks the records for one
  * action code; ai_StartKreditNehmen (GoldTL 0x0049e900) rates them and fills the two action packets;
@@ -162,6 +162,6 @@ int __cdecl ai_PrepareBuildSite(int action, short* ent, int mode, Cmd* cmd,
 
 /* Entity season/kind value. The entity is a short* record and the second
  * argument is the active player byte. */
-int __cdecl fcn_0050d320(short* ent, unsigned char player);
+int __cdecl gm_GetSeasonTreasury(short* ent, unsigned char player);
 
 #endif /* CLIENT_DIALOG_HELPERS_H */

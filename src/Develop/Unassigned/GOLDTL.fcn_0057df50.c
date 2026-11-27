@@ -3,7 +3,7 @@
 
 extern int g_7749f4;
 
-void __cdecl fcn_0057df50(int id, int on)
+void __cdecl d2_ToggleMessageFilterFlag(int id, int on)
 {
 	switch (id) {
 	case 0x605:

@@ -27,7 +27,7 @@ int __cdecl d2_CheckActionBlocker(unsigned char*, int);
 int __cdecl gm_CheckEntityStock(unsigned char*, int, char);
 void __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -90,7 +90,7 @@ int __cdecl d2_ShowMedicusDialog(unsigned char* e)
 					result = 0x81;
 					h = cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x40, 0);
 					while (cm_GetCommandStatus(h) == 0) {
-						fcn_00535960();
+						cm_StepCommandQueue();
 					}
 					fcn_00526120(text, 0);
 					g_774654 = 1;

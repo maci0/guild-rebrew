@@ -8,7 +8,7 @@
 
 
 #include "Develop/DieGildeAddOnServer/server_stats.h"
-void __cdecl fcn_004e7660(unsigned short*, char*);
+void __cdecl srv_FormatStatFamily(unsigned short*, char*);
 
 void __cdecl srv_FormatStatEntity(unsigned short* e)
 {
@@ -22,5 +22,5 @@ void __cdecl srv_FormatStatEntity(unsigned short* e)
 	srv_FormatStatSkills((unsigned char*) e, buf + strlen(buf));
 	srv_FormatStatAemter((unsigned char*) e, buf + strlen(buf));
 	srv_FormatStatTreasury(e, buf + strlen(buf));
-	fcn_004e7660(e, buf + strlen(buf));
+	srv_FormatStatFamily(e, buf + strlen(buf));
 }

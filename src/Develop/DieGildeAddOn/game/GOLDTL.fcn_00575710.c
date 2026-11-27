@@ -17,7 +17,7 @@ void __cdecl fcn_00572760(char*);
 void __cdecl fcn_00572770(char*);
 void __cdecl he_StartSuchen(char*);
 void __cdecl he_RunSuchen(char*);
-void __cdecl fcn_005729e0(char*);
+void __cdecl he_StartResourceSuchen(char*);
 void __cdecl he_RunResourceSuchen(char*);
 void __cdecl fcn_00572d90(char*);
 void __cdecl fcn_00572da0(char*);
@@ -51,7 +51,7 @@ int __cdecl he_RegisterCoreActionHandlers(void)
 		return 1;
 	}
 	he_RegisterActionMeta(8, g_6a7df0, 1, 0x500, 0xac);
-	if (he_RegisterHandler(9, fcn_005729e0, he_RunResourceSuchen) != 0) {
+	if (he_RegisterHandler(9, he_StartResourceSuchen, he_RunResourceSuchen) != 0) {
 		return 1;
 	}
 	he_RegisterActionMeta(9, g_6a7df0, 1, 0x500, -1);

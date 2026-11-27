@@ -25,7 +25,7 @@ void __cdecl fcn_00452300(void);
 #include "Develop/Units/d3/d3_animation.h"
 void __cdecl m_pool_free_all(int* p);
 void __cdecl fcn_00459bc0(void);
-void __cdecl fcn_00456cf0(void);
+void __cdecl d3s_ReleaseCache(void);
 void __cdecl fcn_0043bc20(void);
 void __cdecl fcn_0045c1e0(void);
 void __cdecl fcn_00450ad0(void);
@@ -93,7 +93,7 @@ void __cdecl d3_Shutdown(void)
 	}
 	m_pool_free_all(&g_6b8064);
 	fcn_00459bc0();
-	fcn_00456cf0();
+	d3s_ReleaseCache();
 	fcn_0043bc20();
 	fcn_0045c1e0();
 	fcn_00450ad0();

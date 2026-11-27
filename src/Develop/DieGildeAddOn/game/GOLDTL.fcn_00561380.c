@@ -44,7 +44,7 @@ void __cdecl he_FreeAction(void *);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl sb_PrepareVoice(int, char *);
 void __cdecl d3snd_PlayObjectSound(int, int, int, int);
-void *__cdecl fcn_00445600(void *, int, int, char *);
+void *__cdecl d3_FindSceneObject(void *, int, int, char *);
 void __cdecl d3_TransformPoint(char *, char *, float *);
 void __cdecl cm_SendCopyEntityData(void *);
 void __cdecl fcn_00418000(int, float *, int, float, float, float, float, float, float, float *, int, int, int);
@@ -318,11 +318,11 @@ void __cdecl he_RunSabotage(void *action)
 				goto label_562049;
 			if (!(*(unsigned char *)(p + 0xc2) == 0)) {
 				n = gm_RandomMod(3) & 0xffff;
-				model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, &names[n][0]);
+				model = (unsigned char *)d3_FindSceneObject((void *)*(int *)(r + 0x61), 0x100, 0, &names[n][0]);
 				if (model != 0)
 					d3_TransformPoint((char *)model, (char *)model + 0x4c, pos);
 				else
-					model = (unsigned char *)fcn_00445600((void *)*(int *)(r + 0x61), 0x100, 0, "dummy_TUER");
+					model = (unsigned char *)d3_FindSceneObject((void *)*(int *)(r + 0x61), 0x100, 0, "dummy_TUER");
 			} else {
 				*(unsigned char *)(msg + 4) = 0x4f;
 				*(int *)(msg + 8) = *(int *)((unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)] + 4);

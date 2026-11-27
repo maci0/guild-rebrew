@@ -9,7 +9,7 @@ extern blk24 g_68bef4;
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-char* __cdecl fcn_00445600(int, int, int, int*);
+char* __cdecl d3_FindSceneObject(int, int, int, int*);
 char* __cdecl ch_CreateQueuedAction(int, void*, int, int, int);
 void __cdecl fcn_004d4ee0(void);
 
@@ -26,7 +26,7 @@ void __cdecl gm_StartGroundCollectAction(int* args)
 	e = gm_LookupEntityRecordIn32SlotTable(args[0]);
 	s = *(unsigned short**) (e + 0x16c);
 	ch_CancelActionQueue((char*) *(int*) (e + 0x184));
-	p = fcn_00445600(0, 0x40, 0, args + 4);
+	p = d3_FindSceneObject(0, 0x40, 0, args + 4);
 	if (p == 0)
 		return;
 #ifdef REBREW_GOLD

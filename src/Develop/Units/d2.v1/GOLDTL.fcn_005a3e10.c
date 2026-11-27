@@ -26,7 +26,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_0050b710(int, char);
+int __cdecl gm_AmountToUnits(int, char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_GetControlValue(int);
@@ -55,9 +55,9 @@ void __cdecl fcn_005a3e10(void)
 	io_AppendText(0x1a4c);
 	d2_SetForm(dlg, 2);
 	sl = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1a4d, g_773d75));
-	max = fcn_0050b710(stock, g_773d75) + fcn_0050b710(have, g_773d75) > fcn_0050b710(stock, g_773d75) ?
-	      fcn_0050b710(stock, g_773d75) + fcn_0050b710(have, g_773d75) : fcn_0050b710(stock, g_773d75);
-	d2_SetElementValue(sl, 0, max, fcn_0050b710(stock, g_773d75));
+	max = gm_AmountToUnits(stock, g_773d75) + gm_AmountToUnits(have, g_773d75) > gm_AmountToUnits(stock, g_773d75) ?
+	      gm_AmountToUnits(stock, g_773d75) + gm_AmountToUnits(have, g_773d75) : gm_AmountToUnits(stock, g_773d75);
+	d2_SetElementValue(sl, 0, max, gm_AmountToUnits(stock, g_773d75));
 	d2_SetOverlayAnimation(0, 0);
 	if (main_RunFrameLoop((void*) fcn_005a3e10, 0x677c7) != 0) {
 		do {

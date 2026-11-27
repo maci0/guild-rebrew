@@ -3,7 +3,7 @@ char* __cdecl fcn_004cef30(int id);
 unsigned short __cdecl fcn_0042e410(int code);
 char* __cdecl gm_FindOrCreateEntitySlot(int a, char* s);
 int __cdecl fcn_004d2f70(char* s);
-char* __cdecl fcn_004d34f0(char* s);
+char* __cdecl d3_FindNearestEscapeNode(char* s);
 int __cdecl d3_TransformPoint(char* a, char* b, void* c);
 char __cdecl fcn_0045b990(int a, void* b, void* c, void* d, void* e);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int a, void* b);
@@ -107,7 +107,7 @@ int __cdecl cut_UpdateCombatTeamAI(int ctx, int teamPtr)
 			cm_SendUpdateCutsceneEntitySlot(*(int*) (ctx + 0x10), tmp);
 		} else {
 			float height;
-			targetPtr = (char*) fcn_004d34f0(s);
+			targetPtr = (char*) d3_FindNearestEscapeNode(s);
 			d3_TransformPoint(targetPtr, targetPtr + 0x4c, point);
 			map_x = ctx;
 			status = fcn_0045b990(*(int*) (g_67a370 + 0xb0),

@@ -14,7 +14,7 @@ extern void __cdecl fcn_004b20d0(int a);
 extern void __cdecl fcn_00471af0(int obj, int a);
 extern int __cdecl fcn_004b41b0(void);
 extern int __cdecl fcn_004e4470(const char *name);
-extern void __cdecl fcn_004e44f0(int a);
+extern void __cdecl cut_WaitForScript(int a);
 extern int __cdecl gm_FindHeadIconIndex(const char *name);
 extern int __cdecl d2_RunChoosePlayerDialog(int a, int b);
 extern int __cdecl fcn_0053e8a0(int a);
@@ -137,13 +137,13 @@ label_53de5c:
 				g_7e242c = v13;
 				if (!v2) {
 					main_LoopFlags = 0x12d6;
-					fcn_004e44f0(fcn_004e4470((const char *) 0x6a4040));
+					cut_WaitForScript(fcn_004e4470((const char *) 0x6a4040));
 				}
 				v2 = 0;
 				again = d2_RunChoosePlayerDialog(0xc6, 0);
 				if (again == 0) {
 					main_LoopFlags = 0x12d6;
-					fcn_004e44f0(fcn_004e4470((const char *) 0x6a4024));
+					cut_WaitForScript(fcn_004e4470((const char *) 0x6a4024));
 					retry = 1;
 				} else {
 					v4 = fcn_0053e8a0(0);

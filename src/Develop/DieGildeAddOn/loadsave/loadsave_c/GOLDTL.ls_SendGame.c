@@ -18,7 +18,7 @@ void __cdecl m_FreeTracked(char*);
 void __cdecl cm_RequestSendGameHeader(int);
 int __cdecl cm_SendLoadChunk(char*);
 void __cdecl main_PumpWindowMessages(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 
 int __cdecl ls_SendGame(char* path)
 {
@@ -61,11 +61,11 @@ int __cdecl ls_SendGame(char* path)
 			}
 		}
 		main_PumpWindowMessages();
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	while (g_1005760 != 0) {
 		main_PumpWindowMessages();
-		fcn_00535960();
+		cm_StepCommandQueue();
 	}
 	m_FreeTracked(buf);
 	CloseVfsStream(h);

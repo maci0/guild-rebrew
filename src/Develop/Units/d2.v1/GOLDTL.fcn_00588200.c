@@ -15,7 +15,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl fcn_0046fac0(int, int, char*, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-int __cdecl fcn_0050d320(char*, unsigned char);
+int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00588200 */
 void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
@@ -85,7 +85,7 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2;
 	d2_SetElementFont(rec, 0x54);
 	io_FormatTextBuffer(text, (char*) 0x6a9480,
-	             fcn_0050d320((char*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0),
+	             gm_GetSeasonTreasury((char*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0),
 	                          *(unsigned char*) &g_773d75),
 	             *(int*) (*(unsigned short*) &g_774970 * 0x21c + (unsigned long)&g_7f4ca0 + 0x194));
 	rec = fcn_0046fac0(*(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c) / 2,

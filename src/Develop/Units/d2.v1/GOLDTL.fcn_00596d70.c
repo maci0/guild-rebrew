@@ -49,7 +49,7 @@ void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_0046f280(int);
 void __cdecl fcn_0046f940(int, char*);
 int __cdecl d2_ShowTxt(int, int, char*, int);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 void __cdecl fcn_0050bc10(int, unsigned char, char*);
 void* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void* __cdecl he_fn_Handlung(void);
@@ -97,11 +97,11 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 		}
 		if (flags & 2) {
 			if (*p == 0x47) {
-				f = fcn_0050bb50(r->id, p[0x65]);
+				f = gm_GetSeasonPrice(r->id, p[0x65]);
 			} else if (*((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*p]) == '\n') {
-				f = fcn_0050bb50(r->id, g_773d75) * 1.1;
+				f = gm_GetSeasonPrice(r->id, g_773d75) * 1.1;
 			} else {
-				f = fcn_0050bb50(r->id, g_773d75) * *(float*) (p + 0x49);
+				f = gm_GetSeasonPrice(r->id, g_773d75) * *(float*) (p + 0x49);
 			}
 			fcn_0050bc10((int) f, g_773d75, text);
 			if (r->text1 == -1) {
@@ -115,9 +115,9 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 		}
 		if (flags & 1) {
 			if (*p == 0x47) {
-				f = fcn_0050bb50(r->id, p[0x65]);
+				f = gm_GetSeasonPrice(r->id, p[0x65]);
 			} else {
-				f = fcn_0050bb50(r->id, g_773d75) * 0.9;
+				f = gm_GetSeasonPrice(r->id, g_773d75) * 0.9;
 			}
 			fcn_0050bc10((int) f, g_773d75, text);
 			if (r->text2 == -1) {

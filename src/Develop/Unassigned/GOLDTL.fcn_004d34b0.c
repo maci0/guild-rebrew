@@ -6,10 +6,10 @@ extern char g_68b82c[];
 
 int __cdecl fcn_0065f220(char*, char*);
 
-char __cdecl fcn_004d34b0(char* s, char** arr)
+char __cdecl d3_CollectEscapePointsCallback(char* name, char** arr)
 {
-	if (fcn_0065f220(s, g_68b82c) == 0) {
-		arr[g_772f10] = s;
+	if (fcn_0065f220(name, g_68b82c) == 0) {
+		arr[g_772f10] = name;
 		g_772f10++;
 	}
 	return 1;

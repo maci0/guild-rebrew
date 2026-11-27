@@ -27,7 +27,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl cm_AppendCommandSyncField(int, int, int, char *);
 void __cdecl cm_SendSetAttribute(void);
 void __cdecl fcn_004c6e20(int, void *);
-void __cdecl fcn_004c6ea0(int);
+void __cdecl cm_SendClearObjektResources(int);
 int __cdecl gm_SearchTable67(int);
 void __cdecl fcn_00533bb0(int, int, void *, int, int, int, int);
 int __cdecl main_RunFrameLoop(void *, int);
@@ -150,7 +150,7 @@ int __cdecl fcn_004bfe00(char *obj)
 	if (n >= 2) {
 		fcn_004c6e20((int) obj, (void *) g_772908);
 	} else {
-		changed = 0; fcn_004c6ea0((int) obj);
+		changed = 0; cm_SendClearObjektResources((int) obj);
 		cm_BeginPacketFieldDelta(obj, *(int *) (obj + 2));
 		cm_AppendCommandSyncField(1, 1, (int) (obj - g_aed32c) + 0x33, &changed);
 		cm_SendSetAttribute();

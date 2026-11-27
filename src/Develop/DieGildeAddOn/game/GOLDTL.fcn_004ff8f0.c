@@ -14,7 +14,7 @@ int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 int __cdecl cm_RequestAllocSpieler(int, int, int, int, int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_GetRangeStatId(int, int);
 int __cdecl gm_IsNpcEntityState(void*);
 
@@ -100,7 +100,7 @@ void __cdecl gm_MaintainNpcPopulation(void)
 		handle = cm_RequestAllocSpieler(0x10, -1, -1, gm_RandomMod(4) + 0x10, -1, 0, 0, 0);
 		if (handle != -1) {
 			while (!cm_GetCommandStatus(handle)) {
-				fcn_00535960();
+				cm_StepCommandQueue();
 			}
 		}
 		if (cm_GetCommandStatus(handle) == 1) {
@@ -124,7 +124,7 @@ void __cdecl gm_MaintainNpcPopulation(void)
 				gm_GetRangeStatId((passes & 0xffff) + 1, (rnd2 & 0xffff) + 1), 0, 2);
 			if (handle != -1) {
 				while (!cm_GetCommandStatus(handle)) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 				}
 			}
 			if (cm_GetCommandStatus(handle) == 1) {

@@ -11,9 +11,9 @@ char* __cdecl fcn_004d3600(char*);
 int __cdecl he_QueueTradeWareCommand(char*, char*, char*);
 char* __cdecl fcn_004d36e0(char*);
 int __cdecl cut_AssignConquerTarget(char*, char*, char*);
-void __cdecl fcn_004d1570(char*, char*);
+void __cdecl cut_SendExitSlotCommand(char*, char*);
 int __cdecl cut_AssignGuardOrder(char*, char*);
-char* __cdecl fcn_004d34f0(char*);
+char* __cdecl d3_FindNearestEscapeNode(char*);
 int __cdecl gm_IssueEscapeOrder(char*, char*, char*);
 
 /* ADDRESS: GOLDTL 0x004d4250 */
@@ -51,7 +51,7 @@ void __cdecl cut_AssignCombatUnitOrder(char* rec, char* e)
 			}
 			break;
 		case 5:
-			obj = fcn_004d34f0(e);
+			obj = d3_FindNearestEscapeNode(e);
 			if (obj != 0) {
 				gm_IssueEscapeOrder(rec, e, obj);
 				return;
@@ -75,7 +75,7 @@ void __cdecl cut_AssignCombatUnitOrder(char* rec, char* e)
 			cut_AssignGuardOrder(rec, e);
 			return;
 		case 3:
-			fcn_004d1570(rec, e);
+			cut_SendExitSlotCommand(rec, e);
 			break;
 		}
 	}

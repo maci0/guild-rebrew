@@ -21,7 +21,7 @@ extern char s_662d1c[];
 
 char* __cdecl fcn_0064f026(char* s, char* delim);
 char* __cdecl fcn_0064d1a0(char* s, int c);
-void __cdecl fcn_0044cbd0(char* name, int flag);
+void __cdecl d3_ValidateTextureDimensions(char* name, int flag);
 
 /* ADDRESS: GOLDTL 0x0044d010 */
 void __cdecl fcn_0044d010(void* stream, fcn_0044d010_Ctx* c)
@@ -35,5 +35,5 @@ void __cdecl fcn_0044d010(void* stream, fcn_0044d010_Ctx* c)
 		*dot = 0;
 	}
 	strcpy(c->recs[c->n].name, tok);
-	fcn_0044cbd0(c->recs[c->n].name, 1);
+	d3_ValidateTextureDimensions(c->recs[c->n].name, 1);
 }

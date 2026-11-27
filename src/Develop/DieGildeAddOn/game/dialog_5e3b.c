@@ -27,7 +27,7 @@ void __cdecl fcn_00533a40(char*);
 int __cdecl ls_CanSaveGame(void);
 int __cdecl cm_RequestSysMessage(int, void*);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl ls_CaptureSavePreview(void);
 void __cdecl ls_SaveGame(char*, char*, int);
@@ -77,7 +77,7 @@ void __cdecl ls_QuickSave(void)
 		strcpy(s.name, "QUICKSAVE");
 		r = cm_RequestSysMessage(0xf, &s);
 		while (cm_GetCommandStatus(r) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 	} else if (!(g_7747b0 & 0x80)) {
 		fcn_00533a40("Quicksave");

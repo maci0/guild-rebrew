@@ -48,7 +48,7 @@ struct Obj043d860 {
 void __cdecl fcn_00458b10(Obj043d860* o, int arg, int* p, Vec043d860* out);
 void __cdecl fcn_00439870(Obj043d860* o, int arg, int z);
 
-char __cdecl fcn_0043d860(Obj043d860* o, int arg, Vec043d860* out, float* radius)
+char __cdecl d3_GetObjectBoundingSphere(Obj043d860* o, int arg, Vec043d860* out, float* radius)
 {
 	Ctx043d860* ctx;
 	Box043d860* b;

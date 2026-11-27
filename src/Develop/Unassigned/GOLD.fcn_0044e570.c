@@ -1,14 +1,14 @@
 // fcn_0044e570 — (popcount32(a) == 1).
 
 /* ADDRESS: GOLDTL 0x0044cba0 */
-unsigned char __cdecl fcn_0044e570(int a)
+unsigned char __cdecl d3_IsPowerOfTwo(int value)
 {
 	int i;
 	int n;
 	n = 0;
 	for (i = 0; i < 0x20; i++) {
-		n += a & 1;
-		a >>= 1;
+		n += value & 1;
+		value >>= 1;
 	}
 	return n == 1;
 }
@@ -23,7 +23,7 @@ unsigned char __cdecl fcn_0044e570(int a)
 char* __cdecl d3_ResolveTexturePath(int tex);
 unsigned char __cdecl vfs_ReadBmpInfo(char* name, int* w, int* h, int z);
 
-int __cdecl fcn_0044cbd0(int tex, char verbose)
+int __cdecl d3_ValidateTextureDimensions(int tex, char verbose)
 {
 	char* name;
 	int h;
@@ -48,7 +48,7 @@ int __cdecl fcn_0044cbd0(int tex, char verbose)
 		strcat(msg, " is not square!");
 		return -2;
 	}
-	if (!fcn_0044e570(w) || !fcn_0044e570(h)) {
+	if (!d3_IsPowerOfTwo(w) || !d3_IsPowerOfTwo(h)) {
 		if (verbose) {
 			strcpy(msg, name);
 			strcat(msg, " does not have power of 2 dimensions!");

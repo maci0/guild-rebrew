@@ -30,7 +30,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl fcn_0050e600(int, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_ShowKircheTop5(void);
@@ -106,7 +106,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 				sel = cm_RequestMoveCredits(-1, *(int*) (rec + 4), g_773d75, cost);
 			}
 			while (sel != -1 && cm_GetCommandStatus(sel) == 0)
-				fcn_00535960();
+				cm_StepCommandQueue();
 			io_FormatTextBuffer(text, 0x1964, *(int*) (rec + 0x1ac), fcn_0050e600(g_774970, 0));
 			fcn_00526120(text, 0x100);
 			changed = 1;

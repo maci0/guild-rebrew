@@ -37,7 +37,7 @@ int __cdecl cm_SendTraceEnd(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 unsigned short* __cdecl fcn_005cadc0(int, Req*, char*, char*, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 void __cdecl fcn_00526120(char*, int);
 
 int __cdecl d2_ShowAbsetzenDialog(unsigned char* e, int* o)
@@ -111,7 +111,7 @@ int __cdecl d2_ShowAbsetzenDialog(unsigned char* e, int* o)
 		cm_RequestCopyEntityData(*(int*) (e + 4), *(int*) (g + 2), -0x14, 1);
 		h = cm_SendTraceEnd(s_6accdc);
 		while (cm_GetCommandStatus(h) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 		if (cm_GetCommandStatus(h) == 2) {
 		refused:
@@ -120,7 +120,7 @@ int __cdecl d2_ShowAbsetzenDialog(unsigned char* e, int* o)
 			return 0x20;
 		}
 		while (cm_GetCommandStatus(h1) == 0) {
-			fcn_00535960();
+			cm_StepCommandQueue();
 		}
 		io_FormatTextBuffer(text3, 0x1d9b, *g, *g);
 		fcn_00526120(text3, 0);

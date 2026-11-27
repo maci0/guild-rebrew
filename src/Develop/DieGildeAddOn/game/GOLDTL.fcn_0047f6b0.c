@@ -99,8 +99,8 @@ void __cdecl fcn_004849b0(char*, char*, char*);
 int __cdecl ai_CanProduceGood(char*, int*, int);
 void __cdecl fcn_004868d0(char*, int*);
 void __cdecl ai_ManageMeisterWorkers(char*);
-void __cdecl fcn_00487470(char*);
-void __cdecl fcn_00487970(char*, char*, int);
+void __cdecl ai_BuyStallGoods(char*);
+void __cdecl gm_TryAutoUpgradeBuildingSlots(char*, char*, int);
 void __cdecl ai_RequestAusbauUpgrade(char*, char*, int);
 void __cdecl ai_CancelBlockedActions(char*, int);
 void __cdecl ai_DispatchMeisterAction(int*);
@@ -112,7 +112,7 @@ void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl cm_SendChainRecordLookup(int, int, int, int, int, int);
 void* __cdecl gm_eval_SlotVoll(char*, int, int);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
-int __cdecl fcn_005b1e40(int);
+int __cdecl hp_PickWeightedProdItem(int);
 int __cdecl plt_CheckZoneAvailability(int, int, int, int);
 int __cdecl gm_RandomMod(int);
 /* ADDRESS: GOLDTL 0x0047f6b0 */
@@ -167,9 +167,9 @@ int __cdecl fcn_0047f6b0(char* a)
 	}
 
 	ai_ManageMeisterWorkers(a);
-	fcn_00487970(t2, a, 0xa);
+	gm_TryAutoUpgradeBuildingSlots(t2, a, 0xa);
 	ai_RequestAusbauUpgrade(t2, a, 0x19);
-	fcn_00487470(a);
+	ai_BuyStallGoods(a);
 	if ((*(unsigned char*) (a + 0x1c8) & 0x10) == 0
 	    && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (a + 0x16c))].category != 0xb) {
 		q = fcn_00502cd0(*(int*) (t1 + 0x14), 1, 4, 0x17);
@@ -222,7 +222,7 @@ done_m:
 	}
 	h = *(char**) (a + 0x16c);
 	if (g_7f4ca0[*(unsigned short*) (h + 0x27)].f2 == 6) {
-		v = fcn_005b1e40((int) h);
+		v = hp_PickWeightedProdItem((int) h);
 		if (q != 0) {
 			for (i = 0; i < 0x20; i++) {
 				if (g_100d0c0[i].goods_id == v) {

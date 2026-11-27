@@ -12,7 +12,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x005bdfc0 */
-int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, int a3)
+int __cdecl d2_RunRoomSlotDialog(unsigned short* room, unsigned char* building, int slotCountA, int slotCountB)
 {
 	int btn;
 	BUILDING_PROTOTYPE *info;
@@ -26,19 +26,19 @@ int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, in
 	dlg = fcn_00470820(0, 0, (char*) 0x6ac448);
 	d2_CenterDialogWindows(dlg);
 	io_AppendText(0x10b);
-	if (*a0 != 0x116) {
-		if (a2 >= (int) (unsigned char) ((char) info->dimension_240)) {
+	if (*room != 0x116) {
+		if (slotCountA >= (int) (unsigned char) ((char) info->dimension_240)) {
 			io_AppendText(0x110);
 		} else {
 			btn = io_AppendText(0x10c, 0x1f40);
 			x_dlg = d2_GetWindowListItem(dlg, 0, btn);
 		}
-		if (a3 >= (int) (unsigned char) ((char) info->dimension_241)) {
+		if (slotCountB >= (int) (unsigned char) ((char) info->dimension_241)) {
 			io_AppendText(0x111);
 		} else {
 			y_dlg = d2_GetWindowListItem(dlg, 0, io_AppendText(0x10d, 0x1f40));
 		}
-	} else if (a2 >= (int) (unsigned char) ((char) info->dimension_242)) {
+	} else if (slotCountA >= (int) (unsigned char) ((char) info->dimension_242)) {
 		io_AppendText(0x111);
 	} else {
 		x_dlg = d2_GetWindowListItem(dlg, 0, io_AppendText(0x10e, 0x1f40));
@@ -59,7 +59,7 @@ int __cdecl fcn_005bdfc0(unsigned short* a0, unsigned char* building, int a2, in
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
-		r = main_RunFrameLoop(fcn_005bdfc0, 0x677c7);
+		r = main_RunFrameLoop(d2_RunRoomSlotDialog, 0x677c7);
 	} while (r != 0);
 	d2_DestroyForm(dlg);
 	return handled;

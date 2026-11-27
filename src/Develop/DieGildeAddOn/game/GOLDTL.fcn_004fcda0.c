@@ -23,7 +23,7 @@ typedef struct Rec18 {
 } Rec18;
 // SIZE 0x18
 
-typedef struct Income {
+typedef struct PRIVILEGE_INCOME_INFO {
 	unsigned char a;
 	unsigned char b;
 	unsigned char c;
@@ -31,7 +31,7 @@ typedef struct Income {
 	int va;
 	int vb;
 	int vc;
-} Income;
+} PRIVILEGE_INCOME_INFO;
 // SIZE 0x10
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
@@ -47,7 +47,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl cm_RequestModifyHealth(int, int);
 
 /* ADDRESS: GOLDTL 0x004fcda0 */
-int __cdecl fcn_004fcda0(unsigned short id, int pay, Income* out)
+int __cdecl amt_ProcessPrivilegeIncome(unsigned short id, int pay, PRIVILEGE_INCOME_INFO* out)
 {
 	Rec18 q;
 	int info[9];

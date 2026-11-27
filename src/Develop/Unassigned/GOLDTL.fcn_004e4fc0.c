@@ -14,13 +14,13 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004e4fc0(unsigned char* a1)
+int __cdecl cut_AreAllPlayersDone(unsigned char* cutscene)
 {
 	int i;
 	int r;
 
 	r = 1;
-	for (i = 0; i < a1[0x30]; i++) {
+	for (i = 0; i < cutscene[0x30]; i++) {
 		if (((Player35c*)g_9b0e20)[i].used != 0 && ((Player35c*)g_9b0e20)[i].x8 == 0 && ((Player35c*)g_9b0e20)[i].x10 != -1) {
 			r = 0;
 			break;

@@ -20,7 +20,7 @@ struct msg_4ab3e0 {
 
 
 /* ADDRESS: GOLDTL 0x004ab3e0 */
-int __cdecl fcn_004ab3e0(char* actor, char* a2, char* a3)
+int __cdecl ai_RequestBuyGood(char* actor, char* a2, char* a3)
 {
 	struct msg_4ab3e0 msg;
 	char* found;

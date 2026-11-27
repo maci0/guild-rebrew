@@ -38,7 +38,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005c0d90(unsigned short* obj)
+int __cdecl d2_RunAction0x35Dialog(unsigned short* obj)
 {
 	int res;
 	int cnt;
@@ -115,7 +115,7 @@ int __cdecl fcn_005c0d90(unsigned short* obj)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005c0d90, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunAction0x35Dialog, 0x677c7) != 0);
 	d2_DestroyForm(d);
 	return res;
 }

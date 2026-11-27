@@ -8,7 +8,7 @@
 #define F(a) (*(float *)(a))
 short *__cdecl gm_GetEntityTableEntry(char *);
 int __cdecl gm_WalkEntityChain(unsigned short);
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl fcn_0050b750(int, int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_RandomMod(unsigned short);
@@ -43,7 +43,7 @@ int __cdecl fcn_005e6e00(void)
     previous = -1;
     entry = (char *)gm_GetEntityTableEntry(g_7f4ca0 + g_774970 * 0x21c);
     if (!entry) return 0;
-    money = fcn_0050b710(gm_WalkEntityChain(g_774970), g_773d75);
+    money = gm_AmountToUnits(gm_WalkEntityChain(g_774970), g_773d75);
     if (gm_RandomFloat01() < *(float *)(entry + 0x60) && W(0x7f4c04) > 11 && money >= 10000) {
     *(float *)(entry + 0x60) = *(float *)(entry + 0x60) * F(0x664178) - g_662a3c;
     B(0x14cf71e) = 0;

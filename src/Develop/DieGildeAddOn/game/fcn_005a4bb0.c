@@ -11,7 +11,7 @@ void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);
 int __cdecl io_AppendText(void* id, ...);
 int __cdecl d2_GetWindowListItem(int a, int b, int c);
-int __cdecl fcn_0050b710(int a, unsigned char b);
+int __cdecl gm_AmountToUnits(int a, unsigned char b);
 int __cdecl fcn_0050b750(int a, unsigned char index);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl main_RunFrameLoop(void* a, int b);
@@ -49,7 +49,7 @@ void __cdecl fcn_005a4bb0(char* o)
     it2 = d2_GetWindowListItem((int)dlg, 2, txt + 1);
     fcn_00472380(it1, 5, 0x28, *(int*)(o + 0x65));
     sval = gm_AccumulateTyped2(*(u16*)(o + 0x27) * 0x21c + 0x7f4ca0);
-    fcn_00472380(it2, 0, fcn_0050b710(sval, g_773d75), fcn_0050b710(have, g_773d75));
+    fcn_00472380(it2, 0, gm_AmountToUnits(sval, g_773d75), gm_AmountToUnits(have, g_773d75));
     d2_SetOverlayAnimation(0, 0);
     while (main_RunFrameLoop((void*)0x5a4bb0, 0x677c7) != 0) {
         if (g_14ce8e0 != 0 || g_100f1dc == 1)

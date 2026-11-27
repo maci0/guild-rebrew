@@ -3,7 +3,7 @@
 
 extern char* g_6b7ebc;
 extern char* evt_CurrentScript;
-int __cdecl fcn_00445600(int a, int b, char* c, int d);
+int __cdecl d3_FindSceneObject(int a, int b, char* c, int d);
 int __cdecl ch_QueueDropObjectLeft(char* e, char* name, char* name2, int param);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
@@ -13,7 +13,7 @@ int __cdecl DropObjectLeft(char** a, char** name, int* param, char** name2)
 		evt_LogScriptError(evt_CurrentScript, *(int*) (evt_CurrentScript + 0x118), "invalid object");
 		return 1;
 	}
-	if (*name2 != 0 && !fcn_00445600(0, 0x40, *name2, 0)) {
+	if (*name2 != 0 && !d3_FindSceneObject(0, 0x40, *name2, 0)) {
 		return 1;
 	}
 	if (g_6b7ebc != 0 && *(void**) (g_6b7ebc + 0x44) == (void*) DropObjectLeft) {

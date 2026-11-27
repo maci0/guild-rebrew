@@ -12,7 +12,7 @@ int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 float __cdecl gm_GetCityStatsSummary(char*);
 int __cdecl gm_RandomMod(int);
 int __cdecl ai_SelectBestMethod(int, int, int, void*, void*);
-int __cdecl fcn_0050d170(int);
+int __cdecl gm_GetTypeProductValue(int);
 int __cdecl ai_PrepareBuildSite(int, char*, int, void*, void*, int);
 
 /* ADDRESS: GOLDTL 0x0049d300 */
@@ -84,17 +84,17 @@ int __cdecl ai_StartBuergermeister(int a0, unsigned short* a1, int a2,
 		if (vals[0] != 0 && ptrs[0] != 0) {
 			*(unsigned char*) a3 = 4;
 			a3[1] = 2;
-			n = fcn_0050d170(2);
+			n = gm_GetTypeProductValue(2);
 			e = (unsigned char*) ptrs[0];
 		} else if (vals[1] != 0 && ptrs[1] != 0) {
 			*(unsigned char*) a3 = 4;
 			a3[1] = 3;
-			n = fcn_0050d170(3);
+			n = gm_GetTypeProductValue(3);
 			e = (unsigned char*) ptrs[1];
 		} else {
 			*(unsigned char*) ptrs = 5;
 			ptrs[1] = 1;
-			n = fcn_0050d170(1);
+			n = gm_GetTypeProductValue(1);
 			if ((double) a0 < (double) n * g_664198)
 				return 0;
 			ptrs[2] = 1;

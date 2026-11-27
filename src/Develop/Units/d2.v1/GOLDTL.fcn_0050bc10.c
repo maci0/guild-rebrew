@@ -4,7 +4,7 @@
 
 extern float g_662a68;
 
-int __cdecl fcn_0050b710(int, unsigned char);
+int __cdecl gm_AmountToUnits(int, unsigned char);
 char* __cdecl itoa(int, char*, int);
 
 /* ADDRESS: GOLDTL 0x0050bc10 */
@@ -19,7 +19,7 @@ void __cdecl fcn_0050bc10(int value, unsigned char mode, char* dst)
 	int i;
 	int written;
 
-	scaled = fcn_0050b710(abs(value), mode);
+	scaled = gm_AmountToUnits(abs(value), mode);
 	if (value < 0) {
 		if (scaled != 0) {
 			if (scaled >= 1000) {

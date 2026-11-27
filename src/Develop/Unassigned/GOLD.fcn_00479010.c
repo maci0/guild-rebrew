@@ -41,13 +41,13 @@ int __cdecl d2_LockSurface(char *s)
 			if (mode == 3) {
 				d3d_LastResult = surf->lpVtbl->Lock(surf, 0, &ddsd, 1, 0);
 				if (d3d_LastResult != 0) {
-					fcn_00418e90("D:\\develop\\Units\\d2.v1\\GFX.C", 0x49a,
+					d3d_LogResultError("D:\\develop\\Units\\d2.v1\\GFX.C", 0x49a,
 						"s->DDSurface->lpVtbl->Lock( s->DDSurface, NULL, &ddsd, DDLOCK_WAIT, NULL )");
 				}
 			} else {
 				d3d_LastResult = surf->lpVtbl->Lock(surf, 0, &ddsd, 0x801, 0);
 				if (d3d_LastResult != 0) {
-					fcn_00418e90("D:\\develop\\Units\\d2.v1\\GFX.C", 0x49c,
+					d3d_LogResultError("D:\\develop\\Units\\d2.v1\\GFX.C", 0x49c,
 						"s->DDSurface->lpVtbl->Lock( s->DDSurface, NULL, &ddsd, DDLOCK_WAIT | DDLOCK_NOSYSLOCK, NULL )");
 				}
 			}

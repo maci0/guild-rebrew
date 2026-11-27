@@ -7,7 +7,7 @@ typedef struct {
 
 extern volatile int g_6b7fac;
 
-char* __cdecl fcn_004f0c90(int a1);
+char* __cdecl gm_FindSlot170Entry(int a1);
 
 int __cdecl fcn_004f0cc0(int* a, int flag)
 {
@@ -22,7 +22,7 @@ int __cdecl fcn_004f0cc0(int* a, int flag)
 	x = *(float*) &a[1];
 	k = a[2];
 	blk = *(Blk4f0cc0*) &a[3];
-	p = fcn_004f0c90(a[0]);
+	p = gm_FindSlot170Entry(a[0]);
 	if (p != 0) {
 		for (i = 0; i < 3; i++) {
 			if (*(int*) (p + 0x150 + i * 4) == 0) {

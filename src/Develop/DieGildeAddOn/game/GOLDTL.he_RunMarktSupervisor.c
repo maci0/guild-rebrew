@@ -60,7 +60,7 @@ extern double g_665dd0;
 
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl he_FreeAction(char*);
-int __cdecl fcn_0050d320(int, unsigned char);
+int __cdecl gm_GetSeasonTreasury(int, unsigned char);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 char* __cdecl gm_FindCityItemHolder(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
@@ -122,7 +122,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 	if (*(int*) (action + 0x70) != 0) {
 		return;
 	}
-	if (fcn_0050d320((int) gm_CityEntity, g_773d75) < 0x4e2000) {
+	if (gm_GetSeasonTreasury((int) gm_CityEntity, g_773d75) < 0x4e2000) {
 		cm_RequestMoveCredits(*(int*) (gm_CityEntity + 4), -1, g_773d75, 0x4e2000);
 	}
 	/* pass 1: refill the player's own stock */

@@ -25,7 +25,7 @@ extern unsigned short g_7f4c04;
 struct obj* __cdecl gm_LookupEntityRecordById(int);
 
 int __cdecl gm_IsEntityAtBuilding(struct obj*, int);
-void __cdecl fcn_004c6a40(int);
+void __cdecl cm_SendEntityLookup(int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 
@@ -42,7 +42,7 @@ int __cdecl he_ReturnPoliticianFromJob(struct slot* s)
 		gm_ResolveEntityById((void**) (&r), 0, 0, s->item);
 		if (r == 0) {
 			if (o->shown != 0) {
-				fcn_004c6a40(s->id);
+				cm_SendEntityLookup(s->id);
 				cm_RequestChangeBits(o->handle, 0x1c8, 4, 0, 0x40000000);
 			}
 		clear:
@@ -59,7 +59,7 @@ int __cdecl he_ReturnPoliticianFromJob(struct slot* s)
 		}
 		if (o->shown != 0) {
 			cm_SendCancelCharacterActions(o->handle);
-			fcn_004c6a40(s->id);
+			cm_SendEntityLookup(s->id);
 		}
 		s->id = -1;
 		s->item = -1;

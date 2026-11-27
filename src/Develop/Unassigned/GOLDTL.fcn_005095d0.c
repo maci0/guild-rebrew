@@ -3,7 +3,7 @@
 
 char* __cdecl gm_LookupEntityRecordById(int);
 
-int __cdecl fcn_005095d0(char* e, int* out_count)
+int __cdecl gm_CountChildren(char* e, int* out_count)
 {
 	int flag;
 	int count;

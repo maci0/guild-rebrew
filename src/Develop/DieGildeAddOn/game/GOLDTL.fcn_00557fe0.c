@@ -8,8 +8,8 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 void __cdecl d3_SelectSceneContext(int, int);
-char* __cdecl fcn_00557f00(char*);
-char* __cdecl fcn_00557f70(char*);
+char* __cdecl he_SpawnTimedRauchEffect(char*);
+char* __cdecl he_SpawnTimedPunkteEffect(char*);
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_00452420(char*);
@@ -29,9 +29,9 @@ void __cdecl he_RunTimedEffectAction(char* action)
 		saved_ctx = d3_CurrentContextIndex;
 		d3_SelectSceneContext(0, 1);
 		if (*(unsigned short*) (action + 0xc2) == 0x177) {
-			*(char**) (action + 0xb0) = fcn_00557f00(target);
+			*(char**) (action + 0xb0) = he_SpawnTimedRauchEffect(target);
 		} else if (*(unsigned short*) (action + 0xc2) == 0x178) {
-			*(char**) (action + 0xb0) = fcn_00557f70(target);
+			*(char**) (action + 0xb0) = he_SpawnTimedPunkteEffect(target);
 		}
 		d3_SelectSceneContext(saved_ctx, 1);
 		*(int*) (action + 0x70) = *(char**) (action + 0xb0) != 0 ? 1 : -1;

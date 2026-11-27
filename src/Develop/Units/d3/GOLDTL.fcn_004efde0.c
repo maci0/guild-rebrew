@@ -50,7 +50,7 @@ int __cdecl fcn_005e9da0(Sefde0Entry*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl d3_DestroyObject(void*);
 void __cdecl d3_SetNodePosition(char*, int*);
-void __cdecl fcn_004efd70(int);
+void __cdecl d3_ReleaseLightSlot(int);
 void __cdecl fcn_004f01c0(int, int, int, int*);
 
 /* ADDRESS: GOLDTL 0x004efde0 */
@@ -84,7 +84,7 @@ void __cdecl fcn_004efde0(void)
 			SLOTS[slot].z = MIN(SLOTS[slot].z, 1.0f);
 			if (!(SLOTS[slot].flags & 2)) {
 				if (SLOTS[slot].flags & 4) {
-					fcn_004efd70(SLOTS[slot].id);
+					d3_ReleaseLightSlot(SLOTS[slot].id);
 				}
 			} else {
 				for (i = 0; i < 3; i++) {
@@ -94,7 +94,7 @@ void __cdecl fcn_004efde0(void)
 						if (count >= 3) {
 							SLOTS[slot].flags &= ~3;
 							if (SLOTS[slot].flags & 4) {
-								fcn_004efd70(SLOTS[slot].id);
+								d3_ReleaseLightSlot(SLOTS[slot].id);
 							}
 						}
 					} else if (state == 1) {
@@ -149,7 +149,7 @@ void __cdecl fcn_004efde0(void)
 				if (count >= 3) {
 					SLOTS[slot].flags &= ~3;
 					if (SLOTS[slot].flags & 4) {
-						fcn_004efd70(SLOTS[slot].id);
+						d3_ReleaseLightSlot(SLOTS[slot].id);
 					}
 				}
 			}

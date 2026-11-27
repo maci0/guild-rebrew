@@ -22,7 +22,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_004eba60(char*, Req*);
+void __cdecl amt_HandleOfficeAction(char*, Req*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -55,7 +55,7 @@ int __cdecl fcn_005aa860(unsigned short* target)
 		if (g_100f1dc == 2) {
 			s.x4 = *(int*) (target + 2);
 			s.x0 = 1;
-			fcn_004eba60(g_7f4ca0 + g_774970 * 540, &s);
+			amt_HandleOfficeAction(g_7f4ca0 + g_774970 * 540, &s);
 			g_774654 = 3;
 			r = 1;
 		} else if (g_100f1dc == 1) {

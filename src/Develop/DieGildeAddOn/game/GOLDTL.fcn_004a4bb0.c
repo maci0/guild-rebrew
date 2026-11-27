@@ -12,7 +12,7 @@ typedef struct Query {
 extern unsigned char* lpGebaeudePROT;
 
 int __cdecl gm_CheckPrivilege(int k, char* e, Query* q);
-int __cdecl fcn_00504f30(int k, int id);
+int __cdecl gm_CanBuildBuildingType(int k, int id);
 int __cdecl gm_PickRandomOrNearestBuilding(char* e, int k);
 
 int __cdecl ai_PrepareBuildSite(char* action, char* e, char* mode, char* cmd, char* out, int want)
@@ -58,7 +58,7 @@ int __cdecl ai_PrepareBuildSite(char* action, char* e, char* mode, char* cmd, ch
 				return 0;
 			}
 		}
-	} else if (fcn_00504f30(k, *(unsigned short*) e) == 0) {
+	} else if (gm_CanBuildBuildingType(k, *(unsigned short*) e) == 0) {
 		return 0;
 	}
 	if (want == 0) {

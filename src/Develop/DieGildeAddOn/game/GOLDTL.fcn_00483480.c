@@ -6,16 +6,16 @@ extern int g_100dc3c;
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl fcn_004849b0(int, int, int);
 void __cdecl ai_TryHireWorker(int);
-void __cdecl fcn_00487970(int, int, int);
+void __cdecl gm_TryAutoUpgradeBuildingSlots(int, int, int);
 void __cdecl ai_RequestAusbauUpgrade(int, int, int);
-void __cdecl fcn_00487470(int);
+void __cdecl ai_BuyStallGoods(int);
 void __cdecl ai_FlagWorkerTrainingNeeded(int);
 void __cdecl ai_SendAction0x8f(int);
-void __cdecl fcn_004833a0(int);
+void __cdecl gm_UpdateWorkerArrival(int);
 int __cdecl ai_CanProduceGood(int, void *, int);
 void __cdecl fcn_004868d0(int, void *);
 int __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_005b1e40(int);
+int __cdecl hp_PickWeightedProdItem(int);
 int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 void __cdecl fcn_0064d41a(char *, char *, ...);
@@ -23,7 +23,7 @@ void __cdecl ai_RequestProductionGoods(int);
 void __cdecl ai_PlanResourceRestock(int, int);
 void __cdecl ai_CancelBlockedActions(int, int);
 void __cdecl he_AssignActionSlot(int, int, int, int);
-void __cdecl fcn_004831f0(int);
+void __cdecl ai_StartGrabpflege(int);
 void __cdecl ai_MeisterCollectTrans(int);
 void __cdecl ai_MeisterTrade(int, int);
 void __cdecl ai_DispatchMeisterAction(void *);
@@ -70,12 +70,12 @@ void __cdecl ai_PlanMasterProduction(int entityRecord)
 	}
 	fcn_004849b0(entityRecord, (int) rec0, (int) rec1);
 	ai_TryHireWorker(entityRecord);
-	fcn_00487970((int) rec1, entityRecord, 0x4b);
+	gm_TryAutoUpgradeBuildingSlots((int) rec1, entityRecord, 0x4b);
 	ai_RequestAusbauUpgrade((int) rec1, entityRecord, 0x19);
-	fcn_00487470(entityRecord);
+	ai_BuyStallGoods(entityRecord);
 	ai_FlagWorkerTrainingNeeded(entityRecord);
 	ai_SendAction0x8f(entityRecord);
-	fcn_004833a0(entityRecord);
+	gm_UpdateWorkerArrival(entityRecord);
 	mode = (short) g_7f4c04;
 	if (mode == 8 || mode == 0xd) {
 		if ((*(unsigned int *) (entityRecord + 0x1b4) & 0x100) == 0) {
@@ -128,7 +128,7 @@ void __cdecl ai_PlanMasterProduction(int entityRecord)
 	}
 type6:
 	if (*(char *) ((int) *(unsigned short *) (*(int *) (entityRecord + 0x16c) + 0x27) * 0x21c + 0x7f4ca2) == 6) {
-		gate = fcn_005b1e40(*(int *) (entityRecord + 0x16c));
+		gate = hp_PickWeightedProdItem(*(int *) (entityRecord + 0x16c));
 		if (gate != 0) {
 			for (i = 0; i < 0x20; i++) {
 				sp = (void *) (i * 0x58 + (int) g_100d0c0);
@@ -355,7 +355,7 @@ tail:
 	if (g_100dc20 == *(int *) (entityRecord + 0x16c)) {
 		g_100dc34 = arg.cur;
 	}
-	fcn_004831f0(entityRecord);
+	ai_StartGrabpflege(entityRecord);
 	arg.k = 0;
 	{
 		unsigned int *fl;

@@ -12,12 +12,12 @@ extern unsigned char* lpGebaeudePROT;
 
 void* __cdecl gm_LookupEntityRecordById(int);
 
-void* __cdecl fcn_004ec7d0(unsigned char* a1)
+void* __cdecl ahm_GetWorkshopOwner(unsigned char* building)
 {
 	int* idPtr;
 
-	if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[a1[0]].category)) == 0x1e) {
-		idPtr = *(int**) (a1 + 0x65);
+	if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[building[0]].category)) == 0x1e) {
+		idPtr = *(int**) (building + 0x65);
 		if (idPtr != 0) {
 			return gm_LookupEntityRecordById(*idPtr);
 		}

@@ -10,7 +10,7 @@ void __cdecl gm_AddTime(void* p, int a, int b, int c);
 extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x00579690 */
-void __cdecl fcn_00579690(char* event)
+void __cdecl he_StartRohstoffsuchen(char* event)
 {
 	void* h;
 	void* q;

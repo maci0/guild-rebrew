@@ -4,19 +4,19 @@
 extern unsigned char* lpGebaeudePROT;
 extern char* g_7746cc;
 
-int __cdecl fcn_0057ed60(int* a)
+int __cdecl d2_CheckTutCh2RathausGate(int* msg)
 {
-	if (a[0] == 0x19 && a[1] != 0) {
-		if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) a[1]].category)) == 0xf && a[3] == 0x10e) {
+	if (msg[0] == 0x19 && msg[1] != 0) {
+		if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) msg[1]].category)) == 0xf && msg[3] == 0x10e) {
 			return 1;
 		}
 		return 0;
 	}
-	if (a[0] == 0x1a && a[1] != 0) {
-		if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) a[1]].category)) == 0xf && *((short*)g_7746cc) == 0x10e) {
+	if (msg[0] == 0x1a && msg[1] != 0) {
+		if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) msg[1]].category)) == 0xf && *((short*)g_7746cc) == 0x10e) {
 			return 0;
 		}
 		return 1;
 	}
-	return a[0] != 0x1b;
+	return msg[0] != 0x1b;
 }

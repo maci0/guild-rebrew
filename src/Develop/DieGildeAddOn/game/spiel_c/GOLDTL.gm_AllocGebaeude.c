@@ -32,7 +32,7 @@ void __cdecl gm_InitBuildingStartingGoods(char*);
 char* __cdecl gv_AllocGraveyardField(char*);
 void __cdecl gm_AssignBuildingResidents(char*, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_005b1b30(char*);
+void __cdecl hp_AddProdSetting(char*);
 char* __cdecl m_alloc(int, char*);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -119,7 +119,7 @@ char* __cdecl gm_AllocGebaeude(unsigned char geb_type, unsigned short owner)
 	*(int*) (geb + 0x95) = -1;
 	if (owner != 0xffff) {
 		if (((ENTITY_RECORD*) g_7f4ca0)[owner].entity_state == 6) {
-			fcn_005b1b30(geb);
+			hp_AddProdSetting(geb);
 		}
 	}
 	memset(geb + 0x99, 0, 0x10);

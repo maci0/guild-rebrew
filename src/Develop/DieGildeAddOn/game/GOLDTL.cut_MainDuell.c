@@ -31,7 +31,7 @@ extern int g_9afde4;
 unsigned short __cdecl gm_RandomMod(int a);
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl fcn_004e04f0(char* a0);
-void __cdecl fcn_004e4f10(void* event);
+void __cdecl cut_ResetEventSlots(void* event);
 void __cdecl fcn_004e4730(char* name);
 void __cdecl fcn_004dfef0(int v);
 void __cdecl d3_UpdateSeasonTextures(void);
@@ -51,14 +51,14 @@ int __cdecl fcn_0064d41a(char* out, char* fmt, ...);
 int __cdecl fcn_004e4b20(int a, int b, char* c, int d);
 int __cdecl sb_CheckVoicePlaying(int* a);
 void __cdecl cut_WaitTicks(int dur);
-char* __cdecl fcn_00445600(int o, int flags, int ptr, char* name);
+char* __cdecl d3_FindSceneObject(int o, int flags, int ptr, char* name);
 void __cdecl ch_QueueWalkToDummy(char* owner, char* text);
 char* __cdecl ch_CreateAction(char* e, int kind, int p);
 char* __cdecl ch_CreateQueuedAction(char* e, int a, int b, int c, int d);
 int __cdecl d3snd_PlaySoundEffect(int a, int b, int c, int d);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 void __cdecl cut_RunTurnRound(unsigned int* a0, int a1);
-int __cdecl fcn_004e6a70(int a1);
+int __cdecl gm_FindPlayerById(int a1);
 int __cdecl fcn_004de610(int v);
 float __cdecl gm_GetEntityHealthRatio(char* p);
 float __cdecl fcn_004ff210(int a, int b);
@@ -68,9 +68,9 @@ int __cdecl srv_GetEntityOfficeSlot(char* ent, int* role, int* slot);
 int __cdecl amt_SendOfficeCommand(int id, int ea, int eb, int x1, int x2);
 void __cdecl io_FormatTextBuffer(char* out, int id, int a, int b);
 int __cdecl he_PostEntityMessage(int id, int arg, char* t1, int flags, int value, char* t2);
-int __cdecl fcn_004e4aa0(int a);
-void __cdecl fcn_004e4610(int a);
-void __cdecl fcn_004e45c0(int a);
+int __cdecl cut_DestroyActiveCharacter(int a);
+void __cdecl evt_StopScriptIfActive(int a);
+void __cdecl cut_WaitForScriptExit(int a);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004230e0(char* p);
@@ -122,7 +122,7 @@ void __cdecl cut_MainDuell(char* a0)
         fcn_004e04f0(a0);
         return;
     }
-    fcn_004e4f10(a0);
+    cut_ResetEventSlots(a0);
     lvl = (signed char) a0[0x7c];
     fcn_004e4730(scene[lvl]);
     fcn_004dfef0(0xa);
@@ -179,10 +179,10 @@ void __cdecl cut_MainDuell(char* a0)
         i++;
     } while (i < 3);
 
-    ch_QueueWalkToDummy((char*) sB.entity, fcn_00445600(0, 0x100, 0, (char*) 0x68cd80));
-    ch_CreateAction((char*) sB.entity, 0x35, fcn_00445600(0, 0x100, 0, (char*) 0x68cd68));
-    ch_QueueWalkToDummy((char*) sA.entity, fcn_00445600(0, 0x100, 0, (char*) 0x68cd54));
-    ch_CreateAction((char*) sA.entity, 0x35, fcn_00445600(0, 0x100, 0, (char*) 0x68cd3c));
+    ch_QueueWalkToDummy((char*) sB.entity, d3_FindSceneObject(0, 0x100, 0, (char*) 0x68cd80));
+    ch_CreateAction((char*) sB.entity, 0x35, d3_FindSceneObject(0, 0x100, 0, (char*) 0x68cd68));
+    ch_QueueWalkToDummy((char*) sA.entity, d3_FindSceneObject(0, 0x100, 0, (char*) 0x68cd54));
+    ch_CreateAction((char*) sA.entity, 0x35, d3_FindSceneObject(0, 0x100, 0, (char*) 0x68cd3c));
 
     d2_SetForm(g_68bfc0, 0);
     io_AppendText(0x6811b0);
@@ -192,11 +192,11 @@ void __cdecl cut_MainDuell(char* a0)
     d3snd_PlaySoundEffect(-7, 0, (int) 0x68cd18, -1);
 
     cut_RunTurnRound((unsigned int*) a0, 0);
-    e = (char*) fcn_004e6a70(sB.idx);
+    e = (char*) gm_FindPlayerById(sB.idx);
     if (*(unsigned char*) (e + 0x94) == 1)
-        p = fcn_00445600(0, 0x100, 0, (char*) 0x68cd00);
+        p = d3_FindSceneObject(0, 0x100, 0, (char*) 0x68cd00);
     else
-        p = fcn_00445600(0, 0x100, 0, (char*) 0x68cd68);
+        p = d3_FindSceneObject(0, 0x100, 0, (char*) 0x68cd68);
     ch_QueueWalkToDummy((char*) sB.entity, p);
     ch_CreateAction((char*) sB.entity, 0x35, *(int*) (sA.entity + 0x34));
     if (*(unsigned char*) (e + 0x94) == 1) {
@@ -212,11 +212,11 @@ void __cdecl cut_MainDuell(char* a0)
         keepA = 1;
     }
 
-    e = (char*) fcn_004e6a70(sA.idx);
+    e = (char*) gm_FindPlayerById(sA.idx);
     if (*(unsigned char*) (e + 0x94) == 1)
-        p = fcn_00445600(0, 0x100, 0, (char*) 0x68cccc);
+        p = d3_FindSceneObject(0, 0x100, 0, (char*) 0x68cccc);
     else
-        p = fcn_00445600(0, 0x100, 0, (char*) 0x68cd3c);
+        p = d3_FindSceneObject(0, 0x100, 0, (char*) 0x68cd3c);
     ch_QueueWalkToDummy((char*) sA.entity, p);
     ch_CreateAction((char*) sA.entity, 0x35, *(int*) (sB.entity + 0x34));
     if (*(unsigned char*) (e + 0x94) == 1) {
@@ -238,7 +238,7 @@ void __cdecl cut_MainDuell(char* a0)
         if (g_772f44 != 0)
             break;
         cut_RunTurnRound((unsigned int*) a0, (int) a0);
-        e = (char*) fcn_004e6a70(sA.idx);
+        e = (char*) gm_FindPlayerById(sA.idx);
         g_772f5a = 0;
         g_772f5b = 0;
         g_772f5c = 0;
@@ -348,12 +348,12 @@ void __cdecl cut_MainDuell(char* a0)
         cm_RequestCopyEntityData(sA.idx, sB.idx, 0xf, 1);
     }
     fcn_004e48b0();
-    fcn_004e4aa0(sB.entity);
+    cut_DestroyActiveCharacter(sB.entity);
     sB.entity = 0;
-    fcn_004e4aa0(sA.entity);
+    cut_DestroyActiveCharacter(sA.entity);
     sA.entity = 0;
-    fcn_004e4610(event);
-    fcn_004e45c0(event);
+    evt_StopScriptIfActive(event);
+    cut_WaitForScriptExit(event);
     cut_CleanupCutscene();
     fcn_004230e0((char*) bank);
     fcn_004230e0((char*) snd);

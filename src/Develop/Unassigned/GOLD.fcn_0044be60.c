@@ -28,7 +28,7 @@ char* __cdecl d3_int_io_LoadFloor(void*, int);
 void __cdecl fcn_0043ea10(void*);
 char* __cdecl fcn_00438c30(char*);
 char* __cdecl fcn_0043d180(char*);
-void __cdecl fcn_0043ca20(char*);
+void __cdecl d3_RegisterSceneObject(char*);
 void __cdecl fcn_0045e610(char*, int);
 char* __cdecl d3sm_Create(int, int, int);
 void __cdecl d3sm_Destroy(char*);
@@ -197,7 +197,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 				clone = fcn_0043d180(obj);
 				clone[0x211] |= 0x10;
 				strcat(clone, "boden");
-				fcn_0043ca20(clone);
+				d3_RegisterSceneObject(clone);
 				break;
 			}
 			obj = fcn_00438c30(obj);

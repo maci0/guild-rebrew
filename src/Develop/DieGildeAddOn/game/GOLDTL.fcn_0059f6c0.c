@@ -37,8 +37,8 @@ int __cdecl fcn_005cd440(Req*, char*, int, void*);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_RunTalenteDialog(int, int, int);
 void __cdecl d2_OpenPaymentTargetPicker(int);
-void __cdecl fcn_005bf0d0(void);
-void __cdecl fcn_005bf9e0(void);
+void __cdecl d2_RunSabotageDialog(void);
+void __cdecl d2_RunBeatupDialog(void);
 
 /* The first request's zero-fill is the original's hand-written block-fill
  * prelude; recorded C memset probes did not emit it (archived docs/codegen-walls.md
@@ -90,7 +90,7 @@ void __cdecl d2_RunSabotageActionsHud(int entity, int mode)
 					req.d = 3;
 					req.id = 0x727;
 					io_FormatTextBuffer(text, 0x16ff);
-					fcn_005bdc30(1, &req, text, (void*) fcn_005bf0d0, 0);
+					fcn_005bdc30(1, &req, text, (void*) d2_RunSabotageDialog, 0);
 				}
 				else if (g_7746a0 == b) {
 					Req req;
@@ -103,7 +103,7 @@ void __cdecl d2_RunSabotageActionsHud(int entity, int mode)
 					req.d = g_66601c;
 					req.id = 0x727;
 					io_FormatTextBuffer(text, 0x1707);
-					fcn_005cd440(&req, text, 0, (void*) fcn_005bf9e0);
+					fcn_005cd440(&req, text, 0, (void*) d2_RunBeatupDialog);
 					d3_EndCameraAndUiMode();
 				}
 				else if (g_7746a0 == c) {

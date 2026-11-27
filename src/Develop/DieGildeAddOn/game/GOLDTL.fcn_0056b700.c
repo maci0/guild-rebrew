@@ -33,7 +33,7 @@ extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 extern int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 extern void __cdecl he_FreeAction(char*);
 extern void __cdecl d3_SelectSceneContext(int, int);
-extern char* __cdecl fcn_00445600(int, int, int, char*);
+extern char* __cdecl d3_FindSceneObject(int, int, int, char*);
 extern void __cdecl d3_TransformPoint(char*, char*, float*);
 extern int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 extern void __cdecl he_CharacterBehavior(char*, int);
@@ -164,7 +164,7 @@ label_56b858:
 		list[1] = 0;
 		list[2] = 0;
 		d3_SelectSceneContext(0, 1);
-		door = fcn_00445600(0, 0x100, 0, obj + 0xac);
+		door = d3_FindSceneObject(0, 0x100, 0, obj + 0xac);
 		if (door != 0)
 			d3_TransformPoint(door, door + 0x4c, (float*) &pos);
 		for (i = 0, iter = obj + 0x8c; i < 8; i++, iter += 4) {

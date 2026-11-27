@@ -2,7 +2,7 @@
 
 
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-void __cdecl fcn_004cfc40(char*, int, int);
+void __cdecl d3_ScheduleActionTimer(char*, int, int);
 
 int __cdecl cm_ExReduceLifespan(char* request, char* output)
 {
@@ -10,7 +10,7 @@ int __cdecl cm_ExReduceLifespan(char* request, char* output)
 
 	target = gm_LookupEntityRecordIn32SlotTable(*(int*) (request + 0x10));
 	if (target != 0) {
-		fcn_004cfc40(target, *(int*) (request + 0x14), 0);
+		d3_ScheduleActionTimer(target, *(int*) (request + 0x14), 0);
 		*(int*) (target + 0x24) -= *(int*) (request + 0x14);
 		target[8] = request[0x18];
 	}

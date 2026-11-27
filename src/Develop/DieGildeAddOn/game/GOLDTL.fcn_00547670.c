@@ -19,7 +19,7 @@ extern unsigned char g_773d75;
 int __cdecl gm_AccumulateTyped2(ENTITY_RECORD*);
 int __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl cm_GetCommandStatus(int);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 
 void __cdecl gm_ReplenishAiBuildingFunds(void)
 {
@@ -53,7 +53,7 @@ void __cdecl gm_ReplenishAiBuildingFunds(void)
 					if (cm_GetCommandStatus(cmd_handle) != 0) {
 						break;
 					}
-					fcn_00535960();
+					cm_StepCommandQueue();
 				} while (1);
 				cmd_handle = -1;
 				batch_count = 0;

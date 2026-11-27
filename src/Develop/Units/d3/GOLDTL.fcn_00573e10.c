@@ -7,7 +7,7 @@ extern int g_6b23a4;
 void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
 void __cdecl d3_SetSubtreeVisible(int, int);
 void __cdecl d3_SelectSceneContext(int, int);
-int __cdecl fcn_00445600(int, int, int, char*);
+int __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_RemoveSubTreeFromCellTree(int, int);
 void __cdecl d3_DestroyObject(int);
 int __cdecl gm_SearchTable67(int);
@@ -48,7 +48,7 @@ void __cdecl fcn_00573e10(int action)
 	saved = d3_CurrentContextIndex;
 	d3_SelectSceneContext(0, 1);
 	fcn_0064d41a(name, "he_%i", *(int*) (action + 4));
-	obj = fcn_00445600(0, 0x1c0, 0, name);
+	obj = d3_FindSceneObject(0, 0x1c0, 0, name);
 	cur = *(int*) (action + 0xc8);
 	if (cur == -1 && obj != 0) {
 		list.handle = obj;

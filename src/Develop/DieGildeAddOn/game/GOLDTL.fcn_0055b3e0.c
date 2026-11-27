@@ -75,13 +75,13 @@ void __cdecl he_StartAction0x67(void);
 void __cdecl he_RunAction0x67(void);
 void __cdecl he_InitAction0x69(void);
 void __cdecl fcn_00554f00(void);
-void __cdecl fcn_00555440(void);
+void __cdecl he_InitSimulateWirtshaus(void);
 void __cdecl gm_SimulateWirtshaus(void);
 void __cdecl he_StartTalentLevelAction(void);
 void __cdecl d2_HandleTalentLevelDialog(void);
 void __cdecl he_InitAction0x6bGedicht(void);
 void __cdecl he_RunBardeEvent(void);
-void __cdecl fcn_00556110(void);
+void __cdecl he_InitAction0x6d(void);
 void __cdecl he_RunCityPopulationEvent(void);
 void __cdecl he_RunAction0x6f(void);
 void __cdecl fcn_00556e30(void);
@@ -93,7 +93,7 @@ void __cdecl he_RunTimedEffectAction(void);
 void __cdecl he_AllocUnkendunk(void);
 void __cdecl he_RunUnkendunk(void);
 void __cdecl he_PickNextSensenmannTarget(void);
-void __cdecl fcn_005591c0(void);
+void __cdecl he_InitAction0x79Report(void);
 void __cdecl he_BroadcastLeaderboard(void);
 void __cdecl fcn_005595e0(void);
 void __cdecl he_RunPoliticians(void);
@@ -257,7 +257,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(103, (void*) he_StartAction0x67, (void*) he_RunAction0x67) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(104, (void*) fcn_00555440, (void*) gm_SimulateWirtshaus) != 0) {
+	if (he_RegisterHandler(104, (void*) he_InitSimulateWirtshaus, (void*) gm_SimulateWirtshaus) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(105, (void*) he_InitAction0x69, (void*) fcn_00554f00) != 0) {
@@ -269,7 +269,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(107, (void*) he_InitAction0x6bGedicht, (void*) he_RunBardeEvent) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(109, (void*) fcn_00556110, (void*) he_RunCityPopulationEvent) != 0) {
+	if (he_RegisterHandler(109, (void*) he_InitAction0x6d, (void*) he_RunCityPopulationEvent) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(111, (void*) 0x556a20, (void*) he_RunAction0x6f) != 0) {
@@ -290,7 +290,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(120, (void*) he_PickNextSensenmannTarget, (void*) 0x00558e80) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(121, (void*) fcn_005591c0, (void*) he_BroadcastLeaderboard) != 0) {
+	if (he_RegisterHandler(121, (void*) he_InitAction0x79Report, (void*) he_BroadcastLeaderboard) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(122, (void*) fcn_005595e0, (void*) he_RunPoliticians) != 0) {

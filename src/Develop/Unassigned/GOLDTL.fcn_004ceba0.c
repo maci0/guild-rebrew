@@ -3,7 +3,7 @@
 
 extern int g_67a370;
 
-int __cdecl fcn_004ceba0(int x, int y)
+int __cdecl gm_IsMapTileWalkable(int x, int y)
 {
 	char* m;
 	int n;

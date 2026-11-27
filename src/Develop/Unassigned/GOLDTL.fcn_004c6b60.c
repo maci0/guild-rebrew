@@ -15,7 +15,7 @@ typedef struct
 
 #pragma pack(pop)
 
-void __cdecl fcn_004c6b60(Small10* body)
+void __cdecl cm_SendSwapOfficeOccupants(Small10* body)
 {
 	char buf[0x9c];
 

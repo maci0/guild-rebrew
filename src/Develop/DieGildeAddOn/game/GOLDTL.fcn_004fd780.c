@@ -4,7 +4,7 @@ void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_00535960(void);
+void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
 extern int gm_GameTime;
@@ -47,7 +47,7 @@ void __cdecl gm_TickObjectTable(void)
 						cm_RequestChangeAttribute();
 						g_773d48++;
 						if (g_773d48 > 0x40) {
-							fcn_00535960();
+							cm_StepCommandQueue();
 							g_773d48 = 0;
 						}
 					}
@@ -78,7 +78,7 @@ void __cdecl gm_TickObjectTable(void)
 				}
 				g_773d48++;
 				if (g_773d48 > 0x40) {
-					fcn_00535960();
+					cm_StepCommandQueue();
 					g_773d48 = 0;
 				}
 			}

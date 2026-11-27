@@ -11,7 +11,7 @@ extern short g_7f4c0c;
 extern int d2_CurrentWindowId;
 
 int __cdecl vfs_ResolvePath(char* a, int b, int c, char* out);
-int __cdecl fcn_0050d200(int a, int b);
+int __cdecl gm_CalcBuildingCost(int a, int b);
 char* __cdecl _strupr(char* s);
 void __cdecl d3_GetObjectWorldPosition(char* a, int b);
 void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj);

@@ -12,7 +12,7 @@ extern double g_664108;
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-int __cdecl fcn_004d5450(int);
+int __cdecl cut_GetBuildingCombatType(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 float __cdecl gm_GetEntitySkill(char*, int);
@@ -22,7 +22,7 @@ int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);
 int __cdecl gm_CalcEntityInventoryStats(char*, int*);
-float __cdecl fcn_0050bb50(int id, unsigned char a);
+float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004d5490(int, int, int);
 void __cdecl fcn_004d5740(char*, int, int);
@@ -80,7 +80,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 	g_772ea8 = 0;
 	id = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x14));
 	rec = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (dialogState + 0x10c));
-	k = fcn_004d5450(rec);
+	k = cut_GetBuildingCombatType(rec);
 	d2_SetForm(win, 1);
 	if (*((char*) g_772e9c + 2) == 6) {
 		if (*(unsigned char*) (dialogState + 0x7c) & 2) {
@@ -211,7 +211,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 					sel = 0;
 					if (0 < items.count_b) {
 						do {
-							total = (int) (fcn_0050bb50(items.ids[sel], g_773d75) * (float) items.weights[sel] + (float) total);
+							total = (int) (gm_GetSeasonPrice(items.ids[sel], g_773d75) * (float) items.weights[sel] + (float) total);
 							sel++;
 						} while (sel < items.count_b);
 					}

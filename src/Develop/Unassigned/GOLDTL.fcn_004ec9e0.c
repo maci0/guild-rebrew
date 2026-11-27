@@ -14,7 +14,7 @@ extern ALCHEMY_PLAYER_PROTOTYPE* g_772fdc;
 
 void __cdecl ahm_ResetAlchemyState(int a);
 
-void __cdecl fcn_004ec9e0(void)
+void __cdecl ahm_DealPlayerPrototypes(void)
 {
 	int i;
 

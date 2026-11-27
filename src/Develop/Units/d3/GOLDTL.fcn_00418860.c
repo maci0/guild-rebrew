@@ -17,7 +17,7 @@ extern double g_662b38;
 extern double dbl_1_0;
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl d3_SetNodePosition(char*, float*);
-char* __cdecl fcn_00445600(char*, int, char*, char*);
+char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 float __cdecl d3_Smoothstep(float, float, float);
 void __cdecl fcn_00418ae0(char*);
@@ -55,7 +55,7 @@ void __cdecl fcn_00418860(char* obj)
 		char* light;
 		float pos[3];
 
-		light = fcn_00445600(0, 8, 0, "pLicht");
+		light = d3_FindSceneObject(0, 8, 0, "pLicht");
 		if (light != 0) {
 			a = *(float*) (light + 0x88) - *(float*) (obj + 0x88);
 			if (fabs(a) >= 0.01) {

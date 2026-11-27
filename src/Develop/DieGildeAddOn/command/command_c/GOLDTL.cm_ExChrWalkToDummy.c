@@ -10,7 +10,7 @@ char* __cdecl gm_SearchTable67(int);
 int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl init_AllocateGebaeudeSceneSlot(char*);
 void __cdecl d3_SelectSceneContext(int, int);
-char* __cdecl fcn_00445600(int, int, int, char*);
+char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl ch_QueueStandUpAnimation(char*, char*);
 char* __cdecl ch_QueueWalkToDummy(char*, char*);
 char* __cdecl ch_CreateAction(char*, int, int);
@@ -51,7 +51,7 @@ int __cdecl cm_ExChrWalkToDummy(char* a1, char* a2)
 		return 3;
 	if (a1[0x1c] != 0) {
 		d3_SelectSceneContext(k, 1);
-		dummy = fcn_00445600(0, 0x160, 0, a1 + 0x1c);
+		dummy = d3_FindSceneObject(0, 0x160, 0, a1 + 0x1c);
 		d3_SelectSceneContext(saved, 1);
 		if (dummy == 0)
 			return 4;

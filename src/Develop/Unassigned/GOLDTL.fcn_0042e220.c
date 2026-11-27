@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char* g_6b7fd8;
 
-void __cdecl fcn_0041da60(char* a, int b, char* c, int n);
+void __cdecl LogMessageInternal(char* a, int b, char* c, int n);
 
 /* ADDRESS: GOLDTL 0x0042e220 */
 void __cdecl fcn_0042e220(void)
@@ -11,6 +11,6 @@ void __cdecl fcn_0042e220(void)
 	p = g_6b7fd0;
 	while (p > g_6b7fd8) {
 		p -= 0x84;
-		fcn_0041da60(p + 0x3e, *(int*) (p + 0x70), p + 0xe, 0x400);
+		LogMessageInternal(p + 0x3e, *(int*) (p + 0x70), p + 0xe, 0x400);
 	}
 }

@@ -5,7 +5,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl fcn_0050c4e0(unsigned char* e);
 
-int __cdecl fcn_0050c550(unsigned char* e, unsigned char* x)
+int __cdecl gm_HasLevelFor(unsigned char* e, unsigned char* x)
 {
 	BUILDING_PROTOTYPE *t;
 	int n;

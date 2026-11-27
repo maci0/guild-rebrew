@@ -5,7 +5,7 @@ extern int g_67a370;
 
 void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
-int __cdecl fcn_004ceba0(int, int);
+int __cdecl gm_IsMapTileWalkable(int, int);
 void __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
 /* ADDRESS: GOLDTL 0x004cecf0 */
@@ -63,7 +63,7 @@ unsigned int __cdecl d3_FindGridCellOutsideRadius(char* originNode, int* outColu
 			minx = col - span;
 			if (minx < 0) minx = 0;
 			for (x = minx; x <= maxx; x++) {
-				if (!fcn_004ceba0(x, y)) {
+				if (!gm_IsMapTileWalkable(x, y)) {
 					continue;
 				}
 				d3_GridPointToWorld(m, x, y, hit);

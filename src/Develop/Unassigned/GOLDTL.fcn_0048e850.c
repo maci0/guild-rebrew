@@ -1,7 +1,7 @@
 int __cdecl fcn_0048e7f0(char* e, unsigned short** out);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
-int __cdecl fcn_0050d170(int k);
-int __cdecl fcn_0050d200(char* e, int k);
+int __cdecl gm_GetTypeProductValue(int k);
+int __cdecl gm_CalcBuildingCost(char* e, int k);
 int __cdecl gm_SumQueryEntryValues(int a, char b);
 int __cdecl ai_PrepareBuildSite(int action, char* e, int a, char* b, char* c, int d);
 int __cdecl ai_StartKreditNehmen(int a, char* e, int b, char* out1, char* out2);
@@ -39,7 +39,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 						*(unsigned char*) rec1.v = 4;
 						*(int*) (rec1.v + 1) = *(int*) (ent + 1);
 						*(int*) (rec1.v + 2) = 1;
-						need = (int) ((float) fcn_0050d170(c + 1) * 0.3f);
+						need = (int) ((float) gm_GetTypeProductValue(c + 1) * 0.3f);
 						if (ai_PrepareBuildSite(action, e, 0, (char*) rec2.v, (char*) rec1.v, 0) != 0) {
 							have = (int) ((float) gm_SumQueryEntryValues(*(int*) (e + 0x178), (char) g_773d75) * 0.5f);
 							if (have < need) {
@@ -61,7 +61,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 					*(int*) (rec1.v + 1) = 0x54;
 					*(int*) (rec1.v + 2) = 1;
 					if (ai_PrepareBuildSite(action, e, 0, (char*) rec1.v, (char*) rec2.v, 1) != 0) {
-						need = fcn_0050d200(e, *(int*) (rec1.v + 1));
+						need = gm_CalcBuildingCost(e, *(int*) (rec1.v + 1));
 						have = (int) ((float) gm_SumQueryEntryValues(*(int*) (e + 0x178), (char) g_773d75) * 0.5f);
 						if (have < need) {
 							d = need - have;

@@ -58,7 +58,7 @@ int __cdecl gm_CollectBuildingStock(char*, void*, int);
 int __cdecl gm_CalcEntityInventoryStats(char*, Stats*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetStorageSlotCapacity(char*, int);
-float __cdecl fcn_0050bb50(int, unsigned char);
+float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl ai_GetMaxActiveTradeActions(void);
 int __cdecl he_CountActiveTradeActions(void);
 int __cdecl cm_SendCopyEntityData(void*);
@@ -147,13 +147,13 @@ int __cdecl ai_MeisterTradeFernEinkauf(char* meister, char* warehouse)
 				}
 				sprintf(line, (char*) 0x67e8c0, *(int*) (meister + 0x16c) + 5,
 				    st.x68[i], st.x48[i] * 0x41 + 1 + lpObjektePROT);
-				tmp = (int) fcn_0050bb50((int) st.x48[i], g_773d75);
+				tmp = (int) gm_GetSeasonPrice((int) st.x48[i], g_773d75);
 				sprintf(line, (char*) 0x67e358, -1, *(int*) (cargo + 2),
 				    (int) st.x48[i], st.x68[i], g_773d75, (double) tmp);
 				cm_SendSellObjekt(-1, *(int*) (cargo + 2), (short) st.x48[i],
 				    st.x68[i], (char) g_773d75,
-				    (int) fcn_0050bb50((int) st.x48[i], g_773d75));
-				*(int*) (meister + 0x1b8) = (int) (fcn_0050bb50((int) st.x48[i],
+				    (int) gm_GetSeasonPrice((int) st.x48[i], g_773d75));
+				*(int*) (meister + 0x1b8) = (int) (gm_GetSeasonPrice((int) st.x48[i],
 				    g_773d75) + *(int*) (meister + 0x1b8));
 				st.x48[i] = 0;
 				st.x68[i] = 0;
