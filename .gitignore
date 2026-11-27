@@ -63,7 +63,7 @@ compile_commands.json
 /run_out/
 /.scratch/
 /source-backups/
-/binsync/
+/binsync*/
 /.rebrew/
 /rebrew-rsp-*/
 /flirt_sigs/
