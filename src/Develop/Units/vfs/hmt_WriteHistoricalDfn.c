@@ -12,7 +12,7 @@ struct rec_4ac9c0 {
 	char name[16];
 	char text[16];
 };
-// SIZE 0x2c
+/* SIZE 0x2c */
 
 struct hist_4ac9c0 {
 	int n0;
@@ -20,9 +20,10 @@ struct hist_4ac9c0 {
 	struct rec_4ac9c0* r0;
 	struct rec_4ac9c0* r1;
 };
-// SIZE 0x10
+/* SIZE 0x10 */
 
 
+/* ADDRESS: GOLD 0x004ac8a0 */
 /* ADDRESS: GOLDTL 0x004ac9c0 */
 int __cdecl hmt_WriteHistoricalDfn(struct hist_4ac9c0* h)
 {

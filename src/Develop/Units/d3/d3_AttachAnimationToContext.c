@@ -1,9 +1,8 @@
 #include "Develop/Units/d3/d3_animation.h"
-
 #include "client_lighting.h"
+#include "Develop/DieGildeAddOn/game/game_data.h"
 
 extern volatile int g_6b7fac;
-#include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_CalculateAnimNormals(char* anim, char* mesh);
 int __cdecl d3_StepAnimFrame(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max);
@@ -11,6 +10,14 @@ int __cdecl d3_CreateObjectMesh(char* e);
 char __cdecl d3_BindAnimTrackNodes(char* obj);
 void __cdecl d3_UpdateObjectAnimPose(int obj);
 
+#if defined(REBREW_GOLD)
+/* ADDRESS: GOLD 0x00435550 */
+char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATION_OPTIONS options)
+{
+	/* Stub: provider restored; native behavior and full C contract unrecovered. */
+	return 0;
+}
+#else
 /* Claims the first free animation slot of the context, fills it from the
  * named animation and the 12-byte options block, and returns the slot. */
 /* ADDRESS: GOLDTL 0x00434970 */
@@ -103,3 +110,4 @@ char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATIO
 	}
 	return 0;
 }
+#endif

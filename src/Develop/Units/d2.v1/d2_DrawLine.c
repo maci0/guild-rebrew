@@ -4,6 +4,7 @@ void __cdecl d2_Plot(int, int, unsigned char, unsigned char, unsigned char);
 /* Draws the line from (x0,y0) to (x1,y1) with the plot attributes a4, a5 and
  * a6. Axis-parallel segments become straight runs, the rest use the
  * Bresenham error accumulator. */
+/* ADDRESS: GOLD 0x004764e0 */
 /* ADDRESS: GOLDTL 0x00472c30 */
 void __cdecl d2_DrawLine(int x0, int y0, int x1, int y1, unsigned char a4, unsigned char a5, unsigned char a6)
 {

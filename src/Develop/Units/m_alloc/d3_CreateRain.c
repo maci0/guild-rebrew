@@ -1,82 +1,69 @@
 #include <stdlib.h>
 
-#include "Develop/Units/d3/d3_camera.h"
+extern volatile int g_6b7fac;
+extern char* d3_ActiveCamera;
 
-extern char g_677580[];
-extern char g_67756c[];
-extern float g_662a18;
-extern float g_6628bc;
-extern float g_6628cc;
-extern float g_662a40;
-extern float g_662a44;
-
-void* __cdecl m_alloc(int size, char* tag);
+void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
-#include "Develop/DieGildeAddOn/game/game_data.h"
+
+/* ADDRESS: GOLD 0x00413b30 */
 /* ADDRESS: GOLDTL 0x00415310 */
 int* __cdecl d3_CreateRain(int count)
 {
-	int* rain;
-	char* cam;
+	int* info;
 	float* drop;
+	int capacity;
 	int i;
-	int n;
-
-	rain = (int*) m_alloc(0x60, g_677580);
-	if (rain == 0) {
+	double value;
+	info = (int*) m_alloc(0x60, "d3t:RainInfo");
+	i = 0;
+	if (info == 0) {
 		return 0;
 	}
-	rain[0] = count;
-	rain[1] = count;
-	rain[2] = count;
-	rain[3] = count;
-	rain[5] = 0x3f800000;
-	rain[6] = 0;
-	rain[7] = 0x3f800000;
-	rain[8] = 0;
-	rain[9] = 0x3f800000;
-	rain[10] = 0;
-	rain[11] = *(int*) &g_6b7fac;
-	rain[12] = *(int*) &g_6b7fac;
-	rain[13] = *(int*) &g_6b7fac;
-	rain[14] = *(int*) &g_6b7fac;
-	rain[15] = *(int*) &g_6b7fac;
-	cam = *(char**) &d3_ActiveCamera;
-	if (cam != 0) {
-		rain[16] = *(int*) (cam + 0x84);
-		cam = *(char**) &d3_ActiveCamera;
-		rain[17] = *(int*) (cam + 0x88);
-		cam = *(char**) &d3_ActiveCamera;
-		rain[18] = *(int*) (cam + 0x8c);
-		cam = *(char**) &d3_ActiveCamera;
-		rain[20] = *(int*) (cam + 0x4c);
-		cam = *(char**) &d3_ActiveCamera;
-		rain[21] = *(int*) (cam + 0x50);
-		cam = *(char**) &d3_ActiveCamera;
-		rain[22] = *(int*) (cam + 0x54);
+	info[0] = count;
+	info[1] = count;
+	info[2] = count;
+	info[3] = count;
+	info[5] = 0x3f800000;
+	info[6] = 0;
+	info[7] = 0x3f800000;
+	info[8] = 0;
+	info[9] = 0x3f800000;
+	info[10] = 0;
+	info[11] = g_6b7fac;
+	info[12] = g_6b7fac;
+	info[13] = g_6b7fac;
+	info[14] = g_6b7fac;
+	info[15] = g_6b7fac;
+	if (d3_ActiveCamera != 0) {
+		info[16] = *(int*) (d3_ActiveCamera + 0x84);
+		info[17] = *(int*) (d3_ActiveCamera + 0x88);
+		info[18] = *(int*) (d3_ActiveCamera + 0x8c);
+		info[20] = *(int*) (d3_ActiveCamera + 0x4c);
+		info[21] = *(int*) (d3_ActiveCamera + 0x50);
+		info[22] = *(int*) (d3_ActiveCamera + 0x54);
 	}
-	n = count;
-	if (n < 1) {
-		n = 1;
+	capacity = count;
+	if (capacity < 1) {
+		capacity = 1;
 	}
-	rain[4] = (int) m_alloc(n * 0x28, g_67756c);
-	if (rain[4] == 0) {
-		m_FreeTracked(rain);
+	if ((info[4] = (int) m_alloc(capacity * 0x28, "d3t:RainDropList")) == 0) {
+		m_FreeTracked(info);
 		return 0;
 	}
-	drop = (float*) rain[4];
-	if (rain[0] > 0) {
-		i = 0;
-		do {
-			drop[0] = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
-			drop[1] = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
-			drop[2] = ((float) rand() * 3.0518509447574615e-05f - g_6628cc) * 2.0f;
-			drop[3] = (float) rand() * g_662a44 + 0.25f;
-			drop[4] = (float) rand() * g_662a40 + 0.25f;
-			drop[5] = (float) rand() * g_662a40 + 0.25f;
-			drop += 10;
-			i++;
-		} while (i < rain[0]);
+	drop = (float*) info[4];
+	while (i < *info) {
+		value = rand() * 3.0518509447574615e-5f - 0.5f;
+		drop[0] = value + value;
+		value = rand() * 3.0518509447574615e-5f - 0.5f;
+		drop[1] = value + value;
+		value = rand() * 3.0518509447574615e-5f - 0.5f;
+		drop[2] = value + value;
+		drop[3] = rand() * 7.629627361893654e-6f + 0.25f;
+		drop[4] = rand() * 1.5259255405908334e-6f + 0.25f;
+		drop[5] = rand() * 1.5259255405908334e-6f + 0.25f;
+		drop += 10;
+		i++;
 	}
-	return rain;
+	return info;
 }

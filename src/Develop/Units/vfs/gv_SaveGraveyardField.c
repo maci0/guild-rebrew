@@ -1,4 +1,3 @@
-
 /* Save counterpart of the graveyard loader (GOLDTL 0x4f3bb0,
  * loadsave_dump1.c); twin of GOLD 0x4f17f0. */
 
@@ -19,6 +18,8 @@ typedef struct {
 	void* entry_table; /* 0x20 */
 } GraveyardSlot;
 
+/* ADDRESS: GOLD 0x004f17f0 */
+/* ADDRESS: GOLDTL 0x004f3900 */
 int __cdecl gv_SaveGraveyardField(void* stream_ctx, unsigned char* field)
 {
 	GraveyardSlot* slot;

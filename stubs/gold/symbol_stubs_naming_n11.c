@@ -60,10 +60,7 @@ void __cdecl d2_CloseAllEntityStatusPopups(void)
 {
 }
 
-int __cdecl d2_CloseWindow(int a1)
-{
-	return 0;
-}
+
 
 int __cdecl d2_CreateButtonRow(int a, int b, int* c, int d, ...)
 {
@@ -114,9 +111,7 @@ int __cdecl d2_SetElementEnabled(int element, int a)
 	return 0;
 }
 
-void __cdecl d2_SetMouseTooltip(void)
-{
-}
+
 
 void __cdecl d2_SetValueGaugeFlags(int a, int b)
 {

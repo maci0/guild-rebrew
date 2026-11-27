@@ -26,6 +26,7 @@ typedef struct HistPair {
 
 int __cdecl hmt_WriteHistoricalDfn(HistPair* p);
 
+/* ADDRESS: GOLD 0x004ac440 */
 /* ADDRESS: GOLDTL 0x004ac560 */
 unsigned int __cdecl hmt_CreateBinaryFile(void)
 {

@@ -452,9 +452,7 @@ int __cdecl ob_TransportFromLager(int a, int b, int c, int d, int e, float f, in
 	return 0;
 }
 
-void __cdecl sb_LoadEntry(char* bank, char* sample)
-{
-}
+
 
 void* __cdecl sb_LoadSampleBank(char* name, int init)
 {

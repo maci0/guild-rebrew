@@ -496,8 +496,8 @@ requires-dist = [
     { name = "isort", marker = "extra == 'dev'", specifier = ">=9.0.2" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=2.4.1" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=9.2.0" },
-    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.91.0/rebrew-6.91.0-py3-none-any.whl" },
-    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.91.0/rebrew-6.91.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["binsync"], marker = "extra == 'binsync'", url = "https://github.com/maci0/rebrew/releases/download/v6.92.0/rebrew-6.92.0-py3-none-any.whl" },
+    { name = "rebrew", extras = ["prove"], url = "https://github.com/maci0/rebrew/releases/download/v6.92.0/rebrew-6.92.0-py3-none-any.whl" },
     { name = "recoverage", marker = "extra == 'dashboard'", url = "https://github.com/maci0/recoverage/releases/download/v8.8.2/recoverage-8.8.2-py3-none-any.whl" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.17.3" },
 ]
@@ -1355,8 +1355,8 @@ wheels = [
 
 [[package]]
 name = "rebrew"
-version = "6.91.0"
-source = { url = "https://github.com/maci0/rebrew/releases/download/v6.91.0/rebrew-6.91.0-py3-none-any.whl" }
+version = "6.92.0"
+source = { url = "https://github.com/maci0/rebrew/releases/download/v6.92.0/rebrew-6.92.0-py3-none-any.whl" }
 dependencies = [
     { name = "cachetools" },
     { name = "capstone" },
@@ -1385,7 +1385,7 @@ dependencies = [
     { name = "typer" },
 ]
 wheels = [
-    { url = "https://github.com/maci0/rebrew/releases/download/v6.91.0/rebrew-6.91.0-py3-none-any.whl", hash = "sha256:d0129001885aaf8d84964c084cb0fb68266598169881eb22f7e34da363ef10e5" },
+    { url = "https://github.com/maci0/rebrew/releases/download/v6.92.0/rebrew-6.92.0-py3-none-any.whl", hash = "sha256:ee18d99b813ab317acf7e4426f2cab4b9c37925e76a9064895c3d7f14b160b51" },
 ]
 
 [package.optional-dependencies]

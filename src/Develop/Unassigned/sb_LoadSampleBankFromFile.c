@@ -7,7 +7,7 @@ char* __cdecl sb_FindBankByPath(char*);
 char* __cdecl sb_GetLastBank(void);
 void* __cdecl m_alloc(unsigned int, char*);
 void __cdecl m_FreeTracked(void*);
-void __cdecl sb_LoadEntryGold(char*, char*);
+void __cdecl sb_LoadEntry(char*, char*);
 /* DATA TODO: 0x633194, 0x6331a8, bank state in .data; 0x1460920 log buffer, .data virtual tail. */
 /* ADDRESS: GOLD 0x00426950 */
 char* __cdecl sb_LoadSampleBankFromFile(char* name, int load)
@@ -50,7 +50,7 @@ char* __cdecl sb_LoadSampleBankFromFile(char* name, int load)
                         *(int*) (bank + 0x140) = 1;
                         if (load) {
                             for (i = 0; i < *(int*) (header + 0x134); ++i)
-                                sb_LoadEntryGold(bank, *(char**) (bank + 0x138) + i * 0x40);
+                                sb_LoadEntry(bank, *(char**) (bank + 0x138) + i * 0x40);
                         }
                         fclose(file);
                         return bank;

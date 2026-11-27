@@ -1,26 +1,81 @@
 #include <stdio.h>
 
+#include "Develop/Units/d2.v1/gold_window.h"
 #include "Develop/Units/d2.v1/d2_win.h"
 #include "client_types.h"
-extern Win_1015f40 g_1015f40[0x60];
-extern char s_67d54c[];
-
-void __cdecl d3_SafeReleaseSceneResource(void* tex);
-void* __cdecl d3_LoadTextureWithDefaultTint(const char* name, int a2);
 #include "Develop/Units/Error/error_message.h"
-typedef D2_FORM_RECORD Obj;
-
-extern D2_FORM_RECORD g_1038140[];
-extern int g_772534;
-extern int d2_CurrentWindowId;
-extern char* g_77255c;
-extern char s_67d7d0[];
-
 #include "GOLDTL.fcn_00472960_gconf.h"
 
+typedef D2_FORM_RECORD Obj;
+
+extern int d2_CurrentWindowId;
+extern D2_FORM_RECORD g_1038140[];
+extern int g_772534;
+extern char* g_77255c;
+extern char s_67d54c[];
+extern char s_67d7d0[];
+
+void __cdecl fcn_004222b0(char*);
 void __cdecl d2_LockSurface(void*);
+int __cdecl d3_UnlockSurfaceHandle(void*);
 int __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g, unsigned char b, void* s);
+void __cdecl d3_SafeReleaseSceneResource(void* tex);
+void* __cdecl d3_LoadTextureWithDefaultTint(const char* name, int a2);
 void __cdecl d2_UnlockSurface(void*);
+
+#if defined(REBREW_GOLD)
+extern GOLD_GUI_WINDOW g_1015f40[];
+
+/* ADDRESS: GOLD 0x00476210 */
+void __cdecl d2_Plot(int x, int y, int r, int g, int b)
+{
+	GOLD_GUI_WINDOW* win;
+	int border;
+
+	win = &g_1015f40[d2_CurrentWindowId];
+	if (win->active == 0) {
+		return;
+	}
+	if (win->unk_028 == 0) {
+		fcn_004222b0((char*) 0x5feb18);
+		return;
+	}
+	border = *(unsigned int*) 0x6ed97c & 0xff;
+	if (x < border || x > win->width - border || y < border || y > win->height - border) {
+		return;
+	}
+	d2_LockSurface((void*) win->unk_028);
+	switch (*(unsigned int*) 0x6ed97c & 0xff) {
+	case 0:
+		d2_WriteSurfacePixel(x, y, r, g, b, (void*) win->unk_028);
+		break;
+	case 1:
+		d2_WriteSurfacePixel(x - 1, y, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x + 1, y, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x, y + 1, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x, y - 1, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x, y, r, g, b, (void*) win->unk_028);
+		break;
+	case 2:
+		d2_WriteSurfacePixel(x - 1, y, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x + 1, y, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x - 2, y, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x + 2, y, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x, y, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x, y + 1, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x, y - 1, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x, y + 2, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x, y - 2, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x + 1, y + 1, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x - 1, y - 1, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x - 1, y + 1, r, g, b, (void*) win->unk_028);
+		d2_WriteSurfacePixel(x + 1, y - 1, r, g, b, (void*) win->unk_028);
+		break;
+	}
+	d3_UnlockSurfaceHandle((void*) win->unk_028);
+}
+#else
+extern Win_1015f40 g_1015f40[0x60];
 
 /* ADDRESS: GOLDTL 0x00472960 */
 void __cdecl d2_Plot(int x, int y, unsigned char r, unsigned char g, unsigned char b)
@@ -69,3 +124,4 @@ void __cdecl d2_Plot(int x, int y, unsigned char r, unsigned char g, unsigned ch
 	}
 	d2_UnlockSurface(w->surf);
 }
+#endif

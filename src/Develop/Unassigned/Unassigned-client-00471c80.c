@@ -89,34 +89,6 @@ char* __cdecl d2_GetFormControl(int j, int k)
 	return (char*)&((D2_CONTROL_TL*)g_1015ea0)[(*(int**) (m + 0x28))[j]];
 }
 
-/* ADDRESS: GOLDTL 0x00471f80 */
-int __cdecl d2_GetControlValue(int slot)
-{
-	Slot* s;
-	char* d;
-
-	s = (Slot*)&((D2_CONTROL_TL*)g_1015ea0)[slot];
-	if ((*(int*)&((D2_CONTROL_TL*)s)->kind) == 0x41) {
-		d = (*(char**)&((D2_CONTROL_TL*)s)->data);
-		if (*(int*) (d + 0x28) & 0x10) {
-			return *(int*) (d + 0x14c);
-		}
-		if (*(int*) (d + 0x28) & 1) {
-			return (int) (d + 0x2c);
-		}
-		if (*(int*) (d + 0x28) & 2) {
-			return *(int*) (d + 0x12c);
-		}
-	}
-	if ((*(int*)&((D2_CONTROL_TL*)s)->value_058)) {
-		return (*(int*)&((D2_CONTROL_TL*)s)->value_038);
-	}
-	if ((*(int*)&((D2_CONTROL_TL*)s)->kind) == 0x45) {
-		return (int) (*(char**)&((D2_CONTROL_TL*)s)->payload.fields.value_08c);
-	}
-	return -1;
-}
-
 /* ADDRESS: GOLDTL 0x00471ff0 */
 int __cdecl d2_GetFormControlValue(int j, int k)
 {

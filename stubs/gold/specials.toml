@@ -556,3 +556,12 @@ impl = ""
 
 [specials.d2_LockSurface]
 impl = ""
+
+[specials.sb_LoadEntry]
+impl = ""
+
+[specials.d2_CloseWindow]
+impl = ""
+
+[specials.d2_SetMouseTooltip]
+impl = ""

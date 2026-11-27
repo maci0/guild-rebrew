@@ -12,7 +12,7 @@ typedef struct GUI_ENTRY {
 
 extern GUI_ENTRY g_9b4840[6];
 #ifdef REBREW_GOLD
-int __cdecl d2_CloseWindowGold(int slot);
+int __cdecl d2_CloseWindow(int slot);
 void __cdecl d2_DestroyGuiElement(int slot);
 #else
 int __cdecl d2_CloseWindow(int slot);
@@ -27,7 +27,7 @@ void __cdecl d2_ClearCombatHudSlots(void)
     for (i = 0; i < 6; ++i) {
         if (g_9b4840[i].win != -1) {
 #ifdef REBREW_GOLD
-            d2_CloseWindowGold(g_9b4840[i].win);
+            d2_CloseWindow(g_9b4840[i].win);
 #else
             d2_CloseWindow(g_9b4840[i].win);
 #endif
