@@ -127,7 +127,7 @@ extern void ch_Update();
 extern void ch_UpdateCharacterObjectPositions();
 extern void gm_UpdateWeatherWave();
 extern void fcn_004efde0();
-extern void fcn_00536bb0();
+extern void d3_UpdateWeatherAndSkyBlend();
 extern void fcn_004c0cd0();
 extern void gm_UpdateAmbientAudio();
 extern void fcn_004c0b40();
@@ -332,7 +332,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 	}
 	p = (char *) (flags & 0x4000);
 	if (p != 0 && (g_7f4c04 & 0xffff) != g_7e4534) {
-		fcn_00536bb0();
+		d3_UpdateWeatherAndSkyBlend();
 	}
 	if (g_774938 != 0) {
 		fcn_004c0cd0();

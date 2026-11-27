@@ -30,7 +30,7 @@ char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, unsigned char);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Blk24* b1, Blk24* b2);
-int __cdecl fcn_004a48a0(char*, int);
+int __cdecl gm_CalcBuildingRepairCost(char*, int);
 int __cdecl ai_FindMissingBuildingUpgrade(int* a, int* b, char* q, int c);
 int __cdecl gm_GetTypeProductValue(int);
 int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
@@ -97,7 +97,7 @@ int __cdecl ai_StartUpgradeZunft(int a0, char* e, int a2, Blk24* o1, Blk24* o2)
 			*o2 = b;
 			return r;
 		}
-		val = fcn_004a48a0(w, need);
+		val = gm_CalcBuildingRepairCost(w, need);
 		if (price < val) {
 			flag = 1;
 			goto sell;

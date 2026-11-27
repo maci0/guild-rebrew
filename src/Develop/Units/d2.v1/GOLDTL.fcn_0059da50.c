@@ -47,7 +47,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl cm_SendCopyEntityData(Packet*);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl cm_ExProdObjekt(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -103,7 +103,7 @@ void __cdecl d2_OpenRaubzugDialog(int unused, char* e)
 				}
 				if (n != 0) {
 					cm_SendCopyEntityData(&pkt);
-					fcn_005100f0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1);
+					gm_ModifyHealth(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -1);
 					cm_ExProdObjekt();
 				}
 				else {

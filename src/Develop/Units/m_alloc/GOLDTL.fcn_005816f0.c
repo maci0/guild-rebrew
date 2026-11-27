@@ -40,21 +40,21 @@ int* __cdecl m_alloc(int size, char* tag);
 void __cdecl d2_FreeTutorialNodes(int*);
 void __cdecl d2_IsTutorialStepAllowed(void);
 void __cdecl d2_CheckTutCh2RathausGate(void);
-void __cdecl fcn_0057edf0(void);
+void __cdecl d2_CheckTutCh2RathausAction110(void);
 void __cdecl d2_CheckTutorialStep0x1a(void);
-void __cdecl fcn_0057ee60(void);
-void __cdecl fcn_0057eea0(void);
-void __cdecl fcn_0057eee0(void);
+void __cdecl d2_AllowTutCh2RathausMsg19(void);
+void __cdecl d2_AllowTutCh2Cat0fOr02Msg19(void);
+void __cdecl d2_AllowTutCh2Cat0fOr02Or12Msg19(void);
 void __cdecl fcn_0057f090(void);
 void __cdecl fcn_0057f100(void);
 void __cdecl fcn_0057f130(void);
 void __cdecl fcn_0057f180(void);
-void __cdecl fcn_0057f1d0(void);
-void __cdecl fcn_0057f220(void);
+void __cdecl d2_UpdateTutCh2Action110Step(void);
+void __cdecl d2_UpdateTutCh2Cat0dStep(void);
 void __cdecl fcn_0057f2e0(void);
-void __cdecl fcn_0057f310(void);
+void __cdecl d2_UpdateTutCh2Node13Step(void);
 void __cdecl d2_FocusTutorialBuilding0x0a(void);
-void __cdecl fcn_0057f3e0(void);
+void __cdecl d2_UpdateTutCh2Node74Step(void);
 
 int* __cdecl d2_CreateTutorialChapter2(void)
 {
@@ -247,7 +247,7 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0xa] = (int) g_6a88c8;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_0057edf0;
+	p[0xf] = (int) d2_CheckTutCh2RathausAction110;
 	p[0xd] = 0;
 	p[0xe] = (int) fcn_0057f180;
 	p[0x10] = 1;
@@ -298,7 +298,7 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0xc] = 0x8e;
 	p[0xd] = 0;
 	p[0xf] = (int) d2_CheckTutorialStep0x1a;
-	p[0xe] = (int) fcn_0057f1d0;
+	p[0xe] = (int) d2_UpdateTutCh2Action110Step;
 	p[0x10] = 1;
 	p[0x11] = 0x2148;
 	p[0x12] = 0xa;
@@ -345,9 +345,9 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0xa] = (int) g_6a8828;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_0057ee60;
+	p[0xf] = (int) d2_AllowTutCh2RathausMsg19;
 	p[0xd] = (int) fcn_0057f2e0;
-	p[0xe] = (int) fcn_0057f220;
+	p[0xe] = (int) d2_UpdateTutCh2Cat0dStep;
 	p[0x10] = 1;
 	p[0x11] = 0x2148;
 	p[0x12] = 0xa;
@@ -394,9 +394,9 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0xa] = (int) g_6a87d8;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_0057eea0;
+	p[0xf] = (int) d2_AllowTutCh2Cat0fOr02Msg19;
 	p[0xd] = (int) d2_FocusTutorialBuilding0x0a;
-	p[0xe] = (int) fcn_0057f310;
+	p[0xe] = (int) d2_UpdateTutCh2Node13Step;
 	p[0x10] = 1;
 	p[0x11] = 0x2148;
 	p[0x12] = 0xa;
@@ -441,9 +441,9 @@ int* __cdecl d2_CreateTutorialChapter2(void)
 	p[0x8] = 0;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xf] = (int) fcn_0057eee0;
+	p[0xf] = (int) d2_AllowTutCh2Cat0fOr02Or12Msg19;
 	p[0xd] = 0;
-	p[0xe] = (int) fcn_0057f3e0;
+	p[0xe] = (int) d2_UpdateTutCh2Node74Step;
 	p[0x10] = 1;
 	p[0x11] = 0x429;
 	p[0x12] = 0xa;

@@ -22,7 +22,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int d2_CurrentElementId;
 
-int __cdecl fcn_004f63d0(int, int*, unsigned short);
+int __cdecl gs_CollectEvidenceIndicesForTarget(int, int*, unsigned short);
 void __cdecl d2_SortCrimeRecordsByKind(int n, Rec2d_9a3800* arr);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -31,7 +31,7 @@ void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c91c0(int, int, int, int, int);
-int __cdecl fcn_004f4830(int, Stat5d9f*);
+int __cdecl gm_GetLawEntry(int, Stat5d9f*);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl gm_CheckPrivilege(int, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -60,7 +60,7 @@ int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
 	if (*other == 0xffff) {
 		return 0;
 	}
-	n = fcn_004f63d0(*(int*) (other + 2), list, *entity);
+	n = gs_CollectEvidenceIndicesForTarget(*(int*) (other + 2), list, *entity);
 	if (n < 1) {
 		return 0x60;
 	}
@@ -84,7 +84,7 @@ int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
 	d2_SetForm(dlg, 2);
 	for (k = 0; k < n; k++) {
 		fcn_005c91c0(g_14aa314[rows[k].x1c].name, 10, k * 0x28 + 10, 0x13b, 0x55);
-		if (fcn_004f4830(rows[k].x1c, &st) != 0 && st.count != 0) {
+		if (gm_GetLawEntry(rows[k].x1c, &st) != 0 && st.count != 0) {
 			for (i = 0; i < st.count; i++) {
 				d2_AddElementToWindow(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, d2_CurrentWindowId);
 			}

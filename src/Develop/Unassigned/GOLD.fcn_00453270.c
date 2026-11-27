@@ -2,23 +2,23 @@
 
 extern volatile int g_6b7fac;
 
-typedef struct Query_453270 {
+typedef struct D3_OBJECT_LIGHT_QUERY {
 	char* ref;
 	unsigned int count;
 	char** list;
 	unsigned char flag;
-} Query_453270;
+} D3_OBJECT_LIGHT_QUERY;
 
-typedef union Color_453270 {
+typedef union D3_LIGHT_COLOR {
 	unsigned int u;
 	unsigned char b[4];
-} Color_453270;
+} D3_LIGHT_COLOR;
 
 char* __cdecl d3_SelectObjectLod(char* object);
 void __cdecl fcn_00452ee0(char* o);
-void __cdecl fcn_004522a0(char* o, Query_453270* q);
-void __cdecl fcn_00452f90(char* o, char* mesh, int zero, unsigned int color);
-char __cdecl fcn_00453100(char* o, void* q);
+void __cdecl fcn_004522a0(char* o, D3_OBJECT_LIGHT_QUERY* q);
+void __cdecl d3_ApplyMaterialVertexColors(char* o, char* mesh, int zero, unsigned int color);
+char __cdecl d3_CollectAffectingLights(char* o, void* q);
 char __cdecl fcn_00452d80(char* o, void* ctx);
 char __cdecl d3_VisitSceneObjectsUntilStopped(char* scene, char* node, unsigned int flags,
 	char (__cdecl* callback)(char*, void*), void* context);
@@ -26,12 +26,12 @@ void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLD 0x00453270 */
-char __cdecl fcn_00453270(char* o)
+char __cdecl d3_UpdateObjectLighting(char* o)
 {
 	char* mesh;
 	char* p;
-	Query_453270 q;
-	Color_453270 color;
+	D3_OBJECT_LIGHT_QUERY q;
+	D3_LIGHT_COLOR color;
 	int i;
 	int tmp;
 	float v[3];
@@ -61,11 +61,11 @@ char __cdecl fcn_00453270(char* o)
 	q.list = 0;
 	q.ref = o;
 	q.flag = ((unsigned char) o[0x210] >> 5) & 1;
-	d3_VisitSceneObjectsUntilStopped(*(char**) (o + 0x208), 0, 10, (char (__cdecl*)(char*, void*)) fcn_00453100, &q);
+	d3_VisitSceneObjectsUntilStopped(*(char**) (o + 0x208), 0, 10, (char (__cdecl*)(char*, void*)) d3_CollectAffectingLights, &q);
 	if (q.count > 0) {
 		q.list = (char**) m_alloc(q.count * 4, "d3_light:cache");
 		q.count = 0;
-		d3_VisitSceneObjectsUntilStopped(*(char**) (o + 0x208), 0, 10, (char (__cdecl*)(char*, void*)) fcn_00453100, &q);
+		d3_VisitSceneObjectsUntilStopped(*(char**) (o + 0x208), 0, 10, (char (__cdecl*)(char*, void*)) d3_CollectAffectingLights, &q);
 		fcn_004522a0(o, &q);
 		m_FreeTracked(q.list);
 		q.list = 0;
@@ -111,7 +111,7 @@ char __cdecl fcn_00453270(char* o)
 			*(int*) (p + 0x40) = *(int*) (p + 0x44);
 		}
 	}
-	fcn_00452f90(o, mesh, 0, color.u);
+	d3_ApplyMaterialVertexColors(o, mesh, 0, color.u);
 	d3_VisitSceneObjectsUntilStopped(*(char**) (o + 0x208), 0, 4, fcn_00452d80, o);
 	*(int*) 0x633b18 = 0;
 	o[0x210] |= 4;

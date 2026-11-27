@@ -30,9 +30,9 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl he_NotifyConfession(ENTITY_RECORD*, ENTITY_RECORD*, unsigned char*);
-void __cdecl fcn_004f5e20(int, int);
+void __cdecl gs_ClearTargetStraftaten(int, int);
 int __cdecl fcn_00526120(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -84,12 +84,12 @@ void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 				me = ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]);
 				v = d2_GetControlValue(btnB);
 				if (d2_CheckActionBlocker(me, v) != 0) {
-					fcn_005100f0(me->entity_id, -v);
+					gm_ModifyHealth(me->entity_id, -v);
 					if (*(unsigned short*) (e + 0x27) != 0xffff && *(unsigned short*) (e + 0x27) != g_774970) {
-						fcn_005100f0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id, 1);
+						gm_ModifyHealth(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].entity_id, 1);
 						he_NotifyConfession(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (e + 0x27)]), e);
 					}
-					fcn_004f5e20(me->entity_id, v / 2);
+					gs_ClearTargetStraftaten(me->entity_id, v / 2);
 					fcn_00526120(g_14ab930, 0);
 					g_774654 = 1;
 				}

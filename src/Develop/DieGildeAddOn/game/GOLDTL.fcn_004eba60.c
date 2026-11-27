@@ -6,7 +6,7 @@ extern char g_6b5c60[];
 
 float __cdecl gm_RandomFloat01(void);
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_005100f0(int id, int amount);
+void __cdecl gm_ModifyHealth(int id, int amount);
 void __cdecl cm_RequestChangeBits(int handle, int a, int b, int c, int d);
 int __cdecl cm_RequestCopyEntityData(int a, int b, int value, int flag);
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
@@ -55,7 +55,7 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 			return 0;
 		if (f > 0.3f)
 			amt_SendOfficeCommand(slot[0], 0, 0, 4, 0xff);
-		fcn_005100f0(*(int*) (e + 4), -8);
+		gm_ModifyHealth(*(int*) (e + 4), -8);
 		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
 		if (f > 0.3f) {
 			if (7 == h[2] || 6 == h[2]) {
@@ -111,7 +111,7 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 					cm_RequestCopyEntityData(*(int*) (e + 4), id1, value, 1);
 			}
 		}
-		fcn_005100f0(*(int*) (e + 4), -8);
+		gm_ModifyHealth(*(int*) (e + 4), -8);
 		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
 		if (f > 0.3f) {
 			io_FormatTextBuffer(buf, 0x167a, target[1] + 0x1663);
@@ -163,7 +163,7 @@ unsigned int __cdecl amt_HandleOfficeAction(char* e, unsigned int* target)
 		} else {
 			n = amt_FindOfficeSlotsByKind(target[1], 6, arr);
 		}
-		fcn_005100f0(*(int*) (e + 4), -8);
+		gm_ModifyHealth(*(int*) (e + 4), -8);
 		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x10000000, 0);
 		if (f > 0.3f) {
 			io_FormatTextBuffer(buf, 0x1672, target[1] + 0x1663);

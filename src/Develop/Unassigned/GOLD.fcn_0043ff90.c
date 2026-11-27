@@ -1,12 +1,12 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 
 void __cdecl fcn_0045fbb0(void*);
-void __cdecl fcn_0043f990(void);
+void __cdecl d3_ResetFloorTileCache(void);
 
 #define SLOT(p, off) (*(void**) ((char*) (p) + (off)))
 
 /* ADDRESS: GOLD 0x0043ff90 */
-void __cdecl fcn_0043ff90(char* scene)
+void __cdecl d3_DestroyFloor(char* scene)
 {
 	int i;
 	int j;
@@ -81,6 +81,6 @@ void __cdecl fcn_0043ff90(char* scene)
 			SLOT(scene, 0x24 + i * 4) = 0;
 		}
 	}
-	fcn_0043f990();
+	d3_ResetFloorTileCache();
 	m_FreeTracked(scene);
 }

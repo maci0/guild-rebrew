@@ -1,10 +1,10 @@
 
 /* Calls fcn_0043f270, then zeroes g_00633748. */
 extern int g_00633748; /* 0x00633748 */
-void __cdecl fcn_0043f270(void);
+void __cdecl d3_ShutdownFloorTileCache(void);
 
-void __cdecl fcn_0043fed0(void)
+void __cdecl d3_ShutdownFloorTiles(void)
 {
-    fcn_0043f270();
+    d3_ShutdownFloorTileCache();
     g_00633748 = 0;
 }

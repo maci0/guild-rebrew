@@ -42,7 +42,7 @@ void __cdecl fcn_0046ac30(void);
 #include "client_timer.h"
 void __cdecl fcn_0053f4b0(void);
 
-void __cdecl fcn_0053f4c0(void)
+void __cdecl d2_ShowLoadingScreen(void)
 {
 	d2_SuppressOverlay = 1;
 	d2_ClearScreen();

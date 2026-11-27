@@ -20,7 +20,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckEntityStock(void*, int, char);
-int __cdecl fcn_004f2f90(void*, int, char*, int, int, int);
+int __cdecl gv_SendMoveSlotEntry(void*, int, char*, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -63,7 +63,7 @@ int __cdecl d2_RunFriedhofDialog(char* entity, int a2, unsigned char a3, int cho
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
 				if (cost == 0 || gm_CheckEntityStock(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), cost, (*(char*)&g_773d75)) != 0) {
-					h = fcn_004f2f90(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), choice, entity, a2, a3, cost);
+					h = gv_SendMoveSlotEntry(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), choice, entity, a2, a3, cost);
 					while (h != -1 && (s = cm_GetCommandStatus(h)) == 0) {
 						main_RunFrameLoop((void*) s, 0x20007);
 					}

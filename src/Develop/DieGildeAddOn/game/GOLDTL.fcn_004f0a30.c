@@ -5,7 +5,7 @@ extern unsigned char g_773d75;
 int __cdecl gm_FindSlot170Entry(int);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 int __cdecl cm_SendAdjustResourceSlots(void*);
 
 /* ADDRESS: GOLDTL 0x004f0a30 */
@@ -36,7 +36,7 @@ int __cdecl gm_SendCannonVolleys(char* building, char* payer, unsigned int* firs
 		memset(pkt, 0, sizeof(pkt));
 		if (firstPayload != 0) {
 			gm_TryRecordCrime(8, 1, *(int*) (payer + 4), -1, -1);
-			fcn_005100f0(*(int*) (payer + 4), -hpDelta);
+			gm_ModifyHealth(*(int*) (payer + 4), -hpDelta);
 			cm_RequestTransferCurrencyNoKill(-1, *(int*) (payer + 4), (char) g_773d75, goldCost);
 			pkt[0] = *(unsigned int*) (building + 1);
 			pkt[1] = prio;
@@ -48,7 +48,7 @@ int __cdecl gm_SendCannonVolleys(char* building, char* payer, unsigned int* firs
 		}
 		if (secondPayload != 0) {
 			if (ok != 0) {
-				fcn_005100f0(*(int*) (payer + 4), -hpDelta);
+				gm_ModifyHealth(*(int*) (payer + 4), -hpDelta);
 				cm_RequestTransferCurrencyNoKill(-1, *(int*) (payer + 4), (char) g_773d75, goldCost);
 				ok = 0;
 			}
@@ -61,7 +61,7 @@ int __cdecl gm_SendCannonVolleys(char* building, char* payer, unsigned int* firs
 		}
 		if (thirdPayload != 0) {
 			if (ok != 0) {
-				fcn_005100f0(*(int*) (payer + 4), -hpDelta);
+				gm_ModifyHealth(*(int*) (payer + 4), -hpDelta);
 				cm_RequestTransferCurrencyNoKill(-1, *(int*) (payer + 4), (char) g_773d75, goldCost);
 			}
 			pkt[0] = *(unsigned int*) (building + 1);

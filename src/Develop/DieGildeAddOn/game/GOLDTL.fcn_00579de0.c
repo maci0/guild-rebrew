@@ -41,8 +41,8 @@ void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 char* __cdecl gv_GetSlotEntry(int a, int b, unsigned char c);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00* a, pos14_7f4c00* b);
 
-int __cdecl fcn_004f2d30(char* p, int a, int b, int c);
-char* __cdecl fcn_0050dc90(char* p);
+int __cdecl gv_RequestUpdateProductionProgress(char* p, int a, int b, int c);
+char* __cdecl gm_FindBuildingOwner(char* p);
 void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c, char* p);
 void __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d, int e,
 	int f, int g, char* fmt);
@@ -121,12 +121,12 @@ void __cdecl he_RunGrabpflege(char* a0)
 	}
 	v = (int) place->add;
 	if (slot != 0 && v > 0) {
-		fcn_004f2d30(rec, place->xb0, place->xb4, v);
+		gv_RequestUpdateProductionProgress(rec, place->xb0, place->xb4, v);
 		if (!entity) {
 			he_FreeAction(a0);
 			return;
 		}
-		fig = fcn_0050dc90(rec);
+		fig = gm_FindBuildingOwner(rec);
 		io_FormatTextBuffer(text, 0x4126, 0x411e, *(unsigned short*) entity, rec);
 		row = (int) (*(unsigned short*) (a0 + 8)) * 0x21c;
 		if ((g_7f4ca0[row + 2] == 6 || g_7f4ca0[row + 2] == 7)

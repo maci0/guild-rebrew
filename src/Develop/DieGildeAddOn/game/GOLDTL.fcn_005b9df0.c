@@ -29,7 +29,7 @@ int __cdecl d2_DispatchTutorialEvent(int, char*, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl gm_CalcEntityInventoryStats(char*, char*);
-int __cdecl fcn_0050ddf0(int, int);
+int __cdecl gm_CalcEscortCost(int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_0057e880(int, char*, int, int);
 
@@ -61,7 +61,7 @@ int __cdecl cm_DispatchCartTransfer(int playerIdx, char* cart, char* origin, cha
 		cm_SendCopyEntityData(msg);
 		if (cart[0x28] != 0) {
 			gm_CalcEntityInventoryStats(cart, info);
-			res = fcn_0050ddf0(*(int*) (info + 0xb0), cart[0x28]);
+			res = gm_CalcEscortCost(*(int*) (info + 0xb0), cart[0x28]);
 			cm_RequestTransferCurrencyNoKill(-1, ((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIdx].entity_id, g_773d75, res);
 		}
 		if (playerIdx == g_774970) {

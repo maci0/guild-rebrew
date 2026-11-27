@@ -49,7 +49,7 @@ int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
 int __cdecl fcn_004a5340(char* e, int a, int* b, float c, float r, unsigned short* out);
 
 /* ADDRESS: GOLDTL 0x0049a0c0 */
-int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
+int __cdecl ai_StartUseObjectAnsehen(int kind, char* entity, int busy, Msg* out1, Msg* out2)
 {
 	Slot slot[12];
 	Counts cnt;
@@ -66,7 +66,7 @@ int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
 	if (k == 0) {
 		k = 0x1c;
 	}
-	if (a2 != 0 || kind != 0) {
+	if (busy != 0 || kind != 0) {
 		return 0;
 	}
 	memset(slot, 0, sizeof(slot));
@@ -82,7 +82,7 @@ int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
 	slot[9].id = 0x167;
 	slot[10].id = 0x229;
 	slot[11].id = 0x2b6;
-	gm_CheckEntityObjectSlots(e, 12, slot, &cnt);
+	gm_CheckEntityObjectSlots(entity, 12, slot, &cnt);
 	total = cnt.total;
 	free = cnt.free;
 	if (total == 6 && free == 0) {
@@ -102,7 +102,7 @@ int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
 		return 0;
 	}
 	{
-		if (!amt_GetRoleTemplate(((Ent*) e)->x166, &q)) {
+		if (!amt_GetRoleTemplate(((Ent*) entity)->x166, &q)) {
 			i = 7;
 		} else {
 			if (q.x8 < 4) {
@@ -121,9 +121,9 @@ int __cdecl fcn_0049a0c0(int kind, char* e, int a2, Msg* out1, Msg* out2)
 		b.b = 1;
 		b.f = 0.05f;
 		a.type = 7;
-		a.a = ((Ent*) e)->x4;
+		a.a = ((Ent*) entity)->x4;
 		a.b = 1;
-		r = ai_SelectBestMethod(k, ((Ent*) e)->id, 2, &b, &a);
+		r = ai_SelectBestMethod(k, ((Ent*) entity)->id, 2, &b, &a);
 		if (r != 0) {
 			*out1 = b;
 			*out2 = a;
@@ -145,8 +145,8 @@ pick_used:
 	if (i == 9) {
 		unsigned short picked;
 		int mask;
-		mask = (((Ent*) e)->x9 ? 1 : 2) | 0xf00500;
-		if (fcn_004a5340(e, 1, &mask, 10.0f, (gm_RandomMod(0x20) & 0xffff) + 40.0f, &picked) == 0) {
+		mask = (((Ent*) entity)->x9 ? 1 : 2) | 0xf00500;
+		if (fcn_004a5340(entity, 1, &mask, 10.0f, (gm_RandomMod(0x20) & 0xffff) + 40.0f, &picked) == 0) {
 			return 0;
 		}
 		b.type = 7;
@@ -155,15 +155,15 @@ pick_used:
 	} else if (i == 10) {
 		int mask;
 		unsigned short picked;
-		mask = (((Ent*) e)->x9 == 1 ? 2 : 1) | 0xf00500;
-		if (fcn_004a5340(e, 1, &mask, 10.0f, (gm_RandomMod(0x20) & 0xffff) + 40.0f, &picked) == 0) {
+		mask = (((Ent*) entity)->x9 == 1 ? 2 : 1) | 0xf00500;
+		if (fcn_004a5340(entity, 1, &mask, 10.0f, (gm_RandomMod(0x20) & 0xffff) + 40.0f, &picked) == 0) {
 			return 0;
 		}
 		b.type = 7;
 		b.a = ((Ent*) g_7f4ca0)[picked].x4;
 		b.b = -1;
 	} else if (i == 8) {
-		r = ai_SelectBestMethod(k, ((Ent*) e)->id, 3, &a, &b);
+		r = ai_SelectBestMethod(k, ((Ent*) entity)->id, 3, &a, &b);
 		if (r != 0) {
 			*out1 = a;
 			*out2 = b;

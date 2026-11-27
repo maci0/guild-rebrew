@@ -35,7 +35,7 @@ extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004f63d0(int, int*, unsigned short);
+int __cdecl gs_CollectEvidenceIndicesForTarget(int, int*, unsigned short);
 void __cdecl d2_SortCrimeRecordsByKind(int n, Rec5bfd* arr);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -44,7 +44,7 @@ void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c91c0(int, int, int, int, int);
-int __cdecl fcn_004f4830(int, Stat5bfd*);
+int __cdecl gm_GetLawEntry(int, Stat5bfd*);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 int __cdecl gm_CheckPrivilege(int, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -65,7 +65,7 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 	if (*e == 0xffff) {
 		return;
 	}
-	n = fcn_004f63d0(*(int*) (e + 2), list, *who);
+	n = gs_CollectEvidenceIndicesForTarget(*(int*) (e + 2), list, *who);
 	if (n < 1) {
 		return;
 	}
@@ -85,7 +85,7 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 	d2_SetForm(h, 2);
 	for (k = 0; k < n; k++) {
 		fcn_005c91c0(g_14aa314[recs[k].kind].name, 10, k * 0x28 + 10, 0x13b, 0x55);
-		if (fcn_004f4830(recs[k].kind, &st) != 0 && st.count != 0) {
+		if (gm_GetLawEntry(recs[k].kind, &st) != 0 && st.count != 0) {
 			for (i = 0; i < st.count; i++) {
 				d2_AddElementToWindow(i * 0x10 + 0x154, k * 0x28 + 10, 0x526, d2_CurrentWindowId);
 			}

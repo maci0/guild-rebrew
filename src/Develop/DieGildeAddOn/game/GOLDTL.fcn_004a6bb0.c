@@ -55,7 +55,7 @@ int __cdecl gm_AmountToUnits(int a, unsigned char b);
 int __cdecl fcn_0050b750(int a, unsigned char b);
 int __cdecl gm_ResetCardGameRound(Game* s);
 
-int __cdecl fcn_004a6bb0(char* owner, Game* game)
+int __cdecl gm_InitCardGame(char* owner, Game* game)
 {
 	int i;
 	int j;

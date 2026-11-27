@@ -4,10 +4,10 @@ extern GOLD_GUI_WINDOW g_00f8f120[];
 extern GuiEnt* g_00f8f080;
 int __cdecl fcn_00472380(int x, int y, int width, int height, unsigned int flags);
 void __cdecl fcn_004730d0(int, GuiWin*);
-void __cdecl fcn_00472c70(void* a0, int* a1, int* a2);
+void __cdecl d2_GetWindowBorderSize(void* a0, int* a1, int* a2);
 
 /* ADDRESS: GOLD 0x00472a90 */
-int __cdecl fcn_00472a90(short x, short y, short width, short height, unsigned int flags, int parent)
+int __cdecl d2_CreateChildWindow(short x, short y, short width, short height, unsigned int flags, int parent)
 {
 	GOLD_GUI_WINDOW* p;
 	int idx;
@@ -27,7 +27,7 @@ int __cdecl fcn_00472a90(short x, short y, short width, short height, unsigned i
 	g_00f8f080[g_00f8f120[idx].id].f20 = p->x + x + width;
 	g_00f8f080[g_00f8f120[idx].id].f40 = g_00f8f080[*(int*) ((char*) p + 0x26c)].f40;
 	p->count++;
-	fcn_00472c70(p, (int*) &parent, (int*) &flags);
+	d2_GetWindowBorderSize(p, (int*) &parent, (int*) &flags);
 	if (g_00f8f120[idx].height + y > *(int*) ((char*) p + 0x244)) {
 		*(int*) ((char*) p + 0x244) = g_00f8f120[idx].height + parent * 2 + y;
 	}

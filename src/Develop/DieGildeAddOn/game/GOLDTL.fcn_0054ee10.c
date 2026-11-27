@@ -21,7 +21,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl gm_TryRecordCrime(int a, int b, int c, int d, int e);
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
-int __cdecl fcn_004f6470(int id, int* out, unsigned short k);
+int __cdecl gs_CollectEvidenceForTarget(int id, int* out, unsigned short k);
 void __cdecl gm_GenerateShuffledIndices(int n, int* out);
 void __cdecl cm_RequestClearEvidenceLink(int a1, int a2, int a3);
 int __cdecl gm_IncrementMissionActionCount(char* a1, int kind);
@@ -77,7 +77,7 @@ void __cdecl he_StartDuellChallenge(char* t)
 			id = *(int*) (*(char**) (secondEntity + 0x170) + 1);
 		gm_TryRecordCrime(0x16, 1, *(int*) (firstEntity + 4), *(int*) (secondEntity + 4), id);
 		cm_RequestCopyEntityData(*(int*) (firstEntity + 4), *(int*) (secondEntity + 4), 0x34, 1);
-		n = fcn_004f6470(*(int*) (secondEntity + 4), ids, *(unsigned short*) firstEntity);
+		n = gs_CollectEvidenceForTarget(*(int*) (secondEntity + 4), ids, *(unsigned short*) firstEntity);
 		gm_GenerateShuffledIndices(n < 0x10 ? n : 0x10, pick);
 		for (i = 0; i < 3; i++, n--) {
 			if (n == 0)

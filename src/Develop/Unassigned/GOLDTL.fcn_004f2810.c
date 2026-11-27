@@ -13,26 +13,26 @@ typedef struct
 	short f11;
 	int f13;
 	char pad[9];
-} F28Msg;
+} GV_EXTEND_SLOT_MSG;
 
 #pragma pack(pop)
 // SIZE 0x20
 
 int __cdecl fcn_004c6c30(void*);
 
-int __cdecl fcn_004f2810(int a1, int a2, int a3, int a4, short a5, int a6)
+int __cdecl gv_SendExtendProductionTime(int slot, int building, int worktype, int slotIndex, short duration, int cost)
 {
-	F28Msg m;
+	GV_EXTEND_SLOT_MSG msg;
 
-	if (a1 == 0 || a2 == 0 || a4 == -1) {
+	if (slot == 0 || building == 0 || slotIndex == -1) {
 		return -1;
 	}
-	m.f0 = 2;
-	m.f4 = *(int*) ((char*) a1 + 4);
-	m.f8 = *(int*) ((char*) a2 + 1);
-	m.fc = a3;
-	m.f10 = (char) a4;
-	m.f11 = a5;
-	m.f13 = a6;
-	return fcn_004c6c30(&m);
+	msg.f0 = 2;
+	msg.f4 = *(int*) ((char*) slot + 4);
+	msg.f8 = *(int*) ((char*) building + 1);
+	msg.fc = worktype;
+	msg.f10 = (char) slotIndex;
+	msg.f11 = duration;
+	msg.f13 = cost;
+	return fcn_004c6c30(&msg);
 }

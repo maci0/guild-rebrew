@@ -40,7 +40,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004bfc70(int);
 void __cdecl fcn_004be360(void);
 Node_4bf8e0* __cdecl fcn_004be1f0(Node_4bf8e0*);
-void __cdecl fcn_004be3d0(int, char*, Node_4bf8e0*, Node_4bf8e0*);
+void __cdecl d2_AddRoutePointMarker(int, char*, Node_4bf8e0*, Node_4bf8e0*);
 void __cdecl d2_SelectRadioGroup(int, int);
 
 int __cdecl cm_AppendCommandSyncField(unsigned char, unsigned char, short, void*);
@@ -97,7 +97,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 			g_772908 = fcn_004be1f0(0);
 			g_772908->f4 = *(int*) (p + 0x1c);
 			g_772908->f0 = *(int*) (p + 2);
-			fcn_004be3d0(arg, p, g_772908, g_772908);
+			d2_AddRoutePointMarker(arg, p, g_772908, g_772908);
 			d2_SelectRadioGroup(g_6816d8, 0);
 			g_774654 = 2;
 		}

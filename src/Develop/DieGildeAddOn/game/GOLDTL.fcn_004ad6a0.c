@@ -38,7 +38,7 @@ extern short g_7f4c0c;
 
 int __cdecl amt_FindOfficeSlotByType(int id, int* out);
 char* __cdecl amt_GetOfficeHolderRecord(int kind);
-float __cdecl fcn_004ad500(unsigned char* a1, unsigned short* a2, int a3, int a4);
+float __cdecl amt_ScoreOfficeCandidate(unsigned char* a1, unsigned short* a2, int a3, int a4);
 void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 int __cdecl amt_SendOfficeCommand(unsigned char a1, char* a2, char* a3, int a4, int a5);
 void __cdecl cm_SendCopyEntityData(char* msg);
@@ -97,7 +97,7 @@ void __cdecl amt_AssignSpecialOffices(void)
 	best = 0;
 	highestScore = -1.0;
 	for (i = 0; i < count; i++) {
-		hits[i].f = fcn_004ad500((unsigned char*) hits[i].p,
+		hits[i].f = amt_ScoreOfficeCandidate((unsigned char*) hits[i].p,
 		    (unsigned short*) obj, id, 1);
 	}
 	for (i = 0; i < count; i++) {

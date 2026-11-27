@@ -21,7 +21,7 @@ int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char fla
 void __cdecl gm_TryRecordCrime(int a, int b, int c, int d, int e);
 
 /* ADDRESS: GOLDTL 0x0054b150 */
-void __cdecl fcn_0054b150(char* entity)
+void __cdecl he_StartAction0x2e(char* entity)
 {
 	char buf[0x200];
 	char* firstEntity;

@@ -2,7 +2,7 @@
 
 
 int __cdecl d2_CheckActionBlocker(char*, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 
 int __cdecl gm_ObjSpendThreeActionPoints(char* e)
 {
@@ -13,6 +13,6 @@ int __cdecl gm_ObjSpendThreeActionPoints(char* e)
 	} else if (*(int*) (e + 0x194) < 3) {
 		return 0;
 	}
-	fcn_005100f0(*(int*) (e + 4), -3);
+	gm_ModifyHealth(*(int*) (e + 4), -3);
 	return 1;
 }

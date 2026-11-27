@@ -35,7 +35,7 @@ extern int __cdecl fcn_004ce210(int);
 extern int __cdecl lb_RequestLeaveLobby(void);
 extern int __cdecl cm_SendChatMessage(int, char*);
 extern int __cdecl cm_SendSyncStamp0x5f(void*);
-extern int __cdecl fcn_004ce380(void*);
+extern int __cdecl cm_SendUpdateSceneEntry(void*);
 extern int __cdecl cm_GetCommandStatus(int);
 extern int __cdecl gm_GetRangeStatId(int, int);
 extern int __cdecl fcn_00507b00(int);
@@ -245,12 +245,12 @@ int __cdecl d2_RunNetLobbySetup(void)
 					*(int*)0x779c6c = *(int*)0x7e23e4 - 0x59a;
 					*(unsigned char*)0x779c70 = *(unsigned char*)0x7e23e8;
 					*(unsigned char*)0x779c71 = *(unsigned char*)0x7e23e9;
-					d = fcn_004ce380((void*)0x779c60);
+					d = cm_SendUpdateSceneEntry((void*)0x779c60);
 					while (cm_GetCommandStatus(d) == 0)
 						cm_StepCommandQueue();
 					if (d2_ChooseProfession(0x24087)) {
 						*(unsigned char*)0x779c6b = *(unsigned char*)0x7e23e3;
-						d = fcn_004ce380((void*)0x779c60);
+						d = cm_SendUpdateSceneEntry((void*)0x779c60);
 						while (cm_GetCommandStatus(d) == 0)
 							cm_StepCommandQueue();
 					}

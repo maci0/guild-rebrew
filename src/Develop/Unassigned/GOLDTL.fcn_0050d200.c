@@ -2,7 +2,7 @@
 
 
 int __cdecl gm_GetTypeProductValue(int k);
-int __cdecl fcn_004f4830(int k, int* info);
+int __cdecl gm_GetLawEntry(int k, int* info);
 
 int __cdecl gm_CalcBuildingCost(unsigned char* p, int k)
 {
@@ -15,6 +15,6 @@ int __cdecl gm_CalcBuildingCost(unsigned char* p, int k)
 	if (p[0x166] != 0xe) {
 		m = 1.0f;
 	}
-	fcn_004f4830(6, info);
+	gm_GetLawEntry(6, info);
 	return (int) (((4 - info[6]) * 0.1f + 0.8f) * total * m);
 }

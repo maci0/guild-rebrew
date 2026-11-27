@@ -23,7 +23,7 @@ extern int g_9baa08;
 extern int g_9baa04;
 
 int* __cdecl d3_LookupSceneEntry(int);
-struct s87_4ce430* __cdecl fcn_004cded0(void);
+struct s87_4ce430* __cdecl d3_FindFreeSceneEntry(void);
 void __cdecl lb_AppendChatLog(int, int, char*);
 
 
@@ -47,7 +47,7 @@ int __cdecl fcn_004ce430(char* rec, char* out)
 		r[1] = *(int*) (rec + 0x18);
 		break;
 	case 2:
-		r = (int*) fcn_004cded0();
+		r = (int*) d3_FindFreeSceneEntry();
 		if (r == 0)
 			return -1;
 		*(struct s87_4ce430*) r = *(struct s87_4ce430*) (rec + 0x14);

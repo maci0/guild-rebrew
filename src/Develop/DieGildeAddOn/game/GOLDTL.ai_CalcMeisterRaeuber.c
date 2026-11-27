@@ -33,14 +33,14 @@ char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl ai_CollectGoodsResources(char*, char*);
 void __cdecl ai_PlanMeisterSupplies(char*, char*, int);
-void __cdecl fcn_00489010(char*, char*);
+void __cdecl ai_ArmMeisterWorkers(char*, char*);
 void __cdecl ai_MeisterCollectTrans(char*);
 void __cdecl ai_MeisterTrade(char*, char*);
 void __cdecl ai_ManageMeisterWorkers(char*);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(char*, char*, int);
 void __cdecl ai_RequestAusbauUpgrade(char*, char*, int);
 void __cdecl ai_BuyStallGoods(char*);
-void __cdecl fcn_004888a0(char*);
+void __cdecl ai_FlagIdleWorkersForRecovery(char*);
 void __cdecl ai_DispatchWorkerRecovery(char*);
 void __cdecl ai_CalcAngriff(char*, int);
 
@@ -84,7 +84,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 		ai_ResourceCount = 0;
 		ai_CollectGoodsResources(meister, res);
 		ai_PlanMeisterSupplies(meister, res, *(int*) (*(char**) (meister + 0x16c) + 0x39));
-		fcn_00489010(meister, res);
+		ai_ArmMeisterWorkers(meister, res);
 		ai_MeisterCollectTrans(meister);
 		ai_MeisterTrade(meister, res);
 	}
@@ -92,7 +92,7 @@ void __cdecl ai_CalcMeisterRaeuber(char* meister)
 	gm_TryAutoUpgradeBuildingSlots(res, meister, 10);
 	ai_RequestAusbauUpgrade(res, meister, 10);
 	ai_BuyStallGoods(meister);
-	fcn_004888a0(meister);
+	ai_FlagIdleWorkersForRecovery(meister);
 	ai_DispatchWorkerRecovery(meister);
 	if ((unsigned short) gm_GameTime.b > 6 && (*(unsigned int*) (meister + 4) + (unsigned short) gm_GameTime.b) % 3 == 0) {
 		if (*(int*) (meister + 0x1b4) & 0x20) {

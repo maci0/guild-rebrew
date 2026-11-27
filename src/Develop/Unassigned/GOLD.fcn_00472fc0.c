@@ -10,7 +10,7 @@ extern GuiEnt** g_006ed964; /* 0x006ed964 */
 
 void __cdecl d2_ReorderControlStack(int id);
 
-void __cdecl fcn_00472fc0(int win)
+void __cdecl d2_BringWindowToFront(int win)
 {
 	GOLD_GUI_WINDOW* w;
 	GuiEnt* tmp[0x181];

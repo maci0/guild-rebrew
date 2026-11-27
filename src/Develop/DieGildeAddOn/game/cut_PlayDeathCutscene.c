@@ -10,7 +10,7 @@ void __cdecl fcn_004e4730(char* s);
 void __cdecl fcn_004e4b60(char* s);
 void __cdecl fcn_00445f50(int a, int b, float f, int c);
 void __cdecl fcn_004463f0(int a, int b, float f);
-int __cdecl fcn_004e44b0(char* s, void* p);
+int __cdecl evt_StartGfxScript(char* s, void* p);
 int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
 void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
 void __cdecl main_RunFrameLoop(int a, int b);
@@ -78,7 +78,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 	fcn_004e4b60((char*) 0x68d2b8);
 	fcn_00445f50(state, 0, 1.0f, 1);
 	fcn_004463f0(0, 0, 0.0f);
-	xslot = fcn_004e44b0((char*) 0x68d29c, (void*) 0x6b5c60);
+	xslot = evt_StartGfxScript((char*) 0x68d29c, (void*) 0x6b5c60);
 	r = cut_WaitForTimeoutOrInput(3000, 0, 0);
 	if (r == 0) {
 		fcn_004e4b40(-8, handle, (char*) 0x68d294, 0, 0);

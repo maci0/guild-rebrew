@@ -37,7 +37,7 @@ void __cdecl d2_SetElementFont(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_RunCharacterDebugDialog(void*);
 char* __cdecl io_AppendText(int, ...);
-int __cdecl fcn_005b44b0(Ent_5b4c80*);
+int __cdecl he_CountActiveHandlungen(Ent_5b4c80*);
 int __cdecl d2_GetWindowListItem(int, int, char*);
 void __cdecl d2_UpdateWindowDrag(D2_WIN*);
 int __cdecl fcn_0046f280(int);
@@ -85,7 +85,7 @@ void __cdecl d2_ShowCharacterActionDebug(void)
 				d2_CurrentWindowId = left;
 				saved = *(int*) &((D2_WIN*)g_1015f40)[left].pad3c[0x21c];
 				io_AppendText((int) "$C");
-				ids[0] = d2_GetWindowListItem(-1, d2_CurrentWindowId, io_AppendText((int) "%ib[NIEMAND]$6THeCnt:%i$A", 2, fcn_005b44b0(0)));
+				ids[0] = d2_GetWindowListItem(-1, d2_CurrentWindowId, io_AppendText((int) "%ib[NIEMAND]$6THeCnt:%i$A", 2, he_CountActiveHandlungen(0)));
 				((D2_CONTROL_TL*) g_1015ea0)[ids[0]].associated_object = 0;
 				((D2_CONTROL_TL*) g_1015ea0)[ids[0]].value_05c = 1;
 				n = 1;
@@ -95,7 +95,7 @@ void __cdecl d2_ShowCharacterActionDebug(void)
 					}
 					ids[i] = -1;
 					if (((Ent_5b4c80*)g_7f4ca0)[i].slot != 0xffff) {
-						ids[i] = d2_GetWindowListItem(-1, d2_CurrentWindowId, io_AppendText((int) "%it[%1N4]$6THeCnt:%i$A", ((Ent_5b4c80*)g_7f4ca0)[i].slot, fcn_005b44b0(&((Ent_5b4c80*)g_7f4ca0)[i])));
+						ids[i] = d2_GetWindowListItem(-1, d2_CurrentWindowId, io_AppendText((int) "%it[%1N4]$6THeCnt:%i$A", ((Ent_5b4c80*)g_7f4ca0)[i].slot, he_CountActiveHandlungen(&((Ent_5b4c80*)g_7f4ca0)[i])));
 						((D2_CONTROL_TL*) g_1015ea0)[ids[i]].associated_object = &((Ent_5b4c80*)g_7f4ca0)[i];
 						n++;
 						((D2_CONTROL_TL*) g_1015ea0)[ids[i]].value_05c = 1;

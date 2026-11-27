@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_004f4830(int, int*);
+void __cdecl gm_GetLawEntry(int, int*);
 
 /* k indexes both arrays, so the out address is derived from the weight
    pointer; the product goes through a float temporary, so its load issues
@@ -16,7 +16,7 @@ float __cdecl fcn_004fc3a0(int* out)
 	int k;
 
 	for (k = 0, i = 0x11; i < 0x1d; i++, k++) {
-		fcn_004f4830(i, buf);
+		gm_GetLawEntry(i, buf);
 		f = buf[6] * w[k];
 		out[k] = buf[6];
 		sum += f;

@@ -13,7 +13,7 @@ void __cdecl amt_NotifyOfficeAppointed(void*, unsigned int);
 void __cdecl amt_NotifyOfficeLost(void*, unsigned int);
 
 /* ADDRESS: GOLDTL 0x004ea620 */
-void __cdecl fcn_004ea620(void)
+void __cdecl amt_FillOffice0x1c0x1dFromRichest(void)
 {
 	int a[6];
 	int b[6];

@@ -1,8 +1,8 @@
 #include <string.h>
 
 int __cdecl atoi(char*);
-int __cdecl fcn_004f4830(int, void*);
-void __cdecl fcn_004f4860(unsigned short*, unsigned char, int);
+int __cdecl gm_GetLawEntry(int, void*);
+void __cdecl gm_SetLawValue(unsigned short*, unsigned char, int);
 
 struct range_4b0b30 {
 	char kind;
@@ -47,12 +47,12 @@ int __cdecl fcn_004b0b30(int a1, int a2, char* arg)
 		n = atoi(arg);
 		id = ids[i];
 		r = (struct range_4b0b30*) names;
-		if (fcn_004f4830(id, r) == 0)
+		if (gm_GetLawEntry(id, r) == 0)
 			return 0;
 		if ((n < r->lo || n > r->hi) && r->strict != 0)
 			return 0;
 		n = MAX(MIN(r->hi, n), r->lo);
 	}
-	fcn_004f4860(0, id, n);
+	gm_SetLawValue(0, id, n);
 	return 1;
 }

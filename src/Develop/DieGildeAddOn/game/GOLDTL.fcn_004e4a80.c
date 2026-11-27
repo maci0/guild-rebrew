@@ -2,7 +2,7 @@
 
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 
-char* __cdecl fcn_004e4a80(char* resource, float* position)
+char* __cdecl cut_CreateCharacterAtPosition(char* resource, float* position)
 {
 	if (*(int*) 0x772f3c != 0) {
 		return 0;

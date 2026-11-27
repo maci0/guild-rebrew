@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 unsigned char __cdecl fcn_004f97a0(int a);
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 
 int __cdecl ai_EvaluateLaw0x18(char* e, int unused, int* out)
 {
@@ -24,7 +24,7 @@ int __cdecl ai_EvaluateLaw0x18(char* e, int unused, int* out)
 	if (job == 11 || job == 12) {
 		x *= 1.1f;
 	}
-	fcn_004f4830(0x18, info);
+	gm_GetLawEntry(0x18, info);
 	if (x < 1.0f && info[6] == 0) {
 		if (!(z > y)) {
 			return 0;

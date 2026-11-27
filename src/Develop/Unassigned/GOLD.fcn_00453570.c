@@ -3,7 +3,7 @@
 
 int __cdecl d3_VisitSceneNodes(int, int, int, int);
 
-void __cdecl fcn_00453570(char* a)
+void __cdecl d3_UpdateObjectHierarchyLighting(char* a)
 {
 	if (a != 0) {
 		d3_VisitSceneNodes(*(int*) (a + 0x208), (int) a, 0x240, 0x453270);

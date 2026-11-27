@@ -11,7 +11,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x165
 
-void __cdecl fcn_004f4830(int a, Stat* st);
+void __cdecl gm_GetLawEntry(int a, Stat* st);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 /* ADDRESS: GOLDTL 0x00490b20 */
@@ -32,7 +32,7 @@ int __cdecl ai_EvaluateLaw0x05(Ent* entity, int unused, int* out)
 	if ((jobCategory == 8 || jobCategory == 9) && clamped > 1) {
 		clamped = 1;
 	}
-	fcn_004f4830(5, &st);
+	gm_GetLawEntry(5, &st);
 	if (clamped != st.v[6]) {
 		*out = clamped;
 		return 1;

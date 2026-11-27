@@ -14,7 +14,7 @@ int __cdecl fcn_00472380();
 int __cdecl fcn_00472640();
 int __cdecl d2_SetForm();
 int __cdecl fcn_00476970();
-int __cdecl fcn_00495890();
+int __cdecl ai_RollNpcActionFlags();
 int __cdecl gm_ReplenishOfficeCandidates();
 int __cdecl hst_ShowDueHistoryScroll();
 int __cdecl plt_UpdatePlantStages();
@@ -193,7 +193,7 @@ void __cdecl gm_RunRoundUpdate(void)
 		gm_UpdateAllBuildingLevels();
 		cm_StepCommandQueue();
 		Sleep(100);
-		fcn_00495890();
+		ai_RollNpcActionFlags();
 		cm_StepCommandQueue();
 		Sleep(100);
 		fcn_004fb390();

@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void *__cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl _ftol(void);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -35,7 +35,7 @@ int __cdecl ai_RunBlutrache(int actor, char *a2, char *a3)
 	participants[count] = (int) gm_LookupEntityRecordById(*(int *) (a3 + 8));
 	if (participants[count] == 0)
 		count++;
-	fcn_005100f0(*(int *) (actor + 4), -h);
+	gm_ModifyHealth(*(int *) (actor + 4), -h);
 	cm_RequestChangeBits(*(int *) (actor + 4), 0x1cc, 4, 8, 0);
 	for (i = 0; i < count; i++) {
 		t = 0x32 - (int) (gm_CalcSkillDuelScore((char *) actor, (char *) participants[i], 4) * -50.0f);

@@ -4,7 +4,7 @@
 extern int g_100dc20;
 extern int g_100dc3c;
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_004849b0(int, int, int);
+void __cdecl ai_CollectBuildingGoodsPlan(int, int, int);
 void __cdecl ai_TryHireWorker(int);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(int, int, int);
 void __cdecl ai_RequestAusbauUpgrade(int, int, int);
@@ -13,7 +13,7 @@ void __cdecl ai_FlagWorkerTrainingNeeded(int);
 void __cdecl ai_SendAction0x8f(int);
 void __cdecl gm_UpdateWorkerArrival(int);
 int __cdecl ai_CanProduceGood(int, void *, int);
-void __cdecl fcn_004868d0(int, void *);
+void __cdecl ai_PlanGoodIngredients(int, void *);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl hp_PickWeightedProdItem(int);
 int __cdecl gm_FindCityItemHolder(int);
@@ -68,7 +68,7 @@ void __cdecl ai_PlanMasterProduction(int entityRecord)
 	if (rec1 == 0) {
 		return;
 	}
-	fcn_004849b0(entityRecord, (int) rec0, (int) rec1);
+	ai_CollectBuildingGoodsPlan(entityRecord, (int) rec0, (int) rec1);
 	ai_TryHireWorker(entityRecord);
 	gm_TryAutoUpgradeBuildingSlots((int) rec1, entityRecord, 0x4b);
 	ai_RequestAusbauUpgrade((int) rec1, entityRecord, 0x19);
@@ -93,7 +93,7 @@ void __cdecl ai_PlanMasterProduction(int entityRecord)
 							    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
 						    ai_CanProduceGood(entityRecord, sp, 1) != 0) {
 							*(unsigned int *) ((char *) sp + 0x54) |= 8;
-							fcn_004868d0(entityRecord, sp);
+							ai_PlanGoodIngredients(entityRecord, sp);
 							*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
 							goto tail;
 						}
@@ -114,7 +114,7 @@ void __cdecl ai_PlanMasterProduction(int entityRecord)
 					    (int) *(unsigned short *) (*(int *) sp * 0x41 + 0x36 + *(int *) 0x99ec10) &&
 				    ai_CanProduceGood(entityRecord, sp, 1) != 0) {
 					*(unsigned int *) ((char *) sp + 0x54) |= 8;
-					fcn_004868d0(entityRecord, sp);
+					ai_PlanGoodIngredients(entityRecord, sp);
 					*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
 					found = 1;
 				}
@@ -146,7 +146,7 @@ type6:
 							    *(int *) ((char *) sp + 0x3c) <= have) {
 							if (ai_CanProduceGood(entityRecord, sp, 1) != 0) {
 								*(unsigned int *) ((char *) sp + 0x54) |= 8;
-								fcn_004868d0(entityRecord, sp);
+								ai_PlanGoodIngredients(entityRecord, sp);
 								*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
 								fcn_0064d41a(msg,
 									"Produktion von %s starten, da Humanplayer es so will.",
@@ -154,7 +154,7 @@ type6:
 								goto tail;
 							}
 							if (ai_CanProduceGood(entityRecord, sp, 0) != 0) {
-								fcn_004868d0(entityRecord, sp);
+								ai_PlanGoodIngredients(entityRecord, sp);
 								*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) sp;
 								fcn_0064d41a(msg,
 									"Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will",
@@ -209,7 +209,7 @@ shuffle:
 				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
 			    ai_CanProduceGood(entityRecord, (void *) (off + (int) g_100d0c0), 1) != 0) {
 				*(unsigned int *) (off + ((int) g_100d0c0 + 0x54)) |= 8;
-				fcn_004868d0(entityRecord, (void *) (off + (int) g_100d0c0));
+				ai_PlanGoodIngredients(entityRecord, (void *) (off + (int) g_100d0c0));
 				*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
 				fcn_0064d41a(msg, "Produktion von %s starten",
 					*(int *) (off + (int) g_100d0c0) * 0x41 + 1 + *(int *) 0x99ec10);
@@ -242,7 +242,7 @@ shuffle:
 			if ((int) *(unsigned short *) (typ * 0x41 + 0x36 + *(int *) 0x99ec10) +
 				    *(int *) (off + ((int) g_100d0c0 + 0x3c)) <= have &&
 			    ai_CanProduceGood(entityRecord, (void *) (off + (int) g_100d0c0), 0) != 0) {
-				fcn_004868d0(entityRecord, (void *) (off + (int) g_100d0c0));
+				ai_PlanGoodIngredients(entityRecord, (void *) (off + (int) g_100d0c0));
 				*(unsigned short *) (entityRecord + 0x1bc) = *(unsigned short *) (off + (int) g_100d0c0);
 				fcn_0064d41a(msg, "Produktion von %s starten obwohl Rohstoffe fehlen",
 					*(int *) (off + (int) g_100d0c0) * 0x41 + 1 + *(int *) 0x99ec10);

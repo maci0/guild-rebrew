@@ -8,24 +8,24 @@ extern char g_679060[];
 int __cdecl d2_ShowPrivilegMessage(void*, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-int __cdecl fcn_004f93f0(unsigned char* a1, int* a2)
+int __cdecl gm_HandleSpionageDurationPrivilege(unsigned char* entity, int* request)
 {
 	char buf[0x400];
 
-	if (*a2 != 3 && *a2 != 1) {
+	if (*request != 3 && *request != 1) {
 		return 1;
 	}
-	if (a1[0x166] != 0x17 && a1[0x166] != 0x13) {
+	if (entity[0x166] != 0x17 && entity[0x166] != 0x13) {
 		return 1;
 	}
-	if (*a2 == 3 && a1[2] == 6) {
+	if (*request == 3 && entity[2] == 6) {
 		memset(buf, 0, sizeof(buf));
-		io_FormatTextBuffer(buf, 0x1dd5, (a1[9] != 0 ? 0x27b : 0x253) + a1[0x166]);
+		io_FormatTextBuffer(buf, 0x1dd5, (entity[9] != 0 ? 0x27b : 0x253) + entity[0x166]);
 		d2_ShowPrivilegMessage(buf, 1, 0x657c7);
 		return 2;
 	}
-	if (*a2 == 1 && a1[2] == 6) {
-		io_FormatTextBuffer((char*) a2 + 0x14, (int) "%s", 0x1dd4);
+	if (*request == 1 && entity[2] == 6) {
+		io_FormatTextBuffer((char*) request + 0x14, (int) "%s", 0x1dd4);
 	}
 	return 2;
 }

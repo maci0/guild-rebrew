@@ -27,7 +27,7 @@ void __cdecl d2_RunKanoneUI(int);
 int __cdecl fcn_005e6e00(void);
 
 /* ADDRESS: GOLDTL 0x005359c0 */
-int __cdecl fcn_005359c0(void)
+int __cdecl gm_DispatchDebugActionKeys(void)
 {
 	char* o;
 	char* e;

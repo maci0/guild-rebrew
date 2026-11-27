@@ -30,7 +30,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_SendRemoveStraftat(int id, int v);
 void __cdecl he_NotifyStraftatExpired(char* o, char* p);
 
-int __cdecl fcn_004f5f30(int target, int count, int* ids)
+int __cdecl gs_ClearStraftatenByIds(int target, int count, int* ids)
 {
 	int n;
 	int flag[8];

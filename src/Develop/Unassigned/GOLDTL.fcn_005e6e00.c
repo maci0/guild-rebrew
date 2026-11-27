@@ -19,7 +19,7 @@ int __cdecl io_AppendText(char *, ...);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl fcn_005e6ba0(void);
-int __cdecl fcn_004a6bb0(char *, void *);
+int __cdecl gm_InitCardGame(char *, void *);
 void __cdecl fcn_005e6dd0(void);
 unsigned short __cdecl gm_StepCardGameRound(void);
 void __cdecl fcn_00472640(int, int);
@@ -48,7 +48,7 @@ int __cdecl fcn_005e6e00(void)
     *(float *)(entry + 0x60) = *(float *)(entry + 0x60) * F(0x664178) - g_662a3c;
     B(0x14cf71e) = 0;
     if (!fcn_005e6ba0()) return 0;
-    if (!fcn_004a6bb0(g_7f4ca0 + g_774970 * 0x21c, (void *)0x7765a0)) {
+    if (!gm_InitCardGame(g_7f4ca0 + g_774970 * 0x21c, (void *)0x7765a0)) {
         fcn_005e6dd0();
         return 0;
     }

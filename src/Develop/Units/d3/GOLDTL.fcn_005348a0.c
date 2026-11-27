@@ -36,7 +36,7 @@ extern int g_67a370;
 #include "Develop/Units/d3/d3_camera.h"
 extern float g_1052c00[16];
 
-int __cdecl fcn_004cef70(int who, char* obj);
+int __cdecl gm_GetEntityControlMask(int who, char* obj);
 void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int flag);
 Vec3* __stdcall fcn_005eb2e4(Vec3* out, Vec3* v, void* vp, Mat4* proj, Mat4* view, Mat4* world);
 
@@ -74,7 +74,7 @@ void __cdecl d3_UpdateSelectionBoxCharacters(void)
 		if (obj == 0 || obj[8] == 0) {
 			continue;
 		}
-		i = fcn_004cef70(g_774970, obj);
+		i = gm_GetEntityControlMask(g_774970, obj);
 		obj[0x188] = 0;
 		if ((i & 0x800) == 0) {
 			continue;

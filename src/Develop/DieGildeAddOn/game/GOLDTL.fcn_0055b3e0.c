@@ -8,7 +8,7 @@ void __cdecl he_AllocPredigt(void);
 void __cdecl fcn_0054a6a0(void);
 void __cdecl fcn_0054aa70(void);
 void __cdecl fcn_0054b130(void);
-void __cdecl fcn_0054b150(void);
+void __cdecl he_StartAction0x2e(void);
 void __cdecl he_HandleAction0x2e(void);
 void __cdecl fcn_0054b420(void);
 void __cdecl fcn_0054b450(void);
@@ -16,7 +16,7 @@ void __cdecl fcn_0054b800(void);
 void __cdecl he_StartFest(void);
 void __cdecl he_UpdateFest(void);
 void __cdecl fcn_0054bc40(void);
-void __cdecl fcn_0054bc90(void);
+void __cdecl he_RunInvitation(void);
 void __cdecl he_RunAction53(void);
 void __cdecl fcn_0054c800(void);
 void __cdecl he_RunCourtship(void);
@@ -138,7 +138,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(45, (void*) fcn_0054b130, (void*) 0x54b140) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(46, (void*) fcn_0054b150, (void*) he_HandleAction0x2e) != 0) {
+	if (he_RegisterHandler(46, (void*) he_StartAction0x2e, (void*) he_HandleAction0x2e) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(47, (void*) fcn_0054b420, (void*) fcn_0054b450) != 0) {
@@ -150,7 +150,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(55, (void*) he_StartFest, (void*) he_UpdateFest) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(54, (void*) fcn_0054bc40, (void*) fcn_0054bc90) != 0) {
+	if (he_RegisterHandler(54, (void*) fcn_0054bc40, (void*) he_RunInvitation) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(53, (void*) 0x0054c240, (void*) he_RunAction53) != 0) {

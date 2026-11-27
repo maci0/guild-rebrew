@@ -65,7 +65,7 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_SelectEntityHeadSet(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
-void __cdecl fcn_004b3e10(int, int, int);
+void __cdecl gm_AllocMissionJob(int, int, int);
 
 void __cdecl gm_CreateSetupFamily(void)
 {
@@ -128,7 +128,7 @@ void __cdecl gm_CreateSetupFamily(void)
 	cm_RequestMoveCredits(spouse->id, -1, (*(char*)&g_773d75), (gm_RandomMod(0x200) + 0x1f4) << 5);
 	cm_RequestMoveCredits(child->id, -1, (*(char*)&g_773d75), (gm_RandomMod(0x200) + 0x1f4) << 5);
 	if (g_6a3440 > -1) {
-		fcn_004b3e10(p->id, (*(Setup*)g_7e23e0).dynasty, 0);
+		gm_AllocMissionJob(p->id, (*(Setup*)g_7e23e0).dynasty, 0);
 	}
 	for (i = 0; i < 5; i++) {
 		p->skills[i] = (*(Setup*)g_7e23e0).skills[i];

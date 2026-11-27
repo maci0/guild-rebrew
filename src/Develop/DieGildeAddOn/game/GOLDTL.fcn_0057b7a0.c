@@ -16,7 +16,7 @@
 extern unsigned char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_0050f950(int, int);
+int __cdecl gm_GetEntityRelation(int, int);
 char* __cdecl fcn_00502cd0();
 char* __cdecl gm_FindBuildingPrimarySlot(char*);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -52,7 +52,7 @@ void __cdecl he_RunFriedhofStealAction(char* e)
 	}
 	o = gm_LookupEntityRecordById(*(int*) (e + 0xac));
 	if (o == 0 || (p = *(char**) (o + 0x16c)) == 0
-	    || fcn_0050f950(*(unsigned short*) (p + 0x27), *(unsigned short*) o) > -26) {
+	    || gm_GetEntityRelation(*(unsigned short*) (p + 0x27), *(unsigned short*) o) > -26) {
 		he_FreeAction(e);
 		return;
 	}

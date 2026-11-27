@@ -9,7 +9,7 @@ void __cdecl cm_RequestLinkEvidence(int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 void __cdecl cm_SendTraceEnd(char* s);
 
-struct msg_4ab3e0 {
+struct BUY_GOOD_MSG {
 	int tag;
 	int who;
 	int where;
@@ -20,14 +20,14 @@ struct msg_4ab3e0 {
 
 
 /* ADDRESS: GOLDTL 0x004ab3e0 */
-int __cdecl ai_RequestBuyGood(char* actor, char* a2, char* a3)
+int __cdecl ai_RequestBuyGood(char* actor, char* good, char* target)
 {
-	struct msg_4ab3e0 msg;
+	struct BUY_GOOD_MSG msg;
 	char* found;
 	char* entry;
 	int i;
 
-	found = gm_StartFilteredEntitySearch(1, 1, *(int*) (a3 + 4));
+	found = gm_StartFilteredEntitySearch(1, 1, *(int*) (target + 4));
 	if (found == 0)
 		return 0;
 	entry = fcn_00502cd0(*(int*) (found + 0x5d), 1, 0, 0x120);
@@ -37,7 +37,7 @@ int __cdecl ai_RequestBuyGood(char* actor, char* a2, char* a3)
 	if (entry == 0)
 		return 0;
 	for (i = 0; i < 3; i++) {
-		if (*(int*) (entry + 0x1c + i * 4) == *(int*) (a2 + 4))
+		if (*(int*) (entry + 0x1c + i * 4) == *(int*) (good + 4))
 			break;
 	}
 	if (i == 3)
@@ -45,13 +45,13 @@ int __cdecl ai_RequestBuyGood(char* actor, char* a2, char* a3)
 	msg.tag = 0x62757920;
 	msg.where = *(int*) (found + 1);
 	msg.who = *(int*) (actor + 4);
-	msg.what = *(int*) (a2 + 4);
-	msg.amount = *(int*) (a2 + 0x10);
+	msg.what = *(int*) (good + 4);
+	msg.amount = *(int*) (good + 0x10);
 	cm_SendLogAction(s_67fb68);
 	cm_RequestElectionOrTrade(&msg);
-	cm_RequestLinkEvidence(*(int*) (a2 + 4), *(int*) (actor + 4));
+	cm_RequestLinkEvidence(*(int*) (good + 4), *(int*) (actor + 4));
 	cm_RequestTransferCurrencyNoKill(((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (found + 0x27)].entity_id,
-	    *(int*) (actor + 4), 0, *(int*) (a2 + 0x10));
+	    *(int*) (actor + 4), 0, *(int*) (good + 0x10));
 	cm_SendTraceEnd(s_67fb68);
 	return 1;
 }

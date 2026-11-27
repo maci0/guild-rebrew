@@ -13,7 +13,7 @@ void __cdecl fcn_00514e30(void);
 void __cdecl d3_ReleaseUnusedSceneObjects(void);
 void __cdecl fcn_0045b290(int, int);
 
-void __cdecl fcn_00514f10(void)
+void __cdecl d3_RebuildWorldScene(void)
 {
 	char* e;
 	char* o;

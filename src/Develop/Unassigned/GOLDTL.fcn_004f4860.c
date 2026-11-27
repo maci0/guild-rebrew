@@ -12,33 +12,33 @@ typedef struct
 // SIZE 0xc
 #pragma pack(pop)
 
-int __cdecl fcn_004f4830(unsigned char k, int* info);
+int __cdecl gm_GetLawEntry(unsigned char k, int* info);
 int __cdecl cm_RequestSetLaw(Msg0c* m);
 
-int __cdecl fcn_004f4860(unsigned short* a, unsigned char k, int v)
+int __cdecl gm_SetLawValue(unsigned short* entity, unsigned char lawId, int value)
 {
 	Msg0c m;
 	int info[9];
 	int id;
 
-	if (!fcn_004f4830(k, info)) {
+	if (!gm_GetLawEntry(lawId, info)) {
 		return -1;
 	}
-	if (a == 0) {
+	if (entity == 0) {
 		id = -1;
 	} else {
-		if (*a == 0xffff) {
+		if (*entity == 0xffff) {
 			return -1;
 		}
-		id = *(int*) (a + 2);
+		id = *(int*) (entity + 2);
 	}
-	if (v < info[1]) {
-		v = info[1];
-	} else if (v > info[2]) {
-		v = info[2];
+	if (value < info[1]) {
+		value = info[1];
+	} else if (value > info[2]) {
+		value = info[2];
 	}
 	m.id = id;
-	m.k = k;
-	m.v = v;
+	m.k = lawId;
+	m.v = value;
 	return cm_RequestSetLaw(&m);
 }

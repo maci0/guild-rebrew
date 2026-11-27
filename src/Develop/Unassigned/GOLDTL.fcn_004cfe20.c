@@ -18,7 +18,7 @@ extern Timer14 g_9b4900[16];
 #endif
 void __cdecl d2_DestroyElement(int);
 
-void __cdecl fcn_004cfe20(void)
+void __cdecl d3_ClearActionTimers(void)
 {
 	int i;
 

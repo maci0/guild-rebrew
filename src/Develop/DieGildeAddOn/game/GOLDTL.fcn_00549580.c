@@ -2,7 +2,7 @@
 
 /* Message object handed to fcn_004c5530. Field offsets and the 0xf8 extent
  * come from the reference stores and its `rep stosd` clear. */
-typedef struct GOLDTL_Msg549 {
+typedef struct ACCIDENT_DEATH_MSG {
 	int f0;                     /* 0x00 */
 	unsigned char f4;           /* 0x04, 0x71 */
 	char pad5[3];
@@ -17,7 +17,7 @@ typedef struct GOLDTL_Msg549 {
 	char pad37[0x21];
 	int f58;                    /* 0x58 */
 	char pad5c[0x9c];
-} GOLDTL_Msg549;
+} ACCIDENT_DEATH_MSG;
 
 extern float g_6628a8;
 extern float g_6628cc;
@@ -35,7 +35,7 @@ extern char s_6a597c[];
 void __cdecl he_AssignActionSlot(int a, int b, int id, int c);
 int __cdecl evt_FindScriptById(int a);
 void __cdecl evt_RequestScriptExit(int a);
-int __cdecl cm_SendCopyEntityData(GOLDTL_Msg549* msg);
+int __cdecl cm_SendCopyEntityData(ACCIDENT_DEATH_MSG* msg);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 int __cdecl ch_StartMovement(int a, int b, int c, int d, int e, char* text);
 float __cdecl gm_GetEntityMaxHealth(unsigned short* e);
@@ -45,18 +45,18 @@ int __cdecl he_MessageBoxQuickjump(int a, int b, char* text, int c, int d,
                                    int e, int f, int g, void* h);
 
 /* ADDRESS: GOLDTL 0x00549580 */
-void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
-                          float a4, int a5)
+void __cdecl he_HandleAccidentOutcome(int action, char* subject, char* owner,
+                                      char* home, float health, int silent)
 {
 	char* p;
 	int v9;
 	int v8;
-	GOLDTL_Msg549 msg;
+	ACCIDENT_DEATH_MSG msg;
 	char buf[0x800];
 	int t;
 
 	p = subject;
-	if (a4 <= 0.0f) {
+	if (health <= 0.0f) {
 		he_AssignActionSlot(0, 0, *(unsigned short*) p, 0);
 		t = *(int*) (p + 0x184);
 		if (t != 0) {
@@ -67,10 +67,10 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 		}
 		memset(&msg, 0, 0xf8);
 		msg.f4 = 0x71;
-		if (a0) {
-			msg.f8 = g_7f4ca4[*(unsigned short*) (a0 + 8) * 0x87];
+		if (action) {
+			msg.f8 = g_7f4ca4[*(unsigned short*) (action + 8) * 0x87];
 		} else {
-			msg.f8 = *(int*) (a2 + 4);
+			msg.f8 = *(int*) (owner + 4);
 		}
 		msg.f28 = gm_GameTime;
 		msg.f2c = g_7f4c04;
@@ -80,24 +80,24 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 		msg.f36 = 2;
 		msg.f58 = *(int*) (p + 4);
 		cm_SendCopyEntityData(&msg);
-		if (a2[2] != 6 && a2[2] != 7) {
+		if (owner[2] != 6 && owner[2] != 7) {
 			return;
 		}
-		if (a5) {
+		if (silent) {
 			return;
 		}
 		if (p[2] == 0x14) {
-			io_FormatTextBuffer(buf, 0x414a, *(unsigned short*) p, a3);
-			he_MessageBoxQuickjump(*(int*) (a2 + 4), *(int*) (a3 + 1), buf, 0, 0x60a,
-				*(int*) (a3 + 1), -1, 0, s_6a597c);
+			io_FormatTextBuffer(buf, 0x414a, *(unsigned short*) p, home);
+			he_MessageBoxQuickjump(*(int*) (owner + 4), *(int*) (home + 1), buf, 0, 0x60a,
+				*(int*) (home + 1), -1, 0, s_6a597c);
 		} else {
-			io_FormatTextBuffer(buf, 0x1bb0, *(unsigned short*) p, a3);
-			he_MessageBoxQuickjump(*(int*) (a2 + 4), *(int*) (a3 + 1), buf, 0, 0x60a,
-				*(int*) (a3 + 1), -1, 0, s_6a5968);
+			io_FormatTextBuffer(buf, 0x1bb0, *(unsigned short*) p, home);
+			he_MessageBoxQuickjump(*(int*) (owner + 4), *(int*) (home + 1), buf, 0, 0x60a,
+				*(int*) (home + 1), -1, 0, s_6a5968);
 		}
 		return;
 	}
-	if (gm_GetEntityMaxHealth((unsigned short*) p) * g_6628cc > a4) {
+	if (gm_GetEntityMaxHealth((unsigned short*) p) * g_6628cc > health) {
 		if (he_GetEntityHomeTarget((unsigned short*) p, &v9, &v8, 0)) {
 			if (*(int*) (p + 0x184) != 0) {
 				he_AssignActionSlot(0, 0, *(unsigned short*) p, 0);
@@ -113,26 +113,26 @@ void __cdecl fcn_00549580(int a0, char* subject, char* a2, char* a3,
 					ch_StartMovement(*(int*) (p + 4), v9, v8, 0, 0,
 									  s_6a5960);
 				}
-				if (a2[2] != 6 && a2[2] != 7) {
+				if (owner[2] != 6 && owner[2] != 7) {
 					return;
 				}
-				io_FormatTextBuffer(buf, 0x1baf, *(unsigned short*) p, a3);
-				he_MessageBoxQuickjump(*(int*) (a2 + 4), *(int*) (a3 + 1), buf, 0, 0x60a,
-					*(int*) (a3 + 1), -1, 0, s_6a594c);
+				io_FormatTextBuffer(buf, 0x1baf, *(unsigned short*) p, home);
+				he_MessageBoxQuickjump(*(int*) (owner + 4), *(int*) (home + 1), buf, 0, 0x60a,
+					*(int*) (home + 1), -1, 0, s_6a594c);
 				return;
 			}
 		}
 	}
-	if (a2[2] != 6 && a2[2] != 7) {
+	if (owner[2] != 6 && owner[2] != 7) {
 		return;
 	}
 	if (p[2] == 0x14) {
-		io_FormatTextBuffer(buf, 0x4149, *(unsigned short*) p, a3);
-		he_MessageBoxQuickjump(*(int*) (a2 + 4), *(int*) (a3 + 1), buf, 0, 0x60a,
-			*(int*) (a3 + 1), -1, 0, s_6a5930);
+		io_FormatTextBuffer(buf, 0x4149, *(unsigned short*) p, home);
+		he_MessageBoxQuickjump(*(int*) (owner + 4), *(int*) (home + 1), buf, 0, 0x60a,
+			*(int*) (home + 1), -1, 0, s_6a5930);
 	} else {
-		io_FormatTextBuffer(buf, 0x1bae, *(unsigned short*) p, a3);
-		he_MessageBoxQuickjump(*(int*) (a2 + 4), *(int*) (a3 + 1), buf, 0, 0x60a,
-			*(int*) (a3 + 1), -1, 0, s_6a594c);
+		io_FormatTextBuffer(buf, 0x1bae, *(unsigned short*) p, home);
+		he_MessageBoxQuickjump(*(int*) (owner + 4), *(int*) (home + 1), buf, 0, 0x60a,
+			*(int*) (home + 1), -1, 0, s_6a594c);
 	}
 }

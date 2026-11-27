@@ -16,19 +16,19 @@ typedef struct {
 	char p60[0x10];
 	int ids[4];
 	char p80[0x78];
-} Msg_531320;
+} STREIFE_REDIRECT_MSG;
 
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl ch_StartMovement(int, int, int, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
-void __cdecl cm_SendCopyEntityData(Msg_531320*);
+void __cdecl cm_SendCopyEntityData(STREIFE_REDIRECT_MSG*);
 
 /* ADDRESS: GOLDTL 0x00531320 */
-void __cdecl fcn_00531320(void)
+void __cdecl he_RedirectStreifeSelection(void)
 {
-	Msg_531320 msg;
+	STREIFE_REDIRECT_MSG msg;
 	int* cursor;
 	char* row;
 	char* hit;

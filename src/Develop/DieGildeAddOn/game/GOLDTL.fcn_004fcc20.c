@@ -5,7 +5,7 @@ extern unsigned char g_773d75;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 char* __cdecl gm_FindPublicTreasury(int a);
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 int __cdecl fcn_0050b750(int a, unsigned char b);
 void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_AccumulateTyped2(char* rec);
@@ -26,7 +26,7 @@ void __cdecl fcn_004fcc20(void)
 	char* e;
 
 	handle = (int) gm_FindPublicTreasury(1);
-	fcn_004f4830(5, buf);
+	gm_GetLawEntry(5, buf);
 	r = 0xe - *(int*) (buf + 0x18); n = fcn_0050b750(r, g_773d75);
 	i = 0;
 	g_773d48 = 0;

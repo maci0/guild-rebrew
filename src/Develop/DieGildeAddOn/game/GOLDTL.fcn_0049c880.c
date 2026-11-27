@@ -4,7 +4,7 @@
 
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 int __cdecl ai_SelectBestMethod(int who, int idx, int arg, int* out1, int* out2);
-int __cdecl fcn_004aa7c0(char* e, int* a, int* b);
+int __cdecl ai_SelectDrohenTarget(char* e, int* a, int* b);
 float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c);
 double __cdecl gm_RandomFloat01(void);
 
@@ -61,7 +61,7 @@ int __cdecl ai_StartDrohen(int a0, unsigned short* a1, int a2, int* a3, int* a4)
 retry:
 	memset(v7, 0, sizeof(v7));
 	memset(v8, 0, sizeof(v8));
-	if (fcn_004aa7c0(p, v7, v8) == 0) {
+	if (ai_SelectDrohenTarget(p, v7, v8) == 0) {
 		return 0;
 	}
 	v9 = gm_CalcSkillDuelScore(p, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[v8[4]]), 4);

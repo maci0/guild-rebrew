@@ -1,11 +1,11 @@
 
 
 
-int __cdecl fcn_004f5940(int, int);
+int __cdecl gs_RemoveStraftat(int, int);
 
 int __cdecl cm_ExRemoveStraftat(char* request, char* output)
 {
-	switch (fcn_004f5940(*(int*) (request + 0x10), *(int*) (request + 0x14))) {
+	switch (gs_RemoveStraftat(*(int*) (request + 0x10), *(int*) (request + 0x14))) {
 	case 1:
 		return 1;
 	case 2:

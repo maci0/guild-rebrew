@@ -23,7 +23,7 @@ void __cdecl fcn_004e4730(char* s);
 void __cdecl fcn_00445f50(int a, int b, float f, int c);
 void __cdecl fcn_004463f0(int a, int b, float f);
 void __cdecl fcn_004e4b60(char* s);
-int __cdecl fcn_004e44b0(char* s, char* buf);
+int __cdecl evt_StartGfxScript(char* s, char* buf);
 int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
 void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
 void __cdecl fcn_004e4c40(int a);
@@ -82,7 +82,7 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 	fcn_004463f0(0, 0, 0.0f);
 	fcn_004e4b60((char*) 0x68d308);
 	sprintf(f.path, "%i", state);
-	h2 = fcn_004e44b0((char*) 0x68d2e4, f.path);
+	h2 = evt_StartGfxScript((char*) 0x68d2e4, f.path);
 	r = cut_WaitForTimeoutOrInput(0x1770, 0, 0);
 	if (r == 0) {
 		fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 0, 0);

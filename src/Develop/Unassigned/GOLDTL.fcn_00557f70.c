@@ -1,22 +1,22 @@
-struct rgba_00557f70;
+struct EFFECT_RGBA;
 
 
 // SIZE 0x4
-struct rgba_00557f70 {
+struct EFFECT_RGBA {
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
 	unsigned char a;
 };
 
-void __cdecl fcn_00417180(int, char*, int, struct rgba_00557f70, float*, int, int, float, float,
+void __cdecl fcn_00417180(int, char*, int, struct EFFECT_RGBA, float*, int, int, float, float,
                           float, float, float);
 
 
 /* ADDRESS: GOLDTL 0x00557f70 */
 void __cdecl he_SpawnTimedPunkteEffect(char* o)
 {
-	struct rgba_00557f70 c;
+	struct EFFECT_RGBA c;
 	float v[4];
 
 	c.b = 0x50;

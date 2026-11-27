@@ -29,7 +29,7 @@ extern char g_7f4ca0[];
 extern int g_773d48;
 extern int g_99f6e0;
 
-void __cdecl fcn_004f4830(int kind, Offer* o);
+void __cdecl gm_GetLawEntry(int kind, Offer* o);
 char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
@@ -43,7 +43,7 @@ int __cdecl gm_CollectCityTaxOffers(unsigned short id, Slots* s, unsigned char f
 	float f;
 	char* p;
 
-	fcn_004f4830(9, &offer);
+	gm_GetLawEntry(9, &offer);
 	for (i = 0; i < 6; i++) {
 		if (s->used[i] == 0) {
 			break;

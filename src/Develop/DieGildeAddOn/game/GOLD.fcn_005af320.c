@@ -63,7 +63,7 @@ int __cdecl fcn_005462a0(void);
 int __cdecl fcn_00502850(void);
 int __cdecl fcn_00472380(int, ...);
 int __cdecl fcn_00466330(int, int);
-int __cdecl fcn_0050ddf0(int, int);
+int __cdecl gm_CalcEscortCost(int, int);
 void __cdecl fcn_0051af00(int, int, ...);
 int __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendCommandSyncField(int, int, int, void*);
@@ -761,7 +761,7 @@ l_slot:
 	if (g_00f8f080[e->f18].f08 != i) {
 		fcn_00466330(e->f18, i);
 	}
-	j = fcn_0050ddf0(*(int*) (f.v15C + 0xac),
+	j = gm_CalcEscortCost(*(int*) (f.v15C + 0xac),
 	                 (int) (*(signed char*) (idx + 0x28)));
 	fcn_0051af00((int) (g_00f8f080[e->f18].u.text + 0x3c),
 	             (int) (*(signed char*) (idx + 0x28)) + 0xe4, j);

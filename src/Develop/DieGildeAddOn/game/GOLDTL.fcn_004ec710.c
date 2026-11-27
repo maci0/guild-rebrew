@@ -21,7 +21,7 @@ extern Rec18 g_9a9224[42];
 extern Tab18 g_68da6c[];
 extern float g_665264[];
 
-void __cdecl fcn_004f4830(int kind, int* out);
+void __cdecl gm_GetLawEntry(int kind, int* out);
 
 int __cdecl amt_CalcTotalOfficeSalaries(void)
 {
@@ -30,7 +30,7 @@ int __cdecl amt_CalcTotalOfficeSalaries(void)
 	int total;
 	int i;
 
-	fcn_004f4830(0xf, buf);
+	gm_GetLawEntry(0xf, buf);
 	mult = (int) g_665264[buf[6]];
 	total = 0;
 	for (i = 0; i < 42; i++) {

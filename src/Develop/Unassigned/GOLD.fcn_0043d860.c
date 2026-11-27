@@ -4,40 +4,40 @@
 
 #include <math.h>
 
-typedef struct Vec043d860 {
+typedef struct D3_SPHERE_VEC4 {
 	float x;
 	float y;
 	float z;
 	float w;
-} Vec043d860;
+} D3_SPHERE_VEC4;
 // SIZE 0x10
 
-typedef struct Box043d860 {
+typedef struct D3_BOUNDING_CORNER {
 	float x;
 	float y;
 	float z;
 	char padc[0x50 - 0xc];
-} Box043d860;
+} D3_BOUNDING_CORNER;
 
-typedef struct Obj043d860 Obj043d860;
+typedef struct D3_BOUNDING_OBJ D3_BOUNDING_OBJ;
 
-typedef struct Api043d860 {
+typedef struct D3_BOUNDING_API {
 	char pad0[0x1f4];
-	Box043d860*(__cdecl* query)(Obj043d860* o, void* ctx, char* data);
-} Api043d860;
+	D3_BOUNDING_CORNER*(__cdecl* query)(D3_BOUNDING_OBJ* o, void* ctx, char* data);
+} D3_BOUNDING_API;
 
-typedef struct Ctx043d860 {
+typedef struct D3_BOUNDING_CTX {
 	char pad0[0x10];
-	Api043d860* api;
-} Ctx043d860;
+	D3_BOUNDING_API* api;
+} D3_BOUNDING_CTX;
 
-struct Obj043d860 {
+struct D3_BOUNDING_OBJ {
 	char pad0[0x4c];
 	int x4c;
 	char pad50[0x68 - 0x50];
 	float radius;
 	char pad6c[0x1cc - 0x6c];
-	Ctx043d860* ctx;
+	D3_BOUNDING_CTX* ctx;
 	char pad1d0[0x1ec - 0x1d0];
 	char* ov;
 	char pad1f0[0x218 - 0x1f0];
@@ -45,15 +45,15 @@ struct Obj043d860 {
 };
 
 
-void __cdecl fcn_00458b10(Obj043d860* o, int arg, int* p, Vec043d860* out);
-void __cdecl fcn_00439870(Obj043d860* o, int arg, int z);
+void __cdecl fcn_00458b10(D3_BOUNDING_OBJ* o, int arg, int* p, D3_SPHERE_VEC4* out);
+void __cdecl fcn_00439870(D3_BOUNDING_OBJ* o, int arg, int z);
 
-char __cdecl d3_GetObjectBoundingSphere(Obj043d860* o, int arg, Vec043d860* out, float* radius)
+char __cdecl d3_GetObjectBoundingSphere(D3_BOUNDING_OBJ* o, int arg, D3_SPHERE_VEC4* out, float* radius)
 {
-	Ctx043d860* ctx;
-	Box043d860* b;
-	Box043d860* q;
-	Vec043d860 c;
+	D3_BOUNDING_CTX* ctx;
+	D3_BOUNDING_CORNER* b;
+	D3_BOUNDING_CORNER* q;
+	D3_SPHERE_VEC4 c;
 	float r;
 	float d;
 	float* pz;

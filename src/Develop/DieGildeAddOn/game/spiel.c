@@ -175,7 +175,9 @@ int __cdecl sprintf(char* buffer, const char* format, ...);
 extern unsigned short* g_entity_table_end; 
 
 int __cdecl gm_LookupEntityRecordById(int);
+#if defined(REBREW_SERVER)
 void __cdecl gm_AssignBuildingOwner(char*, int, int);
+#endif
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl gm_MapEntityStatRange(int);
@@ -2291,6 +2293,45 @@ int __cdecl gm_AddObjekt(int a, int b, int c)
 	return (int) exi;
 }
 #endif
+#if !defined(REBREW_SERVER)
+extern char g_6997e8[];
+void* __cdecl fcn_00502cd0(int list, int a, int b, int c);
+
+/* ADDRESS: GOLDTL 0x005037c0 */
+/* ADDRESS: GOLD 0x00500970 */
+int __cdecl gm_AddObjekt(int a, int b, int c)
+{
+	char* list_head;
+	void* r;
+	void* dyn;
+	void* exi;
+	void* sta;
+	char buf[0x200];
+
+	if (b == 0) {
+		return 0;
+	}
+	if (!gm_ResolveEntityById((void**) (&dyn), (void**) (&exi), (void**) (&sta), a)) {
+		sprintf(buf, g_6997e8, b, c);
+		return 0;
+	}
+	if (dyn != 0) {
+		list_head = (char*) dyn + 0x5d;
+	} else if (exi != 0) {
+		list_head = (char*) exi + 0x14;
+	} else if (sta != 0) {
+		list_head = (char*) sta + 0x178;
+	} else {
+		return 0;
+	}
+	r = fcn_00502cd0(*(int*) list_head, 1, 0, b);
+	if (r == 0) {
+		return (int) gm_AllocObjekt(a, b, c);
+	}
+	*(int*) ((char*) r + 0xe) += c;
+	return (int) r;
+}
+#endif
 
 /* Removes c units of object b from the list reachable from the resolved
  * parent entity.  When the entry's count drops to zero the entry is
@@ -3352,6 +3393,180 @@ void __cdecl gm_AssignBuildingOwner(unsigned char* building, unsigned short new_
 	}
 }
 #endif
+#if !defined(REBREW_SERVER)
+#include "object_prototype.h"
+#include "building_prototype.h"
+
+#pragma pack(push, 1)
+// SIZE 0x65
+typedef struct {
+	unsigned char type;
+	int key;
+	char pad5[0x20];
+	unsigned short owner;
+	unsigned short slot;
+	char pad29[0x38];
+	int placed;
+} Estate;
+
+// SIZE 0xe
+typedef struct {
+	char pad0[0xa];
+	int id;
+} Link;
+
+// SIZE 0x1d0
+typedef struct Model {
+	char pad0[0x34];
+	struct Model* body;
+	char pad38[0x50];
+	int res;
+	char pad8c[0x98];
+	struct Model** parts;
+	char pad128[0xa4];
+	int visible;
+} Model;
+
+// SIZE 0x43
+typedef struct {
+	unsigned short kind;
+	char pad2[8];
+	int id;
+	char pade[6];
+	Link* link;
+	char pad18[4];
+	int key;
+	char pad20[0x1b];
+	Model* model;
+	char pad3f[4];
+} Obj;
+#pragma pack(pop)
+
+// SIZE 0x21c
+typedef struct {
+	char pad0[2];
+	unsigned char type;
+	char pad3;
+	int id;
+	char pad8[0x4c];
+	int scene;
+	char pad58[0x118];
+	Estate* best;
+	char pad174[0xa8];
+} Entity;
+
+// SIZE 0x170
+typedef struct {
+	char pad0[0x165];
+	char busy;
+	char pad166[6];
+	int task;
+	char pad170[0x44];
+	int flags;
+} Figure;
+
+#if defined(REBREW_GOLD)
+extern unsigned short* lpObjekteINST;
+extern char* lpObjektePROT;
+#endif
+extern char* gm_CityEntity;
+
+void __cdecl hp_RemoveProdEntry(int);
+void __cdecl hp_AddProdSetting(Estate*);
+void __cdecl gm_UpdateResidenceOwnerDecor(Estate*);
+Figure* __cdecl gm_FindBuildingOwner(Estate*);
+int __cdecl d3_GetContextIndex(int);
+void __cdecl fcn_00402aa0(Model*);
+void __cdecl fcn_0052dd80(Estate*);
+void __cdecl fcn_0052d9d0(Estate*);
+
+/* ADDRESS: GOLDTL 0x005059b0 */
+/* ADDRESS: GOLD 0x00502b60 */
+void __cdecl gm_AssignBuildingOwner(Estate* building, unsigned short owner, int slot)
+{
+	char* rec;
+	Entity* slot_ent;
+	Figure* fig;
+	Obj* obj;
+	Model* model;
+	int saved;
+	int sc;
+	int i;
+
+	rec = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[building->type];
+	building->owner = owner;
+	if (slot == 0xffff) {
+		return;
+	}
+	if (building->slot != slot) {
+		if (building->slot != 0xffff && ((Entity*)g_7f4ca0)[building->slot].type == 6) {
+			hp_RemoveProdEntry(building->key);
+		}
+		if (((Entity*)g_7f4ca0)[slot].type == 6) {
+			hp_AddProdSetting(building);
+		}
+	}
+	if (building->slot != 0xffff && ((Entity*)g_7f4ca0)[building->slot].best == building) {
+		((Entity*)g_7f4ca0)[building->slot].best = 0;
+	}
+	building->slot = slot;
+	if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 2) {
+		gm_UpdateResidenceOwnerDecor(building);
+		if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 2) {
+			if (((Entity*)g_7f4ca0)[building->slot].best == 0 || ((Entity*)g_7f4ca0)[building->slot].best->type <= building->type) {
+				((Entity*)g_7f4ca0)[building->slot].best = building;
+			}
+		}
+	}
+	if (((Entity*)g_7f4ca0)[slot].type == 6 || ((Entity*)g_7f4ca0)[slot].type == 7) {
+		fig = gm_FindBuildingOwner(building);
+		if (fig != 0) {
+			fig->busy = 0;
+			fig->flags &= ~1;
+			if (((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 5 || ((char)(((BUILDING_PROTOTYPE*)rec)->category)) == 9) {
+				fig->task = 0;
+			}
+		}
+	}
+	obj = ((Obj*)lpObjekteINST);
+	for (i = 0x5008; i != 0; i--) {
+		if (obj->kind != 0 && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[obj->kind].kind) == 0x1d && obj->key == building->key) {
+			obj->id = ((Entity*)g_7f4ca0)[slot].id;
+			if (obj->link != 0) {
+				obj->link->id = ((Entity*)g_7f4ca0)[slot].id;
+			}
+			saved = d3_CurrentContextIndex;
+			model = obj->model;
+			if (((Entity*)g_7f4ca0)[slot].scene != 0 && (((Entity*)g_7f4ca0)[slot].type == 5 || ((Entity*)g_7f4ca0)[slot].type == 6 || ((Entity*)g_7f4ca0)[slot].type == 7)) {
+				sc = ((Entity*)g_7f4ca0)[slot].scene - 0x599;
+			} else {
+				sc = 0;
+			}
+			d3_SelectSceneContext(d3_GetContextIndex(model->res), 1);
+			if (model->body->visible == 0) {
+				fcn_00402aa0(model);
+			}
+			SelectTextureSet((D3_OBJECT*)*model->parts, (void*)(*model->parts)->visible, (unsigned char)sc, 1);
+			d3_SelectSceneContext(saved, 1);
+		}
+		obj++;
+	}
+	slot_ent = &((Entity*)g_7f4ca0)[slot];
+	if (slot_ent != ((Entity*)gm_CityEntity) && building->placed != 0 && (slot_ent->type == 6 || slot_ent->type == 7 || slot_ent->type == 5)) {
+		saved = d3_CurrentContextIndex;
+		d3_SelectSceneContext(0, 1);
+		fcn_0052dd80(building);
+		fcn_0052d9d0(building);
+		d3_SelectSceneContext(saved, 1);
+		return;
+	}
+	saved = d3_CurrentContextIndex;
+	d3_SelectSceneContext(0, 1);
+	fcn_0052dd80(building);
+	d3_SelectSceneContext(saved, 1);
+}
+#endif
+
 
 #ifdef REBREW_SERVER
 char* __cdecl gm_AllocRaum(char* geb, int obj_id)
@@ -3702,6 +3917,128 @@ void __cdecl gm_KillSpieler(unsigned int index, int arg2)
 
 /* Initializes entity slots to default/empty values. Zeros
  * link fields and sets capacity counters. */
+#endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+extern int gm_EntityCount;
+void __cdecl gm_CleanupPlayerActions(void*);
+void __cdecl he_NotifyStraftatExpired(void*, void*);
+void __cdecl ch_DestroyCharacter(int*);
+int __cdecl fcn_0064d41a(char*, char*, ...);
+
+/* ADDRESS: GOLDTL 0x00506ab0 */
+void __cdecl gm_KillSpieler(int slotIndex, int removeMode)
+{
+	char* e;
+	int v4;
+	int v12;
+	char buf[512];
+	char* ent;
+	char* p;
+	char* e2;
+	int* v10;
+	int* v8;
+	unsigned int* v14;
+	int v9;
+	int v15;
+	int v5;
+
+	v12 = slotIndex * 0x21c;
+	ent = (char*) 0x7f4ca0 + v12;
+	v4 = *(int*) (ent + 4);
+	if (ent[2] != 0x0f) {
+		*(unsigned short*) (ent + 0x28) = *(unsigned short*) 0x7f4c00;
+		ent[8] = 0;
+		gm_CleanupPlayerActions(ent);
+		ent[2] = 0x0f;
+		e = 0;
+		v15 = 0;
+		v9 = 0;
+		p = (char*) 0x7f4ca2;
+		do {
+			if (*p == 0x06) {
+				e = (char*) (v9 * 0x21c + 0x7f4ca0);
+				break;
+			}
+			p += 0x21c;
+			v9 += 1;
+		} while ((int) p < 0x85a0a2);
+		v9 = *(int*) (ent + 4);
+		v10 = (int*) 0x9a3816;
+		do {
+			if (*v10 == v9) {
+				v5 = *(int*) ((char*) v10 - 0x16);
+				v8 = (int*) 0x99f800;
+				do {
+					if (v8[1] == v5) {
+						if (e != 0 && *(int*) (e + 4) == *v8) {
+							v15 += 1;
+						}
+						v8[1] = -1;
+						*v8 = -1;
+					}
+					v8 += 2;
+				} while ((int) v8 < 0x9a3800);
+				v10[-1] = -1;
+				*v10 = -1;
+				*(int*) ((char*) v10 - 0x16) = -1;
+			}
+			v10 = (int*) ((char*) v10 + 0x2d);
+		} while ((int) v10 < 0x9a9216);
+		if (v15 != 0 && e != 0 && e != ent) {
+			he_NotifyStraftatExpired(e, ent);
+		}
+	}
+	gm_FreeObjectListRecursive((LinkedNode**) (ent + 0x178));
+	if (*(int*) (ent + 0x184) != 0) {
+		ch_DestroyCharacter(*(int**) (ent + 0x184));
+		*(int*) (ent + 0x184) = 0;
+	}
+	e2 = *(char**) (ent + 0x170);
+	if (e2 != 0) {
+		if (g_entity_type_table[*(unsigned char*) e2 * 0x24d] == 1 && *(unsigned char*) (e2 + 0x65) > 0) {
+			e2[0x65] -= 1;
+		}
+		*(int*) (ent + 0x170) = 0;
+	}
+	*(int*) (ent + 0x16c) = 0;
+	if (removeMode != 0) {
+		if (*(unsigned short*) ent != 0xffff) {
+			gm_EntityCount -= 1;
+		}
+		v10 = (int*) 0x7f4cfc;
+		do {
+			v9 = 8;
+			v8 = v10;
+			do {
+				if (*v8 == *(int*) (ent + 4)) {
+					*v8 = -1;
+				}
+				v8 += 1;
+				v9 -= 1;
+			} while (v9 != 0);
+			v10 += 0x87;
+		} while ((int) v10 < 0x85a0fc);
+		v10 = (int*) ent;
+		for (v9 = 0; v9 < 0x87; v9++) {
+			v10[v9] = 0;
+		}
+		v9 = 8;
+		v14 = (unsigned int*) (0x7f4cfc + v12);
+		*(unsigned short*) ent = 0xffff;
+		*(int*) (0x7f4ca4 + v12) = -1;
+		do {
+			*v14 = 0xffffffff;
+			v14 += 1;
+			v9 -= 1;
+		} while (v9 != 0);
+		if (removeMode != 1) {
+			return;
+		}
+		fcn_0064d41a(buf, (char*) 0x699918, v4);
+		return;
+	}
+	fcn_0064d41a(buf, (char*) 0x6998e0, v4);
+}
 #endif
 
 void __cdecl gm_KillAllSpieler(void)
@@ -4603,6 +4940,23 @@ int __cdecl gm_LookupEntityRecordById(int search_id)
 		}
 		base_cursor += 0x21C;
 		i++;
+	}
+	return 0;
+}
+#endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+extern char g_7f4ca4[];
+
+/* ADDRESS: GOLDTL 0x00508e40 */
+int __cdecl gm_LookupEntityRecordById(int id)
+{
+	int i;
+	int a;
+
+	for (i = 0, a = (int) g_7f4ca4; a < (int) (g_7f4ca4 + 0x65400); a += 0x21c, i++) {
+		if (*(unsigned short*) (a - 4) != 0xffff && *(int*) a == id) {
+			return (int) ((int) (g_7f4ca4 - 4) + i * 540);
+		}
 	}
 	return 0;
 }
@@ -6907,6 +7261,113 @@ limited:
 	return size < requested ? size : requested;
 }
 #endif
+#if !defined(REBREW_SERVER)
+#include "spiel.h"
+#include "object_prototype.h"
+
+int __cdecl gm_GetStorageSlotCapacity(char* pkt, int item_id);
+void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+
+/* The T&L/Gold build of gm_eval_SlotVoll (SERVER 0x10019d30): a missing entity
+ * returns 0 without the LogMessageInternal call. */
+/* ADDRESS: GOLDTL 0x0050e000 */
+/* ADDRESS: GOLD 0x0050ab80 */
+int __cdecl gm_eval_SlotVoll(char* obj, int item_id, int requested)
+{
+	char* pkt;
+	char* ent;
+	char* record;
+	int is_cat2;
+	int is_producer;
+	int size;
+	int count;
+	int msg_field;
+	void* query_result;
+	int q_id;
+
+	pkt = obj;
+	ent = (char*) gm_EntityAccumulate((void*) pkt);
+	if (ent == NULL) {
+		return 0;
+	}
+	is_cat2 = (gm_GetBuildingTypeCategory((unsigned char) *ent) == 2);
+	size = gm_GetStorageSlotCapacity(pkt, item_id);
+	query_result = fcn_00502cd0(*(int*) (pkt + 0x14), 1, 0, item_id);
+	if (query_result != NULL) {
+		msg_field = gm_GetMsgField(pkt, (char*) query_result);
+		if (size - msg_field > requested) {
+			return requested;
+		}
+		return size - msg_field;
+	}
+	record = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[item_id]);
+	if (is_cat2) {
+		is_producer = (*record == 0x17);
+	} else {
+		if (*record == 0x17 || *record == 0x25) {
+			is_producer = 1;
+		} else {
+			is_producer = 0;
+		}
+	}
+	if (*(unsigned short*) pkt == 0x2a) {
+		count = 0;
+		query_result = fcn_00502cd0(*(int*) (pkt + 0x14), 1, 5);
+		if (query_result != NULL) {
+			do {
+				q_id = *(unsigned short*) query_result;
+				record = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[q_id]);
+				if (is_cat2) {
+					if (is_producer) {
+						if (*record == 0x17) {
+							count++;
+						}
+					} else {
+						if (*record != 0x17) {
+							count++;
+						}
+					}
+				} else {
+					if (is_producer) {
+						if (*record == 0x17 || *record == 0x25) {
+							count++;
+						}
+					} else {
+						if (*record != 0x17 && *record != 0x25) {
+							count++;
+						}
+					}
+				}
+				query_result = gm_NextEntityQueryMatch();
+			} while (query_result != NULL);
+		}
+		if (is_producer) {
+			if (count >= *(unsigned char*) (pkt + 0x1c)) {
+				return 0;
+			}
+			goto limited;
+		}
+		if (count >= *(unsigned char*) (pkt + 0x1d)) {
+			return 0;
+		}
+		goto limited;
+	}
+	count = 0;
+	query_result = fcn_00502cd0(*(int*) (pkt + 0x14), 1, 5);
+	if (query_result != NULL) {
+		do {
+			count++;
+			query_result = gm_NextEntityQueryMatch();
+		} while (query_result != NULL);
+	}
+	if (count >= *(unsigned char*) (pkt + 0x1c)) {
+		return 0;
+	}
+limited:
+	return size < requested ? size : requested;
+}
+#endif
+
 /* Client-only: room left in a store for `item`, capped at `limit`
  * (discarded). */
 int __cdecl gm_GetStoreRoom(char* store, int item, int limit)

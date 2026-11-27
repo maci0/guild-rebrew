@@ -5,7 +5,7 @@ int __cdecl fcn_004a7770(int* h, int a2, int skip, int* out);
 int __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLDTL 0x004a7d40 */
-void __cdecl fcn_004a7d40(void)
+void __cdecl ai_EvaluateCardGameFold(void)
 {
 	char* p;
 	char* q;

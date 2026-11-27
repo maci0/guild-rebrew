@@ -50,7 +50,7 @@ int* __cdecl gm_SetupEntityQuery(char*);
 int __cdecl fcn_00506380(int, void*, void*, int);
 void __cdecl d3_UpdateCameraAtScreenEdges(void);
 void __cdecl d3_AnimateCameraToStoredTransform(void);
-void __cdecl fcn_0052f7b0(void);
+void __cdecl d2_UpdateSelectionPanels(void);
 void __cdecl fcn_00530510(void);
 void __cdecl fcn_005338a0(void);
 void __cdecl d2_HighlightSelectedControl(int);
@@ -243,7 +243,7 @@ void __cdecl fcn_00533090(unsigned int flags)
 	}
 done:
 	if (flags & 0x100) {
-		fcn_0052f7b0();
+		d2_UpdateSelectionPanels();
 	}
 	v4 = g_7746c4;
 	if (v4 == 0) {

@@ -4,7 +4,7 @@
 void __cdecl d3_SetNodePosition(char*, int*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
-void __cdecl fcn_00453270(char*);
+void __cdecl d3_UpdateObjectLighting(char*);
 #endif
 #include <stdio.h>
 #include <string.h>

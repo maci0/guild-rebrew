@@ -6,7 +6,7 @@ void __cdecl he_TriggerAction0x67(void);
 void __cdecl he_ClearDunkleEcke(void);
 void __cdecl he_PruneStammtischSeats(void);
 void __cdecl gm_RolloverBuilding0x16Stats(void);
-void __cdecl fcn_005473a0(void);
+void __cdecl he_EnsureAhmAction0x98(void);
 
 /* ADDRESS: GOLDTL 0x005490a0 */
 void __cdecl he_RunDailyActionMaintenance(void)
@@ -17,5 +17,5 @@ void __cdecl he_RunDailyActionMaintenance(void)
 	he_ClearDunkleEcke();
 	he_PruneStammtischSeats();
 	gm_RolloverBuilding0x16Stats();
-	fcn_005473a0();
+	he_EnsureAhmAction0x98();
 }

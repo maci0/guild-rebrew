@@ -30,7 +30,7 @@ typedef struct {
 extern int g_773d48;
 extern int g_99f7ac;
 
-void __cdecl fcn_004f4830(int kind, Offer* o);
+void __cdecl gm_GetLawEntry(int kind, Offer* o);
 char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int obj, int mode, ...);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
@@ -45,7 +45,7 @@ int __cdecl gm_CalcLaw0x0cTaxSlot(unsigned short id, Slots* s, unsigned char fla
 	float f;
 	char* p;
 
-	fcn_004f4830(0xc, &offer);
+	gm_GetLawEntry(0xc, &offer);
 	amt = offer.amount;
 	p = gm_GetGuildHall(1);
 	fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);

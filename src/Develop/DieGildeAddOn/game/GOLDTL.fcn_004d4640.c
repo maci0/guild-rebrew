@@ -6,7 +6,7 @@ void __cdecl d3_UpdateCameraAtScreenEdges(void);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl fcn_004cf180(void);
 int __cdecl fcn_004cf6b0(void);
-void __cdecl fcn_004d0070(void);
+void __cdecl cut_UpdateCombatEffects(void);
 
 struct slot_4d4640 {
 	int id;
@@ -42,7 +42,7 @@ void __cdecl fcn_004d4640(char* context)
 			busy = 1;
 		if (fcn_004cf6b0() != 0)
 			busy = 1;
-		fcn_004d0070();
+		cut_UpdateCombatEffects();
 		if (busy == 0)
 			g_774654 = 1;
 	}

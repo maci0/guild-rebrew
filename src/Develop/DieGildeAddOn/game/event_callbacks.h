@@ -23,7 +23,7 @@ void __cdecl cut_RunAuction(char* event);
 void __cdecl fcn_004e4180(char* event);
 
 /* Reconstructed court decision callback; other phase-slot contracts remain open. */
-void __cdecl fcn_004df1b0(char* participant, int* action);
+void __cdecl cut_PromptProzessChoice(char* participant, int* action);
 
 /* Existing event helpers use word and unsigned-byte access views. */
 void __cdecl cut_ExecuteCutscene(int* event);
@@ -33,7 +33,7 @@ int __cdecl cut_IsParticipant(int participant, unsigned char* event);
 int __cdecl cut_CheckMaster(int* event);
 
 int __cdecl fcn_004dc7d0(char* event);
-int __cdecl fcn_004d74b0(char* event);
+int __cdecl cut_NotifyCombatCutscene(char* event);
 int __cdecl fcn_004e1330(char* event);
 int __cdecl cut_NotifyHinrichtung(char* event);
 int __cdecl gm_NotifyHochzeit(char* event);

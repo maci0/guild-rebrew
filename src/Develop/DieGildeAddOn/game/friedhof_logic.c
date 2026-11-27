@@ -704,6 +704,138 @@ fail:
 	return 0;
 }
 #endif
+#if !defined(REBREW_SERVER)
+void __cdecl gv_FreeFieldAllocs(int* slot);
+
+/* Client (GOLDTL/GOLD) twin: same shape as the server build, but the old field
+ * allocation is released by gv_FreeFieldAllocs (0x4f2290, frees +0x1c/+0x20),
+ * not by gv_Free3Fields (0x45b790, frees +0x24/+0x28).
+ */
+/* ADDRESS: GOLDTL 0x004f2060 */
+/* ADDRESS: GOLD 0x004eff50 */
+int __cdecl gv_UpgradeField(unsigned char* field)
+{
+	unsigned char* entry;
+	void* old_alloc;
+	void* new_alloc;
+	int maturity;
+	int level;
+	int type;
+	int count8;
+	int countc;
+	int slot[4];
+	int* count10;
+	int n10;
+	int last_n;
+	int i;
+	int row;
+
+	count10 = &slot[2];
+	type = field[0];
+	old_alloc = *(void**) (field + 0x65);
+	entry = (unsigned char*) (g_entity_type_table + type + type * 588);
+	if (entry[0] != 0x1d)
+		goto fail;
+	if (old_alloc == 0)
+		goto fail;
+	level = *(int*) ((char*) old_alloc + 4);
+	if (level >= 3)
+		goto fail;
+	maturity = entry[0x247];
+	if (maturity - level != 1)
+		goto fail;
+	*(void**) (field + 0x65) = 0;
+	new_alloc = gv_AllocGraveyardField(field);
+	if (new_alloc == 0) {
+		*(void**) (field + 0x65) = old_alloc;
+		goto fail;
+	}
+	last_n = 0x88;
+	if (entry[0x247] == 2) {
+		count8 = 8;
+		countc = 4;
+		*count10 = 0;
+		memcpy(*(void**) (*(char**) ((char*) new_alloc + 8) + 0x10),
+		       *(void**) (*(char**) ((char*) old_alloc + 8) + 0x10), 0x88 * 4);
+		memcpy(*(void**) (*(char**) ((char*) new_alloc + 0xc) + 0x10),
+		       *(void**) (*(char**) ((char*) old_alloc + 0xc) + 0x10), last_n * 4);
+	} else {
+		count8 = 0xc;
+		countc = 6;
+		*count10 = 2;
+		memcpy(*(void**) (*(char**) ((char*) new_alloc + 8) + 0x10),
+		       *(void**) (*(char**) ((char*) old_alloc + 8) + 0x10), 0xcc * 4);
+		memcpy(*(void**) (*(char**) ((char*) new_alloc + 0xc) + 0x10),
+		       *(void**) (*(char**) ((char*) old_alloc + 0xc) + 0x10), 0xcc * 4);
+		memcpy(*(void**) (*(char**) ((char*) new_alloc + 0x10) + 0x10),
+		       *(void**) (*(char**) ((char*) old_alloc + 0x10) + 0x10), last_n * 4);
+	}
+	if (((char**) old_alloc)[2] != 0 && count8 > 0) {
+		row = 0;
+		i = count8;
+		while (i != 0) {
+			*(int*) (((char**) new_alloc)[2] + row * 0x14) =
+			    *(int*) (((char**) old_alloc)[2] + row * 0x14);
+			*(int*) (((char**) new_alloc)[2] + row * 0x14 + 4) =
+			    *(int*) (((char**) old_alloc)[2] + row * 0x14 + 4);
+			*(unsigned short*) (((char**) new_alloc)[2] + row * 0x14 + 8) =
+			    *(unsigned short*) (((char**) old_alloc)[2] + row * 0x14 + 8);
+			*(unsigned short*) (((char**) new_alloc)[2] + row * 0x14 + 0xa) =
+			    *(unsigned short*) (((char**) old_alloc)[2] + row * 0x14 + 0xa);
+			*(unsigned char*) (((char**) new_alloc)[2] + row * 0x14 + 0xc) =
+			    *(unsigned char*) (((char**) old_alloc)[2] + row * 0x14 + 0xc);
+			row++;
+			i--;
+		}
+	}
+	if (((char**) old_alloc)[3] != 0 && countc > 0) {
+		row = 0;
+		i = countc;
+		while (i != 0) {
+			*(int*) (((char**) new_alloc)[3] + row * 0x14) =
+			    *(int*) (((char**) old_alloc)[3] + row * 0x14);
+			*(int*) (((char**) new_alloc)[3] + row * 0x14 + 4) =
+			    *(int*) (((char**) old_alloc)[3] + row * 0x14 + 4);
+			*(unsigned short*) (((char**) new_alloc)[3] + row * 0x14 + 8) =
+			    *(unsigned short*) (((char**) old_alloc)[3] + row * 0x14 + 8);
+			*(unsigned short*) (((char**) new_alloc)[3] + row * 0x14 + 0xa) =
+			    *(unsigned short*) (((char**) old_alloc)[3] + row * 0x14 + 0xa);
+			*(unsigned char*) (((char**) new_alloc)[3] + row * 0x14 + 0xc) =
+			    *(unsigned char*) (((char**) old_alloc)[3] + row * 0x14 + 0xc);
+			row++;
+			i--;
+		}
+	}
+	n10 = *count10;
+	if (((char**) old_alloc)[4] != 0 && n10 > 0) {
+		row = 0;
+		i = n10;
+		while (i != 0) {
+			*(int*) (((char**) new_alloc)[4] + row * 0x14) =
+			    *(int*) (((char**) old_alloc)[4] + row * 0x14);
+			*(int*) (((char**) new_alloc)[4] + row * 0x14 + 4) =
+			    *(int*) (((char**) old_alloc)[4] + row * 0x14 + 4);
+			*(unsigned short*) (((char**) new_alloc)[4] + row * 0x14 + 8) =
+			    *(unsigned short*) (((char**) old_alloc)[4] + row * 0x14 + 8);
+			*(unsigned short*) (((char**) new_alloc)[4] + row * 0x14 + 0xa) =
+			    *(unsigned short*) (((char**) old_alloc)[4] + row * 0x14 + 0xa);
+			*(unsigned char*) (((char**) new_alloc)[4] + row * 0x14 + 0xc) =
+			    *(unsigned char*) (((char**) old_alloc)[4] + row * 0x14 + 0xc);
+			row++;
+			i--;
+		}
+	}
+	((char*) new_alloc)[0x18] = ((char*) old_alloc)[0x18];
+	((char*) new_alloc)[0x19] = ((char*) old_alloc)[0x19];
+	((char*) new_alloc)[0x1a] = ((char*) old_alloc)[0x1a];
+	((char*) new_alloc)[0x1b] = ((char*) old_alloc)[0x1b];
+	gv_FreeFieldAllocs((int*) old_alloc);
+	return *(int*) (field + 0x65);
+
+fail:
+	return 0;
+}
+#endif
 
 extern void __cdecl m_FreeTracked(void* ptr);
 
@@ -1037,6 +1169,73 @@ int __cdecl gv_ActivateSection(void* cmd)
 			if ((char*) &g_slot_table + grave_id * 0x21c != (char*) g_entity_table_end) {
 				field_id = *(unsigned char*) entity;
 				if (g_entity_type_table[field_id + field_id * 588] != 0x1d) {
+					return -2;
+				}
+				workers = *(void**) ((char*) entity + 0x65);
+				if (!workers) {
+					return -3;
+				}
+				gm_ResolveEntityById(0, 0, &resolved, *(int*) ((char*) cmd + 4));
+				if (!resolved) {
+					return -6;
+				}
+				field_type = *(int*) ((char*) cmd + 0xc);
+				if (field_type == 3) {
+					if (*(int*) ((char*) workers + 0x14)
+					    && *(int*) ((char*) workers + 4) >= 3) {
+						*(char*) ((char*) workers + 0x1b) = 1;
+						*(char*) ((char*) workers + 0x1a) = 1;
+						*(char*) ((char*) workers + 0x19) = 1;
+						return 0;
+					}
+					return -7;
+				}
+				if (field_type == 2) {
+					if (*(int*) ((char*) workers + 0x10) != 0) {
+						if (*(int*) ((char*) workers + 4) >= 2) {
+							*(char*) ((char*) workers + 0x1a) = 1;
+							*(char*) ((char*) workers + 0x19) = 1;
+							return 0;
+						}
+					}
+					return -7;
+				}
+				if (field_type == 1) {
+					if (*(int*) ((char*) workers + 0xc) == 0) {
+						return -7;
+					}
+					*(char*) ((char*) workers + 0x19) = 1;
+					return 0;
+				}
+				return -8;
+			}
+		}
+	}
+	return -1;
+}
+#endif
+#if !defined(REBREW_SERVER)
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+extern char g_7f4ca0[];
+
+/* ADDRESS: GOLDTL 0x004f2c00 */
+/* ADDRESS: GOLD 0x004f0af0 */
+int __cdecl gv_ActivateSection(void* cmd)
+{
+	void* entity;
+	void* workers;
+	void* resolved;
+	unsigned short grave_id;
+	unsigned char field_id;
+	int field_type;
+
+	gm_ResolveEntityById(&entity, 0, 0, *(int*) ((char*) cmd + 8));
+	if (entity) {
+		grave_id = *(unsigned short*) ((char*) entity + 0x27);
+		if (grave_id != 0xffff) {
+			if (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[grave_id]) != (char*) g_entity_table_end) {
+				field_id = *(unsigned char*) entity;
+				if (((unsigned char*)g_entity_type_table)[field_id + field_id * 588] != 0x1d) {
 					return -2;
 				}
 				workers = *(void**) ((char*) entity + 0x65);

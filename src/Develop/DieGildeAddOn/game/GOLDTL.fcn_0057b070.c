@@ -15,7 +15,7 @@ extern char g_7f4ca0[];
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004f2810(char*, unsigned char*, int, int, short, int);
+void __cdecl gv_SendExtendProductionTime(char*, unsigned char*, int, int, short, int);
 void __cdecl he_NotifyFriedhofEvent0x414f(struct s_7f4ca0*, char*, unsigned char*, int, int, int);
 
 void __cdecl he_ApplyAction0x92Favor(char* o)
@@ -30,7 +30,7 @@ void __cdecl he_ApplyAction0x92Favor(char* o)
 	if (e != 0 && ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*e].category == 0x1d) {
 		x = gm_LookupEntityRecordById(*(int*) (o + 0xc));
 		if (x != 0) {
-			fcn_004f2810(x, e, *(int*) (o + 0xb0), *(unsigned char*) (o + 0xb4),
+			gv_SendExtendProductionTime(x, e, *(int*) (o + 0xb0), *(unsigned char*) (o + 0xb4),
 			             *(short*) (o + 0xbc), *(int*) (o + 0xb8));
 			r = &((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)];
 			if (x != (char*) r && (((struct s_7f4ca0*)g_7f4ca0)[*(unsigned short*) (e + 0x27)].kind == 6 ||

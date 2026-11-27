@@ -32,7 +32,7 @@ void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl fcn_00597fd0(void*);
 void __cdecl d2_RunCharacterActionsHud(int, void*);
 void __cdecl d2_RunSabotageActionsHud(int, void*);
-void __cdecl fcn_005a4030(int, void*);
+void __cdecl d2_RunWeinschrankMenu(int, void*);
 void __cdecl d2_RunRhetoricActionsHud(int, void*);
 void __cdecl d2_RunSocialActionsHud(int, void*);
 void __cdecl fcn_005a0250(int, void*);
@@ -194,7 +194,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         d2_RunSabotageActionsHud(*(int*)&g_7746c4, msg);
         break;
     case 0x16:
-        fcn_005a4030(*(int*)&g_7746c4, msg);
+        d2_RunWeinschrankMenu(*(int*)&g_7746c4, msg);
         break;
     case 0x15:
         d2_RunRhetoricActionsHud(*(int*)&g_7746c4, msg);

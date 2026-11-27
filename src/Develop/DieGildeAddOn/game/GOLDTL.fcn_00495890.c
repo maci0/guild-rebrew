@@ -15,7 +15,7 @@ void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, int* flags);
 void __cdecl cm_RequestChangeAttribute(void);
 
 /* ADDRESS: GOLDTL 0x00495890 */
-void __cdecl fcn_00495890(void)
+void __cdecl ai_RollNpcActionFlags(void)
 {
 	int flags;
 	int i;

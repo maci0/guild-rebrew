@@ -20,8 +20,8 @@ int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunDomizilKabinettDialog(int, char*);
 void __cdecl d2_RunSpyCabinetDialog(int);
 void __cdecl d2_ShowCabinetSpyDialog(int);
-void __cdecl fcn_0058a6b0(int);
-void __cdecl fcn_00589d00(int);
+void __cdecl d2_RunSchleichendeLaehmungDialog(int);
+void __cdecl d2_RunBeweiseFaelschenDialog(int);
 
 void __cdecl d2_RunDomizilKabinettMenu(int entityId, char* msg)
 {
@@ -53,9 +53,9 @@ void __cdecl d2_RunDomizilKabinettMenu(int entityId, char* msg)
 			} else if (g_7746a0 == k2) {
 				d2_ShowCabinetSpyDialog(entityId);
 			} else if (g_7746a0 == k3) {
-				fcn_0058a6b0(entityId);
+				d2_RunSchleichendeLaehmungDialog(entityId);
 			} else if (g_7746a0 == k4) {
-				fcn_00589d00(entityId);
+				d2_RunBeweiseFaelschenDialog(entityId);
 			}
 		}
 	}

@@ -25,7 +25,7 @@ extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004f6470(int, char*, unsigned short);
+int __cdecl gs_CollectEvidenceForTarget(int, char*, unsigned short);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -62,7 +62,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 	if (e[2] != 6 && e[2] != 7) {
 		return 0;
 	}
-	chance = fcn_004f6470(*(int*) (o + 4), buf, *(unsigned short*) e);
+	chance = gs_CollectEvidenceForTarget(*(int*) (o + 4), buf, *(unsigned short*) e);
 	dlg = fcn_00470820(0, 0, s_6acc74);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);

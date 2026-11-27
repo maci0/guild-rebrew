@@ -47,7 +47,7 @@ int __cdecl gm_GetOppositeStatIndex(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 float __cdecl gm_CalcActionCompletionTime(int, int*);
 void __cdecl cm_SendCopyEntityData(Msg*);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 
 void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 {
@@ -88,7 +88,7 @@ void __cdecl gm_UpdateEntityAgingAndTraining(int index)
 				msg.x58 = e->id;
 				cm_SendCopyEntityData(&msg);
 				sprintf(text, "MeisterPr\xfc" "fung started: player_id:%i beruf:%i grad:%i", e->id, e->trade, step + 1);
-				fcn_005100f0(e->id, -4);
+				gm_ModifyHealth(e->id, -4);
 			}
 		}
 	} else if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 6 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[index].entity_type) == 7) {

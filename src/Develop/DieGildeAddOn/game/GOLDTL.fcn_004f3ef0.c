@@ -16,12 +16,12 @@ extern unsigned short __cdecl gm_RandomMod(int a);
 extern float __cdecl gm_RandomFloat01(void);
 extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, void* d, int e);
 extern int __cdecl fcn_004f1790(char* a, void* e);
-extern int __cdecl fcn_004f2810(int slot, int record, int item, int value, int a, int b);
+extern int __cdecl gv_SendExtendProductionTime(int slot, int record, int item, int value, int a, int b);
 extern int __cdecl fcn_004f2a10(int a, int record, int item, int value);
-extern int __cdecl fcn_004f2d30(int record, int item, int value, int delta);
+extern int __cdecl gv_RequestUpdateProductionProgress(int record, int item, int value, int delta);
 extern int __cdecl gm_CalcBribeOrPriceScore(int slot, int byte, int item, int zero, int* out);
 extern int __cdecl cm_CountOccupiedBuildingStats(char* record);
-extern void __cdecl fcn_004f2e80(char* record, int value);
+extern void __cdecl gv_SendSpawnEntities(char* record, int value);
 extern void* __cdecl gm_LookupEntityRecordById(int id);
 extern int __cdecl gm_GetSeasonTreasury(char* slot, char mode);
 extern int __cdecl cm_GetCommandStatus(int handle);
@@ -92,7 +92,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 							* g_6652e8[entry[0]] * a);
 						if (value > 0
 						    && ((fcn_004f1790((char*) *(int*) (entity + 0x65), entry) ^ gm_GameTime) & 1) == 0) {
-							handle = fcn_004f2d30((int) entity, entry[0],
+							handle = gv_RequestUpdateProductionProgress((int) entity, entry[0],
 								fcn_004f1790((char*) *(int*) (entity + 0x65), entry), -value);
 							n++;
 						}
@@ -111,7 +111,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 			if (value > 0) {
 				list = (char*) *(int*) (entity + 0x65);
 				if (((fcn_004f1790(list, entry) ^ gm_GameTime) & 1) == 0) {
-					handle = fcn_004f2d30((int) entity, result, fcn_004f1790(list, entry), -value);
+					handle = gv_RequestUpdateProductionProgress((int) entity, result, fcn_004f1790(list, entry), -value);
 					n++;
 				}
 			}
@@ -128,12 +128,12 @@ void __cdecl fcn_004f3ef0(char* entity)
 				continue;
 			result = gm_CalcBribeOrPriceScore((int) slot, *(unsigned char*) ((char*) entry + 0xc), entry[0], 0, &out);
 			if (slot == home) {
-				handle = fcn_004f2810((int) slot, (int) entity, entry[0],
+				handle = gv_SendExtendProductionTime((int) slot, (int) entity, entry[0],
 					fcn_004f1790((char*) *(int*) (entity + 0x65), entry), 10, 0);
 			} else if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
 				value = gm_GetSeasonTreasury(slot, (char) g_773d75);
 				if ((int) (value * g_66417c) > result) {
-					handle = fcn_004f2810((int) slot, (int) entity, entry[0],
+					handle = gv_SendExtendProductionTime((int) slot, (int) entity, entry[0],
 						fcn_004f1790((char*) *(int*) (entity + 0x65), entry), 10, result);
 					n++;
 					count++;
@@ -165,7 +165,7 @@ next_entry:
 		} while ((entry = (int*) FindSlotEntryFiltered(0, entity, entry, (void*) fcn_004f1850, 0xff)) != 0);
 	}
 	if (cm_CountOccupiedBuildingStats(entity) < 4)
-		fcn_004f2e80(entity, gm_RandomMod(2) + 1);
+		gv_SendSpawnEntities(entity, gm_RandomMod(2) + 1);
 	if (home != 0 && (*(char*) (home + 2) == 6 || *(char*) (home + 2) == 7)) {
 		if (count > 0)
 			he_NotifyContractBatch((int) home, (int) entity, count, total);

@@ -42,7 +42,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl d2_RunSeanceMenu(int, char*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl d2_RunSeanceDialog(char*, char*);
 void __cdecl d2_RunSeanceItemsDialog(char*, char*);
 void __cdecl d2_RunSeanceTreasureDialog(char*, char*);
@@ -74,7 +74,7 @@ void __cdecl d2_RunSeanceAction(char* e)
 		if (r != 0) {
 			cm_RequestChangeBits(*(int*) (g_slot_table + g_774970 * 0x21c + 4), 0x1cc, 4, 0x800000, 0);
 			if (result.cost != 0) {
-				fcn_005100f0(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -result.cost);
+				gm_ModifyHealth(*(int*) (g_slot_table + g_774970 * 0x21c + 4), -result.cost);
 			}
 			switch (result.kind) {
 			case 1:

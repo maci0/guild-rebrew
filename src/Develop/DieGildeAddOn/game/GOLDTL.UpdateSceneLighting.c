@@ -5,7 +5,7 @@
 char __cdecl d3_VisitSceneObjectsUntilStopped(char*, char*, unsigned int, char (__cdecl *)(char*, void*), void*);
 char __cdecl d3_VisitSceneNodes(char*, char*, unsigned int, void (__cdecl *)(char*));
 char __cdecl fcn_00452e30(char*, void*);
-void __cdecl fcn_00453270(char*);
+void __cdecl d3_UpdateObjectLighting(char*);
 void __cdecl fcn_00441860(int);
 #else
 void __cdecl fcn_0043ef20(int);
@@ -23,7 +23,7 @@ void __cdecl UpdateSceneLighting(unsigned char flag)
             goto update_terrain;
         }
     } else if (flag > 1) {
-        d3_VisitSceneNodes((char*)g_67a370, 0, 0x40, fcn_00453270);
+        d3_VisitSceneNodes((char*)g_67a370, 0, 0x40, d3_UpdateObjectLighting);
         goto update_terrain;
     }
     d3_VisitSceneObjectsUntilStopped((char*)g_67a370, 0, 2, fcn_00452e30, 0);

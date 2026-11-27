@@ -6,7 +6,7 @@ void __cdecl m_FreeTracked(void*);
 int __cdecl d3_FindSceneObjectByName(int, int);
 char __cdecl d3_SetObjectVisible(char*, char);
 char* __cdecl fcn_00446e10(char*, float*, float*, char*);
-void __cdecl fcn_00453270(char*);
+void __cdecl d3_UpdateObjectLighting(char*);
 int __cdecl fcn_00474b20(int, int, int);
 void __cdecl fcn_00474d80(int, void*, void*);
 void __cdecl fcn_00474e70(int);
@@ -44,7 +44,7 @@ char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
         *(int*)(book + 4) = 0;
     }
     *(unsigned char*)(*(char**)book + 0x210) &= 0xdf;
-    fcn_00453270(*(char**)book);
+    d3_UpdateObjectLighting(*(char**)book);
     book[0x271] = count;
     book[0x270] = 0;
     *(int*)(book + 0x268) = -1;

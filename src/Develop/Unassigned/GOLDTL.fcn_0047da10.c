@@ -37,7 +37,7 @@ extern unsigned char g_7747b0;
 int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl ai_RepairMeisterObjects(fcn_0047da10_Ent* e);
-void __cdecl fcn_0047d810(fcn_0047da10_Ent* e);
+void __cdecl ai_UpdateEntityTurn(fcn_0047da10_Ent* e);
 int __cdecl fcn_0047dca0(fcn_0047da10_Ent* e);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
@@ -86,7 +86,7 @@ void __cdecl fcn_0047da10(void)
 			ai_RepairMeisterObjects(e);
 			if ((*(GAME_TIMESTAMP*)&gm_GameTime).hour > 6 && (*(GAME_TIMESTAMP*)&gm_GameTime).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
 			    || ((e->id ^ (*(GAME_TIMESTAMP*)&gm_GameTime).hour) & 1) == 0))
-				fcn_0047d810(e);
+				ai_UpdateEntityTurn(e);
 			if ((fcn_0047dca0(e) != 0 && e->gold != 0) || (e->flags & 0x3000)) {
 				int v;
 

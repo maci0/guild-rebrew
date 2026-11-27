@@ -24,7 +24,7 @@ extern char g_7f4ca0[];
 
 int __cdecl gm_EntityClassCheck(int kind);
 int __cdecl gm_IsInRange(int cls);
-int __cdecl fcn_0050f950(int a, int i);
+int __cdecl gm_GetEntityRelation(int a, int i);
 
 Obj* __cdecl gm_FindAndReserveEntity(char* who, int kind, int group)
 {
@@ -39,7 +39,7 @@ Obj* __cdecl gm_FindAndReserveEntity(char* who, int kind, int group)
 				c = gm_EntityClassCheck(kind);
 				if ((c == 2 || ((Obj*)g_7f4ca0)[i].cls == c) &&
 				    (*(unsigned short*) (who + 0x27) == 0xffff ||
-				     fcn_0050f950(*(unsigned short*) (who + 0x27), i) > -30)) {
+				     gm_GetEntityRelation(*(unsigned short*) (who + 0x27), i) > -30)) {
 					goto found;
 				}
 			}
@@ -53,7 +53,7 @@ Obj* __cdecl gm_FindAndReserveEntity(char* who, int kind, int group)
 	for (i = 0; i < 768; i++) {
 		if (((Obj*)g_7f4ca0)[i].id != 0xffff && !(((Obj*)g_7f4ca0)[i].flags & 0x2000) && ((Obj*)g_7f4ca0)[i].type <= 1 &&
 		    ((Obj*)g_7f4ca0)[i].group == group && ((Obj*)g_7f4ca0)[i].home == 0 && (c == 2 || ((Obj*)g_7f4ca0)[i].cls == c) &&
-		    (*(unsigned short*) (who + 0x27) == 0xffff || fcn_0050f950(*(unsigned short*) (who + 0x27), i) > -30)) {
+		    (*(unsigned short*) (who + 0x27) == 0xffff || gm_GetEntityRelation(*(unsigned short*) (who + 0x27), i) > -30)) {
 			goto found;
 		}
 	}

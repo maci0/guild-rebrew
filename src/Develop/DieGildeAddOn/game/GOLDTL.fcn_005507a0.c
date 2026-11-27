@@ -23,7 +23,7 @@ void __cdecl fcn_00545780(char*);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
-void __cdecl fcn_0050fe40(unsigned short, int);
+void __cdecl gm_AdjustOfficeHoldersFavor(unsigned short, int);
 int __cdecl fcn_00545670(char*, int, int, char*, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -58,13 +58,13 @@ void __cdecl he_RunMeisterpruefungPrompt(char* u)
 			if (g_100f1dc == 2) {
 				cm_RequestMoveCredits(*(int*) (gm_CityEntity + 4), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, g_773d75,
 				    (int) (gm_WalkEntityChain(*(unsigned short*) (u + 8)) * g_6652c8));
-				fcn_0050fe40(*(unsigned short*) (u + 8), 8);
+				gm_AdjustOfficeHoldersFavor(*(unsigned short*) (u + 8), 8);
 				fcn_00545780(u);
 				he_FreeAction(u);
 				return;
 			}
 			if (g_100f1dc == 1) {
-				fcn_0050fe40(*(unsigned short*) (u + 8), -6);
+				gm_AdjustOfficeHoldersFavor(*(unsigned short*) (u + 8), -6);
 				fcn_00545780(u);
 				he_FreeAction(u);
 			}

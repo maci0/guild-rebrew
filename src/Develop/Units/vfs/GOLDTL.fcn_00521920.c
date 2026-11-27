@@ -53,7 +53,7 @@ int __cdecl fcn_005252d0(void* stream);
 int __cdecl ls_LoadTabAndWeatherState(void* stream);
 unsigned int __cdecl gm_RebuildLoadedReferences(void);
 int __cdecl d3_SelectSceneContext(int a, int b);
-void __cdecl fcn_00514f10(void);
+void __cdecl d3_RebuildWorldScene(void);
 void __cdecl fcn_00514fc0(void);
 int __cdecl ls_LoadCharacter(void* stream);
 char* __cdecl gm_LookupEntityRecordById(int handle);
@@ -199,7 +199,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 		goto fail;
 	}
 	d3_SelectSceneContext(0, 1);
-	fcn_00514f10();
+	d3_RebuildWorldScene();
 	fcn_00514fc0();
 	if (ls_LoadCharacter(stream) == 0) {
 		CloseVfsStream(stream);
@@ -247,7 +247,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	}
 	CloseVfsStream(stream);
 	d3_RefreshBuildingPennants();
-	fcn_00514f10();
+	d3_RebuildWorldScene();
 	d3_ResetWorldSceneState();
 	fcn_00516de0(g_6b8300, 1);
 	strcpy(g_7e2480, g_7f3a5c);

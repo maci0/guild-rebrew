@@ -9,7 +9,7 @@ typedef struct OfficeCandidateHit {
 
 void __cdecl amt_SendSpecialOfficeSlot(int a1);
 char* __cdecl amt_GetOfficeHolderRecord(int kind);
-float __cdecl fcn_004ad500(unsigned char* a1, unsigned short* a2, int a3, int a4);
+float __cdecl amt_ScoreOfficeCandidate(unsigned char* a1, unsigned short* a2, int a3, int a4);
 void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
@@ -56,7 +56,7 @@ void __cdecl amt_NominateSpecialOfficeCandidates(void)
 		    (rec->entity_state == 6 || rec->entity_state == 7 ||
 		     rec->entity_state == 5 || rec->entity_state == 4 ||
 		     rec->entity_state == 3 || rec->entity_state == 2)) {
-			f = fcn_004ad500((unsigned char*) rec, (unsigned short*) obj, v4, 0);
+			f = amt_ScoreOfficeCandidate((unsigned char*) rec, (unsigned short*) obj, v4, 0);
 			for (i = 4; i > 0; i--) {
 				if (!(f > hits[i - 1].f)) {
 					break;

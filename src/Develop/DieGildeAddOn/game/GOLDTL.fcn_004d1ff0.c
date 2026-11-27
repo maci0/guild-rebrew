@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 int __cdecl fcn_004e4730(char *);
 int __cdecl d3_UpdateSeasonTextures(void);
-int __cdecl fcn_00536bb0(void);
+int __cdecl d3_UpdateWeatherAndSkyBlend(void);
 void __cdecl fcn_00459710(int, int);
 int __cdecl sb_LoadSampleBank(char *, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -119,7 +119,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 	if (*(int *) &g_6b8300 != 0) {
 		*(int *) (*(int *) &d3_CurrentContextIndex * 0x3dc + 0x1043378) = *(int *) 0x1043378;
 		g_6b89c0 = *(int *) 0x1043378;
-		fcn_00536bb0();
+		d3_UpdateWeatherAndSkyBlend();
 		fcn_00459710(g_6b89c0, 1);
 	}
 	for (p = (int *) 0x9ba2e0, i = 0x20; i != 0; i--)

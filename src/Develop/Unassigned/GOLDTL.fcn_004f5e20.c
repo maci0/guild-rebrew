@@ -25,7 +25,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_SendRemoveStraftat(int id, int v);
 void __cdecl he_NotifyStraftatExpired(char* o, char* p);
 
-int __cdecl fcn_004f5e20(int target, int max)
+int __cdecl gs_ClearTargetStraftaten(int target, int max)
 {
 	int n;
 	char* p;

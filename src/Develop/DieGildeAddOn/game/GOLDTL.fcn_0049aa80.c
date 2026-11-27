@@ -15,30 +15,30 @@ float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049aa80 */
-int __cdecl fcn_0049aa80(char* e, int* p)
+int __cdecl ai_RunEducationObject(char* entity, int* action)
 {
-	float* d;
-	unsigned short* s;
-	Req r;
+	float* objData;
+	unsigned short* slot;
+	Req req;
 
-	s = fcn_00502cd0(*(int*) (e + 0x178), 1, 1, p[1]);
-	if (!s) {
+	slot = fcn_00502cd0(*(int*) (entity + 0x178), 1, 1, action[1]);
+	if (!slot) {
 		return 0;
 	}
-	d = gm_LookupSpecialObject(*s);
-	if (d) {
-		r.s = s;
-		r.id = -1;
-		r.arg = -1;
-		r.dir = 0;
-		r.pad = 0;
-		if (gm_UseSpecialObject(e, &r) == 1) {
-			if (r.dir == 1) {
-				g_10096ec = g_10096cc * d[3];
+	objData = gm_LookupSpecialObject(*slot);
+	if (objData) {
+		req.s = slot;
+		req.id = -1;
+		req.arg = -1;
+		req.dir = 0;
+		req.pad = 0;
+		if (gm_UseSpecialObject(entity, &req) == 1) {
+			if (req.dir == 1) {
+				g_10096ec = g_10096cc * objData[3];
 				return 0x1e;
 			}
-			if (r.dir == -1) {
-				g_10096ec = -(g_10096cc * d[3]);
+			if (req.dir == -1) {
+				g_10096ec = -(g_10096cc * objData[3]);
 			}
 			return 0x1e;
 		}

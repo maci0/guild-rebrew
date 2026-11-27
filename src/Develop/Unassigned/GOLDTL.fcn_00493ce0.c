@@ -4,7 +4,7 @@ typedef struct Stat {
 // SIZE 0x24
 
 int __cdecl fcn_00493be0(char* p);
-void __cdecl fcn_004f4830(int a, Stat* st);
+void __cdecl gm_GetLawEntry(int a, Stat* st);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
@@ -18,7 +18,7 @@ int __cdecl fcn_00493ce0(unsigned short* home, char* p)
 	char* q;
 
 	r = fcn_00493be0(p);
-	fcn_004f4830(0, &st);
+	gm_GetLawEntry(0, &st);
 	f = (5.0f - st.v[6]) * 0.1f + 0.7f;
 	q = gm_LookupEntityRecordById(*(int*) (p + 0x18));
 	d = gm_CalcEntityFavor(*(unsigned short*) q, *home, 1);

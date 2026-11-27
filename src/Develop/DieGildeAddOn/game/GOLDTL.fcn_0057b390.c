@@ -33,10 +33,10 @@ extern double g_662908;
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_GetBuildingTechEffect(char* e, int a, int b);
-char* __cdecl fcn_0050dc90(char* e);
+char* __cdecl gm_FindBuildingOwner(char* e);
 float __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
-int __cdecl fcn_0050f950(int a, int b);
+int __cdecl gm_GetEntityRelation(int a, int b);
 void __cdecl fcn_005904a0(char* s, int v);
 void __cdecl cm_SendCopyEntityData(Msg5* m);
 void __cdecl gm_AddTime(GAME_TIMESTAMP* t, int a, int b, int c);
@@ -83,7 +83,7 @@ void __cdecl he_RunAction0x93(char* e)
 					} else if (r > 0.5) {
 						s = list[k];
 						if (*(int*) (s + 0x17c) == 0) {
-							d = fcn_0050f950(*(unsigned short*) (u + 0x27), *(unsigned short*) s);
+							d = gm_GetEntityRelation(*(unsigned short*) (u + 0x27), *(unsigned short*) s);
 							if (-gm_RandomMod(0x4a) < d) {
 								memset(&m, 0, sizeof(m));
 								m.owner = *(unsigned short*) (e + 8);
@@ -105,7 +105,7 @@ void __cdecl he_RunAction0x93(char* e)
 		u = gm_StartFilteredEntitySearch(1, 5, 0x1d);
 		while (u != 0) {
 			count = 0;
-			cur = fcn_0050dc90(u);
+			cur = gm_FindBuildingOwner(u);
 			for (p = 0x7f4ca0; p < 0x85a0a0; p += 0x21c) {
 				if (*(unsigned short*) p != 0xffff && *(int*) (p + 0x16c) == (int) u) {
 					list[count++] = (char*) p;

@@ -11,7 +11,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x165
 
-void __cdecl fcn_004f4830(int a, Stat* st);
+void __cdecl gm_GetLawEntry(int a, Stat* st);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 #define MAXV(a, b) (((a) > (b)) ? (a) : (b))
@@ -27,7 +27,7 @@ int __cdecl ai_EvaluateLaw0x0b(Ent* e, int unused, int* out)
 	int c;
 
 	r = gm_MapEntityStatRange(e->job);
-	fcn_004f4830(0xb, &st);
+	gm_GetLawEntry(0xb, &st);
 	d = st.v[2] - st.v[1];
 	if (r == 7) {
 		x = (int) ((e->mood - 2.0) * d + st.v[1]);

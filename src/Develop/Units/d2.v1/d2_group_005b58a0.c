@@ -72,7 +72,7 @@ void __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534160(int x0, int y, int len, int t);
-int __cdecl fcn_0050f950(int a1, int a2);
+int __cdecl gm_GetEntityRelation(int a1, int a2);
 
 /* ADDRESS: GOLDTL 0x005b58a0 */
 void __cdecl d2_CreateGauge(int x, int y, Gauge* s)
@@ -139,5 +139,5 @@ void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 		fcn_00534160(g->x, g->y + 0x74, e[0x82], 0x4df);
 	}
 	if (g->bar != -1)
-		d2_SetElementValue(g->bar, 0, 0x64, (int) ((float) ((fcn_0050f950(g_774970, *(unsigned short*) g->obj) + 128.0) * 100.0) / 255.0));
+		d2_SetElementValue(g->bar, 0, 0x64, (int) ((float) ((gm_GetEntityRelation(g_774970, *(unsigned short*) g->obj) + 128.0) * 100.0) / 255.0));
 }

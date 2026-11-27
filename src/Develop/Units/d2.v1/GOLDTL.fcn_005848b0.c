@@ -28,7 +28,7 @@ int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(void *);
 void __cdecl d3_EndCameraAndUiMode(void);
-int __cdecl fcn_00584f00(int, void *, int);
+int __cdecl d2_DispatchAlchemyOrder(int, void *, int);
 void __cdecl fcn_005263d0(void *, char *, int);
 
 /* ADDRESS: GOLDTL 0x5848b0 */
@@ -161,7 +161,7 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 			if (*(unsigned int *)0x67d370 == pt[0]) {
 				for (id = 0; id < 3; id++) {
 					if (exp == (unsigned int)id) {
-						if (fcn_00584f00(a0, rec[id], val[id])) {
+						if (d2_DispatchAlchemyOrder(a0, rec[id], val[id])) {
 							g_774654 = 1;
 						}
 					}

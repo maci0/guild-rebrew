@@ -6,7 +6,7 @@ typedef int (__stdcall* SurfRestore)(void*);
  * lost), publishes pitch and pixel depth, and returns the surface pointer
  * (0 on failure). The globals have no Gold data names yet. */
 /* ADDRESS: GOLD 0x0041de30 */
-void* __cdecl fcn_0041de30(void* surface, unsigned int flags)
+void* __cdecl d3_LockSurface(void* surface, unsigned int flags)
 {
 	unsigned int desc[0x7c / 4];
 	unsigned int bits;

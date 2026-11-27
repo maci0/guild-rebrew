@@ -5,7 +5,7 @@ int __cdecl he_HasNoActiveAction0x2e(char* a, char* b);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x004aa7c0 */
-int __cdecl fcn_004aa7c0(char* entity, char* res, char* out)
+int __cdecl ai_SelectDrohenTarget(char* entity, char* res, char* out)
 {
 	int d[32];
 	int ids[32];

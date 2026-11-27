@@ -8,7 +8,7 @@ void* __cdecl he_StartHandlungSearch(int n, ...);
 void* __cdecl he_fn_Handlung(void);
 void __cdecl he_NotifyObjektMessage(void* a1);
 void __cdecl gm_AddTime(void* clock, int a2, int a3, int a4);
-void __cdecl fcn_005100f0(int id, int amount);
+void __cdecl gm_ModifyHealth(int id, int amount);
 int __cdecl gm_TryRecordCrime(int idx, int id, int a3, int a4, int a5);
 int __cdecl gm_RandomMod(int);
 float __cdecl gm_GetEntitySkill(char* entity, int idx);
@@ -59,7 +59,7 @@ void __cdecl he_StartAction53(u8* action)
     gm_AddTime(clockPtr, 0, 1, 0);
     gm_AddTime(action + 0xac, 0x18, 0, 0);
 
-    fcn_005100f0(*((u32*)(0x7f4ca4 + 540 * (u32)*(u16*)(action + 8))), -1);
+    gm_ModifyHealth(*((u32*)(0x7f4ca4 + 540 * (u32)*(u16*)(action + 8))), -1);
 
     {
         u32 ownerPtr = *((u32*)(0x7f4e10 + 540 * (u32)*(u16*)(action + 8)));

@@ -25,7 +25,7 @@ int __cdecl d2_GetControlValue(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CheckActionBlocker(void*, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
@@ -83,7 +83,7 @@ void __cdecl fcn_005e6360(char* entity)
             if (d2_CurrentElementId == ids[0]) {
                 if (d2_CheckActionBlocker((char*) &((ENTITY_RECORD*) g_7f4ca0)[g_774970], amount) == 1) {
                     cm_RequestChangeBits(((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id, 0x1cc, 4, 0x20, 0);
-                    fcn_005100f0(((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id, -amount);
+                    gm_ModifyHealth(((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id, -amount);
                     cm_RequestCopyEntityData(((ENTITY_RECORD*) g_7f4ca0)[g_774970].entity_id, *(int*) (target + 4), amount * 5, 1);
                     if (target[2] == 6 || target[2] == 7) {
                         io_FormatTextBuffer(text, 0x420e, g_774970);

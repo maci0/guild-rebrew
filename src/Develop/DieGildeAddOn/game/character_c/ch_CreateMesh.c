@@ -4,7 +4,7 @@
 void __cdecl d3_SetNodePosition(char*, int*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
-void __cdecl fcn_00453270(char*);
+void __cdecl d3_UpdateObjectLighting(char*);
 #endif
 #include <stdio.h>
 #include <string.h>
@@ -133,7 +133,7 @@ int __cdecl ch_CreateMesh(char* model, char* resource, float* position)
     *(int*) ((char*) *(D3_OBJECT**) (model + 0x34) + 0x48) = 0x3000000;
     ch_PlaceOnGround(model, 0);
 #ifdef REBREW_GOLD
-    fcn_00453270(*(char**) (model + 0x34));
+    d3_UpdateObjectLighting(*(char**) (model + 0x34));
 #endif
     d3_InvalidateSubTreeFlags(*(char**) (model + 0x34), 1);
     *(int*) (model + 4) = 1;

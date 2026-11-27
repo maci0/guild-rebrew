@@ -25,7 +25,7 @@ int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
 
 /* ADDRESS: GOLDTL 0x004be3d0 */
-int __cdecl fcn_004be3d0(int* a0, char* a1, char* a2, char* a3)
+int __cdecl d2_AddRoutePointMarker(int* town, char* building, char* routeHead, char* point)
 {
 	float out[4];
 	MapPos p;
@@ -41,7 +41,7 @@ int __cdecl fcn_004be3d0(int* a0, char* a1, char* a2, char* a3)
 	idx = g_773d75;
 	idx = (idx << 6) - idx;
 	map = g_1043370;
-	rec = a3;
+	rec = point;
 	idx = idx * 12;
 	a = *(int*) (0x86834c + idx);
 	b = *(int*) (0x868350 + idx);
@@ -52,12 +52,12 @@ int __cdecl fcn_004be3d0(int* a0, char* a1, char* a2, char* a3)
 	obj = *(char**) (obj + 0x61);
 	d3_TransformPoint(obj, (float*) (obj + 0x4c), out);
 	/* The native fourth argument slot also holds the height output. */
-	if (!fcn_0045b990(map, out, &p.col, &p.row, (float*) &a3)) {
+	if (!fcn_0045b990(map, out, &p.col, &p.row, (float*) &point)) {
 		return -1;
 	}
 	fcn_005b00f0((char*) &p, a, b);
-	v = fcn_004be300(a2, rec) + 0x7bb;
-	v = d2_AddElementToWindow((int) p.x - 0x20, (int) p.y - 0x20, v, a0[2]);
+	v = fcn_004be300(routeHead, rec) + 0x7bb;
+	v = d2_AddElementToWindow((int) p.x - 0x20, (int) p.y - 0x20, v, town[2]);
 	n = g_772900;
 	g_10058a0[n].id = v;
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[v].value_058)) = 1;

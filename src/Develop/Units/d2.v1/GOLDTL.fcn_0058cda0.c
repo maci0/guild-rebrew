@@ -30,7 +30,7 @@ void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckEntityStock(ENTITY_RECORD*, int, unsigned char);
-int __cdecl fcn_004f0430(ENTITY_RECORD*, char*, int, int, int);
+int __cdecl gv_RequestRentGrave(ENTITY_RECORD*, char*, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -77,7 +77,7 @@ int __cdecl d2_ConfirmRentAGrave(char* who, int k)
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
 				if (x == 0 || gm_CheckEntityStock(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), x, g_773d75) != 0) {
-					id = fcn_004f0430(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), who, k, 10, x);
+					id = gv_RequestRentGrave(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), who, k, 10, x);
 					while (id != -1 && cm_GetCommandStatus(id) == 0) {
 						main_RunFrameLoop(0, 0x20007);
 					}

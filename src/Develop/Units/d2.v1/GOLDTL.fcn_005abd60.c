@@ -35,7 +35,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_0050e670(int*, int*);
+void __cdecl gm_GetKircheTop5(int*, int*);
 void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_BuildPersonStatusDesc(Item*);
@@ -69,7 +69,7 @@ void __cdecl d2_ShowKircheTop5(void)
 	dirty = 1;
 	g_100f1dc = -1;
 	do {
-		fcn_0050e670(a, b);
+		gm_GetKircheTop5(a, b);
 		for (i = 0; i < 5; i++) {
 			if (pa[i] != a[i] || pb[i] != b[i]) {
 				dirty = 1;

@@ -3,7 +3,7 @@ extern char g_9baae0[];
 
 /* ADDRESS: GOLD 0x004cd350 */
 /* ADDRESS: GOLDTL 0x004cded0 */
-char* __cdecl fcn_004cded0(void)
+char* __cdecl d3_FindFreeSceneEntry(void)
 {
 	int i;
 	int a;

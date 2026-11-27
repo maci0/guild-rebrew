@@ -6,7 +6,7 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
-void __cdecl fcn_005100f0(int id, int amount);
+void __cdecl gm_ModifyHealth(int id, int amount);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004abd80 */
@@ -14,7 +14,7 @@ int __cdecl ai_RunTheater(char* actor, char* x)
 {
 	char msg[0xf8];
 
-	fcn_005100f0(*(int*) (actor + 4), -*(int*) (x + 0x10));
+	gm_ModifyHealth(*(int*) (actor + 4), -*(int*) (x + 0x10));
 	memset(msg, 0, sizeof(msg));
 	msg[4] = (char) 0xa0;
 	*(int*) (msg + 8) = *(int*) (actor + 4);

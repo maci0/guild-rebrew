@@ -13,7 +13,7 @@ void __cdecl msx_StartMusicIfAllowed(char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471af0(int, int);
-int __cdecl fcn_004e44b0(char*, char*);
+int __cdecl evt_StartGfxScript(char*, char*);
 int __cdecl cut_WaitForTimeoutOrInput(int, int, int*);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
@@ -73,9 +73,9 @@ void __cdecl fcn_004e2090(int event)
 	scene[1] = fcn_00470820(0, 0, "cutscenes\\hochzeit");
 	fcn_00471d80(scene[1], 3);
 	fcn_00471af0(scene[1], 0);
-	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-create.esc", text);
-	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-intro.esc", g_6b5c60);
-	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden1.esc", g_6b5c60);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-create.esc", text);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-intro.esc", g_6b5c60);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden1.esc", g_6b5c60);
 	if (cut_WaitForTimeoutOrInput(0x5dc, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
@@ -103,7 +103,7 @@ void __cdecl fcn_004e2090(int event)
 	if (cut_WaitForTimeoutOrInput(1000, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
-	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden2.esc", g_6b5c60);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden2.esc", g_6b5c60);
 	d2_SetForm(scene[1], 0);
 	fcn_00471af0(scene[1], 1);
 	io_AppendText((char*) 0x1aac, *entity1, *entity2);
@@ -142,7 +142,7 @@ void __cdecl fcn_004e2090(int event)
 	if (value != 0) {
 		return;
 	}
-	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden3.esc", g_6b5c60);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden3.esc", g_6b5c60);
 	fcn_00471af0(scene[1], 0);
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
@@ -187,7 +187,7 @@ void __cdecl fcn_004e2090(int event)
 	if (value != 0) {
 		return;
 	}
-	scene[0] = fcn_004e44b0("cutscenes\\hochzeit\\hochzeit-reden4.esc", g_6b5c60);
+	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden4.esc", g_6b5c60);
 	d2_SetForm(scene[1], 0);
 	io_AppendText((char*) 0x1aad);
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_04", 0);

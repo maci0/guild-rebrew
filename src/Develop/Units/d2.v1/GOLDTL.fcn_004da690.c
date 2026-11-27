@@ -19,7 +19,7 @@ void __cdecl fcn_004e4730(char *);
 int __cdecl msx_StartAmbientTrack(char *, int);
 int __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl fcn_0064d41a(char *, char *, ...);
-int __cdecl fcn_004e44b0(char *, char *);
+int __cdecl evt_StartGfxScript(char *, char *);
 int __cdecl fcn_0051af00(char *, char *, char *);
 int __cdecl cut_WaitForScript(int);
 int __cdecl amt_IsCandidateInOffice(int, char *);
@@ -278,14 +278,14 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
             else
                 fcn_0064d41a((char *)&mid[0x2a8], (char *)0x68c1b0,
                              blkB.sD0[i]);
-            fcn_004e44b0((char *)0x68c184, (char *)&mid[0x2a8]);
+            evt_StartGfxScript((char *)0x68c184, (char *)&mid[0x2a8]);
         }
         for (i = 0; i < s44; i++) {
             fcn_0064d41a((char *)&mid[0x2a8], "%i", blkB.sD0[i]);
-            fcn_004e44b0((char *)0x68c158, (char *)&mid[0x2a8]);
+            evt_StartGfxScript((char *)0x68c158, (char *)&mid[0x2a8]);
         }
         fcn_0051af00((char *)&mid[0x2a8], (char *)0x68c140, flug[s30]);
-        cut_WaitForScript(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x2a8]));
+        cut_WaitForScript(evt_StartGfxScript((char *)0x6b5c60, (char *)&mid[0x2a8]));
         s3C = 1;
         cm_WaitNetworkSyncBanner(0x6b5c60);
     }
@@ -513,14 +513,14 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                  blkB.sD0[i], (char *)(s04 + 4));
                 else
                     fcn_0064d41a((char *)&mid[0x1a8], (char *)0x68c1b0, blkB.sD0[i]);
-                fcn_004e44b0((char *)0x68c184, (char *)&mid[0x1a8]);
+                evt_StartGfxScript((char *)0x68c184, (char *)&mid[0x1a8]);
             }
             for (i = 0; i < s44; i++) {
                 fcn_0064d41a((char *)&mid[0x1a8], "%i", blkB.sD0[i]);
-                fcn_004e44b0((char *)0x68c158, (char *)&mid[0x1a8]);
+                evt_StartGfxScript((char *)0x68c158, (char *)&mid[0x1a8]);
             }
             fcn_0051af00((char *)&mid[0x1a8], (char *)0x68c140, flug[s30]);
-            cut_WaitForScript(fcn_004e44b0((char *)0x6b5c60, (char *)&mid[0x1a8]));
+            cut_WaitForScript(evt_StartGfxScript((char *)0x6b5c60, (char *)&mid[0x1a8]));
             cm_WaitNetworkSyncBanner(0x6b5c60);
             s3C = 1;
     }
@@ -806,7 +806,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     if (s3C != 0) {
         fcn_004e48b0();
         cut_WaitSeconds(0x3e8);
-        cut_WaitForScriptExit(fcn_004e44b0((char *)0x6b5c60, (char *)0x68c010));
+        cut_WaitForScriptExit(evt_StartGfxScript((char *)0x6b5c60, (char *)0x68c010));
         cut_CleanupCutscene();
     }
     d2_DestroyForm(s14);

@@ -3,12 +3,12 @@
 
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_0050e520(int k, int* out)
+int __cdecl gm_GetBuildingCategorySlot(int buildingType, int* out)
 {
 	int r;
 
 	r = 1;
-	switch (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[k].category) {
+	switch (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[buildingType].category) {
 	case 15:
 		*out = 1;
 		break;

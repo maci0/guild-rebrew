@@ -9,14 +9,14 @@ extern pos14_7f4c00 gm_GameTime;
 void *__cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl ai_CollectGoodsResources(char *, char *);
 void __cdecl ai_PlanMeisterSupplies(char *, char *, int);
-void __cdecl fcn_00489010(char *, char *);
+void __cdecl ai_ArmMeisterWorkers(char *, char *);
 void __cdecl ai_MeisterCollectTrans(char *);
 void __cdecl ai_MeisterTrade(char *, char *);
 void __cdecl ai_ManageMeisterWorkers(char *);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(char *, char *, int);
 void __cdecl ai_RequestAusbauUpgrade(char *, char *, int);
 void __cdecl ai_BuyStallGoods(char *);
-void __cdecl fcn_004888a0(char *);
+void __cdecl ai_FlagIdleWorkersForRecovery(char *);
 void __cdecl ai_DispatchWorkerRecovery(char *);
 char *__cdecl ai_CalcAngriff(char *, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -26,7 +26,7 @@ void *__cdecl cm_SendCopyEntityData(char *);
 void *__cdecl gm_StartFilteredEntitySearch(int, int);
 void *__cdecl gm_FindNextFilteredEntity(void);
 int __cdecl gm_PosToStatsGrid(int, int *, int *);
-int __cdecl fcn_0050f950(unsigned short, unsigned short);
+int __cdecl gm_GetEntityRelation(unsigned short, unsigned short);
 char *__cdecl gm_SetupEntityQuery(char *);
 void *__cdecl gm_SearchTable67(int);
 
@@ -58,7 +58,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 		ai_ResourceCount = 0;
 		ai_CollectGoodsResources(meister, res);
 		ai_PlanMeisterSupplies(meister, res, *(int *) (*(int *) (meister + 0x16c) + 0x39));
-		fcn_00489010(meister, res);
+		ai_ArmMeisterWorkers(meister, res);
 		ai_MeisterCollectTrans(meister);
 		ai_MeisterTrade(meister, res);
 	}
@@ -66,7 +66,7 @@ void __cdecl ai_CalcMeisterWache(char *meister)
 	gm_TryAutoUpgradeBuildingSlots(res, meister, 10);
 	ai_RequestAusbauUpgrade(res, meister, 10);
 	ai_BuyStallGoods(meister);
-	fcn_004888a0(meister);
+	ai_FlagIdleWorkersForRecovery(meister);
 	ai_DispatchWorkerRecovery(meister);
 	if (((unsigned short) gm_GameTime.b <= 6)
 		|| ((*(int *) (meister + 4) + (unsigned int) (unsigned short) gm_GameTime.b) % 3 != 0)) {
@@ -179,8 +179,8 @@ city:
 			} else {
 				i = *(short *) (it + 0x27);
 				if (i != -1) {
-					dist = fcn_0050f950(*(unsigned short *) meister, *(unsigned short *) (res + 0x27));
-					j = fcn_0050f950(*(unsigned short *) meister, (unsigned short) i);
+					dist = gm_GetEntityRelation(*(unsigned short *) meister, *(unsigned short *) (res + 0x27));
+					j = gm_GetEntityRelation(*(unsigned short *) meister, (unsigned short) i);
 					if (j > dist) {
 						res = it;
 					}
@@ -275,9 +275,9 @@ check:
 			} else {
 				i = *(short *) (it + 0x27);
 				if ((i != -1) && ((*(unsigned char *) (it + 0x5a) & 1) == 0)) {
-					dist = fcn_0050f950(*(unsigned short *) meister,
+					dist = gm_GetEntityRelation(*(unsigned short *) meister,
 										*(unsigned short *) (res + 0x27));
-					j = fcn_0050f950(*(unsigned short *) meister, (unsigned short) i);
+					j = gm_GetEntityRelation(*(unsigned short *) meister, (unsigned short) i);
 					if (j < dist) {
 						res = it;
 					}

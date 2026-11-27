@@ -38,7 +38,7 @@ int __cdecl he_IsEntityEligibleForAccident(Player* p);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_GetBuildingTechEffect(Home* h, int a, int b);
 float __cdecl fcn_004ff210(unsigned short id, int delta);
-void __cdecl fcn_00549580(char* s, Player* p, Player* q, Home* h, float v, int f);
+void __cdecl he_HandleAccidentOutcome(char* s, Player* p, Player* q, Home* h, float v, int f);
 void __cdecl gm_AddTime(Clock* c, int a, int b, int d);
 
 /* One step of the accident simulation: walks twelve players in a
@@ -95,7 +95,7 @@ void __cdecl RunSimUnfall(char* s)
 			if (25.0f - 20.0f * x > f) {
 				y = MINV(MAXV(2.0f - x, 0.0f), 2.0f);
 				f = fcn_004ff210(idx, -50 - gm_RandomMod((int) (y * 255.0f + 1.0f)));
-				fcn_00549580(s, p, &((Player*) g_7f4ca0)[((Player*) g_7f4ca0)[idx].home->x27], ((Player*) g_7f4ca0)[idx].home, f, 0);
+				he_HandleAccidentOutcome(s, p, &((Player*) g_7f4ca0)[((Player*) g_7f4ca0)[idx].home->x27], ((Player*) g_7f4ca0)[idx].home, f, 0);
 			}
 		}
 		idx = (*(int*) (s + 0xb0) + idx) % 0x300;

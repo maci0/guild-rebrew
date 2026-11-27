@@ -2,7 +2,7 @@
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 
 /* ADDRESS: GOLDTL 0x0047cf60 */
-void __cdecl fcn_0047cf60(char* e)
+void __cdecl ai_UpdateEntityDrives(char* e)
 {
     double v;
     float best;

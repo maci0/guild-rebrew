@@ -29,7 +29,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004f63d0(int id, int* ids, short kind);
+int __cdecl gs_CollectEvidenceIndicesForTarget(int id, int* ids, short kind);
 int __cdecl gs_StartCourtTrial(char* e, char* who, int n, int a4);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -73,7 +73,7 @@ int __cdecl fcn_005da820(char* e, char* request)
 		if (who == 0 || who[0x166] == 0xd) {
 			return 0x60;
 		}
-		b[0] = fcn_004f63d0(*(int*) (request + 0x214), ids, *(short*) e);
+		b[0] = gs_CollectEvidenceIndicesForTarget(*(int*) (request + 0x214), ids, *(short*) e);
 		if (b[0] == 0) {
 			return 0x60;
 		}

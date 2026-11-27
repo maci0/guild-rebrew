@@ -14,7 +14,7 @@ struct info_577940 {
 
 
 
-void __cdecl fcn_004f4830(int, struct info_577940*);
+void __cdecl gm_GetLawEntry(int, struct info_577940*);
 
 int __cdecl gm_FindMatchingLawEntry(int x)
 {
@@ -31,7 +31,7 @@ int __cdecl gm_FindMatchingLawEntry(int x)
 		s = gm_RandomMod(0x1d);
 		n = 0x1d;
 		do {
-			fcn_004f4830(s, &info);
+			gm_GetLawEntry(s, &info);
 			if (info.kind == 1 && info.type == 2 && info.owner == y) {
 				return s;
 			}

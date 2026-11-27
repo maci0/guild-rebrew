@@ -1,7 +1,7 @@
 
 
 
-int __cdecl fcn_004f4830(int k, int* info);
+int __cdecl gm_GetLawEntry(int k, int* info);
 
 float __cdecl gm_GetLiteracyRate(void)
 {
@@ -13,7 +13,7 @@ float __cdecl gm_GetLiteracyRate(void)
 	int k;
 
 	for (k = 9; k <= 0xf; k++) {
-		fcn_004f4830(k, info);
+		gm_GetLawEntry(k, info);
 		lo = (float) info[1];
 		t = (float)((1.0 - (info[6] - lo) / (info[2] - lo)) * w[k - 9]);
 		sum += t;

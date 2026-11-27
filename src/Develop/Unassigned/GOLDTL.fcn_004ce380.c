@@ -6,7 +6,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004ce380(void* payload)
+void __cdecl cm_SendUpdateSceneEntry(void* payload)
 {
 	char buf[0x9c];
 

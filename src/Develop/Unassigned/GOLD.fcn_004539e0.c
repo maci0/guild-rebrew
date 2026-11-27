@@ -5,7 +5,7 @@ int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 extern char g_6628f8[];
 
 /* ADDRESS: GOLD 0x004539e0 */
-float __cdecl fcn_004539e0(const float* a, const float* b)
+float __cdecl d3_SignedPlanarAngle(const float* a, const float* b)
 {
     float first[4];
     float second[4];

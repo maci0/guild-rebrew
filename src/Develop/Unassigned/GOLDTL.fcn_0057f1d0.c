@@ -4,7 +4,7 @@
 extern int* g_665f08;
 extern volatile int g_6b7fac;
 
-int __cdecl fcn_0057f1d0(int* msg)
+int __cdecl d2_UpdateTutCh2Action110Step(int* msg)
 {
 	short* e;
 

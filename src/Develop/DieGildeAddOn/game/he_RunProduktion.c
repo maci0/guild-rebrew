@@ -15,7 +15,7 @@ void __cdecl io_FormatTextBuffer(char* text, int format, ...);
 int __cdecl cm_GetCommandStatus(int id);
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 char* __cdecl gm_FindBuildingPrimarySlot(char* objekt);
-char* __cdecl fcn_0050dc90(int objekt);
+char* __cdecl gm_FindBuildingOwner(int objekt);
 int __cdecl gm_eval_SlotVoll(char* objekt, int ware, int menge);
 void __cdecl gm_AddTime(pos14_7f4c00* zeit, int a, int b, int c);
 int __cdecl gm_CompareGameTime(pos14_7f4c00* a, pos14_7f4c00* b);
@@ -29,7 +29,7 @@ int __cdecl gm_HasActiveSpecialObject(char* objekt, int id);
 int __cdecl gm_HasActiveSpecialObjectOnEntity(char* objekt, int id);
 int __cdecl he_HasZigeunerAction0x9f(char* objekt);
 void __cdecl gm_CountBuildingWorkers(char* objekt);
-float __cdecl fcn_0050fdb0(int besitzer, int anzahl, int* ids);
+float __cdecl gm_CalcAvgEntityFavor(int besitzer, int anzahl, int* ids);
 struct unit* __cdecl he_StartHandlungSearch(int anzahl, ...);
 void __cdecl he_FreeAction(struct unit* objekt);
 void __cdecl d3_FreeEventGfxSlot(int* objekt);
@@ -95,7 +95,7 @@ void __cdecl he_RunProduktion(char* e)
             if (cm_GetCommandStatus(*(int*) (e + 0xc4)) == 2) {
                 haushalt = 0;
                 bild[0] = 0;
-                haus = fcn_0050dc90((int) gebaeude);
+                haus = gm_FindBuildingOwner((int) gebaeude);
                 for (arbeiter = g_7f4ca0; (int) arbeiter < (int) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[768]); arbeiter += sizeof(ENTITY_RECORD)) {
                     if (*(char**) (arbeiter + 0x17c) == e) {
                         haushalt = arbeiter;
@@ -134,7 +134,7 @@ void __cdecl he_RunProduktion(char* e)
                 if (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 2) == 6 ||
                     *(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 2) == 7) {
                     nachricht_typ = 0x5f1;
-                    haus = fcn_0050dc90((int) gebaeude);
+                    haus = gm_FindBuildingOwner((int) gebaeude);
                     if (haus != 0 && (haus[0x1b4] & 1)) {
                         nachricht_typ = 0x60d;
                     }
@@ -168,7 +168,7 @@ warten:
         }
         typ = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*)gebaeude];
         leistung = gm_GetBuildingTechEffect((unsigned char*) gebaeude, 1, 1) * 0.01 + 1.0;
-        haus = fcn_0050dc90((int) gebaeude);
+        haus = gm_FindBuildingOwner((int) gebaeude);
         if (haus == 0) {
             haus = (char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)];
         }
@@ -215,7 +215,7 @@ warten:
                 }
             }
             gm_CountBuildingWorkers(e);
-            *(float*) (e + 0xcc) = (fcn_0050fdb0(*(unsigned short*) (gebaeude + 0x27), 8, (int*) (e + 0x8c)) - 0.5) * 0.25;
+            *(float*) (e + 0xcc) = (gm_CalcAvgEntityFavor(*(unsigned short*) (gebaeude + 0x27), 8, (int*) (e + 0x8c)) - 0.5) * 0.25;
             e[0xd0] = 0;
         }
         letzte_zeit = (pos14_7f4c00*) (e + 0x60);
@@ -308,7 +308,7 @@ mangel:
             (*(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 2) == 6 ||
              *(unsigned char*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (gebaeude + 0x27)] + 2) == 7)) {
             nachricht_typ = 0x5f1;
-            haus = fcn_0050dc90((int) gebaeude);
+            haus = gm_FindBuildingOwner((int) gebaeude);
             if (haus != 0 && (haus[0x1b4] & 1)) {
                 nachricht_typ = 0x60d;
             }

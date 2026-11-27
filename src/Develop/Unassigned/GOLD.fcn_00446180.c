@@ -1,9 +1,9 @@
 void __cdecl fcn_004437f0(char*);
-char* __cdecl fcn_0043fc10(int, int, unsigned int, unsigned int, unsigned int, void*);
+char* __cdecl d3_AcquireFloorTileTexture(int, int, unsigned int, unsigned int, unsigned int, void*);
 void __cdecl fcn_004614b0(char*);
-void* __cdecl fcn_0041de30(void*, int);
-void __cdecl fcn_0043eef0(void*, void*);
-void __cdecl fcn_0041e740(void*);
+void* __cdecl d3_LockSurface(void*, int);
+void __cdecl d3_BlitFloorTileCells(void*, void*);
+void __cdecl d3_UnlockSurface(void*);
 void __cdecl fcn_004371d0(void*, int);
 void __cdecl fcn_004360e0(void*);
 
@@ -69,7 +69,7 @@ int __cdecl fcn_00446180(char* object)
                             x = base_x;
                             left_x = nx;
                             do {
-                                resource = fcn_0043fc10(scene, universe, x, y, step, object + 0x30);
+                                resource = d3_AcquireFloorTileTexture(scene, universe, x, y, step, object + 0x30);
                                 if (resource != 0 && *resource == 0x2a) {
                                     description = *(char**)(resource + 0x4c);
                                     if (description[0x40] == 0) {
@@ -77,10 +77,10 @@ int __cdecl fcn_00446180(char* object)
                                         if (*(void**)(resource + 0x60) == 0) {
                                             fcn_004614b0(resource);
                                         }
-                                        buffer = fcn_0041de30(*(void**)(resource + 0x60), 0x20);
+                                        buffer = d3_LockSurface(*(void**)(resource + 0x60), 0x20);
                                         if (buffer != 0) {
-                                            fcn_0043eef0(buffer, description + 0x10);
-                                            fcn_0041e740(*(void**)(resource + 0x60));
+                                            d3_BlitFloorTileCells(buffer, description + 0x10);
+                                            d3_UnlockSurface(*(void**)(resource + 0x60));
                                             if (*(unsigned char*)0x63373c != 0) {
                                                 fcn_004371d0(*(void**)(resource + 0x60), 0);
                                             }

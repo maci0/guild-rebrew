@@ -3,19 +3,19 @@
 int __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int); int __cdecl d3_SetObjectVisible(int, int);
 int __cdecl fcn_0045bad0(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(int, int, int, float*);
-int __cdecl fcn_004cef70(int, int);
+int __cdecl gm_GetEntityControlMask(int, int);
 int* __cdecl gm_GetEquippedCombatGear(int);
 int __cdecl fcn_0064f170(char*, char*, int);
 #include <string.h>
 
 /* ADDRESS: GOLDTL 0x004d06d0 */
-void __cdecl fcn_004d06d0(void)
+void __cdecl cut_UpdateCombatHoverTarget(void)
 {
 	float buf[3];
 	char* obj;
 	int* rec;
 	int* meta;
-	unsigned int v4;
+	unsigned int sceneObj;
 	int i;
 	int count;
 	int x;
@@ -24,7 +24,7 @@ void __cdecl fcn_004d06d0(void)
 	int same;
 	unsigned short code;
 
-	v4 = *(unsigned int*) (*(int*) &g_67a370 + 0xb0);
+	sceneObj = *(unsigned int*) (*(int*) &g_67a370 + 0xb0);
 	code = 0x23;
 	i = 0;
 	*(int*) &g_7746a4 = 0;
@@ -43,8 +43,8 @@ void __cdecl fcn_004d06d0(void)
 				d3_SetObjectVisible(*(int*) 0x772ea0, 0);
 			}
 		}
-		else if ((fcn_0045bad0(v4, x + 0x1a, y + 0x1a, &x, &y) & 0xff) != 0xffffffff) {
-			d3_GridPointToWorld(v4, x, y, buf);
+		else if ((fcn_0045bad0(sceneObj, x + 0x1a, y + 0x1a, &x, &y) & 0xff) != 0xffffffff) {
+			d3_GridPointToWorld(sceneObj, x, y, buf);
 			buf[1] = buf[1] + *(float*) 0x6640cc;
 			g_7725c4 = 0;
 		}
@@ -53,7 +53,7 @@ void __cdecl fcn_004d06d0(void)
 			for (rec = (int*) &ch_ContextCharacters; rec < (int*) 0x7e42dc; rec++) {
 				i = *rec;
 				if (i != 0 && *(char*) (i + 0x188) != 0) {
-					if ((fcn_004cef70(*g_772f24, i) & 0x800) != 0
+					if ((gm_GetEntityControlMask(*g_772f24, i) & 0x800) != 0
 						&& g_14cf736 == 0) {
 						kind = 0;
 						meta = gm_GetEquippedCombatGear(i);
@@ -98,8 +98,8 @@ void __cdecl fcn_004d06d0(void)
 				return;
 			}
 			if (*(int*) (*(int*) &g_7746a4 + 0x220) == 2 && count != 0) {
-				v4 = *(unsigned int*) (*(int*) &g_7746a4 + 0x204);
-				if ((fcn_004cef70(*g_772f24, v4) & 0x800) == 0
+				sceneObj = *(unsigned int*) (*(int*) &g_7746a4 + 0x204);
+				if ((gm_GetEntityControlMask(*g_772f24, sceneObj) & 0x800) == 0
 					|| g_14cf736 != 0) {
 					g_7725c4 = code;
 					*(int*) 0x772e90 = (int) *(int*) &g_7746a4;

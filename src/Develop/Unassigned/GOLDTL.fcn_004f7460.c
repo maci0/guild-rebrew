@@ -5,7 +5,7 @@ int  __cdecl d2_ShowMedicusDialog(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
-int __cdecl fcn_004f7460(void* entity, void* request)
+int __cdecl he_HandleMedicusRequest(void* entity, void* request)
 {
 	int mode;
 

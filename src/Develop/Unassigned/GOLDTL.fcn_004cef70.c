@@ -5,7 +5,7 @@ extern int g_774800;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLD 0x004ce170 */
 /* ADDRESS: GOLDTL 0x004cef70 */
-int __cdecl fcn_004cef70(int entityIndex, char* entityRecord)
+int __cdecl gm_GetEntityControlMask(int entityIndex, char* entityRecord)
 {
 	int r;
 

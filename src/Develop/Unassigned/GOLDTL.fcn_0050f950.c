@@ -2,7 +2,7 @@
 
 /* ADDRESS: GOLD 0x0050c520 */
 /* ADDRESS: GOLDTL 0x0050f950 */
-int __cdecl fcn_0050f950(int row, int column)
+int __cdecl gm_GetEntityRelation(int row, int column)
 {
 	if (row == column) {
 		return 0x7f;

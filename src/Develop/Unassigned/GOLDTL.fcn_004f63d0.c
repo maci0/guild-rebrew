@@ -23,33 +23,33 @@ extern Pair_99f800 g_99f800[0x800];
 void* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl FindStraftatIndexById(int b);
 
-int __cdecl fcn_004f63d0(int id, int* out, unsigned short k)
+int __cdecl gs_CollectEvidenceIndicesForTarget(int targetId, int* outIndices, unsigned short holderSlot)
 {
-	char* e;
-	int cnt;
+	char* holder;
+	int count;
 	int i;
-	int s;
+	int idx;
 
-	cnt = 0;
-	if (gm_LookupEntityRecordById(id) == 0) {
+	count = 0;
+	if (gm_LookupEntityRecordById(targetId) == 0) {
 		return 0;
 	}
-	e = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[k]);
-	if (e == 0) {
+	holder = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[holderSlot]);
+	if (holder == 0) {
 		return 0;
 	}
-	memset(out, 0xff, 0x20 * 4);
+	memset(outIndices, 0xff, 0x20 * 4);
 	for (i = 0; i < 0x800; i++) {
-		if (((Pair*)g_99f800)[i].a == *(int*) (e + 4)) {
-			s = FindStraftatIndexById(((Pair*)g_99f800)[i].b);
-			if (s != -1 && g_9a3800[s].x16 == id) {
-				out[cnt] = s;
-				cnt++;
-				if (cnt > 0x20) {
+		if (((Pair*)g_99f800)[i].a == *(int*) (holder + 4)) {
+			idx = FindStraftatIndexById(((Pair*)g_99f800)[i].b);
+			if (idx != -1 && g_9a3800[idx].x16 == targetId) {
+				outIndices[count] = idx;
+				count++;
+				if (count > 0x20) {
 					break;
 				}
 			}
 		}
 	}
-	return cnt;
+	return count;
 }

@@ -33,7 +33,7 @@ char* __cdecl gm_LookupEntityRecordById(int a);
 int __cdecl gm_WalkEntityChain(unsigned short id);
 int __cdecl gm_AccumulateTyped2(char* a);
 unsigned short __cdecl gm_RandomMod(int a);
-int __cdecl fcn_0050f950(int a, int i);
+int __cdecl gm_GetEntityRelation(int a, int i);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
 void __cdecl cm_RequestModifyHealth(int a, int b);
@@ -98,8 +98,8 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 		}
 		bw1 = gm_RandomMod(0x1e) + 3;
 		bw2 = gm_RandomMod(0x1e) + 3;
-		bd1 = fcn_0050f950(firstEntity->id, secondEntity->id);
-		bd2 = fcn_0050f950(secondEntity->id, firstEntity->id);
+		bd1 = gm_GetEntityRelation(firstEntity->id, secondEntity->id);
+		bd2 = gm_GetEntityRelation(secondEntity->id, firstEntity->id);
 		cm_RequestCopyEntityData(firstEntity->handle, secondEntity->handle, bw1 - bd1 - 0x7f, 1);
 		cm_RequestCopyEntityData(secondEntity->handle, firstEntity->handle, bw2 - bd2 - 0x7f, 1);
 		cm_RequestMoveCredits(-1, *(int*) (actor + 4), *(char*) &g_773d75, bv);
@@ -147,8 +147,8 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 				    gm_CheckEntityStock(actor, v, *(char*) &g_773d75) != 0) {
 					w1 = gm_RandomMod(0x1e) + 3;
 					w2 = gm_RandomMod(0x1e) + 3;
-					d1 = fcn_0050f950(firstEntity->id, secondEntity->id);
-					d2 = fcn_0050f950(secondEntity->id, firstEntity->id);
+					d1 = gm_GetEntityRelation(firstEntity->id, secondEntity->id);
+					d2 = gm_GetEntityRelation(secondEntity->id, firstEntity->id);
 					cm_RequestCopyEntityData(firstEntity->handle, secondEntity->handle,
 						     w1 - d1 - 0x7f, 1);
 					cm_RequestCopyEntityData(secondEntity->handle, firstEntity->handle,

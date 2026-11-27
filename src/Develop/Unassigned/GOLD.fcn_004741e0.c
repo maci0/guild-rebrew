@@ -12,7 +12,7 @@ unsigned int __cdecl fcn_00430bd0(void*, unsigned int, unsigned int, char*);
 int __cdecl fcn_00430fa0(char*, int, int);
 void __cdecl fcn_00430aa0(char*);
 int __cdecl fcn_00472380(short, short, short, short, unsigned int);
-int __cdecl fcn_00472a90(short, short, short, short, unsigned int, int);
+int __cdecl d2_CreateChildWindow(short, short, short, short, unsigned int, int);
 void __cdecl fcn_004721d0(char*, int);
 int __cdecl fcn_00468880(char*);
 void __cdecl d2_AddRefcount(int);
@@ -119,7 +119,7 @@ int __cdecl fcn_004741e0(short x, short y, char* name)
                     parentID = pWin;
                 }
                 if (I32(v1 + 0xe94)) {
-                    *winSlot = fcn_00472a90((short)(S16(v1) - S16(parent + 4)),
+                    *winSlot = d2_CreateChildWindow((short)(S16(v1) - S16(parent + 4)),
                         (short)(S16(v1 + 2) - S16(parent + 6)), S16(v1 + 4), S16(v1 + 6),
                         I32(v1 + 8), parentID);
                 } else {
@@ -129,7 +129,7 @@ int __cdecl fcn_004741e0(short x, short y, char* name)
                 if (I32(v2)) {
                     parentID = I32((dialogWords + I32(v2)) * 4 + 0xfb1020);
                     parent = (char*)&g_00f8f120[parentID];
-                    windowID = fcn_00472a90((short)(S16(record) - S16(parent + 4)),
+                    windowID = d2_CreateChildWindow((short)(S16(record) - S16(parent + 4)),
                         (short)(S16(v2 - 0xece) - S16(parent + 6)), S16(v2 - 0xecc), S16(v2 - 0xeca),
                         I32(v2 - 0xec8), parentID);
                 } else {

@@ -12,22 +12,22 @@ typedef struct
 	int fd;
 	int f11;
 	char pad[7];
-} F2fMsg;
+} GV_MOVE_SLOT_MSG;
 // SIZE 0x1c
 
 #pragma pack(pop)
 
 void __cdecl cm_RequestMoveSlot(void*);
 
-void __cdecl fcn_004f2f90(int a1, int a2, int a3, int a4, char a5, int a6)
+void __cdecl gv_SendMoveSlotEntry(int payer, int dstWorktype, int building, int srcWorktype, char srcSlotIndex, int cost)
 {
-	F2fMsg message;
+	GV_MOVE_SLOT_MSG message;
 
-	message.f0 = *(int*) ((char*) a1 + 4);
-	message.f4 = *(int*) ((char*) a3 + 1);
-	message.f8 = a4;
-	message.fc = a5;
-	message.fd = a2;
-	message.f11 = a6;
+	message.f0 = *(int*) ((char*) payer + 4);
+	message.f4 = *(int*) ((char*) building + 1);
+	message.f8 = srcWorktype;
+	message.fc = srcSlotIndex;
+	message.fd = dstWorktype;
+	message.f11 = cost;
 	cm_RequestMoveSlot(&message);
 }

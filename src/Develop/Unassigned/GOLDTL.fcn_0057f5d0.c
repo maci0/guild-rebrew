@@ -31,7 +31,7 @@ extern volatile int g_6b7fac;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-int __cdecl fcn_0057f5d0(int* ev)
+int __cdecl d2_UpdateTutCh4Cat12Msg11Step(int* ev)
 {
 	struct item* p;
 

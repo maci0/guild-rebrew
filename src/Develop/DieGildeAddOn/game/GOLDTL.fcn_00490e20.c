@@ -5,7 +5,7 @@ extern double g_664180;
 
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
-void __cdecl fcn_004f4830(int, int*);
+void __cdecl gm_GetLawEntry(int, int*);
 float __cdecl gm_GetBuildingLevelRatio(void);
 int __cdecl gm_GetGuildHall(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -40,7 +40,7 @@ int __cdecl ai_EvaluateLaw0x0a(char* actor, int unused, int* outValue)
 			cnt++;
 		}
 		if (cnt != 0) {
-			fcn_004f4830(10, lawInfo);
+			gm_GetLawEntry(10, lawInfo);
 			f = gm_GetBuildingLevelRatio();
 			d = lawInfo[2] - lawInfo[1];
 			if (f < g_664188) {

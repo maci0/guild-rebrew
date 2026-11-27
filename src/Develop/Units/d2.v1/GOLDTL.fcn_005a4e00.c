@@ -18,9 +18,9 @@ void __cdecl fcn_0046f280(int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl he_GetActiveKrediteByLender(int, char*, unsigned int, char**);
 char* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_0050dd00(int, int*, int);
+void __cdecl gm_SortEntitiesByName(int, int*, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_005a4bb0(char*);
+void __cdecl d2_RunKreditFreigabeDialog(char*);
 void __cdecl fcn_005a4960(char*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -111,7 +111,7 @@ void __cdecl fcn_005a4e00(char* building)
 			if (count == 0) {
 				io_AppendText(0x48d);
 			}
-			fcn_0050dd00(count, ids, 0);
+			gm_SortEntitiesByName(count, ids, 0);
 			for (i = 0; i < count; i++) {
 				v = he_GetActiveKrediteByLender(*(unsigned short*) (building + 0x27), building,
 				    ids[i], out);
@@ -126,7 +126,7 @@ void __cdecl fcn_005a4e00(char* building)
 		}
 		if (g_100f1dc == 2) {
 			if (d2_CurrentElementId == close_btn) {
-				fcn_005a4bb0(building);
+				d2_RunKreditFreigabeDialog(building);
 			}
 			else {
 				for (i = 0; i < count; i++) {

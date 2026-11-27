@@ -5,7 +5,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-int __cdecl fcn_004f5e20(int, int);
+int __cdecl gs_ClearTargetStraftaten(int, int);
 void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -38,7 +38,7 @@ int __cdecl gm_HandleAbbitte(char* e, char* o)
 		if (n < 1 || n > 9 || n > *(int*) (e + 0x194)) {
 			return 0x60;
 		}
-		fcn_004f5e20(*(int*) (e + 4), n);
+		gs_ClearTargetStraftaten(*(int*) (e + 4), n);
 		cm_RequestModifyHealth(*(int*) (e + 4), -*(int*) (o + 4));
 	}
 	if (e[2] == 6) {
@@ -59,7 +59,7 @@ int __cdecl gm_HandleAbbitte(char* e, char* o)
 					v = d2_GetControlValue(sl);
 					if (d2_CheckActionBlocker(e, v) != 0) {
 						cm_RequestModifyHealth(*(int*) (e + 4), -v);
-						io_FormatTextBuffer(buf, 0x1deb, fcn_004f5e20(*(int*) (e + 4), v));
+						io_FormatTextBuffer(buf, 0x1deb, gs_ClearTargetStraftaten(*(int*) (e + 4), v));
 						fcn_00526120(buf, 0);
 						r = 1;
 						g_774654 = 1;

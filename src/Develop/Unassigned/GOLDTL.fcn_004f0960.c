@@ -7,7 +7,7 @@ typedef Slot170_7731b8 Slot170;
 
 extern Slot170_7731b8 g_7731b8[8];
 
-int __cdecl fcn_004f0960(int id)
+int __cdecl d3_AcquireSlot170(int id)
 {
 	int free;
 	int i;

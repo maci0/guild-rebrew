@@ -30,7 +30,7 @@ int __cdecl io_AppendText(int, ...);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
-int __cdecl fcn_0050dc90(int);
+int __cdecl gm_FindBuildingOwner(int);
 float __cdecl fcn_00510260(int, int, int*);
 
 /* ADDRESS: GOLDTL 0x00590b80 */
@@ -90,7 +90,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 		io_AppendText(0x20, *(int*) (def + 0x22));
 	} else {
 		gm_GetBuildingTechEffect((int) ent, 1, 1);
-		p = (char*) fcn_0050dc90((int) ent);
+		p = (char*) gm_FindBuildingOwner((int) ent);
 		slot = 0;
 		count = 0x7f4ca0;
 		for (i = 0x300; i != 0; i--) {
@@ -101,7 +101,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 			count += 0x21c;
 		}
 		quality = fcn_00510260((int) ent, slot, arr);
-		p = (char*) fcn_0050dc90((int) ent);
+		p = (char*) gm_FindBuildingOwner((int) ent);
 		if (p == 0) {
 			p = (char*) (0x7f4ca0 + *(unsigned short*) ((char*) ent + 0x27) * 0x21c);
 		}

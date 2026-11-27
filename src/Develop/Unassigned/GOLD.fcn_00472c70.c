@@ -2,7 +2,7 @@ int __cdecl fcn_004690a0(int font);
 int __cdecl fcn_0047cb60(int font_data, unsigned short character);
 
 /* ADDRESS: GOLD 0x00472c70 */
-void __cdecl fcn_00472c70(void* context, int* a1, int* a2)
+void __cdecl d2_GetWindowBorderSize(void* context, int* a1, int* a2)
 {
 	int font;
 

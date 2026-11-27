@@ -31,7 +31,7 @@ int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d3_EndCameraAndUiMode(void);
-int __cdecl fcn_005100f0(int, int);
+int __cdecl gm_ModifyHealth(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005c1110 */
 int __cdecl fcn_005c1110(void)
@@ -141,7 +141,7 @@ done:;
 							main_RunFrameLoop(0, 0x677c7);
 						}
 						if (cm_GetCommandStatus(r) == 1) {
-							fcn_005100f0(*(int*) ((char*) &g_7f4ca0
+							gm_ModifyHealth(*(int*) ((char*) &g_7f4ca0
 							    + 4 + 0x21c
 							    * (unsigned int) *(unsigned short*) &g_774970), -2);
 						}

@@ -29,7 +29,7 @@ extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudeINST;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004a55c0(struct house*, int, int*, float, float, unsigned short*);
+int __cdecl gm_FindEntityCandidatesInRange(struct house*, int, int*, float, float, unsigned short*);
 int __cdecl ai_FindEntityInFavorRange(struct house*, int, F8, int, float, int*);
 double __cdecl gm_RandomFloat01(void);
 
@@ -62,8 +62,8 @@ int __cdecl he_TryDispatchNpcAction(char* s, int n, int m)
 		flt[0] = 0x402c20;
 		flt[1] = 0x20a0;
 	}
-	if (fcn_004a55c0(&((struct house*)g_7f4ca0)[g_774970], 1, &flt[0], 0.0f, 100.0f, (unsigned short*) &x) == 0
-	    && fcn_004a55c0(&((struct house*)g_7f4ca0)[g_774970], 1, &flt[1], 0.0f, 100.0f, (unsigned short*) &x) == 0) {
+	if (gm_FindEntityCandidatesInRange(&((struct house*)g_7f4ca0)[g_774970], 1, &flt[0], 0.0f, 100.0f, (unsigned short*) &x) == 0
+	    && gm_FindEntityCandidatesInRange(&((struct house*)g_7f4ca0)[g_774970], 1, &flt[1], 0.0f, 100.0f, (unsigned short*) &x) == 0) {
 		goto fail;
 	}
 	f.mask = 0xa7f4c3a0;

@@ -15,7 +15,7 @@ extern int g_100e764;
 extern char* lpObjektePROT;
 extern char g_7f4ca0[];
 /* ADDRESS: GOLDTL 0x00489010 */
-void __cdecl fcn_00489010(char* e, char* a1)
+void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 {
 	char buf[0x400];
 	int m;
@@ -31,7 +31,7 @@ void __cdecl fcn_00489010(char* e, char* a1)
 	for (m = 0; m < 0x300; m++) {
 		p = g_7f4ca0 + m * 0x21c;
 		if (*(unsigned short*) p == 0xffff
-		    || *(char**) (p + 0x16c) != *(char**) (e + 0x16c)
+		    || *(char**) (p + 0x16c) != *(char**) (meister + 0x16c)
 		    || *(char*) (p + 0x165) == 0
 		    || *(char**) (p + 0x184) == 0
 		    || *(int*) (*(char**) (p + 0x184) + 0x2c) != *(int*) (*(char**) (p + 0x16c) + 1)) {
@@ -77,12 +77,12 @@ void __cdecl fcn_00489010(char* e, char* a1)
 		}
 		if (found != 0 && *(int*) (found + 0x28) != 0
 		    && gm_LookupWeaponSpec(*(int*) found) != 0
-		    && fcn_005c7270((int) e, *(int*) found) != 0) {
-			sprintf(buf, (char*) 0x67e388, e + 0x30, p + 0x30,
+		    && fcn_005c7270((int) meister, *(int*) found) != 0) {
+			sprintf(buf, (char*) 0x67e388, meister + 0x30, p + 0x30,
 			        (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(int*) found] + 1);
 			sprintf(buf, (char*) 0x67e358, *(int*) (p + 4),
-			        *(int*) (a1 + 2), *(int*) found, 1, g_773d75, 0);
-			cm_SendSellObjekt(*(int*) (p + 4), *(int*) (a1 + 2), *(int*) found, 1,
+			        *(int*) (building + 2), *(int*) found, 1, g_773d75, 0);
+			cm_SendSellObjekt(*(int*) (p + 4), *(int*) (building + 2), *(int*) found, 1,
 			             g_773d75, 0);
 			*(int*) (found + 0x28) = *(int*) (found + 0x28) - 1;
 		}

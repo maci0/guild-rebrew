@@ -6,7 +6,7 @@ char* __cdecl sb_FindVoiceBySample(int, int*);
 void __cdecl sb_StopVoice(void*, int);
 #define I32(p) (*(int*)(p))
 /* ADDRESS: GOLD 0x00426ba0 */
-int __cdecl fcn_00426ba0(char* target)
+int __cdecl sb_UnloadSampleBank(char* target)
 {
     char* previous;
     char* bank;

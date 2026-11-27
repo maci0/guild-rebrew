@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 unsigned char __cdecl fcn_004f97a0(int a);
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 
 int __cdecl ai_EvalStrafrechtLaw13(char* actor, int unused, int* out)
 {
@@ -20,7 +20,7 @@ int __cdecl ai_EvalStrafrechtLaw13(char* actor, int unused, int* out)
 	axis_good = (float)((*(float*) (actor + 0xf4) - 2.0) * *(float*) (actor + 0xfc));
 	axis_evil = (float)((*(float*) (actor + 0x10c) - 2.0) * *(float*) (actor + 0x114));
 	weight = skill_val * 0.8f;
-	fcn_004f4830(0x13, info);
+	gm_GetLawEntry(0x13, info);
 	if (weight < 1.0f && info[6] == 0) {
 		if (!(axis_good > axis_evil)) {
 			return 0;

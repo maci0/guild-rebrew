@@ -31,7 +31,7 @@ extern char* g_77255c;
 
 /* Inferred name and source home; the native registry selects this two-argument callback. */
 /* ADDRESS: GOLDTL 0x004df1b0 */
-void __cdecl fcn_004df1b0(char* participant, int* action)
+void __cdecl cut_PromptProzessChoice(char* participant, int* action)
 {
     /* Reference allocator order needs two extra register candidates here. */
     register int _dummy_19 = 0;
@@ -67,7 +67,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -92,7 +92,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -125,7 +125,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -151,7 +151,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -177,7 +177,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -205,7 +205,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {
@@ -249,7 +249,7 @@ void __cdecl fcn_004df1b0(char* participant, int* action)
         timer = fcn_004677e0((cut_WINDOW_WIDTH - 300) / 2 - 8,
             8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
         d2_UpdateProgressBar(timer, 1500, 1);
-        while (main_RunFrameLoop((void*) fcn_004df1b0, cut_EventLoopFlags)) {
+        while (main_RunFrameLoop((void*) cut_PromptProzessChoice, cut_EventLoopFlags)) {
             if (!d2_UpdateProgressBar(timer, 0, 0)) {
                 g_774654 = 1;
             } else if (g_100f1dc != -1) {

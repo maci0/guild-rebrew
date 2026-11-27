@@ -18,7 +18,7 @@ int __cdecl tb_SetCallbackPaused(void* fn, int flag);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_0045b290(int a, int b);
 void __cdecl fcn_004ad2d0(int v);
-void __cdecl fcn_004b3d40(int a, int b);
+void __cdecl gm_SetFirstMissionJob(int a, int b);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl gm_LookupEntityRecordById(int id);
@@ -114,7 +114,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 		if (v == 1)
 			g_774954 = 1;
 		if (*(char*) 0x6a3440 == 5)
-			fcn_004b3d40(
+			gm_SetFirstMissionJob(
 			    *(int*) (0x7f4ca4 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c),
 			    *(int*) (buf + 0x31));
 		break;

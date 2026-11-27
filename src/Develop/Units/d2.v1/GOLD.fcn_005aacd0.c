@@ -9,7 +9,7 @@ int __cdecl fcn_0052f390(int, int, int, int, int, int, int);
 void __cdecl d2_UpdatePagedPanel(int);
 void __cdecl fcn_00576300(int, int, int, int);
 int __cdecl fcn_00514400(int, int, int, void*);
-int __cdecl fcn_0050dc90(void*);
+int __cdecl gm_FindBuildingOwner(void*);
 void __cdecl fcn_00475f60(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00475ca0(int, int, int, int);
@@ -133,7 +133,7 @@ int __cdecl fcn_005aacd0(unsigned char* buildingRec, int modelId, int a3)
 	fcn_00576300(0x21, (int) book, 0, 0);
 	fcn_00514400(*(unsigned short*) (buildingRec + 0x27), 1, 2, f.txt7b0);
 	fcn_00514400(*(unsigned short*) (buildingRec + 0x25), 1, 2, f.txt760);
-	r = (char*) fcn_0050dc90(buildingRec);
+	r = (char*) gm_FindBuildingOwner(buildingRec);
 	if (r == 0) {
 		src = *(char**) 0x1440ac8;
 		dst = f.txt204;

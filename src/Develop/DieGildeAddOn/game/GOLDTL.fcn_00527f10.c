@@ -4,7 +4,7 @@
 
 
 
-int __cdecl fcn_0050e520(int, int*);
+int __cdecl gm_GetBuildingCategorySlot(int, int*);
 
 void __cdecl gm_CollectGebaeudeUpgrades(unsigned char* e)
 {
@@ -16,7 +16,7 @@ void __cdecl gm_CollectGebaeudeUpgrades(unsigned char* e)
 		g_7746f8 = 1;
 		return;
 	}
-	if (t == 5 && fcn_0050e520(*e, &v)) {
+	if (t == 5 && gm_GetBuildingCategorySlot(*e, &v)) {
 		g_7746f8 = v;
 	}
 }

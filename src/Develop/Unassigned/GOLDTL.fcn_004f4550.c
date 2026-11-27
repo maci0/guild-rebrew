@@ -5,13 +5,13 @@ extern float g_6652d8[];
 
 int __cdecl gm_CalcBribeOrPriceScore(int, int, int, int, int*);
 
-int __cdecl fcn_004f4550(int a1, int a2, int a3, int* out)
+int __cdecl gv_CalcGraveUpgradePrice(int entity, int currentTier, int targetTier, int* ownerShareOut)
 {
 	int first;
 	int result;
 
-	first = gm_CalcBribeOrPriceScore(a1, 100, a2, 1, &a2);
-	result = gm_CalcBribeOrPriceScore(a1, 100, a3, 1, &a2) - first / 2;
-	*out = (int) (result * g_6652d8[a3]);
+	first = gm_CalcBribeOrPriceScore(entity, 100, currentTier, 1, &currentTier);
+	result = gm_CalcBribeOrPriceScore(entity, 100, targetTier, 1, &currentTier) - first / 2;
+	*ownerShareOut = (int) (result * g_6652d8[targetTier]);
 	return result;
 }

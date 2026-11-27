@@ -1,0 +1,35 @@
+#include <string.h>
+
+extern unsigned char g_773d75;
+#include "Develop/DieGildeAddOn/game/game_data.h"
+
+int __cdecl gm_LookupEntityRecordById(int);
+int __cdecl fcn_0042e410(int);
+int __cdecl fcn_0050dac0(short);
+void __cdecl io_FormatTextBuffer(char*, int, ...);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
+
+/* ADDRESS: GOLDTL 0x004b6740 */
+int __cdecl gm_HandleMsg01DebitWealth(int* noticeRequest)
+{
+	char buf[0x100];
+	int* ent;
+	int v;
+	int w;
+	double d;
+
+	ent = (int*) gm_LookupEntityRecordById(*noticeRequest);
+	if (ent == 0)
+		return 1;
+	if (*(unsigned char*) ((char*) ent + 0x166) == 0xe)
+		return 0x400;
+	v = fcn_0042e410(3) & 0xffff;
+	d = (double) v + 2.0;
+	w = fcn_0050dac0(*(short*) ent);
+	v = (int) (((double) w * d) * 0.01);
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) noticeRequest + 4) + 0x12e7, v);
+	cm_RequestTransferCurrencyNoKill(*noticeRequest, -1, g_773d75, v);
+	he_PostEntityMessage(ent[1], ent[1], buf, 0x100 < strlen(buf), 0x603, 0);
+	return 0;
+}

@@ -3,7 +3,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_0057eee0(int* msg)
+int __cdecl d2_AllowTutCh2Cat0fOr02Or12Msg19(int* msg)
 {
 	unsigned char* e;
 	char* t;

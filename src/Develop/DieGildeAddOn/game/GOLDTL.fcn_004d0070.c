@@ -24,7 +24,7 @@ char* __cdecl gm_LookupWeaponSpec(int);
 unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl cm_RequestReduceLifespan(int, int, int);
 char* __cdecl gm_GetEquippedCombatGear(char*);
-int __cdecl fcn_004cef70(int, char*);
+int __cdecl gm_GetEntityControlMask(int, char*);
 unsigned char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl fcn_0043a3f0(char*, char*, V43a3f0);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
@@ -40,7 +40,7 @@ void __cdecl fcn_004cfca0(void);
 /* Ages the effect timers of the 32 tracked records, then drives their
    proximity/visibility states against the current selection. */
 /* ADDRESS: GOLDTL 0x004d0070 */
-void __cdecl fcn_004d0070(void)
+void __cdecl cut_UpdateCombatEffects(void)
 {
 	V43a3f0 c;
 	char** p;
@@ -92,7 +92,7 @@ void __cdecl fcn_004d0070(void)
 		if (s != 0 && *(int*) s == 0x172) {
 			t = 0;
 			if (g_772f24 != 0) {
-				t = fcn_004cef70((int) *(unsigned short*) g_772f24, e);
+				t = gm_GetEntityControlMask((int) *(unsigned short*) g_772f24, e);
 			}
 			o = *(char**) (e + 0x184);
 			if (t & 0x800) {

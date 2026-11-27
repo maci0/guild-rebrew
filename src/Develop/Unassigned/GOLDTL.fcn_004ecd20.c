@@ -5,7 +5,7 @@
 
 int __cdecl ahm_CalcResearchDuration(int a, int b);
 
-int __cdecl fcn_004ecd20(int a, int b)
+int __cdecl ahm_CalcUnlockDuration(int entity, int recipe)
 {
-	return (int) (ahm_CalcResearchDuration(a, b) * 0.1f);
+	return (int) (ahm_CalcResearchDuration(entity, recipe) * 0.1f);
 }

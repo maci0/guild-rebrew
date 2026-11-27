@@ -5,7 +5,7 @@ extern unsigned char* lpGebaeudeINST;
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 unsigned char __cdecl fcn_004f97a0(int a);
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 
 int __cdecl ai_EvaluateLaw0x08(char* e, int unused, int* out)
 {
@@ -44,7 +44,7 @@ int __cdecl ai_EvaluateLaw0x08(char* e, int unused, int* out)
 	if (cnt == 0) {
 		return 0;
 	}
-	fcn_004f4830(8, info);
+	gm_GetLawEntry(8, info);
 	if (e[2] == 5) {
 		if (owned) {
 			if (info[6] != 1) {

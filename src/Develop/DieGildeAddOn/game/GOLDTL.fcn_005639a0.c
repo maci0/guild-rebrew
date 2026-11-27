@@ -7,7 +7,7 @@ extern char g_7f4ca0[];
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 void __cdecl gm_AdjustGebaeudeCondition(void*, int);
-char* __cdecl fcn_0050dc90(void*);
+char* __cdecl gm_FindBuildingOwner(void*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, void*);
@@ -47,7 +47,7 @@ void __cdecl he_RunGebaeudeReparieren(int a)
 			return;
 		}
 		id = 0x5f6;
-		q = fcn_0050dc90(r);
+		q = gm_FindBuildingOwner(r);
 		if (q != 0 && *(char*) (q + 2) == 1 && (*(unsigned char*) (q + 0x1b4) & 1)) {
 			id = 0x60b;
 		}

@@ -7,7 +7,7 @@ typedef struct Stat {
 } Stat;
 // SIZE 0x24
 
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 struct unit* __cdecl he_StartHandlungSearch(int n, ...);
 int __cdecl he_fn_Handlung(void);
 unsigned short __cdecl gm_RandomMod(unsigned short n);
@@ -43,7 +43,7 @@ void __cdecl ai_CalcMeisterBank(char* e)
 	if (*(int*) (e + 0x1c8) & 8) {
 		return;
 	}
-	if (!fcn_004f4830(0xe, &st)) {
+	if (!gm_GetLawEntry(0xe, &st)) {
 		return;
 	}
 	o = *(char**) (e + 0x16c);

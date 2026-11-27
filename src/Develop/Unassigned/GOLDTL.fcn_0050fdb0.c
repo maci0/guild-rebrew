@@ -6,7 +6,7 @@
 unsigned short* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
-float __cdecl fcn_0050fdb0(int k, int n, int* ids)
+float __cdecl gm_CalcAvgEntityFavor(int entityIdx, int count, int* ids)
 {
 	float sum;
 	int cnt;
@@ -15,11 +15,11 @@ float __cdecl fcn_0050fdb0(int k, int n, int* ids)
 
 	cnt = 0;
 	sum = 0;
-	for (i = 0; i < n; i++) {
+	for (i = 0; i < count; i++) {
 		if (ids[i] != -1) {
 			e = gm_LookupEntityRecordById(ids[i]);
 			if (e != 0) {
-				sum = gm_CalcEntityFavor(k, *e, 0) + sum;
+				sum = gm_CalcEntityFavor(entityIdx, *e, 0) + sum;
 				cnt++;
 			}
 		}

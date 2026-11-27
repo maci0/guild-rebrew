@@ -21,7 +21,7 @@ unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_CalcEntityFavor(int, int, int);
 
 /* ADDRESS: GOLDTL 0x004a57a0 */
-unsigned int __cdecl fcn_004a57a0(unsigned short *e, int filterFlags, int n, char *src, float lo, float hi, unsigned short *out)
+unsigned int __cdecl gm_FindFilteredEntity(unsigned short *entity, int filterFlags, int excludeCount, char *excludeIds, float minFavor, float maxFavor, unsigned short *out)
 {
 	int step;
 	float val;
@@ -36,23 +36,23 @@ unsigned int __cdecl fcn_004a57a0(unsigned short *e, int filterFlags, int n, cha
 	step = gm_RandomSearchSteps[gm_RandomMod(0x10)];
 	memset(&q, 0, sizeof(q));
 	{
-	len = n * 2;
+	len = excludeCount * 2;
 	if (len > 0x20) {
 		len = 0x20;
 	}
-	memcpy(q.name, src, len);
+	memcpy(q.name, excludeIds, len);
 	q.kind = 2;
 	if (g_77261c != 0) {
 		q.x40 = 0;
 		q.flags = filterFlags;
-		if (fcn_005cf720(*e, *((unsigned short *) g_77261c), &q, 0) != 0) {
+		if (fcn_005cf720(*entity, *((unsigned short *) g_77261c), &q, 0) != 0) {
 			*out = *((unsigned short *) g_77261c);
 			return 1;
 		}
 	}
 	q.flags = filterFlags;
-	if (0.0 < lo || hi < 100.0) {
-		if (lo < hi) {
+	if (0.0 < minFavor || maxFavor < 100.0) {
+		if (minFavor < maxFavor) {
 			flag = 1;
 		}
 	}
@@ -66,8 +66,8 @@ unsigned int __cdecl fcn_004a57a0(unsigned short *e, int filterFlags, int n, cha
 			}
 			return 0;
 		}
-		if (fcn_005cf720(*e, (unsigned short) i, &q, 0) != 0) {
-			if (flag == 0 || (val = gm_CalcEntityFavor(i, *e, 1), !(val < lo) && !(val > hi))) {
+		if (fcn_005cf720(*entity, (unsigned short) i, &q, 0) != 0) {
+			if (flag == 0 || (val = gm_CalcEntityFavor(i, *entity, 1), !(val < minFavor) && !(val > maxFavor))) {
 				found = 1;
 				*out = (unsigned short) i;
 			}

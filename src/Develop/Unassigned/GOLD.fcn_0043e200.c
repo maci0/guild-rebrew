@@ -1,5 +1,5 @@
 void __cdecl d3_ClearViewport(void*);
-void __cdecl fcn_0041e100(void*, unsigned char, unsigned char, unsigned char);
+void __cdecl d3_ClearSoftwareViewport(void*, unsigned char, unsigned char, unsigned char);
 float __cdecl fcn_00446990(void*, void*, void*);
 void __cdecl d3_SetFogRange(float, float);
 void __cdecl fcn_004439e0(void*, int);
@@ -14,7 +14,7 @@ void __cdecl fcn_0043b600(void); extern float g_5ebaa4;
 #include "client_lighting.h"
 #include "Develop/Units/d3/d3_camera.h"
 /* ADDRESS: GOLD 0x0043e200 */
-void __cdecl fcn_0043e200(unsigned int pass, int overlay)
+void __cdecl d3_RenderScene(unsigned int pass, int overlay)
 {
     char* p;
     char* next;
@@ -31,7 +31,7 @@ void __cdecl fcn_0043e200(unsigned int pass, int overlay)
     if (c633450)
         d3_ClearViewport((void*) 0xfc2930);
     else
-        fcn_0041e100((void*) 0xfc2930, *(unsigned char*) 0x6334a2,
+        d3_ClearSoftwareViewport((void*) 0xfc2930, *(unsigned char*) 0x6334a2,
             *(unsigned char*) 0x6334a1, *(unsigned char*) 0x6334a0);
     *(int*) 0x633b08 = 0;
     *(int*) 0x633b0c = 0;

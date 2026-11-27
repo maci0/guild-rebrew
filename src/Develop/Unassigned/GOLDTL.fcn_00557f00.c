@@ -1,22 +1,22 @@
-struct rgba_00557f00;
+struct RGBA_COLOR;
 
 
 // SIZE 0x4
-struct rgba_00557f00 {
+struct RGBA_COLOR {
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
 	unsigned char a;
 };
 
-void __cdecl fcn_00417180(int, char*, int, struct rgba_00557f00, float*, int, int, float, float,
+void __cdecl fcn_00417180(int, char*, int, struct RGBA_COLOR, float*, int, int, float, float,
                           float, float, float);
 
 
 /* ADDRESS: GOLDTL 0x00557f00 */
 void __cdecl he_SpawnTimedRauchEffect(char* o)
 {
-	struct rgba_00557f00 c;
+	struct RGBA_COLOR c;
 	float v[4];
 
 	c.b = 0xa0;

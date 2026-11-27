@@ -14,7 +14,7 @@ extern char g_68bcec[];
 
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl msx_OverrideMusicTrack(char*);
-void __cdecl fcn_00536bb0(void);
+void __cdecl d3_UpdateWeatherAndSkyBlend(void);
 void __cdecl fcn_0052a960(char*);
 char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl evt_RunScript(char*);
@@ -40,7 +40,7 @@ void __cdecl cut_RunGfxCutscene(void)
 			msx_OverrideMusicTrack(g_68bd14);
 	}
 	main_LoopFlags = 0x7d6c6;
-	fcn_00536bb0();
+	d3_UpdateWeatherAndSkyBlend();
 	fcn_0052a960(((char*)&gm_GameTime));
 	p = evt_LoadGfxScript(g_68bcec);
 	if (p != 0) {

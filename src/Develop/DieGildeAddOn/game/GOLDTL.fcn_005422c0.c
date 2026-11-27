@@ -28,7 +28,7 @@ void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_004c6090(char*, int, int, int);
 void __cdecl fcn_004f3ef0(char*);
 void __cdecl gm_AdjustGebaeudeCondition(char*, int);
-unsigned char* __cdecl fcn_0050dc90(unsigned char*);
+unsigned char* __cdecl gm_FindBuildingOwner(unsigned char*);
 unsigned char* __cdecl ahm_GetWorkshopOwner(unsigned char*);
 int __cdecl fcn_004ee160(char*);
 int __cdecl gm_AccumulateTyped2(char*);
@@ -51,7 +51,7 @@ void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_CalcBuildingRoundBalance(unsigned char*, int, int*);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_SumQueryEntryValues(int, char);
-int __cdecl fcn_0050f950(int, int);
+int __cdecl gm_GetEntityRelation(int, int);
 
 /* ADDRESS: GOLDTL 0x005422c0 */
 void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
@@ -117,7 +117,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 				}
 				else if (v == 0xd || v == 0xc || v == 0xb) {
 					if (*(unsigned short*) (rec + 0x27) == gm_CityEntity[0]) {
-						obj = fcn_0050dc90(rec);
+						obj = gm_FindBuildingOwner(rec);
 						if (obj == 0) {
 							count++;
 							fcn_004c6090((char*) rec, 1, 0, *(unsigned char*) (def + 0x223));
@@ -271,28 +271,28 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 								cm_RequestTransferCurrencyNoKill(*(int*) (tile2 + 4), *(int*) (tile + 4), g_773d75, v);
 							}
 							count++;
-							if (*(int*) (p + 0x3d) < 100 && fcn_0050f950(idx, *(unsigned short*) tile2) > -120) {
+							if (*(int*) (p + 0x3d) < 100 && gm_GetEntityRelation(idx, *(unsigned short*) tile2) > -120) {
 								b1 = (100 - *(int*) (p + 0x3d)) / 3;
 								if (b1 < 1) {
 									b1 = 1;
 								}
 								delta = (char) -b1;
 							}
-							else if (*(int*) (p + 0x3d) > 100 && fcn_0050f950(idx, *(unsigned short*) tile2) < 100) {
+							else if (*(int*) (p + 0x3d) > 100 && gm_GetEntityRelation(idx, *(unsigned short*) tile2) < 100) {
 								b1 = (*(int*) (p + 0x3d) - 100) / 3;
 								if (b1 < 1) {
 									b1 = 1;
 								}
 								delta = (char) b1;
 							}
-							if (*(int*) (p + 0x41) < 100 && fcn_0050f950(idx, *(unsigned short*) tile2) > -120) {
+							if (*(int*) (p + 0x41) < 100 && gm_GetEntityRelation(idx, *(unsigned short*) tile2) > -120) {
 								b1 = (*(int*) (p + 0x41) - 100) / 5;
 								if (b1 < 1) {
 									b1 = 1;
 								}
 								delta = (char) (delta + b1);
 							}
-							else if (*(int*) (p + 0x41) > 100 && fcn_0050f950(idx, *(unsigned short*) tile2) < 100) {
+							else if (*(int*) (p + 0x41) > 100 && gm_GetEntityRelation(idx, *(unsigned short*) tile2) < 100) {
 								b1 = (100 - *(int*) (p + 0x41)) / 5;
 								if (b1 < 1) {
 									b1 = 1;
@@ -307,7 +307,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 							cm_AppendPacketFieldDelta(4, 1, 0x19c, &v);
 							cm_RequestChangeAttribute();
 							count++;
-							b1 = fcn_0050f950(idx, *(unsigned short*) tile2) + delta;
+							b1 = gm_GetEntityRelation(idx, *(unsigned short*) tile2) + delta;
 							if (b1 < -26) {
 								if (-((int) (gm_RandomMod(0x4a) & 0xffff)) > b1) {
 									if (gm_RandomMod(100) > 0x32) {

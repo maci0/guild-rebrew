@@ -1,7 +1,7 @@
 
 
 
-int __cdecl fcn_004f3e60(char* e, int* out);
+int __cdecl gv_CanHireGraveyardWorker(char* e, int* out);
 int* __cdecl gv_PickRandomFieldEntry(char* e);
 int* __cdecl fcn_004f1a10(char* e, int* r);
 int __cdecl fcn_004f1790(int d, int* s);
@@ -13,7 +13,7 @@ int __cdecl gv_AssignGraveyardField(char* e)
 	int* s;
 	int k;
 
-	if (fcn_004f3e60(e, 0) != 1) {
+	if (gv_CanHireGraveyardWorker(e, 0) != 1) {
 		return -1;
 	}
 	r = gv_PickRandomFieldEntry(e);

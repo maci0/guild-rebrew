@@ -4,7 +4,7 @@ int __cdecl gm_LookupEntityRecordById(int a0);
 void __cdecl cm_BeginPacketFieldDelta(char* a0, int a1);
 void __cdecl cm_AppendCommandSyncField(int a0, int a1, int a2, int* a3);
 void __cdecl cm_SendSetAttribute(void);
-int __cdecl fcn_0050f950(int a0, int a1);
+int __cdecl gm_GetEntityRelation(int a0, int a1);
 void __cdecl cm_RequestCopyEntityData(int a0, int a1, int a2, int a3);
 void __cdecl cm_RequestChangePlayerHe(int a0, int a1, int a2);
 void __cdecl cm_RequestCancelEntityEvent(int a0);
@@ -35,8 +35,8 @@ void __cdecl he_HandleEntlassen(int event)
 			cm_BeginPacketFieldDelta(ent, *(int*) (ent + 4));
 			cm_AppendCommandSyncField(4, 1, (int) ent - g_aed32c + 0x16c, &v6);
 			cm_SendSetAttribute();
-			if (fcn_0050f950(*(unsigned short*) (*(int*) (ent + 0x16c) + 0x27), *(unsigned short*) ent) > -0x1e) {
-				v6 = -0x1e - fcn_0050f950(*(unsigned short*) (*(int*) (ent + 0x16c) + 0x27), *(unsigned short*) ent);
+			if (gm_GetEntityRelation(*(unsigned short*) (*(int*) (ent + 0x16c) + 0x27), *(unsigned short*) ent) > -0x1e) {
+				v6 = -0x1e - gm_GetEntityRelation(*(unsigned short*) (*(int*) (ent + 0x16c) + 0x27), *(unsigned short*) ent);
 			}
 			v2 = *(unsigned short*) (*(int*) (ent + 0x16c) + 0x27);
 			v5 = v6;

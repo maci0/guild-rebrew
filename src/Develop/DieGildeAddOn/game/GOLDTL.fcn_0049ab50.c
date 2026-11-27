@@ -29,7 +29,7 @@ void __cdecl gm_CheckEntityObjectSlots(char* e, int n, Slot* slots, Counts* cnt)
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
 /* ADDRESS: GOLDTL 0x0049ab50 */
-int __cdecl fcn_0049ab50(int kind, char* e, int busy, Msg* out1, Msg* out2)
+int __cdecl ai_StartUseObjectUnversehrtheit(int kind, char* entity, int busy, Msg* out1, Msg* out2)
 {
 	Counts cnt;
 	Slot slot;
@@ -42,14 +42,14 @@ int __cdecl fcn_0049ab50(int kind, char* e, int busy, Msg* out1, Msg* out2)
 	}
 	if (busy == 0) {
 		memset(&slot, 0, sizeof(slot));
-		if (*(int*) (e + 0x2c) != 0) {
+		if (*(int*) (entity + 0x2c) != 0) {
 			slot.id = 0x17e;
 		} else if (gm_RandomMod(3) == 0) {
 			slot.id = 0x175;
 		} else {
 			return 0;
 		}
-		gm_CheckEntityObjectSlots(e, 1, &slot, &cnt);
+		gm_CheckEntityObjectSlots(entity, 1, &slot, &cnt);
 		if ((cnt.total != 6 || cnt.free != 0) && cnt.blocked != 1) {
 			if (cnt.total < 6 && cnt.free == 0) {
 				a.type = 2;
@@ -57,9 +57,9 @@ int __cdecl fcn_0049ab50(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				a.b = 1;
 				a.f = 0.05f;
 				b.type = 7;
-				b.a = *(int*) (e + 4);
+				b.a = *(int*) (entity + 4);
 				b.b = 1;
-				r = ai_SelectBestMethod(kind, *(unsigned short*) e, 2, &a, &b);
+				r = ai_SelectBestMethod(kind, *(unsigned short*) entity, 2, &a, &b);
 				if (r != 0) {
 					*out1 = a;
 					*out2 = b;
@@ -74,7 +74,7 @@ int __cdecl fcn_0049ab50(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				b.b = 1;
 				a.type = 0;
 				a.d = 0x1f;
-				r = ai_SelectBestMethod(kind, *(unsigned short*) e, 4, &b, &a);
+				r = ai_SelectBestMethod(kind, *(unsigned short*) entity, 4, &b, &a);
 				if (r != 0) {
 					*out1 = b;
 					*out2 = a;

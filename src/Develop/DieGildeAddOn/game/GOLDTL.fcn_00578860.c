@@ -22,7 +22,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 
 void __cdecl he_StartHauchDesVerfalls(char* e)
@@ -53,7 +53,7 @@ void __cdecl he_StartHauchDesVerfalls(char* e)
 	*(int*) (e + 0xbc) = 0;
 	*(pos14_7f4c00*) (e + 0x52) = gm_GameTime;
 	gm_AddTime((pos14_7f4c00*) (e + 0x52), 0, 1, 0);
-	fcn_005100f0(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 8)])->entity_id, -*(int*) (e + 0xb8));
+	gm_ModifyHealth(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 8)])->entity_id, -*(int*) (e + 0xb8));
 	*(int*) (e + 0x70) = 0;
 	gm_TryRecordCrime(0x1b, 1, ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (e + 8)])->entity_id, p != 0 ? *(int*) (p + 4) : -1,
 	    p != 0 && *(char**) (p + 0x170) != 0 ? *(int*) (*(char**) (p + 0x170) + 1) : -1);

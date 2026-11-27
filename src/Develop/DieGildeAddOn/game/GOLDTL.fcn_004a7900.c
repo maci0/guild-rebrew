@@ -4,7 +4,7 @@ extern char* g_1007cd4;
 extern Card_1007ce0 g_1007ce0[24];
 
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_004a7af0(void*, int);
+void __cdecl gm_ReplaceCardSlot(void*, int);
 
 /* ADDRESS: GOLDTL 0x004a7900 */
 void __cdecl ai_PlayCardGameTurn(void)
@@ -117,7 +117,7 @@ void __cdecl ai_PlayCardGameTurn(void)
 			break;
 		}
 		if (move >= 0) {
-			fcn_004a7af0(seat, move);
+			gm_ReplaceCardSlot(seat, move);
 		}
 		off += 0x34;
 		k++;

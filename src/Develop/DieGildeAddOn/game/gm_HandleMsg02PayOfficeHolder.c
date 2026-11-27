@@ -1,0 +1,83 @@
+#include <string.h>
+
+extern unsigned char g_773d75;
+#include "Develop/DieGildeAddOn/game/game_data.h"
+
+int __cdecl gm_LookupEntityRecordById(int);
+int __cdecl fcn_004e8ad0(int);
+int __cdecl amt_FindOfficeSlotsByKind(int, int, void*);
+int __cdecl fcn_0042e410(int);
+int __cdecl fcn_0050dac0(short);
+void __cdecl io_FormatTextBuffer(char*, int, int, int, int, int);
+void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
+void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
+
+/* ADDRESS: GOLDTL 0x004b6830 */
+int __cdecl gm_HandleMsg02PayOfficeHolder(int* request)
+{
+	unsigned char msg[0x90];
+	char buf[0x100];
+	unsigned short* ent;
+	unsigned char* rec;
+	unsigned char* s;
+	unsigned short* hit;
+	int i;
+	int j;
+	int n;
+	int r;
+	int w;
+	int v;
+	double d;
+
+	ent = (unsigned short*) gm_LookupEntityRecordById(*request);
+	if (ent == 0) {
+		return 1;
+	}
+	if (*(unsigned char*) ((char*) ent + 0x166) == 0) {
+		return 0x400;
+	}
+	r = fcn_004e8ad0(*(unsigned char*) ((char*) ent + 0x166));
+	if (r == 0 || r >= 7) {
+		return 0x400;
+	}
+	n = amt_FindOfficeSlotsByKind(r, 6, msg);
+	if (n == 0) {
+		return 0x400;
+	}
+	i = 0;
+	hit = 0;
+	for (; i < n; i++) {
+		if (hit != 0) goto found;
+		rec = msg + 0xc + i * 0x18;
+		if (*(rec + 4) != 3 || *(int*) rec == 0) {
+			continue;
+		}
+		for (j = 0, s = (unsigned char*) 0x7f4ca2; (int) s < 0x85a0a2; s += 0x21c, j++) {
+			if (*(s + 0x166) != msg[8 + i * 0x18]) {
+				continue;
+			}
+			if (*s != 3 && *s != 4) {
+				continue;
+			}
+			hit = (unsigned short*) (g_7f4ca0 + j * 0x21c);
+			break;
+		}
+		if (hit != 0) {
+			goto found;
+		}
+	}
+	return 0x400;
+found:
+	v = fcn_0042e410(4) & 0xffff;
+	d = (double) v + 2.0;
+	w = fcn_0050dac0(*(short*) hit);
+	v = (int) (((double) w * d) * 0.01);
+	io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
+	    *(unsigned short*) hit, *(unsigned short*) ent,
+	    *(unsigned char*) (msg + 8 + i * 0x18) + 0x253, v);
+	cm_RequestTransferCurrencyNoKill(*request, *(int*) ((char*) hit + 4), g_773d75, v);
+	he_PostEntityMessage(*((int*) ent + 1), *((int*) ent + 1), buf,
+	    0x100 < strlen(buf), 0x603, 0);
+	return 0;
+
+}

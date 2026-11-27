@@ -6,7 +6,7 @@ typedef void (__cdecl* BLIT_FN)(short* dst, int* src, int** corners, unsigned in
  * four corner textures picked by the byte map at desc + 0x14 (row stride 5).
  * Globals have no Gold data rows yet (DATA TODO). */
 /* ADDRESS: GOLD 0x0043eef0 */
-void __cdecl fcn_0043eef0(char* buffer, char* desc)
+void __cdecl d3_BlitFloorTileCells(char* buffer, char* desc)
 {
 	int* corners[4];
 	int* src;

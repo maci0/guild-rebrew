@@ -23,7 +23,7 @@ unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-char* __cdecl fcn_0050dc90(unsigned char*);
+char* __cdecl gm_FindBuildingOwner(unsigned char*);
 char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -95,7 +95,7 @@ void __cdecl he_RunBuildingExpansion(char* u)
 		if (p == 0) {
 			goto kill;
 		}
-		r = fcn_0050dc90(p);
+		r = gm_FindBuildingOwner(p);
 		if (r != 0 && (*(unsigned char*) (r + 0x1b4) & 1)) {
 			msg = 0x60b;
 		}

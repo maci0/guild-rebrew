@@ -42,7 +42,7 @@ char* __cdecl cut_SpawnCutsceneSpectator(unsigned short* entity, char* prefix, i
 	} else {
 		strcpy(name, r + 4);
 	}
-	o = fcn_004e4a80(name, pos);
+	o = cut_CreateCharacterAtPosition(name, pos);
 	g_9b0dc0[idx] = o;
 	if (o != 0) {
 		ch_SetToDummy(o, w);

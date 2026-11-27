@@ -9,7 +9,7 @@ void __cdecl fcn_0047cda0(int, void*);
 void __cdecl fcn_00476020(int);
 int __cdecl fcn_004690a0(int);
 int __cdecl fcn_0047c820(int, int, char*, char*, unsigned char, char, int);
-void __cdecl fcn_0046f190(int, int, int, int, void*, char*, int);
+void __cdecl d2_RenderWrappedText(int, int, int, int, void*, char*, int);
 void __cdecl fcn_00468ea0(int, int, int, int);
 
 /* ADDRESS: GOLD 0x00476ca0 */
@@ -66,7 +66,7 @@ void __cdecl fcn_00476ca0(char* obj, int x, int y)
                     sprintf(label, (char*) 0x5fe7d0, entry[1]);
             } else
                 sprintf(label, (char*) 0x5fe7d0, entry[1]);
-            fcn_0046f190(px - 8, py + 24, 0x28, *(int*) 0xf8f084, obj, label, 8);
+            d2_RenderWrappedText(px - 8, py + 24, 0x28, *(int*) 0xf8f084, obj, label, 8);
         }
         index++;
     }

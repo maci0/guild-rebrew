@@ -5,7 +5,7 @@
 
 void __cdecl fcn_00517c00(int id, int a, int b, char* out);
 
-void __cdecl fcn_0050dd00(int n, int* arr, int flag)
+void __cdecl gm_SortEntitiesByName(int n, int* arr, int flag)
 {
 	char b[0x80];
 	char a[0x80];

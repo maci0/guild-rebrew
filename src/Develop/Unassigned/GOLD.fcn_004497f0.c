@@ -18,8 +18,8 @@ typedef struct Obj04497f0 {
 
 void __cdecl d3_MatrixToEulerAngles(void* a, int b);
 void __cdecl fcn_00458d90(Obj04497f0* o, int a, int b, Mat04497f0* out);
-void __cdecl fcn_00454060(Mat04497f0*, Mat04497f0*);
-void __cdecl fcn_00454030(Mat04497f0*, Mat04497f0*);
+void __cdecl d3_InvertMatrix4x4(Mat04497f0*, Mat04497f0*);
+void __cdecl d3_TransposeMatrix4x4(Mat04497f0*, Mat04497f0*);
 void __cdecl d3_MultiplyAffineMatrices(void*, Mat04497f0*, void*);
 
 void __cdecl d3_TransformWorldToParent(Obj04497f0* o, Vec04497f0* in, void* dir, Vec04497f0* out, int arg)
@@ -37,12 +37,12 @@ void __cdecl d3_TransformWorldToParent(Obj04497f0* o, Vec04497f0* in, void* dir,
 		return;
 	}
 	fcn_00458d90(p, 0, 0, &m);
-	fcn_00454060(&m, &inv);
+	d3_InvertMatrix4x4(&m, &inv);
 	out->x = inv.m[1][0] * in->y + inv.m[0][0] * in->x + inv.m[2][0] * in->z + inv.m[3][0];
 	out->y = inv.m[1][1] * in->y + inv.m[0][1] * in->x + inv.m[2][1] * in->z + inv.m[3][1];
 	out->z = inv.m[1][2] * in->y + inv.m[0][2] * in->x + inv.m[2][2] * in->z + inv.m[3][2];
 	fcn_00458d90(p, 0, 1, &m);
-	fcn_00454030(&m, &inv);
+	d3_TransposeMatrix4x4(&m, &inv);
 	d3_MultiplyAffineMatrices(dir, &inv, &m);
 	d3_MatrixToEulerAngles(&m, arg);
 }

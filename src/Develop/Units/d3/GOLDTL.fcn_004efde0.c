@@ -51,7 +51,7 @@ char* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl d3_DestroyObject(void*);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_ReleaseLightSlot(int);
-void __cdecl fcn_004f01c0(int, int, int, int*);
+void __cdecl gm_ApplyCannonImpact(int, int, int, int*);
 
 /* ADDRESS: GOLDTL 0x004efde0 */
 void __cdecl fcn_004efde0(void)
@@ -133,7 +133,7 @@ void __cdecl fcn_004efde0(void)
 								d3_DestroyObject(SLOTS[slot].objects[i]);
 								SLOTS[slot].objects[i] = 0;
 							}
-							fcn_004f01c0(SLOTS[slot].flags & 1, SLOTS[slot].id, (int) &SLOTS[slot].entry[i], SLOTS[slot].data);
+							gm_ApplyCannonImpact(SLOTS[slot].flags & 1, SLOTS[slot].id, (int) &SLOTS[slot].entry[i], SLOTS[slot].data);
 							if (SLOTS[slot].data != 0) {
 								*SLOTS[slot].data = i;
 							}

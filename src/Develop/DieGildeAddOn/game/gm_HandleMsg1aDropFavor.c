@@ -1,0 +1,52 @@
+#include <string.h>
+
+typedef struct {
+	char pad_000[0x4];
+	int f4;
+} GM_MSG1A_ENTITY;
+
+char *__cdecl gm_LookupEntityRecordById(int);
+int __cdecl gm_HasActiveSpecialObject(char *, int);
+int __cdecl gm_FindEntityCandidatesInRange(char *, int, int *, int, float, int *);
+int __cdecl gm_RandomMod(unsigned short);
+void __cdecl cm_RequestCopyEntityData(int, int, int, int);
+void __cdecl io_FormatTextBuffer(char *, int, ...);
+void __cdecl he_PostEntityMessage(int, int, char *, int, int, int);
+
+/* ADDRESS: GOLDTL 0x004b82f0 */
+int __cdecl gm_HandleMsg1aDropFavor(int *obj)
+{
+	int a;
+	int b;
+	char buf[0x400];
+	GM_MSG1A_ENTITY *h;
+	char *t;
+	char *s;
+	int type;
+	int r;
+	int neg;
+	int clamp;
+
+	h = (GM_MSG1A_ENTITY *) gm_LookupEntityRecordById(obj[0]);
+	if (h == 0) {
+		return 1;
+	}
+	if (gm_HasActiveSpecialObject((char *) h, 0x290) != 0) {
+		return 0x400;
+	}
+	b = 0x600c00;
+	if (gm_FindEntityCandidatesInRange((char *) h, 1, &b, 0, 100.0f, &a) == 0) {
+		return 0x400;
+	}
+	type = a & 0xffff;
+	t = (char *) (0x7f4ca0 + type * 0x21c);
+	r = gm_RandomMod(5) & 0xffff;
+	neg = r * 2 + 6;
+	cm_RequestCopyEntityData(h->f4, *(int *) (t + 4), -neg, 1);
+	s = buf;
+	io_FormatTextBuffer(s, *(unsigned short *) ((char *) obj + 4) + 0x12e7,
+		*(unsigned short *) t, *(unsigned short *) t, *(unsigned short *) t);
+	clamp = strlen(s) > 0x100;
+	he_PostEntityMessage(h->f4, h->f4, s, clamp, 0x603, 0);
+	return 0;
+}

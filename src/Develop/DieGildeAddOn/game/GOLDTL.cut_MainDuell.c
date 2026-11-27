@@ -74,7 +74,7 @@ void __cdecl cut_WaitForScriptExit(int a);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl fcn_004e48b0(void);
 void __cdecl fcn_004230e0(char* p);
-void __cdecl fcn_004cfe20(void);
+void __cdecl d3_ClearActionTimers(void);
 void __cdecl ReportClientMessage(char* msg);
 int __cdecl msx_RestoreMusicIfAllowed(void);
 
@@ -357,7 +357,7 @@ void __cdecl cut_MainDuell(char* a0)
     cut_CleanupCutscene();
     fcn_004230e0((char*) bank);
     fcn_004230e0((char*) snd);
-    fcn_004cfe20();
+    d3_ClearActionTimers();
     msx_RestoreMusicIfAllowed(); return;
     }
     ReportClientMessage((char*) 0x68cc70);

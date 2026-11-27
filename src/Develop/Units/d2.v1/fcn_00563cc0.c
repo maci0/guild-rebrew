@@ -1,5 +1,5 @@
 int __cdecl fcn_00503fe0(int, int, int);
-char* __cdecl fcn_0050dc90(char*);
+char* __cdecl gm_FindBuildingOwner(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, int);
 void __cdecl cm_SendSetGebUpgrade(int);
@@ -29,7 +29,7 @@ void __cdecl fcn_00563cc0(char* action)
 		}
 		ent = (char*) fcn_00503fe0(1, 1, *(int*) (action + 0xac));
 		if (ent != 0) {
-			p = fcn_0050dc90(ent);
+			p = gm_FindBuildingOwner(ent);
 			if (p != 0) {
 				if (*(unsigned char*) (p + 0x1b4) & 1) {
 					mode = 0x60b;

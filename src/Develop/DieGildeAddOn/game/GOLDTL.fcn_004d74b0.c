@@ -33,67 +33,67 @@ void __cdecl he_SendCmdMessage(char*, char*, char*, char*);
 // listed record (+0x100, -1 = none) must exist and hold a positive total.
 
 /* ADDRESS: GOLDTL 0x004d74b0 */
-int __cdecl fcn_004d74b0(char* x)
+int __cdecl cut_NotifyCombatCutscene(char* event)
 {
 	int i;
-	int t;
-	char* b;
-	int t67;
+	int combatType;
+	char* partyB;
+	int targetObj;
 	char buf[0x400];
 	Stats st;
-	char* a;
-	char* r;
-	int* id;
+	char* partyA;
+	char* entry;
+	int* targetIds;
 	unsigned char flags;
 
-	a = gm_LookupEntityRecordById(*(int*) (x + 0x34));
-	b = gm_LookupEntityRecordById(*(int*) (x + 0x38));
-	if (a == 0 || b == 0 || a == b) {
+	partyA = gm_LookupEntityRecordById(*(int*) (event + 0x34));
+	partyB = gm_LookupEntityRecordById(*(int*) (event + 0x38));
+	if (partyA == 0 || partyB == 0 || partyA == partyB) {
 		return 0;
 	}
-	if (x[0x7c] & 1) {
-		id = (int*) (x + 0x100);
+	if (event[0x7c] & 1) {
+		targetIds = (int*) (event + 0x100);
 		for (i = 0; i < 3; i++) {
-			if (id[i] != -1) {
-				r = gm_FindRecordById(id[i]);
-				if (r == 0) {
+			if (targetIds[i] != -1) {
+				entry = gm_FindRecordById(targetIds[i]);
+				if (entry == 0) {
 					return 0;
 				}
-				gm_CalcEntityInventoryStats(r, &st);
+				gm_CalcEntityInventoryStats(entry, &st);
 				if (st.xb0 <= 0) {
 					return 0;
 				}
 			}
 		}
 	}
-	t67 = gm_SearchTable67(*(int*) (x + 0x14));
-	if (!gm_StartFilteredEntitySearch(1, 1, *(int*) (x + 0x10c))) {
+	targetObj = gm_SearchTable67(*(int*) (event + 0x14));
+	if (!gm_StartFilteredEntitySearch(1, 1, *(int*) (event + 0x10c))) {
 		return 0;
 	}
-	flags = x[0x7c];
+	flags = event[0x7c];
 	if (flags & 1) {
-		io_FormatTextBuffer(buf, 0x11e0, *(unsigned short*) b);
+		io_FormatTextBuffer(buf, 0x11e0, *(unsigned short*) partyB);
 		strcat(buf, g_14a9aa8);
-		he_SendCmdMessage(a, x, buf, g_6b5c60);
-		io_FormatTextBuffer(buf, 0x11e1, *(unsigned short*) a);
+		he_SendCmdMessage(partyA, event, buf, g_6b5c60);
+		io_FormatTextBuffer(buf, 0x11e1, *(unsigned short*) partyA);
 		strcat(buf, g_14a9aa8);
-		he_SendCmdMessage(b, x, buf, g_6b5c60);
+		he_SendCmdMessage(partyB, event, buf, g_6b5c60);
 	} else if (flags & 2) {
-		t = cut_GetBuildingCombatType(gm_SearchTable67(*(int*) (x + 0x10c))) + 0x1125;
-		io_FormatTextBuffer(buf, 0x11e3, t, *(unsigned short*) b, t67);
+		combatType = cut_GetBuildingCombatType(gm_SearchTable67(*(int*) (event + 0x10c))) + 0x1125;
+		io_FormatTextBuffer(buf, 0x11e3, combatType, *(unsigned short*) partyB, targetObj);
 		strcat(buf, g_14a9ab4);
-		he_SendCmdMessage(a, x, buf, g_6b5c60);
-		io_FormatTextBuffer(buf, 0x11e4, *(unsigned short*) a, t, t67);
+		he_SendCmdMessage(partyA, event, buf, g_6b5c60);
+		io_FormatTextBuffer(buf, 0x11e4, *(unsigned short*) partyA, combatType, targetObj);
 		strcat(buf, g_14a9ab4);
-		he_SendCmdMessage(b, x, buf, g_6b5c60);
+		he_SendCmdMessage(partyB, event, buf, g_6b5c60);
 		return 1;
 	} else if (flags & 4) {
-		io_FormatTextBuffer(buf, 0x11e6, *(unsigned short*) b);
+		io_FormatTextBuffer(buf, 0x11e6, *(unsigned short*) partyB);
 		strcat(buf, g_14a9ac0);
-		he_SendCmdMessage(a, x, buf, g_6b5c60);
-		io_FormatTextBuffer(buf, 0x11e7, *(unsigned short*) a);
+		he_SendCmdMessage(partyA, event, buf, g_6b5c60);
+		io_FormatTextBuffer(buf, 0x11e7, *(unsigned short*) partyA);
 		strcat(buf, g_14a9ac0);
-		he_SendCmdMessage(b, x, buf, g_6b5c60);
+		he_SendCmdMessage(partyB, event, buf, g_6b5c60);
 	}
 	return 1;
 }

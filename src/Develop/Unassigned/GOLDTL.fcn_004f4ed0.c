@@ -8,7 +8,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl gm_GetBuildingTechEffect(unsigned char* rec, int a, int b);
 
-float __cdecl fcn_004f4ed0(unsigned short* key)
+float __cdecl gm_CalcCrimeReportChance(unsigned short* key)
 {
 	unsigned char* rec;
 	int best;

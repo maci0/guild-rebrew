@@ -4,7 +4,7 @@
 void __cdecl d3_SetNodePosition(char*, int*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 #ifdef REBREW_GOLD
-void __cdecl fcn_00453270(char*);
+void __cdecl d3_UpdateObjectLighting(char*);
 #endif
 #include <stdio.h>
 #include <string.h>
@@ -77,7 +77,7 @@ void __cdecl ch_SetPosition(char* obj, float* pos, int flag)
 	d3_SetNodePosition(*(char**) (obj + 0x34), (int*) pos);
 #ifdef REBREW_GOLD
 	if (flag != 0) {
-		fcn_00453270(*(char**) (obj + 0x34));
+		d3_UpdateObjectLighting(*(char**) (obj + 0x34));
 	}
 #endif
 	ch_PlaceOnGround(obj, 0);
@@ -85,7 +85,7 @@ void __cdecl ch_SetPosition(char* obj, float* pos, int flag)
 		ch_UpdateAttachedModelPosition(obj, 0);
 #ifdef REBREW_GOLD
 		if (flag != 0) {
-			fcn_00453270(**(char***) (obj + 0x124));
+			d3_UpdateObjectLighting(**(char***) (obj + 0x124));
 		}
 #endif
 	}

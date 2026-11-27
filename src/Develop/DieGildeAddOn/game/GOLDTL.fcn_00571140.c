@@ -8,7 +8,7 @@ typedef struct {
 #pragma pack(pop)
 extern char* lpObjektePROT;
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-double __cdecl fcn_0050fdb0(int, int, void*);
+double __cdecl gm_CalcAvgEntityFavor(int, int, void*);
 int __cdecl gm_SearchTable67(int);
 void __cdecl he_AssignActionSlot(int, int, int, void*);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -31,7 +31,7 @@ void __cdecl he_StartAbbau(char* obj)
 	*dst = *(Cpy14*) (obj + 0x44);
 	*(Cpy14*) (obj + 0x60) = *(Cpy14*) (obj + 0x44);
 	*(float*) (obj + 0xb4) = (float) value;
-	scaled = fcn_0050fdb0(*(unsigned short*) (obj + 8), 8, obj + 0x8c) - *(double*) 0x662908;
+	scaled = gm_CalcAvgEntityFavor(*(unsigned short*) (obj + 8), 8, obj + 0x8c) - *(double*) 0x662908;
 	*(char*) (obj + 0xc8) = 0;
 	*(float*) (obj + 0xc4) = (float) (scaled * *(double*) 0x662ad8);
 	id = gm_SearchTable67(*(int*) (obj + 0xb8));

@@ -4,7 +4,7 @@
 extern int* g_665f08;
 extern volatile int g_6b7fac;
 
-int __cdecl fcn_0057f310(int* m)
+int __cdecl d2_UpdateTutCh2Node13Step(int* m)
 {
 	if (m[0] == 0x19 && m[1] != 0 && g_665f08[1] == 4) {
 		if (*(short*) m[1] == 0x13) {

@@ -29,7 +29,7 @@ extern char g_7f4ca0[];
 int __cdecl gm_GetSeasonTreasury(char* e, unsigned char flag);
 int __cdecl ai_SelectBestMethod(int kind, int id, int n, Msg* b1, Msg* b2);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
-void __cdecl fcn_004f4830(int size, Stat* st);
+void __cdecl gm_GetLawEntry(int size, Stat* st);
 unsigned short __cdecl gm_RandomMod(int a);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 void __cdecl gm_ResolveEntityById(int* out, int a, int b, int id);
@@ -95,7 +95,7 @@ int __cdecl ai_StartSabotieren(int who, char* entity, int busy, Msg* out1, Msg* 
 		}
 		return r;
 	}
-	fcn_004f4830(0x18, &st);
+	gm_GetLawEntry(0x18, &st);
 	if (st.v[6] != 0 && gm_RandomMod(4) == 0 && g_77261c == 0) {
 		return 0;
 	}

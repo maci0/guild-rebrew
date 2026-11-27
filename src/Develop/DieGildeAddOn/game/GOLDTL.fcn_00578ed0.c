@@ -2,7 +2,7 @@ extern char* __cdecl gm_LookupEntityRecordById(int);
 extern void __cdecl he_AssignActionSlot(int, int, int, int);
 extern char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 extern void __cdecl ch_StartMovement(int, int, int, int, int, char*);
-extern int __cdecl fcn_004a57a0(char*, int, int, char*, int, int, unsigned int*);
+extern int __cdecl gm_FindFilteredEntity(char*, int, int, char*, int, int, unsigned int*);
 extern int __cdecl fcn_004f45b0(char*);
 extern int __cdecl gm_WalkEntityChain(int);
 extern int __cdecl gm_AmountToUnits(int, unsigned char);
@@ -95,7 +95,7 @@ void __cdecl he_RunDeathPact(char* event)
 					gm_AddTime(event + 0x52, 0, 10, 0);
 					return;
 				}
-				if (fcn_004a57a0((char*) ((*(unsigned short*) (event + 8)) * 0x21c + (unsigned long)&g_7f4ca0),
+				if (gm_FindFilteredEntity((char*) ((*(unsigned short*) (event + 8)) * 0x21c + (unsigned long)&g_7f4ca0),
 						0x700408, 4, event + 0xc8, 0, 0x42c80000, &found) != 0) {
 					goto found_one;
 				}

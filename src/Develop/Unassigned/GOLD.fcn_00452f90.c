@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00452f90 */
-void __cdecl fcn_00452f90(char* mesh, char* obj)
+void __cdecl d3_ApplyMaterialVertexColors(char* mesh, char* obj)
 {
 	unsigned char flags;
 	unsigned char high;

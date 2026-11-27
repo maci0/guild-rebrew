@@ -21,7 +21,7 @@ void __cdecl cm_BeginPacketFieldDelta(void *, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void *);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, void *);
 void __cdecl cm_RequestChangeAttribute(void);
-unsigned int __cdecl fcn_004a55c0(void *, unsigned int, unsigned int *, float, float, unsigned short *);
+unsigned int __cdecl gm_FindEntityCandidatesInRange(void *, unsigned int, unsigned int *, float, float, unsigned short *);
 int __cdecl srv_GetEntityOfficeSlot(void *, void *, void *);
 void __cdecl amt_SendOfficeCommand(void *, int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char *, int, int, char *);
@@ -116,7 +116,7 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 		unsigned short b;
 
 		a = 0x400800;
-		if (fcn_004a55c0(e, 1, &a, 0.0f, 100.0f, &b) == 0)
+		if (gm_FindEntityCandidatesInRange(e, 1, &a, 0.0f, 100.0f, &b) == 0)
 			return;
 		best = &((ENTITY_RECORD*)g_7f4ca0)[b];
 		if (srv_GetEntityOfficeSlot(best, &role, &slot) == 0)
@@ -131,7 +131,7 @@ void __cdecl gm_ApplyMiracleEffect(unsigned char *e, int mode)
 
 		a = 0x300000;
 		delta = gm_RandomMod(0x15);
-		if (fcn_004a55c0(e, 1, &a, 0.0f, 100.0f, &b) == 0)
+		if (gm_FindEntityCandidatesInRange(e, 1, &a, 0.0f, 100.0f, &b) == 0)
 			return;
 		best = &((ENTITY_RECORD*)g_7f4ca0)[b];
 		picked = -1;

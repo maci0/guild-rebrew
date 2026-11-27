@@ -8,7 +8,7 @@ typedef struct SLOT_44 {
 } SLOT_44;
 
 /* ADDRESS: GOLD 0x0043f270 */
-void __cdecl fcn_0043f270(void)
+void __cdecl d3_ShutdownFloorTileCache(void)
 {
     unsigned int i;
     unsigned int count;

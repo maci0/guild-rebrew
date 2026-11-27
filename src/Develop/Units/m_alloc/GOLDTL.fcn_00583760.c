@@ -41,7 +41,7 @@ void __cdecl fcn_0057fb20(void);
 void __cdecl fcn_0057fb60(void);
 void __cdecl d2_FocusTutorialBuilding0x02(void);
 void __cdecl fcn_0057fe50(void);
-void __cdecl fcn_0057fea0(void);
+void __cdecl d2_RunTutorialOfficeStep(void);
 void __cdecl d2_SendTutorialTownMsgA0(void);
 
 int* __cdecl d2_CreateTutorialChapter5(void)
@@ -448,7 +448,7 @@ int* __cdecl d2_CreateTutorialChapter5(void)
 	p[0xa] = (int) g_6a903c;
 	p[0xb] = 0x429;
 	p[0xc] = 0xd5;
-	p[0xd] = (int) fcn_0057fea0;
+	p[0xd] = (int) d2_RunTutorialOfficeStep;
 	p[0xe] = 0;
 	p[0x10] = 0x2f;
 	p[0x11] = 0x2148;

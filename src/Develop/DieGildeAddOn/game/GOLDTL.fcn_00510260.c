@@ -2,10 +2,10 @@ extern char* lpGebaeudePROT;
 extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl gm_GetBuildingTechEffect(unsigned char* p, int a, int b);
-char* __cdecl fcn_0050dc90(int arg1);
+char* __cdecl gm_FindBuildingOwner(int arg1);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_GetEntityHealthRatio(char* e);
-float __cdecl fcn_0050fdb0(int k, int n, int* ids);
+float __cdecl gm_CalcAvgEntityFavor(int k, int n, int* ids);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x00510260 */
 float __cdecl fcn_00510260(unsigned char* buildingData, int countArg, int idsAddress)
@@ -30,7 +30,7 @@ float __cdecl fcn_00510260(unsigned char* buildingData, int countArg, int idsAdd
 	bonus = 0.0f;
 	typePrototype = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(int) *buildingData];
 	a = gm_GetBuildingTechEffect(buildingData, 1, 1) * 0.01 + 1.0;
-	e = fcn_0050dc90((int) buildingData);
+	e = gm_FindBuildingOwner((int) buildingData);
 	if (e == 0) {
 		e = (char*)&((ENTITY_RECORD*)0x7f4ca0)[(int) *(unsigned short*) (buildingData + 0x27)];
 	}
@@ -59,7 +59,7 @@ float __cdecl fcn_00510260(unsigned char* buildingData, int countArg, int idsAdd
 		avg = sum * (1.0f / count);
 		bonus = (1.0f / count) * bonus;
 	}
-	f = (float) (fcn_0050fdb0(*(unsigned short*) (buildingData + 0x27), countArg, idsAddress) - 0.5);
+	f = (float) (gm_CalcAvgEntityFavor(*(unsigned short*) (buildingData + 0x27), countArg, idsAddress) - 0.5);
 	f = (float) (f * 0.25);
 	if (*(unsigned short*) (buildingData + 0x5a) & 0x1000) {
 		a = a + 0.1f;

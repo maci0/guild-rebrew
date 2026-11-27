@@ -113,7 +113,7 @@ int __cdecl fcn_00534c40(int, int, int, int, int, int, int);
 void __cdecl d2_UpdatePagedPanel(int);
 int __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00517c00(int, int, int, void*);
-char* __cdecl fcn_0050dc90(char*);
+char* __cdecl gm_FindBuildingOwner(char*);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
 int __cdecl d2_SetForm(int, int);
@@ -219,7 +219,7 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 	fcn_0057e880(0x21, (int) book, 0, 0);
 	fcn_00517c00(*(unsigned short*) (rec + 0x27), 1, 2, f.txt7a0);
 	fcn_00517c00(*(unsigned short*) (rec + 0x25), 1, 2, f.txt740);
-	r = fcn_0050dc90(rec);
+	r = gm_FindBuildingOwner(rec);
 	if (r == 0) {
 		strcpy(f.txt204, *(char**) 0x14abc28);
 	} else {
@@ -336,7 +336,7 @@ L6901:
 		fcn_004727a0(G(f.book + 0x228), 4);
 		gm_CalcBuildingRoundBalance((int) a1, *(unsigned short*) 0x774970, f.rec2);
 		io_AppendText(0x1a2c, G(f.rec2 + 0xc));
-		f.v2c = (int) fcn_0050dc90(a1);
+		f.v2c = (int) gm_FindBuildingOwner(a1);
 		n = G(&f.sel.a1c);
 		if (f.v2c == 0)
 			goto L6993;

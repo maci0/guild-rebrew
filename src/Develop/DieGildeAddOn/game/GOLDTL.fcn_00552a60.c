@@ -23,7 +23,7 @@ int __cdecl fcn_0050b750(int, unsigned char);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 int __cdecl gm_GetEntityTableEntry(int);
-int __cdecl fcn_0050dc90(int);
+int __cdecl gm_FindBuildingOwner(int);
 int __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl gm_AccumulateTyped2(int);
@@ -133,7 +133,7 @@ void __cdecl he_RunTaschendieb(int event)
 						*(int*) (v6 + 0x18) =
 						    *(int*) (v6 + 0x18) + v5;
 					}
-					v4 = fcn_0050dc90(v4);
+					v4 = gm_FindBuildingOwner(v4);
 					if (v4 == 0
 					    || (*(unsigned char*) (v4 + 0x1b4) & 1) == 0) {
 						io_FormatTextBuffer(v12, 0x19f4, v5);

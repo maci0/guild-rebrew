@@ -5,7 +5,7 @@ int  __cdecl fcn_005d5930(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
-int __cdecl fcn_004f7580(void* entity, void* request)
+int __cdecl he_HandleErpressungRequest(void* entity, void* request)
 {
 	int mode;
 

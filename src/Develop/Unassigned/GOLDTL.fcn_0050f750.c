@@ -1,9 +1,9 @@
-/* fcn_0050f750 — fixed-argument command dispatch. */
+/* d2_DrawDependencyLine — draw dependency diagram line with fixed style. */
 
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0050f750 */
-void __cdecl fcn_0050f750(int a1, int a2, int a3, int a4)
+void __cdecl d2_DrawDependencyLine(int x0, int y0, int x1, int y1)
 {
-	fcn_00472c30(a1, a2, a3, a4, 0x58, 0x1f, 0x14);
+	fcn_00472c30(x0, y0, x1, y1, 0x58, 0x1f, 0x14);
 }

@@ -13,7 +13,7 @@ typedef struct D3_ANIMATION_OPTIONS {
     unsigned char pad8[3];
 } D3_ANIMATION_OPTIONS;
 void __cdecl d3_SetObjectVisible(char*, int);
-void __cdecl fcn_00453270(char*);
+void __cdecl d3_UpdateObjectLighting(char*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
@@ -52,7 +52,7 @@ void __cdecl fcn_00402ba0(char* character)
             low = *(char**)(character + 0x22c);
             if (I32(low + 0x218) == 1) {
                 d3_SetObjectVisible(low, 1);
-                fcn_00453270(*(char**)(character + 0x22c));
+                d3_UpdateObjectLighting(*(char**)(character + 0x22c));
             }
             return;
         }
@@ -73,7 +73,7 @@ void __cdecl fcn_00402ba0(char* character)
             if ((I32(character + 0x2c) == I32(0x5f1294) && I32(character + 0x30) == I32(0x5f1298)) || !I32(character + 0x30)) {
                 if (I32(*(char**)(character + 0x22c) + 0x218) == 1 && !(character[0x8c] & 0x20)) {
                     d3_SetObjectVisible(*(char**)(character + 0x22c), 1);
-                    fcn_00453270(*(char**)(character + 0x22c));
+                    d3_UpdateObjectLighting(*(char**)(character + 0x22c));
                 }
             } else if (I32(*(char**)(character + 0x22c) + 0x218) != 1) {
                 d3_SetObjectVisible(*(char**)(character + 0x22c), 0);
@@ -88,7 +88,7 @@ void __cdecl fcn_00402ba0(char* character)
             highpoly_model:
                 if (I32(high + 0x218) == 1 && !(flags & 0x20)) {
                     d3_SetObjectVisible(high, 1);
-                    fcn_00453270(*(char**)(character + 0x34));
+                    d3_UpdateObjectLighting(*(char**)(character + 0x34));
                 }
                 if (I32(*(char**)(character + 0x22c) + 0x218) != 1)
                     d3_SetObjectVisible(*(char**)(character + 0x22c), 0);
@@ -134,7 +134,7 @@ void __cdecl fcn_00402ba0(char* character)
         if ((I32(character + 0x2c) == I32(0x5f1294) && I32(character + 0x30) == I32(0x5f1298)) || !I32(character + 0x30)) {
             if (I32(*(char**)(character + 0x34) + 0x218) == 1 && !(flags & 0x20)) {
                 d3_SetObjectVisible(*(char**)(character + 0x34), 1);
-                fcn_00453270(*(char**)(character + 0x34));
+                d3_UpdateObjectLighting(*(char**)(character + 0x34));
             }
         } else if (I32(*(char**)(character + 0x34) + 0x218) != 1) {
             d3_SetObjectVisible(*(char**)(character + 0x34), 0);
@@ -143,7 +143,7 @@ void __cdecl fcn_00402ba0(char* character)
         high = *(char**)(character + 0x34);
         if (I32(high + 0x218) == 1 && !(character[0x8c] & 0x20)) {
             d3_SetObjectVisible(high, 1);
-            fcn_00453270(*(char**)(character + 0x34));
+            d3_UpdateObjectLighting(*(char**)(character + 0x34));
         }
     }
     low = *(char**)(character + 0x22c);

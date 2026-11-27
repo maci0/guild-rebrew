@@ -22,7 +22,7 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bb0b0 */
-int __cdecl fcn_004bb0b0(int* request)
+int __cdecl gm_HandleEntityMsg38(int* request)
 {
 	unsigned short* found[6];
 	char buf[0x100];

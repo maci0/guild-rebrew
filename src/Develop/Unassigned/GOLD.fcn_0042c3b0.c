@@ -1,8 +1,8 @@
-/* Walks a packed string list: a1 entries (plus 4 more when a2 == 8) are
+/* Walks a packed string list: index entries (plus 4 more when mode == 8) are
  * skipped, entry 4 or a nonempty entry 6 become the fallback returned for
- * a2 == 8. */
+ * mode == 8. */
 /* ADDRESS: GOLD 0x0042c3b0 */
-char* __cdecl fcn_0042c3b0(char* a0, int a1, int a2)
+char* __cdecl txt_GetPackedStringEntry(char* entries, int index, int mode)
 {
 	char* alt;
 	char* p;
@@ -10,21 +10,21 @@ char* __cdecl fcn_0042c3b0(char* a0, int a1, int a2)
 	int len;
 	char mode_c;
 
-	mode_c = (char) a2;
-	p = a0;
+	mode_c = (char) mode;
+	p = entries;
 	i = 0;
-	alt = (char*) a2;
+	alt = (char*) mode;
 	if (mode_c == 8) {
-		a1 += 4;
-		alt = a0;
+		index += 4;
+		alt = entries;
 	}
-	while (i < a1 - 1) {
+	while (i < index - 1) {
 		len = 0;
 		while (p[len++] != 0) {
 		}
 		p = p + len - 1;
 		if (p == 0) {
-			return a0;
+			return entries;
 		}
 		p++;
 		i++;
@@ -34,7 +34,7 @@ char* __cdecl fcn_0042c3b0(char* a0, int a1, int a2)
 	}
 	if (*p == 0) {
 		if (mode_c == 4) {
-			return a0;
+			return entries;
 		}
 		if (mode_c == 8) {
 			p = alt;

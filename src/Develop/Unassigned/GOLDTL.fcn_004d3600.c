@@ -11,7 +11,7 @@ int __cdecl fcn_004d35b0(char*, char*);
 void __cdecl d3_VisitSceneObjects(char*, int, int, int(__cdecl*)(char*, char*), char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
-char* __cdecl fcn_004d3600(char* e)
+char* __cdecl d3_FindNearestEnemyWare(char* e)
 {
 	float best;
 	float pos[4];

@@ -6,7 +6,7 @@ int __cdecl gm_RandomMod(unsigned short);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_CountBuildingExtensions(char*);
 int __cdecl amt_GetRoleLevel(int);
-int __cdecl fcn_004a58d0(char*, int, char**, int, float, unsigned short*);
+int __cdecl ai_SelectRankedCandidates(char*, int, char**, int, float, unsigned short*);
 int __cdecl fcn_004a61d0(char*, int, char*, float, float, int, unsigned short*);
 typedef struct GOLD_ACTION_PROTO { unsigned char kind; unsigned char unknown01[0x24c]; } GOLD_ACTION_PROTO;
 
@@ -51,7 +51,7 @@ int __cdecl fcn_004ab3e0_gold(int action, char* actor, int busy, char* first, ch
     }
     if (!best || !best_score) return 0;
     candidate = (char*) 0xf00500;
-    if (!fcn_004a58d0(actor, 1, &candidate, 0,
+    if (!ai_SelectRankedCandidates(actor, 1, &candidate, 0,
             (float) (gm_RandomMod(0x20) & 0xffff) + 25.0f, &target_id)) return 0;
     target = (char*) g_slot_table + target_id * 0x21c;
     total = amt_GetRoleLevel((unsigned char) target[0x166]) / 3 + 2;

@@ -29,7 +29,7 @@ int __cdecl fcn_0050c830(pos14_7f4c00*, pos14_7f4c00*, char*);
 void __cdecl cm_AppendPacketFieldValue(int, int, short, unsigned char*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-char* __cdecl fcn_0050dc90(unsigned char*);
+char* __cdecl gm_FindBuildingOwner(unsigned char*);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -93,7 +93,7 @@ void __cdecl he_RunTrainierenSkill(char* e)
 		if (q == 0 || who == 0) {
 			break;
 		}
-		r = fcn_0050dc90((unsigned char*) q);
+		r = gm_FindBuildingOwner((unsigned char*) q);
 		if (r != 0 && (r[0x1b4] & 1)) {
 			goto tail;
 		}

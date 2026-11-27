@@ -15,7 +15,7 @@ typedef struct {
 extern Rec18_68da68 amt_OfficeSlots[42];
 char* __cdecl gm_LookupEntityRecordById(int);
 
-char* __cdecl fcn_004e90d0(int value)
+char* __cdecl amt_FindOfficeHolderByType(int value)
 {
 	int index;
 	int cursor;

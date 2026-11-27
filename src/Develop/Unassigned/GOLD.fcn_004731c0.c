@@ -3,7 +3,7 @@
 extern GOLD_GUI_WINDOW g_00f8f120[];
 int __cdecl fcn_0046cd70(short, short, int);
 void __cdecl fcn_004730d0(int, char*);
-void __cdecl fcn_00472c70(void*, int*, int*);
+void __cdecl d2_GetWindowBorderSize(void*, int*, int*);
 void __cdecl ReportClientMessage(const char*);
 
 /* ADDRESS: GOLD 0x004731c0 */
@@ -35,7 +35,7 @@ int __cdecl d2_AddElementToWindow(short x, short y, int image, int window)
         *(int*) ((char*) &g_00f8f080[index] + 0x38) =
             *(int*) ((char*) &g_00f8f080[owner->id] + 0x38);
         ++owner->count;
-        fcn_00472c70(owner, &window, &image);
+        d2_GetWindowBorderSize(owner, &window, &image);
         height = g_00f8f080[index].f16;
         if (y + height > *(int*) ((char*) owner + 0x244)) {
             *(int*) ((char*) owner + 0x244) = y + window * 2 + height;

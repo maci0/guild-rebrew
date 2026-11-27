@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-void __cdecl fcn_004f0430(int a1, int x, int a3, int a4, int a5);
-void __cdecl fcn_004f2f90(int a1, int a2, int x, int a4, int a5, int a6);
+void __cdecl gv_RequestRentGrave(int a1, int x, int a3, int a4, int a5);
+void __cdecl gv_SendMoveSlotEntry(int a1, int a2, int x, int a4, int a5, int a6);
 
 /* ADDRESS: GOLDTL 0x00490130 */
 int __cdecl ai_RunHandleGrave(int a1, char* p, char* q)
@@ -13,11 +13,11 @@ int __cdecl ai_RunHandleGrave(int a1, char* p, char* q)
 		return 0;
 	}
 	if (*(int*) (p + 0x10) == 4) {
-		fcn_004f0430(a1, targetEntity, *(int*) (p + 4), 10, *(int*) (p + 8));
+		gv_RequestRentGrave(a1, targetEntity, *(int*) (p + 4), 10, *(int*) (p + 8));
 		return 0x3e;
 	}
 	if (*(int*) (p + 0x10) == 5) {
-		fcn_004f2f90(a1, *(int*) (p + 4), targetEntity, *(int*) (q + 4), *(int*) (q + 0x10), *(int*) (p + 8));
+		gv_SendMoveSlotEntry(a1, *(int*) (p + 4), targetEntity, *(int*) (q + 4), *(int*) (q + 0x10), *(int*) (p + 8));
 		return 0x3e;
 	}
 	return 0;

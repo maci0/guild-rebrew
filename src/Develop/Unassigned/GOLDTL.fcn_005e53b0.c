@@ -50,7 +50,7 @@ int __cdecl d2_CheckActionBlocker(char *, int);
 int __cdecl io_FormatTextBuffer(char *, int, ...);
 float __cdecl gm_CalcSkillDuelScore(char *, char *, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_ShowZigeunerGroupMessage(unsigned short *, int, char **);
 void __cdecl fcn_00526120(char *, int);
@@ -144,7 +144,7 @@ void __cdecl fcn_005e53b0(void *arg)
                             selected[n++] = items[i].entity;
                         }
                     }
-                    fcn_005100f0(*(int *)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4), -cost);
+                    gm_ModifyHealth(*(int *)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4), -cost);
                     cm_RequestChangeBits(*(int *)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4), 0x1cc, 4, 8, 0);
                     he_ShowZigeunerGroupMessage((unsigned short *)p, n, selected);
                     io_FormatTextBuffer(text, 0x41b9, 0x41b2);

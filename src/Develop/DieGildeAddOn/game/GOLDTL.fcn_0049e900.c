@@ -22,7 +22,7 @@ extern unsigned short __cdecl gm_RandomMod(int);
 extern char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
 extern int __cdecl fcn_0050d6d0(char*, short*, int, int*);
-extern int __cdecl fcn_004f4830(int, int*);
+extern int __cdecl gm_GetLawEntry(int, int*);
 
 /* ADDRESS: GOLDTL 0x0049e900 */
 int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1, char* out2)
@@ -96,7 +96,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 		n = fcn_0050d6d0(e2, target, 3, rec);
 		if (n <= 0)
 			return 0;
-		fcn_004f4830(0xe, msg);
+		gm_GetLawEntry(0xe, msg);
 		for (i = 0; i < n; i++)
 			score[i + 1] = (float) (msg[6] - 2) / rec[i * 3 + 2] * (rec[i * 3 + 1] * *(float*) 0x662dbc) * rec[i * 3];
 		d = g_6628a8;
@@ -135,7 +135,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 	n = fcn_0050d6d0(e2, target, 3, rec);
 	if (n <= 0)
 		return 0;
-	fcn_004f4830(0xe, msg);
+	gm_GetLawEntry(0xe, msg);
 	for (i = 0; i < n; i++) {
 		if ((unsigned int) rec[i * 3] > *(unsigned int*) (out1 + 8))
 			score[i + 1] = (float) (msg[6] - 2) / rec[i * 3 + 2] * (rec[i * 3 + 1] * *(float*) 0x662dbc) * rec[i * 3];

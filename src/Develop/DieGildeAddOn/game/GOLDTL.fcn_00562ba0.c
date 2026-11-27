@@ -10,7 +10,7 @@ void __cdecl gm_AddTime(int* p, int a1, int a2, int a3);
 int __cdecl gm_CompareGameTime(int a0, int a1);
 int __cdecl gm_EvalSkill3PrivilegeCheck(int a0, int a1, int a2);
 int __cdecl gm_HasActiveSpecialObject(int a0, int a1);
-void __cdecl fcn_005100f0(int a0, int a1);
+void __cdecl gm_ModifyHealth(int a0, int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_PostEntityMessage(int a0, int a1, char* buf, int a3, int a4, char* text);
 int __cdecl gm_TryRecordCrime(int a0, int a1, int a2, int a3, int a4);
@@ -157,7 +157,7 @@ label_562e74:
 		}
 		v4 = gm_EvalSkill3PrivilegeCheck((int*) ep, v7, (int) v11);
 		if (gm_HasActiveSpecialObject(v7, 0x2c0)) {
-			fcn_005100f0(*(int*) (ep + 4), -1);
+			gm_ModifyHealth(*(int*) (ep + 4), -1);
 			if (*(char*) (ep + 2) == 6 || *(char*) (ep + 2) == 7) {
 				io_FormatTextBuffer(buf, 0x1012, *(unsigned short*) v7, 2);
 				he_PostEntityMessage(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
@@ -187,9 +187,9 @@ label_562e74:
 					he_PostEntityMessage(*(int*) (ep + 4), -1, buf, 0, 0x5fa, 0);
 				}
 				if (gm_HasActiveSpecialObject(v7, 0x2b4)) {
-					fcn_005100f0(*(int*) (eventBase + 0xb4), -1);
+					gm_ModifyHealth(*(int*) (eventBase + 0xb4), -1);
 				} else {
-					fcn_005100f0(*(int*) (eventBase + 0xb4), -2);
+					gm_ModifyHealth(*(int*) (eventBase + 0xb4), -2);
 				}
 			} else {
 				if (targetType == 6 || targetType == 7) {

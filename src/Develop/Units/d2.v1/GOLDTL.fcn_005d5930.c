@@ -37,7 +37,7 @@ typedef struct {
 } Rec_5d5930;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004f6470(int, int*, unsigned short);
+int __cdecl gs_CollectEvidenceForTarget(int, int*, unsigned short);
 int __cdecl fcn_004f61c0(int*, int*, int*, unsigned short);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -84,7 +84,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 		if (e == 0) {
 			return 0x60;
 		}
-		b[0] = fcn_004f6470(*(int*) (e + 4), ids, *(unsigned short*) p);
+		b[0] = gs_CollectEvidenceForTarget(*(int*) (e + 4), ids, *(unsigned short*) p);
 		if (b[0] >= gm_RandomMod(8)) {
 			Msg_5d5930 m;
 			pos14_7f4c00 pos;

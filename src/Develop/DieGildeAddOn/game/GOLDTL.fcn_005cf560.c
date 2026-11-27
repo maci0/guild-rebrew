@@ -20,7 +20,7 @@ extern char g_7f4ca0[];
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-void* __cdecl fcn_0050dc90(unsigned char*);
+void* __cdecl gm_FindBuildingOwner(unsigned char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -46,7 +46,7 @@ void __cdecl d2_OpenMeisterbriefDialog(unsigned char* obj)
 	}
 	me = &((Player*)g_7f4ca0)[g_774970];
 	t = &((Shop*)lpGebaeudePROT)[obj[0]];
-	x = fcn_0050dc90(obj);
+	x = gm_FindBuildingOwner(obj);
 	if (t->x0 == 5 || t->x0 == 9) {
 		mode = 0x40;
 	}

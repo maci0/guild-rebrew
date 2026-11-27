@@ -22,10 +22,10 @@ void __cdecl fcn_004e4730(char* name);
 void* __cdecl d3_FindSceneObject(int a, int b, int c, char* name);
 void __cdecl SelectTextureSet(int a, int b, int c, int d);
 void __cdecl d3_TransformPoint(int a, int b, int* c);
-void* __cdecl fcn_004e4a80(char* name, int* b);
+void* __cdecl cut_CreateCharacterAtPosition(char* name, int* b);
 void __cdecl ch_SetToDummy(int a, int b);
 int __cdecl gm_SelectEntityHeadSet(unsigned short a);
-void* __cdecl fcn_004e44b0(char* name, int a);
+void* __cdecl evt_StartGfxScript(char* name, int a);
 void __cdecl fcn_004e4b40(int id, int bank, char* label, int a, int b);
 void __cdecl fcn_00471af0(int dlg, int a);
 void __cdecl fcn_00471d80(int dlg, int a);
@@ -154,7 +154,7 @@ void __cdecl cut_RunAuction(int* arg)
 	auctioneer = (int) d3_FindSceneObject(0, 0x100, 0, "dummy_AUKTIONATOR");
 	if (auctioneer != 0)
 		d3_TransformPoint(auctioneer, auctioneer + 0x4c, bid);
-	auctioneer = (int) fcn_004e4a80(line, bid);
+	auctioneer = (int) cut_CreateCharacterAtPosition(line, bid);
 	if (auctioneer != 0) {
 		ch_SetToDummy(auctioneer, npc);
 		strcpy((char*) auctioneer + 8, "Auktionator");
@@ -183,15 +183,15 @@ void __cdecl cut_RunAuction(int* arg)
 			}
 		}
 		if (bidders[i] != 0) {
-			objs[i] = (int) fcn_004e4a80(temp, bid);
+			objs[i] = (int) cut_CreateCharacterAtPosition(temp, bid);
 			ch_SetToDummy(objs[i], (int) npc2);
 		} else {
 			objs[i] = 0;
 		}
 	}
-	escBehavior = (int) fcn_004e44b0(
+	escBehavior = (int) evt_StartGfxScript(
 	    "cutscenes\\auktion\\behavior_auktionator.esc", 0x6b5c60);
-	cand = (int) fcn_004e44b0("cutscenes\\auktion\\Enterfly_auktion.esc",
+	cand = (int) evt_StartGfxScript("cutscenes\\auktion\\Enterfly_auktion.esc",
 	    0x6b5c60);
 	fcn_0064d41a(temp, (char*) 0x68d3b8, label);
 	fcn_004e4b40(-7, bank_intro, temp, -1, 0);
@@ -316,7 +316,7 @@ void __cdecl cut_RunAuction(int* arg)
 		}
 	}
 	fcn_004e4b40(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 8, 500);
-	cand = (int) fcn_004e44b0("cutscenes\\auktion\\Auktion_Outro.esc",
+	cand = (int) evt_StartGfxScript("cutscenes\\auktion\\Auktion_Outro.esc",
 	    0x6b5c60);
 	cut_WaitForScript(cand);
 	d2_DestroyForm(dlg);

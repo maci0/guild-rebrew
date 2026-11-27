@@ -5,7 +5,7 @@ extern char g_7f4ca0[];
 
 void* __cdecl gm_LookupEntityRecordById(int);
 int  __cdecl gm_HasActiveSpecialObject(void*, int);
-int  __cdecl fcn_004a55c0(void*, int, int*, float, float, unsigned short*);
+int  __cdecl gm_FindEntityCandidatesInRange(void*, int, int*, float, float, unsigned short*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, int, int);
@@ -30,7 +30,7 @@ int __cdecl fcn_004b8550(void* a1)
 		return 0x400;
 	}
 	d2 = 0x600c00;
-	if (fcn_004a55c0(actor, 1, &d2, 0.0f, 100.0f, &w1) == 0) {
+	if (gm_FindEntityCandidatesInRange(actor, 1, &d2, 0.0f, 100.0f, &w1) == 0) {
 		return 0x400;
 	}
 	target = (void*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[w1]));

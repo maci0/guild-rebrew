@@ -11,7 +11,7 @@ unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_FindBuildingPrimarySlot(int);
-int __cdecl fcn_0050dc90(int);
+int __cdecl gm_FindBuildingOwner(int);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
@@ -90,7 +90,7 @@ void __cdecl he_RunGetier(char* jobState)
 	}
 	ent = fcn_00502cd0(*(int*) (rec + 0x5d), 2, 6, 0, 0x2a);
 	if (ent != 0) {
-		tmp = fcn_0050dc90(rec);
+		tmp = gm_FindBuildingOwner(rec);
 		f = (double) gm_GetBuildingTechEffect(rec, 0xb, 1) * 0.01 + g_6629c8;
 		len = (int) ((gm_RandomMod(5) + 5) * f);
 		cm_SendSellObjekt(*(int*) (ent + 2), -1, *(unsigned short*) (jobState + 0xae),

@@ -69,7 +69,7 @@ void __cdecl msx_ApplyAudioSettings(void);
 void __cdecl fcn_00520f10(void);
 void __cdecl fcn_0050d460(void);
 void __cdecl fcn_0040afb0(void);
-void __cdecl fcn_00416980(void);
+void __cdecl d3_InitSnowMipMaps(void);
 void __cdecl fcn_0047d9d0(void);
 void __cdecl fcn_004eb480(int);
 void __cdecl fcn_004ac440(void);
@@ -152,7 +152,7 @@ int __cdecl main_OpenEngine(void)
 	fcn_00520f10();
 	fcn_0050d460();
 	fcn_0040afb0();
-	fcn_00416980();
+	d3_InitSnowMipMaps();
 	fcn_0047d9d0();
 	fcn_004eb480(g_6f2468);
 	if (g_6f246c != 0) {

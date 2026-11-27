@@ -3,7 +3,7 @@
 
 int __cdecl fcn_004e6f10(int);
 int __cdecl amt_GetRoleTemplate(int, Rec18_68da68*);
-void __cdecl fcn_004f4830(int, int*);
+void __cdecl gm_GetLawEntry(int, int*);
 int __cdecl gm_MapEntityStatRange(int);
 
 /* ADDRESS: GOLDTL 0x004e7990 */
@@ -71,7 +71,7 @@ float __cdecl fcn_004e7990(int a0, int a1, unsigned int a2, int a3)
 	}
 	if (a3 != 0) {
 		amt_GetRoleTemplate(*(unsigned char*) (a1 + 0x166), &v9);
-		fcn_004f4830(2, v10);
+		gm_GetLawEntry(2, v10);
 		bonus = *(float*) ((char*) &v9 + 0x14);
 		if (v10[6] == 2) {
 			bonus = bonus * 0.75f;

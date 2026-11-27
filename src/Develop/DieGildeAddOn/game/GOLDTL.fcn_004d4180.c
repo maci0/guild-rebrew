@@ -21,36 +21,36 @@ ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cut_AssignCombatUnitOrder(char*, char*);
 
-void __cdecl fcn_004d4180(char* x)
+void __cdecl cut_AssignIdleCombatOrders(char* team)
 {
-	char* rec;
+	char* teamSlot;
 	int* base;
 	int i;
-	char* e;
-	ent2c* d;
+	char* unit;
+	ent2c* unitSlot;
 
-	rec = 0;
+	teamSlot = 0;
 	for (i = 0; i < ((unsigned char*)g_772eb4)[0x30]; i++) {
-		if (*(int*) (((unsigned char*)g_772eb4) + 0x34 + i * 4) == *(int*) (x + 4)) {
-			rec = g_9b0e20 + i * 0x35c;
+		if (*(int*) (((unsigned char*)g_772eb4) + 0x34 + i * 4) == *(int*) (team + 4)) {
+			teamSlot = g_9b0e20 + i * 0x35c;
 			break;
 		}
 	}
-	if (x == ((char*)g_772e9c))
+	if (team == ((char*)g_772e9c))
 		base = (int*) (((unsigned char*)g_772eb4) + 0xc0);
 	else
 		base = (int*) (((unsigned char*)g_772eb4) + 0x80);
 	for (i = 0; i < 16; i++) {
 		if (base[i] == -1)
 			continue;
-		e = gm_LookupEntityRecordIn32SlotTable(base[i]);
-		if (e == 0)
+		unit = gm_LookupEntityRecordIn32SlotTable(base[i]);
+		if (unit == 0)
 			continue;
-		d = gm_FindOrCreateEntitySlot(rec, e);
-		if (d->f8 == 1 || cm_GetCommandStatus(d->f8) != 0) {
-			d->f8 = -1;
-			if (d->f4 == 0 && *(int*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x218) != 1)
-				cut_AssignCombatUnitOrder(rec, e);
+		unitSlot = gm_FindOrCreateEntitySlot(teamSlot, unit);
+		if (unitSlot->f8 == 1 || cm_GetCommandStatus(unitSlot->f8) != 0) {
+			unitSlot->f8 = -1;
+			if (unitSlot->f4 == 0 && *(int*) (*(char**) (*(char**) (unit + 0x184) + 0x34) + 0x218) != 1)
+				cut_AssignCombatUnitOrder(teamSlot, unit);
 		}
 	}
 }

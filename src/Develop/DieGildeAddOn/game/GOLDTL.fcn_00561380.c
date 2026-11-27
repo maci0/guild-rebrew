@@ -35,7 +35,7 @@ int __cdecl gm_HasActiveSpecialObject(void *, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char *, int, int, int, int, int, char *);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl he_PostEntityMessage(int, int, char *, int, int, char *);
 void *__cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl cm_RequestLinkEvidence(int, int);
@@ -250,7 +250,7 @@ void __cdecl he_RunSabotage(void *action)
 			recA = (unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(r + 0x27)];
 			recB = (unsigned char*)&((ENTITY_RECORD*)0x7f4ca0)[*(unsigned short*)(p + 8)];
 			if (gm_HasActiveSpecialObject(recA, 0x2c0)) {
-				fcn_005100f0(*(int *)(recB + 4), -1);
+				gm_ModifyHealth(*(int *)(recB + 4), -1);
 				if (*(unsigned char *)(recB + 2) == 6 || *(unsigned char *)(recB + 2) == 7) {
 					io_FormatTextBuffer(text, 0x1013, *(unsigned short *)recA, r);
 					he_PostEntityMessage(*(int *)(recB + 4), -1, text, 0, 0x5fa, 0);

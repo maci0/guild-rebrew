@@ -70,7 +70,6 @@ int __cdecl fcn_00472380(void) { return 0; }
 int __cdecl fcn_00476850(void) { return 0; }
 int __cdecl fcn_00478cb0(void) { return 0; }
 int __cdecl fcn_0047d220(void) { return 0; }
-int __cdecl fcn_0047daa0(void) { return 0; }
 int __cdecl fcn_00484740(void) { return 0; }
 int __cdecl fcn_00498f40(void) { return 0; }
 int __cdecl fcn_0049a7b0(void) { return 0; }

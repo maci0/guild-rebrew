@@ -8,12 +8,12 @@ extern char g_9b0eb4[];
 extern char g_9b1210[];
 extern char g_9b156c[];
 
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 void __cdecl fcn_004e4450(int k, int flag);
 void __cdecl fcn_004e4730(char* scene);
-int __cdecl fcn_004f5740(int key, int* out);
+int __cdecl gs_CollectStraftatenByState(int key, int* out);
 char* __cdecl gm_LookupEntityRecordById(int id);
-int __cdecl fcn_004e44b0(int a1, int a2);
+int __cdecl evt_StartGfxScript(int a1, int a2);
 void __cdecl cut_WaitForScript(int a1);
 int __cdecl fcn_004e4ae0(char* name, int a2);
 int __cdecl fcn_004e4b20(int a1, int a2, char* name, int mode);
@@ -54,8 +54,8 @@ typedef struct S2d {
 	char b[0x2d];
 } S2d;
 
-int __cdecl fcn_004f56b0(int a, S2d s, int c);
-int __cdecl fcn_004f5f30(int a, int b, int* c);
+int __cdecl gs_FormatStraftatText(int a, S2d s, int c);
+int __cdecl gs_ClearStraftatenByIds(int a, int b, int* c);
 void __cdecl cut_RunTurnRound(unsigned int* a0, int a1);
 void* __cdecl memcpy(void*, const void*, unsigned int);
 
@@ -135,7 +135,7 @@ int __cdecl cut_RunProzess(int a0)
 	tbl.f[2] = 1.0f;
 	tbl.f[3] = 0.8f;
 	tbl.f[4] = 0.6f;
-	fcn_004f4830(0, rec.i);
+	gm_GetLawEntry(0, rec.i);
 	i = rec.i[6];
 	if (i < 4) {
 		if (i <= 0) {
@@ -168,7 +168,7 @@ int __cdecl cut_RunProzess(int a0)
 	msg.id[3] = *(int*) (a0 + 0x40);
 	msg.id[4] = *(int*) (a0 + 0x44);
 	msg.id[5] = *(int*) (a0 + 0x48);
-	n = fcn_004f5740(*(int*) (a0 + 0x7c), list);
+	n = gs_CollectStraftatenByState(*(int*) (a0 + 0x7c), list);
 	msg.text[1] = (char) n;
 	p34 = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
 	if (p34 == 0) {
@@ -215,12 +215,12 @@ int __cdecl cut_RunProzess(int a0)
 	sprintf(end, "%s ", (char*) gm_SelectEntityHeadSet(*(unsigned short*) p40) + 4);
 	end = str + strlen(str);
 	sprintf(end, "%s", (char*) gm_SelectEntityHeadSet(*(unsigned short*) p44) + 4);
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-create2.esc", (int) str);
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "2");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "2");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "2");
-	cut_WaitForScript(fcn_004e44b0((int) "cutscenes\\prozess\\prozess-intro.esc", (int) ""));
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-create2.esc", (int) str);
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "2");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "2");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "2");
+	cut_WaitForScript(evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-intro.esc", (int) ""));
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 	fcn_004e4450(g_68bfc0, 1);
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x1491);
@@ -234,7 +234,7 @@ int __cdecl cut_RunProzess(int a0)
 	io_AppendText(0x1492, *(unsigned short*) p34, *(unsigned short*) p38,
 		*(unsigned short*) p34);
 	cut_WaitTicks(4);
-	h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
+	h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x6811b0);
 	io_AppendText(0x1499, *(unsigned short*) p38);
@@ -281,11 +281,11 @@ int __cdecl cut_RunProzess(int a0)
 		fsum = 0.0f;
 		for (j = 0; j < n; j++) {
 			memcpy(rec.c, &g_9a3800[list[j]], 45);
-			fcn_004f4830(rec.c[0x1c] & 0xff, tbl.i);
+			gm_GetLawEntry(rec.c[0x1c] & 0xff, tbl.i);
 			if (flags[j] != -1) {
 				fsum += (float) tbl.i[3] * f;
-				h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
-				fcn_004f56b0((int) work, *(S2d*) rec.c, flags[j]);
+				h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
+				gs_FormatStraftatText((int) work, *(S2d*) rec.c, flags[j]);
 				d2_SetForm(g_68bfc0, 0);
 				io_AppendText(0x68c998);
 				io_AppendText((int) work);
@@ -302,7 +302,7 @@ int __cdecl cut_RunProzess(int a0)
 		}
 	}
 	msg.f04 = fsum;
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 	io_AppendText(0x14ba, *(unsigned short*) p38, n);
 	{
 		char ch;
@@ -316,7 +316,7 @@ int __cdecl cut_RunProzess(int a0)
 	cut_WaitTicks(1);
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x6811b0);
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-angeklagter.esc", (int) "0");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-angeklagter.esc", (int) "0");
 	fcn_004e4450(g_68bfc0, 0);
 	{
 		int id;
@@ -326,10 +326,10 @@ int __cdecl cut_RunProzess(int a0)
 		id = *(int*) (a0 + 0xc);
 		idx = g_774970;
 		if (id == *(int*) (0x7f4ca4 + idx * 540)) {
-			fcn_004f5f30(*(int*) (p38 + 4), cnt, sel);
+			gs_ClearStraftatenByIds(*(int*) (p38 + 4), cnt, sel);
 		}
 	}
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-angeklagter.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-angeklagter.esc", (int) "1");
 	{
 		int cnt2;
 		int idx;
@@ -375,10 +375,10 @@ int __cdecl cut_RunProzess(int a0)
 		}
 	}
 	cut_WaitTicks(2);
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "1");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "");
 
 	/* ---- 0x4dd976: msg.state == 1 follow-up ---- */
 	if (msg.state == 1) {
@@ -387,7 +387,7 @@ int __cdecl cut_RunProzess(int a0)
 		io_AppendText(0x6811b0);
 		io_AppendText(0x14ca, *(unsigned short*) p34, *(unsigned short*) p38, msg.pad[1]);
 		cut_WaitTicks(4);
-		h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-folter-1.esc", (int) "");
+		h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-folter-1.esc", (int) "");
 		d2_SetForm(g_68bfc0, 0);
 		io_AppendText(0x6811b0);
 		fcn_004e4450(g_68bfc0, 0);
@@ -419,10 +419,10 @@ int __cdecl cut_RunProzess(int a0)
 			io_AppendText(0x14d9);
 			cut_WaitTicks(1);
 			io_AppendText(0x6811b0);
-			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-folter-3.esc", (int) "1");
+			h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-folter-3.esc", (int) "1");
 			msg.pad[6] = 1;
 		} else {
-			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-folter-2.esc", (int) "");
+			h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-folter-2.esc", (int) "");
 			io_AppendText(0x14d8);
 			msg.pad[6] = 0;
 		}
@@ -465,7 +465,7 @@ int __cdecl cut_RunProzess(int a0)
 			pent = gm_LookupEntityRecordById(*(int*) (a0 + 0x48));
 			d2_SetForm(g_68bfc0, 0);
 			io_AppendText(0x6811b0);
-			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "0");
+			h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "0");
 			msg.state = 2;
 			fcn_004e4450(g_68bfc0, 0);
 			cut_RunTurnRound((unsigned int*) a0, (int) &msg);
@@ -482,7 +482,7 @@ int __cdecl cut_RunProzess(int a0)
 				}
 			}
 			cut_WaitForScript(h);
-			h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
+			h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-klaeger.esc", (int) "1");
 			st = *(int*) (g_9b0eb4 + i * 0x35c) & 0xf;
 			if (st < 6) {
 				if (st > 0) {
@@ -536,7 +536,7 @@ int __cdecl cut_RunProzess(int a0)
 			}
 			msg.hnd[6] = d3_CurrentContextIndex;
 			fcn_004e4730("ob_GEFAENGNIS_FOLTERKAMMER.ed3");
-			fcn_004e44b0((int) "cutscenes\\prozess\\folter-create.esc", (int) str);
+			evt_StartGfxScript((int) "cutscenes\\prozess\\folter-create.esc", (int) str);
 			fcn_004e4450(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
 			io_AppendText(0x6811b0);
@@ -553,7 +553,7 @@ int __cdecl cut_RunProzess(int a0)
 			fcn_004e4450(g_68bfc0, 0);
 			d2_SetForm(g_68bfc0, 0);
 			io_AppendText(0x6811b0);
-			h = fcn_004e44b0((int) work, (int) "");
+			h = evt_StartGfxScript((int) work, (int) "");
 			cut_WaitTicks(5);
 			fcn_004e4450(g_68bfc0, 1);
 			d2_SetForm(g_68bfc0, 0);
@@ -607,7 +607,7 @@ int __cdecl cut_RunProzess(int a0)
 			msg.f04 = msg.f04 * 0.8f;
 		}
 		cut_WaitTicks(4);
-		h = fcn_004e44b0((int) "cutscenes\\prozess\\folterexit.esc", (int) "");
+		h = evt_StartGfxScript((int) "cutscenes\\prozess\\folterexit.esc", (int) "");
 		if (h != 0) {
 			cut_WaitForScript(h);
 		}
@@ -616,15 +616,15 @@ int __cdecl cut_RunProzess(int a0)
 		}
 	}
 	/* 0x4de6e0 */
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "1");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
 	fcn_004e4450(g_68bfc0, 1);
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x6811b0);
 	if (msg.pad[6] != 0) {
 		h0 = fcn_004e4ae0("PROZESS_6_FOLTERERGEBNIS.sbf", 0);
-		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
+		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 		if (didFolter != 0) {
 			fcn_004e4b40(*(unsigned short*) p34, h0, "_PROZESS_6_FOLTERERGEBNIS", 0, 0x64);
 			io_AppendText(0x1520, *(unsigned short*) p38, 0x1521);
@@ -637,14 +637,14 @@ int __cdecl cut_RunProzess(int a0)
 	/* 0x4de7c9 */
 	hAnk = fcn_004e4ae0("PROZESS_6_ANKUENDIGUNG.sbf", 0);
 	fcn_004e4b40(*(unsigned short*) p34, hAnk, "_PROZESS_6_ANKUENDIGUNG", 0, 0);
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x6811b0);
 	io_AppendText(0x1523);
 	cut_WaitTicks(4);
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "1");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
 	fcn_004e4450(g_68bfc0, 0);
 	cut_RunTurnRound((unsigned int*) a0, (int) &msg);
 	fcn_004e4b00(hAnk);
@@ -661,7 +661,7 @@ int __cdecl cut_RunProzess(int a0)
 		}
 	}
 	hStrafe = fcn_004e4ae0("PROZESS_6_ABSTIMMUNG_ERGEBNISSE.sbf", 0);
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
 	fcn_004e4450(g_68bfc0, 1);
 	d2_SetForm(g_68bfc0, 0);
 	io_AppendText(0x6811b0);
@@ -672,12 +672,12 @@ int __cdecl cut_RunProzess(int a0)
 	fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_6_ABSTIMMUNG_ERGEBNISSE", votes, 0x64);
 	io_AppendText(acc + 0x152c);
 	cut_WaitTicks(2);
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "1");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
-	fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "1");
+	evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "1");
 	if (msg.id[3] >= 0) {
 		x74 = *(int*) (g_9b1210 + i * 0x35c);
-		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-1.esc", (int) "");
+		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-abstimmen-1.esc", (int) "");
 		d2_SetForm(g_68bfc0, 0);
 		nam = gm_LookupEntityRecordById(msg.id[3]);
 		io_AppendText(0x68112c);
@@ -688,11 +688,11 @@ int __cdecl cut_RunProzess(int a0)
 		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_6_ABSTIMMUNG_ERGEBNISSE", votes, 0x64);
 		cut_WaitTicks(2);
 		acc += *(int*) (g_9b1210 + i * 0x35c);
-		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "2");
+		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer1.esc", (int) "2");
 	}
 	if (msg.id[4] != -1) {
 		x74 = *(int*) (g_9b156c + i * 0x35c);
-		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-2.esc", (int) "");
+		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-abstimmen-2.esc", (int) "");
 		d2_SetForm(g_68bfc0, 0);
 		nam = gm_LookupEntityRecordById(msg.id[4]);
 		io_AppendText(0x68112c);
@@ -703,7 +703,7 @@ int __cdecl cut_RunProzess(int a0)
 		fcn_004e4b40(*(unsigned short*) p3c, hStrafe, "_PROZESS_6_ABSTIMMUNG_ERGEBNISSE", votes, 0x64);
 		cut_WaitTicks(2);
 		acc += *(int*) (g_9b156c + i * 0x35c);
-		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "2");
+		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-beisitzer2.esc", (int) "2");
 	}
 	/* 0x4deb1c */
 	fcn_004e4b00(hStrafe);
@@ -714,8 +714,8 @@ int __cdecl cut_RunProzess(int a0)
 		hStrafe = fcn_004e4ae0("PROZESS_7_SCHULDIG.sbf", 0);
 		h0 = fcn_004e4ae0("PROZESS_7_STRAFEN.sbf", 0);
 		msg.state = 5;
-		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
-		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
+		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
+		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-richter-reden.esc", (int) "");
 		fcn_004e4450(g_68bfc0, 0);
 		cut_RunTurnRound((unsigned int*) a0, (int) &msg);
 		st = 0;
@@ -786,7 +786,7 @@ int __cdecl cut_RunProzess(int a0)
 			((*(char*) (p38 + 9) == 1) & 1), 0x64);
 		fcn_004e4b40(*(unsigned short*) p3c, h14, "_PROZESS_8",
 			2 + ((*(char*) (p34 + 9) == 1) & 1), 0xc8);
-		fcn_004e44b0((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
+		evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-abstimmen-3.esc", (int) "");
 		fcn_004e4450(g_68bfc0, 1);
 		d2_SetForm(g_68bfc0, 0);
 		io_AppendText(0x6811b0);
@@ -823,9 +823,9 @@ int __cdecl cut_RunProzess(int a0)
 	}
 	/* 0x4df09b cleanup ladder */
 	fcn_004e48b0();
-	h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-ende.esc", (int) "");
+	h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-ende.esc", (int) "");
 	cut_WaitForScript(h);
-	h = fcn_004e44b0((int) "cutscenes\\prozess\\prozess-exit.esc", (int) "");
+	h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-exit.esc", (int) "");
 	cut_WaitForScript(h);
 	if (msg.hnd[7] != 0) {
 		msx_StopAmbientTrack(msg.hnd[7]);

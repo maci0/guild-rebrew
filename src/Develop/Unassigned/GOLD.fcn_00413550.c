@@ -1,7 +1,7 @@
-void __cdecl fcn_00453270(void*);
+void __cdecl d3_UpdateObjectLighting(void*);
 
 /* ADDRESS: GOLD 0x00413550 */
-void __cdecl fcn_00413550(char* obj, char r, char g, char b)
+void __cdecl d3_SetObjectColor(char* obj, char r, char g, char b)
 {
     char* mesh;
     char** faces;
@@ -15,7 +15,7 @@ void __cdecl fcn_00413550(char* obj, char r, char g, char b)
         return;
     if (r == 0 && g == 0 && b == 0) {
         obj[0x212] &= 0xfd;
-        fcn_00453270(obj);
+        d3_UpdateObjectLighting(obj);
         obj[0x210] |= 4;
         return;
     }

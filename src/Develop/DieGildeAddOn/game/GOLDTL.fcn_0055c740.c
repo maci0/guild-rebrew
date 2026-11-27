@@ -29,7 +29,7 @@ void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 char* __cdecl gm_FindBuildingPrimarySlot(char*);
 int __cdecl gm_LookupEntityRecordById(int);
-char* __cdecl fcn_0050dc90(char*);
+char* __cdecl gm_FindBuildingOwner(char*);
 char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl gm_RandomMod(int);
 
@@ -137,7 +137,7 @@ void __cdecl he_RunHireWorkerJob(char* ctx)
 			bank = *(unsigned short*) (ctx + 8);
 			kind = ((ENTITY_RECORD*)g_7f4ca0)[bank].entity_state;
 			if (kind == 6 || kind == 7) {
-				h = fcn_0050dc90(rec);
+				h = gm_FindBuildingOwner(rec);
 				io_FormatTextBuffer(text, 0x1bab, ver, *obj, rec);
 				if (h != 0 && (*(unsigned char*) (h + 0x1b4) & 1)) {
 					he_MessageBoxQuickjump(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (ctx + 8)].entity_id,

@@ -43,7 +43,7 @@ int __cdecl m_UnlinkAndFreeNode(char*);
 int __cdecl rt_CountRoutePoints(char*);
 void __cdecl fcn_004be360(void);
 void __cdecl fcn_004be380(void);
-void __cdecl fcn_004be3d0(int*, char*, int, int);
+void __cdecl d2_AddRoutePointMarker(int*, char*, int, int);
 int __cdecl fcn_004bea00(char*, int);
 unsigned int __cdecl fcn_004be560(char*, int, unsigned int);
 unsigned int __cdecl d2_ChooseRoutingGood(char*, int, unsigned int);
@@ -233,7 +233,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 				fcn_004be360();
 				a0 = (int*) g_772908;
 				while (a0 != 0) {
-					fcn_004be3d0(uiContext, rec, g_772908, (int) a0);
+					d2_AddRoutePointMarker(uiContext, rec, g_772908, (int) a0);
 					a0 = (int*) a0[0xf];
 				}
 				d2_SelectRadioGroup(g_6816d8, 0);

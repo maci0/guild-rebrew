@@ -13,7 +13,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x165
 
-void __cdecl fcn_004f4830(int a, Stat* st);
+void __cdecl gm_GetLawEntry(int a, Stat* st);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 #define MAXF(a, b) (((a) > (b)) ? (a) : (b))
@@ -28,7 +28,7 @@ int __cdecl ai_EvaluateLaw0x0d(Ent* e, int unused, int* out)
 	int x;
 
 	v = MAXF(MINF((3.0f - e->mood) * (*(float*) ((char*) e + 0x1c) * (1.0f / 700.0f)), 1.0f), 0.0f);
-	fcn_004f4830(0xd, &st);
+	gm_GetLawEntry(0xd, &st);
 	d = st.v[2] - st.v[1];
 	x = (int) (d * v + st.v[1]);
 	if (abs(x - st.v[6]) > 3) {

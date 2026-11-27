@@ -11,7 +11,7 @@ int __cdecl amt_FindOfficeSlotByKey(char*, void*);
 int __cdecl amt_GetRoleTemplate(int, void*);
 int __cdecl amt_CollectOfficeCandidates(int, int, void*);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004aae50(char*, int, int*, void*);
+int __cdecl ai_SelectOfficeCandidate(char*, int, int*, void*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -58,7 +58,7 @@ int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 	if (found == 0) {
 		return -1;
 	}
-	result = fcn_004aae50(a0, a1, entityIds, &ret);
+	result = ai_SelectOfficeCandidate(a0, a1, entityIds, &ret);
 	gui = fcn_00470820(0, 0, (char*) 0x68c340);
 	fcn_00471d80(gui, 1);
 	d2_SetForm(gui, 0);

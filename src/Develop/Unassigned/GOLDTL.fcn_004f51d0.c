@@ -9,49 +9,49 @@ extern char g_69037c[];
 // SIZE 0x2d
 typedef struct tag_req_2d_b {
 	char raw[0x2d];
-} req_2d_b;
+} GS_STRAFTAT_REC;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-int __cdecl fcn_004f51d0(void* dst, req_2d_b s, int b)
+int __cdecl gs_FormatStraftatTextLow(void* dst, GS_STRAFTAT_REC rec, int count)
 {
-	unsigned short w;
-	unsigned char* p;
-	int r = 1;
-	int v = (b <= r);
+	unsigned short targetId;
+	unsigned char* entity;
+	int result = 1;
+	int fmtOffset = (count <= result);
 
-	p = gm_LookupEntityRecordById(*(int*) ((char*) &s + 0x12));
-	if (p != 0) {
-		w = *(unsigned short*) p;
+	entity = gm_LookupEntityRecordById(*(int*) ((char*) &rec + 0x12));
+	if (entity != 0) {
+		targetId = *(unsigned short*) entity;
 	} else {
-		w = 0xfffe;
+		targetId = 0xfffe;
 	}
-	switch (*(int*) ((char*) &s + 0x1c) & 0xff) {
+	switch (*(int*) ((char*) &rec + 0x1c) & 0xff) {
 	case 2:
-		if (*(int*) ((char*) &s + 4) < 0x75) {
-			io_FormatTextBuffer(dst, v + 0x140a, (char*) &s + 4,
-			    *(int*) ((char*) &s + 0x1d) + 0x13f9);
+		if (*(int*) ((char*) &rec + 4) < 0x75) {
+			io_FormatTextBuffer(dst, fmtOffset + 0x140a, (char*) &rec + 4,
+			    *(int*) ((char*) &rec + 0x1d) + 0x13f9);
 		} else {
-			io_FormatTextBuffer(dst, v + 0x140a, (char*) &s + 4,
-			    *(int*) ((char*) &s + 0x1d) + 0x13fb);
+			io_FormatTextBuffer(dst, fmtOffset + 0x140a, (char*) &rec + 4,
+			    *(int*) ((char*) &rec + 0x1d) + 0x13fb);
 		}
 		break;
 	case 3:
-		io_FormatTextBuffer(dst, v + 0x140f, (char*) &s + 4);
+		io_FormatTextBuffer(dst, fmtOffset + 0x140f, (char*) &rec + 4);
 		break;
 	case 4:
-		io_FormatTextBuffer(dst, v + 0x1414, (char*) &s + 4, w);
+		io_FormatTextBuffer(dst, fmtOffset + 0x1414, (char*) &rec + 4, targetId);
 		break;
 	case 8:
-		io_FormatTextBuffer(dst, v + 0x1428, (char*) &s + 4);
+		io_FormatTextBuffer(dst, fmtOffset + 0x1428, (char*) &rec + 4);
 		break;
 	default:
 		memcpy(dst, g_69037c, 0x20);
-		r = 0;
+		result = 0;
 		break;
 	}
-	return r;
+	return result;
 }
 unsigned char _dpad_69037c[252] = {
     0x48, 0x6d, 0x2c, 0x20, 0x64, 0x61, 0x73, 0x20, 0x69, 0x73, 0x74, 0x20, 0x64, 0x6f, 0x63, 0x68,

@@ -13,26 +13,26 @@ typedef struct
 	short f11;
 	int f13;
 	char pad[9];
-} F22Msg;
+} GV_OFFICE_POOL_MSG;
 
 #pragma pack(pop)
 // SIZE 0x20
 
 int __cdecl fcn_004c6c30(void*);
 
-int __cdecl fcn_004f22e0(int a1, int a2, int a3, int a4)
+int __cdecl gv_RequestAddCandidateToOfficePool(int candidate, int building, int slot_type, int slot_index)
 {
-	F22Msg m;
+	GV_OFFICE_POOL_MSG msg;
 
-	if (a1 == 0 || a2 == 0 || a4 == -1) {
+	if (candidate == 0 || building == 0 || slot_index == -1) {
 		return -1;
 	}
-	m.f0 = 0;
-	m.f4 = *(int*) ((char*) a1 + 4);
-	m.f8 = *(int*) ((char*) a2 + 1);
-	m.fc = a3;
-	m.f10 = (char) a4;
-	m.f11 = 0;
-	m.f13 = 0;
-	return fcn_004c6c30(&m);
+	msg.f0 = 0;
+	msg.f4 = *(int*) ((char*) candidate + 4);
+	msg.f8 = *(int*) ((char*) building + 1);
+	msg.fc = slot_type;
+	msg.f10 = (char) slot_index;
+	msg.f11 = 0;
+	msg.f13 = 0;
+	return fcn_004c6c30(&msg);
 }

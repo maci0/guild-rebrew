@@ -1,4 +1,4 @@
-int __cdecl fcn_004f4830(int, void*);
+int __cdecl gm_GetLawEntry(int, void*);
 int __cdecl ai_ComputeActionScore(void*, void*, int, int, void*);
 int __cdecl fcn_004a4410(void*, void*, int, int, int, int, int);
 
@@ -14,7 +14,7 @@ int __cdecl ai_ScorePamphlete(int* firstScore, int* secondScore, int a3, int a4,
 	}
 	*firstScore = 0;
 	*secondScore = 0;
-	fcn_004f4830(3, local);
+	gm_GetLawEntry(3, local);
 	if (*(int*) (local + 0x18) != 0) {
 		return ai_ComputeActionScore(firstScore, secondScore, a3, a4, local);
 	}

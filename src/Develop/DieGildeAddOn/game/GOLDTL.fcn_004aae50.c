@@ -5,7 +5,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 
-struct info_4aae50 {
+struct OFFICE_SLOT_INFO {
 	int pad0[2];
 	unsigned char kind;
 	char pad9[15];
@@ -14,30 +14,30 @@ struct info_4aae50 {
 
 
 /* ADDRESS: GOLDTL 0x004aae50 */
-int __cdecl fcn_004aae50(int a1, unsigned short* referenceId, int* candidateIds, int* a4)
+int __cdecl ai_SelectOfficeCandidate(int officeKey, unsigned short* referenceId, int* candidateIds, int* unusedOut)
 {
 	float score[4];
-	char* ents[4];
-	struct info_4aae50 info;
+	char* candidates[4];
+	struct OFFICE_SLOT_INFO info;
 	float bonus;
 	float best;
-	char* e;
+	char* candidate;
 	int i;
 	int tie;
 	int idx;
 	int k;
 
-	*a4 = 0;
-	if (amt_FindOfficeSlotByKey(a1, &info) == 0)
+	*unusedOut = 0;
+	if (amt_FindOfficeSlotByKey(officeKey, &info) == 0)
 		return -1;
 	for (i = 0; i < 4; i++) {
-		e = gm_LookupEntityRecordById(candidateIds[i]);
-		ents[i] = e;
-		if (e != 0 && amt_GetOfficeAffinity((unsigned char*) e, info.kind, &bonus) != 0) {
-			score[i] = gm_CalcEntityFavor(*(unsigned short*) e, *referenceId, 1) + bonus;
-			if (gm_HasActiveSpecialObject(e, 0x2be) != 0)
+		candidate = gm_LookupEntityRecordById(candidateIds[i]);
+		candidates[i] = candidate;
+		if (candidate != 0 && amt_GetOfficeAffinity((unsigned char*) candidate, info.kind, &bonus) != 0) {
+			score[i] = gm_CalcEntityFavor(*(unsigned short*) candidate, *referenceId, 1) + bonus;
+			if (gm_HasActiveSpecialObject(candidate, 0x2be) != 0)
 				score[i] += 0.2f;
-			if ((*(int*) (e + 0x1cc) & 0x400000) != 0)
+			if ((*(int*) (candidate + 0x1cc) & 0x400000) != 0)
 				score[i] -= 0.2f;
 		} else {
 			score[i] = -1000.0f;
@@ -47,27 +47,27 @@ int __cdecl fcn_004aae50(int a1, unsigned short* referenceId, int* candidateIds,
 	tie = 0;
 	idx = -1;
 	for (i = 0; i < 4; i++) {
-		if (ents[i] != 0 && score[i] > best) {
+		if (candidates[i] != 0 && score[i] > best) {
 			best = score[i];
 			tie = 0;
 			idx = i;
-		} else if (ents[i] != 0 && score[i] == best) {
+		} else if (candidates[i] != 0 && score[i] == best) {
 			tie = 1;
 		}
 	}
 	if (idx < 0)
 		return -1;
 	if (tie == 0)
-		return *(int*) (ents[idx] + 4);
+		return *(int*) (candidates[idx] + 4);
 	idx = -1;
 	i = gm_RandomMod(4);
 	for (k = 4; k != 0; k--, i = (i + 1) % 4) {
-		if (score[i] == best && ents[i] != 0) {
+		if (score[i] == best && candidates[i] != 0) {
 			idx = i;
 			break;
 		}
 	}
 	if (idx < 0)
 		return -1;
-	return *(int*) (ents[idx] + 4);
+	return *(int*) (candidates[idx] + 4);
 }

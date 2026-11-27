@@ -7,8 +7,8 @@ extern int g_14ce8e0;
 
 
 int __cdecl fcn_004f39b0(int a);
-int __cdecl fcn_004f5dd0(int a);
-void __cdecl fcn_004f5e20(int a, int b);
+int __cdecl gm_SumStraftatSeverity(int a);
+void __cdecl gs_ClearTargetStraftaten(int a, int b);
 int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
@@ -31,7 +31,7 @@ int __cdecl fcn_00526120(char*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl cm_StepCommandQueue(void);
-int __cdecl fcn_0050e600(int, int);
+int __cdecl gm_GetKircheRank(int, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_ShowKircheTop5(void);
 
@@ -57,7 +57,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 	item = -1;
 	cost = 0;
 	count = fcn_004f39b0(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4));
-	kind = fcn_004f5dd0(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4));
+	kind = gm_SumStraftatSeverity(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4));
 	if (kind != 0) {
 		scale = (float) gm_WalkEntityChain(g_774970) * 0.005f;
 		factor = 1.5f;
@@ -94,7 +94,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 			cm_BeginPacketFieldDelta(rec, *(int*) (rec + 4));
 			cm_AppendPacketFieldValue(4, 1, 0x1ac, &cost);
 			cm_RequestChangeAttribute();
-			fcn_004f5e20(*(int*) (rec + 4), count);
+			gs_ClearTargetStraftaten(*(int*) (rec + 4), count);
 			if (*(unsigned short*) (churchBuilding + 0x27) != 0xffff
 				&& *(unsigned short*) (churchBuilding + 0x27) != g_774970) {
 				val = (int) (cost / log10((double) cost));
@@ -107,7 +107,7 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 			}
 			while (sel != -1 && cm_GetCommandStatus(sel) == 0)
 				cm_StepCommandQueue();
-			io_FormatTextBuffer(text, 0x1964, *(int*) (rec + 0x1ac), fcn_0050e600(g_774970, 0));
+			io_FormatTextBuffer(text, 0x1964, *(int*) (rec + 0x1ac), gm_GetKircheRank(g_774970, 0));
 			fcn_00526120(text, 0x100);
 			changed = 1;
 			g_774654 = 1;

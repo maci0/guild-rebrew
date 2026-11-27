@@ -33,7 +33,7 @@ int __cdecl amt_GetRoleTemplate(int, Rec18*);
 int __cdecl fcn_004f7120(unsigned int, void*, void*, void*, void*);
 
 /* ADDRESS: GOLDTL 0x004ab1a0 */
-unsigned int __cdecl fcn_004ab1a0(int* subject, Msg* firstMessage, Msg* secondMessage)
+unsigned int __cdecl ai_FindDunkleEckeStraftat(int* subject, Msg* firstMessage, Msg* secondMessage)
 {
 	Rec18 rec;
 	int found[16];

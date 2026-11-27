@@ -9,7 +9,7 @@ typedef struct Node {
 /* SIZE 0xb4 */
 
 void* __cdecl gm_LookupEntityRecordById(int a);
-void __cdecl fcn_005100f0(int a, int b);
+void __cdecl gm_ModifyHealth(int a, int b);
 void __cdecl gm_AddTime(char* p, int a, int b, int c);
 void __cdecl he_FreeAction(Node* n);
 
@@ -38,13 +38,13 @@ void __cdecl he_UpdateEvent09e(Node* o)
 	}
 	h = *(int*) ((char*) a + 0x194);
 	if (h != 0) {
-		fcn_005100f0(*(int*) ((char*) a + 4), -h);
+		gm_ModifyHealth(*(int*) ((char*) a + 4), -h);
 		m = h / 2;
 		if (m <= 2) {
 			m = 2;
 		}
 		if (b != 0) {
-			fcn_005100f0(*(int*) ((char*) b + 4), m);
+			gm_ModifyHealth(*(int*) ((char*) b + 4), m);
 		}
 	}
 	if (o->f70 < 2) {

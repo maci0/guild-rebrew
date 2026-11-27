@@ -13,7 +13,7 @@ void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl he_FreeAction(char*);
-char* __cdecl fcn_0050dc90(int);
+char* __cdecl gm_FindBuildingOwner(int);
 char* __cdecl he_RegisterApEvent(int, char*, int, int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 void __cdecl cm_SendCopyEntityData(int);
@@ -76,7 +76,7 @@ void __cdecl he_RunEntfuehrungHostage(char* eventTrack)
 			return;
 		}
 
-		pl = fcn_0050dc90((int) rec);
+		pl = gm_FindBuildingOwner((int) rec);
 		if ((*(unsigned char*) (eventTrack + 0x78) & 2) == 0) {
 			return;
 		}

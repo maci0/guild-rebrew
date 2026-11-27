@@ -5,7 +5,7 @@ int  __cdecl gm_RunIntimidationAction(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
-int __cdecl fcn_004f76d0(void* entity, void* command)
+int __cdecl gm_HandleIntimidationPrivilege(void* entity, void* command)
 {
 	int kind;
 

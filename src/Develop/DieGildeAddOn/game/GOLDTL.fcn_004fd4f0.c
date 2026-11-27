@@ -35,7 +35,7 @@ extern char g_773d75;
 
 void __cdecl gm_FindRichestEntity(int* a, int* b);
 float __cdecl gm_GetEntitySkill(fcn_004fd4f0_Ent* e, int k);
-int __cdecl fcn_004f4830(int idx, fcn_004fd4f0_Stat* dst);
+int __cdecl gm_GetLawEntry(int idx, fcn_004fd4f0_Stat* dst);
 int __cdecl gm_GetBuildingTechEffect(char* a, int b, int c);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_WalkEntityChain(unsigned short id);
@@ -69,7 +69,7 @@ int __cdecl fcn_004fd4f0(char* building, fcn_004fd4f0_Out* out)
 		return 0;
 	me = &g_7f4ca0[*(unsigned short*) (building + 0x27)];
 	gm_GetEntitySkill(me, 4);
-	fcn_004f4830(2, &st);
+	gm_GetLawEntry(2, &st);
 	mult = gm_GetBuildingTechEffect(building, 9, 1) * 0.0125f + 1.0f;
 	for (i = 0; i < 768; i++) {
 		ent = &g_7f4ca0[i];

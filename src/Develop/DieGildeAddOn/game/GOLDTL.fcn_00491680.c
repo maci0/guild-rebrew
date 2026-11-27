@@ -3,7 +3,7 @@ typedef struct Stat {
 } Stat;
 
 int __cdecl gm_MapEntityStatRange(int raw_idx);
-void __cdecl fcn_004f4830(int idx, Stat* st);
+void __cdecl gm_GetLawEntry(int idx, Stat* st);
 
 /* ADDRESS: GOLDTL 0x00491680 */
 int __cdecl ai_EvaluateLaw0x12(char* entity, int unused, int* out)
@@ -23,7 +23,7 @@ int __cdecl ai_EvaluateLaw0x12(char* entity, int unused, int* out)
 	} else if (job == 7) {
 		w = w * 0.9f;
 	}
-	fcn_004f4830(0x12, &st);
+	gm_GetLawEntry(0x12, &st);
 	if (w < 0.5f && st.v[6] == 0) {
 		if (!(y > z)) {
 			return 0;

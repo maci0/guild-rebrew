@@ -3,7 +3,7 @@
 
 extern float g_6628a8;
 
-int __cdecl fcn_0050ddf0(int v, int mode)
+int __cdecl gm_CalcEscortCost(int v, int mode)
 {
 	int r;
 

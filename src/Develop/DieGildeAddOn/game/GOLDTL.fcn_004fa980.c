@@ -15,7 +15,7 @@ typedef CRIME_GRID_CELL Cell;
 
 extern CRIME_GRID_CELL g_99ef80[9][8];
 
-void __cdecl fcn_004f4830(int kind, Offer* o);
+void __cdecl gm_GetLawEntry(int kind, Offer* o);
 
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl gm_PosToStatsGrid(char* pos, int* x, int* y);
@@ -31,7 +31,7 @@ void __cdecl cm_SubtractCrimeGrid(int key, unsigned char kind)
 	int i;
 	int j;
 
-	fcn_004f4830(kind, &offer);
+	gm_GetLawEntry(kind, &offer);
 	gm_ResolveEntityById((void**) (&entity), 0, 0, key);
 	x = gm_RandomMod(8);
 	y = gm_RandomMod(8);

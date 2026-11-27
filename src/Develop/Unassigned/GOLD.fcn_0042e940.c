@@ -4,7 +4,7 @@
 int (__stdcall* f1_5eb288)(int);
 int (__stdcall* f2_5eb274)(int);
 
-void __cdecl fcn_0042e940(void)
+void __cdecl tb_StopTimer(void)
 {
 	int e;
 	e = *(int*) 0x6333c8;

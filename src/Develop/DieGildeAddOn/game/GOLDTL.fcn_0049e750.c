@@ -13,7 +13,7 @@ typedef struct Blk24 {
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int job);
 int __cdecl ai_FindDunkleEckeTarget(unsigned short* e, Blk24* o1, Blk24* o2);
-int __cdecl fcn_004ab1a0(unsigned short* e, Blk24* o1, Blk24* o2);
+int __cdecl ai_FindDunkleEckeStraftat(unsigned short* e, Blk24* o1, Blk24* o2);
 
 int __cdecl ai_StartDunkleEcke(int a1, unsigned short* e, int a3, Blk24* o1, Blk24* o2)
 {
@@ -35,7 +35,7 @@ int __cdecl ai_StartDunkleEcke(int a1, unsigned short* e, int a3, Blk24* o1, Blk
 				return 0x32;
 			}
 		}
-		if (fcn_004ab1a0(e, &b1, &b2) != 0) {
+		if (ai_FindDunkleEckeStraftat(e, &b1, &b2) != 0) {
 			*o1 = b1;
 			*o2 = b2;
 			return 0x32;

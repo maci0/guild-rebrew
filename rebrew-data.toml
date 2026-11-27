@@ -23415,10 +23415,10 @@ measured_at = "2026-11-03T20:26:48+00:00"
 type = "char *"
 name = "gm_CityEntity"
 section = ".bss"
-file = "src/Develop/DieGildeAddOn/command/command_c/GOLDTL.cm_ChkJoinLeaveElection.c"
+file = "src/Develop/DieGildeAddOn/command/command.c"
 note = "Type conflict canonicalized: majority .c declaration 'char *' (52 of 62 .c files)."
-updated_by = "rename"
-updated_at = "2026-11-18T23:14:37+00:00"
+updated_by = "rehome"
+updated_at = "2026-11-27T00:40:08+00:00"
 
 ["GOLDTL.0x00773da8".verification]
 status = "DISPLACED"

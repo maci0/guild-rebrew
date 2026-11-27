@@ -95,9 +95,9 @@ char* __cdecl gm_NextEntityQueryMatch(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl plt_FindPlantInfo(int);
 void* __cdecl gm_FindCityItemHolder(int);
-void __cdecl fcn_004849b0(char*, char*, char*);
+void __cdecl ai_CollectBuildingGoodsPlan(char*, char*, char*);
 int __cdecl ai_CanProduceGood(char*, int*, int);
-void __cdecl fcn_004868d0(char*, int*);
+void __cdecl ai_PlanGoodIngredients(char*, int*);
 void __cdecl ai_ManageMeisterWorkers(char*);
 void __cdecl ai_BuyStallGoods(char*);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(char*, char*, int);
@@ -116,13 +116,13 @@ int __cdecl hp_PickWeightedProdItem(int);
 int __cdecl plt_CheckZoneAvailability(int, int, int, int);
 int __cdecl gm_RandomMod(int);
 /* ADDRESS: GOLDTL 0x0047f6b0 */
-int __cdecl fcn_0047f6b0(char* a)
+int __cdecl ai_RunResourceMaster(char* meister)
 {
 	Msg st;
-	char* t1;
+	char* prod_slot;
 	int* p2;
 	int i;
-	char* t3;
+	char* store_slot;
 	int t;
 	int flag;
 	char* h;
@@ -130,21 +130,21 @@ int __cdecl fcn_0047f6b0(char* a)
 	int j;
 	int n;
 	int v;
-	char* t2;
+	char* craft_slot;
 
-	t1 = fcn_00502cd0(*(int*) (*(char**) (a + 0x16c) + 0x5d), 2, 6, 0, 0xff);
-	if (t1 == 0) {
+	prod_slot = fcn_00502cd0(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0xff);
+	if (prod_slot == 0) {
 		return 0;
 	}
-	t2 = fcn_00502cd0(*(int*) (*(char**) (a + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
-	if (t2 == 0) {
+	craft_slot = fcn_00502cd0(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 2, 6, 0, 0x2a);
+	if (craft_slot == 0) {
 		return 0;
 	}
-	t3 = fcn_00502cd0(*(int*) (*(char**) (a + 0x16c) + 0x5d), 1, 0, 0xfe);
-	if (t3 == 0) {
+	store_slot = fcn_00502cd0(*(int*) (*(char**) (meister + 0x16c) + 0x5d), 1, 0, 0xfe);
+	if (store_slot == 0) {
 		return 0;
 	}
-	fcn_004849b0(a, t1, t2);
+	ai_CollectBuildingGoodsPlan(meister, prod_slot, craft_slot);
 
 	if (g_100b0ac > 0) {
 		p2 = (int*) &g_100d0c0[0].building_indices[0];
@@ -166,25 +166,25 @@ int __cdecl fcn_0047f6b0(char* a)
 		}
 	}
 
-	ai_ManageMeisterWorkers(a);
-	gm_TryAutoUpgradeBuildingSlots(t2, a, 0xa);
-	ai_RequestAusbauUpgrade(t2, a, 0x19);
-	ai_BuyStallGoods(a);
-	if ((*(unsigned char*) (a + 0x1c8) & 0x10) == 0
-	    && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (a + 0x16c))].category != 0xb) {
-		q = fcn_00502cd0(*(int*) (t1 + 0x14), 1, 4, 0x17);
+	ai_ManageMeisterWorkers(meister);
+	gm_TryAutoUpgradeBuildingSlots(craft_slot, meister, 0xa);
+	ai_RequestAusbauUpgrade(craft_slot, meister, 0x19);
+	ai_BuyStallGoods(meister);
+	if ((*(unsigned char*) (meister + 0x1c8) & 0x10) == 0
+	    && ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (meister + 0x16c))].category != 0xb) {
+		q = fcn_00502cd0(*(int*) (prod_slot + 0x14), 1, 4, 0x17);
 		if (q != 0) {
 			while (*(int*) (q + 0xe) != 1) {
 				q = gm_NextEntityQueryMatch();
 				if (q == 0) {
-					*(int*) (a + 0x1c8) |= 0x10;
+					*(int*) (meister + 0x1c8) |= 0x10;
 					goto done_m;
 				}
 			}
 			{
 				char m[0xf8];
 				memset(m, 0, sizeof(m));
-				h = *(char**) (a + 0x16c);
+				h = *(char**) (meister + 0x16c);
 				m[4] = 9;
 				*(int*) (m + 8) = *(int*) (g_7f4ca4 +
 				                           *(unsigned short*) (h + 0x27) * 0x21c);
@@ -197,30 +197,30 @@ int __cdecl fcn_0047f6b0(char* a)
 				*(short*) (m + 0x34) = g_7f4c0c;
 				m[0x36] = 1;
 				*(int*) (m + 0x58) = *(int*) (h + 1);
-				*(int*) (m + 0x5c) = *(int*) (t1 + 2);
-				*(int*) (m + 0x60) = *(int*) (t3 + 2);
+				*(int*) (m + 0x5c) = *(int*) (prod_slot + 2);
+				*(int*) (m + 0x60) = *(int*) (store_slot + 2);
 				cm_SendCopyEntityData(m);
 			}
 		}
-		*(int*) (a + 0x1c8) |= 0x10;
+		*(int*) (meister + 0x1c8) |= 0x10;
 done_m:
 		;
 	} else {
-		q = t1;
+		q = prod_slot;
 	}
 
 	flag = 0;
 	{
 		char* s;
-		s = he_StartHandlungSearch(2, 0, 9, 3, *(int*) (*(char**) (a + 0x16c) + 1));
+		s = he_StartHandlungSearch(2, 0, 9, 3, *(int*) (*(char**) (meister + 0x16c) + 1));
 		if (s != 0) {
-			if (*(int*) (a + 0x17c) != (int) s) {
-				he_AssignActionSlot(*(char**) (a + 0x16c), 0, *(unsigned short*) a, (int) s);
+			if (*(int*) (meister + 0x17c) != (int) s) {
+				he_AssignActionSlot(*(char**) (meister + 0x16c), 0, *(unsigned short*) meister, (int) s);
 			}
 			flag = 1;
 		}
 	}
-	h = *(char**) (a + 0x16c);
+	h = *(char**) (meister + 0x16c);
 	if (g_7f4ca0[*(unsigned short*) (h + 0x27)].f2 == 6) {
 		v = hp_PickWeightedProdItem((int) h);
 		if (q != 0) {
@@ -234,10 +234,10 @@ done_m:
 	goto scan;
 
 found:
-	if ((int) *(unsigned char*) (t2 + 0x1c) < g_100d0c0[i].min_1) {
+	if ((int) *(unsigned char*) (craft_slot + 0x1c) < g_100d0c0[i].min_1) {
 		goto scan;
 	}
-	if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].min_2) {
+	if ((int) *(unsigned char*) (craft_slot + 0x1d) < g_100d0c0[i].min_2) {
 		goto scan;
 	}
 	if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
@@ -252,7 +252,7 @@ found:
 		goto scan;
 	}
 	if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
-		q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].goods_id);
+		q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, g_100d0c0[i].goods_id);
 		if (q == 0) {
 			goto scan;
 		}
@@ -260,12 +260,12 @@ found:
 			goto scan;
 		}
 		g_100d0c0[i].flags |= 8;
-		fcn_004868d0(a, (int*) &g_100d0c0[i]);
-	} else if (ai_CanProduceGood(a, (int*) &g_100d0c0[i], 1)) {
+		ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
+	} else if (ai_CanProduceGood(meister, (int*) &g_100d0c0[i], 1)) {
 		g_100d0c0[i].flags |= 8;
-		fcn_004868d0(a, (int*) &g_100d0c0[i]);
-	} else if (ai_CanProduceGood(a, (int*) &g_100d0c0[i], 0)) {
-		fcn_004868d0(a, (int*) &g_100d0c0[i]);
+		ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
+	} else if (ai_CanProduceGood(meister, (int*) &g_100d0c0[i], 0)) {
+		ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
 	} else {
 		goto scan;
 	}
@@ -276,10 +276,10 @@ scan:
 		if (g_100d0c0[i].flags & 4) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (t2 + 0x1c) < g_100d0c0[i].min_1) {
+		if ((int) *(unsigned char*) (craft_slot + 0x1c) < g_100d0c0[i].min_1) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].min_2) {
+		if ((int) *(unsigned char*) (craft_slot + 0x1d) < g_100d0c0[i].min_2) {
 			continue;
 		}
 		if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
@@ -294,7 +294,7 @@ scan:
 			continue;
 		}
 		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
-			q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].goods_id);
+			q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, g_100d0c0[i].goods_id);
 			if (q == 0) {
 				continue;
 			}
@@ -302,11 +302,11 @@ scan:
 				continue;
 			}
 			g_100d0c0[i].flags |= 8;
-			fcn_004868d0(a, (int*) &g_100d0c0[i]);
+			ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
 			goto after;
-		} else if (ai_CanProduceGood(a, (int*) &g_100d0c0[i], 1)) {
+		} else if (ai_CanProduceGood(meister, (int*) &g_100d0c0[i], 1)) {
 			g_100d0c0[i].flags |= 8;
-			fcn_004868d0(a, (int*) &g_100d0c0[i]);
+			ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
 			goto after;
 		}
 	}
@@ -319,10 +319,10 @@ after:
 		if (g_100d0c0[i].flags & 4) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (t2 + 0x1c) < g_100d0c0[i].min_1) {
+		if ((int) *(unsigned char*) (craft_slot + 0x1c) < g_100d0c0[i].min_1) {
 			continue;
 		}
-		if ((int) *(unsigned char*) (t2 + 0x1d) < g_100d0c0[i].min_2) {
+		if ((int) *(unsigned char*) (craft_slot + 0x1d) < g_100d0c0[i].min_2) {
 			continue;
 		}
 		if (g_100d0c0[i].unk_40 < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
@@ -340,8 +340,8 @@ after:
 			g_100d0c0[i].flags |= 0x10;
 			break;
 		}
-		if (ai_CanProduceGood(a, (int*) &g_100d0c0[i], 0)) {
-			fcn_004868d0(a, (int*) &g_100d0c0[i]);
+		if (ai_CanProduceGood(meister, (int*) &g_100d0c0[i], 0)) {
+			ai_PlanGoodIngredients(meister, (int*) &g_100d0c0[i]);
 			break;
 		}
 	}
@@ -351,10 +351,10 @@ after:
 			continue;
 		}
 		if (((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].kind == 0x17) {
-			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (a + 0x16c))].category == 0xb) {
+			if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (meister + 0x16c))].category == 0xb) {
 				g_100d0c0[i].flags |= 0x10;
 			} else {
-				q = fcn_00502cd0(*(int*) (t3 + 0x14), 1, 0, g_100d0c0[i].goods_id);
+				q = fcn_00502cd0(*(int*) (store_slot + 0x14), 1, 0, g_100d0c0[i].goods_id);
 				if (q == 0
 				    || *(int*) (q + 0xe) < (int) ((OBJECT_PROTOTYPE*) lpObjektePROT)[g_100d0c0[i].goods_id].value_036) {
 					g_100d0c0[i].flags =
@@ -371,25 +371,25 @@ after:
 		}
 	}
 
-	ai_CancelBlockedActions(a, 4);
-	ai_CancelBlockedActions(a, 8);
-	ai_CancelBlockedActions(a, 3);
+	ai_CancelBlockedActions(meister, 4);
+	ai_CancelBlockedActions(meister, 8);
+	ai_CancelBlockedActions(meister, 3);
 
 	st.avail = 0;
 	for (j = 0; j < 0x300; j++) {
 		if (g_7f4ca0[j].f8 > 0 && g_7f4ca0[j].id != 0xffff
 		    && g_7f4ca0[j].f2 != 0xa
-		    && g_7f4ca0[j].f16c == *(int*) (a + 0x16c)
+		    && g_7f4ca0[j].f16c == *(int*) (meister + 0x16c)
 		    && g_7f4ca0[j].f165 != 0
 		    && g_7f4ca0[j].f184 != 0
-		    && *(int*) (g_7f4ca0[j].f184 + 0x2c) == *(int*) (*(char**) (a + 0x16c) + 1)
+		    && *(int*) (g_7f4ca0[j].f184 + 0x2c) == *(int*) (*(char**) (meister + 0x16c) + 1)
 		    && (g_7f4ca0[j].host == 0 || *(unsigned char*) g_7f4ca0[j].host != 0x28)
-		    && !(flag != 0 && (char*) a == (char*) &g_7f4ca0[j])) {
-			he_AssignActionSlot(*(char**) (a + 0x16c), 0, g_7f4ca0[j].id, 0);
+		    && !(flag != 0 && (char*) meister == (char*) &g_7f4ca0[j])) {
+			he_AssignActionSlot(*(char**) (meister + 0x16c), 0, g_7f4ca0[j].id, 0);
 			st.avail++;
 		}
 	}
-	if (g_100dc20 == *(int*) (a + 0x16c)) {
+	if (g_100dc20 == *(int*) (meister + 0x16c)) {
 		g_100dc34 = st.avail;
 	}
 	st.want = 0;
@@ -402,7 +402,7 @@ after:
 				st.want++;
 			}
 			if (*f & 0x10) {
-				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (a + 0x16c))].category != 0xb) {
+				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (meister + 0x16c))].category != 0xb) {
 					st.want++;
 				}
 			}
@@ -413,32 +413,32 @@ after:
 		st.want = st.avail;
 	}
 	if (st.avail == 0 || st.want == 0) {
-		ai_MeisterCollectTrans(a);
-		ai_MeisterTrade(a, t2);
+		ai_MeisterCollectTrans(meister);
+		ai_MeisterTrade(meister, craft_slot);
 		return 0;
 	}
 
-	st.p0c = t2;
-	st.p10 = t3;
-	st.self = a;
+	st.p0c = craft_slot;
+	st.p10 = store_slot;
+	st.self = meister;
 	st.total = 0;
 	st.sent = 0;
-	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (a + 0x16c))].category != 0xb) {
+	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**) (meister + 0x16c))].category != 0xb) {
 		goto ltail;
 	}
 	if ((unsigned short) g_7f4c04 % 2 == 0) {
-		*(int*) (a + 0x1b4) &= ~0x20;
+		*(int*) (meister + 0x1b4) &= ~0x20;
 		goto ltail;
 	}
-	if ((*(int*) (a + 0x1b4) & 0x20) != 0) {
+	if ((*(int*) (meister + 0x1b4) & 0x20) != 0) {
 		goto ltail;
 	}
-	v = init_AllocateGebaeudeSceneSlot(*(char**) (a + 0x16c));
+	v = init_AllocateGebaeudeSceneSlot(*(char**) (meister + 0x16c));
 	p2 = *(char**) (0x104336c + v * 0x3dc);
 	if (p2 == 0) {
 		return 0;
 	}
-	n = *(int*) (*(char**) (a + 0x16c) + 0x71);
+	n = *(int*) (*(char**) (meister + 0x16c) + 0x71);
 	{
 		int ch;
 		char* g;
@@ -469,13 +469,13 @@ after:
 				if (plt_CheckZoneAvailability(n, j, i, *(unsigned char*) (g + 0x42)) == 0) {
 					continue;
 				}
-				cm_SendChainRecordLookup(*(int*) (*(char**) (a + 0x16c) + 1), j, i, *(unsigned short*) g, 0, -1);
+				cm_SendChainRecordLookup(*(int*) (*(char**) (meister + 0x16c) + 1), j, i, *(unsigned short*) g, 0, -1);
 				v++;
 			}
 		}
 	}
 lflag:
-	*(int*) (a + 0x1b4) |= 0x20;
+	*(int*) (meister + 0x1b4) |= 0x20;
 
 ltail:
 	{
@@ -484,7 +484,7 @@ ltail:
 		rec = (char*) &g_100d0c0[0];
 		for (i = 0; i < g_100b0ac; i++) {
 			if (((PRODUCTION_GOODS_RECORD*) rec)->flags & 0x10) {
-				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].category != 0xb) {
+				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**)(meister + 0x16c))].category != 0xb) {
 					st.kind = 8;
 					st.rec = rec;
 					ai_DispatchMeisterAction((int*) &st);
@@ -493,10 +493,10 @@ ltail:
 			if (((PRODUCTION_GOODS_RECORD*) rec)->flags & 8) {
 					if (((OBJECT_PROTOTYPE*) lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) rec)->goods_id].kind == 0x17) {
 						st.rec = rec;
-						if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**)(a + 0x16c))].category == 0xb) {
+						if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) (*(char**)(meister + 0x16c))].category == 0xb) {
 							st.kind = 0x28;
 							ai_DispatchMeisterAction((int*) &st);
-							if (g_100dc20 == *(int*)(a + 0x16c) && *(int*) 0x100dc3c < 4) {
+							if (g_100dc20 == *(int*)(meister + 0x16c) && *(int*) 0x100dc3c < 4) {
 								*(PRODUCTION_GOODS_RECORD*) (0x100ddc0 + *(int*) 0x100dc3c * 0x58) =
 								    *(PRODUCTION_GOODS_RECORD*) st.rec;
 								*(int*) 0x100dc3c = *(int*) 0x100dc3c + 1;
@@ -510,7 +510,7 @@ ltail:
 						st.rec = rec;
 					}
 					ai_DispatchMeisterAction((int*) &st);
-					if (g_100dc20 == *(int*)(a + 0x16c) && *(int*) 0x100dc3c < 4) {
+					if (g_100dc20 == *(int*)(meister + 0x16c) && *(int*) 0x100dc3c < 4) {
 						*(PRODUCTION_GOODS_RECORD*) (0x100ddc0 + *(int*) 0x100dc3c * 0x58) =
 						    *(PRODUCTION_GOODS_RECORD*) st.rec;
 						*(int*) 0x100dc3c = *(int*) 0x100dc3c + 1;
@@ -521,8 +521,8 @@ next_rec:
 		}
 	}
 
-	ai_RequestProductionGoods(t2);
-	ai_MeisterCollectTrans(a);
-	ai_MeisterTrade(a, t2);
+	ai_RequestProductionGoods(craft_slot);
+	ai_MeisterCollectTrans(meister);
+	ai_MeisterTrade(meister, craft_slot);
 	return 0;
 }

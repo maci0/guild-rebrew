@@ -12,7 +12,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 /* ADDRESS: GOLDTL 0x0048f710 */
-int __cdecl fcn_0048f710(char* a1, char* e, char* r, char* out)
+int __cdecl ai_PlanGraveyardAction0x90(char* actor, char* building, char* req, char* out)
 {
 	int w;
 	int h;
@@ -21,22 +21,22 @@ int __cdecl fcn_0048f710(char* a1, char* e, char* r, char* out)
 
 	w = gm_RandomMod(3);
 	h = gm_RandomMod(3);
-	*(int*) (r + 0x10) = 1;
-	*(int*) (r + 0xc) = *(int*) (e + 1);
-	if ((unsigned int) ((h + 2) * (w + 2)) > *(unsigned int*) (a1 + 0x194)) {
+	*(int*) (req + 0x10) = 1;
+	*(int*) (req + 0xc) = *(int*) (building + 1);
+	if ((unsigned int) ((h + 2) * (w + 2)) > *(unsigned int*) (actor + 0x194)) {
 		return 0;
 	}
-	if (!fcn_00502cd0(*(int*) (e + 0x5d), 2, 0, 0x211, 6)) {
+	if (!fcn_00502cd0(*(int*) (building + 0x5d), 2, 0, 0x211, 6)) {
 		return 0;
 	}
-	if (he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (e + 1))) {
+	if (he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (building + 1))) {
 		return 0;
 	}
 	found = -1;
 	f.mask = 0xa07c43b4;
 	f.b = 1;
 	if (g_77261c == 0 || (ai_FindEntityInFavorRange(g_77261c, 4, f, 0, 100.0f, &found), found == -1)) {
-		if (!ai_FindEntityInFavorRange(a1, 6, f, 0, (float) gm_RandomMod(0x20) + 19.0f, &found)) {
+		if (!ai_FindEntityInFavorRange(actor, 6, f, 0, (float) gm_RandomMod(0x20) + 19.0f, &found)) {
 			return 0;
 		}
 	}

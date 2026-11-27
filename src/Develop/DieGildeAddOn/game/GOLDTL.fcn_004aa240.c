@@ -14,8 +14,8 @@ extern void *__cdecl he_fn_Handlung(void);
 extern void *__cdecl gm_LookupEntityRecordById(int a);
 extern int __cdecl ai_PreparePrivBeleidigung(int a0, int obj, void *rec, char *out, int a4);
 extern int __cdecl ai_PreparePriv0x03(int a0, int obj, void *rec, char *out, int a4);
-extern int __cdecl fcn_004a9470(int a0, int obj, void *rec, char *out, int a4);
-extern int __cdecl fcn_004a9540(int a0, int obj, void *rec, char *out, int a4);
+extern int __cdecl ai_PreparePrivErpressung(int a0, int obj, void *rec, char *out, int a4);
+extern int __cdecl ai_PreparePrivFurchtEinfloessen(int a0, int obj, void *rec, char *out, int a4);
 extern int __cdecl ai_PreparePrivWerbung(int a0, int obj, void *rec, char *out, int a4);
 
 /* ADDRESS: GOLDTL 0x004aa240 */
@@ -112,9 +112,9 @@ unsigned int __cdecl ai_SelectPrivTarget(int unused0, int entity, int unused2, c
     case 3:
         return ai_PreparePriv0x03(unused0, entity, &rec, request, extraOut);
     case 4:
-        return fcn_004a9470(unused0, entity, &rec, request, extraOut);
+        return ai_PreparePrivErpressung(unused0, entity, &rec, request, extraOut);
     case 7:
-        return fcn_004a9540(unused0, entity, &rec, request, extraOut);
+        return ai_PreparePrivFurchtEinfloessen(unused0, entity, &rec, request, extraOut);
     case 8:
         return ai_PreparePrivWerbung(unused0, entity, &rec, request, extraOut);
     }

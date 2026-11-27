@@ -20,7 +20,7 @@ extern char s_6a9748[];
 extern char s_6a9714[];
 extern char s_6a96d8[];
 
-int __cdecl fcn_004f3e60(int, int*);
+int __cdecl gv_CanHireGraveyardWorker(int, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_00470820(int, int, int);
@@ -54,7 +54,7 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 	char* p;
 
 	result = 0;
-	status = fcn_004f3e60(a1, &info);
+	status = gv_CanHireGraveyardWorker(a1, &info);
 	if (status != 1) {
 		if (status == 0) {
 			io_FormatTextBuffer(buf, 0x4135, info, 0x229, a1);

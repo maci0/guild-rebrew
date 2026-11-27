@@ -13,26 +13,26 @@ typedef struct
 	short f11;
 	int f13;
 	char pad[9];
-} F2dMsg;
+} GV_PROGRESS_MSG;
 
 #pragma pack(pop)
 // SIZE 0x20
 
 int __cdecl fcn_004c6c30(void*);
 
-int __cdecl fcn_004f2d30(int a1, int a2, int a3, int a4)
+int __cdecl gv_RequestUpdateProductionProgress(int building, int slot_type, int slot_index, int delta)
 {
-	F2dMsg m;
+	GV_PROGRESS_MSG msg;
 
-	if (a1 == 0 || a3 == -1) {
+	if (building == 0 || slot_index == -1) {
 		return -1;
 	}
-	m.f0 = 5;
-	m.f4 = -1;
-	m.f8 = *(int*) ((char*) a1 + 1);
-	m.fc = a2;
-	m.f10 = (char) a3;
-	m.f11 = 0;
-	m.f13 = a4;
-	return fcn_004c6c30(&m);
+	msg.f0 = 5;
+	msg.f4 = -1;
+	msg.f8 = *(int*) ((char*) building + 1);
+	msg.fc = slot_type;
+	msg.f10 = (char) slot_index;
+	msg.f11 = 0;
+	msg.f13 = delta;
+	return fcn_004c6c30(&msg);
 }

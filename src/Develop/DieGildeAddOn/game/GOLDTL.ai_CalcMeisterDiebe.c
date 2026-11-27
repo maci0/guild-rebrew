@@ -46,14 +46,14 @@ int __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_ResolveEntityById(int, int*, int, int);
 void __cdecl ai_CollectGoodsResources(int, int);
 void __cdecl ai_PlanMeisterSupplies(int, int, int);
-void __cdecl fcn_00489010(int, int);
+void __cdecl ai_ArmMeisterWorkers(int, int);
 void __cdecl fcn_00489250(int);
 void __cdecl fcn_00489a70(int, int);
 void __cdecl ai_ManageMeisterWorkers(int);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(int, int, int);
 void __cdecl ai_RequestAusbauUpgrade(int, int, int);
 void __cdecl ai_BuyStallGoods(int);
-void __cdecl fcn_004888a0(int);
+void __cdecl ai_FlagIdleWorkersForRecovery(int);
 void __cdecl ai_DispatchWorkerRecovery(int);
 void __cdecl ai_CalcAngriff(int, int);
 int __cdecl gm_SearchTable67(int);
@@ -122,7 +122,7 @@ void __cdecl ai_CalcMeisterDiebe(unsigned char* rec)
 	ai_ResourceCount = 0;
 	ai_CollectGoodsResources((int) rec, (int) handle);
 	ai_PlanMeisterSupplies((int) rec, (int) handle, *(int*) (*(int*) (rec + 0x16c) + 0x39));
-	fcn_00489010((int) rec, (int) handle);
+	ai_ArmMeisterWorkers((int) rec, (int) handle);
 	if (g_100dc20 == *(int*) (rec + 0x16c) && g_100dc38 < 4) {
 		j = 0;
 		n = ai_ResourceCount;
@@ -145,7 +145,7 @@ common:
 	ai_RequestAusbauUpgrade(saved, (int) rec, 10);
 	ai_BuyStallGoods((int) rec);
 	if (fcn_00502cd0(*(int*) (*(int*) (rec + 0x16c) + 0x5d), 2, 6, 0, 0x60) != 0) {
-		fcn_004888a0((int) rec);
+		ai_FlagIdleWorkersForRecovery((int) rec);
 	}
 	ai_DispatchWorkerRecovery((int) rec);
 	if (g_7f4c04 <= 6

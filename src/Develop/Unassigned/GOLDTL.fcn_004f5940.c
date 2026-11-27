@@ -25,38 +25,38 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_SubtractCrimeGrid(int arg, unsigned char kind);
 void __cdecl he_NotifyStraftatExpired(Obj* o, char* p);
 
-int __cdecl fcn_004f5940(int key, int force)
+int __cdecl gs_RemoveStraftat(int key, int force)
 {
-	int k;
-	char* p;
+	int idx;
+	char* targetEntity;
 	int i;
 
-	k = FindStraftatIndexById(key);
-	if (k == -1) {
+	idx = FindStraftatIndexById(key);
+	if (idx == -1) {
 		return 3;
 	}
-	if (g_9a3800[k].count > 0) {
-		g_9a3800[k].count--;
+	if (g_9a3800[idx].count > 0) {
+		g_9a3800[idx].count--;
 	}
-	if (g_9a3800[k].count != 0 && force == 0) {
+	if (g_9a3800[idx].count != 0 && force == 0) {
 		return 2;
 	}
-	if (g_9a3800[k].state != 1 && (force == 0 || g_9a3800[k].state == 0)) {
+	if (g_9a3800[idx].state != 1 && (force == 0 || g_9a3800[idx].state == 0)) {
 		return 1;
 	}
-	p = gm_LookupEntityRecordById(g_9a3800[k].target_id);
-	cm_SubtractCrimeGrid(g_9a3800[k].unk_21, g_9a3800[k].kind);
+	targetEntity = gm_LookupEntityRecordById(g_9a3800[idx].target_id);
+	cm_SubtractCrimeGrid(g_9a3800[idx].unk_21, g_9a3800[idx].kind);
 	for (i = 0; i < 2048; i++) {
 		if (key == g_99f800[i].key) {
-			if (g_774970 != 0xffff && g_99f800[i].owner == (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id) && p != 0 && force == 0) {
-				he_NotifyStraftatExpired(((Obj*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), p);
+			if (g_774970 != 0xffff && g_99f800[i].owner == (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id) && targetEntity != 0 && force == 0) {
+				he_NotifyStraftatExpired(((Obj*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), targetEntity);
 			}
 			g_99f800[i].owner = -1;
 			g_99f800[i].key = -1;
 		}
 	}
-	g_9a3800[k].state = 0;
-	g_9a3800[k].target_id = -1;
-	g_9a3800[k].id = -1;
+	g_9a3800[idx].state = 0;
+	g_9a3800[idx].target_id = -1;
+	g_9a3800[idx].id = -1;
 	return 0;
 }

@@ -23,7 +23,7 @@ int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 
 int __cdecl ai_FindGraveyardTargets(char* e, char* q, Blk24* b1, Blk24* b2);
-int __cdecl fcn_0048f710(char* e, char* q, Blk24* b1, Blk24* b2);
+int __cdecl ai_PlanGraveyardAction0x90(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl ai_PlanHauchDesVerfalls(char* e, char* q, Blk24* b1, Blk24* b2);
 int __cdecl ai_PlanDeathPact(char* e, char* q, Blk24* b1, Blk24* b2);
 
@@ -64,7 +64,7 @@ int __cdecl ai_StartGraveyardOwner(int a1, char* e, int a3, Blk24* o1, Blk24* o2
 		return 0;
 	}
 	res[0] = ai_FindGraveyardTargets(e, target, &b1[0], &b2[0]);
-	res[1] = fcn_0048f710(e, target, &b1[1], &b2[1]);
+	res[1] = ai_PlanGraveyardAction0x90(e, target, &b1[1], &b2[1]);
 	res[2] = ai_PlanHauchDesVerfalls(e, target, &b1[2], &b2[2]);
 	res[3] = ai_PlanDeathPact(e, target, &b1[3], &b2[3]);
 	k = gm_RandomMod(4);

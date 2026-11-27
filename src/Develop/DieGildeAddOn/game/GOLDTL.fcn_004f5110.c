@@ -1,7 +1,7 @@
 
 
 
-int __cdecl fcn_004f4830(int, void*);
+int __cdecl gm_GetLawEntry(int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl gm_FormatLawName(void* buf, int a2)
@@ -12,7 +12,7 @@ int __cdecl gm_FormatLawName(void* buf, int a2)
 	int formatId;
 	int r = 1;
 
-	if (!fcn_004f4830(a2, local)) {
+	if (!gm_GetLawEntry(a2, local)) {
 		return 0;
 	}
 	a = local[0];

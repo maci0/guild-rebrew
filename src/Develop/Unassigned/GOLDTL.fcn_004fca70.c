@@ -7,7 +7,7 @@ extern float g_6628a8;
 extern int g_773d48;
 extern int g_99f7f0;
 
-int __cdecl fcn_004f4830(int k, int* info);
+int __cdecl gm_GetLawEntry(int k, int* info);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, int c, int d);
 
 int __cdecl gm_ApplyLaw0x0bTaxSlot(unsigned short id, unsigned char* s, unsigned char flags)
@@ -18,7 +18,7 @@ int __cdecl gm_ApplyLaw0x0bTaxSlot(unsigned short id, unsigned char* s, unsigned
 	int amt;
 	float v;
 
-	fcn_004f4830(0xb, info);
+	gm_GetLawEntry(0xb, info);
 	for (i = 0; i < 6; i++) {
 		if (s[i] == 0) {
 			break;

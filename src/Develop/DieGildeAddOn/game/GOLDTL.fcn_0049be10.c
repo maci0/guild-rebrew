@@ -15,34 +15,34 @@ float* __cdecl gm_LookupSpecialObject(int id);
 int __cdecl gm_UseSpecialObject(char* e, Req* r);
 
 /* ADDRESS: GOLDTL 0x0049be10 */
-int __cdecl fcn_0049be10(char* e, int* p, int* q)
+int __cdecl ai_RunUseTrank(char* entity, int* args, int* ctx)
 {
 	float* d;
 	unsigned short* s;
 	Req r;
 
-	s = fcn_00502cd0(*(int*) (e + 0x178), 1, 1, p[1]);
+	s = fcn_00502cd0(*(int*) (entity + 0x178), 1, 1, args[1]);
 	if (!s) {
 		return 0;
 	}
 	d = gm_LookupSpecialObject(*s);
 	if (d) {
 		r.s = s;
-		r.id = q[1];
-		r.arg = q[2];
-		if (gm_UseSpecialObject(e, &r) == 1) {
+		r.id = ctx[1];
+		r.arg = ctx[2];
+		if (gm_UseSpecialObject(entity, &r) == 1) {
 			if (r.dir == 1) {
-				g_1009a64[0] = g_1008574[q[4] * 37 + 0] * d[3];
-				g_1009a64[2] = g_1008574[q[4] * 37 + 2] * d[3];
-				g_1009a64[4] = g_1008574[q[4] * 37 + 4] * d[3];
-				g_1009a64[6] = g_1008574[q[4] * 37 + 6] * d[3];
+				g_1009a64[0] = g_1008574[ctx[4] * 37 + 0] * d[3];
+				g_1009a64[2] = g_1008574[ctx[4] * 37 + 2] * d[3];
+				g_1009a64[4] = g_1008574[ctx[4] * 37 + 4] * d[3];
+				g_1009a64[6] = g_1008574[ctx[4] * 37 + 6] * d[3];
 				return 0x24;
 			}
 			if (r.dir == -1) {
-				g_1009a64[0] = -(g_1008574[q[4] * 37 + 0] * d[3] * 0.5f);
-				g_1009a64[2] = -(g_1008574[q[4] * 37 + 2] * d[3] * 0.5f);
-				g_1009a64[4] = -(g_1008574[q[4] * 37 + 4] * d[3] * 0.5f);
-				g_1009a64[6] = -(g_1008574[q[4] * 37 + 6] * d[3] * 0.5f);
+				g_1009a64[0] = -(g_1008574[ctx[4] * 37 + 0] * d[3] * 0.5f);
+				g_1009a64[2] = -(g_1008574[ctx[4] * 37 + 2] * d[3] * 0.5f);
+				g_1009a64[4] = -(g_1008574[ctx[4] * 37 + 4] * d[3] * 0.5f);
+				g_1009a64[6] = -(g_1008574[ctx[4] * 37 + 6] * d[3] * 0.5f);
 			}
 			return 0x24;
 		}

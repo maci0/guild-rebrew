@@ -1,0 +1,75 @@
+#include <string.h>
+
+extern unsigned short* __cdecl gm_LookupEntityRecordById(int id);
+extern int __cdecl gm_MapEntityStatRange(int type);
+extern int __cdecl gm_HasActiveSpecialObject(unsigned short* rec, int mode);
+extern int __cdecl gm_RandomMod(int range);
+extern void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
+extern int __cdecl gm_WalkEntityChain(unsigned short v);
+extern void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, char c, int d);
+extern void __cdecl io_FormatTextBuffer(char* buf, int a, int b, int c);
+extern void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
+extern double g_6629c8;
+#include "Develop/DieGildeAddOn/game/game_data.h"
+extern unsigned char g_773d75;
+
+/* ADDRESS: GOLDTL 0x004b8130 */
+int __cdecl gm_HandleMsg19GrantBonusAndFavor(int* request)
+{
+    char buf[0x400];
+    unsigned char* rec;
+    int i;
+    int key;
+
+    int mode;
+    int v;
+    int t;
+    double d;
+    int r;
+
+    rec = (unsigned char*) gm_LookupEntityRecordById(request[0]);
+    if (rec == 0) {
+        return 1;
+    }
+    if (rec[0x169] < 0x1e || rec[0x169] > 0x21) {
+        return 0x400;
+    }
+    key = gm_MapEntityStatRange(rec[0x164]);
+    if (key == 0) {
+        return 0x400;
+    }
+    if (gm_HasActiveSpecialObject((unsigned short*) rec, 0x290) != 0) {
+        return 0x400;
+    }
+    for (i = 0x7f4ca2; i < 0x85a0a2; i += 0x21c) {
+        if (*(char*) i == 6 || *(char*) i == 7) {
+            continue;
+        }
+        if (key != gm_MapEntityStatRange(*(unsigned char*) (i + 0x162))) {
+            continue;
+        }
+        cm_RequestCopyEntityData(*(int*) (rec + 4), *(int*) (i + 2),
+                     (gm_RandomMod(8) & 0xffff) + 1, 1);
+    }
+    t = gm_RandomMod(4) & 0xffff;
+    d = (double) t + g_6629c8;
+    v = gm_WalkEntityChain(*(unsigned short*) rec);
+    r = (int) (0.01 * ((double) v * d));
+    cm_RequestTransferCurrencyNoKill(-1, request[0], g_773d75, r);
+    if (rec[0x169] == 0x1e) {
+        mode = 0;
+    } else if (rec[0x169] == 0x1f) {
+        mode = 1;
+    } else if (rec[0x169] == 0x20) {
+        mode = 2;
+    } else if (rec[0x169] == 0x21) {
+        mode = 3;
+    } else {
+        return 0x400;
+    }
+    io_FormatTextBuffer(buf, *(unsigned short*) ((char*) request + 4) + 0x12e7,
+                 mode + 0x2a3, r);
+    he_PostEntityMessage(*(int*) (rec + 4), *(int*) (rec + 4), buf,
+                 strlen(buf) > 0x100, 0x603, 0);
+    return 0;
+}

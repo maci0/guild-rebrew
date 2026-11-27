@@ -68,7 +68,7 @@ void __cdecl cm_RequestUseGate(int, int, int);
 int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
 void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl sv_ClearObjectSelection(void);
-void __cdecl fcn_00531320(void);
+void __cdecl he_RedirectStreifeSelection(void);
 int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char*);
 void __cdecl d3_BeginSelectionBox(void);
@@ -144,7 +144,7 @@ L6d3:
 		goto La50;
 	}
 	if (g_7e4318 != 0) {
-		fcn_00531320();
+		he_RedirectStreifeSelection();
 		goto La5d;
 	}
 	if (map == 0 || ent == 0 || g_14ce8cc == 0 || d2_HoveredWindow != -1) {
@@ -272,7 +272,7 @@ L1a0d:
 
 La50:
 	if (g_7e4318 != 0) {
-		fcn_00531320();
+		he_RedirectStreifeSelection();
 	}
 
 La5d:

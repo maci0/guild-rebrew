@@ -11,17 +11,17 @@ extern char* gm_CityEntity;
 extern char g_7f4ca4[];
 extern char g_677640[];
 
-typedef struct Ff01c0Slot {
+typedef struct CANNON_HIT_SLOT {
 	int id;
 	float dist;
 	int type;
 	float strength;
-} Ff01c0Slot;
+} CANNON_HIT_SLOT;
 
 typedef struct Ff01c0Out {
 	int h0;
 	int h1;
-	Ff01c0Slot slot[3];
+	CANNON_HIT_SLOT slot[3];
 } Ff01c0Out;
 
 typedef struct Ff01c0Color {
@@ -56,7 +56,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004f01c0 */
-void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
+void __cdecl gm_ApplyCannonImpact(int applyDamage, int impactId, int projectilePtr, Ff01c0Out* resultOut)
 {
 	Ff01c0Out out;
 	Ff01c0Vec pv;
@@ -95,8 +95,8 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 	Ff01c0Color col;
 	char msg[0xf8];
 
-	in = (char*) a2;
-	out.h1 = a1;
+	in = (char*) projectilePtr;
+	out.h1 = impactId;
 	best = 0;
 	count = 0;
 	bestdist = 100000.0f;
@@ -226,7 +226,7 @@ void __cdecl fcn_004f01c0(int a0, int a1, int a2, Ff01c0Out* resultOut)
 	if (p != 0) {
 		d3snd_PlayObjectSound((int) p, *(int*) (best + 0x61), 0x6b, 12200.0f);
 	}
-	if (a0) {
+	if (applyDamage) {
 		for (i = 0; i < 3; i++) {
 			if (out.slot[i].id == -1) {
 				continue;

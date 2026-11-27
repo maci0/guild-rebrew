@@ -19,7 +19,7 @@ int __cdecl cm_GetCommandStatus(int v);
 void __cdecl cm_StepCommandQueue(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
 void __cdecl amt_calc_zuenfte(int n);
-void __cdecl fcn_004ea620(void);
+void __cdecl amt_FillOffice0x1c0x1dFromRichest(void);
 void __cdecl amt_FillOffice0x22FromRichest(void);
 
 /* ADDRESS: GOLDTL 0x004eafe0 */
@@ -104,6 +104,6 @@ void __cdecl amt_UpdateAllOffices(void)
 		amt_calc_zuenfte(0x20);
 		amt_calc_zuenfte(0x21);
 	}
-	fcn_004ea620();
+	amt_FillOffice0x1c0x1dFromRichest();
 	amt_FillOffice0x22FromRichest();
 }

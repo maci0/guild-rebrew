@@ -2,7 +2,7 @@ extern unsigned char g_14cf950;
 extern int g_77480c;
 
 extern int __cdecl fcn_00535bd0(void);
-extern int __cdecl fcn_005359c0(void);
+extern int __cdecl gm_DispatchDebugActionKeys(void);
 extern int __cdecl fcn_00535ec0(void);
 
 /* Mode byte g_14cf950 selects O/P/R; every other value re-dispatches the
@@ -14,7 +14,7 @@ int __cdecl fcn_005365d0(void)
 	switch (g_14cf950) {
 	case 0x4f:
 		g_77480c = 1;
-		return fcn_005359c0();
+		return gm_DispatchDebugActionKeys();
 	case 0x50:
 		g_77480c = 2;
 		return fcn_00535ec0();
@@ -26,7 +26,7 @@ int __cdecl fcn_005365d0(void)
 			return fcn_00535bd0();
 		}
 		if (g_77480c == 1) {
-			return fcn_005359c0();
+			return gm_DispatchDebugActionKeys();
 		}
 		if (g_77480c == 2) {
 			return fcn_00535ec0();

@@ -1,7 +1,7 @@
 extern volatile int g_6b7fac;
 void __cdecl fcn_00476020(int);
 unsigned char __cdecl fcn_004486e0(char*, int*);
-void __cdecl fcn_0046f190(int, int, int, int, int, char*, int);
+void __cdecl d2_RenderWrappedText(int, int, int, int, int, char*, int);
 void __cdecl fcn_00468ea0(int, int, int, int);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 typedef struct {
@@ -43,9 +43,9 @@ void __cdecl fcn_0052cf20(void)
         y = rect[1] - 0x40;
         x = (rect[2] - rect[0]) / 2 + rect[0] - 0x50;
         if (slots[i].text[0])
-            fcn_0046f190(x, y, 0xa0, 0x60, *(int*) 0x6ed924, slots[i].text, 0x28);
+            d2_RenderWrappedText(x, y, 0xa0, 0x60, *(int*) 0x6ed924, slots[i].text, 0x28);
         else
-            fcn_0046f190(x, y, 0xa0, 0x60, *(int*) 0x6ed924, ((char**) 0x143a1c0)[slots[i].textId], 0x28);
+            d2_RenderWrappedText(x, y, 0xa0, 0x60, *(int*) 0x6ed924, ((char**) 0x143a1c0)[slots[i].textId], 0x28);
         fcn_00468ea0(x, y, *(int*) 0x6ed968, *(int*) 0x6ed96c);
     }
 }

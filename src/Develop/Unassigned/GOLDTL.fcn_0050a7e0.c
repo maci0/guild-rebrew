@@ -21,7 +21,7 @@ void __cdecl ahm_ResetEntityState(void* rec);
 void __cdecl fcn_004fdfe0(char* rec);
 int __cdecl gm_FindHeadIconIndex(char* name);
 char* __cdecl gm_PickUnusedPresetCharacter(void);
-void __cdecl fcn_004adcd0(int type, int a, int b, char* rec);
+void __cdecl amt_InitRulerEntity(int type, int a, int b, char* rec);
 
 #define B(p, o) (*(unsigned char*) ((char*) (p) + (o)))
 #define W(p, o) (*(unsigned short*) ((char*) (p) + (o)))
@@ -155,7 +155,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         }
     }
     if (B(slot, 2) == 0x15 || B(slot, 2) == 0x16) {
-        fcn_004adcd0(B(slot, 2) & 0xff, mother_id, arg4, slot);
+        amt_InitRulerEntity(B(slot, 2) & 0xff, mother_id, arg4, slot);
         return W(slot, 0);
     }
     if (location != 0) {

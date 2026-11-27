@@ -3,7 +3,7 @@ typedef struct {
 	char pad[0x23];
 } Rec24;
 
-int __cdecl fcn_004f4980(char*, int, Rec24*);
+int __cdecl gm_FindLawByKindAndSub(char*, int, Rec24*);
 void __cdecl gm_FormatLawName(void*, int);
 int __cdecl fcn_005d6540(void*, void*);
 
@@ -18,7 +18,7 @@ int __cdecl fcn_004f8140(char* a1, int* a2)
 	if (*a2 == 3 || *a2 == 1) {
 		if (a1[0x166] == 0)
 			return 1;
-		if (fcn_004f4980(a1, 1, &rec) == 0)
+		if (gm_FindLawByKindAndSub(a1, 1, &rec) == 0)
 			return 1;
 		if (a1[2] == 6)
 			gm_FormatLawName((char*) a2 + 0x14, rec.id);
@@ -40,7 +40,7 @@ int __cdecl fcn_004f8140(char* a1, int* a2)
 			return 1;
 		if (*(int*) (other + 0x1c8) & 0x80000)
 			return 1;
-		if (fcn_004f4980(other, 1, &rec) == 0)
+		if (gm_FindLawByKindAndSub(other, 1, &rec) == 0)
 			return 1;
 		a2[1] = rec.id;
 		if (*a2 == 4) {

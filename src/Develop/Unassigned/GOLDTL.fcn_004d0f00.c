@@ -8,7 +8,7 @@ extern unsigned short* g_772e9c;
 extern int g_772ed4;
 extern int g_772ed8;
 
-int __cdecl fcn_004cef70(int, char*);
+int __cdecl gm_GetEntityControlMask(int, char*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 void __cdecl fcn_004d1910(void);
 int* __cdecl d3snd_QueueSound(int, int, char*, int, int);
@@ -33,7 +33,7 @@ void __cdecl fcn_004d0f00(void)
 	g_7746a0 = 0;
 	for (i = 0; i < 32; i++) {
 		e = ch_ContextCharacters[i];
-		if (e != 0 && e[0x188] != 0 && (fcn_004cef70(*me, e) & 0x800) != 0
+		if (e != 0 && e[0x188] != 0 && (gm_GetEntityControlMask(*me, e) & 0x800) != 0
 		    && *(int*) (e + 0x184) != 0 && e[8] != 0)
 			break;
 	}
@@ -42,7 +42,7 @@ void __cdecl fcn_004d0f00(void)
 	x = g_7746a4;
 	if (x != 0 && *(int*) (x + 0x220) == 2) {
 		t = *(char**) (x + OBJ_TITLE_OFF);
-		if ((fcn_004cef70(*me, t) & 0x800) != 0 && g_14cf736 == 0
+		if ((gm_GetEntityControlMask(*me, t) & 0x800) != 0 && g_14cf736 == 0
 		    && (e == 0 || gm_EntitiesDifferByOwnerPtr(e, t) == 0)) {
 			fcn_004d1910();
 			t[0x188] = 1;

@@ -3,7 +3,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_0057edf0(int* msg)
+int __cdecl d2_CheckTutCh2RathausAction110(int* msg)
 {
 	unsigned char* e;
 

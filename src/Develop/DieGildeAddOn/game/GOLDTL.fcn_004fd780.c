@@ -1,4 +1,4 @@
-int __cdecl fcn_004f4830(int, void*);
+int __cdecl gm_GetLawEntry(int, void*);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
@@ -27,7 +27,7 @@ void __cdecl gm_TickObjectTable(void)
 	if ((gm_GameTime % 4) != 0) {
 		return;
 	}
-	fcn_004f4830(2, info);
+	gm_GetLawEntry(2, info);
 	mode = *(int*) (info + 0x18);
 	if (mode == 2) {
 		p = (char*) 0x7f4ca2;

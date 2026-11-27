@@ -83,7 +83,7 @@ void __cdecl fcn_005340f0(int win);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl d2_CheckActionBlocker(char* house, int mode);
-void __cdecl fcn_005100f0(int id, int amount);
+void __cdecl gm_ModifyHealth(int id, int amount);
 int __cdecl d2_BuildPersonStatusDesc(sel005ac2d0* sel);
 int __cdecl fcn_005ca740(int x, int y, int win, int id, sel005ac2d0* sel, int flag);
 int __cdecl io_FormatTextBuffer(char* buf, int id, ...);
@@ -261,7 +261,7 @@ void __cdecl fcn_005ac2d0(char* building)
 			if (d2_CurrentElementId == btnState0) {
 				if (d2_CheckActionBlocker((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 1) != 0) {
 					v12 = 1;
-					fcn_005100f0(((ENTITY_RECORD*)(g_7f4ca4 - 4))[g_774970].entity_id, -1);
+					gm_ModifyHealth(((ENTITY_RECORD*)(g_7f4ca4 - 4))[g_774970].entity_id, -1);
 					cm_BeginPacketFieldDelta(obj, *(int*) (obj + 2));
 					cm_AppendPacketFieldDelta(1, 1, 0x22, &v12);
 					rc = cm_RequestChangeAttribute();

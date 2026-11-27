@@ -60,13 +60,13 @@ extern unsigned short g_7f4c04;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_004849b0(Bld*, int, int);
+void __cdecl ai_CollectBuildingGoodsPlan(Bld*, int, int);
 void __cdecl ai_ManageMeisterWorkers(Bld*);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(int, Bld*, int);
 void __cdecl ai_RequestAusbauUpgrade(int, Bld*, int);
 void __cdecl ai_BuyStallGoods(Bld*);
 int __cdecl ai_CanProduceGood(Bld*, PRODUCTION_GOODS_RECORD*, int);
-void __cdecl fcn_004868d0(Bld*, PRODUCTION_GOODS_RECORD*);
+void __cdecl ai_PlanGoodIngredients(Bld*, PRODUCTION_GOODS_RECORD*);
 int __cdecl hp_PickWeightedProdItem(int);
 int __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
@@ -105,7 +105,7 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 	craft = fcn_00502cd0(*(int*) (bld->x16c + 0x5d), 2, 6, 0, 0x2a);
 	if (craft == 0)
 		return;
-	fcn_004849b0(bld, prod, craft);
+	ai_CollectBuildingGoodsPlan(bld, prod, craft);
 	ai_ManageMeisterWorkers(bld);
 	gm_TryAutoUpgradeBuildingSlots(craft, bld, 0x4b);
 	ai_RequestAusbauUpgrade(craft, bld, 0x19);
@@ -118,7 +118,7 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 >= (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 &&
 			    ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
 				((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
-				fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
+				ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
 				bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
 				hit = 1;
 			}
@@ -139,7 +139,7 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 			if (((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_40 >= (int) ((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id].value_036 &&
 			    ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
 				((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
-				fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
+				ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
 				bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
 				goto done;
 			}
@@ -166,7 +166,7 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 				           ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].unk_3c)) {
 					if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 1)) {
 						if (ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i], 0)) {
-							fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
+							ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
 							bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
 							fcn_0064d41a(name, "Produktion von %s starten obwohl Rohstoffe fehlen, da der spieler es so will",
 							             ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id]) + 1);
@@ -174,7 +174,7 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 						}
 					} else {
 						((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].flags |= 8;
-						fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
+						ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i]);
 						bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id;
 						fcn_0064d41a(name, "Produktion von %s starten, da Humanplayer es so will.",
 						             ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[i].goods_id]) + 1);
@@ -213,7 +213,7 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 		if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]], 1))
 			continue;
 		((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].flags |= 8;
-		fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]]);
+		ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]]);
 		bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id;
 		fcn_0064d41a(name, "Produktion von %s starten", ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id]) + 1);
 		goto done;
@@ -237,7 +237,7 @@ void __cdecl ai_UpdateMeisterBuilding(Bld* bld)
 			continue;
 		if (!ai_CanProduceGood(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]], 0))
 			continue;
-		fcn_004868d0(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]]);
+		ai_PlanGoodIngredients(bld, &((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]]);
 		bld->id = (unsigned short) ((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id;
 		fcn_0064d41a(name, "Produktion von %s starten obwohl Rohstoffe fehlen", ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[((PRODUCTION_GOODS_RECORD*) g_100d0c0)[order[i]].goods_id]) + 1);
 		goto done;

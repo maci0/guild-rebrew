@@ -10,7 +10,7 @@ extern unsigned char g_773d75;
 
 char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl cm_SendCopyEntityData(char* msg);
 typedef struct F8 {
 	int mask;
@@ -33,7 +33,7 @@ int __cdecl fcn_0048e360(char* a1, char* a2, char* a3)
 		return 0;
 	}
 	cm_RequestTransferCurrencyNoKill(-1, *(int*) (a1 + 4), (*(char*)&g_773d75), *(int*) (a3 + 8));
-	fcn_005100f0(*(int*) (a1 + 4), -*(int*) (a2 + 8));
+	gm_ModifyHealth(*(int*) (a1 + 4), -*(int*) (a2 + 8));
 	memset(msg, 0, sizeof(msg));
 	msg[4] = (char) 0x99;
 	*(int*) (msg + 8) = *(int*) (a1 + 4);

@@ -39,7 +39,7 @@ Spec* __cdecl gm_LookupMissionSpec(int op);
 void __cdecl fcn_004b5630(Spec* s, int flags);
 void __cdecl main_PlayOutroMovie(void);
 int __cdecl fcn_004b43f0(int n);
-int __cdecl fcn_004b3e10(int a1, int a2, int a3);
+int __cdecl gm_AllocMissionJob(int a1, int a2, int a3);
 int __cdecl cm_RequestSysMessage(int, Req*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
@@ -89,7 +89,7 @@ void __cdecl fcn_004b62e0(int flags)
 		}
 		fcn_004b5b20(flags);
 	} else {
-		fcn_004b3e10(ent->entity_id, r, 1);
+		gm_AllocMissionJob(ent->entity_id, r, 1);
 		m.id = ent->entity_id;
 		m.x10 = 0;
 		h = cm_RequestSysMessage(10, &m);

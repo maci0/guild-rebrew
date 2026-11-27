@@ -12,12 +12,12 @@ extern char g_9baae0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_9badd4;
 
-void __cdecl fcn_004ce100(int a1, int a2)
+void __cdecl d3_InitSceneState(int clientId, int sessionParam)
 {
 	memset(&g_9baa20, 0, 0x24);
 	memset(g_9baae0, 0, 0x2b8);
 	g_9baa00 = 1;
-	g_9badd0 = a1;
-	g_9badd4 = a2;
+	g_9badd0 = clientId;
+	g_9badd4 = sessionParam;
 	g_9baa08 = 0;
 }

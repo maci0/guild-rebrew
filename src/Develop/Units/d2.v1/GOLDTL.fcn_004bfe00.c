@@ -14,7 +14,7 @@ void *__cdecl fcn_004be2a0(void *);
 void *__cdecl fcn_004be1f0(void *);
 int __cdecl rt_CountRoutePoints(void *);
 void __cdecl rt_FreeRoutePoints(void *);
-void __cdecl fcn_004be3d0(void *, void *, void *, void *);
+void __cdecl d2_AddRoutePointMarker(void *, void *, void *, void *);
 void __cdecl fcn_004be530(void);
 void __cdecl fcn_004bf1b0(int, void *);
 void __cdecl fcn_004bf8e0(void *, void *);
@@ -79,12 +79,12 @@ int __cdecl fcn_004bfe00(char *obj)
 		g_772908 = head;
 		*(int *) (head + 4) = *(int *) (obj + 0x1c);
 		*(int *) head = *(int *) (obj + 2);
-		fcn_004be3d0(town, obj, (void *) head, (void *) head);
+		d2_AddRoutePointMarker(town, obj, (void *) head, (void *) head);
 		d2_SelectRadioGroup(g_6816d8, 0);
 		g_772904 = 0;
 	} else {
 		for (p = (char *) head; p != 0; p = *(char **) (p + 0x3c)) {
-			fcn_004be3d0(town, obj, (void *) g_772908, p);
+			d2_AddRoutePointMarker(town, obj, (void *) g_772908, p);
 		}
 	}
 	d2_SetForm(*(int *) town, 2);
@@ -110,7 +110,7 @@ int __cdecl fcn_004bfe00(char *obj)
 				p = (char *) fcn_004be1f0((void *) g_772908);
 				*(int *) (p + 4) = *(int *) (g_772904 + 1);
 				*(int *) p = *(int *) (obj + 2);
-				fcn_004be3d0(town, obj, (void *) g_772908, p);
+				d2_AddRoutePointMarker(town, obj, (void *) g_772908, p);
 				d2_SelectRadioGroup(g_6816d8, g_772900 - 1);
 				g_772904 = 0;
 			}

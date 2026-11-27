@@ -69,13 +69,13 @@ void __cdecl cm_RequestClearLagerslot(int, int);
 void __cdecl fcn_00486500(PRODUCTION_GOODS_RECORD*);
 
 /* ADDRESS: GOLDTL 0x004849b0 */
-void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
+void __cdecl ai_CollectBuildingGoodsPlan(char* entity, char* prod, char* craft)
 {
 	Stats st;
 	PRODUCTION_GOODS_RECORD tmp;
-	char* p;
-	char* e;
-	char* r;
+	char* goodsSlot;
+	char* action;
+	char* actor;
 	int i;
 	int j;
 	int k;
@@ -84,10 +84,10 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 	unsigned char kind;
 
 	g_100b0ac = 0;
-	p = fcn_00502cd0(*(int*) (prod + 0x14), 1, 5);
-	while (p != 0) {
-		if (*(int*) (p + 0xe)  > 1 && g_100b0ac < 0x20) {
-			g_100d0c0[g_100b0ac].goods_id = *(unsigned short*) p;
+	goodsSlot = fcn_00502cd0(*(int*) (prod + 0x14), 1, 5);
+	while (goodsSlot != 0) {
+		if (*(int*) (goodsSlot + 0xe)  > 1 && g_100b0ac < 0x20) {
+			g_100d0c0[g_100b0ac].goods_id = *(unsigned short*) goodsSlot;
 			for (j = 0; j < 4; j++) {
 				g_100d0c0[g_100b0ac].building_indices[j] = -1;
 			}
@@ -102,7 +102,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 			g_100d0c0[g_100b0ac].flags = 0;
 			g_100b0ac++;
 		}
-		p = gm_NextEntityQueryMatch();
+		goodsSlot = gm_NextEntityQueryMatch();
 	}
 
 	ai_ResourceCount = 0;
@@ -137,7 +137,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (entity + 0x16c)].category;
 	if (kind == 0xe || kind == 8 || kind == 0x20) {
 		for (i = 0; i < ai_ResourceCount; i++) {
 			if (g_100b0c0[i].goods_id == 0x1c7 || g_100b0c0[i].goods_id == 0x1c4 ||
@@ -196,7 +196,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		}
 	}
 
-	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (entity + 0x16c)].category;
 	if (kind == 0x1d || kind == 0x1f) {
 		for (i = 0; i < ai_ResourceCount; i++) {
 			if (g_100b0c0[i].goods_id == 0x225 || g_100b0c0[i].goods_id == 0x226 || g_100b0c0[i].goods_id == 0x227 ||
@@ -238,22 +238,22 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 	}
 
 	for (i = 0; i < g_100b0ac; i++) {
-		p = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, g_100d0c0[i].goods_id);
-		if (p == 0) {
+		goodsSlot = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, g_100d0c0[i].goods_id);
+		if (goodsSlot == 0) {
 			g_100d0c0[i].unk_3c = 0;
 		} else {
-			g_100d0c0[i].unk_3c = gm_GetMsgField(craft, p);
+			g_100d0c0[i].unk_3c = gm_GetMsgField(craft, goodsSlot);
 		}
 		g_100d0c0[i].unk_40 =
 		    gm_eval_SlotVoll(craft, g_100d0c0[i].goods_id, 0xf4240);
 	}
 
 	for (i = 0; i < ai_ResourceCount; i++) {
-		p = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, g_100b0c0[i].goods_id);
-		if (p == 0) {
+		goodsSlot = fcn_00502cd0(*(int*) (craft + 0x14), 1, 0, g_100b0c0[i].goods_id);
+		if (goodsSlot == 0) {
 			g_100b0c0[i].stock = 0;
 		} else {
-			g_100b0c0[i].stock = gm_GetMsgField(craft, p);
+			g_100b0c0[i].stock = gm_GetMsgField(craft, goodsSlot);
 			if (g_100b0c0[i].stock == 0) {
 				cm_RequestClearLagerslot(*(int*) (craft + 2), g_100b0c0[i].goods_id);
 			}
@@ -262,15 +262,15 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 		    gm_eval_SlotVoll(craft, g_100b0c0[i].goods_id, 0xf4240);
 	}
 
-	for (e = he_StartHandlungSearch(2, 0, 0xb, 3,
-	                     *(int*) (*(char**) (a + 0x16c) + 1));
-	     e != 0;
-	     e = he_fn_Handlung()) {
-		r = gm_FindRecordById(*(int*) (e + 0xac));
-		if (r == 0) {
+	for (action = he_StartHandlungSearch(2, 0, 0xb, 3,
+	                     *(int*) (*(char**) (entity + 0x16c) + 1));
+	     action != 0;
+	     action = he_fn_Handlung()) {
+		actor = gm_FindRecordById(*(int*) (action + 0xac));
+		if (actor == 0) {
 			continue;
 		}
-		gm_CalcEntityInventoryStats(r, &st);
+		gm_CalcEntityInventoryStats(actor, &st);
 		for (i = 0; i < st.x0; i++) {
 			id = st.x48[i];
 			if (id == 0) {
@@ -278,7 +278,7 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 			}
 			found = 0;
 			for (j = 0; found == 0 && j < 3; j++) {
-				if (((unsigned short*) (e + 0xd0))[j] == id) {
+				if (((unsigned short*) (action + 0xd0))[j] == id) {
 					found = 1;
 				}
 			}
@@ -297,72 +297,72 @@ void __cdecl fcn_004849b0(char* a, char* prod, char* craft)
 			}
 		}
 		for (j = 0; j < 3; j++) {
-			if (((unsigned short*) (e + 0xd6))[j] != 0) {
+			if (((unsigned short*) (action + 0xd6))[j] != 0) {
 				for (i = 0; i < g_100b0ac; i++) {
-					if (((unsigned short*) (e + 0xd6))[j] == g_100d0c0[i].goods_id) {
-						g_100d0c0[i].amount += ((int*) (e + 0xdc))[j];
+					if (((unsigned short*) (action + 0xd6))[j] == g_100d0c0[i].goods_id) {
+						g_100d0c0[i].amount += ((int*) (action + 0xdc))[j];
 					}
 				}
 				for (i = 0; i < ai_ResourceCount; i++) {
-					if (((unsigned short*) (e + 0xd6))[j] == g_100b0c0[i].goods_id) {
-						g_100b0c0[i].allocated += ((int*) (e + 0xdc))[j];
+					if (((unsigned short*) (action + 0xd6))[j] == g_100b0c0[i].goods_id) {
+						g_100b0c0[i].allocated += ((int*) (action + 0xdc))[j];
 					}
 				}
 			}
 		}
 	}
 
-	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (entity + 0x16c)].category;
 	if (kind == 8 || kind == 0xe) {
-		for (e = he_StartHandlungSearch(2, 0, 0x14, 3,
-		                     *(int*) (*(char**) (a + 0x16c) + 1));
-		     e != 0;
-		     e = he_fn_Handlung()) {
+		for (action = he_StartHandlungSearch(2, 0, 0x14, 3,
+		                     *(int*) (*(char**) (entity + 0x16c) + 1));
+		     action != 0;
+		     action = he_fn_Handlung()) {
 			for (i = 0; i < ai_ResourceCount; i++) {
 				if (g_100b0c0[i].goods_id !=
-				    (int) *(unsigned short*) (e + 0xae)) {
+				    (int) *(unsigned short*) (action + 0xae)) {
 					continue;
 				}
 				g_100b0c0[i].allocated =
-				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
+				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (entity + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
 				           (float) g_100b0c0[i].allocated);
 			}
 		}
 	}
 
-	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (entity + 0x16c)].category;
 	if (kind == 8) {
-		for (e = he_StartHandlungSearch(2, 0, 0x15, 3,
-		                     *(int*) (*(char**) (a + 0x16c) + 1));
-		     e != 0;
-		     e = he_fn_Handlung()) {
+		for (action = he_StartHandlungSearch(2, 0, 0x15, 3,
+		                     *(int*) (*(char**) (entity + 0x16c) + 1));
+		     action != 0;
+		     action = he_fn_Handlung()) {
 			for (i = 0; i < ai_ResourceCount; i++) {
 				if (g_100b0c0[i].goods_id !=
-				    (int) *(unsigned short*) (e + 0xae)) {
+				    (int) *(unsigned short*) (action + 0xae)) {
 					continue;
 				}
 				g_100b0c0[i].allocated =
-				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
+				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (entity + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
 				           (float) g_100b0c0[i].allocated);
 			}
 		}
 	}
 
-	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (a + 0x16c)].category;
+	kind = ((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*(unsigned char*) *(char**) (entity + 0x16c)].category;
 	if (kind == 0x1d || kind == 0x1f) {
-		for (e = he_StartHandlungSearch(2, 0, 0x8c, 3,
-		                     *(int*) (*(char**) (a + 0x16c) + 1));
-		     e != 0;
-		     e = he_fn_Handlung()) {
+		for (action = he_StartHandlungSearch(2, 0, 0x8c, 3,
+		                     *(int*) (*(char**) (entity + 0x16c) + 1));
+		     action != 0;
+		     action = he_fn_Handlung()) {
 			for (i = 0; i < ai_ResourceCount; i++) {
 				if (g_100b0c0[i].goods_id !=
-				    (int) *(unsigned short*) (e + 0xac)) {
+				    (int) *(unsigned short*) (action + 0xac)) {
 					continue;
 				}
 				g_100b0c0[i].allocated =
-				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (a + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
+				    (int) (((float) gm_GetBuildingTechEffect(*(char**) (entity + 0x16c), 0xb, 1) * 0.01f + 1.0f) *
 				               g_664124 +
 				           (float) g_100b0c0[i].allocated);
 			}

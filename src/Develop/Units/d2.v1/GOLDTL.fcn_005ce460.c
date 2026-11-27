@@ -25,7 +25,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl gm_FormatLawName(char *, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_004f4830(int, Law *);
+void __cdecl gm_GetLawEntry(int, Law *);
 void __cdecl d2_RunGesetzbuchInfoDialog(int, int);
 void __cdecl d2_UpdatePagedPanel(Book *);
 int __cdecl main_RunFrameLoop(void *, int);
@@ -103,7 +103,7 @@ void __cdecl fcn_005ce460(int cmd)
 				}
 			}
 			if (sel != -1) {
-				fcn_004f4830(sel + first, &law);
+				gm_GetLawEntry(sel + first, &law);
 				switch (law.kind) {
 				case 0:
 					d2_RunGesetzbuchInfoDialog(base + sel * 5, law.text);

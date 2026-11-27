@@ -21,7 +21,7 @@ int __cdecl gm_MapEntityStatRange(int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00525ef0(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -102,7 +102,7 @@ int __cdecl fcn_005a02b0(void)
 					fcn_00526120(text, 4);
 				}
 				else {
-					fcn_005100f0(*(int*) (slot + 4), -4);
+					gm_ModifyHealth(*(int*) (slot + 4), -4);
 					memset(msg, 0, sizeof(msg));
 					*(int*) (msg + 8) = *(int*) (slot + 4);
 					msg[4] = 0x26;

@@ -34,7 +34,7 @@ int __cdecl fcn_004fd4f0(int, Out54a6a0*);
 int __cdecl io_FormatTextBuffer(char*, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
-int __cdecl fcn_00493200(Rec54a6a0*, int);
+int __cdecl ai_SelectThemaPredigt(Rec54a6a0*, int);
 
 /* ADDRESS: GOLDTL 0x0054a6a0 */
 void __cdecl fcn_0054a6a0(int a0)
@@ -128,7 +128,7 @@ void __cdecl fcn_0054a6a0(int a0)
 				*(int*) (v2 + 0x84) = cm_SendSetHE(0, v2);
 				return;
 			}
-			if (!fcn_00493200(&g_7f4ca0[*(unsigned short*) (entity + 0x27)], v3)) {
+			if (!ai_SelectThemaPredigt(&g_7f4ca0[*(unsigned short*) (entity + 0x27)], v3)) {
 				gm_AddTime(v2 + 0x52, 0x18, 0, 0);
 				*(unsigned short*) (v2 + 0x56) = 7;
 				*(int*) (v2 + 0x84) = cm_SendSetHE(0, v2);

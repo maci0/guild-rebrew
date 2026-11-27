@@ -97,7 +97,7 @@ void __cdecl fcn_00402220(int);
 void __cdecl nt_ConnectTcp(int, int);
 void __cdecl cm_ResetCommandQueue(void);
 int __cdecl d2_RunNetLobbySetup(void);
-void __cdecl fcn_0053f4c0(void);
+void __cdecl d2_ShowLoadingScreen(void);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetProgressPercent(int, int);
 void __cdecl main_PumpWindowMessages(void);
@@ -117,7 +117,7 @@ int __cdecl gm_QuerySeason(void*);
 void __cdecl gm_UpdateWeatherAndSky(void*, int);
 void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl fcn_00528fd0(void);
-void __cdecl fcn_00540020(void);
+void __cdecl gm_BeginPlayerTurn(void);
 int __cdecl cm_RequestSysMessage(int, void*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
@@ -157,7 +157,7 @@ void __cdecl ls_LoadSavePreview(char*);
 void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl fcn_005bd820(void);
 void __cdecl d2_InitDefaultBookmarks(void);
-void __cdecl fcn_00514f10(void);
+void __cdecl d3_RebuildWorldScene(void);
 void __cdecl fcn_00514fc0(void);
 void __cdecl gm_ApplyGameSettings(void);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
@@ -297,7 +297,7 @@ void __cdecl fcn_005438c0(int a0)
 		}
 	}
 	d2_SuppressOverlay = 1;
-	fcn_0053f4c0();
+	d2_ShowLoadingScreen();
 	d2_SetForm(g_7e1d40, 1);
 	if (g_7747b0 & 4) {
 		n = g_14ac5d4;
@@ -400,7 +400,7 @@ void __cdecl fcn_005438c0(int a0)
 	fcn_00526db0(d2_GetHudThemeResourceId());
 	d3_SelectSceneContext(0, 0);
 	if ((g_7747b0 & 1) && (!(g_7747b0 & 0x40))) {
-		fcn_00514f10();
+		d3_RebuildWorldScene();
 		fcn_00514fc0();
 		d2_InitDefaultBookmarks();
 	}
@@ -496,7 +496,7 @@ void __cdecl fcn_005438c0(int a0)
 			}
 		}
 		if (!(g_7747b0 & 0x42)) {
-			fcn_00540020();
+			gm_BeginPlayerTurn();
 		} else {
 			d3_ResetWorldSceneState();
 			fcn_00528fd0();

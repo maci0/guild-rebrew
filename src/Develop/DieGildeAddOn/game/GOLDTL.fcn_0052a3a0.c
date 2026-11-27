@@ -32,7 +32,7 @@ typedef struct {
 	char pad0[0x2c];
 	int f2c;
 	char pad30[0x3dc - 0x30];
-} Slot_52a3a0;
+} D3_CONTEXT_SLOT;
 
 #include "client_types.h"
 
@@ -196,7 +196,7 @@ void __cdecl gm_UpdateWeatherAndSky(GAME_TIMESTAMP* now, int flag)
 	d3_SetSkyLayerScrollSpeed(g_6b89c0, g_7e4540[2], 0);
 	player = d3_CurrentContextIndex;
 	for (i = 0; i < 64; i++) {
-		if (((Slot_52a3a0*) g_1043340)[i].f2c != 0) {
+		if (((D3_CONTEXT_SLOT*) g_1043340)[i].f2c != 0) {
 			d3_SelectSceneContext(i, 1);
 			d3_ApplySceneLightingPreset();
 		}

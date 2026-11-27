@@ -4,7 +4,7 @@ extern int g_6b8300;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 void __cdecl fcn_0043c7a0(void*);
 void __cdecl fcn_00455750(void*);
-void __cdecl fcn_0043ff90(void*);
+void __cdecl d3_DestroyFloor(void*);
 void __cdecl fcn_0045da90(void*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_00448910(void);
@@ -22,7 +22,7 @@ void __cdecl fcn_004473f0(void)
 	while (*(void**) 0xfb98f4 != (void*) 0xfb9280)
 		fcn_00455750(*(void**) 0xfb98f4);
 	if (g_6b8300 != 0) {
-		fcn_0043ff90((void*) g_6b8300);
+		d3_DestroyFloor((void*) g_6b8300);
 		g_6b8300 = 0;
 	}
 	if (*(void**) 0x633dd4 != 0) {

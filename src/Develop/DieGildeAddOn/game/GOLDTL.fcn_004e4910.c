@@ -12,7 +12,7 @@ char* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl cut_ExitPendingEvtScripts(void);
-void __cdecl fcn_004e4680(void);
+void __cdecl cut_WaitForPendingScripts(void);
 void __cdecl gv_Free3Fields(int);
 void __cdecl d3_FreeObjectAnimation(void*);
 void __cdecl fcn_00442e30(void);
@@ -43,7 +43,7 @@ void __cdecl cut_CleanupCutscene(void)
 			main_RunFrameLoop(0, cut_EventLoopFlags | 0x80);
 	}
 	cut_ExitPendingEvtScripts();
-	fcn_004e4680();
+	cut_WaitForPendingScripts();
 	if (g_68bfc4 != -1) {
 		for (w = evt_FindScriptById(g_68bfc4); w != 0 && (w[0x124] & 1) != 0; w = evt_FindScriptById(g_68bfc4))
 			main_RunFrameLoop(0, cut_EventLoopFlags | 0x80);

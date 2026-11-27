@@ -20,7 +20,7 @@ extern char s_68149c[];
 
 char* __cdecl fcn_0045b700(int* a1, int n, int a3);
 void __cdecl gv_Free3Fields(char* p);
-void __cdecl fcn_004bdd40(int a);
+void __cdecl rd_AddUnusedBauplatzToSupermap(int a);
 int __cdecl lc_GetBauplatzPrefix(int a1, char* out);
 void __cdecl d3_TransformToObjectSpace(char* object, float* position, float* result);
 int __cdecl d3_TransformPoint(char* object, char* pos, float* result);
@@ -95,7 +95,7 @@ int __cdecl fcn_004bd4e0(int sceneObjectArg, int typeIdArg)
 	if (g_1005908 == -1) {
 		g_1005908 = 2;
 	}
-	fcn_004bdd40((int) &g_1005900);
+	rd_AddUnusedBauplatzToSupermap((int) &g_1005900);
 	i = lc_GetBauplatzPrefix(typeIdArg, ctx);
 	if (i == 0) {
 		gv_Free3Fields(g_1005904);

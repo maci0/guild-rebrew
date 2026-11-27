@@ -158,7 +158,7 @@ void __cdecl fcn_004c2d90(float, int);
 #define OBJBYTE (*(unsigned char *) obj)
 
 /* ADDRESS: GOLDTL 0x00540020 */
-void __cdecl fcn_00540020(void)
+void __cdecl gm_BeginPlayerTurn(void)
 {
 	int i;
 	int agebits;

@@ -11,7 +11,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x165
 
-void __cdecl fcn_004f4830(int a, Stat* st);
+void __cdecl gm_GetLawEntry(int a, Stat* st);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 #include "client_types.h"
@@ -30,7 +30,7 @@ int __cdecl ai_EvaluateLaw0x0e(Ent* entity, int unused, int* out)
 	if ((*(int*)&gm_GameTime) < 4) {
 		return 0;
 	}
-	fcn_004f4830(0xe, &st);
+	gm_GetLawEntry(0xe, &st);
 	d = st.v[2] - st.v[1];
 	if (r == 9) {
 		if (st.v[6] < (int) (d * 0.55f + st.v[1])) {

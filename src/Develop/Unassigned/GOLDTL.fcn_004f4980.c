@@ -12,7 +12,7 @@ typedef struct
 
 extern char g_68ff68[];
 
-int __cdecl fcn_004f4980(char* obj, int sub, Rec24* out)
+int __cdecl gm_FindLawByKindAndSub(char* obj, int sub, Rec24* out)
 {
 	int i;
 

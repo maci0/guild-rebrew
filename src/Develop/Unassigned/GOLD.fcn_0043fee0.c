@@ -8,7 +8,7 @@ typedef struct State {
 	unsigned char hi : 3;
 } State;
 
-char __cdecl fcn_0043fee0(char* a, char* b, int unused, int n)
+char __cdecl d3_SelectFloorChunkLod(char* a, char* b, int unused, int n)
 {
 	float t;
 	float s;

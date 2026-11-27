@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00454030 */
-void __cdecl fcn_00454030(int* src, int* dst)
+void __cdecl d3_TransposeMatrix4x4(int* src, int* dst)
 {
     int i;
     int j;

@@ -64,7 +64,7 @@ void __cdecl cm_StepCommandQueue(void);
 int __cdecl cut_AreAllPlayersDone(unsigned char*);
 void __cdecl d2_AppendPendingPlayerNames(unsigned char*);
 int __cdecl main_RunFrameLoop(int, int);
-int __cdecl fcn_004e51a0(unsigned char*, int);
+int __cdecl cut_FindPrevActiveSlot(unsigned char*, int);
 void __cdecl fcn_004e6c60(int);
 int __cdecl sprintf(char*, const char*, ...);
 
@@ -189,7 +189,7 @@ label_4e526f:
 				if (*(int*) (cutscene + 0x34 + i * 4) == *(int*) ((unsigned int) g_774970 * 0x21c + 0x7f4ca4)) {
 					pos = i;
 					if (pos != -1) {
-						found = fcn_004e51a0(cutscene, pos);
+						found = cut_FindPrevActiveSlot(cutscene, pos);
 					}
 					break;
 				}
@@ -223,7 +223,7 @@ label_4e526f:
 						if (ent != 0
 								&& *(unsigned char*) (ent + 2) != 6
 								&& *(unsigned char*) (ent + 2) != 7
-								&& (i == 0 || ((rec35c*) g_9b0e20)[fcn_004e51a0(cutscene, i)].f8 == 1)
+								&& (i == 0 || ((rec35c*) g_9b0e20)[cut_FindPrevActiveSlot(cutscene, i)].f8 == 1)
 								&& ((rec35c*) g_9b0e20)[i].f8 == 0) {
 							g_772f28 = i;
 							c2 = ((rec35c*) g_9b0e20)[i];

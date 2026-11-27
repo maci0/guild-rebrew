@@ -21,15 +21,15 @@ typedef struct {
 	pos14_7f4c00 pos;
 	unsigned char flag;
 	char pad37[0xf8 - 0x37];
-} Msg5473a0;
+} AHM_ACTION_0X98_MSG;
 #pragma pack(pop)
 
-void __cdecl cm_SendCopyEntityData(Msg5473a0*);
+void __cdecl cm_SendCopyEntityData(AHM_ACTION_0X98_MSG*);
 
 /* ADDRESS: GOLDTL 0x005473a0 */
-void __cdecl fcn_005473a0(void)
+void __cdecl he_EnsureAhmAction0x98(void)
 {
-	Msg5473a0 msg;
+	AHM_ACTION_0X98_MSG msg;
 	char* slot;
 	unsigned short* h;
 

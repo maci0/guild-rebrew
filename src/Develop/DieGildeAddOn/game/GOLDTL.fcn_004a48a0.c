@@ -2,12 +2,12 @@ int __cdecl gm_CalculateGebaeudeValue(int, int);
 
 
 /* ADDRESS: GOLDTL 0x004a48a0 */
-int __cdecl fcn_004a48a0(int a, int kind)
+int __cdecl gm_CalcBuildingRepairCost(int building, int kind)
 {
 	int n;
 
-	a = gm_CalculateGebaeudeValue(a, 100);
-	n = (int) (a * 0.005f);
+	building = gm_CalculateGebaeudeValue(building, 100);
+	n = (int) (building * 0.005f);
 	if (kind == 50)
 		n *= 4;
 	else if (kind == 30)

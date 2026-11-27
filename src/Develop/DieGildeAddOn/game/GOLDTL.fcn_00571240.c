@@ -19,7 +19,7 @@ void __cdecl he_AssignActionSlot(char*, int, int, int);
 void __cdecl he_FreeAction(char*);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-double __cdecl fcn_0050fdb0(int, int, char*);
+double __cdecl gm_CalcAvgEntityFavor(int, int, char*);
 int __cdecl fcn_0050c830(char*, char*, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -88,7 +88,7 @@ void __cdecl he_RunAbbau(char* self)
 						cm_RequestCopyEntityData(*(int*) (map + 4), ((int*) (self + 0x8c))[i], 2 - n, 0);
 				}
 			}
-			*(float*) (self + 0xc4) = (float) ((fcn_0050fdb0(*(unsigned short*) map, 8, self + 0x8c)
+			*(float*) (self + 0xc4) = (float) ((gm_CalcAvgEntityFavor(*(unsigned short*) map, 8, self + 0x8c)
 				- g_662908) * 0.25);
 skip_map:
 			*(unsigned char*) (self + 0xc8) = 0;

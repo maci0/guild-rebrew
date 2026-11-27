@@ -8,7 +8,7 @@
 #include "GOLDTL.fcn_004e99e0_gconf.h"
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl ai_CompareOfficeCandidates(unsigned short*, unsigned short*, unsigned short*, int*);
-int __cdecl fcn_004aae50(unsigned char, unsigned short*, int*, int*);
+int __cdecl ai_SelectOfficeCandidate(unsigned char, unsigned short*, int*, int*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char*, unsigned char*, int, int);
@@ -184,7 +184,7 @@ void __cdecl amt_ResolveOfficeApplications(int office, int count, OFFICE_SLOT* l
 				ent = gm_LookupEntityRecordById(list[k].mplayerid);
 				if (ent != 0 && fcn_004e9180(ent, p->mamt) != 0
 				    && *(unsigned char*) (ent + 0x1b1) <= 0) {
-					work.score[k] = fcn_004aae50(p->id,
+					work.score[k] = ai_SelectOfficeCandidate(p->id,
 					    (unsigned short*) ent, work.ids, &work.relation);
 				}
 			}

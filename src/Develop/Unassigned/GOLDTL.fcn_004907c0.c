@@ -3,14 +3,14 @@ typedef struct Stat {
 } Stat;
 // SIZE 0x24
 
-void __cdecl fcn_004f4830(int a, Stat* buf);
+void __cdecl gm_GetLawEntry(int a, Stat* buf);
 
 /* ADDRESS: GOLDTL 0x004907c0 */
 int __cdecl fcn_004907c0(char* e, int a2, int* out)
 {
 	Stat st;
 
-	fcn_004f4830(2, &st);
+	gm_GetLawEntry(2, &st);
 	if (e[0xc] == 0 && st.v[6] == 1) {
 		if (*(float*) (e + 0x1d0) < 0.4f) {
 			*out = 2;

@@ -1,9 +1,9 @@
 #include "client_lighting.h"
 void __cdecl fcn_0045fbb0(void*);
-void __cdecl fcn_00440140(void*);
+void __cdecl d3_InvalidateFloorChunks(void*);
 
 /* ADDRESS: GOLD 0x0043f990 */
-void __cdecl fcn_0043f990(void)
+void __cdecl d3_ResetFloorTileCache(void)
 {
 	unsigned int i;
 	unsigned int offset;
@@ -52,10 +52,10 @@ void __cdecl fcn_0043f990(void)
 		}
 	}
 	if ((void*) g_6b8300 != 0)
-		fcn_00440140((void*) g_6b8300);
+		d3_InvalidateFloorChunks((void*) g_6b8300);
 	for (offset = 0; offset < 0xf800; offset += 0x3e0) {
 		resource = *(char**) (0xfd7c4c + offset);
 		if (resource != 0 && resource != (char*) g_6b8300)
-			fcn_00440140(resource);
+			d3_InvalidateFloorChunks(resource);
 	}
 }

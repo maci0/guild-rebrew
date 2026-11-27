@@ -7,7 +7,7 @@ char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
 unsigned char* __cdecl fcn_004d2f70(char*);
 int __cdecl fcn_004d3330(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
-char* __cdecl fcn_004d3600(char*);
+char* __cdecl d3_FindNearestEnemyWare(char*);
 int __cdecl he_QueueTradeWareCommand(char*, char*, char*);
 char* __cdecl fcn_004d36e0(char*);
 int __cdecl cut_AssignConquerTarget(char*, char*, char*);
@@ -58,7 +58,7 @@ void __cdecl cut_AssignCombatUnitOrder(char* rec, char* e)
 			}
 			break;
 		case 1:
-			obj = fcn_004d3600(e);
+			obj = d3_FindNearestEnemyWare(e);
 			if (obj != 0) {
 				he_QueueTradeWareCommand(rec, e, obj);
 				return;

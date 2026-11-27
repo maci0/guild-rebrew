@@ -25,7 +25,7 @@ int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe);
 /* Reconstructed model byte view and floating-point position contracts. */
 int __cdecl ch_CreateMesh(char* model, char* resource, float* position);
 char* __cdecl ch_CreateAtPosition(char* resource, float* position);
-char* __cdecl fcn_004e4a80(char* resource, float* position);
+char* __cdecl cut_CreateCharacterAtPosition(char* resource, float* position);
 
 /* Character camera adapters use a game-object byte view and float vectors. */
 void __cdecl ch_GetCameraView(char* object, int view, float* position, float* rotation);

@@ -21,7 +21,7 @@ int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strrchr(const char*, int);
 
 /* ADDRESS: GOLDTL 0x00527540 */
-void __cdecl fcn_00527540(void)
+void __cdecl d2_LoadBuildingGroundplan(void)
 {
 	char buf[256];
 	char key[4];

@@ -9,17 +9,17 @@
 #pragma pack(pop)
 
 
-int __cdecl fcn_004f57e0(void)
+int __cdecl cm_FindFreeCrimeSlot(void)
 {
-	int r;
+	int slot;
 	int i;
 
-	r = -1;
+	slot = -1;
 	for (i = 0; i < 512; i++) {
 		if (g_9a3800[i].state == 0) {
-			r = i;
+			slot = i;
 			i = 512;
 		}
 	}
-	return r;
+	return slot;
 }

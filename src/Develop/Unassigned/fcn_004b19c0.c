@@ -17,7 +17,7 @@
 extern pos14_7f4c00 gm_GameTime;
 extern short g_7f4c0c;
 
-int __cdecl fcn_004ae210(int);
+int __cdecl gm_IsSlotPlayerPerson(int);
 void __cdecl cm_SendCopyEntityData(void*);
 
 /* ADDRESS: GOLDTL 0x004b19c0 */
@@ -40,7 +40,7 @@ int __cdecl fcn_004b19c0(void)
 		if (sent >= 8) {
 			break;
 		}
-		if (fcn_004ae210(n) != 0) {
+		if (gm_IsSlotPlayerPerson(n) != 0) {
 			memset(msg, 0, sizeof(msg));
 			id = *(int*) rec;
 			*(int*) (msg + 8) = id;

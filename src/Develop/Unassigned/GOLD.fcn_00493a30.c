@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00493a30 */
-void __cdecl fcn_00493a30(unsigned char* game)
+void __cdecl gm_UpdateDiceGameState(unsigned char* game)
 {
     int state;
     int left;

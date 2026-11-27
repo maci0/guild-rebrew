@@ -3,10 +3,10 @@
 extern pos14_7f4c00 gm_GameTime;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl gm_ResolveEntityById(char** out, int a2, int a3, int a4);
-float __cdecl fcn_004f4ed0(unsigned short* key);
+float __cdecl gm_CalcCrimeReportChance(unsigned short* key);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl gm_HasActiveSpecialObject(char* a1, int a2);
 int __cdecl cm_SendAddStraftat(void* a1);
@@ -37,7 +37,7 @@ int __cdecl gm_TryRecordCrime(int idx, int id, int actorId, int targetId, int lo
 	float f;
 
 
-	if (!fcn_004f4830(idx, rec)) {
+	if (!gm_GetLawEntry(idx, rec)) {
 		goto fail;
 	}
 	origActorId = actorId;
@@ -83,7 +83,7 @@ int __cdecl gm_TryRecordCrime(int idx, int id, int actorId, int targetId, int lo
 	default:
 		goto fail;
 	}
-	f = fcn_004f4ed0((unsigned short*) h1);
+	f = gm_CalcCrimeReportChance((unsigned short*) h1);
 	if (gm_RandomFloat01() >= f) {
 		goto fail;
 	}

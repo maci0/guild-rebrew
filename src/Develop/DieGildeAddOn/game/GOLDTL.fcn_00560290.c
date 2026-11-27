@@ -26,7 +26,7 @@ int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl gm_eval_SlotVoll(char*, int, int);
-char* __cdecl fcn_0050dc90(unsigned char*);
+char* __cdecl gm_FindBuildingOwner(unsigned char*);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -191,7 +191,7 @@ void __cdecl he_RunKraeuter(char* action)
 			if (!*(unsigned short*) (action + 0xae)) {
 				break;
 			}
-			id = (unsigned short*) fcn_0050dc90(v9);
+			id = (unsigned short*) gm_FindBuildingOwner(v9);
 			if (rec) {
 				cm_SendSellObjekt(*(int*) (q + 2), -1, *(unsigned short*) (action + 0xae), rec, g_773d75, 0);
 				io_FormatTextBuffer(text, 0x1802, 0x17fd, v9);

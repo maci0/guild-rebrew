@@ -1,5 +1,9 @@
 #include "command_internal.h"
 #include "../../Units/Error/error.h"
+#if !defined(REBREW_SERVER)
+#include "../game/entity_record.h"
+extern char* gm_CityEntity;
+#endif
 extern char g_entity_state_base[2];
 extern int g_entity_id_field;
 extern float g_color_scale;
@@ -1156,6 +1160,33 @@ int __cdecl cm_ChkMoveCredits(int cmd, char* result)
 	return 0;
 }
 #endif
+#if !defined(REBREW_SERVER)
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
+/* ADDRESS: GOLDTL 0x004c6ee0 */
+/* ADDRESS: GOLD 0x004c6350 */
+int __cdecl cm_ChkMoveCredits(char* x)
+{
+	char* e1;
+	char* e2;
+	char* e3;
+	int* p;
+
+	if (*(int*) (x + 0x14) != -1) {
+		*(int*) (x + 0x14) = cm_ResolveSpecialEntityId(x, *(int*) (x + 0x14));
+		if (gm_ResolveEntityById((void**) (&e1), (void**) (&e2), (void**) (&e3), *(int*) (x + 0x14)) == 0)
+			return 1;
+		if (e1 != 0)
+			p = (int*) (e1 + 0x5d);
+		else if (e2 != 0)
+			p = (int*) (e2 + 0x14);
+		else
+			p = (int*) (e3 + 0x178);
+		if (gm_QueryEntitySum(*p, x[0x1c]) - *(int*) (x + 0x1d) < 0)
+			return 1;
+	}
+	return 0;
+}
+#endif
 
 int __cdecl cm_ChkSellObjekt(char* cmd)
 {
@@ -1297,7 +1328,7 @@ int __cdecl cm_ChkChangeAttribute(int cmd, char* result)
 	return 0;
 }
 
-#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
+#if defined(REBREW_SERVER)
 int __cdecl cm_ChkChangeBits(int cmd, char* result)
 {
 	void* ent_c;
@@ -1330,6 +1361,28 @@ int __cdecl cm_ChkChangeBits(int cmd, char* result)
 	return 0;
 }
 #endif
+#if !defined(REBREW_SERVER)
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
+
+/* ADDRESS: GOLDTL 0x004c7250 */
+/* ADDRESS: GOLD 0x004c66c0 */
+int __cdecl cm_ChkChangeBits(char* cmd)
+{
+	char* e1;
+	char* e2;
+	char* e3;
+	char* target;
+
+	*(int*) (cmd + 0x10) = cm_ResolveSpecialEntityId(cmd, *(int*) (cmd + 0x10));
+	if (gm_ResolveEntityById((void**) (&e1), (void**) (&e2), (void**) (&e3), *(int*) (cmd + 0x10)) == 0)
+		return 1;
+	target = e1 != 0 ? e1 : (e2 != 0 ? e2 : e3);
+	if (e3 != 0 && target + *(int*) (cmd + 0x14) == e3 + 0x1c8 && (*(int*) (cmd + 0x1c) & 0x800000) != 0 &&
+	    (*(int*) (e3 + 0x1c8) & 0x800000) != 0)
+		return 1;
+	return 0;
+}
+#endif
 
 /* Validation handler: checks if a building (Gebaeude) can have
  * its owner set. Verifies the entity exists and has bit 1 of
@@ -1350,6 +1403,20 @@ int __cdecl cm_ChkSetGebBesitzer(char* obj)
 		"cm_ChkSetGebBesitzer() Invalid Id or inavlid status",
 		1
 	);
+	return 1;
+}
+#endif
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLDTL 0x004c72e0 */
+/* ADDRESS: GOLD 0x004c6750 */
+int __cdecl cm_ChkSetGebBesitzer(int* args)
+{
+	char* p;
+
+	p = (char*) gm_StartFilteredEntitySearch(1, 1, args[4]);
+	if (p != 0 && (p[0x5a] & 2) != 0) {
+		return 0;
+	}
 	return 1;
 }
 #endif
@@ -1422,7 +1489,7 @@ int __cdecl cm_ChkElectionOrTrade(int cmd)
  * verifies the player is actually in a slot. */
 
 
-#ifdef REBREW_SERVER
+#if defined(REBREW_SERVER)
 int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 {
 	int action;
@@ -1469,6 +1536,65 @@ int __cdecl cm_ChkJoinLeaveElection(int* cmd)
 			rec = (char *) ((int) g_slot_table + slot_index * 0x21c);
 			if (rec == 0) goto cler_query;
 			if (rec == (char *) g_entity_table_end) goto cler_query;
+			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;
+			if (*(unsigned char *) (rec + 2) != 0xf) return 1;
+		}
+		goto cler_query;
+	}
+	return 1;
+cler_query:
+	return gm_ff_Objekt(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d) == 0;
+}
+#endif
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLDTL 0x004c7400 */
+/* ADDRESS: GOLD 0x004c6870 */
+int __cdecl cm_ChkJoinLeaveElection(int* cmd)
+{
+	int action;
+	char* query_result;
+	int player;
+	int i;
+	unsigned short slot_index;
+	char* rec;
+
+	action = *(int *) ((char *) cmd + 0x10);
+	if (action == 0x6a6f696e) {
+		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
+		if (query_result == 0) return 1;
+		query_result = (char *) gm_ff_Objekt(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
+		if (query_result == 0) return 1;
+		player = *(int *) ((char *) cmd + 0x14);
+		for (i = 0; i < 4; i++) {
+			if (*(int *) (query_result + 0x1c + i * 4) == player) return 1;
+		}
+		i = 0;
+		while (i < 4 && *(int *) (query_result + 0x1c + i * 4) != -1) {
+			i++;
+		}
+		if (i >= 4) return 1;
+		return 0;
+	}
+	if (action == 0x6c656176) {
+		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
+		if (query_result == 0) return 1;
+		query_result = (char *) gm_ff_Objekt(*(int *) (query_result + 0x5d), 2, 6, 0, 0x12d);
+		if (query_result == 0) return 1;
+		player = *(int *) ((char *) cmd + 0x14);
+		for (i = 0; i < 4; i++) {
+			if (*(int *) (query_result + 0x1c + i * 4) == player) break;
+		}
+		if (i >= 4) return 1;
+		return 0;
+	}
+	if (action == 0x636c6572) {
+		query_result = (char *) gm_StartFilteredEntitySearch(1, 1, *(int *) ((char *) cmd + 0x18));
+		if (query_result == 0) return 1;
+		slot_index = *(unsigned short *) (query_result + 0x27);
+		if (slot_index != 0xffff) {
+			rec = (char *) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[slot_index]));
+			if (rec == 0) goto cler_query;
+			if (rec == (char *) ((unsigned short*) (*(unsigned int*)&gm_CityEntity))) goto cler_query;
 			if (*(unsigned char *) (rec + 8) == 0) goto cler_query;
 			if (*(unsigned char *) (rec + 2) != 0xf) return 1;
 		}
@@ -3086,7 +3212,7 @@ int __cdecl cm_ExChangeAttribute(int cmd, char* result)
  * a separate `resolved` out-param variable keeps cmd in the base register,
  * and the pre-resolve field store is emitted after the resolve call. */
 
-#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
+#if defined(REBREW_SERVER)
 int __cdecl cm_ExSetAttribute(int cmd, char* result)
 {
 	void* entity_or_node;
@@ -3159,6 +3285,65 @@ int __cdecl cm_ExSetAttribute(int cmd, char* result)
 	if (result != 0) {
 		*result = 1;
 	}
+	return 0;
+}
+#endif
+#if !defined(REBREW_SERVER)
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
+
+/* ADDRESS: GOLDTL 0x004c8b10 */
+/* ADDRESS: GOLD 0x004c7f70 */
+int __cdecl cm_ExSetAttribute(char* x, char* out)
+{
+	char* e1;
+	char* e2;
+	char* e3;
+	char* p;
+	char* q;
+	char* d;
+	int v;
+	unsigned int i;
+	unsigned int j;
+	int type;
+	int n;
+
+	v = cm_ResolveSpecialEntityId(x, *(int*) (x + 0x10));
+	*(int*) (x + 0x10) = v;
+	if (gm_ResolveEntityById((void**) (&e1), (void**) (&e2), (void**) (&e3), v) == 0)
+		return 1;
+	p = e1 != 0 ? e1 : (e2 != 0 ? e2 : e3);
+	q = x + 0x15;
+	for (i = 0; i < (unsigned char) x[0x14]; i++) {
+		type = *q++;
+		n = *q++;
+		d = p + *(unsigned short*) q;
+		q += 2;
+		switch (type) {
+		case 1:
+			for (j = 0; j < (unsigned int)n; j++) {
+				*d = *q;
+				d++;
+				q++;
+			}
+			break;
+		case 2:
+			for (j = 0; j < (unsigned int)n; j++) {
+				*(short*) d = *(short*) q;
+				d += 2;
+				q += 2;
+			}
+			break;
+		case 4:
+			for (j = 0; j < (unsigned int)n; j++) {
+				*(int*) d = *(int*) q;
+				d += 4;
+				q += 4;
+			}
+			break;
+		}
+	}
+	if (out != 0)
+		*out = 1;
 	return 0;
 }
 #endif
@@ -3248,6 +3433,43 @@ int __cdecl cm_ExChangeDesire(uchar* cmd, uchar* result)
 	}
 	return 0;
 }
+#endif
+#if !defined(REBREW_SERVER)
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) < (b) ? (b) : (a))
+
+typedef struct {
+	float a;
+	float b;
+	float c;
+} tri12;
+
+/* ADDRESS: GOLDTL 0x004c8bf0 */
+/* ADDRESS: GOLD 0x004c8050 */
+int __cdecl cm_ExChangeDesire(char* x, char* out)
+{
+	char* e;
+	unsigned char* q;
+	int k;
+	unsigned int i;
+
+	*(int*) (x + 0x10) = cm_ResolveSpecialEntityId(x, *(int*) (x + 0x10));
+	if (gm_ResolveEntityById(0, 0, (void**) (&e), *(int*) (x + 0x10)) == 0)
+		return 1;
+	q = (unsigned char*) x + 0x15;
+	for (i = 0; i < (unsigned char) x[0x14]; i++) {
+		k = *q;
+		q++;
+		((tri12*) (e + 0x90))[k].a += *(float*) q;
+		q += 4;
+		((tri12*) (e + 0x90))[k].a = (float)(MIN(MAX(((tri12*) (e + 0x90))[k].a, 0.0), 1000.0));
+	}
+	if (out != 0)
+		*out = 1;
+	return 0;
+}
+#undef MIN
+#undef MAX
 #endif
 
 /* Execution handler: modifies a bit-field on an entity.  Resolves
@@ -3689,6 +3911,124 @@ int __cdecl cm_ExAddStraftat(int cmd, char* result)
 	return 0;
 }
 #endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+#include "Develop/DieGildeAddOn/game/game_data.h"
+#include "client_straftat.h"
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+
+/* SIZE 0x2d */
+typedef struct Straftat {
+	int id;
+	char pad04[0x12];
+	int f16;
+	char pad1a[0x13];
+} Straftat;
+
+/* SIZE 0xc */
+typedef struct Area {
+	unsigned int a;
+	unsigned int b;
+	unsigned int c;
+	unsigned int d;
+} Area;
+
+void __cdecl gm_IncrementMissionActionCount(char*, int);
+int __cdecl gs_AddBeweis(int, int);
+int __cdecl cm_FindFreeCrimeSlot(void);
+void __cdecl gm_AddNeighborhoodLawEffect(int, char, unsigned int*, unsigned int*);
+void __cdecl cm_CrimeGridCellToWorld(unsigned int, unsigned int, Area*);
+int __cdecl he_StartHandlungSearch(int, int, int);
+int __cdecl he_fn_Handlung(void);
+void __cdecl he_NotifyCrimeRecorded(char*, char*);
+
+/* Copies the crime description of a source record into the crime table,
+ * resolves the offender, reports the new entry and walks the entity list
+ * that belongs to the case. */
+/* ADDRESS: GOLDTL 0x004c9a10 */
+int __cdecl cm_ExAddStraftat(char* src, char* out)
+{
+	STRAFTAT_RECORD* rec;
+	unsigned int v13;
+	unsigned int v14;
+	char* p;
+	Straftat* ent;
+	Area area;
+	char msg[0x200];
+	int taeter;
+	int idx;
+	unsigned short slot;
+
+	if (g_14cbca0 != -1) {
+		cm_LastCrimeId = *(int*) (src + 0x10);
+	} else {
+		cm_LastCrimeId = cm_LastCrimeId + 1;
+	}
+	idx = cm_FindFreeCrimeSlot();
+	if (idx != -1) {
+		ent = (Straftat*) gm_LookupEntityRecordById(*(int*) (src + 0x26));
+		if (ent != 0 && *(char*) ((char*) ent + 2) == 6) {
+			gm_IncrementMissionActionCount((char*) ent, 0x17);
+		}
+		rec = &g_9a3800[idx];
+		memcpy(rec, src + 0x10, 0x2d);
+		rec->id = cm_LastCrimeId;
+		sprintf(msg, "cm_ExAddStraftat(): Executed---- st_id = %i, taeter = %i, opfer = %i",
+			cm_LastCrimeId, *(int*) (src + 0x26), *(int*) (src + 0x22));
+		taeter = *(int*) (src + 0x31);
+		if (taeter == -1) {
+			ent = (Straftat*) gm_LookupEntityRecordById(*(int*) (src + 0x22));
+			if (ent != 0) {
+				if (*(int*) ((char*) ent + 0x170) != 0) {
+					taeter = *(int*) (*(char**) ((char*) ent + 0x170) + 1);
+				} else if (*(int*) ((char*) ent + 0x16c) != 0) {
+					taeter = *(int*) (*(char**) ((char*) ent + 0x16c) + 1);
+				} else {
+					srv_SeedRandom(*(int*) (src + 0x39));
+				}
+			} else {
+				srv_SeedRandom(*(int*) (src + 0x39));
+			}
+		}
+		gm_AddNeighborhoodLawEffect(taeter, *(char*) (src + 0x2c), &v13, &v14);
+		gm_ResolveEntityById((void**) &p, 0, 0, taeter);
+		if (p == 0) {
+			cm_CrimeGridCellToWorld(v13, v14, &area);
+		} else {
+			if (*(int*) (p + 0x61) != 0) {
+				area.a = *(unsigned int*) (*(char**) (p + 0x61) + 0x4c);
+				area.b = *(unsigned int*) (*(char**) (p + 0x61) + 0x50);
+				area.c = *(unsigned int*) (*(char**) (p + 0x61) + 0x54);
+			}
+		}
+		for (ent = (Straftat*) he_StartHandlungSearch(1, 0, 0x18); ent != 0;
+			ent = (Straftat*) he_fn_Handlung()) {
+			if (*(int*) ((char*) ent + 0xc4) != g_9a3800[idx].target_id) {
+				continue;
+			}
+			slot = *(unsigned short*) ((char*) ent + 8);
+			if (gs_AddBeweis(rec->id, *(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slot].entity_id) == 0) {
+				break;
+			}
+			if (out != 0) {
+				char* px;
+
+				px = (char*) gm_LookupEntityRecordById(*(int*) ((char*) ent + 0xc4));
+				if (px != 0) {
+					slot = *(unsigned short*) ((char*) ent + 8);
+					he_NotifyCrimeRecorded(px, ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slot]));
+				}
+			}
+		}
+		if (out != 0) {
+			out[0] = 1;
+			out[1] = 6;
+			*(STRAFTAT_RECORD**) (out + 6) = rec;
+		}
+		return 0;
+	}
+	return -1;
+}
+#endif
 
 /* Assigns the next sequential entity ID to the command packet at
  * offset 0x10, records a timestamp at 0x14, then increments the
@@ -3706,6 +4046,53 @@ int __cdecl cm_ExAllocCutscene(int cmd, char* result)
 	*(DWORD*) (cmd + 0x14) = timestamp;
 	g_entity_id_counter = g_entity_id_counter + 1;
 	return 0;
+}
+#endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+extern unsigned char g_aed340[];
+extern unsigned char g_7747b0;
+extern char g_7f4ca4[];
+extern int g_14cbca0;
+int g_699368 = 1;
+char* __cdecl cut_AllocCutscene(void* src);
+
+/* ADDRESS: GOLDTL 0x004c9e20 */
+int __cdecl cm_ExAllocCutscene(int* obj, char* result)
+{
+    extern unsigned short g_774970;
+    unsigned int payload[69];
+    char* entry;
+    int ret;
+    int idx;
+
+    ret = 0;
+    memcpy(payload, g_aed340, sizeof(payload));
+    if (g_14cbca0 != -1)
+        g_699368 = *(int*) ((char*) obj + 0x10);
+    entry = cut_AllocCutscene(payload);
+    if (entry == 0)
+        goto null_entry;
+    if (g_7747b0 & 4)
+        *(unsigned char*) (entry + 0x26) |= 0x80;
+    *(int*) (entry + 0x78) = *(int*) ((char*) obj + 0x14);
+    if (result != 0) {
+        result[0] = 1;
+        result[1] = 9;
+        *(char**) (result + 6) = entry;
+    }
+post_alloc:
+    if (*(unsigned char*) (entry + 8) == 5) {
+        idx = (unsigned short) g_774970;
+        if (*(int*) (g_7f4ca4 + idx * 0x21c) != *(int*) (entry + 0x34)) {
+            if (!(g_7747b0 & 4))
+                *(unsigned char*) (entry + 0x26) &= 0x7f;
+        }
+    }
+    g_699368++;
+    return ret;
+null_entry:
+    ret = 1;
+    goto post_alloc;
 }
 #endif
 
@@ -3855,7 +4242,7 @@ int __cdecl cm_ChainRecordLookup(int cmd, char* result)
 /* Execution handler: allocates a sermon theme (Thema Predigt)
  * for a church/religious building entity. */
 
-#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
+#if defined(REBREW_SERVER)
 int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 {
 	int field;
@@ -3883,6 +4270,38 @@ int __cdecl cm_ExAllocThemaPredigt(int cmd, char* result)
 		*result = 1;
 		result[1] = 3;
 		*(char**) (result + 6) = obj;
+	}
+	return 0;
+}
+#endif
+#if !defined(REBREW_SERVER)
+#include "Develop/DieGildeAddOn/game/game_data.h"
+extern char cm_LastObjectId[];
+int __cdecl cm_ResolveSpecialEntityId(char*, int);
+
+/* ADDRESS: GOLDTL 0x004ca2e0 */
+/* ADDRESS: GOLD 0x004c9740 */
+int __cdecl cm_ExAllocThemaPredigt(char* x, char* out)
+{
+	char* obj;
+	char* dst;
+
+	if (g_14cbca0 != -1)
+		gm_NextEntityId = *(int*) (x + 0x10);
+	*(int*) (x + 0x14) = cm_ResolveSpecialEntityId(x, *(int*) (x + 0x14));
+	obj = gm_AllocObjekt(*(int*) (x + 0x14), 0x1b5, 1);
+	if (obj == 0)
+		return 1;
+	(*(int*)cm_LastObjectId) = *(int*) (obj + 2);
+	obj[0x12] = 0x40;
+	x += 0x18;
+	dst = obj + 0x1c;
+	memcpy(dst, x, 7);
+	obj[0x22] = 0;
+	if (out != 0) {
+		out[0] = 1;
+		out[1] = 3;
+		*(char**) (out + 6) = obj;
 	}
 	return 0;
 }
@@ -3960,6 +4379,33 @@ int __cdecl cm_ExSetGebBesitzer(int cmd, char* result)
 		*result = '\x02';
 		result[1] = '\0';
 		*(int*) (result + 6) = 0;
+	}
+	return 0;
+}
+#endif
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLDTL 0x004cb650 */
+/* ADDRESS: GOLD 0x004caaa0 */
+int __cdecl cm_ExSetGebBesitzer(char* x, char* out)
+{
+	char* e;
+	unsigned short* a;
+	unsigned short* b;
+
+	e = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (x + 0x10));
+	if (e == 0)
+		return 1;
+	a = (unsigned short*) gm_LookupEntityRecordById(*(int*) (x + 0x18));
+	if (a == 0 && *(int*) (x + 0x18) != -1)
+		return 1;
+	b = (unsigned short*) gm_LookupEntityRecordById(*(int*) (x + 0x14));
+	if (b == 0 && *(int*) (x + 0x14) != -1)
+		return 2;
+	gm_AssignBuildingOwner(e, *b, *a);
+	if (out != 0) {
+		out[0] = 2;
+		out[1] = 0;
+		*(int*) (out + 6) = 0;
 	}
 	return 0;
 }
@@ -4364,7 +4810,7 @@ int __cdecl cm_ExAllocCharacter(int cmd, char* result)
 /* Execution handler: removes a transporter entity. Resolves
  * entity by ID and deallocates it from the game world. */
 
-#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
+#if defined(REBREW_SERVER)
 int __cdecl cm_ExKillTransporter(int cmd, char* result)
 {
 	void* record;
@@ -4384,6 +4830,26 @@ int __cdecl cm_ExKillTransporter(int cmd, char* result)
 		*result = '\x01';
 		result[1] = '\0';
 		*(int*) (result + 6) = 0;
+	}
+	return 0;
+}
+#endif
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLDTL 0x004cc710 */
+/* ADDRESS: GOLD 0x004cbb90 */
+int __cdecl cm_ExKillTransporter(char* input, char* response)
+{
+	char* p;
+
+	p = gm_FindRecordById(*(int*) (input + 0x10));
+	if (p == 0) {
+		return 1;
+	}
+	gm_RemoveClientEntityLink(p);
+	if (response != 0) {
+		response[0] = 1;
+		response[1] = 0;
+		*(int*) (response + 6) = 0;
 	}
 	return 0;
 }
@@ -4420,6 +4886,118 @@ int __cdecl cm_ExCreateGeb(int cmd, char* result)
 		*(char**) (result + 6) = building;
 	}
 
+	return 0;
+}
+#endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+extern void* g_6b7fdc;
+int __cdecl vfs_ResolvePath(char* path, int a, int b, char* out);
+int __cdecl fcn_004488e0(char* path, int a, int b);
+void __cdecl d3_SetNodePosition(int h, void* p);
+void __cdecl d3_SetObjectRotation(int h, void* p);
+void __cdecl d3_SetObjectGroundPosition(int h, void* p);
+void __cdecl d3_BindEntitySceneObject(int h, void* p, int n);
+void __cdecl lc_GetBauplatzPrefix(int id, char* dst);
+int __cdecl lc_GetGebaeudeBauplatz(char* name, void* p);
+void __cdecl d3_VisitSceneObjects(int a, int b, int c, int d, void* out);
+void __cdecl fcn_005982d0(void);
+void __cdecl ReportClientMessage(char* msg);
+void __cdecl fcn_0052d9d0(void* p);
+void __cdecl fcn_004bd4e0(int a, int b);
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
+
+/* ADDRESS: GOLDTL 0x004cc820 */
+int __cdecl cm_ExCreateGeb(char* request, char* out)
+{
+	char name[260];
+	char tmp[128];
+	char found[260];
+	char path[260];
+	char msg[256];
+	char shortname[84];
+	int pos[4];
+	struct {
+		int items[32];
+		int count;
+	} list;
+	unsigned char* geb;
+	unsigned char* model;
+	int saved;
+	int i;
+	int handle;
+	unsigned int kind;
+
+	model = (unsigned char*) gm_LookupEntityRecordById(*(int*) (request + 0x10));
+	if (model == 0)
+		return 1;
+	if (g_14cbca0 != -1)
+		gm_NextEntityId = *(int*) (request + 0x14);
+	geb = (unsigned char*) gm_AllocGebaeude(*(char*) (request + 0x18),
+	                                        *(unsigned short*) model);
+	if (geb == 0)
+		return 1;
+	*(int*) 0x68a9d4 = *(int*) (geb + 1);
+	kind = *geb;
+	/* Prefix literal at native 0x6798d4. */
+	strcpy(name, "gb_");
+	strcat(name, ((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[kind] + 1));
+	strupr(name + 2);
+	for (i = 0; i < 4; i++) {
+		if (i != 0)
+			sprintf(path, "%sgebaeude/*%s_%c.ogr", (char*) 0x7e1ae0, name,
+			        (char) (i + '@'));
+		else
+			sprintf(path, "%sgebaeude/*%s.ogr", (char*) 0x7e1ae0, name);
+		if (vfs_ResolvePath(path, (int) g_6b7fdc, (int) g_6b7fdc, found) != 0)
+			goto load;
+	}
+	goto done;
+load:
+	saved = d3_CurrentContextIndex;
+	d3_SelectSceneContext(0, 1);
+	pos[0] = *(int*) (request + 0x19);
+	pos[1] = *(int*) (request + 0x1d);
+	pos[2] = *(int*) (request + 0x21);
+	handle = fcn_004488e0(path, 0, 0);
+	if (handle == 0) {
+		sprintf(name,
+		        "cm_ExCreateGeb(): Could not load 3D-Object-Group '%s'...",
+		        path);
+		goto destroy;
+	}
+	memset(shortname, 0, sizeof shortname);
+	d3_SetNodePosition(handle, &pos[0]);
+	d3_SetObjectRotation(handle, request + 0x29);
+	d3_SetObjectGroundPosition(handle, pos);
+	d3_BindEntitySceneObject(handle, geb, 2);
+	lc_GetBauplatzPrefix(*geb, tmp);
+	strcpy(shortname, tmp);
+	sprintf(name, "cm_ExCreateGeb(): bauplatze name:%s", tmp);
+	if (lc_GetGebaeudeBauplatz(shortname, geb) != 0) {
+		memset(&list, 0, sizeof list);
+		d3_VisitSceneObjects(g_67a370, *(int*)(shortname + 0x50), 0x2c0, (int) fcn_005982d0, &list);
+		for (i = 0; i < list.count; i++) {
+			if (g_773dd8 != 0)
+				d3_RemoveSubTreeFromCellTree(list.items[i], (int*) g_773dd8);
+			sprintf(msg, "cm_ExCreateGeb(): killing objectname: %s",
+			        list.items[i]);
+			sprintf(msg, "cm_ExCreateGeb(): killing objectptr: %s",
+			        list.items[i]);
+			d3_DestroyObject((D3_OBJECT*)list.items[i]);
+		}
+	} else {
+		ReportClientMessage("cm_ExCreateGeb(): could not lc_GetGebaeudeBauplatz()...");
+	}
+	fcn_0052d9d0(geb);
+	fcn_004bd4e0(*(int*) (geb + 0x61), *geb);
+destroy:
+	d3_SelectSceneContext(saved, 1);
+done:
+	if (out != 0) {
+		out[0] = 1;
+		out[1] = 2;
+		*(void**) (out + 6) = geb;
+	}
 	return 0;
 }
 #endif
@@ -5149,7 +5727,7 @@ int __cdecl cm_ExSimSpecialAction(int cmd, char* result)
 }
 #endif
 
-#ifdef REBREW_SERVER
+#if defined(REBREW_SERVER)
 int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 {
 	int upgrade_data;
@@ -5196,6 +5774,59 @@ int __cdecl cm_GetBuildingStatCount(uchar* cmd)
 	return stat_count;
 }
 #endif
+#if !defined(REBREW_SERVER)
+/* cm_GetBuildingStatCount - client (GOLDTL/GOLD) variant.
+ * Field spans differ from the server build: the client's stat_count literals
+ * are 0x10/0x18/0x20 with +0x10/+8, the server's 0xc/0x12/0x18 with +4/+2.
+ * Same shape, different constants -> twin file, not a shared marker. */
+/* ADDRESS: GOLDTL 0x004f1320 */
+/* ADDRESS: GOLD 0x004ef3c0 */
+int __cdecl cm_GetBuildingStatCount(uchar* cmd)
+{
+	int upgrade_data;
+	int stat_count;
+	uchar entity_type;
+	char* type_entry;
+
+	entity_type = *cmd;
+	type_entry = g_entity_type_table + (uint) entity_type * 0x24d;
+	upgrade_data = *(int*) (cmd + 0x65);
+	/* Reading the tier byte in each test rather than into a local makes the
+	 * record address a common subexpression, so msvc6 materialises it with
+	 * `lea eax,[esi+eax*4]` and reads `[eax+0x247]` instead of folding the
+	 * displacement into the scaled load, and it still hoists `mov dl,1`
+	 * ahead of the leas.  A volatile load also splits the address but fences
+	 * the constant behind it (121/135). */
+	if (type_entry[0x247] == '\x01') {
+		stat_count = 8;
+		if (*(uchar*) (upgrade_data + 0x19) == (uchar) 1) {
+			return 0x10;
+		}
+	}
+	else if (type_entry[0x247] == '\x02') {
+		stat_count = 0xc;
+		if (*(uchar*) (upgrade_data + 0x19) == (uchar) 1) {
+			stat_count = 0x18;
+		}
+		if (*(uchar*) (upgrade_data + 0x1a) == (uchar) 1) {
+			return stat_count + 8;
+		}
+	}
+	else {
+		stat_count = 0x10;
+		if (*(uchar*) (upgrade_data + 0x19) == (uchar) 1) {
+			stat_count = 0x20;
+		}
+		if (*(uchar*) (upgrade_data + 0x1a) == (uchar) 1) {
+			stat_count = stat_count + 0x10;
+		}
+		if (*(uchar*) (upgrade_data + 0x1b) == (uchar) 1) {
+			stat_count = stat_count + 8;
+		}
+	}
+	return stat_count;
+}
+#endif
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 unsigned char _dpad_1002c050[928];
 unsigned char _dpad_1002c3f8[424];
@@ -5206,4 +5837,8 @@ unsigned char _dpad_1002caf0[67];
 unsigned char _dpad_1002cc39[1307];
 unsigned char _dpad_1002d361[115];
 unsigned char _dpad_100a8c40[84];
+#endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+/* Reference gaps only; the emitted objects inside the span keep their own rows. */
+unsigned char _dpad_7731d8[2912];
 #endif

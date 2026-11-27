@@ -38,7 +38,7 @@ int __cdecl fcn_00526120(char* text, int flag);
 void* __cdecl fcn_005cd440(void* desc, int a, int b, int c);
 int __cdecl d2_CheckActionBlocker(void* p, int flag);
 int __cdecl cm_SendSetHE(int mode, int arg);
-void __cdecl fcn_005100f0(int handle, int value);
+void __cdecl gm_ModifyHealth(int handle, int value);
 void __cdecl cm_RequestCopyEntityData(int a, int b, int c, int d);
 int __cdecl cm_GetCommandStatus(int handle);
 int __cdecl main_RunFrameLoop(int func, int id);
@@ -131,7 +131,7 @@ void __cdecl fcn_0059fa80(int a0, unsigned short* a1, int a2)
 							d2_CheckActionBlocker((char*) (v11 * 0x21c + 0x7f4ca0), 2))) {
 							*(int*) (v7 + 0xbc) = gm_GameTime.a;
 							cm_SendSetHE(3, v7);
-							fcn_005100f0(*(unsigned int*) (a0 + 4),
+							gm_ModifyHealth(*(unsigned int*) (a0 + 4),
 								0xfffffffe);
 							cm_RequestCopyEntityData(*(unsigned int*) &v10[2],
 								*(unsigned int*) &v6[2], 0xffffffdf, 1);

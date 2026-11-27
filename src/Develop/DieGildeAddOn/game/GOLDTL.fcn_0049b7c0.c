@@ -35,7 +35,7 @@ int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 /* Each arm declares its own message pair (block scope) so the pair lands in
  * the reference slots; every arm keeps its own call-and-copy tail, which c2
  * cross-jumps into one call site as in the reference. */
-int __cdecl fcn_0049b7c0(int kind, char* e, int busy, Msg* out1, Msg* out2)
+int __cdecl ai_StartUseObjectSicherheit(int kind, char* entity, int busy, Msg* out1, Msg* out2)
 {
 	Slot slots[10];
 	Counts cnt;
@@ -58,7 +58,7 @@ int __cdecl fcn_0049b7c0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 		slots[7].id = 0x2b4;
 		slots[8].id = 0x2b5;
 		slots[9].id = 0x2b3;
-		gm_CheckEntityObjectSlots(e, 10, slots, &cnt);
+		gm_CheckEntityObjectSlots(entity, 10, slots, &cnt);
 		if ((cnt.total != 6 || cnt.free != 0) && cnt.blocked != 10) {
 			if (cnt.total < 6 && cnt.free == 0) {
 				Msg a;
@@ -73,9 +73,9 @@ int __cdecl fcn_0049b7c0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				a.b = 1;
 				a.f = 0.05f;
 				b.type = 7;
-				b.a = *(int*) (e + 4);
+				b.a = *(int*) (entity + 4);
 				b.b = 1;
-				r = ai_SelectBestMethod(r, *(unsigned short*) e, 2, &a, &b);
+				r = ai_SelectBestMethod(r, *(unsigned short*) entity, 2, &a, &b);
 				if (r != 0) {
 					*out1 = a;
 					*out2 = b;
@@ -98,7 +98,7 @@ int __cdecl fcn_0049b7c0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 				b.b = -1;
 				b.d = 0x22;
 				if (i == 0) {
-					r = ai_SelectBestMethod(r, *(unsigned short*) e, 4, &a, &b);
+					r = ai_SelectBestMethod(r, *(unsigned short*) entity, 4, &a, &b);
 					if (r != 0) {
 						*out1 = a;
 						*out2 = b;
@@ -106,7 +106,7 @@ int __cdecl fcn_0049b7c0(int kind, char* e, int busy, Msg* out1, Msg* out2)
 					return r;
 				}
 				if (i < 4) {
-					r = ai_SelectBestMethod(r, *(unsigned short*) e, 3, &a, &b);
+					r = ai_SelectBestMethod(r, *(unsigned short*) entity, 3, &a, &b);
 					if (r != 0) {
 						*out1 = a;
 						*out2 = b;

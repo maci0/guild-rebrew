@@ -23,7 +23,7 @@ extern void* __cdecl fcn_00502cd0(int list, int a, int b, int c, int d);
 extern int __cdecl gm_GetElapsedMinutes(void* p, int v);
 extern int __cdecl gm_GetBuildingTechEffect(void* p, int a, int b);
 extern int __cdecl he_CountActionActors(char* record);
-extern int __cdecl fcn_0050dc90(void* p);
+extern int __cdecl gm_FindBuildingOwner(void* p);
 extern int __cdecl gm_eval_SlotVoll(int a, int b, int c);
 extern void __cdecl cm_SendSellObjekt(int a, int b, int c, int d, char e, int f);
 extern void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
@@ -133,7 +133,7 @@ void __cdecl he_RunRohstoffsuchen(char* event)
 	if (count == -1 && he_CountActionActors(event) <= 0)
 		valid = -1;
 	if (search != 0 && param != 0 && valid >= 1) {
-		count = fcn_0050dc90(search);
+		count = gm_FindBuildingOwner(search);
 		valid = gm_eval_SlotVoll((int) param, *(unsigned short*) (event + 0xac), valid);
 		if (valid != 0) {
 			cm_SendSellObjekt(*(int*) (param + 2), -1, *(unsigned short*) (event + 0xac),

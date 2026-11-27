@@ -1,5 +1,5 @@
 char* __cdecl cm_WaitForQueuedCommand(int, int);
-void __cdecl fcn_004ce100(int, int);
+void __cdecl d3_InitSceneState(int, int);
 void __cdecl cm_RecycleCommandQueueNode(char*);
 
 
@@ -13,7 +13,7 @@ int __cdecl cm_RecvSceneInitPacket(void)
 		return 1;
 	if (*(unsigned int*) (p + 0x10) != 0xa03ef57c)
 		return 1;
-	fcn_004ce100(*(int*) (p + 0x14), *(int*) (p + 0x18));
+	d3_InitSceneState(*(int*) (p + 0x14), *(int*) (p + 0x18));
 	cm_RecycleCommandQueueNode(p);
 	return 0;
 }

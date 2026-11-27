@@ -13,7 +13,7 @@ void __cdecl msx_StartMusicIfAllowed(char*);
 void __cdecl fcn_004e4c40(int);
 int __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl gm_FindOrAllocHeadSet(int, int);
-int __cdecl fcn_004e44b0(char*, char*);
+int __cdecl evt_StartGfxScript(char*, char*);
 void __cdecl cut_WaitForScript(int);
 int __cdecl gm_RandomMod(unsigned short);
 float __cdecl fcn_004ff210(unsigned short, int);
@@ -96,29 +96,29 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 		id = gm_FindOrAllocHeadSet(gm_RandomMod(2) & 0xffff, (gm_RandomMod(0x5e) & 0xffff) + 1);
 	}
 	sprintf(s_dst, (char*) 0x679060, id + 4);
-	fcn_004e44b0((char*) 0x68cf80, buf);
-	cut_WaitForScript(fcn_004e44b0((char*) 0x68cf54, (char*) 0x6b5c60));
+	evt_StartGfxScript((char*) 0x68cf80, buf);
+	cut_WaitForScript(evt_StartGfxScript((char*) 0x68cf54, (char*) 0x6b5c60));
 	if (*(int*) (eventRecord + 0xc) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
 		fcn_004ff210(*p, (int) -(*(float*) ((char*) p + 0x1c) + *(float*) 0x662a98));
 	}
 	switch (*(char*) (eventRecord + 0x7c)) {
 	case 0:
-		fcn_004e44b0((char*) 0x68cf28, (char*) 0x6b5c60);
+		evt_StartGfxScript((char*) 0x68cf28, (char*) 0x6b5c60);
 		break;
 	case 1:
 	case 2:
-		fcn_004e44b0((char*) 0x68cef8, (char*) 0x6b5c60);
+		evt_StartGfxScript((char*) 0x68cef8, (char*) 0x6b5c60);
 		break;
 	case 3:
-		fcn_004e44b0((char*) 0x68cec8, (char*) 0x6b5c60);
+		evt_StartGfxScript((char*) 0x68cec8, (char*) 0x6b5c60);
 		break;
 	case 4:
-		fcn_004e44b0((char*) 0x68ce98, (char*) 0x6b5c60);
+		evt_StartGfxScript((char*) 0x68ce98, (char*) 0x6b5c60);
 		break;
 	}
 	cut_WaitSeconds(ranges[*(char*) (eventRecord + 0x7c)]);
 	fcn_004e48b0();
-	cut_WaitForScript(fcn_004e44b0((char*) 0x68ce6c, (char*) 0x6b5c60));
+	cut_WaitForScript(evt_StartGfxScript((char*) 0x68ce6c, (char*) 0x6b5c60));
 	if (mode != 0) {
 		fcn_004e4c60();
 	}

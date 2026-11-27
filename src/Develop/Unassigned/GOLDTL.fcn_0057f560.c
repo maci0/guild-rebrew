@@ -4,7 +4,7 @@
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-int __cdecl fcn_0057f560(int* m)
+int __cdecl d2_CheckTutCh4Cat12Action0cGate(int* m)
 {
 	if (m[0] == 0x2b && m[1] != 0 && ((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) m[1]].category)) == 0x12 &&
 	    *(short*) (m[1] + 0x27) == (*(short*)&g_774970) && (m[3] == 0xc || m[3] == 0x1df)) {

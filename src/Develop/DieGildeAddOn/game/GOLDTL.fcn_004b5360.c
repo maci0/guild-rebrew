@@ -8,22 +8,22 @@ char* __cdecl gm_FindNextFilteredEntity(void);
 
 
 /* ADDRESS: GOLDTL 0x004b5360 */
-int __cdecl fcn_004b5360(int owner)
+int __cdecl gm_CountPlayerBuildingsByCategory(int category)
 {
-	int n;
-	char* p;
-	unsigned short h;
+	int count;
+	char* building;
+	unsigned short ownerSlot;
 	unsigned char kind;
 
-	n = 0;
-	for (p = gm_StartFilteredEntitySearch(1, 5, owner); p != 0; p = gm_FindNextFilteredEntity()) {
-		h = *(unsigned short*) (p + 0x27);
-		if (h == 0xffff)
+	count = 0;
+	for (building = gm_StartFilteredEntitySearch(1, 5, category); building != 0; building = gm_FindNextFilteredEntity()) {
+		ownerSlot = *(unsigned short*) (building + 0x27);
+		if (ownerSlot == 0xffff)
 			return -1;
-		kind = g_7f4ca2[h].kind;
+		kind = g_7f4ca2[ownerSlot].kind;
 		if (kind != 6 && kind != 7)
 			return -1;
-		n++;
+		count++;
 	}
-	return n;
+	return count;
 }

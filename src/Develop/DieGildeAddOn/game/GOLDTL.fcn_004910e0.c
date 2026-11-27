@@ -11,7 +11,7 @@ typedef struct Ent {
 } Ent;
 // SIZE 0x165
 
-void __cdecl fcn_004f4830(int a, Stat* st);
+void __cdecl gm_GetLawEntry(int a, Stat* st);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
 #include "client_types.h"
@@ -20,17 +20,17 @@ extern pos14_7f4c00 gm_GameTime;
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004910e0 */
-int __cdecl fcn_004910e0(Ent* e, int a2, int* out)
+int __cdecl ai_EvaluateLaw0x0c(Ent* entity, int unused, int* out)
 {
 	Stat st;
 	int range;
 	int difference;
 
-	range = gm_MapEntityStatRange(e->job);
+	range = gm_MapEntityStatRange(entity->job);
 	if ((*(int*)&gm_GameTime) < 4) {
 		return 0;
 	}
-	fcn_004f4830(0xc, &st);
+	gm_GetLawEntry(0xc, &st);
 	difference = st.v[2] - st.v[1];
 	if (range == 8) {
 		if (st.v[6] > (int) (difference * 0.33f + st.v[1])) {

@@ -44,7 +44,7 @@ typedef struct {
 	int f18c;
 	char pad190[0x1cc - 0x190];
 	int flags;
-} Guild4adc;
+} RULER_ENTITY;
 
 #include "Develop/DieGildeAddOn/game/game_matrices.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -60,12 +60,12 @@ void __cdecl gm_AddObjekt(int a, int b, int c);
 char* __cdecl gm_LookupHistoricalEntry(int, int*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
-int __cdecl fcn_004ae040(void);
-int __cdecl fcn_004ae060(void);
+int __cdecl gm_PickRandomType26HeadPortrait(void);
+int __cdecl gm_PickRandomHeadPortrait(void);
 void __cdecl fcn_004adf80(void);
 void __cdecl fcn_004adfe0(void);
 
-void __cdecl fcn_004adcd0(int mode, int unused, unsigned short owner, Guild4adc* g)
+void __cdecl amt_InitRulerEntity(int mode, int unused, unsigned short owner, RULER_ENTITY* g)
 {
 	char buf[0x100];
 	char* p;
@@ -128,14 +128,14 @@ void __cdecl fcn_004adcd0(int mode, int unused, unsigned short owner, Guild4adc*
 			io_FormatTextBuffer(buf, 0x42b3, g->id);
 			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_01");
 		}
-		g->f18c = fcn_004ae040();
+		g->f18c = gm_PickRandomType26HeadPortrait();
 		fcn_004adf80();
 	} else {
 		if ((*(int*)&gm_GameTime) > 0 && k != 0xffff) {
 			io_FormatTextBuffer(buf, 0x42b5, g->id);
 			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_03");
 		}
-		g->f18c = fcn_004ae060();
+		g->f18c = gm_PickRandomHeadPortrait();
 		fcn_004adfe0();
 	}
 	g->state = 3;

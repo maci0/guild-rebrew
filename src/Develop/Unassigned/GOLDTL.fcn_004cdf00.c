@@ -1,7 +1,7 @@
 
 
 
-char* __cdecl fcn_004cded0(void);
+char* __cdecl d3_FindFreeSceneEntry(void);
 extern char g_9baae0[];
 
 char* __cdecl d3_LookupSceneEntry(int id)
@@ -17,5 +17,5 @@ char* __cdecl d3_LookupSceneEntry(int id)
 			return g_9baae0 + i * 87;
 		}
 	}
-	return fcn_004cded0();
+	return d3_FindFreeSceneEntry();
 }

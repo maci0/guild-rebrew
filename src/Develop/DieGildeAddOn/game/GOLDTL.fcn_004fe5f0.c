@@ -18,7 +18,7 @@ extern char g_6b5c60[];
 extern char g_6964f0[];
 
 int __cdecl gm_CanDeleteEntity(char*);
-int __cdecl fcn_004f3770(char*);
+int __cdecl gv_DecayGravediggerHealth(char*);
 void __cdecl cm_RequestKillSpieler(int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendCommandSyncField(int, int, char*, void*);
@@ -61,7 +61,7 @@ double __cdecl fcn_004fe5f0(char* entity)
 		return g_662a94;
 	}
 	if (*(char*) (entity + 2) == 0x14) {
-		v4 = fcn_004f3770(entity);
+		v4 = gv_DecayGravediggerHealth(entity);
 		if (v4 == 1) {
 			c = 0;
 			cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));

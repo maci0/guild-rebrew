@@ -54,13 +54,13 @@ extern int* g_100dc48;
 extern unsigned short g_7f4c04;
 
 void* __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_004849b0(AI_MASTER_ENTITY*, void*, void*);
+void __cdecl ai_CollectBuildingGoodsPlan(AI_MASTER_ENTITY*, void*, void*);
 void __cdecl ai_ManageMeisterWorkers(AI_MASTER_ENTITY*);
 void __cdecl gm_TryAutoUpgradeBuildingSlots(void*, AI_MASTER_ENTITY*, int);
 void __cdecl ai_RequestAusbauUpgrade(void*, AI_MASTER_ENTITY*, int);
 void __cdecl ai_BuyStallGoods(AI_MASTER_ENTITY*);
 int __cdecl ai_CanProduceGood(AI_MASTER_ENTITY*, PRODUCTION_GOODS_RECORD*, int);
-void __cdecl fcn_004868d0(AI_MASTER_ENTITY*, PRODUCTION_GOODS_RECORD*);
+void __cdecl ai_PlanGoodIngredients(AI_MASTER_ENTITY*, PRODUCTION_GOODS_RECORD*);
 int __cdecl hp_PickWeightedProdItem(int);
 void* __cdecl gm_FindCityItemHolder(int);
 int __cdecl gm_eval_SlotVoll(void*, int, int);
@@ -114,7 +114,7 @@ static __inline int can_start(AI_MASTER_ENTITY* e, void* rec, PRODUCTION_GOODS_R
 static __inline void start_production(AI_MASTER_ENTITY* e, PRODUCTION_GOODS_RECORD* p, char* fmt, char* msg)
 {
 	p->flags |= 8;
-	fcn_004868d0(e, p);
+	ai_PlanGoodIngredients(e, p);
 	e->item = (unsigned short) p->goods_id;
 	if (fmt != 0) {
 		wsprintfA(msg, fmt, type_entry(p->goods_id) + 1);
@@ -152,7 +152,7 @@ void __cdecl ai_RunWorkshopMaster(AI_MASTER_ENTITY* e)
 	if (stk == 0) {
 		return;
 	}
-	fcn_004849b0(e, rec, stk);
+	ai_CollectBuildingGoodsPlan(e, rec, stk);
 	ai_ManageMeisterWorkers(e);
 	gm_TryAutoUpgradeBuildingSlots(stk, e, 0x4b);
 	ai_RequestAusbauUpgrade(stk, e, 0x19);

@@ -1,16 +1,16 @@
 #include "client_actions.h"
 
 #pragma pack(push, 1)
-typedef struct Ent47d {
+typedef struct AI_TURN_ENTITY {
 	unsigned short id;
 	unsigned char kind;
 	char pad3;
 	unsigned int seed;
 	char pad8[0x21c - 8];
-} Ent47d;
+} AI_TURN_ENTITY;
 // SIZE 0x21c
 
-typedef struct Bld47d {
+typedef struct AI_TURN_BUILDING {
 	unsigned char kind;
 	char pad1[4];
 	char name[0x22];
@@ -18,104 +18,104 @@ typedef struct Bld47d {
 	char pad29[0x5a - 0x29];
 	unsigned char x5a;
 	char pad5b[0xa9 - 0x5b];
-} Bld47d;
+} AI_TURN_BUILDING;
 // SIZE 0xa9
 
-typedef struct Level47d {
+typedef struct AI_TURN_PROTO {
 	unsigned char kind;
 	char pad1[0x223 - 1];
 	unsigned char x223;
 	char pad224[0x230 - 0x224];
 	unsigned char x230;
 	char pad231[0x24d - 0x231];
-} Level47d;
+} AI_TURN_PROTO;
 // SIZE 0x24d
 #pragma pack(pop)
 
 extern unsigned char* lpGebaeudePROT;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_0047d240(Ent47d*);
-Ent47d* __cdecl fcn_0047d2a0(Ent47d*);
-void __cdecl ai_BuildActionCandidates(Ent47d*);
-void __cdecl fcn_004c6090(Bld47d*, int, int, int);
+int __cdecl fcn_0047d240(AI_TURN_ENTITY*);
+AI_TURN_ENTITY* __cdecl fcn_0047d2a0(AI_TURN_ENTITY*);
+void __cdecl ai_BuildActionCandidates(AI_TURN_ENTITY*);
+void __cdecl fcn_004c6090(AI_TURN_BUILDING*, int, int, int);
 int __cdecl fcn_00495180(int);
 void __cdecl fcn_00495690(int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl sprintf(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x0047d810 */
-void __cdecl fcn_0047d810(Ent47d* e)
+void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 {
-	int n;
+	int remaining;
 	char buf[1024];
 	int found;
 	unsigned int lo;
 	unsigned int hi;
-	Bld47d* p;
-	Level47d* q;
-	char* r;
+	AI_TURN_BUILDING* building;
+	AI_TURN_PROTO* proto;
+	char* candidate;
 	unsigned int state;
 	int x223;
 	int x230;
 
-	if (!fcn_0047d240(e)) {
+	if (!fcn_0047d240(entity)) {
 		return;
 	}
-	if (*(unsigned int*) ((char*) e + 0x1cc) & 0x3000) {
+	if (*(unsigned int*) ((char*) entity + 0x1cc) & 0x3000) {
 		return;
 	}
-	n = 0x100;
-	p = *(Bld47d**) 0x90e094;
+	remaining = 0x100;
+	building = *(AI_TURN_BUILDING**) 0x90e094;
 	do {
-		if (p->kind) {
-			q = &((Level47d*) lpGebaeudePROT)[p->kind];
+		if (building->kind) {
+			proto = &((AI_TURN_PROTO*) lpGebaeudePROT)[building->kind];
 			lo = 0;
 			hi = 0;
-			if (q->kind > 0x1f) {
-				hi = 1 << (q->kind - 0x20);
+			if (proto->kind > 0x1f) {
+				hi = 1 << (proto->kind - 0x20);
 			}
 			else {
-				lo = 1 << q->kind;
+				lo = 1 << proto->kind;
 			}
-			if (p->x27 == e->id && !(p->x5a & 1)
+			if (building->x27 == entity->id && !(building->x5a & 1)
 			 && ((*(unsigned int*) 0x666028 & lo) || (*(unsigned int*) 0x66602c & hi))) {
 				found = 0;
-				r = (char*) 0x7f4ca2;
+				candidate = (char*) 0x7f4ca2;
 				do {
-					if ((int) r >= 0x85a0a2) {
+					if ((int) candidate >= 0x85a0a2) {
 						break;
 					}
-					if (*(unsigned short*) (r - 2) != 0xffff
-					 && *(Bld47d**) (r + 0x16a) == p
-					 && (*(unsigned char*) r == 1 || *(unsigned char*) r == 2)) {
+					if (*(unsigned short*) (candidate - 2) != 0xffff
+					 && *(AI_TURN_BUILDING**) (candidate + 0x16a) == building
+					 && (*(unsigned char*) candidate == 1 || *(unsigned char*) candidate == 2)) {
 						found = 1;
 					}
-					r += 0x21c;
+					candidate += 0x21c;
 				} while (!found);
-				if (gm_GetBuildingTypeCategory(p->kind) != 6 && !found) {
-					q = &((Level47d*) lpGebaeudePROT)[p->kind];
-					x223 = q->x223;
-					x230 = q->x230;
-					fcn_004c6090(p, 1, x230, x223);
+				if (gm_GetBuildingTypeCategory(building->kind) != 6 && !found) {
+					proto = &((AI_TURN_PROTO*) lpGebaeudePROT)[building->kind];
+					x223 = proto->x223;
+					x230 = proto->x230;
+					fcn_004c6090(building, 1, x230, x223);
 					sprintf(buf, (char*) 0x67db58, *(unsigned short*) &g_7f4c04,
-					 *(int*) 0x7f4c06, (char*) e + 0x30, p->name);
+					 *(int*) 0x7f4c06, (char*) entity + 0x30, building->name);
 				}
 			}
 		}
-		p++;
-		n--;
-	} while (n);
-	if (*(unsigned char*) ((char*) e + 8) <= 0) {
+		building++;
+		remaining--;
+	} while (remaining);
+	if (*(unsigned char*) ((char*) entity + 8) <= 0) {
 		return;
 	}
-	*(int*) 0x77261c = (int) fcn_0047d2a0(e);
-	ai_BuildActionCandidates(e);
-	state = *((unsigned char*) e + 0x132);
-	if (!*((char*) e + 0x1b1) && fcn_00495180(e->id)) {
-		if (*((unsigned char*) e + 0x132) != state
-		 || (*(unsigned int*) (0x10085d0 + *((unsigned char*) e + 0x132) * 0x94) & 0x200)) {
-			fcn_00495690(e->id);
+	*(int*) 0x77261c = (int) fcn_0047d2a0(entity);
+	ai_BuildActionCandidates(entity);
+	state = *((unsigned char*) entity + 0x132);
+	if (!*((char*) entity + 0x1b1) && fcn_00495180(entity->id)) {
+		if (*((unsigned char*) entity + 0x132) != state
+		 || (*(unsigned int*) (0x10085d0 + *((unsigned char*) entity + 0x132) * 0x94) & 0x200)) {
+			fcn_00495690(entity->id);
 		}
 	}
 	*(int*) 0x77261c = 0;

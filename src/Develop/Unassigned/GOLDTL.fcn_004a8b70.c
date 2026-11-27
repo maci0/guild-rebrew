@@ -4,14 +4,14 @@ typedef struct Stat {
 } Stat;
 // SIZE 0x24
 
-int __cdecl fcn_004f4830(int a, Stat* st);
+int __cdecl gm_GetLawEntry(int a, Stat* st);
 
 /* ADDRESS: GOLDTL 0x004a8b70 */
 int __cdecl ai_CheckLawActionPredicate(int unused1, int actor, char* ctx, int unused4, char* out)
 {
 	Stat st;
 
-	if (fcn_004f4830(*(int*) (ctx + 4), &st) && st.check(actor, st.v[0] & 0xff, (int*) &ctx)) {
+	if (gm_GetLawEntry(*(int*) (ctx + 4), &st) && st.check(actor, st.v[0] & 0xff, (int*) &ctx)) {
 		if ((int) ctx != st.v[6] && (int) ctx >= st.v[1] && (int) ctx <= st.v[2]) {
 			out[0] = 0x11;
 			*(int*) (out + 4) = st.v[0] & 0xff;

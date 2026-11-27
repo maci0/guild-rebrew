@@ -1,4 +1,4 @@
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 
 
 /* ADDRESS: GOLDTL 0x00490bb0 */
@@ -13,7 +13,7 @@ int __cdecl fcn_00490bb0(char* e, int unused, int* out)
 		level = n;
 	else
 		level = 4;
-	fcn_004f4830(6, info);
+	gm_GetLawEntry(6, info);
 	if (level != info[6]) {
 		*out = level;
 		return 1;

@@ -13,7 +13,7 @@ char* __cdecl gm_LookupWeaponSpec(int);
 unsigned int __cdecl cut_RandMod(unsigned int);
 void __cdecl cm_RequestReduceLifespan(int, int, int);
 char* __cdecl gm_GetEquippedCombatGear(char*);
-int __cdecl fcn_004cef70(int, char*);
+int __cdecl gm_GetEntityControlMask(int, char*);
 unsigned char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl d3_ChangeObjectTransparency(char*, char*, OBJECT_COLOR);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
@@ -79,7 +79,7 @@ void __cdecl fcn_004cf000(void)
 		if (s != 0 && *(int*) s == 0x172) {
 			t = 0;
 			if ((*(char**) 0x6f0d74) != 0) {
-				t = fcn_004cef70((int) *(unsigned short*) (*(char**) 0x6f0d74), e);
+				t = gm_GetEntityControlMask((int) *(unsigned short*) (*(char**) 0x6f0d74), e);
 			}
 			o = *(char**) (e + 0x184);
 			if (t & 0x800) {

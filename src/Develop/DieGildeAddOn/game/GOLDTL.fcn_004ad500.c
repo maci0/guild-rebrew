@@ -5,7 +5,7 @@ float __cdecl amt_GetOfficeAffinityScore(unsigned char*, int);
 
 
 /* ADDRESS: GOLDTL 0x004ad500 */
-float __cdecl fcn_004ad500(unsigned char* subjectEntity, unsigned short* otherEntity, int a3, int a4)
+float __cdecl amt_ScoreOfficeCandidate(unsigned char* subjectEntity, unsigned short* otherEntity, int unusedOfficeId, int doubleFavor)
 {
 	float d;
 	float w;
@@ -15,7 +15,7 @@ float __cdecl fcn_004ad500(unsigned char* subjectEntity, unsigned short* otherEn
 	float s2;
 
 	d = gm_CalcEntityFavor(*(unsigned short*) subjectEntity, *otherEntity, 1) * 0.01f;
-	if (a4 != 0)
+	if (doubleFavor != 0)
 		d = d + d;
 	w = (subjectEntity[0xd] + 1) * 0.1f;
 	w = w + w;

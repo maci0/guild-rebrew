@@ -10,7 +10,7 @@ typedef struct {
 	unsigned char d4[8];
 } Guid;
 
-char __cdecl fcn_0041c760(const char* s, Guid* g)
+char __cdecl d3_ParseGuid(const char* s, Guid* g)
 {
 	int d1;
 	int d2;

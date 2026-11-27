@@ -1,7 +1,7 @@
 #include <string.h>
 
 /* ADDRESS: GOLD 0x00435810 */
-void __cdecl fcn_00435810(char* base, char* name)
+void __cdecl d3_DeactivateObjectAnimation(char* base, char* name)
 {
 	char* p;
 	char* s;

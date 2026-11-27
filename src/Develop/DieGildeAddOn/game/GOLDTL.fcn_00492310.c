@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 unsigned char __cdecl fcn_004f97a0(int a);
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 
 int __cdecl ai_EvalStrafrechtLaw1b(char* e, int unused, int* out)
 {
@@ -26,7 +26,7 @@ int __cdecl ai_EvalStrafrechtLaw1b(char* e, int unused, int* out)
 	} else {
 		x = m * 0.9f;
 	}
-	fcn_004f4830(0x1b, info);
+	gm_GetLawEntry(0x1b, info);
 	if (x < 1.0f && info[6] == 0) {
 		if (!(z > y)) {
 			return 0;

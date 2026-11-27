@@ -42,7 +42,7 @@ void __cdecl io_AppendText(char* fmt, int a, int b);
 int __cdecl d2_BuildDependencyDiagram(unsigned char* a, unsigned short* b, int w, int h);
 void __cdecl d2_DestroyForm(int h);
 void __cdecl fcn_0050ee80(unsigned char* a, unsigned short* b);
-void __cdecl fcn_0050f750(int a, int b, int c, int d);
+void __cdecl d2_DrawDependencyLine(int a, int b, int c, int d);
 
 int __cdecl d2_OpenDependencyDiagram(int arg, unsigned char* a, unsigned short* b)
 {
@@ -69,10 +69,10 @@ int __cdecl d2_OpenDependencyDiagram(int arg, unsigned char* a, unsigned short* 
 	for (i = 0; i < g_85ab60; i++) {
 		for (j = 0; j < i; j++) {
 			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_a) {
-				fcn_0050f750(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].x + 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].y + 0x30, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x + 0x18,
+				d2_DrawDependencyLine(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].x + 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].y + 0x30, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x + 0x18,
 					     ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x18);
 			} else if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].item_id == ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].parent_b) {
-				fcn_0050f750(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].x + 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].y + 0x30, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x + 0x18,
+				d2_DrawDependencyLine(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].x + 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[j].y + 0x30, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x + 0x18,
 					     ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x18);
 			}
 		}

@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_004f4830(int, int*);
+void __cdecl gm_GetLawEntry(int, int*);
 
 void __cdecl fcn_004fc5c0(float* out)
 {
@@ -9,7 +9,7 @@ void __cdecl fcn_004fc5c0(float* out)
 	float lo;
 
 	for (i = 9; i <= 15; i++) {
-		fcn_004f4830(i, buf);
+		gm_GetLawEntry(i, buf);
 		lo = (float) buf[1];
 		out[i] = (buf[6] - lo) / (buf[2] - lo);
 	}

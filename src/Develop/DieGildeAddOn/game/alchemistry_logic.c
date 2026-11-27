@@ -642,6 +642,38 @@ int __cdecl ahm_AllocateEntitySlot(int obj, int tgt, int src)
 	return 0;
 }
 #endif
+#if !defined(REBREW_SERVER)
+extern int g_14cbca0;
+extern int gm_NextEntityId;
+extern unsigned char g_773d75;
+char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
+void __cdecl fcn_00501d20(int season);
+
+/* ADDRESS: GOLDTL 0x004ee8c0 */
+/* ADDRESS: GOLD 0x004ecb30 */
+int __cdecl ahm_AllocateEntitySlot(char* obj, char* tgt, char* src)
+{
+	int i;
+	char* query;
+
+	for (i = 0; i < 6; i++) {
+		if (*(int*) (tgt + 0xc + i * 8) == 0) {
+			query = fcn_00502cd0(*(int*) (src + 0x5d), 2, 6, 0, 0xff);
+			if (g_14cbca0 != -1) {
+				gm_NextEntityId = *(int*) (obj + 0x14);
+			}
+			*(int*) (tgt + 0xc + i * 8) = *(int*) (obj + 8);
+			*(int*) (tgt + 0x10 + i * 8) = *(int*) (obj + 0x10);
+			if (query != 0) {
+				gm_AddObjekt(*(int*) (query + 2), *(int*) (obj + 8), 2);
+			}
+			fcn_00501d20(g_773d75);
+			return 1;
+		}
+	}
+	return 0;
+}
+#endif
 
 
 int __cdecl ahm_SlotClearMatch(char* data, char* target, char* src)
@@ -1294,7 +1326,7 @@ int* __cdecl ahm_QueryEntityBuildingType(int arg1)
 }
 
 
-#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
+#if defined(REBREW_SERVER)
 /* RELOC 752/752.  The switch-byte/index register pair (dl/ecx in the target,
  * cl/edx before this fix) is decided by which case-0x16 statement reads
  * cmd_payload first: assigning `cursor` from the `*cmd_payload == 0x16`

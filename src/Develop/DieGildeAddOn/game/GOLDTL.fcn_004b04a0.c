@@ -7,7 +7,7 @@ void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004b04a0 */
-int __cdecl fcn_004b04a0(int* entries, int index, char* text)
+int __cdecl hst_HandleVermoegen(int* entries, int index, char* text)
 {
 	int sign[2] = { -1, 1 };
 	char names[2][6] = { "MINUS", "PLUS" };

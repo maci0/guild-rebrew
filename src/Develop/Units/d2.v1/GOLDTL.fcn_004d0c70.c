@@ -48,7 +48,7 @@ extern char* g_1015ea0;
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 
-int __cdecl fcn_004cef70(int a1, char* a2);
+int __cdecl gm_GetEntityControlMask(int a1, char* a2);
 int __cdecl fcn_00469c30(int x, int y, int a3);
 int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
 char** __cdecl gm_GetEquippedCombatGear(char* x);
@@ -81,7 +81,7 @@ void __cdecl fcn_004d0c70(void)
 			break;
 		}
 		unit = ch_ContextCharacters[i];
-		if (unit != 0 && (fcn_004cef70(((Game*)g_772f24)->id, unit) & 0x800) != 0) {
+		if (unit != 0 && (gm_GetEntityControlMask(((Game*)g_772f24)->id, unit) & 0x800) != 0) {
 			g_9b4840[k].frame = fcn_00469c30(k * 0x80 + 0x18, 0xf, 0x5da);
 			g_9b4840[k].win = fcn_0046e940(k * 0x80, 0, 0x80, 0x4b, 0x110);
 			name = gm_GetEquippedCombatGear(unit);

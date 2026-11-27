@@ -11,7 +11,7 @@ extern char g_6aa35c[];
 void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
-void __cdecl fcn_005b7880(int, char*);
+void __cdecl d2_RunSoeldnerbuchDialog(int, char*);
 void __cdecl fcn_005c72f0(int);
 
 void __cdecl d2_RunWacheInteriorHud(int a)
@@ -29,7 +29,7 @@ void __cdecl d2_RunWacheInteriorHud(int a)
 		}
 		if (g_7746a0 != 0) {
 			if (g_7746a0 == x) {
-				fcn_005b7880(a, g_6aa370);
+				d2_RunSoeldnerbuchDialog(a, g_6aa370);
 			}
 			else if (g_7746a0 == y) {
 				fcn_005c72f0(a);

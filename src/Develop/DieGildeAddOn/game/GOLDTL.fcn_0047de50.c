@@ -61,7 +61,7 @@ extern unsigned char* lpGebaeudePROT;
 int __cdecl gm_CanEvaluateMaster(char*);
 int __cdecl gm_AccumulateTyped2(void*);
 
-void __cdecl fcn_0047f6b0(Master47de*);
+void __cdecl ai_RunResourceMaster(Master47de*);
 void __cdecl ai_CalcMeisterWache(Master47de*);
 void __cdecl ai_CalcMeisterDiebe(Master47de*);
 void __cdecl ai_CalcMeisterRaeuber(Master47de*);
@@ -112,7 +112,7 @@ void __cdecl ai_EvaluateMeister(Master47de* m)
 			ai_UpdateMeisterBuilding(m);
 		}
 	} else if (gm_GetBuildingTypeCategory(m->bld->office) == 2) {
-		fcn_0047f6b0(m);
+		ai_RunResourceMaster(m);
 	} else {
 		k = ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[m->bld->office].category;
 		if (k == 0x13) {

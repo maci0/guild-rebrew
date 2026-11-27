@@ -26,7 +26,7 @@ char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int id);
 
 
 /* ADDRESS: GOLDTL 0x004a8ed0 */
-int __cdecl fcn_004a8ed0(char* unused1, char* e, char* unused3, char* unused4, char* out)
+int __cdecl ai_CheckAction028Predicate(char* unused1, char* actor, char* unused3, char* unused4, char* out)
 {
 	int found;
 	char* q;
@@ -40,7 +40,7 @@ int __cdecl fcn_004a8ed0(char* unused1, char* e, char* unused3, char* unused4, c
 	if (g_77261c != 0) {
 		ai_FindEntityInFavorRange(g_77261c, 4, f, 0, 100.0f, &found);
 	}
-	if (found == -1 && ai_FindEntityInFavorRange(e, 6, f, 0, gm_RandomMod(0x20) + 32.0f, &found) == 0) {
+	if (found == -1 && ai_FindEntityInFavorRange(actor, 6, f, 0, gm_RandomMod(0x20) + 32.0f, &found) == 0) {
 		return 0;
 	}
 	q = gm_StartFilteredEntitySearch(1, 1, found);

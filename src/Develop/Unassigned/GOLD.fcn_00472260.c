@@ -8,7 +8,7 @@ extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 
-void __cdecl fcn_00472260(int x, int y, int win, int target, int id)
+void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id)
 {
 	int wo;
 

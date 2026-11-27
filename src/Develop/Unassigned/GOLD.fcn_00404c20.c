@@ -1,5 +1,5 @@
-void __cdecl fcn_00435810(char*, char*);
-void __cdecl fcn_00435870(char*, char*, int);
+void __cdecl d3_DeactivateObjectAnimation(char*, char*);
+void __cdecl d3_SetObjectAnimationActive(char*, char*, int);
 
 /* ADDRESS: GOLD 0x00404c20 */
 void __cdecl fcn_00404c20(char* obj, int paused)
@@ -16,10 +16,10 @@ void __cdecl fcn_00404c20(char* obj, int paused)
     frames = *(char**) (0x68 + stream);
 
     if (paused) {
-        fcn_00435810(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames);
+        d3_DeactivateObjectAnimation(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames);
         *(unsigned char*) (obj + 0x8c) |= 4;
     } else {
-        fcn_00435870(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames, 1);
+        d3_SetObjectAnimationActive(*(char**) (*(char**) (obj + 0x34) + 0x1ec) + 0xf4, frames, 1);
         *(unsigned char*) (obj + 0x8c) &= 0xfb;
     }
 }

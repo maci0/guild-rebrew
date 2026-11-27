@@ -38,7 +38,7 @@ void __cdecl fcn_0052df40(unsigned char*);
 
 /* Dispatch selection actions, then refresh changed panel state. */
 /* ADDRESS: GOLDTL 0x0052f7b0 */
-void __cdecl fcn_0052f7b0(void)
+void __cdecl d2_UpdateSelectionPanels(void)
 {
     int query[20];
     char* selected;

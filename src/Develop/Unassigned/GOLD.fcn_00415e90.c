@@ -13,7 +13,7 @@ typedef struct {
 int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, float a, int b, void (__cdecl* cb)(void));
 void __cdecl fcn_00417870(void);
 
-int* __cdecl fcn_00415e90(int a1, int a2, int v0, int v1, int v2, int v3)
+int* __cdecl d3_SpawnBlutEffect(int unused, int mode, int v0, int v1, int v2, int v3)
 {
 	Bytes4 flags;
 	int* result;
@@ -22,9 +22,9 @@ int* __cdecl fcn_00415e90(int a1, int a2, int v0, int v1, int v2, int v3)
 	memset(&flags, 0, sizeof(flags));
 	flags.c |= 2;
 	flags.a = 0x7f;
-	result = fcn_004524e0(200, "Blut", flags, 1.0f, a1, fcn_00417870);
+	result = fcn_004524e0(200, "Blut", flags, 1.0f, unused, fcn_00417870);
 	if (result != 0) {
-		result[8] = a2 * 2 | 1;
+		result[8] = mode * 2 | 1;
 		result[0] = v0;
 		result[1] = v1;
 		result[2] = v2;

@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0041e740 */
-int __cdecl fcn_0041e740(void* surface)
+int __cdecl d3_UnlockSurface(void* surface)
 {
 	int result;
 

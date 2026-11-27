@@ -11,7 +11,7 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_CheckPrivilege(int, char*, int*);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl ai_SelectBestMethod(int, unsigned short, int, void*, void*);
-int __cdecl fcn_004f4830(int, void*);
+int __cdecl gm_GetLawEntry(int, void*);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_004a5340(char*, int, int*, int, float, unsigned short*);
@@ -97,7 +97,7 @@ fail:
 		return 0;
 	}
 main:
-	fcn_004f4830(0x15, rec);
+	gm_GetLawEntry(0x15, rec);
 	if (*(int*) (rec + 0x18) != 0) {
 		if (gm_RandomMod(3) == 0 && g_77261c == 0) {
 			goto fail;

@@ -13,7 +13,7 @@ void __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendPacketFieldValue(unsigned char, unsigned char, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl gm_StartFilteredEntitySearch(int, ...);
-int __cdecl fcn_0050dc90(int);
+int __cdecl gm_FindBuildingOwner(int);
 int __cdecl gm_FindBuildingPrimarySlot(void*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -58,7 +58,7 @@ void __cdecl he_RunLagerErweitern(char* action)
 		msg = 0x606;
 		ent = (int) gm_StartFilteredEntitySearch(1, 1, *(unsigned int*) (action + 0x10));
 		if (ent) {
-			info = (char*) fcn_0050dc90(ent);
+			info = (char*) gm_FindBuildingOwner(ent);
 			if (info != 0 && (*(unsigned char*) (info + 0x1b4) & 1))
 				msg = 0x60b;
 			cat = gm_FindBuildingPrimarySlot((void*) ent);

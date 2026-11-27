@@ -4,7 +4,7 @@ extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl gm_GetSeasonTreasury(char*, unsigned char);
-int __cdecl fcn_004a48a0(char*, int);
+int __cdecl gm_CalcBuildingRepairCost(char*, int);
 
 
 /* The inventory entry also holds a second function at 0x4978d0 (180 bytes). */
@@ -35,7 +35,7 @@ int __cdecl ai_StartRepairBuilding(int unused, char* e, int unused2, char* out, 
 		if (best != 0) {
 			f = gm_GetSeasonTreasury(e, g_773d75) * 0.95f;
 			kind = minv < 50 ? 50 : 30;
-			amt = (float)(fcn_004a48a0(best, kind));
+			amt = (float)(gm_CalcBuildingRepairCost(best, kind));
 			if (amt != 0.0f && !(amt > f)) {
 				out[0] = 4;
 				*(int*) (out + 4) = *(int*) (best + 1);
@@ -56,7 +56,7 @@ int __cdecl ai_StartRepairBuilding(int unused, char* e, int unused2, char* out, 
 				if (p[0x5a] & 5) {
 					return 0;
 				}
-				amt = (float)(fcn_004a48a0(p, *(int*) (out + 0x10)));
+				amt = (float)(gm_CalcBuildingRepairCost(p, *(int*) (out + 0x10)));
 				if (amt != 0.0f && !(amt > *(unsigned int*) (out2 + 8))) {
 					*(float*) (out + 0x14) = amt;
 					return 0xf;

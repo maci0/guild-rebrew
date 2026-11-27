@@ -3,10 +3,10 @@ typedef struct Stat {
 } Stat;
 
 int __cdecl gm_MapEntityStatRange(int raw_idx);
-void __cdecl fcn_004f4830(int idx, Stat* st);
+void __cdecl gm_GetLawEntry(int idx, Stat* st);
 
 /* ADDRESS: GOLDTL 0x00491570 */
-int __cdecl fcn_00491570(char* e, int unused, int* out)
+int __cdecl ai_EvaluateLaw0x11(char* entity, int unused, int* out)
 {
 	Stat st;
 	float w;
@@ -14,16 +14,16 @@ int __cdecl fcn_00491570(char* e, int unused, int* out)
 	float z;
 	int job;
 
-	job = gm_MapEntityStatRange(*(unsigned char*) (e + 0x164));
-	w = (float) (*(float*) (e + 0x100) - 2.0);
-	y = (*(float*) (e + 0xf4) - 2.0) * *(float*) (e + 0xfc);
-	z = (*(float*) (e + 0x10c) - 2.0) * *(float*) (e + 0x114);
+	job = gm_MapEntityStatRange(*(unsigned char*) (entity + 0x164));
+	w = (float) (*(float*) (entity + 0x100) - 2.0);
+	y = (*(float*) (entity + 0xf4) - 2.0) * *(float*) (entity + 0xfc);
+	z = (*(float*) (entity + 0x10c) - 2.0) * *(float*) (entity + 0x114);
 	if (job == 5 || job == 6) {
 		w = w * 1.5f;
 	} else if (job == 7) {
 		w = w * 0.9f;
 	}
-	fcn_004f4830(0x11, &st);
+	gm_GetLawEntry(0x11, &st);
 	if (w < 0.5f && st.v[6] == 0) {
 		if (!(y > z)) {
 			return 0;

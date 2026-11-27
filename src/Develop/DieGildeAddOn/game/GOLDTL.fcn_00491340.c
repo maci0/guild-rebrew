@@ -6,7 +6,7 @@
 extern pos14_7f4c00 gm_GameTime;
 extern unsigned char g_773d75;
 
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 float __cdecl gm_GetBuildingLevelRatio(void);
 char* __cdecl gm_GetGuildHall(int k);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
@@ -24,7 +24,7 @@ int __cdecl ai_EvalSteuernLaw0f(char* entity, char* unused, int* out)
 	if ((*(int*)&gm_GameTime) < 4) {
 		return 0;
 	}
-	fcn_004f4830(0xf, info);
+	gm_GetLawEntry(0xf, info);
 	gm_GetBuildingLevelRatio();
 	p = gm_GetGuildHall(1);
 	p = fcn_00502cd0(*(int*) (p + 0x5d), 2, 6, 0, 0x115);

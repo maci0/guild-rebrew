@@ -31,7 +31,7 @@ slot80* __cdecl gm_FindSlotById(int a1, int a2);
 float __cdecl gm_CalcMarketSlotPriceByObjektId(int a1, int a2);
 int __cdecl cm_SendMarktSlotDelta(slot80* e, unsigned char kind);
 void __cdecl cm_RequestChangeBits(int a1, int a2, int a3, int a4, int a5);
-void __cdecl fcn_005100f0(int a1, int a2);
+void __cdecl gm_ModifyHealth(int a1, int a2);
 int __cdecl gm_RandomMod(int a1);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_PostEntityMessage(int a1, int a2, void* p, int a4, int a5, void* p6);
@@ -148,7 +148,7 @@ found:
 			packet[4] = secondId;
 		}
 		cm_RequestChangeBits(*(int*) (self + 4), 0x1c8, 4, 0x4000000, 0);
-		fcn_005100f0(*(int*) (self + 4), -3);
+		gm_ModifyHealth(*(int*) (self + 4), -3);
 		found = gm_RandomMod(3);
 		if (packet[2] == 1) {
 			io_FormatTextBuffer(buf1, (found & 0xffff) + 0x1656, packet[1] + 0x1648);

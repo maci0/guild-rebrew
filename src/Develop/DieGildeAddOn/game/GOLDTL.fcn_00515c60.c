@@ -5,7 +5,7 @@ extern void* g_6b7fdc;
 extern char g_6790c8[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
-int __cdecl fcn_0050dc90(void*);
+int __cdecl gm_FindBuildingOwner(void*);
 int __cdecl gm_CheckEntityType(void*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 int __cdecl vfs_LookupPath(char*, int, char*);
@@ -28,7 +28,7 @@ void __cdecl evt_StartShopIntroScript(unsigned char* building, unsigned char* vi
 	zv[0] = 0;
 	v9 = 0;
 	v8 = 0;
-	v3 = fcn_0050dc90(building);
+	v3 = gm_FindBuildingOwner(building);
 	p = (int*) ch_ContextCharacters;
 loop:
 	if (v9) {

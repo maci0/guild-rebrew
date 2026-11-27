@@ -5,7 +5,7 @@ extern int* g_665f08;
 extern volatile int g_6b7fac;
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_0057f220(int* m)
+int __cdecl d2_UpdateTutCh2Cat0dStep(int* m)
 {
 	if (m[0] == 0x1b && m[1] != 0 && g_665f08[1] == 4) {
 		if (((char)(((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*(unsigned char*) m[1]].category)) == 0xd) {

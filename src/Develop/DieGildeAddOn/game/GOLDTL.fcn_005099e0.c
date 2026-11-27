@@ -2,7 +2,7 @@
 
 int __cdecl fcn_004f4650(void *, void **, void **);
 int __cdecl fcn_004f1790(void *, void *);
-void __cdecl fcn_004f22e0(void *, void *, int, int);
+void __cdecl gv_RequestAddCandidateToOfficePool(void *, void *, int, int);
 void __cdecl fcn_004f2a10(void *, void *, int, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
@@ -48,7 +48,7 @@ void __cdecl gm_TransferEntityBuildings(void *fromEntity, void *toEntity)
 	cnt = 0;
 	flag = 0;
 	if (fcn_004f4650(fromEntity, &ent, &found)) {
-		fcn_004f22e0(fromEntity, ent, *(int *) found,
+		gv_RequestAddCandidateToOfficePool(fromEntity, ent, *(int *) found,
 					 fcn_004f1790(*(void **) ((char *) ent + 0x65), found));
 		if (toEntity != 0 && toEntity != (void *) gm_CityEntity
 			&& *(int *) ((char *) fromEntity + 4) == *(int *) ((char *) found + 4)) {

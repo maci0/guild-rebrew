@@ -42,8 +42,8 @@ void __cdecl fcn_004e71a0(void)
 		((struct reg_4e71a0*)cut_Cutscenes)[i].id = -1;
 	cut_RegisterEventCallbacks(0, cut_RunTobyCutscene, (void*) fcn_004e1950, 0, 0, 0);
 	cut_RegisterEventCallbacks(1, cut_RunOfficeSessions, (void*) fcn_004dc5f0, (void*) fcn_004dc6e0, 0, 0);
-	cut_RegisterEventCallbacks(2, cut_RunProzess, (void*) fcn_004df1b0, (void*) cut_HandleProzessEvent, fcn_004dc7d0, 0);
-	cut_RegisterEventCallbacks(3, cut_RunCombatCutscene, (void*) fcn_004da170, 0, fcn_004d74b0, 1);
+	cut_RegisterEventCallbacks(2, cut_RunProzess, (void*) cut_PromptProzessChoice, (void*) cut_HandleProzessEvent, fcn_004dc7d0, 0);
+	cut_RegisterEventCallbacks(3, cut_RunCombatCutscene, (void*) fcn_004da170, 0, cut_NotifyCombatCutscene, 1);
 	cut_RegisterEventCallbacks(4, cut_MainDuell, (void*) fcn_004e1900, (void*) cut_SelectDuellResponse, fcn_004e1330, 0);
 	cut_RegisterEventCallbacks(5, cut_PlayHinrichtung, 0, 0, cut_NotifyHinrichtung, 0);
 	cut_RegisterEventCallbacks(6, fcn_004e2090, 0, 0, gm_NotifyHochzeit, 0);

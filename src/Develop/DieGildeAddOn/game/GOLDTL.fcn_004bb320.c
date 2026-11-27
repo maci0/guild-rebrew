@@ -10,22 +10,22 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bb320 */
-int __cdecl fcn_004bb320(int* request)
+int __cdecl gm_HandleMsg3aBoostSkill(int* request)
 {
 	char buf[0x100];
-	unsigned char* e;
-	int k;
+	unsigned char* entity;
+	int skill;
 	int room;
 
-	k = gm_RandomMod(5);
-	e = gm_LookupEntityRecordById(request[0]);
-	if (e == 0)
+	skill = gm_RandomMod(5);
+	entity = gm_LookupEntityRecordById(request[0]);
+	if (entity == 0)
 		return 1;
-	room = 0xfc - e[k + 0x80];
+	room = 0xfc - entity[skill + 0x80];
 	if (room <= 0)
 		return 0x400;
-	cm_RequestModifyEntityLevel(*(int*) (e + 4), k, (char) MIN(room, gm_RandomMod(0x11) + 8));
-	io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, k + 0x16b7);
-	he_PostEntityMessage(*(int*) (e + 4), *(int*) (e + 4), buf, strlen(buf) > 0x100, 0x603, 0);
+	cm_RequestModifyEntityLevel(*(int*) (entity + 4), skill, (char) MIN(room, gm_RandomMod(0x11) + 8));
+	io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, skill + 0x16b7);
+	he_PostEntityMessage(*(int*) (entity + 4), *(int*) (entity + 4), buf, strlen(buf) > 0x100, 0x603, 0);
 	return 0;
 }

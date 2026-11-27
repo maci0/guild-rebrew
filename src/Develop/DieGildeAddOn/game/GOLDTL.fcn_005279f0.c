@@ -47,7 +47,7 @@ extern char g_6b5c60[];
 extern char* g_14a79c0[];
 
 void __cdecl d2_DestroyElement(int id);
-void __cdecl fcn_00527540(void);
+void __cdecl d2_LoadBuildingGroundplan(void);
 int __cdecl fcn_00465950(const char* name);
 void* __cdecl d2_GetResourceData(int idx);
 int __cdecl fcn_0047cba0(int x, int y, int a3, fcn_0047cba0_set* s,
@@ -102,7 +102,7 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 			p += 4;
 		} while ((int) p < (int)(g_7ea380 + 15));
 		if (g_7746c4 || g_7746c8)
-			fcn_00527540();
+			d2_LoadBuildingGroundplan();
 		g_6a2be4 = d3_CurrentContextIndex;
 	}
 	if (!g_7746c4 && !g_7746c8) {

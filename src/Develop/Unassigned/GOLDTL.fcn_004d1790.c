@@ -14,7 +14,7 @@ extern char g_68b844[];
 
 void __cdecl fcn_005345a0(void);
 void __cdecl d3_BeginSelectionBox(void);
-int __cdecl fcn_004cef70(int, char*);
+int __cdecl gm_GetEntityControlMask(int, char*);
 char __cdecl fcn_004d15c0(int, char*);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 void __cdecl fcn_00414c30(int, int);
@@ -44,7 +44,7 @@ void __cdecl fcn_004d1790(int a0)
 					continue;
 				if (*(char*) (o + 0x188) == 0)
 					continue;
-				if ((fcn_004cef70(*g_772f24, o) & 0x800) == 0)
+				if ((gm_GetEntityControlMask(*g_772f24, o) & 0x800) == 0)
 					continue;
 				if (*(int*) (o + 0x184) == 0)
 					continue;

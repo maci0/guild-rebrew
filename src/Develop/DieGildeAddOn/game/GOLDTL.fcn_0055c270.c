@@ -36,9 +36,9 @@ extern unsigned char* __cdecl fcn_00502cd0(int, int, int, int);
 extern int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 extern int __cdecl cm_GetCommandStatus(int);
 extern char* __cdecl cm_GetCommandResult(int);
-extern void __cdecl fcn_004f2ba0(char*, char*, int);
+extern void __cdecl gv_RequestActivateSection(char*, char*, int);
 extern void __cdecl cm_SendCopyEntityData(char*);
-extern char* __cdecl fcn_0050dc90(char*);
+extern char* __cdecl gm_FindBuildingOwner(char*);
 extern void __cdecl he_FreeAction(char*);
 extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 extern void __cdecl cm_RequestSysMessage(int, Req55c270*);
@@ -88,13 +88,13 @@ void __cdecl he_RunCartBuySellObjekt(char* o)
 			return;
 		}
 		if (*(unsigned short*) rec == 0x1f9) {
-			fcn_004f2ba0((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
+			gv_RequestActivateSection((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
 				(char*) e, 1);
 		} else if (*(unsigned short*) rec == 0x1fd) {
-			fcn_004f2ba0((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
+			gv_RequestActivateSection((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
 				(char*) e, 2);
 		} else if (*(unsigned short*) rec == 0x201) {
-			fcn_004f2ba0((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
+			gv_RequestActivateSection((char*) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) (e + 0x27)],
 				(char*) e, 3);
 		} else if (*(unsigned short*) rec == 0x12d) {
 			Msg55c270 msg;
@@ -134,7 +134,7 @@ void __cdecl he_RunCartBuySellObjekt(char* o)
 			if (h != 0 && *(unsigned short*) h != 0xfd) {
 				kind = 0x606;
 				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category != 6) {
-					p = (unsigned char*) fcn_0050dc90((char*) e);
+					p = (unsigned char*) gm_FindBuildingOwner((char*) e);
 					if (p != 0 && p[2] == 1 && (p[0x1b4] & 1) != 0 &&
 					    *(int*) (o + 0xb8) != 0)
 						kind = 0x60b;
@@ -150,7 +150,7 @@ void __cdecl he_RunCartBuySellObjekt(char* o)
 			} else {
 				kind = 0x606;
 				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*e].category != 6) {
-					p = (unsigned char*) fcn_0050dc90((char*) e);
+					p = (unsigned char*) gm_FindBuildingOwner((char*) e);
 					if (p != 0 && p[2] == 1 && (p[0x1b4] & 1) != 0 &&
 					    *(int*) (o + 0xb8) != 0)
 						kind = 0x60b;

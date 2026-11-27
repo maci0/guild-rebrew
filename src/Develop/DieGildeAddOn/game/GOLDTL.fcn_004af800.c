@@ -25,8 +25,8 @@ int __cdecl fcn_004ae0f0(int);
 unsigned short __cdecl gm_RandomMod(int);
 
 int __cdecl gm_IsSlotActivePerson(unsigned short a1);
-int __cdecl fcn_004ae1c0(int a1);
-int __cdecl fcn_004ae210(int a1);
+int __cdecl gm_IsSlotNpcPerson(int a1);
+int __cdecl gm_IsSlotPlayerPerson(int a1);
 
 #pragma optimize("y", off)
 int __cdecl fcn_004af800(int mode, int* pairs, int idx, char* text, void* out)
@@ -96,9 +96,9 @@ int __cdecl fcn_004af800(int mode, int* pairs, int idx, char* text, void* out)
 		if (sel == 0) {
 			test = (int (__cdecl*)(int)) gm_IsSlotActivePerson;
 		} else if (sel == 1) {
-			test = fcn_004ae1c0;
+			test = gm_IsSlotNpcPerson;
 		} else {
-			test = fcn_004ae210;
+			test = gm_IsSlotPlayerPerson;
 		}
 	}
 	if (mode == 1) {

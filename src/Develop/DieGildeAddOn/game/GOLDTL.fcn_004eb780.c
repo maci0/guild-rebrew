@@ -17,7 +17,7 @@ extern unsigned char g_773d75;
 float __cdecl gm_RandomFloat01(void);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -61,7 +61,7 @@ int __cdecl gm_ExecZunftAufruhr(char* e, int* msg)
 			}
 		}
 	}
-	fcn_005100f0(*(int*) (e + 4), -5);
+	gm_ModifyHealth(*(int*) (e + 4), -5);
 	cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x8000000, 0);
 	if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].entity_type == 7 || ((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (h + 0x27)].entity_type == 6) {
 		io_FormatTextBuffer(buf, 0x1663, h);

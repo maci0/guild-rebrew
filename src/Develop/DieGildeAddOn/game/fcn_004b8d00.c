@@ -7,7 +7,7 @@ unsigned short __cdecl fcn_0042e410(int a);
 int __cdecl fcn_0050b750(int a, char b);
 void __cdecl io_FormatTextBuffer(char* buf, int fmt, ...);
 void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
-void __cdecl fcn_005100f0(int a, int b);
+void __cdecl gm_ModifyHealth(int a, int b);
 
 /* ADDRESS: GOLDTL 0x004b8d00 */
 int __cdecl fcn_004b8d00(int* request)
@@ -25,6 +25,6 @@ int __cdecl fcn_004b8d00(int* request)
 		n = (unsigned short) fcn_0042e410(3) + 3);
 	he_PostEntityMessage(*(int*) (p + 4), *(int*) (p + 4), buf,
 		strlen(buf) > 0x100, 0x603, 0);
-	fcn_005100f0(*(int*) (p + 4), n);
+	gm_ModifyHealth(*(int*) (p + 4), n);
 	return 0;
 }

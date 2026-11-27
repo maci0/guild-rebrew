@@ -1,8 +1,8 @@
 #include <math.h>
-void __cdecl fcn_00454030(int*, int*);
+void __cdecl d3_TransposeMatrix4x4(int*, int*);
 
 /* ADDRESS: GOLD 0x00454060 */
-void __cdecl fcn_00454060(float* a, float* out)
+void __cdecl d3_InvertMatrix4x4(float* a, float* out)
 {
 	float p, q, r, s, t, u;
 	float first, determinant, scale;
@@ -18,7 +18,7 @@ void __cdecl fcn_00454060(float* a, float* out)
 	    + (a[1]*q - a[5]*s + a[13]*u)*a[8]
 	    - (a[1]*r - a[5]*t + a[9]*u)*a[12];
 	if (fabs(determinant) < 1.0e-7f) {
-		fcn_00454030((int*) a, (int*) out);
+		d3_TransposeMatrix4x4((int*) a, (int*) out);
 		return;
 	}
 	scale = 1.0f / determinant;

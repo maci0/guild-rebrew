@@ -39,7 +39,7 @@ extern float g_665264[];
 extern int g_773d48;
 
 int __cdecl amt_GetRoleTemplate(int idx, Rec18* out);
-int __cdecl fcn_004f4830(int idx, void* dst);
+int __cdecl gm_GetLawEntry(int idx, void* dst);
 char* __cdecl gm_GetGuildHall(int n);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
@@ -77,7 +77,7 @@ int __cdecl amt_ProcessPrivilegeIncome(unsigned short id, int pay, PRIVILEGE_INC
 	out->vc = 0;
 	if ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_index) != 0xffff && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_type) < 0xa && (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].health) > 0
 	    && ((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].class_166) != 0 || (((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].grade) != 0 || ((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].flags_1cc) & 0xe00) != 0)) {
-		fcn_004f4830(0xf, info);
+		gm_GetLawEntry(0xf, info);
 		mult = g_665264[info[6]];
 		amt_GetRoleTemplate((((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].grade), &q);
 		out->vb = (int) ((q.xc << 5) * mult);

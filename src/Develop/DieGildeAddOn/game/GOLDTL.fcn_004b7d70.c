@@ -3,7 +3,7 @@
 
 extern char g_7f4ca0[];
 void* __cdecl gm_LookupEntityRecordById(int);
-int  __cdecl fcn_004a55c0(void*, int, int*, float, float, unsigned short*);
+int  __cdecl gm_FindEntityCandidatesInRange(void*, int, int*, float, float, unsigned short*);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, int, int);
@@ -23,7 +23,7 @@ int __cdecl gm_HandleMsg16BoostFavor(void* request)
 		return 1;
 	}
 	d2 = 0x600c00;
-	if (fcn_004a55c0(p, 1, &d2, 33.0f, 100.0f, &w1) == 0) {
+	if (gm_FindEntityCandidatesInRange(p, 1, &d2, 33.0f, 100.0f, &w1) == 0) {
 		return 0x400;
 	}
 	e = (void*) ((int) g_7f4ca0 + 540 * w1);

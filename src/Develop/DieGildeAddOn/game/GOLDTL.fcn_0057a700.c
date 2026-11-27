@@ -37,7 +37,7 @@ char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl cm_SendSetHE(int, char*);
 void __cdecl cm_SendCopyEntityData(struct msg*);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 
 void __cdecl he_StartAction0x90(char* u)
@@ -73,7 +73,7 @@ void __cdecl he_StartAction0x90(char* u)
 	if (*(int*) (u + 0xb0) > 2) {
 		*(int*) (u + 0xb0) = 2;
 	}
-	fcn_005100f0(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -((*(int*) (u + 0xb4) + 2) * (*(int*) (u + 0xb0) + 2)));
+	gm_ModifyHealth(((ENTITY_RECORD*)g_7f4ca0)[*(unsigned short*) (u + 8)].entity_id, -((*(int*) (u + 0xb4) + 2) * (*(int*) (u + 0xb0) + 2)));
 	gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 5, 0);
 	cm_SendSetHE(0, u);
 }

@@ -13,26 +13,26 @@ typedef struct
 	short f11;
 	int f13;
 	char pad[9];
-} F2eMsg;
+} GV_SPAWN_ENTITIES_MSG;
 
 #pragma pack(pop)
 // SIZE 0x20
 
 int __cdecl fcn_004c6c30(void*);
 
-int __cdecl fcn_004f2e80(int a1, int a2)
+int __cdecl gv_SendSpawnEntities(int building, int count)
 {
-	F2eMsg m;
+	GV_SPAWN_ENTITIES_MSG msg;
 
-	if (a1 == 0) {
+	if (building == 0) {
 		return -1;
 	}
-	m.f0 = 6;
-	m.f4 = -1;
-	m.f8 = *(int*) ((char*) a1 + 1);
-	m.fc = 0;
-	m.f10 = 0;
-	m.f11 = 0;
-	m.f13 = a2;
-	return fcn_004c6c30(&m);
+	msg.f0 = 6;
+	msg.f4 = -1;
+	msg.f8 = *(int*) ((char*) building + 1);
+	msg.fc = 0;
+	msg.f10 = 0;
+	msg.f11 = 0;
+	msg.f13 = count;
+	return fcn_004c6c30(&msg);
 }

@@ -22,7 +22,7 @@ int __cdecl he_PostEntityMessage(int, int, char*, unsigned char, int, char*);
 int __cdecl cm_SendSetHE(int, char*);
 void __cdecl he_FreeAction(char*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
-void __cdecl fcn_005100f0(int, int);
+void __cdecl gm_ModifyHealth(int, int);
 
 void __cdecl he_StartAction0x88(char* u)
 {
@@ -47,5 +47,5 @@ void __cdecl he_StartAction0x88(char* u)
 		return;
 	}
 	*(int*) (u + 0x84) = cm_SendSetHE(0, u);
-	fcn_005100f0(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)])->entity_id, -*(int*) (u + 0xb8));
+	gm_ModifyHealth(((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (u + 8)])->entity_id, -*(int*) (u + 0xb8));
 }

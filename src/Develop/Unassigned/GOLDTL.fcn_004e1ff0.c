@@ -10,7 +10,7 @@ void __cdecl sb_StopVoice(int, int);
 void __cdecl fcn_004230e0(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl evt_StopScriptIfActive(int);
-int __cdecl fcn_004e44b0(char*, char*);
+int __cdecl evt_StartGfxScript(char*, char*);
 void __cdecl cut_WaitForScript(int);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
@@ -26,7 +26,7 @@ int __cdecl cut_ReleaseSceneContexts(int* scene)
 		d2_DestroyForm(scene[1]);
 	if (scene[0] != -1)
 		evt_StopScriptIfActive(scene[0]);
-	scene[0] = fcn_004e44b0(g_68d00c, g_6b5c60);
+	scene[0] = evt_StartGfxScript(g_68d00c, g_6b5c60);
 	cut_WaitForScript(scene[0]);
 	scene[0] = -1;
 	scene[1] = -1;

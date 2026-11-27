@@ -56,7 +56,7 @@ void* __cdecl fcn_00534c40(unsigned int, int, char, ...);
 void __cdecl d2_UpdatePagedPanel(char*);
 void __cdecl d2_HandleBookPageButton(char*);
 int __cdecl fcn_00517c00(int, int, int, char*);
-char* __cdecl fcn_0050dc90(int);
+char* __cdecl gm_FindBuildingOwner(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -83,7 +83,7 @@ int __cdecl fcn_00505d00(unsigned char*, int*);
 void __cdecl d2_DestroyElement(int);
 void* __cdecl he_StartHandlungSearch(int, ...);
 void* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_0050f950(int, int);
+int __cdecl gm_GetEntityRelation(int, int);
 void __cdecl fcn_0046f940(int, const char*);
 extern unsigned char* lpGebaeudePROT;
 extern double dbl_128_0;
@@ -151,7 +151,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 	d2_UpdatePagedPanel(win);
 	fcn_00517c00(*(unsigned short*) (building + 0x27), 1, 2, numA);
 	fcn_00517c00(*(unsigned short*) (building + 0x25), 1, 2, numB);
-	p = fcn_0050dc90((int) building);
+	p = gm_FindBuildingOwner((int) building);
 	if (p == 0) {
 		strcpy(txtName, *(char**) 0x14abc28);
 	} else {
@@ -294,7 +294,7 @@ void __cdecl fcn_005b88b0(char* building, int a1)
 			             fcn_0050b750(ret, *(unsigned char*) 0x773d75));
 			}
 		}
-		p = fcn_0050dc90((int) building);
+		p = gm_FindBuildingOwner((int) building);
 		if (p != 0) {
 			if (*(unsigned short*) p != *(unsigned short*) 0x774970) {
 				if (p[8] == 0) {
@@ -497,7 +497,7 @@ after2:
 						GUI(r->value).f4c = 1;
 					}
 					if (r->bar != -1) {
-						tv = fcn_0050f950(
+						tv = gm_GetEntityRelation(
 						    *(unsigned short*) r->obj,
 						    *(unsigned short*) 0x774970);
 						d2_SetElementValue(

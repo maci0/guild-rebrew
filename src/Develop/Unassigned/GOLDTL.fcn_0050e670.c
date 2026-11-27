@@ -15,7 +15,7 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-void __cdecl fcn_0050e670(int* ids, int* vals)
+void __cdecl gm_GetKircheTop5(int* ids, int* vals)
 {
 	int i;
 	int j;

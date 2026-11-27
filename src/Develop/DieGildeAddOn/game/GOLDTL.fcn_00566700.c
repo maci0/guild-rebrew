@@ -14,7 +14,7 @@
 #include "client_packet_builder.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_0050f950(int, int);
+int __cdecl gm_GetEntityRelation(int, int);
 void __cdecl cm_RequestChangePlayerHe(int, int, int);
 void __cdecl cm_RequestCancelEntityEvent(int);
 
@@ -43,7 +43,7 @@ void __cdecl he_RunWorkerQuitAction(char* u)
 	case 0:
 		h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 		if (h == 0 || *(char**) (h + 0x16c) == 0
-		    || fcn_0050f950(*(unsigned short*) (*(char**) (h + 0x16c) + 0x27), *(unsigned short*) h) > -0x1a) {
+		    || gm_GetEntityRelation(*(unsigned short*) (*(char**) (h + 0x16c) + 0x27), *(unsigned short*) h) > -0x1a) {
 			goto kill;
 		}
 		cm_RequestChangePlayerHe(*(int*) (h + 4), 0, 0);

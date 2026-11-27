@@ -14,7 +14,7 @@ typedef struct Surf004799d0 {
 } Surf004799d0;
 // SIZE 0x3c
 
-int __cdecl fcn_0041e670(unsigned char r, unsigned char g, unsigned char b);
+int __cdecl d3_PackSurfaceRgb(unsigned char r, unsigned char g, unsigned char b);
 
 int __cdecl fcn_004799d0(int x, int y, unsigned char r, unsigned char g, unsigned char b, Surf004799d0* s)
 {
@@ -25,7 +25,7 @@ int __cdecl fcn_004799d0(int x, int y, unsigned char r, unsigned char g, unsigne
 		return 0;
 	}
 	n = s->bpp >> 3;
-	c = fcn_0041e670(r, g, b);
+	c = d3_PackSurfaceRgb(r, g, b);
 	switch (s->bpp) {
 	case 8:
 		s->bits[s->pitch * y + x] = (r + g + b) / 3;

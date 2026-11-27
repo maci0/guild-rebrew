@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00440140 */
-void __cdecl fcn_00440140(char* obj)
+void __cdecl d3_InvalidateFloorChunks(char* obj)
 {
 	int row;
 	int col;

@@ -35,7 +35,7 @@ extern float g_6628a0;
 unsigned short __cdecl gm_RandomMod(int);
 void* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl gm_StartFilteredEntitySearch(int, ...);
-void __cdecl fcn_004f4830(int, struct stats*);
+void __cdecl gm_GetLawEntry(int, struct stats*);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl cm_SendCopyEntityData(struct msg*);
@@ -79,7 +79,7 @@ void __cdecl he_TriggerAction0x67(void)
 		return;
 	}
 	idx = gm_RandomMod(n);
-	fcn_004f4830(7, &info);
+	gm_GetLawEntry(7, &info);
 	pick = cand[idx];
 	amount = (int) ((*(int*) (pick + 0x65) + *(int*) (pick + 0x69)) * (((5 - info.level) * 0.1f + g_6629c0) * g_6628cc));
 	m.kind = 0x67;

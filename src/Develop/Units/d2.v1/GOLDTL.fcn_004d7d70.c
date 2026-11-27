@@ -27,10 +27,10 @@ extern unsigned short* g_772f24;
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d3_UpdateCameraAtScreenEdges(void);
 void __cdecl fcn_004d0a20(void);
-void __cdecl fcn_004d06d0(void);
+void __cdecl cut_UpdateCombatHoverTarget(void);
 void __cdecl fcn_004d0f00(void);
 void __cdecl fcn_004d1790(char*);
-void __cdecl fcn_004d0070(void);
+void __cdecl cut_UpdateCombatEffects(void);
 void __cdecl d2_UpdateEntityOverlays(char*);
 void __cdecl fcn_004cf180(void);
 void __cdecl fcn_004cf6b0(void);
@@ -44,10 +44,10 @@ void __cdecl d2_UpdateCombatFrame(char* rec)
 	d2_SetElementValue(g_68b7a4, 0, g_68bfbc, cut_ClockDeadline - cut_CurrentTick + 1);
 	d3_UpdateCameraAtScreenEdges();
 	fcn_004d0a20();
-	fcn_004d06d0();
+	cut_UpdateCombatHoverTarget();
 	fcn_004d0f00();
 	fcn_004d1790(rec);
-	fcn_004d0070();
+	cut_UpdateCombatEffects();
 	d2_UpdateEntityOverlays(rec);
 	fcn_004cf180();
 	fcn_004cf6b0();

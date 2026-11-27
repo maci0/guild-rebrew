@@ -7,11 +7,11 @@ typedef struct {
 	int f4;
 	int f8;
 	unsigned short fc;
-} fcn_00561250_rec;
+} ACTION_TIME_REC;
 #pragma pack(pop)
 // SIZE 0xe
 
-void __cdecl fcn_00561250(char* object)
+void __cdecl he_InitAction0x17(char* object)
 {
-	*(fcn_00561250_rec*) (object + 0x52) = *(fcn_00561250_rec*) (object + 0xb4);
+	*(ACTION_TIME_REC*) (object + 0x52) = *(ACTION_TIME_REC*) (object + 0xb4);
 }

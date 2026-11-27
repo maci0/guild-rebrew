@@ -14,7 +14,7 @@ void __cdecl fcn_004a8770(void);
 void __cdecl fcn_004a8640(void);
 void __cdecl fcn_004a7be0(void);
 void __cdecl gm_PickCardGameBet(void);
-void __cdecl fcn_004a7d40(void);
+void __cdecl ai_EvaluateCardGameFold(void);
 void __cdecl fcn_004a86b0(void);
 void __cdecl fcn_004a7b40(void);
 void __cdecl ai_PlayCardGameTurn(void);
@@ -39,7 +39,7 @@ short __cdecl gm_StepCardGameRound(void)
 		return (((Seq*)g_1007cd4)->xb0 ? 0 : 0x20) | 9;
 	case 3:
 		fcn_004a7be0();
-		fcn_004a7d40();
+		ai_EvaluateCardGameFold();
 		((Seq*)g_1007cd4)->state++;
 		fcn_004a86b0();
 		fcn_004a7b40();
@@ -50,7 +50,7 @@ short __cdecl gm_StepCardGameRound(void)
 		gm_PickCardGameBet();
 		return (((Seq*)g_1007cd4)->xb0 ? 0 : 0x20) | 9;
 	case 5:
-		fcn_004a7d40();
+		ai_EvaluateCardGameFold();
 		fcn_004a7b40();
 		((Seq*)g_1007cd4)->state++;
 		return 0x1c;
@@ -67,7 +67,7 @@ short __cdecl gm_StepCardGameRound(void)
 		((Seq*)g_1007cd4)->state++;
 		return (((Seq*)g_1007cd4)->xb0 ? 0 : 0x20) | 9;
 	case 9:
-		fcn_004a7d40();
+		ai_EvaluateCardGameFold();
 		fcn_004a7b40();
 		((Seq*)g_1007cd4)->state++;
 		return 0;

@@ -38,7 +38,7 @@ extern char* gm_RichterEvangelisch;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_AddObjekt(void);
 int __cdecl gm_RandomMod(int);
-int __cdecl fcn_004a57a0(Ent*, int, int, unsigned short*, int, float, int*);
+int __cdecl gm_FindFilteredEntity(Ent*, int, int, unsigned short*, int, float, int*);
 void __cdecl cm_SendCopyEntityData(Msg*);
 
 int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
@@ -107,7 +107,7 @@ int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
 			}
 		}
 	}
-	if (!fcn_004a57a0(ent, 0xc00, 4, ids, 0, 100.0f, &out)) {
+	if (!gm_FindFilteredEntity(ent, 0xc00, 4, ids, 0, 100.0f, &out)) {
 		return 0x40;
 	}
 	if (ids[2] == 0xffff) {
@@ -116,7 +116,7 @@ int __cdecl gs_StartCourtTrial(Ent* ent, Ent* other, int count, int flag)
 		ids[3] = (unsigned short) out;
 	}
 	msg.who[1] = ((Ent*)g_7f4ca0)[out & 0xffff].handle;
-	if (!fcn_004a57a0(ent, 0xc00, 4, ids, 0, 100.0f, &out)) {
+	if (!gm_FindFilteredEntity(ent, 0xc00, 4, ids, 0, 100.0f, &out)) {
 		return 0x40;
 	}
 	msg.who[2] = ((Ent*)g_7f4ca0)[out & 0xffff].handle;

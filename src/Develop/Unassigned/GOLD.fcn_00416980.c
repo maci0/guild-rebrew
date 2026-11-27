@@ -4,13 +4,13 @@
 #include "client_scene_resources.h"
 
 unsigned char __cdecl fcn_004611a0(SCENE_RESOURCE*, unsigned char);
-void __cdecl fcn_004205c0(void*, void*, void*, void*);
-void __cdecl fcn_00420140(void*, void*);
+void __cdecl d3_ConvertSurfaceFormat(void*, void*, void*, void*);
+void __cdecl d3_ScaleSurface(void*, void*);
 void* __cdecl m_alloc(int, const char*);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLD 0x00416980 */
-void __cdecl fcn_00416980(void)
+void __cdecl d3_InitSnowMipMaps(void)
 {
 	unsigned int descriptor[31];
 	char palette[4096];
@@ -136,7 +136,7 @@ source_ready:
 	((unsigned int*) 0x14665a0)[4] = 256;
 	((unsigned int*) 0x14665a0)[9] = (unsigned int) m_alloc(65536, "d3t:SnowMipMap8");
 	if (((unsigned int*) 0x14665a0)[9] == 0) { return; }
-	fcn_004205c0((unsigned int*) 0x14665a0, palette, descriptor, palette);
+	d3_ConvertSurfaceFormat((unsigned int*) 0x14665a0, palette, descriptor, palette);
 	for (level = 0, mip = (unsigned int*) 0x14661c0; (int) mip < 0x14665a0; level++, mip += 31) {
 		size = 1 << level;
 		mip[0] = 124;
@@ -146,7 +146,7 @@ source_ready:
 		mip[4] = size;
 		mip[9] = (unsigned int) m_alloc(size * size, "d3t:SnowMipMap8");
 		if (mip[9] == 0) { return; }
-		fcn_00420140(mip, (unsigned int*) 0x14665a0);
+		d3_ScaleSurface(mip, (unsigned int*) 0x14665a0);
 	}
 	((unsigned int*) 0x1466e80)[0] = 124;
 	((unsigned int*) 0x1466e80)[3] = 256;
@@ -155,7 +155,7 @@ source_ready:
 	((unsigned int*) 0x1466e80)[4] = 512;
 	((unsigned int*) 0x1466e80)[9] = (unsigned int) m_alloc(131072, "d3t:SnowMipMap16");
 	if (((unsigned int*) 0x1466e80)[9] == 0) { return; }
-	fcn_004205c0((unsigned int*) 0x1466e80, palette, descriptor, palette);
+	d3_ConvertSurfaceFormat((unsigned int*) 0x1466e80, palette, descriptor, palette);
 	for (level = 0, mip = (unsigned int*) 0x1466aa0; (int) mip < 0x1466e80; level++, mip += 31) {
 		size = 1 << level;
 		mip[0] = 124;
@@ -165,7 +165,7 @@ source_ready:
 		mip[4] = size * 2;
 		mip[9] = (unsigned int) m_alloc(size * size * 2, "d3t:SnowMipMap16");
 		if (mip[9] == 0) { return; }
-		fcn_00420140(mip, (unsigned int*) 0x1466e80);
+		d3_ScaleSurface(mip, (unsigned int*) 0x1466e80);
 	}
 	((unsigned int*) 0x14672e0)[0] = 124;
 	((unsigned int*) 0x14672e0)[3] = 256;
@@ -181,7 +181,7 @@ source_ready:
 	((unsigned int*) 0x14672e0)[4] = 1024;
 	((unsigned int*) 0x14672e0)[9] = (unsigned int) m_alloc(262144, "d3t:SnowMipMap32");
 	if (((unsigned int*) 0x14672e0)[9] == 0) { return; }
-	fcn_004205c0((unsigned int*) 0x14672e0, palette, descriptor, palette);
+	d3_ConvertSurfaceFormat((unsigned int*) 0x14672e0, palette, descriptor, palette);
 	for (level = 0, mip = (unsigned int*) 0x1466f00; (int) mip < 0x14672e0; level++, mip += 31) {
 		size = 1 << level;
 		mip[0] = 124;
@@ -191,7 +191,7 @@ source_ready:
 		mip[4] = size * 4;
 		mip[9] = (unsigned int) m_alloc(size * size * 4, "d3t:SnowMipMap32");
 		if (mip[9] == 0) { return; }
-		fcn_00420140(mip, (unsigned int*) 0x14672e0);
+		d3_ScaleSurface(mip, (unsigned int*) 0x14672e0);
 	}
 	if (texture != 0) {
 		surface = texture->com60;
