@@ -42,7 +42,9 @@ def test_shared_bound_function_is_the_transferred_body() -> None:
     assert len(gold) == 1 and len(goldtl) == 1
     assert gold[0].module == "GOLD"
     assert goldtl[0].module == "GOLDTL"
-    assert gold[0].name == goldtl[0].name == "fcn_0040abd0"
+    # One body, one name in both clients; the name itself is naming's to change.
+    assert gold[0].name and gold[0].name == goldtl[0].name
+    assert f" {gold[0].name}(" in SOURCE.read_text(encoding="utf-8")
     assert gold[0].va != goldtl[0].va
     assert gold[0].size and gold[0].size == goldtl[0].size
 
