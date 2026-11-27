@@ -26,9 +26,9 @@ extern char gm_GameTime[];
 
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl gm_CollectBuildingStock(char* o, void* out, int producers);
-int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
+int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
-int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5);
+int __cdecl d2_AddWindowImage(int x, int y, int a3, int win, int a5);
 void __cdecl d2_DestroyElement(int id);
 int __cdecl gm_GetElapsedMinutes(void* a, void* b);
 void* __cdecl he_StartHandlungSearch(int n, ...);
@@ -68,7 +68,7 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 	for (i = 0; i < panelCountArg; i++) {
 		p = (Panel*) (g_779160 + i * 0x58);
 		if (p->c[1] < 0) {
-			w = fcn_0046f100(p->x24, p->x28, 0xcd, 0x57, 0x10, d2_CurrentWindowId);
+			w = d2_CreateChildWindow(p->x24, p->x28, 0xcd, 0x57, 0x10, d2_CurrentWindowId);
 			p->c[1] = w;
 			*(int*) (0x10161cc + w * 0x3cc) = 0x54;
 			d2_AddElementToWindow(0, 0, 0x749, w);
@@ -82,14 +82,14 @@ void __cdecl fcn_00594de0(int formIdArg, int formTabArg, int panelCountArg)
 			((D2_CONTROL_TL*) (g_1015ea0))[p->c[2]].value_1ec = -1;
 			for (y = 0x11, k = 0; y < 0xd5; y += 0x31, k++) {
 				if (p->a[k] != 0) {
-					w = fcn_0046f7e0(y, 0x3a, p->a[k] + 0xdf, p->c[1], -2);
+					w = d2_AddWindowImage(y, 0x3a, p->a[k] + 0xdf, p->c[1], -2);
 					p->d[k] = w;
 					((D2_CONTROL_TL*) (g_1015ea0))[w].value_05c = 1;
 					((D2_CONTROL_TL*) (g_1015ea0))[w].value_1e8 = -1;
 					((D2_CONTROL_TL*) (g_1015ea0))[w].value_1ec = -1;
 				}
 			}
-			w = fcn_0046f100(0x43, 4, 0x88, 0x32, 0x10, p->c[1]);
+			w = d2_CreateChildWindow(0x43, 4, 0x88, 0x32, 0x10, p->c[1]);
 			p->x4c = w;
 			*(int*) (0x10161cc + w * 0x3cc) = 0x54;
 		}

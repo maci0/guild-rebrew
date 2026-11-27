@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0044a9e0 */
-int __cdecl fcn_0044a9e0(unsigned int a)
+int __cdecl d3_GetScenePresetCount(unsigned int a)
 {
 	if (a >= 0x3a6c00ba) {
 		return 7;

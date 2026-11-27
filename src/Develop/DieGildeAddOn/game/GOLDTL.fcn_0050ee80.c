@@ -25,9 +25,9 @@ extern int g_7f4c10;
 int __cdecl fcn_00502cd0(int, int, ...);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_0046f100(int, int, int, int, int, int);
+int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_0046f280(int);
+int __cdecl d2_CloseWindow(int);
 int __cdecl io_AppendText();
 int __cdecl gm_GetElapsedMinutes(void*, void*);
 
@@ -124,24 +124,24 @@ set_st3:
 skip_st3:
 		if (st != ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].state) {
 			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c != -1) {
-				fcn_0046f280(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
+				d2_CloseWindow(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = -1;
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = -1;
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = -1;
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_28 = -1;
 			}
 			if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_2c != -1) {
-				fcn_0046f280(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_2c);
+				d2_CloseWindow(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_2c);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_2c = -1;
 			}
 			h = d2_CurrentWindowId;
 			if (st == 0) {
-				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
+				windowId = d2_CreateChildWindow(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = windowId;
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = d2_AddElementToWindow(0, 0, 0x52b, windowId);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = d2_AddElementToWindow(3, 3, 0x4fb, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
 			} else if (st == 1) {
-				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
+				windowId = d2_CreateChildWindow(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = windowId;
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = d2_AddElementToWindow(0, 0, 0x529, windowId);
 				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id < 0x2dc) {
@@ -153,7 +153,7 @@ skip_st3:
 				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_064) = 1;
 				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_05c) = 1;
 				d2_CurrentWindowId = h;
-				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x32, 0x60, 0x11, 0x4510, v1);
+				windowId = d2_CreateChildWindow(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x32, 0x60, 0x11, 0x4510, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_2c = windowId;
 				*(int*) ((char*) g_1015f40 + windowId * 0x3cc + 0x28c) = 0x54;
 				*(int*) ((char*) g_1015f40 + windowId * 0x3cc + 0x20) = 1;
@@ -162,7 +162,7 @@ skip_st3:
 					io_AppendText(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id * 2 + 0x9a8);
 				}
 			} else if (st == 2) {
-				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
+				windowId = d2_CreateChildWindow(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = windowId;
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = d2_AddElementToWindow(0, 0, 0x52a, windowId);
 				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id < 0x2dc) {
@@ -173,7 +173,7 @@ skip_st3:
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = d2_AddElementToWindow(3, 3, y, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
 				*(int*) (&((D2_CONTROL_TL*)g_1015ea0)[((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24].value_05c) = 1;
 				d2_CurrentWindowId = h;
-				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x32, 0x60, 0x11, 0x4510, v1);
+				windowId = d2_CreateChildWindow(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x32, 0x60, 0x11, 0x4510, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_2c = windowId;
 				*(int*) ((char*) g_1015f40 + windowId * 0x3cc + 0x28c) = 0x54;
 				*(int*) ((char*) g_1015f40 + windowId * 0x3cc + 0x20) = 1;
@@ -182,7 +182,7 @@ skip_st3:
 					io_AppendText(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id * 2 + 0x9a8);
 				}
 			} else {
-				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
+				windowId = d2_CreateChildWindow(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 4, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y - 4, 0x36, 0x36, 0x400, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c = windowId;
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_20 = d2_AddElementToWindow(0, 0, 0x529, windowId);
 				if (((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].item_id < 0x2dc) {
@@ -193,7 +193,7 @@ skip_st3:
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_24 = d2_AddElementToWindow(3, 3, y, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_28 = d2_AddElementToWindow(3, 3, 0x4fc, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_1c);
 				d2_CurrentWindowId = h;
-				windowId = fcn_0046f100(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x32, 0x60, 0x11, 0x4510, v1);
+				windowId = d2_CreateChildWindow(((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].x - 0x18, ((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].y + 0x32, 0x60, 0x11, 0x4510, v1);
 				((DEPENDENCY_DIAGRAM_NODE*)g_7f3f00)[i].unk_2c = windowId;
 				*(int*) ((char*) g_1015f40 + windowId * 0x3cc + 0x28c) = 0x54;
 				*(int*) ((char*) g_1015f40 + windowId * 0x3cc + 0x20) = 1;

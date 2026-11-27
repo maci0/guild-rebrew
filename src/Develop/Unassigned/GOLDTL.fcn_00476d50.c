@@ -11,10 +11,10 @@ typedef struct Surf {
 	int y1;
 } Surf;
 
-void __cdecl fcn_00476b10(int x, int y, unsigned char r, unsigned char g, unsigned char b, Surf* s);
+void __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g, unsigned char b, Surf* s);
 
 /* ADDRESS: GOLDTL 0x00476d50 */
-void __cdecl fcn_00476d50(int x0, int y0, int x1, int y1, int r, int g, int b, Surf* s)
+void __cdecl d2_DrawSurfaceLine(int x0, int y0, int x1, int y1, int r, int g, int b, Surf* s)
 {
 	int n, x, y, dx, dy, step[2], d, inc1, inc2;
 
@@ -23,24 +23,24 @@ void __cdecl fcn_00476d50(int x0, int y0, int x1, int y1, int r, int g, int b, S
 		if (x1 < x0) {
 			n = x0 - x1;
 			while (n-- > 0)
-				fcn_00476b10(x1++, y0, r, g, b, s);
+				d2_WriteSurfacePixel(x1++, y0, r, g, b, s);
 			return;
 		}
 		n = x1 - x0;
 		while (n-- > 0)
-			fcn_00476b10(x++, y0, r, g, b, s);
+			d2_WriteSurfacePixel(x++, y0, r, g, b, s);
 		return;
 	}
 	if (x0 == x1) {
 		if (y1 < y0) {
 			n = y0 - y1;
 			while (n-- > 0)
-				fcn_00476b10(x0, y1++, r, g, b, s);
+				d2_WriteSurfacePixel(x0, y1++, r, g, b, s);
 			return;
 		}
 		n = y1 - y0;
 		while (n-- > 0)
-			fcn_00476b10(x0, y0++, r, g, b, s);
+			d2_WriteSurfacePixel(x0, y0++, r, g, b, s);
 		return;
 	}
 	if (x0 < x1) {
@@ -59,7 +59,7 @@ void __cdecl fcn_00476d50(int x0, int y0, int x1, int y1, int r, int g, int b, S
 	}
 	x = x0;
 	y = y0;
-	fcn_00476b10(x, y, r, g, b, s);
+	d2_WriteSurfacePixel(x, y, r, g, b, s);
 	if (dx > dy) {
 		inc1 = 2 * (dy - dx);
 		inc2 = 2 * dy;
@@ -72,7 +72,7 @@ void __cdecl fcn_00476d50(int x0, int y0, int x1, int y1, int r, int g, int b, S
 			} else {
 				d += inc2;
 			}
-			fcn_00476b10(x, y, r, g, b, s);
+			d2_WriteSurfacePixel(x, y, r, g, b, s);
 		}
 		return;
 	}
@@ -87,6 +87,6 @@ void __cdecl fcn_00476d50(int x0, int y0, int x1, int y1, int r, int g, int b, S
 		} else {
 			d += inc2;
 		}
-		fcn_00476b10(x, y, r, g, b, s);
+		d2_WriteSurfacePixel(x, y, r, g, b, s);
 	}
 }

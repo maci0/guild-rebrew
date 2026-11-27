@@ -5,7 +5,7 @@ typedef struct Vec3i {
 } Vec3i;
 
 /* ADDRESS: GOLDTL 0x00408250 */
-void __cdecl fcn_00408250(Vec3i* dst, Vec3i* src)
+void __cdecl ch_CopyMapBounds(Vec3i* dst, Vec3i* src)
 {
 	*dst = *src;
 }

@@ -2,9 +2,9 @@
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_00477560(const void* src, char* hdr);
+void __cdecl shp_WriteFrameOffsets(const void* src, char* hdr);
 int __cdecl fcn_00475780(char*, char*);
-void __cdecl fcn_004757b0(char*, char, char, char);
+void __cdecl d2_WritePixelRgb(char*, char, char, char);
 
 /* Lay out one wide-glyph text block: scan the three-byte glyph cells for the
 /* Lay out one wide-glyph text block: scan the three-byte glyph cells for the
@@ -76,12 +76,12 @@ unsigned int* __cdecl fcn_00477590(int originX, int originY, unsigned int width,
             for (x = 0; x < (int) width; x++) {
                 stride = pixels + (((originY + y) * rowStride + originX) + x) * 3;
                 if (fcn_00475780((char*) 0x67d960, ref) && !fcn_00475780((char*) stride, (char*) 0x67d960)) {
-                    fcn_004757b0((char*) stride, *(char*) 0x100f1a0, *(char*) 0x100f1a1, *(char*) 0x100f1a2);
+                    d2_WritePixelRgb((char*) stride, *(char*) 0x100f1a0, *(char*) 0x100f1a1, *(char*) 0x100f1a2);
                     minx = x;
                     miny = y;
                 }
                 if (!fcn_00475780((char*) stride, (char*) 0x67d95c)) {
-                    fcn_004757b0((char*) stride, *(char*) 0x100f1a0, *(char*) 0x100f1a1, *(char*) 0x100f1a2);
+                    d2_WritePixelRgb((char*) stride, *(char*) 0x100f1a0, *(char*) 0x100f1a1, *(char*) 0x100f1a2);
                     maxx = x;
                     maxy = y;
                 }
@@ -125,7 +125,7 @@ unsigned int* __cdecl fcn_00477590(int originX, int originY, unsigned int width,
     }
     *(unsigned int*) ((char*) buf + 0x2a) = buf[0];
     buf[0] += *(unsigned short*) ((char*) buf + 0xa) * 4;
-    fcn_00477560(tbl, (char*) buf);
+    shp_WriteFrameOffsets(tbl, (char*) buf);
     *((char*) buf + 0xd) = a5;
     *(int*) ((char*) buf + 0x26) = total;
     out = (unsigned int*) m_alloc(buf[0], (char*) 0x67d970);

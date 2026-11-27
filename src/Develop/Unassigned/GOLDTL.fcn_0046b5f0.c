@@ -52,7 +52,7 @@ extern int g_772554;
 extern D2_WIN g_1015f40[0x60];
 
 int __cdecl d2_GetResourceData(int);
-int __cdecl fcn_0046bd00(int, int, int);
+int __cdecl d2_SetTextColor(int, int, int);
 void __cdecl d2_SelectFont(int);
 int __cdecl fcn_0047b620(char*, int);
 int __cdecl fcn_0047cba0(int, int, int, char*, int);
@@ -60,7 +60,7 @@ int __cdecl fcn_0047ccd0(int, int, int, char*, int);
 int __cdecl fcn_0047cd20(int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x0046b5f0 */
-void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newflags, int xstart, int xlimit)
+void __cdecl d2_RenderMarkupLine(int a1, int y, int surf, int win, int flag, int newflags, int xstart, int xlimit)
 {
 	D2_WIN* w;
 	Rec46b5f0* rec;
@@ -153,7 +153,7 @@ void __cdecl fcn_0046b5f0(int a1, int y, int surf, int win, int flag, int newfla
 			}
 		}
 		if (rec->b104 & 0x40) {
-			fcn_0046bd00(rec->b100, rec->b101, rec->b102);
+			d2_SetTextColor(rec->b100, rec->b101, rec->b102);
 			draw = fcn_0047cd20;
 			back = d2_CurrentFont;
 			if (d2_CurrentFont == 0x55) {

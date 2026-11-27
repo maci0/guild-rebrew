@@ -25,10 +25,10 @@ extern UI_FIELD g_102d140[];
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern char* txt_TextEntries[];
 
-int __cdecl fcn_0046b520(char* s, int font);
+int __cdecl d2_MeasureTextWidth(char* s, int font);
 
 /* ADDRESS: GOLDTL 0x00466fe0 */
-void __cdecl fcn_00466fe0(int fld, int str)
+void __cdecl d2_SetFieldTextId(int fld, int str)
 {
 	fcn_00466fe0_Fld* f;
 	char* e;
@@ -51,6 +51,6 @@ void __cdecl fcn_00466fe0(int fld, int str)
 	f->len = len;
 	memmove(f->cur + len, f->cur, strlen(*(char**) (e + 0x3c)) - (f->cur - *(char**) (e + 0x3c)) + 1);
 	memcpy(f->cur, txt_TextEntries[str], f->len);
-	f->w = fcn_0046b520(txt_TextEntries[str], f->font);
+	f->w = d2_MeasureTextWidth(txt_TextEntries[str], f->font);
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[f->ent].width) = f->w;
 }

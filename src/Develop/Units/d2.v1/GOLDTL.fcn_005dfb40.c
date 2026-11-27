@@ -47,7 +47,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl vfs_ListFilesByExtension(int, int, Rec*);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -84,7 +84,7 @@ int __cdecl d2_OpenFileSelector(int wait, int mode, int title, int a4, int a5, c
 	d2_SetForm(dlg, 2);
 	io_AppendText(title);
 	d2_SetForm(dlg, 0);
-	fcn_00533f40(0x140, 0x100, d2_CurrentWindowId, fcn_00472830(dlg, 1), 0x18, &w, &h, &field);
+	fcn_00533f40(0x140, 0x100, d2_CurrentWindowId, d2_GetFormWindow(dlg, 1), 0x18, &w, &h, &field);
 	memset(recs, 0, sizeof(recs));
 	count = vfs_ListFilesByExtension(a4, a5, recs);
 	flag = mode & 1;

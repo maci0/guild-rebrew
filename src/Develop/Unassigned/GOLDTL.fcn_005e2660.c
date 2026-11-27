@@ -8,11 +8,11 @@ int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(char *, ...);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00533a60(int, int, int *, int, ...);
+void __cdecl d2_CreateButtonRow(int, int, int *, int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
-void __cdecl fcn_00468cd0(int, int);
-void __cdecl fcn_00468b80(int, int);
+void __cdecl d2_SetValueGaugeFlags(int, int);
+void __cdecl d2_SetValueGaugeLabel(int, int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl d3_SetGammaParams(float *, float *, float *);
 int __cdecl main_RunFrameLoop(void *, int);
@@ -40,7 +40,7 @@ void __cdecl fcn_005e2660(void)
     io_AppendText((char *)0x67d520);
     d2_SetOverlayAnimation(0, 0);
     d2_SetForm(dialog, 3);
-    fcn_00533a60(*(int *)0x772514, 0, selection, 2, *(int *)0x14ac5a8, *(int *)0x14ac5ac);
+    d2_CreateButtonRow(*(int *)0x772514, 0, selection, 2, *(int *)0x14ac5a8, *(int *)0x14ac5ac);
     a[0] = d2_GetWindowListItem(dialog, 1, 0);
     a[1] = d2_GetWindowListItem(dialog, 1, 1);
     a[2] = d2_GetWindowListItem(dialog, 1, 2);
@@ -55,14 +55,14 @@ void __cdecl fcn_005e2660(void)
     c[3] = d2_GetWindowListItem(dialog, 1, 11);
     for (i = 0; i < 3; i++) {
         d2_SetElementValue(a[i], -50, 50, (int)(((float *)0x776670)[i] * 100.0f));
-        fcn_00468cd0(a[i], 0x82);
-        fcn_00468b80(a[i], ((int *)0x14b52b4)[i]);
+        d2_SetValueGaugeFlags(a[i], 0x82);
+        d2_SetValueGaugeLabel(a[i], ((int *)0x14b52b4)[i]);
         d2_SetElementValue(b[i], 0, 200, (int)(((float *)0x776680)[i] * 100.0f));
-        fcn_00468cd0(b[i], 0x82);
-        fcn_00468b80(b[i], ((int *)0x14b52b4)[i]);
+        d2_SetValueGaugeFlags(b[i], 0x82);
+        d2_SetValueGaugeLabel(b[i], ((int *)0x14b52b4)[i]);
         d2_SetElementValue(c[i], 50, 600, (int)(((float *)0x776690)[i] * 100.0f));
-        fcn_00468cd0(c[i], 0x82);
-        fcn_00468b80(c[i], ((int *)0x14b52b4)[i]);
+        d2_SetValueGaugeFlags(c[i], 0x82);
+        d2_SetValueGaugeLabel(c[i], ((int *)0x14b52b4)[i]);
     }
     d2_SetElementValue(a[3], 0, 100, (int)(*(float *)0x77667c * 100.0f));
     d2_SetElementValue(b[3], 0, 150, (int)(*(float *)0x77668c * 100.0f));

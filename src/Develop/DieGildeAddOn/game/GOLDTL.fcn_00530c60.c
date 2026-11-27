@@ -24,7 +24,7 @@ int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
 char* __cdecl evt_LoadScript(char*);
 int __cdecl vfs_LookupPath(char*, void*, void**);
-int __cdecl fcn_00428340(char*, int, ...);
+int __cdecl evt_CallScriptFunction(char*, int, ...);
 void __cdecl init_GetGebaeudeSceneName(int, char*);
 
 /* ADDRESS: GOLDTL 0x00530c60 */
@@ -203,7 +203,7 @@ void __cdecl d3_UpdateBuildingSceneScripts(unsigned char* building)
 						sprintf(sp, "sp_%i", *(int*) (ent + 4));
 						script = evt_LoadScript(path);
 						if (script != 0) {
-							fcn_00428340(script, 1, sp);
+							evt_CallScriptFunction(script, 1, sp);
 							*(int*) (script + 0xc94) = (int) info;
 							*(int*) (info + 0x28) = *(int*) (script + 0x100);
 						}

@@ -12,7 +12,7 @@ int __cdecl d2_ClearRadioGroup();
 int __cdecl d2_SelectRadioGroup();
 int __cdecl d2_UpdateRadioGroup();
 int __cdecl fcn_00470820();
-int __cdecl fcn_00471af0();
+int __cdecl d2_SetFormVisibility();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
@@ -109,7 +109,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 			} else {
 				d2_SelectRadioGroup(group, 0);
 			}
-			fcn_00471af0(dialog, 0);
+			d2_SetFormVisibility(dialog, 0);
 			*(int*) &main_LoopFlags = 0x12d6;
 			cut_EventLoopFlags = 0x12d6;
 			cut_WaitForScript(fcn_004e4470(0x6a4040));
@@ -142,7 +142,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 					v1 = 1;
 				}
 			}
-			fcn_00471af0(dialog, 1);
+			d2_SetFormVisibility(dialog, 1);
 			if (v12 != 0) {
 				if (*(unsigned char*) &g_6a375c >= 1) {
 					*(int*) &g_7747b0 |= 8;

@@ -59,7 +59,7 @@ echo "== build raw server.dll"
 # Delete the output so this run must link it; check the build exit status too.
 rm -f build/server.dll
 build_rc=0
-cmake --build build --parallel 2 > .scratch/gate-build.log 2>&1 || build_rc=$?
+cmake --build build --parallel "$(nproc)" > .scratch/gate-build.log 2>&1 || build_rc=$?
 errs=$(grep -cE "error C[0-9]+|error LNK" .scratch/gate-build.log)
 echo "compile/link errors: $errs   cmake exit: $build_rc  (full log: .scratch/gate-build.log)"
 if [ "$errs" -ne 0 ]; then

@@ -4,7 +4,7 @@
 extern struct VFS_DIR* g_6b7fdc;
 extern char g_6a23b0[];
 
-void __cdecl fcn_00469e30(int);
+void __cdecl d2_SetBackdropResource(int);
 void __cdecl ls_CaptureSavePreview(void);
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned char* __cdecl m_alloc(int, char*);
@@ -22,7 +22,7 @@ void __cdecl ls_WriteSavePreviewPixels(int previewModeArg, char* name)
 	int y;
 
 	n = 0;
-	fcn_00469e30(previewModeArg);
+	d2_SetBackdropResource(previewModeArg);
 	ls_CaptureSavePreview();
 	fh = vfs_Tfopen(name, g_6790b0, g_6b7fdc);
 	if (fh != 0) {

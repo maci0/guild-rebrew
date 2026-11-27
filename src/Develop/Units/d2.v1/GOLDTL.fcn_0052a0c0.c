@@ -61,8 +61,8 @@ extern Row g_7e30c0[32];
 int __cdecl fcn_00470820(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 int __cdecl d2_GetWindowListItem(int h, int a, int b);
-void __cdecl fcn_00471af0(int h, int v);
-int __cdecl fcn_0046f7e0(int a, int b, int c, int d, int e);
+void __cdecl d2_SetFormVisibility(int h, int v);
+int __cdecl d2_AddWindowImage(int a, int b, int c, int d, int e);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0052a0c0(int unused, char arg)
 {
@@ -91,7 +91,7 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 		*(int*) &((D2_WIN*)g_1015f40)[owner].pad3c[0x238] = 0x4e;
 		if (g_6a25b4 != -1) {
 			if (g_6a25b8 != -1) {
-				fcn_00471af0(g_6a25b8, 0);
+				d2_SetFormVisibility(g_6a25b8, 0);
 			}
 			d2_SetForm(g_6a25b4, 1);
 			for (i = 0; i < 32; i++) {
@@ -104,7 +104,7 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 				g_7e30c0[i].g = 0;
 			}
 			d2_SetForm(g_6a25b4, 2);
-			id = fcn_0046f7e0(0x11, 4, 0x51d, d2_CurrentWindowId, -2);
+			id = d2_AddWindowImage(0x11, 4, 0x51d, d2_CurrentWindowId, -2);
 			((D2_CONTROL_TL*) g_1015ea0)[id].value_05c = 1;
 			((D2_CONTROL_TL*) g_1015ea0)[id].flags_1d0 = 3;
 			for (i = 0; i < 768; i++) {

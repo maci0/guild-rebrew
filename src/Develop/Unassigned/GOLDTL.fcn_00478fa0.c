@@ -1,7 +1,7 @@
 
 /* ADDRESS: GOLDTL 0x00478fa0 */
-void __cdecl fcn_00478fa0(int a1, int a2, int a3, short* p)
+void __cdecl d2_StoreShapeSize(int x, int y, int surf, short* shape)
 {
-	*(short*) 0x7725f0 = p[3];
-	*(short*) 0x7725f2 = p[5];
+	*(short*) 0x7725f0 = shape[3];
+	*(short*) 0x7725f2 = shape[5];
 }

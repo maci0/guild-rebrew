@@ -18,8 +18,8 @@ void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel);
 int __cdecl d2_UpdateRentGraveOptions(char* a1, int a2, int a3, int* a4, int* a5);
 int __cdecl d2_RunFriedhofDialog(char* a1, int a2, int a3, int a4);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472640(int i, int flag);
-void __cdecl fcn_00471af0(int k, int flag);
+void __cdecl d2_SetElementEnabled(int i, int flag);
+void __cdecl d2_SetFormVisibility(int k, int flag);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -44,7 +44,7 @@ int __cdecl d2_RunRentGraveDialog(char* p, int a1, int a2)
 	fcn_0058c4f0(p, d, 2, ids, &sel);
 	d2_SetForm(d, 3);
 	back = d2_GetWindowListItem(d, 3, io_AppendText(g_6a4078, 0x4119));
-	fcn_00472640(back, d2_UpdateRentGraveOptions(p, a1, a2, ids, &sel));
+	d2_SetElementEnabled(back, d2_UpdateRentGraveOptions(p, a1, a2, ids, &sel));
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {
@@ -52,12 +52,12 @@ int __cdecl d2_RunRentGraveDialog(char* p, int a1, int a2)
 		}
 		else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == back) {
-				fcn_00471af0(d, 0);
+				d2_SetFormVisibility(d, 0);
 				if (d2_RunFriedhofDialog(p, a1, a2, sel) == 1) {
 					res = 1;
 					g_774654 = 1;
 				}
-				fcn_00471af0(d, 1);
+				d2_SetFormVisibility(d, 1);
 			}
 			else {
 				for (i = 0; i < 4; i++) {
@@ -69,7 +69,7 @@ int __cdecl d2_RunRentGraveDialog(char* p, int a1, int a2)
 found:
 				sel = i;
 				fcn_0058c4f0(p, d, 2, ids, &sel);
-				fcn_00472640(back, d2_UpdateRentGraveOptions(p, a1, a2, ids, &sel));
+				d2_SetElementEnabled(back, d2_UpdateRentGraveOptions(p, a1, a2, ids, &sel));
 			}
 		}
 	} while (main_RunFrameLoop(d2_RunRentGraveDialog, 0x677c7) != 0);

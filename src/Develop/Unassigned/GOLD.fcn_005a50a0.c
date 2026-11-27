@@ -3,7 +3,7 @@
 int __cdecl d2_ClearInteractionSlots(void);
 int __cdecl main_RunFrameLoop(void *, int);
 
-void __cdecl fcn_005a50a0(void)
+void __cdecl d2_UpdateBuildingInteriorLoop(void)
 {
 	int r;
 

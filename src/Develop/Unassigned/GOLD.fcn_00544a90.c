@@ -35,7 +35,7 @@ int __cdecl gv_SendSetGraveOwner(int*, char*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLD 0x00544a90 */
-void __cdecl fcn_00544a90(char* e)
+void __cdecl he_StepCourtshipAction(char* e)
 {
 	char* fill_dst;
 	int fill_len;

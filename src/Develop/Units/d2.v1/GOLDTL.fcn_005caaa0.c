@@ -47,9 +47,9 @@ extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
-int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
+int __cdecl d2_AddWindowValueGauge(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00472640(int i, int flag);
+void __cdecl d2_SetElementEnabled(int i, int flag);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 
 /* ADDRESS: GOLDTL 0x005caaa0 */
@@ -70,13 +70,13 @@ int __cdecl fcn_005caaa0(int x, int y, int win, fcn_005caaa0_Sel* selection)
 			d2_AddElementToWindow(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, y + 3, selection->f24, d2_CurrentWindowId);
 		d2_AddElementToWindow(((fcn_005caaa0_Def*)g_772500)[1498].w + x - 0x10, ((fcn_005caaa0_Def*)g_772500)[1498].h + y - 0x13, selection->f28, d2_CurrentWindowId);
 		if (selection->e[2] != 6) {
-			b = fcn_004677e0(cx - 0x23, ((fcn_005caaa0_Def*)g_772500)[1498].h + y + 2, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
+			b = d2_AddWindowValueGauge(cx - 0x23, ((fcn_005caaa0_Def*)g_772500)[1498].h + y + 2, 0x40, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 			selection->bar = b;
 			if (selection->e[2] == 7)
 				d2_SetElementValue(b, 0, 0x64, 0, 1);
 			else
 				d2_SetElementValue(selection->bar, 0, 0x64, (int) gm_CalcEntityFavor(g_774970, *(unsigned short*) selection->e, 1));
-			fcn_00472640(selection->bar, 0);
+			d2_SetElementEnabled(selection->bar, 0);
 		}
 		if (*(int*) (selection->e + 0x210) == ((ENTITY_RECORD*)g_7f4ca0)[g_774970].entity_id)
 			d2_AddElementToWindow(((fcn_005caaa0_Def*)g_772500)[1498].w + x, y, 0x6d3, d2_CurrentWindowId);

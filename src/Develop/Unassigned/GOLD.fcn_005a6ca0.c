@@ -3,7 +3,7 @@
 
 int __cdecl io_FormatTextBuffer(int, int, int);
 
-void __cdecl fcn_005a6ca0(int a, int b)
+void __cdecl d2_AppendFormattedText61166c(int arg, int textBuf)
 {
-	io_FormatTextBuffer(b, 0x61166c, a);
+	io_FormatTextBuffer(textBuf, 0x61166c, arg);
 }

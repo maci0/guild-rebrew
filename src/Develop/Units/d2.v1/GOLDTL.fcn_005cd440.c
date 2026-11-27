@@ -15,14 +15,14 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl amt_HasOccupiedOfficeType7(void);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl fcn_005cadc0(int, char*, char*, int, void*);
 int __cdecl d2_ShowTabbedSelectionDialog(char*, char*, int, void*);
 
 /* ADDRESS: GOLDTL 0x005cd440 */
-int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
+int __cdecl d2_OpenTargetPicker(char* query, int titleTextId, int unused, void* callback)
 {
 	int btn[9];
 	int order[9];
@@ -64,7 +64,7 @@ int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 	btn[7] = d2_AddElementToWindow(0x1d9, 0x125, 0x58b, d2_CurrentWindowId);
 	btn[8] = d2_AddElementToWindow(0x1d9, 0x3c, 0x58e, d2_CurrentWindowId);
 	for (i = 0; i < 9; i++) {
-		if (i != 1 || *(int*) (a0 + 0x18) == 0) {
+		if (i != 1 || *(int*) (query + 0x18) == 0) {
 			e = btn[i];
 			((D2_CONTROL_TL*)g_1015ea0)[e].value_05c = 1;
 			((D2_CONTROL_TL*)g_1015ea0)[e].flags_1d0 = 3;
@@ -96,19 +96,19 @@ int __cdecl fcn_005cd440(char* a0, int titleTextId, int a2, void* a3)
 				}
 			}
 			if (i < 9 && i > -1) {
-				fcn_00471af0(dlg, 0);
-				result = fcn_005cadc0(order[i], a0, (char*) titleTextId, 0, a3);
-				fcn_00471af0(dlg, 1);
+				d2_SetFormVisibility(dlg, 0);
+				result = fcn_005cadc0(order[i], query, (char*) titleTextId, 0, callback);
+				d2_SetFormVisibility(dlg, 1);
 			} else if (d2_CurrentElementId == id) {
-				fcn_00471af0(dlg, 0);
-				result = d2_ShowTabbedSelectionDialog(a0, (char*) titleTextId, -1, a3);
-				fcn_00471af0(dlg, 1);
+				d2_SetFormVisibility(dlg, 0);
+				result = d2_ShowTabbedSelectionDialog(query, (char*) titleTextId, -1, callback);
+				d2_SetFormVisibility(dlg, 1);
 			}
-			if (result && a3 == 0 && (*(unsigned char*) (a0 + 0x14) & 4) == 0) {
+			if (result && callback == 0 && (*(unsigned char*) (query + 0x14) & 4) == 0) {
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005cd440, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_OpenTargetPicker, 0x657c7) != 0);
 	d2_DestroyForm(dlg);
 	return result;
 }

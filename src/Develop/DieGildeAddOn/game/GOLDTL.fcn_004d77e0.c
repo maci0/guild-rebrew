@@ -34,7 +34,7 @@ typedef struct COMBAT_CUTSCENE_DLG {
 } COMBAT_CUTSCENE_DLG;
 #include "client_data.h"
 int __cdecl cut_GetRandSeed(void);
-void __cdecl fcn_004e6c60(int);
+void __cdecl cut_SetRandSeed(int);
 Ent* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_FindRecordById(int);
 void __cdecl gm_CalcEntityInventoryStats(int, Query*);
@@ -55,7 +55,7 @@ void __cdecl cut_RunTurnRound(COMBAT_CUTSCENE_DLG*, int);
 void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_004d6170(COMBAT_CUTSCENE_DLG*);
 void __cdecl cut_RunCombatFlightOutro(COMBAT_CUTSCENE_DLG*);
-void __cdecl fcn_004d2a60(COMBAT_CUTSCENE_DLG*);
+void __cdecl cut_CleanupCombatScene(COMBAT_CUTSCENE_DLG*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_ShowMessageBox(char*, unsigned int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
@@ -126,7 +126,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 		*(int*) &g_772ea8 = 0;
 		*(int*) &g_772eac = 0;
 		cut_RunCombatStartDialog(p);
-		fcn_004e6c60(saved);
+		cut_SetRandSeed(saved);
 		fcn_004d1a80();
 		fcn_004d1a80();
 		cut_RunTurnRound(p, 0);
@@ -161,7 +161,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 			}
 			d2_ShowMessageBox(buf, 0x10);
 		}
-		fcn_004d2a60(p);
+		cut_CleanupCombatScene(p);
 		return;
 	}
 	changed = 0;

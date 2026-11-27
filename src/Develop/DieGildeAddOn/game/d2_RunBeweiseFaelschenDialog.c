@@ -26,7 +26,7 @@ typedef struct {
 } FORGE_EVIDENCE_REQ;
 
 int __cdecl gm_WalkEntityChain(unsigned short);
-void* __cdecl fcn_005cd440(void*, int, int, int);
+void* __cdecl d2_OpenTargetPicker(void*, int, int, int);
 int __cdecl amt_GetRoleLevel(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -35,9 +35,9 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_0046fac0(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int, int);
-void __cdecl fcn_00468bb0(int, int, int, int, int);
+void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
@@ -81,7 +81,7 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 	q.f0 = 1;
 	q.f4 = 0x400;
 	q.f10 = 6;
-	selectedEntity = (char*) fcn_005cd440(&q, *(int*) 0x14b5354, 0, 0);
+	selectedEntity = (char*) d2_OpenTargetPicker(&q, *(int*) 0x14b5354, 0, 0);
 	if (selectedEntity == 0)
 		return;
 	total += gm_WalkEntityChain(*(unsigned short*) selectedEntity);
@@ -103,9 +103,9 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[elem].width)) =
 	    *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c);
 	d2_SetElementFont(elem, 0x54);
-	elem = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);
+	elem = d2_AddWindowValueGauge(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);
 	fcn_00472380(elem, 0, 2, 0, 1);
-	fcn_00468bb0(elem, 3, *(int*) 0x14b5364, *(int*) 0x14b5368,
+	d2_SetValueGaugeStepLabels(elem, 3, *(int*) 0x14b5364, *(int*) 0x14b5368,
 	             *(int*) 0x14b536c);
 	d2_SetForm(dlg, 3);
 	btn = io_AppendText(0x4014);

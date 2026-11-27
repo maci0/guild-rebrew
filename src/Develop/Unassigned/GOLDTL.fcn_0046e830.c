@@ -18,7 +18,7 @@ extern Win_1015f40 g_1015f40[0x60];
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 
 /* ADDRESS: GOLDTL 0x0046e830 */
-void __cdecl fcn_0046e830(int x, int y, int win, int target, int id)
+void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id)
 {
 	int wo;
 	short sy;

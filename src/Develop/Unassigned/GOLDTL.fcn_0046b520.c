@@ -5,7 +5,7 @@ void* __cdecl d2_GetResourceData(int idx);
 char* __cdecl fcn_0047b620(char* p, int i);
 
 /* ADDRESS: GOLDTL 0x0046b520 */
-int __cdecl fcn_0046b520(char* inputText, int fontId)
+int __cdecl d2_MeasureTextWidth(char* inputText, int fontId)
 {
 	int len;
 	int total;

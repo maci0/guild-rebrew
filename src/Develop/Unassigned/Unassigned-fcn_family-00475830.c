@@ -32,7 +32,7 @@ extern int g_67d920;
 
 int __cdecl fcn_00475830(const char* name);
 void* __cdecl fcn_004770a0(TexDesc* d, int fmt);
-void __cdecl fcn_00475fd0(void* t);
+void __cdecl d2_LockSurface(void* t);
 void __cdecl fcn_00475a00(const char* name, void* t);
 void __cdecl d2_UnlockSurface(void* t);
 
@@ -85,7 +85,7 @@ void* __cdecl fcn_00475c10(const char* name)
 	if (!t) {
 		return 0;
 	}
-	fcn_00475fd0(t);
+	d2_LockSurface(t);
 	fcn_00475a00(name, t);
 	d2_UnlockSurface(t);
 	return t;

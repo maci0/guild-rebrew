@@ -4,7 +4,7 @@
 
 #pragma intrinsic(memcpy, memset)
 
-void __cdecl fcn_004ce150(void)
+void __cdecl d3_ResetSceneState(void)
 {
 	memset((void*) 0x9baa20, 0, 36);
 	memset((void*) 0x9baae0, 0, 0x2b8);

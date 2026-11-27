@@ -22,7 +22,7 @@ void __cdecl fcn_00414960(float*, float*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
 int __cdecl d3_ApplyObjectAnimation(char*, char*, int);
-int __cdecl fcn_00476970(void*);
+int __cdecl d2_ClearSurface(void*);
 void __cdecl fcn_00473150(char*);
 void __cdecl d2_CreateCannonControls(int, int);
 void __cdecl fcn_00588200(char*, char*, char*);
@@ -194,9 +194,9 @@ void __cdecl d2_RunKanoneUI(char* obj)
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x216) = (u8) (((u8) (*(char**) ((char*) S + 0x9c))[0x216] & 0xfd) | 1);
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x216) |= 0x10;
     *(u8*) (*(char**) ((char*) S + 0x9c) + 0x214) &= 0x7f;
-    fcn_00476970((void*) g_77250c);
+    d2_ClearSurface((void*) g_77250c);
     main_RunFrameLoop(0, 0x86);
-    fcn_00476970((void*) g_77250c);
+    d2_ClearSurface((void*) g_77250c);
     fcn_00473150(sp);
 
     sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);

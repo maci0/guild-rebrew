@@ -8,15 +8,15 @@ struct VIDEO_WIN_FS_GET_IFACE {
 
 char* __cdecl FindVideoById(int);
 
-int __cdecl IsVideoWindowed(int a1)
+int __cdecl IsVideoWindowed(int videoId)
 {
 	char* p;
 	VIDEO_WIN_FS_GET_IFACE* o;
 
-	p = FindVideoById(a1);
+	p = FindVideoById(videoId);
 	if (p != 0) {
 		o = *(VIDEO_WIN_FS_GET_IFACE**) (p + 0x130);
-		if (o->vt[0x8c / 4](o, &a1) >= 0 && a1 == 0) {
+		if (o->vt[0x8c / 4](o, &videoId) >= 0 && videoId == 0) {
 			return 1;
 		}
 	}

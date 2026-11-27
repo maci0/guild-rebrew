@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 void __cdecl sb_SetVoiceLoopCount(char* o, int v);
-int __cdecl fcn_00423670(char* o, int a, int b);
+int __cdecl sb_StartVoice(char* o, int a, int b);
 void __cdecl sb_ResumeOrStartVoice(char* o);
 
 void __cdecl d3snd_PlaySource(char* r, int a2, int a3, int a4)
@@ -24,7 +24,7 @@ void __cdecl d3snd_PlaySource(char* r, int a2, int a3, int a4)
 	sb_SetVoiceLoopCount(*(char**) (r + 0x34), a3);
 	*(int*) (r + 0x4c) = a4;
 	if (*(int*) (r + 0x50) == 0) {
-		fcn_00423670(*(char**) (r + 0x34), a2, a4);
+		sb_StartVoice(*(char**) (r + 0x34), a2, a4);
 		*(int*) (r + 0x3c) = 0;
 		return;
 	}

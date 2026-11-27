@@ -35,10 +35,10 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_CreateRadioGroup(int);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
-void __cdecl fcn_004707d0(int);
+void __cdecl d2_BringFormToFront(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
@@ -99,12 +99,12 @@ int __cdecl fcn_00526120(char* text, int flags)
 	d2_SetForm(dlg, 0);
 	bar = flags & 0x80;
 	if (bar) {
-		timer = fcn_004677e0(0x1c, ((Screen*)g_77255c)->x10 - 0x18, ((Screen*)g_77255c)->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
+		timer = d2_AddWindowValueGauge(0x1c, ((Screen*)g_77255c)->x10 - 0x18, ((Screen*)g_77255c)->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
 	}
 	while (main_RunFrameLoop((void*) fcn_00526120, wait) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
-			fcn_004707d0(dlg);
+			d2_BringFormToFront(dlg);
 		}
 		if (g_100f1dc == 2 && d2_HoveredWindow == screen) {
 			result = ((int*)g_102cbc8)[list * 35] + 1;

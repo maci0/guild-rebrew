@@ -11,7 +11,7 @@ extern void __cdecl d2_ClearRadioGroup(int obj);
 extern void __cdecl d2_DestroyForm(int obj);
 extern void __cdecl d2_UpdateRadioGroup(int obj);
 extern void __cdecl fcn_004b20d0(int a);
-extern void __cdecl fcn_00471af0(int obj, int a);
+extern void __cdecl d2_SetFormVisibility(int obj, int a);
 extern int __cdecl fcn_004b41b0(void);
 extern int __cdecl fcn_004e4470(const char *name);
 extern void __cdecl cut_WaitForScript(int a);
@@ -127,11 +127,11 @@ label_53de37:
 				mode = 1;
 				d2_SelectRadioGroup(dlg, mode);
 			}
-			fcn_00471af0(obj, 0);
+			d2_SetFormVisibility(obj, 0);
 			v13 = fcn_004b41b0();
-			fcn_00471af0(obj, 1);
+			d2_SetFormVisibility(obj, 1);
 label_53de5c:
-			fcn_00471af0(obj, 0);
+			d2_SetFormVisibility(obj, 0);
 			retry = 0;
 			if (v13 != 0xff || v2) {
 				g_7e242c = v13;
@@ -180,7 +180,7 @@ label_53df85:
 					}
 				}
 			}
-			fcn_00471af0(obj, 1);
+			d2_SetFormVisibility(obj, 1);
 		} else {
 			if (v2) {
 				goto label_53de5c;

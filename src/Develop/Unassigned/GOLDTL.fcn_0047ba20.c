@@ -10,8 +10,8 @@ typedef struct {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_0047c560(int a, int b, int c);
-int __cdecl fcn_0047b8b0(int x, int y, int w, int h, Vtx47ba20* v);
+void __cdecl d2_FlushQueuedQuads(int a, int b, int c);
+int __cdecl d2_BuildQuadVertices(int x, int y, int w, int h, Vtx47ba20* v);
 void __cdecl d2_SetQuadVertexColor(Vtx47ba20* v, unsigned char r, unsigned char g,
                           unsigned char b);
 
@@ -42,7 +42,7 @@ int __cdecl d2_QueueScaledQuad(int x, int y, char* image, float scale)
 		w = *(unsigned short*) (image + 2);
 		h = *(unsigned short*) (image + 6);
 		if (d2_QueuedQuadCount >= 0x400) {
-			fcn_0047c560(0, 0, 0);
+			d2_FlushQueuedQuads(0, 0, 0);
 			if (d2_QueuedQuadCount >= 0x400)
 				return 0;
 		}
@@ -69,7 +69,7 @@ int __cdecl d2_QueueScaledQuad(int x, int y, char* image, float scale)
 			h = (int) ((float) (d2_ClipBottom - y) / scale);
 		if (w <= 0 || h <= 0)
 			return 0;
-		if (!fcn_0047b8b0(x, y, (int) ((float) w * scale + 0.5f),
+		if (!d2_BuildQuadVertices(x, y, (int) ((float) w * scale + 0.5f),
 		                  (int) ((float) h * scale + 0.5f), (Vtx47ba20*) rec))
 			return 0;
 		q = *(int**) (image + 0x28);

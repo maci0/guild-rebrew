@@ -74,7 +74,7 @@ void __cdecl fcn_0058b030(char*, SelDlg*);
 void __cdecl fcn_0058b1f0(char*, DialogState*, unsigned int);
 void __cdecl fcn_0058b440(unsigned int, unsigned int*, int, int);
 char __cdecl fcn_004f1790(int, void*);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -177,9 +177,9 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 							rec.kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), rec.item);
 							rec.item2 = (char*) st.rows[i][1];
 							rec.value2 = *(int*) rec.item2;
-							fcn_00471af0(st.handle, 0);
+							d2_SetFormVisibility(st.handle, 0);
 							callback(a1, &rec);
-							fcn_00471af0(st.handle, 1);
+							d2_SetFormVisibility(st.handle, 1);
 						} else if (result != 0) {
 							g_774654 = 1;
 						}
@@ -199,9 +199,9 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 					rec1.kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), rec1.item);
 					rec1.item2 = 0;
 					rec1.value2 = -1;
-					fcn_00471af0(st.handle, 0);
+					d2_SetFormVisibility(st.handle, 0);
 					callback(a1, &rec1);
-					fcn_00471af0(st.handle, 1);
+					d2_SetFormVisibility(st.handle, 1);
 				} else if (result != 0) {
 					g_774654 = 1;
 				}

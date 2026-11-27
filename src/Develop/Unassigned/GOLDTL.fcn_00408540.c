@@ -7,14 +7,14 @@ int __cdecl ch_RestoreGridRegion();
 int __cdecl ch_MarkGridDiamond();
 int __cdecl ch_DownsamplePath();
 char __cdecl ch_FindWalkableCell();
-int __cdecl fcn_00408250();
+int __cdecl ch_CopyMapBounds();
 int __cdecl ch_WorldToGridCoordinates();
 int __cdecl ch_ConvertGridPointToCharacterGrid();
 int __cdecl ch_CollectCharacterOccupiedCells();
 int __cdecl d3_GetContextIndex();
 int __cdecl fcn_0041db70();
 int __cdecl fcn_0041ddd0();
-int __cdecl fcn_00421350();
+int __cdecl FindPath();
 int __cdecl d3_GridPointToWorld();
 char __cdecl fcn_0045b990();
 int __cdecl fcn_0064d228();
@@ -66,7 +66,7 @@ int __cdecl ch_ReplanBlockedPath(int a0,int a1,int *a2)
   if (*(char *)(v28 + 9) != '-')
     return -1;
   v35 = d3sm_GetObjectSuperMap(v27);
-  fcn_00408250(((int)g_6b5c5c),v35);
+  ch_CopyMapBounds(((int)g_6b5c5c),v35);
   v36 = (int)(0.5 + (g_662914 / *(float *)(v35 + 0x10)));
   if (v36 > 10)
     v36 = 10;
@@ -325,7 +325,7 @@ label_40892d:
         v8 = v15;
         v14 = v24;
       }
-      v5 = fcn_00421350(0x14d0c20,v13,v14,v8,v23,v22,*(unsigned char *)(a0 + 0x240));
+      v5 = FindPath(0x14d0c20,v13,v14,v8,v23,v22,*(unsigned char *)(a0 + 0x240));
       v27 = (*(int *)0x14d0c20);
       if (v5 == -1) {
         ch_RestoreGridRegion(v13);

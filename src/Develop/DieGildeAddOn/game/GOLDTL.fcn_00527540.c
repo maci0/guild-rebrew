@@ -5,7 +5,7 @@ extern char* lpObjektePROT;
 extern int g_1040494;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 void __cdecl fcn_00475f80(int);
-void __cdecl fcn_00475fd0(int);
+void __cdecl d2_LockSurface(int);
 void __cdecl d2_UnlockSurface(int);
 int __cdecl fcn_00475c10(char*);
 char* __cdecl fcn_00475000(char*);
@@ -14,9 +14,9 @@ int __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_00475c10(char*);
 int __cdecl fcn_00475780(void*, void*);
-void __cdecl fcn_00476a50(int, int, int, void*);
+void __cdecl d2_ReadSurfacePixel(int, int, int, void*);
 int __cdecl gm_GetWareIconId(void*);
-int __cdecl fcn_00469c30(short, short, int);
+int __cdecl d2_CreateElement(short, short, int);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strrchr(const char*, int);
 
@@ -125,7 +125,7 @@ have_image:
 		if (!v3)
 			return;
 	}
-	fcn_00475fd0(v3);
+	d2_LockSurface(v3);
 	*(int*) 0x774684 = fcn_00475c10(buf);
 	if (*(int*) 0x774680) {
 		fcn_00475f80(*(int*) 0x774680);
@@ -136,17 +136,17 @@ have_image:
 	strcat(buf, "_C.bmp");
 	*(int*) 0x774680 = fcn_00475c10(buf);
 	v22 = 0;
-	fcn_00475fd0(*(int*) 0x774680);
+	d2_LockSurface(*(int*) 0x774680);
 	v12 = *(int*) 0x774680;
 	v3 = 0;
 	if (!v12)
 		return;
 	for (; v3 < *(int*) (v12 + 8); v3++) {
 		for (v14 = 0; v14 < *(int*) (v12 + 4); v14++) {
-			fcn_00476a50(v14, v3, v12, key);
+			d2_ReadSurfacePixel(v14, v3, v12, key);
 			if (fcn_00475780(key, white))
 				goto next_pixel;
-			fcn_00476a50(v14 + 1, v3, *(int*) 0x774680, key);
+			d2_ReadSurfacePixel(v14 + 1, v3, *(int*) 0x774680, key);
 			for (i = 0, q = (char*) 0x6a24ec; q < (char*) 0x6a2519; q += 3, i++) {
 				if (!fcn_00475780(key, q)) {
 					if (i >= 0xf)
@@ -188,7 +188,7 @@ found:
 			if (v4 != 0) {
 				v13 = gm_GetWareIconId(v4);
 				if (v13 != -1) {
-					v6 = fcn_00469c30(*(int*) 0x1040494 + v14 - 0x7e,
+					v6 = d2_CreateElement(*(int*) 0x1040494 + v14 - 0x7e,
 						v3 + 0x4c, v13);
 					*(int*) (v22 * 4 + 0x7ea380) = v6;
 					v22++;

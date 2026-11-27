@@ -27,7 +27,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_SendSetHE(int, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_0052a0c0(char*, int);
-int __cdecl fcn_005cd440(Req*, char*, int, void*);
+int __cdecl d2_OpenTargetPicker(Req*, char*, int, void*);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl fcn_00526120(int, int);
@@ -68,7 +68,7 @@ void __cdecl d2_StartEntfuehrungDialog(char* building)
 	req.d = g_66601c;
 	io_FormatTextBuffer(text, 0x19b8);
 	fcn_0052a0c0(building, 0);
-	fcn_005cd440(&req, text, 0, (void*) d2_RunEntfuehrungDialog);
+	d2_OpenTargetPicker(&req, text, 0, (void*) d2_RunEntfuehrungDialog);
 	d2_RestoreHudAfterDialog();
 	d3_EndCameraAndUiMode();
 }

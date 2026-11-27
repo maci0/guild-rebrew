@@ -16,9 +16,20 @@ Use one state Git repository per exact reference binary. Give each
 analyst and bridge its own BinSync username and branch. Use separate checkouts
 for live clients with different users; do not switch branches under another client.
 
-This project's ignored `binsync/` repository is configured for the server. Preserve
-it rather than initializing over it. Client states need their own binary bindings.
-Names and source similarity do not establish a compatible state repository.
+This project keeps three ignored state repositories, one per current reference
+binary, each set by `binsync_state_dir` in `rebrew-project.toml`:
+
+| Target | State directory |
+|---|---|
+| `server.dll` | `binsync/` |
+| `Europa1400Gold_TL.exe` | `binsync-goldtl/` |
+| `Europa1400Gold.exe` | `binsync-gold/` |
+
+`binsync-2026-09-22/` is the archived September state. It is bound to a binary that
+is none of the three current ones and holds the user's own annotations: preserve it,
+never initialize, push or prune over it. Preserve the three current repositories
+too rather than initializing over them. Names and source similarity do not
+establish a compatible state repository.
 
 ## Review an exchange
 
@@ -29,7 +40,7 @@ uv run --frozen --extra binsync rebrew binsync pull binsync --target server.dll 
 uv run --frozen --extra binsync rebrew binsync push binsync --target server.dll --user REBREW_USER --dry-run --json
 ```
 
-Replace `REBREW_USER` with Rebrew's own writer username. It must differ from
+For a client, use its state directory and target in place of `binsync` and `server.dll`. Replace `REBREW_USER` with Rebrew's own writer username. It must differ from
 the live bridge's username: pull excludes Rebrew's user branch, and push writes
 that branch. Keep the same writer identity for the exchange; do not infer it
 from the state author in `binsync/metadata.toml`. Resolve binary,

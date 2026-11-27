@@ -23,11 +23,11 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl sprintf(char*, const char*, ...);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00468cd0(int, int);
-void __cdecl fcn_00468b80(int, char*);
-void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
+void __cdecl d2_SetValueGaugeFlags(int, int);
+void __cdecl d2_SetValueGaugeLabel(int, char*);
+void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int, int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(void (__cdecl*)(int), int);
 int __cdecl d2_GetControlValue(int);
@@ -54,11 +54,11 @@ void __cdecl fcn_0053eb60(int n)
 	x = (*(int*) (g_77255c + 0x10) - w * n) / 2 + 0xe;
 	for (i = 0; i < n; i++) {
 		sprintf(buf, "%s %c", g_14b5e38, i + 0x41);
-		ids[i] = fcn_004677e0(0x80, x + i * w, 0xc8, 0, 0x64, 0x7b, 0x802, d2_CurrentWindowId);
+		ids[i] = d2_AddWindowValueGauge(0x80, x + i * w, 0xc8, 0, 0x64, 0x7b, 0x802, d2_CurrentWindowId);
 		d2_SetElementValue(ids[i], 0, 4, g_7e1fa0[i]);
-		fcn_00468cd0(ids[i], 0x82);
-		fcn_00468b80(ids[i], buf);
-		fcn_00468bb0(ids[i], 5, g_14b5e3c, g_14b5e40, g_14b5e44, g_14b5e48, g_14b5e4c);
+		d2_SetValueGaugeFlags(ids[i], 0x82);
+		d2_SetValueGaugeLabel(ids[i], buf);
+		d2_SetValueGaugeStepLabels(ids[i], 5, g_14b5e3c, g_14b5e40, g_14b5e44, g_14b5e48, g_14b5e4c);
 	}
 	d2_SetForm(h, 2);
 	ok = d2_GetWindowListItem(h, 2, io_AppendText(0x7d));

@@ -19,7 +19,7 @@ int __cdecl gm_RandomMod(unsigned short);
 float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl cut_WaitSeconds(int);
 void __cdecl cut_FadeToBlack(void);
-void __cdecl fcn_004e4c60(void);
+void __cdecl d3_DestroySceneRain(void);
 void __cdecl d3_DestroySkyLayer(void);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
@@ -120,7 +120,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	cut_FadeToBlack();
 	cut_WaitForScript(evt_StartGfxScript((char*) 0x68ce6c, (char*) 0x6b5c60));
 	if (mode != 0) {
-		fcn_004e4c60();
+		d3_DestroySceneRain();
 	}
 	d3_DestroySkyLayer();
 	g_772f54 = 0;

@@ -4,7 +4,7 @@ extern volatile int g_6b7fac;
 void __cdecl d3_FreeObjectAnimation(char* a0);
 char* __cdecl m_alloc(unsigned int size, char* file);
 int __cdecl d3_StepAnimFrame(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max);
-void __cdecl fcn_004337c0(void* a0);
+void __cdecl d3_BuildAnimSplineTangents(void* a0);
 
 #pragma optimize("y", off)
 
@@ -76,7 +76,7 @@ int* __cdecl d3_CreateObjectAnimation(char* a0, D3_ANIMATION_OPTIONS flags, int 
 			animation[2] = d3_StepAnimFrame(*(D3_ANIMATION_OPTIONS*) (animation + 0xb), v6, 0, v6, v6);
 		
 		}
-		fcn_004337c0(animation);
+		d3_BuildAnimSplineTangents(animation);
 	}
 	*(int**) (a0 + 0x1d0) = animation;
 	*(int*) (a0 + 0x40) = g_6b7fac;

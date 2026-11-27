@@ -3,7 +3,7 @@
 
 int __cdecl vfs_FindPathNode(int, int);
 
-void __cdecl fcn_0044c510(int a)
+void __cdecl d3_SetAnimDir(int a)
 {
 	*(void**) 0xfba940 = (void*) vfs_FindPathNode(a, *(int*) 0x6333fc);
 }

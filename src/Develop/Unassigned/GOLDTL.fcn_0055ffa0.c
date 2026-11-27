@@ -7,7 +7,7 @@ typedef struct {
 
 void __cdecl gm_AddTime(char*, int, int, int);
 
-void __cdecl fcn_0055ffa0(char* e)
+void __cdecl he_StartLagerErweitern(char* e)
 {
 	*(Rec14*) (e + 0x52) = *(Rec14*) (e + 0x44);
 	gm_AddTime(e + 0x52, 2, 0, 0);

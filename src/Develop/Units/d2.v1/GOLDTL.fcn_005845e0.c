@@ -7,7 +7,7 @@ char* __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(char*);
 void __cdecl d2_DestroyForm(char*);
 int __cdecl d2_GetWindowListItem(char*, int, char*);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetForm(char*, int);
 char* __cdecl io_AppendText(char*, int);
 int __cdecl main_RunFrameLoop(char*, int);
@@ -56,13 +56,13 @@ int __cdecl d2_ChooseTutorial(void)
 				index = index * 0x40 - index;
 				index = index * 0xc;
 				if (*(int*)&((D2_CONTROL_TL*)(g_1015ea0 + index))->value_038 != 0) {
-					fcn_00472640((char*) result, 1);
+					d2_SetElementEnabled((char*) result, 1);
 					break;
 				}
 				n++;
 			}
 			if (n == 5) {
-				fcn_00472640((char*) result, 0);
+				d2_SetElementEnabled((char*) result, 0);
 			}
 			if (g_14ce8e0 != 0 || g_14cf950 == 1 || g_100f1dc == 1) {
 				g_774654 = 1;

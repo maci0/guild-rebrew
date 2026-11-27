@@ -4,7 +4,7 @@
 int __cdecl d3_AppendVfsAssetPath(char*, char*);
 
 /* ADDRESS: GOLD 0x0044c9d0 */
-char __cdecl fcn_0044c9d0(char* a, char* b, int n, char* da, char* db)
+char __cdecl d3_FormatMeshAssetNames(char* a, char* b, int n, char* da, char* db)
 {
 	int i;
 	int k;

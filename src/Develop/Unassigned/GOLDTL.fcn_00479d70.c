@@ -25,26 +25,26 @@ typedef struct Bank {
 
 extern char s_67da68[];
 
-void __cdecl fcn_00478fc0(int a1, int a2, int a3, char* sh);
+void __cdecl d2_BlitShape(int a1, int a2, int a3, char* sh);
 
 /* ADDRESS: GOLDTL 0x00479d70 */
-int __cdecl fcn_00479d70(int a1, int a2, int a3, Bank* b, int idx)
+int __cdecl shp_ShowShapeFromBankMode2(int x, int y, int surface, Bank* bank, int idx)
 {
 	char msg[0x80];
 	char* sh;
-	char old;
+	char saved_mode;
 
-	if (!b) {
+	if (!bank) {
 		return 0;
 	}
-	if (idx > b->count) {
-		sprintf(msg, s_67da68, b->name);
+	if (idx > bank->count) {
+		sprintf(msg, s_67da68, bank->name);
 		return 0;
 	}
-	sh = (char*) b + *(unsigned int*) ((char*) b + 0x45 + idx * 4);
-	old = sh[0xd];
+	sh = (char*) bank + *(unsigned int*) ((char*) bank + 0x45 + idx * 4);
+	saved_mode = sh[0xd];
 	sh[0xd] = 2;
-	fcn_00478fc0(a1, a2, a3, (char*) b + *(unsigned int*) ((char*) b + 0x45 + idx * 4));
-	sh[0xd] = old;
+	d2_BlitShape(x, y, surface, (char*) bank + *(unsigned int*) ((char*) bank + 0x45 + idx * 4));
+	sh[0xd] = saved_mode;
 	return 1;
 }

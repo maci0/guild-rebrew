@@ -17,7 +17,7 @@ typedef struct {
 extern int g_67a370;
 
 char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
-int __cdecl fcn_004d31d0(char*, int, int, int, int*, int*);
+int __cdecl gm_FindBestBalancedTile(char*, int, int, int, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
@@ -32,7 +32,7 @@ int __cdecl cut_AssignGuardOrder(char* rec, char* e)
 
 	h = *(int*) (((char*)g_67a370) + 0xb0);
 	if (fcn_0045b990(h, (float*) (*(char**) (*(char**) (e + 0x184) + 0x34) + 0x4c), &c, &a, &b) != 0 &&
-	    fcn_004d31d0(e, c, a, 8, &c, &a) != 0) {
+	    gm_FindBestBalancedTile(e, c, a, 8, &c, &a) != 0) {
 		r = gm_FindOrCreateEntitySlot(rec, e);
 		r->fc = 0;
 		l = *r;

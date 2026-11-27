@@ -40,24 +40,24 @@ void __cdecl fcn_0047ccd0(int x, int y, int surf, char* font, int c);
 int __cdecl fcn_0047cc80(int x, int y, int surf, void* s, int idx, float scale, int tint);
 void* __cdecl d2_GetResourceData(int idx);
 int __cdecl fcn_00465950(const char* name);
-void __cdecl fcn_004663e0(char* f, int surf);
-void __cdecl fcn_00469fd0(char* e);
+void __cdecl d2_DrawFieldSliderPopup(char* f, int surf);
+void __cdecl d2_DrawElementTooltip(char* e);
 int __cdecl d2_DrawMouseCursor(int x, int y);
-void __cdecl fcn_0047c560(int a, int b, int c);
+void __cdecl d2_FlushQueuedQuads(int a, int b, int c);
 void __cdecl fcn_004732c0(void);
 void __cdecl d2_SelectFont(int font);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
-void __cdecl fcn_00479cc0(int a, int b, int c, int d, char* e);
-void __cdecl fcn_00467920(int a0, int a1);
-void __cdecl fcn_00468e40(int a0, int a1);
+void __cdecl d2_SetSurfaceClipRect(int a, int b, int c, int d, char* e);
+void __cdecl d2_DrawValueGauge(int a0, int a1);
+void __cdecl d2_DrawTextButton(int a0, int a1);
 void __cdecl d2_DrawField(int idx, int surf);
 void __cdecl d2_DrawWindow(int a0, int a1);
-void __cdecl fcn_00469320(int idx, int surf);
+void __cdecl d2_DrawBitmapElement(int idx, int surf);
 void __cdecl d2_DrawAnimationSlot(int i, int tex);
 void __cdecl d2_GetElementResourceSize(int a, int* w, int* h);
 
 /* ADDRESS: GOLDTL 0x0046a110 */
-void __cdecl fcn_0046a110(int clearAll)
+void __cdecl d2_RenderAllElements(int clearAll)
 {
 	struct { fcn_0046a110_Rect screen; float uv[2]; } loc;
 	union { fcn_0046a110_Rect clip[2]; char buf[40]; } u;
@@ -150,7 +150,7 @@ void __cdecl fcn_0046a110(int clearAll)
 			}
 			if (g_7725a4 && (*(int*) &((D2_CONTROL_TL*) ent)->parent != g_7725a0 || !*(int*) (g_7725a4 + 0x40))) {
 				fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
-				fcn_00469fd0((char*) g_7725a4);
+				d2_DrawElementTooltip((char*) g_7725a4);
 				g_7725a0 = *(int*) &((D2_CONTROL_TL*) ent)->parent;
 				g_7725a4 = 0;
 			}
@@ -284,7 +284,7 @@ label_46a7ab:
 				}
 				break;
 			case 9:
-				fcn_00468e40(((D2_CONTROL_TL*) ent)->value_000, g_77250c);
+				d2_DrawTextButton(((D2_CONTROL_TL*) ent)->value_000, g_77250c);
 				break;
 			case 0x40:
 				if (((D2_CONTROL_TL*) ent)->mode <= 0)
@@ -329,17 +329,17 @@ label_46a7ab:
 			case 0x45:
 				if (*(int*) &((D2_CONTROL_TL*) ent)->parent) {
 					child = *(char**) &((D2_CONTROL_TL*) ent)->parent;
-					fcn_00479cc0(((D2_CONTROL_TL*) ent)->clip_left, ((D2_CONTROL_TL*) ent)->clip_top,
+					d2_SetSurfaceClipRect(((D2_CONTROL_TL*) ent)->clip_left, ((D2_CONTROL_TL*) ent)->clip_top,
 					             *(int*) (child + 0xc), *(int*) (child + 0x10),
 					             (char*) g_77250c);
 				}
-				fcn_00467920(((D2_CONTROL_TL*) ent)->value_000, g_77250c);
-				fcn_00479cc0(0, 0, g_1040494, d2_ScreenHeight, (char*) g_77250c);
+				d2_DrawValueGauge(((D2_CONTROL_TL*) ent)->value_000, g_77250c);
+				d2_SetSurfaceClipRect(0, 0, g_1040494, d2_ScreenHeight, (char*) g_77250c);
 				break;
 			case 0x47:
 				((D2_CONTROL_TL*) ent)->clip_top = top;
 				((D2_CONTROL_TL*) ent)->clip_bottom = bottom;
-				fcn_00469320(((D2_CONTROL_TL*) ent)->value_000, g_77250c);
+				d2_DrawBitmapElement(((D2_CONTROL_TL*) ent)->value_000, g_77250c);
 				break;
 			}
 		}
@@ -351,16 +351,16 @@ label_46a7ab:
 label_46aadd:
 	if (g_7725a4) {
 		fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
-		fcn_00469fd0((char*) g_7725a4);
+		d2_DrawElementTooltip((char*) g_7725a4);
 		g_7725a0 = 0;
 		g_7725a4 = 0;
 	}
 	if (tp_d2_SelectedControl && *(signed char*) (tp_d2_SelectedControl + 0x28) < 0 && *(int*) (tp_d2_SelectedControl + 0x12c) != -1
 	    && *(int*) (tp_d2_SelectedControl + 0x1c) < *(int*) (tp_d2_SelectedControl + 0x18) && g_14ce8d4)
-		fcn_004663e0((char*) tp_d2_SelectedControl, g_77250c);
+		d2_DrawFieldSliderPopup((char*) tp_d2_SelectedControl, g_77250c);
 	fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 	d2_DrawMouseCursor(g_772570, g_772574);
-	fcn_0047c560(0, 0, 0);
+	d2_FlushQueuedQuads(0, 0, 0);
 	fcn_004732c0();
 	g_772524 = (int) d2_GetResourceData(fcn_00465950((char*) 0x67d474));
 	d2_FontHeight = 0x18;

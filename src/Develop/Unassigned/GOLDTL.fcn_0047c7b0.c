@@ -74,7 +74,7 @@ typedef struct {
 extern int g_772614;
 
 
-int __cdecl fcn_0047b8b0(int, int, int, int, Quad*);
+int __cdecl d2_BuildQuadVertices(int, int, int, int, Quad*);
 void __cdecl fcn_0047b9f0(Quad*, int);
 void __cdecl fcn_0047c4e0(void);
 void __cdecl fcn_004372d0(int, int, int, int, int);
@@ -90,7 +90,7 @@ void __cdecl fcn_0047c7b0(int x, int y, int w, int h, Tex* tex, float alpha)
 	VBVtbl* vt;
 
 	((Tex*) tex)->vtbl->GetLevelDesc(tex, 0, &desc);
-	if (fcn_0047b8b0(x, y, w, h, &q) == 0) {
+	if (d2_BuildQuadVertices(x, y, w, h, &q) == 0) {
 		return;
 	}
 	fcn_0047b9f0(&q, (int) (alpha * 255.0f));

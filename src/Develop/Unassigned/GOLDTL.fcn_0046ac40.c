@@ -22,7 +22,7 @@ extern HitObj** g_772540;
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLDTL 0x0046ac40 */
-int __cdecl fcn_0046ac40(int x, int y)
+int __cdecl d2_HitTestWindow(int x, int y)
 {
 	HitObj* o;
 	int n;

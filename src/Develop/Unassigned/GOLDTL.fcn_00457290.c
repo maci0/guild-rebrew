@@ -85,9 +85,9 @@ void __cdecl fcn_00455140(char* node, float* in, float* out);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 int __cdecl fcn_00456630(void* obj, char b, unsigned int key,
                          unsigned int stamp, int unused);
-int __cdecl fcn_004582d0(char* a0, char* p2, char* p1, char* a2, float* va,
+int __cdecl d3_RenderProjectedShadow(char* a0, char* p2, char* p1, char* a2, float* va,
                          float* vb, char* a1, Item0457290* rec, char* a3);
-int __cdecl fcn_00457630(Item0457290* rec, unsigned int map);
+int __cdecl d3_SubmitShadowPatch(Item0457290* rec, unsigned int map);
 
 #include <string.h>
 
@@ -248,8 +248,8 @@ alloc:
 			}
 		}
 submit:
-		fcn_004582d0((char*) node, (char*) q, p1, a2, va, vb, (char*) other, rec, a3);
-		fcn_00457630(rec, *(unsigned int*) 0x6b8300);
+		d3_RenderProjectedShadow((char*) node, (char*) q, p1, a2, va, vb, (char*) other, rec, a3);
+		d3_SubmitShadowPatch(rec, *(unsigned int*) 0x6b8300);
 	}
 end:
 	return 0;

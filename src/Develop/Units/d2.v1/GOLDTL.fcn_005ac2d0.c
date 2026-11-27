@@ -77,7 +77,7 @@ void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_DestroyForm(int dlg);
 void __cdecl d2_SetForm(int dlg, int page);
 int __cdecl d2_GetWindowListItem(int dlg, int page, int id);
-void __cdecl fcn_00472640(int button, int state);
+void __cdecl d2_SetElementEnabled(int button, int state);
 int __cdecl d2_ClearWindowChildren(int win, int keep);
 void __cdecl fcn_005340f0(int win);
 int __cdecl io_AppendText(int id, ...);
@@ -87,7 +87,7 @@ void __cdecl gm_ModifyHealth(int id, int amount);
 int __cdecl d2_BuildPersonStatusDesc(sel005ac2d0* sel);
 int __cdecl fcn_005ca740(int x, int y, int win, int id, sel005ac2d0* sel, int flag);
 int __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-char* __cdecl fcn_005cd440(void* m, char* text, int a2, int a3);
+char* __cdecl d2_OpenTargetPicker(void* m, char* text, int a2, int a3);
 int __cdecl gm_RandomMod(unsigned short range);
 void __cdecl d3_EndCameraAndUiMode(void);
 
@@ -225,9 +225,9 @@ void __cdecl fcn_005ac2d0(char* building)
 			btnState1 = d2_GetWindowListItem(dlg, 2, i);
 			btnCancel = d2_GetWindowListItem(dlg, 2, i + 1);
 			if (*(int*) (unit + 0x70) > 0) {
-				fcn_00472640(btnState1, 0);
+				d2_SetElementEnabled(btnState1, 0);
 			} else {
-				fcn_00472640(btnState1, 1);
+				d2_SetElementEnabled(btnState1, 1);
 			}
 		} else if (state == 2) {
 			d2_SetForm(dlg, 1);
@@ -248,9 +248,9 @@ void __cdecl fcn_005ac2d0(char* building)
 			btnState2 = d2_GetWindowListItem(dlg, 2, i);
 			btnCancel = d2_GetWindowListItem(dlg, 2, i + 1);
 			if (*(int*) (unit + 0x70) > 0) {
-				fcn_00472640(btnState2, 0);
+				d2_SetElementEnabled(btnState2, 0);
 			} else {
-				fcn_00472640(btnState2, 1);
+				d2_SetElementEnabled(btnState2, 1);
 			}
 		}
 		flag = 0;
@@ -278,7 +278,7 @@ void __cdecl fcn_005ac2d0(char* building)
 				*(int*) (pkt2 + 8) = g_666018;
 				*(int*) (pkt2 + 0xc) = g_66601c;
 				io_FormatTextBuffer(text, 0x19a2);
-				info = fcn_005cd440(pkt2, text, 0, 0);
+				info = d2_OpenTargetPicker(pkt2, text, 0, 0);
 				obj = (char*) fcn_00502cd0(*(int*) (building + 0x5d), 1, 0, 0x1b5);
 				if (info != 0 && *(int*) (info + 4) != -1 && obj != 0) {
 					v15 = (char) gm_RandomMod(8);

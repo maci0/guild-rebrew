@@ -7,7 +7,7 @@ void __cdecl vfs_WriteVec4(int, int*);
 void __cdecl vfs_WriteVec3(int, int*);
 
 /* ADDRESS: GOLD 0x0044a770 */
-void __cdecl fcn_0044a770(int stream, char* model)
+void __cdecl d3_SaveFloor(int stream, char* model)
 {
     char* name;
     char* row;

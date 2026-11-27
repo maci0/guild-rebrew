@@ -3,7 +3,7 @@
 extern char* g_1015ea0;
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00468c30 */
-void __cdecl fcn_00468c30(int slot, int n, char* out)
+void __cdecl d2_GetValueGaugeStepLabel(int slot, int n, char* out)
 {
 	char buf[0x400];
 	char* p;

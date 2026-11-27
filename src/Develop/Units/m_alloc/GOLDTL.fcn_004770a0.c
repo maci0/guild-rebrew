@@ -6,7 +6,7 @@ extern void* g_6b5de0;
 
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
-void __cdecl fcn_004760c0(void* o, void* desc);
+void __cdecl d2_GetSurfaceDesc(void* o, void* desc);
 int __stdcall fcn_00610011(void* device, int width, int height, int kind, int state,
     int format, int bypass, int** target);
 
@@ -142,7 +142,7 @@ created:
 	tex[10] = format;
 	tex[0x15] = rw;
 	tex[0x16] = rh;
-	fcn_004760c0(tex, &desc);
+	d2_GetSurfaceDesc(tex, &desc);
 	tex[0x13] = desc.pitch + 0x5c;
 done:
 	tex[4] = 0;

@@ -12,7 +12,7 @@ struct VIDEO_CTRL_OBJ {
 };
 
 // SIZE 0x1c
-struct msg_41f350 {
+struct VIDEO_PUMP_MSG {
 	void* hwnd;
 	unsigned int message;
 	unsigned int wParam;
@@ -26,10 +26,10 @@ __declspec(dllimport) int __stdcall ShowWindow(void*, int);
 __declspec(dllimport) int __stdcall BringWindowToTop(void*);
 __declspec(dllimport) int __stdcall SetWindowPos(void*, void*, int, int, int, int, unsigned int);
 __declspec(dllimport) int __stdcall UpdateWindow(void*);
-__declspec(dllimport) int __stdcall PeekMessageA(struct msg_41f350*, void*, unsigned int, unsigned int, unsigned int);
-__declspec(dllimport) int __stdcall GetMessageA(struct msg_41f350*, void*, unsigned int, unsigned int);
-__declspec(dllimport) int __stdcall TranslateMessage(const struct msg_41f350*);
-__declspec(dllimport) long __stdcall DispatchMessageA(const struct msg_41f350*);
+__declspec(dllimport) int __stdcall PeekMessageA(struct VIDEO_PUMP_MSG*, void*, unsigned int, unsigned int, unsigned int);
+__declspec(dllimport) int __stdcall GetMessageA(struct VIDEO_PUMP_MSG*, void*, unsigned int, unsigned int);
+__declspec(dllimport) int __stdcall TranslateMessage(const struct VIDEO_PUMP_MSG*);
+__declspec(dllimport) long __stdcall DispatchMessageA(const struct VIDEO_PUMP_MSG*);
 __declspec(dllimport) int __stdcall IsWindow(void*);
 __declspec(dllimport) void __stdcall Sleep(unsigned long);
 
@@ -43,7 +43,7 @@ int __cdecl PlayVideo(int id)
 {
 	char* v;
 	long hr;
-	struct msg_41f350 msg;
+	struct VIDEO_PUMP_MSG msg;
 
 	v = FindVideoById(id);
 	if (v != 0) {

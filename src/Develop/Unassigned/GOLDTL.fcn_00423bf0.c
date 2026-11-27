@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-int __cdecl fcn_00423bf0(char* path, int* d)
+int __cdecl sbs_ReadSampleFile(char* path, int* d)
 {
 	int r;
 	FILE* f;

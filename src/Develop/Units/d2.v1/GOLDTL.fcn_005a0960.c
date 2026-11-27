@@ -11,7 +11,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_0046e830(int, int, int, int, int);
+void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -29,7 +29,7 @@ void __cdecl d2_ShowWirtshausRules(void)
 	d2_SetForm(h, 2);
 	a = d2_CurrentWindowId;
 	d2_SetForm(h, 3);
-	fcn_0046e830(-1, -1, d2_CurrentWindowId, a, 0x767);
+	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, a, 0x767);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1889);
 	d2_SetForm(h, 2);

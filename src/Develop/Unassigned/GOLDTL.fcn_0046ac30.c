@@ -1,9 +1,9 @@
-void __cdecl fcn_0046a110(int a);
+void __cdecl d2_RenderAllElements(int a);
 void __cdecl d3_PresentFrame(void);
 
 /* ADDRESS: GOLDTL 0x0046ac30 */
-void __cdecl fcn_0046ac30(void)
+void __cdecl d2_RenderAndPresentFrame(void)
 {
-	fcn_0046a110(1);
+	d2_RenderAllElements(1);
 	d3_PresentFrame();
 }

@@ -9,12 +9,12 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DrawPanelFrame(int, int, int);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl io_AppendText();
-int __cdecl fcn_00533a60(int, int, int*, int, int);
+int __cdecl d2_CreateButtonRow(int, int, int*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl he_GetActiveKrediteByLender(int, char*, unsigned int, char**);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -58,7 +58,7 @@ void __cdecl fcn_005a4e00(char* building)
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);
-	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, fcn_00472830(h, 2),
+	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, d2_GetFormWindow(h, 2),
 	    0x78, &v3, &v2, &v1);
 	*(int*) &((D2_WIN*) g_1015f40)[d2_CurrentWindowId].pad3a8[0x0] = 0xe;
 	*(int*) &((D2_WIN*) g_1015f40)[d2_CurrentWindowId].pad3a8[0x4] = 0x18;
@@ -67,7 +67,7 @@ void __cdecl fcn_005a4e00(char* building)
 	d2_SetForm(h, 1);
 	io_AppendText(0x18d9);
 	d2_SetForm(h, 3);
-	fcn_00533a60(d2_CurrentWindowId, 0, tmp, 1, g_14ab694);
+	d2_CreateButtonRow(d2_CurrentWindowId, 0, tmp, 1, g_14ab694);
 	close_btn = tmp[0];
 	while (main_RunFrameLoop((void*) fcn_005a4e00, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0) {
@@ -77,7 +77,7 @@ void __cdecl fcn_005a4e00(char* building)
 			d2_SetForm(h, 2);
 			for (i = 0; i < 16; i++) {
 				if (items[i][0] != -1) {
-					fcn_0046f280(items[i][0]);
+					d2_CloseWindow(items[i][0]);
 					d2_DestroyElement(items[i][1]);
 					items[i][0] = -1;
 					items[i][1] = -1;

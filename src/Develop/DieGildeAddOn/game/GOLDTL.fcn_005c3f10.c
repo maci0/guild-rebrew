@@ -90,9 +90,9 @@ int __cdecl fcn_00519190(int id, ...);
 void __cdecl io_FormatTextBuffer(char* out, int id, ...);
 int __cdecl fcn_00526120(char* text, int mode);
 int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
-void __cdecl fcn_00472640(int a, int b);
+void __cdecl d2_SetElementEnabled(int a, int b);
 void __cdecl d2_SetBildArgument(int a, int b);
-void __cdecl fcn_00471af0(int a, int b);
+void __cdecl d2_SetFormVisibility(int a, int b);
 void __cdecl d2_DestroyForm(int a);
 int __cdecl d2_GetControlValue(int a);
 void __cdecl cm_BeginPacketFieldDelta(char* ent, int id);
@@ -236,7 +236,7 @@ void __cdecl d2_RunGebaeudeOptionenDialog(char* ent)
 					v.h20 = d2_GetWindowListItem(dlg, 1,
 					    fcn_00519190(0x17ad));
 				if ((*(unsigned char*) (ent + 0x5b) & 2) != 0)
-					fcn_00472640(v.h20, 0);
+					d2_SetElementEnabled(v.h20, 0);
 			}
 			goto after_build;
 build_other:
@@ -305,69 +305,69 @@ after_build:
 			changed = 0;
 		}
 		if ((*(unsigned char*) (ent + 0x5a) & 4) != 0) {
-			fcn_00472640(v.h34, 0);
-			fcn_00472640(v.h3c, 0);
-			fcn_00472640(v.h30, 0);
-			fcn_00472640(v.h1c, 0);
+			d2_SetElementEnabled(v.h34, 0);
+			d2_SetElementEnabled(v.h3c, 0);
+			d2_SetElementEnabled(v.h30, 0);
+			d2_SetElementEnabled(v.h1c, 0);
 		}
 		if (v.h18 != -1) {
 			if ((*(unsigned char*) (ent + 0x5a) & 0x40) != 0)
-				fcn_00472640(v.h18, 0);
+				d2_SetElementEnabled(v.h18, 0);
 			else
-				fcn_00472640(v.h18, 1);
+				d2_SetElementEnabled(v.h18, 1);
 		}
 		if (g_14ce8e0 != 0 && tp_d2_SelectedControl == 0)
 			g_774654 = 1;
 		if (g_100f1dc == -1)
 			goto loop_test;
 		if (d2_CurrentElementId == v.h34) {
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			d2_RunTechTreeDialog((int) ent, 0xfd);
-			fcn_00471af0(dlg, 1);
+			d2_SetFormVisibility(dlg, 1);
 			goto loop_test;
 		}
 		if (d2_CurrentElementId == v.h1c && g_7747b0 >= 0) {
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			d2_ShowSellGebaeudeDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h3c && g_7747b0 >= 0) {
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			d2_ShowRenovationDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h20 && g_7747b0 >= 0) {
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			d2_RunSellGebaeudeDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h44 && g_7747b0 >= 0) {
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			d2_ShowGebaeudeSaleDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h28 && g_7747b0 >= 0) {
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			d2_RunRoomUpgradeDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h4c) {
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			cm_RequestSetWohnsitz(
 			    *(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
  + 4),
 			    *(int*) (ent + 1));
-			fcn_00471af0(dlg, 1);
+			d2_SetFormVisibility(dlg, 1);
 			goto tail_changed;
 		}
 		if (d2_CurrentElementId == v.h18 && g_7747b0 >= 0) {
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			d2_RunBuildingUpgradeDialog((int) ent);
 			goto tail_on;
 		}
 		if (d2_CurrentElementId == v.h30 && g_7747b0 >= 0) {
 			io_FormatTextBuffer(text1, 0x17c7, (int) ent);
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			if (fcn_00526120(text1, 1) != 0) {
 				memset(&st, 0, sizeof(st));
 				st.f04 = 0x20;
@@ -383,7 +383,7 @@ after_build:
 				cm_SendCopyEntityData(&st);
 				g_774654 = 1;
 			}
-			fcn_00471af0(dlg, 1);
+			d2_SetFormVisibility(dlg, 1);
 			goto tail_changed;
 		}
 		if (d2_CurrentElementId == v.h54 && g_7747b0 >= 0) {
@@ -392,7 +392,7 @@ after_build:
 				fcn_00526120((char*) g_14ab294, 0);
 				goto loop_test;
 			}
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			if (fcn_0050d2a0((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int)g_774970]
 )
 			    > *(int*) (v.other + 0xb0)) {
@@ -409,11 +409,11 @@ after_build:
 					    v.other, 0);
 				}
 			}
-			fcn_00471af0(dlg, 1);
+			d2_SetFormVisibility(dlg, 1);
 			goto tail_changed;
 		}
 		if (d2_CurrentElementId == -1) {
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			d2_ShowTechTreeEffects((int) ent);
 			goto tail_on;
 		}
@@ -428,7 +428,7 @@ after_build:
 		if (d2_CurrentElementId == v.h48) {
 			v.len = *(int*) (ent + 0x69)
 			    + *(int*) (ent + 0x65);
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			v.len = (int) ((double) v.len * 0.5);
 			io_FormatTextBuffer(text3, 0x17e3, (int) ent,
 			    (int) ent, v.len);
@@ -445,17 +445,17 @@ after_build:
 				cm_RequestChangeAttribute();
 				g_774654 = 1;
 			}
-			fcn_00471af0(dlg, 1);
+			d2_SetFormVisibility(dlg, 1);
 			goto tail_changed;
 		}
 		if (d2_CurrentElementId == v.h58) {
-			fcn_00471af0(dlg, 0);
+			d2_SetFormVisibility(dlg, 0);
 			d2_RunFireExtinguishDialog((int) ent);
 			goto tail_on;
 		}
 		goto loop_test;
 tail_on:
-		fcn_00471af0(dlg, 1);
+		d2_SetFormVisibility(dlg, 1);
 tail_changed:
 		changed = 1;
 loop_test:

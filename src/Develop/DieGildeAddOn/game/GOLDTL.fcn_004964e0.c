@@ -56,7 +56,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 char* __cdecl he_StartHandlungSearch(int type, int a, int b);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_GetLawEntry(int idx, void* dst);
-int __cdecl fcn_004a4410(float* a0, float* a1, int idx, Actor* e, int a4,
+int __cdecl ai_ComputeBaseActionScore(float* a0, float* a1, int idx, Actor* e, int a4,
 	char* a5, int a6);
 int __cdecl ai_ComputeActionScore(float* a0, float* a1, int idx, Actor* e, int* rec);
 
@@ -137,7 +137,7 @@ int __cdecl ai_ScoreBestechung(float* firstScore, float* secondScore, int idx, A
 fallback:
 	gm_GetLawEntry(0x10, rec);
 	if (rec[6] == 0) {
-		return fcn_004a4410(firstScore, secondScore, idx, actor, 0, resultData, extra);
+		return ai_ComputeBaseActionScore(firstScore, secondScore, idx, actor, 0, resultData, extra);
 	}
 	return ai_ComputeActionScore(firstScore, secondScore, idx, actor, rec);
 calc:

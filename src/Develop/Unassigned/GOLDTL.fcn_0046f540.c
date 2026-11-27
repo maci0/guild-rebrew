@@ -20,10 +20,10 @@ typedef struct
 extern Win_1015f40 g_1015f40[0x60];
 extern void** g_772540;
 
-void __cdecl fcn_0046f4c0(int id);
+void __cdecl d2_ReorderControlStack(int id);
 
 /* ADDRESS: GOLDTL 0x0046f540 */
-void __cdecl fcn_0046f540(int win)
+void __cdecl d2_BringWindowToFront(int win)
 {
 	D2_WIN* w;
 	fcn_0046f540_Ent* tmp[0x181];
@@ -57,6 +57,6 @@ void __cdecl fcn_0046f540(int win)
 	}
 	memcpy(&((fcn_0046f540_Ent**)g_772540)[i + 1], tmp, n);
 	for (i = 0; i < w->count; i++) {
-		fcn_0046f4c0(w->children[i]);
+		d2_ReorderControlStack(w->children[i]);
 	}
 }

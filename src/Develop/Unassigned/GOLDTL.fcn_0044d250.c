@@ -3,7 +3,7 @@
 int __cdecl fcn_0064f026(int, void*);
 float __cdecl fcn_0064d62e(int);
 
-void __cdecl fcn_0044d250(int a1, char* p)
+void __cdecl d3_ParseMatUTile(int unused, char* ctx)
 {
-	*(float*) (*(int*) (p + 0x10) + *(int*) (p + 8) * 0xe0 + 0xcc) = fcn_0064d62e(fcn_0064f026(0, (void*) 0x662d18));
+	*(float*) (*(int*) (ctx + 0x10) + *(int*) (ctx + 8) * 0xe0 + 0xcc) = fcn_0064d62e(fcn_0064f026(0, (void*) 0x662d18));
 }

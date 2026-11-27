@@ -1,7 +1,7 @@
 #include <string.h>
 extern __int64 g_666018;
 
-unsigned short* __cdecl fcn_005cd440(unsigned int*, char*, int, int);
+unsigned short* __cdecl d2_OpenTargetPicker(unsigned int*, char*, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -27,12 +27,12 @@ unsigned int __cdecl gm_ObjLowerMutualAffinity(int actorRec, int eventArgs)
 		q[1] = 0x400;
 		q[4] = 6;
 		*(__int64*) (q + 2) = g_666018;
-		firstTarget = fcn_005cd440(q, buf, 0, 0);
+		firstTarget = d2_OpenTargetPicker(q, buf, 0, 0);
 		if (firstTarget != 0) {
 			q[5] = 3;
 			*(unsigned short*) &q[7] = *firstTarget;
 			io_FormatTextBuffer(buf, 0x9e);
-			secondTarget = fcn_005cd440(q, buf, 0, 0);
+			secondTarget = d2_OpenTargetPicker(q, buf, 0, 0);
 			if (secondTarget != 0) {
 				goto do_apply;
 			}

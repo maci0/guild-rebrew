@@ -18,26 +18,26 @@ extern char g_6b89bd;
 	    g_14ce86c, 1, 3, (f))
 
 /* ADDRESS: GOLDTL 0x00456750 */
-void __cdecl fcn_00456750(unsigned int a0, unsigned int a1, int a2, int a3,
-                          char a4, char tryAdditionalModes, int a6)
+void __cdecl d3_SelectShadowTextureFormat(unsigned int minSize, unsigned int maxSize, int unused2, int unused3,
+                          char formatFlag, char tryAdditionalModes, int shadowDepth)
 {
 	int r;
 	unsigned int h;
 
-	h = a1;
+	h = maxSize;
 	if (h >= g_14ce798) {
-		a1 = g_14ce798;
+		maxSize = g_14ce798;
 	}
-	g_10405fc = a1;
-	g_104061c = a0;
-	if (a0 >= a1) {
-		g_104061c = a1;
+	g_10405fc = maxSize;
+	g_104061c = minSize;
+	if (minSize >= maxSize) {
+		g_104061c = maxSize;
 	}
-	g_6b89b0 = a6;
+	g_6b89b0 = shadowDepth;
 	g_1040600 = 1;
-	*(char*) 0x1040601 = a4;
+	*(char*) 0x1040601 = formatFlag;
 	*(char*) 0x10405f8 = 1;
-	fcn_00456530(a2, a3);
+	fcn_00456530(unused2, unused3);
 	r = 0;
 	g_6b89b8 = r;
 	if (tryAdditionalModes) {

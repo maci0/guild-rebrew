@@ -17,7 +17,7 @@ extern int g_7747ac;
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d2_TurnBookPagesBack(Panel*);
 void __cdecl fcn_00535550(Panel*);
-void __cdecl fcn_00471490(int);
+void __cdecl d2_RenderFormToTextures(int);
 
 void __cdecl d2_UpdatePagedPanel(Panel* panel)
 {
@@ -41,7 +41,7 @@ void __cdecl d2_UpdatePagedPanel(Panel* panel)
 		if (i > panel->first + (unsigned char) g_7747ac) {
 			break;
 		}
-		fcn_00471490(panel->items[i]);
+		d2_RenderFormToTextures(panel->items[i]);
 	}
 	*(unsigned char*) &g_7747ac ^= 1;
 }

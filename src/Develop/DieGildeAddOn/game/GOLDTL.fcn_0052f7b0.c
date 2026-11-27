@@ -16,12 +16,12 @@ extern char g_7746f4;
 extern char g_6b5c60[];
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 void* __cdecl fcn_00502cd0(int, int, int, ...);
-int __cdecl fcn_00472640(int, int);
+int __cdecl d2_SetElementEnabled(int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_005cd440(char*, int, int, void*);
+int __cdecl d2_OpenTargetPicker(char*, int, int, void*);
 int __cdecl d2_RunTradeInventoryPanel(int, int);
 void __cdecl fcn_00525ef0(void);
 void __cdecl d2_RunTechTreeDialog(char*, int);
@@ -56,9 +56,9 @@ void __cdecl d2_UpdateSelectionPanels(void)
         return;
     if (g_7e2aa0 != 0 && fcn_00502cd0(*(int*)(g_7e2aa0 + 0x5d), 2, 6, 0, 0x2a) == 0
         && fcn_00502cd0(*(int*)(g_7e2aa0 + 0x5d), 2, 6, 0, 0x116) == 0)
-        fcn_00472640(g_6a25e4, 0);
+        d2_SetElementEnabled(g_6a25e4, 0);
     else
-        fcn_00472640(g_6a25e4, 1);
+        d2_SetElementEnabled(g_6a25e4, 1);
     selected = g_7e2aa0;
     flags = main_LoopFlags & 0x2000;
     if (flags && g_100f1dc != -1) {
@@ -114,7 +114,7 @@ void __cdecl d2_UpdateSelectionPanels(void)
                 query[1] = 0;
                 query[5] = 4;
                 fcn_0057e880(0xf, 0, 0, 0);
-                fcn_005cd440((char*)query, (int)g_6b5c60, (int)g_6b5c60,
+                d2_OpenTargetPicker((char*)query, (int)g_6b5c60, (int)g_6b5c60,
                     (void*)fcn_0052f7a0);
                 fcn_0057e880(0xf, 0, 1, 0);
             }

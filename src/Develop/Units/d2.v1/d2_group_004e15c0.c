@@ -12,7 +12,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -25,7 +25,7 @@ void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_004cfca0(void);
@@ -46,7 +46,7 @@ void __cdecl fcn_004e15c0(char* state)
 	io_AppendText(0x10de, *g_772f24);
 	state[0x94] = 0;
 	state[0x14] = (*(char*)g_6b5c60);
-	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
+	w = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(w, g_68bfbc * 75, 1);
 	while (main_RunFrameLoop(fcn_004e15c0, cut_EventLoopFlags) != 0) {
 		if (d2_UpdateProgressBar(w, 0, 0) == 0)
@@ -90,7 +90,7 @@ void __cdecl fcn_004e16e0(char* state, int* event)
 	b2 = d2_GetWindowListItem(h, 0, t + 2);
 	state[0x94] = 4;
 	state[0x14] = (*(char*)g_6b5c60);
-	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
+	w = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(w, g_68bfbc * 75, 1);
 	while (main_RunFrameLoop(fcn_004e16e0, cut_EventLoopFlags) != 0) {
 		fcn_004cfca0();

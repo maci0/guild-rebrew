@@ -13,7 +13,7 @@ extern int g_67d384;
 
 int __cdecl fcn_00465950(char* name);
 void* __cdecl d2_GetResourceData(int handle);
-int __cdecl fcn_0046b520(char* text, int font);
+int __cdecl d2_MeasureTextWidth(char* text, int font);
 char* __cdecl fcn_0047b620(char* font, int c);
 int __cdecl fcn_0047cba0(int x, int y, int surface, void* font, int c);
 int __cdecl fcn_0047cbf0(int x, int y, int surface, void* font, int c);
@@ -121,7 +121,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
             else
                 end = strchr(word, 0);
             offset += end - word + 1;
-            last_width = fcn_0046b520(word, d2_CurrentFont);
+            last_width = d2_MeasureTextWidth(word, d2_CurrentFont);
             x += last_width;
             used_width += last_width;
             if (offset <= length) {
@@ -140,7 +140,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                             if (last[split] == '~')
                                 last[split] = '-';
                             last[split + 1] = 0;
-                            if (fcn_0046b520(last, d2_CurrentFont) + used_width <= width)
+                            if (d2_MeasureTextWidth(last, d2_CurrentFont) + used_width <= width)
                                 break;
                         }
                         split--;
@@ -150,7 +150,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                         used_width = 0;
                         word = words[0];
                         for (i = next_count; i > 0; i--) {
-                            used_width += fcn_0046b520(word, d2_CurrentFont) + g_67d380;
+                            used_width += d2_MeasureTextWidth(word, d2_CurrentFont) + g_67d380;
                             word += 0x60;
                         }
                         used_width -= g_67d380;
@@ -160,7 +160,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                         used_width = 0;
                         word = words[0];
                         for (i = next_count; i > 0; i--) {
-                            used_width += fcn_0046b520(word, d2_CurrentFont) + g_67d380;
+                            used_width += d2_MeasureTextWidth(word, d2_CurrentFont) + g_67d380;
                             word += 0x60;
                         }
                         used_width -= g_67d380;

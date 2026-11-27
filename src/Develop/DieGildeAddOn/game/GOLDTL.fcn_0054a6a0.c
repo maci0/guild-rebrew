@@ -30,14 +30,14 @@ void __cdecl he_NotifyThemaPredigt(Rec54a6a0*, int, int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-int __cdecl fcn_004fd4f0(int, Out54a6a0*);
+int __cdecl gm_ApplyPredigtCollection(int, Out54a6a0*);
 int __cdecl io_FormatTextBuffer(char*, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl ai_SelectThemaPredigt(Rec54a6a0*, int);
 
 /* ADDRESS: GOLDTL 0x0054a6a0 */
-void __cdecl fcn_0054a6a0(int a0)
+void __cdecl he_RunPredigt(int action)
 {
 	int v2;
 	int v3;
@@ -47,16 +47,16 @@ void __cdecl fcn_0054a6a0(int a0)
 	char message[256];
 	char v1;
 
-	v2 = a0;
+	v2 = action;
 	entity = 0;
-	if (*(int*) (a0 + 0x70) == -1 || *(int*) (a0 + 0x70) == -2) {
-		he_FreeAction(a0);
+	if (*(int*) (action + 0x70) == -1 || *(int*) (action + 0x70) == -2) {
+		he_FreeAction(action);
 		return;
 	}
-	if (*(unsigned char*) (a0 + 0x78) & 4) {
+	if (*(unsigned char*) (action + 0x78) & 4) {
 		return;
 	}
-	v4 = *(int*) (a0 + 0x84);
+	v4 = *(int*) (action + 0x84);
 	if (v4 != -1 && !cm_GetCommandStatus(v4)) {
 		return;
 	}
@@ -94,7 +94,7 @@ void __cdecl fcn_0054a6a0(int a0)
 			cm_AppendPacketFieldDelta(1, 1, 0x1d, (int*) &v9);
 			cm_AppendPacketFieldDelta(4, 1, 0x1e, (int*) &v10);
 			cm_RequestChangeAttribute();
-			v4 = fcn_004fd4f0(entity, &pair);
+			v4 = gm_ApplyPredigtCollection(entity, &pair);
 			if (v4) {
 				v1 = g_7f4ca0[*(unsigned short*) (entity + 0x27)].kind;
 				if (v1 == 6 || v1 == 7) {

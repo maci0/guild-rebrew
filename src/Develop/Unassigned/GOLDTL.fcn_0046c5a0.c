@@ -28,27 +28,27 @@ extern int txt_TextEntries;
 
 int __cdecl fcn_00465950(char* name);
 void __cdecl d2_SelectFont(int font);
-int __cdecl fcn_0046b520(char* text, int font);
-void __cdecl fcn_0046b5f0(int x, int y, int a0, int a1, int last, int color,
+int __cdecl d2_MeasureTextWidth(char* text, int font);
+void __cdecl d2_RenderMarkupLine(int x, int y, int a0, int a1, int last, int color,
     int xr, int yr);
 void __cdecl d2_ResizeWindow(int x, int y, int a1);
 void __cdecl fcn_00469c40(int a, int b, int c);
 void __cdecl fcn_0047a040(int a, int b, int c, int d);
 void __cdecl fcn_0047cba0(int x, int y, int a0, int text);
-void __cdecl fcn_0046c4e0(int a1);
-int __cdecl fcn_00467480(int x, int y, int a, int b, int c, int d);
-int __cdecl fcn_00466fe0(int a, int b);
+void __cdecl d2_NormalizeWindowButtonWidths(int a1);
+int __cdecl d2_AddWindowInputIcon(int x, int y, int a, int b, int c, int d);
+int __cdecl d2_SetFieldTextId(int a, int b);
 int __cdecl d2_AddElementToWindow(int x, int y, int img, int a1);
-void __cdecl fcn_0046f9b0(int img, char* text);
+void __cdecl d2_SetControlText(int img, char* text);
 int __cdecl d2_AddWindowText(int x, int y, int img, int a1);
-int __cdecl fcn_0046ff90(int a, int b);
-int __cdecl fcn_00468df0(int x, int y, int name, int table, int a1);
+int __cdecl d2_SetEditControlText(int a, int b);
+int __cdecl d2_AddWindowTextButton(int x, int y, int name, int table, int a1);
 int __cdecl _isctype(int c, int type);
 int __cdecl d2_GetResourceData(int table, int index);
 
 /* Emits the run accumulated so far with the pen at (px, g_102d024). */
 #define DRAW_RUN(last, px) \
-	fcn_0046b5f0(px, g_102d024, a0, a1, last, color, xr, yr)
+	d2_RenderMarkupLine(px, g_102d024, a0, a1, last, color, xr, yr)
 
 /* Renders one element's text record: walks the text string, expands the
  * '%'/'$' markup through the switch below, word-wraps the token into the
@@ -210,7 +210,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 					img = *(int*) (slot + nImg * 4 + 0x294);
 					v64 = 1;
 					if (img == -1) {
-						img = fcn_00468df0(g_102d020 - *(int*) (slot + 4),
+						img = d2_AddWindowTextButton(g_102d020 - *(int*) (slot + 4),
 						    g_102d024 - *(int*) (slot + 8),
 						    fcn_00465950("_IMG"), 0x6b5c60, a1);
 						if (*(char*) (p + 2) == '[') {
@@ -244,7 +244,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 								continue;
 							}
 							strncpy(bufs.d, s, (int) (e - s));
-							fcn_0046f9b0(img, bufs.d);
+							d2_SetControlText(img, bufs.d);
 							if (!*(char*) (e + 1)) {
 								*(char*) (p + 2) = 0;
 							} else {
@@ -347,7 +347,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 							continue;
 						}
 						strncpy(bufs.b, s, (int) (e - s));
-						fcn_0046f9b0(img, bufs.b);
+						d2_SetControlText(img, bufs.b);
 						if (!*(char*) (e + 1)) {
 							*(char*) (p + 2) = 0;
 						} else {
@@ -379,7 +379,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 					if (g_102d020 > xr) {
 						g_102d020 += 6;
 					}
-					img = fcn_00467480(g_102d020 - *(int*) (slot + 4),
+					img = d2_AddWindowInputIcon(g_102d020 - *(int*) (slot + 4),
 					    g_102d024 - *(int*) (slot + 8), 0x10, d2_FontHeight, 0x82, a1);
 					*(int*) (slot + nImg * 4 + 0x294) =
 					    ((D2_CONTROL_TL*)g_1015ea0)[img].value_088;
@@ -392,7 +392,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 					nImg += 1;
 					continue;
 				}
-				img = fcn_00467480(g_102d020 - *(int*) (slot + 4),
+				img = d2_AddWindowInputIcon(g_102d020 - *(int*) (slot + 4),
 				    g_102d024 - *(int*) (slot + 8), 8, d2_FontHeight, 0x10, a1);
 				((D2_CONTROL_TL*)g_1015ea0)[img].value_078 = 1;
 				tmp = ((D2_CONTROL_TL*)g_1015ea0)[img].value_088;
@@ -401,7 +401,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				len = *(int*) (slot + nImg * 4 + 0x298);
 				*(int*) (tmp * 0x160 + 0x102d28c) = len;
 				*(int*) (tmp * 0x160 + 0x102d294) = *(int*) (slot + 0x3c) + i;
-				fcn_00466fe0(tmp, len);
+				d2_SetFieldTextId(tmp, len);
 				*(int*) (slot + nImg * 4 + 0x294) = -1;
 				*(int*) (slot + nImg * 4 + 0x298) = tmp;
 				textLen = (int) strlen(*(char**) (slot + 0x3c));
@@ -421,7 +421,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				    (short) ((short) g_102d020 - *(short*) (slot + 4)), img, a1);
 				((D2_CONTROL_TL*)g_1015ea0)[img].value_078 = 1;
 				((D2_CONTROL_TL*)g_1015ea0)[img].payload.fields.value_08c = *(int*) (slot + 0x3c) + i;
-				fcn_0046ff90(img, *(int*) (slot + nImg * 4 + 0x294));
+				d2_SetEditControlText(img, *(int*) (slot + nImg * 4 + 0x294));
 				*(int*) (slot + nImg * 4 + 0x294) = -1;
 				textLen = (int) strlen(*(char**) (slot + 0x3c));
 				g_102d020 = xr;
@@ -450,7 +450,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				if (g_102d020 > xr) {
 					g_102d020 += 6;
 				}
-				img = fcn_00467480(g_102d020 - *(int*) (slot + 4),
+				img = d2_AddWindowInputIcon(g_102d020 - *(int*) (slot + 4),
 				    g_102d024 - *(int*) (slot + 8), 0, d2_FontHeight, 1, a1);
 				tmp = ((D2_CONTROL_TL*)g_1015ea0)[img].value_088;
 				len = *(int*) (slot + nImg * 4 + 0x294);
@@ -461,7 +461,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 					strcpy(s, (char*) *(int*) (len * 4 + 0x14a5320));
 				}
 				*(int*) (tmp * 0x160 + 0x102d150) =
-				    fcn_0046b520(s, *(int*) (tmp * 0x160 + 0x102d278));
+				    d2_MeasureTextWidth(s, *(int*) (tmp * 0x160 + 0x102d278));
 				len = *(int*) (tmp * 0x160 + 0x102d274);
 				((D2_CONTROL_TL*)g_1015ea0)[len].width =
 				    *(int*) (tmp * 0x160 + 0x102d150);
@@ -473,7 +473,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				if (d == -1) {
 					d = 1;
 				}
-				span = fcn_0046b520((char*) 0x67d52c, *(int*) (slot + 0x28c)) * d;
+				span = d2_MeasureTextWidth((char*) 0x67d52c, *(int*) (slot + 0x28c)) * d;
 				span = xr + span + span * 2;
 				if (span <= g_102d020) {
 					i += 1;
@@ -497,7 +497,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 					d = 0;
 				}
 				DRAW_RUN(1, g_102d020);
-				span = fcn_0046b520((char*) 0x67d52c, *(int*) (slot + 0x28c)) * d;
+				span = d2_MeasureTextWidth((char*) 0x67d52c, *(int*) (slot + 0x28c)) * d;
 				xr = (*(int*) (slot + 4) + *(int*) (slot + 0x18)) + span * 2;
 				g_102d020 = xr;
 				i += 1;
@@ -507,7 +507,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 					d = 0;
 				}
 				DRAW_RUN(1, g_102d020);
-				span = fcn_0046b520((char*) 0x67d52c, *(int*) (slot + 0x28c)) * d;
+				span = d2_MeasureTextWidth((char*) 0x67d52c, *(int*) (slot + 0x28c)) * d;
 				yr = ((*(int*) (slot + 4) - *(int*) (slot + 0x1c)) - span * 2) +
 				    *(int*) (slot + 0xc);
 				i += 1;
@@ -638,7 +638,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 				memcpy(bufs.a, s, len);
 				bufs.a[len] = 0;
 			}
-			span = fcn_0046b520(bufs.a, *(int*) (slot + 0x28c));
+			span = d2_MeasureTextWidth(bufs.a, *(int*) (slot + 0x28c));
 			if (span + g_102d020 > yr) {
 				if (!(*(int*) (slot + 0x14) & 0x2000)) {
 					tmp = 0;
@@ -662,7 +662,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 							tmp = (*p == '-');
 							*p = '-';
 							p[1] = 0;
-							if (fcn_0046b520(bufs.a, *(int*) (slot + 0x28c)) +
+							if (d2_MeasureTextWidth(bufs.a, *(int*) (slot + 0x28c)) +
 							    g_102d020 <= yr) {
 								break;
 							}
@@ -677,7 +677,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 						len += tmp;
 						textLen = (int) strlen(bufs.a);
 						strcpy((char*) (g_772530 * 0x10c + 0x10119e0), bufs.a);
-						span = fcn_0046b520(bufs.a, *(int*) (slot + 0x28c));
+						span = d2_MeasureTextWidth(bufs.a, *(int*) (slot + 0x28c));
 						*(int*) (g_772530 * 0x10c + 0x1011ae8) = span;
 						i += tmp + textLen - 1;
 						g_772530 += 1;
@@ -691,7 +691,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 					if (len > 0) {
 						strcpy(bufs.a, &bufs.c[len]);
 						textLen = (int) strlen(bufs.a);
-						span = fcn_0046b520(bufs.a, *(int*) (slot + 0x28c));
+						span = d2_MeasureTextWidth(bufs.a, *(int*) (slot + 0x28c));
 					}
 				} else if (span + g_102d020 < g_1040494) {
 					d2_ResizeWindow((short) ((short) span + *(short*) (slot + 0xc)),
@@ -793,7 +793,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 		fcn_0047cba0(yr + 1, tmp, a0, span);
 	}
 	if ((*(int*) (slot + 0x3c4) != *(int*) (slot + 0x2c)) && v64) {
-		fcn_0046c4e0(a1);
+		d2_NormalizeWindowButtonWidths(a1);
 		*(int*) (slot + 0x3c4) = *(int*) (slot + 0x2c);
 	}
 }

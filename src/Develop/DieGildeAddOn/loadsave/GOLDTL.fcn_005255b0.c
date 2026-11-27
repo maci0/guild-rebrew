@@ -18,7 +18,7 @@ extern Tabs_7e43a8 g_7e43a8;
 
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 int __cdecl ls_LoadWeatherState(void* stream);
-int __cdecl fcn_004ef770(void* stream, int version);
+int __cdecl ls_LoadRenderSlots(void* stream, int version);
 
 int __cdecl ls_LoadTabAndWeatherState(void* x)
 {
@@ -41,7 +41,7 @@ int __cdecl ls_LoadTabAndWeatherState(void* x)
 			return 0;
 		}
 	}
-	if (ls_SaveVersion >= 0x10050 && ls_LoadWeatherState(x) != 0 && fcn_004ef770(x, ls_SaveVersion) != 0) {
+	if (ls_SaveVersion >= 0x10050 && ls_LoadWeatherState(x) != 0 && ls_LoadRenderSlots(x, ls_SaveVersion) != 0) {
 		return 1;
 	}
 	return 0;

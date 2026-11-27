@@ -27,7 +27,7 @@ void __cdecl ch_SetToDummy(int a, int b);
 int __cdecl gm_SelectEntityHeadSet(unsigned short a);
 void* __cdecl evt_StartGfxScript(char* name, int a);
 void __cdecl fcn_004e4b40(int id, int bank, char* label, int a, int b);
-void __cdecl fcn_00471af0(int dlg, int a);
+void __cdecl d2_SetFormVisibility(int dlg, int a);
 void __cdecl fcn_00471d80(int dlg, int a);
 void __cdecl cut_WaitForScript(int a);
 void __cdecl cut_RunTurnRound(int arg, int* ids);
@@ -199,7 +199,7 @@ void __cdecl cut_RunAuction(int* arg)
 	fcn_004e4b40(result, bank_intro, temp, cut_RandMod(3), 500);
 	dlg = (int) fcn_00470820(0, 0, "cutscenes\\pacht_main");
 	if (g_772f3c != 0)
-		fcn_00471af0(dlg, 0);
+		d2_SetFormVisibility(dlg, 0);
 	fcn_00471d80(dlg, 3);
 	d2_SetForm(dlg, 0);
 	io_AppendText((void*) 0x1aa2, (void*) building, (void*) price);

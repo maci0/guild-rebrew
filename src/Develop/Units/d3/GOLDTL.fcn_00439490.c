@@ -21,7 +21,7 @@ void __cdecl fcn_00452420(char* p);
 void __cdecl fcn_0043bcf0(int a);
 void __cdecl fcn_00459b40(int a);
 void __cdecl m_FreeTracked(void* p);
-void __cdecl fcn_00452300(void);
+void __cdecl d3_ReleaseRenderVertexBuffer(void);
 #include "Develop/Units/d3/d3_animation.h"
 void __cdecl m_pool_free_all(int* p);
 void __cdecl fcn_00459bc0(void);
@@ -80,7 +80,7 @@ void __cdecl d3_Shutdown(void)
 		fcn_00459b40(g_6b89c0);
 		g_6b89c0 = 0;
 	}
-	fcn_00452300();
+	d3_ReleaseRenderVertexBuffer();
 	if (*(void**) (((char*)g_67a370) + 0x3c8) != 0) {
 		m_FreeTracked(*(void**) (((char*)g_67a370) + 0x3c8));
 		*(void**) (((char*)g_67a370) + 0x3c8) = 0;

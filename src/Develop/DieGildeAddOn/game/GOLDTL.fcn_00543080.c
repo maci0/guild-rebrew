@@ -3,17 +3,17 @@ __declspec(dllimport) void __stdcall Sleep(unsigned long);
 int __cdecl fcn_0043a9c0();
 int __cdecl fcn_0043aa30();
 int __cdecl d3_SelectSceneContext();
-int __cdecl fcn_0046ac30();
-int __cdecl fcn_00469e30();
+int __cdecl d2_RenderAndPresentFrame();
+int __cdecl d2_SetBackdropResource();
 int __cdecl d2_AddElementToWindow();
 int __cdecl fcn_00470820();
 int __cdecl fcn_00471d80();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
 int __cdecl fcn_00472380();
-int __cdecl fcn_00472640();
+int __cdecl d2_SetElementEnabled();
 int __cdecl d2_SetForm();
-int __cdecl fcn_00476970();
+int __cdecl d2_ClearSurface();
 int __cdecl ai_RollNpcActionFlags();
 int __cdecl gm_ReplenishOfficeCandidates();
 int __cdecl hst_ShowDueHistoryScroll();
@@ -108,7 +108,7 @@ void __cdecl gm_RunRoundUpdate(void)
 				main_ExitToFrameHandler(0x5438c0);
 				return;
 			}
-			fcn_0046ac30();
+			d2_RenderAndPresentFrame();
 			Sleep(1000);
 			loopStat = fcn_005435d0();
 		}
@@ -123,8 +123,8 @@ void __cdecl gm_RunRoundUpdate(void)
 		g_1040480 = g_1040494;
 		g_1040484 = 0;
 		g_104048c = d2_ScreenHeight;
-		fcn_00476970(*(int*) &g_77250c);
-		fcn_00469e30(0x79d);
+		d2_ClearSurface(*(int*) &g_77250c);
+		d2_SetBackdropResource(0x79d);
 	}
 	fcn_0053f100();
 	fcn_00546f80();

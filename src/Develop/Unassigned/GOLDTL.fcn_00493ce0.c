@@ -3,7 +3,7 @@ typedef struct Stat {
 } Stat;
 // SIZE 0x24
 
-int __cdecl fcn_00493be0(char* p);
+int __cdecl gm_CalcProzessBasePenalty(char* p);
 void __cdecl gm_GetLawEntry(int a, Stat* st);
 char* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
@@ -17,7 +17,7 @@ int __cdecl fcn_00493ce0(unsigned short* home, char* p)
 	float d;
 	char* q;
 
-	r = fcn_00493be0(p);
+	r = gm_CalcProzessBasePenalty(p);
 	gm_GetLawEntry(0, &st);
 	f = (5.0f - st.v[6]) * 0.1f + 0.7f;
 	q = gm_LookupEntityRecordById(*(int*) (p + 0x18));

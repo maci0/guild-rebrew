@@ -10,7 +10,7 @@ char* __cdecl d3sm_GetObjectSuperMap(int);
 char __cdecl fcn_0045b990(float*, float*, int*, int*, float*);
 int __cdecl fcn_0045b7e0(int, int, int, int*, int*);
 char __cdecl ch_FindWalkableCell(char*, float*, float*, int, int, int*, int*, int, int);
-unsigned short __cdecl fcn_00421350(struct path_421350*, char*, int, int, int, int, int);
+unsigned short __cdecl FindPath(struct path_421350*, char*, int, int, int, int, int);
 void __cdecl m_FreeTracked(int);
 int __cdecl m_alloc(int, char*);
 int __cdecl ch_DownsamplePath(char*, void*, char*, void*);
@@ -68,7 +68,7 @@ unsigned int __cdecl fcn_004090d0(int self)
 	v11 = v13;
 	*(int*) 0x14d0c28 = 0x14cfc20;
 	*(int*) 0x14d0c24 = 0x200;
-	pathResult = fcn_00421350((struct path_421350*) 0x14d0c20, v4, a0, v10, v14, v13,
+	pathResult = FindPath((struct path_421350*) 0x14d0c20, v4, a0, v10, v14, v13,
 	                  *(unsigned char*) (v1 + 0x240));
 	if (pathResult == -1) {
 		return 0;

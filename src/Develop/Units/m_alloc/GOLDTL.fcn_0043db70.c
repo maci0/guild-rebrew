@@ -25,7 +25,7 @@ void __cdecl fcn_0045ce90(void* obj);
 void __cdecl fcn_0045c310(void* tex, char all);
 void __cdecl fcn_0045bfb0(int obj);
 int __cdecl d3_MapWaterRangeIndex(char* tile, int x, int id, unsigned char tag);
-void __cdecl fcn_0043c0d0(unsigned char* buf, int x0, int x1, unsigned char c0, unsigned char c1);
+void __cdecl d3_InterpolateByteSpan(unsigned char* buf, int x0, int x1, unsigned char c0, unsigned char c1);
 void __cdecl d3_FillWaterRegion(unsigned char* regionen, int breite, int x, int y,
     int alte_region, int neue_region);
 
@@ -165,7 +165,7 @@ void __cdecl PrepareFloorWater(char* e)
 							v12 = MAX(1,
 							    *(unsigned char*) (*(int*) (e + 0x10) + v17 - 1) - 2);
 						}
-						fcn_0043c0d0((unsigned char*) waterMask + *(int*) e * v13,
+						d3_InterpolateByteSpan((unsigned char*) waterMask + *(int*) e * v13,
 						    v15, v14 - 1, (unsigned char) v10, (unsigned char) v12);
 					}
 					v14++;
@@ -174,7 +174,7 @@ void __cdecl PrepareFloorWater(char* e)
 			if (flag) {
 				v12 = MAX(1, *(unsigned char*) (*(int*) (e + 0x10)
 					+ (v13 + 1) * *(int*) e - 1) - 2);
-				fcn_0043c0d0((unsigned char*) waterMask + *(int*) e * v13,
+				d3_InterpolateByteSpan((unsigned char*) waterMask + *(int*) e * v13,
 				    v15, *(int*) e - 1, (unsigned char) v10, (unsigned char) v12);
 			}
 			v13++;

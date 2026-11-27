@@ -29,7 +29,7 @@ void __cdecl d3_TransformPoint(char*, char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_UpdateWindowDrag(char*);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 void __cdecl d2_CollectDebugObject(void);
 
 void __cdecl d2_ShowSmapDiagnostics(void)
@@ -78,5 +78,5 @@ void __cdecl d2_ShowSmapDiagnostics(void)
 			d2_UpdateWindowDrag((char*)win);
 		} while (main_RunFrameLoop((void*) d2_ShowSmapDiagnostics, 0x657c7) != 0);
 	}
-	fcn_0046f280(w);
+	d2_CloseWindow(w);
 }

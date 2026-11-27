@@ -28,7 +28,7 @@ extern int d2_CurrentWindowId;
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel)
 {
@@ -44,9 +44,9 @@ void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel)
 		((D2_CONTROL_TL*) g_1015ea0)[ids[i]].flags_1d0 = 3;
 		((D2_CONTROL_TL*) g_1015ea0)[ids[i]].associated_object = (char*) &((OBJECT_PROTOTYPE*)lpObjektePROT)[g_665f84[i]];
 	}
-	fcn_00472640(ids[1], (unsigned char) s[0x19]);
-	fcn_00472640(ids[2], (unsigned char) s[0x1a]);
-	fcn_00472640(ids[3], (unsigned char) s[0x1b]);
+	d2_SetElementEnabled(ids[1], (unsigned char) s[0x19]);
+	d2_SetElementEnabled(ids[2], (unsigned char) s[0x1a]);
+	d2_SetElementEnabled(ids[3], (unsigned char) s[0x1b]);
 	if (*sel == 3 && s[0x1b] == 1) {
 		((D2_CONTROL_TL*) g_1015ea0)[ids[3]].value_03c = 1;
 	} else if (*sel == 2 && s[0x1a] == 1) {

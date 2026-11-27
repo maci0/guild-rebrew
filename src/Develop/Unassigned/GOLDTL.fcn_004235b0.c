@@ -11,7 +11,7 @@ Voice* __cdecl sb_AllocVoice(void);
 char* __cdecl sb_FindSampleByName(char* bank, const char* name);
 char* __cdecl sb_FindSampleBank(char* sample);
 void __cdecl sb_LoadEntry(char* bank, char* sample);
-int __cdecl fcn_00423670(Voice* v, int a, int b);
+int __cdecl sb_StartVoice(Voice* v, int a, int b);
 
 Voice* __cdecl sb_PlayPrioritizedVoice(char* bank, const char* name, int prio, int loop, int pan, int vol, int a)
 {
@@ -40,7 +40,7 @@ Voice* __cdecl sb_PlayPrioritizedVoice(char* bank, const char* name, int prio, i
 				v->vol = vol;
 				v->flags |= 4;
 				v->f20 = prio;
-				fcn_00423670(v, a, 0);
+				sb_StartVoice(v, a, 0);
 			} else {
 				v = 0;
 			}

@@ -44,16 +44,16 @@ extern D2_FORM_RECORD g_1038140[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x00472100 */
-char* __cdecl fcn_00472100(int j, int i)
+char* __cdecl d2_GetFieldData(int slot_idx, int win_idx)
 {
 	D2_WIN* w;
 	D2_CONTROL_TL* s;
 
-	w = &((D2_WIN*)g_1015f40)[g_1038140[g_772534].wins[i]];
-	if (j > w->count) {
+	w = &((D2_WIN*)g_1015f40)[g_1038140[g_772534].wins[win_idx]];
+	if (slot_idx > w->count) {
 		return 0;
 	}
-	s = &((D2_CONTROL_TL*)g_1015ea0)[w->children[j]];
+	s = &((D2_CONTROL_TL*)g_1015ea0)[w->children[slot_idx]];
 	if (s->kind == 0x41) {
 		return *(char**)&s->data;
 	}

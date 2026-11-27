@@ -42,7 +42,7 @@ typedef struct RGB_COLOR {
 /* Writes a top-down 24-bit BMP from w*h RGB pixels (rows of at most 1024).
  * The inventory entry also holds a second function at 0x475e20 (279 bytes). */
 /* ADDRESS: GOLDTL 0x00475cb0 */
-int __cdecl fcn_00475cb0(const char* name, int w, int h, unsigned char* pixels)
+int __cdecl d2_SaveBMP24(const char* name, int w, int h, unsigned char* pixels)
 {
 	FILE* fp;
 	int y;

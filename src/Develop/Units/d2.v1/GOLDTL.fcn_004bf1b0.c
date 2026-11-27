@@ -24,13 +24,13 @@ void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl io_AppendText(char*, ...);
-void __cdecl fcn_00533a60(int, int, int*, int, ...);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_GetStorageSlotCapacity(int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
@@ -48,7 +48,7 @@ int __cdecl fcn_004bea00(char*, int);
 unsigned int __cdecl fcn_004be560(char*, int, unsigned int);
 unsigned int __cdecl d2_ChooseRoutingGood(char*, int, unsigned int);
 int __cdecl d2_FindRadioSlotByValue(int*);
-void __cdecl fcn_004bfc70(int);
+void __cdecl d2_ClearRoutePointSlot(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004bf1b0 */
 void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
@@ -86,12 +86,12 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 	types = (char*)&((TradeProto*)lpGebaeudePROT)[*(unsigned char*)tbl];
 	h = fcn_00470820(0, 0, s_681718);
 	d2_CenterDialogWindows(h);
-	first = fcn_00472830(h, 2);
-	fcn_00472830(h, 1);
+	first = d2_GetFormWindow(h, 2);
+	d2_GetFormWindow(h, 1);
 	d2_SetForm(h, 1);
 	io_AppendText(s_68170c, *(unsigned short*) (tbl + 0x27), tbl);
 	d2_SetForm(h, 3);
-	fcn_00533a60(d2_CurrentWindowId, 0, ids, 2, g_14b5e9c, g_14b5ea4);
+	d2_CreateButtonRow(d2_CurrentWindowId, 0, ids, 2, g_14b5e9c, g_14b5ea4);
 	selA = ids[0];
 	selB = ids[1];
 	
@@ -142,10 +142,10 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 		}
 		if (g_772908 != 0 && selB != -1
 			&& rt_CountRoutePoints((char*) g_772908) <= 1) {
-			fcn_00472640(selB, 0);
+			d2_SetElementEnabled(selB, 0);
 		}
 		else {
-			fcn_00472640(selB, 1);
+			d2_SetElementEnabled(selB, 1);
 		}
 		for (i = 0; i < 3; i++) {
 			n = nodeA[i][1];
@@ -216,7 +216,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 			if (d2_CurrentElementId == selB) {
 				k = d2_FindRadioSlotByValue(a0);
 				if (k != -1) {
-					fcn_004bfc70(k);
+					d2_ClearRoutePointSlot(k);
 				}
 				fcn_004be360();
 				fcn_004be380();
@@ -226,7 +226,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 				m_UnlinkAndFreeNode((char*) a0);
 				for (i = 0; i < 8; i++) {
 					if (g_10058a0[i * 2] != -1) {
-						fcn_004bfc70(i);
+						d2_ClearRoutePointSlot(i);
 					}
 				}
 				g_772900 = 0;

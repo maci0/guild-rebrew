@@ -22,7 +22,7 @@ int __cdecl fcn_00470820();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
-int __cdecl fcn_00472640();
+int __cdecl d2_SetElementEnabled();
 int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
 int __cdecl gm_ResolveDinnerParty();
@@ -40,12 +40,12 @@ int __cdecl io_FormatTextBuffer();
 int __cdecl d3_AnimateCameraToStoredTransform();
 int __cdecl fcn_00530510();
 int __cdecl d3_EndCameraAndUiMode();
-int __cdecl fcn_00533a60();
+int __cdecl d2_CreateButtonRow();
 int __cdecl fcn_005340f0();
 int __cdecl main_RunFrameLoop();
 int __cdecl he_fn_Handlung();
 int __cdecl he_StartHandlungSearch();
-int __cdecl fcn_005cd440();
+int __cdecl d2_OpenTargetPicker();
 
 /* ADDRESS: GOLDTL 0x005c18e0 */
 void __cdecl d2_ShowFestInvitation(int a0,int a1)
@@ -316,16 +316,16 @@ label_5c221e:
             v12 = d2_GetWindowListItem(v9,2,v11);
             v36 = v12;
             if (v10 == 4)
-              fcn_00472640(v12,0);
+              d2_SetElementEnabled(v12,0);
             d2_SetForm(v9,3);
             io_AppendText(0x6811b0);
             io_FormatTextBuffer(buttonLabelA,0x176c);
             io_FormatTextBuffer(buttonLabelB,0x176d);
-            fcn_00533a60(d2_CurrentWindowId,0,buttons,2,buttonLabelA,buttonLabelB);
+            d2_CreateButtonRow(d2_CurrentWindowId,0,buttons,2,buttonLabelA,buttonLabelB);
             commit = buttons[0];
             v38 = buttons[1];
             if (!v10)
-              fcn_00472640(buttons[0],0);
+              d2_SetElementEnabled(buttons[0],0);
           }
           if (g_100f1dc != -1) {
             if (g_14ce8e0) {
@@ -407,7 +407,7 @@ label_5c221e:
                 }
                 v10 += 1;
               } while (v10 < 4);
-              v10 = fcn_005cd440(v15,(char *)0x6ac578,0,0);
+              v10 = d2_OpenTargetPicker(v15,(char *)0x6ac578,0,0);
               if (v10) {
                 v8 = 0;
                 do {

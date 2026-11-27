@@ -8,9 +8,9 @@ extern void __cdecl m_FreeTracked(void *p);
 extern int __cdecl d3_FindSceneObjectByName(int a0, int a1);
 extern void __cdecl d3_SetObjectVisible(int a0, int a1);
 extern int __cdecl fcn_00442910(int a0, int a1, int a2, int a3);
-extern int __cdecl fcn_00471170(int a0, int a1, int a2);
-extern void __cdecl fcn_004713b0(int a0, char *a1, char *a2);
-extern void __cdecl fcn_00471490(int a0);
+extern int __cdecl d2_CreateRenderableForm(int a0, int a1, int a2);
+extern void __cdecl d2_CaptureFormPageTextures(int a0, char *a1, char *a2);
+extern void __cdecl d2_RenderFormToTextures(int a0);
 extern void __cdecl d2_SetGroupVisibility(int a0, int a1);
 extern void __cdecl fcn_00436f70(int a0);
 extern void __cdecl sb_PlayVoice(int a0, char *a1, int a2, int a3, int a4, int a5, int a6);
@@ -65,13 +65,13 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
     {
         v1 = (unsigned int *)(v6 + 4);
         v6 = v6 + 4;
-        *v10 = fcn_00471170(0, 0, *v1);
+        *v10 = d2_CreateRenderableForm(0, 0, *v1);
         if (*v10 == 0)
             break;
         v4 = index + 1;
         sprintf(v8, (char *)0x6a3168, v4);
         sprintf(v9, (char *)0x6a314c, v4);
-        fcn_004713b0(*v10, v8, v9);
+        d2_CaptureFormPageTextures(*v10, v8, v9);
         for (i = 0; i < *(int *)(*(int *)(*(int *)(*v3 + 0x1cc) + 0x318) + 0x1e4); i++)
         {
             if (strcmpi(*(char **)(*(int *)(*(int *)(*v3 + 0x1cc) + 0x31c) + i * 4), v8) == 0)
@@ -91,7 +91,7 @@ int *__cdecl fcn_00534c40(unsigned int a0, int a1, char a2, ...)
             *(unsigned int *)(*(int *)(*(int *)(*(int *)(*v3 + 0x1cc) + 0x31c) + i * 4) + 0x50) =
                 *(unsigned int *)(v7 + 0x20);
         }
-        fcn_00471490(*v10);
+        d2_RenderFormToTextures(*v10);
         if (v5 > 2)
             d2_SetGroupVisibility(*v10, 0);
         v10 = v10 + 1;

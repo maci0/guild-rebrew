@@ -1,6 +1,6 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-int __cdecl fcn_0046b520(const char* s, int a);
+int __cdecl d2_MeasureTextWidth(const char* s, int a);
 
 /* ADDRESS: GOLDTL 0x0046f940 */
 void __cdecl fcn_0046f940(int i, const char* s)
@@ -16,6 +16,6 @@ void __cdecl fcn_0046f940(int i, const char* s)
 		*d++ = c;
 	} while (c != 0);
 	if (*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].value_06c)) == 0 && *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].value_070)) == 0) {
-		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].width)) = fcn_0046b520(s, *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].font)));
+		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].width)) = d2_MeasureTextWidth(s, *(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[i].font)));
 	}
 }

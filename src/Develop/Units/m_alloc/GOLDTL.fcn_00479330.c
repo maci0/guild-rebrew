@@ -1,7 +1,7 @@
 #include <string.h>
 void* __cdecl m_alloc(unsigned int, char*);
 int __cdecl d2_PackColorForPixelFormat(unsigned char, unsigned char, unsigned char);
-void __cdecl fcn_00477560(int*, int*);
+void __cdecl shp_WriteFrameOffsets(int*, int*);
 
 /* ADDRESS: GOLDTL 0x00479330 */
 int* __cdecl fcn_00479330(int* src)
@@ -67,7 +67,7 @@ int* __cdecl fcn_00479330(int* src)
 		}
 		*(int*) ((char*) res + 0x2a) = *(int*) res;
 		*(int*) res += *(unsigned short*) ((char*) res + 0xa) * 4;
-		fcn_00477560(offs, res);
+		shp_WriteFrameOffsets(offs, res);
 		return res;
 	}
 	size = *(int*) src - *(int*) ((char*) src + 0x2e);

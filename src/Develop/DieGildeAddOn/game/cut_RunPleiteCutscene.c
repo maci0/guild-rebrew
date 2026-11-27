@@ -33,7 +33,7 @@ void __cdecl cut_FadeToBlack(void);
 void __cdecl evt_StopScriptIfActive(void* h);
 void __cdecl cut_WaitForScript(void* h);
 void __cdecl d3_DestroySkyLayer(void);
-void __cdecl fcn_004e4c60(void);
+void __cdecl d3_DestroySceneRain(void);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl fcn_004230e0(void* h);
@@ -112,7 +112,7 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 	evt_StopScriptIfActive((void*) h2);
 	cut_WaitForScript((void*) h2);
 	d3_DestroySkyLayer();
-	fcn_004e4c60();
+	d3_DestroySceneRain();
 	cut_CleanupCutscene();
 	d3snd_StopTrackedVoices();
 	fcn_004230e0((void*) handle);

@@ -26,7 +26,7 @@ int __cdecl io_OpenRegistryKey(const char* sub, int mode);
 int __cdecl io_ReadRegistryDword(int h, const char* name);
 int __cdecl io_TryReadRegistryDword(int h, const char* name, int* out);
 int __cdecl io_ReadRegistryString(int h, const char* name, char* out);
-int __cdecl fcn_00411490(int h, const char* name, float* out);
+int __cdecl io_TryReadRegistryFloat(int h, const char* name, float* out);
 void __cdecl fcn_00410430(int h);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 
@@ -95,13 +95,13 @@ char __cdecl d3_ReadRegistryConfig(D3dRegCfg_44c940* cfg, const char* key, D3dRe
 					d3_LODMode = 4;
 				}
 			}
-			fcn_00411490(h, "d3_window_width", &cfg->window_width);
-			fcn_00411490(h, "d3_window_height", &cfg->window_height);
-			fcn_00411490(h, "d3_window_x_offset", &cfg->window_x_offset);
-			fcn_00411490(h, "d3_window_y_offset", &cfg->window_y_offset);
-			fcn_00411490(h, "d3_window_near_z", &cfg->window_near_z);
-			fcn_00411490(h, "d3_window_far_z", &cfg->window_far_z);
-			fcn_00411490(h, "d3_window_viewdistance", &cfg->viewdistance);
+			io_TryReadRegistryFloat(h, "d3_window_width", &cfg->window_width);
+			io_TryReadRegistryFloat(h, "d3_window_height", &cfg->window_height);
+			io_TryReadRegistryFloat(h, "d3_window_x_offset", &cfg->window_x_offset);
+			io_TryReadRegistryFloat(h, "d3_window_y_offset", &cfg->window_y_offset);
+			io_TryReadRegistryFloat(h, "d3_window_near_z", &cfg->window_near_z);
+			io_TryReadRegistryFloat(h, "d3_window_far_z", &cfg->window_far_z);
+			io_TryReadRegistryFloat(h, "d3_window_viewdistance", &cfg->viewdistance);
 			cfg->viewdistance = 0.0015625f * ((float) (unsigned int) cfg->res_x * 512.0f);
 			fcn_00410430(h);
 			return 1;

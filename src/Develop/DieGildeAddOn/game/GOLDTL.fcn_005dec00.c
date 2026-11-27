@@ -16,7 +16,7 @@ extern __int64 g_666018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-char* __cdecl fcn_005cd440(int*, char*, int, int);
+char* __cdecl d2_OpenTargetPicker(int*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
@@ -43,7 +43,7 @@ int __cdecl gm_ObjBefriendOppositeGender(char* ent, int* arg)
 		desc[4] = 6;
 		desc[2] = (*(int*)&g_666018);
 		desc[3] = g_66601c;
-		obj = fcn_005cd440(desc, name, 0, 0);
+		obj = d2_OpenTargetPicker(desc, name, 0, 0);
 		if (obj == 0) {
 			goto end;
 		}

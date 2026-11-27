@@ -1,6 +1,6 @@
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl d3_InitializeGridCell(char* cell, int a, unsigned char b);
-void __cdecl fcn_0043c2c0(void* g);
+void __cdecl d3_BuildFloorGeometry(void* g);
 
 static __inline void fill0(char* dst, int size)
 {
@@ -73,6 +73,6 @@ void __cdecl fcn_0043f6b0(Grid* g)
 			d3_InitializeGridCell(g->cells[i][j], g->x4, g->x8037 & 0xf);
 		}
 	}
-	fcn_0043c2c0(g);
+	d3_BuildFloorGeometry(g);
 	g->x8036 |= 1;
 }

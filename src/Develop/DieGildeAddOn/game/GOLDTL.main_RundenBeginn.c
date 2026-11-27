@@ -15,7 +15,7 @@ void* __cdecl gm_FindNextFilteredEntity(void);
 int __cdecl he_SumEventValuesForSubject(int id);
 void __cdecl cm_RequestModifyHealth(int a1, int a2);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
-void __cdecl fcn_00420bf0(void);
+void __cdecl nt_FormatPacketStats(void);
 void __cdecl nt_ResetPacketStats(void);
 int __cdecl fcn_0064d41a(char* out, char* fmt, ...);
 
@@ -43,7 +43,7 @@ void __cdecl main_RundenBeginn(void)
 	bufA[0] = *(char*) 0x6b5c60;
 	for (i = 1; i < 0x100; i++)
 		bufA[i] = 0;
-	fcn_00420bf0();
+	nt_FormatPacketStats();
 	nt_ResetPacketStats();
 	fcn_0064d41a(bufA, (char*) 0x6a42d0, *(int*) 0x774950);
 	slot2 = (char*) 0x7f4ca2;

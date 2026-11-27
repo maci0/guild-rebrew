@@ -3,7 +3,7 @@
 void __cdecl ReportClientMessage(char*);
 void* __cdecl m_alloc(unsigned int, char*);
 unsigned short __cdecl d2_PackColorForPixelFormat(unsigned char, unsigned char, unsigned char);
-void __cdecl fcn_00477560(int*, int*);
+void __cdecl shp_WriteFrameOffsets(int*, int*);
 extern char g_100eb80[];
 
 /* ADDRESS: GOLDTL 0x00479110 */
@@ -69,6 +69,6 @@ int* __cdecl shp_Convert8To16(int* src, int unused, char* dest)
 	}
 	*(int*) ((char*) res + 0x2a) = *(int*) res;
 	*(int*) res += *(unsigned short*) ((char*) res + 0xa) * 4;
-	fcn_00477560(offs, res);
+	shp_WriteFrameOffsets(offs, res);
 	return res;
 }

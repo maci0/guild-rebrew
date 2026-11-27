@@ -25,10 +25,10 @@ extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
 int __cdecl d2_OpenInputIcon(int x, int y, int a3, int a4, int a5);
-void __cdecl fcn_0046f650(int slot, D2_WIN* parent);
+void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00467480 */
-int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win)
+int __cdecl d2_AddWindowInputIcon(int x, int y, int a3, int a4, int a5, int win)
 {
 	D2_WIN* par;
 	int id;
@@ -42,7 +42,7 @@ int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win)
 		return -1;
 	}
 	id = d2_OpenInputIcon(par->left + x, par->top - (*(int*) &par->pad3c[0x21c]) + y, a3, a4, a5);
-	fcn_0046f650(id, par);
+	d2_InsertControlAfterWindow(id, par);
 	*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[id].parent) = (int) par;
 	((D2_CONTROL_TL*) g_1015ea0)[id].value_050 = ((D2_CONTROL_TL*) g_1015ea0)[par->slot].value_050;
 	((D2_CONTROL_TL*) g_1015ea0)[id].clip_top = par->top;

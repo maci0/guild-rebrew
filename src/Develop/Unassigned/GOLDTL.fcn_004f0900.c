@@ -4,7 +4,7 @@
 
 int __cdecl cm_RequestSlot170Command(int*);
 
-void __cdecl fcn_004f0900(char* a)
+void __cdecl cm_SendSlotRemoveNCtd(char* a)
 {
 	int x[2];
 	x[0] = 0x6454436e;

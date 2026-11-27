@@ -2,7 +2,7 @@
 
 #include "client_method_registry.h"
 
-int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e);
+int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, char* e);
 int __cdecl ai_StartBlutrache(void);
 int __cdecl ai_RunBlutrache(void);
 int __cdecl ai_StartVerfluchen(void);
@@ -44,7 +44,7 @@ int __cdecl ai_RegisterSocialMethods(char* e)
 	}
 	d.type = 0x44;
 	strcpy(d.name, "Blutrache");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBlutrache;
 	d.run = ai_RunBlutrache;
 	d.flags = 0x1c3;
@@ -78,7 +78,7 @@ int __cdecl ai_RegisterSocialMethods(char* e)
 	}
 	d.type = 0x45;
 	strcpy(d.name, "Verfluchen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartVerfluchen;
 	d.run = ai_RunVerfluchen;
 	d.flags = 0x1c3;
@@ -112,7 +112,7 @@ int __cdecl ai_RegisterSocialMethods(char* e)
 	}
 	d.type = 0x46;
 	strcpy(d.name, "Theater");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartTheater;
 	d.run = ai_RunTheater;
 	d.flags = 1;
@@ -146,7 +146,7 @@ int __cdecl ai_RegisterSocialMethods(char* e)
 	}
 	d.type = 0x47;
 	strcpy(d.name, "Ehrerbietung");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartEhrerbietung;
 	d.run = ai_RunEhrerbietung;
 	d.flags = 3;

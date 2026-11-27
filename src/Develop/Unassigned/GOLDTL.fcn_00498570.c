@@ -13,7 +13,7 @@ int __cdecl ai_FindMissingBuildingUpgrade(int* x, int* y, void* home, int a4);
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, Msg* b, Msg* a);
 
 /* ADDRESS: GOLDTL 0x00498570 */
-int __cdecl fcn_00498570(int a1, char* e, int y, Msg* out1, Msg* out2)
+int __cdecl ai_StartWohnsitzUpgraden(int unused, char* e, int y, Msg* out1, Msg* out2)
 {
 	Msg a;
 	Msg b;

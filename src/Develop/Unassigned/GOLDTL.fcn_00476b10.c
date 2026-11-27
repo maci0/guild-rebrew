@@ -16,7 +16,7 @@ typedef struct Surf {
 
 short __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsigned char b);
 
-int __cdecl fcn_00476b10(int x, int y, unsigned char r, unsigned char g, unsigned char b, Surf* s)
+int __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g, unsigned char b, Surf* s)
 {
 	short c;
 	char* p;

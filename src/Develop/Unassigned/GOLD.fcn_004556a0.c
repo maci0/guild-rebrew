@@ -3,7 +3,7 @@
 
 int __cdecl d3_DestroyEffect(int);
 
-void __cdecl fcn_004556a0(void)
+void __cdecl d3_DestroyAllEffects(void)
 {
 	int v;
 

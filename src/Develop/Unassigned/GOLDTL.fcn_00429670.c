@@ -6,7 +6,7 @@ extern int g_6791c8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_00429490(char*);
+void __cdecl evt_InvokeExternalCommand(char*);
 void __cdecl evt_ExecuteStatements(char*);
 
 
@@ -39,7 +39,7 @@ void __cdecl evt_RunGfxScript(char* s)
 			d3_SelectSceneContext(*(int*) (s + 0xc90), 1);
 		}
 		if (*(int*) (s + 0xc60) != 0) {
-			fcn_00429490(s);
+			evt_InvokeExternalCommand(s);
 		}
 		if (*(int*) (s + 0xc60) == 0) {
 			do {

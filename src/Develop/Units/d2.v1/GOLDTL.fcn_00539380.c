@@ -16,7 +16,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 unsigned char __cdecl d2_GetControlValue(int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_DestroyForm(int);
 
 int __cdecl d2_ChoosePlayerCount(void)
@@ -49,7 +49,7 @@ int __cdecl d2_ChoosePlayerCount(void)
 			g_774654 = 1;
 		} else if (g_100f1dc == 2) {
 			*(unsigned char*) &(*(int*)&g_6a375c) = d2_GetControlValue(d);
-			fcn_00471af0(h, 0);
+			d2_SetFormVisibility(h, 0);
 			result = 1;
 			g_774654 = 1;
 		}

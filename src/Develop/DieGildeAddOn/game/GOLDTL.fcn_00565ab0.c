@@ -25,7 +25,7 @@ char* __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(char*);
 char* __cdecl evt_LoadScript(char*);
 int __cdecl vfs_LookupPath(char*, void*, void**);
-int __cdecl fcn_00428340(char*, int, ...);
+int __cdecl evt_CallScriptFunction(char*, int, ...);
 void __cdecl cm_SendChainRecordLookup(int, char, char, short, char, int);
 char* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl cm_SendSellObjekt(int, int, unsigned int, int, char, int);
@@ -74,7 +74,7 @@ void __cdecl he_UpdateErnten(char* ev)
 
 								if (script != 0) {
 									sprintf(spname, "sp_%i", *(int*) (ev + 0xb0));
-									fcn_00428340(script, 3, spname, *(int*) (v5 + 0x14),
+									evt_CallScriptFunction(script, 3, spname, *(int*) (v5 + 0x14),
 									             (int) *(char*) (v5 + 0xd) / (int) *(unsigned char*) (plantInfo + 0x43));
 									*(int*) (script + 0xc94) = (int) v8;
 									*(int*) (v8 + 0x28) = *(int*) (script + 0x100);
@@ -117,7 +117,7 @@ void __cdecl he_UpdateErnten(char* ev)
 
 								if (script != 0) {
 									sprintf(spname, "sp_%i", *(int*) (ev + 0xb0));
-									fcn_00428340(script, 3, spname, *(int*) (v5 + 0x14),
+									evt_CallScriptFunction(script, 3, spname, *(int*) (v5 + 0x14),
 									             (int) *(char*) (v5 + 0xd) / (int) *(unsigned char*) (plantInfo + 0x43));
 									*(int*) (script + 0xc94) = (int) v8;
 									*(int*) (v8 + 0x28) = *(int*) (script + 0x100);

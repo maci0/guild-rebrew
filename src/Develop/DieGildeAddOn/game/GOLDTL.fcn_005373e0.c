@@ -139,26 +139,26 @@ extern void d3_UpdateCharacterBoxSelection();
 extern void d3_DrawSelectionBox();
 extern void d3snd_UpdateSoundSources();
 extern void d3snd_UpdateAmbientSources();
-extern void fcn_00422150();
+extern void sb_UpdateVoices();
 extern void sv_UpdateSceneHover();
-extern void fcn_00475220();
+extern void d2_SetMouseTooltip();
 extern void d2_SetOverlayAnimation();
 extern void sv_HandleObjects();
 extern void fcn_00531620();
 extern void d2_UpdateHoverTooltip();
 extern void d2_UpdateSceneTooltip();
 extern void fcn_00527f60();
-extern void fcn_0046a110();
+extern void d2_RenderAllElements();
 extern void fcn_004da1b0();
 extern void fcn_00532650();
 extern void fcn_00532900();
 extern void d2_DrawBuildingItemLabels();
 extern void fcn_4d03e0();
-extern void fcn_00532bd0();
+extern void d2_DrawCameraScrollArrows();
 extern void fcn_005337a0();
 extern void fcn_005337f0();
 extern void fcn_00526b70();
-extern void fcn_0047c560();
+extern void d2_FlushQueuedQuads();
 extern void fcn_0047cdf0();
 extern void fcn_00472a50();
 extern void fcn_00411fe0();
@@ -367,7 +367,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		if (g_774938 != 0) {
 			d3snd_UpdateAmbientSources();
 		}
-		fcn_00422150();
+		sb_UpdateVoices();
 	}
 	if (g_774654 == 0 && !(flags & 0x100000)) {
 		if (z == 0) {
@@ -378,7 +378,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 			if (g_14ce8e8 == 0) {
 				if (d2_CurrentElementId == -1 ||
 					!(*(char *) (g_1015ea0 + d2_CurrentElementId * 756 + 0x1d0) & 0x40)) {
-					fcn_00475220(g_6b5c60);
+					d2_SetMouseTooltip(g_6b5c60);
 				}
 				g_7746a4 = 0;
 				sv_HoveredObjekt = 0;
@@ -414,7 +414,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		if (g_6a25ac != -1 && (flags & 0x100) && g_6a2c0c != 0) {
 			fcn_00527f60(2, flags);
 		}
-		fcn_0046a110((~flags >> 6) & 1);
+		d2_RenderAllElements((~flags >> 6) & 1);
 		if (g_772f54 != 0) {
 			fcn_004da1b0();
 		}
@@ -429,7 +429,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		if (flags & 0x80000) {
 			fcn_4d03e0();
 		} else if ((flags & 8) && (g_7746cc != 0 || g_7746c8 != 0)) {
-			fcn_00532bd0();
+			d2_DrawCameraScrollArrows();
 		}
 		if (f != 0 && g_14ce8e8 == 0 && g_774668 == 0 && d3_ActiveCameraAnimation == 0 &&
 			d3_SelectionBoxActive == 0 && d2_SuppressOverlay == 0 && g_7749e4 == 0) {
@@ -437,7 +437,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		}
 		fcn_005337f0();
 		fcn_00526b70();
-		fcn_0047c560(0, 0, 0);
+		d2_FlushQueuedQuads(0, 0, 0);
 		(*(void (__stdcall **) (int, int)) (*(int *) g_6b5de0 + 0xa0))(g_6b5de0, (int) g_1052be0);
 		fcn_0047cdf0();
 	} else if (g_7e2700 != 0) {

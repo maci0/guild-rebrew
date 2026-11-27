@@ -28,7 +28,7 @@ void __cdecl fcn_0058fba0(int);
 void __cdecl fcn_0058fbd0(int);
 void __cdecl fcn_0058fa20(int);
 void __cdecl d2_OpenTransportPanel(int);
-void __cdecl fcn_0058fa40(int);
+void __cdecl d2_RunGraveyardDialog(int);
 void __cdecl fcn_0058dbe0(int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
 
@@ -88,7 +88,7 @@ void __cdecl d2_RunFriedhofActions(int arg)
 				}
 			}
 			if ((g_7746d8 & 0x80) != 0 && g_7746a0 == rentGraveAction) {
-				fcn_0058fa40(arg);
+				d2_RunGraveyardDialog(arg);
 			}
 		} else if (g_774800 != 0) {
 			if ((*(unsigned char*)&g_14cf950) == 0x1e) {
@@ -102,7 +102,7 @@ void __cdecl d2_RunFriedhofActions(int arg)
 			} else if ((*(unsigned char*)&g_14cf950) == 0x19) {
 				d2_StartGrabpflege(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x16) {
-				fcn_0058fa40(arg);
+				d2_RunGraveyardDialog(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x11) {
 				fcn_0058fba0(arg);
 			}

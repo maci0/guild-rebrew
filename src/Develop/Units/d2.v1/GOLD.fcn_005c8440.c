@@ -51,7 +51,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005c9090(char*, int, int, int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -104,7 +104,7 @@ void __cdecl fcn_005c8440(void)
 		sprintf(text, s_6a9680, list[i].id);
 		fcn_005c9090(text, 0x36, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 0x22, 0x12c, 0x56);
 		v = MIN(MAX(((House*)g_7f4ca0)[list[i].id].f54 - 0x59a, 0), 7);
-		h = fcn_004677e0(0x5a, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 7, 0x12c, 0, 0x64,
+		h = d2_AddWindowValueGauge(0x5a, (count <= 4 ? 0x50 : 0x3a) * i + (count <= 4 ? 0x14 : 2) + 7, 0x12c, 0, 0x64,
 			cols[v], 0x42, d2_CurrentWindowId);
 		d2_SetElementValue(h, 0, 0x64, fl);
 		sprintf(text, s_67d444, list[i].f20);

@@ -4,7 +4,7 @@ void* __cdecl fcn_0064f026(int, int);
 float __cdecl fcn_0064d62e(void*);
 
 /* ADDRESS: GOLDTL 0x0044d350 */
-void __cdecl fcn_0044d350(int a1, int ctx)
+void __cdecl d3_ParseMatUvwRotate(int unused, int ctx)
 {
 	char* base;
 	float value;

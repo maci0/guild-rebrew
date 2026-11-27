@@ -27,7 +27,7 @@ extern TexSlot g_100f840;
 void __cdecl fcn_00475f80(void* p);
 
 /* ADDRESS: GOLDTL 0x00473ed0 */
-void __cdecl fcn_00473ed0(void)
+void __cdecl d2_ShutdownOverlayState(void)
 {
 	int i;
 

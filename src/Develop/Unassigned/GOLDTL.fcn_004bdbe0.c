@@ -1,4 +1,4 @@
-unsigned short __cdecl fcn_00421350(void* path, char* map, int x0, int y0, int x1, int y1, int flags);
+unsigned short __cdecl FindPath(void* path, char* map, int x0, int y0, int x1, int y1, int flags);
 
 /* Picks the nearest walkable cell to (x, y) when no grid index was supplied. */
 /* ADDRESS: GOLDTL 0x004bdbe0 */
@@ -48,7 +48,7 @@ int __cdecl fcn_004bdbe0(int obj, int x, int y, int i, int j)
 		*(int*) (obj + 0x1018) = 0x400;
 		*(int*) (obj + 0x101c) = obj + 0x10;
 		*(int*) (obj + 0x1014) = 0;
-		return fcn_00421350((void*) (obj + 0x1014), *(char**) (obj + 4), x, y, i, j, 3) != 0xffff;
+		return FindPath((void*) (obj + 0x1014), *(char**) (obj + 4), x, y, i, j, 3) != 0xffff;
 	}
 	return 0;
 }

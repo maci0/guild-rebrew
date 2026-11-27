@@ -24,7 +24,7 @@ extern int g_623850;
 extern int g_623854;
 
 void __cdecl d2_SetFormVisibility(int h, int v);
-void __cdecl fcn_0053dd30(int v);
+void __cdecl d2_SetTooltipPanelVisible(int v);
 void __cdecl fcn_00475a90(int h, int v);
 
 void __cdecl d2_SetHudVisibility(int show)
@@ -35,7 +35,7 @@ void __cdecl d2_SetHudVisibility(int show)
 	if (g_623868 != -1) {
 		d2_SetFormVisibility(g_623868, show);
 	}
-	fcn_0053dd30(show);
+	d2_SetTooltipPanelVisible(show);
 	if (g_623868 != -1) {
 		d2_SetFormVisibility(g_623868, show);
 	}

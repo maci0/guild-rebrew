@@ -87,13 +87,13 @@ void __cdecl fcn_004b20d0(int);
 int __cdecl fcn_005435d0(void);
 void __cdecl io_FormatTextBuffer(void*, int);
 int __cdecl fcn_00526120(void*, int);
-void __cdecl fcn_0046ac30(void);
+void __cdecl d2_RenderAndPresentFrame(void);
 int __cdecl fcn_00470820(int, int, const char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl io_AppendText(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_00402220(int);
+void __cdecl nt_InitBroadcastSocket(int);
 void __cdecl nt_ConnectTcp(int, int);
 void __cdecl cm_ResetCommandQueue(void);
 int __cdecl d2_RunNetLobbySetup(void);
@@ -216,7 +216,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 					io_FormatTextBuffer(buf, 0x79);
 					r = fcn_00526120(buf, 1);
 					if (r != 0) {
-						fcn_0046ac30();
+						d2_RenderAndPresentFrame();
 						Sleep(1000);
 					}
 				} while (r != 0);
@@ -258,7 +258,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				return;
 			}
 			Sleep(0x9c4);
-			fcn_00402220(0x3039);
+			nt_InitBroadcastSocket(0x3039);
 			g_77497c = 1;
 		}
 		nt_ConnectTcp((int) g_7e2000, g_7e2510);
@@ -274,7 +274,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 					break;
 				}
 				d2_SuppressOverlay = 1;
-				fcn_0046ac30();
+				d2_RenderAndPresentFrame();
 				Sleep(1000);
 			}
 			g_774958 = 0;

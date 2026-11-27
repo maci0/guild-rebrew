@@ -7,7 +7,7 @@ unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00533cf0(int);
 void __cdecl d2_ClearScreen(void);
-void __cdecl fcn_00469e30(int);
+void __cdecl d2_SetBackdropResource(int);
 void __cdecl fcn_00473150(unsigned char*);
 void __cdecl fcn_005270c0(int);
 #include <string.h>
@@ -50,7 +50,7 @@ void __cdecl d2_EnterMenuScreen(void)
 	main_LoopFlags = 0x24087;
 	fcn_00533cf0(1);
 	d2_ClearScreen();
-	fcn_00469e30(0x794);
+	d2_SetBackdropResource(0x794);
 	fcn_00473150(p);
 	fcn_005270c0(0);
 	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x32, 0xa);

@@ -47,15 +47,15 @@ int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_00534160(int, int, int, int);
-int __cdecl fcn_00468df0(int, int, int, char*, int);
-void __cdecl fcn_00469110(int, int);
+int __cdecl d2_AddWindowTextButton(int, int, int, char*, int);
+void __cdecl d2_SetElementWidth(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 char* __cdecl fcn_004ee160(char*);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_RunDomizilSkillConfirmDialog(char*, int*, int);
@@ -110,7 +110,7 @@ void __cdecl fcn_00585910(char* e)
 	d2_SetForm(ids[0], 2);
 	d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
 	d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
-	ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
+	ids[2] = d2_AddWindowValueGauge((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 	d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 	io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
 	item = d2_ShowTxt(0, 0, buf, ids[1]);
@@ -128,27 +128,27 @@ void __cdecl fcn_00585910(char* e)
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = 0xc8;
 	io_FormatTextBuffer(buf, "%s", g_14b58e8);
-	ids[4] = fcn_00468df0(0x14a, 0xbe, 0xc5, g_14b5f04, ids[1]);
-	fcn_00469110(ids[4], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+	ids[4] = d2_AddWindowTextButton(0x14a, 0xbe, 0xc5, g_14b5f04, ids[1]);
+	d2_SetElementWidth(ids[4], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[4], 0x54);
 	io_FormatTextBuffer(buf, "%s", g_14b58e8);
-	ids[5] = fcn_00468df0(10, 0x64, 0xc5, buf, ids[1]);
-	fcn_00469110(ids[5], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+	ids[5] = d2_AddWindowTextButton(10, 0x64, 0xc5, buf, ids[1]);
+	d2_SetElementWidth(ids[5], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[5], 0x54);
 	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
 	io_FormatTextBuffer(buf, "%s", g_14b58ec);
-	ids[6] = fcn_00468df0(10, 0x82, 0xc5, buf, ids[1]);
-	fcn_00469110(ids[6], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+	ids[6] = d2_AddWindowTextButton(10, 0x82, 0xc5, buf, ids[1]);
+	d2_SetElementWidth(ids[6], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[6], 0x54);
 	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
 	io_FormatTextBuffer(buf, "%s", g_14b58f0);
-	ids[7] = fcn_00468df0(10, 0xa0, 0xc5, buf, ids[1]);
-	fcn_00469110(ids[7], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+	ids[7] = d2_AddWindowTextButton(10, 0xa0, 0xc5, buf, ids[1]);
+	d2_SetElementWidth(ids[7], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[7], 0x54);
 	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
 	io_FormatTextBuffer(buf, "%s", g_14b58f4);
-	ids[8] = fcn_00468df0(10, 0xbe, 0xc5, buf, ids[1]);
-	fcn_00469110(ids[8], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+	ids[8] = d2_AddWindowTextButton(10, 0xbe, 0xc5, buf, ids[1]);
+	d2_SetElementWidth(ids[8], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 	d2_SetElementFont(ids[8], 0x54);
 	fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
 	d2_SetForm(ids[0], 3);
@@ -158,7 +158,7 @@ void __cdecl fcn_00585910(char* e)
 		d2_SetForm(ids[0], 4);
 		io_AppendText(0x6811b0);
 		if (sel != 0) {
-			ids[9] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
+			ids[9] = d2_AddWindowValueGauge((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			if (sel == 1) {
 				io_FormatTextBuffer(text, (char*) 0x404b);
 			} else if (sel == 2) {
@@ -184,7 +184,7 @@ void __cdecl fcn_00585910(char* e)
 			io_AppendText(0x6811b0);
 			d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x18, 0x1e, 0x6c7, ids[1]);
 			d2_AddElementToWindow(((Screen*) g_77255c)->xc / 2 - 0x16, 0x20, *(int*) (data + 0x18c), ids[1]);
-			ids[2] = fcn_004677e0((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
+			ids[2] = d2_AddWindowValueGauge((((Screen*) g_77255c)->xc - 0x32) / 2, 0x55, 0x32, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			d2_SetElementValue(ids[2], 0, 0x64, (int) (*(float*) (src + 1) * 100.0f));
 			io_FormatTextBuffer(buf, g_68b3f8, data + 0x30, data + 0x40);
 			ids[9] = d2_ShowTxt(0, 0, buf, ids[1]);
@@ -202,27 +202,27 @@ void __cdecl fcn_00585910(char* e)
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].value_06c) = 1;
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[item].width) = 0xc8;
 			io_FormatTextBuffer(buf, "%s", g_14b58e8);
-			ids[4] = fcn_00468df0(0x14a, 0xbe, 0xc5, g_14b5f04, ids[1]);
-			fcn_00469110(ids[4], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+			ids[4] = d2_AddWindowTextButton(0x14a, 0xbe, 0xc5, g_14b5f04, ids[1]);
+			d2_SetElementWidth(ids[4], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[4], 0x54);
 			io_FormatTextBuffer(buf, "%s", g_14b58e8);
-			ids[5] = fcn_00468df0(10, 0x64, 0xc5, buf, ids[1]);
-			fcn_00469110(ids[5], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+			ids[5] = d2_AddWindowTextButton(10, 0x64, 0xc5, buf, ids[1]);
+			d2_SetElementWidth(ids[5], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[5], 0x54);
 			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x68, *((unsigned char*) src + 8), 0x4df);
 			io_FormatTextBuffer(buf, "%s", g_14b58ec);
-			ids[6] = fcn_00468df0(10, 0x82, 0xc5, buf, ids[1]);
-			fcn_00469110(ids[6], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+			ids[6] = d2_AddWindowTextButton(10, 0x82, 0xc5, buf, ids[1]);
+			d2_SetElementWidth(ids[6], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[6], 0x54);
 			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0x86, *((unsigned char*) src + 9), 0x4df);
 			io_FormatTextBuffer(buf, "%s", g_14b58f0);
-			ids[7] = fcn_00468df0(10, 0xa0, 0xc5, buf, ids[1]);
-			fcn_00469110(ids[7], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+			ids[7] = d2_AddWindowTextButton(10, 0xa0, 0xc5, buf, ids[1]);
+			d2_SetElementWidth(ids[7], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[7], 0x54);
 			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xa4, *((unsigned char*) src + 10), 0x4df);
 			io_FormatTextBuffer(buf, "%s", g_14b58f4);
-			ids[8] = fcn_00468df0(10, 0xbe, 0xc5, buf, ids[1]);
-			fcn_00469110(ids[8], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
+			ids[8] = d2_AddWindowTextButton(10, 0xbe, 0xc5, buf, ids[1]);
+			d2_SetElementWidth(ids[8], ((D2_WIN*)g_1015f40)[ids[1]].width / 3 - 0x14);
 			d2_SetElementFont(ids[8], 0x54);
 			fcn_00534160(((D2_WIN*)g_1015f40)[ids[1]].width / 3 + 0xa, 0xc2, *((unsigned char*) src + 11), 0x4df);
 		}
@@ -231,22 +231,22 @@ void __cdecl fcn_00585910(char* e)
 		} else if (g_100f1dc != -1) {
 			for (i = 0, p = &ids[5]; i < 4; i++, p++) {
 				if (*p == d2_CurrentElementId) {
-					fcn_00471af0(ids[0], 0);
+					d2_SetFormVisibility(ids[0], 0);
 					d2_RunDomizilSkillConfirmDialog(e, src, i);
-					fcn_00471af0(ids[0], 1);
+					d2_SetFormVisibility(ids[0], 1);
 					d2_CurrentElementId = -1;
 				}
 			}
 			if (d2_CurrentElementId == ids[4]) {
-				fcn_00471af0(ids[0], 0);
+				d2_SetFormVisibility(ids[0], 0);
 				d2_RunDomizilSkillDialog(e, src);
-				fcn_00471af0(ids[0], 1);
+				d2_SetFormVisibility(ids[0], 1);
 			} else if (d2_CurrentElementId == ids[3]) {
-				fcn_00471af0(ids[0], 0);
+				d2_SetFormVisibility(ids[0], 0);
 				if (d2_ConfirmFireAlchemist(e, src) != 0) {
 					g_774654 = 1;
 				}
-				fcn_00471af0(ids[0], 1);
+				d2_SetFormVisibility(ids[0], 1);
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_00585910, 0x677c7) != 0);

@@ -17,11 +17,11 @@ extern float g_6b86cc;
 extern float g_1040d00[0x400];
 extern int g_67a370;
 
-void __cdecl fcn_0043bf20(char* a);
+void __cdecl d3_InvalidateFloorChunks(char* a);
 void __cdecl fcn_00455140(char* node, float* in, float* out);
 char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags,
                           char (__cdecl* cb)(char*, void*), void* ctx);
-char __cdecl fcn_0043ed30(char* node, void* ctx);
+char __cdecl d3_CollectFloorLightCallback(char* node, void* ctx);
 
 typedef void (__stdcall* LightLock)(char*, int, char**);
 typedef void (__stdcall* LightUnlock)(char*);
@@ -34,7 +34,7 @@ typedef struct LightIter {
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0043ef20 */
-void __cdecl fcn_0043ef20(char* a0)
+void __cdecl d3_UpdateFloorLighting(char* a0)
 {
 	char* lum;
 	char* bmp;
@@ -81,7 +81,7 @@ void __cdecl fcn_0043ef20(char* a0)
 	char* self = a0; /* native stores the fill count over the a0 argument slot */
 
 	if ((*(unsigned char*) (self + 0x8036) & 2) == 0 && *(int*) (self + 0x1c) != 0) {
-		fcn_0043bf20(self);
+		d3_InvalidateFloorChunks(self);
 		w = *(int*) self;
 		a0 = (char*) (w * w);
 		fillDst = *(char**) (self + 0x1c);
@@ -104,7 +104,7 @@ void __cdecl fcn_0043ef20(char* a0)
 		}
 		it.obj = self;
 		it.item = 0;
-		d3_VisitSceneObjects((char*) g_67a370, 0, 0xe, fcn_0043ed30, &it);
+		d3_VisitSceneObjects((char*) g_67a370, 0, 0xe, d3_CollectFloorLightCallback, &it);
 		if (it.item != 0) {
 			char* e;
 

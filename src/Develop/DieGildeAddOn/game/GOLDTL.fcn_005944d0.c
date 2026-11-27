@@ -17,7 +17,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_eval_SlotVoll(int, int, int);
@@ -115,7 +115,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 	}
 	d2_DrawPanelFrame(d2_CurrentWindowId, id, 0x742);
 	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId,
-	             fcn_00472830(window, 2), 0x78, &rect2, &rect1, &listControl);
+	             d2_GetFormWindow(window, 2), 0x78, &rect2, &rect1, &listControl);
 	*(unsigned int*) ((int) g_1015ea0 + 0x84 + listControl * 0x2f4) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	while (1) {

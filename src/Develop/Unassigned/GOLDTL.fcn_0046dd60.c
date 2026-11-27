@@ -57,14 +57,14 @@ extern char* g_772500;
 void* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int a5, void* r);
 void __cdecl d2_SetQuadVertexColor(void* p, int r, int g, int b);
 void __cdecl d2_DrawTexturedQuad(int x, int y, int w, int h, int color, float alpha);
-void __cdecl fcn_0047cb60(int x, int y, int a3, int img);
+void __cdecl d2_DrawSprite(int x, int y, int a3, int img);
 int __cdecl d2_GetResourceData(int id);
 void __cdecl fcn_0047a040(int a, int b, int c, int d);
 void __cdecl fcn_0047cba0(int x, int y, int surf, int tex, int c);
 void __cdecl fcn_0047c7b0(int x, int y, int w, int h, int bits, float alpha);
 
 /* ADDRESS: GOLDTL 0x0046dd60 */
-void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
+void __cdecl d2_DrawWindowBackground(fcn_0046dd60_Win* w, int dst)
 {
 	void* p;
 	fcn_0046dd60_Def* d;
@@ -95,7 +95,7 @@ void __cdecl fcn_0046dd60(fcn_0046dd60_Win* w, int dst)
 	else if (w->pal != 0)
 		d2_DrawTexturedQuad(x0, y0, cw, ch, w->pal->color, w->alpha);
 	else if (w->img != 0)
-		fcn_0047cb60(w->x - w->sx, w->y - w->sy, dst, w->img);
+		d2_DrawSprite(w->x - w->sx, w->y - w->sy, dst, w->img);
 	if (w->tex != -1 && (tex = d2_GetResourceData(w->tex)) != 0) {
 		clipLeft = d2_ClipLeft;
 		clipTop = g_7725fc;

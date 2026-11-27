@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004239b0 */
-void* __cdecl fcn_004239b0(void)
+void* __cdecl sbs_GetLastSet(void)
 {
 	char* p;
 	void* r;

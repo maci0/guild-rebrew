@@ -34,7 +34,7 @@ char* __cdecl fcn_004770a0(Desc* d, int kind);
 int __cdecl fcn_00476120(int x, int y, int w, int h, char* img, int sx, int sy, Target* t);
 void __cdecl fcn_00475f80(char* img);
 
-int __cdecl fcn_004767f0(int x, int y, int w, int h, char* src, int sx, int sy, Target* t)
+int __cdecl d2_BlitBufferToSurface(int x, int y, int w, int h, char* src, int sx, int sy, Target* t)
 {
 	Desc d;
 	int handle;

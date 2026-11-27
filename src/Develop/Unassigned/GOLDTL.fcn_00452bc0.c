@@ -22,7 +22,7 @@ extern unsigned int g_6b8714;
 extern unsigned int g_6b8710;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00452740(char*);
+void __cdecl d3_UpdateAndRenderEffect(char*);
 
 void __cdecl d3_RenderSceneList(void)
 {
@@ -34,7 +34,7 @@ void __cdecl d3_RenderSceneList(void)
 	((SetVertexShaderFn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x130 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), g_6b8710);
 	for (p = d3_SceneRenderListHead; p != g_1040640; p = next) {
 		next = *(char**) (p + 0x314);
-		fcn_00452740(p);
+		d3_UpdateAndRenderEffect(p);
 	}
 	((SetStreamSourceFn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x14c / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0, 0);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x8d, 0);

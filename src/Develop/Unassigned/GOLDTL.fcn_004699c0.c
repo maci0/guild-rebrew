@@ -1,13 +1,13 @@
 extern int g_772504,d2_ClipLeft,d2_ClipRight,g_7725fc,d2_ClipBottom,d2_DefaultFont,d2_ResourceOffset;
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_AllocateElement(void);
-int __cdecl fcn_00466260(int, int*, int*);
+int __cdecl d2_ResolveResourceEntry(int, int*, int*);
 void __cdecl d2_AddRefcount(int);
-int __cdecl fcn_0047a200(int, int, int, int);
+int __cdecl d2_AllocAnimationSlot(int, int, int, int);
 int __cdecl fcn_0047b620(int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x004699c0 */
-int __cdecl fcn_004699c0(unsigned int x, int y, int resourceId)
+int __cdecl d2_CreateElementCore(unsigned int x, int y, int resourceId)
 {
 	int v4;
 	int n;
@@ -28,7 +28,7 @@ int __cdecl fcn_004699c0(unsigned int x, int y, int resourceId)
 	if (idx >= 0x400) {
 		return -1;
 	}
-	fcn_00466260(resourceId, &v4, &n);
+	d2_ResolveResourceEntry(resourceId, &v4, &n);
 	*(int*) &((D2_CONTROL_TL*)slot)->data = v4;
 	*(int*) &((D2_CONTROL_TL*)slot)->value_008 = n;
 	*(int*) &((D2_CONTROL_TL*)slot)->kind = *(int*) (*(int*) &g_772500 + 0x3c + n * 0x54);
@@ -55,7 +55,7 @@ int __cdecl fcn_004699c0(unsigned int x, int y, int resourceId)
 		*(int*) &((D2_CONTROL_TL*)slot)->height = *(unsigned short*) (tp + 8);
 		return idx;
 	case 4:
-		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_088 = fcn_0047a200(x, y, *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data, 0);
+		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].value_088 = d2_AllocAnimationSlot(x, y, *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data, 0);
 		tp = (char*) *(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].data;
 		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].width = *(unsigned short*) (tp + 6);
 		*(int*) &((D2_CONTROL_TL*)g_1015ea0)[idx].height = *(unsigned short*) (tp + 8);

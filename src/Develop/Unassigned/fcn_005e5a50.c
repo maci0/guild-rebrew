@@ -33,16 +33,16 @@ extern int g_666018, g_66601c;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl fcn_005263d0(int, int, int);
-char* __cdecl fcn_005cd440(int*, int, int, void*);
+char* __cdecl d2_OpenTargetPicker(int*, int, int, void*);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00468bb0(int, int, ...);
-void __cdecl fcn_00533a60(int, int, int*, int, ...);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
+void __cdecl d2_SetValueGaugeStepLabels(int, int, ...);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl gm_GetBuildingSlotCapacity(char*);
 int __cdecl d2_GetControlValue(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -82,7 +82,7 @@ void __cdecl fcn_005e5a50(char* entity)
 	query[0] = 1;
 	query[1] = 0x400;
 	query[4] = 6;
-	target = fcn_005cd440(query, *(int*) 0x14b5a2c, 0, 0);
+	target = d2_OpenTargetPicker(query, *(int*) 0x14b5a2c, 0, 0);
 	if (target == 0) {
 		d3_EndCameraAndUiMode();
 		return;
@@ -93,13 +93,13 @@ void __cdecl fcn_005e5a50(char* entity)
 	d2_SetForm(dialog, 0);
 	fcn_005340f0(d2_CurrentWindowId);
 	d2_SetForm(dialog, 2);
-	control = fcn_004677e0(0x57, 7, 200, 0, 100, 0x7b, 2, d2_CurrentWindowId);
+	control = d2_AddWindowValueGauge(0x57, 7, 200, 0, 100, 0x7b, 2, d2_CurrentWindowId);
 	d2_SetElementValue(control, 0, 5, 0, 1);
-	fcn_00468bb0(control, 6, *(int*) 0x14b5a48, *(int*) 0x14b5a4c,
+	d2_SetValueGaugeStepLabels(control, 6, *(int*) 0x14b5a48, *(int*) 0x14b5a4c,
 	             *(int*) 0x14b5a50, *(int*) 0x14b5a54,
 	             *(int*) 0x14b5a58, *(int*) 0x14b5a5c);
 	d2_SetForm(dialog, 3);
-	fcn_00533a60(d2_CurrentWindowId, 0, ids, 2, *(int*) 0x14b5a80, *(int*) 0x14b5a84);
+	d2_CreateButtonRow(d2_CurrentWindowId, 0, ids, 2, *(int*) 0x14b5a80, *(int*) 0x14b5a84);
 	do {
 		max_val = gm_GetBuildingSlotCapacity(entity) - 1;
 		val = d2_GetControlValue(control);

@@ -49,9 +49,9 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_0046fac0(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int, int);
-void __cdecl fcn_00468bb0(int, int, int, int, int);
+void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
@@ -99,11 +99,11 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	((D2_CONTROL_TL*)g_1015ea0)[i].width =
 	    *(int*) (*(int*) &d2_CurrentWindowId * 0x3cc + (unsigned long)&g_1015f4c);
 	d2_SetElementFont(i, 0x54);
-	lst = fcn_004677e0(0x57, 0x14, 200, 0, 100, 0x7b, 2,
+	lst = d2_AddWindowValueGauge(0x57, 0x14, 200, 0, 100, 0x7b, 2,
 	                   *(int*) &d2_CurrentWindowId);
 	act.item = lst;
 	fcn_00472380(lst, 0, 2, 0, 1);
-	fcn_00468bb0(lst, 3, *(int*) 0x14b53a4, *(int*) 0x14b53a8,
+	d2_SetValueGaugeStepLabels(lst, 3, *(int*) 0x14b53a4, *(int*) 0x14b53a8,
 	             *(int*) 0x14b53ac);
 	d2_SetForm(dlg, 3);
 	btn = io_AppendText(0x4024);

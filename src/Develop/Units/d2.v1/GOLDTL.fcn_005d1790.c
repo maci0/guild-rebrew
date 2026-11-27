@@ -25,10 +25,10 @@ int __cdecl fcn_00470820(int, int, char *);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl gm_HasActiveMission(int);
 void __cdecl d2_ShowMissionForEntity(int);
 void __cdecl cm_SendChangePlayerIdentity(int, int);
@@ -41,8 +41,8 @@ int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl io_AppendText();
 void __cdecl io_FormatTextBuffer();
 int __cdecl fcn_00526120(char *, int);
-void __cdecl fcn_00533a60(int, int, int *, int, char *, char *);
-void __cdecl fcn_00534210(int, int, char *, int, int);
+void __cdecl d2_CreateButtonRow(int, int, int *, int, char *, char *);
+void __cdecl d2_DrawSkillBar(int, int, char *, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 char *__cdecl he_StartHandlungSearch(int, ...);
 char *__cdecl he_fn_Handlung(void);
@@ -189,7 +189,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 		inx += 0x18;
 		io_FormatTextBuffer(buf12, i + 0x16b7);
 		d2_ShowTxt(10, inx - 1, buf12, d2_CurrentWindowId);
-		fcn_00534210(0xaf, inx, (char *)person, i, 0x4e5);
+		d2_DrawSkillBar(0xaf, inx, (char *)person, i, 0x4e5);
 		i++;
 	} while (i < 5);
 	io_FormatTextBuffer(buf12, 0x1f63);
@@ -277,7 +277,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 							io_FormatTextBuffer(bufA, 0x1f4b, *person);
 							io_FormatTextBuffer(bufB, 0x1a96);
 							d2_SetForm(h, 4);
-							fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, bufA, bufB);
+							d2_CreateButtonRow(d2_CurrentWindowId, 0, buttons, 2, bufA, bufB);
 							r1 = buttons[0];
 							r2 = buttons[1];
 						}
@@ -297,7 +297,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 						io_FormatTextBuffer(bufB, 0x1f4b, *person);
 						io_FormatTextBuffer(bufA, 0x1a97);
 						d2_SetForm(h, 4);
-						fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, bufB, bufA);
+						d2_CreateButtonRow(d2_CurrentWindowId, 0, buttons, 2, bufB, bufA);
 						r1 = buttons[0];
 						r4 = buttons[1];
 					}
@@ -320,16 +320,16 @@ label_2281:
 	do {
 		if (r1 != -1) {
 			if (gm_AccumulateTyped2(g_7f4ca0 + 540 * g_774970) <= 0) {
-				fcn_00472640(r1, 0);
+				d2_SetElementEnabled(r1, 0);
 			} else {
-				fcn_00472640(r1, 1);
+				d2_SetElementEnabled(r1, 1);
 			}
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
 		}
 		if (g_100f1dc != -1) {
-			fcn_00471af0(h, 0);
+			d2_SetFormVisibility(h, 0);
 			if (d2_CurrentElementId == r5) {
 				io_FormatTextBuffer(bufB, 0x1f51, *person, *person);
 				if (fcn_00526120(bufB, 1) != 0) {
@@ -339,20 +339,20 @@ label_2281:
 				}
 			} else if (d2_CurrentElementId == r1) {
 				if (d2_ShowGiftDialog(g_7f4ca0 + 540 * g_774970, person) != 0) {
-					fcn_00472640(r1, 0);
+					d2_SetElementEnabled(r1, 0);
 				}
 			} else if (d2_CurrentElementId == r2) {
 				if (d2_ShowChooseProfessionDialog2(g_7f4ca0 + 540 * g_774970, person) != 0) {
-					fcn_00472640(r2, 0);
+					d2_SetElementEnabled(r2, 0);
 				}
 			} else if (d2_CurrentElementId == r4) {
 				if (fcn_005dbb60(g_7f4ca0 + 540 * g_774970, person) != 0) {
-					fcn_00472640(r4, 0);
+					d2_SetElementEnabled(r4, 0);
 				}
 			} else if (d2_CurrentElementId == r3) {
 				d2_ShowMissionForEntity(*(int *)((char *)person + 4));
 			}
-			fcn_00471af0(h, 1);
+			d2_SetFormVisibility(h, 1);
 		}
 	} while (main_RunFrameLoop((int)fcn_005d1790, msg) != 0);
 	d2_DestroyForm(h);

@@ -5,7 +5,7 @@ char* __cdecl sb_FindVoiceBySample(int key, int* idx);
 int __cdecl msx_GetSampleStatus(int a1);
 
 /* ADDRESS: GOLDTL 0x004227c0 */
-char* __cdecl fcn_004227c0(void)
+char* __cdecl sb_FindOldestUnusedSample(void)
 {
 	char* o;
 	char* found;

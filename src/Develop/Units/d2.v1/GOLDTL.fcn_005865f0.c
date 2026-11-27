@@ -47,7 +47,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -85,7 +85,7 @@ int __cdecl d2_RunDomizilSkillConfirmDialog(char* entity, int* who, int kind)
 	item_idx = io_AppendText(0x4047);
 	yes = d2_GetWindowListItem(dlg, 2, item_idx);
 	no = d2_GetWindowListItem(dlg, 2, item_idx + 1);
-	fcn_00472640(yes, ok);
+	d2_SetElementEnabled(yes, ok);
 	g_100f1dc = -1;
 	do {
 		if (g_14ce8e0 != 0) {

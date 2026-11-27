@@ -3,7 +3,7 @@
 /* ADDRESS: GOLDTL 0x004cefb0 */
 
 /* Flat distance between a2's position and the position reached from a1. */
-float __cdecl fcn_004cefb0(char* source, char* target)
+float __cdecl gm_CalcEntityFlatDistance(char* source, char* target)
 {
 	char* p;
 	float a[2];

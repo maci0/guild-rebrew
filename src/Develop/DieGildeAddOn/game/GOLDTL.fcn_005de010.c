@@ -19,7 +19,7 @@ extern __int64 g_666018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-char* __cdecl fcn_005cd440(Req*, char*, int, int);
+char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_GenerateShuffledIndices(int, int*);
 void __cdecl cm_RequestModifyEntityLevel(int, int, int);
@@ -45,7 +45,7 @@ int __cdecl gm_ObjDrainRandomSkill(unsigned char* e, char* request)
 		req.size = 0x400;
 		req.kind = 6;
 		req.d = g_66601c;
-		r = fcn_005cd440(&req, text, 0, 0);
+		r = d2_OpenTargetPicker(&req, text, 0, 0);
 	}
 	else {
 		r = gm_LookupEntityRecordById(*(int*) (request + 4));

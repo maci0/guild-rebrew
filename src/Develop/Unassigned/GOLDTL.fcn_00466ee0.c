@@ -21,11 +21,11 @@ extern Tex_102d278 g_102d278[];
 extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
-int __cdecl fcn_00466cb0(int x, int y, int a3, int a4);
-void __cdecl fcn_0046f650(int slot, D2_WIN* parent);
+int __cdecl d2_CreateField(int x, int y, int a3, int a4);
+void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00466ee0 */
-int __cdecl fcn_00466ee0(int x, int y, int a3, int a4, int win)
+int __cdecl d2_AddWindowField(int x, int y, int a3, int a4, int win)
 {
 	D2_WIN* w;
 	int id;
@@ -38,8 +38,8 @@ int __cdecl fcn_00466ee0(int x, int y, int a3, int a4, int win)
 		ReportClientMessage(s_67d420);
 		return -1;
 	}
-	id = fcn_00466cb0(w->left + x, w->top - (*(int*) &w->pad3c[0x21c]) + y, a3, a4);
-	fcn_0046f650(id, w);
+	id = d2_CreateField(w->left + x, w->top - (*(int*) &w->pad3c[0x21c]) + y, a3, a4);
+	d2_InsertControlAfterWindow(id, w);
 	*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[id].parent) = (int) w;
 	((D2_CONTROL_TL*) g_1015ea0)[id].value_050 = ((D2_CONTROL_TL*) g_1015ea0)[w->slot].value_050;
 	g_102d278[((D2_CONTROL_TL*) g_1015ea0)[id].value_088].i[0] = (*(int*) &w->pad280[12]);

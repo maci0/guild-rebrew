@@ -2,9 +2,9 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 int __cdecl fcn_00423a50(unsigned int a0);
-int __cdecl fcn_004239e0(void);
+int __cdecl sbs_GetLastRootSample(void);
 char* __cdecl m_alloc(unsigned int size, char* file);
-int __cdecl fcn_00423920(unsigned int a0);
+int __cdecl sbs_GetFileSize(unsigned int a0);
 char* __cdecl strncpy(char* dst, const char* src, unsigned int n);
 
 /* ADDRESS: GOLDTL 0x00424420 */
@@ -21,7 +21,7 @@ unsigned int __cdecl fcn_00424420(unsigned int bankName)
 	if (v2 != 0) {
 		return 0xffffffff;
 	}
-	v2 = (char*) fcn_004239e0();
+	v2 = (char*) sbs_GetLastRootSample();
 	v3 = m_alloc(0x108, (char*) 0x679000);
 	v4 = bankName;
 	if (v2 != 0) {
@@ -49,7 +49,7 @@ unsigned int __cdecl fcn_00424420(unsigned int bankName)
 				rep stosb
 			}
 			strncpy(*(char**) (v2 + 0x104), (char*) bankName, 0x100);
-			v4 = fcn_00423920(v4);
+			v4 = sbs_GetFileSize(v4);
 			*(unsigned int*) (*(char**) (v2 + 0x104) + 0x100) = v4;
 			*(int*) (sbs_BankManager + 0x34) = *(int*) (sbs_BankManager + 0x34) + *(int*) (*(char**) (v2 + 0x104) + 0x100);
 			g_6b7d6c = g_6b7d6c + 1;
@@ -81,7 +81,7 @@ unsigned int __cdecl fcn_00424420(unsigned int bankName)
 				rep stosb
 			}
 			strncpy(*(char**) (sbs_BankManager + 0x38), (char*) bankName, 0x100);
-			v4 = fcn_00423920(v4);
+			v4 = sbs_GetFileSize(v4);
 			*(unsigned int*) (*(char**) (sbs_BankManager + 0x38) + 0x100) = v4;
 			*(int*) (sbs_BankManager + 0x34) = *(int*) (sbs_BankManager + 0x34) + *(int*) (*(char**) (sbs_BankManager + 0x38) + 0x100);
 			g_6b7d6c = g_6b7d6c + 1;

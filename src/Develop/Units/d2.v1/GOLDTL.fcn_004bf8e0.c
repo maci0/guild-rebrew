@@ -30,14 +30,14 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00533a60(int, int, int*, int, ...);
-void __cdecl fcn_0046f9b0(int, int);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
+void __cdecl d2_SetControlText(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00468cd0(int, int);
-void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
+void __cdecl d2_SetValueGaugeFlags(int, int);
+void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_004bfc70(int);
+void __cdecl d2_ClearRoutePointSlot(int);
 void __cdecl fcn_004be360(void);
 Node_4bf8e0* __cdecl fcn_004be1f0(Node_4bf8e0*);
 void __cdecl d2_AddRoutePointMarker(int, char*, Node_4bf8e0*, Node_4bf8e0*);
@@ -68,28 +68,28 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 	d2_SetForm(dlg, 4);
 	io_AppendText(*(unsigned char*) (p + 0x33) + 0x42ec);
 	d2_SetForm(dlg, 3);
-	fcn_00533a60(d2_CurrentWindowId, 0, ids, 3, g_14b5e9c, g_14b5eac, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
+	d2_CreateButtonRow(d2_CurrentWindowId, 0, ids, 3, g_14b5e9c, g_14b5eac, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
 	ok = ids[0];
 	clear = ids[1];
 	flip = ids[2];
-	fcn_0046f9b0(flip, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
+	d2_SetControlText(flip, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
 	d2_SetElementValue(list, 0, 4, *(unsigned char*) (p + 0x31));
-	fcn_00468cd0(list, 0x82);
-	fcn_00468bb0(list, 5, g_14b5eb4, g_14b5eb8, g_14b5ebc, g_14b5ec0, g_14b5ec4);
+	d2_SetValueGaugeFlags(list, 0x82);
+	d2_SetValueGaugeStepLabels(list, 5, g_14b5eb4, g_14b5eb8, g_14b5ebc, g_14b5ec0, g_14b5ec4);
 	while (main_RunFrameLoop(fcn_004bf8e0, 0x657c7) != 0) {
 		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == ok)) {
 			g_774654 = 1;
 		}
 		d2_SetForm(dlg, 4);
 		io_AppendText(*(unsigned char*) (p + 0x33) + 0x42ec);
-		fcn_0046f9b0(flip, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
+		d2_SetControlText(flip, g_14b5ed8[*(unsigned char*) (p + 0x33)]);
 		if (g_100f1dc != -1 && d2_CurrentElementId == clear) {
 			if (g_772908 != 0) {
 				rt_FreeRoutePoints((char*) g_772908);
 			}
 			for (i = 0; i < 8; i++) {
 				if (g_10058a0[i].id != -1) {
-					fcn_004bfc70(i);
+					d2_ClearRoutePointSlot(i);
 				}
 			}
 			g_772900 = 0;

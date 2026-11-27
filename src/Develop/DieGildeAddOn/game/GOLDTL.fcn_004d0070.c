@@ -28,7 +28,7 @@ int __cdecl gm_GetEntityControlMask(int, char*);
 unsigned char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl fcn_0043a3f0(char*, char*, V43a3f0);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
-float __cdecl fcn_004cefb0(char*, char*);
+float __cdecl gm_CalcEntityFlatDistance(char*, char*);
 char* __cdecl gm_FindEntitySlot(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
@@ -120,7 +120,7 @@ void __cdecl cut_UpdateCombatEffects(void)
 					if (*(char*) (g + 8) == 0) {
 						continue;
 					}
-					v = fcn_004cefb0(e, *(char**) (*(char**) (g + 0x184) + 0x34));
+					v = gm_CalcEntityFlatDistance(e, *(char**) (*(char**) (g + 0x184) + 0x34));
 					if (v < 100.0f) {
 						found = 1;
 						if (v < best) {

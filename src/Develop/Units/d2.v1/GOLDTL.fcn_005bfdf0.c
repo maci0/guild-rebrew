@@ -40,7 +40,7 @@ void __cdecl d2_SortCrimeRecordsByKind(int n, Rec5bfd* arr);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
+void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c91c0(int, int, int, int, int);
@@ -78,7 +78,7 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 	d2_SetForm(h, 2);
 	w = d2_CurrentWindowId;
 	d2_SetForm(h, 4);
-	fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
+	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, w, 0x767);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1742, *e);

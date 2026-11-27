@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00441720 */
-unsigned char __cdecl fcn_00441720(int* a0, float* worldPos, unsigned int a2, unsigned int* gridX, unsigned int* gridZ, float* heightOut)
+unsigned char __cdecl d3_GetFloorHeight(int* a0, float* worldPos, unsigned int a2, unsigned int* gridX, unsigned int* gridZ, float* heightOut)
 {
 	float pp[4];
 	float v13;

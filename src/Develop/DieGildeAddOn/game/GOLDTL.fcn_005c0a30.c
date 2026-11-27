@@ -17,7 +17,7 @@ extern int g_14ab080;
 extern __int64 g_666018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_005cd440(Desc*, int, int, void*);
+void __cdecl d2_OpenTargetPicker(Desc*, int, int, void*);
 void __cdecl d2_RunStraftatAccuseDialog(void);
 
 void __cdecl d2_OpenStraftatAccusePicker(void)
@@ -29,5 +29,5 @@ void __cdecl d2_OpenStraftatAccusePicker(void)
 	d.w = (*(int*)&g_666018);
 	d.caps = 6;
 	d.h = g_66601c;
-	fcn_005cd440(&d, g_14ab080, 0, d2_RunStraftatAccuseDialog);
+	d2_OpenTargetPicker(&d, g_14ab080, 0, d2_RunStraftatAccuseDialog);
 }

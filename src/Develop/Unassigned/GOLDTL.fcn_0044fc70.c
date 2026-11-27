@@ -10,7 +10,7 @@ void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl d3_ComputeBoundsAndBox(char*);
 void __cdecl d3_CalculateMeshNormals(char*);
-int __cdecl fcn_0044fba0(char*, char*);
+int __cdecl d3_CalcMeshBinarySize(char*, char*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 int __cdecl vfs_ReadData(char*, int, int, char*);
 unsigned int __cdecl vfs_fwrite(void*, int, int, char*);
@@ -385,7 +385,7 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 	vfs_fwrite(buf, len, 1, stream);
 	m_FreeTracked(buf);
 	vfs_WriteByte(stream, 0x2d);
-	fcn_00401360(stream, fcn_0044fba0((char*) obj, (char*) &info));
+	fcn_00401360(stream, d3_CalcMeshBinarySize((char*) obj, (char*) &info));
 	fcn_00401360(stream, 0xfab50005);
 	fcn_00401360(stream, obj->anzahl_mat);
 	fcn_00401360(stream, obj->anzahl_poi);

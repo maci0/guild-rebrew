@@ -18,7 +18,7 @@ void __cdecl ai_EvaluateCardGameFold(void);
 void __cdecl fcn_004a86b0(void);
 void __cdecl fcn_004a7b40(void);
 void __cdecl ai_PlayCardGameTurn(void);
-void __cdecl fcn_004a8700(void);
+void __cdecl gm_DealFifthCard(void);
 void __cdecl fcn_004a87b0(void);
 
 short __cdecl gm_StepCardGameRound(void)
@@ -59,7 +59,7 @@ short __cdecl gm_StepCardGameRound(void)
 		((Seq*)g_1007cd4)->state++;
 		return 0x10;
 	case 7:
-		fcn_004a8700();
+		gm_DealFifthCard();
 		((Seq*)g_1007cd4)->state++;
 		break;
 	case 8:

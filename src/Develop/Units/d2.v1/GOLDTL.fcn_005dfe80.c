@@ -35,7 +35,7 @@ int __cdecl d2_CreateRadioGroup(int);
 void __cdecl d2_AddToRadioGroup(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
-void __cdecl fcn_004707d0(int);
+void __cdecl d2_BringFormToFront(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 
@@ -83,7 +83,7 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 	while (main_RunFrameLoop(fcn_005dfe80, wflags)) {
 		d2_UpdateRadioGroup(ctx);
 		if (flags & 0x40) {
-			fcn_004707d0(h);
+			d2_BringFormToFront(h);
 		}
 		if (g_100f1dc != 2) {
 			if (g_100f1dc == 1) {

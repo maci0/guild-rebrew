@@ -2,7 +2,7 @@
 
 void __cdecl cm_EnqueueClientPacket(void*);
 
-void __cdecl fcn_004c5770(void)
+void __cdecl cm_RequestExitToFrameLoop(void)
 {
 	char buf[0x9c];
 

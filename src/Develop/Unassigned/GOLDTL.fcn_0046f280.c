@@ -4,7 +4,7 @@ extern char g_10161bc[];
 
 void __cdecl d2_DestroyElement(int);
 
-int __cdecl fcn_0046f280(int index)
+int __cdecl d2_CloseWindow(int index)
 {
 	char* p;
 

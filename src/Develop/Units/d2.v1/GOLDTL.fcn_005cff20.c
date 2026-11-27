@@ -74,7 +74,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0046e830(int, int, int, int, int);
+void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
@@ -83,9 +83,9 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 int __cdecl fcn_005cf720(unsigned short, unsigned short, void*, int);
 int __cdecl fcn_0046fac0(int, int, char*, int);
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
@@ -177,7 +177,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 		d2_SetForm(dlg, 2);
 		v = d2_CurrentWindowId;
 		d2_SetForm(dlg, 0);
-		fcn_0046e830(-1, -1, d2_CurrentWindowId, v, 0x767);
+		d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, v, 0x767);
 	}
 	g_100f1dc = -1;
 	do {
@@ -221,11 +221,11 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 					d2_SetElementFont(name, 0x56);
 					((D2_CONTROL_TL*) (g_1015ea0))[btn].value_05c = shown;
 					((D2_CONTROL_TL*) (g_1015ea0))[btn].value_060 = (shown == 0);
-					slider = fcn_004677e0(0x8c, dy + y + 4, 0x40, 0, 0x64,
+					slider = d2_AddWindowValueGauge(0x8c, dy + y + 4, 0x40, 0, 0x64,
 					                      0x75, 0x442, d2_CurrentWindowId);
 					s->slider = slider;
 					fcn_00472380(slider, 0, 0x64, progress);
-					fcn_00472640(slider, 0);
+					d2_SetElementEnabled(slider, 0);
 					fcn_00469c40(((GOLDTL_Screen5cff*) g_77255c)->x
 					                 - (((D2_CONTROL_TL*) (g_1015ea0))[slider].width - width) / 2
 					                 + 0x96,

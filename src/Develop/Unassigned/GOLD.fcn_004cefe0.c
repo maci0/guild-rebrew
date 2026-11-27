@@ -3,7 +3,7 @@
 
 int __cdecl fcn_004758e0(int);
 
-void __cdecl fcn_004cefe0(void)
+void __cdecl d2_DestroyHudForm(void)
 {
 	int h;
 	h = *(int*) 0x60cb40;

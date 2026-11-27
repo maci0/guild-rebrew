@@ -16,7 +16,7 @@ void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl fcn_00476b60(void);
 int __cdecl d2_ClearWindowChildren(int, int);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
@@ -78,7 +78,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 		}
 		if (*(int*) (0x102cbc8 + n) != v18 || v2) {
 			d2_SetForm(g, 2);
-			d2_ClearWindowChildren(fcn_00472830(g, 2), 0);
+			d2_ClearWindowChildren(d2_GetFormWindow(g, 2), 0);
 			for (i = 0; i < 0x30; i++) {
 				list[i] = -1;
 			}

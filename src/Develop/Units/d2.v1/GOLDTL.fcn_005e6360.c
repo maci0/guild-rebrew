@@ -13,14 +13,14 @@ extern int d2_CurrentElementId;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl fcn_005263d0(int, int, int);
-int __cdecl fcn_005cd440(char*, int, int, void*);
+int __cdecl d2_OpenTargetPicker(char*, int, int, void*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00533a60(int, int, int*, int, ...);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl d2_GetControlValue(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CheckActionBlocker(void*, int);
@@ -57,7 +57,7 @@ void __cdecl fcn_005e6360(char* entity)
     query[1] = 0x400;
     query[4] = 6;
     query[2] = g_666018; query[3] = g_66601c;
-    target = (char*) fcn_005cd440((char*) query, *(int*) 0x14b5b44, 0, 0);
+    target = (char*) d2_OpenTargetPicker((char*) query, *(int*) 0x14b5b44, 0, 0);
     if (target == 0) {
         d3_EndCameraAndUiMode();
         return;
@@ -68,10 +68,10 @@ void __cdecl fcn_005e6360(char* entity)
     d2_SetForm(dialog, 0);
     fcn_005340f0(d2_CurrentWindowId);
     d2_SetForm(dialog, 2);
-    control = fcn_004677e0(0x57, 7, 200, 0, 100, 0x7b, 2, d2_CurrentWindowId);
+    control = d2_AddWindowValueGauge(0x57, 7, 200, 0, 100, 0x7b, 2, d2_CurrentWindowId);
     d2_SetElementValue(control, 2, 8, 2, 1);
     d2_SetForm(dialog, 3);
-    fcn_00533a60(d2_CurrentWindowId, 0, ids, 2, *(int*) 0x14b5b50, *(int*) 0x14b5b54);
+    d2_CreateButtonRow(d2_CurrentWindowId, 0, ids, 2, *(int*) 0x14b5b50, *(int*) 0x14b5b54);
     do {
         amount = d2_GetControlValue(control);
         d2_SetForm(dialog, 1);

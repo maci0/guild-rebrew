@@ -39,7 +39,7 @@ extern int g_7e2708;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl gm_GetSeason(char*);
 void __cdecl d3_ResetWorldSceneState(void);
-void __cdecl fcn_0043c2c0(int* a0);
+void __cdecl d3_BuildFloorGeometry(int* a0);
 void __cdecl d2_ChooseWappen(void);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
@@ -63,7 +63,7 @@ int __cdecl gm_IsWarehouse(void* a0);
 void __cdecl gm_RunGebaeudeVisit(int a, int b);
 void __cdecl fcn_005a3b30(int a0);
 void __cdecl fcn_004c3a10(void);
-void __cdecl fcn_00475220(char* a);
+void __cdecl d2_SetMouseTooltip(char* a);
 void __cdecl fcn_00533a40(char* a);
 void __cdecl fcn_00530510(void);
 void __cdecl fcn_004125c0(int x, int y);
@@ -91,7 +91,7 @@ void __cdecl d2_RunWorldHudLoop(void)
 	g_677508 = -1;
 	d3_ResetWorldSceneState();
 	if (g_773ddc) {
-		fcn_0043c2c0((int*) g_6b8300);
+		d3_BuildFloorGeometry((int*) g_6b8300);
 		g_773ddc = 0;
 	}
 	savedRight = d2_MouseRightBoundary;
@@ -243,7 +243,7 @@ label_59a83a:
 	g_772d10 = 0;
 	g_774964 = 0;
 	fcn_004c3a10();
-	fcn_00475220(g_6b5c60);
+	d2_SetMouseTooltip(g_6b5c60);
 	fcn_00533a40(g_6b5c60);
 	fcn_00530510();
 	g_7725c4 = 0;

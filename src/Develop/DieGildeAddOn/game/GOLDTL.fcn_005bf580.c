@@ -32,10 +32,10 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl fcn_0046fac0(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int, int);
-void __cdecl fcn_00468bb0(int, int, int, int, int);
-void __cdecl fcn_00533a60(int, int, int*, int, int, int);
+void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl io_AppendText(int, ...);
@@ -98,11 +98,11 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[row].value_06c)) = 1;
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[row].width)) = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width;
 	d2_SetElementFont(row, 0x54);
-	row2 = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 0x82, d2_CurrentWindowId);
+	row2 = d2_AddWindowValueGauge(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 0x82, d2_CurrentWindowId);
 	fcn_00472380(row2, 0, 2, 0, 1);
-	fcn_00468bb0(row2, 3, g_14b5e0c, g_14b5e10, g_14b5e14);
+	d2_SetValueGaugeStepLabels(row2, 3, g_14b5e0c, g_14b5e10, g_14b5e14);
 	d2_SetForm((int) h, 3);
-	fcn_00533a60(d2_CurrentWindowId, 0, sel, 2, g_14b5e04, g_14b5e08);
+	d2_CreateButtonRow(d2_CurrentWindowId, 0, sel, 2, g_14b5e04, g_14b5e08);
 	while (main_RunFrameLoop((void*) d2_RunSpionageDialog, 0x677c7) != 0) {
 		if (g_14ce8e0 != 0 || *(unsigned short*) rec == 0xffff) {
 			g_774654 = 1;

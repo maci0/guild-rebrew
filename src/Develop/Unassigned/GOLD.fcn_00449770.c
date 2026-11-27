@@ -5,7 +5,7 @@
 void __cdecl d3_VisitSceneObjectsUntilStopped(int, char*, int, void*, void*);
 int __cdecl fcn_00449710(char*, char**);
 
-char* __cdecl fcn_00449770(char* o, int flags, char* ptr, char* name)
+char* __cdecl d3_FindSceneObjectI(char* o, int flags, char* ptr, char* name)
 {
 	char* st[3];
 	int saved;

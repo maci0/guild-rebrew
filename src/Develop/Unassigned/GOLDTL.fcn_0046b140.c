@@ -29,7 +29,7 @@ extern int g_67d388;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046b140 */
-int __cdecl fcn_0046b140(int x, int y)
+int __cdecl d2_FindTopElementAt(int x, int y)
 {
 	int i;
 	int hidden;

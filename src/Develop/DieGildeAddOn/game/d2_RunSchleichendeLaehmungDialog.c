@@ -29,7 +29,7 @@ extern int g_14ce8e0;
 extern int d2_CurrentElementId;
 
 int __cdecl gm_WalkEntityChain(unsigned short);
-char *__cdecl fcn_005cd440(int *, int, int, int);
+char *__cdecl d2_OpenTargetPicker(int *, int, int, int);
 int __cdecl he_HasNoActiveAction0x9b(char *);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl fcn_00526120(char *, int);
@@ -76,7 +76,7 @@ void __cdecl d2_RunSchleichendeLaehmungDialog(char *gebaeude)
     query[0] = 1;
     query[1] = 0x400;
     query[4] = 6;
-    sel = fcn_005cd440(query, *(int *) 0x14b53d0, 0, 0);
+    sel = d2_OpenTargetPicker(query, *(int *) 0x14b53d0, 0, 0);
     if (he_HasNoActiveAction0x9b(sel) == 0) {
         io_FormatTextBuffer(text, 0x4030, *(unsigned short *) sel);
         fcn_00526120(text, 0);

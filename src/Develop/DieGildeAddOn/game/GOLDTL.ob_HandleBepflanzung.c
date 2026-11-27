@@ -20,7 +20,7 @@ extern double g_662908;
 unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_00470820(int a, int b, char* name);
-void __cdecl fcn_00471af0(int a, int b);
+void __cdecl d2_SetFormVisibility(int a, int b);
 void __cdecl d2_SetForm(int a, int b);
 int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 void __cdecl d2_AddToRadioGroup(int a, int b);
@@ -149,7 +149,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 	}
 	v38 = v17;
 	if (g_6a25b8 != -1) {
-		fcn_00471af0(g_6a25b8, 0);
+		d2_SetFormVisibility(g_6a25b8, 0);
 	}
 	d2_SetForm(v17, 1);
 	v17 = 0;
@@ -300,7 +300,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			}
 			d2_ClearRadioGroup(v24);
 			if (g_6a25b8 != -1) {
-				fcn_00471af0(g_6a25b8, 1);
+				d2_SetFormVisibility(g_6a25b8, 1);
 			}
 			d2_DestroyForm(v38);
 			return;

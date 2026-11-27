@@ -31,11 +31,11 @@ int __cdecl fcn_00413160(void);
 int __cdecl d3_SelectSceneContext(int a0, int a1);
 int __cdecl fcn_00442e30(void);
 int __cdecl d3_LoadScene(char *name, int a1, int a2);
-int __cdecl fcn_00471af0(int a0, int a1);
-int __cdecl fcn_00476970(int a0);
+int __cdecl d2_SetFormVisibility(int a0, int a1);
+int __cdecl d2_ClearSurface(int a0);
 int __cdecl gm_RandomMod(unsigned short a0);
-int __cdecl fcn_00469e30(int a0);
-int __cdecl fcn_0046ac30(void);
+int __cdecl d2_SetBackdropResource(int a0);
+int __cdecl d2_RenderAndPresentFrame(void);
 void __cdecl cm_RequestSysMessage(char id, char *args);
 int __cdecl cm_SendAllocClientSpieler(int a0, int a1, short a2, char a3, int a4,
                          char a5, char a6, char *a7, char *a8);
@@ -86,16 +86,16 @@ int __cdecl ls_StartNetworkGame(char *path)
     *(int *) 0x7725c8 = 0;
     d3_SelectSceneContext(fcn_00413160(), 0);
     d3_LoadScene("scenes/*network.ed3", 0, 0);
-    fcn_00471af0(*(int *) 0x7e1d40, 0);
+    d2_SetFormVisibility(*(int *) 0x7e1d40, 0);
     *(int *) 0x7725c8 = 1;
     fcn_00442e30();
     d3_SelectSceneContext(engine, 0);
-    fcn_00471af0(*(int *) 0x7e1d40, 1);
+    d2_SetFormVisibility(*(int *) 0x7e1d40, 1);
     WritePrivateProfileStringA("Network", "Name", (char *) 0x7e23ea, file);
     WritePrivateProfileStringA("Network", "Familienname", (char *) 0x7e240a, file);
-    fcn_00476970(*(int *) &g_77250c);
-    fcn_00469e30(((unsigned short) gm_RandomMod(2) != 1) ? 0x791 : 0x78e);
-    fcn_0046ac30();
+    d2_ClearSurface(*(int *) &g_77250c);
+    d2_SetBackdropResource(((unsigned short) gm_RandomMod(2) != 1) ? 0x791 : 0x78e);
+    d2_RenderAndPresentFrame();
     if (*(int *) &g_77494c & 1) {
         msg[0] = *(unsigned char *) &g_6a375c;
         cm_RequestSysMessage(6, (char *) msg);

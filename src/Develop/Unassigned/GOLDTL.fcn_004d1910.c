@@ -11,7 +11,7 @@ extern struct ent_4d1910 g_9b4bc0[32];
 
 void __cdecl fcn_00414be0(char*, int, int, int);
 
-void __cdecl fcn_004cfa80(void);
+void __cdecl d2_CloseAllEntityStatusPopups(void);
 void __cdecl fcn_004d0050(void);
 
 
@@ -28,6 +28,6 @@ void __cdecl fcn_004d1910(void)
 			fcn_00414be0(*(char**) (g_9b4bc0[i].obj + 0x34), 0, 0, 0);
 	}
 	ResetDisplayCounters();
-	fcn_004cfa80();
+	d2_CloseAllEntityStatusPopups();
 	fcn_004d0050();
 }

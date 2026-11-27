@@ -54,7 +54,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00525ef0(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
@@ -100,7 +100,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 					g_774654 = 1;
 				} else if (g_100f1dc == 1 && ((*(char*)&g_7747b0) & 0x80) == 0) {
 					io_FormatTextBuffer(text, 0xfe6, *item * 2 + 0x9a8, *item * 2 + 0x9a8);
-					fcn_00471af0(dlg, 0);
+					d2_SetFormVisibility(dlg, 0);
 					if (fcn_00526120(text, 1) != 0) {
 						for (i = 0; i < 6; i++) {
 							if (((Btn*)g_776c60)[i].item != 0 && (id = d2_GetControlValue(((Btn*)g_776c60)[i].btn)) != 0) {
@@ -110,7 +110,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 						}
 						ResetDisplayCounters();
 					}
-					fcn_00471af0(dlg, 1);
+					d2_SetFormVisibility(dlg, 1);
 					buy = 0;
 					g_774654 = 1;
 				}

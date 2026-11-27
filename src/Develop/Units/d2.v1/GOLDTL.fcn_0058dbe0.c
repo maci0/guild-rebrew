@@ -13,11 +13,11 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
-void __cdecl fcn_00468cd0(int, int);
-void __cdecl fcn_00468b80(int, int);
-void __cdecl fcn_00468bb0(int, int, int, int, int);
+void __cdecl d2_SetValueGaugeFlags(int, int);
+void __cdecl d2_SetValueGaugeLabel(int, int);
+void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_CheckActionBlocker(int, int);
@@ -94,19 +94,19 @@ void __cdecl fcn_0058dbe0(int a0)
 	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(dialogId, 1);
 	io_AppendText(0x40b7, 0x40b6, *(unsigned short*) (rec + 0x27), rec);
-	firstControl = fcn_004677e0(100, 0xa0, 200, 0, 2, 0x7b, 0x82,
+	firstControl = d2_AddWindowValueGauge(100, 0xa0, 200, 0, 2, 0x7b, 0x82,
 	                  *(int*) &d2_CurrentWindowId);
 	fcn_00472380(firstControl, 0, 2, 0);
-	fcn_00468cd0(firstControl, 0x82);
-	fcn_00468b80(firstControl, *(int*) 0x14b561c);
-	fcn_00468bb0(firstControl, 3, *(int*) 0x14b5620, *(int*) 0x14b5624,
+	d2_SetValueGaugeFlags(firstControl, 0x82);
+	d2_SetValueGaugeLabel(firstControl, *(int*) 0x14b561c);
+	d2_SetValueGaugeStepLabels(firstControl, 3, *(int*) 0x14b5620, *(int*) 0x14b5624,
 	             *(int*) 0x14b5628);
-	secondControl = fcn_004677e0(100, 0xbe, 200, 0, 2, 0x7b, 0x82,
+	secondControl = d2_AddWindowValueGauge(100, 0xbe, 200, 0, 2, 0x7b, 0x82,
 	                  *(int*) &d2_CurrentWindowId);
 	fcn_00472380(secondControl, 0, 2, 0);
-	fcn_00468cd0(secondControl, 0x82);
-	fcn_00468b80(secondControl, *(int*) 0x14b562c);
-	fcn_00468bb0(secondControl, 3, *(int*) 0x14b5630, *(int*) 0x14b5634,
+	d2_SetValueGaugeFlags(secondControl, 0x82);
+	d2_SetValueGaugeLabel(secondControl, *(int*) 0x14b562c);
+	d2_SetValueGaugeStepLabels(secondControl, 3, *(int*) 0x14b5630, *(int*) 0x14b5634,
 	             *(int*) 0x14b5638);
 	d2_SetForm(dialogId, 2);
 	v30 = io_AppendText(0x40be);

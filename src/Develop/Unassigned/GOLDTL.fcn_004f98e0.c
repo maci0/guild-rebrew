@@ -2,7 +2,7 @@ void __cdecl io_FormatTextBuffer(void* buffer, int format, ...);
 void __cdecl gm_HandleAbbitte(void* rec, void* ctx);
 
 /* ADDRESS: GOLDTL 0x004f98e0 */
-int __cdecl fcn_004f98e0(char* rec, int* ctx)
+int __cdecl gm_HandleAbbittePrivilege(char* rec, int* ctx)
 {
 	int action;
 

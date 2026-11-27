@@ -3,7 +3,7 @@
 int __cdecl msx_FindSampleHandleIndex(int);
 typedef int (__stdcall* f)(int);
 
-int __cdecl fcn_0042a8e0(int a1, int* out)
+int __cdecl msx_GetSamplePlaybackRate(int a1, int* out)
 {
 	int result = 0;
 

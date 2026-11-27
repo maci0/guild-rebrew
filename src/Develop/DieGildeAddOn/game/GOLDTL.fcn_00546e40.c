@@ -1,13 +1,13 @@
 #include "Develop/DieGildeAddOn/game/event_deal.h"
 
-void __cdecl fcn_00546e40(int a1, int a2, char* a3, int a4, void* a5);
+void __cdecl he_AddEventDeal(int id, int owner, char* name, int amount, void* pos);
 
 
 
 
 #include <string.h>
 
-void __cdecl fcn_00546e40(int id, int owner, char* name, int amount, void* pos)
+void __cdecl he_AddEventDeal(int id, int owner, char* name, int amount, void* pos)
 {
 	int i;
 	EVENT_DEAL* t;

@@ -3,9 +3,9 @@
 void __cdecl gm_GenerateShuffledIndices(int, int);
 
 /* ADDRESS: GOLDTL 0x004dfef0 */
-void __cdecl fcn_004dfef0(int name)
+void __cdecl cut_InitShufflePool(int count)
 {
-	gm_GenerateShuffledIndices(name, 0x9afe00);
-	*(int*) 0x68bfc8 = name;
+	gm_GenerateShuffledIndices(count, 0x9afe00);
+	*(int*) 0x68bfc8 = count;
 	*(int*) 0x772f60 = 0;
 }

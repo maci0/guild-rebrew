@@ -6,11 +6,11 @@ int __cdecl fcn_0052dee0(int, int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_0057e880(int, char*, int, int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00533a60(int, int, int*, int, ...);
+int __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl d2_SetSlotVisibility(int, int);
 float __cdecl fcn_0050bbb0(int);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
+int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 void __cdecl fcn_00533f40(int, int, int, int);
 void __cdecl io_AppendText(int, ...);
@@ -30,11 +30,11 @@ int __cdecl fcn_00597940(int, int, int, int, int);
 int __cdecl gm_IsWarehouse(int);
 int __cdecl gm_CanTradeWithObject(int, int);
 void __cdecl d2_DestroyElement(int);
-void __cdecl fcn_00469880(int);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_RemoveElement(int);
+void __cdecl d2_CloseWindow(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int, ...);
-int __cdecl fcn_004677e0(int, ...);
-int __cdecl fcn_0046f100(int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, ...);
+int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 int __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_005462a0(void);
 int __cdecl fcn_00502850(void);
@@ -46,16 +46,16 @@ int __cdecl cm_BeginPacketFieldDelta(char*, int);
 int __cdecl cm_AppendCommandSyncField(int, int, int, void*);
 void __cdecl cm_SendSetAttribute(void);
 void __cdecl fcn_00533a40(int);
-int __cdecl fcn_0046f9b0(int, int);
-int __cdecl fcn_00471af0(int, int);
+int __cdecl d2_SetControlText(int, int);
+int __cdecl d2_SetFormVisibility(int, int);
 void __cdecl fcn_004bfe00(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl gm_GetStorageSlotCapacity(int, int);
-int __cdecl fcn_00466ee0(int, int, int, int, int);
+int __cdecl d2_AddWindowField(int, int, int, int, int);
 int __cdecl fcn_0064d41a(int, int, int, int, int);
 int __cdecl d2_UpdateActiveItemSlots(void);
 void __cdecl ResetDisplayCounters(void);
-int __cdecl fcn_00473690(int, int);
+int __cdecl d2_AddDisplayCounter(int, int);
 int __cdecl CountDisplayCounters(void);
 void __cdecl d2_ClearSelectedControl(void);
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
@@ -370,7 +370,7 @@ l_after:
 
 	if (f.v70 != 0) {
 		/* 0x5bad0e: four row ids through the shared layout helper */
-		fcn_00533a60(*(int*) 0x772514, 0, &f.v138, 4,
+		d2_CreateButtonRow(*(int*) 0x772514, 0, &f.v138, 4,
 			*(int*) 0x14a566c, *(int*) 0x14a5668,
 			*(int*) 0x14a5664, *(int*) 0x14a5670);
 		f.v6c = f.v140;
@@ -379,7 +379,7 @@ l_after:
 		f.v54 = f.v13C;
 	} else {
 		/* 0x5bad6d: one row id, then the entity's own selection field */
-		fcn_00533a60(*(int*) 0x772514, 0, &f.v138, 1, *(int*) 0x14a566c);
+		d2_CreateButtonRow(*(int*) 0x772514, 0, &f.v138, 1, *(int*) 0x14a566c);
 		f.v6c = -1;
 		f.v58 = -1;
 		f.v34 = *(int*) (f.v14 + 0x65);
@@ -452,7 +452,7 @@ l_after:
 
 	/* 0x5baf75: the item rectangle and its definition-table entry */
 	fcn_00533f40(0x270, 0x15c, *(int*) 0x772514,
-	             fcn_00472830(f.v2c, 2, 0x5e2, &f.v130, &f.v134, &f.vB4));
+	             d2_GetFormWindow(f.v2c, 2, 0x5e2, &f.v130, &f.v134, &f.vB4));
 	*(int*) (*(int*) 0x1015ea0 + f.vB4 * 0x2f4 + 0x84) = 0x54;
 	d2_SetForm(f.v2c, 3);
 
@@ -578,20 +578,20 @@ l_sel:
 			do {
 				if (*(int*) idx != -1) {
 					d2_DestroyElement(*(int*) idx);
-					fcn_00469880(*(int*) (idx + 0xc));
+					d2_RemoveElement(*(int*) (idx + 0xc));
 					*(int*) idx = -1;
 					*(int*) (idx + 0xc) = -1;
 				}
 				idx += 4;
 			} while (--j != 0);
-			fcn_00469880(e->f14);
+			d2_RemoveElement(e->f14);
 			d2_DestroyElement(e->f18);
 			d2_DestroyElement(e->f1c);
 			e->f14 = -1;
 			e->f18 = -1;
 			e->f1c = -1;
 			if (e->f10 != -1) {
-				fcn_0046f280(e->f10);
+				d2_CloseWindow(e->f10);
 				e->f10 = -1;
 			}
 		}
@@ -663,10 +663,10 @@ l_next:
 			}
 		}
 		d2_SetElementFont(e->f1c, 0x54);
-		e->f14 = fcn_004677e0(0x4b, j + 0x59, 0x50, 0, 0x64, 0x65, 0x2a,
+		e->f14 = d2_AddWindowValueGauge(0x4b, j + 0x59, 0x50, 0, 0x64, 0x65, 0x2a,
 		                      *(int*) 0x772514);
 		j += 0x26;
-		e->f10 = fcn_0046f100(0x10, j, 0xc8, 0x40, 0x10, *(int*) 0x772514);
+		e->f10 = d2_CreateChildWindow(0x10, j, 0xc8, 0x40, 0x10, *(int*) 0x772514);
 		d2_SetElementFont(*(int*) (0x10161bc + e->f10 * 0x3cc), 0x53);
 		*(int*) (*(int*) 0x1015ea0 + f.v1c * 0x2f4 + 0x5c) = 1;
 		i = he_StartHandlungSearch(2, 3, *(int*) (f.v20 + 2), 0, 0x11);
@@ -766,14 +766,14 @@ l_slot:
 l_slot_handles:
 	/* 0x5bb937: item handle, selection frame and the list of owned rows */
 	if (e->f1c != -1) {
-		fcn_0046f9b0(e->f1c, (*(char*) (idx + 0x33) != 0)
+		d2_SetControlText(e->f1c, (*(char*) (idx + 0x33) != 0)
 		             ? *(int*) 0x14b5ecc : *(int*) 0x14b5ec8);
 	}
 	if (*(int*) 0x100f1dc != -1 && *(int*) 0x67d370 == e->f1c
 	    && (*(char*) (idx + 0x20) & 1) == 0) {
-		fcn_00471af0(f.v2c, 0);
+		d2_SetFormVisibility(f.v2c, 0);
 		fcn_004bfe00(idx);
-		fcn_00471af0(f.v2c, 1);
+		d2_SetFormVisibility(f.v2c, 1);
 	}
 	if ((*(char*) (idx + 0x13) & 0x20) != 0 || (*(char*) (idx + 0x20) & 1) != 0) {
 		e->f08 = 0;
@@ -798,7 +798,7 @@ l_slot_handles:
 			if (*(int*) ((char*) e + 0xd8 + f.v20 * 4) != -1) {
 				d2_DestroyElement(*(int*) ((char*) e + 0xd8 + f.v20 * 4));
 				if (*(int*) ((char*) e + 0xe4 + f.v20 * 4) != -1) {
-					fcn_00469880(*(int*) ((char*) e + 0xe4 + f.v20 * 4));
+					d2_RemoveElement(*(int*) ((char*) e + 0xe4 + f.v20 * 4));
 				}
 				*(int*) ((char*) e + 0xd8 + f.v20 * 4) = -1;
 				*(int*) ((char*) e + 0xe4 + f.v20 * 4) = -1;
@@ -854,11 +854,11 @@ l_slot_handles:
 					j -= *(int*) (0x1015f44 + *(int*) 0x772514 * 0x3cc);
 					j += *(int*) (*(int*) 0x1015ea0 + e->f0c * 0x2f4 + 0x10);
 					f.v1c = ((int) (*(short*) (*(int*) 0x772500 + 0x1ee7a)) + 0x16) * f.v30 + 0x1e;
-					e->fE4[f.v10 + i] = fcn_004677e0(j - 8, f.v1c - 5, 0x2f, 0, f.v30,
+					e->fE4[f.v10 + i] = d2_AddWindowValueGauge(j - 8, f.v1c - 5, 0x2f, 0, f.v30,
 					                                 0x6a, 0x2d, *(int*) 0x772514);
 					{
 						int d;
-						d = fcn_00466ee0(j, f.v1c,
+						d = d2_AddWindowField(j, f.v1c,
 						                 (int) (*(unsigned short*) (f.v15C + 0x44 + f.v24 * 2)) + 0xdf,
 						                 0x8a, *(int*) 0x772514);
 						e->fD8[f.v10 + i] = d;
@@ -981,7 +981,7 @@ l_da9:
 			idx = (int) e->fD8;
 			do {
 				if (*(int*) (idx + 0xc) != -1) {
-					fcn_00473690(*(int*) (*(int*) 0x1015ea0 + *(int*) idx * 0x2f4 + 8),
+					d2_AddDisplayCounter(*(int*) (*(int*) 0x1015ea0 + *(int*) idx * 0x2f4 + 8),
 					             d2_GetControlValue(*(int*) idx));
 				}
 				idx += 4;
@@ -1563,7 +1563,7 @@ l_5bcf9f:
 		*(int*) (f.v210 + 0x10) = 0;
 		*(int*) (f.v210 + 0xc) = 0x40000001;
 		*(int*) (f.v210 + 8) = (int) 0xf07d7fb0;
-		fcn_00471af0(f.v2c, 0);
+		d2_SetFormVisibility(f.v2c, 0);
 		j = 0;
 		e = f.v6D8;
 		for (i = 0x10; i != 0; i--, e++) {
@@ -1646,7 +1646,7 @@ l_5bd240:
 			fcn_00533a40((int) (f.v210 + 0x138));
 		}
 l_5bd26b:
-		fcn_00471af0(f.v2c, 1);
+		d2_SetFormVisibility(f.v2c, 1);
 		goto l_5bd62f;
 }
 	/* 0x5bd27c: the selected row, routed by the dialog that owns it */
@@ -1727,9 +1727,9 @@ l_5bd26b:
 		} while (--f.v1c != 0);
 	} else if (f.vD0 == f.v6c && *(signed char*) 0x7747b0 >= 0) {
 		/* 0x5bd550: the slot list of the owning dialog is redrawn */
-		fcn_00471af0(f.v2c, 0);
+		d2_SetFormVisibility(f.v2c, 0);
 		d2_ShowNewCartDialog(f.vCC);
-		fcn_00471af0(f.v2c, 1);
+		d2_SetFormVisibility(f.v2c, 1);
 		if (f.v94 == 0) {
 			goto l_5bd632;
 		}

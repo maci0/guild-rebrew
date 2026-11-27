@@ -3,7 +3,7 @@
 int __cdecl fcn_004f5c40(int, int, int*);
 void __cdecl gs_RemoveStraftat(int, int);
 
-int __cdecl fcn_004f5c70(int key)
+int __cdecl gs_RemoveEntityStraftaten(int key)
 {
 	int i;
 	int v;

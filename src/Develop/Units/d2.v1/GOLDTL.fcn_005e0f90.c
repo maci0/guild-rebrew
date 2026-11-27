@@ -70,10 +70,10 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl fcn_005e0140(int, int, void*, void*, char*, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl vfs_LookupPath(char*, int, int*);
 void __cdecl d2_SetSlotVisibility(int, int);
@@ -110,10 +110,10 @@ int __cdecl d2_ShowNetworkLoadGame(void)
 	d2_SetForm(0, 2);
 	io_AppendText(0x1c58);
 	d2_SetForm(0, 0);
-	fcn_00533f40(0x214, 0x168, d2_CurrentWindowId, fcn_00472830(dlg, 1), 0x82, &a, &b, &c);
+	fcn_00533f40(0x214, 0x168, d2_CurrentWindowId, d2_GetFormWindow(dlg, 1), 0x82, &a, &b, &c);
 	fcn_005e0140(dlg, 1, slots, recs, s_6acff0, 1);
-	fcn_00472640(slots[0].h, 0);
-	sel = fcn_00472830(dlg, 1);
+	d2_SetElementEnabled(slots[0].h, 0);
+	sel = d2_GetFormWindow(dlg, 1);
 	while (main_RunFrameLoop((void*) d2_ShowNetworkLoadGame, wait) != 0) {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

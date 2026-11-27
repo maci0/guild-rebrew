@@ -28,7 +28,7 @@ void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl he_FreeAction(char*);
 void __cdecl he_RollTripletEventScores(char*, char*, char*);
 int __cdecl fcn_004c5980(void*);
-int __cdecl fcn_004f46e0(int, unsigned char**, void**);
+int __cdecl gv_FindEntityGraveSlot(int, unsigned char**, void**);
 int __cdecl fcn_004f1790(int, void*);
 int __cdecl gv_SendSetGraveOwner(int*, char*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -196,7 +196,7 @@ void __cdecl he_RunCourtship(char* e)
 			he_PostEntityMessage(*(int*) (a + 4), *(int*) (a + 4), buf, 0, 0x5f4, 0);
 			cm_RequestChangeFloat(*(int*) (pb + 4), 0x7c, 1.1f - *(float*) (pb + 0x7c));
 		}
-		if (fcn_004f46e0((int) b, &rec, &hit) != 0) {
+		if (gv_FindEntityGraveSlot((int) b, &rec, &hit) != 0) {
 			v = fcn_004f1790(*(int*) (rec + 0x65), hit);
 			gv_SendSetGraveOwner(0, (char*) rec, *(int*) hit, v);
 		}

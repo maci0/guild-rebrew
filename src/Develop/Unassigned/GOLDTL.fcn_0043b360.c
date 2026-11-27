@@ -13,10 +13,10 @@ extern unsigned long g_14ce728;
 extern int g_6b8300;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00452340(void);
+void __cdecl d3_ReleaseVertexBufferPtr(void);
 void __cdecl fcn_0043b8f0(int a);
 void __cdecl fcn_00459a90(int a);
-void __cdecl fcn_00456c60(void);
+void __cdecl d3_ResetSceneAuxSlots(void);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_00456c10(void);
 void __cdecl d3_InvalidateDeviceResources(void);
@@ -25,7 +25,7 @@ int __cdecl fcn_0041baa0(void);
 int __cdecl d3_RestoreDeviceResources(void);
 void __cdecl fcn_00436aa0(int a);
 void __cdecl fcn_00452360(void);
-void __cdecl fcn_0043b990(int a);
+void __cdecl d3_RebuildFloorMeshes(int a);
 void __cdecl fcn_00459a10(int a);
 void __cdecl fcn_00456c80(void);
 #include "client_lighting.h"
@@ -39,7 +39,7 @@ char __cdecl fcn_0043b360(void)
 	char r;
 
 	r = 0;
-	fcn_00452340();
+	d3_ReleaseVertexBufferPtr();
 	for (o = g_1042c38; o != g_1042d00; o = *(char**) (o + 0x1f8)) {
 		if (*(IRes**) (o + 0x268) != 0) {
 			g_14ce728 = (*(IRes**) (o + 0x268))->v->Release(*(IRes**) (o + 0x268));
@@ -52,7 +52,7 @@ char __cdecl fcn_0043b360(void)
 	if (g_6b89c0 != 0) {
 		fcn_00459a90(g_6b89c0);
 	}
-	fcn_00456c60();
+	d3_ResetSceneAuxSlots();
 	saved = d3_CurrentContextIndex;
 	for (i = 0; i < 0x40; i++) {
 		if (i != saved) {
@@ -63,7 +63,7 @@ char __cdecl fcn_0043b360(void)
 			if (g_6b89c0 != 0) {
 				fcn_00459a90(g_6b89c0);
 			}
-			fcn_00456c60();
+			d3_ResetSceneAuxSlots();
 		}
 	}
 	d3_SelectSceneContext(saved, 1);
@@ -75,7 +75,7 @@ char __cdecl fcn_0043b360(void)
 		fcn_00436aa0(0);
 		fcn_00452360();
 		if (g_6b8300 != 0) {
-			fcn_0043b990(g_6b8300);
+			d3_RebuildFloorMeshes(g_6b8300);
 		}
 		if (g_6b89c0 != 0) {
 			fcn_00459a10(g_6b89c0);
@@ -85,7 +85,7 @@ char __cdecl fcn_0043b360(void)
 			if (i != saved) {
 				d3_SelectSceneContext(i, 1);
 				if (g_6b8300 != 0) {
-					fcn_0043b990(g_6b8300);
+					d3_RebuildFloorMeshes(g_6b8300);
 					UpdateSceneLighting(1);
 				}
 				if (g_6b89c0 != 0) {

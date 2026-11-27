@@ -38,7 +38,7 @@ extern int g_14a79c0[];
 extern char g_868060[];
 
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00466ee0(int, int, int, int, int);
+int __cdecl d2_AddWindowField(int, int, int, int, int);
 int __cdecl d2_AddElementToWindow(short, short, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl io_FormatTextBuffer(void*, char*, ...);
@@ -56,7 +56,7 @@ void __cdecl fcn_0059c5a0(Row* rows, int a2, int a3, int mode)
 		}
 		d2_SetForm(a2, a3);
 		if (mode != 0) {
-			rows[i].icon = fcn_00466ee0((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, 0x82, d2_CurrentWindowId);
+			rows[i].icon = d2_AddWindowField((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, 0x82, d2_CurrentWindowId);
 		} else {
 			rows[i].icon = d2_AddElementToWindow((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, d2_CurrentWindowId);
 			((Ctl*)g_f8f080)[rows[i].icon].x4c = 1;

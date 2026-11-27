@@ -4,7 +4,7 @@
 
 char* __cdecl sbs_FindSet(char*);
 
-char* __cdecl fcn_004247c0(char* name, char* dst, int n)
+char* __cdecl sbs_GetFirstSetSample(char* name, char* dst, int n)
 {
 	char* r = 0;
 	char* p;

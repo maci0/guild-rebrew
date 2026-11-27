@@ -3,7 +3,7 @@
 void __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(char*, ...);
 void __cdecl d2_ClearWindowChildren(int, int);
-void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
+void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id);
 
 extern int d2_CurrentWindowId;
 extern char g_1016198[];
@@ -23,7 +23,7 @@ int __cdecl fcn_005cc240(int dlg, int sel, int alt)
 		old = d2_CurrentWindowId;
 		d2_SetForm(dlg, alt);
 		io_AppendText(s_6811b0);
-		fcn_0046e830(-1, -1, d2_CurrentWindowId, old, 0x767);
+		d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, old, 0x767);
 		d2_SetForm(dlg, sel);
 		return 0;
 	}

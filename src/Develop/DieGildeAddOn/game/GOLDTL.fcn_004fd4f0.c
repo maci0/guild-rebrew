@@ -14,14 +14,14 @@ typedef struct
 	char pad1b1[0x1d0 - 0x1b1];
 	float mood;
 	char pad1d4[0x21c - 0x1d4];
-} fcn_004fd4f0_Ent;
+} PREDIGT_ENTITY;
 
 typedef struct
 {
 	char pad0[0x18];
 	int side;
 	char pad1c[8];
-} fcn_004fd4f0_Stat;
+} PREDIGT_LAW_STAT;
 
 typedef struct
 {
@@ -30,22 +30,22 @@ typedef struct
 	char* who;
 } fcn_004fd4f0_Out;
 
-extern fcn_004fd4f0_Ent g_7f4ca0[];
+extern PREDIGT_ENTITY g_7f4ca0[];
 extern char g_773d75;
 
 void __cdecl gm_FindRichestEntity(int* a, int* b);
-float __cdecl gm_GetEntitySkill(fcn_004fd4f0_Ent* e, int k);
-int __cdecl gm_GetLawEntry(int idx, fcn_004fd4f0_Stat* dst);
+float __cdecl gm_GetEntitySkill(PREDIGT_ENTITY* e, int k);
+int __cdecl gm_GetLawEntry(int idx, PREDIGT_LAW_STAT* dst);
 int __cdecl gm_GetBuildingTechEffect(char* a, int b, int c);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_WalkEntityChain(unsigned short id);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
 void __cdecl cm_RequestChangeFloat(int a1, int a2, float a3);
-float __cdecl gm_CalcSkillDuelScore(fcn_004fd4f0_Ent* a, fcn_004fd4f0_Ent* b, int k);
+float __cdecl gm_CalcSkillDuelScore(PREDIGT_ENTITY* a, PREDIGT_ENTITY* b, int k);
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x004fd4f0 */
-int __cdecl fcn_004fd4f0(char* building, fcn_004fd4f0_Out* out)
+int __cdecl gm_ApplyPredigtCollection(char* building, fcn_004fd4f0_Out* out)
 {
 	float mult;
 	int count;
@@ -53,9 +53,9 @@ int __cdecl fcn_004fd4f0(char* building, fcn_004fd4f0_Out* out)
 	float sign;
 	int base;
 	int n;
-	fcn_004fd4f0_Stat st;
-	fcn_004fd4f0_Ent* me;
-	fcn_004fd4f0_Ent* ent;
+	PREDIGT_LAW_STAT st;
+	PREDIGT_ENTITY* me;
+	PREDIGT_ENTITY* ent;
 	float v;
 	float fb;
 	float r;

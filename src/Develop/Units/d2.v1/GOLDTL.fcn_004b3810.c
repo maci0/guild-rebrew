@@ -22,7 +22,7 @@ int __cdecl d2_CreateScrollPerga(void);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0046e830(int, int, int, int, int);
+void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 void __cdecl d2_UpdateScrollPerga(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyScrollPerga(void);
@@ -94,7 +94,7 @@ void __cdecl fcn_004b3810(int arg)
 	w = d2_CurrentWindowId;
 	d2_SetForm(h, 2);
 	io_AppendText(0x10b0);
-	fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
+	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, w, 0x767);
 	*(int*) &((D2_WIN*)g_1015f40)[w].pad3c[0x238] = 0x18;
 	d2_SetForm(h, 1);
 	io_AppendText((int) "$C%s", text);
@@ -159,7 +159,7 @@ void __cdecl fcn_004b3810(int arg)
 			} else {
 				d2_SetForm(h, 2);
 				io_AppendText(0x10b0);
-				fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
+				d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, w, 0x767);
 				*(int*) &((D2_WIN*)g_1015f40)[w].pad3c[0x238] = 0x18;
 				d2_SetForm(h, 1);
 				io_AppendText((int) "$C%s", text);

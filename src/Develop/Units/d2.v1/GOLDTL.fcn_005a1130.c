@@ -1,6 +1,6 @@
 int __cdecl d2_ClearWindowChildren();
 int __cdecl d2_AddElementToWindow();
-int __cdecl fcn_00471af0();
+int __cdecl d2_SetFormVisibility();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
@@ -8,7 +8,7 @@ int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
 int __cdecl gm_ResolveWirtshausOffer();
 int __cdecl gm_IsDiceStageValid();
-int __cdecl fcn_00492d60();
+int __cdecl gm_ExecuteDiceStage();
 int __cdecl ai_EvalBlackjackAction();
 int __cdecl fcn_00493000();
 int __cdecl cm_RequestTransferCurrencyNoKill();

@@ -18,7 +18,7 @@ int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, int, int, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl fcn_00539490(void);
 int __cdecl d2_ShowServerBrowser(int);
@@ -52,28 +52,28 @@ int __cdecl d2_ShowChooseNetworkDialog(void)
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == a) {
 				(*(int*)&g_7747b0) = 5;
-				fcn_00471af0(h, 0);
+				d2_SetFormVisibility(h, 0);
 				if (fcn_00539490() != 0) {
 					g_774654 = 1;
 					result = 1;
 				}
-				fcn_00471af0(h, 1);
+				d2_SetFormVisibility(h, 1);
 			} else if (d2_CurrentElementId == b) {
 				(*(int*)&g_7747b0) = 5;
-				fcn_00471af0(h, 0);
+				d2_SetFormVisibility(h, 0);
 				if (d2_ShowServerBrowser(0) != 0) {
 					g_774654 = 1;
 					result = 1;
 				}
-				fcn_00471af0(h, 1);
+				d2_SetFormVisibility(h, 1);
 			} else if (d2_CurrentElementId == c) {
 				(*(int*)&g_7747b0) = 4;
-				fcn_00471af0(h, 0);
+				d2_SetFormVisibility(h, 0);
 				if (d2_ShowNetworkLoadDialog() != 0) {
 					g_774654 = 1;
 					result = 1;
 				}
-				fcn_00471af0(h, 1);
+				d2_SetFormVisibility(h, 1);
 			}
 		}
 	}

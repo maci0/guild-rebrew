@@ -12,7 +12,7 @@ extern char g_67d5bc[];
 
 int __cdecl d2_AllocateElement(void);
 int __cdecl m_alloc(int, char*);
-int __cdecl fcn_0046b520(char*, int);
+int __cdecl d2_MeasureTextWidth(char*, int);
 
 /* ADDRESS: GOLDTL 0x0046fcd0 */
 int __cdecl fcn_0046fcd0(int xpos, int ypos, char* name)
@@ -39,7 +39,7 @@ int __cdecl fcn_0046fcd0(int xpos, int ypos, char* name)
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].kind) = 0x43;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].x) = xpos;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].y) = ypos;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].width) = fcn_0046b520(name, (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].font)) + 0x60;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].width) = d2_MeasureTextWidth(name, (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].font)) + 0x60;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].height) = d2_FontHeight;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].mode) = 2;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[idx].clip_top) = 0;

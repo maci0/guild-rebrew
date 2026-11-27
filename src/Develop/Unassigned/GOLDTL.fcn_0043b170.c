@@ -9,7 +9,7 @@ extern char g_6b8018;
 
 void __cdecl fcn_0045ccf0(unsigned int now);
 char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags, char (__cdecl* cb)(char*, void*), void* ctx);
-char __cdecl fcn_00432480(char* node, void* ctx);
+char __cdecl d3_UpdateSceneObjectAnimCallback(char* node, void* ctx);
 void __cdecl fcn_0043ad10(int mode);
 
 
@@ -44,7 +44,7 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 		now = g_6b7fac;
 		fcn_0045ccf0(now);
 		fl = flags | 0x181;
-		d3_VisitSceneObjects((char*) g_67a370, 0, fl, fcn_00432480, (void*) now);
+		d3_VisitSceneObjects((char*) g_67a370, 0, fl, d3_UpdateSceneObjectAnimCallback, (void*) now);
 		if (deep) {
 			i = 0;
 			entry = (Entry_1043340*) 0x1043340;
@@ -53,7 +53,7 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 					node = entry->node;
 					if (node != 0 && node != d3_SceneObjectSentinel) {
 						do {
-							d3_VisitSceneObjects((char*) g_67a370, node, fl, fcn_00432480, (void*) (now | 0x80000000));
+							d3_VisitSceneObjects((char*) g_67a370, node, fl, d3_UpdateSceneObjectAnimCallback, (void*) (now | 0x80000000));
 							node = *(char**) (node + 0x1f4);
 						} while (node != d3_SceneObjectSentinel);
 					}

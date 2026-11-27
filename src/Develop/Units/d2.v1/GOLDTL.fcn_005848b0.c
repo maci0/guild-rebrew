@@ -22,8 +22,8 @@ void __cdecl d2_AddToRadioGroup(int, int);
 int __cdecl io_FormatTextBuffer(char *, int, ...);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl fcn_00534160(int, int, int, int);
-void __cdecl fcn_00533a60(int, int, void *, int, int, int);
-void __cdecl fcn_00472640(void *, int);
+void __cdecl d2_CreateButtonRow(int, int, void *, int, int, int);
+void __cdecl d2_SetElementEnabled(void *, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(void *);
@@ -149,12 +149,12 @@ void __cdecl d2_RunAlchemyDialog(int a0)
 		} while (i < count);
 	}
 	d2_SetForm(w, 3);
-	fcn_00533a60(last, 0, pt, 2, *(int *)0x14b5428, *(int *)0x14b542c);
+	d2_CreateButtonRow(last, 0, pt, 2, *(int *)0x14b5428, *(int *)0x14b542c);
 	g_100f1dc = -1;
 	do {
 		r = (void *)pt[0];
 		exp = *(unsigned int *)(0x102cbc8 + idx * 0x8c);
-		fcn_00472640(r, (exp != 0xffffffff) && (i != 0));
+		d2_SetElementEnabled(r, (exp != 0xffffffff) && (i != 0));
 		if (g_14ce8e0) {
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {

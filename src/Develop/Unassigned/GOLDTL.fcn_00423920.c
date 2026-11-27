@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-long __cdecl fcn_00423920(char* path)
+long __cdecl sbs_GetFileSize(char* path)
 {
 	FILE* f;
 	long r;

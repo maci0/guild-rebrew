@@ -11,8 +11,8 @@ extern int g_6b7d7c;
 extern SOUND_VOICE g_14cbbe0;
 Voice* __cdecl sb_AllocVoice(void);
 char* __cdecl sb_FindSampleByName(int a, int b);
-void __cdecl fcn_0042a920(int h, int v);
-void __cdecl fcn_0042a9a0(int h, int v);
+void __cdecl msx_SetSampleVolume(int h, int v);
+void __cdecl msx_SetSamplePan(int h, int v);
 void __cdecl msx_SetSampleLoopCount(int h, int v);
 
 Voice* __cdecl sb_PrepareVoice(int bank, int name)
@@ -28,8 +28,8 @@ Voice* __cdecl sb_PrepareVoice(int bank, int name)
 				v->loop = 1;
 				v->pan = abs(0x7f) / 2;
 				v->vol = 0x7f;
-				fcn_0042a920(v->h, 0x7f);
-				fcn_0042a9a0(v->h, v->pan);
+				msx_SetSampleVolume(v->h, 0x7f);
+				msx_SetSamplePan(v->h, v->pan);
 				msx_SetSampleLoopCount(v->h, v->loop);
 			} else {
 				v = 0;

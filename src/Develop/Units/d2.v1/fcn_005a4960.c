@@ -8,11 +8,11 @@ void __cdecl d2_SetForm(int a, int b);
 void __cdecl io_AppendText(void* id, ...);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl main_RunFrameLoop(void* a, int b);
-void __cdecl fcn_0046f280(int w);
+void __cdecl d2_CloseWindow(int w);
 int __cdecl d2_DestroyElement(int id);
 int __cdecl he_GetActiveKrediteByBorrower(int id, char* owner, char** out);
 int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
-int __cdecl fcn_0046f100(int a, int b, int c, int d, int e, int f);
+int __cdecl d2_CreateChildWindow(int a, int b, int c, int d, int e, int f);
 void __cdecl d2_DestroyForm(int a);
 void __cdecl d3_EndCameraAndUiMode(void);
 /* ADDRESS: GOLDTL 0x005a4960 */
@@ -48,7 +48,7 @@ void __cdecl fcn_005a4960(char* owner, int id)
         if (esi != 0) {
             for (i = 0; i < 9; i++) {
                 if (slot[i][0] != -1) {
-                    fcn_0046f280(slot[i][0]);
+                    d2_CloseWindow(slot[i][0]);
                     d2_DestroyElement(slot[i][1]);
                     slot[i][0] = -1;
                     slot[i][1] = -1;
@@ -63,7 +63,7 @@ void __cdecl fcn_005a4960(char* owner, int id)
                 d2_SetForm((int)dlg, 2);
                 slot[i][1] = d2_AddElementToWindow(0, ebx, 0x75a,
                                            d2_CurrentWindowId);
-                slot[i][0] = fcn_0046f100(0, ebx, cx, cy,
+                slot[i][0] = d2_CreateChildWindow(0, ebx, cx, cy,
                                            0x110, d2_CurrentWindowId);
                 slot[i][2] = (int) entries[i];
                 idx = 972 * slot[i][0];

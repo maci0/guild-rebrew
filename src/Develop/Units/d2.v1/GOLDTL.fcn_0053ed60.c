@@ -34,7 +34,7 @@ int __cdecl vfs_ListFilesByExtension(char*, char*, FileSlot53ed60*);
 int __cdecl vfs_Tfopen(char*, char*, int);
 int __cdecl fcn_00521eb0(int, char*);
 void __cdecl CloseVfsStream(int);
-char* __cdecl fcn_0053e7a0(char*);
+char* __cdecl d3_SpawnCityMapMarker(char*);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl txt_FindEntryIndex(char*);
 void __cdecl RegisterStatusText(char*, char*, int);
@@ -49,13 +49,13 @@ void __cdecl fcn_00471db0(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
-void __cdecl fcn_00533a60(int, int, int*, int, ...);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int);
 int __cdecl fcn_0064f170(char*, char*, int);
 void __cdecl fcn_0053eb60(int);
-void __cdecl fcn_00471af0(int, int);
-int __cdecl fcn_0053e9a0(void);
+void __cdecl d2_SetFormVisibility(int, int);
+int __cdecl d2_RunChooseIntroMenu(void);
 int __cdecl fcn_0053dc20(void);
 int __cdecl fcn_004130b0(char*, char*);
 void __cdecl d2_DestroyForm(int);
@@ -120,7 +120,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 		}
 		CloseVfsStream(h);
 		data.values[i] = (signed char) data.hdr[0x30] - (*(int*) &g_6a375c & 0xff);
-		city = fcn_0053e7a0(data.hdr + 5);
+		city = d3_SpawnCityMapMarker(data.hdr + 5);
 		data.cities[i] = city;
 		if (city != 0) {
 			sprintf(data.keybuf, (char*) 0x6a22a8, data.hdr + 5);
@@ -165,7 +165,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	fcn_00471d80(win2, 3);
 	fcn_00471db0(win2, 1);
 	d2_SetForm(win2, 2);
-	fcn_00533a60(d2_CurrentWindowId, 0, tmp_ids, 2, g_14b5e50, g_14b5e54);
+	d2_CreateButtonRow(d2_CurrentWindowId, 0, tmp_ids, 2, g_14b5e50, g_14b5e54);
 	ok_id = tmp_ids[0];
 	info_id = tmp_ids[1];
 	while (main_RunFrameLoop((void*) fcn_0053ed60, 0x10d6) != 0) {
@@ -218,11 +218,11 @@ int __cdecl fcn_0053ed60(int unused, int network)
 		}
 		if (g_100f1dc == 2) {
 			if (d2_CurrentElementId == info_id) {
-				fcn_00471af0(win2, 0);
-				fcn_00471af0(win1, 0);
+				d2_SetFormVisibility(win2, 0);
+				d2_SetFormVisibility(win1, 0);
 				fcn_0053eb60(highlight);
-				fcn_00471af0(win2, 1);
-				fcn_00471af0(win1, 1);
+				d2_SetFormVisibility(win2, 1);
+				d2_SetFormVisibility(win1, 1);
 				if (g_100f1dc != 2) {
 					goto not_checked;
 				}
@@ -236,19 +236,19 @@ not_checked:
 			continue;
 		}
 accepted:
-		fcn_00471af0(win2, 0);
-		fcn_00471af0(win1, 0);
+		d2_SetFormVisibility(win2, 0);
+		d2_SetFormVisibility(win1, 0);
 		if (network != 0) {
 			g_774654 = 1;
 			result = 1;
 		} else {
-			if (fcn_0053e9a0() != 0 && fcn_0053dc20() != 0) {
+			if (d2_RunChooseIntroMenu() != 0 && fcn_0053dc20() != 0) {
 				g_774654 = 1;
 				result = 1;
-				fcn_00471af0(win2, 1);
+				d2_SetFormVisibility(win2, 1);
 			}
-			fcn_00471af0(win2, 1);
-			fcn_00471af0(win1, 1);
+			d2_SetFormVisibility(win2, 1);
+			d2_SetFormVisibility(win1, 1);
 		}
 	}
 	if (win2 != -1) {

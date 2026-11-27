@@ -3,7 +3,7 @@
 
 int __cdecl main_RunFrameLoop(void*, int);
 
-void __cdecl fcn_0058f700(void)
+void __cdecl d2_RunDefaultBuildingInterior(void)
 {
 	int r;
 	do {

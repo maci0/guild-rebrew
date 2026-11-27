@@ -23,10 +23,10 @@ void __cdecl fcn_00438da0(float a, float b, float c, float d, int e, int f,
 void __cdecl fcn_005270c0(int a);
 int __cdecl fcn_00470820(int a, int b, char* c);
 void __cdecl fcn_00471d80(int a, int b);
-void __cdecl fcn_00471af0(int a, int b);
-void __cdecl fcn_004e6c60(int a);
+void __cdecl d2_SetFormVisibility(int a, int b);
+void __cdecl cut_SetRandSeed(int a);
 void __cdecl d2_DestroyForm(int a);
-void __cdecl fcn_004da280(void);
+void __cdecl cut_DestroyAllActiveCharacters(void);
 void __cdecl fcn_004e59c0(void);
 void __cdecl fcn_0042def0(char* a);
 void __cdecl fcn_00528fd0(void);
@@ -232,8 +232,8 @@ display:
     *(int*) 0x68bfc0 = obj;
     fcn_00471d80(obj, 3);
     if (*(int*) 0x772f3c != 0)
-        fcn_00471af0(obj, 0);
-    fcn_004e6c60(*(int*) (e + 0x78));
+        d2_SetFormVisibility(obj, 0);
+    cut_SetRandSeed(*(int*) (e + 0x78));
     sprintf(text, (char*) 0x68d58c, e[8]);
     *(int*) 0x772f40 = (int) e;
     (*(void (__cdecl**) (int*)) (g_9b0840 + e[8] * 20)) (event);
@@ -241,7 +241,7 @@ display:
     *(int*) 0x68bfc0 = saved_68bfc0;
     if (*(int*) 0x772f3c != 0)
         goto post_cleanup;
-    fcn_004da280();
+    cut_DestroyAllActiveCharacters();
     *(int*) 0x6b5c34 = saved_6b5c34;
     if (*(unsigned char*) 0x7747b0 & 8)
         fcn_004e59c0();

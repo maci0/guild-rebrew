@@ -21,7 +21,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 int __cdecl fcn_005340f0(int);
 int __cdecl fcn_005c9450(char*, int, int*);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl d2_ShowBuildingTurnSummary(int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -46,7 +46,7 @@ void __cdecl d2_ShowGebaeudeList(void)
 	d2_SetForm(obj, 2);
 	n = fcn_005c9450(table, 0x80, rec.ids);
 	d2_SetForm(obj, 0);
-	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, fcn_00472830(obj, 2), 0x100,
+	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, d2_GetFormWindow(obj, 2), 0x100,
 	    &rec.out1, &rec.out0, &rec.out2);
 	g_100f1dc = -1;
 	do {

@@ -12,7 +12,7 @@ extern char __cdecl fcn_0045b990();
 extern void __cdecl m_FreeTracked(void* ptr);
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern int __cdecl ch_FindWalkableCell();
-extern short __cdecl fcn_00421350();
+extern short __cdecl FindPath();
 extern int __cdecl ch_DownsamplePath();
 extern int __cdecl d3_GridPointToWorld();
 extern int __cdecl CompareVector3WithinTolerance();
@@ -111,7 +111,7 @@ unsigned int __cdecl fcn_004094c0(int rec, int gridContext)
 			    &cell.z, &cell.x, 8, *(unsigned int*) (rec + 0x160));
 		g_14d0c20.cells = (unsigned char*) 0x14cfc20;
 		g_14d0c20.max = 0x200;
-		if (fcn_00421350((void*) &g_14d0c20, gridContext, v15, v14, cell.z, cell.x,
+		if (FindPath((void*) &g_14d0c20, gridContext, v15, v14, cell.z, cell.x,
 		    *(unsigned char*) (obj + 0x240)) == -1) {
 			*(char*) (*(int*) (rec + 0x14) + 0x110) = 0;
 			if (g_6b5c28 != 0)

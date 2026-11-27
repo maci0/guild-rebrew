@@ -1,5 +1,5 @@
 void __cdecl d3_SetIdentityMatrix4x4(float*);
-void __cdecl fcn_00458cd0(int, int, float*, float*);
+void __cdecl d3_ComposeNodeMatrix(int, int, float*, float*);
 void __cdecl d3_MultiplyAffineMatrices(float*, float*, float*);
 
 /* ADDRESS: GOLD 0x00458d90 */
@@ -10,7 +10,7 @@ void __cdecl d3_BuildViewMatrix(int source, char* view, int flags, float* out)
 
     d3_SetIdentityMatrix4x4(identity);
     if (view != 0) {
-        fcn_00458cd0(source, flags, identity, transform);
+        d3_ComposeNodeMatrix(source, flags, identity, transform);
         transform[12] -= *(float*) (view + 0x4c);
         transform[13] -= *(float*) (view + 0x50);
         transform[14] -= *(float*) (view + 0x54);
@@ -19,6 +19,6 @@ void __cdecl d3_BuildViewMatrix(int source, char* view, int flags, float* out)
         transform[14] -= *(float*) (view + 0x80);
         d3_MultiplyAffineMatrices(transform, (float*) (view + 0x18c), out);
     } else {
-        fcn_00458cd0(source, flags, identity, out);
+        d3_ComposeNodeMatrix(source, flags, identity, out);
     }
 }

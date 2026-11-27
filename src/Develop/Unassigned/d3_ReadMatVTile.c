@@ -11,7 +11,7 @@ struct VfsStream {
 };
 
 /* ADDRESS: GOLDTL 0x0044dc30 */
-int __cdecl fcn_0044dc30(void *a, VfsStream *b)
+int __cdecl d3_ReadMatVTile(void *stream, VfsStream *ctx)
 {
-    return fcn_004011d0(a, b->p16 + b->n8 * 224 + 0xd0);
+    return fcn_004011d0(stream, ctx->p16 + ctx->n8 * 224 + 0xd0);
 }

@@ -1,4 +1,4 @@
-struct fcn_00473700_slot {
+struct D2_DISPLAY_COUNTER_SLOT {
 	int key;
 	int count;
 	int extra;
@@ -9,19 +9,19 @@ struct fcn_00473700_slot {
 
 
 /* ADDRESS: GOLDTL 0x00473700 */
-void __cdecl fcn_00473700(int key, int n)
+void __cdecl d2_SubDisplayCounter(int key, int n)
 {
 	int i;
 
 	for (i = 0; i < 6; i++) {
-		if (((struct fcn_00473700_slot*)d2_DisplayCounters)[i].key == key)
+		if (((struct D2_DISPLAY_COUNTER_SLOT*)d2_DisplayCounters)[i].key == key)
 			break;
 	}
 	if (i != 6) {
-		((struct fcn_00473700_slot*)d2_DisplayCounters)[i].count -= n;
-		if (((struct fcn_00473700_slot*)d2_DisplayCounters)[i].count == 0) {
-			((struct fcn_00473700_slot*)d2_DisplayCounters)[i].count = 0;
-			((struct fcn_00473700_slot*)d2_DisplayCounters)[i].key = -1;
+		((struct D2_DISPLAY_COUNTER_SLOT*)d2_DisplayCounters)[i].count -= n;
+		if (((struct D2_DISPLAY_COUNTER_SLOT*)d2_DisplayCounters)[i].count == 0) {
+			((struct D2_DISPLAY_COUNTER_SLOT*)d2_DisplayCounters)[i].count = 0;
+			((struct D2_DISPLAY_COUNTER_SLOT*)d2_DisplayCounters)[i].key = -1;
 		}
 	}
 }

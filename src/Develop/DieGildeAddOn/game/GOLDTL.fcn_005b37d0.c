@@ -38,7 +38,7 @@ int __cdecl fcn_00459d90(int, int);
 int __cdecl d3_GetAnimSize(char*);
 int __cdecl ch_CountCharacters(int, int);
 int __cdecl d2_UpdateWindowDrag(char*);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 
 void __cdecl d2_ShowMemoryStats(void)
 {
@@ -87,5 +87,5 @@ void __cdecl d2_ShowMemoryStats(void)
 		io_AppendText((int) s_6ab6d0, g_773d8c);
 		d2_UpdateWindowDrag((char*)w);
 	}
-	fcn_0046f280(h);
+	d2_CloseWindow(h);
 }

@@ -22,10 +22,10 @@ int __cdecl d2_UpdateWindowDrag(char*);
 int __cdecl fcn_005b10e0(char*);
 void __cdecl d2_RunPersonDialog(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-int __cdecl fcn_00469c30(int, int, int);
+int __cdecl d2_CreateElement(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_DestroyElement(int);
-void __cdecl fcn_0046ed00(int, int, int);
+void __cdecl d2_ScrollWindow(int, int, int);
 char* __cdecl fcn_0050d490(char*);
 
 /* ADDRESS: GOLDTL 0x005b11f0 */
@@ -134,7 +134,7 @@ void __cdecl d2_UpdateCityScrollMap(int* state)
 				}
 				kind = *(unsigned char*) (w * 0x21c + 0x7f4ca2);
 				if (kind == 6 || kind == 7 || kind == 5) {
-					n = fcn_00469c30(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
+					n = d2_CreateElement(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
 					    *(int*) (w * 0x21c + 0x7f4cf4) - 0x53);
 					*slot = n;
 					if (n == -1) {
@@ -158,7 +158,7 @@ void __cdecl d2_UpdateCityScrollMap(int* state)
 				if (kind != 6 && kind != 7 && kind != 5) {
 					goto check;
 				}
-				n = fcn_00469c30(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
+				n = d2_CreateElement(*(int*) (g_77255c + 4) + sx, *(int*) (g_77255c + 8) + sy,
 				    *(int*) (p + 0x54) - 0x53);
 				*slot = n;
 				if (n == -1) {
@@ -199,18 +199,18 @@ next:
 		}
 	}
 	if (g_14cf7c8) {
-		fcn_0046ed00(0, -4, d2_CurrentWindowId);
+		d2_ScrollWindow(0, -4, d2_CurrentWindowId);
 		return;
 	}
 	if (g_14cf7d0) {
-		fcn_0046ed00(0, 4, d2_CurrentWindowId);
+		d2_ScrollWindow(0, 4, d2_CurrentWindowId);
 		return;
 	}
 	if (g_14cf7cb) {
-		fcn_0046ed00(-4, 0, d2_CurrentWindowId);
+		d2_ScrollWindow(-4, 0, d2_CurrentWindowId);
 		return;
 	}
 	if (g_14cf7cd) {
-		fcn_0046ed00(4, 0, d2_CurrentWindowId);
+		d2_ScrollWindow(4, 0, d2_CurrentWindowId);
 	}
 }

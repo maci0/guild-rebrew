@@ -3,39 +3,39 @@ typedef struct {
 	unsigned short prev;
 	unsigned short pad18;
 	unsigned short next;
-} Node_00421f10;
+} PATH_LINK_NODE;
 // SIZE 0x1c
 
 typedef struct {
 	char pad[0x24];
-	Node_00421f10* table;
-} Obj_00421f10;
+	PATH_LINK_NODE* table;
+} PATH_LINK_GRID;
 // SIZE 0x28
 
 /* ADDRESS: GOLDTL 0x00421f10 */
-void __cdecl fcn_00421f10(Obj_00421f10* a0, unsigned short startIndex)
+void __cdecl ReversePathLinks(PATH_LINK_GRID* grid, unsigned short startIndex)
 {
 	unsigned short v;
 	unsigned short n;
 	int tail;
 
-	if (a0->table[startIndex].next == 0xffff) {
+	if (grid->table[startIndex].next == 0xffff) {
 		return;
 	}
-	a0->table[startIndex].prev = 0xffff;
+	grid->table[startIndex].prev = 0xffff;
 	v = startIndex;
 	tail = (int) startIndex;
 	while (v != 0xffff) {
-		n = a0->table[v].next;
+		n = grid->table[v].next;
 		if (n != 0xffff) {
 			tail = (int) n;
-			a0->table[n].prev = v;
-			n = a0->table[v].next;
+			grid->table[n].prev = v;
+			n = grid->table[v].next;
 		}
 		v = n;
 	}
 	while (tail != 0xffff) {
-		a0->table[tail].next = a0->table[tail].prev;
-		tail = (int) a0->table[tail].prev;
+		grid->table[tail].next = grid->table[tail].prev;
+		tail = (int) grid->table[tail].prev;
 	}
 }

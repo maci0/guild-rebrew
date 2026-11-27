@@ -13,8 +13,8 @@ extern int g_774658;
 
 int __cdecl sb_CheckVoicePlaying(int);
 int __cdecl sb_StopVoice(int, int);
-void __cdecl fcn_004707d0(int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_BringFormToFront(int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d3snd_PlaySoundEffect(int, int, int, int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -155,7 +155,7 @@ ret0:
 			}
 		}
 		if (g_665f08[10] == 1) {
-			fcn_004707d0(g_665f08[9]);
+			d2_BringFormToFront(g_665f08[9]);
 			return 0;
 		}
 		break;
@@ -184,7 +184,7 @@ label7:
 		deadline = cue_time + start_time;
 		cue_ready = current_time >= deadline;
 		g_6b7fc0 = cue_ready;
-		fcn_00472640(g_665f08[0x13], cue_ready);
+		d2_SetElementEnabled(g_665f08[0x13], cue_ready);
 		if (fcn_00580960() != 1) {
 			break;
 		}
@@ -223,7 +223,7 @@ label7:
 			fcn_00584160(0);
 		}
 		if (g_665f08[0xc] == 1) {
-			fcn_004707d0(g_665f08[0xd]);
+			d2_BringFormToFront(g_665f08[0xd]);
 		}
 		fcn_00584160(1);
 		return 0;

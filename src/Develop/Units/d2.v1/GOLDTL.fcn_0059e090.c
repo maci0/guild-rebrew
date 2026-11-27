@@ -55,7 +55,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d2_SetBackgroundTexture(char*, int);
-void __cdecl fcn_00533a60(int, int, Pick*, int, int, char*, char*);
+void __cdecl d2_CreateButtonRow(int, int, Pick*, int, int, char*, char*);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
@@ -108,7 +108,7 @@ void __cdecl fcn_0059e090(char* b)
 			slot->alpha = 0.0f;
 			t0 = *(unsigned int*)&g_6b7fac;
 			d2_SetForm(h, 4);
-			fcn_00533a60(d2_CurrentWindowId, 0, &pick, 3, g_14a566c, "Import", "Export");
+			d2_CreateButtonRow(d2_CurrentWindowId, 0, &pick, 3, g_14a566c, "Import", "Export");
 			d2_SetSlotVisibility(pick.x0, 0);
 			a = pick.a;
 			c = pick.b;

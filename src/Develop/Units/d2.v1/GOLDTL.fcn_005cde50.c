@@ -14,7 +14,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -76,9 +76,9 @@ void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 				}
 			}
 			if (cb != 0 && sel > -1 && sel < 7) {
-				fcn_00471af0(dlg, 0);
+				d2_SetFormVisibility(dlg, 0);
 				(*cb)(btn[sel + 7]);
-				fcn_00471af0(dlg, 1);
+				d2_SetFormVisibility(dlg, 1);
 			}
 		}
 	} while (main_RunFrameLoop((void*) fcn_005cde50, 0x657c7) != 0);

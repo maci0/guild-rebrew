@@ -21,10 +21,10 @@ typedef struct Slot {
 extern Win_1015f40 g_1015f40[0x60];
 extern char* g_1015ea0;
 
-void __cdecl fcn_00469110(int slot, int w);
+void __cdecl d2_SetElementWidth(int slot, int w);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046c4e0 */
-void __cdecl fcn_0046c4e0(int win)
+void __cdecl d2_NormalizeWindowButtonWidths(int win)
 {
 	Win* w;
 	int maxw;
@@ -44,7 +44,7 @@ void __cdecl fcn_0046c4e0(int win)
 	for (i = 0; i < w->count; i++) {
 		if (((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].kind == 9) {
 			((D2_CONTROL_TL*) g_1015ea0)[w->children[i]].value_06c = 1;
-			fcn_00469110(w->children[i], maxw);
+			d2_SetElementWidth(w->children[i], maxw);
 		}
 	}
 }

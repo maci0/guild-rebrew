@@ -30,7 +30,7 @@ extern int g_1015ea0;
 extern int g_14ce728;
 
 void __cdecl d2_FreeAllSprites(void);
-void __cdecl fcn_0046f280(int a1);
+void __cdecl d2_CloseWindow(int a1);
 void __cdecl d2_DestroyElement(int id);
 void __cdecl fcn_0047b5d0(void* p);
 void __cdecl m_FreeTracked(void* p);
@@ -38,7 +38,7 @@ void __cdecl fcn_00475f80(void* o);
 void __cdecl fcn_00477550(void);
 void __cdecl fcn_0047ce50(int a1);
 void __cdecl fcn_0047c4b0(void);
-void __cdecl fcn_00477480(void);
+void __cdecl d2_ReleaseRenderToSurface(void);
 
 /* Shuts the resource system down: drops the animation tracks, every entry of
  * the file table, the open archive handles and the tracked allocations. */
@@ -57,7 +57,7 @@ void __cdecl fcn_00465c60(void)
 	track = (int*) 0x10161d0;
 	do {
 		if (*track == 1) {
-			fcn_0046f280(i);
+			d2_CloseWindow(i);
 		}
 		track = (int*) ((char*) track + 0x3cc);
 		i++;
@@ -134,5 +134,5 @@ void __cdecl fcn_00465c60(void)
 		g_7725ac = 0;
 	}
 	fcn_0047c4b0();
-	fcn_00477480();
+	d2_ReleaseRenderToSurface();
 }

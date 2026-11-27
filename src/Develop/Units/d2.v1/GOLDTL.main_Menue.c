@@ -42,7 +42,7 @@ int __cdecl fcn_0051e070(void);
 void __cdecl ReportClientMessage(char *);
 void __cdecl fcn_00438da0(float, float, int, int, int, int, int, int, int);
 void __cdecl d2_ClearScreen(void);
-int __cdecl fcn_00469e30(int);
+int __cdecl d2_SetBackdropResource(int);
 int __cdecl fcn_00470820(int, int, char *);
 int __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
@@ -152,7 +152,7 @@ void __cdecl main_Menue(void)
 	g_1040484 = 0;
 	g_104048c = d2_ScreenHeight;
 	d2_ClearScreen();
-	fcn_00469e30(0x797);
+	d2_SetBackdropResource(0x797);
 	v29 = 0;
 	v15 = fcn_00470820(0, 0, (char *)0x6a3b60);
 	fcn_00471d80(v15, 3);
@@ -196,7 +196,7 @@ void __cdecl main_Menue(void)
 	do {
 		d2_UpdateRadioGroup(v28);
 		if (v29) {
-			fcn_00469e30(0x797);
+			d2_SetBackdropResource(0x797);
 			v29 = 0;
 		}
 		if (g_14ce8d8 != 0 && d2_CurrentElementId != -1) {

@@ -56,7 +56,7 @@ void __cdecl ch_QueueWalkToDummyRotate(char *, char *);
 int __cdecl fcn_0053b1b0(void);
 int __cdecl d2_ShowChooseProfessionDialog(int);
 unsigned int __cdecl d2_ChooseCharacterModel(int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 char *__cdecl fcn_004730c0(int, int, int, int, char *, int, int);
 int __cdecl ch_DestroyCharacter(char *);
 void *__cdecl evt_FindScriptById(int);
@@ -206,7 +206,7 @@ slot_found:
 			if (i >= 6) {
 				d2_SetForm(obj, 0);
 				io_AppendText(0x6811b0);
-				fcn_00471af0(obj, 0);
+				d2_SetFormVisibility(obj, 0);
 				d3_FreeObjectAnimation(d3_ActiveCamera);
 				d3_CameraAnimating = 0;
 				d3_ActiveCameraAnimation = 0;
@@ -219,12 +219,12 @@ slot_found:
 						g_774654 = 1;
 						ret = 1;
 					} else if (!ret) {
-						fcn_00471af0(obj, 1);
+						d2_SetFormVisibility(obj, 1);
 					}
 				} else {
 					g_774654 = 1;
 					ret = 0;
-					fcn_00471af0(obj, 1);
+					d2_SetFormVisibility(obj, 1);
 				}
 			}
 		} while (main_RunFrameLoop((int) d2_RunParentProfessionSelection, 0x12d6) != 0);

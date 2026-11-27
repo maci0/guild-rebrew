@@ -12,10 +12,10 @@ float __cdecl fcn_004ff210(unsigned short, int);
 void __cdecl ch_DestroyCharacter(int);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicVolume(void);
-void __cdecl fcn_00475220(char*);
+void __cdecl d2_SetMouseTooltip(char*);
 
 /* ADDRESS: GOLDTL 0x004d2a60 */
-void __cdecl fcn_004d2a60(int a0)
+void __cdecl cut_CleanupCombatScene(int dlg)
 {
 	int i;
 	int v;
@@ -57,7 +57,7 @@ void __cdecl fcn_004d2a60(int a0)
 	q = (int*) 0x9b4bc4;
 	do {
 		if (*(unsigned short*) ((char*) q - 0x184) != 0xffff && *q) {
-			v = *(int*) (a0 + 0xc);
+			v = *(int*) (dlg + 0xc);
 			if (v ==
 			        *(int*) ((unsigned short) g_774970 *
 			                     0x21c +
@@ -85,5 +85,5 @@ void __cdecl fcn_004d2a60(int a0)
 	cut_CleanupCutscene();
 	msx_RestoreMusicVolume();
 	*(char*) 0x6a2574 = 1;
-	fcn_00475220((char*) 0x6b5c60);
+	d2_SetMouseTooltip((char*) 0x6b5c60);
 }

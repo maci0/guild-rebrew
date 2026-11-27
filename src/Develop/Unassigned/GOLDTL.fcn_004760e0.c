@@ -2,18 +2,18 @@
 typedef struct {
 	char pad0[0x4c];
 	int f4c;
-} fcn_004760e0_obj;
+} D2_TEX_SIZE_OBJ;
 
-int __cdecl fcn_004760c0(fcn_004760e0_obj*, void*);
+int __cdecl d2_GetSurfaceDesc(D2_TEX_SIZE_OBJ*, void*);
 
 
 /* ADDRESS: GOLDTL 0x004760e0 */
-int __cdecl fcn_004760e0(fcn_004760e0_obj* o)
+int __cdecl d2_UpdateTextureBytes(D2_TEX_SIZE_OBJ* tex)
 {
 	int desc[8];
 
-	if (fcn_004760c0(o, desc) != 0) {
-		o->f4c = desc[4] + 0x5c;
+	if (d2_GetSurfaceDesc(tex, desc) != 0) {
+		tex->f4c = desc[4] + 0x5c;
 		return 1;
 	}
 	return 0;

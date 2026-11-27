@@ -12,12 +12,12 @@ char* __cdecl fcn_0064f026(char* s, const char* delim);
 int __cdecl atoi(const char* s);
 
 /* ADDRESS: GOLDTL 0x0044d500 */
-void __cdecl fcn_0044d500(int unused, char* s)
+void __cdecl d3_ParseMeshMaterialRef(int unused, char* ctx)
 {
-	char* t;
+	char* tok;
 
-	t = fcn_0064f026(0, " ");
-	(*(Rec38**) (s + 0x20))[*(int*) (s + 0x18)].a = -1;
-	(*(Rec38**) (s + 0x20))[*(int*) (s + 0x18)].b = atoi(t);
-	*(int*) (s + 0x18) += 1;
+	tok = fcn_0064f026(0, " ");
+	(*(Rec38**) (ctx + 0x20))[*(int*) (ctx + 0x18)].a = -1;
+	(*(Rec38**) (ctx + 0x20))[*(int*) (ctx + 0x18)].b = atoi(tok);
+	*(int*) (ctx + 0x18) += 1;
 }

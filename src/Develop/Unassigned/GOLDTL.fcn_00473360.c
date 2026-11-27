@@ -2,33 +2,33 @@
 typedef struct { unsigned char bytes[3]; } RECORD3;
 
 /* ADDRESS: GOLDTL 0x00473360 */
-char __cdecl fcn_00473360(char* p)
+char __cdecl d2_GetResourceKind(char* buf)
 {
 	union {
 		char shape[9];
 		RECORD3 record;
 	} u;
-	int a;
-	char r;
+	int tag;
+	char kind;
 
-	if (p == 0)
+	if (buf == 0)
 		return 0;
 	memset(u.shape, 0, 9);
 	u.shape[8] = 0;
-	memcpy(u.shape, p, 8);
+	memcpy(u.shape, buf, 8);
 	u.shape[8] = 0;
 	if (!memcmp(u.shape, (char*) 0x67d8bc, 9)) {
-		if (*(int*) p == 0 && *(unsigned short*) (p + 4) > 1)
+		if (*(int*) buf == 0 && *(unsigned short*) (buf + 4) > 1)
 			return 5;
-		a = *(int*) p;
-		if (a == 1)
+		tag = *(int*) buf;
+		if (tag == 1)
 			return 4;
-		if (a == 2)
+		if (tag == 2)
 			return 7;
-		r = a == 3 ? 8 : 1;
-		return r;
+		kind = tag == 3 ? 8 : 1;
+		return kind;
 	}
-	u.record = *(RECORD3*) p;
-	r = u.record.bytes[2] == 2 ? 17 : 0;
-	return r;
+	u.record = *(RECORD3*) buf;
+	kind = u.record.bytes[2] == 2 ? 17 : 0;
+	return kind;
 }

@@ -13,7 +13,7 @@ char* __cdecl strcat(char*, char*);
 unsigned int __cdecl strlen(char*);
 void* __cdecl memset(void*, int, unsigned int);
 void* __cdecl m_alloc(unsigned int, char*);
-int __cdecl fcn_00423920(char*);
+int __cdecl sbs_GetFileSize(char*);
 
 /* ADDRESS: GOLDTL 0x00424de0 */
 int __cdecl sbs_LoadSampleBanks(char* sampleListPath, char* languageSuffix)
@@ -123,7 +123,7 @@ int __cdecl sbs_LoadSampleBanks(char* sampleListPath, char* languageSuffix)
 			strcat(buf, languageSuffix);
 			strcat(buf, (char*) node + (p - buf) + 5);
 		}
-		*(int*) ((char*) node + 0x100) = fcn_00423920(buf);
+		*(int*) ((char*) node + 0x100) = sbs_GetFileSize(buf);
 	}
 after_banks:
 	if (result != 0) {
@@ -219,7 +219,7 @@ after_banks:
 				strcat(buf, languageSuffix);
 				strcat(buf, (char*) node + (p - buf) + 5);
 			}
-			*(int*) ((char*) node + 0x100) = fcn_00423920(buf);
+			*(int*) ((char*) node + 0x100) = sbs_GetFileSize(buf);
 			if (*(int*) ((char*) node + 0x100) != 0) {
 				*(int*) ((char*) sbs_BankManager + 0x34) += *(int*) ((char*) node + 0x100);
 				*(int*) ((char*) hdr + 0x34) += *(int*) ((char*) node + 0x100);

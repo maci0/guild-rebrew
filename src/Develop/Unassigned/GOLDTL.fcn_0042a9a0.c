@@ -3,7 +3,7 @@
 int __cdecl msx_FindSampleHandleIndex(int);
 typedef int (__stdcall* f)(int, int);
 
-int __cdecl fcn_0042a9a0(int a1, int a2)
+int __cdecl msx_SetSamplePan(int a1, int a2)
 {
 	int r = 0;
 

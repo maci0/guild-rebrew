@@ -2,7 +2,7 @@
 
 char* __cdecl sbs_FindSet(char*);
 
-int __cdecl fcn_00424700(char* name)
+int __cdecl sbs_CountSetEntries(char* name)
 {
 	int n;
 	char* p;
@@ -18,7 +18,7 @@ int __cdecl fcn_00424700(char* name)
 		}
 	} else {
 		for (q = *(char**) (*(char**) 0x6b7d68 + 0x3c); q != 0; q = *(char**) (q + 0x3c)) {
-			n += fcn_00424700(q);
+			n += sbs_CountSetEntries(q);
 		}
 	}
 	return n;

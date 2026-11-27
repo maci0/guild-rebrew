@@ -16,7 +16,7 @@ void __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d2_GetControlValue(int);
@@ -69,7 +69,7 @@ void __cdecl fcn_004e3de0(char* a, int* b)
 	io_AppendText(0x1aa7);
 	w = d2_GetWindowListItem(dlg, 0, t);
 	d2_SetElementValue(w, lo, hi, lo);
-	bar = fcn_004677e0((*(int*) (g_77255c + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
+	bar = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 0x12c) / 2 - 8, 8, 0x12c, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(bar, 0x5dc, 1);
 	g_100f1dc = -1;
 	while (main_RunFrameLoop(fcn_004e3de0, cut_EventLoopFlags) != 0) {

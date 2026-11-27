@@ -9,7 +9,7 @@ void __cdecl fcn_0044b340(char* name, int* a, int* b, int* c);
 char* __cdecl fcn_0044b480(char* buf, char* name, int a, int b, int c);
 void __cdecl m_FreeTracked(int p);
 void __cdecl fcn_0044a120(void);
-void __cdecl fcn_00455910(void);
+void __cdecl d3_ComputeNodeBoundsBox(void);
 float __cdecl fcn_0044c0c0(int, char*);
 
 /* ADDRESS: GOLDTL 0x0044c0e0 */
@@ -41,7 +41,7 @@ char* __cdecl fcn_0044c0e0(char* path, char* name)
 				m_FreeTracked(x);
 			}
 			*(void**) (r + 0x1ec) = (void*) fcn_0044a120;
-			*(void**) (r + 0x1f0) = (void*) fcn_00455910;
+			*(void**) (r + 0x1f0) = (void*) d3_ComputeNodeBoundsBox;
 			*(void**) (r + 0x1f4) = (void*) fcn_0044c0c0;
 		} else if (x != 0) {
 			m_FreeTracked(x);

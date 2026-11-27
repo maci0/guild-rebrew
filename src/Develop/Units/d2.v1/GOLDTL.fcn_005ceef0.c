@@ -34,10 +34,10 @@ int __cdecl fcn_0050b750(int a, unsigned char k);
 void __cdecl fcn_005ced80(int dlg, int* list, int* bars, int* icons);
 void __cdecl fcn_005ce800(int id, int* out, int* value, int* slots,
 	unsigned char* type, int text, Ce800Config cfg, int* handle, int source);
-void __cdecl fcn_00533a60(int a, int b, int* c, int d, int e, int f);
+void __cdecl d2_CreateButtonRow(int a, int b, int* c, int d, int e, int f);
 int __cdecl d2_GetControlValue(int a);
 void __cdecl fcn_00472380(int a, int b, int c, int d);
-void __cdecl fcn_00472640(int a, int b);
+void __cdecl d2_SetElementEnabled(int a, int b);
 void __cdecl cm_BeginPacketFieldDelta(void* p, unsigned int value);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, unsigned int* value);
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int off, void* value);
@@ -102,7 +102,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 	}
 	if (v20) {
 		d2_SetForm(v28, 3);
-		fcn_00533a60(d2_CurrentWindowId, 0, &v18[0], 2, g_14a90a0, g_14b5874);
+		d2_CreateButtonRow(d2_CurrentWindowId, 0, &v18[0], 2, g_14a90a0, g_14b5874);
 		v29 = v18[0];
 		v30 = v18[1];
 	}
@@ -151,7 +151,7 @@ void __cdecl fcn_005ceef0(int a0, unsigned short* a1)
 					*v21 = (v2 == 0);
 					*(unsigned int*) &((D2_CONTROL_TL*) g_1015ea0)[v23].value_038
 						= (*v21 == 0);
-					fcn_00472640(*(unsigned int*) ((char*) v12 + v8),
+					d2_SetElementEnabled(*(unsigned int*) ((char*) v12 + v8),
 						*v21 == 0);
 				}
 				v8 += 4;

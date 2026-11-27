@@ -24,7 +24,7 @@ typedef struct PathGrid {
 	PathNode* nodes;
 } PathGrid;
 /* ADDRESS: GOLDTL 0x00421ba0 */
-unsigned short __cdecl fcn_00421ba0(PathGrid* grid, unsigned short node)
+unsigned short __cdecl ExpandPathNode(PathGrid* grid, unsigned short node)
 {
 	PathNode* p;
 	PathNode* q;

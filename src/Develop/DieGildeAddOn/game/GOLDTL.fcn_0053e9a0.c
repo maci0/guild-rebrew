@@ -20,7 +20,7 @@ void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_0053e9a0(void)
+int __cdecl d2_RunChooseIntroMenu(void)
 {
 	int option1;
 	int option2;
@@ -44,7 +44,7 @@ int __cdecl fcn_0053e9a0(void)
 	option4 = d2_GetWindowListItem(h, 0, s + 4);
 	list = d2_CreateRadioGroup(6, option0, option1, option2, option3, option4, d2_GetWindowListItem(h, 0, s + 5));
 	d2_SelectRadioGroup(list, g_7747b4);
-	while (main_RunFrameLoop(fcn_0053e9a0, 0xc6) != 0) {
+	while (main_RunFrameLoop(d2_RunChooseIntroMenu, 0xc6) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (g_14ce8e0 != 0 || g_14cf950 == 1) {
 			result = 0;

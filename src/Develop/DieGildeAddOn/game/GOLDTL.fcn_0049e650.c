@@ -11,7 +11,7 @@ extern unsigned short g_7f4c04;
 int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl gm_GetOppositeStatIndex(int job);
 int __cdecl ai_FindDunkleEckeTarget(unsigned short* e, Blk24* o1, Blk24* o2);
-int __cdecl fcn_004a4410(float* o1, float* o2, int a3, unsigned short* e, int a5, Blk24* a6, Blk24* a7);
+int __cdecl ai_ComputeBaseActionScore(float* o1, float* o2, int a3, unsigned short* e, int a5, Blk24* a6, Blk24* a7);
 int __cdecl ai_CalculateMatchingMethodEffects(float* o1, float* o2, int a3, unsigned short* e, int a5, Blk24* a6, Blk24* a7);
 
 int __cdecl ai_ScoreDunkleEcke(float* o1, float* o2, int a3, unsigned short* e, int skip, Blk24* firstResult, Blk24* secondResult)
@@ -40,5 +40,5 @@ int __cdecl ai_ScoreDunkleEcke(float* o1, float* o2, int a3, unsigned short* e, 
 	if (g_7f4c04 < 0x14) {
 		return 0;
 	}
-	return fcn_004a4410(o1, o2, a3, e, 0, firstResult, secondResult);
+	return ai_ComputeBaseActionScore(o1, o2, a3, e, 0, firstResult, secondResult);
 }

@@ -38,7 +38,7 @@ extern int g_77250c;
 Tex* __cdecl fcn_004770a0(TexDesc*, int);
 void __cdecl fcn_00476620(int, int, int, int, int, int, int, Tex*);
 long __stdcall fcn_006114ff(void*, void*, Rect*, void*, void*, Rect*, int, unsigned int);
-void __cdecl fcn_00475fd0(Tex*);
+void __cdecl d2_LockSurface(Tex*);
 void __cdecl d2_UnlockSurface(Tex*);
 void __cdecl fcn_00475f80(Tex*);
 
@@ -73,7 +73,7 @@ void __cdecl ls_CaptureSavePreview(void)
 	dst.bottom = 0x78;
 	fcn_00476620(0, 0, g_1040494, d2_ScreenHeight, g_77250c, 0, 0, big);
 	fcn_006114ff(small->surf, 0, &dst, big->surf, 0, &src, 4, 0xff000000);
-	fcn_00475fd0(small);
+	d2_LockSurface(small);
 	k = 0;
 	for (y = 0; y < 0x78; y++) {
 		for (x = 0; x < 0xa0; x++) {

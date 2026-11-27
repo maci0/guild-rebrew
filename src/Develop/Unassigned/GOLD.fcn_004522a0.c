@@ -10,7 +10,7 @@ void __cdecl d3_CalculateTriangleNormal(float* a, float* b, float* c, float* n);
 void __cdecl d3_BuildViewMatrix(char* source, char* view, int flags, float* out);
 
 /* ADDRESS: GOLD 0x004522a0 */
-char __cdecl fcn_004522a0(char* o, Query_4522a0* q)
+char __cdecl d3_AccumulateObjectLights(char* o, Query_4522a0* q)
 {
 	int* mesh;
 	unsigned int i;

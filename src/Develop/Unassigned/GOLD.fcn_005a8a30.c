@@ -3,12 +3,12 @@
 
 int __cdecl hp_FindProdSetting(int);
 
-float __cdecl fcn_005a8a30(char* a)
+float __cdecl hp_GetProdSettingFloat38(char* entity)
 {
-	int p;
-	p = hp_FindProdSetting(*(int*) (a + 1));
-	if (p != 0) {
-		return *(float*) (p + 0x38);
+	int setting;
+	setting = hp_FindProdSetting(*(int*) (entity + 1));
+	if (setting != 0) {
+		return *(float*) (setting + 0x38);
 	}
 	return *(float*) 0x5eb780;
 }

@@ -9,7 +9,7 @@ int __cdecl fcn_005455b0(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_00470820(int, int, int);
 void __cdecl fcn_00471d80(int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl d2_SetForm(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00545670 */
@@ -49,7 +49,7 @@ allocate_slot:
 	((D2_CONTROL_TL*) (g_1015ea0))[v].value_058 = 1;
 	*(int*) ((char*) *(int*) (e + 0x74) + 8) = fcn_00470820(a2, a3, a4);
 	fcn_00471d80(*(int*) ((char*) *(int*) (e + 0x74) + 8), 3);
-	fcn_00471af0(*(int*) ((char*) *(int*) (e + 0x74) + 8), 0);
+	d2_SetFormVisibility(*(int*) ((char*) *(int*) (e + 0x74) + 8), 0);
 	if (*(int*) ((char*) *(int*) (e + 0x74) + 4) == -1) {
 		__asm { int 3 }
 	}

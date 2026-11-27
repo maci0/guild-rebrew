@@ -15,7 +15,7 @@ typedef struct Elem {
 void* __cdecl FindSlotEntryFiltered(int a, unsigned char* rec, void* prev,
 	void* filter, int mask);
 int __cdecl fcn_004f1790(char* a, Elem* e);
-int __cdecl fcn_004f46e0(int a, unsigned char** out1, void** out2);
+int __cdecl gv_FindEntityGraveSlot(int a, unsigned char** out1, void** out2);
 void __cdecl io_FormatTextBuffer(void* dest, int id, ...);
 int __cdecl d2_CreateRentAGraveDialog(View* view, char* text);
 void __cdecl d2_RunRentAGraveMenu(unsigned char* a1, View* view);
@@ -25,7 +25,7 @@ int __cdecl fcn_00526120(int a, int b);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 /* ADDRESS: GOLDTL 0x0058fa40 */
-void __cdecl fcn_0058fa40(unsigned char* input)
+void __cdecl d2_RunGraveyardDialog(unsigned char* input)
 {
 	unsigned char text[0x100];
 	View view;
@@ -49,7 +49,7 @@ void __cdecl fcn_0058fa40(unsigned char* input)
 		}
 		return;
 	}
-	if (fcn_004f46e0((int) (0x7f4ca0 + (*(unsigned short*) 0x774970) * 0x21c),
+	if (gv_FindEntityGraveSlot((int) (0x7f4ca0 + (*(unsigned short*) 0x774970) * 0x21c),
 			&rec, &obj) == 0) {
 		d2_OpenRentAGraveDialog(input);
 		d3_EndCameraAndUiMode();

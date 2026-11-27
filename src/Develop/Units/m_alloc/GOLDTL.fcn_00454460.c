@@ -4,7 +4,7 @@
 
 int __cdecl fcn_004524e0(int, int, int, int, int, int);
 void __cdecl d3_SetEffectPosition(void*, int);
-void __cdecl fcn_004526f0(void*, void*, int);
+void __cdecl d3_SetEffectDirection(void*, void*, int);
 
 /* ADDRESS: GOLDTL 0x00454460 */
 int __cdecl fcn_00454460(int a0, int a1, int a2, int a3, int* a4, int a5, int* a6)
@@ -44,7 +44,7 @@ copy_tail:
 			add ecx, ebx
 			rep movsb
 		}
-		fcn_004526f0(s, (char*) s + 0x74, 0);
+		d3_SetEffectDirection(s, (char*) s + 0x74, 0);
 		if (*(unsigned char*) ((char*) s + 0xd5) & 1) {
 			s[8] = 0;
 			*(unsigned char*) ((char*) s + 0xd5) |= 2;

@@ -5,7 +5,7 @@ extern char g_100eb80[];
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_00477560(const void* src, char* hdr);
+void __cdecl shp_WriteFrameOffsets(const void* src, char* hdr);
 
 /* Lay out one text block: scan the 8-bit glyph rows for the used bounds,
    replace the two row markers with blanks, pack the glyph runs into the
@@ -216,7 +216,7 @@ bounds_done:
     }
     *(unsigned int*) ((char*) v7 + 0x2a) = *v7;
     *v7 = *v7 + (unsigned int) *(unsigned short*) ((char*) v7 + 10) * 4;
-    fcn_00477560(v17, (char*) v7);
+    shp_WriteFrameOffsets(v17, (char*) v7);
     *(char*) ((char*) v7 + 0xd) = a5;
     *(int*) ((char*) v7 + 0x26) = v28;
     v11 = (unsigned int*) m_alloc(*v7, (char*) 0x67d970);

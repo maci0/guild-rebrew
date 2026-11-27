@@ -24,10 +24,10 @@ typedef struct
 extern UI_FIELD g_102d140[];
 extern char* g_1015ea0;
 
-int __cdecl fcn_0046b520(char* s, int font);
+int __cdecl d2_MeasureTextWidth(char* s, int font);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00467100 */
-void __cdecl fcn_00467100(int fld, char* text)
+void __cdecl d2_SetFieldText(int fld, char* text)
 {
 	fcn_00467100_Fld* f;
 	char* e;
@@ -50,7 +50,7 @@ void __cdecl fcn_00467100(int fld, char* text)
 	f->len = len;
 	memmove(f->cur + len, f->cur, strlen(*(char**) (e + 0x3c)) - (f->cur - *(char**) (e + 0x3c)) + 1);
 	memcpy(f->cur, text, f->len);
-	f->w = fcn_0046b520(text, f->font);
+	f->w = d2_MeasureTextWidth(text, f->font);
 	if (f->fixed != 0) {
 		((D2_CONTROL_TL*) g_1015ea0)[f->ent].width = f->w;
 	} else {

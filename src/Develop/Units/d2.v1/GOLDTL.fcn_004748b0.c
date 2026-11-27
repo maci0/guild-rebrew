@@ -3,15 +3,15 @@ extern void __cdecl d2_ClearSelectedControl(void);
 extern void __cdecl d2_DestroyElement(int a);
 extern int __cdecl CountDisplayCounters(void);
 extern void __cdecl fcn_00469c40(int a, int b, int c);
-extern int __cdecl fcn_00469c30(short a, short b, int c);
+extern int __cdecl d2_CreateElement(short a, short b, int c);
 extern void __cdecl d2_HandleTextInput(void);
 extern int __cdecl d2_UpdateSelectedControlDrag(void);
-extern void __cdecl fcn_00466fe0(int a, int b);
-extern void __cdecl fcn_00474040(void);
-extern void __cdecl fcn_00475220(void *p);
+extern void __cdecl d2_SetFieldTextId(int a, int b);
+extern void __cdecl d2_HandleSliderInput(void);
+extern void __cdecl d2_SetMouseTooltip(void *p);
 extern int __cdecl d2_GetValueStep(void *p);
 extern void __cdecl fcn_00412830(int a);
-extern int __cdecl fcn_0046b520(void *p, int a);
+extern int __cdecl d2_MeasureTextWidth(void *p, int a);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1cc;
 extern int g_100f1d4;
@@ -27,7 +27,7 @@ extern int g_67d8ec;
 extern int g_7725e4;
 extern int g_7725e8;
 /* ADDRESS: GOLDTL 0x004748b0 */
-int __cdecl fcn_004748b0(void)
+int __cdecl d2_UpdateSelectedControl(void)
 {
 	unsigned int *p;
 	unsigned int *candidateControl;
@@ -90,14 +90,14 @@ int __cdecl fcn_004748b0(void)
 					p = *(unsigned int **) &tp_d2_SelectedControl;
 				}
 				if (*(unsigned char *) ((char *) p + 0x28) & 1) {
-					g_100f898 = fcn_0046b520((char *) p + 0x2c, p[0x4e]);
+					g_100f898 = d2_MeasureTextWidth((char *) p + 0x2c, p[0x4e]);
 					g_100f898 += p[1];
 					g_100f89c = p[2];
 					if (g_67d8ec != -1) {
 						fcn_00469c40(g_100f898, g_100f89c - 7,
 						    g_67d8ec);
 					} else {
-						g_67d8ec = fcn_00469c30(
+						g_67d8ec = d2_CreateElement(
 						    (short) g_100f898,
 						    (short) (g_100f89c - 7),
 						    g_67d3b0 + 8);
@@ -170,15 +170,15 @@ label_474b96:
 			if ((int) (candidateControl[0x54] + 0xffffffff + candidateControl[0x52]) < (int) candidateControl[0x53]) {
 				candidateControl[0x53] = candidateControl[0x52];
 			}
-			fcn_00466fe0(candidateControl[0], candidateControl[0x53]);
+			d2_SetFieldTextId(candidateControl[0], candidateControl[0x53]);
 		}
 	}
 label_474ca4:
-	fcn_00474040();
+	d2_HandleSliderInput();
 	if (d2_CurrentElementId != -1) {
 		v7 = (int)&((D2_CONTROL_TL*) *(int *)&g_1015ea0)[d2_CurrentElementId];
 		if (*(unsigned char *) (v7 + 0x1d0) & 0x40) {
-			fcn_00475220((void *) (v7 + 0xcc));
+			d2_SetMouseTooltip((void *) (v7 + 0xcc));
 		}
 	}
 	return 0;

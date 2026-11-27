@@ -15,7 +15,7 @@ typedef struct Unit {
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_IsNpcEntityState(char* e);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
-int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e, int a5, int a6, int a7);
+int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x004a0a40 */
 int __cdecl ai_ScoreBerufsausbildung(float* s1, float* s2, int idx, char* actor, int flag, int a6, int a7)
@@ -56,7 +56,7 @@ int __cdecl ai_ScoreBerufsausbildung(float* s1, float* s2, int idx, char* actor,
 	}
 	*s1 = 0;
 	*s2 = 0;
-	fcn_004a4410(s1, s2, idx, actor, 0, a6, a7);
+	ai_ComputeBaseActionScore(s1, s2, idx, actor, 0, a6, a7);
 	eligible = best->level + 4 >= best->need;
 	*s1 *= eligible;
 	*s2 *= eligible;

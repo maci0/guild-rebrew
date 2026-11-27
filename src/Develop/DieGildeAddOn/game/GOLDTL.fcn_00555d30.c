@@ -14,7 +14,7 @@ unsigned short __cdecl fcn_004ac290(int);
 char* __cdecl fcn_004ac1e0(short);
 char* __cdecl evt_FindScriptById(int);
 char* __cdecl evt_LoadGfxScript(char*);
-void __cdecl fcn_00428340(char*, int, int);
+void __cdecl evt_CallScriptFunction(char*, int, int);
 void __cdecl evt_RequestScriptExit(char*);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl sprintf(char*, const char*, ...);
@@ -96,7 +96,7 @@ void __cdecl he_RunBardeEvent(char* obj)
 				if (q != 0) {
 					*(int*) q = 0x68427244;
 					*(int*) (obj + 0xb4) = *(int*) (q + 0x100);
-					fcn_00428340(q, 1, *(int*) (x + 8));
+					evt_CallScriptFunction(q, 1, *(int*) (x + 8));
 					*(int*) (q + 0x104) = 0;
 				}
 				d3_SelectSceneContext(t, 1);

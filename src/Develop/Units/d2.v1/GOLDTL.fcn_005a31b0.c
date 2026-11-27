@@ -25,7 +25,7 @@ int __cdecl fcn_005a30c0(int x, int y, int layer, int a4, int a5);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x005a31b0 */
-void __cdecl fcn_005a31b0(char* building)
+void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 {
 	char name[260];
 	int win;
@@ -53,7 +53,7 @@ void __cdecl fcn_005a31b0(char* building)
 	object = (int) d3_FindSceneObject(0, 0x40, 0, "ob_KARTENTISCH");
 	idx = -1;
 	k = -1;
-	if (main_RunFrameLoop((void*) fcn_005a31b0, 0x677c7)) {
+	if (main_RunFrameLoop((void*) d2_ShowCityTradeInfoDialog, 0x677c7)) {
 		do {
 			if (g_14ce8e0 != 0) {
 				g_774654 = 1;
@@ -118,7 +118,7 @@ void __cdecl fcn_005a31b0(char* building)
 				dt = g_665ed0;
 			}
 			*(float*) (windowData + 0x3a4) = (float) dt;
-		} while (main_RunFrameLoop((void*) fcn_005a31b0, 0x677c7));
+		} while (main_RunFrameLoop((void*) d2_ShowCityTradeInfoDialog, 0x677c7));
 		if (idx != -1) {
 			d2_DestroyForm(idx);
 		}

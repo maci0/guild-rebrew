@@ -9,7 +9,7 @@ extern const float g_662d40[3];
 extern char* d3_ActiveCamera;
 
 void __cdecl d3_LerpVec3(float*, float*, float, float*);
-float __cdecl fcn_00451380(float*, float*);
+float __cdecl d3_SignedPlanarAngle(float*, float*);
 void __cdecl d3_NormalizeVector(float*);
 float* __stdcall D3DXMatrixTranspose(float*, const float*);
 
@@ -50,7 +50,7 @@ void __cdecl fcn_00459050(int self)
 	v[0] = g_662d40[1] * src[4] + g_662d40[2] * src[8] + g_662d40[0] * src[0];
 	v[1] = g_662d40[1] * src[5] + g_662d40[2] * src[9] + g_662d40[0] * src[1];
 	v[2] = g_662d40[1] * src[6] + g_662d40[2] * src[10] + g_662d40[0] * src[2];
-	*(float*) (p + 0x14) = (float) fmod(fcn_00451380((float*) g_662d40, v), 6.2831854820251465);
+	*(float*) (p + 0x14) = (float) fmod(d3_SignedPlanarAngle((float*) g_662d40, v), 6.2831854820251465);
 	*(unsigned int*) (p + 0xc) = 0x30;
 	src = (float*) (d3_ActiveCamera + 0x18c);
 	D3DXMatrixTranspose(m, src);

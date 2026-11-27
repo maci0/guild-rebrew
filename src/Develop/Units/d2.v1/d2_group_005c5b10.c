@@ -79,7 +79,7 @@ extern char* g_775318;
 extern char* g_77255c;
 extern int g_10161cc[];
 
-int __cdecl fcn_0046f100(int, int, int, int, int, int);
+int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 
@@ -245,9 +245,9 @@ void __cdecl fcn_005c5da0(int layer, int x, int y, unsigned short who, int text)
 			((Pair*)g_776c60)[i].v = 0;
 		}
 		g_775318 = g_7f4ca0 + who * 540;
-		g_6abb00 = fcn_0046f100(x, y, 0xcd, 0xc4, 0x10, layer);
+		g_6abb00 = d2_CreateChildWindow(x, y, 0xcd, 0xc4, 0x10, layer);
 		d2_AddElementToWindow(0, 0, 0x587, g_6abb00);
-		fcn_0046f100(0, 0x2c, *(int*) (g_77255c + 0xc), 0x1e, 0x110, d2_CurrentWindowId);
+		d2_CreateChildWindow(0, 0x2c, *(int*) (g_77255c + 0xc), 0x1e, 0x110, d2_CurrentWindowId);
 		g_10161cc[d2_CurrentWindowId * 243] = 0x54;
 		io_AppendText(text);
 	}

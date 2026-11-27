@@ -18,7 +18,7 @@ extern float g_1042198;
 extern int g_10432a8;
 extern int g_1042a04;
 
-extern unsigned int __cdecl fcn_00440260(int, int, int, int);
+extern unsigned int __cdecl d3_ProjectFloorCellBounds(int, int, int, int);
 extern unsigned char __cdecl fcn_00437ee0(void*, char*, char*);
 
 typedef int (__stdcall* Fn_441050)(void*);
@@ -28,7 +28,7 @@ typedef int (__stdcall* Fn_441050)(void*);
 /* Recomputes the two cached shadow boxes of an entity from the eight
  * surrounding placements and sums the visibility/occupancy callbacks of the
  * 8x8 cell grid. Returns the number of lit cells. */
-int __cdecl fcn_00441050(char* e)
+int __cdecl d3_UpdateFloorVisibility(char* e)
 {
 	float* m;
 	float dx;
@@ -79,7 +79,7 @@ int __cdecl fcn_00441050(char* e)
 		+ m[0x65] * *(float*) (e + 0x80);
 	for (i = 0, w = e + 0x280; i < 8; i++) {
 		for (j = 0; j < 8; j++) {
-			p = (float*) fcn_00440260((int) e, (int) (w - 0x1e0), j, i);
+			p = (float*) d3_ProjectFloorCellBounds((int) e, (int) (w - 0x1e0), j, i);
 			res = fcn_00437ee0(p, w, w + 4);
 			*(unsigned char*) (w + 0x11) = res;
 			if ((res & 0x40) != 0) {

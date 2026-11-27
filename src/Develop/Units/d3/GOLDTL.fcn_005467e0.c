@@ -6,7 +6,7 @@
 
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_FindSceneObject(int, int, char*, int);
-void __cdecl fcn_00546480(char*);
+void __cdecl he_ArrangeEntityMarkers(char*);
 
 
 void __cdecl d3_FreeEventGfxSlot(int* s)
@@ -20,7 +20,7 @@ void __cdecl d3_FreeEventGfxSlot(int* s)
 		s[2] = 0;
 		d3_SelectSceneContext(0, 1);
 		if (h != 0 && d3_FindSceneObject(0, 0x1c0, h, 0) != 0) {
-			fcn_00546480(h);
+			he_ArrangeEntityMarkers(h);
 		}
 		d3_DestroyObject((D3_OBJECT*) ((char*) s[3]));
 		s[3] = 0;

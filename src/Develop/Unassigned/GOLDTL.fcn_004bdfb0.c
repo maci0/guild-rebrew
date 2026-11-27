@@ -2,7 +2,7 @@
 
 
 /* ADDRESS: GOLDTL 0x004bdfb0 */
-void __cdecl fcn_004bdfb0(float* ox, float* oy, float* position, char* object, char** ctx)
+void __cdecl rd_ProjectWorldToSupermap(float* ox, float* oy, float* position, char* object, char** ctx)
 {
 	float v[4];
 

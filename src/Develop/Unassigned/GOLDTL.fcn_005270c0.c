@@ -26,7 +26,7 @@ extern int g_6a2594;
 extern int g_6a25a0;
 extern int g_6a25a4;
 
-void __cdecl fcn_00471af0(int h, int v);
+void __cdecl d2_SetFormVisibility(int h, int v);
 void __cdecl fcn_00545a80(int v);
 void __cdecl d2_SetSlotVisibility(int h, int v);
 
@@ -36,11 +36,11 @@ void __cdecl fcn_005270c0(int show)
 
 	g_6a2be0 = show;
 	if (g_6a25b8 != -1) {
-		fcn_00471af0(g_6a25b8, show);
+		d2_SetFormVisibility(g_6a25b8, show);
 	}
 	fcn_00545a80(show);
 	if (g_6a25b8 != -1) {
-		fcn_00471af0(g_6a25b8, show);
+		d2_SetFormVisibility(g_6a25b8, show);
 	}
 	if (g_6a2578 != -1) {
 		d2_SetSlotVisibility(g_6a2578, show);

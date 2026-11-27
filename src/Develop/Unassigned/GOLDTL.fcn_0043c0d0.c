@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0043c0d0 */
-void __cdecl fcn_0043c0d0(unsigned char* buf, int x0, int x1, unsigned char c0, unsigned char c1)
+void __cdecl d3_InterpolateByteSpan(unsigned char* buf, int x0, int x1, unsigned char c0, unsigned char c1)
 {
 	float step;
 	float v;

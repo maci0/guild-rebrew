@@ -18,7 +18,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl gm_ModifyHealth(int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00526120(int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int);
@@ -75,7 +75,7 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 			}
 			if (d2_CheckActionBlocker(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), n)) {
 				gm_ModifyHealth(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, -n);
-				fcn_00471af0(win, 0);
+				d2_SetFormVisibility(win, 0);
 				if (gm_RandomFloat01() < p) {
 					ent = he_StartHandlungSearch(1, 0, 0x4f);
 					if (ent != 0) {
@@ -90,10 +90,10 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 					}
 done:
 					g_774654 = 1;
-					fcn_00471af0(win, 1);
+					d2_SetFormVisibility(win, 1);
 				} else {
 					fcn_00526120((*(int*) 0x14ab300), 4);
-					fcn_00471af0(win, 1);
+					d2_SetFormVisibility(win, 1);
 				}
 			}
 		} else if (g_100f1dc == n) {

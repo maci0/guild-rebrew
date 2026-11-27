@@ -18,7 +18,6 @@ int g_14ab2e0 = 0;
 int g_14ab2e4 = 0;
 float g_664138 = 0;
 float g_66430c = 0;
-float g_664ea0 = 0;
 float g_665c0c = 0;
 double g_665df8 = 0;
 float g_665e00 = 0;

@@ -4,7 +4,7 @@
 void __cdecl d2_ResizeWindow(int w, int h, int win);
 
 /* ADDRESS: GOLDTL 0x0046f060 */
-void __cdecl fcn_0046f060(int win)
+void __cdecl d2_FitWindowHeightToContents(int win)
 {
 	D2_WIN* p;
 	char* e;

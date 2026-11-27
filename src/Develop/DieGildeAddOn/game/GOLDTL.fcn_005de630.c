@@ -31,7 +31,7 @@ extern char* g_14a5590;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
+unsigned char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -59,7 +59,7 @@ int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
 		req.size = 0x400;
 		req.kind = 6;
 		req.cd = g_666018;
-		e = (ENTITY_RECORD*) fcn_005cd440(&req, g_14a5590, 0, 0);
+		e = (ENTITY_RECORD*) d2_OpenTargetPicker(&req, g_14a5590, 0, 0);
 		if (e == 0) {
 			return 0;
 		}

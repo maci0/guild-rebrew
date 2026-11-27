@@ -15,7 +15,7 @@ int __cdecl d3_SetObjectRotation();
 int __cdecl CompareVector3WithinTolerance();
 int __cdecl d2_ClearWindowChildren();
 int __cdecl fcn_00470820();
-int __cdecl fcn_00471af0();
+int __cdecl d2_SetFormVisibility();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
@@ -23,7 +23,7 @@ int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
 int __cdecl gm_ResolveWirtshausOffer();
 int __cdecl gm_IsDiceStageValid();
-int __cdecl fcn_00492d60();
+int __cdecl gm_ExecuteDiceStage();
 int __cdecl ai_EvalBlackjackAction();
 int __cdecl fcn_00493000();
 int __cdecl cm_RequestTransferCurrencyNoKill();
@@ -152,9 +152,9 @@ void __cdecl d2_ShowWirtshausDialog(void)
         v2 = 0;
       }
       else if ((*(int *)0x67d370) == v29) {
-        fcn_00471af0(windowId,0);
+        d2_SetFormVisibility(windowId,0);
         d2_ShowWirtshausRules();
-        fcn_00471af0(windowId,1);
+        d2_SetFormVisibility(windowId,1);
       }
     }
   } while (main_RunFrameLoop(0x5a1430,0x677c7));
@@ -245,7 +245,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
           fcn_005a0cd0(&v14,v24,1,windowId,2,0x96,0);
         }
         if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
-          fcn_00492d60(&v14,v13[2],1);
+          gm_ExecuteDiceStage(&v14,v13[2],1);
           fcn_00493000(&v14);
           if (v25) {
             fcn_005a0cd0(&v14,v12,1,windowId,3,0x14,1);
@@ -261,7 +261,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
               fcn_005a0cd0(&v14,v12,1,windowId,3,0x96,0);
             }
             if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
-              fcn_00492d60(&v14,v21[0],1);
+              gm_ExecuteDiceStage(&v14,v21[0],1);
               fcn_00493000(&v14);
               if (v25) {
                 fcn_005a0cd0(&v14,v24,1,windowId,2,0x14,1);
@@ -275,7 +275,7 @@ void __cdecl d2_ShowWirtshausDialog(void)
                     v9 = ai_EvalBlackjackAction(&v14,*v24);
                     fcn_005a0cd0(&v14,v24,v9,windowId,2,0x96,0);
                     if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) {
-                      fcn_00492d60(&v14,*v24,v9);
+                      gm_ExecuteDiceStage(&v14,*v24,v9);
                       fcn_00493000(&v14);
                       fcn_005a0cd0(&v14,v24,v9,windowId,2,0x14,1);
                       if (*(char *)((unsigned int)(*(unsigned short *)&g_774970) * 0x21c + 0x7f4ca8)) goto label_5a1b81;
@@ -318,13 +318,13 @@ label_5a1b81:
                           io_AppendText(0x6811b0);
                           d2_ClearWindowChildren((*(int *)&d2_CurrentWindowId),1);
                           fcn_005a0cd0(&v14,v12,v22[v11 * 0x43 + 1],windowId,3,0x96,0);
-                          fcn_00492d60(&v14,v3,v22[v11 * 0x43 + 1]);
+                          gm_ExecuteDiceStage(&v14,v3,v22[v11 * 0x43 + 1]);
                           fcn_00493000(&v14);
                           fcn_005a0cd0(&v14,v12,v22[v11 * 0x43 + 1],windowId,3,0x14,1);
                           if ((v13[1] != 5) && (v13[1] != 6)) {
                             v9 = ai_EvalBlackjackAction(&v14,*v24);
                             fcn_005a0cd0(&v14,v24,v9,windowId,2,0x96,0);
-                            fcn_00492d60(&v14,*v24,v9);
+                            gm_ExecuteDiceStage(&v14,*v24,v9);
                             fcn_00493000(&v14);
                             fcn_005a0cd0(&v14,v24,v9,windowId,2,0x14,1);
                             if ((v13[1] != 5) && (v13[1] != 6)) break;

@@ -24,7 +24,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
-unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
+unsigned char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -83,12 +83,12 @@ int __cdecl gm_HandleFriedenStiften(unsigned char* e, unsigned char* ctx)
 	req.kind = 6;
 	req.cd = g_666018;
 	io_FormatTextBuffer(text, 0x1de4);
-	o1 = fcn_005cd440(&req, text, 0, 0);
+	o1 = d2_OpenTargetPicker(&req, text, 0, 0);
 	if (o1 == 0) {
 		return 0;
 	}
 	io_FormatTextBuffer(text, 0x1de5, *(unsigned short*) o1);
-	o2 = fcn_005cd440(&req, text, 0, 0);
+	o2 = d2_OpenTargetPicker(&req, text, 0, 0);
 	if (o2 == 0) {
 		return 0;
 	}

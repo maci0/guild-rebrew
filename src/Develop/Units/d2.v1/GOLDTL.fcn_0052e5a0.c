@@ -35,7 +35,7 @@ int __cdecl gm_GetEntityMood(unsigned char* s);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
-int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f, int g, int h);
+int __cdecl d2_AddWindowValueGauge(int a, int b, int c, int d, int e, int f, int g, int h);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl d2_OpenBuildingInfoPanel(void)
@@ -67,7 +67,7 @@ void __cdecl d2_OpenBuildingInfoPanel(void)
 	io_AppendText(g_6a2f9c, name, *g_7746c8 * 14 + 0x48e, g_7746c8 + 5);
 	d2_SetForm(g_6a25b8, 0);
 	d2_AddElementToWindow(((((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1) - 1, 0x4c, *g_7746c8 + 0x427, d2_CurrentWindowId);
-	d2_CurrentValueBar = fcn_004677e0(0x15, 0x7a, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
+	d2_CurrentValueBar = d2_AddWindowValueGauge(0x15, 0x7a, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 	d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, pct);
 	g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0cc);
 	if (*g_7746c8 == 0x1e) {

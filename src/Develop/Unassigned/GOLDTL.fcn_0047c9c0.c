@@ -56,7 +56,7 @@ extern int d2_DrawDepthIndex;
 extern int g_772614;
 
 
-int __cdecl fcn_0047b8b0(int, int, int, int, Quad*);
+int __cdecl d2_BuildQuadVertices(int, int, int, int, Quad*);
 void __cdecl fcn_0047b9f0(Quad*, int);
 void __cdecl fcn_0047c4e0(void);
 void __cdecl fcn_004372d0(int, int, int, int, int);
@@ -69,7 +69,7 @@ void __cdecl d2_DrawTexturedQuad(int a1, int a2, int a3, int a4, int tex, float 
 	float t;
 	int i;
 
-	if (fcn_0047b8b0(a1, a2, a3, a4, &quad) == 0) {
+	if (d2_BuildQuadVertices(a1, a2, a3, a4, &quad) == 0) {
 		return;
 	}
 	fcn_0047b9f0(&quad, (int) (alpha * 255.0f));

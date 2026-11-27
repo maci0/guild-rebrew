@@ -1,6 +1,6 @@
 extern char g_67d934[];
 
-unsigned int __cdecl fcn_00475360(void*);
+unsigned int __cdecl d2_ReadBmpDimensions(void*);
 void* __cdecl m_alloc(unsigned int, char*);
 unsigned char __cdecl fcn_004754b0(void* a0, void* a1, int a3);
 
@@ -11,7 +11,7 @@ void* __cdecl fcn_00475740(void* src)
 	unsigned int dim;
 	void* p;
 
-	dim = fcn_00475360(src);
+	dim = d2_ReadBmpDimensions(src);
 	if (dim == 0)
 		return 0;
 	p = m_alloc((dim >> 16) * (dim & 0xffff), g_67d934);

@@ -19,11 +19,11 @@ extern int d2_DefaultFont;
 
 int __cdecl d2_AllocateElement(void);
 int __cdecl d2_GetResourceData(int);
-void __cdecl fcn_0046f9b0(int, int);
+void __cdecl d2_SetControlText(int, int);
 void __cdecl d2_AddRefcount(int);
 
 /* ADDRESS: GOLDTL 0x00468cf0 */
-int __cdecl fcn_00468cf0(int a1, int a2, int resourceId, int a4)
+int __cdecl d2_CreateTextButton(int a1, int a2, int resourceId, int a4)
 {
 	int idx;
 
@@ -41,7 +41,7 @@ int __cdecl fcn_00468cf0(int a1, int a2, int resourceId, int a4)
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x2c / 4] = g_1040494;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0x84 / 4] = d2_DefaultFont;
 	((fcn_00468cf0_Ent*)g_1015ea0)[idx].i[0xc / 4] = d2_GetResourceData(resourceId);
-	fcn_0046f9b0(idx, a4);
+	d2_SetControlText(idx, a4);
 	d2_AddRefcount(resourceId);
 	return idx;
 }

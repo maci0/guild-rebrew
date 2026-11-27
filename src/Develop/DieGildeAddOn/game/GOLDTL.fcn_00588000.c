@@ -33,7 +33,7 @@ extern int g_774a1c;
 extern volatile int g_6b7fac;
 
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 
 int __cdecl io_AppendText(int, ...);
 
@@ -83,7 +83,7 @@ void __cdecl d2_UpdateDealSummaryLog(char* w)
 		if (cnt != 0) {
 			g_774a1c = 0;
 			((struct deal*)g_77dda0)[i].state = -1;
-			fcn_00471af0(*(int*) (w + 0x74), 1);
+			d2_SetFormVisibility(*(int*) (w + 0x74), 1);
 			return;
 		}
 		if (g_774a1c != 0) {
@@ -91,10 +91,10 @@ void __cdecl d2_UpdateDealSummaryLog(char* w)
 			((struct deal*)g_77dda0)[i].state = -1;
 			io_AppendText((int) "$C");
 			io_AppendText(0x406e);
-			fcn_00471af0(*(int*) (w + 0x74), 1);
+			d2_SetFormVisibility(*(int*) (w + 0x74), 1);
 			return;
 		}
 	}
-	fcn_00471af0(*(int*) (w + 0x74), 0);
+	d2_SetFormVisibility(*(int*) (w + 0x74), 0);
 	g_774a1c = 0;
 }

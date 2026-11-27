@@ -21,7 +21,7 @@ extern void __cdecl fcn_0047a040(int a0, int a1, int a2, int a3);
 extern void __cdecl fcn_0047cba0(int a0, int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00532bd0 */
-void __cdecl fcn_00532bd0(void)
+void __cdecl d2_DrawCameraScrollArrows(void)
 {
     int rightState = 0;
     int leftState = 0;

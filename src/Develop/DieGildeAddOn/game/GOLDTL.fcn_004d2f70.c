@@ -2,7 +2,7 @@ extern char* ch_ContextCharacters[32];
 
 char* __cdecl gm_GetEquippedCombatGear(char*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, unsigned char*);
-float __cdecl fcn_004cefb0(char*, int);
+float __cdecl gm_CalcEntityFlatDistance(char*, int);
 float __cdecl gm_GetEntityHealthRatio(unsigned char*);
 
 
@@ -21,7 +21,7 @@ unsigned char* __cdecl cut_FindCombatTarget(char* actor)
 		for (i = 0; i < 32; i++) {
 			e = ((unsigned char**)ch_ContextCharacters)[i];
 			if (e != 0 && gm_EntitiesDifferByOwnerPtr(actor, e) != 0 && e[8] != 0) {
-				d = fcn_004cefb0(actor, *(int*) (*(char**) (e + 0x184) + 0x34));
+				d = gm_CalcEntityFlatDistance(actor, *(int*) (*(char**) (e + 0x184) + 0x34));
 				if (d * gm_GetEntityHealthRatio(e) < best) {
 					best = d;
 					result = ((unsigned char**)ch_ContextCharacters)[i];
@@ -32,7 +32,7 @@ unsigned char* __cdecl cut_FindCombatTarget(char* actor)
 		for (i = 0; i < 32; i++) {
 			e = ((unsigned char**)ch_ContextCharacters)[i];
 			if (e != 0 && gm_EntitiesDifferByOwnerPtr(actor, e) != 0 && e[8] != 0) {
-				d = fcn_004cefb0(actor, *(int*) (*(char**) (e + 0x184) + 0x34));
+				d = gm_CalcEntityFlatDistance(actor, *(int*) (*(char**) (e + 0x184) + 0x34));
 				if (d * gm_GetEntityHealthRatio(e) < best) {
 					best = d;
 					result = ((unsigned char**)ch_ContextCharacters)[i];

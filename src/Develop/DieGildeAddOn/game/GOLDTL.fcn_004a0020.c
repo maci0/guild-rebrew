@@ -9,7 +9,7 @@ typedef struct
 	unsigned char x167;
 	unsigned char x168;
 	char pad169[0x21c - 0x169];
-} fcn_004a0020_Ent;
+} ZUNFT_GROUP_ENTITY;
 
 typedef struct
 {
@@ -17,17 +17,17 @@ typedef struct
 	int id;
 	unsigned char x8;
 	char pad9[0xf];
-} fcn_004a0020_Rec;
+} ZUNFT_GROUP_SLOT;
 // SIZE 0x18
 
-int __cdecl amt_GetRoleTemplate(int idx, fcn_004a0020_Rec* out);
-int __cdecl amt_CollectOfficeSlotsByGroup(int k, int max, fcn_004a0020_Rec* out);
-fcn_004a0020_Ent* __cdecl gm_LookupEntityRecordById(int id);
+int __cdecl amt_GetRoleTemplate(int idx, ZUNFT_GROUP_SLOT* out);
+int __cdecl amt_CollectOfficeSlotsByGroup(int k, int max, ZUNFT_GROUP_SLOT* out);
+ZUNFT_GROUP_ENTITY* __cdecl gm_LookupEntityRecordById(int id);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004a0020 */
-int __cdecl ai_SelectZunftPrivilegeGroup(fcn_004a0020_Ent* e)
+int __cdecl ai_SelectZunftPrivilegeGroup(ZUNFT_GROUP_ENTITY* entity)
 {
 	float sum;
 	int cnt;
@@ -35,10 +35,10 @@ int __cdecl ai_SelectZunftPrivilegeGroup(fcn_004a0020_Ent* e)
 	int j;
 	int n;
 	int ord[6];
-	fcn_004a0020_Rec q;
-	fcn_004a0020_Rec list[6];
-	fcn_004a0020_Ent* d;
-	fcn_004a0020_Ent* d2;
+	ZUNFT_GROUP_SLOT q;
+	ZUNFT_GROUP_SLOT list[6];
+	ZUNFT_GROUP_ENTITY* d;
+	ZUNFT_GROUP_ENTITY* d2;
 	int k;
 	int a;
 	int b;
@@ -47,12 +47,12 @@ int __cdecl ai_SelectZunftPrivilegeGroup(fcn_004a0020_Ent* e)
 	for (i = 0; i < 6; i++) {
 		ord[i] = i + 1;
 	}
-	if (e->x168 != 0) {
-		j = e->x168;
-	} else if (e->x166 != 0) {
-		j = e->x166;
-	} else if (e->x167 != 0) {
-		j = e->x167;
+	if (entity->x168 != 0) {
+		j = entity->x168;
+	} else if (entity->x166 != 0) {
+		j = entity->x166;
+	} else if (entity->x167 != 0) {
+		j = entity->x167;
 	}
 	if (j != 0) {
 		if (amt_GetRoleTemplate(j, &q) == 0) {
@@ -87,12 +87,12 @@ int __cdecl ai_SelectZunftPrivilegeGroup(fcn_004a0020_Ent* e)
 		n = amt_CollectOfficeSlotsByGroup(ord[i], 6, list);
 		if (n >= 3) {
 			for (j = 0; j < n - 1; j++) {
-				if (list[j].id != e->h && list[j].id != -1) {
+				if (list[j].id != entity->h && list[j].id != -1) {
 					d = gm_LookupEntityRecordById(list[j].id);
 					for (k = j + 1; k < n; k++) {
 						if (d == 0)
 							break;
-						if (list[k].id != e->h && list[k].id != -1) {
+						if (list[k].id != entity->h && list[k].id != -1) {
 							d2 = gm_LookupEntityRecordById(list[k].id);
 							if (d2 != 0) {
 								sum += gm_CalcEntityFavor(d->id, d2->id, 1);

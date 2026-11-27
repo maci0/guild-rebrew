@@ -35,7 +35,7 @@ unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_005cd440(Req*, char*, int, void*);
+int __cdecl d2_OpenTargetPicker(Req*, char*, int, void*);
 void __cdecl d2_ShowIntimidationDialog(void);
 
 /* The message struct is local to the branch that sends it: with it at function
@@ -74,7 +74,7 @@ int __cdecl gm_RunIntimidationAction(unsigned char* obj, char* request)
 	req.kind = 6;
 	req.cd = g_666018;
 	io_FormatTextBuffer(text, 0x1d61);
-	if (fcn_005cd440(&req, text, 0, d2_ShowIntimidationDialog)) {
+	if (d2_OpenTargetPicker(&req, text, 0, d2_ShowIntimidationDialog)) {
 		result = 1;
 	}
 	return result;

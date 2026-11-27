@@ -10,9 +10,9 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_LookupSpecialObject(unsigned short id);
 int __cdecl d2_GetControlValue(int handle);
 void __cdecl d2_SetElementValue(int handle, ...);
-void __cdecl fcn_00472640(int handle, int value);
+void __cdecl d2_SetElementEnabled(int handle, int value);
 void __cdecl d2_SetDisplayCounter(int id, int value);
-int __cdecl fcn_00466ee0(int x, int y, int id, int group, char* name);
+int __cdecl d2_AddWindowField(int x, int y, int id, int group, char* name);
 void __cdecl d2_DestroyElement(int handle);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
 /* ADDRESS: GOLDTL 0x005c5e70 */
@@ -41,12 +41,12 @@ unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 				used = gm_LookupSpecialObject(*(unsigned short*) *slot);
 				if (used != 0) {
 					if (*(int*) (*slot + 0x21) != 0) {
-						fcn_00472640(slot[-1], 0);
+						d2_SetElementEnabled(slot[-1], 0);
 						*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_1f4)) = 1.0
 						    - (float) *(int*) (*slot + 0x1c) / *(int*) (used + 4);
 					}
 					else {
-						fcn_00472640(slot[-1], 1);
+						d2_SetElementEnabled(slot[-1], 1);
 						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_060)) = 0;
 						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[slot[-1]].value_1f4)) = 0;
 					}
@@ -78,7 +78,7 @@ unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 				for (i = 0; i < 6; i++) {
 					if (*(int*) (i * 8 + 0x776c64) == 0) {
 						*(int*) (i * 8 + 0x776c64) = (int) match;
-						handle = fcn_00466ee0((i % 3) * 0x38 + 0x15, (i / 3) * 0x36 + 0x4a,
+						handle = d2_AddWindowField((i % 3) * 0x38 + 0x15, (i / 3) * 0x36 + 0x4a,
 						    *match + 0xdf, 10, g_6abb00);
 						*(int*) (i * 8 + 0x776c60) = handle;
 						*(unsigned int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].flags_1d0)) = 0x23;
@@ -90,12 +90,12 @@ unsigned int __cdecl d2_UpdateActiveItemSlots(void)
 						used = gm_LookupSpecialObject(*match);
 						if (used != 0) {
 							if (*(int*) ((char*) match + 0x21) != 0) {
-								fcn_00472640(handle, 0);
+								d2_SetElementEnabled(handle, 0);
 								*(float*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[handle].value_1f4)) = 1.0
 								    - (float) *(int*) ((char*) match + 0x1c) / *(int*) (used + 4);
 							}
 							else {
-								fcn_00472640(handle, 1);
+								d2_SetElementEnabled(handle, 1);
 							}
 						}
 						break;

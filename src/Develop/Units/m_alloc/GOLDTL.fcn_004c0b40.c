@@ -15,7 +15,7 @@ struct snd_4c0b40 {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
-int __cdecl fcn_00423670(char**, int, int);
+int __cdecl sb_StartVoice(char**, int, int);
 int __cdecl sb_CheckVoicePlaying(char**);
 void __cdecl d3snd_SetVoiceFlag0x10(char**, int);
 void __cdecl m_FreeTracked(struct snd_4c0b40*);
@@ -43,7 +43,7 @@ void __cdecl fcn_004c0b40(void)
 					msx_FadeMasterVolumeIfTrackActive(0.0f, 0x7d0);
 					g_772d2c = one;
 				}
-				fcn_00423670((*(struct snd_4c0b40**)&g_772d34)->voice, 0, 0);
+				sb_StartVoice((*(struct snd_4c0b40**)&g_772d34)->voice, 0, 0);
 				(*(struct snd_4c0b40**)&g_772d34)->started = one;
 				g_772d38 = now;
 				return;

@@ -3,12 +3,12 @@
 // +0x24/+0x28/+0x2c/+0x30, so the two are twins, not one body.
 
 /* ADDRESS: GOLDTL 0x00477070 */
-void __cdecl fcn_00479cc0(int a, int b, int c, int d, char* e)
+void __cdecl d2_SetSurfaceClipRect(int x, int y, int w, int h, char* surf)
 {
-	if (e != 0) {
-		*(int*) (e + 0x2c) = a;
-		*(int*) (e + 0x30) = b;
-		*(int*) (e + 0x34) = a + c;
-		*(int*) (e + 0x38) = b + d;
+	if (surf != 0) {
+		*(int*) (surf + 0x2c) = x;
+		*(int*) (surf + 0x30) = y;
+		*(int*) (surf + 0x34) = x + w;
+		*(int*) (surf + 0x38) = y + h;
 	}
 }

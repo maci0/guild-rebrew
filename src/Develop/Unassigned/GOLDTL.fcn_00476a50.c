@@ -12,7 +12,7 @@ typedef struct Surf {
 } Surf;
 
 /* ADDRESS: GOLDTL 0x00476a50 */
-void __cdecl fcn_00476a50(int x, int y, Surf* s, unsigned char* dst)
+void __cdecl d2_ReadSurfacePixel(int x, int y, Surf* s, unsigned char* dst)
 {
 	char* b;
 	int off;

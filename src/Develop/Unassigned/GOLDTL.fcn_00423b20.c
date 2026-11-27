@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-int __cdecl fcn_00423b20(char* path, char* out, int n)
+int __cdecl sbs_ExtractBaseName(char* path, char* out, int n)
 {
 	int r = 0;
 	char* s;

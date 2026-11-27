@@ -3,7 +3,7 @@
 int __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 unsigned int __cdecl d2_PackColorForPixelFormat(int r, int g, unsigned char b);
-void __cdecl fcn_00477560(const void* src, char* hdr);
+void __cdecl shp_WriteFrameOffsets(const void* src, char* hdr);
 
 /* Block-encodes the colour-keyed sprite rectangle found inside the plane at
  * a5 (stride a7, origin a1) and returns the packed block buffer. */
@@ -132,7 +132,7 @@ char* __cdecl fcn_00477e70(int a1, int a2, int width, int height, int a5, unsign
 	bytes = *(int*) b;
 	*(int*) (b + 0x2a) = bytes;
 	*(int*) b = bytes + *(unsigned short*) (b + 0xa) * 4;
-	fcn_00477560(&offs[0], b);
+	shp_WriteFrameOffsets(&offs[0], b);
 	*(int*) (b + 0x26) = runs;
 	b[0xd] = a8;
 	out = (char*) m_alloc(*(int*) b, (char*) 0x67d970);

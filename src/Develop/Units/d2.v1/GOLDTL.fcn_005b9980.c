@@ -24,8 +24,8 @@ extern float __cdecl eval_ObjektPreis2Credits(int a0, int a1);
 extern int __cdecl gm_CheckEntityStock(char *a0, int a1, unsigned char a2);
 extern int __cdecl fcn_0051e070(void);
 extern int __cdecl fcn_00526120(char *a0, int a1);
-extern void __cdecl fcn_0046f9b0(int a0, char *a1);
-extern void __cdecl fcn_00469090(int a0);
+extern void __cdecl d2_SetControlText(int a0, char *a1);
+extern void __cdecl d2_CenterElement(int a0);
 extern void __cdecl cm_RequestTransferCurrencyNoKill(int a0, int a1, char a2, int a3);
 extern int __cdecl gm_GetEntityTableEntry(int a0);
 extern void __cdecl cm_SendSellObjekt(int a0, int a1, int a2, int a3, char a4, int a5);
@@ -111,8 +111,8 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
         {
             io_FormatTextBuffer(messageBuf, (char *)0xda, choiceIndex * 2 + 0xc10,
                 (int) eval_ObjektPreis2Credits(choiceIndex + 0x134, 100));
-            fcn_0046f9b0(confirmButton, messageBuf);
-            fcn_00469090(confirmButton);
+            d2_SetControlText(confirmButton, messageBuf);
+            d2_CenterElement(confirmButton);
         }
         if (g_14ce8e0 != 0)
             g_774654 = 1;

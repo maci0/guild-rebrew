@@ -20,7 +20,7 @@ extern __int64 g_666018;
 extern char g_68ff68[];
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-char* __cdecl fcn_005cd440(int*, char*, int, int);
+char* __cdecl d2_OpenTargetPicker(int*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
@@ -53,7 +53,7 @@ int __cdecl gm_ObjTriggerMultiCrimes(char* ent, int* arg)
 		desc[1] = 0x400;
 		desc[4] = 6;
 		desc[3] = g_66601c;
-		obj = fcn_005cd440(desc, name, 0, 0);
+		obj = d2_OpenTargetPicker(desc, name, 0, 0);
 		if (obj == 0) {
 			goto end;
 		}

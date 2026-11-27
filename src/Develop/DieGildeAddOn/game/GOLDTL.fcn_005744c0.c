@@ -12,7 +12,7 @@ int __cdecl fcn_00415300(int);
 int __cdecl sb_PlayVoice(int, int, int, int, int, int, int);
 int __cdecl evt_FindScriptById(int);
 int __cdecl evt_LoadGfxScript(char*);
-void __cdecl fcn_00428340(int, int, ...);
+void __cdecl evt_CallScriptFunction(int, int, ...);
 int __cdecl evt_RequestScriptExit(int);
 void __cdecl evt_RunGfxScript(int);
 void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
@@ -247,7 +247,7 @@ LfailB:
 				if (v8 && *(int*) (v8 + 0x218) != 1 && v14) {
 					v24 = evt_LoadGfxScript((char*) 0x6a7dd4);
 					if (v24) {
-						fcn_00428340(v24, 4, v14, v8, 0x573d90, buildAction);
+						evt_CallScriptFunction(v24, 4, v14, v8, 0x573d90, buildAction);
 						*(int*) (v24 + 0x104) = 0;
 						*(int*) (v24 + 0xc8c) = 1;
 						evt_RunGfxScript(v24);
@@ -340,7 +340,7 @@ LfailB:
 				v11 += 0xa9;
 			} while (v11 < 0xa900);
 			if (v13 && v8 && (v24 = evt_LoadGfxScript((char*) 0x6a7db8)) != 0) {
-				fcn_00428340(v24, 3, v8, v13, 2);
+				evt_CallScriptFunction(v24, 3, v8, v13, 2);
 				*(int*) (v24 + 0xc8c) = 1;
 				*(int*) (v24 + 0x104) = 0;
 				*(int*) (buildAction + 0xbc) = *(int*) (v24 + 0x100);
@@ -410,7 +410,7 @@ LfailB:
 					v31 = (int) (v21 * 1.8);
 					v8 = evt_LoadGfxScript((char*) 0x6a7da0);
 					if (v8) {
-						fcn_00428340(v8, 6, (int) v17[0], (int) v17[1], (int) v17[2],
+						evt_CallScriptFunction(v8, 6, (int) v17[0], (int) v17[1], (int) v17[2],
 							(int) v21, v31, *(int*) (v15 + 0x61));
 						*(int*) (v8 + 0x104) = 0;
 					}

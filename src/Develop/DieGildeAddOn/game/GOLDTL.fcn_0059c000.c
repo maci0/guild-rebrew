@@ -25,7 +25,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int);
 void __cdecl fcn_00594340(void);
 void __cdecl d2_DrawPanelFrame(int, int, int);
-int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
+int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
 void __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -112,7 +112,7 @@ int __cdecl d2_RunMetalProduktionDialog(char* building)
 	p[2] = 0xe;
 	p[3] = 0xe;
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x742);
-	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
+	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, d2_GetFormWindow(h, 2, 0x78, &v16, &v15, &item));
 	*(unsigned int*) (&((D2_CONTROL_TL*) (g_1015ea0))[item].font) = 0x54;
 	do {
 		d2_SetForm(h, 2);

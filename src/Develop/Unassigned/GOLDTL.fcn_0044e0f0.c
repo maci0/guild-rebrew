@@ -2,7 +2,7 @@
 
 int __cdecl fcn_004011f0(void* stream, void* dst);
 
-void __cdecl fcn_0044e0f0(void* stream)
+void __cdecl d3_SkipBinVersionChunk(void* stream)
 {
 	int x;
 

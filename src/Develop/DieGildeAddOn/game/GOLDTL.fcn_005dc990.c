@@ -37,7 +37,7 @@ extern __int64 g_666018;
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-unsigned char* __cdecl fcn_005cd440(Req*, char*, int, void*);
+unsigned char* __cdecl d2_OpenTargetPicker(Req*, char*, int, void*);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 /* One result variable set on every path keeps the two arms' tails apart (no
@@ -59,7 +59,7 @@ int __cdecl gm_UseSkillModifier82Stats3And2(unsigned char* obj, int* request)
 		req.size = 0x400;
 		req.kind = 6;
 		req.cd = g_666018;
-		e = fcn_005cd440(&req, text, 0, 0);
+		e = d2_OpenTargetPicker(&req, text, 0, 0);
 		if (e != 0) {
 			struct msg m;
 

@@ -49,9 +49,9 @@ extern unsigned char g_1040600;
 extern float g_6628a4;
 extern unsigned long g_14ce728;
 
-void* __cdecl fcn_00457c10(void* vb, void* ib, void* map, int step, int* rect,
+void* __cdecl d3_BuildShadowPatchFromMap(void* vb, void* ib, void* map, int step, int* rect,
 	GOLDTL_TileUv* uv, unsigned long diffuse);
-int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
+int __cdecl d3_BuildShadowPatchFromHeightGrid(void* vb, void* ib, int* rect, int stride, int base,
 	float* offset, float* scale, GOLDTL_TileUv* uv, unsigned long diffuse);
 
 /* Patch layout: 0x00 texture, 0x04 diffuse, 0x08 entity, 0x10 base,
@@ -60,7 +60,7 @@ int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
  * 0x88/0x8c buffer capacities, 0x90/0x94 written counts, 0x98 skip flag.
  * The byte return matches the original: only al is defined on the 0 path. */
 /* ADDRESS: GOLDTL 0x00457630 */
-char __cdecl fcn_00457630(void* obj, void* map)
+char __cdecl d3_SubmitShadowPatch(void* obj, void* map)
 {
 	char* s;
 	void* vb;
@@ -208,11 +208,11 @@ char __cdecl fcn_00457630(void* obj, void* map)
 			rect[3] = z1;
 			*(int*) (s + 0x94) = (w + 1) * (h + 1);
 			if (map != 0) {
-				*(int*) (s + 0x90) = (int) fcn_00457c10(
+				*(int*) (s + 0x90) = (int) d3_BuildShadowPatchFromMap(
 					*(void**) (s + 0x80), ib, map,
 					*(int*) (s + 0x18), rect, &uv, color);
 			} else {
-				*(int*) (s + 0x90) = fcn_00457f40(
+				*(int*) (s + 0x90) = d3_BuildShadowPatchFromHeightGrid(
 					*(void**) (s + 0x80), ib, rect,
 					*(int*) (s + 0x14), *(int*) (s + 0x10),
 					(float*) (s + 0x3c), (float*) (s + 0x2c),

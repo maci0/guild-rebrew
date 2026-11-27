@@ -40,7 +40,7 @@ void __cdecl d2_GrantTutorialLumber(void);
 void __cdecl d2_CheckTutCh5Msg29Node155Gate(void);
 void __cdecl d2_GetTutCh5SubStep(void);
 void __cdecl d2_FocusTutorialBuilding0x02(void);
-void __cdecl fcn_0057fe50(void);
+void __cdecl d2_GrantTutorialCh5Reward(void);
 void __cdecl d2_RunTutorialOfficeStep(void);
 void __cdecl d2_SendTutorialTownMsgA0(void);
 
@@ -400,7 +400,7 @@ int* __cdecl d2_CreateTutorialChapter5(void)
 	p[0xa] = (int) g_6a9078;
 	p[0xb] = 0x429;
 	p[0xc] = 0x163;
-	p[0xd] = (int) fcn_0057fe50;
+	p[0xd] = (int) d2_GrantTutorialCh5Reward;
 	p[0xe] = 0;
 	p[0x10] = 0x2e;
 	p[0x11] = 0x2148;

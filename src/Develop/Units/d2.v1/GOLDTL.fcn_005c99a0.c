@@ -17,10 +17,10 @@ typedef struct Item_5c99a0 {
 int __cdecl d2_AddElementToWindow();
 int __cdecl io_FormatTextBuffer();
 int __cdecl fcn_005c9090();
-int __cdecl fcn_004677e0();
+int __cdecl d2_AddWindowValueGauge();
 int __cdecl fcn_00472380();
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
-int __cdecl fcn_00472640();
+int __cdecl d2_SetElementEnabled();
 int __cdecl fcn_005cf720(unsigned short, unsigned short, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005c99a0 */
@@ -139,13 +139,13 @@ int __cdecl fcn_005c99a0(int a0, int mode, int filter, int itemCount, Item_5c99a
 				fcn_005c9090(buf, x, item->y + 0xf, 0xca, 0x56);
 			}
 			if (item->obj != (int*) owner && *(char*) ((int) item->obj + 2) != 6) {
-				item->win2 = fcn_004677e0(x - 0x23, (int) *(short*) (g_772500 + 0x1ebda) + 5 + y, 0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
+				item->win2 = d2_AddWindowValueGauge(x - 0x23, (int) *(short*) (g_772500 + 0x1ebda) + 5 + y, 0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
 				if (*(char*) ((int) item->obj + 2) == 7) {
 					fcn_00472380(item->win2, 0, 100, 0, 1);
 				} else {
 					fcn_00472380(item->win2, 0, 100, (int) gm_CalcEntityFavor(*(unsigned short*) owner, *(unsigned short*) item->obj, 1));
 				}
-				fcn_00472640(item->win2, 1);
+				d2_SetElementEnabled(item->win2, 1);
 				((D2_CONTROL_TL*)(*(int*)&g_1015ea0))[item->win2].value_05c = 1;
 			}
 			if (owner != 0 && *(char*) (owner + 2) == 6 && *(int*) ((int) item->obj + 0x210) == *(int*) (owner + 4)) {

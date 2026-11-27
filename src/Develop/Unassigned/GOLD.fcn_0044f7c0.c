@@ -3,7 +3,7 @@
 
 int __cdecl fcn_004011d0(void* stream, void* dst);
 
-void __cdecl fcn_0044f7c0(void* a)
+void __cdecl vfs_SkipInt(void* a)
 {
 	int x;
 	x = 0;

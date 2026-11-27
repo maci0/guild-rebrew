@@ -44,7 +44,7 @@ extern char s_67d46c[];
 #include "Develop/Units/Error/error_message.h"
 int __cdecl fcn_00465950(char* name);
 int __cdecl d2_AllocateElement(void);
-int __cdecl fcn_0046b520(char* s, int font);
+int __cdecl d2_MeasureTextWidth(char* s, int font);
 
 /* ADDRESS: GOLDTL 0x00467240 */
 int __cdecl d2_OpenInputIcon(int x, int y, int w, int h, unsigned char flags)
@@ -95,7 +95,7 @@ int __cdecl d2_OpenInputIcon(int x, int y, int w, int h, unsigned char flags)
 		f->digits = n;
 		sprintf(buf, s_67d46c, f->digits);
 		sprintf(buf + 8, buf, f->f12c * f->f140);
-		f->w = fcn_0046b520(buf + 8, f->font);
+		f->w = d2_MeasureTextWidth(buf + 8, f->font);
 	}
 	if (flags & 1) {
 		f->max = 0x20;

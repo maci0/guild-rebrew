@@ -10,7 +10,7 @@ extern unsigned int g_6b7d5c;
 
 
 /* ADDRESS: GOLDTL 0x00420bf0 */
-void __cdecl fcn_00420bf0(void)
+void __cdecl nt_FormatPacketStats(void)
 {
 	unsigned int i;
 	char buf[256];

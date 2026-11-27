@@ -6,7 +6,7 @@ int __cdecl atoi(const char* s);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004b1900 */
-int __cdecl fcn_004b1900(int a1, int a2, char* s)
+int __cdecl hst_CmdFernhandelRaubritter(int unused1, int unused2, char* s)
 {
 	char msg[0xf8];
 	char c;

@@ -2,12 +2,12 @@
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-char* __cdecl fcn_00424760(char* dst, int n);
-char* __cdecl fcn_00424790(char* p, char* dst, int n);
-char* __cdecl fcn_00424810(char* dst, int n);
-char* __cdecl fcn_004247c0(char* dir, char* dst, int n);
-char* __cdecl fcn_00424840(char* p, char* dst, int n);
-int __cdecl fcn_00423920(char* name);
+char* __cdecl sbs_GetFirstRootSample(char* dst, int n);
+char* __cdecl sbs_GetNextSample(char* p, char* dst, int n);
+char* __cdecl sbs_GetFirstSet(char* dst, int n);
+char* __cdecl sbs_GetFirstSetSample(char* dir, char* dst, int n);
+char* __cdecl sbs_GetNextSet(char* p, char* dst, int n);
+int __cdecl sbs_GetFileSize(char* name);
 
 
 /* Loads every sample of the bank, substituting the language for "%lang". */
@@ -21,7 +21,7 @@ int __cdecl sbs_UpdateSampleSizes(char* lang)
 	char* p;
 
 	if (sbs_BankManager != 0) {
-		s = fcn_00424760(name, 0x100);
+		s = sbs_GetFirstRootSample(name, 0x100);
 		*(int*) (sbs_BankManager + 0x34) = 0;
 		while (s != 0) {
 			p = strstr(name, "%lang");
@@ -30,15 +30,15 @@ int __cdecl sbs_UpdateSampleSizes(char* lang)
 				strcat(name, lang);
 				strcat(name, s + (p - name) + 5);
 			}
-			*(int*) (s + 0x100) = fcn_00423920(name);
+			*(int*) (s + 0x100) = sbs_GetFileSize(name);
 			if (*(int*) (s + 0x100) == 0) {
 				return -1;
 			}
 			*(int*) (sbs_BankManager + 0x34) += *(int*) (s + 0x100);
-			s = fcn_00424790(s, name, 0x100);
+			s = sbs_GetNextSample(s, name, 0x100);
 		}
-		for (v = fcn_00424810(vname, 0x100); v != 0; v = fcn_00424840(v, vname, 0x100)) {
-			s = fcn_004247c0(vname, name, 0x100);
+		for (v = sbs_GetFirstSet(vname, 0x100); v != 0; v = sbs_GetNextSet(v, vname, 0x100)) {
+			s = sbs_GetFirstSetSample(vname, name, 0x100);
 			*(int*) (v + 0x34) = 0;
 			while (s != 0) {
 				p = strstr(name, "%lang");
@@ -47,13 +47,13 @@ int __cdecl sbs_UpdateSampleSizes(char* lang)
 					strcat(name, lang);
 					strcat(name, s + (p - name) + 5);
 				}
-				*(int*) (s + 0x100) = fcn_00423920(name);
+				*(int*) (s + 0x100) = sbs_GetFileSize(name);
 				if (*(int*) (s + 0x100) == 0) {
 					return -1;
 				}
 				*(int*) (sbs_BankManager + 0x34) += *(int*) (s + 0x100);
 				*(int*) (v + 0x34) += *(int*) (s + 0x100);
-				s = fcn_00424790(s, name, 0x100);
+				s = sbs_GetNextSample(s, name, 0x100);
 			}
 		}
 		return 0;

@@ -8,7 +8,7 @@ void __cdecl d3_SetActiveCamera(char*);
 void __cdecl d3sm_Destroy(void*);
 void __cdecl fcn_0045e610(void*, int);
 void* __cdecl d3sm_Create(int, int, int);
-void __cdecl fcn_0045cdf0(char*);
+void __cdecl d3_ClearObjectOverlayCoords(char*);
 void __cdecl d3_VisitSceneNodes(char*, int, int, void*);
 void __cdecl fcn_0043a6f0(int, int, int);
 #define I32(p) (*(int*)(p))
@@ -196,7 +196,7 @@ char __cdecl d3_SelectSceneContext(int index, char force)
             fcn_0045e610((void*)I32(0x633df8), 0);
         } else {
             I32(0x633df8) = (int)d3sm_Create(0, -I32(0x633dcc), 1);
-            d3_VisitSceneNodes((char*)I32(0x5fb5b0), 0, 0xc0, (void*)fcn_0045cdf0);
+            d3_VisitSceneNodes((char*)I32(0x5fb5b0), 0, 0xc0, (void*)d3_ClearObjectOverlayCoords);
         }
         I32(0xfc2dc8) = I32(0xfc2de0);
         I32(0xfc2dcc) = 0;

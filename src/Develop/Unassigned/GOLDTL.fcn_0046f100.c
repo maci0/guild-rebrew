@@ -17,7 +17,7 @@ extern Win_1015f40 g_1015f40[0x60];
 int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
 
 /* ADDRESS: GOLDTL 0x0046f100 */
-int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win)
+int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win)
 {
 	fcn_0046f100_Win* w;
 	int id;

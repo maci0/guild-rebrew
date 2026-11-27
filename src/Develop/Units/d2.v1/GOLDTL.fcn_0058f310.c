@@ -17,7 +17,7 @@ extern short g_7f4c0c;
 extern char g_7f4ca0[];
 extern char g_7f4ca4[];
 
-void* __cdecl fcn_005cd440(void*, char*, int, int);
+void* __cdecl d2_OpenTargetPicker(void*, char*, int, int);
 int __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl fcn_0052a0c0(char*, int);
 int __cdecl fcn_00470820(int, int, char*);
@@ -71,7 +71,7 @@ int __cdecl d2_ShowHauntingDialog(char* subject)
 	q[0] = 1;
 	q[1] = 0x400;
 	q[4] = 6;
-	v = (char*) fcn_005cd440(q, (char*) g_14b5574, 0, 0);
+	v = (char*) d2_OpenTargetPicker(q, (char*) g_14b5574, 0, 0);
 	if (v == 0) {
 		return d3_EndCameraAndUiMode();
 	}

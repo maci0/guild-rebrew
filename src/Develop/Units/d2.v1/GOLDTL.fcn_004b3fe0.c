@@ -21,9 +21,9 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0046e830(int, int, int, int, int);
+void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 int __cdecl d2_CreateRadioGroup(int);
-int* __cdecl fcn_004b3ce0(int, int*);
+int* __cdecl gm_FindNextMissionSpec(int, int*);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_AddToRadioGroup(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -52,10 +52,10 @@ int __cdecl d2_ChooseMission(int missionKey)
 	d2_SetForm(h, 2);
 	prev = d2_CurrentWindowId;
 	d2_SetForm(h, 0);
-	fcn_0046e830(-1, -1, d2_CurrentWindowId, prev, 0x767);
+	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, prev, 0x767);
 	d2_SetForm(h, 2);
 	lst = d2_CreateRadioGroup(0);
-	for (it = fcn_004b3ce0(missionKey, 0); it != 0; it = fcn_004b3ce0(missionKey, it)) {
+	for (it = gm_FindNextMissionSpec(missionKey, 0); it != 0; it = gm_FindNextMissionSpec(missionKey, it)) {
 		k = d2_GetWindowListItem(h, 2, io_AppendText((int) g_681140, it[2]));
 		*(int**) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[k].associated_object)) = it;
 		d2_AddToRadioGroup(lst, k);

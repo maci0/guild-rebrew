@@ -24,11 +24,11 @@ unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00473150(unsigned char*);
 void __cdecl d2_ClearScreen(void);
-void __cdecl fcn_00469e30(int);
+void __cdecl d2_SetBackdropResource(int);
 int __cdecl fcn_0046e940(int, int, int, int, int);
 void __cdecl fcn_00471c80(int, int);
 void __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 
 void __cdecl d2_ShowCreditsScreen(void)
 {
@@ -45,7 +45,7 @@ void __cdecl d2_ShowCreditsScreen(void)
 	fcn_00473150(fade);
 	fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 10);
 	d2_ClearScreen();
-	fcn_00469e30(0x7ad);
+	d2_SetBackdropResource(0x7ad);
 	win = fcn_0046e940(100, 0, 0x258, g_fb9070, 0x10);
 	fcn_00471c80(win, 1);
 	io_AppendText(0x2004);
@@ -88,8 +88,8 @@ void __cdecl d2_ShowCreditsScreen(void)
 		}
 		i++;
 	}
-	fcn_0046f280(win);
-	fcn_00469e30(0x797);
+	d2_CloseWindow(win);
+	d2_SetBackdropResource(0x797);
 	fcn_00473150(fade);
 	fcn_004730c0(0, 0, g_fb9072, g_fb9070, s_67d67c, 0x3c, 10);
 	d2_SuppressOverlay = 0;

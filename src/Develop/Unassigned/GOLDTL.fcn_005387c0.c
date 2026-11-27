@@ -2,7 +2,7 @@ extern int g_6acf80;
 extern int g_6acf84;
 
 /* ADDRESS: GOLDTL 0x005387c0 */
-int __cdecl fcn_005387c0(int count, char* list)
+int __cdecl d3_SelectDisplayMode(int count, char* list)
 {
 	int ids[5];
 	int* p;

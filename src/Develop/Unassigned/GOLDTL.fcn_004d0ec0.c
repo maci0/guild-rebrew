@@ -15,7 +15,7 @@ extern GUI_ENTRY g_9b4840[6];
 int __cdecl fcn_00472cd0(int slot);
 void __cdecl fcn_0046e700(int slot);
 #else
-int __cdecl fcn_0046f280(int slot);
+int __cdecl d2_CloseWindow(int slot);
 void __cdecl d2_DestroyElement(int slot);
 #endif
 
@@ -29,7 +29,7 @@ void __cdecl fcn_004d0ec0(void)
 #ifdef REBREW_GOLD
             fcn_00472cd0(g_9b4840[i].win);
 #else
-            fcn_0046f280(g_9b4840[i].win);
+            d2_CloseWindow(g_9b4840[i].win);
 #endif
             g_9b4840[i].win = -1;
 #ifdef REBREW_GOLD

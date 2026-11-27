@@ -2,10 +2,10 @@
 extern int __cdecl d2_AddElementToWindow(int x, int y, int id, int ctx);
 extern int __cdecl io_FormatTextBuffer(char* dst, const char* fmt, ...);
 extern int __cdecl fcn_005c9090(char* text, int x, int y, int color, int flags);
-extern int __cdecl fcn_004677e0(int x, int y, int w, int a, int b, int c, int d, int ctx);
+extern int __cdecl d2_AddWindowValueGauge(int x, int y, int w, int a, int b, int c, int d, int ctx);
 extern float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 #include "d2_gui.h"
-extern int __cdecl fcn_00472640(int element, int a);
+extern int __cdecl d2_SetElementEnabled(int element, int a);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* Draw the trade-good detail window: create the frame and the four value
  * labels, format the two lines of text into the message buffer, draw the
@@ -52,7 +52,7 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* row, int a5)
 		io_FormatTextBuffer(buf, (const char*) 0x6ac95c, *(unsigned short*) row[0]);
 		fcn_005c9090(buf, v10, row[5] + 0xe, 0xca, v7);
 		if (*(unsigned char*) (row[0] + 2) != 6) {
-			v6 = fcn_004677e0(v10 - 0x23, ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 0x1e + a1,
+			v6 = d2_AddWindowValueGauge(v10 - 0x23, ((D2_BILD_GROESSE*)g_772500)[0x5da].hoehe + 0x1e + a1,
 			                  0x40, 0, 100, 0x75, 0x442, d2_CurrentWindowId);
 			row[2] = v6;
 			if (*(unsigned char*) (row[0] + 2) != 7) {
@@ -61,7 +61,7 @@ int __cdecl fcn_005ca740(int a0, int a1, int a2, int a3, int* row, int a5)
 			} else {
 				d2_SetElementValue(v6, 0, 100, 0, 1);
 			}
-			fcn_00472640(row[2], 0);
+			d2_SetElementEnabled(row[2], 0);
 		}
 		if (row[0xc]) {
 			*(int*) ((int)((char*)&((D2_CONTROL_TL*)g_1015ea0)[row[1]].value_05c)) = 1;

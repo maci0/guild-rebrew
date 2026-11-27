@@ -40,7 +40,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471af0(int k, int flag);
+void __cdecl d2_SetFormVisibility(int k, int flag);
 void __cdecl d2_ShowSmapDiagnostics(void);
 void __cdecl d2_ShowScriptMemory(void);
 void __cdecl d2_ShowMemoryStats(void);
@@ -100,19 +100,19 @@ void __cdecl d2_RunSceneChecker(void)
 				d2_ShowLagerInventoryDebug();
 			}
 			if (d2_CurrentElementId == h5) {
-				fcn_00471af0(d, 0);
+				d2_SetFormVisibility(d, 0);
 				d2_RunTheatreCutscenePicker();
-				fcn_00471af0(d, 1);
+				d2_SetFormVisibility(d, 1);
 			}
 			else if (d2_CurrentElementId == h6) {
-				fcn_00471af0(d, 0);
+				d2_SetFormVisibility(d, 0);
 				d2_ShowPlayerObjektCounts();
-				fcn_00471af0(d, 1);
+				d2_SetFormVisibility(d, 1);
 			}
 			else if (d2_CurrentElementId == h7) {
-				fcn_00471af0(d, 0);
+				d2_SetFormVisibility(d, 0);
 				d2_ShowCharacterActionDebug();
-				fcn_00471af0(d, 1);
+				d2_SetFormVisibility(d, 1);
 			}
 		}
 		d2_SetForm(d, 1);

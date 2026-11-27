@@ -10,7 +10,7 @@ int __cdecl d2_SetForm(int k, int i);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
@@ -50,23 +50,23 @@ int __cdecl fcn_004b43f0(int n)
 	list = d2_CreateRadioGroup(7, b0, b1, b2, b3, b4, b5, b6);
 	sel = 1;
 	if (n > 0) {
-		fcn_00472640(b1, 0);
+		d2_SetElementEnabled(b1, 0);
 		sel = 2;
 	}
 	if (n > 1) {
-		fcn_00472640(b2, 0);
+		d2_SetElementEnabled(b2, 0);
 		sel++;
 	}
 	if (n > 2) {
-		fcn_00472640(b3, 0);
+		d2_SetElementEnabled(b3, 0);
 		sel++;
 	}
 	if (n > 3) {
-		fcn_00472640(b4, 0);
+		d2_SetElementEnabled(b4, 0);
 		sel++;
 	}
 	if (n > 4) {
-		fcn_00472640(b5, 0);
+		d2_SetElementEnabled(b5, 0);
 		sel = 0;
 	}
 	d2_SelectRadioGroup(list, sel);

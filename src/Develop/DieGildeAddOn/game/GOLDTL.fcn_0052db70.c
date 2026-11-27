@@ -14,7 +14,7 @@ void* __cdecl evt_LoadGfxScript(char*);
 void* __cdecl evt_FindScriptById(int);
 char __cdecl evt_RequestScriptExit(char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
-int __cdecl fcn_00428340(int, int, int, int, int);
+int __cdecl evt_CallScriptFunction(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0052db70 */
 void __cdecl gm_UpdateBuildingSmokeEffect(char* buildingRecord)
@@ -65,7 +65,7 @@ void __cdecl gm_UpdateBuildingSmokeEffect(char* buildingRecord)
 				goto unlock;
 			}
 			d3_TransformPoint(obj, (float*) (obj + 0x4c), v);
-			if (fcn_00428340((int) found, 3, (int) v[0], (int) v[1], (int) v[2]) != 0) {
+			if (evt_CallScriptFunction((int) found, 3, (int) v[0], (int) v[1], (int) v[2]) != 0) {
 				*(int*) (buildingRecord + 0x95) = *(int*) ((char*) found + 0x100);
 			}
 			*(int*) ((char*) found + 0x104) = 0;

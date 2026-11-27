@@ -8,10 +8,10 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl gm_CollectBuildingStock(char*, void*, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_0046f100(int, int, int, int, int, int);
+int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_0046f7e0(int, int, int, int, int);
-void __cdecl fcn_0046f9b0(int, int);
+int __cdecl d2_AddWindowImage(int, int, int, int, int);
+void __cdecl d2_SetControlText(int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl io_AppendText(int, ...);
@@ -100,7 +100,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 		delta = 0;
 		pick = 0;
 		if (g_row_handle(row) < 0) {
-			idx = fcn_0046f100(g_row_arg0(row), g_row_arg1(row), 0xcd, 0x57, 0x10,
+			idx = d2_CreateChildWindow(g_row_arg0(row), g_row_arg1(row), 0xcd, 0x57, 0x10,
 			                   d2_CurrentWindowId);
 			g_row_handle(row) = idx;
 			*(int*) (idx * 0x3cc + 0x10161cc) = 0x54;
@@ -115,13 +115,13 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 			*(int*)&((D2_CONTROL_TL*)g_1015ea0)[g_row_sub(row)].value_1ec = -1;
 			do {
 				if (*(int*) (slot - 0x38)) {
-					*(int*) slot = fcn_0046f7e0(delta, 0x3a,
+					*(int*) slot = d2_AddWindowImage(delta, 0x3a,
 					                            *(int*) (slot - 0x38) + 0xdf,
 					                            g_row_handle(row), -2);
 					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_05c = 1;
 					d2_SetElementFont(*(int*) slot, 0x54);
 					_itoa(g_id_field(row, key), numbuf, 10);
-					fcn_0046f9b0(*(int*) slot, (int) numbuf);
+					d2_SetControlText(*(int*) slot, (int) numbuf);
 					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1dc = -8;
 					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e0 = 6;
 					*(int*)&((D2_CONTROL_TL*)g_1015ea0)[*(int*) slot].value_1e8 = -1;
@@ -131,7 +131,7 @@ void __cdecl d2_RenderProduktionStockRows(int windowId, int formId, int rowCount
 				slot += 4;
 				delta += 0x31;
 			} while (key < 0x2e);
-			idx = fcn_0046f100(0x43, 4, 0x88, 0x32, 0x10, g_row_handle(row));
+			idx = d2_CreateChildWindow(0x43, 4, 0x88, 0x32, 0x10, g_row_handle(row));
 			g_row_last(row) = idx;
 			*(int*) (idx * 0x3cc + 0x10161cc) = 0x54;
 		}

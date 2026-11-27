@@ -4,7 +4,7 @@
 #include "Develop/Units/d3/d3_camera.h"
 
 void __cdecl d3_UpdateObjectCameraTransform(char* e, char* cam, int f);
-char* __cdecl fcn_00455910(char* e, int h, char* p);
+char* __cdecl d3_ComputeNodeBoundsBox(char* e, int h, char* p);
 
 /* ADDRESS: GOLDTL 0x004546e0 */
 char __cdecl fcn_004546e0(char* e, float* lo, float* hi)
@@ -16,7 +16,7 @@ char __cdecl fcn_004546e0(char* e, float* lo, float* hi)
 	if (!(*(unsigned char*) (e + 0x216) & 0x20))
 		d3_UpdateObjectCameraTransform(e, *(char**) 0x6b8014, 0);
 	h = *(int*) (e + 0x1ec);
-	q = (float*) fcn_00455910(e, h + 0xf4, (char*) (h + 8));
+	q = (float*) d3_ComputeNodeBoundsBox(e, h + 0xf4, (char*) (h + 8));
 	if (q != 0) {
 		*lo = 1.0e10f;
 		lo[1] = 1.0e10f;

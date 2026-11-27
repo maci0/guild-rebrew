@@ -3,7 +3,7 @@
 typedef struct
 {
 	int i[0x3cc / 4];
-} fcn_00472510_Win;
+} D2_FORM_WINDOW;
 // SIZE 0x3cc
 
 typedef struct
@@ -22,13 +22,13 @@ extern Page_1038144 g_1038144[];
 extern int g_772534;
 
 /* ADDRESS: GOLDTL 0x00472510 */
-void __cdecl fcn_00472510(int idx, int slot, int a3, int a4, int a5, int a6)
+void __cdecl d2_SetFormElementValue(int idx, int slot, int value1, int value2, int value3, int value4)
 {
-	fcn_00472510_Win* w;
+	D2_FORM_WINDOW* w;
 	D2_CONTROL_TL* e;
 	char* sub;
 
-	w = &((fcn_00472510_Win*)g_1015f40)[g_1038144[g_772534].i[slot]];
+	w = &((D2_FORM_WINDOW*)g_1015f40)[g_1038144[g_772534].i[slot]];
 	if (idx > w->i[0x2c / 4]) {
 		return;
 	}
@@ -36,27 +36,27 @@ void __cdecl fcn_00472510(int idx, int slot, int a3, int a4, int a5, int a6)
 	if ((*(int*)&e->kind) == 0x41) {
 		sub = (char*) (*(int*)&e->data);
 		if (*(int*) (sub + 0x28) & 1) {
-			if (strlen((char*) a3) > 0xfe) {
+			if (strlen((char*) value1) > 0xfe) {
 				return;
 			}
-			strcpy(sub + 0x2c, (char*) a3);
+			strcpy(sub + 0x2c, (char*) value1);
 			return;
 		}
 		if (*(int*) (sub + 0x28) & 2) {
-			*(int*) (sub + 0x1c) = a3;
-			*(int*) (sub + 0x18) = a4;
-			*(int*) (sub + 0x12c) = a5;
+			*(int*) (sub + 0x1c) = value1;
+			*(int*) (sub + 0x18) = value2;
+			*(int*) (sub + 0x12c) = value3;
 			return;
 		}
 	}
 	if ((*(int*)&e->kind) == 0x45) {
-		(*(int*)&e->payload.fields.value_090) = a3;
-		(*(int*)&e->payload.fields.value_094) = a4;
-		(*(int*)&e->payload.fields.value_08c) = a5;
+		(*(int*)&e->payload.fields.value_090) = value1;
+		(*(int*)&e->payload.fields.value_094) = value2;
+		(*(int*)&e->payload.fields.value_08c) = value3;
 		if (*((unsigned char*)&e->payload.fields.value_098) & 0x10) {
-			(*(int*)&e->payload.fields.value_0a0) = a6;
+			(*(int*)&e->payload.fields.value_0a0) = value4;
 		}
 	} else if ((*(int*)&e->value_058) != 0 || (*(int*)&e->value_05c) != 0) {
-		(*(int*)&e->value_03c) = (*(int*)&e->value_038) = (unsigned char) a3;
+		(*(int*)&e->value_03c) = (*(int*)&e->value_038) = (unsigned char) value1;
 	}
 }

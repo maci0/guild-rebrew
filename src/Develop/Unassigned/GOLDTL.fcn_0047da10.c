@@ -21,7 +21,7 @@ typedef struct
 	char pad28[0x1cc - 0x28];
 	int flags;
 	char pad1d0[0x21c - 0x1d0];
-} fcn_0047da10_Ent;
+} AI_STEP_ENTITY;
 
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
@@ -36,21 +36,21 @@ extern unsigned char g_7747b0;
 
 int __cdecl gm_GetElapsedMinutes(GAME_TIMESTAMP* a, GAME_TIMESTAMP* b);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl ai_RepairMeisterObjects(fcn_0047da10_Ent* e);
-void __cdecl ai_UpdateEntityTurn(fcn_0047da10_Ent* e);
-int __cdecl fcn_0047dca0(fcn_0047da10_Ent* e);
+void __cdecl ai_RepairMeisterObjects(AI_STEP_ENTITY* e);
+void __cdecl ai_UpdateEntityTurn(AI_STEP_ENTITY* e);
+int __cdecl fcn_0047dca0(AI_STEP_ENTITY* e);
 #include "client_packet_builder.h"
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
 
 /* ADDRESS: GOLDTL 0x0047da10 */
-void __cdecl fcn_0047da10(void)
+void __cdecl ai_StepEntityTurns(void)
 {
 	float f;
 	int n;
 	GAME_TIMESTAMP now;
 	char buf[0x400];
-	fcn_0047da10_Ent* e;
+	AI_STEP_ENTITY* e;
 	int d;
 	int k;
 	int idx;
@@ -82,7 +82,7 @@ void __cdecl fcn_0047da10(void)
 	idx = g_100dc00;
 	for (k = n; k != 0; k--) {
 		if ((*(unsigned short*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx].entity_index) != 0xffff) {
-			e = ((fcn_0047da10_Ent*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
+			e = ((AI_STEP_ENTITY*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[idx]);
 			ai_RepairMeisterObjects(e);
 			if ((*(GAME_TIMESTAMP*)&gm_GameTime).hour > 6 && (*(GAME_TIMESTAMP*)&gm_GameTime).hour < 0x16 && (g_7747b0 & 0x80) == 0 && (e->kind == 5
 			    || ((e->id ^ (*(GAME_TIMESTAMP*)&gm_GameTime).hour) & 1) == 0))

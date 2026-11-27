@@ -25,7 +25,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_0046f7e0(int, int, int, int, int);
+int __cdecl d2_AddWindowImage(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
@@ -117,7 +117,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 		v = *(unsigned short*) p;
 		val = *(unsigned short*) (p + 8);
 		if (val != 0) {
-			fcn_0046f7e0(0, item, val + 0xdf, d2_CurrentWindowId, -2);
+			d2_AddWindowImage(0, item, val + 0xdf, d2_CurrentWindowId, -2);
 			io_AppendText((int) s_6a9a30, v, val * 2 + 0x9a8);
 			item += 0x16;
 		}
@@ -131,7 +131,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 		val = slot * 0x16 + 0x28;
 		for (n = 10; n != 0; n--) {
 			if (*(unsigned short*) p == itemId && itemId != 0x1cd) {
-				fcn_0046f7e0(6, val,
+				d2_AddWindowImage(6, val,
 						*(unsigned char*) (0x699058 + i) + 0x427,
 						d2_CurrentWindowId, -2);
 				io_AppendText((int) s_6a9a28,
@@ -186,7 +186,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 		val = slot * 0x16 + 0x28;
 		for (count = 0; count < i; count++) {
 			item = arr[count];
-			fcn_0046f7e0(6, val, item + 0x427, d2_CurrentWindowId, -2);
+			d2_AddWindowImage(6, val, item + 0x427, d2_CurrentWindowId, -2);
 			io_AppendText((int) s_6a9a28, item * 0xe + 0x48e);
 			val += 0x16;
 		}
@@ -196,7 +196,7 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 				&& itemId != 0x1c4 && itemId != 0x1c5 && itemId != 0x1c6
 				&& itemId != 0x2af && itemId != 0x2b0))
 			&& (def[0] == 0x17 || def[0] == 0x25)) {
-		fcn_0046f7e0(6, n * 0x16 + 0x28, 0x444, d2_CurrentWindowId, -2);
+		d2_AddWindowImage(6, n * 0x16 + 0x28, 0x444, d2_CurrentWindowId, -2);
 		io_AppendText((int) s_6a9a28, 0x624);
 		n++;
 	}

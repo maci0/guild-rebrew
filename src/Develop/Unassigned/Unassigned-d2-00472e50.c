@@ -3,7 +3,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern int d2_CurrentWindowId;
 
 #include "Develop/Units/Error/error_message.h"
-void __cdecl fcn_00476970(int a);
+void __cdecl d2_ClearSurface(int a);
 typedef struct Win {
 	int pad0;
 	int left;
@@ -49,7 +49,7 @@ extern char s_67d890[];
 extern char s_67d868[];
 
 int __cdecl d2_GetResourceData(int id);
-void __cdecl fcn_00475fd0(int surf);
+void __cdecl d2_LockSurface(int surf);
 void __cdecl fcn_0047cba0(int x, int y, int surf, int src, int mode);
 void __cdecl d2_UnlockSurface(int surf);
 
@@ -67,7 +67,7 @@ void __cdecl d2_ClearPaintbox(void)
 		ReportClientMessage((const char*) 0x67d818);
 		return;
 	}
-	fcn_00476970(*(int*) (m + 0x38));
+	d2_ClearSurface(*(int*) (m + 0x38));
 }
 
 /* ADDRESS: GOLDTL 0x00472ea0 */
@@ -104,7 +104,7 @@ void __cdecl d2_DrawShape(int x, int y, int id)
 	}
 	src = d2_GetResourceData(id);
 	if (src != 0) {
-		fcn_00475fd0(w->i[0x38 / 4]);
+		d2_LockSurface(w->i[0x38 / 4]);
 		fcn_0047cba0(x, y, w->i[0x38 / 4], src, d2_ResourceOffset);
 		d2_UnlockSurface(w->i[0x38 / 4]);
 	}

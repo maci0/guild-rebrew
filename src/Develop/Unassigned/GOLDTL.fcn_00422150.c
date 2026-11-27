@@ -7,10 +7,10 @@ extern int g_678dec;
 extern volatile int g_6b7fac;
 
 extern int __cdecl msx_GetSampleStatus(int a0);
-extern void __cdecl fcn_0042a920(int a0, int a1);
-extern void __cdecl fcn_0042a880(int a0);
+extern void __cdecl msx_SetSampleVolume(int a0, int a1);
+extern void __cdecl msx_EndSample(int a0);
 extern void __cdecl sb_StopVoice(void *a0, int a1);
-extern void __cdecl fcn_00423670(void *a0, int a1, int a2);
+extern void __cdecl sb_StartVoice(void *a0, int a1, int a2);
 
 typedef struct
 {
@@ -29,7 +29,7 @@ typedef struct
 } PART;
 
 /* ADDRESS: GOLDTL 0x00422150 */
-void __cdecl fcn_00422150(void)
+void __cdecl sb_UpdateVoices(void)
 {
     int now;
     PART *p;
@@ -65,13 +65,13 @@ void __cdecl fcn_00422150(void)
                         if ((unsigned int)dt < (unsigned int)g_678de8)
                         {
                             if (p->flags14 & 1)
-                                fcn_0042a920(p->obj, (int)((float)(unsigned int)dt / (unsigned int)g_678de8 * (unsigned int)p->speed24));
+                                msx_SetSampleVolume(p->obj, (int)((float)(unsigned int)dt / (unsigned int)g_678de8 * (unsigned int)p->speed24));
                             else
-                                fcn_0042a920(p->obj, (int)((float)(unsigned int)(p->start10 - now + g_678de8) / (unsigned int)g_678de8 * (unsigned int)p->speed24));
+                                msx_SetSampleVolume(p->obj, (int)((float)(unsigned int)(p->start10 - now + g_678de8) / (unsigned int)g_678de8 * (unsigned int)p->speed24));
                         }
                         else if (p->flags14 & 2)
                         {
-                            fcn_0042a880(p->obj);
+                            msx_EndSample(p->obj);
                             value = p->flags14 | 8;
                             p->flags14 = value;
                             p->start10 = 0;
@@ -79,7 +79,7 @@ void __cdecl fcn_00422150(void)
                         }
                         else
                         {
-                            fcn_0042a920(p->obj, p->speed24);
+                            msx_SetSampleVolume(p->obj, p->speed24);
                             p->flags14 = p->flags14 & ~3;
                             p->start10 = 0;
                         }
@@ -94,7 +94,7 @@ void __cdecl fcn_00422150(void)
                         {
                             if (p->count0c != 0)
                                 p->count0c--;
-                            fcn_00423670(p, 0, p->limit18);
+                            sb_StartVoice(p, 0, p->limit18);
                         }
                     }
                     else
@@ -125,7 +125,7 @@ void __cdecl fcn_00422150(void)
                     now = g_6b7fac * 8 + g_6b7fac * 4 + g_6b7fac;
                     dt = now - p->start10;
                     if ((unsigned int)dt < (unsigned int)g_678dec)
-                        fcn_0042a920(p->obj,
+                        msx_SetSampleVolume(p->obj,
                             (int)((float)(unsigned int)dt / (unsigned int)g_678dec * (unsigned int)p->speed24));
                     else
                         sb_StopVoice(p, 0);

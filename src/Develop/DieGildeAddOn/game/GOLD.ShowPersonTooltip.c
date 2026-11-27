@@ -25,7 +25,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00534210(int, int, char*, int, int);
+void __cdecl d2_DrawSkillBar(int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00525ef0(void);
 void __cdecl d2_DestroyForm(int);
@@ -105,7 +105,7 @@ void __cdecl ShowPersonTooltip(char* w)
 	for (i = 0; i < 5; i++) {
 		io_FormatTextBuffer(buf, "%s:", i + 0x16b7);
 		d2_ShowTxt(0, i * 15, buf, d2_CurrentWindowId);
-		fcn_00534210(0x64, i * 15 + 2, w, i, 0x4df);
+		d2_DrawSkillBar(0x64, i * 15 + 2, w, i, 0x4df);
 	}
 	do {
 		if (g_14ce8e0 != 0) {

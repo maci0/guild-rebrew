@@ -23,7 +23,7 @@ extern int g_100f1dc;
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl amt_ApplyOfficeSupportEffect(char*, char*);
 void __cdecl fcn_00526120(int, int);
-unsigned short* __cdecl fcn_005cd440(Query*, int, int, int);
+unsigned short* __cdecl d2_OpenTargetPicker(Query*, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -67,7 +67,7 @@ int __cdecl amt_HandleOfficeSupport(char* e, char* o)
 	q.x10 = 6;
 	q.x4 = 0xc00;
 	q.mask = g_666018;
-	h = fcn_005cd440(&q, g_14acb40, 0, 0);
+	h = d2_OpenTargetPicker(&q, g_14acb40, 0, 0);
 	if (h == 0) {
 		return 2;
 	}

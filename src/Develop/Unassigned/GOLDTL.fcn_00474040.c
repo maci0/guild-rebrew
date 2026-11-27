@@ -47,7 +47,7 @@ extern short g_14ce8c2;
 
 Glyph* __cdecl fcn_0047b620(char* font, int c);
 
-void __cdecl fcn_00474040(void)
+void __cdecl d2_HandleSliderInput(void)
 {
 	int flags;
 	Glyph* g;

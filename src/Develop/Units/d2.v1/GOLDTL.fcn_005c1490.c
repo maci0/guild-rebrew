@@ -11,7 +11,7 @@ extern char g_10161b4[];
 extern char g_1016198[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl msx_SetFadeDuration(int);
-void __cdecl fcn_0046e830(int, int, int, int, int);
+void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
@@ -115,7 +115,7 @@ void __cdecl d2_ShowBardPoemDialog(void)
 		d2_SetForm(h, 2);
 		idx = d2_CurrentWindowId;
 		d2_SetForm(h, 3);
-		fcn_0046e830(-1, -1, d2_CurrentWindowId, idx, 0x767);
+		d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, idx, 0x767);
 		*(int*) (g_10161b4 + idx * 0x3cc) = 0x30;
 		d2_SetForm(h, 2);
 		io_AppendText((int) *(unsigned short*) (rec + 0xc) + 2);

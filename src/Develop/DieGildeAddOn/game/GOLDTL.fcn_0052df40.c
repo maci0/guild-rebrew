@@ -54,7 +54,7 @@ void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
@@ -94,7 +94,7 @@ void __cdecl d2_ShowBuildingInfoPanel(unsigned char* building)
 	if (*building == 0x47 || *building == 0x1d || *building == 0x57) {
 		d2_CurrentValueBar = -1;
 	} else {
-		d2_CurrentValueBar = fcn_004677e0(0x15, 0x7b, 0x38, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
+		d2_CurrentValueBar = d2_AddWindowValueGauge(0x15, 0x7b, 0x38, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 		d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, pct);
 	}
 	if ((building[0x5a] & 1) != 0 || *building == 0x47 || *building == 0x1d || *building == 0x57) {

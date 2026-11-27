@@ -49,7 +49,7 @@ extern unsigned short* g_772f24;
 
 unsigned short __cdecl gm_RandomMod(int n);
 void __cdecl fcn_004d1a80(void);
-void __cdecl fcn_004d7e50(int);
+void __cdecl d2_InitCombatHud(int);
 #include "Develop/Units/Msx/msx.h"
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl ch_SetAnimationPaused(Obj*, int);
@@ -72,7 +72,7 @@ void __cdecl fcn_004d9f20(int arg)
 	last = (unsigned int) g_6b7fb8 - 0x15e;
 	r = gm_RandomMod(100);
 	fcn_004d1a80();
-	fcn_004d7e50(arg);
+	d2_InitCombatHud(arg);
 	g_772efc = 0;
 	if (r < 0x32) {
 		g_772efc = msx_StartAmbientTrack("Athmos\\Kampfathmo_1.mp3", 0xb);

@@ -3,7 +3,7 @@
 int __cdecl cut_FindCutsceneById(int);
 #include "Develop/DieGildeAddOn/game/cutscene.h"
 
-int __cdecl fcn_004c9fa0(char* request, char* output)
+int __cdecl cm_ExRemoveCutsceneParticipant(char* request, char* output)
 {
 	if (cut_FindCutsceneById(*(int*) (request + 0x10)) == 0) {
 		return 1;

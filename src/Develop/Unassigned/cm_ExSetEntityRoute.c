@@ -6,7 +6,7 @@ void __cdecl rt_FreeRoutePoints(void*);
 void* __cdecl fcn_004be2a0(void*);
 
 /* ADDRESS: GOLDTL 0x004cdda0 */
-int __cdecl fcn_004cdda0(char* command, unsigned char* response, unsigned char* a3)
+int __cdecl cm_ExSetEntityRoute(char* command, unsigned char* response, unsigned char* unused)
 {
 	char buf[0x240];
 	void* p;

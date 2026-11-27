@@ -2,7 +2,7 @@ extern int g_77250c;
 extern unsigned long g_14ce728;
 
 /* ADDRESS: GOLDTL 0x00473610 */
-short __cdecl fcn_00473610(void)
+short __cdecl d3_ReleaseBackBuffer(void)
 {
 	int obj;
 	int r;

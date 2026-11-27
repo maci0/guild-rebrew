@@ -8,12 +8,12 @@ extern char* g_1015ea0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 char* __cdecl fcn_0047b620(int p, int i);
-int __cdecl fcn_0046b520(char* s, int font);
+int __cdecl d2_MeasureTextWidth(char* s, int font);
 int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046f9b0 */
-void __cdecl fcn_0046f9b0(int idx, char* text)
+void __cdecl d2_SetControlText(int idx, char* text)
 {
 	fcn_0046f9b0_Ent* e;
 	int w;
@@ -27,7 +27,7 @@ void __cdecl fcn_0046f9b0(int idx, char* text)
 		c = *(int*) &((D2_CONTROL_TL*) e)->data;
 		p0 = fcn_0047b620(c, 0);
 		p1 = fcn_0047b620(c, 1);
-		w = fcn_0046b520(text, d2_DefaultFont) + *(unsigned short*) (p1 + 2) + *(unsigned short*) (p0 + 2) + 4;
+		w = d2_MeasureTextWidth(text, d2_DefaultFont) + *(unsigned short*) (p1 + 2) + *(unsigned short*) (p0 + 2) + 4;
 		fcn_0064d530((char*) e + 0x8c, text, 0x3f);
 		((D2_CONTROL_TL*) g_1015ea0)[idx].width = w;
 		return;
@@ -37,7 +37,7 @@ void __cdecl fcn_0046f9b0(int idx, char* text)
 	}
 	fcn_0064d530((char*) (fcn_0046f9b0_Ent*) &((D2_CONTROL_TL*) g_1015ea0)[idx] + 0x8c, text, 0x3f);
 	if (((D2_CONTROL_TL*) g_1015ea0)[idx].value_06c == 0) {
-		((D2_CONTROL_TL*) g_1015ea0)[idx].width = fcn_0046b520(text, ((D2_CONTROL_TL*) g_1015ea0)[idx].font) + w + 6;
+		((D2_CONTROL_TL*) g_1015ea0)[idx].width = d2_MeasureTextWidth(text, ((D2_CONTROL_TL*) g_1015ea0)[idx].font) + w + 6;
 	} else {
 		((D2_CONTROL_TL*) g_1015ea0)[idx].width = w;
 	}

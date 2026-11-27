@@ -2,7 +2,7 @@
 
 int __cdecl msx_GetSampleStatus(int);
 
-int __cdecl fcn_00425520(void)
+int __cdecl sbs_IsSamplePlaying(void)
 {
 	int r;
 

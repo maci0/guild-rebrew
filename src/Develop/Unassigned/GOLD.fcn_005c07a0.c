@@ -35,7 +35,7 @@ void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl fcn_005c9160(int, int, int, int, int);
 void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
-int __cdecl fcn_005c07a0(int dialogId, int formId, int altFormId, unsigned int n, Item* items)
+int __cdecl d2_LayoutScrolledItemDialog(int dialogId, int formId, int altFormId, unsigned int n, Item* items)
 {
 	int y;
 	char buf[0x200];

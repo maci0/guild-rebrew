@@ -46,7 +46,7 @@ unsigned char __cdecl fcn_00437ee0(float*, int, int);
 void __cdecl fcn_00457290(char*, char*, int, float);
 
 /* ADDRESS: GOLDTL 0x00456ef0 */
-void __cdecl fcn_00456ef0(char* o)
+void __cdecl d3_ProjectNodeShadows(char* node)
 {
 	V456ef0 position;
 	V456ef0 direction;
@@ -61,26 +61,26 @@ void __cdecl fcn_00456ef0(char* o)
 	char* ctx;
 	int i;
 
-	*(unsigned char*) (o + 0x216) &= 0x7f;
-	if (!(*(unsigned char*) (o + 0x215) & 1)) {
+	*(unsigned char*) (node + 0x216) &= 0x7f;
+	if (!(*(unsigned char*) (node + 0x215) & 1)) {
 		return;
 	}
-	if (*(char**) (o + 0x1ec) == 0) {
+	if (*(char**) (node + 0x1ec) == 0) {
 		return;
 	}
-	if (!(*(unsigned char*) (o + 0x216) & 0x20)) {
-		d3_UpdateObjectCameraTransform(o, (*(unsigned char*) (o + 0x214) & 0x20) ? 0 : d3_ActiveCamera, 0);
+	if (!(*(unsigned char*) (node + 0x216) & 0x20)) {
+		d3_UpdateObjectCameraTransform(node, (*(unsigned char*) (node + 0x214) & 0x20) ? 0 : d3_ActiveCamera, 0);
 	}
 	for (s = g_6b86e0; s != 0; s = *(char**) (s + 0x1f0)) {
-		ctx = *(char**) (o + 0x1cc);
+		ctx = *(char**) (node + 0x1cc);
 		if (ctx == 0) {
 			break;
 		}
 		d3_TransformPoint(s, s + 0x4c, &position);
 		fcn_00455140(s, g_662d40, &direction);
-		h = fcn_00457140(o, ctx, s);
+		h = fcn_00457140(node, ctx, s);
 		base = ((Api456ef0*) *(char**) (ctx + 0x318))->query(
-		    o, ctx, *(char**) (o + 0x1ec) + 8);
+		    node, ctx, *(char**) (node + 0x1ec) + 8);
 		q = base;
 		i = 8;
 		do {
@@ -109,8 +109,8 @@ void __cdecl fcn_00456ef0(char* o)
 			i--;
 		} while (i != 0);
 		if (!(fcn_00437ee0(base, 0, 0) & 0x40)) {
-			*(unsigned char*) (o + 0x216) |= 0x80;
-			fcn_00457290(o, s, g_6b8300, h);
+			*(unsigned char*) (node + 0x216) |= 0x80;
+			fcn_00457290(node, s, g_6b8300, h);
 		}
 	}
 }

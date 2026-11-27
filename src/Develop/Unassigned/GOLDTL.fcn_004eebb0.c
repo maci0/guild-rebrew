@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x004eebb0 */
-int __cdecl fcn_004eebb0(void *a, void *b)
+int __cdecl ahm_AccumulateClampedValue(void *a, void *b)
 {
     float t;
 

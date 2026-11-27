@@ -33,8 +33,8 @@ extern int d2_ClipRight;
 extern int d2_ClipBottom;
 #include "Develop/Unassigned/render_quad.h"
 
-void __cdecl fcn_0047c560(int a, int b, int c);
-int __cdecl fcn_0047b8b0(int x, int y, int w, int h, RENDER_QUAD* q);
+void __cdecl d2_FlushQueuedQuads(int a, int b, int c);
+int __cdecl d2_BuildQuadVertices(int x, int y, int w, int h, RENDER_QUAD* q);
 void __cdecl d2_SetQuadVertexColor(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
 
 RENDER_QUAD* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex, Rect47bf* src)
@@ -67,7 +67,7 @@ RENDER_QUAD* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex, R
 	}
 	quadIndex = d2_QueuedQuadCount;
 	if (quadIndex >= 0x400) {
-		fcn_0047c560(0, 0, 0);
+		d2_FlushQueuedQuads(0, 0, 0);
 		quadIndex = d2_QueuedQuadCount;
 		if (quadIndex >= 0x400) {
 			return 0;
@@ -93,7 +93,7 @@ RENDER_QUAD* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex, R
 		ch = d2_ClipBottom - y;
 	}
 	quad = &g_1552020[quadIndex];
-	if (fcn_0047b8b0(x, y, cw, ch, quad) == 0) {
+	if (d2_BuildQuadVertices(x, y, cw, ch, quad) == 0) {
 		return 0;
 	}
 	quad->tex = tex;

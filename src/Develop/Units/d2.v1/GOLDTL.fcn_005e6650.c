@@ -49,7 +49,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00533a60(int, int, int*, int, ...);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 void __cdecl fcn_00526120(int, int);
 void __cdecl cm_SendCopyEntityData(struct msg*);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -77,7 +77,7 @@ void __cdecl d2_OpenBlutracheDialog(char* e)
 	io_AppendText((int) s_6811b0);
 	io_AppendText(0x41e7, 0x41e6, 0xed6);
 	d2_SetForm(dlg, 3);
-	fcn_00533a60(d2_CurrentWindowId, 0, ids, 2, g_14b5ac0, g_14b5ac4);
+	d2_CreateButtonRow(d2_CurrentWindowId, 0, ids, 2, g_14b5ac0, g_14b5ac4);
 	do {
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;

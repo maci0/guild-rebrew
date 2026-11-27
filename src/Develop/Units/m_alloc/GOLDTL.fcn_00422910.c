@@ -3,7 +3,7 @@
 
 extern int g_6b7d70;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-char* __cdecl fcn_004227c0(void);
+char* __cdecl sb_FindOldestUnusedSample(void);
 void __cdecl m_FreeTracked(void* p);
 
 int __cdecl sb_EnsureSampleMemory(int need)
@@ -11,7 +11,7 @@ int __cdecl sb_EnsureSampleMemory(int need)
 	char* s;
 
 	while (g_6b7d70 - MemUsed < need) {
-		s = fcn_004227c0();
+		s = sb_FindOldestUnusedSample();
 		if (s != 0) {
 			if (*(char**) (s + 0x38) == 0) {
 				return -1;

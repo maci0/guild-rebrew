@@ -32,10 +32,10 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_CreateRadioGroup(int);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
-void __cdecl fcn_004707d0(int);
+void __cdecl d2_BringFormToFront(int);
 void __cdecl d2_SetElementValue(int, int, int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyForm(int);
@@ -87,12 +87,12 @@ int __cdecl d2_RunMessageBox(int parent, int flags)
 	d2_SelectRadioGroup(list, 0);
 	d2_SetForm(dlg, 0);
 	if (flags & 0x80) {
-		h = fcn_004677e0(0x1c, g_77255c->x10 - 0x20, g_77255c->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
+		h = d2_AddWindowValueGauge(0x1c, g_77255c->x10 - 0x20, g_77255c->xc - 0x40, 0, 0x1f4, 0x83, 0x42, d2_CurrentWindowId);
 	}
 	while (main_RunFrameLoop((void*) d2_RunMessageBox, style) != 0) {
 		d2_UpdateRadioGroup(list);
 		if (flags & 0x40) {
-			fcn_004707d0(dlg);
+			d2_BringFormToFront(dlg);
 		}
 		if (g_100f1dc != 2) {
 			if (g_100f1dc == 1) {

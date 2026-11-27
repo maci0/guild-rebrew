@@ -12,7 +12,7 @@ typedef struct {
 	int locked;
 } Surf;
 
-int __cdecl fcn_00475fd0(Surf*);
+int __cdecl d2_LockSurface(Surf*);
 void __cdecl d2_UnlockSurface(Surf*);
 
 
@@ -26,7 +26,7 @@ void __cdecl d2_ClearSurfaceRect(int x, int y, int w, int h, Surf* s)
 		return;
 	}
 	locked = s->locked;
-	if (fcn_00475fd0(s) == 0) {
+	if (d2_LockSurface(s) == 0) {
 		return;
 	}
 	if (s->bpp == 0x10) {
@@ -43,7 +43,7 @@ void __cdecl d2_ClearSurfaceRect(int x, int y, int w, int h, Surf* s)
 		}
 	}
 	if (locked) {
-		fcn_00475fd0(s);
+		d2_LockSurface(s);
 	} else {
 		d2_UnlockSurface(s);
 	}

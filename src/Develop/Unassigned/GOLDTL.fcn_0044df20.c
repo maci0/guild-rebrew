@@ -1,6 +1,6 @@
 
 
-typedef struct S0044df20 {
+typedef struct D3_BIN_MESH_BUILD_CTX {
 	int pad0[5];
 	int f14;
 	int pad18;
@@ -9,13 +9,13 @@ typedef struct S0044df20 {
 	int f24;
 	int pad28;
 	int f2c;
-} S0044df20;
+} D3_BIN_MESH_BUILD_CTX;
 // SIZE 0x30
 
-void __cdecl fcn_0044df20(int a, S0044df20* p)
+void __cdecl d3_FinalizeBinMeshSection(int unused, D3_BIN_MESH_BUILD_CTX* ctx)
 {
-	p->f1c += p->f14;
-	p->f14 = 0;
-	p->f2c += p->f24;
-	p->f24 = 0;
+	ctx->f1c += ctx->f14;
+	ctx->f14 = 0;
+	ctx->f2c += ctx->f24;
+	ctx->f24 = 0;
 }

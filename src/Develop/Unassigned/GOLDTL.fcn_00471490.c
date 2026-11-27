@@ -13,20 +13,20 @@ extern char s_67d7a0[];
 void __cdecl ReportClientMessage(char* text);
 void __cdecl fcn_00465e60(char* base);
 void __cdecl d2_DrawField(int idx, int surf);
-void __cdecl fcn_00467920(int idx, int surf);
+void __cdecl d2_DrawValueGauge(int idx, int surf);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, char* surf, char* text, int flags);
 void __cdecl d2_DrawWindow(int idx, char* surf);
 int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h);
 void __cdecl d2_SelectFont(int idx);
-int __cdecl fcn_004767f0(int x, int y, int w, int h, char* src, int sx, int sy, char* t);
+int __cdecl d2_BlitBufferToSurface(int x, int y, int w, int h, char* src, int sx, int sy, char* t);
 void __cdecl fcn_0047a040(int left, int top, int right, int bottom);
-void __cdecl fcn_0047c560(int a, int b, char* surf);
+void __cdecl d2_FlushQueuedQuads(int a, int b, char* surf);
 void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
 void __cdecl fcn_0047ccd0(int x, int y, int surf, char* font, int c);
 void __cdecl d2_DrawAnimationSlot(int idx, int surf);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00471490 */
-void __cdecl fcn_00471490(int k)
+void __cdecl d2_RenderFormToTextures(int k)
 {
 	char** pp;
 	int saved;
@@ -65,7 +65,7 @@ void __cdecl fcn_00471490(int k)
 			ReportClientMessage(s_67d7a0);
 			return;
 		}
-		fcn_004767f0(0, 0, *(int*) (pp[0] + 4), *(int*) (pp[0] + 8), *(int*) (pp[0] + 0x20), 0, 0, surf);
+		d2_BlitBufferToSurface(0, 0, *(int*) (pp[0] + 4), *(int*) (pp[0] + 8), *(int*) (pp[0] + 0x20), 0, 0, surf);
 		for (row = 0; row < *(int*) (base + 0x184); row++) {
 			win = &((D2_WIN*)g_1015f40)[((int*) (base + 4))[row]];
 			oh2 = win->top;
@@ -182,7 +182,7 @@ void __cdecl fcn_00471490(int k)
 						sy = (*(D2_CONTROL_TL*) obj).y;
 						(*(D2_CONTROL_TL*) obj).x = sx - *(int*) (base + 0x188);
 						(*(D2_CONTROL_TL*) obj).y = ybase - *(int*) (base + 0x18c) + sy;
-						fcn_00467920(*(int*) obj, (int) surf);
+						d2_DrawValueGauge(*(int*) obj, (int) surf);
 						(*(D2_CONTROL_TL*) obj).x = sx;
 						(*(D2_CONTROL_TL*) obj).y = sy;
 						break;
@@ -191,7 +191,7 @@ void __cdecl fcn_00471490(int k)
 				fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 			}
 		}
-		fcn_0047c560(saved, g_7725ec, surf);
+		d2_FlushQueuedQuads(saved, g_7725ec, surf);
 		ybase -= 0x100;
 		pp++;
 	} while (ybase > -0x200);

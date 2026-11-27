@@ -1,7 +1,7 @@
 int __cdecl CountDisplayCounters(void);
-int __cdecl fcn_0046b520(char*, int);
+int __cdecl d2_MeasureTextWidth(char*, int);
 void __cdecl d2_DestroyElement(int);
-int __cdecl fcn_00469c30(int, int, int);
+int __cdecl d2_CreateElement(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
 typedef struct List0474cf0 {
 	char pad0[0x28];
@@ -88,12 +88,12 @@ void __cdecl d2_SelectControl(int slot)
 	}
 	if ((it->flags & 1) != 0) {
 		g_100f898 =
-		    fcn_0046b520(it->text, it->font) +
+		    d2_MeasureTextWidth(it->text, it->font) +
 		    (*(Item0474cf0**) &tp_d2_SelectedControl)->x;
 		g_100f89c = (*(Item0474cf0**) &tp_d2_SelectedControl)->y;
 		y = g_100f89c - 7;
 		if (g_67d8ec == -1) {
-			g_67d8ec = fcn_00469c30(
+			g_67d8ec = d2_CreateElement(
 			    (short) g_100f898, (short) y,
 			    g_67d3b0 + 8);
 			return;

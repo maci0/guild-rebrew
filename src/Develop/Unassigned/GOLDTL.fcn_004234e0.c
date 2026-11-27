@@ -9,7 +9,7 @@ extern int g_6b7d7c;
 extern SOUND_VOICE g_14cbbe0;
 Voice* __cdecl sb_AllocVoice(void);
 char* __cdecl sb_FindSampleByName(char* bank, const char* name);
-int __cdecl fcn_00423670(Voice* v, int a, int b);
+int __cdecl sb_StartVoice(Voice* v, int a, int b);
 
 Voice* __cdecl sb_PlayVoice(char* bank, const char* name, int loop, int pan, int vol, int a, int b)
 {
@@ -25,7 +25,7 @@ Voice* __cdecl sb_PlayVoice(char* bank, const char* name, int loop, int pan, int
 			v->loop = loop;
 			v->pan = pan;
 			v->vol = vol;
-			fcn_00423670(v, a, b);
+			sb_StartVoice(v, a, b);
 		} else {
 			v = 0;
 		}

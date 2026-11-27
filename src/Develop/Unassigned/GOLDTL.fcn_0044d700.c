@@ -3,7 +3,7 @@
 char* __cdecl fcn_0064f026(char* s, const char* delim);
 
 /* ADDRESS: GOLDTL 0x0044d700 */
-void __cdecl fcn_0044d700(int unused, char* out)
+void __cdecl d3_ParseSpaceType(int unused, char* out)
 {
 	char* t;
 

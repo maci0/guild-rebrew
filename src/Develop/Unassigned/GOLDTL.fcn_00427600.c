@@ -7,19 +7,19 @@ typedef struct {
 		char* sym;
 		int num;
 	} u;
-} tok_427600;
+} EVT_TOKEN;
 
 extern char* evt_CurrentScript;
 
-void __cdecl evt_ReadToken(int lex, tok_427600* t);
+void __cdecl evt_ReadToken(int lex, EVT_TOKEN* t);
 void __cdecl evt_LogScriptError(char* script, unsigned int position, const char* message);
 void __cdecl evt_RequestScriptExit(char* c);
 
 /* ADDRESS: GOLDTL 0x00427600 */
-int __cdecl fcn_00427600(char* g, int arg)
+int __cdecl evt_ParseFunctionArgs(char* g, int arg)
 {
 	char* e;
-	tok_427600 t;
+	EVT_TOKEN t;
 	char* d;
 
 	e = *(char**) (g + 0x10c) + *(int*) (g + 0x110) * 0x14c;

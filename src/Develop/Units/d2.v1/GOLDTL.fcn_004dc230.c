@@ -11,7 +11,7 @@ void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl ai_CompareOfficeCandidates(unsigned short*, unsigned short*, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -37,7 +37,7 @@ int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short*
 	b0 = d2_GetWindowListItem(h, 0, t);
 	d2_GetWindowListItem(h, 0, t + 1);
 	b2 = d2_GetWindowListItem(h, 0, t + 2);
-	w = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
+	w = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(w, 0x5dc, 1);
 	res = ai_CompareOfficeCandidates(a1, a2, a3, &aux);
 	g_100f1dc = -1;

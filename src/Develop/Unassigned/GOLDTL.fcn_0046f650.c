@@ -32,7 +32,7 @@ extern char s_67d59c[];
 #include "Develop/Units/Error/error_message.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046f650 */
-void __cdecl fcn_0046f650(int slot, char* parent)
+void __cdecl d2_InsertControlAfterWindow(int slot, char* parent)
 {
 	int i;
 	Slot* p;

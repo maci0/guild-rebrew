@@ -71,7 +71,7 @@ extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern void __cdecl m_FreeTracked(void* p);
 int __cdecl d3_CalculateTriangleNormal(Point45a9d0* a, Point45a9d0* b, Point45a9d0* c,
 	float* plane);
-int __cdecl fcn_00456080(float* uvs, unsigned char* depths, int arg2,
+int __cdecl d3_RasterizeHeightTriangle(float* uvs, unsigned char* depths, int arg2,
 	int width, unsigned char flags, int arg5, int steps);
 
 /* ADDRESS: GOLDTL 0x0045a9d0 */
@@ -251,7 +251,7 @@ char __cdecl fcn_0045a9d0(Obj45a9d0* o, Ctx45a9d0* c)
 				depths[k] = pts[arrays->index[i * 3 + k]].depth;
 			}
 		}
-		fcn_00456080(uvs, depths, c->f28, c->width, flagbyte, c->f24,
+		d3_RasterizeHeightTriangle(uvs, depths, c->f28, c->width, flagbyte, c->f24,
 		    steps);
 	}
 

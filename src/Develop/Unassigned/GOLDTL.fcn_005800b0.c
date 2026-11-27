@@ -5,7 +5,7 @@ extern int* g_665f08;
 
 void __cdecl fcn_00545780(void*);
 
-int __cdecl fcn_005800b0(void)
+int __cdecl d2_CleanupTutorialAction(void)
 {
 	char* p;
 

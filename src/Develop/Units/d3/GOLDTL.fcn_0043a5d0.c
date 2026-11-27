@@ -6,7 +6,7 @@ typedef float* (__cdecl* fcn_0043a5d0_f)(char*, char*, char*);
 
 void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
 
-char __cdecl fcn_0043a5d0(char* o, float* bb)
+char __cdecl d3_AccumulateObjectBounds(char* o, float* bb)
 {
 	float* p;
 	float* row;

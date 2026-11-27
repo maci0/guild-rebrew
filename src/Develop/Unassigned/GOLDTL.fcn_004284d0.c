@@ -1,7 +1,7 @@
 #include <string.h>
 
 int __cdecl evt_RunScript(char* script);
-void __cdecl fcn_00428340(char* o, int n, ...);
+void __cdecl evt_CallScriptFunction(char* o, int n, ...);
 char* __cdecl fcn_0064f026(char* s, char* delim);
 int __cdecl _isctype(int c, int mask);
 int __cdecl atoi(char* s);
@@ -61,25 +61,25 @@ void __cdecl evt_RunScriptLine(char* o, char* line)
 		evt_RunScript(o);
 		return;
 	case 1:
-		fcn_00428340(o, 1, values[0]);
+		evt_CallScriptFunction(o, 1, values[0]);
 		return;
 	case 2:
-		fcn_00428340(o, 2, values[0], values[1]);
+		evt_CallScriptFunction(o, 2, values[0], values[1]);
 		return;
 	case 3:
-		fcn_00428340(o, 3, values[0], values[1], values[2]);
+		evt_CallScriptFunction(o, 3, values[0], values[1], values[2]);
 		return;
 	case 4:
-		fcn_00428340(o, 4, values[0], values[1], values[2], values[3]);
+		evt_CallScriptFunction(o, 4, values[0], values[1], values[2], values[3]);
 		return;
 	case 5:
-		fcn_00428340(o, 5, values[0], values[1], values[2], values[3], values[4]);
+		evt_CallScriptFunction(o, 5, values[0], values[1], values[2], values[3], values[4]);
 		return;
 	case 6:
-		fcn_00428340(o, 6, values[0], values[1], values[2], values[3], values[4], values[5]);
+		evt_CallScriptFunction(o, 6, values[0], values[1], values[2], values[3], values[4], values[5]);
 		return;
 	case 7:
-		fcn_00428340(o, 7, values[0], values[1], values[2], values[3], values[4], values[5], values[6]);
+		evt_CallScriptFunction(o, 7, values[0], values[1], values[2], values[3], values[4], values[5], values[6]);
 		return;
 	default:
 		return;

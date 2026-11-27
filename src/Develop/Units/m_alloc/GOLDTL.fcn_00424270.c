@@ -3,9 +3,9 @@
 
 char* __cdecl m_alloc(int size, char* tag);
 char* __cdecl sbs_FindSet(int id);
-int* __cdecl fcn_00423c50(int a0, int a1);
-char* __cdecl fcn_00423a10(int a1);
-int __cdecl fcn_00423920(unsigned int a0);
+int* __cdecl sbs_FindSetSample(int a0, int a1);
+char* __cdecl sbs_GetLastSetSample(int a1);
+int __cdecl sbs_GetFileSize(unsigned int a0);
 
 #pragma optimize("y", off)
 
@@ -18,8 +18,8 @@ unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int sampleName)
 
 	v2 = sbs_FindSet(a0);
 	if (v2) {
-		if (!fcn_00423c50(a0, sampleName)) {
-	v3 = fcn_00423a10(a0);
+		if (!sbs_FindSetSample(a0, sampleName)) {
+	v3 = sbs_GetLastSetSample(a0);
 	p = m_alloc(0x108, (char*) 0x678fec);
 	if (v3) {
 		char* fill;
@@ -46,7 +46,7 @@ unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int sampleName)
 			rep stosb
 		}
 		strncpy(*(char**) (v3 + 0x104), (char*) sampleName, 0x100);
-		*(int*) (*(char**) (v3 + 0x104) + 0x100) = fcn_00423920(sampleName);
+		*(int*) (*(char**) (v3 + 0x104) + 0x100) = sbs_GetFileSize(sampleName);
 		*(int*) (v2 + 0x34) += *(int*) (*(char**) (v3 + 0x104) + 0x100);
 		*(int*) (sbs_BankManager + 0x34) += *(int*) (*(char**) (v3 + 0x104) + 0x100);
 		g_6b7d6c++;
@@ -77,7 +77,7 @@ unsigned int __cdecl fcn_00424270(unsigned int a0, unsigned int sampleName)
 			rep stosb
 		}
 		strncpy(*(char**) (v2 + 0x38), (char*) sampleName, 0x100);
-		*(int*) (*(char**) (v2 + 0x38) + 0x100) = fcn_00423920(sampleName);
+		*(int*) (*(char**) (v2 + 0x38) + 0x100) = sbs_GetFileSize(sampleName);
 		*(int*) (v2 + 0x34) += *(int*) (*(char**) (v2 + 0x38) + 0x100);
 		*(int*) (sbs_BankManager + 0x34) += *(int*) (*(char**) (v2 + 0x38) + 0x100);
 		g_6b7d6c++;

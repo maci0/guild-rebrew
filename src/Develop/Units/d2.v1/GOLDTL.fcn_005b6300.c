@@ -120,7 +120,7 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CreateGauge(void*, int, int);
 int __cdecl d2_ShowTxt(int, int, int, int);
-void __cdecl fcn_00468bb0(int, int, int, int, int, int, int);
+void __cdecl d2_SetValueGaugeStepLabels(int, int, int, int, int, int, int);
 void __cdecl d2_DestroyElement(int);
 
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
@@ -231,7 +231,7 @@ int __cdecl d2_ShowPersonalbuch(unsigned char* a1, int a2, int a3)
 	if (f.row[0] != 4 && f.row[0] != 0x13 && f.row[0] != 0x10) {
 		el = f.v44 = d2_GetWindowListItem(*(int*) (book + 0x228), 3, 3);
 		fcn_00472380(el, 0, 4, *(int*) (rec + 0x41));
-		fcn_00468bb0(el, 5, *(int*) 0x14abbd8, *(int*) 0x14abbdc,
+		d2_SetValueGaugeStepLabels(el, 5, *(int*) 0x14abbd8, *(int*) 0x14abbdc,
 			*(int*) 0x14abbe0, *(int*) 0x14abbe4, *(int*) 0x14abbe8);
 	}
 	d2_SetForm(*(int*) (book + 0x228), 3);

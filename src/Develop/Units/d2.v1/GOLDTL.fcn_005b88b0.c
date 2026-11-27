@@ -90,7 +90,7 @@ extern double dbl_128_0;
 extern double dbl_100_0;
 extern double dbl_0_00392156862745098;
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00534f30(char*);
@@ -490,7 +490,7 @@ after2:
 						fcn_0046f940(r->label, txtNum);
 						GUI(r->label).f6c = 1;
 						GUI(r->label).w = 0xa0;
-						r->value = fcn_004677e0(
+						r->value = d2_AddWindowValueGauge(
 						    r->x + 0xc, r->y + 0x32, 0x40, 0, 0x64,
 						    0x75, 0x42, *(int*) 0x772514);
 						r->state = 1;

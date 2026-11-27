@@ -23,7 +23,7 @@ void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
-int __cdecl fcn_005cc620(int a1, int a2, int a3, unsigned int n, Item* items)
+int __cdecl d2_LayoutAction6fCandidateList(int dialog, int selectedForm, int alternateForm, unsigned int n, Item* items)
 {
 	int y;
 	int half;
@@ -32,7 +32,7 @@ int __cdecl fcn_005cc620(int a1, int a2, int a3, unsigned int n, Item* items)
 	if (n == 0) {
 		return 0;
 	}
-	y = fcn_005cc240(a1, a2, a3);
+	y = fcn_005cc240(dialog, selectedForm, alternateForm);
 	half = ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width / 2;
 	fcn_005c9090(g_14aad94, half, 8, half * 2, 0x55);
 	for (i = 0; i < n; i++) {

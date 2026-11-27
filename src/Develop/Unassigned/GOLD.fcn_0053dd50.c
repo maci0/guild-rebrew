@@ -25,7 +25,7 @@ extern int g_6333e0;
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_BringFormToFront(int);
 
-void __cdecl fcn_0053dd50(void)
+void __cdecl d2_UpdateHoverSlotDialogs(void)
 {
 	int i;
 	unsigned char* o;

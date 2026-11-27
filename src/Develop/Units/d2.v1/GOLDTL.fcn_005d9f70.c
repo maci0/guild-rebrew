@@ -27,7 +27,7 @@ void __cdecl d2_SortCrimeRecordsByKind(int n, Rec2d_9a3800* arr);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_0046e830(int x, int y, int win, int target, int id);
+void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005c91c0(int, int, int, int, int);
@@ -37,7 +37,7 @@ int __cdecl gm_CheckPrivilege(int, unsigned short*, int*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl gs_StartCourtTrial(unsigned short*, unsigned short*, int, int);
 
 /* ADDRESS: GOLDTL 0x005d9f70 */
@@ -77,7 +77,7 @@ int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
 	d2_SetForm(dlg, 2);
 	w = d2_CurrentWindowId;
 	d2_SetForm(dlg, 4);
-	fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
+	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, w, 0x767);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1742, *other);
@@ -98,7 +98,7 @@ int __cdecl fcn_005d9f70(unsigned short* entity, unsigned short* other)
 	} else {
 		sel = d2_GetWindowListItem(dlg, 3, io_AppendText(0x1745));
 		if (flag == 0) {
-			fcn_00472640(sel, 0);
+			d2_SetElementEnabled(sel, 0);
 		}
 	}
 	g_100f1dc = -1;

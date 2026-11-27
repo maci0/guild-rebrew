@@ -36,7 +36,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0046e830(int, int, int, int, int);
+void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 int __cdecl fcn_004f61c0(int* ids, int* b, int* c, short kind);
 int __cdecl d2_BuildPersonStatusDesc(Row* r);
 void __cdecl fcn_005ca740(int, int, int, int, Row*, int);
@@ -85,7 +85,7 @@ int __cdecl fcn_005da250(char* e, char* a2)
 	d2_SetForm(dlg, 2);
 	win = d2_CurrentWindowId;
 	d2_SetForm(dlg, 3);
-	fcn_0046e830(-1, -1, d2_CurrentWindowId, win, 0x767);
+	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, win, 0x767);
 	n = fcn_004f61c0(ids, b, c, *(short*) e);
 	for (i = 0, count = 0; i < n; i++) {
 		who = gm_LookupEntityRecordById(ids[i]);

@@ -35,10 +35,10 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl fcn_0046fac0(int, int, void*, int);
-void __cdecl fcn_00533a60(int, int, int*, int, ...);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl gm_SumContainerCredits(int);
 void __cdecl fcn_005a5760(void*, int, int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl he_StartHandlungSearch(int, int, int);
@@ -53,7 +53,7 @@ int __cdecl d2_CountActiveListRows(ListRow*);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_00657a73(int, void*, int);
 void __cdecl fcn_0046f940(int, void*);
-void __cdecl fcn_0046ed00(int, int, int);
+void __cdecl d2_ScrollWindow(int, int, int);
 void __cdecl fcn_005a6570(char*);
 void __cdecl d2_ShowMoneyExchangeDialog(char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -124,7 +124,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 	d2_SetForm(h, 1);
 	io_AppendText(0x1900);
 	d2_SetForm(h, 3);
-	fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, g_14ab738, g_14b5278);
+	d2_CreateButtonRow(d2_CurrentWindowId, 0, buttons, 2, g_14ab738, g_14b5278);
 
 	d270 = gm_SumContainerCredits(*(int*) (obj + 0x5d));
 	if (d270 <= 0) {
@@ -134,7 +134,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 	fcn_005a5760(list1, h, 4, 0);
 	for (i = 0; i < 16; i++) {
 		if (list1[i].sel != -1)
-			fcn_00472640(list1[i].sel, 0);
+			d2_SetElementEnabled(list1[i].sel, 0);
 	}
 	while (main_RunFrameLoop((void*) 0x5a6880, 0x677c7) != 0) {
 		cur = he_StartHandlungSearch(1, 0, 0x27);
@@ -169,7 +169,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 		}
 		for (i = 0; i < 16; i++) {
 			if (list1[i].sel != -1)
-				fcn_00472640(list1[i].sel,
+				d2_SetElementEnabled(list1[i].sel,
 				             selected != -1 ? 1 : 0);
 		}
 		sel1 = d2_CountActiveListRows(list2);
@@ -200,16 +200,16 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 			cur = d2_CurrentElementId;
 			if (cur == w2) {
 				d2_SetForm(h, 4);
-				fcn_0046ed00(0, -0x4c, d2_CurrentWindowId);
+				d2_ScrollWindow(0, -0x4c, d2_CurrentWindowId);
 			} else if (cur == w3) {
 				d2_SetForm(h, 4);
-				fcn_0046ed00(0, 0x4c, d2_CurrentWindowId);
+				d2_ScrollWindow(0, 0x4c, d2_CurrentWindowId);
 			} else if (cur == w1) {
 				d2_SetForm(h, 5);
-				fcn_0046ed00(0, -0x4c, d2_CurrentWindowId);
+				d2_ScrollWindow(0, -0x4c, d2_CurrentWindowId);
 			} else if (cur == w0) {
 				d2_SetForm(h, 5);
-				fcn_0046ed00(0, 0x4c, d2_CurrentWindowId);
+				d2_ScrollWindow(0, 0x4c, d2_CurrentWindowId);
 			}
 		}
 		if (g_100f1dc == 2) {

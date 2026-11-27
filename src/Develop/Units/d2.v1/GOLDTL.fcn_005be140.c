@@ -6,12 +6,12 @@ extern unsigned char g_773d75;
 
 extern int d2_CurrentWindowId;
 
-int __cdecl fcn_0046f9b0();
+int __cdecl d2_SetControlText();
 int __cdecl fcn_00470820();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_SetSlotVisibility();
-int __cdecl fcn_00472640();
+int __cdecl d2_SetElementEnabled();
 int __cdecl d2_SetForm();
 int __cdecl d2_SetOverlayAnimation();
 int __cdecl cm_GetCommandStatus();
@@ -26,7 +26,7 @@ int __cdecl d2_CheckOwnerBlocked();
 int __cdecl gm_CheckEntityStock();
 int __cdecl fcn_00526120();
 int __cdecl d3_EndCameraAndUiMode();
-int __cdecl fcn_00533a60();
+int __cdecl d2_CreateButtonRow();
 int __cdecl d2_DrawPanelFrame();
 int __cdecl cm_StepCommandQueue();
 int __cdecl main_RunFrameLoop();
@@ -139,11 +139,11 @@ void __cdecl d2_ShowLagerOptions(unsigned char *a0,int a1)
   d2_SetForm(dialogId,0);
   d2_DrawPanelFrame(d2_CurrentWindowId,0x70b,0x740);
   d2_SetForm(dialogId,4);
-  fcn_00533a60(d2_CurrentWindowId,0,&v23,2,(*(int *)0x14a570c),(*(int *)0x14a5710));
+  d2_CreateButtonRow(d2_CurrentWindowId,0,&v23,2,(*(int *)0x14a570c),(*(int *)0x14a5710));
   v29 = v23;
   v28 = v30;
   if ((*(signed char *)0x7747b0) < 0)
-    fcn_00472640(v30,0);
+    d2_SetElementEnabled(v30,0);
   fcn_00594340();
   d2_SetOverlayAnimation(0,0);
   do {
@@ -350,7 +350,7 @@ label_5bea02:
         *(unsigned int *)(v28 * 0x2f4 + 0x4c + (*(int *)0x1015ea0)) = 1;
         if (!v7) goto label_5bea6c;
         v11 = (*(int *)0x14a5714);
-        fcn_0046f9b0(v28,v11); // crossjump-dupe
+        d2_SetControlText(v28,v11); // crossjump-dupe
       }
     }
     else if (v28 != -1) {
@@ -358,7 +358,7 @@ label_5bea02:
       *(unsigned int *)(v28 * 0x2f4 + 0x4c + (*(int *)0x1015ea0)) = 0;
 label_5bea6c:
       v11 = (*(int *)0x14a5710);
-      fcn_0046f9b0(v28,v11);
+      d2_SetControlText(v28,v11);
     }
     if (((3 <= *(int *)&v4[7]) && ((int)v8 <= (int)(unsigned int)*(unsigned char *)&v4[0xe])) && ((int)v15 <= (int)(unsigned int)*(unsigned char *)((int)v4 + 0x1d))) {
       if (v28 != -1)

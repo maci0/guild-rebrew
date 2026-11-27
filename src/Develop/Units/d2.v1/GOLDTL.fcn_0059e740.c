@@ -23,8 +23,8 @@ int __cdecl io_AppendText(int id, ...);
 void __cdecl fcn_0052a0c0(void* obj, int flag);
 void __cdecl fcn_00594340(void);
 int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
-void __cdecl fcn_0046f9b0(int handle, char* name);
-void __cdecl fcn_00472640(int handle, int flag);
+void __cdecl d2_SetControlText(int handle, char* name);
+void __cdecl d2_SetElementEnabled(int handle, int flag);
 void __cdecl fcn_00595e20(void* obj, int packet);
 void __cdecl fcn_005963f0(int dlg, int a, int b, void* obj);
 int __cdecl main_RunFrameLoop(void* fn, int key);
@@ -119,9 +119,9 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x1dc) = 100;
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x1e0) = 0x10;
 			*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[h]) + 0x84) = 0x54;
-			fcn_0046f9b0(h, (char*) *(int*) (ids[i] * 8 + 0x14a79c0));
+			d2_SetControlText(h, (char*) *(int*) (ids[i] * 8 + 0x14a79c0));
 			handles[i] = h;
-			fcn_00472640(h, 1);
+			d2_SetElementEnabled(h, 1);
 			x += 0x50;
 		}
 	}
@@ -145,7 +145,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 		d2_SetForm(dlg, 2);
 		if (count > 0) {
 			for (i = 0; i < count; i++) {
-				fcn_00472640(handles[i], 1);
+				d2_SetElementEnabled(handles[i], 1);
 				if (ids[i + 3] == 1) {
 					io_FormatTextBuffer(buf, 0x17ff, ids[i + 3], ids[i] * 2 + 0x9a8);
 				} else if (ids[i + 3] > 1) {
@@ -153,7 +153,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 				} else {
 					io_FormatTextBuffer(buf, (int) 0x679060, ids[i] * 2 + 0x9a8);
 				}
-				fcn_0046f9b0(handles[i], buf);
+				d2_SetControlText(handles[i], buf);
 			}
 		}
 		if (g_100f1dc != -1 && count > 0) {

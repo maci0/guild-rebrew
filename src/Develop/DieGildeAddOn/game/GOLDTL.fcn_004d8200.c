@@ -16,7 +16,7 @@ int __cdecl ch_QueuePlayAnimation(char*, char*, int);
 void __cdecl sb_PlayVoice(char*, char*, int, int, int, int, int);
 unsigned int __cdecl cut_RandMod(unsigned int);
 int __cdecl d3snd_QueueSound(int, int, char*, int, int);
-int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
+int __cdecl gm_FindBestBalancedTile(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl cm_RequestChTalkAction(char*, int, int, char*);
 void __cdecl gm_ResolveDuelHit(void);
 void __cdecl cut_FinishPotThrow(void);
@@ -139,7 +139,7 @@ block_174:
 		                  &g_102d020, &g_102d024, &height)) {
 			return;
 		}
-		fcn_004d31d0((char*) rec, g_102d020, g_102d024, 8, &tileX,
+		gm_FindBestBalancedTile((char*) rec, g_102d020, g_102d024, 8, &tileX,
 		             (unsigned int*) &ent);
 		q = *(char**) ((char*) rec + 0x184); cm_RequestChTalkAction((char*) *(int*) (q + 0x34), tileX, (int) ent, 0);
 		p[0] = -1;

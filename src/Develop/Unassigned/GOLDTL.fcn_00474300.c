@@ -44,9 +44,9 @@ extern int g_100f940;
 extern int g_100f950;
 
 void __cdecl d2_DestroyElement(int id);
-int __cdecl fcn_0046b520(char* s, int font);
+int __cdecl d2_MeasureTextWidth(char* s, int font);
 void __cdecl fcn_00469c40(int x, int y, int slot);
-int __cdecl fcn_00469c30(int x, int y, int a3);
+int __cdecl d2_CreateElement(int x, int y, int a3);
 char __cdecl io_TranslateKeyCode(int shift, int ctrl, int alt, char key);
 
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -100,7 +100,7 @@ common_tail:
 		if ((*(Combo**) &tp_d2_SelectedControl)->flags & 2) {
 			(*(Combo**) &tp_d2_SelectedControl)->text_len = atoi((*(Combo**) &tp_d2_SelectedControl)->text);
 		}
-		g_100f898 = fcn_0046b520((*(Combo**) &tp_d2_SelectedControl)->text, (*(Combo**) &tp_d2_SelectedControl)->text_px) + (*(Combo**) &tp_d2_SelectedControl)->f4;
+		g_100f898 = d2_MeasureTextWidth((*(Combo**) &tp_d2_SelectedControl)->text, (*(Combo**) &tp_d2_SelectedControl)->text_px) + (*(Combo**) &tp_d2_SelectedControl)->f4;
 		if (g_67d8ec != -1) {
 			fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
 		}
@@ -147,10 +147,10 @@ tail15:
 			g_67d8ec = -1;
 		}
 		if ((*(Combo**) &tp_d2_SelectedControl)->flags & 1) {
-			g_100f898 = fcn_0046b520((*(Combo**) &tp_d2_SelectedControl)->text, (*(Combo**) &tp_d2_SelectedControl)->text_px) + (*(Combo**) &tp_d2_SelectedControl)->f4;
+			g_100f898 = d2_MeasureTextWidth((*(Combo**) &tp_d2_SelectedControl)->text, (*(Combo**) &tp_d2_SelectedControl)->text_px) + (*(Combo**) &tp_d2_SelectedControl)->f4;
 			g_100f89c = (*(Combo**) &tp_d2_SelectedControl)->f8;
 			if (g_67d8ec == -1) {
-				g_67d8ec = fcn_00469c30((short) g_100f898, (short) (g_100f89c - 7), g_67d3b0 + 8);
+				g_67d8ec = d2_CreateElement((short) g_100f898, (short) (g_100f89c - 7), g_67d3b0 + 8);
 			} else {
 				fcn_00469c40(g_100f898, g_100f89c - 7, g_67d8ec);
 			}

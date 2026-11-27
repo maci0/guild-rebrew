@@ -23,7 +23,7 @@ char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectEulerRotation(char*, int, float, int);
-void __cdecl fcn_004cee20(void);
+void __cdecl d2_UpdateFloatingDamagePopups(void);
 
 /* ADDRESS: GOLD 0x004cf000 */
 void __cdecl fcn_004cf000(void)
@@ -155,5 +155,5 @@ void __cdecl fcn_004cf000(void)
 			}
 		}
 	}
-	fcn_004cee20();
+	d2_UpdateFloatingDamagePopups();
 }

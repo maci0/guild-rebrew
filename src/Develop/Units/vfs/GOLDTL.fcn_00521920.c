@@ -42,7 +42,7 @@ int __cdecl ls_LoadExistingEntities(void* stream);
 int __cdecl fcn_00522510(void* stream);
 void __cdecl m_FreeTracked(char* p);
 int __cdecl amt_fio_LoadAemter(void* stream, int version);
-int __cdecl fcn_004f4c40(void* stream);
+int __cdecl ls_LoadCrimeRecords(void* stream);
 int __cdecl ls_LoadGameMatrices(void* stream);
 int __cdecl ls_LoadStatsAndCrimeGrid(unsigned int stream);
 int __cdecl fcn_00524b40(void* stream);
@@ -166,7 +166,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	if (ls_SaveVersion < 0x10045 && amt_fio_LoadAemter(stream, ls_SaveVersion) == 0) {
 		goto fail;
 	}
-	if (fcn_004f4c40(stream) == 0) {
+	if (ls_LoadCrimeRecords(stream) == 0) {
 		goto fail;
 	}
 	if (ls_SaveVersion >= 0x10016 && ls_LoadGameMatrices(stream) == 0) {

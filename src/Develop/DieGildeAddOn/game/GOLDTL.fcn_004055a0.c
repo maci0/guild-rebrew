@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
-void __cdecl fcn_004355d0(char*, const char*);
-void __cdecl fcn_00435630(char*, char*, char);
+void __cdecl d3_DeactivateObjectAnimation(char*, const char*);
+void __cdecl d3_SetObjectAnimationActive(char*, char*, char);
 
 #include "client_scene_transform.h"
 
@@ -17,10 +17,10 @@ void __cdecl ch_SetAnimationPaused(unsigned char* object, int paused)
             motion = *(unsigned char**) (animation + 0x68);
             node = *(unsigned char**) (*(unsigned char**) (object + 0x34) + 0x1ec);
             if (paused) {
-                fcn_004355d0((char*) (node + 0xf4), (const char*) motion);
+                d3_DeactivateObjectAnimation((char*) (node + 0xf4), (const char*) motion);
                 *(unsigned char*) (object + 0x8c) |= 4;
             } else {
-                fcn_00435630((char*) (node + 0xf4), (char*) motion, 1);
+                d3_SetObjectAnimationActive((char*) (node + 0xf4), (char*) motion, 1);
                 *(unsigned char*) (object + 0x8c) &= 0xfb;
             }
         }

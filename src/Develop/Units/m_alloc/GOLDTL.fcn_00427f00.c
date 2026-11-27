@@ -13,7 +13,7 @@ extern char g_679540[];
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl evt_ReadToken(int, int*);
-int __cdecl fcn_00427830(char* g, int v);
+int __cdecl evt_ParseVarDecl(char* g, int v);
 void __cdecl evt_IncludeScript(void);
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
@@ -38,7 +38,7 @@ int __cdecl evt_ParseScript(char* g)
 	for (;;) {
 		evt_ReadToken(*(int*) (evt_CurrentScript + 0x118), tok);
 		if (tok[0] == 8 && depth == 0) {
-			if (fcn_00427830(g, tok[1]) == 0) {
+			if (evt_ParseVarDecl(g, tok[1]) == 0) {
 				m_FreeTracked(a);
 				m_FreeTracked(b);
 				m_FreeTracked(*(void**) (g + 0x108));

@@ -23,7 +23,7 @@ void __cdecl fcn_0047a040(int a, int b, int c, int d);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x00468e40 */
-void __cdecl fcn_00468e40(int slotIndex, int surface)
+void __cdecl d2_DrawTextButton(int slotIndex, int surface)
 {
 	char* slot;
 	char* font;

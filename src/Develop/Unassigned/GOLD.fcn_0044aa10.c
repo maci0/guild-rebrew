@@ -11,7 +11,7 @@ void __cdecl vfs_WriteVec3(int, int*);
 void __cdecl fcn_004011f0(int, unsigned char);
 int __cdecl d3_GetNextSceneNode(int);
 void __cdecl wr_object(int, int);
-void __cdecl fcn_0044a770(int, char*);
+void __cdecl d3_SaveFloor(int, char*);
 struct Event;
 void __cdecl d3_WriteEventTable(int, struct Event*);
 void __cdecl CloseVfsStream(int);
@@ -66,7 +66,7 @@ void __cdecl fcn_0044aa10(char* path, int supplied)
     }
     fcn_004011f0(stream, g_6b8300 != 0);
     if (g_6b8300)
-        fcn_0044a770(stream, (char*) g_6b8300);
+        d3_SaveFloor(stream, (char*) g_6b8300);
     d3_WriteEventTable(stream, *(struct Event**) (g_5fb5b0 + 0x3c8));
     if (!supplied)
         CloseVfsStream(stream);

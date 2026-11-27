@@ -10,7 +10,7 @@ int __cdecl io_AppendText();
 int __cdecl d2_CheckActionBlocker(void*, int);
 int __cdecl fcn_00526120(void*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
-int __cdecl fcn_00533a60(int, int, int*, int, ...);
+int __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 void __cdecl fcn_005340f0(int);
 int __cdecl main_RunFrameLoop(void*, int);
 extern int g_100f1dc; extern char * g_1015ea0; extern int d2_CurrentWindowId; extern unsigned short g_774970; extern char g_7f4ca0[];
@@ -71,7 +71,7 @@ void __cdecl fcn_005aa480(void)
 	}
 	io_AppendText(0x1644, n, 3, 0x1649);
 	d2_SetForm(h, 4);
-	fcn_00533a60(*(int*) &d2_CurrentWindowId, 0, sel, 3,
+	d2_CreateButtonRow(*(int*) &d2_CurrentWindowId, 0, sel, 3,
 	    *(char**) 0x14aac34, *(char**) 0x14aac38, *(char**) 0x14aac3c);
 	*(int*) &g_100f1dc = -1;
 	do {

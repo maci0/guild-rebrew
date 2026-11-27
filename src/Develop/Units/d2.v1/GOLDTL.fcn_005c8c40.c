@@ -19,19 +19,19 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00533a60(int, int, int*, int, int, int, int);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, int, int, int);
 int __cdecl fcn_005c8400(void);
 int __cdecl d2_CreateGebaeudeListPanel(void);
 int __cdecl fcn_005c89a0(void);
 int __cdecl d2_CreateRadioGroup(int, int, int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
-void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl fcn_005a5440(int, char*, int, int, int);
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d2_ShowBuildingStatsDetail(int);
-int __cdecl fcn_00472830(int, int);
-void __cdecl fcn_0046ed00(int, int, int);
+int __cdecl d2_GetFormWindow(int, int);
+void __cdecl d2_ScrollWindow(int, int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_0050b750(int, char);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
@@ -73,7 +73,7 @@ void __cdecl d2_OpenPlayerStats(void)
 	d2_SetForm(save, 0);
 	fcn_005340f0(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(save, 3);
-	fcn_00533a60(*(int*) &d2_CurrentWindowId, 0, out, 3, *(int*) 0x14b5294, *(int*) 0x14b5298, *(int*) 0x14b529c);
+	d2_CreateButtonRow(*(int*) &d2_CurrentWindowId, 0, out, 3, *(int*) 0x14b5294, *(int*) 0x14b5298, *(int*) 0x14b529c);
 	firstWindow = fcn_005c8400();
 	v3 = d2_CreateGebaeudeListPanel();
 	v4 = fcn_005c89a0();
@@ -82,7 +82,7 @@ void __cdecl d2_OpenPlayerStats(void)
 	*(int*) (ofs + (unsigned long)&g_102cbc0) = *(int*) (ofs + (unsigned long)&g_102cbc0) | 1;
 	d2_SelectRadioGroup(idx, *(int*) 0x77533c);
 	if (v4 == -1) {
-		fcn_00472640(out[2], 0);
+		d2_SetElementEnabled(out[2], 0);
 	}
 	for (;;) {
 		if (g_14ce8e0 != 0) {
@@ -90,17 +90,17 @@ void __cdecl d2_OpenPlayerStats(void)
 		}
 		state = *(int*) (ofs + (unsigned long)&g_102cbc8);
 		if (state == 0) {
-			fcn_00471af0(firstWindow, 1);
-			fcn_00471af0(v3, 0);
-			fcn_00471af0(v4, 0);
+			d2_SetFormVisibility(firstWindow, 1);
+			d2_SetFormVisibility(v3, 0);
+			d2_SetFormVisibility(v4, 0);
 		} else if (state == 1) {
-			fcn_00471af0(v3, 1);
-			fcn_00471af0(firstWindow, 0);
-			fcn_00471af0(v4, 0);
+			d2_SetFormVisibility(v3, 1);
+			d2_SetFormVisibility(firstWindow, 0);
+			d2_SetFormVisibility(v4, 0);
 		} else if (state == 2) {
-			fcn_00471af0(v4, 1);
-			fcn_00471af0(v3, 0);
-			fcn_00471af0(firstWindow, 0);
+			d2_SetFormVisibility(v4, 1);
+			d2_SetFormVisibility(v3, 0);
+			d2_SetFormVisibility(firstWindow, 0);
 		}
 		if (firstWindow != -1) {
 			d2_SetForm(firstWindow, 1);
@@ -119,14 +119,14 @@ void __cdecl d2_OpenPlayerStats(void)
 		if (v4 != -1) {
 			d2_SetForm(v4, 0);
 			if (*(int*) &g_100f1dc != -1) {
-				t1 = fcn_00472830(v4, 3);
-				t2 = fcn_00472830(v4, 2);
+				t1 = d2_GetFormWindow(v4, 3);
+				t2 = d2_GetFormWindow(v4, 2);
 				if (d2_CurrentElementId == g_776c90) {
-					fcn_0046ed00(0, 0x3e, t1);
-					fcn_0046ed00(0, 0x3e, t2);
+					d2_ScrollWindow(0, 0x3e, t1);
+					d2_ScrollWindow(0, 0x3e, t2);
 				} else if (d2_CurrentElementId == g_777ca0) {
-					fcn_0046ed00(0, -0x3e, t1);
-					fcn_0046ed00(0, -0x3e, t2);
+					d2_ScrollWindow(0, -0x3e, t1);
+					d2_ScrollWindow(0, -0x3e, t2);
 				}
 			}
 			i = 0x777d14;

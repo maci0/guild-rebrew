@@ -16,7 +16,7 @@ void __cdecl ch_DestroyCharacter(char*);
 char* __cdecl ch_SpawnEntityCharacter(char*, int, float*, float*, int, int);
 void __cdecl ch_SetBodyAttachment(int, int, char*);
 char* __cdecl evt_LoadGfxScript(char*);
-void __cdecl fcn_00428340(char*, int, ...);
+void __cdecl evt_CallScriptFunction(char*, int, ...);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_FreeAction(char*);
 
@@ -126,7 +126,7 @@ void __cdecl he_RunBefoerdern(char* action)
 			}
 			p = evt_LoadGfxScript((char*) 0x6a68bc);
 			if (p != 0) {
-				fcn_00428340(p, 5, (int) pos[0], (int) pos[1], (int) pos[2], 0x28, 0xb4);
+				evt_CallScriptFunction(p, 5, (int) pos[0], (int) pos[1], (int) pos[2], 0x28, 0xb4);
 				if (v30 != -1) {
 					*(int*) (p + 0x104) = v30;
 				} else {

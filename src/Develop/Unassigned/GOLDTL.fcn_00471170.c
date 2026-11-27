@@ -3,13 +3,13 @@
 typedef struct
 {
 	int i[0x3cc / 4];
-} fcn_00471170_Win;
+} D2_FORM_WIN;
 // SIZE 0x3cc
 
 typedef struct
 {
 	int i[0x2f4 / 4];
-} fcn_00471170_Ent;
+} D2_FORM_ENT;
 // SIZE 0x2f4
 
 typedef struct
@@ -23,7 +23,7 @@ typedef struct
 	int surf[2];
 	int back[2];
 	char pad1b4[0x2bc - 0x1b4];
-} fcn_00471170_Page;
+} D2_FORM_PAGE;
 // SIZE 0x2bc
 
 typedef struct
@@ -34,7 +34,7 @@ typedef struct
 	char pad0c[0x28 - 0xc];
 	int fmt;
 	char pad2c[0x5c - 0x2c];
-} fcn_00471170_Desc;
+} D2_FORM_TEX_DESC;
 // SIZE 0x5c
 
 #include "client_types.h"
@@ -44,23 +44,23 @@ extern D2_FORM_RECORD g_1038140[];
 extern int g_14ce86c;
 
 int __cdecl fcn_00470820(int a, int b, int c);
-int __cdecl fcn_004770a0(fcn_00471170_Desc* d, int flags);
+int __cdecl fcn_004770a0(D2_FORM_TEX_DESC* d, int flags);
 
 /* ADDRESS: GOLDTL 0x00471170 */
-int __cdecl fcn_00471170(int a, int b, int c)
+int __cdecl d2_CreateRenderableForm(int x, int y, int formName)
 {
 	int id;
 	int i;
 	int j;
-	fcn_00471170_Page* p;
-	fcn_00471170_Win* w;
-	fcn_00471170_Desc d;
+	D2_FORM_PAGE* p;
+	D2_FORM_WIN* w;
+	D2_FORM_TEX_DESC d;
 
-	id = fcn_00470820(a, b, c);
+	id = fcn_00470820(x, y, formName);
 	if (id != 0) {
-		p = &((fcn_00471170_Page*)g_1038140)[id];
+		p = &((D2_FORM_PAGE*)g_1038140)[id];
 		for (i = 0; i < p->count; i++) {
-			w = &((fcn_00471170_Win*)g_1015f40)[p->wins[i]];
+			w = &((D2_FORM_WIN*)g_1015f40)[p->wins[i]];
 			(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->i[0x27c / 4]].value_048) = 1;
 			for (j = 0; j < w->i[0x2c / 4]; j++) {
 				(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[((int*) w->i[0x28 / 4])[j]].value_048) = 1;

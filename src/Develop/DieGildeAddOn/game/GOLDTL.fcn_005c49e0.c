@@ -17,8 +17,8 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl gm_GetEntityMood(unsigned char* e);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472640(int i, int flag);
-void __cdecl fcn_00471af0(int k, int flag);
+void __cdecl d2_SetElementEnabled(int i, int flag);
+void __cdecl d2_SetFormVisibility(int k, int flag);
 void __cdecl d2_RunTechTreeDialog(unsigned char*, int);
 void __cdecl d2_ShowRenovationDialog(unsigned char*);
 void __cdecl d2_RunRoomUpgradeDialog(unsigned char*);
@@ -90,18 +90,18 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 		}
 		if ((p[0x5a] & 4) != 0) {
 			if (h1 != -1) {
-				fcn_00472640(h1, 0);
+				d2_SetElementEnabled(h1, 0);
 			}
 			if (h2 != -1) {
-				fcn_00472640(h2, 0);
+				d2_SetElementEnabled(h2, 0);
 			}
 		}
 		if (h4 != -1) {
 			if ((p[0x5a] & 0x40) != 0) {
-				fcn_00472640(h4, 0);
+				d2_SetElementEnabled(h4, 0);
 			}
 			else {
-				fcn_00472640(h4, 1);
+				d2_SetElementEnabled(h4, 1);
 			}
 		}
 		if (g_14ce8e0 != 0) {
@@ -109,26 +109,26 @@ void __cdecl d2_ShowGebaeudeOptions(unsigned char* p)
 		}
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == h1) {
-				fcn_00471af0(d, 0);
+				d2_SetFormVisibility(d, 0);
 				d2_RunTechTreeDialog(p, 0xfd);
-				fcn_00471af0(d, 1);
+				d2_SetFormVisibility(d, 1);
 			}
 			else if (d2_CurrentElementId == h2) {
-				fcn_00471af0(d, 0);
+				d2_SetFormVisibility(d, 0);
 				d2_ShowRenovationDialog(p);
-				fcn_00471af0(d, 1);
+				d2_SetFormVisibility(d, 1);
 				redraw = 1;
 			}
 			else if (d2_CurrentElementId == h3) {
-				fcn_00471af0(d, 0);
+				d2_SetFormVisibility(d, 0);
 				d2_RunRoomUpgradeDialog(p);
-				fcn_00471af0(d, 1);
+				d2_SetFormVisibility(d, 1);
 				redraw = 1;
 			}
 			else if (d2_CurrentElementId == h4) {
-				fcn_00471af0(d, 0);
+				d2_SetFormVisibility(d, 0);
 				d2_RunBuildingUpgradeDialog(p);
-				fcn_00471af0(d, 1);
+				d2_SetFormVisibility(d, 1);
 				redraw = 1;
 			}
 		}

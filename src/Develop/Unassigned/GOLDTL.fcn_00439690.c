@@ -22,7 +22,7 @@ extern Flags g_1052bd0;
 extern unsigned char g_6b7ff8;
 
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_00456c60(void);
+void __cdecl d3_ResetSceneAuxSlots(void);
 void __cdecl fcn_00456c10(void);
 void __cdecl fcn_00456c80(void);
 void __cdecl fcn_0043bbf0(unsigned char);
@@ -35,11 +35,11 @@ void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3, unsigned i
 	unsigned int t;
 
 	save = d3_CurrentContextIndex;
-	fcn_00456c60();
+	d3_ResetSceneAuxSlots();
 	for (i = 0; i < 64; i++) {
 		if (i != (unsigned int)save && ((Player*)g_1043340)[i].active != 0) {
 			d3_SelectSceneContext(i, 1);
-			fcn_00456c60();
+			d3_ResetSceneAuxSlots();
 		}
 	}
 	d3_SelectSceneContext(save, 1);

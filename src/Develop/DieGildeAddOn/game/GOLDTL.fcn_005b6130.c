@@ -6,7 +6,7 @@ extern int g_14abc14;    /* 0x14abc14 */
 
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 void __cdecl fcn_0046f940(int element, char* text);
-void __cdecl fcn_0046f9b0(int element, int a2);
+void __cdecl d2_SetControlText(int element, int a2);
 void __cdecl d2_SetElementFont(int element, int a2);
 char* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 char* __cdecl gm_EntityAccumulate(int entity);
@@ -62,7 +62,7 @@ void __cdecl d2_UpdateWorkerOverlaySlots(int panelState, char* ownerName)
                 }
                 v3 = *(int*) (v4 * 4 + 0x777cd0);
                 if (v3 != -1) {
-                    fcn_0046f9b0(v3, g_14abc14);
+                    d2_SetControlText(v3, g_14abc14);
                 }
             }
             v4 += 1;

@@ -80,7 +80,7 @@ void __cdecl d2_SetBackgroundTexture(const char*, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl CountDisplayCounters(void);
 void __cdecl d3snd_PlayWorkerOrderVoice(void);
@@ -165,12 +165,12 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 			btnC = 1;
 		}
 	} else { btnC = 1; }
-	if (btnA) fcn_00472640(out[0], 1);
-	else fcn_00472640(out[0], 0);
-	if (btnB) fcn_00472640(out[3], 1);
-	else fcn_00472640(out[3], 0);
-	if (btnC) fcn_00472640(out[6], 1);
-	else fcn_00472640(out[6], 0);
+	if (btnA) d2_SetElementEnabled(out[0], 1);
+	else d2_SetElementEnabled(out[0], 0);
+	if (btnB) d2_SetElementEnabled(out[3], 1);
+	else d2_SetElementEnabled(out[3], 0);
+	if (btnC) d2_SetElementEnabled(out[6], 1);
+	else d2_SetElementEnabled(out[6], 0);
 	for (;;) {
 		d2_SetForm(dlg, 1);
 		i = g_6b7fac - start;

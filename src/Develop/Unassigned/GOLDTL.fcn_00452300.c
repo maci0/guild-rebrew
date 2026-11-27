@@ -6,7 +6,7 @@ extern unsigned long g_14ce728;
 void __cdecl fcn_00452420(char* p);
 
 /* ADDRESS: GOLDTL 0x00452300 */
-void __cdecl fcn_00452300(void)
+void __cdecl d3_ReleaseRenderVertexBuffer(void)
 {
 	while (d3_SceneRenderListHead != g_1040640) {
 		fcn_00452420(d3_SceneRenderListHead);

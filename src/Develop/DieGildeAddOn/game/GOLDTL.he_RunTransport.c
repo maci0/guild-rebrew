@@ -52,7 +52,7 @@ void __cdecl he_StepTransportEntry(char *);
 void __cdecl he_TransportStadtStadt(char *);
 void __cdecl ReportClientMessage(char *);
 void __cdecl sb_PlayVoice(int, char *, int, int, int, int, int);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 int __cdecl gm_IsGebaeudeOpen(char *, int, int);
 
 /* ADDRESS: GOLDTL 0x0055ea30 */
@@ -262,7 +262,7 @@ void __cdecl he_RunTransport(char *e)
 				gm_ChangeObjektZustand(*(char **)(r + 2), -2);
 			}
 			if (*(int *)(e + 0xe8) != -1) {
-				fcn_0046f280(*(int *)(e + 0xe8));
+				d2_CloseWindow(*(int *)(e + 0xe8));
 			}
 		}
 		if (r != 0) {

@@ -39,7 +39,7 @@ void __cdecl d2_BuildCityScrollMap(MsgCtx*);
 void __cdecl d2_UpdateCityScrollMap(MsgCtx*);
 void __cdecl fcn_0057e880(int, int, int, int);
 void __cdecl fcn_005b18c0(int*);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 int __cdecl fcn_005d0460(char*, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -75,10 +75,10 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 					if (ctx.ids10[i] != -1 && d2_CurrentElementId == ctx.ids10[i]) {
 						v = *(int*) (&((D2_CONTROL_TL*) (g_1015ea0))[ctx.ids10[i]].associated_object);
 						if (v != 0 && cb != 0) {
-							fcn_00471af0(ctx.dlg, 0);
+							d2_SetFormVisibility(ctx.dlg, 0);
 							d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
 							cb(v, v);
-							fcn_00471af0(ctx.dlg, 1);
+							d2_SetFormVisibility(ctx.dlg, 1);
 							d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
 						}
 						else {
@@ -108,11 +108,11 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 					if (!(flags & 2)) {
 						continue;
 					}
-					fcn_00471af0(ctx.dlg, 0);
+					d2_SetFormVisibility(ctx.dlg, 0);
 					d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
 					v = fcn_005d0460((char*) ctx.queue[i].value, (int) state, (int) name, (int) cb);
 					d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
-					fcn_00471af0(ctx.dlg, 1);
+					d2_SetFormVisibility(ctx.dlg, 1);
 				}
 				if (v == 0) {
 					continue;
@@ -124,10 +124,10 @@ int __cdecl fcn_005bdc30(int flags, void* state, char* name, void (__cdecl* cb)(
 				if (flags & 2) {
 					continue;
 				}
-				fcn_00471af0(ctx.dlg, 0);
+				d2_SetFormVisibility(ctx.dlg, 0);
 				d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 0);
 				cb(v, ctx.queue[i].value);
-				fcn_00471af0(ctx.dlg, 1);
+				d2_SetFormVisibility(ctx.dlg, 1);
 				d2_SetSlotVisibility(*(int*) (g_10161bc + ctx.win * 0x3cc), 1);
 				break;
 			}

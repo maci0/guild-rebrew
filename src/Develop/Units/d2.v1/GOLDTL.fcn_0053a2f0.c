@@ -10,7 +10,7 @@ int __cdecl io_AppendText(char*);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 
 void __cdecl d2_ShowAmountDialog(void)
 {
@@ -29,5 +29,5 @@ void __cdecl d2_ShowAmountDialog(void)
 			g_774654 = 1;
 		}
 	}
-	fcn_0046f280(w);
+	d2_CloseWindow(w);
 }

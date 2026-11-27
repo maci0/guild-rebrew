@@ -6,11 +6,11 @@
 extern char* g_6b5de0;
 extern int g_14ce728;
 
-void __cdecl fcn_0043ef20(char* a0);
+void __cdecl d3_UpdateFloorLighting(char* a0);
 long __stdcall D3DXCreateMeshFVF(int a0, int a1, int a2, int a3, char* a4, char* a5);
 
 /* ADDRESS: GOLDTL 0x0043b990 */
-void __cdecl fcn_0043b990(char* terrainObject)
+void __cdecl d3_RebuildFloorMeshes(char* terrainObject)
 {
 	char* rec;
 	char* start;
@@ -170,5 +170,5 @@ void __cdecl fcn_0043b990(char* terrainObject)
 		} while (--j);
 		start = rec;
 	} while (--i);
-	fcn_0043ef20(terrainObject);
+	d3_UpdateFloorLighting(terrainObject);
 }

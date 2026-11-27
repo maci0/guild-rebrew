@@ -42,7 +42,7 @@ int __cdecl fcn_0064d41a(char *, char *, ...);
 #include "Develop/Units/vfs/vfs.h"
 char *__cdecl m_alloc(int, char *);
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
-int __cdecl fcn_00426ac0(char *, char *, int *);
+int __cdecl evt_NormalizeScriptSource(char *, char *, int *);
 void __cdecl m_FreeTracked(void *);
 
 Script *__cdecl evt_LoadScript(char *name)
@@ -79,7 +79,7 @@ Script *__cdecl evt_LoadScript(char *name)
 	memset(tmp, 0, 0xfa01);
 	vfs_ReadData(tmp, 0xfa00, 1, f);
 	CloseVfsStream(f);
-	len = fcn_00426ac0(tmp, out, g_14c93a0);
+	len = evt_NormalizeScriptSource(tmp, out, g_14c93a0);
 	for (sc->ndebug = 0; sc->ndebug < 0x800; sc->ndebug++) {
 		if (g_14c93a0[sc->ndebug] == -1) {
 			break;

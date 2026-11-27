@@ -90,7 +90,7 @@ uv run --frozen cmake -G "Unix Makefiles" -S . -B build/server-example \
   -DREBREW_BUILD_SERVER=ON \
   -DREBREW_BUILD_GOLD=OFF -DREBREW_BUILD_GOLDTL=OFF \
   -DREBREW_DEBUG_INFO=OFF
-uv run --frozen cmake --build build/server-example --parallel 2
+uv run --frozen cmake --build build/server-example --parallel "$(nproc)"
 ```
 
 This produces `server.dll` and `server.map` in that directory. Keep each image

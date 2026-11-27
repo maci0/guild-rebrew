@@ -51,9 +51,9 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckPrivilege(int, char*, Query*);
 void __cdecl d2_ShowPrivilegMessage(char*, int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_0046e830(int, int, int, int, int);
+void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -196,7 +196,7 @@ void __cdecl d2_ShowPrivilegien(void)
 					win = d2_CurrentWindowId;
 					d2_SetForm((int) dlg, 4);
 					io_AppendText((int) g_6811b0);
-					fcn_0046e830(-1, -1, d2_CurrentWindowId, win, 0x767);
+					d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, win, 0x767);
 				} else {
 					d2_SetForm((int) dlg, 4);
 					io_AppendText((int) g_6811b0);
@@ -210,7 +210,7 @@ void __cdecl d2_ShowPrivilegien(void)
 			} else {
 				for (i = 0; i < 0x3a; i++) {
 					if (d2_CurrentElementId == keys[i]) {
-						fcn_00471af0((int) dlg, 0);
+						d2_SetFormVisibility((int) dlg, 0);
 						q.kind = mode == 2 ? 3 : 4;
 						r = gm_CheckPrivilege(i, (char*) &((House*) g_7f4ca0)[g_774970], &q);
 						if (r & 0x80) {
@@ -218,7 +218,7 @@ void __cdecl d2_ShowPrivilegien(void)
 							state[i] = r & 0xa;
 						}
 						q.kind = mode == 2 ? 1 : 2;
-						fcn_00471af0((int) dlg, 1);
+						d2_SetFormVisibility((int) dlg, 1);
 						break;
 					}
 				}

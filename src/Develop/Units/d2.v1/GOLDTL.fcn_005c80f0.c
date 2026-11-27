@@ -38,7 +38,7 @@ int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CreateRadioGroup(int n, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 void __cdecl d2_AddToRadioGroup(int g, int id);
-void __cdecl fcn_00472640(int i, int flag);
+void __cdecl d2_SetElementEnabled(int i, int flag);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00525ef0(void);
 
@@ -82,7 +82,7 @@ void __cdecl d2_ChooseWappen(void)
 		for (j = 0; j < HOUSES; j++) {
 			if (((House5c80*)g_7f4ca0)[j].id != 0xffff && ((House5c80*)g_7f4ca0)[j].district == DISTRICT0 - i && ((House5c80*)g_7f4ca0)[j].id != g_774970
 				&& (((House5c80*)g_7f4ca0)[j].type == 6 || ((House5c80*)g_7f4ca0)[j].type == 7 || ((House5c80*)g_7f4ca0)[j].type == 5)) {
-				fcn_00472640(btn[i], 0);
+				d2_SetElementEnabled(btn[i], 0);
 			}
 		}
 	}
@@ -93,19 +93,19 @@ void __cdecl d2_ChooseWappen(void)
 	do {
 		for (i = 0; i < 8; i++) {
 			b = btn[i];
-			fcn_00472640(b, 1);
+			d2_SetElementEnabled(b, 1);
 			for (j = 0; j < HOUSES; j++) {
 				if (((House5c80*)g_7f4ca0)[j].id != 0xffff && ((House5c80*)g_7f4ca0)[j].district == i + DISTRICT0 && ((House5c80*)g_7f4ca0)[j].id != g_774970
 					&& (((House5c80*)g_7f4ca0)[j].type == 6 || ((House5c80*)g_7f4ca0)[j].type == 7 || ((House5c80*)g_7f4ca0)[j].type == 5)) {
-					fcn_00472640(b, 0);
+					d2_SetElementEnabled(b, 0);
 				}
 			}
 		}
 		if (g_102cbc4[grp].sel != -1) {
-			fcn_00472640(back, 1);
+			d2_SetElementEnabled(back, 1);
 		}
 		else {
-			fcn_00472640(back, 0);
+			d2_SetElementEnabled(back, 0);
 		}
 		if (g_100f1dc == 2 && g_102cbc4[grp].sel != -1) {
 			me_h = &((House5c80*)g_7f4ca0)[g_774970];

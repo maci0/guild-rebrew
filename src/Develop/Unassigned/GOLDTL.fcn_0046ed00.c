@@ -16,7 +16,7 @@ typedef struct Win046ed00 {
 #include "client_types.h"
 extern Win_1015f40 g_1015f40[0x60];
 
-void __cdecl fcn_0046ed00(int delta, int step, int k)
+void __cdecl d2_ScrollWindow(int delta, int step, int k)
 {
 	int scroll;
 	int base;

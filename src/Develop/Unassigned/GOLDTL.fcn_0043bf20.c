@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x0043bf20 */
-void __cdecl fcn_0043bf20(char* a)
+void __cdecl d3_InvalidateFloorChunks(char* a)
 {
 	int i;
 	int j;

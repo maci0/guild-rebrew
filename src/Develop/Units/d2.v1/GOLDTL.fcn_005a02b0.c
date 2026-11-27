@@ -22,7 +22,7 @@ void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00525ef0(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl gm_ModifyHealth(int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl cm_SendCopyEntityData(char*);
@@ -87,7 +87,7 @@ int __cdecl fcn_005a02b0(void)
 		else {
 			d2_SetForm(h, 1); io_AppendText(0x15bb); d2_SetForm(h, 2);
 			io_AppendText(0x15bc, *(unsigned short*) slot, info);
-			d = fcn_004677e0(0x1c,
+			d = d2_AddWindowValueGauge(0x1c,
 			    *(int*) (g_77255c + 0x10) - 0x3c,
 			    *(int*) (g_77255c + 0xc) - 0x40, 0, 0x64, 0x83,
 			    0x42, d2_CurrentWindowId);

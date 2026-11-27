@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004239e0 */
-int* __cdecl fcn_004239e0(void)
+int* __cdecl sbs_GetLastRootSample(void)
 {
 	int* p;
 	int* result;

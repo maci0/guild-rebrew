@@ -45,7 +45,7 @@ extern int g_1040494;
 
 int __cdecl d2_AllocateElement(void);
 Surf* __cdecl fcn_004770a0(Desc*, int);
-int __cdecl fcn_00475fd0(Surf*);
+int __cdecl d2_LockSurface(Surf*);
 void __cdecl d2_UnlockSurface(Surf*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 static __inline void fill0(char* dst, int size)
@@ -81,7 +81,7 @@ static __inline void fill0(char* dst, int size)
 
 // FUNCTION: GOLDTL 0x00469140
 
-int __cdecl fcn_00469140(int a1, int a2, int w, int h, char* src)
+int __cdecl d2_CreateBitmapElement(int a1, int a2, int w, int h, char* src)
 {
 	int idx;
 	Desc desc;
@@ -105,7 +105,7 @@ int __cdecl fcn_00469140(int a1, int a2, int w, int h, char* src)
 	desc.x28 = 0x17;
 	*(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c = fcn_004770a0(&desc, 0);
 	s = *(Surf**) &((D2_CONTROL_TL*) g_1015ea0)[idx].payload.fields.value_08c;
-	if (fcn_00475fd0(s)) {
+	if (d2_LockSurface(s)) {
 		for (i = 0; i < h; i++) {
 			memcpy(s->bits + s->pitch * i, src + i * w * 2, w * 2);
 		}

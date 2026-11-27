@@ -1,6 +1,6 @@
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 extern int* g_665f08; extern char d2_TutorialActive[];
 
 void __cdecl d2_DestroyForm(int);
@@ -11,7 +11,7 @@ void __cdecl d2_HideTutorialHint(void)
 {
 	d2_SetForm(*(int*) (*(int*) 0x665f08 + 0x24), 0);
 	io_AppendText(0x6811b0);
-	fcn_00471af0(*(int*) (*(int*) 0x665f08 + 0x24), 0);
+	d2_SetFormVisibility(*(int*) (*(int*) 0x665f08 + 0x24), 0);
 }
 
 /* ADDRESS: GOLDTL 0x005805e0 */

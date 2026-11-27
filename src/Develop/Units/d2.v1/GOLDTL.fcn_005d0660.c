@@ -42,7 +42,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_005c9090(char*, int, int, int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_005d1790(void*, int);
@@ -626,7 +626,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 				q += 0x10;
 			}
 			if (rec) {
-				fcn_00471af0(win, 0);
+				d2_SetFormVisibility(win, 0);
 				if (!(a1 & 0x10) && (a1 & 8)) {
 					if (ent != rec) {
 						fcn_005d1790((void*) rec, 1);
@@ -634,7 +634,7 @@ id]) + 0x18c), d2_CurrentWindowId);
 						fcn_005d1790((void*) rec, 0);
 					}
 				}
-				fcn_00471af0(win, 1);
+				d2_SetFormVisibility(win, 1);
 			} else {
 				count = 1;
 			}

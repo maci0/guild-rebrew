@@ -26,7 +26,7 @@ void __cdecl d3_TransformToObjectSpace(char* object, float* position, float* res
 int __cdecl d3_TransformPoint(char* object, char* pos, float* result);
 char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags, char (__cdecl* cb)(char*, char*), char* ctx);
 char* __cdecl rd_GetBKSize(char* name);
-void __cdecl fcn_004bdfb0(float* ox, float* oy, float* position, char* object, char** context);
+void __cdecl rd_ProjectWorldToSupermap(float* ox, float* oy, float* position, char* object, char** context);
 int __cdecl fcn_004bdbe0(int obj, int x, int y, int i, int j);
 char* __cdecl d3_FindSceneObject(char* o, int flags, char* ptr, char* name);
 char __cdecl fcn_0045b990(char* map, float* pos, int* x, int* y, int* z);
@@ -119,11 +119,11 @@ int __cdecl rd_ConnectBuildingToSupermap(int sceneObjectArg, int typeIdArg)
 	pos[0] = *(float*) (g_1005900 + 0x18) + *(float*) (box + 0x40);
 	pos[1] = *(float*) (box + 0x44);
 	pos[2] = *(float*) (g_1005900 + 0x1e) + *(float*) (box + 0x48);
-	fcn_004bdfb0(&oy1, &ox1, pos, *(char**)(ctx + 0x50), (char**) &g_1005900);
+	rd_ProjectWorldToSupermap(&oy1, &ox1, pos, *(char**)(ctx + 0x50), (char**) &g_1005900);
 	pos[0] = *(float*) (box + 0x50) - *(float*) (g_1005900 + 0x18);
 	pos[1] = *(float*) (box + 0x44);
 	pos[2] = *(float*) (g_1005900 + 0x1e) + *(float*) (box + 0x48);
-	fcn_004bdfb0(&oy2, &ox2, pos, *(char**)(ctx + 0x50), (char**) &g_1005900);
+	rd_ProjectWorldToSupermap(&oy2, &ox2, pos, *(char**)(ctx + 0x50), (char**) &g_1005900);
 	if (fcn_004bdbe0((int)&g_1005900, (int)oy1, (int)ox1, -1, -1) == 0) {
         gv_Free3Fields(g_1005904);
         return 0;

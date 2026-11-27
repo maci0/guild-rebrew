@@ -32,7 +32,7 @@ extern char g_7f4ca0[];
 #include "client_dialog_state.h"
 
 int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
-int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
+int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_RunCharacterDebugDialog(void*);
@@ -40,7 +40,7 @@ char* __cdecl io_AppendText(int, ...);
 int __cdecl he_CountActiveHandlungen(Ent_5b4c80*);
 int __cdecl d2_GetWindowListItem(int, int, char*);
 void __cdecl d2_UpdateWindowDrag(D2_WIN*);
-int __cdecl fcn_0046f280(int);
+int __cdecl d2_CloseWindow(int);
 
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* Modal two-column entity list: fills it once, then pumps the UI and opens
@@ -60,8 +60,8 @@ void __cdecl d2_ShowCharacterActionDebug(void)
 
 	memset(ids, 0xff, sizeof(ids));
 	fill = 1;
-	left = fcn_0046f100(0, 0, 0x140, 0x190, 0x10, win = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414));
-	right = fcn_0046f100(0x140, 0, 0x140, 0x190, 0x10, win);
+	left = d2_CreateChildWindow(0, 0, 0x140, 0x190, 0x10, win = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414));
+	right = d2_CreateChildWindow(0x140, 0, 0x140, 0x190, 0x10, win);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[win].slot, 0x54);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[left].slot, 0x54);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[right].slot, 0x54);
@@ -116,7 +116,7 @@ void __cdecl d2_ShowCharacterActionDebug(void)
 			d2_UpdateWindowDrag(rp);
 		} while (main_RunFrameLoop((void*) d2_ShowCharacterActionDebug, 0x657c7));
 	}
-	fcn_0046f280(win);
-	fcn_0046f280(left);
-	fcn_0046f280(right);
+	d2_CloseWindow(win);
+	d2_CloseWindow(left);
+	d2_CloseWindow(right);
 }

@@ -6,7 +6,7 @@ extern RGB_COLOR g_100f1a0;
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void*);
 int __cdecl fcn_00475780(char*, char*);
-void __cdecl fcn_004757b0(char*, char, char, char);
+void __cdecl d2_WritePixelRgb(char*, char, char, char);
 
 /* Crop one 24-bit bitmap block: scan the cells against the hole colour for the
    used bounds, repaint both row markers, copy the bounding rows into the block
@@ -72,12 +72,12 @@ unsigned int* __cdecl fcn_00477ae0(int x, int y, int width,
 				if (!fcn_00475780(v20, (char*) 0x67d960)) {
 					xmin = (unsigned short) col;
 					ymin = (unsigned short) row;
-					fcn_004757b0(v20, g_100f1a0.r, g_100f1a0.g, g_100f1a0.b);
+					d2_WritePixelRgb(v20, g_100f1a0.r, g_100f1a0.g, g_100f1a0.b);
 				}
 				if (!fcn_00475780(v20, (char*) 0x67d95c)) {
 					xmax = (unsigned short) col;
 					ymax = (unsigned short) row;
-					fcn_004757b0(v20, g_100f1a0.r, g_100f1a0.g, g_100f1a0.b);
+					d2_WritePixelRgb(v20, g_100f1a0.r, g_100f1a0.g, g_100f1a0.b);
 				}
 			}
 		}

@@ -7,7 +7,7 @@ typedef struct {
 	char pad20[0x60];
 	int f80;
 	char pad84[0x270];
-} Slot_00472680;
+} D2_ELEMENT_SCALE_SLOT;
 // SIZE 0x2f4
 
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -15,7 +15,7 @@ typedef struct {
 int __cdecl d2_GetElementResourceSize(int, int*, int*);
 
 /* ADDRESS: GOLDTL 0x00472680 */
-void __cdecl fcn_00472680(int id, int type)
+void __cdecl d2_SetElementScale(int id, int scale)
 {
 	int h;
 	int w;
@@ -32,13 +32,13 @@ void __cdecl fcn_00472680(int id, int type)
 	}
 	w0 = w;
 	h0 = h;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_080) = type;
-	if (type > 1) {
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = h0 * type;
-		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = w0 * type;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_080) = scale;
+	if (scale > 1) {
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = h0 * scale;
+		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = w0 * scale;
 	}
-	if (type < -1) {
-		n = abs(type);
+	if (scale < -1) {
+		n = abs(scale);
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = h0 / n;
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = w0 / n;
 	}

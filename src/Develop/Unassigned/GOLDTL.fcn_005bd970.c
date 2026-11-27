@@ -12,7 +12,7 @@
 
 
 void __cdecl fcn_00455140(char* node, float* in, float* out);
-float __cdecl fcn_00451380(float* a, float* b);
+float __cdecl d3_SignedPlanarAngle(float* a, float* b);
 
 /* ADDRESS: GOLDTL 0x005bd970 */
 int __cdecl fcn_005bd970(char* node, char* entries)
@@ -22,7 +22,7 @@ int __cdecl fcn_005bd970(char* node, char* entries)
 
 	if (strstr(node, "ob_BRUECKE_FLUSS") != 0) {
 		fcn_00455140(node, (float*) 0x662d40, v4);
-		angle = -fcn_00451380((float*) 0x662d40, v4);
+		angle = -d3_SignedPlanarAngle((float*) 0x662d40, v4);
 		*(unsigned int*) (entries + *(int*) (entries + 0x400) * 4) = (unsigned int) node;
 		if (angle >= 0.0 && angle < 0.39269909262657166) {
 			*(int*) (entries + 0x200 + *(int*) (entries + 0x400) * 4) = 0x1a;

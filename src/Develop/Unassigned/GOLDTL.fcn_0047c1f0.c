@@ -27,7 +27,7 @@ typedef struct Tex {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Unassigned/render_quad.h"
 
-int __cdecl fcn_0047b8b0(int x, int y, int w, int h, RENDER_QUAD* q);
+int __cdecl d2_BuildQuadVertices(int x, int y, int w, int h, RENDER_QUAD* q);
 void __cdecl d2_SetQuadVertexColor(RENDER_QUAD* q, unsigned char r, unsigned char g, unsigned char b);
 
 RENDER_QUAD* __cdecl d2_QueueClippedTexturedQuad(float u, float v, int w, int h, Tex* tex, int x, int y)
@@ -72,7 +72,7 @@ RENDER_QUAD* __cdecl d2_QueueClippedTexturedQuad(float u, float v, int w, int h,
 		ch = d2_ClipBottom - y;
 	}
 	q = &g_1552020[d2_QueuedQuadCount];
-	if (fcn_0047b8b0(x, y, cw, ch, q) == 0) {
+	if (d2_BuildQuadVertices(x, y, cw, ch, q) == 0) {
 		return 0;
 	}
 	du = du / w;

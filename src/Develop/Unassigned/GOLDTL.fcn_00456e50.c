@@ -23,7 +23,7 @@ extern char* g_1041d00;
 extern float g_1052c00[16];
 
 void __cdecl fcn_004372d0(int, int, int, int, int);
-void __cdecl fcn_00456ef0(char*);
+void __cdecl d3_ProjectNodeShadows(char*);
 
 void __cdecl fcn_00456e50(void)
 {
@@ -34,10 +34,10 @@ void __cdecl fcn_00456e50(void)
 	((Texture456e50Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_cc[10])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0);
 	if (g_1040600 != 0) {
 		for (p = g_6b86ec; p != 0; p = *(char**) (p + 0x1f0)) {
-			fcn_00456ef0(p);
+			d3_ProjectNodeShadows(p);
 		}
 		for (p = g_1041d00; p != 0; p = *(char**) (p + 0x1f0)) {
-			fcn_00456ef0(p);
+			d3_ProjectNodeShadows(p);
 		}
 	}
 	((Transform456e50Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform)(((D3D_DEVICE_VIEW*)g_6b5de0), 3, ((char*)g_1052c00));

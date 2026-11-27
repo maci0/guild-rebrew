@@ -6,16 +6,16 @@ extern short g_14ce8c2;
 extern int g_774a58;
 extern int g_774a4c;
 
-int __cdecl fcn_005a7d10(char* w)
+int __cdecl d2_ScrollMinimapViewport(char* widget)
 {
 	int r;
 	int x;
 	int y;
 
 	r = 0;
-	x = *(int*) (w + 0x258);
+	x = *(int*) (widget + 0x258);
 	g_774a58 = x;
-	y = *(int*) (w + 0x248);
+	y = *(int*) (widget + 0x248);
 	if (g_14ce8c0 <= g_6b5c80) {
 		x -= 10;
 	} else if (g_14ce8c0 >= d2_MouseRightBoundary) {
@@ -43,9 +43,9 @@ int __cdecl fcn_005a7d10(char* w)
 	if (g_778d20 - 0x168 < g_774a4c) {
 		g_774a4c = g_778d20 - 0x168;
 	}
-	if (g_774a58 != *(int*) (w + 0x258) || g_774a4c != *(int*) (w + 0x248)) {
-		*(int*) (w + 0x258) = g_774a58;
-		*(int*) (w + 0x248) = g_774a4c;
+	if (g_774a58 != *(int*) (widget + 0x258) || g_774a4c != *(int*) (widget + 0x248)) {
+		*(int*) (widget + 0x258) = g_774a58;
+		*(int*) (widget + 0x248) = g_774a4c;
 		r = 1;
 	}
 	return r;

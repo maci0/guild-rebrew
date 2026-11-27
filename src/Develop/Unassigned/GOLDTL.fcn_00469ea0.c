@@ -22,7 +22,7 @@ int __cdecl fcn_0047cba0(int, int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x00469ea0 */
-int __cdecl fcn_00469ea0(int a1, int a2, int idx, int a4)
+int __cdecl d2_DrawResource(int a1, int a2, int idx, int a4)
 {
 	int result;
 	int base;

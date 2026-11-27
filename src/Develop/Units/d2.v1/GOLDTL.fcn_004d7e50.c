@@ -4,16 +4,16 @@
 int __cdecl fcn_00470820(int, int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00468df0(int, int, int, unsigned int, unsigned int);
-void __cdecl fcn_00469090(int);
-int __cdecl fcn_004677e0(int, int, int, int, unsigned int, int, int,
+int __cdecl d2_AddWindowTextButton(int, int, int, unsigned int, unsigned int);
+void __cdecl d2_CenterElement(int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, unsigned int, int, int,
                         unsigned int);
 void __cdecl io_AppendText(int);
 void __cdecl fcn_004d0ec0(void);
 void __cdecl fcn_004d0c70(void);
 
 /* ADDRESS: GOLDTL 0x004d7e50 */
-void __cdecl fcn_004d7e50(void)
+void __cdecl d2_InitCombatHud(void)
 {
 	int dialog;
 
@@ -21,13 +21,13 @@ void __cdecl fcn_004d7e50(void)
 	*(unsigned int*) 0x772f14 = dialog;
 	fcn_00471d80(dialog, 3);
 	d2_SetForm(dialog, 0);
-	*(unsigned int*) 0x68b7a8 = fcn_00468df0(0x10, 0xc, 0xbf,
+	*(unsigned int*) 0x68b7a8 = d2_AddWindowTextButton(0x10, 0xc, 0xbf,
 	                                         *(unsigned int*) 0x14a9a14,
 	                                         *(unsigned int*) 0x772514);
 	*(unsigned int*) (*(unsigned int*) 0x1015ea0 +
 	                  *(unsigned int*) 0x68b7a8 * 0x2f4 + 0x6c) = 1;
-	fcn_00469090(*(unsigned int*) 0x68b7a8);
-	*(unsigned int*) 0x68b7a4 = fcn_004677e0(
+	d2_CenterElement(*(unsigned int*) 0x68b7a8);
+	*(unsigned int*) 0x68b7a4 = d2_AddWindowValueGauge(
 	    (*(int*) (*(unsigned int*) 0x77255c + 0xc) - 0x190) / 2, 0x37, 0x190, 0,
 	    *(unsigned int*) 0x68bfbc, 0x83, 0x42, *(unsigned int*) 0x772514);
 	*(unsigned int*) (*(unsigned int*) 0x1015ea0 +

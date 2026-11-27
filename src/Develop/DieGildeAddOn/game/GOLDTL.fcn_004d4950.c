@@ -5,7 +5,7 @@
 
 char* __cdecl gm_GetEquippedCombatGear(char*);
 int __cdecl d3sm_GetObjectSuperMap(char*);
-float __cdecl fcn_004cefb0(char*, unsigned int);
+float __cdecl gm_CalcEntityFlatDistance(char*, unsigned int);
 unsigned short* __cdecl gm_FindEntityActiveItem(char*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
@@ -47,7 +47,7 @@ void __cdecl gm_ResolveDuelHit(int ctx)
     d3sm_GetObjectSuperMap((char*) *(int*) ((char*) v4 + 0x184));
     if (!v7 ||
         *(float*) ((char*) v7 + 0xc) <
-            fcn_004cefb0(v3,
+            gm_CalcEntityFlatDistance(v3,
                          *(unsigned int*) (*(int*) ((char*) v4 + 0x184) + 0x34))) {
         v22 = 0;
         v5 = 0;

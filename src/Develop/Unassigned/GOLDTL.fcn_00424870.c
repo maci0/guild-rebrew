@@ -2,12 +2,12 @@
 
 int __cdecl fcn_0064d530(int, int, int);
 
-int __cdecl fcn_00424870(int a1, int a2)
+int __cdecl sbs_GetRootSetName(int nameBuf, int bufSize)
 {
 	int r = 0;
 
 	if (*(int*) 0x6b7d68 != 0) {
-		fcn_0064d530(a1, *(int*) 0x6b7d68, a2);
+		fcn_0064d530(nameBuf, *(int*) 0x6b7d68, bufSize);
 	} else {
 		r = -1;
 	}

@@ -12,7 +12,7 @@ extern char s_6a99c4[];
 double __cdecl gm_RandomFloat01(void);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl evt_LoadGfxScript(char*);
-void __cdecl fcn_00428340(int, int, int, int, int);
+void __cdecl evt_CallScriptFunction(int, int, int, int, int);
 
 void __cdecl d3_TriggerFriedhofChatScript(void)
 {
@@ -72,6 +72,6 @@ void __cdecl d3_TriggerFriedhofChatScript(void)
 	}
 	s = evt_LoadGfxScript(s_6a99c4);
 	if (s != 0) {
-		fcn_00428340(s, 3, *(int*) (e1 + 0x184), va, vb);
+		evt_CallScriptFunction(s, 3, *(int*) (e1 + 0x184), va, vb);
 	}
 }

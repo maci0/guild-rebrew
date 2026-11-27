@@ -87,15 +87,15 @@ int __cdecl ReportClientMessage(const char* text);
 int __cdecl fcn_00465950(const char* name);
 int __cdecl d2_Show(int idx, char* path);
 void __cdecl fcn_00477450(void);
-void __cdecl fcn_0047c4a0(void);
+void __cdecl d2_InitQuadVertexBuffer(void);
 int __cdecl fcn_0047a040(int a0, int a1, int a2, int a3);
-int __cdecl fcn_00477520(int a0, int a1);
+int __cdecl shp_InitRenderState(int a0, int a1);
 int __cdecl fcn_004770a0(void* info, int kind);
-void __cdecl fcn_004760c0(int win, char* buf);
-int __cdecl fcn_00475fd0(int win);
-void __cdecl fcn_00476970(int win);
+void __cdecl d2_GetSurfaceDesc(int win, char* buf);
+int __cdecl d2_LockSurface(int win);
+void __cdecl d2_ClearSurface(int win);
 void __cdecl d2_UnlockSurface(int win);
-void __cdecl fcn_00476b10(int x, int y, int r, int g, int b, int win);
+void __cdecl d2_WriteSurfacePixel(int x, int y, int r, int g, int b, int win);
 void __cdecl d2_SelectFont(int handle);
 char* __cdecl fcn_0047ce00(char* name, int a1);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -133,7 +133,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 		g_67d920 = g_14ce79c;
 	}
 	fcn_00477450();
-	fcn_0047c4a0();
+	d2_InitQuadVertexBuffer();
 	memset(g_1015f40, 0, 0x16c80);
 	*(int*) g_1015ea0 = 0;
 	*(int*) g_772500 = 0;
@@ -236,7 +236,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 		} while (!(*(unsigned char*) ((char*) g_772564 + 0xc) & 0x10));
 		fclose(g_772564);
 	}
-	fcn_00477520(0, 1);
+	shp_InitRenderState(0, 1);
 	for (i = 0; i < g_772504; i++) {
 		if ((*(unsigned char*) (g_772500 + i * 0x54 + 0x44) & 1) && *(int*) (g_772500 + i * 0x54 + 0x38)) {
 			d2_Show(i, 0);
@@ -267,9 +267,9 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	if (!g_77250c) {
 		return 0;
 	}
-	fcn_004760c0(g_77250c, info + 0x5c);
-	if (fcn_00475fd0(g_77250c)) {
-		fcn_00476970(g_77250c);
+	d2_GetSurfaceDesc(g_77250c, info + 0x5c);
+	if (d2_LockSurface(g_77250c)) {
+		d2_ClearSurface(g_77250c);
 		d2_UnlockSurface(g_77250c);
 	}
 	for (i = 0; i < 0x17; i++) {
@@ -282,10 +282,10 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	if (!g_77256c) {
 		return 0;
 	}
-	fcn_00475fd0((int) g_77256c);
+	d2_LockSurface((int) g_77256c);
 	for (i = 0; i < 0x20; i++) {
 		for (j = 0; j < 0x20; j++) {
-			fcn_00476b10(j, i, 0xff, 0xff, 0xff, (int) g_77256c);
+			d2_WriteSurfacePixel(j, i, 0xff, 0xff, 0xff, (int) g_77256c);
 		}
 	}
 	d2_UnlockSurface((int) g_77256c);

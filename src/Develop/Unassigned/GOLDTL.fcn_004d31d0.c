@@ -3,7 +3,7 @@ extern int g_67a370;
 float __cdecl gm_ScorePositionBalance(char* self, int x, int z, float range);
 
 /* ADDRESS: GOLDTL 0x004d31d0 */
-int __cdecl fcn_004d31d0(char* self, int centerColumn, int centerRow, int searchRadius,
+int __cdecl gm_FindBestBalancedTile(char* self, int centerColumn, int centerRow, int searchRadius,
 	unsigned int* resultColumn, unsigned int* resultRow)
 {
 	char* map;

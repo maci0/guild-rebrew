@@ -48,7 +48,7 @@ void __cdecl d3_TransformPoint(int a, int b, void* c);
 void __cdecl d3_ComputeObjectYawToTarget(void* a, int b);
 void __cdecl cm_SendCopyEntityData(void* a);
 void __cdecl fcn_0050bc10(int a, unsigned char b, char* c);
-void __cdecl fcn_0046ed00(int a, int b, int c);
+void __cdecl d2_ScrollWindow(int a, int b, int c);
 int __cdecl main_RunFrameLoop(int a, int b);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00599b00 */
@@ -140,7 +140,7 @@ void __cdecl fcn_00599b00(void)
 			ent = d2_CheckFundsAndNotify(query, *(int*) (query + 0x14),
 			    gm_CalcBuildingCost((int)((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]), i), g_773d75);
 			if (ent != 0) {
-				fcn_00471af0(dlg, 0);
+				d2_SetFormVisibility(dlg, 0);
 				ent = lc_GebaeudeAusrichten(i, name);
 				if (ent != 0) {
 					msg.kind = 0x0d;
@@ -166,16 +166,16 @@ void __cdecl fcn_00599b00(void)
 					cm_SendCopyEntityData(&msg);
 					g_774654 = 1;
 				} else {
-					fcn_00471af0(dlg, 1);
+					d2_SetFormVisibility(dlg, 1);
 				}
 			}
 		}
 		if (g_100f1dc == 3) {
 			d2_SetForm(dlg, 3);
-			fcn_0046ed00(0, -0x46, d2_CurrentWindowId);
+			d2_ScrollWindow(0, -0x46, d2_CurrentWindowId);
 		} else if (g_100f1dc == 4) {
 			d2_SetForm(dlg, 3);
-			fcn_0046ed00(0, 0x46, d2_CurrentWindowId);
+			d2_ScrollWindow(0, 0x46, d2_CurrentWindowId);
 		}
 		if (g_14ce8e0 != 0)
 			g_774654 = 1;

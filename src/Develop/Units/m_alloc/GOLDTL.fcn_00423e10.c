@@ -4,7 +4,7 @@ extern char* sbs_BankManager;
 extern int g_6b7d6c;
 
 char* __cdecl sbs_FindSet(char* s);
-void* __cdecl fcn_004239b0(void);
+void* __cdecl sbs_GetLastSet(void);
 char* __cdecl m_alloc(int size, char* tag);
 char* __cdecl strncpy(char* dst, const char* src, unsigned int n);
 
@@ -19,7 +19,7 @@ int __cdecl sbs_CreateSet(char* s)
 	if (sbs_BankManager == 0 || sbs_FindSet(s) != 0) {
 		return -1;
 	}
-	list = (char*) fcn_004239b0();
+	list = (char*) sbs_GetLastSet();
 	buf = m_alloc(0x40, (char*) 0x678fe0);
 	if (list != 0) {
 		*(char**) (list + 0x3c) = buf;

@@ -22,7 +22,7 @@ void* __cdecl evt_FindScriptById(int a1);
 void __cdecl evt_RequestScriptExit(void* p);
 void __cdecl evt_WaitForScriptExit(int a0);
 void __cdecl d3snd_FreeObjectSoundBanks(void);
-void __cdecl fcn_00516ed0(int a0);
+void __cdecl d3_CleanupBuildingScene(int a0);
 void __cdecl fcn_0043a9c0(int a0);
 void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl d2_RunSchmiedeInteriorHud(int a0);
@@ -205,7 +205,7 @@ void __cdecl d2_EnterGebaeudeInterior(unsigned char* building)
 		evt_WaitForScriptExit(*(int*) &evt_LastGfxScriptId);
 	}
 	d3snd_FreeObjectSoundBanks();
-	fcn_00516ed0(*(int*) &g_7746c8);
+	d3_CleanupBuildingScene(*(int*) &g_7746c8);
 	fcn_0043a9c0(3);
 	d3_SelectSceneContext((int) building, 0);
 	*(int*) &g_7ea360 = 0;

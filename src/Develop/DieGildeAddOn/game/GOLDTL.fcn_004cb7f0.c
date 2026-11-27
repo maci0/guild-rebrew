@@ -33,7 +33,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_TransformPoint(char*, char*, int*);
 int __cdecl fcn_004488e0(char*, int, int);
 void __cdecl fcn_00455140(char*, float*, float*);
-float __cdecl fcn_00451380(float*, float*);
+float __cdecl d3_SignedPlanarAngle(float*, float*);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl d3_SetObjectGroundPosition(int, void*);
@@ -41,7 +41,7 @@ void __cdecl d3_RemoveSubTreeFromCellTree(int, int);
 void __cdecl d3_DestroyObject(int);
 char __cdecl d3_ComputeObjectBoundingSphere(char*, char*, float*, float*);
 char* __cdecl evt_LoadGfxScript(int);
-void __cdecl fcn_00428340(char*, int, ...);
+void __cdecl evt_CallScriptFunction(char*, int, ...);
 void __cdecl d3_BindEntitySceneObject(int, void*, int);
 void __cdecl fcn_0052d9d0(void*);
 int __cdecl gm_GetSeason(char*);
@@ -129,7 +129,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		angles[0] = 0;
 		angles[1] = 0;
 		angles[2] = 0;
-		angles[1] = fcn_00451380(g_662d40, direction);
+		angles[1] = d3_SignedPlanarAngle(g_662d40, direction);
 		d3_SetNodePosition((char*) obj, (int*) vec);
 		d3_SetObjectRotation((char*) obj, (int*) angles);
 		d3_SetObjectGroundPosition(obj, vec);
@@ -141,7 +141,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 			res = (int)(radius * 1.8);
 			h = (int) evt_LoadGfxScript(0x68b228);
 			if (h != 0) {
-				fcn_00428340((char*) h, 6, (int)vec[0], (int)vec[1], (int)vec[2],
+				evt_CallScriptFunction((char*) h, 6, (int)vec[0], (int)vec[1], (int)vec[2],
 				             (int)radius, res, obj);
 				*(int*) (h + 0x104) = 0;
 			}

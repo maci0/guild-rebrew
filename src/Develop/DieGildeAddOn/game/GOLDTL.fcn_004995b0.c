@@ -1,5 +1,5 @@
 extern int __cdecl gm_GetLawEntry(int idx, void* dst);
-extern void __cdecl fcn_004a4410(unsigned int* a0, unsigned int* a1,
+extern void __cdecl ai_ComputeBaseActionScore(unsigned int* a0, unsigned int* a1,
     unsigned int a2, unsigned char* a3, unsigned int a4, unsigned int a5,
     unsigned int a6);
 extern void __cdecl ai_ComputeActionScore(unsigned int* a0, unsigned int* a1,
@@ -18,5 +18,5 @@ void __cdecl ai_ScoreVerpruegeln(unsigned int* outFirst, unsigned int* outSecond
         ai_ComputeActionScore(outFirst, outSecond, methodIndex, entity, actionDef);
         return;
     }
-    fcn_004a4410(outFirst, outSecond, methodIndex, entity, extra1, extra2, extra3);
+    ai_ComputeBaseActionScore(outFirst, outSecond, methodIndex, entity, extra1, extra2, extra3);
 }

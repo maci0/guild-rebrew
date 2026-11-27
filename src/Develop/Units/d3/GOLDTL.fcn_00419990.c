@@ -52,8 +52,8 @@ extern int int_67769c[];
 extern char str_6776b8[];
 
 float __cdecl fcn_00413d10(float* pos);
-unsigned char __cdecl fcn_00441720(int* world, float* pos, unsigned int flag, unsigned int* grid_x, unsigned int* grid_y, float* radius);
-int __cdecl fcn_00441f10(int* world, int x, int y);
+unsigned char __cdecl d3_GetFloorHeight(int* world, float* pos, unsigned int flag, unsigned int* grid_x, unsigned int* grid_y, float* radius);
+int __cdecl d3_GetFloorWaterType(int* world, int x, int y);
 float* __stdcall D3DXMatrixTranspose(float* matrix, const float* camera);
 void __cdecl d3_NormalizeVector(float* v);
 char* __cdecl fcn_00419640(int id, int* which);
@@ -115,7 +115,7 @@ void __cdecl d3snd_UpdateAmbientSources(void)
 	if (hint > 2000) {
 		hint = 2000;
 	}
-	if (!fcn_00441720(g_6b8300, center, 1, &raw_x, &raw_y, &height)) {
+	if (!d3_GetFloorHeight(g_6b8300, center, 1, &raw_x, &raw_y, &height)) {
 		return;
 	}
 	count = 0;
@@ -127,7 +127,7 @@ void __cdecl d3snd_UpdateAmbientSources(void)
 	dir[0] = g_662d40[0] * matrix[0][0] + (g_662d40[1] * matrix[1][0] + g_662d40[2] * matrix[2][0]);
 	dir[2] = g_662d40[0] * matrix[0][2] + (g_662d40[1] * matrix[1][2] + g_662d40[2] * matrix[2][2]);
 	d3_NormalizeVector(dir);
-	run = fcn_00441f10(g_6b8300, raw_x, raw_y);
+	run = d3_GetFloorWaterType(g_6b8300, raw_x, raw_y);
 	if (run < 0) {
 		goto fill_one;
 	}
@@ -158,8 +158,8 @@ fill_one:
 		pos[2] = dir[2] * radius + center[2];
 		for (slot = 0; slot < g_6b5d18; slot++) {
 			if (((int*) g_6b5d14)[slot] != 0) {
-				if (fcn_00441720(g_6b8300, pos, 0, &raw_x, &raw_y, &height)) {
-					run = fcn_00441f10(g_6b8300, raw_x, raw_y);
+				if (d3_GetFloorHeight(g_6b8300, pos, 0, &raw_x, &raw_y, &height)) {
+					run = d3_GetFloorWaterType(g_6b8300, raw_x, raw_y);
 					if (run >= 0) {
 						cell = *(int*) ((char*) g_6b8300 + 0x7da0);
 						((int*) g_6b5d10)[slot] = *(int*) ((char*) cell + run * 344 + 0x154);

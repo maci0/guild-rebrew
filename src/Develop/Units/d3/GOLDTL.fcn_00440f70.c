@@ -26,8 +26,8 @@ extern volatile int g_6b7fac;
 
 float* __stdcall fcn_005ec410(float*, float, float, float);
 float* __stdcall fcn_005eb970(float*, float*, float*);
-void __cdecl fcn_00440670(int, int, int);
-void __cdecl fcn_00440870(char*, Cell*);
+void __cdecl d3_UpdateAnimatedFloorMaterials(int, int, int);
+void __cdecl d3_RenderFloorCellWater(char*, Cell*);
 
 void __cdecl fcn_00440f70(char* o, char flag)
 {
@@ -41,13 +41,13 @@ void __cdecl fcn_00440f70(char* o, char flag)
 	fcn_005eb970(m, m, (float*) (((char*)d3_ActiveCamera) + 0x18c));
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform(((D3D_DEVICE_VIEW*)g_6b5de0), 0x100, m);
 	if (flag != 0) {
-		fcn_00440670(g_6b7fac, *(unsigned char*) (o + 0x8035), *(int*) (o + 0x7da0));
+		d3_UpdateAnimatedFloorMaterials(g_6b7fac, *(unsigned char*) (o + 0x8035), *(int*) (o + 0x7da0));
 	}
 	cells = (Cell (*)[8]) (o + 0xa0);
 	for (a = 0; a < 8; a++) {
 		for (b = 0; b < 8; b++) {
 			if (cells[a][b].on != 0) {
-				fcn_00440870(o, &cells[a][b]);
+				d3_RenderFloorCellWater(o, &cells[a][b]);
 			}
 		}
 	}

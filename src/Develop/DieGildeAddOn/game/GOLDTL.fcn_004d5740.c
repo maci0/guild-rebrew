@@ -18,7 +18,7 @@ float __cdecl gm_GetEntityHealthRatio(char*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
 int* __cdecl gm_GetEquippedCombatGear(char*);
-void __cdecl fcn_00472680(int, int);
+void __cdecl d2_SetElementScale(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004d5740 */
 void __cdecl d2_DrawCombatParticipants(char* ids, int originX, int originY)
@@ -62,7 +62,7 @@ void __cdecl d2_DrawCombatParticipants(char* ids, int originX, int originY)
 		p = gm_GetEquippedCombatGear(rec);
 		if (p != 0 && *p != 0) {
 			v = d2_AddElementToWindow(x + 0x28, y + 0xf, *p + 0xdf, d2_CurrentWindowId);
-			fcn_00472680(v, -2);
+			d2_SetElementScale(v, -2);
 		}
 		if (*(char*) (rec + 8) == 0) {
 			v = (int) -(*(float*) (rec + 0x1c));

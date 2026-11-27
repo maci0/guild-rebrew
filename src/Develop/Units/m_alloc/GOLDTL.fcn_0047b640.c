@@ -47,12 +47,12 @@ extern RGB_COLOR g_100f1a0;
 Tiles* __cdecl fcn_0047abd0(int, int);
 Tex* __cdecl fcn_004770a0(TexDesc* d, int fmt);
 void __cdecl fcn_00476620(int, int, int, int, Img*, int, int, Tex*);
-int __cdecl fcn_00475fd0(Tex*);
-void __cdecl fcn_00476a50(int, int, Tex*, RGB_COLOR*);
-void __cdecl fcn_00476b10(int, int, unsigned char, unsigned char, unsigned char, Tex*);
+int __cdecl d2_LockSurface(Tex*);
+void __cdecl d2_ReadSurfacePixel(int, int, Tex*, RGB_COLOR*);
+void __cdecl d2_WriteSurfacePixel(int, int, unsigned char, unsigned char, unsigned char, Tex*);
 void __cdecl d2_UnlockSurface(Tex*);
 void __cdecl fcn_00475f80(Tex*);
-void __cdecl fcn_004760e0(Tex*);
+void __cdecl d2_UpdateTextureBytes(Tex*);
 long __stdcall fcn_006114ff(void*, void*, void*, void*, void*, void*, int, unsigned int);
 
 /* ADDRESS: GOLDTL 0x0047b640 */
@@ -99,12 +99,12 @@ Tiles* __cdecl fcn_0047b640(int x, int y, int w, int h, Img* img, int size)
 		if (g_100f1a0.r || g_100f1a0.g || g_100f1a0.b) {
 			RGB_COLOR px;
 
-			fcn_00475fd0(t);
+			d2_LockSurface(t);
 			for (px_y = 0; px_y < tile; px_y++) {
 				for (px_x = 0; px_x < tile; px_x++) {
-					fcn_00476a50(px_x, px_y, t, &px);
+					d2_ReadSurfacePixel(px_x, px_y, t, &px);
 					if (px.r == g_100f1a0.r && px.g == g_100f1a0.g && px.b == g_100f1a0.b) {
-						fcn_00476b10(px_x, px_y, 0, 0, 0, t);
+						d2_WriteSurfacePixel(px_x, px_y, 0, 0, 0, t);
 					}
 				}
 			}
@@ -121,7 +121,7 @@ Tiles* __cdecl fcn_0047b640(int x, int y, int w, int h, Img* img, int size)
 		t2 = fcn_004770a0(&d, 0);
 		fcn_006114ff(t2->surf, 0, 0, t->surf, 0, 0, -1, 0xff000000);
 		fcn_00475f80(t);
-		fcn_004760e0(t2);
+		d2_UpdateTextureBytes(t2);
 		g_772610 += t2->bytes;
 		res->tex[i] = t2;
 	}

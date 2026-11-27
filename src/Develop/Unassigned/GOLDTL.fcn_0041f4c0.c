@@ -15,7 +15,7 @@ struct Snd {
 
 char* __cdecl FindVideoById(int id);
 
-int __cdecl fcn_0041f4c0(int id, float vol)
+int __cdecl SetVideoVolume(int id, float vol)
 {
 	char* o;
 	Snd* s;

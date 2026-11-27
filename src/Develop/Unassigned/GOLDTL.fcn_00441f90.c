@@ -12,7 +12,7 @@
 
 extern float g_6628a0; /* 1.0f */
 
-float __cdecl fcn_004517e0(float a, float b, float c, float d, float t);
+float __cdecl d3_EvalHermiteSpline(float a, float b, float c, float d, float t);
 
 #define MAX(a, b) ((a) < (b) ? (b) : (a))
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
@@ -79,7 +79,7 @@ void __cdecl fcn_00441f90(unsigned char* base, int w, int x0, int y0, int size, 
 						break;
 					}
 					if (j >= 0) {
-						v = CLAMP(fcn_004517e0(f1, f2, f3, f4, t));
+						v = CLAMP(d3_EvalHermiteSpline(f1, f2, f3, f4, t));
 						*out = (unsigned char) (int) v;
 					}
 					t += inv;
@@ -114,7 +114,7 @@ void __cdecl fcn_00441f90(unsigned char* base, int w, int x0, int y0, int size, 
 					break;
 				}
 				if (xx + i >= 0) {
-					v = CLAMP(fcn_004517e0(f1, f2, f3, f4, t));
+					v = CLAMP(d3_EvalHermiteSpline(f1, f2, f3, f4, t));
 					base[rowbase + xx + i] = (unsigned char) (int) v;
 				}
 				t += inv;

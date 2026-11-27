@@ -3,7 +3,7 @@
 int __cdecl msx_FindSampleHandleIndex(int);
 typedef void (__stdcall* f)(int, int, int);
 
-int __cdecl fcn_0042a620(int a1, int a2, int a3)
+int __cdecl msx_SetSampleType(int a1, int a2, int a3)
 {
 	int r = 0;
 

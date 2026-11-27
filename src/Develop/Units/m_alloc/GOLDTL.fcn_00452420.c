@@ -2,7 +2,7 @@
 
 extern int g_67a370;
 
-void __cdecl fcn_004523a0(char*);
+void __cdecl d3_UnlinkFromRenderList(char*);
 void __cdecl fcn_0045bfb0(int);
 void __cdecl m_FreeTracked(void*);
 
@@ -21,7 +21,7 @@ void __cdecl fcn_00452420(char* o)
 			*(char**) (owner + 0xa8) = *(char**) (o + 0x314);
 		}
 	} else {
-		fcn_004523a0(o);
+		d3_UnlinkFromRenderList(o);
 	}
 	if (*(int*) (o + 0xdc) != 0) {
 		fcn_0045bfb0(*(int*) (o + 0xdc));

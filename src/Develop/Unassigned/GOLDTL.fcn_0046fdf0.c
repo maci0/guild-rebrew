@@ -23,8 +23,8 @@ extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
 int __cdecl d2_AllocateElement(void);
-int __cdecl fcn_0046b520(char* s, int font);
-void __cdecl fcn_0046f650(int slot, D2_WIN* parent);
+int __cdecl d2_MeasureTextWidth(char* s, int font);
+void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
 
 /* ADDRESS: GOLDTL 0x0046fdf0 */
 int __cdecl d2_AddWindowText(int x, int y, char* text, int win)
@@ -50,7 +50,7 @@ int __cdecl d2_AddWindowText(int x, int y, char* text, int win)
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].kind) = 0x46;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].x) = w->left + x;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].y) = w->top - (*(int*) &w->pad3c[0x21c]) + y;
-	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = fcn_0046b520(text, (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].font)) + 0x60;
+	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].width) = d2_MeasureTextWidth(text, (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].font)) + 0x60;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) = d2_FontHeight;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].mode) = 2;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].parent) = (int) w;
@@ -60,7 +60,7 @@ int __cdecl d2_AddWindowText(int x, int y, char* text, int win)
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_left) = 0;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = g_1040494;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_050) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_050);
-	fcn_0046f650(id, w);
+	d2_InsertControlAfterWindow(id, w);
 	w->children[w->count] = id;
 	w->count++;
 	return id;

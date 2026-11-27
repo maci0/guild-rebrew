@@ -12,7 +12,7 @@ extern char g_005feea8[]; /* 0x005feea8 */
 int __cdecl d2_DrawScaledRemappedRleSprite(int a1, int a2, char* a3, char* e, int s);
 int __cdecl d2_DrawScaledRleSprite(int a1, int a2, char* a3, char* e, int s);
 
-int __cdecl fcn_0047c820(int a1, int a2, char* context, char* h, unsigned char idx, char scale, int alt)
+int __cdecl d2_DrawOrMeasureSpriteFrame(int a1, int a2, char* context, char* h, unsigned char idx, char scale, int alt)
 {
 	char buf[0x80];
 	char* e;

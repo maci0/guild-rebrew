@@ -17,7 +17,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
-void __cdecl fcn_0046f650(int slot, D2_WIN* parent);
+void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
 
 /* ADDRESS: GOLDTL 0x00465eb0 */
 int __cdecl d2_AddWindowChild(int id, int win)
@@ -36,7 +36,7 @@ int __cdecl d2_AddWindowChild(int id, int win)
 		ReportClientMessage(s_67d420);
 		return 0;
 	}
-	fcn_0046f650(id, w);
+	d2_InsertControlAfterWindow(id, w);
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].parent) = (int) w;
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_050) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_050);
 	(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top) = w->top;

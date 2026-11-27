@@ -40,8 +40,8 @@ void __cdecl fcn_00469e70(void);
 int __cdecl fcn_0053ed60(int, int);
 int __cdecl sprintf(char*, const char*, ...);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
-void __cdecl fcn_00476970(int);
-void __cdecl fcn_00469e30(int);
+void __cdecl d2_ClearSurface(int);
+void __cdecl d2_SetBackdropResource(int);
 
 int __cdecl fcn_00539490(void)
 {
@@ -64,7 +64,7 @@ int __cdecl fcn_00539490(void)
 			return 1;
 		}
 	}
-	fcn_00476970(g_77250c);
-	fcn_00469e30(0x797);
+	d2_ClearSurface(g_77250c);
+	d2_SetBackdropResource(0x797);
 	return 0;
 }

@@ -13,7 +13,7 @@ void __cdecl fcn_004557c0(char*, char*, int, float*);
 void __cdecl fcn_004372d0(unsigned char, unsigned char, int, unsigned char, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00452740 */
-void __cdecl fcn_00452740(void *arg)
+void __cdecl d3_UpdateAndRenderEffect(void *arg)
 {
 	unsigned char *obj;
 	int n;

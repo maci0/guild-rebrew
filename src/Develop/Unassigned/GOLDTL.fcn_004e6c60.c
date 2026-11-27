@@ -2,7 +2,7 @@ extern char cut_RandomSeed[];
 
 #include <stdio.h>
 
-void __cdecl fcn_004e6c60(int seed)
+void __cdecl cut_SetRandSeed(int seed)
 {
 	char buf[0x40];
 

@@ -83,7 +83,7 @@ extern int g_67d3a0;
 extern char g_1015f40[];
 
 int __cdecl fcn_004770a0(int* p, int kind);
-void __cdecl fcn_00476970(int h);
+void __cdecl d2_ClearSurface(int h);
 int __cdecl d2_AllocateElement(void);
 int __cdecl m_alloc(int size, char* tag);
 void __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
@@ -164,7 +164,7 @@ found:
 		v9[10] = 0x15;
 		h = fcn_004770a0(v9, 10);
 		rec->x38 = h;
-		fcn_00476970(h);
+		d2_ClearSurface(h);
 		if (rec->x38 == 0) {
 			return 0;
 		}

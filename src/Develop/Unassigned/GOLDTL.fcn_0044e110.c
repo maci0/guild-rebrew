@@ -12,21 +12,21 @@ int __cdecl vfs_ReadByte(void* stream, void* dst);
 char* __cdecl vfs_ReadCString(void* stream, char* text);
 void __cdecl vfs_ReadVec3(void* stream, void* dst);
 
-void __cdecl fcn_0044e110(void* r, char* o)
+void __cdecl d3_ReadBinBones(void* stream, char* obj)
 {
 	int n;
 	char c;
 	int i;
 
 	n = 0;
-	fcn_004011f0(r, &n);
-	*(int*) (o + 0x34) = n;
+	fcn_004011f0(stream, &n);
+	*(int*) (obj + 0x34) = n;
 	for (i = 0; i < n; i++) {
-		vfs_ReadByte(r, &c);
-		vfs_ReadCString(r, ((Bone*) (o + 0x38))[i].name);
-		vfs_ReadByte(r, &c);
-		vfs_ReadVec3(r, ((Bone*) (o + 0x38))[i].a);
-		vfs_ReadByte(r, &c);
-		vfs_ReadVec3(r, ((Bone*) (o + 0x38))[i].b);
+		vfs_ReadByte(stream, &c);
+		vfs_ReadCString(stream, ((Bone*) (obj + 0x38))[i].name);
+		vfs_ReadByte(stream, &c);
+		vfs_ReadVec3(stream, ((Bone*) (obj + 0x38))[i].a);
+		vfs_ReadByte(stream, &c);
+		vfs_ReadVec3(stream, ((Bone*) (obj + 0x38))[i].b);
 	}
 }

@@ -17,7 +17,7 @@ void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 unsigned int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, char*);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -76,7 +76,7 @@ int __cdecl cut_ShowSessionDialog(char* a0, int a1, int* entityIds, int* a3)
 	for (i = found; i < 4; i++) {
 		handles[i] = -1;
 	}
-	n = fcn_004677e0((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100,
+	n = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 300) / 2 - 8, 8, 300, 0, 100,
 	    0x75, 0x42, d2_CurrentWindowId);
 	d2_UpdateProgressBar(n, 0x5dc, 1);
 	g_100f1dc = -1;

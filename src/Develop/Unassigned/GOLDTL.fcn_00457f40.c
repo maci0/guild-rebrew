@@ -34,7 +34,7 @@ typedef struct GOLDTL_TileUv {
 extern unsigned char g_6b7ff9;
 
 /* ADDRESS: GOLDTL 0x00457f40 */
-int __cdecl fcn_00457f40(void* vb, void* ib, int* rect, int stride, int base,
+int __cdecl d3_BuildShadowPatchFromHeightGrid(void* vb, void* ib, int* rect, int stride, int base,
 	float* offset, float* scale, GOLDTL_TileUv* uv, unsigned long diffuse)
 {
 	GOLDTL_BufferVtbl* ops;

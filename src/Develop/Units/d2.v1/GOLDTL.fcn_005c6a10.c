@@ -21,15 +21,15 @@ void __cdecl d2_DestroyElement(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00534160(int, int, int, int);
-int __cdecl fcn_00466ee0(int, int, int, int, int);
+int __cdecl d2_AddWindowField(int, int, int, int, int);
 int __cdecl d2_GetControlValue(int);
 void __cdecl fcn_00472380(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_0046f100(int, int, int, int, int, int);
+int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl fcn_00507c30(int);
-void __cdecl fcn_00473690(int, int);
+void __cdecl d2_AddDisplayCounter(int, int);
 float __cdecl gm_GetEntityHealthRatio(int);
 
 /* ADDRESS: GOLDTL 0x005c6a10 */
@@ -101,7 +101,7 @@ unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int for
 				}
 				goto present;
 			found_item_slot:
-				g_7774a0[i].item[j].button = fcn_00466ee0(j * 0x36 + 0x50, i * 0x78 + 0x28,
+				g_7774a0[i].item[j].button = d2_AddWindowField(j * 0x36 + 0x50, i * 0x78 + 0x28,
 					*item + 0xdf, 10, d2_CurrentWindowId);
 				g_7774a0[i].item[j].objekt_id = *item;
 			present:
@@ -134,7 +134,7 @@ unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int for
 		*(int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_05c = 1;
 		g_7774a0[i].portrait_element = d2_AddElementToWindow(0x10, i * 0x78 + 5,
 			*(int*) (g_7774a0[i].entity + 0x18c), d2_CurrentWindowId);
-		h = fcn_0046f100(0x40, i * 0x78, 0xb4, 0x50, 0x10, d2_CurrentWindowId);
+		h = d2_CreateChildWindow(0x40, i * 0x78, 0xb4, 0x50, 0x10, d2_CurrentWindowId);
 		g_7774a0[i].window = h;
 		d2_SetElementFont(*(int*) (g_10161bc + h * 0x3cc), 0x54);
 		io_AppendText(0x16ab, *(unsigned short*) g_7774a0[i].entity,
@@ -147,7 +147,7 @@ unsigned int __cdecl d2_UpdateTrainingRows(unsigned int dialog, unsigned int for
 			continue;
 		for (j = 0; j < 6; j++) {
 			if (g_7774a0[i].item[j].button != -1 && d2_GetControlValue(g_7774a0[i].item[j].button)) {
-				fcn_00473690(g_7774a0[i].item[j].objekt_id + 0xdf,
+				d2_AddDisplayCounter(g_7774a0[i].item[j].objekt_id + 0xdf,
 					d2_GetControlValue(g_7774a0[i].item[j].button));
 				built = 1;
 			}

@@ -3,7 +3,7 @@
 
 int __cdecl fcn_00472cd0(int);
 
-void __cdecl fcn_004cec00(void)
+void __cdecl d2_ClearHudWinSlots(void)
 {
 	int p;
 	for (p = 0x935d20; p < 0x935da0; p += 4) {

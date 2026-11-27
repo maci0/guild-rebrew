@@ -11,7 +11,7 @@ unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_00469e70(void);
-void __cdecl fcn_00476970(int);
+void __cdecl d2_ClearSurface(int);
 void __cdecl fcn_00473150(unsigned char*);
 
 void __cdecl fcn_0053f720(void)
@@ -30,7 +30,7 @@ void __cdecl fcn_0053f720(void)
 	}
 	d2_DestroyForm(g_7e1d40);
 	fcn_00469e70();
-	fcn_00476970(g_77250c);
+	d2_ClearSurface(g_77250c);
 	d2_SuppressOverlay = 0;
 	fcn_00473150(p);
 }

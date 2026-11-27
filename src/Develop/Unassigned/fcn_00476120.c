@@ -1,6 +1,6 @@
 #include <string.h>
 extern void * g_6b5de0; extern int g_772614; extern int g_7725ec;
-int __cdecl fcn_0047b8b0(int a1, int a2, int a3, int a4, void* out);
+int __cdecl d2_BuildQuadVertices(int a1, int a2, int a3, int a4, void* out);
 void __cdecl fcn_004372d0(int a1, int a2, int a3, int a4, int a5);
 
 typedef struct BlitSurf BlitSurf;
@@ -24,7 +24,7 @@ typedef struct BlitSurf {
 	int flag;               
 } BlitSurf;
 
-int __cdecl fcn_00475fd0(BlitSurf* s);
+int __cdecl d2_LockSurface(BlitSurf* s);
 int __cdecl d2_UnlockSurface(BlitSurf* s);
 int __cdecl fcn_00476120(int x, int y, int w, int h, char* src, int sx, int sy, char* dst);
 int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused);
@@ -42,7 +42,7 @@ int __cdecl fcn_00476120(int left, int top, int width, int height, char* src,
 	int locked;
 
 	if ((*(unsigned char*) dest & 0x10) != 0 && *(void**) &g_7725ec != 0) {
-		if (fcn_0047b8b0(left, top, width, height, frame) == 0) {
+		if (d2_BuildQuadVertices(left, top, width, height, frame) == 0) {
 			return 0;
 		}
 		locked = *(int*) (src + 0x20);

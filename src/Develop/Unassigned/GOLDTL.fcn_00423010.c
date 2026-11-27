@@ -25,7 +25,7 @@ extern volatile int g_6b7fac;
 int __cdecl msx_GetSampleStatus(int h);
 void __cdecl sb_StopVoice(Voice* v, int a);
 
-void __cdecl fcn_00423010(int fade)
+void __cdecl sb_StopAllVoices(int fade)
 {
 	int i;
 	int t;

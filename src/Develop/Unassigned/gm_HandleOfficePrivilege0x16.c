@@ -4,7 +4,7 @@ void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl d2_ShowPrivilegMessage(void* buf, int a, char* b);
 
 /* ADDRESS: GOLDTL 0x004f8570 */
-int __cdecl fcn_004f8570(char* entity, int* request)
+int __cdecl gm_HandleOfficePrivilege0x16(char* entity, int* request)
 {
     char buf[0x200];
 

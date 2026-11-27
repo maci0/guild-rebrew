@@ -124,7 +124,7 @@ void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl d2_DestroyElement(int);
 int __cdecl fcn_00505d00(unsigned char*, int*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl fcn_0046f940(int, char*);
 int __cdecl fcn_0046fac0(int, int, char*, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
@@ -393,7 +393,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 						fcn_0046f940(r->label, f.txtNum);
 						GUI(r->label).value_06c = 1;
 						GUI(r->label).width = 0xa0;
-						r->bar = fcn_004677e0(
+						r->bar = d2_AddWindowValueGauge(
 						    r->x + 0xc, r->y + 0x32, 0x40,
 						    0, 0x64, 0x75, 0x42,
 						    *(int*) 0x772514);

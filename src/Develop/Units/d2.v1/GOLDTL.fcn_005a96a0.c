@@ -40,11 +40,11 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
-void __cdecl fcn_00533a60(int, int, int*, int, ...);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 void __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_BuildPersonStatusDesc(Item5a96* s);
 void __cdecl fcn_005ca740(int, int, int, int, Item5a96*, int);
-void __cdecl fcn_00472640(int i, int flag);
+void __cdecl d2_SetElementEnabled(int i, int flag);
 int __cdecl amt_ApplyForOffice(char*, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
@@ -106,7 +106,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 					d2_SetForm(d, 1);
 					io_AppendText(0x1a07, id + 0x253);
 					d2_SetForm(d, 3);
-					fcn_00533a60(d2_CurrentWindowId, 0, ids, 3, g_14abb40, g_14abb44, g_14abb48);
+					d2_CreateButtonRow(d2_CurrentWindowId, 0, ids, 3, g_14abb40, g_14abb44, g_14abb48);
 					ha = ids[0];
 					hb = ids[1];
 					hc = ids[2];
@@ -130,10 +130,10 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 					}
 				}
 				if (n < 4 && who[0x168] == 0) {
-					fcn_00472640(ha, 1);
+					d2_SetElementEnabled(ha, 1);
 				}
 				else {
-					fcn_00472640(ha, 0);
+					d2_SetElementEnabled(ha, 0);
 				}
 			}
 		}

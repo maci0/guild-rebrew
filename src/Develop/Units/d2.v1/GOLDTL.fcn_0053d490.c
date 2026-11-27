@@ -50,7 +50,7 @@ void __cdecl fcn_00476b60(void);
 void __cdecl d2_SelectControl(int);
 int __cdecl txt_GetCitySelectInfo(char*, char*);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00533a60(int, int, int*, int, int, int);
+int __cdecl d2_CreateButtonRow(int, int, int*, int, int, int);
 int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 
 /* ADDRESS: GOLDTL 0x0053d490 */
@@ -103,13 +103,13 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	surnameField = d2_GetWindowListItem(dlg, 2, io_AppendText(0x1ad1, 0x1ad3));
 	d2_SetForm(dlg, 3);
 	io_AppendText(0x1ad4);
-	fcn_00533a60(d2_CurrentWindowId, 0x1c, v11, 2, g_14abe74,
+	d2_CreateButtonRow(d2_CurrentWindowId, 0x1c, v11, 2, g_14abe74,
 	    g_14abe78);
 	s1a = (char*) v11[0];
 	s1b = (char*) v11[1];
 	d2_SetForm(dlg, 4);
 	io_AppendText(0x1ad7);
-	fcn_00533a60(d2_CurrentWindowId, 0x1c, v11, 2, g_14abe80,
+	d2_CreateButtonRow(d2_CurrentWindowId, 0x1c, v11, 2, g_14abe80,
 	    g_14abe84);
 	s2a = (char*) v11[0];
 	s2b = (char*) v11[1];

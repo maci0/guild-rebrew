@@ -5,7 +5,7 @@ int __cdecl d2_GetControlValue(int);
 float __cdecl fcn_004f0eb0(int, int, int);
 void __cdecl gm_GetArtilleryLimits(char*, int*, int*);
 void __cdecl fcn_00472380(int, ...);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl fcn_004f0ff0(char*, int, int, int, int*, int*);
 float __cdecl fcn_005e8860(void);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -39,8 +39,8 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 		level = max;
 	}
 	fcn_00472380(*(int*) (panel + 0xb0), 0, max, level);
-	fcn_00472640(*(int*) (panel + 0xcc), 1 <= *(int*) (panel + 0xdc));
-	fcn_00472640(*(int*) (panel + 0xd0), 2 <= *(int*) (panel + 0xdc));
+	d2_SetElementEnabled(*(int*) (panel + 0xcc), 1 <= *(int*) (panel + 0xdc));
+	d2_SetElementEnabled(*(int*) (panel + 0xd0), 2 <= *(int*) (panel + 0xdc));
 	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xc8)].value_03c =
 	    *(int*) (panel + 0xa0) == 0;
 	((D2_CONTROL_TL*) (*(int*) &g_1015ea0))[*(int*) (panel + 0xcc)].value_03c =
@@ -58,8 +58,8 @@ void __cdecl fcn_00588200(char* obj, char* panel, char* a2)
 	show = *(float*) (panel + 0x20) <= 0.01f && rec != 0 &&
 	       *(float*) (a2 + 8 + *(int*) (panel + 0xa0) * 4) >= f &&
 	       (*(unsigned char*) (a2 + 4) & 2) == 0;
-	fcn_00472640(*(int*) (panel + 0xb8), show);
-	fcn_00472640(*(int*) (panel + 0xbc),
+	d2_SetElementEnabled(*(int*) (panel + 0xb8), show);
+	d2_SetElementEnabled(*(int*) (panel + 0xbc),
 	             (~*(unsigned int*) (a2 + 4) >> 1) & 1);
 	fcn_00472380(*(int*) (panel + 0xa8), 0, 100, (int) (fcn_005e8860() * 100.0f), 1);
 	fcn_00472380(*(int*) (panel + 0xac), 0, 100, (int) (fcn_00580070((float*) panel) * 100.0f), 1);

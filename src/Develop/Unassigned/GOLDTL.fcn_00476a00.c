@@ -4,24 +4,24 @@ typedef struct {
 	int f1c;
 	int f20;
 	char pad24[0x38];
-} fcn_00476a00_req;
+} D2_CLONE_SURFACE_SRC;
 // SIZE 0x5c
 
 typedef struct {
 	char pad0[0x4];
 	int f4;
 	int f8;
-} fcn_00476a00_res;
+} D2_CLONE_SURFACE_DST;
 
-fcn_00476a00_res* __cdecl fcn_004770a0(fcn_00476a00_req*, int);
-void __cdecl fcn_00476620(int, int, int, int, fcn_00476a00_req*, int, int, fcn_00476a00_res*);
+D2_CLONE_SURFACE_DST* __cdecl fcn_004770a0(D2_CLONE_SURFACE_SRC*, int);
+void __cdecl fcn_00476620(int, int, int, int, D2_CLONE_SURFACE_SRC*, int, int, D2_CLONE_SURFACE_DST*);
 
 
 /* ADDRESS: GOLDTL 0x00476a00 */
-fcn_00476a00_res* __cdecl fcn_00476a00(fcn_00476a00_req* req)
+D2_CLONE_SURFACE_DST* __cdecl d2_CloneSurface(D2_CLONE_SURFACE_SRC* req)
 {
-	fcn_00476a00_req copy;
-	fcn_00476a00_res* r;
+	D2_CLONE_SURFACE_SRC copy;
+	D2_CLONE_SURFACE_DST* r;
 
 	copy = *req;
 	copy.f20 = 0;

@@ -30,7 +30,7 @@ extern int d2_ResourceOffset;
 extern int tp_d2_SelectedControl;
 extern float g_6628a8;
 
-int __cdecl fcn_0046b520(char* s, int font);
+int __cdecl d2_MeasureTextWidth(char* s, int font);
 void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, int flags);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 void __cdecl d2_SelectFont(int font);
@@ -64,7 +64,7 @@ void __cdecl d2_DrawField(int idx, int surf)
 	flags = f->flags;
 	if (flags & 1) {
 		if (f->def == -1 && !(flags & 0x200)) {
-			f->w = fcn_0046b520(((char*) f + 0x2c), f->font);
+			f->w = d2_MeasureTextWidth(((char*) f + 0x2c), f->font);
 		} else {
 			f->w = ((D2_CONTROL_TL*) (g_1015ea0))[f->ent].width;
 		}

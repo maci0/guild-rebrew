@@ -15,8 +15,8 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_0050c7d0(int, int);
 int __cdecl gm_GetBuildingTechEffect(unsigned char*, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_0046f9b0(int, char*);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
+void __cdecl d2_SetControlText(int, char*);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 int __cdecl fcn_00526120(void*, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -79,7 +79,7 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 			((D2_CONTROL_TL*) (g_1015ea0))[label].flags_1d0 = 3;
 			((D2_CONTROL_TL*) (g_1015ea0))[label].font = 0x55;
 			io_FormatTextBuffer(buf, "%s:", *(unsigned int*) (table[i] * 8 + 0x14a9180));
-			fcn_0046f9b0(label, buf);
+			d2_SetControlText(label, buf);
 			((D2_CONTROL_TL*) (g_1015ea0))[label].value_05c = 1;
 			if (table[i] == 3) {
 				type = 6;
@@ -90,7 +90,7 @@ void __cdecl d2_ShowTechTreeEffects(unsigned char* building, unsigned char* a1)
 			else {
 				type = fcn_0050c7d0(building[0], table[i]);
 			}
-			gauge = fcn_004677e0(0x140, height, 0x82, 0, type, 0x6f, 0x56, d2_CurrentWindowId);
+			gauge = d2_AddWindowValueGauge(0x140, height, 0x82, 0, type, 0x6f, 0x56, d2_CurrentWindowId);
 			elems[i] = gauge;
 			d2_SetElementValue(gauge, 0, type, 0, 0);
 			height += step;

@@ -4,7 +4,7 @@ void __cdecl ai_RollWirtshausDice(void*, void*, int);
 void __cdecl gm_AdvanceDiceStage(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x00492d60 */
-int __cdecl fcn_00492d60(int* p, char* q, int kind)
+int __cdecl gm_ExecuteDiceStage(int* p, char* q, int kind)
 {
 	if (!gm_IsDiceStageValid((char*) p, q, kind)) {
 		return 0;

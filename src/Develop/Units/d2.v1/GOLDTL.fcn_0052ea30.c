@@ -42,7 +42,7 @@ char* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 int __cdecl gm_GetElapsedMinutes(void* a, void* b);
 void __cdecl gm_AddTime(void* p, int a, int b, int c);
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
-int __cdecl fcn_0046f7e0(int x, int y, int z, int owner, int flag);
+int __cdecl d2_AddWindowImage(int x, int y, int z, int owner, int flag);
 void __cdecl d2_DestroyElement(int element);
 int __cdecl fcn_00529800(char* s, int* out);
 float __cdecl gm_GetEntityHealthRatio(char* e);
@@ -196,7 +196,7 @@ no_header:
 		y = 0x38;
 		for (i = 0; i < n; i++) {
 			if (kinds[i] >= 0xdf && kinds[i] < 0x3bb) {
-				g_6a25c4[i] = fcn_0046f7e0(x + 0x32, y, kinds[i], d2_CurrentWindowId, -2);
+				g_6a25c4[i] = d2_AddWindowImage(x + 0x32, y, kinds[i], d2_CurrentWindowId, -2);
 			} else {
 				g_6a25c4[i] = d2_AddElementToWindow(x + 0x32, y, kinds[i], d2_CurrentWindowId);
 			}
@@ -351,7 +351,7 @@ no_target:
 	}
 	k = 0;
 	for (i = 3; i < 0x83; i += 0x20) {
-		g_6a25c4[k] = fcn_0046f7e0(i, 0x28, *(unsigned short*) s + 0xdf, d2_CurrentWindowId, -2);
+		g_6a25c4[k] = d2_AddWindowImage(i, 0x28, *(unsigned short*) s + 0xdf, d2_CurrentWindowId, -2);
 		fcn_0064d41a(buf, "%i", gm_GetMsgField((int) e, (int) s));
 		n = d2_ShowTxt(i - 2, 0x1c, buf, d2_CurrentWindowId);
 		((D2_CONTROL_TL*) (g_1015ea0))[n].value_05c = 1;

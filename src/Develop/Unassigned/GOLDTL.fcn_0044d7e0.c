@@ -4,7 +4,7 @@ int __cdecl fcn_0044d770(void* h);
 int __cdecl FindTableEntryIndex(int a1, int* p, int kind);
 
 /* ADDRESS: GOLDTL 0x0044d7e0 */
-void __cdecl fcn_0044d7e0(void* stream, int* table, int kind, void* extra)
+void __cdecl d3_DispatchBinaryChunks(void* stream, int* table, int kind, void* extra)
 {
 	int* rec;
 	int idx;
@@ -39,9 +39,9 @@ void __cdecl fcn_0044d7e0(void* stream, int* table, int kind, void* extra)
 					r2 = rec[2];
 					g_6b86c0++;
 					if (r2 == 0) {
-						fcn_0044d7e0(stream, table, kind, extra);
+						d3_DispatchBinaryChunks(stream, table, kind, extra);
 					} else {
-						fcn_0044d7e0(stream, (int*) rec[1], rec[2], extra);
+						d3_DispatchBinaryChunks(stream, (int*) rec[1], rec[2], extra);
 					}
 				}
 			}

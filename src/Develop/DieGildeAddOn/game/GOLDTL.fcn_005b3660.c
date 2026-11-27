@@ -22,11 +22,11 @@ int __cdecl fcn_0046e940(int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0042a030(void);
-int __cdecl fcn_00429ce0(char*);
+int __cdecl evt_CountActiveScripts(void);
+int __cdecl evt_CalcScriptMemSize(char*);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl d2_UpdateWindowDrag(char*);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 
 void __cdecl d2_ShowScriptMemory(void)
 {
@@ -46,20 +46,20 @@ void __cdecl d2_ShowScriptMemory(void)
 		}
 		d2_CurrentWindowId = h;
 		io_AppendText((int) "$C");
-		io_AppendText((int) s_6ab6b8, fcn_0042a030());
+		io_AppendText((int) s_6ab6b8, evt_CountActiveScripts());
 		io_AppendText((int) s_6ab67c);
 		io_AppendText((int) s_6ab63c);
 		total = 0;
 		for (i = 0; i < 128; i++) {
 			e = g_6b7e94 + i * 0xc98;
 			if ((e[0] != 0 && *(int*) (e + 0x100) != -1) || (e[0x124] & 1)) {
-				sprintf(buf, s_6ab624, *(int*) (e + 0x100), e, *(int*) (e + 0x110), *(int*) (e + 0x114), fcn_00429ce0(e));
+				sprintf(buf, s_6ab624, *(int*) (e + 0x100), e, *(int*) (e + 0x110), *(int*) (e + 0x114), evt_CalcScriptMemSize(e));
 				io_AppendText((int) buf);
-				total += fcn_00429ce0(e);
+				total += evt_CalcScriptMemSize(e);
 			}
 		}
 		io_AppendText((int) s_6ab610, total);
 		d2_UpdateWindowDrag((char*)w);
 	}
-	fcn_0046f280(h);
+	d2_CloseWindow(h);
 }

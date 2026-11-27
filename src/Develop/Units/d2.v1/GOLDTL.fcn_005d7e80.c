@@ -25,7 +25,7 @@ int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl fcn_00526120(char*, int);
-unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
+unsigned char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -81,7 +81,7 @@ int __cdecl gm_HandleDrainTargetAP(unsigned char* actor, unsigned char* action)
 	req.kind = 6;
 	req.cd = g_666018;
 	io_FormatTextBuffer(text, 0x1dd7);
-	o = fcn_005cd440(&req, text, 0, 0);
+	o = d2_OpenTargetPicker(&req, text, 0, 0);
 	if (o == 0) {
 		return 2;
 	}

@@ -65,7 +65,7 @@ int __cdecl cut_AreAllPlayersDone(unsigned char*);
 void __cdecl d2_AppendPendingPlayerNames(unsigned char*);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl cut_FindPrevActiveSlot(unsigned char*, int);
-void __cdecl fcn_004e6c60(int);
+void __cdecl cut_SetRandSeed(int);
 int __cdecl sprintf(char*, const char*, ...);
 
 /* ADDRESS: GOLDTL 0x004e51d0 */
@@ -248,5 +248,5 @@ label_4e526f:
 		}
 	}
 	g_772f2c += 1;
-	fcn_004e6c60(saved);
+	cut_SetRandSeed(saved);
 }

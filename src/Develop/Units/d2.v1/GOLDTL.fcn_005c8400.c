@@ -40,13 +40,13 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005a5440(int, Tab5c84*, int, int, int);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl he_GetActiveKrediteByBorrower(int, int, char**);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
-int __cdecl fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
+int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);
 char* __cdecl gm_SearchTable67(int);
 
 int __cdecl fcn_005c8400(void)
@@ -89,7 +89,7 @@ int __cdecl fcn_005c8400(void)
 	fcn_005a5440((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].object_list), g_776aa0, h, 1, 0);
 	for (k = 0; k < 9; k++) {
 		if (lines[k].bar != -1) {
-			fcn_0046f280(lines[k].bar);
+			d2_CloseWindow(lines[k].bar);
 			d2_DestroyElement(lines[k].btn);
 			lines[k].bar = -1;
 			lines[k].btn = -1;
@@ -105,11 +105,11 @@ int __cdecl fcn_005c8400(void)
 	}
 	cy = *(short*) (g_772500 + 0x269d8);
 	d2_SetForm(h, 0);
-	fcn_00533f40(0x215, 0x16b, d2_CurrentWindowId, fcn_00472830(h, 3), 0x6a, &id2, &id1, &id3);
+	fcn_00533f40(0x215, 0x16b, d2_CurrentWindowId, d2_GetFormWindow(h, 3), 0x6a, &id2, &id1, &id3);
 	for (i = 0; i < n; i++) {
 		d2_SetForm(h, 3);
 		lines[i].btn = d2_AddElementToWindow((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a, 0x75a, d2_CurrentWindowId);
-		lines[i].bar = fcn_0046f100((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a + 4, cy, 0x62, 0x10, d2_CurrentWindowId);
+		lines[i].bar = d2_CreateChildWindow((*(int*) (g_77255c + 0xc) - cy) >> 1, i * 0x6a + 4, cy, 0x62, 0x10, d2_CurrentWindowId);
 		lines[i].e = list[i];
 		/* both fields through one symbol: c2 chains the two stores, which issues the bar store first */
 		*(int*) &((D2_WIN*)g_1015f40)[lines[i].bar].pad280[12] = 0x56;

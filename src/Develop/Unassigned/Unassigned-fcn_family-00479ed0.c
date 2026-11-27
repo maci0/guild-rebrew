@@ -1,5 +1,5 @@
-void __cdecl fcn_00478fc0(int, int, int, char*);
-void __cdecl fcn_00478fc0(int, int, int, char*);
+void __cdecl d2_BlitShape(int, int, int, char*);
+void __cdecl d2_BlitShape(int, int, int, char*);
 
 /* ADDRESS: GOLDTL 0x00479ed0 */
 int __cdecl fcn_00479ed0(int x, int y, int surface, char* h, int idx)
@@ -12,7 +12,7 @@ int __cdecl fcn_00479ed0(int x, int y, int surface, char* h, int idx)
 	e = h + *(int*) (h + idx * 4 + 0x45);
 	save = e[0xd];
 	e[0xd] = 1;
-	fcn_00478fc0(x, y, surface, h + *(int*) (h + idx * 4 + 0x45));
+	d2_BlitShape(x, y, surface, h + *(int*) (h + idx * 4 + 0x45));
 	e[0xd] = save;
 	return 1;
 }
@@ -28,7 +28,7 @@ int __cdecl fcn_00479f20(int x, int y, int surface, char* h, int idx)
 	e = h + *(int*) (h + idx * 4 + 0x45);
 	save = e[0xd];
 	e[0xd] = 3;
-	fcn_00478fc0(x, y, surface, h + *(int*) (h + idx * 4 + 0x45));
+	d2_BlitShape(x, y, surface, h + *(int*) (h + idx * 4 + 0x45));
 	e[0xd] = save;
 	return 1;
 }

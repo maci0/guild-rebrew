@@ -39,7 +39,7 @@ void __cdecl cm_RequestMoveCredits(int a, int b, char c, int n);
 void __cdecl cm_RequestModifyHealth(int a, int b);
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl he_PostEntityMessage(int a, int b, char* text, int c, int d, char* file);
-int __cdecl fcn_005cd440(Query* q, char* text, int a, void* b);
+int __cdecl d2_OpenTargetPicker(Query* q, char* text, int a, void* b);
 int __cdecl fcn_00470820(int a, int b, char* name);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_CenterDialogWindows(int h);
@@ -120,12 +120,12 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 	req.x10 = 6;
 	req.mask = g_666018;
 	io_FormatTextBuffer(buf, 0x1dcf);
-	firstEntity = (HatredEntity*) fcn_005cd440(&req, buf, 0, 0);
+	firstEntity = (HatredEntity*) d2_OpenTargetPicker(&req, buf, 0, 0);
 	if (firstEntity == 0) {
 		return 0;
 	}
 	io_FormatTextBuffer(buf, 0x1dd0, firstEntity->id);
-	secondEntity = (HatredEntity*) fcn_005cd440(&req, buf, 0, 0);
+	secondEntity = (HatredEntity*) d2_OpenTargetPicker(&req, buf, 0, 0);
 	if (secondEntity == 0) {
 		return 0;
 	}

@@ -10,7 +10,7 @@ typedef struct Msg {
 	float f;
 } Msg;
 
-extern int __cdecl fcn_004fef00(char* p);
+extern int __cdecl gm_EstimateEntityDeathAge(char* p);
 extern int __cdecl amt_SelectOfficeCandidates(void* p, int n, void* out);
 extern int __cdecl ai_SelectPrivilegeAction(int a1, char* e, int a3, Msg* in, Msg* out);
 extern int __cdecl ai_SelectBestMethod(int kind, unsigned short id, int a3, Msg* b, Msg* a);
@@ -70,7 +70,7 @@ int __cdecl ai_StartAmtsbewerbung(int actorKind, char* actor, int busy, Msg* out
 	if (*(unsigned char*) (actor + 0x168)) {
 		return 0;
 	}
-	if (fcn_004fef00(actor) - *(unsigned short*) (actor + 0xa) < 3) {
+	if (gm_EstimateEntityDeathAge(actor) - *(unsigned short*) (actor + 0xa) < 3) {
 		return 0;
 	}
 	r = amt_SelectOfficeCandidates(actor, 2, items);

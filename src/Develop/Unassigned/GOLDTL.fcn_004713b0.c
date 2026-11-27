@@ -20,31 +20,31 @@ extern int g_14ce86c;
 
 char* __cdecl d3_FindTextureByName(char* name);
 void __cdecl fcn_0045d090(char* p, int a);
-void __cdecl fcn_004767f0(int a, int b, int c, int d, int e, int f, int g, int h);
+void __cdecl d2_BlitBufferToSurface(int a, int b, int c, int d, int e, int f, int g, int h);
 
 /* ADDRESS: GOLDTL 0x004713b0 */
-void __cdecl fcn_004713b0(int k, char* a, char* b)
+void __cdecl d2_CaptureFormPageTextures(int slot, char* upperName, char* lowerName)
 {
-	Obj* o;
-	char* p;
-	char* q;
+	Obj* form;
+	char* upperTex;
+	char* lowerTex;
 
-	o = &((Obj*)g_1038140)[k];
-	p = 0;
-	if (a) {
-		strcpy(o->name1, a);
-		p = d3_FindTextureByName(a);
-		if (p) {
-			fcn_0045d090(p, g_14ce86c);
-			fcn_004767f0(0, 0, *(int*) (p + 0x64), *(int*) (p + 0x64), *(int*) (p + 0x50), 0, 0, o->h1);
+	form = &((Obj*)g_1038140)[slot];
+	upperTex = 0;
+	if (upperName) {
+		strcpy(form->name1, upperName);
+		upperTex = d3_FindTextureByName(upperName);
+		if (upperTex) {
+			fcn_0045d090(upperTex, g_14ce86c);
+			d2_BlitBufferToSurface(0, 0, *(int*) (upperTex + 0x64), *(int*) (upperTex + 0x64), *(int*) (upperTex + 0x50), 0, 0, form->h1);
 		}
 	}
-	if (b) {
-		strcpy(o->name2, b);
-		q = d3_FindTextureByName(b);
-		if (q) {
-			fcn_0045d090(q, g_14ce86c);
-			fcn_004767f0(0, 0, *(int*) (q + 0x64), *(int*) (o->h2 + 8), *(int*) (q + 0x50), 0, *(int*) (p + 0x64), (int) o->h2);
+	if (lowerName) {
+		strcpy(form->name2, lowerName);
+		lowerTex = d3_FindTextureByName(lowerName);
+		if (lowerTex) {
+			fcn_0045d090(lowerTex, g_14ce86c);
+			d2_BlitBufferToSurface(0, 0, *(int*) (lowerTex + 0x64), *(int*) (form->h2 + 8), *(int*) (lowerTex + 0x50), 0, *(int*) (upperTex + 0x64), (int) form->h2);
 		}
 	}
 }

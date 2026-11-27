@@ -39,7 +39,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_0052a0c0(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl d2_SendFriedhofUpgradeWorkerCmd(char*, ENTITY_RECORD*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_RestoreHudAfterDialog(void);
@@ -100,19 +100,19 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 		}
 		if (hh != 0) {
 			if (gm_GetEntitySkill((char*) hh, 1) >= 1.0) {
-				fcn_00472640(b1, 0);
+				d2_SetElementEnabled(b1, 0);
 			} else {
-				fcn_00472640(b1, 1);
+				d2_SetElementEnabled(b1, 1);
 			}
 			if (gm_GetEntitySkill((char*) hh, 2) >= 1.0) {
-				fcn_00472640(b2, 0);
+				d2_SetElementEnabled(b2, 0);
 			} else {
-				fcn_00472640(b2, 1);
+				d2_SetElementEnabled(b2, 1);
 			}
 			if (gm_GetEntitySkill((char*) hh, 4) >= 1.0) {
-				fcn_00472640(b4, 0);
+				d2_SetElementEnabled(b4, 0);
 			} else {
-				fcn_00472640(b4, 1);
+				d2_SetElementEnabled(b4, 1);
 			}
 		}
 		if (g_100f1dc != -1) {

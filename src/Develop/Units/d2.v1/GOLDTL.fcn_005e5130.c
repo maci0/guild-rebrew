@@ -28,7 +28,7 @@ extern char g_6b5c60[];
 
 void __cdecl fcn_00526120(int, int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
-int __cdecl fcn_005cd440(Req*, char*, char*, void*);
+int __cdecl d2_OpenTargetPicker(Req*, char*, char*, void*);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_ShowSchneidereiPlauschDialog(void);
 
@@ -68,7 +68,7 @@ void __cdecl d2_SelectPlauschTarget(void)
 		req.a = 1;
 		req.size = 0x400;
 		req.kind = 6;
-		fcn_005cd440(&req, g_14b5bc8, g_6b5c60, d2_ShowSchneidereiPlauschDialog);
+		d2_OpenTargetPicker(&req, g_14b5bc8, g_6b5c60, d2_ShowSchneidereiPlauschDialog);
 	}
 	d3_EndCameraAndUiMode();
 }

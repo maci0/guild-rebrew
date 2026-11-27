@@ -43,8 +43,8 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_00594340(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_0046f9b0(int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetControlText(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
@@ -115,9 +115,9 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1dc = 100;
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].value_1e0 = 0x10;
 		*(unsigned int*)&((D2_CONTROL_TL*)g_1015ea0)[h].font = 0x54;
-		fcn_0046f9b0(h, g_14a79c0[(int) ids[cnt] * 2]);
+		d2_SetControlText(h, g_14a79c0[(int) ids[cnt] * 2]);
 		handles[cnt] = h;
-		fcn_00472640(h, 1);
+		d2_SetElementEnabled(h, 1);
 	}
 	d2_SetOverlayAnimation(0, 0);
 	fcn_00595e20(gebaeude, ids[6]);
@@ -143,7 +143,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 		}
 		d2_SetForm(total, 2);
 		for (i = 0; i < 3; i++) {
-			fcn_00472640(handles[i], 1);
+			d2_SetElementEnabled(handles[i], 1);
 			if (ids[i + 3] == 1) {
 				io_FormatTextBuffer(text, 0x1807, ids[i + 3], (int)ids[i] * 2 + 0x9a8);
 			}
@@ -154,7 +154,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 				io_FormatTextBuffer(text, 0x679060,
 					(int) ids[i] * 2 + 0x9a8);
 			}
-			fcn_0046f9b0(handles[i], text);
+			d2_SetControlText(handles[i], text);
 		}
 		if (g_100f1dc != -1) {
 			for (sel = 0; sel < 3; sel++) {

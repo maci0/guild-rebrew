@@ -3,7 +3,7 @@ extern int g_6b7d7c;
 
 
 extern volatile int g_6b7fac;
-int __cdecl fcn_0042a880(int);
+int __cdecl msx_EndSample(int);
 
 void __cdecl sb_StopVoice(int* p, int fade)
 {
@@ -13,7 +13,7 @@ void __cdecl sb_StopVoice(int* p, int fade)
 			p[4] = (g_6b7fac * 2 + g_6b7fac) * 4 + g_6b7fac;
 			return;
 		}
-		fcn_0042a880(p[0]);
+		msx_EndSample(p[0]);
 		p[5] |= 8;
 	}
 }

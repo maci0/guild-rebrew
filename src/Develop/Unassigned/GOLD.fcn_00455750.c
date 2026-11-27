@@ -1,7 +1,7 @@
 #include "client_scene_resources.h"
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-void __cdecl fcn_004556d0(char*);
+void __cdecl d3_UnlinkEffect(char*);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLD 0x00455750 */
@@ -18,7 +18,7 @@ void __cdecl d3_DestroyEffect(char* object)
 		if (object == *(char**) (owner + 0xa8))
 			*(char**) (owner + 0xa8) = *(char**) (object + 0x314);
 	} else {
-		fcn_004556d0(object);
+		d3_UnlinkEffect(object);
 	}
 	if (*(SCENE_RESOURCE**) (object + 0xd4) != 0)
 		fcn_0045fbb0(*(SCENE_RESOURCE**) (object + 0xd4));

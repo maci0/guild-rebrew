@@ -2,7 +2,7 @@ extern char* g_5fb5b0;
 extern int g_fb9598, g_fb98f4;
 
 /* ADDRESS: GOLD 0x004556d0 */
-void __cdecl fcn_004556d0(char* node)
+void __cdecl d3_UnlinkEffect(char* node)
 {
 	char* prev;
 	char* owner;

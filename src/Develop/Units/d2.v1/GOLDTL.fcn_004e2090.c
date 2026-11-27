@@ -12,7 +12,7 @@ void __cdecl fcn_004e4730(char*);
 void __cdecl msx_StartMusicIfAllowed(char*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl evt_StartGfxScript(char*, char*);
 int __cdecl cut_WaitForTimeoutOrInput(int, int, int*);
 void __cdecl d2_SetForm(int, int);
@@ -72,14 +72,14 @@ void __cdecl fcn_004e2090(int event)
 	msx_StartMusicIfAllowed("cd2\\Hochzeit.mp3");
 	scene[1] = fcn_00470820(0, 0, "cutscenes\\hochzeit");
 	fcn_00471d80(scene[1], 3);
-	fcn_00471af0(scene[1], 0);
+	d2_SetFormVisibility(scene[1], 0);
 	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-create.esc", text);
 	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-intro.esc", g_6b5c60);
 	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden1.esc", g_6b5c60);
 	if (cut_WaitForTimeoutOrInput(0x5dc, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
-	fcn_00471af0(scene[1], 1);
+	d2_SetFormVisibility(scene[1], 1);
 	d2_SetForm(scene[1], 0);
 	io_AppendText((char*) 0x1aa9, *entity1, *entity2);
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_00", 0);
@@ -95,7 +95,7 @@ void __cdecl fcn_004e2090(int event)
 	}
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
-	fcn_00471af0(scene[1], 0);
+	d2_SetFormVisibility(scene[1], 0);
 	value = cut_WaitForScriptOrInput(scene[0], (void*) cut_ReleaseSceneContexts, scene);
 	if (value != 0) {
 		return;
@@ -105,7 +105,7 @@ void __cdecl fcn_004e2090(int event)
 	}
 	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden2.esc", g_6b5c60);
 	d2_SetForm(scene[1], 0);
-	fcn_00471af0(scene[1], 1);
+	d2_SetFormVisibility(scene[1], 1);
 	io_AppendText((char*) 0x1aac, *entity1, *entity2);
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_03", 0);
 	value = sb_CheckVoicePlaying(scene[3]);
@@ -120,11 +120,11 @@ void __cdecl fcn_004e2090(int event)
 	}
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
-	fcn_00471af0(scene[1], 0);
+	d2_SetFormVisibility(scene[1], 0);
 	if (cut_WaitForTimeoutOrInput(500, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
-	fcn_00471af0(scene[1], 1);
+	d2_SetFormVisibility(scene[1], 1);
 	d2_SetForm(scene[1], 0);
 	io_AppendText((char*) 0x1aab);
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_M", 0);
@@ -143,13 +143,13 @@ void __cdecl fcn_004e2090(int event)
 		return;
 	}
 	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-reden3.esc", g_6b5c60);
-	fcn_00471af0(scene[1], 0);
+	d2_SetFormVisibility(scene[1], 0);
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
 	if (cut_WaitForTimeoutOrInput(0x5dc, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
-	fcn_00471af0(scene[1], 1);
+	d2_SetFormVisibility(scene[1], 1);
 	d2_SetForm(scene[1], 0);
 	io_AppendText((char*) 0x1aaa, *entity2, *entity1);
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_MAIN_01", 0);
@@ -163,13 +163,13 @@ void __cdecl fcn_004e2090(int event)
 	if (cut_WaitForTimeoutOrInput(500, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
-	fcn_00471af0(scene[1], 0);
+	d2_SetFormVisibility(scene[1], 0);
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
 	if (cut_WaitForTimeoutOrInput(500, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
-	fcn_00471af0(scene[1], 1);
+	d2_SetFormVisibility(scene[1], 1);
 	d2_SetForm(scene[1], 0);
 	io_AppendText((char*) 0x1aab);
 	scene[3] = fcn_004e4b20(0xfffffff9, scene[2], "_HOCHZEIT_NEU_W", 0);
@@ -201,7 +201,7 @@ void __cdecl fcn_004e2090(int event)
 	if (cut_WaitForTimeoutOrInput(500, (int) cut_ReleaseSceneContexts, scene)) {
 		return;
 	}
-	fcn_00471af0(scene[1], 0);
+	d2_SetFormVisibility(scene[1], 0);
 	d2_SetForm(scene[1], 0);
 	io_AppendText(g_6811b0);
 	if (cut_WaitForScriptOrInput(scene[0], (void*) cut_ReleaseSceneContexts, scene)) {

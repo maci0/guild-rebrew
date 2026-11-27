@@ -36,7 +36,7 @@ char* __cdecl fcn_00502cd0(int, int, int);
 char* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_LookupSpecialObject(int);
 int __cdecl d2_UpdateWindowDrag(char*);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 
 void __cdecl d2_ShowPlayerObjektCounts(void)
 {
@@ -74,5 +74,5 @@ void __cdecl d2_ShowPlayerObjektCounts(void)
 			d2_UpdateWindowDrag((char*)win);
 		} while (main_RunFrameLoop((void*) d2_ShowPlayerObjektCounts, 0x657c7) != 0);
 	}
-	fcn_0046f280(w);
+	d2_CloseWindow(w);
 }

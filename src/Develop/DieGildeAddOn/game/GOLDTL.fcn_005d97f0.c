@@ -13,8 +13,8 @@ int __cdecl gm_CheckStatLevel(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl gm_GetOppositeStatIndex(int, int);
-void __cdecl fcn_0046f9b0(int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetControlText(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(void*, ...);
@@ -82,10 +82,10 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
         } else {
             buf[0] = 0;
         }
-        fcn_0046f9b0(ctrlId, (int) buf);
+        d2_SetControlText(ctrlId, (int) buf);
         ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].width = 0xa4;
         if (profId == *(unsigned char*) ((char*) actor + 0x164)) {
-            fcn_00472640(ctrlId, 0);
+            d2_SetElementEnabled(ctrlId, 0);
         } else if (!profId) {
             ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].value_1cc = 0x56;
             ((D2_CONTROL_TL*) g_1015ea0)[ctrlId].value_1d4 = 0xa4;

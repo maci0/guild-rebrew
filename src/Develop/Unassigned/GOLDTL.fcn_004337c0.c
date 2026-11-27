@@ -2,7 +2,7 @@ extern void __cdecl d3_WrapEulerAnglesPi(int *a, int *b, int *c, int *d);
 extern void __cdecl d3_ComputeSplineTangents(int *a, int *b, int *c);
 
 /* ADDRESS: GOLDTL 0x004337c0 */
-void __cdecl fcn_004337c0(int *state)
+void __cdecl d3_BuildAnimSplineTangents(int *state)
 {
     int i;
     int j;

@@ -21,8 +21,8 @@ int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 float __cdecl gm_GetEntityHealth(char*);
 int __cdecl fcn_005c9f10(int, int, int, int, int, short*);
 int __cdecl fcn_005c99a0(int, int, int, int, int, int);
-void __cdecl fcn_00472640(int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_ShowAmtInfo(int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_DestroyForm(int);
@@ -163,9 +163,9 @@ void __cdecl fcn_005cd810(int office)
 				fcn_005c99a0(d2_CurrentWindowId, office, 0, count, (int) rec, (int) p);
 			}
 			for (i = 0; i < count; i++) {
-				fcn_00472640(rec[i].h1, 1);
+				d2_SetElementEnabled(rec[i].h1, 1);
 				if (rec[i].h2 != -1)
-					fcn_00472640(rec[i].h2, 1);
+					d2_SetElementEnabled(rec[i].h2, 1);
 			}
 			again = 0;
 		}
@@ -209,9 +209,9 @@ void __cdecl fcn_005cd810(int office)
 						sel2 = 0;
 						sel = 0;
 					}
-					fcn_00471af0(dlg, 0);
+					d2_SetFormVisibility(dlg, 0);
 					d2_ShowAmtInfo(rec[i].text, (int) ent);
-					fcn_00471af0(dlg, 1);
+					d2_SetFormVisibility(dlg, 1);
 				}
 				again = 1;
 			}

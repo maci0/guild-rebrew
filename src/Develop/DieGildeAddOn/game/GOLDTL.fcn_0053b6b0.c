@@ -11,10 +11,10 @@ void __cdecl ch_DestroyCharacter(void* obj);
 void* __cdecl ch_CreateAtPosition(char* name, void* pos);
 void __cdecl ch_CreateAction(void* obj, int mode, int value);
 void* __cdecl evt_LoadGfxScript(char* script);
-void __cdecl fcn_00428340(void* obj, int argc, ...);
+void __cdecl evt_CallScriptFunction(void* obj, int argc, ...);
 void* __cdecl d3_FindSceneObject(void* dev, int flags, void* ptr, char* name);
 void __cdecl d3_TransformPoint(void* dev, void* pos, void* out);
-int __cdecl fcn_00469c30(int x, int y, int a3);
+int __cdecl d2_CreateElement(int x, int y, int a3);
 void __cdecl d2_DestroyElement(int kind);
 int __cdecl gm_FindHeadIconIndex(char* name);
 int __cdecl gm_MapEntityStatRange(int arg);
@@ -59,17 +59,17 @@ unsigned int __cdecl d2_ChooseCharacterModel(int jobCode)
 		d3_TransformPoint(dev, (char*) dev + 0x4c, pos);
 	}
 
-	id1 = fcn_00469c30((int) (d2_UiScale * 150.0f + d2_UiScale * 330.0f),
+	id1 = d2_CreateElement((int) (d2_UiScale * 150.0f + d2_UiScale * 330.0f),
 		(int) (d2_UiScale * 370.0f), 0x1a);
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id1].value_05c = 1;
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id1].flags_1d0 = 3;
 
-	id2 = fcn_00469c30((int) (d2_UiScale * 330.0f),
+	id2 = d2_CreateElement((int) (d2_UiScale * 330.0f),
 		(int) (d2_UiScale * 370.0f), 0x1b);
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id2].value_05c = 1;
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id2].flags_1d0 = 3;
 
-	id3 = fcn_00469c30((int) (d2_UiScale * 70.0f + d2_UiScale * 330.0f),
+	id3 = d2_CreateElement((int) (d2_UiScale * 70.0f + d2_UiScale * 330.0f),
 		(int) (d2_UiScale * 45.0f + d2_UiScale * 370.0f), 0x51b);
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id3].value_05c = 1;
 	((D2_CONTROL_TL*) ((char*) g_1015ea0))[id3].flags_1d0 = 3;
@@ -121,7 +121,7 @@ unsigned int __cdecl d2_ChooseCharacterModel(int jobCode)
 		if (prev != idx) {
 			view = evt_LoadGfxScript("Effekte/choose_character.esc");
 			if (view != 0) {
-				fcn_00428340(view, 6,
+				evt_CallScriptFunction(view, 6,
 					(int) pos[0],
 					(int) pos[1] + 0x14,
 					(int) pos[2],

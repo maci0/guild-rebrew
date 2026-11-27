@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-char* __cdecl fcn_00424840(char* p, char* dst, int n)
+char* __cdecl sbs_GetNextSet(char* p, char* dst, int n)
 {
 	if (p != 0) {
 		p = *(char**) (p + 0x3c);

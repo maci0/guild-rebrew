@@ -34,7 +34,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 void __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3);
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 unsigned char* __cdecl gm_AddObjekt(void);
@@ -43,7 +43,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_00467480(int x, int y, int a3, int a4, int a5, int win);
+int __cdecl d2_AddWindowInputIcon(int x, int y, int a3, int a4, int a5, int win);
 int __cdecl gm_AmountToUnits(int, unsigned char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
@@ -71,7 +71,7 @@ int __cdecl fcn_005c89a0(void)
 		g_777d00[k].value = 0;
 	}
 	d2_SetForm(h, 0);
-	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, fcn_00472830(h, 2), 0x3e, &g_776c90, &g_777ca0, &g_778b00);
+	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, d2_GetFormWindow(h, 2), 0x3e, &g_776c90, &g_777ca0, &g_778b00);
 	*(int*) (g_1016198 + d2_CurrentWindowId * 0x3cc + 0x160) = -1;
 	*(int*) (g_1016198 + d2_CurrentWindowId * 0x3cc + 0x164) = -1;
 	d2_SetForm(h, 3);
@@ -92,7 +92,7 @@ int __cdecl fcn_005c89a0(void)
 				d2_SetElementFont(g_777d00[n].name_text, 0x54);
 				io_FormatTextBuffer(buf, g_68be7c, *(int*) (m + 0x1b8));
 				g_777d00[n].value_text = d2_ShowTxt(0x180, n * 0x3e + 0x14, buf, d2_CurrentWindowId);
-				g_777d00[n].bar = fcn_00467480(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, d2_CurrentWindowId);
+				g_777d00[n].bar = d2_AddWindowInputIcon(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, d2_CurrentWindowId);
 				d2_SetElementValue(g_777d00[n].bar, 0x3e8, 0x2328, gm_AmountToUnits(*(int*) (e + 0x39), g_773d75));
 				g_777d00[n].value = d2_GetControlValue(g_777d00[n].bar);
 				g_777d00[n].e = e;

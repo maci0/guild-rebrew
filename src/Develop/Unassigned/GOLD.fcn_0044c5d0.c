@@ -1,7 +1,7 @@
 #include <string.h>
 
 /* ADDRESS: GOLD 0x0044c5d0 */
-char* __cdecl fcn_0044c5d0(char* name)
+char* __cdecl d3_FindModelByName(char* name)
 {
 	char* e;
 

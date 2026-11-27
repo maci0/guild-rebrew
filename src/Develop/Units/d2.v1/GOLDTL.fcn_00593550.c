@@ -36,7 +36,7 @@ int __cdecl sprintf(char*, const char*, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-void __cdecl fcn_00593550(void)
+void __cdecl d2_PopulateNetLobbyPlayerList(void)
 {
 	int y;
 	int i;

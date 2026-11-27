@@ -5,7 +5,7 @@ extern char g_5c0d90[];
 #include <string.h>
 
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_005cd440(void*, void*, int, int);
+void __cdecl d2_OpenTargetPicker(void*, void*, int, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 
@@ -23,6 +23,6 @@ void __cdecl d2_OpenDuelTargetPicker(int enabled)
 	*(int*) (buf + 8) = (*(int*)&g_666018);
 	*(int*) (buf + 0xc) = g_66601c;
 	io_FormatTextBuffer(buf + 0x50, 0x190d);
-	fcn_005cd440(buf, buf + 0x50, 0, (int) g_5c0d90);
+	d2_OpenTargetPicker(buf, buf + 0x50, 0, (int) g_5c0d90);
 	d3_EndCameraAndUiMode();
 }

@@ -37,9 +37,9 @@ void __cdecl evt_ParseWhile(void);
 void __cdecl evt_ParseIfHead(void);
 void __cdecl evt_IncludeScript(void);
 void __cdecl evt_ReturnFromFunction(void);
-void __cdecl fcn_00427570(void);
-void __cdecl fcn_00427580(void);
-void __cdecl fcn_00427590(void);
+void __cdecl evt_SetScriptFlowState1(void);
+void __cdecl evt_SetScriptFlowState2(void);
+void __cdecl evt_ClearScriptFlowState(void);
 void __cdecl evt_TrySkipIfFalseBlock(void);
 void __cdecl evt_ExecuteCommand(int);
 void __cdecl evt_ParseVariableAssignment(int);
@@ -94,13 +94,13 @@ int __cdecl evt_ExecuteStatements(char* g)
 				evt_IncludeScript();
 				break;
 			case 6:
-				fcn_00427570();
+				evt_SetScriptFlowState1();
 				break;
 			case 8:
-				fcn_00427580();
+				evt_SetScriptFlowState2();
 				break;
 			case 7:
-				fcn_00427590();
+				evt_ClearScriptFlowState();
 				break;
 			case 3:
 				evt_ReturnFromFunction();

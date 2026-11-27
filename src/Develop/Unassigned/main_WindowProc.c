@@ -18,9 +18,9 @@ void __cdecl msx_ReleaseAllDrivers(void);
 void __cdecl msx_ReacquireWaveDriver(int, int, int);
 void __cdecl msx_ReacquireAllWaveDrivers(int, int);
 void __cdecl fcn_0043b360(void);
-void __cdecl fcn_00473610(void);
+void __cdecl d3_ReleaseBackBuffer(void);
 void __cdecl d3_AcquireBackBuffer(void);
-void __cdecl fcn_00476970(int);
+void __cdecl d2_ClearSurface(int);
 void __cdecl fcn_004774a0(void);
 void __cdecl fcn_004774b0(void);
 void __cdecl fcn_0047ce70(void);
@@ -50,7 +50,7 @@ LRESULT CALLBACK main_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 	case WM_GETMINMAXINFO_VALUE:
 		ValidateRect(hWnd, 0);
 		if (g_77250c)
-			fcn_00476970(g_77250c);
+			d2_ClearSurface(g_77250c);
 		return 1;
 	case WM_ACTIVATEAPP:
 		/* The two guard exits share one `return 0` epilogue in the target
@@ -77,7 +77,7 @@ LRESULT CALLBACK main_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 			} while (hr != (int) D3DERR_DEVICELOST_VALUE);
 		teardown:
 			fcn_00418640();
-			fcn_00473610();
+			d3_ReleaseBackBuffer();
 			fcn_004774a0();
 			fcn_0047ce70();
 			fcn_0043b360();

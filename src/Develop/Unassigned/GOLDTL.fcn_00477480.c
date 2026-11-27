@@ -2,7 +2,7 @@
 
 typedef int (__stdcall* fcn_00477480_f)(void*);
 
-void __cdecl fcn_00477480(void)
+void __cdecl d2_ReleaseRenderToSurface(void)
 {
 	void* p;
 

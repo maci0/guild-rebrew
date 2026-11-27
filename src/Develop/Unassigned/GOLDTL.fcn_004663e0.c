@@ -32,7 +32,7 @@ void __cdecl d2_SelectFont(int font);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x004663e0 */
-void __cdecl fcn_004663e0(char* f, int surf)
+void __cdecl d2_DrawFieldSliderPopup(char* f, int surf)
 {
 	fcn_004663e0_Ent* e;
 	char* font;

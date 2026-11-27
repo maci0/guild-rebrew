@@ -39,7 +39,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DrawPanelFrame(int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00475220(char*);
+void __cdecl d2_SetMouseTooltip(char*);
 int __cdecl io_AppendText(int, ...);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00533a40(char*);
@@ -47,7 +47,7 @@ int __cdecl fcn_005a5440(int, void*, int, int, int);
 int __cdecl d2_FindSelectedListRow(void*);
 int __cdecl d2_CountActiveListRows(void*);
 int __cdecl fcn_0046f940(int, char*);
-void __cdecl fcn_0046ed00(int, int, int);
+void __cdecl d2_ScrollWindow(int, int, int);
 int __cdecl d2_SetSlotVisibility(int, int);
 void __cdecl d2_SetElementImage(int, int);
 void __cdecl d2_SetElementValue(int, ...);
@@ -118,7 +118,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 	d2_SetForm(dialogId, 2);
 	io_AppendText(0x18f6, *(int*)(a0 + 0x69),
 		*(unsigned short*)(g_773d75 * 0x2f4 + 0x8680b4) * 2 + 0x9a8, *(int*)(a0 + 0x6d));
-	fcn_00475220(g_14ab6fc);
+	d2_SetMouseTooltip(g_14ab6fc);
 	d2_SetOverlayAnimation(0, 0);
 	v29 = -1;
 	do {
@@ -141,7 +141,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 			if (v29 != -1) {
 				if (!g_100f8c0 || !v31) {
 					io_FormatTextBuffer(buf, 0x18fa, ownRows[v29].x14, ownRows[v29].val * 2 + 0x9a8);
-					fcn_00475220(buf);
+					d2_SetMouseTooltip(buf);
 				}
 				v31 = 1;
 				v30 = v29;
@@ -153,12 +153,12 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 		if (v29 == -1) {
 			v30 = -1;
 			v31 = 0;
-			fcn_00475220(g_14ab6fc);
+			d2_SetMouseTooltip(g_14ab6fc);
 			d2_SetElementImage(e4, 0x4f7);
 		} else {
 			if (!g_100f8c0 || !v31) {
 				io_FormatTextBuffer(buf, 0x18f8, globRows[v29].x14, globRows[v29].val * 2 + 0x9a8);
-				fcn_00475220(buf);
+				d2_SetMouseTooltip(buf);
 			}
 			v31 = 2;
 			v30 = v29;
@@ -192,16 +192,16 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 		if (g_100f1dc == 3 || g_100f1dc == 4) {
 			if (d2_CurrentElementId == e2) {
 				d2_SetForm(dialogId, 4);
-				fcn_0046ed00(0, -0x4c, d2_CurrentWindowId);
+				d2_ScrollWindow(0, -0x4c, d2_CurrentWindowId);
 			} else if (d2_CurrentElementId == e3) {
 				d2_SetForm(dialogId, 4);
-				fcn_0046ed00(0, 0x4c, d2_CurrentWindowId);
+				d2_ScrollWindow(0, 0x4c, d2_CurrentWindowId);
 			} else if (d2_CurrentElementId == e1) {
 				d2_SetForm(dialogId, 5);
-				fcn_0046ed00(0, -0x4c, d2_CurrentWindowId);
+				d2_ScrollWindow(0, -0x4c, d2_CurrentWindowId);
 			} else if (d2_CurrentElementId == e0) {
 				d2_SetForm(dialogId, 5);
-				fcn_0046ed00(0, 0x4c, d2_CurrentWindowId);
+				d2_ScrollWindow(0, 0x4c, d2_CurrentWindowId);
 			}
 		}
 		if (v31 == 1) {
@@ -221,7 +221,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 					v17 = fcn_00508620(globRows[v16].x18, v2);
 					if ((float) v17 < value) {
 						io_FormatTextBuffer(buf, 0x18fd, v2 * 2 + 0x9a8);
-						fcn_00475220(buf);
+						d2_SetMouseTooltip(buf);
 					} else {
 						v28 = (int) value;
 						v17 = fcn_00508620(v4, v3);
@@ -241,7 +241,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 							if (*(int*)((char*)globRows + v15) != -1) d2_SetElementValue(*(int*)((char*)globRows + v15), 0, 0, 0);
 						}
 					}
-				} else fcn_00475220(g_14ab710);
+				} else d2_SetMouseTooltip(g_14ab710);
 			}
 		} else if (v31 == 2) {
 			v16 = d2_FindSelectedListRow(ownRows);

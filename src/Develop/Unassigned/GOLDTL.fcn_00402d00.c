@@ -10,7 +10,7 @@ void __cdecl d3_NormalizeVector(float* v);
 char __cdecl fcn_0045b990(float* tex, float* pt, int* col, int* row, float* out);
 
 /* ADDRESS: GOLDTL 0x00402d00 */
-void __cdecl fcn_00402d00(char* character)
+void __cdecl ch_ApplyCharacterSeparation(char* character)
 {
 	float limit = 50.0f;
 	float t;

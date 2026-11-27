@@ -1,7 +1,7 @@
 #include <string.h>
 
 int __cdecl io_OpenRegistryKey(const char* sub, int mode);
-void __cdecl fcn_00411500(int, const char*, int);
+void __cdecl io_WriteRegistryDword(int, const char*, int);
 void __cdecl io_WriteRegistryString(int, const char*, char*);
 void __cdecl fcn_00410430(int);
 
@@ -17,7 +17,7 @@ void __cdecl d3_SaveDisplayOptions(unsigned char flags, int fill, const char* ke
 	if (h == -1) {
 		return;
 	}
-	fcn_00411500(h, "d3d_beautiful", (flags >> 1) & 1);
+	io_WriteRegistryDword(h, "d3d_beautiful", (flags >> 1) & 1);
 	switch (fill) {
 	case 1:
 		strcpy(mode, "D3DFILL_POINT");
@@ -33,8 +33,8 @@ void __cdecl d3_SaveDisplayOptions(unsigned char flags, int fill, const char* ke
 		break;
 	}
 	io_WriteRegistryString(h, "d3d_fillmode", mode);
-	fcn_00411500(h, "d3_mirrors", flags & 1);
-	fcn_00411500(h, "d3d_shadows", (flags >> 2) & 7);
-	fcn_00411500(h, "d3d_registry_version", 3);
+	io_WriteRegistryDword(h, "d3_mirrors", flags & 1);
+	io_WriteRegistryDword(h, "d3d_shadows", (flags >> 2) & 7);
+	io_WriteRegistryDword(h, "d3d_registry_version", 3);
 	fcn_00410430(h);
 }

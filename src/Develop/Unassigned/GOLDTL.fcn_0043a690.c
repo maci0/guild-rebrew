@@ -3,7 +3,7 @@
 extern int g_67a370;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
-char __cdecl fcn_0043a5d0(char*, float*);
+char __cdecl d3_AccumulateObjectBounds(char*, float*);
 
 void __cdecl fcn_0043a690(float* mn, float* mx)
 {
@@ -15,7 +15,7 @@ void __cdecl fcn_0043a690(float* mn, float* mx)
 	bb[4] = -1.0e10f;
 	bb[5] = -1.0e10f;
 	bb[6] = -1.0e10f;
-	d3_VisitSceneObjects(g_67a370, 0, 0x40, fcn_0043a5d0, bb);
+	d3_VisitSceneObjects(g_67a370, 0, 0x40, d3_AccumulateObjectBounds, bb);
 	mn[0] = bb[0];
 	mn[1] = bb[1];
 	mn[2] = bb[2];

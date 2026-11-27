@@ -31,7 +31,7 @@ typedef struct {
 void __cdecl d2_ClearPaintbox(void);
 void __cdecl fcn_00472c30(int, int, int, int, int, int, int);
 int __cdecl fcn_0046fac0(int, int, char *, int);
-int __cdecl fcn_0046b520(char *, int);
+int __cdecl d2_MeasureTextWidth(char *, int);
 void __cdecl gm_PackGameTime(int *, char *);
 int __cdecl d2_DrawHistoryGraph(Arg, int, int);
 void __cdecl io_FormatTextBuffer(char *, char *, ...);
@@ -93,7 +93,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		fcn_00472c30(x2, 8, x1, 8, 0x10, 0x10, 0x10);
 		fcn_00472c30(x2, (h - 0x1e) / 2 + 8, x1, (h - 0x1e) / 2 + 8, 0x10, 0x10, 0x10);
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, m);
-		d = fcn_0046b520(loc.buf, 0x55) + 2;
+		d = d2_MeasureTextWidth(loc.buf, 0x55) + 2;
 		id = fcn_0046fac0(x1, 5, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_070)) = 1;
@@ -109,7 +109,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	gm_PackGameTime(loc.src, loc.out);
 	if (loc.out[1] == 1) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
-		d = fcn_0046b520(loc.buf, 0x55);
+		d = d2_MeasureTextWidth(loc.buf, 0x55);
 		id = fcn_0046fac0(step * 16 + 0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 	}
@@ -120,7 +120,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 		fcn_00472c30(n, h - 0x13, n, h - 0x10, 0x10, 0x10, 0x10);
 		if (loc.out[1] == 1) {
 			io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
-			d = fcn_0046b520(loc.buf, 0x55);
+			d = d2_MeasureTextWidth(loc.buf, 0x55);
 			id = fcn_0046fac0(n, h - 0xd, loc.buf, d2_CurrentWindowId);
 			*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 			fcn_00472c30(n, h - 0x13, n, h - 0xd, 0x10, 0x10, 0x10);
@@ -130,7 +130,7 @@ void __cdecl fcn_005d3d90(unsigned short flags, Gfx g, int win)
 	}
 	if (loc.out[1] == 1) {
 		io_FormatTextBuffer(loc.buf, (char *) 0x67d444, *(short *) (loc.out + 2));
-		d = fcn_0046b520(loc.buf, 0x55);
+		d = d2_MeasureTextWidth(loc.buf, 0x55);
 		id = fcn_0046fac0(0x2d, h - 0xd, loc.buf, d2_CurrentWindowId);
 		*(int *) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[id].width)) = d;
 	}

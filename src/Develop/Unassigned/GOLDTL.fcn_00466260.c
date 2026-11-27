@@ -19,7 +19,7 @@ extern int d2_ResourceOffset;
 void __cdecl d2_Show(int idx, int arg);
 
 /* ADDRESS: GOLDTL 0x00466260 */
-int __cdecl fcn_00466260(int idx, void** out, int* out_idx)
+int __cdecl d2_ResolveResourceEntry(int idx, void** out, int* out_idx)
 {
 	int j;
 

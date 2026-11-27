@@ -29,8 +29,8 @@ void __cdecl d3_ScheduleActionTimer(int a1, int a2, int a3);
 int __cdecl fcn_004d4790(char* e);
 int __cdecl ch_QueuePlayAnimation(char* e, const char* name, int param);
 void __cdecl d3_DestroyObject(int p);
-int __cdecl fcn_0043c2c0(int m);
-int __cdecl fcn_0043ef20(int m);
+int __cdecl d3_BuildFloorGeometry(int m);
+int __cdecl d3_UpdateFloorLighting(int m);
 
 /* ADDRESS: GOLDTL 0x004cf6b0 */
 int __cdecl fcn_004cf6b0(void)
@@ -87,8 +87,8 @@ int __cdecl fcn_004cf6b0(void)
 				if (*(unsigned char*) (n + *(int*) (map + 0x14)) != 0) {
 					*(unsigned char*) (n + *(int*) (map + 0x10)) += 0xfb;
 					*(unsigned char*) (p->z * *(int*) g_6b8300 + *(int*) (g_6b8300 + 0x14) + p->x) = 0;
-					fcn_0043c2c0(g_6b8300);
-					fcn_0043ef20(g_6b8300);
+					d3_BuildFloorGeometry(g_6b8300);
+					d3_UpdateFloorLighting(g_6b8300);
 				}
 				sb_PlayVoice((char*) g_772ec4, "Explosion_s", 1, 0x3f,
 				    0x7f, 0, 0);

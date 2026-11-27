@@ -1,6 +1,6 @@
 #include <string.h>
 
-int __cdecl fcn_0047b8b0(int a1, int a2, int a3, int a4, void* out);
+int __cdecl d2_BuildQuadVertices(int a1, int a2, int a3, int a4, void* out);
 void __cdecl fcn_004372d0(int a1, int a2, int a3, int a4, int a5);
 
 typedef struct BlitSurf BlitSurf;
@@ -24,7 +24,7 @@ typedef struct BlitSurf {
 	int flag;               
 } BlitSurf;
 
-int __cdecl fcn_00475fd0(BlitSurf* s);
+int __cdecl d2_LockSurface(BlitSurf* s);
 int __cdecl d2_UnlockSurface(BlitSurf* s);
 int __cdecl fcn_00476120(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst);
 int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int sy, BlitSurf* dst, int unused);
@@ -72,7 +72,7 @@ int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int 
 	if (((dst->a != 0 && src->a != 0) || (dst->b != 0 && src->b != 0)) && dst->flag == 0 && src->flag == 0) {
 		if (fcn_00476120(x, y, w, h, src, sx, sy, dst) == 0)
 			return 0;
-	} else if (fcn_00475fd0(dst) != 0 && fcn_00475fd0(src) != 0) {
+	} else if (d2_LockSurface(dst) != 0 && d2_LockSurface(src) != 0) {
 		sbase = src->pitch * y + (src->bpp >> 3) * x;
 		dbase = dst->pitch * sy + (dst->bpp >> shift) * sx;
 		for (y = 0; y < h; y++) {
@@ -82,11 +82,11 @@ int __cdecl fcn_004763e0(int x, int y, int w, int h, BlitSurf* src, int sx, int 
 		}
 	}
 	if (dstLocked)
-		fcn_00475fd0(dst);
+		d2_LockSurface(dst);
 	else
 		d2_UnlockSurface(dst);
 	if (srcLocked)
-		fcn_00475fd0(src);
+		d2_LockSurface(src);
 	else
 		d2_UnlockSurface(src);
 	return 1;

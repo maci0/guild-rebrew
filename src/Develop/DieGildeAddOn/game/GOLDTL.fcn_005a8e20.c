@@ -38,7 +38,7 @@ extern char s_6b5c60[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_0046e830(int, int, int, int, int);
+void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_ClearWindowChildren(int, int);
@@ -71,7 +71,7 @@ void __cdecl d2_OpenRathausGebInfo(void)
 	d2_SetForm(dlg, 2);
 	w = d2_CurrentWindowId;
 	d2_SetForm(dlg, 0);
-	fcn_0046e830(-1, -1, d2_CurrentWindowId, w, 0x767);
+	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, w, 0x767);
 	d2_SetOverlayAnimation(0, 0);
 	*(int*) &((D2_WIN*)g_1015f40)[w].pad3c[0x238] = 0x5a;
 	do {

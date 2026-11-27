@@ -72,10 +72,7 @@ void __cdecl d2_EnterBuildingObjekt(void* p, int a, void* b)
 {
 }
 
-int __cdecl d2_LockSurface(void* a)
-{
-	return 0;
-}
+
 
 int __cdecl d3_BuildOctreeHistogram(void* dst, int n)
 {

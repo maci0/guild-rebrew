@@ -8,9 +8,9 @@ typedef struct {
 	char unused8;
 	char type;
 	char pad[0x21c - 10];
-} Rec_7f4ca0;
+} VOICE_ENTITY_RECORD;
 
-extern Rec_7f4ca0 g_7f4ca0[];
+extern VOICE_ENTITY_RECORD g_7f4ca0[];
 extern int g_774934;
 extern char g_6b5c60;
 extern char g_68a4cc[]; /* "_HS" */
@@ -31,7 +31,7 @@ int __cdecl sb_PreparePrioritizedVoice(int a0, char* text, int n);
 int __cdecl sb_PrepareVoice(int a0, char* text);
 
 /* ADDRESS: GOLDTL 0x004c2de0 */
-int __cdecl fcn_004c2de0(int code, int a1, char* text, int a3)
+int __cdecl d3snd_PrepareVoiceSample(int code, int bank, char* text, int variation)
 {
 	char num[0x14];
 	char tmp[0x10];
@@ -77,23 +77,23 @@ int __cdecl fcn_004c2de0(int code, int a1, char* text, int a3)
 
 		}
 		sprintf(buf, g_67728c, text, num);
-		res = sb_IsSampleType2(a1, buf);
-		if (a3 >= 0 && res == 0) {
-			sprintf(tmp, g_68a4c4, a3);
+		res = sb_IsSampleType2(bank, buf);
+		if (variation >= 0 && res == 0) {
+			sprintf(tmp, g_68a4c4, variation);
 			strcat(num, tmp);
 		}
 		sprintf(buf, g_67728c, text, num);
-		if (res != 0 && a3 >= 0) {
-			res = sb_PreparePrioritizedVoice(a1, buf, a3);
+		if (res != 0 && variation >= 0) {
+			res = sb_PreparePrioritizedVoice(bank, buf, variation);
 			if (res == 0) {
-				sprintf(buf, g_68a498, text, a3);
+				sprintf(buf, g_68a498, text, variation);
 			}
 			return res;
 		}
 	} else {
 		sprintf(buf, text);
 	}
-	res = sb_PrepareVoice(a1, buf);
+	res = sb_PrepareVoice(bank, buf);
 	if (res == 0) {
 		sprintf(buf, g_68a47c, text);
 	}

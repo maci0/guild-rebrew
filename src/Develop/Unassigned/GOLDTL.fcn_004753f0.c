@@ -27,7 +27,7 @@ typedef struct Quad {
 extern char s_6750e8[];
 
 /* ADDRESS: GOLDTL 0x004753f0 */
-void __cdecl fcn_004753f0(const char* name, unsigned char* pal)
+void __cdecl d2_LoadBmpPalette(const char* name, unsigned char* pal)
 {
 	BmpInfo bi;
 	Quad quads[0x100];

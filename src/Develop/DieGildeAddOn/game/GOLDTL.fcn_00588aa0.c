@@ -68,7 +68,7 @@ int __cdecl d3_PerturbParticleVelocity(float* p, float spread, float* dir, float
 int __cdecl cm_GetCommandStatus(int i);
 int __cdecl main_RunFrameLoop(int a, int b);
 int __cdecl evt_LoadGfxScript(const char* name);
-int __cdecl fcn_00428340(int h, int a, int b, int c, int d, int e);
+int __cdecl evt_CallScriptFunction(int h, int a, int b, int c, int d, int e);
 int __cdecl sb_PlayPrioritizedVoice(char* bank, const char* name, int prio, int loop,
 	int pan, int vol, int a);
 void __cdecl fcn_00589390(void);
@@ -213,19 +213,19 @@ int __cdecl d2_FireKanone(Emitter* emitter, char* building)
 		h = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 		h2 = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 		h3 = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
-		fcn_00428340(h, 4, 5, dy, 40, emitter->frame2);
-		fcn_00428340(h2, 4, dx, dy, ey, emitter->frame2);
-		fcn_00428340(h3, 4, 0, ex, ez, emitter->frame2);
+		evt_CallScriptFunction(h, 4, 5, dy, 40, emitter->frame2);
+		evt_CallScriptFunction(h2, 4, dx, dy, ey, emitter->frame2);
+		evt_CallScriptFunction(h3, 4, 0, ex, ez, emitter->frame2);
 		return sb_PlayPrioritizedVoice(0, "Explosion", 1, 1, 0x3f, 0x7f, 0);
 	}
 	if (sel == 2) {
 		h = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
 		h2 = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
-		fcn_00428340(h, 4, 5, 0, 40, emitter->frame1);
-		fcn_00428340(h2, 4, dx, dy, ey, emitter->frame1);
+		evt_CallScriptFunction(h, 4, 5, 0, 40, emitter->frame1);
+		evt_CallScriptFunction(h2, 4, dx, dy, ey, emitter->frame1);
 		return sb_PlayPrioritizedVoice(0, "Explosion", 2, 1, 0x3f, 0x7f, 0);
 	}
 	h = evt_LoadGfxScript("LOCATIONS\\DOMIZIL\\KANONE1.esc");
-	fcn_00428340(h, 4, 0, 0, 50, emitter->frame0);
+	evt_CallScriptFunction(h, 4, 0, 0, 50, emitter->frame0);
 	return sb_PlayPrioritizedVoice(0, "Explosion", 3, 1, 0x3f, 0x7f, 0);
 }

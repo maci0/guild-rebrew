@@ -3,7 +3,7 @@
 
 int __cdecl d3_PackSurfaceRgb(int, int, int);
 
-void __cdecl fcn_0047ca00(int a, int b, int c)
+void __cdecl d2_SetSolidColor16(int a, int b, int c)
 {
 	int r;
 	r = d3_PackSurfaceRgb(a, b, c);

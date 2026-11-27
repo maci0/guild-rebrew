@@ -59,11 +59,11 @@ extern int g_77e8a0;
 extern int d3_ActiveCamera;
 
 void __cdecl fcn_0047a040(int, int, int, int);
-int __cdecl fcn_0047cb60(int, int, int, int);
+int __cdecl d2_DrawSprite(int, int, int, int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char*, int);
-int __cdecl fcn_00469c30(int, int, int);
+int __cdecl d2_CreateElement(int, int, int);
 int __cdecl fcn_0046fcd0(int, int, char*);
 void __cdecl fcn_005279f0(int);
 char* __cdecl d2_SelectFont(int);
@@ -120,14 +120,14 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 	}
 	fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
 	if (g_774674) {
-		fcn_0047cb60(g_14ce860 - 0x80, 0, g_77250c, g_774674);
+		d2_DrawSprite(g_14ce860 - 0x80, 0, g_77250c, g_774674);
 	}
 	if (g_774678) {
-		fcn_0047cb60(g_14ce860 - 0x100, g_14ce864 - 0x80, g_77250c,
+		d2_DrawSprite(g_14ce860 - 0x100, g_14ce864 - 0x80, g_77250c,
 			     g_774678);
 	}
 	if (g_77467c) {
-		fcn_0047cb60(*(int*) (0x6a24d8 + g_77534c * 4), 0, g_77250c,
+		d2_DrawSprite(*(int*) (0x6a24d8 + g_77534c * 4), 0, g_77250c,
 			     g_77467c);
 	}
 
@@ -188,27 +188,27 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a0].value_05c = 1;
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a25a0].font = 0x55;
 
-		g_6a2588 = fcn_00469c30((short) (g_1040494 - 0x8d),
+		g_6a2588 = d2_CreateElement((short) (g_1040494 - 0x8d),
 					(short) (d2_ScreenHeight - 0x73), 0x583);
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2588].flags_1d0 = 0x43;
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2588].value_05c = 1;
 
-		g_6a258c = fcn_00469c30((short) (g_1040494 - 0x57),
+		g_6a258c = d2_CreateElement((short) (g_1040494 - 0x57),
 					(short) (d2_ScreenHeight - 0x4f), 0x7d9);
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a258c].flags_1d0 = three;
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a258c].value_05c = 1;
 
-		g_6a2584 = fcn_00469c30((short) (g_1040494 - 0x2a),
+		g_6a2584 = d2_CreateElement((short) (g_1040494 - 0x2a),
 					(short) (d2_ScreenHeight - 0x66), 0x584);
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2584].flags_1d0 = 0x43;
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2584].value_05c = 1;
 
-		g_6a2590 = fcn_00469c30((short) (g_1040494 - 0x4a), 0xd6,
+		g_6a2590 = d2_CreateElement((short) (g_1040494 - 0x4a), 0xd6,
 					0x585);
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2590].flags_1d0 = 0x43;
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2590].value_05c = 1;
 
-		g_6a2594 = fcn_00469c30((short) (g_1040494 - 0x48), 0xd7,
+		g_6a2594 = d2_CreateElement((short) (g_1040494 - 0x48), 0xd7,
 					0x551);
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].flags_1d0 = 0x43;
 		((D2_CONTROL_TL*) g_1015ea0)[g_6a2594].value_05c = 1;
@@ -349,10 +349,10 @@ hidden:
 			sprintf(fr.buf, (char*) 0x6a2e38, fr.name);
 			id = fcn_00465950(fr.buf);
 			if (id != -1) {
-				g_6a2580 = fcn_00469c30(
+				g_6a2580 = d2_CreateElement(
 					(short) (g_1040494 - 0x6e), 0x5b, id);
 			} else {
-				g_6a2580 = fcn_00469c30(
+				g_6a2580 = d2_CreateElement(
 					(short) (g_1040494 - 0x6e), 0x5b, 0x5b1);
 			}
 			((D2_CONTROL_TL*) g_1015ea0)[g_6a2580].flags_1d0 = 0x43;

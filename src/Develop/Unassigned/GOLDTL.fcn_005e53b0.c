@@ -39,12 +39,12 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00533a60(int, int, int *, int, ...);
+void __cdecl d2_CreateButtonRow(int, int, int *, int, ...);
 int __cdecl gm_CountBuildingExtensions(char *);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_BuildPersonStatusDesc(ITEM *);
 void __cdecl fcn_005ca740(int, int, int, int, ITEM *, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl amt_GetRoleLevel(int);
 int __cdecl d2_CheckActionBlocker(char *, int);
 int __cdecl io_FormatTextBuffer(char *, int, ...);
@@ -54,7 +54,7 @@ void __cdecl gm_ModifyHealth(int, int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl he_ShowZigeunerGroupMessage(unsigned short *, int, char **);
 void __cdecl fcn_00526120(char *, int);
-char *__cdecl fcn_005cd440(REQUEST *, char *, int, int);
+char *__cdecl d2_OpenTargetPicker(REQUEST *, char *, int, int);
 int __cdecl main_RunFrameLoop(void (__cdecl *)(void *), int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -99,7 +99,7 @@ void __cdecl fcn_005e53b0(void *arg)
     items[4].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) * 2 / 3 + 100;
     items[4].y = 220;
     d2_SetForm(window, 3);
-    fcn_00533a60(d2_CurrentWindowId, 0, buttons, 2, g_14b59fc, g_14b5a00);
+    d2_CreateButtonRow(d2_CurrentWindowId, 0, buttons, 2, g_14b59fc, g_14b5a00);
     do {
         if (refresh) {
             count = gm_CountBuildingExtensions((char *)arg) + 1;
@@ -114,7 +114,7 @@ void __cdecl fcn_005e53b0(void *arg)
                 d2_BuildPersonStatusDesc(&items[i]);
                 fcn_005ca740(items[i].x, items[i].y, d2_CurrentWindowId, 0x54, &items[i], 1);
                 if (i < count) {
-                    fcn_00472640(items[i].control, 1);
+                    d2_SetElementEnabled(items[i].control, 1);
                     ((D2_CONTROL_TL*) g_1015ea0)[items[i].control].value_05c = 1;
                     ((D2_CONTROL_TL*) g_1015ea0)[items[i].control].flags_1d0 = 3;
                     *(char**) (&((D2_CONTROL_TL*) g_1015ea0)[items[i].control].associated_object) = items[i].entity;
@@ -127,7 +127,7 @@ void __cdecl fcn_005e53b0(void *arg)
             d2_SetForm(window, 2);
             io_AppendText((int)g_6811b0, cost);
             io_AppendText(0x41b6, cost);
-            fcn_00472640(buttons[0], items[0].entity != 0 && cost != 0);
+            d2_SetElementEnabled(buttons[0], items[0].entity != 0 && cost != 0);
         }
         if (g_14ce8e0) g_774654 = 1;
         else if (g_100f1dc != -1) {
@@ -163,7 +163,7 @@ void __cdecl fcn_005e53b0(void *arg)
                         request.field8 = g_666018; request.fieldc = g_66601c;
                         request.enabled = 1; request.size = 0x400;
                         request.kind = 6; request.field14 = 2;
-                        p = fcn_005cd440(&request, i ? g_14b59f4 : g_14b59f0, 0, 0);
+                        p = d2_OpenTargetPicker(&request, i ? g_14b59f4 : g_14b59f0, 0, 0);
                         items[i].entity = p;
                         cache[i] = p ? *(int *)(p + 4) : -1;
                         refresh = 1;

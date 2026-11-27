@@ -4,7 +4,7 @@ extern volatile int g_6b7fac;
    versions (before 0x10055) carry no rotation block, so the two rotation
    floats are forced to 1.0f. */
 /* ADDRESS: GOLDTL 0x004ef770 */
-unsigned int __cdecl fcn_004ef770(void* file, int version)
+unsigned int __cdecl ls_LoadRenderSlots(void* file, int version)
 {
     int i;
 

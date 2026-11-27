@@ -15,7 +15,7 @@ extern char* g_1015ea0;
 extern Anim_100e7a0 g_100e7a0[0x30];
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00473030 */
-void __cdecl fcn_00473030(int slot, char mode)
+void __cdecl d2_SetControlAnimationState(int slot, char mode)
 {
 	Slot* s;
 

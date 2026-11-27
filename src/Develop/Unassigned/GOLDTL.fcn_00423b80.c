@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-int __cdecl fcn_00423b80(const char* name)
+int __cdecl sbs_GetAudioFormat(const char* name)
 {
 	int r;
 

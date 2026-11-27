@@ -6,7 +6,7 @@ extern float g_662d40[3];
 
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00455140(int, float*, float*);
-float __cdecl fcn_00451380(float*, float*);
+float __cdecl d3_SignedPlanarAngle(float*, float*);
 
 void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj)
 {
@@ -22,6 +22,6 @@ void __cdecl d3_ComputeObjectYawToTarget(float* out, int obj)
 	out[1] = 0;
 	out[2] = 0;
 	fcn_00455140(obj, g_662d40, v);
-	out[1] = fcn_00451380(g_662d40, v);
+	out[1] = d3_SignedPlanarAngle(g_662d40, v);
 	d3_SelectSceneContext(save, 1);
 }

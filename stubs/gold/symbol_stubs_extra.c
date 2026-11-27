@@ -149,16 +149,6 @@ void __cdecl ch_LoadCharacterMotion(char* e, char* name, int n)
 
 
 
-int __stdcall fcn_0041c460(int a1, int a2, int a3, int a4, int a5, int a6)
-{
-	return 0;
-}
-
-int __cdecl fcn_0041f350(int a)
-{
-	return 0;
-}
-
 int __cdecl evt_ParseSymbolDeclaration(char* a, int b)
 {
 	return 0;
@@ -221,10 +211,6 @@ int __cdecl fcn_00466330(int a, int b)
 	return 0;
 }
 
-void __cdecl fcn_00469880(int a)
-{
-}
-
 void __cdecl fcn_0046c310(int a)
 {
 }
@@ -233,20 +219,7 @@ void __cdecl d2_RenderMarkupText(int a, int b)
 {
 }
 
-void __cdecl fcn_0046dd60(int a, int b)
-{
-}
-
-void __cdecl fcn_0046f9b0(int a0, char* a1)
-{
-}
-
 int __cdecl d2_SetElementFont(int a, int b)
-{
-	return 0;
-}
-
-int __cdecl fcn_00473690(int a, int b)
 {
 	return 0;
 }
@@ -339,10 +312,6 @@ void __cdecl fcn_004a8700(void)
 {
 }
 
-void __cdecl fcn_004a8810(void)
-{
-}
-
 
 
 int __cdecl fcn_004acc00(int* a)
@@ -397,20 +366,11 @@ void __cdecl fcn_004bfe00(int a)
 
 
 
-int __cdecl fcn_004c5da0(int a, int b, int c, char* d, int e, char* f)
-{
-	return 0;
-}
-
 void __cdecl fcn_004ce430(void)
 {
 }
 
 
-
-void __cdecl fcn_004e71a0(void)
-{
-}
 
 
 
@@ -502,17 +462,7 @@ int __cdecl fcn_005963f0(int a, int b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_00596810(int a, int b)
-{
-	return 0;
-}
-
 int __cdecl fcn_00596b10(int a, int b, int c, int d)
-{
-	return 0;
-}
-
-int __cdecl fcn_005974e0(int a, int b)
 {
 	return 0;
 }
@@ -537,21 +487,7 @@ int __cdecl d2_ShowNewCartDialog(int a)
 	return 0;
 }
 
-int __cdecl fcn_005ba910(void)
-{
-	return 0;
-}
 
-
-
-void __cdecl fcn_005e7858(void)
-{
-}
-
-int __cdecl fcn_005e7891(int a)
-{
-	return 0;
-}
 
 void __cdecl fcn_005eaad0(void)
 {

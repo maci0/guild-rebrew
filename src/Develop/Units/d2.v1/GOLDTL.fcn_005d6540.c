@@ -12,7 +12,7 @@ void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "d2_gui.h"
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
@@ -25,7 +25,7 @@ void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void*, int);
 
 /* ADDRESS: GOLDTL 0x005d6540 */
-int __cdecl fcn_005d6540(char* a0, int* a1)
+int __cdecl d2_ShowGesetzDialog(char* entity, int* request)
 {
 	int rec[9];
 	int r;
@@ -41,43 +41,43 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 	int dlg;
 
 	r = 0;
-	if (a1[0] == 3) {
-		recp = a0;
-	} else if (a1[0] == 4) {
-		recp = (char*) a1[0x87];
+	if (request[0] == 3) {
+		recp = entity;
+	} else if (request[0] == 4) {
+		recp = (char*) request[0x87];
 		if (recp == 0) {
 			return 0x60;
 		}
 	} else {
 		return 0x60;
 	}
-	if (a1[0x85] == 1) {
+	if (request[0x85] == 1) {
 		limit = 0x80000;
-	} else if (a1[0x85] == 2) {
+	} else if (request[0x85] == 2) {
 		limit = 0x100000;
 	} else {
 		return 0x60;
 	}
-	if (a0[2] != 6) {
-		if (*(int*) (a0 + 0x194) < 2) {
+	if (entity[2] != 6) {
+		if (*(int*) (entity + 0x194) < 2) {
 			return 0x20;
 		}
-		if (gm_GetLawEntry(a1[1], rec) == 0) {
+		if (gm_GetLawEntry(request[1], rec) == 0) {
 			return 0x60;
 		}
-		if (a1[2] == rec[6]) {
+		if (request[2] == rec[6]) {
 			return 0x60;
 		}
-		if (a1[2] > rec[2]) {
+		if (request[2] > rec[2]) {
 			return 0x60;
 		}
-		if (a1[2] < rec[1]) {
+		if (request[2] < rec[1]) {
 			return 0x60;
 		}
-		gm_SetLawValue(a0, *(unsigned char*) rec, a1[2]);
-		cm_RequestModifyHealth(*(int*) (a0 + 4), -2);
+		gm_SetLawValue(entity, *(unsigned char*) rec, request[2]);
+		cm_RequestModifyHealth(*(int*) (entity + 4), -2);
 		cm_RequestChangeBits(*(int*) (recp + 4), 0x1c8, 4, limit, 0);
-		if (a0[2] != 6) {
+		if (entity[2] != 6) {
 			return 0;
 		}
 	}
@@ -86,7 +86,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 	keep = 1;
 	add = 0;
 	box = -1;
-	if (gm_GetLawEntry(a1[1], rec) == 0) {
+	if (gm_GetLawEntry(request[1], rec) == 0) {
 		return 0;
 	}
 	id = 0x13fd + *(unsigned char*) rec * 5;
@@ -125,9 +125,9 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 	do {
 		if (keep) {
 			if (d2_GetControlValue(ctl) - add != rec[6] && box != -1) {
-				fcn_00472640(box, 1);
+				d2_SetElementEnabled(box, 1);
 			} else {
-				fcn_00472640(box, 0);
+				d2_SetElementEnabled(box, 0);
 			}
 		}
 		if (g_14ce8e0 != 0) {
@@ -135,19 +135,19 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 		}
 		if (g_100f1dc != -1) {
 			if (g_100f1dc == 2) {
-				if (d2_CheckActionBlocker(a0, 2) != 0) {
+				if (d2_CheckActionBlocker(entity, 2) != 0) {
 					if (*(unsigned char*) ((char*) rec + 1) == 2) {
 						delta = 1 - rec[6];
 					} else {
 						delta = d2_GetControlValue(ctl) - add;
 					}
 					r = 0x80;
-					idx = gm_SetLawValue(a0, *(unsigned char*) rec, delta);
+					idx = gm_SetLawValue(entity, *(unsigned char*) rec, delta);
 					if (idx != -1) {
 						while (cm_GetCommandStatus(idx) == 0) {
 							cm_StepCommandQueue();
 						}
-						cm_RequestModifyHealth(*(int*) (a0 + 4), -2);
+						cm_RequestModifyHealth(*(int*) (entity + 4), -2);
 						cm_RequestChangeBits(*(int*) (recp + 4), 0x1c8, 4, limit, 0);
 					}
 					g_774654 = 1;
@@ -156,7 +156,7 @@ int __cdecl fcn_005d6540(char* a0, int* a1)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005d6540, 0x657c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_ShowGesetzDialog, 0x657c7) != 0);
 	d2_DestroyForm(dlg);
 	return r;
 }

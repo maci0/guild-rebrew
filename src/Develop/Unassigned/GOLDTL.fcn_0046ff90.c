@@ -17,10 +17,10 @@ typedef struct Slot {
 
 extern char* g_1015ea0;
 
-int __cdecl fcn_0046b520(const char* text, int font);
+int __cdecl d2_MeasureTextWidth(const char* text, int font);
 
 /* ADDRESS: GOLDTL 0x0046ff90 */
-void __cdecl fcn_0046ff90(int slot, char* text)
+void __cdecl d2_SetEditControlText(int slot, char* text)
 {
 	Slot* s;
 	char* par;
@@ -36,7 +36,7 @@ void __cdecl fcn_0046ff90(int slot, char* text)
 		s->len = n;
 		memmove(s->buf + n, s->buf, strlen(*(char**) (par + 0x3c)) - (s->buf - *(char**) (par + 0x3c)) + 1);
 		memcpy(s->buf, text, n);
-		s->w = fcn_0046b520(text, s->font);
+		s->w = d2_MeasureTextWidth(text, s->font);
 		strcpy(s->copy, text);
 	}
 }

@@ -4,7 +4,7 @@ int __cdecl atoi(char*);
 int __cdecl gm_GetLawEntry(int, void*);
 void __cdecl gm_SetLawValue(unsigned short*, unsigned char, int);
 
-struct range_4b0c90 {
+struct HST_LAW_RANGE {
 	char kind;
 	char strict;
 	short pad2;
@@ -20,7 +20,7 @@ struct range_4b0c90 {
 
 
 /* ADDRESS: GOLDTL 0x004b0c90 */
-int __cdecl fcn_004b0c90(int a1, int a2, char* text)
+int __cdecl hst_HandleGesetzRel(int unused1, int unused2, char* text)
 {
 	int ids[2];
 	int i;
@@ -33,7 +33,7 @@ int __cdecl fcn_004b0c90(int a1, int a2, char* text)
 		int sign = -1;
 		char signs[2][6] = { "MINUS", "PLUS" };
 		char names[2][32] = { "RECHTSPRECHUNG_HAERTE", "AEMTEREINKOMMEN" };
-		struct range_4b0c90* r;
+		struct HST_LAW_RANGE* r;
 
 		ids[0] = 0;
 		ids[1] = 0xf;
@@ -60,7 +60,7 @@ int __cdecl fcn_004b0c90(int a1, int a2, char* text)
 		if (*text != '_')
 			return 0;
 		id = ids[i];
-		r = (struct range_4b0c90*) names;
+		r = (struct HST_LAW_RANGE*) names;
 		if (gm_GetLawEntry(id, r) == 0)
 			return 0;
 		text++;

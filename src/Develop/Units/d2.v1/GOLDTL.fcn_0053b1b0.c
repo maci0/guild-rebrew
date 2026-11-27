@@ -16,7 +16,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
@@ -105,9 +105,9 @@ int __cdecl fcn_0053b1b0(void)
 				v_first = 0;
 			}
 			if (v_len != 0)
-				fcn_00472640(v_id, 0);
+				d2_SetElementEnabled(v_id, 0);
 			else
-				fcn_00472640(v_id, 1);
+				d2_SetElementEnabled(v_id, 1);
 			if (g_100f1dc != -1) {
 				if (g_100f1dc == 2 || g_14cf950 == 0x1c) {
 					v_ret = 1;

@@ -4,21 +4,21 @@ typedef struct {
 	char pad[0x24];
 	int n;
 	char pad2[0x30 - 0x28];
-} R429ce0;
+} EVT_VAR_INFO;
 
 // SIZE 0x124
 typedef struct {
 	char pad[0x108];
-	R429ce0* recs;
+	EVT_VAR_INFO* recs;
 	int f10c;
 	int a;
 	int b;
 	int f118;
 	int f11c;
 	int c;
-} S429ce0;
+} EVT_SCRIPT_SIZE_INFO;
 
-int __cdecl fcn_00429ce0(S429ce0* s)
+int __cdecl evt_CalcScriptMemSize(EVT_SCRIPT_SIZE_INFO* s)
 {
 	int n;
 	int i;

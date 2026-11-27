@@ -22,7 +22,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 #include "client_scene_loader.h"
 void __cdecl fcn_004428d0(char*, int, int);
-void __cdecl fcn_00476970(int);
+void __cdecl d2_ClearSurface(int);
 int __cdecl gm_GetSeason(int*);
 void __cdecl d3_ApplySceneLightingPreset(void);
 #include "Develop/Units/d3/d3_d3d.h"
@@ -60,7 +60,7 @@ void __cdecl fcn_004e4730(char* sceneName)
 		fcn_004428d0(((char*)g_6b8300), n >> 1, 1);
 	}
 	if ((((char*)cut_ActiveCutscene)[0x26] & 0x20) != 0)
-		fcn_00476970(g_77250c);
+		d2_ClearSurface(g_77250c);
 	if (gm_GetSeason(&(*(int*)&gm_GameTime)) == 3)
 		d3_ApplySceneLightingPreset();
 	g_6791c8 = -2;

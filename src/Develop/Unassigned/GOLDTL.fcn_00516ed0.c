@@ -15,7 +15,7 @@ void __cdecl evt_WaitForScriptExit(int);
 void __cdecl ch_ClearSceneActionFinishCallbacks(int);
 /* ADDRESS: GOLD 0x5136e0 */
 
-void __cdecl fcn_00516ed0(void)
+void __cdecl d3_CleanupBuildingScene(void)
 {
 	char* p;
 

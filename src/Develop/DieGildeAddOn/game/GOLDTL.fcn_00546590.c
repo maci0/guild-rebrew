@@ -38,7 +38,7 @@ char* __cdecl fcn_00442910(int parent, float* pos, float* dir, char* name);
 void __cdecl fcn_0043a3f0(char* a, char* b, COLOR546590 c);
 void __cdecl fcn_00414be0(char* p, unsigned char r, unsigned char g, unsigned char b);
 int __cdecl d3_CreateObjectAnimation(char* obj, FLAGS546590 fl, int n, FRAME546590* frames);
-int __cdecl fcn_00546480(char* entity);
+int __cdecl he_ArrangeEntityMarkers(char* entity);
 
 /* ADDRESS: GOLDTL 0x00546590 */
 char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char* entity)
@@ -84,7 +84,7 @@ char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char*
 		frames[1].rot[1] = 201.061935f;
 		frames[1].rot[2] = 0.0f;
 		d3_CreateObjectAnimation(obj, flags, 2, frames);
-		fcn_00546480(entity);
+		he_ArrangeEntityMarkers(entity);
 	}
 	return obj;
 }

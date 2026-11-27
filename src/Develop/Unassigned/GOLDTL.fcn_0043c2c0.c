@@ -4,14 +4,14 @@
 
 #include <stdlib.h>
 
-char __cdecl fcn_0043c140(int*, int, int, int);
+char __cdecl d3_IsFloorBlockUniform(int*, int, int, int);
 void __cdecl PrepareFloorWater(char*);
 typedef struct Tile Tile;
 void __cdecl fcn_0043c640(Tile*);
-void __cdecl fcn_0043b990(char*);
+void __cdecl d3_RebuildFloorMeshes(char*);
 
 /* ADDRESS: GOLDTL 0x0043c2c0 */
-void __cdecl fcn_0043c2c0(int* floor)
+void __cdecl d3_BuildFloorGeometry(int* floor)
 {
 	unsigned char div[3];
 	int mask;
@@ -46,7 +46,7 @@ void __cdecl fcn_0043c2c0(int* floor)
 			x1 = (x + 1) & mask;
 			((unsigned char*) floor[9])[y * w + x] =
 			    ((abs(h[y * w + x] - h[y1 * w + x1]) <= abs(h[y * w + x1] - h[y1 * w + x])) * 2
-			     | fcn_0043c140(floor, x, y, 1)) * 0x40;
+			     | d3_IsFloorBlockUniform(floor, x, y, 1)) * 0x40;
 		}
 	}
 	for (lv = 1; lv < 3; lv++) {
@@ -60,7 +60,7 @@ void __cdecl fcn_0043c2c0(int* floor)
 				((unsigned char*) floor[10 + lv - 1])[y * n + x] =
 				    ((abs(h[(floor[0] * y + x) * s] - h[y1 * floor[0] + x1])
 				      <= abs(h[floor[0] * s * y + x1] - h[y1 * floor[0] + x * s])) * 2
-				     | fcn_0043c140(floor, x * s, y * s, s)) * 0x40;
+				     | d3_IsFloorBlockUniform(floor, x * s, y * s, s)) * 0x40;
 			}
 		}
 	}
@@ -98,6 +98,6 @@ void __cdecl fcn_0043c2c0(int* floor)
 	*(float*) ((char*) floor + 0x802c) = 0.05f;
 	*(float*) ((char*) floor + 0x8030) = 0.25f;
 	fcn_0043c640((Tile*) floor);
-	fcn_0043b990((char*) floor);
+	d3_RebuildFloorMeshes((char*) floor);
 	*(unsigned char*) ((char*) floor + 0x8036) |= 1;
 }

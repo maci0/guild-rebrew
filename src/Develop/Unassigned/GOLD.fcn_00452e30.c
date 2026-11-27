@@ -3,7 +3,7 @@
 /* Frees the light node with the given id from the object's list at
  * +0x1e8 -> +0x198 (next at +8, id at +4); id 0 frees the whole list. */
 /* ADDRESS: GOLD 0x00452e30 */
-char __cdecl fcn_00452e30(char* obj, int id)
+char __cdecl d3_FreeObjectLightNodes(char* obj, int id)
 {
 	char* n;
 	char* next;

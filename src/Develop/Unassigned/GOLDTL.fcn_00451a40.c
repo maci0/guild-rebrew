@@ -4,7 +4,7 @@ void __cdecl d3_NormalizeVector(float* v);
 void __cdecl d3_MatrixToEulerAngles(float* m, float* e);
 
 /* ADDRESS: GOLDTL 0x00451a40 */
-void __cdecl fcn_00451a40(float* m, float* out, float* e)
+void __cdecl d3_ExtractBoxCenterAndAngles(float* corners, float* centerOut, float* anglesOut)
 {
     float basis[16];
     float u[4];
@@ -29,24 +29,24 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     basis[10] = 1.0f;
     basis[5] = 1.0f;
     basis[0] = 1.0f;
-    u[0] = m[0x10] - m[0x14];
-    u[1] = m[0x11] - m[0x15];
-    u[2] = m[0x12] - m[0x16];
-    v[0] = m[0] - m[4];
-    v[1] = m[1] - m[5];
-    v[2] = m[2] - m[6];
+    u[0] = corners[0x10] - corners[0x14];
+    u[1] = corners[0x11] - corners[0x15];
+    u[2] = corners[0x12] - corners[0x16];
+    v[0] = corners[0] - corners[4];
+    v[1] = corners[1] - corners[5];
+    v[2] = corners[2] - corners[6];
     u[0] = v[0] + u[0];
     u[1] = v[1] + u[1];
     u[2] = v[2] + u[2];
-    v[0] = m[0x18] - m[0x1c];
-    v[1] = m[0x19] - m[0x1d];
-    v[2] = m[0x1a] - m[0x1e];
+    v[0] = corners[0x18] - corners[0x1c];
+    v[1] = corners[0x19] - corners[0x1d];
+    v[2] = corners[0x1a] - corners[0x1e];
     u[0] = v[0] + u[0];
     u[1] = v[1] + u[1];
     u[2] = v[2] + u[2];
-    v[0] = m[8] - m[0xc];
-    v[1] = m[9] - m[0xd];
-    v[2] = m[0xa] - m[0xe];
+    v[0] = corners[8] - corners[0xc];
+    v[1] = corners[9] - corners[0xd];
+    v[2] = corners[0xa] - corners[0xe];
     t[0] = v[0] + u[0];
     t[1] = v[1] + u[1];
     t[2] = v[2] + u[2];
@@ -55,24 +55,24 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     basis[2] = t[2];
     d3_NormalizeVector(basis + 0);
 
-    u[0] = m[0x1c] - m[0x14];
-    u[1] = m[0x1d] - m[0x15];
-    u[2] = m[0x1e] - m[0x16];
-    v[0] = m[0xc] - m[4];
-    v[1] = m[0xd] - m[5];
-    v[2] = m[0xe] - m[6];
+    u[0] = corners[0x1c] - corners[0x14];
+    u[1] = corners[0x1d] - corners[0x15];
+    u[2] = corners[0x1e] - corners[0x16];
+    v[0] = corners[0xc] - corners[4];
+    v[1] = corners[0xd] - corners[5];
+    v[2] = corners[0xe] - corners[6];
     u[0] = v[0] + u[0];
     u[1] = v[1] + u[1];
     u[2] = v[2] + u[2];
-    v[0] = m[0x18] - m[0x10];
-    v[1] = m[0x19] - m[0x11];
-    v[2] = m[0x1a] - m[0x12];
+    v[0] = corners[0x18] - corners[0x10];
+    v[1] = corners[0x19] - corners[0x11];
+    v[2] = corners[0x1a] - corners[0x12];
     u[0] = v[0] + u[0];
     u[1] = v[1] + u[1];
     u[2] = v[2] + u[2];
-    v[0] = m[8] - m[0];
-    v[1] = m[9] - m[1];
-    v[2] = m[0xa] - m[2];
+    v[0] = corners[8] - corners[0];
+    v[1] = corners[9] - corners[1];
+    v[2] = corners[0xa] - corners[2];
     t[0] = v[0] + u[0];
     t[1] = v[1] + u[1];
     t[2] = v[2] + u[2];
@@ -81,24 +81,24 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     basis[6] = t[2];
     d3_NormalizeVector(basis + 4);
 
-    u[0] = m[4] - m[0x14];
-    u[1] = m[5] - m[0x15];
-    u[2] = m[6] - m[0x16];
-    v[0] = m[0xc] - m[0x1c];
-    v[1] = m[0xd] - m[0x1d];
-    v[2] = m[0xe] - m[0x1e];
+    u[0] = corners[4] - corners[0x14];
+    u[1] = corners[5] - corners[0x15];
+    u[2] = corners[6] - corners[0x16];
+    v[0] = corners[0xc] - corners[0x1c];
+    v[1] = corners[0xd] - corners[0x1d];
+    v[2] = corners[0xe] - corners[0x1e];
     u[0] = v[0] + u[0];
     u[1] = v[1] + u[1];
     u[2] = v[2] + u[2];
-    v[0] = m[0] - m[0x10];
-    v[1] = m[1] - m[0x11];
-    v[2] = m[2] - m[0x12];
+    v[0] = corners[0] - corners[0x10];
+    v[1] = corners[1] - corners[0x11];
+    v[2] = corners[2] - corners[0x12];
     u[0] = v[0] + u[0];
     u[1] = v[1] + u[1];
     u[2] = v[2] + u[2];
-    v[0] = m[8] - m[0x18];
-    v[1] = m[9] - m[0x19];
-    v[2] = m[0xa] - m[0x1a];
+    v[0] = corners[8] - corners[0x18];
+    v[1] = corners[9] - corners[0x19];
+    v[2] = corners[0xa] - corners[0x1a];
     t[0] = v[0] + u[0];
     t[1] = v[1] + u[1];
     t[2] = v[2] + u[2];
@@ -107,17 +107,17 @@ void __cdecl fcn_00451a40(float* m, float* out, float* e)
     basis[10] = t[2];
     d3_NormalizeVector(basis + 8);
 
-    d3_MatrixToEulerAngles(basis, e);
+    d3_MatrixToEulerAngles(basis, anglesOut);
 
     c[0] = g_6628a8;
     c[1] = g_6628a8;
     c[2] = g_6628a8;
     for (i = 0; i < 8; i++) {
-        c[0] += m[i * 4];
-        c[1] += m[i * 4 + 1];
-        c[2] += m[i * 4 + 2];
+        c[0] += corners[i * 4];
+        c[1] += corners[i * 4 + 1];
+        c[2] += corners[i * 4 + 2];
     }
-    out[0] = c[0] * 0.125f;
-    out[1] = c[1] * 0.125f;
-    out[2] = c[2] * 0.125f;
+    centerOut[0] = c[0] * 0.125f;
+    centerOut[1] = c[1] * 0.125f;
+    centerOut[2] = c[2] * 0.125f;
 }

@@ -2,7 +2,7 @@ extern int g_6b7d7c;
 
 
 
-int __cdecl fcn_0042a920(int, int);
+int __cdecl msx_SetSampleVolume(int, int);
 
 int __cdecl sb_SetVoiceVolume(int* state, int value)
 {
@@ -14,7 +14,7 @@ int __cdecl sb_SetVoiceVolume(int* state, int value)
 			if (value >= 0 && value <= 0x7f) {
 				if (state[9] != value) {
 					state[9] = value;
-					return fcn_0042a920(state[0], value);
+					return msx_SetSampleVolume(state[0], value);
 				}
 				return value;
 			}

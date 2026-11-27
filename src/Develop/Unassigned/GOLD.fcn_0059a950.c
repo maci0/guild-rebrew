@@ -21,7 +21,7 @@ void __cdecl d2_OpenMarktstandPanel(int, int);
 void __cdecl fcn_005c1110(void);
 void __cdecl d2_ShowBardPoemDialog(void);
 
-void __cdecl fcn_0059a950(int arg)
+void __cdecl d2_UpdateMarktplatzInteractions(int buildingId)
 {
 	char* c;
 	char* a;
@@ -49,25 +49,25 @@ void __cdecl fcn_0059a950(int arg)
 		return;
 	}
 	if (strcmp(((char*)g_7746a0), "ob_MARKTSTAND_TISCHLER_SCHMIEDE") == 0) {
-		d2_OpenMarktstandPanel(arg, 0x92);
+		d2_OpenMarktstandPanel(buildingId, 0x92);
 	}
 	else if (strcmp(((char*)g_7746a0), "ob_MARKTSTAND_STEINMETZ_WIRT") == 0) {
-		d2_OpenMarktstandPanel(arg, 0x93);
+		d2_OpenMarktstandPanel(buildingId, 0x93);
 	}
 	else if (strcmp(((char*)g_7746a0), "ob_MARKTSTAND_PARFUM_KRAEUTER") == 0) {
-		d2_OpenMarktstandPanel(arg, 0x94);
+		d2_OpenMarktstandPanel(buildingId, 0x94);
 	}
 	else if (strcmp(((char*)g_7746a0), "ob_MARKTSTAND_ROHSTOFFE") == 0) {
-		d2_OpenMarktstandPanel(arg, 0x95);
+		d2_OpenMarktstandPanel(buildingId, 0x95);
 	}
 	else if (strcmp(((char*)g_7746a0), "ob_MARKTSTAND_IMPORTEUR") == 0) {
-		d2_OpenMarktstandPanel(arg, 0x96);
+		d2_OpenMarktstandPanel(buildingId, 0x96);
 	}
 	else if (strcmp(((char*)g_7746a0), "ob_MARKTSTAND_KIRCHE") == 0) {
-		d2_OpenMarktstandPanel(arg, 0x97);
+		d2_OpenMarktstandPanel(buildingId, 0x97);
 	}
 	else if (strcmp(((char*)g_7746a0), "ob_MARKTSTAND_OKKULT") == 0) {
-		d2_OpenMarktstandPanel(arg, 0x2db);
+		d2_OpenMarktstandPanel(buildingId, 0x2db);
 	}
 	else if (strcmp(((char*)g_7746a0), "contact_ob_SCHWARZES_BRETT") == 0 || strcmp(((char*)g_7746a0), "ob_SCHWARZES_BRETT") == 0) {
 		fcn_005c1110();

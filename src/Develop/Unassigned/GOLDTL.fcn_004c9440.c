@@ -28,7 +28,7 @@ void __cdecl fcn_004fc180(void);
 void __cdecl gm_CollectPopulationStats(void);
 void __cdecl fcn_0047da70(void);
 void __cdecl ai_EvaluateMeister(char*);
-void __cdecl fcn_0047da10(void);
+void __cdecl ai_StepEntityTurns(void);
 void __cdecl gm_TickStampedItems(void);
 void __cdecl gm_UpdateGraveyardFlags(void);
 
@@ -54,7 +54,7 @@ int __cdecl cm_ExAdvanceGameTick(char* x, char* out)
 				if (*(unsigned short*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i])) != 0xffff)
 					ai_EvaluateMeister(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]));
 			}
-			fcn_0047da10();
+			ai_StepEntityTurns();
 		}
 		gm_TickStampedItems();
 		gm_UpdateGraveyardFlags();

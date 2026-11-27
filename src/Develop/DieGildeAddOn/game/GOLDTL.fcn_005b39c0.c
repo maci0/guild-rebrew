@@ -4,7 +4,7 @@ int __cdecl main_RunFrameLoop(void* fn, int line);
 int __cdecl io_AppendText(int fmt, ...);
 float __cdecl eval_ObjektPreis2Credits(int id, int pct);
 int __cdecl d2_UpdateWindowDrag(void* win);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 #include "Develop/Units/d2.v1/d2_window_view.h"
 extern char* lpObjektePROT;
@@ -80,5 +80,5 @@ void __cdecl d2_ShowLagerInventoryDebug(void)
 			d2_UpdateWindowDrag(&((D2_WIN*)g_1015f40)[idx]);
 		} while (main_RunFrameLoop((void*) 0x5b39c0, 0x657c7) != 0);
 	}
-	fcn_0046f280(idx);
+	d2_CloseWindow(idx);
 }

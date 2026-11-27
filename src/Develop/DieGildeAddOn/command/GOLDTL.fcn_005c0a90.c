@@ -20,7 +20,7 @@ extern char g_6ac494[];
 
 int __cdecl d2_CheckActionBlocker(void*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-unsigned short* __cdecl fcn_005cd440(int*, char*, int, int);
+unsigned short* __cdecl d2_OpenTargetPicker(int*, char*, int, int);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 void __cdecl fcn_00526120(char*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -61,12 +61,12 @@ void __cdecl d2_ShowAnschwaerzenDialog(int selected_obj)
 	msg[2] = (*(int*)&g_666018);
 	msg[3] = g_66601c;
 	io_FormatTextBuffer(buf, 0x175f);
-	accused = fcn_005cd440(msg, buf, 0, 0);
+	accused = d2_OpenTargetPicker(msg, buf, 0, 0);
 	if (accused == 0) {
 		return;
 	}
 	io_FormatTextBuffer(buf, 0x1760, *accused);
-	judge = fcn_005cd440(msg, buf, 0, 0);
+	judge = d2_OpenTargetPicker(msg, buf, 0, 0);
 	if (judge == 0) {
 		return;
 	}

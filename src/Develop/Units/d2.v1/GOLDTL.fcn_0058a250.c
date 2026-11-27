@@ -36,7 +36,7 @@ extern pos14_7f4c00 gm_GameTime;
 #include "GOLDTL.fcn_0058a250_gconf.h"
 extern char g_7f4ca4[];
 
-void* __cdecl fcn_005cd440(void*, char*, int, int);
+void* __cdecl d2_OpenTargetPicker(void*, char*, int, int);
 int __cdecl amt_GetRoleLevel(int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -44,8 +44,8 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00468bb0(int, int, ...);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
+void __cdecl d2_SetValueGaugeStepLabels(int, int, ...);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetControlValue(int);
@@ -89,7 +89,7 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 	q[0] = 1;
 	q[1] = 0x400;
 	q[4] = 6;
-	targetEntity = (char*) fcn_005cd440(q, (char*) *(int*) 0x14b5310, 0, 0);
+	targetEntity = (char*) d2_OpenTargetPicker(q, (char*) *(int*) 0x14b5310, 0, 0);
 	if (targetEntity == 0) {
 		d3_EndCameraAndUiMode();
 		return;
@@ -108,9 +108,9 @@ void __cdecl d2_RunSpyCabinetDialog(int a0)
 	*(int*) (elem * 0x2f4 + (int) g_1015ea0 + 0x6c) = 1;
 	*(int*) (elem * 0x2f4 + (int) g_1015ea0 + 0x18) = *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c);
 	d2_SetElementFont(elem, 0x54);
-	elem = fcn_004677e0(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);
+	elem = d2_AddWindowValueGauge(0x57, 0x14, 0xc8, 0, 0x64, 0x7b, 2, d2_CurrentWindowId);
 	d2_SetElementValue(elem, 0, 2, 0, 1);
-	fcn_00468bb0(elem, 3, *(int*) 0x14b5320, *(int*) 0x14b5324, *(int*) 0x14b5328);
+	d2_SetValueGaugeStepLabels(elem, 3, *(int*) 0x14b5320, *(int*) 0x14b5324, *(int*) 0x14b5328);
 	d2_SetForm(dlg, 3);
 	v16 = io_AppendText(0x4003);
 	confirmButton = d2_GetWindowListItem(dlg, 3, v16);

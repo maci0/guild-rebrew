@@ -52,7 +52,7 @@ void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -67,7 +67,7 @@ int __cdecl d2_ClearWindowChildren(int, int);
 char* __cdecl gm_FindPublicTreasury(int);
 int __cdecl d2_CheckFundsAndNotify(int, int, int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl lc_GebaeudeAusrichten(int, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 void __cdecl d3_ComputeObjectYawToTarget(float*, int);
@@ -118,7 +118,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 	*(int*) (i + 0x10162ec) = 0x18;
 	*(int*) (i + 0x10162f0) = 0x18;
 	*(int*) (i + 0x10162f4) = 0x18;
-	fcn_00533f40(0x20c, 0x168, d2_CurrentWindowId, fcn_00472830(hwnd, 3), 0x5a, &ida, &idc, &idb);
+	fcn_00533f40(0x20c, 0x168, d2_CurrentWindowId, d2_GetFormWindow(hwnd, 3), 0x5a, &ida, &idc, &idb);
 	d2_SetForm(hwnd, 1);
 	io_AppendText(0x17eb);
 	d2_SetForm(hwnd, 2);
@@ -235,7 +235,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 					goto skip_place;
 				}
 			}
-			fcn_00471af0(hwnd, 0);
+			d2_SetFormVisibility(hwnd, 0);
 			obj = (char*) lc_GebaeudeAusrichten(i, path);
 			if (obj != 0) {
 				msg.f28 = gm_GameTime;
@@ -260,7 +260,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 				cm_SendCopyEntityData((char*) &msg);
 				g_774654 = 1;
 			} else {
-				fcn_00471af0(hwnd, 1);
+				d2_SetFormVisibility(hwnd, 1);
 			}
 		}
 skip_place:

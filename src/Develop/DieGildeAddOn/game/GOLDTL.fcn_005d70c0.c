@@ -20,7 +20,7 @@ int __cdecl gm_CalcBecircenFavor(char*, char*, int);
 void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-int __cdecl fcn_005cd440(Query*, char*, int, void*);
+int __cdecl d2_OpenTargetPicker(Query*, char*, int, void*);
 int __cdecl d2_ShowBecircenDialog(unsigned short*);
 
 int __cdecl gm_HandleBecircen(char* e, char* o)
@@ -58,7 +58,7 @@ int __cdecl gm_HandleBecircen(char* e, char* o)
 		} else {
 			io_FormatTextBuffer(buf, 0x1dae, 0x1db0);
 		}
-		if (fcn_005cd440(&q, buf, 0, (void*) d2_ShowBecircenDialog) != 0) {
+		if (d2_OpenTargetPicker(&q, buf, 0, (void*) d2_ShowBecircenDialog) != 0) {
 			r = 1;
 		}
 	}

@@ -4,7 +4,7 @@ typedef struct Stat0049c800 {
 
 extern void __cdecl gm_GetLawEntry(int a, Stat0049c800* p);
 extern void __cdecl ai_ComputeActionScore(void* a0, void* a1, int a2, int a3, Stat0049c800* p);
-extern void __cdecl fcn_004a4410(void* a0, void* a1, int a2, int a3, int a4, int a5, int a6);
+extern void __cdecl ai_ComputeBaseActionScore(void* a0, void* a1, int a2, int a3, int a4, int a5, int a6);
 
 
 /* ADDRESS: GOLDTL 0x0049c800 */
@@ -19,5 +19,5 @@ void __cdecl ai_ScoreDrohen(int* out1, int* out2, int a2, int a3, int a4, int a5
 		ai_ComputeActionScore(out1, out2, a2, a3, &st);
 		return;
 	}
-	fcn_004a4410(out1, out2, a2, a3, a4, a5, a6);
+	ai_ComputeBaseActionScore(out1, out2, a2, a3, a4, a5, a6);
 }

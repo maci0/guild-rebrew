@@ -6,7 +6,7 @@ extern __int64 g_666018;
 extern int g_66601c;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
-int __cdecl fcn_005cd440(int*, char*, int, int);
+int __cdecl d2_OpenTargetPicker(int*, char*, int, int);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
 unsigned int __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
@@ -43,7 +43,7 @@ unsigned int __cdecl gm_LowerTargetStandingWithPeers(ENTITY_RECORD_VIEW* actor, 
 		query[1] = 0x400;
 		query[4] = 6;
 		query[3] = g_66601c;
-		target = (ENTITY_RECORD_VIEW*) fcn_005cd440((int*) query, pickerTitle, 0, 0);
+		target = (ENTITY_RECORD_VIEW*) d2_OpenTargetPicker((int*) query, pickerTitle, 0, 0);
 	} else {
 		target = (ENTITY_RECORD_VIEW*) gm_LookupEntityRecordById(request[1]);
 	}

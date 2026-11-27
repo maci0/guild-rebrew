@@ -16,7 +16,7 @@ extern float g_6629c0;
 extern double g_6629c8;
 extern double g_664e60;
 
-void __cdecl fcn_004fad10(void);
+void __cdecl gm_RebuildCrimeGrid(void);
 int __cdecl gm_PosToStatsGrid(char*, int*, int*);
 float __cdecl gm_GetLiteracyRate(void);
 float __cdecl fcn_004fc3a0(int*);
@@ -68,7 +68,7 @@ void __cdecl gm_CollectOccupancyStats(float* out)
 	weight_a = 0;
 	weight_b = 0;
 	accum = 0.0f;
-	fcn_004fad10();
+	gm_RebuildCrimeGrid();
 	rec = (char*) g_7f4e0c; do {
 		if (*(short*) (rec - 0x16c) == -1) {
 			continue;

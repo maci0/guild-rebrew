@@ -4,12 +4,12 @@ void* __cdecl fcn_0064f026(int, int);
 float __cdecl fcn_0064d62e(void*);
 
 /* ADDRESS: GOLDTL 0x0044d290 */
-void __cdecl fcn_0044d290(int a1, int a2)
+void __cdecl d3_ParseMatVTile(int unused, int ctx)
 {
 	char* base;
 	float value;
 
 	value = fcn_0064d62e(fcn_0064f026(0, 0x662d18));
-	base = *(char**) (a2 + 0x10);
-	*(float*) (base + *(int*) (a2 + 8) * 0xe0 + 0xd0) = value;
+	base = *(char**) (ctx + 0x10);
+	*(float*) (base + *(int*) (ctx + 8) * 0xe0 + 0xd0) = value;
 }

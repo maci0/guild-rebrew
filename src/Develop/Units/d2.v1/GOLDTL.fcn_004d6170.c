@@ -19,7 +19,7 @@ extern int g_aed32c;
 extern char* g_14a79c0[];
 typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } Building4d6170;
 
-void __cdecl fcn_00475220(char*);
+void __cdecl d2_SetMouseTooltip(char*);
 void __cdecl fcn_00533a40(char*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, ...);
@@ -101,7 +101,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	self = ctx;
 	mode = 0;
 	rec = 0;
-	fcn_00475220(g_6b5c60);
+	d2_SetMouseTooltip(g_6b5c60);
 	fcn_00533a40(g_6b5c60);
 	if (*(int*) (self + 0x10c) != -1) {
 		ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x10c));

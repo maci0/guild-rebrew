@@ -60,8 +60,8 @@ int __cdecl fcn_0047ccd0(int, int, int, char*, int);
 int __cdecl d2_QueueTexturedQuad(int, int, int, int, int, int*);
 void __cdecl d2_SetQuadVertexColor(int*, unsigned char, unsigned char, unsigned char);
 char* __cdecl d2_SelectFont(int idx);
-void __cdecl fcn_00468c30(int slot, int n, char* out);
-int __cdecl fcn_0046b520(char* text, int font);
+void __cdecl d2_GetValueGaugeStepLabel(int slot, int n, char* out);
+int __cdecl d2_MeasureTextWidth(char* text, int font);
 void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, unsigned char flags);
 int __cdecl fcn_0046bd20(int, int, int, int, int, int, int);
 void __cdecl fcn_00479e00(unsigned char r, unsigned char g, unsigned char b);
@@ -102,7 +102,7 @@ typedef struct {
 #define FLD(base, off)	(*(int*) ((char*) (base) + (off)))
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00467920 */
-void __cdecl fcn_00467920(int a0, int a1)
+void __cdecl d2_DrawValueGauge(int a0, int a1)
 {
 	fcn_00467920_frame f;
 	int* e;
@@ -459,7 +459,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			fcn_0047cba0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) - GLYPH_W(H3) / 2
 				     + f.v28, (*(D2_CONTROL_TL*) e).y, (int) b, (char*) f.v14, 3);
 			if (*(char*) ((char*) e + 0xe8)) {
-				fcn_00468c30(a0, f.v30, f.buf);
+				d2_GetValueGaugeStepLabel(a0, f.v30, f.buf);
 				d2_SelectFont((*(D2_CONTROL_TL*) e).font ? (*(D2_CONTROL_TL*) e).font
 						     : d2_DefaultFont + 1);
 				f.v2c = GLYPH_W(H3);
@@ -508,7 +508,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			}
 			sprintf(f.v3c, str_67d444, f.v38);
 			n = (d2_FontHeight - GLYPH_H(h0)) / 2 - 1;
-			x = fcn_0046b520(f.v3c, d2_CurrentFont);
+			x = d2_MeasureTextWidth(f.v3c, d2_CurrentFont);
 			d2_DrawDefaultFontText((*(D2_CONTROL_TL*) e).x - x - 4, (*(D2_CONTROL_TL*) e).y - n,
 				     (int) b, f.v3c, 0);
 			sprintf(f.v3c, str_67d444, f.v10);
@@ -525,7 +525,7 @@ void __cdecl fcn_00467920(int a0, int a1)
 			y = (*(D2_CONTROL_TL*) e).y - 0xd;
 			n = 8;
 			if (f.v20 & 0x80) {
-				x = (*(D2_CONTROL_TL*) e).x - fcn_0046b520((char*) e + 0xa8, d2_DefaultFont) - 0x18;
+				x = (*(D2_CONTROL_TL*) e).x - d2_MeasureTextWidth((char*) e + 0xa8, d2_DefaultFont) - 0x18;
 				y = (*(D2_CONTROL_TL*) e).y;
 				n = 0x10;
 			}

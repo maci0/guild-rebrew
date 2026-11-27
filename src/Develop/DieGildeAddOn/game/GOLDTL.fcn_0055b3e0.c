@@ -5,9 +5,9 @@ void __cdecl fcn_00549b80(void);
 void __cdecl he_StartElectionCampaign(void);
 void __cdecl he_RunElectionCampaign(void);
 void __cdecl he_AllocPredigt(void);
-void __cdecl fcn_0054a6a0(void);
+void __cdecl he_RunPredigt(void);
 void __cdecl fcn_0054aa70(void);
-void __cdecl fcn_0054b130(void);
+void __cdecl he_StartAction0x2d(void);
 void __cdecl he_StartAction0x2e(void);
 void __cdecl he_HandleAction0x2e(void);
 void __cdecl fcn_0054b420(void);
@@ -129,13 +129,13 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(42, (void*) he_StartElectionCampaign, (void*) he_RunElectionCampaign) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(43, (void*) he_AllocPredigt, (void*) fcn_0054a6a0) != 0) {
+	if (he_RegisterHandler(43, (void*) he_AllocPredigt, (void*) he_RunPredigt) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(44, (void*) fcn_0054aa70, (void*) 0x0054ac70) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(45, (void*) fcn_0054b130, (void*) 0x54b140) != 0) {
+	if (he_RegisterHandler(45, (void*) he_StartAction0x2d, (void*) 0x54b140) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(46, (void*) he_StartAction0x2e, (void*) he_HandleAction0x2e) != 0) {

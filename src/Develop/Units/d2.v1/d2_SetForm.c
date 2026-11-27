@@ -18,8 +18,8 @@ extern char s_67d7d0[];
 
 #include "GOLDTL.fcn_00472960_gconf.h"
 
-void __cdecl fcn_00475fd0(void*);
-int __cdecl fcn_00476b10(int x, int y, unsigned char r, unsigned char g, unsigned char b, void* s);
+void __cdecl d2_LockSurface(void*);
+int __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g, unsigned char b, void* s);
 void __cdecl d2_UnlockSurface(void*);
 
 /* ADDRESS: GOLDTL 0x004727a0 */

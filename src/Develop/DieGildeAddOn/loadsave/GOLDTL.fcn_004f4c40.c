@@ -5,7 +5,7 @@ typedef struct
 {
 	int id;
 	char pad4[0x20];
-} fcn_004f4c40_Slot;
+} CRIME_SLOT_STUB;
 // SIZE 0x24
 
 #pragma pack(push, 1)
@@ -40,7 +40,7 @@ extern Pair_99f800 g_99f800[0x800];
 #include "Develop/DieGildeAddOn/loadsave/loadsave.h"
 
 /* ADDRESS: GOLDTL 0x004f4c40 */
-int __cdecl fcn_004f4c40(void* f)
+int __cdecl ls_LoadCrimeRecords(void* f)
 {
 	int ver;
 	unsigned int n1;
@@ -56,7 +56,7 @@ int __cdecl fcn_004f4c40(void* f)
 	if (ver != 0x1d)
 		return 0;
 	for (i = 0; i < 0x1d; i++) {
-		if (ls_ReadVfsDataChecked(&((fcn_004f4c40_Slot*)g_68ff80)[i].id, 4, 1, f) == 0)
+		if (ls_ReadVfsDataChecked(&((CRIME_SLOT_STUB*)g_68ff80)[i].id, 4, 1, f) == 0)
 			return 0;
 	}
 	if (ls_ReadVfsDataChecked(&cm_LastCrimeId, 4, 1, f) == 0)

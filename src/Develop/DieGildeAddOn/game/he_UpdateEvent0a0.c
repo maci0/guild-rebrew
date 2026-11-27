@@ -16,7 +16,7 @@ void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, char*,
 int __cdecl init_EnsureObjektSceneContext(int);
 void __cdecl d3_SelectSceneContext(int, int);
 void* __cdecl evt_LoadGfxScript(char*);
-void __cdecl fcn_00428340(void*, int, int);
+void __cdecl evt_CallScriptFunction(void*, int, int);
 void __cdecl he_FreeAction(char*);
 void __cdecl he_AwardEvent0a0Bonus(char*);
 int __cdecl cm_SendSetHE(int, char*);
@@ -59,7 +59,7 @@ void __cdecl he_UpdateEvent0a0(char* p)
             if (e != 0) {
                 *(int*) (e + 0x104) = *(int*) (wnd + 2);
                 *(int*) (e + 0xc8c) = 1;
-                fcn_00428340(e, 1, *(int*) (p + 0xac));
+                evt_CallScriptFunction(e, 1, *(int*) (p + 0xac));
             }
             d3_SelectSceneContext(gfx, 1);
         }

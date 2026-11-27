@@ -26,7 +26,7 @@ int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
+int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
 int __cdecl fcn_0046f940(int, char*);
 int __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl io_AppendText(int, ...);
@@ -115,7 +115,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[8] = 0xe;
 	*(int*) &((D2_WIN*)((char*)g_1015f40 + k))->pad3a8[12] = 0xe;
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x742);
-	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, fcn_00472830(h, 2, 0x78, &v16, &v15, &item));
+	fcn_00533f40(0x270, 0x15e, d2_CurrentWindowId, d2_GetFormWindow(h, 2, 0x78, &v16, &v15, &item));
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[item].font)) = 0x54;
 	d2_SetOverlayAnimation(0, 0);
 	do {

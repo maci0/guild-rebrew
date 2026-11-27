@@ -37,7 +37,7 @@ typedef struct {
     out[2] = g_1042168 * z + t.z
 
 /* ADDRESS: GOLDTL 0x00440260 */
-unsigned int __cdecl fcn_00440260(int a0, int a1, int gridX, int gridY)
+unsigned int __cdecl d3_ProjectFloorCellBounds(int a0, int a1, int gridX, int gridY)
 {
     PROJECTED_VECTOR q;
     PROJECTED_VECTOR t;

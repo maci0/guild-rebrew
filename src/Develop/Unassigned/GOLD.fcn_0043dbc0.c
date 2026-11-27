@@ -3,7 +3,7 @@ extern unsigned int g_fb9084;
 extern void* g_fb9074;
 void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_0045cdf0(char*);
+void __cdecl d3_ClearObjectOverlayCoords(char*);
 
 typedef struct {
     char prefix[0x40];
@@ -81,7 +81,7 @@ void __cdecl d3_InflateObject(char* object)
         return;
     }
     object[0x210] |= 4;
-    fcn_0045cdf0(object);
+    d3_ClearObjectOverlayCoords(object);
     for (group = 0; group <= 3; group++) {
         bank = (INFLATED_BANK*)(*(char**)(object + 0x1ec) + 0xf4 + group * 0x198);
         source = bank->source;

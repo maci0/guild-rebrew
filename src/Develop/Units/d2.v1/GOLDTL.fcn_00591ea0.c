@@ -17,9 +17,9 @@ int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 int __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
-void __cdecl fcn_00533a60(int, int, int*, int, int, int);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, int, int);
 void __cdecl fcn_00476b60(void);
 void __cdecl d2_ClearRadioGroup(int);
 int __cdecl d2_ClearWindowChildren(int, int);
@@ -34,7 +34,7 @@ void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_ClearBookmarkSlot(char*);
 void __cdecl d2_SaveBookmarkSlot(int);
 void __cdecl d2_UpdateRadioGroup(int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_FocusBookmarkSlot(void);
 int __cdecl main_RunFrameLoop(int, int); void __cdecl d2_DestroyForm(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -75,10 +75,10 @@ void __cdecl fcn_00591ea0(void)
 	io_AppendText(0x205b);
 	d2_SetForm(win, 0);
 	fcn_00533f40(0x214, 0x168, *(int*) &d2_CurrentWindowId,
-		fcn_00472830(win, 1),
+		d2_GetFormWindow(win, 1),
 		0x38, &b1, &b2, &b3);
 	d2_SetForm(win, 3);
-	fcn_00533a60(*(int*) &d2_CurrentWindowId, 0, clicks, 2,
+	d2_CreateButtonRow(*(int*) &d2_CurrentWindowId, 0, clicks, 2,
 		*(int*) 0x14ad4cc, *(int*) 0x14ad4c8);
 	fcn_00476b60();
 	redraw = 1;
@@ -148,8 +148,8 @@ void __cdecl fcn_00591ea0(void)
 		d2_UpdateRadioGroup(last_win);
 		i = *(int*) (y + (unsigned long)&g_102cbc8) != -1 &&
 			*(int*) (*(int*) (y + (unsigned long)&g_102cbc8) * 0xc + 0x779d04) != -1;
-		fcn_00472640(clicks[1], i);
-		fcn_00472640(clicks[0], *(int*) (y + (unsigned long)&g_102cbc8) != -1);
+		d2_SetElementEnabled(clicks[1], i);
+		d2_SetElementEnabled(clicks[0], *(int*) (y + (unsigned long)&g_102cbc8) != -1);
 		d2_FocusBookmarkSlot();
 	} while (main_RunFrameLoop((int) fcn_00591ea0, 0x657c7));
 	d2_ClearRadioGroup(last_win);

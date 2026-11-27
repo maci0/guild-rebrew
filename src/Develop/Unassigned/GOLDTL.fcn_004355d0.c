@@ -14,7 +14,7 @@ typedef struct Ent7c {
 // SIZE 0x7c
 
 /* ADDRESS: GOLDTL 0x004355d0 */
-void __cdecl fcn_004355d0(char* a, const char* name)
+void __cdecl d3_DeactivateObjectAnimation(char* a, const char* name)
 {
 	int i;
 	Ent7c* e;

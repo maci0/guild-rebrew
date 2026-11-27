@@ -26,7 +26,7 @@ extern int g_14aacd0;
 int __cdecl amt_CheckHighOfficeEligibility(char*);
 void __cdecl fcn_00526120(int, int);
 void __cdecl d2_CheckActionBlocker(char*, int);
-void __cdecl fcn_005cd440(Query*, int, int, void*);
+void __cdecl d2_OpenTargetPicker(Query*, int, int, void*);
 void __cdecl fcn_005cde50(void*, int, int);
 int __cdecl fcn_005aa860(unsigned short*);
 void __cdecl fcn_005aa9a0(int);
@@ -54,7 +54,7 @@ void __cdecl d2_RunHighOfficePrivilegeDialog(void)
 		q.x4 = 0xc00;
 		q.x10 = 6;
 		q.x18 = 1;
-		fcn_005cd440(&q, g_14aad18, 0, (void*) fcn_005aa860);
+		d2_OpenTargetPicker(&q, g_14aad18, 0, (void*) fcn_005aa860);
 	} else if (lvl == 0x1f || lvl == 0x21) {
 		fcn_005cde50((void*) fcn_005aa9a0, g_14aacd0, 0);
 	} else if (lvl == 0x20) {

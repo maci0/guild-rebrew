@@ -6,7 +6,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl d2_OpenSeanceDialog(int, char*, int);
 
 int __cdecl d2_RunSeanceMenu(int entity, char* s, int resultOut)
@@ -24,9 +24,9 @@ int __cdecl d2_RunSeanceMenu(int entity, char* s, int resultOut)
 			for (i = 0; i < 8; i++) {
 				if (d2_CurrentElementId == *(int*) (s + 0x28 + i * 0xc)) {
 					*(int*) (s + 0x88) = i;
-					fcn_00471af0(*(int*) s, 0);
+					d2_SetFormVisibility(*(int*) s, 0);
 					r = d2_OpenSeanceDialog(entity, s, resultOut);
-					fcn_00471af0(*(int*) s, 1);
+					d2_SetFormVisibility(*(int*) s, 1);
 					break;
 				}
 			}

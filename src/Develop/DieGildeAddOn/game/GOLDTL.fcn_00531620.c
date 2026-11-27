@@ -59,7 +59,7 @@ void* __cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(char*);
 int __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char __cdecl fcn_0045bad0(int, int, int, int*, int*);
-void __cdecl fcn_00473690(int, int);
+void __cdecl d2_AddDisplayCounter(int, int);
 void __cdecl ResetDisplayCounters(void);
 void __cdecl d3snd_PlaySelectedObjectClickSound(void);
 void __cdecl cm_RequestWalkOnPath(int, int, int, int);
@@ -301,7 +301,7 @@ La5d:
 				if (f != 0 && *(int*) (f + 1) == *(int*) (s->owner + 0x2c)
 				    && !(g_7746c8 == 0
 				         && (g_7746cc == 0 || *(unsigned short*) g_7746cc == 0x120))) {
-					fcn_00473690(s->f18c, 1);
+					d2_AddDisplayCounter(s->f18c, 1);
 				}
 			}
 		}

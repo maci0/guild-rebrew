@@ -3,14 +3,14 @@ void __cdecl d3_MatrixToEulerAngles(float* m, float* v);
 void __cdecl d3_SetObjectRotation(char* p, float* v);
 
 /* ADDRESS: GOLDTL 0x004526f0 */
-void __cdecl fcn_004526f0(char* a, int b, int c)
+void __cdecl d3_SetEffectDirection(char* effect, int dir, int angle)
 {
 	float m[16];
 	float v[3];
 
-	if (a != 0) {
-		fcn_00451500(b, c, m);
+	if (effect != 0) {
+		fcn_00451500(dir, angle, m);
 		d3_MatrixToEulerAngles(m, v);
-		d3_SetObjectRotation(a + 0xe8, v);
+		d3_SetObjectRotation(effect + 0xe8, v);
 	}
 }

@@ -1,6 +1,6 @@
 char* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
 unsigned short __cdecl gm_RandomMod(int n);
-int __cdecl fcn_004a4410(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
+int __cdecl ai_ComputeBaseActionScore(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 int __cdecl ai_CalculateMatchingMethodEffects(float* o1, float* o2, int a3, char* e, int a5, int a6, int a7);
 
 /* ADDRESS: GOLDTL 0x004a03d0 */
@@ -33,5 +33,5 @@ int __cdecl ai_ScoreUpgradeZunft(float* o1, float* o2, int a3, char* e, int a5, 
 		*o2 = *o2 * 3.0f;
 		return 1;
 	}
-	return fcn_004a4410(o1, o2, a3, e, a5, a6, a7);
+	return ai_ComputeBaseActionScore(o1, o2, a3, e, a5, a6, a7);
 }

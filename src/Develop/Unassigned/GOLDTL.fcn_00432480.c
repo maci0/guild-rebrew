@@ -77,7 +77,7 @@ void __cdecl d3_AccumulateAnimDelta(char*, char*, int, int, int);
 void __cdecl d3_EvalAnimSlotPosition(char*, char*, int, int, float*);
 void __cdecl d3_LerpVec3(float*, float*, float, float*);
 void __cdecl fcn_00455140(char*, float*, float*);
-float __cdecl fcn_004517e0(float, float, float, float, float);
+float __cdecl d3_EvalHermiteSpline(float, float, float, float, float);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl d3_ComputeSplineTangents(void*, void*, void*);
 void __cdecl d3_UpdateObjectAnimPose(char*);
@@ -117,7 +117,7 @@ char __cdecl fcn_0045cbe0(char*, unsigned int);
 #define BF(e) ((char*) ((BldFrm*) (frames) + (e)))
 
 /* ADDRESS: GOLDTL 0x00432480 */
-char __cdecl fcn_00432480(char* o, void* ctx)
+char __cdecl d3_UpdateSceneObjectAnimCallback(char* o, void* ctx)
 {
 	Frame frame;
 	Frame* fs;
@@ -457,11 +457,11 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 			fs->tan[0] = -SF(WR(cur) + 0x30);
 			fs->tan[1] = -SF(WR(cur) + 0x34);
 			fs->tan[2] = -SF(WR(cur) + 0x38);
-			fs->vec[0] = fcn_004517e0(SF(sfr + prev * 0x58 + 4),
+			fs->vec[0] = d3_EvalHermiteSpline(SF(sfr + prev * 0x58 + 4),
 				SF(sfr + cur * 0x58 + 4), fs->tan[0], fs->neg[0], fs->f14);
-			fs->vec[1] = fcn_004517e0(SF(sfr + prev * 0x58 + 8),
+			fs->vec[1] = d3_EvalHermiteSpline(SF(sfr + prev * 0x58 + 8),
 				SF(sfr + cur * 0x58 + 8), fs->tan[1], fs->neg[1], fs->f14);
-			fs->vec[2] = fcn_004517e0(SF(WR(prev) + 0xc),
+			fs->vec[2] = d3_EvalHermiteSpline(SF(WR(prev) + 0xc),
 				SF(WR(cur) + 0xc), fs->tan[2], fs->neg[2], fs->f14);
 			fs->vec[0] += SF(st + 0x14);
 			fs->vec[1] += SF(st + 0x18);
@@ -474,11 +474,11 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 				fs->tan[0] = -SF(WR(cur) + 0x4c);
 				fs->tan[1] = -SF(WR(cur) + 0x50);
 				fs->tan[2] = -SF(WR(cur) + 0x54);
-				fs->vec[0] = fcn_004517e0(SF(WR(prev) + 0x14),
+				fs->vec[0] = d3_EvalHermiteSpline(SF(WR(prev) + 0x14),
 					SF(WR(cur) + 0x14), fs->tan[0], fs->neg[0], fs->f14);
-				fs->vec[1] = fcn_004517e0(SF(WR(prev) + 0x18),
+				fs->vec[1] = d3_EvalHermiteSpline(SF(WR(prev) + 0x18),
 					SF(WR(cur) + 0x18), fs->tan[1], fs->neg[1], fs->f14);
-				fs->vec[2] = fcn_004517e0(SF(WR(prev) + 0x1c),
+				fs->vec[2] = d3_EvalHermiteSpline(SF(WR(prev) + 0x1c),
 					SF(WR(cur) + 0x1c), fs->tan[2], fs->neg[2], fs->f14);
 				fs->vec[0] += SF(st + 0x20);
 				fs->vec[1] += SF(st + 0x24);
@@ -489,15 +489,15 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 			prev = SI(st + 4);
 			cur = SI(st + 8);
 			g = fs->f18;
-			fs->vec[0] = fcn_004517e0(SF(sfr + cur * 0x58 + 4),
+			fs->vec[0] = d3_EvalHermiteSpline(SF(sfr + cur * 0x58 + 4),
 				SF(sfr + prev * 0x58 + 4),
 				-SF(WR(prev) + 0x30),
 				-SF(WR(prev) + 0x20), g);
-			fs->vec[1] = fcn_004517e0(SF(sfr + cur * 0x58 + 8),
+			fs->vec[1] = d3_EvalHermiteSpline(SF(sfr + cur * 0x58 + 8),
 				SF(sfr + prev * 0x58 + 8),
 				-SF(WR(prev) + 0x34),
 				-SF(WR(prev) + 0x24), g);
-			fs->vec[2] = fcn_004517e0(SF(WR(cur) + 0xc),
+			fs->vec[2] = d3_EvalHermiteSpline(SF(WR(cur) + 0xc),
 				SF(WR(prev) + 0xc),
 				-SF(WR(prev) + 0x38),
 				-SF(WR(prev) + 0x28), g);
@@ -506,15 +506,15 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 			fs->vec[2] += SF(st + 0x1c);
 			d3_SetNodePosition(o, fs->vec);
 			if (SI(o + 0x218) < 5) {
-				fs->vec[0] = fcn_004517e0(SF(WR(cur) + 0x14),
+				fs->vec[0] = d3_EvalHermiteSpline(SF(WR(cur) + 0x14),
 					SF(WR(prev) + 0x14),
 					-SF(WR(prev) + 0x4c),
 					-SF(WR(prev) + 0x40), g);
-				fs->vec[1] = fcn_004517e0(SF(WR(cur) + 0x18),
+				fs->vec[1] = d3_EvalHermiteSpline(SF(WR(cur) + 0x18),
 					SF(WR(prev) + 0x18),
 					-SF(WR(prev) + 0x50),
 					-SF(WR(prev) + 0x44), g);
-				fs->vec[2] = fcn_004517e0(SF(WR(cur) + 0x1c),
+				fs->vec[2] = d3_EvalHermiteSpline(SF(WR(cur) + 0x1c),
 					SF(WR(prev) + 0x1c),
 					-SF(WR(prev) + 0x54),
 					-SF(WR(prev) + 0x48), g);

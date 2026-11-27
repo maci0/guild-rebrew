@@ -2,7 +2,7 @@
 
 int __cdecl fcn_0064d530(int, int, int);
 
-int* __cdecl fcn_00424760(int dst, int size)
+int* __cdecl sbs_GetFirstRootSample(int dst, int size)
 {
 	int* p;
 	int* n;

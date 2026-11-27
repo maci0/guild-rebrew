@@ -11,7 +11,7 @@ typedef struct Slot046f4c0 {
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern void** g_772540;
 
-void __cdecl fcn_0046f4c0(int slot)
+void __cdecl d2_ReorderControlStack(int slot)
 {
 	Slot046f4c0* s;
 	int i;

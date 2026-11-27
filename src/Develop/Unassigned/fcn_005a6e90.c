@@ -9,10 +9,10 @@ int __cdecl fcn_00470820(int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00472830(int, int, ...);
+int __cdecl d2_GetFormWindow(int, int, ...);
 int __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl d2_CenterDialogWindows(int);
-int __cdecl fcn_0046f280(int);
+int __cdecl d2_CloseWindow(int);
 int __cdecl d2_DestroyElement(int);
 void __cdecl d2_ClearPaintbox(void);
 int __cdecl d2_ClearWindowChildren(int, int);
@@ -69,7 +69,7 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
     q2 = d2_GetWindowListItem(dialogWindow, 5, io_AppendText(0x18f1));
     d2_SetForm(dialogWindow, 0);
 
-    r = fcn_00472830(dialogWindow, 2, 0x100, (int)&s20, (int)&s24, (int)&s1c);
+    r = d2_GetFormWindow(dialogWindow, 2, 0x100, (int)&s20, (int)&s24, (int)&s1c);
     fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, r);
     d2_CenterDialogWindows(dialogWindow);
 
@@ -89,7 +89,7 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
             p = &arr[k][0];
             if (*p != -1)
             {
-                fcn_0046f280(*p);
+                d2_CloseWindow(*p);
                 d2_DestroyElement(p[1]);
                 p[0] = -1;
                 p[1] = -1;
@@ -149,7 +149,7 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
             p = &arr[i][0];
             if (*p != -1)
             {
-                fcn_0046f280(*p);
+                d2_CloseWindow(*p);
                 d2_DestroyElement(p[1]);
                 p[0] = -1;
                 p[1] = -1;

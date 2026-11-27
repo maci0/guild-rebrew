@@ -22,7 +22,7 @@ extern char* g_772500;
 extern int g_772504;
 extern int g_67d8c8;
 
-int __cdecl fcn_00473360(char* p);
+int __cdecl d2_GetResourceKind(char* p);
 int __cdecl fcn_0047b620(char* p, int i);
 int __cdecl d2_Show(int idx, char* path);
 
@@ -45,7 +45,7 @@ int __cdecl d2_LoadResourceFile(char* path, char* name)
 	fseek(f, 0, 0);
 	fread(buf, size, 1, f);
 	save = index = g_772504;
-	((VfsEntry*) g_772500)[index].kind = fcn_00473360(buf) & 0xff;
+	((VfsEntry*) g_772500)[index].kind = d2_GetResourceKind(buf) & 0xff;
 	i = ((VfsEntry*) g_772500)[index].kind;
 	if (i == 1 || i == 5 || i == 4 || i == 8) {
 		char* p;

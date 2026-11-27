@@ -18,7 +18,7 @@ extern char* lpObjektePROT;
  
 
 /* ADDRESS: GOLDTL 0x00487d80 */
-void __cdecl fcn_00487d80(int* ca, int* cb, PRODUCTION_GOODS_RECORD* n)
+void __cdecl ai_CountProductionGoodsKinds(int* ca, int* cb, PRODUCTION_GOODS_RECORD* n)
 {
 	int i;
 	GOODS_PLAN_ENTRY* s;
@@ -48,7 +48,7 @@ void __cdecl fcn_00487d80(int* ca, int* cb, PRODUCTION_GOODS_RECORD* n)
 			}
 		}
 		if (s->parent_index != -1) {
-			fcn_00487d80(ca, cb, &((PRODUCTION_GOODS_RECORD*)g_100d0c0)[s->parent_index]);
+			ai_CountProductionGoodsKinds(ca, cb, &((PRODUCTION_GOODS_RECORD*)g_100d0c0)[s->parent_index]);
 		}
 	}
 }

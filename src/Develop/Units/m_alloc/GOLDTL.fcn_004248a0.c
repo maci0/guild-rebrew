@@ -5,14 +5,14 @@ extern char g_679010[]; /* %lang */
 extern char g_679018[]; /* sbs_Compile */
 
 int __cdecl fcn_004230e0(char*);
-char* __cdecl fcn_00423960(void);
-int __cdecl fcn_00423b20(char*, char*, int);
-int __cdecl fcn_00423b80(char*);
-int __cdecl fcn_00423bf0(char*, char*);
-int __cdecl fcn_00423ce0(char*);
-int __cdecl fcn_004246c0(void);
-int __cdecl fcn_004246e0(void);
-int __cdecl fcn_00424700(char*);
+char* __cdecl sbs_CalcCompiledSize(void);
+int __cdecl sbs_ExtractBaseName(char*, char*, int);
+int __cdecl sbs_GetAudioFormat(char*);
+int __cdecl sbs_ReadSampleFile(char*, char*);
+int __cdecl sbs_CalcSetDataSize(char*);
+int __cdecl sbs_CountRootSamples(void);
+int __cdecl sbs_CountSets(void);
+int __cdecl sbs_CountSetEntries(char*);
 char* __cdecl m_alloc(char*, char*);
 int __cdecl sbs_UpdateSampleSizes(char*);
 
@@ -39,12 +39,12 @@ int __cdecl sbs_Compile(char* name)
 	count = 0;
 	fcn_004230e0(0);
 	if (sbs_BankManager != 0) {
-		n1 = fcn_004246c0();
-		n2 = fcn_004246e0();
+		n1 = sbs_CountRootSamples();
+		n2 = sbs_CountSets();
 		if (sbs_UpdateSampleSizes(name) == -1) {
 			return -1;
 		}
-		text = fcn_00423960();
+		text = sbs_CalcCompiledSize();
 		root = (int) m_alloc(text, g_679018);
 		if (root != 0) {
 	g_6b7d78 = (char*) root;
@@ -84,11 +84,11 @@ int __cdecl sbs_Compile(char* name)
 							*(int*) (*(char**) (g_6b7d78 + 0x138) + i + 0x38) = 0;
 							*(int*) (*(char**) (g_6b7d78 + 0x138) + i + 0x3c) = 0;
 							p = (char*) (root + offset);
-							result = fcn_00423b20(node,
+							result = sbs_ExtractBaseName(node,
 							    *(char**) (g_6b7d78 + 0x138) + i + 4, 0x32);
 							if (result == 0) {
 								*(int*) (p + 4) = *(int*) (node + 0x100);
-								*(char*) p = (char) fcn_00423b80(node);
+								*(char*) p = (char) sbs_GetAudioFormat(node);
 								if (*(char*) p != 0) {
 									*(char**) (p + 8) = (char*) (root + offset + 0xc);
 									strcpy(buf, node);
@@ -97,7 +97,7 @@ int __cdecl sbs_Compile(char* name)
 										strcat(buf, name);
 										strcat(buf, &node[5 + (m - buf)]);
 									}
-									result = fcn_00423bf0(buf, p);
+									result = sbs_ReadSampleFile(buf, p);
 									if (result == 0) {
 										offset = offset + *(int*) (node + 0x100) + 0xc;
 									}
@@ -125,8 +125,8 @@ int __cdecl sbs_Compile(char* name)
 						*(int*) (*(char**) (g_6b7d78 + 0x138) + n2 + 0x38) = 0;
 						*(int*) (*(char**) (g_6b7d78 + 0x138) + n2 + 0x3c) = 0;
 						p = (char*) (root + offset);
-						*(int*) p = fcn_00424700(node);
-						*(int*) (p + 8) = fcn_00423ce0(node);
+						*(int*) p = sbs_CountSetEntries(node);
+						*(int*) (p + 8) = sbs_CalcSetDataSize(node);
 						strncpy(*(char**) (g_6b7d78 + 0x138) + n2 + 4, node, 0x32);
 						offset += 0xc;
 						if (*(int*) p != 0) {
@@ -137,7 +137,7 @@ int __cdecl sbs_Compile(char* name)
 								i = 0;
 								if (result == 0) {
 									do {
-										*(char*) (*(int*) (p + 4) + i) = (char) fcn_00423b80(child);
+										*(char*) (*(int*) (p + 4) + i) = (char) sbs_GetAudioFormat(child);
 										if (*(char*) (*(int*) (p + 4) + i) != 0) {
 											*(int*) (*(int*) (p + 4) + i + 4) = *(int*) (child + 0x100);
 											*(int*) (*(int*) (p + 4) + i + 8) = root + *(int*) p * 12 + sum + offset;
@@ -148,7 +148,7 @@ int __cdecl sbs_Compile(char* name)
 												strcat(buf, name);
 												strcat(buf, &child[5 + (m - buf)]);
 											}
-											result = fcn_00423bf0(buf,
+											result = sbs_ReadSampleFile(buf,
 											    (char*) (*(int*) (p + 4) + i));
 										} else {
 											result = -1;

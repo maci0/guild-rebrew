@@ -12,7 +12,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
-void __cdecl fcn_0046f9b0(int, int);
+void __cdecl d2_SetControlText(int, int);
 int __cdecl fcn_0057de80(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl main_RunFrameLoop(void*, int);
@@ -36,7 +36,7 @@ void __cdecl d2_RunMessageFilterDialog(void)
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_058)) = 1;
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_05c)) = 1;
 		d2_SetElementFont(b, 0x55);
-		fcn_0046f9b0(b, g_14ac660[i]);
+		d2_SetControlText(b, g_14ac660[i]);
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_1d4)) = 0x78;
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_1dc)) = 0x1e;
 		*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[b].value_1e0)) = 3;

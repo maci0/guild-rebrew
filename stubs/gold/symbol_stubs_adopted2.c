@@ -71,22 +71,12 @@ int __cdecl fcn_0040c420(void)
 	return 0;
 }
 
-int __cdecl fcn_0040c4c0(void)
-{
-	return 0;
-}
-
 int __cdecl RunScriptString(void)
 {
 	return 0;
 }
 
 int __cdecl StopScript(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_00413d00(int a)
 {
 	return 0;
 }

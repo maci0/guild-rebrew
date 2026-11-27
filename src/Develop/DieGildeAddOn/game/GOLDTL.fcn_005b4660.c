@@ -11,8 +11,8 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(void*, int);
 float __cdecl fcn_004ff210(unsigned short, int);
-void __cdecl fcn_00471af0(int, int);
-void* __cdecl fcn_005cd440(void*, char*, int, int);
+void __cdecl d2_SetFormVisibility(int, int);
+void* __cdecl d2_OpenTargetPicker(void*, char*, int, int);
 void __cdecl cm_SendLogAction(char*);
 void __cdecl cm_SendTraceEnd(char*);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
@@ -56,15 +56,15 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 				fcn_004ff210(*(unsigned short*) e, -2000);
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == hShow) {
-				fcn_00471af0(dialog, 0);
-				fcn_00471af0(dialog, 1);
+				d2_SetFormVisibility(dialog, 0);
+				d2_SetFormVisibility(dialog, 1);
 			} else if (d2_CurrentElementId == hMarriage) {
-				fcn_00471af0(dialog, 0);
+				d2_SetFormVisibility(dialog, 0);
 				if (*(int*) (e + 0x5c) == -1) {
 					memset(buf, 0, 0x50);
 					*(int*) (buf + 4) = *(unsigned char*) (e + 9) ?
 						0x5409 : 0x540a;
-					p = fcn_005cd440(buf, 0, 0, 0);
+					p = d2_OpenTargetPicker(buf, 0, 0, 0);
 					if (p != 0) {
 						cm_SendLogAction("marriage");
 						cm_BeginPacketFieldDelta(p, *(int*) ((char*) p + 4));
@@ -77,9 +77,9 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 						cm_SendTraceEnd("marriage");
 					}
 				}
-				fcn_00471af0(dialog, 1);
+				d2_SetFormVisibility(dialog, 1);
 			} else if (d2_CurrentElementId == hChild) {
-				fcn_00471af0(dialog, 0);
+				d2_SetFormVisibility(dialog, 0);
 				if (*(int*) (e + 0x5c) != -1) {
 					for (i = 3; i < 8; i++) {
 						if (*(int*) (e + 0x5c + i * 4) ==
@@ -99,7 +99,7 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 						}
 					}
 				}
-				fcn_00471af0(dialog, 1);
+				d2_SetFormVisibility(dialog, 1);
 			}
 		}
 		if (g_14ce8e0 != 0) {

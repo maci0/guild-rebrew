@@ -100,7 +100,7 @@ void __cdecl gm_UpdateDaylightSchedule(pos14_7f4c00*);
 int __cdecl ahm_DealPlayerPrototypes(void);
 void* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
-void __cdecl fcn_00469e30(int);
+void __cdecl d2_SetBackdropResource(int);
 void __cdecl fcn_00469e70(void);
 void __cdecl fcn_00473150(void*);
 void __cdecl sv_WaitForNetworkSync(int);
@@ -118,12 +118,12 @@ void __cdecl cm_SendTraceEnd(int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl gm_SendRandomTurnEvents(int, int);
-int __cdecl fcn_00471af0(int, int);
+int __cdecl d2_SetFormVisibility(int, int);
 void __cdecl fcn_005459a0(int);
 int __cdecl d2_CreateScrollPerga(void);
 void __cdecl fcn_004727a0(int, int);
-int __cdecl fcn_00472830(int, int);
-void __cdecl fcn_0046e830(int, int, int, int, int);
+int __cdecl d2_GetFormWindow(int, int);
+void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 int __cdecl fcn_00519190(int, ...);
 void __cdecl cm_RequestKillSpieler(int, int);
 int __cdecl he_SumEventCostsForSubject(int);
@@ -202,7 +202,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 			while (!(*(unsigned char*) hp & 4)) {
 				main_RunFrameLoop(0, 0x24087);
 			}
-			fcn_00469e30(0x79d);
+			d2_SetBackdropResource(0x79d);
 			fcn_00473150(hp);
 			fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x32, 0xa);
 		}
@@ -314,15 +314,15 @@ void __cdecl gm_BeginPlayerTurn(void)
 	}
 
 	if (g_6a25b8 != -1) {
-		fcn_00471af0(g_6a25b8, 0);
+		d2_SetFormVisibility(g_6a25b8, 0);
 	}
 	fcn_005459a0(0xffff);
 	if (g_6a3420 != 0) {
 		w = d2_CreateScrollPerga();
 		fcn_004727a0(w, 2);
 		fcn_00519190(0x7d);
-		fcn_0046e830(-1, -1, d2_CurrentWindowId, fcn_00472830(w, 1), 0x767);
-		*(int*) (0x10161b4 + fcn_00472830(w, 1) * 972) = 0x18;
+		d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, d2_GetFormWindow(w, 1), 0x767);
+		*(int*) (0x10161b4 + d2_GetFormWindow(w, 1) * 972) = 0x18;
 		fcn_004727a0(w, 1);
 		fcn_00519190(0x2051, &pos, (int) g_696540[season],
 			     (int) g_696550[season] % 12);
@@ -399,7 +399,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 		fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x32, 0xa);
 	}
 	if (g_6a25b8 != -1) {
-		fcn_00471af0(g_6a25b8, 1);
+		d2_SetFormVisibility(g_6a25b8, 1);
 	}
 	if (g_6a3440 != 5 && g_6a3440 > -1) {
 		if (he_StartHandlungSearch(2, 0, 0x4c, 2, g_774970 & 0xffff) == 0) {

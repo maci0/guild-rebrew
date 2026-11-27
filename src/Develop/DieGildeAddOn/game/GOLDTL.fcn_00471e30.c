@@ -1,7 +1,7 @@
 #include <string.h>
 #include "client_data.h"
 
-extern int __cdecl fcn_0046f280(int a1);
+extern int __cdecl d2_CloseWindow(int a1);
 extern int __cdecl fcn_00475f80(void* o);
 
 /* ADDRESS: GOLDTL 0x00471e30 */
@@ -23,7 +23,7 @@ void __cdecl d2_DestroyForm(int dialogIndex)
 	}
 	items = (int*) g_1038144;
 	for (i = base->count - 1; i >= 0; i--) {
-		fcn_0046f280(items[dialogIndex * 175 + i]);
+		d2_CloseWindow(items[dialogIndex * 175 + i]);
 	}
 	slot = (int*) base->h;
 	for (i = 0; i < 2; i++) {

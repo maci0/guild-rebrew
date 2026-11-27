@@ -5,11 +5,11 @@ extern void __cdecl evt_ReadToken(int stream, void *out);
 extern int __cdecl evt_FindSymbol(int a0, char *text);
 extern int __cdecl evt_AllocVariable(int a0, unsigned int a1, int a2);
 extern void __cdecl evt_LogScriptError(int a0, int a1, char *text);
-extern int __cdecl fcn_00427600(int a0, void *rec);
+extern int __cdecl evt_ParseFunctionArgs(int a0, void *rec);
 extern int __cdecl fcn_0064e790(int a0, int a1);
 
 /* ADDRESS: GOLDTL 0x00427830 */
-unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
+unsigned int __cdecl evt_ParseVarDecl(int script, unsigned int kind)
 {
     char name[32];
     struct {
@@ -36,24 +36,24 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
         v2++;
     } while (copiedChar);
     evt_ReadToken(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
-    v2 = a0;
+    v2 = script;
     if (tok.status != 1)
         return 1;
     if (tok.data[0] == 10)
     {
-        v3 = evt_FindSymbol(a0, name);
+        v3 = evt_FindSymbol(script, name);
         if (v3)
             return 1;
-        q = (char *)(evt_AllocVariable(v2, a1, 1) + 4);
+        q = (char *)(evt_AllocVariable(v2, kind, 1) + 4);
         strcpy(q, name);
         return 1;
     }
     if (tok.data[0] == 2)
     {
-        v3 = evt_FindSymbol(a0, name);
+        v3 = evt_FindSymbol(script, name);
         if (!v3)
         {
-            record = evt_AllocVariable(v2, a1, 1);
+            record = evt_AllocVariable(v2, kind, 1);
             q = (char *)(record + 4); strcpy(q, name);
         } else {
             __asm { int 3 }
@@ -67,7 +67,7 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     if (tok.data[0] == 0xc)
     {
         v4 = *(unsigned int *)(evt_CurrentScript + 0x118);
-        v3 = fcn_00427600(a0, tok.data);
+        v3 = evt_ParseFunctionArgs(script, tok.data);
         if (!v3)
             return 0;
         v5 = fcn_0064e790(v4, 0x7b);
@@ -87,17 +87,17 @@ unsigned int __cdecl fcn_00427830(int a0, unsigned int a1)
     if (tok.data[0] != 0x1b)
         return 1;
     evt_ReadToken(*(unsigned int *)(evt_CurrentScript + 0x118), &tok.status);
-    v2 = a0;
+    v2 = script;
     if (tok.status == 5)
         v3 = tok.data[0];
     else
     {
         v3 = 1;
-        evt_LogScriptError(a0, *(unsigned int *)(a0 + 0x118), (char *)0x6794a0);
+        evt_LogScriptError(script, *(unsigned int *)(script + 0x118), (char *)0x6794a0);
     }
     if (!evt_FindSymbol(v2, name))
     {
-        v3 = evt_AllocVariable(v2, a1, v3);
+        v3 = evt_AllocVariable(v2, kind, v3);
         q = (char *)(v3 + 4);
         strcpy(q, name);
     }

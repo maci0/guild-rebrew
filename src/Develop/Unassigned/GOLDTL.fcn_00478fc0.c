@@ -23,15 +23,15 @@ extern int g_100ef80;
 extern int g_67d96c;
 extern int g_100f1bc;
 
-void __cdecl fcn_00478fa0(int, int, Surf*, Spr*);
+void __cdecl d2_StoreShapeSize(int, int, Surf*, Spr*);
 void __cdecl fcn_004774e0(int, int, int, Spr*);
 void __cdecl fcn_0047a320(int, int, int, Spr*);
-void __cdecl fcn_00477500(int, int, int, Spr*);
-void __cdecl fcn_004774f0(int, int, int, Spr*);
+void __cdecl d2_ClearDrawnShapeSize(int, int, int, Spr*);
+void __cdecl d2_ClearDrawnSpriteSize(int, int, int, Spr*);
 
 
 /* ADDRESS: GOLDTL 0x00478fc0 */
-int __cdecl fcn_00478fc0(int x, int y, Surf* s, Spr* spr)
+int __cdecl d2_BlitShape(int x, int y, Surf* s, Spr* spr)
 {
 	int saved;
 	int right;
@@ -48,9 +48,9 @@ int __cdecl fcn_00478fc0(int x, int y, Surf* s, Spr* spr)
 					switch (spr->kind) {
 					case 0:
 						if (g_100f1bc == 0) {
-							fcn_00477500(x, y, s->bits, spr);
+							d2_ClearDrawnShapeSize(x, y, s->bits, spr);
 						} else {
-							fcn_004774f0(x, y, s->bits, spr);
+							d2_ClearDrawnSpriteSize(x, y, s->bits, spr);
 						}
 						return 1;
 					case 1:
@@ -75,7 +75,7 @@ int __cdecl fcn_00478fc0(int x, int y, Surf* s, Spr* spr)
 			case 2:
 				return 1;
 			case 1:
-				fcn_00478fa0(x, y, s, spr);
+				d2_StoreShapeSize(x, y, s, spr);
 				return 1;
 			}
 		}

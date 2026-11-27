@@ -7,7 +7,7 @@ int __cdecl d2_ShowObjectTooltip(int);
 int __cdecl d2_CreateGebaeudeTooltip(int);
 int __cdecl d2_ShowContactTooltip(int);
 int __cdecl d2_ShowPersonTooltip(int*);
-void __cdecl fcn_004707d0(int);
+void __cdecl d2_BringFormToFront(int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00590670 */
 void __cdecl d2_UpdateSceneTooltip(void)
@@ -148,7 +148,7 @@ void __cdecl d2_UpdateSceneTooltip(void)
 	if (tooltipWindow != -1) {
 		d2_SuppressOverlay = 1;
 		*(int*) 0x774a28 = 1;
-		fcn_004707d0(tooltipWindow);
+		d2_BringFormToFront(tooltipWindow);
 		return;
 	}
 	if (*(int*) 0x774a28 == 0) {

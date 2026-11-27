@@ -25,8 +25,8 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_00594340(void);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_0046f9b0(int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetControlText(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
@@ -145,9 +145,9 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 			*(int*)&((D2_CONTROL_TL*)vp)->value_1dc = 100;
 			*(int*)&((D2_CONTROL_TL*)vp)->value_1e0 = 0x10;
 			*(int*)&((D2_CONTROL_TL*)vp)->font = 0x54;
-			fcn_0046f9b0(h, *(int*) (0x14a79c0 + (int) ids[count] * 8));
+			d2_SetControlText(h, *(int*) (0x14a79c0 + (int) ids[count] * 8));
 			handles[count] = h;
-			fcn_00472640(h, 1);
+			d2_SetElementEnabled(h, 1);
 			j += 0x50;
 		}
 		menu = ids[3];
@@ -182,7 +182,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 		d2_SetForm(menu, 2);
 		if (n) {
 			for (i = 0; i < n; i++) {
-				fcn_00472640(handles[i], 1);
+				d2_SetElementEnabled(handles[i], 1);
 				if (((char)(((BUILDING_PROTOTYPE*)ents)->category)) != 0x1f) {
 					h = ids[i] * 2 + 0x9a8;
 					if (counts[i] == 1) {
@@ -199,7 +199,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 				} else {
 					io_FormatTextBuffer(text, 0x679060, ids[i] * 2 + 0x9a8);
 				}
-				fcn_0046f9b0(handles[i], text);
+				d2_SetControlText(handles[i], text);
 			}
 		}
 		if (g_100f1dc != -1) {

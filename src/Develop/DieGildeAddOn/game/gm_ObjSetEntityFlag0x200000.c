@@ -2,7 +2,7 @@
 extern __int64 g_666018;
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void* __cdecl gm_LookupEntityRecordById(int id);
-void* __cdecl fcn_005cd440(void* desc, void* buf, int a, int b);
+void* __cdecl d2_OpenTargetPicker(void* desc, void* buf, int a, int b);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl fcn_005dbe90(void* buf);
 
@@ -23,7 +23,7 @@ int __cdecl gm_ObjSetEntityFlag0x200000(char* actor, char* action)
 		*(int*) (desc + 0x04) = 0x400;
 		*(int*) (desc + 0x10) = 6;
 		*(__int64*) (desc + 0x08) = g_666018;
-		p = fcn_005cd440(desc, bufA, 0, 0);
+		p = d2_OpenTargetPicker(desc, bufA, 0, 0);
 	} else {
 		p = gm_LookupEntityRecordById(*(int*) (action + 4));
 	}

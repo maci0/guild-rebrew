@@ -1,8 +1,8 @@
 
 /* ADDRESS: GOLDTL 0x00423590 */
-void __cdecl fcn_00423590(int p, int v)
+void __cdecl sb_SetVoiceCallback(int voice, int callback)
 {
-	if (*(int*) 0x6b7d7c != 0 && p != 0) {
-		*(int*) (p + 0x2c) = v;
+	if (*(int*) 0x6b7d7c != 0 && voice != 0) {
+		*(int*) (voice + 0x2c) = callback;
 	}
 }

@@ -49,11 +49,11 @@ extern int g_67d388;
 extern int g_67d374;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_0046ac40(int x, int y);
-int __cdecl fcn_0046acf0(int x, int y);
+void __cdecl d2_HitTestWindow(int x, int y);
+int __cdecl d2_HitTestRenderableForm(int x, int y);
 
 /* ADDRESS: GOLDTL 0x0046aee0 */
-int __cdecl fcn_0046aee0(int x, int y)
+int __cdecl d2_HitTestGui(int x, int y)
 {
 	int i;
 	int hidden;
@@ -66,7 +66,7 @@ int __cdecl fcn_0046aee0(int x, int y)
 	int bottom;
 	int r;
 
-	fcn_0046ac40(x, y);
+	d2_HitTestWindow(x, y);
 	g_67d38c = -1;
 	g_67d374 = -1;
 	for (i = 0x3ff; i >= 0; i--) {
@@ -123,7 +123,7 @@ int __cdecl fcn_0046aee0(int x, int y)
 			}
 		}
 	}
-	r = fcn_0046acf0(x, y);
+	r = d2_HitTestRenderableForm(x, y);
 	if (r == -1) {
 		d2_CurrentElementId = -1;
 		r = -1;

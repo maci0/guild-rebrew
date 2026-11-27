@@ -27,7 +27,7 @@ void __stdcall fcn_005ed39b(float* out, float l, float r, float b, float t,
                             float zn, float zf);
 
 /* ADDRESS: GOLDTL 0x004582d0 */
-void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
+void __cdecl d3_RenderProjectedShadow(char* object, char* subObj, char* renderObj, char* map, float* va,
                           float* vb, char* node, int* rec, float height)
 {
     float minx;
@@ -69,7 +69,7 @@ void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
     maxz = -1.0e10f;
     maxx = -1.0e10f;
     if (*(unsigned char*) &rec[0x26] != 0) {
-        d3_TransformPoint(a0, (float*) (a0 + 0x4c), d);
+        d3_TransformPoint(object, (float*) (object + 0x4c), d);
         height = height + 5.0f;
         minx = d[0] - 16.0f;
         maxx = d[0] + 16.0f;
@@ -77,8 +77,8 @@ void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
         maxz = d[2] + 16.0f;
     } else {
         v = ((float* (__cdecl*) (char*, char*, char*))
-            *(void**) (*(char**) (a1 + 0x318) + 0x1f0))(
-            a0, a1, *(char**) (a0 + 0x1ec) + 8);
+            *(void**) (*(char**) (subObj + 0x318) + 0x1f0))(
+            object, subObj, *(char**) (object + 0x1ec) + 8);
         for (i = 8; i != 0; i--) {
             if (*(unsigned char*) (node + 0x215) & 4) {
                 k = -((v[1] - height) / va[1]);
@@ -207,7 +207,7 @@ void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
         light[2] = vb[2];
     }
     fcn_005ed44c(m, light, plane);
-    fcn_005eb970(m, (float*) (*(char**) (a0 + 0x1ec) + 8), m);
+    fcn_005eb970(m, (float*) (*(char**) (object + 0x1ec) + 8), m);
     fcn_005ec410(t, 0.0f, -height - 1.0f, 0.0f);
     fcn_005eb970(m, m, t);
     fcn_005ec4b3(t, -1.5707964f);
@@ -232,8 +232,8 @@ void __cdecl fcn_004582d0(char* a0, char* a1, char* a2, char* map, float* va,
             g_6b5de0, 3, t);
         (*(int (__stdcall**) (void*, int, void*, int, int, float, int))
             ((char*) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl + 0x90))(g_6b5de0, 0, 0, 1, 0, 1.0f, 0);
-        mesh = d3_GetObjectMesh(a2, 0);
-        for (n = 0; n < *(unsigned int*) (*(char**) (a2 + 0x318) + 0x1e4); n++)
+        mesh = d3_GetObjectMesh(renderObj, 0);
+        for (n = 0; n < *(unsigned int*) (*(char**) (renderObj + 0x318) + 0x1e4); n++)
             (*(int (__stdcall**) (void*, unsigned int)) (*(char**) mesh + 0xc))(mesh, n);
         (*(int (__stdcall**) (void*)) ((char*) *g_1040610[idx] + 0x18))(g_1040610[idx]);
     }

@@ -40,7 +40,7 @@ char* __cdecl plt_FindRecordByOwner(int, int);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl cm_ExProdObjekt(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
-void __cdecl fcn_00475220(char*);
+void __cdecl d2_SetMouseTooltip(char*);
 
 void __cdecl d2_HandleErnten(char* building, int plant_table)
 {
@@ -85,8 +85,8 @@ void __cdecl d2_HandleErnten(char* building, int plant_table)
 		char text[0xf8];
 
 		fcn_0064d41a(text, g_14a555c, ((OBJEKT_NAME_ENTRY*)g_14a79c0)[*(unsigned short*) (entry + 0xa)].name);
-		fcn_00475220(text);
+		d2_SetMouseTooltip(text);
 	} else {
-		fcn_00475220(g_14a5558);
+		d2_SetMouseTooltip(g_14a5558);
 	}
 }

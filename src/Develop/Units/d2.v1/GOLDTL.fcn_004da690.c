@@ -13,7 +13,7 @@ int __cdecl amt_GetOfficeGroupHumanFlags(int);
 int __cdecl amt_ResolveOfficeApplications(int, int, void *);
 
 int __cdecl fcn_00470820(char *, int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_004e4730(char *);
 int __cdecl msx_StartAmbientTrack(char *, int);
@@ -256,7 +256,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     /* native 0x4dac46: scene handle, per-entity text packets */
     cm_WaitNetworkSyncBanner(0x6b5c60);
     s14 = fcn_00470820((char *)0x68c1ec, 0, 0);
-    fcn_00471af0(s14, 0);
+    d2_SetFormVisibility(s14, 0);
     fcn_00471d80(s14, 3);
     s1C = 0;
     if (s28 > 0) {
@@ -324,7 +324,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 fcn_004727a0(s60, 2);
                 fcn_004da510(*(int *)0x772514, 1, 0);
                 fcn_004e4b40(-8, s34, 0x68c0f0, s20 - 1, 0x32);
-                fcn_00471af0((int)a0, 1);
+                d2_SetFormVisibility((int)a0, 1);
                 fcn_004727a0((int)a0, 0);
                 io_AppendText((char *)0x6811b0);
                 io_AppendText((char *)0x12c4);
@@ -361,10 +361,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 blkC.sE0 = *(unsigned char *)(s00 + 4);
                 blkC.sE4 = *(int *)s00;
                 blkC.sE8 = *(int *)(s00 + 0x10);
-                fcn_00471af0(s38, 0);
+                d2_SetFormVisibility(s38, 0);
                 cut_RunTurnRound(a0, (void *)&blkC);
                 cut_WaitSeconds(0x3e8);
-                fcn_00471af0(s38, 1);
+                d2_SetFormVisibility(s38, 1);
                 if (s0C > 0) {
                     i = 0;
                     do {
@@ -480,7 +480,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     }
                 }
                 fcn_004727a0(s14, 0);
-                fcn_00471af0(s14, 0);
+                d2_SetFormVisibility(s14, 0);
                 io_AppendText((char *)0x6811b0);
                 d2_DestroyForm(s60);
                 d2_DestroyForm(s5C);
@@ -590,7 +590,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     }
                     fcn_004e4b40(-8, s38, 0x68c050, s20 - 1, 0x64);
                     fcn_004e4b40(-8, s38, 0x68c044, numSel - 1, 0x1f4);
-                    fcn_00471af0(s14, 1);
+                    d2_SetFormVisibility(s14, 1);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12d8);
@@ -669,10 +669,10 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     }
                 } else {
                     /* native 0x4dbce1: count > 1, scan the 0x9b0eb4 packets */
-                    fcn_00471af0(s14, 0);
+                    d2_SetFormVisibility(s14, 0);
                     cut_RunTurnRound(a0, (void *)&blkA.blkD);
                     cut_WaitSeconds(0x3e8);
-                    fcn_00471af0(s14, 1);
+                    d2_SetFormVisibility(s14, 1);
                     if (s0C > 0) {
                         int s4C, curId;
                         s4C = 0;
@@ -792,7 +792,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     }
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
-                    fcn_00471af0(s14, 0);
+                    d2_SetFormVisibility(s14, 0);
                     d2_DestroyForm(s14);
                     d2_DestroyForm(s50);
                     cut_WaitSeconds(0x3e8);

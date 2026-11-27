@@ -1,8 +1,8 @@
 
 /* ADDRESS: GOLDTL 0x004757b0 */
-void __cdecl fcn_004757b0(char* p, char a, char b, char c)
+void __cdecl d2_WritePixelRgb(char* pixel, char r, char g, char b)
 {
-	p[0] = a;
-	p[1] = b;
-	p[2] = c;
+	pixel[0] = r;
+	pixel[1] = g;
+	pixel[2] = b;
 }

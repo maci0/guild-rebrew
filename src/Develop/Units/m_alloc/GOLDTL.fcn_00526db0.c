@@ -56,14 +56,14 @@ int __cdecl fcn_0046e940(int, int, int, int, int);
 void __cdecl fcn_00471c80(int, unsigned char);
 char* __cdecl d2_LoadObj(char*, int);
 Surface* __cdecl fcn_004770a0(SurfaceDesc*, int);
-int __cdecl fcn_00475fd0(Surface*);
+int __cdecl d2_LockSurface(Surface*);
 void __cdecl fcn_0047a710(int, int, char*, Surface*);
 void __cdecl d2_UnlockSurface(Surface*);
 int __cdecl fcn_0047b640(int, int, int, int, Surface*, int);
 void __cdecl fcn_00475f80(Surface*);
 void __cdecl m_FreeTracked(char*);
-void __cdecl fcn_00476970(Surface*);
-int __cdecl fcn_00469c30(int, int, int);
+void __cdecl d2_ClearSurface(Surface*);
+int __cdecl d2_CreateElement(int, int, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 
 void __cdecl fcn_00526db0(char* name)
@@ -108,7 +108,7 @@ void __cdecl fcn_00526db0(char* name)
 	desc.format = 0x15;
 	s = fcn_004770a0(&desc, 0x20);
 	if (s != 0) {
-		if (fcn_00475fd0(s) != 0) {
+		if (d2_LockSurface(s) != 0) {
 			fcn_0047a710(0, 0, data + *(int*) (data + 0x45), s);
 			d2_UnlockSurface(s);
 		}
@@ -129,8 +129,8 @@ void __cdecl fcn_00526db0(char* name)
 	desc2.height = 0x6e;
 	desc2.format = 0x15;
 	(*(Surface**)&g_774684) = fcn_004770a0(&desc2, 3);
-	fcn_00476970((*(Surface**)&g_774684));
-	g_6a25fc = fcn_00469c30(0x286, 0x23c, 0x544);
+	d2_ClearSurface((*(Surface**)&g_774684));
+	g_6a25fc = d2_CreateElement(0x286, 0x23c, 0x544);
 	((D2_CONTROL_TL*)g_1015ea0)[g_6a25fc].value_05c = 1;
 	d2_SetSlotVisibility(g_6a25fc, 0);
 }

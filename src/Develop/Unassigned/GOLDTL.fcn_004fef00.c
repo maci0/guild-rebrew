@@ -2,7 +2,7 @@ extern float g_6628a0;
 extern float g_6628a8;
 
 /* ADDRESS: GOLDTL 0x004fef00 */
-int __cdecl fcn_004fef00(char* p)
+int __cdecl gm_EstimateEntityDeathAge(char* p)
 {
 	float v;
 	float s;

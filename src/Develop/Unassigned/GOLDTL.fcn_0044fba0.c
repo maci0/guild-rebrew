@@ -9,7 +9,7 @@ typedef struct Bone {
 	float b[3];
 } Bone;
 
-int __cdecl fcn_0044fba0(char* m, char* o)
+int __cdecl d3_CalcMeshBinarySize(char* mesh, char* obj)
 {
 	int sz;
 	int n;
@@ -18,18 +18,18 @@ int __cdecl fcn_0044fba0(char* m, char* o)
 	char* q;
 
 	sz = 0x18;
-	if (*(int*) (m + 0x44) > 0) {
-		sz = (*(int*) (m + 0x44) * 3 + 0x1b) * 8;
+	if (*(int*) (mesh + 0x44) > 0) {
+		sz = (*(int*) (mesh + 0x44) * 3 + 0x1b) * 8;
 	}
-	n = *(int*) (m + 0x1e4);
+	n = *(int*) (mesh + 0x1e4);
 	if (n > 0xfe) {
-		sz += *(int*) (m + 0x4c) * 52;
+		sz += *(int*) (mesh + 0x4c) * 52;
 	} else {
-		sz += *(int*) (m + 0x4c) * 49;
+		sz += *(int*) (mesh + 0x4c) * 49;
 	}
 	sz += n * 6;
 	if (n > 0) {
-		p = *(char**) (o + 0x10);
+		p = *(char**) (obj + 0x10);
 		q = p + 0x40;
 		for (i = 0; i < n; i++) {
 			sz += strlen(p) + strlen(q) + strlen(q + 0x40) + 3;
@@ -37,10 +37,10 @@ int __cdecl fcn_0044fba0(char* m, char* o)
 			q += 0xe0;
 		}
 	}
-	n = *(int*) (o + 0x34);
+	n = *(int*) (obj + 0x34);
 	sz += n * 24;
 	for (i = 0; i < n; i++) {
-		sz += strlen(((Bone*) (o + 0x38))[i].name) + 1;
+		sz += strlen(((Bone*) (obj + 0x38))[i].name) + 1;
 	}
 	return sz;
 }

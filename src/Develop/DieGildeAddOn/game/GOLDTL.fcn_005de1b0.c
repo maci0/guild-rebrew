@@ -43,7 +43,7 @@ extern char* g_14a558c;
 extern char* g_14a5590;
 
 Unit* __cdecl fcn_005bdc30(int, Req*, char*, int, int);
-unsigned char* __cdecl fcn_005cd440(Req*, char*, int, int);
+unsigned char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 
 unsigned short __cdecl gm_RandomMod(int);
@@ -79,7 +79,7 @@ int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 		req.size = 0x400;
 		req.kind = 6;
 		req.cd = g_666018;
-		e = fcn_005cd440(&req, g_14a5590, 0, 0);
+		e = d2_OpenTargetPicker(&req, g_14a5590, 0, 0);
 		if (e == 0) {
 			return 0;
 		}

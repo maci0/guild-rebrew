@@ -10,7 +10,7 @@ extern SOUND_VOICE g_14cbbe0;
 extern char* g_6b7e88;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl msx_GetSampleStatus(int h);
-void __cdecl fcn_0042a7c0(int h);
+void __cdecl msx_InitSample(int h);
 
 Voice* __cdecl sb_AllocVoice(void)
 {
@@ -35,7 +35,7 @@ Voice* __cdecl sb_AllocVoice(void)
 					best = &((Voice*)g_6b7e88)[i];
 				}
 			}
-			fcn_0042a7c0(best->h);
+			msx_InitSample(best->h);
 			best->flags = 0;
 			best->f18 = 0;
 			best->loop = 1;

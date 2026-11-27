@@ -19,7 +19,7 @@ typedef struct BmpInfo {
 extern char s_6750e8[];
 
 /* ADDRESS: GOLDTL 0x00475360 */
-int __cdecl fcn_00475360(const char* name)
+int __cdecl d2_ReadBmpDimensions(const char* name)
 {
 	BmpInfo bi;
 	FILE* f;

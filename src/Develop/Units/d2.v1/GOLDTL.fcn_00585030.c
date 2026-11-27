@@ -41,14 +41,14 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_00533a60(int, int, int*, int, ...);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-void __cdecl fcn_00472640(int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534160(int, int, int, int);
@@ -119,7 +119,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		return;
 	}
 	d2_SetForm(win, 3);
-	fcn_00533a60(d2_CurrentWindowId, 0, two, 2, g_14b546c, g_14b5470);
+	d2_CreateButtonRow(d2_CurrentWindowId, 0, two, 2, g_14b546c, g_14b5470);
 	btn0 = two[0];
 	btn1 = two[1];
 	d2_SetForm(win, 2);
@@ -152,7 +152,7 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 		d2_SetForm(win, 4);
 		io_AppendText(0x6811b0);
 		if (sel != 0) {
-			dlg = fcn_004677e0((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
+			dlg = d2_AddWindowValueGauge((((Screen*) g_77255c)->xc - 0x12c) / 2, 0x12, 0x12c, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 			if (sel == 1) {
 				io_FormatTextBuffer(buf, (char*) 0x404b);
 			} else if (sel == 2) {
@@ -166,8 +166,8 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 			d2_SetElementFont(item, 0x54);
 			d2_SetElementValue(dlg, 0, 0x64, (int) (frac * g_662cf8));
 		}
-		fcn_00472640(btn1, g_102cbc8[list].n != -1 && count != 0 && sel == 0);
-		fcn_00472640(btn0, sel == 0);
+		d2_SetElementEnabled(btn1, g_102cbc8[list].n != -1 && count != 0 && sel == 0);
+		d2_SetElementEnabled(btn0, sel == 0);
 		if (sel != prev || g_6b7fac > (unsigned int) (stamp + 0x32)) {
 			stamp = g_6b7fac;
 			prev = sel;

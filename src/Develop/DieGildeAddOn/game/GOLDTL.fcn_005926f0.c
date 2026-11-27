@@ -23,7 +23,7 @@ extern int __cdecl fcn_00472380(void*, char*);
 extern int __cdecl d2_SetBildArgument(void*, int);
 extern int __cdecl fcn_004727a0(void*, int);
 extern int __cdecl d2_SelectControl(void*);
-extern int __cdecl fcn_00469e30(int);
+extern int __cdecl d2_SetBackdropResource(int);
 extern int __cdecl fcn_00469e70(void);
 extern int __cdecl fcn_004ce080(void);
 extern int __cdecl gm_AreAllMultiplayerReady(void);
@@ -48,7 +48,7 @@ extern int __cdecl d2_InitNetLobbyScrollbar(void);
 extern int __cdecl fcn_00593200(void);
 extern int __cdecl fcn_00593360(void);
 extern int __cdecl d3_FlushLoadAndPreloadQueue(void);
-extern int __cdecl fcn_00593550(void);
+extern int __cdecl d2_PopulateNetLobbyPlayerList(void);
 extern int __cdecl fcn_005936f0(int, int);
 extern int __cdecl d2_ChooseProfession(int);
 extern int __cdecl fcn_005941e0(void);
@@ -147,7 +147,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 		return -1;
 	while (cm_GetCommandStatus(d) == 0)
 		cm_StepCommandQueue();
-	fcn_00469e30(0x7d6);
+	d2_SetBackdropResource(0x7d6);
 	g_779cb8 = (char*)fcn_004ce1a0();
 	if (g_779cb8 == 0) {
 		h = (void*)fcn_00470820(0, 0, (char*)0x68d714);
@@ -172,7 +172,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 	fcn_00593200();
 	d3_FlushLoadAndPreloadQueue();
 	fcn_00593360();
-	fcn_00593550();
+	d2_PopulateNetLobbyPlayerList();
 	fcn_004727a0(g_6a9b9c, 1);
 	h = (void*)d2_GetWindowListItem(g_6a9b9c, 0, 0);
 	d2_SetBildArgument(h, 0x40);
@@ -290,7 +290,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 					cm_StepCommandQueue();
 				g_774a34 = (unsigned*)fcn_004ce180();
 				fcn_00593360();
-				fcn_00593550();
+				d2_PopulateNetLobbyPlayerList();
 				fcn_005941e0();
 				g_779ce4[1] = 0;
 			}

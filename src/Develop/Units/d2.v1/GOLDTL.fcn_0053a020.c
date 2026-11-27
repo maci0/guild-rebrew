@@ -16,7 +16,7 @@ int __cdecl main_RunFrameLoop(int (__cdecl*)(void), int);
 int __cdecl d2_CreateRadioGroup(int, int, int);
 void __cdecl d2_UpdateRadioGroup(int);
 void __cdecl d2_ClearRadioGroup(int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl ls_LoadNetworkSaveHeader(void);
 int __cdecl d2_ShowServerBrowser(int);
@@ -45,19 +45,19 @@ int __cdecl d2_ShowNetworkLoadDialog(void)
 		}
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == host_btn) {
-				fcn_00471af0(dlg, 0);
+				d2_SetFormVisibility(dlg, 0);
 				if (ls_LoadNetworkSaveHeader() != 0) {
 					g_774654 = 1;
 					result = 1;
 				}
-				fcn_00471af0(dlg, 1);
+				d2_SetFormVisibility(dlg, 1);
 			} else if (d2_CurrentElementId == join_btn) {
-				fcn_00471af0(dlg, 0);
+				d2_SetFormVisibility(dlg, 0);
 				if (d2_ShowServerBrowser(1) != 0) {
 					g_774654 = 1;
 					result = 1;
 				}
-				fcn_00471af0(dlg, 1);
+				d2_SetFormVisibility(dlg, 1);
 			}
 		}
 	}

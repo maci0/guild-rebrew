@@ -5,7 +5,7 @@ int __cdecl gm_LookupEntityRecordById(int a0);
 int __cdecl gm_HasActiveSpecialObject(int a0, int a1);
 
 /* ADDRESS: GOLDTL 0x00493be0 */
-int __cdecl fcn_00493be0(void* a0)
+int __cdecl gm_CalcProzessBasePenalty(void* action)
 {
 	char* p;
 	float f;
@@ -14,7 +14,7 @@ int __cdecl fcn_00493be0(void* a0)
 	int v;
 	int k;
 
-	p = (char*) a0;
+	p = (char*) action;
 	n = (int) (*(float*) (p + 4) - 1.0f);
 	f = *(float*) (p + 4);
 	frac = f - floor(f);

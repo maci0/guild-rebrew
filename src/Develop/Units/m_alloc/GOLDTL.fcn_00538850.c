@@ -19,7 +19,7 @@ extern void __cdecl d3_ApplyGraphicsOptions(void);
 extern void __cdecl fcn_0045bf50(char*);
 extern void __cdecl fcn_00449aa0(char*);
 extern int __cdecl d2_Open(HWND, int, int, char*, char*);
-extern void __cdecl fcn_00473df0(void);
+extern void __cdecl d2_InitOverlayState(void);
 extern int __cdecl sprintf(char*, const char*, ...);
 extern int g_1015ce0;
 extern int d2_ScreenHeight;
@@ -188,7 +188,7 @@ int __cdecl fcn_00538850(int topmost)
 	g_1015ce0 = (int) g_774940;
 	d2_MouseRightBoundary = g_1040494 - 8;
 	d2_MouseBottomBoundary = d2_ScreenHeight;
-	fcn_00473df0();
+	d2_InitOverlayState();
 	main_PumpWindowMessages();
 	return 1;
 }

@@ -35,7 +35,7 @@ char* __cdecl d3sm_GetObjectSuperMap(char*);
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
-void __cdecl fcn_00441720(char*, float*, int, int*, int*, float*);
+void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
 extern float g_6628a8;
 #include "../../../Units/d3/d3_animation.h"
 

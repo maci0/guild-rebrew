@@ -23,11 +23,6 @@ int __cdecl evt_LoadScript(char* a)
 	return 0;
 }
 
-int __cdecl fcn_004287b0(void* a)
-{
-	return 0;
-}
-
 
 
 int __cdecl fcn_005a8600(int a)

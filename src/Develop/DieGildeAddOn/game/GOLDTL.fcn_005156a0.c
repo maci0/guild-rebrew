@@ -19,7 +19,7 @@ extern void __cdecl d3_SetSubtreeVisible(char* record, int mode);
 extern char __cdecl d3_ComputeObjectBoundingSphere(char* record, char* scene, float* out, float* value);
 extern double g_662a08;
 extern void* __cdecl evt_LoadGfxScript(char* name);
-extern int __cdecl fcn_00428340(char* handle, int a, ...);
+extern int __cdecl evt_CallScriptFunction(char* handle, int a, ...);
 extern void __cdecl SelectTextureSet(char* record, int target, char mode, int flag);
 
 /* ADDRESS: GOLDTL 0x005156a0 */
@@ -183,7 +183,7 @@ label_5aab:
 					scaled = (int) (value * g_662a08);
 					handle = (char*) evt_LoadGfxScript((char*) 0x6a1f3c);
 					if (handle != 0)
-						fcn_00428340(handle, 6, (int) buf[0], (int) buf[1],
+						evt_CallScriptFunction(handle, 6, (int) buf[0], (int) buf[1],
 							(int) buf[2], (int) value, scaled, record);
 				}
 			}

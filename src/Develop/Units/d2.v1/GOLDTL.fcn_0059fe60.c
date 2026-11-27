@@ -30,12 +30,12 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 char *__cdecl he_StartHandlungSearch(int, int, int);
 char *__cdecl he_fn_Handlung(void);
 char *__cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
-unsigned short *__cdecl fcn_005cd440(int *, char *, char *, int);
+unsigned short *__cdecl d2_OpenTargetPicker(int *, char *, char *, int);
 int __cdecl fcn_00526120(char *, int);
 void __cdecl cm_SendCopyEntityData(char *);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl fcn_0059fa80(Slot59fe *, char *, char *);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_DestroyForm(int);
@@ -109,12 +109,12 @@ void __cdecl fcn_0059fe60(char *a0)
 				break;
 			}
 			buttons[i] = d2_GetWindowListItem(dlg, 1, io_AppendText(0x1a52, *(unsigned short *) ent));
-			fcn_00472640(buttons[i], avail[i]);
+			d2_SetElementEnabled(buttons[i], avail[i]);
 		}
 		if (n >= 4) {
-			fcn_00472640(item, 0);
+			d2_SetElementEnabled(item, 0);
 		} else {
-			fcn_00472640(item, 1);
+			d2_SetElementEnabled(item, 1);
 		}
 		if (g_14ce8e0 != 0) {
 			g_774654 = 1;
@@ -127,7 +127,7 @@ void __cdecl fcn_0059fe60(char *a0)
 				box[3] = g_66601c;
 				io_FormatTextBuffer(text_a, 0x1a53);
 				io_FormatTextBuffer(text_b, 0x1a54);
-				sel = fcn_005cd440(box, text_a, text_b, 0);
+				sel = d2_OpenTargetPicker(box, text_a, text_b, 0);
 				if (sel != 0) {
 					if (g_7f4ca0[g_774970].b9 == 0) {
 						io_FormatTextBuffer(text_c, 0x1a55, *sel);
@@ -150,9 +150,9 @@ void __cdecl fcn_0059fe60(char *a0)
 					if (d2_CurrentElementId == buttons[i]) {
 						ent = gm_LookupEntityRecordById(ids[i]);
 						act = he_StartHandlungSearch(1, 1, acts[i]);
-						fcn_00471af0(dlg, 0);
+						d2_SetFormVisibility(dlg, 0);
 						fcn_0059fa80(&g_7f4ca0[g_774970], ent, act);
-						fcn_00471af0(dlg, 1);
+						d2_SetFormVisibility(dlg, 1);
 						break;
 					}
 				}

@@ -1,7 +1,7 @@
 extern char g_9a3825[];
 
 /* ADDRESS: GOLDTL 0x004f5bf0 */
-int __cdecl fcn_004f5bf0(unsigned int key, int start)
+int __cdecl gm_FindStraftatIndex(unsigned int key, int start)
 {
 	int r;
 	int i;

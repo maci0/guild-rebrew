@@ -5,13 +5,13 @@ int __cdecl sb_FindSampleBank(int* a0);
 int __cdecl sb_LoadEntry(int a0, int* a1);
 int __cdecl fcn_0064d3f8(void);
 int __cdecl msx_SetSampleData(int a0, int a1, int a2, int a3);
-void __cdecl fcn_0042a920(int a0, int a1);
-void __cdecl fcn_0042a9a0(int a0, int a1);
+void __cdecl msx_SetSampleVolume(int a0, int a1);
+void __cdecl msx_SetSamplePan(int a0, int a1);
 void __cdecl msx_SetSampleLoopCount(int a0, int a1);
 void __cdecl msx_StartSample(int a0);
 
 /* ADDRESS: GOLDTL 0x00423670 */
-int __cdecl fcn_00423670(int* voice, int a1, int a2)
+int __cdecl sb_StartVoice(int* voice, int fade_in, int limit)
 {
 	int result;
 	char* ent;
@@ -67,19 +67,19 @@ int __cdecl fcn_00423670(int* voice, int a1, int a2)
 		result = -1;
 		goto done;
 	}
-	if (a1 != 0) {
+	if (fade_in != 0) {
 		voice[4] = (g_6b7fac * 2 + g_6b7fac) * 4
 			+ g_6b7fac;
 		voice[5] |= 1;
-		fcn_0042a920(*voice, 0);
+		msx_SetSampleVolume(*voice, 0);
 	} else {
-		fcn_0042a920(*voice, voice[9]);
+		msx_SetSampleVolume(*voice, voice[9]);
 	}
-	fcn_0042a9a0(*voice, voice[10]);
-	if ((*(unsigned char*) ((char*) voice + 0x14) & 4) == 0 && a2 != 0) {
+	msx_SetSamplePan(*voice, voice[10]);
+	if ((*(unsigned char*) ((char*) voice + 0x14) & 4) == 0 && limit != 0) {
 		msx_SetSampleLoopCount(*voice, 1);
 		voice[7] = 0;
-		voice[6] = a2;
+		voice[6] = limit;
 	} else {
 		msx_SetSampleLoopCount(*voice, voice[3]);
 		voice[6] = 0;

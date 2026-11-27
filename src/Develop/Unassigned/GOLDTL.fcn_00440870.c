@@ -28,7 +28,7 @@ void __cdecl d3_NormalizeVector(float* v);
 void __cdecl fcn_004372d0(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00440870 */
-void __cdecl fcn_00440870(char* o, char* c)
+void __cdecl d3_RenderFloorCellWater(char* o, char* c)
 {
 	char* m;
 	char* map;

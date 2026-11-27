@@ -18,7 +18,7 @@ extern void __cdecl fcn_00455c90(int i, int j);
 extern void __cdecl fcn_00455d30(int count, int size, unsigned char flags, int arg3, int y);
 
 /* ADDRESS: GOLDTL 0x00456080 */
-void __cdecl fcn_00456080(float* v, unsigned char* colors, int base, int size,
+void __cdecl d3_RasterizeHeightTriangle(float* v, unsigned char* colors, int base, int size,
 	unsigned char flags, int grid, int r)
 {
 	int ymin = size << 16;

@@ -3,8 +3,8 @@ void __cdecl fcn_0058ba20(char*, char*);
 int __cdecl fcn_0046fac0(void*, int, void*, int);
 void __cdecl fcn_00534160(int, int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00468df0(int, int, int, int, int);
-void __cdecl fcn_00469110(int, int);
+int __cdecl d2_AddWindowTextButton(int, int, int, int, int);
+void __cdecl d2_SetElementWidth(int, int);
 void __cdecl fcn_0046c310(int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl d2_SetElementFont(int, int);
@@ -165,12 +165,12 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
         io_AppendText((int) 0x6a9668, 0x4103, (int) v12);
         if (a3 == 1) {
             v14 = d2_CurrentWindowId;
-            v6 = fcn_00468df0(
+            v6 = d2_AddWindowTextButton(
                 (*(int*) (v14 * 0x3cc + 0x1015f4c) - 0xb4) / 2,
                 *(int*) (v14 * 0x3cc + 0x1015f50) - 0x21, 0xbf,
                 *(int*) 0x14b5ee4, v14);
             v2[0x4e] = v6;
-            fcn_00469110(v6, 0xb4);
+            d2_SetElementWidth(v6, 0xb4);
         }
     }
     *(unsigned int*) (v2[3] * 0x3cc + 0x1016198) = v19;

@@ -1,7 +1,7 @@
 void __cdecl free(void* p);
 
 /* ADDRESS: GOLDTL 0x00429490 */
-int __cdecl fcn_00429490(char* ctx)
+int __cdecl evt_InvokeExternalCommand(char* ctx)
 {
 	char* cb;
 	int result;

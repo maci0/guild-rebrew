@@ -4,7 +4,7 @@
 
 char* __cdecl sbs_FindSet(int id);
 
-char* __cdecl fcn_00423c50(int id, const char* name)
+char* __cdecl sbs_FindSetSample(int id, const char* name)
 {
 	char* r;
 	char* e;

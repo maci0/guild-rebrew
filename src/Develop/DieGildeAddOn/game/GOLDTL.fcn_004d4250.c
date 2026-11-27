@@ -9,7 +9,7 @@ int __cdecl fcn_004d3330(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
 char* __cdecl d3_FindNearestEnemyWare(char*);
 int __cdecl he_QueueTradeWareCommand(char*, char*, char*);
-char* __cdecl fcn_004d36e0(char*);
+char* __cdecl d3_FindNearestConquerNode(char*);
 int __cdecl cut_AssignConquerTarget(char*, char*, char*);
 void __cdecl cut_SendExitSlotCommand(char*, char*);
 int __cdecl cut_AssignGuardOrder(char*, char*);
@@ -65,7 +65,7 @@ void __cdecl cut_AssignCombatUnitOrder(char* rec, char* e)
 			}
 			break;
 		case 2:
-			obj = fcn_004d36e0(e);
+			obj = d3_FindNearestConquerNode(e);
 			if (obj != 0) {
 				cut_AssignConquerTarget(rec, e, obj);
 				return;

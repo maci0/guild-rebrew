@@ -9,7 +9,7 @@ char __cdecl d3_RenderSceneObject(char*, void*);
 char __cdecl d3_RenderMirroredObject(char*, void*);
 void __cdecl d3_UpdateAndRenderEffect(char*);
 void __cdecl fcn_0045d4f0(void*);
-void __cdecl fcn_00452e00(void);
+void __cdecl d3_UpdateSceneOverlayObjects(void);
 void __cdecl d3_FlushRenderQueues(void); extern float g_5ebaa4;
 #include "client_lighting.h"
 #include "Develop/Units/d3/d3_camera.h"
@@ -72,7 +72,7 @@ void __cdecl d3_RenderScene(unsigned int pass, int overlay)
     if (*(void**) 0x633dd4)
         fcn_0045d4f0(*(void**) 0x633dd4);
     if ((unsigned char) overlay)
-        fcn_00452e00();
+        d3_UpdateSceneOverlayObjects();
     if ((*(unsigned char*) 0xfe7670 & 0x40) && *(int*) 0x63344c &&
         *(int*) 0xfb9904 && *(int*) 0xfb9908 && (*(unsigned char*) 0xfb9928 & 1))
         d3_VisitSceneObjectsUntilStopped(*(char**) 0x5fb5b0, 0, pass, d3_RenderMirroredObject, (void*) 0xfb9900);

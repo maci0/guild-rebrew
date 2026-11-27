@@ -52,7 +52,7 @@ void __cdecl fcn_0046bd20(int, int, int, int, Ctx*, char*, int);
 
 
 /* ADDRESS: GOLDTL 0x00473800 */
-void __cdecl fcn_00473800(Ctx* c, int x, int y)
+void __cdecl d2_DrawCursorAndCounters(Ctx* c, int x, int y)
 {
 	Item* p;
 	int old;

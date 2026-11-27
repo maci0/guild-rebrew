@@ -19,19 +19,19 @@ int __cdecl he_GetActiveKrediteByBorrower(int, char*, char**);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_DestroyElement(int);
-int __cdecl fcn_0046f100(int, int, int, int, int, int);
-void __cdecl fcn_0046f280(int);
+int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
+void __cdecl d2_CloseWindow(int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText();
 void __cdecl d3_EndCameraAndUiMode(void);
-void __cdecl fcn_00533a60(int, int, int*, int, ...);
+void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_ChooseNewLoan(char*);
 void __cdecl d2_AcceptLoanOffer(char*, char*);
@@ -84,7 +84,7 @@ void __cdecl d2_ShowLoanDialog(char* p)
 		if (refresh) {
 			for (i = 0; i < 9; i++) {
 				if (rows[i].image != -1) {
-					fcn_0046f280(rows[i].image);
+					d2_CloseWindow(rows[i].image);
 					d2_DestroyElement(rows[i].text);
 					rows[i].image = -1;
 					rows[i].text = -1;
@@ -112,11 +112,11 @@ void __cdecl d2_ShowLoanDialog(char* p)
 			d2_SetForm(dialog, 3);
 			io_AppendText(g_6811b0);
 			if (refresh == 0) {
-				fcn_00533a60(d2_CurrentWindowId, 0, sel, 2, g_14ab658, g_14ab65c);
+				d2_CreateButtonRow(d2_CurrentWindowId, 0, sel, 2, g_14ab658, g_14ab65c);
 				first = sel[0];
 				second = sel[1];
 			} else {
-				fcn_00533a60(d2_CurrentWindowId, 0, sel, 1, g_14ab65c);
+				d2_CreateButtonRow(d2_CurrentWindowId, 0, sel, 1, g_14ab65c);
 				first = -1;
 				second = sel[0];
 			}
@@ -128,7 +128,7 @@ void __cdecl d2_ShowLoanDialog(char* p)
 				for (i = 0; i < count; i++) {
 					d2_SetForm(dialog, 2);
 					rows[i].text = d2_AddElementToWindow((*(int*) (g_77255c + 0xc) - w) >> 1, y, 0x75a, d2_CurrentWindowId);
-					rows[i].image = fcn_0046f100((*(int*) (g_77255c + 0xc) - w) >> 1, y, w, h, 0x10, d2_CurrentWindowId);
+					rows[i].image = d2_CreateChildWindow((*(int*) (g_77255c + 0xc) - w) >> 1, y, w, h, 0x10, d2_CurrentWindowId);
 					line = lines[index];
 					rows[i].line = line;
 					*(int*) (rows[i].image * 0x3cc + 0x10161cc) = 0x56;
@@ -157,20 +157,20 @@ void __cdecl d2_ShowLoanDialog(char* p)
 		}
 		if (second != -1) {
 			arg = count > 0 && *(int*) (slot * 0x8c + 0x102cbc8) != -1;
-			fcn_00472640(second, arg);
+			d2_SetElementEnabled(second, arg);
 		}
 		if (g_100f1dc != -1 && g_100f1dc == 2) {
 			if (d2_CurrentElementId != first || first == -1) {
 				if (d2_CurrentElementId == second && second != -1) {
-					fcn_00471af0(dialog, 0);
+					d2_SetFormVisibility(dialog, 0);
 					d2_AcceptLoanOffer(p, rows[*(int*) (slot * 0x8c + 0x102cbc8)].line);
 					refresh = 1;
-					fcn_00471af0(dialog, 1);
+					d2_SetFormVisibility(dialog, 1);
 				}
 			} else {
-				fcn_00471af0(dialog, 0);
+				d2_SetFormVisibility(dialog, 0);
 				d2_ChooseNewLoan(p);
-				fcn_00471af0(dialog, 1);
+				d2_SetFormVisibility(dialog, 1);
 				refresh = 1;
 			}
 		}

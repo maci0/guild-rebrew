@@ -35,7 +35,7 @@ int __cdecl gm_GetEquippedCombatGear(int);
 int __cdecl gm_FindEntityActiveItem(int);
 int __cdecl gm_FindOrCreateEntitySlot(int, int);
 int __cdecl fcn_004cec00(int, int, int*, int*);
-float __cdecl fcn_004cefb0(int, unsigned int);
+float __cdecl gm_CalcEntityFlatDistance(int, unsigned int);
 int __cdecl cut_AssignTargetOrder(int, int, int, int, int);
 int __cdecl cut_RandMod(int);
 int __cdecl gm_HasActiveSpecialObject(int, int);
@@ -73,7 +73,7 @@ unsigned int __cdecl cut_ExecuteCombatAttack(int ctx, unsigned int actorArg, int
 	if (v8 == 0x154 || v8 == 0x156 || v8 == 0x158 || v8 == 0x16e
 	    || v8 == 0x172 || v8 == 0 || v8 == 0x176) {
 		v9 = *(int*) (targetEnt + 0x184);
-		if (*(float*) (p + 3) < fcn_004cefb0(actor, *(unsigned int*) (v9 + 0x34))) {
+		if (*(float*) (p + 3) < gm_CalcEntityFlatDistance(actor, *(unsigned int*) (v9 + 0x34))) {
 			if (*(int*) (*(int*) (actor + 0x184) + 0x128) != 0)
 				goto fail;
 			if (ev.busy)

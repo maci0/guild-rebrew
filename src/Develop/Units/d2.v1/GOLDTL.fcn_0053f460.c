@@ -6,8 +6,8 @@ extern int g_77250c;
 
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_0053ed60(int, int);
-void __cdecl fcn_00476970(int);
-void __cdecl fcn_00469e30(int);
+void __cdecl d2_ClearSurface(int);
+void __cdecl d2_SetBackdropResource(int);
 
 int __cdecl d2_StartSinglePlayerChooseCity(void)
 {
@@ -18,8 +18,8 @@ int __cdecl d2_StartSinglePlayerChooseCity(void)
 	(*(char*)&g_6a375c) = 1;
 	r = fcn_0053ed60(1, 0);
 	if (r == 0) {
-		fcn_00476970(g_77250c);
-		fcn_00469e30(0x797);
+		d2_ClearSurface(g_77250c);
+		d2_SetBackdropResource(0x797);
 	}
 	return r;
 }

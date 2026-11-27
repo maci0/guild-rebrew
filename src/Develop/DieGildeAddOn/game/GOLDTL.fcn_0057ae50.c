@@ -12,7 +12,7 @@ char* __cdecl evt_FindScriptById(int);
 char* __cdecl evt_LoadGfxScript(const char* name);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-void __cdecl fcn_00428340(char* o, int n, ...);
+void __cdecl evt_CallScriptFunction(char* o, int n, ...);
 void __cdecl evt_RequestScriptExit(char*);
 void __cdecl he_FreeAction(char*);
 
@@ -62,7 +62,7 @@ void __cdecl he_UpdateNecromancerFog(char* u)
 	d3_SelectSceneContext(0, 1);
 	d3_TransformPoint(*(char**) (e + 0x61), *(char**) (e + 0x61) + 0x4c, pos);
 	pos[1] += 500.0f;
-	fcn_00428340(o, 3, (int) pos[0], (int) pos[1], (int) pos[2]);
+	evt_CallScriptFunction(o, 3, (int) pos[0], (int) pos[1], (int) pos[2]);
 	*(int*) (o + 0x104) = 0;
 	d3_SelectSceneContext(saved, 1);
 	*(int*) (u + 0xb0) = *(int*) (o + 0x100);

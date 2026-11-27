@@ -37,7 +37,7 @@ extern int g_665f84[4];
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl fcn_0058b030(char* a, struct seldlg* d)
 {
@@ -53,9 +53,9 @@ void __cdecl fcn_0058b030(char* a, struct seldlg* d)
 		((D2_CONTROL_TL*) g_1015ea0)[d->ids[i]].flags_1d0 = 3;
 		((D2_CONTROL_TL*) g_1015ea0)[d->ids[i]].associated_object = (char*) &((OBJECT_PROTOTYPE*)lpObjektePROT)[g_665f84[i]];
 	}
-	fcn_00472640(d->ids[1], (unsigned char) s[0x19]);
-	fcn_00472640(d->ids[2], (unsigned char) s[0x1a]);
-	fcn_00472640(d->ids[3], (unsigned char) s[0x1b]);
+	d2_SetElementEnabled(d->ids[1], (unsigned char) s[0x19]);
+	d2_SetElementEnabled(d->ids[2], (unsigned char) s[0x1a]);
+	d2_SetElementEnabled(d->ids[3], (unsigned char) s[0x1b]);
 	if (d->sel == 3 && s[0x1b] == 1) {
 		((D2_CONTROL_TL*) g_1015ea0)[d->ids[3]].value_03c = 1;
 	} else if (d->sel == 2 && s[0x1a] == 1) {

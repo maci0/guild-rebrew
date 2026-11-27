@@ -25,14 +25,14 @@ extern int d2_CurrentElementId;
 int __cdecl fcn_00470820(int, int, char*);
 int __cdecl fcn_004f65a0(ENTITY_RECORD*, int, int*, int*);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
-int __cdecl fcn_00472830(int, int);
+int __cdecl d2_GetFormWindow(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_005338a0(void);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl cm_RequestLinkEvidence(int, int);
 void __cdecl cm_RequestModifyHealth(int, int);
@@ -64,7 +64,7 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 	if (count >= max + 1) {
 		count = max + 1;
 	}
-	fcn_005340f0(fcn_00472830(dlg, 0));
+	fcn_005340f0(d2_GetFormWindow(dlg, 0));
 	d2_CenterDialogWindows(dlg);
 	fcn_005338a0();
 	d2_SetForm(dlg, 1);
@@ -74,7 +74,7 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 	yes = d2_GetWindowListItem(dlg, 2, io_AppendText((int) s_681140, 0x422d));
 	io_AppendText((int) s_6ad3bc, 0x422e);
 	if (found == 0 || count == 0) {
-		fcn_00472640(yes, 0);
+		d2_SetElementEnabled(yes, 0);
 	}
 	while (main_RunFrameLoop(d2_ShowSchneidereiPlauschDialog, 0x67fff)) {
 		if (g_14ce8e0 || g_100f1dc == 1) {

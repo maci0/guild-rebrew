@@ -23,7 +23,7 @@ void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl d3_SetActiveCamera(char*);
 void __cdecl d3_DisposeObject(char*);
 char* __cdecl fcn_0044abb0(void*, char*, unsigned int, unsigned char);
-int __cdecl fcn_0044a9e0(unsigned int);
+int __cdecl d3_GetScenePresetCount(unsigned int);
 char* __cdecl d3_int_io_LoadFloor(void*, int);
 void __cdecl d3e_ReadSceneEvents(void*);
 char* __cdecl d3_GetNextSceneNode(char*);
@@ -118,7 +118,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 			*(int*) (g_1041d80 + index * 0x60 + 0x14) = 0;
 		}
 		if (version >= 0x3a6c00a2) {
-			rows = fcn_0044a9e0((unsigned) version);
+			rows = d3_GetScenePresetCount((unsigned) version);
 			index = 0;
 			if (rows > 0) {
 				do {

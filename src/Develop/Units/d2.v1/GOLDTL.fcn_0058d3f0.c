@@ -35,7 +35,7 @@ int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl evt_LoadGfxScript(char*);
-void __cdecl fcn_00428340(int, int, char*);
+void __cdecl evt_CallScriptFunction(int, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -90,7 +90,7 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 					if (p != 0) {
 						sprintf(line, s_6a9748, *(int*) (p + 4));
 						id = evt_LoadGfxScript(s_6a9714);
-						fcn_00428340(id, 1, line);
+						evt_CallScriptFunction(id, 1, line);
 					}
 					result = 1;
 					g_774654 = 1;

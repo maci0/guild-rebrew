@@ -1,6 +1,6 @@
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void* __cdecl d2_GetResourceData(int);
-int __cdecl fcn_0047cb30(int, int, int, int);
+int __cdecl d2_SetClipRect(int, int, int, int);
 int __cdecl d2_DrawShapeFrame(int, int, int, void*, int);
 
 #define CAM(off)	((float*) (*(char**) 0xfc2dec + (off)))
@@ -61,7 +61,7 @@ void __cdecl fcn_004cf370(void)
 			d = 1;
 		}
 	}
-	fcn_0047cb30(0, 0, ((int*) *(int*) 0x6ed924)[1], ((int*) *(int*) 0x6ed924)[2]);
+	d2_SetClipRect(0, 0, ((int*) *(int*) 0x6ed924)[1], ((int*) *(int*) 0x6ed924)[2]);
 	if (c == 2) {
 		d2_DrawShapeFrame(HALF_H - 0x14, (int) (*(float*) 0x5fe708 * *(float*) 0x5edc50 - *(float*) 0x5eb81c),
 			     *(int*) 0x6ed924, rec, 0);

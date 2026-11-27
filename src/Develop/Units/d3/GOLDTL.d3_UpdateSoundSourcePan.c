@@ -5,7 +5,7 @@ extern float g_662d40[3];
 
 float* __stdcall D3DXMatrixTranspose(float*, const float*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-float __cdecl fcn_00451380(float*, float*);
+float __cdecl d3_SignedPlanarAngle(float*, float*);
 void __cdecl sb_SetVoicePan(void*, int);
 
 
@@ -30,5 +30,5 @@ void __cdecl d3_UpdateSoundSourcePan(char* src)
 	dir[0] = pos[0] - *(float*) (((char*)d3_ActiveCamera) + 0x4c);
 	dir[1] = pos[1] - *(float*) (((char*)d3_ActiveCamera) + 0x50);
 	dir[2] = pos[2] - *(float*) (((char*)d3_ActiveCamera) + 0x54);
-	sb_SetVoicePan(*(void**) (src + 0x34), (int) (sin(fcn_00451380(dir, fwd)) * 63.5 + 63.0));
+	sb_SetVoicePan(*(void**) (src + 0x34), (int) (sin(d3_SignedPlanarAngle(dir, fwd)) * 63.5 + 63.0));
 }

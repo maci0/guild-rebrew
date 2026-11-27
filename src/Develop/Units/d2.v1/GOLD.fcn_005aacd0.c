@@ -7,7 +7,7 @@
 
 int __cdecl d2_OpenBook(int, int, int, int, int, int, int);
 void __cdecl d2_UpdatePagedPanel(int);
-void __cdecl fcn_00576300(int, int, int, int);
+void __cdecl d2_StepTutorialEvent(int, int, int, int);
 int __cdecl gm_FormatEntityName(int, int, int, void*);
 int __cdecl gm_FindBuildingOwner(void*);
 void __cdecl fcn_00475f60(int, int);
@@ -130,7 +130,7 @@ int __cdecl fcn_005aacd0(unsigned char* buildingRec, int modelId, int a3)
 	}
 	f.book = book;
 	d2_UpdatePagedPanel((int) book);
-	fcn_00576300(0x21, (int) book, 0, 0);
+	d2_StepTutorialEvent(0x21, (int) book, 0, 0);
 	gm_FormatEntityName(*(unsigned short*) (buildingRec + 0x27), 1, 2, f.txt7b0);
 	gm_FormatEntityName(*(unsigned short*) (buildingRec + 0x25), 1, 2, f.txt760);
 	r = (char*) gm_FindBuildingOwner(buildingRec);

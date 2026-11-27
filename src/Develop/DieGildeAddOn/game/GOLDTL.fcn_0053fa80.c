@@ -25,7 +25,7 @@ extern int g_7746c4;
 extern int g_7746c8;
 
 void __cdecl fcn_00533880(void);
-void __cdecl fcn_00475220(void* p);
+void __cdecl d2_SetMouseTooltip(void* p);
 void __cdecl fcn_00533a40(void* p);
 void __cdecl fcn_0042def0(void* p);
 void __cdecl evt_CloseAllScripts(void);
@@ -65,7 +65,7 @@ void __cdecl gm_ShutdownGameRuntime(void)
 	int* entry;
 
 	fcn_00533880();
-	fcn_00475220(&g_6b5c60);
+	d2_SetMouseTooltip(&g_6b5c60);
 	fcn_00533a40(&g_6b5c60);
 	d2_SuppressOverlay = 1;
 	fcn_0042def0(&g_538060);

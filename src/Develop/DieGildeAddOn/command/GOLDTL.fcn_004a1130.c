@@ -2,10 +2,10 @@
 
 #include "client_method_registry.h"
 
-int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e);
+int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, char* e);
 int __cdecl fcn_00495960(void);
 int __cdecl am_RunDummyRechtschaffenheit(void);
-int __cdecl fcn_00495990(void);
+int __cdecl am_StartDummySicherheit(void);
 int __cdecl fcn_004959b0(void);
 int __cdecl fcn_004959c0(void);
 int __cdecl fcn_004959e0(void);
@@ -41,7 +41,7 @@ int __cdecl fcn_00497990(void);
 int __cdecl fcn_00497e60(void);
 int __cdecl fcn_00497ec0(void);
 int __cdecl ai_RunWohnsitzBauen(void);
-int __cdecl fcn_00498570(void);
+int __cdecl ai_StartWohnsitzUpgraden(void);
 int __cdecl fcn_00498660(void);
 int __cdecl ai_StartBetriebBauen(void);
 int __cdecl ai_RunBetriebBauen(void);
@@ -175,7 +175,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x1;
 	strcpy(d.name, "DummyUnversehrtheit");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 #ifdef REBREW_GOLD
 	d.start = fcn_00496020;
 #else
@@ -213,7 +213,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x2;
 	strcpy(d.name, "DummyBeruf");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartDummyBeruf;
 	d.run = cm_RunDummyBeruf;
 	d.flags = 0x1;
@@ -247,7 +247,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x3;
 	strcpy(d.name, "DummyVergnuegen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = fcn_00495a50;
 	d.run = fcn_00495a70;
 	d.flags = 0x1;
@@ -281,7 +281,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x4;
 	strcpy(d.name, "Bildung");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBildung;
 	d.run = fcn_00495f80;
 	d.flags = 0x1;
@@ -315,7 +315,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x5;
 	strcpy(d.name, "Bildung (Beruf)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBildungBeruf;
 	d.run = fcn_00496480;
 	d.flags = 0x1;
@@ -349,7 +349,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x6;
 	strcpy(d.name, "DummyRechtschaffenheit");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = fcn_00495960;
 	d.run = am_RunDummyRechtschaffenheit;
 	d.flags = 0x1;
@@ -383,8 +383,8 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x7;
 	strcpy(d.name, "DummySicherheit");
-	d.score = fcn_004a4410;
-	d.start = fcn_00495990;
+	d.score = ai_ComputeBaseActionScore;
+	d.start = am_StartDummySicherheit;
 	d.run = fcn_004959b0;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -417,7 +417,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x8;
 	strcpy(d.name, "DummyFortpflanzung");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = fcn_004959c0;
 	d.run = fcn_004959e0;
 	d.flags = 0x1;
@@ -519,7 +519,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0xb;
 	strcpy(d.name, "Objekt kaufen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBuyObjekt;
 	d.run = ai_RunBuyObject;
 	d.flags = 0x1;
@@ -553,7 +553,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0xd;
 	strcpy(d.name, "Objekt kaufen (AP)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = am_StartBuyObjektAP;
 	d.run = fcn_004974d0;
 	d.flags = 0x1;
@@ -587,7 +587,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0xe;
 	strcpy(d.name, "Raum kaufen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartRaumKaufen;
 	d.run = ai_RunRaumKaufen;
 	d.flags = 0xff;
@@ -621,7 +621,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0xf;
 	strcpy(d.name, "Repair Building");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartRepairBuilding;
 	d.run = ai_RunRepairBuilding;
 	d.flags = 0xff;
@@ -655,7 +655,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x10;
 	strcpy(d.name, "Wohnsitz kaufen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = fcn_00497990;
 	d.run = fcn_00497e60;
 	d.flags = 0x3;
@@ -689,7 +689,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x11;
 	strcpy(d.name, "Wohnsitz bauen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = fcn_00497ec0;
 	d.run = ai_RunWohnsitzBauen;
 	d.flags = 0x3;
@@ -723,8 +723,8 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x12;
 	strcpy(d.name, "Wohnsitz upgraden (Credits)");
-	d.score = fcn_004a4410;
-	d.start = fcn_00498570;
+	d.score = ai_ComputeBaseActionScore;
+	d.start = ai_StartWohnsitzUpgraden;
 	d.run = fcn_00498660;
 	d.flags = 0x3;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -757,7 +757,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x13;
 	strcpy(d.name, "Betrieb bauen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBetriebBauen;
 	d.run = ai_RunBetriebBauen;
 	d.flags = 0x3;
@@ -791,7 +791,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x14;
 	strcpy(d.name, "Betrieb upgraden (AP)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = fcn_00498e00;
 	d.run = fcn_00498e10;
 	d.flags = 0x3;
@@ -825,7 +825,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x15;
 	strcpy(d.name, "Betrieb upgraden (Credits)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBetriebUpgraden;
 	d.run = fcn_00498f40;
 	d.flags = 0x3;
@@ -859,7 +859,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x16;
 	strcpy(d.name, "Medicus ausfsuchen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartMedicusAufsuchen;
 	d.run = ai_RunMedicusAufsuchen;
 	d.flags = 0x3b;
@@ -961,7 +961,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x19;
 	strcpy(d.name, "Buergerrecht");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = PrepareBuergerrecht;
 	d.run = ai_RunBuergerrecht;
 	d.flags = 0x1b;
@@ -995,7 +995,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x1a;
 	strcpy(d.name, "ApsSparen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = fcn_00499cc0;
 	d.run = cm_RunApsSparen;
 	d.flags = 0x1;
@@ -1029,7 +1029,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x1b;
 	strcpy(d.name, "UseObject (Military)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUseObjectMilitary;
 	d.run = ai_RunUseObjectMilitary;
 	d.flags = 0x3;
@@ -1063,7 +1063,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x1c;
 	strcpy(d.name, "UseObject (Ansehen)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUseObjectAnsehen;
 	d.run = ai_RunUseObjectAnsehen;
 	d.flags = 0x19;
@@ -1097,7 +1097,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x1d;
 	strcpy(d.name, "UseObject (APS)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUseObjectAps;
 	d.run = fcn_0049a7b0;
 	d.flags = 0x39;
@@ -1131,7 +1131,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x1e;
 	strcpy(d.name, "UseObject (Bildung)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartEducationObject;
 	d.run = ai_RunEducationObject;
 	d.flags = 0x3b;
@@ -1165,7 +1165,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x1f;
 	strcpy(d.name, "UseObject (Unversehrtheit)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUseObjectUnversehrtheit;
 	d.run = ai_RunUseObjectUnversehrtheit;
 	d.flags = 0x3f;
@@ -1199,7 +1199,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x20;
 	strcpy(d.name, "UseObject (Dynastie)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUseDynastyObject;
 	d.run = ai_RunUseDynastyObject;
 	d.flags = 0x17;
@@ -1233,7 +1233,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x21;
 	strcpy(d.name, "UseObject (Gemeinheit)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUseObjectGemeinheit;
 	d.run = ai_RunUseObjectGemeinheit;
 	d.flags = 0xc9;
@@ -1267,7 +1267,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x22;
 	strcpy(d.name, "UseObject (Sicherheit)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUseObjectSicherheit;
 	d.run = ai_RunSecurityObject;
 	d.flags = 0x39;
@@ -1369,7 +1369,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x25;
 	strcpy(d.name, "Spionage");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartSpionage;
 	d.run = ai_RunSpionage;
 	d.flags = 0x69;
@@ -1403,7 +1403,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0xc;
 	strcpy(d.name, "Objekt Kaufen (Markt)");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartObjektKaufen;
 	d.run = ai_RunObjektKaufen;
 	d.flags = 0xff;
@@ -1437,7 +1437,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x26;
 	strcpy(d.name, "Ablass Kaufen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartAblassKaufen;
 	d.run = ai_RunAblassKaufen;
 	d.flags = 0x39;
@@ -1471,7 +1471,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x27;
 	strcpy(d.name, "UseAmt");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUseAmt;
 	d.run = ai_RunUseAmt;
 	d.flags = 0xff;
@@ -1573,7 +1573,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x2a;
 	strcpy(d.name, "Anschwaerzen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartAnschwaerzen;
 	d.run = ai_RunAnschwaerzen;
 	d.flags = 0x39;
@@ -1675,7 +1675,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x2d;
 	strcpy(d.name, "UsePrivs");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUsePrivs;
 	d.run = ai_RunUsePrivs;
 	d.flags = 0xff;
@@ -1743,7 +1743,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x2f;
 	strcpy(d.name, "Baumeister");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBaumeister;
 	d.run = ai_RunBaumeister;
 	d.flags = 0x3b;
@@ -1777,7 +1777,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x30;
 	strcpy(d.name, "Buergermeister upgrade");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBuergermeisterUpgrade;
 	d.run = am_RunBuergermeisterUpgrade;
 	d.flags = 0x39;
@@ -1811,7 +1811,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x31;
 	strcpy(d.name, "Buergermeister Rathaus");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBuergermeisterRathaus;
 	d.run = ai_RunBuergermeisterRathaus;
 	d.flags = 0x39;
@@ -1845,7 +1845,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x3c;
 	strcpy(d.name, "Buergermeister Kerker");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartBuergermeisterKerker;
 	d.run = ai_RunBuergermeisterKerker;
 	d.flags = 0x39;
@@ -1913,7 +1913,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x33;
 	strcpy(d.name, "Kredit Nehmen");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartKreditNehmen;
 	d.run = ai_RunKreditNehmen;
 	d.flags = 0x7;
@@ -1981,7 +1981,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x35;
 	strcpy(d.name, "Stammtisch");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartStammtisch;
 	d.run = ai_RunStammtisch;
 	d.flags = 0x19;
@@ -2015,7 +2015,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x36;
 	strcpy(d.name, "Zunft Preismanipulation");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartZunftPreismanipulation;
 	d.run = fcn_0049fa80;
 	d.flags = 0x3;
@@ -2049,7 +2049,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x37;
 	strcpy(d.name, "Zunft Aufruhr");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartZunftAufruhr;
 	d.run = ai_RunZunftAufruhr;
 	d.flags = 0x43;
@@ -2083,7 +2083,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x38;
 	strcpy(d.name, "Zunft Level 3");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartZunftLevel3;
 	d.run = ai_RunZunftLevel3;
 	d.flags = 0x4b;
@@ -2185,7 +2185,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0x3b;
 	strcpy(d.name, "Studium");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartStudium;
 	d.run = ai_RunStudium;
 	d.flags = 0x13;

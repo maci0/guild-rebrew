@@ -77,6 +77,8 @@ compiler = { profile = "msvc-6.0-sp5-pp" }
 # todo) skip the band instead of treating it as unreversed game code.  GOLD links
 # DirectX by DLL import only.
 external_ranges = ["0x5ea7b0-0x5eaacf", "0x5eaaf0-0x64ffff", "0x650000-0x66ffff"]
+# Separate, ignored BinSync Git repository for this exact binary (see docs/collaboration.md).
+binsync_state_dir = "binsync-goldtl"
 binary = "original/Europa1400Gold_TL.exe"
 format = "pe"
 arch = "x86_32"
@@ -116,6 +118,8 @@ raw_link = "build/consolidation-baseline-pp/Europa1400Gold.exe"
 # Same code generator as TL; native CRT entry points and gzip errno access
 # identify the single-thread runtime. Keep this override local to Gold.
 compiler = { profile = "msvc-6.0-sp5-pp", base_cflags = '/nologo /c /ML /D "_WIN32_WINNT=0x0400" /Ireferences/zlib-1.1.3' }
+# Separate, ignored BinSync Git repository for this exact binary (see docs/collaboration.md).
+binsync_state_dir = "binsync-gold"
 binary = "original/Europa1400Gold.exe"
 format = "pe"
 arch = "x86_32"

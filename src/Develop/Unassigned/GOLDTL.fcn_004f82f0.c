@@ -6,7 +6,7 @@ typedef struct {
 
 int __cdecl gm_FindLawByKindAndSub(char*, int, Rec24*);
 int __cdecl gm_FormatLawName(void*, int);
-int __cdecl fcn_005d6540(char*, int*);
+int __cdecl d2_ShowGesetzDialog(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f82f0 */
@@ -31,7 +31,7 @@ int __cdecl fcn_004f82f0(char* e, int* s)
 		s[1] = rec.id;
 		if (*s == 3) {
 			s[0x85] = 2;
-			r = fcn_005d6540(e, s);
+			r = d2_ShowGesetzDialog(e, s);
 		}
 		return r | 2;
 	}
@@ -47,7 +47,7 @@ int __cdecl fcn_004f82f0(char* e, int* s)
 		s[1] = rec.id;
 		if (*s == 4) {
 			s[0x85] = 2;
-			r = fcn_005d6540(e, s);
+			r = d2_ShowGesetzDialog(e, s);
 		} else if (e[2] == 6) {
 			gm_FormatLawName((char*) s + 0x14, rec.id);
 		}

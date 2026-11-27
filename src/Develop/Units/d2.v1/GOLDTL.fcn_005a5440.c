@@ -46,17 +46,17 @@ extern char g_6aac70[];
 unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_00466ee0(int, int, int, int, int);
+int __cdecl d2_AddWindowField(int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetElementFont(int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_00508640(int a, int b);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl d2_DestroyElement(int);
-void __cdecl fcn_00473690(int key, int amt);
+void __cdecl d2_AddDisplayCounter(int key, int amt);
 void __cdecl fcn_005a51c0(int);
 
 int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
@@ -88,7 +88,7 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 					r = &rows[j];
 					r->key = key;
 					d2_SetForm(a3, a4);
-					r->icon = fcn_00466ee0((((Screen*)g_77255c)->w - 0x30) >> 1, j * 76, r->key + 0xdf, 0x82, d2_CurrentWindowId);
+					r->icon = d2_AddWindowField((((Screen*)g_77255c)->w - 0x30) >> 1, j * 76, r->key + 0xdf, 0x82, d2_CurrentWindowId);
 					(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[r->icon].value_054) = 1;
 					r->label = d2_ShowTxt((((Screen*)g_77255c)->w - 0xbe) >> 1, j * 76 + 0x2e, g_6b5c60, d2_CurrentWindowId);
 					d2_SetElementFont(r->icon, 0x54);
@@ -108,7 +108,7 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 	if (sel) {
 		for (i = 0; i < 16; i++) {
 			if (rows[i].icon != -1) {
-				fcn_00472640(rows[i].icon, 1);
+				d2_SetElementEnabled(rows[i].icon, 1);
 			}
 		}
 	}
@@ -137,10 +137,10 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 			changed = 1;
 		}
 		if (sel && ent) {
-			fcn_00473690(r->key + 0xdf, ent);
+			d2_AddDisplayCounter(r->key + 0xdf, ent);
 			for (j = 0; j < 16; j++) {
 				if (rows[j].icon != -1 && i != j) {
-					fcn_00472640(rows[j].icon, 0);
+					d2_SetElementEnabled(rows[j].icon, 0);
 				}
 			}
 			result = i;

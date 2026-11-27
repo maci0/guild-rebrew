@@ -24,7 +24,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-char* __cdecl fcn_005cd440(Req*, char*, int, int);
+char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCopyEntityData(char*);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
@@ -50,7 +50,7 @@ int __cdecl gm_ObjSendTargetMsg0xa3(char* e, char* request)
 		req.size = 0x400;
 		req.kind = 6;
 		req.d = g_66601c;
-		r = fcn_005cd440(&req, text, 0, 0);
+		r = d2_OpenTargetPicker(&req, text, 0, 0);
 	}
 	else {
 		r = gm_LookupEntityRecordById(*(int*) (request + 4));

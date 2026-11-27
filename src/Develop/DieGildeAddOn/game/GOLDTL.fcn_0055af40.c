@@ -4,7 +4,7 @@ extern char g_774964;
 
 
 
-void __cdecl fcn_005800b0(void);
+void __cdecl d2_CleanupTutorialAction(void);
 void __cdecl d2_ResetTutorialStep(void);
 void __cdecl he_FreeAction(char*);
 void __cdecl main_ExitToFrameHandler(void*);
@@ -17,7 +17,7 @@ void __cdecl he_UpdateTutorialEvent(char* o)
 	if (g_774964 != 0) {
 		switch (*(int*) (o + 0x70)) {
 		case 2:
-			fcn_005800b0();
+			d2_CleanupTutorialAction();
 			d2_ResetTutorialStep();
 			he_FreeAction(o);
 			g_774954 = 1;

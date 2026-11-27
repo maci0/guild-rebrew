@@ -46,33 +46,33 @@ typedef struct Tex {
 } Tex;
 // SIZE 0x58
 
-int __cdecl fcn_00475fd0(Tex* t);
-void __cdecl d2_UnlockSurface(Tex* t);
+int __cdecl d2_LockSurface(Tex* tex);
+void __cdecl d2_UnlockSurface(Tex* tex);
 
 /* ADDRESS: GOLDTL 0x00476970 */
-int __cdecl fcn_00476970(Tex* t)
+int __cdecl d2_ClearSurface(Tex* tex)
 {
-	int was;
+	int was_locked;
 
-	if (!t) {
+	if (!tex) {
 		return 0;
 	}
-	was = t->locked;
-	if (!was) {
-		fcn_00475fd0(t);
+	was_locked = tex->locked;
+	if (!was_locked) {
+		d2_LockSurface(tex);
 	}
-	if (t->bits) {
-		if (t->bpp == 0x10) {
-			memset(t->bits, 0, t->height * t->width * 2);
-		} else if (t->bpp == 0x18) {
-			memset(t->bits, 0, t->height * t->width * 3);
-		} else if (t->bpp == 0x20) {
-			memset(t->bits, 0, t->height * t->width * 4);
+	if (tex->bits) {
+		if (tex->bpp == 0x10) {
+			memset(tex->bits, 0, tex->height * tex->width * 2);
+		} else if (tex->bpp == 0x18) {
+			memset(tex->bits, 0, tex->height * tex->width * 3);
+		} else if (tex->bpp == 0x20) {
+			memset(tex->bits, 0, tex->height * tex->width * 4);
 		}
-		if (was) {
-			fcn_00475fd0(t);
+		if (was_locked) {
+			d2_LockSurface(tex);
 		} else {
-			d2_UnlockSurface(t);
+			d2_UnlockSurface(tex);
 		}
 	}
 	return 1;

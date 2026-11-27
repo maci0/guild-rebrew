@@ -26,7 +26,7 @@ extern int g_1040494;
 
 void __cdecl fcn_00469c40(int x, int y, int slot);
 #include "Develop/Units/d2.v1/d2_gui.h"
-void __cdecl fcn_00469090(int slot)
+void __cdecl d2_CenterElement(int slot)
 {
 	Slot0469090* s;
 	Rect0469090* r;

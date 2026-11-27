@@ -38,7 +38,7 @@ void __cdecl d2_ResetTrainingRows(int);
 int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_00594340(void);
 int __cdecl d2_DrawPanelFrame(int, int, int);
-int __cdecl fcn_00472830(int, int, int, int*, int*, int*);
+int __cdecl d2_GetFormWindow(int, int, int, int*, int*, int*);
 int __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl fcn_00595e20(int, int);
 int __cdecl fcn_005963f0(int, int, int, int);
@@ -123,7 +123,7 @@ int __cdecl fcn_005c72f0(int objectArg)
 	d2_SetForm(win, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x72f, 0);
 	fcn_00533f40(0x270, 0x15c, d2_CurrentWindowId,
-			fcn_00472830(win, 2, 0x78, v10, v9buf, &v8));
+			d2_GetFormWindow(win, 2, 0x78, v10, v9buf, &v8));
 	((D2_CONTROL_TL*) (g_1015ea0))[v8].font = 0x54;
 	def = g_item_def_table + (unsigned int) *p * 0x41;
 	v16 = win * 0xaf;

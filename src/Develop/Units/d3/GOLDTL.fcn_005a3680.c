@@ -21,7 +21,7 @@ char* __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
-void __cdecl fcn_005a31b0(char*, int);
+void __cdecl d2_ShowCityTradeInfoDialog(char*, int);
 
 void __cdecl fcn_00533880(void);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -56,7 +56,7 @@ void __cdecl d3_SelectTavernCardTableCity(void)
 					if ((*(char**)&g_7746a0) == items[i]) {
 						for (city = gm_StartFilteredEntitySearch(1, 0, 0x47); city != 0; city = gm_FindNextFilteredEntity()) {
 							if (*(int*) (city + 0x65) == i + 1) {
-								fcn_005a31b0(city, 1);
+								d2_ShowCityTradeInfoDialog(city, 1);
 								break;
 							}
 						}

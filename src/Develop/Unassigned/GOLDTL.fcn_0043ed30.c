@@ -18,11 +18,11 @@ typedef struct Scene {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
-int __cdecl fcn_00441720(int* a0, float* a1, unsigned int a2, unsigned int* a3,
+int __cdecl d3_GetFloorHeight(int* a0, float* a1, unsigned int a2, unsigned int* a3,
                          unsigned int* a4, float* a5);
 
 /* ADDRESS: GOLDTL 0x0043ed30 */
-char __cdecl fcn_0043ed30(char* node, LightIter* it)
+char __cdecl d3_CollectFloorLightCallback(char* node, LightIter* it)
 {
 	float pt[4];
 	float val;
@@ -58,7 +58,7 @@ char __cdecl fcn_0043ed30(char* node, LightIter* it)
 	sc = (Scene*) it->obj;
 	f90 = *(float*) (node + 0x90);
 	d3_TransformPoint(node, (float*) (node + 0x4c), pt);
-	if (!(unsigned char) fcn_00441720(&sc->width, pt, 0, (unsigned int*) &centerX, (unsigned int*) &centerY, &val)) {
+	if (!(unsigned char) d3_GetFloorHeight(&sc->width, pt, 0, (unsigned int*) &centerX, (unsigned int*) &centerY, &val)) {
 		return 1;
 	}
 	t = f90 * f90 - (pt[1] - val) * (pt[1] - val);

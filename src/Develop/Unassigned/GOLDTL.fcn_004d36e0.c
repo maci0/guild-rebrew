@@ -13,7 +13,7 @@ void __cdecl d3_VisitSceneObjects(char*, int, int, char(__cdecl*)(char*), char*)
 void __cdecl d3_TransformPoint(char*, char*, float*);
 
 /* ADDRESS: GOLDTL 0x004d36e0 */
-char* __cdecl fcn_004d36e0(char* e)
+char* __cdecl d3_FindNearestConquerNode(char* e)
 {
     float best;
     float pos[4];

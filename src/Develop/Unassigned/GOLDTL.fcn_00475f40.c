@@ -3,12 +3,12 @@ typedef struct {
 	int pitch;
 	char pad14[0x8];
 	short* pixels;
-} fcn_00475f40_image;
+} D2_IMAGE_16;
 // SIZE 0x20
 
 
 /* ADDRESS: GOLDTL 0x00475f40 */
-void __cdecl fcn_00475f40(int a1, int a2, int w, int h, int a5, int a6, int a7, fcn_00475f40_image* img)
+void __cdecl d2_FillSurfaceConst(int dst_x, int dst_y, int w, int h, int src, int src_x, int src_y, D2_IMAGE_16* img)
 {
 	int y;
 	int x;

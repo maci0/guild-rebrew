@@ -17,7 +17,7 @@ extern s_1015f4c g_1015f4c[];
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00469c40(int, int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 
 void __cdecl d2_CreateEventBar(void)
 {
@@ -29,5 +29,5 @@ void __cdecl d2_CreateEventBar(void)
 	for (i = 0; i < 16; i++) {
 		g_77e8c0[i].h = -1;
 	}
-	fcn_00471af0(g_77e8a0, 0);
+	d2_SetFormVisibility(g_77e8a0, 0);
 }

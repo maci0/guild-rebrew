@@ -35,7 +35,7 @@ extern Win_1015f40 g_1015f40[0x60];
 int __cdecl he_GetActiveKrediteByBorrower(int, int, char**);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_0046f100(int, int, int, int, int, int);
+int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 void* __cdecl gm_SearchTable67(int);
 int __cdecl io_AppendText(int, ...);
 
@@ -58,7 +58,7 @@ void __cdecl fcn_005c9310(unsigned short* who, int max, Row* rows, int dlg, int 
 	for (i = 0; i < cnt; i++) {
 		d2_SetForm(dlg, n);
 		rows[i].icon = d2_AddElementToWindow((((Screen*)g_77255c)->width - w) >> 1, i * 0x80, 0x75a, d2_CurrentWindowId);
-		rows[i].text = fcn_0046f100((((Screen*)g_77255c)->width - w) >> 1, i * 0x80 + 4, w, 0x72, 0x10, d2_CurrentWindowId);
+		rows[i].text = d2_CreateChildWindow((((Screen*)g_77255c)->width - w) >> 1, i * 0x80 + 4, w, 0x72, 0x10, d2_CurrentWindowId);
 		rows[i].obj = list[i];
 		*(int*) &((D2_WIN*)g_1015f40)[rows[i].text].pad280[12] = 0x56;
 		*(int*) &((D2_WIN*)g_1015f40)[rows[i].text].pad14[4] = 0x10;

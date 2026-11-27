@@ -14,7 +14,7 @@ typedef struct Slot {
 
 extern volatile int g_6b7fac;
 
-void __cdecl fcn_00435630(char* o, char* name, char on)
+void __cdecl d3_SetObjectAnimationActive(char* o, char* name, char on)
 {
 	Slot* slots;
 	int i;

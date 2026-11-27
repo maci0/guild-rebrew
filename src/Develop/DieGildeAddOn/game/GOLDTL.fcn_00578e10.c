@@ -3,7 +3,7 @@
 extern char g_7f4ca0[];
 extern pos14_7f4c00 gm_GameTime;
 
-int __cdecl fcn_004a5fe0(char*, int, int, int, int, int, int, int*);
+int __cdecl ai_CollectMatchingBuildings(char*, int, int, int, int, int, int, int*);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl he_FreeAction(char*);
 int __cdecl cm_SendSetHE(char, unsigned char*);
@@ -22,7 +22,7 @@ void __cdecl he_StartDeathPact(char* action)
 		return;
 	}
 	rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (action + 8)]);
-	n = fcn_004a5fe0(rec,
+	n = ai_CollectMatchingBuildings(rec,
 	    5, flag, zero, zero, zero, 5, (int*) (action + 0xb4));
 	if (n == 0) {
 		he_FreeAction(action);

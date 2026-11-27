@@ -54,8 +54,8 @@ int __cdecl fcn_0047cba0(int x, int y, int a3, fcn_0047cba0_set* s,
 	int idx);
 void* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex,
 	Rect47bf* src);
-int __cdecl fcn_00475fd0(void* s);
-void __cdecl fcn_00476a50(int x, int y, void* s, unsigned char* dst);
+int __cdecl d2_LockSurface(void* s);
+void __cdecl d2_ReadSurfacePixel(int x, int y, void* s, unsigned char* dst);
 int __cdecl fcn_00475780(char* a1, char* a2);
 int __cdecl d2_UnlockSurface(void* o);
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
@@ -63,7 +63,7 @@ void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d);
 int __cdecl fcn_00506380(int a, int b, void* c, int d);
 void __cdecl gm_ChangeBuildingRoom(int n, int v);
-void __cdecl fcn_00475220(char* a);
+void __cdecl d2_SetMouseTooltip(char* a);
 void __cdecl d2_EnterBuildingObjekt(int a, int b, int c);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strupr(char*);
@@ -136,8 +136,8 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 			y = g_14ce8c2 - 0x59;
 			if (g_774680 && x >= 0 && x < *(int*) (g_774680 + 4)
 				&& y >= 0 && y < *(int*) (g_774680 + 8)) {
-				fcn_00475fd0(g_774680);
-				fcn_00476a50(x, y, g_774680, (unsigned char*) key);
+				d2_LockSurface(g_774680);
+				d2_ReadSurfacePixel(x, y, g_774680, (unsigned char*) key);
 				v6 = 0;
 				q = (char*) 0x6a24ec;
 				do {
@@ -195,7 +195,7 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 							}
 						}
 						if (v8)
-							fcn_00475220(g_14a79c0[(unsigned short) *v8 * 2]);
+							d2_SetMouseTooltip(g_14a79c0[(unsigned short) *v8 * 2]);
 					}
 label_527db2:
 					if (g_7746c8) {
@@ -234,7 +234,7 @@ label_527db2:
 							}
 						}
 						if (v8)
-							fcn_00475220(g_14a79c0[(unsigned short) *v8 * 2]);
+							d2_SetMouseTooltip(g_14a79c0[(unsigned short) *v8 * 2]);
 					}
 				}
 			}

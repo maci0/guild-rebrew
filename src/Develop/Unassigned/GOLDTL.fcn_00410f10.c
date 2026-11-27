@@ -4,7 +4,7 @@
 extern char* evt_CurrentScript;
 extern int g_6791c8;
 int __cdecl sb_PrepareVoice(int a, int b);
-int __cdecl fcn_00423670(int o, int a, int b);
+int __cdecl sb_StartVoice(int o, int a, int b);
 
 int __cdecl PlaySampleHandle(int* a, int* b)
 {
@@ -17,5 +17,5 @@ int __cdecl PlaySampleHandle(int* a, int* b)
 	if (o == 0) {
 		return o;
 	}
-	return fcn_00423670(o, 0, 0);
+	return sb_StartVoice(o, 0, 0);
 }

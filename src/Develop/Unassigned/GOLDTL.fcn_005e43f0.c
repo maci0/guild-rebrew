@@ -12,14 +12,14 @@ int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 void __cdecl fcn_00525ef0(void);
 int __cdecl fcn_005e3b10(int, int, int);
-int __cdecl fcn_00472640(int, int);
+int __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_PauseTutorialUpdates(void);
 int __cdecl d2_CreateRadioGroup(int, ...);
 void __cdecl fcn_004c3140(void *);
 void __cdecl fcn_004c3a10(void);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_UpdateRadioGroup(int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl d2_ShowLoadGameMenu(void);
 int __cdecl d2_RunSaveGameDialog(void *);
 int __cdecl d2_ShowNetworkLoadGame(void *);
@@ -59,13 +59,13 @@ void __cdecl fcn_005e43f0(void)
     a = fcn_005e3b10(0, *(int *)0x14ac490, d2_CurrentWindowId);
     b = fcn_005e3b10(1, *(int *)0x14ac494, d2_CurrentWindowId);
     if (*(unsigned char *)0x7747b0 & 4) {
-        fcn_00472640(a, 0);
-        if (!(*(unsigned char *)0x7747b0 & 0x10)) fcn_00472640(b, 0);
+        d2_SetElementEnabled(a, 0);
+        if (!(*(unsigned char *)0x7747b0 & 0x10)) d2_SetElementEnabled(b, 0);
     }
     if (*(signed char *)0x7747b0 & 0x80) {
         d2_PauseTutorialUpdates();
-        fcn_00472640(a, 0);
-        fcn_00472640(b, 0);
+        d2_SetElementEnabled(a, 0);
+        d2_SetElementEnabled(b, 0);
     }
     *(unsigned char *)0x774966 = 1;
     c = fcn_005e3b10(2, *(int *)0x14ac498, d2_CurrentWindowId);
@@ -86,19 +86,19 @@ void __cdecl fcn_005e43f0(void)
             current = *(int *)0x67d370;
             if (current != -1) {
                 if (current == a) {
-                    fcn_00471af0(dialog, 0);
+                    d2_SetFormVisibility(dialog, 0);
                     if (d2_ShowLoadGameMenu()) {
                         *(int *)0x774958 = 1;
                         *(int *)0x774954 = 1;
                         main_ExitToFrameHandler(0x5438c0);
-                    } else fcn_00471af0(dialog, 1);
+                    } else d2_SetFormVisibility(dialog, 1);
                 } else if (current == b) {
-                    fcn_00471af0(dialog, 0);
+                    d2_SetFormVisibility(dialog, 0);
                     if (!(*(unsigned char *)0x7747b0 & 4)) d2_RunSaveGameDialog(preview);
                     else d2_ShowNetworkLoadGame(preview);
-                    fcn_00471af0(dialog, 1);
+                    d2_SetFormVisibility(dialog, 1);
                 } else if (current == f) {
-                    fcn_00471af0(dialog, 0);
+                    d2_SetFormVisibility(dialog, 0);
                     io_FormatTextBuffer(message, 0x1ca4);
                     if (fcn_005dfe80(message, 1)) {
                         handle = cm_SendQuitGameCommand();
@@ -110,13 +110,13 @@ void __cdecl fcn_005e43f0(void)
                         }
                         *(int *)0x774954 = 1;
                         main_ExitToFrameHandler(0x5438c0);
-                    } else fcn_00471af0(dialog, 1);
+                    } else d2_SetFormVisibility(dialog, 1);
                 } else if (current == c) {
-                    fcn_00471af0(dialog, 0); fcn_005e3520(); fcn_00471af0(dialog, 1);
+                    d2_SetFormVisibility(dialog, 0); fcn_005e3520(); d2_SetFormVisibility(dialog, 1);
                 } else if (current == d) {
-                    fcn_00471af0(dialog, 0); fcn_005e2b60(); fcn_00471af0(dialog, 1);
+                    d2_SetFormVisibility(dialog, 0); fcn_005e2b60(); d2_SetFormVisibility(dialog, 1);
                 } else if (current == e) {
-                    fcn_00471af0(dialog, 0); d2_ShowSoundOptions(); fcn_00471af0(dialog, 1);
+                    d2_SetFormVisibility(dialog, 0); d2_ShowSoundOptions(); d2_SetFormVisibility(dialog, 1);
                 } else if (current == g) *(int *)0x774654 = 1;
             }
         }

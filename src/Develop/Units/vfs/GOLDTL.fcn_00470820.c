@@ -23,12 +23,12 @@ int __cdecl vfs_fseek(void* f, int off, int whence);
 void __cdecl CloseVfsStream(void* f);
 int __cdecl fcn_00465950(const char* name);
 void __cdecl d2_AddRefcount(int a0);
-int __cdecl fcn_0046f100(int a, int b, int c, int d, int e, int f);
+int __cdecl d2_CreateChildWindow(int a, int b, int c, int d, int e, int f);
 int __cdecl fcn_0046e940(int a, int b, int c, int d, int e);
 void __cdecl d2_SetBackgroundTexture(const char* name, int win);
 int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
-int __cdecl fcn_00467480(int a, int b, int c, int d, int e, int f);
-int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f,
+int __cdecl d2_AddWindowInputIcon(int a, int b, int c, int d, int e, int f);
+int __cdecl d2_AddWindowValueGauge(int a, int b, int c, int d, int e, int f,
 	int g, int h);
 int __cdecl txt_FindEntryIndex(const char* name);
 int __cdecl fcn_0046fac0(int a, int b, int c, int d);
@@ -151,7 +151,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 					if (*(int*) v36) {
 						v45 = *(int*) ((*(int*) v36 + v43) * 4 + 0x1038140);
 						v42 = v45 * 0x3cc + 0x1015f40;
-						v11 = fcn_0046f100(
+						v11 = d2_CreateChildWindow(
 							(short) ((short) *v26
 							- *(short*) (v42 + 4)),
 							(short) (*((short*) v36 - 0x767)
@@ -189,7 +189,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 					v45 = *(int*) ((v39[0x3a5]
 						+ v43) * 4 + 0x1038140);
 					v42 = v45 * 0x3cc + 0x1015f40;
-					v11 = fcn_0046f100(
+					v11 = d2_CreateChildWindow(
 						(short) ((short) *v39
 						- *(short*) (v42 + 4)),
 						(short) (*((short*) v39 + 1)
@@ -296,7 +296,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 						}
 					} else if (t[-0x330] == 0x41) {
 						v37 = *t & 0xff;
-						v13 = fcn_00467480(
+						v13 = d2_AddWindowInputIcon(
 							(short) *q,
 							(short) q[0x18],
 							*(unsigned char*) ((char*) t + 1),
@@ -308,7 +308,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 						v37 = *t & 0xff;
 						v12 = fcn_00465950(
 							(char*) v19);
-						v13 = fcn_004677e0(
+						v13 = d2_AddWindowValueGauge(
 							(short) *q,
 							(short) q[0x18],
 							*(unsigned char*) ((char*) v33

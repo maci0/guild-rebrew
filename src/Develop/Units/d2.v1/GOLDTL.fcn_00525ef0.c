@@ -9,7 +9,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 
 void __cdecl io_ClearInputState(void);
 void __cdecl fcn_00533a40(char*);
-void __cdecl fcn_00475220(char*);
+void __cdecl d2_SetMouseTooltip(char*);
 
 void __cdecl fcn_00525ef0(void)
 {
@@ -17,7 +17,7 @@ void __cdecl fcn_00525ef0(void)
 	ResetDisplayCounters();
 	io_ClearInputState();
 	fcn_00533a40(g_6b5c60);
-	fcn_00475220(g_6b5c60);
+	d2_SetMouseTooltip(g_6b5c60);
 	g_6772c4 = 1;
 	g_6b5c80 = 0;
 	d2_MouseTopBoundary = 0;

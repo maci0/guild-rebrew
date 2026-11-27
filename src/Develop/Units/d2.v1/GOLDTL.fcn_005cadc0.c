@@ -40,7 +40,7 @@ int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 float __cdecl gm_GetEntityHealth(char*);
 int __cdecl fcn_005c9f10(int, int, int, int, int, short*);
 int __cdecl fcn_005c99a0(int, int, int, int, int, int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -234,9 +234,9 @@ select:
 						sel = 0;
 						p = 0;
 					} else if (cb) {
-						fcn_00471af0(dlg, 0);
+						d2_SetFormVisibility(dlg, 0);
 						res = cb(ent, 0) ? ent : 0;
-						fcn_00471af0(dlg, 1);
+						d2_SetFormVisibility(dlg, 1);
 					} else {
 						g_774654 = 1;
 						res = ent;

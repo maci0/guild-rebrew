@@ -1,22 +1,22 @@
 
 
-typedef struct I41f630 I41f630;
+typedef struct VIDEO_WIN_VIS_IFACE VIDEO_WIN_VIS_IFACE;
 // SIZE 0x4
-struct I41f630 {
-	int (__stdcall** vt)(I41f630*, int);
+struct VIDEO_WIN_VIS_IFACE {
+	int (__stdcall** vt)(VIDEO_WIN_VIS_IFACE*, int);
 };
 
 char* __cdecl FindVideoById(int);
 
-int __cdecl fcn_0041f630(int videoId, int a2)
+int __cdecl SetVideoVisible(int videoId, int visible)
 {
 	char* video;
-	I41f630* iface;
+	VIDEO_WIN_VIS_IFACE* iface;
 
 	video = FindVideoById(videoId);
 	if (video != 0) {
-		iface = *(I41f630**) (video + 0x130);
-		return iface->vt[0x4c / 4](iface, a2 ? -1 : 0) >= 0;
+		iface = *(VIDEO_WIN_VIS_IFACE**) (video + 0x130);
+		return iface->vt[0x4c / 4](iface, visible ? -1 : 0) >= 0;
 	}
 	return 0;
 }

@@ -26,7 +26,7 @@ void __cdecl fcn_0057e880(int, void*, int, int);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(void*);
 void __cdecl evt_WaitForScriptExit(int);
-void __cdecl fcn_00516ed0(char*);
+void __cdecl d3_CleanupBuildingScene(char*);
 void __cdecl d3snd_FreeObjectSoundBanks(void);
 void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl fcn_00597fd0(void*);
@@ -340,7 +340,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
             i = *(int*) &evt_LastGfxScriptId;
             if (i != -1)
                 evt_WaitForScriptExit(i);
-            fcn_00516ed0(o);
+            d3_CleanupBuildingScene(o);
             g_774670 = 1;
             if (*(int*) &g_7746c4 == 0) {
                 g_774654 = 1;

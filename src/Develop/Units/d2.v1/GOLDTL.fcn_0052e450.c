@@ -35,7 +35,7 @@ void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, int a, int b);
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 int __cdecl fcn_0052dee0(int x, int y, int z);
-int __cdecl fcn_004677e0(int a, int b, int c, int d, int e, int f, int g, int h);
+int __cdecl d2_AddWindowValueGauge(int a, int b, int c, int d, int e, int f, int g, int h);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 void __cdecl d2_OpenTransporterInfoPanel(unsigned short* e)
@@ -57,7 +57,7 @@ void __cdecl d2_OpenTransporterInfoPanel(unsigned short* e)
 			if (*parent == g_774970) {
 				g_6a25e8 = fcn_0052dee0(x, 0xac, g_14b5e84);
 			}
-			d2_CurrentValueBar = fcn_004677e0(0x18, 0x66, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
+			d2_CurrentValueBar = d2_AddWindowValueGauge(0x18, 0x66, 0x30, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 			d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, *((unsigned char*) e + 0x12));
 			d2_SetForm(g_6a25b8, 2);
 			g_6a25d4 = d2_CurrentWindowId;

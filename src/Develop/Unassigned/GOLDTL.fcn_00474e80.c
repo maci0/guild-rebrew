@@ -19,9 +19,9 @@ extern int g_100f1d0;
 extern int g_100f1e4;
 extern int g_67d8d0;
 
-int __cdecl fcn_0046aee0(int x, int y);
-void __cdecl fcn_004748b0(void);
-void __cdecl fcn_00473b10(void);
+int __cdecl d2_HitTestGui(int x, int y);
+void __cdecl d2_UpdateSelectedControl(void);
+void __cdecl d2_UpdateMouseHoverAndScroll(void);
 void __cdecl sb_PlayVoice(int handle, char* text, int a, int b, int c, int d, int e);
 void __cdecl fcn_00472380(int object, int selected);
 void __cdecl fcn_0046e790(int index);
@@ -43,8 +43,8 @@ void __cdecl d2_ProcessMouseInput(void)
 		d2_MouseX = *(short*) g_14cf900;
 		d2_MouseY = g_14cf902;
 	}
-	g_100f890 = fcn_0046aee0(d2_MouseX, d2_MouseY);
-	fcn_004748b0();
+	g_100f890 = d2_HitTestGui(d2_MouseX, d2_MouseY);
+	d2_UpdateSelectedControl();
 	if (g_67d388 != -1) {
 		d2_HoveredWindow = g_67d388;
 		g_100f800 = -1;
@@ -64,7 +64,7 @@ void __cdecl d2_ProcessMouseInput(void)
 	} else {
 		d2_HoveredWindow = -1;
 	}
-	fcn_00473b10();
+	d2_UpdateMouseHoverAndScroll();
 	if (g_14ce8d8 != 0) {
 		v7 = d2_CurrentElementId;
 		if (g_100f890 != -1) {

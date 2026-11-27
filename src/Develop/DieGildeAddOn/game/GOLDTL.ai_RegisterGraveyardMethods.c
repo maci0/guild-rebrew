@@ -2,7 +2,7 @@
 
 #include "client_method_registry.h"
 
-int __cdecl fcn_004a4410(float* s1, float* s2, int idx, char* e);
+int __cdecl ai_ComputeBaseActionScore(float* s1, float* s2, int idx, char* e);
 int __cdecl ai_StartGraveyardOwner(void);
 int __cdecl ai_RunGraveyardOwner(void);
 int __cdecl ai_StartHandleGrave(void);
@@ -42,7 +42,7 @@ int __cdecl ai_RegisterGraveyardMethods(char* e)
 	}
 	d.type = 0x3d;
 	strcpy(d.name, "Graveyard Owner");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartGraveyardOwner;
 	d.run = ai_RunGraveyardOwner;
 	d.flags = 0x1c3;
@@ -76,7 +76,7 @@ int __cdecl ai_RegisterGraveyardMethods(char* e)
 	}
 	d.type = 0x3e;
 	strcpy(d.name, "Handle Grave");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartHandleGrave;
 	d.run = ai_RunHandleGrave;
 	d.flags = 1;
@@ -110,7 +110,7 @@ int __cdecl ai_RegisterGraveyardMethods(char* e)
 	}
 	d.type = 0x3f;
 	strcpy(d.name, "Use Seance");
-	d.score = fcn_004a4410;
+	d.score = ai_ComputeBaseActionScore;
 	d.start = ai_StartUseSeance;
 	d.run = ai_RunUseSeance;
 	d.flags = 1;

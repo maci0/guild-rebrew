@@ -1,6 +1,6 @@
 char* __cdecl d3sm_GetObjectSuperMap(char*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
-void __cdecl fcn_00441720(int, float*, int, int*, int*, float*);
+void __cdecl d3_GetFloorHeight(int, float*, int, int*, int*, float*);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SetNodePosition(char*, float*);
 
@@ -33,7 +33,7 @@ int __cdecl ch_AdjustHeightToGround(char* ev)
 			if ((cell != 0 && cell != 0xd) || *(int*) (*(char**) (obj + 0x88) + 0xac) != 0) {
 				node = *(char**) (obj + 0x34);
 				if (*(int*) (*(char**) (obj + 0x88) + 0xac) != 0) {
-					fcn_00441720(*(int*) (*(char**) (obj + 0x88) + 0xac), (float*) (node + 0x4c), 1, &col, &row, &ground);
+					d3_GetFloorHeight(*(int*) (*(char**) (obj + 0x88) + 0xac), (float*) (node + 0x4c), 1, &col, &row, &ground);
 					if (cell == 0 || cell == 0xd || !(ground - height < -5.0)) {
 						height = ground;
 					}

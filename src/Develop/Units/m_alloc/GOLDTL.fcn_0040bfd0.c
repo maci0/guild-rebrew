@@ -13,7 +13,7 @@ typedef struct {
 extern void* g_6b5c5c;
 char* g_6b5c20 = 0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-void __cdecl fcn_00408240(void* p);
+void __cdecl ch_FreeMap(void* p);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl ch_DestroyCharacter(char* e);
 
@@ -24,7 +24,7 @@ void __cdecl ch_ShutdownCharacters(void)
 	void** d;
 
 	if (g_6b5c5c != 0) {
-		fcn_00408240(g_6b5c5c);
+		ch_FreeMap(g_6b5c5c);
 	}
 	if ((*(Slot**)&g_6b5c20) != 0) {
 		for (i = 0; i < 2000; i++) {

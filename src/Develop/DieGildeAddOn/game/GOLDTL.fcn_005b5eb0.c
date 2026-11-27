@@ -7,7 +7,7 @@ int __cdecl gm_FindHeadIconIndex(char* name);
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl d2_AddElementToWindow(int x, int y, int id, int win);
 void __cdecl d2_SetElementFont(int i, int v);
-void __cdecl fcn_0046f9b0(int element, int a2);
+void __cdecl d2_SetControlText(int element, int a2);
 char* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 char* __cdecl gm_EntityAccumulate(int entity);
 int __cdecl gm_CollectEntityCarts(char* a, void** out);
@@ -84,7 +84,7 @@ void __cdecl d2_InitWorkerOverlaySlots(int windowContext, char* entityName)
             *(char**) (&((D2_CONTROL_TL*)g_1015ea0)
                        [*(int*) (i * 4 + 0x777cd0)].associated_object) = name;
             d2_SetElementFont(*(int*) (i * 4 + 0x777cd0), 0x56);
-            fcn_0046f9b0(*(int*) (i * 4 + 0x777cd0), g_14abc14);
+            d2_SetControlText(*(int*) (i * 4 + 0x777cd0), g_14abc14);
             *(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
                               [*(int*) (i * 4 + 0x777cd0)].flags_1d0) = 3;
         }

@@ -14,7 +14,7 @@ typedef struct D3_LIGHT_QUERY {
 } D3_LIGHT_QUERY;
 
 void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* out);
-void __cdecl fcn_00458940(char* o, char* ref, D3_LIGHT_VEC3* v, D3_LIGHT_VEC3* out);
+void __cdecl d3_TransformDirectionToView(char* o, char* ref, D3_LIGHT_VEC3* v, D3_LIGHT_VEC3* out);
 
 /* ADDRESS: GOLD 0x00453100 */
 char __cdecl d3_CollectAffectingLights(char* o, D3_LIGHT_QUERY* q)
@@ -30,7 +30,7 @@ char __cdecl d3_CollectAffectingLights(char* o, D3_LIGHT_QUERY* q)
 		fcn_00458b10(o, d3_ActiveCamera, (float*) (o + 0x4c), (float*) (o + 0x1d8));
 		if (*(int*) (o + 0x218) == 7) {
 			if (*(float*) (o + 0x94) != *(double*) 0x5eb830 && (*(unsigned char*) (o + 0x211) & 0x10) == 0) {
-				fcn_00458940(o, d3_ActiveCamera, (D3_LIGHT_VEC3*) 0x5ebb74, (D3_LIGHT_VEC3*) (*(char**) (o + 0x1e8) + 0x188));
+				d3_TransformDirectionToView(o, d3_ActiveCamera, (D3_LIGHT_VEC3*) 0x5ebb74, (D3_LIGHT_VEC3*) (*(char**) (o + 0x1e8) + 0x188));
 				q->count++;
 				return *(char*) (*(char**) (o + 0x1e8) + 0x1a8) = 1;
 			}

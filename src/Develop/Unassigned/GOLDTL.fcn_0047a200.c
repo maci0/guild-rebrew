@@ -16,7 +16,7 @@ typedef struct Anim {
 extern Anim_100e7a0 g_100e7a0[0x30];
 
 /* ADDRESS: GOLDTL 0x0047a200 */
-int __cdecl fcn_0047a200(short x, short y, void* img, unsigned char flag)
+int __cdecl d2_AllocAnimationSlot(short x, short y, void* img, unsigned char flag)
 {
 	int i;
 

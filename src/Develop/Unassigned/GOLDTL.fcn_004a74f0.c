@@ -11,10 +11,10 @@ typedef struct {
 #include "client_types.h"
 extern Card_1007ce0 g_1007ce0[24];
 
-int __cdecl fcn_004a7340(int* ids, int* out, int flag);
+int __cdecl gm_FindCardThreeOfAKind(int* ids, int* out, int flag);
 int __cdecl fcn_004a7770(int* ids, int zero, int kind, int* found);
 
-int __cdecl fcn_004a74f0(int* ids, int* out, int kind)
+int __cdecl gm_CheckCardFullHouse(int* ids, int* out, int kind)
 {
 	int i;
 	int n;
@@ -26,7 +26,7 @@ int __cdecl fcn_004a74f0(int* ids, int* out, int kind)
 	if (ids[0] < 0 || ids[1] < 0 || ids[2] < 0 || ids[3] < 0 || ids[4] < 0) {
 		return 0;
 	}
-	if (fcn_004a7340(ids, out, 0) == 0) {
+	if (gm_FindCardThreeOfAKind(ids, out, 0) == 0) {
 		return 0;
 	}
 	v = ((Slot10*)g_1007ce0)[out[0]].a;

@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0047cb30 */
-void __cdecl fcn_0047cb30(int x, int y, int w, int h)
+void __cdecl d2_SetClipRect(int x, int y, int w, int h)
 {
 	*(int*) 0x6f0458 = x;
 	*(int*) 0x6f045c = y;

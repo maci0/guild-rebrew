@@ -7,7 +7,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
-int __cdecl fcn_00469c30(int x, int y, int a3);
+int __cdecl d2_CreateElement(int x, int y, int a3);
 void __cdecl d2_AddWindowChild(int id, int win);
 
 /* ADDRESS: GOLDTL 0x0046f740 */
@@ -24,7 +24,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win)
 		ReportClientMessage(s_67d420);
 		return -1;
 	}
-	w->children[w->count] = fcn_00469c30(w->left - (*(int*) &w->pad3c[0x22c]) + x, w->top - (*(int*) &w->pad3c[0x21c]) + y, a3);
+	w->children[w->count] = d2_CreateElement(w->left - (*(int*) &w->pad3c[0x22c]) + x, w->top - (*(int*) &w->pad3c[0x21c]) + y, a3);
 	id = w->children[w->count];
 	if (id != -1) {
 		d2_AddWindowChild(id, win);

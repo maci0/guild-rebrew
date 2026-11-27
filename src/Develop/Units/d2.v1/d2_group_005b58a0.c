@@ -69,7 +69,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 void __cdecl fcn_00517c00(int, int, int, char*);
 void __cdecl fcn_0046f940(int, char*);
-int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
+int __cdecl d2_AddWindowValueGauge(int x, int y, int a3, int a4, int a5, int a6, int a7, int win);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_00534160(int x0, int y, int len, int t);
 int __cdecl gm_GetEntityRelation(int a1, int a2);
@@ -113,7 +113,7 @@ void __cdecl d2_UpdateGauge(unsigned char* e, fcn_005b59c0_Gauge* g, int full)
 	fcn_0046f940(g->label, buf);
 	((D2_CONTROL_TL*) g_1015ea0)[g->label].value_06c = 1;
 	((D2_CONTROL_TL*) g_1015ea0)[g->label].width = 0xa0;
-	g->bar = fcn_004677e0(g->x - 8, g->y + 0x32, 0x40, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
+	g->bar = d2_AddWindowValueGauge(g->x - 8, g->y + 0x32, 0x40, 0, 0x64, 0x75, 0x42, d2_CurrentWindowId);
 	((D2_CONTROL_TL*) g_1015ea0)[g->bar].disabled = 1;
 	g->state = 1;
 	((D2_CONTROL_TL*) g_1015ea0)[g->icon].associated_object = (char*) e;

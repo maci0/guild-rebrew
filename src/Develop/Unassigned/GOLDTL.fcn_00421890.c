@@ -42,10 +42,10 @@ extern unsigned short g_14cbc7c;
 extern unsigned short g_14cbc7e;
 extern float g_14cbc80;
 
-unsigned short __cdecl fcn_00421ba0(PathGrid* grid, unsigned short node);
-void __cdecl fcn_00421f10(PathGrid* grid, unsigned short node);
+unsigned short __cdecl ExpandPathNode(PathGrid* grid, unsigned short node);
+void __cdecl ReversePathLinks(PathGrid* grid, unsigned short node);
 
-unsigned short __cdecl fcn_00421890(PathGrid* grid, int x, int y, int goal_x, int goal_y, int kind)
+unsigned short __cdecl RunForwardPathSearch(PathGrid* grid, int x, int y, int goal_x, int goal_y, int kind)
 {
 	int t;
 	int i;
@@ -108,14 +108,14 @@ unsigned short __cdecl fcn_00421890(PathGrid* grid, int x, int y, int goal_x, in
 	g_14cbc7c = g_14cbc74;
 	g_14cbc60 = 4;
 	g_14cbc68 = 8;
-	node = fcn_00421ba0(grid, node);
+	node = ExpandPathNode(grid, node);
 	while (node != 0xffff) {
 		if (node == g_14cbc74) {
-			fcn_00421f10(grid, node);
+			ReversePathLinks(grid, node);
 			return g_14cbc76;
 		}
 		if ((grid->nodes[node].flags & 0xc) == 0xc) {
-			fcn_00421f10(grid, node);
+			ReversePathLinks(grid, node);
 			grid->nodes[node].parent = g_14cbc7e;
 			return g_14cbc76;
 		}
@@ -123,7 +123,7 @@ unsigned short __cdecl fcn_00421890(PathGrid* grid, int x, int y, int goal_x, in
 		g_14cbc7c = g_14cbc74;
 		g_14cbc60 = 4;
 		g_14cbc68 = 8;
-		node = fcn_00421ba0(grid, node);
+		node = ExpandPathNode(grid, node);
 	}
 	return 0xffff;
 }

@@ -19,12 +19,12 @@ extern int g_1040494;
 extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
-int __cdecl fcn_00469c30(int x, int y, int a3);
-void __cdecl fcn_0046f650(int slot, D2_WIN* parent);
-void __cdecl fcn_00472680(int id, int a2);
+int __cdecl d2_CreateElement(int x, int y, int a3);
+void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
+void __cdecl d2_SetElementScale(int id, int a2);
 
 /* ADDRESS: GOLDTL 0x0046f7e0 */
-int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5)
+int __cdecl d2_AddWindowImage(int x, int y, int a3, int win, int a5)
 {
 	D2_WIN* w;
 	int id;
@@ -37,10 +37,10 @@ int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5)
 		ReportClientMessage(s_67d420);
 		return -1;
 	}
-	w->children[w->count] = fcn_00469c30((short) (w->left + x), (short) (w->top - (*(int*) &w->pad3c[0x21c]) + y), a3);
+	w->children[w->count] = d2_CreateElement((short) (w->left + x), (short) (w->top - (*(int*) &w->pad3c[0x21c]) + y), a3);
 	id = w->children[w->count];
 	if (id != -1) {
-		fcn_0046f650(id, w);
+		d2_InsertControlAfterWindow(id, w);
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].parent) = (int) w;
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_top) = 0;
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_bottom) = d2_ScreenHeight;
@@ -48,7 +48,7 @@ int __cdecl fcn_0046f7e0(int x, int y, int a3, int win, int a5)
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = g_1040494;
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_050) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_050);
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_048) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_048);
-		fcn_00472680(id, a5);
+		d2_SetElementScale(id, a5);
 		w->count++;
 		if ((*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) + y > (*(int*) &w->pad3c[0x218])) {
 			(*(int*) &w->pad3c[0x218]) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) + y;

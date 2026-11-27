@@ -33,7 +33,7 @@ extern char g_6a3194[];
 void __cdecl d3_RemoveObjectAnim(char* o);
 void __cdecl d3_SetObjectVisible(char* o, int v);
 
-void __cdecl fcn_00471340(int h);
+void __cdecl d2_ResetFormBackground(int h);
 void __cdecl d2_DestroyForm(int h);
 void __cdecl d2_DestroyElement(int h);
 void __cdecl fcn_00436f70(int v);
@@ -64,7 +64,7 @@ void __cdecl fcn_00534f30(Pager* p)
 			p->obj = p->next;
 		}
 		for (i = 0; i < p->count; i++) {
-			fcn_00471340(p->items[i]);
+			d2_ResetFormBackground(p->items[i]);
 			d2_DestroyForm(p->items[i]);
 		}
 		if (p->cb_a != -1) {

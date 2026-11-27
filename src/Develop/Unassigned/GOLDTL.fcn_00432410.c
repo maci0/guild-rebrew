@@ -2,7 +2,7 @@
 
 /* The record extent and argument roles are inferred from native accesses. */
 /* ADDRESS: GOLDTL 0x00432410 */
-int __cdecl fcn_00432410(void* object, const char* name)
+int __cdecl d3_FindAnimTrackIndex(void* object, const char* name)
 {
     char* record;
     int count;

@@ -18,7 +18,7 @@ void __cdecl d3_TransformPoint(char*, char*, struct vec4*);
 char* __cdecl fcn_00442910(int, struct vec4*, struct vec4*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 
-char* __cdecl fcn_0053e7a0(char* name)
+char* __cdecl d3_SpawnCityMapMarker(char* name)
 {
 	struct vec4 v;
 	char upper[0x100];

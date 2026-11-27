@@ -3,7 +3,7 @@
 int __cdecl msx_FindWaveDriverIndex(int);
 typedef int (__stdcall* f)(int);
 
-int __cdecl fcn_0042a660(int* input, int* out)
+int __cdecl msx_GetActiveSampleCount(int* input, int* out)
 {
 	int r = 0;
 

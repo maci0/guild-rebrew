@@ -7,7 +7,7 @@ extern char g_7f4ca0[];
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, int, int);
 
-void __cdecl fcn_0057fe50(int a)
+void __cdecl d2_GrantTutorialCh5Reward(int a)
 {
 	char* p;
 

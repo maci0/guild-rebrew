@@ -3,7 +3,7 @@
 
 extern char* evt_CurrentScript;
 char* __cdecl evt_LoadGfxScript(int id);
-void __cdecl fcn_00428340(char* o, int n, ...);
+void __cdecl evt_CallScriptFunction(char* o, int n, ...);
 
 char* __cdecl RunScriptInt2(int* a, int* b, int* c)
 {
@@ -16,6 +16,6 @@ char* __cdecl RunScriptInt2(int* a, int* b, int* c)
 	*(int*) (o + 0x104) = *(int*) (evt_CurrentScript + 0x104);
 	*(int*) (o + 0xc8c) = *(int*) (evt_CurrentScript + 0xc8c);
 	*(int*) (o + 0xc90) = *(int*) (evt_CurrentScript + 0xc90);
-	fcn_00428340(o, 2, *b, *c);
+	evt_CallScriptFunction(o, 2, *b, *c);
 	return o;
 }

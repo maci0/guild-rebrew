@@ -49,7 +49,7 @@ void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl he_MessageBoxQuickjump(int, int, char *, unsigned char, int, int, int, char *, char *);
 int __cdecl gm_RandomMod(unsigned short);
 char *__cdecl evt_LoadGfxScript(char *);
-int __cdecl fcn_00428340(int, int, int, int, int);
+int __cdecl evt_CallScriptFunction(int, int, int, int, int);
 char *__cdecl gm_FindNearestBuildingByKind(char *, int);
 void __cdecl cm_RequestChangePlayerHe(int, int, int);
 void __cdecl cm_RequestPlayAnimation(int, char *, int);
@@ -129,7 +129,7 @@ void __cdecl he_RunHausbrand(char *action)
 						if (m != 0) {
 							sprintf(m, g_6a6afc, *(int *)(action + 4),
 								*(unsigned char *)(action + 0xb4));
-							fcn_00428340((int)m, 3, (int)pos[0], (int)pos[1],
+							evt_CallScriptFunction((int)m, 3, (int)pos[0], (int)pos[1],
 								     (int)pos[2]);
 							*(int *)(m + 0x104) = 0;
 						}

@@ -2,9 +2,9 @@
 
 char* __cdecl FindVideoById(int);
 
-typedef int (__stdcall* fcn_0041f490_m)(void*);
+typedef int (__stdcall* VIDEO_STOP_FN)(void*);
 
-int __cdecl fcn_0041f490(int videoId)
+int __cdecl StopVideo(int videoId)
 {
 	char* node;
 	void* obj;
@@ -12,7 +12,7 @@ int __cdecl fcn_0041f490(int videoId)
 	node = FindVideoById(videoId);
 	if (node != 0) {
 		obj = *(void**) (node + 0x120);
-		return ((fcn_0041f490_m) ((int*) *(int*) obj)[9])(obj) == 0;
+		return ((VIDEO_STOP_FN) ((int*) *(int*) obj)[9])(obj) == 0;
 	}
 	return 0;
 }

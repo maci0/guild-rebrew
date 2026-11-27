@@ -25,7 +25,7 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 extern char g_67d67c[];
 
-int __cdecl fcn_00476970(int);
+int __cdecl d2_ClearSurface(int);
 void __cdecl fcn_00473150(unsigned char*);
 void __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int);
@@ -79,7 +79,7 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 	if ((g_7746c4 == entity && *(unsigned short*) (entity + 0x29) == sceneId) ||
 	    (g_7746c8 == entity && *(unsigned short*) (entity + 0x29) == sceneId)) {
 		if (*((unsigned char*) cut_ActiveCutscene + 0x26) & 0x20) {
-			fcn_00476970(g_77250c);
+			d2_ClearSurface(g_77250c);
 		}
 		if (g_772f50) {
 			fcn_00473150(g_772f50);
@@ -117,7 +117,7 @@ void __cdecl fcn_004e4230(unsigned char* entity, unsigned int sceneId)
 			g_772f48 &= 0xfffffffd;
 		}
 		if (*((unsigned char*) cut_ActiveCutscene + 0x26) & 0x20) {
-			fcn_00476970(g_77250c);
+			d2_ClearSurface(g_77250c);
 		}
 		if (g_772f50) {
 			fcn_00473150(g_772f50);

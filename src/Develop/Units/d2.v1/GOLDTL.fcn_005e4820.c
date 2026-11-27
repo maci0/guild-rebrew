@@ -16,7 +16,7 @@ int __cdecl fcn_005e3b10(int, int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateRadioGroup(int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl fcn_005e3520(void);
 void __cdecl fcn_005e2b60(void);
 void __cdecl d2_ShowSoundOptions(void);
@@ -46,17 +46,17 @@ void __cdecl d2_ShowOptionsMenu(void)
 		d2_UpdateRadioGroup(p);
 		if (g_14ce8d8 != 0 && d2_CurrentElementId != -1) {
 			if (d2_CurrentElementId == b1) {
-				fcn_00471af0(h, 0);
+				d2_SetFormVisibility(h, 0);
 				fcn_005e3520();
-				fcn_00471af0(h, 1);
+				d2_SetFormVisibility(h, 1);
 			} else if (d2_CurrentElementId == b2) {
-				fcn_00471af0(h, 0);
+				d2_SetFormVisibility(h, 0);
 				fcn_005e2b60();
-				fcn_00471af0(h, 1);
+				d2_SetFormVisibility(h, 1);
 			} else if (d2_CurrentElementId == b3) {
-				fcn_00471af0(h, 0);
+				d2_SetFormVisibility(h, 0);
 				d2_ShowSoundOptions();
-				fcn_00471af0(h, 1);
+				d2_SetFormVisibility(h, 1);
 			}
 		}
 	}

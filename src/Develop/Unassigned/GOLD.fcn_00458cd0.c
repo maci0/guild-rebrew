@@ -5,7 +5,7 @@ void __cdecl d3_MultiplyAffineMatrices(float* a, float* b, float* output);
  * translation of m and the pivot (+0x1bc) is position - offset + base. */
 
 /* ADDRESS: GOLD 0x00458cd0 */
-void __cdecl fcn_00458cd0(char* o, int flags, float* m, float* out)
+void __cdecl d3_ComposeNodeMatrix(char* o, int flags, float* m, float* out)
 {
 	float t[16];
 	char* parent;
@@ -28,7 +28,7 @@ void __cdecl fcn_00458cd0(char* o, int flags, float* m, float* out)
 	}
 	if (parent != 0) {
 		d3_MultiplyAffineMatrices(m, (float*) (o + 0x18c), t);
-		fcn_00458cd0(parent, flags, t, out);
+		d3_ComposeNodeMatrix(parent, flags, t, out);
 	} else {
 		d3_MultiplyAffineMatrices(m, (float*) (o + 0x18c), out);
 	}

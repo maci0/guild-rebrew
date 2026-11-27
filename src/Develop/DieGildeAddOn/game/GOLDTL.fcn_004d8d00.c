@@ -29,7 +29,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl gm_GetEquippedCombatGear(char*);
 unsigned short* __cdecl gm_FindEntityActiveItem(char*);
-float __cdecl fcn_004cefb0(char*, int);
+float __cdecl gm_CalcEntityFlatDistance(char*, int);
 float __cdecl gm_GetEntityGridDistance(void*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 unsigned int __cdecl cut_RandMod(int);
@@ -37,7 +37,7 @@ int __cdecl gm_HasActiveSpecialObject(void*, int);
 char* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
-int __cdecl fcn_004d31d0(char*, int, int, int, unsigned int*, unsigned int*);
+int __cdecl gm_FindBestBalancedTile(char*, int, int, int, unsigned int*, unsigned int*);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
@@ -198,10 +198,10 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 				}
 			} else if (*(int*)ent == 0x176) {
 				if (tgt) {
-					if (fcn_004cefb0(obj, ent34(tgt)) > *(float*)(ent + 0xc))
+					if (gm_CalcEntityFlatDistance(obj, ent34(tgt)) > *(float*)(ent + 0xc))
 						v24 = 0;
 					if (!p->c0c) {
-						if (fcn_004cefb0(obj, ent34(tgt)) > *(float*)(ent + 0xc) * 0.1)
+						if (gm_CalcEntityFlatDistance(obj, ent34(tgt)) > *(float*)(ent + 0xc) * 0.1)
 							v24 = 0;
 					}
 				} else {
@@ -214,7 +214,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 				}
 			} else {
 				if (tgt) {
-					if (fcn_004cefb0(obj, ent34(tgt)) > *(float*)(ent + 0xc))
+					if (gm_CalcEntityFlatDistance(obj, ent34(tgt)) > *(float*)(ent + 0xc))
 						v24 = 0;
 				} else {
 					if (gm_GetEntityGridDistance(obj, p->f14, p->f18) > *(float*)(ent + 0xc))
@@ -316,7 +316,7 @@ void __cdecl gm_UpdateTaskProgress(char* context)
 						&p->f14, &p->f18, &v28))
 						break;
 				}
-				if (fcn_004d31d0(obj, p->f14, p->f18,
+				if (gm_FindBestBalancedTile(obj, p->f14, p->f18,
 					(int)(*(float*)(ent + 0xc)
 					/ *(float*)(base + 0x10)
 					* g_664128), &v10, &v14))
@@ -338,7 +338,7 @@ lvl3:
 			if (!fcn_0045b990(base, (float*)(ent34(obj) + 0x4c),
 				(int*)0x102d020, (int*)0x102d024, &v28))
 				break;
-			if (fcn_004d31d0(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
+			if (gm_FindBestBalancedTile(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
 				(unsigned int*)&v10, (unsigned int*)&v14))
 				p->timer = cm_RequestChTalkAction((char*)ent34(obj), v10, v14, 0);
 			p->timer = cm_SendUpdateCutsceneEntitySlot(*(int*)(context + 0x10), msg.f);
@@ -354,7 +354,7 @@ tail1_body:
 			if (!fcn_0045b990(base, (float*)(ent34(obj) + 0x4c),
 				(int*)0x102d020, (int*)0x102d024, &v28))
 				break;
-			if (fcn_004d31d0(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
+			if (gm_FindBestBalancedTile(obj, *(int*)0x102d020, *(int*)0x102d024, 0xc,
 				(unsigned int*)&v10, (unsigned int*)&v14))
 				p->timer = cm_RequestChTalkAction((char*)ent34(obj), v10, v14, 0);
 			msg.f[0] = *(int*)(obj + 4);

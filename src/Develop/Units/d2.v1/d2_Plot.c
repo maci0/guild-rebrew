@@ -18,8 +18,8 @@ extern char s_67d7d0[];
 
 #include "GOLDTL.fcn_00472960_gconf.h"
 
-void __cdecl fcn_00475fd0(void*);
-int __cdecl fcn_00476b10(int x, int y, unsigned char r, unsigned char g, unsigned char b, void* s);
+void __cdecl d2_LockSurface(void*);
+int __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g, unsigned char b, void* s);
 void __cdecl d2_UnlockSurface(void*);
 
 /* ADDRESS: GOLDTL 0x00472960 */
@@ -39,32 +39,32 @@ void __cdecl d2_Plot(int x, int y, unsigned char r, unsigned char g, unsigned ch
 	    || y < (unsigned char) d2_PlotRadius || y > w->height - (unsigned char) d2_PlotRadius) {
 		return;
 	}
-	fcn_00475fd0(w->surf);
+	d2_LockSurface(w->surf);
 	switch ((unsigned char) d2_PlotRadius) {
 	case 0:
-		fcn_00476b10(x, y, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x, y, r, g, b, w->surf);
 		break;
 	case 1:
-		fcn_00476b10(x - 1, y, r, g, b, w->surf);
-		fcn_00476b10(x + 1, y, r, g, b, w->surf);
-		fcn_00476b10(x, y + 1, r, g, b, w->surf);
-		fcn_00476b10(x, y - 1, r, g, b, w->surf);
-		fcn_00476b10(x, y, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x - 1, y, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x + 1, y, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x, y + 1, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x, y - 1, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x, y, r, g, b, w->surf);
 		break;
 	case 2:
-		fcn_00476b10(x - 1, y, r, g, b, w->surf);
-		fcn_00476b10(x + 1, y, r, g, b, w->surf);
-		fcn_00476b10(x - 2, y, r, g, b, w->surf);
-		fcn_00476b10(x + 2, y, r, g, b, w->surf);
-		fcn_00476b10(x, y, r, g, b, w->surf);
-		fcn_00476b10(x, y + 1, r, g, b, w->surf);
-		fcn_00476b10(x, y - 1, r, g, b, w->surf);
-		fcn_00476b10(x, y + 2, r, g, b, w->surf);
-		fcn_00476b10(x, y - 2, r, g, b, w->surf);
-		fcn_00476b10(x + 1, y + 1, r, g, b, w->surf);
-		fcn_00476b10(x - 1, y - 1, r, g, b, w->surf);
-		fcn_00476b10(x - 1, y + 1, r, g, b, w->surf);
-		fcn_00476b10(x + 1, y - 1, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x - 1, y, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x + 1, y, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x - 2, y, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x + 2, y, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x, y, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x, y + 1, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x, y - 1, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x, y + 2, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x, y - 2, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x + 1, y + 1, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x - 1, y - 1, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x - 1, y + 1, r, g, b, w->surf);
+		d2_WriteSurfacePixel(x + 1, y - 1, r, g, b, w->surf);
 		break;
 	}
 	d2_UnlockSurface(w->surf);

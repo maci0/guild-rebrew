@@ -28,7 +28,7 @@ extern int g_772528;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLDTL 0x0046b210 */
-int __cdecl fcn_0046b210(int x, int y)
+int __cdecl d2_FindWindowAt(int x, int y)
 {
 	int i;
 	Slot* s;

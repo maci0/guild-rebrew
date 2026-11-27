@@ -1,8 +1,8 @@
 
 
-char __cdecl fcn_0043c140(int*, int, int, int);
+char __cdecl d3_IsFloorBlockUniform(int*, int, int, int);
 
-void __cdecl fcn_0043c1d0(int* a)
+void __cdecl d3_MarkFloorUniformBlocks(int* a)
 {
 	unsigned char div[3];
 	int k;
@@ -19,7 +19,7 @@ void __cdecl fcn_0043c1d0(int* a)
 		m = a[0] / d;
 		for (j = 0; j < m; j++) {
 			for (i = 0; i < m; i++) {
-				if (fcn_0043c140(a, i * d, j * d, d)) {
+				if (d3_IsFloorBlockUniform(a, i * d, j * d, d)) {
 					((unsigned char*) a[9 + k])[j * m + i] |= 0x40;
 				} else {
 					((unsigned char*) a[9 + k])[j * m + i] &= 0xbf;

@@ -7,7 +7,7 @@ int __cdecl d2_AllocateElement(void);
 void* __cdecl d2_GetResourceData(int);
 
 /* ADDRESS: GOLDTL 0x004675f0 */
-int __cdecl fcn_004675f0(int a0, int a1, int a2, int a3, int a4, int resourceId, int flags)
+int __cdecl d2_CreateValueGauge(int a0, int a1, int a2, int a3, int a4, int resourceId, int flags)
 {
 	int id;
 	char* p0;

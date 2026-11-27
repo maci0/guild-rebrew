@@ -48,9 +48,9 @@ extern int g_14ce904;
 
 void __cdecl fcn_00412830(unsigned char mask);
 char* __cdecl d2_SelectFont(int idx);
-void __cdecl fcn_0046ed00(int delta, int step, int k);
+void __cdecl d2_ScrollWindow(int delta, int step, int k);
 
-void __cdecl fcn_00473b10(void)
+void __cdecl d2_UpdateMouseHoverAndScroll(void)
 {
 	int sel;
 	int btn;
@@ -103,21 +103,21 @@ done:
 			w = &((Win*)g_1015f40)[(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->up_btn].value_1f0)];
 			if (w->scroll == w->scroll_max || w->scroll == 0) {
 				d = w->step;
-				fcn_0046ed00(0, d, w->id);
+				d2_ScrollWindow(0, d, w->id);
 			}
 		} else if (d2_CurrentElementId == w->down_btn) {
 			w = &((Win*)g_1015f40)[(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->down_btn].value_1f0)];
 			if (w->scroll == w->scroll_max || w->scroll == 0) {
 				d = -w->step;
-				fcn_0046ed00(0, d, w->id);
+				d2_ScrollWindow(0, d, w->id);
 			}
 		}
 	}
 	if (g_67d38c != -1 && (w = &((Win*)g_1015f40)[g_67d38c]) != 0 && g_14ce904 - g_14ce900 != 0 && (d = w->step) != 0 && tp_d2_SelectedControl == 0) {
 		if (g_14ce904 != 0) {
-			fcn_0046ed00(0, -d, w->id);
+			d2_ScrollWindow(0, -d, w->id);
 		} else if (g_14ce900 != 0) {
-			fcn_0046ed00(0, d, w->id);
+			d2_ScrollWindow(0, d, w->id);
 		}
 	}
 	if (sel != -1) {

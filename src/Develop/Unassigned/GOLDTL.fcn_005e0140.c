@@ -10,10 +10,10 @@ int __cdecl ls_LoadSavegameHeader(int, char *);
 int __cdecl CloseVfsStream(int);
 int __cdecl fcn_005e0090(int, void *, int, void *);
 int __cdecl d2_SetForm(int, int);
-int __cdecl fcn_0046f100(int, int, int, int, int, int);
+int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 int __cdecl d2_ShowTxt(int, int, char *, int);
 int __cdecl d2_SetElementFont(int, int);
-int __cdecl fcn_004692c0(int, int, int, int, void *, int);
+int __cdecl d2_AddWindowBitmapElement(int, int, int, int, void *, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 
@@ -47,7 +47,7 @@ void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, 
         d2_SetForm(a, b);
         row = (char *)items + index * 0x220;
         y = *(short *)((int)g_77255c + 0xc);
-        element = fcn_0046f100(0, (short)(index * 130), (short)(y - 16), 0x82, 16, d2_CurrentWindowId);
+        element = d2_CreateChildWindow(0, (short)(index * 130), (short)(y - 16), 0x82, 16, d2_CurrentWindowId);
         *(int *)(row + 8) = element;
         *(int *)(element * 0x3cc + 0x10161cc) = 0x54;
         element = d2_ShowTxt(0xa8, -2, header + 0x9c, d2_CurrentWindowId);
@@ -65,12 +65,12 @@ void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, 
                 pixels[x] = 0;
                 pixels[119 * 160 + x] = 0;
             }
-            fcn_004692c0(0, 0, 160, 120, pixels, d2_CurrentWindowId);
+            d2_AddWindowBitmapElement(0, 0, 160, 120, pixels, d2_CurrentWindowId);
         }
         *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x5c) = 1;
         *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
         *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x1d0) = 3;
-        fcn_0046f100(0xa4, 0x12, (short)(*(short *)((int)g_77255c + 0xc) - 0xb0), 0x6e, 16, d2_CurrentWindowId);
+        d2_CreateChildWindow(0xa4, 0x12, (short)(*(short *)((int)g_77255c + 0xc) - 0xb0), 0x6e, 16, d2_CurrentWindowId);
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x10161cc) = 0x54;
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x1015f60) = 0;
         sprintf(text, (char *)0x699a68, *(int *)(header + 0x68), 0x11);
@@ -93,18 +93,18 @@ void __cdecl fcn_005e0140(int a, int b, void *items, void *records, char *path, 
         row = (char *)items + index * 0x220;
         row[0xc] = 0;
         y = *(short *)((int)g_77255c + 0xc);
-        element = fcn_0046f100(0, (short)(index * 130), (short)(y - 16), 0x78, 16, d2_CurrentWindowId);
+        element = d2_CreateChildWindow(0, (short)(index * 130), (short)(y - 16), 0x78, 16, d2_CurrentWindowId);
         *(int *)(row + 8) = element;
         *(int *)(element * 0x3cc + 0x10161cc) = 0x54;
         element = d2_ShowTxt(0xa8, 0, row + 0x19, d2_CurrentWindowId);
         *(int *)(row + 4) = element;
         d2_SetElementFont(element, 0x53);
-        fcn_004692c0(0, 0, 160, 120, (void *)0x7ea3c0, d2_CurrentWindowId);
+        d2_AddWindowBitmapElement(0, 0, 160, 120, (void *)0x7ea3c0, d2_CurrentWindowId);
         d2_AddElementToWindow(0x3c, 0x20, 0x4fb, d2_CurrentWindowId);
         *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x5c) = 1;
         *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x18) = *(int *)((int)g_77255c + 0xc) - 0xa0;
         *(int *)(g_1015ea0 + *(int *)(row + 4) * 0x2f4 + 0x1d0) = 3;
-        fcn_0046f100(0xa4, 0x18, (short)(*(short *)((int)g_77255c + 0xc) - 0xb0), 0x60, 16, d2_CurrentWindowId);
+        d2_CreateChildWindow(0xa4, 0x18, (short)(*(short *)((int)g_77255c + 0xc) - 0xb0), 0x60, 16, d2_CurrentWindowId);
         *(int *)(d2_CurrentWindowId * 0x3cc + 0x10161cc) = 0x54;
         io_AppendText(0x1cc7);
     }

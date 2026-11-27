@@ -10,12 +10,12 @@ int __cdecl fcn_0064ebe4(void* buffer, int size, int count, char* file);
 int __cdecl fcn_0064e1fd(char* file);
 int __cdecl fcn_0064d3f8(void);
 int __cdecl msx_AllocateSampleHandle(int handle, void* out);
-void __cdecl fcn_0042a7c0(int handle);
+void __cdecl msx_InitSample(int handle);
 void __cdecl msx_StartSample(int handle);
 int __cdecl msx_SetSampleData(int handle, char* flag, void* data, int size);
-int __cdecl fcn_00423920(char* path);
-int __cdecl fcn_00423b80(char* name);
-int __cdecl fcn_00424700(char* name);
+int __cdecl sbs_GetFileSize(char* path);
+int __cdecl sbs_GetAudioFormat(char* name);
+int __cdecl sbs_CountSetEntries(char* name);
 void* __cdecl sbs_FindSet(char* name);
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* pointer);
@@ -39,7 +39,7 @@ int __cdecl fcn_00425550(char* name, char* ext)
 				goto fail;
 			}
 		}
-		fcn_0042a7c0((int) g_6b7d80);
+		msx_InitSample((int) g_6b7d80);
 		if (g_6b7d84 != 0) {
 			m_FreeTracked(g_6b7d84);
 			g_6b7d84 = 0;
@@ -51,7 +51,7 @@ int __cdecl fcn_00425550(char* name, char* ext)
 			strcat(path, ext);
 			strcat(path, name + (found - path) + 5);
 		}
-		size = fcn_00423920(path);
+		size = sbs_GetFileSize(path);
 		if (size == 0) {
 			goto fail;
 		}
@@ -66,7 +66,7 @@ int __cdecl fcn_00425550(char* name, char* ext)
 		if (fcn_0064ebe4(g_6b7d84, size, 1, file) != 1) {
 			goto close_failed;
 		}
-		if (fcn_00423b80(name) == 1) {
+		if (sbs_GetAudioFormat(name) == 1) {
 			found = ".wav";
 		} else {
 			found = ".mp3";
@@ -90,7 +90,7 @@ fail:
 		result = -1;
 		return result;
 	} else {
-		size = fcn_00424700(name);
+		size = sbs_CountSetEntries(name);
 		index = fcn_0064d3f8() % size;
 		data = sbs_FindSet(name);
 		if (data == 0) {

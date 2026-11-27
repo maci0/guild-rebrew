@@ -30,7 +30,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_UpdateActiveItemSlots(void);
 
 int __cdecl gm_LookupSpecialObject(int);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_ConfirmUseObjekt(char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
@@ -67,11 +67,11 @@ void __cdecl d2_ShowInventoryPanel(void)
 				for (i = 0; i < 6; i++) {
 					if (g_776c60[i].item != 0 && d2_CurrentElementId == g_776c60[i].btn) {
 						if (gm_LookupSpecialObject(*(unsigned short*) g_776c60[i].item) != 0) {
-							fcn_00471af0(dlg, 0);
+							d2_SetFormVisibility(dlg, 0);
 							d2_ConfirmUseObjekt(g_776c60[i].item);
 							d2_SetElementValue(g_776c60[i].btn, 0, 0x3e7, 0);
 							ResetDisplayCounters();
-							fcn_00471af0(dlg, 1);
+							d2_SetFormVisibility(dlg, 1);
 						}
 						else {
 							fcn_00526120(g_14a92bc, 0);

@@ -61,7 +61,7 @@ void __cdecl fcn_0047c520(void);
 void __cdecl fcn_004372d0(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0047c560 */
-int __cdecl fcn_0047c560(int idx, Snd* snd, char* src)
+int __cdecl d2_FlushQueuedQuads(int idx, Snd* snd, char* src)
 {
 	int start;
 	int count;

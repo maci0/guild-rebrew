@@ -27,9 +27,9 @@ int __cdecl fcn_0047a990(int, int, char*, char*);
 char* __cdecl fcn_0047abd0(int, int);
 void __cdecl fcn_0047ac20(char*, char*);
 char* __cdecl fcn_004770a0(int*, int);
-int __cdecl fcn_00475fd0(char*);
+int __cdecl d2_LockSurface(char*);
 void __cdecl d2_UnlockSurface(char*);
-void __cdecl fcn_004760e0(char*);
+void __cdecl d2_UpdateTextureBytes(char*);
 void __cdecl fcn_00475f80(char*);
 int __cdecl fcn_00477420(int);
 char* __cdecl fcn_0047b620(char*, int);
@@ -155,7 +155,7 @@ char* __cdecl fcn_0047acf0(char* list)
 				hdr[2] = (int) *(unsigned short*) (shape + 0xa);
 			hdr[0xa] = 0x15;
 			base = fcn_004770a0(hdr, 0x20);
-			fcn_00475fd0(base);
+			d2_LockSurface(base);
 			fcn_0047a710(0, 0, shape, base);
 			d2_UnlockSurface(base);
 			j = 0;
@@ -207,7 +207,7 @@ char* __cdecl fcn_0047acf0(char* list)
 						*(int*) (*(int*) (node + 0x30) + j * 0xc + 8) = (int) surf;
 					}
 					*(int*) (*(int*) (node + 0x28) + j * 4) = (int) surf;
-					fcn_004760e0(surf);
+					d2_UpdateTextureBytes(surf);
 					g_772610 = g_772610 + *(int*) (surf + 0x4c);
 					g_77260c = g_77260c + 1;
 					j++;
@@ -251,7 +251,7 @@ char* __cdecl fcn_0047acf0(char* list)
 				m_FreeTracked(bank);
 				return 0;
 			}
-			if (fcn_00475fd0(surf) != 0) {
+			if (d2_LockSurface(surf) != 0) {
 				cols = sz / (int) *(unsigned short*) (bank + 6);
 				rows = sz / (int) *(unsigned short*) (bank + 8);
 				cells = rows * cols;
@@ -304,7 +304,7 @@ char* __cdecl fcn_0047acf0(char* list)
 						*(int*) (*(int*) (sn + 0x28) + 0x48) = *(int*) (*(int*) (sn + 0x28) + 0x48) + 1;
 					}
 					fcn_00475f80(surf);
-					fcn_004760e0(base);
+					d2_UpdateTextureBytes(base);
 					g_772610 = g_772610 + *(int*) (base + 0x4c);
 				}
 				else {

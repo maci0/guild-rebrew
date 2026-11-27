@@ -12,7 +12,7 @@ unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl cm_RequestModifyHealth(int, int);
 void __cdecl io_FormatTextBuffer(char*, int);
-int __cdecl fcn_005cd440(void*, char*, int, void*);
+int __cdecl d2_OpenTargetPicker(void*, char*, int, void*);
 int __cdecl d2_ShowDuelChallengeDialog(unsigned char*);
 /* Two dialog outcomes: the shop path builds a 0xf8-byte request record from
  * the owner id and four random-range globals; the quest path fills a
@@ -61,7 +61,7 @@ int __cdecl gm_RunDuelChallengeAction(char* actor, char* request)
 	init[3] = g_66601c;
 	init[4] = 6;
 	io_FormatTextBuffer(name, 0x1d66);
-	found = fcn_005cd440(init, name, 0, (void*) d2_ShowDuelChallengeDialog);
+	found = d2_OpenTargetPicker(init, name, 0, (void*) d2_ShowDuelChallengeDialog);
 	if (found != 0 && (*(unsigned int*) (found + 0x1c8) & 0x400) != 0) {
 		ret = 0x81;
 	}

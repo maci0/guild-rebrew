@@ -12,7 +12,7 @@ int __cdecl vfs_LookupPath(char*, int, char*);
 int __cdecl evt_LoadScript(char*);
 int __cdecl evt_FindScriptById(int);
 void __cdecl evt_RequestScriptExit(int);
-void __cdecl fcn_00428340(int, int, int, int);
+void __cdecl evt_CallScriptFunction(int, int, int, int);
 /* ADDRESS: GOLDTL 0x00515c60 */
 void __cdecl evt_StartShopIntroScript(unsigned char* building, unsigned char* visitor)
 {
@@ -83,7 +83,7 @@ fmt:
 				evt_RequestScriptExit(v3);
 			}
 		}
-		fcn_00428340(r, 2, *(int*) (v8 + 0x184), 0x4c3800);
+		evt_CallScriptFunction(r, 2, *(int*) (v8 + 0x184), 0x4c3800);
 		*(int*) (r + 0xc94) = *(int*) (v8 + 0x184);
 		*(int*) (*(int*) (v8 + 0x184) + 0x28) = *(int*) (r + 0x100);
 		g_699b10 = *(int*) (r + 0x100);

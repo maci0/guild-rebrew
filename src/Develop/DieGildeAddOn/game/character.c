@@ -35,7 +35,7 @@ char* __cdecl d3sm_GetObjectSuperMap(char*);
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
-void __cdecl fcn_00441720(char*, float*, int, int*, int*, float*);
+void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
 extern float g_6628a8;
 #include "Develop/Units/d3/d3_animation.h"
 
@@ -251,7 +251,7 @@ int __cdecl ch_PlaceOnGround(void* object, int force)
 			cell = *(int*) (*(char**) (map + 0x24) + (*(int*) (map + 0x20) * row + col) * 0x1c);
 			if (force != 0 || (cell != 0 && cell != 0xd)) {
 				if (*(int*) (*(char**) (obj + 0x88) + 0xac) != 0) {
-					fcn_00441720(*(char**) (*(char**) (obj + 0x88) + 0xac), pos, 1, &col, &row, &height);
+					d3_GetFloorHeight(*(char**) (*(char**) (obj + 0x88) + 0xac), pos, 1, &col, &row, &height);
 				}
 				if (d3_GetContextIndex(*(void**) (obj + 0x88)) == 0) {
 					pos[1] = height + 3.0f;

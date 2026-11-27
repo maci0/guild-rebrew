@@ -3,7 +3,7 @@ extern double g_664360;
 extern float g_6628b0;
 
 float __cdecl gm_GetCityStatsSummary(char* p);
-int __cdecl fcn_004a4410(float* a0, float* a1, int a2, char* a3, int a4,
+int __cdecl ai_ComputeBaseActionScore(float* a0, float* a1, int a2, char* a3, int a4,
     int a5, int a6);
 int __cdecl ai_CalculateMatchingMethodEffects(float* a0, float* a1, int a2, char* a3, int a4,
     int a5, int a6);
@@ -31,5 +31,5 @@ int __cdecl ai_ScoreBuergermeister(float* scoreFirst, float* scoreSecond, int a2
         *scoreSecond = t * g_6628b0;
         return 1;
     }
-    return fcn_004a4410(scoreFirst, scoreSecond, a2, candidateRecord, a4, a5, a6);
+    return ai_ComputeBaseActionScore(scoreFirst, scoreSecond, a2, candidateRecord, a4, a5, a6);
 }

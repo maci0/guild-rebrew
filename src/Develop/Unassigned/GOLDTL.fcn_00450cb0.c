@@ -23,7 +23,7 @@ extern int g_67a370;
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, int);
 void __cdecl fcn_00450d40(void);
 
-void __cdecl fcn_00450cb0(int ctx, unsigned char mask)
+void __cdecl d3_CollectSceneLights(int ctx, unsigned char mask)
 {
 	int i;
 

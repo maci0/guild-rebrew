@@ -5,10 +5,10 @@ void __cdecl d3_SetFogRange(float a, float b);
 int __cdecl fcn_004385e0();
 int __cdecl fcn_00440f70();
 int __cdecl fcn_00441400();
-int __cdecl fcn_00441050();
+int __cdecl d3_UpdateFloorVisibility();
 float __cdecl fcn_004424c0();
 int __cdecl fcn_00437160();
-void __cdecl fcn_00450cb0(int ctx, unsigned char mask);
+void __cdecl d3_CollectSceneLights(int ctx, unsigned char mask);
 void __cdecl fcn_004509c0(void);
 int __cdecl fcn_00450e90();
 int __cdecl fcn_00451df0();
@@ -74,10 +74,10 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		*(int*) 0x1043294 = 0;
 		*(int*) 0x10432a0 = 0x501502f9;
 		if (*(int*) 0x6b8300) {
-			fcn_00441050(*(int*) 0x6b8300);
+			d3_UpdateFloorVisibility(*(int*) 0x6b8300);
 		}
 		*(int*) 0x1043028 = 0;
-		fcn_00450cb0(*(int*) 0x6b8014, ((unsigned char) g_1052bd0[0] & 0x1c) != 0);
+		d3_CollectSceneLights(*(int*) 0x6b8014, ((unsigned char) g_1052bd0[0] & 0x1c) != 0);
 		if (a0) {
 			fcn_004509c0();
 		}

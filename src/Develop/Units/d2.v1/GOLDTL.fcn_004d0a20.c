@@ -23,14 +23,14 @@ extern double g_662c38;
 extern char g_67d444[];
 
 void __cdecl ResetDisplayCounters(void);
-void __cdecl fcn_00473690(int, int);
+void __cdecl d2_AddDisplayCounter(int, int);
 void __cdecl d2_SetElementValue(int, ...);
 float __cdecl gm_GetEntityHealthRatio(char*);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
 int __cdecl gm_GetUnitWeaponSpec(char*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-void __cdecl fcn_00472680(int, int);
+void __cdecl d2_SetElementScale(int, int);
 char* __cdecl gm_FindEntityActiveItem(char*);
 void __cdecl d2_DestroyElement(int);
 void __cdecl d2_SetSlotVisibility(int, int);
@@ -67,7 +67,7 @@ void __cdecl fcn_004d0a20(void)
 				d2_SetSlotVisibility(*(int*) (g_10161bc + q->frame * 0x3cc), 0);
 			} else {
 				if (*(char*) (v + 0x188) != 0) {
-					fcn_00473690(*(int*) (v + 0x18c), 1);
+					d2_AddDisplayCounter(*(int*) (v + 0x18c), 1);
 					d2_SetElementValue(q->icon, 1);
 					*(int*) 0x772eb8 += 1;
 				} else {
@@ -88,7 +88,7 @@ void __cdecl fcn_004d0a20(void)
 					} else {
 relabel:
 						d2_CurrentWindowId = q->win;
-						fcn_00472680(q->name = d2_AddElementToWindow(0x54, 0xf,
+						d2_SetElementScale(q->name = d2_AddElementToWindow(0x54, 0xf,
 							*r + 0xdf, d2_CurrentWindowId), 0xfffffffe);
 					}
 					if (q->label != -1) {

@@ -24,7 +24,7 @@ typedef struct Bank {
 // SIZE 0x35
 
 /* ADDRESS: GOLDTL 0x00479a20 */
-int __cdecl fcn_00479a20(Bank* b, int idx)
+int __cdecl d2_RemoveShapeFromBank(Bank* b, int idx)
 {
 	unsigned int* po;
 	unsigned int* q;

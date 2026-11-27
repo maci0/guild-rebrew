@@ -3,7 +3,7 @@ extern char g_772f3c[];
 void __cdecl d3_DestroyRain(int);
 
 /* ADDRESS: GOLDTL 0x004e4c60 */
-void __cdecl fcn_004e4c60(void)
+void __cdecl d3_DestroySceneRain(void)
 {
 	if (*(int*) &g_772f3c == 0) {
 		d3_DestroyRain(*(int*) 0x772f6c);

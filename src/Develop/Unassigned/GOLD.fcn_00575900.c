@@ -1,7 +1,7 @@
 /* id in 0x605..0x60d tests a bit of [0x6f263c]; anything else returns 0.
  * 0x605 is bit 0. 0x606's test is the tail of this range. */
 /* ADDRESS: GOLD 0x00575900 */
-int __cdecl fcn_00575900(unsigned int id)
+int __cdecl d2_TestTutorialFlag0x6f263c(unsigned int id)
 {
 	unsigned int v;
 

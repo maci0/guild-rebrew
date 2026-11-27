@@ -19,7 +19,7 @@ extern __int64 g_666018;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-char* __cdecl fcn_005cd440(Req*, char*, int, int);
+char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
@@ -43,14 +43,14 @@ int __cdecl gm_ObjCreateMutualRivalry(char* e, char* request)
 		req.size = 0x400;
 		req.kind = 6;
 		req.d = g_66601c;
-		a = fcn_005cd440(&req, text, 0, 0);
+		a = d2_OpenTargetPicker(&req, text, 0, 0);
 		if (a == 0) {
 			goto done;
 		}
 		req.pad[0] = 3;
 		*(short*) &req.pad[2] = *(short*) a;
 		io_FormatTextBuffer(text, 0x9e);
-		b = fcn_005cd440(&req, text, 0, 0);
+		b = d2_OpenTargetPicker(&req, text, 0, 0);
 	} else {
 		a = gm_LookupEntityRecordById(*(int*) (request + 4));
 		b = gm_LookupEntityRecordById(*(int*) (request + 8));

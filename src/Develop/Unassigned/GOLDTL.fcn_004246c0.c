@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004246c0 */
-int __cdecl fcn_004246c0(void)
+int __cdecl sbs_CountRootSamples(void)
 {
 	char* p;
 	int n;

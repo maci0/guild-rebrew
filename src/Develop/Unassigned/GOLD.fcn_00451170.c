@@ -11,7 +11,7 @@ typedef struct Bone {
 	float b[3];
 } Bone;
 
-int __cdecl fcn_00451170(char* m, char* o)
+int __cdecl d3_CalcModelSaveSize(char* m, char* o)
 {
 	int sz;
 	int n;

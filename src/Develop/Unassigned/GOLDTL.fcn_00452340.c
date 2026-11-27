@@ -2,7 +2,7 @@
 
 typedef int (__stdcall* fcn_00452340_f)(void*);
 
-void __cdecl fcn_00452340(void)
+void __cdecl d3_ReleaseVertexBufferPtr(void)
 {
 	void* p;
 

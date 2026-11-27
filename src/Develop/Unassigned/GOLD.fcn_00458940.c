@@ -12,7 +12,7 @@ typedef struct Vec3 {
 
 void __cdecl d3_TransformDirection(char*, Vec3*, Vec3*);
 
-void __cdecl fcn_00458940(char* o, char* ref, Vec3* v, Vec3* out)
+void __cdecl d3_TransformDirectionToView(char* o, char* ref, Vec3* v, Vec3* out)
 {
 	float t[4];
 

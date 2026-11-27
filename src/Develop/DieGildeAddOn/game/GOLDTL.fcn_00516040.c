@@ -5,7 +5,7 @@ int __cdecl gm_GetSeason(char*);
 char* __cdecl strstr(char*, char*);
 int __cdecl sprintf(char*, char*, ...);
 int __cdecl d3_ResolveTexturePath(char*);
-void __cdecl fcn_0043f990(char*, char*, int);
+void __cdecl d3_ReloadFloorTextureSlot(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x00516040 */
 void __cdecl fcn_00516040(void)
@@ -61,9 +61,9 @@ void __cdecl fcn_00516040(void)
 			}
 			sprintf(name, "%s_SNOW", buf);
 			if (d3_ResolveTexturePath(name) != 0) {
-				fcn_0043f990(g_6b8300, name, i);
+				d3_ReloadFloorTextureSlot(g_6b8300, name, i);
 			} else {
-				fcn_0043f990(g_6b8300, buf, i);
+				d3_ReloadFloorTextureSlot(g_6b8300, buf, i);
 			}
 		}
 		return;
@@ -103,9 +103,9 @@ void __cdecl fcn_00516040(void)
 			}
 			sprintf(name, "%s_HERBST", buf);
 			if (d3_ResolveTexturePath(name) != 0) {
-				fcn_0043f990(g_6b8300, name, i);
+				d3_ReloadFloorTextureSlot(g_6b8300, name, i);
 			} else {
-				fcn_0043f990(g_6b8300, buf, i);
+				d3_ReloadFloorTextureSlot(g_6b8300, buf, i);
 			}
 		}
 		return;
@@ -145,9 +145,9 @@ void __cdecl fcn_00516040(void)
 			}
 			sprintf(name, "%s_FRUEHLING", buf);
 			if (d3_ResolveTexturePath(name) != 0) {
-				fcn_0043f990(g_6b8300, name, i);
+				d3_ReloadFloorTextureSlot(g_6b8300, name, i);
 			} else {
-				fcn_0043f990(g_6b8300, buf, i);
+				d3_ReloadFloorTextureSlot(g_6b8300, buf, i);
 			}
 		}
 		return;
@@ -187,7 +187,7 @@ void __cdecl fcn_00516040(void)
 			if (q != 0) {
 				*q = 0;
 				if (d3_ResolveTexturePath(buf) != 0) {
-					fcn_0043f990(g_6b8300, buf, i);
+					d3_ReloadFloorTextureSlot(g_6b8300, buf, i);
 				}
 			}
 		}

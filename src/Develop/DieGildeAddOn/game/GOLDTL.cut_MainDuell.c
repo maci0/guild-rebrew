@@ -33,7 +33,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl cut_HandleDuellOfficeLoss(char* a0);
 void __cdecl cut_ResetEventSlots(void* event);
 void __cdecl fcn_004e4730(char* name);
-void __cdecl fcn_004dfef0(int v);
+void __cdecl cut_InitShufflePool(int v);
 void __cdecl d3_UpdateSeasonTextures(void);
 int __cdecl gm_GetSeason(int* p);
 int __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3);
@@ -125,7 +125,7 @@ void __cdecl cut_MainDuell(char* a0)
     cut_ResetEventSlots(a0);
     lvl = (signed char) a0[0x7c];
     fcn_004e4730(scene[lvl]);
-    fcn_004dfef0(0xa);
+    cut_InitShufflePool(0xa);
     d3_UpdateSeasonTextures();
     sel = gm_GetSeason((int*) 0x7f4c00);
     if (sel == 3)

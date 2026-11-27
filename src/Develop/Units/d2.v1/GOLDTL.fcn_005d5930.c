@@ -47,7 +47,7 @@ int __cdecl fcn_00470820(int, int, char*);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_0046e830(int, int, int, int, int);
+void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 void __cdecl d2_BuildPersonStatusDesc(Rec_5d5930*);
 void __cdecl fcn_005ca740(int, int, int, int, Rec_5d5930*, int);
 void __cdecl fcn_005c9160(char*, int, int, int, int);
@@ -116,7 +116,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 	io_AppendText(0x1d55);	d2_SetForm(dlg, 2);
 	k = d2_CurrentWindowId;
 	d2_SetForm(dlg, 3);
-	fcn_0046e830(-1, -1, d2_CurrentWindowId, k, 0x767);
+	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, k, 0x767);
 	n = fcn_004f61c0(ids, b, c, *(unsigned short*) p);
 	cnt = i = 0;
 	for (; i < n; i++) {

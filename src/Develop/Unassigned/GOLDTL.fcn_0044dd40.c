@@ -9,14 +9,14 @@ typedef struct Face {
 
 int __cdecl fcn_004011f0(void* stream, void* dst);
 
-void __cdecl fcn_0044dd40(void* r, char* o)
+void __cdecl d3_ReadFaceIndices(void* stream, char* ctx)
 {
 	int t;
 
-	fcn_004011f0(r, &t);
-	(*(Face**) (o + 0x20))[*(int*) (o + 0x18)].idx[0] = *(int*) (o + 0x2c) + t;
-	fcn_004011f0(r, &t);
-	(*(Face**) (o + 0x20))[*(int*) (o + 0x18)].idx[1] = *(int*) (o + 0x2c) + t;
-	fcn_004011f0(r, &t);
-	(*(Face**) (o + 0x20))[*(int*) (o + 0x18)].idx[2] = *(int*) (o + 0x2c) + t;
+	fcn_004011f0(stream, &t);
+	(*(Face**) (ctx + 0x20))[*(int*) (ctx + 0x18)].idx[0] = *(int*) (ctx + 0x2c) + t;
+	fcn_004011f0(stream, &t);
+	(*(Face**) (ctx + 0x20))[*(int*) (ctx + 0x18)].idx[1] = *(int*) (ctx + 0x2c) + t;
+	fcn_004011f0(stream, &t);
+	(*(Face**) (ctx + 0x20))[*(int*) (ctx + 0x18)].idx[2] = *(int*) (ctx + 0x2c) + t;
 }

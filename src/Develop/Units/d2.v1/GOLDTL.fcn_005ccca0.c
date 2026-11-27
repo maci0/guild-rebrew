@@ -33,13 +33,13 @@ typedef struct {
 extern TabRec_5ccca0 g_6ac8a8[];
 #include "client_data.h"
 #include "Develop/Units/d2.v1/d2_win.h"
-int __cdecl fcn_00468df0(int, int, int, int, int);
-void __cdecl fcn_00469110(int, int);
+int __cdecl d2_AddWindowTextButton(int, int, int, int, int);
+void __cdecl d2_SetElementWidth(int, int);
 int __cdecl fcn_00470820(int, int, char*);
-void __cdecl fcn_00471af0(int, int);
+void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -100,10 +100,10 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 	rem = rem % 7;
 	y = 0;
 	for (i = 0; i < 8;) {
-		g_6ac8a8[i].element = fcn_00468df0(
+		g_6ac8a8[i].element = d2_AddWindowTextButton(
 				(((D2_WIN*)g_1015f40)[d2_CurrentWindowId].width - 0xb9) / 2, y, 0xbf,
 				*(int*) (0x14aad40 + g_6ac8a8[i].bild * 4), d2_CurrentWindowId);
-		fcn_00469110(g_6ac8a8[i].element, 0xb9);
+		d2_SetElementWidth(g_6ac8a8[i].element, 0xb9);
 		i++;
 		y += 0x21 + step + (--rem >= 0);
 	}
@@ -138,7 +138,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 				}
 			}
 			for (i = 0; i < 8; i++) {
-				fcn_00472640(g_6ac8a8[i].element, g_6ac8a8[i].count > 0);
+				d2_SetElementEnabled(g_6ac8a8[i].element, g_6ac8a8[i].count > 0);
 				*(int*) ((char*)&((D2_CONTROL_TL*)g_1015ea0)[g_6ac8a8[i].element] + 0x38) =
 						i == g_775344;
 			}
@@ -169,7 +169,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 				g_6ac8a8[g_775344].count = n;
 				g_6ac8a8[g_775344].present(h, 2, 3, n, rows);
 			} else {
-				fcn_00472640(g_6ac8a8[sel].element, 0);
+				d2_SetElementEnabled(g_6ac8a8[sel].element, 0);
 			}
 		} else if (state == 4) {
 			d2_UpdateMatchAttitudeBars(cur, g_6ac8a8[g_775344].count, rows);
@@ -225,14 +225,14 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 						result = (int) rows[i].ent;
 						g_774654 = 1;
 					} else {
-						fcn_00471af0(h, 0);
+						d2_SetFormVisibility(h, 0);
 						if (((int (__cdecl*) (void*, int)) callback)(
 									rows[i].ent, 0) != 0) {
 							result = (int) rows[i].ent;
 						} else {
 							result = 0;
 						}
-						fcn_00471af0(h, 1);
+						d2_SetFormVisibility(h, 1);
 					}
 				}
 			}

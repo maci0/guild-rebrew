@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x004246e0 */
-int __cdecl fcn_004246e0(void)
+int __cdecl sbs_CountSets(void)
 {
 	char* p;
 	int n;

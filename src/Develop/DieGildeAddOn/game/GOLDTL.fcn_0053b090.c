@@ -28,7 +28,7 @@ char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl fcn_00455140(char*, char*, float*);
-float __cdecl fcn_00451380(char*, float*);
+float __cdecl d3_SignedPlanarAngle(char*, float*);
 void __cdecl d3_SetObjectRotation(Model*, float*);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl d3_InvalidateSubTreeFlags(Model*, int);
@@ -55,7 +55,7 @@ Figure* __cdecl ch_CreateCharacterAtSceneObject(char* res, char* kind, int anim)
 		pos[1] = 0.0f;
 		pos[2] = 0.0f;
 		fcn_00455140(h, ((char*)g_662d40), at);
-		pos[1] = fcn_00451380(((char*)g_662d40), at);
+		pos[1] = d3_SignedPlanarAngle(((char*)g_662d40), at);
 		d3_SetObjectRotation(f->model, pos);
 		ch_PlaceOnGround(f, 0);
 		f->model->owner = f;

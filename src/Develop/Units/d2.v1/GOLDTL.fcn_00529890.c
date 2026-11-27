@@ -7,16 +7,16 @@ extern int d2_CurrentWindowId;
 extern char g_6b5c60[]; extern int g_6a25b4; extern char g_774724;
 
 void d2_DestroyElement(int id);
-int fcn_0046f100(int x, int y, int cx, int cy, int a5, int win);
-void fcn_0046f280(int id);
+int d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);
+void d2_CloseWindow(int id);
 int d2_AddElementToWindow(int x, int y, int id, int win);
-int fcn_0046f7e0(int x, int y, int id, int win, int a5);
+int d2_AddWindowImage(int x, int y, int id, int win, int a5);
 void fcn_0046f940(int id, char* text);
 int d2_ShowTxt(int x, int y, char* text, int win);
 void d2_SetElementValue(int id, ...);
-void fcn_00472640(int id, int flag);
+void d2_SetElementEnabled(int id, int flag);
 void d2_SetForm(int screen, int flag);
-void fcn_00473690(int key, int amount);
+void d2_AddDisplayCounter(int key, int amount);
 void ResetDisplayCounters(void);
 void d3snd_PlayObjectClickSound(char* entity);
 float gm_GetEntityHealthRatio(char* entity);
@@ -25,7 +25,7 @@ void fcn_00517c00(int id, int a, int b, char* out);
 void he_AssignActionSlot(char* obj, int a, int id, int b);
 int fcn_00529800(char* entity, int* out);
 void sv_ClearObjectSelection(void);
-void fcn_00534210(int a, int b, char* entity, int c, int d);
+void d2_DrawSkillBar(int a, int b, char* entity, int c, int d);
 
 /* ADDRESS: GOLDTL 0x00529890 */
 void __cdecl fcn_00529890(char* building)
@@ -71,7 +71,7 @@ void __cdecl fcn_00529890(char* building)
 					d2_DestroyElement(v13[-2]);
 					v13[-2] = -1;
 					if (v13[3] != -1) {
-						fcn_0046f280(v13[3]);
+						d2_CloseWindow(v13[3]);
 					}
 					v13[3] = -1;
 					v13[1] = 0xffff;
@@ -137,7 +137,7 @@ void __cdecl fcn_00529890(char* building)
 				*(char**) (&((D2_CONTROL_TL*)g_1015ea0)
 					[*(int*) (v6 + 0x7e30c0)].associated_object) = &v11[-0x165];
 				if (*(int*) (v6 + 0x7e30d8) != -1) {
-					fcn_0046f280(*(int*) (v6 + 0x7e30d8));
+					d2_CloseWindow(*(int*) (v6 + 0x7e30d8));
 					*(unsigned int*) (v6 + 0x7e30d8) = 0xffffffff;
 				}
 				*(int*) (v6 + 0x7e30d0) = v3;
@@ -145,15 +145,15 @@ void __cdecl fcn_00529890(char* building)
 				v1 = *v12;
 				if (v1 == 0x10 || v1 == 0x13 || v1 == 0x04) {
 					d2_SetForm(g_6a25b4, 1);
-					v16 = fcn_0046f100(6, v5 + 0x3f, 0x50, 0xf, 0,
+					v16 = d2_CreateChildWindow(6, v5 + 0x3f, 0x50, 0xf, 0,
 						d2_CurrentWindowId);
 					*(unsigned int*) (v6 + 0x7e30d8) = v16;
 					d2_AddElementToWindow(4, 1, 0x5df, d2_CurrentWindowId);
-					fcn_00534210(0x10, 4,
+					d2_DrawSkillBar(0x10, 4,
 						(char*) (*(int*) (v6 + 0x7e30d0) * 0x21c
 							+ 0x7f4ca0), 2, 0x4f1);
 					d2_AddElementToWindow(0x28, 1, 0x5e0, d2_CurrentWindowId);
-					fcn_00534210(0x34, 4,
+					d2_DrawSkillBar(0x34, 4,
 						(char*) (*(int*) (v6 + 0x7e30d0) * 0x21c
 							+ 0x7f4ca0), 3, 0x4f1);
 				}
@@ -191,10 +191,10 @@ label_529c64:
 				|| (*(int*) (v3 + 0x7f4e68) & 0x800)
 				|| *(char*) (v3 + 0x7f4e20) == 0x14) {
 label_529d30:
-				fcn_00472640(v13[-4], 0);
+				d2_SetElementEnabled(v13[-4], 0);
 			}
 			else {
-				fcn_00472640(v13[-4], 1);
+				d2_SetElementEnabled(v13[-4], 1);
 			}
 			v13 = &v13[10];
 		} while ((int) v13 < 0x7e35d0);
@@ -205,7 +205,7 @@ label_529d30:
 				if (!(*(char*) (v13[2] * 0x21c + 0x7f4e28))) {
 					d2_SetElementValue(v13[-2], 0);
 				} else {
-					fcn_00473690(*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
+					d2_AddDisplayCounter(*(unsigned int*) (&((D2_CONTROL_TL*)g_1015ea0)
 						[v13[-2]].value_008), 1);
 					d2_SetElementValue(v13[-2], 1);
 				}
@@ -240,7 +240,7 @@ label_529d30:
 						v5 = *v13;
 						if (v5 == -1) {
 							if (v6 >= 0xdf && v6 <= 0x3bb) {
-								v6 = fcn_0046f7e0(0x38, v3 - 0x18,
+								v6 = d2_AddWindowImage(0x38, v3 - 0x18,
 									v6, d2_CurrentWindowId, -2);
 							}
 							else {
@@ -256,7 +256,7 @@ label_529d30:
 							d2_DestroyElement(v5);
 							*v13 = -1;
 							if (v6 >= 0xdf && v6 <= 0x3bb) {
-								v6 = fcn_0046f7e0(0x38, v3 - 0x18,
+								v6 = d2_AddWindowImage(0x38, v3 - 0x18,
 									v6, d2_CurrentWindowId, -2);
 							}
 							else {
@@ -277,7 +277,7 @@ label_529f4c:
 							d2_DestroyElement(v6);
 							v13[1] = -1;
 							if (v15 != 0) {
-								v6 = fcn_0046f7e0(0x38, v3, v15,
+								v6 = d2_AddWindowImage(0x38, v3, v15,
 									d2_CurrentWindowId, -2);
 							}
 							else {
@@ -286,7 +286,7 @@ label_529f4c:
 							}
 						} else {
 							if (v15 >= 0xdf && v15 <= 0x3bb) {
-								v6 = fcn_0046f7e0(0x38, v3, v15,
+								v6 = d2_AddWindowImage(0x38, v3, v15,
 									d2_CurrentWindowId, -2);
 							}
 							else {

@@ -20,7 +20,7 @@ extern char* g_772500;
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 
-void __cdecl fcn_00534210(int x, int y, char* p, int idx, int bar)
+void __cdecl d2_DrawSkillBar(int x, int y, char* entity, int skillIndex, int bar)
 {
 	int w;
 	int cur;
@@ -33,8 +33,8 @@ void __cdecl fcn_00534210(int x, int y, char* p, int idx, int bar)
 	int i;
 
 	w = ((BarImg*) g_772500)[bar].w + 2;
-	cur = gm_GetScaledEntitySkill(p, idx);
-	max = (unsigned char) p[idx + 0x80];
+	cur = gm_GetScaledEntitySkill(entity, skillIndex);
+	max = (unsigned char) entity[skillIndex + 0x80];
 	if (cur > max) {
 		m = cur;
 	} else {

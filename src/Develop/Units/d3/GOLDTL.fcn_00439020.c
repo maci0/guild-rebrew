@@ -61,7 +61,7 @@ void __cdecl fcn_0045bed0(unsigned int n, int a2);
 void __cdecl fcn_00436aa0(int* a);
 void __cdecl fcn_00436f70(char on);
 void __cdecl fcn_0043bc00(char a, char b);
-void __cdecl fcn_00456750(int, int, int, int, int, int, int);
+void __cdecl d3_SelectShadowTextureFormat(int, int, int, int, int, int, int);
 void __cdecl InitColorTable(void);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, unsigned int, unsigned int);
 void __cdecl d3_InitRenderVertexBuffer(void);
@@ -129,7 +129,7 @@ char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 	d3_FogColor = 0;
 	g_6b7ff8 = g_10529e0.b34;
 	fcn_0043bc00(g_10529e0.b30, g_10529e0.b28);
-	fcn_00456750(g_10529e0.bpp, 0x80, 0x100, 0x20, 0, 1, 0x20);
+	d3_SelectShadowTextureFormat(g_10529e0.bpp, 0x80, 0x100, 0x20, 0, 1, 0x20);
 	InitColorTable();
 	g_6b8018 = 1;
 	fcn_00438da0(g_10529e0.x, g_10529e0.y, g_10529e0.cw, g_10529e0.ch, g_10529e0.f4c, g_10529e0.f50, g_10529e0.f54, g_10529e0.w, g_10529e0.h);

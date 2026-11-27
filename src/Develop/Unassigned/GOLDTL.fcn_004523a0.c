@@ -4,25 +4,24 @@
 extern char g_1040960[];
 extern int g_67a370;
 
-/* ADDRESS: GOLD 0x004556d0 */
-void __cdecl fcn_004523a0(char* o)
+void __cdecl d3_UnlinkFromRenderList(char* node)
 {
 	char* owner;
 
 #ifdef REBREW_GOLD
-	owner = *(char**) (o + 0x2f0);
+	owner = *(char**) (node + 0x2f0);
 #else
-	owner = *(char**) (o + 0x2f4);
+	owner = *(char**) (node + 0x2f4);
 #endif
-	if (*(char**) (o + 0x318) == g_1040960) {
-		*(char**) (owner + 0xa4) = *(char**) (o + 0x314);
+	if (*(char**) (node + 0x318) == g_1040960) {
+		*(char**) (owner + 0xa4) = *(char**) (node + 0x314);
 	} else {
-		*(char**) (*(char**) (o + 0x318) + 0x314) = *(char**) (o + 0x314);
+		*(char**) (*(char**) (node + 0x318) + 0x314) = *(char**) (node + 0x314);
 	}
-	if (*(char**) (o + 0x314) == g_1040640) {
-		*(char**) (owner + 0xa8) = *(char**) (o + 0x318);
+	if (*(char**) (node + 0x314) == g_1040640) {
+		*(char**) (owner + 0xa8) = *(char**) (node + 0x318);
 	} else {
-		*(char**) (*(char**) (o + 0x314) + 0x318) = *(char**) (o + 0x318);
+		*(char**) (*(char**) (node + 0x314) + 0x318) = *(char**) (node + 0x318);
 	}
 	if (owner == ((char*)g_67a370)) {
 		d3_SceneRenderListHead = *(char**) (owner + 0xa4);

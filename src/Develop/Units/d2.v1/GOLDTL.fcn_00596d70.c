@@ -40,13 +40,13 @@ extern char g_1015f40[];
 extern int g_14a79c0[];
 extern char* g_14b52c0;
 
-int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
-int __cdecl fcn_00466ee0(int, int, int, int, int);
+int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
+int __cdecl d2_AddWindowField(int, int, int, int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetElementFont(int, int);
 void __cdecl d2_DestroyElement(int);
-void __cdecl fcn_0046f280(int);
+void __cdecl d2_CloseWindow(int);
 void __cdecl fcn_0046f940(int, char*);
 int __cdecl d2_ShowTxt(int, int, char*, int);
 float __cdecl gm_GetSeasonPrice(int, unsigned char);
@@ -73,7 +73,7 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 	w = &((D2_WIN*) g_1015f40)[g_1038144[dialog * 175 + form]];
 	if (r->id != 0) {
 		if (r->title == -1) {
-			r->title = fcn_004677e0(r->x + 6, r->y, 0x30, 0, 100, 0x6a, 0x3d, d2_CurrentWindowId);
+			r->title = d2_AddWindowValueGauge(r->x + 6, r->y, 0x30, 0, 100, 0x6a, 0x3d, d2_CurrentWindowId);
 		}
 		if (r->icon == -1) {
 			if (makeIcon) {
@@ -81,7 +81,7 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 				if (g_7746d8 & 0x200) {
 					v = 0xca;
 				}
-				r->icon = fcn_00466ee0(r->x + 0xf, r->y + 6, r->id + 0xdf, v, d2_CurrentWindowId);
+				r->icon = d2_AddWindowField(r->x + 0xf, r->y + 6, r->id + 0xdf, v, d2_CurrentWindowId);
 				d2_SetElementFont(r->icon, 0x54);
 			} else {
 				r->icon = d2_AddElementToWindow(r->x + 0xf, r->y + 6, r->id + 0xdf, d2_CurrentWindowId);
@@ -232,7 +232,7 @@ void __cdecl fcn_00596d70(int dialog, int form, DlgRow_596d70* r, int makeIcon,
 		r->title = -1;
 	}
 	if (r->obj != -1) {
-		fcn_0046f280(r->obj);
+		d2_CloseWindow(r->obj);
 		r->obj = -1;
 	}
 }

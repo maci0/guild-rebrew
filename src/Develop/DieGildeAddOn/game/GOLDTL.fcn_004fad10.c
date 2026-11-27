@@ -5,7 +5,7 @@ int __cdecl gm_PosToStatsGrid(char* a1, int* a2, int* a3);
 void __cdecl gm_GetLawEntry(unsigned char a1, char* a2);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x004fad10 */
-void __cdecl fcn_004fad10(void)
+void __cdecl gm_RebuildCrimeGrid(void)
 {
 	int* v4;
 	int* v12;

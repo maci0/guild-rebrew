@@ -5,10 +5,10 @@
 void __cdecl ReportClientMessage(char*);
 int __cdecl fcn_0042b2f0(char*, int, int);
 int __cdecl gm_RandomMod(int);
-void __cdecl fcn_0046ac30(void);
+void __cdecl d2_RenderAndPresentFrame(void);
 void __cdecl d2_DrawWindow(int, int);
 void __cdecl d2_ClearWindowChildren(int, int);
-void __cdecl fcn_00471490(int);
+void __cdecl d2_RenderFormToTextures(int);
 void __cdecl d2_SetForm(char*, int, int);
 int __cdecl gm_PackGameTime(int, char*);
 int __cdecl gm_GetSeasonFromDate(char*, int);
@@ -795,7 +795,7 @@ carry:
 	v24 = *(int*)(v14 + 0x1015f6c);
 	if (v2c != 0) {
 		if (v30 != 0) {
-			fcn_0046ac30();
+			d2_RenderAndPresentFrame();
 			return v24;
 		}
 		v08 = *(int*)0x772554;
@@ -805,7 +805,7 @@ carry:
 		v20 = *(int*)(*(int*)0x1015ea0 + v28 * 4 + 0x50);
 		if (v20 != 0) {
 			if (*(int*)(v20 + 0x198) != 0) {
-				fcn_00471490(*(int*)v20);
+				d2_RenderFormToTextures(*(int*)v20);
 				*(int*)0x772554 = v08;
 				return v24;
 			}
@@ -818,7 +818,7 @@ carry:
 		return v24;
 	}
 	if (v30 != 0) {
-		fcn_0046ac30();
+		d2_RenderAndPresentFrame();
 	}
 	return v24;
 }

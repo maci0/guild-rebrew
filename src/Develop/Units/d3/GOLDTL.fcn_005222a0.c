@@ -21,7 +21,7 @@ void __cdecl fcn_004437a0(int);
 int __cdecl fcn_0045b700(struct s_6b8300*, int, int);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl fcn_005224b0(void);
-void __cdecl fcn_005224f0(void);
+void __cdecl d3_ClearSceneObjectFlag0x217(void);
 
 int __cdecl fcn_005222a0(void* stream)
 {
@@ -46,7 +46,7 @@ int __cdecl fcn_005222a0(void* stream)
 		((struct s_6b8300*)g_6b8300)->mode = g_699b08;
 	}
 	d3_TraverseSceneObjects(g_67a370, 0, 0x1c0, (void*) fcn_005224b0);
-	d3_TraverseSceneObjects(g_67a370, 0, 0xc0, (void*) fcn_005224f0);
+	d3_TraverseSceneObjects(g_67a370, 0, 0xc0, (void*) d3_ClearSceneObjectFlag0x217);
 	d3_SelectSceneContext(save, 0);
 	return 1;
 }

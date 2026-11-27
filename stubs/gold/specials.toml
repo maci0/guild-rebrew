@@ -553,3 +553,6 @@ impl = ""
 
 [specials.txt_FindEntryIndex]
 impl = ""
+
+[specials.d2_LockSurface]
+impl = ""

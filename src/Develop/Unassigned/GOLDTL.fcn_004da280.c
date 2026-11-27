@@ -2,7 +2,7 @@
 
 void __cdecl cut_DestroyActiveCharacter(int);
 
-void __cdecl fcn_004da280(void)
+void __cdecl cut_DestroyAllActiveCharacters(void)
 {
 	int a;
 	int v;

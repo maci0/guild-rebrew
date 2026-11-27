@@ -1,6 +1,6 @@
 #include "client_sound.h"
 
-void __cdecl fcn_00423670(char* obj, int a, int b);
+void __cdecl sb_StartVoice(char* obj, int a, int b);
 
 
 int __cdecl d3snd_PlayObjectSound(char* voice, void* object, int volume, float range)
@@ -24,6 +24,6 @@ int __cdecl d3snd_PlayObjectSound(char* voice, void* object, int volume, float r
 	if (*(int*) (voice + 0x24) == 0) {
 		return 0;
 	}
-	fcn_00423670(voice, 0, 0);
+	sb_StartVoice(voice, 0, 0);
 	return 1;
 }

@@ -3,9 +3,9 @@ extern char* g_665f08;
 extern int g_774650;
 extern volatile unsigned int g_6b7fac;
 
-void __cdecl fcn_0046f4c0(int);
+void __cdecl d2_ReorderControlStack(int);
 int __cdecl d2_SetSlotVisibility(int, int);
-int __cdecl fcn_00469c30(int, int, int);
+int __cdecl d2_CreateElement(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
 int __cdecl d2_DestroyElement(int);
 
@@ -52,7 +52,7 @@ void __cdecl fcn_00584160(int a0)
 	o = g_665f08;
 	handle = *(int*) (o + 0x60);
 	if (handle != -1) {
-		fcn_0046f4c0(handle);
+		d2_ReorderControlStack(handle);
 		o = g_665f08;
 		if (*(int*) (o + 0x64) != g_774650) {
 			d2_SetSlotVisibility(*(int*) (o + 0x60), 0);
@@ -69,7 +69,7 @@ void __cdecl fcn_00584160(int a0)
 		o = g_665f08;
 		if (*(int*) (o + 0x60) == -1) {
 			frame = *(char**) (*(char**) (o + 0x18) + 0x64) + *(int*) (o + 0x54) * 0x2c;
-			*(int*) (g_665f08 + 0x60) = fcn_00469c30((short) *(float*) frame, (short) *(float*) (frame + 4), 0x1d); o = g_665f08;
+			*(int*) (g_665f08 + 0x60) = d2_CreateElement((short) *(float*) frame, (short) *(float*) (frame + 4), 0x1d); o = g_665f08;
 		}
 		frame = *(char**) (*(char**) (o + 0x18) + 0x64) + *(int*) (o + 0x54) * 0x2c;
 		fcn_00469c40((short) *(float*) frame, (short) *(float*) (frame + 4), *(int*) (o + 0x60));

@@ -10,11 +10,11 @@ extern Win_1015f40 g_1015f40[0x60];
 extern char s_67d420[];
 
 #include "Develop/Units/Error/error_message.h"
-int __cdecl fcn_004675f0(int x, int y, int a3, int a4, int a5, int a6, int a7);
+int __cdecl d2_CreateValueGauge(int x, int y, int a3, int a4, int a5, int a6, int a7);
 int __cdecl d2_AddWindowChild(int id, int win);
 
 /* ADDRESS: GOLDTL 0x004677e0 */
-int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, int win)
+int __cdecl d2_AddWindowValueGauge(int x, int y, int a3, int a4, int a5, int a6, int a7, int win)
 {
 	D2_WIN* window;
 	int id;
@@ -30,7 +30,7 @@ int __cdecl fcn_004677e0(int x, int y, int a3, int a4, int a5, int a6, int a7, i
 		ReportClientMessage(s_67d420);
 		return -1;
 	}
-	id = fcn_004675f0(window->left + x, window->top - (*(int*) &window->pad3c[0x21c]) + y, a3, a4, a5, a6, a7);
+	id = d2_CreateValueGauge(window->left + x, window->top - (*(int*) &window->pad3c[0x21c]) + y, a3, a4, a5, a6, a7);
 	d2_AddWindowChild(id, win);
 	return id;
 }

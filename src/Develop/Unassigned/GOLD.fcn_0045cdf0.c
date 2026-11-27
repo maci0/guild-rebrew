@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0045cdf0 */
-void __cdecl fcn_0045cdf0(char* object)
+void __cdecl d3_ClearObjectOverlayCoords(char* object)
 {
 	int offset;
 

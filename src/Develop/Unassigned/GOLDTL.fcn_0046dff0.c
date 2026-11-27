@@ -9,10 +9,10 @@ extern int g_67d3a4;
 
 void __cdecl d2_RenderMarkupText(int, int);
 void __cdecl fcn_0046c310(int);
-void __cdecl fcn_0046dd60(int, int);
-void __cdecl fcn_00472640(int, int);
+void __cdecl d2_DrawWindowBackground(int, int);
+void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl fcn_0046f940(int, char*);
-void __cdecl fcn_0047c560(int, int, int);
+void __cdecl d2_FlushQueuedQuads(int, int, int);
 void __cdecl fcn_0047a040(int, int, int, int);
 void __cdecl fcn_0047cba0(int, int, int, int, int);
 int __cdecl d2_GetResourceData(int);
@@ -84,11 +84,11 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 		rec = *(int*) (b + 0x3bc);
 		x = *(int*) (g_1015ea0 + 0x1f0 + rec * 0x2f4) * 0x3cc;
 		if (rec != -1) {
-			fcn_00472640(rec, *(int*) ((char*) g_1015f40 + x + 0x274) + *(int*) ((char*) g_1015f40 + x + 0x10) <= *(int*) ((char*) g_1015f40 + x + 0x254));
-			fcn_00472640(rec, *(int*) ((char*) g_1015f40 + x + 0x260) + *(int*) ((char*) g_1015f40 + x + 0x258) + *(int*) ((char*) g_1015f40 + x + 0x10) < *(int*) ((char*) g_1015f40 + x + 0x254));
+			d2_SetElementEnabled(rec, *(int*) ((char*) g_1015f40 + x + 0x274) + *(int*) ((char*) g_1015f40 + x + 0x10) <= *(int*) ((char*) g_1015f40 + x + 0x254));
+			d2_SetElementEnabled(rec, *(int*) ((char*) g_1015f40 + x + 0x260) + *(int*) ((char*) g_1015f40 + x + 0x258) + *(int*) ((char*) g_1015f40 + x + 0x10) < *(int*) ((char*) g_1015f40 + x + 0x254));
 		}
 		if (*(int*) (b + 0x3b8) != -1) {
-			fcn_00472640(*(int*) (b + 0x3b8), *(int*) ((char*) g_1015f40 + x + 0x258) != 0);
+			d2_SetElementEnabled(*(int*) (b + 0x3b8), *(int*) ((char*) g_1015f40 + x + 0x258) != 0);
 		}
 		if (*(int*) (b + 0x3c0) != -1) {
 			itoa((int) ((double) *(int*) ((char*) g_1015f40 + x + 0x254) / (double) *(int*) ((char*) g_1015f40 + x + 0x274) + 0.5f), buf, 10);
@@ -99,9 +99,9 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 	vert = a1;
 	if (!g_772554) {
 		if ((*(unsigned char*) (b + 0x14) & 1) || *(int*) (b + 0x3a0)) {
-			fcn_0047c560(0, 0, 0);
+			d2_FlushQueuedQuads(0, 0, 0);
 		}
-		fcn_0046dd60((int) b, vert);
+		d2_DrawWindowBackground((int) b, vert);
 	}
 	if (*(unsigned char*) (b + 0x14) & 0x10) {
 		d2_RenderMarkupText(vert, windowIndex);
