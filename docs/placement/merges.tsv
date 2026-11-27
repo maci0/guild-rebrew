@@ -119,3 +119,16 @@ d3_TransformPoint	merged-guarded	src/Develop/Unassigned/d3_TransformPoint.c	EXAC
 d3snd_StopSourceVoiceSafe	merged-shared	src/Develop/Unassigned/d3snd_StopSourceVoiceSafe.c	RELOC	RELOC	GOLD RELOC 18B (6/6), TL RELOC 18B (6/6); cross RELOC 6/6 on both
 init_AllocateGebaeudeSceneSlot	merged-guarded	src/Develop/DieGildeAddOn/game/init_AllocateGebaeudeSceneSlot.c	RELOC	RELOC	GOLD RELOC 177B (59/65), TL RELOC 182B (61/67); cross SIZE_MISMATCH (tl->g 58/65, g->tl 58/67)
 txt_FindEntryIndex	merged-guarded	src/Develop/Unassigned/txt_FindEntryIndex.c	RELOC	RELOC	GOLD RELOC 53B (26/26), TL RELOC 53B (25/26); tl->g UNRESOLVED relocs and aligned_pairs 25<26, g->tl NEAR_MATCHING
+WinMain	skipped	-	STUB	SIZE_MISMATCH	Gold body is a stub
+d2_GetResourceData	skipped	-	-	RELOC	Gold body is a stub
+d3_DisposeObject	skipped	-	STUB	RELOC	Gold body is a stub
+d3_LoadAnimStream	skipped	-	-	RELOC	Gold body is a stub
+d3_RemoveObjectAnimation	skipped	-	STUB	RELOC	Gold body is a stub
+d3_SignedPlanarAngle	skipped	-	STUB	NEAR_MATCHING	Gold row has stored STUB status
+d3_UpdateAndRenderEffect	skipped	-	-	SIZE_MISMATCH	Gold body is a stub
+d3_UpdateScene	skipped	-	STUB	NEAR_MATCHING	Gold body is a stub
+d3e_ReadSceneEvents	skipped	-	-	RELOC	Gold body is a stub
+eval_ObjektPreis2Credits	skipped	-	STUB	RELOC	Gold row has stored STUB status
+gm_CalculateGebaeudeValue	merged-guarded	src/Develop/DieGildeAddOn/game/gm_CalculateGebaeudeValue.c	RELOC (124 pairs)	SIZE_MISMATCH (113 pairs)	original edition-specific bodies and declarations preserved; before and after object status, size, and aligned pairs agree
+main_RunFrameLoop	skipped	-	STUB	SIZE_MISMATCH	Gold body is a stub
+vfs_FindPathNode	skipped	-	STUB	SIZE_MISMATCH	Gold body is a stub

@@ -1,3 +1,68 @@
+#if defined(REBREW_GOLD)
+extern unsigned char* g_7e3f30;
+
+extern char* g_item_def_table;
+unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
+float __cdecl eval_ObjektPreis2Credits(int, unsigned char);
+
+/* ADDRESS: GOLD 0x00509b40 */
+int __cdecl gm_CalculateGebaeudeValue(unsigned char* a0, int scale)
+{
+	unsigned char* row;
+	unsigned short* words;
+	unsigned short* ent;
+	unsigned short* rec;
+	unsigned char* kind;
+	int acc;
+	int i;
+	int id;
+	char seen;
+
+	row = g_7e3f30 + *a0 * 0x24d;
+	acc = *(int*) (row + 0x249) * 0xf00;
+	ent = 0;
+	seen = 0;
+	i = 0;
+	words = (unsigned short*) (row + 0x25);
+	for (; i < 0x40; i++, words++) {
+		if (words[-1] == 0) {
+			break;
+		}
+		id = words[-1] & 0x7fff;
+		kind = (unsigned char*) g_item_def_table + (id << 6) + id;
+		if (!seen) {
+			if (*kind != 2 && *kind != 6) {
+				continue;
+			}
+			ent = fcn_00502cd0(*(int*) (a0 + 0x5d), 1, 0, id);
+			if (ent == 0) {
+				continue;
+			}
+			acc = (int) (eval_ObjektPreis2Credits(ent[0], *((unsigned char*) ent + 0x12)) + acc);
+			if (i >= 0x3f) {
+				continue;
+			}
+			id = words[0] & 0x7fff;
+			if (g_item_def_table[id * 0x41] != 2 && g_item_def_table[id * 0x41] != 6) {
+				seen = 1;
+			}
+		} else if (ent != 0) {
+			rec = fcn_00502cd0(*(int*) ((unsigned char*) ent + 0x14), 1, 0, id);
+			if (rec != 0) {
+				acc = (int) (eval_ObjektPreis2Credits(rec[0], *((unsigned char*) rec + 0x12)) + acc);
+			}
+			if (i >= 0x3f) {
+				continue;
+			}
+			id = words[0] & 0x7fff;
+			if (g_item_def_table[id * 0x41] == 2 || g_item_def_table[id * 0x41] == 6) {
+				seen = 0;
+			}
+		}
+	}
+	return (int) (acc * (scale * 0.01f));
+}
+#else
 #pragma pack(push, 1)
 /* SIZE 0x24d */
 typedef struct {
@@ -76,3 +141,4 @@ int __cdecl gm_CalculateGebaeudeValue(unsigned char* buildingRecordArg, int perc
 	}
 	return (int) (acc[0] * (0.01f * percentScale));
 }
+#endif

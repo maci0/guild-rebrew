@@ -703268,8 +703268,8 @@ measured_at = "2026-10-22T08:35:59+00:00"
 ["GOLD.0x00509b40"]
 size = 360
 updated_by = "rehome"
-updated_at = "2026-11-27T17:27:16+00:00"
-file = "src/Develop/Unassigned/gm_CalculateGebaeudeValue.c"
+updated_at = "2026-11-27T22:16:37+00:00"
+file = "src/Develop/DieGildeAddOn/game/gm_CalculateGebaeudeValue.c"
 name = "gm_CalculateGebaeudeValue"
 symbol = "_gm_CalculateGebaeudeValue"
 kind = "FUNCTION"
