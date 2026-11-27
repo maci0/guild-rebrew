@@ -5,7 +5,7 @@ extern int* g_665f08;
 
 int __cdecl d2_CheckTutMsg1aNotCat12Node74(int* m);
 
-int __cdecl fcn_0057f970(int* m)
+int __cdecl d2_CheckTutCh3Action155Gate(int* m)
 {
 	if (m[0] == 0x20) {
 		if (m[3] == 0x155 && g_665f08[15] == 3) {

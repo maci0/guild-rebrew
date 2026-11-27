@@ -38,7 +38,7 @@ typedef struct PathState {
 } PathState;
 
 /* ADDRESS: GOLDTL 0x00431dd0 */
-void __cdecl fcn_00431dd0(Cam* cam, PathState* ps, int segmentIndex, int segmentOffset, float* out)
+void __cdecl d3_EvalAnimSlotPosition(Cam* cam, PathState* ps, int segmentIndex, int segmentOffset, float* out)
 {
     PathInfo* info;
     Seg* segs;

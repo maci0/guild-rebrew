@@ -19,7 +19,7 @@ char* __cdecl gm_FindBuildingOwner(int objekt);
 int __cdecl gm_eval_SlotVoll(char* objekt, int ware, int menge);
 void __cdecl gm_AddTime(pos14_7f4c00* zeit, int a, int b, int c);
 int __cdecl gm_CompareGameTime(pos14_7f4c00* a, pos14_7f4c00* b);
-int __cdecl fcn_0050c830(pos14_7f4c00* a, pos14_7f4c00* b, int modus);
+int __cdecl gm_CalcElapsedWorkMinutes(pos14_7f4c00* a, pos14_7f4c00* b, int modus);
 int __cdecl gm_GetBuildingTechEffect(unsigned char* objekt, int art, int modus);
 void __cdecl cm_RequestCopyEntityData(int besitzer, int objekt, int menge, int modus);
 char* __cdecl gm_LookupEntityRecordById(int id);
@@ -219,7 +219,7 @@ warten:
             e[0xd0] = 0;
         }
         letzte_zeit = (pos14_7f4c00*) (e + 0x60);
-        differenz = fcn_0050c830(letzte_zeit, &gm_GameTime, 0);
+        differenz = gm_CalcElapsedWorkMinutes(letzte_zeit, &gm_GameTime, 0);
         if (differenz > 0) {
             e[0xd0] += differenz;
         }
@@ -278,7 +278,7 @@ warten:
             }
             do {
                 rezept = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) (e + 0xac)]);
-                differenz = fcn_0050c830(letzte_zeit, naechste_zeit, 0);
+                differenz = gm_CalcElapsedWorkMinutes(letzte_zeit, naechste_zeit, 0);
                 produziert = 0;
                 *(float*) (e + 0xb4) -= (*(int*) (e + 0x14) * 1.3f + *(int*) (e + 0x18)) * (float) differenz * leistung;
                 if (*(float*) (e + 0xb4) <= 0.0f) {

@@ -6,7 +6,7 @@
 extern int g_772fe0;
 extern ALCHEMY_RECIPE_PROTOTYPE* g_772fe4;
 
-ALCHEMY_RECIPE_PROTOTYPE* __cdecl fcn_004ecbe0(int key)
+ALCHEMY_RECIPE_PROTOTYPE* __cdecl ahm_FindRecipePrototypeByKey(int key)
 {
 	int i;
 

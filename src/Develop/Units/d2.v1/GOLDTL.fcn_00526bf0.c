@@ -32,7 +32,7 @@ void __cdecl d2_DestroyElement(int h);
 void __cdecl fcn_004730c0(int a, int b, int w, int h, char* s, int c, int d);
 void __cdecl fcn_00527f60(int a, int b);
 void __cdecl fcn_0046a110(int v);
-void __cdecl fcn_0041bcb0(void);
+void __cdecl d3_PresentFrame(void);
 
 void __cdecl d2_UpdateProgressOverlay(int phase, int cur, int max)
 {
@@ -68,7 +68,7 @@ void __cdecl d2_UpdateProgressOverlay(int phase, int cur, int max)
 	}
 	if (g_774710 % 10 == 0 && g_6a2bdc != -1) {
 		fcn_0046a110(1);
-		fcn_0041bcb0();
+		d3_PresentFrame();
 	}
 	g_774710++;
 }

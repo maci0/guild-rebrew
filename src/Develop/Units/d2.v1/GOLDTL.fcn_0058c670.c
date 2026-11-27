@@ -13,7 +13,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_004f2a10(int, int, int, int);
+void __cdecl gv_SendSetGraveOwner(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
@@ -43,7 +43,7 @@ int __cdecl d2_ShowGraveyardConfirm(int building, int itemId, unsigned char slot
 			g_774654 = 1;
 		} else if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == ok) {
-				fcn_004f2a10(0, building, itemId, slotIndex);
+				gv_SendSetGraveOwner(0, building, itemId, slotIndex);
 				r = 1;
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == cancel) {

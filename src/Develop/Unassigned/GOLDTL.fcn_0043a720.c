@@ -27,8 +27,8 @@ typedef struct Obj043a720 {
 	struct Obj043a720* parent;
 } Obj043a720;
 
-void __cdecl fcn_004315c0(Obj043a720* o);
-void __cdecl fcn_004316c0(Obj043a720* o);
+void __cdecl d3_BindAnimTrackNodes(Obj043a720* o);
+void __cdecl d3_UpdateObjectAnimPose(Obj043a720* o);
 
 /* ADDRESS: GOLDTL 0x0043a720 */
 char __cdecl fcn_0043a720(Obj043a720* o, char* name)
@@ -50,8 +50,8 @@ char __cdecl fcn_0043a720(Obj043a720* o, char* name)
 				}
 				if (i < l->count) {
 					strcpy(o->ov->name, name);
-					fcn_004315c0(p);
-					fcn_004316c0(p);
+					d3_BindAnimTrackNodes(p);
+					d3_UpdateObjectAnimPose(p);
 					return 1;
 				}
 			}

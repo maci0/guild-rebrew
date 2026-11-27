@@ -29,7 +29,7 @@ void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_PostEntityMessage(int slot, int entity, char* text, int flag, int size, int extra);
 
 /* ADDRESS: GOLDTL 0x004fbdd0 */
-void __cdecl fcn_004fbdd0(void)
+void __cdecl gm_PostPeriodicCityReport(void)
 {
 	float sum[3];
 	float sum3;

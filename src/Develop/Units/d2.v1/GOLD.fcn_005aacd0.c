@@ -5,10 +5,10 @@
 
 #include <string.h>
 
-int __cdecl fcn_0052f390(int, int, int, int, int, int, int);
+int __cdecl d2_OpenBook(int, int, int, int, int, int, int);
 void __cdecl d2_UpdatePagedPanel(int);
 void __cdecl fcn_00576300(int, int, int, int);
-int __cdecl fcn_00514400(int, int, int, void*);
+int __cdecl gm_FormatEntityName(int, int, int, void*);
 int __cdecl gm_FindBuildingOwner(void*);
 void __cdecl fcn_00475f60(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -122,17 +122,17 @@ int __cdecl fcn_005aacd0(unsigned char* buildingRec, int modelId, int a3)
 	f.row = tbl + t * 0x24c;
 
 	if (f.row[0] != 4 && f.row[0] != 0x13 && f.row[0] != 0x10) {
-		book = (char*) fcn_0052f390(modelId, 0x62537c, 4, 0x62cc04,
+		book = (char*) d2_OpenBook(modelId, 0x62537c, 4, 0x62cc04,
 			0x62cc18, 0x62cc2c, 0x62cc40);
 	} else {
-		book = (char*) fcn_0052f390(modelId, 0x62537c, 4, 0x62cbe4,
+		book = (char*) d2_OpenBook(modelId, 0x62537c, 4, 0x62cbe4,
 			0x62cc18, 0x62cc2c, 0x62cc40);
 	}
 	f.book = book;
 	d2_UpdatePagedPanel((int) book);
 	fcn_00576300(0x21, (int) book, 0, 0);
-	fcn_00514400(*(unsigned short*) (buildingRec + 0x27), 1, 2, f.txt7b0);
-	fcn_00514400(*(unsigned short*) (buildingRec + 0x25), 1, 2, f.txt760);
+	gm_FormatEntityName(*(unsigned short*) (buildingRec + 0x27), 1, 2, f.txt7b0);
+	gm_FormatEntityName(*(unsigned short*) (buildingRec + 0x25), 1, 2, f.txt760);
 	r = (char*) gm_FindBuildingOwner(buildingRec);
 	if (r == 0) {
 		src = *(char**) 0x1440ac8;
@@ -142,7 +142,7 @@ int __cdecl fcn_005aacd0(unsigned char* buildingRec, int modelId, int a3)
 			*dst++ = c;
 		} while (c != 0);
 	} else {
-		fcn_00514400(*(unsigned short*) r, 1, 1, f.txt204);
+		gm_FormatEntityName(*(unsigned short*) r, 1, 1, f.txt204);
 	}
 	fcn_00475f60(*(int*) (book + 0x228), 3);
 	f.v40 = d2_GetWindowListItem(*(int*) (book + 0x228), 3, 2);

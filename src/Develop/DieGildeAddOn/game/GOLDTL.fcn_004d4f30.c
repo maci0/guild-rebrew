@@ -1,16 +1,16 @@
 #include <string.h>
 
-typedef struct fcn_004d4f30_World {
+typedef struct COMBAT_WORLD {
     char pad00[0x80];
     int listA[16]; /* +0x80 */
     int listB[16]; /* +0xc0 */
-} fcn_004d4f30_World;
+} COMBAT_WORLD;
 
-typedef struct fcn_004d4f30_Slot {
+typedef struct CUTSCENE_ENTITY_SLOT {
     int id;
     int f4;
     char pad8[0x24];
-} fcn_004d4f30_Slot; /* SIZE 0x2c */
+} CUTSCENE_ENTITY_SLOT; /* SIZE 0x2c */
 
 extern int g_772ea4;               /* 0x772ea4 */
 extern unsigned short* g_772e98;   /* 0x772e98, entity pointer */
@@ -26,7 +26,7 @@ void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 void __cdecl cm_SendUpdateCutsceneEntitySlot(int a1, void* a2);
 
 /* ADDRESS: GOLDTL 0x004d4f30 */
-char* __cdecl fcn_004d4f30(fcn_004d4f30_World* world)
+char* __cdecl cut_ResolveCombatWinner(COMBAT_WORLD* world)
 {
     int countA;
     int nB;
@@ -38,8 +38,8 @@ char* __cdecl fcn_004d4f30(fcn_004d4f30_World* world)
     int* p;
     char* rec;
     char* obj;
-    fcn_004d4f30_Slot slot;
-    fcn_004d4f30_Slot* src;
+    CUTSCENE_ENTITY_SLOT slot;
+    CUTSCENE_ENTITY_SLOT* src;
     float out[4];
 
     result = 0;
@@ -111,7 +111,7 @@ char* __cdecl fcn_004d4f30(fcn_004d4f30_World* world)
                 p++;
             } while (i < n);
         }
-        src = (fcn_004d4f30_Slot*) gm_FindOrCreateEntitySlot(g_9b0e20 + i * 0x35c,
+        src = (CUTSCENE_ENTITY_SLOT*) gm_FindOrCreateEntitySlot(g_9b0e20 + i * 0x35c,
                                                 result);
         slot = *src;
         slot.id = *(int*) (result + 4);

@@ -1,14 +1,14 @@
-struct unk_41f350;
+struct VIDEO_CTRL_OBJ;
 
 // SIZE 0x20
-struct ctlvtbl_41f350 {
+struct VIDEO_CTRL_VTBL {
 	char pad0[0x1c];
-	long (__stdcall* Run)(struct unk_41f350*);
+	long (__stdcall* Run)(struct VIDEO_CTRL_OBJ*);
 };
 
 // SIZE 0x4
-struct unk_41f350 {
-	struct ctlvtbl_41f350* vtbl;
+struct VIDEO_CTRL_OBJ {
+	struct VIDEO_CTRL_VTBL* vtbl;
 };
 
 // SIZE 0x1c
@@ -39,7 +39,7 @@ char* __cdecl FindVideoById(int);
 /* Shows a video window topmost and starts playback; a modal video pumps
  * messages until its window closes. */
 /* ADDRESS: GOLDTL 0x0041f350 */
-int __cdecl fcn_0041f350(int id)
+int __cdecl PlayVideo(int id)
 {
 	char* v;
 	long hr;
@@ -51,7 +51,7 @@ int __cdecl fcn_0041f350(int id)
 		BringWindowToTop(*(void**) (v + 0x114));
 		SetWindowPos(*(void**) (v + 0x114), (void*) -1, 0, 0, 0, 0, 3);
 		UpdateWindow(*(void**) (v + 0x114));
-		hr = (*(struct unk_41f350**) (v + 0x120))->vtbl->Run(*(struct unk_41f350**) (v + 0x120));
+		hr = (*(struct VIDEO_CTRL_OBJ**) (v + 0x120))->vtbl->Run(*(struct VIDEO_CTRL_OBJ**) (v + 0x120));
 		if (*(int*) (v + 0xc) & 0x100) {
 			for (;;) {
 				if (PeekMessageA(&msg, *(void**) (v + 0x114), 0, 0, 0)) {

@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0052e1c0 */
-void __cdecl fcn_0052e1c0(void)
+void __cdecl d2_ClearInteractionSlots(void)
 {
     char* slot;
     char* record;

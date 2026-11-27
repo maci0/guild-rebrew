@@ -41,7 +41,7 @@ int __cdecl cut_RandMod(int);
 int __cdecl gm_HasActiveSpecialObject(int, int);
 
 /* ADDRESS: GOLDTL 0x004d89c0 */
-unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
+unsigned int __cdecl cut_ExecuteCombatAttack(int ctx, unsigned int actorArg, int targetEnt)
 {
 	Ev_4d89c0 ev;
 	unsigned int v7;
@@ -57,14 +57,14 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 
 	v7 = *(unsigned int*) (g_67a370 + 0xb0);
 	memset(&ev, 0, sizeof(ev));
-	ev.ent = *(unsigned int*) (a1 + 4);
-	v2 = *(char*) (a1 + 0x1c4);
-	actor = a1;
+	ev.ent = *(unsigned int*) (actorArg + 4);
+	v2 = *(char*) (actorArg + 0x1c4);
+	actor = actorArg;
 	ev.kind = 2;
-	ev.target = *(unsigned int*) (a2 + 4);
+	ev.target = *(unsigned int*) (targetEnt + 4);
 	if (v2 == 1 || v2 == 2 || v2 == 3)
 		ev.busy = 1;
-	p = (int*) gm_GetEquippedCombatGear(a1);
+	p = (int*) gm_GetEquippedCombatGear(actorArg);
 	if ((p[0x16] == 1 || p[0x16] == 2)
 	    && (w = gm_FindEntityActiveItem(actor)) != 0
 	    && *(int*) (w + 0x20) <= 0)
@@ -72,32 +72,32 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 	v8 = p[0];
 	if (v8 == 0x154 || v8 == 0x156 || v8 == 0x158 || v8 == 0x16e
 	    || v8 == 0x172 || v8 == 0 || v8 == 0x176) {
-		v9 = *(int*) (a2 + 0x184);
+		v9 = *(int*) (targetEnt + 0x184);
 		if (*(float*) (p + 3) < fcn_004cefb0(actor, *(unsigned int*) (v9 + 0x34))) {
 			if (*(int*) (*(int*) (actor + 0x184) + 0x128) != 0)
 				goto fail;
 			if (ev.busy)
 				goto fail;
-			if (fcn_0045b990(v7, *(int*) (v9 + 0x34) + 0x4c, (int*) &a1, &a2, &a0) == 0)
+			if (fcn_0045b990(v7, *(int*) (v9 + 0x34) + 0x4c, (int*) &actorArg, &targetEnt, &ctx) == 0)
 				goto fail;
-			if (fcn_004cec00(a1, a2, (int*) &a1, &a2) == 0)
+			if (fcn_004cec00(actorArg, targetEnt, (int*) &actorArg, &targetEnt) == 0)
 				goto fail;
-			return cm_RequestChTalkAction(*(int*) (*(int*) (actor + 0x184) + 0x34), a1, a2, 0);
+			return cm_RequestChTalkAction(*(int*) (*(int*) (actor + 0x184) + 0x34), actorArg, targetEnt, 0);
 		}
 	}
 	if (*(int*) (*(int*) (actor + 0x184) + 0x128) != 0)
 		goto fail;
 	roll = (unsigned short) gm_RandomMod(0xff);
-	a1 = *(unsigned char*) (actor + 0x83);
+	actorArg = *(unsigned char*) (actor + 0x83);
 	v9 = *(int*) (actor + 0x16c);
-	v8 = (int) (*((unsigned char*) p + 4) * 0.01 * (int) a1);
+	v8 = (int) (*((unsigned char*) p + 4) * 0.01 * (int) actorArg);
 	if ((int) roll <= 0xff - v8) {
 		hit = 0;
 		ev.amount = 0;
 	} else {
 		hit = 1;
 		ev.amount = (int) ((unsigned int) (cut_RandMod(*((unsigned char*) p + 6) - *((unsigned char*) p + 5))
-		    + *((unsigned char*) p + 5)) * *(float*) (a2 + 0x1c) * 0.01);
+		    + *((unsigned char*) p + 5)) * *(float*) (targetEnt + 0x1c) * 0.01);
 	}
 	if (v9 != 0 && gm_HasActiveSpecialObject(v9, 0x2b9))
 		ev.amount = (int) (ev.amount * g_664144);
@@ -106,18 +106,18 @@ unsigned int __cdecl fcn_004d89c0(int a0, unsigned int a1, int a2)
 	if (*(int*) (g_772f24 + 4) == g_68b79c && p[0x16] == 0) {
 		v9 = 0;
 		for (i = 0; i < *(unsigned char*) (g_772eb4 + 0x30); i++) {
-			if (*(int*) (g_772eb4 + 0x34 + i * 4) != -1 && a0 != 0x9b0e20 + i * 0x35c) {
+			if (*(int*) (g_772eb4 + 0x34 + i * 4) != -1 && ctx != 0x9b0e20 + i * 0x35c) {
 				v9 = 0x9b0e20 + i * 0x35c;
 				break;
 			}
 		}
-		v8 = gm_FindOrCreateEntitySlot(v9, a2);
+		v8 = gm_FindOrCreateEntitySlot(v9, targetEnt);
 		if (*(int*) (v8 + 8) == -1 || cm_GetCommandStatus(*(int*) (v8 + 8))) {
 			*(unsigned int*) (v8 + 8) = 0xffffffff;
 			if (*(int*) (v8 + 4) == 0) {
-				w = gm_FindEntityActiveItem(a2);
+				w = gm_FindEntityActiveItem(targetEnt);
 				if (w != 0 && *(int*) (w + 0x20) > 0)
-					*(unsigned int*) (v8 + 8) = cut_AssignTargetOrder(v9, a2, actor, 0, 0);
+					*(unsigned int*) (v8 + 8) = cut_AssignTargetOrder(v9, targetEnt, actor, 0, 0);
 			}
 		}
 	}

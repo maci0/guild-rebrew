@@ -7,14 +7,14 @@ extern int __cdecl CloseVfsStream(void* stream);
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned int __cdecl vfs_fwrite(const void* data, int size, int count, void* stream);
 void __cdecl fcn_0051e9d0(void);
-void __cdecl fcn_0051ea70(void);
+void __cdecl ls_RebindSavedSceneRefs(void);
 int __cdecl fcn_0051e490(void* stream, int flags);
 int __cdecl fcn_0051eb20(void* stream);
 int __cdecl ls_fio_SaveObjekteINST(void* stream);
 int __cdecl fcn_0051ecf0(void* stream);
 int __cdecl ls_SaveDynamicEntities(void* stream);
 int __cdecl ls_SaveEntities(void* stream);
-int __cdecl fcn_0051ffc0(void* stream);
+int __cdecl ls_SaveFiguresAndAnimQueue(void* stream);
 int __cdecl fcn_00520310(void* stream);
 int __cdecl ls_SaveRelationMatrices(void* stream);
 int __cdecl fcn_005208e0(void* stream);
@@ -60,126 +60,126 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 	vfs_fwrite((void*) 0x773d38, 4, 1, stream);
 	if (ls_fio_SaveObjekteINST(stream) == 0) {
 		CloseVfsStream(stream);
-		fcn_0051ea70();
+		ls_RebindSavedSceneRefs();
 		return 0;
 	}
 	if (fcn_0051ecf0(stream) == 0) {
 		CloseVfsStream(stream);
-		fcn_0051ea70();
+		ls_RebindSavedSceneRefs();
 		return 0;
 	}
 	if (ls_SaveDynamicEntities(stream) == 0) {
 		CloseVfsStream(stream);
-		fcn_0051ea70();
+		ls_RebindSavedSceneRefs();
 		return 0;
 	}
 	if (ls_SaveEntities(stream) == 0) {
 		CloseVfsStream(stream);
-		fcn_0051ea70();
+		ls_RebindSavedSceneRefs();
 		return 0;
 	}
 	if (fcn_00520310(stream) == 0) {
 		CloseVfsStream(stream);
-		fcn_0051ea70();
+		ls_RebindSavedSceneRefs();
 		return 0;
 	}
 	if (amt_fio_SaveAemter(stream) == 0) {
 		CloseVfsStream(stream);
-		fcn_0051ea70();
+		ls_RebindSavedSceneRefs();
 		return 0;
 	}
 	if (fcn_0051eb20(stream) == 0) {
 		CloseVfsStream(stream);
-		fcn_0051ea70();
+		ls_RebindSavedSceneRefs();
 		return 0;
 	}
 	if (!(flags & 2)) {
 		if (fcn_004f49e0(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (ls_SaveRelationMatrices(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (fcn_005208e0(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (fcn_00520d80(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (he_SaveEvents(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (ls_SaveCutscenes(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (ls_SaveHistoryState(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (fcn_00521530(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (ls_SaveWeatherAndSlots(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
-		if (fcn_0051ffc0(stream) == 0) {
+		if (ls_SaveFiguresAndAnimQueue(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (fcn_004b64b0(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (ls_SaveSlot779d00(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (ls_SaveList774a78(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (ls_SaveAlchemyDrawSlots(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (ls_SaveHighOfficeTargets(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 		if (fcn_004c0740(stream) == 0) {
 			CloseVfsStream(stream);
-			fcn_0051ea70();
+			ls_RebindSavedSceneRefs();
 			return 0;
 		}
 	}
 	CloseVfsStream(stream);
-	fcn_0051ea70();
+	ls_RebindSavedSceneRefs();
 	return 1;
 failure:
 	CloseVfsStream(stream);
-	fcn_0051ea70();
+	ls_RebindSavedSceneRefs();
 	return 0;
 }

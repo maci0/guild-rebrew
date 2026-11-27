@@ -1,4 +1,4 @@
-int __cdecl fcn_004690a0(int);
+int __cdecl d2_GetResourceData(int);
 extern char* g_772500;
 
 /* ADDRESS: GOLD 0x00476020 */
@@ -10,7 +10,7 @@ int __cdecl fcn_00476020(int index)
 	if (*(int*) (g_772500 + index * 0x54 + 0x3c) != 7) {
 		return 0;
 	}
-	rec = fcn_004690a0(index);
+	rec = d2_GetResourceData(index);
 	slot = *(int*) 0x5fe73c;
 	*(int*) 0x6ed948 = rec;
 	*(int*) 0x5fe718 = index;

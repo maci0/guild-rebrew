@@ -1,14 +1,14 @@
-void __cdecl fcn_004437f0(char*);
+void __cdecl d3_UpdateFloorChunkLods(char*);
 char* __cdecl d3_AcquireFloorTileTexture(int, int, unsigned int, unsigned int, unsigned int, void*);
 void __cdecl fcn_004614b0(char*);
 void* __cdecl d3_LockSurface(void*, int);
 void __cdecl d3_BlitFloorTileCells(void*, void*);
 void __cdecl d3_UnlockSurface(void*);
-void __cdecl fcn_004371d0(void*, int);
-void __cdecl fcn_004360e0(void*);
+void __cdecl d3_BuildTextureMipMaps(void*, int);
+void __cdecl d3_PrecacheTexture(void*);
 
 /* ADDRESS: GOLD 0x00446180 */
-int __cdecl fcn_00446180(char* object)
+int __cdecl d3_BuildFloorTileTextures(char* object)
 {
     int created;
     unsigned int size;
@@ -36,7 +36,7 @@ int __cdecl fcn_00446180(char* object)
     size = *(unsigned int*)(object + 4);
     universe = *(int*)object;
     scene = *(int*)(object + 0x14);
-    fcn_004437f0(object);
+    d3_UpdateFloorChunkLods(object);
     for (row = 0; row < 8; row++) {
         base_y = row * size;
         for (column = 0; column < 8; column++) {
@@ -82,14 +82,14 @@ int __cdecl fcn_00446180(char* object)
                                             d3_BlitFloorTileCells(buffer, description + 0x10);
                                             d3_UnlockSurface(*(void**)(resource + 0x60));
                                             if (*(unsigned char*)0x63373c != 0) {
-                                                fcn_004371d0(*(void**)(resource + 0x60), 0);
+                                                d3_BuildTextureMipMaps(*(void**)(resource + 0x60), 0);
                                             }
                                             description[0x40] = 1;
                                             created++;
                                         }
                                     }
                                     if ((*(unsigned char*)(resource + 0x68) & 0x80) == 0) {
-                                        fcn_004360e0(*(void**)(resource + 0x64));
+                                        d3_PrecacheTexture(*(void**)(resource + 0x64));
                                         *(unsigned char*)(resource + 0x68) |= 0x80;
                                     }
                                 }

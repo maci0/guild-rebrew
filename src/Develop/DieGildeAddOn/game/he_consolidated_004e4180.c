@@ -4,7 +4,7 @@ void __cdecl fcn_004e4230(void*, int);
 void __cdecl fcn_004e4730(char*);
 void __cdecl cut_WaitTicks(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-void __cdecl fcn_004e48b0(void);
+void __cdecl cut_FadeToBlack(void);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
@@ -62,7 +62,7 @@ void __cdecl fcn_004e4180(char* event)
 		}
 	}
 	if (fallback) {
-		fcn_004e48b0();
+		cut_FadeToBlack();
 		cut_CleanupCutscene();
 	}
 	msx_RestoreMusicIfAllowed();

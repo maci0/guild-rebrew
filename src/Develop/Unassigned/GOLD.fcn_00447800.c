@@ -1,7 +1,7 @@
 #include "Develop/Units/d3/d3_d3d.h"
 
 /* ADDRESS: GOLD 0x00447800 */
-void __cdecl fcn_00447800(char* self)
+void __cdecl d3_PrecacheObjectTextures(char* self)
 {
 	char* list;
 	char* ctx;

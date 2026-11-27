@@ -17,7 +17,7 @@ typedef struct
 extern Rec2d_9a3800 g_9a3800[512];
 extern Pair_99f800 g_99f800[0x800];
 
-int __cdecl fcn_004f5d00(int a, int b, unsigned int st, int flag)
+int __cdecl cm_UpdateStraftatState(int a, int b, unsigned int st, int flag)
 {
 	int cnt;
 	int i;

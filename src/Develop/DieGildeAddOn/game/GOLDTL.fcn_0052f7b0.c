@@ -34,7 +34,7 @@ void __cdecl d2_OpenTransporterInfoPanel(unsigned short*);
 void __cdecl d2_OpenPersonInfoPanel(char*);
 void __cdecl d2_OpenBuildingInfoPanel(void);
 void __cdecl fcn_0052e250(unsigned short*);
-void __cdecl fcn_0052df40(unsigned char*);
+void __cdecl d2_ShowBuildingInfoPanel(unsigned char*);
 
 /* Dispatch selection actions, then refresh changed panel state. */
 /* ADDRESS: GOLDTL 0x0052f7b0 */
@@ -206,6 +206,6 @@ snapshot:
         pick = g_7e2aa0;
     else if (g_7746c8 != 0)
         pick = (char*)g_7746c8;
-    fcn_0052df40((u8*)pick);
+    d2_ShowBuildingInfoPanel((u8*)pick);
     fcn_0052ea30();
 }

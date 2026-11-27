@@ -44,12 +44,12 @@ void __cdecl m_FreeTracked(char* p);
 int __cdecl amt_fio_LoadAemter(void* stream, int version);
 int __cdecl fcn_004f4c40(void* stream);
 int __cdecl ls_LoadGameMatrices(void* stream);
-int __cdecl fcn_005246e0(unsigned int stream);
+int __cdecl ls_LoadStatsAndCrimeGrid(unsigned int stream);
 int __cdecl fcn_00524b40(void* stream);
 int __cdecl fcn_00524b50(void* stream);
-int __cdecl fcn_00524fc0(void* stream);
+int __cdecl ls_LoadCutscenes(void* stream);
 int __cdecl ls_LoadHistoryState(void* stream);
-int __cdecl fcn_005252d0(void* stream);
+int __cdecl ls_LoadCommandQueue(void* stream);
 int __cdecl ls_LoadTabAndWeatherState(void* stream);
 unsigned int __cdecl gm_RebuildLoadedReferences(void);
 int __cdecl d3_SelectSceneContext(int a, int b);
@@ -62,7 +62,7 @@ int __cdecl ls_LoadSlot779d00(void* stream);
 int __cdecl ls_LoadList774a78(void* stream);
 int __cdecl ls_LoadAlchemyDrawSlots(void* stream);
 int __cdecl ls_LoadHighOfficeTargets(void* stream, int version);
-int __cdecl fcn_004c0840(int stream);
+int __cdecl ls_LoadRoutePoints(int stream);
 void __cdecl d3_RefreshBuildingPennants(void);
 void __cdecl d3_ResetWorldSceneState(void);
 void __cdecl fcn_00516de0(int a, char b);
@@ -172,7 +172,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	if (ls_SaveVersion >= 0x10016 && ls_LoadGameMatrices(stream) == 0) {
 		goto fail;
 	}
-	if (fcn_005246e0((unsigned int) stream) == 0) {
+	if (ls_LoadStatsAndCrimeGrid((unsigned int) stream) == 0) {
 		goto fail;
 	}
 	if (ls_SaveVersion >= 0x1002a && fcn_00524b40(stream) == 0) {
@@ -181,13 +181,13 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	if (fcn_00524b50(stream) == 0) {
 		goto fail;
 	}
-	if (fcn_00524fc0(stream) == 0) {
+	if (ls_LoadCutscenes(stream) == 0) {
 		goto fail;
 	}
 	if (ls_LoadHistoryState(stream) == 0) {
 		goto fail;
 	}
-	if (fcn_005252d0(stream) == 0) {
+	if (ls_LoadCommandQueue(stream) == 0) {
 		CloseVfsStream(stream);
 		gm_RebuildLoadedReferences();
 		return 0;
@@ -239,7 +239,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (ls_SaveVersion >= 0x10053 && fcn_004c0840((int) stream) == 0) {
+	if (ls_SaveVersion >= 0x10053 && ls_LoadRoutePoints((int) stream) == 0) {
 		CloseVfsStream(stream);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;

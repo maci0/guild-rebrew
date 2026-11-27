@@ -8,7 +8,7 @@ extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 
 int __cdecl fcn_0046ea00(const char* text, int font);
 
-void __cdecl fcn_00473b20(int slot, char* text)
+void __cdecl d2_SetEditControlText(int slot, char* text)
 {
 	GuiEnt* s;
 	char* par;

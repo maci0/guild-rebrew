@@ -1,7 +1,7 @@
 #include "client_scene_resources.h"
 
 /* ADDRESS: GOLD 0x0045cc80 */
-void __cdecl fcn_0045cc80(int* holder)
+void __cdecl d3_ReleaseResourceSlot(int* holder)
 {
     int* p;
 

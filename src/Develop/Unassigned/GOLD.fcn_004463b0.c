@@ -2,7 +2,7 @@
 #define U32(p) (*(unsigned int*)(p))
 #define F32(p) (*(float*)(p))
 /* ADDRESS: GOLD 0x004463b0 */
-char __cdecl fcn_004463b0(char* terrain, float* position, char coarse, int* outX, int* outY, float* height)
+char __cdecl d3_GetFloorHeight(char* terrain, float* position, char coarse, int* outX, int* outY, float* height)
 {
     float x;
     float z;

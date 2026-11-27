@@ -3,7 +3,7 @@
 
 extern int* g_665f08;
 
-int __cdecl fcn_0057fce0(int* msg)
+int __cdecl d2_CheckTutCh3Msg26Node1d0Gate(int* msg)
 {
 	int* g;
 	int r;

@@ -23,6 +23,7 @@ int __cdecl gm_RandomMod(unsigned short n)
 }
 
 /* Returns a random integer in [-n, n]. */
+/* ADDRESS: GOLDTL 0x0042e430 */
 int __cdecl gm_RandomRange(int n)
 {
 	return gm_RandomMod((unsigned short) (n + n + 1)) - n;

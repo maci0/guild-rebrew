@@ -2,12 +2,12 @@
 #include "client_queued_packet.h"
 
 #pragma pack(push, 1)
-typedef struct node99_load {
+typedef struct CMD_QUEUE_NODE_99 {
 	char used;
 	char pad[0x90];
 	int prev;
 	int next;
-} node99_load;
+} CMD_QUEUE_NODE_99;
 #pragma pack(pop)
 /* SIZE 0x99 */
 extern char g_9bade0[];
@@ -26,7 +26,7 @@ int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementC
  * 0xfb5760 from a save stream, turning the stored link indices back into
  * absolute addresses. */
 /* ADDRESS: GOLDTL 0x005252d0 */
-int __cdecl fcn_005252d0(void* fp)
+int __cdecl ls_LoadCommandQueue(void* fp)
 {
 	char* r;
 	int n;
@@ -39,12 +39,12 @@ int __cdecl fcn_005252d0(void* fp)
 		if (*(int*) r == -1) {
 			*(int*) r = 0;
 		} else {
-			*(int*) r = (int) &((node99_load*) g_9bade0)[*(int*) r];
+			*(int*) r = (int) &((CMD_QUEUE_NODE_99*) g_9bade0)[*(int*) r];
 		}
 		if (*(int*) (r + 4) == -1) {
 			*(int*) (r + 4) = 0;
 		} else {
-			*(int*) (r + 4) = (int) &((node99_load*) g_9bade0)[*(int*) (r + 4)];
+			*(int*) (r + 4) = (int) &((CMD_QUEUE_NODE_99*) g_9bade0)[*(int*) (r + 4)];
 		}
 	}
 	if (!ls_ReadVfsDataChecked(&n, 4, 1, fp)) {
@@ -53,7 +53,7 @@ read_failed: return 0;
 	if (n == -1) {
 		cm_CommandQueueHead = 0;
 	} else {
-		cm_CommandQueueHead = (char*) &((node99_load*) g_9bade0)[n];
+		cm_CommandQueueHead = (char*) &((CMD_QUEUE_NODE_99*) g_9bade0)[n];
 	}
 	i = 0;
 	if (!ls_ReadVfsDataChecked(&n, 4, 1, fp)) {
@@ -62,7 +62,7 @@ read_failed: return 0;
 	if (n == -1) {
 		g_aed200 = 0;
 	} else {
-		g_aed200 = (char*) &((node99_load*) g_9bade0)[n];
+		g_aed200 = (char*) &((CMD_QUEUE_NODE_99*) g_9bade0)[n];
 	}
 	n = (ls_SaveVersion >= 0x1003c) ? 0x8000 : 0x2000;
 	for (r = (char*) g_fb5760 + 2; (int) r < (int) g_fb5760 + 0x50002; r += 0xa) {

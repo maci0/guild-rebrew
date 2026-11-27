@@ -1,7 +1,7 @@
 int __cdecl amt_CheckHighOfficeEligibility(char* e);
 char* __cdecl ai_PickOfficeRival(char* e);
 int __cdecl ai_SelectZunftPrivilege0x20Target(char* e);
-int __cdecl fcn_004a0020(char* e);
+int __cdecl ai_SelectZunftPrivilegeGroup(char* e);
 
 /* ADDRESS: GOLDTL 0x004a02d0 */
 int __cdecl ai_StartZunftLevel3(int a1, char* e, int a3, char* out)
@@ -33,7 +33,7 @@ int __cdecl ai_StartZunftLevel3(int a1, char* e, int a3, char* out)
 	if (c == 0x20) {
 		r = ai_SelectZunftPrivilege0x20Target(e);
 	} else if (c == 0x1f || c == 0x21) {
-		r = fcn_004a0020(e);
+		r = ai_SelectZunftPrivilegeGroup(e);
 	} else {
 		return 0;
 	}

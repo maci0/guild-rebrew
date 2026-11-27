@@ -10,7 +10,7 @@ float __cdecl ahm_ConsumeEssenceCapacity(char*, int, int*);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl he_AssignActionSlot(char*, int, int, char*);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_StartAhmBoostEssence(char* u)
@@ -28,7 +28,7 @@ void __cdecl he_StartAhmBoostEssence(char* u)
 			*(int*) (u + 0x70) = 0;
 			he_AssignActionSlot(*(char**) (h + 0x16c), fcn_00502cd0(*(int*) (*(char**) (h + 0x16c) + 0x5d), 2, 6, 0, 0x24b),
 			    *(unsigned short*) h, u);
-			fcn_004c35f0();
+			d3snd_PlayWorkerOrderVoice();
 			return;
 		}
 	}

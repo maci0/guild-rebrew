@@ -5,7 +5,7 @@
 
 extern float g_6628a8;
 void __cdecl ch_LoadCharacterMotion(char* e, char* name, int n);
-int __cdecl fcn_004042b0(char* e);
+int __cdecl ch_IsAnimationFinished(char* e);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 void __cdecl ch_CheckAniMorph(char* e);
 
@@ -28,7 +28,7 @@ void __cdecl ch_ExecPlayAnimation(CH_ACTION* t)
 		if (t->parameter == -1) {
 			*(unsigned short*) (e + 0x8c) &= ~2;
 		}
-		if (fcn_004042b0(e)) {
+		if (ch_IsAnimationFinished(e)) {
 			ch_RemoveQueueEntry((char*) (t));
 			ch_CheckAniMorph(e);
 		}

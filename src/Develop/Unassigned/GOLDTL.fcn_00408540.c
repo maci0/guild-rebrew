@@ -4,13 +4,13 @@ extern void* g_6b5c5c; extern int g_67a370; extern char* g_6b8300;
 extern double g_662908; extern float g_662914;  extern float g_6628cc; extern const float g_6628a0;
 int __cdecl d3sm_GetObjectSuperMap();
 int __cdecl ch_RestoreGridRegion();
-int __cdecl fcn_00405a50();
+int __cdecl ch_MarkGridDiamond();
 int __cdecl ch_DownsamplePath();
 char __cdecl ch_FindWalkableCell();
 int __cdecl fcn_00408250();
 int __cdecl ch_WorldToGridCoordinates();
 int __cdecl ch_ConvertGridPointToCharacterGrid();
-int __cdecl fcn_00408320();
+int __cdecl ch_CollectCharacterOccupiedCells();
 int __cdecl d3_GetContextIndex();
 int __cdecl fcn_0041db70();
 int __cdecl fcn_0041ddd0();
@@ -97,7 +97,7 @@ int __cdecl ch_ReplanBlockedPath(int a0,int a1,int *a2)
       v10 += 1;
       v7 = &v7[8];
     } while (v10 < 0x10);
-    fcn_00408320(v35,v28,v20);
+    ch_CollectCharacterOccupiedCells(v35,v28,v20);
     v28 = 0;
     v11 = v20;
     do {
@@ -230,7 +230,7 @@ label_40892d:
       for (; (v6 < v10 && (v6 < *(int *)(v28 + 0xf0))); v6 = v6 + 1) {
         v23 = (int *)(unsigned int)*(unsigned char *)(*(int *)(v28 + 0xf4) + v6 * 2);
         v22 = (unsigned int)*(unsigned char *)(*(int *)(v28 + 0xf4) + 1 + v6 * 2);
-        fcn_00405a50(v23,v22,v37,(v6 == *(int *)(v28 + 0xf0) - 1) ? 0xd : 1,v27);
+        ch_MarkGridDiamond(v23,v22,v37,(v6 == *(int *)(v28 + 0xf0) - 1) ? 0xd : 1,v27);
       }
     }
     v26 += 1;
@@ -243,11 +243,11 @@ label_40892d:
     if ((((v6) && (*(char *)(v6 + 9) == '-')) && (*(int *)(v6 + 0xf4))) && (*(int *)(v6 + 0x154) == -1)) {
       v4 = fcn_0045b990(v35,*(int *)(v27 + 0x34) + 0x4c,&v23,&v22,v21);
       if (v4)
-        fcn_00405a50(v23,v22,v37,0,v36);
+        ch_MarkGridDiamond(v23,v22,v37,0,v36);
       if ((*(int **)(a2[v28] + 0x124)) && (v4 = fcn_0045b990(v35,**(int **)(a2[v28] + 0x124) + 0x4c,&v23,&v22,v21), v4)) {
         v34 = 0;
         v27 = v36;
-        fcn_00405a50(v23,v22,v37,v34,v27 * 2); 
+        ch_MarkGridDiamond(v23,v22,v37,v34,v27 * 2); 
       }
     }
     else {
@@ -262,11 +262,11 @@ label_40892d:
         else {
           v34 = 0xd;
         }
-        fcn_00405a50(v23,v22,v37,v34,v10);
+        ch_MarkGridDiamond(v23,v22,v37,v34,v10);
       }
       if ((*(int **)(a2[v28] + 0x124)) && (v6 = **(int **)(a2[v28] + 0x124), fcn_0045b990(v13,v6 + 0x4c,&v23,&v22,v21))) {
         v34 = 0xd;
-        fcn_00405a50(v23,v22,v37,v34,v27 * 2);
+        ch_MarkGridDiamond(v23,v22,v37,v34,v27 * 2);
       }
     }
     v28 += 1;

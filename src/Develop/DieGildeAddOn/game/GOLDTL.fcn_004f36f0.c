@@ -5,7 +5,7 @@ int __cdecl gv_CanHireGraveyardWorker(char* e, int* out);
 int* __cdecl gv_PickRandomFieldEntry(char* e);
 int* __cdecl fcn_004f1a10(char* e, int* r);
 int __cdecl fcn_004f1790(int d, int* s);
-int __cdecl fcn_004f3280(char* e, int a, int b, int c, int d);
+int __cdecl gv_SendAllocGraveyardWorker(char* e, int a, int b, int c, int d);
 
 int __cdecl gv_AssignGraveyardField(char* e)
 {
@@ -28,5 +28,5 @@ int __cdecl gv_AssignGraveyardField(char* e)
 	if (k == -1) {
 		return k;
 	}
-	return fcn_004f3280(e, *s, k, *r, 0x1c);
+	return gv_SendAllocGraveyardWorker(e, *s, k, *r, 0x1c);
 }

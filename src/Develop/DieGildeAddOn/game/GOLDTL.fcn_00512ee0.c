@@ -107,7 +107,7 @@ int __cdecl d3_CollectUnusedSceneObjects(char *, char **);
 void __cdecl d3_ComputeObjectYawToTarget(float *, int);
 
 /* ADDRESS: GOLDTL 0x00512ee0 */
-void __cdecl fcn_00512ee0(void)
+void __cdecl gm_InitStartingEntitiesAndRelations(void)
 {
 	int i = 0;
 	int total = 0;

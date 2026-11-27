@@ -12,15 +12,15 @@ typedef struct
 	short e;
 	int f;
 	char pad[9];
-} Msg20;
+} GV_SLOT_CMD_MSG;
 // SIZE 0x20
 #pragma pack(pop)
 
-int __cdecl fcn_004c6c30(Msg20* m);
+int __cdecl fcn_004c6c30(GV_SLOT_CMD_MSG* m);
 
-int __cdecl fcn_004f2a10(int* a, char* b, int c, int d)
+int __cdecl gv_SendSetGraveOwner(int* a, char* b, int c, int d)
 {
-	Msg20 m;
+	GV_SLOT_CMD_MSG m;
 	int t;
 
 	if (b == 0 || d == -1) {

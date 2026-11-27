@@ -24,7 +24,7 @@ extern char g_6a6b48[];
 
 int __cdecl cm_GetCommandStatus(int);
 char *__cdecl gm_StartFilteredEntitySearch(int, ...);
-int __cdecl fcn_0050cad0(int *, int *);
+int __cdecl gm_CalcWorkMinutesBetween(int *, int *);
 void __cdecl gm_AdjustGebaeudeCondition(char *, int);
 int __cdecl d3snd_QueueSound(int, int, char *, int, int);
 void __cdecl gm_AddTime(char *, int, int, int);
@@ -202,7 +202,7 @@ inc_step:
 
 				f = 1.0f;
 				p = (int *)(action + 0x60);
-				tmp = (float)fcn_0050cad0(p, (int *)0x7f4c00) * (1.0f / 6.0f);
+				tmp = (float)gm_CalcWorkMinutesBetween(p, (int *)0x7f4c00) * (1.0f / 6.0f);
 				n = (int)(tmp + tmp);
 				if (g_7e4538 != 0) {
 					dtmp = *(int *)g_7e4538 * 0.002;

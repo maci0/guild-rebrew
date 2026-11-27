@@ -1,5 +1,5 @@
 extern void __cdecl d3_WrapEulerAnglesPi(int *a, int *b, int *c, int *d);
-extern void __cdecl fcn_004321f0(int *a, int *b, int *c);
+extern void __cdecl d3_ComputeSplineTangents(int *a, int *b, int *c);
 
 /* ADDRESS: GOLDTL 0x004337c0 */
 void __cdecl fcn_004337c0(int *state)
@@ -64,13 +64,13 @@ void __cdecl fcn_004337c0(int *state)
                         *(int *)((char *)state[0x10] + j * 0x58 + 0x54) = 0;
                     }
                 }
-                fcn_004321f0(
+                d3_ComputeSplineTangents(
                     (int *)((char *)state[0x10] + j * 0x58 - 0x58),
                     (int *)((char *)state[0x10] + j * 0x58),
                     (int *)((char *)state[0x10] + (j + 1) * 0x58));
             } else {
                 if ((*(unsigned char *)((int)state + 0x2d) & 0x10) == 0 && (*(unsigned char *)((int)state + 0x2d) & 1) == 0) {
-                    fcn_004321f0(
+                    d3_ComputeSplineTangents(
                         (int *)((char *)state[0x10] + j * 0x58 - 0x58),
                         (int *)((char *)state[0x10] + j * 0x58),
                         (int *)state[0x10]);

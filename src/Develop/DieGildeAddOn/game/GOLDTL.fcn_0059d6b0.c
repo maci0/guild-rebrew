@@ -17,7 +17,7 @@ void __cdecl d2_SetForm(int dlg, int flag);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl d2_GetWindowListItem(int dlg, int a, int b);
 void __cdecl cm_SendCopyEntityData(int a1);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(int a, int b);
 void __cdecl d2_DestroyForm(int dlg);
@@ -113,7 +113,7 @@ void __cdecl d2_ShowBriberyDialog(unsigned int id, char* obj)
 				}
 				if (i != 0) {
 					cm_SendCopyEntityData((int) packet);
-					fcn_004c35f0();
+					d3snd_PlayWorkerOrderVoice();
 					sv_ClearObjectSelection();
 					g_774654 = 1;
 				}

@@ -55,7 +55,7 @@ char *__cdecl d3_FindSceneObject(char *, int, char *, char *);
 void __cdecl ch_QueueWalkToDummyRotate(char *, char *);
 int __cdecl fcn_0053b1b0(void);
 int __cdecl d2_ShowChooseProfessionDialog(int);
-unsigned int __cdecl fcn_0053b6b0(int);
+unsigned int __cdecl d2_ChooseCharacterModel(int);
 void __cdecl fcn_00471af0(int, int);
 char *__cdecl fcn_004730c0(int, int, int, int, char *, int, int);
 int __cdecl ch_DestroyCharacter(char *);
@@ -215,7 +215,7 @@ slot_found:
 				    (Vec3 *) (d3_ActiveCamera + 0x120), 0x50, 8);
 				if (fcn_0053b1b0()) {
 					if (d2_ShowChooseProfessionDialog(0xc6) &&
-					    fcn_0053b6b0((unsigned char) g_7e23e3)) {
+					    d2_ChooseCharacterModel((unsigned char) g_7e23e3)) {
 						g_774654 = 1;
 						ret = 1;
 					} else if (!ret) {

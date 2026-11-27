@@ -35,7 +35,7 @@ void __cdecl cut_WaitTicks(int a);
 int __cdecl gm_GetGuildHall(int a);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 void __cdecl cm_SendSetGebBesitzer(int a, int b, int c);
-void __cdecl fcn_004e48b0(void);
+void __cdecl cut_FadeToBlack(void);
 void __cdecl evt_StopScriptIfActive(int a);
 void __cdecl cut_DestroyActiveCharacter(int a);
 void __cdecl cut_CleanupCutscene(void);
@@ -320,7 +320,7 @@ void __cdecl cut_RunAuction(int* arg)
 	    0x6b5c60);
 	cut_WaitForScript(cand);
 	d2_DestroyForm(dlg);
-	fcn_004e48b0();
+	cut_FadeToBlack();
 	evt_StopScriptIfActive(escBehavior);
 	cut_WaitForScript(escBehavior);
 	for (i = 0; i < *(unsigned char*) ((char*) arg + 0x30); i++) {

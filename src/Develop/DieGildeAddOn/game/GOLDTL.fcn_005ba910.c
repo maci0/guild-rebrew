@@ -88,7 +88,7 @@ int __cdecl fcn_0050b750(int, int);
 int __cdecl cm_RequestClearLagerslot(int, int);
 int __cdecl fcn_005bdc30(int, int, int, int, int);
 int __cdecl gm_CheckEntityType(int);
-int __cdecl fcn_004c35f0(void);
+int __cdecl d3snd_PlayWorkerOrderVoice(void);
 int __cdecl fcn_005ba0e0(int, int, int, int, int, float, int, int);
 void __cdecl gm_CalcEntityInventoryStats(int, int*);
 int __cdecl main_RunFrameLoop(int, int);
@@ -1604,7 +1604,7 @@ l_5bcf9f:
 					goto l_5bd135;
 				}
 			}
-			fcn_004c35f0();
+			d3snd_PlayWorkerOrderVoice();
 		l_5bd135:
 			cm_CompleteAction0x0f((int) e->f00);
 			f.v10 += cm_DispatchCartTransfer((int) (*(unsigned short*) 0x774970),
@@ -1633,7 +1633,7 @@ l_5bd177:
 					goto l_5bd207;
 				}
 			}
-			fcn_004c35f0();
+			d3snd_PlayWorkerOrderVoice();
 		l_5bd207:
 			cm_CompleteAction0x0f((int) e->f00);
 			f.v10 += cm_DispatchCartTransfer((int) (*(unsigned short*) 0x774970),

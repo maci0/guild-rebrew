@@ -6,7 +6,7 @@ char* __cdecl gm_FindEntityActiveItem(char* o);
 
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int c, int* d);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_004cf450(char* pos, int a, int b);
+void __cdecl cut_SpawnBombThrow(char* pos, int a, int b);
 
 /* ADDRESS: GOLDTL 0x004d4e30 */
 void __cdecl cut_FinishPotThrow(char* e)
@@ -25,5 +25,5 @@ void __cdecl cut_FinishPotThrow(char* e)
 			cm_RequestChangeAttribute();
 		}
 	}
-	fcn_004cf450(*(char**) (*(char**) (o + 0x184) + 0x34) + 0x4c, *(int*) (e + 0x180), *(int*) (e + 0x184));
+	cut_SpawnBombThrow(*(char**) (*(char**) (o + 0x184) + 0x34) + 0x4c, *(int*) (e + 0x180), *(int*) (e + 0x184));
 }

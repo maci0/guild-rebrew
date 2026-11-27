@@ -6,7 +6,7 @@ extern void* g_006ed9dc;
 void __cdecl fcn_0047ce20(int);
 void __cdecl fcn_00472df0(int);
 void __cdecl fcn_0046cab0(int);
-void __cdecl fcn_00478fb0(int);
+void __cdecl d2_DestroySurface(int);
 void __cdecl fcn_00468fa0(int, int, int, int, void*);
 void __cdecl fcn_00468ea0(int, int, int, int);
 
@@ -38,7 +38,7 @@ void __cdecl fcn_0046e700(int index)
         memset(object, 0, 0x160);
         break;
     case 0x45:
-        fcn_00478fb0(*(int*) ((char*) element + 0x98));
+        d2_DestroySurface(*(int*) ((char*) element + 0x98));
         break;
     case 9:
         if (element->parent) *(int*) ((char*) element->parent + 0x3b4) = 0;

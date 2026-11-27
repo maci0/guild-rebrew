@@ -45,7 +45,7 @@ int __cdecl fcn_0042c9c0(char*);
 void __cdecl fcn_004222b0(char*);
 void __cdecl fcn_004b1f30(void);
 void __cdecl fcn_0046e980(void);
-int __cdecl fcn_004741e0(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterWindowAxes(int, int);
 void __cdecl fcn_0046cd90(int, short, int);
 void __cdecl fcn_00515990(int, char*);
@@ -66,13 +66,13 @@ int __cdecl fcn_00426950(char*, int);
 void __cdecl main_PreloadSound(char*);
 void __cdecl fcn_00423830(int, int, int);
 void __cdecl msx_ApplyAudioSettings(void);
-void __cdecl fcn_00520f10(void);
+void __cdecl main_InitFrameRateTimer(void);
 void __cdecl fcn_0050d460(void);
 void __cdecl fcn_0040afb0(void);
 void __cdecl d3_InitSnowMipMaps(void);
 void __cdecl fcn_0047d9d0(void);
 void __cdecl fcn_004eb480(int);
-void __cdecl fcn_004ac440(void);
+void __cdecl hmt_CreateBinaryFile(void);
 void __cdecl gm_LoadHistoricalTable(void);
 void __cdecl fcn_004d27a0(void);
 void __cdecl fcn_004758e0(int);
@@ -86,7 +86,7 @@ void __cdecl fcn_0040d270(void);
 void __cdecl evt_RegisterSoundCommands(void);
 void __cdecl fcn_0042b700(void);
 void __cdecl gm_ApplyGameSettings(void);
-void __cdecl fcn_0052fbb0(void);
+void __cdecl main_DrainWindowMessages(void);
 
 int __cdecl main_OpenEngine(void)
 {
@@ -108,7 +108,7 @@ int __cdecl main_OpenEngine(void)
 	}
 	fcn_004b1f30();
 	fcn_0046e980();
-	screen = fcn_004741e0(0, 0, "Misc\\Loading_main");
+	screen = d2_LoadForm(0, 0, "Misc\\Loading_main");
 	d2_CenterWindowAxes(g_fb1024[screen].image, 3);
 	fcn_0046cd90(0, g_fb9070 - ((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_fb1024[screen].window].height - 0x30,
 		((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_fb1024[screen].window].id);
@@ -149,14 +149,14 @@ int __cdecl main_OpenEngine(void)
 		SetTrackPath(path);
 	}
 	msx_ApplyAudioSettings();
-	fcn_00520f10();
+	main_InitFrameRateTimer();
 	fcn_0050d460();
 	fcn_0040afb0();
 	d3_InitSnowMipMaps();
 	fcn_0047d9d0();
 	fcn_004eb480(g_6f2468);
 	if (g_6f246c != 0) {
-		fcn_004ac440();
+		hmt_CreateBinaryFile();
 	}
 	g_6f246c = 0;
 	gm_LoadHistoricalTable();
@@ -198,6 +198,6 @@ int __cdecl main_OpenEngine(void)
 	g_5fb920 = (int) fcn_0042b700;
 	g_5f927c = 0x400000;
 	gm_ApplyGameSettings();
-	fcn_0052fbb0();
+	main_DrainWindowMessages();
 	return 1;
 }

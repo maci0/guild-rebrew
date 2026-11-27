@@ -3,18 +3,18 @@ float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int 
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004943e0 */
-int __cdecl fcn_004943e0(unsigned short* a, unsigned short* b)
+int __cdecl ai_CheckFavorRankAcceptance(unsigned short* host, unsigned short* guest)
 {
-	int x;
-	float f;
+	int hostRank;
+	float score;
 
-	if (*(int*) ((char*) a + 4) == *(int*) ((char*) b + 0x210)) {
+	if (*(int*) ((char*) host + 4) == *(int*) ((char*) guest + 0x210)) {
 		return 0;
 	}
-	x = fcn_00508eb0(*a, 0);
-	f = (fcn_00508eb0(*b, 0) - x) * 2.5f;
-	f = gm_CalcEntityFavor(*a, *b, 1) + f;
-	if (gm_RandomFloat01() * 75.0f > f) {
+	hostRank = fcn_00508eb0(*host, 0);
+	score = (fcn_00508eb0(*guest, 0) - hostRank) * 2.5f;
+	score = gm_CalcEntityFavor(*host, *guest, 1) + score;
+	if (gm_RandomFloat01() * 75.0f > score) {
 		return 0;
 	}
 	return 1;

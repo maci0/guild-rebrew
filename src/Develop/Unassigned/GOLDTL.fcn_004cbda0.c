@@ -1,14 +1,14 @@
 
 
 
-int __cdecl fcn_004f5d00(int, int, int, int);
+int __cdecl cm_UpdateStraftatState(int, int, int, int);
 
 int __cdecl cm_ExUpdateStraftatState(void* input, char* response)
 {
 	char b;
 
 	b = 2;
-	if (fcn_004f5d00(*(int*) ((char*) input + 0x10), *(int*) ((char*) input + 0x14),
+	if (cm_UpdateStraftatState(*(int*) ((char*) input + 0x10), *(int*) ((char*) input + 0x14),
 	                 *(int*) ((char*) input + 0x18), *(int*) ((char*) input + 0x1c)) > 0) {
 		b = 1;
 	}

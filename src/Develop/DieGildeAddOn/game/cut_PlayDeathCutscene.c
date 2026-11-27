@@ -25,7 +25,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl main_ExitToFrameHandler(int p);
 void __cdecl fcn_00509fc0(void* a, void* b, int c);
-void __cdecl fcn_004e48b0(void);
+void __cdecl cut_FadeToBlack(void);
 void __cdecl evt_StopScriptIfActive(void* h);
 void __cdecl cut_WaitForScript(void* h);
 void __cdecl d3_DestroySkyLayer(void);
@@ -161,7 +161,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			d2_ShowMessageBox(buf2, 0x10);
 		}
 	}
-	fcn_004e48b0();
+	cut_FadeToBlack();
 	evt_StopScriptIfActive((void*) xslot);
 	cut_WaitForScript((void*) xslot);
 	d3_DestroySkyLayer();

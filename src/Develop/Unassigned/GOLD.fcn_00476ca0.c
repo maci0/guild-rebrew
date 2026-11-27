@@ -4,10 +4,10 @@
 int __cdecl d2_LockSurface(void*);
 int __cdecl fcn_004790d0(void*);
 int __cdecl fcn_0047cb30(int, int, int, int);
-void __cdecl fcn_0047c6e0(int, int, void*, int, unsigned char);
+void __cdecl d2_DrawShapeFrame(int, int, void*, int, unsigned char);
 void __cdecl fcn_0047cda0(int, void*);
 void __cdecl fcn_00476020(int);
-int __cdecl fcn_004690a0(int);
+int __cdecl d2_GetResourceData(int);
 int __cdecl fcn_0047c820(int, int, char*, char*, unsigned char, char, int);
 void __cdecl d2_RenderWrappedText(int, int, int, int, void*, char*, int);
 void __cdecl fcn_00468ea0(int, int, int, int);
@@ -41,7 +41,7 @@ void __cdecl fcn_00476ca0(char* obj, int x, int y)
     old_height = *(int*) 0x5fed60;
     fcn_0047cb30(0, 0, *(int*) (obj + 4), *(int*) (obj + 8));
     if (*(int*) 0x5feba8 == -1) {
-        fcn_0047c6e0(x, y, obj, *(int*) 0x6ed9cc, *(unsigned char*) 0x6ed9d0);
+        d2_DrawShapeFrame(x, y, obj, *(int*) 0x6ed9cc, *(unsigned char*) 0x6ed9d0);
     } else {
         selected = *(int*) 0x5feba8;
         *(short*) (0xf8a52d + selected * 17) = (short) x;
@@ -57,7 +57,7 @@ void __cdecl fcn_00476ca0(char* obj, int x, int y)
             continue;
         px = x + *(short*) (*(int*) 0x6ed918 + *(int*) 0x5fe750 * 0x54 + 0x50) + index % 3 * 26;
         py = (*(int*) 0xf8f084 + 26) * (index / 3) + y;
-        font = fcn_004690a0(*entry);
+        font = d2_GetResourceData(*entry);
         if (fcn_0047c820(px, py, obj, (char*) font, *(unsigned char*) 0x6ed98c, -2, 0)) {
             if (*entry >= 0xdf && *entry < 0x3bb) {
                 if (entry[1] == -1)

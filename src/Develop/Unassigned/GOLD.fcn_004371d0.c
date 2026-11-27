@@ -4,7 +4,7 @@ void __cdecl d3_ScaleSurface(unsigned int*, unsigned int*);
 #define TEX_VTBL(t) (*(int**) (t))
 
 /* ADDRESS: GOLD 0x004371d0 */
-void __cdecl fcn_004371d0(void* tex, unsigned int* back)
+void __cdecl d3_BuildTextureMipMaps(void* tex, unsigned int* back)
 {
 	unsigned int ddsd_back[31];
 	unsigned int ddsd2[31];
@@ -76,7 +76,7 @@ void __cdecl fcn_004371d0(void* tex, unsigned int* back)
 		d3d_LogResultError((char*) 0x5f944c, 0x316, (char*) 0x5fa418);
 	}
 	d3_ScaleSurface(ddsd2, back);
-	fcn_004371d0(tex, ddsd2);
+	d3_BuildTextureMipMaps(tex, ddsd2);
 	d3d_LastResult = ((int (__stdcall*)(void*, int)) TEX_VTBL(tex)[32])(tex, 0);
 	if (d3d_LastResult != 0) {
 		d3d_LogResultError((char*) 0x5f944c, 0x31b, (char*) 0x5fa3f4);

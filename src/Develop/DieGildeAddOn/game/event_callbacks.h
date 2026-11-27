@@ -32,9 +32,9 @@ int __cdecl cut_CutsceneReady(int* event);
 int __cdecl cut_IsParticipant(int participant, unsigned char* event);
 int __cdecl cut_CheckMaster(int* event);
 
-int __cdecl fcn_004dc7d0(char* event);
+int __cdecl cut_NotifyProzess(char* event);
 int __cdecl cut_NotifyCombatCutscene(char* event);
-int __cdecl fcn_004e1330(char* event);
+int __cdecl cut_NotifyDuell(char* event);
 int __cdecl cut_NotifyHinrichtung(char* event);
 int __cdecl gm_NotifyHochzeit(char* event);
 int __cdecl gm_NotifyGeburt(char* event);

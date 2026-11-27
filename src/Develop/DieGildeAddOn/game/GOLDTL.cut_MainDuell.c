@@ -30,7 +30,7 @@ extern int g_9afde4;
 
 unsigned short __cdecl gm_RandomMod(int a);
 char* __cdecl gm_LookupEntityRecordById(int id);
-void __cdecl fcn_004e04f0(char* a0);
+void __cdecl cut_HandleDuellOfficeLoss(char* a0);
 void __cdecl cut_ResetEventSlots(void* event);
 void __cdecl fcn_004e4730(char* name);
 void __cdecl fcn_004dfef0(int v);
@@ -43,7 +43,7 @@ void __cdecl msx_StartMusicIfAllowed(char* s);
 void* __cdecl sb_LoadSampleBank(char* name, int init);
 int __cdecl sb_LoadLocalizedSampleBank(char* name, int x);
 int __cdecl fcn_004e4470(char* name);
-int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5);
+int __cdecl ch_SpawnEntityCharacter(char* a0, int a1, int* a2, int* a3, int a4, int* a5);
 void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name);
 int __cdecl d2_SetForm(int k, int i);
 void __cdecl io_AppendText(int a, ...);
@@ -72,7 +72,7 @@ int __cdecl cut_DestroyActiveCharacter(int a);
 void __cdecl evt_StopScriptIfActive(int a);
 void __cdecl cut_WaitForScriptExit(int a);
 void __cdecl cut_CleanupCutscene(void);
-void __cdecl fcn_004e48b0(void);
+void __cdecl cut_FadeToBlack(void);
 void __cdecl fcn_004230e0(char* p);
 void __cdecl d3_ClearActionTimers(void);
 void __cdecl ReportClientMessage(char* msg);
@@ -119,7 +119,7 @@ void __cdecl cut_MainDuell(char* a0)
     if (e1 == 0 || e2 == 0)
         goto fail;
     if (g_772f3c != 0) {
-        fcn_004e04f0(a0);
+        cut_HandleDuellOfficeLoss(a0);
         return;
     }
     cut_ResetEventSlots(a0);
@@ -156,8 +156,8 @@ void __cdecl cut_MainDuell(char* a0)
     g_9afde0 = (int) &sA;
     g_772f58 = 0;
     g_772f59 = 0;
-    fcn_004fe2e0((char*) &sB, d3_CurrentContextIndex, 0, 0, 0, (int*) 0x68cdd0);
-    fcn_004fe2e0((char*) &sA, d3_CurrentContextIndex, 0, 0, 0, (int*) 0x68cdb8);
+    ch_SpawnEntityCharacter((char*) &sB, d3_CurrentContextIndex, 0, 0, 0, (int*) 0x68cdd0);
+    ch_SpawnEntityCharacter((char*) &sA, d3_CurrentContextIndex, 0, 0, 0, (int*) 0x68cdb8);
     if (sB.entity != 0 && sA.entity != 0) {
     ch_SetBodyAttachment((char*) sB.entity, 2, (char*) 0x68cdac);
     *(unsigned char*) (sB.entity + 0x240) = 4;
@@ -347,7 +347,7 @@ void __cdecl cut_MainDuell(char* a0)
         cm_RequestCopyEntityData(sB.idx, sA.idx, 0xf, 1);
         cm_RequestCopyEntityData(sA.idx, sB.idx, 0xf, 1);
     }
-    fcn_004e48b0();
+    cut_FadeToBlack();
     cut_DestroyActiveCharacter(sB.entity);
     sB.entity = 0;
     cut_DestroyActiveCharacter(sA.entity);

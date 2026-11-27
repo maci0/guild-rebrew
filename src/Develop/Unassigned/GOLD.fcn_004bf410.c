@@ -3,9 +3,9 @@
 
 void __cdecl fcn_0046e700(int);
 
-void __cdecl fcn_004bf410(int a)
+void __cdecl d2_ClearRouteMarkerSlot(int index)
 {
-	fcn_0046e700(*(int*) (0xf812a0 + a * 8));
-	*(int*) (0xf812a0 + a * 8) = 0xffffffff;
-	*(int*) (0xf812a4 + a * 8) = 0;
+	fcn_0046e700(*(int*) (0xf812a0 + index * 8));
+	*(int*) (0xf812a0 + index * 8) = 0xffffffff;
+	*(int*) (0xf812a4 + index * 8) = 0;
 }

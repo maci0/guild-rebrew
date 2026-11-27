@@ -50,7 +50,7 @@ void __cdecl fcn_004d2c80(int*, int);
 void __cdecl cut_RunGfxCutscene(COMBAT_CUTSCENE_DLG*);
 void __cdecl fcn_0052a960(void*);
 void __cdecl fcn_00445f50(int, int, float, int);
-void __cdecl fcn_004d5940(COMBAT_CUTSCENE_DLG*);
+void __cdecl cut_RunCombatStartDialog(COMBAT_CUTSCENE_DLG*);
 void __cdecl cut_RunTurnRound(COMBAT_CUTSCENE_DLG*, int);
 void __cdecl d2_DestroyElement(int);
 void __cdecl fcn_004d6170(COMBAT_CUTSCENE_DLG*);
@@ -125,7 +125,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 		*(int*) &g_772ea4 = 0;
 		*(int*) &g_772ea8 = 0;
 		*(int*) &g_772eac = 0;
-		fcn_004d5940(p);
+		cut_RunCombatStartDialog(p);
 		fcn_004e6c60(saved);
 		fcn_004d1a80();
 		fcn_004d1a80();

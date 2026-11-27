@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-int __cdecl fcn_00508280(char*, int*, int*);
+int __cdecl gm_ApplyRandomDisease(char*, int*, int*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 
@@ -16,7 +16,7 @@ void __cdecl he_ShowZigeunerMessage(char* a, char* b)
 	char buf2[0x400];
 	int id;
 
-	if (fcn_00508280(b, &v0, &v1) != 0) {
+	if (gm_ApplyRandomDisease(b, &v0, &v1) != 0) {
 		if (b == a) {
 			id = 0x41dd;
 			memcpy(tag, "_NACHRICHTEN_ZIGEUNER_02", 25);

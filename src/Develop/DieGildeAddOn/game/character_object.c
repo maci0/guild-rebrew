@@ -3,12 +3,12 @@
 char* __cdecl ch_LoadCharacterMotion(char*, char*, char);
 void __cdecl ch_SetBodyAttachment(char*, int, char*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
-int __cdecl fcn_004042b0(char*);
+int __cdecl ch_IsAnimationFinished(char*);
 void __cdecl ch_CheckAniMorph(char*);
 
 char* __cdecl ch_LoadCharacterMotion(char*, char*, char);
 void __cdecl ch_SetBodyAttachment(char*, int, char*);
-int __cdecl fcn_004042b0(char*);
+int __cdecl ch_IsAnimationFinished(char*);
 void __cdecl ch_CheckAniMorph(char*);
 
 /* Steps a play-motion event: loads the motion on the first step, fires the
@@ -38,7 +38,7 @@ void __cdecl ch_TakingObject(char* ev)
 			*(int*) (ev + 0x30) = 99999999;
 		}
 	}
-	if (*(int*) (obj + 0x80) == 0 && fcn_004042b0(obj)) {
+	if (*(int*) (obj + 0x80) == 0 && ch_IsAnimationFinished(obj)) {
 		if (*(int*) (ev + 0x30) != 99999999) {
 			sprintf(msg, "ch_TakingObject(): object not taken yet (should be in frame:%i)!", *(int*) (ev + 0x30));
 			ch_SetBodyAttachment(*(char**) (ev + 0x14), *(int*) (ev + 0x38), ev + 0x130);
@@ -82,7 +82,7 @@ void __cdecl ch_DroppingObject(char* ev)
 		ch_SetBodyAttachment(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
 		*(int*) (ev + 0x30) = 99999999;
 	}
-	if (*(int*) (obj + 0x80) == 0 && fcn_004042b0(obj)) {
+	if (*(int*) (obj + 0x80) == 0 && ch_IsAnimationFinished(obj)) {
 		if (*(int*) (ev + 0x30) != 99999999) {
 			ch_SetBodyAttachment(*(char**) (ev + 0x14), *(int*) (ev + 0x38), 0);
 			sprintf(msg, "ch_DroppingObject(): object not dropped yet (should be in frame:%i)!", *(int*) (ev + 0x30));

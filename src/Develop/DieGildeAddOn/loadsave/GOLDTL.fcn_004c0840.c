@@ -19,7 +19,7 @@ char* __cdecl fcn_004be1f0(int head);
 
 /* Reads a table of 0x40-byte records and appends each record to its owner list. */
 /* ADDRESS: GOLDTL 0x004c0840 */
-int __cdecl fcn_004c0840(int n)
+int __cdecl ls_LoadRoutePoints(int n)
 {
 	Rec64* rec;
 	char* buf;

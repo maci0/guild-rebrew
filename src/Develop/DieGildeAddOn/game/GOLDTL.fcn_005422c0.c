@@ -26,7 +26,7 @@ void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl fcn_004c6090(char*, int, int, int);
-void __cdecl fcn_004f3ef0(char*);
+void __cdecl gv_UpdateGraveyardPlots(char*);
 void __cdecl gm_AdjustGebaeudeCondition(char*, int);
 unsigned char* __cdecl gm_FindBuildingOwner(unsigned char*);
 unsigned char* __cdecl ahm_GetWorkshopOwner(unsigned char*);
@@ -134,7 +134,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 					}
 				}
 				else if (v == 0x1d) {
-					fcn_004f3ef0((char*) rec);
+					gv_UpdateGraveyardPlots((char*) rec);
 				}
 			}
 			else {

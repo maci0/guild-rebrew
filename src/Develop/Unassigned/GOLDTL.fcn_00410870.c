@@ -2,7 +2,7 @@ int __cdecl evt_ImportCommand(const char* name, void* fn, int flags, int nargs, 
 
 /* Register every script command handled by this module. */
 /* ADDRESS: GOLDTL 0x00410870 */
-void __cdecl fcn_00410870(void)
+void __cdecl evt_RegisterSceneCommands(void)
 {
     evt_ImportCommand((const char*) 0x677178,0x40e800,1,4,7,7,7,6);
     evt_ImportCommand((const char*) 0x677164,0x40e860,1,2,6,1);

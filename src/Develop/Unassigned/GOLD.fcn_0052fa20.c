@@ -1,7 +1,7 @@
 
-void __cdecl fcn_0052f740(void* obj, int n);
+void __cdecl d2_TurnBookPages(void* obj, int n);
 
-void __cdecl fcn_0052fa20(void* obj)
+void __cdecl d2_TurnBookPagesForward(void* obj)
 {
-    fcn_0052f740(obj, 2);
+    d2_TurnBookPages(obj, 2);
 }

@@ -5,7 +5,7 @@ extern signed char g_7f3b00[];
 
 /* ADDRESS: GOLD 0x0050d460 */
 /* ADDRESS: GOLDTL 0x00510900 */
-char __cdecl fcn_00510900(void)
+char __cdecl d3_ResetSceneContextIndices(void)
 {
 	int i;
 

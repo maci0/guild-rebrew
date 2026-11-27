@@ -6,7 +6,7 @@ unsigned int __cdecl cut_RandMod(int);
 
 
 /* ADDRESS: GOLDTL 0x004e3ff0 */
-void __cdecl fcn_004e3ff0(char* a, int* b)
+void __cdecl cut_HandleAuctionEvent(char* participant, int* bidCtx)
 {
 	int i;
 	int val;
@@ -14,22 +14,22 @@ void __cdecl fcn_004e3ff0(char* a, int* b)
 	float fv;
 	char* o;
 
-	*(int*) (a + 0x98) = 0;
-	for (i = 0; i < b[0x12]; i++) {
-		if (b[9 + i] == *(int*) (a + 0x10))
+	*(int*) (participant + 0x98) = 0;
+	for (i = 0; i < bidCtx[0x12]; i++) {
+		if (bidCtx[9 + i] == *(int*) (participant + 0x10))
 			break;
 	}
-	if (i >= b[0x12])
+	if (i >= bidCtx[0x12])
 		return;
-	if (b[i] == -1)
+	if (bidCtx[i] == -1)
 		return;
-	*(int*) (a + 0x94) = b[8];
-	gm_StartFilteredEntitySearch(1, 1, b[0x11]);
-	val = b[8];
-	o = gm_LookupEntityRecordById(*(int*) (a + 0x10));
+	*(int*) (participant + 0x94) = bidCtx[8];
+	gm_StartFilteredEntitySearch(1, 1, bidCtx[0x11]);
+	val = bidCtx[8];
+	o = gm_LookupEntityRecordById(*(int*) (participant + 0x10));
 	if (o == 0)
 		return;
-	fv = (float) (val + b[0x13] * 32000);
+	fv = (float) (val + bidCtx[0x13] * 32000);
 	n = (int) ((cut_RandFloat() / 6.0f + 0.3f) * gm_AccumulateTyped2(o) < fv
 	    ? (cut_RandFloat() / 6.0f + 0.3f) * gm_AccumulateTyped2(o) : fv);
 	if (n < val)
@@ -39,7 +39,7 @@ void __cdecl fcn_004e3ff0(char* a, int* b)
 	if (n > val * 2)
 		n = val * 2;
 	n -= val;
-	*(int*) (a + 0x98) = 1;
-	n = (int) ((float) val + cut_RandMod(n) * (b[0x13] * 0.1f));
-	*(int*) (a + 0x94) = n % 32 + n;
+	*(int*) (participant + 0x98) = 1;
+	n = (int) ((float) val + cut_RandMod(n) * (bidCtx[0x13] * 0.1f));
+	*(int*) (participant + 0x94) = n % 32 + n;
 }

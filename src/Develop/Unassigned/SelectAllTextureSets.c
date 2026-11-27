@@ -12,7 +12,7 @@ struct query_40f4b0 {
 extern char g_6b5c60[];
 extern int g_67a370;
 
-int __cdecl fcn_0040f470();
+int __cdecl d3_SelectMatchingTextureSet();
 void __cdecl d3_VisitSceneObjects(char*, int, int, int (__cdecl*)(), struct query_40f4b0*);
 
 /* ADDRESS: GOLDTL 0x0040f4b0 */
@@ -26,7 +26,7 @@ int __cdecl SelectAllTextureSets(char** args, char* pflag)
 	q.result = 0;
 	q.flag = *pflag;
 	if (q.name[0] != 0) {
-		d3_VisitSceneObjects(((char*)g_67a370), 0, 0xc0, fcn_0040f470, &q);
+		d3_VisitSceneObjects(((char*)g_67a370), 0, 0xc0, d3_SelectMatchingTextureSet, &q);
 	}
 	return 0;
 }

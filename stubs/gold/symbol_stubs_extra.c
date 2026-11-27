@@ -75,10 +75,7 @@ int __cdecl ch_ClearSitting(void)
 	return 0;
 }
 
-void* __cdecl ch_Create(void)
-{
-	return (void*) 0;
-}
+
 
 int __cdecl ch_CreateMesh(void* a, char* b, void* c)
 {
@@ -94,23 +91,16 @@ int __cdecl ch_ExecFinishAnimation(void)
 
 
 
-void __cdecl ch_SetVisible(void* a, int b)
-{
-}
 
-void __cdecl ch_Updatelowpoly(char* obj)
-{
-}
+
+
 
 int __cdecl d2_CreateRadioGroup(int a, int b, int c, int d)
 {
 	return 0;
 }
 
-int __cdecl d2_GetResourceData(int a0)
-{
-	return 0;
-}
+
 
 void __cdecl d2_SelectRadioGroup(int obj, int a)
 {
@@ -131,10 +121,7 @@ void __cdecl d2_UpdateRadioGroup(int obj)
 
 
 
-char* __cdecl d3_LoadAnimStream(char* path, char* name, char loop)
-{
-	return (void*) 0;
-}
+
 
 
 
@@ -203,10 +190,7 @@ int __cdecl fcn_0042d630(const char* name)
 	return 0;
 }
 
-int __cdecl txt_FindEntryIndex(char* a)
-{
-	return 0;
-}
+
 
 void __stdcall fcn_0042dcd0(unsigned int a, unsigned int b, unsigned long c, unsigned long d, unsigned long e)
 {

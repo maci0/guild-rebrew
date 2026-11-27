@@ -15,10 +15,10 @@ typedef struct {
 	int top;
 	int right;
 	int bottom;
-} Rect41ec50;
+} VIDEO_RECT;
 
 __declspec(dllimport) int __stdcall IsWindow(void*);
-__declspec(dllimport) int __stdcall GetClientRect(void*, Rect41ec50*);
+__declspec(dllimport) int __stdcall GetClientRect(void*, VIDEO_RECT*);
 __declspec(dllimport) int __stdcall MultiByteToWideChar(unsigned int, unsigned long, const char*, int, unsigned short*, int);
 extern long __stdcall DirectDrawCreateEx(void*, void**, void*, void*);
 extern __declspec(dllimport) long __stdcall CoCreateInstance(void*, void*, unsigned long, void*, void**);
@@ -31,16 +31,16 @@ void __cdecl FreeVideoListNode(char*);
    DirectShow filter graph, then places the video window. Returns the new
    client id, or 0 on failure. */
 /* ADDRESS: GOLDTL 0x0041ec50 */
-int __cdecl fcn_0041ec50(char* name, void* hwnd, int x, int y, int w, int h, int flags, int mode_w, int mode_h, int mode_bpp)
+int __cdecl OpenVideo(char* name, void* hwnd, int x, int y, int w, int h, int flags, int mode_w, int mode_h, int mode_bpp)
 {
 	FILE* fp;
 	char* v;
 	Com* com;
-	Rect41ec50 rc;
+	VIDEO_RECT rc;
 	int wflags;
 	int vid_w;
 	int vid_h;
-	Rect41ec50 client;
+	VIDEO_RECT client;
 	int desc[0x1f];
 	int scaled;
 	int num;

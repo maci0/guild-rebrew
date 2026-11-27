@@ -14,10 +14,10 @@ typedef struct {
 } Guid;
 
 int __cdecl io_OpenRegistryKey(const char* sub, int mode);
-T41b1c0* __cdecl fcn_0041b1c0(int a1);
-int __cdecl fcn_0041a950(int a1, int a2);
+T41b1c0* __cdecl d3_GetFormatName(int a1);
+int __cdecl d3_GetFormatBpp(int a1, int a2);
 char* __cdecl d3_FormatGuid(Guid* g, char* out);
-char* __cdecl fcn_0041b250(int* v, char* buf);
+char* __cdecl d3_FormatDisplayMode(int* v, char* buf);
 void __cdecl io_WriteRegistryString(int a1, int a2, char* a3);
 void __cdecl fcn_00411340(int a);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
@@ -50,7 +50,7 @@ int __stdcall fcn_0041adc0(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 			rows = (char*) (*(char**) 0x6b5dd0 + r * 0x508);
 			for (i = 0; i < *(unsigned int*) (rows + 0x500); i++) {
 				row = (char*) (*(int*) (rows + 0x504) + i * 0x10);
-				v = fcn_0041a950(*(int*) (row + 0xc), (int) fcn_0041b1c0(*(int*) (row + 0xc)));
+				v = d3_GetFormatBpp(*(int*) (row + 0xc), (int) d3_GetFormatName(*(int*) (row + 0xc)));
 				fcn_0064d41a(text, (char*) 0x677820, *(int*) row, *(int*) (row + 4), v);
 				v = (int) SendMessageA(*(HWND*) 0x6b5dd4, 0x143, 0, (LPARAM) text);
 				SendMessageA(*(HWND*) 0x6b5dd4, 0x151, v,
@@ -109,7 +109,7 @@ int __stdcall fcn_0041adc0(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 			if (r >= 0) {
 				r = (int) SendMessageA(*(HWND*) 0x6b5dd4, 0x150, r, 0);
 				if (r != 0) {
-					r = (int) fcn_0041b250((int*) r, buf);
+					r = (int) d3_FormatDisplayMode((int*) r, buf);
 					if (r != 0) {
 						io_WriteRegistryString(h, (int) 0x6777f4, (char*) r);
 					}

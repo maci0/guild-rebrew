@@ -43,7 +43,7 @@ void __cdecl fcn_0043c2c0(int* a0);
 void __cdecl d2_ChooseWappen(void);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
-void __cdecl fcn_0052cf20(int a0);
+void __cdecl d3_SnapCameraToEntity(int a0);
 void __cdecl fcn_004c39b0(void);
 void __cdecl tb_SetCallbackPaused(int a1, int a2);
 int __cdecl main_RunFrameLoop(int a1, int a2);
@@ -51,7 +51,7 @@ void __cdecl lc_PlayerInJail(void);
 void __cdecl d3_UpdateCameraController(void);
 void* __cdecl evt_FindScriptById(int a1);
 int __cdecl evt_RequestScriptExit(int a1);
-void __cdecl fcn_0052db70(int a0);
+void __cdecl gm_UpdateBuildingSmokeEffect(int a0);
 void __cdecl d3_HandleCameraLevelKey(void);
 void __cdecl d3_FocusCameraOnEntity(int a0);
 void __cdecl d2_ShowBuildingMenu(void);
@@ -120,7 +120,7 @@ void __cdecl d2_RunWorldHudLoop(void)
 		v8 = (int) gm_StartFilteredEntitySearch(1, 4, v13);
 		while (v8) {
 			if (v8 != *(int*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970]) + 0x170)) {
-				fcn_0052cf20(v8);
+				d3_SnapCameraToEntity(v8);
 				break;
 			}
 			v8 = (int) gm_FindNextFilteredEntity();
@@ -159,7 +159,7 @@ void __cdecl d2_RunWorldHudLoop(void)
 				v8 = (int) gm_StartFilteredEntitySearch(1, 6);
 				while (v8) {
 					if (*(int*) (v8 + 0x95) == -1)
-						fcn_0052db70(v8);
+						gm_UpdateBuildingSmokeEffect(v8);
 					v8 = (int) gm_FindNextFilteredEntity();
 				}
 				state = 2;
@@ -215,7 +215,7 @@ void __cdecl d2_RunWorldHudLoop(void)
 					(*(unsigned char*) (v9 + 0x5a) & 1)) {
 					if (*(int*) (v9 + 0x61)
 						&& !gm_IsWarehouse((void*) v9))
-						fcn_0052cf20(v9);
+						d3_SnapCameraToEntity(v9);
 					if (gm_CheckEntityType((void*) v9)) {
 						d2_EnterGebaeudeInterior(v9);
 						goto label_59a83a;

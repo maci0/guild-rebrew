@@ -4,27 +4,27 @@
 #include <string.h>
 #include "Develop/Units/m_alloc/m_alloc.h"
 
-typedef struct GOLD_OPTION_4AC440 {
+typedef struct HMT_INI_RECORD {
     int id;
     int type;
     int enabled;
     char name[16];
     char other[16];
-} GOLD_OPTION_4AC440;
+} HMT_INI_RECORD;
 
-typedef struct GOLD_OPTIONS_4AC440 {
+typedef struct HMT_INI_TABLE {
     int second_count;
     int first_count;
-    GOLD_OPTION_4AC440* second;
-    GOLD_OPTION_4AC440* first;
-} GOLD_OPTIONS_4AC440;
+    HMT_INI_RECORD* second;
+    HMT_INI_RECORD* first;
+} HMT_INI_TABLE;
 
-int __cdecl fcn_004ac8a0(GOLD_OPTIONS_4AC440*);
+int __cdecl hmt_WriteHistoricalDfn(HMT_INI_TABLE*);
 
 /* ADDRESS: GOLD 0x004ac440 */
-int __cdecl fcn_004ac440(void)
+int __cdecl hmt_CreateBinaryFile(void)
 {
-    GOLD_OPTIONS_4AC440 options;
+    HMT_INI_TABLE options;
     char path[260];
     char text[256];
     char section[32];
@@ -43,10 +43,10 @@ int __cdecl fcn_004ac440(void)
     options.second_count = atoi(text);
     if (options.second_count <= 0)
         return -1;
-    options.first = (GOLD_OPTION_4AC440*) m_alloc(options.first_count * 44, "hmt_CreateBinaryFile");
+    options.first = (HMT_INI_RECORD*) m_alloc(options.first_count * 44, "hmt_CreateBinaryFile");
     if (options.first == 0)
         goto fail;
-    options.second = (GOLD_OPTION_4AC440*) m_alloc(options.second_count * 44, "hmt_CreateBinaryFile");
+    options.second = (HMT_INI_RECORD*) m_alloc(options.second_count * 44, "hmt_CreateBinaryFile");
     if (options.second == 0)
         goto fail;
     memset(options.first, 0, options.first_count * 44);
@@ -76,7 +76,7 @@ int __cdecl fcn_004ac440(void)
         GetPrivateProfileStringA(section, "end", "-1", text, 256, path);
         options.second[i].enabled = atoi(text);
     }
-    if (fcn_004ac8a0(&options)) {
+    if (hmt_WriteHistoricalDfn(&options)) {
     fail:
         if (options.first != 0) {
             m_FreeTracked(options.first);

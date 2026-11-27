@@ -7,7 +7,7 @@ int* __cdecl ahm_FindRecipeSlot(char*, unsigned int);
 int __cdecl ahm_CalcResearchDuration(char*, char*);
 
 /* ADDRESS: GOLDTL 0x004ecd50 */
-float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
+float __cdecl ahm_CalcResearchStep(char* actor, unsigned int* recipe, int* maxDuration)
 {
 	float x;
 	int* obj;
@@ -16,19 +16,19 @@ float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
 	int adjusted;
 	int amount;
 
-	x = ahm_GetEssenceValue(a0, 2);
-	obj = ahm_FindRecipeSlot(a0, *a1);
+	x = ahm_GetEssenceValue(actor, 2);
+	obj = ahm_FindRecipeSlot(actor, *recipe);
 	if (obj == 0) {
 		return 0.0f;
 	}
 	if (*((float*) obj + 1) >= 1.0f) {
 		return 0.0f;
 	}
-	requested = *a2;
+	requested = *maxDuration;
 	if (requested <= 0) {
 		return 0.0f;
 	}
-	v4 = ahm_CalcResearchDuration(a0, (char*) a1);
+	v4 = ahm_CalcResearchDuration(actor, (char*) recipe);
 	adjusted = (int) ((float) v4 * (1.0f - x * 0.5f) * (1.0f - *((float*) obj + 1)));
 	if (adjusted <= 0) {
 		return 0.0f;
@@ -37,6 +37,6 @@ float __cdecl fcn_004ecd50(char* a0, unsigned int* a1, int* a2)
 	if (requested < adjusted) {
 		amount = requested;
 	}
-	*a2 = amount;
+	*maxDuration = amount;
 	return ((float) amount / (float) adjusted) * (1.0f - *((float*) obj + 1));
 }

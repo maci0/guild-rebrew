@@ -45,7 +45,7 @@ extern unsigned char g_773d75;
 void __cdecl gm_InitCityOfficialsAndCitizens(int);
 void __cdecl gm_InitCivicBuildings(int);
 void __cdecl cm_DistributeStartingWares(int, int, int*);
-void __cdecl fcn_00512ee0(void);
+void __cdecl gm_InitStartingEntitiesAndRelations(void);
 Player* __cdecl gm_GetGuildHall(int);
 Unit* __cdecl fcn_00502cd0(int, int, int, int, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
@@ -121,7 +121,7 @@ int __cdecl gm_InitCityAndTradeState(int variant)
 		}
 		cm_DistributeStartingWares(((Variant*)g_868060)[k].count - g_6a375c, 8, wares);
 	}
-	fcn_00512ee0();
+	gm_InitStartingEntitiesAndRelations();
 	pl = gm_GetGuildHall(1);
 	if (pl != 0) {
 		u = fcn_00502cd0(pl->home, 2, 6, 0, 0x115);

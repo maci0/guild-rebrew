@@ -9,7 +9,7 @@ void __cdecl fcn_00439c90(char*);
 #endif
 
 #ifdef REBREW_GOLD
-int __cdecl fcn_0043c7a0(int);
+int __cdecl d3_DisposeObject(int);
 #else
 void __cdecl d3_DisposeObject(char*);
 #endif
@@ -88,7 +88,7 @@ char __cdecl d3_DestroyObject(D3_OBJECT* object)
 	if (object != 0) {
 		d3_UnlinkObject(object);
 #ifdef REBREW_GOLD
-		fcn_0043c7a0((int) object);
+		d3_DisposeObject((int) object);
 #else
 		d3_DisposeObject((char*) object);
 #endif
@@ -99,7 +99,7 @@ char __cdecl d3_DestroyObject(D3_OBJECT* object)
 
 /* Inferred auxiliary cleanup; per-record providers retain their native identities. */
 #ifdef REBREW_GOLD
-void __cdecl fcn_0045cc80(char*);
+void __cdecl d3_ReleaseResourceSlot(char*);
 #else
 void __cdecl fcn_00456b10(char*);
 #endif
@@ -110,7 +110,7 @@ void __cdecl d3_CleanupObjectAuxSlots(D3_OBJECT* object)
         for (i = 0; i < 4; i++) {
             if (object->zeichendaten->zusatz[i].unbekannt_000 != 0) {
 #ifdef REBREW_GOLD
-                fcn_0045cc80((char*) &object->zeichendaten->zusatz[i]);
+                d3_ReleaseResourceSlot((char*) &object->zeichendaten->zusatz[i]);
 #else
                 fcn_00456b10((char*) &object->zeichendaten->zusatz[i]);
 #endif

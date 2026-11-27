@@ -49,7 +49,7 @@ int __cdecl amt_ApplyForOffice(char*, int);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
 void __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_004e6f10(int a);
+int __cdecl amt_GetOfficeGroup(int a);
 void __cdecl fcn_005cadc0(int, int, int, int, void*);
 void __cdecl fcn_0052f7a0(void);
 void __cdecl d2_ShowAmtInfo(int, int);
@@ -157,7 +157,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 				fcn_0057e880(0x2f, 0, 0, id);
 			}
 			else if (d2_CurrentElementId == hb) {
-				r = fcn_004e6f10(id);
+				r = amt_GetOfficeGroup(id);
 				fcn_005cadc0(r, 0, 0, 0, fcn_0052f7a0);
 			}
 			else if (d2_CurrentElementId == hc) {

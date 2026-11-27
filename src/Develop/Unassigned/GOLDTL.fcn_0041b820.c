@@ -5,14 +5,14 @@ extern float g_6777bc[3];
 void __cdecl fcn_0041b870(void);
 
 /* ADDRESS: GOLDTL 0x0041b820 */
-void __cdecl fcn_0041b820(float* a, float* b, float* c)
+void __cdecl d3_SetGammaParams(float* brightness, float* contrast, float* gamma)
 {
 	int i;
 
 	for (i = 0; i < 3; i++) {
-		g_6b5df8[i] = a[i];
-		g_6777b0[i] = b[i];
-		g_6777bc[i] = c[i];
+		g_6b5df8[i] = brightness[i];
+		g_6777b0[i] = contrast[i];
+		g_6777bc[i] = gamma[i];
 	}
 	fcn_0041b870();
 }

@@ -74,13 +74,13 @@ void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl d3_ApplyAnimDelta(char*, char*, int, int, int);
 void __cdecl d3_AccumulateAnimDelta(char*, char*, int, int, int);
-void __cdecl fcn_00431dd0(char*, char*, int, int, float*);
+void __cdecl d3_EvalAnimSlotPosition(char*, char*, int, int, float*);
 void __cdecl d3_LerpVec3(float*, float*, float, float*);
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl fcn_004517e0(float, float, float, float, float);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-void __cdecl fcn_004321f0(void*, void*, void*);
-void __cdecl fcn_004316c0(char*);
+void __cdecl d3_ComputeSplineTangents(void*, void*, void*);
+void __cdecl d3_UpdateObjectAnimPose(char*);
 void __cdecl d3_FreeObjectAnimation(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 char __cdecl fcn_0045cbe0(char*, unsigned int);
@@ -310,7 +310,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 					    SI(slot + 8) < QI(BF(cur), 4)) {
 						r = SI(slot + 8);
 					}
-					fcn_00431dd0(o, slot, cur, r, fs->out);
+					d3_EvalAnimSlotPosition(o, slot, cur, r, fs->out);
 					if (fabs(fs->out[0] - SF(slot + 0x4c)) <
 					    SF(slot + 0x5c) &&
 					    fabs(fs->out[2] - SF(slot + 0x54)) <
@@ -424,7 +424,7 @@ char __cdecl fcn_00432480(char* o, void* ctx)
 	}
 
 	/* half two: walk state */
-	fcn_004316c0(o);
+	d3_UpdateObjectAnimPose(o);
 	st = SP(o + 0x1d0);
 	if (st == 0) {
 		return 1;
@@ -672,7 +672,7 @@ fwd2:
 		}
 	prune:
 		if ((SB(st + 0x34) & 0x10) && !(flags & 0x11) && (flags & 4)) {
-			fcn_004321f0(sfr + (SI(st) - 1) * 0x58, sfr, sfr + 0x58);
+			d3_ComputeSplineTangents(sfr + (SI(st) - 1) * 0x58, sfr, sfr + 0x58);
 			SB(st + 0x34) &= ~0x10;
 		}
 		SI(st + 0xc) = SI(st + 0xc) - QI(sfr + SI(st + 4) * 0x58, 0);

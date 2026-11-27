@@ -5,7 +5,7 @@ extern int g_7f3e20[];
 
 void __cdecl sb_StopVoice(int, int);
 
-void __cdecl fcn_00516000(void)
+void __cdecl d3snd_StopAllAmbientVoices(void)
 {
 	int i;
 

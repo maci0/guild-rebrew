@@ -8,8 +8,8 @@ extern volatile int g_6b7fac;
 void __cdecl fcn_00434ba0(char* anim, char* mesh);
 int __cdecl d3_StepAnimFrame(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max);
 int __cdecl d3_CreateObjectMesh(char* e);
-char __cdecl fcn_004315c0(char* obj);
-void __cdecl fcn_004316c0(int obj);
+char __cdecl d3_BindAnimTrackNodes(char* obj);
+void __cdecl d3_UpdateObjectAnimPose(int obj);
 
 /* Claims the first free animation slot of the context, fills it from the
  * named animation and the 12-byte options block, and returns the slot. */
@@ -93,8 +93,8 @@ char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATIO
 						}
 					}
 
-					fcn_004315c0(base);
-					fcn_004316c0((int) base);
+					d3_BindAnimTrackNodes(base);
+					d3_UpdateObjectAnimPose((int) base);
 					g_6b86d4--;
 					return entry;
 				}

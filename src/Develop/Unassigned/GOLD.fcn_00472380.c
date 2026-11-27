@@ -7,7 +7,7 @@ extern short g_005fe73c;
 extern int d2_CurrentWindowId;
 void* __cdecl m_alloc(unsigned int, const char*);
 int __cdecl fcn_00478cb0(int*, int);
-void __cdecl fcn_004796b0(int);
+void __cdecl d2_ClearSurface(int);
 int __cdecl fcn_0046c9e0(void);
 int __cdecl d2_AddElementToWindow(short, short, int, int);
 #define I32(p) (*(int*)(p))
@@ -81,7 +81,7 @@ int __cdecl fcn_00472380(short x, short y, short width, short height, unsigned i
         descriptor[1] = *(short*)(window + 8);
         descriptor[2] = *(short*)(window + 0xa);
         I32(window + 0x28) = fcn_00478cb0(descriptor, 0xb);
-        fcn_004796b0(I32(window + 0x28));
+        d2_ClearSurface(I32(window + 0x28));
         if (I32(window + 0x28) == 0) {
             return 0;
         }

@@ -9,8 +9,8 @@ typedef struct {
 // SIZE 0x8
 
 int __cdecl io_OpenRegistryKey(const char* sub, int mode);
-int __cdecl fcn_00411350(int h, const char* name);
-int __cdecl fcn_00411390(int h, const char* name, int* out);
+int __cdecl io_ReadRegistryDword(int h, const char* name);
+int __cdecl io_TryReadRegistryDword(int h, const char* name, int* out);
 int __cdecl io_ReadRegistryString(int h, const char* name, char* out);
 void __cdecl fcn_00410430(int h);
 int __cdecl _strcmpi(const char* a, const char* b);
@@ -52,11 +52,11 @@ char __cdecl fcn_00437710(D3dCfg_437710* cfg, const char* key, D3dCfg_437710* de
 	}
 	h = io_OpenRegistryKey(key, 1);
 	if (h != -1) {
-		v = fcn_00411350(h, "d3d_registry_version");
+		v = io_ReadRegistryDword(h, "d3d_registry_version");
 		if (v != 3) {
 			fcn_00410430(h);
 		} else {
-			if (fcn_00411390(h, "d3d_beautiful", &v) != 0) {
+			if (io_TryReadRegistryDword(h, "d3d_beautiful", &v) != 0) {
 				cfg->beautiful = v;
 			}
 			if (io_ReadRegistryString(h, "d3d_fillmode", mode) != 0) {
@@ -70,10 +70,10 @@ char __cdecl fcn_00437710(D3dCfg_437710* cfg, const char* key, D3dCfg_437710* de
 					cfg->fill = 3;
 				}
 			}
-			if (fcn_00411390(h, "d3_mirrors", &v) != 0) {
+			if (io_TryReadRegistryDword(h, "d3_mirrors", &v) != 0) {
 				cfg->mirrors = v;
 			}
-			if (fcn_00411390(h, "d3d_shadows", &v) != 0) {
+			if (io_TryReadRegistryDword(h, "d3d_shadows", &v) != 0) {
 				cfg->shadows = v;
 			}
 			fcn_00410430(h);

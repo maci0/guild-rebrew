@@ -5,7 +5,7 @@ void __cdecl fcn_004556d0(char*);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLD 0x00455750 */
-void __cdecl fcn_00455750(char* object)
+void __cdecl d3_DestroyEffect(char* object)
 {
 	char* owner;
 

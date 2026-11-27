@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00454500 */
-void __cdecl fcn_00454500(float* m)
+void __cdecl d3_SetIdentityMatrix4x4(float* m)
 {
 	int n;
 

@@ -37,8 +37,8 @@ int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 int* __cdecl m_alloc(int size, char* tag);
 void __cdecl d2_FreeTutorialNodes(int*);
 void __cdecl d2_GrantTutorialLumber(void);
-void __cdecl fcn_0057fb20(void);
-void __cdecl fcn_0057fb60(void);
+void __cdecl d2_CheckTutCh5Msg29Node155Gate(void);
+void __cdecl d2_GetTutCh5SubStep(void);
 void __cdecl d2_FocusTutorialBuilding0x02(void);
 void __cdecl fcn_0057fe50(void);
 void __cdecl d2_RunTutorialOfficeStep(void);
@@ -234,7 +234,7 @@ int* __cdecl d2_CreateTutorialChapter5(void)
 	p[0xc] = 0xd5;
 	p[0xe] = 0;
 	p[0xd] = (int) d2_GrantTutorialLumber;
-	p[0xf] = (int) fcn_0057fb20;
+	p[0xf] = (int) d2_CheckTutCh5Msg29Node155Gate;
 	p[0x10] = 0x17;
 	p[0x11] = 0x58c;
 	p[0x12] = 9;
@@ -243,7 +243,7 @@ int* __cdecl d2_CreateTutorialChapter5(void)
 	p[0x14] = 0;
 	p[0x15] = 0;
 	p[0x17] = 2;
-	p[0x18] = (int) fcn_0057fb60;
+	p[0x18] = (int) d2_GetTutCh5SubStep;
 	p[0x19] = (int) m_alloc(0x58, g_6a9184);
 	if (p[0x19] == 0) {
 		goto fail;

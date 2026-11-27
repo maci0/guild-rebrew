@@ -28,7 +28,7 @@ int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
@@ -145,7 +145,7 @@ int __cdecl d2_RunProductionTradeDialog(char* building)
 								p += 10;
 							} while ((int) p < 0x7e35d0);
 						} else {
-							fcn_004c35f0();
+							d3snd_PlayWorkerOrderVoice();
 							found = he_StartHandlungSearch(2, 0, 3, 3, *(unsigned int*) (building + 1));
 							while (found) {
 								if (*(unsigned short*) (found + 0xac) == *(unsigned int*) (g_779160 + k * 0x58))

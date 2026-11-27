@@ -9,7 +9,7 @@ int __cdecl fcn_004e4ae0(char *, int);
 int __cdecl msx_StartMusicIfAllowed(int);
 void __cdecl cut_WaitSeconds(int, ...);
 int __cdecl cm_WaitNetworkSyncBanner(int);
-int __cdecl fcn_004ea130(int);
+int __cdecl amt_GetOfficeGroupHumanFlags(int);
 int __cdecl amt_ResolveOfficeApplications(int, int, void *);
 
 int __cdecl fcn_00470820(char *, int, int);
@@ -32,19 +32,19 @@ int __cdecl io_AppendText(char *, ...);
 unsigned int __cdecl cut_RandMod(unsigned int, ...);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl cut_RunTurnRound(unsigned int *, void *);
-int __cdecl fcn_004e9180(void *, int);
+int __cdecl amt_IsNextOfficeStep(void *, int);
 int __cdecl amt_SendOfficeCommand(unsigned char, unsigned char *, unsigned char *, int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_StepCommandQueue(void);
 int __cdecl cm_RequestCopyEntityData(int, int, int, int);
-int __cdecl fcn_004e48b0(void);
+int __cdecl cut_FadeToBlack(void);
 int __cdecl cut_WaitForScriptExit(int);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_004da4d0(int, void *);
 
 
-int __cdecl fcn_004ea350(void);
+int __cdecl amt_SyncAllOfficeSlots(void);
 int __cdecl fcn_004e4b00(int);
 void __cdecl msx_StopAmbientTrack(int);
 int __cdecl fcn_004e4eb0(void);
@@ -196,7 +196,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     }
 
     cm_WaitNetworkSyncBanner(0x6b5c60);
-    if (fcn_004ea130(s20) == 0) {
+    if (amt_GetOfficeGroupHumanFlags(s20) == 0) {
         unsigned short v = g_774970;
         if (*(int *)((char *)a0 + 0xc) == *(int *)(0x7f4ca4 + (unsigned int)v * 0x21c)) {
             amt_ResolveOfficeApplications(s20, s28, (char *)&mid[0x38]);
@@ -541,7 +541,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 i = 0;
                 rs20 = 0;
                 while (i < s44) {
-                    if (fcn_004e9180((void *)blkA.s84[i], blkA.blkD.sA4) != 0 &&
+                    if (amt_IsNextOfficeStep((void *)blkA.s84[i], blkA.blkD.sA4) != 0 &&
                         ((char *)blkA.s84[i])[0x1b1] == 0)
                         rs20 += 1;
                     i += 1;
@@ -612,7 +612,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             i = 0;
                             acc = s08;
                             do {
-                                if (fcn_004e9180((void *)blkA.s84[i], blkA.blkD.sA4) != 0) {
+                                if (amt_IsNextOfficeStep((void *)blkA.s84[i], blkA.blkD.sA4) != 0) {
                                     *(int *)((char *)&mid + 0x3a8 + i * 0x38) = blkA.s84[i];
                                     *(int *)((char *)&mid + 0x3bc + i * 0x38) = 0;
                                     *(int *)((char *)&mid + 0x3d8 + i * 0x38) = 0;
@@ -804,7 +804,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
         }
     }
     if (s3C != 0) {
-        fcn_004e48b0();
+        cut_FadeToBlack();
         cut_WaitSeconds(0x3e8);
         cut_WaitForScriptExit(evt_StartGfxScript((char *)0x6b5c60, (char *)0x68c010));
         cut_CleanupCutscene();
@@ -815,7 +815,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     } while (s30 < 6);
     /* native 0x4dc199..0x4dc221: epilogue */
     if (a0[3] == *(int *)(0x7f4ca4 + (unsigned int)g_774970 * 0x21c))
-        fcn_004ea350();
+        amt_SyncAllOfficeSlots();
     fcn_004e4b00(s34);
     fcn_004e4b00(s38);
     if (s2C != 0)

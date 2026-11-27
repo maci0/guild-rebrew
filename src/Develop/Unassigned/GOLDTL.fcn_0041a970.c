@@ -8,12 +8,12 @@ typedef int (__cdecl *INDEXFN)(int count, int ptr);
 typedef int (__stdcall *VTBLFN)(void *self, int a, int b, int c, int d,
 	void *rec, int *out);
 
-extern char __cdecl fcn_0041b290(unsigned int *adapter, int *mode);
-extern char __cdecl fcn_0041ad80(int a, int b);
-extern int __cdecl fcn_0041ba40(void);
+extern char __cdecl d3_LoadSavedDisplayConfig(unsigned int *adapter, int *mode);
+extern char __cdecl d3_ShowDisplaySetupDialog(int a, int b);
+extern int __cdecl d3_RestoreDeviceResources(void);
 
 /* ADDRESS: GOLDTL 0x0041a970 */
-char __cdecl fcn_0041a970(int a0, INDEXFN indexCallback, unsigned char a2, unsigned char a3)
+char __cdecl d3_CreateGraphicsDevice(int hwnd, INDEXFN indexCallback, unsigned char windowed, unsigned char triple_buffer)
 {
 	int ready;
 	int slot;
@@ -30,16 +30,16 @@ char __cdecl fcn_0041a970(int a0, INDEXFN indexCallback, unsigned char a2, unsig
 	int ccnt;
 
 	ready = *(int *) 0x6b5ddc;
-	*(int *) 0x14ce730 = a0;
+	*(int *) 0x14ce730 = hwnd;
 	if (ready == 0 || *(unsigned int *) 0x6b5de8 <= 0)
 		goto done;
 	slot = -1;
 	*(unsigned char *) 0x6b5dec = (indexCallback != 0);
-	found = fcn_0041b290((unsigned int *) &slot, pos);
+	found = d3_LoadSavedDisplayConfig((unsigned int *) &slot, pos);
 	while (!found) {
-		if (!fcn_0041ad80(0, a0))
+		if (!d3_ShowDisplaySetupDialog(0, hwnd))
 			break;
-		found = fcn_0041b290((unsigned int *) &slot, pos);
+		found = d3_LoadSavedDisplayConfig((unsigned int *) &slot, pos);
 	}
 	if (slot < 0) {
 		slot = 0;
@@ -80,12 +80,12 @@ char __cdecl fcn_0041a970(int a0, INDEXFN indexCallback, unsigned char a2, unsig
 	*(int *) 0x14ce824 = pos[1];
 	*(int *) 0x14ce844 = pos[2];
 	*(int *) 0x14ce840 = pos[2] != 0;
-	*(int *) 0x14ce82c = a3 + 1;
-	*(int *) 0x14ce83c = a2;
+	*(int *) 0x14ce82c = triple_buffer + 1;
+	*(int *) 0x14ce83c = windowed;
 	*(int *) 0x14ce848 = 0;
 	*(int *) 0x14ce850 = 0;
 	*(int *) 0x14ce84c = 0;
-	*(int *) 0x14ce838 = a0;
+	*(int *) 0x14ce838 = hwnd;
 	*(int *) 0x14ce830 = 0;
 	*(int *) 0x14ce834 = 1;
 	ok = *(unsigned int *) (rec + 0x4cc) >= 8
@@ -94,41 +94,41 @@ char __cdecl fcn_0041a970(int a0, INDEXFN indexCallback, unsigned char a2, unsig
 	*(int *) &g_6b5de0 = 0;
 	if (ok) {
 		(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
-			(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x50,
+			(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x50,
 			(void *) &g_14ce820, (int *) &g_6b5de0);
 		if (*(int *) &g_6b5de0)
 			goto success;
-		if (a3) {
+		if (triple_buffer) {
 			(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
-				(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x50,
+				(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x50,
 				(void *) &g_14ce820, (int *) &g_6b5de0);
 			if (*(int *) &g_6b5de0)
 				goto success;
 		}
-		*(int *) 0x14ce82c = a3 + 1;
+		*(int *) 0x14ce82c = triple_buffer + 1;
 		(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
-			(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x40,
+			(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x40,
 			(void *) &g_14ce820, (int *) &g_6b5de0);
 		if (*(int *) &g_6b5de0)
 			goto success;
-		if (a3) {
+		if (triple_buffer) {
 			(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
-				(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x40,
+				(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x40,
 				(void *) &g_14ce820, (int *) &g_6b5de0);
 			if (*(int *) &g_6b5de0)
 				goto success;
 		}
 	}
-	*(int *) 0x14ce82c = a3 + 1;
+	*(int *) 0x14ce82c = triple_buffer + 1;
 	(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
-		(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x20,
+		(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x20,
 		(void *) &g_14ce820, (int *) &g_6b5de0);
 	if (*(int *) &g_6b5de0)
 		goto success;
-	if (!a3)
+	if (!triple_buffer)
 		goto done;
 	(*(VTBLFN *) (*(int *) (*(int *) 0x6b5ddc) + 0x3c))(
-		(void *) *(int *) 0x6b5ddc, slot, 1, a0, 0x20,
+		(void *) *(int *) 0x6b5ddc, slot, 1, hwnd, 0x20,
 		(void *) &g_14ce820, (int *) &g_6b5de0);
 	if (!*(int *) &g_6b5de0)
 		goto done;
@@ -176,7 +176,7 @@ success:
 		rep movsb
 	}
 	*(int *) 0x14ce72c = 1;
-	fcn_0041ba40();
+	d3_RestoreDeviceResources();
 done:
 	return *(int *) &g_6b5de0 != 0;
 }

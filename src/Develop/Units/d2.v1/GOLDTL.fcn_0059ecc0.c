@@ -50,7 +50,7 @@ void __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
@@ -190,7 +190,7 @@ void __cdecl fcn_0059ecc0(int gebaeude, int a1)
 				}
 				req.f58 = (unsigned char) cnt;
 				if (cnt != 0) {
-					fcn_004c35f0();
+					d3snd_PlayWorkerOrderVoice();
 					sv_ClearObjectSelection();
 					sel = cm_SendCopyEntityData(&req);
 					while (!cm_GetCommandStatus(sel)) {

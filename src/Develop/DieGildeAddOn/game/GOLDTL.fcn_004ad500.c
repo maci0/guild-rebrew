@@ -1,6 +1,6 @@
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl amt_GetRoleLevel(int);
-int __cdecl fcn_004e6f10(int);
+int __cdecl amt_GetOfficeGroup(int);
 float __cdecl amt_GetOfficeAffinityScore(unsigned char*, int);
 
 
@@ -23,9 +23,9 @@ float __cdecl amt_ScoreOfficeCandidate(unsigned char* subjectEntity, unsigned sh
 	r2 = (float) amt_GetRoleLevel(subjectEntity[0x167]) / amt_GetRoleLevel(0x1b);
 	s1 = 0.0f;
 	if (subjectEntity[0x166] != 0)
-		s1 = amt_GetOfficeAffinityScore(subjectEntity, fcn_004e6f10(subjectEntity[0x166]));
+		s1 = amt_GetOfficeAffinityScore(subjectEntity, amt_GetOfficeGroup(subjectEntity[0x166]));
 	s2 = 0.0f;
 	if (subjectEntity[0x167] != 0)
-		s2 = amt_GetOfficeAffinityScore(subjectEntity, fcn_004e6f10(subjectEntity[0x167]));
+		s2 = amt_GetOfficeAffinityScore(subjectEntity, amt_GetOfficeGroup(subjectEntity[0x167]));
 	return s1 * r1 + s2 * r2 + w + d;
 }

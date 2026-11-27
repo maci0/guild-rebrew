@@ -5,7 +5,7 @@
 extern int g_9b4a40[];
 
 void* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_004fe2e0(char*, int, int*, int*, int, int*);
+int __cdecl ch_SpawnEntityCharacter(char*, int, int*, int*, int, int*);
 void __cdecl ch_UpdateHeldObjectAttachment(char*);
 char* __cdecl gm_GetEquippedCombatGear(char*);
 char* __cdecl gm_FindEntityActiveItem(char*);
@@ -38,7 +38,7 @@ found:
 	pool[i] = *(EntityStruct*) src;
 	*(int*) ((char*) g_9b4a40 + i * 0x21c + 0x1ac) = 0;
 	*(int*) ((char*) g_9b4a40 + i * 0x21c + 0x184) = 0;
-	fcn_004fe2e0(rec, d3_CurrentContextIndex, 0, 0, 0, (int*) dummyName);
+	ch_SpawnEntityCharacter(rec, d3_CurrentContextIndex, 0, 0, 0, (int*) dummyName);
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);
 	*(unsigned char*) (obj + 0x240) = 4;
 	obj = *(char**) ((char*) g_9b4a40 + i * 0x21c + 0x184);

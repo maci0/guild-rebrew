@@ -1266,13 +1266,14 @@ int __cdecl ls_SaveRelationships(void* file)
 }
 
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
-#if defined(REBREW_SERVER)
+/* ADDRESS: SERVER 0x10012440 */
+/* ADDRESS: GOLDTL 0x005218f0 */
+/* ADDRESS: GOLD 0x0051c950 */
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx)
 {
 	/* vfs_ReadData wrapper: nonzero on success (unsigned > 0 carry idiom). */
 	return (unsigned int) vfs_ReadData(outBuffer, elementSize, elementCount, streamCtx) > 0;
 }
-#endif
 
 #include "../../Units/Error/error.h"
 #include "../../Units/m_alloc/m_alloc.h"
@@ -1399,10 +1400,140 @@ int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
 	return 1;
 }
 #endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+extern char s_ls_tmp_1002d4fc; /* 0x1002d4fc */
+extern unsigned short ls_SavePreviewPixels[];
+int __cdecl d2_PackColorForPixelFormat(char a, char b, char c);
+
+/* ADDRESS: GOLDTL 0x00521eb0 */
+int __cdecl ls_LoadSavegameHeader(void* stream, char* dest)
+{
+	unsigned char* buf;
+	int i;
+	int n;
+	int x;
+	int y;
+
+	n = 0;
+	buf = m_alloc(0xe100, &s_ls_tmp_1002d4fc);
+	if (!ls_ReadVfsDataChecked(dest, 4, 1, stream)) {
+		return 0;
+	}
+	g_file_version = *(int*) dest;
+	if (!ls_ReadVfsDataChecked(dest + 4, 1, 1, stream)) {
+		return 0;
+	}
+	if (!ls_ReadVfsDataChecked(dest + 5, 0x20, 1, stream)) {
+		return 0;
+	}
+	if (!ls_ReadVfsDataChecked(dest + 0x28, 8, 1, stream)) {
+		return 0;
+	}
+	if (!ls_ReadVfsDataChecked(dest + 0x30, 1, 1, stream)) {
+		return 0;
+	}
+	if (g_file_version >= 0x10033) {
+		if (!ls_ReadVfsDataChecked(dest + 0x31, 1, 1, stream)) {
+			return 0;
+		}
+	}
+	if (g_file_version >= 0x10028) {
+		if (!ls_ReadVfsDataChecked(dest + 0x32, 0xe, 1, stream)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(dest + 0x40, 0x10, 1, stream)) {
+			return 0;
+		}
+		if (g_file_version >= 0x10054) {
+			if (!ls_ReadVfsDataChecked(dest + 0x50, 0x10, 1, stream)) {
+				return 0;
+			}
+			if (!ls_ReadVfsDataChecked(dest + 0x63, 1, 1, stream)) {
+				return 0;
+			}
+			if (!ls_ReadVfsDataChecked(dest + 0x64, 4, 1, stream)) {
+				return 0;
+			}
+		}
+		if (!ls_ReadVfsDataChecked(dest + 0x60, 1, 1, stream)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(dest + 0x61, 1, 1, stream)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(dest + 0x62, 1, 1, stream)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(dest + 0x68, 4, 1, stream)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(dest + 0x6c, 1, 1, stream)) {
+			return 0;
+		}
+		if (!ls_ReadVfsDataChecked(dest + 0x6d, 1, 1, stream)) {
+			return 0;
+		}
+		if (g_file_version >= 0x1002b) {
+			if (!ls_ReadVfsDataChecked(dest + 0x70, 4, 1, stream)) {
+				return 0;
+			}
+			if (!ls_ReadVfsDataChecked(dest + 0x74, 4, 1, stream)) {
+				return 0;
+			}
+		}
+		else {
+			*(int*) (dest + 0x70) = -1;
+			*(int*) (dest + 0x74) = -1;
+		}
+		if (g_file_version >= 0x10034) {
+			for (i = 0; i < 8; i++) {
+				if (!ls_ReadVfsDataChecked(dest + 0x78 + i * 4, 4, 1, stream)) {
+					return 0;
+				}
+			}
+		}
+		if (!ls_ReadVfsDataChecked(buf, 0xe100, 1, stream)) {
+			return 0;
+		}
+		for (y = 0; y < 120; y++) {
+			for (x = 0; x < 160; x++) {
+				ls_SavePreviewPixels[n] = (unsigned short) d2_PackColorForPixelFormat(buf[n * 3], buf[n * 3 + 1], buf[n * 3 + 2]);
+				n++;
+			}
+		}
+	}
+	if (buf != 0) {
+		m_FreeTracked(buf);
+	}
+	if (g_file_version < 0x10025) {
+		return 0;
+	}
+	if (g_file_version >= 0x10038) {
+		if (!ls_ReadVfsDataChecked(dest + 0x98, 4, 1, stream)) {
+			return 0;
+		}
+	}
+	else {
+		*(int*) (dest + 0x98) = 2;
+	}
+	if (g_file_version >= 0x10039) {
+		dest += 0x9c;
+		if (!ls_ReadVfsDataChecked(dest, 0x60, 1, stream)) {
+			return 0;
+		}
+	}
+	else {
+		*(struct SAVE_HEADER_LEGACY_PREFIX*) (dest + 0x9c) = *(struct SAVE_HEADER_LEGACY_PREFIX*) g_save_header_tail;
+	}
+	return 1;
+}
+#endif
 
 void __cdecl gm_CleanupObjectEntities(void);
 extern int g_query_limit; /* 0x10035450 */
-#if defined(REBREW_SERVER)
+/* ADDRESS: SERVER 0x100127d0 */
+/* ADDRESS: GOLDTL 0x00522390 */
+/* ADDRESS: GOLD 0x0051d400 */
 int __cdecl ls_LoadExistingEntities(void* arg1)
 {
 	int count;
@@ -1444,7 +1575,6 @@ int __cdecl ls_LoadExistingEntities(void* arg1)
 	g_query_limit = count;
 	return 1;
 }
-#endif
 /* Loads building entity state from a save file. Reads
  * building type, owner, upgrade level, and production
  * state for each building entity. */

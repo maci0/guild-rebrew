@@ -16,7 +16,7 @@ int __cdecl init_AllocateGebaeudeSceneSlot(char* e);
 int __cdecl init_EnsureObjektSceneContext(char* q);
 void __cdecl d3_SelectSceneContext(int a, int b);
 char* __cdecl ch_SelectRandomDummy(void);
-void __cdecl fcn_004fe2e0(char* o, int h, int x, int y, int view, char* name);
+void __cdecl ch_SpawnEntityCharacter(char* o, int h, int x, int y, int view, char* name);
 void __cdecl ch_PreloadCharacterMotions(char* v, int n, ...);
 void __cdecl ch_SetVisible(char* v, int a);
 
@@ -59,12 +59,12 @@ char* __cdecl init_SpawnBuildingCharacter(int id, int type, int sub, int x, int 
 	if (q != 0) {
 		m = ch_SelectRandomDummy();
 		if (m != 0) {
-			fcn_004fe2e0(o, h, x, y, 0, m);
+			ch_SpawnEntityCharacter(o, h, x, y, 0, m);
 		} else {
-			fcn_004fe2e0(o, h, x, y, 0, g_675908);
+			ch_SpawnEntityCharacter(o, h, x, y, 0, g_675908);
 		}
 	} else {
-		fcn_004fe2e0(o, h, 0, 0, *(int*) (b + 0x61), g_68149c);
+		ch_SpawnEntityCharacter(o, h, 0, 0, *(int*) (b + 0x61), g_68149c);
 	}
 	if (*(char**) (o + 0x184) != 0) {
 		ch_PreloadCharacterMotions(*(char**) (o + 0x184), 1, g_6753fc);

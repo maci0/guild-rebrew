@@ -38,7 +38,7 @@ int __cdecl gm_RandomMod(unsigned short);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
-int __cdecl fcn_00508280(char*, int*, float*);
+int __cdecl gm_ApplyRandomDisease(char*, int*, float*);
 float __cdecl gm_GetEntityHealth(char*);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
 int __cdecl he_IsEntityEligibleForIllness(unsigned short*);
@@ -116,7 +116,7 @@ void __cdecl RunSimKrankheiten(char* s)
 			}
 			m = gm_HasActiveSpecialObject((char*) p, 0x2b3) != 0 ? y * 0.75f : y;
 			if (f < m - x) {
-				if (fcn_00508280((char*) p, &r, &g) != 0) {
+				if (gm_ApplyRandomDisease((char*) p, &r, &g) != 0) {
 					home2 = g_7f4ca0[idx].home2;
 					if (home2 != 0 && *(unsigned short*) (home2 + 0x27) != 0xffff
 					    && (q = (unsigned char*) &g_7f4ca0[*(unsigned short*) (home2 + 0x27)]) != 0) {

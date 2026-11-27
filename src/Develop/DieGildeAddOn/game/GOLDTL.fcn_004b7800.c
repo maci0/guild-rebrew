@@ -20,7 +20,7 @@ int __cdecl he_PostEntityMessage(int a, int b, char* s, int flag, int c, int d);
 
 /* Builds a chat line for the owner of the record named by a0. */
 /* ADDRESS: GOLDTL 0x004b7800 */
-int __cdecl fcn_004b7800(int* request)
+int __cdecl gm_HandleMsg11GrantBonus(int* request)
 {
 	char buf[512];
 	char* h;

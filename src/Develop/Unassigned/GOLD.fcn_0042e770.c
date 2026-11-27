@@ -1,7 +1,7 @@
 #include <string.h>
 
 /* ADDRESS: GOLD 0x0042e770 */
-int __cdecl fcn_0042e770(char* name)
+int __cdecl txt_FindEntryIndex(char* name)
 {
 	char* e;
 	int i;

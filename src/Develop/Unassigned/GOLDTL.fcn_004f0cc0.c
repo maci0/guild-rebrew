@@ -3,15 +3,15 @@
 // SIZE 0x68
 typedef struct {
 	int d[0x1a];
-} Blk4f0cc0;
+} SLOT170_ACTION_BLK;
 
 extern volatile int g_6b7fac;
 
 char* __cdecl gm_FindSlot170Entry(int a1);
 
-int __cdecl fcn_004f0cc0(int* a, int flag)
+int __cdecl gm_AdjustSlot170Resource(int* a, int flag)
 {
-	Blk4f0cc0 blk;
+	SLOT170_ACTION_BLK blk;
 	char* p;
 	char* e;
 	float x;
@@ -21,7 +21,7 @@ int __cdecl fcn_004f0cc0(int* a, int flag)
 
 	x = *(float*) &a[1];
 	k = a[2];
-	blk = *(Blk4f0cc0*) &a[3];
+	blk = *(SLOT170_ACTION_BLK*) &a[3];
 	p = gm_FindSlot170Entry(a[0]);
 	if (p != 0) {
 		for (i = 0; i < 3; i++) {
@@ -34,7 +34,7 @@ int __cdecl fcn_004f0cc0(int* a, int flag)
 				}
 				*(float*) (p + 8 + k * 4) = v;
 				e = p + i * 0x68;
-				*(Blk4f0cc0*) (e + 0x18) = blk;
+				*(SLOT170_ACTION_BLK*) (e + 0x18) = blk;
 				*(int*) (p + 4) |= 2;
 				*(int*) (e + 0x78) = *(int*) ((char*)&g_6b7fac);
 				*(int*) (e + 0x74) = 1;

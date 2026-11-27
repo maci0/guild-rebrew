@@ -33,7 +33,7 @@ int __cdecl ai_StartBuyObjekt(void);
 int __cdecl ai_RunBuyObject(void);
 int __cdecl am_StartBuyObjektAP(void);
 int __cdecl fcn_004974d0(void);
-int __cdecl fcn_004974e0(void);
+int __cdecl ai_StartRaumKaufen(void);
 int __cdecl ai_RunRaumKaufen(void);
 int __cdecl ai_StartRepairBuilding(void);
 int __cdecl ai_RunRepairBuilding(void);
@@ -58,7 +58,7 @@ int __cdecl ai_ScoreVerpruegeln(void);
 int __cdecl ai_StartBeatUp(void);
 int __cdecl ai_RunBeatUp(void);
 int __cdecl PrepareBuergerrecht(void*, char*, int, char*);
-int __cdecl fcn_00499ad0(void);
+int __cdecl ai_RunBuergerrecht(void);
 int __cdecl fcn_00499cc0(void);
 int __cdecl cm_RunApsSparen(void);
 int __cdecl ai_StartUseObjectMilitary(void);
@@ -72,7 +72,7 @@ int __cdecl ai_RunEducationObject(void);
 int __cdecl ai_StartUseObjectUnversehrtheit(void);
 int __cdecl ai_RunUseObjectUnversehrtheit(void);
 int __cdecl ai_StartUseDynastyObject(void);
-int __cdecl fcn_0049b120(void);
+int __cdecl ai_RunUseDynastyObject(void);
 int __cdecl ai_StartUseObjectGemeinheit(void);
 int __cdecl ai_RunUseObjectGemeinheit(void);
 int __cdecl ai_StartUseObjectSicherheit(void);
@@ -588,7 +588,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	d.type = 0xe;
 	strcpy(d.name, "Raum kaufen");
 	d.score = fcn_004a4410;
-	d.start = fcn_004974e0;
+	d.start = ai_StartRaumKaufen;
 	d.run = ai_RunRaumKaufen;
 	d.flags = 0xff;
 	if (am_RegisterMethod(&d, e) == 0) {
@@ -963,7 +963,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Buergerrecht");
 	d.score = fcn_004a4410;
 	d.start = PrepareBuergerrecht;
-	d.run = fcn_00499ad0;
+	d.run = ai_RunBuergerrecht;
 	d.flags = 0x1b;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;
@@ -1201,7 +1201,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "UseObject (Dynastie)");
 	d.score = fcn_004a4410;
 	d.start = ai_StartUseDynastyObject;
-	d.run = fcn_0049b120;
+	d.run = ai_RunUseDynastyObject;
 	d.flags = 0x17;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;

@@ -12,7 +12,7 @@ unsigned short* __cdecl fcn_00502cd0(int, int, int, ...);
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
 char* __cdecl gm_AllocObjekt(int, int, int);
 /* ADDRESS: GOLDTL 0x00501d20 */
-void __cdecl fcn_00501d20(int season)
+void __cdecl gm_RefreshLocalMarketStock(int season)
 {
 	unsigned int ids[8];
 	char* slots;

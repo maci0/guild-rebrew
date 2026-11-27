@@ -16,16 +16,16 @@ typedef struct {
 	unsigned char b43;
 	char pad44[0xb];
 	unsigned char b4f;
-} Vtx439c90;
+} D3_CLIP_VERTEX;
 
 /* ADDRESS: GOLD 0x00439c90 */
 int __cdecl fcn_00439c90(unsigned int* a0)
 {
-	Vtx439c90** cur;
-	Vtx439c90** out;
-	Vtx439c90* v;
-	Vtx439c90* n;
-	Vtx439c90* tmp;
+	D3_CLIP_VERTEX** cur;
+	D3_CLIP_VERTEX** out;
+	D3_CLIP_VERTEX* v;
+	D3_CLIP_VERTEX* n;
+	D3_CLIP_VERTEX* tmp;
 	float* pl;
 	float dc;
 	float dn;
@@ -40,16 +40,16 @@ int __cdecl fcn_00439c90(unsigned int* a0)
 		return 0;
 	}
 	pi = 0;
-	tmp = (Vtx439c90*) 0xfc5360;
+	tmp = (D3_CLIP_VERTEX*) 0xfc5360;
 	if (*a0 != 0) {
 		pl = (float*) &a0[3];
 		do {
 			*(int*) 0x633454 = 0;
-			cur = (Vtx439c90**) ((pi & 1) * 0x200 + 0xfc4c60);
+			cur = (D3_CLIP_VERTEX**) ((pi & 1) * 0x200 + 0xfc4c60);
 			v = cur[0];
 			cur[*(int*) 0x633458] = v;
 			dc = v->x * pl[-1] + (v->y * pl[0] + v->z * pl[1]);
-			out = (Vtx439c90**) (((pi - 1) & 1) * 0x200 + 0xfc4c60);
+			out = (D3_CLIP_VERTEX**) (((pi - 1) & 1) * 0x200 + 0xfc4c60);
 			inside = dc >= pl[2];
 			k = 0;
 			if (*(int*) 0x633458 != 0) {

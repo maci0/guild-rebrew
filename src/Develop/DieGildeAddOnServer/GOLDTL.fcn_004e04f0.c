@@ -6,7 +6,7 @@ int __cdecl amt_SendOfficeCommand(unsigned char id, unsigned char* ea, unsigned 
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 int __cdecl he_PostEntityMessage(int id, int arg, char* text1, unsigned char flags, int value, char* text2);
 
-void __cdecl fcn_004e04f0(char* a0)
+void __cdecl cut_HandleDuellOfficeLoss(char* duel)
 {
 	char* first;
 	char* second;
@@ -16,13 +16,13 @@ void __cdecl fcn_004e04f0(char* a0)
 	int role[6];
 	char buf[0x400];
 
-	first = gm_LookupEntityRecordById(*(int*) (a0 + 0x34));
-	second = gm_LookupEntityRecordById(*(int*) (a0 + 0x38));
+	first = gm_LookupEntityRecordById(*(int*) (duel + 0x34));
+	second = gm_LookupEntityRecordById(*(int*) (duel + 0x38));
 	if (first != 0 && second != 0) {
 		w = gm_GetEntitySkill(first, 3) > gm_GetEntitySkill(second, 3) ? second : first;
 		if (*(unsigned char*) (w + 0x166) != 0) {
 			if (srv_GetEntityOfficeSlot((unsigned char*) w, role, slot) != 0) {
-				if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + g_774970 * 0x21c)) {
+				if (*(int*) (duel + 0xc) == *(int*) (0x7f4ca4 + g_774970 * 0x21c)) {
 					amt_SendOfficeCommand(*(unsigned char*) slot, 0, 0, 4, 0xff);
 					p = (char*) 0x7f4ca2;
 					do {

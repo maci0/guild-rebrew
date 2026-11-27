@@ -136,14 +136,14 @@ void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl sim_SetSyncParams(void*, int, int, int);
 int __cdecl cm_RequestUpdateGameTime(void*);
 void __cdecl fcn_00541620(void);
-int __cdecl fcn_004e9ee0(void);
-void __cdecl fcn_004ea350(void);
+int __cdecl amt_ProcessOfficeElections(void);
+void __cdecl amt_SyncAllOfficeSlots(void);
 int __cdecl fcn_004c5980(void*);
 void __cdecl gm_RunRoundUpdate(void);
 void __cdecl cm_RequestMoveCredits(int, int, int, int);
 int __cdecl fcn_0050b750(int, int);
 void __cdecl ls_LoadNetworkGame(void*);
-void __cdecl fcn_005145a0(void*);
+void __cdecl ls_StartNetworkGame(void*);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
 void* __cdecl fcn_0064e2f9(char*, const char*);
 int __cdecl fcn_0064e48f(void*, int, int);
@@ -165,7 +165,7 @@ int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);
 void __cdecl init_LoadObjektScene(int);
 void __cdecl init_LoadGebaeudeScene(int);
-void __cdecl fcn_00526920(void*, int, void*);
+void __cdecl d2_EnterBuildingObjekt(void*, int, void*);
 void __cdecl cm_SendCopyEntityData(void*);
 void* __cdecl d2_GetHudThemeResourceId(void);
 void __cdecl fcn_00526db0(void*);
@@ -181,7 +181,7 @@ typedef struct {
 } SyncRect;
 
 /* ADDRESS: GOLDTL 0x005438c0 */
-void __cdecl fcn_005438c0(int a0)
+void __cdecl main_RunGameLoop(int skipBuildingInit)
 {
 	SyncRect r1;
 	SyncRect r2;
@@ -200,7 +200,7 @@ void __cdecl fcn_005438c0(int a0)
 	void* base;
 	void* proc;
 
-	if ((g_7747b0 & 1) && (a0 == 0)) {
+	if ((g_7747b0 & 1) && (skipBuildingInit == 0)) {
 		srv_InitBuildingTypeTable();
 	}
 	g_7e2500 = 0;
@@ -338,7 +338,7 @@ void __cdecl fcn_005438c0(int a0)
 			if (g_7747b0 & 0x40) {
 				ls_LoadNetworkGame(g_7e254a);
 			} else {
-				fcn_005145a0(g_7e21a0);
+				ls_StartNetworkGame(g_7e21a0);
 			}
 			g_7747b4 = 2;
 		}
@@ -422,7 +422,7 @@ void __cdecl fcn_005438c0(int a0)
 				init_LoadGebaeudeScene(*(unsigned char*) base);
 				c = -1;
 			}
-			fcn_00526920(base, c, g_6b5c60);
+			d2_EnterBuildingObjekt(base, c, g_6b5c60);
 		}
 	}
 	for (;;) {
@@ -618,7 +618,7 @@ l_gate:
 			tb_SetCallbackPaused((void*) 0x538060, 0);
 		}
 		if (((g_77494c & 8) != 0) || (g_14cbca0 == -1)) {
-			if (fcn_004e9ee0() != 0) {
+			if (amt_ProcessOfficeElections() != 0) {
 				memset(msg, 0, 0x114);
 				c = 0;
 				for (p = 0x7f4ca4; p < 0x85a0a4; p += 0x21c) {
@@ -647,7 +647,7 @@ l_gate:
 					cm_StepCommandQueue();
 				}
 			} else {
-				fcn_004ea350();
+				amt_SyncAllOfficeSlots();
 			}
 		}
 		if (g_7747b0 & 4) {

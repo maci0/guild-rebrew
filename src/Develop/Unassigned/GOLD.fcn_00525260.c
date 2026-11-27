@@ -58,10 +58,10 @@ extern char* g_f8f080;
 extern Row g_75f280[32];
 extern Obj g_770b80[];
 
-int __cdecl fcn_004741e0(short a, int b, char* s);
+int __cdecl d2_LoadForm(short a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 int __cdecl d2_GetWindowListItem(int h, int a, int b);
-void __cdecl fcn_00475580(int h, int v);
+void __cdecl d2_SetFormVisibility(int h, int v);
 int __cdecl d2_AddWindowImage(int a, int b, int c, int d, int e);
 
 void __cdecl d2_OpenPlayerBar(int unused, char arg)
@@ -73,9 +73,9 @@ void __cdecl d2_OpenPlayerBar(int unused, char arg)
 	if (g_623864 == -1) {
 		g_6f2368 = arg;
 		if (g_6f2f94 == 0) {
-			g_623864 = fcn_004741e0((short) (g_fb9072 - 0x68), 0x106, g_624158);
+			g_623864 = d2_LoadForm((short) (g_fb9072 - 0x68), 0x106, g_624158);
 		} else {
-			g_623864 = fcn_004741e0((short) (g_fb9072 - 0x68), 0x106, g_624144);
+			g_623864 = d2_LoadForm((short) (g_fb9072 - 0x68), 0x106, g_624144);
 		}
 		d2_SetForm(g_623864, 1);
 		owner = g_6ed938;
@@ -91,7 +91,7 @@ void __cdecl d2_OpenPlayerBar(int unused, char arg)
 		((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[owner].step = 0x4e;
 		if (g_623864 != -1) {
 			if (g_623868 != -1) {
-				fcn_00475580(g_623868, 0);
+				d2_SetFormVisibility(g_623868, 0);
 			}
 			d2_SetForm(g_623864, 1);
 			for (i = 0; i < 32; i++) {

@@ -11,7 +11,7 @@ extern char g_868060[];
 #include "client_types.h"
 extern pos14_7f4c00 gm_GameTime;
 
-void __cdecl fcn_005020e0(int, char*);
+void __cdecl gm_UpdateTownSeasonPrices(int, char*);
 
 void __cdecl fcn_005016c0(void)
 {
@@ -21,6 +21,6 @@ void __cdecl fcn_005016c0(void)
 		if (((Rec2f4*)g_868060)[i].used == 0) {
 			break;
 		}
-		fcn_005020e0(i, ((char*)&gm_GameTime));
+		gm_UpdateTownSeasonPrices(i, ((char*)&gm_GameTime));
 	}
 }

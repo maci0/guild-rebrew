@@ -17,7 +17,7 @@ void __cdecl d3_ApplyAnimDelta(char*, char*, int, int, int);
 void __cdecl d3_ReleaseAnim(char*, char);
 int __cdecl d3_GetContextIndex(char*);
 int __cdecl d3_CreateMorphAnimation(char*, char*, int, int, int, int, char*, int);
-int __cdecl fcn_004316c0(char*);
+int __cdecl d3_UpdateObjectAnimPose(char*);
 void __cdecl ReportClientMessage(const char*);
 
 /* Completes a pending animation morph on the character. A finished morph is
@@ -148,7 +148,7 @@ void __cdecl ch_CheckAniMorph(char* obj)
 				if (frame != -1 && cleared != 0) {
 					*(int*) *(char**) (obj + 0x70) = frame;
 					*(int*) (*(char**) (obj + 0x70) + 4) = frame + 1;
-					fcn_004316c0(*(char**) (obj + 0x34));
+					d3_UpdateObjectAnimPose(*(char**) (obj + 0x34));
 				}
 			} else {
 				sprintf(path, g_675548, *(char**) (obj + 0x80));

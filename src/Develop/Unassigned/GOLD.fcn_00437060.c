@@ -1,7 +1,7 @@
 #include "Develop/Units/d3/d3_d3d.h"
 
 /* ADDRESS: GOLD 0x00437060 */
-void __cdecl fcn_00437060(unsigned char mode)
+void __cdecl d3_SetZEnable(unsigned char mode)
 {
 	int value;
 	void* obj;

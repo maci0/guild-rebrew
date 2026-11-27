@@ -38,8 +38,8 @@ void __cdecl fcn_004fdcf0(char*);
 void __cdecl fcn_004fdfe0(char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl ch_UpdateAttachedModelPosition(char*, int);
-void __cdecl fcn_00516550(void);
-void __cdecl fcn_005165b0(void);
+void __cdecl d3_ApplyVegetationTextureSet(void);
+void __cdecl d3_ApplySeasonTextureSet(void);
 void __cdecl d3_UpdateBuildingSlotVisibility(void);
 void __cdecl fcn_00515ef0(void);
 
@@ -100,8 +100,8 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 	g_67a964 = 1.0f;
 	g_6b86d8 = 0x800;
 	if (gm_CheckEntityType((char*) building)) {
-		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, fcn_00516550);
-		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, fcn_005165b0);
+		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, d3_ApplyVegetationTextureSet);
+		d3_TraverseSceneObjects(g_67a370, 0, 0xc0, d3_ApplySeasonTextureSet);
 	}
 	if (*building == 0x1e && queryId == 0xfd) {
 		fcn_004bd150(*(int*) (building + 0x71));

@@ -62,7 +62,7 @@ void __cdecl d3_SetNodePosition(View* v, Vec3* p);
 void __cdecl d3_SetObjectRotation(View* v, Vec3* r);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 
-void __cdecl fcn_0052cf20(Ent* e)
+void __cdecl d3_SnapCameraToEntity(Ent* entity)
 {
 	Vec4 q;
 	Vec3 rot;
@@ -81,7 +81,7 @@ void __cdecl fcn_0052cf20(Ent* e)
 	char* obj;
 	Save* s;
 
-	obj = e->obj;
+	obj = entity->obj;
 	d3_GetObjectVerticalBounds(obj, &lo, &hi);
 	D3DXMatrixTranspose(m, ((View*)d3_ActiveCamera)->mat);
 	a = g_662d40[0] * -600.0f;
@@ -126,6 +126,6 @@ void __cdecl fcn_0052cf20(Ent* e)
 		*(int*) &s->rot.y = *(int*) &rot.y;
 		*(int*) &s->rot.z = *(int*) &rot.z;
 	}
-	g_7e2aa0 = (char*) e;
-	g_7746c0 = e->obj;
+	g_7e2aa0 = (char*) entity;
+	g_7746c0 = entity->obj;
 }

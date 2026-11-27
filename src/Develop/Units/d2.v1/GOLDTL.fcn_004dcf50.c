@@ -40,10 +40,10 @@ float __cdecl fcn_004ff210(int a, int b);
 int __cdecl gm_HasActiveSpecialObject(int a, int b);
 void __cdecl fcn_004f6810(int a, int b);
 void __cdecl cut_FormatProzessPunishment(int a, int b, char* s);
-void __cdecl fcn_004f6850(int a, int b, int c, int d, int e);
+void __cdecl cut_ExecuteProzessPunishment(int a, int b, int c, int d, int e);
 int* __cdecl gm_GetEntityTableEntry(int a);
 void __cdecl gm_IncrementMissionActionCount(int a, int b);
-void __cdecl fcn_004e48b0(void);
+void __cdecl cut_FadeToBlack(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
 void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl msx_StopAmbientTrack(int a);
@@ -762,7 +762,7 @@ int __cdecl cut_RunProzess(int a0)
 			((*(char*) (p38 + 9) == 1) & 1), 0xc8);
 		eIdx = g_774970;
 		if (*(int*) (a0 + 0xc) == *(int*) (0x7f4ca4 + eIdx * 540)) {
-			fcn_004f6850((int) p38, st, (int) p3c, (int) p40, (int) p44);
+			cut_ExecuteProzessPunishment((int) p38, st, (int) p3c, (int) p40, (int) p44);
 		}
 		io_AppendText(0x1531);
 		eIdx = g_774970;
@@ -822,7 +822,7 @@ int __cdecl cut_RunProzess(int a0)
 		}
 	}
 	/* 0x4df09b cleanup ladder */
-	fcn_004e48b0();
+	cut_FadeToBlack();
 	h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-ende.esc", (int) "");
 	cut_WaitForScript(h);
 	h = evt_StartGfxScript((int) "cutscenes\\prozess\\prozess-exit.esc", (int) "");

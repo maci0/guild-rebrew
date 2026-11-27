@@ -5,7 +5,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl gm_CheckZunftPreismanipulation(char*);
-int __cdecl fcn_004eb3e0(int, int*);
+int __cdecl gm_ExecZunftPreismanipulation(int, int*);
 int __cdecl io_AppendText();
 int __cdecl d2_CheckActionBlocker(void*, int);
 int __cdecl fcn_00526120(void*, int);
@@ -87,13 +87,13 @@ void __cdecl fcn_005aa480(void)
 				pb[0] = 3;
 				pb[1] = cur + 1;
 				pb[2] = 1;
-				fcn_004eb3e0((int) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) n]), pb);
+				gm_ExecZunftPreismanipulation((int) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) n]), pb);
 				*(int*) 0x774654 = 1;
 			} else if (n == sel[1]) {
 				pa[0] = 3;
 				pa[1] = cur + 1;
 				pa[2] = -1;
-				fcn_004eb3e0((int) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) &g_774970]), pa);
+				gm_ExecZunftPreismanipulation((int) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) &g_774970]), pa);
 				*(int*) 0x774654 = 1;
 			} else {
 				j = 0;

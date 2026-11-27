@@ -13,17 +13,17 @@ typedef struct {
 	int shown;
 	char pad60[0x2f0 - 0x60];
 	void* link;
-} Ctl_52df40;
+} D2_CTRL_VIEW;
 
 // SIZE 0x21c
 typedef struct {
 	char pad0[0x21c];
-} House_52df40;
+} ENTITY_REC_VIEW;
 
 // SIZE 0x2f4
 typedef struct {
 	char pad0[0x2f4];
-} Dyn_52df40;
+} DYNASTY_REC_VIEW;
 
 extern int g_6a25b8;
 extern int g_6a25bc;
@@ -39,8 +39,8 @@ extern char g_6a2f18[];
 extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
-extern House_52df40 g_7f4ca0[];
-extern Dyn_52df40 g_868060[];
+extern ENTITY_REC_VIEW g_7f4ca0[];
+extern DYNASTY_REC_VIEW g_868060[];
 extern char* gm_CityEntity;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
@@ -61,7 +61,7 @@ unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 
 /* ADDRESS: GOLDTL 0x0052df40 */
-void __cdecl fcn_0052df40(unsigned char* s)
+void __cdecl d2_ShowBuildingInfoPanel(unsigned char* building)
 {
 	char name[128];
 	int pct;
@@ -69,44 +69,44 @@ void __cdecl fcn_0052df40(unsigned char* s)
 	unsigned char* t;
 	unsigned char r;
 
-	pct = gm_GetEntityMood(s);
+	pct = gm_GetEntityMood(building);
 	if (g_6a25b8 != -1) {
 		return;
 	}
 	g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2f40);
 	d2_SetForm(g_6a25b8, 1);
-	if (*s != 0x47) {
-		io_FormatEntityNameMarkup(*(unsigned short*) (s + 0x27), 2, 1, name);
-		if (s[5] != 0) {
-			io_AppendText(g_6a2f30, name, *s * 14 + 0x48e, s + 5);
+	if (*building != 0x47) {
+		io_FormatEntityNameMarkup(*(unsigned short*) (building + 0x27), 2, 1, name);
+		if (building[5] != 0) {
+			io_AppendText(g_6a2f30, name, *building * 14 + 0x48e, building + 5);
 		} else {
-			io_AppendText(g_6a2f24, name, *s * 14 + 0x48e);
+			io_AppendText(g_6a2f24, name, *building * 14 + 0x48e);
 		}
 	} else {
-		io_AppendText(g_6a2f24, 0x870, &g_868060[*(int*) (s + 0x65)]);
+		io_AppendText(g_6a2f24, 0x870, &g_868060[*(int*) (building + 0x65)]);
 	}
 	d2_SetForm(g_6a25b8, 0);
-	g_6a25bc = d2_AddElementToWindow((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1, 0x48, *s + 0x427, d2_CurrentWindowId);
-	((Ctl_52df40*)g_1015ea0)[g_6a25bc].shown = 1;
-	if (*(unsigned short*) (s + 0x27) != 0xffff && *(unsigned short*) (s + 0x27) != *(unsigned short*) gm_CityEntity) {
-		((Ctl_52df40*)g_1015ea0)[g_6a25bc].link = &g_7f4ca0[*(unsigned short*) (s + 0x27)];
+	g_6a25bc = d2_AddElementToWindow((((D2_WIN*) g_1015f40)[d2_CurrentWindowId].width - 0x30) >> 1, 0x48, *building + 0x427, d2_CurrentWindowId);
+	((D2_CTRL_VIEW*)g_1015ea0)[g_6a25bc].shown = 1;
+	if (*(unsigned short*) (building + 0x27) != 0xffff && *(unsigned short*) (building + 0x27) != *(unsigned short*) gm_CityEntity) {
+		((D2_CTRL_VIEW*)g_1015ea0)[g_6a25bc].link = &g_7f4ca0[*(unsigned short*) (building + 0x27)];
 	}
-	if (*s == 0x47 || *s == 0x1d || *s == 0x57) {
+	if (*building == 0x47 || *building == 0x1d || *building == 0x57) {
 		d2_CurrentValueBar = -1;
 	} else {
 		d2_CurrentValueBar = fcn_004677e0(0x15, 0x7b, 0x38, 0, 0x64, 0x75, 0x442, d2_CurrentWindowId);
 		d2_SetElementValue(d2_CurrentValueBar, 0, 0x64, pct);
 	}
-	if ((s[0x5a] & 1) != 0 || *s == 0x47 || *s == 0x1d || *s == 0x57) {
+	if ((building[0x5a] & 1) != 0 || *building == 0x47 || *building == 0x1d || *building == 0x57) {
 		g_6a25ec = -1;
 		g_6a25e4 = -1;
 		g_6a25c4[0] = -1;
 		return;
 	}
-	kind = gm_GetBuildingTypeCategory(*s);
-	t = (unsigned char*) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*s];
-	r = fcn_00506380(g_774970, s, 0, 0);
-	if (*(unsigned short*) (s + 0x27) == g_774970 || *(unsigned short*) (s + 0x25) == g_774970 || (r & 0x10) != 0) {
+	kind = gm_GetBuildingTypeCategory(*building);
+	t = (unsigned char*) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*building];
+	r = fcn_00506380(g_774970, building, 0, 0);
+	if (*(unsigned short*) (building + 0x27) == g_774970 || *(unsigned short*) (building + 0x25) == g_774970 || (r & 0x10) != 0) {
 		g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0cc);
 	} else {
 		g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0d4);

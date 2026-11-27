@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0041f2b0 */
-void __cdecl fcn_0041f2b0(unsigned int* destination, unsigned int* source)
+void __cdecl d3_UpsampleSurface16(unsigned int* destination, unsigned int* source)
 {
 	unsigned int bits;
 	unsigned int rs;

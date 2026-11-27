@@ -34,10 +34,10 @@ void __cdecl fcn_00533880(void);
 void __cdecl fcn_005338a0(void);
 void __cdecl fcn_005c80c0(void);
 void __cdecl fcn_004bbd20(void);
-void __cdecl fcn_0040bdc0(void);
+void __cdecl ch_ResetGridAndUniverseCache(void);
 void __cdecl d2_ResetBookmarkSlots(void);
-void __cdecl fcn_00510900(void);
-void __cdecl fcn_004e71a0(void);
+void __cdecl d3_ResetSceneContextIndices(void);
+void __cdecl cut_InitCutsceneRegistry(void);
 
 void __cdecl gm_InitGameSession(void)
 {
@@ -75,8 +75,8 @@ void __cdecl gm_InitGameSession(void)
 	(*(int*)&g_7746c8) = 0;
 	fcn_005c80c0();
 	fcn_004bbd20();
-	fcn_0040bdc0();
+	ch_ResetGridAndUniverseCache();
 	d2_ResetBookmarkSlots();
-	fcn_00510900();
-	fcn_004e71a0();
+	d3_ResetSceneContextIndices();
+	cut_InitCutsceneRegistry();
 }

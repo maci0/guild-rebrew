@@ -6,7 +6,7 @@ extern char g_679060[];
 int __cdecl d2_ShowPrivilegMessage(void*, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-int __cdecl fcn_004f75f0(unsigned char* entity, int* request)
+int __cdecl gm_CheckPrivRank3Building(unsigned char* entity, int* request)
 {
 	char buf[0x100];
 

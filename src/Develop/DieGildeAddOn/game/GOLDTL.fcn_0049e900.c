@@ -21,7 +21,7 @@ extern float g_6628a8;
 extern unsigned short __cdecl gm_RandomMod(int);
 extern char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 extern char* __cdecl he_fn_Handlung(void);
-extern int __cdecl fcn_0050d6d0(char*, short*, int, int*);
+extern int __cdecl gm_GenerateLoanOffers(char*, short*, int, int*);
 extern int __cdecl gm_GetLawEntry(int, int*);
 
 /* ADDRESS: GOLDTL 0x0049e900 */
@@ -93,7 +93,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 			if (i == 0)
 				return 0;
 		}
-		n = fcn_0050d6d0(e2, target, 3, rec);
+		n = gm_GenerateLoanOffers(e2, target, 3, rec);
 		if (n <= 0)
 			return 0;
 		gm_GetLawEntry(0xe, msg);
@@ -132,7 +132,7 @@ int __cdecl ai_StartKreditNehmen(int code, short* target, char* ent, char* out1,
 		if (i == 0)
 			return 0;
 	}
-	n = fcn_0050d6d0(e2, target, 3, rec);
+	n = gm_GenerateLoanOffers(e2, target, 3, rec);
 	if (n <= 0)
 		return 0;
 	gm_GetLawEntry(0xe, msg);

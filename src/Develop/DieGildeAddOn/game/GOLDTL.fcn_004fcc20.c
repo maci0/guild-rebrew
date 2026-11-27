@@ -14,7 +14,7 @@ float __cdecl fcn_004ff210(int a, int b);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a1, int a2, char a3, int a4);
 
 /* ADDRESS: GOLDTL 0x004fcc20 */
-void __cdecl fcn_004fcc20(void)
+void __cdecl gm_UpdateBuildingSubsidies(void)
 {
 	int handle;
 	char buf[0x24];

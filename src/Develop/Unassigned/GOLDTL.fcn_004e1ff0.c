@@ -5,7 +5,7 @@ extern char g_68d00c[];
 extern char g_6b5c60[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004e48b0(void);
+void __cdecl cut_FadeToBlack(void);
 void __cdecl sb_StopVoice(int, int);
 void __cdecl fcn_004230e0(int);
 void __cdecl d2_DestroyForm(int);
@@ -17,7 +17,7 @@ void __cdecl msx_RestoreMusicIfAllowed(void);
 
 int __cdecl cut_ReleaseSceneContexts(int* scene)
 {
-	fcn_004e48b0();
+	cut_FadeToBlack();
 	if (scene[3] != 0)
 		sb_StopVoice(scene[3], 0);
 	scene[3] = 0;

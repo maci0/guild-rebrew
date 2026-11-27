@@ -64,7 +64,7 @@ int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d);
 int __cdecl fcn_00506380(int a, int b, void* c, int d);
 void __cdecl gm_ChangeBuildingRoom(int n, int v);
 void __cdecl fcn_00475220(char* a);
-void __cdecl fcn_00526920(int a, int b, int c);
+void __cdecl d2_EnterBuildingObjekt(int a, int b, int c);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strupr(char*);
 
@@ -228,7 +228,7 @@ label_527db2:
 								if (!(fcn_00506380(g_774970,
 									(int) g_7746c8, v8, 0) & 0x4000))
 									goto done;
-								fcn_00526920((int) g_7746c8,
+								d2_EnterBuildingObjekt((int) g_7746c8,
 									*(int*) ((char*) v8 + 2), (int) g_6b5c60);
 								goto done;
 							}

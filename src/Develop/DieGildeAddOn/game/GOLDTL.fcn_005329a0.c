@@ -45,7 +45,7 @@ char __cdecl fcn_00443e10(void*, int*);
 void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
 Unit* __cdecl gm_NextEntityQueryMatch(void);
 
-void __cdecl fcn_005329a0(void)
+void __cdecl d2_DrawBuildingItemLabels(void)
 {
 	int r[4];
 	int home;

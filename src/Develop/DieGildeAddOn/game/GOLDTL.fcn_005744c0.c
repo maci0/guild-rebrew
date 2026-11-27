@@ -22,7 +22,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_RemoveSubTreeFromCellTree(int, int);
 void __cdecl fcn_004550e0(int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-void __cdecl fcn_004bd4e0(int, int);
+void __cdecl rd_ConnectBuildingToSupermap(int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
@@ -40,10 +40,10 @@ int __cdecl gm_CompareGameTime(int*, int*);
 int __cdecl gm_GetSeason(int);
 void __cdecl fcn_005015e0(void*, int, int, int);
 int __cdecl fcn_00509570(int);
-int __cdecl fcn_0050cad0(int*, int*);
+int __cdecl gm_CalcWorkMinutesBetween(int*, int*);
 int __cdecl gm_CreditCityTreasury(int);
 int __cdecl d3_BindEntitySceneObject(int, void*, int);
-void __cdecl fcn_005165b0(int);
+void __cdecl d3_ApplySeasonTextureSet(int);
 void __cdecl fcn_0052d9d0(void*);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(int);
@@ -301,7 +301,7 @@ LfailB:
 		return;
 
 	case 9:
-		v8 = fcn_0050cad0((void*) (buildAction + 0x60), (void*) &gm_GameTime);
+		v8 = gm_CalcWorkMinutesBetween((void*) (buildAction + 0x60), (void*) &gm_GameTime);
 		v36 = v8 + *(int*) (buildAction + 0xb4);
 		if (v36 < *(int*) (buildAction + 0xc0)) {
 			gm_AddTime((void*) (buildAction + 0x52), 0, 0x1e, 0);
@@ -391,7 +391,7 @@ LfailB:
 				else if (v8 == 3) {
 					g_773dd4 = (char) v8;
 				}
-				fcn_005165b0(*(int*) (v15 + 0x61));
+				d3_ApplySeasonTextureSet(*(int*) (v15 + 0x61));
 			}
 			if (g_773dd8) {
 				fcn_004550e0(*(int*) (v15 + 0x61), g_773dd8);
@@ -416,7 +416,7 @@ LfailB:
 					}
 				}
 			}
-			fcn_004bd4e0(*(int*) (v15 + 0x61), *(unsigned char*) v15);
+			rd_ConnectBuildingToSupermap(*(int*) (v15 + 0x61), *(unsigned char*) v15);
 			if (*(unsigned char*) (buildAction + 0x78) & 2) {
 				cm_RequestChangeBits(*(int*) (v15 + 1), 0x5a, 2, 0, 1);
 				if (*(unsigned char*) v15 >= 4 && *(unsigned char*) v15 <= 7) {

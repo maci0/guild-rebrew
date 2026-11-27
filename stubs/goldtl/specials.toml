@@ -356,3 +356,9 @@ impl = "char g_869480[0x300][0x300] = {0};"
 
 [specials.g_90e0a0]
 impl = "char g_90e0a0[0x300][0x300] = {0};"
+
+[specials.g_office_role_templates]
+impl = ""
+
+[specials.g_office_float_table]
+impl = ""

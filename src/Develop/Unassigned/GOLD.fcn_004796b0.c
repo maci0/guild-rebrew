@@ -4,7 +4,7 @@ int __cdecl d2_LockSurface(void* surface);
 int __cdecl fcn_004790d0(void* surface);
 
 /* ADDRESS: GOLD 0x004796b0 */
-int __cdecl fcn_004796b0(char* surface)
+int __cdecl d2_ClearSurface(char* surface)
 {
 	unsigned int effects[25];
 	int saved;

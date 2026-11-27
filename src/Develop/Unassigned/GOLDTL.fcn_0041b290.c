@@ -7,15 +7,15 @@ extern unsigned int g_6b5de8;
 
 int __cdecl io_OpenRegistryKey(const char* sub, int mode);
 int __cdecl io_ReadRegistryString(int, const char*, char*);
-char __cdecl fcn_0041b3a0(char*, unsigned long*);
-char __cdecl fcn_0041b470(char*, int*);
+char __cdecl d3_ParseGuid(char*, unsigned long*);
+char __cdecl d3_ParseDisplayMode(char*, int*);
 void __cdecl fcn_00410430(int);
 
 
 /* Reads the saved display adapter and mode from the registry; returns 1
  * when both are still available. */
 /* ADDRESS: GOLDTL 0x0041b290 */
-char __cdecl fcn_0041b290(unsigned int* adapter, int* mode)
+char __cdecl d3_LoadSavedDisplayConfig(unsigned int* adapter, int* mode)
 {
 	int h;
 	unsigned int i;
@@ -28,11 +28,11 @@ char __cdecl fcn_0041b290(unsigned int* adapter, int* mode)
 	*adapter = 0xffffffff;
 	h = io_OpenRegistryKey("d8_vesa", 1);
 	if (h != -1) {
-		if (io_ReadRegistryString(h, "d8_Guid", buf) && fcn_0041b3a0(buf, guid)) {
+		if (io_ReadRegistryString(h, "d8_Guid", buf) && d3_ParseGuid(buf, guid)) {
 			for (i = 0; i < g_6b5de8; i++) {
 				if (memcmp(guid, g_6b5dd0[i].guid, sizeof(guid)) == 0) {
 					*adapter = i;
-					if (io_ReadRegistryString(h, "d8_Mode", buf) && fcn_0041b470(buf, mode)) {
+					if (io_ReadRegistryString(h, "d8_Mode", buf) && d3_ParseDisplayMode(buf, mode)) {
 						found = 1;
 					}
 				}

@@ -1,7 +1,7 @@
 #include <string.h>
 #include "Develop/Units/d3/d3_d3d.h"
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_004475f0(char*);
+void __cdecl d3_InitSceneContext(char*);
 void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl d3_SetActiveCamera(char*);
@@ -113,7 +113,7 @@ char __cdecl d3_SelectSceneContext(int index, char force)
         }
         next = (char*)0xfd7ba0 + index * 0x3e0;
         if (I32(next + 0x80) == 0) {
-            fcn_004475f0(next);
+            d3_InitSceneContext(next);
         }
         I32(0xfb98f4) = I32(next + 0xa4);
         I32(0xfc28f4) = I32(next + 0x84);

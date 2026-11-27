@@ -5,25 +5,25 @@
 
 #include <string.h>
 
-char __cdecl fcn_00511730(char* o)
+char __cdecl d3_MarkGebaeudeGateFlagsCb(char* sceneObj)
 {
-	unsigned char* t;
+	unsigned char* proto;
 
-	if (strncmp(o, "gb_", 3) == 0) {
-		t = 0;
-		if (o[0x4b] == 2) {
-			t = g_7e3f30 + (*(int*) (o + 0x48) & 0xffffff) * 0x24d;
+	if (strncmp(sceneObj, "gb_", 3) == 0) {
+		proto = 0;
+		if (sceneObj[0x4b] == 2) {
+			proto = g_7e3f30 + (*(int*) (sceneObj + 0x48) & 0xffffff) * 0x24d;
 		}
-		if (t == 0) {
-			if (strstr(o, "_TOR_") == 0) {
-				o[0x212] = (o[0x212] & 0xf7) | 4;
+		if (proto == 0) {
+			if (strstr(sceneObj, "_TOR_") == 0) {
+				sceneObj[0x212] = (sceneObj[0x212] & 0xf7) | 4;
 				return 1;
 			}
-		} else if (*t != 0x1f) {
-			o[0x212] = (o[0x212] & 0xf7) | 4;
+		} else if (*proto != 0x1f) {
+			sceneObj[0x212] = (sceneObj[0x212] & 0xf7) | 4;
 			return 1;
 		} else {
-			o[0x212] |= 0xc;
+			sceneObj[0x212] |= 0xc;
 		}
 	}
 	return 1;

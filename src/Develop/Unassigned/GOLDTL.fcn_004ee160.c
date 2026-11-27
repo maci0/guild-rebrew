@@ -1,6 +1,6 @@
 char* __cdecl ahm_GetWorkshopOwner(char*);
 float __cdecl ahm_GetEssenceValue(char*, int);
-char* __cdecl fcn_004ecbe0(int);
+char* __cdecl ahm_FindRecipePrototypeByKey(int);
 
 /* ADDRESS: GOLDTL 0x004ee160 */
 int __cdecl fcn_004ee160(char* a0)
@@ -29,7 +29,7 @@ int __cdecl fcn_004ee160(char* a0)
 	r = ahm_GetEssenceValue(p, 3);
 	total = r * r + total;
 	for (p2 = e + 0x10, n = 6; n != 0; n--, p2 += 8) {
-		q = fcn_004ecbe0(*(int*) (p2 - 4));
+		q = ahm_FindRecipePrototypeByKey(*(int*) (p2 - 4));
 		if (q != 0) {
 			sum += *(float*) (q + 4) + *(float*) p2;
 		}

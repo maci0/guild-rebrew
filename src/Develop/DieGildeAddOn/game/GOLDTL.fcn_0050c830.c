@@ -37,7 +37,7 @@ void __cdecl sim_SetSyncParams(int target, unsigned char type_id, unsigned int f
  * minute-of-day is scaled, the remainder is distributed over the days
  * between the records, and the end record's minute-of-day is scaled too. */
 /* ADDRESS: GOLDTL 0x0050c830 */
-int __cdecl fcn_0050c830(Time* start, Time* end, char* building)
+int __cdecl gm_CalcElapsedWorkMinutes(Time* start, Time* end, char* building)
 {
 	float f1;
 	float f2;

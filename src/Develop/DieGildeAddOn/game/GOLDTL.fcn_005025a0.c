@@ -14,7 +14,7 @@ float __cdecl eval_ObjektPreis2Credits(int id, int arg);
 /* Slot price of one season slot: stock against the slot's base rate, clamped
  * to 0.25..5 and moved 0.4 of the way from the slot's last price. */
 /* ADDRESS: GOLDTL 0x005025a0 */
-float __cdecl fcn_005025a0(int season, int slot)
+float __cdecl gm_CalcMarketSlotPrice(int season, int slot)
 {
 	char* def;
 	char* store;

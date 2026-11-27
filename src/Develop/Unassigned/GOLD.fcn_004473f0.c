@@ -2,15 +2,15 @@ extern char g_fc2700[];
 extern char* g_fc28f4;
 extern int g_6b8300;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-void __cdecl fcn_0043c7a0(void*);
-void __cdecl fcn_00455750(void*);
+void __cdecl d3_DisposeObject(void*);
+void __cdecl d3_DestroyEffect(void*);
 void __cdecl d3_DestroyFloor(void*);
 void __cdecl fcn_0045da90(void*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_00448910(void);
 
 /* ADDRESS: GOLD 0x004473f0 */
-void __cdecl fcn_004473f0(void)
+void __cdecl d3_ClearScene(void)
 {
 	unsigned int* p;
 	char* copyDst;
@@ -18,9 +18,9 @@ void __cdecl fcn_004473f0(void)
 	int offset;
 
 	while (*(void**) 0xfc52f0 != (void*) g_fc2700)
-		fcn_0043c7a0(*(void**) 0xfc52f0);
+		d3_DisposeObject(*(void**) 0xfc52f0);
 	while (*(void**) 0xfb98f4 != (void*) 0xfb9280)
-		fcn_00455750(*(void**) 0xfb98f4);
+		d3_DestroyEffect(*(void**) 0xfb98f4);
 	if (g_6b8300 != 0) {
 		d3_DestroyFloor((void*) g_6b8300);
 		g_6b8300 = 0;

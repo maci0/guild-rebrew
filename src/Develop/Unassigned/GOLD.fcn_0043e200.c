@@ -1,16 +1,16 @@
 void __cdecl d3_ClearViewport(void*);
 void __cdecl d3_ClearSoftwareViewport(void*, unsigned char, unsigned char, unsigned char);
-float __cdecl fcn_00446990(void*, void*, void*);
+float __cdecl d3_CalcFloorFogDistance(void*, void*, void*);
 void __cdecl d3_SetFogRange(float, float);
-void __cdecl fcn_004439e0(void*, int);
-void __cdecl fcn_0045c9e0(void);
+void __cdecl d3_RenderFloor(void*, int);
+void __cdecl d3_CollectFlaggedObjects(void);
 char __cdecl d3_VisitSceneObjectsUntilStopped(char*, char*, unsigned int, char (__cdecl*)(char*, void*), void*);
-char __cdecl fcn_0043a160(char*, void*);
-char __cdecl fcn_004550d0(char*, void*);
-void __cdecl fcn_00455a80(char*);
+char __cdecl d3_RenderSceneObject(char*, void*);
+char __cdecl d3_RenderMirroredObject(char*, void*);
+void __cdecl d3_UpdateAndRenderEffect(char*);
 void __cdecl fcn_0045d4f0(void*);
 void __cdecl fcn_00452e00(void);
-void __cdecl fcn_0043b600(void); extern float g_5ebaa4;
+void __cdecl d3_FlushRenderQueues(void); extern float g_5ebaa4;
 #include "client_lighting.h"
 #include "Develop/Units/d3/d3_camera.h"
 /* ADDRESS: GOLD 0x0043e200 */
@@ -44,7 +44,7 @@ void __cdecl d3_RenderScene(unsigned int pass, int overlay)
     if ((void*) g_6b8300) {
         if (*(unsigned char*) 0x6334a4 && *(unsigned char*) 0x6334a5) {
             object = d3_ActiveCamera;
-            distance = fcn_00446990((void*) g_6b8300, object + 0x4c, object + 0x18c);
+            distance = d3_CalcFloorFogDistance((void*) g_6b8300, object + 0x4c, object + 0x18c);
             if (distance < *(float*) 0xfc5340) {
                 density = (1.0f - (*(float*) 0xfc5340 - distance) / *(float*) 0xfc5340)
                     * *(float*) 0xfc29bc;
@@ -52,21 +52,21 @@ void __cdecl d3_RenderScene(unsigned int pass, int overlay)
             } else
                 d3_SetFogRange(*(float*) 0xfc29bc, *(float*) 0xfc5340);
         }
-        fcn_004439e0((void*) g_6b8300, overlay);
+        d3_RenderFloor((void*) g_6b8300, overlay);
     }
     *(int*) 0x63344c = 0;
-    fcn_0045c9e0();
+    d3_CollectFlaggedObjects();
     *(int*) 0x633498 = 0;
     *(int*) 0x633494 = 0;
-    d3_VisitSceneObjectsUntilStopped(*(char**) 0x5fb5b0, 0, pass, fcn_0043a160, 0);
+    d3_VisitSceneObjectsUntilStopped(*(char**) 0x5fb5b0, 0, pass, d3_RenderSceneObject, 0);
     object = *(char**) 0x633448;
     if (*(int*) (*(char**) (object + 0x1ec) + 0x100) > 0 &&
         (*(unsigned char*) 0xfe7671 & 7))
-        fcn_0043a160(object, 0);
+        d3_RenderSceneObject(object, 0);
     p = *(char**) 0xfb98f4;
     while (p != (char*) 0xfb9280) {
         next = *(char**) (p + 0x314);
-        fcn_00455a80(p);
+        d3_UpdateAndRenderEffect(p);
         p = next;
     }
     if (*(void**) 0x633dd4)
@@ -75,7 +75,7 @@ void __cdecl d3_RenderScene(unsigned int pass, int overlay)
         fcn_00452e00();
     if ((*(unsigned char*) 0xfe7670 & 0x40) && *(int*) 0x63344c &&
         *(int*) 0xfb9904 && *(int*) 0xfb9908 && (*(unsigned char*) 0xfb9928 & 1))
-        d3_VisitSceneObjectsUntilStopped(*(char**) 0x5fb5b0, 0, pass, fcn_004550d0, (void*) 0xfb9900);
+        d3_VisitSceneObjectsUntilStopped(*(char**) 0x5fb5b0, 0, pass, d3_RenderMirroredObject, (void*) 0xfb9900);
     if (*(float*) 0xfc5344 == g_5ebaa4)
         *(float*) 0xfc5344 = 0.0f;
     *(int*) 0x633470 = *(int*) 0xfc2dcc;
@@ -84,7 +84,7 @@ void __cdecl d3_RenderScene(unsigned int pass, int overlay)
     *(int*) 0x633484 = *(int*) 0xfc2dc4;
     object = *(char**) (*(char**) 0x633448 + 0x1cc);
     *(int*) 0x633478 = *(int*) (object + 0xc);
-    fcn_0043b600();
+    d3_FlushRenderQueues();
     *(int*) 0x63347c = *(int*) 0xfe75b4;
     *(int*) 0x633480 = *(int*) 0xfc2dc0;
     --g_6b86d4;

@@ -1,10 +1,10 @@
 #include "Develop/Units/d3/d3_d3d.h"
 
 /* ADDRESS: GOLD 0x004360e0 */
-void __cdecl fcn_004360e0(void* a0)
+void __cdecl d3_PrecacheTexture(void* texture)
 {
-	if (a0 != 0) {
-		d3d_LastResult = ((int (__stdcall*)(void*, int, void*)) (*(int**) d3d_Device)[0x98 / 4])(d3d_Device, 0, a0);
+	if (texture != 0) {
+		d3d_LastResult = ((int (__stdcall*)(void*, int, void*)) (*(int**) d3d_Device)[0x98 / 4])(d3d_Device, 0, texture);
 		if (d3d_LastResult != 0) {
 			d3d_LogResultError((char*) 0x5f944c, 0x167, (char*) 0x5f9640);
 		}

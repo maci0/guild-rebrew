@@ -36,7 +36,7 @@ extern int g_6b8af0;
 void __cdecl fcn_0045fbb0(SCENE_RESOURCE* resource);
 SCENE_RESOURCE* __cdecl fcn_004605b0(const char* name, unsigned int style,
     unsigned char flags, unsigned char control);
-void __cdecl fcn_004481e0(SCENE_RESOURCE* resource);
+void __cdecl d3_ReleaseSceneResource(SCENE_RESOURCE* resource);
 void __cdecl fcn_0045d9e0(char* owner, const char* name);
 void __cdecl fcn_00460210(char* name, SCENE_RESOURCE* resource);
 void __cdecl fcn_00460e40(SCENE_RESOURCE* resource, int selector);

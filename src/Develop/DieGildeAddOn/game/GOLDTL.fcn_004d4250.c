@@ -4,7 +4,7 @@ extern float g_664330;
 char* __cdecl gm_GetEquippedCombatGear(char*);
 unsigned short* __cdecl gm_FindEntityActiveItem(char*);
 char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
-unsigned char* __cdecl fcn_004d2f70(char*);
+unsigned char* __cdecl cut_FindCombatTarget(char*);
 int __cdecl fcn_004d3330(char*, int, int, int, unsigned int*, unsigned int*);
 int __cdecl cut_AssignTargetOrder(char*, char*, char*, int, int);
 char* __cdecl d3_FindNearestEnemyWare(char*);
@@ -43,7 +43,7 @@ void __cdecl cut_AssignCombatUnitOrder(char* rec, char* e)
 					}
 				}
 			} else {
-				obj = (char*) fcn_004d2f70(e);
+				obj = (char*) cut_FindCombatTarget(e);
 				if (obj != 0) {
 					cut_AssignTargetOrder(rec, e, obj, 0, 0);
 					return;

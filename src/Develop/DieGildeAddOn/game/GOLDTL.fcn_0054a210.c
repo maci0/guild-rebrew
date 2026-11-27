@@ -32,7 +32,7 @@ void __cdecl cm_RequestJoinLeaveElection(int*);
 void __cdecl cm_SendTraceEnd(char*);
 
 /* ADDRESS: GOLDTL 0x0054a210 */
-void __cdecl fcn_0054a210(char* a0)
+void __cdecl he_RunElectionCampaign(char* action)
 {
     char* o;
     char* sel;
@@ -41,7 +41,7 @@ void __cdecl fcn_0054a210(char* a0)
     int none;
     int loc[3];
 
-    o = a0;
+    o = action;
     none = -1;
     if (*(int*) (o + 0x70) == none || *(int*) (o + 0x70) == -2) {
         he_FreeAction(o);
@@ -55,23 +55,23 @@ void __cdecl fcn_0054a210(char* a0)
         return;
     }
     *(int*) (o + 0x84) = none;
-    gm_ResolveEntityById(&a0, 0, 0, *(int*) (o + 0xac));
-    if (a0 == 0) {
+    gm_ResolveEntityById(&action, 0, 0, *(int*) (o + 0xac));
+    if (action == 0) {
         gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
         cm_SendSetHE(none, o);
         return;
     }
-    sel = fcn_00502cd0(*(int*) (a0 + 0x5d), 2, 6, 0, 0x12d);
+    sel = fcn_00502cd0(*(int*) (action + 0x5d), 2, 6, 0, 0x12d);
     if (sel == 0) {
         gm_AddTime((pos14_7f4c00*) (o + 0x52), 0, 5, 0);
         cm_SendSetHE(none, o);
         return;
     }
-    if (*(unsigned short*) (a0 + 0x27) != 0xffff) {
-        rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (a0 + 0x27)]);
+    if (*(unsigned short*) (action + 0x27) != 0xffff) {
+        rec = ((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (action + 0x27)]);
         if (rec != 0 && rec != (char*) gm_CityEntity && *(char*)&((ENTITY_RECORD_VIEW*)rec)->health != 0 && *(char*)&((ENTITY_RECORD_VIEW*)rec)->entity_type != 0xf) {
             if (*(int*) (o + 0xc0) == 1) {
-                gm_HandleAllianceCommand(0x6e657720, a0, sel, -1);
+                gm_HandleAllianceCommand(0x6e657720, action, sel, -1);
                 *(int*) (o + 0xc0) = *(int*) (o + 0xc0) - 1;
                 *(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 
@@ -94,7 +94,7 @@ void __cdecl fcn_0054a210(char* a0)
                     cm_SendSetHE(0, o);
                     return;
                 }
-                gm_HandleAllianceCommand(0x65786563, a0, sel, -1);
+                gm_HandleAllianceCommand(0x65786563, action, sel, -1);
                 *(pos14_7f4c00*) (o + 0x52) = gm_GameTime;
 
 
@@ -115,7 +115,7 @@ void __cdecl fcn_0054a210(char* a0)
     if (*(int*) (o + 0xc0) == 0) {
         loc[0] = 0x636c6572;
         loc[1] = none;
-        loc[2] = *(int*) (a0 + 1);
+        loc[2] = *(int*) (action + 1);
         cm_SendLogAction(g_6a5998);
         cm_RequestJoinLeaveElection(loc);
         cm_SendTraceEnd(g_6a5998);

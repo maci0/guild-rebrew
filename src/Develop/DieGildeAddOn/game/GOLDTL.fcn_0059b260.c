@@ -44,7 +44,7 @@ void __cdecl d2_RunProduktionDialog(int);
 void __cdecl fcn_00594de0(int, int, int, char*);
 int __cdecl fcn_00595e20(int, int);
 void __cdecl fcn_005963f0(int, int, int, int);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl cm_SendCopyEntityData(char*);
@@ -175,7 +175,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 							} while (q < (char*) 0x7e35d0);
 						} else {
 							if (i == 0) {
-								fcn_004c35f0();
+								d3snd_PlayWorkerOrderVoice();
 								p = he_StartHandlungSearch(2, 0, 9, 3, *(int*) (building + 1));
 								if (p == 0) {
 									memset(&msg, 0, 0xf8);
@@ -202,7 +202,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 								}
 							}
 							else {
-								fcn_004c35f0();
+								d3snd_PlayWorkerOrderVoice();
 								p = he_StartHandlungSearch(2, 0, 8, 3, *(int*) (building + 1));
 								while (p != 0) {
 									if (*(unsigned short*) (p + 0xac) == *(int*) e) {

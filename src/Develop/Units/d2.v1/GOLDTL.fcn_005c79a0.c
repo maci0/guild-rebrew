@@ -83,7 +83,7 @@ void __cdecl d2_DestroyForm(int);
 void __cdecl fcn_00472640(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl CountDisplayCounters(void);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 int __cdecl cm_SendCopyEntityData(Packet*);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl he_fn_Handlung(void);
@@ -275,7 +275,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 						fcn_00526120((char*) g_14abc44, 0);
 					}
 					else {
-						fcn_004c35f0();
+						d3snd_PlayWorkerOrderVoice();
 						sv_ClearObjectSelection();
 						if (sum > 3) {
 							io_FormatTextBuffer(buf, 0x1a4a, 3);

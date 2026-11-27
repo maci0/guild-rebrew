@@ -35,7 +35,7 @@ extern unsigned char* g_772fe4;
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
-int __cdecl fcn_004edcd0(char* text);
+int __cdecl ahm_FindObjektByObName(char* text);
 
 /* ADDRESS: GOLDTL 0x004ed240 */
 unsigned int __cdecl fcn_004ed240(void)
@@ -94,7 +94,7 @@ unsigned int __cdecl fcn_004ed240(void)
 
 			g_772fdc[i * 0xc + 4] = (unsigned char) v;
 			GetPrivateProfileStringA(app, s_68df44, s_68df4c, out, 0x100, path);
-			*(int*) (g_772fdc + i * 0xc + 8) = fcn_004edcd0(out);
+			*(int*) (g_772fdc + i * 0xc + 8) = ahm_FindObjektByObName(out);
 
 		}
 
@@ -158,7 +158,7 @@ clamp_low2:
 		}
 		*(float*) (g_772fe4 + i * 0xc + 8) = (float) f;
 		GetPrivateProfileStringA(app, s_68dee0, s_68df4c, out, 0x100, path);
-		*(int*) (g_772fe4 + i * 0xc) = fcn_004edcd0(out);
+		*(int*) (g_772fe4 + i * 0xc) = ahm_FindObjektByObName(out);
 
 	}
 	return 1;

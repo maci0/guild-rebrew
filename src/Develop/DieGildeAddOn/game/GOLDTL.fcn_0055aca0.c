@@ -38,7 +38,7 @@ void __cdecl amt_PurchaseOfficeApplication(int, int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP *, int, int, int);
 int __cdecl cm_SendSetHE(int, Ent *);
 int __cdecl amt_FindHighestOccupiedOffice(int);
-int __cdecl fcn_004e9730(int);
+int __cdecl amt_SpawnOfficeCandidate(int);
 short __cdecl gm_RandomMod(int);
 
 void __cdecl he_RunDailyCouncilEvent(Ent *e)
@@ -82,8 +82,8 @@ void __cdecl he_RunDailyCouncilEvent(Ent *e)
 			e->wait = cm_SendSetHE(0, e);
 			return;
 		}
-		e->b4 = fcn_004e9730(e->ac);
-		e->b8 = gm_RandomMod(3) ? fcn_004e9730(e->ac) : -1;
+		e->b4 = amt_SpawnOfficeCandidate(e->ac);
+		e->b8 = gm_RandomMod(3) ? amt_SpawnOfficeCandidate(e->ac) : -1;
 		break;
 	case 1:
 		n = 0;

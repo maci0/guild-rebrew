@@ -32,7 +32,7 @@ char* __cdecl d3_FindSceneObject(char* o, int flags, char* ptr, char* name);
 char __cdecl fcn_0045b990(char* map, float* pos, int* x, int* y, int* z);
 char __cdecl d3_MatchObjectByNameAndPos(char* e, char* obj);
 /* ADDRESS: GOLDTL 0x004bd4e0 */
-int __cdecl fcn_004bd4e0(int sceneObjectArg, int typeIdArg)
+int __cdecl rd_ConnectBuildingToSupermap(int sceneObjectArg, int typeIdArg)
 {
 	char name[0x40];
 	char ctx[0x54];

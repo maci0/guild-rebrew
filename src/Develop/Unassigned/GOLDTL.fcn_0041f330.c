@@ -2,7 +2,7 @@
 
 char* __cdecl FindVideoById(int);
 
-int __cdecl fcn_0041f330(int id)
+int __cdecl GetVideoWindow(int id)
 {
 	char* p;
 

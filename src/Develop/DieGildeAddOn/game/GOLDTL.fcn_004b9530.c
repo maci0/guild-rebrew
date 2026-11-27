@@ -40,7 +40,7 @@ int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
-int __cdecl fcn_004b9530(Cmd* cmd)
+int __cdecl gm_HandleMsg24FineWorkshop(Cmd* cmd)
 {
 	char* shop;
 	char* work;

@@ -6,7 +6,7 @@ extern char g_679060[];
 int __cdecl d2_ShowExpelWorkersDialog(unsigned char* a1, int* a2);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-int __cdecl fcn_004fa530(unsigned char* entity, int* context)
+int __cdecl he_HandleExpelWorkersRequest(unsigned char* entity, int* context)
 {
 	int result;
 

@@ -2,7 +2,7 @@
 
 /* Horizontal distance from the point a to the position held at b->member->pos. */
 /* ADDRESS: GOLD 0x004ce1b0 */
-float __cdecl fcn_004ce1b0(char* b, char* a)
+float __cdecl gm_GetCharacterDistFromTarget(char* b, char* a)
 {
 	char* p;
 	float pos_a[2];

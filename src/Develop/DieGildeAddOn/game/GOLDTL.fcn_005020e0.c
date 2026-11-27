@@ -64,10 +64,10 @@ void __cdecl gm_UpdateMarketStockSlots(int);
 void __cdecl cm_SendRandomMarktSlotDelta(int);
 int __cdecl fcn_00502450(int, int);
 int __cdecl fcn_005024e0(int, int);
-float __cdecl fcn_005025a0(int, int);
+float __cdecl gm_CalcMarketSlotPrice(int, int);
 
 /* ADDRESS: GOLDTL 0x005020e0 */
-void __cdecl fcn_005020e0(int townRow, char* timeSource)
+void __cdecl gm_UpdateTownSeasonPrices(int townRow, char* timeSource)
 {
 	Stamp stamp;
 	int year;
@@ -138,7 +138,7 @@ void __cdecl fcn_005020e0(int townRow, char* timeSource)
 		} else {
 			g_85ab80[townRow].slots[i].unk_34 = g_85ab80[townRow].slots[i].unk_30;
 		}
-		g_85ab80[townRow].slots[i].unk_38 = fcn_005025a0(townRow, i);
+		g_85ab80[townRow].slots[i].unk_38 = gm_CalcMarketSlotPrice(townRow, i);
 		if (g_85ab80[townRow].slots[i].entries[0].kind) {
 			g_85ab80[townRow].slots[i].unk_20 = (float) g_85ab80[townRow].slots[i].unk_34;
 		}

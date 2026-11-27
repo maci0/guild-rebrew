@@ -20,7 +20,7 @@ void __cdecl he_FreeAction(char*);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 double __cdecl gm_CalcAvgEntityFavor(int, int, char*);
-int __cdecl fcn_0050c830(char*, char*, int);
+int __cdecl gm_CalcElapsedWorkMinutes(char*, char*, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -93,7 +93,7 @@ void __cdecl he_RunAbbau(char* self)
 skip_map:
 			*(unsigned char*) (self + 0xc8) = 0;
 		}
-		n = fcn_0050c830(self + 0x60, gm_GameTime, 0);
+		n = gm_CalcElapsedWorkMinutes(self + 0x60, gm_GameTime, 0);
 		if (n > 0)
 			*(unsigned char*) (self + 0xc8) += n;
 		total = total + *(float*) (self + 0xc4);
@@ -102,7 +102,7 @@ skip_map:
 		do {
 			entry = ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(unsigned short*) (self + 0xac)]);
 			prev = (float) *(int*) (self + 0xb0);
-			n = fcn_0050c830(self + 0x60, self + 0x52, 0)
+			n = gm_CalcElapsedWorkMinutes(self + 0x60, self + 0x52, 0)
 				* (*(int*) (self + 0x18) + *(int*) (self + 0x14) * 2);
 			*(int*) (self + 0xb0) = (int) (prev - n * total);
 			while (*(int*) (self + 0xb0) <= 0) {

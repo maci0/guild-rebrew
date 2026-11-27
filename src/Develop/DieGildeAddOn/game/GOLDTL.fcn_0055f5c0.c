@@ -36,7 +36,7 @@ char* __cdecl cut_FindCutsceneById(int);
 int __cdecl cut_RemoveParticipant(int, int);
 void __cdecl cm_RequestRemoveCutsceneParticipant(int, int);
 int __cdecl fcn_00503fe0(int, int, int);
-void __cdecl fcn_00526920(char*, int, char*);
+void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 void __cdecl io_ClearInputState(void);
 void __cdecl fcn_00545780(char*);
 
@@ -243,7 +243,7 @@ exit_a:
                 rec = (char*) fcn_00503fe0(1, 1, *(int*) (e + 0xb0));
                 if (rec == 0)
                     return;
-                fcn_00526920(rec, *(int*) (e + 0xb4), e + 0xbc);
+                d2_EnterBuildingObjekt(rec, *(int*) (e + 0xb4), e + 0xbc);
             }
             if ((*(unsigned char*) (e + 0xf0) & 0x10) && *(int*) (e + 0xec) != 0) {
                 sb_StopVoice(*(void**) (e + 0xec), 0);

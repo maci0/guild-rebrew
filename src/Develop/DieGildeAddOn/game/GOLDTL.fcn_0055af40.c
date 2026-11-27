@@ -8,7 +8,7 @@ void __cdecl fcn_005800b0(void);
 void __cdecl d2_ResetTutorialStep(void);
 void __cdecl he_FreeAction(char*);
 void __cdecl main_ExitToFrameHandler(void*);
-void __cdecl fcn_005438c0(void);
+void __cdecl main_RunGameLoop(void);
 int __cdecl fcn_0057e0a0(void);
 int __cdecl d2_OpenTutorialMainDialog(void);
 
@@ -21,7 +21,7 @@ void __cdecl he_UpdateTutorialEvent(char* o)
 			d2_ResetTutorialStep();
 			he_FreeAction(o);
 			g_774954 = 1;
-			main_ExitToFrameHandler((void*) fcn_005438c0);
+			main_ExitToFrameHandler((void*) main_RunGameLoop);
 			break;
 		case 1:
 			if (fcn_0057e0a0() != 0) {

@@ -1,9 +1,9 @@
 
 /* ADDRESS: GOLDTL 0x0041a950 */
-int __cdecl fcn_0041a950(int i)
+int __cdecl d3_GetFormatBpp(int format)
 {
-	if (i < 0x14 || i > 0x1f) {
+	if (format < 0x14 || format > 0x1f) {
 		return 0;
 	}
-	return ((int*) 0x662ba8)[i];
+	return ((int*) 0x662ba8)[format];
 }

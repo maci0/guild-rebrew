@@ -1,7 +1,7 @@
 
 
 
-int __cdecl fcn_004e6f10(int);
+int __cdecl amt_GetOfficeGroup(int);
 #include "Develop/DieGildeAddOn/game/aemter.h"
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
@@ -18,7 +18,7 @@ void __cdecl amt_ApplyOfficeSupportEffect(unsigned short* who, char* e)
 	int i;
 	char* o;
 
-	n = fcn_004e6f10(*(unsigned char*) (e + 0x166));
+	n = amt_GetOfficeGroup(*(unsigned char*) (e + 0x166));
 	n = amt_FindOfficeSlotsByKind(n, 6, list);
 	for (i = 0; i < n; i++) {
 		if (list[i].mplayerid == -1) {

@@ -1091,6 +1091,72 @@ int __cdecl gv_ExtendProductionTime(void* building)
 	return -1;
 }
 #endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
+#define g_entity_slot_table ((unsigned int*) 0x8680b4)
+extern unsigned char* lpGebaeudePROT;
+#define g_output_share ((float*) 0x6652d8)
+extern int __cdecl fcn_10016ea0(int a, int b, int c);
+extern int __cdecl _ftol(void);
+
+/* ADDRESS: GOLDTL 0x004f2880 */
+int __cdecl gv_ExtendProductionTime(void* building)
+{
+	void* entity;
+	void* workers;
+	void* object;
+	void* slot;
+	unsigned short grave_id;
+	unsigned char field_id;
+	unsigned short word1;
+	unsigned short word2;
+	int obj4;
+	int ftol_val;
+
+	gm_ResolveEntityById(&entity, 0, 0, *(int*) ((char*) building + 8));
+	if (entity) {
+		grave_id = *(unsigned short*) ((char*) entity + 0x27);
+		if (grave_id != 0xffff) {
+			if ((char*) 0x7f4ca0 + grave_id * 0x21c != (char*) *(unsigned int*) 0x773da8) {
+				field_id = *(unsigned char*) entity;
+				if (((BUILDING_PROTOTYPE*)lpGebaeudePROT)[field_id].category != 0x1d) {
+					return -2;
+				}
+				workers = *(void**) ((char*) entity + 0x65);
+				if (!workers) {
+					return -3;
+				}
+				if (!gv_CheckSlotActive(workers, *(int*) ((char*) building + 0xc))) {
+					return -4;
+				}
+				gm_ResolveEntityById(0, 0, &object, *(int*) ((char*) building + 4));
+				if (!object) {
+					return -6;
+				}
+				slot = gv_GetSlotEntry(workers, *(int*) ((char*) building + 0xc),
+				    *(unsigned char*) ((char*) building + 0x10));
+				if (!slot) {
+					return -7;
+				}
+				*(short*) ((char*) slot + 0xa) += *(short*) ((char*) building + 0x11);
+				if (*(int*) ((char*) building + 0x13) > 0) {
+					obj4 = *(int*) ((char*) object + 4);
+					word1 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x773d75 * 189];
+					fcn_10016ea0(obj4, word1, *(int*) ((char*) building + 0x13));
+					word2 = (unsigned short) g_entity_slot_table[(unsigned int) *(unsigned char*) 0x773d75 * 189];
+					ftol_val = (int) (*(int*) ((char*) building + 0x13) * g_output_share[*(int*) ((char*) building + 0xc)]);
+					gm_AddObjekt(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) ((char*) entity + 0x27) * 0x21c),
+					    word2, ftol_val);
+				}
+				return 0;
+			}
+		}
+	}
+	return -1;
+}
+#undef g_entity_slot_table
+#undef g_output_share
+#endif
 
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
@@ -1121,6 +1187,55 @@ int __cdecl gv_ReplaceProductionWorker(void* a)
 		return -1;
 	type = *(unsigned char*) rec;
 	if (*(unsigned char*) (g_entity_type_table + type + type * 0x24c) != 0x1d)
+		return -2;
+	worker = *(int*) ((char*) rec + 0x65);
+	if (worker == 0)
+		return -3;
+	if (!gv_CheckSlotActive((void*) worker, *(int*) ((char*) a + 0xc)))
+		return -4;
+	if (*(int*) ((char*) a + 4) != -1) {
+		gm_ResolveEntityById(0, 0, &rec2, *(int*) ((char*) a + 4));
+		if (rec2 == 0)
+			return -6;
+		owner_id = *(int*) ((char*) a + 4);
+		slot_off = *(unsigned short*) ((char*) rec2 + 0x50);
+	}
+	slot = gv_GetSlotEntry((void*) worker, *(int*) ((char*) a + 0xc),
+	                       *(unsigned char*) ((char*) a + 0x10));
+	if (slot == 0)
+		return -7;
+	*(unsigned short*) ((char*) slot + 8) = slot_off;
+	*(int*) ((char*) slot + 4) = owner_id;
+	return 0;
+}
+#endif
+#if !defined(REBREW_SERVER)
+extern char g_7f4ca0[];
+
+/* ADDRESS: GOLDTL 0x004f2a80 */
+/* ADDRESS: GOLD 0x004f0970 */
+int __cdecl gv_ReplaceProductionWorker(void* a)
+{
+	void* rec;
+	void* rec2;
+	void* slot;
+	unsigned short slot_off;
+	unsigned short limit;
+	int owner_id;
+	int worker;
+	int type;
+
+	owner_id = -1;
+	limit = 0xffff;
+	slot_off = limit;
+	gm_ResolveEntityById(&rec, 0, 0, *(int*) ((char*) a + 8));
+	if (rec == 0 ||
+	    *(unsigned short*) ((char*) rec + 0x27) == limit ||
+	    g_7f4ca0 + (unsigned int) (*(unsigned short*) ((char*) rec + 0x27) & limit) * 540 ==
+	        g_entity_table_end)
+		return -1;
+	type = *(unsigned char*) rec;
+	if (*(unsigned char*) (((unsigned char*)g_entity_type_table) + type + type * 0x24c) != 0x1d)
 		return -2;
 	worker = *(int*) ((char*) rec + 0x65);
 	if (worker == 0)
@@ -1366,6 +1481,40 @@ int __cdecl gv_ValidateEntityAction(void* cmd)
 	}
 	return -1;
 }
+#endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
+#define g_entity_table_end (*(unsigned int*) 0x773da8)
+extern int __cdecl gm_AssignBuildingResidents(void* entity, int cmd_arg);
+
+/* ADDRESS: GOLDTL 0x004f2ee0 */
+int __cdecl gv_ValidateEntityAction(void* cmd)
+{
+	void* entity;
+	unsigned short grave_id;
+	unsigned char field_id;
+	int v;
+
+	gm_ResolveEntityById(&entity, 0, 0, *(int*) ((char*) cmd + 8));
+	if (entity) {
+		grave_id = *(unsigned short*) ((char*) entity + 0x27);
+		if (grave_id != 0xffff) {
+			if ((char*) 0x7f4ca0 + grave_id * 0x21c != (char*) g_entity_table_end) {
+				field_id = *(unsigned char*) entity;
+				if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[field_id].category != 0x1d) {
+					return -2;
+				}
+				if (*(void**) ((char*) entity + 0x65) == 0) {
+					return -3;
+				}
+				v = gm_AssignBuildingResidents(entity, *(int*) ((char*) cmd + 0x13));
+				return v <= 0 ? -4 : 0;
+			}
+		}
+	}
+	return -1;
+}
+#undef g_entity_table_end
 #endif
 
 extern char* gm_CityEntity;

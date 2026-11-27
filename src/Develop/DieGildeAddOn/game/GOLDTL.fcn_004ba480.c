@@ -31,7 +31,7 @@ void __cdecl cm_SendCopyEntityData(void*);
 
 
 /* ADDRESS: GOLDTL 0x004ba480 */
-int __cdecl fcn_004ba480(int* a1)
+int __cdecl gm_HandleMsg2eSendAction4a(int* request)
 {
 	unsigned short* e;
 	Kind* kind;
@@ -49,7 +49,7 @@ int __cdecl fcn_004ba480(int* a1)
 	int v;
 
 	n = 0;
-	e = gm_LookupEntityRecordById(a1[0]);
+	e = gm_LookupEntityRecordById(request[0]);
 	if (e == 0)
 		return 1;
 	for (it = gm_StartFilteredEntitySearch(1, 3, *e); it != 0 && n < 8; it = gm_FindNextFilteredEntity()) {
@@ -83,7 +83,7 @@ int __cdecl fcn_004ba480(int* a1)
 		*(int*) (message + 0x5c) = v;
 		*(int*) (message + 8) = *(int*) (g_7f4ca0 + g_774970 * 540 + 4);
 		*(pos14_7f4c00*) (message + 0x28) = (*(pos14_7f4c00*)&gm_GameTime);
-		*(short*) (message + 0x64) = *(unsigned short*) (a1 + 1) + 0x12e7;
+		*(short*) (message + 0x64) = *(unsigned short*) (request + 1) + 0x12e7;
 		*(int*) (message + 0x58) = *(int*) (e + 2);
 		*(int*) (message + 0x60) = *(int*) (p + 2);
 		cm_SendCopyEntityData(message);

@@ -6,7 +6,7 @@ extern unsigned char* lpGebaeudePROT;
 
 int __cdecl d2_CheckTutMsg1aNotCat12Node74(int* m);
 
-int __cdecl fcn_0057fa40(int* m)
+int __cdecl d2_CheckTutCh3Cat0aBuildGate(int* m)
 {
 	if (g_665f08[14] >= 0 && m[0] == 0x25 && m[3] == 0x155) {
 		g_665f08[14] = 1;

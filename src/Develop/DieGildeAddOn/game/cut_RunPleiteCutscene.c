@@ -29,7 +29,7 @@ void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
 void __cdecl fcn_004e4c40(int a);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl d2_ShowMessageBox(void* buf, int n);
-void __cdecl fcn_004e48b0(void);
+void __cdecl cut_FadeToBlack(void);
 void __cdecl evt_StopScriptIfActive(void* h);
 void __cdecl cut_WaitForScript(void* h);
 void __cdecl d3_DestroySkyLayer(void);
@@ -108,7 +108,7 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 		io_FormatTextBuffer(f.msg, 0x1ab1, *(unsigned short*) obj);
 	}
 	d2_ShowMessageBox(f.msg, 0);
-	fcn_004e48b0();
+	cut_FadeToBlack();
 	evt_StopScriptIfActive((void*) h2);
 	cut_WaitForScript((void*) h2);
 	d3_DestroySkyLayer();

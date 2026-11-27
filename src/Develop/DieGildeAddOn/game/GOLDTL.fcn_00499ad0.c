@@ -25,7 +25,7 @@ typedef struct {
 	char pad59[3];
 	int other;
 	char pad60[0x98];
-} Msg499a;
+} CITIZENSHIP_MSG;
 
 // SIZE 0x21c
 typedef struct {
@@ -34,7 +34,7 @@ typedef struct {
 	char pad3;
 	int owner;
 	char pad8[0x214];
-} House499a;
+} CITIZENSHIP_ENTITY;
 
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 #include "client_types.h"
@@ -50,18 +50,18 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_AddTime(GAME_TIMESTAMP*, int, int, int);
-void __cdecl cm_SendCopyEntityData(Msg499a*);
+void __cdecl cm_SendCopyEntityData(CITIZENSHIP_MSG*);
 
 #pragma optimize("y", off)
-int __cdecl fcn_00499ad0(char* e)
+int __cdecl ai_RunBuergerrecht(char* entity)
 {
-	Msg499a m;
+	CITIZENSHIP_MSG m;
 	GAME_TIMESTAMP st;
 	int ret;
 	char* s;
 	char* r;
 	int i;
-	int k;
+	int slotIdx;
 
 	s = gm_StartFilteredEntitySearch(1, 5, 0xf);
 	ret = 2;
@@ -72,20 +72,20 @@ int __cdecl fcn_00499ad0(char* e)
 	if (r == 0) {
 		return 0;
 	}
-	cm_RequestTransferCurrencyNoKill(*(int*) (r + 2), *(int*) (e + 4), 0, 0x3e80);
-	cm_BeginPacketFieldDelta(e, *(int*) (e + 4));
+	cm_RequestTransferCurrencyNoKill(*(int*) (r + 2), *(int*) (entity + 4), 0, 0x3e80);
+	cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 	cm_AppendPacketFieldDelta(1, 1, 0xd, &ret);
 	cm_RequestChangeAttribute();
-	cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0, 0x4000);
+	cm_RequestChangeBits(*(int*) (entity + 4), 0x1c8, 4, 0, 0x4000);
 	st = (*(GAME_TIMESTAMP*)&gm_GameTime);
 	gm_AddTime(&st, gm_RandomMod(4) + 1, gm_RandomMod(8) * 7, 0);
-	if (e[2] == 5) {
+	if (entity[2] == 5) {
 		i = 0;
-		for (k = 0; k < 768; k++) {
+		for (slotIdx = 0; slotIdx < 768; slotIdx++) {
 			if (i >= g_6a375c) {
 				break;
 			}
-			if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_type) == 6 || (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_type) == 7) {
+			if ((*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slotIdx].entity_type) == 6 || (*(unsigned char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slotIdx].entity_type) == 7) {
 				{
 					int dst;
 					int n;
@@ -110,13 +110,13 @@ int __cdecl fcn_00499ad0(char* e)
 					rep stosb
 					}
 				}
-				m.owner = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[k].entity_id);
+				m.owner = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[slotIdx].entity_id);
 				m.kind = 0x69;
 				m.target = -1;
 				m.code = 9;
 				m.at = st;
 				m.who = 2;
-				m.other = *(int*) (e + 4);
+				m.other = *(int*) (entity + 4);
 				cm_SendCopyEntityData(&m);
 				i++;
 			}

@@ -32,7 +32,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
-void __cdecl fcn_004d5740(char*, int, int);
+void __cdecl d2_DrawCombatParticipants(char*, int, int);
 int __cdecl fcn_004d5490(int, int, int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 void __cdecl fcn_0050d490(char*);
@@ -207,7 +207,7 @@ int __cdecl fcn_004d6170(char* ctx)
 		mode = 2;
 	}
 	io_AppendText(0x1193, *(unsigned short*) g_772e9c, mode + 0x1125);
-	fcn_004d5740(self + 0xc0, 0, 0x64);
+	d2_DrawCombatParticipants(self + 0xc0, 0, 0x64);
 	ent = gm_StartFilteredEntitySearch(1, 1, *(int*) (self + 0x14));
 	if (ent == 0) {
 		mode = 0;
@@ -223,7 +223,7 @@ int __cdecl fcn_004d6170(char* ctx)
 	}
 	io_AppendText((int) "$7A");
 	io_AppendText(0x1193, *(unsigned short*) g_772e98, mode + 0x1125);
-	fcn_004d5740(self + 0x80, 0, 0x12c);
+	d2_DrawCombatParticipants(self + 0x80, 0, 0x12c);
 	while (main_RunFrameLoop(fcn_004d6170, 0x7d6c6) != 0) {
 		if (g_14ce8e0 != 0 || g_100f1dc == 2) {
 			g_774654 = 1;

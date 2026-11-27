@@ -50,7 +50,7 @@ float __cdecl eval_ObjektPreis2Credits(int, int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
 int __cdecl d2_CheckFundsAndNotify(char*, int, int, char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00526920(char*, int, char*);
+void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 char* __cdecl gm_FindBuildingTreasury(char*);
 void __cdecl cm_SendLogAction(char*);
 void __cdecl cm_SendTraceEnd(char*);
@@ -203,7 +203,7 @@ void __cdecl d2_RunTechTreeDialog(char* a0, int a1)
 							}
 							_strupr(name);
 							fcn_0064d41a(text, s_68b7ac, name);
-							fcn_00526920(a0, *(int*) ((char*) q + 2), text);
+							d2_EnterBuildingObjekt(a0, *(int*) ((char*) q + 2), text);
 						}
 					}
 				}

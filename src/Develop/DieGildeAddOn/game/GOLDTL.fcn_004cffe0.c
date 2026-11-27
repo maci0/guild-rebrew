@@ -4,7 +4,7 @@ char __cdecl fcn_00443e10(char*, int*);
 int __cdecl fcn_00470820(int, int, char*);
 
 /* ADDRESS: GOLDTL 0x004cffe0 */
-void __cdecl fcn_004cffe0(int unused, void* object)
+void __cdecl d2_ShowCombatCommandForm(int unused, void* object)
 {
     int info[4];
     int cx;

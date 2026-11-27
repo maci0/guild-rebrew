@@ -62,7 +62,7 @@ void __cdecl main_PreloadSound(char*);
 void __cdecl msx_InitDrivers(int, int, int);
 void __cdecl msx_ApplyAudioSettings(void);
 void __cdecl fcn_00525eb0(void);
-void __cdecl fcn_00510900(void);
+void __cdecl d3_ResetSceneContextIndices(void);
 void __cdecl ch_InitActionQueue(void);
 void __cdecl fcn_004186c0(void);
 void __cdecl ai_InitContextAndGoodsLists(void);
@@ -76,7 +76,7 @@ void __cdecl main_RunFrameLoop(int, int);
 void __cdecl fcn_00473150(unsigned char*);
 void __cdecl fcn_00429920(void);
 void __cdecl evt_RegisterCoreCommands(void);
-void __cdecl fcn_00410870(void);
+void __cdecl evt_RegisterSceneCommands(void);
 void __cdecl ch_RegisterScriptCommands(void);
 void __cdecl evt_RegisterSoundCommands(void);
 void __cdecl fcn_0042a020(void);
@@ -122,7 +122,7 @@ extern int __cdecl main_PumpWindowMessages(void);
 extern void __cdecl main_Menue(void);
 extern void __cdecl main_SetLanguageByName(char* language);
 extern Rec6* __cdecl gm_GetStatRecord(Rec6* dst, int idx);
-extern void __cdecl fcn_005438c0(int v);
+extern void __cdecl main_RunGameLoop(int v);
 extern void __cdecl fcn_005386c0(void* p);
 
 int __cdecl main_OpenEngine(void);
@@ -323,7 +323,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 		*(int*) 0x774958 = 1;
 		if (*(int*) 0x7747b0 != 0 && *(int*) 0x77496c == 0) {
 			do {
-				fcn_005438c0(0);
+				main_RunGameLoop(0);
 			} while (*(int*) 0x774958 != 0);
 		}
 		if (*(int*) 0x7747ec != 0 || server != 0)

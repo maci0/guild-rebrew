@@ -4,7 +4,7 @@ int __cdecl fcn_004011d0(void* stream, void* dst);
 int __cdecl vfs_fseek(char* f, int off, int whence);
 #include "Develop/Units/Error/error_message.h"
 void* __cdecl m_alloc(unsigned int size, const char* tag);
-int __cdecl fcn_00430bd0(void* buf, int size, int count, void* stream);
+int __cdecl vfs_ReadData(void* buf, int size, int count, void* stream);
 
 /* ADDRESS: GOLD 0x00401380 */
 int __cdecl bio_rd_array_quick(void* f, int count, void** out)
@@ -22,7 +22,7 @@ int __cdecl bio_rd_array_quick(void* f, int count, void** out)
 		return 0;
 	}
 	*out = m_alloc(*(int*)&f * count, "bio:bio_rd_array_quick");
-	fcn_00430bd0(*out, count, *(int*)&f, stream);
+	vfs_ReadData(*out, count, *(int*)&f, stream);
 	return *(int*)&f;
 }
 #else

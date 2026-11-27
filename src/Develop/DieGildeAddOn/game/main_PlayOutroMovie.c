@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int __cdecl fcn_0041e620(void);
-void __cdecl fcn_0041e650(void);
+void __cdecl ShutdownVideo(void);
 void __cdecl fcn_004c2d90(float, int);
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 void __cdecl main_RunFrameLoop(int, int);
@@ -10,7 +10,7 @@ void __cdecl fcn_004124b0(void);
 void __cdecl io_AcquireKeyboard(int);
 void __cdecl io_AcquireMouse(int);
 int __cdecl fcn_0041e680(char*, void*, void*, int, int, int, int, int);
-int __cdecl fcn_0041f350(int);
+int __cdecl PlayVideo(int);
 void __cdecl fcn_00473150(unsigned char*);
 
 
@@ -56,7 +56,7 @@ void __cdecl main_PlayOutroMovie(void)
 	Sleep(0x1f4);
 	g_7747d4 = fcn_0041e680(b, 0, (void*) main_Instance, 0, 0, 0, 0, 0x8a);
 	Sleep(0xc8);
-	fcn_0041f350(g_7747d4);
+	PlayVideo(g_7747d4);
 	fcn_00473150(h);
 	main_PumpWindowMessages();
 	g_662264((int) g_774940);
@@ -70,7 +70,7 @@ void __cdecl main_PlayOutroMovie(void)
 	fcn_004c2d90(vol * (1.0f / 127.0f), 0x3e8);
 	if (*(int*) 0x77492c == 0) {
 		g_772d10 = (unsigned char) saved;
-		fcn_0041e650();
+		ShutdownVideo();
 	} else {
 		g_772d10 = (unsigned char) saved;
 	}

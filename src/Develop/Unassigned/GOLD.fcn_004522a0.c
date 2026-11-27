@@ -7,7 +7,7 @@ typedef struct Query_4522a0 {
 
 void __cdecl d3_NormalizeVector(float* v);
 void __cdecl d3_CalculateTriangleNormal(float* a, float* b, float* c, float* n);
-void __cdecl fcn_00458d90(char* source, char* view, int flags, float* out);
+void __cdecl d3_BuildViewMatrix(char* source, char* view, int flags, float* out);
 
 /* ADDRESS: GOLD 0x004522a0 */
 char __cdecl fcn_004522a0(char* o, Query_4522a0* q)
@@ -99,7 +99,7 @@ char __cdecl fcn_004522a0(char* o, Query_4522a0* q)
 		return 1;
 	}
 	if (*(int*) (o + 0x220) == 1) {
-		fcn_00458d90(o, (*(unsigned char*) (o + 0x210) & 0x80) ? 0 : *(char**) 0xfc2dec, 1, mat);
+		d3_BuildViewMatrix(o, (*(unsigned char*) (o + 0x210) & 0x80) ? 0 : *(char**) 0xfc2dec, 1, mat);
 		invScale = 20.0f / *(float*) (mesh[4] + 0x1d4);
 		minY = *(float*) (mesh[4] + 0x6c);
 		for (i = sunStart; i < q->count; i++) {

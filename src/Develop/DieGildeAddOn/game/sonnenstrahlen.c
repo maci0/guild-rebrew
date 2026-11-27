@@ -2,7 +2,7 @@
 
 #ifdef REBREW_GOLD
 #define fcn_00445600 fcn_00449690
-#define fcn_00442910 fcn_00446e10
+#define fcn_00442910 d3_SpawnModelObject
 #define fcn_00418860 fcn_004172e0
 #endif
 

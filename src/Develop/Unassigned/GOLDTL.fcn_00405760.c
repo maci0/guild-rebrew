@@ -9,7 +9,7 @@ void __cdecl d3_SetObjectPosition(char* o, float* v);
 void __cdecl d3_SetNodePosition(char* p, float* v);
 
 /* ADDRESS: GOLDTL 0x00405760 */
-void __cdecl fcn_00405760(unsigned char* e)
+void __cdecl ch_StepToTargetPosition(unsigned char* e)
 {
 	float v[4];
 	float x;

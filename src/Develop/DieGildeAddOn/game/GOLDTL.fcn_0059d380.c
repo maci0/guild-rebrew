@@ -42,7 +42,7 @@ extern void __cdecl d2_SetOverlayAnimation(int, int);
 extern void __cdecl d2_SetForm(int, int);
 extern int __cdecl io_AppendText(int, ...);
 extern int __cdecl d2_GetWindowListItem(int, int, int);
-extern void __cdecl fcn_004c35f0(void);
+extern void __cdecl d3snd_PlayWorkerOrderVoice(void);
 extern void __cdecl cm_SendCopyEntityData(Msg_59d380*);
 extern void __cdecl sv_ClearObjectSelection(void);
 extern int __cdecl main_RunFrameLoop(void*, int);
@@ -106,7 +106,7 @@ int __cdecl d2_RunRaeuberlagerTargetDialog(int unusedFlags, char* object)
 			continue;
 		}
 		if (d2_CurrentElementId == item1) {
-			fcn_004c35f0();
+			d3snd_PlayWorkerOrderVoice();
 			message.b4 = 0x62;
 			slot = g_774970;
 			message.f8 = ((ENTITY_RECORD*)g_7f4ca0)[slot].entity_id;

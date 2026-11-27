@@ -5,7 +5,7 @@ extern int g_6b6714[];
 extern unsigned int* g_6b6d18;
 
 /* ADDRESS: GOLDTL 0x0041bdc0 */
-void __cdecl fcn_0041bdc0(void)
+void __cdecl d3_InitOctreeTables(void)
 {
 	int i;
 

@@ -1,6 +1,6 @@
 #pragma intrinsic(strcpy, strcmpi)
 
-int __cdecl fcn_005105a0(int a0);
+int __cdecl d3_ResolveSceneObjectProtoId(int a0);
 int __cdecl gm_AllocGebaeude(int a0, int a1);
 char* __cdecl fcn_0064d1a0(int a0, int a1);
 int __cdecl fcn_0065f220(const char* a0, const char* a1);
@@ -9,7 +9,7 @@ int __cdecl strcmpi(const char* a0, const char* a1);
 int __cdecl sprintf(char* a0, const char* a1, ...);
 
 /* ADDRESS: GOLDTL 0x005109f0 */
-void __cdecl fcn_005109f0(int sceneObject)
+void __cdecl gm_BindBuildingSceneObjects(int sceneObject)
 {
 	char name[128];
 	char buf[256];
@@ -18,7 +18,7 @@ void __cdecl fcn_005109f0(int sceneObject)
 	int i;
 	char* p;
 
-	if (fcn_005105a0(sceneObject) == 0) {
+	if (d3_ResolveSceneObjectProtoId(sceneObject) == 0) {
 		return;
 	}
 	if (*(int*) (sceneObject + 0x48) != -1 && (id = *(int*) (sceneObject + 0x48) & 0xffffff, *(char*) (sceneObject + 0x4b) == 2) &&

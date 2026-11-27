@@ -5,7 +5,7 @@ extern char* g_7746cc;
 
 extern int* g_665f08;
 
-int __cdecl fcn_0057fb60(void)
+int __cdecl d2_GetTutCh5SubStep(void)
 {
 	unsigned short* p;
 	unsigned short k;

@@ -27,7 +27,7 @@ int __cdecl srv_GetEntityOfficeSlot(unsigned char*, void*, void*);
 int __cdecl amt_SendOfficeCommand(unsigned char, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004f6850 */
-void __cdecl fcn_004f6850(unsigned short* entity, int action)
+void __cdecl cut_ExecuteProzessPunishment(unsigned short* entity, int action)
 {
 	char level;
 	int n;

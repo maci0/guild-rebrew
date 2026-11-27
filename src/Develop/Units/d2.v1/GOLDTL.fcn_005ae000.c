@@ -13,7 +13,7 @@ int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00529890(char* obj);
 void __cdecl fcn_00526120(int a, int b);
 void __cdecl cm_SendCopyEntityData(int a1);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl sv_ClearObjectSelection(void);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_DestroyForm(int);
@@ -75,7 +75,7 @@ int __cdecl fcn_005ae000(char* obj)
 					*(char*) (packet + 0x36) = 1;
 					*(int*) (packet + 0x80) = *(int*) (((char *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[idx]) + 4);
 					cm_SendCopyEntityData((int) packet);
-					fcn_004c35f0();
+					d3snd_PlayWorkerOrderVoice();
 					sv_ClearObjectSelection();
 					g_774654 = 1;
 				} else {

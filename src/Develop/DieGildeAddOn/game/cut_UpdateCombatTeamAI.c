@@ -2,7 +2,7 @@ extern char* g_772eb4; extern int g_772f2c; extern unsigned short* g_772e9c; ext
 char* __cdecl fcn_004cef30(int id);
 unsigned short __cdecl fcn_0042e410(int code);
 char* __cdecl gm_FindOrCreateEntitySlot(int a, char* s);
-int __cdecl fcn_004d2f70(char* s);
+int __cdecl cut_FindCombatTarget(char* s);
 char* __cdecl d3_FindNearestEscapeNode(char* s);
 int __cdecl d3_TransformPoint(char* a, char* b, void* c);
 char __cdecl fcn_0045b990(int a, void* b, void* c, void* d, void* e);
@@ -96,7 +96,7 @@ int __cdecl cut_UpdateCombatTeamAI(int ctx, int teamPtr)
 		val = gm_GetEntityHealthRatio(s) * 100.0;
 		status = (int) val;
 		if (status >= 0x14 || fcn_0042e410(0x64) <= 0x1e) {
-			status = fcn_004d2f70(s);
+			status = cut_FindCombatTarget(s);
 			if (status == 0) {
 				continue;
 			}

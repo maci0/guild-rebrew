@@ -10,7 +10,7 @@ extern char g_7f4ca4[];
 
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
-char* __cdecl fcn_004bcc50(char*, int);
+char* __cdecl plt_FindRecordById(char*, int);
 char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl he_AssignActionSlot(int, int, unsigned int, int);
@@ -43,7 +43,7 @@ void __cdecl ai_DispatchMeisterAction(int* actionCtx)
 		for (rec = he_StartHandlungSearch(2, 0, 0x28, 3,
 		                        *(int*) (*(int*) (actionCtx[1] + 0x16c) + 1));
 		     rec != 0; rec = he_fn_Handlung()) {
-			v = (int) fcn_004bcc50((char*) base, *(int*) (rec + 0xb8));
+			v = (int) plt_FindRecordById((char*) base, *(int*) (rec + 0xb8));
 			if (v != 0 &&
 			    *(unsigned short*) (v + 0xa) == *(int*) actionCtx[2]) {
 				n = n - 1;

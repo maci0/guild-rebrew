@@ -15,7 +15,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 float __cdecl fcn_004ff210(unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x00508280 */
-int __cdecl fcn_00508280(char* p, unsigned int* selectionOut, float* valueOut)
+int __cdecl gm_ApplyRandomDisease(char* entity, unsigned int* selectionOut, float* valueOut)
 {
 	int flags;
 	int avail[8];
@@ -28,7 +28,7 @@ int __cdecl fcn_00508280(char* p, unsigned int* selectionOut, float* valueOut)
 	int cost;
 	float f;
 
-	flags = *(int*) (p + 0x2c);
+	flags = *(int*) (entity + 0x2c);
 	avail[0] = 0;
 	avail[1] = 0;
 	avail[2] = 0;
@@ -79,7 +79,7 @@ found:
 	if (i >= 8) {
 		goto fail;
 	}
-	flags = *(int*) (p + 0x2c);
+	flags = *(int*) (entity + 0x2c);
 	i += 2;
 	if (gm_GetKindRecord(i, &s) == 0) {
 		goto fail;
@@ -112,10 +112,10 @@ found:
 	}
 	flags ^= mask;
 	v = flags;
-	cm_BeginPacketFieldDelta(p, *(int*) (p + 4));
+	cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &v);
 	cm_RequestChangeAttribute();
-	f = fcn_004ff210(*(unsigned short*) p, -cost);
+	f = fcn_004ff210(*(unsigned short*) entity, -cost);
 	if (valueOut == 0) {
 		goto fail_1;
 	}

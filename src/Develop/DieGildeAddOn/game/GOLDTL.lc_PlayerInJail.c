@@ -12,7 +12,7 @@ char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
 #include "Develop/Units/Error/error_message.h"
 char* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_00526920(char*, int, char*);
+void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 
 void __cdecl lc_PlayerInJail(void)
 {
@@ -26,7 +26,7 @@ void __cdecl lc_PlayerInJail(void)
 				if (*(int*) (e + 0x65) == ((ENTITY_RECORD_VIEW *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->entity_id) {
 					d = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0x65);
 					if (d != 0 && g_7746cc != d) {
-						fcn_00526920(e, *(int*) (d + 2), "");
+						d2_EnterBuildingObjekt(e, *(int*) (d + 2), "");
 					}
 					return;
 				}
@@ -42,6 +42,6 @@ void __cdecl lc_PlayerInJail(void)
 	}
 	d = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0xba);
 	if (d != 0 && g_7746cc != d) {
-		fcn_00526920(e, *(int*) (d + 2), "");
+		d2_EnterBuildingObjekt(e, *(int*) (d + 2), "");
 	}
 }

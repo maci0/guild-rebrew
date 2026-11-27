@@ -3,12 +3,12 @@
 
 int __cdecl main_ExitToFrameHandler(int);
 
-int __cdecl fcn_004c8990(int unused, char* arg2)
+int __cdecl cm_ExExitToFrameLoop(int unused, char* result)
 {
 	(void) unused;
 	main_ExitToFrameHandler(0x53bd80);
-	if (arg2 != 0) {
-		*arg2 = 1;
+	if (result != 0) {
+		*result = 1;
 	}
 	return 0;
 }

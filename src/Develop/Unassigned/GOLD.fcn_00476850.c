@@ -11,7 +11,7 @@ void __cdecl fcn_00476850(void* node)
     for (i = 0; i < 32; i++) {
         if (g_1015ec0[i] == node) {
             g_1015ec0[i] = 0;
-            fcn_004481e0(*(SCENE_RESOURCE**)((char*)node + 0x60));
+            d3_ReleaseSceneResource(*(SCENE_RESOURCE**)((char*)node + 0x60));
             m_FreeTracked(node);
             return;
         }

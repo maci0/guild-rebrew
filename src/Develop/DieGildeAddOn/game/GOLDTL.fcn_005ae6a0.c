@@ -26,7 +26,7 @@ int __cdecl fcn_00526120(void* a1, int a2);
 void __cdecl cm_SendCopyEntityData(char* msg);
 void __cdecl cm_RequestModifyHealth(int a1, int a2);
 void __cdecl gm_TryRecordCrime(int a1, int a2, int a3, int a4, int a5);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl sv_ClearObjectSelection(void);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x005ae6a0 */
@@ -100,7 +100,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 					cm_RequestModifyHealth(((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id, -3);
 					gm_TryRecordCrime(0x1a, 1, ((ENTITY_RECORD*)((char*)&g_7f4ca4 - 4))[*(unsigned short*)&g_774970].entity_id,
 						*(int*) ((char*) a0 + 4), -1);
-					fcn_004c35f0();
+					d3snd_PlayWorkerOrderVoice();
 					sv_ClearObjectSelection();
 					res = 1;
 					g_774654 = 3;

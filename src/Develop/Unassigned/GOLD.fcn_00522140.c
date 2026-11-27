@@ -23,21 +23,21 @@ extern int g_623844;
 extern int g_623850;
 extern int g_623854;
 
-void __cdecl fcn_00475580(int h, int v);
+void __cdecl d2_SetFormVisibility(int h, int v);
 void __cdecl fcn_0053dd30(int v);
 void __cdecl fcn_00475a90(int h, int v);
 
-void __cdecl fcn_00522140(int show)
+void __cdecl d2_SetHudVisibility(int show)
 {
 	int i;
 
 	g_623e90 = show;
 	if (g_623868 != -1) {
-		fcn_00475580(g_623868, show);
+		d2_SetFormVisibility(g_623868, show);
 	}
 	fcn_0053dd30(show);
 	if (g_623868 != -1) {
-		fcn_00475580(g_623868, show);
+		d2_SetFormVisibility(g_623868, show);
 	}
 	if (g_623828 != -1) {
 		fcn_00475a90(g_623828, show);

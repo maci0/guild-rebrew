@@ -1,9 +1,9 @@
 
 
-typedef struct I41b5b0 I41b5b0;
+typedef struct DD_LINE_VB DD_LINE_VB;
 // SIZE 0x4
-struct I41b5b0 {
-	int (__stdcall** vt)(I41b5b0*, int, int, void*, int);
+struct DD_LINE_VB {
+	int (__stdcall** vt)(DD_LINE_VB*, int, int, void*, int);
 };
 
 extern int g_6777ac;
@@ -11,11 +11,11 @@ extern void* g_6b5df4;
 extern char g_6b5df0[];
 #include "Develop/Units/Error/error_message.h"
 
-void __cdecl fcn_0041b5b0(void)
+void __cdecl dd_BeginLines(void)
 {
 	if (g_6777ac != -1) {
 		ReportClientMessage((char*) 0x677870);
 	}
 	g_6777ac = 0;
-	((I41b5b0*)g_6b5df4)->vt[0x2c / 4](((I41b5b0*)g_6b5df4), 0, 0, g_6b5df0, 0x2000);
+	((DD_LINE_VB*)g_6b5df4)->vt[0x2c / 4](((DD_LINE_VB*)g_6b5df4), 0, 0, g_6b5df0, 0x2000);
 }

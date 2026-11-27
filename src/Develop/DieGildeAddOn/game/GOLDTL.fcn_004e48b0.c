@@ -9,7 +9,7 @@ extern int g_1040494;
 unsigned char* __cdecl fcn_004730c0(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 
-void __cdecl fcn_004e48b0(void)
+void __cdecl cut_FadeToBlack(void)
 {
 	if (g_772f3c == 0) {
 		g_772f50 = fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x5a, 1);

@@ -19,10 +19,10 @@ void __cdecl fcn_00459a90(int a);
 void __cdecl fcn_00456c60(void);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_00456c10(void);
-void __cdecl fcn_0041b7c0(void);
-void __cdecl fcn_0041b7f0(void);
+void __cdecl d3_InvalidateDeviceResources(void);
+void __cdecl d3_ResetGraphicsDevice(void);
 int __cdecl fcn_0041baa0(void);
-int __cdecl fcn_0041ba40(void);
+int __cdecl d3_RestoreDeviceResources(void);
 void __cdecl fcn_00436aa0(int a);
 void __cdecl fcn_00452360(void);
 void __cdecl fcn_0043b990(int a);
@@ -68,10 +68,10 @@ char __cdecl fcn_0043b360(void)
 	}
 	d3_SelectSceneContext(saved, 1);
 	fcn_00456c10();
-	fcn_0041b7c0();
-	fcn_0041b7f0();
+	d3_InvalidateDeviceResources();
+	d3_ResetGraphicsDevice();
 	if (fcn_0041baa0() == 0) {
-		fcn_0041ba40();
+		d3_RestoreDeviceResources();
 		fcn_00436aa0(0);
 		fcn_00452360();
 		if (g_6b8300 != 0) {

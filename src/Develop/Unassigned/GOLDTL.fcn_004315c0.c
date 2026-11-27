@@ -1,7 +1,7 @@
 #include <string.h>
 
 /* ADDRESS: GOLDTL 0x004315c0 */
-char __cdecl fcn_004315c0(char* obj)
+char __cdecl d3_BindAnimTrackNodes(char* obj)
 {
 	char* child;
 	char* rec;

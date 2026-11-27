@@ -9,7 +9,7 @@ void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_004222b0(char*);
 
 /* ADDRESS: GOLD 0x004029c0 */
-void* __cdecl fcn_004029c0(void)
+void* __cdecl ch_Create(void)
 {
 	int i = 0;
 	void* p;

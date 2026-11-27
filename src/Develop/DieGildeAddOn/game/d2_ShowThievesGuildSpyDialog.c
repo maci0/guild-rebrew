@@ -62,7 +62,7 @@ void __cdecl d2_SetForm(int h, int stage);
 int __cdecl io_AppendText(int id, int a, void* p);
 int __cdecl d2_GetWindowListItem(int h, int a, int b);
 void __cdecl cm_SendCopyEntityData(void* p);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 void __cdecl d2_DestroyForm(int h);
 void __cdecl fcn_005305a0(void);
@@ -165,7 +165,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 							if (i) {
 								cm_SendCopyEntityData(&msg);
 								ret = 1;
-								fcn_004c35f0();
+								d3snd_PlayWorkerOrderVoice();
 								g_774654 = 1;
 							} else {
 								fcn_00526120((char*) g_14abc98, 0);

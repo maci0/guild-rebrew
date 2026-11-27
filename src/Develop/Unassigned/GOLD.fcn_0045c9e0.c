@@ -3,7 +3,7 @@
 
 int __cdecl d3_VisitSceneObjectsUntilStopped(int, int, int, int, int);
 
-void __cdecl fcn_0045c9e0(void)
+void __cdecl d3_CollectFlaggedObjects(void)
 {
 	int self;
 

@@ -1,7 +1,7 @@
 char* __cdecl d3sm_GetObjectSuperMap(char*);
 
 /* ADDRESS: GOLDTL 0x00409020 */
-int __cdecl fcn_00409020(char* obj)
+int __cdecl ch_IsNextPathSegmentClear(char* obj)
 {
 	char* task;
 	char* map;

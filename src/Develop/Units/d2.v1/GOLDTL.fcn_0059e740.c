@@ -32,7 +32,7 @@ void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl d2_DestroyForm(int dlg);
 int __cdecl cm_SendCopyEntityData(char* msg);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 int __cdecl cm_GetCommandStatus(int handle);
 void __cdecl cm_GetCommandResult(int handle);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
@@ -189,7 +189,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 					}
 					pkt[0x58] = (char) j;
 					if (j != 0) {
-						fcn_004c35f0();
+						d3snd_PlayWorkerOrderVoice();
 						sv_ClearObjectSelection();
 						h = cm_SendCopyEntityData(pkt);
 						while (cm_GetCommandStatus(h) == 0) {

@@ -7,7 +7,7 @@ int __cdecl cm_RequestChangeAttribute(void);
 float __cdecl fcn_004ff210(unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x00508540 */
-int __cdecl fcn_00508540(int* rec, int unused, void* out)
+int __cdecl gm_ApplyRandomEntityDefect(int* rec, int unused, void* out)
 {
 	int avail[4];
 	int sel[4];

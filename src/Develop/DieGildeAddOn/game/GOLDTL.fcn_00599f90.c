@@ -24,7 +24,7 @@ extern char* g_7746c4;
 
 unsigned char* __cdecl fcn_005bdc30(int, Query*, int, int, int);
 int __cdecl gm_CheckEntityType(unsigned char*);
-void __cdecl fcn_00526920(unsigned char*, int, char*);
+void __cdecl d2_EnterBuildingObjekt(unsigned char*, int, char*);
 unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
 void __cdecl d3_FocusCameraOnEntity(unsigned char*);
 
@@ -51,15 +51,15 @@ void __cdecl d2_HandleEntityChooser(void)
 	}
 	if ((*(int*)&g_7746c8) != 0) {
 		if (gm_CheckEntityType(e) && *e == 0x47) {
-			fcn_00526920(e, 0xfd, "");
+			d2_EnterBuildingObjekt(e, 0xfd, "");
 			return;
 		}
-		fcn_00526920(e, -1, "");
+		d2_EnterBuildingObjekt(e, -1, "");
 		return;
 	}
 	if (gm_CheckEntityType(e) && *e == 0x47) {
 		if (fcn_00506380(g_774970, e, 0, 0) & 1) {
-			fcn_00526920(e, 0xfd, "");
+			d2_EnterBuildingObjekt(e, 0xfd, "");
 		}
 		return;
 	}
@@ -67,5 +67,5 @@ void __cdecl d2_HandleEntityChooser(void)
 		d3_FocusCameraOnEntity(e);
 		return;
 	}
-	fcn_00526920(e, *(unsigned short*) (e + 0x29), "");
+	d2_EnterBuildingObjekt(e, *(unsigned short*) (e + 0x29), "");
 }

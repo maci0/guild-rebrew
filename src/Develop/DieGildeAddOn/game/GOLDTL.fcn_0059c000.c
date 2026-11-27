@@ -30,7 +30,7 @@ void __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_GetCommandResult(int);
@@ -155,7 +155,7 @@ int __cdecl d2_RunMetalProduktionDialog(char* building)
 									goto located;
 								found = he_fn_Handlung();
 							}
-							fcn_004c35f0();
+							d3snd_PlayWorkerOrderVoice();
 							memset(&req, 0, sizeof(req));
 							req.flag4 = 4;
 							if (*(unsigned short*) (building + 0x27) != 0xffff)

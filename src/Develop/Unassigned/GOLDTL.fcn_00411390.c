@@ -2,7 +2,7 @@
 
 typedef int (__stdcall* fcn_00411390_fn)(int, int, int, int, int*, int*);
 
-int __cdecl fcn_00411390(int a1, int value, int* out)
+int __cdecl io_TryReadRegistryDword(int a1, int value, int* out)
 {
 	int local;
 

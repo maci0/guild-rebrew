@@ -2,7 +2,7 @@
 extern void __cdecl gm_ResolveEntityById(char**, int, int, int); extern char* __cdecl fcn_00502cd0(int, ...);
 extern void __cdecl he_FreeAction(char*);
 extern char* __cdecl he_StartHandlungSearch(int, int, int, ...);
-extern int __cdecl fcn_004943e0(unsigned short*, unsigned short*);
+extern int __cdecl ai_CheckFavorRankAcceptance(unsigned short*, unsigned short*);
 extern void __cdecl io_FormatTextBuffer(char*, int, ...);
 extern void __cdecl cm_BeginPacketFieldDelta(char*, unsigned int);
 extern int __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
@@ -94,7 +94,7 @@ void __cdecl he_RunInvitation(char* action)
 		*(int*) (action + 0x70) = 2;
 	switch (*(int*) (action + 0x70)) {
 	case 2:
-		if (fcn_004943e0(v7, v3) == 1) {
+		if (ai_CheckFavorRankAcceptance(v7, v3) == 1) {
 			v16 = *(int*) (v3 + 2);
 			if (*(int*) (action + 0xbc) == 0) {
 				for (idx = 0; idx < 4; idx++) {

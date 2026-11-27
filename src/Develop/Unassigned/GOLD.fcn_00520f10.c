@@ -3,7 +3,7 @@
 
 int __cdecl tb_OpenFunction(int, int);
 
-void __cdecl fcn_00520f10(void)
+void __cdecl main_InitFrameRateTimer(void)
 {
 	tb_OpenFunction(0x520ef0, 0x47);
 	memset((void*) 0x75e920, 0, 0x300);

@@ -66,7 +66,8 @@ char* __cdecl plt_FindRecord(char* base, unsigned int type1, unsigned int type2)
 /* Client-only plant-record lookups (the Gold T&L client's plant order).  No
  * server function calls them, so /OPT:REF discards them. */
 
-#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
+/* ADDRESS: GOLDTL 0x004bcc20 */
+/* ADDRESS: GOLD 0x004bc640 */
 char* __cdecl plt_FindRecordByOwner(char* base, int owner)
 {
 	char* p;
@@ -79,8 +80,9 @@ char* __cdecl plt_FindRecordByOwner(char* base, int owner)
 	}
 	return 0;
 }
-#endif
 
+/* ADDRESS: GOLDTL 0x004bcc50 */
+/* ADDRESS: GOLD 0x004bc670 */
 char* __cdecl plt_FindRecordById(char* base, int id)
 {
 	char* p;

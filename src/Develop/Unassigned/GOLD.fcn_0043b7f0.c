@@ -3,11 +3,11 @@
 
 int __cdecl d3_SetNodePosition(int, int*);
 
-void __cdecl fcn_0043b7f0(int p1, int p2, int p3, int p4)
+void __cdecl d3_SetNodePositionXYZ(int node, int x, int y, int z)
 {
-	int x[4];
-	x[0] = p2;
-	x[1] = p3;
-	x[2] = p4;
-	d3_SetNodePosition(p1, x);
+	int pos[4];
+	pos[0] = x;
+	pos[1] = y;
+	pos[2] = z;
+	d3_SetNodePosition(node, pos);
 }

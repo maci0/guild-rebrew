@@ -13,14 +13,14 @@ void __cdecl fcn_004fdcf0(char*);
 void __cdecl fcn_004fdfe0(char*);
 
 /* ADDRESS: GOLDTL 0x004fe2e0 */
-int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
+int __cdecl ch_SpawnEntityCharacter(char* entity, int sceneCtx, int* posPtr, int* rotPtr, int parentObj, int* dummyName)
 {
 	int savedContext;
 	int transformed;
 	float def[4];
 	float opt[4];
-	int* q;
-	int* p;
+	int* rot;
+	int* pos;
 	int v5;
 	char* v6;
 
@@ -30,52 +30,52 @@ int __cdecl fcn_004fe2e0(char* a0, int a1, int* a2, int* a3, int a4, int* a5)
 	def[1] = 0.0f;
 	def[2] = 0.0f;
 	def[3] = 0.0f;
-	p = a2;
-	if (p == 0) {
-		p = (int*) def;
+	pos = posPtr;
+	if (pos == 0) {
+		pos = (int*) def;
 	}
-	q = a3;
-	if (q == 0) {
-		q = (int*) def;
+	rot = rotPtr;
+	if (rot == 0) {
+		rot = (int*) def;
 	}
-	if (a1 < 0) {
+	if (sceneCtx < 0) {
 		return 0;
 	}
-	d3_SelectSceneContext(a1, 1);
-	if (a5 != 0) {
-		v5 = d3_FindSceneObject(a4, 0x100, 0, a5);
+	d3_SelectSceneContext(sceneCtx, 1);
+	if (dummyName != 0) {
+		v5 = d3_FindSceneObject(parentObj, 0x100, 0, dummyName);
 		if (v5 != 0) {
 			transformed = 1;
 			goto have;
 		}
 	}
-	if (p == 0 && q == 0) {
+	if (pos == 0 && rot == 0) {
 		goto done;
 	}
-	*(int*) &opt[0] = p[0];
-	*(int*) &opt[1] = p[1];
-	*(int*) &opt[2] = p[2];
+	*(int*) &opt[0] = pos[0];
+	*(int*) &opt[1] = pos[1];
+	*(int*) &opt[2] = pos[2];
 have:
 	if (transformed != 0) {
 		d3_TransformPoint((char*) v5, (char*) v5 + 0x4c, (int*) opt);
 	}
-	v5 = gm_SelectEntityHeadSet(*(unsigned short*) a0);
+	v5 = gm_SelectEntityHeadSet(*(unsigned short*) entity);
 	if (v5 != 0) {
 		v6 = (char*) (v5 + 4);
-		*(char**) (a0 + 0x184) = ch_CreateAtPosition(v6, opt);
-		if (*(char**) (a0 + 0x184) != 0) {
-			fcn_0064d41a(*(char**) (*(char**) (a0 + 0x184) + 0x34), g_68b0d8, *(int*) (a0 + 4));
-			*(void**) (*(char**) (*(char**) (a0 + 0x184) + 0x34) + 0x204) = a0;
-			*(int*) (*(char**) (*(char**) (a0 + 0x184) + 0x34) + 0x48) = *(unsigned short*) a0 | 0x3000000;
-			if (a3 != 0) {
-				d3_SetObjectRotation(*(char**) (*(char**) (a0 + 0x184) + 0x34), a3);
+		*(char**) (entity + 0x184) = ch_CreateAtPosition(v6, opt);
+		if (*(char**) (entity + 0x184) != 0) {
+			fcn_0064d41a(*(char**) (*(char**) (entity + 0x184) + 0x34), g_68b0d8, *(int*) (entity + 4));
+			*(void**) (*(char**) (*(char**) (entity + 0x184) + 0x34) + 0x204) = entity;
+			*(int*) (*(char**) (*(char**) (entity + 0x184) + 0x34) + 0x48) = *(unsigned short*) entity | 0x3000000;
+			if (rotPtr != 0) {
+				d3_SetObjectRotation(*(char**) (*(char**) (entity + 0x184) + 0x34), rotPtr);
 			}
-			strcpy(a0 + 0x1f4, v6);
-			fcn_004fdcf0(a0);
-			fcn_004fdfe0(a0);
+			strcpy(entity + 0x1f4, v6);
+			fcn_004fdcf0(entity);
+			fcn_004fdfe0(entity);
 		}
 	}
 done:
 	d3_SelectSceneContext(savedContext, 1);
-	return *(int*) (a0 + 0x184);
+	return *(int*) (entity + 0x184);
 }

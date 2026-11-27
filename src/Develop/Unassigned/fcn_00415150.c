@@ -1,4 +1,4 @@
-void __cdecl fcn_00431d70(char* a1, char* a2, int idx, int a4, float* out);
+void __cdecl d3_GetAnimFrameOffset(char* a1, char* a2, int idx, int a4, float* out);
 
 /* ADDRESS: GOLDTL 0x00415150 */
 int __cdecl fcn_00415150(char *this_, char *firstOut, char *secondOut)
@@ -8,7 +8,7 @@ int __cdecl fcn_00415150(char *this_, char *firstOut, char *secondOut)
 	p = *(char **)(this_ + 0x1EC);
 	if (p != 0 && *(int *)(p + 0x484) != 0) {
 		p += 0x41C;
-		fcn_00431d70(this_, p, *(int *)p, firstOut, secondOut);
+		d3_GetAnimFrameOffset(this_, p, *(int *)p, firstOut, secondOut);
 		return 1;
 	}
 	*(int *)firstOut = *(int *)(this_ + 0x4C);

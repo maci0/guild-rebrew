@@ -5,7 +5,7 @@ int  __cdecl d2_RunProfessionSelectDialog(void*, void*);
 extern char g_679060[];
 void __cdecl io_FormatTextBuffer(void*, int, int);
 
-int __cdecl fcn_004f73e0(void* entity, void* context)
+int __cdecl gm_HandleChooseProfessionCommand(void* entity, void* context)
 {
 	int result;
 

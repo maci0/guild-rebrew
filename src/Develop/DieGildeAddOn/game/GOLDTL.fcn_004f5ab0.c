@@ -6,7 +6,7 @@ unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, void*, int, int, void*);
 
-void __cdecl fcn_004f5ab0(int a1, int excludedId, int mask)
+void __cdecl gm_NotifyStraftatWitnesses(int straftatId, int excludedId, int mask)
 {
 	char buf[0x200];
 	unsigned char* p;
@@ -15,7 +15,7 @@ void __cdecl fcn_004f5ab0(int a1, int excludedId, int mask)
 
 	p = 0;
 	for (i = 0x9a3816; i < 0x9a9216; i += 0x2d) {
-		if (*(int*) (i - 0x16) == a1) {
+		if (*(int*) (i - 0x16) == straftatId) {
 			p = gm_LookupEntityRecordById(*(int*) i);
 			if (p != 0) {
 				io_FormatTextBuffer(buf, 0x1747, *(unsigned short*) p);
@@ -31,7 +31,7 @@ void __cdecl fcn_004f5ab0(int a1, int excludedId, int mask)
 		    && (*(int*) (e + 0x1e4) & mask) == 0) {
 			for (i = 0; i < 0x800; i++) {
 				if (*(int*) (0x99f800 + i * 8) == *(int*) e
-				    && *(int*) (0x99f804 + i * 8) == a1) {
+				    && *(int*) (0x99f804 + i * 8) == straftatId) {
 					he_PostEntityMessage(*(int*) e, -1, buf, 0, 0x5ec, g_6b5c60);
 					*(int*) (0x7f4e88 + i * 540) &= mask;
 					break;

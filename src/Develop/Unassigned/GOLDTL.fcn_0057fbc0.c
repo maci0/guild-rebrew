@@ -5,7 +5,7 @@ extern int* g_665f08;
 extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 
-int __cdecl fcn_0057fbc0(int* m)
+int __cdecl d2_CheckTutCh3Cat12BuyGate(int* m)
 {
 	if (g_665f08[14] >= 0 && m[0] == 0x28 && m[3] == 0x155) {
 		g_665f08[14] = 1;

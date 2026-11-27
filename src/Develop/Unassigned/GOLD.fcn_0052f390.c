@@ -5,17 +5,17 @@ void* __cdecl m_alloc(unsigned int, const char*);
 void __cdecl m_FreeTracked(void*);
 int __cdecl d3_FindSceneObjectByName(int, int);
 char __cdecl d3_SetObjectVisible(char*, char);
-char* __cdecl fcn_00446e10(char*, float*, float*, char*);
+char* __cdecl d3_SpawnModelObject(char*, float*, float*, char*);
 void __cdecl d3_UpdateObjectLighting(char*);
-int __cdecl fcn_00474b20(int, int, int);
-void __cdecl fcn_00474d80(int, void*, void*);
-void __cdecl fcn_00474e70(int);
+int __cdecl d2_CreateRenderableForm(int, int, int);
+void __cdecl d2_CaptureFormPageTextures(int, void*, void*);
+void __cdecl d2_RenderFormToTextures(int);
 void __cdecl fcn_004754c0(int, int);
-void __cdecl fcn_00437060(int);
+void __cdecl d3_SetZEnable(int);
 SOUND_VOICE* __cdecl sb_PlayVoice(char*, const char*, int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x0052f390 */
-char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
+char* __cdecl d2_OpenBook(int model, char* parent, signed char count, ...)
 {
     char* book;
     char* object;
@@ -39,7 +39,7 @@ char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
         d3_SetObjectVisible(object, 0);
         *(char**)(book + 4) = *(char**)book;
         object = *(char**)book;
-        *(char**)book = fcn_00446e10(*(char**)(object + 0x1f8), (float*)(object + 0x4c), (float*)(object + 0x84), parent);
+        *(char**)book = d3_SpawnModelObject(*(char**)(object + 0x1f8), (float*)(object + 0x4c), (float*)(object + 0x84), parent);
     } else {
         *(int*)(book + 4) = 0;
     }
@@ -51,7 +51,7 @@ char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
     *(int*)(book + 0x26c) = -1;
     va_start(ap, count);
     for (i = 0; i < count; i++) {
-        page = fcn_00474b20(0, 0, va_arg(ap, int));
+        page = d2_CreateRenderableForm(0, 0, va_arg(ap, int));
         ((int*)(book + 0x228))[i] = page;
         if (page == 0) {
             va_end(ap);
@@ -60,8 +60,8 @@ char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
         }
         sprintf(upper, "Buch_Seite%i_oben_ns_nm", i + 1);
         sprintf(lower, "Buch_Seite%i_unten_ns_nm", i + 1);
-        fcn_00474d80(((int*)(book + 0x228))[i], upper, lower);
-        fcn_00474e70(((int*)(book + 0x228))[i]);
+        d2_CaptureFormPageTextures(((int*)(book + 0x228))[i], upper, lower);
+        d2_RenderFormToTextures(((int*)(book + 0x228))[i]);
         if (i > 2) {
             fcn_004754c0(((int*)(book + 0x228))[i], 0);
         }
@@ -73,7 +73,7 @@ char* __cdecl fcn_0052f390(int model, char* parent, signed char count, ...)
         flag = *(char*)0x63342d;
         if (flag != 0) {
             book[0x272] = flag;
-            fcn_00437060(0);
+            d3_SetZEnable(0);
         }
     }
     sb_PlayVoice(*(char**)0x6f240c, "Aufklappen_s", 1, 0x3f, 0x7f, 0, 0);

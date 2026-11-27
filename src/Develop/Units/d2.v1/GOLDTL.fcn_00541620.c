@@ -45,7 +45,7 @@ int __cdecl he_GetActiveKrediteByLender(int, int, int, int*);
 int __cdecl he_GetActiveKrediteByBorrower(int, char*, int*);
 int __cdecl fcn_0050d2a0(int);
 int __cdecl amt_ProcessPrivilegeIncome(unsigned short, int, int*);
-int __cdecl fcn_004fcb50(unsigned short, int*, int);
+int __cdecl gm_CalcEntityTaxSlots(unsigned short, int*, int);
 void __cdecl fcn_005459a0(int);
 void __cdecl fcn_00476970(int);
 void __cdecl fcn_00469e30(int);
@@ -250,7 +250,7 @@ void __cdecl fcn_00541620(void)
 		d1f8 += v1d0[1] + v1d0[2];
 		c1fc += v1d0[1] + v1d0[2];
 	}
-	n = fcn_004fcb50(((unsigned short)g_774970), (int*)&revenue, 0);
+	n = gm_CalcEntityTaxSlots(((unsigned short)g_774970), (int*)&revenue, 0);
 	if (n != 0) {
 		i = 0;
 		do {

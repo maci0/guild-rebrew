@@ -647,7 +647,7 @@ extern int g_14cbca0;
 extern int gm_NextEntityId;
 extern unsigned char g_773d75;
 char* __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
-void __cdecl fcn_00501d20(int season);
+void __cdecl gm_RefreshLocalMarketStock(int season);
 
 /* ADDRESS: GOLDTL 0x004ee8c0 */
 /* ADDRESS: GOLD 0x004ecb30 */
@@ -667,7 +667,7 @@ int __cdecl ahm_AllocateEntitySlot(char* obj, char* tgt, char* src)
 			if (query != 0) {
 				gm_AddObjekt(*(int*) (query + 2), *(int*) (obj + 8), 2);
 			}
-			fcn_00501d20(g_773d75);
+			gm_RefreshLocalMarketStock(g_773d75);
 			return 1;
 		}
 	}

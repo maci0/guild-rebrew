@@ -22,18 +22,18 @@ extern char g_7f4ca0[];
 unsigned short __cdecl gm_RandomMod(int n);
 
 /* ADDRESS: GOLDTL 0x004888a0 */
-int __cdecl ai_FlagIdleWorkersForRecovery(Ent* e)
+int __cdecl ai_FlagIdleWorkersForRecovery(Ent* meister)
 {
 	int found;
 	int i;
 
-	if (e->state & 4) {
+	if (meister->state & 4) {
 		return 0;
 	}
-	e->state |= 4;
+	meister->state |= 4;
 	found = 0;
 	for (i = 0; !found && i < 768; i++) {
-		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].owner == e->owner && ((Ent*)g_7f4ca0)[i].alive != 0 && ((Ent*)g_7f4ca0)[i].task == 0 && (((Ent*)g_7f4ca0)[i].state & 4) == 0) {
+		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].owner == meister->owner && ((Ent*)g_7f4ca0)[i].alive != 0 && ((Ent*)g_7f4ca0)[i].task == 0 && (((Ent*)g_7f4ca0)[i].state & 4) == 0) {
 			if (((Ent*)g_7f4ca0)[i].rest < 168.0f || ((Ent*)g_7f4ca0)[i].food < 168.0f) {
 				found = 1;
 			}
@@ -46,7 +46,7 @@ int __cdecl ai_FlagIdleWorkersForRecovery(Ent* e)
 		return 0;
 	}
 	for (i = 0; i < 768; i++) {
-		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].owner == e->owner && ((Ent*)g_7f4ca0)[i].alive != 0 && ((Ent*)g_7f4ca0)[i].task == 0 && (((Ent*)g_7f4ca0)[i].state & 4) == 0) {
+		if (((Ent*)g_7f4ca0)[i].id != 0xffff && ((Ent*)g_7f4ca0)[i].owner == meister->owner && ((Ent*)g_7f4ca0)[i].alive != 0 && ((Ent*)g_7f4ca0)[i].task == 0 && (((Ent*)g_7f4ca0)[i].state & 4) == 0) {
 			((Ent*)g_7f4ca0)[i].flags |= 0x10;
 		}
 	}

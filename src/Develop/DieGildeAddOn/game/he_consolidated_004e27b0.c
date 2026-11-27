@@ -37,7 +37,7 @@ void __cdecl d2_SelectControl(int);
 char* __cdecl d2_GetControlValue(int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_004e48b0(void);
+void __cdecl cut_FadeToBlack(void);
 void __cdecl evt_StopScriptIfActive(int);
 void __cdecl cut_WaitForScript(int);
 void __cdecl d3snd_StopTrackedVoices(void);
@@ -146,7 +146,7 @@ void __cdecl cut_PlayBirthCutscene(char* event)
 	cm_AppendPacketFieldDelta(1, 0x10, 0x30, buf);
 	cm_RequestChangeAttribute();
 	d2_DestroyForm(sc);
-	fcn_004e48b0();
+	cut_FadeToBlack();
 	evt_StopScriptIfActive(esc);
 	cut_WaitForScript(esc);
 	d3snd_StopTrackedVoices();

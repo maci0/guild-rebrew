@@ -28,7 +28,7 @@ int __cdecl cm_SendCopyEntityData(void*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl cm_GetCommandResult(int);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 void __cdecl he_AssignActionSlot(void*, int, int, int);
 void __cdecl fcn_00526120(int, int);
 int __cdecl d2_CanCloseWindowDuringTutorial(void);
@@ -263,7 +263,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 										fcn_0057e880(0x20, 0, 0, 0);
 									}
 found_row:
-									fcn_004c35f0();
+									d3snd_PlayWorkerOrderVoice();
 									r = (int*) 0x7e30d0;
 									do {
 										if (*r == 0xffff) {

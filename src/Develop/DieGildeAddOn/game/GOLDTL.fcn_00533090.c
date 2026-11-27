@@ -60,7 +60,7 @@ void __cdecl d2_HandleEntityChooser(void);
 void __cdecl gm_ChangeBuildingRoom(int, int);
 
 /* ADDRESS: GOLDTL 0x00533090 */
-void __cdecl fcn_00533090(unsigned int flags)
+void __cdecl d2_UpdateBuildingCameraAndUi(unsigned int flags)
 {
 	char* p;
 	char* q;

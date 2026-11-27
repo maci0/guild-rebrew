@@ -507,3 +507,49 @@ impl = ""
 # command.c defines it for every target again (the n06 guard was wrong).
 [specials.cm_ExSetWohnsitz]
 impl = ""
+
+# Real Gold bodies define these again (17 Gold rows rebound 2026-11-27 after the 2026-10-24 retire).
+[specials.d2_ShowMeisterbriefDialog]
+impl = ""
+
+[specials.d2_RunZunftLevel2Menu]
+impl = ""
+
+[specials.he_NotifyDomizil01]
+impl = ""
+
+[specials.he_NotifyDomizil03]
+impl = ""
+
+[specials.vfs_FindPathNode]
+impl = ""
+
+[specials.d3_AttachAnimationToContext]
+impl = ""
+
+[specials.d3_UpdateObjectCameraTransform]
+impl = ""
+
+[specials.g_office_role_templates]
+impl = ""
+
+[specials.g_office_float_table]
+impl = ""
+
+[specials.ch_Create]
+impl = ""
+
+[specials.ch_SetVisible]
+impl = ""
+
+[specials.ch_Updatelowpoly]
+impl = ""
+
+[specials.d2_GetResourceData]
+impl = ""
+
+[specials.d3_LoadAnimStream]
+impl = ""
+
+[specials.txt_FindEntryIndex]
+impl = ""

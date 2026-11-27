@@ -9,7 +9,7 @@ extern char s_005feb68[]; /* 0x005feb68 */
 extern char s_005feb3c[]; /* 0x005feb3c */
 
 void __cdecl fcn_004222b0(const char* msg);
-void __cdecl fcn_004796b0(int a);
+void __cdecl d2_ClearSurface(int a);
 
 /* ADDRESS: GOLD 0x00476700 */
 void __cdecl fcn_00476700(void)
@@ -25,5 +25,5 @@ void __cdecl fcn_00476700(void)
 		fcn_004222b0(s_005feb3c);
 		return;
 	}
-	fcn_004796b0(m->unk_028);
+	d2_ClearSurface(m->unk_028);
 }

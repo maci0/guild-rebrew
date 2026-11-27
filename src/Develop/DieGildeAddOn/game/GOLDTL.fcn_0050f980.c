@@ -4,7 +4,7 @@ int __cdecl gm_GetBuildingTechEffect(void*, int, int);
 int __cdecl amt_GetRoleTemplate(int, void*);
 int __cdecl gm_GetGuildHall(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
-float __cdecl fcn_004e7990(void*, void*, int, unsigned int);
+float __cdecl amt_CalcOfficeFavor(void*, void*, int, unsigned int);
 int __cdecl gm_HasActiveSpecialObject(void*, int);
 
 /* Effective price of one inventory slot: base value from the object class,
@@ -98,7 +98,7 @@ float __cdecl gm_CalcEntityFavor(unsigned int entityId, unsigned int targetId, u
     } while (entityIndex < 0x100);
     v3 = firstOffset + 0x7f4ca0;
     secondOffset = targetId * 0x21c;
-    score = fcn_004e7990((void*) v3, (void*) (secondOffset + 0x7f4ca0), qual, flags) + score;
+    score = amt_CalcOfficeFavor((void*) v3, (void*) (secondOffset + 0x7f4ca0), qual, flags) + score;
     if (*(char*) (secondOffset + 0x7f4e06)) {
         amt_GetRoleTemplate(*(unsigned char*) (secondOffset + 0x7f4e06), q);
         v17 = *(unsigned char*) (q + 8);

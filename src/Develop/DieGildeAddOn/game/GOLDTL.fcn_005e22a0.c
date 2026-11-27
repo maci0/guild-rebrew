@@ -56,7 +56,7 @@ void __cdecl d3_SetCameraHeightFraction(int);
 void __cdecl fcn_0043bbf0(unsigned char);
 void __cdecl d3_ReleaseUnusedSceneObjects(void);
 void __cdecl fcn_0043ace0(int);
-void __cdecl fcn_0041b820(float*, float*, float*);
+void __cdecl d3_SetGammaParams(float*, float*, float*);
 
 void __cdecl d3_ApplyGraphicsOptions(void)
 {
@@ -132,5 +132,5 @@ void __cdecl d3_ApplyGraphicsOptions(void)
 		b[i] = g_77668c * g_776680[i];
 		c[i] = g_77669c * g_776690[i];
 	}
-	fcn_0041b820(a, b, c);
+	d3_SetGammaParams(a, b, c);
 }

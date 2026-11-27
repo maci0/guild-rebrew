@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0047b630 */
-int __cdecl fcn_0047b630(int x, int y, int* surface, char* sprite, int factor)
+int __cdecl d2_DrawScaledRemappedRleSprite(int x, int y, int* surface, char* sprite, int factor)
 {
 	unsigned int* line_count;
 	unsigned int* run;

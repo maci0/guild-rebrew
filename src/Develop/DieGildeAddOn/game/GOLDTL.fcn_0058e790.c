@@ -34,7 +34,7 @@ extern float g_6628bc;
 
 int __cdecl d3snd_SelectVoiceCode(int, int);
 char* __cdecl d2_RunSeance(char*, char*);
-float __cdecl fcn_004f4770(char*);
+float __cdecl gv_CalcSeanceBonus(char*);
 float __cdecl gm_RandomFloat01(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl fcn_00470820(int, int, char*);
@@ -68,7 +68,7 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 	mode = 0;
 	t = d3snd_SelectVoiceCode(*(int*) (res + 0x14), *(int*) (res + 0x4c));
 	m = d2_RunSeance(e, res);
-	f = fcn_004f4770(e);
+	f = gv_CalcSeanceBonus(e);
 	if (gm_RandomFloat01() + f - 0.4f < 1.0f) {
 		mode = 2;
 	}

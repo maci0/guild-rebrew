@@ -29,10 +29,10 @@ int __cdecl sb_LoadLocalizedSampleBank(char*, int);
 void __cdecl d2_UpdateTutCh4Cat12Msg10Step(void);
 void __cdecl d2_CheckTutCh4Cat12Action0cGate(void);
 void __cdecl d2_UpdateTutCh4Cat12Msg11Step(void);
-void __cdecl fcn_0057f700(void);
-void __cdecl fcn_0057f770(void);
-void __cdecl fcn_0057f8b0(void);
-void __cdecl fcn_0057f930(void);
+void __cdecl d2_CheckTutCh4Cat12Action78Gate(void);
+void __cdecl d2_UpdateTutCh4Cat02Msg10Step(void);
+void __cdecl d2_CheckTutCh4Cat02ActionGate(void);
+void __cdecl d2_GrantTutorialGold(void);
 void __cdecl d2_FocusTutorialBuilding0x12(void);
 
 int* __cdecl d2_CreateTutorialChapter4(void)
@@ -127,8 +127,8 @@ int* __cdecl d2_CreateTutorialChapter4(void)
 	p[0xa] = (int) g_6a8f78;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xd] = (int) fcn_0057f930;
-	p[0xf] = (int) fcn_0057f700;
+	p[0xd] = (int) d2_GrantTutorialGold;
+	p[0xf] = (int) d2_CheckTutCh4Cat12Action78Gate;
 	p[0xe] = (int) d2_UpdateTutCh4Cat12Msg11Step;
 	p[0x10] = 1;
 	p[0x11] = 0x2148;
@@ -176,7 +176,7 @@ int* __cdecl d2_CreateTutorialChapter4(void)
 	p[0xa] = (int) g_6a8f18;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xd] = (int) fcn_0057f930;
+	p[0xd] = (int) d2_GrantTutorialGold;
 	p[0xe] = (int) d2_UpdateTutCh4Cat12Msg10Step;
 	p[0xf] = (int) d2_CheckTutCh4Cat12Action0cGate;
 	p[0x10] = 1;
@@ -225,9 +225,9 @@ int* __cdecl d2_CreateTutorialChapter4(void)
 	p[0xa] = (int) g_6a8eb8;
 	p[0xb] = 0x429;
 	p[0xc] = 0x8e;
-	p[0xd] = (int) fcn_0057f930;
-	p[0xf] = (int) fcn_0057f8b0;
-	p[0xe] = (int) fcn_0057f770;
+	p[0xd] = (int) d2_GrantTutorialGold;
+	p[0xf] = (int) d2_CheckTutCh4Cat02ActionGate;
+	p[0xe] = (int) d2_UpdateTutCh4Cat02Msg10Step;
 	p[0x10] = 1;
 	p[0x11] = 0x2148;
 	p[0x12] = 0xa;

@@ -21,7 +21,7 @@ int __cdecl gm_FindRecordById(int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl cut_FindCutsceneById(int);
 
-void __cdecl fcn_0051ea70(void)
+void __cdecl ls_RebindSavedSceneRefs(void)
 {
 	int save;
 	int i;

@@ -7,17 +7,17 @@ extern GuiEnt* g_00f8f080;
 extern float g_6628a8;
 extern int d2_CurrentWindowId;
 extern char g_6b5c60[];
-char* __cdecl fcn_00430470(char*, const char*, void*);
-unsigned int __cdecl fcn_00430bd0(void*, unsigned int, unsigned int, char*);
-int __cdecl fcn_00430fa0(char*, int, int);
-void __cdecl fcn_00430aa0(char*);
+char* __cdecl vfs_Tfopen(char*, const char*, void*);
+unsigned int __cdecl vfs_ReadData(void*, unsigned int, unsigned int, char*);
+int __cdecl vfs_fseek(char*, int, int);
+void __cdecl CloseVfsStream(char*);
 int __cdecl fcn_00472380(short, short, short, short, unsigned int);
 int __cdecl d2_CreateChildWindow(short, short, short, short, unsigned int, int);
 void __cdecl fcn_004721d0(char*, int);
 int __cdecl fcn_00468880(char*);
 void __cdecl d2_AddRefcount(int);
 int __cdecl d2_AddElementToWindow(short, short, int, int);
-int __cdecl fcn_0042e770(char*);
+int __cdecl txt_FindEntryIndex(char*);
 int __cdecl d2_ShowTxt(short, short, char*, int);
 int __cdecl fcn_0046a350(int, int, int, int, unsigned char, int);
 int __cdecl fcn_0046a950(int, int, unsigned char, int, int, int, unsigned char, int);
@@ -28,7 +28,7 @@ void __cdecl fcn_0046cd90(short, short, int);
 #define F32(p) (*(float*)(p))
 
 /* ADDRESS: GOLD 0x004741e0 */
-int __cdecl fcn_004741e0(short x, short y, char* name)
+int __cdecl d2_LoadForm(short x, short y, char* name)
 {
     char message[256];
     char path[256] = "";
@@ -66,24 +66,24 @@ int __cdecl fcn_004741e0(short x, short y, char* name)
         strcat(path, name);
         strcat(path, ".form");
     }
-    file = fcn_00430470(path, "rb", *(void**)0x6333fc);
+    file = vfs_Tfopen(path, "rb", *(void**)0x6333fc);
     if (!file) {
         sprintf(message, "Konnte die Form\n %s\nnicht laden...", name);
         return -1;
     }
-    fcn_00430bd0(header, 1, 4, file);
+    vfs_ReadData(header, 1, 4, file);
     version = (signed char)header[3] - '0';
     header[4] = 0;
     if (version == 2) {
-        fcn_00430bd0(&count, 4, 1, file);
-        fcn_00430bd0((void*)0x68ce98, 0x101c, count, file);
+        vfs_ReadData(&count, 4, 1, file);
+        vfs_ReadData((void*)0x68ce98, 0x101c, count, file);
     } else {
         version = 0;
-        fcn_00430fa0(file, 0, 0);
-        fcn_00430bd0(&count, 4, 1, file);
-        fcn_00430bd0((void*)0x633f18, 0xed4, count, file);
+        vfs_fseek(file, 0, 0);
+        vfs_ReadData(&count, 4, 1, file);
+        vfs_ReadData((void*)0x633f18, 0xed4, count, file);
     }
-    fcn_00430aa0(file);
+    CloseVfsStream(file);
     slot = 1;
     if (I32(0xfb1450)) {
         p = 0xfb1450;
@@ -191,10 +191,10 @@ int __cdecl fcn_004741e0(short x, short y, char* name)
                         }
                     }
                     if (typePtr[-0x330] == 'C' && strcmp(imageName, g_6b5c60) != 0) {
-                        resource = fcn_0042e770(imageName);
+                        resource = txt_FindEntryIndex(imageName);
                         if (resource != -1) {
                             element = d2_ShowTxt(S16(coords), S16(coords + 0x60), ((char**)0x143a1c0)[resource], windowID);
-                            g_00f8f080[element].f08 = fcn_0042e770(imageName);
+                            g_00f8f080[element].f08 = txt_FindEntryIndex(imageName);
                             g_00f8f080[element].f40 = dialogOff + 0xfb1020;
                         }
                     } else if (typePtr[-0x330] == 'A') {
@@ -216,7 +216,7 @@ int __cdecl fcn_004741e0(short x, short y, char* name)
                 } while (j < S16(record + 0xcc));
             }
             if (record[0xe50]) {
-                resource = fcn_0042e770(record + 0xe50);
+                resource = txt_FindEntryIndex(record + 0xe50);
                 if (resource != -1) {
                     strcpy(*(char**)(window + 0x2c), ((char**)0x143a1c0)[resource]);
                 }

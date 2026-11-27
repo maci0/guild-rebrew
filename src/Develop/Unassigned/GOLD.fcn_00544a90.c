@@ -28,10 +28,10 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl he_FreeAction(char*);
 void __cdecl he_RollTripletEventScores(char*, char*, char*);
-int __cdecl fcn_004c4fa0(void*);
+int __cdecl cm_SendAllocCutscene(void*);
 int __cdecl fcn_004f25d0(int, unsigned char**, void**);
 int __cdecl fcn_004ef6b0(int, void*);
-int __cdecl fcn_004f2a10(int*, char*, int, int);
+int __cdecl gv_SendSetGraveOwner(int*, char*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 /* ADDRESS: GOLD 0x00544a90 */
@@ -200,7 +200,7 @@ void __cdecl fcn_00544a90(char* e)
 		}
 		if (fcn_004f25d0((int) b, &rec, &hit) != 0) {
 			v = fcn_004ef6b0(*(int*) (rec + 0x65), hit);
-			fcn_004f2a10(0, (char*) rec, *(int*) hit, v);
+			gv_SendSetGraveOwner(0, (char*) rec, *(int*) hit, v);
 		}
 		fill_dst = msg;
 		fill_len = sizeof(msg);
@@ -244,7 +244,7 @@ void __cdecl fcn_00544a90(char* e)
 		*(pos14_7f4c00*) (e + 0x52) = *(pos14_7f4c00*) (msg + 0x18);
 		*(int*) (e + 0x84) = -1;
 		cm_SendSetHE(4, e);
-		fcn_004c4fa0(msg);
+		cm_SendAllocCutscene(msg);
 		return;
 		}
 		if (a[2] != 6) {

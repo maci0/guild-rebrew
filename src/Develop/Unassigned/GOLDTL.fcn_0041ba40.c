@@ -34,7 +34,7 @@ extern void* g_6b5df4;
 long __stdcall D3DXCreateFont(Device* dev, HFONT font, Font** out);
 int __cdecl fcn_0041b870(void);
 
-int __cdecl fcn_0041ba40(void)
+int __cdecl d3_RestoreDeviceResources(void)
 {
 	if ((*(Font**)&g_6b5de4) == 0) {
 		D3DXCreateFont(((Device*)g_6b5de0), (HFONT) GetStockObject(0xc), &(*(Font**)&g_6b5de4));

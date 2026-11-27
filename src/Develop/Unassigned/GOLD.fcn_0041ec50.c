@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0041ec50 */
-void __cdecl fcn_0041ec50(unsigned int* destination, unsigned int* source)
+void __cdecl d3_DownsampleSurface16(unsigned int* destination, unsigned int* source)
 {
 	unsigned int mask;
 	unsigned int rshift;

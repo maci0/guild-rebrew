@@ -1,11 +1,11 @@
 char __cdecl d3_SetSubtreeVisible(int model, unsigned char visible);
 char __cdecl d3_SetObjectVisible(char* model, char visible);
 void __cdecl d3_UpdateObjectLighting(int model);
-void __cdecl fcn_00402ba0(char* character);
+void __cdecl ch_Updatelowpoly(char* character);
 void __cdecl ReportClientMessage(const char* message);
 
 /* ADDRESS: GOLD 0x00402480 */
-void __cdecl fcn_00402480(char* character, int visible)
+void __cdecl ch_SetVisible(char* character, int visible)
 {
     if (character == 0 || *(int*) (character + 0x34) == 0) {
         ReportClientMessage("ch_SetVisible(): invalid character");
@@ -32,5 +32,5 @@ void __cdecl fcn_00402480(char* character, int visible)
     } else {
         *(unsigned short*) (character + 0x8c) |= 0x20;
     }
-    fcn_00402ba0(character);
+    ch_Updatelowpoly(character);
 }

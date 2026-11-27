@@ -3,7 +3,7 @@ extern int g_6b8300;
 extern unsigned short g_774970;
 /* Release the client path/mode tables and reset the scene clock state. */
 
-void __cdecl fcn_004e48b0(void);
+void __cdecl cut_FadeToBlack(void);
 void __cdecl d3_DestroyObject(int);
 void __cdecl fcn_004230e0(int);
 void __cdecl gv_SpawnIfPending(int);
@@ -22,7 +22,7 @@ void __cdecl fcn_004d2a60(int a0)
 	char* p;
 	int* q;
 
-	fcn_004e48b0();
+	cut_FadeToBlack();
 	v = *(int*) 0x772ea0;
 	if (v) {
 		d3_DestroyObject(v);

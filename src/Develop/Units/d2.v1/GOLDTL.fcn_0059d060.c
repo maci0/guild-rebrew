@@ -51,7 +51,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 int __cdecl cm_SendCopyEntityData(Packet*);
-void __cdecl fcn_004c35f0(void);
+void __cdecl d3snd_PlayWorkerOrderVoice(void);
 int __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl he_AssignActionSlot(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -122,7 +122,7 @@ int __cdecl d2_RunTaschendiebstahlDialog(int unused, char* param)
 					else {
 						flag = 1;
 						cm_SendCopyEntityData(&pkt);
-						fcn_004c35f0();
+						d3snd_PlayWorkerOrderVoice();
 						count = 0;
 						for (p = (char*) 0x7e4260; (int) p < 0x7e42e0; p += 4) {
 							player = *(Player**) p;

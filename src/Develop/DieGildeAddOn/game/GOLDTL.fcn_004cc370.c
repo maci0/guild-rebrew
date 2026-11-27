@@ -3,7 +3,7 @@
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_CheckEntityType(char*);
-void __cdecl fcn_0052db70(char*);
+void __cdecl gm_UpdateBuildingSmokeEffect(char*);
 
 int __cdecl cm_ExUpdateBuildingSmoke(char* packet, char* reply)
 {
@@ -11,7 +11,7 @@ int __cdecl cm_ExUpdateBuildingSmoke(char* packet, char* reply)
 
 	building = gm_StartFilteredEntitySearch(1, 1, *(int*) (packet + 0x10));
 	if (building != 0 && *(int*) (building + 0x61) != 0 && gm_CheckEntityType(building) == 0) {
-		fcn_0052db70(building);
+		gm_UpdateBuildingSmokeEffect(building);
 	}
 	if (reply != 0) {
 		reply[0] = 1;

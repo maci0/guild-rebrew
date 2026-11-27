@@ -15,7 +15,7 @@ extern struct s_fd7c50 g_fd7c50[64];
 
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl fcn_00457c20(int);
-void __cdecl fcn_004473f0(void);
+void __cdecl d3_ClearScene(void);
 void __cdecl d3sm_Destroy(int);
 
 void __cdecl fcn_0050d490(void)
@@ -27,18 +27,18 @@ void __cdecl fcn_0050d490(void)
 		fcn_00457c20(g_6f1c28);
 		g_6f1c28 = 0;
 	}
-	fcn_004473f0();
+	d3_ClearScene();
 	for (i = 0; i < 0x2dc; i++) {
 		if (g_76faa0[i] > 0) {
 			d3_SelectSceneContext(g_76faa0[i], 0);
-			fcn_004473f0();
+			d3_ClearScene();
 			g_76faa0[i] = -1;
 		}
 	}
 	for (i = 0; i < 0x22; i++) {
 		if (g_76fa60[i] > 0) {
 			d3_SelectSceneContext(g_76fa60[i], 0);
-			fcn_004473f0();
+			d3_ClearScene();
 			g_76fa60[i] = -1;
 		}
 	}

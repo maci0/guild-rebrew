@@ -31,7 +31,7 @@ char* __cdecl strcpy(char* a, const char* b);
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x004316c0 */
-void __cdecl fcn_004316c0(int obj)
+void __cdecl d3_UpdateObjectAnimPose(int obj)
 {
 	PathRec rec[4];
 	float left[0xc];

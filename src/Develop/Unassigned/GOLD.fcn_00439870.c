@@ -1,8 +1,8 @@
-void __cdecl fcn_00458d90(char* object, int a, int b, float* output);
+void __cdecl d3_BuildViewMatrix(char* object, int a, int b, float* output);
 void __cdecl d3_MultiplyAffineMatrices(float* a, float* b, float* output);
 
 /* ADDRESS: GOLD 0x00439870 */
-void __cdecl fcn_00439870(char* object, char* parent, int force)
+void __cdecl d3_UpdateObjectCameraTransform(char* object, char* parent, int force)
 {
 	float matrix[16];
 	char* source;
@@ -10,7 +10,7 @@ void __cdecl fcn_00439870(char* object, char* parent, int force)
 	char* source2;
 	char* destination2;
 	if (!(object[0x212] & 0x80) || (char) force != 0) {
-		fcn_00458d90(object, 0, 0, (float*) (*(char**) (object + 0x1ec) + 8));
+		d3_BuildViewMatrix(object, 0, 0, (float*) (*(char**) (object + 0x1ec) + 8));
 		object[0x212] |= 0x80;
 	}
 	if ((object[0x213] & 1) && (char) force == 0

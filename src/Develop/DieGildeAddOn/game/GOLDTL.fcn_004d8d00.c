@@ -43,7 +43,7 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, char*);
 int __cdecl cm_SendCutCommand51(int, void*);
 int __cdecl cm_RequestChTalkAction(char*, int, int, char*);
-unsigned int __cdecl fcn_004d89c0(int, unsigned int, int);
+unsigned int __cdecl cut_ExecuteCombatAttack(int, unsigned int, int);
 int __cdecl sprintf(char*, char*, ...);
 int __cdecl _ftol(void);
 
@@ -494,7 +494,7 @@ case4b:
 				if (*((unsigned char*)v68 + 8) != 0
 				    && CompareVector3WithinTolerance(vec,
 					(float*)(ent34((char*)v68) + 0x4c), 49.5f)) {
-					p->timer = fcn_004d89c0((int)context, (unsigned int)obj,
+					p->timer = cut_ExecuteCombatAttack((int)context, (unsigned int)obj,
 					    *(int*)(e + 0x204));
 					goto after2;
 				}

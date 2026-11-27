@@ -32,7 +32,7 @@ extern unsigned short g_7f4c04;
 extern int g_7f4c08;
 extern short g_7f4c0c;
 
-int __cdecl fcn_004e9ee0(void);
+int __cdecl amt_ProcessOfficeElections(void);
 void __cdecl fcn_004c5980(Msg*);
 
 void __cdecl d2_SendTutorialTownMsgA0(int a)
@@ -42,7 +42,7 @@ void __cdecl d2_SendTutorialTownMsgA0(int a)
 	unsigned int n;
 	char t;
 
-	if (a == 0 && fcn_004e9ee0() != 0) {
+	if (a == 0 && amt_ProcessOfficeElections() != 0) {
 		memset(&msg, 0, sizeof(msg));
 		n = 0;
 		for (i = 0; i < 768; i++) {

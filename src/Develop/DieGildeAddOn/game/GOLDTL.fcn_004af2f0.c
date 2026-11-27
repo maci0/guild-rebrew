@@ -39,11 +39,11 @@ unsigned short __cdecl gm_RandomMod(int);
  * `w` to a callee-saved register (object 267 bytes instead of 264). */
 /* ADDRESS: GOLD 0x004adff0 */
 /* ADDRESS: GOLDTL 0x004ae130 */
-int __cdecl gm_IsSlotActivePerson(unsigned short a1)
+int __cdecl gm_IsSlotActivePerson(unsigned short slot)
 {
 	int o;
 
-	o = (a1 & 0xffff) * 540;
+	o = (slot & 0xffff) * 540;
 	if (*(unsigned short*) ((char*) g_7f4ca0 + o) != 0xffff
 	    && *((unsigned char*) g_7f4ca0 + 8 + o) > 0
 	    && *((unsigned char*) g_7f4ca0 + 2 + o) < 0xa) {
@@ -55,20 +55,20 @@ int __cdecl gm_IsSlotActivePerson(unsigned short a1)
 
 /* ADDRESS: GOLD 0x004ae080 */
 /* ADDRESS: GOLDTL 0x004ae1c0 */
-int __cdecl gm_IsSlotNpcPerson(int a1)
+int __cdecl gm_IsSlotNpcPerson(int slot)
 {
 	unsigned char c;
 	unsigned char f;
 
-	a1 &= 0xffff;
-	if (*(unsigned short*) ((int) g_7f4ca0 + a1 * 540) == 0xffff) {
+	slot &= 0xffff;
+	if (*(unsigned short*) ((int) g_7f4ca0 + slot * 540) == 0xffff) {
 		return 0;
 	}
-	c = *(unsigned char*) ((int) g_7f4ca0 + 8 + a1 * 540);
+	c = *(unsigned char*) ((int) g_7f4ca0 + 8 + slot * 540);
 	if (c <= 0) {
 		return 0;
 	}
-	f = *(unsigned char*) ((int) g_7f4ca0 + 2 + a1 * 540);
+	f = *(unsigned char*) ((int) g_7f4ca0 + 2 + slot * 540);
 	if (f < 0xa && f != 6 && f != 7) {
 		return 1;
 	}
@@ -78,16 +78,16 @@ int __cdecl gm_IsSlotNpcPerson(int a1)
 
 /* ADDRESS: GOLD 0x004ae0d0 */
 /* ADDRESS: GOLDTL 0x004ae210 */
-int __cdecl gm_IsSlotPlayerPerson(int a1)
+int __cdecl gm_IsSlotPlayerPerson(int slot)
 {
 	unsigned char c;
 	unsigned char f;
 
-	a1 &= 0xffff;
-	if (*(unsigned short*) ((int) g_7f4ca0 + a1 * 540) != 0xffff) {
-		c = *(unsigned char*) ((int) g_7f4ca0 + 8 + a1 * 540);
+	slot &= 0xffff;
+	if (*(unsigned short*) ((int) g_7f4ca0 + slot * 540) != 0xffff) {
+		c = *(unsigned char*) ((int) g_7f4ca0 + 8 + slot * 540);
 		if (c > 0) {
-			f = *(unsigned char*) ((int) g_7f4ca0 + 2 + a1 * 540);
+			f = *(unsigned char*) ((int) g_7f4ca0 + 2 + slot * 540);
 			if (f == 6 || f == 7) {
 				return 1;
 			}
@@ -322,7 +322,7 @@ send:
 
 
 #pragma optimize("y", off)
-int __cdecl fcn_004ae740(int mode, int* pairs, int idx, char* text, void* out)
+int __cdecl hst_HandleRndAmtstraegerin(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
 	Rec21c* r;
@@ -438,7 +438,7 @@ send:
 
 
 #pragma optimize("y", off)
-int __cdecl fcn_004aea40(int mode, int* pairs, int idx, char* text, void* out)
+int __cdecl hst_HandleRndAmtstraeger(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
 	Rec21c* r;
@@ -557,7 +557,7 @@ send:
 
 
 #pragma optimize("y", off)
-int __cdecl fcn_004aed40(int mode, int* pairs, int idx, char* text, void* out)
+int __cdecl hst_HandleRndAmtsperson(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
 	Rec21c* r;
@@ -680,7 +680,7 @@ send:
  * addresses the 0x200 scratch buffer off ebp; section 13 of
  * docs/msvc6-c-shapes.md. */
 #pragma optimize("y", off)
-int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
+int __cdecl hst_HandleGeld(int mode, int pairs, int idx, char* text, int out)
 {
 	char buf[0x200];
 	unsigned short w;
@@ -689,10 +689,10 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 	int r;
 	void* e;
 
-	if (a1 != 2 || a2 == 0 || a3 == 8) {
+	if (mode != 2 || pairs == 0 || idx == 8) {
 		return 0;
 	}
-	e = gm_LookupEntityRecordById(*(int*) ((char*) a2 + a3 * 8 + 4));
+	e = gm_LookupEntityRecordById(*(int*) ((char*) pairs + idx * 8 + 4));
 	if (e == 0) {
 		return 0;
 	}
@@ -724,9 +724,9 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 		add ecx, ebx
 		rep stosb
 	}
-	hst_SplitFormatPrefix(a4, buf, &n, (int*) &p);
-	n = atoi(a4 + n);
-	io_FormatTextBuffer((void*) a5, (int) buf,
+	hst_SplitFormatPrefix(text, buf, &n, (int*) &p);
+	n = atoi(text + n);
+	io_FormatTextBuffer((void*) out, (int) buf,
 	    gm_AmountToUnits((int) (((float) n * 0.01f) * (float) r),
 	    g_773d75),
 	    g_773d75);
@@ -737,7 +737,7 @@ int __cdecl fcn_004af2f0(int a1, int a2, int a3, char* a4, int a5)
 
 
 #pragma optimize("y", off)
-int __cdecl fcn_004af530(int mode, int* pairs, int idx, char* text, void* out)
+int __cdecl hst_HandleRndKirchenberuf(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
 	Rec21c* r;
@@ -851,7 +851,7 @@ send:
 
 
 #pragma optimize("y", off)
-int __cdecl fcn_004afd70(int mode, int* pairs, int idx, char* text, void* out)
+int __cdecl hst_HandleRndSpieler(int mode, int* pairs, int idx, char* text, void* out)
 {
 	char buf[0x200];
 	int steps[4];

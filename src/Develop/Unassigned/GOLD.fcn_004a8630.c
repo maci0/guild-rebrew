@@ -3,7 +3,7 @@
 
 int __cdecl fcn_004a79d0(int, int);
 
-void __cdecl fcn_004a8630(int a)
+void __cdecl gm_ReplacePlayerCardSlot(int slotIdx)
 {
-	fcn_004a79d0(*(int*) 0xf83654 + 4, a);
+	fcn_004a79d0(*(int*) 0xf83654 + 4, slotIdx);
 }

@@ -4,7 +4,7 @@ extern char g_7f4ca0[];
 
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00510500(int);
+int __cdecl gm_GetBuildingBonusTier(int);
 unsigned short __cdecl gm_RandomMod(int);
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl io_FormatTextBuffer(char*, int, int, int, int);
@@ -35,7 +35,7 @@ void __cdecl he_AwardEvent0a0Bonus(char* action)
 	if (ent == 0) {
 		return;
 	}
-	kind = fcn_00510500(handle);
+	kind = gm_GetBuildingBonusTier(handle);
 	if (kind == 3) {
 		level = *(int*) (action + 0xac);
 		base = 0;

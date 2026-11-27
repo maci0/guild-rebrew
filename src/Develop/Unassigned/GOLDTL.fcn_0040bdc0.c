@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0040bdc0 */
-void __cdecl fcn_0040bdc0(void)
+void __cdecl ch_ResetGridAndUniverseCache(void)
 {
 	*(int*) 0x67530c = -1;
 	*(int*) 0x675310 = -1;

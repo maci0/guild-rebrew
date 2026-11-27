@@ -3,7 +3,7 @@
 int __cdecl fcn_004f4650(void *, void **, void **);
 int __cdecl fcn_004f1790(void *, void *);
 void __cdecl gv_RequestAddCandidateToOfficePool(void *, void *, int, int);
-void __cdecl fcn_004f2a10(void *, void *, int, int);
+void __cdecl gv_SendSetGraveOwner(void *, void *, int, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
 void __cdecl cm_SendSetGebBesitzer(int, int, int);
@@ -52,7 +52,7 @@ void __cdecl gm_TransferEntityBuildings(void *fromEntity, void *toEntity)
 					 fcn_004f1790(*(void **) ((char *) ent + 0x65), found));
 		if (toEntity != 0 && toEntity != (void *) gm_CityEntity
 			&& *(int *) ((char *) fromEntity + 4) == *(int *) ((char *) found + 4)) {
-			fcn_004f2a10(toEntity, ent, *(int *) found,
+			gv_SendSetGraveOwner(toEntity, ent, *(int *) found,
 						 fcn_004f1790(*(void **) ((char *) ent + 0x65), found));
 		}
 	}

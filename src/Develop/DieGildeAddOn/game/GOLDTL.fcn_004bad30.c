@@ -10,26 +10,26 @@ void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x004bad30 */
-int __cdecl fcn_004bad30(int* request)
+int __cdecl gm_HandleMsg32DeductGood(int* request)
 {
-	float f;
+	float ratio;
 	int id;
 	char buf[0x200];
-	unsigned short* e;
-	char* s;
+	unsigned short* entity;
+	char* building;
 
-	f = (float)((gm_RandomMod(0xd) + 13.0) * 0.01);
-	e = gm_LookupEntityRecordById(request[0]);
-	if (e == 0)
+	ratio = (float)((gm_RandomMod(0xd) + 13.0) * 0.01);
+	entity = gm_LookupEntityRecordById(request[0]);
+	if (entity == 0)
 		return 1;
-	if (gm_HasActiveSpecialObject(e, 0x290) != 0)
+	if (gm_HasActiveSpecialObject(entity, 0x290) != 0)
 		goto fail;
-	if (gm_DeductRandomBuildingGood(e, &id, f) == 0)
+	if (gm_DeductRandomBuildingGood(entity, &id, ratio) == 0)
 		goto fail;
-	s = gm_StartFilteredEntitySearch(1, 1, id);
-	if (s != 0) {
-		io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, s, (int) (f * 100.0f));
-		he_PostEntityMessage(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
+	building = gm_StartFilteredEntitySearch(1, 1, id);
+	if (building != 0) {
+		io_FormatTextBuffer(buf, *(unsigned short*) (request + 1) + 0x12e7, building, (int) (ratio * 100.0f));
+		he_PostEntityMessage(*(int*) (entity + 2), *(int*) (entity + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 		return 0;
 	}
 fail:

@@ -14,7 +14,7 @@ void __cdecl d2_SetElementValue(int, ...);
 void __cdecl fcn_00468cd0(int, int);
 void __cdecl fcn_00468b80(int, int);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_0041b820(float *, float *, float *);
+void __cdecl d3_SetGammaParams(float *, float *, float *);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl fcn_005e12d0(void);
 void __cdecl d3_ApplyGraphicsOptions(void);
@@ -90,7 +90,7 @@ void __cdecl fcn_005e2660(void)
                 second = d2_GetControlValue(c[3]);
                 z[i] = second * (float)first * *(float *)0x662d04;
             }
-            fcn_0041b820(x, y, z);
+            d3_SetGammaParams(x, y, z);
         }
     }
     if (accepted) {

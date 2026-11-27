@@ -78,7 +78,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl fcn_004677e0(int, int, int, int, int, int, int, int);
 #include "d2_gui.h"
-int __cdecl fcn_00510550(char*);
+int __cdecl gm_GetBuildingOptionCount(char*);
 void __cdecl fcn_00533a60(int, int, int*, int, int, int);
 int __cdecl he_HasActiveAction0xa0(char*);
 int __cdecl gm_GetElapsedMinutes(void*, void*);
@@ -124,8 +124,8 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 	d2_SetElementValue(timer1, 0, 100, 0);
 	d2_SetForm(dlg, 2);
 	timer2 = fcn_004677e0(0x57, 7, 200, 0, 100, 0x7b, 2, d2_CurrentWindowId);
-	fcn_00510550(participant);
-	d2_SetElementValue(timer2, 0, fcn_00510550(participant) - 1, 0, 1);
+	gm_GetBuildingOptionCount(participant);
+	d2_SetElementValue(timer2, 0, gm_GetBuildingOptionCount(participant) - 1, 0, 1);
 	d2_SetForm(dlg, 3);
 	fcn_00533a60(d2_CurrentWindowId, 0, ids, stage, g_14b5af8, g_14b5afc);
 

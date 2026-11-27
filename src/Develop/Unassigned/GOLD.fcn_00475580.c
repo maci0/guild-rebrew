@@ -5,7 +5,7 @@ extern GuiEnt* g_00f8f080;
 void __cdecl fcn_00475a90(int index, int value);
 
 /* ADDRESS: GOLD 0x00475580 */
-void __cdecl fcn_00475580(int index, int value)
+void __cdecl d2_SetFormVisibility(int index, int value)
 {
     GuiObj* object;
     int i;

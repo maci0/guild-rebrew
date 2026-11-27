@@ -4,7 +4,7 @@ extern int g_100f1dc, g_1040480, g_1040484, g_1040488, g_104048c, d2_ScreenHeigh
 extern int g_9a9200[8]; extern char g_77dda0[]; extern char* g_6b8300; extern char g_100f8c0[];
 #include "Develop/Units/d2.v1/d2_gui.h"
 void* __cdecl memset(void*, int, unsigned int);
-int __cdecl fcn_004efd30(int);
+int __cdecl gm_LookupSlot170ByKey(int);
 int __cdecl fcn_004f08d0(char*);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl main_RunFrameLoop(int, unsigned int);
@@ -81,14 +81,14 @@ void __cdecl d2_RunKanoneUI(char* obj)
     if (*(int*) (obj + 0x61) == 0)
         return;
 
-    res = (char*) fcn_004efd30(*(int*) (obj + 1));
+    res = (char*) gm_LookupSlot170ByKey(*(int*) (obj + 1));
     if (res == 0) {
         id = fcn_004f08d0(obj);
         if (id != -1) {
             while ((i = cm_GetCommandStatus(id)) == 0)
                 main_RunFrameLoop(i, 0x20007);
         }
-        res = (char*) fcn_004efd30(*(int*) (obj + 1));
+        res = (char*) gm_LookupSlot170ByKey(*(int*) (obj + 1));
         if (res == 0)
             return;
     }

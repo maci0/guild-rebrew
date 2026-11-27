@@ -9,7 +9,7 @@ extern char* lpObjektePROT;
 
 int __cdecl _strcmpi(const char* a, const char* b);
 
-int __cdecl fcn_005105a0(char* o)
+int __cdecl d3_ResolveSceneObjectProtoId(char* obj)
 {
 	char tail[128];
 	char base[256];
@@ -17,7 +17,7 @@ int __cdecl fcn_005105a0(char* o)
 	char* p;
 	int i;
 
-	strcpy(base, o);
+	strcpy(base, obj);
 	p = strchr(base, '_');
 	if (p == 0) {
 		return 0;
@@ -36,7 +36,7 @@ int __cdecl fcn_005105a0(char* o)
 	if (_strcmpi(base, "ob") == 0 || _strcmpi(base + 1, "ob") == 0) {
 		for (i = 0; i < 732; i++) {
 			if (_strcmpi(type, ((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[i]) + 1) == 0) {
-				*(int*) (o + 0x48) = i | 0x1000000;
+				*(int*) (obj + 0x48) = i | 0x1000000;
 				return 1;
 			}
 		}
@@ -47,13 +47,13 @@ int __cdecl fcn_005105a0(char* o)
 	}
 	for (i = 0; i < 88; i++) {
 		if (_strcmpi(type, ((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[i] + 1)) == 0) {
-			*(int*) (o + 0x48) = i | 0x2000000;
+			*(int*) (obj + 0x48) = i | 0x2000000;
 			return 1;
 		}
 	}
 	if (strstr(type, "KONTOR") == 0) {
 		return 0;
 	}
-	*(int*) (o + 0x48) = 0x2000047;
+	*(int*) (obj + 0x48) = 0x2000047;
 	return 1;
 }

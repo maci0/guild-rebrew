@@ -21,7 +21,7 @@ extern char g_7e1ae0[];
 typedef struct {
  unsigned char kind; char name; char unknown002[0x245];
  unsigned char level, max_level; char unknown249[4];
-} BuildingProto4cb7f0;
+} BUILDING_UPGRADE_PROTO;
 
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 void __cdecl ReportClientMessage(const char*);
@@ -45,20 +45,20 @@ void __cdecl fcn_00428340(char*, int, ...);
 void __cdecl d3_BindEntitySceneObject(int, void*, int);
 void __cdecl fcn_0052d9d0(void*);
 int __cdecl gm_GetSeason(char*);
-void __cdecl fcn_005165b0(int);
+void __cdecl d3_ApplySeasonTextureSet(int);
 char __cdecl d3_TraverseSceneObjects(char*, char*, unsigned int, void (__cdecl*)(char*));
 void __cdecl d3_VisitSceneObjects(int, int, int, int, void*);
 void* __cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(int);
-void __cdecl fcn_0052db70(char*);
-void __cdecl fcn_00501d20(int);
+void __cdecl gm_UpdateBuildingSmokeEffect(char*);
+void __cdecl gm_RefreshLocalMarketStock(int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004cb7f0 */
 int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 {
 	unsigned char* upgradeBuilding;
-	BuildingProto4cb7f0* rec;
+	BUILDING_UPGRADE_PROTO* rec;
 	char name[0x80];
 	char path[0x104];
 	char tmp[256];
@@ -79,7 +79,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 	if (upgradeBuilding == 0) {
 		return 1;
 	}
-	rec = &((BuildingProto4cb7f0*)lpGebaeudePROT)[upgradeBuilding[0]];
+	rec = &((BUILDING_UPGRADE_PROTO*)lpGebaeudePROT)[upgradeBuilding[0]];
 	if (rec->level >= rec->max_level) {
 		ReportClientMessage("cm_ExSetGebUpgrade(): already highest level");
 		return 1;
@@ -92,7 +92,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		gv_UpgradeField(upgradeBuilding);
 	}
 	*(int*)name = g_6798d4;
-	strcat(name, &((BuildingProto4cb7f0*)lpGebaeudePROT)[upgradeBuilding[0]].name);
+	strcat(name, &((BUILDING_UPGRADE_PROTO*)lpGebaeudePROT)[upgradeBuilding[0]].name);
 	_strupr(name + 2);
 	i = 0;
 	for (;;) {
@@ -157,7 +157,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 		else if (res == 0) g_773dd4 = (unsigned char)res;
 		else if (res == 2) g_773dd4 = (unsigned char)res;
 		else if (res == 3) g_773dd4 = (unsigned char)res;
-		fcn_005165b0(*(int*)(upgradeBuilding + 0x61));
+		d3_ApplySeasonTextureSet(*(int*)(upgradeBuilding + 0x61));
 		d3_TraverseSceneObjects((char*) g_67a370, (char*) *(int*)(upgradeBuilding + 0x61), 0x2c0, (void (__cdecl*) (char*)) 0x514d80);
 		f = (float) g_774728 + g_6a2bec;
 		d3_VisitSceneObjects(g_67a370, *(int*)(upgradeBuilding + 0x61), 0x21e, 0x445d20, &f);
@@ -167,13 +167,13 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 				evt_RequestScriptExit(obj);
 			}
 			*(int*) (upgradeBuilding + 0x95) = -1;
-			fcn_0052db70((char*) upgradeBuilding);
+			gm_UpdateBuildingSmokeEffect((char*) upgradeBuilding);
 		}
 	}
 restore:
 	d3_SelectSceneContext(saved, 1);
 done:
-	fcn_00501d20(g_773d75);
+	gm_RefreshLocalMarketStock(g_773d75);
 	if (replyData != 0) {
 		replyData[0] = 2;
 		replyData[1] = 0;

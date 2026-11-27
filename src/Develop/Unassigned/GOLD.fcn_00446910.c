@@ -9,7 +9,7 @@ typedef struct Run {
 	unsigned char v;
 } Run;
 
-int __cdecl fcn_00446910(int* g, int x, int y)
+int __cdecl d3_GetFloorWaterType(int* g, int x, int y)
 {
 	Run* p;
 

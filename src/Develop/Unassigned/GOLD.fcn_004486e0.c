@@ -4,10 +4,10 @@ extern float g_fc5348;
 extern float g_fc2944;
 
 void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* out);
-void __cdecl fcn_00439870(char* object, char* parent, int force);
+void __cdecl d3_UpdateObjectCameraTransform(char* object, char* parent, int force);
 
 /* ADDRESS: GOLD 0x004486e0 */
-unsigned char __cdecl fcn_004486e0(char* e, int* rect)
+unsigned char __cdecl d3_GetObjectScreenRect(char* e, int* rect)
 {
 	float v[4];
 	float inv;
@@ -52,7 +52,7 @@ unsigned char __cdecl fcn_004486e0(char* e, int* rect)
 		return 0;
 	}
 	camera = d3_ActiveCamera;
-	fcn_00439870(e, (e[0x210] & 0x80) ? 0 : camera, 0);
+	d3_UpdateObjectCameraTransform(e, (e[0x210] & 0x80) ? 0 : camera, 0);
 	pts = (float*) (*(int (__cdecl **)(char*, char*, char*)) (*(char**) (owner + 0x10) + 0x1f4))(e, owner, *(char**) (e + 0x1ec) + 0x48);
 	rect[1] = 0x10000;
 	rect[0] = 0x10000;

@@ -6,7 +6,7 @@ int __cdecl fcn_0040c420();
 int __cdecl ecmd_Rnd();
 int __cdecl GetTime();
 int __cdecl RunScript();
-int __cdecl fcn_0040c4c0();
+int __cdecl ecmd_RunScriptInt();
 int __cdecl RunScriptInt2();
 int __cdecl RunScriptString();
 int __cdecl StopScript();
@@ -29,7 +29,7 @@ void __cdecl evt_RegisterCoreCommands(void)
 	evt_ImportCommand("rnd", ecmd_Rnd, 1, 1, 1);
 	evt_ImportCommand("GetTime", GetTime, 1, 0);
 	evt_ImportCommand("RunScript", RunScript, 1, 1, 6);
-	evt_ImportCommand("RunScriptInt", fcn_0040c4c0, 1, 2, 6, 1);
+	evt_ImportCommand("RunScriptInt", ecmd_RunScriptInt, 1, 2, 6, 1);
 	evt_ImportCommand("RunScriptInt2", RunScriptInt2, 1, 3, 6, 1, 1);
 	evt_ImportCommand("RunScriptString", RunScriptString, 1, 2, 6, 6);
 	evt_ImportCommand("StopScript", StopScript, 5, 1, 1);

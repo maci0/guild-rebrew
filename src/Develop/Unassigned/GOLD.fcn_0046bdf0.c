@@ -16,8 +16,8 @@ extern short g_00fb9072; /* 0x00fb9072 */
 extern short g_005fe73c; /* 0x005fe73c */
 
 int __cdecl fcn_0046c9e0(void);
-int __cdecl fcn_004690a0(int);
-void __cdecl fcn_00473530(int, int);
+int __cdecl d2_GetResourceData(int);
+void __cdecl d2_SetControlText(int, int);
 void __cdecl d2_AddRefcount(int);
 
 int __cdecl fcn_0046bdf0(int x, int y, int a3, int a4)
@@ -37,8 +37,8 @@ int __cdecl fcn_0046bdf0(int x, int y, int a3, int a4)
 	g_00f8f080[idx].f1e = 0;
 	g_00f8f080[idx].f20 = g_00fb9072;
 	g_00f8f080[idx].font = g_005fe73c;
-	g_00f8f080[idx].data = (char*) fcn_004690a0(a3);
-	fcn_00473530(idx, a4);
+	g_00f8f080[idx].data = (char*) d2_GetResourceData(a3);
+	d2_SetControlText(idx, a4);
 	d2_AddRefcount(a3);
 	return idx;
 }

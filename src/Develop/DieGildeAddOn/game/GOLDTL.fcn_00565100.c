@@ -17,7 +17,7 @@ int __cdecl sb_FindBankByName(char*);
 void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 int __cdecl io_AppendText(int, ...);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
-void __cdecl fcn_00526920(char*, int, char*);
+void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 
 void __cdecl he_RunMeisterpruefungNotice(char* u)
 {
@@ -70,7 +70,7 @@ void __cdecl he_RunMeisterpruefungNotice(char* u)
 			h = gm_LookupEntityRecordById(*(int*) (u + 0xac));
 			if (*(char**) (h + 0x170) != 0) {
 				q = fcn_00502cd0(*(int*) (*(char**) (h + 0x170) + 0x5d), 2, 0, 0x13, 6);
-				fcn_00526920(*(char**) (h + 0x170), *(int*) (q + 2), g_6b5c60);
+				d2_EnterBuildingObjekt(*(char**) (h + 0x170), *(int*) (q + 2), g_6b5c60);
 			}
 			fcn_00545780(u);
 			he_FreeAction(u);

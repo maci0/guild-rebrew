@@ -1,4 +1,4 @@
-int __cdecl fcn_0048e7f0(char* e, unsigned short** out);
+int __cdecl ai_CheckSculptureEligibility(char* e, unsigned short** out);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl gm_GetTypeProductValue(int k);
 int __cdecl gm_CalcBuildingCost(char* e, int k);
@@ -27,7 +27,7 @@ int __cdecl ai_StartSculpture(int action, char* ent, char* opt, char* out1, char
 	Rec6* second;
 
 	e = ent;
-	if (fcn_0048e7f0(ent, (unsigned short**) &ent) != 0) {
+	if (ai_CheckSculptureEligibility(ent, (unsigned short**) &ent) != 0) {
 		if (opt == 0 && (action == 0x43 || action == 0)) {
 			if (he_StartHandlungSearch(2, 0, 0xd, 2, *(unsigned short*) e) == 0) {
 				if (ent != 0) {

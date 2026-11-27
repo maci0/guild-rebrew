@@ -43,7 +43,7 @@ typedef struct
 } EMITTER;
 
 int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, float a, int b, void (__cdecl* cb)(void));
-void __cdecl fcn_0040f9d0(void);
+void __cdecl d3_UpdateBloodParticles(void);
 int __cdecl fcn_0064d3f8(void);
 
 /* ADDRESS: GOLDTL 0x0040fb80 */
@@ -57,7 +57,7 @@ int* __cdecl CreateParticle(int* a1)
 	memset(&f, 0, sizeof(f));
 	f.c |= 3;
 	f.a = 0x7f;
-	s = (EMITTER*) fcn_004524e0(100, "blut", f, 1.0f, *a1, fcn_0040f9d0);
+	s = (EMITTER*) fcn_004524e0(100, "blut", f, 1.0f, *a1, d3_UpdateBloodParticles);
 	for (i = 0; i < 100; i++) {
 		s->items[i].x38 = 0.0f;
 		s->items[i].x3c = (float) i * 0.16f;

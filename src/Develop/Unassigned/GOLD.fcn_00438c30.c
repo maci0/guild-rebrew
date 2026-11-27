@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00438c30 */
-char* __cdecl fcn_00438c30(char* node)
+char* __cdecl d3_GetNextSceneNode(char* node)
 {
 	int mode;
 

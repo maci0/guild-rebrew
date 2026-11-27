@@ -12,7 +12,7 @@ void* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int offset, void* value);
 void __cdecl cm_AppendPacketFieldValue(int a, int b, int offset, void* value);
 void __cdecl cm_RequestChangeAttribute(void);
-void __cdecl fcn_004eea30(int city, int id, float value);
+void __cdecl ahm_RequestSetMatchingSlotValue(int city, int id, float value);
 void __cdecl gm_IncreaseEntityStat(int a, unsigned short b);
 void __cdecl he_NotifyDomizilAccident(char* slot, int a, char* object);
 void __cdecl he_NotifyDomizilEvent(char* slot, int a, char* object);
@@ -123,7 +123,7 @@ void __cdecl he_TriggerAhmLabEvent(int city, char* owner, char* object, int mode
 
 				f = *(float*) (vertices + 0x10 + index * 8)
 				    - (gm_RandomFloat01() * 0.1f + g_662b10);
-				fcn_004eea30(city, *(int*) (vertices + 0xc + index * 8), f);
+				ahm_RequestSetMatchingSlotValue(city, *(int*) (vertices + 0xc + index * 8), f);
 				he_NotifyDomizilSkillGain((char*) (*(unsigned short*) (object + 0x27) * 0x21c + 0x7f4ca0),
 				    city, object, *(int*) (vertices + 0xc + index * 8));
 				break;

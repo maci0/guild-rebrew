@@ -3,13 +3,13 @@ extern unsigned short* g_772e9c;
 
 float* __cdecl cut_GetCombatActionWeights(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-float __cdecl fcn_004d3e90(void*, unsigned int);
+float __cdecl cut_ScoreCombatUnitMode(void*, unsigned int);
 float __cdecl cut_RandFloat(void);
 double __cdecl gm_RandomFloat01(void);
 void __cdecl cut_AssignCombatUnitOrder(char*, char*);
 
 /* ADDRESS: GOLDTL 0x004d3fe0 */
-void __cdecl fcn_004d3fe0(char* a0)
+void __cdecl cut_AssignCombatTeamOrders(char* teamActor)
 {
 	char* rec;
 	char* base;
@@ -29,14 +29,14 @@ void __cdecl fcn_004d3fe0(char* a0)
 	n = 0;
 	auswahl = 0;
 	rec = 0;
-	w = cut_GetCombatActionWeights(a0);
+	w = cut_GetCombatActionWeights(teamActor);
 	for (i = 0; i < ((unsigned char*) g_772eb4)[0x30]; i++) {
-		if (*(int*) (g_772eb4 + 0x34 + i * 4) == *(int*) (a0 + 4)) {
+		if (*(int*) (g_772eb4 + 0x34 + i * 4) == *(int*) (teamActor + 4)) {
 			rec = g_9b0e20 + i * 0x35c;
 			break;
 		}
 	}
-	if (a0 == (char*) g_772e9c) {
+	if (teamActor == (char*) g_772e9c) {
 		base = g_772eb4 + 0xc0;
 	} else {
 		base = g_772eb4 + 0x80;
@@ -62,7 +62,7 @@ void __cdecl fcn_004d3fe0(char* a0)
 			best = -1.0f;
 			for (i = 0; i < 16; i++) {
 				if (ent[i] != 0) {
-					f = fcn_004d3e90(ent[i], auswahl);
+					f = cut_ScoreCombatUnitMode(ent[i], auswahl);
 					if (f > best) {
 						best = f;
 						chosen = i;

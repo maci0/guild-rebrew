@@ -13,7 +13,7 @@ void __cdecl evt_RequestScriptExit(int);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl ch_DestroyCharacter(char*);
-char* __cdecl fcn_004fe2e0(char*, int, float*, float*, int, int);
+char* __cdecl ch_SpawnEntityCharacter(char*, int, float*, float*, int, int);
 void __cdecl ch_SetBodyAttachment(int, int, char*);
 char* __cdecl evt_LoadGfxScript(char*);
 void __cdecl fcn_00428340(char*, int, ...);
@@ -116,7 +116,7 @@ void __cdecl he_RunBefoerdern(char* action)
 		ch_DestroyCharacter((char*) v6);
 		*(unsigned int*) (ent + 0x184) = 0;
 		*(char*) (ent + 0x1f4) = 0;
-		p = fcn_004fe2e0(ent, v7, pos, rot, 0, 0);
+		p = ch_SpawnEntityCharacter(ent, v7, pos, rot, 0, 0);
 		*(char**) (ent + 0x184) = p;
 		if (p != 0) {
 			*(unsigned int*) (p + 0x2c) = v3;

@@ -3,7 +3,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 void __cdecl gm_AddTime(char* dst, int a, int b, int c);
 void* __cdecl gm_StartFilteredEntitySearch(int a, int b, int c);
-char* __cdecl fcn_004bcc50(int a, int b);
+char* __cdecl plt_FindRecordById(int a, int b);
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl fcn_00502cd0(int a, int b, int c, int d);
 void __cdecl he_AssignActionSlot(char* obj, int a, int id, int b);
@@ -23,7 +23,7 @@ void __cdecl he_StartErnten(char* obj)
 	*(int*) (obj + 0x70) = 0;
 	e = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0xac));
 	if (e != 0) {
-		t = (char*) fcn_004bcc50(*(int*) (e + 0x71), *(int*) (obj + 0xb8));
+		t = (char*) plt_FindRecordById(*(int*) (e + 0x71), *(int*) (obj + 0xb8));
 		pal = (unsigned short*) gm_LookupEntityRecordById(*(int*) (obj + 0xb0));
 		if (t != 0 && *(int*) (t + 0x10) == -1) {
 			if (pal != 0) {

@@ -7,7 +7,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl ls_ReadVfsDataChecked(void* outBuffer, int elementSize, int elementCount, void* streamCtx);
 void __cdecl gm_AddTime(void*, int, int, int);
 
-typedef struct slot_114 {
+typedef struct CUTSCENE_LOAD_SLOT {
 	char pad0[0x14];
 	int field14;
 	char pad18[0xe];
@@ -19,16 +19,16 @@ typedef struct slot_114 {
 	char field74;
 	char pad75[0x7];
 	char field7c[0x98];
-} slot_114;
+} CUTSCENE_LOAD_SLOT;
 
 /* Reads the 0x114-byte slot records of the table at g_9a9660 from a save
  * stream. Records written by version 0x1003f and later carry a timestamp;
  * older ones reuse g_7f4c00. */
 /* ADDRESS: GOLDTL 0x00524fc0 */
-int __cdecl fcn_00524fc0(void* fp)
+int __cdecl ls_LoadCutscenes(void* fp)
 {
 	char buf[0x1000];
-	slot_114* p;
+	CUTSCENE_LOAD_SLOT* p;
 	int count;
 	int i;
 	int k;
@@ -40,7 +40,7 @@ int __cdecl fcn_00524fc0(void* fp)
 	if (count <= 0) {
 		return 1;
 	}
-	p = (slot_114*) cut_Cutscenes;
+	p = (CUTSCENE_LOAD_SLOT*) cut_Cutscenes;
 	for (; i < count; i++, p++) {
 		if (!ls_ReadVfsDataChecked(&p->pad0[0], 4, 1, fp)) {
 			return 0;

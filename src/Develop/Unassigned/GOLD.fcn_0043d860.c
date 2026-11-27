@@ -46,7 +46,7 @@ struct D3_BOUNDING_OBJ {
 
 
 void __cdecl fcn_00458b10(D3_BOUNDING_OBJ* o, int arg, int* p, D3_SPHERE_VEC4* out);
-void __cdecl fcn_00439870(D3_BOUNDING_OBJ* o, int arg, int z);
+void __cdecl d3_UpdateObjectCameraTransform(D3_BOUNDING_OBJ* o, int arg, int z);
 
 char __cdecl d3_GetObjectBoundingSphere(D3_BOUNDING_OBJ* o, int arg, D3_SPHERE_VEC4* out, float* radius)
 {
@@ -72,7 +72,7 @@ char __cdecl d3_GetObjectBoundingSphere(D3_BOUNDING_OBJ* o, int arg, D3_SPHERE_V
 		}
 		ctx = o->ctx;
 		if (ctx != 0 && ctx->api != 0) {
-			fcn_00439870(o, arg, 0);
+			d3_UpdateObjectCameraTransform(o, arg, 0);
 			b = ctx->api->query(o, ctx, o->ov + 0x48);
 			if (b != 0) {
 				c.x = b->x;

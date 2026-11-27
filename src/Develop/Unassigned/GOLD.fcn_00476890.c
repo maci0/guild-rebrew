@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00476890 */
-int __cdecl fcn_00476890(void)
+int __cdecl d2_DrawAnimatedSprite(void)
 {
 	/* stub */
 	return 0;

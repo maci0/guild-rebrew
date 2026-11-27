@@ -41,7 +41,7 @@ void __cdecl ch_SetPosition(char*, float*, int);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 int __cdecl fcn_00413160(void);
 void __cdecl ReportClientMessage(const char*);
-int __cdecl fcn_005105a0(char*);
+int __cdecl d3_ResolveSceneObjectProtoId(char*);
 void __cdecl fcn_00510bd0(char*);
 void __cdecl d2_UpdateProgressOverlay(int, int, int);
 void __cdecl gm_AdvanceGameClock(void);
@@ -92,7 +92,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 		strupr(path);
 		if (d3_LoadScene(path, 0, (SCENE_PROGRESS) progress)) {
 			d3_SelectSceneContext(d3_CurrentContextIndex, 0);
-			d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
+			d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) d3_ResolveSceneObjectProtoId);
 			d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
 			init_SceneContextIndices[objectTypeIndex] = (char) type;
 			d3_SelectSceneContext(saved, 0);
@@ -110,7 +110,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 				*(int*) (g_67a370 + 0xb0) = 0;
 				d3sm_GetSceneSuperMap((char*) g_67a370);
 				fcn_0045b290((char*) *(int*) (g_67a370 + 0xb0), g_6b8300);
-				d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) fcn_005105a0);
+				d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) d3_ResolveSceneObjectProtoId);
 				d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
 				p = ch_CharacterSlots;
 				do {

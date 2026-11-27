@@ -48,7 +48,7 @@ char __cdecl d3_GridPointToWorld(int map, int x, int y, float* out);
 int __cdecl d3_CreateObjectAnimation(char* obj, Flags4cf450 fl, int n, Ent4cf450* ents);
 
 #pragma optimize("y", off)
-Slot4cf450* __cdecl fcn_004cf450(float* pos, int x, int y)
+Slot4cf450* __cdecl cut_SpawnBombThrow(float* pos, int x, int y)
 {
 	Ent4cf450 ents[4];
 	float s[4];

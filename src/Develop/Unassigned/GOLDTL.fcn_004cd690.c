@@ -10,7 +10,7 @@ extern char g_774964;
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl main_ExitToFrameHandler(void*);
 void __cdecl d2_RunWorldHudLoop(void);
-void __cdecl fcn_004e89e0(unsigned char*, int);
+void __cdecl amt_ReleaseEntityOffices(unsigned char*, int);
 
 int __cdecl cm_ExBlockCharacter(char* x, char* out)
 {
@@ -30,7 +30,7 @@ int __cdecl cm_ExBlockCharacter(char* x, char* out)
 	e[0x1b1] = MAX(0, e[0x1b1]);
 	if (*(unsigned short*) e == g_774970 && g_774964 != 0 && e[0x1b1] > 0)
 		main_ExitToFrameHandler(d2_RunWorldHudLoop);
-	fcn_004e89e0(e, *(int*) (x + 0x18));
+	amt_ReleaseEntityOffices(e, *(int*) (x + 0x18));
 	if (out != 0)
 		out[0] = 1;
 	return 0;

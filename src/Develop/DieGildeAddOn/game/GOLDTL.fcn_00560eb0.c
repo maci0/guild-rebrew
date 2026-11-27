@@ -25,7 +25,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
-int __cdecl fcn_0050c830(pos14_7f4c00*, pos14_7f4c00*, char*);
+int __cdecl gm_CalcElapsedWorkMinutes(pos14_7f4c00*, pos14_7f4c00*, char*);
 void __cdecl cm_AppendPacketFieldValue(int, int, short, unsigned char*);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
@@ -64,9 +64,9 @@ void __cdecl he_RunTrainierenSkill(char* e)
 				break;
 			}
 			if (gm_CompareGameTime(&gm_GameTime, (pos14_7f4c00*) (e + 0xb8)) < 0) {
-				n = fcn_0050c830((pos14_7f4c00*) (e + 0x60), &gm_GameTime, q);
+				n = gm_CalcElapsedWorkMinutes((pos14_7f4c00*) (e + 0x60), &gm_GameTime, q);
 			} else {
-				n = fcn_0050c830((pos14_7f4c00*) (e + 0x60), (pos14_7f4c00*) (e + 0xb8), q);
+				n = gm_CalcElapsedWorkMinutes((pos14_7f4c00*) (e + 0x60), (pos14_7f4c00*) (e + 0xb8), q);
 				*(int*) (e + 0x70) = 1;
 			}
 			skill = (float) gm_GetBuildingTechEffect(q, 0xc, 1);

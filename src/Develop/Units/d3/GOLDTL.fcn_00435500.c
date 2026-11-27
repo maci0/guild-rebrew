@@ -13,8 +13,8 @@ typedef struct Slot {
 } Slot;
 
 #include "Develop/Units/d3/d3_animation.h"
-void __cdecl fcn_004315c0(int);
-void __cdecl fcn_004316c0(int);
+void __cdecl d3_BindAnimTrackNodes(int);
+void __cdecl d3_UpdateObjectAnimPose(int);
 
 void __cdecl d3_RemoveObjectAnimation(char* o, char* name)
 {
@@ -42,6 +42,6 @@ void __cdecl d3_RemoveObjectAnimation(char* o, char* name)
 	if (i == 3) {
 		o[0x4a0] = 0;
 	}
-	fcn_004315c0(h);
-	fcn_004316c0(h);
+	d3_BindAnimTrackNodes(h);
+	d3_UpdateObjectAnimPose(h);
 }

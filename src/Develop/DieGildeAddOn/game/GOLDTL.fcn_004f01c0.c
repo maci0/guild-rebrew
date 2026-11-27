@@ -18,24 +18,24 @@ typedef struct CANNON_HIT_SLOT {
 	float strength;
 } CANNON_HIT_SLOT;
 
-typedef struct Ff01c0Out {
+typedef struct CANNON_HIT_RESULT {
 	int h0;
 	int h1;
 	CANNON_HIT_SLOT slot[3];
-} Ff01c0Out;
+} CANNON_HIT_RESULT;
 
-typedef struct Ff01c0Color {
+typedef struct CANNON_FX_COLOR {
 	unsigned char r;
 	unsigned char g;
 	unsigned char b;
 	unsigned char a;
-} Ff01c0Color;
+} CANNON_FX_COLOR;
 
-typedef struct Ff01c0Vec {
+typedef struct CANNON_VEC3 {
 	float x;
 	float y;
 	float z;
-} Ff01c0Vec;
+} CANNON_VEC3;
 
 int __cdecl d3_TransformPoint(char* src, char* pos, float* out);
 void __cdecl fcn_00414ab0(float* a, float* b, char* ent);
@@ -56,13 +56,13 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_SendCopyEntityData(char* msg);
 
 /* ADDRESS: GOLDTL 0x004f01c0 */
-void __cdecl gm_ApplyCannonImpact(int applyDamage, int impactId, int projectilePtr, Ff01c0Out* resultOut)
+void __cdecl gm_ApplyCannonImpact(int applyDamage, int impactId, int projectilePtr, CANNON_HIT_RESULT* resultOut)
 {
-	Ff01c0Out out;
-	Ff01c0Vec pv;
-	Ff01c0Vec va;
-	Ff01c0Vec vb;
-	Ff01c0Vec ov;
+	CANNON_HIT_RESULT out;
+	CANNON_VEC3 pv;
+	CANNON_VEC3 va;
+	CANNON_VEC3 vb;
+	CANNON_VEC3 ov;
 	char* in;
 	char* rec;
 	char* best;
@@ -92,7 +92,7 @@ void __cdecl gm_ApplyCannonImpact(int applyDamage, int impactId, int projectileP
 	int k;
 	int i;
 	char neg;
-	Ff01c0Color col;
+	CANNON_FX_COLOR col;
 	char msg[0xf8];
 
 	in = (char*) projectilePtr;

@@ -36,7 +36,7 @@ extern unsigned char g_773d75;
 int __cdecl d3snd_SelectVoiceCode(int, int);
 char* __cdecl d2_RunSeance(char*, char*);
 void __cdecl gm_CheckEntityObjectSlots(ENTITY_RECORD*, int, struct offer*, struct level*);
-float __cdecl fcn_004f4770(char*);
+float __cdecl gv_CalcSeanceBonus(char*);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -96,7 +96,7 @@ void __cdecl d2_RunSeanceItemsDialog(char* e, char* res)
 		id = list[i].id;
 		mode = 0;
 	}
-	f = fcn_004f4770(e);
+	f = gv_CalcSeanceBonus(e);
 	if (gm_RandomFloat01() + f - 0.2f < 1.0f) {
 		mode = 2;
 	}

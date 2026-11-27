@@ -18,14 +18,14 @@ int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 int __cdecl d3_FindAnimByName(char*);
-void __cdecl fcn_0044e4a0(char*, char*, int);
-char* __cdecl fcn_00435550(char*, char*, D3_ANIMATION_OPTIONS);
+void __cdecl d3_LoadAnimStream(char*, char*, int);
+char* __cdecl d3_AttachAnimationToContext(char*, char*, D3_ANIMATION_OPTIONS);
 char* __cdecl vfs_ToSlashes(char*);
 void __cdecl d3_RemoveObjectAnim(char*);
 #define I32(p) (*(int*)(p))
 #define F32(p) (*(float*)(p))
 /* ADDRESS: GOLD 0x00402ba0 */
-void __cdecl fcn_00402ba0(char* character)
+void __cdecl ch_Updatelowpoly(char* character)
 {
     D3_ANIMATION_OPTIONS opt;
     char name[256];
@@ -112,8 +112,8 @@ void __cdecl fcn_00402ba0(char* character)
                 opt.reverse = 0;
                 opt.loop = 0;
                 if (!d3_FindAnimByName(name))
-                    fcn_0044e4a0(path, name, 1);
-                attached = fcn_00435550(*(char**)(*(char**)(character + 0x22c) + 0x1ec) + 0xf4, name, opt);
+                    d3_LoadAnimStream(path, name, 1);
+                attached = d3_AttachAnimationToContext(*(char**)(*(char**)(character + 0x22c) + 0x1ec) + 0xf4, name, opt);
                 if (!attached) {
                     sprintf(error, "ch_Updatelowpoly(): Could not attach ani: %s", path);
                     *(unsigned char*)(character + 0x8c) |= 0x80;

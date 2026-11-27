@@ -11,7 +11,7 @@ extern char* lpGebaeudePROT;
 typedef struct {
 	unsigned char type;
 	char rest[0x24c];
-} BldProt_526920;
+} BUILDING_PROTO_VIEW;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char* g_7746c4;
 extern char* g_7746c8;
@@ -29,12 +29,12 @@ void __cdecl init_LoadObjektScene(int id);
 void __cdecl main_ExitToFrameHandler(void* p);
 
 /* ADDRESS: GOLDTL 0x00526920 */
-void __cdecl fcn_00526920(char* buildingRecord, int a1, char* a2)
+void __cdecl d2_EnterBuildingObjekt(char* buildingRecord, int objektId, char* entryText)
 {
 	char* hit;
 	char* old;
 	int saved;
-	BldProt_526920* row;
+	BUILDING_PROTO_VIEW* row;
 	int n;
 
 	hit = 0;
@@ -45,7 +45,7 @@ void __cdecl fcn_00526920(char* buildingRecord, int a1, char* a2)
 		return;
 	}
 	if (g_774970 != 0xffff && g_7f4e51[(int) g_774970 * 540] != 0) {
-		row = &((BldProt_526920*) lpGebaeudePROT)[(unsigned char) *buildingRecord];
+		row = &((BUILDING_PROTO_VIEW*) lpGebaeudePROT)[(unsigned char) *buildingRecord];
 		if (row->type != 6 && (row->type != 4 || *(int*) (buildingRecord + 0x65) != *(int*) (g_7f4ca4 + (int) g_774970 * 540))) {
 			return;
 		}
@@ -56,11 +56,11 @@ void __cdecl fcn_00526920(char* buildingRecord, int a1, char* a2)
 		hit = g_7746c8;
 	}
 	g_7e2704 = buildingRecord;
-	g_7e2708 = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 1, a1);
+	g_7e2708 = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 1, objektId);
 	if (*buildingRecord == 0x47) {
 		g_7e2708 = fcn_00502cd0(*(int*) (buildingRecord + 0x5d), 1, 0, 0xfd);
 	}
-	strcpy(g_7e2714, a2);
+	strcpy(g_7e2714, entryText);
 	g_7e2700 = 1;
 	if (g_7e2708 != 0 && *(unsigned short*) g_7e2708 != 0) {
 		if (g_7e2708 != g_7746cc) {

@@ -3091,8 +3091,8 @@ char g_minimum_manufacturer[1] = {0};
 int g_net_socket = 0;
 int g_next_family_index = 0;
 int gm_NextObjectId = 0;
-float g_office_float_table[49] = {0};
-int g_office_role_templates[40] = {0};
+
+
 char g_office_slots[1008] = {0};
 int g_owner_window = 0;
 unsigned int g_player_record_dst = 0;

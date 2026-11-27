@@ -13,7 +13,7 @@ extern int __cdecl gm_AssignBuildingOwner(void* record, int a, int b);
 extern int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 extern void __cdecl he_FreeActionsByKind(void* entity);
 extern void __cdecl he_ClearEntityActions(void* entity);
-extern void __cdecl fcn_004e8940(void* entity);
+extern void __cdecl amt_ClearEntityOffices(void* entity);
 extern int __cdecl gm_MapEntityStatRange(int age);
 extern void* __cdecl gm_GetEntityTableEntry(void* entity);
 extern int __cdecl gm_CheckStatLevel(int slot, int kind);
@@ -76,7 +76,7 @@ int __cdecl gm_TransferDynastyEstate(int sourceId, int targetId)
 	q_slot = q->entity_index;
 	if (p->max_hp != q->max_hp)
 		q->max_hp = p->max_hp;
-	fcn_004e8940(p);
+	amt_ClearEntityOffices(p);
 
 	memcpy(&rec_a, q, 0x21c);
 	rec_a.entity_id = p->entity_id;

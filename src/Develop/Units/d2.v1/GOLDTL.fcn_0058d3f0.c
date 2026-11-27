@@ -30,7 +30,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_005340f0(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_004f3280(int, int, int, int, int);
+int __cdecl gv_SendAllocGraveyardWorker(int, int, int, int, int);
 int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
 int __cdecl sprintf(char*, const char*, ...);
@@ -82,7 +82,7 @@ int __cdecl d2_ShowFriedhofGehilfenDialog(int a1, Req* request)
 				if (*request->xc == -1) {
 					g_774654 = 1;
 				} else {
-					h = fcn_004f3280(a1, *request->x0, request->x8, request->x10, 0x1c);
+					h = gv_SendAllocGraveyardWorker(a1, *request->x0, request->x8, request->x10, 0x1c);
 					while (h != -1 && (status = cm_GetCommandStatus(h)) == 0) {
 						main_RunFrameLoop((void*) status, 0x20007);
 					}

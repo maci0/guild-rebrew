@@ -8,7 +8,7 @@ typedef struct Rec {
 	int rest[34];
 } Rec;
 
-void __cdecl fcn_00432120(int unused, char* obj, int idx, int* a, int* b)
+void __cdecl d3_ReadAnimFramePose(int unused, char* obj, int idx, int* a, int* b)
 {
 	a[0] = (*(Rec**) (*(char**) (obj + 0x68) + 0x15c))[idx].a[0];
 	a[1] = (*(Rec**) (*(char**) (obj + 0x68) + 0x15c))[idx].a[1];

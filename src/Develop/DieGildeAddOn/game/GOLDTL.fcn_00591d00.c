@@ -13,7 +13,7 @@ extern char g_6b5c60[];
 void __cdecl d2_PruneBookmarkSlots(void);
 int __cdecl gm_SearchTable67(int);
 char* __cdecl gm_FindRecordById(int);
-void __cdecl fcn_00526920(int, int, char*);
+void __cdecl d2_EnterBuildingObjekt(int, int, char*);
 
 void __cdecl d2_FocusBookmarkSlot(void)
 {
@@ -29,10 +29,10 @@ void __cdecl d2_FocusBookmarkSlot(void)
 					x = gm_SearchTable67(g_779d00[i].b);
 					r = gm_FindRecordById(g_779d00[i].c);
 					if (r != 0) {
-						fcn_00526920(x, *(int*) (r + 2), g_6b5c60);
+						d2_EnterBuildingObjekt(x, *(int*) (r + 2), g_6b5c60);
 						return;
 					}
-					fcn_00526920(x, -1, g_6b5c60);
+					d2_EnterBuildingObjekt(x, -1, g_6b5c60);
 					return;
 				}
 			}

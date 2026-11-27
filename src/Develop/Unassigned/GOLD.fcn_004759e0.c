@@ -1,6 +1,6 @@
 #include "gold_gui.h"
 
-int __cdecl fcn_004690a0(int);
+int __cdecl d2_GetResourceData(int);
 
 /* ADDRESS: GOLD 0x004759e0 */
 int __cdecl fcn_004759e0(int id, int* out, int* out2)
@@ -15,7 +15,7 @@ int __cdecl fcn_004759e0(int id, int* out, int* out2)
 		rec = (char*) &g_00f8f080[id];
 		kind = *(int*) (rec + 0x18);
 		if (kind == 1 || kind == 8 || kind == 5) {
-			font = (char*) fcn_004690a0(*(int*) (rec + 8));
+			font = (char*) d2_GetResourceData(*(int*) (rec + 8));
 			if (font != 0) {
 				kind = *(int*) (rec + 0x18);
 				if (kind == 8 || kind == 5) {

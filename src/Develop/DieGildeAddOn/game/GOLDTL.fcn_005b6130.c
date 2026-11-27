@@ -11,7 +11,7 @@ void __cdecl d2_SetElementFont(int element, int a2);
 char* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
 char* __cdecl gm_EntityAccumulate(int entity);
 void __cdecl io_FormatTextBuffer(char* buf, char* fmt, ...);
-void __cdecl fcn_00526920(char* text, int a2, int a3);
+void __cdecl d2_EnterBuildingObjekt(char* text, int a2, int a3);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005b6130 */
 void __cdecl d2_UpdateWorkerOverlaySlots(int panelState, char* ownerName)
@@ -75,7 +75,7 @@ void __cdecl d2_UpdateWorkerOverlaySlots(int panelState, char* ownerName)
         do {
             v4 = *v6;
             if (v4 != -1 && d2_CurrentElementId == v4) {
-                fcn_00526920(*(char**) (&((D2_CONTROL_TL*) g_1015ea0)[
+                d2_EnterBuildingObjekt(*(char**) (&((D2_CONTROL_TL*) g_1015ea0)[
                                         v4].associated_object),
                              -1, 0x6b5c60);
             }

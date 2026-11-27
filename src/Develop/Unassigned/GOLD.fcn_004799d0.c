@@ -16,7 +16,7 @@ typedef struct Surf004799d0 {
 
 int __cdecl d3_PackSurfaceRgb(unsigned char r, unsigned char g, unsigned char b);
 
-int __cdecl fcn_004799d0(int x, int y, unsigned char r, unsigned char g, unsigned char b, Surf004799d0* s)
+int __cdecl d2_WriteSurfacePixel(int x, int y, unsigned char r, unsigned char g, unsigned char b, Surf004799d0* s)
 {
 	int c;
 	unsigned char n;

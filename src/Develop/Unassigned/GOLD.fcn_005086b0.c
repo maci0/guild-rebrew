@@ -4,17 +4,17 @@
 int __cdecl fcn_004ffe90(int, int, int, int);
 int __cdecl fcn_004ffcc0(void);
 
-int __cdecl fcn_005086b0(int a)
+int __cdecl gm_SumContainerGold(int containerId)
 {
-	int s;
-	char* n;
-	s = 0;
-	n = (char*) fcn_004ffe90(a, 1, 4, 9);
-	if (n != 0) {
+	int total;
+	char* entry;
+	total = 0;
+	entry = (char*) fcn_004ffe90(containerId, 1, 4, 9);
+	if (entry != 0) {
 		do {
-			s += *(int*) (n + 0xe);
-			n = (char*) fcn_004ffcc0();
-		} while (n != 0);
+			total += *(int*) (entry + 0xe);
+			entry = (char*) fcn_004ffcc0();
+		} while (entry != 0);
 	}
-	return s;
+	return total;
 }

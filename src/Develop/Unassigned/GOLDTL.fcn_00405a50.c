@@ -20,7 +20,7 @@ extern int g_6b5c4c;
 extern int g_6b5c50;
 
 /* ADDRESS: GOLDTL 0x00405a50 */
-int __cdecl fcn_00405a50(int a, int b, int id, int value, int radius)
+int __cdecl ch_MarkGridDiamond(int a, int b, int id, int value, int radius)
 {
 	Grid* g;
 	int r = 0;

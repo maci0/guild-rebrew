@@ -14,17 +14,17 @@ typedef struct {
 	unsigned int b17 : 3;
 	unsigned int b20 : 3;
 	unsigned int b23 : 2;
-} Flags5086f0;
+} AFFLICTION_FLAGS;
 
 /* Picks the first free animation slot from a random start, updates the four
  * packed flags fields for the chosen slot and hands the record to the pool. */
 /* ADDRESS: GOLDTL 0x005086f0 */
-unsigned int __cdecl fcn_005086f0(unsigned short* objectContext)
+unsigned int __cdecl gm_ApplyRandomAffliction(unsigned short* objectContext)
 {
 	int ids[4];
 	int avail[4];
-	Flags5086f0 flags;
-	Flags5086f0 v;
+	AFFLICTION_FLAGS flags;
+	AFFLICTION_FLAGS v;
 	int id;
 	int i;
 	int n;
@@ -38,7 +38,7 @@ unsigned int __cdecl fcn_005086f0(unsigned short* objectContext)
 	ids[1] = 6;
 	ids[2] = 7;
 	ids[3] = 8;
-	flags = *(Flags5086f0*) ((char*) objectContext + 0x2c);
+	flags = *(AFFLICTION_FLAGS*) ((char*) objectContext + 0x2c);
 	if (flags.b14 == 0) {
 		avail[0] = 1;
 	}
@@ -75,7 +75,7 @@ unsigned int __cdecl fcn_005086f0(unsigned short* objectContext)
 		return 0;
 	}
 	n = (int) ((float) value * *(float*) &avail[1]);
-	flags = *(Flags5086f0*) ((char*) objectContext + 0x2c);
+	flags = *(AFFLICTION_FLAGS*) ((char*) objectContext + 0x2c);
 	if (id == 5) {
 		flags.b23 = value;
 	} else if (id == 6) {

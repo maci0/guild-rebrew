@@ -1,9 +1,9 @@
 typedef struct VFS_DIR VFS_DIR;
 
 
-void* __cdecl fcn_00430470(const char* name, const char* mode, struct VFS_DIR* root);
+void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 unsigned int __cdecl vfs_fwrite(void*, int, int, void*);
-int __cdecl fcn_00430aa0(void*);
+int __cdecl CloseVfsStream(void*);
 
 struct rec_4ac9c0 {
 	int a;
@@ -24,13 +24,13 @@ struct hist_4ac9c0 {
 
 
 /* ADDRESS: GOLD 0x004ac8a0 */
-int __cdecl fcn_004ac8a0(struct hist_4ac9c0* h)
+int __cdecl hmt_WriteHistoricalDfn(struct hist_4ac9c0* h)
 {
 	int magic;
 	void* f;
 	int i;
 
-	f = fcn_00430470("/gamedata/ai/historical.dfn", "wb", (*(VFS_DIR**) 0x6333fc));
+	f = vfs_Tfopen("/gamedata/ai/historical.dfn", "wb", (*(VFS_DIR**) 0x6333fc));
 	magic = 0x68466153;
 	if (f == 0)
 		goto out;
@@ -64,10 +64,10 @@ int __cdecl fcn_004ac8a0(struct hist_4ac9c0* h)
 		if (vfs_fwrite(h->r1[i].text, 0x10, 1, f) <= 0)
 			goto fail;
 	}
-	fcn_00430aa0(f);
+	CloseVfsStream(f);
 	return 0;
 fail:
-	fcn_00430aa0(f);
+	CloseVfsStream(f);
 out:
 	return -1;
 }

@@ -3,7 +3,7 @@
 extern BOOL __stdcall fcn_0041adc0(HWND, UINT, WPARAM, LPARAM);
 
 /* ADDRESS: GOLDTL 0x0041ad80 */
-char __cdecl fcn_0041ad80(int unused, HWND owner)
+char __cdecl d3_ShowDisplaySetupDialog(int unused, HWND owner)
 {
 	HINSTANCE library;
 

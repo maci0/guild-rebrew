@@ -5,7 +5,7 @@ __declspec(dllimport) int __stdcall TranslateMessage(void*);
 __declspec(dllimport) long __stdcall DispatchMessageA(void*);
 
 /* ADDRESS: GOLD 0x0052fbb0 */
-int __cdecl fcn_0052fbb0(void)
+int __cdecl main_DrainWindowMessages(void)
 {
     while (PeekMessageA((void*)0x75ec40, *(HWND*)0x6f2588, 0, 0, 0) != 0) {
         if (GetMessageA((void*)0x75ec40, *(HWND*)0x6f2588, 0, 0) == 0) {

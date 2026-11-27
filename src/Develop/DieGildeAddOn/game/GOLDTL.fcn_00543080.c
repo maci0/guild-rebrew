@@ -31,7 +31,7 @@ int __cdecl fcn_004fb390();
 int __cdecl gm_GetDisasterState();
 void __cdecl gm_InitDisasterState(int, int, int, float);
 int __cdecl gm_UpdateDisasterState();
-int __cdecl fcn_004fcc20();
+int __cdecl gm_UpdateBuildingSubsidies();
 int __cdecl gm_CollectAllTaxes();
 int __cdecl gm_AdvanceRoundCounters();
 int __cdecl gm_UpdateActiveEntities();
@@ -179,7 +179,7 @@ void __cdecl gm_RunRoundUpdate(void)
 		cm_StepCommandQueue();
 		Sleep(100);
 		gm_AdvanceRoundCounters(3);
-		fcn_004fcc20();
+		gm_UpdateBuildingSubsidies();
 		cm_StepCommandQueue();
 		Sleep(100);
 		gm_CollectAllTaxes();

@@ -6,7 +6,7 @@
 int __cdecl fcn_004616e0(z_streamp, int);
 
 /* ADDRESS: GOLD 0x00430bd0 */
-unsigned int __cdecl fcn_00430bd0(void* buffer, unsigned int size,
+unsigned int __cdecl vfs_ReadData(void* buffer, unsigned int size,
     unsigned int count, char* file)
 {
     unsigned int bytes;

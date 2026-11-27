@@ -21,7 +21,7 @@ int* __cdecl gm_GetEquippedCombatGear(char*);
 void __cdecl fcn_00472680(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004d5740 */
-void __cdecl fcn_004d5740(char* ids, int originX, int originY)
+void __cdecl d2_DrawCombatParticipants(char* ids, int originX, int originY)
 {
 	char buf[0x100];
 	int total;

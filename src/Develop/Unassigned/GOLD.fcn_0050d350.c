@@ -4,10 +4,10 @@
 int __cdecl d3_ReleaseSceneSlotById(int);
 int __cdecl d3_RemoveSubTreeFromCellTree(int, int);
 
-void __cdecl fcn_0050d350(int a)
+void __cdecl d3_ReleaseAndDetachSceneSlot(int slotId)
 {
-	d3_ReleaseSceneSlotById(a);
+	d3_ReleaseSceneSlotById(slotId);
 	if (*(int*) 0x6f1c28 != 0) {
-		d3_RemoveSubTreeFromCellTree(a, *(int*) 0x6f1c28);
+		d3_RemoveSubTreeFromCellTree(slotId, *(int*) 0x6f1c28);
 	}
 }

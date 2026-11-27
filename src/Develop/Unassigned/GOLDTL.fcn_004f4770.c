@@ -6,7 +6,7 @@ extern float g_665370;
 
 int __cdecl fcn_00502cd0(int a, int b, int c, int d, int e);
 
-float __cdecl fcn_004f4770(char* p)
+float __cdecl gv_CalcSeanceBonus(char* p)
 {
 	float v;
 

@@ -3,7 +3,7 @@
 
 int __cdecl m_FreeTracked(int);
 
-void __cdecl fcn_0045ab80(void)
+void __cdecl d3s_FreeCache(void)
 {
 	int v;
 	v = *(int*) 0x633dd0;

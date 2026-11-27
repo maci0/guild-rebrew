@@ -9,7 +9,7 @@ void __cdecl d2_CenterDialogWindows(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl main_ExitToFrameHandler(void*);
-void __cdecl fcn_005438c0(void);
+void __cdecl main_RunGameLoop(void);
 
 void __cdecl d2_ShowEndRoundDialog(void)
 {
@@ -30,6 +30,6 @@ void __cdecl d2_ShowEndRoundDialog(void)
 	d2_DestroyForm(h);
 	if (q != 0) {
 		g_774960 = 1;
-		main_ExitToFrameHandler((void*) fcn_005438c0);
+		main_ExitToFrameHandler((void*) main_RunGameLoop);
 	}
 }

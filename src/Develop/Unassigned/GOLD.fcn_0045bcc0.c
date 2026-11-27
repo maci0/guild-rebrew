@@ -4,15 +4,15 @@
 // m is a double compared as !(m < b[i].y): that is the spelling that loads the
 // float first and copies m for fld/fld st(1)/fcompp with the test ah,5 mask.
 
-typedef struct Vec045bcc0 {
+typedef struct D3_SHADOW_VEC4 {
 	float x;
 	float y;
 	float z;
 	float w;
-} Vec045bcc0;
+} D3_SHADOW_VEC4;
 // SIZE 0x10
 
-typedef struct Ent045bcc0 {
+typedef struct D3_SHADOW_ENT {
 	int active;
 	char pad4[0x18 - 4];
 	float x;
@@ -21,55 +21,55 @@ typedef struct Ent045bcc0 {
 	char pad24[0x58 - 0x24];
 	float value;
 	char pad5c[0x80 - 0x5c];
-} Ent045bcc0;
+} D3_SHADOW_ENT;
 
-typedef struct Ov045bcc0 {
+typedef struct D3_SHADOW_OV {
 	char pad0[0x754];
-	Ent045bcc0 ents[4];
+	D3_SHADOW_ENT ents[4];
 	float height;
-} Ov045bcc0;
+} D3_SHADOW_OV;
 
-typedef struct Obj045bcc0 {
+typedef struct D3_SHADOW_OBJ {
 	char pad0[0x4c];
 	int x4c;
 	char pad50[0x1ec - 0x50];
-	Ov045bcc0* ov;
+	D3_SHADOW_OV* ov;
 	char pad1f0[0x1f8 - 0x1f0];
-	struct Obj045bcc0* parent;
+	struct D3_SHADOW_OBJ* parent;
 	char pad1fc[0x211 - 0x1fc];
 	unsigned char flags;
-} Obj045bcc0;
+} D3_SHADOW_OBJ;
 
-typedef struct Api045bcc0 {
+typedef struct D3_SHADOW_API {
 	char pad0[0x1d4];
 	float base;
 	char pad1d8[0x1f4 - 0x1d8];
-	struct Box045bcc0*(__cdecl* query)(Obj045bcc0* o, void* ctx, char* data);
-} Api045bcc0;
+	struct D3_SHADOW_BOX*(__cdecl* query)(D3_SHADOW_OBJ* o, void* ctx, char* data);
+} D3_SHADOW_API;
 
-typedef struct Box045bcc0 {
+typedef struct D3_SHADOW_BOX {
 	float x;
 	float y;
 	char pad8[0x50 - 8];
-} Box045bcc0;
+} D3_SHADOW_BOX;
 
-typedef struct Ctx045bcc0 {
+typedef struct D3_SHADOW_CTX {
 	char pad0[0x10];
-	Api045bcc0* api;
-} Ctx045bcc0;
+	D3_SHADOW_API* api;
+} D3_SHADOW_CTX;
 
 extern float g_5ebaa4;
 
-void __cdecl d3_TransformPoint(Obj045bcc0* o, int* p, Vec045bcc0* out);
+void __cdecl d3_TransformPoint(D3_SHADOW_OBJ* o, int* p, D3_SHADOW_VEC4* out);
 
-float __cdecl fcn_0045bcc0(Obj045bcc0* o, Ctx045bcc0* ctx)
+float __cdecl d3_GetShadowPlaneHeight(D3_SHADOW_OBJ* o, D3_SHADOW_CTX* ctx)
 {
-	Obj045bcc0* p;
-	Ov045bcc0* ov;
-	Box045bcc0* b;
+	D3_SHADOW_OBJ* p;
+	D3_SHADOW_OV* ov;
+	D3_SHADOW_BOX* b;
 	float res;
 	double m;
-	Vec045bcc0 pos;
+	D3_SHADOW_VEC4 pos;
 	char found;
 	int i;
 

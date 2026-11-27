@@ -86,9 +86,7 @@ typedef struct {
  * and displace everything after them.  Callers already push/cmp the raw
  * addresses (gm_Open, vfs_OpenStream, vfs_ReadData); nothing names these
  * symbols, but they must occupy this exact span. */
-#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
 char s_gzip_mode_rb[4] = { 'r', 'b', 0, 0 };
-#endif
 unsigned int g_gzip_magic_1f = 0x1f;
 
 unsigned int g_gzip_magic_8b = 0x8b;
@@ -1325,8 +1323,71 @@ int __cdecl CloseVfsStream(void* stream)
 	return result;
 }
 #endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+int __cdecl vfs_FlushAndClose(int);
+
+/* ADDRESS: GOLDTL 0x00430580 */
+int __cdecl CloseVfsStream(void* stream)
+{
+	int result;
+	int n;
+	unsigned int value;
+	char* write_cursor;
+
+	result = 0;
+	if (stream != 0) {
+		if (*(unsigned char*) ((char*) stream + 0x13c) & 0x20) {
+			if (*(unsigned char*) ((char*) stream + 0x13c) & 8) {
+				if (*(unsigned char*) ((char*) stream + 0x13c) & 1) {
+					inflateEnd((char*) stream + 0x100);
+				} else {
+					deflate((char*) stream + 0x100, 4);
+					deflateEnd((char*) stream + 0x100);
+					if (*(unsigned int*) ((char*) stream + 0x110) >= 8) {
+						write_cursor = *(char**) ((char*) stream + 0x10c);
+						value = *(unsigned int*) ((char*) stream + 0x138);
+						n = 4;
+						do {
+							*write_cursor = (char) value;
+							value >>= 8;
+							write_cursor++;
+						} while (--n != 0);
+						value = *(unsigned int*) ((char*) stream + 0x108);
+						n = 4;
+						do {
+							*write_cursor = (char) value;
+							value >>= 8;
+							write_cursor++;
+						} while (--n != 0);
+						*(unsigned int*) ((char*) stream + 0x114) += 8;
+						*(char**) ((char*) stream + 0x10c) += 8;
+						*(unsigned int*) ((char*) stream + 0x110) -= 8;
+					}
+				}
+			}
+			if (!(*(unsigned char*) ((char*) stream + 0x13c) & 1)) {
+				result = *(unsigned int*) ((char*) stream + 0x114);
+			}
+		} else {
+				if (*(void**) ((char*) stream + 0x100) != 0) {
+					if ((*(unsigned char*) ((char*) stream + 0x13c) & 1) && (*(unsigned char*) ((char*) stream + 0x13c) & 0x10)) {
+						unzCloseCurrentFile(*(void**) ((char*) stream + 0x100));
+						unzClose(*(void**) ((char*) stream + 0x100));
+					} else if (*(unsigned char*) ((char*) stream + 0x13c) & 8) {
+						vfs_FlushAndClose((int) *(void**) ((char*) stream + 0x100));
+					} else {
+						fclose(*(void**) ((char*) stream + 0x100));
+					}
+				}
+		}
+		vfs_OpenStreamCount--;
+		m_pool_free((int*) g_stream_pool, stream);
+	}
+	return result;
+}
+#endif
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream);
-#if defined(REBREW_SERVER) || defined(REBREW_GOLD)
+#if defined(REBREW_SERVER)
 int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
 {
 	char name[0x100];
@@ -1443,6 +1504,117 @@ done:
 	return result;
 }
 #endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+struct z_stream_s;
+extern int __cdecl fcn_004616e0(struct z_stream_s* zstrm, int flush);
+
+/* ADDRESS: GOLDTL 0x004306b0 */
+int __cdecl vfs_ReadData(char* buf, int size, int count, char* stream)
+{
+	int result;
+	int total;
+	char* zstrm;
+	char name[0x100];
+	unsigned char flags, memory;
+	char* src;
+
+	result = -1;
+	if (stream == 0) {
+		goto done;
+	}
+	flags = (unsigned char) stream[0x13c];
+	if (!(flags & 1)) {
+		goto done;
+	}
+	zstrm = stream + 0x100;
+	src = *(char**) zstrm;
+	if (src == 0 && !(flags & 0x20)) {
+		goto done;
+	}
+	total = size * count;
+	memory = (flags >> 5) & 1;
+	if (memory && !(flags & 8)) {
+		unsigned int avail;
+
+		avail = *(unsigned int*) (stream + 0x104);
+		if (avail < (unsigned int) total) {
+			total = (int) avail;
+		}
+	}
+	if (total == 0) {
+		result = total;
+		goto done;
+	}
+	if (buf == 0) {
+		goto done;
+	}
+	if (memory) {
+		if (flags & 8) {
+			*(char**) (stream + 0x10c) = buf;
+			*(int*) (stream + 0x110) = total;
+			fcn_004616e0((struct z_stream_s*) zstrm, 2);
+			result = total - *(int*) (stream + 0x110);
+			goto done;
+		}
+		{
+			count = (int) src;
+			__asm {
+				mov edi, buf
+				mov esi, count
+				mov ebx, total
+				lea ecx, [edi+edi*2]
+				and ecx, 3
+				sub ebx, ecx
+				jle short CopyDone
+				rep movsb
+				mov ecx, ebx
+				and ebx, 3
+				shr ecx, 2
+				rep movsd
+			CopyDone:
+				add ecx, ebx
+				rep movsb
+			}
+		}
+		result = total;
+		*(char**) zstrm += total;
+		{
+			int avail = *(int*) (stream + 0x104);
+			int consumed = *(int*) (stream + 0x108);
+
+			*(int*) (stream + 0x104) = avail - total;
+			*(int*) (stream + 0x108) = consumed + total;
+		}
+		goto done;
+	}
+	if (flags & 0x10) {
+		result = unzReadCurrentFile((int) src, buf, (unsigned int) total);
+		flags = (unsigned char) stream[0x13c];
+		if (!(flags & 4)) {
+			goto done;
+		}
+		if ((unsigned int) result < 2) {
+			goto done;
+		}
+		*(unsigned char*) (stream + 0x13c) =
+		    (unsigned char) (flags & ~4);
+		if (*(unsigned char*) buf != *(int*) 0x679e60 ||
+		    *((unsigned char*) buf + 1) != *(int*) 0x679e64) {
+			goto done;
+		}
+		sprintf(name, "vfs: gz-compressed file (\"%s\") in zip found!", stream);
+		goto done;
+	}
+	if (flags & 8) {
+		result = gzread((void*) src, buf, (unsigned int) total);
+		goto done;
+	}
+	result = fread(buf, size, count, (FILE*) src);
+done:
+	return result;
+}
+#endif
+
 /* Client-only stream helpers (TL client 0x430870..0x430c50, between vfs_ReadData and vfs_OpenStream;
  * discarded). */
 
@@ -1789,6 +1961,130 @@ done:
 	return result;
 cleanup:
 	m_pool_free((void*) &g_stream_pool, stream);
+	return 0;
+}
+#endif
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+extern int __cdecl crt_toupper(int current_char);
+typedef struct {
+	unsigned char read : 1;
+	unsigned char b1 : 1;
+	unsigned char b2 : 1;
+	unsigned char compressed : 1;
+	unsigned char b4 : 1;
+	unsigned char b5 : 1;
+	unsigned char b6 : 1;
+	unsigned char b7 : 1;
+} vfs_mode_bits_tl;
+
+/* ADDRESS: GOLDTL 0x00430cb0 */
+void* __cdecl vfs_OpenStream(unsigned char* buf, unsigned int size, char* mode_flags)
+{
+	char* stream;
+	char* path_cursor;
+	void* result;
+	int mode14;
+	unsigned char mode13;
+	unsigned char mode18;
+
+	result = 0;
+	*(unsigned char*) &mode14 = 1;
+	mode18 = 1;
+	mode13 = 1;
+	if (buf == 0 || size <= 0) {
+		goto done;
+	}
+	for (path_cursor = mode_flags; *path_cursor != 0; path_cursor++) {
+		switch (crt_toupper(*path_cursor)) {
+		case 'N':
+			mode18 = 0;
+			mode13 = 0;
+			break;
+		case 'R':
+			*(unsigned char*) &mode14 = 1;
+			break;
+		case 'W':
+			*(unsigned char*) &mode14 = 0;
+			break;
+		case 'Z':
+			mode18 = 1;
+			mode13 = 0;
+			break;
+		default:
+			break;
+		}
+	}
+	stream = (char*) m_PoolAlloc(g_6b7fe4, 0x140, 0x10);
+	*(unsigned char*) (stream + 0x13c) = (unsigned char) ((*(unsigned char*) (stream + 0x13c) & 0xeb) | 0x22);
+	if (*(unsigned char*) &mode14 != 0) {
+		if (mode13 != 0) {
+			if (size <= 10) {
+				mode18 = 0;
+			} else if (buf[0] == *(int*) 0x679e60 && buf[1] == *(int*) 0x679e64) {
+				mode18 = 1;
+				goto inflate_setup;
+			} else {
+				mode18 = 0;
+			}
+		} else if (mode18 != 0) {
+			goto inflate_setup;
+		}
+		*(unsigned char**) (stream + 0x100) = buf;
+		*(unsigned int*) (stream + 0x104) = size;
+		*(int*) (stream + 0x108) = 0;
+		goto finalize;
+	inflate_setup:
+		*(unsigned char**) (stream + 0x100) = buf + 10;
+		*(unsigned int*) (stream + 0x104) = size - 10;
+		*(int*) (stream + 0x10c) = 0;
+		*(int*) (stream + 0x110) = 0;
+		*(int*) (stream + 0x120) = 0;
+		*(int*) (stream + 0x124) = 0;
+		if (inflateInit2_((void*) (stream + 0x100), -0xf, "1.1.3", 0x38) == 0) {
+			goto finalize;
+		}
+		goto cleanup;
+	}
+	if (mode18 != 0) {
+		if (size < 0x12) {
+			goto cleanup;
+		}
+		buf[0] = *(unsigned char*) 0x679e60;
+		buf[1] = *(unsigned char*) 0x679e64;
+		buf[2] = 8;
+		buf[8] = 0;
+		buf[7] = 0;
+		buf[6] = 0;
+		buf[5] = 0;
+		buf[4] = 0;
+		buf[3] = 0;
+		buf[9] = 0xb;
+		*(unsigned char**) (stream + 0x100) = 0;
+		*(unsigned int*) (stream + 0x104) = 0;
+		*(unsigned char**) (stream + 0x10c) = buf + 10;
+		*(unsigned int*) (stream + 0x110) = size - 10;
+		*(int*) (stream + 0x120) = 0;
+		*(int*) (stream + 0x124) = 0;
+		*(int*) (stream + 0x138) = crc32(0, 0, 0);
+		if (deflateInit2_((void*) (stream + 0x100), -1, 8, -0xf, 8, 0, "1.1.3", 0x38) != 0) {
+			goto cleanup;
+		}
+		*(int*) (stream + 0x114) = 0xa;
+	} else {
+		*(unsigned char**) (stream + 0x10c) = buf;
+		*(unsigned int*) (stream + 0x110) = size;
+		*(int*) (stream + 0x114) = 0;
+	}
+finalize:
+	vfs_OpenStreamCount = vfs_OpenStreamCount + 1;
+	((vfs_mode_bits_tl*) (stream + 0x13c))->read = *(unsigned char*) &mode14;
+	((vfs_mode_bits_tl*) (stream + 0x13c))->compressed = mode18;
+	sprintf(stream, "0x%08X -> length: %u, read: %u compressed: %u", buf, size, (unsigned char) mode14, mode18);
+	result = stream;
+done:
+	return result;
+cleanup:
+	m_pool_free(g_6b7fe4, stream);
 	return 0;
 }
 #endif

@@ -5,10 +5,10 @@ extern float g_6628a0;
 typedef struct {
 	int i;
 	float f[21];
-} F4321F0;
+} D3_SPLINE_KEY;
 
 /* ADDRESS: GOLDTL 0x004321f0 */
-void __cdecl fcn_004321f0(F4321F0* previous, F4321F0* current, F4321F0* next)
+void __cdecl d3_ComputeSplineTangents(D3_SPLINE_KEY* previous, D3_SPLINE_KEY* current, D3_SPLINE_KEY* next)
 {
 	float d[4];
 	float e[4];

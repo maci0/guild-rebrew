@@ -1,6 +1,6 @@
 int __cdecl gm_IsDiceStageValid(char*, char*, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, char, int);
-void __cdecl fcn_004929e0(void*, void*, int);
+void __cdecl ai_RollWirtshausDice(void*, void*, int);
 void __cdecl gm_AdvanceDiceStage(char*, char*, int);
 
 /* ADDRESS: GOLDTL 0x00492d60 */
@@ -15,7 +15,7 @@ int __cdecl fcn_00492d60(int* p, char* q, int kind)
 			cm_RequestTransferCurrencyNoKill(-1, *(int*) (q + 4), 0, *p);
 		}
 		p[0x15] += *p;
-		fcn_004929e0(p, q, 1);
+		ai_RollWirtshausDice(p, q, 1);
 		gm_AdvanceDiceStage((char*) p, q, kind);
 		return 1;
 	case 2:
@@ -23,7 +23,7 @@ int __cdecl fcn_00492d60(int* p, char* q, int kind)
 			cm_RequestTransferCurrencyNoKill(-1, *(int*) (q + 4), 0, p[1]);
 		}
 		p[0x15] += p[1];
-		fcn_004929e0(p, q, 0);
+		ai_RollWirtshausDice(p, q, 0);
 		gm_AdvanceDiceStage((char*) p, q, kind);
 		return 1;
 	case 3:

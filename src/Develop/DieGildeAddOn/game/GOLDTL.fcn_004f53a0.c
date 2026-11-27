@@ -3,30 +3,30 @@
 
 /* Same by-value request struct as fcn_004f5300: caller 0x4f56b0 copies 0x2d bytes. */
 // SIZE 0x2d
-typedef struct tag_req_2d_c {
+typedef struct tag_GS_STRAFTAT_REC_HIGH {
 	char raw[0x2d];
-} req_2d_c;
+} GS_STRAFTAT_REC_HIGH;
 
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 int __cdecl fcn_0051e070(void);
 
-int __cdecl fcn_004f53a0(void* output, req_2d_c request, int b)
+int __cdecl gs_FormatStraftatTextHigh(void* output, GS_STRAFTAT_REC_HIGH request, int count)
 {
-	char* nm;
+	char* buildingName;
 	char name[0x80] = "Geb\xe4ude";
 	unsigned short entityId;
-	unsigned char* p;
-	int formatOffset = (b <= 1);
+	unsigned char* victim;
+	int formatOffset = (count <= 1);
 
-	gm_ResolveEntityById((void**) (&nm), 0, 0, *(int*) ((char*) &request + 0x21));
-	if (nm != 0) {
-		io_FormatTextBuffer(name, (int) "%1G", nm);
+	gm_ResolveEntityById((void**) (&buildingName), 0, 0, *(int*) ((char*) &request + 0x21));
+	if (buildingName != 0) {
+		io_FormatTextBuffer(name, (int) "%1G", buildingName);
 	}
-	p = gm_LookupEntityRecordById(*(int*) ((char*) &request + 0x12));
-	if (p != 0) {
-		entityId = *(unsigned short*) p;
+	victim = gm_LookupEntityRecordById(*(int*) ((char*) &request + 0x12));
+	if (victim != 0) {
+		entityId = *(unsigned short*) victim;
 	} else {
 		entityId = 0xfffe;
 	}

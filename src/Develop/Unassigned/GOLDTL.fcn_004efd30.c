@@ -5,7 +5,7 @@
 extern Slot170_7731b8 g_7731b8[8];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_004efd30(int selectedKey)
+int __cdecl gm_LookupSlot170ByKey(int selectedKey)
 {
 	int i;
 	int a;

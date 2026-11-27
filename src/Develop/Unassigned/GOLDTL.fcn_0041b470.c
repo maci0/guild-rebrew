@@ -2,14 +2,14 @@
 
 int __cdecl fcn_0064dc43(char*, char*, ...);
 
-char __cdecl fcn_0041b470(char* s, int* v)
+char __cdecl d3_ParseDisplayMode(char* str, int* mode)
 {
-	char r;
+	char ok;
 
-	r = 0;
-	if (s != 0 && *s != 0 && v != 0) {
-		v[2] = 0;
-		r = fcn_0064dc43(s, (char*) 0x677864, v, v + 1, v + 3, v + 2) == 4;
+	ok = 0;
+	if (str != 0 && *str != 0 && mode != 0) {
+		mode[2] = 0;
+		ok = fcn_0064dc43(str, (char*) 0x677864, mode, mode + 1, mode + 3, mode + 2) == 4;
 	}
-	return r;
+	return ok;
 }

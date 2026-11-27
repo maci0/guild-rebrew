@@ -28,7 +28,7 @@ char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, pos14_7f4c00*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
-int __cdecl fcn_0050c830(pos14_7f4c00*, pos14_7f4c00*, char*);
+int __cdecl gm_CalcElapsedWorkMinutes(pos14_7f4c00*, pos14_7f4c00*, char*);
 
 void __cdecl cm_AppendPacketFieldValue(int, int, short, unsigned char*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -63,7 +63,7 @@ void __cdecl he_RunUpgraden(char* e)
 				break;
 			}
 			skill = (float) gm_GetBuildingTechEffect(q, 0xc, 1);
-			months = fcn_0050c830((pos14_7f4c00*) (e + 0x60), &gm_GameTime, q) * (1.0 / 30.0);
+			months = gm_CalcElapsedWorkMinutes((pos14_7f4c00*) (e + 0x60), &gm_GameTime, q) * (1.0 / 30.0);
 			add = (unsigned char) ((months * 8.0) * (skill * 0.01 + 1.0));
 			p = (unsigned char*) &who[*(int*) (e + 0xb0) + 0x80];
 			add = (unsigned char) (add / (*p * (1.0f / 252.0f) + 1.0));

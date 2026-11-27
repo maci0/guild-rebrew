@@ -4,7 +4,7 @@ int __cdecl ch_WorldToGridCoordinates(float*, float*, int*, int*);
 int __cdecl ch_ConvertGridPointToCharacterGrid(int, int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00408320 */
-int __cdecl fcn_00408320(int a0, char* a1, int* a2)
+int __cdecl ch_CollectCharacterOccupiedCells(int a0, char* a1, int* a2)
 {
 	int* p;
 	int* q; int* start;

@@ -17,7 +17,7 @@ extern float __cdecl gm_RandomFloat01(void);
 extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, void* d, int e);
 extern int __cdecl fcn_004f1790(char* a, void* e);
 extern int __cdecl gv_SendExtendProductionTime(int slot, int record, int item, int value, int a, int b);
-extern int __cdecl fcn_004f2a10(int a, int record, int item, int value);
+extern int __cdecl gv_SendSetGraveOwner(int a, int record, int item, int value);
 extern int __cdecl gv_RequestUpdateProductionProgress(int record, int item, int value, int delta);
 extern int __cdecl gm_CalcBribeOrPriceScore(int slot, int byte, int item, int zero, int* out);
 extern int __cdecl cm_CountOccupiedBuildingStats(char* record);
@@ -37,7 +37,7 @@ extern int __cdecl fcn_004f1850();
 extern int __cdecl cm_SendCopyEntityData(void* msg);
 
 /* ADDRESS: GOLDTL 0x004f3ef0 */
-void __cdecl fcn_004f3ef0(char* entity)
+void __cdecl gv_UpdateGraveyardPlots(char* entity)
 {
 	int n;
 	int result;
@@ -99,7 +99,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 						goto next_entry;
 					}
 				}
-				handle = fcn_004f2a10(0, (int) entity, result,
+				handle = gv_SendSetGraveOwner(0, (int) entity, result,
 					fcn_004f1790((char*) *(int*) (entity + 0x65), entry));
 				n++;
 				continue;
@@ -140,7 +140,7 @@ void __cdecl fcn_004f3ef0(char* entity)
 					total += out;
 					continue;
 				}
-				handle = fcn_004f2a10(0, (int) entity, entry[0],
+				handle = gv_SendSetGraveOwner(0, (int) entity, entry[0],
 					fcn_004f1790((char*) *(int*) (entity + 0x65), entry));
 			} else {
 				memset(block, 0, sizeof(block));

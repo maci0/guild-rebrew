@@ -1,4 +1,4 @@
-int __cdecl fcn_0041a950(int a);
+int __cdecl d3_GetFormatBpp(int a);
 
 /* ADDRESS: GOLDTL 0x0041a8d0 */
 int __cdecl fcn_0041a8d0(unsigned int* a, unsigned int* b)
@@ -18,13 +18,13 @@ int __cdecl fcn_0041a8d0(unsigned int* a, unsigned int* b)
 	if (a[1] > b[1]) {
 		return 1;
 	}
-	x = fcn_0041a950((int) b[3]);
-	y = fcn_0041a950((int) a[3]);
+	x = d3_GetFormatBpp((int) b[3]);
+	y = d3_GetFormatBpp((int) a[3]);
 	if (y < x) {
 		return -1;
 	}
-	x = fcn_0041a950((int) b[3]);
-	y = fcn_0041a950((int) a[3]);
+	x = d3_GetFormatBpp((int) b[3]);
+	y = d3_GetFormatBpp((int) a[3]);
 	if (x < y) {
 		return 1;
 	}

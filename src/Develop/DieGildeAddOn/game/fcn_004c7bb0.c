@@ -1,20 +1,20 @@
 #pragma pack(push, 1)
-typedef struct Obj4c7bb0 {
+typedef struct CM_TRANSFER_CURRENCY_CMD {
 	char pad0[0x10];
 	int h10;
 	int h14;
 	int f18;
 	unsigned char idx1c;
 	int f1d;
-} Obj4c7bb0;
+} CM_TRANSFER_CURRENCY_CMD;
 #pragma pack(pop)
 
-int __cdecl cm_ResolveSpecialEntityId(Obj4c7bb0* obj, int h);
+int __cdecl cm_ResolveSpecialEntityId(CM_TRANSFER_CURRENCY_CMD* obj, int h);
 void __cdecl gm_SubObjectNoKill(int h, unsigned int w, int v);
 void __cdecl gm_AddObjekt(int h, unsigned int w, int v);
 
 /* ADDRESS: GOLDTL 0x004c7bb0 */
-int __cdecl fcn_004c7bb0(Obj4c7bb0* obj, char* out)
+int __cdecl fcn_004c7bb0(CM_TRANSFER_CURRENCY_CMD* obj, char* out)
 {
 	int h;
 	unsigned int w;

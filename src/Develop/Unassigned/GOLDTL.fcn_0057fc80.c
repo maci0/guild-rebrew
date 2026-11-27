@@ -4,7 +4,7 @@
 extern char* g_7746cc;
 extern int* g_665f08;
 
-int __cdecl fcn_0057fc80(void)
+int __cdecl d2_GetTutCh3SubStep(void)
 {
 	unsigned short* p;
 	unsigned short k;

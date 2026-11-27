@@ -104,7 +104,7 @@ extern void io_ClearInputState();
 extern int cut_FindCutsceneById();
 extern void fcn_00533a40();
 extern void d2_ProcessMouseInput();
-extern void fcn_00533090();
+extern void d2_UpdateBuildingCameraAndUi();
 extern void ReportClientMessage();
 extern void fcn_00545aa0();
 extern void he_RunQueuedActions();
@@ -152,7 +152,7 @@ extern void fcn_0046a110();
 extern void fcn_004da1b0();
 extern void fcn_00532650();
 extern void fcn_00532900();
-extern void fcn_005329a0();
+extern void d2_DrawBuildingItemLabels();
 extern void fcn_4d03e0();
 extern void fcn_00532bd0();
 extern void fcn_005337a0();
@@ -163,7 +163,7 @@ extern void fcn_0047cdf0();
 extern void fcn_00472a50();
 extern void fcn_00411fe0();
 extern void fcn_00537320();
-extern void fcn_0041bcb0();
+extern void d3_PresentFrame();
 extern void SetMasterVolume();
 extern void sb_SetMasterVolume();
 extern void fcn_5e43f0();
@@ -231,7 +231,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		g_774670 = 1;
 	}
 	if (g_774654 == 0 && (flags & 0x100) && !(flags & 0x100000)) {
-		fcn_00533090(flags);
+		d2_UpdateBuildingCameraAndUi(flags);
 	}
 	g_774708 = a0;
 	if (a0 != 0) {
@@ -423,7 +423,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 			if (g_14cf71d != 0) {
 				fcn_00532900();
 			} else if (g_14cf738 != 0) {
-				fcn_005329a0();
+				d2_DrawBuildingItemLabels();
 			}
 		}
 		if (flags & 0x80000) {
@@ -450,7 +450,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 	}
 	fcn_00537320(flags);
 	if (g_774670 == 0 && (flags & 0x80)) {
-		fcn_0041bcb0();
+		d3_PresentFrame();
 	}
 	if (g_14cf950 == 1 && (flags & 0x2000)) {
 		t = (float) (g_7766a0 & 0xff) * g_665e44;

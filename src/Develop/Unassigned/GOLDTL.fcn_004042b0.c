@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x004042b0 */
-int __cdecl fcn_004042b0(void *self)
+int __cdecl ch_IsAnimationFinished(void *self)
 {
     void *p;
     void *v;

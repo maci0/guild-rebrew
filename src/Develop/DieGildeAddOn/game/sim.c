@@ -1,6 +1,17 @@
 #include "../../Units/Error/error.h"
 #include "rebrew_types.h"
 #include "rebrew_globals.h"
+#if !defined(REBREW_SERVER)
+#include <io.h>
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include "rgb.h"
+#include "Develop/DieGildeAddOn/game/building_prototype.h"
+#include "Develop/DieGildeAddOn/game/entity_record.h"
+#include "Develop/DieGildeAddOn/game/game_data.h"
+#endif
+
 extern unsigned char g_entity_type_bytes[1];
 extern int __cdecl gm_RandomMod(unsigned short range);
 unsigned int __cdecl gm_AllocSpieler(int p1, int p2, int p3, int p4, int p5, int p6, int p7, int p8);
@@ -10,6 +21,92 @@ extern unsigned char g_slot_table[2];
 /* 0x10035a05: the byte at +0x165 of each 0x21c-byte g_slot_table record. */
 #define g_stat_b_array ((unsigned char*) g_slot_table + 0x165)
 unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
+
+#if !defined(REBREW_SERVER)
+#if defined(REBREW_GOLD)
+extern unsigned char* lpGebaeudeINST;
+#endif
+extern char g_7f4caa[];
+extern char g_7f4cc0[];
+extern int g_773d64;
+extern int g_773d3c;
+extern char g_67bd30[];
+extern char g_67a930[];
+extern RGB_COLOR g_100f1a0;
+extern char g_1015da0[];
+extern char g_696528[];
+extern char g_67d940[];
+extern char g_99f620[];
+extern int g_99f624[9];
+extern float g_99f644;
+extern float g_99f648[8];
+extern float g_99f668[8];
+extern float g_662cf8;
+
+typedef struct { int word[2]; } QUERY_LIMIT;
+
+// SIZE 0x21c
+typedef struct {
+	unsigned short id;
+	unsigned char type;
+	char pad3[6];
+	unsigned char cls;
+	unsigned short age;
+	char padc[0x20 - 0xc];
+	float years;
+	char pad24[0x164 - 0x24];
+	unsigned char group;
+	unsigned char kind;
+	char pad166[0x16c - 0x166];
+	int home;
+	char pad170[0x1c8 - 0x170];
+	int flags;
+	char pad1cc[0x21c - 0x1cc];
+} Obj;
+
+#pragma pack(push, 2)
+typedef struct {
+	int day;
+	unsigned short hour;
+	int min;
+	int sec;
+} Time;
+// SIZE 0xe
+#pragma pack(pop)
+
+#pragma pack(push, 2)
+typedef struct TIME_4FE140 {
+	int day;
+	unsigned short hour;
+	int minute;
+	int second;
+} TIME_4FE140;
+#pragma pack(pop)
+
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
+int __cdecl gm_CheckEntityAgeLimit(int index);
+char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
+char* __cdecl gm_FindNextFilteredEntity(void);
+int __cdecl gm_GetBuildingSlotLimits(int, int*);
+void __cdecl d3_TransformPoint(int, int, float*);
+int __cdecl gm_EntityClassCheck(int kind);
+int __cdecl gm_IsInRange(int cls);
+int __cdecl gm_GetEntityRelation(int a, int i);
+int __cdecl fcn_0050a7e0(int a, int b, int c, int d, int e, int f, int g, int h);
+int __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
+int __cdecl fcn_00475830(char* path);
+int __cdecl fcn_00475c10(char* path);
+int __cdecl fcn_004788b0(int a, int b, int c, int d, int h, int e, int f);
+void __cdecl d2_AppendShapeToBank(int o, int x);
+void __cdecl m_FreeTracked(void*);
+void __cdecl fcn_00475f80(int h);
+char* __cdecl m_alloc(int size, char* tag);
+float __cdecl fcn_00505e30(int);
+float __cdecl gm_GetEntityHealth(void*);
+float __cdecl gm_GetEntityMaxHealth(void*);
+#endif
 
 /* Simulation entity records are 0x21c bytes, based at g_slot_table
  * (0x100358a0).  Fields used here: +0x00 slot id (0xffff = free),
@@ -164,9 +261,6 @@ done2:
  * Processor Pack code generator needs the weight test spelled as
  * !(f < w) to emit the reference's test ah,5 / jnp. */
 
-extern char g_7f4ca0[];
-int __cdecl fcn_0050a7e0(int a, int b, int c, int d, int e, int f, int g, int h);
-
 /* ADDRESS: GOLDTL 0x004ffd90 */
 /* ADDRESS: GOLD 0x004fd5c0 */
 unsigned short __cdecl sim_FindAndMatchParents(unsigned int param)
@@ -266,6 +360,90 @@ int __cdecl sim_IsUnderage(int slot)
 	return *(unsigned short*) (g_slot_table + 0xa + i * 0x21c) < *(float*) (g_slot_table + 0x20 + i * 0x21c);
 }
 
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLD 0x004fd7e0 */
+/* ADDRESS: GOLDTL 0x004fffb0 */
+int __cdecl gm_CheckEntityAgeLimit(int index)
+{
+	unsigned short w;
+	unsigned int slot;
+	int v;
+
+	slot = (unsigned int) index & 0xffff;
+	w = *(unsigned short*) (g_7f4caa + slot * 540);
+	v = w;
+	return v < *(float*) (g_7f4cc0 + slot * 540);
+}
+#endif
+
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+/* ADDRESS: GOLDTL 0x004ffff0 */
+char* __cdecl gm_FindAvailableResidence(int unused, int nearEntity)
+{
+	char* e;
+	char* best;
+	char* list[0x10];
+	float p1[4];
+	float p2[4];
+	float bestd;
+	float d;
+	int n;
+	QUERY_LIMIT selected, current;
+	int best_n;
+
+	best = 0;
+	bestd = 1e8f;
+	gm_GetBuildingSlotLimits(1, selected.word);
+	e = gm_StartFilteredEntitySearch(1, 5, 1);
+	if (e != 0) {
+		best_n = selected.word[0];
+		do {
+			gm_GetBuildingSlotLimits(*(unsigned char*) e, current.word);
+			n = current.word[0];
+			if ((unsigned short) *(unsigned char*) (e + 0x65) < (unsigned short) current.word[0]
+			    && (*(unsigned char*) (e + 0x5a) & 1) == 0) {
+				if (nearEntity != 0 && *(int*) (nearEntity + 0x61) != 0 && *(int*) (e + 0x61) != 0) {
+					d3_TransformPoint(*(int*) (e + 0x61), *(int*) (e + 0x61) + 0x4c, p1);
+					d3_TransformPoint(*(int*) (nearEntity + 0x61), *(int*) (nearEntity + 0x61) + 0x4c, p2);
+					p1[0] = p1[0] - p2[0];
+					p1[1] = p1[1] - p2[1];
+					p1[2] = p1[2] - p2[2];
+					d = sqrt(p1[0] * p1[0] + p1[1] * p1[1] + p1[2] * p1[2]);
+					if (d < bestd) {
+						selected.word[1] = current.word[1];
+						best_n = n;
+						best = e;
+						bestd = d;
+					}
+				} else if (best != 0) {
+					if ((float) *(unsigned char*) (e + 0x65) / (float) (n & 0xffff)
+					    < (float) *(unsigned char*) (best + 0x65) / (float) (best_n & 0xffff)) {
+						best = e;
+					}
+				} else {
+					selected.word[1] = current.word[1];
+					best_n = n;
+					best = e;
+				}
+			}
+			e = gm_FindNextFilteredEntity();
+		} while (e != 0);
+		if (best != 0) {
+			return best;
+		}
+	}
+	e = gm_StartFilteredEntitySearch(1, 5, 0x16);
+	memset(list, 0, sizeof(list));
+	n = 0;
+	while (e != 0 && (*(unsigned char*) (e + 0x5a) & 1) == 0 && n < 0x10) {
+		list[n] = e;
+		n++;
+		e = gm_FindNextFilteredEntity();
+	}
+	return list[gm_RandomMod((unsigned short) n) & 0xffff];
+}
+#endif
+
 /* Updates entity priority/scheduling. Called during simulation
  * tick to adjust entity processing order based on game state. */
 
@@ -332,6 +510,47 @@ unsigned char* __cdecl sim_ClaimResident(char* who, int kind, int group)
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\sim.c", __LINE__, "sim_ClaimResident(): no free resident found", 1);
 	return 0;
 }
+
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLDTL 0x00500240 */
+/* ADDRESS: GOLD 0x004fda70 */
+Obj* __cdecl gm_FindAndReserveEntity(char* who, int kind, int group)
+{
+	int i;
+	int c;
+
+	if (kind != 0) {
+		for (i = 0; i < 768; i++) {
+			if (((Obj*)g_7f4ca0)[i].id != 0xffff && !(((Obj*)g_7f4ca0)[i].flags & 0x2000) && ((Obj*)g_7f4ca0)[i].type <= 1 &&
+			    (((Obj*)g_7f4ca0)[i].kind == kind || ((Obj*)g_7f4ca0)[i].kind == 0) && ((Obj*)g_7f4ca0)[i].home == 0 &&
+			    (float) ((Obj*)g_7f4ca0)[i].age >= ((Obj*)g_7f4ca0)[i].years && ((Obj*)g_7f4ca0)[i].group == group) {
+				c = gm_EntityClassCheck(kind);
+				if ((c == 2 || ((Obj*)g_7f4ca0)[i].cls == c) &&
+				    (*(unsigned short*) (who + 0x27) == 0xffff ||
+				     gm_GetEntityRelation(*(unsigned short*) (who + 0x27), i) > -30)) {
+					goto found;
+				}
+			}
+		}
+		return 0;
+	}
+	if (group == 0) {
+		return 0;
+	}
+	c = gm_IsInRange((unsigned char) group);
+	for (i = 0; i < 768; i++) {
+		if (((Obj*)g_7f4ca0)[i].id != 0xffff && !(((Obj*)g_7f4ca0)[i].flags & 0x2000) && ((Obj*)g_7f4ca0)[i].type <= 1 &&
+		    ((Obj*)g_7f4ca0)[i].group == group && ((Obj*)g_7f4ca0)[i].home == 0 && (c == 2 || ((Obj*)g_7f4ca0)[i].cls == c) &&
+		    (*(unsigned short*) (who + 0x27) == 0xffff || gm_GetEntityRelation(*(unsigned short*) (who + 0x27), i) > -30)) {
+			goto found;
+		}
+	}
+	return 0;
+found:
+	((Obj*)g_7f4ca0)[i].flags |= 0x2000;
+	return &((Obj*)g_7f4ca0)[i];
+}
+#endif
 
 /* Starts an entity query filtered by type byte from arg1.
  * Dispatches entity iteration across buildings, citizens, or
@@ -415,6 +634,44 @@ char* __cdecl sim_NextServiceBuilding(char* entity, int* id, int* sub)
 	return 0;
 }
 
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLDTL 0x00500480 */
+/* ADDRESS: GOLD 0x004fdcb0 */
+char* __cdecl gm_FindFallbackPublicBuilding(char* entity, int* id, int* sub)
+{
+	char* found_ent;
+	int idx;
+	int rem;
+	char* proto;
+
+	rem = 255;
+	if (*(char**) (entity + 0x170) != 0) {
+		found_ent = (char*) sim_StartEntityQueryByType(*(unsigned char**) (entity + 0x170));
+		if (found_ent != 0) {
+			*sub = *(int*) (found_ent + 2);
+		} else {
+			*sub = -1;
+		}
+		*id = *(int*) (*(char**) (entity + 0x170) + 1);
+		return *(char**) (entity + 0x170);
+	}
+	idx = g_773d64;
+	do {
+		if (((char*)lpGebaeudeINST)[idx * 169] != 0) {
+			proto = (char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char)((char*)lpGebaeudeINST)[idx * 169]];
+			if (*proto == 3 || *proto == 0x16 || *proto == 0xf) {
+				g_773d64 = idx + 1;
+				*sub = -1;
+				*id = *(int*) (((char*)lpGebaeudeINST) + idx * 169 + 1);
+				return ((char*)lpGebaeudeINST) + idx * 169;
+			}
+		}
+		idx = (idx + 1) % 256;
+	} while (--rem != 0);
+	return 0;
+}
+#endif
+
 /* Creates a new citizen entity with initial stats generated
  * from parent entities. Allocates entity memory, assigns random
  * stats via gm_AllocSpieler, and links to home. */
@@ -453,6 +710,46 @@ error:
 	return (void*) 0;
 }
 
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+/* ADDRESS: GOLDTL 0x00500580 */
+char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
+	char* queryEntity)
+{
+	int i;
+	char* rec;
+	char* s;
+
+	if (flags & 1) {
+		i = sim_FindAndMatchParents(a3) & 0xffff;
+		if (i != 0xffff && (flags & 2)) {
+			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].active = (char) a5;
+			*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].stat_category = (char) a4;
+		}
+	} else {
+		i = fcn_0050a7e0(a2, -1, -1, a3, 0, a4 & 0xff, a5 & 0xff, 2)
+			& 0xffff;
+	}
+	if (i == 0xffff) {
+		return 0;
+	}
+	rec = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]);
+	if (!(flags & 4)) {
+		return rec;
+	}
+	{
+		if (queryEntity != 0) {
+			s = (char*) sim_StartEntityQueryByType((unsigned char*) queryEntity);
+			if (s != 0) {
+				init_SpawnBuildingCharacter(*(int*) (rec + 4), *(int*) (queryEntity + 1),
+					*(int*) (s + 2), 0, 0);
+			}
+		}
+	}
+	return rec;
+}
+#endif
+
+#if defined(REBREW_SERVER)
 /* Client-only: calls `visit` for every file below `dir` (discarded). */
 void __cdecl sim_WalkDirectory(char* dir, int arg, void (__cdecl* visit)(char* path))
 {
@@ -501,6 +798,172 @@ void __cdecl sim_WalkDirectory(char* dir, int arg, void (__cdecl* visit)(char* p
 	} while (_findnext(h, &fd) == 0);
 	_findclose(h);
 }
+#endif
+
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+/* ADDRESS: GOLDTL 0x00500660 */
+void __cdecl fcn_00500660(char* dir, int arg, void (__cdecl* visit)(char*))
+{
+	char path[0x100];
+	struct _finddata_t fd;
+	long h;
+
+	strcpy(path, dir);
+	strcat(path, "*");
+	h = _findfirst(path, &fd);
+	if (h == -1) {
+		return;
+	}
+	do {
+		if (strcmp(fd.name, ".") != 0 && strcmp(fd.name, "..") != 0) {
+			if (fd.attrib & _A_SUBDIR) {
+				strcpy(path, dir);
+				strcat(path, fd.name);
+				strcat(path, "\\");
+				fcn_00500660(path, arg, visit);
+			} else {
+				strcpy(path, dir);
+				strcat(path, fd.name);
+				if (visit != 0) {
+					visit(path);
+				}
+			}
+		}
+	} while (_findnext(h, &fd) == 0);
+	_findclose(h);
+}
+
+/* ADDRESS: GOLDTL 0x005007f0 */
+void __cdecl fcn_005007f0(char* s)
+{
+	if (strstr(s, g_67bd30) != 0 || strstr(s, g_67a930) != 0) {
+		g_773d40++;
+	}
+}
+
+/* ADDRESS: GOLDTL 0x00500830 */
+void __cdecl fcn_00500830(char* path)
+{
+	int k;
+	int h;
+	int o;
+	char* d;
+
+	k = fcn_00475830(path);
+	if (k == -1) {
+		return;
+	}
+	h = fcn_00475c10(path);
+	if (h == 0) {
+		return;
+	}
+	o = fcn_004788b0(0, 0, k & 0xffff, k >> 16, h, 0, 1);
+	if (o != 0) {
+		d2_AppendShapeToBank(o, g_773d3c);
+		m_FreeTracked((void*) o);
+		strcpy(g_773d44 + g_773d40 * 0x30, strrchr(path, '\\') + 1);
+		d = strrchr(g_773d44 + g_773d40 * 0x30, '.');
+		if (d != 0) {
+			*d = 0;
+		}
+		g_773d40++;
+	}
+	fcn_00475f80(h);
+}
+#endif
+
+#if !defined(REBREW_SERVER)
+/* ADDRESS: GOLDTL 0x00500900 */
+/* ADDRESS: GOLD 0x004fde90 */
+void __cdecl init_LoadCharacterNames(void)
+{
+	char path[260];
+	char line[260];
+	FILE* f;
+
+	g_100f1a0.g = 0xff;
+	g_100f1a0.r = 0;
+	g_100f1a0.b = 0;
+	g_773d40 = 0;
+	sprintf(path, g_696528, g_1015da0);
+	f = fopen(path, g_6750e8);
+	if (f != 0) {
+		do {
+			fread(line, 0x80, 1, f);
+			g_773d40++;
+		} while (!feof(f));
+		fclose(f);
+	}
+	g_773d44 = m_alloc(g_773d40 * 48, g_67d940);
+	g_773d40 = 0;
+	f = fopen(path, g_6750e8);
+	if (f != 0) {
+		do {
+			fread(line, 0x80, 1, f);
+			strcpy(g_773d44 + g_773d40++ * 48, line);
+		} while (!feof(f));
+		fclose(f);
+	}
+}
+#endif
+
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+/* ADDRESS: GOLDTL 0x00500a20 */
+void __cdecl gm_FreeBuffer773d44(void)
+{
+	if (*(int*) 0x773d44 != 0) {
+		m_FreeTracked((void*) *(int*) 0x773d44);
+		*(int*) 0x773d44 = 0;
+	}
+}
+#endif
+
+#if defined(REBREW_GOLD)
+/* ADDRESS: GOLD 0x004fdfb0 */
+void __cdecl gm_FreeBuffer773d44(void)
+{
+	int h;
+	h = *(int*) 0x6f1b94;
+	if (h != 0) {
+		m_FreeTracked((void*) h);
+		*(int*) 0x6f1b94 = 0;
+	}
+}
+#endif
+
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+/* ADDRESS: GOLDTL 0x00500a40 */
+void __cdecl gm_CollectPopulationStats(void)
+{
+	char* p;
+	int i;
+	int idx;
+
+	p = g_7f4ca0;
+	memset(g_99f620, 0, 0x68);
+	i = 0;
+	do {
+		if (*(short*) p != -1
+		    && *(unsigned char*) (p + 8) > 0
+		    && *(unsigned char*) (p + 2) < 0xa) {
+			*(int*) &g_99f620[0] += 1;
+			idx = (int) MAX(MIN(fcn_00505e30(i) * 0.1f, 7.0f), 0.0f);
+			g_99f624[idx] += 1;
+			if (gm_CheckEntityAgeLimit(i) != 0)
+				g_99f644 += 1.0f;
+			g_99f648[idx] += gm_GetEntityHealth(p);
+			g_99f668[idx] += gm_GetEntityMaxHealth(p);
+		}
+		p += 0x21c;
+		i++;
+	} while ((int) p < 0x85a0a0);
+	for (p = g_99f620 + 0x48; (int) p < (int) (g_99f620 + 0x68); p += 4) {
+		*(float*) (p - 0x20) = (*(float*) (p - 0x20) / *(float*) p) * g_662cf8;
+		*(float*) p = *(float*) p / (float) *(int*) (p - 0x44);
+	}
+	g_99f644 = (g_99f644 / (float) *(int*) &g_99f620[0]) * g_662cf8;
+}
+#endif
 
 /* Advances the game clock by one tick. Updates day/hour/minute
  * counters, triggers periodic events (taxes, production cycles),
@@ -517,6 +980,7 @@ typedef struct {
 } SIM_CLOCK;
 #pragma pack(pop)
 
+#if defined(REBREW_SERVER)
 #pragma optimize("a", on)
 void __cdecl sim_AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4)
 {
@@ -570,6 +1034,71 @@ void __cdecl sim_AdvanceGameClock(SIM_CLOCK* clock, int arg2, int arg3, int arg4
 	clock->x04 = (unsigned short) minutes;
 }
 #pragma optimize("", on)
+#endif
+
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+#pragma optimize("a", on)
+/* ADDRESS: GOLDTL 0x00500bb0 */
+void __cdecl gm_AddTime(Time* clock, int arg2, int arg3, int arg4)
+{
+	unsigned short* p4 = &clock->hour;
+	int minutes;
+	int days;
+
+	clock->min += (arg4 + clock->sec) / 60;
+	clock->sec = (arg4 + clock->sec) % 60;
+	clock->hour += (unsigned short) ((arg3 + clock->min) / 60);
+	minutes = *p4;
+	clock->min = (arg3 + clock->min) % 60;
+	minutes += arg2;
+
+	days = clock->day;
+	if (minutes >= 24) {
+		days += (unsigned int) minutes / 24;
+		minutes -= (unsigned int) minutes / 24 * 24;
+		clock->day = days;
+	}
+	if (minutes < 0) {
+		days -= (unsigned int) (-1 - minutes) / 24 + 1;
+		clock->day = days;
+		minutes += ((unsigned int) (-1 - minutes) / 24 + 1) * 24;
+	}
+
+	clock->hour = (unsigned short) minutes;
+}
+#pragma optimize("", on)
+#endif
+
+#if defined(REBREW_GOLD)
+/* ADDRESS: GOLD 0x004fe140 */
+void __cdecl gm_AddTime(TIME_4FE140* clock, int hours, int minutes, int seconds)
+{
+	unsigned short* hour = &clock->hour;
+	int value;
+	int days;
+	unsigned int q;
+
+	clock->minute += (seconds + clock->second) / 60;
+	clock->second = (seconds + clock->second) % 60;
+	clock->hour += (unsigned short) ((minutes + clock->minute) / 60);
+	value = *hour;
+	clock->minute = (minutes + clock->minute) % 60;
+	value += hours;
+	days = clock->day;
+	if (value >= 24) {
+		days += (unsigned int) value / 24;
+		value -= (unsigned int) value / 24 * 24;
+		clock->day = days;
+	}
+	if (value < 0) {
+		q = (unsigned int) (-1 - value) / 24 + 1;
+		days -= q;
+		clock->day = days;
+		value += q * 24;
+	}
+	clock->hour = (unsigned short) value;
+}
+#endif
 
 /* Sets the simulation sync parameters for the entity query
  * engine. Stores target, type, and field values for later use

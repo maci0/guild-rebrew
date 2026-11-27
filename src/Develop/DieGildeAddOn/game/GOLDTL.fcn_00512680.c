@@ -11,7 +11,7 @@ char* __cdecl gm_AllocObjekt(int, int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 unsigned short __cdecl gm_RandomMod(int);
 
-void __cdecl fcn_00512680(void)
+void __cdecl gm_InitChurchAndGuildStocks(void)
 {
 	int kinds[4];
 	int ids[8];

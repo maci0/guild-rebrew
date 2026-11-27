@@ -10,7 +10,7 @@ extern Tabs_7e43a8 g_7e43a8;
 
 unsigned int __cdecl vfs_fwrite(void* p, int size, int n, int f);
 int __cdecl ls_SaveWeatherState(int f);
-int __cdecl fcn_004ef2e0(int f);
+int __cdecl ls_SaveRenderSlots(int f);
 
 int __cdecl ls_SaveWeatherAndSlots(int stream)
 {
@@ -36,7 +36,7 @@ int __cdecl ls_SaveWeatherAndSlots(int stream)
 	if (ls_SaveWeatherState(stream) == 0) {
 		return 0;
 	}
-	if (fcn_004ef2e0(stream) == 0) {
+	if (ls_SaveRenderSlots(stream) == 0) {
 		return 0;
 	}
 	return 1;

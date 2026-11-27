@@ -8,7 +8,7 @@ extern char g_6b5c60[];
 
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
-void __cdecl fcn_00526920(char*, int, char*);
+void __cdecl d2_EnterBuildingObjekt(char*, int, char*);
 
 void __cdecl d2_FocusTutorialBuilding0x02(int a)
 {
@@ -21,7 +21,7 @@ void __cdecl d2_FocusTutorialBuilding0x02(int a)
 			if (e != 0) {
 				r = fcn_00502cd0(*(int*) (e + 0x5d), 1, 0, 0x13);
 				if (r != 0) {
-					fcn_00526920(e, *(int*) (r + 2), g_6b5c60);
+					d2_EnterBuildingObjekt(e, *(int*) (r + 2), g_6b5c60);
 				}
 			}
 		}

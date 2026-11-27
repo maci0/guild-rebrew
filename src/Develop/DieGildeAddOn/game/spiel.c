@@ -1476,6 +1476,22 @@ char* __cdecl gm_FindSlotById(int arg1, int arg2)
 	return 0;
 }
 #endif
+#if !defined(REBREW_SERVER)
+#include "season_slots.h"
+
+/* ADDRESS: GOLDTL 0x005027d0 */
+char* __cdecl gm_FindSlotById(int arg1, int arg2)
+{
+	int i;
+
+	for (i = 0; i < 0x55; i++) {
+		if (((MARKET_STOCK_SLOT*)(g_85ab90 + arg1 * 0x2a90))[i].objekt_id == arg2) {
+			return (char*)&((MARKET_STOCK_SLOT*)(g_85ab90 + arg1 * 0x2a90))[i];
+		}
+	}
+	return 0;
+}
+#endif
 #if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 /* Client-only: map distance between two tile positions (discarded). */
 double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
@@ -1495,7 +1511,9 @@ double __cdecl gm_GetTileDistance(int x1, int y1, int x2, int y2)
 	return sqrt(dx * dx + dy * dy) * 2.90816330909729;
 }
 #endif
-#if defined(REBREW_SERVER)
+/* ADDRESS: SERVER 0x10016290 */
+/* ADDRESS: GOLDTL 0x00502850 */
+/* ADDRESS: GOLD 0x004ffcc0 */
 void* __cdecl gm_NextEntityQueryMatch(void)
 {
     unsigned short* current;
@@ -1610,7 +1628,6 @@ lab_43e:
     }
     return (void*)matched_ent;
 }
-#endif
 /* Client-only: the item-list variant of gm_NextEntityQueryMatch.  It walks
  * the query's 0x43-byte item records (g_query_flag1) or their +0x3f links,
  * keeping the link stack in g_dispatch_table_a/b, and applies the id, owner,
@@ -1838,7 +1855,8 @@ query_tail:
 	gm_QueryCursor = (unsigned short*) container_id;
 	return gm_NextEntityQueryMatch();
 }
-#if defined(REBREW_SERVER)
+/* ADDRESS: GOLDTL 0x00502e00 */
+/* ADDRESS: GOLD 0x004fffc0 */
 char* __cdecl gm_AllocateObjectSlot(void)
 {
 	char* node;
@@ -1858,7 +1876,6 @@ char* __cdecl gm_AllocateObjectSlot(void)
 	}
 	return result;
 }
-#endif
 /* Removes the first node whose type id equals b from the list headed by *a.
  * Returns 0 on success, -1 if the list is empty, -2 if the id is not found.
  * Also decrements the global query limit counter. */

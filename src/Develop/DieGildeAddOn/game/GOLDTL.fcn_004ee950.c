@@ -17,19 +17,19 @@ int __cdecl ahm_CheckFlag(char* p);
 int __cdecl ahm_FindRecipeSlot(char* p, int id);
 int __cdecl cm_RequestAhmCommand(Msg18* m);
 
-int __cdecl fcn_004ee950(char* p, int id)
+int __cdecl ahm_RequestSlotClearMatch(char* entity, int recipeId)
 {
 	Msg18 m;
 
-	if (!ahm_CheckFlag(p)) {
+	if (!ahm_CheckFlag(entity)) {
 		return -1;
 	}
-	if (!ahm_FindRecipeSlot(p, id)) {
+	if (!ahm_FindRecipeSlot(entity, recipeId)) {
 		return -1;
 	}
 	memset(&m, 0, sizeof(m));
 	m.tag = 0x61736452;
-	m.id = *(int*) (p + 4);
-	m.x8 = id;
+	m.id = *(int*) (entity + 4);
+	m.x8 = recipeId;
 	return cm_RequestAhmCommand(&m);
 }

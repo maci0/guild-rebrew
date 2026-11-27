@@ -2,7 +2,7 @@
 #include "gold_gui.h"
 extern GuiObj g_00fb1020[];
 int __cdecl fcn_00472cd0(int);
-void __cdecl fcn_00478fb0(int);
+void __cdecl d2_DestroySurface(int);
 
 /* ADDRESS: GOLD 0x004758e0 */
 void __cdecl fcn_004758e0(int index)
@@ -19,8 +19,8 @@ void __cdecl fcn_004758e0(int index)
     for (i = g_00fb1020[index].count - 1; i >= 0; i--)
         fcn_00472cd0(g_00fb1020[index].wins[i]);
     if (*(int*) ((char*) object + 0x1a4) != 0)
-        fcn_00478fb0(*(int*) ((char*) object + 0x1a4));
+        d2_DestroySurface(*(int*) ((char*) object + 0x1a4));
     if (*(int*) ((char*) object + 0x1a8) != 0)
-        fcn_00478fb0(*(int*) ((char*) object + 0x1a8));
+        d2_DestroySurface(*(int*) ((char*) object + 0x1a8));
     memset(object, 0, sizeof(*object));
 }

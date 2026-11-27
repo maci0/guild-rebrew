@@ -56,8 +56,8 @@ void __cdecl ch_SetAnimationPaused(Obj*, int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl d2_UpdateCombatFrame(int);
 Ent* __cdecl gm_LookupEntityRecordById(int);
-void __cdecl fcn_004d3fe0(Ent*);
-void __cdecl fcn_004d4f30(Party*);
+void __cdecl cut_AssignCombatTeamOrders(Ent*);
+void __cdecl cut_ResolveCombatWinner(Party*);
 void __cdecl gm_UpdateTaskProgress(Slot*);
 void __cdecl fcn_004d7f70(void);
 
@@ -107,14 +107,14 @@ void __cdecl fcn_004d9f20(int arg)
 					if (id != -1) {
 						e = gm_LookupEntityRecordById(id);
 						if (e != 0 && e->kind != 6 && e->kind != 7) {
-							fcn_004d3fe0(e);
+							cut_AssignCombatTeamOrders(e);
 						}
 					}
 				}
 				last = (unsigned int) g_6b7fb8;
 			}
 			if (((Game*)g_772f24)->player == g_68b79c) {
-				fcn_004d4f30(((Party*)g_772eb4));
+				cut_ResolveCombatWinner(((Party*)g_772eb4));
 				for (i = 0; i < ((Party*)g_772eb4)->count; i++) {
 					if (((Party*)g_772eb4)->ids[i] != -1) {
 						gm_UpdateTaskProgress(&((Slot*)g_9b0e20)[i]);

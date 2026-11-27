@@ -7,7 +7,7 @@ void __cdecl ReleaseVideoInterfaces(char*);
 void __cdecl FreeVideoListNode(struct Node*);
 
 /* ADDRESS: GOLDTL 0x0041e650 */
-void __cdecl fcn_0041e650(void)
+void __cdecl ShutdownVideo(void)
 {
 	char* node;
 

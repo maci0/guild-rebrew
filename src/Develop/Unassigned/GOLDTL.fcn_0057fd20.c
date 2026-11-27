@@ -6,7 +6,7 @@ extern int* g_665f08;
 void __cdecl fcn_00535550(int);
 void __cdecl d2_TurnBookPagesBack(int);
 
-int __cdecl fcn_0057fd20(void)
+int __cdecl d2_AdvanceTutCh3BookCue(void)
 {
 	int* g;
 

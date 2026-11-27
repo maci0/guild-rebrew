@@ -3,7 +3,7 @@
 
 int __cdecl m_FreeTracked(int);
 
-void __cdecl fcn_004bb840(void)
+void __cdecl gm_FreeAmbientAnimals(void)
 {
 	int h;
 	h = *(int*) 0x6f0738;

@@ -2,14 +2,14 @@
 
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
-char* __cdecl fcn_0041b250(int* v, char* buf)
+char* __cdecl d3_FormatDisplayMode(int* mode, char* buf)
 {
-	char* r;
+	char* result;
 
-	r = 0;
-	if (v != 0 && buf != 0) {
-		fcn_0064d41a(buf, (char*) 0x677864, v[0], v[1], v[3], v[2]);
-		r = buf;
+	result = 0;
+	if (mode != 0 && buf != 0) {
+		fcn_0064d41a(buf, (char*) 0x677864, mode[0], mode[1], mode[3], mode[2]);
+		result = buf;
 	}
-	return r;
+	return result;
 }

@@ -13,7 +13,7 @@ extern HEAD_SET g_6918e8[];
 
 unsigned short __cdecl gm_RandomMod(unsigned short n);
 
-HEAD_SET* __cdecl fcn_004fdc40(void)
+HEAD_SET* __cdecl gm_PickRandomWorkerHeadSet(void)
 {
 	switch (gm_RandomMod(4)) {
 	case 0:

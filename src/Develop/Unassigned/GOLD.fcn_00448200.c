@@ -14,7 +14,7 @@ typedef union ResourceStyle {
 } ResourceStyle;
 
 /* ADDRESS: GOLD 0x00448200 */
-SCENE_RESOURCE* __cdecl fcn_00448200(const char* name, unsigned char flag)
+SCENE_RESOURCE* __cdecl d3_CreateSceneResource(const char* name, unsigned char flag)
 {
     ResourceStyle style;
     SCENE_RESOURCE* resource;

@@ -43,7 +43,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 extern char g_6aaba0[];
 
-void __cdecl fcn_0050d6d0(char*, ENTITY_RECORD*, int, struct want*);
+void __cdecl gm_GenerateLoanOffers(char*, ENTITY_RECORD*, int, struct want*);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -69,7 +69,7 @@ void __cdecl d2_ChooseNewLoan(char* p)
 	int j;
 
 	memset(list, 0, sizeof(list));
-	fcn_0050d6d0(p, &((ENTITY_RECORD*)g_7f4ca0)[g_774970], 3, src);
+	gm_GenerateLoanOffers(p, &((ENTITY_RECORD*)g_7f4ca0)[g_774970], 3, src);
 	j = 0;
 	for (i = 0; i < 3; i++) {
 		if (src[i].n > 0) {

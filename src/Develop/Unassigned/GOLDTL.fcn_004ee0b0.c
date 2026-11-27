@@ -1,4 +1,4 @@
-char* __cdecl fcn_004ecbe0(int id);
+char* __cdecl ahm_FindRecipePrototypeByKey(int id);
 
 /* ADDRESS: GOLDTL 0x004ee0b0 */
 int __cdecl fcn_004ee0b0(char* p)
@@ -8,7 +8,7 @@ int __cdecl fcn_004ee0b0(char* p)
 	float v;
 	float alt;
 
-	q = fcn_004ecbe0(*(int*) (p + 0xc));
+	q = ahm_FindRecipePrototypeByKey(*(int*) (p + 0xc));
 	v = (float) *(unsigned char*) (p + 4) * 0.003968254f;
 	s = v * v;
 	v = (float) *(unsigned char*) (p + 5) * 0.003968254f;

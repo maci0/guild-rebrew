@@ -1,7 +1,7 @@
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-void* __cdecl fcn_004690a0(int);
+void* __cdecl d2_GetResourceData(int);
 int __cdecl fcn_0047cb30(int, int, int, int);
-int __cdecl fcn_0047c6e0(int, int, int, void*, int);
+int __cdecl d2_DrawShapeFrame(int, int, int, void*, int);
 
 #define CAM(off)	((float*) (*(char**) 0xfc2dec + (off)))
 #define SAME(off)	CompareVector3WithinTolerance(CAM(off), (float*) 0x5ebba4, 0.2f)
@@ -22,7 +22,7 @@ void __cdecl fcn_004cf370(void)
 	b = 0;
 	c = 0;
 	d = 0;
-	rec = fcn_004690a0(0x52c);
+	rec = d2_GetResourceData(0x52c);
 	mode = *(int*) 0x6f22cc;
 	if (mode == -1) {
 		a = 1;
@@ -63,25 +63,25 @@ void __cdecl fcn_004cf370(void)
 	}
 	fcn_0047cb30(0, 0, ((int*) *(int*) 0x6ed924)[1], ((int*) *(int*) 0x6ed924)[2]);
 	if (c == 2) {
-		fcn_0047c6e0(HALF_H - 0x14, (int) (*(float*) 0x5fe708 * *(float*) 0x5edc50 - *(float*) 0x5eb81c),
+		d2_DrawShapeFrame(HALF_H - 0x14, (int) (*(float*) 0x5fe708 * *(float*) 0x5edc50 - *(float*) 0x5eb81c),
 			     *(int*) 0x6ed924, rec, 0);
 	} else if (c == 1) {
-		fcn_0047c6e0(HALF_H - 0x14, (int) (*(float*) 0x5fe708 * *(float*) 0x5edc50 - *(float*) 0x5eb81c),
+		d2_DrawShapeFrame(HALF_H - 0x14, (int) (*(float*) 0x5fe708 * *(float*) 0x5edc50 - *(float*) 0x5eb81c),
 			     *(int*) 0x6ed924, rec, c);
 	}
 	if (b == 2) {
-		fcn_0047c6e0(8, HALF_W + 0x14, *(int*) 0x6ed924, rec, b);
+		d2_DrawShapeFrame(8, HALF_W + 0x14, *(int*) 0x6ed924, rec, b);
 	} else if (b == 1) {
-		fcn_0047c6e0(8, HALF_W + 0x14, *(int*) 0x6ed924, rec, 3);
+		d2_DrawShapeFrame(8, HALF_W + 0x14, *(int*) 0x6ed924, rec, 3);
 	}
 	if (a == 2) {
-		fcn_0047c6e0(*(short*) 0xfb9072 - 0x28, HALF_W + 0x14, *(int*) 0x6ed924, rec, 4);
+		d2_DrawShapeFrame(*(short*) 0xfb9072 - 0x28, HALF_W + 0x14, *(int*) 0x6ed924, rec, 4);
 	} else if (a == 1) {
-		fcn_0047c6e0(*(short*) 0xfb9072 - 0x28, HALF_W + 0x14, *(int*) 0x6ed924, rec, 5);
+		d2_DrawShapeFrame(*(short*) 0xfb9072 - 0x28, HALF_W + 0x14, *(int*) 0x6ed924, rec, 5);
 	}
 	if (d == 2) {
-		fcn_0047c6e0(HALF_H - 0x14, (int) (*(float*) 0x5fe708 * *(float*) 0x5eb7fc), *(int*) 0x6ed924, rec, 6);
+		d2_DrawShapeFrame(HALF_H - 0x14, (int) (*(float*) 0x5fe708 * *(float*) 0x5eb7fc), *(int*) 0x6ed924, rec, 6);
 	} else if (d == 1) {
-		fcn_0047c6e0(HALF_H - 0x14, (int) (*(float*) 0x5fe708 * *(float*) 0x5eb7fc), *(int*) 0x6ed924, rec, 7);
+		d2_DrawShapeFrame(HALF_H - 0x14, (int) (*(float*) 0x5fe708 * *(float*) 0x5eb7fc), *(int*) 0x6ed924, rec, 7);
 	}
 }

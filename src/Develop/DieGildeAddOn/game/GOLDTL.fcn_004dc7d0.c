@@ -13,7 +13,7 @@ extern char g_6b5c60[];
 
 /* Inferred source placement; registration proves the validator slot. */
 /* ADDRESS: GOLDTL 0x004dc7d0 */
-int __cdecl fcn_004dc7d0(char* cmd)
+int __cdecl cut_NotifyProzess(char* cmd)
 {
     char* a;
     char* b;

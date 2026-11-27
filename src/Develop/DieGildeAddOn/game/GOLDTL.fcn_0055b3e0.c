@@ -3,7 +3,7 @@ int __cdecl he_RegisterActionMeta(int, char*, int, int, int);
 void __cdecl fcn_00549b50(void);
 void __cdecl fcn_00549b80(void);
 void __cdecl he_StartElectionCampaign(void);
-void __cdecl fcn_0054a210(void);
+void __cdecl he_RunElectionCampaign(void);
 void __cdecl he_AllocPredigt(void);
 void __cdecl fcn_0054a6a0(void);
 void __cdecl fcn_0054aa70(void);
@@ -126,7 +126,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(41, (void*) fcn_00549b50, (void*) fcn_00549b80) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(42, (void*) he_StartElectionCampaign, (void*) fcn_0054a210) != 0) {
+	if (he_RegisterHandler(42, (void*) he_StartElectionCampaign, (void*) he_RunElectionCampaign) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(43, (void*) he_AllocPredigt, (void*) fcn_0054a6a0) != 0) {

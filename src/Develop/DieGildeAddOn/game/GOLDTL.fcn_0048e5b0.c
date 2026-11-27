@@ -19,7 +19,7 @@ typedef struct Msg {
 int __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl ai_SelectBestMethod(int, int, int, void*, void*);
-int __cdecl fcn_004efd30(int);
+int __cdecl gm_LookupSlot170ByKey(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 void __cdecl cm_SendSlotAddNCta(void*);
 int __cdecl gm_RandomMod(int);
@@ -65,7 +65,7 @@ int __cdecl ai_StartCannonTower(int a0, char* a1, int a2, char* firstAction, cha
 		}
 		goto result;
 	}
-	if (fcn_004efd30(*(int*) (e + 1)) == 0 && (*(int*) (p + 0x1cc) & 0x80000000) == 0) {
+	if (gm_LookupSlot170ByKey(*(int*) (e + 1)) == 0 && (*(int*) (p + 0x1cc) & 0x80000000) == 0) {
 		cm_RequestChangeBits(*(int*) (p + 4), 0x1e8, 4, 0x80000000, 0);
 		cm_SendSlotAddNCta(e);
 		return 0;

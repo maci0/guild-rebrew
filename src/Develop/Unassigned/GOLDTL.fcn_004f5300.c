@@ -7,13 +7,13 @@
 // SIZE 0x2d
 typedef struct tag_req_2d {
 	char raw[0x2d];
-} req_2d;
+} STRAFTAT_TEXT_REQ;
 
 extern char g_69037c[];
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 
-int __cdecl fcn_004f5300(void* output, req_2d s, int b)
+int __cdecl gs_FormatStraftatTextMid(void* output, STRAFTAT_TEXT_REQ s, int b)
 {
 	unsigned short w;
 	unsigned char* p;

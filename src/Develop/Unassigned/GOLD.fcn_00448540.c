@@ -7,7 +7,7 @@ extern float g_fc2944;
 
 char __cdecl d3_GetObjectBoundingSphere(char*, int, float*, float*);
 
-char __cdecl fcn_00448540(char* e, char* ctx)
+char __cdecl d3_PickClosestObjectCallback(char* e, char* ctx)
 {
 	float v[4];
 	float w;

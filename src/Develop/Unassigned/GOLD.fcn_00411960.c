@@ -3,8 +3,8 @@
 typedef struct { unsigned int words[3]; } GOLD_ATTACH_OPTIONS; /* Inferred 12-byte argument record. */
 unsigned int __cdecl StripPathAndExt(char*);
 int __cdecl d3_FindAnimByName(unsigned int);
-void __cdecl fcn_0044e4a0(char*, unsigned int, int);
-int __cdecl fcn_00435550(char*, unsigned int, GOLD_ATTACH_OPTIONS);
+void __cdecl d3_LoadAnimStream(char*, unsigned int, int);
+int __cdecl d3_AttachAnimationToContext(char*, unsigned int, GOLD_ATTACH_OPTIONS);
 char* __cdecl fcn_0044e2e0(char*, char*, int);
 
 /* ADDRESS: GOLD 0x00411960 */
@@ -24,7 +24,7 @@ int __cdecl d3_AttachObjectAnim(char* object, char* name, unsigned int flags)
 	strcpy(key, name);
 	id = StripPathAndExt(key);
 	if (!d3_FindAnimByName(id))
-		fcn_0044e4a0(name, id, 0);
+		d3_LoadAnimStream(name, id, 0);
 	fillDst = (char*) &options;
 	fillCount = sizeof(options);
 	__asm {
@@ -52,7 +52,7 @@ int __cdecl d3_AttachObjectAnim(char* object, char* name, unsigned int flags)
 	if (flags & 0x20) bytes[1] |= 4;
 	bytes[8] |= 2;
 	if (*(char**) (object + 0x1ec) != 0 &&
-	    fcn_00435550(*(char**) (object + 0x1ec) + 0xf4, id,
+	    d3_AttachAnimationToContext(*(char**) (object + 0x1ec) + 0xf4, id,
 	        options))
 		return 1;
 	sprintf(path, "%s%s.oam", *(char**) 0xfba940, name);

@@ -69,7 +69,7 @@ int __cdecl gm_RandomMod(unsigned short);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 int __cdecl cm_SendMarktSlotDelta(MarktSlot*, unsigned char);
-float __cdecl fcn_005025a0(int, int);
+float __cdecl gm_CalcMarketSlotPrice(int, int);
 char* __cdecl gm_FindKind47ByOwner(int);
 void __cdecl gm_AddTime(void*, int, int, int);
 void __cdecl he_SetActionSubject(char*, int);
@@ -189,7 +189,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			}
 		}
 		if ((unsigned short) gm_RandomMod(100) > 0xa || (unsigned short) gm_GameTime.b == 0xc) {
-			rec.f38 = fcn_005025a0(g_773d75, i);
+			rec.f38 = gm_CalcMarketSlotPrice(g_773d75, i);
 		}
 		cm_SendMarktSlotDelta(&rec, g_773d75);
 	}
@@ -279,7 +279,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 			}
 		}
 		if ((unsigned short) gm_RandomMod(100) > 0xa || (unsigned short) gm_GameTime.b == 0xc) {
-			rec.f38 = fcn_005025a0(g_773d75, i);
+			rec.f38 = gm_CalcMarketSlotPrice(g_773d75, i);
 		}
 		cm_SendMarktSlotDelta(&rec, g_773d75);
 	}
@@ -357,7 +357,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 				}
 			}
 			if ((unsigned short) gm_RandomMod(100) > 0x4b) {
-				rec.f38 = fcn_005025a0(i, t);
+				rec.f38 = gm_CalcMarketSlotPrice(i, t);
 			}
 			cm_SendMarktSlotDelta(&rec, i);
 		}
@@ -411,7 +411,7 @@ void __cdecl he_RunMarktSupervisor(char* action)
 				}
 			}
 			if ((unsigned short) gm_RandomMod(100) > 0x4b) {
-				((MarktSlot*) scratch)->f38 = fcn_005025a0(i, t);
+				((MarktSlot*) scratch)->f38 = gm_CalcMarketSlotPrice(i, t);
 			}
 			cm_SendMarktSlotDelta((MarktSlot*) scratch, i);
 		}

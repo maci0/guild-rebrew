@@ -25,7 +25,7 @@ int __cdecl gm_CalcEntityInventoryStats(char*, int*);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl fcn_004d5490(int, int, int);
-void __cdecl fcn_004d5740(char*, int, int);
+void __cdecl d2_DrawCombatParticipants(char*, int, int);
 int __cdecl d2_ShowMessageBox(char*, unsigned int);
 int __cdecl cut_PlunderBuildingCarts(int, int, char*, char*, float);
 void __cdecl d2_SetSlotVisibility(int, int);
@@ -50,7 +50,7 @@ struct item_table {
 /* Modal sub-dialog for picking the guard shift. The first block drives the
  * generic selection page, the second the concrete shift of one guard. */
 /* ADDRESS: GOLDTL 0x004d5940 */
-unsigned int __cdecl fcn_004d5940(int dialogState)
+unsigned int __cdecl cut_RunCombatStartDialog(int dialogState)
 {
 	char str[1024];
 	char text[1024];
@@ -128,7 +128,7 @@ unsigned int __cdecl fcn_004d5940(int dialogState)
 		}
 		d2_SetForm(win, 1);
 		io_AppendText(0x1132);
-		fcn_004d5740((char*) (dialogState + 0xc0), 0, 0xb4);
+		d2_DrawCombatParticipants((char*) (dialogState + 0xc0), 0, 0xb4);
 		d2_GetWindowListItem(win, 2, sel);
 		d2_GetWindowListItem(win, 2, sel + 1);
 		t = main_RunFrameLoop(0x4d5940, 0x7d6c6);

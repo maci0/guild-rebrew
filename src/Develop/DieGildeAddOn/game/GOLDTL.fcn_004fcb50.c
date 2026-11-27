@@ -12,30 +12,30 @@ void __cdecl gm_CalcLaw0x0dTaxSlot(unsigned short id, int* out, int c);
 void __cdecl gm_CalcLaw0x0cTaxSlot(unsigned short id, int* out, int c);
 
 /* ADDRESS: GOLDTL 0x004fcb50 */
-int __cdecl fcn_004fcb50(unsigned short id, int* out, int c)
+int __cdecl gm_CalcEntityTaxSlots(unsigned short id, int* out, int flag)
 {
-	int o;
+	int offset;
 
-	o = id * 0x21c;
+	offset = id * 0x21c;
 	memset(out, 0, 0xe * sizeof(int));
-	if (*(unsigned short*) (g_7f4ca0 + o) == 0xffff) {
+	if (*(unsigned short*) (g_7f4ca0 + offset) == 0xffff) {
 		return 0;
 	}
-	if (*(unsigned char*) (g_7f4ca0 + o + 8) == 0) {
+	if (*(unsigned char*) (g_7f4ca0 + offset + 8) == 0) {
 		return 0;
 	}
 	if (gm_CheckEntityAgeLimit(id) != 0) {
 		return 0;
 	}
-	if (amt_CheckZunftTaxLaw(gm_MapEntityStatRange(*(unsigned char*) (g_7f4ca0 + o + 0x164))) != 0) {
-		gm_ApplySteuerLaw0aToSlots(id, out, c);
+	if (amt_CheckZunftTaxLaw(gm_MapEntityStatRange(*(unsigned char*) (g_7f4ca0 + offset + 0x164))) != 0) {
+		gm_ApplySteuerLaw0aToSlots(id, out, flag);
 	} else {
-		gm_CollectCityTaxOffers(id, out, c);
+		gm_CollectCityTaxOffers(id, out, flag);
 	}
-	gm_ApplyLaw0x0bTaxSlot(id, out, c);
-	if (*(int*) (g_7f4ca0 + o + 0x1a8) > 0) {
-		gm_CalcLaw0x0dTaxSlot(id, out, c);
+	gm_ApplyLaw0x0bTaxSlot(id, out, flag);
+	if (*(int*) (g_7f4ca0 + offset + 0x1a8) > 0) {
+		gm_CalcLaw0x0dTaxSlot(id, out, flag);
 	}
-	gm_CalcLaw0x0cTaxSlot(id, out, c);
+	gm_CalcLaw0x0cTaxSlot(id, out, flag);
 	return 1;
 }

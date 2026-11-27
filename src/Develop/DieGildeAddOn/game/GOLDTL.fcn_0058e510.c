@@ -19,7 +19,7 @@ extern unsigned char g_773d75;
 int __cdecl d3snd_SelectVoiceCode(int, int);
 char* __cdecl d2_RunSeance(char*, char*);
 unsigned short* __cdecl fcn_004f65a0(ENTITY_RECORD*, int, int*, int*);
-float __cdecl fcn_004f4770(char*);
+float __cdecl gv_CalcSeanceBonus(char*);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl fcn_00470820(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -53,7 +53,7 @@ void __cdecl d2_RunSeanceDialog(char* e, char* res)
 	m = d2_RunSeance(e, res);
 	p = fcn_004f65a0(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 4, list, &cnt);
 	b = p == 0;
-	f = fcn_004f4770(e);
+	f = gv_CalcSeanceBonus(e);
 	if (gm_RandomFloat01() + f - 0.1f < 1.0f) {
 		b = 2;
 	}

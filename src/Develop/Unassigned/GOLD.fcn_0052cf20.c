@@ -1,6 +1,6 @@
 extern volatile int g_6b7fac;
 void __cdecl fcn_00476020(int);
-unsigned char __cdecl fcn_004486e0(char*, int*);
+unsigned char __cdecl d3_GetObjectScreenRect(char*, int*);
 void __cdecl d2_RenderWrappedText(int, int, int, int, int, char*, int);
 void __cdecl fcn_00468ea0(int, int, int, int);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
@@ -12,7 +12,7 @@ typedef struct {
 } MessageSlot;
 
 /* ADDRESS: GOLD 0x0052cf20 */
-void __cdecl fcn_0052cf20(void)
+void __cdecl d2_RenderFloatingMessages(void)
 {
     MessageSlot* slots = (MessageSlot*) 0x761fc0;
     int i;
@@ -33,11 +33,11 @@ void __cdecl fcn_0052cf20(void)
         if (*(int*) (entity + 0x208) != g_67a370)
             continue;
         if (*(int*) (entity + 0x218) != 1) {
-            if (!fcn_004486e0(entity, rect))
+            if (!d3_GetObjectScreenRect(entity, rect))
                 continue;
         } else {
             entity = *(char**) (slots[i].actor + 0x22c);
-            if (!entity || *(int*) (entity + 0x218) == 1 || !fcn_004486e0(entity, rect))
+            if (!entity || *(int*) (entity + 0x218) == 1 || !d3_GetObjectScreenRect(entity, rect))
                 continue;
         }
         y = rect[1] - 0x40;

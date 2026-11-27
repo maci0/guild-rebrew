@@ -21,7 +21,7 @@ typedef struct {
 typedef GOLD_BBOX_CORNER* (__cdecl* GOLD_GET_CORNERS_FN)(char* obj, char* m, char* p);
 
 extern float g_6628a8;
-void __cdecl fcn_00439870(char* obj, char* cam, int flag);
+void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int flag);
 
 char __cdecl fcn_00411eb0(char* obj, char* cam, float* center, float* radius)
 {
@@ -39,7 +39,7 @@ char __cdecl fcn_00411eb0(char* obj, char* cam, float* center, float* radius)
 	r = 0;
 	if (obj != 0 && (center != 0 || radius != 0) && *(int*) (*(char**) (obj + 0x1ec) + 0x104) != 0) {
 		m = *(char**) (obj + 0x1ec) + 0xf4;
-		fcn_00439870(obj, cam, 0);
+		d3_UpdateObjectCameraTransform(obj, cam, 0);
 		p = (*(GOLD_GET_CORNERS_FN*) (*(char**) (m + 0x10) + 0x1f4))(obj, m, *(char**) (obj + 0x1ec) + 8);
 		if (p != 0) {
 			c.x = p[0].x;

@@ -17,7 +17,7 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 int __cdecl fcn_00428340(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0052db70 */
-void __cdecl fcn_0052db70(char* buildingRecord)
+void __cdecl gm_UpdateBuildingSmokeEffect(char* buildingRecord)
 {
 	float v[4];
 	char* ent;

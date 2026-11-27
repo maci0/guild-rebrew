@@ -3,7 +3,7 @@
 
 int __cdecl d2_ClearRadioGroup(int);
 
-void __cdecl fcn_004bdac0(void)
+void __cdecl d2_ClearRouteMarkerGroup(void)
 {
 	int h;
 	h = *(int*) 0x602a70;

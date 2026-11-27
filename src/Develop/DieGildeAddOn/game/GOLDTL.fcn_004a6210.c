@@ -23,7 +23,7 @@ extern float g_772888;
 extern float g_6660f4;
 extern unsigned char g_773d75;
 
-int __cdecl fcn_004efd30(int);
+int __cdecl gm_LookupSlot170ByKey(int);
 int __cdecl fcn_004a6160(char*, void*, int, void*);
 void __cdecl gm_GetArtilleryLimits(char*, int*, int*);
 void __cdecl fcn_004f0f60(int, void*);
@@ -71,7 +71,7 @@ int __cdecl gm_ComputeCannonShot(char* actor, char* building, int targetEnt)
 
 	g_772848 = -1;
 	g_77284c = -1;
-	p = (int*) fcn_004efd30(*(int*) (building + 1));
+	p = (int*) gm_LookupSlot170ByKey(*(int*) (building + 1));
 	if (p == 0) return 0;
 	if (fcn_004a6160(building, origin, targetEnt, target) != 0) return 0;
 	gm_GetArtilleryLimits(building, &row, &col);

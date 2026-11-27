@@ -6,7 +6,7 @@ int __cdecl fcn_004759e0(int, int*, int*);
 #include <string.h>
 
 /* ADDRESS: GOLD 0x00473530 */
-void __cdecl fcn_00473530(int id, char* text)
+void __cdecl d2_SetControlText(int id, char* text)
 {
     GuiEnt* entry;
     char* left;

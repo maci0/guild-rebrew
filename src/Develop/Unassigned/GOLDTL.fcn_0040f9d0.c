@@ -39,7 +39,7 @@ typedef struct
 } PARTICLE_CTX;
 
 /* ADDRESS: GOLDTL 0x0040f9d0 */
-void __cdecl fcn_0040f9d0(PARTICLE_CTX *ctx, int arg)
+void __cdecl d3_UpdateBloodParticles(PARTICLE_CTX *ctx, int arg)
 {
     int i;
 

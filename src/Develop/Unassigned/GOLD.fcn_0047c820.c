@@ -9,8 +9,8 @@ extern short g_006f044c; /* 0x006f044c */
 extern short g_006f044e; /* 0x006f044e */
 extern char g_005feea8[]; /* 0x005feea8 */
 
-int __cdecl fcn_0047b630(int a1, int a2, char* a3, char* e, int s);
-int __cdecl fcn_0047b340(int a1, int a2, char* a3, char* e, int s);
+int __cdecl d2_DrawScaledRemappedRleSprite(int a1, int a2, char* a3, char* e, int s);
+int __cdecl d2_DrawScaledRleSprite(int a1, int a2, char* a3, char* e, int s);
 
 int __cdecl fcn_0047c820(int a1, int a2, char* context, char* h, unsigned char idx, char scale, int alt)
 {
@@ -38,9 +38,9 @@ int __cdecl fcn_0047c820(int a1, int a2, char* context, char* h, unsigned char i
 		case 1:
 			if (scale < 0) {
 				if (alt != 0) {
-					r = fcn_0047b630(a1, a2, context, e, abs(scale));
+					r = d2_DrawScaledRemappedRleSprite(a1, a2, context, e, abs(scale));
 				} else {
-					r = fcn_0047b340(a1, a2, context, e, abs(scale));
+					r = d2_DrawScaledRleSprite(a1, a2, context, e, abs(scale));
 				}
 			}
 			return r;

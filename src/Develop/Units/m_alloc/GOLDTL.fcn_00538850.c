@@ -3,11 +3,11 @@
 extern void __cdecl fcn_005e1ca0(void);
 extern void __cdecl main_PumpWindowMessages(void);
 extern int __cdecl fcn_0041a380(unsigned int, unsigned int, unsigned char);
-extern char __cdecl fcn_0041a970(HWND, void*, unsigned char, unsigned char);
+extern char __cdecl d3_CreateGraphicsDevice(HWND, void*, unsigned char, unsigned char);
 extern void __cdecl ReportClientMessage(char*);
 extern void __cdecl d3_ClearDisplayAdapterList(void);
 extern void __cdecl m_ShutdownAllocator(void);
-extern void __cdecl fcn_0041d850(void);
+extern void __cdecl ShutdownClientLogAndErrorHandler(void);
 extern char __cdecl fcn_00439020(void*, HWND, int);
 extern void __cdecl d3_CreateSceneCameras(void);
 extern void __cdecl fcn_00411820(HWND, int, int);
@@ -144,11 +144,11 @@ int __cdecl fcn_00538850(int topmost)
 	d3_LODMode = 2;
 	g.f7c = (float) (512.0 / (640.0 / (double) (unsigned int) g_6acf80));
 	fcn_0041a380(g_6acf80, g_6acf84, topmost == 1);
-	if (!fcn_0041a970((HWND) g_774940, (void*) 0x5387c0, topmost == 1, 1)) {
+	if (!d3_CreateGraphicsDevice((HWND) g_774940, (void*) 0x5387c0, topmost == 1, 1)) {
 		ReportClientMessage((char*) 0x6a3904);
 		d3_ClearDisplayAdapterList();
 		m_ShutdownAllocator();
-		fcn_0041d850();
+		ShutdownClientLogAndErrorHandler();
 		return 0;
 	}
 	d3_ClearDisplayAdapterList();

@@ -1,7 +1,7 @@
 void __cdecl d2_Plot(int, int, int, int, int);
 
 /* ADDRESS: GOLD 0x004764e0 */
-void __cdecl fcn_004764e0(int x, int y, int x1, int y1, int red, int green, int blue)
+void __cdecl d2_DrawLine(int x, int y, int x1, int y1, int red, int green, int blue)
 {
     int dx, dy;
     int sx, sy;

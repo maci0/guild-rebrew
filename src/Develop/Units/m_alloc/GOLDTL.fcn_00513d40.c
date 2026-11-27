@@ -26,7 +26,7 @@ int __cdecl _strnicmp(const char* a, const char* b, int n);
 int __cdecl fcn_0065f220(const char* a, const char* b);
 void* __cdecl fcn_0064fde9(void* p, int size);
 void __cdecl d3_VisitSceneObjects(int, int, int, int (__cdecl*)(), Query*);
-int __cdecl fcn_00513d00(char* name, int* list);
+int __cdecl d3_CollectMatchingSceneObjects(char* name, int* list);
 char* __cdecl d3_SpawnObject(int kind, char* name);
 void __cdecl fcn_00439aa0(char* o);
 char __cdecl d3_ReparentObject(char* e, char* parent);
@@ -50,7 +50,7 @@ void __cdecl fcn_00513d40(char* name)
 
 	memset(&q, 0, sizeof(q));
 	strcpy(q.path, name);
-	d3_VisitSceneObjects(g_67a370, 0, 0x1c0, fcn_00513d00, &q);
+	d3_VisitSceneObjects(g_67a370, 0, 0x1c0, d3_CollectMatchingSceneObjects, &q);
 	if (q.count == 0) {
 		return;
 	}

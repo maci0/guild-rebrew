@@ -30,7 +30,7 @@ void __cdecl he_RollTripletEventScores(char*, char*, char*);
 int __cdecl fcn_004c5980(void*);
 int __cdecl fcn_004f46e0(int, unsigned char**, void**);
 int __cdecl fcn_004f1790(int, void*);
-int __cdecl fcn_004f2a10(int*, char*, int, int);
+int __cdecl gv_SendSetGraveOwner(int*, char*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
 #pragma optimize("y", off)
@@ -198,7 +198,7 @@ void __cdecl he_RunCourtship(char* e)
 		}
 		if (fcn_004f46e0((int) b, &rec, &hit) != 0) {
 			v = fcn_004f1790(*(int*) (rec + 0x65), hit);
-			fcn_004f2a10(0, (char*) rec, *(int*) hit, v);
+			gv_SendSetGraveOwner(0, (char*) rec, *(int*) hit, v);
 		}
 		memset(msg, 0, sizeof(msg));
 		*(int*) (msg + 0x34) = *(int*) (a + 4);

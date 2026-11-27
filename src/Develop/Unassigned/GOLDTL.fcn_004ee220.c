@@ -21,7 +21,7 @@ typedef struct
 } Msg24;
 // SIZE 0x24
 
-int __cdecl fcn_004ecbe0(int id);
+int __cdecl ahm_FindRecipePrototypeByKey(int id);
 int __cdecl cm_SendAllocAlchemist(Msg24* m);
 
 int __cdecl ahm_DispatchAlchemistCommand(char* building, char* order)
@@ -29,7 +29,7 @@ int __cdecl ahm_DispatchAlchemistCommand(char* building, char* order)
 	Msg24 m;
 	char* recipe;
 
-	recipe = (char*) fcn_004ecbe0(*(int*) (order + 0xc));
+	recipe = (char*) ahm_FindRecipePrototypeByKey(*(int*) (order + 0xc));
 	if (recipe == 0) {
 		return -1;
 	}

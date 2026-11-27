@@ -16,7 +16,7 @@ typedef struct
 
 int __cdecl ahm_CheckFlag(char* p);
 int __cdecl ahm_HasRecipeSlotCapacity(char* p);
-int* __cdecl fcn_004ecbe0(int id);
+int* __cdecl ahm_FindRecipePrototypeByKey(int id);
 int __cdecl cm_RequestAhmCommand(Msg18* m);
 
 int __cdecl ahm_UnlockSlotRecipe(char* p, int id)
@@ -30,7 +30,7 @@ int __cdecl ahm_UnlockSlotRecipe(char* p, int id)
 	if (!ahm_HasRecipeSlotCapacity(p)) {
 		return -1;
 	}
-	q = fcn_004ecbe0(id);
+	q = ahm_FindRecipePrototypeByKey(id);
 	if (q == 0) {
 		return -1;
 	}

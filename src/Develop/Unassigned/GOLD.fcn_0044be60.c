@@ -10,8 +10,8 @@ extern char* g_6338c4;
 extern char* g_6b8300;
 extern char* g_fc52f0;
 extern char g_fc2700[];
-void* __cdecl fcn_00430470(const char*, const char*, void*);
-int __cdecl fcn_00430aa0(void*);
+void* __cdecl vfs_Tfopen(const char*, const char*, void*);
+int __cdecl CloseVfsStream(void*);
 int __cdecl vfs_ReadByte(void*, void*);
 void __cdecl vfs_ReadCString(void*, char*);
 int __cdecl fcn_004011d0(void*, void*);
@@ -21,12 +21,12 @@ void __cdecl fcn_0043a6f0(float, float, int);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl d3_SetActiveCamera(char*);
-void __cdecl fcn_0043c7a0(char*);
+void __cdecl d3_DisposeObject(char*);
 char* __cdecl fcn_0044abb0(void*, char*, unsigned int, unsigned char);
 int __cdecl fcn_0044a9e0(unsigned int);
 char* __cdecl d3_int_io_LoadFloor(void*, int);
 void __cdecl d3e_ReadSceneEvents(void*);
-char* __cdecl fcn_00438c30(char*);
+char* __cdecl d3_GetNextSceneNode(char*);
 char* __cdecl fcn_0043d180(char*);
 void __cdecl d3_RegisterSceneObject(char*);
 void __cdecl fcn_0045e610(char*, int);
@@ -66,7 +66,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 	if (stream != 0) {
 		s = (char*) stream;
 	} else {
-		s = (char*) fcn_00430470(filename, "rb", g_6b7fdc);
+		s = (char*) vfs_Tfopen(filename, "rb", g_6b7fdc);
 	}
 	if (s == 0) {
 		return 0;
@@ -74,7 +74,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 	fcn_004011d0(s, &version);
 	if ((version & 0xffff0000) != 0x3a6c0000 || version < 0x3a6c0001) {
 		if (stream == 0) {
-			fcn_00430aa0(s);
+			CloseVfsStream(s);
 		}
 		return 0;
 	}
@@ -151,7 +151,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 			}
 		}
 		if (g_6338c4 != 0) {
-			fcn_0043c7a0(g_6338c4);
+			d3_DisposeObject(g_6338c4);
 		}
 		fcn_004011d0(s, &count);
 		index = 0;
@@ -188,7 +188,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 		ReportClientMessage("Scene too old... Sorry!");
 	}
 	if (stream == 0) {
-		fcn_00430aa0(s);
+		CloseVfsStream(s);
 	}
 	if (version < 0x3a6c00b1 && g_6b8300 != 0) {
 		obj = g_fc52f0;
@@ -200,7 +200,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 				d3_RegisterSceneObject(clone);
 				break;
 			}
-			obj = fcn_00438c30(obj);
+			obj = d3_GetNextSceneNode(obj);
 		}
 	}
 	if (g_6b8300 == 0) {
