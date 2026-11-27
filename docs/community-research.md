@@ -25,7 +25,7 @@ has none of these strings. [Naming](naming_conventions.md) owns adoption rules.
 - Both client images contain
   `gs_AddBeweis(): Executed---- owner = %i, st_id = %i, slot = %i`. Keep
   `Beweis`. The shared definition is `gs_AddBeweis` in
-  `src/Develop/Unassigned/GOLDTL.gs_AddBeweis.c` (GoldTL `0x004f5770`, Gold
+  `src/Develop/Unassigned/gs_AddBeweis.c` (GoldTL `0x004f5770`, Gold
   `0x004f3640`).
 
 ## Reuse research carefully

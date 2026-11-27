@@ -412,12 +412,12 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 item = 0
 count = 128
 [types."event.validator_view".GOLDTL]
-file = "src/Develop/DieGildeAddOn/game/GOLDTL.cut_UpdateCutscenes.c"
+file = "src/Develop/DieGildeAddOn/game/cut_UpdateCutscenes.c"
 symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-27 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "c8867cca004c1b341547944963e415e0cd0873d903fe356b4da91c2e288e18b2"
 headers_hash = "b7bc5e9a3e48eb7824b4931f6a784e277d2d506c71396818a9b6d7bb51ef78f6"
@@ -427,12 +427,12 @@ binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 [types."event.validator_view".GOLDTL.offsets]
 
 [types."event.validator_view".GOLD]
-file = "src/Develop/DieGildeAddOn/game/GOLDTL.cut_UpdateCutscenes.c"
+file = "src/Develop/DieGildeAddOn/game/cut_UpdateCutscenes.c"
 symbol = "Kind"
 size = 20
 native_size = 20
 extent = "allocation"
-evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-27 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "c8867cca004c1b341547944963e415e0cd0873d903fe356b4da91c2e288e18b2"
 headers_hash = "b7bc5e9a3e48eb7824b4931f6a784e277d2d506c71396818a9b6d7bb51ef78f6"

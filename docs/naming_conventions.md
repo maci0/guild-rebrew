@@ -27,11 +27,11 @@ Prefix witnesses in the current source tree:
 
 | Prefix | Witness |
 | --- | --- |
-| `evt_` | `src/Develop/Units/vfs/GOLDTL.evt_LoadScript.c`, diagnostic naming `evt_LoadScript` |
-| `ecmd_` | `src/Develop/Unassigned/GOLDTL.ecmd_LoadScene.c`, diagnostic naming `ecmd_LoadScene` |
-| `hst_` | `src/Develop/Unassigned/GOLDTL.hst_ParseText_Fake_1st_Pass.c`, diagnostic naming `hst_ParseText_Fake_1st_Pass` |
+| `evt_` | `src/Develop/Units/vfs/evt_LoadScript.c`, diagnostic naming `evt_LoadScript` |
+| `ecmd_` | `src/Develop/Unassigned/ecmd_LoadScene.c`, diagnostic naming `ecmd_LoadScene` |
+| `hst_` | `src/Develop/Unassigned/hst_ParseText_Fake_1st_Pass.c`, diagnostic naming `hst_ParseText_Fake_1st_Pass` |
 | `msx_` | `src/Develop/Units/Msx/msx.c`, assertion path `D:\develop\units\Msx\msx.c`; attests the unit, not a function spelling |
-| `sbs_` | `docs/name-ledger.tsv`, `sbs:CreateSB` witness for `sbs_CreateSB`; definition in `src/Develop/Units/m_alloc/GOLDTL.sbs_CreateSB.c` |
+| `sbs_` | `docs/name-ledger.tsv`, `sbs:CreateSB` witness for `sbs_CreateSB`; definition in `src/Develop/Units/m_alloc/sbs_CreateSB.c` |
 | `d3snd_` | GOLDTL diagnostic strings `d3snd_Init` and `d3sndw_Init` (file offsets 0x277750, 0x27779c); attests the prefix for the D3 sound unit |
 
 ## Function naming
