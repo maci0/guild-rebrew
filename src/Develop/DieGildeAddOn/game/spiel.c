@@ -3497,6 +3497,23 @@ void __cdecl ch_EnsureCharacterMeshes(Model*);
 void __cdecl d3_DestroyEntityWimpelNodes(Estate*);
 void __cdecl d3_CreateEntityFlagPennant(Estate*);
 
+#if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
+/* ADDRESS: GOLDTL 0x00505840 */
+unsigned char __cdecl d3_CollectEntityStageMeshNode(char* obj, char* list)
+{
+	unsigned int idx;
+	char ch;
+
+	idx = *(unsigned int*) (obj + 0x48) & 0xffffff;
+	ch = *(char*) (obj + 0x4b);
+	if (ch == 1 && (*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[idx].kind) == 0x21) {
+		*(unsigned int*) (list + 0x100 + *(unsigned int*) (list + 0x200) * 4) = idx;
+		*(char**) (list + *(unsigned int*) (list + 0x200) * 4) = obj;
+		*(unsigned int*) (list + 0x200) = *(unsigned int*) (list + 0x200) + 1;
+	}
+	return *(int*) (list + 0x200) < 0x40 ? 1 : 0;
+}
+#endif
 /* ADDRESS: GOLDTL 0x005059b0 */
 /* ADDRESS: GOLD 0x00502b60 */
 void __cdecl gm_AssignBuildingOwner(Estate* building, unsigned short owner, int slot)

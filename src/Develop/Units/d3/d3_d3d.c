@@ -49,7 +49,6 @@ void __cdecl d3_ClearViewport(void)
 }
 
 /* Inferred function name; native unit and buffer name are attested. */
-/* ADDRESS: GOLD 0x004360e0 */
 void __cdecl d3d_PrecacheTexture(void* t)
 {
     int result;
@@ -72,6 +71,21 @@ void __cdecl d3d_PrecacheTexture(void* t)
         d3d_LogResultError("D:\\develop\\Units\\d3\\d3_d3d.c", 0x168,
             "d3d_Device->lpVtbl->DrawPrimitive(d3d_Device, D3DPT_TRIANGLELIST, D3D_VERTEX_STRUCT, (void*)d3d_PrecacheBuffer, 3, 0)");
     }
+}
+
+/* ADDRESS: GOLD 0x004360e0 */
+void __cdecl d3_PrecacheTexture(void* texture)
+{
+	if (texture != 0) {
+		d3d_LastResult = ((int (__stdcall*)(void*, int, void*)) (*(int**) d3d_Device)[0x98 / 4])(d3d_Device, 0, texture);
+		if (d3d_LastResult != 0) {
+			d3d_LogResultError((char*) 0x5f944c, 0x167, (char*) 0x5f9640);
+		}
+		d3d_LastResult = ((int (__stdcall*)(void*, int, int, void*, int, int)) (*(int**) d3d_Device)[0x70 / 4])(d3d_Device, 4, 0x1c4, d3d_PrecacheBuffer, 3, 0);
+		if (d3d_LastResult != 0) {
+			d3d_LogResultError((char*) 0x5f944c, 0x168, (char*) 0x5f95c8);
+		}
+	}
 }
 #endif
 
