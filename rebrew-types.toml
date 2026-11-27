@@ -558,12 +558,12 @@ other_effects = 112
 flags = 144
 
 [types."d3.universe-view".GOLDTL]
-file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00515540.c"
+file = "src/Develop/DieGildeAddOn/game/init_EnsureObjektSceneContext.c"
 symbol = "D3_UNIVERSE_VIEW"
 size = 988
 native_size = 988
 extent = "allocation"
-evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-27 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "fc38be4ac8a49ae16d633d1ba597f8e45a6f766edfab24a467ae5de243bfee94"
 headers_hash = "f0596901cfed4f6dcde9814e040bff3243f7d572c6b9c32b0dc864b3f3d83bd8"
@@ -573,12 +573,12 @@ binary_hash = "6fe7a24c93192f6511bc8595eb82fd166db44f6cbeaf7c2f036838f3b6b4af45"
 [types."d3.universe-view".GOLDTL.offsets]
 
 [types."d3.universe-view".GOLD]
-file = "src/Develop/DieGildeAddOn/game/GOLDTL.fcn_00515540.c"
+file = "src/Develop/DieGildeAddOn/game/init_EnsureObjektSceneContext.c"
 symbol = "D3_UNIVERSE_VIEW"
 size = 992
 native_size = 992
 extent = "allocation"
-evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "Rebound after game/game_data.h gained client data declarations (header context change); the type definition, native extent and modeled offsets are unchanged. Rebound 2026-11-27 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "fc38be4ac8a49ae16d633d1ba597f8e45a6f766edfab24a467ae5de243bfee94"
 headers_hash = "f0596901cfed4f6dcde9814e040bff3243f7d572c6b9c32b0dc864b3f3d83bd8"
@@ -648,12 +648,12 @@ binary_hash = "7d1f178f6463ab41f90987451187a93056814293832a5d2c76444dbd087e3ae8"
 
 [types."d3.object-selection-list32".GOLD.offsets]
 [types."dd.device_record".GOLD]
-file = "src/Develop/Units/d3/GOLD.fcn_0041c830.c"
+file = "src/Develop/Units/d3/dd_SelectDeviceDialogProc.c"
 symbol = "DD_DEVICE"
 size = 824
 native_size = 824
 extent = "allocation"
-evidence = "GOLD rebind after source edits; enumeration writes description/name/flag at unchanged offsets in the 824-byte stride.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "GOLD rebind after source edits; enumeration writes description/name/flag at unchanged offsets in the 824-byte stride.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-27 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "43773c2fa9db877869141ff060002e08513812b0e4dbca7337d0dad9ec116af3"
 headers_hash = "ebe28fd68e51936130b3faed3c0f36e5ee4b2b17c6d05328529777e615181369"
@@ -666,12 +666,12 @@ description = 16
 name = 272
 flag = 781
 [types."dd.driver_record".GOLD]
-file = "src/Develop/Units/d3/GOLD.fcn_0041c830.c"
+file = "src/Develop/Units/d3/dd_SelectDeviceDialogProc.c"
 symbol = "DD_DRIVER"
 size = 532
 native_size = 532
 extent = "allocation"
-evidence = "GOLD rebind after source edits; enumeration writes guid/description/name at unchanged offsets in the 532-byte stride.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-27 after naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
+evidence = "GOLD rebind after source edits; enumeration writes guid/description/name at unchanged offsets in the 532-byte stride.24.0 upgrade changed the compiler-context hash; the reviewed native extent and modeled offsets are unchanged. Rebound 2026-11-14: header stat metadata changed when hard-linked scratch copies were deleted; header content, sizes and offsets unchanged. Rebound for rebrew 6.49.0: reached-header hash is now content-based; header content, sizes and offsets unchanged. Rebound 2026-11-27 after its source file was renamed and naming renames changed identifiers in its source; definition, native extent and offsets unchanged."
 cflags = "/O2 /Gd"
 source_hash = "43773c2fa9db877869141ff060002e08513812b0e4dbca7337d0dad9ec116af3"
 headers_hash = "ebe28fd68e51936130b3faed3c0f36e5ee4b2b17c6d05328529777e615181369"

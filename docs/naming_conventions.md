@@ -83,4 +83,15 @@ may change when better evidence appears.
 
 Recheck the current managed binding before using a recorded name or address.
 
+## Source file names
+
+A source file that defines one named function is named after it, in its directory:
+`src/Develop/Unassigned/ch_SetVisible.c`. Client builds pick their sources from the metadata
+(`rebrew build cmake-sources`), not from file names, so a file name carries no target. A name
+still shaped `fcn_XXXXXXXX.c`, with or without a `GOLD.`/`GOLDTL.` prefix, marks a file whose
+function is unnamed, a file defining several names, or one of a Gold/GoldTL twin pair still to
+merge. Rename a file with `git mv`, then `rebrew source rehome --from OLD --to NEW`, which repoints
+the function and data rows that name it; type entries that name it need `rebrew types bind` with the
+new path.
+
 Older write-ups are in the [archive](goal-history.md#full-notebooks) under this filename.

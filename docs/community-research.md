@@ -13,7 +13,7 @@ has none of these strings. [Naming](naming_conventions.md) owns adoption rules.
 - Both client images contain `ch_SetVisible(): invalid character`. GoldTL
   `0x00402a00` is bound to `ch_SetVisible` in
   `src/Develop/DieGildeAddOn/game/GOLDTL.ch_SetVisible.c`. The Gold copy of the
-  same diagnostic is in `src/Develop/Unassigned/GOLD.fcn_00402480.c`, which is
+  same diagnostic is in `src/Develop/Unassigned/ch_SetVisible.c`, which is
   still named `fcn_00402480`.
 - Both client images contain `ch_Create:Too many characters!`. Keep that
   spelling, including the missing space, when reviewing the GoldTL `0x00403200`
