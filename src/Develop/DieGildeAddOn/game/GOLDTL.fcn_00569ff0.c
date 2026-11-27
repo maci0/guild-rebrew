@@ -50,7 +50,7 @@ int __cdecl _ftol(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl he_FreeAction(char*);
 int __cdecl he_HasNoActiveAction0x62(char*);
-float __cdecl fcn_004ff210(short, int);
+float __cdecl gm_ApplyEntityHealthDelta(short, int);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl gm_GetMsgField(char*, char*);
 int __cdecl gm_GetMsgField(char*, char*);
@@ -238,7 +238,7 @@ void __cdecl he_RunEinbruch(char* e)
 				if (*p != -1) {
 					o = (char*) fcn_00508e40(*p);
 					if (o != 0) {
-						fcn_004ff210(*(short*) o, -100 - (gm_RandomMod(0x64) & 0xffff));
+						gm_ApplyEntityHealthDelta(*(short*) o, -100 - (gm_RandomMod(0x64) & 0xffff));
 					}
 				}
 				p++;

@@ -4,7 +4,7 @@ void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void* __cdecl gm_LookupEntityRecordById(int id);
 void* __cdecl d2_OpenTargetPicker(void* desc, void* buf, int a, int b);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
-void __cdecl fcn_005dbe90(void* buf);
+void __cdecl d2_ShowUseObjDialog(void* buf);
 
 /* ADDRESS: GOLDTL 0x005de9a0 */
 int __cdecl gm_ObjSetEntityFlag0x200000(char* actor, char* action)
@@ -35,7 +35,7 @@ int __cdecl gm_ObjSetEntityFlag0x200000(char* actor, char* action)
 	if (actor[2] == 6) {
 		io_FormatTextBuffer(bufA, 0x10a7, *(unsigned short*) p);
 		io_FormatTextBuffer(bufB, 0xfe8, bufA);
-		fcn_005dbe90(bufB);
+		d2_ShowUseObjDialog(bufB);
 	}
 	return 1;
 }

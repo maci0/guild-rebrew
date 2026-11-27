@@ -3,13 +3,13 @@
 int __cdecl msx_FindStreamIndex(int);
 typedef int (__stdcall* f)(int, int, int);
 
-int __cdecl fcn_0042b080(int a1, int a2)
+int __cdecl msx_GetStreamLengthMs(int streamHandle, int outLengthMs)
 {
 	int result = 0;
 
 	if (*(int*) 0x6b7f90 != 0) {
-		if (msx_FindStreamIndex(a1) >= 0) {
-			(*(f*) 0x66243c)(a1, a2, 0);
+		if (msx_FindStreamIndex(streamHandle) >= 0) {
+			(*(f*) 0x66243c)(streamHandle, outLengthMs, 0);
 		} else {
 			result = -1;
 		}

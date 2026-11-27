@@ -12,7 +12,7 @@ extern char g_6a33b4[];
 
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int);
 int __cdecl main_RunFrameLoop(void (__cdecl*)(void), int);
@@ -33,7 +33,7 @@ void __cdecl main_RunAdvanceGameDialog(void)
 		g_774660 = 1;
 		g_7766a8 = 0x2ee;
 		g_675308 = 4.9375f;
-		h = fcn_00470820(0, 0, g_6a33b4);
+		h = d2_LoadForm(0, 0, g_6a33b4);
 		d2_CenterDialogWindows(h);
 		io_AppendText(0x82);
 		while (main_RunFrameLoop(main_RunAdvanceGameDialog, flags) != 0) {

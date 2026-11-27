@@ -7,7 +7,7 @@ extern int g_14ac660[];
 extern char g_14cf950;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -27,7 +27,7 @@ void __cdecl d2_RunMessageFilterDialog(void)
 	int i;
 	int b;
 
-	h = fcn_00470820(0, 0, "menu\\messagefilter");
+	h = d2_LoadForm(0, 0, "menu\\messagefilter");
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 2);
 	for (i = 0; i < 9; i++) {

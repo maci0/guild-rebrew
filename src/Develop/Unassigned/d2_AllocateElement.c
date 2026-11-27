@@ -1,4 +1,4 @@
-extern int __cdecl fcn_00465920(void);
+extern int __cdecl d2_FindFreeElementSlot(void);
 extern int g_772540, g_772528, g_1015ea0;
 /* ADDRESS: GOLDTL 0x00469890 */
 int __cdecl d2_AllocateElement(void)
@@ -9,7 +9,7 @@ int __cdecl d2_AllocateElement(void)
 	int* rec;
 	int i;
 
-	id = fcn_00465920();
+	id = d2_FindFreeElementSlot();
 	if (id == -1) {
 		return -1;
 	}

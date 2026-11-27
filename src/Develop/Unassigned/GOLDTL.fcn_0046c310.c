@@ -15,7 +15,7 @@ typedef struct
 	int prevy;              /* 0x26c */
 	unsigned char step;     /* 0x270 */
 	char pad271[0x3cc - 0x271];
-} fcn_0046c310_Win;
+} D2_SCROLL_STEP_WIN;
 
 typedef struct
 {
@@ -27,7 +27,7 @@ typedef struct
 	char pad24[0x88 - 0x24];
 	int anim;               /* 0x88 */
 	char pad8c[0x2f4 - 0x8c];
-} fcn_0046c310_Ent;
+} D2_SCROLL_STEP_ENT;
 
 #include "client_types.h"
 
@@ -37,16 +37,16 @@ extern Win_1015f40 g_1015f40[0x60];
 void __cdecl fcn_00469c40(int x, int y, int slot);
 
 /* ADDRESS: GOLDTL 0x0046c310 */
-void __cdecl fcn_0046c310(int win)
+void __cdecl d2_UpdateWindowScroll(int win)
 {
-	fcn_0046c310_Win* w;
-	fcn_0046c310_Ent* ent;
+	D2_SCROLL_STEP_WIN* w;
+	D2_SCROLL_STEP_ENT* ent;
 	int v;
 	int pos;
 	int slot;
 	int i;
 
-	w = &((fcn_0046c310_Win*)g_1015f40)[win];
+	w = &((D2_SCROLL_STEP_WIN*)g_1015f40)[win];
 	v = w->vx;
 	if (v < 0) {
 		w->x -= w->step;
@@ -95,7 +95,7 @@ y_axis:
 		}
 		while (i < w->count) {
 			slot = w->ids[i];
-			ent = (fcn_0046c310_Ent*)&((D2_CONTROL_TL*)g_1015ea0)[slot];
+			ent = (D2_SCROLL_STEP_ENT*)&((D2_CONTROL_TL*)g_1015ea0)[slot];
 			fcn_00469c40(((*(int*)&((D2_CONTROL_TL*)ent)->x) - w->y) + w->prevy,
 				((*(int*)&((D2_CONTROL_TL*)ent)->y) - w->x) + w->prevx, slot);
 			if ((*(int*)&((D2_CONTROL_TL*)ent)->kind) == 0x11) {

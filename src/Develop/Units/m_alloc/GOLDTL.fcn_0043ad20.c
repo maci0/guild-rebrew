@@ -6,16 +6,16 @@ int __cdecl fcn_004385e0();
 int __cdecl fcn_00440f70();
 int __cdecl fcn_00441400();
 int __cdecl d3_UpdateFloorVisibility();
-float __cdecl fcn_004424c0();
+float __cdecl d3_CalcFloorFogDistance();
 int __cdecl fcn_00437160();
 void __cdecl d3_CollectSceneLights(int ctx, unsigned char mask);
 void __cdecl fcn_004509c0(void);
-int __cdecl fcn_00450e90();
+int __cdecl d3_SelectActiveObjectLights();
 int __cdecl fcn_00451df0();
 int __cdecl d3_RenderSceneList();
-int __cdecl fcn_00456e50();
-int __cdecl fcn_00458bf0();
-int __cdecl fcn_00459530();
+int __cdecl d3_BuildSceneShadows();
+int __cdecl d3_RenderShadowPatches();
+int __cdecl d3_UpdateAndRenderSky();
 
 typedef struct Dev_43ad20 Dev_43ad20;
 typedef struct DevVtbl_43ad20 {
@@ -82,11 +82,11 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 			fcn_004509c0();
 		}
 		if ((unsigned char) g_1052bd0[0] & 0x1c) {
-			fcn_00456e50();
+			d3_BuildSceneShadows();
 		}
 		if (*(int*) 0x6b8300) {
 			if (g_6b8060 && g_6b8061) {
-				fogDistance = fcn_004424c0(*(int*) 0x6b8300, *(int*) 0x6b8014 + 0x4c, *(int*) 0x6b8014 + 0x18c);
+				fogDistance = d3_CalcFloorFogDistance(*(int*) 0x6b8300, *(int*) 0x6b8014 + 0x4c, *(int*) 0x6b8014 + 0x18c);
 				if (fogDistance < g_104329c) {
 					d3_SetFogRange((1.0f - (g_104329c - fogDistance) / g_104329c) * g_10425fc, fogDistance);
 				} else {
@@ -99,7 +99,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x8b, -1);
 		fcn_00437160(g_6b8060, *(int*) 0x6b805c, 1);
 		if (g_6b89c0) {
-			fcn_00459530(g_6b89c0);
+			d3_UpdateAndRenderSky(g_6b89c0);
 		}
 		if (*(int*) 0x6b8300) {
 			fcn_00441400(*(int*) 0x6b8300);
@@ -116,9 +116,9 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		for (outer = (int*) g_6b8068; outer; outer = (int*) outer[10]) {
 			DEV_43ad20->vtbl->SetTransform(DEV_43ad20, 0x100, (void*) outer[1]);
 			if (outer[6] >= 0) {
-				fcn_00450e90(outer[4], outer[5], *(int*) (*outer + 0x1cc) + 0x280, 0, 0);
+				d3_SelectActiveObjectLights(outer[4], outer[5], *(int*) (*outer + 0x1cc) + 0x280, 0, 0);
 			} else {
-				fcn_00450e90(outer[4], outer[5], *(int*) (*outer + 0x1cc) + 0x280, 0x1040cc0, 0x1040c80);
+				d3_SelectActiveObjectLights(outer[4], outer[5], *(int*) (*outer + 0x1cc) + 0x280, 0x1040cc0, 0x1040c80);
 			}
 			drawNode = outer;
 			do {
@@ -137,7 +137,7 @@ void __cdecl fcn_0043ad20(char a0, int a1)
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x16, (g_6b7ffe == 0) * 2 + 1);
 		DEV_43ad20->vtbl->SetRenderState(DEV_43ad20, 0x89, 0);
 		if ((unsigned char) g_1052bd0[0] & 0x1c) {
-			fcn_00458bf0(*(int*) 0x6b8014);
+			d3_RenderShadowPatches(*(int*) 0x6b8014);
 		}
 		if (*(int*) 0x6b8300) {
 			fcn_00440f70(*(int*) 0x6b8300, a1);

@@ -14,7 +14,7 @@ extern s_1015f4c g_1015f4c[];
 
 
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_SetFormVisibility(int, int);
@@ -23,7 +23,7 @@ void __cdecl d2_CreateEventBar(void)
 {
 	int i;
 
-	g_77e8a0 = fcn_00470820(0, 0, "Panel\\Event_Leiste");
+	g_77e8a0 = d2_LoadForm(0, 0, "Panel\\Event_Leiste");
 	d2_SetForm(g_77e8a0, 0);
 	fcn_00469c40(g_1040494 - 0x7d, d2_ScreenHeight - 0x21, g_1015f4c[d2_CurrentWindowId].f270);
 	for (i = 0; i < 16; i++) {

@@ -5,7 +5,7 @@
 
 extern char* g_f8f080;
 
-int __cdecl fcn_00468850(void)
+int __cdecl d2_FindFreeElementSlot(void)
 {
 	int i;
 	char* p;

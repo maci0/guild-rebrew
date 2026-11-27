@@ -21,11 +21,11 @@ char* __cdecl d2_RunSeance(char*, char*);
 unsigned short* __cdecl fcn_004f65a0(ENTITY_RECORD*, int, int*, int*);
 float __cdecl gv_CalcSeanceBonus(char*);
 float __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl cm_RequestLinkEvidence(int, int);
 void __cdecl gm_IncreaseEntityStat(ENTITY_RECORD*, int);
 int __cdecl io_AppendText();
@@ -57,11 +57,11 @@ void __cdecl d2_RunSeanceDialog(char* e, char* res)
 	if (gm_RandomFloat01() + f - 0.1f < 1.0f) {
 		b = 2;
 	}
-	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Friedhof");
+	h = d2_LoadForm(0, 0, "Locations\\Friedhof\\Friedhof");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	g_100f1dc = -1;
 	d2_SetForm(h, 1);
 	t = d3snd_SelectVoiceCode(*(int*) (res + 0x14), *(int*) (res + 0x4c));

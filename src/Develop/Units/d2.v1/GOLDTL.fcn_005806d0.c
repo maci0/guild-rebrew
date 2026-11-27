@@ -34,7 +34,7 @@ extern int* g_665f08;
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl sb_CheckVoicePlaying(int);
@@ -79,16 +79,16 @@ int __cdecl d2_ShowTutorialStep(void)
 			}
 			switch (k) {
 			case 0:
-				((struct tutor*)g_665f08)->dlg = fcn_00470820(0, 0, "tutorial\\left_form");
+				((struct tutor*)g_665f08)->dlg = d2_LoadForm(0, 0, "tutorial\\left_form");
 				break;
 			case 1:
-				((struct tutor*)g_665f08)->dlg = fcn_00470820(0, 0, "tutorial\\right_form");
+				((struct tutor*)g_665f08)->dlg = d2_LoadForm(0, 0, "tutorial\\right_form");
 				break;
 			case 2:
-				((struct tutor*)g_665f08)->dlg = fcn_00470820(0, 0, "tutorial\\top_form");
+				((struct tutor*)g_665f08)->dlg = d2_LoadForm(0, 0, "tutorial\\top_form");
 				break;
 			case 3:
-				((struct tutor*)g_665f08)->dlg = fcn_00470820(0, 0, "tutorial\\bottom_form");
+				((struct tutor*)g_665f08)->dlg = d2_LoadForm(0, 0, "tutorial\\bottom_form");
 				break;
 			}
 			fcn_00471d80(((struct tutor*)g_665f08)->dlg, 3);

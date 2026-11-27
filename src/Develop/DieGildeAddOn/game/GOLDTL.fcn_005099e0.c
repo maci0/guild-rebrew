@@ -1,7 +1,7 @@
 #include <string.h>
 
 int __cdecl fcn_004f4650(void *, void **, void **);
-int __cdecl fcn_004f1790(void *, void *);
+int __cdecl gm_GetEntitySlotIndex(void *, void *);
 void __cdecl gv_RequestAddCandidateToOfficePool(void *, void *, int, int);
 void __cdecl gv_SendSetGraveOwner(void *, void *, int, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -49,11 +49,11 @@ void __cdecl gm_TransferEntityBuildings(void *fromEntity, void *toEntity)
 	flag = 0;
 	if (fcn_004f4650(fromEntity, &ent, &found)) {
 		gv_RequestAddCandidateToOfficePool(fromEntity, ent, *(int *) found,
-					 fcn_004f1790(*(void **) ((char *) ent + 0x65), found));
+					 gm_GetEntitySlotIndex(*(void **) ((char *) ent + 0x65), found));
 		if (toEntity != 0 && toEntity != (void *) gm_CityEntity
 			&& *(int *) ((char *) fromEntity + 4) == *(int *) ((char *) found + 4)) {
 			gv_SendSetGraveOwner(toEntity, ent, *(int *) found,
-						 fcn_004f1790(*(void **) ((char *) ent + 0x65), found));
+						 gm_GetEntitySlotIndex(*(void **) ((char *) ent + 0x65), found));
 		}
 	}
 	ent = gm_StartFilteredEntitySearch(1, 4, *(unsigned short *) fromEntity);

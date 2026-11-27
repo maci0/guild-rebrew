@@ -43,14 +43,14 @@ unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendCopyEntityData(Msg_5d5930*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
 void __cdecl d2_BuildPersonStatusDesc(Rec_5d5930*);
 void __cdecl fcn_005ca740(int, int, int, int, Rec_5d5930*, int);
-void __cdecl fcn_005c9160(char*, int, int, int, int);
+void __cdecl d2_CreateRightAlignedText(char*, int, int, int, int);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl d2_CheckActionBlocker(void*, int);
 int __cdecl fcn_005d5670(unsigned char*, unsigned char*);
@@ -110,7 +110,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 			return 0x10;
 		}
 	}
-	dlg = fcn_00470820(0, 0, "privillegien\\erpressung");
+	dlg = d2_LoadForm(0, 0, "privillegien\\erpressung");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1d55);	d2_SetForm(dlg, 2);
@@ -141,7 +141,7 @@ int __cdecl fcn_005d5930(unsigned char* p, int* q)
 				r->x10 = 0x32;
 				r->x14 = y;
 				fcn_005ca740(0x32, y, d2_CurrentWindowId, 0x56, r, 1);
-				fcn_005c9160(text, *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0xf, y + 0x2d, 200, 0x55);
+				d2_CreateRightAlignedText(text, *(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0xf, y + 0x2d, 200, 0x55);
 				r++;
 				y += 0x69;
 			} while (--k != 0);

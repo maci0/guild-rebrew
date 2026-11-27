@@ -10,7 +10,7 @@ int __cdecl fcn_0050b750(int a, unsigned char b);
 void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_AccumulateTyped2(char* rec);
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
-float __cdecl fcn_004ff210(int a, int b);
+float __cdecl gm_ApplyEntityHealthDelta(int a, int b);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a1, int a2, char a3, int a4);
 
 /* ADDRESS: GOLDTL 0x004fcc20 */
@@ -47,7 +47,7 @@ void __cdecl gm_UpdateBuildingSubsidies(void)
 				if (*(int*) (rec + 0x16c) == 0 && *(int*) (rec + 0x5c) == -1) {
 					r = abs(r);
 					if (r > n * 2) {
-						fcn_004ff210(i, 0xffffec78);
+						gm_ApplyEntityHealthDelta(i, 0xffffec78);
 						goto inc;
 					}
 				}

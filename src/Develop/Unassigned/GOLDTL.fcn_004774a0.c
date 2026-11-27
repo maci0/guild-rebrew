@@ -3,7 +3,7 @@
 extern int g_007725ec; /* 0x007725ec */
 typedef void (__stdcall *comfn_t)(int self);
 
-void __cdecl fcn_004774a0(void)
+void __cdecl d2_OnLostRenderToSurface(void)
 {
     int self = g_007725ec;
     if (self != 0) {

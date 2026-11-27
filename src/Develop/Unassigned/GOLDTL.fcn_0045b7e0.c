@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /* ADDRESS: GOLDTL 0x0045b7e0 */
-char __cdecl fcn_0045b7e0(int grid, int startCol, int startRow, int* outCol, int* outRow)
+char __cdecl d3sm_FindNearestValidCell(int grid, int startCol, int startRow, int* outCol, int* outRow)
 {
 	int* base;
 	int n;

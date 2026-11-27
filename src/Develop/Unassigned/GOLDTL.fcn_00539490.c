@@ -36,8 +36,8 @@ extern int d2_ScreenHeight;
 extern int g_77250c;
 
 int __cdecl d2_ChoosePlayerCount(void);
-void __cdecl fcn_00469e70(void);
-int __cdecl fcn_0053ed60(int, int);
+void __cdecl d2_ClearBackdropResource(void);
+int __cdecl d2_RunChooseCityDialog(int, int);
 int __cdecl sprintf(char*, const char*, ...);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
 void __cdecl d2_ClearSurface(int);
@@ -46,8 +46,8 @@ void __cdecl d2_SetBackdropResource(int);
 int __cdecl fcn_00539490(void)
 {
 	if (d2_ChoosePlayerCount() != 0) {
-		fcn_00469e70();
-		if (fcn_0053ed60(1, 1) != 0) {
+		d2_ClearBackdropResource();
+		if (d2_RunChooseCityDialog(1, 1) != 0) {
 			sprintf(g_7e21a0, g_6a3a28, g_6a3778, g_7e1d00);
 			strcpy(g_7e2000, "127.0.0.1");
 			(*(int*)&g_7747b0) |= 0x10;

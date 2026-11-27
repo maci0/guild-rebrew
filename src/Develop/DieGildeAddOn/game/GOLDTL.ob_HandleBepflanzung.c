@@ -19,13 +19,13 @@ extern double g_662908;
 
 unsigned short* __cdecl fcn_00502cd0(int a, int b, int c, int d);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_00470820(int a, int b, char* name);
+int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_SetFormVisibility(int a, int b);
 void __cdecl d2_SetForm(int a, int b);
 int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 void __cdecl d2_AddToRadioGroup(int a, int b);
 int __cdecl d2_CreateRadioGroup(int a, ...);
-int __cdecl fcn_00441ab0(char* a, int b, int c, float d, float* out);
+int __cdecl d3_PickFloorPoint(char* a, int b, int c, float d, float* out);
 float* __stdcall D3DXMatrixTranspose(float* a, const float* b);
 void __cdecl d3_SetNodePosition(int h, float* p);
 int __cdecl plt_CheckZoneAvailability(int a, int b, int c, unsigned int d);
@@ -43,7 +43,7 @@ void __cdecl d2_SelectRadioGroup(int a, int b);
 int __cdecl plt_FindPlantInfo(int a);
 void __cdecl d3_DestroyObject(int a);
 int __cdecl fcn_0064d41a(char* buf, char* fmt, ...);
-int __cdecl fcn_004488e0(char* a, int b, int c);
+int __cdecl d3_LoadObjectFile(char* a, int b, int c);
 void __cdecl fcn_0043a5a0(int a, int p);
 void __cdecl ReportClientMessage(char* a);
 void __cdecl d2_ClearRadioGroup(int a);
@@ -143,7 +143,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 		} while (v4);
 		v25 = v16;
 	}
-	v17 = fcn_00470820(g_1040494 - 0x5f, 0x10a, (char*) 0x6ac720);
+	v17 = d2_LoadForm(g_1040494 - 0x5f, 0x10a, (char*) 0x6ac720);
 	if (v17 == -1) {
 		return;
 	}
@@ -171,7 +171,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 	}
 	v35 = v24 * 0x23;
 	for (;;) {
-		v18 = fcn_00441ab0(g_6b8300, (int) g_14ce8c0,
+		v18 = d3_PickFloorPoint(g_6b8300, (int) g_14ce8c0,
 			(int) g_14ce8c2, 30.0f, pick);
 		if (v18 != 0xffffffff && v6) {
 			v19 = v18 & 0xffff;
@@ -276,7 +276,7 @@ void __cdecl ob_HandleBepflanzung(int gebaeude)
 			}
 			fcn_0064d41a(v14, (char*) 0x6ac704, (char*) 0x7e1ae0,
 				&v4[1]);
-			v6 = fcn_004488e0(v14, 0, 0);
+			v6 = d3_LoadObjectFile(v14, 0, 0);
 			if (!v6) {
 				fcn_0064d41a(v15, (char*) 0x6ac6c4, v14);
 				ReportClientMessage(v15);

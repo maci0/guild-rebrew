@@ -2,7 +2,7 @@
 #include "GOLDTL.fcn_00506e70_gconf.h"
 
 /* ADDRESS: GOLDTL 0x00506e70 */
-int __cdecl fcn_00506e70(unsigned int idx, int count, ...)
+int __cdecl gm_HasEntityClassOrGrade(unsigned int idx, int count, ...)
 {
     unsigned char *t;
     va_list p;

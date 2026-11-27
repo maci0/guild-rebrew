@@ -17,7 +17,7 @@ extern pos14_7f4c00 gm_GameTime;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_GetElapsedMinutes(pos14_7f4c00*, pos14_7f4c00*);
 double __cdecl gm_GetEntityHealthRatio(char*);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 char* __cdecl gm_SearchTable67(int);
 void __cdecl he_AssignActionSlot(char*, int, int, char*);
@@ -43,7 +43,7 @@ void __cdecl he_RunHeilen(char* u)
 		x *= 5.0f;
 		r = gm_GetEntityHealthRatio(h) * 100.0;
 		if (*(unsigned int*) (u + 0xb0) > 0 && x + r < 100.0f) {
-			fcn_004ff210(*(unsigned short*) h, (int) x);
+			gm_ApplyEntityHealthDelta(*(unsigned short*) h, (int) x);
 			*(unsigned int*) (u + 0xb0) = (unsigned int) (*(unsigned int*) (u + 0xb0) - x);
 			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
 			gm_AddTime((pos14_7f4c00*) (u + 0x52), 0, 10, 0);

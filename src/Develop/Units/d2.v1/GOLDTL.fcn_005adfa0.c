@@ -22,7 +22,7 @@ void __cdecl fcn_0052a0c0(int, int);
 void __cdecl fcn_005bdc30(int, Req*, int, void*, int);
 void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl sv_ClearObjectSelection(void);
-void __cdecl fcn_005add40(void);
+void __cdecl d2_OpenTaschendiebstahlDialog(void);
 
 void __cdecl d2_OpenAngriffDialog(int a)
 {
@@ -33,7 +33,7 @@ void __cdecl d2_OpenAngriffDialog(int a)
 	req.kind = 7;
 	req.c = 0x90010;
 	fcn_0052a0c0(a, 0);
-	fcn_005bdc30(1, &req, g_14abad4, (void*) fcn_005add40, 0);
+	fcn_005bdc30(1, &req, g_14abad4, (void*) d2_OpenTaschendiebstahlDialog, 0);
 	d2_RestoreHudAfterDialog();
 	sv_ClearObjectSelection();
 }

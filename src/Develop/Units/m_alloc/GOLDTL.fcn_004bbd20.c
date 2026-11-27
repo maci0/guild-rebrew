@@ -3,7 +3,7 @@
 
 void* __cdecl m_alloc(int, void*);
 
-void __cdecl fcn_004bbd20(void)
+void __cdecl gm_AllocAmbientAnimals(void)
 {
 	void* p;
 

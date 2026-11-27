@@ -44,7 +44,7 @@ extern int g_14ce8e0;
 void __cdecl fcn_005091d0(int*, Entry*);
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -85,9 +85,9 @@ void __cdecl fcn_005c8440(void)
 	}
 	fcn_0057e880(10, 0, 0, 0);
 	if (count <= 6) {
-		dlg = fcn_00470820(0, 0, s_6acc18);
+		dlg = d2_LoadForm(0, 0, s_6acc18);
 	} else {
-		dlg = fcn_00470820(0, 0, s_6acc08);
+		dlg = d2_LoadForm(0, 0, s_6acc08);
 	}
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);

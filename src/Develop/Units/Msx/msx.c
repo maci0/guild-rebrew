@@ -5,13 +5,13 @@
 
 extern int g_6b719c;
 extern char g_6b6f90[];
-int __cdecl fcn_0042b2e0(void);
+int __cdecl msx_GetTimerHighestDelay(void);
 int __cdecl msx_OpenStream(int* lib, char* path, int* out);
-int __cdecl fcn_0042b080(int h, int* len);
-int __cdecl fcn_0042ae10(int h, int v);
+int __cdecl msx_GetStreamLengthMs(int h, int* len);
+int __cdecl msx_SetStreamVolume(int h, int v);
 int __cdecl msx_StartStream(int h);
-int __cdecl fcn_0042aed0(int h, int pos);
-int __cdecl fcn_0042ae90(int h, int f);
+int __cdecl msx_SetStreamMsPosition(int h, int pos);
+int __cdecl msx_SetStreamLoopCount(int h, int f);
 
 void __cdecl msx_SetTrackVolume(Chan_14cc460* p, int a2)
 {
@@ -21,7 +21,7 @@ void __cdecl msx_SetTrackVolume(Chan_14cc460* p, int a2)
 		if (p->f114 == 0 && p->active != 0) {
 			p->f11c = a2;
 			if (p->handle != 0) {
-				fcn_0042ae10(p->handle, a2);
+				msx_SetStreamVolume(p->handle, a2);
 			}
 		}
 		LeaveCriticalSection(&msx_TrackLock);
@@ -65,10 +65,10 @@ int __cdecl msx_StartTrackInternal(Chan_14cc460* c, int restart)
 	}
 	EnterCriticalSection(&msx_TrackLock);
 	if (g_6b719c != 0) {
-		sprintf(g_6b6f90, "Reporting last delaypeak: %d", fcn_0042b2e0());
+		sprintf(g_6b6f90, "Reporting last delaypeak: %d", msx_GetTimerHighestDelay());
 	}
 	else {
-		g_6b719c = fcn_0042b2e0();
+		g_6b719c = msx_GetTimerHighestDelay();
 	}
 	if (c->active == 0) {
 		strcpy(path, msx_TrackPath);
@@ -86,24 +86,24 @@ int __cdecl msx_StartTrackInternal(Chan_14cc460* c, int restart)
 			}
 		}
 		if (c->f108 == 0) {
-			fcn_0042b080(c->handle, &c->f108);
+			msx_GetStreamLengthMs(c->handle, &c->f108);
 			c->f118 = 0x7f;
 		}
 		if ((c->bAmbient == 0 && c->f108 - c->f10c < 10000) || c->f10c == 0) {
 			c->f10c = 0;
 			c->f11c = c->f118;
 			c->f114 = 0;
-			fcn_0042ae10(c->handle, 0);
+			msx_SetStreamVolume(c->handle, 0);
 			msx_StartStream(c->handle);
-			fcn_0042ad90(c->handle, 1);
-			fcn_0042aed0(c->handle, 0);
-			fcn_0042ae10(c->handle, c->f118);
+			msx_PauseStream(c->handle, 1);
+			msx_SetStreamMsPosition(c->handle, 0);
+			msx_SetStreamVolume(c->handle, c->f118);
 			c->f110 = 0;
 		}
 		else {
-			fcn_0042ad90(c->handle, 1);
-			fcn_0042ae10(c->handle, 0);
-			fcn_0042aed0(c->handle, c->f10c);
+			msx_PauseStream(c->handle, 1);
+			msx_SetStreamVolume(c->handle, 0);
+			msx_SetStreamMsPosition(c->handle, c->f10c);
 			if (c->bAmbient == 0) {
 				c->f11c = 0;
 				c->f120 = 0;
@@ -112,10 +112,10 @@ int __cdecl msx_StartTrackInternal(Chan_14cc460* c, int restart)
 			}
 		}
 		if (restart != 0) {
-			fcn_0042ae90(c->handle, 0);
+			msx_SetStreamLoopCount(c->handle, 0);
 		}
 		else {
-			fcn_0042ae90(c->handle, 1);
+			msx_SetStreamLoopCount(c->handle, 1);
 		}
 		cur = msx_FindActiveTrack();
 		if (c->bAmbient == 0 && cur != 0) {
@@ -127,7 +127,7 @@ int __cdecl msx_StartTrackInternal(Chan_14cc460* c, int restart)
 		else {
 			sprintf(g_6b6f90, "Starting Track %s !", c->name);
 			c->b105 = 0;
-			fcn_0042ad90(c->handle, 0);
+			msx_PauseStream(c->handle, 0);
 			c->active = 1;
 		}
 	}
@@ -146,7 +146,7 @@ void __cdecl msx_StopTrack(Chan_14cc460* hTrack, int fade)
             if (fade != 0) {
                 msx_StartTrackFade(hTrack, 2);
             } else {
-                fcn_0042ad90(hTrack->handle, 1);
+                msx_PauseStream(hTrack->handle, 1);
                 msx_CloseStream(hTrack->handle);
                 hTrack->handle = 0;
                 hTrack->active = 0;
@@ -208,7 +208,7 @@ void __cdecl msx_StartTrackFade(Chan_14cc460* hTrack, int mode)
     if (mode == 0) {
         return;
     }
-    fcn_0042b040(hTrack->handle, &hTrack->f10c);
+    msx_GetStreamMsPosition(hTrack->handle, &hTrack->f10c);
     hTrack->f110 = hTrack->f10c;
     hTrack->f120 = hTrack->f11c;
     hTrack->f114 = mode;

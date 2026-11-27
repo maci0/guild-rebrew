@@ -1,7 +1,7 @@
 typedef struct
 {
 	int i[0x2f4 / 4];
-} fcn_0046f9b0_Ent;
+} D2_CTRL_TEXT_ENT;
 // SIZE 0x2f4
 
 extern char* g_1015ea0;
@@ -15,14 +15,14 @@ void __cdecl fcn_0064d530(char* dst, char* src, int n);
 /* ADDRESS: GOLDTL 0x0046f9b0 */
 void __cdecl d2_SetControlText(int idx, char* text)
 {
-	fcn_0046f9b0_Ent* e;
+	D2_CTRL_TEXT_ENT* e;
 	int w;
 	int h;
 	int c;
 	char* p0;
 	char* p1;
 
-	e = (fcn_0046f9b0_Ent*) &((D2_CONTROL_TL*) g_1015ea0)[idx];
+	e = (D2_CTRL_TEXT_ENT*) &((D2_CONTROL_TL*) g_1015ea0)[idx];
 	if (((D2_CONTROL_TL*) e)->kind == 9) {
 		c = *(int*) &((D2_CONTROL_TL*) e)->data;
 		p0 = fcn_0047b620(c, 0);
@@ -35,7 +35,7 @@ void __cdecl d2_SetControlText(int idx, char* text)
 	if (d2_GetElementResourceSize(idx, &w, &h) == 0) {
 		w = 0x18;
 	}
-	fcn_0064d530((char*) (fcn_0046f9b0_Ent*) &((D2_CONTROL_TL*) g_1015ea0)[idx] + 0x8c, text, 0x3f);
+	fcn_0064d530((char*) (D2_CTRL_TEXT_ENT*) &((D2_CONTROL_TL*) g_1015ea0)[idx] + 0x8c, text, 0x3f);
 	if (((D2_CONTROL_TL*) g_1015ea0)[idx].value_06c == 0) {
 		((D2_CONTROL_TL*) g_1015ea0)[idx].width = d2_MeasureTextWidth(text, ((D2_CONTROL_TL*) g_1015ea0)[idx].font) + w + 6;
 	} else {

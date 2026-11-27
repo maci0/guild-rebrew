@@ -8,7 +8,7 @@
 typedef struct
 {
 	int i[0x2f4 / 4];
-} fcn_0046e830_Ent;
+} D2_SCROLL_BTN_ENT;
 // SIZE 0x2f4
 
 #include "client_types.h"

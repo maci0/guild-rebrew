@@ -11,7 +11,7 @@ extern char g_14cf950;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -31,7 +31,7 @@ int __cdecl d2_PromptNetworkHost(void)
 
 	result = 0;
 	GetPrivateProfileStringA("Network", "Host", "127.0.0.1", buf, 0x104, g_7e22c0);
-	h = fcn_00470820(0, 0, g_6a3a34);
+	h = d2_LoadForm(0, 0, g_6a3a34);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 2);
 	io_AppendText(0x1cae);

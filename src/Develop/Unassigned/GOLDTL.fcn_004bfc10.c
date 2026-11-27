@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_004bfbc0(void*);
+void __cdecl d2_UpdateRoutePointImage(void*);
 
 void __cdecl fcn_004bfc10(void)
 {
@@ -8,7 +8,7 @@ void __cdecl fcn_004bfc10(void)
 
 	for (a = 0x10058a0; a < 0x10058e0; a += 8) {
 		if (*(int*) a != -1) {
-			fcn_004bfbc0((void*) a);
+			d2_UpdateRoutePointImage((void*) a);
 		}
 	}
 }

@@ -8,7 +8,7 @@ extern int d2_CurrentElementId;
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 #include "Develop/DieGildeAddOn/game/entity_record.h"
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -64,7 +64,7 @@ void __cdecl d2_ShowRenovationDialog(char* e)
 	if (128.0f > x) {
 		x = 128.0f;
 	}
-	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Renovieren");
+	win = d2_LoadForm(0, 0, "Panel\\Gebaeude_Renovieren");
 	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 2);
 	a = (int) (n * x);

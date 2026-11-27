@@ -8,7 +8,7 @@ extern int g_100f1dc;
 extern int __cdecl gm_CollectEntityCarts(int a0, int a1);
 extern int __cdecl io_FormatTextBuffer(char *a0, char *a1, ...);
 extern int __cdecl fcn_00526120(char *a0, int a1);
-extern int __cdecl fcn_00470820(int a0, int a1, char *a2);
+extern int __cdecl d2_LoadForm(int a0, int a1, char *a2);
 extern void __cdecl d2_CenterDialogWindows(int a0);
 extern void __cdecl d2_SetForm(int a0, int a1);
 extern int __cdecl io_AppendText(int a0);
@@ -52,7 +52,7 @@ void __cdecl d2_ShowNewCartDialog(int sourceObj)
         fcn_00526120(messageBuf, 0);
         return;
     }
-    h = fcn_00470820(0, 0, (char *)0x6ac354);
+    h = d2_LoadForm(0, 0, (char *)0x6ac354);
     d2_CenterDialogWindows(h);
     d2_SetForm(h, 2);
     io_AppendText(0xd8);

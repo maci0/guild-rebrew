@@ -65,11 +65,11 @@ extern int g_14ce8d8;
 #include "client_dialog_state.h"
 extern int d2_CurrentElementId;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471db0(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetFormWindow(int, int);
@@ -103,11 +103,11 @@ int __cdecl d2_RunSaveGameDialog(Blob* src)
 	int h;
 
 	wait = main_LoopFlags;
-	dlg = fcn_00470820(0, 0, s_6acfdc);
+	dlg = d2_LoadForm(0, 0, s_6acfdc);
 	fcn_00471db0(dlg, 1);
 	fcn_00471d80(dlg, 2);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(0, 2);
 	io_AppendText(0x1c58);

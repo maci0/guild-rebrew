@@ -10,7 +10,7 @@ int __cdecl fcn_004011f0(void* stream, void* dst);
 int __cdecl vfs_fseek(void*, int, int);
 #include "Develop/Units/vfs/vfs.h"
 
-void* __cdecl fcn_0044f190(char* name)
+void* __cdecl vfs_OpenFastChunk(char* name)
 {
 	int magic;
 	int id;

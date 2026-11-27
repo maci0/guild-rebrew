@@ -10,7 +10,7 @@ int __cdecl gm_MapEntityStatRange(int typ);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int, int, int);
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 /* ADDRESS: GOLDTL 0x00506380 */
-int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2, int a3)
+int __cdecl gm_GetEntityUiFlags(int playerIndex, unsigned char* building, unsigned short* object, int actor)
 {
 	unsigned char* rec;
 	unsigned char* geb;
@@ -22,31 +22,31 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 	result = 0;
 	rec = 0;
-	if (a1 != 0) {
+	if (building != 0) {
 		rec = (unsigned char*) (((unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[
-(unsigned int) *a1]));
+(unsigned int) *building]));
 		found = gm_CheckStatLevel(playerIndex, fcn_00507910(*rec));
 		if (*rec == 0x1d)
-			return gm_GetBuildingUiFlags((void*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex])), a1, a2);
+			return gm_GetBuildingUiFlags((void*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex])), building, object);
 		switch (*rec) {
 		case 33:
-				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
+				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result = 0x3c;
-				if (*(unsigned short*) (a1 + 0x27) == playerIndex)
+				if (*(unsigned short*) (building + 0x27) == playerIndex)
 					result |= 0x620;
 				break;
 			case 2:
 			case 30:
-				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
+				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result = 0x3c;
-				if (*(unsigned short*) (a1 + 0x27) == playerIndex)
+				if (*(unsigned short*) (building + 0x27) == playerIndex)
 					result |= 0x5661;
 				break;
 			case 9:
 				result = 1;
-				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
+				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result = 0x403d;
-				if (*(unsigned short*) (a1 + 0x27) != playerIndex)
+				if (*(unsigned short*) (building + 0x27) != playerIndex)
 					break;
 				result |= 0x54e1;
 				for (i = 0; i < 6; i++) {
@@ -59,9 +59,9 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 				}
 				break;
 			case 4:
-				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
+				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result = 0x50bd;
-				if (*(unsigned short*) (a1 + 0x27) != playerIndex)
+				if (*(unsigned short*) (building + 0x27) != playerIndex)
 					break;
 				result |= 0x44e1;
 				for (i = 0; i < 6; i++) {
@@ -82,9 +82,9 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 			case 22:
 			case 32:
 				result = 0x81;
-				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
+				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result = 0x10bd;
-				if (*(unsigned short*) (a1 + 0x27) != playerIndex)
+				if (*(unsigned short*) (building + 0x27) != playerIndex)
 					break;
 				result |= 0x460;
 				for (i = 0; i < 6; i++) {
@@ -113,19 +113,19 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 			case 13:
 			case 17:
 			case 31:
-				if (a2 == 0 || *(unsigned short*) (a1 + 0x27) == playerIndex)
+				if (object == 0 || *(unsigned short*) (building + 0x27) == playerIndex)
 					result = 0x81;
-				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
+				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result |= 0x403c;
-				if (*(unsigned short*) (a1 + 0x27) == playerIndex)
+				if (*(unsigned short*) (building + 0x27) == playerIndex)
 					result |= 0x5670;
-				if (a2 == 0)
+				if (object == 0)
 					goto finish;
-				if (*a2 == 0xfd)
+				if (*object == 0xfd)
 					result |= 0x4001;
 				break;
 			case 16:
-				if (*(unsigned short*) (a1 + 0x27) == playerIndex) {
+				if (*(unsigned short*) (building + 0x27) == playerIndex) {
 					result = 0x54e1;
 					for (i = 0; i < 6; i++) {
 						if (rec[0x223 + i] == 0)
@@ -136,7 +136,7 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 						}
 					}
 				}
-				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
+				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result |= 0x3c;
 				break;
 			case 1:
@@ -155,13 +155,13 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 				} else if (ch == 0xf) {
 					result |= 0x30;
 				}
-				if (a2 != 0 && *a2 == 0x114 && ch == 0)
+				if (object != 0 && *object == 0x114 && ch == 0)
 					result &= 0xffffbffe;
 				break;
 			case 19:
-				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
+				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result = 0x50bd;
-				if (*(unsigned short*) (a1 + 0x27) != playerIndex)
+				if (*(unsigned short*) (building + 0x27) != playerIndex)
 					break;
 				result |= 0x44e1;
 				for (i = 0; i < 6; i++) {
@@ -176,9 +176,9 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 			case 6:
 				geb = (unsigned char*) (((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[playerIndex]));
 				result = 0x5001;
-				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
+				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result = 0x503d;
-				if (*(unsigned short*) (a1 + 0x27) == playerIndex)
+				if (*(unsigned short*) (building + 0x27) == playerIndex)
 					result |= 0x5660;
 				if (*(unsigned char*) (geb + 0x166) == 0xf)
 					result |= 0x30;
@@ -197,11 +197,11 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 				break;
 			case 7:
 				result = 1;
-				if (a2 != 0 && (*a2 == 0xe6 || *a2 == 0xe5))
+				if (object != 0 && (*object == 0xe6 || *object == 0xe5))
 					result = 0x1001;
-				if (*(unsigned short*) (a1 + 0x25) == playerIndex)
+				if (*(unsigned short*) (building + 0x25) == playerIndex)
 					result |= 0x103c;
-				if (*(unsigned short*) (a1 + 0x27) == playerIndex) {
+				if (*(unsigned short*) (building + 0x27) == playerIndex) {
 					result |= 0x4460;
 					for (i = 0; i < 6; i++) {
 						if (rec[0x223 + i] == 0)
@@ -212,22 +212,22 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 						}
 					}
 				} else {
-					if (a2 == 0)
+					if (object == 0)
 						goto finish;
-					if (*a2 != 0xf3)
+					if (*object != 0xf3)
 						result |= 0x5000;
 				}
 			break;
 		}
 		goto common;
-	} else if (a3 != 0) {
-		if (*(int*) (a3 + 0x16c) != 0 &&
-		    *(unsigned short*) (*(int*) (a3 + 0x16c) + 0x27) == playerIndex)
+	} else if (actor != 0) {
+		if (*(int*) (actor + 0x16c) != 0 &&
+		    *(unsigned short*) (*(int*) (actor + 0x16c) + 0x27) == playerIndex)
 			result = 0x800;
 	} else {
-		if (a2 == 0)
+		if (object == 0)
 			goto finish;
-		id = *a2;
+		id = *object;
 		if (*(char*) (((char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[(unsigned int) id])) == 6) {
 			if (id >= 0x91 && id <= 0x97)
 				result = 1;
@@ -242,8 +242,8 @@ int __cdecl fcn_00506380(int playerIndex, unsigned char* a1, unsigned short* a2,
 		}
 	}
 common:
-	if (a2 != 0) {
-		id = *a2;
+	if (object != 0) {
+		id = *object;
 		if (id == 0x27f || id == 0x21b || id == 0x28a || id == 0x120)
 			result |= 0x5000;
 		if (id == 0x12e)
@@ -252,10 +252,10 @@ common:
 finish:
 	if (g_774800 != 0) {
 		result = 0xffffffff;
-		if (a1 != 0 && (*rec == 3 || *rec == 0x21))
+		if (building != 0 && (*rec == 3 || *rec == 0x21))
 			result = 0xfffffffe;
 	}
-	if (a1 != 0 && *(unsigned short*) (a1 + 0x27) == 0xffff)
+	if (building != 0 && *(unsigned short*) (building + 0x27) == 0xffff)
 		result = 0;
 	return result;
 }

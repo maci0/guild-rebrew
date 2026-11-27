@@ -4,7 +4,7 @@ extern GuiEnt* g_00f8f080;
 int __cdecl fcn_0046ea00(const char*, int);
 
 /* ADDRESS: GOLD 0x00469fd0 */
-void __cdecl fcn_00469fd0(int index, int text_index)
+void __cdecl d2_SetFieldEntryText(int index, int text_index)
 {
     char* record;
     char* window;

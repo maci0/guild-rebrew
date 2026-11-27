@@ -6,7 +6,7 @@ int __cdecl d3_SelectSceneContext();
 int __cdecl d2_RenderAndPresentFrame();
 int __cdecl d2_SetBackdropResource();
 int __cdecl d2_AddElementToWindow();
-int __cdecl fcn_00470820();
+int __cdecl d2_LoadForm();
 int __cdecl fcn_00471d80();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
@@ -129,7 +129,7 @@ void __cdecl gm_RunRoundUpdate(void)
 	fcn_0053f100();
 	fcn_00546f80();
 	if (g_6a3420) {
-		tmpVal = fcn_00470820(0, 0, 0x6a43ac);
+		tmpVal = d2_LoadForm(0, 0, 0x6a43ac);
 		fcn_00471d80(tmpVal, 3);
 		d2_SetForm(tmpVal, 1);
 		io_AppendText(0x7d);

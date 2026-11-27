@@ -37,7 +37,7 @@ unsigned short __cdecl gm_RandomMod(int n);
 int __cdecl he_IsEntityEligibleForAccident(Player* p);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_GetBuildingTechEffect(Home* h, int a, int b);
-float __cdecl fcn_004ff210(unsigned short id, int delta);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int delta);
 void __cdecl he_HandleAccidentOutcome(char* s, Player* p, Player* q, Home* h, float v, int f);
 void __cdecl gm_AddTime(Clock* c, int a, int b, int d);
 
@@ -94,7 +94,7 @@ void __cdecl RunSimUnfall(char* s)
 			x = r * 0.0125f;
 			if (25.0f - 20.0f * x > f) {
 				y = MINV(MAXV(2.0f - x, 0.0f), 2.0f);
-				f = fcn_004ff210(idx, -50 - gm_RandomMod((int) (y * 255.0f + 1.0f)));
+				f = gm_ApplyEntityHealthDelta(idx, -50 - gm_RandomMod((int) (y * 255.0f + 1.0f)));
 				he_HandleAccidentOutcome(s, p, &((Player*) g_7f4ca0)[((Player*) g_7f4ca0)[idx].home->x27], ((Player*) g_7f4ca0)[idx].home, f, 0);
 			}
 		}

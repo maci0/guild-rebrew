@@ -22,11 +22,11 @@ extern int g_100f1dc;
 extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 int __cdecl fcn_004f65a0(ENTITY_RECORD*, int, int*, int*);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl d2_GetFormWindow(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_005338a0(void);
 void __cdecl d2_SetForm(int, int);
@@ -54,7 +54,7 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 	int i;
 
 	me = &((ENTITY_RECORD*)g_7f4ca0)[g_774970];
-	dlg = fcn_00470820(0, 0, s_6ad3c4);
+	dlg = d2_LoadForm(0, 0, s_6ad3c4);
 	found = fcn_004f65a0(&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 4, list, &count);
 	if ((*(int*)&g_7746c4)) {
 		max = gm_GetBuildingTechEffect((*(int*)&g_7746c4), 0x24, 1);
@@ -64,7 +64,7 @@ void __cdecl d2_ShowSchneidereiPlauschDialog(ENTITY_RECORD* other)
 	if (count >= max + 1) {
 		count = max + 1;
 	}
-	fcn_005340f0(d2_GetFormWindow(dlg, 0));
+	d2_InitWindowBounds(d2_GetFormWindow(dlg, 0));
 	d2_CenterDialogWindows(dlg);
 	fcn_005338a0();
 	d2_SetForm(dlg, 1);

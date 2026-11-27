@@ -1,7 +1,7 @@
 #include "Develop/Units/d3/d3_camera.h"
 
 /* ADDRESS: GOLDTL 0x0052d7c0 */
-void __cdecl fcn_0052d7c0(int* src)
+void __cdecl d3_SetActiveCameraTransform(int* src)
 {
 	if (((char*)d3_ActiveCamera) != 0 && src != 0) {
 		*(int*) (((char*)d3_ActiveCamera) + 0x4c) = src[0];

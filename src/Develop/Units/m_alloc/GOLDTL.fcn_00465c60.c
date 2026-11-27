@@ -36,7 +36,7 @@ void __cdecl fcn_0047b5d0(void* p);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl fcn_00475f80(void* o);
 void __cdecl fcn_00477550(void);
-void __cdecl fcn_0047ce50(int a1);
+void __cdecl d3_SafeReleaseSceneResource(int a1);
 void __cdecl fcn_0047c4b0(void);
 void __cdecl d2_ReleaseRenderToSurface(void);
 
@@ -93,7 +93,7 @@ void __cdecl fcn_00465c60(void)
 	}
 	fcn_00477550();
 	if (g_77253c != 0) {
-		fcn_0047ce50(g_77253c);
+		d3_SafeReleaseSceneResource(g_77253c);
 		g_77253c = 0;
 	}
 	if (g_772564 != 0) {

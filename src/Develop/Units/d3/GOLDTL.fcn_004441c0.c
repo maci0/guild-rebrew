@@ -7,7 +7,7 @@ int __cdecl fcn_0043b170(int, int, int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x004441c0 */
-void __cdecl fcn_004441c0(void)
+void __cdecl d3_RenderSceneCameras(void)
 {
 	int v4;
 	int displayValue;

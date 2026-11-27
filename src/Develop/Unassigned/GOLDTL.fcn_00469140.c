@@ -81,7 +81,7 @@ static __inline void fill0(char* dst, int size)
 
 // FUNCTION: GOLDTL 0x00469140
 
-int __cdecl d2_CreateBitmapElement(int a1, int a2, int w, int h, char* src)
+int __cdecl d2_CreateBitmapElement(int x, int y, int w, int h, char* src)
 {
 	int idx;
 	Desc desc;
@@ -90,8 +90,8 @@ int __cdecl d2_CreateBitmapElement(int a1, int a2, int w, int h, char* src)
 
 	idx = d2_AllocateElement();
 	((D2_CONTROL_TL*) g_1015ea0)[idx].kind = 0x47;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].x = a1;
-	((D2_CONTROL_TL*) g_1015ea0)[idx].y = a2;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].x = x;
+	((D2_CONTROL_TL*) g_1015ea0)[idx].y = y;
 	((D2_CONTROL_TL*) g_1015ea0)[idx].height = h;
 	((D2_CONTROL_TL*) g_1015ea0)[idx].width = w;
 	((D2_CONTROL_TL*) g_1015ea0)[idx].value_008 = -1;

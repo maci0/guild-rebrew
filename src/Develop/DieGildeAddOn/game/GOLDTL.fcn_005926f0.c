@@ -13,7 +13,7 @@ extern int* g_779ce4;
 extern void* g_1015ea0;
 extern void* g_6a9b9c;
 
-extern void* __cdecl fcn_00470820(int, int, char*);
+extern void* __cdecl d2_LoadForm(int, int, char*);
 extern void __cdecl d2_CenterDialogWindows(void*);
 extern void __cdecl io_AppendText(int);
 extern int __cdecl d2_DestroyForm(void*);
@@ -24,7 +24,7 @@ extern int __cdecl d2_SetBildArgument(void*, int);
 extern int __cdecl fcn_004727a0(void*, int);
 extern int __cdecl d2_SelectControl(void*);
 extern int __cdecl d2_SetBackdropResource(int);
-extern int __cdecl fcn_00469e70(void);
+extern int __cdecl d2_ClearBackdropResource(void);
 extern int __cdecl fcn_004ce080(void);
 extern int __cdecl gm_AreAllMultiplayerReady(void);
 extern void* __cdecl fcn_004ce180(void);
@@ -91,7 +91,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 	g_779c40 = -1;
 	g_779ce4 = (int*)fcn_004ce1c0();
 	if (g_779ce4 == 0) {
-		h = (void*)fcn_00470820(0, 0, (char*)0x68d714);
+		h = (void*)d2_LoadForm(0, 0, (char*)0x68d714);
 		d2_CenterDialogWindows(h);
 		io_AppendText(0x87);
 		(*(int*)0x100f1dc) = -1;
@@ -150,7 +150,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 	d2_SetBackdropResource(0x7d6);
 	g_779cb8 = (char*)fcn_004ce1a0();
 	if (g_779cb8 == 0) {
-		h = (void*)fcn_00470820(0, 0, (char*)0x68d714);
+		h = (void*)d2_LoadForm(0, 0, (char*)0x68d714);
 		d2_CenterDialogWindows(h);
 		io_AppendText(0x87);
 		(*(int*)0x100f1dc) = -1;
@@ -165,7 +165,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 		return 0;
 	}
 
-	g_6a9b9c = (void*)fcn_00470820(0x3c, 0, (char*)0x6a9ba0);
+	g_6a9b9c = (void*)d2_LoadForm(0x3c, 0, (char*)0x6a9ba0);
 	d2_CenterDialogWindows(g_6a9b9c);
 	d2_InitNetLobbyScrollbar();
 	fcn_00593110();
@@ -317,6 +317,6 @@ int __cdecl d2_RunNetLobbySetup(void)
 	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a3ff4, profileText, (char*)0x7e22c0);
 	fcn_0064d41a(profileText, (char*)0x6a81d8, *(unsigned char*)0x7e23e3);
 	WritePrivateProfileStringA((char*)0x6a1e4c, (char*)0x6a9bb0, profileText, (char*)0x7e22c0);
-	fcn_00469e70();
+	d2_ClearBackdropResource();
 	return ret;
 }

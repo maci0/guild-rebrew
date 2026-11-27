@@ -57,7 +57,7 @@ extern char* g_7746cc;
 extern char s_6ab348[];
 
 int __cdecl fcn_00526120(int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -94,7 +94,7 @@ int __cdecl d2_SelectBetriebsPruefungTarget(int unused, char* e)
 		fcn_00526120(g_14b5290, 0);
 		return 0;
 	}
-	dlg = fcn_00470820(0, 0, s_6ab348);
+	dlg = d2_LoadForm(0, 0, s_6ab348);
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);

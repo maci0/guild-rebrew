@@ -1,6 +1,6 @@
 void __cdecl d3_UpdateFloorChunkLods(char*);
 char* __cdecl d3_AcquireFloorTileTexture(int, int, unsigned int, unsigned int, unsigned int, void*);
-void __cdecl fcn_004614b0(char*);
+void __cdecl d3_EnsureTextureSurface(char*);
 void* __cdecl d3_LockSurface(void*, int);
 void __cdecl d3_BlitFloorTileCells(void*, void*);
 void __cdecl d3_UnlockSurface(void*);
@@ -75,7 +75,7 @@ int __cdecl d3_BuildFloorTileTextures(char* object)
                                     if (description[0x40] == 0) {
                                         *(int*)(resource + 0x58) = 0;
                                         if (*(void**)(resource + 0x60) == 0) {
-                                            fcn_004614b0(resource);
+                                            d3_EnsureTextureSurface(resource);
                                         }
                                         buffer = d3_LockSurface(*(void**)(resource + 0x60), 0x20);
                                         if (buffer != 0) {

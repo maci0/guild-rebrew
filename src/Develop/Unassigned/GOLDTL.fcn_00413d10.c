@@ -1,4 +1,4 @@
-char __cdecl fcn_0045b990(char* map, float* pos, int* col, int* row, float* height);
+char __cdecl d3sm_SampleHeight(char* map, float* pos, int* col, int* row, float* height);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 /* ADDRESS: GOLDTL 0x00413d10 */
 float __cdecl fcn_00413d10(float* pos)
@@ -19,7 +19,7 @@ float __cdecl fcn_00413d10(float* pos)
 	if (world != 0) {
 		map = *(char**) (world + 0xb0);
 		if (map != 0) {
-			if (fcn_0045b990(map, pos, &col, &row, &height) != 0) {
+			if (d3sm_SampleHeight(map, pos, &col, &row, &height) != 0) {
 				k = -4;
 				width = *(int*) (map + 0x20);
 				off = (row - 4) * width;

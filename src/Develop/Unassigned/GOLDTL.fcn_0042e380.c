@@ -2,7 +2,7 @@
 
 void __cdecl fcn_0042e260(int);
 
-void __cdecl fcn_0042e380(void)
+void __cdecl ch_ValidateCharacterTable(void)
 {
 	int a;
 	int v;

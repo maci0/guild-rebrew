@@ -12,13 +12,13 @@ typedef struct
 	int n;
 	int pad0c;
 	D3_BIN_MAT_ALPHA_REC* recs;
-} fcn_0044da30_Ctx;
+} D3_BIN_MAT_ALPHA_CTX;
 // SIZE 0x14
 
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 
 /* ADDRESS: GOLDTL 0x0044da30 */
-void __cdecl d3_ReadMatAlphaType(void* stream, fcn_0044da30_Ctx* ctx)
+void __cdecl d3_ReadMatAlphaType(void* stream, D3_BIN_MAT_ALPHA_CTX* ctx)
 {
 	vfs_ReadByte(stream, &ctx->recs[ctx->n].fc0);
 }

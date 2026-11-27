@@ -10,7 +10,7 @@ extern int g_90d520[];
 extern int g_14a79c0[];
 extern char g_679060[];
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -42,7 +42,7 @@ unsigned int __cdecl fcn_004be560(char* building, int a1, unsigned int a2)
 
 	ret = a2;
 	src = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[(unsigned char) *building];
-	a2 = fcn_00470820(0, 0, (char*) 0x6816e8);
+	a2 = d2_LoadForm(0, 0, (char*) 0x6816e8);
 	d2_CenterDialogWindows(a2);
 	d2_SetForm(a2, 4);
 	d2_GetWindowListItem(a2, 4, io_AppendText(0x7d));

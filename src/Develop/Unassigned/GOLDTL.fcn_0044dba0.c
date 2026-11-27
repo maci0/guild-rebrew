@@ -12,13 +12,13 @@ typedef struct
 	int n;
 	int pad0c;
 	D3_BIN_MAT_SCROLL_REC* recs;
-} fcn_0044dba0_Ctx;
+} D3_BIN_MAT_SCROLL_CTX;
 // SIZE 0x14
 
 int __cdecl vfs_ReadByte(void* stream, void* dst);
 
 /* ADDRESS: GOLDTL 0x0044dba0 */
-void __cdecl d3_ReadMatScrollMode(void* stream, fcn_0044dba0_Ctx* ctx)
+void __cdecl d3_ReadMatScrollMode(void* stream, D3_BIN_MAT_SCROLL_CTX* ctx)
 {
 	vfs_ReadByte(stream, &ctx->recs[ctx->n].fc8);
 }

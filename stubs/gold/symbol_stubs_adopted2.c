@@ -85,11 +85,6 @@ void __cdecl fcn_00414be0(int a, int b, int c, int d)
 {
 }
 
-int __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3)
-{
-	return 0;
-}
-
 void __cdecl fcn_004fb4e0(void* a)
 {
 }

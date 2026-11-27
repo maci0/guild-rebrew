@@ -1,4 +1,4 @@
-void __cdecl fcn_00451500(int b, int c, float* m);
+void __cdecl d3_BuildBasisMatrixFromDir(int b, int c, float* m);
 void __cdecl d3_MatrixToEulerAngles(float* m, float* v);
 void __cdecl d3_SetObjectRotation(char* p, float* v);
 
@@ -9,7 +9,7 @@ void __cdecl d3_SetEffectDirection(char* effect, int dir, int angle)
 	float v[3];
 
 	if (effect != 0) {
-		fcn_00451500(dir, angle, m);
+		d3_BuildBasisMatrixFromDir(dir, angle, m);
 		d3_MatrixToEulerAngles(m, v);
 		d3_SetObjectRotation(effect + 0xe8, v);
 	}

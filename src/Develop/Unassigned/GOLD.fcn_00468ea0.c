@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00468ea0 */
-void __cdecl fcn_00468ea0(int x, int y, int w, int h)
+void __cdecl d2_AddSlotDirtyRect(int x, int y, int w, int h)
 {
 	int slot;
 	int n;

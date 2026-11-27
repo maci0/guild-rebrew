@@ -22,7 +22,7 @@ extern float g_773d4c, g_773d50, g_773d54, g_99ec14, g_6628cc;
 float __cdecl gm_GetCityStatsSummary(char* p);
 
 /* ADDRESS: GOLDTL 0x004fb2c0 */
-int __cdecl fcn_004fb2c0(void)
+int __cdecl gm_UpdateCityStats(void)
 {
 	float buf[10];
 	float v;

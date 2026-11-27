@@ -7,10 +7,10 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_6b5c60[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -56,10 +56,10 @@ void __cdecl fcn_005a2080(int building, int table)
 		}
 	}
 	btn = -1;
-	win = fcn_00470820(0, 0, "locations\\Wirtshaus\\Stammtisch");
+	win = d2_LoadForm(0, 0, "locations\\Wirtshaus\\Stammtisch");
 	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	ip = (unsigned int*) (table + 0x1c);
 	for (;;) {

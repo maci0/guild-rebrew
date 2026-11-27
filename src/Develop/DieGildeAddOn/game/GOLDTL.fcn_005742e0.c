@@ -20,13 +20,13 @@ extern struct modelent g_6a6ee8[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl d3_SelectSceneContext(int, int);
-char* __cdecl fcn_004488e0(char* name, int a, int b);
+char* __cdecl d3_LoadObjectFile(char* name, int a, int b);
 void __cdecl d3_SetNodePosition(char*, struct vec3*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl fcn_00514d80(char*);
 void __cdecl fcn_004143b0(char*, int, int);
 void __cdecl d3_SetSubtreeVisible(char*, int);
-void __cdecl fcn_00573e10(char*);
+void __cdecl d3_UpdateBuildStageMeshes(char*);
 void __cdecl d3_BindEntitySceneObject(char*, unsigned char*, int);
 
 char* __cdecl he_CreateGebaeudeSceneModel(float* rot, struct vec3* pos, unsigned char* kind, char* model, char* u)
@@ -57,7 +57,7 @@ char* __cdecl he_CreateGebaeudeSceneModel(float* rot, struct vec3* pos, unsigned
 	}
 	saved = d3_CurrentContextIndex;
 	d3_SelectSceneContext(0, 1);
-	h = fcn_004488e0(name, 0, 0);
+	h = d3_LoadObjectFile(name, 0, 0);
 	if (h == 0) {
 		d3_SelectSceneContext(saved, 1);
 		return 0;
@@ -67,7 +67,7 @@ char* __cdecl he_CreateGebaeudeSceneModel(float* rot, struct vec3* pos, unsigned
 	h[0x215] &= 0xfe;
 	h[0x214] |= 0x80;
 	sprintf(h, "he_%i", *(int*) (u + 4));
-	h = fcn_004488e0(model, 0, 0);
+	h = d3_LoadObjectFile(model, 0, 0);
 	if (h == 0) {
 		d3_SelectSceneContext(saved, 1);
 		return 0;
@@ -83,7 +83,7 @@ char* __cdecl he_CreateGebaeudeSceneModel(float* rot, struct vec3* pos, unsigned
 	}
 	d3_SetSubtreeVisible(h, 0);
 	*(int*) (u + 0xbc) = *(int*) (u + 0xc8) = -1;
-	fcn_00573e10(u);
+	d3_UpdateBuildStageMeshes(u);
 	d3_BindEntitySceneObject(h, kind, 2);
 	d3_SelectSceneContext(saved, 1);
 	return h;

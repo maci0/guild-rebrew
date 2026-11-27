@@ -1,0 +1,54 @@
+#include "Develop/DieGildeAddOn/game/game_data.h"
+extern char g_77666a;
+extern char g_699b08;
+void __cdecl d3_SetFloorDetailLevel(char*, unsigned char, char);
+
+/* ADDRESS: GOLDTL 0x00516de0 */
+void __cdecl d3_UpdateSceneDetailLevel(char* scene, unsigned char force)
+{
+	unsigned char al;
+	int oldmode;
+	int unit;
+
+	unit = 0;
+	if (scene == 0)
+		return;
+	al = *(unsigned char*) (scene + 0x8036);
+	oldmode = (al >> 2) & 7;
+	if (d3_CurrentContextIndex == 0) {
+		if (*(int*) scene == 0x40 || g_778d24 >= 0x780) {
+			al = (unsigned char) ((al & 0xe7) | 4);
+			*(unsigned char*) (scene + 0x8036) = al;
+			g_699b08 = 1;
+			unit = 1;
+		} else if (g_77666a == 0) {
+			al = (unsigned char) ((al & 0xf3) | 0x10);
+			*(unsigned char*) (scene + 0x8036) = al;
+			g_699b08 = 4;
+			unit = 4;
+		} else if (g_77666a == 1) {
+			al = (unsigned char) ((al & 0xeb) | 8);
+			*(unsigned char*) (scene + 0x8036) = al;
+			g_699b08 = 2;
+			unit = 2;
+		} else if (g_77666a == 2) {
+			al = (unsigned char) ((al & 0xe7) | 4);
+			*(unsigned char*) (scene + 0x8036) = al;
+			g_699b08 = 1;
+			unit = 1;
+		}
+	} else {
+		if (g_77666a == 2) {
+			al = (unsigned char) ((al & 0xe7) | 4);
+			*(unsigned char*) (scene + 0x8036) = al;
+			unit = 1;
+		} else {
+			al = (unsigned char) ((al & 0xeb) | 8);
+			*(unsigned char*) (scene + 0x8036) = al;
+			unit = 2;
+		}
+	}
+	if (oldmode != ((*(unsigned char*) (scene + 0x8036) >> 2) & 7) || force != 0) {
+		d3_SetFloorDetailLevel(scene, (unsigned char) (unit >> 1), 1);
+	}
+}

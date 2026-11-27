@@ -6,8 +6,8 @@ void __cdecl he_StartElectionCampaign(void);
 void __cdecl he_RunElectionCampaign(void);
 void __cdecl he_AllocPredigt(void);
 void __cdecl he_RunPredigt(void);
-void __cdecl fcn_0054aa70(void);
-void __cdecl he_StartAction0x2d(void);
+void __cdecl he_StartCourtTrial(void);
+void __cdecl fcn_0054b130(void);
 void __cdecl he_StartAction0x2e(void);
 void __cdecl he_HandleAction0x2e(void);
 void __cdecl fcn_0054b420(void);
@@ -69,7 +69,7 @@ void __cdecl he_AllocBetriebsPruefung(void);
 void __cdecl he_RunBetriebsPruefung(void);
 void __cdecl he_AllocMultiActorAction(void);
 void __cdecl he_RunMultiActorAction(void);
-void __cdecl fcn_00554770(void);
+void __cdecl he_StartSimUnfall(void);
 void __cdecl RunSimUnfall(void);
 void __cdecl he_StartAction0x67(void);
 void __cdecl he_RunAction0x67(void);
@@ -84,7 +84,7 @@ void __cdecl he_RunBardeEvent(void);
 void __cdecl he_InitAction0x6d(void);
 void __cdecl he_RunCityPopulationEvent(void);
 void __cdecl he_RunAction0x6f(void);
-void __cdecl fcn_00556e30(void);
+void __cdecl he_InitSimKrankheiten(void);
 void __cdecl RunSimKrankheiten(void);
 void __cdecl he_InitDunkleEcke(void);
 void __cdecl he_RunDunkleEcke(void);
@@ -132,10 +132,10 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(43, (void*) he_AllocPredigt, (void*) he_RunPredigt) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(44, (void*) fcn_0054aa70, (void*) 0x0054ac70) != 0) {
+	if (he_RegisterHandler(44, (void*) he_StartCourtTrial, (void*) 0x0054ac70) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(45, (void*) he_StartAction0x2d, (void*) 0x54b140) != 0) {
+	if (he_RegisterHandler(45, (void*) fcn_0054b130, (void*) 0x54b140) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(46, (void*) he_StartAction0x2e, (void*) he_HandleAction0x2e) != 0) {
@@ -251,7 +251,7 @@ int __cdecl he_RegisterEventHandlers(void)
 		return 1;
 	}
 	he_RegisterActionMeta(101, 0, 0, 1287, -1);
-	if (he_RegisterHandler(102, (void*) fcn_00554770, (void*) RunSimUnfall) != 0) {
+	if (he_RegisterHandler(102, (void*) he_StartSimUnfall, (void*) RunSimUnfall) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(103, (void*) he_StartAction0x67, (void*) he_RunAction0x67) != 0) {
@@ -275,7 +275,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(111, (void*) 0x556a20, (void*) he_RunAction0x6f) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(112, (void*) fcn_00556e30, (void*) RunSimKrankheiten) != 0) {
+	if (he_RegisterHandler(112, (void*) he_InitSimKrankheiten, (void*) RunSimKrankheiten) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(116, (void*) he_InitDunkleEcke, (void*) he_RunDunkleEcke) != 0) {

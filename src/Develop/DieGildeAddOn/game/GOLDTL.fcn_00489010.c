@@ -4,7 +4,7 @@
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 int __cdecl fcn_00502cd0(int, int, int, int);
 int __cdecl gm_LookupWeaponSpec(int);
-int __cdecl fcn_005c7270(int, int);
+int __cdecl gm_CheckBuildingCategoryForItem(int, int);
 void __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 int __cdecl sprintf(char*, char*, ...);
 
@@ -77,7 +77,7 @@ void __cdecl ai_ArmMeisterWorkers(char* meister, char* building)
 		}
 		if (found != 0 && *(int*) (found + 0x28) != 0
 		    && gm_LookupWeaponSpec(*(int*) found) != 0
-		    && fcn_005c7270((int) meister, *(int*) found) != 0) {
+		    && gm_CheckBuildingCategoryForItem((int) meister, *(int*) found) != 0) {
 			sprintf(buf, (char*) 0x67e388, meister + 0x30, p + 0x30,
 			        (char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[*(int*) found] + 1);
 			sprintf(buf, (char*) 0x67e358, *(int*) (p + 4),

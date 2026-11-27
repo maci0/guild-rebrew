@@ -2,7 +2,7 @@
 extern GuiEnt* g_00f8f080;
 extern char* g_772500; extern int d2_ResourceOffset;
 int __cdecl fcn_0046c9e0(void);
-void __cdecl fcn_00469170(int, void**, int*);
+void __cdecl d2_ResolveResourceData(int, void**, int*);
 void __cdecl d2_AddRefcount(int);
 int __cdecl fcn_0047cd10(int, int, void*, int);
 char* __cdecl fcn_0047cb60(void*, unsigned short);
@@ -23,7 +23,7 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 	s = &g_00f8f080[id];
 	if (id >= 0x300)
 		return -1;
-	fcn_00469170(type, &data, &type);
+	d2_ResolveResourceData(type, &data, &type);
 	s->data = data;
 	s->f08 = type;
 	s->kind = *(int*) (g_772500 + type * 0x54 + 0x3c);

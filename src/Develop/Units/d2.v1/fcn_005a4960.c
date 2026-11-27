@@ -2,7 +2,7 @@
 typedef unsigned short u16;
 typedef unsigned int   u32;
 extern int d2_CurrentWindowId, g_14ce8e0, g_774654;
-void* __cdecl fcn_00470820(int a, int b, char* c);
+void* __cdecl d2_LoadForm(int a, int b, char* c);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);
 void __cdecl io_AppendText(void* id, ...);
@@ -33,7 +33,7 @@ void __cdecl fcn_005a4960(char* owner, int id)
         slot[i][1] = -1;
         slot[i][2] = 0;
     }
-    dlg = fcn_00470820(0, 0, "locations\\geldleihe\\geldleihe_kreditaufnehmen");
+    dlg = d2_LoadForm(0, 0, "locations\\geldleihe\\geldleihe_kreditaufnehmen");
     d2_CenterDialogWindows((int)dlg);
     d2_SetForm((int)dlg, 0);
     idx = 972 * d2_CurrentWindowId;

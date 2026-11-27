@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d3_FindSceneObjectAtScreenPoint(float, float, int, int); int __cdecl d3_SetObjectVisible(int, int);
-int __cdecl fcn_0045bad0(int, int, int, int*, int*);
+int __cdecl d3sm_RaycastScreenPoint(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(int, int, int, float*);
 int __cdecl gm_GetEntityControlMask(int, int);
 int* __cdecl gm_GetEquippedCombatGear(int);
@@ -43,7 +43,7 @@ void __cdecl cut_UpdateCombatHoverTarget(void)
 				d3_SetObjectVisible(*(int*) 0x772ea0, 0);
 			}
 		}
-		else if ((fcn_0045bad0(sceneObj, x + 0x1a, y + 0x1a, &x, &y) & 0xff) != 0xffffffff) {
+		else if ((d3sm_RaycastScreenPoint(sceneObj, x + 0x1a, y + 0x1a, &x, &y) & 0xff) != 0xffffffff) {
 			d3_GridPointToWorld(sceneObj, x, y, buf);
 			buf[1] = buf[1] + *(float*) 0x6640cc;
 			g_7725c4 = 0;

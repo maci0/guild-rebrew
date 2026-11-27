@@ -10,7 +10,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
 int __cdecl ch_QueuePlayAnimation(char* e, char* name, int param);
 int __cdecl ch_GenerateNearbyWalkablePoints(int, int, float (*)[4]);
-char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
+char __cdecl d3sm_SampleHeight(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
 void __cdecl he_CharacterBehavior(char* u, int where)
@@ -49,7 +49,7 @@ void __cdecl he_CharacterBehavior(char* u, int where)
 			n = gm_RandomMod(3) + 1;
 			n = ch_GenerateNearbyWalkablePoints(where, n, list);
 			for (i = 0; i < n; i++) {
-				if (fcn_0045b990(world, list[i], &b, &a, &c) != 0) {
+				if (d3sm_SampleHeight(world, list[i], &b, &a, &c) != 0) {
 					r = ch_CreateAction(*(char**) (e + 0x184), 0x2d, b, a, 0);
 					strcpy(r + 0x70, "he_CharacterBehavior");
 				}

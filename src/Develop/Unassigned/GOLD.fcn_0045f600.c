@@ -1,7 +1,7 @@
 void* __cdecl m_alloc(int, int);
 
 /* ADDRESS: GOLD 0x0045f600 */
-void __cdecl fcn_0045f600(unsigned int capacity)
+void __cdecl d3_InitSurfaceCache(unsigned int capacity)
 {
 	*(unsigned int*) 0xfb9080 = capacity;
 	*(int*) 0xfb91b4 = 0;

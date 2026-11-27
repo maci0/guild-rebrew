@@ -19,7 +19,7 @@ extern D2_FORM_RECORD g_1038140[];
 extern int g_14ce86c;
 
 char* __cdecl d3_FindTextureByName(char* name);
-void __cdecl fcn_0045d090(char* p, int a);
+void __cdecl d3_SetTextureFormatAndReload(char* p, int a);
 void __cdecl d2_BlitBufferToSurface(int a, int b, int c, int d, int e, int f, int g, int h);
 
 /* ADDRESS: GOLDTL 0x004713b0 */
@@ -35,7 +35,7 @@ void __cdecl d2_CaptureFormPageTextures(int slot, char* upperName, char* lowerNa
 		strcpy(form->name1, upperName);
 		upperTex = d3_FindTextureByName(upperName);
 		if (upperTex) {
-			fcn_0045d090(upperTex, g_14ce86c);
+			d3_SetTextureFormatAndReload(upperTex, g_14ce86c);
 			d2_BlitBufferToSurface(0, 0, *(int*) (upperTex + 0x64), *(int*) (upperTex + 0x64), *(int*) (upperTex + 0x50), 0, 0, form->h1);
 		}
 	}
@@ -43,7 +43,7 @@ void __cdecl d2_CaptureFormPageTextures(int slot, char* upperName, char* lowerNa
 		strcpy(form->name2, lowerName);
 		lowerTex = d3_FindTextureByName(lowerName);
 		if (lowerTex) {
-			fcn_0045d090(lowerTex, g_14ce86c);
+			d3_SetTextureFormatAndReload(lowerTex, g_14ce86c);
 			d2_BlitBufferToSurface(0, 0, *(int*) (lowerTex + 0x64), *(int*) (form->h2 + 8), *(int*) (lowerTex + 0x50), 0, *(int*) (upperTex + 0x64), (int) form->h2);
 		}
 	}

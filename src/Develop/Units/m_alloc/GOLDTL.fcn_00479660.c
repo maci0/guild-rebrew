@@ -4,7 +4,7 @@ extern char s_67da58[];
 
 extern void* __cdecl m_alloc(int, char*);
 extern void __cdecl m_FreeTracked(void*);
-extern void* __cdecl fcn_00479620(char*, int);
+extern void* __cdecl shp_ConvertTo16(char*, int);
 extern void __cdecl d2_AppendShapeToBank(void*, void*);
 
 
@@ -32,7 +32,7 @@ void* __cdecl fcn_00479660(char* bank, int mode, int keepOriginal)
 		*(unsigned char*) (n + 0x34) = 1;
 		*(unsigned short*) (n + 0x2a) = 0;
 		for (total = 0; total < *(unsigned short*) (bank + 0x2a); total++) {
-			p = (char*) fcn_00479620(bank + ((int*) (bank + 0x45))[total], 1);
+			p = (char*) shp_ConvertTo16(bank + ((int*) (bank + 0x45))[total], 1);
 			d2_AppendShapeToBank(p, n);
 			if (p)
 				m_FreeTracked(p);
@@ -54,7 +54,7 @@ void* __cdecl fcn_00479660(char* bank, int mode, int keepOriginal)
 	*(unsigned char*) (n + 0x34) = 1;
 	*(unsigned short*) (n + 0x2a) = 0;
 	for (total = 0; total < *(unsigned short*) (bank + 0x2a); total++) {
-		p = (char*) fcn_00479620(bank + ((int*) (bank + 0x45))[total], 1);
+		p = (char*) shp_ConvertTo16(bank + ((int*) (bank + 0x45))[total], 1);
 		d2_AppendShapeToBank(p, n);
 		if (p)
 			m_FreeTracked(p);

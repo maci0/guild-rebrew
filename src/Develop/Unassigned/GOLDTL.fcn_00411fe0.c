@@ -7,7 +7,7 @@ extern short g_14ce8c2;
 extern int g_14ce8e8;
 extern int g_6b5c88;
 void __cdecl io_SwapMouseButtons(void);
-void __cdecl fcn_00411b80(void);
+void __cdecl io_UpdateMouseClickState(void);
 
 typedef struct {
 	int dwOfs;
@@ -26,7 +26,7 @@ typedef struct {
  * 12/13/14 latch the three buttons. The cursor is clamped to the screen rect
  * and the whole state is published afterwards. */
 /* ADDRESS: GOLDTL 0x00411fe0 */
-void __cdecl fcn_00411fe0(void)
+void __cdecl io_PollMouseInput(void)
 {
 	DWORD count;
 	DI_OBJDATA_411FE0 ev;
@@ -73,7 +73,7 @@ void __cdecl fcn_00411fe0(void)
 			}
 			g_14ce924 += (short) v;
 			((short*) g_14ce920)[5] = (short) v;
-			fcn_00411b80();
+			io_UpdateMouseClickState();
 			break;
 		case 12:
 			v = ev.dwData;
@@ -84,13 +84,13 @@ void __cdecl fcn_00411fe0(void)
 					g_14ce920[6] = 1;
 				}
 				io_SwapMouseButtons();
-				fcn_00411b80();
+				io_UpdateMouseClickState();
 			}
 			if (!(v & 0x80)) {
 				g_14ce920[3] = 1;
 				g_14ce920[4] = 0;
 				io_SwapMouseButtons();
-				fcn_00411b80();
+				io_UpdateMouseClickState();
 			}
 			break;
 		case 13:
@@ -100,13 +100,13 @@ void __cdecl fcn_00411fe0(void)
 				g_14ce920[8] = 0;
 				g_14ce920[11] = 1;
 				io_SwapMouseButtons();
-				fcn_00411b80();
+				io_UpdateMouseClickState();
 			}
 			if (!(v & 0x80)) {
 				g_14ce920[8] = 1;
 				g_14ce920[9] = 0;
 				io_SwapMouseButtons();
-				fcn_00411b80();
+				io_UpdateMouseClickState();
 			}
 			break;
 		case 14:
@@ -116,13 +116,13 @@ void __cdecl fcn_00411fe0(void)
 				g_14ce920[12] = 0;
 				g_14ce920[15] = 1;
 				io_SwapMouseButtons();
-				fcn_00411b80();
+				io_UpdateMouseClickState();
 			}
 			if (!(v & 0x80)) {
 				g_14ce920[12] = 1;
 				g_14ce920[13] = 0;
 				io_SwapMouseButtons();
-				fcn_00411b80();
+				io_UpdateMouseClickState();
 			}
 			break;
 		}
@@ -150,11 +150,11 @@ void __cdecl fcn_00411fe0(void)
 			pt.y = g_14ce8c2;
 			ClientToScreen(g_14ce89c, &pt);
 			SetCursorPos(pt.x, pt.y);
-			fcn_00411b80();
+			io_UpdateMouseClickState();
 			return;
 		}
 		*(short*) g_14ce920 = (short) MAX411FE0(g_6b5c80, MIN411FE0(pt.x, d2_MouseRightBoundary));
 		g_14ce922 = (short) MAX411FE0(d2_MouseTopBoundary, MIN411FE0(pt.y, d2_MouseBottomBoundary));
 	}
-	fcn_00411b80();
+	io_UpdateMouseClickState();
 }

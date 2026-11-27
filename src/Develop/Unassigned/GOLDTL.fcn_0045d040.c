@@ -5,7 +5,7 @@ extern unsigned long g_14ce728;
 void __cdecl fcn_0045ce90(char* a);
 
 /* ADDRESS: GOLDTL 0x0045d040 */
-char __cdecl fcn_0045d040(char* a)
+char __cdecl d3_ReloadTexture(char* a)
 {
 	void** t;
 

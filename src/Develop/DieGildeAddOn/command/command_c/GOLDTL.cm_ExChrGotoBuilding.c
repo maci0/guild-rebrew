@@ -31,7 +31,7 @@ char* __cdecl ch_UseGate(char*, char*, char*, int, int, int);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 char* __cdecl fcn_004456e0(char*, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
+char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 char* __cdecl ch_CreateAction(char*, int, ...);
 char* __cdecl he_PickRandomSceneObject(char*);
 char* __cdecl strupr(char*);
@@ -124,7 +124,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			if (u != 0) {
 				m = g_1043370[k * 247];
 				d3_TransformPoint(u, u + 0x4c, pos);
-				if (fcn_0045b990(m, pos, &col, &row, &height) != 0) {
+				if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
 					r = ch_CreateAction(o, 0x2d, col, row, k);
 					if (r != 0)
 						strcpy(r + 0x70, e + 0x3d);
@@ -169,7 +169,7 @@ int __cdecl cm_ExChrGotoBuilding(char* e, char* out)
 			if (u != 0) {
 				m = g_1043370[k * 247];
 				d3_TransformPoint(u, u + 0x4c, pos);
-				if (fcn_0045b990(m, pos, &col, &row, &height) != 0) {
+				if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
 					r = ch_CreateAction(o, 0x2d, col, row, k);
 					if (r != 0)
 						strcpy(r + 0x70, e + 0x3d);
@@ -227,7 +227,7 @@ after:
 	if (u != 0) {
 		m = g_1043370[0];
 		d3_TransformPoint(u, u + 0x4c, pos);
-		if (fcn_0045b990(m, pos, &col, &row, &height) != 0) {
+		if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
 			r = ch_CreateAction(o, 0x2d, col, row, 0);
 			if (r != 0)
 				strcpy(r + 0x70, e + 0x3d);
@@ -277,7 +277,7 @@ b3:
 		if (u != 0) {
 			m = g_1043370[0];
 			d3_TransformPoint(u, u + 0x4c, pos);
-			if (fcn_0045b990(m, pos, &col, &row, &height) != 0) {
+			if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
 				r = ch_CreateAction(o, 0x2d, col, row, 0);
 				if (r != 0)
 					strcpy(r + 0x70, e + 0x3d);
@@ -334,7 +334,7 @@ b3:
 			goto saved_exit;
 		m = g_1043370[k * 247];
 		d3_TransformPoint(u, u + 0x4c, pos);
-		if (fcn_0045b990(m, pos, &col, &row, &height) != 0) {
+		if (d3sm_SampleHeight(m, pos, &col, &row, &height) != 0) {
 			r = ch_CreateAction(o, 0x2d, col, row, k);
 			if (r != 0)
 				strcpy(r + 0x70, e + 0x3d);

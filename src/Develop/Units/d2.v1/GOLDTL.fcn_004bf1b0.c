@@ -19,7 +19,7 @@ extern int g_10058a0[];
 
 void* __cdecl gm_SearchTable67(int);
 char* __cdecl gm_FindRecordById(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetGroupVisibility(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
@@ -38,7 +38,7 @@ void __cdecl d2_SetElementValue(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl fcn_004bf000(unsigned short*, int, int, int, int, int, int, int*);
 void __cdecl d2_DestroyElementTriple(int*);
-void __cdecl fcn_004bf1a0(char*);
+void __cdecl d2_ResetElementTriple(char*);
 int __cdecl m_UnlinkAndFreeNode(char*);
 int __cdecl rt_CountRoutePoints(char*);
 void __cdecl fcn_004be360(void);
@@ -51,7 +51,7 @@ int __cdecl d2_FindRadioSlotByValue(int*);
 void __cdecl d2_ClearRoutePointSlot(int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x004bf1b0 */
-void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
+void __cdecl d2_EditRoutePointDialog(int* route_point, int* uiContext)
 {
 	int counts[3] = { 1, 2, 3 };
 	int ids[2];
@@ -77,14 +77,14 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 
 	cur = 0;
 	node = 0;
-	tbl = (char*) gm_SearchTable67(a0[1]);
-	rec = gm_FindRecordById(a0[0]);
+	tbl = (char*) gm_SearchTable67(route_point[1]);
+	rec = gm_FindRecordById(route_point[0]);
 	if (rec == 0 || tbl == 0) {
 		return;
 	}
 	d2_SetGroupVisibility(uiContext[0], 0);
 	types = (char*)&((TradeProto*)lpGebaeudePROT)[*(unsigned char*)tbl];
-	h = fcn_00470820(0, 0, s_681718);
+	h = d2_LoadForm(0, 0, s_681718);
 	d2_CenterDialogWindows(h);
 	first = d2_GetFormWindow(h, 2);
 	d2_GetFormWindow(h, 1);
@@ -105,8 +105,8 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 	labels[1] = -1;
 	labels[2] = -1;
 	for (k = 0; k < 3; k++) {
-		fcn_004bf1a0((char*) &nodeA[k][0]);
-		fcn_004bf1a0((char*) &nodeB[k][0]);
+		d2_ResetElementTriple((char*) &nodeA[k][0]);
+		d2_ResetElementTriple((char*) &nodeB[k][0]);
 	}
 	d2_AddElementToWindow(0x6e, 0x1a, *(unsigned short*) rec + 0x4ae, first);
 	i = d2_ShowTxt(0x6e, 2, g_14b5e88, first);
@@ -136,7 +136,7 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 			((D2_CONTROL_TL*) (g_1015ea0))[labels[i]].flags_1d0 = 3;
 		}
 	}
-	while (main_RunFrameLoop(fcn_004bf1b0, 0x657c7) != 0) {
+	while (main_RunFrameLoop(d2_EditRoutePointDialog, 0x657c7) != 0) {
 		if (g_14ce8e0 != 0 || (g_100f1dc != -1 && d2_CurrentElementId == selA)) {
 			g_774654 = 1;
 		}
@@ -149,9 +149,9 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 		}
 		for (i = 0; i < 3; i++) {
 			n = nodeA[i][1];
-			if (n == -1 && a0[2 + i * 2] != 0) {
-				fcn_004bf000((unsigned short*) rec, (int) item, a0[2 + i * 2], i, 0, 0, first, &nodeA[i][0]);
-				k = a0[3 + i * 2];
+			if (n == -1 && route_point[2 + i * 2] != 0) {
+				fcn_004bf000((unsigned short*) rec, (int) item, route_point[2 + i * 2], i, 0, 0, first, &nodeA[i][0]);
+				k = route_point[3 + i * 2];
 				if (k < 1) {
 					k = 1;
 				}
@@ -164,9 +164,9 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 		}
 		for (i = 0; i < 3; i++) {
 			n = nodeB[i][1];
-			if (n == -1 && a0[8 + i * 2] != 0) {
-				fcn_004bf000((unsigned short*) rec, (int) item, a0[8 + i * 2], i, 0, 0x6e, first, &nodeB[i][0]);
-				k = a0[9 + i * 2];
+			if (n == -1 && route_point[8 + i * 2] != 0) {
+				fcn_004bf000((unsigned short*) rec, (int) item, route_point[8 + i * 2], i, 0, 0x6e, first, &nodeB[i][0]);
+				k = route_point[9 + i * 2];
 				if (k < 1) {
 					k = 1;
 				}
@@ -180,14 +180,14 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 		if (g_100f1dc != -1) {
 			for (i = 0; i < 3; i++) {
 				if (icons[i] != -1 && icons[i] == d2_CurrentElementId) {
-					cur = &a0[2 + i * 2];
+					cur = &route_point[2 + i * 2];
 					node = &nodeA[i][0];
 					kind = 1;
 				}
 			}
 			for (i = 0; i < 3; i++) {
 				if (labels[i] != -1 && labels[i] == d2_CurrentElementId) {
-					cur = &a0[8 + i * 2];
+					cur = &route_point[8 + i * 2];
 					node = &nodeB[i][0];
 					kind = 2;
 				}
@@ -214,16 +214,16 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 				cur = 0;
 			}
 			if (d2_CurrentElementId == selB) {
-				k = d2_FindRadioSlotByValue(a0);
+				k = d2_FindRadioSlotByValue(route_point);
 				if (k != -1) {
 					d2_ClearRoutePointSlot(k);
 				}
 				fcn_004be360();
 				fcn_004be380();
-				if (a0 == (int*) g_772908) {
-					g_772908 = a0[0xf];
+				if (route_point == (int*) g_772908) {
+					g_772908 = route_point[0xf];
 				}
-				m_UnlinkAndFreeNode((char*) a0);
+				m_UnlinkAndFreeNode((char*) route_point);
 				for (i = 0; i < 8; i++) {
 					if (g_10058a0[i * 2] != -1) {
 						d2_ClearRoutePointSlot(i);
@@ -231,25 +231,25 @@ void __cdecl fcn_004bf1b0(int* a0, int* uiContext)
 				}
 				g_772900 = 0;
 				fcn_004be360();
-				a0 = (int*) g_772908;
-				while (a0 != 0) {
-					d2_AddRoutePointMarker(uiContext, rec, g_772908, (int) a0);
-					a0 = (int*) a0[0xf];
+				route_point = (int*) g_772908;
+				while (route_point != 0) {
+					d2_AddRoutePointMarker(uiContext, rec, g_772908, (int) route_point);
+					route_point = (int*) route_point[0xf];
 				}
 				d2_SelectRadioGroup(g_6816d8, 0);
 				g_774654 = 1;
 			}
 		}
 	}
-	if (a0 != 0) {
+	if (route_point != 0) {
 		for (i = 0; i < 3; i++) {
 			if (nodeA[i][1] != -1) {
-				*(int*) ((char*) a0 + 0xc + i * 8) = d2_GetControlValue(nodeA[i][1]);
+				*(int*) ((char*) route_point + 0xc + i * 8) = d2_GetControlValue(nodeA[i][1]);
 			}
 		}
 		for (i = 0; i < 3; i++) {
 			if (nodeB[i][1] != -1) {
-				*(int*) ((char*) a0 + 0x24 + i * 8) = d2_GetControlValue(nodeB[i][1]);
+				*(int*) ((char*) route_point + 0x24 + i * 8) = d2_GetControlValue(nodeB[i][1]);
 			}
 		}
 	}

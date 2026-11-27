@@ -46,7 +46,7 @@ int __cdecl he_GetActiveKrediteByBorrower(int, char*, int*);
 int __cdecl fcn_0050d2a0(int);
 int __cdecl amt_ProcessPrivilegeIncome(unsigned short, int, int*);
 int __cdecl gm_CalcEntityTaxSlots(unsigned short, int*, int);
-void __cdecl fcn_005459a0(int);
+void __cdecl d2_ToggleActionPopupBar(int);
 void __cdecl d2_ClearSurface(int);
 void __cdecl d2_SetBackdropResource(int);
 void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
@@ -295,7 +295,7 @@ void __cdecl fcn_00541620(void)
 	}
 	n = fcn_0050d2a0((((unsigned short)g_774970) & 0xffff) * 0x21c + (int) (char*) g_7f4ca0);
 	io_AppendText(0x2029, ((n - f1e8) - e1ec) - runningTotal);
-	fcn_005459a0(0xffff);
+	d2_ToggleActionPopupBar(0xffff);
 	d2_ClearSurface(g_77250c);
 	d2_SetBackdropResource(0x79d);
 	g_774978 = 1;

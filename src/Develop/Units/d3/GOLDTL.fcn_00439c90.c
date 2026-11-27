@@ -17,7 +17,7 @@ typedef struct Slot {
 typedef void (__cdecl* fcn_00439c90_f)(char*);
 
 void __cdecl fcn_0043a3f0(int, char*, Col);
-void __cdecl fcn_0045bfb0(int);
+void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 #include "Develop/Units/d3/d3_animation.h"
 
@@ -39,7 +39,7 @@ void __cdecl fcn_00439c90(char* o)
 		if (*(char**) (o + 0x318) != 0) {
 			for (i = 0; i < *(int*) (*(char**) (o + 0x318) + 0x1e4); i++) {
 				if ((*(int**) (o + 0x31c))[i] != 0) {
-					fcn_0045bfb0((*(int**) (o + 0x31c))[i]);
+					d3_ReleaseTexture((*(int**) (o + 0x31c))[i]);
 				}
 			}
 		}

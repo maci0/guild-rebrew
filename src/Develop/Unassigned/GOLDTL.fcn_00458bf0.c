@@ -43,11 +43,11 @@ extern char* g_1041d00;
 Mat* __stdcall fcn_005ec410(Mat*, float, float, float);
 Mat* __stdcall fcn_005eb970(Mat*, Mat*, Mat*);
 void __cdecl fcn_004372d0(int, int, int, int, int);
-void __cdecl fcn_00458d20(Ent*);
+void __cdecl d3_DrawObjectShadowPatches(Ent*);
 
 
 /* ADDRESS: GOLDTL 0x00458bf0 */
-void __cdecl fcn_00458bf0(Ent* n)
+void __cdecl d3_RenderShadowPatches(Ent* n)
 {
 	Mat m;
 	Ent* e;
@@ -63,12 +63,12 @@ void __cdecl fcn_00458bf0(Ent* n)
 	}
 	for (e = ((Ent*)g_6b86ec); e != 0; e = e->next) {
 		if (e->flags & 0x80) {
-			fcn_00458d20(e);
+			d3_DrawObjectShadowPatches(e);
 		}
 	}
 	for (e = ((Ent*)g_1041d00); e != 0; e = e->next) {
 		if (e->flags & 0x80) {
-			fcn_00458d20(e);
+			d3_DrawObjectShadowPatches(e);
 		}
 	}
 	if (!(*(char *)&g_6b89bc)) {

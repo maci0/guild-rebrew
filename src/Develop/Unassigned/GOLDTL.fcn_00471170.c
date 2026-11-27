@@ -43,7 +43,7 @@ extern Win_1015f40 g_1015f40[0x60];
 extern D2_FORM_RECORD g_1038140[];
 extern int g_14ce86c;
 
-int __cdecl fcn_00470820(int a, int b, int c);
+int __cdecl d2_LoadForm(int a, int b, int c);
 int __cdecl fcn_004770a0(D2_FORM_TEX_DESC* d, int flags);
 
 /* ADDRESS: GOLDTL 0x00471170 */
@@ -56,7 +56,7 @@ int __cdecl d2_CreateRenderableForm(int x, int y, int formName)
 	D2_FORM_WIN* w;
 	D2_FORM_TEX_DESC d;
 
-	id = fcn_00470820(x, y, formName);
+	id = d2_LoadForm(x, y, formName);
 	if (id != 0) {
 		p = &((D2_FORM_PAGE*)g_1038140)[id];
 		for (i = 0; i < p->count; i++) {

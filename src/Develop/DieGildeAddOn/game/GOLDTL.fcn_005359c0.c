@@ -14,7 +14,7 @@ typedef struct {
 // SIZE 0x18
 
 char* __cdecl gm_LookupEntityRecordById(int);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 int __cdecl ai_StartGraveyardOwner(int, char*, int, Blk24*, Blk24*);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl gm_ComputeCannonShot(char*, char*, int);
@@ -64,11 +64,11 @@ int __cdecl gm_DispatchDebugActionKeys(void)
 	case 0x25:
 		e = gm_LookupEntityRecordById(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 0x60));
 		if (e != 0) {
-			fcn_004ff210(*(unsigned short*) e, -1000);
+			gm_ApplyEntityHealthDelta(*(unsigned short*) e, -1000);
 		} else {
 			e = gm_LookupEntityRecordById(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 0x60));
 			if (e != 0) {
-				fcn_004ff210(*(unsigned short*) e, -1000);
+				gm_ApplyEntityHealthDelta(*(unsigned short*) e, -1000);
 			}
 		}
 		return;

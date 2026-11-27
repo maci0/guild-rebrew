@@ -21,7 +21,7 @@ extern char* g_104049c;
 extern unsigned int g_10404a0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-Tex* __cdecl fcn_0045c290(Col c, int* out)
+Tex* __cdecl d3_AllocTextureSlot(Col c, int* out)
 {
 	Tex* t;
 	int i;

@@ -17,7 +17,7 @@ typedef struct {
 typedef struct {
 	char pad0[0x18];
 	int* items;
-} fcn_0047cba0_set;
+} D2_SPRITE_SET;
 
 extern int d3_CurrentContextIndex;
 extern int g_6a2be4;
@@ -48,20 +48,20 @@ extern char* g_14a79c0[];
 
 void __cdecl d2_DestroyElement(int id);
 void __cdecl d2_LoadBuildingGroundplan(void);
-int __cdecl fcn_00465950(const char* name);
+int __cdecl d2_FindResourceByName(const char* name);
 void* __cdecl d2_GetResourceData(int idx);
-int __cdecl fcn_0047cba0(int x, int y, int a3, fcn_0047cba0_set* s,
+int __cdecl d2_DrawSpriteFromSet(int x, int y, int a3, D2_SPRITE_SET* s,
 	int idx);
 void* __cdecl d2_QueueTexturedQuad(int x, int y, int w, int h, int tex,
 	Rect47bf* src);
 int __cdecl d2_LockSurface(void* s);
 void __cdecl d2_ReadSurfacePixel(int x, int y, void* s, unsigned char* dst);
-int __cdecl fcn_00475780(char* a1, char* a2);
+int __cdecl d2_CompareRgb(char* a1, char* a2);
 int __cdecl d2_UnlockSurface(void* o);
 unsigned short* __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d);
-int __cdecl fcn_00506380(int a, int b, void* c, int d);
+int __cdecl gm_GetEntityUiFlags(int a, int b, void* c, int d);
 void __cdecl gm_ChangeBuildingRoom(int n, int v);
 void __cdecl d2_SetMouseTooltip(char* a);
 void __cdecl d2_EnterBuildingObjekt(int a, int b, int c);
@@ -116,12 +116,12 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 		} while (c);
 		strupr(name);
 		sprintf(path, "_STADTWAPPEN_%s", name);
-		v6 = fcn_00465950(path);
+		v6 = d2_FindResourceByName(path);
 		if (v6 == -1)
-			v6 = fcn_00465950("_STADTWAPPEN_BERLIN");
+			v6 = d2_FindResourceByName("_STADTWAPPEN_BERLIN");
 		v7 = (int) d2_GetResourceData(v6);
-		fcn_0047cba0(g_1040494 - 0x6e, 0x5b, g_77250c,
-			(fcn_0047cba0_set*) v7, d2_ResourceOffset + 1);
+		d2_DrawSpriteFromSet(g_1040494 - 0x6e, 0x5b, g_77250c,
+			(D2_SPRITE_SET*) v7, d2_ResourceOffset + 1);
 	} else {
 		if (g_774684) {
 			r.left = 0;
@@ -141,7 +141,7 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 				v6 = 0;
 				q = (char*) 0x6a24ec;
 				do {
-					if (!fcn_00475780(key, q))
+					if (!d2_CompareRgb(key, q))
 						break;
 					q += 3;
 					v6++;
@@ -188,7 +188,7 @@ void __cdecl fcn_005279f0(unsigned int inputFlags)
 								&& d2_DispatchTutorialEvent(0x19, (int) g_7746c4, 0,
 									(int) *v8) == 1
 								&& g_7f4e51[g_774970 * 0x21c] <= 0) {
-								if (fcn_00506380(g_774970,
+								if (gm_GetEntityUiFlags(g_774970,
 									(int) g_7746c4, v8, 0) & 0x4000)
 									gm_ChangeBuildingRoom(-1, (int) *v8);
 								goto label_527db2;
@@ -225,7 +225,7 @@ label_527db2:
 								&& d2_DispatchTutorialEvent(0x19, (int) g_7746c8, 0,
 									(int) *v8) == 1))
 								&& g_7f4e51[g_774970 * 0x21c] <= 0) {
-								if (!(fcn_00506380(g_774970,
+								if (!(gm_GetEntityUiFlags(g_774970,
 									(int) g_7746c8, v8, 0) & 0x4000))
 									goto done;
 								d2_EnterBuildingObjekt((int) g_7746c8,

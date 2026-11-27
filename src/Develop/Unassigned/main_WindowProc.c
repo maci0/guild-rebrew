@@ -9,7 +9,7 @@ extern char g_774944;
 extern int g_77250c;
 extern volatile int g_6b7fc0;
 
-int __cdecl fcn_0041baa0(void);
+int __cdecl d3_TestCooperativeLevel(void);
 void __cdecl fcn_00418640(void);
 void __cdecl d3_CreateRenderVertexBuffers(void);
 void __cdecl io_AcquireKeyboard(int);
@@ -21,10 +21,10 @@ void __cdecl fcn_0043b360(void);
 void __cdecl d3_ReleaseBackBuffer(void);
 void __cdecl d3_AcquireBackBuffer(void);
 void __cdecl d2_ClearSurface(int);
-void __cdecl fcn_004774a0(void);
-void __cdecl fcn_004774b0(void);
+void __cdecl d2_OnLostRenderToSurface(void);
+void __cdecl d2_ResetRenderToSurface(void);
 void __cdecl fcn_0047ce70(void);
-void __cdecl fcn_0047ce80(void);
+void __cdecl d2_RebuildQuadVertexBuffer(void);
 
 #define WM_PRIVATE_7E7 0x7e7
 #define WM_MOUSEHWHEEL_VALUE 0x20a
@@ -62,27 +62,27 @@ LRESULT CALLBACK main_WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 				goto exit0;
 			if (!g_774944)
 				goto cleared;
-			hr = fcn_0041baa0();
+			hr = d3_TestCooperativeLevel();
 			if (hr == E_FAIL)
 				goto resume;
-			hr = fcn_0041baa0();
+			hr = d3_TestCooperativeLevel();
 			if (hr == 0)
 				goto resume;
-			hr = fcn_0041baa0();
+			hr = d3_TestCooperativeLevel();
 			if (hr == (int) D3DERR_DEVICELOST_VALUE)
 				goto teardown;
 			do {
 				Sleep(250);
-				hr = fcn_0041baa0();
+				hr = d3_TestCooperativeLevel();
 			} while (hr != (int) D3DERR_DEVICELOST_VALUE);
 		teardown:
 			fcn_00418640();
 			d3_ReleaseBackBuffer();
-			fcn_004774a0();
+			d2_OnLostRenderToSurface();
 			fcn_0047ce70();
 			fcn_0043b360();
-			fcn_0047ce80();
-			fcn_004774b0();
+			d2_RebuildQuadVertexBuffer();
+			d2_ResetRenderToSurface();
 			d3_AcquireBackBuffer();
 			d3_CreateRenderVertexBuffers();
 		resume:

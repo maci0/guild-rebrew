@@ -2,10 +2,10 @@
 
 void __cdecl fcn_0043f9d0(int);
 
-void __cdecl d3_ReloadFloorTextures(int a1)
+void __cdecl d3_ReloadFloorTextures(int floor)
 {
-	if (a1 == 0) {
+	if (floor == 0) {
 		return;
 	}
-	fcn_0043f9d0(a1);
+	fcn_0043f9d0(floor);
 }

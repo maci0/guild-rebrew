@@ -14,7 +14,7 @@ extern unsigned char* g_7746c8;
 extern char* g_7e2aa0;
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_SetForm(int, int);
@@ -37,7 +37,7 @@ int __cdecl d2_OpenObjektUpgradeTooltip(int id)
 	if ((*(char *)&((OBJECT_PROTOTYPE *)lpObjektePROT)[id].kind) == 0x1d) {
 		return -1;
 	}
-	dlg = fcn_00470820(0, 0, "ToolTip\\ToolTip_Objekte_Upgrades");
+	dlg = d2_LoadForm(0, 0, "ToolTip\\ToolTip_Objekte_Upgrades");
 	d2_CenterDialogWindows(dlg);
 	p = &((D2_WIN*)g_1015f40)[*(int*) (((char*)g_1038140) + dlg * 700 + 4)];
 	if (p->left + p->width > g_1040494 - 16) {

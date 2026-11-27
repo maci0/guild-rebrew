@@ -6,7 +6,7 @@ extern int __cdecl fcn_0064ebe4(void*, int, int, void*);
 extern int __cdecl fcn_0064e1fd(void*);
 
 /* ADDRESS: GOLDTL 0x004758b0 */
-int __cdecl fcn_004758b0(char* name, unsigned char* pix)
+int __cdecl d2_ReadBmp24Pixels(char* name, unsigned char* pix)
 {
 	unsigned char hdr[0x28];
 	unsigned char* p;

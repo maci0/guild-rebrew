@@ -93,5 +93,7 @@ separate. Never hand-edit managed stores or put STATUS in C.
 
 ## Atomicity
 
-Source rewrites use atomic replacement. Managed stores use locked atomic writes
-and return to mode `0444`. Atomicity is per file/store, not a multi-file transaction.
+Source rewrites use atomic replacement. Local TOML and SQLite stores use
+locked writes and return to mode `0444`. PostgreSQL uses database permissions.
+Atomicity covers each published file or store. Operations spanning several
+files need their own coordination.

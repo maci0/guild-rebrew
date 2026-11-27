@@ -39,9 +39,9 @@ typedef struct {
 } Ent;
 
 void __cdecl d3_PackTextureFlags(Tex*, int*, int*);
-Tex* __cdecl fcn_0045c5b0(Cell*, int, int, int);
+Tex* __cdecl d3_LoadOrReuseTexture(Cell*, int, int, int);
 void __cdecl fcn_0045ce90(Tex*);
-void __cdecl fcn_0045bfb0(Tex*);
+void __cdecl d3_ReleaseTexture(Tex*);
 
 
 /* ADDRESS: GOLDTL 0x00442a30 */
@@ -74,14 +74,14 @@ char __cdecl SelectTextureSet(Ent* e, Obj* o, unsigned char lod, char refresh)
 				t = o->tex[i];
 				if (t != 0) {
 					d3_PackTextureFlags(t, &v18, &v14);
-					r = fcn_0045c5b0(d, t->x58, v18, v14);
+					r = d3_LoadOrReuseTexture(d, t->x58, v18, v14);
 					if (r != 0) {
 						if (refresh) {
 							fcn_0045ce90(r);
 						}
 						o->tex[i] = r;
 						o->tex[m->count + i] = r;
-						fcn_0045bfb0(t);
+						d3_ReleaseTexture(t);
 					} else {
 						sprintf(buf, "SelectTextureSet: cannot replace %s with %s (new not found) in %s", t, d, e);
 						ok = 0;

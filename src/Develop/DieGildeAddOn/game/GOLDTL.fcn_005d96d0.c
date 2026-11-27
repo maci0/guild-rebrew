@@ -6,7 +6,7 @@
 void __cdecl cm_RequestModifyHealth(int, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl gm_ApplyMiracleEffect(char*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -30,7 +30,7 @@ int __cdecl gm_HandleWunder(char* e)
 	}
 	if (e[2] == 6) {
 		r = 0;
-		dlg = fcn_00470820(0, 0, "privillegien\\wunder");
+		dlg = d2_LoadForm(0, 0, "privillegien\\wunder");
 		d2_SetOverlayAnimation(0, 0);
 		d2_CenterDialogWindows(dlg);
 		d2_SetForm(dlg, 1);

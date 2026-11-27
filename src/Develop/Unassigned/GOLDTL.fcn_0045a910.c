@@ -5,7 +5,7 @@ void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int flag);
 /* Clamps eight 0x50-byte rows of the corner buffer against the first
  * three floats: low corner to the minimum, +0x10 corner to the maximum. */
 /* ADDRESS: GOLDTL 0x0045a910 */
-char __cdecl fcn_0045a910(char* object, float* bounds)
+char __cdecl d3sm_AccumulateObjectBounds(char* object, float* bounds)
 {
 	unsigned int v4;
 	char* m;

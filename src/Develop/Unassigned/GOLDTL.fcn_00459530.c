@@ -1,14 +1,14 @@
 #include <math.h>
 
 #pragma pack(push, 1)
-typedef struct Node459 {
+typedef struct D3_SKY_LAYER_NODE {
 	char pad0[4];
 	float f4;
 	float f8;
 	float fc;
 	float f10;
 	char pad14[0x0c];
-	struct Node459* next;
+	struct D3_SKY_LAYER_NODE* next;
 	char pad24[2];
 	unsigned char flags26;
 	char pad27;
@@ -16,35 +16,35 @@ typedef struct Node459 {
 	unsigned char to29;
 	unsigned char cur2a;
 	char pad2b[5];
-} Node459;
+} D3_SKY_LAYER_NODE;
 // SIZE 0x30
 
-typedef struct Ent459 {
+typedef struct D3_SKY_DOME_STATE {
 	char* p0;
 	int f4;
 	char pad8[4];
 	int f_c;
 	char pade[0x14];
-	Node459* node;
+	D3_SKY_LAYER_NODE* node;
 	unsigned long last;
 	float dt;
-} Ent459;
+} D3_SKY_DOME_STATE;
 
-typedef struct Dev459 Dev459;
+typedef struct D3_SKY_DEV D3_SKY_DEV;
 
-typedef struct Vtbl459 {
+typedef struct D3_SKY_DEV_VTBL {
 	void* m[50];
-	int (__stdcall* SetRenderState)(Dev459*, unsigned int, unsigned int);
+	int (__stdcall* SetRenderState)(D3_SKY_DEV*, unsigned int, unsigned int);
 	void* m2[0x130 / 4 - 51];
-	int (__stdcall* SetVertexShader)(Dev459*, unsigned int);
+	int (__stdcall* SetVertexShader)(D3_SKY_DEV*, unsigned int);
 	void* m3[0x14c / 4 - 0x134 / 4];
-	int (__stdcall* SetStreamSource)(Dev459*, unsigned int, void*, unsigned int);
+	int (__stdcall* SetStreamSource)(D3_SKY_DEV*, unsigned int, void*, unsigned int);
 	void* m84;
-	int (__stdcall* fn154)(Dev459*, unsigned int, unsigned int);
-} Vtbl459;
+	int (__stdcall* fn154)(D3_SKY_DEV*, unsigned int, unsigned int);
+} D3_SKY_DEV_VTBL;
 
-struct Dev459 {
-	Vtbl459* vtbl;
+struct D3_SKY_DEV {
+	D3_SKY_DEV_VTBL* vtbl;
 };
 #pragma pack(pop)
 
@@ -53,14 +53,14 @@ extern int g_6b86d4;
 extern unsigned char g_67a2ac;
 extern unsigned char g_6b7ff9;
 extern volatile int g_6b7fac;
-int __cdecl fcn_00459050(Ent459*);
-void __cdecl fcn_00458e00(Ent459*, Node459*);
+int __cdecl d3_RebuildSkyDomeMesh(D3_SKY_DOME_STATE*);
+void __cdecl d3_RenderSkyLayer(D3_SKY_DOME_STATE*, D3_SKY_LAYER_NODE*);
 
 /* ADDRESS: GOLDTL 0x00459530 */
-char __cdecl fcn_00459530(Ent459* e)
+char __cdecl d3_UpdateAndRenderSky(D3_SKY_DOME_STATE* e)
 {
-	Node459* n;
-	Node459* found;
+	D3_SKY_LAYER_NODE* n;
+	D3_SKY_LAYER_NODE* found;
 	float v;
 	int from;
 	int to;
@@ -69,7 +69,7 @@ char __cdecl fcn_00459530(Ent459* e)
 
 	if (e) {
 	if (e->f_c == -1) {
-		fcn_00459050(e);
+		d3_RebuildSkyDomeMesh(e);
 	}
 	e->dt = (float) ((unsigned long) g_6b7fac - e->last);
 	e->last = (unsigned long) g_6b7fac;
@@ -99,23 +99,23 @@ char __cdecl fcn_00459530(Ent459* e)
 		}
 	}
 	if (found && e->f_c > 0 && g_6b86d4 <= 1) {
-		((Dev459*) g_6b5de0)->vtbl->SetRenderState((Dev459*) g_6b5de0, 0x88, 0);
-		((Dev459*) g_6b5de0)->vtbl->SetRenderState((Dev459*) g_6b5de0, 7, 0);
-		((Dev459*) g_6b5de0)->vtbl->SetVertexShader((Dev459*) g_6b5de0, 0x1c4);
-		((Dev459*) g_6b5de0)->vtbl->SetStreamSource((Dev459*) g_6b5de0, 0, *(void**) e, 0x20);
-		((Dev459*) g_6b5de0)->vtbl->fn154((Dev459*) g_6b5de0, e->f4, 0);
+		((D3_SKY_DEV*) g_6b5de0)->vtbl->SetRenderState((D3_SKY_DEV*) g_6b5de0, 0x88, 0);
+		((D3_SKY_DEV*) g_6b5de0)->vtbl->SetRenderState((D3_SKY_DEV*) g_6b5de0, 7, 0);
+		((D3_SKY_DEV*) g_6b5de0)->vtbl->SetVertexShader((D3_SKY_DEV*) g_6b5de0, 0x1c4);
+		((D3_SKY_DEV*) g_6b5de0)->vtbl->SetStreamSource((D3_SKY_DEV*) g_6b5de0, 0, *(void**) e, 0x20);
+		((D3_SKY_DEV*) g_6b5de0)->vtbl->fn154((D3_SKY_DEV*) g_6b5de0, e->f4, 0);
 		do {
-			fcn_00458e00(e, found);
+			d3_RenderSkyLayer(e, found);
 			found = found->next;
 		} while (found);
-		((Dev459*) g_6b5de0)->vtbl->SetRenderState((Dev459*) g_6b5de0, 0x88, 1);
+		((D3_SKY_DEV*) g_6b5de0)->vtbl->SetRenderState((D3_SKY_DEV*) g_6b5de0, 0x88, 1);
 		if (g_67a2ac) {
 			arg = (g_6b7ff9 != 0) + 1;
 		}
 		else {
 			arg = 0;
 		}
-		((Dev459*) g_6b5de0)->vtbl->SetRenderState((Dev459*) g_6b5de0, 7, arg);
+		((D3_SKY_DEV*) g_6b5de0)->vtbl->SetRenderState((D3_SKY_DEV*) g_6b5de0, 7, arg);
 	}
 	}
 	return 1;

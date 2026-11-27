@@ -12,47 +12,47 @@ int __cdecl cm_RequestUpdateStraftatState(int, int, int, int);
 int __cdecl cm_SendSetHE(int, char*);
 
 /* ADDRESS: GOLDTL 0x0054aa70 */
-void __cdecl fcn_0054aa70(char* u)
+void __cdecl he_StartCourtTrial(char* action)
 {
-	char* r1;
+	char* accused;
 	char buf[0x100];
-	char* r2;
-	char* p;
+	char* accuser;
+	char* existing;
 	pos14_7f4c00* stamp;
 
-	r1 = gm_LookupEntityRecordById(*(int*) (u + 0xb0));
-	r2 = gm_LookupEntityRecordById(*(int*) (u + 0xac));
-	stamp = (pos14_7f4c00*) (u + 0xc5);
+	accused = gm_LookupEntityRecordById(*(int*) (action + 0xb0));
+	accuser = gm_LookupEntityRecordById(*(int*) (action + 0xac));
+	stamp = (pos14_7f4c00*) (action + 0xc5);
 	*stamp = gm_GameTime;
 	gm_AddTime(stamp, 0x18, 0, 0);
-	*(short*) (u + 0xc9) = 0xa;
-	*(int*) (u + 0xcb) = 0;
-	*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-	if ((u[0x78] & 2) == 0) {
+	*(short*) (action + 0xc9) = 0xa;
+	*(int*) (action + 0xcb) = 0;
+	*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
+	if ((action[0x78] & 2) == 0) {
 		return;
 	}
-	for (p = he_StartHandlungSearch(1, 0, 0x2c); p != 0; p = he_fn_Handlung()) {
-		if (*(int*) (p + 4) == *(int*) (u + 4)) {
+	for (existing = he_StartHandlungSearch(1, 0, 0x2c); existing != 0; existing = he_fn_Handlung()) {
+		if (*(int*) (existing + 4) == *(int*) (action + 4)) {
 			continue;
 		}
-		if (*(char*) (p + 0xc4) != *(char*) (u + 0xc4)) {
+		if (*(char*) (existing + 0xc4) != *(char*) (action + 0xc4)) {
 			continue;
 		}
-		if (*(int*) (p + 0xac) == *(int*) (u + 0xac)) {
-			io_FormatTextBuffer(buf, 0x1bbe, *(unsigned short*) r2, *(unsigned short*) r1);
-			he_PostEntityMessage(*(int*) (r2 + 4), *(int*) (r2 + 4), buf, 0, 0x5f5, 0);
-			*(pos14_7f4c00*) (u + 0x52) = gm_GameTime;
-			*(int*) (u + 0x84) = cm_SendSetHE(-1, u);
+		if (*(int*) (existing + 0xac) == *(int*) (action + 0xac)) {
+			io_FormatTextBuffer(buf, 0x1bbe, *(unsigned short*) accuser, *(unsigned short*) accused);
+			he_PostEntityMessage(*(int*) (accuser + 4), *(int*) (accuser + 4), buf, 0, 0x5f5, 0);
+			*(pos14_7f4c00*) (action + 0x52) = gm_GameTime;
+			*(int*) (action + 0x84) = cm_SendSetHE(-1, action);
 			return;
 		}
-		if (*(int*) (u + 0xc5) > *(int*) (p + 0xc5)) {
+		if (*(int*) (action + 0xc5) > *(int*) (existing + 0xc5)) {
 			continue;
 		}
-		*stamp = *(pos14_7f4c00*) (p + 0xc5);
+		*stamp = *(pos14_7f4c00*) (existing + 0xc5);
 		gm_AddTime(stamp, 0x18, 0, 0);
-		*(short*) (u + 0xc9) = 0xa;
-		*(int*) (u + 0xcb) = 0;
+		*(short*) (action + 0xc9) = 0xa;
+		*(int*) (action + 0xcb) = 0;
 	}
-	*(int*) (u + 0xd4) = cm_RequestUpdateStraftatState(*(int*) (u + 0xac), *(int*) (u + 0xb0), *(int*) (u + 4), 1);
-	*(int*) (u + 0x84) = cm_SendSetHE(0, u);
+	*(int*) (action + 0xd4) = cm_RequestUpdateStraftatState(*(int*) (action + 0xac), *(int*) (action + 0xb0), *(int*) (action + 4), 1);
+	*(int*) (action + 0x84) = cm_SendSetHE(0, action);
 }

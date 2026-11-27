@@ -48,7 +48,7 @@ extern char g_774964;
 extern float g_774694;
 extern unsigned char g_6b8304;
 
-void __cdecl fcn_00516de0(int, int);
+void __cdecl d3_UpdateSceneDetailLevel(int, int);
 void __cdecl d3_SelectSceneContext(int, int);
 #include "client_scene_loader.h"
 void __cdecl ch_SetLowPolyMode(unsigned char);
@@ -86,7 +86,7 @@ void __cdecl d3_ApplyGraphicsOptions(void)
 		width = 0x40;
 		hi = 1;
 	}
-	fcn_00516de0(g_104336c, 0);
+	d3_UpdateSceneDetailLevel(g_104336c, 0);
 	if (g_776666 == 0) {
 		depth = 2;
 	} else if (g_776666 == 1) {

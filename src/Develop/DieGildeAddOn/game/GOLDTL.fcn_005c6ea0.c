@@ -61,7 +61,7 @@ char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 void __cdecl fcn_0052a0c0(unsigned char*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -107,7 +107,7 @@ void __cdecl d2_ShowTrainingDialog(unsigned char* obj, char* sceneObj, int targe
 		return;
 	}
 	fcn_0052a0c0(obj, 1);
-	dlg = fcn_00470820(0, 0, s_6ac79c);
+	dlg = d2_LoadForm(0, 0, s_6ac79c);
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);

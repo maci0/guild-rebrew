@@ -26,13 +26,13 @@ int __cdecl fcn_00496480(void);
 int __cdecl ai_ScoreBestechung(void);
 int __cdecl ai_StartBestechung(void);
 int __cdecl ai_RunBestechung(void);
-int __cdecl fcn_00496dc0(void);
+int __cdecl ai_ScoreAmtsbewerbung(void);
 int __cdecl ai_StartAmtsbewerbung(void);
 int __cdecl ai_RunAmtsbewerbung(void);
 int __cdecl ai_StartBuyObjekt(void);
 int __cdecl ai_RunBuyObject(void);
 int __cdecl am_StartBuyObjektAP(void);
-int __cdecl fcn_004974d0(void);
+int __cdecl am_RunBuyObjektAP(void);
 int __cdecl ai_StartRaumKaufen(void);
 int __cdecl ai_RunRaumKaufen(void);
 int __cdecl ai_StartRepairBuilding(void);
@@ -485,7 +485,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	}
 	d.type = 0xa;
 	strcpy(d.name, "Amtsbewerbung");
-	d.score = fcn_00496dc0;
+	d.score = ai_ScoreAmtsbewerbung;
 	d.start = ai_StartAmtsbewerbung;
 	d.run = ai_RunAmtsbewerbung;
 	d.flags = 0x1b;
@@ -555,7 +555,7 @@ int __cdecl am_RegisterGameMethods(char* e)
 	strcpy(d.name, "Objekt kaufen (AP)");
 	d.score = ai_ComputeBaseActionScore;
 	d.start = am_StartBuyObjektAP;
-	d.run = fcn_004974d0;
+	d.run = am_RunBuyObjektAP;
 	d.flags = 0x1;
 	if (am_RegisterMethod(&d, e) == 0) {
 		return 0;

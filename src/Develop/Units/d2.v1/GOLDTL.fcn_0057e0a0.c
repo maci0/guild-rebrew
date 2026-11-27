@@ -22,14 +22,14 @@ void __cdecl fcn_00533a40(int);
 void __cdecl d2_HighlightSelectedControl(int);
 int __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl d2_ShowTutorialPage(void);
-int __cdecl fcn_00580290(void);
+int __cdecl d2_PollTutorialVoiceDone(void);
 void __cdecl d2_ShowTutorialInlineForm(void);
 void __cdecl d2_HideTutorialHint(void);
 void __cdecl fcn_00580420(void);
 void __cdecl d2_HideTutorialPrompt(void);
 void __cdecl d2_UpdateTutorialProgress(void);
 void __cdecl d2_ShowTutorialStep(void);
-int __cdecl fcn_00580960(void);
+int __cdecl d2_CheckTutorialCueClicked(void);
 void __cdecl fcn_00584160(int);
 
 /* ADDRESS: GOLDTL 0x0057e0a0 */
@@ -115,7 +115,7 @@ int __cdecl fcn_0057e0a0(void)
 		d2_SetOverlayAnimation(0, 0);
 		return 0;
 	case 2:
-		if (fcn_00580290() != 1) {
+		if (d2_PollTutorialVoiceDone() != 1) {
 			break;
 		}
 		g_665f08[0] = g_665f08[1];
@@ -125,7 +125,7 @@ int __cdecl fcn_0057e0a0(void)
 		d2_HighlightSelectedControl(0);
 		return 0;
 	case 3:
-		if (fcn_00580290() != 1) {
+		if (d2_PollTutorialVoiceDone() != 1) {
 			break;
 		}
 		g_665f08[0] = g_665f08[1];
@@ -185,7 +185,7 @@ label7:
 		cue_ready = current_time >= deadline;
 		g_6b7fc0 = cue_ready;
 		d2_SetElementEnabled(g_665f08[0x13], cue_ready);
-		if (fcn_00580960() != 1) {
+		if (d2_CheckTutorialCueClicked() != 1) {
 			break;
 		}
 		g_665f08[0x10] = g_665f08[0x10] + 1;

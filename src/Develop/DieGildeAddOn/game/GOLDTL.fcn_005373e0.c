@@ -118,7 +118,7 @@ extern void fcn_465fe0();
 extern void fcn_0052a960();
 extern void d3_UpdateFrustumCellVisibility();
 extern void fcn_00413380();
-extern void fcn_00444190();
+extern void d3_RenderDefaultFrame();
 extern void ch_CollectContextCharacters();
 extern void d3_UpdateBuildingSceneScripts();
 extern void fcn_00529890();
@@ -150,7 +150,7 @@ extern void d2_UpdateSceneTooltip();
 extern void fcn_00527f60();
 extern void d2_RenderAllElements();
 extern void fcn_004da1b0();
-extern void fcn_00532650();
+extern void d2_RenderHoverTooltips();
 extern void fcn_00532900();
 extern void d2_DrawBuildingItemLabels();
 extern void fcn_4d03e0();
@@ -159,9 +159,9 @@ extern void fcn_005337a0();
 extern void fcn_005337f0();
 extern void fcn_00526b70();
 extern void d2_FlushQueuedQuads();
-extern void fcn_0047cdf0();
-extern void fcn_00472a50();
-extern void fcn_00411fe0();
+extern void d2_ResetDrawState();
+extern void d2_SweepFadeOverlays();
+extern void io_PollMouseInput();
 extern void fcn_00537320();
 extern void d3_PresentFrame();
 extern void SetMasterVolume();
@@ -303,7 +303,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 				d3_UpdateFrustumCellVisibility(g_773dd8, d3_ActiveCamera, g_6b8008);
 			}
 			fcn_00413380();
-			fcn_00444190();
+			d3_RenderDefaultFrame();
 		}
 	}
 	i = g_7746c4;
@@ -419,7 +419,7 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 			fcn_004da1b0();
 		}
 		if (f != 0 && g_774650 == g_774658 && g_7749e4 == 0) {
-			fcn_00532650();
+			d2_RenderHoverTooltips();
 			if (g_14cf71d != 0) {
 				fcn_00532900();
 			} else if (g_14cf738 != 0) {
@@ -439,11 +439,11 @@ int __cdecl main_RunFrameLoop(int a0, unsigned int flags)
 		fcn_00526b70();
 		d2_FlushQueuedQuads(0, 0, 0);
 		(*(void (__stdcall **) (int, int)) (*(int *) g_6b5de0 + 0xa0))(g_6b5de0, (int) g_1052be0);
-		fcn_0047cdf0();
+		d2_ResetDrawState();
 	} else if (g_7e2700 != 0) {
-		fcn_00472a50();
+		d2_SweepFadeOverlays();
 	}
-	fcn_00411fe0();
+	io_PollMouseInput();
 	if (g_6772c4 != 0) {
 		d2_MouseX = g_14cf900;
 		d2_MouseY = g_14cf902;

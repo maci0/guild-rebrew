@@ -1,13 +1,13 @@
-void __cdecl fcn_00445aa0(int a, unsigned int i, float f);
+void __cdecl d3_InterpolateObjectKeyframe(int a, unsigned int i, float f);
 
 /* ADDRESS: GOLDTL 0x00445d20 */
-char __cdecl fcn_00445d20(int a, float* v)
+char __cdecl d3_InterpolateObjectSlotCallback(int obj, float* slotPos)
 {
 	float x;
 	unsigned int i;
 
-	x = *v;
+	x = *slotPos;
 	i = (unsigned int) x;
-	fcn_00445aa0(a, i, x - i);
+	d3_InterpolateObjectKeyframe(obj, i, x - i);
 	return 1;
 }

@@ -10,7 +10,7 @@ extern char g_14cf950;
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
@@ -37,7 +37,7 @@ int __cdecl d2_ChooseHistory(void)
 	int radioGroup;
 
 	result = 0;
-	dialogHandle = fcn_00470820(0, 0, g_68116c);
+	dialogHandle = d2_LoadForm(0, 0, g_68116c);
 	d2_CenterDialogWindows(dialogHandle);
 	d2_SetForm(dialogHandle, 0);
 	textStart = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca, 0x1acb, 0x1acc);

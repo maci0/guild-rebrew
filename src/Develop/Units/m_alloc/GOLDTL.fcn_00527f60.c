@@ -58,7 +58,7 @@ extern int g_772544;
 extern int g_77e8a0;
 extern int d3_ActiveCamera;
 
-void __cdecl fcn_0047a040(int, int, int, int);
+void __cdecl d2_SetClipRect(int, int, int, int);
 int __cdecl d2_DrawSprite(int, int, int, int);
 void __cdecl d2_DestroyElement(int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -72,7 +72,7 @@ int __cdecl fcn_0051e070(void);
 int __cdecl gm_GetSeasonFromDate(char*, int);
 void __cdecl d2_DrawDefaultFontText(int, int, int, char*, int);
 void* __cdecl d2_GetResourceData(int);
-int __cdecl fcn_0047cba0(int, int, int, void*, int);
+int __cdecl d2_DrawSpriteFromSet(int, int, int, void*, int);
 int __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
 void __cdecl d2_SetSlotVisibility(int, int);
 void __cdecl fcn_00469c40(int, int, int);
@@ -83,7 +83,7 @@ int __cdecl gm_SumContainerCredits(int);
 int __cdecl gm_QueryEntitySum(int, int);
 int __cdecl gm_AmountToUnits(int, int);
 int __cdecl fcn_0051af00(char*, int, ...);
-int __cdecl fcn_00465950(const char*);
+int __cdecl d2_FindResourceByName(const char*);
 int __cdecl d2_SetForm(int, int);
 void __cdecl fcn_0066080a(char*);
 
@@ -118,7 +118,7 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 	if (g_slot_table[2 + g_774970 * 0x21c] != 6) {
 		return;
 	}
-	fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
+	d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 	if (g_774674) {
 		d2_DrawSprite(g_14ce860 - 0x80, 0, g_77250c, g_774674);
 	}
@@ -283,12 +283,12 @@ void __cdecl fcn_00527f60(unsigned char a0, int a1)
 	}
 
 	fr.tmp = *(int*) 0x7f4c06 % 0x3c;
-	fcn_0047cba0(g_1040494 - 0x50, 0x11, g_77250c,
+	d2_DrawSpriteFromSet(g_1040494 - 0x50, 0x11, g_77250c,
 		     d2_GetResourceData(0x581),
 		     (int) (fr.tmp * *(double*) 0x664108));
 
 	fr.tmp = (*(int*) 0x7f4c04 & 0xffff) * 0x3c + *(int*) 0x7f4c06;
-	fcn_0047cba0(g_1040494 - 0x50, 0x11, g_77250c,
+	d2_DrawSpriteFromSet(g_1040494 - 0x50, 0x11, g_77250c,
 		     d2_GetResourceData(0x582),
 		     (int) (fr.tmp * *(double*) 0x662ad0
 			    * *(double*) 0x665dd0) % 0x30);
@@ -347,7 +347,7 @@ hidden:
 			strcpy(fr.name, (char*) (0x868060 + g_773d75 * 0x2f4));
 			fcn_0066080a(fr.name);
 			sprintf(fr.buf, (char*) 0x6a2e38, fr.name);
-			id = fcn_00465950(fr.buf);
+			id = d2_FindResourceByName(fr.buf);
 			if (id != -1) {
 				g_6a2580 = d2_CreateElement(
 					(short) (g_1040494 - 0x6e), 0x5b, id);
@@ -449,10 +449,10 @@ hidden:
 stored:
 	g_6a2be8 = g_6a4768;
 	if (g_774720) {
-		fcn_0047a040(0, 0, g_1040494 - 0x8c, d2_ScreenHeight);
-		fcn_0047cba0(g_1040494 - g_6a4768 * 0x20 - 0x37,
+		d2_SetClipRect(0, 0, g_1040494 - 0x8c, d2_ScreenHeight);
+		d2_DrawSpriteFromSet(g_1040494 - g_6a4768 * 0x20 - 0x37,
 			     d2_ScreenHeight - 0x37, g_77250c,
 			     d2_GetResourceData(g_6a25ac + 3), 0);
-		fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
+		d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 	}
 }

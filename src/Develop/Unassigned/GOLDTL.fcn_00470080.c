@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00470080 */
-void __stdcall d2_FrameTimerCallback(int a1, int a2, int a3, int a4, int a5)
+void __stdcall d2_FrameTimerCallback(int timerId, int msg, int userData, int reserved1, int reserved2)
 {
 	int previous;
 

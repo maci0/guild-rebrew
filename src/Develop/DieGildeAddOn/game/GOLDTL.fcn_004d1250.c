@@ -17,7 +17,7 @@ typedef struct {
 extern int g_67a370;
 
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
+char __cdecl d3sm_SampleHeight(int, float*, int*, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
@@ -35,7 +35,7 @@ int __cdecl gm_IssueEscapeOrder(char* rec, char* e, char* obj)
 	if (obj == 0 || e == 0 || rec == 0)
 		return -1;
 	d3_TransformPoint(obj, obj + 0x4c, v);
-	if (fcn_0045b990(h, v, &x, &y, &z) == 0)
+	if (d3sm_SampleHeight(h, v, &x, &y, &z) == 0)
 		return -1;
 	r = gm_FindOrCreateEntitySlot(rec, e);
 	if (r == 0)

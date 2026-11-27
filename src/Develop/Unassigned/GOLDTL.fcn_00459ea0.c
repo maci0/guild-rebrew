@@ -1,7 +1,7 @@
-void __cdecl fcn_00459be0(unsigned int flags);
-int __cdecl fcn_00459c70(char* a);
-int __cdecl fcn_00459cd0(char* a);
-int __cdecl fcn_00459d00(char* a, int b);
+void __cdecl d3_ResetMemoryCountFlags(unsigned int flags);
+int __cdecl d3_GetMeshMemorySize(char* a);
+int __cdecl d3_GetAnimMemorySize(char* a);
+int __cdecl d3_GetTextureMemorySize(char* a, int b);
 
 
 /* Sums into *size the bytes the parts of o selected by flags occupy. */
@@ -16,7 +16,7 @@ unsigned char __cdecl d3_CalculateObjectMemorySize(char* o, unsigned int flags, 
 
 	r = 0;
 	if (o != 0 && size != 0) {
-		fcn_00459be0(flags);
+		d3_ResetMemoryCountFlags(flags);
 		*size = 0;
 		if (flags & 1) {
 			*size = 0x228;
@@ -38,12 +38,12 @@ unsigned char __cdecl d3_CalculateObjectMemorySize(char* o, unsigned int flags, 
 				for (i = 0; i < *(unsigned char*) (*(char**) (o + 0x1ec) + 0x163c); i++) {
 					p = *(char**) (*(char**) (o + 0x1ec) + i * 0x4a4 + 0x40c);
 					if (p != 0) {
-						*size += fcn_00459c70(p);
+						*size += d3_GetMeshMemorySize(p);
 					}
 				}
 				p = *(char**) (*(char**) (o + 0x1ec) + 0x11f8);
 				if (p != 0) {
-					*size += fcn_00459c70(p);
+					*size += d3_GetMeshMemorySize(p);
 				}
 			}
 			if (flags & 8) {
@@ -52,7 +52,7 @@ unsigned char __cdecl d3_CalculateObjectMemorySize(char* o, unsigned int flags, 
 						for (j = 0; j < 3; j++) {
 							p = *(char**) (*(char**) (o + 0x1ec) + i * 0x4a4 + j * 0x7c + 0x484);
 							if (p != 0) {
-								*size += fcn_00459cd0(p);
+								*size += d3_GetAnimMemorySize(p);
 							}
 						}
 					}
@@ -66,7 +66,7 @@ unsigned char __cdecl d3_CalculateObjectMemorySize(char* o, unsigned int flags, 
 						n = *(int*) (p + 0x1e4);
 					}
 					for (j = 0; j < n; j++) {
-						*size += fcn_00459d00(
+						*size += d3_GetTextureMemorySize(
 							(*(char***) (*(char**) (o + 0x1ec) + i * 0x4a4 + 0x410))[j], 1);
 					}
 				}

@@ -15,7 +15,7 @@ extern int g_6652f8[];
 extern unsigned short __cdecl gm_RandomMod(int a);
 extern float __cdecl gm_RandomFloat01(void);
 extern void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, void* d, int e);
-extern int __cdecl fcn_004f1790(char* a, void* e);
+extern int __cdecl gm_GetEntitySlotIndex(char* a, void* e);
 extern int __cdecl gv_SendExtendProductionTime(int slot, int record, int item, int value, int a, int b);
 extern int __cdecl gv_SendSetGraveOwner(int a, int record, int item, int value);
 extern int __cdecl gv_RequestUpdateProductionProgress(int record, int item, int value, int delta);
@@ -91,16 +91,16 @@ void __cdecl gv_UpdateGraveyardPlots(char* entity)
 						value = (int) ((g_662c30 * *(unsigned char*) ((char*) entry + 0xc))
 							* g_6652e8[entry[0]] * a);
 						if (value > 0
-						    && ((fcn_004f1790((char*) *(int*) (entity + 0x65), entry) ^ gm_GameTime) & 1) == 0) {
+						    && ((gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry) ^ gm_GameTime) & 1) == 0) {
 							handle = gv_RequestUpdateProductionProgress((int) entity, entry[0],
-								fcn_004f1790((char*) *(int*) (entity + 0x65), entry), -value);
+								gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry), -value);
 							n++;
 						}
 						goto next_entry;
 					}
 				}
 				handle = gv_SendSetGraveOwner(0, (int) entity, result,
-					fcn_004f1790((char*) *(int*) (entity + 0x65), entry));
+					gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry));
 				n++;
 				continue;
 			}
@@ -110,8 +110,8 @@ void __cdecl gv_UpdateGraveyardPlots(char* entity)
 				* g_6652e8[result] * a);
 			if (value > 0) {
 				list = (char*) *(int*) (entity + 0x65);
-				if (((fcn_004f1790(list, entry) ^ gm_GameTime) & 1) == 0) {
-					handle = gv_RequestUpdateProductionProgress((int) entity, result, fcn_004f1790(list, entry), -value);
+				if (((gm_GetEntitySlotIndex(list, entry) ^ gm_GameTime) & 1) == 0) {
+					handle = gv_RequestUpdateProductionProgress((int) entity, result, gm_GetEntitySlotIndex(list, entry), -value);
 					n++;
 				}
 			}
@@ -129,19 +129,19 @@ void __cdecl gv_UpdateGraveyardPlots(char* entity)
 			result = gm_CalcBribeOrPriceScore((int) slot, *(unsigned char*) ((char*) entry + 0xc), entry[0], 0, &out);
 			if (slot == home) {
 				handle = gv_SendExtendProductionTime((int) slot, (int) entity, entry[0],
-					fcn_004f1790((char*) *(int*) (entity + 0x65), entry), 10, 0);
+					gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry), 10, 0);
 			} else if (*(char*) (slot + 2) != 6 && *(char*) (slot + 2) != 7) {
 				value = gm_GetSeasonTreasury(slot, (char) g_773d75);
 				if ((int) (value * g_66417c) > result) {
 					handle = gv_SendExtendProductionTime((int) slot, (int) entity, entry[0],
-						fcn_004f1790((char*) *(int*) (entity + 0x65), entry), 10, result);
+						gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry), 10, result);
 					n++;
 					count++;
 					total += out;
 					continue;
 				}
 				handle = gv_SendSetGraveOwner(0, (int) entity, entry[0],
-					fcn_004f1790((char*) *(int*) (entity + 0x65), entry));
+					gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry));
 			} else {
 				memset(block, 0, sizeof(block));
 				*(int*) ((char*) block + 8) = *(int*) (slot + 4);
@@ -154,7 +154,7 @@ void __cdecl gv_UpdateGraveyardPlots(char* entity)
 				*(unsigned short*) ((char*) block + 0x34) = (unsigned short) g_7f4c0c;
 				*(unsigned char*) ((char*) block + 0x36) = 9;
 				*(int*) ((char*) block + 0x5c) = entry[0];
-				*(char*) ((char*) block + 0x60) = (char) fcn_004f1790((char*) *(int*) (entity + 0x65), entry);
+				*(char*) ((char*) block + 0x60) = (char) gm_GetEntitySlotIndex((char*) *(int*) (entity + 0x65), entry);
 				*(int*) ((char*) block + 0x64) = result;
 				*(int*) ((char*) block + 0x68) = 10;
 				handle = cm_SendCopyEntityData(block);

@@ -21,7 +21,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 int __cdecl gm_ObjBefriendThreeRivals(Ent* ent, int* arg)
 {
@@ -81,7 +81,7 @@ int __cdecl gm_ObjBefriendThreeRivals(Ent* ent, int* arg)
 		rec = gm_LookupSpecialObjectRecord(**(unsigned short**) arg, &tmp);
 		io_FormatTextBuffer(text, 0xfe8, *(unsigned short*) (rec + 0x18) + 1, picks[0]->id, picks[1]->id,
 		    picks[2]->id);
-		fcn_005dbe90(text);
+		d2_ShowUseObjDialog(text);
 	}
 	return 1;
 }

@@ -39,8 +39,8 @@ extern int g_100f1dc;
 extern signed char g_6a3440;
 
 Spec* __cdecl gm_LookupMissionSpec(int op);
-void __cdecl fcn_004b5630(Spec* s, int flags);
-int __cdecl fcn_00470820(int, int, char*);
+void __cdecl d2_RunMissionBriefingDialog(Spec* s, int flags);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl io_AppendText(int, ...);
@@ -52,10 +52,10 @@ void __cdecl cm_StepCommandQueue(void);
 void __cdecl d2_DestroyForm(int);
 int* __cdecl fcn_004b3d80(int a, int b, int c);
 void __cdecl fcn_004b5530(int a1, int flags);
-void __cdecl fcn_004b5b20(int flags);
+void __cdecl main_ExitToGameLoop(int flags);
 
 /* ADDRESS: GOLDTL 0x004b5df0 */
-void __cdecl fcn_004b5df0(int flags)
+void __cdecl d2_RunMissionDialog(int flags)
 {
 	int level;
 	int b_ok;
@@ -88,8 +88,8 @@ void __cdecl fcn_004b5df0(int flags)
 		}
 	}
 	flags = (flags & ~9) | 0x100;
-	fcn_004b5630(s, flags);
-	dlg = fcn_00470820(0, 0, "special\\mission");
+	d2_RunMissionBriefingDialog(s, flags);
+	dlg = d2_LoadForm(0, 0, "special\\mission");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1b94, ent->entity_index);
@@ -126,7 +126,7 @@ void __cdecl fcn_004b5df0(int flags)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop(fcn_004b5df0, mode) != 0);
+	} while (main_RunFrameLoop(d2_RunMissionDialog, mode) != 0);
 	d2_DestroyForm(dlg);
 	if (done) {
 		p = fcn_004b3d80(ent->entity_id, level, 1);
@@ -140,6 +140,6 @@ void __cdecl fcn_004b5df0(int flags)
 		return;
 	}
 	if (cancel) {
-		fcn_004b5b20(flags);
+		main_ExitToGameLoop(flags);
 	}
 }

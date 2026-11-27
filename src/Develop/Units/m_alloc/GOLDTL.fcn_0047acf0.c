@@ -20,18 +20,18 @@ extern char g_772c44[];
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl ReportClientMessage(char*);
-char* __cdecl fcn_0047a070(char*, int);
-int __cdecl fcn_0047a570(int, int, int, int*, int*, int);
-int __cdecl fcn_0047a710(int, int, char*, char*);
-int __cdecl fcn_0047a990(int, int, char*, char*);
-char* __cdecl fcn_0047abd0(int, int);
-void __cdecl fcn_0047ac20(char*, char*);
+char* __cdecl d2_GetShapeListEntry(char*, int);
+int __cdecl d2_ComputeShapeSheetSizes(int, int, int, int*, int*, int);
+int __cdecl d2_DrawShapeToArgbSurface(int, int, char*, char*);
+int __cdecl d2_BlitRgb24ShapeToSurface(int, int, char*, char*);
+char* __cdecl d2_AllocShapeBuffer(int, int);
+void __cdecl d2_AppendShapeNode(char*, char*);
 char* __cdecl fcn_004770a0(int*, int);
 int __cdecl d2_LockSurface(char*);
 void __cdecl d2_UnlockSurface(char*);
 void __cdecl d2_UpdateTextureBytes(char*);
 void __cdecl fcn_00475f80(char*);
-int __cdecl fcn_00477420(int);
+int __cdecl d2_NextPowerOfTwo(int);
 char* __cdecl fcn_0047b620(char*, int);
 long __stdcall fcn_006114ff(int, int, int*, int, int, int*, int, unsigned int);
 
@@ -93,7 +93,7 @@ char* __cdecl fcn_0047acf0(char* list)
 		minh = 0x800;
 		i = 0;
 		while (i < (int) *(unsigned short*) (list + 0x2a)) {
-			shape = fcn_0047a070(list, i);
+			shape = d2_GetShapeListEntry(list, i);
 			w = (int) *(unsigned short*) (shape + 6);
 			if (w > maxw)
 				maxw = w;
@@ -112,8 +112,8 @@ char* __cdecl fcn_0047acf0(char* list)
 	}
 	if ((int) *(unsigned short*) (bank + 6) > g_67dac0 || *(unsigned short*) (bank + 6) > 0x200 || flag) {
 		for (i = 0; i < (int) *(unsigned short*) (list + 0x2a); i++) {
-			shape = fcn_0047a070(list, i);
-			sz = fcn_00477420(*(unsigned short*) (shape + 6) < *(unsigned short*) (shape + 0xa)
+			shape = d2_GetShapeListEntry(list, i);
+			sz = d2_NextPowerOfTwo(*(unsigned short*) (shape + 6) < *(unsigned short*) (shape + 0xa)
 			                  ? *(unsigned short*) (shape + 6) : *(unsigned short*) (shape + 0xa));
 			if (sz > g_67dac0)
 				sz = g_67dac0;
@@ -133,12 +133,12 @@ char* __cdecl fcn_0047acf0(char* list)
 				if (n > 0x200)
 					n = 0x200;
 				if (sz < n) {
-					if (fcn_0047a570(cells, sz, sz, &sheets, sizes, 1)) {
+					if (d2_ComputeShapeSheetSizes(cells, sz, sz, &sheets, sizes, 1)) {
 						cells = sheets;
 					}
 				}
 			}
-			node = fcn_0047abd0(cells, split);
+			node = d2_AllocShapeBuffer(cells, split);
 			*(unsigned short*) (node + 2) = *(unsigned short*) (shape + 6);
 			*(unsigned short*) (node + 6) = *(unsigned short*) (shape + 0xa);
 			*(unsigned short*) (node + 0) = 0;
@@ -156,7 +156,7 @@ char* __cdecl fcn_0047acf0(char* list)
 			hdr[0xa] = 0x15;
 			base = fcn_004770a0(hdr, 0x20);
 			d2_LockSurface(base);
-			fcn_0047a710(0, 0, shape, base);
+			d2_DrawShapeToArgbSurface(0, 0, shape, base);
 			d2_UnlockSurface(base);
 			j = 0;
 			y = 0;
@@ -213,7 +213,7 @@ char* __cdecl fcn_0047acf0(char* list)
 					j++;
 				} while (j < sheets);
 			}
-			fcn_0047ac20(node, bank);
+			d2_AppendShapeNode(node, bank);
 			n = 0;
 			if (*(int*) (node + 0x2c) >= 1) {
 				do {
@@ -228,7 +228,7 @@ char* __cdecl fcn_0047acf0(char* list)
 		}
 	}
 	else {
-		if (!fcn_0047a570(count, (int) *(unsigned short*) (bank + 6), (int) *(unsigned short*) (bank + 8), &split, sizes, 1)) {
+		if (!d2_ComputeShapeSheetSizes(count, (int) *(unsigned short*) (bank + 6), (int) *(unsigned short*) (bank + 8), &split, sizes, 1)) {
 			m_FreeTracked(bank);
 			return 0;
 		}
@@ -260,15 +260,15 @@ char* __cdecl fcn_0047acf0(char* list)
 					while (x < (int) *(unsigned short*) (list + 0x2a)) {
 						y = (int) *(unsigned short*) (bank + 6) * (j % cols);
 						n = (int) *(unsigned short*) (bank + 8) * (j / cols);
-						shape = fcn_0047a070(list, x);
+						shape = d2_GetShapeListEntry(list, x);
 						if (g_67dab8 != 0x15) {
 							if (g_67dab8 == 0x19)
-								fcn_0047a990(y, n, shape, surf);
+								d2_BlitRgb24ShapeToSurface(y, n, shape, surf);
 						}
 						else {
-							fcn_0047a710(y, n, shape, surf);
+							d2_DrawShapeToArgbSurface(y, n, shape, surf);
 						}
-						node = fcn_0047abd0(1, 1);
+						node = d2_AllocShapeBuffer(1, 1);
 						*(unsigned short*) (node + 0) = *(unsigned short*) (shape + 4);
 						*(unsigned short*) (node + 2) = *(unsigned short*) (shape + 6);
 						*(unsigned short*) (node + 4) = *(unsigned short*) (shape + 8);
@@ -280,7 +280,7 @@ char* __cdecl fcn_0047acf0(char* list)
 						*(float*) (uv + 4) = (float) n / (float) sz;
 						*(int*) (uv + 8) = (int) surf;
 						*(unsigned int*) (node + 0x34) = (unsigned int) *(unsigned short*) (shape + 6);
-						fcn_0047ac20(node, bank);
+						d2_AppendShapeNode(node, bank);
 						x = x + 1;
 						j++;
 						if (cells <= j)

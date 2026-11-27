@@ -46,13 +46,13 @@ extern char* g_775318;
 extern unsigned char g_773d75;
 
 Rec* __cdecl gm_LookupSpecialObjectRecord(int key, int* out);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 char* __cdecl gm_LookupSpecialObject(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00525ef0(void);
+void __cdecl d2_ResetUiInputAndBounds(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl fcn_00526120(char*, int);
@@ -78,7 +78,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 	buy = 0;
 	rec = gm_LookupSpecialObjectRecord(*item, &tmp);
 	if (rec != 0) {
-		dlg = fcn_00470820(0, 0, "panel\\useobj");
+		dlg = d2_LoadForm(0, 0, "panel\\useobj");
 		d2_CenterDialogWindows(dlg);
 		d2_SetForm(dlg, 1);
 		if ((rec->mask & ((Ent *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970])->mask) == 0 && gm_LookupSpecialObject(id = *item) != 0) {
@@ -87,7 +87,7 @@ int __cdecl d2_ConfirmUseObjekt(unsigned short* item)
 			io_AppendText(0xfe4, *item * 2 + 0x9a8);
 		}
 		d2_SetOverlayAnimation(0, 0);
-		fcn_00525ef0();
+		d2_ResetUiInputAndBounds();
 		g_100f1dc = -1;
 		do {
 			if (g_14ce8e0 != 0) {

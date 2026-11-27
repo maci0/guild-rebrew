@@ -4,7 +4,7 @@
 extern int g_67a370;
 
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
+char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 int __cdecl gm_IsMapTileWalkable(int, int);
 void __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
@@ -44,7 +44,7 @@ unsigned int __cdecl d3_FindGridCellOutsideRadius(char* originNode, int* outColu
 	found = 0;
 	i = 0;
 	d3_TransformPoint(originNode, originNode + 0x4c, start);
-	if (!fcn_0045b990(m, start, &col, &row, &height)) {
+	if (!d3sm_SampleHeight(m, start, &col, &row, &height)) {
 		return 0;
 	}
 	do {

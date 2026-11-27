@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "client_types.h"
-typedef UI_FIELD fcn_00466cb0_Fld;
+typedef UI_FIELD D2_CREATED_FIELD;
 // SIZE 0x160
 
 typedef struct
@@ -9,13 +9,13 @@ typedef struct
 	char pad00[0x50];
 	short w;
 	short h;
-} fcn_00466cb0_Def;
+} D2_FIELD_RES_DEF;
 // SIZE 0x54
 
 typedef struct
 {
 	int i[0x2f4 / 4];
-} fcn_00466cb0_Ent;
+} D2_FIELD_ELEMENT_WORDS;
 // SIZE 0x2f4
 
 extern UI_FIELD g_102d140[];
@@ -29,7 +29,7 @@ extern char s_67d474[];
 extern char s_67d46c[];
 
 #include "Develop/Units/Error/error_message.h"
-int __cdecl fcn_00465950(char* name);
+int __cdecl d2_FindResourceByName(char* name);
 void __cdecl d2_AddRefcount(int def);
 int __cdecl d2_AllocateElement(void);
 
@@ -40,7 +40,7 @@ int __cdecl d2_CreateField(int x, int y, int def, unsigned char flags)
 	int n;
 	int v;
 	int id;
-	fcn_00466cb0_Fld* f;
+	D2_CREATED_FIELD* f;
 
 	i = 1;
 	if (g_102d140[1].used != 0) {
@@ -57,15 +57,15 @@ int __cdecl d2_CreateField(int x, int y, int def, unsigned char flags)
 	f->y = y;
 	f->def = def;
 	f->idx = i;
-	f->w = ((fcn_00466cb0_Def*)g_772500)[def].w;
-	f->h = ((fcn_00466cb0_Def*)g_772500)[def].h;
+	f->w = ((D2_FIELD_RES_DEF*)g_772500)[def].w;
+	f->h = ((D2_FIELD_RES_DEF*)g_772500)[def].h;
 	f->f1c = 0;
 	f->f12c = 0;
 	f->max = 999;
 	f->digits = 3;
 	f->flags = flags | 0x100;
 	f->used = 1;
-	f->font = fcn_00465950(s_67d474);
+	f->font = d2_FindResourceByName(s_67d474);
 	d2_AddRefcount(def);
 	if (flags & 2) {
 		char buf[24];

@@ -10,7 +10,7 @@ void __cdecl fcn_00439c00(char* object, char* child);
 
 /* Reads one object, or a list of objects, and attaches them under the parent. */
 /* ADDRESS: GOLDTL 0x004488e0 */
-int __cdecl fcn_004488e0(char* path, void* stream, char* parent)
+int __cdecl d3_LoadObjectFile(char* path, void* stream, char* parent)
 {
 	int magic;
 	int count;

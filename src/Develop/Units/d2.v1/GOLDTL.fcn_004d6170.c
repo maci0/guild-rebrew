@@ -26,7 +26,7 @@ char* __cdecl fcn_00502cd0(int, ...);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004ce740(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
@@ -162,7 +162,7 @@ int __cdecl fcn_004d6170(char* ctx)
 			side = g_772e9c;
 		}
 	}
-	screen = fcn_00470820(0, 0, "cutscenes\\combat_end");
+	screen = d2_LoadForm(0, 0, "cutscenes\\combat_end");
 	fcn_00471d80(screen, 3);
 	d2_SetForm(screen, 2);
 	io_AppendText(0x7d);

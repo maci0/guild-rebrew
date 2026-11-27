@@ -10,7 +10,7 @@ extern double g_665ea8;
 int __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_TransformPoint(char*, char*, float*);
 int __cdecl gm_ResolveEntityById(char**, int, int, int);
-char __cdecl fcn_0045b990(int, float*, int*, int*, float*);
+char __cdecl d3sm_SampleHeight(int, float*, int*, int*, float*);
 void __cdecl d3_NormalizeVector(float*);
 void __cdecl d3_SetNodePosition(char*, float*);
 int __cdecl gm_GetGameSpeedSetting(void);
@@ -56,7 +56,7 @@ int __cdecl he_StepSensenmannMove(char* action)
 						dir[1] = 0.0f;
 						dir[2] = pos1[2] - pos2[2];
 						len = (float) sqrt((double) (dir[0] * dir[0] + dir[2] * dir[2]));
-						fcn_0045b990(g_1043370, pos1, keys, (int*) flag, &scale);
+						d3sm_SampleHeight(g_1043370, pos1, keys, (int*) flag, &scale);
 						pos1[1] = scale + 80.0f;
 						dir[0] = pos1[0] - pos2[0];
 						dir[1] = pos1[1] - pos2[1];
@@ -81,7 +81,7 @@ int __cdecl he_StepSensenmannMove(char* action)
 						pos1[0] = dir[0] + pos2[0];
 						pos1[1] = dir[1] + pos2[1];
 						pos1[2] = dir[2] + pos2[2];
-						fcn_0045b990(level, pos1, (int*) flag, keys, &len);
+						d3sm_SampleHeight(level, pos1, (int*) flag, keys, &len);
 						if (pos1[1] < len + 80.0f) {
 							pos1[1] = scale * 0.978 + pos1[1];
 							pos1[0] = scale * dir[0] * 0.1f + pos2[0];

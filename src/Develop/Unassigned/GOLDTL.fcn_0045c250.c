@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x0045c250 */
-int __cdecl fcn_0045c250(float a, float b, float c, float d)
+int __cdecl d3_LerpRangeInt(float a, float b, float c, float d)
 {
 	float t;
 

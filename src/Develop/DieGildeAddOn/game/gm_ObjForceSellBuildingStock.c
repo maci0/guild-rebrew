@@ -13,7 +13,7 @@ float __cdecl fcn_0042e450(void);
 void __cdecl cm_SendSellObjekt(int a, int b, int c, int d, unsigned char e, int f);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl he_PostEntityMessage(int a, int b, char* buf, int c, int d, int e);
-void __cdecl fcn_005dbe90(char* buf);
+void __cdecl d2_ShowUseObjDialog(char* buf);
 
 /* ADDRESS: GOLDTL 0x005de420 */
 int __cdecl gm_ObjForceSellBuildingStock(char* actor, char* action)
@@ -75,7 +75,7 @@ int __cdecl gm_ObjForceSellBuildingStock(char* actor, char* action)
 		io_FormatTextBuffer(detail, 0x109d,
 		    *(unsigned short*) ((char*) recordAddr + 0x27), recordAddr);
 		io_FormatTextBuffer(text, 0xfe8, detail);
-		fcn_005dbe90(text);
+		d2_ShowUseObjDialog(text);
 	}
 	*(int*) (action + 0x10) = one;
 	return one;

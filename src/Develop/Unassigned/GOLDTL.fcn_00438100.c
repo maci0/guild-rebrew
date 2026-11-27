@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_004557c0(char* obj, char* a, int b, char* m);
+void __cdecl d3_ComposeObserverMatrix(char* obj, char* a, int b, char* m);
 float* __stdcall fcn_005eb970(float* out, const float* a, const float* b);
 
 void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, char force)
@@ -14,7 +14,7 @@ void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, char force)
 	char* d2;
 
 	if (!(obj[0x216] & 0x20) || force) {
-		fcn_004557c0(obj, 0, 0, *(char**) (obj + 0x1ec) + 8);
+		d3_ComposeObserverMatrix(obj, 0, 0, *(char**) (obj + 0x1ec) + 8);
 		obj[0x216] |= 0x20;
 	}
 	if ((obj[0x216] & 0x40) && !force && *(char**) (*(char**) (obj + 0x1ec) + 4) == cam) {

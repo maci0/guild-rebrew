@@ -12,7 +12,7 @@ char* __cdecl he_SpawnTimedRauchEffect(char*);
 char* __cdecl he_SpawnTimedPunkteEffect(char*);
 int __cdecl gm_CompareGameTime(pos14_7f4c00*, char*);
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
-void __cdecl fcn_00452420(char*);
+void __cdecl d3_FreeMeshObject(char*);
 void __cdecl he_FreeAction(char*);
 
 void __cdecl he_RunTimedEffectAction(char* action)
@@ -57,7 +57,7 @@ void __cdecl he_RunTimedEffectAction(char* action)
 		if (*(char**) (action + 0xb0) != 0 && m_is_tracked(*(char**) (action + 0xb0)) != 0) {
 			saved_ctx = d3_CurrentContextIndex;
 			d3_SelectSceneContext(0, 1);
-			fcn_00452420(*(char**) (action + 0xb0));
+			d3_FreeMeshObject(*(char**) (action + 0xb0));
 			d3_SelectSceneContext(saved_ctx, 1);
 		}
 kill:

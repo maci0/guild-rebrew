@@ -2,7 +2,7 @@
 
 void __cdecl fcn_0043b320(int, int, int);
 
-void __cdecl fcn_00444190(void)
+void __cdecl d3_RenderDefaultFrame(void)
 {
 	if (*(char*) 0x6b8018 == 0) {
 		return;

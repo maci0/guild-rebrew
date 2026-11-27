@@ -26,14 +26,14 @@ void __cdecl gm_AdvanceGameClock(void);
 void __cdecl fcn_0053f100(void);
 void __cdecl cm_InitCrimeRecords(void);
 void __cdecl gm_ResetCityStats(void);
-int __cdecl fcn_0044c310(char*, char*);
+int __cdecl d3_AcquireModel(char*, char*);
 int __cdecl sb_LoadSampleBank(char*, int);
 void __cdecl msx_SetFadeDuration(int);
 void __cdecl d2_CreateEventBar(void);
 void __cdecl fcn_00533880(void);
 void __cdecl fcn_005338a0(void);
 void __cdecl fcn_005c80c0(void);
-void __cdecl fcn_004bbd20(void);
+void __cdecl gm_AllocAmbientAnimals(void);
 void __cdecl ch_ResetGridAndUniverseCache(void);
 void __cdecl d2_ResetBookmarkSlots(void);
 void __cdecl d3_ResetSceneContextIndices(void);
@@ -54,7 +54,7 @@ void __cdecl gm_InitGameSession(void)
 	fcn_0053f100();
 	cm_InitCrimeRecords();
 	gm_ResetCityStats();
-	g_7749cc = fcn_0044c310("Buch", "Buch");
+	g_7749cc = d3_AcquireModel("Buch", "Buch");
 	if (g_774934 != 0) {
 		g_7747bc = sb_LoadSampleBank("natur\\regen.sbf", 0);
 		g_7e2470 = sb_LoadSampleBank("natur\\wind.sbf", 0);
@@ -74,7 +74,7 @@ void __cdecl gm_InitGameSession(void)
 	(*(int*)&g_7746c4) = 0;
 	(*(int*)&g_7746c8) = 0;
 	fcn_005c80c0();
-	fcn_004bbd20();
+	gm_AllocAmbientAnimals();
 	ch_ResetGridAndUniverseCache();
 	d2_ResetBookmarkSlots();
 	d3_ResetSceneContextIndices();

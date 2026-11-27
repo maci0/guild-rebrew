@@ -67,9 +67,9 @@ typedef struct {
 
 extern char* g_104049c;
 
-void __cdecl fcn_0044a390(Obj44a770* m);
+void __cdecl d3_RecalculateObjectBounds(Obj44a770* m);
 void __cdecl d3_RecalculateMeshNormals(Obj44a770* m);
-int __cdecl fcn_0044aec0(Obj44a770* m);
+int __cdecl d3_BuildStockObjectMesh(Obj44a770* m);
 void __cdecl fcn_0044a9f0(Obj44a770* m);
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
@@ -83,7 +83,7 @@ void __cdecl fcn_0044a770(Obj44a770* m, char normals)
 	int j;
 	int k;
 
-	fcn_0044a390(m);
+	d3_RecalculateObjectBounds(m);
 	if (normals) {
 		d3_RecalculateMeshNormals(m);
 	}
@@ -92,7 +92,7 @@ void __cdecl fcn_0044a770(Obj44a770* m, char normals)
 		m->box[i].y = m->verts[m->nverts + i].pos.y;
 		m->box[i].z = m->verts[m->nverts + i].pos.z;
 	}
-	m->f264 = fcn_0044aec0(m);
+	m->f264 = d3_BuildStockObjectMesh(m);
 	m->f268 = 0;
 	if (m->flags & 2) {
 		fcn_0044a9f0(m);

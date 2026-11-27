@@ -20,7 +20,7 @@ typedef struct Cmd {
 
 void __cdecl cm_RequestChangeFloat(int, int, float);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 int __cdecl gm_ObjBoostEntityHealth(Ent* ent, Cmd* cmd)
 {
@@ -33,7 +33,7 @@ int __cdecl gm_ObjBoostEntityHealth(Ent* ent, Cmd* cmd)
 	if (cmd->shown == 0 && ent->kind == 6) {
 		cmd->done = 1;
 		io_FormatTextBuffer(text, 0xff0);
-		fcn_005dbe90(text);
+		d2_ShowUseObjDialog(text);
 	}
 	return 1;
 }

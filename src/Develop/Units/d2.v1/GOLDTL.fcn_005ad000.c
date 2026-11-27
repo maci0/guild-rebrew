@@ -6,7 +6,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl fcn_00526120(int, int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
-void* __cdecl fcn_00470820(int, int, void*);
+void* __cdecl d2_LoadForm(int, int, void*);
 void __cdecl d2_CenterDialogWindows(void*);
 void __cdecl d2_DestroyForm(void*);
 void __cdecl d2_SetForm(void*, int);
@@ -59,7 +59,7 @@ void __cdecl d2_RunKerkermeisterBribeDialog(void)
 		d3_EndCameraAndUiMode();
 		return;
 	}
-	dlg = fcn_00470820(0, 0, (void*) 0x6ab180);
+	dlg = d2_LoadForm(0, 0, (void*) 0x6ab180);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	h = *(unsigned char*) &g_773d75;

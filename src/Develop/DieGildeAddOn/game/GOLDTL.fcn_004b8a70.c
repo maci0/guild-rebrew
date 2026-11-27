@@ -12,7 +12,7 @@ unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 unsigned short __cdecl gm_RandomMod(unsigned short);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 
 
 /* ADDRESS: GOLDTL 0x004b8a70 */
@@ -59,7 +59,7 @@ int __cdecl gm_HandleMsg1fDrainHealth(int* request)
 		he_PostEntityMessage(*(int*) (e + 2), *(int*) (e + 2), buf, strlen(buf) > 0x100, 0x603, 0);
 		a = (int) (*(float*) (e + 0xe) * 0.25);
 		b = (int) (*(float*) (e + 0xe) * 0.05);
-		fcn_004ff210(*e, -(gm_RandomMod(a) + b));
+		gm_ApplyEntityHealthDelta(*e, -(gm_RandomMod(a) + b));
 	}
 	return 0;
 }

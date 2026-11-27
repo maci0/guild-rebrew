@@ -5,7 +5,7 @@ void __cdecl fcn_00534160(int, int, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d2_AddWindowTextButton(int, int, int, int, int);
 void __cdecl d2_SetElementWidth(int, int);
-void __cdecl fcn_0046c310(int);
+void __cdecl d2_UpdateWindowScroll(int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -174,6 +174,6 @@ void __cdecl fcn_0058b440(unsigned int a0, unsigned int* a1, int a2, int a3)
         }
     }
     *(unsigned int*) (v2[3] * 0x3cc + 0x1016198) = v19;
-    fcn_0046c310(v2[3]);
+    d2_UpdateWindowScroll(v2[3]);
     return;
 }

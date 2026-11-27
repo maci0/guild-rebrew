@@ -49,13 +49,13 @@ typedef struct Col {
 
 char* __cdecl d3_FindTextureByName(const char*);
 int __cdecl d3_ResolveTexturePath(char*);
-int __cdecl fcn_0045c290(unsigned int, int*);
-void __cdecl fcn_0045c310(Tex*, char);
-void __cdecl fcn_0045c380(Tex*, unsigned int, unsigned int, unsigned int);
+int __cdecl d3_AllocTextureSlot(unsigned int, int*);
+void __cdecl d3_AddRefTexture(Tex*, char);
+void __cdecl d3_LoadAnimatedTextureFrames(Tex*, unsigned int, unsigned int, unsigned int);
 int __cdecl vfs_ReadBmpInfo(int, unsigned int*, int*, unsigned int*);
 
 /* ADDRESS: GOLDTL 0x0045c5b0 */
-Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int flags2)
+Tex* __cdecl d3_LoadOrReuseTexture(char* name, Col c, unsigned int flags, unsigned int flags2)
 {
 	unsigned char c26;
 	unsigned char c25;
@@ -100,7 +100,7 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 				    && p->b3 == c23
 				    && p->field5e == c21) {
 					found = p;
-					fcn_0045c310(found, 1);
+					d3_AddRefTexture(found, 1);
 					return found;
 				}
 			}
@@ -108,10 +108,10 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 			p++;
 		}
 		if (found == p) {
-			fcn_0045c310(found, 1);
+			d3_AddRefTexture(found, 1);
 			return found;
 		}
-		t = (Tex*) fcn_0045c290(*(unsigned int*) &c, 0);
+		t = (Tex*) d3_AllocTextureSlot(*(unsigned int*) &c, 0);
 				fn = 0x70;
 				__asm {
 					mov edi, t
@@ -155,7 +155,7 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 				t->refs = 1;
 				t->color48 = -1;
 				g_10405c4++;
-				fcn_0045c380(t, *(unsigned int*) &c, flags, flags2);
+				d3_LoadAnimatedTextureFrames(t, *(unsigned int*) &c, flags, flags2);
 				return t;
 	}
 	avail = d3_ResolveTexturePath(name);
@@ -167,7 +167,7 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 		height = 0;
 		fmt = 0;
 	}
-	t = (Tex*) fcn_0045c290(*(unsigned int*) &c, 0);
+	t = (Tex*) d3_AllocTextureSlot(*(unsigned int*) &c, 0);
 	strcpy(buf1, name);
 	strcpy(buf2, name);
 	strupr(buf1);
@@ -214,7 +214,7 @@ Tex* __cdecl fcn_0045c5b0(char* name, Col c, unsigned int flags, unsigned int fl
 		t->refs = 1;
 		t->color48 = -1;
 		g_10405c4++;
-		fcn_0045c380(t, *(unsigned int*) &c, flags, flags2);
+		d3_LoadAnimatedTextureFrames(t, *(unsigned int*) &c, flags, flags2);
 		return t;
 	}
 	return 0;

@@ -6,7 +6,7 @@
  * operand without a segment prefix or a relocation, and either one changes the
  * bytes. Four arguments are read from [ebp+8..0x14] by the block. */
 /* ADDRESS: GOLDTL 0x0047a320 */
-void __cdecl fcn_0047a320(int a, int b, int c, int d)
+void __cdecl d2_BlitRleSprite(int x, int y, int dst_bits, int sprite)
 {
 	__asm {
 		push edi

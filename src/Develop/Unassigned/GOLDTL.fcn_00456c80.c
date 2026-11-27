@@ -8,7 +8,7 @@ extern void** g_1040610[];
 
 long __stdcall fcn_005ef8cf(void*, unsigned int, unsigned int, int, int, int, void**);
 
-void __cdecl fcn_00456c80(void)
+void __cdecl d3_AllocShadowTextures(void)
 {
 	unsigned int s;
 	unsigned int i;

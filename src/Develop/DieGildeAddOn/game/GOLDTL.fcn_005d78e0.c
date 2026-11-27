@@ -40,7 +40,7 @@ void __cdecl cm_RequestModifyHealth(int a, int b);
 void __cdecl io_FormatTextBuffer(void* out, int id, ...);
 void __cdecl he_PostEntityMessage(int a, int b, char* text, int c, int d, char* file);
 int __cdecl d2_OpenTargetPicker(Query* q, char* text, int a, void* b);
-int __cdecl fcn_00470820(int a, int b, char* name);
+int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_DestroyForm(int h);
@@ -132,7 +132,7 @@ int __cdecl d2_ShowIncitingHatredDialog(char* actor, char* request)
 	sum = gm_WalkEntityChain(secondEntity->id);
 	sum = sum + gm_WalkEntityChain(firstEntity->id);
 	v = (int) (sum * g_6628ac);
-	dialog = fcn_00470820(0, 0, (char*) 0x6acd58);
+	dialog = d2_LoadForm(0, 0, (char*) 0x6acd58);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dialog);
 	d2_SetForm(dialog, 1);

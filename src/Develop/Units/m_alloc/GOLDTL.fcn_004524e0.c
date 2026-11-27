@@ -3,7 +3,7 @@ extern char* g_1040958;
 extern int g_67a370;
 extern volatile int g_6b7fac;
 extern char g_1040640[];
-int __cdecl fcn_0045c5b0(char* name, int flags, int a3, int a4);
+int __cdecl d3_LoadOrReuseTexture(char* name, int flags, int a3, int a4);
 void __cdecl fcn_0045ce90(int h);
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl fcn_00439e70(char* o);
@@ -18,7 +18,7 @@ char* __cdecl fcn_004524e0(unsigned int entryCount, char* assetName, int a2, flo
 
 	s = 0;
 	if (a3 > 0.0 && entryCount > 0) {
-		assetHandle = fcn_0045c5b0(assetName, a2, 0, 0);
+		assetHandle = d3_LoadOrReuseTexture(assetName, a2, 0, 0);
 		if (assetHandle != 0) {
 			fcn_0045ce90(assetHandle);
 			s = m_alloc(0x31c, (char*) 0x67bc8c);

@@ -15,12 +15,12 @@ typedef struct {
 	char tail[0x180];
 } Rec_5c9850;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
-int __cdecl fcn_005340f0(int);
-int __cdecl fcn_005c9450(char*, int, int*);
+int __cdecl d2_InitWindowBounds(int);
+int __cdecl d2_PopulateOwnerBuildingList(char*, int, int*);
 int __cdecl d2_GetFormWindow(int, int);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 int __cdecl d2_ShowBuildingTurnSummary(int);
@@ -37,14 +37,14 @@ void __cdecl d2_ShowGebaeudeList(void)
 	int j;
 
 	table = (char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) g_774970];
-	obj = fcn_00470820(0, 0, (char*) 0x6ac94c);
+	obj = d2_LoadForm(0, 0, (char*) 0x6ac94c);
 	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(obj, 1);
 	io_AppendText(0xb2);
 	d2_SetForm(obj, 2);
-	n = fcn_005c9450(table, 0x80, rec.ids);
+	n = d2_PopulateOwnerBuildingList(table, 0x80, rec.ids);
 	d2_SetForm(obj, 0);
 	fcn_00533f40(0x206, 0x167, d2_CurrentWindowId, d2_GetFormWindow(obj, 2), 0x100,
 	    &rec.out1, &rec.out0, &rec.out2);

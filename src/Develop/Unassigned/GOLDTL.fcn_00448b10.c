@@ -8,7 +8,7 @@ int __cdecl d3_TraverseSceneObjects(int a, int b, int c, const char *s);
 int __cdecl fcn_00438af0(int a);
 
 /* ADDRESS: GOLDTL 0x00448b10 */
-char __cdecl fcn_00448b10(void)
+char __cdecl d3_HandleDebugCameraHotkeys(void)
 {
 	unsigned char flags[8];
 	char *node;

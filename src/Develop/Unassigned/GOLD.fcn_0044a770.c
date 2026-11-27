@@ -1,6 +1,6 @@
 extern char g_631090[];
 void __cdecl vfs_WriteCString(int, char*);
-void __cdecl fcn_00401320(int, unsigned int);
+void __cdecl vfs_WriteDword(int, unsigned int);
 int __cdecl vfs_WriteArray(int, int, int, int);
 void __cdecl fcn_004011f0(int, unsigned char);
 void __cdecl vfs_WriteVec4(int, int*);
@@ -20,14 +20,14 @@ void __cdecl d3_SaveFloor(int stream, char* model)
     vfs_WriteCString(stream, name);
     if (*name) {
         count = *(int*) model;
-        fcn_00401320(stream, count);
+        vfs_WriteDword(stream, count);
         count = *(int*) model;
         vfs_WriteArray(stream, count, count, *(int*) (model + 0x10));
         count = *(int*) model;
         vfs_WriteArray(stream, count * 4, count, *(int*) (model + 0x20));
         fcn_004011f0(stream, *(int*) (model + 0x18) != 0);
         if (*(int*) (model + 0x18)) {
-            fcn_00401320(stream, *(unsigned char*) (model + 0x1c6d));
+            vfs_WriteDword(stream, *(unsigned char*) (model + 0x1c6d));
             if (0 < *(unsigned char*) (model + 0x1c6d)) {
                 count = *(int*) model;
                 vfs_WriteArray(stream, count, count, *(int*) (model + 0x18));
@@ -61,17 +61,17 @@ void __cdecl d3_SaveFloor(int stream, char* model)
                 row = *(char**) (model + 0x19e0) + offset;
                 fcn_004011f0(stream, ((unsigned char) row[0xa] >> 1) & 1);
                 row = *(char**) (model + 0x19e0) + offset;
-                fcn_00401320(stream, *(unsigned int*) (row + 0x14));
+                vfs_WriteDword(stream, *(unsigned int*) (row + 0x14));
                 row = *(char**) (model + 0x19e0) + offset;
-                fcn_00401320(stream, *(unsigned int*) (row + 0xc));
+                vfs_WriteDword(stream, *(unsigned int*) (row + 0xc));
                 row = *(char**) (model + 0x19e0) + offset;
-                fcn_00401320(stream, *(unsigned int*) (row + 0x10));
+                vfs_WriteDword(stream, *(unsigned int*) (row + 0x10));
                 row = *(char**) (model + 0x19e0) + offset;
                 vfs_WriteVec4(stream, (int*) (row + 0x18));
                 row = *(char**) (model + 0x19e0) + offset;
                 vfs_WriteVec4(stream, (int*) (row + 0x28));
                 row = *(char**) (model + 0x19e0) + offset;
-                fcn_00401320(stream, *(unsigned int*) (row + 0x154));
+                vfs_WriteDword(stream, *(unsigned int*) (row + 0x154));
                 index++;
             }
         }
@@ -89,7 +89,7 @@ void __cdecl d3_SaveFloor(int stream, char* model)
         vfs_WriteCString(stream, name);
         name += 0x40;
     } while (--count);
-    fcn_00401320(stream, *(unsigned int*) (model + 0xa0));
-    fcn_00401320(stream, *(unsigned int*) (model + 0xc4));
+    vfs_WriteDword(stream, *(unsigned int*) (model + 0xa0));
+    vfs_WriteDword(stream, *(unsigned int*) (model + 0xc4));
     vfs_WriteVec3(stream, (int*) (model + 0x90));
 }

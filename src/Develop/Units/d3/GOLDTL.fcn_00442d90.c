@@ -4,7 +4,7 @@
 void __cdecl d3_DisposeObject(char*);
 char* __cdecl fcn_00437890(char*);
 
-void __cdecl fcn_0044c200(int, int);
+void __cdecl d3_LoadModel(int, int);
 void __cdecl fcn_00449f90(char*, int, int);
 #include "client_scene_loader.h"
 
@@ -27,7 +27,7 @@ char __cdecl fcn_00442d90(char* o, int a2)
 		*(char**) (o + 0x1f4) = n;
 	}
 	d3_CleanupObjectDrawData((D3_OBJECT*) (o));
-	fcn_0044c200(a2, a2);
+	d3_LoadModel(a2, a2);
 	fcn_00449f90(o, 0, a2);
 	fcn_0045cfa0(0);
 	p = *(char**) (o + 0x1ec);

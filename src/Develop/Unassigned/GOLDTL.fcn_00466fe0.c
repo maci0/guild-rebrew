@@ -11,13 +11,13 @@ typedef struct
 	char* cur;
 	int len;
 	char pad15c[0x160 - 0x15c];
-} fcn_00466fe0_Fld;
+} D2_TEXTID_FIELD;
 // SIZE 0x160
 
 typedef struct
 {
 	int i[0x2f4 / 4];
-} fcn_00466fe0_Ent;
+} D2_TEXTID_FIELD_ENT;
 // SIZE 0x2f4
 
 #include "client_types.h"
@@ -30,12 +30,12 @@ int __cdecl d2_MeasureTextWidth(char* s, int font);
 /* ADDRESS: GOLDTL 0x00466fe0 */
 void __cdecl d2_SetFieldTextId(int fld, int str)
 {
-	fcn_00466fe0_Fld* f;
+	D2_TEXTID_FIELD* f;
 	char* e;
 	char* cur;
 	int len;
 
-	f = &((fcn_00466fe0_Fld*)g_102d140)[fld];
+	f = &((D2_TEXTID_FIELD*)g_102d140)[fld];
 	e = (char*) (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[f->ent].parent);
 	if (e == 0) {
 		return;

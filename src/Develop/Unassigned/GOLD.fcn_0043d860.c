@@ -45,7 +45,7 @@ struct D3_BOUNDING_OBJ {
 };
 
 
-void __cdecl fcn_00458b10(D3_BOUNDING_OBJ* o, int arg, int* p, D3_SPHERE_VEC4* out);
+void __cdecl d3_TransformPointToView(D3_BOUNDING_OBJ* o, int arg, int* p, D3_SPHERE_VEC4* out);
 void __cdecl d3_UpdateObjectCameraTransform(D3_BOUNDING_OBJ* o, int arg, int z);
 
 char __cdecl d3_GetObjectBoundingSphere(D3_BOUNDING_OBJ* o, int arg, D3_SPHERE_VEC4* out, float* radius)
@@ -66,7 +66,7 @@ char __cdecl d3_GetObjectBoundingSphere(D3_BOUNDING_OBJ* o, int arg, D3_SPHERE_V
 	ok = 0;
 	if (o != 0 && (out != 0 || radius != 0)) {
 		if (o->x218 == 0) {
-			fcn_00458b10(o, arg, &o->x4c, &c);
+			d3_TransformPointToView(o, arg, &o->x4c, &c);
 			r = o->radius;
 			goto done;
 		}

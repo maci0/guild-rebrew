@@ -9,7 +9,7 @@ int __cdecl d2_DrawShapeFrame(int, int, int, void*, int);
 #define HALF_H		(*(short*) 0xfb9072 / 2)
 
 /* ADDRESS: GOLD 0x004cf370 */
-void __cdecl fcn_004cf370(void)
+void __cdecl d2_DrawCameraPanArrows(void)
 {
 	void* rec;
 	int a;

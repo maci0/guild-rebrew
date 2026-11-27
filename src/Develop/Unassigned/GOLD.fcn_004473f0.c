@@ -5,7 +5,7 @@ extern int g_6b8300;
 void __cdecl d3_DisposeObject(void*);
 void __cdecl d3_DestroyEffect(void*);
 void __cdecl d3_DestroyFloor(void*);
-void __cdecl fcn_0045da90(void*);
+void __cdecl d3_DestroySky(void*);
 void __cdecl m_FreeTracked(void*);
 void __cdecl fcn_00448910(void);
 
@@ -26,7 +26,7 @@ void __cdecl d3_ClearScene(void)
 		g_6b8300 = 0;
 	}
 	if (*(void**) 0x633dd4 != 0) {
-		fcn_0045da90(*(void**) 0x633dd4);
+		d3_DestroySky(*(void**) 0x633dd4);
 		*(void**) 0x633dd4 = 0;
 	}
 	if (*(void**) (g_5fb5b0 + 0x3c8) != 0) {

@@ -20,7 +20,7 @@ int __cdecl d2_AddElementToWindow(short, short, int, int);
 int __cdecl txt_FindEntryIndex(char*);
 int __cdecl d2_ShowTxt(short, short, char*, int);
 int __cdecl fcn_0046a350(int, int, int, int, unsigned char, int);
-int __cdecl fcn_0046a950(int, int, unsigned char, int, int, int, unsigned char, int);
+int __cdecl d2_AddWindowSlider(int, int, unsigned char, int, int, int, unsigned char, int);
 void __cdecl fcn_0046cd90(short, short, int);
 #define I32(p) (*(int*)(p))
 #define S16(p) (*(short*)(p))
@@ -206,7 +206,7 @@ int __cdecl d2_LoadForm(short x, short y, char* name)
                         aux = (unsigned char*)typePtr;
                         aux0 = aux[0];
                         resource = fcn_00468880(imageName);
-                        element = fcn_0046a950(S16(coords), S16(coords + 0x60), U8(record + 0xf1c + j), 0, 100, resource, aux0, windowID);
+                        element = d2_AddWindowSlider(S16(coords), S16(coords + 0x60), U8(record + 0xf1c + j), 0, 100, resource, aux0, windowID);
                         g_00f8f080[element].f40 = dialogOff + 0xfb1020;
                     }
                     j++;

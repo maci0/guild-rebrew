@@ -13,7 +13,7 @@ typedef struct {
 
 int* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, int b, void (__cdecl* cb)(void));
 void __cdecl d3_SetEffectPosition(int* s, float* pos);
-void __cdecl fcn_00418210(void);
+void __cdecl d3_UpdateRockDebrisParticles(void);
 
 int* __cdecl d3_SpawnRockDebrisEffect(int a1, float* pos, int n, int a4, int v0, int v1, int v2, int v3, int v4, int v5, int v6, int v7)
 {
@@ -23,7 +23,7 @@ int* __cdecl d3_SpawnRockDebrisEffect(int a1, float* pos, int n, int a4, int v0,
 	memset(&effectFlags, 0, sizeof(effectFlags));
 	effectFlags.c |= 2;
 	effectFlags.a = 0x7f;
-	effectState = fcn_004524e0(n, "Erdbrocken_an0", effectFlags, a4, a1, fcn_00418210);
+	effectState = fcn_004524e0(n, "Erdbrocken_an0", effectFlags, a4, a1, d3_UpdateRockDebrisParticles);
 	if (effectState != 0) {
 		d3_SetEffectPosition(effectState, pos);
 		effectState[0] = v0;

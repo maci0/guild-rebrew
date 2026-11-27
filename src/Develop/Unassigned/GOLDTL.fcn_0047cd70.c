@@ -15,8 +15,8 @@ typedef struct Anim {
 #include "client_types.h"
 extern Anim_100e7a0 g_100e7a0[0x30];
 
-void __cdecl fcn_0047cbf0(int x, int y, int tex, void* seq, int frame);
-void __cdecl fcn_0047cba0(int x, int y, int tex, void* seq, int frame);
+void __cdecl d2_DrawDimmedSpriteFrame(int x, int y, int tex, void* seq, int frame);
+void __cdecl d2_DrawSpriteFromSet(int x, int y, int tex, void* seq, int frame);
 
 /* ADDRESS: GOLDTL 0x0047cd70 */
 void __cdecl d2_DrawAnimationSlot(int i, int tex)
@@ -28,8 +28,8 @@ void __cdecl d2_DrawAnimationSlot(int i, int tex)
 		x = ((Anim*)g_100e7a0)[i].x;
 		y = ((Anim*)g_100e7a0)[i].y;
 		if (((Anim*)g_100e7a0)[i].looping) {
-			fcn_0047cbf0(x + 6, y + 6, tex, ((Anim*)g_100e7a0)[i].seq, ((Anim*)g_100e7a0)[i].w6);
+			d2_DrawDimmedSpriteFrame(x + 6, y + 6, tex, ((Anim*)g_100e7a0)[i].seq, ((Anim*)g_100e7a0)[i].w6);
 		}
-		fcn_0047cba0(x, y, tex, ((Anim*)g_100e7a0)[i].seq, ((Anim*)g_100e7a0)[i].w6);
+		d2_DrawSpriteFromSet(x, y, tex, ((Anim*)g_100e7a0)[i].seq, ((Anim*)g_100e7a0)[i].w6);
 	}
 }

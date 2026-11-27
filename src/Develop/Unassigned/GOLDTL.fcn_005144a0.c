@@ -13,7 +13,7 @@ extern char g_7e23e3;
 void __cdecl d2_RunChoosePlayerDialog(int, int);
 void __cdecl d2_ShowChooseProfessionDialog(int);
 
-int __cdecl fcn_005144a0(char* p, char* s)
+int __cdecl d2_RunCreatePlayerWizard(char* p, char* s)
 {
 	strcpy(g_7e23ea, p + 0x30);
 	strcpy(g_7e240a, s);

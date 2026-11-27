@@ -20,7 +20,7 @@ typedef struct {
 } pkt2c;
 /* SIZE 0x2c */
 
-char __cdecl fcn_0045bad0(int, int, int, int*, int*);
+char __cdecl d3sm_RaycastScreenPoint(int, int, int, int*, int*);
 int __cdecl gm_EntitiesDifferByOwnerPtr(char*, int);
 int __cdecl gm_IssueEscapeOrder(char*, char*, char*);
 int __cdecl cut_AssignConquerTarget(char*, char*, char*);
@@ -69,7 +69,7 @@ char __cdecl fcn_004d15c0(char* context, char* targetEntity)
 				}
 			}
 		} else {
-			obj = *(int*) (g_67a370 + 0xb0); if (fcn_0045bad0(obj, g_14ce8c0 + 0x1a,
+			obj = *(int*) (g_67a370 + 0xb0); if (d3sm_RaycastScreenPoint(obj, g_14ce8c0 + 0x1a,
 					 g_14ce8c2 + 0x1a, &v13, &v12) != 0) {
 				e = gm_FindOrCreateEntitySlot(context, targetEntity);
 				e->fc = 0;

@@ -29,7 +29,7 @@ void __cdecl d2_CheckActionBlocker(char*, int);
 void __cdecl d2_OpenTargetPicker(Query*, int, int, void*);
 void __cdecl fcn_005cde50(void*, int, int);
 int __cdecl fcn_005aa860(unsigned short*);
-void __cdecl fcn_005aa9a0(int);
+void __cdecl d2_RunOfficeDiscordDialog(int);
 void __cdecl fcn_005aaae0(int);
 void __cdecl d3_EndCameraAndUiMode(void);
 
@@ -56,7 +56,7 @@ void __cdecl d2_RunHighOfficePrivilegeDialog(void)
 		q.x18 = 1;
 		d2_OpenTargetPicker(&q, g_14aad18, 0, (void*) fcn_005aa860);
 	} else if (lvl == 0x1f || lvl == 0x21) {
-		fcn_005cde50((void*) fcn_005aa9a0, g_14aacd0, 0);
+		fcn_005cde50((void*) d2_RunOfficeDiscordDialog, g_14aacd0, 0);
 	} else if (lvl == 0x20) {
 		fcn_005cde50((void*) fcn_005aaae0, g_14aacf8, 0);
 	}

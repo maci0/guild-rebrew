@@ -2,7 +2,7 @@
 
 typedef int (__stdcall* f)(void*);
 
-void __cdecl fcn_00459a90(char* p)
+void __cdecl d3_ReleaseSkyDomeBuffers(char* p)
 {
 	void* q;
 

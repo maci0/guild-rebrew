@@ -22,7 +22,7 @@ extern char* g_1043370[];
 void* __cdecl gm_StartFilteredEntitySearch(int a, ...);
 char* __cdecl gm_FindRecordById(int id);
 int __cdecl d3_SelectSceneContext(int a, int b);
-char __cdecl fcn_0045b990(char* map, float* out, int* x, int* y, float* z);
+char __cdecl d3sm_SampleHeight(char* map, float* out, int* x, int* y, float* z);
 int __cdecl cm_RequestMoveObjekt(int a, int b, int c);
 int __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl cm_RequestWalkOnPath(int who, int x, int y, int id);
@@ -84,7 +84,7 @@ void __cdecl he_StepTransportEntry(char* ev)
 		d3_SelectSceneContext(n7, 1);
 		if (he_PickRandomSceneObject(0)) {
 			idx = g_1043370[n7 * 247];
-			if (idx != 0 && fcn_0045b990(idx, position, (int*) &cellX, (int*) &cellY, (float*) v10)) {
+			if (idx != 0 && d3sm_SampleHeight(idx, position, (int*) &cellX, (int*) &cellY, (float*) v10)) {
 				cm_RequestWalkOnPath(*(int*) (e + 2), cellX, cellY, n7);
 			}
 		}

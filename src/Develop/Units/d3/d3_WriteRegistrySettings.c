@@ -2,7 +2,7 @@
 int __cdecl io_OpenRegistryKey(int, int);
 void __cdecl io_WriteRegistryDword(int, char*, int);
 void __cdecl io_WriteRegistryString(int, char*, char*);
-void __cdecl fcn_00411550(int, char*, int);
+void __cdecl io_WriteRegistryFloat(int, char*, int);
 void __cdecl fcn_00411340(int);
 
 /* ADDRESS: GOLDTL 0x0044c6f0 */
@@ -45,13 +45,13 @@ void __cdecl d3_WriteRegistrySettings(int a1, int a2, int a3, int a4, int a5, in
 		break;
 	}
 	io_WriteRegistryString(sectionId, (char*) 0x67b11c, lodText);
-	fcn_00411550(sectionId, (char*) 0x67b10c, a16);
-	fcn_00411550(sectionId, (char*) 0x67b0f8, a17);
-	fcn_00411550(sectionId, (char*) 0x67b0e4, a18);
-	fcn_00411550(sectionId, (char*) 0x67b0d0, a19);
-	fcn_00411550(sectionId, (char*) 0x67b0bc, a20);
-	fcn_00411550(sectionId, (char*) 0x67b0ac, a21);
-	fcn_00411550(sectionId, (char*) 0x67b094, a22);
+	io_WriteRegistryFloat(sectionId, (char*) 0x67b10c, a16);
+	io_WriteRegistryFloat(sectionId, (char*) 0x67b0f8, a17);
+	io_WriteRegistryFloat(sectionId, (char*) 0x67b0e4, a18);
+	io_WriteRegistryFloat(sectionId, (char*) 0x67b0d0, a19);
+	io_WriteRegistryFloat(sectionId, (char*) 0x67b0bc, a20);
+	io_WriteRegistryFloat(sectionId, (char*) 0x67b0ac, a21);
+	io_WriteRegistryFloat(sectionId, (char*) 0x67b094, a22);
 	io_WriteRegistryDword(sectionId, (char*) 0x67b080, 3);
 	fcn_00411340(sectionId);
 }

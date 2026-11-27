@@ -184,14 +184,6 @@ int __cdecl he_ArrangeEntityMarkers(char* entity)
 	return 0;
 }
 
-void __cdecl he_RunAction0x92(void)
-{
-}
-
-void __cdecl he_StartAction0x9f(void)
-{
-}
-
 int __cdecl ls_LoadRenderSlots(void* stream, int version)
 {
 	return 0;

@@ -60,7 +60,7 @@ extern int g_14ce8e0;
 extern int d2_CurrentElementId;
 
 void __cdecl gm_CalcStudiumOffers(ENTITY_RECORD*, Share*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -85,7 +85,7 @@ int __cdecl fcn_005cf640(int unused, unsigned short* p)
 	int i;
 
 	gm_CalcStudiumOffers(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), shares);
-	dlg = fcn_00470820(0, 0, s_6ace6c);
+	dlg = d2_LoadForm(0, 0, s_6ace6c);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1a9d, (((unsigned char*) p)[9] != 0) + 0x1aa0, *p, 5);

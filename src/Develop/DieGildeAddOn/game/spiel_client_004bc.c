@@ -6,13 +6,13 @@ extern int g_67a370;
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl ch_QueuePlayAnimation(char*, char*, int);
 int __cdecl ch_GenerateNearbyWalkablePoints(int*, int, float*);
-char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
+char __cdecl d3sm_SampleHeight(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
 int __cdecl ch_QueuePlayAnimation(char*, char*, int);
 int __cdecl ch_GenerateNearbyWalkablePoints(int*, int, float*);
-char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
+char __cdecl d3sm_SampleHeight(int, float*, int*, int*, int*);
 char* __cdecl ch_CreateAction(char*, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004bc540 */
@@ -46,7 +46,7 @@ void __cdecl fcn_004bc540(AMBIENT_ANIMAL_SLOT* state)
 	if (n <= 0)
 		return;
 	for (pt = pts[0]; n != 0; n--, pt += 4) {
-		if (fcn_0045b990(g, pt, &x, &y, &z) != 0) {
+		if (d3sm_SampleHeight(g, pt, &x, &y, &z) != 0) {
 			o = ch_CreateAction(state->objekt, 0x2d, x, y, 0);
 			strcpy(o + 0x70, "anm_UpdateCat");
 		}
@@ -80,7 +80,7 @@ void __cdecl fcn_004bc6b0(AMBIENT_ANIMAL_SLOT* state)
 	if (n <= 0)
 		return;
 	for (pt = pts[0]; n != 0; n--, pt += 4) {
-		if (fcn_0045b990(g, pt, &x, &y, &z) != 0) {
+		if (d3sm_SampleHeight(g, pt, &x, &y, &z) != 0) {
 			o = ch_CreateAction(state->objekt, 0x2d, x, y, 0);
 			strcpy(o + 0x70, "anm_UpdateSheep");
 		}

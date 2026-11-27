@@ -30,7 +30,7 @@ extern char g_6ac878[];
 extern char g_6ac870[];
 extern char g_68be7c[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -49,7 +49,7 @@ int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005c89a0(void)
+int __cdecl d2_RunMeisterListeDialog(void)
 {
 	int n;
 	char* m;
@@ -59,7 +59,7 @@ int __cdecl fcn_005c89a0(void)
 	unsigned char* e;
 
 	n = 0;
-	h = fcn_00470820(0, 0, g_6ac878);
+	h = d2_LoadForm(0, 0, g_6ac878);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1934);

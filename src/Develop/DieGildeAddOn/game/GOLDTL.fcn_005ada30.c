@@ -22,7 +22,7 @@ extern D2_RADIO_GROUP g_102cbc4[8];
 #include "client_dialog_state.h"
 extern char g_6ab1e4[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
@@ -67,7 +67,7 @@ void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 	refresh = 1;
 	n = 0;
 	grp = -1;
-	d = fcn_00470820(0, 0, g_6ab1e4);
+	d = d2_LoadForm(0, 0, g_6ab1e4);
 	d2_CenterDialogWindows(d);
 	d2_SetForm(d, 1);
 	io_AppendText(0x19fb);

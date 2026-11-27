@@ -21,7 +21,7 @@ typedef struct Ctx {
 extern int g_67a370;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
-char __cdecl fcn_00443b00(char*, char*);
+char __cdecl d3_PickClosestObjectCallback(char*, char*);
 
 char* __cdecl d3_FindSceneObjectAtScreenPoint(float a, float b, int flags, int mask)
 {
@@ -39,7 +39,7 @@ char* __cdecl d3_FindSceneObjectAtScreenPoint(float a, float b, int flags, int m
 	ctx.cam = d3_ActiveCamera;
 	ctx.mask = mask;
 	ctx.y = g_1052bc8 - b;
-	d3_VisitSceneObjects(g_67a370, 0, flags, fcn_00443b00, &ctx);
+	d3_VisitSceneObjects(g_67a370, 0, flags, d3_PickClosestObjectCallback, &ctx);
 	for (i = 0; i < 9; i++) {
 		if (ctx.hits[i].e != 0 && ctx.hits[i].d < best) {
 			r = ctx.hits[i].e;

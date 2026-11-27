@@ -23,11 +23,11 @@ extern char* g_104049c;
 extern unsigned int g_10404a0;
 extern int g_10405c0;
 
-Tex* __cdecl fcn_0045c290(int, int);
+Tex* __cdecl d3_AllocTextureSlot(int, int);
 
 
 /* ADDRESS: GOLDTL 0x0045d1e0 */
-Tex* __cdecl fcn_0045d1e0(Tex* src, int color, char recurse)
+Tex* __cdecl d3_CloneTexture(Tex* src, int color, char recurse)
 {
 	Tex* p;
 	int n;
@@ -37,7 +37,7 @@ Tex* __cdecl fcn_0045d1e0(Tex* src, int color, char recurse)
 	if (src == 0) {
 		return 0;
 	}
-	p = fcn_0045c290(color, 0);
+	p = d3_AllocTextureSlot(color, 0);
 	if (p != 0) {
 		n = 0x70;
 		/*
@@ -78,7 +78,7 @@ Tex* __cdecl fcn_0045d1e0(Tex* src, int color, char recurse)
 			p->x48 = g_10405c0;
 			for (i = 0; i < g_10404a0; i++) {
 				if (((Tex*)g_104049c)[i].x40 > 0 && ((Tex*)g_104049c)[i].x48 == src->x48) {
-					fcn_0045d1e0(&((Tex*)g_104049c)[i], color, 0);
+					d3_CloneTexture(&((Tex*)g_104049c)[i], color, 0);
 				}
 			}
 			g_10405c0++;

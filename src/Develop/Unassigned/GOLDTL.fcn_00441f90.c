@@ -19,7 +19,7 @@ float __cdecl d3_EvalHermiteSpline(float a, float b, float c, float d, float t);
 #define CLAMP(v) MIN(255.0f, MAX(v, 0.0f))
 
 /* ADDRESS: GOLDTL 0x00441f90 */
-void __cdecl fcn_00441f90(unsigned char* base, int w, int x0, int y0, int size, int step)
+void __cdecl d3_ResampleHeightMapRegion(unsigned char* base, int w, int x0, int y0, int size, int step)
 {
 	float inv;
 	float t;

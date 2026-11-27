@@ -12,11 +12,11 @@ extern float g_6660e8;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1043370;
 
-char __cdecl fcn_0045b990(int, float*, int*, int*, float*);
+char __cdecl d3sm_SampleHeight(int, float*, int*, int*, float*);
 int __cdecl d3_TraceTerrainSegment(int, float*, float*, int, int, int*, int*);
 
 /* ADDRESS: GOLDTL 0x005e9870 */
-int __cdecl fcn_005e9870(Sefde0Entry *entry)
+int __cdecl d3_StepBallisticProjectile(Sefde0Entry *entry)
 {
 	char *obj;
 	float step;
@@ -45,7 +45,7 @@ int __cdecl fcn_005e9870(Sefde0Entry *entry)
 		return 0;
 	}
 	remain = g_6b7fac - *(int*) (obj + 0x60);
-	if (fcn_0045b990(map, (float*) (obj + 0x30), &ox, &oy, &h) == 0) {
+	if (d3sm_SampleHeight(map, (float*) (obj + 0x30), &ox, &oy, &h) == 0) {
 		*(int*) (obj + 0x5c) = 3;
 		*(int*) (obj + 0x58) = 0;
 		return 0;

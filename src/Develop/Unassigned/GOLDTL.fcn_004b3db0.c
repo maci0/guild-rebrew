@@ -3,7 +3,7 @@
 extern Entry680bd0 g_680bd0[48];
 
 int __cdecl gm_CountMissionEntriesByKey(int);
-int __cdecl fcn_004b3b80(int);
+int __cdecl gm_MissionRandomMod(int);
 
 
 /* ADDRESS: GOLDTL 0x004b3db0 */
@@ -16,7 +16,7 @@ int __cdecl fcn_004b3db0(int key)
 
 	n = gm_CountMissionEntriesByKey(key);
 	if (n > 0) {
-		pick = fcn_004b3b80(n);
+		pick = gm_MissionRandomMod(n);
 		for (i = 0, seen = 0; i < 48; i++) {
 			if (g_680bd0[i].key == key)
 				seen++;

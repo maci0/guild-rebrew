@@ -23,7 +23,7 @@ extern int d2_CurrentElementId;
 extern int g_774954;
 extern char g_7f4ca0[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -49,7 +49,7 @@ void __cdecl d2_RunTheatreCutscenePicker(void)
 	char* r;
 
 	memset(msg, 0, sizeof(msg));
-	item[7] = fcn_00470820(0, 0, "misc\\theatre");
+	item[7] = d2_LoadForm(0, 0, "misc\\theatre");
 	d2_CenterDialogWindows(item[7]);
 	d2_SetForm(item[7], 0);
 	item[2] = d2_GetWindowListItem(item[7], 0, io_AppendText("%ia[Hochzeit]$N"));

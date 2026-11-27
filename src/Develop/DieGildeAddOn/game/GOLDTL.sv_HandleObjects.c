@@ -48,7 +48,7 @@ extern int g_6a256c;
 extern char* __cdecl d3_FindSceneObject(int, int, int, char*);
 extern int __cdecl fcn_0064d41a(char*, char*, ...);
 extern void __cdecl d3_AnimateCameraToNode(char*, int);
-extern int __cdecl fcn_00506380(int, int, int, void*);
+extern int __cdecl gm_GetEntityUiFlags(int, int, int, void*);
 extern void __cdecl sv_ClearObjectSelection(void);
 extern void __cdecl d3snd_PlayObjectClickSound(char*);
 extern void __cdecl fcn_00530510(void);
@@ -184,7 +184,7 @@ L744:
 	}
 	g_77479c = selected;
 	if (g_7746b4 != 0 && *(char*) (g_7746b4 + 8) != 0) {
-		r = fcn_00506380((int) g_774970, 0, 0, g_7746b4);
+		r = gm_GetEntityUiFlags((int) g_774970, 0, 0, g_7746b4);
 		sv_ClearObjectSelection();
 		p = g_7746b4;
 		if ((r & 0x800) != 0

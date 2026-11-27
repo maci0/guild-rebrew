@@ -9,7 +9,7 @@ extern int d2_CurrentWindowId;
 extern int g_774654;
 extern char* g_77255c;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 void __cdecl d2_DestroyForm(int);
@@ -18,8 +18,8 @@ int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_GetOppositeStatIndex(int);
 float __cdecl gm_CalcActionCompletionTime(int, int*);
 int __cdecl gm_MapEntityStatRange(int);
-void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00525ef0(void);
+void __cdecl d2_InitWindowBounds(int);
+void __cdecl d2_ResetUiInputAndBounds(void);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl gm_ModifyHealth(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
@@ -46,11 +46,11 @@ int __cdecl fcn_005a02b0(void)
 
 	slot = ((char*)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) g_774970]);
 	n = gm_GetOppositeStatIndex(*(unsigned char*) (slot + 0x164)) + 1;
-	h = fcn_00470820(0, 0, (char*) 0x6aa80c);
+	h = d2_LoadForm(0, 0, (char*) 0x6aa80c);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
-	fcn_00525ef0();
+	d2_InitWindowBounds(d2_CurrentWindowId);
+	d2_ResetUiInputAndBounds();
 	grade = gm_CalcActionCompletionTime(g_774970, info);
 	r = (int) he_StartHandlungSearch(2, 2, g_774970, 0, 0x26);
 	if (r == 0 && grade >= 1.0 && n <= 6) {

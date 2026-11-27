@@ -7,7 +7,7 @@ extern float g_1040504[15];
 
 
 /* ADDRESS: GOLDTL 0x0045ccf0 */
-void __cdecl fcn_0045ccf0(unsigned int now)
+void __cdecl d3_UpdateTextureScrollOffsets(unsigned int now)
 {
 	float dt;
 	float d;

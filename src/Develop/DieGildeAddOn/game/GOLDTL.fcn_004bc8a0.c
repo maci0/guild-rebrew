@@ -1,7 +1,7 @@
 extern int g_67a370;
 
 unsigned short __cdecl gm_RandomMod(unsigned short);
-char __cdecl fcn_0045b990(char*, float*, int*, int*, int*);
+char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, int*);
 char __cdecl ch_FindWalkableCell(char*, float*, float*, int, int, int*, int*, int, int);
 void __cdecl d3_GridPointToWorld(char*, int, int, float*);
 
@@ -18,7 +18,7 @@ int __cdecl ch_GenerateNearbyWalkablePoints(float* position, int count, float* o
 	char* grid;
 
 	grid = *(char**) (((char*)g_67a370) + 0xb0);
-	fcn_0045b990(grid, position, &x, &y, &z);
+	d3sm_SampleHeight(grid, position, &x, &y, &z);
 	for (idx = 0; idx < count; idx++) {
 		nx = gm_RandomMod(10) + x - 4;
 		ny = gm_RandomMod(10) + y - 4;

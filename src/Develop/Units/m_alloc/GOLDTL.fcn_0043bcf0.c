@@ -5,7 +5,7 @@ typedef struct {
 } fcn_0043bcf0_vtbl;
 /* SIZE 0xc */
 
-void __cdecl fcn_0045bfb0(int);
+void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLDTL 0x0043bcf0 */
@@ -21,7 +21,7 @@ void __cdecl fcn_0043bcf0(int a)
 
 	for (i = 0; i < 8; i++) {
 		if (*(int*) (a + 0x30 + i * 4) != 0) {
-			fcn_0045bfb0(*(int*) (a + 0x30 + i * 4));
+			d3_ReleaseTexture(*(int*) (a + 0x30 + i * 4));
 		}
 	}
 	q = (char*) a + 0x258;
@@ -104,7 +104,7 @@ void __cdecl fcn_0043bcf0(int a)
 	}
 	if (*(int*) (a + 0x7da0) != 0) {
 		for (i = 0; i < *(unsigned char*) (a + 0x8035); i++) {
-			fcn_0045bfb0(*(int*) (*(int*) (a + 0x7da0) + i * 0x158));
+			d3_ReleaseTexture(*(int*) (*(int*) (a + 0x7da0) + i * 0x158));
 		}
 		m_FreeTracked((void*) *(int*) (a + 0x7da0));
 		*(int*) (a + 0x7da0) = 0;

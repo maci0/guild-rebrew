@@ -26,9 +26,9 @@ int __cdecl gm_CheckStatLevel(int, int);
 char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 void __cdecl d2_ConfirmMeisterbrief(unsigned char*, int);
-void __cdecl fcn_005ceef0(unsigned char*, void*);
+void __cdecl d2_RunProdSettingsDialog(unsigned char*, void*);
 void __cdecl d2_ShowMeisterbriefDialog(unsigned char*);
-void __cdecl fcn_005cea10(unsigned char*);
+void __cdecl d2_ShowMeisterbriefPendingDialog(unsigned char*);
 void __cdecl d3_EndCameraAndUiMode(void);
 
 void __cdecl d2_OpenMeisterbriefDialog(unsigned char* obj)
@@ -78,13 +78,13 @@ void __cdecl d2_OpenMeisterbriefDialog(unsigned char* obj)
 		d2_ConfirmMeisterbrief(obj, mode);
 		break;
 	case 0x30:
-		fcn_005ceef0(obj, x);
+		d2_RunProdSettingsDialog(obj, x);
 		break;
 	case 0x40:
 		d2_ShowMeisterbriefDialog(obj);
 		break;
 	case 0x50:
-		fcn_005cea10(obj);
+		d2_ShowMeisterbriefPendingDialog(obj);
 		break;
 	}
 	d3_EndCameraAndUiMode();

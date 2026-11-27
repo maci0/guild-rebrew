@@ -30,17 +30,17 @@ extern int g_100f1dc;
 #include "client_packet_builder.h"
 extern char g_6ac80c[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CreateRadioGroup(int n, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int a3, int win);
 void __cdecl d2_AddToRadioGroup(int g, int id);
 void __cdecl d2_SetElementEnabled(int i, int flag);
 int __cdecl d2_GetWindowListItem(int, int, int);
-void __cdecl fcn_00525ef0(void);
+void __cdecl d2_ResetUiInputAndBounds(void);
 
 int __cdecl cm_AppendCommandSyncField(int type, int count, int off, char* data);
 int __cdecl cm_SendSetAttribute(void);
@@ -66,10 +66,10 @@ void __cdecl d2_ChooseWappen(void)
 	int found;
 	int r;
 
-	d = fcn_00470820(0, 0, g_6ac80c);
+	d = d2_LoadForm(0, 0, g_6ac80c);
 	d2_CenterDialogWindows(d);
 	d2_SetForm(d, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(d, 1);
 	io_AppendText(0x85);
 	d2_SetForm(d, 2);
@@ -89,7 +89,7 @@ void __cdecl d2_ChooseWappen(void)
 	d2_SetForm(d, 3);
 	back = d2_GetWindowListItem(d, 3, io_AppendText(0x7f));
 	g_102cbc4[grp].sel = -1;
-	fcn_00525ef0();
+	d2_ResetUiInputAndBounds();
 	do {
 		for (i = 0; i < 8; i++) {
 			b = btn[i];

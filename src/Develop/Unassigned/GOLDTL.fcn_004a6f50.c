@@ -11,7 +11,7 @@ typedef struct Seq {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 void __cdecl fcn_004a8770(void);
-void __cdecl fcn_004a8640(void);
+void __cdecl gm_DealInitialCards(void);
 void __cdecl fcn_004a7be0(void);
 void __cdecl gm_PickCardGameBet(void);
 void __cdecl ai_EvaluateCardGameFold(void);
@@ -30,7 +30,7 @@ short __cdecl gm_StepCardGameRound(void)
 	case 1:
 		fcn_004a8770();
 		((Seq*)g_1007cd4)->state++;
-		fcn_004a8640();
+		gm_DealInitialCards();
 		fcn_004a7be0();
 		gm_PickCardGameBet();
 		return 0;

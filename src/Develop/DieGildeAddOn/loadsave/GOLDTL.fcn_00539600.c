@@ -41,7 +41,7 @@ extern int g_9badc8;
 extern int g_9badcc;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
-int __cdecl fcn_005e0930(void);
+int __cdecl d2_RunLoadNetworkGameDialog(void);
 int __cdecl ls_LoadSavegameHeader(void* stream, char* dest);
 int __cdecl CloseVfsStream(void* stream);
 
@@ -54,7 +54,7 @@ int __cdecl ls_LoadNetworkSaveHeader(void)
 	unsigned int i;
 	char c;
 
-	if (fcn_005e0930()) {
+	if (d2_RunLoadNetworkGameDialog()) {
 		sprintf(path, g_6a1ea4, g_7e21a0);
 		f = vfs_Tfopen(path, (char*) 0x6750e8, (struct VFS_DIR*) g_6b7fdc);
 		if (f != 0) {

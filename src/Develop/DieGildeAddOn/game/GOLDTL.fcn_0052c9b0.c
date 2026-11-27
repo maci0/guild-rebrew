@@ -40,7 +40,7 @@ extern short g_14ce8c0;
 extern int g_1040494;
 extern int d2_ScreenHeight;
 
-int __cdecl fcn_0052b720(void);
+int __cdecl d3_PanCameraFromInput(void);
 void __cdecl d3_UpdateCameraFromMouse(void);
 void __cdecl d3_AdjustCameraHeight(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
@@ -53,7 +53,7 @@ int __cdecl d3_UpdateCameraController(void)
 	if (((View*)d3_ActiveCamera) != 0 && g_6b7fc0 == 0) {
 		if (d3_SelectionBoxActive == 0 && g_6a99e8 == -1) {
 			if (g_14ce8e8 == 0) {
-				g_774668 = fcn_0052b720();
+				g_774668 = d3_PanCameraFromInput();
 			}
 			if (!(main_LoopFlags & 0x8000)) {
 				d3_UpdateCameraFromMouse();

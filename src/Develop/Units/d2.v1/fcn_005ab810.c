@@ -22,11 +22,11 @@ struct house {
 };
 
 int __cdecl gm_WalkEntityChain(unsigned short);
-void* __cdecl fcn_00470820(int, int, char*);
+void* __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckEntityStock(void*, int, char);
@@ -68,11 +68,11 @@ void __cdecl fcn_005ab810(char* e, int unused)
 	}
 	if (*(unsigned short*) (e + 0x27) == g_774970) {
 		d = t * 15;
-		dlg = fcn_00470820(0, 0, "Locations\\Kirche\\Taufe");
+		dlg = d2_LoadForm(0, 0, "Locations\\Kirche\\Taufe");
 		d2_SetOverlayAnimation(0, 0);
 		d2_CenterDialogWindows((int) dlg);
 		d2_SetForm((int) dlg, 0);
-		fcn_005340f0(d2_CurrentWindowId);
+		d2_InitWindowBounds(d2_CurrentWindowId);
 		d2_SetForm((int) dlg, 1);
 		io_AppendText(0x1976, p->id, d, 2 * (0x75 <= gm_GameTime) + 0x197a + 1 - p->state);
 		d2_SetForm((int) dlg, 2);
@@ -129,11 +129,11 @@ void __cdecl fcn_005ab810(char* e, int unused)
 			fcn_00526120(buf, 0);
 			return;
 		}
-		dlg = fcn_00470820(0, 0, "Locations\\Kirche\\Taufe");
+		dlg = d2_LoadForm(0, 0, "Locations\\Kirche\\Taufe");
 		d2_SetOverlayAnimation(0, 0);
 		d2_CenterDialogWindows((int) dlg);
 		d2_SetForm((int) dlg, 0);
-		fcn_005340f0(d2_CurrentWindowId);
+		d2_InitWindowBounds(d2_CurrentWindowId);
 		d2_SetForm((int) dlg, 1);
 		io_AppendText(0x1971, p->id, t, 2 * (0x75 <= gm_GameTime) + 0x197a + q->state);
 		d2_SetForm((int) dlg, 2);

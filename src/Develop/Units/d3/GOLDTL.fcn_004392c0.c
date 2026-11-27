@@ -13,14 +13,14 @@ extern int g_67a370;
 
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_DisposeObject(char* p);
-void __cdecl fcn_00452420(char* p);
+void __cdecl d3_FreeMeshObject(char* p);
 void __cdecl fcn_0043bcf0(int a);
 void __cdecl fcn_00459b40(int a);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl d3_ReleaseRenderVertexBuffer(void);
 void __cdecl d3_InitRenderVertexBuffer(void);
 #include "Develop/Units/d3/d3_animation.h"
-void __cdecl fcn_0045c110(void);
+void __cdecl d3_ShutdownTextures(void);
 
 /* ADDRESS: GOLDTL 0x004392c0 */
 void __cdecl fcn_004392c0(void)
@@ -40,7 +40,7 @@ void __cdecl fcn_004392c0(void)
 			}
 			g_6b8484 = 0;
 			while (d3_SceneRenderListHead != g_1040640) {
-				fcn_00452420(d3_SceneRenderListHead);
+				d3_FreeMeshObject(d3_SceneRenderListHead);
 			}
 			if (g_6b8300 != 0) {
 				fcn_0043bcf0(g_6b8300);
@@ -82,5 +82,5 @@ void __cdecl fcn_004392c0(void)
 	while (g_1042320 != g_1052a40) {
 		d3_ReleaseAnim(g_1042320, 1);
 	}
-	fcn_0045c110();
+	d3_ShutdownTextures();
 }

@@ -40,7 +40,7 @@ extern int __cdecl fcn_0041a8d0(const void* a, const void* b);
 #define MODEAT(k) ((unsigned int*) ((char*) MODES + (k) * 0x10))
 
 /* ADDRESS: GOLDTL 0x0041a380 */
-int __cdecl fcn_0041a380(unsigned int minWidth, unsigned int minHeight, unsigned char windowed)
+int __cdecl d3_EnumerateDisplayAdapters(unsigned int minWidth, unsigned int minHeight, unsigned char windowed)
 {
 	MODE8 cur;
 	unsigned char reliable;

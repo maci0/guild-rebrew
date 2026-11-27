@@ -6,7 +6,7 @@ typedef unsigned char  u8;
 typedef unsigned short u16;
 typedef unsigned int   u32;
 #include "client_actions.h"
-void* __cdecl fcn_00470820(short a, short b, char* c);
+void* __cdecl d2_LoadForm(short a, short b, char* c);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);
 int __cdecl io_AppendText(void* id, ...);
@@ -38,7 +38,7 @@ void __cdecl d2_RunKreditFreigabeDialog(char* o)
     int v;
     int d;
 
-    dlg = (char*) fcn_00470820(0, 0, "locations\\geldleihe\\geldleihe_KreditFreigabe");
+    dlg = (char*) d2_LoadForm(0, 0, "locations\\geldleihe\\geldleihe_KreditFreigabe");
     d2_CenterDialogWindows((int)dlg);
     d2_SetForm((int)dlg, 1);
     io_AppendText((void*)0x18e5);

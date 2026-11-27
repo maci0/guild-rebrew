@@ -14,7 +14,7 @@ extern float g_662ac8;
 extern char g_67eab0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00470820(short, short, char*);
+int __cdecl d2_LoadForm(short, short, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -61,7 +61,7 @@ int __cdecl d2_RunPaymentTargetDialog(char* entity)
     result = 0;
     if (entity == 0)
         return 0;
-    dlg = fcn_00470820(0, 0, "misc\\perga_rolle");
+    dlg = d2_LoadForm(0, 0, "misc\\perga_rolle");
     d2_CenterDialogWindows(dlg);
     d2_SetOverlayAnimation(0, 0);
     d2_SetForm(dlg, 1);

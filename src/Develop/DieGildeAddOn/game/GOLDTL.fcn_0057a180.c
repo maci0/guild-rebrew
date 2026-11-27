@@ -4,7 +4,7 @@ char* __cdecl gm_LookupEntityRecordById(int a1);
 int __cdecl gm_GetSeasonTreasury(char* entity, char season);
 void __cdecl cm_RequestMoveCredits(int a1, int a2, char a3, int a4);
 void __cdecl he_FreeAction(void* u);
-float __cdecl fcn_004ff210(unsigned short id, int delta);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int delta);
 
 /* Releases every played sound of the behaviour when its counter ran out. */
 /* ADDRESS: GOLDTL 0x0057a180 */
@@ -37,14 +37,14 @@ void __cdecl he_RunDeathPactCollection(char* action)
 			if (*p != -1) {
 				sound = gm_LookupEntityRecordById(*p);
 				if (sound != 0) {
-					fcn_004ff210(*(unsigned short*) sound, -1001);
+					gm_ApplyEntityHealthDelta(*(unsigned short*) sound, -1001);
 					found = 1;
 				}
 			}
 			p++;
 		}
 		if (found == 0) {
-			fcn_004ff210(*(unsigned short*) entity, -1001);
+			gm_ApplyEntityHealthDelta(*(unsigned short*) entity, -1001);
 		}
 		he_FreeAction(action);
 	}

@@ -8,11 +8,11 @@
 typedef struct
 {
 	int i[0x2f4 / 4];
-} fcn_00466ee0_Ent;
+} D2_WIN_FIELD_ENT;
 // SIZE 0x2f4
 
 #include "client_types.h"
-typedef Tex_102d278 fcn_00466ee0_Tex;
+typedef Tex_102d278 D2_WIN_FIELD_TEX;
 // SIZE 0x160
 
 extern Win_1015f40 g_1015f40[0x60];
@@ -25,7 +25,7 @@ int __cdecl d2_CreateField(int x, int y, int a3, int a4);
 void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00466ee0 */
-int __cdecl d2_AddWindowField(int x, int y, int a3, int a4, int win)
+int __cdecl d2_AddWindowField(int x, int y, int def, int flags, int win)
 {
 	D2_WIN* w;
 	int id;
@@ -38,7 +38,7 @@ int __cdecl d2_AddWindowField(int x, int y, int a3, int a4, int win)
 		ReportClientMessage(s_67d420);
 		return -1;
 	}
-	id = d2_CreateField(w->left + x, w->top - (*(int*) &w->pad3c[0x21c]) + y, a3, a4);
+	id = d2_CreateField(w->left + x, w->top - (*(int*) &w->pad3c[0x21c]) + y, def, flags);
 	d2_InsertControlAfterWindow(id, w);
 	*(int*) (&((D2_CONTROL_TL*) g_1015ea0)[id].parent) = (int) w;
 	((D2_CONTROL_TL*) g_1015ea0)[id].value_050 = ((D2_CONTROL_TL*) g_1015ea0)[w->slot].value_050;

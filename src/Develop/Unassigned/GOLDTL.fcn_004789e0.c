@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-unsigned int __cdecl fcn_004789e0(int x, unsigned int y, char* s, unsigned short* spr, unsigned int zoom)
+unsigned int __cdecl d2_DrawScaledRleSprite(int x, unsigned int y, char* s, unsigned short* spr, unsigned int zoom)
 {
 	unsigned short* dst;
 	unsigned int* line;

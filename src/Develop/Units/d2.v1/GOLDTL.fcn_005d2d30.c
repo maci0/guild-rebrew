@@ -35,7 +35,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
 int __cdecl gm_CalcWerbungSteps(int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -55,7 +55,7 @@ int __cdecl d2_RunWerbungDialog(unsigned short* target)
 	int h;
 
 	cost = gm_CalcWerbungSteps(*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, *(int*) (target + 2));
-	dlg = fcn_00470820(0, 0, "privillegien\\werbung2");
+	dlg = d2_LoadForm(0, 0, "privillegien\\werbung2");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1ce5, *target, cost);

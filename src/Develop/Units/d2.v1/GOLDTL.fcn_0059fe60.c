@@ -9,9 +9,9 @@ typedef struct {
 	char p8;
 	unsigned char b9;
 	char pa[0x21c - 0xa];
-} Slot59fe;
+} D2_RESIDENCE_ENTITY;
 
-extern Slot59fe g_7f4ca0[];
+extern D2_RESIDENCE_ENTITY g_7f4ca0[];
 extern int d2_CurrentWindowId;
 extern int g_100f1dc;
 extern int g_14ce8e0;
@@ -20,9 +20,9 @@ extern int g_666018;
 extern int g_66601c;
 
 void __cdecl fcn_005338a0(void);
-int __cdecl fcn_00470820(int, int, char *);
+int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText();
@@ -36,7 +36,7 @@ unsigned short *__cdecl d2_OpenTargetPicker(int *, char *, char *, int);
 int __cdecl fcn_00526120(char *, int);
 void __cdecl cm_SendCopyEntityData(char *);
 void __cdecl d2_SetFormVisibility(int, int);
-void __cdecl fcn_0059fa80(Slot59fe *, char *, char *);
+void __cdecl fcn_0059fa80(D2_RESIDENCE_ENTITY *, char *, char *);
 int __cdecl main_RunFrameLoop(void *, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -44,7 +44,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
 /* Residence ("Wohnsitz") dialog: lists the player's lovers' residences as
  * buttons and runs the dialog loop until it closes. */
 /* ADDRESS: GOLDTL 0x0059fe60 */
-void __cdecl fcn_0059fe60(char *a0)
+void __cdecl d2_ShowGeliebteDialog(char *building)
 {
 	int item;
 	int ids[4];
@@ -68,9 +68,9 @@ void __cdecl fcn_0059fe60(char *a0)
 	buttons[2] = -1;
 	buttons[3] = -1;
 	fcn_005338a0();
-	dlg = fcn_00470820(0, 0, "locations\\wohnsitz\\geliebte");
+	dlg = d2_LoadForm(0, 0, "locations\\wohnsitz\\geliebte");
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 2);
@@ -139,7 +139,7 @@ void __cdecl fcn_0059fe60(char *a0)
 						msg[4] = 0x6f;
 						msg[0x36] = 2;
 						*(int *) (msg + 8) = g_7f4ca0[g_774970].f4;
-						*(int *) (msg + 0xc) = *(int *) (a0 + 1);
+						*(int *) (msg + 0xc) = *(int *) (building + 1);
 						*(int *) (msg + 0x5c) = *(int *) (sel + 2);
 						*(int *) (msg + 0x58) = g_7f4ca0[g_774970].f4;
 						cm_SendCopyEntityData(msg);
@@ -158,7 +158,7 @@ void __cdecl fcn_0059fe60(char *a0)
 				}
 			}
 		}
-	} while (main_RunFrameLoop((void *) fcn_0059fe60, 0x67fff) != 0);
+	} while (main_RunFrameLoop((void *) d2_ShowGeliebteDialog, 0x67fff) != 0);
 	d2_DestroyForm(dlg);
 	d3_EndCameraAndUiMode();
 }

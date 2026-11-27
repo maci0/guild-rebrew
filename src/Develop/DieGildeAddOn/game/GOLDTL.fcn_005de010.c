@@ -24,7 +24,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_GenerateShuffledIndices(int, int*);
 void __cdecl cm_RequestModifyEntityLevel(int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 int __cdecl gm_ObjDrainRandomSkill(unsigned char* e, char* request)
 {
@@ -70,7 +70,7 @@ found:
 	if (e[2] == 6) {
 		io_FormatTextBuffer(text, 0x1099, *(unsigned short*) r, *p + 0x16b7);
 		io_FormatTextBuffer(msg, 0xfe8, text);
-		fcn_005dbe90(msg);
+		d2_ShowUseObjDialog(msg);
 	}
 done:
 	*(int*) (request + 0x10) = 1;

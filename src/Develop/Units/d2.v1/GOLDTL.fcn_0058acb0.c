@@ -18,11 +18,11 @@ extern int g_14ce8e0;
 extern int d2_CurrentElementId;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(ENTITY_RECORD*, int);
@@ -46,11 +46,11 @@ void __cdecl d2_RunDomizilKabinettDialog(int unused, char* p)
 	int id;
 
 	b = *(int*) (p + 0x20);
-	h = fcn_00470820(0, 0, "Locations\\Domizil\\kabinett");
+	h = d2_LoadForm(0, 0, "Locations\\Domizil\\kabinett");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText("$C");
 	io_AppendText(0x407d, 0x4171, b);

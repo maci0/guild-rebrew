@@ -7,7 +7,7 @@ extern int g_100f1dc;
 extern char g_6ac9b4[];
 extern char g_6ac9a4[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*, ...);
@@ -18,7 +18,7 @@ void __cdecl d2_ShowAmtInfo(int k)
 {
 	int h;
 
-	h = fcn_00470820(0, 0, g_6ac9b4);
+	h = d2_LoadForm(0, 0, g_6ac9b4);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 2);
 	io_AppendText(g_6ac9a4, k + 0x253);

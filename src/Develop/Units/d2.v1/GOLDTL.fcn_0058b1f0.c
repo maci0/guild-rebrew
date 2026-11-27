@@ -2,10 +2,10 @@ int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00533f40(int, int, int, int, int, int*, int*, int*);
 void* __cdecl FindSlotEntryFiltered(int, char*, void*, void*, int);
-char __cdecl fcn_004f1790(int, int*);
+char __cdecl gm_GetEntitySlotIndex(int, int*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl he_HasActiveGrabpflege(char*, int, int);
-void __cdecl fcn_0046c310(int);
+void __cdecl d2_UpdateWindowScroll(int);
 
 extern void* g_1015ea0;
 extern char g_1016198[];
@@ -42,7 +42,7 @@ typedef struct DialogState {
  * type, marks the selected row and clears the unused rows. */
 
 /* ADDRESS: GOLDTL 0x0058b1f0 */
-void __cdecl fcn_0058b1f0(char* building, DialogState* st, unsigned int type)
+void __cdecl d2_PopulateBuildingSlotList(char* building, DialogState* st, unsigned int type)
 {
 	SlotItem* item;
 	DialogEntry* de;
@@ -72,7 +72,7 @@ void __cdecl fcn_0058b1f0(char* building, DialogState* st, unsigned int type)
 		do {
 			de->item = item;
 			de->id = item->id;
-			de->kind = fcn_004f1790(*(int*) (building + 0x65), (int*) item);
+			de->kind = gm_GetEntitySlotIndex(*(int*) (building + 0x65), (int*) item);
 			de->btn = d2_AddElementToWindow(1, y, (item->flag == -1) ? g_665f58[st->type] : g_665f68[st->type], st->slot);
 			if (he_HasActiveGrabpflege(building, item->id, de->kind)) {
 				d2_AddElementToWindow(0xf, y + 7, 0x7de, st->slot);
@@ -101,5 +101,5 @@ void __cdecl fcn_0058b1f0(char* building, DialogState* st, unsigned int type)
 	}
 	*(int*) (g_1016198 + st->slot * 0x3cc) = saved;
 	*(int*) (g_1016198 + st->slot * 0x3cc + 0x1c) = 0x35;
-	fcn_0046c310(st->slot);
+	d2_UpdateWindowScroll(st->slot);
 }

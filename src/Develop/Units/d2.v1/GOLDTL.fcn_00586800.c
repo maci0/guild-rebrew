@@ -22,11 +22,11 @@ extern int d2_CurrentElementId;
 int __cdecl fcn_004ee160(char*);
 char* __cdecl ahm_GetWorkshopOwner(char*);
 float __cdecl ahm_GetEssenceValue(char*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_AmountToUnits(int, unsigned char);
@@ -61,11 +61,11 @@ int __cdecl d2_RunDomizilSkillDialog(char* e, int* unused)
 		return 0;
 	}
 	f = ahm_GetEssenceValue(p, 3);
-	h = fcn_00470820(0, 0, "Locations\\Domizil\\skill");
+	h = d2_LoadForm(0, 0, "Locations\\Domizil\\skill");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	line = d2_GetWindowListItem(h, 1, io_AppendText(0x403a, 0x182, g_773d75));
 	d2_SetElementValue(line, gm_AmountToUnits(tenth, g_773d75), gm_AmountToUnits(n, g_773d75), gm_AmountToUnits(tenth, g_773d75));

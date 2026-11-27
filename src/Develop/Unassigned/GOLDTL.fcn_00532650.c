@@ -15,11 +15,11 @@ struct s_7e6060 {
 extern struct s_7e6060 g_7e6060[64];
 
 void __cdecl d2_SelectFont(int);
-char __cdecl fcn_00443e10(void*, int*);
+char __cdecl d3_GetObjectScreenRect(void*, int*);
 void __cdecl fcn_0046bd20(int, int, int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x00532650 */
-void __cdecl fcn_00532650(void)
+void __cdecl d2_RenderHoverTooltips(void)
 {
 	char** q;
 	char** s;
@@ -48,7 +48,7 @@ void __cdecl fcn_00532650(void)
 			continue;
 		}
 		if (*(int*) (m + 0x218) != 1) {
-			if (!fcn_00443e10(m, r)) { continue; }
+			if (!d3_GetObjectScreenRect(m, r)) { continue; }
 		} else {
 			m = *(char**) (e + 0x22c);
 			if (m == 0) {
@@ -57,7 +57,7 @@ void __cdecl fcn_00532650(void)
 			if (*(int*) (m + 0x218) == 1) {
 				continue;
 			}
-			if (!fcn_00443e10(m, r)) { continue; }
+			if (!d3_GetObjectScreenRect(m, r)) { continue; }
 		}
 		y = r[1] - 0x40;
 		x = (r[2] - r[0]) / 2 + r[0] - 0x50;

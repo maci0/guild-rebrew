@@ -11,7 +11,7 @@ typedef struct Item {
 extern char* g_104049c;
 extern unsigned int g_10404a0;
 
-void __cdecl fcn_00459be0(unsigned int flags)
+void __cdecl d3_ResetMemoryCountFlags(unsigned int flags)
 {
 	char* p;
 	Item* it;

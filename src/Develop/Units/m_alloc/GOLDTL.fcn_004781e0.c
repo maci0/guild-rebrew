@@ -8,7 +8,7 @@ short __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsig
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x004781e0 */
-unsigned int* __cdecl fcn_004781e0(int a0, int a1, int width, int a3, int a4, char a5, int a6)
+unsigned int* __cdecl shp_GrabBit16(int a0, int a1, int width, int a3, int a4, char a5, int a6)
 {
 	char* v6;
 	unsigned int* v18;

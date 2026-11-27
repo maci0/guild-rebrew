@@ -28,7 +28,7 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
 unsigned short* __cdecl fcn_00502cd0(int, int, int, int);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -121,7 +121,7 @@ void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
 		}
 		p = gm_NextEntityQueryMatch();
 	}
-	han = fcn_00470820(0, 0, g_6ac628);
+	han = d2_LoadForm(0, 0, g_6ac628);
 	d2_CenterDialogWindows(han);
 	d2_SetForm(han, 1);
 	io_AppendText(0x17ce);

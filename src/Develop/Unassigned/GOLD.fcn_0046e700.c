@@ -3,12 +3,12 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 extern GuiEnt** g_006ed964;
 extern void* g_006ed9dc;
-void __cdecl fcn_0047ce20(int);
+void __cdecl d2_FreeAnimationSlot(int);
 void __cdecl fcn_00472df0(int);
 void __cdecl fcn_0046cab0(int);
 void __cdecl d2_DestroySurface(int);
 void __cdecl fcn_00468fa0(int, int, int, int, void*);
-void __cdecl fcn_00468ea0(int, int, int, int);
+void __cdecl d2_AddSlotDirtyRect(int, int, int, int);
 
 /* ADDRESS: GOLD 0x0046e700 */
 void __cdecl fcn_0046e700(int index)
@@ -26,7 +26,7 @@ void __cdecl fcn_0046e700(int index)
         if (element->bild_offset) m_FreeTracked((void*) element->bild_offset);
         break;
     case 4:
-        fcn_0047ce20(element->bild_offset);
+        d2_FreeAnimationSlot(element->bild_offset);
         break;
     case 0x40:
         fcn_00472df0(element->bild_offset);
@@ -68,10 +68,10 @@ void __cdecl fcn_0046e700(int index)
         if (*(int*) (object + 0x198)) {
             fcn_00468fa0(element->x, element->y, element->w, element->f16, object);
         } else {
-            fcn_00468ea0(element->x, element->y, element->w, element->f16);
+            d2_AddSlotDirtyRect(element->x, element->y, element->w, element->f16);
         }
     } else {
-        fcn_00468ea0(element->x, element->y, element->w, element->f16);
+        d2_AddSlotDirtyRect(element->x, element->y, element->w, element->f16);
     }
     for (i = 0; i < 0x2ff; i++) {
         if (g_006ed964[i] == element) {

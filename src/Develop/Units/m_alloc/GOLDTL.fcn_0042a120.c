@@ -7,7 +7,7 @@ extern int* g_6b7f50[16];
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void* ptr);
 int __cdecl msx_FindFreeWaveDriver(void);
-int __cdecl fcn_0042b2c0(void);
+int __cdecl msx_CountActiveWaveDrivers(void);
 int __cdecl msx_SetSampleHandleLimit(int);
 __declspec(dllimport) unsigned int __stdcall AIL_waveOutOpen(void* driver, int direct_sound, int device, void* format);
 __declspec(dllimport) int __stdcall AIL_get_preference(int);
@@ -46,7 +46,7 @@ int __cdecl fcn_0042a120(int* out, int channels, int bits, int rate)
 fail:
 		return -1;
 	}
-	if (fcn_0042b2c0() == 1 && g_6b7f94 == 0) {
+	if (msx_CountActiveWaveDrivers() == 1 && g_6b7f94 == 0) {
 		msx_SetSampleHandleLimit(AIL_get_preference(1));
 	}
 	g_6b7f10[index] = m_alloc(g_6b7f94 * 4, (char*) 0x679874);

@@ -8,7 +8,7 @@ extern char g_6aae08[];
 
 char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int, char);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -24,7 +24,7 @@ void __cdecl d2_ShowGildenkasseDialog(char* e)
 
 	r = fcn_00502cd0(*(int*) (e + 0x5d), 2, 6, 0, 0x115);
 	v = gm_SumQueryEntryValues(*(int*) (r + 0x14), (*(char*)&g_773d75));
-	h = fcn_00470820(0, 0, g_6aae08);
+	h = d2_LoadForm(0, 0, g_6aae08);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1a0f, v);

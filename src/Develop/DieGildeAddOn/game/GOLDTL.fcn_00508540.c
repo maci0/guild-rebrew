@@ -4,7 +4,7 @@ int __cdecl gm_GetKindRecord(int, int*);
 int __cdecl cm_BeginPacketFieldDelta(int*, int);
 int __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 int __cdecl cm_RequestChangeAttribute(void);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x00508540 */
 int __cdecl gm_ApplyRandomEntityDefect(int* rec, int unused, void* out)
@@ -84,6 +84,6 @@ int __cdecl gm_ApplyRandomEntityDefect(int* rec, int unused, void* out)
 	cm_BeginPacketFieldDelta(rec, rec[1]);
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &value);
 	cm_RequestChangeAttribute();
-	fcn_004ff210(*(short*) rec, -amount);
+	gm_ApplyEntityHealthDelta(*(short*) rec, -amount);
 	return mode;
 }

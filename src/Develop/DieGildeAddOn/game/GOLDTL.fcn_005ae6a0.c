@@ -13,7 +13,7 @@ typedef struct F8 {
 int __cdecl d2_CheckActionBlocker(char* a1, int a2);
 int __cdecl ai_FindEntityInFavorRange(char* p, int kind, F8 f, int c, float r, int* out);
 void* __cdecl gm_StartFilteredEntitySearch(int a1, int a2, int a3);
-int __cdecl fcn_00470820(int a1, int a2, char* text);
+int __cdecl d2_LoadForm(int a1, int a2, char* text);
 void __cdecl d2_CenterDialogWindows(int a1);
 void __cdecl d2_SetOverlayAnimation(int a1, int a2);
 void __cdecl d2_SetForm(int a1, int a2);
@@ -64,7 +64,7 @@ int __cdecl d2_RunEntfuehrungDialog(void* a0)
 			return 0;
 		p = gm_StartFilteredEntitySearch(1, 1, found);
 	}
-	dialogId = fcn_00470820(0, 0, (char*) 0x6ab2b0);
+	dialogId = d2_LoadForm(0, 0, (char*) 0x6ab2b0);
 	d2_CenterDialogWindows(dialogId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dialogId, 1);

@@ -22,7 +22,7 @@ int __cdecl he_HasNoActiveAction0x62(void* a);
 int __cdecl he_HasNoActiveAction0x88(void* a, void* b);
 void __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 void __cdecl fcn_00526120(char* buf, int flag);
-int __cdecl fcn_00470820(int a, int b, char* name);
+int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int flag);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
@@ -94,7 +94,7 @@ int __cdecl d2_RunSabotageDialog(unsigned short* obj, unsigned char* record)
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	dlg = fcn_00470820(0, 0, (char*) 0x6ac494);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6ac494);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	d2_SetOverlayAnimation(0, 0);

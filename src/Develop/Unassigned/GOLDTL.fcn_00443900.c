@@ -1,43 +1,43 @@
-typedef struct fcn_00443900_Obj
+typedef struct D3_SCENE_OBJ
 {
 	char pad000[0x1f4];
-	struct fcn_00443900_Obj* next;
-	struct fcn_00443900_Obj* prev;
-	struct fcn_00443900_Scene* scene;
-} fcn_00443900_Obj;
+	struct D3_SCENE_OBJ* next;
+	struct D3_SCENE_OBJ* prev;
+	struct D3_SCENE_CTX* scene;
+} D3_SCENE_OBJ;
 // SIZE 0x200
 
-typedef struct fcn_00443900_Scene
+typedef struct D3_SCENE_CTX
 {
 	char pad00[0x80];
-	fcn_00443900_Obj* head;
-	fcn_00443900_Obj* tail;
+	D3_SCENE_OBJ* head;
+	D3_SCENE_OBJ* tail;
 	char pad88[0xa4 - 0x88];
 	void* fa4;
 	void* fa8;
-} fcn_00443900_Scene;
+} D3_SCENE_CTX;
 // SIZE 0xac
 
 typedef struct
 {
-	fcn_00443900_Scene* from;
-	fcn_00443900_Scene* to;
-} fcn_00443900_Ctx;
+	D3_SCENE_CTX* from;
+	D3_SCENE_CTX* to;
+} D3_SCENE_MOVE_CTX;
 // SIZE 0x8
 
 extern int g_67a370;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern char g_1043060;
 
-void __cdecl d3_VisitSceneObjects(fcn_00443900_Scene* s, fcn_00443900_Obj* o, int mask, void* fn, void* ctx);
-void __cdecl fcn_004438b0(void);
-void __cdecl fcn_00443030(fcn_00443900_Scene* s);
+void __cdecl d3_VisitSceneObjects(D3_SCENE_CTX* s, D3_SCENE_OBJ* o, int mask, void* fn, void* ctx);
+void __cdecl d3_TransferObjectSceneCallback(void);
+void __cdecl fcn_00443030(D3_SCENE_CTX* s);
 
 /* ADDRESS: GOLDTL 0x00443900 */
-char __cdecl fcn_00443900(fcn_00443900_Obj* o, fcn_00443900_Scene* from, fcn_00443900_Scene* to)
+char __cdecl d3_MoveObjectToScene(D3_SCENE_OBJ* o, D3_SCENE_CTX* from, D3_SCENE_CTX* to)
 {
-	fcn_00443900_Obj* p;
-	fcn_00443900_Ctx ctx;
+	D3_SCENE_OBJ* p;
+	D3_SCENE_MOVE_CTX ctx;
 
 	if (o == 0 || from == 0 || to == 0 || o->scene != 0) {
 		return 0;
@@ -45,13 +45,13 @@ char __cdecl fcn_00443900(fcn_00443900_Obj* o, fcn_00443900_Scene* from, fcn_004
 	if (from == to) {
 		return 1;
 	}
-	if (from == ((fcn_00443900_Scene*)g_67a370)) {
-		from->head = (*(fcn_00443900_Obj**)&d3_ObjectListHead);
-		from->tail = (*(fcn_00443900_Obj**)&g_1042538);
+	if (from == ((D3_SCENE_CTX*)g_67a370)) {
+		from->head = (*(D3_SCENE_OBJ**)&d3_ObjectListHead);
+		from->tail = (*(D3_SCENE_OBJ**)&g_1042538);
 		from->fa4 = (*(void**)&d3_SceneRenderListHead);
 		from->fa8 = (*(void**)&g_1040958);
 	}
-	for (p = from->head; p != &(*(fcn_00443900_Obj*)d3_SceneObjectSentinel); p = p->next) {
+	for (p = from->head; p != &(*(D3_SCENE_OBJ*)d3_SceneObjectSentinel); p = p->next) {
 		if (p == o) {
 			break;
 		}
@@ -59,41 +59,41 @@ char __cdecl fcn_00443900(fcn_00443900_Obj* o, fcn_00443900_Scene* from, fcn_004
 	if (p != o) {
 		return 0;
 	}
-	if (o->prev == &(*(fcn_00443900_Obj*)&g_1043060)) {
+	if (o->prev == &(*(D3_SCENE_OBJ*)&g_1043060)) {
 		from->head = o->next;
 	} else {
 		o->prev->next = o->next;
 	}
-	if (o->next == &(*(fcn_00443900_Obj*)d3_SceneObjectSentinel)) {
+	if (o->next == &(*(D3_SCENE_OBJ*)d3_SceneObjectSentinel)) {
 		from->tail = o->prev;
 	} else {
 		o->next->prev = o->prev;
 	}
-	if (from == ((fcn_00443900_Scene*)g_67a370)) {
-		(*(fcn_00443900_Obj**)&d3_ObjectListHead) = from->head;
-		(*(fcn_00443900_Obj**)&g_1042538) = from->tail;
+	if (from == ((D3_SCENE_CTX*)g_67a370)) {
+		(*(D3_SCENE_OBJ**)&d3_ObjectListHead) = from->head;
+		(*(D3_SCENE_OBJ**)&g_1042538) = from->tail;
 		(*(void**)&d3_SceneRenderListHead) = from->fa4;
 		(*(void**)&g_1040958) = from->fa8;
 	}
 	ctx.from = from;
 	ctx.to = to;
-	d3_VisitSceneObjects(from, o, 0x3ff, (void*) fcn_004438b0, &ctx);
-	if (to == ((fcn_00443900_Scene*)g_67a370)) {
-		to->head = (*(fcn_00443900_Obj**)&d3_ObjectListHead);
-		to->tail = (*(fcn_00443900_Obj**)&g_1042538);
+	d3_VisitSceneObjects(from, o, 0x3ff, (void*) d3_TransferObjectSceneCallback, &ctx);
+	if (to == ((D3_SCENE_CTX*)g_67a370)) {
+		to->head = (*(D3_SCENE_OBJ**)&d3_ObjectListHead);
+		to->tail = (*(D3_SCENE_OBJ**)&g_1042538);
 		to->fa4 = (*(void**)&d3_SceneRenderListHead);
 		to->fa8 = (*(void**)&g_1040958);
 	} else if (to->head == 0) {
 		fcn_00443030(to);
 	}
-	o->next = &(*(fcn_00443900_Obj*)d3_SceneObjectSentinel);
+	o->next = &(*(D3_SCENE_OBJ*)d3_SceneObjectSentinel);
 	p = to->tail;
 	p->next = o;
 	o->prev = p;
 	to->tail = o;
-	if (to == ((fcn_00443900_Scene*)g_67a370)) {
-		(*(fcn_00443900_Obj**)&d3_ObjectListHead) = to->head;
-		(*(fcn_00443900_Obj**)&g_1042538) = to->tail;
+	if (to == ((D3_SCENE_CTX*)g_67a370)) {
+		(*(D3_SCENE_OBJ**)&d3_ObjectListHead) = to->head;
+		(*(D3_SCENE_OBJ**)&g_1042538) = to->tail;
 		(*(void**)&d3_SceneRenderListHead) = to->fa4;
 		(*(void**)&g_1040958) = to->fa8;
 	}

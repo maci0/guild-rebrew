@@ -2,13 +2,13 @@
 typedef struct {
 	char pad0[0x18];
 	int* items;
-} fcn_0047cba0_set;
+} D2_SPRITE_SET;
 
 int __cdecl fcn_0047bdd0(int, int, int, float, unsigned char, unsigned char, unsigned char);
 
 
 /* ADDRESS: GOLDTL 0x0047cba0 */
-int __cdecl fcn_0047cba0(int x, int y, int a3, fcn_0047cba0_set* s, int idx)
+int __cdecl d2_DrawSpriteFromSet(int x, int y, int a3, D2_SPRITE_SET* s, int idx)
 {
 	if (s == 0)
 		return 0;

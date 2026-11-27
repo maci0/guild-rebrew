@@ -33,9 +33,9 @@ extern char g_14cf950;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int, int, char *);
+int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl io_AppendText(char *);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_CreateRadioGroup(int);
@@ -68,12 +68,12 @@ int __cdecl fcn_005263d0(char *title, char *text, unsigned int flags)
 		return 0;
 	}
 	mode = main_LoopFlags & ~0x38;
-	h = fcn_00470820(0, 0, "misc\\MessageBoxGreen");
+	h = d2_LoadForm(0, 0, "misc\\MessageBoxGreen");
 	if (flags & 8) {
 		mode = 0x717c6;
 	}
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	if (title != 0) {
 		io_AppendText(title);

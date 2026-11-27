@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00459d50 */
-int __cdecl fcn_00459d50(char* p)
+int __cdecl d3sm_GetMemorySize(char* p)
 {
 	int r;
 	int n;

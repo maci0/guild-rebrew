@@ -35,11 +35,11 @@ extern int d2_CurrentElementId;
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_CheckEntityStock(ZUNFT_ENTITY_VIEW*, int, unsigned char);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl gm_ExecZunftAufruhr(ZUNFT_ENTITY_VIEW*, ZUNFT_LEVEL2_REQUEST*);
@@ -60,11 +60,11 @@ int __cdecl d2_RunZunftLevel2Dialog(int unused, char* target)
 	if (gm_CheckEntityStock(((ZUNFT_ENTITY_VIEW*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), cost, g_773d75) == 0) {
 		return 0;
 	}
-	h = fcn_00470820(0, 0, g_6aaf58);
+	h = d2_LoadForm(0, 0, g_6aaf58);
 	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x165f);
 	d2_SetForm(h, 2);

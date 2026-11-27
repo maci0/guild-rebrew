@@ -10,7 +10,7 @@ extern float g_10425d0[];
 void __cdecl d3_LerpVec3(float*, float*, float, float*);
 void __cdecl d3_NormalizeVector(float*);
 
-void __cdecl fcn_00459710(char* o, char flag)
+void __cdecl d3_ResetSkyDomeNormals(char* o, char flag)
 {
 	float vc[4];
 	float v[2][4];

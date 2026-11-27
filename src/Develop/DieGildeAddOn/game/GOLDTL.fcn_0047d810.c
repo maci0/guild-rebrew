@@ -36,7 +36,7 @@ extern unsigned char* lpGebaeudePROT;
 extern char g_7f4ca0[];
 
 int __cdecl fcn_0047d240(AI_TURN_ENTITY*);
-AI_TURN_ENTITY* __cdecl fcn_0047d2a0(AI_TURN_ENTITY*);
+AI_TURN_ENTITY* __cdecl ai_UpdateEntityFeud(AI_TURN_ENTITY*);
 void __cdecl ai_BuildActionCandidates(AI_TURN_ENTITY*);
 void __cdecl fcn_004c6090(AI_TURN_BUILDING*, int, int, int);
 int __cdecl fcn_00495180(int);
@@ -109,7 +109,7 @@ void __cdecl ai_UpdateEntityTurn(AI_TURN_ENTITY* entity)
 	if (*(unsigned char*) ((char*) entity + 8) <= 0) {
 		return;
 	}
-	*(int*) 0x77261c = (int) fcn_0047d2a0(entity);
+	*(int*) 0x77261c = (int) ai_UpdateEntityFeud(entity);
 	ai_BuildActionCandidates(entity);
 	state = *((unsigned char*) entity + 0x132);
 	if (!*((char*) entity + 0x1b1) && fcn_00495180(entity->id)) {

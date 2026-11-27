@@ -42,11 +42,11 @@ extern pos14_7f4c00 gm_GameTime;
 extern int d2_CurrentElementId;
 #include "client_data.h"
 int __cdecl gm_WalkEntityChain(unsigned short);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl fcn_0046fac0(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
@@ -88,11 +88,11 @@ void __cdecl d2_ShowCabinetSpyDialog(char* building)
 	act.amt[0] = (int) (f * 0.01f);
 	act.amt[1] = (int) (f * 0.015f);
 	act.amt[2] = (int) (f * 0.0199999996f);
-	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6a9514);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(*(int*) &d2_CurrentWindowId);
+	d2_InitWindowBounds(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
 	i = fcn_0046fac0(0, 3, *(int*) 0x14b53a0, *(int*) &d2_CurrentWindowId);
 	((D2_CONTROL_TL*)g_1015ea0)[i].value_06c = 1;

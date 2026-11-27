@@ -10,7 +10,7 @@ char* __cdecl gm_SelectEntityHeadSet(int);
 int __cdecl fcn_004e4ae0(char*, int);
 void __cdecl fcn_004e4730(char*);
 void __cdecl msx_StartMusicIfAllowed(char*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl evt_StartGfxScript(char*, char*);
@@ -70,7 +70,7 @@ void __cdecl fcn_004e2090(int event)
 	scene[2] = fcn_004e4ae0("ADDON\\HOCHZEIT_NEU.sbf", 0);
 	fcn_004e4730("KIRCHE_HOCHZEIT.ed3");
 	msx_StartMusicIfAllowed("cd2\\Hochzeit.mp3");
-	scene[1] = fcn_00470820(0, 0, "cutscenes\\hochzeit");
+	scene[1] = d2_LoadForm(0, 0, "cutscenes\\hochzeit");
 	fcn_00471d80(scene[1], 3);
 	d2_SetFormVisibility(scene[1], 0);
 	scene[0] = evt_StartGfxScript("cutscenes\\hochzeit\\hochzeit-create.esc", text);

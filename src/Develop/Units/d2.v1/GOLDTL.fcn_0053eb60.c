@@ -17,10 +17,10 @@ extern int g_100f1dc;
 extern float g_6640cc;
 extern float g_66292c;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
@@ -43,10 +43,10 @@ void __cdecl fcn_0053eb60(int n)
 	int i;
 	int ok;
 
-	h = fcn_00470820(0, 0, g_6a4144);
+	h = d2_LoadForm(0, 0, g_6a4144);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x42c5);
 	d2_SetForm(h, 3);

@@ -5,7 +5,7 @@ extern RGB_COLOR g_100f1a0;
 
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void*);
-int __cdecl fcn_00475780(char*, char*);
+int __cdecl d2_CompareRgb(char*, char*);
 void __cdecl d2_WritePixelRgb(char*, char, char, char);
 
 /* Crop one 24-bit bitmap block: scan the cells against the hole colour for the
@@ -37,16 +37,16 @@ unsigned int* __cdecl fcn_00477ae0(int x, int y, int width,
 	for (row = 0; row < height; row++) {
 		for (col = 0; col < width; col++) {
 			v20 = &pixels[((y + row) * stride + x + col) * 3];
-			if (fcn_00475780(v20, (char*) &g_100f1a0) && col > (int) xmax) {
+			if (d2_CompareRgb(v20, (char*) &g_100f1a0) && col > (int) xmax) {
 				xmax = (unsigned short) col;
 			}
-			if (fcn_00475780(v20, (char*) &g_100f1a0) && col < (int) xmin) {
+			if (d2_CompareRgb(v20, (char*) &g_100f1a0) && col < (int) xmin) {
 				xmin = (unsigned short) col;
 			}
-			if (fcn_00475780(v20, (char*) &g_100f1a0) && row > (int) ymax) {
+			if (d2_CompareRgb(v20, (char*) &g_100f1a0) && row > (int) ymax) {
 				ymax = (unsigned short) row;
 			}
-			if (fcn_00475780(v20, (char*) &g_100f1a0) && row < (int) ymin) {
+			if (d2_CompareRgb(v20, (char*) &g_100f1a0) && row < (int) ymin) {
 				ymin = (unsigned short) row;
 			}
 		}
@@ -65,16 +65,16 @@ unsigned int* __cdecl fcn_00477ae0(int x, int y, int width,
 	*(unsigned short*) ((char*) v6 + 0x10) = ymin;
 	*(unsigned short*) ((char*) v6 + 0x12) = (unsigned short) (xmax + 1);
 	*(unsigned short*) ((char*) v6 + 0x14) = (unsigned short) (ymax + 1);
-	if (fcn_00475780((char*) 0x67d95c, black)) {
+	if (d2_CompareRgb((char*) 0x67d95c, black)) {
 		for (row = 0; row < height; row++) {
 			for (col = 0; col < width; col++) {
 				v20 = &pixels[((y + row) * stride + x + col) * 3];
-				if (!fcn_00475780(v20, (char*) 0x67d960)) {
+				if (!d2_CompareRgb(v20, (char*) 0x67d960)) {
 					xmin = (unsigned short) col;
 					ymin = (unsigned short) row;
 					d2_WritePixelRgb(v20, g_100f1a0.r, g_100f1a0.g, g_100f1a0.b);
 				}
-				if (!fcn_00475780(v20, (char*) 0x67d95c)) {
+				if (!d2_CompareRgb(v20, (char*) 0x67d95c)) {
 					xmax = (unsigned short) col;
 					ymax = (unsigned short) row;
 					d2_WritePixelRgb(v20, g_100f1a0.r, g_100f1a0.g, g_100f1a0.b);

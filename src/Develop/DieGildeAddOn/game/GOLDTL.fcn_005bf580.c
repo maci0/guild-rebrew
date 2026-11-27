@@ -22,11 +22,11 @@ char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl fcn_00526120(char*, int);
 int __cdecl cm_SendSetHE(char, unsigned char*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -88,11 +88,11 @@ int __cdecl d2_RunSpionageDialog(char* rec)
 			return 0;
 		}
 	}
-	h = (char*) fcn_00470820(0, 0, "locations\\wohnsitz\\spy");
+	h = (char*) d2_LoadForm(0, 0, "locations\\wohnsitz\\spy");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows((int) h);
 	d2_SetForm((int) h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm((int) h, 2);
 	row = fcn_0046fac0(0, 3, g_14b5e18, d2_CurrentWindowId);
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[row].value_06c)) = 1;

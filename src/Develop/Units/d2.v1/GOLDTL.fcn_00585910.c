@@ -40,11 +40,11 @@ void* __cdecl memset(void*, int, unsigned int);
 
 void* __cdecl ahm_GetWorkshopOwner(unsigned char*);
 int __cdecl he_GetActionProgress(char*, int*, float*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
@@ -87,11 +87,11 @@ void __cdecl fcn_00585910(char* e)
 	stamp = g_6b7fac;
 	g_100f1dc = -1;
 	memset(ids, -1, 0x24);
-	ids[0] = fcn_00470820(0, 0, g_6a93c0);
+	ids[0] = d2_LoadForm(0, 0, g_6a93c0);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(ids[0]);
 	d2_SetForm(ids[0], 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(ids[0], 2);
 	ids[1] = d2_CurrentWindowId;
 	d2_SetForm(ids[0], 1);

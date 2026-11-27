@@ -11,14 +11,14 @@ typedef struct
 {
 	char pad0[0x50];
 	int color;
-} fcn_0046dd60_Pal;
+} D2_BG_PALETTE;
 
 typedef struct
 {
 	char pad0[0x50];
 	short w;
 	short h;
-} fcn_0046dd60_Def;
+} D2_BG_TEX_DEF;
 // SIZE 0x54
 
 // SIZE 0x3cc
@@ -39,7 +39,7 @@ typedef struct
 	char pad26c[0x398 - 0x26c];
 	int tex;
 	char pad39c[4];
-	fcn_0046dd60_Pal* pal;
+	D2_BG_PALETTE* pal;
 	float alpha;
 	int ml;
 	int mt;
@@ -47,7 +47,7 @@ typedef struct
 	int mb;
 	char pad3b8[0x3c8 - 0x3b8];
 	int img;
-} fcn_0046dd60_Win;
+} D2_BG_WINDOW;
 
 
 extern char* g_77253c;
@@ -59,15 +59,15 @@ void __cdecl d2_SetQuadVertexColor(void* p, int r, int g, int b);
 void __cdecl d2_DrawTexturedQuad(int x, int y, int w, int h, int color, float alpha);
 void __cdecl d2_DrawSprite(int x, int y, int a3, int img);
 int __cdecl d2_GetResourceData(int id);
-void __cdecl fcn_0047a040(int a, int b, int c, int d);
-void __cdecl fcn_0047cba0(int x, int y, int surf, int tex, int c);
-void __cdecl fcn_0047c7b0(int x, int y, int w, int h, int bits, float alpha);
+void __cdecl d2_SetClipRect(int a, int b, int c, int d);
+void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, int tex, int c);
+void __cdecl d2_DrawSurfaceQuad(int x, int y, int w, int h, int bits, float alpha);
 
 /* ADDRESS: GOLDTL 0x0046dd60 */
-void __cdecl d2_DrawWindowBackground(fcn_0046dd60_Win* w, int dst)
+void __cdecl d2_DrawWindowBackground(D2_BG_WINDOW* w, int dst)
 {
 	void* p;
-	fcn_0046dd60_Def* d;
+	D2_BG_TEX_DEF* d;
 	int tex;
 	int x0;
 	int y0;
@@ -91,7 +91,7 @@ void __cdecl d2_DrawWindowBackground(fcn_0046dd60_Win* w, int dst)
 	cw = w->w - w->mr - w->ml;
 	ch = w->h - w->mb - w->mt;
 	if (w->flags & 1)
-		d2_DrawTexturedQuad(x0, y0, cw, ch, ((fcn_0046dd60_Pal*)g_77253c)->color, w->alpha);
+		d2_DrawTexturedQuad(x0, y0, cw, ch, ((D2_BG_PALETTE*)g_77253c)->color, w->alpha);
 	else if (w->pal != 0)
 		d2_DrawTexturedQuad(x0, y0, cw, ch, w->pal->color, w->alpha);
 	else if (w->img != 0)
@@ -101,18 +101,18 @@ void __cdecl d2_DrawWindowBackground(fcn_0046dd60_Win* w, int dst)
 		clipTop = g_7725fc;
 		clipRight = d2_ClipRight;
 		clipBottom = d2_ClipBottom;
-		fcn_0047a040(w->x, w->y, w->w + w->x, w->h + w->y);
-		d = &((fcn_0046dd60_Def*)g_772500)[w->tex];
+		d2_SetClipRect(w->x, w->y, w->w + w->x, w->h + w->y);
+		d = &((D2_BG_TEX_DEF*)g_772500)[w->tex];
 		if (w->sy >= 0)
 			oy = w->y - w->sy % d->h;
 		else
 			oy = w->y - w->sy % d->h - d->h;
 		for (rows = 0; rows < w->h / d->h + 1.5; rows++) {
 			for (i = 0; i < w->w / d->w; i++)
-				fcn_0047cba0(w->x + d->w * i, d->h * rows + oy, dst, tex, 0);
+				d2_DrawSpriteFromSet(w->x + d->w * i, d->h * rows + oy, dst, tex, 0);
 		}
-		fcn_0047a040(clipLeft, clipTop, clipRight, clipBottom);
+		d2_SetClipRect(clipLeft, clipTop, clipRight, clipBottom);
 	}
 	if (w->surf != 0)
-		fcn_0047c7b0(w->x, w->y, w->surf->width, w->surf->height, (int) w->surf->surface, 1.0f);
+		d2_DrawSurfaceQuad(w->x, w->y, w->surf->width, w->surf->height, (int) w->surf->surface, 1.0f);
 }

@@ -16,7 +16,7 @@ extern char g_67bd38[];
 
 void* __cdecl m_alloc(int, void*);
 
-void __cdecl fcn_0045bed0(unsigned int n, int levels)
+void __cdecl d3_InitTextures(unsigned int n, int levels)
 {
 	g_10405cc = 0;
 	g_10404a0 = n;

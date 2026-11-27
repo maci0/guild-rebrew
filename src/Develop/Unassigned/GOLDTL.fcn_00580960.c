@@ -5,7 +5,7 @@ extern int* g_665f08;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_100f1dc;
 
-int __cdecl fcn_00580960(void)
+int __cdecl d2_CheckTutorialCueClicked(void)
 {
 	int r;
 

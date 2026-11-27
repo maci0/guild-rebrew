@@ -9,7 +9,7 @@ extern char* g_1015ea0;
 
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int, ...);
-int __cdecl fcn_00465950(char* name);
+int __cdecl d2_FindResourceByName(char* name);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00593200 */
@@ -36,9 +36,9 @@ void __cdecl fcn_00593200(void)
 	strupr(s1);
 	flag = g_9baa96;
 	sprintf(s3, (char*) 0x6a2e38, s1);
-	slot = fcn_00465950(s3);
+	slot = d2_FindResourceByName(s3);
 	if (slot == -1) {
-		slot = fcn_00465950((char*) 0x6a2e24);
+		slot = d2_FindResourceByName((char*) 0x6a2e24);
 	}
 	slot = d2_AddElementToWindow(5, 5, slot, d2_CurrentWindowId);
 	x = ((D2_CONTROL_TL*) (g_1015ea0))[slot].width + 0xf;

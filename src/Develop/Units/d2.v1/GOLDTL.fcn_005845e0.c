@@ -3,7 +3,7 @@ extern int g_14ce8e0, g_100f1dc, d2_CurrentElementId;
 extern char g_14cf950;
 extern int g_6a81dc[5];
 #include "Develop/Units/d2.v1/d2_gui.h"
-char* __cdecl fcn_00470820(int, int, char*);
+char* __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(char*);
 void __cdecl d2_DestroyForm(char*);
 int __cdecl d2_GetWindowListItem(char*, int, char*);
@@ -28,7 +28,7 @@ int __cdecl d2_ChooseTutorial(void)
 	int flag;
 
 	i = 0; flag = 0;
-	menu = fcn_00470820(0, 0, (char*) 0x6a9298);
+	menu = d2_LoadForm(0, 0, (char*) 0x6a9298);
 	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 1);
 	io_AppendText((char*) 0x6a2f5c, 0x3f1a);

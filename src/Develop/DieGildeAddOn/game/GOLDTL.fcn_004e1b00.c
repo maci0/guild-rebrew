@@ -8,7 +8,7 @@ extern int g_772f54;
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cut_RandMod(int);
 void __cdecl fcn_004e4730(char*);
-void __cdecl fcn_004e4b60(char*);
+void __cdecl d3_InitSkyLayer(char*);
 void __cdecl msx_StartMusicIfAllowed(char*);
 void __cdecl fcn_004e4c40(int);
 int __cdecl gm_SelectEntityHeadSet(int);
@@ -16,15 +16,15 @@ int __cdecl gm_FindOrAllocHeadSet(int, int);
 int __cdecl evt_StartGfxScript(char*, char*);
 void __cdecl cut_WaitForScript(int);
 int __cdecl gm_RandomMod(unsigned short);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl cut_WaitSeconds(int);
 void __cdecl cut_FadeToBlack(void);
 void __cdecl d3_DestroySceneRain(void);
 void __cdecl d3_DestroySkyLayer(void);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicIfAllowed(void);
-int __cdecl fcn_00445f50(int, float, float, int);
-void __cdecl fcn_004463f0(int, int, float);
+int __cdecl d3_BlendSceneLightingPreset(int, float, float, int);
+void __cdecl d3_InterpolateSceneFog(int, int, float);
 
 /* ADDRESS: GOLDTL 0x004e1b00 */
 void __cdecl cut_PlayHinrichtung(int eventRecord)
@@ -58,14 +58,14 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	cut_EventLoopFlags = 0x702c6;
 	d2_SuppressOverlay = 1;
 	fcn_004e4730((char*) 0x68cfb0);
-	fcn_00445f50(0, 0, 1.0f, 1);
-	fcn_004463f0(0, 0, 0);
+	d3_BlendSceneLightingPreset(0, 0, 1.0f, 1);
+	d3_InterpolateSceneFog(0, 0, 0);
 	if (mode == 1) {
-		fcn_004e4b60((char*) (cut_RandMod(3) * 0x4c + 0x6a2818));
+		d3_InitSkyLayer((char*) (cut_RandMod(3) * 0x4c + 0x6a2818));
 	} else if (mode == 2) {
-		fcn_004e4b60((char*) (cut_RandMod(3) * 0x4c + 0x6a2730));
+		d3_InitSkyLayer((char*) (cut_RandMod(3) * 0x4c + 0x6a2730));
 	} else {
-		fcn_004e4b60((char*) (cut_RandMod(4) * 0x4c + 0x6a2600));
+		d3_InitSkyLayer((char*) (cut_RandMod(4) * 0x4c + 0x6a2600));
 	}
 	msx_StartMusicIfAllowed((char*) 0x68cb08);
 	if (mode == 1) {
@@ -99,7 +99,7 @@ void __cdecl cut_PlayHinrichtung(int eventRecord)
 	evt_StartGfxScript((char*) 0x68cf80, buf);
 	cut_WaitForScript(evt_StartGfxScript((char*) 0x68cf54, (char*) 0x6b5c60));
 	if (*(int*) (eventRecord + 0xc) == *(int*) (g_774970 * 0x21c + 0x7f4ca4)) {
-		fcn_004ff210(*p, (int) -(*(float*) ((char*) p + 0x1c) + *(float*) 0x662a98));
+		gm_ApplyEntityHealthDelta(*p, (int) -(*(float*) ((char*) p + 0x1c) + *(float*) 0x662a98));
 	}
 	switch (*(char*) (eventRecord + 0x7c)) {
 	case 0:

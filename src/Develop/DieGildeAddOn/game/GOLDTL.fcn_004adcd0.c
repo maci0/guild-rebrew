@@ -62,7 +62,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl gm_PickRandomType26HeadPortrait(void);
 int __cdecl gm_PickRandomHeadPortrait(void);
-void __cdecl gm_AdvanceType26HistoricalEntry(void);
+void __cdecl gm_AdvanceRulerHistoricalEntry(void);
 void __cdecl fcn_004adfe0(void);
 
 void __cdecl amt_InitRulerEntity(int mode, int unused, unsigned short owner, RULER_ENTITY* g)
@@ -129,7 +129,7 @@ void __cdecl amt_InitRulerEntity(int mode, int unused, unsigned short owner, RUL
 			he_PostEntityMessage(((ENTITY_RECORD*)g_7f4ca0)[k].entity_id, -1, buf, 0, 0x602, "_NACHRICHTEN_NEU_01");
 		}
 		g->f18c = gm_PickRandomType26HeadPortrait();
-		gm_AdvanceType26HistoricalEntry();
+		gm_AdvanceRulerHistoricalEntry();
 	} else {
 		if ((*(int*)&gm_GameTime) > 0 && k != 0xffff) {
 			io_FormatTextBuffer(buf, 0x42b5, g->id);

@@ -7,7 +7,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6ac994[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -34,7 +34,7 @@ void __cdecl fcn_005cde50(void (*cb)(int), int textId, int enableFirst)
 	btn[11] = 1;
 	btn[12] = 2;
 	btn[13] = 3;
-	dlg = fcn_00470820(0, 0, s_6ac994);
+	dlg = d2_LoadForm(0, 0, s_6ac994);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 2);
 	if (textId)

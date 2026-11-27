@@ -4,7 +4,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern signed char g_6a3440;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int k, int i);
 int __cdecl io_AppendText(int, ...);
@@ -36,7 +36,7 @@ int __cdecl fcn_004b43f0(int n)
 	int r;
 
 	r = 0;
-	dlg = fcn_00470820(0, 0, "Menu\\CHOOSEHISTORY");
+	dlg = d2_LoadForm(0, 0, "Menu\\CHOOSEHISTORY");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	base = io_AppendText(0x1b9f);

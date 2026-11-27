@@ -16,7 +16,7 @@ typedef struct
 	D3_MESH_FACE_REC* recs;
 	char pad24[0x2c - 0x24];
 	int base;
-} fcn_0044d3f0_Ctx;
+} D3_MESH_FACE_CTX;
 // SIZE 0x30
 
 extern char s_662d18[];
@@ -25,7 +25,7 @@ char* __cdecl fcn_0064f026(char* s, char* delim);
 int __cdecl atoi(char* s);
 
 /* ADDRESS: GOLDTL 0x0044d3f0 */
-void __cdecl d3_ParseMeshFaceIndex(void* stream, fcn_0044d3f0_Ctx* ctx)
+void __cdecl d3_ParseMeshFaceIndex(void* stream, D3_MESH_FACE_CTX* ctx)
 {
 	char* tok;
 

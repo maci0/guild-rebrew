@@ -31,7 +31,7 @@ extern char* g_1015ea0;
 extern char g_6a2fc8[];
 extern char g_6a2e8c[];
 
-int __cdecl fcn_00470820(int a, int b, char* s);
+int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 int __cdecl gm_GetEntityRelation(int a, int b);
 int __cdecl fcn_00507c30(int k);
@@ -55,7 +55,7 @@ void __cdecl d2_OpenPersonInfoPanel(char* e)
 	if (g_6a25b8 != -1) {
 		return;
 	}
-	g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2fc8);
+	g_6a25b8 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2fc8);
 	d2_SetForm(g_6a25b8, 1);
 	if (e != 0 && g_7746f0 < 2) {
 		rel = gm_GetEntityRelation(g_774970, *(unsigned short*) e);

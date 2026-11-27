@@ -43,7 +43,7 @@ void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, int, char*);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
-float __cdecl fcn_004ff210(int, int);
+float __cdecl gm_ApplyEntityHealthDelta(int, int);
 char* __cdecl gm_SetupEntityQuery(char*);
 void __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl gm_GetScaledEntitySkill(char*, int);
@@ -227,7 +227,7 @@ label_1bc:
 			if (*(int*) (actionRecord + 0x8c + cnt * 4) != -1) {
 				val = (int) gm_LookupEntityRecordById(*(int*) (actionRecord + 0x8c + cnt * 4));
 				if (val != 0) {
-					fcn_004ff210(*(unsigned short*) val, 0xffffff9c - gm_RandomMod(100));
+					gm_ApplyEntityHealthDelta(*(unsigned short*) val, 0xffffff9c - gm_RandomMod(100));
 				}
 			}
 		}

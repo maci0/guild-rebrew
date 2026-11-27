@@ -14,7 +14,7 @@ int __cdecl ai_CheckAction012Predicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckLawActionPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction01cPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction01dPredicate(char*, char*, int, char*, int);
-int __cdecl fcn_004a8d40(char*, char*, int, char*, int);
+int __cdecl ai_CheckUseTrankPredicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction025Predicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction027Predicate(char*, char*, int, char*, int);
 int __cdecl ai_CheckAction028Predicate(char*, char*, int, char*, int);
@@ -138,7 +138,7 @@ int __cdecl ai_SelectPrivilegeAction(char* unused0, char* actorEntity, int unuse
 		r = fcn_004a8d30(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x24:
-		r = fcn_004a8d40(unused0, actorEntity, (int) &c, ctx, unused4);
+		r = ai_CheckUseTrankPredicate(unused0, actorEntity, (int) &c, ctx, unused4);
 		break;
 	case 0x25:
 		r = ai_CheckAction025Predicate(unused0, actorEntity, (int) &c, ctx, unused4);

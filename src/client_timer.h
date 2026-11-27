@@ -16,7 +16,7 @@ typedef struct {
 extern TIMER_CALLBACK_SLOT g_1052c60[32];
 
 int __cdecl tb_OpenFunction(TIMER_CALLBACK callback, unsigned int period);
-int __cdecl fcn_0042def0(TIMER_CALLBACK callback);
+int __cdecl tb_CloseFunction(TIMER_CALLBACK callback);
 int __cdecl tb_SetCallbackPaused(TIMER_CALLBACK callback, int paused);
 int __cdecl tb_IsCallbackPaused(TIMER_CALLBACK callback);
 

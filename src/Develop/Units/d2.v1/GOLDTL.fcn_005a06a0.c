@@ -1,10 +1,10 @@
 
-int __cdecl fcn_00470820(int a, int b, char* name);
+int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int k);
 int __cdecl d2_SetForm(int k, int i);
 void __cdecl io_AppendText(int a);
 int __cdecl main_RunFrameLoop(void* p, int a);
-float __cdecl fcn_004ff210(unsigned short id, int delta);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int delta);
 int __cdecl gm_CountChildren(char* e, int* out_count);
 int __cdecl fcn_00526120(char* text, int flags);
 int __cdecl d2_DestroyForm(int k);
@@ -18,7 +18,7 @@ void __cdecl d2_ShowWeinkellerDialog(void)
 	int mode;
 
 	slot = (char*) 0x7f4ca0 + (unsigned int) *(unsigned short*) 0x774970 * 0x21c;
-	h = fcn_00470820(0, 0, "locations\\wohnsitz\\weinkeller");
+	h = d2_LoadForm(0, 0, "locations\\wohnsitz\\weinkeller");
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x42cf);
@@ -34,7 +34,7 @@ void __cdecl d2_ShowWeinkellerDialog(void)
 		else if ((mode = *(int*) 0x100f1dc) == 2) {
 			n = 0;
 			if (gm_CountChildren(slot, &n) != 0) {
-				fcn_004ff210(*(unsigned short*) slot, -2000);
+				gm_ApplyEntityHealthDelta(*(unsigned short*) slot, -2000);
 			}
 			else {
 				fcn_00526120((char*) *(int*) (0x14a5320 + (n != 0 ? 0x42d3 : 0x42d2) * 4), 0);

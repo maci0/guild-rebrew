@@ -28,11 +28,11 @@ typedef struct {
 int __cdecl gm_WalkEntityChain(unsigned short);
 void* __cdecl d2_OpenTargetPicker(void*, int, int, int);
 int __cdecl amt_GetRoleLevel(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl fcn_0046fac0(int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
@@ -92,11 +92,11 @@ void __cdecl d2_RunBeweiseFaelschenDialog(int building)
 	ids[0] = (int) (0.01f * (float) total);
 	ids[1] = (int) (0.015f * (float) total);
 	ids[2] = (int) ((float) total * 0.02f);
-	dlg = fcn_00470820(0, 0, (char*) 0x6a9514);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6a9514);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
 	elem = fcn_0046fac0(0, 3, *(int*) 0x14b5360, d2_CurrentWindowId);
 	*(int*) (((char*)&((D2_CONTROL_TL*)g_1015ea0)[elem].value_06c)) = 1;

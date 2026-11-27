@@ -3,7 +3,7 @@
 extern volatile int g_6b7fac;
 
 extern void __cdecl d3snd_StopTrackedVoices(void);
-extern void *__cdecl fcn_00470820(int a, int b, const char *name);
+extern void *__cdecl d2_LoadForm(int a, int b, const char *name);
 extern void __cdecl d2_CenterDialogWindows(void *obj);
 extern void __cdecl d2_SetForm(void *obj, int a);
 extern int __cdecl io_AppendText(int id);
@@ -16,7 +16,7 @@ extern void __cdecl main_RunFrameLoop(int a, int b);
 extern void __cdecl d2_DestroyForm(void *obj);
 
 /* ADDRESS: GOLDTL 0x004b5630 */
-void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
+void __cdecl d2_RunMissionBriefingDialog(int a0, unsigned loopFlags)
 {
 	char buf[256];
 	void *obj;
@@ -26,7 +26,7 @@ void __cdecl fcn_004b5630(int a0, unsigned loopFlags)
 	unsigned i;
 
 	d3snd_StopTrackedVoices();
-	obj = fcn_00470820(0, 0, (const char *) 0x681130);
+	obj = d2_LoadForm(0, 0, (const char *) 0x681130);
 	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 1);
 	io_AppendText(0x1b9b);

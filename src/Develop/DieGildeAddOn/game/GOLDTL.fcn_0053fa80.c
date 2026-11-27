@@ -27,7 +27,7 @@ extern int g_7746c8;
 void __cdecl fcn_00533880(void);
 void __cdecl d2_SetMouseTooltip(void* p);
 void __cdecl fcn_00533a40(void* p);
-void __cdecl fcn_0042def0(void* p);
+void __cdecl tb_CloseFunction(void* p);
 void __cdecl evt_CloseAllScripts(void);
 void __cdecl gv_SpawnIfPending(int p);
 void __cdecl d3snd_StopTrackedVoices(void);
@@ -68,7 +68,7 @@ void __cdecl gm_ShutdownGameRuntime(void)
 	d2_SetMouseTooltip(&g_6b5c60);
 	fcn_00533a40(&g_6b5c60);
 	d2_SuppressOverlay = 1;
-	fcn_0042def0(&g_538060);
+	tb_CloseFunction(&g_538060);
 	g_772f3c = 0;
 	evt_CloseAllScripts();
 	if (g_7749cc != 0) {

@@ -26,7 +26,7 @@ int __cdecl fcn_004011f0(void* stream, void* dst);
 int __cdecl fcn_004011d0(void* stream, void* dst);
 void __cdecl vfs_ReadVec3(void* stream, void* dst);
 int __cdecl vfs_ReadByte(void* stream, void* dst);
-int __cdecl fcn_00446ca0(int);
+int __cdecl d3_GetSceneVersionSlotCount(int);
 void __cdecl d3_SetFog(float, float, int);
 void __cdecl rd_object(void*, int, int, int);
 #include "Develop/Units/vfs/vfs.h"
@@ -56,7 +56,7 @@ void __cdecl fcn_00446df0(const char* name, void* stream)
 	}
 	fcn_004011f0(s, &ver);
 	if ((ver & 0xffff0000) == 0x3a6c0000 && ver >= 0x3a6c00b9) {
-		n = fcn_00446ca0(ver);
+		n = d3_GetSceneVersionSlotCount(ver);
 		fcn_004011d0(s, &f);
 		vfs_ReadVec3(s, &g_67bbdc);
 		vfs_ReadVec3(s, &g_6b86c4);

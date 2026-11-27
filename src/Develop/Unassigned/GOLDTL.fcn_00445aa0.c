@@ -2,7 +2,7 @@ char __cdecl d3_SetNodePosition(char*, float*);
 char __cdecl d3_SetObjectRotation(char*, float*);
 
 /* ADDRESS: GOLDTL 0x00445aa0 */
-char __cdecl fcn_00445aa0(char* interpObj, unsigned int keyIndex, float keyFraction)
+char __cdecl d3_InterpolateObjectKeyframe(char* interpObj, unsigned int keyIndex, float keyFraction)
 {
 	float newPosition[4];
 	float newRotation[4];

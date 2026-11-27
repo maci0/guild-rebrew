@@ -30,7 +30,7 @@ void __cdecl d2_SetFormVisibility(int h, int v);
 void __cdecl fcn_00545a80(int v);
 void __cdecl d2_SetSlotVisibility(int h, int v);
 
-void __cdecl fcn_005270c0(int show)
+void __cdecl d2_UpdateHudVisibility(int show)
 {
 	int i;
 

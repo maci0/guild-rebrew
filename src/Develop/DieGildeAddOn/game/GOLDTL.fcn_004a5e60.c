@@ -2,7 +2,7 @@
 extern unsigned char* g_entity_ptr;
 
 int __cdecl gm_RandomMod(int a0);
-int __cdecl fcn_005cfb00(unsigned short* a0, int* a1, int a2);
+int __cdecl ai_MatchesBuildingFilter(unsigned short* a0, int* a1, int a2);
 float __cdecl gm_CalcEntityFavor(unsigned short a0, unsigned short a1, int a2);
 
 /* ADDRESS: GOLDTL 0x004a5e60 */
@@ -43,7 +43,7 @@ int __cdecl ai_FindEntityInFavorRange(unsigned short* entity, int kind, int filt
 		if (*(char*) ent == 0) {
 			goto next;
 		}
-		if (fcn_005cfb00(entity, buf, ent) == 0) {
+		if (ai_MatchesBuildingFilter(entity, buf, ent) == 0) {
 			goto next;
 		}
 		if (flag != 0) {

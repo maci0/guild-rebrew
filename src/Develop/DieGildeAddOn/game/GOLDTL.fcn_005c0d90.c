@@ -26,7 +26,7 @@ int __cdecl he_HasNoActiveAction0x88(unsigned short*, void*);
 int __cdecl d2_CheckActionBlocker(void*, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_00470820(int, int, void*);
+int __cdecl d2_LoadForm(int, int, void*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -74,7 +74,7 @@ int __cdecl d2_RunAction0x35Dialog(unsigned short* obj)
 	if (d2_CheckActionBlocker(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), 1) == 0) {
 		return 0;
 	}
-	d = fcn_00470820(0, 0, g_6ac494);
+	d = d2_LoadForm(0, 0, g_6ac494);
 	d2_CenterDialogWindows(d);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(d, 1);

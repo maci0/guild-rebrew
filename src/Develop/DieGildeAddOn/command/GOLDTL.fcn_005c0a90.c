@@ -24,7 +24,7 @@ unsigned short* __cdecl d2_OpenTargetPicker(int*, char*, int, int);
 int __cdecl CountMatchingStraftatEntries(int, unsigned short);
 void __cdecl fcn_00526120(char*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
-int __cdecl fcn_00470820(int, int, void*);
+int __cdecl d2_LoadForm(int, int, void*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -81,7 +81,7 @@ void __cdecl d2_ShowAnschwaerzenDialog(int selected_obj)
 		d3_EndCameraAndUiMode();
 		return;
 	}
-	dlg = fcn_00470820(0, 0, g_6ac494);
+	dlg = d2_LoadForm(0, 0, g_6ac494);
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);

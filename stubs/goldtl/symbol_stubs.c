@@ -1289,7 +1289,6 @@ int g_67bd2c = 0;
 char g_67bd30[1] = {0};
 char g_67bd38[1] = {0};
 int g_67d0b0[1] = {0};
-int g_67d1d4[1] = {0};
 float d2_UiScale = 0;
 int g_67d36c = 0;
 int d2_CurrentElementId = 0;

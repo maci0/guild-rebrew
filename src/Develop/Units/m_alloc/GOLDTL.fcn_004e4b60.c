@@ -4,7 +4,7 @@ typedef struct {
 	unsigned char g;
 	unsigned char b;
 	unsigned char a;
-} Col4e4b60;
+} D3_SKY_COLOR;
 
 extern int g_772f3c;
 extern int g_772f68;
@@ -12,14 +12,14 @@ extern int g_772f68;
 extern int g_772f64;
 
 int __cdecl fcn_00459ae0(float a, float b, float c);
-int __cdecl d3_CreateSkyLayer(int h, int a, int b, Col4e4b60 c, float d, int e, float f, float g);
+int __cdecl d3_CreateSkyLayer(int h, int a, int b, D3_SKY_COLOR c, float d, int e, float f, float g);
 void __cdecl d3_SetSkyLayerScrollSpeed(int h, int s, int a);
-void __cdecl fcn_00459980(int h, int s, int a, float b);
+void __cdecl d3_SetSkyLayerTransition(int h, int s, int a, float b);
 
 /* ADDRESS: GOLDTL 0x004e4b60 */
-void __cdecl fcn_004e4b60(int textureName)
+void __cdecl d3_InitSkyLayer(int textureName)
 {
-	Col4e4b60 c;
+	D3_SKY_COLOR c;
 
 	if (g_772f3c == 0) {
 		g_6b89c0 = g_772f68 = fcn_00459ae0(-2.25f, -0.2f, 600.0f);
@@ -27,6 +27,6 @@ void __cdecl fcn_004e4b60(int textureName)
 		c.b = 0;
 		g_772f64 = d3_CreateSkyLayer(g_772f68, 0, textureName, c, 3.0f, 0, 0.8f, -0.25f);
 		d3_SetSkyLayerScrollSpeed(g_772f68, g_772f64, 0);
-		fcn_00459980(g_772f68, g_772f64, 0xff, 10.0f);
+		d3_SetSkyLayerTransition(g_772f68, g_772f64, 0xff, 10.0f);
 	}
 }

@@ -6,7 +6,7 @@ extern g_662408_f g_662408;
 
 
 
-int __cdecl fcn_0042b280(int);
+int __cdecl msx_FindStreamDriverIndex(int);
 int __cdecl msx_FindStreamIndex(int);
 
 int __cdecl msx_CloseStream(int streamId)
@@ -15,7 +15,7 @@ int __cdecl msx_CloseStream(int streamId)
 	int i;
 	int j;
 
-	if (g_6b7f90 != 0 && (i = fcn_0042b280(streamId)) >= 0 && (j = msx_FindStreamIndex(streamId)) >= 0) {
+	if (g_6b7f90 != 0 && (i = msx_FindStreamDriverIndex(streamId)) >= 0 && (j = msx_FindStreamIndex(streamId)) >= 0) {
 		g_662408(streamId);
 		msx_WaveDrivers[i][5]--;
 		g_6b7f50[i][j] = r;

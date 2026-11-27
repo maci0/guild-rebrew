@@ -3,13 +3,13 @@
 int __cdecl msx_FindStreamIndex(int);
 typedef int (__stdcall* f)(int, int);
 
-int __cdecl fcn_0042aed0(int a1, int a2)
+int __cdecl msx_SetStreamMsPosition(int streamHandle, int msPos)
 {
 	int r = 0;
 
 	if (*(int*) 0x6b7f90 != 0) {
-		if (msx_FindStreamIndex(a1) >= 0) {
-			(*(f*) 0x00662424)(a1, a2);
+		if (msx_FindStreamIndex(streamHandle) >= 0) {
+			(*(f*) 0x00662424)(streamHandle, msPos);
 		} else {
 			r = -1;
 		}

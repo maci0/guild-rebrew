@@ -50,14 +50,14 @@ extern int g_7ea380[15];
 extern int g_774684;
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-void __cdecl fcn_0047a040(int, int, int, int);
+void __cdecl d2_SetClipRect(int, int, int, int);
 int __cdecl fcn_00475290(int, int, int, int, int);
-int __cdecl fcn_0046e940(int, int, int, int, int);
+int __cdecl d2_CreateWindow(int, int, int, int, int);
 void __cdecl fcn_00471c80(int, unsigned char);
 char* __cdecl d2_LoadObj(char*, int);
 Surface* __cdecl fcn_004770a0(SurfaceDesc*, int);
 int __cdecl d2_LockSurface(Surface*);
-void __cdecl fcn_0047a710(int, int, char*, Surface*);
+void __cdecl d2_DrawShapeToArgbSurface(int, int, char*, Surface*);
 void __cdecl d2_UnlockSurface(Surface*);
 int __cdecl fcn_0047b640(int, int, int, int, Surface*, int);
 void __cdecl fcn_00475f80(Surface*);
@@ -75,9 +75,9 @@ void __cdecl fcn_00526db0(char* name)
 	char* data;
 	Surface* s;
 
-	fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
+	d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 	g_6a25a8 = fcn_00475290(g_1040494 - 0x50, 0x11, 0x30, 0x30, 0);
-	g_6a2598 = fcn_0046e940(4, 0xa, 0x288, 0x30, 0);
+	g_6a2598 = d2_CreateWindow(4, 0xa, 0x288, 0x30, 0);
 	fcn_00471c80(g_6a2598, 1);
 	data = d2_LoadObj(name, 0);
 	n = sizeof(desc);
@@ -109,7 +109,7 @@ void __cdecl fcn_00526db0(char* name)
 	s = fcn_004770a0(&desc, 0x20);
 	if (s != 0) {
 		if (d2_LockSurface(s) != 0) {
-			fcn_0047a710(0, 0, data + *(int*) (data + 0x45), s);
+			d2_DrawShapeToArgbSurface(0, 0, data + *(int*) (data + 0x45), s);
 			d2_UnlockSurface(s);
 		}
 		g_774674 = fcn_0047b640(s->width - 0x80, 0, 0x80, s->height - 0x80, s, 0);

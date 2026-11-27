@@ -3,7 +3,7 @@
 int __cdecl _strnicmp(const char* a, const char* b, int n);
 
 /* ADDRESS: GOLDTL 0x00449b60 */
-char* __cdecl fcn_00449b60(const char* name)
+char* __cdecl d3_FindCachedModel(const char* name)
 {
 	char* p;
 

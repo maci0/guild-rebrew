@@ -56,8 +56,8 @@ extern Device* g_772614;
 extern Device* g_6b5de0;
 #include "Develop/Unassigned/render_quad.h"
 
-void __cdecl fcn_0047c4e0(void);
-void __cdecl fcn_0047c520(void);
+void __cdecl d2_BindQuadVertexBuffer(void);
+void __cdecl d2_ResetQuadDeviceState(void);
 void __cdecl fcn_004372d0(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0047c560 */
@@ -87,7 +87,7 @@ int __cdecl d2_FlushQueuedQuads(int idx, Snd* snd, char* src)
 		data++;
 	}
 	((Device*) g_772614)->vtbl->Unlock((Device*) g_772614);
-	fcn_0047c4e0();
+	d2_BindQuadVertexBuffer();
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 0);
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x88, 0);
 	fcn_004372d0(0xff, 0, 0, 1, 1);
@@ -136,7 +136,7 @@ done:
 	d2_QueuedQuadCount = start;
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 7, 1);
 	g_6b5de0->vtbl->SetRenderState(g_6b5de0, 0x88, 1);
-	fcn_0047c520();
+	d2_ResetQuadDeviceState();
 	return 1;
 }
 #if defined(REBREW_SERVER) || defined(REBREW_GOLD)

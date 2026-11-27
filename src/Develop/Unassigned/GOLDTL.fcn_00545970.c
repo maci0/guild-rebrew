@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00545970 */
-int __cdecl fcn_00545970(int index)
+int __cdecl gm_GetPlayerOrdinal(int index)
 {
 	int i;
 	int count;

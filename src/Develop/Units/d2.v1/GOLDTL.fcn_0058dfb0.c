@@ -39,11 +39,11 @@ extern int g_14b5650;
 extern int g_14b5654;
 
 void __cdecl fcn_005263d0(int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CheckActionBlocker(struct house*, int);
@@ -77,11 +77,11 @@ int __cdecl d2_OpenSeanceDialog(int a1, char* s, struct result* out)
 		fcn_005263d0(g_14b5650, g_14b5654, 0);
 		return 0;
 	}
-	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Seance");
+	h = d2_LoadForm(0, 0, "Locations\\Friedhof\\Seance");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x40ce, 0x40cc);
 	d2_SetForm(h, 2);

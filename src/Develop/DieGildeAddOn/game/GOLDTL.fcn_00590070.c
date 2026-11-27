@@ -29,11 +29,11 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(int, int);
 void __cdecl d3_EndCameraAndUiMode(void);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_0052a0c0(char*, int);
@@ -75,11 +75,11 @@ void __cdecl d2_RunFriedhofUpgradeWorkerDialog(char* who)
 		d3_EndCameraAndUiMode();
 		return;
 	}
-	h = fcn_00470820(0, 0, "Locations\\Friedhof\\UpgradeWorker");
+	h = d2_LoadForm(0, 0, "Locations\\Friedhof\\UpgradeWorker");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x4138);
 	d2_SetForm(h, 3);

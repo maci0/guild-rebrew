@@ -1,8 +1,8 @@
-int __cdecl fcn_0047c480(void);
+int __cdecl d2_ReleaseQuadVertexBuffer(void);
 
 
 /* ADDRESS: GOLDTL 0x0047c4b0 */
 int __cdecl fcn_0047c4b0(void)
 {
-	return fcn_0047c480();
+	return d2_ReleaseQuadVertexBuffer();
 }

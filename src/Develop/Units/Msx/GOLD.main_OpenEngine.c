@@ -76,7 +76,7 @@ void __cdecl hmt_CreateBinaryFile(void);
 void __cdecl gm_LoadHistoricalTable(void);
 void __cdecl fcn_004d27a0(void);
 void __cdecl fcn_004758e0(int);
-unsigned char* __cdecl fcn_004767c0(int, int, int, int, char*, int, int);
+unsigned char* __cdecl d2_CreateOverlaySprite(int, int, int, int, char*, int, int);
 void __cdecl main_RunFrameLoop(int, int);
 #include "client_sprites.h"
 void __cdecl evt_InitScriptEngine(void);
@@ -162,7 +162,7 @@ int __cdecl main_OpenEngine(void)
 	gm_LoadHistoricalTable();
 	fcn_004d27a0();
 	fcn_004758e0(screen);
-	fade = fcn_004767c0(0, 0, g_fb9072, g_fb9070, "BLACK", 0x5a, 1);
+	fade = d2_CreateOverlaySprite(0, 0, g_fb9072, g_fb9070, "BLACK", 0x5a, 1);
 	while ((*fade & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);
 	}

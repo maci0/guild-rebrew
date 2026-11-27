@@ -1,7 +1,7 @@
 extern void __cdecl fcn_005eaaf0(void);
 
 /* ADDRESS: GOLDTL 0x005eaae0 */
-void __cdecl fcn_005eaae0(void)
+void __cdecl msx_ShutdownMilesAtexit(void)
 {
 	fcn_005eaaf0();
 }

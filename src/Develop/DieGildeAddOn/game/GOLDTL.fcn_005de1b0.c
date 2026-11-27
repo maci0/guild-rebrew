@@ -49,10 +49,10 @@ unsigned char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 float __cdecl gm_RandomFloat01(void);
-float __cdecl fcn_004ff210(int, int);
+float __cdecl gm_ApplyEntityHealthDelta(int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 {
@@ -96,7 +96,7 @@ int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 	cm_RequestCopyEntityData(*(unsigned short*) e, ((House*)g_7f4ca0)[q->w27].f4, -20 - gm_RandomMod(0x20), 1);
 	for (i = 0; i < 768; i++) {
 		if (((House*)g_7f4ca0)[i].b2 == 0 && ((House*)g_7f4ca0)[i].f16c == q) {
-			fcn_004ff210(i, (int) -((gm_RandomFloat01() * 0.2f + 0.1f) * ((House*)g_7f4ca0)[i].f1c));
+			gm_ApplyEntityHealthDelta(i, (int) -((gm_RandomFloat01() * 0.2f + 0.1f) * ((House*)g_7f4ca0)[i].f1c));
 		}
 	}
 	if (e[2] == 6 || e[2] == 7) {
@@ -106,7 +106,7 @@ int __cdecl gm_ObjSabotageBuildingHealth(unsigned char* obj, int* arg)
 	if (obj[2] == 6) {
 		io_FormatTextBuffer(text2, 0x109b, *(unsigned short*) e, q->w27, q);
 		io_FormatTextBuffer(text, 0xfe8, text2);
-		fcn_005dbe90(text);
+		d2_ShowUseObjDialog(text);
 	}
 	arg[4] = 1;
 	return 1;

@@ -9,7 +9,7 @@ typedef struct Ent {
 	int b;
 } Ent;
 
-int __cdecl fcn_0044cd20(char* name, Ent* tbl, int n)
+int __cdecl d3_LookupParserToken(char* name, Ent* tbl, int n)
 {
 	int i;
 

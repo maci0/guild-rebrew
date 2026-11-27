@@ -31,7 +31,7 @@ void __cdecl gv_UpgradeField(unsigned char*);
 int __cdecl vfs_ResolvePath(char*, int, int, char*);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_TransformPoint(char*, char*, int*);
-int __cdecl fcn_004488e0(char*, int, int);
+int __cdecl d3_LoadObjectFile(char*, int, int);
 void __cdecl fcn_00455140(char*, float*, float*);
 float __cdecl d3_SignedPlanarAngle(float*, float*);
 void __cdecl d3_SetNodePosition(char*, int*);
@@ -119,7 +119,7 @@ int __cdecl fcn_004cb7f0(char* upgradeCmd, char* replyData)
 	d3_SelectSceneContext(0, 1);
 	h = *(int*) (upgradeBuilding + 0x61);
 	d3_TransformPoint((char*) h, (char*) (h + 0x4c), (int*) vec);
-	obj = fcn_004488e0(path, 0, 0);
+	obj = d3_LoadObjectFile(path, 0, 0);
 	if (obj == 0) {
 		sprintf(name, "cm_ExGebUpgrade(): Could not load 3D-Object-Group '%s'...", path);
 		ReportClientMessage(name);

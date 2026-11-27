@@ -7,7 +7,7 @@
 char __cdecl d3_IsFloorBlockUniform(int*, int, int, int);
 void __cdecl PrepareFloorWater(char*);
 typedef struct Tile Tile;
-void __cdecl fcn_0043c640(Tile*);
+void __cdecl d3_BuildTerrainTileMeshes(Tile*);
 void __cdecl d3_RebuildFloorMeshes(char*);
 
 /* ADDRESS: GOLDTL 0x0043c2c0 */
@@ -97,7 +97,7 @@ void __cdecl d3_BuildFloorGeometry(int* floor)
 	}
 	*(float*) ((char*) floor + 0x802c) = 0.05f;
 	*(float*) ((char*) floor + 0x8030) = 0.25f;
-	fcn_0043c640((Tile*) floor);
+	d3_BuildTerrainTileMeshes((Tile*) floor);
 	d3_RebuildFloorMeshes((char*) floor);
 	*(unsigned char*) ((char*) floor + 0x8036) |= 1;
 }

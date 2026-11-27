@@ -9,7 +9,7 @@ int __cdecl d2_CreateElement(int, int, int);
 void __cdecl fcn_00469c40(int, int, int);
 int __cdecl d2_DestroyElement(int);
 
-void __cdecl fcn_005840d0(float*, float*, float*, float*, float, float*);
+void __cdecl d2_EvalCubicBezier2D(float*, float*, float*, float*, float, float*);
 
 /* ADDRESS: GOLDTL 0x00584160 */
 void __cdecl fcn_00584160(int a0)
@@ -91,7 +91,7 @@ void __cdecl fcn_00584160(int a0)
 				float point[2];
 				float f;
 				f = (float) ((double) (unsigned int) (g_6b7fac - *(unsigned int*) (o + 0x5c)) / *(float*) (frame + 0x24));
-				fcn_005840d0((float*) frame, (float*) (frame + 8), (float*) (frame + 0x10), (float*) (frame + 0x18), f, point);
+				d2_EvalCubicBezier2D((float*) frame, (float*) (frame + 8), (float*) (frame + 0x10), (float*) (frame + 0x18), f, point);
 				fcn_00469c40((short) point[0], (short) point[1], *(int*) (o + 0x60));
 				return;
 			}

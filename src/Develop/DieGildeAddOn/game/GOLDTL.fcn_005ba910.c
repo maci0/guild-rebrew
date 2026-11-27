@@ -1,7 +1,7 @@
 #include <string.h>
 extern unsigned char g_773d75;
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 int __cdecl fcn_0052dee0(int, int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_0057e880(int, char*, int, int);
@@ -18,7 +18,7 @@ void __cdecl fcn_00594340(void);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005c5da0(int, int, int, int, int);
-void __cdecl fcn_00525ef0(void);
+void __cdecl d2_ResetUiInputAndBounds(void);
 int __cdecl gm_IsGebaeudeOpen(int, int, int);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
 int __cdecl d2_BuildProduktionSlotGrid(int, int);
@@ -26,7 +26,7 @@ int __cdecl fcn_00596b10(int, int, int, int);
 int __cdecl fcn_00595e20(int, int);
 int __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl d2_SyncProduktionSlotGrid(int, int);
-int __cdecl fcn_00597940(int, int, int, int, int);
+int __cdecl d2_DrawProduktionSlotGrid(int, int, int, int, int);
 int __cdecl gm_IsWarehouse(int);
 int __cdecl gm_CanTradeWithObject(int, int);
 void __cdecl d2_DestroyElement(int);
@@ -249,7 +249,7 @@ int __cdecl d2_RunTradeInventoryPanel(int buildingArg, int modeFlags)
 	if (f.v80 != 0) {
 		int* tp;
 
-		f.vA4 = fcn_00470820(*(int*) 0x1040494 - 0x68, 0x106, (char*) 0x6ac3b4);
+		f.vA4 = d2_LoadForm(*(int*) 0x1040494 - 0x68, 0x106, (char*) 0x6ac3b4);
 		tp = (int*) 0x14a56e8;
 		for (i = 0; i < 7; i++) {
 			int d;
@@ -364,7 +364,7 @@ l_after:
 
 	/* 0x5bacd6: open the panel window and select its fourth page */
 	fcn_0057e880(0x23, (char*) buildingArg, 0, 0);
-	f.v2c = fcn_00470820(0, 0, (char*) 0x6aa5d0);
+	f.v2c = d2_LoadForm(0, 0, (char*) 0x6aa5d0);
 	d2_CenterDialogWindows(f.v2c);
 	d2_SetForm(f.v2c, 4);
 
@@ -486,7 +486,7 @@ l_after:
 	f.vB0 = d2_AddElementToWindow(0x261, 0x104, 0x527, *(int*) 0x772514);
 	f.v9c = f.vB0 * 0x2f4;
 	*(int*) (*(int*) 0x1015ea0 + f.v9c + 0x1d0) = 3;
-	fcn_00525ef0();
+	d2_ResetUiInputAndBounds();
 	f.vA8 = f.vA0 * 0x2f4;
 	f.vAC = f.v2c * 0xaf;
 
@@ -546,7 +546,7 @@ l_sel:
 			fcn_005963f0(f.v2c, 1, 1, f.v14);
 		} else if (*(char*) f.v94 == 0x11) {
 			f.v38 = (int) d2_SyncProduktionSlotGrid(f.v14, f.v18);
-			fcn_00597940(f.v2c, 1, 1, f.v14, f.v18);
+			d2_DrawProduktionSlotGrid(f.v2c, 1, 1, f.v14, f.v18);
 		}
 	}
 
@@ -1738,7 +1738,7 @@ l_5bd26b:
 			fcn_005963f0(f.v2c, 1, 1, f.v14);
 		} else if (*(unsigned char*) f.v94 == 0x11) {
 			f.v38 = d2_SyncProduktionSlotGrid(f.v14, f.v18);
-			fcn_00597940(f.v2c, 1, 1, f.v14, f.v18);
+			d2_DrawProduktionSlotGrid(f.v2c, 1, 1, f.v14, f.v18);
 		}
 	} else if (f.vD0 == f.v58 && *(signed char*) 0x7747b0 >= 0) {
 		/* 0x5bd5e7: every filled slot of the panel as a pointer list */

@@ -26,7 +26,7 @@ float __cdecl d3_WrapYawDelta(int a, int b);
 void __cdecl d3_SetNodePosition(char* p, int* v);
 
 /* ADDRESS: GOLDTL 0x0052b720 */
-int __cdecl fcn_0052b720(void)
+int __cdecl d3_PanCameraFromInput(void)
 {
 	unsigned short mode;
 	short pos;

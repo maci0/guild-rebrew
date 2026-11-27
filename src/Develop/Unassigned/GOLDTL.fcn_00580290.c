@@ -10,7 +10,7 @@ extern char g_14cf950;
 int __cdecl sb_CheckVoicePlaying(int);
 void __cdecl sb_StopVoice(int, int);
 
-int __cdecl fcn_00580290(void)
+int __cdecl d2_PollTutorialVoiceDone(void)
 {
 	int o;
 	unsigned char* p;

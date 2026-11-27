@@ -122,7 +122,7 @@ void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl cm_SendTraceEnd(int);
 void __cdecl cm_SendCopyEntityData(void*);
 void __cdecl d2_DestroyElement(int);
-int __cdecl fcn_00505d00(unsigned char*, int*);
+int __cdecl gm_CollectBuildingObjectSlots(unsigned char*, int*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl fcn_0046f940(int, char*);
@@ -322,7 +322,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 				f.rows[i].obj = 0;
 			}
 		}
-		f.nSlots = fcn_00505d00((unsigned char*) building, f.slots);
+		f.nSlots = gm_CollectBuildingObjectSlots((unsigned char*) building, f.slots);
 		for (i = 0; i < 12; i++) {
 			entityId = f.slots[0x19 + i];
 			if (entityId == 0xffff) {

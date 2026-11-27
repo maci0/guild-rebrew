@@ -7,13 +7,13 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int h);
-int __cdecl fcn_00470820(int a, int b, int* c);
+int __cdecl d2_LoadForm(int a, int b, int* c);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int on);
 void __cdecl io_AppendText(int id, int a, int b);
 int __cdecl main_RunFrameLoop(void (__cdecl* cb)(int), int flags);
 void __cdecl d2_DestroyForm(int h);
-void __cdecl fcn_004b5b20(int arg);
+void __cdecl main_ExitToGameLoop(int arg);
 
 void __cdecl d2_ShowMissionDialog(int arg)
 {
@@ -23,7 +23,7 @@ void __cdecl d2_ShowMissionDialog(int arg)
 
 	mode = 0;
 	p = gm_LookupEntityRecordById(g_6a3760);
-	h = fcn_00470820(mode, mode, &(*(int*)g_681130));
+	h = d2_LoadForm(mode, mode, &(*(int*)g_681130));
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1b97, *p, *p);
@@ -36,6 +36,6 @@ void __cdecl d2_ShowMissionDialog(int arg)
 	} while (main_RunFrameLoop(d2_ShowMissionDialog, arg | 0x80) != 0);
 	d2_DestroyForm(h);
 	if (mode == 2) {
-		fcn_004b5b20(arg);
+		main_ExitToGameLoop(arg);
 	}
 }

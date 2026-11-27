@@ -5,7 +5,7 @@ extern void __cdecl fcn_00443030(void*);
 extern void __cdecl d3_SetNodePosition(int, void*);
 extern void __cdecl d3_SetObjectRotation(int, void*);
 extern void __cdecl d3_SetActiveCamera(int);
-extern void __cdecl fcn_0045b290(int, int);
+extern void __cdecl d3sm_Rebuild(int, int);
 extern int __cdecl fcn_0045b700(int, int, int);
 extern void __cdecl d3_TraverseSceneObjects(int, int, int, int);
 extern void __cdecl gv_Free3Fields(int);
@@ -225,7 +225,7 @@ char __cdecl d3_SelectSceneContext(int contextIndex, char a1)
 		if (a1 == 0) {
 			if (g_6b8300 == 0) {
 				if (*(int*) 0x6b89e4 != 0) {
-					fcn_0045b290(*(int*) 0x6b89e4, 0);
+					d3sm_Rebuild(*(int*) 0x6b89e4, 0);
 				}
 				else {
 					*(int*) 0x6b89e4 = fcn_0045b700(0, -*(int*) 0x6b89b0, 1);

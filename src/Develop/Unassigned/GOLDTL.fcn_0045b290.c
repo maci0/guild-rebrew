@@ -6,18 +6,18 @@ extern int g_67a370;
 typedef struct {
 	float mn[4];
 	float mx[4];
-} Box_45b290;
+} D3SM_BBOX;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
-void __cdecl fcn_0045a910(void);
+void __cdecl d3sm_AccumulateObjectBounds(void);
 void __cdecl fcn_0045a9d0(void);
-void __cdecl fcn_0045a3a0(int*, int*);
+void __cdecl d3sm_BuildFromTerrain(int*, int*);
 void __cdecl d3_RelabelMatchingCells(int*, int, int);
 
 /* ADDRESS: GOLDTL 0x0045b290 */
-void __cdecl fcn_0045b290(int* m, unsigned char* t)
+void __cdecl d3sm_Rebuild(int* m, unsigned char* t)
 {
-	Box_45b290 box;
+	D3SM_BBOX box;
 	float pts[8][4];
 	float* f;
 	int* cells;
@@ -51,7 +51,7 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 	box.mx[0] = -1e10f;
 	box.mx[1] = -1e10f;
 	box.mx[2] = -1e10f;
-	d3_VisitSceneObjects(g_67a370, 0, 0x40, fcn_0045a910, &box);
+	d3_VisitSceneObjects(g_67a370, 0, 0x40, d3sm_AccumulateObjectBounds, &box);
 	cells = (int*) m[9];
 	if (cells) {
 		fn = m[8] * m[8] * 0x1c;
@@ -154,7 +154,7 @@ void __cdecl fcn_0045b290(int* m, unsigned char* t)
 	*(float*) (m + 5) = (box.mx[1] - box.mn[1]) * 0.0039525693f;
 	*(float*) (m + 6) = (box.mn[2] - box.mx[2]) / ((float) n - 1.75f);
 	if (t) {
-		fcn_0045a3a0((int*) t, m);
+		d3sm_BuildFromTerrain((int*) t, m);
 	} else {
 		bytes = (unsigned char*) m[10];
 		fn = n * n;

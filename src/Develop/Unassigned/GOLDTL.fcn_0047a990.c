@@ -3,7 +3,7 @@ typedef unsigned short u16;
 typedef unsigned int u32;
 #include <string.h>
 /* ADDRESS: GOLDTL 0x0047a990 */
-unsigned int __cdecl fcn_0047a990(int a0, int a1, char* a2, char* a3)
+unsigned int __cdecl d2_BlitRgb24ShapeToSurface(int x, int y, char* shape, char* surface)
 {
 	u32* v1;
 	u16 v10;
@@ -26,14 +26,14 @@ unsigned int __cdecl fcn_0047a990(int a0, int a1, char* a2, char* a3)
 	int v8;
 	u8* v9;
 
-	if (*(int*) (a2 + 0x26) != -1) {
+	if (*(int*) (shape + 0x26) != -1) {
 		v8 = 0;
-		v13 = (int*) (a2 + 0x32);
-		v15 = (u32*) (a2 + 0x36);
-		if (*(u16*) (a2 + 10) > 0) {
+		v13 = (int*) (shape + 0x32);
+		v15 = (u32*) (shape + 0x36);
+		if (*(u16*) (shape + 10) > 0) {
 			do {
 				v21 = 0;
-				v11 = (u16*) (*(int*) (a3 + 0x1c) + ((v8 + a1) * *(int*) (a3 + 0x10) + a0) * 2);
+				v11 = (u16*) (*(int*) (surface + 0x1c) + ((v8 + y) * *(int*) (surface + 0x10) + x) * 2);
 				if (*v13 > 0) {
 					do {
 						for (loopIndex = 0; loopIndex < (int) (*v15 / 3); loopIndex++) {
@@ -69,15 +69,15 @@ unsigned int __cdecl fcn_0047a990(int a0, int a1, char* a2, char* a3)
 				v13 = (int*) v15;
 				v15 = (u32*) (v13 + 1);
 				v8 += 1;
-			} while (v8 < (int) *(u16*) (a2 + 10));
+			} while (v8 < (int) *(u16*) (shape + 10));
 			return 1;
 		}
 		return 1;
 	}
-	v20 = *(u16*) (a2 + 10);
-	v8 = *(u16*) (a2 + 6);
-	v18 = (u16*) (*(int*) (a3 + 0x1c) + (*(int*) (a3 + 0x10) * a1 + a0) * 2);
-	v9 = (u8*) (a2 + 0x32);
+	v20 = *(u16*) (shape + 10);
+	v8 = *(u16*) (shape + 6);
+	v18 = (u16*) (*(int*) (surface + 0x1c) + (*(int*) (surface + 0x10) * y + x) * 2);
+	v9 = (u8*) (shape + 0x32);
 	if (v20 > 0) {
 		do {
 			if (v8 > 0) {
@@ -102,7 +102,7 @@ unsigned int __cdecl fcn_0047a990(int a0, int a1, char* a2, char* a3)
 					v12 -= 1;
 				} while (v12);
 			}
-			v18 = v18 + *(int*) (a3 + 0x10) - v8;
+			v18 = v18 + *(int*) (surface + 0x10) - v8;
 			v20 -= 1;
 		} while (v20);
 		return 1;

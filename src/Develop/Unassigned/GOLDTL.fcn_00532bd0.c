@@ -14,11 +14,11 @@ extern int d2_DialogCenterY;
 extern int d2_ScreenHeight;
 extern int g_1040494;
 
-extern int __cdecl fcn_00506380(int a0, int a1, int a2, int a3);
+extern int __cdecl gm_GetEntityUiFlags(int a0, int a1, int a2, int a3);
 extern int __cdecl d2_GetResourceData(int a0);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
-extern void __cdecl fcn_0047a040(int a0, int a1, int a2, int a3);
-extern void __cdecl fcn_0047cba0(int a0, int a1, int a2, int a3, int a4);
+extern void __cdecl d2_SetClipRect(int a0, int a1, int a2, int a3);
+extern void __cdecl d2_DrawSpriteFromSet(int a0, int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x00532bd0 */
 void __cdecl d2_DrawCameraScrollArrows(void)
@@ -39,7 +39,7 @@ void __cdecl d2_DrawCameraScrollArrows(void)
         {
             if (g_7746cc != 0 || g_7746c8 != 0)
             {
-                g_7746dc = fcn_00506380(g_774970, selection, g_7746cc, 0);
+                g_7746dc = gm_GetEntityUiFlags(g_774970, selection, g_7746cc, 0);
                 if (!(g_7746dc & 0x1000))
                     return;
             }
@@ -86,21 +86,21 @@ void __cdecl d2_DrawCameraScrollArrows(void)
         if (!CompareVector3WithinTolerance(d3_ActiveCamera + 0xcc, 0x662d70, 0.2f))
             topState = 1;
     }
-    fcn_0047a040(0, 0, *(int *)(g_77250c + 4), *(int *)(g_77250c + 8));
+    d2_SetClipRect(0, 0, *(int *)(g_77250c + 4), *(int *)(g_77250c + 8));
     if (bottomState == 2)
-        fcn_0047cba0(d2_CenterX - 0x10, d2_ScreenHeight - 0x20, g_77250c, resource, 0);
+        d2_DrawSpriteFromSet(d2_CenterX - 0x10, d2_ScreenHeight - 0x20, g_77250c, resource, 0);
     else if (bottomState == 1)
-        fcn_0047cba0(d2_CenterX - 0x10, d2_ScreenHeight - 0x20, g_77250c, resource, bottomState);
+        d2_DrawSpriteFromSet(d2_CenterX - 0x10, d2_ScreenHeight - 0x20, g_77250c, resource, bottomState);
     if (leftState == 2)
-        fcn_0047cba0(4, d2_DialogCenterY, g_77250c, resource, leftState);
+        d2_DrawSpriteFromSet(4, d2_DialogCenterY, g_77250c, resource, leftState);
     else if (leftState == 1)
-        fcn_0047cba0(4, d2_DialogCenterY, g_77250c, resource, 3);
+        d2_DrawSpriteFromSet(4, d2_DialogCenterY, g_77250c, resource, 3);
     if (rightState == 2)
-        fcn_0047cba0(g_1040494 - 0x96, d2_DialogCenterY, g_77250c, resource, 4);
+        d2_DrawSpriteFromSet(g_1040494 - 0x96, d2_DialogCenterY, g_77250c, resource, 4);
     else if (rightState == 1)
-        fcn_0047cba0(g_1040494 - 0x96, d2_DialogCenterY, g_77250c, resource, 5);
+        d2_DrawSpriteFromSet(g_1040494 - 0x96, d2_DialogCenterY, g_77250c, resource, 5);
     if (topState == 2)
-        fcn_0047cba0(d2_CenterX - 0x10, 0x38, g_77250c, resource, 6);
+        d2_DrawSpriteFromSet(d2_CenterX - 0x10, 0x38, g_77250c, resource, 6);
     else if (topState == 1)
-        fcn_0047cba0(d2_CenterX - 0x10, 0x38, g_77250c, resource, 7);
+        d2_DrawSpriteFromSet(d2_CenterX - 0x10, 0x38, g_77250c, resource, 7);
 }

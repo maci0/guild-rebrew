@@ -9,8 +9,8 @@ extern int g_6b86f4;
 extern float g_662d40[3];
 
 unsigned char __cdecl fcn_00438450(char* o);
-void __cdecl fcn_00455280(char* o, char* a, float* v, char* m);
-void __cdecl fcn_00455450(char* o, char* a, char* v, char* m);
+void __cdecl d3_TransformDirectionToRef(char* o, char* a, float* v, char* m);
+void __cdecl d3_TransformPointToRef(char* o, char* a, char* v, char* m);
 
 /* ADDRESS: GOLDTL 0x00450d40 */
 char __cdecl fcn_00450d40(char* o, char* a)
@@ -35,7 +35,7 @@ char __cdecl fcn_00450d40(char* o, char* a)
 	}
 	if (*(int*) (o + 0x218) == 7) {
 		if (*(float*) (o + 0x94) > 0.0f && !(o[0x215] & 4)) {
-			fcn_00455280(o, a, g_662d40, o + 0x1d8);
+			d3_TransformDirectionToRef(o, a, g_662d40, o + 0x1d8);
 			*(char**) (o + 0x1f0) = g_6b86e4;
 			g_6b86e4 = o;
 			g_6b86f0++;
@@ -43,7 +43,7 @@ char __cdecl fcn_00450d40(char* o, char* a)
 		return 1;
 	}
 	if (*(float*) (o + 0x94) > 0.0f) {
-		fcn_00455450(o, a, o + 0x4c, o + 0x1d8);
+		d3_TransformPointToRef(o, a, o + 0x4c, o + 0x1d8);
 		*(char**) (o + 0x1f0) = g_6b86e8;
 		g_6b86e8 = o;
 		g_6b86f4++;

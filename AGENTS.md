@@ -113,12 +113,12 @@ does not approve.
 | `rebrew data move 0xOLD 0xNEW` | Re-address a data row; drops its verdict, keeps verification history |
 | `rebrew types check` | Check layouts and stale type bindings; `--compile` repeats target sizeof/offsetof assertions |
 | `rebrew types bind ID FILE C_NAME --size N --native-size N --evidence TEXT` | Register or refresh a stable type ID and target layout in managed `rebrew-types.toml` |
-| `rebrew types apply` | Rewrite signature types; preview with `--dry-run` |
+| `rebrew types apply FILE --param 0 --type TYPE --dry-run` | Preview a change to the first parameter's type |
 | `rebrew orphans list` | List metadata identities whose source is missing |
 | `rebrew orphans prune` | Remove orphaned metadata through the locked writer; preview with `--dry-run` |
 | `rebrew verify --data --built build/<target>` | Byte-compare built data sections per symbol |
 | `rebrew verify --whole-binary --built build/<target>` | Sections/exports/imports/rsrc/headers + layout freshness |
-| `rebrew verify --text --raw-link --built build/<target>` | Check .text placement; record RELOC functions whose raw-link bytes equal the reference as linked EXACT |
+| `rebrew verify --text --raw-link --built <raw-link-path>` | Check .text placement and record linked EXACT from the unmodified linker output |
 | `rebrew source graph --format summary` | Dependency graph stats and blockers |
 | `rebrew coverage catalog --json` | Catalog summary (no artifact of its own) |
 | `rebrew coverage export --output snapshots/ --json` | Export optional portable snapshots for offline viewing |

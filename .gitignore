@@ -120,3 +120,5 @@ compile_commands.json
 # SQLite metadata replica (primary read source); TOML stores are the tracked copy.
 /rebrew-metadata.sqlite3
 /rebrew-metadata.sqlite3.lock
+# Staged copies rebrew leaves behind when a source write is killed before publishing.
+.rebrew-stage-*

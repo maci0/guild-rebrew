@@ -15,7 +15,7 @@ typedef struct {
 } Ent5c1110;
 #include "client_data.h"
 #include "client_dialog_state.h"
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -59,7 +59,7 @@ int __cdecl fcn_005c1110(void)
 	b[2] = -1;
 	b[3] = -1;
 	t = (unsigned int) g_6b7fac;
-	h = fcn_00470820(0, 0, (char*) 0x6ac514);
+	h = d2_LoadForm(0, 0, (char*) 0x6ac514);
 	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);

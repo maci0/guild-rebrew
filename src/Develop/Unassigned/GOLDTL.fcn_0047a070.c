@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0047a070 */
-char* __cdecl fcn_0047a070(char* p, int i)
+char* __cdecl d2_GetShapeListEntry(char* p, int i)
 {
 	if (p == 0) {
 		return 0;

@@ -39,7 +39,7 @@ void __cdecl d3snd_PlayBuildingAmbient(Player*);
 int __cdecl gm_CheckEntityType(Player*);
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, Player*);
 void __cdecl d3_ApplyBuildingTextureSet(void);
-void __cdecl fcn_00516de0(int, char);
+void __cdecl d3_UpdateSceneDetailLevel(int, char);
 void __cdecl fcn_00516040(void);
 #include "Develop/Units/d3/d3_d3d.h"
 void __cdecl d3_ApplySceneLightingPreset(void);
@@ -82,7 +82,7 @@ void __cdecl d3_SetupInteriorScene(Player* p, void* unit)
 	if (gm_CheckEntityType(p) == 0) {
 		d3_VisitSceneObjects(g_67a370, 0, 0xc0, d3_ApplyBuildingTextureSet, p);
 	}
-	fcn_00516de0(g_6b8300, 0);
+	d3_UpdateSceneDetailLevel(g_6b8300, 0);
 	fcn_00516040();
 	fcn_00443230(0);
 	d3_ApplySceneLightingPreset();

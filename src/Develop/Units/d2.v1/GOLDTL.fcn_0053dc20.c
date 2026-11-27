@@ -1,4 +1,4 @@
-extern int __cdecl fcn_00470820(int a, int b, const char *name);
+extern int __cdecl d2_LoadForm(int a, int b, const char *name);
 extern void __cdecl d2_CenterDialogWindows(int obj);
 extern void __cdecl d2_SetForm(int obj, int a);
 extern int __cdecl fcn_0051e070(void);
@@ -17,7 +17,7 @@ extern int __cdecl fcn_004e4470(const char *name);
 extern void __cdecl cut_WaitForScript(int a);
 extern int __cdecl gm_FindHeadIconIndex(const char *name);
 extern int __cdecl d2_RunChoosePlayerDialog(int a, int b);
-extern int __cdecl fcn_0053e8a0(int a);
+extern int __cdecl d2_RunChooseCharacterIntroDialog(int a);
 extern int __cdecl d2_ShowChooseProfessionDialog(int a);
 extern unsigned int *__cdecl gm_GetStatRecord(char *buf, unsigned char a);
 extern void __cdecl d3_SelectSceneContext(int a, int b);
@@ -54,7 +54,7 @@ int __cdecl fcn_0053dc20(void)
 	v12 = -1;
 	v13 = 0xff;
 	v2 = 0;
-	obj = fcn_00470820(0, 0, (const char *) 0x68116c);
+	obj = d2_LoadForm(0, 0, (const char *) 0x68116c);
 	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 0);
 	if (fcn_0051e070()) {
@@ -146,7 +146,7 @@ label_53de5c:
 					cut_WaitForScript(fcn_004e4470((const char *) 0x6a4024));
 					retry = 1;
 				} else {
-					v4 = fcn_0053e8a0(0);
+					v4 = d2_RunChooseCharacterIntroDialog(0);
 					if (v4 == 1) {
 						d2_SuppressOverlay = v4;
 						*(int *) 0x6a37f8 = d2_OpenMessageBox(*(int *) 0x14abf04, 0);

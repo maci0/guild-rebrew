@@ -58,7 +58,7 @@ unsigned char __cdecl fcn_00438270(char* e, char* o, char* world);
 void* __cdecl m_PoolAlloc(int* pool, int size, int grow);
 void __stdcall fcn_005eb970(void* out, void* a, void* b);
 void __stdcall fcn_005ec410(Mat_451f80* out, float x, float y, float z);
-void __cdecl fcn_00450e90(float a, float b, char* c, Mat_451f80* d, Mat_451f80* e);
+void __cdecl d3_SelectActiveObjectLights(float a, float b, char* c, Mat_451f80* d, Mat_451f80* e);
 void __cdecl fcn_004372d0(unsigned char a, unsigned char b, int c, unsigned char d, unsigned char e);
 
 char __cdecl fcn_00451f80(char* e, void* parent)
@@ -117,7 +117,7 @@ char __cdecl fcn_00451f80(char* e, void* parent)
 					}
 				} else {
 					if (!set) {
-						fcn_00450e90(f, g, o + 0x280, (Mat_451f80*) g_1040cc0, (Mat_451f80*) g_1040c80);
+						d3_SelectActiveObjectLights(f, g, o + 0x280, (Mat_451f80*) g_1040cc0, (Mat_451f80*) g_1040c80);
 						((Transform451f80Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetTransform)((D3D_DEVICE_VIEW*)g_6b5de0, 0x100, *(char**) (e + 0x1ec) + 0x15fc);
 						set = 1;
 					}

@@ -45,7 +45,7 @@ extern pos14_7f4c00 gm_GameTime;
 extern float g_6652c4;
 int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl d3_SelectSceneContext(int, int);
-int __cdecl fcn_005e9870(Sefde0Entry*);
+int __cdecl d3_StepBallisticProjectile(Sefde0Entry*);
 int __cdecl fcn_005e9da0(Sefde0Entry*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
 void __cdecl d3_DestroyObject(void*);
@@ -100,7 +100,7 @@ void __cdecl fcn_004efde0(void)
 					} else if (state == 1) {
 						int runs;
 						if (SLOTS[slot].mode == 0) {
-							runs = fcn_005e9870(&SLOTS[slot].entry[i]);
+							runs = d3_StepBallisticProjectile(&SLOTS[slot].entry[i]);
 						} else {
 							runs = fcn_005e9da0(&SLOTS[slot].entry[i]);
 						}

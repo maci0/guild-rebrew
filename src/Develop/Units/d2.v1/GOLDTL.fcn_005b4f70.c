@@ -34,7 +34,7 @@ extern char g_6aba70[];
 extern char g_6aba5c[];
 extern char g_6aba48[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
@@ -75,7 +75,7 @@ void __cdecl d2_RunSceneChecker(void)
 
 	frame = 0;
 	t = main_LoopFlags;
-	d = fcn_00470820(0, 0, g_6abad8);
+	d = d2_LoadForm(0, 0, g_6abad8);
 	d2_CenterDialogWindows(d);
 	d2_SetForm(d, 0);
 	h1 = d2_GetWindowListItem(d, 0, io_AppendText(g_6ababc, 2));

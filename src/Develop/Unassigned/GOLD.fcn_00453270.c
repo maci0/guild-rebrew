@@ -15,7 +15,7 @@ typedef union D3_LIGHT_COLOR {
 } D3_LIGHT_COLOR;
 
 char* __cdecl d3_SelectObjectLod(char* object);
-void __cdecl fcn_00452ee0(char* o);
+void __cdecl d3_UpdateObjectLodAndLighting(char* o);
 void __cdecl d3_AccumulateObjectLights(char* o, D3_OBJECT_LIGHT_QUERY* q);
 void __cdecl d3_ApplyMaterialVertexColors(char* o, char* mesh, int zero, unsigned int color);
 char __cdecl d3_CollectAffectingLights(char* o, void* q);
@@ -49,7 +49,7 @@ char __cdecl d3_UpdateObjectLighting(char* o)
 	color.u = 0;
 	color.b[0] = 0xff;
 	g_6b86d4++;
-	fcn_00452ee0(o);
+	d3_UpdateObjectLodAndLighting(o);
 	*(int*) 0x633b18 = 0;
 	p = *(char**) mesh;
 	for (i = 0; i < *(int*) (mesh + 8); i++, p += 0x50) {

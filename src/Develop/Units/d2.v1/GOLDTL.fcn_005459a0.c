@@ -20,7 +20,7 @@ void __cdecl d2_SetForm(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 
-void __cdecl fcn_005459a0(int a)
+void __cdecl d2_ToggleActionPopupBar(int a)
 {
 	int i;
 

@@ -17,7 +17,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00533cf0(int);
 void __cdecl d2_ClearScreen(void);
 void __cdecl fcn_00473150(unsigned char*);
-void __cdecl fcn_005270c0(int);
+void __cdecl d2_UpdateHudVisibility(int);
 void __cdecl fcn_00528fd0(void);
 
 void __cdecl d2_RestoreHudAfterPause(void)
@@ -39,7 +39,7 @@ void __cdecl d2_RestoreHudAfterPause(void)
 	((Rect*)&g_1040480)->top = ((Rect*)&g_6a3764)->top;
 	((Rect*)&g_1040480)->bottom = ((Rect*)&g_6a3764)->bottom;
 	d2_ClearScreen();
-	fcn_005270c0(1);
+	d2_UpdateHudVisibility(1);
 	fcn_00528fd0();
 	fcn_00533cf0(0);
 	fcn_00473150(p);

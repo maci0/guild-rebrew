@@ -25,11 +25,6 @@ int __cdecl evt_LoadScript(char* a)
 
 
 
-int __cdecl fcn_005a8600(int a)
-{
-	return 0;
-}
-
 float __cdecl fcn_005b1910(char* o)
 {
 	return 0.0f;

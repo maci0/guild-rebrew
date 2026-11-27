@@ -15,9 +15,9 @@ void __cdecl cm_RequestModifyHealth(int, int);
 int __cdecl cm_RequestChangeBits(int, int, int, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 int __cdecl gm_CureRandomAffliction(unsigned char*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -56,13 +56,13 @@ int __cdecl d2_ShowMedicusDialog(unsigned char* e)
 		cm_RequestChangeBits(*(int*) (e + 4), 0x1c8, 4, 0x40, 0);
 		if (gm_RandomMod(2)) {
 			cm_RequestMoveCredits(-1, *(int*) (e + 4), g_773d75, money);
-			fcn_004ff210(*(unsigned short*) e, half);
+			gm_ApplyEntityHealthDelta(*(unsigned short*) e, half);
 			gm_CureRandomAffliction(e);
 		}
 		return 0x11;
 	}
 	money = (int) (gm_WalkEntityChain(*(unsigned short*) e) * 0.02f);
-	dlg = fcn_00470820(0, 0, s_6acc44);
+	dlg = d2_LoadForm(0, 0, s_6acc44);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);

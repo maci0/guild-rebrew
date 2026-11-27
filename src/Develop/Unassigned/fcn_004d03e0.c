@@ -14,8 +14,8 @@ extern float g_66291c;
 
 int __cdecl d2_GetResourceData(int size);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
-void __cdecl fcn_0047a040(int, int, int, int);
-int __cdecl fcn_0047cba0(int, int, int, int, int);
+void __cdecl d2_SetClipRect(int, int, int, int);
+int __cdecl d2_DrawSpriteFromSet(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x004d03e0 */
 void __cdecl fcn_004d03e0(void)
@@ -59,23 +59,23 @@ void __cdecl fcn_004d03e0(void)
         if (CompareVector3WithinTolerance((float*) (d3_ActiveCamera + 0xcc), g_662d70, 0.2f) == 0)
             down = 1;
     }
-    fcn_0047a040(0, 0, *(int*) (g_77250c + 4), *(int*) (g_77250c + 8));
+    d2_SetClipRect(0, 0, *(int*) (g_77250c + 4), *(int*) (g_77250c + 8));
     if (up == 2)
-        fcn_0047cba0(g_1040494 / 2 - 0x14, (int) (d2_UiScale * *(float*) 0x664ef0 - g_66293c),
+        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * *(float*) 0x664ef0 - g_66293c),
                      g_77250c, res, 0);
     else if (up == 1)
-        fcn_0047cba0(g_1040494 / 2 - 0x14, (int) (d2_UiScale * *(float*) 0x664ef0 - g_66293c),
+        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * *(float*) 0x664ef0 - g_66293c),
                      g_77250c, res, 1);
     if (left == 2)
-        fcn_0047cba0(8, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 2);
+        d2_DrawSpriteFromSet(8, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 2);
     else if (left == 1)
-        fcn_0047cba0(8, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 3);
+        d2_DrawSpriteFromSet(8, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 3);
     if (right == 2)
-        fcn_0047cba0(g_1040494 - 0x28, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 4);
+        d2_DrawSpriteFromSet(g_1040494 - 0x28, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 4);
     else if (right == 1)
-        fcn_0047cba0(g_1040494 - 0x28, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 5);
+        d2_DrawSpriteFromSet(g_1040494 - 0x28, d2_ScreenHeight / 2 + 0x14, g_77250c, res, 5);
     if (down == 2)
-        fcn_0047cba0(g_1040494 / 2 - 0x14, (int) (d2_UiScale * g_66291c), g_77250c, res, 6);
+        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * g_66291c), g_77250c, res, 6);
     else if (down == 1)
-        fcn_0047cba0(g_1040494 / 2 - 0x14, (int) (d2_UiScale * g_66291c), g_77250c, res, 7);
+        d2_DrawSpriteFromSet(g_1040494 / 2 - 0x14, (int) (d2_UiScale * g_66291c), g_77250c, res, 7);
 }

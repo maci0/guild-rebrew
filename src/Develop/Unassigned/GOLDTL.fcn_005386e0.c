@@ -2,7 +2,7 @@
 
 __declspec(dllimport) int __stdcall SystemParametersInfoA(unsigned int, unsigned int, void*, unsigned int);
 
-int __cdecl fcn_005386e0(void)
+int __cdecl main_IsScreensaverActive(void)
 {
 	int v;
 

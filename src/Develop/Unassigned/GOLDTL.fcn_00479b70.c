@@ -33,31 +33,31 @@ extern char s_67da68[];
 extern int g_100ef80;
 extern int g_67d96c;
 
-void __cdecl fcn_00478d50(int x, int y, Tex* t, char* sh);
+void __cdecl d2_DrawGrayscaleRleSprite(int x, int y, Tex* t, char* sh);
 
 /* ADDRESS: GOLDTL 0x00479b70 */
-int __cdecl fcn_00479b70(int x, int y, Tex* t, Bank* b, int idx)
+int __cdecl d2_DrawGrayscaleShapeFrame(int x, int y, Tex* tex, Bank* bank, int idx)
 {
 	char msg[0x80];
-	char* sh;
+	char* shape;
 	int saved;
 
-	if (!b) {
+	if (!bank) {
 		return 0;
 	}
-	if (idx > b->count) {
-		sprintf(msg, s_67da68, b->name);
+	if (idx > bank->count) {
+		sprintf(msg, s_67da68, bank->name);
 		return 0;
 	}
-	sh = (char*) b + *(unsigned int*) ((char*) b + 0x45 + idx * 4);
+	shape = (char*) bank + *(unsigned int*) ((char*) bank + 0x45 + idx * 4);
 	if (g_100ef80 == 0) {
 		saved = g_67d96c;
-		g_67d96c = t->pw;
-		switch (((Shape*) sh)->type) {
+		g_67d96c = tex->pw;
+		switch (((Shape*) shape)->type) {
 		case 0:
 			return 0;
 		case 1:
-			fcn_00478d50(x, y, t, sh);
+			d2_DrawGrayscaleRleSprite(x, y, tex, shape);
 			break;
 		case 2:
 			break;

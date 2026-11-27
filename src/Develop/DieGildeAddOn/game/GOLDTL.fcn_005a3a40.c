@@ -8,7 +8,7 @@ extern int g_7746d4;
 extern char* g_773d78;
 extern char* g_7746cc;
 
-void __cdecl fcn_0052f710(void);
+void __cdecl d2_DestroySelectionPanel(void);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl fcn_00502cd0(int, int, int, int);
@@ -19,7 +19,7 @@ void __cdecl d2_OpenMarktstandPanel(int buildingArg, int queryTypeId)
 {
 	(*(int*)&g_7e2aa0) = 0;
 	g_7746c0 = 0;
-	fcn_0052f710();
+	d2_DestroySelectionPanel();
 	sv_ClearObjectSelection();
 	g_7746d4 = 1;
 	if (g_6a25b8 != -1) {

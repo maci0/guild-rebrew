@@ -62,7 +62,7 @@ void __cdecl cm_SendSetGebBesitzer(int, int, int);
 float __cdecl gm_RandomQuadratic(void);
 
 /* ADDRESS: GOLDTL 0x00509fc0 */
-void __cdecl fcn_00509fc0(unsigned short* subjectRecord, char* reportText, int a2)
+void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* reportText, int a2)
 {
 	char buf[0x800];
 	Packet pkt;

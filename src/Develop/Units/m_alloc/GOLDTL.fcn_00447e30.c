@@ -62,12 +62,12 @@ int __cdecl vfs_ReadVec3(char*, void*);
 int __cdecl bio_rd_array_quick(char*, int, int*);
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
-int __cdecl fcn_0045c5b0(char*, Col447e30, unsigned int, unsigned int);
+int __cdecl d3_LoadOrReuseTexture(char*, Col447e30, unsigned int, unsigned int);
 int __cdecl fcn_0045ce90(int);
 char* __cdecl fcn_0043fa10(char*);
 
 /* ADDRESS: GOLDTL 0x00447e30 */
-int __cdecl fcn_00447e30(char* stream, unsigned int version)
+int __cdecl d3_int_io_LoadFloor(char* stream, unsigned int version)
 {
 	S447e30Desc desc;
 	char recName[0x40];
@@ -141,7 +141,7 @@ int __cdecl fcn_00447e30(char* stream, unsigned int version)
 						vfs_ReadByte(stream, &b2);
 						if (recName[0] != 0) {
 							mask = ((b1 & 0x0f) << 2) | (b2 & 1);
-							memset(&bits, 0, sizeof(bits)); bits.a = 0x7f; last = fcn_0045c5b0(recName, bits, mask, 0);
+							memset(&bits, 0, sizeof(bits)); bits.a = 0x7f; last = d3_LoadOrReuseTexture(recName, bits, mask, 0);
 							if (last != 0) {
 								fcn_0045ce90(last);
 							}

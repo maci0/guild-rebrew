@@ -2,7 +2,7 @@ void __cdecl fcn_00533a40(char *);
 void __cdecl d2_BroadcastCutscene0xa2(char *);
 int __cdecl fcn_004bfe00(char *);
 unsigned short * __cdecl fcn_00502cd0(int, int, ...);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl cm_RequestSysMessage(char, char *);
 
 /* ADDRESS: GOLDTL 0x00535bd0 */
@@ -56,7 +56,7 @@ void __cdecl fcn_00535bd0(void)
             fcn_00533a40((char *)0x6a327c);
         break;
     case 20:
-        fcn_004ff210(*(unsigned short *)0x774970, -1000);
+        gm_ApplyEntityHealthDelta(*(unsigned short *)0x774970, -1000);
         break;
     case 21:
         if (*(unsigned char *)0x7747b0 & 4) {

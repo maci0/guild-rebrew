@@ -4,7 +4,7 @@ extern int g_772600;
 void __cdecl d2_ClearAnimationSlot(int index);
 
 /* ADDRESS: GOLDTL 0x0047a090 */
-void __cdecl fcn_0047a090(void)
+void __cdecl d2_UpdateAnimations(void)
 {
 	int delta;
 	int ebp;

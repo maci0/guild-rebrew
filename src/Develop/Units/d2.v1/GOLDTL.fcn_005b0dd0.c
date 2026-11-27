@@ -16,7 +16,7 @@ extern char* g_77255c;
 extern int g_774a64;
 extern char s_6ab3e4[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
@@ -26,7 +26,7 @@ int __cdecl io_AppendText(char*, ...);
 
 int __cdecl fcn_005b0dd0(MsgBox* m)
 {
-	m->dlg = fcn_00470820(0, 0, s_6ab3e4);
+	m->dlg = d2_LoadForm(0, 0, s_6ab3e4);
 	fcn_00471d80(m->dlg, 3);
 	d2_SetForm(m->dlg, 0);
 	m->win = d2_CreateChildWindow(0x4a, 0x4c, 0x206, 0x164, 0, d2_CurrentWindowId);

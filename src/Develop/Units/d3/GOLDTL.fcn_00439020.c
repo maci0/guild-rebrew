@@ -57,7 +57,7 @@ extern char g_10432c0[];
 
 void __cdecl fcn_00439e70(char* o);
 void __cdecl fcn_00450a30(int nlist, int nactive);
-void __cdecl fcn_0045bed0(unsigned int n, int a2);
+void __cdecl d3_InitTextures(unsigned int n, int a2);
 void __cdecl fcn_00436aa0(int* a);
 void __cdecl fcn_00436f70(char on);
 void __cdecl fcn_0043bc00(char a, char b);
@@ -123,7 +123,7 @@ char __cdecl fcn_00439020(fcn_00439020_Cfg* cfg)
 		n = 8;
 	fcn_00450a30(0x200, n);
 	g_6b8008 = 0;
-	fcn_0045bed0(g_10529e0.a18, g_10529e0.a1c);
+	d3_InitTextures(g_10529e0.a18, g_10529e0.a1c);
 	fcn_00436aa0(&g_67a374);
 	fcn_00436f70(1);
 	d3_FogColor = 0;

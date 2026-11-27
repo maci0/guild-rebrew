@@ -28,7 +28,7 @@ extern char s_67da68[];
 void __cdecl d2_BlitShape(int a1, int a2, int a3, char* sh);
 
 /* ADDRESS: GOLDTL 0x00479af0 */
-int __cdecl fcn_00479af0(int a1, int a2, int a3, Bank* bank, int idx)
+int __cdecl shp_ShowShapeFromBank(int x, int y, int surface, Bank* bank, int idx)
 {
 	char msg[0x80];
 
@@ -39,6 +39,6 @@ int __cdecl fcn_00479af0(int a1, int a2, int a3, Bank* bank, int idx)
 		sprintf(msg, s_67da68, bank->name);
 		return 0;
 	}
-	d2_BlitShape(a1, a2, a3, (char*) bank + *(unsigned int*) ((char*) bank + 0x45 + idx * 4));
+	d2_BlitShape(x, y, surface, (char*) bank + *(unsigned int*) ((char*) bank + 0x45 + idx * 4));
 	return 1;
 }

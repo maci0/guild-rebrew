@@ -15,7 +15,7 @@ int __cdecl fcn_00502cd0(int a, int b, ...);
 int __cdecl d2_CheckOwnerBlocked(void* obj);
 void* __cdecl he_StartHandlungSearch(int a, int b, int c, int d, int e);
 void* __cdecl he_fn_Handlung(void);
-int __cdecl fcn_00470820(int a, int b, char* name);
+int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int flag);
 void __cdecl d2_DrawPanelFrame(int ctx, int a, int b);
@@ -99,7 +99,7 @@ void __cdecl d2_ShowHandelSearch(unsigned char* targetBuilding, unsigned char* a
 		}
 		entity = he_fn_Handlung();
 	}
-	dlg = fcn_00470820(0, 0, (char*) 0x6a9750);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6a9750);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x70f, 0x741);

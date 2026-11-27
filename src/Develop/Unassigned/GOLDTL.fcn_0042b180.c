@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl msx_FindWaveDriverIndex(char*);
 
-int __cdecl fcn_0042b180(char* context)
+int __cdecl msx_FindFreeStreamSlot(char* context)
 {
 	int i;
 	int j;

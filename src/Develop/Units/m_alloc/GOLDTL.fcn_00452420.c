@@ -3,10 +3,10 @@
 extern int g_67a370;
 
 void __cdecl d3_UnlinkFromRenderList(char*);
-void __cdecl fcn_0045bfb0(int);
+void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 
-void __cdecl fcn_00452420(char* o)
+void __cdecl d3_FreeMeshObject(char* o)
 {
 	char* owner;
 
@@ -24,7 +24,7 @@ void __cdecl fcn_00452420(char* o)
 		d3_UnlinkFromRenderList(o);
 	}
 	if (*(int*) (o + 0xdc) != 0) {
-		fcn_0045bfb0(*(int*) (o + 0xdc));
+		d3_ReleaseTexture(*(int*) (o + 0xdc));
 	}
 	m_FreeTracked(*(void**) (o + 0x28));
 	*(void**) (o + 0x28) = 0;

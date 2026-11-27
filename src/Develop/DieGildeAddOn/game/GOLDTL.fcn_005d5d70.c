@@ -37,7 +37,7 @@ extern char s_6ac494[];
 
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -69,7 +69,7 @@ int __cdecl d2_ShowDuelChallengeDialog(unsigned char* e)
 		return 0;
 	}
 	kind = (e[9] != 0) + 0x1d68;
-	dlg = fcn_00470820(0, 0, s_6ac494);
+	dlg = d2_LoadForm(0, 0, s_6ac494);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);

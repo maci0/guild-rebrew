@@ -4,7 +4,7 @@ int __cdecl d2_PackColorForPixelFormat(unsigned char, unsigned char, unsigned ch
 void __cdecl shp_WriteFrameOffsets(int*, int*);
 
 /* ADDRESS: GOLDTL 0x00479330 */
-int* __cdecl fcn_00479330(int* src)
+int* __cdecl shp_Convert24To16(int* src)
 {
 	int* in;
 	char* out;

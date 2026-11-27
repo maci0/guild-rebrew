@@ -1,7 +1,7 @@
 extern volatile int g_6b7fac;
 
 /* ADDRESS: GOLDTL 0x0057f130 */
-int __cdecl fcn_0057f130(int* msg)
+int __cdecl d2_CheckTutCh2Step3Done(int* msg)
 {
 	short* e;
 

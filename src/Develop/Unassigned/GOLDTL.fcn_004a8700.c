@@ -3,20 +3,20 @@ typedef struct {
 	int flag;
 	int c;
 	int d;
-} fcn_004a8700_slot;
+} FIFTH_CARD_SLOT;
 // SIZE 0x10
 
 typedef struct {
 	char pad0[0x1c];
 	int h;
 	char pad[0x34 - 4 - 0x1c];
-} fcn_004a8700_entry;
+} FIFTH_CARD_ENTRY;
 
 typedef struct {
-	fcn_004a8700_entry e[3];
+	FIFTH_CARD_ENTRY e[3];
 	char pad9c[0x19];
 	unsigned char count;
-} fcn_004a8700_game;
+} FIFTH_CARD_GAME;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_types.h"
@@ -31,8 +31,8 @@ void __cdecl gm_DealFifthCard(void)
 	int i;
 
 	for (i = 0; i < 3; i++) {
-		((fcn_004a8700_game*)g_1007cd4)->e[i].h = gm_DrawCard(i);
-		((fcn_004a8700_slot*)g_1007ce8)[((fcn_004a8700_game*)g_1007cd4)->e[i].h].flag = 1;
+		((FIFTH_CARD_GAME*)g_1007cd4)->e[i].h = gm_DrawCard(i);
+		((FIFTH_CARD_SLOT*)g_1007ce8)[((FIFTH_CARD_GAME*)g_1007cd4)->e[i].h].flag = 1;
 	}
-	((fcn_004a8700_game*)g_1007cd4)->count++;
+	((FIFTH_CARD_GAME*)g_1007cd4)->count++;
 }

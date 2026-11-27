@@ -49,10 +49,10 @@ typedef struct Col {
 char __cdecl vfs_FileExists(char*);
 char* __cdecl d3_FindTextureByName(const char*);
 int __cdecl d3_ResolveTexturePath(char*);
-Tex* __cdecl fcn_0045c5b0(char*, Col, unsigned int, unsigned int);
+Tex* __cdecl d3_LoadOrReuseTexture(char*, Col, unsigned int, unsigned int);
 
 /* ADDRESS: GOLDTL 0x0045c380 */
-void __cdecl fcn_0045c380(Tex* t, Col c, unsigned int flags, unsigned int flags2)
+void __cdecl d3_LoadAnimatedTextureFrames(Tex* t, Col c, unsigned int flags, unsigned int flags2)
 {
 	char name[0x100];
 	char buf2[0x40];
@@ -96,7 +96,7 @@ void __cdecl fcn_0045c380(Tex* t, Col c, unsigned int flags, unsigned int flags2
 				sprintf(name, "%s/%s%i.bmp", p, buf1, n + 1);
 				if (vfs_FileExists(name) != 0) {
 					sprintf(name, "%s%i", buf1, n + 1);
-					fcn_0045c5b0(name, out, flags, flags2);
+					d3_LoadOrReuseTexture(name, out, flags, flags2);
 				} else {
 					e = (Tex*) g_104049c;
 					k = 0;

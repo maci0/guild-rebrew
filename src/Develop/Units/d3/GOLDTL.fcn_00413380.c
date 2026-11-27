@@ -12,7 +12,7 @@ extern int g_67a370;
 #endif
 
 void __cdecl d3_FreeObjectAnimation(void*);
-void __cdecl fcn_00418860(char*);
+void __cdecl d3_UpdateSunRays(char*);
 
 /* ADDRESS: GOLD 0x00411c10 */
 void __cdecl fcn_00413380(void)
@@ -26,6 +26,6 @@ void __cdecl fcn_00413380(void)
 		}
 	}
 	if (g_6b5cf8 != 0 && g_67a370 == *(int*) (g_6b5cf8 + OBJ_SND_OFF)) {
-		fcn_00418860(g_6b5cf8);
+		d3_UpdateSunRays(g_6b5cf8);
 	}
 }

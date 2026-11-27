@@ -8,14 +8,14 @@ typedef struct {
 } Col44f250;
 
 void* __cdecl m_alloc(int size, char* tag);
-void* __cdecl fcn_0044f190(unsigned int a0);
+void* __cdecl vfs_OpenFastChunk(unsigned int a0);
 char* __cdecl fcn_0064d530(char* dest, char* src, int count);
 void __cdecl fcn_004011f0(void* a0, void* a1);
 void __cdecl vfs_ReadCString(void* a0, char* a1);
 void __cdecl vfs_ReadByte(void* a0, void* a1);
 void __cdecl fcn_004011d0(void* a0, void* a1);
 void __cdecl vfs_ReadVec3(void* a0, void* a1);
-void* __cdecl fcn_0045c5b0(void* a0, Col44f250 a1, unsigned int a2, unsigned int a3);
+void* __cdecl d3_LoadOrReuseTexture(void* a0, Col44f250 a1, unsigned int a2, unsigned int a3);
 void __cdecl CloseVfsStream(void* a0);
 
 extern char* g_104049c;
@@ -51,7 +51,7 @@ int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, i
 
 	chunk = 0;
 	v3 = 0;
-	inputStream = fcn_0044f190(a0);
+	inputStream = vfs_OpenFastChunk(a0);
 	if (inputStream != 0) {
 		chunk = (unsigned char*)m_alloc(0x2a4, "d3_io_fl:LoadFastChunk(obj)");
 		fcn_0064d530((char*)chunk, (char*)a1, 0x3f);
@@ -147,7 +147,7 @@ int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, i
 							d += 1;
 						} while (*(d - 1) != 0);
 					}
-					v6 = (char*)fcn_0045c5b0((void*)(*(int*)(chunk + 0x200) + v10), v27, (((((unsigned int)v31 << 4) | (unsigned int)v33) << 1) | (unsigned int)v32) << 1 | 1,
+					v6 = (char*)d3_LoadOrReuseTexture((void*)(*(int*)(chunk + 0x200) + v10), v27, (((((unsigned int)v31 << 4) | (unsigned int)v33) << 1) | (unsigned int)v32) << 1 | 1,
 					    ((unsigned int)v23 << 4) | (unsigned int)v24[0]);
 				} else if (v16[0] != 0) {
 					if (!v3) {
@@ -159,7 +159,7 @@ int __cdecl d3_LoadFastChunk(unsigned int a0, unsigned int a1, int a2, int a3, i
 							d += 1;
 						} while (*(d - 1) != 0);
 					}
-					v6 = (char*)fcn_0045c5b0((void*)(*(int*)(chunk + 0x200) + v10), v27, (((((unsigned int)v31 << 4) | (unsigned int)v33) << 1) | (unsigned int)v32) << 1,
+					v6 = (char*)d3_LoadOrReuseTexture((void*)(*(int*)(chunk + 0x200) + v10), v27, (((((unsigned int)v31 << 4) | (unsigned int)v33) << 1) | (unsigned int)v32) << 1,
 					    ((unsigned int)v23 << 4) | (unsigned int)v24[0]);
 				} else if ((v18[0] != 0) && (!v3)) {
 					s = v18;

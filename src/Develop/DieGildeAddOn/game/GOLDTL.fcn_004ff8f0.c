@@ -4,7 +4,7 @@ extern int g_aed32c;
 
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_IsEntityOrphaned(unsigned char*);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 int __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_CheckEntityAgeLimit(int);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
@@ -50,7 +50,7 @@ void __cdecl gm_MaintainNpcPopulation(void)
 		    && !s[0x164] && !s[0x166] && !s[0x167]) {
 			if (gm_IsEntityOrphaned(e)) {
 				val = (int) (-(*(float*) (s + 0x1a) + 1.0f));
-				fcn_004ff210(*(unsigned short*) e, val);
+				gm_ApplyEntityHealthDelta(*(unsigned short*) e, val);
 				active--;
 			}
 		}
@@ -66,7 +66,7 @@ void __cdecl gm_MaintainNpcPopulation(void)
 				if ((!p || p[2] == 0x0f) && (!q || q[2] == 0x0f)) {
 					if (gm_IsEntityOrphaned(e)) {
 						val = (int) (-(*(float*) (s + 0x1a) + 1.0f));
-						fcn_004ff210(*(unsigned short*) e, val);
+						gm_ApplyEntityHealthDelta(*(unsigned short*) e, val);
 						active--;
 					}
 					continue;

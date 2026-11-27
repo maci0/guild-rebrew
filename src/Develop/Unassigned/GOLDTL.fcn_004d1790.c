@@ -12,7 +12,7 @@ extern int g_772ee4;
 extern int g_772ee8;
 extern char g_68b844[];
 
-void __cdecl fcn_005345a0(void);
+void __cdecl d3_ClearSelectionBox(void);
 void __cdecl d3_BeginSelectionBox(void);
 int __cdecl gm_GetEntityControlMask(int, char*);
 char __cdecl fcn_004d15c0(int, char*);
@@ -29,7 +29,7 @@ void __cdecl fcn_004d1790(int a0)
 
 	if (g_14ce8d4 == 0) {
 		if (d3_SelectionBoxActive != 0)
-			fcn_005345a0();
+			d3_ClearSelectionBox();
 	}
 	if (g_14ce8d4 != 0 && g_14ce8e4 == 0) {
 		if (d3_SelectionBoxActive == 0 && g_6772c4 != 0 && d2_CurrentElementId == -1) {

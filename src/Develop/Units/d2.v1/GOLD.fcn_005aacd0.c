@@ -13,7 +13,7 @@ int __cdecl gm_FindBuildingOwner(void*);
 void __cdecl fcn_00475f60(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00475ca0(int, int, int, int);
-void __cdecl fcn_0046bc90(int, int, int, int, int, int, int);
+void __cdecl d2_SetElementPipeStrings(int, int, int, int, int, int, int);
 int __cdecl fcn_00515990(int, ...);
 
 typedef struct {
@@ -150,7 +150,7 @@ int __cdecl fcn_005aacd0(unsigned char* buildingRec, int modelId, int a3)
 	if (f.row[0] != 4 && f.row[0] != 0x13 && f.row[0] != 0x10) {
 		f.v44 = d2_GetWindowListItem(*(int*) (book + 0x228), 3, 3);
 		fcn_00475ca0(f.v44, 0, 4, *(int*) (buildingRec + 0x41));
-		fcn_0046bc90(f.v44, 5, *(int*) 0x1440a78, *(int*) 0x1440a7c,
+		d2_SetElementPipeStrings(f.v44, 5, *(int*) 0x1440a78, *(int*) 0x1440a7c,
 			*(int*) 0x1440a80, *(int*) 0x1440a84,
 			*(int*) 0x1440a88);
 	}

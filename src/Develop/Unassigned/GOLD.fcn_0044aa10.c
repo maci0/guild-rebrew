@@ -5,7 +5,7 @@
 extern char* g_6338c4;
 extern int g_fc52f0;
 int __cdecl vfs_Tfopen(char*, const char*, int);
-void __cdecl fcn_00401320(int, unsigned int);
+void __cdecl vfs_WriteDword(int, unsigned int);
 void __cdecl vfs_WriteCString(int, char*);
 void __cdecl vfs_WriteVec3(int, int*);
 void __cdecl fcn_004011f0(int, unsigned char);
@@ -32,15 +32,15 @@ void __cdecl fcn_0044aa10(char* path, int supplied)
         if (!stream)
             return;
     }
-    fcn_00401320(stream, 0x3a6c00bb);
+    vfs_WriteDword(stream, 0x3a6c00bb);
     vfs_WriteCString(stream, g_6338c4);
-    fcn_00401320(stream, *(unsigned int*) 0x5fcc74);
+    vfs_WriteDword(stream, *(unsigned int*) 0x5fcc74);
     vfs_WriteVec3(stream, (int*) 0x5fcc78);
     vfs_WriteVec3(stream, (int*) 0x633b1c);
-    fcn_00401320(stream, *(unsigned int*) (g_5fb5b0 + 0xb4));
-    fcn_00401320(stream, *(unsigned int*) 0x6334a0);
-    fcn_00401320(stream, *(unsigned int*) 0xfc29bc);
-    fcn_00401320(stream, *(unsigned int*) 0xfc5340);
+    vfs_WriteDword(stream, *(unsigned int*) (g_5fb5b0 + 0xb4));
+    vfs_WriteDword(stream, *(unsigned int*) 0x6334a0);
+    vfs_WriteDword(stream, *(unsigned int*) 0xfc29bc);
+    vfs_WriteDword(stream, *(unsigned int*) 0xfc5340);
     preset = (char*) 0xfba9cc;
     do {
         vfs_WriteVec3(stream, (int*) (preset - 0xc));
@@ -48,9 +48,9 @@ void __cdecl fcn_0044aa10(char* path, int supplied)
         value = (unsigned int*) (preset + 0x10);
         i = 6;
         do {
-            fcn_00401320(stream, value[-1]);
-            fcn_00401320(stream, value[0]);
-            fcn_00401320(stream, value[1]);
+            vfs_WriteDword(stream, value[-1]);
+            vfs_WriteDword(stream, value[0]);
+            vfs_WriteDword(stream, value[1]);
             value += 3;
         } while (--i);
         preset += 0x60;
@@ -58,7 +58,7 @@ void __cdecl fcn_0044aa10(char* path, int supplied)
     count = 0;
     for (node = g_fc52f0; node != (int) g_fc2700; node = d3_GetNextSceneNode(node))
         count++;
-    fcn_00401320(stream, count);
+    vfs_WriteDword(stream, count);
     node = g_fc52f0;
     while (node != (int) g_fc2700) {
         wr_object(stream, node);

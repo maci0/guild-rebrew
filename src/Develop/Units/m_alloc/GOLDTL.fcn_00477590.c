@@ -3,7 +3,7 @@
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl m_FreeTracked(void*);
 void __cdecl shp_WriteFrameOffsets(const void* src, char* hdr);
-int __cdecl fcn_00475780(char*, char*);
+int __cdecl d2_CompareRgb(char*, char*);
 void __cdecl d2_WritePixelRgb(char*, char, char, char);
 
 /* Lay out one wide-glyph text block: scan the three-byte glyph cells for the
@@ -43,16 +43,16 @@ unsigned int* __cdecl fcn_00477590(int originX, int originY, unsigned int width,
     for (y = 0; y < (int) height; y++) {
         stride = pixels + ((originY + y) * rowStride + originX) * 3;
         for (x = 0; x < (int) width; x++, stride += 3) {
-            if (fcn_00475780((char*) stride, (char*) 0x100f1a0) && x > (int) (unsigned short) maxx) {
+            if (d2_CompareRgb((char*) stride, (char*) 0x100f1a0) && x > (int) (unsigned short) maxx) {
                 maxx = x;
             }
-            if (fcn_00475780((char*) stride, (char*) 0x100f1a0) && x < (int) (unsigned short) minx) {
+            if (d2_CompareRgb((char*) stride, (char*) 0x100f1a0) && x < (int) (unsigned short) minx) {
                 minx = x;
             }
-            if (fcn_00475780((char*) stride, (char*) 0x100f1a0) && y > (int) (unsigned short) maxy) {
+            if (d2_CompareRgb((char*) stride, (char*) 0x100f1a0) && y > (int) (unsigned short) maxy) {
                 maxy = y;
             }
-            if (fcn_00475780((char*) stride, (char*) 0x100f1a0) && y < (int) (unsigned short) miny) {
+            if (d2_CompareRgb((char*) stride, (char*) 0x100f1a0) && y < (int) (unsigned short) miny) {
                 miny = y;
             }
         }
@@ -71,16 +71,16 @@ unsigned int* __cdecl fcn_00477590(int originX, int originY, unsigned int width,
     *(unsigned short*) ((char*) buf + 0x10) = (unsigned short) miny;
     *(unsigned short*) ((char*) buf + 0x12) = (unsigned short) (maxx + 1);
     *(unsigned short*) ((char*) buf + 0x14) = (unsigned short) (maxy + 1);
-    if (fcn_00475780((char*) 0x67d95c, ref)) {
+    if (d2_CompareRgb((char*) 0x67d95c, ref)) {
         for (y = 0; y < (int) height; y++) {
             for (x = 0; x < (int) width; x++) {
                 stride = pixels + (((originY + y) * rowStride + originX) + x) * 3;
-                if (fcn_00475780((char*) 0x67d960, ref) && !fcn_00475780((char*) stride, (char*) 0x67d960)) {
+                if (d2_CompareRgb((char*) 0x67d960, ref) && !d2_CompareRgb((char*) stride, (char*) 0x67d960)) {
                     d2_WritePixelRgb((char*) stride, *(char*) 0x100f1a0, *(char*) 0x100f1a1, *(char*) 0x100f1a2);
                     minx = x;
                     miny = y;
                 }
-                if (!fcn_00475780((char*) stride, (char*) 0x67d95c)) {
+                if (!d2_CompareRgb((char*) stride, (char*) 0x67d95c)) {
                     d2_WritePixelRgb((char*) stride, *(char*) 0x100f1a0, *(char*) 0x100f1a1, *(char*) 0x100f1a2);
                     maxx = x;
                     maxy = y;
@@ -103,14 +103,14 @@ unsigned int* __cdecl fcn_00477590(int originX, int originY, unsigned int width,
             run[0] = 0;
             run[1] = 0;
             for (; x < (int) *(unsigned short*) ((char*) buf + 6); x++) {
-                if (fcn_00475780((char*) (pixels + (x + (originY + r) * rowStride + originX) * 3), (char*) 0x100f1a0)) {
+                if (d2_CompareRgb((char*) (pixels + (x + (originY + r) * rowStride + originX) * 3), (char*) 0x100f1a0)) {
                     break;
                 }
                 run[0]++;
             }
             run[0] *= 3;
             for (; run[1] + x < *(unsigned short*) ((char*) buf + 6); run[1]++) {
-                if (!fcn_00475780((char*) (pixels + (run[1] + (originY + r) * rowStride + x + originX) * 3), (char*) 0x100f1a0)) {
+                if (!d2_CompareRgb((char*) (pixels + (run[1] + (originY + r) * rowStride + x + originX) * 3), (char*) 0x100f1a0)) {
                     break;
                 }
             }

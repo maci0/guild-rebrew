@@ -52,7 +52,7 @@ extern int g_14ce8e0;
 extern char s_6ac738[];
 extern char s_6ac730[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -188,7 +188,7 @@ void __cdecl fcn_005c5b10(char* a)
 	int sl;
 	int v;
 
-	dlg = fcn_00470820(0, 0, s_6ac738);
+	dlg = d2_LoadForm(0, 0, s_6ac738);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3a8[0] = 0xe;

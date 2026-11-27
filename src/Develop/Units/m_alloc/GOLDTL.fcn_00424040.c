@@ -7,7 +7,7 @@ int __cdecl fcn_00424130(char* set, char* name);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x00424040 */
-int __cdecl fcn_00424040(char* name)
+int __cdecl sbs_FreeSampleBank(char* name)
 {
 	char* e;
 	int ret = 0;
@@ -36,7 +36,7 @@ int __cdecl fcn_00424040(char* name)
 		return r;
 	}
 	for (e = *(char**) (sbs_BankManager + 0x3c); e != 0; e = *(char**) (sbs_BankManager + 0x3c)) {
-		if (fcn_00424040(e) != 0) {
+		if (sbs_FreeSampleBank(e) != 0) {
 			return -1;
 		}
 		g_6b7d6c++;

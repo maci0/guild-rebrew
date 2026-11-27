@@ -12,12 +12,12 @@ void __cdecl gm_SetSlotCallback(int, void*, void*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl ResetDisplayCounters(void);
-void __cdecl fcn_00525ef0(void);
+void __cdecl d2_ResetUiInputAndBounds(void);
 void* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
 void __cdecl fcn_00438da0(float, float, float, float, float, float, float, int, int);
-void __cdecl fcn_005270c0(int);
+void __cdecl d2_UpdateHudVisibility(int);
 void __cdecl d3_SelectSceneContext(int, char);
-void __cdecl fcn_00459710(char*, char);
+void __cdecl d3_ResetSkyDomeNormals(char*, char);
 void __cdecl fcn_00414960(float*, float*, char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
 char* __cdecl fcn_00442910(int, float*, float*, char*);
@@ -30,7 +30,7 @@ char __cdecl d3_SetObjectVisible(char*, char);
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
 void __cdecl he_SetGfxInfoEnabledByKey(int, int);
 void __cdecl fcn_00587f40(char*);
-void __cdecl fcn_005875c0(char*, float);
+void __cdecl d2_UpdateKanoneCamera(char*, float);
 void __cdecl fcn_00587a50(char*);
 void __cdecl d2_UpdateDealSummaryLog(char*);
 void __cdecl d2_SwitchKanoneMode(int, int, int, int, int);
@@ -42,7 +42,7 @@ char __cdecl d3_DestroyObject(int);
 void __cdecl fcn_00533a40(char*);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
-void __cdecl fcn_00516de0(int, int);
+void __cdecl d3_UpdateSceneDetailLevel(int, int);
 void __cdecl fcn_00443230(int);
 void __cdecl fcn_00528fd0(void);
 
@@ -111,7 +111,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
     d2_SetOverlayAnimation(0, 0);
     sv_ClearObjectSelection();
     ResetDisplayCounters();
-    fcn_00525ef0();
+    d2_ResetUiInputAndBounds();
     g_7e2700 = 0;
     g_100f8c0[0] = 0;
     sp = (char*) fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 1);
@@ -149,7 +149,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
     g_1040480 = g_1040494;
     g_1040484 = 0x4b;
     g_104048c = d2_ScreenHeight - 0x4b;
-    fcn_005270c0(0);
+    d2_UpdateHudVisibility(0);
     g = (int*) d3_ActiveCamera;
     p[0] = *(int*) ((char*) g + 0x4c);
     p[1] = *(int*) ((char*) g + 0x50);
@@ -159,7 +159,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
     v[2] = *(int*) ((char*) g + 0x8c);
     d3_SelectSceneContext(0, 0);
     if (g_6b89c0 != 0)
-        fcn_00459710((char*) g_6b89c0, 1);
+        d3_ResetSkyDomeNormals((char*) g_6b89c0, 1);
 
     fcn_00414960(f0, f1, (char*) *(int*) (obj + 0x61));
     if (g_9a9200[0] != *(int*) (obj + 1)) {
@@ -215,7 +215,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
     *(int*)(g_77dda0 + 0x38) = -1;
     *(int*)(g_77dda0 + 0x0) = -1;
     while (main_RunFrameLoop((int)d2_RunKanoneUI, 0x2656c7)) {
-        fcn_005270c0(0);
+        d2_UpdateHudVisibility(0);
         *(unsigned int*) ((char*) S + 0x6c) = (unsigned int)g_6b7fac;
         elapsedTicks = (unsigned int)g_6b7fac - *(unsigned int*) ((char*) S + 0x68);
         dt = (float) (unsigned int) elapsedTicks * 0.013513514f;
@@ -225,7 +225,7 @@ void __cdecl d2_RunKanoneUI(char* obj)
                     && d2_CurrentElementId == *(int*) ((char*) S + 0xbc)))) {
             g_774654 = 1;
         } else {
-            fcn_005875c0((char*) S, dt);
+            d2_UpdateKanoneCamera((char*) S, dt);
             fcn_00587a50((char*) S);
             fcn_00588200(obj, (char*) S, res);
             d2_UpdateDealSummaryLog((char*) S);
@@ -281,14 +281,14 @@ void __cdecl d2_RunKanoneUI(char* obj)
     g_1040480 = s0;
     g_1040484 = s1;
     g_104048c = s3;
-    fcn_005270c0(1);
+    d2_UpdateHudVisibility(1);
     fcn_00528fd0();
     d3_SelectSceneContext(g28, 0);
     if (g_6b89c0 != 0)
-        fcn_00459710((char*) g_6b89c0, 1);
+        d3_ResetSkyDomeNormals((char*) g_6b89c0, 1);
     d3_SetNodePosition((char*) d3_ActiveCamera, p);
     d3_SetObjectRotation((char*) d3_ActiveCamera, v);
-    fcn_00516de0(g_6b8300, 0);
+    d3_UpdateSceneDetailLevel(g_6b8300, 0);
     fcn_00443230(1);
     fcn_00473150(sp);
     fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, 0x67d67c, 0x5a, 0xa);

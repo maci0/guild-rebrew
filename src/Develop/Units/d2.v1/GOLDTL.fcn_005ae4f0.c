@@ -9,7 +9,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_ResetTrainingRows(char*);
 int __cdecl d2_CheckOwnerBlocked(char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -28,7 +28,7 @@ void __cdecl d2_RunDiebesgildeTraining(char* e)
 	int i;
 
 	if (d2_CheckOwnerBlocked(e) == 0) {
-		dlg = fcn_00470820(0, 0, "locations\\diebesgilde\\diebesgilde_trainieren");
+		dlg = d2_LoadForm(0, 0, "locations\\diebesgilde\\diebesgilde_trainieren");
 		d2_ResetTrainingRows(e);
 		d2_SetOverlayAnimation(0, 0);
 		do {

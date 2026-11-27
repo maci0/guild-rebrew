@@ -43,7 +43,7 @@ extern int d2_CurrentElementId;
 extern char g_6b5c60[];
 extern char g_7e3a60[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -78,7 +78,7 @@ void __cdecl d2_RunChatConsole(void)
 	ids[6] = -1;
 	ids[7] = -1;
 	g_6a2c1c = 0;
-	dlg = fcn_00470820(0, 0, "misc\\chatconsole");
+	dlg = d2_LoadForm(0, 0, "misc\\chatconsole");
 	fcn_00471d80(dlg, 3);
 	d2_SetForm(dlg, 3);
 	n = 0;

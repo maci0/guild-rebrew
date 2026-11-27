@@ -43,7 +43,7 @@ void __cdecl ReportClientMessage(char *);
 void __cdecl fcn_00438da0(float, float, int, int, int, int, int, int, int);
 void __cdecl d2_ClearScreen(void);
 int __cdecl d2_SetBackdropResource(int);
-int __cdecl fcn_00470820(int, int, char *);
+int __cdecl d2_LoadForm(int, int, char *);
 int __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl fcn_0053a3a0(int, int, int);
@@ -68,7 +68,7 @@ int __cdecl d2_ShowLoadGameMenu(void);
 int __cdecl d2_ShowChooseNetworkDialog(void);
 int __cdecl d2_ChooseTutorial(void);
 void __cdecl d2_InitDefaultMenueProfile(void);
-void __cdecl fcn_00469e70(void);
+void __cdecl d2_ClearBackdropResource(void);
 void __cdecl gm_ResetHistoricalCursors(void);
 int __cdecl d2_StartSinglePlayerChooseCity(void);
 void __cdecl d2_ClearRadioGroup(int);
@@ -154,7 +154,7 @@ void __cdecl main_Menue(void)
 	d2_ClearScreen();
 	d2_SetBackdropResource(0x797);
 	v29 = 0;
-	v15 = fcn_00470820(0, 0, (char *)0x6a3b60);
+	v15 = d2_LoadForm(0, 0, (char *)0x6a3b60);
 	fcn_00471d80(v15, 3);
 	d2_SetForm(v15, 0);
 	v5 = d2_CurrentWindowId;
@@ -202,7 +202,7 @@ void __cdecl main_Menue(void)
 		if (g_14ce8d8 != 0 && d2_CurrentElementId != -1) {
 			if (d2_CurrentElementId == b[4]) {
 				d2_SetSlotVisibility(v5, 0);
-				fcn_00469e70();
+				d2_ClearBackdropResource();
 				gm_ResetHistoricalCursors();
 				if (d2_StartSinglePlayerChooseCity()) {
 					*(int*) &g_7747b0 |= 1;

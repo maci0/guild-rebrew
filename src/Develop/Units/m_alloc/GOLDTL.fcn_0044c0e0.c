@@ -6,11 +6,11 @@ extern char* g_1042efc;
 
 char* __cdecl d3_AppendVfsAssetPath(char* s, char* sub);
 void __cdecl fcn_0044b340(char* name, int* a, int* b, int* c);
-char* __cdecl fcn_0044b480(char* buf, char* name, int a, int b, int c);
+char* __cdecl d3_LoadAGF(char* buf, char* name, int a, int b, int c);
 void __cdecl m_FreeTracked(int p);
 void __cdecl fcn_0044a120(void);
 void __cdecl d3_ComputeNodeBoundsBox(void);
-float __cdecl fcn_0044c0c0(int, char*);
+float __cdecl d3_GetModelRadius(int, char*);
 
 /* ADDRESS: GOLDTL 0x0044c0e0 */
 char* __cdecl fcn_0044c0e0(char* path, char* name)
@@ -35,14 +35,14 @@ char* __cdecl fcn_0044c0e0(char* path, char* name)
 			fcn_0044b340(path, &a, &b, &c);
 		}
 		x = a;
-		r = fcn_0044b480(buf, name, x, b, c);
+		r = d3_LoadAGF(buf, name, x, b, c);
 		if (r != 0) {
 			if (x != 0 && *(int*) (r + 0x200) != x) {
 				m_FreeTracked(x);
 			}
 			*(void**) (r + 0x1ec) = (void*) fcn_0044a120;
 			*(void**) (r + 0x1f0) = (void*) d3_ComputeNodeBoundsBox;
-			*(void**) (r + 0x1f4) = (void*) fcn_0044c0c0;
+			*(void**) (r + 0x1f4) = (void*) d3_GetModelRadius;
 		} else if (x != 0) {
 			m_FreeTracked(x);
 		}

@@ -24,12 +24,12 @@ extern int g_100f1dc;
 extern double g_665fb0;
 extern unsigned char g_773d75;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_00508620(int, int);
+int __cdecl gm_TradeUnitsToAmount(int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl cm_SendCopyEntityData(char*);
 void __cdecl d2_DestroyForm(int);
@@ -44,7 +44,7 @@ int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 	char msg[0xf8];
 
 	res = 0;
-	h = fcn_00470820(0, 0, g_6aacdc);
+	h = d2_LoadForm(0, 0, g_6aacdc);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1909, w, n * 2 + 0x9a8, &((Row5a66*)g_868060)[k], k);
@@ -54,11 +54,11 @@ int __cdecl fcn_005a66b0(char* who, int n, int w, unsigned char k)
 				g_774654 = 1;
 			}
 			if (g_100f1dc == 2) {
-				a = fcn_00508620(w, n);
+				a = gm_TradeUnitsToAmount(w, n);
 				fa = (float) (a * g_665fb0);
-				b = fcn_00508620(1, n);
+				b = gm_TradeUnitsToAmount(1, n);
 				if (!((float) b < fa)) {
-					b = fcn_00508620(1, n);
+					b = gm_TradeUnitsToAmount(1, n);
 					fa = (float) b;
 				}
 				cm_SendSellObjekt(-1, *(int*) (who + 1), n, a, g_773d75, 0);

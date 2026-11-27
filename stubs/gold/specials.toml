@@ -249,10 +249,10 @@ impl = ""
 [specials.fcn_00445600]
 impl = ""
 
-# Comparison-only definition for fcn_00401260: the callers' most common prototype (3 of 7 declarations). It proves neither native ABI nor behaviour.
-[specials.fcn_00401260]
+# Comparison-only definition for vfs_WriteInt32 (GOLDTL 0x00401260): the callers' most common prototype (3 of 7 declarations). It proves neither native ABI nor behaviour.
+[specials.vfs_WriteInt32]
 impl = """
-void __cdecl fcn_00401260(int a, int b)
+void __cdecl vfs_WriteInt32(int a, int b)
 {
 }
 """

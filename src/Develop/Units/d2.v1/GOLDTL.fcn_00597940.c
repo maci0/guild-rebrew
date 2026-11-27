@@ -8,7 +8,7 @@ extern int __cdecl d2_GetControlValue(int);
 extern void __cdecl d2_SetDisplayCounter(int, int);
 
 /* ADDRESS: GOLDTL 0x00597940 */
-void __cdecl fcn_00597940(int a0, int a1, int a2, int a3, short *a4)
+void __cdecl d2_DrawProduktionSlotGrid(int a0, int a1, int a2, int a3, short *a4)
 {
     int *r;
     int width;

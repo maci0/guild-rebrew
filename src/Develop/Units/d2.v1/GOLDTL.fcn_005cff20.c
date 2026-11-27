@@ -69,7 +69,7 @@ extern int d2_CurrentElementId;
 extern int g_100f1dc;
 extern char g_7f4ca0[];
 
-void* __cdecl fcn_00470820(short, short, char*);
+void* __cdecl d2_LoadForm(short, short, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -166,7 +166,7 @@ int __cdecl fcn_005cff20(unsigned char* rec, unsigned char* a2, int a3,
 			h++;
 		} while ((int) h < 0x85a0a0);
 	}
-	dlg = (int) fcn_00470820(0, 0, "Gesetze\\Auswahl2");
+	dlg = (int) d2_LoadForm(0, 0, "Gesetze\\Auswahl2");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	if (a3 != 0) {

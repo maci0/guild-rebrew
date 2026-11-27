@@ -17,7 +17,7 @@ int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 int __cdecl he_fn_Handlung(void);
-void* __cdecl fcn_00470820(int, int, char*);
+void* __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DrawPanelFrame(int, int, int);
@@ -122,7 +122,7 @@ void __cdecl fcn_0058d5f0(unsigned char* gebaeude)
 		} while (j < 0xc);
 		h = he_fn_Handlung();
 	}
-	menu = (int) fcn_00470820(0, 0, "s_6a9750");
+	menu = (int) d2_LoadForm(0, 0, "s_6a9750");
 	ids[3] = menu;
 	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 0);

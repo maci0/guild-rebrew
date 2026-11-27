@@ -36,14 +36,14 @@ extern char g_10069a0[];
 extern signed char g_6a3440;
 
 Spec* __cdecl gm_LookupMissionSpec(int op);
-void __cdecl fcn_004b5630(Spec* s, int flags);
+void __cdecl d2_RunMissionBriefingDialog(Spec* s, int flags);
 void __cdecl main_PlayOutroMovie(void);
 int __cdecl fcn_004b43f0(int n);
 int __cdecl gm_AllocMissionJob(int a1, int a2, int a3);
 int __cdecl cm_RequestSysMessage(int, Req*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_StepCommandQueue(void);
-void __cdecl fcn_004b5b20(int flags);
+void __cdecl main_ExitToGameLoop(int flags);
 
 /* ADDRESS: GOLDTL 0x004b62e0 */
 void __cdecl fcn_004b62e0(int flags)
@@ -68,7 +68,7 @@ void __cdecl fcn_004b62e0(int flags)
 		}
 	}
 	flags = (flags & ~9) | 0x100;
-	fcn_004b5630(s, flags);
+	d2_RunMissionBriefingDialog(s, flags);
 	main_PlayOutroMovie();
 	r = fcn_004b43f0(level);
 	if (r == 0) {
@@ -87,7 +87,7 @@ void __cdecl fcn_004b62e0(int flags)
 		while (cm_GetCommandStatus(h) == 0) {
 			cm_StepCommandQueue();
 		}
-		fcn_004b5b20(flags);
+		main_ExitToGameLoop(flags);
 	} else {
 		gm_AllocMissionJob(ent->entity_id, r, 1);
 		m.id = ent->entity_id;

@@ -55,7 +55,7 @@ int __cdecl fcn_00502cd0(int val, int a, int b, int c);
 int __cdecl fcn_00502850(void);
 int __cdecl he_StartHandlungSearch(int a, int b, int idx, int c, int d);
 int __cdecl he_fn_Handlung(void);
-void* __cdecl fcn_00470820(short a, short b, char* name);
+void* __cdecl d2_LoadForm(short a, short b, char* name);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_SetForm(int h, int stage);
@@ -128,7 +128,7 @@ int __cdecl d2_ShowThievesGuildSpyDialog(void* a0, char* obj)
 				fcn_00526120(buf_a, 0);
 			} else {
 				ent = &g_7f4ca0[*(unsigned short*) (obj + 0x27)];
-				dlg = fcn_00470820(0, 0, s_6ab1b8);
+				dlg = d2_LoadForm(0, 0, s_6ab1b8);
 				d2_CenterDialogWindows((int) dlg);
 				d2_SetOverlayAnimation(0, 0);
 				d2_SetForm((int) dlg, 1);

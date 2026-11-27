@@ -26,7 +26,7 @@ void __cdecl d3_SetObjectEulerRotation(char*, int, float, int);
 void __cdecl d2_UpdateFloatingDamagePopups(void);
 
 /* ADDRESS: GOLD 0x004cf000 */
-void __cdecl fcn_004cf000(void)
+void __cdecl ch_UpdateContextCharacters(void)
 {
 	OBJECT_COLOR color;
 	int i;

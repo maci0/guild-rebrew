@@ -31,7 +31,7 @@ int __cdecl fcn_0065f220(const char* a, const char* b);
 HEAD_SET* __cdecl gm_SelectEntityHeadSet(int id);
 
 /* ADDRESS: GOLDTL 0x004fdfe0 */
-void __cdecl fcn_004fdfe0(Figure* f)
+void __cdecl ch_AssignHeadIcon(Figure* f)
 {
 	char icon[0x80];
 	int i;

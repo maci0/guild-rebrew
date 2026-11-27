@@ -64,22 +64,22 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern char g_6a969c[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_0058b030(char*, SelDlg*);
-void __cdecl fcn_0058b1f0(char*, DialogState*, unsigned int);
+void __cdecl d2_PopulateBuildingSlotList(char*, DialogState*, unsigned int);
 void __cdecl fcn_0058b440(unsigned int, unsigned int*, int, int);
-char __cdecl fcn_004f1790(int, void*);
+char __cdecl gm_GetEntitySlotIndex(int, void*);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
 /* ADDRESS: GOLDTL 0x0058bb10 */
-void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
+void __cdecl d2_RunGraveyardPickerDialog(PickResult* result, char* graveyard, int titleId, int mode,
 			  void (__cdecl* callback)(char*, PickResult*))
 {
 
@@ -100,16 +100,16 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 		result->item = 0;
 		result->item2 = 0;
 	}
-	st.handle = fcn_00470820(0, 0, g_6a969c);
+	st.handle = d2_LoadForm(0, 0, g_6a969c);
 
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(st.handle);
 	d2_SetForm(st.handle, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(st.handle, 1);
 	st.filter = d2_CurrentWindowId;
 
-	io_AppendText((int) g_6a9694, a2);
+	io_AppendText((int) g_6a9694, titleId);
 	d2_SetForm(st.handle, 2);
 	st.slot = d2_CurrentWindowId;
 	d2_SetForm(st.handle, 3);
@@ -124,9 +124,9 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 	st.form7 = d2_CurrentWindowId;
 
 	st.type = 0; st.selected = 0; st.row = 0;
-	fcn_0058b030(a1, (SelDlg*)&st);
-	fcn_0058b1f0(a1, &st, 0xffffffff);
-	fcn_0058b440((unsigned int) a1, (unsigned int*) &st, -1, mode);
+	fcn_0058b030(graveyard, (SelDlg*)&st);
+	d2_PopulateBuildingSlotList(graveyard, &st, 0xffffffff);
+	fcn_0058b440((unsigned int) graveyard, (unsigned int*) &st, -1, mode);
 	g_100f1dc = -1;
 	deadline += 0x96;
 	selft = st.selected;
@@ -167,18 +167,18 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 						if (result != 0) {
 							result->item = st.entries[selft].item;
 							result->value = *(int*) result->item;
-							result->kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), result->item);
+							result->kind = (unsigned char) gm_GetEntitySlotIndex(*(int*) (graveyard + 0x65), result->item);
 							result->item2 = (char*) st.rows[i][1];
 							result->value2 = *(int*) result->item2;
 						}
 						if (callback != 0) {
 							rec.item = st.entries[selft].item;
 							rec.value = *(int*) rec.item;
-							rec.kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), rec.item);
+							rec.kind = (unsigned char) gm_GetEntitySlotIndex(*(int*) (graveyard + 0x65), rec.item);
 							rec.item2 = (char*) st.rows[i][1];
 							rec.value2 = *(int*) rec.item2;
 							d2_SetFormVisibility(st.handle, 0);
-							callback(a1, &rec);
+							callback(graveyard, &rec);
 							d2_SetFormVisibility(st.handle, 1);
 						} else if (result != 0) {
 							g_774654 = 1;
@@ -189,18 +189,18 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 				if (result != 0) {
 					result->item = st.entries[selft].item;
 					result->value = *(int*) result->item;
-					result->kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), result->item);
+					result->kind = (unsigned char) gm_GetEntitySlotIndex(*(int*) (graveyard + 0x65), result->item);
 					result->item2 = 0;
 					result->value2 = -1;
 				}
 				if (callback != 0) {
 					rec1.item = st.entries[selft].item;
 					rec1.value = *(int*) rec1.item;
-					rec1.kind = (unsigned char) fcn_004f1790(*(int*) (a1 + 0x65), rec1.item);
+					rec1.kind = (unsigned char) gm_GetEntitySlotIndex(*(int*) (graveyard + 0x65), rec1.item);
 					rec1.item2 = 0;
 					rec1.value2 = -1;
 					d2_SetFormVisibility(st.handle, 0);
-					callback(a1, &rec1);
+					callback(graveyard, &rec1);
 					d2_SetFormVisibility(st.handle, 1);
 				} else if (result != 0) {
 					g_774654 = 1;
@@ -208,15 +208,15 @@ void __cdecl fcn_0058bb10(PickResult* result, char* a1, int a2, int mode,
 			}
 		}
 		if (flags & 4) {
-			fcn_0058b030(a1, (SelDlg*)&st);
+			fcn_0058b030(graveyard, (SelDlg*)&st);
 			selft = st.selected;
 		}
 		if (flags & 2) {
-			fcn_0058b1f0(a1, &st, saved);
+			d2_PopulateBuildingSlotList(graveyard, &st, saved);
 			selft = st.selected;
 		}
 		if (flags & 1) {
-			fcn_0058b440((unsigned int) a1, (unsigned int*) &st, cur, mode);
+			fcn_0058b440((unsigned int) graveyard, (unsigned int*) &st, cur, mode);
 			selft = st.selected;
 		}
 		if (main_RunFrameLoop((void*) 0x58bb10, 0x677c7) == 0) {

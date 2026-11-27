@@ -79,7 +79,7 @@ void __cdecl d2_UpdateGauge(unsigned char*, Row*, int);
 void __cdecl d2_ClearGauge(Row*);
 float __cdecl fcn_005101e0(unsigned char*, int, int, int);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_00505d00(unsigned char*, int*);
+int __cdecl gm_CollectBuildingObjectSlots(unsigned char*, int*);
 void __cdecl d2_DestroyElement(int);
 void* __cdecl he_StartHandlungSearch(int, ...);
 void* __cdecl he_fn_Handlung(void);
@@ -95,7 +95,7 @@ void __cdecl d2_SetElementValue(int, ...);
 void __cdecl d2_ClearRadioGroup(int);
 void __cdecl fcn_00534f30(char*);
 void __cdecl d3_EndCameraAndUiMode(void);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl fcn_0051af00(char*, char*, ...);
 int __cdecl gm_CheckEntityType(int);
 int __cdecl d2_CreateRadioGroup(int, ...);
@@ -427,7 +427,7 @@ after2:
 		for (i = 0; i < tv2; i++) {
 			rows[i].obj = 0;
 		}
-		nSlots = fcn_00505d00((unsigned char*) building, slots);
+		nSlots = gm_CollectBuildingObjectSlots((unsigned char*) building, slots);
 		for (i = 0; i < 12; i++) {
 			if (slots[0xd + i] == 0xffff) {
 				continue;
@@ -574,7 +574,7 @@ after2:
 						d2_SetForm(*(int*) (win + 0x228 + i * 4), 2);
 						io_AppendText((char*) 0x6811b0);
 					}
-					fcn_004ff210(*(unsigned short*) rows[sel].obj, -1000);
+					gm_ApplyEntityHealthDelta(*(unsigned short*) rows[sel].obj, -1000);
 					sel = -1;
 				}
 			}

@@ -18,7 +18,7 @@ int __cdecl gm_MapEntityStatRange(int stat);
 int __cdecl gm_IsInRange(int x);
 char __cdecl gm_RandomStatModifier(char v);
 void __cdecl ahm_ResetEntityState(void* rec);
-void __cdecl fcn_004fdfe0(char* rec);
+void __cdecl ch_AssignHeadIcon(char* rec);
 int __cdecl gm_FindHeadIconIndex(char* name);
 char* __cdecl gm_PickUnusedPresetCharacter(void);
 void __cdecl amt_InitRulerEntity(int type, int a, int b, char* rec);
@@ -467,7 +467,7 @@ short __cdecl fcn_0050a7e0(int type, int mother_id, int father_id, int arg4, cha
         }
         F(slot, 0x1c) = decay;
     }
-    fcn_004fdfe0(slot);
+    ch_AssignHeadIcon(slot);
     memset(slot + 0x1b4, 0, 0x10);
     ahm_ResetEntityState(slot);
     if (B(slot, 2) == 3 || B(slot, 2) == 4 || B(slot, 2) == 2 || B(slot, 2) == 0x13) {

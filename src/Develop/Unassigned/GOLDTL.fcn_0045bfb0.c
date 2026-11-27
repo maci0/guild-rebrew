@@ -2,11 +2,11 @@ extern char* g_104049c;
 extern unsigned int g_10404a0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_0045bf70(char*);
-void __cdecl fcn_0045bfb0(int);
+void __cdecl d3_ReleaseTextureInterface(char*);
+void __cdecl d3_ReleaseTexture(int);
 
 /* ADDRESS: GOLDTL 0x0045bfb0 */
-void __cdecl fcn_0045bfb0(int obj)
+void __cdecl d3_ReleaseTexture(int obj)
 {
 	char* o;
 	char* p;
@@ -24,7 +24,7 @@ void __cdecl fcn_0045bfb0(int obj)
 		for (i = 0; i < g_10404a0; i++, p += 0x70) {
 			if (*(int*) (p + 0x40) > 0 && *(int*) (p + 0x48) == *(int*) (o + 0x48) &&
 			    *(unsigned char*) (p + 0x5d) > 0) {
-				fcn_0045bfb0((int) p);
+				d3_ReleaseTexture((int) p);
 			}
 		}
 	}
@@ -53,7 +53,7 @@ void __cdecl fcn_0045bfb0(int obj)
 			}
 		}
 		if (i == g_10404a0) {
-			fcn_0045bf70(o);
+			d3_ReleaseTextureInterface(o);
 		}
 	}
 	*(int*) (o + 0x40) = 0;

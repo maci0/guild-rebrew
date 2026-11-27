@@ -28,7 +28,7 @@ extern List8c_102cbc8 g_102cbc8[];
 extern char g_14cf950;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char*);
 void __cdecl d2_CenterDialogWindows(int);
@@ -70,16 +70,16 @@ int __cdecl fcn_00526120(char* text, int flags)
 	}
 	wait = main_LoopFlags & ~0x38;
 	if (flags & 2) {
-		dlg = fcn_00470820(0, 0, "misc\\Messagebox_Autosize");
+		dlg = d2_LoadForm(0, 0, "misc\\Messagebox_Autosize");
 	} else if (flags & 0x10) {
-		dlg = fcn_00470820(0, 0, "misc\\Messagebox_BIG");
+		dlg = d2_LoadForm(0, 0, "misc\\Messagebox_BIG");
 	} else if (flags & 0x20) {
-		dlg = fcn_00470820(0, 0, "misc\\Messagebox_VERY_BIG");
+		dlg = d2_LoadForm(0, 0, "misc\\Messagebox_VERY_BIG");
 	} else if (flags & 0x100) {
-		dlg = fcn_00470820(0, 0, "misc\\Messagebox_NONE_PERGA");
+		dlg = d2_LoadForm(0, 0, "misc\\Messagebox_NONE_PERGA");
 		d2_SetForm(dlg, 1);
 	} else {
-		dlg = fcn_00470820(0, 0, "misc\\Messagebox");
+		dlg = d2_LoadForm(0, 0, "misc\\Messagebox");
 	}
 	if (flags & 8) {
 		wait = 0x717c6;

@@ -14,7 +14,7 @@ extern int g_67a370;
 extern int g_9b4a40[];
 extern char* ch_ContextCharacters[32];
 
-void __cdecl fcn_004d1a80(void)
+void __cdecl cut_RefreshCombatContextCharacters(void)
 {
 	int self;
 	int n;

@@ -13,7 +13,7 @@ extern int g_77259c;
 void __cdecl d2_DestroyElement(int id);
 void __cdecl m_FreeTracked(int p);
 void __cdecl fcn_00475f80(int surf);
-void __cdecl fcn_0047ce50(int tex);
+void __cdecl d3_SafeReleaseSceneResource(int tex);
 void __cdecl d2_SubRefcount(int id);
 
 /* ADDRESS: GOLDTL 0x0046f390 */
@@ -45,7 +45,7 @@ int __cdecl d2_DestroyWindow(int win)
 		fcn_00475f80(w->i[0x38 / 4]);
 	}
 	if (w->i[0x3a0 / 4] != 0) {
-		fcn_0047ce50(w->i[0x3a0 / 4]);
+		d3_SafeReleaseSceneResource(w->i[0x3a0 / 4]);
 	}
 	if (w->i[0x398 / 4] != -1) {
 		d2_SubRefcount(w->i[0x398 / 4]);

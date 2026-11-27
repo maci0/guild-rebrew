@@ -35,11 +35,11 @@ extern float g_66413c;
 #include "Develop/Units/d2.v1/d2_window_view.h"
 extern List8c_102cbc8 g_102cbc8[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
 int __cdecl d2_CreateRadioGroup(int, ...);
@@ -98,11 +98,11 @@ void __cdecl fcn_00585030(int alchemyObjectArg)
 	prev = he_GetActionProgress(e, &owner, &frac, 0);
 	stamp = g_6b7fac;
 	g_100f1dc = -1;
-	win = fcn_00470820(0, 0, "Locations\\Domizil\\Alchemistry2");
+	win = d2_LoadForm(0, 0, "Locations\\Domizil\\Alchemistry2");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(win, 2);
 	wnd = d2_CurrentWindowId;
 	d2_SetForm(win, 1);

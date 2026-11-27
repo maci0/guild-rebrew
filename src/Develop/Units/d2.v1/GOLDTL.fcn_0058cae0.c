@@ -8,11 +8,11 @@ extern int g_100f1dc;
 extern char g_6a96f4[];
 extern char g_6a4078[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
 void __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel);
 int __cdecl d2_UpdateRentGraveOptions(char* a1, int a2, int a3, int* a4, int* a5);
@@ -34,11 +34,11 @@ int __cdecl d2_RunRentGraveDialog(char* p, int a1, int a2)
 
 	sel = 0;
 	res = 0;
-	d = fcn_00470820(0, 0, g_6a96f4);
+	d = d2_LoadForm(0, 0, g_6a96f4);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(d);
 	d2_SetForm(d, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(d, 1);
 	io_AppendText(0x4113, 0x4112);
 	fcn_0058c4f0(p, d, 2, ids, &sel);

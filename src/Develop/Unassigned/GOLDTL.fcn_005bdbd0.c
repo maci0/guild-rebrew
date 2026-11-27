@@ -1,5 +1,5 @@
 #include <string.h>
-char __cdecl fcn_005bdbd0(char* obj, char* list)
+char __cdecl d3_CollectTurmSchieferdach(char* obj, char* list)
 {
 	if (strstr(obj, (void*) 0x6ac430) != 0) {
 		((char**) list)[*(int*) (list + 0x400)] = obj;

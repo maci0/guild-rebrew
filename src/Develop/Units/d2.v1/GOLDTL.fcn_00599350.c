@@ -49,7 +49,7 @@ extern char g_6b5c60[];
 
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetFormWindow(int, int);
@@ -110,7 +110,7 @@ void __cdecl d2_ShowBuildingMenu(void)
 		return;
 	}
 	fcn_0057e880(0xe, 0, 0, 0);
-	hwnd = fcn_00470820(0, 0, (char*) 0x6aa298);
+	hwnd = d2_LoadForm(0, 0, (char*) 0x6aa298);
 	d2_CenterDialogWindows(hwnd);
 	d2_SetForm(hwnd, 0);
 	i = d2_CurrentWindowId * 0x3cc;

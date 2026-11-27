@@ -46,10 +46,10 @@ extern int g_14ce8e0;
 extern int g_100f1dc;
 extern char g_7f4ca4[];
 
-int __cdecl fcn_00470820(int a, int b, char* name);
+int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int page);
-void __cdecl fcn_005340f0(int a);
+void __cdecl d2_InitWindowBounds(int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_004f7120(int id, char* rec, int* out1, int* out2, int* idx);
 void __cdecl d2_ClearWindowChildren(int a, int b);
@@ -96,10 +96,10 @@ void __cdecl fcn_005a2580(char* a0, char* a1, char* a2)
 	vals[1] = 0;
 	vals[2] = 0;
 	memset(sel, 0, sizeof(sel));
-	h = fcn_00470820(0, 0, "locations\\Wirtshaus\\DUNKLEECKE");
+	h = d2_LoadForm(0, 0, "locations\\Wirtshaus\\DUNKLEECKE");
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	memset(sel, 0, sizeof(sel));
 	changed = 1;

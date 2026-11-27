@@ -16,7 +16,7 @@ int __cdecl fcn_0041db70();
 int __cdecl fcn_0041ddd0();
 int __cdecl FindPath();
 int __cdecl d3_GridPointToWorld();
-char __cdecl fcn_0045b990();
+char __cdecl d3sm_SampleHeight();
 int __cdecl fcn_0064d228();
 
 /* ADDRESS: GOLDTL 0x00408540 */
@@ -241,17 +241,17 @@ label_40892d:
     v27 = a2[v28];
     v6 = *(int *)(v27 + 0x128);
     if ((((v6) && (*(char *)(v6 + 9) == '-')) && (*(int *)(v6 + 0xf4))) && (*(int *)(v6 + 0x154) == -1)) {
-      v4 = fcn_0045b990(v35,*(int *)(v27 + 0x34) + 0x4c,&v23,&v22,v21);
+      v4 = d3sm_SampleHeight(v35,*(int *)(v27 + 0x34) + 0x4c,&v23,&v22,v21);
       if (v4)
         ch_MarkGridDiamond(v23,v22,v37,0,v36);
-      if ((*(int **)(a2[v28] + 0x124)) && (v4 = fcn_0045b990(v35,**(int **)(a2[v28] + 0x124) + 0x4c,&v23,&v22,v21), v4)) {
+      if ((*(int **)(a2[v28] + 0x124)) && (v4 = d3sm_SampleHeight(v35,**(int **)(a2[v28] + 0x124) + 0x4c,&v23,&v22,v21), v4)) {
         v34 = 0;
         v27 = v36;
         ch_MarkGridDiamond(v23,v22,v37,v34,v27 * 2); 
       }
     }
     else {
-      v4 = fcn_0045b990(v35,*(int *)(v27 + 0x34) + 0x4c,&v23,&v22,v21);
+      v4 = d3sm_SampleHeight(v35,*(int *)(v27 + 0x34) + 0x4c,&v23,&v22,v21);
       v27 = v36;
       if (v4) {
         v10 = 9;
@@ -264,7 +264,7 @@ label_40892d:
         }
         ch_MarkGridDiamond(v23,v22,v37,v34,v10);
       }
-      if ((*(int **)(a2[v28] + 0x124)) && (v6 = **(int **)(a2[v28] + 0x124), fcn_0045b990(v13,v6 + 0x4c,&v23,&v22,v21))) {
+      if ((*(int **)(a2[v28] + 0x124)) && (v6 = **(int **)(a2[v28] + 0x124), d3sm_SampleHeight(v13,v6 + 0x4c,&v23,&v22,v21))) {
         v34 = 0xd;
         ch_MarkGridDiamond(v23,v22,v37,v34,v27 * 2);
       }
@@ -272,7 +272,7 @@ label_40892d:
     v28 += 1;
     if (a1 <= v28) {
       v28 = *(int *)(a0 + 0x128);
-      v4 = fcn_0045b990(v35,*(int *)(*(int *)(v28 + 0x14) + 0x34) + 0x4c,&v24,&v15,v21);
+      v4 = d3sm_SampleHeight(v35,*(int *)(*(int *)(v28 + 0x14) + 0x34) + 0x4c,&v24,&v15,v21);
       if (!v4)
         goto label_ret0;
       v6 = *(int *)(v28 + 0xf8) + 0x10;

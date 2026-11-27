@@ -13,12 +13,12 @@ char* __cdecl d3_SpawnObject(int kind, char* name);
 void __cdecl fcn_00439aa0(char* object);
 void __cdecl d3_AppendObjectSibling(char* object, char* sibling);
 void __cdecl fcn_00439c00(char* object, char* child);
-void __cdecl fcn_00439fa0(char* object);
+void __cdecl d3_AddObjectDrawData(char* object);
 void __cdecl d3_ReadObjectEvents(void* stream, char* object);
 char __cdecl d3_SetObjectVisible(char* object, char on);
-int __cdecl fcn_00446ca0(unsigned int version);
+int __cdecl d3_GetSceneVersionSlotCount(unsigned int version);
 void __cdecl fcn_00449f90(char* object, void* part, char* name);
-int __cdecl fcn_0044c200(char* a, char* b);
+int __cdecl d3_LoadModel(char* a, char* b);
 void __cdecl fcn_0045ce90(void* resource);
 void __cdecl m_FreeTracked(void* ptr);
 
@@ -160,7 +160,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 			if (version >= 0x3a6c00a4u) {
 				if (type > 0) {
 					vfs_ReadCString(stream, name);
-					if (fcn_0044c200(name, name) != 0) {
+					if (d3_LoadModel(name, name) != 0) {
 						fcn_00449f90(object, 0, name);
 					} else {
 						sprintf(tmp, "Missing LOD for Object \"%s\": [\"%s.bgf\"].", object, name);
@@ -169,25 +169,25 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				}
 			} else {
 				if (RD_DRAW(object) == 0) {
-					fcn_00439fa0(object);
+					d3_AddObjectDrawData(object);
 				}
 				for (i = 0; i < type; i++) {
 					vfs_ReadCString(stream, name);
-					fcn_0044c200(name, name);
+					d3_LoadModel(name, name);
 					fcn_00449f90(object, RD_DRAW(object) + i * 0x4a4 + 0xf4, name);
 				}
 				if (version >= 0x3a6c00a3u) {
 					vfs_ReadByte(stream, &b);
 					if (b != 0) {
 						vfs_ReadCString(stream, name);
-						fcn_0044c200(name, name);
+						d3_LoadModel(name, name);
 						fcn_00449f90(object, RD_DRAW(object) + 0xee0, name);
 					}
 				} else {
 					if (*(char**) (RD_DRAW(object) + 0x40c) != 0) {
 						strcpy(name, *(char**) (RD_DRAW(object) + 0x40c));
 						strcat(name, "_s");
-						if (fcn_0044c200(name, name) != 0) {
+						if (d3_LoadModel(name, name) != 0) {
 							fcn_00449f90(object, RD_DRAW(object) + 0xee0, name);
 						}
 					}
@@ -229,7 +229,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		case 8:
 			vfs_ReadByte(stream, &b);
 			if (version >= 0x3a6c00a8u) {
-				count = fcn_00446ca0(version);
+				count = d3_GetSceneVersionSlotCount(version);
 				if (version >= 0x3a6c00a9u) {
 					vfs_ReadByte(stream, &b);
 					object[0x215] = (char) ((object[0x215] & ~0x04) | ((b << 2) & 0x04));
@@ -280,7 +280,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 				vfs_ReadVec3(stream, object + 0x5c);
 				vfs_ReadVec3(stream, object + 0x4c);
 				if (version >= 0x3a6c00a1u) {
-					count = fcn_00446ca0(version);
+					count = d3_GetSceneVersionSlotCount(version);
 					off = 0;
 					for (start = 0; start < count; start++) {
 						fcn_004011d0(stream, RD_LIGHTS(object) + off * 0x38 + 0x28);

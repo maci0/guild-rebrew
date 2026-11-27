@@ -26,7 +26,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
 int __cdecl gs_CollectEvidenceForTarget(int, char*, unsigned short);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -63,7 +63,7 @@ int __cdecl fcn_005d5670(unsigned char* e, unsigned char* o)
 		return 0;
 	}
 	chance = gs_CollectEvidenceForTarget(*(int*) (o + 4), buf, *(unsigned short*) e);
-	dlg = fcn_00470820(0, 0, s_6acc74);
+	dlg = d2_LoadForm(0, 0, s_6acc74);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);

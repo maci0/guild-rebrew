@@ -24,7 +24,7 @@ extern char g_7f4ca0[];
 
 
 int __cdecl gm_CheckAndCollectEntityDebt(struct s_7f4ca0*, int);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 
 void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -44,7 +44,7 @@ void __cdecl gm_ApplyHourlyEntityUpdates(void)
 				gm_UpdateEntityAgingAndTraining(i);
 			}
 			if ((rec->kind == 2 || rec->kind == 5 || rec->kind == 4) && gm_CheckAndCollectEntityDebt(rec, 0) != 0) {
-				fcn_004ff210(rec->id, (int) -(rec->f1c + 5.0f));
+				gm_ApplyEntityHealthDelta(rec->id, (int) -(rec->f1c + 5.0f));
 			}
 			if (rec->b1b1 > 0) {
 				flag_val = -1;

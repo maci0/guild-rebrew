@@ -71,11 +71,11 @@ extern float g_662cf8;
 
 void __cdecl gm_AddTime(void*, int, int, int);
 int __cdecl fcn_0042e410(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 #include "d2_gui.h"
 int __cdecl gm_GetBuildingOptionCount(char*);
@@ -114,11 +114,11 @@ void __cdecl d2_ShowBlutracheDialog(char* participant)
 	st.hour = (unsigned short) (fcn_0042e410(stage) + 0x15);
 	*(int*) ((char*) &st + 6) = 0;
 
-	dlg = fcn_00470820(0, 0, s_6ad434);
+	dlg = d2_LoadForm(0, 0, s_6ad434);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, stage);
 	timer1 = d2_AddWindowValueGauge((*(int*) (g_77255c + 0xc) - 300) / 2, 10, 300, 0, 100, 0x75, 0x42, d2_CurrentWindowId);
 	d2_SetElementValue(timer1, 0, 100, 0);

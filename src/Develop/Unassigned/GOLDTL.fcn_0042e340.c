@@ -2,7 +2,7 @@
 
 void __cdecl fcn_0042e260(int);
 
-void __cdecl fcn_0042e340(void)
+void __cdecl ch_ValidateQueueTable(void)
 {
 	int o;
 	char* base;

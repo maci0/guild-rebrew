@@ -9,7 +9,7 @@ extern char g_14cf950;
 extern int g_100f1dc;
 extern int d2_CurrentElementId;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl io_AppendText(int, ...);
@@ -33,7 +33,7 @@ int __cdecl d2_RunChooseIntroMenu(void)
 	int list;
 
 	result = 0;
-	h = fcn_00470820(0, 0, g_6a4120);
+	h = d2_LoadForm(0, 0, g_6a4120);
 	d2_CenterDialogWindows(h);
 	g_7747b4 = g_77670a;
 	s = io_AppendText(0x1abf);

@@ -29,7 +29,7 @@ void __cdecl he_FreeAction(char*);
 void __cdecl he_RollTripletEventScores(char*, char*, char*);
 int __cdecl fcn_004c5980(void*);
 int __cdecl gv_FindEntityGraveSlot(int, unsigned char**, void**);
-int __cdecl fcn_004f1790(int, void*);
+int __cdecl gm_GetEntitySlotIndex(int, void*);
 int __cdecl gv_SendSetGraveOwner(int*, char*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
 
@@ -197,7 +197,7 @@ void __cdecl he_RunCourtship(char* e)
 			cm_RequestChangeFloat(*(int*) (pb + 4), 0x7c, 1.1f - *(float*) (pb + 0x7c));
 		}
 		if (gv_FindEntityGraveSlot((int) b, &rec, &hit) != 0) {
-			v = fcn_004f1790(*(int*) (rec + 0x65), hit);
+			v = gm_GetEntitySlotIndex(*(int*) (rec + 0x65), hit);
 			gv_SendSetGraveOwner(0, (char*) rec, *(int*) hit, v);
 		}
 		memset(msg, 0, sizeof(msg));

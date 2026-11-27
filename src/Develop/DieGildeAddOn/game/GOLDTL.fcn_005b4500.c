@@ -28,7 +28,7 @@ extern char s_6ab848[];
 extern char s_6ab834[];
 extern char s_6ab8fc[];
 
-int __cdecl fcn_0046e940(int, int, int, int, int);
+int __cdecl d2_CreateWindow(int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(char*, ...);
@@ -46,7 +46,7 @@ void __cdecl d2_ShowPlayerObjektCounts(void)
 	char* e;
 	int n;
 
-	w = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
+	w = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[w].slot, 0x54);
 	if (main_RunFrameLoop((void*) d2_ShowPlayerObjektCounts, 0x657c7) != 0) {
 		win = &((D2_WIN*)g_1015f40)[w];

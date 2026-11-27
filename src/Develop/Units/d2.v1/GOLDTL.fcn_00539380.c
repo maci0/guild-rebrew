@@ -7,7 +7,7 @@ extern int g_100f1dc;
 extern char g_6a3a04[];
 extern char g_6a2300[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -27,7 +27,7 @@ int __cdecl d2_ChoosePlayerCount(void)
 	unsigned char mode;
 
 	result = 0;
-	h = fcn_00470820(0, 0, g_6a3a04);
+	h = d2_LoadForm(0, 0, g_6a3a04);
 	d2_CenterDialogWindows(h);
 	d = d2_GetWindowListItem(h, 0, 0);
 	mode = *(unsigned char*) &(*(int*)&g_6a375c);

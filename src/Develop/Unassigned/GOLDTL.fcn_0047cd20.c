@@ -3,7 +3,7 @@
 typedef struct {
 	char pad0[0x18];
 	int* items;
-} fcn_0047cd20_set;
+} D2_SPRITE_BANK_SET;
 // SIZE 0x1c
 
 extern RGB_COLOR g_100f1b8;
@@ -12,7 +12,7 @@ int __cdecl fcn_0047bdd0(int, int, int, float, unsigned char, unsigned char, uns
 
 
 /* ADDRESS: GOLDTL 0x0047cd20 */
-int __cdecl fcn_0047cd20(int a1, int a2, int a3, fcn_0047cd20_set* s, int idx)
+int __cdecl d2_DrawBankSpriteColored(int a1, int a2, int a3, D2_SPRITE_BANK_SET* s, int idx)
 {
 	if (s == 0)
 		return 0;

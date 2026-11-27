@@ -11,7 +11,7 @@ typedef struct Bits8 {
 // SIZE 0x1
 
 /* ADDRESS: GOLDTL 0x00459c70 */
-int __cdecl fcn_00459c70(char* a)
+int __cdecl d3_GetMeshMemorySize(char* a)
 {
 	int r;
 

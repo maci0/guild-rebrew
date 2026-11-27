@@ -46,7 +46,7 @@ typedef struct {
 } pick_frame;
 
 /* ADDRESS: GOLDTL 0x00444860 */
-unsigned char __cdecl fcn_00444860(float x, float y, int obj, int index,
+unsigned char __cdecl d3_PickObjectSurfaceUV(float x, float y, int obj, int index,
 	float* outx, float* outy)
 {
 	pick_frame fr;

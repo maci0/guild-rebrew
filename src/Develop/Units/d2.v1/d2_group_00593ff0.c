@@ -18,7 +18,7 @@ extern char g_7e23e3;
 #include "client_dialog_state.h"
 extern char s_6a3f8c[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -55,7 +55,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 char* __cdecl fcn_004ce190(int);
 int __cdecl sprintf(char*, const char*, ...);
-void __cdecl fcn_0046c310(int);
+void __cdecl d2_UpdateWindowScroll(int);
 
 /* ADDRESS: GOLDTL 0x00593ff0 */
 int __cdecl d2_ChooseProfession(int a1)
@@ -84,7 +84,7 @@ int __cdecl d2_ChooseProfession(int a1)
 	types[8] = 13;
 	types[9] = 14;
 	types[10] = 15;
-	dlg = fcn_00470820(0, 0, s_6a3f8c);
+	dlg = d2_LoadForm(0, 0, s_6a3f8c);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	io_AppendText(0x1afa);
@@ -162,6 +162,6 @@ void __cdecl fcn_005941e0(void)
 		n = h + 0x18;
 		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x218] = n;
 		*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x21c] = n - ((D2_WIN*)g_1015f40)[d2_CurrentWindowId].height;
-		fcn_0046c310(d2_CurrentWindowId);
+		d2_UpdateWindowScroll(d2_CurrentWindowId);
 	}
 }

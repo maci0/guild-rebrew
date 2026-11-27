@@ -58,7 +58,7 @@ typedef struct Vertex {
 	int id[2];
 } Vertex;
 
-int* __cdecl fcn_004356c0(int a0);
+int* __cdecl d3_SelectBaseMorphSlot(int a0);
 void __cdecl fcn_004357b0(unsigned char* blend, float* w1, float* w0);
 
 /* ADDRESS: GOLDTL 0x00435910 */
@@ -91,7 +91,7 @@ void __cdecl fcn_00435910(int a0, int* vertexCounts, Vertex* vertices, float* bo
 	Vertex* v;
 	float *p0, *p1, *p2, *p3, *p4, *p5;
 
-	first = (unsigned char*) fcn_004356c0(a0);
+	first = (unsigned char*) d3_SelectBaseMorphSlot(a0);
 	layout = (unsigned char*) *(int*) ((unsigned char*) a0 + 0x318);
 	grid = (unsigned char*) *(int*) (layout + 0x294);
 	ids = (int*) grid;

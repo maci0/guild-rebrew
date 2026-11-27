@@ -1,7 +1,7 @@
 void __cdecl d3_TransformPoint(char* object, float* position, float* out);
 
 /* ADDRESS: GOLD 0x00458b10 */
-void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* out)
+void __cdecl d3_TransformPointToView(char* object, char* camera, float* position, float* out)
 {
     float v[4];
 

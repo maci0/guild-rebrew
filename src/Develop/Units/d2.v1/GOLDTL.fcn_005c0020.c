@@ -21,7 +21,7 @@ typedef struct {
 	int x34;
 } Rec38;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
@@ -30,7 +30,7 @@ int __cdecl fcn_004f61c0(int*, int*, int*, unsigned short);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl d2_BuildPersonStatusDesc(Rec38*);
 int __cdecl fcn_005ca740(int, int, int, int, Rec38*, int);
-void __cdecl fcn_005c9160(char*, int, int, int, int);
+void __cdecl d2_CreateRightAlignedText(char*, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl d2_ShowBeweiseDetails(char*, int);
@@ -58,7 +58,7 @@ void __cdecl fcn_005c0020(void)
 	int h2;
 
 	ent = (char*) 0x7f4ca0 + g_774970 * 0x21c;
-	dlg = fcn_00470820(0, 0, (char*) 0x6ac4f4);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6ac4f4);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x173f);
@@ -92,7 +92,7 @@ void __cdecl fcn_005c0020(void)
 			rec->x10 = 0x32;
 			rec->x14 = y;
 			fcn_005ca740(0x32, y, d2_CurrentWindowId, 0x56, rec, 1);
-			fcn_005c9160(buf,
+			d2_CreateRightAlignedText(buf,
 			    *(int*) (0x1015f4c + d2_CurrentWindowId * 0x3cc) - 0xf,
 			    y + 0x2d, 200, 0x55);
 

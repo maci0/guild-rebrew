@@ -20,7 +20,7 @@ extern Ctx g_6b8318;
 extern int g_67a370;
 
 void __cdecl d3_VisitSceneObjects(int, int, int, void*, void*);
-char __cdecl fcn_00443b00(char*, char*);
+char __cdecl d3_PickClosestObjectCallback(char*, char*);
 
 Ctx* __cdecl d3_FindObjectsAtScreenPoint(float a, float b, int flags, int mask, int cam)
 {
@@ -34,6 +34,6 @@ Ctx* __cdecl d3_FindObjectsAtScreenPoint(float a, float b, int flags, int mask, 
 	g_6b8318.mask = mask;
 	g_6b8318.x = d3_ViewportCenterX - a;
 	g_6b8318.y = g_1052bc8 - b;
-	d3_VisitSceneObjects(g_67a370, 0, flags, fcn_00443b00, &g_6b8318);
+	d3_VisitSceneObjects(g_67a370, 0, flags, d3_PickClosestObjectCallback, &g_6b8318);
 	return &g_6b8318;
 }

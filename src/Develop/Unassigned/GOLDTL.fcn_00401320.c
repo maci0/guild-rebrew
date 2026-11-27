@@ -4,11 +4,11 @@
 // fcn_00401260 on four consecutive ints; GOLD calls fcn_00430e30 once.
 
 #ifdef REBREW_GOLD
-void __cdecl fcn_00401320(int, int);
-#define stream_write fcn_00401320
+void __cdecl vfs_WriteDword(int, int);
+#define stream_write vfs_WriteDword
 #else
-void __cdecl fcn_00401260(int, int);
-#define stream_write fcn_00401260
+void __cdecl vfs_WriteInt32(int, int);
+#define stream_write vfs_WriteInt32
 #endif
 
 void __cdecl vfs_WriteVec4(int stream, int* values)

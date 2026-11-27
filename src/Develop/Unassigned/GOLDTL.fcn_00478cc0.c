@@ -2,15 +2,15 @@
 // if (rows > 0) while (rows != 0) {...}, not a do-while: that form puts dst
 // and rows in the dead surf/spr parameter slots like the reference.
 
-typedef struct Surf0478cc0 {
+typedef struct D2_GFX_SURFACE16 {
 	char pad0[0x10];
 	int pitch;
 	char pad14[8];
 	unsigned short* bits;
-} Surf0478cc0;
+} D2_GFX_SURFACE16;
 // SIZE 0x20
 
-void __cdecl fcn_00478cc0(int x, int y, Surf0478cc0* surf, unsigned char* spr)
+void __cdecl d2_DrawRleShape16(int x, int y, D2_GFX_SURFACE16* surf, unsigned char* spr)
 {
 	unsigned short* dst;
 	unsigned short* d;

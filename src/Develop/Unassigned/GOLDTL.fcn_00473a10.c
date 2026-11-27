@@ -2,7 +2,7 @@
 extern char* g_7725c0;
 extern char s_67d5ec[];
 
-int __cdecl fcn_00465950(const char* name);
+int __cdecl d2_FindResourceByName(const char* name);
 char* __cdecl d2_GetResourceData(int idx);
 void __cdecl d2_DrawCursorAndCounters(int a, int x, int y, int w, int h);
 
@@ -19,7 +19,7 @@ int __cdecl d2_DrawMouseCursor(int x, int y)
 	a = 6;
 	b = 6;
 	if (!g_7725c0) {
-		g_7725c0 = d2_GetResourceData(fcn_00465950(s_67d5ec));
+		g_7725c0 = d2_GetResourceData(d2_FindResourceByName(s_67d5ec));
 	}
 	if (g_14ce8d0) {
 		px--;

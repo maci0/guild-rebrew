@@ -20,10 +20,10 @@
 void* __cdecl m_alloc(int size, char* reason);
 void __cdecl m_FreeTracked(void* p);
 char* __cdecl d3_FindTextureByName(const char* name);
-int __cdecl fcn_0045c5b0(char* name, unsigned int flags, unsigned int a3, unsigned int a4);
+int __cdecl d3_LoadOrReuseTexture(char* name, unsigned int flags, unsigned int a3, unsigned int a4);
 void __cdecl fcn_0045ce90(void* obj);
-void __cdecl fcn_0045c310(void* tex, char all);
-void __cdecl fcn_0045bfb0(int obj);
+void __cdecl d3_AddRefTexture(void* tex, char all);
+void __cdecl d3_ReleaseTexture(int obj);
 int __cdecl d3_MapWaterRangeIndex(char* tile, int x, int id, unsigned char tag);
 void __cdecl d3_InterpolateByteSpan(unsigned char* buf, int x0, int x1, unsigned char c0, unsigned char c1);
 void __cdecl d3_FillWaterRegion(unsigned char* regionen, int breite, int x, int y,
@@ -265,7 +265,7 @@ void __cdecl PrepareFloorWater(char* e)
 		}
 		v16 = (int) d3_FindTextureByName((const char*) 0x67a718);
 		if (v16 == 0) {
-			v16 = fcn_0045c5b0((char*) 0x67a718, 0xac, 0, 0);
+			v16 = d3_LoadOrReuseTexture((char*) 0x67a718, 0xac, 0, 0);
 			if (v16 != 0) {
 				fcn_0045ce90((void*) v16);
 			}
@@ -278,7 +278,7 @@ void __cdecl PrepareFloorWater(char* e)
 			if (v16 != 0) {
 				*(int*) (v17 + 0xc) = *(int*) (v16 + 0x58);
 				if (v9 < *(unsigned char*) (e + 0x8035) - 1) {
-					fcn_0045c310((void*) v16, 1);
+					d3_AddRefTexture((void*) v16, 1);
 				}
 			} else {
 				*(int*) (v17 + 0xc) = 0;
@@ -567,7 +567,7 @@ tiles:
 			v13 = 0;
 			if (*(unsigned char*) (e + 0x8035) > 0) {
 				do {
-					fcn_0045bfb0(*(int*) (*(int*) (e + 0x7da0) + v13 * 0x158));
+					d3_ReleaseTexture(*(int*) (*(int*) (e + 0x7da0) + v13 * 0x158));
 					v13++;
 				} while (v13 < *(unsigned char*) (e + 0x8035));
 			}

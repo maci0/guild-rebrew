@@ -5,7 +5,7 @@ extern unsigned int g_fb9084;
 extern unsigned int g_fb91a8;
 extern int g_006333cc;
 char* __cdecl m_alloc(int, const char*);
-void __cdecl fcn_0045f600(int);
+void __cdecl d3_InitSurfaceCache(int);
 
 /* ADDRESS: GOLD 0x0045fa70 */
 void __cdecl d3_InitTextureStorage(int textures, int hicol, int flags, int mode)
@@ -25,5 +25,5 @@ void __cdecl d3_InitTextureStorage(int textures, int hicol, int flags, int mode)
     *(int*) 0xfb91a0 = 0;
     memset((void*) 0xfb9120, 0, 0x80);
     *(int*) 0xfb91ac = g_006333cc;
-    fcn_0045f600(mode);
+    d3_InitSurfaceCache(mode);
 }

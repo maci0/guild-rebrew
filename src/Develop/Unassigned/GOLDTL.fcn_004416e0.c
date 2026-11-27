@@ -1,11 +1,11 @@
 void __cdecl d3_BuildFloorGeometry(char* a);
 
 /* ADDRESS: GOLDTL 0x004416e0 */
-void __cdecl d3_SetFloorScale(char* a, float v)
+void __cdecl d3_SetFloorScale(char* floor, float scale)
 {
-	if (a != 0) {
-		*(float*) (a + 0x78) = -v;
-		*(float*) (a + 0x60) = v;
-		d3_BuildFloorGeometry(a);
+	if (floor != 0) {
+		*(float*) (floor + 0x78) = -scale;
+		*(float*) (floor + 0x60) = scale;
+		d3_BuildFloorGeometry(floor);
 	}
 }

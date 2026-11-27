@@ -18,7 +18,7 @@ int __cdecl vfs_fseek(char*, int, int);
 int __cdecl vfs_ftell(char*);
 void __cdecl vfs_WriteByte(void*, char);
 void __cdecl vfs_WriteCString(void*, void*);
-void __cdecl fcn_00401260(void*, int);
+void __cdecl vfs_WriteInt32(void*, int);
 void __cdecl vfs_WriteVec3(void*, void*);
 void __cdecl fcn_00401360(void*, int);
 
@@ -394,7 +394,7 @@ void __cdecl d3_AddFLChunk(char* name, char flag)
 		vfs_WriteVec3(stream, obj->poi[i].pos);
 		vfs_WriteVec3(stream, obj->poi[i].unbekannt);
 	}
-	fcn_00401260(stream, *(int*) &obj->radius);
+	vfs_WriteInt32(stream, *(int*) &obj->radius);
 	for (i = 0; i < obj->anzahl_pol; i++) {
 		pol = &obj->pol[i];
 		fcn_00401360(stream, pol->idx[0]);

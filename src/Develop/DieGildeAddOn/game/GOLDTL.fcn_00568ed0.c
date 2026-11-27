@@ -19,7 +19,7 @@ void __cdecl cm_RequestChrMoveToUniverse(int, int, int, char*);
 void __cdecl cm_SendCancelCharacterActions(int);
 int __cdecl ch_StartMovement(int, int, int, char*, int, char*);
 void __cdecl cm_SendBlockCharacter(int, int, int);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl gm_StartFilteredEntitySearch(int, int, int);
@@ -242,7 +242,7 @@ void __cdecl he_RunEntfuehren(char* action)
 				if (*(int*) p != -1) {
 					r = (char*) gm_LookupEntityRecordById(*(int*) p);
 					upto = fcn_0042e410((int) *(float*) (r + 0x1c));
-					fcn_004ff210(*(unsigned short*) r,
+					gm_ApplyEntityHealthDelta(*(unsigned short*) r,
 					             (int) -((double) upto * g_6653f8 +
 					                     (double) *(float*) (r + 0x1c) * 0.5));
 				}

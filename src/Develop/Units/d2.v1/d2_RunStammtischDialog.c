@@ -4,10 +4,10 @@ extern int g_77255c;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
-void* __cdecl fcn_00470820(int a, int b, char* name);
+void* __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(void* dlg);
 void __cdecl d2_SetForm(void* dlg, int panel);
-int __cdecl fcn_005340f0(int a);
+int __cdecl d2_InitWindowBounds(int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl gm_LookupEntityRecordById(int id);
 void __cdecl d2_ClearWindowChildren(int a, int b);
@@ -31,10 +31,10 @@ void __cdecl d2_RunStammtischDialog(int gebaeude, int* objekt)
 	int i;
 
 	memset(sel, 0, sizeof(sel));
-	dlg = fcn_00470820(0, 0, "locations\\Wirtshaus\\Stammtisch");
+	dlg = d2_LoadForm(0, 0, "locations\\Wirtshaus\\Stammtisch");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	src = (int*) ((char*) objekt + 0x1c);
 	for (;;) {

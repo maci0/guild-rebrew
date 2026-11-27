@@ -11,7 +11,7 @@ extern ClipRect* g_77257c[2];
 extern int g_77258c[2];
 
 /* ADDRESS: GOLDTL 0x004660f0 */
-void __cdecl fcn_004660f0(int x, int y, int w, int h)
+void __cdecl d2_AddClippedDirtyRect(int x, int y, int w, int h)
 {
 	int i;
 	int n;

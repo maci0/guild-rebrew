@@ -28,10 +28,10 @@ extern int g_67a370;
 
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl fcn_00401360(void* s, int v);
-void __cdecl fcn_00401260(void* s, int v);
+void __cdecl vfs_WriteInt32(void* s, int v);
 void __cdecl vfs_WriteVec3(void* s, int* v);
 void __cdecl d3_VisitSceneObjects(int list, int a, int kind, void* fn, void* ctx);
-void __cdecl fcn_00446c60(void);
+void __cdecl d3_WriteSceneObjectCallback(void);
 void __cdecl vfs_WriteByte(void* s, int v);
 #include "Develop/Units/vfs/vfs.h"
 
@@ -51,22 +51,22 @@ void __cdecl fcn_00446cd0(char* name, void* stream)
 	}
 	g_6b86d4++;
 	fcn_00401360(s, 0x3a6c00bb);
-	fcn_00401260(s, 0);
+	vfs_WriteInt32(s, 0);
 	vfs_WriteVec3(s, ((int*)&g_67bbdc));
 	vfs_WriteVec3(s, ((int*)&g_6b86c4));
 	fcn_00401360(s, d3_FogColor);
-	fcn_00401260(s, (*(int*)&g_10425fc));
-	fcn_00401260(s, (*(int*)&g_104329c));
+	vfs_WriteInt32(s, (*(int*)&g_10425fc));
+	vfs_WriteInt32(s, (*(int*)&g_104329c));
 	for (i = 0; i < 7; i++) {
 		vfs_WriteVec3(s, (int*)&((D3_SCENE_SLOT*)g_1041d80)[i].a);
 		vfs_WriteVec3(s, (int*)&((D3_SCENE_SLOT*)g_1041d80)[i].b);
 		for (j = 0; j < 6; j++) {
 			fcn_00401360(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].color);
-			fcn_00401260(s, *(int*)&((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].f4);
-			fcn_00401260(s, *(int*)&((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].f8);
+			vfs_WriteInt32(s, *(int*)&((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].f4);
+			vfs_WriteInt32(s, *(int*)&((D3_SCENE_SLOT*)g_1041d80)[i].pal[j].f8);
 		}
 	}
-	d3_VisitSceneObjects(g_67a370, 0, 0x18, (void*) fcn_00446c60, s);
+	d3_VisitSceneObjects(g_67a370, 0, 0x18, (void*) d3_WriteSceneObjectCallback, s);
 	vfs_WriteByte(s, 0);
 	if (stream == 0) {
 		CloseVfsStream(s);

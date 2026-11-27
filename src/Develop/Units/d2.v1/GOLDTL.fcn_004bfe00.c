@@ -16,7 +16,7 @@ int __cdecl rt_CountRoutePoints(void *);
 void __cdecl rt_FreeRoutePoints(void *);
 void __cdecl d2_AddRoutePointMarker(void *, void *, void *, void *);
 void __cdecl fcn_004be530(void);
-void __cdecl fcn_004bf1b0(int, void *);
+void __cdecl d2_EditRoutePointDialog(int, void *);
 void __cdecl fcn_004bf8e0(void *, void *);
 void __cdecl fcn_004bfc10(void);
 void __cdecl fcn_004bfca0(void *, void *);
@@ -103,7 +103,7 @@ int __cdecl fcn_004bfe00(char *obj)
 				if (g_6816d8 != -1) {
 					v = *(int *) (g_6816d8 * 0x8c + 0x102cbc8);
 					if (v != -1) {
-						fcn_004bf1b0(*(int *) (0x10058a4 + v * 8), town);
+						d2_EditRoutePointDialog(*(int *) (0x10058a4 + v * 8), town);
 					}
 				}
 			} else if (d2_CurrentElementId == form1 && g_772904 != 0) {

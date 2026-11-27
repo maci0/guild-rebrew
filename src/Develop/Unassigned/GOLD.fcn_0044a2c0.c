@@ -77,7 +77,7 @@ struct Node {
 void __cdecl fcn_004011f0(int, unsigned char);
 void __cdecl vfs_WriteCString(int, char*);
 void __cdecl vfs_WriteVec3(int, float*);
-void __cdecl fcn_00401320(int, int);
+void __cdecl vfs_WriteDword(int, int);
 void __cdecl ReportClientMessage(const char*);
 void __cdecl d3_WriteEventTable(int, void*);
 
@@ -103,9 +103,9 @@ void __cdecl wr_object(int stream, Node* n)
 	} else {
 		vfs_WriteCString(stream, n->name);
 	}
-	fcn_00401320(stream, n->i200);
-	fcn_00401320(stream, n->i220);
-	fcn_00401320(stream, kind);
+	vfs_WriteDword(stream, n->i200);
+	vfs_WriteDword(stream, n->i220);
+	vfs_WriteDword(stream, kind);
 	fcn_004011f0(stream, n->type == 1);
 	switch (kind) {
 	case 1:
@@ -117,9 +117,9 @@ void __cdecl wr_object(int stream, Node* n)
 		fcn_004011f0(stream, ((unsigned char) n->b212 >> 4) & 1);
 		fcn_004011f0(stream, ((unsigned char) n->b212 >> 5) & 1);
 		fcn_004011f0(stream, ((unsigned char) n->b212 >> 6) & 1);
-		fcn_00401320(stream, n->i214);
+		vfs_WriteDword(stream, n->i214);
 		if (n->model != 0) {
-			fcn_00401320(stream, n->model->count);
+			vfs_WriteDword(stream, n->model->count);
 			if (n->model->count > 0) {
 				strcpy(buf, n->model->name);
 				p = strrchr(buf, '_');
@@ -128,7 +128,7 @@ void __cdecl wr_object(int stream, Node* n)
 				vfs_WriteCString(stream, buf);
 			}
 		} else {
-			fcn_00401320(stream, 0);
+			vfs_WriteDword(stream, 0);
 		}
 	case 2:
 	case 3:
@@ -146,7 +146,7 @@ void __cdecl wr_object(int stream, Node* n)
 		break;
 	case 0:
 		fcn_004011f0(stream, (unsigned char) n->b211 & 1);
-		fcn_00401320(stream, n->i68);
+		vfs_WriteDword(stream, n->i68);
 		vfs_WriteVec3(stream, &n->pos.x);
 		vfs_WriteVec3(stream, &n->v5c.x);
 		vfs_WriteVec3(stream, &n->v90.x);
@@ -157,23 +157,23 @@ void __cdecl wr_object(int stream, Node* n)
 	case 8:
 		fcn_004011f0(stream, ((unsigned char) n->flags >> 5) & 1);
 		fcn_004011f0(stream, ((unsigned char) n->b211 >> 4) & 1);
-		fcn_00401320(stream, *(int*) &n->v90.x);
-		fcn_00401320(stream, *(int*) &n->v90.y);
-		fcn_00401320(stream, *(int*) &n->v90.z);
+		vfs_WriteDword(stream, *(int*) &n->v90.x);
+		vfs_WriteDword(stream, *(int*) &n->v90.y);
+		vfs_WriteDword(stream, *(int*) &n->v90.z);
 		vfs_WriteVec3(stream, &n->v5c.x);
 		vfs_WriteVec3(stream, &n->pos.x);
 		vfs_WriteVec3(stream, &n->v84.x);
-		fcn_00401320(stream, n->data->i19c);
-		fcn_00401320(stream, n->data->i1a0);
+		vfs_WriteDword(stream, n->data->i19c);
+		vfs_WriteDword(stream, n->data->i1a0);
 		for (i = 0; i < 7; i++) {
-			fcn_00401320(stream, n->data->items[i].i28);
-			fcn_00401320(stream, n->data->items[i].i24);
-			fcn_00401320(stream, n->data->items[i].i2c);
+			vfs_WriteDword(stream, n->data->items[i].i28);
+			vfs_WriteDword(stream, n->data->items[i].i24);
+			vfs_WriteDword(stream, n->data->items[i].i2c);
 			vfs_WriteVec3(stream, &n->data->items[i].c.x);
 			vfs_WriteVec3(stream, &n->data->items[i].a.x);
 			vfs_WriteVec3(stream, &n->data->items[i].b.x);
-			fcn_00401320(stream, n->data->items[i].i30);
-			fcn_00401320(stream, n->data->items[i].i34);
+			vfs_WriteDword(stream, n->data->items[i].i30);
+			vfs_WriteDword(stream, n->data->items[i].i34);
 		}
 		break;
 	default:

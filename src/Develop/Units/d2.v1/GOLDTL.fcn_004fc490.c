@@ -9,7 +9,7 @@ extern char g_99f6a0[];
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int a, int b, char* s);
+int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_SetForm(int h, int b);
@@ -22,7 +22,7 @@ void __cdecl d2_ShowTaxStatistics(void)
 	int h;
 	int i;
 
-	h = fcn_00470820(0, 0, g_696470);
+	h = d2_LoadForm(0, 0, g_696470);
 	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);

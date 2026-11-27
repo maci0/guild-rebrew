@@ -21,7 +21,7 @@ extern char g_1041d80[];
 
 
 /* ADDRESS: GOLDTL 0x00445e40 */
-void __cdecl fcn_00445e40(int idx)
+void __cdecl d3_SaveSceneLightingPreset(int idx)
 {
 	char* dst;
 	int n;

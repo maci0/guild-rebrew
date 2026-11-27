@@ -7,7 +7,7 @@ extern int g_1042a20;
 extern int g_1043290;
 
 /* ADDRESS: GOLDTL 0x00456400 */
-void __cdecl fcn_00456400(int i, int j)
+void __cdecl d3_SetupLeftEdgeStep(int i, int j)
 {
 	int y0;
 	int x0;

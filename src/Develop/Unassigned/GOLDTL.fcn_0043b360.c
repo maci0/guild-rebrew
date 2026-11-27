@@ -15,19 +15,19 @@ extern int g_6b8300;
 
 void __cdecl d3_ReleaseVertexBufferPtr(void);
 void __cdecl fcn_0043b8f0(int a);
-void __cdecl fcn_00459a90(int a);
+void __cdecl d3_ReleaseSkyDomeBuffers(int a);
 void __cdecl d3_ResetSceneAuxSlots(void);
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl fcn_00456c10(void);
 void __cdecl d3_InvalidateDeviceResources(void);
 void __cdecl d3_ResetGraphicsDevice(void);
-int __cdecl fcn_0041baa0(void);
+int __cdecl d3_TestCooperativeLevel(void);
 int __cdecl d3_RestoreDeviceResources(void);
 void __cdecl fcn_00436aa0(int a);
-void __cdecl fcn_00452360(void);
+void __cdecl d3_AllocRenderVertexBuffer(void);
 void __cdecl d3_RebuildFloorMeshes(int a);
-void __cdecl fcn_00459a10(int a);
-void __cdecl fcn_00456c80(void);
+void __cdecl d3_CreateSkyDomeBuffers(int a);
+void __cdecl d3_AllocShadowTextures(void);
 #include "client_lighting.h"
 
 /* ADDRESS: GOLDTL 0x0043b360 */
@@ -50,7 +50,7 @@ char __cdecl fcn_0043b360(void)
 		fcn_0043b8f0(g_6b8300);
 	}
 	if (g_6b89c0 != 0) {
-		fcn_00459a90(g_6b89c0);
+		d3_ReleaseSkyDomeBuffers(g_6b89c0);
 	}
 	d3_ResetSceneAuxSlots();
 	saved = d3_CurrentContextIndex;
@@ -61,7 +61,7 @@ char __cdecl fcn_0043b360(void)
 				fcn_0043b8f0(g_6b8300);
 			}
 			if (g_6b89c0 != 0) {
-				fcn_00459a90(g_6b89c0);
+				d3_ReleaseSkyDomeBuffers(g_6b89c0);
 			}
 			d3_ResetSceneAuxSlots();
 		}
@@ -70,17 +70,17 @@ char __cdecl fcn_0043b360(void)
 	fcn_00456c10();
 	d3_InvalidateDeviceResources();
 	d3_ResetGraphicsDevice();
-	if (fcn_0041baa0() == 0) {
+	if (d3_TestCooperativeLevel() == 0) {
 		d3_RestoreDeviceResources();
 		fcn_00436aa0(0);
-		fcn_00452360();
+		d3_AllocRenderVertexBuffer();
 		if (g_6b8300 != 0) {
 			d3_RebuildFloorMeshes(g_6b8300);
 		}
 		if (g_6b89c0 != 0) {
-			fcn_00459a10(g_6b89c0);
+			d3_CreateSkyDomeBuffers(g_6b89c0);
 		}
-		fcn_00456c80();
+		d3_AllocShadowTextures();
 		for (i = 0; i < 0x40; i++) {
 			if (i != saved) {
 				d3_SelectSceneContext(i, 1);
@@ -89,7 +89,7 @@ char __cdecl fcn_0043b360(void)
 					UpdateSceneLighting(1);
 				}
 				if (g_6b89c0 != 0) {
-					fcn_00459a10(g_6b89c0);
+					d3_CreateSkyDomeBuffers(g_6b89c0);
 				}
 			}
 		}

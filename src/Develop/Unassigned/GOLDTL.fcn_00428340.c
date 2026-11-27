@@ -12,7 +12,7 @@ int __cdecl sprintf(char* a0, const char* a1, ...);
 char* __cdecl strcpy(char* a0, const char* a1);
 
 /* ADDRESS: GOLDTL 0x00428340 */
-int __cdecl evt_CallScriptFunction(char* scriptCtx, int a1, ...)
+int __cdecl evt_CallScriptFunction(char* scriptCtx, int argCount, ...)
 {
 	int obj;
 	int i;
@@ -30,12 +30,12 @@ int __cdecl evt_CallScriptFunction(char* scriptCtx, int a1, ...)
 		evt_LogScriptError((int) scriptCtx, 0, (char*) 0x6795d0);
 		return 0;
 	}
-	if (a1 != *(char*) (obj + 0x24)) {
+	if (argCount != *(char*) (obj + 0x24)) {
 		evt_LogScriptError((int) scriptCtx, 0, (char*) 0x679610);
 		evt_RequestScriptExit((int) scriptCtx);
 		return 0;
 	}
-	argp = &a1;
+	argp = &argCount;
 	kinds = (int*) (obj + 0x28);
 	text = (char*) 0x14cb540;
 	for (i = 0; i < *(char*) (obj + 0x24); i++) {

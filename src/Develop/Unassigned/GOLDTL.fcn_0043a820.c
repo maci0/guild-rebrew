@@ -45,7 +45,7 @@ struct Obj043a820 {
 };
 
 
-void __cdecl fcn_00455450(Obj043a820* o, char* arg, int* p, Vec043a820* out);
+void __cdecl d3_TransformPointToRef(Obj043a820* o, char* arg, int* p, Vec043a820* out);
 void __cdecl d3_UpdateObjectCameraTransform(Obj043a820* o, char* arg, int z);
 
 char __cdecl fcn_0043a820(Obj043a820* o, char* arg, Vec043a820* out, float* radius)
@@ -66,7 +66,7 @@ char __cdecl fcn_0043a820(Obj043a820* o, char* arg, Vec043a820* out, float* radi
 	ok = 0;
 	if (o != 0 && (out != 0 || radius != 0)) {
 		if (o->x218 == 0) {
-			fcn_00455450(o, arg, &o->x4c, &c);
+			d3_TransformPointToRef(o, arg, &o->x4c, &c);
 			r = o->radius;
 			goto done;
 		}

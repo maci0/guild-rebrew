@@ -27,7 +27,7 @@ extern char s_68d730[];
 extern char s_68d714[];
 extern char s_68d704[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -56,16 +56,16 @@ int __cdecl fcn_005dfe80(int arg, unsigned int flags)
 	}
 	wflags = main_LoopFlags & ~0x38;
 	if (flags & 2) {
-		h = fcn_00470820(0, 0, s_68d760);
+		h = d2_LoadForm(0, 0, s_68d760);
 	} else if (flags & 0x10) {
-		h = fcn_00470820(0, 0, s_68d74c);
+		h = d2_LoadForm(0, 0, s_68d74c);
 	} else if (flags & 0x20) {
-		h = fcn_00470820(0, 0, s_68d730);
+		h = d2_LoadForm(0, 0, s_68d730);
 	} else if (flags & 0x100) {
-		h = fcn_00470820(0, 0, s_68d714);
+		h = d2_LoadForm(0, 0, s_68d714);
 		d2_SetForm(h, 1);
 	} else {
-		h = fcn_00470820(0, 0, s_68d704);
+		h = d2_LoadForm(0, 0, s_68d704);
 	}
 	if (flags & 8) {
 		wflags = 0x717c6;

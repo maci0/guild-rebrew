@@ -8,7 +8,7 @@ void __cdecl d3_DestroyObject(int);
 void __cdecl fcn_004230e0(int);
 void __cdecl gv_SpawnIfPending(int);
 char* __cdecl gm_LookupEntityRecordById(int);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl ch_DestroyCharacter(int);
 void __cdecl cut_CleanupCutscene(void);
 void __cdecl msx_RestoreMusicVolume(void);
@@ -65,7 +65,7 @@ void __cdecl cut_CleanupCombatScene(int dlg)
 			    g_14cbca0 == -1) {
 				p = gm_LookupEntityRecordById(*(int*) ((char*) q - 0x180));
 				if (p[2] != 11) {
-					fcn_004ff210(*(unsigned short*) p,
+					gm_ApplyEntityHealthDelta(*(unsigned short*) p,
 					             *(int*) ((char*) q - 0x160) -
 					                 *(int*) (p + 0x24));
 				}

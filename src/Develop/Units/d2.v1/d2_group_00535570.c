@@ -2,7 +2,7 @@ extern int g_6a2bfc;
 extern int g_6a2c00;
 extern int d2_CurrentWindowId;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -141,7 +141,7 @@ int __cdecl d2_CreateScrollPerga(void)
 	if (g_6a2bf8 != -1) {
 		return -1;
 	}
-	g_6a2bf8 = fcn_00470820(0, 0, "misc\\scroll_perga");
+	g_6a2bf8 = d2_LoadForm(0, 0, "misc\\scroll_perga");
 	d2_CenterDialogWindows(g_6a2bf8);
 	if (g_6a2bf8 == -1) {
 		return g_6a2bf8;

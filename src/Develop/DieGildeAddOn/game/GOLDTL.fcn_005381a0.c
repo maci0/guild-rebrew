@@ -9,7 +9,7 @@ void __cdecl d3snd_Shutdown(void);
 void __cdecl d3_FreeBuffer6b5d08(void);
 void __cdecl msx_ShutdownDrivers(void);
 void __cdecl msx_ShutdownAIL(void);
-void __cdecl fcn_004195f0(void);
+void __cdecl d3sndw_Shutdown(void);
 void __cdecl io_SaveMessageFilterMask(void);
 void __cdecl txt_ReleaseTextBanks(void);
 void __cdecl gm_CleanupAllEntities(void);
@@ -40,7 +40,7 @@ void __cdecl fcn_005381a0(void)
 	}
 	if (g_774934 != 0) {
 		msx_ShutdownAIL();
-		fcn_004195f0();
+		d3sndw_Shutdown();
 	}
 	io_SaveMessageFilterMask();
 	txt_ReleaseTextBanks();

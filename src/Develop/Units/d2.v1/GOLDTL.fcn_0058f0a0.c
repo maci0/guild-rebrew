@@ -29,7 +29,7 @@ void __cdecl fcn_0058fbd0(int);
 void __cdecl fcn_0058fa20(int);
 void __cdecl d2_OpenTransportPanel(int);
 void __cdecl d2_RunGraveyardDialog(int);
-void __cdecl fcn_0058dbe0(int);
+void __cdecl d2_OpenFriedhofFogDialog(int);
 void __cdecl d3_UpdateBuildingInteriorState(void);
 
 void __cdecl d2_RunFriedhofActions(int arg)
@@ -96,7 +96,7 @@ void __cdecl d2_RunFriedhofActions(int arg)
 			} else if ((*(unsigned char*)&g_14cf950) == 0x2f) {
 				fcn_0058fbd0(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x22) {
-				fcn_0058dbe0(arg);
+				d2_OpenFriedhofFogDialog(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x23) {
 				d2_ShowHauntingDialog(arg);
 			} else if ((*(unsigned char*)&g_14cf950) == 0x19) {

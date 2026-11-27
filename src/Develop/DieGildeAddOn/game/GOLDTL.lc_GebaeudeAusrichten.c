@@ -93,7 +93,7 @@ void* __cdecl d3_FindNearestSceneObject(float*, void**);
 void __cdecl d3_ComputeObjectYawToTarget(float*, char*);
 void __cdecl d3_SetObjectGroundPosition(char*, float*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
-void* __cdecl fcn_004488e0(char*, int, int);
+void* __cdecl d3_LoadObjectFile(char*, int, int);
 int __cdecl vfs_ResolvePath(char*, int, int, char*);
 char __cdecl fcn_004143b0(char*, int, int);
 void __cdecl d3_SetNodePosition(char*, float*);
@@ -110,7 +110,7 @@ void __cdecl ReportClientMessage(char*);
 void __cdecl fcn_00412830(char);
 void __cdecl UpdateSceneLighting(unsigned char);
 int __cdecl gm_CalcBuildingCost(int, int);
-char __cdecl fcn_0045bad0(int, int, int, int*, int*);
+char __cdecl d3sm_RaycastScreenPoint(int, int, int, int*, int*);
 char __cdecl d3_GridPointToWorld(char*, int, int, float*);
 void __cdecl d3_AnimateCameraToObject(char*);
 int __cdecl d3_UpdateCameraController(void);
@@ -205,7 +205,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 		}
 		d3_TransformPoint(pAktuell, (float*) (pAktuell + 0x4c), f.fPos);
 		sprintf(f.cBafPfad, (char*) 0x6aa228, (char*) 0x7e1ae0);
-		pTemp = (char*) fcn_004488e0(f.cBafPfad, 0, 0);
+		pTemp = (char*) d3_LoadObjectFile(f.cBafPfad, 0, 0);
 		f.pObjekte[i] = pTemp;
 		fcn_00415300(pTemp);
 		d3_SetNodePosition(pTemp, f.fPos);
@@ -247,7 +247,7 @@ int __cdecl lc_GebaeudeAusrichten(int gebaeudetyp, char* name_aus)
 			}
 			f.iKennung2 = (unsigned short) gm_RandomMod(f.iAnzahl);
 			strcpy(f.cPfad, f.cGruppen[f.iKennung2]);
-			pAktuell = (char*) fcn_004488e0(f.cPfad, 0, 0);
+			pAktuell = (char*) d3_LoadObjectFile(f.cPfad, 0, 0);
 			if (pAktuell == 0) {
 				goto laden_fehlgeschlagen;
 			}
@@ -358,7 +358,7 @@ platzieren:
 			}
 		}
 		if (d3_UpdateCameraController() == 0) {
-			fcn_0045bad0((int) f.pKontext, g_14ce8c0, g_14ce8c2, (int*) &f.fAbstand, &f.iKennung2);
+			d3sm_RaycastScreenPoint((int) f.pKontext, g_14ce8c0, g_14ce8c2, (int*) &f.fAbstand, &f.iKennung2);
 			if (d3_GridPointToWorld(f.pKontext, f.iKennung2, *(int*) &f.fAbstand, f.fPos) != 0) {
 				d3_SetNodePosition(pAktuell, f.fPos);
 				fcn_004143b0(pAktuell, 1, 0);

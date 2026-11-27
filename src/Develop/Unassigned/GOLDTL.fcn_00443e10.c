@@ -7,13 +7,13 @@ typedef struct Vec3 {
 	float z;
 } Vec3;
 
-void __cdecl fcn_00455450(char*, char*, Vec3*, Vec3*);
+void __cdecl d3_TransformPointToRef(char*, char*, Vec3*, Vec3*);
 void __cdecl d3_UpdateObjectCameraTransform(char*, char*, char);
 
 /* Projects an object's bounds into screen space and fills a left/top/right/
  * bottom rectangle. */
 /* ADDRESS: GOLDTL 0x00443e10 */
-char __cdecl fcn_00443e10(char* obj, int* rc)
+char __cdecl d3_GetObjectScreenRect(char* obj, int* rc)
 {
 	float p[4];
 	float t;
@@ -33,7 +33,7 @@ char __cdecl fcn_00443e10(char* obj, int* rc)
 		return 0;
 	}
 	if (*(int*) (obj + 0x218) == 0) {
-		fcn_00455450(obj, d3_ActiveCamera, (Vec3*) (obj + 0x4c), (Vec3*) p);
+		d3_TransformPointToRef(obj, d3_ActiveCamera, (Vec3*) (obj + 0x4c), (Vec3*) p);
 		t = 1.0f / p[2];
 		sx = p[0] * g_10432a4 * t + d3_ViewportCenterX;
 		sy = p[1] * d3_ProjectionScaleY * t + g_1052bc8;

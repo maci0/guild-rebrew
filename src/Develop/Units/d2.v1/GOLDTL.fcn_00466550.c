@@ -34,10 +34,10 @@ int __cdecl d2_MeasureTextWidth(char* s, int font);
 void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, int flags);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 void __cdecl d2_SelectFont(int font);
-void __cdecl fcn_0047a040(int a, int b, int c, int d);
+void __cdecl d2_SetClipRect(int a, int b, int c, int d);
 fcn_00466550_Glyph* __cdecl fcn_0047b620(char* font, int c);
-void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
-void __cdecl fcn_0047cbf0(int x, int y, int surf, char* font, int c);
+void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, char* font, int c);
+void __cdecl d2_DrawDimmedSpriteFrame(int x, int y, int surf, char* font, int c);
 
 /* ADDRESS: GOLDTL 0x00466550 */
 void __cdecl d2_DrawField(int idx, int surf)
@@ -78,7 +78,7 @@ void __cdecl d2_DrawField(int idx, int surf)
 			}
 			f->w = v;
 		}
-		fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
+		d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 		((D2_CONTROL_TL*) (g_1015ea0))[f->ent].width = f->w;
 		if (((D2_CONTROL_TL*) (g_1015ea0))[f->ent].value_03c != 0 || d2_CurrentElementId == f->ent) {
 			d2_DrawDefaultFontText(f->x, f->y, surf, ((char*) f + 0x2c), 2);
@@ -118,14 +118,14 @@ void __cdecl d2_DrawField(int idx, int surf)
 			((D2_CONTROL_TL*) e)->width = f->w = g0->w + f->digits * 14 + g2->w;
 			((D2_CONTROL_TL*) e)->x = f->x;
 			v = f->w - g0->w - g1->w;
-			fcn_0047cba0(f->x, ((D2_CONTROL_TL*) e)->y, surf, font, 0);
-			fcn_0047cba0(f->x + f->w - g1->w, ((D2_CONTROL_TL*) e)->y, surf, font, 1);
+			d2_DrawSpriteFromSet(f->x, ((D2_CONTROL_TL*) e)->y, surf, font, 0);
+			d2_DrawSpriteFromSet(f->x + f->w - g1->w, ((D2_CONTROL_TL*) e)->y, surf, font, 1);
 			w0 = ((D2_CONTROL_TL*) e)->x + g0->w;
-			fcn_0047a040(w0 - 1, g_7725fc, w0 + v, d2_ClipBottom);
+			d2_SetClipRect(w0 - 1, g_7725fc, w0 + v, d2_ClipBottom);
 			i = 0;
 			if (0.0 < (double) (v / g2->w) + 0.5) {
 				do {
-					fcn_0047cba0(g2->w * i + g0->w + ((D2_CONTROL_TL*) e)->x,
+					d2_DrawSpriteFromSet(g2->w * i + g0->w + ((D2_CONTROL_TL*) e)->x,
 					    ((D2_CONTROL_TL*) e)->y, surf, font, 2);
 					i++;
 				} while ((double) i < (double) (v / g2->w) + 0.5);
@@ -138,9 +138,9 @@ void __cdecl d2_DrawField(int idx, int surf)
 			((D2_CONTROL_TL*) e)->value_1d4 = *(unsigned short*) (font + 6);
 			((D2_CONTROL_TL*) e)->value_1d8 = *(unsigned short*) (font + 8);
 			if (((D2_CONTROL_TL*) e)->value_060 != 0 && ((D2_CONTROL_TL*) e)->value_1f4.real == g_6628a8) {
-				fcn_0047cbf0(f->x, f->y, surf, font, d2_ResourceOffset);
+				d2_DrawDimmedSpriteFrame(f->x, f->y, surf, font, d2_ResourceOffset);
 			} else {
-				fcn_0047cba0(f->x, f->y, surf, font, d2_ResourceOffset);
+				d2_DrawSpriteFromSet(f->x, f->y, surf, font, d2_ResourceOffset);
 			}
 			if (((D2_CONTROL_TL*) e)->value_1f4.real != g_6628a8) {
 				y = (int) ((*(double*) 0x6629c8 - ((D2_CONTROL_TL*) e)->value_1f4.real)
@@ -148,9 +148,9 @@ void __cdecl d2_DrawField(int idx, int surf)
 				if (y > d2_ClipBottom) {
 					y = d2_ClipBottom;
 				}
-				fcn_0047a040(d2_ClipLeft, g_7725fc, d2_ClipRight, y);
-				fcn_0047cbf0(f->x, f->y, g_77250c, font, d2_ResourceOffset);
-				fcn_0047a040(d2_ClipLeft, g_7725fc, d2_ClipRight, d2_ClipBottom);
+				d2_SetClipRect(d2_ClipLeft, g_7725fc, d2_ClipRight, y);
+				d2_DrawDimmedSpriteFrame(f->x, f->y, g_77250c, font, d2_ResourceOffset);
+				d2_SetClipRect(d2_ClipLeft, g_7725fc, d2_ClipRight, d2_ClipBottom);
 				if (d2_CurrentElementId != ((D2_CONTROL_TL*) e)->value_000) {
 					width = (int) (((((D2_CONTROL_TL*) (g_1015ea0))[f->ent].value_1f4.real > *(double*) 0x6629c8)
 					    ? *(double*) 0x6629c8

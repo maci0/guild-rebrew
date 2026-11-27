@@ -1,11 +1,11 @@
 
 
 // SIZE 0xc
-typedef struct Light {
+typedef struct D3_LIGHT_SLOT {
 	int a;
 	int used;
 	int b;
-} Light;
+} D3_LIGHT_SLOT;
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern void* g_6b870c;
@@ -28,7 +28,7 @@ void __cdecl d3_CollectSceneLights(int ctx, unsigned char mask)
 	int i;
 
 	for (i = 0; i < d3_MaxActiveLights; i++) {
-		((Light*)g_6b870c)[i].used = 0;
+		((D3_LIGHT_SLOT*)g_6b870c)[i].used = 0;
 	}
 	g_6b8700 = 0;
 	(*(int*)&g_1041d00) = 0;

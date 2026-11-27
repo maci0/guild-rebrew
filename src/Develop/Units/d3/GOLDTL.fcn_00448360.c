@@ -35,10 +35,10 @@ void __cdecl fcn_00439aa0(char* object);
 void __cdecl d3_SetActiveCamera(char* object);
 char* __cdecl d3_CloneObject(char* object);
 void __cdecl fcn_0043b850(void* stream);
-int __cdecl fcn_00446ca0(unsigned version);
+int __cdecl d3_GetSceneVersionSlotCount(unsigned version);
 char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsigned char resources);
-char* __cdecl fcn_00447e30(void* stream, int version);
-void __cdecl fcn_0045b290(char* resource, int mode);
+char* __cdecl d3_int_io_LoadFloor(void* stream, int version);
+void __cdecl d3sm_Rebuild(char* resource, int mode);
 char* __cdecl fcn_0045b700(int a1, int n, int a3);
 void __cdecl gv_Free3Fields(int* slot);
 void __cdecl fcn_0045cfa0(SCENE_PROGRESS progress);
@@ -128,7 +128,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 			*(int*)&((D3_SCENE_SLOT*)g_1041d80)[index].b.z = 0;
 		}
 		if (version >= 0x3a6c00a2) {
-			rows = fcn_00446ca0((unsigned) version);
+			rows = d3_GetSceneVersionSlotCount((unsigned) version);
 			index = 0;
 			if (rows > 0) {
 				do {
@@ -176,7 +176,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 		}
 		vfs_ReadByte(s, &present);
 		if (present != 0) {
-			g_6b8300 = fcn_00447e30(s, version);
+			g_6b8300 = d3_int_io_LoadFloor(s, version);
 		}
 		obj = d3_ObjectListHead;
 		while (obj != d3_SceneObjectSentinel) {
@@ -215,7 +215,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 	}
 	if (g_6b8300 == 0) {
 		if (g_6b89e4 != 0) {
-			fcn_0045b290(g_6b89e4, 0);
+			d3sm_Rebuild(g_6b89e4, 0);
 		} else {
 			g_6b89e4 = fcn_0045b700(0, -g_6b89b0, 1);
 		}

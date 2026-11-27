@@ -6,7 +6,7 @@ extern char s_67a464[];
 
 int __cdecl fcn_0065f220(const char* a, const char* b);
 void __cdecl d3_CleanupObjectResources(char* o);
-int __cdecl fcn_0044c200(char* a, char* b);
+int __cdecl d3_LoadModel(char* a, char* b);
 void __cdecl fcn_00449f90(char* o, int a, char* name);
 void __cdecl d3_InvalidateSubTreeFlags(char* o, int a);
 
@@ -39,7 +39,7 @@ char __cdecl fcn_0043aad0(char* o, SCENE_PROGRESS_CONTEXT* cb)
 		}
 	}
 	d3_CleanupObjectResources(o);
-	if (fcn_0044c200(buf, buf)) {
+	if (d3_LoadModel(buf, buf)) {
 		fcn_00449f90(o, 0, buf);
 	}
 	d3_InvalidateSubTreeFlags(o, 1);

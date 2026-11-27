@@ -14,7 +14,7 @@ int __cdecl d2_CreateValueGauge(int x, int y, int a3, int a4, int a5, int a6, in
 int __cdecl d2_AddWindowChild(int id, int win);
 
 /* ADDRESS: GOLDTL 0x004677e0 */
-int __cdecl d2_AddWindowValueGauge(int x, int y, int a3, int a4, int a5, int a6, int a7, int win)
+int __cdecl d2_AddWindowValueGauge(int x, int y, int barLength, int value, int maxValue, int resourceId, int flags, int win)
 {
 	D2_WIN* window;
 	int id;
@@ -30,7 +30,7 @@ int __cdecl d2_AddWindowValueGauge(int x, int y, int a3, int a4, int a5, int a6,
 		ReportClientMessage(s_67d420);
 		return -1;
 	}
-	id = d2_CreateValueGauge(window->left + x, window->top - (*(int*) &window->pad3c[0x21c]) + y, a3, a4, a5, a6, a7);
+	id = d2_CreateValueGauge(window->left + x, window->top - (*(int*) &window->pad3c[0x21c]) + y, barLength, value, maxValue, resourceId, flags);
 	d2_AddWindowChild(id, win);
 	return id;
 }

@@ -9,10 +9,10 @@ extern int g_10405c8;
 extern volatile int g_6b7fac;
 extern int g_6b8af0;
 
-void __cdecl fcn_0045bfb0(char* p);
+void __cdecl d3_ReleaseTexture(char* p);
 
 /* ADDRESS: GOLDTL 0x0045c110 */
-void __cdecl fcn_0045c110(void)
+void __cdecl d3_ShutdownTextures(void)
 {
 	unsigned int i;
 	unsigned int fill_size;
@@ -21,7 +21,7 @@ void __cdecl fcn_0045c110(void)
 	p = g_104049c;
 	for (i = 0; i < g_10404a0; i++, p += 0x70) {
 		while (*(int*) (p + 0x40) > 0) {
-			fcn_0045bfb0(p);
+			d3_ReleaseTexture(p);
 		}
 	}
 	fill_size = g_10404a0 * 0x70;

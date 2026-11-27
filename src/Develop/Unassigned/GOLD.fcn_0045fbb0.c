@@ -1,6 +1,6 @@
 #include "client_scene_resources.h"
 extern unsigned int g_fb91a8;
-void __cdecl fcn_0045fb40(SCENE_RESOURCE*);
+void __cdecl d3_ReleaseSceneResourceData(SCENE_RESOURCE*);
 
 /* ADDRESS: GOLD 0x0045fbb0 */
 void __cdecl fcn_0045fbb0(SCENE_RESOURCE* p)
@@ -41,7 +41,7 @@ void __cdecl fcn_0045fbb0(SCENE_RESOURCE* p)
             }
         }
         if (i == g_10404a0)
-            fcn_0045fb40(p);
+            d3_ReleaseSceneResourceData(p);
     }
     p->level = 0;
     --g_fb91a8;

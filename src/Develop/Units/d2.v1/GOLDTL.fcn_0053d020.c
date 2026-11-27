@@ -14,7 +14,7 @@ extern char g_7e240a[];
 #include "client_dialog_state.h"
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -49,7 +49,7 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 
 	sel = -1;
 	changed = 0;
-	win = fcn_00470820(0, 0, "Menu\\CHOOSEPLAYER_NEW");
+	win = d2_LoadForm(0, 0, "Menu\\CHOOSEPLAYER_NEW");
 	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 1);
 	io_AppendText(0x1acf, g_7e1d00);

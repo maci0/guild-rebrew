@@ -37,7 +37,7 @@ extern void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 extern void __cdecl gm_TransferEntityBuildings(char*, int);
 extern void __cdecl cm_RequestKillSpieler(int, int);
 extern char* __cdecl fcn_005bdc30(int, int*, char*, int, int);
-extern int __cdecl fcn_00470820(int, int, char*);
+extern int __cdecl d2_LoadForm(int, int, char*);
 extern void __cdecl d2_SetOverlayAnimation(int, int);
 extern void __cdecl d2_CenterDialogWindows(int);
 extern void __cdecl d2_SetForm(int, int);
@@ -129,7 +129,7 @@ unsigned int __cdecl d2_ShowExpelWorkerDialog(char* entity, int* action)
 	if (*(unsigned short*) (rec + 0x27) == 0xffff)
 		return 0;
 	state_ptr = (char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (rec + 0x27)]);
-	j = fcn_00470820(0, 0, (char*) 0x6acd8c);
+	j = d2_LoadForm(0, 0, (char*) 0x6acd8c);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(j);
 	d2_SetForm(j, 1);

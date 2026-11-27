@@ -15,7 +15,7 @@ struct unk_44a120 {
 extern unsigned long g_14ce728;
 
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_0045bfb0(char*);
+void __cdecl d3_ReleaseTexture(char*);
 
 /* ADDRESS: GOLDTL 0x0044a120 */
 void __cdecl fcn_0044a120(char* e)
@@ -33,7 +33,7 @@ void __cdecl fcn_0044a120(char* e)
 		do {
 			p = *(char**) (*(int*) (e + 0x284) + i * 4);
 			if (p != 0) {
-				fcn_0045bfb0(p);
+				d3_ReleaseTexture(p);
 			}
 			i++;
 		} while (i < *(int*) (e + 0x1e4));

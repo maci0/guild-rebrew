@@ -8,7 +8,7 @@ struct unit;
 struct unit* __cdecl he_StartHandlungSearch(int n, ...);
 int __cdecl gm_RandomMod(unsigned short n);
 unsigned char* __cdecl gv_FindLowestCostSlot(char* e, unsigned char lim);
-int __cdecl fcn_004f1790(char* a, void* e);
+int __cdecl gm_GetEntitySlotIndex(char* a, void* e);
 void __cdecl cm_SendCopyEntityData(int a1);
 
 /* ADDRESS: GOLDTL 0x004831f0 */
@@ -79,7 +79,7 @@ void __cdecl ai_StartGrabpflege(char* obj)
 		*(unsigned short*) (s + 0x34) = (unsigned short) gm_GameTime.d;
 		*(char*) (s + 0x36) = 1;
 		*(int*) (s + 0x5c) = *(int*) e;
-		*(char*) (s + 0x60) = (char) fcn_004f1790(*(char**) (c + 0x65), e);
+		*(char*) (s + 0x60) = (char) gm_GetEntitySlotIndex(*(char**) (c + 0x65), e);
 		*(int*) (s + 0x38) = *(int*) (found + 4);
 		cm_SendCopyEntityData((int) s);
 	}

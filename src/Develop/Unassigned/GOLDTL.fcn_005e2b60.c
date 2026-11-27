@@ -1,10 +1,10 @@
 extern int g_100f1dc;
-int __cdecl fcn_00470820(int, int, char *);
+int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl fcn_00537320(int);
 void __cdecl fcn_00471db0(int, int);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(char *, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -31,12 +31,12 @@ void __cdecl fcn_005e2b60(void)
   unsigned int v4, v5, v6, v7, v8, v9, v10, v11, v12, v14, v15;
   v14 = *(unsigned int *)0x7e46ac & ~0x2000;
   v1 = 0;
-  v4 = fcn_00470820(0,0,(char *)0x6ad2d4);
+  v4 = d2_LoadForm(0,0,(char *)0x6ad2d4);
   fcn_00537320(v14);
   fcn_00471db0(v4,1);
   fcn_00471d80(v4,2);
   d2_SetForm(v4,0);
-  fcn_005340f0(*(unsigned int *)0x772514);
+  d2_InitWindowBounds(*(unsigned int *)0x772514);
   d2_SetOverlayAnimation(0,0);
   d2_SetForm(v4,2);
   io_AppendText((char *)0x1c5a);

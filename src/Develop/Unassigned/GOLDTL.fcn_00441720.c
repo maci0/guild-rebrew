@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00441720 */
-unsigned char __cdecl d3_GetFloorHeight(int* a0, float* worldPos, unsigned int a2, unsigned int* gridX, unsigned int* gridZ, float* heightOut)
+unsigned char __cdecl d3_GetFloorHeight(int* floor, float* worldPos, unsigned int coarse, unsigned int* gridX, unsigned int* gridZ, float* heightOut)
 {
 	float pp[4];
 	float v13;
@@ -18,35 +18,35 @@ unsigned char __cdecl d3_GetFloorHeight(int* a0, float* worldPos, unsigned int a
 	float v11;
 	float v12;
 
-	if (a0 == 0) {
+	if (floor == 0) {
 		return 0;
 	}
-	pp[0] = worldPos[0] - *(float*) ((char*) a0 + 0x50);
-	pp[2] = worldPos[2] - *(float*) ((char*) a0 + 0x58);
-	if (*(float*) ((char*) a0 + 0x60) != 0.0f) {
-		pp[0] = pp[0] / *(float*) ((char*) a0 + 0x60);
+	pp[0] = worldPos[0] - *(float*) ((char*) floor + 0x50);
+	pp[2] = worldPos[2] - *(float*) ((char*) floor + 0x58);
+	if (*(float*) ((char*) floor + 0x60) != 0.0f) {
+		pp[0] = pp[0] / *(float*) ((char*) floor + 0x60);
 	}
-	if (*(float*) ((char*) a0 + 0x78) != 0.0f) {
-		pp[2] = pp[2] / *(float*) ((char*) a0 + 0x78);
+	if (*(float*) ((char*) floor + 0x78) != 0.0f) {
+		pp[2] = pp[2] / *(float*) ((char*) floor + 0x78);
 	}
 	v4 = (int) (pp[0] + 0.5f);
 	*gridX = v4;
 	v3 = (int) (pp[2] + 0.5f);
 	*gridZ = v3;
-	if (v4 < 0 || v4 >= a0[0] || v3 < 0 || v3 >= a0[0]) {
+	if (v4 < 0 || v4 >= floor[0] || v3 < 0 || v3 >= floor[0]) {
 		return 0;
 	}
 	if (heightOut == 0) {
 		goto fail_1;
 	}
-	width = a0[0];
-	mask = a0[3];
-	data = (unsigned char*) a0[9];
+	width = floor[0];
+	mask = floor[3];
+	data = (unsigned char*) floor[9];
 	s = 1;
-	if ((unsigned char) a2 != 0) {
-		b = *(unsigned char*) ((char*) a0 + (v4 / a0[1] + (v3 / a0[1]) * 8) * 500 + 0x28e);
+	if ((unsigned char) coarse != 0) {
+		b = *(unsigned char*) ((char*) floor + (v4 / floor[1] + (v3 / floor[1]) * 8) * 500 + 0x28e);
 		if (b == 2 || b == 4) {
-			data = (unsigned char*) a0[(b >> 1) + 9];
+			data = (unsigned char*) floor[(b >> 1) + 9];
 			s = b;
 		}
 	}
@@ -58,32 +58,32 @@ unsigned char __cdecl d3_GetFloorHeight(int* a0, float* worldPos, unsigned int a
 		if (hz + hx > 1.0f) {
 			v6 = ((v3 + s) & mask) * width;
 			v9 = (v4 + s) & mask;
-			v13 = (float) ((unsigned char*) a0[4])[v9 + v6];
-			v11 = (float) ((unsigned char*) a0[4])[v6 + v4] - v13;
-			v12 = (float) ((unsigned char*) a0[4])[v3 * width + v9] - v13;
+			v13 = (float) ((unsigned char*) floor[4])[v9 + v6];
+			v11 = (float) ((unsigned char*) floor[4])[v6 + v4] - v13;
+			v12 = (float) ((unsigned char*) floor[4])[v3 * width + v9] - v13;
 			hx = 1.0f - hx;
 			hz = 1.0f - hz;
 		} else {
-			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v4];
-			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + width * v3] - v13;
-			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v4] - v13;
+			v13 = (float) ((unsigned char*) floor[4])[width * v3 + v4];
+			v11 = (float) ((unsigned char*) floor[4])[((v4 + s) & mask) + width * v3] - v13;
+			v12 = (float) ((unsigned char*) floor[4])[((v3 + s) & mask) * width + v4] - v13;
 		}
 	} else {
 		if (1.0f - hz + hx > 1.0f) {
 			v9 = (v4 + s) & mask;
-			v13 = (float) ((unsigned char*) a0[4])[width * v3 + v9];
-			v11 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
-			v12 = (float) ((unsigned char*) a0[4])[((v3 + s) & mask) * width + v9] - v13;
+			v13 = (float) ((unsigned char*) floor[4])[width * v3 + v9];
+			v11 = (float) ((unsigned char*) floor[4])[width * v3 + v4] - v13;
+			v12 = (float) ((unsigned char*) floor[4])[((v3 + s) & mask) * width + v9] - v13;
 			hx = 1.0f - hx;
 		} else {
 			v7 = ((v3 + s) & mask) * width;
-			v13 = (float) ((unsigned char*) a0[4])[v7 + v4];
-			v11 = (float) ((unsigned char*) a0[4])[((v4 + s) & mask) + v7] - v13;
+			v13 = (float) ((unsigned char*) floor[4])[v7 + v4];
+			v11 = (float) ((unsigned char*) floor[4])[((v4 + s) & mask) + v7] - v13;
 			hz = 1.0f - hz;
-			v12 = (float) ((unsigned char*) a0[4])[width * v3 + v4] - v13;
+			v12 = (float) ((unsigned char*) floor[4])[width * v3 + v4] - v13;
 		}
 	}
-	*heightOut = (v11 * hx + v12 * hz + v13) * *(float*) ((char*) a0 + 0x84) + *(float*) ((char*) a0 + 0x54);
+	*heightOut = (v11 * hx + v12 * hz + v13) * *(float*) ((char*) floor + 0x84) + *(float*) ((char*) floor + 0x54);
 	goto fail_1;
 fail_1:
 	return 1;

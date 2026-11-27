@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00507130 */
-int __cdecl fcn_00507130(int skill, int* first, int* second)
+int __cdecl gm_GetJobTrainingAttributes(int skill, int* first, int* second)
 {
 	switch (skill) {
 	case 11:

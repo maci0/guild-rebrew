@@ -8,7 +8,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 
 char* __cdecl gm_LookupMissionSpec(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
@@ -27,7 +27,7 @@ void __cdecl fcn_004b5530(int a1, int flags)
 	int x;
 
 	r = gm_LookupMissionSpec(a1);
-	h = fcn_00470820(0, 0, g_681130);
+	h = d2_LoadForm(0, 0, g_681130);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(*(int*) (r + 8) + 1);

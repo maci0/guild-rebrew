@@ -2,7 +2,7 @@ int __cdecl fcn_004011f0(void* a, void* b);
 void* __cdecl m_alloc(int size, char* tag);
 
 /* ADDRESS: GOLDTL 0x0044dfb0 */
-void __cdecl fcn_0044dfb0(void* a, char* s)
+void __cdecl d3_AllocBgiPolyBuffer(void* a, char* s)
 {
 	int* n;
 

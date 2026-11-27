@@ -24,7 +24,7 @@ extern int g_67bd2c;
 
 int __cdecl d3_ResolveTexturePath(char* name);
 void __cdecl d3_LoadTextureFromFile(int a1, int a2, void* a3, int a4, int a5, int a6);
-void __cdecl fcn_0045ce20(Tex* a0);
+void __cdecl d3_SyncClonedTextureHandles(Tex* a0);
 
 /* ADDRESS: GOLDTL 0x0045ce90 */
 void __cdecl fcn_0045ce90(Tex* texture)
@@ -48,7 +48,7 @@ void __cdecl fcn_0045ce90(Tex* texture)
 				texture->x64 = (unsigned int) texture->x68 >> g_6b7ff8;
 			}
 		}
-		fcn_0045ce20(texture);
+		d3_SyncClonedTextureHandles(texture);
 		g_6b7ff8 = saved;
 		if (texture->x5c > 1 && texture->x5d == 0) {
 			p = (Tex*) g_104049c;

@@ -29,7 +29,7 @@ static __inline void fill0_42e180(char* dst, int size)
 }
 
 /* ADDRESS: GOLDTL 0x0042e180 */
-void __cdecl fcn_0042e180(void)
+void __cdecl PopErrorContext(void)
 {
 	if (g_6b7fd0 != 0 && g_6b7fd0 > g_6b7fd8) {
 		g_6b7fd0 -= 0x84;

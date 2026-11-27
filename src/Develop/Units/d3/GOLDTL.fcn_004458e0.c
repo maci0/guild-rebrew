@@ -46,12 +46,12 @@ struct Ent {
 int __cdecl d3_FindSceneObject(Ent*, int, Ent*, int);
 void __cdecl d3_TransformPoint(Ent*, void*, Vec4*);
 void __cdecl d3_SetObjectRotation(Ent*, void*);
-void __cdecl fcn_004557c0(Ent*, char*, int, Mat*);
+void __cdecl d3_ComposeObserverMatrix(Ent*, char*, int, Mat*);
 
 void __cdecl fcn_00439aa0(Ent*);
 void __cdecl fcn_00439c00(Ent*, Ent*);
 void __cdecl d3_ApplyWorldTransformToObject(Ent*, Vec4*, Mat*);
-void __cdecl fcn_00445760(Ent*, Vec4*, Mat*, Slot*, char*);
+void __cdecl d3_TransformWorldToParent(Ent*, Vec4*, Mat*, Slot*, char*);
 
 
 /* ADDRESS: GOLDTL 0x004458e0 */
@@ -85,12 +85,12 @@ char __cdecl d3_ReparentObject(Ent* e, Ent* parent)
 		for (i = 0; i < 7; i++) {
 			d3_TransformPoint(e, &e->slots[i], &tmp[i]);
 			d3_SetObjectRotation(e, e->slots[i].xc);
-			fcn_004557c0(e, 0, 1, &mats[i]);
+			d3_ComposeObserverMatrix(e, 0, 1, &mats[i]);
 		}
 		d3_SetObjectRotation(e, &v);
 	}
 	d3_TransformPoint(e, &e->pos, &wpos);
-	fcn_004557c0(e, 0, 1, &wm);
+	d3_ComposeObserverMatrix(e, 0, 1, &wm);
 	d3_UnlinkObject((D3_OBJECT*) (e));
 	if (parent == 0) {
 		fcn_00439aa0(e);
@@ -100,7 +100,7 @@ char __cdecl d3_ReparentObject(Ent* e, Ent* parent)
 	d3_ApplyWorldTransformToObject(e, &wpos, &wm);
 	if (e->kind >= 5 && e->slots != 0) {
 		for (i = 0; i < 7; i++) {
-			fcn_00445760(e, &tmp[i], &mats[i], &e->slots[i], e->slots[i].xc);
+			d3_TransformWorldToParent(e, &tmp[i], &mats[i], &e->slots[i], e->slots[i].xc);
 		}
 	}
 	return 1;

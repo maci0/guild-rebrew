@@ -1,16 +1,16 @@
-typedef struct Query_4522a0 {
+typedef struct D3_LIGHT_ACCUM_QUERY {
 	char* ref;
 	unsigned int count;
 	char** list;
 	unsigned char flag;
-} Query_4522a0;
+} D3_LIGHT_ACCUM_QUERY;
 
 void __cdecl d3_NormalizeVector(float* v);
 void __cdecl d3_CalculateTriangleNormal(float* a, float* b, float* c, float* n);
 void __cdecl d3_BuildViewMatrix(char* source, char* view, int flags, float* out);
 
 /* ADDRESS: GOLD 0x004522a0 */
-char __cdecl d3_AccumulateObjectLights(char* o, Query_4522a0* q)
+char __cdecl d3_AccumulateObjectLights(char* o, D3_LIGHT_ACCUM_QUERY* q)
 {
 	int* mesh;
 	unsigned int i;

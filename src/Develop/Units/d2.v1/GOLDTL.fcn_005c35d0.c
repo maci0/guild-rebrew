@@ -8,7 +8,7 @@ extern char g_7f4ca4[];
 
 int __cdecl gm_CanBuildBuildingType(int, int);
 int __cdecl fcn_00526120(int, int);
-void* __cdecl fcn_00470820(int, int, char*);
+void* __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(void*);
 void __cdecl d2_DestroyForm(void*);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
@@ -40,7 +40,7 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 		fcn_00526120(*(int*) 0x14ab29c, 0);
 		return;
 	}
-	dlg = fcn_00470820(0, 0, (char*) 0x6ac5d8);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6ac5d8);
 	d2_CenterDialogWindows(dlg);
 	x = gm_CalculateGebaeudeValue(e, *(signed char*) (e + 0x5c));
 	w = gm_AmountToUnits(x, g_773d75);

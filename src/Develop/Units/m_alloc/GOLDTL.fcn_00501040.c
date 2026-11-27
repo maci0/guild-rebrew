@@ -17,7 +17,7 @@ void __cdecl fcn_00500e40(void);
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl srv_SeedRandomWithTime(void);
 
-int __cdecl fcn_00501040(char* dir)
+int __cdecl gm_InitGameData(char* dir)
 {
 	unsigned int* src;
 	unsigned int* dst;

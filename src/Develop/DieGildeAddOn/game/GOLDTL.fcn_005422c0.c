@@ -41,7 +41,7 @@ int __cdecl gm_GetItemGuild(int);
 void __cdecl gm_HasGuildHall(int);
 void* __cdecl gm_StartFilteredEntitySearch(int, ...);
 void* __cdecl gm_FindNextFilteredEntity(void);
-int __cdecl fcn_00505d00(char*, int*);
+int __cdecl gm_CollectBuildingObjectSlots(char*, int*);
 float __cdecl gm_GetWorkforceOutput(unsigned char*, int, int, int);
 void* __cdecl sim_StartEntityQueryByType(unsigned char*);
 unsigned char* __cdecl gm_FindBuildingPrimarySlot(unsigned char*);
@@ -236,7 +236,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 					count++;
 				}
 			else {
-				if (fcn_00505d00((char*) p, (int*) msg)) {
+				if (gm_CollectBuildingObjectSlots((char*) p, (int*) msg)) {
 					for (a = 0; a < 2; a++) {
 						for (j = 0; j < 12; j++) {
 							f = gm_GetWorkforceOutput(tile, *p, -1, a);

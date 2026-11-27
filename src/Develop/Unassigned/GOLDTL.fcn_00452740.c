@@ -7,9 +7,9 @@ extern int g_6b8718;
 extern unsigned int g_6b8710;
 extern unsigned int g_6b8714;
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
-extern volatile unsigned int g_6b7fac; void __cdecl fcn_00452420(void*);
+extern volatile unsigned int g_6b7fac; void __cdecl d3_FreeMeshObject(void*);
 int __cdecl d3_FindTextureVariant(int, char);
-void __cdecl fcn_004557c0(char*, char*, int, float*);
+void __cdecl d3_ComposeObserverMatrix(char*, char*, int, float*);
 void __cdecl fcn_004372d0(unsigned char, unsigned char, int, unsigned char, unsigned char);
 
 /* ADDRESS: GOLDTL 0x00452740 */
@@ -33,7 +33,7 @@ void __cdecl d3_UpdateAndRenderEffect(void *arg)
 	obj = (unsigned char *) arg;
 	if (*(void **) (obj + 0x310) == 0 ||
 	    ((char (__cdecl *) (void *, unsigned int)) *(void **) (obj + 0x310))(obj, g_6b7fac) == 0) {
-		fcn_00452420(obj);
+		d3_FreeMeshObject(obj);
 		return;
 	}
 	g_10432a8 += *(int *) (obj + 0xd8) * 2;
@@ -54,7 +54,7 @@ void __cdecl d3_UpdateAndRenderEffect(void *arg)
 			}
 		}
 	}
-	fcn_004557c0((char*) obj + 0xe8,
+	d3_ComposeObserverMatrix((char*) obj + 0xe8,
 				 (char*) (~-((*(unsigned char *) (obj + 0x2fc) & 0x20) != 0) & (unsigned int) d3_ActiveCamera), 0, matrix);
 	first = (int) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl;
 	(*(int (__stdcall **) (int, int, float*)) (first + 0x94))((int) g_6b5de0, 0x100, matrix);

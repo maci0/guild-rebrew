@@ -12,7 +12,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 void __cdecl d2_RunFriedhofUpgradeWorkerDialog(int);
-void __cdecl fcn_0058dbe0(int);
+void __cdecl d2_OpenFriedhofFogDialog(int);
 
 void __cdecl d2_RunFriedhofInteriorHud(int a)
 {
@@ -32,7 +32,7 @@ void __cdecl d2_RunFriedhofInteriorHud(int a)
 				d2_RunFriedhofUpgradeWorkerDialog(a);
 			}
 			else if (g_7746a0 == y) {
-				fcn_0058dbe0(a);
+				d2_OpenFriedhofFogDialog(a);
 			}
 		}
 	}

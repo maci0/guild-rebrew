@@ -27,7 +27,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00473150(unsigned char*);
 void __cdecl d2_ClearScreen(void);
 void __cdecl d2_SetBackdropResource(int);
-int __cdecl fcn_0046e940(int, int, int, int, int);
+int __cdecl d2_CreateWindow(int, int, int, int, int);
 void __cdecl fcn_00471c80(int, unsigned char);
 void __cdecl io_AppendText(int, ...);
 void __cdecl d2_CloseWindow(int);
@@ -48,7 +48,7 @@ void __cdecl d2_ShowCreditsScreen(void)
 	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, s_67d67c, 0x3c, 10);
 	d2_ClearScreen();
 	d2_SetBackdropResource(0x7ad);
-	win = fcn_0046e940(100, 0, 0x258, d2_ScreenHeight, 0x10);
+	win = d2_CreateWindow(100, 0, 0x258, d2_ScreenHeight, 0x10);
 	fcn_00471c80(win, 1);
 	io_AppendText(0x2004);
 	*(int*) &(*(D2_WIN**)&g_77255c)->pad3c[0x21c] = -d2_ScreenHeight;

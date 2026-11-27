@@ -89,7 +89,7 @@ int __cdecl m_alloc(int size, char* tag);
 void __cdecl d2_AddElementToWindow(int x, int y, int id, int layer);
 
 /* ADDRESS: GOLDTL 0x0046e940 */
-int __cdecl fcn_0046e940(unsigned int x, unsigned int y, unsigned int width, int height,
+int __cdecl d2_CreateWindow(unsigned int x, unsigned int y, unsigned int width, int height,
 	unsigned int flags)
 {
 	WinRec* rec;

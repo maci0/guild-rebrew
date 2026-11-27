@@ -2,7 +2,7 @@ extern unsigned char* lpGebaeudePROT;
 extern short* gm_CityEntity;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 /* ADDRESS: GOLDTL 0x005cfb00 */
-unsigned int __cdecl fcn_005cfb00(short* a0, int* filterSpec, unsigned char* gebaeude)
+unsigned int __cdecl ai_MatchesBuildingFilter(short* a0, int* filterSpec, unsigned char* gebaeude)
 {
 	unsigned int hi;
 	unsigned int lo;

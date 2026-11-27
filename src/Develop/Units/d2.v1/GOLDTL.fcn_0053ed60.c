@@ -26,11 +26,11 @@ void __cdecl fcn_005338a0(void);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_SetObjectRotation(char*, int*);
-void __cdecl fcn_00445f50(int, int, float, int);
+void __cdecl d3_BlendSceneLightingPreset(int, int, float, int);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl strcpy(char*, const char*);
-typedef struct { char unknown00[9]; char name[0x100]; char path[0x107]; } FileSlot53ed60;
-int __cdecl vfs_ListFilesByExtension(char*, char*, FileSlot53ed60*);
+typedef struct { char unknown00[9]; char name[0x100]; char path[0x107]; } CITY_MAP_FILE_SLOT;
+int __cdecl vfs_ListFilesByExtension(char*, char*, CITY_MAP_FILE_SLOT*);
 int __cdecl vfs_Tfopen(char*, char*, int);
 int __cdecl fcn_00521eb0(int, char*);
 void __cdecl CloseVfsStream(int);
@@ -43,7 +43,7 @@ void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 char __cdecl d3_SetObjectVisible(char*, char);
 int __cdecl fcn_004e4470(char*);
 void __cdecl cut_WaitForScript(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_00471db0(int, int);
 int __cdecl d2_SetForm(int, int);
@@ -64,7 +64,7 @@ void __cdecl d3_AnimateObjectTransform(char*, float*, float*, int, int);
 
 /* Local frame layout; the 0x8984-byte frame is mostly the city name table. */
 /* ADDRESS: GOLDTL 0x0053ed60 */
-int __cdecl fcn_0053ed60(int unused, int network)
+int __cdecl d2_RunChooseCityDialog(int unused, int network)
 {
 	struct {
 		char langName[0x40];
@@ -73,7 +73,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 		char* cities[0x40];
 		char namebuf[0x100];
 		int values[0x40];
-		FileSlot53ed60 names[0x40];
+		CITY_MAP_FILE_SLOT names[0x40];
 	} data;
 	float pos[4];
 	float dir[3];
@@ -103,7 +103,7 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	d3_SelectSceneContext(0, 0);
 	d3_SetNodePosition(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x5c));
 	d3_SetObjectRotation(d3_ActiveCamera, (int*) (d3_ActiveCamera + 0x90));
-	fcn_00445f50(0, 0, 1.0f, 0);
+	d3_BlendSceneLightingPreset(0, 0, 1.0f, 0);
 	if (network == 0) {
 		count = vfs_ListFilesByExtension((char*) 0x6a3778, (char*) 0x6a41b8, data.names);
 	} else {
@@ -155,20 +155,20 @@ int __cdecl fcn_0053ed60(int unused, int network)
 	main_LoopFlags = 0x12d6;
 	cut_EventLoopFlags = 0x12d6;
 	cut_WaitForScript(fcn_004e4470((char*) 0x6a4024));
-	win1 = fcn_00470820(0, 0, (char*) 0x6a3dd4);
+	win1 = d2_LoadForm(0, 0, (char*) 0x6a3dd4);
 	fcn_00471d80(win1, 3);
 	fcn_00471db0(win1, 1);
 	d2_SetForm(win1, 0);
 	io_AppendText(0x1abb);
 	fcn_00438da0((float) g_1040494, (float) d2_ScreenHeight, 0.0f, 0.0f, g_10529c8, g_10421a0, g_10432a4, g_1040494, d2_ScreenHeight);
-	win2 = fcn_00470820(0, 0, (char*) 0x6a4194);
+	win2 = d2_LoadForm(0, 0, (char*) 0x6a4194);
 	fcn_00471d80(win2, 3);
 	fcn_00471db0(win2, 1);
 	d2_SetForm(win2, 2);
 	d2_CreateButtonRow(d2_CurrentWindowId, 0, tmp_ids, 2, g_14b5e50, g_14b5e54);
 	ok_id = tmp_ids[0];
 	info_id = tmp_ids[1];
-	while (main_RunFrameLoop((void*) fcn_0053ed60, 0x10d6) != 0) {
+	while (main_RunFrameLoop((void*) d2_RunChooseCityDialog, 0x10d6) != 0) {
 		g_7746a0 = 0;
 		image = d3_FindSceneObjectAtScreenPoint((float) g_14ce8c0, (float) g_14ce8c2, 0x60, 1);
 		g_7746a4 = image;

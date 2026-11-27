@@ -1,4 +1,4 @@
-int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
+int __cdecl d2_CreateWindow(int x, int y, int w, int h, int a5);
 void __cdecl d2_SetElementFont(int i, int v);
 int __cdecl main_RunFrameLoop(void* fn, int line);
 int __cdecl io_AppendText(int fmt, ...);
@@ -42,7 +42,7 @@ void __cdecl d2_ShowLagerInventoryDebug(void)
 	int slot;
 	int v1c;
 
-	idx = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
+	idx = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[idx].slot, 0x54);
 	if (main_RunFrameLoop((void*) 0x5b39c0, 0x657c7) != 0) {
 		do {

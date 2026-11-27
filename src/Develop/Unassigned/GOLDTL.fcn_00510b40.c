@@ -1,14 +1,14 @@
-struct node_510b40 {
+struct D3_SCENE_NODE_LINK {
 	char pad0[0x1fc];
-	struct node_510b40* p1fc;
+	struct D3_SCENE_NODE_LINK* p1fc;
 	char pad200[4];
-	struct node_510b40* p204;
+	struct D3_SCENE_NODE_LINK* p204;
 };
 
 /* ADDRESS: GOLDTL 0x00510b40 */
-void __cdecl fcn_00510b40(struct node_510b40* n)
+void __cdecl d3_InheritSceneNodeData(struct D3_SCENE_NODE_LINK* n)
 {
-	struct node_510b40* cur;
+	struct D3_SCENE_NODE_LINK* cur;
 
 	cur = n->p1fc;
 	while (n->p204 == 0 && cur != 0) {

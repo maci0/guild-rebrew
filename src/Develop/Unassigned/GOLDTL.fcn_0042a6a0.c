@@ -6,7 +6,7 @@ extern g_6623bc_f g_6623bc;
 
 
 
-int __cdecl fcn_0042b240(int);
+int __cdecl msx_FindSampleDriverIndex(int);
 int __cdecl msx_FindSampleHandleIndex(int);
 
 int __cdecl msx_ReleaseSampleHandle(int handle)
@@ -15,7 +15,7 @@ int __cdecl msx_ReleaseSampleHandle(int handle)
 	int i;
 	int j;
 
-	if (g_6b7f90 != 0 && (i = fcn_0042b240(handle)) >= 0 && (j = msx_FindSampleHandleIndex(handle)) >= 0) {
+	if (g_6b7f90 != 0 && (i = msx_FindSampleDriverIndex(handle)) >= 0 && (j = msx_FindSampleHandleIndex(handle)) >= 0) {
 		g_6623bc(handle);
 		g_6b7f10[i][j] = r;
 		msx_WaveDrivers[i][5]--;

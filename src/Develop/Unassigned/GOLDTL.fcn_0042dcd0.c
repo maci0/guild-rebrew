@@ -14,15 +14,15 @@ extern unsigned int g_1052c48[2];
 extern unsigned int g_1052c50;
 extern int g_6b7fa8;
 
-typedef void (__stdcall* timecb_42dcd0)(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long);
+typedef void (__stdcall* MM_TIMER_CALLBACK)(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long);
 
-__declspec(dllimport) unsigned int __stdcall timeSetEvent(unsigned int, unsigned int, timecb_42dcd0, unsigned long, unsigned int);
+__declspec(dllimport) unsigned int __stdcall timeSetEvent(unsigned int, unsigned int, MM_TIMER_CALLBACK, unsigned long, unsigned int);
 
 
 /* Multimedia timer tick: runs the periodic callbacks and re-arms the
  * one-shot timer. */
 /* ADDRESS: GOLDTL 0x0042dcd0 */
-void __stdcall fcn_0042dcd0(unsigned int id, unsigned int msg, unsigned long user, unsigned long dw1, unsigned long dw2)
+void __stdcall tb_TimerCallback(unsigned int id, unsigned int msg, unsigned long user, unsigned long dw1, unsigned long dw2)
 {
 	int i;
 	int tick;
@@ -57,7 +57,7 @@ void __stdcall fcn_0042dcd0(unsigned int id, unsigned int msg, unsigned long use
 		}
 	}
 	if (g_6b7fc4 != 0) {
-		(*(unsigned int*)&g_6b7fa8) = timeSetEvent(g_1052c50, (*(unsigned int*)g_1052c48) + 5, fcn_0042dcd0, 0, 0);
+		(*(unsigned int*)&g_6b7fa8) = timeSetEvent(g_1052c50, (*(unsigned int*)g_1052c48) + 5, tb_TimerCallback, 0, 0);
 	}
 	g_6b7fbc = 0;
 }

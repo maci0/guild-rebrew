@@ -7,12 +7,12 @@ typedef struct Nibbles {
 void __cdecl d3_UpdateFloorLighting(char* a);
 
 /* ADDRESS: GOLDTL 0x004428d0 */
-void __cdecl fcn_004428d0(char* a, unsigned char v, char update)
+void __cdecl d3_SetFloorDetailLevel(char* floor, unsigned char level, char update)
 {
-	if (((Nibbles*) (a + 0x8037))->lo != v) {
-		((Nibbles*) (a + 0x8037))->lo = v;
+	if (((Nibbles*) (floor + 0x8037))->lo != level) {
+		((Nibbles*) (floor + 0x8037))->lo = level;
 		if (update) {
-			d3_UpdateFloorLighting(a);
+			d3_UpdateFloorLighting(floor);
 		}
 	}
 }

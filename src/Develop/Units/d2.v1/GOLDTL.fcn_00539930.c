@@ -32,11 +32,11 @@ extern char s_6a3a4c[]; /* "Host" */
 extern char s_6a3a54[]; /* "Gamedata\\network\\%s.SAV" */
 extern char s_6a3a6c[]; /* "Menu\\SEARCH_NETWORK" */
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471db0(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
-int __cdecl fcn_005340f0(int);
+int __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_CreateButtonRow(int, int, int*, int, int, int, int);
 int __cdecl d2_SetElementEnabled(int, int);
@@ -52,7 +52,7 @@ int __cdecl fcn_00521eb0(int, char*);
 int __cdecl CloseVfsStream(int);
 int __cdecl __strupr(char*);
 int __cdecl sprintf(char*, const char*, ...);
-int __cdecl fcn_00465950(char*);
+int __cdecl d2_FindResourceByName(char*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_AddToRadioGroup(int, int);
 int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
@@ -112,11 +112,11 @@ unsigned int __cdecl d2_ShowServerBrowser(int a0)
 	v4 = 1;
 	v36 = g_6b7fac;
 	group = -1;
-	dialog = fcn_00470820(0, 0, s_6a3a6c);
+	dialog = d2_LoadForm(0, 0, s_6a3a6c);
 	fcn_00471db0(dialog, 1);
 	fcn_00471d80(dialog, 2);
 	d2_SetForm(dialog, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dialog, 1);
 	io_AppendText(0x1ca5);
 	d2_SetForm(dialog, 3);
@@ -192,9 +192,9 @@ label_539ba4:
 						if (v4 != 0) {
 							__strupr(mapName);
 							sprintf(crestName, s_6a2e38, mapName);
-							v32 = fcn_00465950(crestName);
+							v32 = d2_FindResourceByName(crestName);
 							if (v32 == -1) {
-								v32 = fcn_00465950(s_6a2e24);
+								v32 = d2_FindResourceByName(s_6a2e24);
 							}
 							d2_SetForm(dialog, 2);
 							v32 = d2_AddElementToWindow(8, v34, v32, d2_CurrentWindowId);

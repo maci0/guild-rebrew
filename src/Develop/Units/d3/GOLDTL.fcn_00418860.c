@@ -32,7 +32,7 @@ typedef struct SUNRAY_COLOR {
 void __cdecl fcn_0043a3f0(char*, char*, SUNRAY_COLOR);
 
 /* ADDRESS: GOLDTL 0x00418860 */
-void __cdecl fcn_00418860(char* obj)
+void __cdecl d3_UpdateSunRays(char* obj)
 {
 	float vec[3];
 	float x;

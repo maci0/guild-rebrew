@@ -8,7 +8,7 @@
 typedef struct
 {
 	int i[0x2f4 / 4];
-} fcn_0046f7e0_Ent;
+} D2_WIN_IMAGE_ENT;
 // SIZE 0x2f4
 
 #include "client_types.h"
@@ -24,7 +24,7 @@ void __cdecl d2_InsertControlAfterWindow(int slot, D2_WIN* parent);
 void __cdecl d2_SetElementScale(int id, int a2);
 
 /* ADDRESS: GOLDTL 0x0046f7e0 */
-int __cdecl d2_AddWindowImage(int x, int y, int a3, int win, int a5)
+int __cdecl d2_AddWindowImage(int x, int y, int resourceId, int win, int scaleType)
 {
 	D2_WIN* w;
 	int id;
@@ -37,7 +37,7 @@ int __cdecl d2_AddWindowImage(int x, int y, int a3, int win, int a5)
 		ReportClientMessage(s_67d420);
 		return -1;
 	}
-	w->children[w->count] = d2_CreateElement((short) (w->left + x), (short) (w->top - (*(int*) &w->pad3c[0x21c]) + y), a3);
+	w->children[w->count] = d2_CreateElement((short) (w->left + x), (short) (w->top - (*(int*) &w->pad3c[0x21c]) + y), resourceId);
 	id = w->children[w->count];
 	if (id != -1) {
 		d2_InsertControlAfterWindow(id, w);
@@ -48,7 +48,7 @@ int __cdecl d2_AddWindowImage(int x, int y, int a3, int win, int a5)
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].clip_right) = g_1040494;
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_050) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_050);
 		(*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].value_048) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[w->slot].value_048);
-		d2_SetElementScale(id, a5);
+		d2_SetElementScale(id, scaleType);
 		w->count++;
 		if ((*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) + y > (*(int*) &w->pad3c[0x218])) {
 			(*(int*) &w->pad3c[0x218]) = (*(int*)&((D2_CONTROL_TL*)g_1015ea0)[id].height) + y;

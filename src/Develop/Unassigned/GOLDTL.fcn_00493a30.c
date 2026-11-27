@@ -9,46 +9,46 @@ float __cdecl gm_CalcSkillDuelScore(char* a, char* b, int c);
 int __cdecl gm_HasActiveSpecialObject(char* a1, int a2);
 
 /* ADDRESS: GOLDTL 0x00493a30 */
-int __cdecl fcn_00493a30(unsigned short* key, char* e)
+int __cdecl ai_ShouldAcquitTrial(unsigned short* assessor, char* trial)
 {
-	char* p1;
-	char* p2;
-	float f2;
-	float f1;
-	float g1;
-	float g2;
-	float v;
-	float s;
+	char* accused;
+	char* accuser;
+	float favorAccuser;
+	float favorAccused;
+	float skillAccused;
+	float skillAccuser;
+	float severity;
+	float accuserScore;
 
-	if (*(int*) (e + 0x48) == 1) {
+	if (*(int*) (trial + 0x48) == 1) {
 		return 0;
 	}
-	if (*(int*) (e + 8) == 1) {
+	if (*(int*) (trial + 8) == 1) {
 		return 0;
 	}
-	p1 = gm_LookupEntityRecordById(*(int*) (e + 0x18));
-	p2 = gm_LookupEntityRecordById(*(int*) (e + 0x14));
-	f1 = gm_CalcEntityFavor(*(unsigned short*) p1, *key, 1) * 0.01f;
-	f2 = gm_CalcEntityFavor(*(unsigned short*) p2, *key, 1) * 0.01f;
-	if (gm_HasActiveSpecialObject(p1, 0x22e) != 0) {
-		f1 = f1 + 0.1f;
-		f2 = f2 - 0.1f;
+	accused = gm_LookupEntityRecordById(*(int*) (trial + 0x18));
+	accuser = gm_LookupEntityRecordById(*(int*) (trial + 0x14));
+	favorAccused = gm_CalcEntityFavor(*(unsigned short*) accused, *assessor, 1) * 0.01f;
+	favorAccuser = gm_CalcEntityFavor(*(unsigned short*) accuser, *assessor, 1) * 0.01f;
+	if (gm_HasActiveSpecialObject(accused, 0x22e) != 0) {
+		favorAccused = favorAccused + 0.1f;
+		favorAccuser = favorAccuser - 0.1f;
 	}
-	f1 = MIN(MAX(0.0f, f1), 1.0f);
-	f2 = MIN(MAX(0.0f, f2), 1.0f);
+	favorAccused = MIN(MAX(0.0f, favorAccused), 1.0f);
+	favorAccuser = MIN(MAX(0.0f, favorAccuser), 1.0f);
 
 
 
 
 
 
-	g1 = gm_CalcSkillDuelScore(p1, (char*) key, 4);
-	g2 = gm_CalcSkillDuelScore(p2, (char*) key, 4);
-	v = *(float*) (e + 4);
-	s = g2 + v * v * 0.0025f;
-	if (*(int*) (e + 0x44) != 0) {
-		f1 = f1 * 1.1f;
-		f2 = f2 * 0.9f;
+	skillAccused = gm_CalcSkillDuelScore(accused, (char*) assessor, 4);
+	skillAccuser = gm_CalcSkillDuelScore(accuser, (char*) assessor, 4);
+	severity = *(float*) (trial + 4);
+	accuserScore = skillAccuser + severity * severity * 0.0025f;
+	if (*(int*) (trial + 0x44) != 0) {
+		favorAccused = favorAccused * 1.1f;
+		favorAccuser = favorAccuser * 0.9f;
 	}
-	return f1 + g1 > f2 + s;
+	return favorAccused + skillAccused > favorAccuser + accuserScore;
 }

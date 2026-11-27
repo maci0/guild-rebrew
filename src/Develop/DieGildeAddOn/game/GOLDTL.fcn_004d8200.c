@@ -7,7 +7,7 @@ typedef struct {
 
 blk24 g_68bef4 = { { 0x7a657073, 0x2f6c6169, 0x686e6965, 0x646e6561, 0x765f6769, 0x625f6d6f, 0x6e65646f, 0x68656e5f, 0x006e656d } };
 
-char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
+char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
 char* __cdecl gm_GetEquippedCombatGear(char*);
 char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(int), int, int, int);
@@ -135,7 +135,7 @@ block_174:
 	if (*(int*) (((char*) g_772f24) + 4) == g_68b79c) {
 		unsigned int tileX;
 		q = *(char**) ((char*) rec + 0x184);
-		if (!fcn_0045b990(map, (float*) (*(int*) (q + 0x34) + 0x4c),
+		if (!d3sm_SampleHeight(map, (float*) (*(int*) (q + 0x34) + 0x4c),
 		                  &g_102d020, &g_102d024, &height)) {
 			return;
 		}

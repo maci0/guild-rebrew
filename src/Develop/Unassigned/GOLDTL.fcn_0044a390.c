@@ -28,7 +28,7 @@ typedef struct MeshBox {
 } MeshBox;
 
 /* ADDRESS: GOLDTL 0x0044a390 */
-void __cdecl fcn_0044a390(MeshBox* m)
+void __cdecl d3_RecalculateObjectBounds(MeshBox* m)
 {
 	Vert* v;
 	int i;

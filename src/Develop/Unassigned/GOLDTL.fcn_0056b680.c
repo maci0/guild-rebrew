@@ -5,7 +5,7 @@ extern pos14_7f4c00 gm_GameTime;
 
 
 /* ADDRESS: GOLDTL 0x0056b680 */
-void __cdecl fcn_0056b680(char* o)
+void __cdecl he_StartUeberfall(char* o)
 {
 	pos14_7f4c00* p;
 

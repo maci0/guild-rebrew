@@ -7,7 +7,7 @@ extern int d2_CurrentWindowId;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 extern char s_6a99f4[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -21,7 +21,7 @@ int __cdecl d2_CreateGebaeudeTooltip(int i)
 	int dlg;
 
 	rec = ((char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[i]);
-	dlg = fcn_00470820(0, 0, s_6a99f4);
+	dlg = d2_LoadForm(0, 0, s_6a99f4);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(0, 1);
 	if (rec[0] != 10) {

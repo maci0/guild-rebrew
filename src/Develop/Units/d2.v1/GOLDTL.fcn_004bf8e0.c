@@ -25,7 +25,7 @@ extern D2_RADIO_SLOT g_10058a0[8];
 extern int g_772900;
 #include "client_packet_builder.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -60,7 +60,7 @@ void __cdecl fcn_004bf8e0(char* p, int arg)
 	int list;
 	int i;
 
-	dlg = fcn_00470820(0, 0, s_681730);
+	dlg = d2_LoadForm(0, 0, s_681730);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x42e2);

@@ -26,7 +26,7 @@ extern double g_6640e8;
 extern float g_664144;
 
 int __cdecl gm_RandomMod(int);
-unsigned char __cdecl fcn_0045b990(int, int, int*, int*, int*);
+unsigned char __cdecl d3sm_SampleHeight(int, int, int*, int*, int*);
 int __cdecl cm_GetCommandStatus(int);
 void __cdecl cm_RequestChangeBits(int, int, int, int, int);
 int __cdecl cm_RequestChTalkAction(int, int, int, int);
@@ -78,7 +78,7 @@ unsigned int __cdecl cut_ExecuteCombatAttack(int ctx, unsigned int actorArg, int
 				goto fail;
 			if (ev.busy)
 				goto fail;
-			if (fcn_0045b990(v7, *(int*) (v9 + 0x34) + 0x4c, (int*) &actorArg, &targetEnt, &ctx) == 0)
+			if (d3sm_SampleHeight(v7, *(int*) (v9 + 0x34) + 0x4c, (int*) &actorArg, &targetEnt, &ctx) == 0)
 				goto fail;
 			if (fcn_004cec00(actorArg, targetEnt, (int*) &actorArg, &targetEnt) == 0)
 				goto fail;

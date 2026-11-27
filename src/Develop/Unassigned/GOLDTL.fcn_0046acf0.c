@@ -1,9 +1,9 @@
 #include <string.h>
 extern int g_102d028, g_102d02c, g_67d388, d2_CurrentElementId; extern char* g_1015ea0;
-char* __cdecl d3_FindTextureByName(char*); char __cdecl fcn_00444860(float, float, int, char*, float*, float*);
+char* __cdecl d3_FindTextureByName(char*); char __cdecl d3_PickObjectSurfaceUV(float, float, int, char*, float*, float*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x0046acf0 */
-int __cdecl d2_HitTestRenderableForm(int a0, int screenY, int a2, int a3, int a4)
+int __cdecl d2_HitTestRenderableForm(int screenX, int screenY, int unused2, int unused3, int unused4)
 {
 	char* q;
 	char* name;
@@ -52,7 +52,7 @@ int __cdecl d2_HitTestRenderableForm(int a0, int screenY, int a2, int a3, int a4
 			if (!obj) {
 				continue;
 			}
-			if (!fcn_00444860((float) a0, (float) screenY, 0, obj, &f1, &f2)) {
+			if (!d3_PickObjectSurfaceUV((float) screenX, (float) screenY, 0, obj, &f1, &f2)) {
 				continue;
 			}
 			goto found;
@@ -71,9 +71,9 @@ found:
 
 
 
-	a0 = *(int*) (q - 0x14) - 1;
-	p = q - 0x194 + a0 * 4;
-	for (; a0 >= 0; a0--) {
+	screenX = *(int*) (q - 0x14) - 1;
+	p = q - 0x194 + screenX * 4;
+	for (; screenX >= 0; screenX--) {
 		t = (char*) 0x1015f40 + *(int*) p * 0x3cc;
 		cnt = *(int*) (t + 0x2c);
 		list = *(int**) (t + 0x28);

@@ -22,7 +22,7 @@ void __cdecl d2_DestroyElement(int);
 int __cdecl d2_CreateChildWindow(int, int, int, int, int, int);
 void __cdecl d2_CloseWindow(int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
@@ -69,7 +69,7 @@ void __cdecl d2_ShowLoanDialog(char* p)
 		rows[i].text = -1;
 		rows[i].line = 0;
 	}
-	dialog = fcn_00470820(0, 0, "locations\\geldleihe\\geldleihe_kreditaufnehmen");
+	dialog = d2_LoadForm(0, 0, "locations\\geldleihe\\geldleihe_kreditaufnehmen");
 	d2_CenterDialogWindows(dialog);
 	d2_SetForm(dialog, 0);
 	arg = d2_CurrentWindowId * 0x3cc;

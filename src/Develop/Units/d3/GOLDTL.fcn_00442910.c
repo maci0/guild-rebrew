@@ -26,8 +26,8 @@ typedef struct Obj0442910 {
 
 Obj0442910* __cdecl d3_SpawnObject(int kind, int id);
 void __cdecl fcn_00439c00(Obj0442910* parent, Obj0442910* o);
-int __cdecl fcn_00449b60(int id);
-void __cdecl fcn_0044c200(int a, int b);
+int __cdecl d3_FindCachedModel(int id);
+void __cdecl d3_LoadModel(int a, int b);
 void __cdecl fcn_00449f90(Obj0442910* o, int z, int id);
 void __cdecl fcn_0045ce90(int* t);
 void __cdecl d3_SetNodePosition(Obj0442910* o, int a);
@@ -50,8 +50,8 @@ Obj0442910* __cdecl fcn_00442910(Obj0442910* parent, int a, int b, int id)
 	if (parent != 0) {
 		fcn_00439c00(parent, o);
 	}
-	if (fcn_00449b60(id) == 0) {
-		fcn_0044c200(id, id);
+	if (d3_FindCachedModel(id) == 0) {
+		d3_LoadModel(id, id);
 	}
 	fcn_00449f90(o, 0, id);
 	ov = o->ov;

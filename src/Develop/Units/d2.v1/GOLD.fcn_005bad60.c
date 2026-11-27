@@ -22,7 +22,7 @@ extern char s_6ac77c[];
 
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_00470820(short, short, char*);
+int __cdecl d2_LoadForm(short, short, char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl fcn_005c5da0(int, int, int, unsigned short, int);
@@ -51,7 +51,7 @@ void __cdecl d2_ShowInventoryPanel(void)
 		return;
 	}
 	fcn_0057e880(0x14, 0, 0, 0);
-	dlg = fcn_00470820(g_fb9072 - 0x158, g_fb9070 - 0x108, s_6ac77c);
+	dlg = d2_LoadForm(g_fb9072 - 0x158, g_fb9070 - 0x108, s_6ac77c);
 	d2_SetForm(dlg, 0);
 	g_f8f120[d2_CurrentWindowId].margin[0] = 0x18;
 	g_f8f120[d2_CurrentWindowId].margin[1] = 0x18;

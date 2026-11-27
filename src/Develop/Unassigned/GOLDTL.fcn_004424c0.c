@@ -14,7 +14,7 @@ extern float g_10425a0[];
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 /* ADDRESS: GOLDTL 0x004424c0 */
-float __cdecl fcn_004424c0(float* a0, float* a1, float* a2)
+float __cdecl d3_CalcFloorFogDistance(float* floor, float* camPos, float* camRot)
 {
 	float* tp;
 	float u0;
@@ -38,40 +38,40 @@ float __cdecl fcn_004424c0(float* a0, float* a1, float* a2)
 	int i;
 	int j;
 
-	u0 = a0[20] - a1[0];
-	u1 = a0[21] - a1[1];
-	u2 = a0[22] - a1[2];
-	t0 = u0*a2[0] + u2*a2[8] + u1*a2[4];
-	t1 = u0*a2[1] + u2*a2[9] + u1*a2[5];
-	t2 = u2*a2[10] + u1*a2[6] + u0*a2[2];
-	c0 = a2[4]*0.0f;
-	plane[0][0] = (a2[0]*0.0f - a2[8]*g_6628a0) + c0;
-	c1 = a2[5]*0.0f;
-	plane[0][1] = (a2[1]*0.0f - a2[9]*g_6628a0) + c1;
-	c2 = a2[6]*0.0f;
-	plane[0][2] = (a2[2]*0.0f - a2[10]*g_6628a0) + c2;
+	u0 = floor[20] - camPos[0];
+	u1 = floor[21] - camPos[1];
+	u2 = floor[22] - camPos[2];
+	t0 = u0*camRot[0] + u2*camRot[8] + u1*camRot[4];
+	t1 = u0*camRot[1] + u2*camRot[9] + u1*camRot[5];
+	t2 = u2*camRot[10] + u1*camRot[6] + u0*camRot[2];
+	c0 = camRot[4]*0.0f;
+	plane[0][0] = (camRot[0]*0.0f - camRot[8]*g_6628a0) + c0;
+	c1 = camRot[5]*0.0f;
+	plane[0][1] = (camRot[1]*0.0f - camRot[9]*g_6628a0) + c1;
+	c2 = camRot[6]*0.0f;
+	plane[0][2] = (camRot[2]*0.0f - camRot[10]*g_6628a0) + c2;
 	plane[0][3] = plane[0][2]*t2 + plane[0][1]*t1 + plane[0][0]*t0;
-	v0 = a2[8]*0.0f + c0;
-	plane[1][0] = v0 + a2[0];
-	v1 = a2[9]*0.0f + c1;
-	plane[1][1] = v1 + a2[1];
-	v2 = a2[10]*0.0f + c2;
-	plane[1][2] = v2 + a2[2];
+	v0 = camRot[8]*0.0f + c0;
+	plane[1][0] = v0 + camRot[0];
+	v1 = camRot[9]*0.0f + c1;
+	plane[1][1] = v1 + camRot[1];
+	v2 = camRot[10]*0.0f + c2;
+	plane[1][2] = v2 + camRot[2];
 	plane[1][3] = plane[1][2]*t2 + plane[1][1]*t1 + plane[1][0]*t0;
-	k = (float) (*(int*) a0 - 4);
-	u0 = (a0[20] + k*a0[24] + k*a0[28]) - a1[0];
-	u1 = (a0[21] + k*a0[25] + k*a0[29]) - a1[1];
-	u2 = (a0[22] + k*a0[26] + k*a0[30]) - a1[2];
-	t0 = u0*a2[0] + u2*a2[8] + u1*a2[4];
-	t1 = u0*a2[1] + u2*a2[9] + u1*a2[5];
-	t2 = u2*a2[10] + u1*a2[6] + u0*a2[2];
-	plane[2][0] = v0 - a2[0]*g_6628a0;
-	plane[2][1] = v1 - a2[1]*g_6628a0;
-	plane[2][2] = v2 - a2[2]*g_6628a0;
+	k = (float) (*(int*) floor - 4);
+	u0 = (floor[20] + k*floor[24] + k*floor[28]) - camPos[0];
+	u1 = (floor[21] + k*floor[25] + k*floor[29]) - camPos[1];
+	u2 = (floor[22] + k*floor[26] + k*floor[30]) - camPos[2];
+	t0 = u0*camRot[0] + u2*camRot[8] + u1*camRot[4];
+	t1 = u0*camRot[1] + u2*camRot[9] + u1*camRot[5];
+	t2 = u2*camRot[10] + u1*camRot[6] + u0*camRot[2];
+	plane[2][0] = v0 - camRot[0]*g_6628a0;
+	plane[2][1] = v1 - camRot[1]*g_6628a0;
+	plane[2][2] = v2 - camRot[2]*g_6628a0;
 	plane[2][3] = plane[2][2]*t2 + plane[2][1]*t1 + plane[2][0]*t0;
-	plane[3][0] = a2[0]*0.0f + c0 + a2[8];
-	plane[3][1] = a2[1]*0.0f + c1 + a2[9];
-	plane[3][2] = a2[2]*0.0f + c2 + a2[10];
+	plane[3][0] = camRot[0]*0.0f + c0 + camRot[8];
+	plane[3][1] = camRot[1]*0.0f + c1 + camRot[9];
+	plane[3][2] = camRot[2]*0.0f + c2 + camRot[10];
 	plane[3][3] = plane[3][2]*t2 + plane[3][1]*t1 + plane[3][0]*t0;
 	mn = MIN(plane[0][3], MIN(plane[1][3], MIN(plane[2][3], plane[3][3])));
 	best = 1e10;

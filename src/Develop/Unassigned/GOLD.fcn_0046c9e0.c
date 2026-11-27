@@ -1,6 +1,6 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 extern GuiEnt** g_006ed964;
-int __cdecl fcn_00468850(void);
+int __cdecl d2_FindFreeElementSlot(void);
 
 /* ADDRESS: GOLD 0x0046c9e0 */
 int __cdecl fcn_0046c9e0(void)
@@ -9,7 +9,7 @@ int __cdecl fcn_0046c9e0(void)
 	int i;
 	GuiEnt* element;
 
-	index = fcn_00468850();
+	index = d2_FindFreeElementSlot();
 	if (index == -1) {
 		return index;
 	}

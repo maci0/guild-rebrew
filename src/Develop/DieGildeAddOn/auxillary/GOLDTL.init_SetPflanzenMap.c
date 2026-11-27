@@ -8,7 +8,7 @@ extern char s_6815c8[];
 extern char s_7e1ae0[];
 
 extern void* __cdecl plt_FindPlantInfo(int);
-extern void* __cdecl fcn_004488e0(char*, int, int);
+extern void* __cdecl d3_LoadObjectFile(char*, int, int);
 extern void __cdecl ReportClientMessage(char*);
 extern void __cdecl d3_SetNodePosition(void*, float*);
 
@@ -39,7 +39,7 @@ void __cdecl init_SetPflanzenMap(char* a0, int a1)
 			n = 1;
 		sprintf(b1, s_681608, s_7e1ae0, info + 2, n);
 	}
-	obj = (char*) fcn_004488e0(b1, 0, 0);
+	obj = (char*) d3_LoadObjectFile(b1, 0, 0);
 	if (obj == NULL) {
 		sprintf(b2, s_6815c8, b1);
 		ReportClientMessage(b2);

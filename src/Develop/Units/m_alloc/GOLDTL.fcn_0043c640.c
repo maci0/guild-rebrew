@@ -69,7 +69,7 @@ struct Tile {
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0043c640 */
-void __cdecl fcn_0043c640(Tile* t)
+void __cdecl d3_BuildTerrainTileMeshes(Tile* t)
 {
 	int x;
 	int y;

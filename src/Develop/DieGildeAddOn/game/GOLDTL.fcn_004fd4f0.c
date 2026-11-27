@@ -28,7 +28,7 @@ typedef struct
 	int count;
 	int total;
 	char* who;
-} fcn_004fd4f0_Out;
+} PREDIGT_RESULT;
 
 extern PREDIGT_ENTITY g_7f4ca0[];
 extern char g_773d75;
@@ -45,7 +45,7 @@ float __cdecl gm_CalcSkillDuelScore(PREDIGT_ENTITY* a, PREDIGT_ENTITY* b, int k)
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 
 /* ADDRESS: GOLDTL 0x004fd4f0 */
-int __cdecl gm_ApplyPredigtCollection(char* building, fcn_004fd4f0_Out* out)
+int __cdecl gm_ApplyPredigtCollection(char* building, PREDIGT_RESULT* out)
 {
 	float mult;
 	int count;

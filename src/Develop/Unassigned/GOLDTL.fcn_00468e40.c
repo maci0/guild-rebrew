@@ -18,8 +18,8 @@ typedef struct Glyph {
 
 void __cdecl d2_SelectFont(int font);
 Glyph* __cdecl fcn_0047b620(char* font, int c);
-void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
-void __cdecl fcn_0047a040(int a, int b, int c, int d);
+void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, char* font, int c);
+void __cdecl d2_SetClipRect(int a, int b, int c, int d);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, int surf, char* text, int flags);
 
 /* ADDRESS: GOLDTL 0x00468e40 */
@@ -65,15 +65,15 @@ void __cdecl d2_DrawTextButton(int slotIndex, int surface)
 	if (*(int*) &((D2_CONTROL_TL*)slot)->value_03c != 0) {
 		glyphBase = 3;
 	}
-	fcn_0047cba0(*(int*) &((D2_CONTROL_TL*)slot)->x, *(int*) &((D2_CONTROL_TL*)slot)->y, surface, font, glyphBase);
-	fcn_0047cba0((*(int*) &((D2_CONTROL_TL*)slot)->width - rightGlyph->w) + *(int*) &((D2_CONTROL_TL*)slot)->x,
+	d2_DrawSpriteFromSet(*(int*) &((D2_CONTROL_TL*)slot)->x, *(int*) &((D2_CONTROL_TL*)slot)->y, surface, font, glyphBase);
+	d2_DrawSpriteFromSet((*(int*) &((D2_CONTROL_TL*)slot)->width - rightGlyph->w) + *(int*) &((D2_CONTROL_TL*)slot)->x,
 	    *(int*) &((D2_CONTROL_TL*)slot)->y, surface, font, glyphBase + 1);
 
-	fcn_0047a040(*(int*) &((D2_CONTROL_TL*)slot)->x + leftGlyph->w - 1, g_7725fc, *(int*) &((D2_CONTROL_TL*)slot)->x + leftGlyph->w + innerWidth, d2_ClipBottom);
+	d2_SetClipRect(*(int*) &((D2_CONTROL_TL*)slot)->x + leftGlyph->w - 1, g_7725fc, *(int*) &((D2_CONTROL_TL*)slot)->x + leftGlyph->w + innerWidth, d2_ClipBottom);
 	i = 0;
 	if (0.0 < (double) (innerWidth / middleGlyph->w) + 0.5) {
 		do {
-			fcn_0047cba0(middleGlyph->w * i + leftGlyph->w + *(int*) &((D2_CONTROL_TL*)slot)->x,
+			d2_DrawSpriteFromSet(middleGlyph->w * i + leftGlyph->w + *(int*) &((D2_CONTROL_TL*)slot)->x,
 			    *(int*) &((D2_CONTROL_TL*)slot)->y, surface, font, glyphBase + 2);
 			i++;
 		} while ((double) i < (double) (innerWidth / middleGlyph->w) + 0.5);

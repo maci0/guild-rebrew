@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00465920 */
-int __cdecl fcn_00465920(void)
+int __cdecl d2_FindFreeElementSlot(void)
 {
 	int i;
 	char* p;

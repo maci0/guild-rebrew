@@ -18,7 +18,7 @@ void __cdecl StopSonnenstrahlen(char* objekt, int phase)
     SonnenstrahlenStartZeit = g_6b7fac;
     SonnenstrahlenPhase = phase;
 }
-void __cdecl fcn_00418860(char*);
+void __cdecl d3_UpdateSunRays(char*);
 
 #include "../../Units/d3/d3_camera.h"
 char* g_6b5cf8 = 0;
@@ -66,7 +66,7 @@ char* __cdecl CreateSonnenstrahlen(void)
 	g_6b5cf8[0x217] &= ~1;
 #endif
 	StartSonnenstrahlen(g_6b5cf8);
-	fcn_00418860(g_6b5cf8);
+	d3_UpdateSunRays(g_6b5cf8);
 	return g_6b5cf8;
 }
 unsigned char _dpad_67754c[280] = {

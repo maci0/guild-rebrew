@@ -1,9 +1,9 @@
 extern char* g_104049c;
 
-char __cdecl fcn_0045d040(char* a);
+char __cdecl d3_ReloadTexture(char* a);
 
 /* ADDRESS: GOLDTL 0x0045d090 */
-char __cdecl fcn_0045d090(char* a, int v)
+char __cdecl d3_SetTextureFormatAndReload(char* a, int v)
 {
 	if (a != 0) {
 		if ((a[0x54] & 2) != 0) {
@@ -11,7 +11,7 @@ char __cdecl fcn_0045d090(char* a, int v)
 		}
 		if (*(int*) (a + 0x60) != v) {
 			*(int*) (a + 0x60) = v;
-			return fcn_0045d040(a);
+			return d3_ReloadTexture(a);
 		}
 	}
 	return 0;

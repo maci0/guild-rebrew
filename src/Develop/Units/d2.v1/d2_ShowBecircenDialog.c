@@ -5,7 +5,7 @@ extern int g_100f1dc;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
-void* __cdecl fcn_00470820(int a, int b, char* name);
+void* __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a);
@@ -43,7 +43,7 @@ int __cdecl d2_ShowBecircenDialog(int entity)
         fcn_00526120(buf, 0);
         return 0;
     }
-    dlg = (int) fcn_00470820(0, 0, "privillegien\\becircen");
+    dlg = (int) d2_LoadForm(0, 0, "privillegien\\becircen");
     d2_SetOverlayAnimation(0, 0);
     d2_CenterDialogWindows(dlg);
     d2_SetForm(dlg, 1);

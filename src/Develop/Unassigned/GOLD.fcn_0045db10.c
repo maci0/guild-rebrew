@@ -1,12 +1,12 @@
-int __cdecl fcn_0045da90(int);
+int __cdecl d3_DestroySky(int);
 
-void __cdecl fcn_0045db10(void)
+void __cdecl d3_DestroyActiveSky(void)
 {
 	int h;
 
 	h = *(int*) 0x633dd4;
 	if (h != 0) {
-		fcn_0045da90(h);
+		d3_DestroySky(h);
 		*(int*) 0x633dd4 = 0;
 	}
 }

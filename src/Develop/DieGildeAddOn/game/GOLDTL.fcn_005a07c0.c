@@ -25,7 +25,7 @@ void __cdecl fcn_005c0020(char*);
 void __cdecl fcn_005a02b0(char*);
 void __cdecl d2_OpenSpionageTargetPicker(char*);
 void __cdecl d2_ShowWeinkellerDialog(char*);
-void __cdecl fcn_0059fe60(char*);
+void __cdecl d2_ShowGeliebteDialog(char*);
 
 void __cdecl d2_RunCharacterActionsHud(char* e, int mode)
 {
@@ -70,7 +70,7 @@ void __cdecl d2_RunCharacterActionsHud(char* e, int mode)
 				d2_ShowWeinkellerDialog(e);
 			}
 		} else if (g_774808 != 0 && g_14cf950 == 0x2d) {
-			fcn_0059fe60(e);
+			d2_ShowGeliebteDialog(e);
 		}
 	}
 }

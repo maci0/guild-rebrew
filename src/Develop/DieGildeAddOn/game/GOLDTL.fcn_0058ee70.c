@@ -35,7 +35,7 @@ extern int g_14b5674;
 extern int g_665f78[];
 
 void* __cdecl FindSlotEntryFiltered(int, char*, unsigned char*, void*, int);
-int __cdecl fcn_004f1790(int, void*);
+int __cdecl gm_GetEntitySlotIndex(int, void*);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 int __cdecl d2_CreateRentAGraveDialog(int*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
@@ -62,7 +62,7 @@ void __cdecl d2_RunSeanceAction(char* e)
 	if (rec != 0) {
 		dlg.rec = (char*) rec;
 		dlg.rec_id = *(int*) rec;
-		v = (unsigned char) fcn_004f1790(*(int*) (e + 0x65), rec);
+		v = (unsigned char) gm_GetEntitySlotIndex(*(int*) (e + 0x65), rec);
 		dlg.rec_state = v;
 		io_FormatTextBuffer(text, 0x4107, g_665f78[*(int*) rec]);
 		if (!d2_CreateRentAGraveDialog((int*) &dlg, g_14b5650)) {

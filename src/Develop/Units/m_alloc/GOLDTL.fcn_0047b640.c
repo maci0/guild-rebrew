@@ -44,7 +44,7 @@ extern int g_77260c;
 extern int g_772610;
 extern RGB_COLOR g_100f1a0;
 
-Tiles* __cdecl fcn_0047abd0(int, int);
+Tiles* __cdecl d2_AllocShapeBuffer(int, int);
 Tex* __cdecl fcn_004770a0(TexDesc* d, int fmt);
 void __cdecl fcn_00476620(int, int, int, int, Img*, int, int, Tex*);
 int __cdecl d2_LockSurface(Tex*);
@@ -80,7 +80,7 @@ Tiles* __cdecl fcn_0047b640(int x, int y, int w, int h, Img* img, int size)
 	cols = (int) (w / (float) tile + 0.99f);
 	rows = (int) (h / (float) tile + 0.99f);
 	cells = cols * rows;
-	res = fcn_0047abd0(cells, cells);
+	res = d2_AllocShapeBuffer(cells, cells);
 	res->w = (short) w;
 	res->h = (short) h;
 	res->x = 0;

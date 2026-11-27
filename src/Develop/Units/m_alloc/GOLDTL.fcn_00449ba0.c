@@ -52,9 +52,9 @@ typedef struct {
 	Set* set;
 } Ent;
 
-Mesh* __cdecl fcn_00449b60(int);
+Mesh* __cdecl d3_FindCachedModel(int);
 void* __cdecl m_alloc(unsigned int, const char*);
-void __cdecl fcn_0045c310(int, int);
+void __cdecl d3_AddRefTexture(int, int);
 void* __cdecl fcn_004382e0(Ent*);
 
 /*
@@ -98,7 +98,7 @@ void __cdecl fcn_00449ba0(Ent* e, Obj* o, int id)
 	Mesh* m;
 	int i;
 
-	m = fcn_00449b60(id);
+	m = d3_FindCachedModel(id);
 	if (m == 0) {
 		return;
 	}
@@ -111,7 +111,7 @@ void __cdecl fcn_00449ba0(Ent* e, Obj* o, int id)
 	for (i = 0; i < m->count; i++) {
 		o->cur[i] = m->tex[i];
 		if (o->cur[i] != 0) {
-			fcn_0045c310(o->cur[i], 1);
+			d3_AddRefTexture(o->cur[i], 1);
 		}
 	}
 	copy0(o->cur + m->count, o->cur, m->count * 4);

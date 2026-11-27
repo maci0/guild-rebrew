@@ -8,7 +8,7 @@ extern int g_774654;
 
 
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -41,7 +41,7 @@ void __cdecl d2_RunFireExtinguishDialog(char* e)
 	float p;
 
 	id = *(int*) (e + 1);
-	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Brand_loeschen");
+	win = d2_LoadForm(0, 0, "Panel\\Gebaeude_Brand_loeschen");
 	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 1);
 	io_AppendText(0x17e4, e);

@@ -7,11 +7,11 @@ int __cdecl he_StartHandlungSearch(int, int, int, int, int);
 void __cdecl d3snd_QueueSound(int, int, char*, int, int);
 void __cdecl fcn_00526120(char*, int);
 int __cdecl fcn_005bdc30(int, int*, int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl fcn_00472380(int, int, int, int);
@@ -30,7 +30,7 @@ void __cdecl d3_EndCameraAndUiMode(void);
  * it here instead of overriding the locked CFLAGS. */
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0058dbe0 */
-void __cdecl fcn_0058dbe0(int a0)
+void __cdecl d2_OpenFriedhofFogDialog(int building)
 {
 	int query[0x14];
 	char text[1024];
@@ -48,7 +48,7 @@ void __cdecl fcn_0058dbe0(int a0)
 	char* fill;
 
 	io_FormatTextBuffer(text, 0x40c8, 0x40b6);
-	if (he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (a0 + 1))) {
+	if (he_StartHandlungSearch(2, 0, 0x90, 3, *(int*) (building + 1))) {
 		d3snd_QueueSound(0xffffffff, 0, (char*) 0x6a9780, 0, 100);
 		fcn_00526120(text, 0);
 		return;
@@ -87,11 +87,11 @@ void __cdecl fcn_0058dbe0(int a0)
 		d3_EndCameraAndUiMode();
 		return;
 	}
-	dialogId = fcn_00470820(0, 0, (char*) 0x6a9768);
+	dialogId = d2_LoadForm(0, 0, (char*) 0x6a9768);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dialogId);
 	d2_SetForm(dialogId, 0);
-	fcn_005340f0(*(int*) &d2_CurrentWindowId);
+	d2_InitWindowBounds(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(dialogId, 1);
 	io_AppendText(0x40b7, 0x40b6, *(unsigned short*) (rec + 0x27), rec);
 	firstControl = d2_AddWindowValueGauge(100, 0xa0, 200, 0, 2, 0x7b, 0x82,
@@ -132,7 +132,7 @@ void __cdecl fcn_0058dbe0(int a0)
 					((char*) req)[4] = (char) 0x90;
 					((char*) req)[0x36] = (char) 2;
 					*(int*) ((char*) req + 8) = *(int*) (g_774970 * 0x21c + (unsigned long)&g_7f4ca4);
-					*(int*) ((char*) req + 0xc) = *(int*) (a0 + 1);
+					*(int*) ((char*) req + 0xc) = *(int*) (building + 1);
 					*(pos14_7f4c00*) ((char*) req + 0x28) = gm_GameTime;
 					*(int*) ((char*) req + 0x5c) = d2_GetControlValue(firstControl);
 					*(int*) ((char*) req + 0x60) = d2_GetControlValue(secondControl);

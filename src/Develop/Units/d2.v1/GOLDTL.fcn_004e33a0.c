@@ -26,7 +26,7 @@ void* __cdecl cut_CreateCharacterAtPosition(char* name, int* b);
 void __cdecl ch_SetToDummy(int a, int b);
 int __cdecl gm_SelectEntityHeadSet(unsigned short a);
 void* __cdecl evt_StartGfxScript(char* name, int a);
-void __cdecl fcn_004e4b40(int id, int bank, char* label, int a, int b);
+void __cdecl d3snd_QueueSoundIfAllowed(int id, int bank, char* label, int a, int b);
 void __cdecl d2_SetFormVisibility(int dlg, int a);
 void __cdecl fcn_00471d80(int dlg, int a);
 void __cdecl cut_WaitForScript(int a);
@@ -194,10 +194,10 @@ void __cdecl cut_RunAuction(int* arg)
 	cand = (int) evt_StartGfxScript("cutscenes\\auktion\\Enterfly_auktion.esc",
 	    0x6b5c60);
 	fcn_0064d41a(temp, (char*) 0x68d3b8, label);
-	fcn_004e4b40(-7, bank_intro, temp, -1, 0);
+	d3snd_QueueSoundIfAllowed(-7, bank_intro, temp, -1, 0);
 	fcn_0064d41a(temp, (char*) 0x68d3a0, name);
-	fcn_004e4b40(result, bank_intro, temp, cut_RandMod(3), 500);
-	dlg = (int) fcn_00470820(0, 0, "cutscenes\\pacht_main");
+	d3snd_QueueSoundIfAllowed(result, bank_intro, temp, cut_RandMod(3), 500);
+	dlg = (int) d2_LoadForm(0, 0, "cutscenes\\pacht_main");
 	if (g_772f3c != 0)
 		d2_SetFormVisibility(dlg, 0);
 	fcn_00471d80(dlg, 3);
@@ -214,7 +214,7 @@ void __cdecl cut_RunAuction(int* arg)
 		bestFrom = start;
 		cut_RunTurnRound((int) arg, states);
 		if (start > 6 && cut_RandMod(3) != 0)
-			fcn_004e4b40(cut_RandMod(4) != 0 ? -4 : -2,
+			d3snd_QueueSoundIfAllowed(cut_RandMod(4) != 0 ? -4 : -2,
 			    bank_comments, "_VERSTEIGERUNG_KOMMENTARE",
 			    cut_RandMod(6), cut_RandMod(0x200) + 0x32);
 		bidCount = 0;
@@ -239,11 +239,11 @@ void __cdecl cut_RunAuction(int* arg)
 		} else if (start > 6) {
 			n = (int) ((unsigned) n >> 1);
 			if (bidCount < n) {
-				fcn_004e4b40(result, bank_bids,
+				d3snd_QueueSoundIfAllowed(result, bank_bids,
 				    "_VERSTEIGERUNG_GEBOTE",
 				    cut_RandMod(4) + 2, 500);
 			} else {
-				fcn_004e4b40(result, bank_bids,
+				d3snd_QueueSoundIfAllowed(result, bank_bids,
 				    "_VERSTEIGERUNG_GEBOTE",
 				    cut_RandMod(2), 500);
 			}
@@ -258,7 +258,7 @@ void __cdecl cut_RunAuction(int* arg)
 		start--;
 	}
 	if (besti < 0) {
-		fcn_004e4b40(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 7,
+		d3snd_QueueSoundIfAllowed(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 7,
 		    200);
 		d2_SetForm(dlg, 0);
 		io_AppendText((void*) 0x1aa5, (void*) building);
@@ -269,7 +269,7 @@ void __cdecl cut_RunAuction(int* arg)
 			    *(int*) (gm_CityEntity + 4));
 		}
 	} else {
-		fcn_004e4b40(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 6,
+		d3snd_QueueSoundIfAllowed(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 6,
 		    200);
 		d2_SetForm(dlg, 0);
 		io_AppendText((void*) 0x1aa4,
@@ -315,7 +315,7 @@ void __cdecl cut_RunAuction(int* arg)
 			}
 		}
 	}
-	fcn_004e4b40(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 8, 500);
+	d3snd_QueueSoundIfAllowed(result, bank_bids, "_VERSTEIGERUNG_GEBOTE", 8, 500);
 	cand = (int) evt_StartGfxScript("cutscenes\\auktion\\Auktion_Outro.esc",
 	    0x6b5c60);
 	cut_WaitForScript(cand);

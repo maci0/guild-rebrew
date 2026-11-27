@@ -1,4 +1,4 @@
-int __cdecl d2_AddElementToWindow(int, int, int, int); int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_AddElementToWindow(int, int, int, int); int __cdecl d2_LoadForm(int, int, char*);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
@@ -11,11 +11,11 @@ int __cdecl d2_CheckActionBlocker(void*, int);
 int __cdecl fcn_00526120(void*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl main_RunFrameLoop(void*, int);
 extern int g_100f1dc; extern char * g_1015ea0; extern int d2_CurrentWindowId; extern unsigned short g_774970; extern char g_7f4ca0[];
 /* ADDRESS: GOLDTL 0x005aa480 */
-void __cdecl fcn_005aa480(void)
+void __cdecl d2_RunZunftPreismanipulationDialog(void)
 {
 	int sel[3];
 	int pos[7][2] = {
@@ -45,11 +45,11 @@ void __cdecl fcn_005aa480(void)
 		d2_CheckActionBlocker((void*) ((unsigned long)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned int) *(unsigned short*) &g_774970]), 3);
 		return;
 	}
-	h = fcn_00470820(0, 0, "LOCATIONS\\ZUNFTHAUS\\LEVEL1");
+	h = d2_LoadForm(0, 0, "LOCATIONS\\ZUNFTHAUS\\LEVEL1");
 	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 0);
-	fcn_005340f0(*(int*) &d2_CurrentWindowId);
+	d2_InitWindowBounds(*(int*) &d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x1643);
 	d2_SetForm(h, 2);
@@ -117,7 +117,7 @@ void __cdecl fcn_005aa480(void)
 				} while (j < 7);
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005aa480, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_RunZunftPreismanipulationDialog, 0x677c7) != 0);
 	d2_DestroyForm(h);
 	d3_EndCameraAndUiMode();
 }

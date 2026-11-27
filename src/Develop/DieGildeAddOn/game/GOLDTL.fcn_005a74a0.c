@@ -21,7 +21,7 @@ extern unsigned short g_7f4c04;
 extern int g_7e2700;
 
 
-int __cdecl fcn_00506380(int id, unsigned char* store, int a, int b);
+int __cdecl gm_GetEntityUiFlags(int id, unsigned char* store, int a, int b);
 int __cdecl gm_IsGebaeudeOpen(unsigned char* p, int* lo, int* hi);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_005263d0(char*, char*, int);
@@ -41,7 +41,7 @@ int __cdecl gm_CanEnterGebaeude(unsigned char* p)
 
 	tbl = (unsigned char*)&((BUILDING_PROTOTYPE*)lpGebaeudePROT)[p[0]];
 	kind = gm_GetBuildingTypeCategory(p[0]);
-	r = fcn_00506380(g_774970, p, 0, 0);
+	r = gm_GetEntityUiFlags(g_774970, p, 0, 0);
 	if ((*(unsigned short*) (p + 0x5a) & 0x400) != 0) {
 		return 0;
 	}

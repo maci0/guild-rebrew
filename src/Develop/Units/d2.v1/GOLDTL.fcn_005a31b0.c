@@ -12,7 +12,7 @@ extern char g_6a40b0[];
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_AnimateCameraToNode(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
@@ -62,7 +62,7 @@ void __cdecl d2_ShowCityTradeInfoDialog(char* building)
 				if (idx != -1) {
 					d2_DestroyForm(idx);
 				}
-				idx = fcn_00470820(0, 0, "Handel\\Handel_Stadtinfo");
+				idx = d2_LoadForm(0, 0, "Handel\\Handel_Stadtinfo");
 				d2_CenterDialogWindows(idx);
 				d2_SetForm(idx, 0);
 				win = d2_CurrentWindowId * 0x3cc;

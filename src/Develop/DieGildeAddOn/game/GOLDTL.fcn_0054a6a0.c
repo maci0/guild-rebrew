@@ -7,15 +7,15 @@ typedef struct {
 	char pad3;
 	int h;
 	char pad8[0x21c - 8];
-} Rec54a6a0;
+} PredigtEntityRecord;
 
 typedef struct {
 	int a;
 	int b;
 	char* who;
-} Out54a6a0;
+} PredigtCollectionResult;
 
-extern Rec54a6a0 g_7f4ca0[];
+extern PredigtEntityRecord g_7f4ca0[];
 extern unsigned char g_773d75;
 
 void __cdecl he_FreeAction(int);
@@ -26,15 +26,15 @@ void __cdecl gm_AddTime(int, int, int, int);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_RandomMod(int);
 int __cdecl gm_LookupEntityRecordById(int);
-void __cdecl he_NotifyThemaPredigt(Rec54a6a0*, int, int);
+void __cdecl he_NotifyThemaPredigt(PredigtEntityRecord*, int, int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-int __cdecl gm_ApplyPredigtCollection(int, Out54a6a0*);
+int __cdecl gm_ApplyPredigtCollection(int, PredigtCollectionResult*);
 int __cdecl io_FormatTextBuffer(char*, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
-int __cdecl ai_SelectThemaPredigt(Rec54a6a0*, int);
+int __cdecl ai_SelectThemaPredigt(PredigtEntityRecord*, int);
 
 /* ADDRESS: GOLDTL 0x0054a6a0 */
 void __cdecl he_RunPredigt(int action)
@@ -43,7 +43,7 @@ void __cdecl he_RunPredigt(int action)
 	int v3;
 	int v4;
 	int entity;
-	Out54a6a0 pair;
+	PredigtCollectionResult pair;
 	char message[256];
 	char v1;
 

@@ -137,7 +137,7 @@ int __cdecl fcn_00525b40(void)
 		cm_LoadBuf = 0;
 		return 0;
 	}
-	if (!(hdr[1] & 4) && fcn_005222a0(f) == 0) {
+	if (!(hdr[1] & 4) && d3_LoadSceneAndTerrain(f) == 0) {
 		CloseVfsStream(f);
 		m_FreeTracked(cm_LoadBuf);
 		cm_LoadBuf = 0;

@@ -46,9 +46,9 @@ int __cdecl abs(int);
 #pragma intrinsic(fabs, abs)
 
 char __cdecl d3_ToggleSceneObjFlag(char* e, int flag);
-void __cdecl fcn_004463f0(int a, int b, float v);
+void __cdecl d3_InterpolateSceneFog(int a, int b, float v);
 void __cdecl d3_VisitSceneObjects(int list, int a, int mask, char (__cdecl* fn)(char*, int), int arg);
-void __cdecl fcn_00445f50(int idx, float frac, float w, int changed);
+void __cdecl d3_BlendSceneLightingPreset(int idx, float frac, float w, int changed);
 
 /* Day-light phase from the clock. v is reused for the truncated phase so it
  * shares the dead parameter slot, and the 0.2 test is written !(d > 0.2)
@@ -84,16 +84,16 @@ void __cdecl fcn_0052a960(Stamp* now)
 		light = g_7e4548[0x2a] * 0.003921569f;
 	}
 	if (((Slot_52a960*)g_1043340)[d3_CurrentContextIndex].f2c != 0 && (unsigned int) g_6b7fac < (unsigned int) (g_7e4468 + g_7e446c)) {
-		fcn_004463f0(0, 2, 1.0f);
+		d3_InterpolateSceneFog(0, 2, 1.0f);
 		g_77472c = 1;
 		return;
 	}
 	if (g_77472c != 0) {
-		fcn_004463f0(0, 1, light);
+		d3_InterpolateSceneFog(0, 1, light);
 		g_77472c = 0;
 	}
 	if ((fabs(g_7e42e0 - 1.0f) < 0.1 && abs(g_7e4380 - v) < 10 && g_7e2a60 == d3_CurrentContextIndex) || d3_ActiveCameraAnimation != 0) {
-		fcn_004463f0(0, 1, light);
+		d3_InterpolateSceneFog(0, 1, light);
 		return;
 	}
 	if (!(fabs(g_7e42e0 - 1.0f) > 0.2) && abs(g_7e4380 - v) < 100) {
@@ -120,6 +120,6 @@ void __cdecl fcn_0052a960(Stamp* now)
 	g_774728 = idx;
 	frac = x - v;
 	g_6a2bec = frac;
-	fcn_00445f50(idx, frac, 1.0f, changed);
-	fcn_004463f0(0, 1, light);
+	d3_BlendSceneLightingPreset(idx, frac, 1.0f, changed);
+	d3_InterpolateSceneFog(0, 1, light);
 }

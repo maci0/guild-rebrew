@@ -17,7 +17,7 @@ float* __stdcall D3DXMatrixTranspose(float*, const float*);
  * camera basis, shade it into a byte, then lock the patch vertex buffer
  * and write two triangles for every visible cell. */
 /* ADDRESS: GOLDTL 0x00459050 */
-void __cdecl fcn_00459050(int self)
+void __cdecl d3_RebuildSkyDomeMesh(int self)
 {
 	unsigned char* p;
 	float* src;

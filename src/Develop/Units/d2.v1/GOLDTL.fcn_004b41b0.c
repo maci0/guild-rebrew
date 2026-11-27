@@ -8,7 +8,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern int main_LoopFlags;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -41,7 +41,7 @@ int __cdecl fcn_004b41b0(void)
 
 	result = 0;
 	b6 = -1;
-	h = fcn_00470820(0, 0, g_68116c);
+	h = d2_LoadForm(0, 0, g_68116c);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	t = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca, 0x1acb, 0x1acc);

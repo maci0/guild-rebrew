@@ -7,12 +7,12 @@ int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl msx_StartMusicIfAllowed(char* s);
 int __cdecl sb_LoadLocalizedSampleBank(char* s, int a);
 void __cdecl fcn_004e4730(char* s);
-void __cdecl fcn_004e4b60(char* s);
-void __cdecl fcn_00445f50(int a, int b, float f, int c);
-void __cdecl fcn_004463f0(int a, int b, float f);
+void __cdecl d3_InitSkyLayer(char* s);
+void __cdecl d3_BlendSceneLightingPreset(int a, int b, float f, int c);
+void __cdecl d3_InterpolateSceneFog(int a, int b, float f);
 int __cdecl evt_StartGfxScript(char* s, void* p);
 int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
-void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
+void __cdecl d3snd_QueueSoundIfAllowed(int a, int b, char* s, int c, int d);
 void __cdecl main_RunFrameLoop(int a, int b);
 void __cdecl sb_PlayVoice(int a, char* s, int b, int c, int d, int e, int f);
 int __cdecl gm_CountChildren(void* p, void* buf);
@@ -24,7 +24,7 @@ void __cdecl cm_AppendPacketFieldDelta(int a, int b, int c, void* p);
 void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeBits(int a, int b, int c, int d, int e);
 void __cdecl main_ExitToFrameHandler(int p);
-void __cdecl fcn_00509fc0(void* a, void* b, int c);
+void __cdecl gm_LiquidateEntityAssets(void* a, void* b, int c);
 void __cdecl cut_FadeToBlack(void);
 void __cdecl evt_StopScriptIfActive(void* h);
 void __cdecl cut_WaitForScript(void* h);
@@ -75,18 +75,18 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 	msx_StartMusicIfAllowed((char*) 0x68bd14);
 	handle = sb_LoadLocalizedSampleBank((char*) 0x68d2d0, 1);
 	fcn_004e4730((char*) 0x68d2c8);
-	fcn_004e4b60((char*) 0x68d2b8);
-	fcn_00445f50(state, 0, 1.0f, 1);
-	fcn_004463f0(0, 0, 0.0f);
+	d3_InitSkyLayer((char*) 0x68d2b8);
+	d3_BlendSceneLightingPreset(state, 0, 1.0f, 1);
+	d3_InterpolateSceneFog(0, 0, 0.0f);
 	xslot = evt_StartGfxScript((char*) 0x68d29c, (void*) 0x6b5c60);
 	r = cut_WaitForTimeoutOrInput(3000, 0, 0);
 	if (r == 0) {
-		fcn_004e4b40(-8, handle, (char*) 0x68d294, 0, 0);
-		fcn_004e4b40(-8, handle, (char*) 0x68d294, 2, 4000);
-		fcn_004e4b40(-8, handle, (char*) 0x68d294, 3, 3000);
-		fcn_004e4b40(-8, handle, (char*) 0x68d294, 4, 2000);
-		fcn_004e4b40(-8, handle, (char*) 0x68d294, 5, 4000);
-		fcn_004e4b40(-8, handle, (char*) 0x68d294, 6, 500);
+		d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d294, 0, 0);
+		d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d294, 2, 4000);
+		d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d294, 3, 3000);
+		d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d294, 4, 2000);
+		d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d294, 5, 4000);
+		d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d294, 6, 500);
 		state = cut_WaitForTimeoutOrInput(0x2af8, 0, 0);
 		if (state == 0) {
 			start = *(int*) 0x6b7fac;
@@ -100,9 +100,9 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 				} else {
 					f10 = 1.0f;
 				}
-				fcn_004463f0(0, 1, f10);
+				d3_InterpolateSceneFog(0, 1, f10);
 			}
-			fcn_004463f0(0, 1, 1.0f);
+			d3_InterpolateSceneFog(0, 1, 1.0f);
 			cut_WaitForTimeoutOrInput(0x2cec, 0, 0);
 		}
 	}
@@ -157,7 +157,7 @@ void __cdecl cut_PlayDeathCutscene(void* arg)
 			d2_ShowMessageBox(buf1, 0);
 			main_ExitToFrameHandler(0x5438c0);
 		} else {
-			fcn_00509fc0(obj, buf2, 1);
+			gm_LiquidateEntityAssets(obj, buf2, 1);
 			d2_ShowMessageBox(buf2, 0x10);
 		}
 	}

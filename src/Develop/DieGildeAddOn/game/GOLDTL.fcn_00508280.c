@@ -12,7 +12,7 @@ int __cdecl gm_GetKindRecord(int, S0c*);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 
 /* ADDRESS: GOLDTL 0x00508280 */
 int __cdecl gm_ApplyRandomDisease(char* entity, unsigned int* selectionOut, float* valueOut)
@@ -115,7 +115,7 @@ found:
 	cm_BeginPacketFieldDelta(entity, *(int*) (entity + 4));
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &v);
 	cm_RequestChangeAttribute();
-	f = fcn_004ff210(*(unsigned short*) entity, -cost);
+	f = gm_ApplyEntityHealthDelta(*(unsigned short*) entity, -cost);
 	if (valueOut == 0) {
 		goto fail_1;
 	}

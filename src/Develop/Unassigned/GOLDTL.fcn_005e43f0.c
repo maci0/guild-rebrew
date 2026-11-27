@@ -4,13 +4,13 @@ extern int d2_CurrentWindowId;
 
 void __cdecl ls_CaptureSavePreview(void);
 void __cdecl d2_EnterMenuScreen(void);
-int __cdecl fcn_00470820(int, int, char *);
+int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl fcn_00537320(int);
 void __cdecl fcn_00471db0(int, int);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
-void __cdecl fcn_00525ef0(void);
+void __cdecl d2_InitWindowBounds(int);
+void __cdecl d2_ResetUiInputAndBounds(void);
 int __cdecl fcn_005e3b10(int, int, int);
 int __cdecl d2_SetElementEnabled(int, int);
 void __cdecl d2_PauseTutorialUpdates(void);
@@ -39,7 +39,7 @@ void __cdecl fcn_004c39b0(void);
 void __cdecl fcn_0057e870(void);
 
 /* ADDRESS: GOLDTL 0x005e43f0 */
-void __cdecl fcn_005e43f0(void)
+void __cdecl d2_RunPauseOptionsMenu(void)
 {
     char message[0x200], preview[0x9600];
     int dialog, a, b, c, d, e, f, g, group, current, handle;
@@ -48,13 +48,13 @@ void __cdecl fcn_005e43f0(void)
     ls_CaptureSavePreview();
     memcpy(preview, (void *)0x7ea3c0, 0x9600);
     d2_EnterMenuScreen();
-    dialog = fcn_00470820(0, 0, (char *)0x6ad384);
+    dialog = d2_LoadForm(0, 0, (char *)0x6ad384);
     fcn_00537320(0x24087);
     fcn_00471db0(dialog, 1);
     fcn_00471d80(dialog, 2);
     d2_SetForm(dialog, 0);
-    fcn_005340f0(d2_CurrentWindowId);
-    fcn_00525ef0();
+    d2_InitWindowBounds(d2_CurrentWindowId);
+    d2_ResetUiInputAndBounds();
     d2_SetForm(0, 0);
     a = fcn_005e3b10(0, *(int *)0x14ac490, d2_CurrentWindowId);
     b = fcn_005e3b10(1, *(int *)0x14ac494, d2_CurrentWindowId);
@@ -79,7 +79,7 @@ void __cdecl fcn_005e43f0(void)
     saved = *(unsigned char *)0x772d10;
     *(unsigned char *)0x772d10 = 0;
     fcn_004c3a10();
-    while (main_RunFrameLoop((void *)fcn_005e43f0, 0x24087)) {
+    while (main_RunFrameLoop((void *)d2_RunPauseOptionsMenu, 0x24087)) {
         d2_UpdateRadioGroup(group);
         if (*(int *)0x14ce8e0 || *(unsigned char *)0x14cf950 == 1) *(int *)0x774654 = 1;
         if (*(int *)0x14ce8d8) {

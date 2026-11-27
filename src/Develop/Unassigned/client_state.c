@@ -2,7 +2,7 @@ extern int g_14cf900[];
 extern int g_14ce920[];
 extern short g_14ce8c0;
 #include "Develop/DieGildeAddOn/game/game_data.h"
-void __cdecl fcn_00411fe0(void);
+void __cdecl io_PollMouseInput(void);
 
 struct cam_412610 {
 	int v[0x13];
@@ -29,7 +29,7 @@ void __cdecl fcn_004125c0(int x, int y)
 /* ADDRESS: GOLDTL 0x00412610 */
 void __cdecl fcn_00412610(void)
 {
-	fcn_00411fe0();
+	io_PollMouseInput();
 	(*(struct cam_412610*)&g_14ce8c0) = (*(struct cam_412610*)g_14cf900);
 	fcn_004124b0();
 }

@@ -13,7 +13,7 @@ typedef struct Bits8 {
 extern char* g_104049c;
 
 /* ADDRESS: GOLDTL 0x00459d00 */
-int __cdecl fcn_00459d00(char* a)
+int __cdecl d3_GetTextureMemorySize(char* a)
 {
 	int r;
 

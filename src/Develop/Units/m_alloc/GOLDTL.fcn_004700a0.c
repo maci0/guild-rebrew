@@ -84,11 +84,11 @@ extern char s_679070[];
 
 char* __cdecl m_alloc(int size, const char* tag);
 int __cdecl ReportClientMessage(const char* text);
-int __cdecl fcn_00465950(const char* name);
+int __cdecl d2_FindResourceByName(const char* name);
 int __cdecl d2_Show(int idx, char* path);
 void __cdecl fcn_00477450(void);
 void __cdecl d2_InitQuadVertexBuffer(void);
-int __cdecl fcn_0047a040(int a0, int a1, int a2, int a3);
+int __cdecl d2_SetClipRect(int a0, int a1, int a2, int a3);
 int __cdecl shp_InitRenderState(int a0, int a1);
 int __cdecl fcn_004770a0(void* info, int kind);
 void __cdecl d2_GetSurfaceDesc(int win, char* buf);
@@ -253,7 +253,7 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 	g_1040494 = a1;
 	g_1015ce0 = a0;
 	d2_ScreenHeight = screenHeight;
-	fcn_0047a040(0, 0, a1, screenHeight);
+	d2_SetClipRect(0, 0, a1, screenHeight);
 	d2_CenterX = (unsigned int) g_14ce860 >> 1;
 	d2_DialogCenterY = (unsigned int) g_14ce864 >> 1;
 	for (i = 0; i < 0x17; i++) {
@@ -289,20 +289,20 @@ int __cdecl d2_Open(int a0, int a1, int screenHeight, char* a3, char* a4)
 		}
 	}
 	d2_UnlockSurface((int) g_77256c);
-	d2_SelectFont(fcn_00465950(s_67d474));
+	d2_SelectFont(d2_FindResourceByName(s_67d474));
 	g_77253c = fcn_0047ce00(s_67d67c, 0);
 	if (g_77253c == 0) {
 		ReportClientMessage(s_67d654);
 	}
-	g_67d390 = fcn_00465950(s_67d648);
-	g_67d394 = fcn_00465950(s_67d638);
-	d2_DefaultFont = fcn_00465950(s_67d474);
-	g_67d39c = fcn_00465950(s_67d624);
-	g_67d3a0 = fcn_00465950(s_67d618);
-	g_67d3a4 = fcn_00465950(s_67d604);
-	g_67d3a8 = fcn_00465950(s_67d5fc);
-	g_67d3ac = fcn_00465950(s_67d5ec);
-	g_67d3b0 = fcn_00465950(s_67d5dc);
-	g_67d3b4 = fcn_00465950(s_67d5c8);
+	g_67d390 = d2_FindResourceByName(s_67d648);
+	g_67d394 = d2_FindResourceByName(s_67d638);
+	d2_DefaultFont = d2_FindResourceByName(s_67d474);
+	g_67d39c = d2_FindResourceByName(s_67d624);
+	g_67d3a0 = d2_FindResourceByName(s_67d618);
+	g_67d3a4 = d2_FindResourceByName(s_67d604);
+	g_67d3a8 = d2_FindResourceByName(s_67d5fc);
+	g_67d3ac = d2_FindResourceByName(s_67d5ec);
+	g_67d3b0 = d2_FindResourceByName(s_67d5dc);
+	g_67d3b4 = d2_FindResourceByName(s_67d5c8);
 	return 1;
 }

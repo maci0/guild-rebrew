@@ -9,7 +9,7 @@ void __cdecl d2_RestoreHudAfterDialog(void);
 void __cdecl d2_ConfirmUeberfall(void);
 void __cdecl sv_ClearObjectSelection(void);
 
-void __cdecl fcn_0059d020(char* a)
+void __cdecl d2_OpenUeberfallDialog(char* a)
 {
 	if (d2_CheckOwnerBlocked(a) == 0) {
 		fcn_0052a0c0(a, 0);

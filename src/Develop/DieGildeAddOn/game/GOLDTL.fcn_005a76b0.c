@@ -3,7 +3,7 @@ typedef unsigned char u8;
 typedef unsigned short u16;
 
 int __cdecl gm_CanEnterGebaeude(char*);
-void __cdecl fcn_00525ef0(void);
+void __cdecl d2_ResetUiInputAndBounds(void);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl fcn_00530510(void);
 void __cdecl fcn_005305a0(void);
@@ -35,7 +35,7 @@ void __cdecl d2_RunSabotageActionsHud(int, void*);
 void __cdecl d2_RunWeinschrankMenu(int, void*);
 void __cdecl d2_RunRhetoricActionsHud(int, void*);
 void __cdecl d2_RunSocialActionsHud(int, void*);
-void __cdecl fcn_005a0250(int, void*);
+void __cdecl d2_RunGeliebteHud(int, void*);
 void __cdecl d2_RunWirtshausTableMenu(int, void*);
 void __cdecl d2_RunTutorialSchmiedeHud(int, void*);
 void __cdecl d2_RunTischlereiInteriorHud(int, void*);
@@ -92,7 +92,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         *(int*) &g_7e2700 = 0;
         return 0;
     }
-    fcn_00525ef0();
+    d2_ResetUiInputAndBounds();
     main_RunFrameLoop((void*) 0x5a76b0, 0x20007);
     g_6a2520 = 0;
     fcn_00530510();
@@ -203,7 +203,7 @@ int __cdecl gm_RunGebaeudeVisit(char* o, int p2)
         d2_RunSocialActionsHud(*(int*)&g_7746c4, msg);
         break;
     case 0x18:
-        fcn_005a0250(*(int*)&g_7746c4, msg);
+        d2_RunGeliebteHud(*(int*)&g_7746c4, msg);
         break;
     case 0x1f:
         d2_RunWirtshausTableMenu(*(int*)&g_7746c4, msg);

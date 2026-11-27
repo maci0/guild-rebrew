@@ -8,7 +8,7 @@ extern char *__cdecl he_PickRandomSceneObject(char *);
 extern void __cdecl he_ApplyTransportSpeedModifiers(char *, char *);
 extern void *__cdecl fcn_00502cd0(int, int, ...);
 extern char *__cdecl d3sm_GetObjectSuperMap(char *);
-extern char __cdecl fcn_0045b990(char *, float *, int *, int *, float *);
+extern char __cdecl d3sm_SampleHeight(char *, float *, int *, int *, float *);
 extern void __cdecl d3_SelectSceneContext(int, int);
 extern void __cdecl d3_TransformPoint(char *, char *, float *);
 extern void __cdecl cm_SendCreateAction0x38(int, int);
@@ -66,7 +66,7 @@ void __cdecl he_TransportStadtStadt(char *transportEvent)
 			he_ApplyTransportSpeedModifiers(transportEvent, v6);
 			v7 = (int)d3sm_GetObjectSuperMap((char *)v19);
 			*(char *)(transportEvent + 0xd0) = 1;
-			fcn_0045b990((char *)v7, l_pos, &l_a, &l_b, &l_c);
+			d3sm_SampleHeight((char *)v7, l_pos, &l_a, &l_b, &l_c);
 			*(int *)(transportEvent + 0xd8) = *(int *)&l_pos[0];
 			*(int *)(transportEvent + 0xdc) = *(int *)&l_pos[1];
 			*(int *)(transportEvent + 0xe0) = *(int *)&l_pos[2];

@@ -38,7 +38,7 @@ int __cdecl fcn_00526120(int, int);
 int __cdecl d2_RunAmtsbewerbungDialog(ENTITY_RECORD*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 int __cdecl amt_RankAvailableOffices(ENTITY_RECORD*, int, Ent*, int*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl amt_SelectOfficeCandidates(ENTITY_RECORD*, int, Ent*);
@@ -84,7 +84,7 @@ void __cdecl d2_ShowOfficeApplicationDialog(void)
 		}
 		return;
 	}
-	dlg = fcn_00470820(0, 0, s_6aaebc);
+	dlg = d2_LoadForm(0, 0, s_6aaebc);
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = prev;

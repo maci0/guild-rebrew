@@ -12,7 +12,7 @@ typedef struct
 
 extern Timer14 g_9b4900[16];
 
-char __cdecl fcn_00443e10(void*, int*);
+char __cdecl d3_GetObjectScreenRect(void*, int*);
 int __cdecl fcn_0046fcd0(int x, int y, char* name);
 void __cdecl fcn_00469c40(int x, int y, int slot);
 void __cdecl d2_DestroyElement(int slot);
@@ -33,7 +33,7 @@ void __cdecl fcn_004cfca0(void)
 			continue;
 		}
 		owner = g_9b4900[i].owner;
-		if (!fcn_00443e10((void*) *(int*) (*(char**) ((char*) owner + 0x184) + 0x34), r)) {
+		if (!d3_GetObjectScreenRect((void*) *(int*) (*(char**) ((char*) owner + 0x184) + 0x34), r)) {
 			if (g_9b4900[i].handle != -1) {
 				d2_SetSlotVisibility(g_9b4900[i].handle, 0);
 			}

@@ -28,7 +28,7 @@ extern pos14_7f4c00 gm_GameTime;
 int __cdecl cm_GetCommandStatus(int id);
 void __cdecl he_FreeAction(char* t);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-void __cdecl fcn_00507130(int k, int* a, int* b);
+void __cdecl gm_GetJobTrainingAttributes(int k, int* a, int* b);
 #include "client_packet_builder.h"
 int __cdecl gm_RandomMod(int n);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, char*);
@@ -63,7 +63,7 @@ void __cdecl he_RunLevelTraining(char* t)
 	switch (*(int*) (t + 0x70)) {
 	case 1:
 		e = ((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[*(unsigned short*) (t + 8)]);
-		fcn_00507130(gm_MapEntityStatRange(*(unsigned char*) (t + 0xb0)), &a, &b);
+		gm_GetJobTrainingAttributes(gm_MapEntityStatRange(*(unsigned char*) (t + 0xb0)), &a, &b);
 		cm_BeginPacketFieldDelta((char*) e, e->entity_id);
 		c = gm_RandomMod(0x10) + 0x10;
 		cm_AppendPacketFieldValue(1, 1, a + 0x80, &c);

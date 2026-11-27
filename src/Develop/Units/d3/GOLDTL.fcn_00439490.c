@@ -17,14 +17,14 @@ extern int g_6b8064;
 
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl d3_DisposeObject(char* p);
-void __cdecl fcn_00452420(char* p);
+void __cdecl d3_FreeMeshObject(char* p);
 void __cdecl fcn_0043bcf0(int a);
 void __cdecl fcn_00459b40(int a);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl d3_ReleaseRenderVertexBuffer(void);
 #include "Develop/Units/d3/d3_animation.h"
 void __cdecl m_pool_free_all(int* p);
-void __cdecl fcn_00459bc0(void);
+void __cdecl d3_DestroySkySystem(void);
 void __cdecl d3s_ReleaseCache(void);
 void __cdecl fcn_0043bc20(void);
 void __cdecl fcn_0045c1e0(void);
@@ -50,7 +50,7 @@ void __cdecl d3_Shutdown(void)
 			}
 			g_6b8484 = 0;
 			while (d3_SceneRenderListHead != g_1040640) {
-				fcn_00452420(d3_SceneRenderListHead);
+				d3_FreeMeshObject(d3_SceneRenderListHead);
 			}
 			if (g_6b8300 != 0) {
 				fcn_0043bcf0(g_6b8300);
@@ -92,7 +92,7 @@ void __cdecl d3_Shutdown(void)
 		d3_ReleaseAnim(g_1042320, 1);
 	}
 	m_pool_free_all(&g_6b8064);
-	fcn_00459bc0();
+	d3_DestroySkySystem();
 	d3s_ReleaseCache();
 	fcn_0043bc20();
 	fcn_0045c1e0();

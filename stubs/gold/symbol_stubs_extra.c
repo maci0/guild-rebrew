@@ -38,10 +38,6 @@ unsigned char* lpGebaeudeINST = 0;
 unsigned short* lpObjekteINST = 0;
 
 /* Special forwarding stubs */
-void __cdecl fcn_00401260(int a, int b)
-{
-}
-
 
 
 
@@ -164,10 +160,6 @@ void __cdecl evt_ParseVariableAssignment(int a)
 {
 }
 
-void __cdecl fcn_00429490(char* a)
-{
-}
-
 
 
 int __cdecl fcn_0042b2f0(char* a, int b, int c)
@@ -182,10 +174,6 @@ int __cdecl fcn_0042d630(const char* name)
 
 
 
-void __stdcall fcn_0042dcd0(unsigned int a, unsigned int b, unsigned long c, unsigned long d, unsigned long e)
-{
-}
-
 void __cdecl fcn_0042dfb0(int a)
 {
 }
@@ -199,20 +187,11 @@ int __cdecl fcn_00430c50(void* a)
 
 
 
-char __cdecl fcn_004463f0(unsigned int a, unsigned int b, float t)
-{
-	return 0;
-}
-
 
 
 int __cdecl fcn_00466330(int a, int b)
 {
 	return 0;
-}
-
-void __cdecl fcn_0046c310(int a)
-{
 }
 
 void __cdecl d2_RenderMarkupText(int a, int b)
@@ -236,18 +215,6 @@ void __cdecl fcn_00475f60(int a, int b)
 {
 }
 
-void __cdecl fcn_0047a040(int a0, int a1, int a2, int a3)
-{
-}
-
-void __cdecl fcn_0047c560(void)
-{
-}
-
-void __cdecl fcn_0047cba0(int a0, int a1, int a2, int a3, int a4)
-{
-}
-
 int __cdecl fcn_0047dca0(void* a)
 {
 	return 0;
@@ -259,11 +226,6 @@ int __cdecl fcn_0047dcf0(unsigned short* a)
 }
 
 int __cdecl fcn_0048e0f0(int a1, char* p, int a3)
-{
-	return 0;
-}
-
-int __cdecl fcn_0048e230(int a1, char* p, int a3)
 {
 	return 0;
 }
@@ -285,10 +247,6 @@ void* __cdecl fcn_004a34d0(void)
 	return (void*) 0;
 }
 
-void __cdecl fcn_004a4410(unsigned int* a0, unsigned int* a1)
-{
-}
-
 int __cdecl ai_CalculateMatchingMethodEffects(float* o1, float* o2, int a3, unsigned short* e, int a5, void* a6, void* a7)
 {
 	return 0;
@@ -300,15 +258,7 @@ void __cdecl fcn_004a7b40(void)
 {
 }
 
-void __cdecl fcn_004a8640(void)
-{
-}
-
 void __cdecl fcn_004a86b0(void)
-{
-}
-
-void __cdecl fcn_004a8700(void)
 {
 }
 
@@ -381,11 +331,6 @@ int __cdecl amt_RankAvailableOffices(void* a, int b, void* c, int* d)
 	return 0;
 }
 
-int __cdecl fcn_004f1790(char* a, void* e)
-{
-	return 0;
-}
-
 
 
 
@@ -417,10 +362,6 @@ int __cdecl init_EnsureObjektSceneContext(char* a)
 int __cdecl fcn_0051af00(char* a, int b)
 {
 	return 0;
-}
-
-void __cdecl fcn_005270c0(int a)
-{
 }
 
 int __cdecl fcn_0052dee0(int a, int b, int c)
@@ -463,11 +404,6 @@ int __cdecl fcn_005963f0(int a, int b, int c, int d)
 }
 
 int __cdecl fcn_00596b10(int a, int b, int c, int d)
-{
-	return 0;
-}
-
-int __cdecl fcn_00597940(int a, int b, int c, int d, int e)
 {
 	return 0;
 }

@@ -21,7 +21,7 @@ struct d2_daterec {
 	short rest;
 };
 
-int __cdecl fcn_00470820(int, int, char *);
+int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -53,7 +53,7 @@ int __cdecl _ftol(void);
 int __cdecl d2_ShowTxt(int, int, char *, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x005d1790 */
-void __cdecl fcn_005d1790(unsigned short *person, int a1)
+void __cdecl d2_ShowSpielerInfoDialog(unsigned short *person, int read_only)
 {
 	char bufB[512];
 	char bufA[512];
@@ -83,7 +83,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 	r4 = -1;
 	r2 = -1;
 	msg = main_LoopFlags;
-	h = fcn_00470820(0, 0, "panel\\info_spieler");
+	h = d2_LoadForm(0, 0, "panel\\info_spieler");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
@@ -261,7 +261,7 @@ void __cdecl fcn_005d1790(unsigned short *person, int a1)
 			((D2_CONTROL_TL*) (g_1015ea0))[idx].width = stamp;
 		}
 	}
-	if (a1 != 0) {
+	if (read_only != 0) {
 		d2_SetForm(h, 4);
 		r5 = d2_GetWindowListItem(h, 4, io_AppendText(0x1f50, *person));
 	} else {
@@ -354,6 +354,6 @@ label_2281:
 			}
 			d2_SetFormVisibility(h, 1);
 		}
-	} while (main_RunFrameLoop((int)fcn_005d1790, msg) != 0);
+	} while (main_RunFrameLoop((int)d2_ShowSpielerInfoDialog, msg) != 0);
 	d2_DestroyForm(h);
 }

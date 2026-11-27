@@ -76,7 +76,7 @@ extern double g_662908;
 int __cdecl d2_TutorialAllowsFlag(int a);
 void __cdecl fcn_0057e880(int a, int b, int c, int d);
 int __cdecl fcn_00504bd0(int a);
-int __cdecl fcn_00470820(int a, int b, char* name);
+int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl fcn_00473a90(int a, int b);
 int __cdecl gm_CalculateGebaeudeValue(char* ent, int kind);
@@ -165,7 +165,7 @@ void __cdecl d2_RunGebaeudeOptionenDialog(char* ent)
 			return;
 	}
 	v.mode = fcn_00504bd0((unsigned char) ent[0]);
-	dlg = fcn_00470820(0, 0, (char*) 0x6ac690);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6ac690);
 	d2_CenterDialogWindows(dlg);
 	fcn_00473a90(0, 0);
 	v.ptr = gm_CalculateGebaeudeValue(ent, ent[0x5c]);

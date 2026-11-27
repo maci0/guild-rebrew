@@ -35,7 +35,7 @@ extern TabRec_5ccca0 g_6ac8a8[];
 #include "Develop/Units/d2.v1/d2_win.h"
 int __cdecl d2_AddWindowTextButton(int, int, int, int, int);
 void __cdecl d2_SetElementWidth(int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
@@ -88,7 +88,7 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* ent, char* name, int tab, int cal
 			}
 		}
 	}
-	h = fcn_00470820(0, 0, "panel\\geb_liste");
+	h = d2_LoadForm(0, 0, "panel\\geb_liste");
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 2);
 	win = d2_CurrentWindowId;

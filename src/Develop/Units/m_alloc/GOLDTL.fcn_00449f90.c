@@ -14,10 +14,10 @@ typedef struct
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00449b60(char* s);
-void __cdecl fcn_00439fa0(char* o);
+int __cdecl d3_FindCachedModel(char* s);
+void __cdecl d3_AddObjectDrawData(char* o);
 void __cdecl fcn_00449ba0(char* o, void* part, char* name);
-char __cdecl fcn_00449db0(char* a, int b, int mode, char* key, char* val);
+char __cdecl d3_FormatModelVariantName(char* a, int b, int mode, char* key, char* val);
 
 /* ADDRESS: GOLDTL 0x00449f90 */
 void __cdecl fcn_00449f90(char* o, void* part, char* name)
@@ -27,24 +27,24 @@ void __cdecl fcn_00449f90(char* o, void* part, char* name)
 	char buf[0x100];
 
 	if (part != 0) {
-		if (fcn_00449b60(name) == 0) {
+		if (d3_FindCachedModel(name) == 0) {
 			return;
 		}
 		if (*(fcn_00449f90_Mesh**) (o + 0x1ec) == 0) {
-			fcn_00439fa0(o);
+			d3_AddObjectDrawData(o);
 		}
 		fcn_00449ba0(o, part, name);
 		return;
 	}
-	fcn_00449db0(name, 0, 0, buf, 0);
-	if (fcn_00449b60(buf) == 0) {
+	d3_FormatModelVariantName(name, 0, 0, buf, 0);
+	if (d3_FindCachedModel(buf) == 0) {
 		return;
 	}
 	if (*(fcn_00449f90_Mesh**) (o + 0x1ec) == 0) {
-		fcn_00439fa0(o);
+		d3_AddObjectDrawData(o);
 	}
 	fcn_00449ba0(o, &(*(fcn_00449f90_Mesh**) (o + 0x1ec))->parts[0], buf);
-	if (fcn_00449db0(name, 0, -1, buf, 0) && fcn_00449b60(buf) != 0) {
+	if (d3_FormatModelVariantName(name, 0, -1, buf, 0) && d3_FindCachedModel(buf) != 0) {
 		fcn_00449ba0(o, &(*(fcn_00449f90_Mesh**) (o + 0x1ec))->extra, buf);
 	}
 	if ((d3_LODMode & 0x7f) == 1) {
@@ -53,7 +53,7 @@ void __cdecl fcn_00449f90(char* o, void* part, char* name)
 			if (n >= 3) {
 				break;
 			}
-			if (fcn_00449db0(name, 0, i, buf, 0) && fcn_00449b60(buf) != 0) {
+			if (d3_FormatModelVariantName(name, 0, i, buf, 0) && d3_FindCachedModel(buf) != 0) {
 				fcn_00449ba0(o, &(*(fcn_00449f90_Mesh**) (o + 0x1ec))->parts[n], buf);
 				n++;
 			}

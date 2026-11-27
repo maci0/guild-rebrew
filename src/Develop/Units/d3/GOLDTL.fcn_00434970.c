@@ -5,7 +5,7 @@
 extern volatile int g_6b7fac;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_00434ba0(char* anim, char* mesh);
+void __cdecl d3_CalculateAnimNormals(char* anim, char* mesh);
 int __cdecl d3_StepAnimFrame(D3_ANIMATION_OPTIONS flags, int v, int lo, int hi, int max);
 int __cdecl d3_CreateObjectMesh(char* e);
 char __cdecl d3_BindAnimTrackNodes(char* obj);
@@ -47,7 +47,7 @@ char* __cdecl d3_AttachAnimationToContext(char* context, char* name, D3_ANIMATIO
 					*(int*) (object + 0x158) = g_6b8008;
 					if (*(char*) (object + 0x168) == 0) {
 						if (*(int*) (context + 0x318) != 0) {
-							fcn_00434ba0(object, *(char**) (context + 0x318));
+							d3_CalculateAnimNormals(object, *(char**) (context + 0x318));
 							*(char*) (object + 0x168) = 1;
 						}
 					}

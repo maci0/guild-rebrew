@@ -7,7 +7,7 @@ extern int d3_ActiveCamera;
 extern int g_6b86d4;
 extern char g_6b8018;
 
-void __cdecl fcn_0045ccf0(unsigned int now);
+void __cdecl d3_UpdateTextureScrollOffsets(unsigned int now);
 char __cdecl d3_VisitSceneObjects(char* scene, char* node, unsigned int flags, char (__cdecl* cb)(char*, void*), void* ctx);
 char __cdecl d3_UpdateSceneObjectAnimCallback(char* node, void* ctx);
 void __cdecl fcn_0043ad10(int mode);
@@ -42,7 +42,7 @@ void __cdecl fcn_0043b170(unsigned int flags, char force, unsigned int mode, cha
 		char* node;
 
 		now = g_6b7fac;
-		fcn_0045ccf0(now);
+		d3_UpdateTextureScrollOffsets(now);
 		fl = flags | 0x181;
 		d3_VisitSceneObjects((char*) g_67a370, 0, fl, d3_UpdateSceneObjectAnimCallback, (void*) now);
 		if (deep) {

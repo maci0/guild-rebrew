@@ -1,11 +1,11 @@
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int, int, char *);
+int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl fcn_00537320(int);
 void __cdecl fcn_00471db0(int, int);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(char *, ...);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CreateButtonRow(int, int, int *, int, ...);
@@ -28,12 +28,12 @@ void __cdecl fcn_005e2660(void)
     float x[3], y[3], z[3];
     flags = *(int *)0x7e46ac & ~0x2000;
     accepted = 0;
-    dialog = fcn_00470820(0, 0, (char *)0x6ad2b0);
+    dialog = d2_LoadForm(0, 0, (char *)0x6ad2b0);
     fcn_00537320(flags);
     fcn_00471db0(dialog, 1);
     fcn_00471d80(dialog, 2);
     d2_SetForm(dialog, 0);
-    fcn_005340f0(*(int *)0x772514);
+    d2_InitWindowBounds(*(int *)0x772514);
     d2_SetForm(dialog, 2);
     io_AppendText((char *)0x6ad2a8);
     io_AppendText((char *)0x3fe0);

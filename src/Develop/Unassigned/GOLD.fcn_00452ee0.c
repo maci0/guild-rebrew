@@ -1,9 +1,9 @@
 char* __cdecl d3_SelectObjectLod(char* object);
 void __cdecl d3_UpdateObjectLodMesh(void* obj);
-void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* out);
+void __cdecl d3_TransformPointToView(char* object, char* camera, float* position, float* out);
 
 /* ADDRESS: GOLD 0x00452ee0 */
-void __cdecl fcn_00452ee0(char* o)
+void __cdecl d3_UpdateObjectLodAndLighting(char* o)
 {
 	float len;
 	char* rec;
@@ -16,7 +16,7 @@ void __cdecl fcn_00452ee0(char* o)
 			return;
 		}
 	}
-	fcn_00458b10(o, *(char**) 0xfc2dec, (float*) (o + 0x4c), (float*) (o + 0x1d8));
+	d3_TransformPointToView(o, *(char**) 0xfc2dec, (float*) (o + 0x4c), (float*) (o + 0x1d8));
 	rec = *(char**) (o + 0x1cc);
 	vt = *(char**) (rec + 0x10);
 	if (vt != 0) {

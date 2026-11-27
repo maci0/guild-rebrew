@@ -31,7 +31,7 @@ typedef struct {
 extern float g_662d70[4];
 System* __cdecl fcn_004524e0(int n, const char* name, Bytes4 f, int a, char* e, void (__cdecl* cb)(void));
 void __cdecl d3_SetEffectPosition(System* s, float* pos);
-void __cdecl fcn_00416d50(void);
+void __cdecl d3_UpdateParticleSystem(void);
 
 System* __cdecl fcn_00417180(char* e, const char* name, unsigned char flag, int kind, V3* pos, int n, int unused, int a, int p0, int p1, int p2, int p3)
 {
@@ -43,7 +43,7 @@ System* __cdecl fcn_00417180(char* e, const char* name, unsigned char flag, int 
 		memset(&f, 0, sizeof(f));
 		f.a = 0x7f;
 		f.c = (flag & 1) | 2;
-		s = fcn_004524e0(n, name, f, a, e, fcn_00416d50);
+		s = fcn_004524e0(n, name, f, a, e, d3_UpdateParticleSystem);
 		if (s != 0) {
 			d3_SetEffectPosition(s, g_662d70);
 			s->pos.x = pos->x;

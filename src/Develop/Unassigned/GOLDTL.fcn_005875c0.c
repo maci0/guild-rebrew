@@ -27,7 +27,7 @@ extern double g_662958;
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 /* ADDRESS: GOLDTL 0x005875c0 */
-void __cdecl fcn_005875c0(char* o, float dt)
+void __cdecl d2_UpdateKanoneCamera(char* o, float dt)
 {
 	int drow;
 	int dcol;

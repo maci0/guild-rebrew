@@ -57,8 +57,8 @@ extern int g_772614;
 
 
 int __cdecl d2_BuildQuadVertices(int, int, int, int, Quad*);
-void __cdecl fcn_0047b9f0(Quad*, int);
-void __cdecl fcn_0047c4e0(void);
+void __cdecl d2_SetQuadAlpha(Quad*, int);
+void __cdecl d2_BindQuadVertexBuffer(void);
 void __cdecl fcn_004372d0(int, int, int, int, int);
 
 
@@ -72,7 +72,7 @@ void __cdecl d2_DrawTexturedQuad(int a1, int a2, int a3, int a4, int tex, float 
 	if (d2_BuildQuadVertices(a1, a2, a3, a4, &quad) == 0) {
 		return;
 	}
-	fcn_0047b9f0(&quad, (int) (alpha * 255.0f));
+	d2_SetQuadAlpha(&quad, (int) (alpha * 255.0f));
 	t = d2_DrawDepthIndex * 0.001f;
 	for (i = 0; i < 6; i++) {
 		quad.vs.v[i].z = 1.0f - t;
@@ -87,7 +87,7 @@ void __cdecl d2_DrawTexturedQuad(int a1, int a2, int a3, int a4, int tex, float 
 		*(Verts*) ptr = quad.vs;
 	}
 	((VB*)g_772614)->vtbl->Unlock(((VB*)g_772614));
-	fcn_0047c4e0();
+	d2_BindQuadVertexBuffer();
 	fcn_004372d0(0xfe, 0, 0, 1, 1);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 7, 0);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x88, 0);

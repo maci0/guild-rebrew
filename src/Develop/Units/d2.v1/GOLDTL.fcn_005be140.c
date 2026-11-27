@@ -7,7 +7,7 @@ extern unsigned char g_773d75;
 extern int d2_CurrentWindowId;
 
 int __cdecl d2_SetControlText();
-int __cdecl fcn_00470820();
+int __cdecl d2_LoadForm();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_SetSlotVisibility();
@@ -38,7 +38,7 @@ int __cdecl fcn_00594340();
 int __cdecl fcn_00595e20();
 int __cdecl fcn_005963f0();
 int __cdecl d2_SyncProduktionSlotGrid();
-int __cdecl fcn_00597940();
+int __cdecl d2_DrawProduktionSlotGrid();
 int __cdecl d2_RunRoomSlotDialog();
 
 #define v23 (*(int *)(frame + 0x1c))
@@ -132,7 +132,7 @@ void __cdecl d2_ShowLagerOptions(unsigned char *a0,int a1)
   if (((!v4) && (v4 = (short *)fcn_00502cd0(v3,2,0,0x116,6), !v4)) && (v4 = (short *)fcn_00502cd0(*(unsigned int *)&v2[0x5d],2,0,0x2a,6), !v4))
     return;
   fcn_0057e880(0x1d,v2,0,0);
-  dialogId = fcn_00470820(0,0,(char *)0x6ac468);
+  dialogId = d2_LoadForm(0,0,(char *)0x6ac468);
   d2_CenterDialogWindows(dialogId);
   d2_SetForm(dialogId,3);
   io_AppendText(0xfa);
@@ -370,7 +370,7 @@ label_5bea6c:
     }
     if (*v4 == 0x116) {
       d2_SyncProduktionSlotGrid(v2,v4);
-      fcn_00597940(dialogId,1,1,v2,v4);
+      d2_DrawProduktionSlotGrid(dialogId,1,1,v2,v4);
     } else { // branch-flip
       fcn_00595e20(v2,v4);
       fcn_005963f0(dialogId,1,0,v2);

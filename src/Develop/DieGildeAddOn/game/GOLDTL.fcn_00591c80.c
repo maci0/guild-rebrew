@@ -10,7 +10,7 @@ extern Slot_779d00 g_779d00[];
 
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_FindRecordById(int);
-char __cdecl fcn_00506380(int, int, int, int);
+char __cdecl gm_GetEntityUiFlags(int, int, int, int);
 void __cdecl d2_ClearBookmarkSlot(Slot*);
 
 void __cdecl d2_PruneBookmarkSlots(void)
@@ -30,7 +30,7 @@ void __cdecl d2_PruneBookmarkSlots(void)
 				if (r == 0 && g_779d00[i].c != -1) {
 					d2_ClearBookmarkSlot(&g_779d00[i]);
 				}
-				else if (!(fcn_00506380(g_774970, x, r, 0) & 1)) {
+				else if (!(gm_GetEntityUiFlags(g_774970, x, r, 0) & 1)) {
 					d2_ClearBookmarkSlot(&g_779d00[i]);
 				}
 			}

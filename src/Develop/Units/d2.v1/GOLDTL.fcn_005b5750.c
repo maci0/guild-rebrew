@@ -18,7 +18,7 @@ extern int g_14ce8e0;
 extern char s_68d704[];
 
 int __cdecl gm_CheckEntityStock(Player*, int, char);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_AccumulateTyped2(Player*);
@@ -42,7 +42,7 @@ int __cdecl fcn_005b5750(void)
 	if (gm_CheckEntityStock(((Player *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), 0x140, (*(char*)&g_773d75)) == 0) {
 		return 0;
 	}
-	dlg = fcn_00470820(0, 0, s_68d704);
+	dlg = d2_LoadForm(0, 0, s_68d704);
 	ctl = d2_GetWindowListItem(dlg, 0, io_AppendText(0x1a34, (unsigned char) (*(char*)&g_773d75)));
 	v = gm_AccumulateTyped2(((Player *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]));
 	if (v >= 0x12c0) {

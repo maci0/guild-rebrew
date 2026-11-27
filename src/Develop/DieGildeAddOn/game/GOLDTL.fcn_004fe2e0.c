@@ -10,7 +10,7 @@ char* __cdecl ch_CreateAtPosition(char*, float*);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d3_SetObjectRotation(char*, int*);
 void __cdecl fcn_004fdcf0(char*);
-void __cdecl fcn_004fdfe0(char*);
+void __cdecl ch_AssignHeadIcon(char*);
 
 /* ADDRESS: GOLDTL 0x004fe2e0 */
 int __cdecl ch_SpawnEntityCharacter(char* entity, int sceneCtx, int* posPtr, int* rotPtr, int parentObj, int* dummyName)
@@ -72,7 +72,7 @@ have:
 			}
 			strcpy(entity + 0x1f4, v6);
 			fcn_004fdcf0(entity);
-			fcn_004fdfe0(entity);
+			ch_AssignHeadIcon(entity);
 		}
 	}
 done:

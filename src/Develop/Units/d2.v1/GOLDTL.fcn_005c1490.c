@@ -12,7 +12,7 @@ extern char g_1016198[];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 void __cdecl msx_SetFadeDuration(int);
 void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
@@ -23,7 +23,7 @@ int __cdecl fcn_004ac320(unsigned short*);
 void __cdecl fcn_004ac410(unsigned char*, int, unsigned short);
 int __cdecl io_AppendText();
 void __cdecl d3_EndCameraAndUiMode(void);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl he_StartHandlungSearch();
 
@@ -39,9 +39,9 @@ void __cdecl d2_ShowBardPoemDialog(void)
 	int idx;
 
 	elem = (char*) he_StartHandlungSearch(1, 0, 0x6b);
-	h = fcn_00470820(0, 0, "special\\barde");
+	h = d2_LoadForm(0, 0, "special\\barde");
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	g_100f1dc = -1;
@@ -104,9 +104,9 @@ void __cdecl d2_ShowBardPoemDialog(void)
 			return;
 		}
 		d2_DestroyForm(h);
-		h = fcn_00470820(0, 0, "special\\barde2");
+		h = d2_LoadForm(0, 0, "special\\barde2");
 		d2_SetForm(h, 0);
-		fcn_005340f0(d2_CurrentWindowId);
+		d2_InitWindowBounds(d2_CurrentWindowId);
 		d2_CenterDialogWindows(h);
 		d2_SetOverlayAnimation(0, 0);
 		g_100f1dc = -1;

@@ -12,7 +12,7 @@ typedef struct Tex {
 extern char* g_104049c;
 extern unsigned int g_10404a0;
 
-void __cdecl fcn_0045c310(Tex* t, char all)
+void __cdecl d3_AddRefTexture(Tex* t, char all)
 {
 	unsigned int i;
 	Tex* list;

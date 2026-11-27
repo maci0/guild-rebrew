@@ -33,7 +33,7 @@ void __cdecl fcn_00537320(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl d2_SetBackdropResource(int);
 void __cdecl fcn_00438da0(float, float, float, float, int, int, int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl d2_PositionWindow(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -54,9 +54,9 @@ void __cdecl d2_ShowLoadingScreen(void)
 	g_104048c = -1;
 	fcn_00438da0((float) g_1040494, (float) d2_ScreenHeight, 0.0f, 0.0f, (*(int*)&g_10529c8), (*(int*)&g_10421a0), (*(int*)&g_10432a4), g_1040494, d2_ScreenHeight);
 	if (g_7747b0 & 4) {
-		g_7e1d40 = fcn_00470820(0, 0, g_6a41d4);
+		g_7e1d40 = d2_LoadForm(0, 0, g_6a41d4);
 	} else {
-		g_7e1d40 = fcn_00470820(0, 0, g_6a41c0);
+		g_7e1d40 = d2_LoadForm(0, 0, g_6a41c0);
 	}
 	fcn_00469c40(0, d2_ScreenHeight - g_1015f50[((struct dlgslot*)g_1038144)[g_7e1d40].ctl].y - 0x30, g_1015f50[((struct dlgslot*)g_1038144)[g_7e1d40].ctl].h);
 	d2_PositionWindow(((struct dlgslot*)g_1038144)[g_7e1d40].ctl, 1);

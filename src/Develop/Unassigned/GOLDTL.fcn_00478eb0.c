@@ -1,13 +1,13 @@
 #pragma optimize("y", off)
 
 /* ADDRESS: GOLDTL 0x00478eb0 */
-void __cdecl fcn_00478eb0(int x, int y, char* surface, char* sprite, int xStep, int yStep, int transparent)
+void __cdecl d2_DrawScaledSprite16(int x, int y, char* surface, char* sprite, int xStep, int yStep, int transparent)
 {
 	short* dest;
 	int stride;
 	int width;
-	char v2;
-	char v3;
+	char sprW;
+	char sprH;
 	int row;
 	int col;
 	char* src;
@@ -15,8 +15,8 @@ void __cdecl fcn_00478eb0(int x, int y, char* surface, char* sprite, int xStep, 
 	short* out;
 
 	stride = *(int*) (surface + 0x10);
-	v2 = sprite[6];
-	v3 = sprite[0xa];
+	sprW = sprite[6];
+	sprH = sprite[0xa];
 	dest = (short*) (*(int*) (surface + 0x1c) + (x + stride * y) * 2);
 	src = sprite + 0x32;
 	width = *(unsigned short*) (sprite + 6) * 2;
@@ -30,11 +30,11 @@ void __cdecl fcn_00478eb0(int x, int y, char* surface, char* sprite, int xStep, 
 				*out = px;
 				col += xStep;
 				out++;
-			} while ((char) (col >> 8) < v2);
+			} while ((char) (col >> 8) < sprW);
 			dest += stride;
 			row += yStep;
 			src = sprite + 0x32 + ((row >> 8) & 0xff) * width;
-		} while ((char) (row >> 8) < v3);
+		} while ((char) (row >> 8) < sprH);
 		return;
 	}
 	row = 0;
@@ -48,9 +48,9 @@ void __cdecl fcn_00478eb0(int x, int y, char* surface, char* sprite, int xStep, 
 			}
 			col += xStep;
 			out++;
-		} while ((char) (col >> 8) < v2);
+		} while ((char) (col >> 8) < sprW);
 		dest += stride;
 		row += yStep;
 		src = sprite + 0x32 + ((row >> 8) & 0xff) * width;
-	} while ((char) (row >> 8) < v3);
+	} while ((char) (row >> 8) < sprH);
 }

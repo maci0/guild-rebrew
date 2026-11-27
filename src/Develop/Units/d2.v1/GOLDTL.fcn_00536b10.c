@@ -13,7 +13,7 @@ extern char g_6811b0[];
 extern char g_7e3a60[];
 
 void __cdecl d2_RunChatConsole(void);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
@@ -26,7 +26,7 @@ void __cdecl fcn_00536b10(void)
 	    g_6a2c1c > g_6b7fac - 0x23a &&
 	    g_6a2c1c != -1) {
 		if (g_6a2c20 == -1) {
-			g_6a2c20 = fcn_00470820(0, 0, "misc\\quickchat");
+			g_6a2c20 = d2_LoadForm(0, 0, "misc\\quickchat");
 			fcn_00471d80(g_6a2c20, 3);
 			if (g_6a2c20 == -1) {
 				return;

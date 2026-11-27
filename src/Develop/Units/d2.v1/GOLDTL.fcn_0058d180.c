@@ -47,11 +47,11 @@ extern int g_14b556c;
 int __cdecl he_HasActiveGrabpflege(char*, int, int);
 void __cdecl fcn_005263d0(int, int, int);
 void __cdecl fcn_0052a0c0(char*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl fcn_00526120(int, int);
@@ -80,11 +80,11 @@ int __cdecl d2_ConfirmGrabpflege(char* who, char* request)
 		return 0;
 	}
 	fcn_0052a0c0(who, 0);
-	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Friedhof");
+	h = d2_LoadForm(0, 0, "Locations\\Friedhof\\Friedhof");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	io_AppendText(0x4120, 0x411e, 0x228);
 	d2_SetForm(h, 2);

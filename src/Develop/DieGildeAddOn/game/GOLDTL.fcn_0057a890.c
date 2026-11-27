@@ -4,7 +4,7 @@ int __cdecl gm_GetKindRecord(int type, int* out);
 void __cdecl cm_BeginPacketFieldDelta(char* off, int v);
 void __cdecl cm_AppendPacketFieldDelta(int a, int b, int off, int* v);
 void __cdecl cm_RequestChangeAttribute(void);
-float __cdecl fcn_004ff210(unsigned short id, int v);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int v);
 
 /* ADDRESS: GOLDTL 0x0057a890 */
 int __cdecl he_InflictAffliction(char* off, float chance, int kind, float* out)
@@ -87,7 +87,7 @@ int __cdecl he_InflictAffliction(char* off, float chance, int kind, float* out)
 		cm_BeginPacketFieldDelta(off, *(int*) (off + 4));
 		cm_AppendPacketFieldDelta(4, 1, 0x2c, &flags);
 		cm_RequestChangeAttribute();
-		f = fcn_004ff210(*(unsigned short*) off, -d);
+		f = gm_ApplyEntityHealthDelta(*(unsigned short*) off, -d);
 		if (out != 0) {
 			*out = f;
 		}

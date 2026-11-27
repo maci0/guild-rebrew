@@ -10,7 +10,7 @@ int __cdecl d2_ShowGesetzDialog(char*, int*);
 
 
 /* ADDRESS: GOLDTL 0x004f82f0 */
-int __cdecl fcn_004f82f0(char* e, int* s)
+int __cdecl gm_HandleSecondaryLawPrivilege(char* e, int* s)
 {
 	Rec24 rec;
 	int r;

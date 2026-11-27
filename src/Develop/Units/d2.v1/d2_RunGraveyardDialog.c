@@ -14,7 +14,7 @@ typedef struct Elem {
 
 void* __cdecl FindSlotEntryFiltered(int a, unsigned char* rec, void* prev,
 	void* filter, int mask);
-int __cdecl fcn_004f1790(char* a, Elem* e);
+int __cdecl gm_GetEntitySlotIndex(char* a, Elem* e);
 int __cdecl gv_FindEntityGraveSlot(int a, unsigned char** out1, void** out2);
 void __cdecl io_FormatTextBuffer(void* dest, int id, ...);
 int __cdecl d2_CreateRentAGraveDialog(View* view, char* text);
@@ -38,7 +38,7 @@ void __cdecl d2_RunGraveyardDialog(unsigned char* input)
 	if (obj != 0) {
 		view.x20 = *(int*) obj;
 		view.x1c = (int) obj;
-		view.x24 = (unsigned char) fcn_004f1790((char*) *(int*) (input + 0x65),
+		view.x24 = (unsigned char) gm_GetEntitySlotIndex((char*) *(int*) (input + 0x65),
 			(Elem*) obj);
 		io_FormatTextBuffer(text, 0x4107, ((char**) 0x665f78)[*(int*) obj]);
 		if (d2_CreateRentAGraveDialog(&view, (char*) text) != 0) {

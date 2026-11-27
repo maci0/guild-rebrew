@@ -42,12 +42,12 @@ extern int g_67d3ac;
 extern int d2_ResourceOffset;
 extern char* g_14a567c;
 
-void __cdecl fcn_0047a040(int, int, int, int);
-void __cdecl fcn_0047cba0(int, int, Ctx*, int, int);
+void __cdecl d2_SetClipRect(int, int, int, int);
+void __cdecl d2_DrawSpriteFromSet(int, int, Ctx*, int, int);
 void __cdecl d2_DrawAnimationSlot(int, Ctx*);
 void __cdecl d2_SelectFont(int);
 int __cdecl d2_GetResourceData(int);
-int __cdecl fcn_0047cc80(int, int, Ctx*, int, int, float, int);
+int __cdecl d2_DrawScaledSpriteQuad(int, int, Ctx*, int, int, float, int);
 void __cdecl fcn_0046bd20(int, int, int, int, Ctx*, char*, int);
 
 
@@ -76,9 +76,9 @@ void __cdecl d2_DrawCursorAndCounters(Ctx* c, int x, int y)
 	y0 = g_7725fc;
 	x1 = d2_ClipRight;
 	y1 = d2_ClipBottom;
-	fcn_0047a040(0, 0, c->w, c->h);
+	d2_SetClipRect(0, 0, c->w, c->h);
 	if (g_67d8cc == -1) {
-		fcn_0047cba0(x, y, c, (*(int*)&g_7725c0), (*(int*)&g_7725c4) & 0xffff);
+		d2_DrawSpriteFromSet(x, y, c, (*(int*)&g_7725c0), (*(int*)&g_7725c4) & 0xffff);
 	} else {
 		((Slot*)g_100e7a0)[g_67d8cc].x = (short) x;
 		((Slot*)g_100e7a0)[g_67d8cc].y = (short) y;
@@ -93,7 +93,7 @@ void __cdecl d2_DrawCursorAndCounters(Ctx* c, int x, int y)
 			px = x + ((Cls*)g_772500)[g_67d3ac].x50 + k % 3 * 0x1a;
 			py = (d2_FontHeight + 0x1a) * (k / 3) + y;
 			h = d2_GetResourceData(p->id);
-			if (fcn_0047cc80(px, py, c, h, d2_ResourceOffset, 0.5f, 0)) {
+			if (d2_DrawScaledSpriteQuad(px, py, c, h, d2_ResourceOffset, 0.5f, 0)) {
 				v = p->value;
 				id = p->id;
 				if (id >= 0xdf && id < 0x3bb) {
@@ -111,5 +111,5 @@ void __cdecl d2_DrawCursorAndCounters(Ctx* c, int x, int y)
 		}
 	}
 	d2_SelectFont(old);
-	fcn_0047a040(x0, y0, x1, y1);
+	d2_SetClipRect(x0, y0, x1, y1);
 }

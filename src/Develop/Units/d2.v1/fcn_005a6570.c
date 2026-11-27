@@ -2,7 +2,7 @@
 extern int g_100f1dc;
 #include "client_dialog_state.h"
 
-void* __cdecl fcn_00470820(int a, int b, char* name);
+void* __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a);
 int __cdecl io_AppendText(int id, ...);
@@ -23,7 +23,7 @@ void __cdecl fcn_005a6570(char* o)
     int w1;
     int w2;
 
-    dlg = fcn_00470820(0, 0, "locations\\geldleihe\\geldleihe_WechselGebuehren");
+    dlg = d2_LoadForm(0, 0, "locations\\geldleihe\\geldleihe_WechselGebuehren");
     d2_CenterDialogWindows((int) dlg);
     d2_SetForm((int) dlg, 2);
     io_AppendText(0x1908);

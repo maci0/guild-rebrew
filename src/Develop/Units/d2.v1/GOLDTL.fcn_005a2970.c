@@ -21,10 +21,10 @@ struct sel {
 };
 /* SIZE 0x38 */
 
-int __cdecl fcn_00470820(int a, int b, char* name);
+int __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(int handle);
 void __cdecl d2_SetForm(int handle, int page);
-void __cdecl fcn_005340f0(int a);
+void __cdecl d2_InitWindowBounds(int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl fcn_004f7120(int id, char* record, int* out1, int* out2, int* idx);
 void __cdecl d2_ClearWindowChildren(int a, int b);
@@ -72,10 +72,10 @@ void __cdecl d2_ShowDunkleEcke(char* building, char* a1)
 	seen[1] = -1;
 	seen[2] = -1;
 	memset(sel, 0, sizeof(sel));
-	handle = fcn_00470820(0, 0, "locations\\Wirtshaus\\DUNKLEECKE");
+	handle = d2_LoadForm(0, 0, "locations\\Wirtshaus\\DUNKLEECKE");
 	d2_CenterDialogWindows(handle);
 	d2_SetForm(handle, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	memset(sel, 0, sizeof(sel));
 	changed = 1;

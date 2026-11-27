@@ -11,7 +11,7 @@ extern int g_7725ec;
 extern char s_67d7a0[];
 
 void __cdecl ReportClientMessage(char* text);
-void __cdecl fcn_00465e60(char* base);
+void __cdecl d2_ClearOwnerDirtyRects(char* base);
 void __cdecl d2_DrawField(int idx, int surf);
 void __cdecl d2_DrawValueGauge(int idx, int surf);
 void __cdecl fcn_0046bd20(int x, int y, int w, int h, char* surf, char* text, int flags);
@@ -19,10 +19,10 @@ void __cdecl d2_DrawWindow(int idx, char* surf);
 int __cdecl d2_GetElementResourceSize(int slot, int* w, int* h);
 void __cdecl d2_SelectFont(int idx);
 int __cdecl d2_BlitBufferToSurface(int x, int y, int w, int h, char* src, int sx, int sy, char* t);
-void __cdecl fcn_0047a040(int left, int top, int right, int bottom);
+void __cdecl d2_SetClipRect(int left, int top, int right, int bottom);
 void __cdecl d2_FlushQueuedQuads(int a, int b, char* surf);
-void __cdecl fcn_0047cba0(int x, int y, int surf, char* font, int c);
-void __cdecl fcn_0047ccd0(int x, int y, int surf, char* font, int c);
+void __cdecl d2_DrawSpriteFromSet(int x, int y, int surf, char* font, int c);
+void __cdecl d2_DrawHighlightSprite(int x, int y, int surf, char* font, int c);
 void __cdecl d2_DrawAnimationSlot(int idx, int surf);
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00471490 */
@@ -56,7 +56,7 @@ void __cdecl d2_RenderFormToTextures(int k)
 	if (*(int*) (base + 0x198) == 0) {
 		return;
 	}
-	fcn_00465e60(base);
+	d2_ClearOwnerDirtyRects(base);
 	ybase = 0;
 	pp = (char**) (base + 0x1ac);
 	do {
@@ -89,13 +89,13 @@ void __cdecl d2_RenderFormToTextures(int k)
 					}
 					top = (*(D2_CONTROL_TL*) obj).clip_top + ybase;
 					left = (*(D2_CONTROL_TL*) obj).clip_left;
-					fcn_0047a040(left & ((left < 0) - 1), top & ((top <= 0) - 1), right, v);
+					d2_SetClipRect(left & ((left < 0) - 1), top & ((top <= 0) - 1), right, v);
 					switch ((*(D2_CONTROL_TL*) obj).kind) {
 					case 1:
 						if ((*(D2_CONTROL_TL*) obj).value_03c) {
-							fcn_0047ccd0(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), 0);
+							d2_DrawHighlightSprite(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), 0);
 						} else {
-							fcn_0047cba0(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), 0);
+							d2_DrawSpriteFromSet(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), 0);
 						}
 						break;
 					case 4:
@@ -115,9 +115,9 @@ void __cdecl d2_RenderFormToTextures(int k)
 							}
 						}
 						if ((*(D2_CONTROL_TL*) obj).value_03c) {
-							fcn_0047ccd0(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), (*(D2_CONTROL_TL*) obj).value_088);
+							d2_DrawHighlightSprite(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), (*(D2_CONTROL_TL*) obj).value_088);
 						} else {
-							fcn_0047cba0(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), (*(D2_CONTROL_TL*) obj).value_088);
+							d2_DrawSpriteFromSet(sx, sy, (int) surf, *(char**) (&(*(D2_CONTROL_TL*) obj).data), (*(D2_CONTROL_TL*) obj).value_088);
 						}
 						if (*(unsigned char*) (&(*(D2_CONTROL_TL*) obj).payload.fields.value_08c) == 0) {
 							break;
@@ -158,7 +158,7 @@ void __cdecl d2_RenderFormToTextures(int k)
 						break;
 					case 0x43:
 						if ((*(D2_CONTROL_TL*) obj).mode > 0) {
-							fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
+							d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 							d2_SelectFont((*(D2_CONTROL_TL*) obj).font);
 							flags = 0;
 							if ((*(D2_CONTROL_TL*) obj).value_03c) {
@@ -188,7 +188,7 @@ void __cdecl d2_RenderFormToTextures(int k)
 						break;
 					}
 				}
-				fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
+				d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 			}
 		}
 		d2_FlushQueuedQuads(saved, g_7725ec, surf);

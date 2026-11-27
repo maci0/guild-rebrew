@@ -53,7 +53,7 @@ Obj* __cdecl he_StartHandlungSearch(int, int, int);
 Obj* __cdecl he_fn_Handlung(void);
 void __cdecl cm_SendSetHE(int, Obj*);
 void __cdecl cm_SendCopyEntityData(struct msg*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -102,7 +102,7 @@ int __cdecl gm_HandleGegenspionage(unsigned char* e)
 		}
 		return result;
 	}
-	dlg = fcn_00470820(0, 0, s_6acd1c);
+	dlg = d2_LoadForm(0, 0, s_6acd1c);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);

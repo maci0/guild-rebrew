@@ -20,7 +20,7 @@ void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
 int __cdecl gm_GetBuildingSlotLimits(int, int*);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 
 #pragma pack(push, 1)
 typedef struct {
@@ -180,7 +180,7 @@ anim7:
 				    *(char*) (key + 0x7f4ca8) != 0 &&
 				    *(char*) (key + 0x7f4ca2) == 0 &&
 				    *(int*) (key + 0x7f4e0c) == 0) {
-					fcn_004ff210(v, -2000);
+					gm_ApplyEntityHealthDelta(v, -2000);
 					*(int*) (p + 0xac) += 1;
 					break;
 				}

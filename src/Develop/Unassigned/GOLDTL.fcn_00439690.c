@@ -24,7 +24,7 @@ extern unsigned char g_6b7ff8;
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_ResetSceneAuxSlots(void);
 void __cdecl fcn_00456c10(void);
-void __cdecl fcn_00456c80(void);
+void __cdecl d3_AllocShadowTextures(void);
 void __cdecl fcn_0043bbf0(unsigned char);
 #include "client_scene_loader.h"
 
@@ -47,7 +47,7 @@ void __cdecl fcn_00439690(unsigned char a1, int a2, unsigned char a3, unsigned i
 	fcn_00456c10();
 	g_1052bd0.on = a4 > 0;
 	g_104061c = t < a4 ? t : a4;
-	fcn_00456c80();
+	d3_AllocShadowTextures();
 	fcn_0043bbf0(a1);
 	if (g_6b7ff8 != a3) {
 		g_6b7ff8 = a3;

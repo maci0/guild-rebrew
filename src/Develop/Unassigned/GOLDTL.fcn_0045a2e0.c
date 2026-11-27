@@ -4,7 +4,7 @@ extern int g_6b89c4[8];
 extern char g_662dc8[15][9];
 
 
-int __cdecl fcn_0045a2e0(int x, int y, int* img)
+int __cdecl d3sm_GetCellMaterial(int x, int y, int* img)
 {
 	int off;
 	int k;

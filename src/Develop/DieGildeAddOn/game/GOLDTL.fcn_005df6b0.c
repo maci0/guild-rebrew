@@ -28,7 +28,7 @@ char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCopyEntityData(char*);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 int __cdecl gm_ObjSendTargetMsg0xa3(char* e, char* request)
 {
@@ -71,7 +71,7 @@ int __cdecl gm_ObjSendTargetMsg0xa3(char* e, char* request)
 		p = gm_LookupSpecialObjectRecord(**(unsigned short**) request, &out);
 		io_FormatTextBuffer(buf, *(unsigned short*) (p + 0x18) + 1, *(unsigned short*) r);
 		io_FormatTextBuffer(line, 0xfe8, buf);
-		fcn_005dbe90(line);
+		d2_ShowUseObjDialog(line);
 	}
 	*(int*) (request + 0x10) = 1;
 	return 1;

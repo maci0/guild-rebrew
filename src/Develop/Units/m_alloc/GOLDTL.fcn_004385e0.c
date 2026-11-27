@@ -41,7 +41,7 @@ typedef struct {
 void* __cdecl m_PoolAlloc(void* head, int size, int max_items);
 void* __cdecl d3_GetObjectMesh(char* o, float* r);
 void __cdecl fcn_004372d0(unsigned char a, unsigned char b, int c, unsigned char d, unsigned char e);
-void __cdecl fcn_00450e90(float a, float b, char* c, void* d, void* e);
+void __cdecl d3_SelectActiveObjectLights(float a, float b, char* c, void* d, void* e);
 
 /* ADDRESS: GOLDTL 0x004385e0 */
 unsigned char __cdecl fcn_004385e0(int a0)
@@ -102,7 +102,7 @@ unsigned char __cdecl fcn_004385e0(int a0)
 			}
 		} else {
 			if (!flag) {
-				fcn_00450e90(v14, v15, v1->f280, 0, 0);
+				d3_SelectActiveObjectLights(v14, v15, v1->f280, 0, 0);
 				(*(void (__stdcall**)(void*, int, void*)) (*(int*) (*(int*) 0x6b5de0) + 0x94))
 				    ((void*) *(int*) 0x6b5de0, 0x100,
 					(void*) (*(int*) (a0 + 0x1ec) + 0x48));

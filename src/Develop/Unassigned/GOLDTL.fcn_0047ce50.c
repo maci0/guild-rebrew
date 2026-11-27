@@ -1,11 +1,11 @@
 
 
-void __cdecl fcn_0045bfb0(int);
+void __cdecl d3_ReleaseTexture(int);
 
-void __cdecl fcn_0047ce50(int a1)
+void __cdecl d3_SafeReleaseSceneResource(int resource)
 {
-	if (a1 == 0) {
+	if (resource == 0) {
 		return;
 	}
-	fcn_0045bfb0(a1);
+	d3_ReleaseTexture(resource);
 }

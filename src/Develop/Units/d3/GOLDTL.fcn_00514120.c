@@ -49,7 +49,7 @@ void* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl gm_BindBuildingSceneObjects(void);
 void __cdecl d3_ResolveSceneObjectProtoId(void);
-void __cdecl fcn_00510b40(void);
+void __cdecl d3_InheritSceneNodeData(void);
 void __cdecl fcn_00513d40(char*);
 void __cdecl cm_BeginCommandSync(void);
 void __cdecl cm_RequestAllocRaum(int, int, int, int);
@@ -98,7 +98,7 @@ int __cdecl gm_LoadCityMap(char* map)
 	}
 	d3_TraverseSceneObjects(g_67a370, 0, 0x140, gm_BindBuildingSceneObjects);
 	d3_TraverseSceneObjects(g_67a370, 0, 0x40, d3_ResolveSceneObjectProtoId);
-	d3_TraverseSceneObjects(g_67a370, 0, 0x20, fcn_00510b40);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x20, d3_InheritSceneNodeData);
 	fcn_00513d40("bk_BRUNNEN");
 	fcn_00513d40("bk_GEFAENGNIS");
 	fcn_00513d40("bk_HANDWERK");

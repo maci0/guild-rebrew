@@ -1,7 +1,7 @@
 #include <math.h>
 
 extern int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-extern void __cdecl fcn_004557c0(void*, void*, int, float*);
+extern void __cdecl d3_ComposeObserverMatrix(void*, void*, int, float*);
 extern float* __stdcall D3DXMatrixTranspose(float*, const float*);
 extern float __cdecl d3_WrapYawDelta(float*, float*);
 extern void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
@@ -17,7 +17,7 @@ extern const float g_662d40[3];
  * when the entity has none), the direction vector is rotated into that basis
  * and both out-points receive the tracker and the position marker. */
 /* ADDRESS: GOLDTL 0x00448cc0 */
-int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view,
+int __cdecl d3_StepObjectBasisTransform(unsigned char* self, float* dir, float* pos, void* view,
                          float* outA, float* outB)
 {
 	unsigned char valid;
@@ -51,7 +51,7 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 	valid = (unsigned char) (r2 == 0 && *(int*) (self + 0x218) != 0);
 	flag = 0;
 	if (*(int*) (self + 0x1fc) != 0) {
-		fcn_004557c0(*(void**) (self + 0x1fc),
+		d3_ComposeObserverMatrix(*(void**) (self + 0x1fc),
 		             ((*(unsigned char*) (self + 0x214) & 0x20) ? 0 : view), 1, p);
 		src = p;
 	} else {
@@ -106,7 +106,7 @@ int __cdecl fcn_00448cc0(unsigned char* self, float* dir, float* pos, void* view
 			outA[2] = z + *(float*) (self + 0x54);
 		}
 		if (valid) {
-			fcn_004557c0(self,
+			d3_ComposeObserverMatrix(self,
 			             ((*(unsigned char*) (self + 0x214) & 0x20) ? 0 : view), 1, p);
 			d3_BuildEulerRotationMatrix(pos, r);
 			fcn_005eb970(q, p, r);

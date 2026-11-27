@@ -36,8 +36,8 @@ void __cdecl fcn_004e4730(char* name);
 void __cdecl cut_InitShufflePool(int v);
 void __cdecl d3_UpdateSeasonTextures(void);
 int __cdecl gm_GetSeason(int* p);
-int __cdecl fcn_00445f50(unsigned int a0, float t, float scale, int a3);
-char __cdecl fcn_004463f0(unsigned int a, unsigned int b, float t);
+int __cdecl d3_BlendSceneLightingPreset(unsigned int a0, float t, float scale, int a3);
+char __cdecl d3_InterpolateSceneFog(unsigned int a, unsigned int b, float t);
 void __cdecl fcn_004cfe00(void);
 void __cdecl msx_StartMusicIfAllowed(char* s);
 void* __cdecl sb_LoadSampleBank(char* name, int init);
@@ -61,7 +61,7 @@ void __cdecl cut_RunTurnRound(unsigned int* a0, int a1);
 int __cdecl gm_FindPlayerById(int a1);
 int __cdecl fcn_004de610(int v);
 float __cdecl gm_GetEntityHealthRatio(char* p);
-float __cdecl fcn_004ff210(int a, int b);
+float __cdecl gm_ApplyEntityHealthDelta(int a, int b);
 int __cdecl cut_RandMod(int n);
 void __cdecl cut_PlayDuelIntroMove(char* a, char* b, char* c);
 int __cdecl srv_GetEntityOfficeSlot(char* ent, int* role, int* slot);
@@ -134,8 +134,8 @@ void __cdecl cut_MainDuell(char* a0)
         sel = 1;
     else if (sel == 1)
         sel = 2;
-    fcn_00445f50(sel, 0.0f, 1.0f, 1);
-    fcn_004463f0(0, 1, 0.0f);
+    d3_BlendSceneLightingPreset(sel, 0.0f, 1.0f, 1);
+    d3_InterpolateSceneFog(0, 1, 0.0f);
     fcn_004cfe00();
     if (sel == 0)
         msx_StartMusicIfAllowed((char*) 0x68ce24);
@@ -284,7 +284,7 @@ void __cdecl cut_MainDuell(char* a0)
     if (keepA == 0) {
         if (g_772f58 != 0) {
             io_AppendText(0x111e, sB.id & 0xffff);
-            fcn_004ff210(sB.id, (int) ((g_772f58 & 0xff) * 5.0));
+            gm_ApplyEntityHealthDelta(sB.id, (int) ((g_772f58 & 0xff) * 5.0));
             sB.acc = (int) ((g_772f58 & 0xff) * 5.0 + sB.acc);
         } else {
             io_AppendText(0x111f, sB.id & 0xffff, sB.id & 0xffff);
@@ -302,7 +302,7 @@ void __cdecl cut_MainDuell(char* a0)
     if (keepB == 0) {
         if (g_772f59 != 0) {
             io_AppendText(0x111e, sA.id & 0xffff);
-            fcn_004ff210(sA.id, (int) ((g_772f59 & 0xff) * 5.0));
+            gm_ApplyEntityHealthDelta(sA.id, (int) ((g_772f59 & 0xff) * 5.0));
             sA.acc = (int) ((g_772f59 & 0xff) * 5.0 + sA.acc);
         } else {
             io_AppendText(0x111f, sA.id & 0xffff, sA.id & 0xffff);

@@ -19,7 +19,7 @@ void __cdecl d3_UpdateObjectLighting(char*);
 #define fcn_0040cfb0 fcn_0040c090
 #endif
 
-char __cdecl fcn_00443900(void*, void*, void*);
+char __cdecl d3_MoveObjectToScene(void*, void*, void*);
 void __cdecl d3_SetObjectPosition(void*, float*);
 int __cdecl d3_GetContextIndex(void*);
 void __cdecl fcn_00402aa0(char*);
@@ -34,7 +34,7 @@ char* __cdecl d3sm_GetObjectSuperMap(char*);
 #include "../client_scene_transform.h"
 float __cdecl d3_ComputeYawToTarget(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
-char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
+char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 void __cdecl d3_GetFloorHeight(char*, float*, int, int*, int*, float*);
 extern float g_6628a8;
 #include "../../../Units/d3/d3_animation.h"
@@ -77,13 +77,13 @@ int __cdecl ch_MoveCharacter2Universe(char* obj, void* universe)
 	D3_OBJECT* n;
 
 	if (obj != 0 && *(void**) (obj + 0x88) != 0 && universe != 0
-	    && fcn_00443900(*(void**) (obj + 0x34), *(void**) (obj + 0x88), universe)) {
+	    && d3_MoveObjectToScene(*(void**) (obj + 0x34), *(void**) (obj + 0x88), universe)) {
 		d3_SetObjectPosition(*(void**) (obj + 0x34), g_662d70);
 		if (*(void***) (obj + 0x124) != 0) {
-			fcn_00443900(**(void***) (obj + 0x124), *(void**) (obj + 0x88), universe);
+			d3_MoveObjectToScene(**(void***) (obj + 0x124), *(void**) (obj + 0x88), universe);
 		}
 		if (*(void**) (obj + 0x22c) != 0) {
-			fcn_00443900(*(void**) (obj + 0x22c), *(void**) (obj + 0x88), universe);
+			d3_MoveObjectToScene(*(void**) (obj + 0x22c), *(void**) (obj + 0x88), universe);
 		}
 		*(void**) (obj + 0x88) = universe;
 		if (d3_GetContextIndex(universe) == 0) {

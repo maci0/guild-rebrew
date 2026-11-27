@@ -48,7 +48,7 @@ extern char* g_14a97d4;
 extern unsigned short* g_772f24;
 
 unsigned short __cdecl gm_RandomMod(int n);
-void __cdecl fcn_004d1a80(void);
+void __cdecl cut_RefreshCombatContextCharacters(void);
 void __cdecl d2_InitCombatHud(int);
 #include "Develop/Units/Msx/msx.h"
 int __cdecl main_RunFrameLoop(void*, int);
@@ -71,7 +71,7 @@ void __cdecl fcn_004d9f20(int arg)
 
 	last = (unsigned int) g_6b7fb8 - 0x15e;
 	r = gm_RandomMod(100);
-	fcn_004d1a80();
+	cut_RefreshCombatContextCharacters();
 	d2_InitCombatHud(arg);
 	g_772efc = 0;
 	if (r < 0x32) {

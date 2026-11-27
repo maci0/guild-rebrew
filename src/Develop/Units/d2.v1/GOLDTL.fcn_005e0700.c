@@ -29,11 +29,11 @@ extern int g_14ac644;
 extern char g_7e21a0[];
 extern unsigned char g_7747b0;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471db0(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int);
 int __cdecl d2_GetFormWindow(int, int);
@@ -58,11 +58,11 @@ int __cdecl d2_ShowLoadGameMenu(void)
 
 	result = 0;
 	style = main_LoopFlags;
-	h = fcn_00470820(0, 0, "menu\\loadgame_new");
+	h = d2_LoadForm(0, 0, "menu\\loadgame_new");
 	fcn_00471db0(h, 1);
 	fcn_00471d80(h, 2);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(0, 2);
 	io_AppendText(0x1c57);

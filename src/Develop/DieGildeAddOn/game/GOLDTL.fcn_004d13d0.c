@@ -20,7 +20,7 @@ extern int g_67a370;
 
 void __cdecl gm_GetEquippedCombatGear(char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char __cdecl fcn_0045b990(int, float*, int*, int*, int*);
+char __cdecl d3sm_SampleHeight(int, float*, int*, int*, int*);
 ent2c* __cdecl gm_FindOrCreateEntitySlot(char*, char*);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int, ent2c*);
 
@@ -37,7 +37,7 @@ int __cdecl he_QueueTradeWareCommand(char* rec, char* e, char* obj)
 	h = *(int*) (((char*)g_67a370) + 0xb0);
 	gm_GetEquippedCombatGear(e);
 	d3_TransformPoint(obj, obj + 0x4c, v);
-	if (fcn_0045b990(h, v, &c, &a, &b) == 0 || *(int*) (e + 0x1ac) != 0)
+	if (d3sm_SampleHeight(h, v, &c, &a, &b) == 0 || *(int*) (e + 0x1ac) != 0)
 		return -1;
 	r = gm_FindOrCreateEntitySlot(rec, e);
 	r->fc = 0;

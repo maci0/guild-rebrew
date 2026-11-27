@@ -1,6 +1,6 @@
 extern int g_67a370;
 
-char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
+char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 unsigned short __cdecl gm_RandomMod(int);
 char __cdecl ch_FindWalkableCell(char*, float*, float*, int, int, int*, int*, int, int);
 void __cdecl d3_GridPointToWorld(char*, int, int, int);
@@ -21,7 +21,7 @@ int __cdecl ch_SelectNearbyPosition(float* pos, int marker)
 	if (map == 0) {
 		return 0;
 	}
-	fcn_0045b990(map, pos, &col, &row, &height);
+	d3sm_SampleHeight(map, pos, &col, &row, &height);
 	x = gm_RandomMod(10) + col - 4;
 	y = gm_RandomMod(10) + row - 4;
 	if (*(int*) (map + 0x20) - 2 < x) {

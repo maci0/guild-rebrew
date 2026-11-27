@@ -26,7 +26,7 @@ extern char g_6aae08[];
 unsigned char* __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl gm_SumQueryEntryValues(int a, char b);
 int __cdecl gm_AccumulateTyped2(ENTITY_RECORD* entity);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -78,7 +78,7 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 	else {
 		ok = 0;
 	}
-	d = fcn_00470820(0, 0, g_6aae08);
+	d = d2_LoadForm(0, 0, g_6aae08);
 	d2_CenterDialogWindows(d);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(d, 1);

@@ -37,7 +37,7 @@ void __cdecl d2_ClearRadioGroup(int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_UpdateRadioGroup(int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 char* __cdecl d2_GetControlValue(int);
@@ -93,7 +93,7 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	g_7e23e4 = GetPrivateProfileIntA(s_6a1e4c, s_6a4008, 0, g_7e22c0) + 0x59a;
 	g_7e23e8 = GetPrivateProfileIntA(s_6a1e4c, s_6a3ffc, 0, g_7e22c0);
 	g_7e23e9 = GetPrivateProfileIntA(s_6a1e4c, s_6a3ff4, 0, g_7e22c0);
-	dlg = fcn_00470820(0, 0, s_6a3fe0);
+	dlg = d2_LoadForm(0, 0, s_6a3fe0);
 	d2_CenterDialogWindows(dlg);
 	txt_GetCitySelectInfo(g_7e1d00, buf);
 	d2_SetForm(dlg, 1);

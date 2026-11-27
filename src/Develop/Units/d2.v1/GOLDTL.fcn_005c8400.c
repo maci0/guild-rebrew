@@ -34,10 +34,10 @@ extern char* g_77255c;
 #include "Develop/Units/d2.v1/d2_win.h"
 extern Win_1015f40 g_1015f40[0x60];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_005a5440(int, Tab5c84*, int, int, int);
 void __cdecl d2_CloseWindow(int);
@@ -75,10 +75,10 @@ int __cdecl fcn_005c8400(void)
 		lines[k].btn = -1;
 		lines[k].e = 0;
 	}
-	h = fcn_00470820(0, 0, g_6ac820);
+	h = d2_LoadForm(0, 0, g_6ac820);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 2);
 	io_AppendText(0x1f3e);
 	d2_SetForm(h, 4);

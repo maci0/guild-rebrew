@@ -30,7 +30,7 @@ void* __cdecl m_alloc(int size, const char* tag);
 void __cdecl m_FreeTracked(void* p);
 void __cdecl vfs_WriteByte(void* s, char v);
 void __cdecl vfs_WriteCString(void* s, void* str);
-void __cdecl fcn_00401260(void* s, int v);
+void __cdecl vfs_WriteInt32(void* s, int v);
 void __cdecl vfs_WriteVec3(void* s, void* v);
 void __cdecl vfs_WriteVec4(void* s, int* v);
 void __cdecl fcn_00401360(void* s, int v);
@@ -74,9 +74,9 @@ void __cdecl fcn_004469e0(void* s, char* o)
 				vfs_WriteByte(s, PART(i).b9);
 				vfs_WriteByte(s, PART(i).flags & 1);
 				vfs_WriteByte(s, (PART(i).flags >> 1) & 1);
-				fcn_00401260(s, PART(i).e);
-				fcn_00401260(s, PART(i).c);
-				fcn_00401260(s, PART(i).d);
+				vfs_WriteInt32(s, PART(i).e);
+				vfs_WriteInt32(s, PART(i).c);
+				vfs_WriteInt32(s, PART(i).d);
 				vfs_WriteVec4(s, PART(i).v18);
 				vfs_WriteVec4(s, PART(i).v28);
 				fcn_00401360(s, PART(i).f154);
@@ -92,7 +92,7 @@ void __cdecl fcn_004469e0(void* s, char* o)
 	for (i = 0; i < 8; i++) {
 		vfs_WriteCString(s, o + 0x7e24 + i * 0x40);
 	}
-	fcn_00401260(s, *(int*) (o + 0x60));
-	fcn_00401260(s, *(int*) (o + 0x84));
+	vfs_WriteInt32(s, *(int*) (o + 0x60));
+	vfs_WriteInt32(s, *(int*) (o + 0x84));
 	vfs_WriteVec3(s, o + 0x50);
 }

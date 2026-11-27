@@ -41,10 +41,10 @@ int __cdecl fcn_00533880(void);
 int __cdecl fcn_005338a0(void);
 int __cdecl d3_SelectSceneContext(int, int);
 Figure *__cdecl ch_CreateCharacterAtSceneObject(char *, char *, int);
-int __cdecl fcn_00470820(int, int, char *);
+int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl fcn_00471d80(int, int);
-void __cdecl fcn_004e4b60(char *);
-int __cdecl fcn_00445f50(unsigned int, float, float, int);
+void __cdecl d3_InitSkyLayer(char *);
+int __cdecl d3_BlendSceneLightingPreset(unsigned int, float, float, int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl d2_SetForm(int, int);
@@ -130,11 +130,11 @@ int __cdecl d2_RunParentProfessionSelection(void)
 	vhFrau = ch_CreateCharacterAtSceneObject((char *) 0x6a3e24, (char *) 0x68d45c, 5);
 	rhMann = ch_CreateCharacterAtSceneObject((char *) 0x6a3e00, (char *) 0x6a3e14, 2);
 	rhFrau = ch_CreateCharacterAtSceneObject((char *) 0x6a3dec, (char *) 0x6a3c78, 6);
-	obj = fcn_00470820(0, 0, (char *) 0x6a3dd4);
+	obj = d2_LoadForm(0, 0, (char *) 0x6a3dd4);
 	fcn_00471d80(obj, 1);
-	fcn_004e4b60((char *) 0x6a3dc4);
+	d3_InitSkyLayer((char *) 0x6a3dc4);
 	i = 4;
-	fcn_00445f50(i, 0, 1.0f, 1);
+	d3_BlendSceneLightingPreset(i, 0, 1.0f, 1);
 	if (*(int *) 0x6a37f8 != -1) {
 		d2_DestroyForm(*(int *) 0x6a37f8);
 		*(int *) 0x6a37f8 = -1;

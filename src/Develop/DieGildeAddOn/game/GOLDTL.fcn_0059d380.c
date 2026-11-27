@@ -36,7 +36,7 @@ extern char* __cdecl he_fn_Handlung(void);
 extern int __cdecl he_HasNoActiveAction0x62(char*);
 extern void __cdecl io_FormatTextBuffer(char*, char*, ...);
 extern int __cdecl fcn_00526120(char*, int);
-extern int __cdecl fcn_00470820(int, int, char*);
+extern int __cdecl d2_LoadForm(int, int, char*);
 extern void __cdecl d2_CenterDialogWindows(int);
 extern void __cdecl d2_SetOverlayAnimation(int, int);
 extern void __cdecl d2_SetForm(int, int);
@@ -90,7 +90,7 @@ int __cdecl d2_RunRaeuberlagerTargetDialog(int unusedFlags, char* object)
 		fcn_00526120(buf, 0);
 		return 0;
 	}
-	dlg = fcn_00470820(0, 0, s_6aa4b8);
+	dlg = d2_LoadForm(0, 0, s_6aa4b8);
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);

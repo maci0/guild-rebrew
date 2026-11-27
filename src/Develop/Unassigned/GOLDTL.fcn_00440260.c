@@ -37,7 +37,7 @@ typedef struct {
     out[2] = g_1042168 * z + t.z
 
 /* ADDRESS: GOLDTL 0x00440260 */
-unsigned int __cdecl d3_ProjectFloorCellBounds(int a0, int a1, int gridX, int gridY)
+unsigned int __cdecl d3_ProjectFloorCellBounds(int floor, int cell, int gridX, int gridY)
 {
     PROJECTED_VECTOR q;
     PROJECTED_VECTOR t;
@@ -47,16 +47,16 @@ unsigned int __cdecl d3_ProjectFloorCellBounds(int a0, int a1, int gridX, int gr
     float y1;
     float z;
 
-    x0 = (float) (*(int*) (a0 + 4) * gridX);
-    x1 = (float) ((gridX + 1) * *(int*) (a0 + 4));
-    y0 = (float) (*(int*) (a0 + 4) * gridY);
-    y1 = (float) ((gridY + 1) * *(int*) (a0 + 4));
-    z = (float) *(unsigned char*) (a1 + 0x1ec);
+    x0 = (float) (*(int*) (floor + 4) * gridX);
+    x1 = (float) ((gridX + 1) * *(int*) (floor + 4));
+    y0 = (float) (*(int*) (floor + 4) * gridY);
+    y1 = (float) ((gridY + 1) * *(int*) (floor + 4));
+    z = (float) *(unsigned char*) (cell + 0x1ec);
     PROJECT_CORNER(g_6b8080[0], x0, y0);
     PROJECT_CORNER(g_6b8080[1], x1, y0);
     PROJECT_CORNER(g_6b8080[2], x1, y1);
     PROJECT_CORNER(g_6b8080[3], x0, y1);
-    z = (float) *(unsigned char*) (a0 + 0x28d + (gridX + gridY * 8) * 500);
+    z = (float) *(unsigned char*) (floor + 0x28d + (gridX + gridY * 8) * 500);
     PROJECT_CORNER(g_6b8080[4], x0, y0);
     PROJECT_CORNER(g_6b8080[5], x1, y0);
     PROJECT_CORNER(g_6b8080[6], x1, y1);

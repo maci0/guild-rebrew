@@ -25,7 +25,7 @@ extern char* g_7746c4;
 unsigned char* __cdecl fcn_005bdc30(int, Query*, int, int, int);
 int __cdecl gm_CheckEntityType(unsigned char*);
 void __cdecl d2_EnterBuildingObjekt(unsigned char*, int, char*);
-unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
+unsigned char __cdecl gm_GetEntityUiFlags(int, unsigned char*, int, int);
 void __cdecl d3_FocusCameraOnEntity(unsigned char*);
 
 void __cdecl d2_HandleEntityChooser(void)
@@ -58,7 +58,7 @@ void __cdecl d2_HandleEntityChooser(void)
 		return;
 	}
 	if (gm_CheckEntityType(e) && *e == 0x47) {
-		if (fcn_00506380(g_774970, e, 0, 0) & 1) {
+		if (gm_GetEntityUiFlags(g_774970, e, 0, 0) & 1) {
 			d2_EnterBuildingObjekt(e, 0xfd, "");
 		}
 		return;

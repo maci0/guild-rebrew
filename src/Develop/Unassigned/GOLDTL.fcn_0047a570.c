@@ -6,32 +6,32 @@ extern int g_67dac0;
 
 
 /* ADDRESS: GOLDTL 0x0047a570 */
-int __cdecl fcn_0047a570(int a0, int a1, int a2, int* countOut, int* sizesOut, int a5)
+int __cdecl d2_ComputeShapeSheetSizes(int shapeCount, int cellW, int cellH, int* countOut, int* sizesOut, int allowSplit)
 {
 	int tmp[8];
 	int n;
 	int size;
-	int v1;
-	int v2;
+	int cols;
+	int rows;
 	int prod;
-	int bp;
+	int sheetCount;
 
 	unsigned int i;
 	int k;
 
-	if (a1 > a2) {
-		n = a1;
+	if (cellW > cellH) {
+		n = cellW;
 	}
 	else {
-		n = a2;
+		n = cellH;
 	}
-	if (a0 > 1) {
-		v1 = (int) (sqrt((double) a0) + 1.0);
+	if (shapeCount > 1) {
+		cols = (int) (sqrt((double) shapeCount) + 1.0);
 	}
 	else {
-		v1 = a0;
+		cols = shapeCount;
 	}
-	n = v1 * n;
+	n = cols * n;
 	i = n;
 	size = 0;
 	do {
@@ -49,27 +49,27 @@ int __cdecl fcn_0047a570(int a0, int a1, int a2, int* countOut, int* sizesOut, i
 	if (g_67dac0 < size) {
 		size = g_67dac0;
 	}
-	if ((float) n / (float) size < 0.9f && size > 0x40 && a5 != 0
-	    && size / 2 > a1 && size / 2 > a2) {
+	if ((float) n / (float) size < 0.9f && size > 0x40 && allowSplit != 0
+	    && size / 2 > cellW && size / 2 > cellH) {
 		size >>= 1;
 	}
-	v1 = size / a1;
-	v1 = (int) (1.0f > (float) v1 + 0.5f ? 1.0f : (float) v1 + 0.5f);
-	v2 = size / a2;
-	v2 = (int) (1.0f > (float) v2 + 0.5f ? 1.0f : (float) v2 + 0.5f);
-	prod = v1 * v2;
-	bp = a0 / prod < 1 ? 1 : a0 / prod;
-	for (k = 0; k < bp; k++) {
+	cols = size / cellW;
+	cols = (int) (1.0f > (float) cols + 0.5f ? 1.0f : (float) cols + 0.5f);
+	rows = size / cellH;
+	rows = (int) (1.0f > (float) rows + 0.5f ? 1.0f : (float) rows + 0.5f);
+	prod = cols * rows;
+	sheetCount = shapeCount / prod < 1 ? 1 : shapeCount / prod;
+	for (k = 0; k < sheetCount; k++) {
 		sizesOut[k] = size;
 	}
-	if (bp >= 1 && a0 % prod != 0 && a0 > prod && a5 != 0) {
+	if (sheetCount >= 1 && shapeCount % prod != 0 && shapeCount > prod && allowSplit != 0) {
 
-		fcn_0047a570(a0 % prod, a1, a2, &a0, tmp, 0);
-		if (a0 > 0) {
-			memcpy(&sizesOut[bp], tmp, a0 * 4);
-			bp += a0;
+		d2_ComputeShapeSheetSizes(shapeCount % prod, cellW, cellH, &shapeCount, tmp, 0);
+		if (shapeCount > 0) {
+			memcpy(&sizesOut[sheetCount], tmp, shapeCount * 4);
+			sheetCount += shapeCount;
 		}
 	}
-	*countOut = bp;
+	*countOut = sheetCount;
 	return 1;
 }

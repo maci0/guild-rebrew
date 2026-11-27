@@ -19,7 +19,7 @@ typedef struct Run {
 } Run;
 
 /* ADDRESS: GOLDTL 0x0047a710 */
-int __cdecl fcn_0047a710(int x, int y, char* hdr, Surface* s)
+int __cdecl d2_DrawShapeToArgbSurface(int x, int y, char* hdr, Surface* s)
 {
 	int* runs;
 	int j;

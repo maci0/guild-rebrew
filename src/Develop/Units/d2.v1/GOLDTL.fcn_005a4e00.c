@@ -5,7 +5,7 @@
 #include "Develop/Units/d2.v1/d2_window_view.h"
 extern int g_14ab694;
 int __cdecl d2_SetOverlayAnimation(int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DrawPanelFrame(int, int, int);
@@ -54,7 +54,7 @@ void __cdecl fcn_005a4e00(char* building)
 		items[i][2] = 0;
 	}
 	d2_SetOverlayAnimation(0, 0);
-	h = fcn_00470820(0, 0, (char*) 0x6aac2c);
+	h = d2_LoadForm(0, 0, (char*) 0x6aac2c);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);

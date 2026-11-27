@@ -21,7 +21,7 @@ extern g_662318_f g_662318;
 
 
 
-void __stdcall fcn_0042dcd0(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long);
+void __stdcall tb_TimerCallback(unsigned int, unsigned int, unsigned long, unsigned long, unsigned long);
 void __cdecl fcn_0064d3eb(unsigned int);
 
 int __cdecl tb_StartTimer(unsigned int delay, int oneshot)
@@ -34,9 +34,9 @@ int __cdecl tb_StartTimer(unsigned int delay, int oneshot)
 	g_1052c50 = delay;
 	g_6b7fc4 = oneshot;
 	if (oneshot) {
-		g_6b7fa8 = g_66231c(delay, g_1052c48[0] + 5, fcn_0042dcd0, 0, 0);
+		g_6b7fa8 = g_66231c(delay, g_1052c48[0] + 5, tb_TimerCallback, 0, 0);
 	} else {
-		g_6b7fa8 = g_66231c(delay, g_1052c48[0] + 5, fcn_0042dcd0, 0, 1);
+		g_6b7fa8 = g_66231c(delay, g_1052c48[0] + 5, tb_TimerCallback, 0, 1);
 	}
 	if (g_6b7fa8 == 0) {
 		return 0;

@@ -14,7 +14,7 @@ extern char* g_1015ea0;
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetElementFont(int, int);
 
-void __cdecl fcn_005c9160(int text, int b, int c, int d, int e)
+void __cdecl d2_CreateRightAlignedText(int text, int b, int c, int d, int e)
 {
 	int idx;
 

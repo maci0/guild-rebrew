@@ -21,5 +21,5 @@ void __cdecl fcn_00443230(int flag)
 	for (i = 0; i < g_10404a0; i++) {
 		((Item*)g_104049c)[i].flags &= 0xbf;
 	}
-	d3_TraverseSceneObjects(g_67a370, 0, 0x40, fcn_00443270);
+	d3_TraverseSceneObjects(g_67a370, 0, 0x40, d3_PrecacheObjectTextures);
 }

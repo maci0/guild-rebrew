@@ -3,7 +3,7 @@ extern char* g_67a370;
 char* __cdecl gm_FindOrCreateEntitySlot(int, char*);
 char* __cdecl gm_GetEquippedCombatGear(char*);
 char* __cdecl gm_LookupEntityRecordIn32SlotTable(int);
-char __cdecl fcn_0045b990(int, int, void*, void*, void*);
+char __cdecl d3sm_SampleHeight(int, int, void*, void*, void*);
 void __cdecl fcn_00414be0(int, int, int, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl fcn_00533a40(char*);
@@ -35,7 +35,7 @@ void __cdecl d2_ShowCombatSlotStatus(int slotId, char* entity)
 	case 2:
 		opponent = gm_LookupEntityRecordIn32SlotTable(*(int*) (rec + 0x10));
 		sceneObj = *(int*) (*(int*) (opponent + 0x184) + 0x34);
-		if (fcn_0045b990(top, sceneObj + 0x4c, &col, &row, &height)) {
+		if (d3sm_SampleHeight(top, sceneObj + 0x4c, &col, &row, &height)) {
 			fcn_00414be0(sceneObj, 0xff, 0, 0);
 		}
 		{

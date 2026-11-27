@@ -33,12 +33,12 @@ extern int g_14ad0dc;
 extern int g_6a25e0;
 extern int g_6a25ec;
 
-int __cdecl fcn_00470820(int a, int b, char* s);
+int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, ...);
 int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 unsigned short* __cdecl gm_ResolveParentEntity(unsigned short* e);
-int __cdecl fcn_00506380(int id, unsigned char* store, int a, int b);
+int __cdecl gm_GetEntityUiFlags(int id, unsigned char* store, int a, int b);
 int __cdecl gm_CollectBuildingSubObjects(unsigned char* store, unsigned short* item, int a);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 
@@ -60,7 +60,7 @@ void __cdecl fcn_0052e250(unsigned short* item)
 	if (*item == 0x2db) {
 		return;
 	}
-	g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2f40);
+	g_6a25b8 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2f40);
 	d2_SetForm(g_6a25b8, 1);
 	if (((unsigned char*)g_7746c4) != 0 || g_7746c8 != 0) {
 		store = ((unsigned char*)g_7746c4) != 0 ? ((unsigned char*)g_7746c4) : g_7746c8;
@@ -80,7 +80,7 @@ void __cdecl fcn_0052e250(unsigned short* item)
 	rec = (char*) &((OBJECT_PROTOTYPE*) lpObjektePROT)[*item];
 	if (store != 0 && (*rec == 2 || *rec == 6)) {
 		parent = gm_ResolveParentEntity(item);
-		fl = fcn_00506380(g_774970, store, 0, 0);
+		fl = gm_GetEntityUiFlags(g_774970, store, 0, 0);
 		if (*parent != g_774970 && !(fl & 0x10)) {
 			g_6a25e0 = fcn_0052dee0(0, 0xa6, g_14ad0dc);
 		} else {

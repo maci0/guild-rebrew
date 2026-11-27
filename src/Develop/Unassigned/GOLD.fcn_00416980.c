@@ -3,7 +3,7 @@
 #include "Develop/Units/d3/d3_d3d.h"
 #include "client_scene_resources.h"
 
-unsigned char __cdecl fcn_004611a0(SCENE_RESOURCE*, unsigned char);
+unsigned char __cdecl d3_SetTextureColorKey(SCENE_RESOURCE*, unsigned char);
 void __cdecl d3_ConvertSurfaceFormat(void*, void*, void*, void*);
 void __cdecl d3_ScaleSurface(void*, void*);
 void* __cdecl m_alloc(int, const char*);
@@ -38,11 +38,11 @@ void __cdecl d3_InitSnowMipMaps(void)
 	float negative_minimum;
 	float scale;
 	float value;
-	texture = fcn_004605b0("snow_256_ns", 0, 0, 0);
+	texture = d3_LoadTexture("snow_256_ns", 0, 0, 0);
 	palette_object = 0;
 	if (texture != 0) {
-		fcn_004611a0(texture, 1);
-		fcn_00460e40(texture, 0);
+		d3_SetTextureColorKey(texture, 1);
+		d3_LoadTextureSurface(texture, 0);
 		surface = texture->com60;
 		if (surface == 0) {
 			goto release_texture;

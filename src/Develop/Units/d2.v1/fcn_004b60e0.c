@@ -8,16 +8,16 @@ extern char g_6a3440;
 #include "client_dialog_state.h"
 
 int __cdecl gm_LookupMissionSpec(int);
-char* __cdecl fcn_00470820(int, int, char*);
+char* __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(char*);
 void __cdecl d2_SetForm(char*, int);
-void __cdecl fcn_004b5630(int, int);
+void __cdecl d2_RunMissionBriefingDialog(int, int);
 void __cdecl io_AppendText(int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_DestroyForm(char*);
 void __cdecl fcn_004b5530(int, int);
 void __cdecl fcn_004b5a80(int);
-void __cdecl fcn_004b5b20(int);
+void __cdecl main_ExitToGameLoop(int);
 void __cdecl fcn_004b60e0(int);
 
 /* ADDRESS: GOLDTL 0x004b60e0 */
@@ -32,11 +32,11 @@ void __cdecl fcn_004b60e0(int flags)
 	r = 0;
 	tab = (unsigned short*) (0x7f4ca0 + (unsigned int) g_774970 * 0x21c);
 	tag = gm_LookupMissionSpec(g_10069a0);
-	obj = fcn_00470820(0, 0, (char*) 0x681130);
+	obj = d2_LoadForm(0, 0, (char*) 0x681130);
 	d2_CenterDialogWindows(obj);
 	d2_SetForm(obj, 0);
 	v = (flags & 0xfffffff6) | 0x100;
-	fcn_004b5630(tag, v);
+	d2_RunMissionBriefingDialog(tag, v);
 	d2_SetForm(obj, 1);
 	io_AppendText(0x1b95, *tab);
 	g_100f1dc = -1;
@@ -63,7 +63,7 @@ void __cdecl fcn_004b60e0(int flags)
 		return;
 	}
 	if (r == 3) {
-		fcn_004b5b20(v);
+		main_ExitToGameLoop(v);
 		return;
 	}
 }

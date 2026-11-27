@@ -5,7 +5,7 @@ extern char g_67a3e4[];
 void* __cdecl m_alloc(int, void*);
 void __cdecl fcn_00439e10(char*, char*);
 
-void __cdecl fcn_00439fa0(char* o)
+void __cdecl d3_AddObjectDrawData(char* o)
 {
 	int i;
 

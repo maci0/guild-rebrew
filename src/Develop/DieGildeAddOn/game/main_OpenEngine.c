@@ -40,14 +40,14 @@ int __cdecl txt_LoadTextFileDefinition(char*);
 #include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_004b2070(void);
 void __cdecl d2_ClearScreen(void);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_PositionWindow(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl io_AppendText(int, char*);
 void __cdecl nt_ConnectTcp(int, int);
 void __cdecl cm_ResetCommandQueue(void);
 void __cdecl fcn_00590650(void);
-void __cdecl fcn_00501040(char*);
+void __cdecl gm_InitGameData(char*);
 void __cdecl gm_ResetSlot170Table(void);
 void __cdecl init_LoadCharacterNames(void);
 void __cdecl ls_FreeList774a78(void);
@@ -61,7 +61,7 @@ int __cdecl sb_LoadSampleBank(char*, int);
 void __cdecl main_PreloadSound(char*);
 void __cdecl msx_InitDrivers(int, int, int);
 void __cdecl msx_ApplyAudioSettings(void);
-void __cdecl fcn_00525eb0(void);
+void __cdecl main_InitFrameProfile(void);
 void __cdecl d3_ResetSceneContextIndices(void);
 void __cdecl ch_InitActionQueue(void);
 void __cdecl fcn_004186c0(void);
@@ -116,7 +116,7 @@ extern int __cdecl main_InitRuntime(void);
 extern void __cdecl main_PlayIntroMovies(void);
 extern int __cdecl fcn_00538850(int topmost);
 extern int __cdecl main_OpenEngine(void);
-extern void __cdecl fcn_00538220(void);
+extern void __cdecl main_ShutdownEngine(void);
 extern void __cdecl fcn_00538160(void);
 extern int __cdecl main_PumpWindowMessages(void);
 extern void __cdecl main_Menue(void);
@@ -146,7 +146,7 @@ int __cdecl main_OpenEngine(void)
 	}
 	fcn_004b2070();
 	d2_ClearScreen();
-	screen = fcn_00470820(0, 0, "Misc\\Loading_main");
+	screen = d2_LoadForm(0, 0, "Misc\\Loading_main");
 	d2_PositionWindow(((Screen*)g_1038144)[screen].image, 3);
 	fcn_00469c40(0, d2_ScreenHeight - ((D2_WIN*)g_1015f40)[((Screen*)g_1038144)[screen].window].height - 0x30,
 		((D2_WIN*)g_1015f40)[((Screen*)g_1038144)[screen].window].slot);
@@ -156,7 +156,7 @@ int __cdecl main_OpenEngine(void)
 	cm_ResetCommandQueue();
 	fcn_00590650();
 	sprintf(path, "%sdata\\", g_6a3550);
-	fcn_00501040(path);
+	gm_InitGameData(path);
 	gm_ResetSlot170Table();
 	init_LoadCharacterNames();
 	ls_FreeList774a78();
@@ -187,7 +187,7 @@ int __cdecl main_OpenEngine(void)
 		SetTrackPath(path);
 	}
 	msx_ApplyAudioSettings();
-	fcn_00525eb0();
+	main_InitFrameProfile();
 	d3_ResetSceneContextIndices();
 	ch_InitActionQueue();
 	fcn_004186c0();

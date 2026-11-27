@@ -4,7 +4,7 @@ extern int g_774960;
 
 
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -16,7 +16,7 @@ void __cdecl d2_ShowEndRoundDialog(void)
 	int h;
 	int q;
 
-	h = fcn_00470820(0, 0, "Runde beenden");
+	h = d2_LoadForm(0, 0, "Runde beenden");
 	q = 0;
 	d2_CenterDialogWindows(h);
 	do {

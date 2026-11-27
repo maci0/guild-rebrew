@@ -36,7 +36,7 @@ void* __cdecl vfs_Tfopen(const char* cpath, const char* cmode, struct VFS_DIR* r
 void __cdecl gm_KillAllSpieler(void);
 void __cdecl ch_ClearCharacters(void);
 void __cdecl d3_ClearAllSceneContexts(void);
-int __cdecl fcn_005222a0(void* stream);
+int __cdecl d3_LoadSceneAndTerrain(void* stream);
 int __cdecl fcn_00524040(void* stream);
 int __cdecl ls_LoadExistingEntities(void* stream);
 int __cdecl fcn_00522510(void* stream);
@@ -65,7 +65,7 @@ int __cdecl ls_LoadHighOfficeTargets(void* stream, int version);
 int __cdecl ls_LoadRoutePoints(int stream);
 void __cdecl d3_RefreshBuildingPennants(void);
 void __cdecl d3_ResetWorldSceneState(void);
-void __cdecl fcn_00516de0(int a, char b);
+void __cdecl d3_UpdateSceneDetailLevel(int a, char b);
 
 /* ADDRESS: GOLDTL 0x00521920 */
 int __cdecl ls_LoadSavegame(char* cpath)
@@ -151,7 +151,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	if (ls_SaveVersion >= 0x10045 && amt_fio_LoadAemter(stream, ls_SaveVersion) == 0) {
 		goto fail;
 	}
-	if (fcn_005222a0(stream) == 0) {
+	if (d3_LoadSceneAndTerrain(stream) == 0) {
 		goto fail;
 	}
 	if (g_7f39c0[4] & 2) {
@@ -249,7 +249,7 @@ int __cdecl ls_LoadSavegame(char* cpath)
 	d3_RefreshBuildingPennants();
 	d3_RebuildWorldScene();
 	d3_ResetWorldSceneState();
-	fcn_00516de0(g_6b8300, 1);
+	d3_UpdateSceneDetailLevel(g_6b8300, 1);
 	strcpy(g_7e2480, g_7f3a5c);
 	return 1;
 

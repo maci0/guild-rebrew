@@ -2,7 +2,7 @@
 #include <windows.h>
 #include "Develop/Units/m_alloc/m_alloc.h"
 
-void __cdecl fcn_0045e610(void*, int);
+void __cdecl d3sm_Build(void*, int);
 
 /* d3sm shadow map record, 0x34 bytes; fields before 0x20 are unrecovered. */
 typedef struct D3SM {
@@ -31,7 +31,7 @@ D3SM* __cdecl d3sm_Create(int src, int n, int flag)
 			sm->entries = 0;
 		}
 		if (sm->height != 0) {
-			fcn_0045e610(sm, src);
+			d3sm_Build(sm, src);
 		}
 		if (n < 0) {
 			OutputDebugStringA("d3sm_Create(shadow)");

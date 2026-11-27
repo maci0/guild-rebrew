@@ -3,14 +3,14 @@
 #include "Develop/Units/d3/d3_camera.h"
 #include "client_lighting.h"
 extern char* g_6b86e0; extern float g_662d40[3];
-typedef struct V456ef0 {
+typedef struct D3_SHADOW_PROJ_VEC4 {
 	float x;
 	float y;
 	float z;
 	float w;
-} V456ef0;
+} D3_SHADOW_PROJ_VEC4;
 
-typedef struct Cam456ef0 {
+typedef struct D3_SHADOW_CAMERA {
 	char pad0[0x4c];
 	float x;
 	float y;
@@ -31,7 +31,7 @@ typedef struct Cam456ef0 {
 	float tx;
 	float ty;
 	float tz;
-} Cam456ef0;
+} D3_SHADOW_CAMERA;
 
 typedef struct Api456ef0 {
 	char pad0[0x1f0];
@@ -39,8 +39,8 @@ typedef struct Api456ef0 {
 } Api456ef0;
 
 void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
-void __cdecl d3_TransformPoint(char*, char*, V456ef0*);
-void __cdecl fcn_00455140(char*, float*, V456ef0*);
+void __cdecl d3_TransformPoint(char*, char*, D3_SHADOW_PROJ_VEC4*);
+void __cdecl fcn_00455140(char*, float*, D3_SHADOW_PROJ_VEC4*);
 float __cdecl fcn_00457140(char*, char*, char*);
 unsigned char __cdecl fcn_00437ee0(float*, int, int);
 void __cdecl fcn_00457290(char*, char*, int, float);
@@ -48,13 +48,13 @@ void __cdecl fcn_00457290(char*, char*, int, float);
 /* ADDRESS: GOLDTL 0x00456ef0 */
 void __cdecl d3_ProjectNodeShadows(char* node)
 {
-	V456ef0 position;
-	V456ef0 direction;
-	V456ef0 r;
+	D3_SHADOW_PROJ_VEC4 position;
+	D3_SHADOW_PROJ_VEC4 direction;
+	D3_SHADOW_PROJ_VEC4 r;
 	float h;
-	V456ef0 d;
+	D3_SHADOW_PROJ_VEC4 d;
 	float t;
-	Cam456ef0* cam;
+	D3_SHADOW_CAMERA* cam;
 	float* base;
 	float* q;
 	char* s;
@@ -98,13 +98,13 @@ void __cdecl d3_ProjectNodeShadows(char* node)
 				r.y = d.y * t + position.y;
 				r.z = d.z * t + position.z;
 			}
-			cam = (Cam456ef0*) d3_ActiveCamera;
+			cam = (D3_SHADOW_CAMERA*) d3_ActiveCamera;
 			d.x = r.x - cam->x;
 			d.y = r.y - cam->y;
 			d.z = r.z - cam->z;
 			q[0] = d.z * cam->m20 + d.y * cam->m10 + d.x * cam->m00 + cam->tx;
-			cam = (Cam456ef0*) d3_ActiveCamera; q[1] = d.z * cam->m21 + d.y * cam->m11 + d.x * cam->m01 + cam->ty;
-			cam = (Cam456ef0*) d3_ActiveCamera; q[2] = d.z * cam->m22 + d.y * cam->m12 + d.x * cam->m02 + cam->tz;
+			cam = (D3_SHADOW_CAMERA*) d3_ActiveCamera; q[1] = d.z * cam->m21 + d.y * cam->m11 + d.x * cam->m01 + cam->ty;
+			cam = (D3_SHADOW_CAMERA*) d3_ActiveCamera; q[2] = d.z * cam->m22 + d.y * cam->m12 + d.x * cam->m02 + cam->tz;
 			q += 0x14;
 			i--;
 		} while (i != 0);

@@ -3,7 +3,7 @@
 extern float g_fc5348;
 extern float g_fc2944;
 
-void __cdecl fcn_00458b10(char* object, char* camera, float* position, float* out);
+void __cdecl d3_TransformPointToView(char* object, char* camera, float* position, float* out);
 void __cdecl d3_UpdateObjectCameraTransform(char* object, char* parent, int force);
 
 /* ADDRESS: GOLD 0x004486e0 */
@@ -32,7 +32,7 @@ unsigned char __cdecl d3_GetObjectScreenRect(char* e, int* rect)
 		return 0;
 	}
 	if (*(int*) (e + 0x218) == 0) {
-		fcn_00458b10(e, d3_ActiveCamera, (float*) (e + 0x4c), v);
+		d3_TransformPointToView(e, d3_ActiveCamera, (float*) (e + 0x4c), v);
 		inv = 1.0f / v[2];
 		x = g_fc5348 * v[0] * inv + *(float*) 0xfe75fc;
 		y = g_fc2944 * v[1] * inv + *(float*) 0xfe7604;

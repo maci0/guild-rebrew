@@ -13,7 +13,7 @@ int __cdecl gm_GetBuildingTypeCategory(int);
 int __cdecl fcn_00502cd0(int, int, ...);
 void* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_00475c10(char*);
-int __cdecl fcn_00475780(void*, void*);
+int __cdecl d2_CompareRgb(void*, void*);
 void __cdecl d2_ReadSurfacePixel(int, int, int, void*);
 int __cdecl gm_GetWareIconId(void*);
 int __cdecl d2_CreateElement(short, short, int);
@@ -144,11 +144,11 @@ have_image:
 	for (; v3 < *(int*) (v12 + 8); v3++) {
 		for (v14 = 0; v14 < *(int*) (v12 + 4); v14++) {
 			d2_ReadSurfacePixel(v14, v3, v12, key);
-			if (fcn_00475780(key, white))
+			if (d2_CompareRgb(key, white))
 				goto next_pixel;
 			d2_ReadSurfacePixel(v14 + 1, v3, *(int*) 0x774680, key);
 			for (i = 0, q = (char*) 0x6a24ec; q < (char*) 0x6a2519; q += 3, i++) {
-				if (!fcn_00475780(key, q)) {
+				if (!d2_CompareRgb(key, q)) {
 					if (i >= 0xf)
 						goto next_pixel;
 					v21 = 0;

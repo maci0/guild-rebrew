@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0045f160 */
-char __cdecl fcn_0045f160(float* tex, float* pt, int* outx, int* outy, float* out)
+char __cdecl d3_SampleHeightmap(float* tex, float* pt, int* outx, int* outy, float* out)
 {
 	int x;
 	int y;

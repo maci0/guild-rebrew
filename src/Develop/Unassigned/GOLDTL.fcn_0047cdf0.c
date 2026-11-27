@@ -1,11 +1,11 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_0047c520(void);
+void __cdecl d2_ResetQuadDeviceState(void);
 
 
 /* ADDRESS: GOLDTL 0x0047cdf0 */
-void __cdecl fcn_0047cdf0(void)
+void __cdecl d2_ResetDrawState(void)
 {
 	d2_DrawDepthIndex = 0;
-	fcn_0047c520();
+	d2_ResetQuadDeviceState();
 }

@@ -28,13 +28,13 @@ extern char s_6ab6f8[];
 extern char s_6ab6e4[];
 extern char s_6ab6d0[];
 
-int __cdecl fcn_0046e940(int, int, int, int, int);
+int __cdecl d2_CreateWindow(int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(int, ...);
-int __cdecl fcn_0045a230(int, int, int);
-int __cdecl fcn_00459d50(int);
-int __cdecl fcn_00459d90(int, int);
+int __cdecl d3_GetSceneMemorySize(int, int, int);
+int __cdecl d3sm_GetMemorySize(int);
+int __cdecl d3_GetTerrainMemorySize(int, int);
 int __cdecl d3_GetAnimSize(char*);
 int __cdecl ch_CountCharacters(int, int);
 int __cdecl d2_UpdateWindowDrag(char*);
@@ -49,7 +49,7 @@ void __cdecl d2_ShowMemoryStats(void)
 	int v;
 	char* p;
 
-	h = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
+	h = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[h].slot, 0x54);
 	while (main_RunFrameLoop((void*) d2_ShowMemoryStats, 0x657c7) != 0) {
 		w = &((D2_WIN*)g_1015f40)[h];
@@ -59,21 +59,21 @@ void __cdecl d2_ShowMemoryStats(void)
 		d2_CurrentWindowId = h;
 		io_AppendText((int) "$C");
 		io_AppendText((int) s_6ab7e4);
-		total = fcn_0045a230(0x1ff, 0x80, 0);
+		total = d3_GetSceneMemorySize(0x1ff, 0x80, 0);
 		io_AppendText((int) s_6ab7cc, total);
-		v = fcn_0045a230(0x1ff, 1, 0);
+		v = d3_GetSceneMemorySize(0x1ff, 1, 0);
 		total += v;
 		io_AppendText((int) s_6ab7ac, v);
-		v = fcn_0045a230(0x1ff, 2, 0);
+		v = d3_GetSceneMemorySize(0x1ff, 2, 0);
 		total += v;
 		io_AppendText((int) s_6ab790, v);
-		v = fcn_00459d50(*(int*) (((char*)g_67a370) + 0xb0));
+		v = d3sm_GetMemorySize(*(int*) (((char*)g_67a370) + 0xb0));
 		total += v;
 		io_AppendText((int) s_6ab778, v);
-		v = fcn_00459d90(g_6b8300, 1);
+		v = d3_GetTerrainMemorySize(g_6b8300, 1);
 		total += v;
 		io_AppendText((int) s_6ab764, v);
-		v = fcn_0045a230(0x1ff, 0x28, 0);
+		v = d3_GetSceneMemorySize(0x1ff, 0x28, 0);
 		total += v;
 		io_AppendText((int) s_6ab748, v);
 		n = 0;

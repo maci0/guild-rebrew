@@ -37,7 +37,7 @@ extern char s_68b3f8[];
 
 char* __cdecl d3_FindSceneObjectAtScreenPoint(float a, float b, int flags, int mask);
 void __cdecl d2_ClearAnimationSlot(int handle);
-int __cdecl fcn_00506380(int a0, char* a1, unsigned short* a2, int a3);
+int __cdecl gm_GetEntityUiFlags(int a0, char* a1, unsigned short* a2, int a3);
 char* __cdecl fcn_00502cd0(int a0, int a1, int a2, int a3);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl fcn_0065f220(char* a, char* b);
@@ -120,7 +120,7 @@ void __cdecl sv_UpdateSceneHover(void)
 		} else {
 			target = 0;
 		}
-		g_7746dc = fcn_00506380((int) g_774970, target, (unsigned short*) sv_HoveredObjekt, 0);
+		g_7746dc = gm_GetEntityUiFlags((int) g_774970, target, (unsigned short*) sv_HoveredObjekt, 0);
 		if (sv_HoveredObjekt) {
 			v = (unsigned int) *(unsigned short*) sv_HoveredObjekt;
 			c = g_item_def_table[v * 0x41];
@@ -136,7 +136,7 @@ void __cdecl sv_UpdateSceneHover(void)
 		target = g_7746b0;
 	} else if (c == 2) {
 		g_7746b0 = *(char**) (cur + 0x204);
-		g_7746dc = fcn_00506380((int) g_774970, g_7746b0, 0, 0);
+		g_7746dc = gm_GetEntityUiFlags((int) g_774970, g_7746b0, 0, 0);
 		if (g_7746b0 && !(g_7746b0[0x5a] & 1)) {
 			if (g_7746b0[5]) {
 				fcn_0064d41a(g_100f8c0, s_6a2308, *(unsigned int*) ((unsigned int) *(unsigned char*) g_7746b0 * 0x38 + (int) g_14a6558), g_7746b0 + 5);
@@ -154,7 +154,7 @@ void __cdecl sv_UpdateSceneHover(void)
 		}
 	} else if (c == 3) {
 		g_7746b4 = *(char**) (cur + 0x204);
-		g_7746dc = fcn_00506380((int) g_774970, 0, 0, (int) g_7746b4);
+		g_7746dc = gm_GetEntityUiFlags((int) g_774970, 0, 0, (int) g_7746b4);
 		if (g_7746b4 && (fcn_00517c00(*(unsigned short*) g_7746b4, 1, 4, g_100f8c0), *(char*) ((int) g_7746b4 + 0x165) == 0x1c) && ((*(unsigned char*) (g_7746b4 + 0x1b4) & 1) && ((g_7746dc & 0x800) &&
 		    d3_CurrentContextIndex))) {
 			io_FormatTextBuffer(g_100f8c0, 0x414c, *(unsigned short*) g_7746b4);
@@ -199,7 +199,7 @@ void __cdecl sv_UpdateSceneHover(void)
 				}
 			}
 			if (rec) {
-				g_7746dc = fcn_00506380((int) g_774970, target, rec, 0);
+				g_7746dc = gm_GetEntityUiFlags((int) g_774970, target, rec, 0);
 				if (g_7746dc & 1) {
 					g_7725c4 = 0xb;
 					if (*g_7746bc == 0xfd) {

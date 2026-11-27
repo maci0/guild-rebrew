@@ -23,7 +23,7 @@ extern int g_14aadb4[];
 int __cdecl fcn_005cc240(int, int, int);
 void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
-void __cdecl fcn_005c9160(int, int, int, int, int);
+void __cdecl d2_CreateRightAlignedText(int, int, int, int, int);
 void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
 int __cdecl fcn_005cc890(int dialogId, int formId, int altFormId, unsigned int n, Item* items)
@@ -42,7 +42,7 @@ int __cdecl fcn_005cc890(int dialogId, int formId, int altFormId, unsigned int n
 		items[i].x10 = 0x4b;
 		items[i].x14 = i * 0x70 + 0x28;
 		fcn_005ca740(0x4b, i * 0x70 + 0x28, d2_CurrentWindowId, 0x56, &items[i], 1);
-		fcn_005c9160(g_14aadb4[items[i].x2c], 0x14a, i * 0x70 + 0x28 + 0x1e, 200, 0x55);
+		d2_CreateRightAlignedText(g_14aadb4[items[i].x2c], 0x14a, i * 0x70 + 0x28 + 0x1e, 200, 0x55);
 	}
 	d2_EnableDialogItems(n, items);
 	*(int*) &((D2_WIN*)g_1015f40)[d2_CurrentWindowId].pad3c[0x21c] = y;

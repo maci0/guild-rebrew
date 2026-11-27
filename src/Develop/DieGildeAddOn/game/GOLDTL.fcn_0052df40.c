@@ -49,7 +49,7 @@ extern int g_14ad0cc;
 extern int g_14ad0d4;
 
 int __cdecl gm_GetEntityMood(unsigned char* s);
-int __cdecl fcn_00470820(int a, int b, char* s);
+int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_FormatEntityNameMarkup(int id, int a, int b, char* out);
 void __cdecl io_AppendText(char* fmt, ...);
@@ -57,7 +57,7 @@ int __cdecl d2_AddElementToWindow(int x, int y, int kind, int owner);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 
-unsigned char __cdecl fcn_00506380(int, unsigned char*, int, int);
+unsigned char __cdecl gm_GetEntityUiFlags(int, unsigned char*, int, int);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 
 /* ADDRESS: GOLDTL 0x0052df40 */
@@ -73,7 +73,7 @@ void __cdecl d2_ShowBuildingInfoPanel(unsigned char* building)
 	if (g_6a25b8 != -1) {
 		return;
 	}
-	g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2f40);
+	g_6a25b8 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2f40);
 	d2_SetForm(g_6a25b8, 1);
 	if (*building != 0x47) {
 		io_FormatEntityNameMarkup(*(unsigned short*) (building + 0x27), 2, 1, name);
@@ -105,7 +105,7 @@ void __cdecl d2_ShowBuildingInfoPanel(unsigned char* building)
 	}
 	kind = gm_GetBuildingTypeCategory(*building);
 	t = (unsigned char*) &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[*building];
-	r = fcn_00506380(g_774970, building, 0, 0);
+	r = gm_GetEntityUiFlags(g_774970, building, 0, 0);
 	if (*(unsigned short*) (building + 0x27) == g_774970 || *(unsigned short*) (building + 0x25) == g_774970 || (r & 0x10) != 0) {
 		g_6a25ec = fcn_0052dee0(0, 0x8c, g_14ad0cc);
 	} else {

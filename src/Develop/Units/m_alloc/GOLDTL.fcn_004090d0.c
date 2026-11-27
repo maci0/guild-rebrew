@@ -7,8 +7,8 @@ struct path_421350 {
 };
 
 char* __cdecl d3sm_GetObjectSuperMap(int);
-char __cdecl fcn_0045b990(float*, float*, int*, int*, float*);
-int __cdecl fcn_0045b7e0(int, int, int, int*, int*);
+char __cdecl d3sm_SampleHeight(float*, float*, int*, int*, float*);
+int __cdecl d3sm_FindNearestValidCell(int, int, int, int*, int*);
 char __cdecl ch_FindWalkableCell(char*, float*, float*, int, int, int*, int*, int, int);
 unsigned short __cdecl FindPath(struct path_421350*, char*, int, int, int, int, int);
 void __cdecl m_FreeTracked(int);
@@ -33,12 +33,12 @@ unsigned int __cdecl fcn_004090d0(int self)
 
 	v1 = *(int*) (self + 0x14);
 	v4 = d3sm_GetObjectSuperMap(v1);
-	if (!fcn_0045b990((float*) v4,
+	if (!d3sm_SampleHeight((float*) v4,
 	                  (float*) (*(int*) (*(int*) (self + 0x14) + 0x34) + 0x4c),
 	                  &a0, &v10, (float*) v9)) {
 		return 0;
 	}
-	if (!fcn_0045b990((float*) v4,
+	if (!d3sm_SampleHeight((float*) v4,
 	                  (float*) (*(int*) (*(int*) (self + 0x110) + 0x34) + 0x4c),
 	                  (int*) &v12, &v11, (float*) v9)) {
 		return 0;
@@ -59,7 +59,7 @@ unsigned int __cdecl fcn_004090d0(int self)
 			v10 = v8;
 		}
 	}
-	fcn_0045b7e0((int) v4, a0, v10, &v14, &v13);
+	d3sm_FindNearestValidCell((int) v4, a0, v10, &v14, &v13);
 	a0 = v14;
 	v10 = v13;
 	ch_FindWalkableCell(v4, (float*) (*(int*) (v1 + 0x34) + 0x4c),

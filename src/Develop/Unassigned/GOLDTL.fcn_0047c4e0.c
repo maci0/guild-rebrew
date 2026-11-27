@@ -16,7 +16,7 @@ extern int g_772614;
 
 
 /* ADDRESS: GOLDTL 0x0047c4e0 */
-void __cdecl fcn_0047c4e0(void)
+void __cdecl d2_BindQuadVertexBuffer(void)
 {
 	if (g_772618 == 0) {
 		((Stream47c4e0Fn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x14c / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, g_772614, 0x1c);

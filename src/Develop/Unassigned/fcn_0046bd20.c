@@ -11,14 +11,14 @@ extern int d2_ScreenHeight;
 extern int g_1040494;
 extern int g_67d384;
 
-int __cdecl fcn_00465950(char* name);
+int __cdecl d2_FindResourceByName(char* name);
 void* __cdecl d2_GetResourceData(int handle);
 int __cdecl d2_MeasureTextWidth(char* text, int font);
 char* __cdecl fcn_0047b620(char* font, int c);
-int __cdecl fcn_0047cba0(int x, int y, int surface, void* font, int c);
-int __cdecl fcn_0047cbf0(int x, int y, int surface, void* font, int c);
-int __cdecl fcn_0047ccd0(int x, int y, int surface, void* font, int c);
-int __cdecl fcn_0047cd20(int x, int y, int surface, void* font, int c);
+int __cdecl d2_DrawSpriteFromSet(int x, int y, int surface, void* font, int c);
+int __cdecl d2_DrawDimmedSpriteFrame(int x, int y, int surface, void* font, int c);
+int __cdecl d2_DrawHighlightSprite(int x, int y, int surface, void* font, int c);
+int __cdecl d2_DrawBankSpriteColored(int x, int y, int surface, void* font, int c);
 void __cdecl d2_DrawTexturedQuad(int width, int y, int x, int height, int color, float alpha);
 
 /* ADDRESS: GOLDTL 0x0046bd20 */
@@ -63,7 +63,7 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
     g_77254c = 9999;
     g_772550 = y;
     if (!g_772524)
-        g_772524 = (char*)d2_GetResourceData(fcn_00465950("_FONT"));
+        g_772524 = (char*)d2_GetResourceData(d2_FindResourceByName("_FONT"));
     d2_FontHeight = *(unsigned short*)(g_772524 + 8);
     memset(words, 0, sizeof(words));
     if (surface && (flags & 0xa0)) {
@@ -105,9 +105,9 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
     }
     offset = 0;
     word_count = 0;
-    draw = fcn_0047cd20;
+    draw = d2_DrawBankSpriteColored;
     if (!(flags & 0x40))
-        draw = fcn_0047cba0;
+        draw = d2_DrawSpriteFromSet;
     text = (char*)text_address;
     length = strlen(text);
     if (length > 0) {
@@ -192,9 +192,9 @@ int __cdecl fcn_0046bd20(int x, int y, int width, int height, int surface,
                             if (c != ' ') {
                                 if (surface) {
                                     if (flags & 2)
-                                        fcn_0047ccd0(draw_x, draw_y, surface, g_772524, c);
+                                        d2_DrawHighlightSprite(draw_x, draw_y, surface, g_772524, c);
                                     else if (flags & 1)
-                                        fcn_0047cbf0(draw_x, draw_y, surface, g_772524, c);
+                                        d2_DrawDimmedSpriteFrame(draw_x, draw_y, surface, g_772524, c);
                                     else if (draw(draw_x, draw_y, surface, g_772524, c))
                                         d2_DrawDepthIndex--;
                                 }

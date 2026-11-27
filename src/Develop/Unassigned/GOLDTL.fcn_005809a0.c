@@ -4,7 +4,7 @@
 extern int* g_665f08;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_005809a0(int a1)
+int __cdecl d2_BindTutorialAction(int a1)
 {
 	int* p;
 

@@ -35,7 +35,7 @@ extern char g_699a9c[];
 extern int g_85ab60;
 
 
-int __cdecl fcn_00470820(int a, int b, int c);
+int __cdecl d2_LoadForm(int a, int b, int c);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int mode);
 void __cdecl io_AppendText(char* fmt, int a, int b);
@@ -50,7 +50,7 @@ int __cdecl d2_OpenDependencyDiagram(int arg, unsigned char* a, unsigned short* 
 	int i;
 	int j;
 
-	g_7f4c10 = fcn_00470820(0, 0, arg);
+	g_7f4c10 = d2_LoadForm(0, 0, arg);
 	d2_CenterDialogWindows(g_7f4c10);
 	g_7f3ee8 = g_6b7fac;
 	s = &((Slot*)g_1015f40)[g_1038150[g_7f4c10].owner];

@@ -5,7 +5,7 @@ extern char g_676cf8[];
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl evt_LogScriptError(void*, int, char*);
 
-int __cdecl fcn_0040f8a0(char** objectRef)
+int __cdecl d3_TriggerEmitter(char** objectRef)
 {
 	char* p;
 

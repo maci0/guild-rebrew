@@ -2,7 +2,7 @@
 #include "client_scene_loader.h"
 
 /* ADDRESS: GOLD 0x00461080 */
-void __cdecl fcn_00461080(int selector, SCENE_PROGRESS progress)
+void __cdecl d3_ReloadAllTextures(int selector, SCENE_PROGRESS progress)
 {
 	SCENE_RESOURCE* r;
 	unsigned int i;
@@ -22,7 +22,7 @@ void __cdecl fcn_00461080(int selector, SCENE_PROGRESS progress)
 	r = g_104049c;
 	for (i = 0; i < g_10404a0; i++, r++) {
 		if (r->level > 0 && (r->flags & 2) == 0) {
-			fcn_00460e40(r, selector);
+			d3_LoadTextureSurface(r, selector);
 			if (progress != 0) {
 				progress(1, done, total);
 			}

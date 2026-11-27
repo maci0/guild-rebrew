@@ -1,7 +1,7 @@
 extern char* g_1006920[];
 extern int g_7728f4;
 
-char* __cdecl fcn_0044c310(char* key, char* val);
+char* __cdecl d3_AcquireModel(char* key, char* val);
 
 void __cdecl gv_SpawnIfPending(char*);
 extern char g_6813e8[];
@@ -20,7 +20,7 @@ char* __cdecl fcn_004bcab0(char* name)
 	int index;
 	char* found;
 
-	found = fcn_0044c310(name, name);
+	found = d3_AcquireModel(name, name);
 	index = g_7728f4;
 	g_1006920[index] = found;
 	found = ((char**) g_1006920)[index];

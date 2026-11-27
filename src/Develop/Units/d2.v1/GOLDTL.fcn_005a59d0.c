@@ -32,7 +32,7 @@ extern double g_6640e8;
 
 void __cdecl ResetDisplayCounters(void);
 int __cdecl CountDisplayCounters(void);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_SetForm(int, int);
@@ -52,7 +52,7 @@ int __cdecl d2_SetSlotVisibility(int, int);
 void __cdecl d2_SetElementImage(int, int);
 void __cdecl d2_SetElementValue(int, ...);
 void __cdecl d2_ClearSelectedControl(void);
-int __cdecl fcn_00508620(int, int);
+int __cdecl gm_TradeUnitsToAmount(int, int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl cm_SendLogAction(char*);
 int __cdecl cm_SendTraceEnd(char*);
@@ -87,7 +87,7 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 		*(int*)((char*)globRows + v7 + 0xc) = 0;
 		v7 += 0x1c;
 	} while (v7 < 0x1c0);
-	dialogId = fcn_00470820(0, 0, g_6aac84);
+	dialogId = d2_LoadForm(0, 0, g_6aac84);
 	d2_CenterDialogWindows(dialogId);
 	e2 = d2_GetWindowListItem(dialogId, 0, 2);
 	e3 = d2_GetWindowListItem(dialogId, 0, 3);
@@ -212,19 +212,19 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 				if (v2 != v3) {
 					v4 = ownRows[v30].x14;
 					factor = (float) (*(int*)(a0 + 0x6d) * 0.01);
-					value = (float) fcn_00508620(v4, v3);
+					value = (float) gm_TradeUnitsToAmount(v4, v3);
 					if (g_774970 != *(unsigned short*)(a0 + 0x27)) {
 						fee = value * factor;
-						v17 = fcn_00508620(1, v3);
-						if (!((float) v17 < fee)) fee = (float) fcn_00508620(1, v3);
+						v17 = gm_TradeUnitsToAmount(1, v3);
+						if (!((float) v17 < fee)) fee = (float) gm_TradeUnitsToAmount(1, v3);
 					} else fee = 0.0f;
-					v17 = fcn_00508620(globRows[v16].x18, v2);
+					v17 = gm_TradeUnitsToAmount(globRows[v16].x18, v2);
 					if ((float) v17 < value) {
 						io_FormatTextBuffer(buf, 0x18fd, v2 * 2 + 0x9a8);
 						d2_SetMouseTooltip(buf);
 					} else {
 						v28 = (int) value;
-						v17 = fcn_00508620(v4, v3);
+						v17 = gm_TradeUnitsToAmount(v4, v3);
 						cm_SendLogAction(g_6aac7c);
 						cm_SendSellObjekt(-1, *(int*)(g_774970 * 0x21c + 0x7f4ca4), v2, v28, g_773d75, 0);
 						cm_SendSellObjekt(*(int*)(g_774970 * 0x21c + 0x7f4ca4), -1, v3, (int) (v17 - fee), g_773d75, 0);
@@ -251,15 +251,15 @@ int __cdecl d2_ShowMoneyExchangeDialog(char* a0)
 				if (v3 != v2) {
 					v4 = globRows[v30].x14;
 					v1 = ownRows[v16].x18 < v4 ? ownRows[v16].x18 : v4;
-					value = (float) fcn_00508620(v1, v2);
+					value = (float) gm_TradeUnitsToAmount(v1, v2);
 					if (g_774970 != *(unsigned short*)(a0 + 0x27)) {
 						fee = (float) (*(int*)(a0 + 0x6d) * 0.01 * value);
-						v17 = fcn_00508620(1, v3);
-						if (!((float) v17 < fee)) fee = (float) fcn_00508620(1, v3);
+						v17 = gm_TradeUnitsToAmount(1, v3);
+						if (!((float) v17 < fee)) fee = (float) gm_TradeUnitsToAmount(1, v3);
 					} else fee = 0.0f;
-					v17 = fcn_00508620(globRows[v30].x18, v3);
+					v17 = gm_TradeUnitsToAmount(globRows[v30].x18, v3);
 					if (!((float) v17 < value)) {
-						fcn_00508620(v1, v3);
+						gm_TradeUnitsToAmount(v1, v3);
 						cm_SendLogAction(g_6aac7c);
 						v28 = (int) value;
 						cm_SendSellObjekt(-1, *(int*)(g_774970 * 0x21c + 0x7f4ca4), v3, v28, g_773d75, 0);

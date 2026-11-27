@@ -11,7 +11,7 @@ int __cdecl d2_AddToRadioGroup();
 int __cdecl d2_ClearRadioGroup();
 int __cdecl d2_SelectRadioGroup();
 int __cdecl d2_UpdateRadioGroup();
-int __cdecl fcn_00470820();
+int __cdecl d2_LoadForm();
 int __cdecl d2_SetFormVisibility();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl d2_DestroyForm();
@@ -36,7 +36,7 @@ int __cdecl main_RunFrameLoop();
 int __cdecl d2_RunParentProfessionSelection();
 int __cdecl d2_ShowChooseProfessionDialog();
 int __cdecl d2_RunChoosePlayerDialog();
-int __cdecl fcn_0053e8a0();
+int __cdecl d2_RunChooseCharacterIntroDialog();
 
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -58,7 +58,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 	v12 = 0;
 	v1 = 0;
 	v13 = -1;
-	dialog = fcn_00470820(0, 0, 0x68116c);
+	dialog = d2_LoadForm(0, 0, 0x68116c);
 	d2_CenterDialogWindows(dialog);
 	d2_SetForm(dialog, 0);
 	v3 = io_AppendText(0x1ac5, 0x1ac7, 0x1ac8, 0x1ac9, 0x1aca);
@@ -119,7 +119,7 @@ int __cdecl d2_RunChooseHistoryMenu(void)
 				cut_EventLoopFlags = 0x12d6;
 				cut_WaitForScript(fcn_004e4470(0x6a4024));
 			} else {
-				r = fcn_0053e8a0(0);
+				r = d2_RunChooseCharacterIntroDialog(0);
 				if (r == 1) {
 					d2_SuppressOverlay = r;
 					*(int*) 0x6a37f8 = d2_OpenMessageBox(g_14abee0[9], 0);

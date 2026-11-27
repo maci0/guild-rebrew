@@ -12,7 +12,7 @@ extern char s_6a3bd4[];
 extern char s_6a3bcc[];
 extern char s_6a3bc4[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -20,7 +20,7 @@ void __cdecl d2_SetElementEnabled(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl io_AppendText(int, ...);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl fcn_00534160(int, int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -52,10 +52,10 @@ int __cdecl fcn_0053b1b0(void)
 			st[6 + st[i]] = (int) (st[6 + st[i]] + 63.0);
 	}
 	memcpy((void*) 0x7e1fc0, st, 44);
-	dlg = fcn_00470820(0, 0, s_6a3bd4);
+	dlg = d2_LoadForm(0, 0, s_6a3bd4);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, 2);
 	io_AppendText(0x1ae2);
 	if (main_RunFrameLoop((void*) fcn_0053b1b0, 0x12d6) != 0) {

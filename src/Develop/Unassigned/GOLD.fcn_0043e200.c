@@ -8,7 +8,7 @@ char __cdecl d3_VisitSceneObjectsUntilStopped(char*, char*, unsigned int, char (
 char __cdecl d3_RenderSceneObject(char*, void*);
 char __cdecl d3_RenderMirroredObject(char*, void*);
 void __cdecl d3_UpdateAndRenderEffect(char*);
-void __cdecl fcn_0045d4f0(void*);
+void __cdecl d3_RenderSky(void*);
 void __cdecl d3_UpdateSceneOverlayObjects(void);
 void __cdecl d3_FlushRenderQueues(void); extern float g_5ebaa4;
 #include "client_lighting.h"
@@ -70,7 +70,7 @@ void __cdecl d3_RenderScene(unsigned int pass, int overlay)
         p = next;
     }
     if (*(void**) 0x633dd4)
-        fcn_0045d4f0(*(void**) 0x633dd4);
+        d3_RenderSky(*(void**) 0x633dd4);
     if ((unsigned char) overlay)
         d3_UpdateSceneOverlayObjects();
     if ((*(unsigned char*) 0xfe7670 & 0x40) && *(int*) 0x63344c &&

@@ -25,12 +25,12 @@ extern int g_6b8484;
 extern float g_6628a8;
 
 int __cdecl fcn_00449600(int a);
-int __cdecl fcn_00448cc0(int self, float* dir, float* view, int pos,
+int __cdecl d3_StepObjectBasisTransform(int self, float* dir, float* view, int pos,
 	float* outA, float* outB);
 void __cdecl d3_SetNodePosition(int h, float* p);
 void __cdecl d3_SetObjectRotation(int h, float* p);
 void __cdecl UpdateSceneLighting(int a);
-int __cdecl fcn_00448b10(void);
+int __cdecl d3_HandleDebugCameraHotkeys(void);
 
 /* ADDRESS: GOLDTL 0x00449600 */
 int __cdecl fcn_00449600(int a1)
@@ -184,7 +184,7 @@ both:
 	p34[0] = f10;
 	p34[1] = f04;
 call:
-	ok = (u8) fcn_00448cc0(h, p34, p28, handle, p44, a18);
+	ok = (u8) d3_StepObjectBasisTransform(h, p34, p28, handle, p44, a18);
 	dirty = (char) (ok & 1);
 	changed = (char) (ok >> 1);
 	if (dirty != 0)
@@ -203,7 +203,7 @@ out:
 		UpdateSceneLighting(1);
 		dirty = 1;
 	}
-	ok = (u8) fcn_00448b10();
+	ok = (u8) d3_HandleDebugCameraHotkeys();
 	if ((ok | dirty) == 0 && changed == 0)
 		return 0;
 	return 1;

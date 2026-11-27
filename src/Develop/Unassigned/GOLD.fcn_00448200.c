@@ -23,9 +23,9 @@ SCENE_RESOURCE* __cdecl d3_CreateSceneResource(const char* name, unsigned char f
     style.bits.alpha = 0x7f;
     style.bits.flag = flag;
     if (d3d_Device != 0 && (*(unsigned char*)0xfe798c & 1)) {
-        resource = fcn_004605b0(name, style.value, 0, 0);
+        resource = d3_LoadTexture(name, style.value, 0, 0);
         if (resource != 0) {
-            fcn_00460e40(resource, 0);
+            d3_LoadTextureSurface(resource, 0);
         }
         return resource;
     }

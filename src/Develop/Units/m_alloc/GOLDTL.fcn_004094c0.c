@@ -8,7 +8,7 @@ extern int __cdecl d3_RemoveObjectAnim();
 extern int __cdecl d3_GetContextIndex();
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
 extern int __cdecl ch_FindCharacterByName();
-extern char __cdecl fcn_0045b990();
+extern char __cdecl d3sm_SampleHeight();
 extern void __cdecl m_FreeTracked(void* ptr);
 extern void* __cdecl m_alloc(unsigned int size, const char* tag);
 extern int __cdecl ch_FindWalkableCell();
@@ -74,7 +74,7 @@ unsigned int __cdecl fcn_004094c0(int rec, int gridContext)
 		}
 		if (*(unsigned char*) (rec + 0x160) & 8)
 			*(int*) (rec + 0x110) = ch_FindCharacterByName(rec + 0x114);
-		r = fcn_0045b990(gridContext, *(int*) (*(int*) (rec + 0x14) + 0x34) + 0x4c,
+		r = d3sm_SampleHeight(gridContext, *(int*) (*(int*) (rec + 0x14) + 0x34) + 0x4c,
 		    &v15, &v14, &cell.flags);
 		if (r == 0) {
 			if (g_6b5c28 != 0)

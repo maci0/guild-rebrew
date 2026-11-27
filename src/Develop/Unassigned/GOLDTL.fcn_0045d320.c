@@ -17,9 +17,9 @@ typedef struct Tex {
 extern char* g_104049c;
 extern unsigned int g_10404a0;
 
-void __cdecl fcn_0045bfb0(Tex*);
+void __cdecl d3_ReleaseTexture(Tex*);
 
-void* __cdecl fcn_0045d320(Tex* t, char all)
+void* __cdecl d3_DetachAndReleaseTexture(Tex* t, char all)
 {
 	void* r;
 	unsigned int i;
@@ -35,11 +35,11 @@ void* __cdecl fcn_0045d320(Tex* t, char all)
 		if (t->id != -1 && t->x5c > 0 && all != 0) {
 			for (i = 0; i < g_10404a0; i++) {
 				if (((Tex*)g_104049c)[i].refs > 0 && ((Tex*)g_104049c)[i].id == t->id) {
-					fcn_0045d320(&((Tex*)g_104049c)[i], 0);
+					d3_DetachAndReleaseTexture(&((Tex*)g_104049c)[i], 0);
 				}
 			}
 		}
-		fcn_0045bfb0(t);
+		d3_ReleaseTexture(t);
 	}
 	return r;
 }

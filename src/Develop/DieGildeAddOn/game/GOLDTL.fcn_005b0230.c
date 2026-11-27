@@ -9,7 +9,7 @@ extern char* g_77255c;
 unsigned char* __cdecl gm_StartFilteredEntitySearch(int, ...);
 unsigned char* __cdecl gm_FindNextFilteredEntity(void);
 void __cdecl d3_TransformPoint(char*, float*, float*);
-int __cdecl fcn_0045b990(float*, float*, int*, int*, float*);
+int __cdecl d3sm_SampleHeight(float*, float*, int*, int*, float*);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl fcn_005b00f0(char*, int, int);
 void __cdecl fcn_005b00d0(int, int);
@@ -17,7 +17,7 @@ void __cdecl fcn_00469c40(int, int, int);
 int __cdecl fcn_005cfd00(unsigned short*, int*, unsigned char*);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_0046c310(int);
+void __cdecl d2_UpdateWindowScroll(int);
 
 typedef struct ScrollSlot {
 	int handle;	/* 0x00 */
@@ -132,7 +132,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 			handle = *(int*) (obj + 0x61);
 			if (handle != 0) {
 				d3_TransformPoint((char*) handle, (float*) (handle + 0x4c), pos);
-				fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
+				d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
 				slot->x = bld_x;
 				slot->y = bld_y;
 				fcn_005b00f0((char*) slot, base_x, base_y);
@@ -279,7 +279,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 			obj = d3_FindSceneObject(0, 0x100, 0, p);
 			if (obj != 0) {
 				d3_TransformPoint(obj, (float*) (obj + 0x4c), pos);
-				fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
+				d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
 				tmp.x = bld_x;
 				tmp.y = bld_y;
 				fcn_005b00f0((char*) &tmp, base_x, base_y);
@@ -306,7 +306,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 			obj = (char*) *(int*) (list + i * 4);
 			if (obj != 0) {
 				d3_TransformPoint(obj, (float*) (obj + 0x4c), pos);
-				fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
+				d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
 				tmp.x = bld_x;
 				tmp.y = bld_y;
 				fcn_005b00f0((char*) &tmp, base_x, base_y);
@@ -335,7 +335,7 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 	}
 
 	d3_TransformPoint((char*) handle, (float*) (handle + 0x4c), pos);
-	fcn_0045b990((float*) tex, pos, &bld_x, &bld_y, &height);
+	d3sm_SampleHeight((float*) tex, pos, &bld_x, &bld_y, &height);
 	tmp.x = bld_x;
 	tmp.y = bld_y;
 	fcn_005b00f0((char*) &tmp, base_x, base_y);
@@ -357,5 +357,5 @@ void __cdecl d2_BuildCityScrollMap(char* town)
 	}
 	*(int*) (g_cur_building + 0x268) = bld_x;
 	*(int*) (g_cur_building + 0x258) = bld_y;
-	fcn_0046c310(*(int*) g_cur_building);
+	d2_UpdateWindowScroll(*(int*) g_cur_building);
 }

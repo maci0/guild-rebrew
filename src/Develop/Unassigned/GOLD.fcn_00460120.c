@@ -19,7 +19,7 @@ extern TexSlot* g_fb9074;
 extern unsigned int g_fb9084;
 extern unsigned int g_fb91a8;
 
-TexSlot* __cdecl fcn_00460120(Col c, int* out)
+TexSlot* __cdecl d3_AllocTextureSlot(Col c, int* out)
 {
 	TexSlot* t;
 	int i;

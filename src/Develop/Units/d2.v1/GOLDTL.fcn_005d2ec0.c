@@ -24,7 +24,7 @@ extern int g_14ce8d8;
 #include "client_dialog_state.h"
 
 int __cdecl gm_FindWerbungCandidates(char*, int*, int*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -54,7 +54,7 @@ int __cdecl fcn_005d2ec0(char* a0)
 
 	res = 2;
 	gm_FindWerbungCandidates(a0, &count, ids);
-	dlg = fcn_00470820(0, 0, (char*) 0x6acbd4);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6acbd4);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1ce3);

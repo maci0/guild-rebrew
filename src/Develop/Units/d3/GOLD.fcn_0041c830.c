@@ -86,7 +86,7 @@ char *__cdecl d3_FormatGuid(GUID *guid, char *out);
 int __stdcall dd_EnumDevicesCallback(int a1, int a2, int a3, int a4, int a5, int a6);
 
 /* ADDRESS: GOLD 0x0041c830 */
-BOOL __stdcall fcn_0041c830(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+BOOL __stdcall dd_SelectDeviceDialogProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	int saved;
 	char text[512];

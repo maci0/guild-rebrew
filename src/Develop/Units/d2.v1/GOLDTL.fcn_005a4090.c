@@ -44,7 +44,7 @@ extern short g_7f4c0c;
 extern char g_6aaba0[];
 
 void __cdecl gm_GenerateLoanOffers(char*, ENTITY_RECORD*, int, struct want*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
@@ -80,7 +80,7 @@ void __cdecl d2_ChooseNewLoan(char* p)
 			j++;
 		}
 	}
-	h = fcn_00470820(0, 0, g_6aaba0);
+	h = d2_LoadForm(0, 0, g_6aaba0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x18d0);

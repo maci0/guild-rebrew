@@ -50,7 +50,7 @@ int __cdecl cm_SendSellObjekt(int, int, int, int, unsigned char, int);
 void __cdecl gm_TryRecordCrime(int, int, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 int __cdecl gm_UseSpecialObject(Ent* ent, Cmd* cmd)
 {
@@ -119,7 +119,7 @@ int __cdecl gm_UseSpecialObject(Ent* ent, Cmd* cmd)
 			if (cmd->shown == 1) {
 				io_FormatTextBuffer(text, 0xfe8, *(unsigned short*) (rec + 0x18) + 1);
 			}
-			fcn_005dbe90(text);
+			d2_ShowUseObjDialog(text);
 		}
 	}
 	return result;

@@ -7,7 +7,7 @@ char* __cdecl he_fn_Handlung(void);
 char* __cdecl gm_LookupEntityRecordById(int a1);
 char* __cdecl io_FormatTextBuffer(char* buf, int id, ...);
 char* __cdecl io_AppendText(int fmt, ...);
-int __cdecl fcn_00470820(int a, int b, char* name);
+int __cdecl d2_LoadForm(int a, int b, char* name);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_SetForm(int, int);
@@ -92,7 +92,7 @@ int __cdecl d2_RunCourtshipDialog(int entity, int* request)
 	if (mode == 1) {
 		return fcn_005d2ec0((char*) entity, request);
 	}
-	h = fcn_00470820(0, 0, (char*) 0x6acbbc);
+	h = d2_LoadForm(0, 0, (char*) 0x6acbbc);
 	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);

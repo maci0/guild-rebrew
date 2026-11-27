@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/event_callbacks.h"
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -58,7 +58,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
     case 0:
         if (*(int*) (participant + 0x10) != action[6]) return;
         *(float*) (participant + 0x98) = *(int*) (other + 0x24) + *(float*) (other + 0x1c);
-        dialog = fcn_00470820(0, 0, "cutscenes\\prozess");
+        dialog = d2_LoadForm(0, 0, "cutscenes\\prozess");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14bc, *(unsigned short*) own);
@@ -83,7 +83,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         return;
     case 1:
         if (*(int*) (participant + 0x10) != action[5]) return;
-        dialog = fcn_00470820(0, 0, "cutscenes\\prozess");
+        dialog = d2_LoadForm(0, 0, "cutscenes\\prozess");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14cb, *(unsigned short*) own, *(unsigned short*) other);
@@ -111,7 +111,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         gm_GenerateShuffledIndices(7, order);
         value = (gm_WalkEntityChain(*(unsigned short*) own)
             + gm_WalkEntityChain(*(unsigned short*) other)) / 2000;
-        dialog = fcn_00470820(0, 0, "cutscenes\\folterwahl");
+        dialog = d2_LoadForm(0, 0, "cutscenes\\folterwahl");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14db, *(unsigned short*) own);
@@ -142,7 +142,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         return;
     case 3:
         if (*(int*) (participant + 0x10) != action[10]) return;
-        dialog = fcn_00470820(0, 0, "cutscenes\\folterwahl");
+        dialog = d2_LoadForm(0, 0, "cutscenes\\folterwahl");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x14e3, *(unsigned short*) own, *(unsigned short*) other, *(unsigned short*) other);
@@ -168,7 +168,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         return;
     case 6:
         if (*(int*) (participant + 0x10) != action[6]) return;
-        dialog = fcn_00470820(0, 0, "cutscenes\\prozess");
+        dialog = d2_LoadForm(0, 0, "cutscenes\\prozess");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x1512, *(unsigned short*) own);
@@ -194,7 +194,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
     case 4:
         value = *(int*) (participant + 0x10);
         if (value != action[7] && value != action[8] && value != action[9]) return;
-        dialog = fcn_00470820(0, 0, "cutscenes\\prozess");
+        dialog = d2_LoadForm(0, 0, "cutscenes\\prozess");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x1529, *(unsigned short*) own);
@@ -225,7 +225,7 @@ void __cdecl cut_PromptProzessChoice(char* participant, int* action)
         available[1] = -1;
         available[2] = -1;
         base = gm_CalcProzessBasePenalty((char*) action);
-        dialog = fcn_00470820(0, 0, "cutscenes\\prozess");
+        dialog = d2_LoadForm(0, 0, "cutscenes\\prozess");
         fcn_00471d80(dialog, 3);
         d2_SetForm(dialog, 0);
         io_AppendText(0x1532, *(unsigned short*) own);

@@ -23,7 +23,7 @@ void __cdecl fcn_005c9090(int, int, int, int, int);
 void __cdecl fcn_005ca740(int, int, int, int, Item*, int);
 void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
-int __cdecl d2_LayoutAction6fCandidateList(int dialog, int selectedForm, int alternateForm, unsigned int n, Item* items)
+int __cdecl fcn_005cc620(int dialog, int selectedForm, int alternateForm, unsigned int n, Item* items)
 {
 	int y;
 	int half;

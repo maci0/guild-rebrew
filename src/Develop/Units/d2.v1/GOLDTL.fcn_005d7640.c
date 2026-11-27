@@ -29,7 +29,7 @@ extern int g_14ce8e0;
 int __cdecl amt_SendAndWaitOfficeCommand(ENTITY_RECORD*, ENTITY_RECORD*, ENTITY_RECORD*);
 void __cdecl io_FormatTextBuffer(char*, ...);
 int __cdecl fcn_00526120(char*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -100,7 +100,7 @@ int __cdecl d2_RunGegenspionageDialog(ENTITY_RECORD* ent, Cmd* cmd)
 		fcn_00526120(text, 0);
 		return 0;
 	}
-	h = fcn_00470820(0, 0, s_6acd38);
+	h = d2_LoadForm(0, 0, s_6acd38);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);

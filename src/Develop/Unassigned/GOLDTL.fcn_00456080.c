@@ -13,8 +13,8 @@ extern int g_1040624;
 
 
 
-extern void __cdecl fcn_00456400(int i, int j);
-extern void __cdecl fcn_00455c90(int i, int j);
+extern void __cdecl d3_SetupLeftEdgeStep(int i, int j);
+extern void __cdecl d3_SetupRightEdgeStep(int i, int j);
 extern void __cdecl fcn_00455d30(int count, int size, unsigned char flags, int arg3, int y);
 
 /* ADDRESS: GOLDTL 0x00456080 */
@@ -106,11 +106,11 @@ void __cdecl d3_RasterizeHeightTriangle(float* v, unsigned char* colors, int bas
 	}
 	if (g_1043040[lower1] <= g_1043040[upper1])
 		return;
-	fcn_00456400(upper1, lower1);
+	d3_SetupLeftEdgeStep(upper1, lower1);
 	y2 = g_1043040[lower2];
 	if (y2 <= g_1043040[upper2])
 		return;
-	fcn_00455c90(upper2, lower2);
+	d3_SetupRightEdgeStep(upper2, lower2);
 	ymin = (ymin + 0xffff) >> 16;
 	g_1042580 = ymin * size + base;
 	g_1040624 = grid;
@@ -123,11 +123,11 @@ void __cdecl d3_RasterizeHeightTriangle(float* v, unsigned char* colors, int bas
 		return;
 	ymid = ymin + count;
 	if (flip) {
-		fcn_00456400(lower1, lower2);
+		d3_SetupLeftEdgeStep(lower1, lower2);
 		count = ((y2 + 0xffff) >> 16) - ((y1 + 0xffff) >> 16);
 	}
 	else {
-		fcn_00455c90(lower2, lower1);
+		d3_SetupRightEdgeStep(lower2, lower1);
 		count = ((y1 + 0xffff) >> 16) - ((y2 + 0xffff) >> 16);
 	}
 	fcn_00455d30(count, size, flags, 0, ymid);

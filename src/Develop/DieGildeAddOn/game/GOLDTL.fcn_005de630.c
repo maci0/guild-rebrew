@@ -35,10 +35,10 @@ unsigned char* __cdecl d2_OpenTargetPicker(Req*, char*, int, int);
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 unsigned short __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
 {
@@ -83,7 +83,7 @@ int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
 	for (i = 0; i < 3; i++) {
 		cm_RequestCopyEntityData(e->entity_id, picks[i]->entity_id, gm_RandomMod(0x20) + 0x14, 1);
 	}
-	fcn_004ff210(e->entity_index, -0x32 - gm_RandomMod(0x40));
+	gm_ApplyEntityHealthDelta(e->entity_index, -0x32 - gm_RandomMod(0x40));
 	if (e->entity_state == 6 || e->entity_state == 7) {
 		io_FormatTextBuffer(text, 0x100d, picks[0]->entity_index, picks[0]->entity_index, picks[1]->entity_index, picks[2]->entity_index);
 		he_PostEntityMessage(e->entity_id, -1, text, 1, 0x5fb, 0);
@@ -104,7 +104,7 @@ int __cdecl gm_ObjDisruptTargetRivals(ENTITY_RECORD* obj, int* arg)
 	if (obj->entity_state == 6) {
 		io_FormatTextBuffer(text2, 0x10a1, e->entity_index, picks[0]->entity_index, picks[1]->entity_index, picks[2]->entity_index);
 		io_FormatTextBuffer(text, 0xfe8, text2);
-		fcn_005dbe90(text);
+		d2_ShowUseObjDialog(text);
 	}
 	return 1;
 }

@@ -31,7 +31,7 @@ extern char g_7f4ca0[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-int __cdecl fcn_0046e940(int x, int y, int w, int h, int a5);
+int __cdecl d2_CreateWindow(int x, int y, int w, int h, int a5);
 int __cdecl d2_CreateChildWindow(int x, int y, int cx, int cy, int a5, int win);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -60,7 +60,7 @@ void __cdecl d2_ShowCharacterActionDebug(void)
 
 	memset(ids, 0xff, sizeof(ids));
 	fill = 1;
-	left = d2_CreateChildWindow(0, 0, 0x140, 0x190, 0x10, win = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414));
+	left = d2_CreateChildWindow(0, 0, 0x140, 0x190, 0x10, win = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414));
 	right = d2_CreateChildWindow(0x140, 0, 0x140, 0x190, 0x10, win);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[win].slot, 0x54);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[left].slot, 0x54);

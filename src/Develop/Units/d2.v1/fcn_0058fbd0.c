@@ -19,11 +19,11 @@ struct msg58 {
 };
 extern int g_14ce8e0, d2_CurrentElementId;
 void __cdecl fcn_0052a0c0(void* a1, int a2);
-int __cdecl fcn_00470820(int a1, int a2, char* path);
+int __cdecl d2_LoadForm(int a1, int a2, char* path);
 void __cdecl d2_SetOverlayAnimation(int a1, int a2);
 void __cdecl d2_CenterDialogWindows(int a1);
 void __cdecl d2_SetForm(int a1, int a2);
-void __cdecl fcn_005340f0(int a1);
+void __cdecl d2_InitWindowBounds(int a1);
 int __cdecl io_AppendText(int a1, ...);
 int __cdecl d2_GetWindowListItem(int a1, int a2, int a3);
 int __cdecl main_RunFrameLoop(void* a1, int a2);
@@ -45,11 +45,11 @@ int __cdecl fcn_0058fbd0(char* gebaeude)
 	int sel;
 
 	fcn_0052a0c0(gebaeude, 0);
-	dlg = fcn_00470820(0, 0, (char*) 0x6a96d8);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6a96d8);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	one = 1;
 	d2_SetForm(dlg, one);
 	io_AppendText(0x40f6, 0x40f5, 0x228);

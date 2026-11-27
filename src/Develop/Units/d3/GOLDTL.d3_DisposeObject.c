@@ -9,7 +9,7 @@ extern char g_10432c0[];
 
 void __cdecl d3_SelectSceneContext(int a, int b);
 void __cdecl m_FreeTracked(void* p);
-void __cdecl fcn_00452420(char* p);
+void __cdecl d3_FreeMeshObject(char* p);
 void __cdecl d3_FreeObjectAnimation(char* obj);
 void __cdecl d3_ClearMatchingAuxSlot(void);
 void __cdecl d3_VisitSceneObjects(char* u, int b, int c, void (__cdecl* cb)(void), char* obj);
@@ -53,7 +53,7 @@ void __cdecl d3_DisposeObject(char* obj)
 	for (p = *(char**) (u + 0xa4); p != g_1040640; p = next) {
 		next = *(char**) (p + 0x314);
 		if (*(char**) (p + 0x2e4) == obj) {
-			fcn_00452420(p);
+			d3_FreeMeshObject(p);
 		}
 	}
 	if (*(int*) (obj + 0x1d0) != 0) {

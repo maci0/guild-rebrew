@@ -21,7 +21,7 @@ char* __cdecl he_fn_Handlung(void);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl gm_WalkEntityChain(unsigned short);
 double __cdecl gm_RandomFloat01(void);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -103,7 +103,7 @@ void __cdecl d2_RunLoesegeldDialog(char* rec)
 	}
 	cnt = (int) prob;
 	cnt = (int) ((double) cnt * (double) weight);
-	ctx = (char*) fcn_00470820(0, 0, g_6ab2e0);
+	ctx = (char*) d2_LoadForm(0, 0, g_6ab2e0);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows((int) ctx);
 	d2_SetForm((int) ctx, 1);

@@ -17,7 +17,7 @@ void __cdecl fcn_0047ac60(int h, int v);
 void __cdecl fcn_004752e0(int h);
 void __cdecl d2_DestroyHudOverlay(void);
 void __cdecl d2_CloseWindow(int h);
-void __cdecl fcn_0052f710(void);
+void __cdecl d2_DestroySelectionPanel(void);
 
 void __cdecl fcn_00527420(void)
 {
@@ -62,7 +62,7 @@ void __cdecl fcn_00527420(void)
 		d2_CloseWindow(g_6a2598);
 		g_6a2598 = -1;
 	}
-	fcn_0052f710();
+	d2_DestroySelectionPanel();
 	g_6a2524 = 1;
 }
 unsigned char _dpad_699368[37424] = {

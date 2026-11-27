@@ -8,7 +8,7 @@ extern int cut_EventLoopFlags;
 #include "client_dialog_state.h"
 extern int g_100f1dc;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -20,7 +20,7 @@ extern int g_772f2c;
 extern int d2_CurrentElementId;
 
 char* __cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -40,7 +40,7 @@ void __cdecl fcn_004e15c0(char* state)
 	int h;
 	int w;
 
-	h = fcn_00470820(0, 0, g_68ce48);
+	h = d2_LoadForm(0, 0, g_68ce48);
 	fcn_00471d80(h, 3);
 	d2_SetForm(h, 0);
 	io_AppendText(0x10de, *g_772f24);
@@ -81,7 +81,7 @@ void __cdecl fcn_004e16e0(char* state, int* event)
 		who = y;
 	else
 		who = x;
-	h = fcn_00470820(0, 0, g_68ce48);
+	h = d2_LoadForm(0, 0, g_68ce48);
 	fcn_00471d80(h, 3);
 	d2_SetForm(h, 0);
 	t = io_AppendText(0x10e6, g_772f2c, *(unsigned short*) ((int*)g_772f24), *(unsigned short*) who);

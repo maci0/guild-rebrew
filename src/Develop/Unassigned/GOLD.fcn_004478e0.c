@@ -6,7 +6,7 @@ void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
 void __cdecl d3_SetActiveCamera(char*);
 void __cdecl d3sm_Destroy(void*);
-void __cdecl fcn_0045e610(void*, int);
+void __cdecl d3sm_Build(void*, int);
 void* __cdecl d3sm_Create(int, int, int);
 void __cdecl d3_ClearObjectOverlayCoords(char*);
 void __cdecl d3_VisitSceneNodes(char*, int, int, void*);
@@ -193,7 +193,7 @@ char __cdecl d3_SelectSceneContext(int index, char force)
                 I32(0x633df8) = 0;
             }
         } else if (I32(0x633df8) != 0) {
-            fcn_0045e610((void*)I32(0x633df8), 0);
+            d3sm_Build((void*)I32(0x633df8), 0);
         } else {
             I32(0x633df8) = (int)d3sm_Create(0, -I32(0x633dcc), 1);
             d3_VisitSceneNodes((char*)I32(0x5fb5b0), 0, 0xc0, (void*)d3_ClearObjectOverlayCoords);

@@ -12,7 +12,7 @@ extern unsigned char g_773d75;
 extern pos14_7f4c00 gm_GameTime;
 int __cdecl gv_CheckSlotActive(void* slot, int type);
 void* __cdecl FindSlotEntryFiltered(void* a, void* b, int c, void* d, int e);
-int __cdecl fcn_004f1840(void*, int*);
+int __cdecl gv_IsGraveSlotFree(void*, int*);
 void __cdecl gm_SubObjectNoKill(int, int, int);
 void __cdecl gm_AddObjekt(int, int, int);
 void __cdecl he_NotifyFriedhofEvent08(char*, void*, void*, int, int, int);
@@ -59,7 +59,7 @@ int __cdecl fcn_004f25a0(char* req)
 	if (*(int*) (req + 0xc) < 0 || *(int*) (req + 0xc) > 3) {
 		return -5;
 	}
-	slot = FindSlotEntryFiltered(entity2, entity1, 0, (void*) fcn_004f1840, *(int*) (req + 0xc));
+	slot = FindSlotEntryFiltered(entity2, entity1, 0, (void*) gv_IsGraveSlotFree, *(int*) (req + 0xc));
 	if (slot == 0) {
 		return -7;
 	}

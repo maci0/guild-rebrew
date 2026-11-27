@@ -3,7 +3,7 @@
 
 unsigned short* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl gm_SetEntityLevel(int, int);
-void __cdecl fcn_004fdfe0(unsigned short*);
+void __cdecl ch_AssignHeadIcon(unsigned short*);
 
 int __cdecl cm_ExSetEntityLevel(char* command, char* result)
 {
@@ -14,7 +14,7 @@ int __cdecl cm_ExSetEntityLevel(char* command, char* result)
 		return 1;
 	}
 	gm_SetEntityLevel(*p, *(unsigned char*) (command + 0x14));
-	fcn_004fdfe0(p);
+	ch_AssignHeadIcon(p);
 	if (result != 0) {
 		result[0] = 1;
 		result[1] = 0;

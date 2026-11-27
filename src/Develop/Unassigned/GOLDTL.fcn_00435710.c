@@ -2,7 +2,7 @@
 
 extern volatile int g_6b7fac;
 
-void __cdecl fcn_00435710(char* o, float a, float b, unsigned int t0, unsigned int t1)
+void __cdecl d3_StartAnimWeightBlend(char* o, float a, float b, unsigned int t0, unsigned int t1)
 {
 	unsigned int now = (*(unsigned int*)&g_6b7fac);
 	float f;

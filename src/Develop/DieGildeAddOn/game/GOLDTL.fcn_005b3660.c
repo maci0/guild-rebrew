@@ -18,7 +18,7 @@ extern char s_6ab63c[];
 extern char s_6ab624[];
 extern char s_6ab610[];
 
-int __cdecl fcn_0046e940(int, int, int, int, int);
+int __cdecl d2_CreateWindow(int, int, int, int, int);
 void __cdecl d2_SetElementFont(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(int, ...);
@@ -37,7 +37,7 @@ void __cdecl d2_ShowScriptMemory(void)
 	int i;
 	char* e;
 
-	h = fcn_0046e940(0x20, 0x60, 0x280, 0x190, 0x414);
+	h = d2_CreateWindow(0x20, 0x60, 0x280, 0x190, 0x414);
 	d2_SetElementFont(((D2_WIN*)g_1015f40)[h].slot, 0x54);
 	while (main_RunFrameLoop((void*) d2_ShowScriptMemory, 0x657c7) != 0) {
 		w = &((D2_WIN*)g_1015f40)[h];

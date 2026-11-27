@@ -9,7 +9,7 @@ typedef struct { unsigned char kind; unsigned char unknown01[0x24c]; } BUILDING_
 
 int __cdecl d2_CheckOwnerBlocked(void*);
 void __cdecl fcn_0057e880(int, int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl fcn_0052a0c0(void*, unsigned int);
 void __cdecl d2_SetForm(int, int);
@@ -77,7 +77,7 @@ unsigned int __cdecl d2_RunProduktionDialog(unsigned char* building)
 		return 0;
 	}
 	fcn_0057e880(0x1f, 0, 0, 0);
-	window = fcn_00470820(0, 0, (char*) 0x6aa148);
+	window = d2_LoadForm(0, 0, (char*) 0x6aa148);
 	saved = window;
 	d2_CenterDialogWindows(window);
 	if (((BUILDING_PROTOTYPE *)lpGebaeudePROT)[*p].category == 0x1e) {

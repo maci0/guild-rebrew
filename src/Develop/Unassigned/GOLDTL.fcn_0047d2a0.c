@@ -23,7 +23,7 @@ void* __cdecl he_NotifyFeudEscalated(void*, void*);
 void __cdecl he_NotifyFeudEnded(void*, void*);
 
 /* ADDRESS: GOLDTL 0x0047d2a0 */
-int __cdecl fcn_0047d2a0(char* e)
+int __cdecl ai_UpdateEntityFeud(char* entity)
 {
 	register char* h;
 	register char* other;
@@ -34,26 +34,26 @@ int __cdecl fcn_0047d2a0(char* e)
 	float f;
 	unsigned char b;
 	unsigned char b2;
-	unsigned char v11;
+	unsigned char zeroVal;
 
-	if (*(int*) (e + 0x210) == -1) {
-		if (e[0x166] == 0 && e[0x169] == 0 && e[2] != 5) {
+	if (*(int*) (entity + 0x210) == -1) {
+		if (entity[0x166] == 0 && entity[0x169] == 0 && entity[2] != 5) {
 			return 0;
 		}
 		best = -1;
 		bestscore = 128.0f;
 		i = 0;
 		for (h = g_7f4ca0 + 2; (int) h < 0x85a0a2; h += (int)sizeof(ENTITY_RECORD), i++) {
-			if (!((i != (int) *(unsigned short*) e && h[0] == 6) || h[0] == 7)) {
+			if (!((i != (int) *(unsigned short*) entity && h[0] == 6) || h[0] == 7)) {
 				if (gm_IsNpcEntityState(h - 2) == 0 || (h[0x164] == 0 && h[0x167] == 0)) {
 					continue;
 				}
 			}
-			d = abs(fcn_00508eb0(i, 0) - fcn_00508eb0(*(unsigned short*) e, 0));
+			d = abs(fcn_00508eb0(i, 0) - fcn_00508eb0(*(unsigned short*) entity, 0));
 			f = (10.0f - (float) d * 0.5f) * 0.1f;
-			if ((float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f < bestscore) {
-				if (gm_CalcEntityFavor(i, (int) *(unsigned short*) e, 1) < 34.0f) {
-					bestscore = (float) (signed char) g_90e0a0[i][*(unsigned short*) e] * f;
+			if ((float) (signed char) g_90e0a0[i][*(unsigned short*) entity] * f < bestscore) {
+				if (gm_CalcEntityFavor(i, (int) *(unsigned short*) entity, 1) < 34.0f) {
+					bestscore = (float) (signed char) g_90e0a0[i][*(unsigned short*) entity] * f;
 					best = i;
 				}
 			}
@@ -61,13 +61,13 @@ int __cdecl fcn_0047d2a0(char* e)
 		if (best == -1) {
 			return 0;
 		}
-		if (((signed char) g_869480[best][*(unsigned short*) e] / 2
-		     + (signed char) g_90e0a0[best][*(unsigned short*) e])
+		if (((signed char) g_869480[best][*(unsigned short*) entity] / 2
+		     + (signed char) g_90e0a0[best][*(unsigned short*) entity])
 		    >= -50 - ((int) gm_RandomMod(0x20) & 0xffff)) {
 			return 0;
 		}
 		b = 0;
-		cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
+		cm_BeginPacketFieldDelta((int) entity, *(int*) (entity + 4));
 		cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
 		d = abs((int) bestscore);
 		b = (unsigned char) (d / 3 + 1);
@@ -80,79 +80,79 @@ int __cdecl fcn_0047d2a0(char* e)
 		cm_AppendPacketFieldDelta(1, 1, 0x216, &b);
 		h = (char *)&((ENTITY_RECORD*)g_7f4ca0)[best];
 		cm_AppendPacketFieldDelta(4, 1, 0x210, h + 4);
-		cm_AppendPacketFieldDelta(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) e]);
+		cm_AppendPacketFieldDelta(1, 1, 0x214, &g_90e0a0[best][*(unsigned short*) entity]);
 		cm_RequestChangeAttribute();
-		cm_RequestCopyEntityData(*(int*) (h + 4), *(int*) (e + 4), 0, 2);
-		he_NotifyFeudDeclared(e, h);
+		cm_RequestCopyEntityData(*(int*) (h + 4), *(int*) (entity + 4), 0, 2);
+		he_NotifyFeudDeclared(entity, h);
 		return 0;
 	}
-	other = (char*) gm_LookupEntityRecordById(*(int*) (e + 0x210));
-	if ((e[0x166] == 0 && e[0x169] == 0 && e[2] != 5) || other == 0) {
+	other = (char*) gm_LookupEntityRecordById(*(int*) (entity + 0x210));
+	if ((entity[0x166] == 0 && entity[0x169] == 0 && entity[2] != 5) || other == 0) {
 		goto reset;
 	}
 	if (other[0x169] == 0 && other[0x166] == 0 && other[2] != 6
 	    && other[2] != 7 && other[2] != 5) {
 		goto reset;
 	}
-	if ((int) (unsigned char) e[0x215] > (int) (unsigned char) e[0x216] + 5) {
+	if ((int) (unsigned char) entity[0x215] > (int) (unsigned char) entity[0x216] + 5) {
 		goto reset;
 	}
-	if ((unsigned char) e[0x215] >= (unsigned char) e[0x216]) {
+	if ((unsigned char) entity[0x215] >= (unsigned char) entity[0x216]) {
 		goto pulse;
 	}
-	if ((signed char) g_90e0a0[*(unsigned short*) other][*(unsigned short*) e]
-	    + (signed char) e[0x214] > 0) {
+	if ((signed char) g_90e0a0[*(unsigned short*) other][*(unsigned short*) entity]
+	    + (signed char) entity[0x214] > 0) {
 		goto pulse2;
 	}
-	if ((unsigned char) e[0x215] > 3) {
+	if ((unsigned char) entity[0x215] > 3) {
 		return (int) other;
 	}
 	b = (unsigned char) ((int) gm_RandomMod(2) + 1);
-	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta((int) entity, *(int*) (entity + 4));
 	cm_AppendPacketFieldValue(1, 1, 0x215, &b);
-	if ((int) (unsigned char) e[0x215] + b > 3) {
-		cm_AppendPacketFieldDelta(1, 1, 0x218, e + 0x217);
+	if ((int) (unsigned char) entity[0x215] + b > 3) {
+		cm_AppendPacketFieldDelta(1, 1, 0x218, entity + 0x217);
 	}
 	cm_RequestChangeAttribute();
-	if ((int) (unsigned char) e[0x215] + b <= 3) {
+	if ((int) (unsigned char) entity[0x215] + b <= 3) {
 		return 0;
 	}
-	he_NotifyFeudEscalated(e, other);
+	he_NotifyFeudEscalated(entity, other);
 	return (int) other;
 
 reset:
 	b = 0;
 	b2 = 0;
 	best = -1;
-	v11 = 0;
-	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
+	zeroVal = 0;
+	cm_BeginPacketFieldDelta((int) entity, *(int*) (entity + 4));
 	cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
 	cm_AppendPacketFieldDelta(1, 1, 0x216, &b2);
 	cm_AppendPacketFieldDelta(4, 1, 0x210, &best);
-	cm_AppendPacketFieldDelta(1, 1, 0x214, &v11);
+	cm_AppendPacketFieldDelta(1, 1, 0x214, &zeroVal);
 	cm_RequestChangeAttribute();
 	b = 1;
 	cm_AppendPacketFieldDelta(1, 1, 0x218, &b);
 	cm_RequestChangeAttribute();
 	if (other != 0) {
-		cm_RequestCopyEntityData(*(int*) (e + 0x210), *(int*) (e + 4), 0x3c, 2);
-		he_NotifyFeudEnded(e, other);
+		cm_RequestCopyEntityData(*(int*) (entity + 0x210), *(int*) (entity + 4), 0x3c, 2);
+		he_NotifyFeudEnded(entity, other);
 	}
 	return 0;
 
 pulse:
 	b = 1;
 	b2 = 1;
-	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta((int) entity, *(int*) (entity + 4));
 	cm_AppendPacketFieldValue(1, 1, 0x215, &b);
 	cm_AppendPacketFieldDelta(1, 1, 0x218, &b2);
 	cm_RequestChangeAttribute();
 	return 0;
 
 pulse2:
-	b = (unsigned char) (e[0x216] + 1);
+	b = (unsigned char) (entity[0x216] + 1);
 	b2 = 1;
-	cm_BeginPacketFieldDelta((int) e, *(int*) (e + 4));
+	cm_BeginPacketFieldDelta((int) entity, *(int*) (entity + 4));
 	cm_AppendPacketFieldDelta(1, 1, 0x215, &b);
 	cm_AppendPacketFieldDelta(1, 1, 0x218, &b2);
 	cm_RequestChangeAttribute();

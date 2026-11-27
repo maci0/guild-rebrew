@@ -22,7 +22,7 @@ void* __cdecl d3_CreateSceneResource(int name, int a2);
 /* GOLD twin of GOLDTL fcn_004730c0: passes 1, not 0, as the second
  * argument of the texture load. */
 /* ADDRESS: GOLD 0x004767c0 */
-Sprite* __cdecl fcn_004767c0(int a1, int a2, int a3, int a4, int textureName, int a6, int a7)
+Sprite* __cdecl d2_CreateOverlaySprite(int x, int y, int w, int h, int textureName, int duration, int flags)
 {
 	int i;
 	Sprite* p;
@@ -36,12 +36,12 @@ Sprite* __cdecl fcn_004767c0(int a1, int a2, int a3, int a4, int textureName, in
 		return 0;
 	}
 	p = (Sprite*) m_alloc(100, s_67d8b0);
-	p->a1 = a1;
-	p->a2 = a2;
-	p->a3 = a3;
-	p->a4 = a4;
-	p->a7 = a7;
-	p->a6 = a6;
+	p->a1 = x;
+	p->a2 = y;
+	p->a3 = w;
+	p->a4 = h;
+	p->a7 = flags;
+	p->a6 = duration;
 	p->tex = d3_CreateSceneResource(textureName, 1);
 	p->t0 = g_6b7fb8;
 	p->t1 = g_6b7fb8;

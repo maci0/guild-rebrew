@@ -2,7 +2,7 @@
 #include <stdlib.h>
 extern void __cdecl fcn_005e1ca0(void);
 extern void __cdecl main_PumpWindowMessages(void);
-extern int __cdecl fcn_0041a380(unsigned int, unsigned int, unsigned char);
+extern int __cdecl d3_EnumerateDisplayAdapters(unsigned int, unsigned int, unsigned char);
 extern char __cdecl d3_CreateGraphicsDevice(HWND, void*, unsigned char, unsigned char);
 extern void __cdecl ReportClientMessage(char*);
 extern void __cdecl d3_ClearDisplayAdapterList(void);
@@ -10,14 +10,14 @@ extern void __cdecl m_ShutdownAllocator(void);
 extern void __cdecl ShutdownClientLogAndErrorHandler(void);
 extern char __cdecl fcn_00439020(void*, HWND, int);
 extern void __cdecl d3_CreateSceneCameras(void);
-extern void __cdecl fcn_00411820(HWND, int, int);
+extern void __cdecl io_InitDirectInputMouse(HWND, int, int);
 extern void __cdecl io_SetMouseSensitivity(int);
-extern int __cdecl fcn_005386e0(void);
+extern int __cdecl main_IsScreensaverActive(void);
 extern void __cdecl fcn_005386c0(int);
 extern void __cdecl gm_ApplyGameSettings(void);
 extern void __cdecl d3_ApplyGraphicsOptions(void);
-extern void __cdecl fcn_0045bf50(char*);
-extern void __cdecl fcn_00449aa0(char*);
+extern void __cdecl d3_SetTextureRootPath(char*);
+extern void __cdecl d3_SetObjectBasePath(char*);
 extern int __cdecl d2_Open(HWND, int, int, char*, char*);
 extern void __cdecl d2_InitOverlayState(void);
 extern int __cdecl sprintf(char*, const char*, ...);
@@ -143,7 +143,7 @@ int __cdecl fcn_00538850(int topmost)
 	g.f78 = 12000.0f;
 	d3_LODMode = 2;
 	g.f7c = (float) (512.0 / (640.0 / (double) (unsigned int) g_6acf80));
-	fcn_0041a380(g_6acf80, g_6acf84, topmost == 1);
+	d3_EnumerateDisplayAdapters(g_6acf80, g_6acf84, topmost == 1);
 	if (!d3_CreateGraphicsDevice((HWND) g_774940, (void*) 0x5387c0, topmost == 1, 1)) {
 		ReportClientMessage((char*) 0x6a3904);
 		d3_ClearDisplayAdapterList();
@@ -159,21 +159,21 @@ int __cdecl fcn_00538850(int topmost)
 		;
 	if (topmost == 0) {
 		if (*(int*) 0x7e246c == 0) {
-			*(int*) 0x774974 = fcn_005386e0();
+			*(int*) 0x774974 = main_IsScreensaverActive();
 			if (*(int*) 0x774974 != 0)
 				fcn_005386c0(0);
 		}
-		fcn_00411820((HWND) g_774940, main_Instance, 1);
+		io_InitDirectInputMouse((HWND) g_774940, main_Instance, 1);
 		io_SetMouseSensitivity(0x50);
 	} else {
-		fcn_00411820((HWND) g_774940, main_Instance, 6);
+		io_InitDirectInputMouse((HWND) g_774940, main_Instance, 6);
 	}
 	gm_ApplyGameSettings();
-	fcn_0045bf50((char*) 0x6a38f8);
+	d3_SetTextureRootPath((char*) 0x6a38f8);
 	*(int*) 0x67ac98 = *(int*) 0x6a38ec;
 	*(int*) 0x67ac9c = *(int*) 0x6a38f0;
 	*(int*) 0x67aca0 = *(int*) 0x6a38f4;
-	fcn_00449aa0((char*) 0x6a38e0);
+	d3_SetObjectBasePath((char*) 0x6a38e0);
 	*(int*) 0x7e1ae0 = *(int*) 0x6a38d8;
 	*(int*) 0x7e1ae4 = *(int*) 0x6a38dc;
 	*(int*) 0x6790c8 = *(int*) 0x6a38cc;

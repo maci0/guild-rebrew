@@ -26,15 +26,15 @@ extern int d2_ClipLeft;
 extern int g_7725fc;
 extern int txt_TextEntries;
 
-int __cdecl fcn_00465950(char* name);
+int __cdecl d2_FindResourceByName(char* name);
 void __cdecl d2_SelectFont(int font);
 int __cdecl d2_MeasureTextWidth(char* text, int font);
 void __cdecl d2_RenderMarkupLine(int x, int y, int a0, int a1, int last, int color,
     int xr, int yr);
 void __cdecl d2_ResizeWindow(int x, int y, int a1);
 void __cdecl fcn_00469c40(int a, int b, int c);
-void __cdecl fcn_0047a040(int a, int b, int c, int d);
-void __cdecl fcn_0047cba0(int x, int y, int a0, int text);
+void __cdecl d2_SetClipRect(int a, int b, int c, int d);
+void __cdecl d2_DrawSpriteFromSet(int x, int y, int a0, int text);
 void __cdecl d2_NormalizeWindowButtonWidths(int a1);
 int __cdecl d2_AddWindowInputIcon(int x, int y, int a, int b, int c, int d);
 int __cdecl d2_SetFieldTextId(int a, int b);
@@ -105,7 +105,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 	if (*(int*) (slot + 0x28c)) {
 		d2_SelectFont(*(int*) (slot + 0x28c));
 	} else {
-		d2_SelectFont(fcn_00465950("_FONT"));
+		d2_SelectFont(d2_FindResourceByName("_FONT"));
 	}
 	g_7725b4 = 0;
 	if (!*(int*) (slot + 0x3c)) {
@@ -212,7 +212,7 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 					if (img == -1) {
 						img = d2_AddWindowTextButton(g_102d020 - *(int*) (slot + 4),
 						    g_102d024 - *(int*) (slot + 8),
-						    fcn_00465950("_IMG"), 0x6b5c60, a1);
+						    d2_FindResourceByName("_IMG"), 0x6b5c60, a1);
 						if (*(char*) (p + 2) == '[') {
 							char* zp;
 							int zn;
@@ -786,11 +786,11 @@ void __cdecl d2_RenderMarkupText(int a0, int a1)
 	if (*(int*) (slot + 0x254) < tmp) {
 		*(int*) (slot + 0x254) = tmp;
 	}
-	fcn_0047a040(sv68, sv74, sv78, sv70);
+	d2_SetClipRect(sv68, sv74, sv78, sv70);
 	if ((*(char*) (slot + 0x14) & 0x20) && !g_772554) {
 		tmp = ((v6c - v38) - 0x10) / *(int*) (slot + 0x254) + v38;
 		span = d2_GetResourceData(g_67d390, 5);
-		fcn_0047cba0(yr + 1, tmp, a0, span);
+		d2_DrawSpriteFromSet(yr + 1, tmp, a0, span);
 	}
 	if ((*(int*) (slot + 0x3c4) != *(int*) (slot + 0x2c)) && v64) {
 		d2_NormalizeWindowButtonWidths(a1);

@@ -1,6 +1,6 @@
 #include "client_timer.h"
 /* ADDRESS: GOLDTL 0x0042def0 */
-int __cdecl fcn_0042def0(TIMER_CALLBACK callback)
+int __cdecl tb_CloseFunction(TIMER_CALLBACK callback)
 {
 	int i;
 	TIMER_CALLBACK_SLOT* a;

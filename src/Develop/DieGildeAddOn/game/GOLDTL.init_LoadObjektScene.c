@@ -31,7 +31,7 @@ void __cdecl d3_SelectSceneContext(int, int);
 char __cdecl d3_LoadScene(const char*, void*, SCENE_PROGRESS);
 void __cdecl gv_Free3Fields(int*);
 int __cdecl d3sm_GetSceneSuperMap(char*);
-void __cdecl fcn_0045b290(char*, int);
+void __cdecl d3sm_Rebuild(char*, int);
 char __cdecl d3_TraverseSceneObjects(int, void*, int, void (__cdecl*)(void));
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
@@ -109,7 +109,7 @@ void __cdecl init_LoadObjektScene(int objectTypeIndex)
 				gv_Free3Fields((int*) *(int*) (g_67a370 + 0xb0));
 				*(int*) (g_67a370 + 0xb0) = 0;
 				d3sm_GetSceneSuperMap((char*) g_67a370);
-				fcn_0045b290((char*) *(int*) (g_67a370 + 0xb0), g_6b8300);
+				d3sm_Rebuild((char*) *(int*) (g_67a370 + 0xb0), g_6b8300);
 				d3_TraverseSceneObjects(g_67a370, 0, 0x1e0, (void (__cdecl*)(void)) d3_ResolveSceneObjectProtoId);
 				d3_TraverseSceneObjects(g_67a370, 0, 6, (void (__cdecl*)(void)) fcn_00510bd0);
 				p = ch_CharacterSlots;

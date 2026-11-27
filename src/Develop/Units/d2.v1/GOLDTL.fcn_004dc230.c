@@ -6,7 +6,7 @@ extern int g_100f1dc;
 #include "client_dialog_state.h"
 extern int d2_CurrentElementId;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -30,7 +30,7 @@ int __cdecl fcn_004dc230(unsigned short* a1, unsigned short* a2, unsigned short*
 	int res;
 
 	*out = 0;
-	h = fcn_00470820(0, 0, g_68c340);
+	h = d2_LoadForm(0, 0, g_68c340);
 	fcn_00471d80(h, 1);
 	d2_SetForm(h, 0);
 	t = io_AppendText(0x12c6, *a2, *a1);

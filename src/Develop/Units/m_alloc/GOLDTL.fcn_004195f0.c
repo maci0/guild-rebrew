@@ -5,7 +5,7 @@ extern char* g_6b5d10;
 extern char* g_6b5d14;
 
 /* ADDRESS: GOLDTL 0x004195f0 */
-void __cdecl fcn_004195f0(void)
+void __cdecl d3sndw_Shutdown(void)
 {
 	if (g_6b5d0c != 0) {
 		m_FreeTracked(g_6b5d0c);

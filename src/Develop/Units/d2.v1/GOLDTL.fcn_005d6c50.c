@@ -6,7 +6,7 @@ extern int g_100f1dc; extern float g_664138;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
-void* __cdecl fcn_00470820(int a, int b, char* name);
+void* __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_SetForm(int dlg, int a);
@@ -66,7 +66,7 @@ int __cdecl fcn_005d6c50(int actor, int a1)
         cm_RequestChangeBits(*(int*) (p + 2), 0x1c8, 4, 0x400000, 0);
         return *(int*) (frame + 0);
     }
-    dlg = (int) fcn_00470820(0, 0, "privillegien\\unterschlagung");
+    dlg = (int) d2_LoadForm(0, 0, "privillegien\\unterschlagung");
     *(int*) (frame + 0x8) = dlg;
     d2_SetOverlayAnimation(0, 0);
     d2_CenterDialogWindows(dlg);

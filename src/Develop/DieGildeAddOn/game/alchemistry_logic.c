@@ -300,7 +300,7 @@ extern unsigned short* __cdecl gm_ff_Objekt(int, int, int, ...);
 extern void __cdecl gm_RemoveObjectByType(int*, int);
 void* __cdecl m_alloc(unsigned int size, const char* source);
 void __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
-void __cdecl fcn_004fdfe0(unsigned short*);
+void __cdecl ch_AssignHeadIcon(unsigned short*);
 /* Defined in alchemistry_logic2.c; same literal, same VA. */
 
 /* Allocates a new alchemy entity: resolves the parent building record,
@@ -524,7 +524,7 @@ ret_false:
 	query_result = (int*) gm_ff_Objekt(*(int*) ((char*) dynamic + 0x5d), 1, 0, 0x24b);
 	init_SpawnBuildingCharacter(*(int*) (slot + 4), *(int*) ((char*) dynamic + 1),
 	             query_result != 0 ? *(int*) ((char*) query_result + 2) : -1, 0, 0);
-	fcn_004fdfe0((unsigned short*) slot);
+	ch_AssignHeadIcon((unsigned short*) slot);
 #endif
 
 	if (*(int*) ((char*) dynamic + 0x65) == 0) {

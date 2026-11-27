@@ -37,11 +37,11 @@ char* __cdecl d2_RunSeance(char*, char*);
 float __cdecl gv_CalcSeanceBonus(char*);
 float __cdecl gm_RandomFloat01(void);
 #include "Develop/DieGildeAddOn/game/spiel.h"
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl gm_IncreaseEntityStat(struct house*, int);
 int __cdecl io_AppendText();
 unsigned short __cdecl gm_RandomMod(int);
@@ -90,11 +90,11 @@ void __cdecl d2_RunSeanceTreasureDialog(char* e, char* res)
 		cm_SendCopyEntityData(ev);
 		gm_IncreaseEntityStat(&((struct house*)g_7f4ca0)[g_774970], 3);
 	}
-	h = fcn_00470820(0, 0, g_6a96d8);
+	h = d2_LoadForm(0, 0, g_6a96d8);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	g_100f1dc = -1;
 	d2_SetForm(h, 1);
 	if (mode == 0) {

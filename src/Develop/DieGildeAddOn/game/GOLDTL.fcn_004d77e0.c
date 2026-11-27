@@ -43,13 +43,13 @@ float __cdecl gm_CalcCombatStrength(Ent*);
 void __cdecl fcn_004ce740(Ent*);
 int __cdecl _ftol(void);
 unsigned short __cdecl gm_RandomMod(int);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl cut_SetupBattleArena(COMBAT_CUTSCENE_DLG*);
-void __cdecl fcn_004d1a80(void);
-void __cdecl fcn_004d2c80(int*, int);
+void __cdecl cut_RefreshCombatContextCharacters(void);
+void __cdecl cut_PlaceCombatTeamAtDummies(int*, int);
 void __cdecl cut_RunGfxCutscene(COMBAT_CUTSCENE_DLG*);
 void __cdecl fcn_0052a960(void*);
-void __cdecl fcn_00445f50(int, int, float, int);
+void __cdecl d3_BlendSceneLightingPreset(int, int, float, int);
 void __cdecl cut_RunCombatStartDialog(COMBAT_CUTSCENE_DLG*);
 void __cdecl cut_RunTurnRound(COMBAT_CUTSCENE_DLG*, int);
 void __cdecl d2_DestroyElement(int);
@@ -113,12 +113,12 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 		*(int*) 0x68bfbc = 0xc8;
 		*(int*) 0x68b79c = p->rec;
 		cut_SetupBattleArena(p);
-		fcn_004d1a80();
-		fcn_004d2c80(p->list_b, 0x68becc);
-		fcn_004d2c80(p->list_a, 0x68bec8);
+		cut_RefreshCombatContextCharacters();
+		cut_PlaceCombatTeamAtDummies(p->list_b, 0x68becc);
+		cut_PlaceCombatTeamAtDummies(p->list_a, 0x68bec8);
 		cut_RunGfxCutscene(p);
 		if (*(int*) 0x774804 != 0) {
-			fcn_00445f50(2, 0, 1.0f, 1);
+			d3_BlendSceneLightingPreset(2, 0, 1.0f, 1);
 		} else {
 			fcn_0052a960((void*) &gm_GameTime);
 		}
@@ -127,8 +127,8 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 		*(int*) &g_772eac = 0;
 		cut_RunCombatStartDialog(p);
 		cut_SetRandSeed(saved);
-		fcn_004d1a80();
-		fcn_004d1a80();
+		cut_RefreshCombatContextCharacters();
+		cut_RefreshCombatContextCharacters();
 		cut_RunTurnRound(p, 0);
 		if (*(int*) &g_772ea4 == 0 && *(int*) &g_772ea8 == 0) {
 			cut_RunTurnRound(p, 0);
@@ -173,7 +173,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 			ep = gm_LookupEntityRecordById(p->list_a[i]);
 			if (ep != 0 && ep->live != 0 && ep->live != 4) {
 				changed = (int) (gm_CalcCombatStrength(ep) + changed);
-				fcn_004ff210(ep->id, gm_RandomMod(10) * -20);
+				gm_ApplyEntityHealthDelta(ep->id, gm_RandomMod(10) * -20);
 			}
 		}
 	}
@@ -182,7 +182,7 @@ void __cdecl cut_RunCombatCutscene(COMBAT_CUTSCENE_DLG* p)
 			ep = gm_LookupEntityRecordById(p->list_b[i]);
 			if (ep != 0 && ep->live != 0 && ep->live != 4) {
 				saved = (int) (gm_CalcCombatStrength(ep) + saved);
-				fcn_004ff210(ep->id, gm_RandomMod(10) * -20);
+				gm_ApplyEntityHealthDelta(ep->id, gm_RandomMod(10) * -20);
 			}
 		}
 	}

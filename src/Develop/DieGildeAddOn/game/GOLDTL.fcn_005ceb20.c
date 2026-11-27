@@ -56,9 +56,9 @@ extern unsigned char* lpGebaeudePROT;
 extern char* g_7746cc;
 extern char s_6aca6c[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -84,9 +84,9 @@ void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 	char* p;
 
 	btn2 = -1;
-	dlg = fcn_00470820(0, 0, s_6aca6c);
+	dlg = d2_LoadForm(0, 0, s_6aca6c);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_CenterDialogWindows(dlg);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);

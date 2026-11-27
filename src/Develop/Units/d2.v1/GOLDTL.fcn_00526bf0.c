@@ -24,7 +24,7 @@ extern char g_67d67c[];
 extern int g_6a25ac;
 extern int g_774670;
 
-void __cdecl fcn_005270c0(int show);
+void __cdecl d2_UpdateHudVisibility(int show);
 void __cdecl fcn_00533cf0(int v);
 int __cdecl d2_CreateValueGauge(int x, int y, int w, int a, int b, int c, int d);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -38,7 +38,7 @@ void __cdecl d2_UpdateProgressOverlay(int phase, int cur, int max)
 {
 	if (g_6a2bdc == -1) {
 		d2_SuppressOverlay = 1;
-		fcn_005270c0(0);
+		d2_UpdateHudVisibility(0);
 		fcn_00533cf0(1);
 		((ClearFn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_00[36])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, 0, 1, 0, 1.0f, 0);
 		g_774710 = 0;
@@ -58,7 +58,7 @@ void __cdecl d2_UpdateProgressOverlay(int phase, int cur, int max)
 			g_6a2bdc = -1;
 			d2_SuppressOverlay = 0;
 			fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x5a, 2);
-			fcn_005270c0(1);
+			d2_UpdateHudVisibility(1);
 			fcn_00533cf0(0);
 			if (g_6a25ac != -1) {
 				fcn_00527f60(1, 0);

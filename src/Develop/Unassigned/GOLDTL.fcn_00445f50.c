@@ -20,11 +20,11 @@ extern int g_10405e0[];
 
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, void* cb, void* q);
 void __cdecl UpdateSceneLighting(int a);
-char __cdecl fcn_00445d20(int a, float* v);
+char __cdecl d3_InterpolateObjectSlotCallback(int a, float* v);
 char __cdecl d3_ScaleNodeIntensityCallback(char* p, float* q);
 
 /* ADDRESS: GOLDTL 0x00445f50 */
-char __cdecl fcn_00445f50(unsigned int slot, float t, float scale, int a3)
+char __cdecl d3_BlendSceneLightingPreset(unsigned int slot, float t, float scale, int updateLighting)
 {
 	float pos;
 	Pal_1041d20* pc;
@@ -44,7 +44,7 @@ char __cdecl fcn_00445f50(unsigned int slot, float t, float scale, int a3)
 	if (!(t <= g_6628a0))
 		return 0;
 	pos = (float) slot + t;
-	d3_VisitSceneObjects(g_67a370, 0, 0x1e, (void*) fcn_00445d20, &pos);
+	d3_VisitSceneObjects(g_67a370, 0, 0x1e, (void*) d3_InterpolateObjectSlotCallback, &pos);
 	if (scale != g_6628a0)
 		d3_VisitSceneObjects(g_67a370, 0, 8, (void*) d3_ScaleNodeIntensityCallback, &scale);
 	n = (slot + 1) % 7;
@@ -75,7 +75,7 @@ char __cdecl fcn_00445f50(unsigned int slot, float t, float scale, int a3)
 		pc++;
 		pn++;
 	}
-	UpdateSceneLighting(a3);
+	UpdateSceneLighting(updateLighting);
 	*(int*) 0x67a95c = slot;
 	if (g_6b89c0 != 0) {
 		*((unsigned char*) (g_6b89c0 + 0x0a)) =

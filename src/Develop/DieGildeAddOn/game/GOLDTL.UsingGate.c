@@ -15,7 +15,7 @@ int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SelectSceneContext(int, int);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char*, char*, float*);
-char __cdecl fcn_0045b990(char*, float*, int*, int*, float*);
+char __cdecl d3sm_SampleHeight(char*, float*, int*, int*, float*);
 
 
 
@@ -51,7 +51,7 @@ void __cdecl UsingGate(char* ev)
 	if (door != 0) {
 		map = ((struct room_4066d0*)g_1043370)[room].map;
 		d3_TransformPoint(door, door + 0x4c, pos);
-		if (fcn_0045b990(map, pos, &col, &row, &height)) {
+		if (d3sm_SampleHeight(map, pos, &col, &row, &height)) {
 			ch_InsertAction(obj, ev, 0x2d, col, row, room);
 		} else {
 			sprintf(msg, "UsingGate: d3sm_3D2SuperMap() failed... scene:%s   object:%s", *(int*) (obj + 0x88), door);

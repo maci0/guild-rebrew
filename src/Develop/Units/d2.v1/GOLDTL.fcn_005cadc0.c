@@ -26,7 +26,7 @@ extern float g_662cf8;
 extern float g_664e88;
 extern float g_6660d4;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -64,7 +64,7 @@ char* __cdecl fcn_005cadc0(int a0, int a1, int a2, int a3, int (__cdecl* cb)(cha
 	res = 0;
 	count = 0;
 	sel = 0;
-	dlg = fcn_00470820(0, 0, "special\\amt2");
+	dlg = d2_LoadForm(0, 0, "special\\amt2");
 	d2_CenterDialogWindows(dlg);
 	again = 1;
 	for (;;) {

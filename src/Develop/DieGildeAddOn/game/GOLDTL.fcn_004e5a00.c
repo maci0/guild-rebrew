@@ -15,25 +15,25 @@ void __cdecl tb_OpenFunction(char* a, int b);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl ResetDisplayCounters(void);
-void __cdecl fcn_00525ef0(void);
-void __cdecl fcn_00469e70(void);
+void __cdecl d2_ResetUiInputAndBounds(void);
+void __cdecl d2_ClearBackdropResource(void);
 void __cdecl fcn_004da190(void);
 void __cdecl fcn_00438da0(float a, float b, float c, float d, int e, int f,
     int g, int h, int i);
-void __cdecl fcn_005270c0(int a);
-int __cdecl fcn_00470820(int a, int b, char* c);
+void __cdecl d2_UpdateHudVisibility(int a);
+int __cdecl d2_LoadForm(int a, int b, char* c);
 void __cdecl fcn_00471d80(int a, int b);
 void __cdecl d2_SetFormVisibility(int a, int b);
 void __cdecl cut_SetRandSeed(int a);
 void __cdecl d2_DestroyForm(int a);
 void __cdecl cut_DestroyAllActiveCharacters(void);
 void __cdecl fcn_004e59c0(void);
-void __cdecl fcn_0042def0(char* a);
+void __cdecl tb_CloseFunction(char* a);
 void __cdecl fcn_00528fd0(void);
 void __cdecl d3_SelectSceneContext(int a, int b);
-void __cdecl fcn_00459710(int a, int b);
-void __cdecl fcn_004463f0(int a, int b, int c);
-void __cdecl fcn_00516de0(int a, int b);
+void __cdecl d3_ResetSkyDomeNormals(int a, int b);
+void __cdecl d3_InterpolateSceneFog(int a, int b, int c);
+void __cdecl d3_UpdateSceneDetailLevel(int a, int b);
 void __cdecl fcn_00443230(int a);
 void __cdecl fcn_00473150(int a);
 void __cdecl cm_BeginPacketFieldDelta(int a, int b);
@@ -178,7 +178,7 @@ fill_tail:
     d2_SetOverlayAnimation(0, 0);
     sv_ClearObjectSelection();
     ResetDisplayCounters();
-    fcn_00525ef0();
+    d2_ResetUiInputAndBounds();
     unit = (int*) *(int*) 0x1015ea0;
     *(unsigned char*) 0x100f8c0 = 0;
     for (i = 0; i < 0x400; i++) {
@@ -190,7 +190,7 @@ fill_tail:
             count++;
         }
     }
-    fcn_00469e70();
+    d2_ClearBackdropResource();
     fcn_004da190();
     if (e[0x26] & 0x20) {
         q = *(int*) 0x1040490;
@@ -206,7 +206,7 @@ fill_tail:
         *(int*) 0x1040484 = (int) t;
         *(int*) 0x104048c = (int) ((float) *(int*) 0x1040490 - t);
         if (*(int*) 0x6a2be0 != 0) {
-            fcn_005270c0(0);
+            d2_UpdateHudVisibility(0);
             ready = 1;
         } else {
             ready = 0;
@@ -227,7 +227,7 @@ display:
         fmt = (char*) 0x68d5c8;
     else
         fmt = (char*) 0x68d5b0;
-    obj = fcn_00470820(0, 0, fmt);
+    obj = d2_LoadForm(0, 0, fmt);
     *(int*) (e + 0x2c) = obj;
     *(int*) 0x68bfc0 = obj;
     fcn_00471d80(obj, 3);
@@ -246,7 +246,7 @@ display:
     if (*(unsigned char*) 0x7747b0 & 8)
         fcn_004e59c0();
     *(int*) 0x68bfbc = 0xa;
-    fcn_0042def0((char*) 0x4e4a60);
+    tb_CloseFunction((char*) 0x4e4a60);
     for (i = 0; i < count; i++) {
         index = *(unsigned short*) (0x9b0020 + i * 2);
         *(int*) ((char*) *(int*) 0x1015ea0 + index * 0x2f4 + 0x48) = 0;
@@ -263,7 +263,7 @@ display:
             *(int*) 0x1040488 = g4808;
             *(int*) 0x104048c = g480c;
             if (ready != 0 && !(e[0x26] & 0x40)) {
-                fcn_005270c0(1);
+                d2_UpdateHudVisibility(1);
                 fcn_00528fd0();
             }
         }
@@ -271,20 +271,20 @@ display:
 tail:
     d3_SelectSceneContext(*(int*) 0x9a9648, 0);
     if (*(int*) 0x6b89c0 != 0)
-        fcn_00459710(*(int*) 0x6b89c0, 1);
+        d3_ResetSkyDomeNormals(*(int*) 0x6b89c0, 1);
     *(int*) 0x7e3a40 = s3a40;
     *(int*) 0x7e3a44 = s3a44;
     *(int*) 0x7e3a48 = s3a48;
     *(int*) 0x7e3a50 = s3a50;
     *(int*) 0x7e3a54 = s3a54;
     *(int*) 0x7e3a58 = s3a58;
-    fcn_004463f0(0, 1, 0);
+    d3_InterpolateSceneFog(0, 1, 0);
     if (*(int*) 0x7746c4 == 0 && *(int*) 0x7746c8 == 0)
         *(float*) 0x67a964 = (float) (dbl_6629c8
             - (double) (*(int*) 0x77666c & 0xff) * dbl_6640e8);
     *(unsigned char*) 0x6b8061 = (unsigned char) saved_6b8061;
     *(int*) 0x675308 = saved_675308;
-    fcn_00516de0(*(int*) 0x6b8300, 0);
+    d3_UpdateSceneDetailLevel(*(int*) 0x6b8300, 0);
     fcn_00443230(1);
     if (*(int*) 0x772f50 != 0) {
         fcn_00473150(*(int*) 0x772f50);

@@ -3,8 +3,8 @@ extern int g_6b89b0, g_6b89b8;
 /* Chooses a display mode through the device vtable, stores the accepted mode
    and the flag bytes, then lets fcn_00456c80 build the surfaces. */
 
-void __cdecl fcn_00456530(int, int);
-void __cdecl fcn_00456c80(void);
+void __cdecl d3s_AllocCache(int, int);
+void __cdecl d3_AllocShadowTextures(void);
 extern unsigned int g_14ce798, g_10405fc, g_104061c;
 extern unsigned char g_1040600;
 extern void* g_6b5ddc;
@@ -37,7 +37,7 @@ void __cdecl d3_SelectShadowTextureFormat(unsigned int minSize, unsigned int max
 	g_1040600 = 1;
 	*(char*) 0x1040601 = formatFlag;
 	*(char*) 0x10405f8 = 1;
-	fcn_00456530(unused2, unused3);
+	d3s_AllocCache(unused2, unused3);
 	r = 0;
 	g_6b89b8 = r;
 	if (tryAdditionalModes) {
@@ -164,5 +164,5 @@ store:
 second:
 	r = SET_MODE(r);
 	g_6b89bd = r >= 0;
-	fcn_00456c80();
+	d3_AllocShadowTextures();
 }

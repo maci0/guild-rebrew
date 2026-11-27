@@ -40,7 +40,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 void __cdecl cm_SendCopyEntityData(Msg*);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, int);
 char* __cdecl gm_LookupSpecialObjectRecord(int, int*);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 static __inline void send_hit(int id)
 {
@@ -87,7 +87,7 @@ int __cdecl gm_UseSkillModifier82Stats3And5(char* e, char* request)
 			p = gm_LookupSpecialObjectRecord(**(unsigned short**) request, &out);
 			*(int*) (request + 0x10) = 1;
 			io_FormatTextBuffer(msg, 0xfe8, *(unsigned short*) (p + 0x18) + 1, *(unsigned short*) r);
-			fcn_005dbe90(msg);
+			d2_ShowUseObjDialog(msg);
 			return 1;
 		}
 	} else {

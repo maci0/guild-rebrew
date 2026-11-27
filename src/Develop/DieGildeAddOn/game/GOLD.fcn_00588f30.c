@@ -8,7 +8,7 @@ struct sel {
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
@@ -36,7 +36,7 @@ int __cdecl d2_CreatePersonTooltip(char* entity)
 	int i;
 	int roleOffset;
 
-	dlg = fcn_00470820(0, 0, "ToolTip\\ToolTip_Personen");
+	dlg = d2_LoadForm(0, 0, "ToolTip\\ToolTip_Personen");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(0, 1);
 	io_AppendText("$Z$[%1N3$]", *(unsigned short*) entity);

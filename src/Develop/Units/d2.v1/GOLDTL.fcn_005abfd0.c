@@ -20,10 +20,10 @@ extern int g_14ce8e0;
 extern char s_6ab060[];
 
 int __cdecl fcn_004f39b0(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -57,10 +57,10 @@ void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 		return;
 	}
 	amt = fcn_004f39b0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
-	dlg = fcn_00470820(0, 0, s_6ab060);
+	dlg = d2_LoadForm(0, 0, s_6ab060);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x197f);

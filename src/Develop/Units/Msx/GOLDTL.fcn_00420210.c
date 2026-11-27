@@ -12,7 +12,7 @@ extern int g_6b7190;
 extern volatile int g_6b7fac;
 
 int __cdecl msx_GetStreamStatus(int h);
-int __cdecl fcn_0042ae10(int h, int v);
+int __cdecl msx_SetStreamVolume(int h, int v);
 void __cdecl SetMasterVolume(int vol);
 
 void __cdecl fcn_00420210(void)
@@ -33,7 +33,7 @@ void __cdecl fcn_00420210(void)
 				c->active = 0;
 				if (c->next != 0) {
 					if (c->next->handle != 0) {
-						fcn_0042ad90(c->next->handle, 0);
+						msx_PauseStream(c->next->handle, 0);
 						c->next->active = 1;
 					}
 					c->next->b105 = 0;
@@ -41,7 +41,7 @@ void __cdecl fcn_00420210(void)
 				}
 				continue;
 			}
-			fcn_0042b040(c->handle, &c->f10c);
+			msx_GetStreamMsPosition(c->handle, &c->f10c);
 			if (c->bAmbient != 0) {
 				continue;
 			}
@@ -51,7 +51,7 @@ void __cdecl fcn_00420210(void)
 				msx_CloseStream(c->handle);
 				c->handle = 0;
 				if (c->next != 0 && c->next->handle != 0) {
-					fcn_0042ad90(c->next->handle, 0);
+					msx_PauseStream(c->next->handle, 0);
 					c->next->active = 1;
 					c->next->b105 = 0;
 					c->next = 0;
@@ -76,7 +76,7 @@ void __cdecl fcn_00420210(void)
 					c->f114 = 0;
 					c->f11c = c->f118;
 				}
-				fcn_0042ae10(c->handle, c->f11c);
+				msx_SetStreamVolume(c->handle, c->f11c);
 			} else if (c->f114 == 2) {
 				if (c->f10c < c->f110) {
 					c->f10c = c->f110;
@@ -87,16 +87,16 @@ void __cdecl fcn_00420210(void)
 					v = (c->f110 - c->f10c + n) * c->f118 / n;
 					c->f11c = v;
 					if (v > 2) {
-						fcn_0042ae10(c->handle, v);
+						msx_SetStreamVolume(c->handle, v);
 					} else {
 						c->f114 = 0;
 						c->f11c = 0;
-						fcn_0042ae10(c->handle, 0);
+						msx_SetStreamVolume(c->handle, 0);
 						msx_CloseStream(c->handle);
 						c->handle = 0;
 						c->active = 0;
 						if (c->next != 0) {
-							fcn_0042ad90(c->next->handle, 0);
+							msx_PauseStream(c->next->handle, 0);
 							c->next->active = 1;
 							c->next->b105 = 0;
 							c->next = 0;
@@ -105,12 +105,12 @@ void __cdecl fcn_00420210(void)
 				} else {
 					c->f114 = v;
 					c->f11c = v;
-					fcn_0042ae10(c->handle, v);
+					msx_SetStreamVolume(c->handle, v);
 					msx_CloseStream(c->handle);
 					c->handle = 0;
 					c->active = 0;
 					if (c->next != 0) {
-						fcn_0042ad90(c->next->handle, 0);
+						msx_PauseStream(c->next->handle, 0);
 						c->next->active = 1;
 						c->next->b105 = 0;
 						c->next = 0;

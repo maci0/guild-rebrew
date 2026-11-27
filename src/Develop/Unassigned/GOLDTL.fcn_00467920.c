@@ -53,10 +53,10 @@ extern char str_67d43c[];
 extern char str_67d444[];
 
 char* __cdecl fcn_0047b620(char* p, int i);
-void __cdecl fcn_0047a040(int, int, int, int);
-int __cdecl fcn_0047cba0(int, int, int, char*, int);
-int __cdecl fcn_0047cbf0(int, int, int, char*, int);
-int __cdecl fcn_0047ccd0(int, int, int, char*, int);
+void __cdecl d2_SetClipRect(int, int, int, int);
+int __cdecl d2_DrawSpriteFromSet(int, int, int, char*, int);
+int __cdecl d2_DrawDimmedSpriteFrame(int, int, int, char*, int);
+int __cdecl d2_DrawHighlightSprite(int, int, int, char*, int);
 int __cdecl d2_QueueTexturedQuad(int, int, int, int, int, int*);
 void __cdecl d2_SetQuadVertexColor(int*, unsigned char, unsigned char, unsigned char);
 char* __cdecl d2_SelectFont(int idx);
@@ -64,7 +64,7 @@ void __cdecl d2_GetValueGaugeStepLabel(int slot, int n, char* out);
 int __cdecl d2_MeasureTextWidth(char* text, int font);
 void __cdecl d2_DrawDefaultFontText(int x, int y, int surf, char* text, unsigned char flags);
 int __cdecl fcn_0046bd20(int, int, int, int, int, int, int);
-void __cdecl fcn_00479e00(unsigned char r, unsigned char g, unsigned char b);
+void __cdecl d2_SetActiveTextColor(unsigned char r, unsigned char g, unsigned char b);
 int __cdecl d2_PackColorForPixelFormat(unsigned char r, unsigned char g, unsigned char b);
 int __cdecl sprintf(char* buf, const char* fmt, ...);
 char* __cdecl itoa(int value, char* buf, int radix);
@@ -93,7 +93,7 @@ typedef struct {
 	int v1c, v20, v24, v28, v2c, v30, v34, v38;
 	char v3c[0x20];
 	char buf[0x200];
-} fcn_00467920_frame;
+} D2_GAUGE_DRAW_FRAME;
 
 #define GLYPH_W(p)	(*(unsigned short*) ((char*) (p) + 2))
 #define GLYPH_H(p)	(*(unsigned short*) ((char*) (p) + 6))
@@ -102,9 +102,9 @@ typedef struct {
 #define FLD(base, off)	(*(int*) ((char*) (base) + (off)))
 #include "Develop/Units/d2.v1/d2_gui.h"
 /* ADDRESS: GOLDTL 0x00467920 */
-void __cdecl d2_DrawValueGauge(int a0, int a1)
+void __cdecl d2_DrawValueGauge(int slotIndex, int surface)
 {
-	fcn_00467920_frame f;
+	D2_GAUGE_DRAW_FRAME f;
 	int* e;
 	int* b;
 	char* h1;
@@ -115,7 +115,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 	int y;
 	float ratio;
 
-	e = (int*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[a0]);
+	e = (int*) ((char*) &((D2_CONTROL_TL*) g_1015ea0)[slotIndex]);
 	f.v34 = 0;
 	f.v2c = 0;
 	hs = (char*) *(int*) (&(*(D2_CONTROL_TL*) e).data);
@@ -149,10 +149,10 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 	}
 
 	if (f.v20 & 2) {
-		b = (int*) a1;
+		b = (int*) surface;
 
 		/* 0x467a69: bar frame */
-		fcn_0047a040((*(D2_CONTROL_TL*) e).x, b[0xc], (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24, b[0xe]);
+		d2_SetClipRect((*(D2_CONTROL_TL*) e).x, b[0xc], (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24, b[0xe]);
 
 		/* 0x467a90: fill run of the value bar */
 		f.w8.f = (float) f.v24;
@@ -170,7 +170,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 					    + GLYPH_W(h1) * f.w0.idx;
 					y = (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3)
 						    - GLYPH_H(h1)) / 2;
-					fcn_0047cba0(x, y, a1,
+					d2_DrawSpriteFromSet(x, y, surface,
 						     (char*) f.v14, 1);
 				}
 			}
@@ -181,7 +181,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 					    + GLYPH_W(h1) * f.w0.idx;
 					y = (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3)
 						    - GLYPH_H(h1)) / 2;
-					fcn_0047cbf0(x, y, (int) b,
+					d2_DrawDimmedSpriteFrame(x, y, (int) b,
 						     (char*) f.v14, 1);
 				}
 			}
@@ -193,7 +193,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 			if (f.v20 & 0x10) {
 				if (f.wc.f > 0.0f) {
 					f.w8.i = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0);
-					fcn_0047a040((*(D2_CONTROL_TL*) e).x, b[0xc],
+					d2_SetClipRect((*(D2_CONTROL_TL*) e).x, b[0xc],
 						     (int) ((float) f.w8.i
 							    + f.wc.f),
 						     b[0xe]);
@@ -208,14 +208,14 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 						    + GLYPH_W(h1) * f.w0.idx;
 						y = (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3)
 							    - GLYPH_H(h1)) / 2;
-						fcn_0047cba0(x, y, (int) b,
+						d2_DrawSpriteFromSet(x, y, (int) b,
 							     (char*) f.v14, 4);
 					}
 				}
 			}
 
 			/* 0x467ca7: bar frame of the fill run */
-			fcn_0047a040((*(D2_CONTROL_TL*) e).x, b[0xc],
+			d2_SetClipRect((*(D2_CONTROL_TL*) e).x, b[0xc],
 				     (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
 				     b[0xe]);
 
@@ -223,7 +223,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 				/* 0x467cce: filled part, no tick offset */
 				if (!(f.v20 & 8)) {
 					f.wc.i = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0);
-					fcn_0047a040(f.wc.i, b[0xc],
+					d2_SetClipRect(f.wc.i, b[0xc],
 						     (int) ((float) f.wc.i
 							    + f.v18),
 						     b[0xe]);
@@ -240,7 +240,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 							y = (*(D2_CONTROL_TL*) e).y
 							    + (GLYPH_H(H3)
 							       - GLYPH_H(h1)) / 2;
-							fcn_0047cbf0(x, y,
+							d2_DrawDimmedSpriteFrame(x, y,
 								     (int) b,
 								     (char*) f.v14, 2);
 						}
@@ -254,19 +254,19 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 							y = (*(D2_CONTROL_TL*) e).y
 							    + (GLYPH_H(H3)
 							       - GLYPH_H(h1)) / 2;
-							fcn_0047cba0(x, y,
+							d2_DrawSpriteFromSet(x, y,
 								     (int) b,
 								     (char*) f.v14, 2);
 						}
 					}
-					fcn_0047a040((*(D2_CONTROL_TL*) e).x, b[0xc],
+					d2_SetClipRect((*(D2_CONTROL_TL*) e).x, b[0xc],
 						     (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
 						     b[0xe]);
 				}
 				/* 0x467e39: filled part with the tick offset */
 				else {
 					f.wc.i = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0);
-					fcn_0047a040(f.wc.i, b[0xc],
+					d2_SetClipRect(f.wc.i, b[0xc],
 						     (int) ((float) f.wc.i
 							    + f.v18),
 						     b[0xe]);
@@ -283,7 +283,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 							y = (*(D2_CONTROL_TL*) e).y
 							    + (GLYPH_H(H3)
 							       - GLYPH_H(h1)) / 2;
-							fcn_0047cbf0(x, y,
+							d2_DrawDimmedSpriteFrame(x, y,
 								     (int) b,
 								     (char*) f.v14, 1);
 						}
@@ -297,7 +297,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 							y = (*(D2_CONTROL_TL*) e).y
 							    + (GLYPH_H(H3)
 							       - GLYPH_H(h1)) / 2;
-							fcn_0047cba0(x, y,
+							d2_DrawSpriteFromSet(x, y,
 								     (int) b,
 								     (char*) f.v14, 1);
 						}
@@ -306,7 +306,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 			}
 
 			/* 0x467f5c: closing rect of the bar frame */
-			fcn_0047a040((*(D2_CONTROL_TL*) e).x, b[0xc],
+			d2_SetClipRect((*(D2_CONTROL_TL*) e).x, b[0xc],
 				     (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) * 2 + f.v24, b[0xe]);
 		}
 		else {
@@ -323,7 +323,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 				f.w0.b.v01 = 0xdc - (int) ((ratio - 1.0) * 135.0);
 				f.w0.b.v02 = (int) ((ratio - 1.0) * 0.0);
 			}
-			fcn_00479e00((unsigned char) f.w0.b.v00,
+			d2_SetActiveTextColor((unsigned char) f.w0.b.v00,
 				     (unsigned char) f.w0.b.v01,
 				     (unsigned char) f.w0.b.v02);
 
@@ -335,9 +335,9 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 				d2_SetQuadVertexColor((int*) n, 1, 1, 1);
 			}
 			f.wc.i = (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0);
-			fcn_0047a040(f.wc.i, ((int*) a1)[0xc],
+			d2_SetClipRect(f.wc.i, ((int*) surface)[0xc],
 				     (int) ((float) f.wc.i + f.v18),
-				     ((int*) a1)[0xe]);
+				     ((int*) surface)[0xe]);
 
 			/* 0x4680b3: clamped label bitmap */
 			n = d2_QueueTexturedQuad((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0),
@@ -349,9 +349,9 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 			}
 
 			/* 0x468119: bar rect and tick marks */
-			fcn_0047a040((*(D2_CONTROL_TL*) e).x, ((int*) a1)[0xc],
+			d2_SetClipRect((*(D2_CONTROL_TL*) e).x, ((int*) surface)[0xc],
 				     (*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
-				     ((int*) a1)[0xe]);
+				     ((int*) surface)[0xe]);
 			if (!(f.v20 & 8)) {
 				f.wc.i = GLYPH_W(h1);
 				f.w8.i = (int) (f.w8.f / (float) f.wc.i
@@ -362,13 +362,13 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 					    + GLYPH_W(h1) * f.w0.idx;
 					y = (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3)
 						    - GLYPH_H(h1)) / 2;
-					fcn_0047cba0(x, y, a1,
+					d2_DrawSpriteFromSet(x, y, surface,
 						     (char*) f.v14, 1);
 				}
 			}
 
 			/* 0x4681cc: gauge body rect */
-			fcn_0047a040((*(D2_CONTROL_TL*) e).clip_left, (*(D2_CONTROL_TL*) e).clip_top, (*(D2_CONTROL_TL*) e).clip_right, (*(D2_CONTROL_TL*) e).clip_bottom);
+			d2_SetClipRect((*(D2_CONTROL_TL*) e).clip_left, (*(D2_CONTROL_TL*) e).clip_top, (*(D2_CONTROL_TL*) e).clip_right, (*(D2_CONTROL_TL*) e).clip_bottom);
 		}
 		if (f.v20 & 0x20) {
 			goto body;
@@ -404,51 +404,51 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 		*((char*) e + 0x2ec) = (char) f.v34;
 		*((char*) e + 0x2ed) = (char) f.v2c;
 		if (!(*(D2_CONTROL_TL*) e).value_060) {
-			fcn_0047cba0((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-				     a1, (char*) f.v14, 0);
-			if (fcn_0047cba0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
+			d2_DrawSpriteFromSet((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+				     surface, (char*) f.v14, 0);
+			if (d2_DrawSpriteFromSet((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
 					 (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-					 a1, (char*) f.v14, 5)) {
+					 surface, (char*) f.v14, 5)) {
 				goto ticks;
 			}
-			fcn_0047cba0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
+			d2_DrawSpriteFromSet((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
 				     (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-				     a1, (char*) f.v14, 0);
+				     surface, (char*) f.v14, 0);
 		}
 		else {
-			fcn_0047cbf0((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-				     a1, (char*) f.v14, 0);
-			if (fcn_0047cbf0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
+			d2_DrawDimmedSpriteFrame((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+				     surface, (char*) f.v14, 0);
+			if (d2_DrawDimmedSpriteFrame((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
 					 (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-					 a1, (char*) f.v14, 5)) {
+					 surface, (char*) f.v14, 5)) {
 				goto ticks;
 			}
-			fcn_0047cbf0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
+			d2_DrawDimmedSpriteFrame((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) + f.v24,
 				     (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-				     a1, (char*) f.v14, 0);
+				     surface, (char*) f.v14, 0);
 		}
 
 	ticks:
 		/* 0x46843c: end marks */
 		if (f.v34) {
 			if (f.v28) {
-				fcn_0047ccd0((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-					     a1, (char*) f.v14, 6);
+				d2_DrawHighlightSprite((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+					     surface, (char*) f.v14, 6);
 			}
 			if (!f.v28) {
-				fcn_0047ccd0((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-					     a1, (char*) f.v14, 3);
+				d2_DrawHighlightSprite((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+					     surface, (char*) f.v14, 3);
 			}
 		}
 		else if (f.v2c) {
-			fcn_0047a040((*(D2_CONTROL_TL*) e).clip_left, (*(D2_CONTROL_TL*) e).clip_top, (*(D2_CONTROL_TL*) e).clip_right, (*(D2_CONTROL_TL*) e).clip_bottom);
+			d2_SetClipRect((*(D2_CONTROL_TL*) e).clip_left, (*(D2_CONTROL_TL*) e).clip_top, (*(D2_CONTROL_TL*) e).clip_right, (*(D2_CONTROL_TL*) e).clip_bottom);
 			if (f.v28) {
-				fcn_0047ccd0((*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width - GLYPH_W(H6), (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H6) - GLYPH_H(h0)) / 2,
-					     a1, (char*) f.v14, 7);
+				d2_DrawHighlightSprite((*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width - GLYPH_W(H6), (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H6) - GLYPH_H(h0)) / 2,
+					     surface, (char*) f.v14, 7);
 			}
 			if (!f.v28) {
-				fcn_0047ccd0((*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width - GLYPH_W(H3), (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
-					     a1, (char*) f.v14, 3);
+				d2_DrawHighlightSprite((*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width - GLYPH_W(H3), (*(D2_CONTROL_TL*) e).y + (GLYPH_H(H3) - GLYPH_H(h0)) / 2,
+					     surface, (char*) f.v14, 3);
 			}
 		}
 
@@ -456,10 +456,10 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 		/* 0x468554: label text */
 		if (!(f.v20 & 0x48)) {
 			f.v28 = (int) f.v18;
-			fcn_0047cba0((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) - GLYPH_W(H3) / 2
+			d2_DrawSpriteFromSet((*(D2_CONTROL_TL*) e).x + GLYPH_W(h0) - GLYPH_W(H3) / 2
 				     + f.v28, (*(D2_CONTROL_TL*) e).y, (int) b, (char*) f.v14, 3);
 			if (*(char*) ((char*) e + 0xe8)) {
-				d2_GetValueGaugeStepLabel(a0, f.v30, f.buf);
+				d2_GetValueGaugeStepLabel(slotIndex, f.v30, f.buf);
 				d2_SelectFont((*(D2_CONTROL_TL*) e).font ? (*(D2_CONTROL_TL*) e).font
 						     : d2_DefaultFont + 1);
 				f.v2c = GLYPH_W(H3);
@@ -496,13 +496,13 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 
 		/* 0x468700: icon block */
 		if (f.v20 & 0x04) {
-			fcn_0047a040(0, 0, b[1], b[2]);
+			d2_SetClipRect(0, 0, b[1], b[2]);
 			d2_SelectFont((*(D2_CONTROL_TL*) e).font ? (*(D2_CONTROL_TL*) e).font
 					     : (*(int*) (&(*(D2_CONTROL_TL*) e).parent) ? FLD(*(int*) (&(*(D2_CONTROL_TL*) e).parent), 0x28c)
 							: d2_DefaultFont + 1));
 			if ((*(D2_CONTROL_TL*) e).value_074) {
 				itoa(f.v30, f.v3c, 10);
-				fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
+				d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 				d2_DrawDefaultFontText((*(D2_CONTROL_TL*) e).x + (int) f.v18, (*(D2_CONTROL_TL*) e).y - 0x10,
 					     (int) b, f.v3c, 0);
 			}
@@ -518,7 +518,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 
 		/* 0x46882f: trailing text of the element */
 		if (*(char*) ((char*) e + 0xa8)) {
-			fcn_0047a040(0, 0, FLD(b, 4), FLD(b, 8));
+			d2_SetClipRect(0, 0, FLD(b, 4), FLD(b, 8));
 			/* Four pending pushes make 0x46884f the v10 scratch, not flags. */
 			d2_SelectFont((*(D2_CONTROL_TL*) e).font ? (*(D2_CONTROL_TL*) e).font : d2_DefaultFont + 1);
 			x = (*(D2_CONTROL_TL*) e).x;
@@ -550,12 +550,12 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 			y = (*(D2_CONTROL_TL*) e).y + GLYPH_H(h0)
 			    + GLYPH_H(h1) * (f.w0.idx - 1);
 			x = (*(D2_CONTROL_TL*) e).x + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
-			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
+			d2_DrawSpriteFromSet(x, y, surface, (char*) f.v14, 1);
 		}
 	}
 	/* 0x468997: end cap */
 	if ((f.v20 & 0x10) && f.wc.f > 0.0f) {
-		fcn_0047a040((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + GLYPH_H(h0),
+		d2_SetClipRect((*(D2_CONTROL_TL*) e).x, (*(D2_CONTROL_TL*) e).y + GLYPH_H(h0),
 			     (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width, (*(D2_CONTROL_TL*) e).y + (*(D2_CONTROL_TL*) e).height - GLYPH_H(h0));
 		f.v10 = GLYPH_H(h1);
 		g_102d024 = (int) (f.wc.f / (float) f.v10 + g_6628a0);
@@ -565,13 +565,13 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 			y = (int) ((float) (*(D2_CONTROL_TL*) e).height - f.wc.f - (float) f.v10
 				   + (float) f.w8.i);
 			x = (*(D2_CONTROL_TL*) e).x + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
-			fcn_0047cba0(x, y, a1, (char*) f.v14, 4);
+			d2_DrawSpriteFromSet(x, y, surface, (char*) f.v14, 4);
 		}
 	}
 	/* 0x468a74 */
 	if (f.v18 > 0.0f) {
 		f.v10 = (*(D2_CONTROL_TL*) e).y + (*(D2_CONTROL_TL*) e).height - GLYPH_H(h0);
-		fcn_0047a040((*(D2_CONTROL_TL*) e).x, (int) ((float) f.v10 - f.v18),
+		d2_SetClipRect((*(D2_CONTROL_TL*) e).x, (int) ((float) f.v10 - f.v18),
 			     (*(D2_CONTROL_TL*) e).x + (*(D2_CONTROL_TL*) e).width, f.v10);
 		f.v10 = GLYPH_H(h1);
 		g_102d024 = (int) (f.v18 / (float) f.v10 + g_6628a0);
@@ -581,7 +581,7 @@ void __cdecl d2_DrawValueGauge(int a0, int a1)
 			y = (int) ((float) (*(D2_CONTROL_TL*) e).height - f.v18 - (float) f.v10
 				   + (float) f.w8.i);
 			x = (*(D2_CONTROL_TL*) e).x + (GLYPH_W(H3) - GLYPH_W(h1)) / 2;
-			fcn_0047cba0(x, y, a1, (char*) f.v14, 1);
+			d2_DrawSpriteFromSet(x, y, surface, (char*) f.v14, 1);
 		}
 		(*(D2_CONTROL_TL*) e).value_074 = 0;
 		return;

@@ -5,7 +5,7 @@ extern int g_14ce8e0;
 extern int g_774654;
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_AccumulateTyped2(int);
-int __cdecl fcn_00470820(int, int, int);
+int __cdecl d2_LoadForm(int, int, int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -16,7 +16,7 @@ int __cdecl d2_CloseWindow(int);
 int __cdecl d2_DestroyElement(int);
 void __cdecl d2_ClearPaintbox(void);
 int __cdecl d2_ClearWindowChildren(int, int);
-int __cdecl fcn_005c9450(int, int, int);
+int __cdecl d2_PopulateOwnerBuildingList(int, int, int);
 int __cdecl fcn_005c9310(int, int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl d2_DestroyForm(int);
@@ -48,7 +48,7 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
 
     edi = gm_WalkEntityChain(*subjectRecord);
     r = gm_AccumulateTyped2((int)subjectRecord);
-    dialogWindow = fcn_00470820(0, 0, 0x6aad0c);
+    dialogWindow = d2_LoadForm(0, 0, 0x6aad0c);
     d2_SetForm(dialogWindow, 0);
 
     g = d2_CurrentWindowId;
@@ -105,7 +105,7 @@ int __cdecl fcn_005a6e90(unsigned short *subjectRecord)
         edi = activeTab;
         if (edi == 1)
         {
-            if (fcn_005c9450((int)subjectRecord, 0, 0) <= 0)
+            if (d2_PopulateOwnerBuildingList((int)subjectRecord, 0, 0) <= 0)
                 io_AppendText(0x18f2, *subjectRecord);
         }
         else if (edi == 2)

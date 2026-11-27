@@ -21,7 +21,7 @@ extern int g_100f1dc; extern int g_774654; extern int g_14ce8e0;
 #include "Develop/DieGildeAddOn/game/game_player.h"
 extern char g_7f4ca4[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl gm_CalculateGebaeudeValue(void*, int);
 int __cdecl gm_AmountToUnits(int, unsigned char);
@@ -51,7 +51,7 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 	int ret;
 
 	id = *(int*) (e + 1);
-	win = fcn_00470820(0, 0, "Panel\\Gebaeude_Verkaufen_pergament");
+	win = d2_LoadForm(0, 0, "Panel\\Gebaeude_Verkaufen_pergament");
 	d2_CenterDialogWindows(win);
 	p = gm_CalculateGebaeudeValue(e, *(char*) (e + 0x5c));
 	v = gm_AmountToUnits(p, g_773d75);

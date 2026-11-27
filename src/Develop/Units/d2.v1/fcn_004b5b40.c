@@ -7,8 +7,8 @@ extern int g_7728dc;
 #include "client_dialog_state.h"
 
 int __cdecl gm_LookupMissionSpec(int a);
-void __cdecl fcn_004b5630(int a, int b);
-int __cdecl fcn_00470820(int a, int b, char* s);
+void __cdecl d2_RunMissionBriefingDialog(int a, int b);
+int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetForm(int a, int b);
 int __cdecl io_AppendText(int a, ...);
@@ -20,7 +20,7 @@ void __cdecl cm_StepCommandQueue(void);
 int __cdecl main_RunFrameLoop(void* a, int b);
 void __cdecl d2_DestroyForm(int a);
 void __cdecl fcn_004b5530(int a, int b);
-void __cdecl fcn_004b5b20(int a);
+void __cdecl main_ExitToGameLoop(int a);
 void __cdecl fcn_004230e0(int a);
 
 /* The dialog message the three choice handlers send. Only three fields are
@@ -65,8 +65,8 @@ void __cdecl fcn_004b5b40(int mode)
 		g_10069a0[i] = 0;
 	}
 	flags = (mode & ~9) | 0x100;
-	fcn_004b5630(h, flags);
-	dlg = fcn_00470820(0, 0, "special\\mission");
+	d2_RunMissionBriefingDialog(h, flags);
+	dlg = d2_LoadForm(0, 0, "special\\mission");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1b95, *(unsigned short*) slot);
@@ -119,7 +119,7 @@ void __cdecl fcn_004b5b40(int mode)
 		fcn_004b5530(*obj, flags);
 	}
 	else if (arena_done) {
-		fcn_004b5b20(flags);
+		main_ExitToGameLoop(flags);
 	}
 	if (g_7728dc != 0) {
 		fcn_004230e0(g_7728dc);

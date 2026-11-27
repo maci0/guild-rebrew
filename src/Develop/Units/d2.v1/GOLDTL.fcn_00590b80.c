@@ -21,7 +21,7 @@ extern char s_6a9a5c[]; /* "ToolTip\\ToolTip_Objekte_Waffen" */
 
 int* __cdecl gm_LookupWeaponSpec(int);
 void __cdecl fcn_00469c40(int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -54,9 +54,9 @@ int __cdecl d2_ShowObjectTooltip(int itemId)
 	rec = gm_LookupWeaponSpec(itemId);
 	def = g_item_def_table + itemId * 0x41;
 	if (rec != 0 && *rec != 0) {
-		win = fcn_00470820(0, 0, s_6a9a5c);
+		win = d2_LoadForm(0, 0, s_6a9a5c);
 	} else {
-		win = fcn_00470820(0, 0, s_6a9a38);
+		win = d2_LoadForm(0, 0, s_6a9a38);
 	}
 	d2_CenterDialogWindows(win);
 	n = g_1038144[win].i[0];

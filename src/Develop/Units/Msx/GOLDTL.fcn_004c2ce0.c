@@ -9,7 +9,7 @@ extern float g_6628a8;
 
 void __cdecl msx_FadeMasterVolumeIfTrackActive(float, int);
 
-void __cdecl fcn_004c2ce0(char* snd)
+void __cdecl msx_PlayOrFadeTrack(char* snd)
 {
 	if (msx_MusicEnabled != 0 && g_6819b0 != g_6628a8) {
 		if (snd != 0) {

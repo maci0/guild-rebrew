@@ -4,7 +4,7 @@ extern char* g_1015ea0;
 extern int g_100f1dc;
 extern int g_774654;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(char* fmt, ...);
@@ -54,7 +54,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 	ids[4] = 0x97;
 	ids[5] = 0x96;
 	ids[6] = 0x2db;
-	g = fcn_00470820(0, 0, "misc\\routing_choose_good_enhanced");
+	g = d2_LoadForm(0, 0, "misc\\routing_choose_good_enhanced");
 	d2_CenterDialogWindows(g);
 	d2_SetForm(g, 1);
 	io_AppendText("$Z%2N3$A%1G", *(unsigned short*) (a0 + 0x27), a0);

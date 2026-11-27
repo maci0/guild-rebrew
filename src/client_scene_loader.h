@@ -5,7 +5,7 @@
 typedef void (__cdecl* SCENE_PROGRESS)(int stage, int done, int total);
 
 #ifdef REBREW_GOLD
-void __cdecl fcn_00461080(int selector, SCENE_PROGRESS progress);
+void __cdecl d3_ReloadAllTextures(int selector, SCENE_PROGRESS progress);
 char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS progress);
 #else
 /* Inferred context names; native callback reads match these five slots. */
@@ -26,7 +26,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 #endif
 
 void __cdecl d2_UpdateSceneLoadProgress(int mode, int done, int total);
-int __cdecl fcn_005222a0(void* stream);
+int __cdecl d3_LoadSceneAndTerrain(void* stream);
 int __cdecl ecmd_LoadScene(char** filename);
 
 #endif

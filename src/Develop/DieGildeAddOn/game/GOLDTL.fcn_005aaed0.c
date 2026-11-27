@@ -10,7 +10,7 @@ void __cdecl fcn_005338a0(void);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl RegisterStatusText(char*, int, int);
 int __cdecl gm_CheckZunftPreismanipulation(char*);
-void __cdecl fcn_005aa480(int);
+void __cdecl d2_RunZunftPreismanipulationDialog(int);
 
 /* ADDRESS: GOLD 0x5a1bb0 */
 void __cdecl d2_RunZunftPreismanipMenu(int a)
@@ -24,7 +24,7 @@ void __cdecl d2_RunZunftPreismanipMenu(int a)
 			x = RegisterStatusText(g_6aafe4, g_14aac24, 0x16);
 		}
 		if (g_7746a0 != 0 && g_7746a0 == x) {
-			fcn_005aa480(a);
+			d2_RunZunftPreismanipulationDialog(a);
 		}
 	}
 }

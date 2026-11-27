@@ -24,7 +24,7 @@ int __cdecl ch_QueuePlayAnimation(char*, char*, int);
 int __cdecl fcn_004de610(int);
 char* __cdecl io_AppendText(int, ...);
 int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl d3_ScheduleActionTimer(char*, int, int);
 
 /* Resolves the shot of a duel action: the challenger's skill decides whether
@@ -91,7 +91,7 @@ void __cdecl fcn_004dff50(char* task)
 				y = *(float*) (foe + 0x1c) * 0.01 * n;
 				x = (float) *(int*) (foe + 0x24) - y;
 				*(int*) (foe + 0x24) = (int) x;
-				fcn_004ff210(*(unsigned short*) foe, (int) -y);
+				gm_ApplyEntityHealthDelta(*(unsigned short*) foe, (int) -y);
 			}
 		} else {
 			if (*(int*) (*(char**) (foe + 0x184) + 0x128) == 0) {

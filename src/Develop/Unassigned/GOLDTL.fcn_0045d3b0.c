@@ -18,12 +18,12 @@ typedef struct Key4 {
 } Key4;
 // SIZE 0x4
 
-void __cdecl fcn_0045d1e0(unsigned char* a, Key4 k, char c);
+void __cdecl d3_CloneTexture(unsigned char* a, Key4 k, char c);
 
 /* ADDRESS: GOLDTL 0x0045d3b0 */
-void __cdecl fcn_0045d3b0(unsigned char* a, Key4 k, char c)
+void __cdecl d3_CloneTextureWithColorKey(unsigned char* a, Key4 k, char c)
 {
 	if (a[0x58] >= 0xff && !((Bits8*) (a + 0x5a))->b0 && (k.id != 0xff || k.f.b0)) {
-		fcn_0045d1e0(a, k, c);
+		d3_CloneTexture(a, k, c);
 	}
 }

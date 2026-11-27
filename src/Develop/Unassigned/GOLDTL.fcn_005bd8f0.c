@@ -2,7 +2,7 @@
 extern char g_6ac3f4[];
 extern char g_6ac3e4[];
 
-int __cdecl fcn_005bd8f0(char* name, int* o)
+int __cdecl d3_CollectTreeSceneObjects(char* name, int* o)
 {
 	if (strstr(name, g_6ac3f4) != 0) {
 		o[o[98]] = (int) name;

@@ -4,7 +4,7 @@ extern char* g_6b7fd8;
 void __cdecl LogMessageInternal(char* a, int b, char* c, int n);
 
 /* ADDRESS: GOLDTL 0x0042e220 */
-void __cdecl fcn_0042e220(void)
+void __cdecl DumpErrorContext(void)
 {
 	char* p;
 

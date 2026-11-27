@@ -30,7 +30,7 @@ extern char s_6ac7b0[];        /* 0x006ac7b0 */
 int __cdecl d2_CheckOwnerBlocked(int);
 int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl fcn_00526120(int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -43,11 +43,11 @@ int __cdecl fcn_00533f40(int, int, int, int);
 int __cdecl fcn_00595e20(int, int);
 int __cdecl fcn_005963f0(int, int, int, int);
 int __cdecl d2_SyncProduktionSlotGrid(int, int);
-int __cdecl fcn_00597940(int, int, int, int, int);
+int __cdecl d2_DrawProduktionSlotGrid(int, int, int, int, int);
 int __cdecl d2_GetControlValue(int);
 int* __cdecl gm_LookupWeaponSpec(int);
 int* __cdecl gm_GetEquippedCombatGear(int);
-int __cdecl fcn_005c7270(int, int);
+int __cdecl gm_CheckBuildingCategoryForItem(int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
 int __cdecl fcn_00472380(int, int, int, int, int);
 void __cdecl cm_BeginCommandSync(void);
@@ -113,7 +113,7 @@ int __cdecl fcn_005c72f0(int objectArg)
 		v15 = fcn_00526120(g_14aba98, 0);
 		return v15;
 	}
-	win = fcn_00470820(0, 0, s_6ac7b0);
+	win = d2_LoadForm(0, 0, s_6ac7b0);
 	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 3);
 	io_AppendText(0x19db);
@@ -136,7 +136,7 @@ label_5c7466:
 		}
 	} else {
 		v15 = d2_SyncProduktionSlotGrid(objectArg, (int) p);
-		fcn_00597940(win, 1, 1, v7, (int) p);
+		d2_DrawProduktionSlotGrid(win, 1, 1, v7, (int) p);
 	}
 	if (g_100f1dc != -1 && v15 != 0) {
 		v7 = 0;
@@ -173,7 +173,7 @@ label_5c752a:
 				}
 				v7 *= 0x38;
 				v13 = *(int*) (v7 + ((int) g_778da0 + 0x0));
-				v5 = fcn_005c7270(selected, v13);
+				v5 = gm_CheckBuildingCategoryForItem(selected, v13);
 				if (v5 != 0) {
 					cm_SendSellObjekt(*(int*) (selected + 4), *(int*) &p[1], v13, 1,
 							g_773d75, 0);
@@ -205,7 +205,7 @@ label_5c7572:
 			v13 = *(int*) (v7 + ((int) g_7796e0 + 0x0));
 			if (gm_LookupWeaponSpec(v13) != 0) {
 				v13 = *(int*) (v7 + ((int) g_7796e0 + 0x0));
-				v5 = fcn_005c7270(selected, v13);
+				v5 = gm_CheckBuildingCategoryForItem(selected, v13);
 				if (v5 != 0) {
 					cm_SendSellObjekt(*(int*) (selected + 4), *(int*) &p[1], v13, 1,
 							g_773d75, 0);

@@ -77,7 +77,7 @@ typedef struct Col0457290 {
 	unsigned char d;
 } Col0457290;
 
-Tex0457290* __cdecl fcn_0045c5b0(char* name, Col0457290 c, unsigned int flags,
+Tex0457290* __cdecl d3_LoadOrReuseTexture(char* name, Col0457290 c, unsigned int flags,
                                  unsigned int flags2);
 void __cdecl fcn_0045ce90(Tex0457290* t);
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
@@ -147,7 +147,7 @@ alloc:
 				memset(&c, 0, sizeof(c));
 				c.a = 0x7f;
 				c.c1 = 1;
-				t = fcn_0045c5b0((char*) 0x67bcb8, c, 0, 0);
+				t = d3_LoadOrReuseTexture((char*) 0x67bcb8, c, 0, 0);
 				rec->f0 = t;
 				if (t != 0 && t->f50 == 0) {
 					fcn_0045ce90(t);

@@ -18,7 +18,7 @@ typedef struct Tex {
 extern char* g_104049c;
 extern unsigned int g_10404a0;
 
-void __cdecl fcn_0045ce20(Tex* t)
+void __cdecl d3_SyncClonedTextureHandles(Tex* t)
 {
 	Tex* list;
 	int idx;

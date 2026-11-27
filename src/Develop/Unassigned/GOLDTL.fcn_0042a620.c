@@ -3,13 +3,13 @@
 int __cdecl msx_FindSampleHandleIndex(int);
 typedef void (__stdcall* f)(int, int, int);
 
-int __cdecl msx_SetSampleType(int a1, int a2, int a3)
+int __cdecl msx_SetSampleType(int sampleHandle, int format, int flags)
 {
 	int r = 0;
 
 	if (*(int*) 0x6b7f90 != 0) {
-		if (msx_FindSampleHandleIndex(a1) >= 0) {
-			(*(f*) 0x6623a0)(a1, a2, a3);
+		if (msx_FindSampleHandleIndex(sampleHandle) >= 0) {
+			(*(f*) 0x6623a0)(sampleHandle, format, flags);
 		} else {
 			r = -1;
 		}

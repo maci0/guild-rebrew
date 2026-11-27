@@ -57,7 +57,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl d2_DestroyElement(int);
 void __cdecl d2_AddDisplayCounter(int key, int amt);
-void __cdecl fcn_005a51c0(int);
+void __cdecl d2_LayoutEntityList(int);
 
 int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 {
@@ -148,7 +148,7 @@ int __cdecl fcn_005a5440(int list, Row* rows, int a3, int a4, char sel)
 	}
 	if (changed) {
 		d2_SetForm(a3, a4);
-		fcn_005a51c0((int) rows);
+		d2_LayoutEntityList((int) rows);
 	}
 	return result;
 }

@@ -834,9 +834,9 @@ void __cdecl fcn_00500660(char* dir, int arg, void (__cdecl* visit)(char*))
 }
 
 /* ADDRESS: GOLDTL 0x005007f0 */
-void __cdecl sim_CountBmpFiles(char* s)
+void __cdecl sim_CountBmpFiles(char* path)
 {
-	if (strstr(s, g_67bd30) != 0 || strstr(s, g_67a930) != 0) {
+	if (strstr(path, g_67bd30) != 0 || strstr(path, g_67a930) != 0) {
 		g_773d40++;
 	}
 }

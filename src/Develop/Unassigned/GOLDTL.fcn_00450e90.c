@@ -5,7 +5,7 @@ typedef struct {
 	float value;
 	char* e;
 	int pad;
-} SortEntry450e90;
+} D3_LIGHT_SORT_ENTRY;
 
 typedef struct SceneLight450e90 SceneLight450e90;
 struct SceneLight450e90 {
@@ -57,7 +57,7 @@ int __cdecl fcn_00451120(float*, float*);
 void __cdecl fcn_00451150(int, char*, float, float*, float*);
 
 /* ADDRESS: GOLDTL 0x00450e90 */
-void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
+void __cdecl d3_SelectActiveObjectLights(float radius, float scale, char* probes, float* dirMat, float* posMat)
 {
 	SceneLight450e90* light;
 	Probe450e90* probe;
@@ -71,21 +71,21 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 	int i;
 	int n;
 
-	sign = (b < 0.0f) ? (int) 0x80000000 : 0;
-	if (!(b > -b)) {
-		b = -b;
+	sign = (scale < 0.0f) ? (int) 0x80000000 : 0;
+	if (!(scale > -scale)) {
+		scale = -scale;
 	}
 	if (!g_67bc24) {
 		return;
 	}
 	g_6b8708 = 0;
 	for (light = (SceneLight450e90*) g_6b86e4; light != 0 && g_6b8708 < g_6b8704; light = light->next) {
-		((SortEntry450e90*) g_1041d04)[g_6b8708].e = (char*) light;
-		((SortEntry450e90*) g_1041d04)[g_6b8708].value = g_67bc1c * light->power * b + 3.402823466e+38F;
-		((SortEntry450e90*) g_1041d04)[g_6b8708].pad = 0;
+		((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].e = (char*) light;
+		((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].value = g_67bc1c * light->power * scale + 3.402823466e+38F;
+		((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].pad = 0;
 		g_6b8708++;
 	}
-	probe = (Probe450e90*) c;
+	probe = (Probe450e90*) probes;
 	for (light = (SceneLight450e90*) g_6b86e8; light != 0 && g_6b8708 < g_6b8704; light = light->next) {
 		acc = 0.0f;
 		for (i = 0; i < 9; i++) {
@@ -94,7 +94,7 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 			dz = probe[i].z - light->z;
 			dist = (float) sqrt(dx * dx + dy * dy + dz * dz);
 			if (i == 8) {
-				dist -= 0.5f * a;
+				dist -= 0.5f * radius;
 			}
 			if (1.0f > dist) {
 				dist = 1.0f;
@@ -103,19 +103,19 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 				v = 1.0f / (dist * light->atten);
 				v = v * light->power;
 				v = v * g_67bc20;
-				v = v * b;
+				v = v * scale;
 				v = v * (light->b + light->g + light->r);
 				acc += v * 0.0013071895809844136f;
 			}
 		}
 		if (acc > 0.0f) {
-			((SortEntry450e90*) g_1041d04)[g_6b8708].e = (char*) light;
-			((SortEntry450e90*) g_1041d04)[g_6b8708].value = acc;
-			((SortEntry450e90*) g_1041d04)[g_6b8708].pad = 0;
+			((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].e = (char*) light;
+			((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].value = acc;
+			((D3_LIGHT_SORT_ENTRY*) g_1041d04)[g_6b8708].pad = 0;
 			g_6b8708++;
 		}
 	}
-	qsort((SortEntry450e90*) g_1041d04, g_6b8708, 0xc, (int (__cdecl*)(const void*, const void*)) fcn_00451120);
+	qsort((D3_LIGHT_SORT_ENTRY*) g_1041d04, g_6b8708, 0xc, (int (__cdecl*)(const void*, const void*)) fcn_00451120);
 	if (g_6b8708 < d3_MaxActiveLights) {
 		n = g_6b8708;
 	} else {
@@ -125,7 +125,7 @@ void __cdecl fcn_00450e90(float a, float b, char* c, float* d, float* e)
 		((Device450e90Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[8])((D3D_DEVICE_VIEW*)g_6b5de0, i, 0);
 	}
 	for (i = 0; i < n; i++) {
-		fcn_00451150(sign + i, ((SortEntry450e90*) g_1041d04)[i].e, b, d, e);
+		fcn_00451150(sign + i, ((D3_LIGHT_SORT_ENTRY*) g_1041d04)[i].e, scale, dirMat, posMat);
 		((Device450e90Fn) ((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->unk_98[8])((D3D_DEVICE_VIEW*)g_6b5de0, i, 1);
 	}
 }

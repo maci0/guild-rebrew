@@ -47,7 +47,7 @@ void __cdecl d3_SetObjectRotation(char*, float*);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl gm_UpdateAmbientAnimals(void);
 int* __cdecl gm_SetupEntityQuery(char*);
-int __cdecl fcn_00506380(int, void*, void*, int);
+int __cdecl gm_GetEntityUiFlags(int, void*, void*, int);
 void __cdecl d3_UpdateCameraAtScreenEdges(void);
 void __cdecl d3_AnimateCameraToStoredTransform(void);
 void __cdecl d2_UpdateSelectionPanels(void);
@@ -251,9 +251,9 @@ done:
 	}
 	if ((flags & 8) && v4 != 0) {
 		if (g_7746cc != 0) {
-			g_7746dc = fcn_00506380(g_774970, v4, g_7746cc, 0);
+			g_7746dc = gm_GetEntityUiFlags(g_774970, v4, g_7746cc, 0);
 		} else {
-			g_7746dc = fcn_00506380(g_774970, v4, 0, 0);
+			g_7746dc = gm_GetEntityUiFlags(g_774970, v4, 0, 0);
 		}
 		if (*(unsigned short*) (v4 + 0x27) == g_774970 || (g_7746dc & 0x1000)) {
 			d3_UpdateCameraAtScreenEdges();
@@ -262,7 +262,7 @@ done:
 	if (g_7747a0 == v4 && g_7747a4 == g_7746cc && g_7746d4 == 0) {
 		return;
 	}
-	g_7746d8 = fcn_00506380(g_774970, v4, g_7746cc, 0);
+	g_7746d8 = gm_GetEntityUiFlags(g_774970, v4, g_7746cc, 0);
 	fcn_005338a0();
 	g_7747a0 = v4;
 	g_7747a4 = g_7746cc;

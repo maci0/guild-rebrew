@@ -47,7 +47,7 @@ void __cdecl d3_ApplySeasonTextureSet(int);
 void __cdecl fcn_0052d9d0(void*);
 void __cdecl fcn_00545e80(int, int, char*, int, int, int, int, int, char*);
 void __cdecl he_FreeAction(int);
-void __cdecl fcn_00573e10(int);
+void __cdecl d3_UpdateBuildStageMeshes(int);
 int __cdecl d3_CountBuildStageMeshes();
 int __cdecl he_CreateGebaeudeSceneModel(void*, void*, void*, void*, void*);
 void __cdecl d3_ReleaseUnusedSceneObjects();
@@ -354,7 +354,7 @@ LfailB:
 		gm_AddTime((void*) (buildAction + 0x52), 0, v11, 0);
 		if (d3_CurrentContextIndex == 0) {
 			if (*(int*) (buildAction + 0xc8) <= *(int*) (buildAction + 0xc4)) {
-				fcn_00573e10(buildAction);
+				d3_UpdateBuildStageMeshes(buildAction);
 			}
 			if (*(int*) (buildAction + 0xc8) == 2 && (*(unsigned char*) (buildAction + 0x78) & 2)) {
 				for (v11 = 0; v11 < 31; v11++) {
@@ -376,7 +376,7 @@ LfailB:
 				fcn_00415300(*(int*) (v15 + 0x61));
 				*(unsigned char*) (*(int*) (v15 + 0x61) + 0x217) |= 1;
 			}
-			fcn_00573e10(buildAction);
+			d3_UpdateBuildStageMeshes(buildAction);
 			if (*(int*) (v15 + 0x61)) {
 				v8 = gm_GetSeason((int) &gm_GameTime);
 				if (v8 == 1) {
@@ -491,7 +491,7 @@ LfailB:
 			*(int*) (buildAction + 0xbc) = -1;
 		}
 		*(int*) (buildAction + 0xc8) = *(int*) (buildAction + 0xc4) + 1;
-		fcn_00573e10(buildAction);
+		d3_UpdateBuildStageMeshes(buildAction);
 		if ((*(unsigned char*) (buildAction + 0x78) & 2) && v15) {
 			cm_RequestDestroyBuilding(*(int*) (v15 + 1));
 			for (v11 = 0; v11 < 31; v11++) {

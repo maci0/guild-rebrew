@@ -20,7 +20,7 @@ typedef struct
 	float span;
 	int bonus;
 	char pad28[0x21c - 0x28];
-} fcn_004ff210_Ent;
+} HEALTH_DELTA_ENTITY_VIEW;
 
 extern char g_7f4ca0[];
 #include "client_packet_builder.h"
@@ -47,14 +47,14 @@ void __cdecl cm_RequestChangeAttribute(void);
 void __cdecl cm_RequestChangeFloat(int a1, int a2, float a3);
 
 /* ADDRESS: GOLDTL 0x004ff210 */
-float __cdecl fcn_004ff210(unsigned short id, int delta)
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short id, int delta)
 {
 	char dead;
 	float res;
 	char msg[0xf8];
-	fcn_004ff210_Ent* e;
+	HEALTH_DELTA_ENTITY_VIEW* e;
 
-	e = &((fcn_004ff210_Ent*)g_7f4ca0)[id];
+	e = &((HEALTH_DELTA_ENTITY_VIEW*)g_7f4ca0)[id];
 	if (e->id == 0xffff || e->kind == 10 || e->alive == 0)
 		return -1.0f;
 	if (e->kind != 0x14) {

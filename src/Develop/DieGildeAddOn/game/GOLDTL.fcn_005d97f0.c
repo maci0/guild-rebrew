@@ -5,7 +5,7 @@
 extern char* g_14a5adc[15];
 
 void __cdecl fcn_0057e880(int, char*, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int);
@@ -54,7 +54,7 @@ unsigned int __cdecl d2_RunProfessionSelectDialog(unsigned short* actor)
     if (*(char*) &actor[1] == '\x06') {
     result = 0;
     fcn_0057e880(9, 0, 0, 0);
-    dialog = fcn_00470820(0, 0, (char*) 0x6ace10);
+    dialog = d2_LoadForm(0, 0, (char*) 0x6ace10);
     d2_CenterDialogWindows(dialog);
     d2_SetForm(dialog, 0);
     colW = (*(int*) (d2_CurrentWindowId * 0x3cc + 0x1015f4c) - 0x40) / 5;

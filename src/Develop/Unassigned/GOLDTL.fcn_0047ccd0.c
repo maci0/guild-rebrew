@@ -8,7 +8,7 @@ int __cdecl fcn_0047bdd0(int, int, int, float, unsigned char, unsigned char, uns
 
 
 /* ADDRESS: GOLDTL 0x0047ccd0 */
-int __cdecl fcn_0047ccd0(int a1, int a2, int a3, fcn_0047ccd0_set* s, int idx)
+int __cdecl d2_DrawHighlightSprite(int a1, int a2, int a3, fcn_0047ccd0_set* s, int idx)
 {
 	if (s == 0)
 		return 0;

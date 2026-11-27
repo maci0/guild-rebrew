@@ -41,7 +41,7 @@ void __cdecl cm_SendCopyEntityData(Msg55a5*);
 void __cdecl he_FreeAction(char*);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_GetEntityHealth(char*);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
@@ -81,7 +81,7 @@ void __cdecl he_RunAction0x7f(char* u)
 			h = ((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[*(unsigned short*) (u + 8)]);
 			f = gm_GetEntitySkill(h, 3) > 0.1f ? gm_GetEntitySkill(h, 3) : 0.1f;
 			a = gm_WalkEntityChain(*(unsigned short*) h);
-			fcn_004ff210(*(unsigned short*) h, -(int) ((int) gm_GetEntityHealth(h) * ((1.0f - f) * 0.5f)));
+			gm_ApplyEntityHealthDelta(*(unsigned short*) h, -(int) ((int) gm_GetEntityHealth(h) * ((1.0f - f) * 0.5f)));
 			d = (int) (a * f * 0.06f);
 			cm_RequestTransferCurrencyNoKill(*(int*) (u + 0xac), -1, g_773d75, d);
 			io_FormatTextBuffer(buf, 0x10ba, d);

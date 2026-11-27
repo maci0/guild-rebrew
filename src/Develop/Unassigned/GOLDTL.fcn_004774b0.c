@@ -2,7 +2,7 @@
 
 typedef void (__stdcall* f)(void*);
 
-void __cdecl fcn_004774b0(void)
+void __cdecl d2_ResetRenderToSurface(void)
 {
 	void* p;
 

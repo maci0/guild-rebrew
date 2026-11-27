@@ -154,7 +154,7 @@ void __cdecl fcn_005b5ce0(int, int, int, int);
 void __cdecl fcn_00473a90(int, int);
 int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_004c53b0(void);
-int __cdecl fcn_00505d00(int, void*);
+int __cdecl gm_CollectBuildingObjectSlots(int, void*);
 int __cdecl fcn_005b5750(void);
 int __cdecl fcn_0050b750(int, char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -504,7 +504,7 @@ L6fa2:
 			for (i = 0; i < f.v30; i++)
 				f.rows[i].a08 = 0;
 		}
-		f.v40 = fcn_00505d00((int) a1, &f.f6a4);
+		f.v40 = gm_CollectBuildingObjectSlots((int) a1, &f.f6a4);
 		f.v2c = 2;
 		p = (char*) &f.arr6a8[0];
 		do {

@@ -18,7 +18,7 @@ int __cdecl d3_FreeObjectAnimation();
 int __cdecl d3_SetNodePosition();
 int __cdecl d3_SetObjectRotation();
 int __cdecl CompareVector3WithinTolerance();
-int __cdecl fcn_00470820();
+int __cdecl d2_LoadForm();
 int __cdecl d2_CenterDialogWindows();
 int __cdecl d2_DestroyForm();
 int __cdecl d2_GetWindowListItem();
@@ -41,7 +41,7 @@ int __cdecl d3_AnimateCameraToStoredTransform();
 int __cdecl fcn_00530510();
 int __cdecl d3_EndCameraAndUiMode();
 int __cdecl d2_CreateButtonRow();
-int __cdecl fcn_005340f0();
+int __cdecl d2_InitWindowBounds();
 int __cdecl main_RunFrameLoop();
 int __cdecl he_fn_Handlung();
 int __cdecl he_StartHandlungSearch();
@@ -137,10 +137,10 @@ label_5c221e:
     party.a = v29;
     party.text = 0;
     party.ent = (unsigned int)g_774970 * 0x21c + 0x7f4ca0;
-    v9 = fcn_00470820(0,0,(char *)0x6ac5bc);
+    v9 = d2_LoadForm(0,0,(char *)0x6ac5bc);
     v28 = v9;
     d2_SetForm(v9,0);
-    fcn_005340f0(d2_CurrentWindowId);
+    d2_InitWindowBounds(d2_CurrentWindowId);
     d2_CenterDialogWindows(v9);
     d2_SetOverlayAnimation(0,0);
     d2_SetForm(v9,1);
@@ -169,10 +169,10 @@ label_5c221e:
     } while (main_RunFrameLoop(0x5c18e0,0x677c7));
   }
   else {
-    v9 = fcn_00470820(0,0,(char *)0x6ac5bc);
+    v9 = d2_LoadForm(0,0,(char *)0x6ac5bc);
     v28 = v9;
     d2_SetForm(v9,0);
-    fcn_005340f0(d2_CurrentWindowId);
+    d2_InitWindowBounds(d2_CurrentWindowId);
     d2_CenterDialogWindows(v9);
     d2_SetOverlayAnimation(0,0);
     g_100f1dc = 0xffffffff;
@@ -274,10 +274,10 @@ label_5c221e:
         v18 = 1;
         commit = -1;
         v38 = -1;
-        v9 = fcn_00470820(0,0,(char *)0x6ac58c);
+        v9 = d2_LoadForm(0,0,(char *)0x6ac58c);
         v28 = v9;
         d2_SetForm(v9,0);
-        fcn_005340f0(d2_CurrentWindowId);
+        d2_InitWindowBounds(d2_CurrentWindowId);
         d2_CenterDialogWindows(v9);
         d2_SetOverlayAnimation(0,0);
         g_100f1dc = -1;

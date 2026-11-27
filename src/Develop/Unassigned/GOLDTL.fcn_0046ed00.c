@@ -1,6 +1,6 @@
 
 
-typedef struct Win046ed00 {
+typedef struct D2_SCROLL_WINDOW {
 	char pad0[0x10];
 	int height;
 	char pad14[0x254 - 0x14];
@@ -10,7 +10,7 @@ typedef struct Win046ed00 {
 	int scroll;
 	int total;
 	char pad268[0x3cc - 0x268];
-} Win046ed00;
+} D2_SCROLL_WINDOW;
 // SIZE 0x3cc
 
 #include "client_types.h"
@@ -23,21 +23,21 @@ void __cdecl d2_ScrollWindow(int delta, int step, int k)
 	int sum;
 	int v;
 
-	scroll = *(int*)&((Win046ed00*)g_1015f40)[k].scroll;
-	base = ((Win046ed00*)g_1015f40)[k].base;
+	scroll = *(int*)&((D2_SCROLL_WINDOW*)g_1015f40)[k].scroll;
+	base = ((D2_SCROLL_WINDOW*)g_1015f40)[k].base;
 	sum = base + scroll;
 	if (sum > 0 && step < 0) {
 		v = -sum;
 		if (step > v) {
 			v = step;
 		}
-		((Win046ed00*)g_1015f40)[k].scroll = v;
-	} else if (sum + ((Win046ed00*)g_1015f40)[k].height < ((Win046ed00*)g_1015f40)[k].limit && step > 0) {
-		v = ((Win046ed00*)g_1015f40)[k].limit - ((Win046ed00*)g_1015f40)[k].height - base - scroll;
+		((D2_SCROLL_WINDOW*)g_1015f40)[k].scroll = v;
+	} else if (sum + ((D2_SCROLL_WINDOW*)g_1015f40)[k].height < ((D2_SCROLL_WINDOW*)g_1015f40)[k].limit && step > 0) {
+		v = ((D2_SCROLL_WINDOW*)g_1015f40)[k].limit - ((D2_SCROLL_WINDOW*)g_1015f40)[k].height - base - scroll;
 		if (step < v) {
 			v = step;
 		}
-		((Win046ed00*)g_1015f40)[k].scroll += v;
+		((D2_SCROLL_WINDOW*)g_1015f40)[k].scroll += v;
 	}
-	((Win046ed00*)g_1015f40)[k].total += delta;
+	((D2_SCROLL_WINDOW*)g_1015f40)[k].total += delta;
 }

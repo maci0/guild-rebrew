@@ -22,7 +22,7 @@ extern int g_100f1dc;
 extern char g_7e23e3;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -58,7 +58,7 @@ int __cdecl d2_ShowChooseProfessionDialog(int flags)
 	types[8] = 0xd;
 	types[9] = 0xe;
 	types[10] = 0xf;
-	h = fcn_00470820(0, 0, g_6a3f8c);
+	h = d2_LoadForm(0, 0, g_6a3f8c);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	io_AppendText(0x1afa);

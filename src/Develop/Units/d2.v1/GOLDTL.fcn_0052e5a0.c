@@ -28,7 +28,7 @@ extern int d2_CurrentWindowId;
 #include "client_types.h"
 
 
-int __cdecl fcn_00470820(int a, int b, char* s);
+int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 int __cdecl fcn_0052dee0(int x, int y, int z);
 int __cdecl gm_GetEntityMood(unsigned char* s);
@@ -50,7 +50,7 @@ void __cdecl d2_OpenBuildingInfoPanel(void)
 		if (((unsigned char*)g_7746c4) != 0) {
 			return;
 		}
-		g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2fac);
+		g_6a25b8 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2fac);
 		d2_SetForm(g_6a25b8, 0);
 		g_6a25dc = fcn_0052dee0(0, 0x8c, g_14ad0c8);
 		g_6a25e0 = fcn_0052dee0(0, 0xa6, g_14ad0dc);
@@ -60,7 +60,7 @@ void __cdecl d2_OpenBuildingInfoPanel(void)
 		return;
 	}
 	pct = gm_GetEntityMood(g_7746c8);
-	g_6a25b8 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2f40);
+	g_6a25b8 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2f40);
 	d2_SetForm(g_6a25b8, 0);
 	d2_SetForm(g_6a25b8, 1);
 	io_FormatEntityNameMarkup(*(unsigned short*) (g_7746c8 + 0x27), 2, 1, name);

@@ -20,8 +20,8 @@ typedef struct
 // SIZE 0x8024
 
 int __cdecl d3_ResolveTexturePath(char* name);
-void __cdecl fcn_0045bfb0(int anim);
-int __cdecl fcn_0045c5b0(char* name, fcn_0043f7e0_Tint tint, int a, int b);
+void __cdecl d3_ReleaseTexture(int anim);
+int __cdecl d3_LoadOrReuseTexture(char* name, fcn_0043f7e0_Tint tint, int a, int b);
 void __cdecl fcn_0045ce90(int anim);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 
@@ -39,7 +39,7 @@ int __cdecl d3_LoadFloorTexture(fcn_0043f7e0_Floor* o, char* name, int slot)
 	if (slot < 8) {
 		strcpy(o->names[slot], "");
 		if (o->anims[slot] != 0) {
-			fcn_0045bfb0(o->anims[slot]);
+			d3_ReleaseTexture(o->anims[slot]);
 			o->anims[slot] = 0;
 		}
 		strcpy(path, name);
@@ -51,7 +51,7 @@ int __cdecl d3_LoadFloorTexture(fcn_0043f7e0_Floor* o, char* name, int slot)
 			if (d3_ResolveTexturePath(msg) != 0) {
 				*(int*) &tint = 0;
 				tint.level = 0xff;
-				o->anims[slot] = fcn_0045c5b0(msg, tint, 0, 0);
+				o->anims[slot] = d3_LoadOrReuseTexture(msg, tint, 0, 0);
 				if (o->anims[slot] != 0) {
 					fcn_0045ce90(o->anims[slot]);
 					return slot;

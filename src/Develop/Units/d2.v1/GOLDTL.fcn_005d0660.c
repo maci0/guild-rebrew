@@ -31,7 +31,7 @@ extern char g_7f4ca0[];			/* 0x007f4ca0 */
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl gm_LookupEntityRecordById(unsigned int);
-void* __cdecl fcn_00470820(short, short, char*);
+void* __cdecl d2_LoadForm(short, short, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -45,7 +45,7 @@ void __cdecl fcn_005c9090(char*, int, int, int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
-void __cdecl fcn_005d1790(void*, int);
+void __cdecl d2_ShowSpielerInfoDialog(void*, int);
 
 typedef struct TreeRec {
 	short id;			/* +0 */
@@ -89,7 +89,7 @@ void __cdecl fcn_005d0660(unsigned int a0, unsigned char a1, int a2, unsigned in
 	if (!ent) {
 		return;
 	}
-	win = (int) fcn_00470820(0, 0, (char*) 0x6acab0);
+	win = (int) d2_LoadForm(0, 0, (char*) 0x6acab0);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(win);
 	d2_SetForm(win, 2);
@@ -629,9 +629,9 @@ id]) + 0x18c), d2_CurrentWindowId);
 				d2_SetFormVisibility(win, 0);
 				if (!(a1 & 0x10) && (a1 & 8)) {
 					if (ent != rec) {
-						fcn_005d1790((void*) rec, 1);
+						d2_ShowSpielerInfoDialog((void*) rec, 1);
 					} else {
-						fcn_005d1790((void*) rec, 0);
+						d2_ShowSpielerInfoDialog((void*) rec, 0);
 					}
 				}
 				d2_SetFormVisibility(win, 1);

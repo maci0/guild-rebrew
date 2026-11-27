@@ -7,7 +7,7 @@ int __cdecl ai_SelectRandomTorture(int*);
 int __cdecl ai_ShouldSpareTrialTorture(int*);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 unsigned short __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_00493a30(char*, int*);
+int __cdecl ai_ShouldAcquitTrial(char*, int*);
 int __cdecl fcn_00493ce0(char*, int*);
 
 
@@ -47,7 +47,7 @@ void __cdecl cut_HandleProzessEvent(char* context, int* ev)
 	case 4:
 		if (*(int*) (context + 0x10) == ev[7] || *(int*) (context + 0x10) == ev[8] || *(int*) (context + 0x10) == ev[9]) {
 			e = gm_LookupEntityRecordById(((int*)g_772f24)[1]);
-			*(int*) (context + 0x94) = fcn_00493a30(e, ev);
+			*(int*) (context + 0x94) = ai_ShouldAcquitTrial(e, ev);
 		}
 		break;
 	case 5:

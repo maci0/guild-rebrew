@@ -1,6 +1,6 @@
 
 
-typedef int (__stdcall* fcn_00477480_f)(void*);
+typedef int (__stdcall* D2_COM_RELEASE_FN)(void*);
 
 void __cdecl d2_ReleaseRenderToSurface(void)
 {
@@ -8,7 +8,7 @@ void __cdecl d2_ReleaseRenderToSurface(void)
 
 	p = *(void**) 0x7725ec;
 	if (p != 0) {
-		*(int*) 0x14ce728 = ((fcn_00477480_f) ((int*) *(int*) p)[2])(p);
+		*(int*) 0x14ce728 = ((D2_COM_RELEASE_FN) ((int*) *(int*) p)[2])(p);
 		*(int*) 0x7725ec = 0;
 	}
 }

@@ -5,7 +5,7 @@ extern char g_67dac4[];
 
 void* __cdecl m_alloc(int, char*);
 
-void* __cdecl fcn_0047abd0(int wordCount, int entryCount, int a3)
+void* __cdecl d2_AllocShapeBuffer(int wordCount, int entryCount, int unused)
 {
 	void* p;
 

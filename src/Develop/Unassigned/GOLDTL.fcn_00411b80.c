@@ -5,7 +5,7 @@ extern int g_6b5c8c;
 /* Watch the cursor and the two button click latches, then publish the new
  * /selection state into the shared UI state block. */
 /* ADDRESS: GOLDTL 0x00411b80 */
-void __cdecl fcn_00411b80(void)
+void __cdecl io_UpdateMouseClickState(void)
 {
 	int t;
 	int pressed;

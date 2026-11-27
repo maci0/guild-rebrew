@@ -71,7 +71,7 @@ void __cdecl cm_BeginPacketFieldDelta(char* base, int entity_id);
 int __cdecl cm_AppendPacketFieldDelta(unsigned char size, unsigned char count, unsigned short off, char* src);
 char* __cdecl he_StartHandlungSearch(int kind, int first, int id, int arg, int entity_id);
 char* __cdecl gm_LookupEntityRecordById(int description_id);
-int __cdecl fcn_00470820(int x, int y, char* title);
+int __cdecl d2_LoadForm(int x, int y, char* title);
 int __cdecl d2_SetOverlayAnimation(int a1, int a2);
 void __cdecl d2_CenterDialogWindows(int dlg);
 void __cdecl d2_DestroyForm(int dlg);
@@ -79,7 +79,7 @@ void __cdecl d2_SetForm(int dlg, int page);
 int __cdecl d2_GetWindowListItem(int dlg, int page, int id);
 void __cdecl d2_SetElementEnabled(int button, int state);
 int __cdecl d2_ClearWindowChildren(int win, int keep);
-void __cdecl fcn_005340f0(int win);
+void __cdecl d2_InitWindowBounds(int win);
 int __cdecl io_AppendText(int id, ...);
 int __cdecl main_RunFrameLoop(void* fn, int msg);
 int __cdecl d2_CheckActionBlocker(char* house, int mode);
@@ -169,11 +169,11 @@ void __cdecl fcn_005ac2d0(char* building)
 			state = 1;
 		}
 	}
-	dlg = fcn_00470820(0, 0, "Locations\\Kirche\\Predigt");
+	dlg = d2_LoadForm(0, 0, "Locations\\Kirche\\Predigt");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	flag = 1;
 	g_100f1dc = -1;
 	prev = g_6b7fac;

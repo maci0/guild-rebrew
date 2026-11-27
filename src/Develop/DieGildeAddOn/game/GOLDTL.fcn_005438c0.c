@@ -88,7 +88,7 @@ int __cdecl fcn_005435d0(void);
 void __cdecl io_FormatTextBuffer(void*, int);
 int __cdecl fcn_00526120(void*, int);
 void __cdecl d2_RenderAndPresentFrame(void);
-int __cdecl fcn_00470820(int, int, const char*);
+int __cdecl d2_LoadForm(int, int, const char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl io_AppendText(int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -105,7 +105,7 @@ void __cdecl gm_InitGameSession(void);
 void __cdecl gm_CreateSetupFamily(void);
 void __cdecl gm_ShutdownGameRuntime(void);
 void __cdecl fcn_0053f720(void);
-void __cdecl fcn_00538220(void);
+void __cdecl main_ShutdownEngine(void);
 void __cdecl init_AllocateKind0bSceneSlot(void);
 void __cdecl gm_InitCityAndTradeState(unsigned char);
 void __cdecl init_LocalData(void);
@@ -129,7 +129,7 @@ void __cdecl fcn_005490e0(void);
 void __cdecl he_RestartAction03b(void);
 void __cdecl he_RestartAction0xa6(void);
 void __cdecl he_ClearActivePlayerActions(void);
-void __cdecl fcn_005459a0(int);
+void __cdecl d2_ToggleActionPopupBar(int);
 void __cdecl d2_RunWorldHudLoop(void);
 void __cdecl tb_SetCallbackPaused(void*, int);
 void __cdecl gm_AddTime(void*, int, int, int);
@@ -232,7 +232,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				g_774954 = 1;
 				return;
 			}
-			h = fcn_00470820(0, 0, g_68d714);
+			h = d2_LoadForm(0, 0, g_68d714);
 			d2_CenterDialogWindows(h);
 			io_AppendText(0x3ff6);
 			main_RunFrameLoop(0, 0x24087);
@@ -316,7 +316,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 		if (!(g_7747b0 & 4)) {
 			fcn_0064d41a(name, g_6a44e8, g_6a3778, g_7e1d00);
 			if (ls_LoadSavegame(name, 2) == 0) {
-				fcn_00538220();
+				main_ShutdownEngine();
 				return;
 			}
 			gm_CreateSetupFamily();
@@ -562,7 +562,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 				}
 			}
 		}
-		fcn_005459a0(g_774970 & 0xffff);
+		d2_ToggleActionPopupBar(g_774970 & 0xffff);
 		g_fb5744 = 0;
 		g_774960 = 0;
 		d2_RunWorldHudLoop();

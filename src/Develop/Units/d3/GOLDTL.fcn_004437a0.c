@@ -16,7 +16,7 @@ extern int g_6b8484;
 void __cdecl fcn_00442e30(void);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_DisposeObject(void*);
-void __cdecl fcn_00452420(void*);
+void __cdecl d3_FreeMeshObject(void*);
 void __cdecl fcn_0043bcf0(int);
 void __cdecl fcn_00459b40(int);
 void __cdecl m_FreeTracked(int);
@@ -38,7 +38,7 @@ char __cdecl fcn_004437a0(int idx)
 					d3_DisposeObject(((void*)d3_ObjectListHead));
 				}
 				while (((void*)d3_SceneRenderListHead) != &(*(char*)g_1040640)) {
-					fcn_00452420(((void*)d3_SceneRenderListHead));
+					d3_FreeMeshObject(((void*)d3_SceneRenderListHead));
 				}
 				if (g_6b8300 != 0) {
 					fcn_0043bcf0(g_6b8300);

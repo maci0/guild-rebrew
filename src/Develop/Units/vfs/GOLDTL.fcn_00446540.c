@@ -76,7 +76,7 @@ struct Node {
 
 void __cdecl vfs_WriteByte(int, unsigned char);
 void __cdecl vfs_WriteCString(int, char*);
-void __cdecl fcn_00401260(int, int);
+void __cdecl vfs_WriteInt32(int, int);
 void __cdecl vfs_WriteVec3(int, float*);
 void __cdecl fcn_00401360(int, int);
 void __cdecl ReportClientMessage(const char*);
@@ -148,7 +148,7 @@ void __cdecl fcn_00446540(int stream, Node* n)
 		break;
 	case 0:
 		vfs_WriteByte(stream, ((unsigned char) n->flags >> 6) & 1);
-		fcn_00401260(stream, n->i68);
+		vfs_WriteInt32(stream, n->i68);
 		vfs_WriteVec3(stream, &n->pos.x);
 		vfs_WriteVec3(stream, &n->v5c.x);
 		vfs_WriteVec3(stream, &n->v90.x);
@@ -159,22 +159,22 @@ void __cdecl fcn_00446540(int stream, Node* n)
 	case 8:
 		vfs_WriteByte(stream, 1);
 		vfs_WriteByte(stream, ((unsigned char) n->b215 >> 2) & 1);
-		fcn_00401260(stream, *(int*) &n->v90);
-		fcn_00401260(stream, *(int*) &n->v90.y);
-		fcn_00401260(stream, *(int*) &n->v90.z);
+		vfs_WriteInt32(stream, *(int*) &n->v90);
+		vfs_WriteInt32(stream, *(int*) &n->v90.y);
+		vfs_WriteInt32(stream, *(int*) &n->v90.z);
 		vfs_WriteVec3(stream, &n->v5c.x);
 		vfs_WriteVec3(stream, &n->pos.x);
 		vfs_WriteVec3(stream, &n->v84.x);
-		fcn_00401260(stream, n->data->i198);
+		vfs_WriteInt32(stream, n->data->i198);
 		fcn_00401360(stream, n->data->i19c);
 		for (i = 0; i < 0x188; i += 0x38) {
-			fcn_00401260(stream, *(int*) ((char*) n->data + i + 0x28));
-			fcn_00401260(stream, *(int*) ((char*) n->data + i + 0x24));
-			fcn_00401260(stream, *(int*) ((char*) n->data + i + 0x2c));
+			vfs_WriteInt32(stream, *(int*) ((char*) n->data + i + 0x28));
+			vfs_WriteInt32(stream, *(int*) ((char*) n->data + i + 0x24));
+			vfs_WriteInt32(stream, *(int*) ((char*) n->data + i + 0x2c));
 			vfs_WriteVec3(stream, (float*) ((char*) n->data + i + 0x18));
 			vfs_WriteVec3(stream, (float*) ((char*) n->data + i));
 			vfs_WriteVec3(stream, (float*) ((char*) n->data + i + 0xc));
-			fcn_00401260(stream, *(int*) ((char*) n->data + i + 0x30));
+			vfs_WriteInt32(stream, *(int*) ((char*) n->data + i + 0x30));
 			fcn_00401360(stream, *(int*) ((char*) n->data + i + 0x34));
 		}
 		break;

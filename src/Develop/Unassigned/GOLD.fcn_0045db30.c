@@ -8,7 +8,7 @@ extern char g_662dc8[15][9];
  * instead of 0x7e24. */
 
 
-int __cdecl fcn_0045db30(int x, int y, int* img)
+int __cdecl d3_GetTerrainSurfaceType(int x, int y, int* img)
 {
 	int off;
 	int k;

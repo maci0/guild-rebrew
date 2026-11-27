@@ -5,7 +5,7 @@ int __cdecl gm_GetKindRecord(int, int*);
 void __cdecl cm_BeginPacketFieldDelta(unsigned short*, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 int __cdecl _ftol(void);
 
 typedef struct {
@@ -89,6 +89,6 @@ unsigned int __cdecl gm_ApplyRandomAffliction(unsigned short* objectContext)
 	cm_BeginPacketFieldDelta(objectContext, *(int*) ((char*) objectContext + 4));
 	cm_AppendPacketFieldDelta(4, 1, 0x2c, &v);
 	cm_RequestChangeAttribute();
-	fcn_004ff210(*objectContext, -n);
+	gm_ApplyEntityHealthDelta(*objectContext, -n);
 	return id;
 }

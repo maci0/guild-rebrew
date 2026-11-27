@@ -2,14 +2,14 @@ typedef struct
 {
 	int used;
 	char pad04[0x1f4 - 0x4];
-} fcn_00459d90_Cell;
+} D3_TERRAIN_CELL;
 // SIZE 0x1f4
 
 typedef struct
 {
 	int obj;
 	char pad04[0x158 - 0x4];
-} fcn_00459d90_Part;
+} D3_TERRAIN_PART;
 // SIZE 0x158
 
 typedef struct
@@ -24,19 +24,19 @@ typedef struct
 	int pad20;
 	int mips[3];
 	char pad30[0x258 - 0x30];
-	fcn_00459d90_Cell cells[8][8];
+	D3_TERRAIN_CELL cells[8][8];
 	char pad7f58[0x8035 - 0x7f58];
 	unsigned char nparts;
-} fcn_00459d90_Tex;
+} D3_TERRAIN_TEX;
 // SIZE 0x8038
 
-#define PARTS(t) (*(fcn_00459d90_Part**) ((char*) (t) + 0x7da0))
+#define PARTS(t) (*(D3_TERRAIN_PART**) ((char*) (t) + 0x7da0))
 
-void __cdecl fcn_00459be0(int a);
-int __cdecl fcn_00459d00(int obj, int flag);
+void __cdecl d3_ResetMemoryCountFlags(int a);
+int __cdecl d3_GetTextureMemorySize(int obj, int flag);
 
 /* ADDRESS: GOLDTL 0x00459d90 */
-int __cdecl fcn_00459d90(fcn_00459d90_Tex* t, char flag)
+int __cdecl d3_GetTerrainMemorySize(D3_TERRAIN_TEX* t, char flag)
 {
 	int r;
 	int sq;
@@ -48,7 +48,7 @@ int __cdecl fcn_00459d90(fcn_00459d90_Tex* t, char flag)
 	if (t != 0) {
 		sq = t->size * t->size;
 		if (flag) {
-			fcn_00459be0(0x14);
+			d3_ResetMemoryCountFlags(0x14);
 		}
 		r = 0x8038;
 		if (t->f10 != 0) {
@@ -70,10 +70,10 @@ int __cdecl fcn_00459d90(fcn_00459d90_Tex* t, char flag)
 			}
 		}
 		if (PARTS(t) != 0) {
-			r += t->nparts * sizeof(fcn_00459d90_Part);
+			r += t->nparts * sizeof(D3_TERRAIN_PART);
 			for (i = 0; i < t->nparts; i++) {
 				if (PARTS(t)[i].obj != 0) {
-					r += fcn_00459d00(PARTS(t)[i].obj, 1);
+					r += d3_GetTextureMemorySize(PARTS(t)[i].obj, 1);
 				}
 			}
 		}

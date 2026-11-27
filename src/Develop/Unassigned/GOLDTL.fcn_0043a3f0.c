@@ -9,8 +9,8 @@ typedef struct {
 	unsigned char x;
 } V43a3f0;
 
-int __cdecl fcn_0045d320(int h, int flag);
-int __cdecl fcn_0045d3b0(int h, V43a3f0 c, int flag);
+int __cdecl d3_DetachAndReleaseTexture(int h, int flag);
+int __cdecl d3_CloneTextureWithColorKey(int h, V43a3f0 c, int flag);
 
 void __cdecl fcn_0043a3f0(char* a, char* b, V43a3f0 c)
 {
@@ -30,7 +30,7 @@ void __cdecl fcn_0043a3f0(char* a, char* b, V43a3f0 c)
 		v->r = 0xff;
 		for (i = 0; i < *(int*) (*(char**) (b + 0x318) + 0x1e4); i++) {
 			h = *(int**) (b + 0x31c);
-			x = fcn_0045d320(h[i], 1);
+			x = d3_DetachAndReleaseTexture(h[i], 1);
 			(*(int**) (b + 0x31c))[*(int*) (*(char**) (b + 0x318) + 0x1e4) + i] = x;
 			(*(int**) (b + 0x31c))[i] = x;
 		}
@@ -39,7 +39,7 @@ void __cdecl fcn_0043a3f0(char* a, char* b, V43a3f0 c)
 	if (v->r == 0xff && !v->f0) {
 		a[0x215] |= 0x20;
 		for (i = 0; i < *(int*) (*(char**) (b + 0x318) + 0x1e4); i++) {
-			x = fcn_0045d3b0((*(int**) (b + 0x31c))[i], c, 1);
+			x = d3_CloneTextureWithColorKey((*(int**) (b + 0x31c))[i], c, 1);
 			(*(int**) (b + 0x31c))[*(int*) (*(char**) (b + 0x318) + 0x1e4) + i] = x;
 			(*(int**) (b + 0x31c))[i] = x;
 		}

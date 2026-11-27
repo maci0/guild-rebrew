@@ -38,7 +38,7 @@ extern int g_6b8300;
 void* __cdecl vfs_Tfopen(const char* name, const char* mode, struct VFS_DIR* root);
 void __cdecl fcn_00401360(void*, int);
 void __cdecl vfs_WriteCString(void*, int);
-void __cdecl fcn_00401260(void*, float);
+void __cdecl vfs_WriteInt32(void*, float);
 void __cdecl vfs_WriteVec3(void*, Vec3*);
 void __cdecl vfs_WriteByte(void*, char);
 void* __cdecl fcn_00437890(void*);
@@ -66,20 +66,20 @@ void __cdecl d3_SaveScene(const char* name, void* stream)
 	}
 	fcn_00401360(s, 0x3a6c00bb);
 	vfs_WriteCString(s, g_6b8484);
-	fcn_00401260(s, 0.0f);
+	vfs_WriteInt32(s, 0.0f);
 	vfs_WriteVec3(s, &g_67bbdc);
 	vfs_WriteVec3(s, &g_6b86c4);
 	fcn_00401360(s, ((Cfg*)g_67a370)->xb4);
 	fcn_00401360(s, d3_FogColor);
-	fcn_00401260(s, g_10425fc);
-	fcn_00401260(s, g_104329c);
+	vfs_WriteInt32(s, g_10425fc);
+	vfs_WriteInt32(s, g_104329c);
 	for (i = 0; i < 7; i++) {
 		vfs_WriteVec3(s, (Vec3*)&((D3_SCENE_SLOT*)g_1041d80)[i].a);
 		vfs_WriteVec3(s, (Vec3*)&((D3_SCENE_SLOT*)g_1041d80)[i].b);
 		for (k = 0; k < 6; k++) {
 			fcn_00401360(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].color);
-			fcn_00401260(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f4);
-			fcn_00401260(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f8);
+			vfs_WriteInt32(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f4);
+			vfs_WriteInt32(s, ((D3_SCENE_SLOT*)g_1041d80)[i].pal[k].f8);
 		}
 	}
 	n = 0;

@@ -3,7 +3,7 @@
 
 #include "Develop/DieGildeAddOn/game/spiel.h"
 float __cdecl gm_RandomFloat01(void);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 
 int __cdecl gm_ApplyAssassinDamage(char* a, unsigned short* b, int c)
 {
@@ -14,7 +14,7 @@ int __cdecl gm_ApplyAssassinDamage(char* a, unsigned short* b, int c)
 		fa = gm_GetEntitySkill(a, 2);
 		fb = gm_GetEntitySkill((char*) b, 2);
 		if (gm_RandomFloat01() + (fa - fb * 0.5f) >= 1.0f) {
-			fcn_004ff210(*b, (-1 - c) * 5);
+			gm_ApplyEntityHealthDelta(*b, (-1 - c) * 5);
 			return 1;
 		}
 	}

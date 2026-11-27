@@ -7,7 +7,7 @@ extern char g_9ba1c0[];
 
 #include "client_timer.h"
 
-void __cdecl fcn_00525eb0(void)
+void __cdecl main_InitFrameProfile(void)
 {
 	tb_OpenFunction(main_SampleFrameCounter, 0x47);
 	memset(g_7e2760, 0, 0x300);

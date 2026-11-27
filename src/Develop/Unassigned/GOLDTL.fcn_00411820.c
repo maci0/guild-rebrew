@@ -70,7 +70,7 @@ void __cdecl io_FormatInputError(int a1, int a2, char* fmt, ...);
 
 int __cdecl io_BuildKeyTranslateTable(void);
 
-int __cdecl fcn_00411820(HWND hwnd, HINSTANCE hinst, int flags)
+int __cdecl io_InitDirectInputMouse(HWND hwnd, HINSTANCE hinst, int flags)
 {
 	HRESULT hr;
 	PropDword dipdw;

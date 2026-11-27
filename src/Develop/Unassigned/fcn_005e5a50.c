@@ -35,11 +35,11 @@ int __cdecl d3snd_PlaySoundEffect(int, int, char*, int);
 void __cdecl fcn_005263d0(int, int, int);
 char* __cdecl d2_OpenTargetPicker(int*, int, int, void*);
 void __cdecl d3_EndCameraAndUiMode(void);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl d2_SetValueGaugeStepLabels(int, int, ...);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, ...);
@@ -87,11 +87,11 @@ void __cdecl fcn_005e5a50(char* entity)
 		d3_EndCameraAndUiMode();
 		return;
 	}
-	dialog = fcn_00470820(0, 0, (char*) 0x6ad434);
+	dialog = d2_LoadForm(0, 0, (char*) 0x6ad434);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dialog);
 	d2_SetForm(dialog, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dialog, 2);
 	control = d2_AddWindowValueGauge(0x57, 7, 200, 0, 100, 0x7b, 2, d2_CurrentWindowId);
 	d2_SetElementValue(control, 0, 5, 0, 1);

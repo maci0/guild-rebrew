@@ -48,7 +48,7 @@ extern int g_14ce8e0;
 extern char* g_7746c4;
 extern char s_6aa490[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -63,7 +63,7 @@ void __cdecl he_AssignActionSlot(int, int, int, char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005add40(int unused, char* e)
+int __cdecl d2_OpenTaschendiebstahlDialog(int unused, char* e)
 {
 	int r;
 	int btn1;
@@ -76,7 +76,7 @@ int __cdecl fcn_005add40(int unused, char* e)
 	int i;
 
 	r = 0;
-	dlg = fcn_00470820(0, 0, s_6aa490);
+	dlg = d2_LoadForm(0, 0, s_6aa490);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
@@ -140,7 +140,7 @@ int __cdecl fcn_005add40(int unused, char* e)
 				g_774654 = 1;
 			}
 		}
-	} while (main_RunFrameLoop((void*) fcn_005add40, 0x677c7) != 0);
+	} while (main_RunFrameLoop((void*) d2_OpenTaschendiebstahlDialog, 0x677c7) != 0);
 	d2_DestroyForm(dlg);
 	return r;
 }

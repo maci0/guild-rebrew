@@ -21,10 +21,10 @@ void* __cdecl vfs_Tfopen(const char* name, const char* mode, int root);
 int __cdecl vfs_ReadData(char* buf, int size, int count, void* stream);
 int __cdecl vfs_fseek(void* f, int off, int whence);
 void __cdecl CloseVfsStream(void* f);
-int __cdecl fcn_00465950(const char* name);
+int __cdecl d2_FindResourceByName(const char* name);
 void __cdecl d2_AddRefcount(int a0);
 int __cdecl d2_CreateChildWindow(int a, int b, int c, int d, int e, int f);
-int __cdecl fcn_0046e940(int a, int b, int c, int d, int e);
+int __cdecl d2_CreateWindow(int a, int b, int c, int d, int e);
 void __cdecl d2_SetBackgroundTexture(const char* name, int win);
 int __cdecl d2_AddElementToWindow(int a, int b, int c, int d);
 int __cdecl d2_AddWindowInputIcon(int a, int b, int c, int d, int e, int f);
@@ -39,7 +39,7 @@ char* __cdecl strcat(char*, const char*);
 int __cdecl strcmp(const char*, const char*);
 
 /* ADDRESS: GOLDTL 0x00470820 */
-int __cdecl fcn_00470820(int a0, int a1, char* formName)
+int __cdecl d2_LoadForm(int a0, int a1, char* formName)
 {
 	char v22[256];
 	char formPath[256];
@@ -160,7 +160,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 							(short) *((short*) v36 - 0x765),
 							v36[-0x3b2], v45);
 					} else {
-						v11 = fcn_0046e940(
+						v11 = d2_CreateWindow(
 							(short) *v26,
 							(short) *((short*) v36 - 0x767),
 							(short) v36[-0x3b3],
@@ -204,7 +204,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 					v8 = v39[1];
 					v6 = *((short*) v39 + 1);
 					v7 = *v39;
-					*v32 = fcn_0046e940(
+					*v32 = d2_CreateWindow(
 						(short) v7, (short) v6,
 						(short) v8, (short) v5, v11);
 				}
@@ -215,10 +215,10 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 					p = (int*) ((char*) v26 + 0xe90);
 				else
 					p = (int*) s_67d474;
-				v12 = fcn_00465950((char*) p);
+				v12 = d2_FindResourceByName((char*) p);
 				*(unsigned int*) (v41 + 0x28c) = v12;
 				if (*(char*) ((char*) v26 + 0xed4)) {
-					v12 = fcn_00465950(
+					v12 = d2_FindResourceByName(
 						(char*) v26 + 0xed4);
 					*(unsigned int*) (v41 + 0x398) =
 						v12;
@@ -233,7 +233,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 				*(int*) (v41 + 0x1c) = (int) v5;
 				*(int*) (v41 + 0x24) = (int) v6;
 				if (*(unsigned char*) (v41 + 0x14) & 4) {
-					v13 = fcn_00465950(
+					v13 = d2_FindResourceByName(
 						(char*) v26 + 0xf90);
 					*(int*) (v41 + 0x288) = v13;
 					if (v13 == -1)
@@ -255,7 +255,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 				t = (int*) ((char*) v33 + 0xd90);
 				do {
 					if (t[-0x330] <= 0x3f) {
-						v12 = fcn_00465950((char*) v19);
+						v12 = d2_FindResourceByName((char*) v19);
 						v13 = d2_AddElementToWindow((short) *q,
 							(short) q[0x18], v12, v34);
 						if (*t == 0x12) {
@@ -306,7 +306,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 							v15 + 0x1038140;
 					} else if (t[-0x330] == 0x45) {
 						v37 = *t & 0xff;
-						v12 = fcn_00465950(
+						v12 = d2_FindResourceByName(
 							(char*) v19);
 						v13 = d2_AddWindowValueGauge(
 							(short) *q,
@@ -353,7 +353,7 @@ int __cdecl fcn_00470820(int a0, int a1, char* formName)
 				if (*(short*) ((char*) v33 + 0xe90))
 					v11 = *(short*) ((char*) v33 + 0xe90);
 				else
-					v11 = fcn_00465950(s_67d474);
+					v11 = d2_FindResourceByName(s_67d474);
 				v8 = v33[0x3a6];
 				*(int*) (v41 + 0x28c) = v11;
 				if (v8 > 0)

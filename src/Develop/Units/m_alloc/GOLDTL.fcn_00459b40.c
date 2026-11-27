@@ -1,7 +1,7 @@
 
 
 void __cdecl fcn_004597f0(void*, void*);
-void __cdecl fcn_00459a90(void*);
+void __cdecl d3_ReleaseSkyDomeBuffers(void*);
 void __cdecl m_FreeTracked(void*);
 
 void __cdecl fcn_00459b40(char* p)
@@ -12,6 +12,6 @@ void __cdecl fcn_00459b40(char* p)
 	while (*(void**) (p + 0x24) != 0) {
 		fcn_004597f0(p, *(void**) (p + 0x24));
 	}
-	fcn_00459a90(p);
+	d3_ReleaseSkyDomeBuffers(p);
 	m_FreeTracked(p);
 }

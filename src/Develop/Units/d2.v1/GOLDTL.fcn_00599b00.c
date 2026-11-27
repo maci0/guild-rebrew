@@ -84,7 +84,7 @@ void __cdecl fcn_00599b00(void)
 	raw = gm_GetGuildHall(1);
 	raw = *(int*) (raw + 0x5d);
 	query = fcn_00502cd0(raw, 2, 6, 0, 0x115);
-	dlg = fcn_00470820(0, 0, (char*) 0x6aa2a8);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6aa2a8);
 	d2_CenterDialogWindows(dlg);
 	g_7746f8 = 1;
 	d2_SetForm(dlg, 0);

@@ -25,10 +25,10 @@ void __cdecl fcn_0057ae40(void);
 void __cdecl he_UpdateNecromancerFog(void);
 void __cdecl he_StartAction0x93(void);
 void __cdecl he_RunAction0x93(void);
-void __cdecl fcn_0057b770(char*);
+void __cdecl he_StartFriedhofStealAction(char*);
 void __cdecl he_RunFriedhofStealAction(char*);
 void __cdecl fcn_0057b000(void);
-void __cdecl he_RunAction0x92(void);
+void __cdecl fcn_0057b1f0(void);
 
 int __cdecl he_RegisterFriedhofHandlers(void)
 {
@@ -38,7 +38,7 @@ int __cdecl he_RegisterFriedhofHandlers(void)
 	    || he_RegisterHandler(0x8d, he_StartGrabpflege, he_RunGrabpflege) || he_RegisterHandler(0x8e, he_StartAction0x8e, he_RunDeathPactCollection)
 	    || he_RegisterHandler(0x8f, he_StartUpgraden, he_RunUpgraden) || he_RegisterHandler(0x90, he_StartAction0x90, he_RunAction0x90)
 	    || he_RegisterHandler(0x91, fcn_0057ae40, he_UpdateNecromancerFog) || he_RegisterHandler(0x93, he_StartAction0x93, he_RunAction0x93)
-	    || he_RegisterHandler(0x94, fcn_0057b770, he_RunFriedhofStealAction) || he_RegisterHandler(0x92, fcn_0057b000, he_RunAction0x92)) {
+	    || he_RegisterHandler(0x94, he_StartFriedhofStealAction, he_RunFriedhofStealAction) || he_RegisterHandler(0x92, fcn_0057b000, fcn_0057b1f0)) {
 		return 1;
 	}
 	he_RegisterActionMeta(0x8d, "grabpflege", 1, 0x513, -1);

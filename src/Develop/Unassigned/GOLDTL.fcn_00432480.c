@@ -83,7 +83,7 @@ void __cdecl d3_ComputeSplineTangents(void*, void*, void*);
 void __cdecl d3_UpdateObjectAnimPose(char*);
 void __cdecl d3_FreeObjectAnimation(char*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
-char __cdecl fcn_0045cbe0(char*, unsigned int);
+char __cdecl d3_UpdateAnimatedTextures(char*, unsigned int);
 
 
 /* Native frame slots, addressed through the aggregate. */
@@ -142,7 +142,7 @@ char __cdecl d3_UpdateSceneObjectAnimCallback(char* o, void* ctx)
 	if (ext != 0) {
 		if ((int) ctx >= 0 && SI(o + 0x1cc) != 0 &&
 		    !(SB(ext + 0x163d) & 0x40) && SI(o + 0x218) == 4) {
-			fcn_0045cbe0(o, now);
+			d3_UpdateAnimatedTextures(o, now);
 		}
 		n = (unsigned char) SB(ext + 0x163c);
 		if (n != 0) {

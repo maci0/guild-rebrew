@@ -1,6 +1,6 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
-void __cdecl fcn_004a7f90(int* h, int* rank_n, int* rank, int* suit_n, int* suit);
+void __cdecl gm_CountBoardCardRanksAndSuits(int* h, int* rank_n, int* rank, int* suit_n, int* suit);
 int __cdecl fcn_004a7770(int* h, int a2, int skip, int* out);
 int __cdecl gm_RandomMod(int);
 
@@ -34,7 +34,7 @@ void __cdecl ai_EvaluateCardGameFold(void)
 		do {
 			q = g_1007cd4 + j;
 			if (i != row && *(int*) (q + 0x2c) < 0) {
-				fcn_004a7f90((int*) (q + 4), &rank_n, &rank, (int*) suit_n, (int*) suit);
+				gm_CountBoardCardRanksAndSuits((int*) (q + 4), &rank_n, &rank, (int*) suit_n, (int*) suit);
 				switch (*(int*) (p + 0x2c)) {
 				case 0:
 					if (*(int*) (p + 0x20) != 0) {

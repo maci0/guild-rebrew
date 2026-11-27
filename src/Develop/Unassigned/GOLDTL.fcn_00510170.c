@@ -3,7 +3,7 @@ extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 
 /* ADDRESS: GOLDTL 0x00510170 */
-int __cdecl fcn_00510170(char* a)
+int __cdecl gm_IsActiveWithoutThievesGuild(char* a)
 {
 	char* p;
 	int i;

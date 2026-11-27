@@ -1,25 +1,25 @@
 typedef struct {
 	char pad0[0x48];
 	int refs;
-} fcn_0047ac20_item;
+} D2_SHAPE_SURFACE;
 
 typedef struct {
 	char pad0[0x24];
 	int count;
-	fcn_0047ac20_item** items;
-} fcn_0047ac20_node;
+	D2_SHAPE_SURFACE** items;
+} D2_SHAPE_NODE;
 
 typedef struct {
 	char pad0[0x4];
 	unsigned short count;
 	char pad6[0x12];
-	fcn_0047ac20_node** nodes;
-} fcn_0047ac20_list;
+	D2_SHAPE_NODE** nodes;
+} D2_SHAPE_BANK;
 // SIZE 0x1c
 
 
 /* ADDRESS: GOLDTL 0x0047ac20 */
-void __cdecl fcn_0047ac20(fcn_0047ac20_node* n, fcn_0047ac20_list* l)
+void __cdecl d2_AppendShapeNode(D2_SHAPE_NODE* n, D2_SHAPE_BANK* l)
 {
 	int i;
 

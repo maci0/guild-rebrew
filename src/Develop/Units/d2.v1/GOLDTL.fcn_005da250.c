@@ -32,7 +32,7 @@ extern int g_100f1dc;
 char* __cdecl gm_LookupEntityRecordById(int id);
 int __cdecl gs_CollectEvidenceIndicesForTarget(int id, int* ids, short kind);
 int __cdecl gs_StartCourtTrial(char* e, char* who, int n, int a4);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText(int, ...);
@@ -41,7 +41,7 @@ int __cdecl fcn_004f61c0(int* ids, int* b, int* c, short kind);
 int __cdecl d2_BuildPersonStatusDesc(Row* r);
 void __cdecl fcn_005ca740(int, int, int, int, Row*, int);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
-void __cdecl fcn_005c9160(char*, int, int, int, int);
+void __cdecl d2_CreateRightAlignedText(char*, int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl fcn_005d9f70(char* e, char* who);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -78,7 +78,7 @@ int __cdecl fcn_005da250(char* e, char* a2)
 		}
 		return gs_StartCourtTrial(e, who, b[0], 0);
 	}
-	dlg = fcn_00470820(0, 0, "privillegien\\Beweise_Sichten");
+	dlg = d2_LoadForm(0, 0, "privillegien\\Beweise_Sichten");
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x173f);
@@ -105,7 +105,7 @@ int __cdecl fcn_005da250(char* e, char* a2)
 			rows[i].x = 0x32;
 			rows[i].y = i * 0x69 + 10;
 			fcn_005ca740(0x32, i * 0x69 + 10, d2_CurrentWindowId, 0x56, &rows[i], 1);
-			fcn_005c9160(text, ((struct s_1015f4c*) g_1015f4c)[d2_CurrentWindowId].x - 0xf, i * 0x69 + 10 + 0x2d, 0xc8, 0x55);
+			d2_CreateRightAlignedText(text, ((struct s_1015f4c*) g_1015f4c)[d2_CurrentWindowId].x - 0xf, i * 0x69 + 10 + 0x2d, 0xc8, 0x55);
 		}
 	} else {
 		io_AppendText(0x1741, g_774970);

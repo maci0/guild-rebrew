@@ -37,7 +37,7 @@ typedef struct {
 char* __cdecl gm_StartFilteredEntitySearch(int mode, int kind, int owner);
 char* __cdecl gm_AddObjekt(void);
 char* __cdecl gm_FindNextFilteredEntity(void);
-void __cdecl fcn_00505d00(char* obj, Sorted* out);
+void __cdecl gm_CollectBuildingObjectSlots(char* obj, Sorted* out);
 
 int __cdecl gm_BuildDealSummary(int owner, Summary* out)
 {
@@ -50,7 +50,7 @@ int __cdecl gm_BuildDealSummary(int owner, Summary* out)
 	memset(out, 0, sizeof(Summary));
 	p = gm_StartFilteredEntitySearch(1, 4, owner);
 	while (p != 0) {
-		fcn_00505d00(p, &sorted);
+		gm_CollectBuildingObjectSlots(p, &sorted);
 		if (sorted.special != 0xffff && sorted.special == owner) {
 			out->width += 0xe;
 			out->height += 0xe;

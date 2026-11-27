@@ -4,7 +4,7 @@
 #include "Develop/Units/d2.v1/d2_gui.h"
 
 /* ADDRESS: GOLD 0x0046bc90 */
-void __cdecl fcn_0046bc90(int index, int count, ...)
+void __cdecl d2_SetElementPipeStrings(int index, int count, ...)
 {
 	GuiEnt* p;
 	int i;

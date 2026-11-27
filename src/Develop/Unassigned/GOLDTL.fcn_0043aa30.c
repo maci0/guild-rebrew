@@ -9,7 +9,7 @@ extern char g_67a448[];
 int __cdecl fcn_0064d41a(char*, char*, ...);
 void __cdecl d3_RebuildFloorMeshes(int);
 void __cdecl fcn_0043f6a0(int);
-void __cdecl fcn_0045b290(int, int);
+void __cdecl d3sm_Rebuild(int, int);
 
 char __cdecl fcn_0043aa30(int flags)
 {
@@ -24,7 +24,7 @@ char __cdecl fcn_0043aa30(int flags)
 	}
 	g_6b8058 = ~flags & 3;
 	if (g_6b8058 == 0 && (*(int*)&g_6b89e4) != 0 && g_6b8300 == 0) {
-		fcn_0045b290((*(int*)&g_6b89e4), 0);
+		d3sm_Rebuild((*(int*)&g_6b89e4), 0);
 	}
 	return 1;
 }

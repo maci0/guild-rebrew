@@ -30,10 +30,10 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6ab048[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl gm_GetKircheTop5(int*, int*);
 void __cdecl d2_ClearWindowChildren(int, int);
@@ -61,10 +61,10 @@ void __cdecl d2_ShowKircheTop5(void)
 	int x;
 	int left;
 
-	dlg = fcn_00470820(0, 0, s_6ab048);
+	dlg = d2_LoadForm(0, 0, s_6ab048);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetOverlayAnimation(0, 0);
 	dirty = 1;
 	g_100f1dc = -1;

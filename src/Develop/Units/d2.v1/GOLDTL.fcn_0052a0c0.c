@@ -58,7 +58,7 @@ extern char* g_1015ea0;
 extern Row g_7e30c0[32];
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 
-int __cdecl fcn_00470820(int a, int b, char* s);
+int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_SetForm(int h, int mode);
 int __cdecl d2_GetWindowListItem(int h, int a, int b);
 void __cdecl d2_SetFormVisibility(int h, int v);
@@ -73,9 +73,9 @@ void __cdecl fcn_0052a0c0(int unused, char arg)
 	if (g_6a25b4 == -1) {
 		g_774724 = arg;
 		if ((*(char*)&g_77534c) == 0) {
-			g_6a25b4 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2ea8);
+			g_6a25b4 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2ea8);
 		} else {
-			g_6a25b4 = fcn_00470820(g_1040494 - 0x68, 0x106, g_6a2e94);
+			g_6a25b4 = d2_LoadForm(g_1040494 - 0x68, 0x106, g_6a2e94);
 		}
 		d2_SetForm(g_6a25b4, 1);
 		owner = d2_CurrentWindowId;

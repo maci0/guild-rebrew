@@ -12,7 +12,7 @@ int __cdecl cm_WaitNetworkSyncBanner(int);
 int __cdecl amt_GetOfficeGroupHumanFlags(int);
 int __cdecl amt_ResolveOfficeApplications(int, int, void *);
 
-int __cdecl fcn_00470820(char *, int, int);
+int __cdecl d2_LoadForm(char *, int, int);
 void __cdecl d2_SetFormVisibility(int, int);
 void __cdecl fcn_00471d80(int, int);
 void __cdecl fcn_004e4730(char *);
@@ -27,7 +27,7 @@ int __cdecl fcn_004727a0(int, int);
 int __cdecl d2_BuildPersonStatusDesc(void *);
 int __cdecl fcn_005ca740(int, int, int, int, int *, int);
 void __cdecl fcn_004da510(int, int, int);
-int __cdecl fcn_004e4b40(int, ...);
+int __cdecl d3snd_QueueSoundIfAllowed(int, ...);
 int __cdecl io_AppendText(char *, ...);
 unsigned int __cdecl cut_RandMod(unsigned int, ...);
 int __cdecl d2_ClearWindowChildren(int, int);
@@ -255,7 +255,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
     }
     /* native 0x4dac46: scene handle, per-entity text packets */
     cm_WaitNetworkSyncBanner(0x6b5c60);
-    s14 = fcn_00470820((char *)0x68c1ec, 0, 0);
+    s14 = d2_LoadForm((char *)0x68c1ec, 0, 0);
     d2_SetFormVisibility(s14, 0);
     fcn_00471d80(s14, 3);
     s1C = 0;
@@ -308,9 +308,9 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         k += 1;
                     i += 1;
                 }
-                s5C = fcn_00470820((char *)0x68c124, 0, 0);
+                s5C = d2_LoadForm((char *)0x68c124, 0, 0);
                 fcn_00471d80(s5C, 3);
-                s60 = fcn_00470820((char *)0x68c104, 0, 0);
+                s60 = d2_LoadForm((char *)0x68c104, 0, 0);
                 fcn_00471d80(s60, 3);
                 s10 = gm_LookupEntityRecordById(*(int *)s00);
                 s18 = gm_LookupEntityRecordById(*(int *)(s00 + 0x10));
@@ -323,7 +323,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                              (int *)((char *)&mid + 0x38), 1);
                 fcn_004727a0(s60, 2);
                 fcn_004da510(*(int *)0x772514, 1, 0);
-                fcn_004e4b40(-8, s34, 0x68c0f0, s20 - 1, 0x32);
+                d3snd_QueueSoundIfAllowed(-8, s34, 0x68c0f0, s20 - 1, 0x32);
                 d2_SetFormVisibility((int)a0, 1);
                 fcn_004727a0((int)a0, 0);
                 io_AppendText((char *)0x6811b0);
@@ -380,7 +380,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             fcn_004727a0(s14, 0);
                             switch (*(int *)s80) {
                             case 0:
-                                fcn_004e4b40(*(unsigned short *)s58, s34, 0x68c0e0,
+                                d3snd_QueueSoundIfAllowed(*(unsigned short *)s58, s34, 0x68c0e0,
                                              (int)cut_RandMod(4), 0x64);
                                 io_AppendText((char *)0x12c8);
                                 if (*(int *)(s80 + 4) == 1)
@@ -391,7 +391,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                 fcn_004da510(*(int *)0x772514, 0, 0);
                                 break;
                             case 1:
-                                fcn_004e4b40(*(unsigned short *)s58, s34, 0x68c0d0,
+                                d3snd_QueueSoundIfAllowed(*(unsigned short *)s58, s34, 0x68c0d0,
                                              (int)cut_RandMod(4), 0x64);
                                 io_AppendText((char *)0x12ca);
                                 if (*(int *)(s80 + 4) == 1)
@@ -403,7 +403,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                                 fcn_004da510(*(int *)0x772514, 0, 1);
                                 break;
                             default:
-                                fcn_004e4b40(*(unsigned short *)s58, s34, 0x68c0b8,
+                                d3snd_QueueSoundIfAllowed(*(unsigned short *)s58, s34, 0x68c0b8,
                                              (int)cut_RandMod(4), 0x64);
                                 io_AppendText((char *)0x12c9);
                                 fcn_004727a0(s60, 2);
@@ -419,7 +419,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 }
                 /* native 0x4db332..0x4db5c5: vote result text and packet pass */
                 if (v1[0] > v1[1]) {
-                    fcn_004e4b40(-8, s60, 0x68c098, (int)cut_RandMod(3), 0x64);
+                    d3snd_QueueSoundIfAllowed(-8, s60, 0x68c098, (int)cut_RandMod(3), 0x64);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12d6, (char *)v1[0], (char *)v1[1],
@@ -447,7 +447,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                 } else {
                     int s70;
                     s70 = gm_LookupEntityRecordById(*(int *)s00);
-                    fcn_004e4b40(-8, s60, 0x68c074, (int)cut_RandMod(3), 0x64);
+                    d3snd_QueueSoundIfAllowed(-8, s60, 0x68c074, (int)cut_RandMod(3), 0x64);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12d7, (char *)v1[0], (char *)v1[1],
@@ -546,9 +546,9 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         rs20 += 1;
                     i += 1;
                 }
-                s14 = fcn_00470820((char *)0x68c124, 0, 0);
+                s14 = d2_LoadForm((char *)0x68c124, 0, 0);
                 fcn_00471d80(s14, 3);
-                s50 = fcn_00470820((char *)0x68c058, 0, 0);
+                s50 = d2_LoadForm((char *)0x68c058, 0, 0);
                 fcn_00471d80(s50, 2);
                 fcn_004727a0(s50, 0);
                 {
@@ -588,8 +588,8 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             n += 1;
                         }
                     }
-                    fcn_004e4b40(-8, s38, 0x68c050, s20 - 1, 0x64);
-                    fcn_004e4b40(-8, s38, 0x68c044, numSel - 1, 0x1f4);
+                    d3snd_QueueSoundIfAllowed(-8, s38, 0x68c050, s20 - 1, 0x64);
+                    d3snd_QueueSoundIfAllowed(-8, s38, 0x68c044, numSel - 1, 0x1f4);
                     d2_SetFormVisibility(s14, 1);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
@@ -629,7 +629,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     cut_WaitSeconds(0x9c4);
                 }
                 if (numSel == 1) {
-                    fcn_004e4b40(-8, s38, 0x68c038, 0, 0x64);
+                    d3snd_QueueSoundIfAllowed(-8, s38, 0x68c038, 0, 0x64);
                     *(int *)(*(int *)0x1015ea0 + *(int *)((char *)&mid + 0xcc) * 0x2f4 + 0x3c) = numSel;
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
@@ -648,7 +648,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                     int s68, s70;
                     /* native 0x4dbbed: count == 0, single picked row */
                     s68 = (int)cut_RandMod((unsigned int)numSel);
-                    fcn_004e4b40(-8, s38, 0x68c038, 1, 0x64);
+                    d3snd_QueueSoundIfAllowed(-8, s38, 0x68c038, 1, 0x64);
                     fcn_004727a0(s14, 0);
                     io_AppendText((char *)0x6811b0);
                     io_AppendText((char *)0x12e1);
@@ -735,7 +735,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                         if (s6C != -1) {
                             *(int *)(*(int *)0x1015ea0 +
                                      *(int *)((char *)&mid + 0xcc + s6C * 0x38) * 0x2f4 + 0x3c) = 1;
-                            fcn_004e4b40(-8, s38, 0x68c038, 3, 0x64);
+                            d3snd_QueueSoundIfAllowed(-8, s38, 0x68c038, 3, 0x64);
                             fcn_004727a0(s14, 0);
                             io_AppendText((char *)0x6811b0);
                             io_AppendText((char *)0x12e5,
@@ -767,7 +767,7 @@ void __cdecl cut_RunOfficeSessions(unsigned int *a0)
                             s78 %= numSel;
                         } while (i != 0);
                         {
-                            fcn_004e4b40(-8, s38, 0x68c038, 2, 0x64);
+                            d3snd_QueueSoundIfAllowed(-8, s38, 0x68c038, 2, 0x64);
                             fcn_004727a0(s14, 0);
                             io_AppendText((char *)0x6811b0);
                             io_AppendText((char *)0x12e3);

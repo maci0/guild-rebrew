@@ -22,7 +22,7 @@ extern int __cdecl gm_SearchTable67(int);
 extern int __cdecl cut_FindCutsceneById(int);
 extern void __cdecl d3_SelectSceneContext(int, int);
 extern void __cdecl gm_CountBuildingWorkers(char*);
-extern void __cdecl fcn_00573e10(char*);
+extern void __cdecl d3_UpdateBuildStageMeshes(char*);
 extern void __cdecl gm_ResetWarehouseStock(void);
 extern char *gm_CityEntity, *g_773d78;
 extern int ls_SaveVersion, g_773d8c;
@@ -137,7 +137,7 @@ unsigned int __cdecl gm_RebuildLoadedReferences(void)
 		if (*(unsigned char*) r == 0xd) {
 			gm_ResolveEntityById(&v6, 0, 0, *(int*) (r + 0xb8));
 			if (v6)
-				fcn_00573e10(r);
+				d3_UpdateBuildStageMeshes(r);
 			continue;
 		}
 		if (*(unsigned char*) r == 0xf) {

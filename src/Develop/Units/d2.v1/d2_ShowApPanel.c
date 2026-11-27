@@ -1,4 +1,4 @@
-extern int __cdecl fcn_00470820(int a, int b, char *name);
+extern int __cdecl d2_LoadForm(int a, int b, char *name);
 void __cdecl d2_CenterDialogWindows(int obj);
 void __cdecl d2_SetForm(int obj, int a);
 int __cdecl io_AppendText(int id, ...);
@@ -16,7 +16,7 @@ void __cdecl d2_ShowApPanel(void)
 	int* p;
 	int* q;
 
-	dlg = fcn_00470820(0, 0, (char *) 0x6ac6b4);
+	dlg = d2_LoadForm(0, 0, (char *) 0x6ac6b4);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1ef9);

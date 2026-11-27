@@ -10,7 +10,7 @@ typedef struct {
 	char pad20[0x58];
 	int skip78;
 	char pad7c[0x2f4 - 0x7c];
-} Tile46b5f0;
+} D2_MARKUP_TILE;
 
 // SIZE 0x10c
 typedef struct {
@@ -22,7 +22,7 @@ typedef struct {
 	unsigned char b104;
 	char pad105[3];
 	int f108;
-} Rec46b5f0;
+} D2_MARKUP_TOKEN;
 
 // SIZE 0x3cc
 #include "Develop/Units/d2.v1/d2_win.h"
@@ -41,7 +41,7 @@ typedef struct {
 	unsigned short w;
 	char pad13[2];
 	unsigned short adv;
-} Glyph46b5f0;
+} D2_MARKUP_GLYPH;
 #pragma pack(pop)
 
 extern char* g_772524;
@@ -55,17 +55,17 @@ int __cdecl d2_GetResourceData(int);
 int __cdecl d2_SetTextColor(int, int, int);
 void __cdecl d2_SelectFont(int);
 int __cdecl fcn_0047b620(char*, int);
-int __cdecl fcn_0047cba0(int, int, int, char*, int);
-int __cdecl fcn_0047ccd0(int, int, int, char*, int);
-int __cdecl fcn_0047cd20(int, int, int, char*, int);
+int __cdecl d2_DrawSpriteFromSet(int, int, int, char*, int);
+int __cdecl d2_DrawHighlightSprite(int, int, int, char*, int);
+int __cdecl d2_DrawBankSpriteColored(int, int, int, char*, int);
 
 /* ADDRESS: GOLDTL 0x0046b5f0 */
-void __cdecl d2_RenderMarkupLine(int a1, int y, int surf, int win, int flag, int newflags, int xstart, int xlimit)
+void __cdecl d2_RenderMarkupLine(int unused, int y, int surf, int win, int flag, int newflags, int xstart, int xlimit)
 {
 	D2_WIN* w;
-	Rec46b5f0* rec;
-	Tile46b5f0* tile;
-	Glyph46b5f0* glyph;
+	D2_MARKUP_TOKEN* rec;
+	D2_MARKUP_TILE* tile;
+	D2_MARKUP_GLYPH* glyph;
 	char* tex;
 	int savedFlags;
 	int back;
@@ -107,7 +107,7 @@ void __cdecl d2_RenderMarkupLine(int a1, int y, int surf, int win, int flag, int
 	base = (((*(int*) &w->pad14[0]) & 8) >> 3) + (((*(int*) &w->pad14[0]) & 0x20) ? 2 : 0);
 	if (base < w->count) {
 		for (k = base; k < w->count; k++) {
-			tile = &((Tile46b5f0*) g_1015ea0)[w->children[k]];
+			tile = &((D2_MARKUP_TILE*) g_1015ea0)[w->children[k]];
 			if (tile->skip78 == 0 && tile->y14 < y + d2_FontHeight
 			    && y < tile->y14 + tile->h1c && newflags != 0x40) {
 				sum += 6 + tile->w18 + g_67d384;
@@ -125,7 +125,7 @@ void __cdecl d2_RenderMarkupLine(int a1, int y, int surf, int win, int flag, int
 		x = xstart + (((xlimit - (*(int*) 0x772530 - 1) * step) - sum) - xstart) / 2;
 	}
 	for (i = 0; i < *(int*) 0x772530; i++) {
-		rec = (Rec46b5f0*) (0x10119e0 + i * 0x10c);
+		rec = (D2_MARKUP_TOKEN*) (0x10119e0 + i * 0x10c);
 		base = (((*(int*) &w->pad14[0]) & 8) >> 3) + (((*(int*) &w->pad14[0]) & 0x20) ? 2 : 0);
 		c = rec->text[0];
 		flag = 0;
@@ -154,7 +154,7 @@ void __cdecl d2_RenderMarkupLine(int a1, int y, int surf, int win, int flag, int
 		}
 		if (rec->b104 & 0x40) {
 			d2_SetTextColor(rec->b100, rec->b101, rec->b102);
-			draw = fcn_0047cd20;
+			draw = d2_DrawBankSpriteColored;
 			back = d2_CurrentFont;
 			if (d2_CurrentFont == 0x55) {
 				d2_SelectFont(0x53);
@@ -162,12 +162,12 @@ void __cdecl d2_RenderMarkupLine(int a1, int y, int surf, int win, int flag, int
 				d2_SelectFont(0x54);
 			}
 		} else {
-			draw = fcn_0047cba0;
+			draw = d2_DrawSpriteFromSet;
 		}
 		if (flag == 0) {
 			if (base < w->count) {
 				for (k = base; k < w->count; k++) {
-					tile = &((Tile46b5f0*) g_1015ea0)[w->children[k]];
+					tile = &((D2_MARKUP_TILE*) g_1015ea0)[w->children[k]];
 					if (tile->skip78 == 0) {
 						while (tile->x10 < rec->f108 + x
 						       && x < tile->x10 + tile->w18 + 6
@@ -187,11 +187,11 @@ void __cdecl d2_RenderMarkupLine(int a1, int y, int surf, int win, int flag, int
 							c = rec->text[j];
 							lastc = (unsigned char) c;
 							if (c != '~') {
-								glyph = (Glyph46b5f0*) fcn_0047b620(g_772524, (unsigned char) c);
+								glyph = (D2_MARKUP_GLYPH*) fcn_0047b620(g_772524, (unsigned char) c);
 								if (j != 0) {
 									x -= glyph->w;
 								}
-								if (fcn_0047ccd0(x, y, surf, g_772524, (unsigned char) c)) {
+								if (d2_DrawHighlightSprite(x, y, surf, g_772524, (unsigned char) c)) {
 									x += glyph->adv + g_67d384;
 								}
 							}
@@ -208,7 +208,7 @@ void __cdecl d2_RenderMarkupLine(int a1, int y, int surf, int win, int flag, int
 							c = rec->text[j];
 							lastc = (unsigned char) c;
 							if (c != '~') {
-								glyph = (Glyph46b5f0*) fcn_0047b620(g_772524, (unsigned char) c);
+								glyph = (D2_MARKUP_GLYPH*) fcn_0047b620(g_772524, (unsigned char) c);
 								if (j != 0) {
 									x -= glyph->w;
 								}
@@ -226,8 +226,8 @@ void __cdecl d2_RenderMarkupLine(int a1, int y, int surf, int win, int flag, int
 				}
 				hflag = 0;
 			} else {
-				glyph = (Glyph46b5f0*) fcn_0047b620(tex, special);
-				if (fcn_0047cba0(x, y, surf, tex, special)) {
+				glyph = (D2_MARKUP_GLYPH*) fcn_0047b620(tex, special);
+				if (d2_DrawSpriteFromSet(x, y, surf, tex, special)) {
 					x += glyph->adv + g_67d384;
 				}
 			}

@@ -10,7 +10,7 @@ void __cdecl fcn_00476020(int);
 int __cdecl d2_GetResourceData(int);
 int __cdecl d2_DrawOrMeasureSpriteFrame(int, int, char*, char*, unsigned char, char, int);
 void __cdecl d2_RenderWrappedText(int, int, int, int, void*, char*, int);
-void __cdecl fcn_00468ea0(int, int, int, int);
+void __cdecl d2_AddSlotDirtyRect(int, int, int, int);
 
 /* ADDRESS: GOLD 0x00476ca0 */
 void __cdecl fcn_00476ca0(char* obj, int x, int y)
@@ -70,7 +70,7 @@ void __cdecl fcn_00476ca0(char* obj, int x, int y)
         }
         index++;
     }
-    fcn_00468ea0(x, y, 128, 128);
+    d2_AddSlotDirtyRect(x, y, 128, 128);
     fcn_00476020(old_font);
     d2_SetClipRect(old_x, old_y, old_width, old_height);
     if (had_surface == 0)

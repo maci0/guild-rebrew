@@ -9,7 +9,7 @@ void __cdecl fcn_00533cf0(int);
 void __cdecl d2_ClearScreen(void);
 void __cdecl d2_SetBackdropResource(int);
 void __cdecl fcn_00473150(unsigned char*);
-void __cdecl fcn_005270c0(int);
+void __cdecl d2_UpdateHudVisibility(int);
 #include <string.h>
 
 typedef struct {
@@ -52,7 +52,7 @@ void __cdecl d2_EnterMenuScreen(void)
 	d2_ClearScreen();
 	d2_SetBackdropResource(0x794);
 	fcn_00473150(p);
-	fcn_005270c0(0);
+	d2_UpdateHudVisibility(0);
 	fcn_004730c0(0, 0, g_1040494, d2_ScreenHeight, g_67d67c, 0x32, 0xa);
 }
 

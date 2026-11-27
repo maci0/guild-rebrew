@@ -30,7 +30,7 @@ extern char* g_77255c;
 extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 
@@ -46,7 +46,7 @@ void __cdecl fcn_00541150(Player* p)
 	int box;
 
 	o = (Office*)(lpGebaeudePROT + p->office * sizeof(Office));
-	box = fcn_00470820(0x3c, 0, "Runden\\Spielerrunde_Ende_geb");
+	box = d2_LoadForm(0x3c, 0, "Runden\\Spielerrunde_Ende_geb");
 	d2_CenterDialogWindows(box);
 	d2_SetForm(box, 1);
 	((Dialog*)g_77255c)->style = 0x55;

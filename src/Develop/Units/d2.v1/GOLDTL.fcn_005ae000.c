@@ -5,7 +5,7 @@ extern int g_100f1dc, g_14abaac, g_14ce8e0;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 int __cdecl d2_CheckOwnerBlocked(char* obj);
 void __cdecl fcn_0052a0c0(char* obj, int a);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
@@ -37,7 +37,7 @@ int __cdecl fcn_005ae000(char* obj)
 		return r;
 	}
 	fcn_0052a0c0(obj, 0);
-	dlg = fcn_00470820(0, 0, "locations\\diebesgilde\\taschendiebstahl");
+	dlg = d2_LoadForm(0, 0, "locations\\diebesgilde\\taschendiebstahl");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);

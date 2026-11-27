@@ -21,7 +21,7 @@ int __cdecl fcn_00413160(void);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 #include "client_scene_loader.h"
-void __cdecl fcn_004428d0(char*, int, int);
+void __cdecl d3_SetFloorDetailLevel(char*, int, int);
 void __cdecl d2_ClearSurface(int);
 int __cdecl gm_GetSeason(int*);
 void __cdecl d3_ApplySceneLightingPreset(void);
@@ -57,7 +57,7 @@ void __cdecl fcn_004e4730(char* sceneName)
 			n = 1;
 			((char*)g_6b8300)[0x8036] = (((char*)g_6b8300)[0x8036] & 0xe7) | 4;
 		}
-		fcn_004428d0(((char*)g_6b8300), n >> 1, 1);
+		d3_SetFloorDetailLevel(((char*)g_6b8300), n >> 1, 1);
 	}
 	if ((((char*)cut_ActiveCutscene)[0x26] & 0x20) != 0)
 		d2_ClearSurface(g_77250c);

@@ -77,7 +77,7 @@ extern int g_7f4c08;
 extern short g_7f4c0c;
 
 void __cdecl d2_SetBackgroundTexture(const char*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetElementEnabled(int, int);
@@ -128,7 +128,7 @@ void __cdecl fcn_005c79a0(unsigned char* obj)
 	btnA = 0;
 	btnC = 0;
 	t = &((BUILDING_PROTOTYPE*) lpGebaeudePROT)[obj[0]];
-	dlg = fcn_00470820(0, 0, s_6ac79c);
+	dlg = d2_LoadForm(0, 0, s_6ac79c);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x72f, 0);

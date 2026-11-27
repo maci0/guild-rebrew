@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x00477420 */
-int __cdecl fcn_00477420(int n)
+int __cdecl d2_NextPowerOfTwo(int n)
 {
 	int i;
 	int v;

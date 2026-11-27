@@ -39,7 +39,7 @@ extern int g_67a370;
 #include "Develop/Units/d3/d3_camera.h"
 extern float g_1052c00[16];
 
-int __cdecl fcn_00506380(int, int, int, char*);
+int __cdecl gm_GetEntityUiFlags(int, int, int, char*);
 void __cdecl d3_UpdateObjectCameraTransform(char*, char*, int);
 Vec3* __stdcall fcn_005eb2e4(Vec3*, Vec3*, char*, Mat4*, Mat4*, Mat4*);
 
@@ -72,7 +72,7 @@ void __cdecl d3_UpdateCharacterBoxSelection(void)
 			if (e == 0 || e[8] == 0) {
 				continue;
 			}
-			i = fcn_00506380(g_774970, 0, 0, e);
+			i = gm_GetEntityUiFlags(g_774970, 0, 0, e);
 			e[0x188] = 0;
 			if ((i & 0x800) == 0) {
 				continue;

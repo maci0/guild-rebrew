@@ -27,7 +27,7 @@ extern int g_14ab738;
 extern int g_14b5278;
 extern char g_6b5c60[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -93,7 +93,7 @@ void __cdecl d2_RunGeldleiheWechselDialog(char* obj)
 			*(unsigned char*)&list1[i].idx = (unsigned char)i;
 		}
 	}
-	h = fcn_00470820(0, 0, g_6aac84);
+	h = d2_LoadForm(0, 0, g_6aac84);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
 	d2_DrawPanelFrame(d2_CurrentWindowId, 0x73b, 0x73f);

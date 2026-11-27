@@ -33,7 +33,7 @@ struct VB {
 };
 
 #include "Develop/Units/d8_vesa/d3d_device_view.h"
-typedef int (__stdcall* Scene47c7b0Fn)(D3D_DEVICE_VIEW*);
+typedef int (__stdcall* D3D_SCENE_FN)(D3D_DEVICE_VIEW*);
 typedef int (__stdcall* Texture47c7b0Fn)(D3D_DEVICE_VIEW*, int, int);
 typedef int (__stdcall* Draw47c7b0Fn)(D3D_DEVICE_VIEW*, int, int, int);
 
@@ -75,12 +75,12 @@ extern int g_772614;
 
 
 int __cdecl d2_BuildQuadVertices(int, int, int, int, Quad*);
-void __cdecl fcn_0047b9f0(Quad*, int);
-void __cdecl fcn_0047c4e0(void);
+void __cdecl d2_SetQuadAlpha(Quad*, int);
+void __cdecl d2_BindQuadVertexBuffer(void);
 void __cdecl fcn_004372d0(int, int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x0047c7b0 */
-void __cdecl fcn_0047c7b0(int x, int y, int w, int h, Tex* tex, float alpha)
+void __cdecl d2_DrawSurfaceQuad(int x, int y, int w, int h, Tex* tex, float alpha)
 {
 	TexDesc desc;
 	Quad q;
@@ -93,7 +93,7 @@ void __cdecl fcn_0047c7b0(int x, int y, int w, int h, Tex* tex, float alpha)
 	if (d2_BuildQuadVertices(x, y, w, h, &q) == 0) {
 		return;
 	}
-	fcn_0047b9f0(&q, (int) (alpha * 255.0f));
+	d2_SetQuadAlpha(&q, (int) (alpha * 255.0f));
 	t = d2_DrawDepthIndex * 0.001f;
 	for (i = 0; i < 6; i++) {
 		q.vs.v[i].z = 1.0f - t;
@@ -117,14 +117,14 @@ void __cdecl fcn_0047c7b0(int x, int y, int w, int h, Tex* tex, float alpha)
 	}
 	*(Verts*) ptr = q.vs;
 	((VB*) g_772614)->vtbl->Unlock(((VB*) g_772614));
-	fcn_0047c4e0();
+	d2_BindQuadVertexBuffer();
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 7, 0);
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x88, 0);
 	fcn_004372d0(0xfe, 0, 0, 1, 1);
-	if (((Scene47c7b0Fn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x88 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0)) >= 0) {
+	if (((D3D_SCENE_FN) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x88 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0)) >= 0) {
 		((Texture47c7b0Fn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0xf4 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 0, (int) tex);
 		((Draw47c7b0Fn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x118 / 4])(((D3D_DEVICE_VIEW*)g_6b5de0), 4, 0, 2);
-		((Scene47c7b0Fn) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x8c / 4])(((D3D_DEVICE_VIEW*)g_6b5de0));
+		((D3D_SCENE_FN) ((void**)((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl)[0x8c / 4])(((D3D_DEVICE_VIEW*)g_6b5de0));
 	}
 	((D3D_DEVICE_VIEW*)g_6b5de0)->vtbl->SetRenderState(((D3D_DEVICE_VIEW*)g_6b5de0), 0x88, 1);
 	d2_DrawDepthIndex++;

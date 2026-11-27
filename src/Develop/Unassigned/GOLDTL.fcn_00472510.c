@@ -9,11 +9,11 @@ typedef struct
 typedef struct
 {
 	int i[0x2f4 / 4];
-} fcn_00472510_Ent;
+} D2_FORM_ENTRY_VIEW;
 // SIZE 0x2f4
 
 #include "client_types.h"
-typedef Page_1038144 fcn_00472510_Page;
+typedef Page_1038144 D2_FORM_PAGE_VIEW;
 // SIZE 0x2bc
 
 extern Win_1015f40 g_1015f40[0x60];

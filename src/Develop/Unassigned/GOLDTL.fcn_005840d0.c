@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x005840d0 */
-void __cdecl fcn_005840d0(float* a, float* b, float* c, float* d, float t, float* out)
+void __cdecl d2_EvalCubicBezier2D(float* a, float* b, float* c, float* d, float t, float* out)
 {
 	float u;
 	float u3;

@@ -20,10 +20,10 @@ void __cdecl fcn_00473150(unsigned char*);
 int __cdecl init_GetGebaeudeSceneName(int idx, char* out);
 void __cdecl d3_SelectSceneContext(int a, int b);
 char __cdecl d3_LoadScene(const char* filename, void* stream, int progress);
-void __cdecl fcn_00516de0(char* a1, unsigned char a2);
+void __cdecl d3_UpdateSceneDetailLevel(char* a1, unsigned char a2);
 int __cdecl d3sm_GetSceneSuperMap(char* p);
 void __cdecl gv_Free3Fields(int);
-void __cdecl fcn_0045b290(int, int);
+void __cdecl d3sm_Rebuild(int, int);
 char __cdecl d3_TraverseSceneObjects(char* scene, char* node, unsigned int flags, void (__cdecl* cb)(char*));
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
@@ -89,7 +89,7 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 		}
 		d3_SelectSceneContext(v, 0);
 		if (g_6b8300 != 0) {
-			fcn_00516de0(g_6b8300, 1);
+			d3_UpdateSceneDetailLevel(g_6b8300, 1);
 		}
 		d3_SelectSceneContext(d3_CurrentContextIndex, 0);
 		d3_TraverseSceneObjects((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
@@ -120,13 +120,13 @@ void __cdecl init_LoadGebaeudeScene(int prototypeIndex)
 		goto done;
 	}
 	if (g_6b8300 != 0) {
-		fcn_00516de0(g_6b8300, 1);
+		d3_UpdateSceneDetailLevel(g_6b8300, 1);
 	}
 	d3_SelectSceneContext(d3_CurrentContextIndex, 0);
 	gv_Free3Fields(*(int*) (g_67a370 + 0xb0));
 	*(int*) (g_67a370 + 0xb0) = 0;
 	d3sm_GetSceneSuperMap((char*) g_67a370);
-	fcn_0045b290(*(int*) (g_67a370 + 0xb0), (int) g_6b8300);
+	d3sm_Rebuild(*(int*) (g_67a370 + 0xb0), (int) g_6b8300);
 	d3_TraverseSceneObjects((char*) g_67a370, 0, 0x160, (void (__cdecl*)(char*)) 0x5105a0);
 	d3_TraverseSceneObjects((char*) g_67a370, 0, 6, (void (__cdecl*)(char*)) 0x510bd0);
 	for (v = 0x14d0020; v < 0x14d0c20; v += 4) {

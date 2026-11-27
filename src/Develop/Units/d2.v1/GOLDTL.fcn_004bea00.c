@@ -1,4 +1,4 @@
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
@@ -58,7 +58,7 @@ int __cdecl fcn_004bea00(int ctx, RouteNode* list)
 			}
 			item++; } while (--i);
 	}
-	menu = fcn_00470820(0, 0, (char*) 0x6816e8);
+	menu = d2_LoadForm(0, 0, (char*) 0x6816e8);
 	d2_CenterDialogWindows(menu);
 	d2_SetForm(menu, 4);
 	active = d2_GetWindowListItem(menu, 4, io_AppendText(0x7d));

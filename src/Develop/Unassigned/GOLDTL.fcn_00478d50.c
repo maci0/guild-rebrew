@@ -29,7 +29,7 @@ short __cdecl d2_PackColorForPixelFormat(int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x00478d50 */
-void __cdecl fcn_00478d50(int x, int y, Surf16* s, Block* b)
+void __cdecl d2_DrawGrayscaleRleSprite(int x, int y, Surf16* s, Block* b)
 {
 	unsigned short* base;
 	Row* r;

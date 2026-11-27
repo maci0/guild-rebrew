@@ -8,7 +8,7 @@ int __cdecl gm_CheckEntityStock(int, int, char);
 int __cdecl he_HasNoActiveEvent04b(unsigned short*, int);
 int __cdecl he_HasNoActiveAction0x2e(unsigned short*, int);
 int __cdecl he_HasNoActiveAction0x88(unsigned short*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
@@ -79,7 +79,7 @@ int __cdecl d2_RunBeatupDialog(unsigned short* entity)
 		fcn_00526120((char*) evt, 0);
 		return 0;
 	}
-	hwnd = fcn_00470820(0, 0, (char*) 0x6ac494);
+	hwnd = d2_LoadForm(0, 0, (char*) 0x6ac494);
 	d2_CenterDialogWindows(hwnd);
 	d2_SetForm(hwnd, 1);
 	d2_SetOverlayAnimation(0, 0);

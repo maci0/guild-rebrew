@@ -1,7 +1,7 @@
 int __cdecl d3_GetAnimSize(char* a);
 
 /* ADDRESS: GOLDTL 0x00459cd0 */
-int __cdecl fcn_00459cd0(char* a)
+int __cdecl d3_GetAnimMemorySize(char* a)
 {
 	int r;
 

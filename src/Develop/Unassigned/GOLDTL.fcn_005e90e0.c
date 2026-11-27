@@ -1,11 +1,11 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_1043370;
 extern float g_662cf8;
-char __cdecl fcn_0045b990(int, float *, int *, int *, float *);
+char __cdecl d3sm_SampleHeight(int, float *, int *, int *, float *);
 int __cdecl d3_TraceTerrainSegment(int, float *, float *, int, int, int *, int *);
 
 /* ADDRESS: GOLDTL 0x005e90e0 */
-int __cdecl fcn_005e90e0(char *obj)
+int __cdecl d3_StepProjectilePhysics(char *obj)
 {
     float gravity, initial[3], next[3], step[3], height;
     float inv, fx, fy, fz;
@@ -14,7 +14,7 @@ int __cdecl fcn_005e90e0(char *obj)
     map = g_1043370;
     if (*(int *)(obj + 0x5c) != 1) return 0;
     remain = g_6b7fac - *(int *)(obj + 0x60);
-    if (!fcn_0045b990(map, (float *)(obj + 0x30), &x, &y, &height)) {
+    if (!d3sm_SampleHeight(map, (float *)(obj + 0x30), &x, &y, &height)) {
         *(int *)(obj + 0x5c) = 3;
         *(int *)(obj + 0x58) = 0;
         return 0;

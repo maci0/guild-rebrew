@@ -101,7 +101,7 @@ int __cdecl ahm_DealPlayerPrototypes(void);
 void* __cdecl fcn_004730c0(int, int, int, int, int, int, int);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d2_SetBackdropResource(int);
-void __cdecl fcn_00469e70(void);
+void __cdecl d2_ClearBackdropResource(void);
 void __cdecl fcn_00473150(void*);
 void __cdecl sv_WaitForNetworkSync(int);
 void __cdecl d2_DestroyScrollPerga(void);
@@ -119,7 +119,7 @@ void __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 void __cdecl gm_SendRandomTurnEvents(int, int);
 int __cdecl d2_SetFormVisibility(int, int);
-void __cdecl fcn_005459a0(int);
+void __cdecl d2_ToggleActionPopupBar(int);
 int __cdecl d2_CreateScrollPerga(void);
 void __cdecl fcn_004727a0(int, int);
 int __cdecl d2_GetFormWindow(int, int);
@@ -128,7 +128,7 @@ int __cdecl fcn_00519190(int, ...);
 void __cdecl cm_RequestKillSpieler(int, int);
 int __cdecl he_SumEventCostsForSubject(int);
 void __cdecl d3_ResetWorldSceneState(void);
-void __cdecl fcn_005270c0(int);
+void __cdecl d2_UpdateHudVisibility(int);
 void __cdecl fcn_00528fd0(void);
 int __cdecl fcn_0050d2a0(void*);
 void* __cdecl fcn_00503fe0(int, int, int);
@@ -316,7 +316,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 	if (g_6a25b8 != -1) {
 		d2_SetFormVisibility(g_6a25b8, 0);
 	}
-	fcn_005459a0(0xffff);
+	d2_ToggleActionPopupBar(0xffff);
 	if (g_6a3420 != 0) {
 		w = d2_CreateScrollPerga();
 		fcn_004727a0(w, 2);
@@ -376,7 +376,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 			main_RunFrameLoop(0, *(int*) 0x7e46ac | 0x80);
 		}
 		d2_DestroyScrollPerga();
-		fcn_00469e70();
+		d2_ClearBackdropResource();
 	}
 	cm_RequestTransferCurrencyNoKill(-1, SLOT4(g_774970 & 0xffff), g_773d75,
 		     -he_SumEventCostsForSubject(g_774970 & 0xffff));
@@ -390,7 +390,7 @@ void __cdecl gm_BeginPlayerTurn(void)
 	g_1040484 = g_6a3768;
 	g_104048c = g_6a3770;
 	d3_ResetWorldSceneState();
-	fcn_005270c0(1);
+	d2_UpdateHudVisibility(1);
 	fcn_00528fd0();
 	if (g_6a3420 != 0) {
 		if (hp != 0) {

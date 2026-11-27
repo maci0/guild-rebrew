@@ -2,12 +2,12 @@
 int __cdecl fcn_004e4730(char *);
 int __cdecl d3_UpdateSeasonTextures(void);
 int __cdecl d3_UpdateWeatherAndSkyBlend(void);
-void __cdecl fcn_00459710(int, int);
+void __cdecl d3_ResetSkyDomeNormals(int, int);
 int __cdecl sb_LoadSampleBank(char *, int);
 void *__cdecl gm_StartFilteredEntitySearch(int, int, int);
 int __cdecl cut_GetBuildingCombatType(void *);
 int __cdecl sb_LoadLocalizedSampleBank(char *, int);
-int __cdecl fcn_0044c310(char *, char *);
+int __cdecl d3_AcquireModel(char *, char *);
 int __cdecl fcn_0045b700(int, int, int);
 int __cdecl gm_LookupEntityRecordById(int);
 void __cdecl fcn_004d1cf0(void);
@@ -28,9 +28,9 @@ int __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl gm_FindRecordById(int);
 int __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl d3_TransformPoint(int, int, void *);
-int __cdecl fcn_004488e0(char *, int, int);
+int __cdecl d3_LoadObjectFile(char *, int, int);
 void __cdecl d3_SetNodePosition(int, void *);
-void __cdecl fcn_0045b290(int, int);
+void __cdecl d3sm_Rebuild(int, int);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl gm_CheckEntityType(void *);
 #include "Develop/DieGildeAddOn/game/game_data.h"
@@ -120,7 +120,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 		*(int *) (*(int *) &d3_CurrentContextIndex * 0x3dc + 0x1043378) = *(int *) 0x1043378;
 		g_6b89c0 = *(int *) 0x1043378;
 		d3_UpdateWeatherAndSkyBlend();
-		fcn_00459710(g_6b89c0, 1);
+		d3_ResetSkyDomeNormals(g_6b89c0, 1);
 	}
 	for (p = (int *) 0x9ba2e0, i = 0x20; i != 0; i--)
 		*p++ = -1;
@@ -203,7 +203,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 		*(int *) 0x772ef0 = sb_LoadLocalizedSampleBank("K_C2C_HOHN_SOELDNER.sbf", 0);
 		*(int *) 0x772ef8 = sb_LoadLocalizedSampleBank("K_C2C_SCHMERZ_SOELDNER.sbf", 0);
 	}
-	*(int *) 0x772f0c = fcn_0044c310("ub_STIEFEL", "ub_STIEFEL");
+	*(int *) 0x772f0c = d3_AcquireModel("ub_STIEFEL", "ub_STIEFEL");
 	if (cur == 0) {
 		cur = fcn_0045b700(*(int *) &g_6b8300, *(int *) (*(int *) &g_67a370 + 0xb4), 2);
 		*(int *) (*(int *) &g_67a370 + 0xb0) = cur;
@@ -307,7 +307,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 					default:
 						break;
 					}
-					e = fcn_004488e0(buf, 0, 0);
+					e = d3_LoadObjectFile(buf, 0, 0);
 					d3_SetNodePosition(e, pathbuf);
 					*(int *) (e + 0x204) = ent;
 					for (j = 0; j < 3; j++) {
@@ -328,7 +328,7 @@ void __cdecl cut_SetupBattleArena(void *arg)
 		}
 		p++;
 		if (i >= 3) {
-			fcn_0045b290(*(int *) (*(int *) &g_67a370 + 0xb0), *(int *) &g_6b8300);
+			d3sm_Rebuild(*(int *) (*(int *) &g_67a370 + 0xb0), *(int *) &g_6b8300);
 			i = 0;
 			if (mode > 0) {
 				n = *(int *) (cur + 0x20);

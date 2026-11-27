@@ -3,11 +3,11 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 
 int __cdecl fcn_00502cd0(int container_id, int arg_count, ...);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
-int __cdecl fcn_00510170(char*);
+int __cdecl gm_IsActiveWithoutThievesGuild(char*);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d3_EndCameraAndUiMode(void);
 void __cdecl d2_DestroyForm(int);
@@ -24,14 +24,14 @@ void __cdecl d2_RunKerkerplanDialog(char* obj)
 	if (fcn_00502cd0(*(int*) (obj + 0x5d), 1, 0, 0xba) == 0) {
 		return;
 	}
-	h = fcn_00470820(0, 0, "locations\\kerker\\kerkerplan");
+	h = d2_LoadForm(0, 0, "locations\\kerker\\kerkerplan");
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);
 	io_AppendText(0x19ad);
 	d2_SetForm(h, 1);
 	entry = g_7f4ca0;
 	do {
-		if (fcn_00510170(entry) != 0) {
+		if (gm_IsActiveWithoutThievesGuild(entry) != 0) {
 			io_AppendText(0x19ae, count + 1, *(unsigned short*) entry);
 			count++;
 		}

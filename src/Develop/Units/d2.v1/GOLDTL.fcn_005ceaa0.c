@@ -4,10 +4,10 @@
 #include "client_dialog_state.h"
 extern char g_6aca6c[];
 extern int d2_CurrentWindowId;
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl io_AppendText(char*, ...);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -18,9 +18,9 @@ void __cdecl d2_ShowMeisterbriefDialog(void)
 {
 	int h;
 
-	h = fcn_00470820(0, 0, g_6aca6c);
+	h = d2_LoadForm(0, 0, g_6aca6c);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_CenterDialogWindows(h);
 	d2_SetOverlayAnimation(0, 0);
 	d2_SetForm(h, 1);

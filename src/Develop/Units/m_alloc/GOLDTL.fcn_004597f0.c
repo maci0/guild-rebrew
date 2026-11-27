@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_0045bfb0(int);
+void __cdecl d3_ReleaseTexture(int);
 void __cdecl m_FreeTracked(void*);
 
 void __cdecl fcn_004597f0(char* owner, char* n)
@@ -21,6 +21,6 @@ void __cdecl fcn_004597f0(char* owner, char* n)
 			*(char**) (p + 0x20) = *(char**) (n + 0x20);
 		}
 	}
-	fcn_0045bfb0(*(int*) (n + 0x1c));
+	d3_ReleaseTexture(*(int*) (n + 0x1c));
 	m_FreeTracked(n);
 }

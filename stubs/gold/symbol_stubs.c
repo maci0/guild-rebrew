@@ -2058,11 +2058,6 @@ int __cdecl fcn_00408220(float a)
 	return 0;
 }
 
-int __cdecl fcn_00408240(void* p)
-{
-	return 0;
-}
-
 int __cdecl fcn_0040afb0(void)
 {
 	return 0;
@@ -2154,11 +2149,6 @@ int __cdecl fcn_00417ec0(int a)
 	return 0;
 }
 
-int __cdecl fcn_00418210(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_00418d70(void* a)
 {
 	return 0;
@@ -2194,27 +2184,12 @@ int __cdecl fcn_00420210(void)
 	return 0;
 }
 
-int __cdecl fcn_004214c0(char* a, int b, int c, int d, int e, int f)
-{
-	return 0;
-}
-
-int __cdecl fcn_00421890(char* a, int b, int c, int d, int e, int f)
-{
-	return 0;
-}
-
 int __cdecl fcn_004222b0(char* a)
 {
 	return 0;
 }
 
 int __cdecl fcn_00422620(void* a)
-{
-	return 0;
-}
-
-int __cdecl fcn_004227c0(void)
 {
 	return 0;
 }
@@ -2227,10 +2202,6 @@ int __cdecl fcn_004230e0(char* p)
 int __cdecl fcn_004232f0(void)
 {
 	return 0;
-}
-
-void __cdecl fcn_00423670(void* a0, int a1, int a2)
-{
 }
 
 int __cdecl fcn_00423830(int a, int b, int c)
@@ -2272,28 +2243,9 @@ int __cdecl fcn_004273d0(int a, int b, int c)
 	return 0;
 }
 
-int __cdecl fcn_00427570(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_00427580(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_00427590(void)
-{
-	return 0;
-}
-
 int __cdecl evt_ParseScript(char* s)
 {
 	return 0;
-}
-
-void __cdecl fcn_00428340(void* handle, int a, int b)
-{
 }
 
 int __cdecl evt_RunScriptLine(char* a, int b)
@@ -2316,25 +2268,7 @@ int __cdecl fcn_0042a2d0(int h)
 	return 0;
 }
 
-int __cdecl fcn_0042a7c0(int h)
-{
-	return 0;
-}
-
 int __cdecl fcn_0042a850(int a)
-{
-	return 0;
-}
-
-void __cdecl fcn_0042a880(int a0)
-{
-}
-
-void __cdecl fcn_0042a920(int a0, int a1)
-{
-}
-
-int __cdecl fcn_0042a9a0(int h, int v)
 {
 	return 0;
 }
@@ -2349,72 +2283,12 @@ int __cdecl msx_StartStream(int h)
 	return 0;
 }
 
-int __cdecl fcn_0042ad90(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042ae10(int h, int v)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042ae90(int h, int f)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042aed0(int h, int pos)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042b040(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042b080(int h, int* len)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042b140(int* a)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042b180(int* a)
-{
-	return 0;
-}
-
 int __cdecl msx_FindSampleHandleIndex(int a)
 {
 	return 0;
 }
 
 int __cdecl msx_FindStreamIndex(int a)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042b240(int a)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042b280(int a)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042b2c0(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_0042b2e0(void)
 {
 	return 0;
 }
@@ -2465,16 +2339,6 @@ int __cdecl d3_CreateMorphAnimation(char* a, char* b, char* c, int d, int e, cha
 
 
 
-int __cdecl fcn_004355d0(char* a, const char* b)
-{
-	return 0;
-}
-
-int __cdecl fcn_00435630(char* a, char* b, char c)
-{
-	return 0;
-}
-
 void __cdecl d3_VisitSceneObjects(int a, int b, int c, void* d, void* e)
 {
 }
@@ -2517,11 +2381,6 @@ int __cdecl fcn_0043aa30(int flags)
 	return 0;
 }
 
-int __cdecl fcn_00441720(char* a, float* b, int c, int* d, int* e, float* f)
-{
-	return 0;
-}
-
 int __cdecl fcn_00442910(int a0, int a1, int a2, int a3)
 {
 	return 0;
@@ -2542,34 +2401,9 @@ int __cdecl fcn_00443230(int a)
 	return 0;
 }
 
-int __cdecl fcn_00443b00(char* a, char* b)
-{
-	return 0;
-}
 
-
-
-int __cdecl fcn_00445760(int a, int b, int c, void* d, void* e)
-{
-	return 0;
-}
-
-int __cdecl fcn_00445aa0(int a, unsigned int i, float f)
-{
-	return 0;
-}
 
 int __cdecl fcn_00449710(char* a, char** b)
-{
-	return 0;
-}
-
-int __cdecl fcn_00449b60(int id)
-{
-	return 0;
-}
-
-int __cdecl fcn_00449db0(char* a, int b, int mode, char* key, char* val)
 {
 	return 0;
 }
@@ -2579,27 +2413,7 @@ int __cdecl fcn_0044c0e0(char* key, char* val)
 	return 0;
 }
 
-int __cdecl fcn_0044c310(char* key, char* val)
-{
-	return 0;
-}
-
 int __cdecl fcn_0044e1e0(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_00451380(float* a, float* b)
-{
-	return 0;
-}
-
-int __cdecl fcn_00451500(int b, int c, float* m)
-{
-	return 0;
-}
-
-int __cdecl fcn_00452420(int a)
 {
 	return 0;
 }
@@ -2636,11 +2450,6 @@ int __cdecl fcn_00455140(char* a, float* b, float* c)
 
 
 
-int __cdecl fcn_00455910(char* e, int h, char* p)
-{
-	return 0;
-}
-
 int __cdecl fcn_00456590(void* s, int a, char b, unsigned int key, unsigned int stamp)
 {
 	return 0;
@@ -2667,11 +2476,6 @@ int __cdecl fcn_00459b40(int a)
 }
 
 int __cdecl fcn_0045b700(int a, int b, int c)
-{
-	return 0;
-}
-
-char __cdecl fcn_0045b990(void)
 {
 	return 0;
 }
@@ -2733,11 +2537,6 @@ int __cdecl fcn_004693b0(int a, int b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_00469e70(void)
-{
-	return 0;
-}
-
 int __cdecl d2_ClearScreen(void)
 {
 	return 0;
@@ -2752,22 +2551,12 @@ int __cdecl fcn_0046c620(int g, int sel)
 
 
 
-int __cdecl fcn_0046e940(int a, int b, int c, int d, int e)
-{
-	return 0;
-}
-
 int __cdecl d2_ClearWindowChildren(int a, int b)
 {
 	return 0;
 }
 
 int __cdecl fcn_0046f940(int a, char* b)
-{
-	return 0;
-}
-
-int __cdecl fcn_004707d0(int a)
 {
 	return 0;
 }
@@ -2829,10 +2618,6 @@ int __cdecl d2_SelectControl(int a)
 	return 0;
 }
 
-void __cdecl fcn_00475220(void* p)
-{
-}
-
 int __cdecl fcn_00475f80(void* o)
 {
 	return 0;
@@ -2843,32 +2628,7 @@ int __cdecl fcn_004763e0(int a, int b, int c, int d, int e, int f, int g, int h,
 	return 0;
 }
 
-int __cdecl fcn_00476970(int a)
-{
-	return 0;
-}
-
 int __cdecl fcn_00477490(void* p, int v, int a3, int a4)
-{
-	return 0;
-}
-
-int __cdecl fcn_004774e0(int a, int b, int c, void* d)
-{
-	return 0;
-}
-
-int __cdecl fcn_004774f0(int a, int b, int c, void* d)
-{
-	return 0;
-}
-
-int __cdecl fcn_00477500(int a, int b, int c, void* d)
-{
-	return 0;
-}
-
-int __cdecl fcn_00478fa0(int a, int b, void* c, void* d)
 {
 	return 0;
 }
@@ -2878,27 +2638,12 @@ int __cdecl fcn_00479330(char* a)
 	return 0;
 }
 
-int __cdecl fcn_0047a200(int a, int b, int c, int d)
-{
-	return 0;
-}
-
 int __cdecl d2_ClearAnimationSlot(int h)
 {
 	return 0;
 }
 
-int __cdecl fcn_0047a320(int a, int b, int c, void* d)
-{
-	return 0;
-}
-
 int __cdecl fcn_0047d220(char* e)
-{
-	return 0;
-}
-
-int __cdecl fcn_0047da10(void)
 {
 	return 0;
 }
@@ -2918,11 +2663,6 @@ int __cdecl ai_RunUseSeance(void)
 	return 0;
 }
 
-int __cdecl fcn_00493be0(char* p)
-{
-	return 0;
-}
-
 int __cdecl ai_SelectBestMethod(int kind, int id, int a3, void* b, void* a)
 {
 	return 0;
@@ -2934,11 +2674,6 @@ int __cdecl fcn_00495960(void)
 }
 
 int __cdecl am_RunDummyRechtschaffenheit(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_00495990(void)
 {
 	return 0;
 }
@@ -2989,11 +2724,6 @@ int __cdecl fcn_00496480(void)
 }
 
 int __cdecl am_StartBuyObjektAP(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_004974d0(void)
 {
 	return 0;
 }
@@ -3108,11 +2838,6 @@ int __cdecl ai_DispatchPrivilege(int a1, int a2, int a3)
 	return 0;
 }
 
-int __cdecl fcn_004ac260(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_004b1f30(void)
 {
 	return 0;
@@ -3129,16 +2854,6 @@ int __cdecl fcn_004b3810(int a)
 }
 
 int __cdecl fcn_004b5530(int handle, int flags)
-{
-	return 0;
-}
-
-int __cdecl fcn_004b5630(void* s, int flags)
-{
-	return 0;
-}
-
-int __cdecl fcn_004b5b20(int flags)
 {
 	return 0;
 }
@@ -3168,22 +2883,12 @@ int __cdecl fcn_004bb6c0(void* a)
 	return 0;
 }
 
-int __cdecl fcn_004bbd20(void)
-{
-	return 0;
-}
-
 int __cdecl plt_SetPlantMapSlot(void* a, unsigned int b, unsigned int c, unsigned int d, unsigned int e)
 {
 	return 0;
 }
 
 int __cdecl fcn_004c0a80(int* a, int b)
-{
-	return 0;
-}
-
-int __cdecl fcn_004c2de0(int a, int b, int c, int d)
 {
 	return 0;
 }
@@ -3245,22 +2950,12 @@ int __cdecl fcn_004cef30(int a)
 	return 0;
 }
 
-int __cdecl fcn_004cefb0(char* a, char* b)
-{
-	return 0;
-}
-
 int __cdecl fcn_004cf180(void)
 {
 	return 0;
 }
 
 int __cdecl fcn_004cf6b0(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_004cfa80(void)
 {
 	return 0;
 }
@@ -3281,11 +2976,6 @@ int __cdecl fcn_004d0f00(void)
 }
 
 int __cdecl fcn_004d1790(char* a)
-{
-	return 0;
-}
-
-int __cdecl fcn_004d31d0(char* a, int b, int c, int d, int* e, int* f)
 {
 	return 0;
 }
@@ -3382,11 +3072,6 @@ int __cdecl fcn_004e4b00(int a)
 	return 0;
 }
 
-int __cdecl fcn_004e4b40(int a1, int a2, char* s, int a4, int a5)
-{
-	return 0;
-}
-
 int __cdecl fcn_004e4eb0(void)
 {
 	return 0;
@@ -3427,11 +3112,6 @@ int __cdecl fcn_004ed240(void)
 }
 
 int __cdecl fcn_004ed800(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_004edae0(void)
 {
 	return 0;
 }
@@ -3502,16 +3182,6 @@ int __cdecl fcn_004fdd70(void* a)
 }
 
 int __cdecl fcn_004fde90(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_004fdfe0(unsigned short* a)
-{
-	return 0;
-}
-
-int __cdecl fcn_004ff210(int a, int b)
 {
 	return 0;
 }
@@ -3591,16 +3261,6 @@ int __cdecl fcn_00505840(void)
 	return 0;
 }
 
-int __cdecl fcn_00505d00(char* obj, void* out)
-{
-	return 0;
-}
-
-int __cdecl fcn_00506380(int a, void* table, void* record, int mode)
-{
-	return 0;
-}
-
 int __cdecl fcn_00508eb0(unsigned short id, int a2)
 {
 	return 0;
@@ -3646,11 +3306,6 @@ void* __cdecl fcn_0050d570(void* record)
 	return (void*) 0;
 }
 
-int __cdecl fcn_00510b40(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_00510b70(char* a)
 {
 	return 0;
@@ -3686,11 +3341,6 @@ int __cdecl fcn_00516040(void)
 	return 0;
 }
 
-int __cdecl fcn_00516de0(int a, int b)
-{
-	return 0;
-}
-
 int __cdecl fcn_00517250(char* a, int b)
 {
 	return 0;
@@ -3717,11 +3367,6 @@ int __cdecl fcn_0051e490(void* stream, int flags)
 }
 
 int __cdecl ls_LoadSavegame(char* s, int n)
-{
-	return 0;
-}
-
-int __cdecl fcn_00525ef0(void)
 {
 	return 0;
 }
@@ -3771,11 +3416,6 @@ int __cdecl fcn_0052dd80(void* a)
 	return 0;
 }
 
-int __cdecl fcn_0052f710(void)
-{
-	return 0;
-}
-
 void __cdecl fcn_00530510(void)
 {
 }
@@ -3798,17 +3438,7 @@ void __cdecl fcn_00533a40(void)
 {
 }
 
-int __cdecl fcn_00533a60(int a, int b, int* c, int d, ...)
-{
-	return 0;
-}
-
 int __cdecl fcn_00533f40(int x, int y, int owner, int other, int arg5, int* id2, int* id1, int* id3)
-{
-	return 0;
-}
-
-int __cdecl fcn_005340f0(int a)
 {
 	return 0;
 }
@@ -3827,10 +3457,6 @@ void __cdecl main_PumpWindowMessages(void)
 int __cdecl fcn_00537320(int a)
 {
 	return 0;
-}
-
-void __cdecl fcn_00538220(void)
-{
 }
 
 int __cdecl fcn_00538700(void)
@@ -3863,11 +3489,6 @@ int __cdecl d3_CreateMapTableTowerMarker(int a, int b, int c, int d, int e)
 	return 0;
 }
 
-int __cdecl fcn_0053ed60(int a, int b)
-{
-	return 0;
-}
-
 int __cdecl fcn_00545410(void)
 {
 	return 0;
@@ -3895,11 +3516,6 @@ int __cdecl d2_CreateEventBar(void)
 char* __cdecl fcn_005462a0(void)
 {
 	return (void*) 0;
-}
-
-int __cdecl fcn_00546480(char* entity)
-{
-	return 0;
 }
 
 int __cdecl he_CreateEventGfxInfo(void* a)
@@ -3972,11 +3588,6 @@ int __cdecl fcn_00575460(char* a)
 	return 0;
 }
 
-int __cdecl fcn_00575470(char* a)
-{
-	return 0;
-}
-
 int __cdecl fcn_005756f0(char* a)
 {
 	return 0;
@@ -4037,11 +3648,6 @@ int __cdecl fcn_0057b1f0(void)
 	return 0;
 }
 
-int __cdecl fcn_0057b770(void)
-{
-	return 0;
-}
-
 int __cdecl fcn_0057ba50(void)
 {
 	return 0;
@@ -4060,16 +3666,6 @@ int __cdecl fcn_0057e880(int a, char* b, int c, int d)
 }
 
 int __cdecl fcn_0057f090(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_0057f100(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_0057f130(void)
 {
 	return 0;
 }
@@ -4115,11 +3711,6 @@ int __cdecl d2_RunSpyCabinetDialog(int a)
 	return 0;
 }
 
-int __cdecl fcn_0058bb10(int a, int b, int c, int d, void* e)
-{
-	return 0;
-}
-
 int __cdecl fcn_0058bfd0(int* a)
 {
 	return 0;
@@ -4131,11 +3722,6 @@ int __cdecl fcn_0058c4f0(char* a, int dlg, int mode, int* ids, int* sel)
 }
 
 int __cdecl fcn_0058d5f0(int a)
-{
-	return 0;
-}
-
-int __cdecl fcn_0058dbe0(int a)
 {
 	return 0;
 }
@@ -4161,11 +3747,6 @@ int __cdecl fcn_0058f780(char* e, char* pfx)
 }
 
 int __cdecl fcn_0058fa20(int a)
-{
-	return 0;
-}
-
-int __cdecl fcn_0058fa40(int a)
 {
 	return 0;
 }
@@ -4210,11 +3791,6 @@ int __cdecl d2_RunProductionTradeDialog(int a)
 	return 0;
 }
 
-int __cdecl fcn_0059d020(char* a)
-{
-	return 0;
-}
-
 int __cdecl d2_RunTaschendiebstahlDialog(void)
 {
 	return 0;
@@ -4231,11 +3807,6 @@ int __cdecl d2_ShowHandelSearch(char* a, int b)
 }
 
 int __cdecl fcn_0059ecc0(int a, int b)
-{
-	return 0;
-}
-
-int __cdecl fcn_0059fe60(char* a)
 {
 	return 0;
 }
@@ -4270,11 +3841,6 @@ int __cdecl d2_ShowDunkleEcke(char* a, char* b)
 	return 0;
 }
 
-int __cdecl fcn_005a31b0(char* a, int b)
-{
-	return 0;
-}
-
 int __cdecl fcn_005a6e90(void)
 {
 	return 0;
@@ -4291,11 +3857,6 @@ int __cdecl d2_RunAmtsbewerbungDialog(void* a, int b)
 }
 
 int __cdecl fcn_005aa860(unsigned short* a)
-{
-	return 0;
-}
-
-int __cdecl fcn_005aa9a0(int a)
 {
 	return 0;
 }
@@ -4326,11 +3887,6 @@ int __cdecl fcn_005ac2d0(char* a)
 }
 
 int __cdecl d2_ShowThievesGuildSpyDialog(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_005add40(void)
 {
 	return 0;
 }
@@ -4426,11 +3982,6 @@ int __cdecl fcn_005c9090(char* text, int x, int y, int color, int flags)
 	return 0;
 }
 
-int __cdecl fcn_005c9160(int a, int b, int c, int d, int e)
-{
-	return 0;
-}
-
 int __cdecl fcn_005ca740(int a, int b, int c, int d, void* e, int f)
 {
 	return 0;
@@ -4456,11 +4007,6 @@ int __cdecl d2_ShowTabbedSelectionDialog(void* a, int b, int c, int d)
 	return 0;
 }
 
-int __cdecl fcn_005cd440(void* a, char* b, int c, int d)
-{
-	return 0;
-}
-
 int __cdecl fcn_005cde30(void)
 {
 	return 0;
@@ -4481,17 +4027,7 @@ int __cdecl fcn_005ce460(int a)
 	return 0;
 }
 
-int __cdecl fcn_005cea10(unsigned char* a)
-{
-	return 0;
-}
-
 int __cdecl d2_ShowMeisterbriefDialog(unsigned char* a)
-{
-	return 0;
-}
-
-int __cdecl fcn_005ceef0(unsigned char* a, void* b)
 {
 	return 0;
 }
@@ -4502,11 +4038,6 @@ int __cdecl fcn_005cf720(unsigned short a, unsigned short b, void* c, int d)
 }
 
 int __cdecl fcn_005d5930(void* a, void* b)
-{
-	return 0;
-}
-
-int __cdecl fcn_005d6540(char* a, int* b)
 {
 	return 0;
 }
@@ -4527,11 +4058,6 @@ int __cdecl fcn_005da250(void* a, void* b)
 }
 
 int __cdecl fcn_005da820(char* a, int* b)
-{
-	return 0;
-}
-
-int __cdecl fcn_005dbe90(char* a)
 {
 	return 0;
 }
@@ -4562,11 +4088,6 @@ int __cdecl fcn_005e6e00(void)
 }
 
 int __cdecl fcn_005e8850(void)
-{
-	return 0;
-}
-
-int __cdecl fcn_005eaae0(void)
 {
 	return 0;
 }

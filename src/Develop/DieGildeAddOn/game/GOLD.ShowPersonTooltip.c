@@ -11,7 +11,7 @@ struct sel {
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
@@ -27,7 +27,7 @@ void __cdecl io_FormatTextBuffer(char*, char*, ...);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_DrawSkillBar(int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
-void __cdecl fcn_00525ef0(void);
+void __cdecl d2_ResetUiInputAndBounds(void);
 void __cdecl d2_DestroyForm(int);
 
 void __cdecl ShowPersonTooltip(char* w)
@@ -43,7 +43,7 @@ void __cdecl ShowPersonTooltip(char* w)
 	if (*(unsigned char*) (w + 2) >= 10) {
 		return;
 	}
-	h = fcn_00470820(0, 0, "ToolTip\\ToolTip_Personen");
+	h = d2_LoadForm(0, 0, "ToolTip\\ToolTip_Personen");
 	d2_CenterDialogWindows(h);
 	d2_SetForm(0, 1);
 	io_AppendText("$Z$[%1N3$]", *(unsigned short*) w);
@@ -112,6 +112,6 @@ void __cdecl ShowPersonTooltip(char* w)
 			g_774654 = 1;
 		}
 	} while (main_RunFrameLoop(ShowPersonTooltip, 0x677c7) != 0);
-	fcn_00525ef0();
+	d2_ResetUiInputAndBounds();
 	d2_DestroyForm(h);
 }

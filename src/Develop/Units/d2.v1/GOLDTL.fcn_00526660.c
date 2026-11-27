@@ -25,7 +25,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetForm(int, int);
 void __cdecl io_AppendText(int);
 void __cdecl d2_CenterDialogWindows(int);
@@ -63,13 +63,13 @@ int __cdecl d2_RunMessageBox(int parent, int flags)
 	}
 	style = main_LoopFlags & ~0x38;
 	if (flags & 2) {
-		dlg = fcn_00470820(0, 0, "misc\\Messagebox_Autosize");
+		dlg = d2_LoadForm(0, 0, "misc\\Messagebox_Autosize");
 	} else if (flags & 0x10) {
-		dlg = fcn_00470820(0, 0, "misc\\Messagebox_BIG");
+		dlg = d2_LoadForm(0, 0, "misc\\Messagebox_BIG");
 	} else if (flags & 0x20) {
-		dlg = fcn_00470820(0, 0, "misc\\Messagebox_VERY_BIG");
+		dlg = d2_LoadForm(0, 0, "misc\\Messagebox_VERY_BIG");
 	} else {
-		dlg = fcn_00470820(0, 0, "misc\\Messagebox");
+		dlg = d2_LoadForm(0, 0, "misc\\Messagebox");
 	}
 	if (flags & 8) {
 		style = 0x717c6;

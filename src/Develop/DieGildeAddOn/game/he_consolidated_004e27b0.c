@@ -25,9 +25,9 @@ void __cdecl fcn_004e4730(char*);
 int __cdecl fcn_004e4470(char*);
 int __cdecl cut_WaitForTimeoutOrInput(int, int, int);
 int __cdecl cut_RandMod(int);
-void __cdecl fcn_004e4b40(int, int, char*, int, int);
+void __cdecl d3snd_QueueSoundIfAllowed(int, int, char*, int, int);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 char* __cdecl io_AppendText(int, ...);
@@ -107,21 +107,21 @@ void __cdecl cut_PlayBirthCutscene(char* event)
 	if (cut_WaitForTimeoutOrInput(0x1964, 0, 0) == 0) {
 		if (parent[9] == 0) {
 			if (child[9] == 0)
-				fcn_004e4b40(-8, snd, "_GEBURT", cut_RandMod(2), 0);
+				d3snd_QueueSoundIfAllowed(-8, snd, "_GEBURT", cut_RandMod(2), 0);
 			else
-				fcn_004e4b40(-8, snd, "_GEBURT", cut_RandMod(2) + 2, 0);
+				d3snd_QueueSoundIfAllowed(-8, snd, "_GEBURT", cut_RandMod(2) + 2, 0);
 		} else if (child[9] == 0) {
-			fcn_004e4b40(-8, snd, "_GEBURT", cut_RandMod(2) + 4, 0);
+			d3snd_QueueSoundIfAllowed(-8, snd, "_GEBURT", cut_RandMod(2) + 4, 0);
 		} else {
-			fcn_004e4b40(-8, snd, "_GEBURT", cut_RandMod(2) + 6, 0);
+			d3snd_QueueSoundIfAllowed(-8, snd, "_GEBURT", cut_RandMod(2) + 6, 0);
 		}
 		if (cut_WaitForTimeoutOrInput(1000, 0, 0) == 0) {
 			for (n = cut_RandMod(4) + 2; n > 0; n--)
-				fcn_004e4b40(-8, snd, "_GEBURT_GESCHREI", cut_RandMod(5), gm_RandomMod(0x800) + 1000);
+				d3snd_QueueSoundIfAllowed(-8, snd, "_GEBURT_GESCHREI", cut_RandMod(5), gm_RandomMod(0x800) + 1000);
 			cut_WaitForTimeoutOrInput(7000, 0, 0);
 		}
 	}
-	sc = fcn_00470820(0, 0, "cutscenes\\geburt");
+	sc = d2_LoadForm(0, 0, "cutscenes\\geburt");
 	d2_CenterDialogWindows(sc);
 	d2_SetForm(sc, 1);
 	if (child[9] == 0)

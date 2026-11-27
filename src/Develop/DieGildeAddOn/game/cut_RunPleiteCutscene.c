@@ -20,12 +20,12 @@ int __cdecl gm_LookupEntityRecordById(void* p);
 int __cdecl sb_LoadLocalizedSampleBank(char* s, int a);
 void __cdecl msx_StartMusicIfAllowed(char* s);
 void __cdecl fcn_004e4730(char* s);
-void __cdecl fcn_00445f50(int a, int b, float f, int c);
-void __cdecl fcn_004463f0(int a, int b, float f);
-void __cdecl fcn_004e4b60(char* s);
+void __cdecl d3_BlendSceneLightingPreset(int a, int b, float f, int c);
+void __cdecl d3_InterpolateSceneFog(int a, int b, float f);
+void __cdecl d3_InitSkyLayer(char* s);
 int __cdecl evt_StartGfxScript(char* s, char* buf);
 int __cdecl cut_WaitForTimeoutOrInput(int a, int b, int c);
-void __cdecl fcn_004e4b40(int a, int b, char* s, int c, int d);
+void __cdecl d3snd_QueueSoundIfAllowed(int a, int b, char* s, int c, int d);
 void __cdecl fcn_004e4c40(int a);
 int __cdecl io_FormatTextBuffer(char* buf, int a, int b);
 int __cdecl d2_ShowMessageBox(void* buf, int n);
@@ -39,7 +39,7 @@ void __cdecl d3snd_StopTrackedVoices(void);
 void __cdecl fcn_004230e0(void* h);
 void __cdecl fcn_004e4eb0(void);
 void __cdecl main_ExitToFrameHandler(int p);
-void __cdecl fcn_00509fc0(void* a, void* b, int c);
+void __cdecl gm_LiquidateEntityAssets(void* a, void* b, int c);
 void __cdecl cut_RegisterEventCallbacks(void);
 
 /* ADDRESS: GOLDTL 0x004e3020 */
@@ -78,24 +78,24 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 	handle = sb_LoadLocalizedSampleBank((char*) 0x68d324, 1);
 	msx_StartMusicIfAllowed((char*) 0x68bd2c);
 	fcn_004e4730((char*) 0x68d318);
-	fcn_00445f50(state, 0, 1.0f, 1);
-	fcn_004463f0(0, 0, 0.0f);
-	fcn_004e4b60((char*) 0x68d308);
+	d3_BlendSceneLightingPreset(state, 0, 1.0f, 1);
+	d3_InterpolateSceneFog(0, 0, 0.0f);
+	d3_InitSkyLayer((char*) 0x68d308);
 	sprintf(f.path, "%i", state);
 	h2 = evt_StartGfxScript((char*) 0x68d2e4, f.path);
 	r = cut_WaitForTimeoutOrInput(0x1770, 0, 0);
 	if (r == 0) {
-		fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 0, 0);
-		fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 1, 2500);
-		fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 2, 500);
+		d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d2d8, 0, 0);
+		d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d2d8, 1, 2500);
+		d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d2d8, 2, 500);
 		r = cut_WaitForTimeoutOrInput(0x3e80, 0, 0);
 		if (r == 0) {
 			fcn_004e4c40(250);
 			r = cut_WaitForTimeoutOrInput(0x2af8, 0, 0);
 			if (r == 0) {
-				fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 3, 0x251c);
-				fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 4, 0x1194);
-				fcn_004e4b40(-8, handle, (char*) 0x68d2d8, 5, 500);
+				d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d2d8, 3, 0x251c);
+				d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d2d8, 4, 0x1194);
+				d3snd_QueueSoundIfAllowed(-8, handle, (char*) 0x68d2d8, 5, 500);
 				cut_WaitForTimeoutOrInput(0x5dc0, 0, 0);
 			}
 		}
@@ -124,6 +124,6 @@ void __cdecl cut_RunPleiteCutscene(void* arg)
 		g_774954 = 1;
 		main_ExitToFrameHandler(g_5438c0);
 	} else {
-		fcn_00509fc0(obj, f.big, 0);
+		gm_LiquidateEntityAssets(obj, f.big, 0);
 	}
 }

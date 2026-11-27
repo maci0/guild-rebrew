@@ -45,7 +45,7 @@ void __cdecl io_FormatTextBuffer(void*, char*, ...);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl fcn_004760a0(int, int);
 
-void __cdecl fcn_0059c5a0(Row* rows, int a2, int a3, int mode)
+void __cdecl d2_BuildItemList(Row* rows, int form_id, int sub_form, int mode)
 {
 	char buf[0x80];
 	int i;
@@ -54,7 +54,7 @@ void __cdecl fcn_0059c5a0(Row* rows, int a2, int a3, int mode)
 		if (rows[i].id == 0) {
 			return;
 		}
-		d2_SetForm(a2, a3);
+		d2_SetForm(form_id, sub_form);
 		if (mode != 0) {
 			rows[i].icon = d2_AddWindowField((((Screen*)g_77255c)->width - 0x30) >> 1, i * 0x4c, rows[i].id + 0xdf, 0x82, d2_CurrentWindowId);
 		} else {

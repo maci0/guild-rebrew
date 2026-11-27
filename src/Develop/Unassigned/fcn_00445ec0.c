@@ -1,5 +1,5 @@
 int __cdecl d3_VisitSceneObjects(int, int, int, int, int);
-void __cdecl fcn_00445e40(int);
+void __cdecl d3_SaveSceneLightingPreset(int);
 
 /* ADDRESS: GOLDTL 0x00445ec0 */
 void __cdecl fcn_00445ec0(unsigned idx, int arg, char flag)
@@ -26,6 +26,6 @@ void __cdecl fcn_00445ec0(unsigned idx, int arg, char flag)
 	*(int*) (base + 0x1041d90) = t1;
 	*(int*) (base + 0x1041d94) = t2;
 	if (flag) {
-		fcn_00445e40(idx);
+		d3_SaveSceneLightingPreset(idx);
 	}
 }

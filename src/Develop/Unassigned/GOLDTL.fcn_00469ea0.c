@@ -18,11 +18,11 @@ extern char* g_772500;
 extern signed char g_772510;
 
 int __cdecl d2_GetResourceData(int);
-int __cdecl fcn_0047cba0(int, int, int, int, int);
+int __cdecl d2_DrawSpriteFromSet(int, int, int, int, int);
 
 
 /* ADDRESS: GOLDTL 0x00469ea0 */
-int __cdecl d2_DrawResource(int a1, int a2, int idx, int a4)
+int __cdecl d2_DrawResource(int x, int y, int idx, int surface)
 {
 	int result;
 	int base;
@@ -49,12 +49,12 @@ int __cdecl d2_DrawResource(int a1, int a2, int idx, int a4)
 		case 5:
 		case 8:
 			if (base != -1) {
-				result = fcn_0047cba0(a1, a2, a4, result, base - idx);
+				result = d2_DrawSpriteFromSet(x, y, surface, result, base - idx);
 				break;
 			}
 		case 1:
 		case 4:
-			result = fcn_0047cba0(a1, a2, a4, result, 0);
+			result = d2_DrawSpriteFromSet(x, y, surface, result, 0);
 			break;
 		case 2:
 		case 3:

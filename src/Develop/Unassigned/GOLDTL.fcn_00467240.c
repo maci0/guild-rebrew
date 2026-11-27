@@ -42,7 +42,7 @@ extern char s_67d474[];
 extern char s_67d46c[];
 
 #include "Develop/Units/Error/error_message.h"
-int __cdecl fcn_00465950(char* name);
+int __cdecl d2_FindResourceByName(char* name);
 int __cdecl d2_AllocateElement(void);
 int __cdecl d2_MeasureTextWidth(char* s, int font);
 
@@ -80,7 +80,7 @@ int __cdecl d2_OpenInputIcon(int x, int y, int w, int h, unsigned char flags)
 	f->digits = 3;
 	f->flags = flags;
 	f->used = 1;
-	f->font = fcn_00465950(s_67d474);
+	f->font = d2_FindResourceByName(s_67d474);
 	f->def = -1;
 	f->f154 = 0;
 	id = d2_AllocateElement();

@@ -17,7 +17,7 @@ int __cdecl gm_AmountToUnits();
 int __cdecl io_AppendText();
 int __cdecl io_FormatTextBuffer();
 int __cdecl d3_EndCameraAndUiMode();
-int __cdecl fcn_005340f0();
+int __cdecl d2_InitWindowBounds();
 int __cdecl main_RunFrameLoop();
 int __cdecl d2_ShowWirtshausRules();
 int __cdecl fcn_005a0cd0();

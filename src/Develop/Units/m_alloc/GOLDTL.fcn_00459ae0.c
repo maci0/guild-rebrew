@@ -1,8 +1,8 @@
 extern volatile int g_6b7fac;
 
 void* __cdecl m_alloc(int size, char* tag);
-void __cdecl fcn_00459a10(char* p);
-void __cdecl fcn_00459710(char* p, int a);
+void __cdecl d3_CreateSkyDomeBuffers(char* p);
+void __cdecl d3_ResetSkyDomeNormals(char* p, int a);
 
 /* ADDRESS: GOLDTL 0x00459ae0 */
 char* __cdecl fcn_00459ae0(int a, int b, int c)
@@ -18,8 +18,8 @@ char* __cdecl fcn_00459ae0(int a, int b, int c)
 		*(int*) (p + 0x2c) = 0;
 		*(int*) (p + 0x1c) = b;
 		*(int*) (p + 0x20) = c;
-		fcn_00459a10(p);
-		fcn_00459710(p, 1);
+		d3_CreateSkyDomeBuffers(p);
+		d3_ResetSkyDomeNormals(p, 1);
 	}
 	return p;
 }

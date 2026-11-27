@@ -22,7 +22,7 @@ extern int g_774654;
 void* __cdecl memset(void*, int, unsigned int);
 char* __cdecl itoa(int, char*, int);
 int __cdecl d2_CheckOwnerBlocked(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 void __cdecl d2_SetForm(int, int);
@@ -100,7 +100,7 @@ int __cdecl d2_ShowProductionDialog(char* building)
 	if (d2_CheckOwnerBlocked((int) building) != 0) {
 		return 0;
 	}
-	h = fcn_00470820(0, 0, (char*) 0x6aa148);
+	h = d2_LoadForm(0, 0, (char*) 0x6aa148);
 	d2_CenterDialogWindows(h);
 	fcn_0052a0c0((int) building, 0);
 	d2_SetForm(h, 3);

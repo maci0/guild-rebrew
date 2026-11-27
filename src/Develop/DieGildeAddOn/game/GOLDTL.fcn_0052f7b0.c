@@ -18,18 +18,18 @@ extern char g_6b5c60[];
 void* __cdecl fcn_00502cd0(int, int, int, ...);
 int __cdecl d2_SetElementEnabled(int, int);
 int __cdecl gm_GetBuildingTypeCategory(int);
-int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
+int __cdecl gm_GetEntityUiFlags(int, unsigned char*, unsigned short*, int);
 int __cdecl d2_TutorialAllowsFlag(int);
 void __cdecl fcn_0057e880(int, int, int, int);
 int __cdecl d2_OpenTargetPicker(char*, int, int, void*);
 int __cdecl d2_RunTradeInventoryPanel(int, int);
-void __cdecl fcn_00525ef0(void);
+void __cdecl d2_ResetUiInputAndBounds(void);
 void __cdecl d2_RunTechTreeDialog(char*, int);
 void __cdecl d2_RunGebaeudeOptionenDialog(char*);
 void __cdecl d2_ShowGebaeudeOptions(char*);
 int __cdecl fcn_0052f7a0(void);
 void __cdecl fcn_0052ea30(void);
-void __cdecl fcn_0052f710(void);
+void __cdecl d2_DestroySelectionPanel(void);
 void __cdecl d2_OpenTransporterInfoPanel(unsigned short*);
 void __cdecl d2_OpenPersonInfoPanel(char*);
 void __cdecl d2_OpenBuildingInfoPanel(void);
@@ -64,19 +64,19 @@ void __cdecl d2_UpdateSelectionPanels(void)
     if (flags && g_100f1dc != -1) {
         if (g_6a25ec != -1 && d2_CurrentElementId == g_6a25ec) {
             if (g_7746c4 != 0) {
-                g_7746dc = fcn_00506380(g_774970, (u8*)g_7746c4, 0, 0);
+                g_7746dc = gm_GetEntityUiFlags(g_774970, (u8*)g_7746c4, 0, 0);
             } else if (g_7746c8 != 0) {
                 if (g_7746cc != 0) {
                     item = (unsigned short*)fcn_00502cd0(*(int*)(g_7746c8 + 0x5d),
                         1, 0, *(unsigned short*)(g_7746c8 + 0x29));
-                    g_7746dc = fcn_00506380(g_774970, 0, item, 0);
+                    g_7746dc = gm_GetEntityUiFlags(g_774970, 0, item, 0);
                 } else {
-                    g_7746dc = fcn_00506380(g_774970, g_7746c8, 0, 0);
+                    g_7746dc = gm_GetEntityUiFlags(g_774970, g_7746c8, 0, 0);
                 }
             } else {
                 if (selected == 0)
                     goto refresh;
-                g_7746dc = fcn_00506380(g_774970, (u8*)selected, 0, 0);
+                g_7746dc = gm_GetEntityUiFlags(g_774970, (u8*)selected, 0, 0);
             }
             if (g_7746c4 != 0 && (g_7746dc & 0x10)) {
                 d2_RunTechTreeDialog(g_7746c4, *(unsigned short*)(g_7746c4 + 0x29));
@@ -86,7 +86,7 @@ void __cdecl d2_UpdateSelectionPanels(void)
                 d2_RunTechTreeDialog((char*)g_7746c8, *(unsigned short*)g_7746cc);
             } else if (g_7e2aa0 != 0) {
                 kind = gm_GetBuildingTypeCategory(*(u8*)g_7e2aa0);
-                g_7746dc = fcn_00506380(g_774970, (u8*)g_7e2aa0, 0, 0);
+                g_7746dc = gm_GetEntityUiFlags(g_774970, (u8*)g_7e2aa0, 0, 0);
                 if ((kind == 3 || kind == 5) && (g_7746dc & 0x10))
                     d2_ShowGebaeudeOptions(g_7e2aa0);
                 else
@@ -99,12 +99,12 @@ void __cdecl d2_UpdateSelectionPanels(void)
                     ((SelectProto*)lpGebaeudePROT)[*(u8*)selected].kind == 0x10 ||
                     ((SelectProto*)lpGebaeudePROT)[*(u8*)selected].kind == 0x1e) {
                     if (d2_TutorialAllowsFlag(0x400) == 1) {
-                        g_7746d8 = fcn_00506380(g_774970, (u8*)selected, 0, 0);
+                        g_7746d8 = gm_GetEntityUiFlags(g_774970, (u8*)selected, 0, 0);
                         fcn_0057e880(0x12, (int)selected, 0, 0);
                         d2_RunTradeInventoryPanel((int)selected, 1);
                         fcn_0057e880(0x12, (int)selected, 1, 0);
                         g_7e2aa0 = selected;
-                        fcn_00525ef0();
+                        d2_ResetUiInputAndBounds();
                     }
                 }
             }
@@ -132,7 +132,7 @@ refresh:
         g_7746f0 == *(int*)0x774794 && g_6a2524 == 0)
         return;
     g_6a2524 = 0;
-    fcn_0052f710();
+    d2_DestroySelectionPanel();
     item = (unsigned short*)g_7e2a9c;
     focus = g_7ea360;
     count = g_7746f0;

@@ -24,7 +24,7 @@ char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
 float __cdecl gm_RandomFloat01(void);
 void __cdecl cm_SendBlockCharacter(int, int, int);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 int __cdecl gm_ObjApplyAction0x5b(char* e, char* action)
 {
@@ -57,7 +57,7 @@ int __cdecl gm_ObjApplyAction0x5b(char* e, char* action)
 	if (e[2] == 6) {
 		io_FormatTextBuffer(text, 0x10a9, *(unsigned short*) r);
 		io_FormatTextBuffer(msg, 0xfe8, text);
-		fcn_005dbe90(msg);
+		d2_ShowUseObjDialog(msg);
 	}
 	return 1;
 }

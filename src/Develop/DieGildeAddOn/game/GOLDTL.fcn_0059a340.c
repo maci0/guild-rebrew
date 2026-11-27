@@ -55,7 +55,7 @@ void __cdecl gm_UpdateBuildingSmokeEffect(int a0);
 void __cdecl d3_HandleCameraLevelKey(void);
 void __cdecl d3_FocusCameraOnEntity(int a0);
 void __cdecl d2_ShowBuildingMenu(void);
-int __cdecl fcn_00506380(int a, int b, int c, int d);
+int __cdecl gm_GetEntityUiFlags(int a, int b, int c, int d);
 int __cdecl gm_CheckEntityType(void* a0);
 int __cdecl d2_DispatchTutorialEvent(int a, int b, int c, int d);
 void __cdecl d2_EnterGebaeudeInterior(int a0);
@@ -187,7 +187,7 @@ void __cdecl d2_RunWorldHudLoop(void)
 		if (g_100f1dc != -1 && d2_CurrentElementId == g_6a25dc)
 			d2_ShowBuildingMenu();
 		if (g_7e2aa0) {
-			v10 = fcn_00506380(g_774970, g_7e2aa0, 0, 0);
+			v10 = gm_GetEntityUiFlags(g_774970, g_7e2aa0, 0, 0);
 			v9 = g_7e2aa0;
 			if (v9 && g_7746b0 == v9
 				&& (g_14ce8dc

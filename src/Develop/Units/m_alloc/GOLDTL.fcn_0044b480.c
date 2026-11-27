@@ -10,7 +10,7 @@ void __cdecl fcn_0044e190(void*, void*);
 char __cdecl fcn_0044f0e0(char*);
 void __cdecl d3_AddFLChunk(char*, char);
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
-int __cdecl fcn_0045c5b0(char*, int, int, int);
+int __cdecl d3_LoadOrReuseTexture(char*, int, int, int);
 char* __cdecl fcn_0064d530(char*, const char*, unsigned int);
 void* __cdecl fcn_0064d740(void*, const void*, unsigned int);
 /* Texture record of the .BGF chunk block, native stride 0xe0. */
@@ -99,7 +99,7 @@ BGF_OBJ* __cdecl d3_LoadFastChunk(char*, char*, char*, int, int);
 
 #pragma optimize("y", off)
 /* ADDRESS: GOLDTL 0x0044b480 */
-BGF_OBJ* __cdecl fcn_0044b480(char* name, char* objectName, char* nametab, int namestep,
+BGF_OBJ* __cdecl d3_LoadAGF(char* name, char* objectName, char* nametab, int namestep,
 	int namecount)
 {
 	char buf[0x120];
@@ -470,7 +470,7 @@ BGF_OBJ* __cdecl fcn_0044b480(char* name, char* objectName, char* nametab, int n
 		if (tex->name_080[0] != 0) {
 			c1 |= 1;
 		}
-		r = (void*) fcn_0045c5b0(obj->texnamen + i * 0x40, info, c1, c2);
+		r = (void*) d3_LoadOrReuseTexture(obj->texnamen + i * 0x40, info, c1, c2);
 		if (r != 0) {
 			idx = ((int) r - *(int*) 0x104049c) / 0x70;
 		}

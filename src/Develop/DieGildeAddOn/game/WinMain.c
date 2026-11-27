@@ -40,14 +40,14 @@ int __cdecl txt_LoadTextFileDefinition(char*);
 #include "Develop/Units/Error/error_message.h"
 void __cdecl fcn_004b2070(void);
 void __cdecl d2_ClearScreen(void);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_PositionWindow(int, int);
 void __cdecl fcn_00469c40(int, int, int);
 void __cdecl io_AppendText(int, char*);
 void __cdecl nt_ConnectTcp(int, int);
 void __cdecl cm_ResetCommandQueue(void);
 void __cdecl fcn_00590650(void);
-void __cdecl fcn_00501040(char*);
+void __cdecl gm_InitGameData(char*);
 void __cdecl gm_ResetSlot170Table(void);
 void __cdecl init_LoadCharacterNames(void);
 void __cdecl ls_FreeList774a78(void);
@@ -61,7 +61,7 @@ int __cdecl sb_LoadSampleBank(char*, int);
 void __cdecl main_PreloadSound(char*);
 void __cdecl msx_InitDrivers(int, int, int);
 void __cdecl msx_ApplyAudioSettings(void);
-void __cdecl fcn_00525eb0(void);
+void __cdecl main_InitFrameProfile(void);
 void __cdecl d3_ResetSceneContextIndices(void);
 void __cdecl ch_InitActionQueue(void);
 void __cdecl fcn_004186c0(void);
@@ -116,7 +116,7 @@ extern int __cdecl main_InitRuntime(void);
 extern void __cdecl main_PlayIntroMovies(void);
 extern int __cdecl fcn_00538850(int topmost);
 extern int __cdecl main_OpenEngine(void);
-extern void __cdecl fcn_00538220(void);
+extern void __cdecl main_ShutdownEngine(void);
 extern void __cdecl fcn_00538160(void);
 extern int __cdecl main_PumpWindowMessages(void);
 extern void __cdecl main_Menue(void);
@@ -255,21 +255,21 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 		exit(1);
 
 	if (main_CreateWindow((HINSTANCE) instance, show, windowed) == 0) {
-		fcn_00538220();
+		main_ShutdownEngine();
 		return 0;
 	}
 	if (main_InitRuntime() == 0) {
-		fcn_00538220();
+		main_ShutdownEngine();
 		return 0;
 	}
 	if (*(int*) 0x77492c != 0)
 		main_PlayIntroMovies();
 	if (fcn_00538850(windowed) == 0) {
-		fcn_00538220();
+		main_ShutdownEngine();
 		return 0;
 	}
 	if (main_OpenEngine() == 0) {
-		fcn_00538220();
+		main_ShutdownEngine();
 		return 0;
 	}
 
@@ -313,7 +313,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 				fcn_00538160();
 				main_PumpWindowMessages();
 				if (fcn_00538850(windowed) == 0) {
-					fcn_00538220();
+					main_ShutdownEngine();
 					return 0;
 				}
 				*(int*) 0x77495c = server;
@@ -332,7 +332,7 @@ int __stdcall WinMain(void *instance, void *previous, char *command, int show)
 		*(int*) 0x774650 = 0;
 	} while (*(int*) 0x77496c == 0);
 
-	fcn_00538220();
+	main_ShutdownEngine();
 	if (*(int*) 0x774974 != 0)
 		fcn_005386c0((void*) 1);
 	return 1;

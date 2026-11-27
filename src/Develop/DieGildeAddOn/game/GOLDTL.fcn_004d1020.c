@@ -21,7 +21,7 @@ extern int g_14a9a0c;
 char* __cdecl gm_GetEquippedCombatGear(char* x);
 char* __cdecl gm_FindEntityActiveItem(char* a1);
 char* __cdecl gm_FindOrCreateEntitySlot(char* rec, char* e);
-char __cdecl fcn_0045b990(char* map, float* pos, int* col, int* row, float* height);
+char __cdecl d3sm_SampleHeight(char* map, float* pos, int* col, int* row, float* height);
 void __cdecl fcn_00533a40(char* a);
 int __cdecl cm_SendUpdateCutsceneEntitySlot(int a1, void* a2);
 
@@ -44,7 +44,7 @@ int __cdecl cut_AssignTargetOrder(char* context, char* e, char* obj, int col, in
 	map = *(char**) (obj + 0x184);
 	node = *(char**) (map + 0x34);
 	if (node == 0) goto fail;
-	if (fcn_0045b990((char*) kind, (float*) (node + 0x4c), &col, &row, &height) == 0) goto fail;
+	if (d3sm_SampleHeight((char*) kind, (float*) (node + 0x4c), &col, &row, &height) == 0) goto fail;
 	rec = gm_FindOrCreateEntitySlot(context, e);
 	if (rec == 0) goto fail;
 	*(unsigned char*) (rec + 0x1c) = 0;

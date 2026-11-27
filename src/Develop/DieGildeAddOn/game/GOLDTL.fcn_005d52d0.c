@@ -20,7 +20,7 @@ void __cdecl d2_DestroyForm(int);
 int __cdecl d2_CenterDialogWindows(int);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl io_AppendText(int, ...);
@@ -75,7 +75,7 @@ int __cdecl d2_RunDivorceAction(char* p)
 	w = (float) gm_WalkEntityChain(*(unsigned short*) p);
 	s.n = (int) (w * g_664ee8);
 	obj = gm_LookupEntityRecordById(*(int*) (p + 0x5c));
-	dlg = fcn_00470820(0, 0, "privillegien\\scheidung");
+	dlg = d2_LoadForm(0, 0, "privillegien\\scheidung");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);

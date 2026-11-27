@@ -12,7 +12,7 @@ unsigned int __cdecl gm_RandomMod(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 int __cdecl gm_LookupSpecialObjectRecord(int, char*);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 /* ADDRESS: GOLDTL 0x005dd5a0 */
 unsigned int __cdecl gm_LowerTargetStandingWithPeers(ENTITY_RECORD_VIEW* actor, unsigned int* request)
@@ -117,6 +117,6 @@ unsigned int __cdecl gm_LowerTargetStandingWithPeers(ENTITY_RECORD_VIEW* actor, 
 	io_FormatTextBuffer(messageText, 0xfe8, *(unsigned short*) (idxOrDelta + 0x18) + 1,
 	                    peers[0]->entity_index, peers[1]->entity_index,
 	                    peers[2]->entity_index);
-	fcn_005dbe90(messageText);
+	d2_ShowUseObjDialog(messageText);
 	return 1;
 }

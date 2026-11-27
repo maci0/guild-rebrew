@@ -8,7 +8,7 @@ extern int g_100f1dc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 #include "client_dialog_state.h"
 
-int __cdecl fcn_00470820(int a, int b, char* s);
+int __cdecl d2_LoadForm(int a, int b, char* s);
 void __cdecl d2_CenterDialogWindows(int h);
 void __cdecl d2_SetForm(int h, int b);
 void __cdecl io_AppendText(char* x);
@@ -20,11 +20,11 @@ void __cdecl d2_ShowPrivilegMessage(char* x, int mode, int y)
 	int h;
 
 	if (mode == 0) {
-		h = fcn_00470820(0, 0, g_69059c);
+		h = d2_LoadForm(0, 0, g_69059c);
 	} else if (mode == 1) {
-		h = fcn_00470820(0, 0, g_690584);
+		h = d2_LoadForm(0, 0, g_690584);
 	} else {
-		h = fcn_00470820(0, 0, g_690568);
+		h = d2_LoadForm(0, 0, g_690568);
 	}
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 1);

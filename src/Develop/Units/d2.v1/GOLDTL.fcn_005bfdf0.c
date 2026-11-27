@@ -37,7 +37,7 @@ extern int g_14ce8e0;
 
 int __cdecl gs_CollectEvidenceIndicesForTarget(int, int*, unsigned short);
 void __cdecl d2_SortCrimeRecordsByKind(int n, Rec5bfd* arr);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id);
@@ -73,7 +73,7 @@ void __cdecl d2_ShowBeweiseDetails(unsigned short* who, unsigned short* e)
 		recs[i] = ((Rec5bfd*)g_9a3800)[list[i]];
 	}
 	d2_SortCrimeRecordsByKind(n, recs);
-	h = fcn_00470820(0, 0, g_6ac4c8);
+	h = d2_LoadForm(0, 0, g_6ac4c8);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 2);
 	w = d2_CurrentWindowId;

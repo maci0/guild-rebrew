@@ -5,7 +5,7 @@ void __cdecl gm_GenerateShuffledIndices(int, int*);
 void __cdecl gm_IncreaseEntitySkill(unsigned char*, int);
 void __cdecl cm_RequestUpdateResidenceDecor(int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_005dbe90(char*);
+void __cdecl d2_ShowUseObjDialog(char*);
 
 int __cdecl gm_ObjBoostTwoSkills(unsigned char* e, int* ctx)
 {
@@ -39,7 +39,7 @@ int __cdecl gm_ObjBoostTwoSkills(unsigned char* e, int* ctx)
 		cm_RequestUpdateResidenceDecor(*(int*) (e + 4));
 		io_FormatTextBuffer(text, 0xfe8, **(unsigned short**) ctx * 2 + 0xd71, second + 0x16b7,
 		    first + 0x16b7);
-		fcn_005dbe90(text);
+		d2_ShowUseObjDialog(text);
 	}
 	return 1;
 }

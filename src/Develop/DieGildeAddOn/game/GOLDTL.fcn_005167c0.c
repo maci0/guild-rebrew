@@ -22,7 +22,7 @@ extern float g_67a964;
 int __cdecl gm_GetSeason(char*);
 int __cdecl gm_GetBuildingTypeCategory(int);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
-void __cdecl fcn_00516b70(void);
+void __cdecl d3_SetInteriorLightingDefaults(void);
 void __cdecl fcn_00516be0(void);
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
 char __cdecl d3_SetSubtreeVisible(int, unsigned char);
@@ -35,7 +35,7 @@ int __cdecl d3_GetContextIndex(int);
 void __cdecl ch_SetVisible(char*, int);
 #include "Develop/DieGildeAddOn/game/ch_ground.h"
 void __cdecl fcn_004fdcf0(char*);
-void __cdecl fcn_004fdfe0(char*);
+void __cdecl ch_AssignHeadIcon(char*);
 void* __cdecl gm_NextEntityQueryMatch(void);
 void __cdecl ch_UpdateAttachedModelPosition(char*, int);
 void __cdecl d3_ApplyVegetationTextureSet(void);
@@ -62,7 +62,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 	if (entity != 0 && *(unsigned short*) entity != 0xfd) {
 		type = ((signed char*) init_SceneContextIndices)[*(unsigned short*) entity];
 		g_7f3b24 = (char*) entity;
-		fcn_00516b70();
+		d3_SetInteriorLightingDefaults();
 	} else {
 		type = g_7f3b00[((BUILDING_PROTOTYPE*)lpGebaeudePROT)[*building].category];
 		g_7f3b24 = 0;
@@ -142,7 +142,7 @@ void __cdecl d3_UpdateBuildingView(unsigned char* building, int queryId)
 				ch_SetVisible((char*) obj, 1);
 				ch_PlaceOnGround((char*) *p, 0);
 				fcn_004fdcf0((char*) p - 0x184);
-				fcn_004fdfe0((char*) p - 0x184);
+				ch_AssignHeadIcon((char*) p - 0x184);
 				i++;
 			} else {
 				ch_SetVisible((char*) obj, 0);

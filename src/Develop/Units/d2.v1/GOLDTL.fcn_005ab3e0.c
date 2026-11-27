@@ -12,11 +12,11 @@ void __cdecl gs_ClearTargetStraftaten(int a, int b);
 int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl gm_CalcEntityFavor(unsigned int a0, unsigned int a1, unsigned int a2);
 int __cdecl gm_HasActiveSpecialObject(char*, int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText(int, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckEntityStock(char*, int, int);
@@ -69,11 +69,11 @@ void __cdecl fcn_005ab3e0(char* churchBuilding)
 		if (gm_HasActiveSpecialObject((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970], 0x2c6) != 0)
 			cost = cost / 2;
 	}
-	dlg = fcn_00470820(0, 0, (char*) 0x6ab014);
+	dlg = d2_LoadForm(0, 0, (char*) 0x6ab014);
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(dlg, 1);
 	io_AppendText(0x1960);
 	if (cost > 0) {

@@ -3889,8 +3889,8 @@ void __cdecl gm_AdvanceGameClock(void);
 int __cdecl tb_IsCallbackPaused(void* fn);
 int __cdecl tb_SetCallbackPaused(void* fn, int flag);
 void __cdecl d3_SelectSceneContext(int a, int b);
-void __cdecl fcn_0045b290(int a, int b);
-void __cdecl fcn_004ad2d0(int v);
+void __cdecl d3sm_Rebuild(int a, int b);
+void __cdecl amt_SetSpecialOfficeIndex(int v);
 void __cdecl fcn_004b3d40(int a, int b);
 unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 void __cdecl d3_UpdateBuildingView(void* ent, int v);
@@ -3992,7 +3992,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 	case 12:
 		saved = *(int*) 0x6b8010;
 		d3_SelectSceneContext(0, 1);
-		fcn_0045b290(*(int*) (*(int*) 0x67a370 + 0xb0), *(int*) 0x6b8300);
+		d3sm_Rebuild(*(int*) (*(int*) 0x67a370 + 0xb0), *(int*) 0x6b8300);
 		d3_SelectSceneContext(saved, 1);
 		*(char**) 0x6b5c54 = 0;
 		break;
@@ -4041,7 +4041,7 @@ int __cdecl cm_ExSysMessage(char* pkt, char* out)
 		*(int*) 0x68a9dc = *(int*) (buf + 0x11);
 		break;
 	case 20:
-		fcn_004ad2d0(*(int*) (buf + 0x11));
+		amt_SetSpecialOfficeIndex(*(int*) (buf + 0x11));
 		break;
 	}
 	goto done;
@@ -5077,7 +5077,7 @@ int __cdecl cm_ExCreateGeb(int cmd, char* result)
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 extern void* g_6b7fdc;
 int __cdecl vfs_ResolvePath(char* path, int a, int b, char* out);
-int __cdecl fcn_004488e0(char* path, int a, int b);
+int __cdecl d3_LoadObjectFile(char* path, int a, int b);
 void __cdecl d3_SetNodePosition(int h, void* p);
 void __cdecl d3_SetObjectRotation(int h, void* p);
 void __cdecl d3_SetObjectGroundPosition(int h, void* p);
@@ -5143,7 +5143,7 @@ load:
 	pos[0] = *(int*) (request + 0x19);
 	pos[1] = *(int*) (request + 0x1d);
 	pos[2] = *(int*) (request + 0x21);
-	handle = fcn_004488e0(path, 0, 0);
+	handle = d3_LoadObjectFile(path, 0, 0);
 	if (handle == 0) {
 		sprintf(name,
 		        "cm_ExCreateGeb(): Could not load 3D-Object-Group '%s'...",

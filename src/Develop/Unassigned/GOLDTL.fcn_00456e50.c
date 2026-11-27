@@ -25,7 +25,7 @@ extern float g_1052c00[16];
 void __cdecl fcn_004372d0(int, int, int, int, int);
 void __cdecl d3_ProjectNodeShadows(char*);
 
-void __cdecl fcn_00456e50(void)
+void __cdecl d3_BuildSceneShadows(void)
 {
 	char* p;
 

@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0042b2c0 */
-int __cdecl fcn_0042b2c0(void)
+int __cdecl msx_CountActiveWaveDrivers(void)
 {
 	int a;
 	int n;

@@ -7,7 +7,7 @@ extern float g_10432a4;
 
 char __cdecl fcn_0043a820(char*, char*, float*, float*);
 
-char __cdecl fcn_00443b00(char* e, char* ctx)
+char __cdecl d3_PickClosestObjectCallback(char* e, char* ctx)
 {
 	float v[4];
 	float w;

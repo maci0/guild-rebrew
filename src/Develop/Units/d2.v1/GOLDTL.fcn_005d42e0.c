@@ -31,7 +31,7 @@ extern double g_662c38;
 
 int __cdecl d2_TutorialAllowsFlag(int a);
 void __cdecl fcn_0057e880(int a, int b, int c, int d);
-char* __cdecl fcn_00470820(int a, int b, char* name);
+char* __cdecl d2_LoadForm(int a, int b, char* name);
 void __cdecl d2_CenterDialogWindows(char* dlg);
 void __cdecl d2_SetForm(char* dlg, int page);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
@@ -87,7 +87,7 @@ void __cdecl fcn_005d42e0(void)
 		return;
 	}
 	fcn_0057e880(0xc, 0, 0, 0);
-	dlg = fcn_00470820(0, 0, "panel\\statistik_stadt");
+	dlg = d2_LoadForm(0, 0, "panel\\statistik_stadt");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 1);

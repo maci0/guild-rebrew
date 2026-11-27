@@ -49,7 +49,7 @@ extern int d2_CurrentElementId;
 
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_DrawPanelFrame(int, int, int);
@@ -61,7 +61,7 @@ int __cdecl fcn_00502cd0(int, int, int, int, int);
 int __cdecl io_AppendText(int, ...);
 void __cdecl fcn_00594340(void);
 void __cdecl d2_SyncProduktionSlotGrid(char*, int);
-void __cdecl fcn_00597940(int, int, int, char*, int);
+void __cdecl d2_DrawProduktionSlotGrid(int, int, int, char*, int);
 
 /* Transport dialog: shows the export/import pick for building b and
  * redraws whenever the direction changes. */
@@ -98,7 +98,7 @@ void __cdecl fcn_0059e090(char* b)
 			if (h != -1) {
 				d2_DestroyForm(h);
 			}
-			h = fcn_00470820(0, 0, "Handel\\Handel_Transport");
+			h = d2_LoadForm(0, 0, "Handel\\Handel_Transport");
 			d2_CenterDialogWindows(h);
 			d2_SetForm(h, 0);
 			d2_DrawPanelFrame(d2_CurrentWindowId, 0x70b, 0x73f);
@@ -141,7 +141,7 @@ void __cdecl fcn_0059e090(char* b)
 		}
 		slot->alpha = (float) d;
 		d2_SyncProduktionSlotGrid(b, grp);
-		fcn_00597940(h, 1, 0, b, grp);
+		d2_DrawProduktionSlotGrid(h, 1, 0, b, grp);
 		if (g_100f1dc == 2) {
 			if (d2_CurrentElementId == a) {
 				sel = 1;

@@ -4,7 +4,7 @@ extern int g_10405cc;
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_67bd2c;
 
-void __cdecl fcn_0045bfb0(char* p);
+void __cdecl d3_ReleaseTexture(char* p);
 void __cdecl m_FreeTracked(void* p);
 
 /* ADDRESS: GOLDTL 0x0045c1e0 */
@@ -16,7 +16,7 @@ void __cdecl fcn_0045c1e0(void)
 	p = g_104049c;
 	for (i = 0; i < g_10404a0; i++, p += 0x70) {
 		while (*(int*) (p + 0x40) > 0) {
-			fcn_0045bfb0(p);
+			d3_ReleaseTexture(p);
 		}
 	}
 	m_FreeTracked(g_104049c);

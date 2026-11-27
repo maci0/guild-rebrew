@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x00455f60 */
-void __cdecl fcn_00455f60(int z, int dz, int mode, int w, unsigned char* dst)
+void __cdecl d3_RasterizeFlatHeightSpan(int z, int dz, int mode, int w, unsigned char* dst)
 {
 	int i;
 	unsigned char v;

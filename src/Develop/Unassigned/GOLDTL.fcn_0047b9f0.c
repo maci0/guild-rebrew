@@ -6,17 +6,17 @@ typedef struct {
 	unsigned int color;
 	float u;
 	float v;
-} fcn_0047b9f0_vertex;
+} D2_QUAD_VERTEX;
 // SIZE 0x1c
 
 
 /* ADDRESS: GOLDTL 0x0047b9f0 */
-void __cdecl fcn_0047b9f0(fcn_0047b9f0_vertex* v, unsigned char a)
+void __cdecl d2_SetQuadAlpha(D2_QUAD_VERTEX* verts, unsigned char alpha)
 {
 	int i;
 
 	for (i = 0; i < 6; i++) {
-		v[i].color &= 0xffffff;
-		v[i].color |= a << 24;
+		verts[i].color &= 0xffffff;
+		verts[i].color |= alpha << 24;
 	}
 }

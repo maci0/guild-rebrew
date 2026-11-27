@@ -1,7 +1,7 @@
-struct s_772500;
+struct D2_RES_BOUNDS;
 
 // SIZE 0x54
-struct s_772500 {
+struct D2_RES_BOUNDS {
 	char pad[0x50];
 	short x;
 	short y;
@@ -28,12 +28,12 @@ extern s_1015f4c g_1015f4c[];
 
 
 /* ADDRESS: GOLDTL 0x005340f0 */
-void __cdecl fcn_005340f0(int i)
+void __cdecl d2_InitWindowBounds(int i)
 {
-	struct s_772500* p;
+	struct D2_RES_BOUNDS* p;
 
 	if (((struct s_1015f4c*)g_1015f4c)[i].idx != -1) {
-		p = &((struct s_772500*)g_772500)[((struct s_1015f4c*)g_1015f4c)[i].idx];
+		p = &((struct D2_RES_BOUNDS*)g_772500)[((struct s_1015f4c*)g_1015f4c)[i].idx];
 		((struct s_1015f4c*)g_1015f4c)[i].x = p->x;
 		((struct s_1015f4c*)g_1015f4c)[i].y = p->y;
 		((struct s_1015f4c*)g_1015f4c)[i].w = 0x18;

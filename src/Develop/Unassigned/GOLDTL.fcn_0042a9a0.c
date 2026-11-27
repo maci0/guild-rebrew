@@ -3,13 +3,13 @@
 int __cdecl msx_FindSampleHandleIndex(int);
 typedef int (__stdcall* f)(int, int);
 
-int __cdecl msx_SetSamplePan(int a1, int a2)
+int __cdecl msx_SetSamplePan(int sampleHandle, int pan)
 {
 	int r = 0;
 
 	if (*(int*) 0x6b7f90 != 0) {
-		if (msx_FindSampleHandleIndex(a1) >= 0) {
-			(*(f*) 0x006623e4)(a1, a2);
+		if (msx_FindSampleHandleIndex(sampleHandle) >= 0) {
+			(*(f*) 0x006623e4)(sampleHandle, pan);
 		} else {
 			r = -1;
 		}

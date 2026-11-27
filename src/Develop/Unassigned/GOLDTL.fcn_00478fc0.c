@@ -24,8 +24,8 @@ extern int g_67d96c;
 extern int g_100f1bc;
 
 void __cdecl d2_StoreShapeSize(int, int, Surf*, Spr*);
-void __cdecl fcn_004774e0(int, int, int, Spr*);
-void __cdecl fcn_0047a320(int, int, int, Spr*);
+void __cdecl d2_ClearLastSpriteSize(int, int, int, Spr*);
+void __cdecl d2_BlitRleSprite(int, int, int, Spr*);
 void __cdecl d2_ClearDrawnShapeSize(int, int, int, Spr*);
 void __cdecl d2_ClearDrawnSpriteSize(int, int, int, Spr*);
 
@@ -55,11 +55,11 @@ int __cdecl d2_BlitShape(int x, int y, Surf* s, Spr* spr)
 						return 1;
 					case 1:
 						if (x < d2_ClipLeft) {
-							fcn_004774e0(x, y, s->bits, spr);
+							d2_ClearLastSpriteSize(x, y, s->bits, spr);
 						} else if (right > d2_ClipRight) {
-							fcn_004774e0(x, y, s->bits, spr);
+							d2_ClearLastSpriteSize(x, y, s->bits, spr);
 						} else {
-							fcn_0047a320(x, y, s->bits, spr);
+							d2_BlitRleSprite(x, y, s->bits, spr);
 						}
 						return 1;
 					case 2:

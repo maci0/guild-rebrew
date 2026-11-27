@@ -3,7 +3,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 int __cdecl msx_FindWaveDriverIndex(char*);
 
-int __cdecl fcn_0042b140(char* audioDevice)
+int __cdecl msx_FindFreeSampleSlot(char* audioDevice)
 {
 	int i;
 	int j;

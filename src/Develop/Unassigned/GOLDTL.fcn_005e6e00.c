@@ -12,7 +12,7 @@ int __cdecl gm_AmountToUnits(int, unsigned char);
 int __cdecl fcn_0050b750(int, int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_RandomMod(unsigned short);
-int __cdecl fcn_00470820(int, int, char *);
+int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_FormatTextBuffer(char *, int, ...);
 int __cdecl io_AppendText(char *, ...);
@@ -27,7 +27,7 @@ void __cdecl fcn_005e6d10(int);
 int __cdecl fcn_00526120(char *, int);
 void __cdecl d2_SetFormVisibility(int, int);
 int __cdecl fcn_005e7e30(void);
-void __cdecl fcn_005e7b70(int, int, void *);
+void __cdecl d2_LayoutCardGameRow(int, int, void *);
 int __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetControlValue(int);
 int __cdecl fcn_004a8750(int);
@@ -75,7 +75,7 @@ int __cdecl fcn_005e6e00(void)
         case 1:
             if (previous != 1) {
                 previous = 1;
-                fcn_005e7b70(1, 0, 0); fcn_005e7b70(2, 0, 0); fcn_005e7b70(0, 0, 0);
+                d2_LayoutCardGameRow(1, 0, 0); d2_LayoutCardGameRow(2, 0, 0); d2_LayoutCardGameRow(0, 0, 0);
             }
             d2_SetForm(D(0x6ad568), 4);
             if (!D(0x776650)) {
@@ -100,9 +100,9 @@ int __cdecl fcn_005e6e00(void)
             if (D(0x776650)) {
                 io_FormatTextBuffer(text, 0x425a, D(0x77664c)); io_AppendText(text);
             } else io_AppendText((char *)D(0x14b5c84));
-            fcn_005e7b70(1, 3, (void *)0x7765e0);
-            fcn_005e7b70(2, 3, (void *)0x776614);
-            fcn_005e7b70(0, 3, (void *)0x7765ac);
+            d2_LayoutCardGameRow(1, 3, (void *)0x7765e0);
+            d2_LayoutCardGameRow(2, 3, (void *)0x776614);
+            d2_LayoutCardGameRow(0, 3, (void *)0x7765ac);
             flags = gm_StepCardGameRound();
             break;
         case 3:
@@ -113,9 +113,9 @@ int __cdecl fcn_005e6e00(void)
                         D(0x77664c) = fcn_0050b750(choice, g_773d75);
                     }
                     flags = gm_StepCardGameRound();
-                    fcn_005e7b70(0, 4, (void *)0x7765ac);
-                    fcn_005e7b70(1, 4, (void *)0x7765e0);
-                    fcn_005e7b70(2, 4, (void *)0x776614);
+                    d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
+                    d2_LayoutCardGameRow(1, 4, (void *)0x7765e0);
+                    d2_LayoutCardGameRow(2, 4, (void *)0x776614);
                 } else if (D(0x6ad570) == D(0x67d370)) g_774654 = 1;
             }
             break;
@@ -128,9 +128,9 @@ int __cdecl fcn_005e6e00(void)
             } else io_AppendText((char *)D(0x14b5c84));
             if (previous != 4) {
                 previous = 4;
-                fcn_005e7b70(1, 4, (void *)0x7765e0);
-                fcn_005e7b70(2, 4, (void *)0x776614);
-                fcn_005e7b70(0, 4, (void *)0x7765ac);
+                d2_LayoutCardGameRow(1, 4, (void *)0x7765e0);
+                d2_LayoutCardGameRow(2, 4, (void *)0x776614);
+                d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
             }
             flags = gm_StepCardGameRound();
             break;
@@ -142,9 +142,9 @@ int __cdecl fcn_005e6e00(void)
                         D(0x77664c) = fcn_0050b750(choice, g_773d75);
                     }
                     flags = gm_StepCardGameRound();
-                    fcn_005e7b70(0, 4, (void *)0x7765ac);
-                    fcn_005e7b70(1, 4, (void *)0x7765e0);
-                    fcn_005e7b70(2, 4, (void *)0x776614);
+                    d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
+                    d2_LayoutCardGameRow(1, 4, (void *)0x7765e0);
+                    d2_LayoutCardGameRow(2, 4, (void *)0x776614);
                 } else if (D(0x6ad570) == D(0x67d370)) g_774654 = 1;
             }
             break;
@@ -181,15 +181,15 @@ int __cdecl fcn_005e6e00(void)
                     if (D(D(0x1015ea0) + 0x38 + D(0x6ad588) * 0x2f4)) fcn_004a8750(0);
                     else if (D(D(0x1015ea0) + 0x38 + D(0x6ad58c) * 0x2f4)) fcn_004a8750(1);
                     flags = gm_StepCardGameRound();
-                    fcn_005e7b70(0, 4, (void *)0x7765ac);
-                    fcn_005e7b70(1, 4, (void *)0x7765e0);
-                    fcn_005e7b70(2, 4, (void *)0x776614);
+                    d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
+                    d2_LayoutCardGameRow(1, 4, (void *)0x7765e0);
+                    d2_LayoutCardGameRow(2, 4, (void *)0x776614);
                 } else if (D(0x6ad578) == clk) {
                     d2_SetElementEnabled(D(0x6ad574), 0);
                     flags = gm_StepCardGameRound();
-                    fcn_005e7b70(0, 4, (void *)0x7765ac);
-                    fcn_005e7b70(1, 4, (void *)0x7765e0);
-                    fcn_005e7b70(2, 4, (void *)0x776614);
+                    d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
+                    d2_LayoutCardGameRow(1, 4, (void *)0x7765e0);
+                    d2_LayoutCardGameRow(2, 4, (void *)0x776614);
                 } else if (D(0x6ad570) == clk) g_774654 = 1;
             }
             break;
@@ -219,9 +219,9 @@ int __cdecl fcn_005e6e00(void)
             if (D(0x776650)) {
                 io_FormatTextBuffer(text, 0x425a, D(0x77664c)); io_AppendText(text);
             } else io_AppendText((char *)D(0x14b5c84));
-            fcn_005e7b70(1, 5, (void *)0x7765e0);
-            fcn_005e7b70(2, 5, (void *)0x776614);
-            fcn_005e7b70(0, 5, (void *)0x7765ac);
+            d2_LayoutCardGameRow(1, 5, (void *)0x7765e0);
+            d2_LayoutCardGameRow(2, 5, (void *)0x776614);
+            d2_LayoutCardGameRow(0, 5, (void *)0x7765ac);
             flags = gm_StepCardGameRound();
             break;
         case 9:
@@ -232,15 +232,15 @@ int __cdecl fcn_005e6e00(void)
                         D(0x77664c) = fcn_0050b750(choice, g_773d75);
                     }
                     flags = gm_StepCardGameRound();
-                    fcn_005e7b70(0, 5, (void *)0x7765ac);
-                    fcn_005e7b70(1, 5, (void *)0x7765e0);
-                    fcn_005e7b70(2, 5, (void *)0x776614);
+                    d2_LayoutCardGameRow(0, 5, (void *)0x7765ac);
+                    d2_LayoutCardGameRow(1, 5, (void *)0x7765e0);
+                    d2_LayoutCardGameRow(2, 5, (void *)0x776614);
                 } else if (D(0x6ad570) == D(0x67d370)) g_774654 = 1;
             }
             break;
         case 10:
             gm_StepCardGameRound();
-            fcn_005e7b70(0, 5, (void *)0x7765ac); fcn_005e7b70(1, 5, (void *)0x7765e0); fcn_005e7b70(2, 5, (void *)0x776614);
+            d2_LayoutCardGameRow(0, 5, (void *)0x7765ac); d2_LayoutCardGameRow(1, 5, (void *)0x7765e0); d2_LayoutCardGameRow(2, 5, (void *)0x776614);
             d2_SetForm(D(0x6ad568), 4);
             if (!W(0x776658)) {
                 io_FormatTextBuffer(text, 0x4265, D(0x77665c) + 0x4266, D(0x776640));
@@ -258,7 +258,7 @@ int __cdecl fcn_005e6e00(void)
     fcn_005e6dd0();
     return 1;
     }
-    dialog = fcn_00470820(0, 0, (char *)0x6ad5f4);
+    dialog = d2_LoadForm(0, 0, (char *)0x6ad5f4);
     if (!dialog) return 0;
     d2_CenterDialogWindows(D(0x6ad568));
     io_FormatTextBuffer(text, 0x4239, 0x4238);

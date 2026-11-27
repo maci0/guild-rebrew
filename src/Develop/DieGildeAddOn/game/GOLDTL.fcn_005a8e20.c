@@ -35,7 +35,7 @@ extern char s_6aade4[];
 extern char s_6811b0[];
 extern char s_6b5c60[];
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 void __cdecl d2_AddWindowScrollButtons(int, int, int, int, int);
@@ -66,7 +66,7 @@ void __cdecl d2_OpenRathausGebInfo(void)
 
 	n = 0;
 	flag = 1;
-	dlg = fcn_00470820(0, 0, s_6aade4);
+	dlg = d2_LoadForm(0, 0, s_6aade4);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 2);
 	w = d2_CurrentWindowId;

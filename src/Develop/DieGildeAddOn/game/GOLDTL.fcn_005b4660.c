@@ -4,13 +4,13 @@
 #include "client_dialog_state.h"
 extern int main_LoopFlags;
 
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 int __cdecl io_AppendText(char*, ...);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(void*, int);
-float __cdecl fcn_004ff210(unsigned short, int);
+float __cdecl gm_ApplyEntityHealthDelta(unsigned short, int);
 void __cdecl d2_SetFormVisibility(int, int);
 void* __cdecl d2_OpenTargetPicker(void*, char*, int, int);
 void __cdecl cm_SendLogAction(char*);
@@ -42,7 +42,7 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 
 	flags = main_LoopFlags;
 	flags &= 0xffffffc7;
-	dialog = fcn_00470820(0, 0, "misc\\Messagebox_BIG");
+	dialog = d2_LoadForm(0, 0, "misc\\Messagebox_BIG");
 	io_AppendText("$Z$[%1N4$]$N$L", *(unsigned short*) e);
 	io_AppendText("Mode:%s$A", names[*(unsigned char*) (e + 2)]);
 	hKill = d2_GetWindowListItem(dialog, 0, io_AppendText("%it[Kill player]$A"));
@@ -53,7 +53,7 @@ void __cdecl d2_RunCharacterDebugDialog(char* e)
 	while (main_RunFrameLoop((void*) d2_RunCharacterDebugDialog, flags) != 0) {
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == hKill) {
-				fcn_004ff210(*(unsigned short*) e, -2000);
+				gm_ApplyEntityHealthDelta(*(unsigned short*) e, -2000);
 				g_774654 = 1;
 			} else if (d2_CurrentElementId == hShow) {
 				d2_SetFormVisibility(dialog, 0);

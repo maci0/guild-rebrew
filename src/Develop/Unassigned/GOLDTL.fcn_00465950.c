@@ -3,7 +3,7 @@
 extern char* g_772500;
 
 /* ADDRESS: GOLDTL 0x00465950 */
-int __cdecl fcn_00465950(const char* name)
+int __cdecl d2_FindResourceByName(const char* name)
 {
 	int i;
 

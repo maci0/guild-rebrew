@@ -22,11 +22,11 @@ extern int g_665f78[];
 extern int main_LoopFlags;
 
 int __cdecl gm_CalcBribeOrPriceScore(ENTITY_RECORD*, int, int, int, int*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 int __cdecl io_AppendText();
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl gm_CheckEntityStock(ENTITY_RECORD*, int, unsigned char);
@@ -55,11 +55,11 @@ int __cdecl d2_ConfirmRentAGrave(char* who, int k)
 	} else {
 		x = gm_CalcBribeOrPriceScore(((ENTITY_RECORD *)&((ENTITY_RECORD_VIEW *)g_7f4ca0)[g_774970]), 0xff, k, 1, &got);
 	}
-	h = fcn_00470820(0, 0, "Locations\\Friedhof\\Friedhof");
+	h = d2_LoadForm(0, 0, "Locations\\Friedhof\\Friedhof");
 	d2_SetOverlayAnimation(0, 0);
 	d2_CenterDialogWindows(h);
 	d2_SetForm(h, 0);
-	fcn_005340f0(d2_CurrentWindowId);
+	d2_InitWindowBounds(d2_CurrentWindowId);
 	d2_SetForm(h, 1);
 	if (*(unsigned short*) (who + 0x27) == g_774970) {
 		io_AppendText(0x410c, 0x4109, who, g_665f78[k]);

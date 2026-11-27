@@ -2,7 +2,7 @@ extern int main_LoopFlags;
 
 
 
-int __cdecl fcn_00470820(int, int, const char*);
+int __cdecl d2_LoadForm(int, int, const char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl io_AppendText(int);
 void __cdecl main_RunFrameLoop(int, int);
@@ -12,11 +12,11 @@ int __cdecl d2_OpenMessageBox(int a, char flags)
 	int h;
 
 	if (flags & 0x10) {
-		h = fcn_00470820(0, 0, "misc\\Messagebox_BIG");
+		h = d2_LoadForm(0, 0, "misc\\Messagebox_BIG");
 	} else if (flags & 0x20) {
-		h = fcn_00470820(0, 0, "misc\\Messagebox_VERY_BIG");
+		h = d2_LoadForm(0, 0, "misc\\Messagebox_VERY_BIG");
 	} else {
-		h = fcn_00470820(0, 0, "misc\\Messagebox");
+		h = d2_LoadForm(0, 0, "misc\\Messagebox");
 	}
 	d2_CenterDialogWindows(h);
 	io_AppendText(a);

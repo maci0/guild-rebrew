@@ -35,7 +35,7 @@ extern int d2_CurrentElementId;
 extern char g_6aae98[];
 
 int __cdecl amt_FindOfficeSlotByType(int, void*);
-int __cdecl fcn_00470820(int, int, char*);
+int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_SetForm(int, int);
@@ -100,7 +100,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 			if (prev != n) {
 				prev = n;
 				if (d == -1) {
-					d = fcn_00470820(0, 0, g_6aae98);
+					d = d2_LoadForm(0, 0, g_6aae98);
 					d2_CenterDialogWindows(d);
 					d2_SetOverlayAnimation(0, 0);
 					d2_SetForm(d, 1);

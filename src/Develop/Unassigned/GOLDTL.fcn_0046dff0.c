@@ -8,13 +8,13 @@ extern int g_67d3a0;
 extern int g_67d3a4;
 
 void __cdecl d2_RenderMarkupText(int, int);
-void __cdecl fcn_0046c310(int);
+void __cdecl d2_UpdateWindowScroll(int);
 void __cdecl d2_DrawWindowBackground(int, int);
 void __cdecl d2_SetElementEnabled(int, int);
 void __cdecl fcn_0046f940(int, char*);
 void __cdecl d2_FlushQueuedQuads(int, int, int);
-void __cdecl fcn_0047a040(int, int, int, int);
-void __cdecl fcn_0047cba0(int, int, int, int, int);
+void __cdecl d2_SetClipRect(int, int, int, int);
+void __cdecl d2_DrawSpriteFromSet(int, int, int, int, int);
 int __cdecl d2_GetResourceData(int);
 char* __cdecl itoa(int, char*, int);
 
@@ -95,7 +95,7 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 			fcn_0046f940(*(unsigned int*) (b + 0x3c0), buf);
 		}
 	}
-	fcn_0046c310(windowIndex);
+	d2_UpdateWindowScroll(windowIndex);
 	vert = a1;
 	if (!g_772554) {
 		if ((*(unsigned char*) (b + 0x14) & 1) || *(int*) (b + 0x3a0)) {
@@ -106,7 +106,7 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 	if (*(unsigned char*) (b + 0x14) & 0x10) {
 		d2_RenderMarkupText(vert, windowIndex);
 	}
-	fcn_0047a040(*(int*) (b + 4), *(int*) (b + 8), *(int*) (b + 0xc) + *(int*) (b + 4), *(int*) (b + 0x10) + *(int*) (b + 8));
+	d2_SetClipRect(*(int*) (b + 4), *(int*) (b + 8), *(int*) (b + 0xc) + *(int*) (b + 4), *(int*) (b + 0x10) + *(int*) (b + 8));
 	if ((*(unsigned char*) (b + 0x14) & 4) && !g_772554) {
 		surf = d2_GetResourceData(*(unsigned int*) (b + 0x288));
 		rec = *(int*) (b + 0x288);
@@ -117,10 +117,10 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 		if (rec != g_67d3a0 && rec != g_67d3a4) {
 			horiz = *(short*) (g_772500 + 0x50 + rec * 0x54);
 			cornerHeight = *(short*) (g_772500 + 0x52 + rec * 0x54);
-			fcn_0047cba0(*(int*) (b + 4), *(int*) (b + 8), a1, surf, 0);
-			fcn_0047cba0(*(int*) (b + 4) - horiz + w, *(int*) (b + 8), a1, surf, 1);
-			fcn_0047cba0(*(int*) (b + 4), *(int*) (b + 8) - cornerHeight + h, a1, surf, 2);
-			fcn_0047cba0(*(int*) (b + 4) - horiz + w, *(int*) (b + 8) - cornerHeight + h, a1, surf, 3);
+			d2_DrawSpriteFromSet(*(int*) (b + 4), *(int*) (b + 8), a1, surf, 0);
+			d2_DrawSpriteFromSet(*(int*) (b + 4) - horiz + w, *(int*) (b + 8), a1, surf, 1);
+			d2_DrawSpriteFromSet(*(int*) (b + 4), *(int*) (b + 8) - cornerHeight + h, a1, surf, 2);
+			d2_DrawSpriteFromSet(*(int*) (b + 4) - horiz + w, *(int*) (b + 8) - cornerHeight + h, a1, surf, 3);
 			step = *(short*) (g_772500 + 0x1a0 + *(int*) (b + 0x288) * 0x54);
 			h = *(short*) (g_772500 + 0x1a2 + *(int*) (b + 0x288) * 0x54);
 			count = (*(int*) (b + 0xc) - horiz * 2) / step;
@@ -128,8 +128,8 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 			i = 0;
 			if (count >= 1) {
 				do {
-					fcn_0047cba0(*(int*) (b + 4) + off + horiz, *(int*) (b + 8) + 10, a1, surf, i % 4 + 4);
-					fcn_0047cba0(*(int*) (b + 4) + off + horiz, (*(int*) (b + 8) - h) - 0xb + *(int*) (b + 0x10), a1, surf, i % 4 + 4);
+					d2_DrawSpriteFromSet(*(int*) (b + 4) + off + horiz, *(int*) (b + 8) + 10, a1, surf, i % 4 + 4);
+					d2_DrawSpriteFromSet(*(int*) (b + 4) + off + horiz, (*(int*) (b + 8) - h) - 0xb + *(int*) (b + 0x10), a1, surf, i % 4 + 4);
 					off += step;
 					i++;
 				} while (i < count);
@@ -142,15 +142,15 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 				while (1) {
 					if (i) {
 						if (i == count - 1) {
-							fcn_0047cba0(*(int*) (b + 4) + 10, *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, 9);
-							fcn_0047cba0((*(int*) (b + 4) - step) - 10 + *(int*) (b + 0xc), *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, 9);
+							d2_DrawSpriteFromSet(*(int*) (b + 4) + 10, *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, 9);
+							d2_DrawSpriteFromSet((*(int*) (b + 4) - step) - 10 + *(int*) (b + 0xc), *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, 9);
 						} else {
-							fcn_0047cba0(*(int*) (b + 4) + 10, *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, i % 4 + 10);
-							fcn_0047cba0((*(int*) (b + 4) - step) - 10 + *(int*) (b + 0xc), *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, (i - 1) % 4 + 10);
+							d2_DrawSpriteFromSet(*(int*) (b + 4) + 10, *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, i % 4 + 10);
+							d2_DrawSpriteFromSet((*(int*) (b + 4) - step) - 10 + *(int*) (b + 0xc), *(int*) (b + 8) + vert * i + cornerHeight, a1, surf, (i - 1) % 4 + 10);
 						}
 					} else {
-						fcn_0047cba0(*(int*) (b + 4) + 10, *(int*) (b + 8) + cornerHeight, a1, surf, 8);
-						fcn_0047cba0((*(int*) (b + 4) - step) - 10 + *(int*) (b + 0xc), *(int*) (b + 8) + cornerHeight, a1, surf, 8);
+						d2_DrawSpriteFromSet(*(int*) (b + 4) + 10, *(int*) (b + 8) + cornerHeight, a1, surf, 8);
+						d2_DrawSpriteFromSet((*(int*) (b + 4) - step) - 10 + *(int*) (b + 0xc), *(int*) (b + 8) + cornerHeight, a1, surf, 8);
 					}
 					i++;
 					if (i >= count) {
@@ -159,16 +159,16 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 				}
 			}
 		} else {
-			fcn_0047cba0(*(int*) (b + 4), *(int*) (b + 8), a1, surf, 0);
-			fcn_0047cba0(*(int*) (b + 4) - 8 + w, *(int*) (b + 8), a1, surf, 1);
-			fcn_0047cba0(*(int*) (b + 4), *(int*) (b + 8) - 8 + h, a1, surf, 2);
-			fcn_0047cba0(*(int*) (b + 4) - 8 + w, *(int*) (b + 8) - 8 + h, a1, surf, 3);
+			d2_DrawSpriteFromSet(*(int*) (b + 4), *(int*) (b + 8), a1, surf, 0);
+			d2_DrawSpriteFromSet(*(int*) (b + 4) - 8 + w, *(int*) (b + 8), a1, surf, 1);
+			d2_DrawSpriteFromSet(*(int*) (b + 4), *(int*) (b + 8) - 8 + h, a1, surf, 2);
+			d2_DrawSpriteFromSet(*(int*) (b + 4) - 8 + w, *(int*) (b + 8) - 8 + h, a1, surf, 3);
 			count = (w - 0x10) >> 3;
 			i = 0;
 			if (count >= 1) {
 				do {
-					fcn_0047cba0(*(int*) (b + 4) + 8 + i * 8, *(int*) (b + 8), a1, surf, 5);
-					fcn_0047cba0(*(int*) (b + 4) + 8 + i * 8, *(int*) (b + 8) - 8 + h, a1, surf, 8);
+					d2_DrawSpriteFromSet(*(int*) (b + 4) + 8 + i * 8, *(int*) (b + 8), a1, surf, 5);
+					d2_DrawSpriteFromSet(*(int*) (b + 4) + 8 + i * 8, *(int*) (b + 8) - 8 + h, a1, surf, 8);
 					i++;
 				} while (i < count);
 			}
@@ -176,21 +176,21 @@ void __cdecl d2_DrawWindow(int windowIndex, int a1)
 			i = 0;
 			if (count >= 1) {
 				do {
-					fcn_0047cba0(*(int*) (b + 4), *(int*) (b + 8) + 8 + i * 8, a1, surf, 0xb);
-					fcn_0047cba0(*(int*) (b + 4) - 8 + w, *(int*) (b + 8) + 8 + i * 8, a1, surf, 0xd);
+					d2_DrawSpriteFromSet(*(int*) (b + 4), *(int*) (b + 8) + 8 + i * 8, a1, surf, 0xb);
+					d2_DrawSpriteFromSet(*(int*) (b + 4) - 8 + w, *(int*) (b + 8) + 8 + i * 8, a1, surf, 0xd);
 					i++;
 				} while (i < count);
 			}
 			if ((char) (*(unsigned int*) (b + 0x14) >> 8) < 0) {
-				fcn_0047cba0(*(int*) (b + 4) - 2, *(int*) (b + 8) - 2, a1, surf, 0x10);
-				fcn_0047cba0(*(int*) (b + 4) - 6 + w, *(int*) (b + 8) - 2, a1, surf, 0x10);
-				fcn_0047cba0(*(int*) (b + 4) - 2, *(int*) (b + 8) - 6 + h, a1, surf, 0x10);
-				fcn_0047cba0(*(int*) (b + 4) - 6 + w, *(int*) (b + 8) - 6 + h, a1, surf, 0x10);
+				d2_DrawSpriteFromSet(*(int*) (b + 4) - 2, *(int*) (b + 8) - 2, a1, surf, 0x10);
+				d2_DrawSpriteFromSet(*(int*) (b + 4) - 6 + w, *(int*) (b + 8) - 2, a1, surf, 0x10);
+				d2_DrawSpriteFromSet(*(int*) (b + 4) - 2, *(int*) (b + 8) - 6 + h, a1, surf, 0x10);
+				d2_DrawSpriteFromSet(*(int*) (b + 4) - 6 + w, *(int*) (b + 8) - 6 + h, a1, surf, 0x10);
 			}
 		}
 	}
 	if (*(int*) (b + 0x280)) {
 		*(int*) (b + 0x280) = *(int*) (b + 0x280) - 1;
 	}
-	fcn_0047a040(0, 0, g_1040494, d2_ScreenHeight);
+	d2_SetClipRect(0, 0, g_1040494, d2_ScreenHeight);
 }

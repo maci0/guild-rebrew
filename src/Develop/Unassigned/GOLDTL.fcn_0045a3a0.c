@@ -1,10 +1,10 @@
 #include <string.h>
 
 #include "Develop/DieGildeAddOn/game/game_data.h"
-int __cdecl fcn_0045a2e0(int x, int y, int* img);
+int __cdecl d3sm_GetCellMaterial(int x, int y, int* img);
 
 /* ADDRESS: GOLDTL 0x0045a3a0 */
-void __cdecl fcn_0045a3a0(int* text, int* fmt)
+void __cdecl d3sm_BuildFromTerrain(int* text, int* fmt)
 {
 	unsigned int width;
 	unsigned int count;
@@ -95,7 +95,7 @@ void __cdecl fcn_0045a3a0(int* text, int* fmt)
 				}
 				for (yy = y0; yy < endy; yy++) {
 					for (xx = x0; xx < endx; xx++) {
-						widths[fcn_0045a2e0(xx, yy, text)]++;
+						widths[d3sm_GetCellMaterial(xx, yy, text)]++;
 					}
 				}
 				best = 0;
@@ -126,7 +126,7 @@ void __cdecl fcn_0045a3a0(int* text, int* fmt)
 			    * *(float*) ((char*) text + 0x84)
 			    + *(float*) ((char*) text + 0x54)
 			    - *(float*) (fmt + 1)) * ratio);
-			*(int*) ((char*) fmt[9] + dst * 0x1c) = fcn_0045a2e0(x, y, text);
+			*(int*) ((char*) fmt[9] + dst * 0x1c) = d3sm_GetCellMaterial(x, y, text);
 		}
 		srcrow += width;
 		outrow += lines * count;

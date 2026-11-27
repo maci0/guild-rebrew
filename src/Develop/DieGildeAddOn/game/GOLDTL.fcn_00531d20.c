@@ -18,7 +18,7 @@ extern char g_6b5c60[];
 
 unsigned short __cdecl fcn_0042e410(int a);
 int __cdecl he_StartHandlungSearch(int n, ...);
-int __cdecl fcn_00506380(int a, int b, int c, int d);
+int __cdecl gm_GetEntityUiFlags(int a, int b, int c, int d);
 int __cdecl ch_FindCharacterByKey(int a, ...);
 int __cdecl fcn_00507c30(int a);
 int __cdecl gm_MapEntityStatRange(int a);
@@ -67,7 +67,7 @@ void __cdecl d2_UpdateHoverTooltip(void)
 	if (sel != 0)
 		kind = &((struct Building_531d20*) lpGebaeudePROT)[*sel];
 	if (g_7746b4 == 0
-	    || (fcn_00506380(g_774970, 0, 0, g_7746b4), g_7746b4 == 0))
+	    || (gm_GetEntityUiFlags(g_774970, 0, 0, g_7746b4), g_7746b4 == 0))
 		rec = g_7746a4 != 0 ? ch_FindCharacterByKey(g_7746a4) : 0;
 	else
 		rec = *(int*) (g_7746b4 + 0x184);

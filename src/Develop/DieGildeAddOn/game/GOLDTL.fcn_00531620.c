@@ -58,21 +58,21 @@ void __cdecl fcn_00414c30(int, int);
 void* __cdecl evt_FindScriptById(int);
 int __cdecl evt_RequestScriptExit(char*);
 int __cdecl d3_FindSceneObject(char*, int, char*, char*);
-char __cdecl fcn_0045bad0(int, int, int, int*, int*);
+char __cdecl d3sm_RaycastScreenPoint(int, int, int, int*, int*);
 void __cdecl d2_AddDisplayCounter(int, int);
 void __cdecl ResetDisplayCounters(void);
 void __cdecl d3snd_PlaySelectedObjectClickSound(void);
 void __cdecl cm_RequestWalkOnPath(int, int, int, int);
 void __cdecl cm_SendCancelCharacterActions(int);
 void __cdecl cm_RequestUseGate(int, int, int);
-int __cdecl fcn_00506380(int, unsigned char*, unsigned short*, int);
+int __cdecl gm_GetEntityUiFlags(int, unsigned char*, unsigned short*, int);
 void __cdecl he_AssignActionSlot(int, int, int, int);
 void __cdecl sv_ClearObjectSelection(void);
 void __cdecl he_RedirectStreifeSelection(void);
 int __cdecl init_EnsureObjektSceneContext(char*);
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char*);
 void __cdecl d3_BeginSelectionBox(void);
-void __cdecl fcn_005345a0(void);
+void __cdecl d3_ClearSelectionBox(void);
 int __cdecl fcn_0064d41a(char*, char*, ...);
 
 /* ADDRESS: GOLDTL 0x00531620 */
@@ -114,7 +114,7 @@ void __cdecl fcn_00531620(void)
 	}
 	if (d3_SelectionBoxActive != 0) {
 		d3snd_PlaySelectedObjectClickSound();
-		fcn_005345a0();
+		d3_ClearSelectionBox();
 		if (g_14ce8d4 != 0) {
 			goto L684;
 		}
@@ -159,7 +159,7 @@ L6d3:
 		if (s->f8 == 0) {
 			continue;
 		}
-		if ((fcn_00506380(g_774970, 0, 0, (int) s) & 0x800) == 0) {
+		if ((gm_GetEntityUiFlags(g_774970, 0, 0, (int) s) & 0x800) == 0) {
 			continue;
 		}
 		if (s->owner == 0) {
@@ -183,7 +183,7 @@ L6d3:
 		u.offs[7][1] = 1;
 		u.offs[8][0] = -1;
 		u.offs[8][1] = 1;
-		if (fcn_0045bad0((int) map, g_14ce8c0, g_14ce8c2, &b, &a) == 0) {
+		if (d3sm_RaycastScreenPoint((int) map, g_14ce8c0, g_14ce8c2, &b, &a) == 0) {
 			continue;
 		}
 		cell = 0;

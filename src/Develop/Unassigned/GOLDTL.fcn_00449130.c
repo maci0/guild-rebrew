@@ -35,15 +35,15 @@ extern int d3_ActiveCamera;
 
 void __cdecl fcn_004127a0(int flag);
 void __cdecl fcn_004125c0(int x, int y);
-char __cdecl fcn_00448cc0(int obj, float* a1, float* a2, int g, char* a5,
+char __cdecl d3_StepObjectBasisTransform(int obj, float* a1, float* a2, int g, char* a5,
 	char* a6);
 void __cdecl d3_SetNodePosition(int h, char* p);
 void __cdecl d3_SetObjectRotation(int h, char* p);
 void __cdecl UpdateSceneLighting(int a);
-char __cdecl fcn_00448b10(void);
+char __cdecl d3_HandleDebugCameraHotkeys(void);
 
 /* ADDRESS: GOLDTL 0x00449130 */
-int __cdecl fcn_00449130(void)
+int __cdecl d3_UpdateFreeCameraInput(void)
 {
 	char v14;
 	char v15;
@@ -185,7 +185,7 @@ int __cdecl fcn_00449130(void)
 		rotate[1] = (float) ((unsigned char) g_14cf70f * 0x28) + v19;
 	}
 	if (v14 != 0 || v15 != 0) {
-		char v3 = fcn_00448cc0(g_1041d0c, rotate, motion, d3_ActiveCamera, v8, v7);
+		char v3 = d3_StepObjectBasisTransform(g_1041d0c, rotate, motion, d3_ActiveCamera, v8, v7);
 		v15 = (char) ((unsigned char) v3 >> 1);
 		v14 = v3 & 1;
 		if (v14 != 0)
@@ -202,7 +202,7 @@ label_4495a3:
 		UpdateSceneLighting(0);
 		v14 = 1;
 	}
-	if ((fcn_00448b10() | v14) == 0 && v15 == 0)
+	if ((d3_HandleDebugCameraHotkeys() | v14) == 0 && v15 == 0)
 		return 0;
 	return 1;
 }

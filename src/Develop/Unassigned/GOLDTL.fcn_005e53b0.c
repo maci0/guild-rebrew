@@ -34,11 +34,11 @@ extern char g_7f4ca0[], g_1015f4c[], g_6811b0[];
 extern char *g_14b59f0, *g_14b59f4;
 
 void __cdecl fcn_005263d0(int, int, int);
-int __cdecl fcn_00470820(int, int, char *);
+int __cdecl d2_LoadForm(int, int, char *);
 void __cdecl d2_SetOverlayAnimation(int, int);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_005340f0(int);
+void __cdecl d2_InitWindowBounds(int);
 void __cdecl d2_CreateButtonRow(int, int, int *, int, ...);
 int __cdecl gm_CountBuildingExtensions(char *);
 int __cdecl io_AppendText(int, ...);
@@ -82,11 +82,11 @@ void __cdecl fcn_005e53b0(void *arg)
         fcn_005263d0(g_14b59e8, g_14b59ec, 0);
         return;
     }
-    window = fcn_00470820(0, 0, "Locations\\zigeuner\\blutrache");
+    window = d2_LoadForm(0, 0, "Locations\\zigeuner\\blutrache");
     d2_SetOverlayAnimation(0, 0);
     d2_CenterDialogWindows(window);
     d2_SetForm(window, 0);
-    fcn_005340f0(d2_CurrentWindowId);
+    d2_InitWindowBounds(d2_CurrentWindowId);
     d2_SetForm(window, 1);
     items[0].x = (*(int *)(g_1015f4c + d2_CurrentWindowId * 972) - *(short *)(g_772500 + 0x1ebd8)) / 2;
     items[0].y = 30;

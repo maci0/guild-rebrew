@@ -4,7 +4,7 @@
 
 int __cdecl fcn_00476850(int);
 
-void __cdecl fcn_00472a50(void)
+void __cdecl d2_SweepFadeOverlays(void)
 {
 	int p;
 	for (p = 0x1015ec0; p < 0x1015f40; p += 4) {

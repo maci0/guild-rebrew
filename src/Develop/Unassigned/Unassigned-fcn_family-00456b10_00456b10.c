@@ -10,7 +10,7 @@ struct IUnk {
 
 extern unsigned long g_14ce728;
 
-void __cdecl fcn_0045bfb0(int);
+void __cdecl d3_ReleaseTexture(int);
 typedef int(__stdcall* Fn1)(void* self);
 
 extern unsigned int g_10405fc;
@@ -29,7 +29,7 @@ void __cdecl fcn_00456b10(char* s)
 			p[0] = 0;
 			p[3] = 0;
 		}
-		fcn_0045bfb0(*(int*) s);
+		d3_ReleaseTexture(*(int*) s);
 		*(int*) s = 0;
 		*(int**) (s + 0xc) = 0;
 	}

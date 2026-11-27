@@ -21,8 +21,8 @@ extern int g_6b89b8;
 extern char g_6b89bd;
 extern char g_67bcb0[];
 
-void __cdecl fcn_0045bfb0(int);
-int __cdecl fcn_0045d0d0(char*, unsigned int, int, int, Col, int, int, char);
+void __cdecl d3_ReleaseTexture(int);
+int __cdecl d3_CreateTexture(char*, unsigned int, int, int, Col, int, int, char);
 typedef struct
 {
 	int f00;
@@ -52,14 +52,14 @@ int __cdecl fcn_00456590(Tex* t, int* owner, char flag, unsigned int id, int x8)
 	t->owner = owner;
 	if (t->id != id || t->flag != flag) {
 		if (t->h != 0) {
-			fcn_0045bfb0(t->h);
+			d3_ReleaseTexture(t->h);
 		}
 		memset(&c, 0, sizeof(c));
 		c.c1 = 1;
 		t->id = id;
 		t->flag = flag;
 		c.a = 0x7f;
-		t->h = fcn_0045d0d0(g_67bcb0, id, g_6b89b8, g_6b89bd != 0, c, 0, 0, flag);
+		t->h = d3_CreateTexture(g_67bcb0, id, g_6b89b8, g_6b89bd != 0, c, 0, 0, flag);
 	}
 	return t->h;
 }

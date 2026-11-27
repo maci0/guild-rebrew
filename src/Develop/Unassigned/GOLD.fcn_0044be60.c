@@ -29,7 +29,7 @@ void __cdecl d3e_ReadSceneEvents(void*);
 char* __cdecl d3_GetNextSceneNode(char*);
 char* __cdecl fcn_0043d180(char*);
 void __cdecl d3_RegisterSceneObject(char*);
-void __cdecl fcn_0045e610(char*, int);
+void __cdecl d3sm_Build(char*, int);
 char* __cdecl d3sm_Create(int, int, int);
 void __cdecl d3sm_Destroy(char*);
 
@@ -206,7 +206,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 	if (g_6b8300 == 0) {
 		clone = *(char**) 0x633df8;
 		if (clone != 0) {
-			fcn_0045e610(clone, 0);
+			d3sm_Build(clone, 0);
 		} else {
 			(*(char**) 0x633df8) = d3sm_Create(0, -(*(int*) 0x633dcc), 1);
 		}
@@ -225,7 +225,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 	if (g_6b8300 != 0) {
 		*(char**) (universe + 0xac) = g_6b8300;
 	}
-	fcn_00461080(0, progress);
+	d3_ReloadAllTextures(0, progress);
 	g_6b86d4--;
 	if (filename != 0) {
 		strncpy(g_67a370, filename, 0x7f);
