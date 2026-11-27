@@ -21,7 +21,7 @@ void* __cdecl m_alloc(int size, char* reason);
 void __cdecl m_FreeTracked(void* p);
 char* __cdecl d3_FindTextureByName(const char* name);
 int __cdecl d3_LoadOrReuseTexture(char* name, unsigned int flags, unsigned int a3, unsigned int a4);
-void __cdecl fcn_0045ce90(void* obj);
+void __cdecl d3_LoadTextureSurfaceTl(void* obj);
 void __cdecl d3_AddRefTexture(void* tex, char all);
 void __cdecl d3_ReleaseTexture(int obj);
 int __cdecl d3_MapWaterRangeIndex(char* tile, int x, int id, unsigned char tag);
@@ -267,7 +267,7 @@ void __cdecl PrepareFloorWater(char* e)
 		if (v16 == 0) {
 			v16 = d3_LoadOrReuseTexture((char*) 0x67a718, 0xac, 0, 0);
 			if (v16 != 0) {
-				fcn_0045ce90((void*) v16);
+				d3_LoadTextureSurfaceTl((void*) v16);
 			}
 		}
 		for (; v9 < *(unsigned char*) (e + 0x8035); v9++) {

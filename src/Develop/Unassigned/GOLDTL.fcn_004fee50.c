@@ -6,7 +6,7 @@ void __cdecl cm_RequestChangeAttribute(void);
 extern unsigned int g_773d48;
 
 /* ADDRESS: GOLDTL 0x004fee50 */
-void __cdecl fcn_004fee50(char* o, int v)
+void __cdecl gm_SetEntityAge(char* o, int v)
 {
 	float f;
 	float x;

@@ -9,7 +9,7 @@ extern float g_664168;
 char* __cdecl gm_LookupEntityRecordById(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, int);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 int __cdecl cm_SendSetHE(int, char*);
 void __cdecl gm_AddTime(char*, int, int, int);
@@ -114,7 +114,7 @@ void __cdecl he_UpdateRobberyAction(char* action)
 			return;
 		}
 		if (hits != 0) {
-			dmg = fcn_0050b750(damage, g_773d75);
+			dmg = gm_ConvertUnitsToAmount(damage, g_773d75);
 			io_FormatTextBuffer(buf, 0x1a6a, dmg);
 			he_MessageBoxQuickjump(*(int*) ((char*) 0x7f4ca4 + *(unsigned short*) (action + 8) * 0x21c),
 			    -1, buf, 0, 0x5ec, *(int*) (ent + 1), -1, 0, 0);

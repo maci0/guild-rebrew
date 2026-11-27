@@ -38,7 +38,7 @@ void __cdecl cm_RequestLinkEvidence(int, int);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_PostEntityMessage(int, int, char*, int, int, char*);
 void __cdecl he_MessageBoxQuickjump(unsigned int, int, char*, int, int, int, int, int, char*);
@@ -209,7 +209,7 @@ label_1bc:
 			val = (int) gm_LookupEntityRecordById(*(int*) ((char *)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (actionRecord + 8)] + 4));
 			row = (int) ((int)&((ENTITY_RECORD*)g_7f4ca0)[(unsigned short) *(unsigned short*) (q + 8)]);
 			if (row != 0 && val != 0) {
-				ent = fcn_0050b750(gm_RandomMod(200) + 0x226, g_773d75);
+				ent = gm_ConvertUnitsToAmount(gm_RandomMod(200) + 0x226, g_773d75);
 				io_FormatTextBuffer(buf, 0x19ea, rec1, ent, *(unsigned short*) row);
 				he_PostEntityMessage(*(int*) (val + 4), *(int*) (val + 4), buf, 1, 0x5f0, s_6a6a60);
 				io_FormatTextBuffer(buf, 0x19eb, rec1, ent);

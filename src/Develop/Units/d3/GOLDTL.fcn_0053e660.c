@@ -9,7 +9,7 @@ struct vec4 {
 };
 
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
-char* __cdecl fcn_00442910(int, struct vec4*, char*, char*);
+char* __cdecl d3_CreateSceneModelObject(int, struct vec4*, char*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 
 char* __cdecl d3_CreateMapTableTowerMarker(float tx, float tz)
@@ -45,7 +45,7 @@ char* __cdecl d3_CreateMapTableTowerMarker(float tx, float tz)
 		v.x = (float)(v.x + tx * (1.0f / 700.0f) * dx);
 		v.z = (float)(tz * (1.0f / 750.0f) * dz + pz);
 	}
-	r = fcn_00442910(0, &v, p + 0x84, "sp_STADTTURM");
+	r = d3_CreateSceneModelObject(0, &v, p + 0x84, "sp_STADTTURM");
 	r[0x215] |= 1;
 	*(int*) (r + 0x220) = 4;
 	r[0x216] = (r[0x216] & 0xfd) | 1;

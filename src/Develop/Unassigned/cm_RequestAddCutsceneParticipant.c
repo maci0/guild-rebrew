@@ -1,7 +1,7 @@
 int __cdecl cm_EnqueueClientPacket(void *);
 
 /* ADDRESS: GOLDTL 0x004c59e0 */
-int __cdecl fcn_004c59e0(int a1, int a2)
+int __cdecl cm_RequestAddCutsceneParticipant(int a1, int a2)
 {
     char buf[0x9c];
 

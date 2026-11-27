@@ -3,7 +3,7 @@
 
 #include "spiel.h"
 
-int __cdecl fcn_00503f30(int a)
+int __cdecl gm_CheckStatInRange(int a)
 {
 	int r;
 	r = gm_MapEntityStatRange(a);

@@ -1,4 +1,4 @@
-struct rec_4cc590 {
+struct ALLOC_CHAR_RECORD {
 	char pad0[2];
 	char kind;
 	char pad3;
@@ -22,7 +22,7 @@ unsigned short __cdecl fcn_0050a7e0(int, int, int, int, int, int, int, int);
 char* __cdecl gm_FindRecordById(int);
 void __cdecl init_SpawnBuildingCharacter(int, int, int, int, int);
 char* __cdecl gm_AllocObjekt(int, int, int);
-void __cdecl ch_UpdateHeldObjectAttachment(struct rec_4cc590*);
+void __cdecl ch_UpdateHeldObjectAttachment(struct ALLOC_CHAR_RECORD*);
 
 
 /* ADDRESS: GOLDTL 0x004cc590 */
@@ -61,13 +61,13 @@ int __cdecl fcn_004cc590(unsigned char* request, char* response)
 	(*(char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_type) = 0xd;
 	if (request[0x21] != 0) {
 		gm_AllocObjekt((*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id), request[0x21], 1);
-		ch_UpdateHeldObjectAttachment(((struct rec_4cc590*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
+		ch_UpdateHeldObjectAttachment(((struct ALLOC_CHAR_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]));
 	}
 	cm_LastEntityId = (*(int*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id].entity_id);
 	if (response != 0) {
 		response[0] = 1;
 		response[1] = 1;
-		*(struct rec_4cc590**) (response + 6) = ((struct rec_4cc590*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]);
+		*(struct ALLOC_CHAR_RECORD**) (response + 6) = ((struct ALLOC_CHAR_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[id]);
 	}
 	return 0;
 }

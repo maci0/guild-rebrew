@@ -90,7 +90,7 @@ int __cdecl gm_StartFilteredEntitySearch(int, ...);
 int __cdecl gm_FindNearestEligibleEntity(unsigned char *, int);
 int __cdecl gm_CheckEntityType(unsigned char *);
 int __cdecl gm_JobToBuildingType(int);
-int __cdecl fcn_0050b750(int, char);
+int __cdecl gm_ConvertUnitsToAmount(int, char);
 int __cdecl gm_CalculateGebaeudeValue(unsigned char *, int);
 int __cdecl gm_GetTypeProductValue(int);
 void __cdecl amt_InitOfficeHolders(int);
@@ -315,7 +315,7 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 			}
 			q = cm_GetCommandResult(h);
 			cm_SendSetGebBesitzer(p->id, *(int *)(q + 4), *(int *)(q + 4));
-			count = fcn_0050b750(3000, g_773d75);
+			count = gm_ConvertUnitsToAmount(3000, g_773d75);
 			cm_RequestMoveCredits(*(int *)(q + 4), -1, g_773d75, count);
 			if (outer <= 0xf) {
 				handles[outer] = q;
@@ -332,7 +332,7 @@ void __cdecl gm_InitStartingEntitiesAndRelations(void)
 			}
 			cm_SendSellObjekt(p->id, -1, 0x135, 1, g_773d75, 0);
 			if (o->category == 5) {
-				count = fcn_0050b750(6000, g_773d75);
+				count = gm_ConvertUnitsToAmount(6000, g_773d75);
 				cm_RequestMoveCredits(*(int *)(q + 4), -1, g_773d75, count);
 			}
 			init_Betrieb((unsigned char *)p);

@@ -2,7 +2,7 @@
 // fcn_004f39b0 — count slots [p]==1 with [p-0xf]==a.
 
 /* ADDRESS: GOLDTL 0x004f5da0 */
-int __cdecl fcn_004f39b0(int a)
+int __cdecl gm_CountStraftatenForEntity(int a)
 {
 	int p;
 	int n;

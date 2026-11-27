@@ -5,7 +5,7 @@ extern int g_67a370;
 extern char g_930600[];
 extern char* ch_ContextCharacters[32];
 
-void __cdecl fcn_004da480(void)
+void __cdecl ch_CollectSceneContextCharacters(void)
 {
     int self;
     int n;

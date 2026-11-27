@@ -13,7 +13,7 @@ extern char* evt_CurrentScript;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040f800(char** a, unsigned char* v)
+int __cdecl evt_SetEmitterTriggerOnce(char** a, unsigned char* v)
 {
 	char* e;
 

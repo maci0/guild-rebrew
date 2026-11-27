@@ -3,7 +3,7 @@
 
 int __cdecl gv_CanHireGraveyardWorker(char* e, int* out);
 int* __cdecl gv_PickRandomFieldEntry(char* e);
-int* __cdecl fcn_004f1a10(char* e, int* r);
+int* __cdecl gv_LookupWorkerSlot(char* e, int* r);
 int __cdecl gm_GetEntitySlotIndex(int d, int* s);
 int __cdecl gv_SendAllocGraveyardWorker(char* e, int a, int b, int c, int d);
 
@@ -20,7 +20,7 @@ int __cdecl gv_AssignGraveyardField(char* e)
 	if (r == 0) {
 		return -1;
 	}
-	s = fcn_004f1a10(e, r);
+	s = gv_LookupWorkerSlot(e, r);
 	if (s == 0) {
 		return -1;
 	}

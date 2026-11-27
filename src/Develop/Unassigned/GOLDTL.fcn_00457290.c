@@ -79,7 +79,7 @@ typedef struct D3_SHADOW_MAP_COLOR {
 
 D3_SHADOW_MAP_TEX* __cdecl d3_LoadOrReuseTexture(char* name, D3_SHADOW_MAP_COLOR c, unsigned int flags,
                                  unsigned int flags2);
-void __cdecl fcn_0045ce90(D3_SHADOW_MAP_TEX* t);
+void __cdecl d3_LoadTextureSurfaceTl(D3_SHADOW_MAP_TEX* t);
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 void __cdecl d3_TransformDirection(char* node, float* in, float* out);
 int __cdecl CompareVector3WithinTolerance(float* a, float* b, float eps);
@@ -150,7 +150,7 @@ alloc:
 				t = d3_LoadOrReuseTexture((char*) 0x67bcb8, c, 0, 0);
 				rec->f0 = t;
 				if (t != 0 && t->f50 == 0) {
-					fcn_0045ce90(t);
+					d3_LoadTextureSurfaceTl(t);
 				}
 			} else {
 				D3_SHADOW_MAP_ENT* e;

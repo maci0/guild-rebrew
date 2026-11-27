@@ -51,7 +51,7 @@ void __cdecl cm_StepCommandQueue(void);
 void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl amt_GetOfficeGroup(int a);
 void __cdecl d2_RunOfficeListDialog(int, int, int, int, void*);
-void __cdecl fcn_0052f7a0(void);
+void __cdecl d2_NoopTargetPickerCallback(void);
 void __cdecl d2_ShowAmtInfo(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -158,7 +158,7 @@ int __cdecl d2_RunAmtsbewerbungDialog(char* who, int id)
 			}
 			else if (d2_CurrentElementId == hb) {
 				r = amt_GetOfficeGroup(id);
-				d2_RunOfficeListDialog(r, 0, 0, 0, fcn_0052f7a0);
+				d2_RunOfficeListDialog(r, 0, 0, 0, d2_NoopTargetPickerCallback);
 			}
 			else if (d2_CurrentElementId == hc) {
 				d2_ShowAmtInfo(id, 0);

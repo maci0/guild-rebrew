@@ -21,7 +21,7 @@ void __cdecl d3_DisposeSceneContext(int);
 int __cdecl d3sm_CreateMap(struct D3_FLOOR_HEADER*, int, int);
 void __cdecl d3_TraverseSceneObjects(int, int, int, void*);
 void __cdecl d3_BindBuildingSceneObjects(void);
-void __cdecl fcn_005224f0(void);
+void __cdecl d3_ClearSceneObjectActiveFlag(void);
 
 int __cdecl d3_LoadSceneAndTerrain(void* stream)
 {
@@ -46,7 +46,7 @@ int __cdecl d3_LoadSceneAndTerrain(void* stream)
 		((struct D3_FLOOR_HEADER*)g_6b8300)->mode = g_699b08;
 	}
 	d3_TraverseSceneObjects(g_67a370, 0, 0x1c0, (void*) d3_BindBuildingSceneObjects);
-	d3_TraverseSceneObjects(g_67a370, 0, 0xc0, (void*) fcn_005224f0);
+	d3_TraverseSceneObjects(g_67a370, 0, 0xc0, (void*) d3_ClearSceneObjectActiveFlag);
 	d3_SelectSceneContext(save, 0);
 	return 1;
 }

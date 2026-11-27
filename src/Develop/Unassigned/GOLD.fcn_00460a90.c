@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00460a90 */
-void __cdecl fcn_00460a90(unsigned char *s, unsigned char *p, unsigned char *q)
+void __cdecl d3_EncodeTextureFlags(unsigned char *s, unsigned char *p, unsigned char *q)
 {
 	unsigned char a;
 	unsigned char c;

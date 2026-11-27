@@ -46,7 +46,7 @@ int __cdecl gm_CalculateGebaeudeValue(int, int);
 int __cdecl gm_SumTreasury(unsigned short*);
 int __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_AmountToUnits(int, unsigned char);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendPacketFieldDelta(unsigned char, unsigned char, unsigned short, char*);
@@ -159,7 +159,7 @@ void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* repor
 		cm_SendRemoveLinkedObject(*(int*) (subjectRecord + 2), -1, *(int*) (p + 2));
 		p = gm_NextEntityQueryMatch();
 	}
-	cm_RequestMoveCredits(*(int*) (subjectRecord + 2), -1, g_773d75, fcn_0050b750(0x5dc, g_773d75));
+	cm_RequestMoveCredits(*(int*) (subjectRecord + 2), -1, g_773d75, gm_ConvertUnitsToAmount(0x5dc, g_773d75));
 	if (resetAttributes != 0) {
 		i = 100;
 		ui_f08 = 0x10;
@@ -210,7 +210,7 @@ void __cdecl gm_LiquidateEntityAssets(unsigned short* subjectRecord, char* repor
 		}
 		r = cm_SendSetAttribute();
 	}
-	io_FormatTextBuffer(reportText, 0x1c4f, *subjectRecord, fcn_0050b750(0x5dc, g_773d75));
+	io_FormatTextBuffer(reportText, 0x1c4f, *subjectRecord, gm_ConvertUnitsToAmount(0x5dc, g_773d75));
 	if (prev != 0) {
 		io_FormatTextBuffer(buf, s_6999a8, prev);
 		strcat(reportText, buf);

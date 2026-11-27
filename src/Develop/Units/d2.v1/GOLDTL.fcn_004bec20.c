@@ -14,7 +14,7 @@ int __cdecl d2_CreateWindowTextButton(int, int, int);
 char* __cdecl fcn_00502cd0(int, int, int, ...);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
-void __cdecl fcn_00476b60(void);
+void __cdecl d2_ResetSelectionAndInput(void);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_GetFormWindow(int, int);
 int __cdecl d2_AddElementToWindow(int, int, int, int);
@@ -70,7 +70,7 @@ unsigned int __cdecl d2_ChooseRoutingGood(int a0, int a1, unsigned int a2)
 		d2_AddToRadioGroup(k, v6);
 	}
 	d2_SelectRadioGroup(k, 0);
-	fcn_00476b60();
+	d2_ResetSelectionAndInput();
 	for (;;) {
 		n = k * 0x8c;
 		if (g_14ce8e0 != 0 || selection != 0 || (g_100f1dc != -1 && d2_CurrentElementId == closeButton)) {

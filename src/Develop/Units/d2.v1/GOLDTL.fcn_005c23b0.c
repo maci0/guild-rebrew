@@ -33,7 +33,7 @@ void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 void __cdecl cm_SendCopyEntityData(Msg5c23b0*);
 int __cdecl d2_ShowModalMessageBox(int, int);
 void __cdecl d2_DestroyForm(int);
@@ -75,7 +75,7 @@ void __cdecl d2_ShowSellGebaeudeDialog(char* e)
 			m.flags = 2;
 			m.key = *(int*) (g_7f4ca4 + g_774970 * 0x21c);
 			m.other = *(int*) (e + 1);
-			m.extra = fcn_0050b750(d2_GetControlValue(h), g_773d75);
+			m.extra = gm_ConvertUnitsToAmount(d2_GetControlValue(h), g_773d75);
 			cm_SendCopyEntityData(&m);
 			d2_ShowModalMessageBox(*(int*) 0x14ab238, 0);
 			g_774654 = 1;

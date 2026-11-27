@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-void __cdecl fcn_004e52a0(int a)
+void __cdecl cut_SetCutsceneRandSeed(int a)
 {
 	char buf[0x40];
 	*(int*) 0x92c4e0 = a;

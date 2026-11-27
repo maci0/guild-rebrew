@@ -2,7 +2,7 @@
 
 extern GuiObj g_00fb1020[];
 extern GuiEnt* g_00f8f080;
-void __cdecl fcn_00475a90(int index, int value);
+void __cdecl d2_ApplyElementEnabled(int index, int value);
 
 /* ADDRESS: GOLD 0x00475580 */
 void __cdecl d2_SetFormVisibility(int index, int value)
@@ -15,7 +15,7 @@ void __cdecl d2_SetFormVisibility(int index, int value)
         for (i = 0; i < 0x300; i++) {
             if (g_00f8f080[i].kind != 0 &&
                 g_00f8f080[i].f40 == (int) object) {
-                fcn_00475a90(i, value);
+                d2_ApplyElementEnabled(i, value);
             }
         }
         *(int*) ((char*) object + 0x1a0) = value;

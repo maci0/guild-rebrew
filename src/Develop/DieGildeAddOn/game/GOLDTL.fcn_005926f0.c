@@ -25,7 +25,7 @@ extern int __cdecl fcn_004727a0(void*, int);
 extern int __cdecl d2_SelectControl(void*);
 extern int __cdecl d2_SetBackdropResource(int);
 extern int __cdecl d2_ClearBackdropResource(void);
-extern int __cdecl fcn_004ce080(void);
+extern int __cdecl d2_ResetTextLog(void);
 extern int __cdecl gm_AreAllMultiplayerReady(void);
 extern void* __cdecl lb_GetPlayerList(void);
 extern int __cdecl d3_GetLocalSceneEntry(void);
@@ -66,7 +66,7 @@ int __cdecl d2_RunNetLobbySetup(void)
 	void* h;
 	int d;
 
-	fcn_004ce080();
+	d2_ResetTextLog();
 	n = 0x57;
 	/* Reviewed original fixed-EBX fill core, native 00592719..00592731;
 	 * the destination immediate and homed count also match native. */

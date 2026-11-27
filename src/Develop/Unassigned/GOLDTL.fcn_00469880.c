@@ -1,5 +1,5 @@
 #ifdef REBREW_GOLD
-void __cdecl fcn_0046e700(int slot);
+void __cdecl d2_DestroyGuiElement(int slot);
 #else
 void __cdecl d2_DestroyElement(int slot);
 #endif
@@ -8,7 +8,7 @@ void __cdecl d2_DestroyElement(int slot);
 void __cdecl d2_RemoveElement(int slot)
 {
 #ifdef REBREW_GOLD
-	fcn_0046e700(slot);
+	d2_DestroyGuiElement(slot);
 #else
 	d2_DestroyElement(slot);
 #endif

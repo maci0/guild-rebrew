@@ -13,7 +13,7 @@ extern Slot_1043340 g_1043340[64];
 extern int g_6b8300;
 extern int g_6b8484;
 
-void __cdecl fcn_00442e30(void);
+void __cdecl d3_ClearSceneState(void);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_DisposeObject(void*);
 void __cdecl d3_FreeMeshObject(void*);
@@ -59,7 +59,7 @@ char __cdecl d3_DisposeSceneContext(int idx)
 				}
 			}
 		} else {
-			fcn_00442e30();
+			d3_ClearSceneState();
 		}
 		ok = 1;
 	}

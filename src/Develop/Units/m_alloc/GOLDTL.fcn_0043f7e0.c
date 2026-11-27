@@ -22,7 +22,7 @@ typedef struct
 int __cdecl d3_ResolveTexturePath(char* name);
 void __cdecl d3_ReleaseTexture(int anim);
 int __cdecl d3_LoadOrReuseTexture(char* name, fcn_0043f7e0_Tint tint, int a, int b);
-void __cdecl fcn_0045ce90(int anim);
+void __cdecl d3_LoadTextureSurfaceTl(int anim);
 void __cdecl fcn_0064d530(char* dst, char* src, int n);
 
 /* ADDRESS: GOLDTL 0x0043f7e0 */
@@ -53,7 +53,7 @@ int __cdecl d3_LoadFloorTexture(fcn_0043f7e0_Floor* o, char* name, int slot)
 				tint.level = 0xff;
 				o->anims[slot] = d3_LoadOrReuseTexture(msg, tint, 0, 0);
 				if (o->anims[slot] != 0) {
-					fcn_0045ce90(o->anims[slot]);
+					d3_LoadTextureSurfaceTl(o->anims[slot]);
 					return slot;
 				}
 			} else {

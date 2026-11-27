@@ -47,7 +47,7 @@ int __cdecl gm_GetElapsedMinutes(char*, char*);
 void __cdecl d3_SelectSceneContext(int, int);
 int __cdecl d3_StepBallisticProjectile(Sefde0Entry*);
 int __cdecl d3_StepProjectileHeun(Sefde0Entry*);
-char* __cdecl fcn_00442910(int, float*, float*, char*);
+char* __cdecl d3_CreateSceneModelObject(int, float*, float*, char*);
 void __cdecl d3_DestroyObject(void*);
 void __cdecl d3_SetNodePosition(char*, int*);
 void __cdecl d3_ReleaseLightSlot(int);
@@ -106,7 +106,7 @@ void __cdecl d3_UpdateCannonProjectiles(void)
 						}
 						if (runs != 0) {
 							if (SLOTS[slot].objects[i] == 0) {
-								SLOTS[slot].objects[i] = fcn_00442910(0, (float*) 0x662d70, (float*) 0x662d80, (char*) 0x68ff14);
+								SLOTS[slot].objects[i] = d3_CreateSceneModelObject(0, (float*) 0x662d70, (float*) 0x662d80, (char*) 0x68ff14);
 								*(unsigned char*) (SLOTS[slot].objects[i] + 0x215) |= 1;
 								*(unsigned char*) (SLOTS[slot].objects[i] + 0x216) |= 3;
 								*(unsigned char*) (SLOTS[slot].objects[i] + 0x215) &= ~2;

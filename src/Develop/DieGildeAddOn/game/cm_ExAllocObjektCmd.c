@@ -4,7 +4,7 @@ int __cdecl cm_ResolveSpecialEntityId(char*, int);
 char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3);
 
 /* ADDRESS: GOLDTL 0x004c89c0 */
-int __cdecl fcn_004c89c0(char* packet, char* response)
+int __cdecl cm_ExAllocObjektCmd(char* packet, char* response)
 {
 	char* p;
 	int parentId;

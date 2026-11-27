@@ -29,7 +29,7 @@ void __cdecl d2_InitWindowBounds(int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 int __cdecl gm_AmountToUnits(int, unsigned char);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
 void __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl io_FormatTextBuffer(char*, char*, ...);
@@ -113,7 +113,7 @@ void __cdecl d2_RunKircheSpendenDialog(char* gebaeude)
 		if (g_100f1dc != -1) {
 			if (d2_CurrentElementId == a) {
 				d = d2_GetControlValue(c);
-				d = fcn_0050b750(d, g_773d75);
+				d = gm_ConvertUnitsToAmount(d, g_773d75);
 				if (gm_CheckEntityStock((char*) (g_774970 * 0x21c + (int) g_7f4ca0), d,
 					g_773d75) != 0) {
 					cm_RequestMoveCredits(*(int*) (h + 2), *(int*) (g_774970 * 0x21c + (int) g_7f4ca4),

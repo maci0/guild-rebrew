@@ -41,10 +41,10 @@ extern int g_5fb920;
 extern int g_5f927c;
 
 void __cdecl fcn_0042cbc0(char*, int);
-int __cdecl fcn_0042c9c0(char*);
+int __cdecl txt_LoadTextDefinitionList(char*);
 void __cdecl fcn_004222b0(char*);
 void __cdecl fcn_004b1f30(void);
-void __cdecl fcn_0046e980(void);
+void __cdecl d2_ResetDisplaySurface(void);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterWindowAxes(int, int);
 void __cdecl d2_MoveElement(int, short, int);
@@ -59,10 +59,10 @@ void __cdecl ls_FreeList774a78(void);
 float __cdecl eval_ObjektPreis2Credits(int, int);
 void __cdecl fcn_0042b720(void);
 int __cdecl fcn_00425bc0(int, int, int, int, int);
-void __cdecl fcn_00417650(int);
+void __cdecl d3snd_InitSoundSources(int);
 void __cdecl fcn_00417ec0(int);
 void __cdecl sb_SetSampleBasePath(char*);
-int __cdecl fcn_00426950(char*, int);
+int __cdecl sb_LoadSampleBankFromFile(char*, int);
 void __cdecl main_PreloadSound(char*);
 void __cdecl fcn_00423830(int, int, int);
 void __cdecl msx_ApplyAudioSettings(void);
@@ -102,12 +102,12 @@ int __cdecl main_OpenEngine(void)
 		fcn_0042cbc0(path, 0);
 	} else {
 		sprintf(path, "%s%s", g_624698, "die_gilde_add_on_text.def");
-		if (fcn_0042c9c0(path) == 0) {
+		if (txt_LoadTextDefinitionList(path) == 0) {
 			fcn_004222b0("main_OpenEngine(): could not open txt-engine!");
 		}
 	}
 	fcn_004b1f30();
-	fcn_0046e980();
+	d2_ResetDisplaySurface();
 	screen = d2_LoadForm(0, 0, "Misc\\Loading_main");
 	d2_CenterWindowAxes(g_fb1024[screen].image, 3);
 	d2_MoveElement(0, g_fb9070 - ((GOLD_GUI_WINDOW*) ((char*) g_f8f110 + 0x10))[g_fb1024[screen].window].height - 0x30,
@@ -135,11 +135,11 @@ int __cdecl main_OpenEngine(void)
 			g_6f257c = 0;
 			g_6f2578 = 0;
 		}
-		fcn_00417650(0x40);
+		d3snd_InitSoundSources(0x40);
 		fcn_00417ec0(0x30);
 		sprintf(path, "%ssfx\\", g_624698);
 		sb_SetSampleBasePath(path);
-		g_6f2400 = fcn_00426950("system.sbf", 0);
+		g_6f2400 = sb_LoadSampleBankFromFile("system.sbf", 0);
 		sprintf(ini, "%s\\include_sfx.ini", g_75e240);
 		main_PreloadSound(ini);
 	}
@@ -166,7 +166,7 @@ int __cdecl main_OpenEngine(void)
 	while ((*fade & 4) == 0) {
 		main_RunFrameLoop(0, 0x24087);
 	}
-	fcn_00476850(fade);
+	d2_FreeOverlaySprite(fade);
 	n = 0x8c;
 	/*
 	 * The reference zero-fills with the hand-written block-fill prelude no

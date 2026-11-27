@@ -2,7 +2,7 @@
 
 // fcn_00472a50 — table: if(n && *(int*)n&8) { fcn_00476850(n); *p=0; } else if(n) *(int*)n|=4.
 
-int __cdecl fcn_00476850(int);
+int __cdecl d2_FreeOverlaySprite(int);
 
 void __cdecl d2_SweepFadeOverlays(void)
 {
@@ -14,7 +14,7 @@ void __cdecl d2_SweepFadeOverlays(void)
 		if (n != 0) {
 			f = *(int*) n;
 			if (f & 8) {
-				fcn_00476850(n);
+				d2_FreeOverlaySprite(n);
 				*(int*) p = 0;
 			} else {
 				*(int*) n = f | 4;

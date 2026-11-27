@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00468fa0 */
-void __cdecl fcn_00468fa0(int x, int y, int w, int h, char* obj)
+void __cdecl d2_QueueDirtyRect(int x, int y, int w, int h, char* obj)
 {
 	int lim;
 	int right;

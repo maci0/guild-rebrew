@@ -156,7 +156,7 @@ int __cdecl main_RunFrameLoop(int, int);
 int __cdecl fcn_004c53b0(void);
 int __cdecl gm_CollectBuildingObjectSlots(int, void*);
 int __cdecl d2_PromptSoeldnerAmountDialog(void);
-int __cdecl fcn_0050b750(int, char);
+int __cdecl gm_ConvertUnitsToAmount(int, char);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 float __cdecl gm_GetWorkforceOutput(unsigned char*, int, int, int);
 int __cdecl gm_CheckEntityStock(int, int);
@@ -396,7 +396,7 @@ L69b6:
 			y = (int) e / f.v38;
 			x = y % 3;
 			trec = *(unsigned short*) 0x774970 * 0x21c;
-			t = fcn_0050b750((int) e, *(char*) 0x773d75);
+			t = gm_ConvertUnitsToAmount((int) e, *(char*) 0x773d75);
 			if (gm_CheckEntityStock((int) (trec + 0x7f4ca0), t) == 0)
 				goto L6cb7;
 			if (f.v30 > 0) {
@@ -407,7 +407,7 @@ L69b6:
 					if (e != 0) {
 						cm_SendLogAction(0x6ac2bc);
 						cm_RequestMoveCredits(G(e + 4), -1, *(char*) 0x773d75,
-							fcn_0050b750(y, *(char*) 0x773d75));
+							gm_ConvertUnitsToAmount(y, *(char*) 0x773d75));
 						trec = *(unsigned short*) 0x774970 * 0x21c;
 						cm_RequestCopyEntityData(G(0x7f4ca4 + trec), G(e + 4), x, 0);
 						cm_SendTraceEnd(0x6ac2bc);
@@ -418,13 +418,13 @@ L69b6:
 			if (f.sel.a08 != 0) {
 				cm_SendLogAction(0x6ac2b0);
 				cm_RequestMoveCredits(G(f.sel.a08 + 4), -1, *(char*) 0x773d75,
-					fcn_0050b750(y, *(char*) 0x773d75));
+					gm_ConvertUnitsToAmount(y, *(char*) 0x773d75));
 				trec = *(unsigned short*) 0x774970 * 0x21c;
 				cm_RequestCopyEntityData(G(0x7f4ca4 + trec), G(f.sel.a08 + 4), x, 0);
 				cm_SendTraceEnd(0x6ac2b0);
 			}
 			trec = *(unsigned short*) 0x774970 * 0x21c;
-			cm_RequestMoveCredits(G(0x7f4ca4 + trec), -1, *(char*) 0x773d75, fcn_0050b750((int) e, *(char*) 0x773d75));
+			cm_RequestMoveCredits(G(0x7f4ca4 + trec), -1, *(char*) 0x773d75, gm_ConvertUnitsToAmount((int) e, *(char*) 0x773d75));
 		}
 L6cb7:
 		if (g_100f1dc == -1)

@@ -1,6 +1,6 @@
 int __cdecl _strcmpi(const char*, const char*);
 void __cdecl d3_TransformPoint(char*, float*, float*);
-int __cdecl fcn_00442910(void*, void*, void*, const char*);
+int __cdecl d3_CreateSceneModelObject(void*, void*, void*, const char*);
 void __cdecl d3_BuildEulerRotationMatrix(float*, float*);
 void __cdecl d3_ApplyWorldTransformToObject(void*, void*, void*);
 char __cdecl SelectTextureSet(void*, int, unsigned char, char);
@@ -21,7 +21,7 @@ char __cdecl d3_CreatePennantAtFlagDummy(char* e, char* o)
 	rot[1] = 0;
 	rot[2] = 0;
 	d3_TransformPoint(e, (float*) (e + 0x4c), (float*) name);
-	obj = (void*) fcn_00442910(*(void**) (o + 0x61), name, rot, "sp_WIMPEL");
+	obj = (void*) d3_CreateSceneModelObject(*(void**) (o + 0x61), name, rot, "sp_WIMPEL");
 	rot[0] = 0;
 	rot[1] = 3.14159274f;
 	rot[2] = 0;

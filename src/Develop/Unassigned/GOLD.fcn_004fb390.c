@@ -5,7 +5,7 @@ extern unsigned char g_entity_type_bytes[];
 extern char g_7f4caa[];
 extern char g_7f4cc0[];
 int __cdecl gm_RandomMod(unsigned short);
-void __cdecl fcn_004fb620(void*);
+void __cdecl gm_ResolveHeadIconSlots(void*);
 
 typedef struct {
     int id;
@@ -59,7 +59,7 @@ CHARACTER_PORTRAIT_SPEC* __cdecl gm_LookupPortraitSpec(unsigned int player)
                 break;
             if (current->id == kind) {
                 result = table + i;
-                fcn_004fb620(result);
+                gm_ResolveHeadIconSlots(result);
                 return result;
             }
             i++;
@@ -82,7 +82,7 @@ CHARACTER_PORTRAIT_SPEC* __cdecl gm_LookupPortraitSpec(unsigned int player)
             }
             if (current->id == kind) {
                 result = table + i;
-                fcn_004fb620(result);
+                gm_ResolveHeadIconSlots(result);
                 return result;
             }
             i++;

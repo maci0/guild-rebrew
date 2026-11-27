@@ -8,7 +8,7 @@
  * DATA TODO: 0x6f1b90 and 0x6f1b94 have no Gold definitions. */
 
 /* ADDRESS: GOLD 0x004fb620 */
-void __cdecl fcn_004fb620(char* p)
+void __cdecl gm_ResolveHeadIconSlots(char* p)
 {
 	char file[0x80];
 	char base[0x80];

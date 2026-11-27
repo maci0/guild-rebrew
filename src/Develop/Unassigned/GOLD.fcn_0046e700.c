@@ -4,14 +4,14 @@
 extern GuiEnt** g_006ed964;
 extern void* g_006ed9dc;
 void __cdecl d2_FreeAnimationSlot(int);
-void __cdecl fcn_00472df0(int);
-void __cdecl fcn_0046cab0(int);
+void __cdecl d2_DestroyElementWindow(int);
+void __cdecl d2_DecrementRefcount(int);
 void __cdecl d2_DestroySurface(int);
-void __cdecl fcn_00468fa0(int, int, int, int, void*);
+void __cdecl d2_QueueDirtyRect(int, int, int, int, void*);
 void __cdecl d2_AddSlotDirtyRect(int, int, int, int);
 
 /* ADDRESS: GOLD 0x0046e700 */
-void __cdecl fcn_0046e700(int index)
+void __cdecl d2_DestroyGuiElement(int index)
 {
     GuiEnt* element;
     GuiWin* parent;
@@ -29,12 +29,12 @@ void __cdecl fcn_0046e700(int index)
         d2_FreeAnimationSlot(element->bild_offset);
         break;
     case 0x40:
-        fcn_00472df0(element->bild_offset);
+        d2_DestroyElementWindow(element->bild_offset);
         break;
     case 0x41:
         object = (char*) 0xfa6020 + element->bild_offset * 0x160;
         if (g_006ed9dc == object) g_006ed9dc = 0;
-        if (*(int*) (object + 0x13c) != -1) fcn_0046cab0(*(int*) (object + 0x13c));
+        if (*(int*) (object + 0x13c) != -1) d2_DecrementRefcount(*(int*) (object + 0x13c));
         memset(object, 0, 0x160);
         break;
     case 0x45:
@@ -50,7 +50,7 @@ void __cdecl fcn_0046e700(int index)
         }
         break;
     }
-    if (element->kind < 0x40) fcn_0046cab0(element->f08);
+    if (element->kind < 0x40) d2_DecrementRefcount(element->f08);
     parent = element->parent;
     if (parent) {
         int count = parent->count;
@@ -66,7 +66,7 @@ void __cdecl fcn_0046e700(int index)
     object = (char*) element->f40;
     if (object) {
         if (*(int*) (object + 0x198)) {
-            fcn_00468fa0(element->x, element->y, element->w, element->f16, object);
+            d2_QueueDirtyRect(element->x, element->y, element->w, element->f16, object);
         } else {
             d2_AddSlotDirtyRect(element->x, element->y, element->w, element->f16);
         }

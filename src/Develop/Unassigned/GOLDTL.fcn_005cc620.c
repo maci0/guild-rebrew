@@ -23,7 +23,7 @@ void __cdecl d2_ShowCenteredText(int, int, int, int, int);
 void __cdecl d2_DrawPersonCard(int, int, int, int, Item*, int);
 void __cdecl d2_EnableDialogItems(unsigned int, Item*);
 
-int __cdecl fcn_005cc620(int dialog, int selectedForm, int alternateForm, unsigned int n, Item* items)
+int __cdecl d2_LayoutGeliebteCandidateList(int dialog, int selectedForm, int alternateForm, unsigned int n, Item* items)
 {
 	int y;
 	int half;

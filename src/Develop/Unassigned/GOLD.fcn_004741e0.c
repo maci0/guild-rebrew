@@ -13,13 +13,13 @@ int __cdecl vfs_fseek(char*, int, int);
 void __cdecl CloseVfsStream(char*);
 int __cdecl d2_CreateGuiWindow(short, short, short, short, unsigned int);
 int __cdecl d2_CreateChildWindow(short, short, short, short, unsigned int, int);
-void __cdecl fcn_004721d0(char*, int);
+void __cdecl d2_LoadBackgroundTexture(char*, int);
 int __cdecl fcn_00468880(char*);
 void __cdecl d2_AddRefcount(int);
 int __cdecl d2_AddElementToWindow(short, short, int, int);
 int __cdecl txt_FindEntryIndex(char*);
 int __cdecl d2_ShowTxt(short, short, char*, int);
-int __cdecl fcn_0046a350(int, int, int, int, unsigned char, int);
+int __cdecl d2_AttachWindowInputIcon(int, int, int, int, unsigned char, int);
 int __cdecl d2_AddWindowSlider(int, int, unsigned char, int, int, int, unsigned char, int);
 void __cdecl d2_MoveElement(short, short, int);
 #define I32(p) (*(int*)(p))
@@ -137,7 +137,7 @@ int __cdecl d2_LoadForm(short x, short y, char* name)
                 }
                 *winSlot = windowID;
                 if (v2[0x7c]) {
-                    fcn_004721d0(v2 + 0x7c, d2_CurrentWindowId);
+                    d2_LoadBackgroundTexture(v2 + 0x7c, d2_CurrentWindowId);
                 }
                 current = (char*)&g_00f8f120[d2_CurrentWindowId];
                 if ((U8(current + 0xc) & 1) && F32(v2 + 0xbc) == g_6628a8) {
@@ -200,7 +200,7 @@ int __cdecl d2_LoadForm(short x, short y, char* name)
                     } else if (typePtr[-0x330] == 'A') {
                         aux = (unsigned char*)typePtr;
                         aux0 = aux[0];
-                        element = fcn_0046a350(S16(coords), S16(coords + 0x60), aux[1], aux[2], aux0, windowID);
+                        element = d2_AttachWindowInputIcon(S16(coords), S16(coords + 0x60), aux[1], aux[2], aux0, windowID);
                         g_00f8f080[element].f40 = dialogOff + 0xfb1020;
                     } else if (typePtr[-0x330] == 'E') {
                         aux = (unsigned char*)typePtr;

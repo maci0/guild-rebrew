@@ -4,7 +4,7 @@ extern unsigned short g_7f4c04;
 extern unsigned char g_773d75;
 
 int __cdecl gm_SumStraftatSeverity(int);
-int __cdecl fcn_004f39b0(int);
+int __cdecl gm_CountStraftatenForEntity(int);
 unsigned short __cdecl gm_RandomMod(int);
 char* __cdecl gm_StartFilteredEntitySearch(int, int, int);
 char* __cdecl gm_AddObjekt(void);
@@ -33,7 +33,7 @@ int __cdecl ai_StartAblassKaufen(int unused, char* e, int busy, char* out, char*
 	if (busy == 0 && (*(unsigned int*) (e + 4) & 3) == (unsigned int)((*(int*)&gm_GameTime) % 4) &&
 	    (*(unsigned int*) (e + 4) & 7) == (unsigned int)(((*(int*)&g_7f4c04) & 0xffff) % 8)) {
 		v1 = gm_SumStraftatSeverity(*(int*) (e + 4));
-		v2 = fcn_004f39b0(*(int*) (e + 4));
+		v2 = gm_CountStraftatenForEntity(*(int*) (e + 4));
 		if (gm_RandomMod(8) + 8 <= v1) {
 			n = 0;
 			p = gm_StartFilteredEntitySearch(1, 5, 7);

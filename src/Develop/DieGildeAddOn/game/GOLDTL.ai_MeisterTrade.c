@@ -110,7 +110,7 @@ int __cdecl ai_MeisterTradeAllgemein(char* o, char* bld);
 int __cdecl gm_GetStorageSlotCapacity(char* pkt, int item_id);
 float __cdecl eval_ObjektPreis2Credits(int id, int n);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
-float __cdecl fcn_005a8a30(char* a);
+float __cdecl hp_GetProdSellPriceFactor(char* a);
 int __cdecl gm_AccumulateTyped2(void* m);
 void* __cdecl fcn_00502cd0(int list, int mode, ...);
 char* __cdecl gm_NextEntityQueryMatch(void);
@@ -200,7 +200,7 @@ int __cdecl ai_MeisterTrade(char* o, char* bld)
 				if (*(unsigned char*) (0x7f4ca2 +
 				    *(unsigned short*) (tp + 0x27) *
 				    0x21c) == 6) {
-					fr = fcn_005a8a30(tp);
+					fr = hp_GetProdSellPriceFactor(tp);
 					if (fr <= gm_GetSeasonPrice(t->id,
 					    g_773d75) /
 					    eval_ObjektPreis2Credits(t->id, 100)) {

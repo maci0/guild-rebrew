@@ -7,7 +7,7 @@ extern unsigned short* g_773da4;
 int __cdecl gm_GetEntityType(void*);
 #include "Develop/DieGildeAddOn/game/object_prototype.h"
 /* ADDRESS: GOLDTL 0x00502a20 */
-int* __cdecl fcn_00502a20(void)
+int* __cdecl gm_FindNextQueryItem(void)
 {
 	char* p;
 	char* q;

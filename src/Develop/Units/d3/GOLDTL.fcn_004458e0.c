@@ -48,7 +48,7 @@ void __cdecl d3_TransformPoint(Ent*, void*, Vec4*);
 void __cdecl d3_SetObjectRotation(Ent*, void*);
 void __cdecl d3_ComposeObserverMatrix(Ent*, char*, int, Mat*);
 
-void __cdecl fcn_00439aa0(Ent*);
+void __cdecl d3_RegisterSceneObjectTl(Ent*);
 void __cdecl d3_AttachSceneNode(Ent*, Ent*);
 void __cdecl d3_ApplyWorldTransformToObject(Ent*, Vec4*, Mat*);
 void __cdecl d3_TransformWorldToParent(Ent*, Vec4*, Mat*, Slot*, char*);
@@ -93,7 +93,7 @@ char __cdecl d3_ReparentObject(Ent* e, Ent* parent)
 	d3_ComposeObserverMatrix(e, 0, 1, &wm);
 	d3_UnlinkObject((D3_OBJECT*) (e));
 	if (parent == 0) {
-		fcn_00439aa0(e);
+		d3_RegisterSceneObjectTl(e);
 	} else {
 		d3_AttachSceneNode(parent, e);
 	}

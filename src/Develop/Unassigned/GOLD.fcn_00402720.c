@@ -4,7 +4,7 @@ extern char g_10432c0[];
 
 #include "client_scene_transform.h"
 
-int __cdecl fcn_00402720(int a1, int a2, float* position, float tolerance)
+int __cdecl ch_CountCharactersNearGold(int a1, int a2, float* position, float tolerance)
 {
 	int count;
 	void** p;

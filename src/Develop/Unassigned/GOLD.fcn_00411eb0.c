@@ -23,7 +23,7 @@ typedef GOLD_BBOX_CORNER* (__cdecl* GOLD_GET_CORNERS_FN)(char* obj, char* m, cha
 extern float g_6628a8;
 void __cdecl d3_UpdateObjectCameraTransform(char* obj, char* cam, int flag);
 
-char __cdecl fcn_00411eb0(char* obj, char* cam, float* center, float* radius)
+char __cdecl d3_CalcObjectBoundingSphere(char* obj, char* cam, float* center, float* radius)
 {
 	char r;
 	char* m;

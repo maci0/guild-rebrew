@@ -3,7 +3,7 @@
 int __cdecl d2_GetResourceData(int);
 
 /* ADDRESS: GOLD 0x004759e0 */
-int __cdecl fcn_004759e0(int id, int* out, int* out2)
+int __cdecl d2_QueryElementResourceSize(int id, int* out, int* out2)
 {
 	char* rec;
 	char* font;

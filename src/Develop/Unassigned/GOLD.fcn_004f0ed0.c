@@ -3,14 +3,14 @@
 int __cdecl gm_ResolveEntityById(void**, void**, void**, int);
 int __cdecl gv_CheckSlotActive(void*, int);
 char* __cdecl fcn_004ef570(void*, int, unsigned char);
-int __cdecl fcn_004ef760(void*, void*);
-void* __cdecl fcn_004ef7c0(void*, void*, void*, int (__cdecl*)(void*, void*), int);
+int __cdecl gv_IsGraveSlotEmpty(void*, void*);
+void* __cdecl gv_FindSlotEntryFilteredGold(void*, void*, void*, int (__cdecl*)(void*, void*), int);
 int __cdecl gm_SubObjectNoKill(int, int, int);
 int __cdecl gm_AddObjekt(int, int, int);
 #include "Develop/DieGildeAddOn/game/game_data.h"
 
 /* ADDRESS: GOLD 0x004f0ed0 */
-int __cdecl fcn_004f0ed0(char* request)
+int __cdecl gv_TransferSlotEntry(char* request)
 {
 	char* entity;
 	char* building;
@@ -46,7 +46,7 @@ int __cdecl fcn_004f0ed0(char* request)
 		return -7;
 	src = *(char**) (oldSlot + 0x10);
 	count = *(int*) (0x5ee054 + type * 4);
-	newSlot = fcn_004ef7c0(entity, building, 0, fcn_004ef760, *(int*) (request + 0xd));
+	newSlot = gv_FindSlotEntryFilteredGold(entity, building, 0, gv_IsGraveSlotEmpty, *(int*) (request + 0xd));
 	if (newSlot == 0)
 		return -7;
 	dst = *(char**) (newSlot + 0x10);

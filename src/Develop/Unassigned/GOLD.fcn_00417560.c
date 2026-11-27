@@ -1,7 +1,7 @@
 extern int SonnenstrahlenAktiv;
 extern int g_633444;
 
-int __cdecl fcn_00411be0(char*);
+int __cdecl d3_GetSceneContextIndex(char*);
 char __cdecl d3_SelectSceneContext(int, char);
 void __cdecl d3_DestroyObject(void*);
 
@@ -16,7 +16,7 @@ void __cdecl d3_DestroySonnenstrahlen(void* obj)
 	found = -1;
 	handle = *(int*) ((char*) obj + 0x208);
 	if (handle != *(int*) 0x5fb5b0) {
-		handle = fcn_00411be0((char*) handle);
+		handle = d3_GetSceneContextIndex((char*) handle);
 		d3_SelectSceneContext(handle, 1);
 		found = handle;
 	}

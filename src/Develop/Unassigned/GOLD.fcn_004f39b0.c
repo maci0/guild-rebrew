@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x004f39b0 */
-int __cdecl fcn_004f39b0(int a)
+int __cdecl gm_CountStraftatenForEntity(int a)
 {
 	int p;
 	int n;

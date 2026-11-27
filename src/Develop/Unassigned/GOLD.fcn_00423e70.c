@@ -2,7 +2,7 @@
 
 extern int g_005f74c0; /* 0x005f74c0 */
 
-void __cdecl fcn_00423e70(int value)
+void __cdecl msx_SetAudioFadeDuration(int value)
 {
     g_005f74c0 = value;
 }

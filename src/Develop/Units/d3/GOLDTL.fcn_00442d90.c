@@ -29,7 +29,7 @@ char __cdecl d3_ReplaceObjectModel(char* o, int a2)
 	d3_CleanupObjectDrawData((D3_OBJECT*) (o));
 	d3_LoadModel(a2, a2);
 	d3_AttachCachedModelParts(o, 0, a2);
-	fcn_0045cfa0(0);
+	d3_ReloadSceneTextureSurfaces(0);
 	p = *(char**) (o + 0x1ec);
 	if (p != 0 && *(int*) (p + 0x40c) != 0) {
 		return 1;

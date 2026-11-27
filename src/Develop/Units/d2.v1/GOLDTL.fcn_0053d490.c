@@ -46,7 +46,7 @@ int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_CreateGuiWindow(int, ...);
 void __cdecl d2_SetBildArgument(int, int);
 void __cdecl d2_SetForm(int, int);
-void __cdecl fcn_00476b60(void);
+void __cdecl d2_ResetSelectionAndInput(void);
 void __cdecl d2_SelectControl(int);
 int __cdecl txt_GetCitySelectInfo(char*, char*);
 int __cdecl io_AppendText(int, ...);
@@ -144,7 +144,7 @@ int __cdecl d2_RunChoosePlayerDialog(int a0, int a1)
 	d2_SelectRadioGroup(list1, g_7e23e8 & 0xff);
 	list2 = d2_CreateRadioGroup(2, s2a, s2b);
 	d2_SelectRadioGroup(list2, (unsigned char) g_7e23e9);
-	fcn_00476b60();
+	d2_ResetSelectionAndInput();
 	g_14cf950 = 0;
 	for (;;) {
 		if (g_14ce8e0 != 0

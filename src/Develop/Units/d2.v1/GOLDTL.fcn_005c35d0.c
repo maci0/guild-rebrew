@@ -20,7 +20,7 @@ void __cdecl d2_CreateGuiWindow(int, int, int, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 int __cdecl gm_SearchTable67(int);
-int __cdecl fcn_0050b750(int, char);
+int __cdecl gm_ConvertUnitsToAmount(int, char);
 int __cdecl d2_GetControlValue(int);
 int __cdecl gm_CheckEntityStock(char*, int, char);
 void __cdecl cm_SendCopyEntityData(void*);
@@ -67,14 +67,14 @@ void __cdecl d2_RunSellGebaeudeDialog(char* e)
 
 			if (gm_CheckEntityStock((char*) (0x7f4ca0 +
 			                          g_774970 * 0x21c),
-			                 fcn_0050b750(d2_GetControlValue(ctl), g_773d75), g_773d75)) {
+			                 gm_ConvertUnitsToAmount(d2_GetControlValue(ctl), g_773d75), g_773d75)) {
 				*(char*) (pkt + 4) = 0x21;
 				*(int*) (pkt + 8) = *(int*) (g_7f4ca4 +
 				                             *(unsigned short*) (e + 0x25) * 0x21c);
 				*(int*) (pkt + 0xc) = -1;
 				*(char*) (pkt + 0x36) = 9;
 				*(int*) (pkt + 0x58) = *(int*) (e + 1);
-				*(int*) (pkt + 0x5c) = fcn_0050b750(
+				*(int*) (pkt + 0x5c) = gm_ConvertUnitsToAmount(
 				    d2_GetControlValue(ctl),
 				    g_773d75);
 				*(int*) (pkt + 0x60) = *(int*) (g_7f4ca4 +

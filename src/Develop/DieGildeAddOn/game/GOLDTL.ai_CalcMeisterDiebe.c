@@ -58,7 +58,7 @@ void __cdecl ai_DispatchWorkerRecovery(int);
 void __cdecl ai_CalcAngriff(int, int);
 int __cdecl gm_SearchTable67(int);
 int __cdecl gm_PosToStatsGrid(int, int*, int*);
-int __cdecl fcn_0050c4e0(unsigned char*);
+int __cdecl gm_GetBuildingProtLevel(unsigned char*);
 int __cdecl gm_CalcOwnerAndStockValue(unsigned char*, int);
 int __cdecl gm_AccumulateTyped2(unsigned char*);
 int __cdecl gm_CheckEntityType(unsigned char*);
@@ -282,7 +282,7 @@ L176c:
 						            + (float) *(unsigned short*) (g_99ef80 + off + 2))
 						           / maxfactor;
 					}
-					j = fcn_0050c4e0(e);
+					j = gm_GetBuildingProtLevel(e);
 					factor = (8.0f - (float) j) * factor * 0.5f;
 					factor = (float) (gm_RandomMod(100) & 0xffff) * factor * 0.01;
 					if (best != 0) {

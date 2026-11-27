@@ -14,7 +14,7 @@ int __cdecl io_AppendText(int a, ...);
 int __cdecl gm_CompareGameTime(void* a, void* b);
 
 /* ADDRESS: GOLDTL 0x0057b1f0 */
-void __cdecl fcn_0057b1f0(char* a)
+void __cdecl he_RunMeisterpruefung(char* a)
 {
 	int state;
 

@@ -3,7 +3,7 @@ int __cdecl gv_CheckSlotActive(void*, int);
 int __cdecl cm_GetBuildingSlotCount(unsigned char*);
 
 /* ADDRESS: GOLD 0x004ef7c0 */
-void* __cdecl fcn_004ef7c0(void* a0, void* a1, void* a2, int (__cdecl* predicate)(void*, void*), int kind)
+void* __cdecl gv_FindSlotEntryFilteredGold(void* a0, void* a1, void* a2, int (__cdecl* predicate)(void*, void*), int kind)
 {
 	unsigned char* type;
 	char* group;

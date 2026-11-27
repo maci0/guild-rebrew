@@ -6,7 +6,7 @@ extern int g_7e1d40;
 
 
 #include "client_timer.h"
-void __cdecl fcn_0053f4b0(void);
+void __cdecl d2_LoadingScreenTimerCallback(void);
 unsigned char* __cdecl d2_StartScreenFade(int, int, int, int, char*, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -23,7 +23,7 @@ void __cdecl main_FadeOutToBlack(void)
 	if (g_14cbca0 == -1) {
 		flags = 0x24086;
 	}
-	tb_CloseFunction(fcn_0053f4b0);
+	tb_CloseFunction(d2_LoadingScreenTimerCallback);
 	p = d2_StartScreenFade(0, 0, g_1040494, d2_ScreenHeight, "BLACK", 0x1e, 1);
 	while ((*p & 4) == 0) {
 		main_RunFrameLoop(0, flags);

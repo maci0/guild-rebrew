@@ -4,7 +4,7 @@
 
 int __cdecl hp_FindProdSetting(int);
 
-float __cdecl fcn_005a8a30(char* a)
+float __cdecl hp_GetProdSellPriceFactor(char* a)
 {
 	int p;
 	p = hp_FindProdSetting(*(int*) (a + 1));

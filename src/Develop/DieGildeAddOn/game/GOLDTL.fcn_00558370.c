@@ -6,7 +6,7 @@ extern int __cdecl gm_ResolveEntityById(void **a0, int a1, int a2, int a3);
 extern void __cdecl d3_SelectSceneContext(int a0, int a1);
 extern void __cdecl d3_TransformPoint(int a0, int a1, float *a2);
 extern float __cdecl d3_WrapYawDelta(float *a0, float *a1);
-extern int __cdecl fcn_00442910(int a0, float *a1, float *a2, char *a3);
+extern int __cdecl d3_CreateSceneModelObject(int a0, float *a1, float *a2, char *a3);
 extern void __cdecl d3_ApplyObjectAnimation(int a0, char *a1, int a2);
 
 typedef struct
@@ -86,7 +86,7 @@ int __cdecl he_SpawnSensenmann(int action)
             dir.y = pos.y - cur.y;
             dir.z = pos.z - cur.z;
         }
-        v5 = fcn_00442910(0, &cur.x, &rot.x, (char *)0x6a5fc4);
+        v5 = d3_CreateSceneModelObject(0, &cur.x, &rot.x, (char *)0x6a5fc4);
         *(int *)(v3 + 0xc8) = v5;
         if (v5 == 0)
             goto fail;

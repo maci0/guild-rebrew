@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00448910 */
-int __cdecl fcn_00448910(void)
+int __cdecl d3_InitSceneCameras(void)
 {
 	/* Stub: provider restored; native behavior and full C contract unrecovered. */
 	return 0;

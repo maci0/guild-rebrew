@@ -36,7 +36,7 @@ char *__cdecl d2_StartScreenFade(int, int, int, int, char *, int, int);
 int __cdecl main_PumpWindowMessages(void);
 int __cdecl main_RunFrameLoop(int, int);
 void __cdecl d3_SelectSceneContext(int, int);
-int __cdecl fcn_00442e30(void);
+int __cdecl d3_ClearSceneState(void);
 int __cdecl main_GetLanguage(void);
 #include "client_scene_loader.h"
 void __cdecl ReportClientMessage(char *);
@@ -112,7 +112,7 @@ void __cdecl main_Menue(void)
 	}
 	d2_SuppressOverlay = 1;
 	d3_SelectSceneContext(0, 0);
-	fcn_00442e30();
+	d3_ClearSceneState();
 	if (main_GetLanguage() != 0) {
 		v14 = "scenes/*ChooseCity_Europa.ed3";
 	} else {
@@ -121,7 +121,7 @@ void __cdecl main_Menue(void)
 	d3_LoadScene(v14, 0, 0);
 	main_PumpWindowMessages();
 	d3_SelectSceneContext(1, 0);
-	fcn_00442e30();
+	d3_ClearSceneState();
 	if (!d3_LoadScene((char *)0x6a3b98, 0, 0)) {
 		ReportClientMessage((char *)0x6a3b70);
 	}
@@ -299,9 +299,9 @@ label_53a8e3:
 	d2_DestroyForm(v15);
 	d2_ClearScreen();
 	d3_SelectSceneContext(0, 0);
-	fcn_00442e30();
+	d3_ClearSceneState();
 	d3_SelectSceneContext(1, 0);
-	fcn_00442e30();
+	d3_ClearSceneState();
 	msx_SetFadeDuration(1000);
 	if (*(int *)0x7747d0 != 0) {
 		msx_StopTrack(*(int *)0x7747d0, 1);

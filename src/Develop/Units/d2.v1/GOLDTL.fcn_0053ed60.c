@@ -38,7 +38,7 @@ char* __cdecl d3_SpawnCityMapMarker(char*);
 int __cdecl sprintf(char*, const char*, ...);
 int __cdecl txt_FindEntryIndex(char*);
 void __cdecl RegisterStatusText(char*, char*, int);
-char* __cdecl fcn_00442910(int, void*, void*, char*);
+char* __cdecl d3_CreateSceneModelObject(int, void*, void*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 char __cdecl d3_SetObjectVisible(char*, char);
 int __cdecl cut_PlayEventScript(char*);
@@ -146,7 +146,7 @@ int __cdecl d2_RunChooseCityDialog(int unused, int network)
 		dir[0] = 0.0f;
 		dir[1] = 0.0f;
 		dir[2] = 0.0f;
-		obj = fcn_00442910(0, pos, dir, (char*) 0x6a40a0);
+		obj = d3_CreateSceneModelObject(0, pos, dir, (char*) 0x6a40a0);
 		*(char*) (obj + 0x215) = *(char*) (obj + 0x215) | 1;
 		*(char*) (obj + 0x216) = (*(char*) (obj + 0x216) & 0xfd) | 1;
 		d3_ApplyObjectAnimation(obj, (char*) 0x6a4080, 1);

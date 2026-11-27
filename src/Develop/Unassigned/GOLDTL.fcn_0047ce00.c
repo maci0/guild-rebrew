@@ -8,7 +8,7 @@ typedef struct Tint {
 } Tint;
 
 int __cdecl d3_LoadOrReuseTexture(char* name, Tint tint, int a, int b);
-void __cdecl fcn_0045ce90(int h);
+void __cdecl d3_LoadTextureSurfaceTl(int h);
 
 /* Loads a texture/animation with a default tint: level 0x7f and the bit-1
  * bitfield of byte 2 set from the flag argument, then frees the handle.
@@ -26,7 +26,7 @@ int __cdecl d3_LoadTextureWithDefaultTint(char* name, unsigned char flag)
 	tint.flag = flag;
 	h = d3_LoadOrReuseTexture(name, tint, 0, 0);
 	if (h != 0) {
-		fcn_0045ce90(h);
+		d3_LoadTextureSurfaceTl(h);
 	}
 	return h;
 }

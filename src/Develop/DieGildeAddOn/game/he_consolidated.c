@@ -14,7 +14,7 @@ void __cdecl cut_HandleOfficeSessionEvent(void);
 void __cdecl cut_HandleProzessEvent(void);
 void __cdecl cut_SelectDuellResponse(void);
 void __cdecl d2_RunDuellPromptDialog(void);
-void __cdecl fcn_004e1950(void);
+void __cdecl cut_NoopTobyCutsceneStep(void);
 void __cdecl cut_RunAuctionBidDialog(void);
 void __cdecl cut_HandleAuctionEvent(void);
 void __cdecl cut_MainDuell(char*);
@@ -40,7 +40,7 @@ void __cdecl cut_InitCutsceneRegistry(void)
 	memset(((struct CUTSCENE_EVENT_SLOT*)cut_Cutscenes), 0, sizeof(struct CUTSCENE_EVENT_SLOT[96]));
 	for (i = 0; i < 96; i++)
 		((struct CUTSCENE_EVENT_SLOT*)cut_Cutscenes)[i].id = -1;
-	cut_RegisterEventCallbacks(0, cut_RunTobyCutscene, (void*) fcn_004e1950, 0, 0, 0);
+	cut_RegisterEventCallbacks(0, cut_RunTobyCutscene, (void*) cut_NoopTobyCutsceneStep, 0, 0, 0);
 	cut_RegisterEventCallbacks(1, cut_RunOfficeSessions, (void*) cut_HandleOfficeSessionStep, (void*) cut_HandleOfficeSessionEvent, 0, 0);
 	cut_RegisterEventCallbacks(2, cut_RunProzess, (void*) cut_PromptProzessChoice, (void*) cut_HandleProzessEvent, cut_NotifyProzess, 0);
 	cut_RegisterEventCallbacks(3, cut_RunCombatCutscene, (void*) cut_SkipCombatCutscene, 0, cut_NotifyCombatCutscene, 1);

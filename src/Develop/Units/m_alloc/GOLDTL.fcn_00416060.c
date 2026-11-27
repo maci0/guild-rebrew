@@ -59,7 +59,7 @@ extern char g_6775f4[];
 void* __cdecl m_alloc(int size, char* tag);
 void __cdecl m_FreeTracked(void* p);
 int __cdecl d3_LoadOrReuseTexture(char* name, LoadFlags flags, int a3, int a4);
-void __cdecl fcn_0045ce90(int h);
+void __cdecl d3_LoadTextureSurfaceTl(int h);
 
 Snow* __cdecl d3_CreateSnowEffect(int count)
 {
@@ -157,7 +157,7 @@ Snow* __cdecl d3_CreateSnowEffect(int count)
 	flags.b2 |= 2;
 	s->handle = d3_LoadOrReuseTexture(g_6775f4, flags, 0, 0);
 	if (s->handle != 0) {
-		fcn_0045ce90(s->handle);
+		d3_LoadTextureSurfaceTl(s->handle);
 	}
 	return s;
 }

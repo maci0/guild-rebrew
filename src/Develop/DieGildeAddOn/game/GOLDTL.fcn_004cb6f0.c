@@ -19,7 +19,7 @@ void __cdecl gm_GetBuildingSlotLimits(int, struct BUILDING_SLOT_LIMITS*);
 
 
 /* ADDRESS: GOLDTL 0x004cb6f0 */
-int __cdecl fcn_004cb6f0(char* a1, char* out)
+int __cdecl cm_ExAssignResidence(char* a1, char* out)
 {
 	struct BUILDING_SLOT_LIMITS info;
 	unsigned char* e;

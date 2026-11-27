@@ -1990,7 +1990,7 @@ void __cdecl d3_TransformPoint(char*, float*, float*);
 #include "Develop/DieGildeAddOn/game/ch_motion.h"
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
 void __cdecl d3_BindEntitySceneObject(char*, unsigned char*, int);
-D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
+D3_OBJECT* __cdecl d3_CreateSceneModelObject(D3_OBJECT*, float*, float*, char*);
 void* __cdecl ch_AttachTransport(char*, D3_OBJECT*);
 char __cdecl SelectTextureSet(D3_OBJECT*, void*, unsigned char, char);
 void __cdecl ch_SetVisible(char*, int);
@@ -2206,11 +2206,11 @@ char* __cdecl gm_AllocObjekt(int parent_id, int type, int param3)
 		sprintf(*(char**) (model + 0x34), "sp_%i", *(int*) (slot + 2));
 		scene = NULL;
 		if (type == 0x134)
-			scene = fcn_00442910(NULL, position, rotation, "ob_KARREN_klein");
+			scene = d3_CreateSceneModelObject(NULL, position, rotation, "ob_KARREN_klein");
 		else if (type == 0x135)
-			scene = fcn_00442910(NULL, position, rotation, "ob_KARREN_mittel");
+			scene = d3_CreateSceneModelObject(NULL, position, rotation, "ob_KARREN_mittel");
 		else if (type == 0x136)
-			scene = fcn_00442910(NULL, position, rotation, "ob_KARREN_GROSS");
+			scene = d3_CreateSceneModelObject(NULL, position, rotation, "ob_KARREN_GROSS");
 		if (scene != NULL) {
 #ifdef REBREW_GOLD
 			scene->flags2 = (scene->flags2 & ~8) | 4;
@@ -3493,7 +3493,7 @@ void __cdecl hp_AddProdSetting(Estate*);
 void __cdecl gm_UpdateResidenceOwnerDecor(Estate*);
 Figure* __cdecl gm_FindBuildingOwner(Estate*);
 int __cdecl d3_GetContextIndex(int);
-void __cdecl fcn_00402aa0(Model*);
+void __cdecl ch_EnsureCharacterMeshes(Model*);
 void __cdecl d3_DestroyEntityWimpelNodes(Estate*);
 void __cdecl d3_CreateEntityFlagPennant(Estate*);
 
@@ -3561,7 +3561,7 @@ void __cdecl gm_AssignBuildingOwner(Estate* building, unsigned short owner, int 
 			}
 			d3_SelectSceneContext(d3_GetContextIndex(model->res), 1);
 			if (model->body->visible == 0) {
-				fcn_00402aa0(model);
+				ch_EnsureCharacterMeshes(model);
 			}
 			SelectTextureSet((D3_OBJECT*)*model->parts, (void*)(*model->parts)->visible, (unsigned char)sc, 1);
 			d3_SelectSceneContext(saved, 1);
@@ -4980,12 +4980,14 @@ int __cdecl gm_LookupEntityRecordById(int id)
 #endif
 /* Client-only age, rank and family helpers (discarded). */
 
+#if defined(REBREW_SERVER) /* the clients link their own twin of this function */
 float __cdecl gm_GetEntityAge(int slot)
 {
 	/* placeholder: inferred server log call, see msvc6-link-layout 5f */
 	LogMessageInternal("D:\\Develop\\DieGildeAddOn\\game\\spiel.c", __LINE__, "gm_GetEntityAge(): enter", 1);
 	return (float) *(unsigned short*) (g_slot_table + 0xa + (slot & 0xffff) * 0x21c);
 }
+#endif
 
 int __cdecl gm_GetOfficeRank(unsigned short slot, int skip_parent)
 {

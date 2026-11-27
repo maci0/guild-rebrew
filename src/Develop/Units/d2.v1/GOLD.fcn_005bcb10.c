@@ -42,14 +42,14 @@ char* __cdecl gm_FindBuildingOwner(unsigned char*);
 int __cdecl d2_AddElementToWindow(short x, short y, int id, int win);
 void __cdecl io_FormatTextBuffer(char*, char*, ...);
 
-void __cdecl fcn_004760a0(int, int);
+void __cdecl d2_AssignElementFont(int, int);
 int __cdecl d2_AddWindowInputIcon(int x, int y, int a3, int a4, int a5, int win);
 int __cdecl gm_AmountToUnits(int, unsigned char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
 void __cdecl d2_DestroyForm(int);
 
-int __cdecl fcn_005bcb10(void)
+int __cdecl d2_InitMeisterListeDialog(void)
 {
 	int n;
 	char* m;
@@ -89,7 +89,7 @@ int __cdecl fcn_005bcb10(void)
 				io_FormatTextBuffer(buf, g_6ac870, *e * 14 + 0x48e, e + 5);
 				g_777d00[n].name_text = d2_ShowTxt(0x40, n * 0x3e + 8, buf, d2_CurrentWindowId);
 				((Font5c89*)g_f8f080)[g_777d00[n].name_text].w = 0xa0;
-				fcn_004760a0(g_777d00[n].name_text, 0x54);
+				d2_AssignElementFont(g_777d00[n].name_text, 0x54);
 				io_FormatTextBuffer(buf, g_68be7c, *(int*) (m + 0x1b8));
 				g_777d00[n].value_text = d2_ShowTxt(0x180, n * 0x3e + 0x14, buf, d2_CurrentWindowId);
 				g_777d00[n].bar = d2_AddWindowInputIcon(0xea, n * 0x3e + 0x14, 0x40, 0x40, 0x82, d2_CurrentWindowId);

@@ -1,4 +1,4 @@
-int __cdecl fcn_00411be0(char*);
+int __cdecl d3_GetSceneContextIndex(char*);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_DestroyObject(void*);
 char* __cdecl d3_SpawnModelObject(int, float*, float*, int);
@@ -18,7 +18,7 @@ void __cdecl ch_SetAttachedObject(char* owner, int selector, int id)
     else if (selector == 3) slot = (char**) (owner + 0x6c);
     if (id) {
         previous = g_633444;
-        d3_SelectSceneContext(fcn_00411be0(*(char**) (owner + 0x88)), 1);
+        d3_SelectSceneContext(d3_GetSceneContextIndex(*(char**) (owner + 0x88)), 1);
         if (*slot) {
             d3_DestroyObject(*slot);
             *slot = 0;
@@ -40,7 +40,7 @@ void __cdecl ch_SetAttachedObject(char* owner, int selector, int id)
         return;
     }
     previous = g_633444;
-    d3_SelectSceneContext(fcn_00411be0(*(char**) (owner + 0x88)), 1);
+    d3_SelectSceneContext(d3_GetSceneContextIndex(*(char**) (owner + 0x88)), 1);
     if (*slot) {
         d3_DestroyObject(*slot);
         *slot = 0;

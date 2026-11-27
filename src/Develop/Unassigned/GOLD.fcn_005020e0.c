@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x005020e0 */
-int __cdecl fcn_005020e0(void)
+int __cdecl gm_IsBuildingTypeAllowed(void)
 {
     /* TODO: Implement based on Ghidra decompilation */
     /* Ghidra name: fcn.005020e0 */

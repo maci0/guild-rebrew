@@ -2,7 +2,7 @@ typedef int(__stdcall* Fn1)(void* self);
 
 extern unsigned long g_14ce728;
 
-void __cdecl fcn_0045ce90(char* a);
+void __cdecl d3_LoadTextureSurfaceTl(char* a);
 
 /* ADDRESS: GOLDTL 0x0045d040 */
 char __cdecl d3_ReloadTexture(char* a)
@@ -16,7 +16,7 @@ char __cdecl d3_ReloadTexture(char* a)
 			*(void**) (a + 0x50) = 0;
 		}
 		if (*(int*) (a + 0x44) != 0 && *a != '*') {
-			fcn_0045ce90(a);
+			d3_LoadTextureSurfaceTl(a);
 		}
 	}
 	return 0;

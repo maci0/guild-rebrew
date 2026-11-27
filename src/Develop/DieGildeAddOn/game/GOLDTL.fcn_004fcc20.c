@@ -6,7 +6,7 @@ extern unsigned char* lpGebaeudePROT;
 #include "Develop/DieGildeAddOn/game/building_prototype.h"
 char* __cdecl gm_FindPublicTreasury(int a);
 int __cdecl gm_GetLawEntry(int idx, void* dst);
-int __cdecl fcn_0050b750(int a, unsigned char b);
+int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char b);
 void __cdecl cm_StepCommandQueue(void);
 int __cdecl gm_AccumulateTyped2(char* rec);
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
@@ -27,7 +27,7 @@ void __cdecl gm_UpdateBuildingSubsidies(void)
 
 	handle = (int) gm_FindPublicTreasury(1);
 	gm_GetLawEntry(5, buf);
-	r = 0xe - *(int*) (buf + 0x18); n = fcn_0050b750(r, g_773d75);
+	r = 0xe - *(int*) (buf + 0x18); n = gm_ConvertUnitsToAmount(r, g_773d75);
 	i = 0;
 	g_773d48 = 0;
 	q = (char*) 0x7f4e10;

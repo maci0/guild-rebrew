@@ -30,7 +30,7 @@ int __cdecl gm_AmountToUnits(int, char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 void __cdecl d2_SetOverlayAnimation(int, int);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_0050b750(int, char);
+int __cdecl gm_ConvertUnitsToAmount(int, char);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -65,7 +65,7 @@ void __cdecl d2_RunWeinkellerDialog(void)
 				g_774654 = 1;
 			}
 			if (g_100f1dc == 2) {
-				v = fcn_0050b750(d2_GetControlValue(sl), g_773d75);
+				v = gm_ConvertUnitsToAmount(d2_GetControlValue(sl), g_773d75);
 				if (stock < v) {
 					cm_RequestMoveCredits(*(int*) (g_7746cc + 2), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, v - stock);
 				}

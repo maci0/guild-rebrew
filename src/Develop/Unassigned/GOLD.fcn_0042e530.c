@@ -13,7 +13,7 @@ int __cdecl CloseVfsStream(char* stream);
  * next free 0x74-byte name slot at 0x1431fc0. The VFS root 0x6333fc and the
  * highest id 0x6333b8 have no Gold data rows yet (DATA TODO). */
 /* ADDRESS: GOLD 0x0042e530 */
-unsigned int __cdecl fcn_0042e530(char* name)
+unsigned int __cdecl txt_LoadTextPointerTable(char* name)
 {
 	int a;
 	int b;

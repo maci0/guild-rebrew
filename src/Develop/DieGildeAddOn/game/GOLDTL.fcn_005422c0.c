@@ -33,7 +33,7 @@ unsigned char* __cdecl ahm_GetWorkshopOwner(unsigned char*);
 int __cdecl ahm_CalcWorkshopOutputScore(char*);
 int __cdecl gm_AccumulateTyped2(char*);
 int __cdecl gm_SearchTable67(int);
-int __cdecl fcn_0050c4e0(unsigned char*);
+int __cdecl gm_GetBuildingProtLevel(unsigned char*);
 unsigned short* __cdecl gm_NextEntityQueryMatch(void);
 int __cdecl gm_CalculateGebaeudeValue(char*, int);
 unsigned short __cdecl gm_RandomMod(int);
@@ -146,7 +146,7 @@ void __cdecl gm_UpdateOwnerBuildings(unsigned int arg)
 					} else {
 						r = (unsigned char*) gm_SearchTable67(*(int*) (obj + 0x2a));
 						if (r != 0) {
-							cv = (char) (*(unsigned char*) (obj + 0x37) - fcn_0050c4e0(r) * 2);
+							cv = (char) (*(unsigned char*) (obj + 0x37) - gm_GetBuildingProtLevel(r) * 2);
 							if (cv < 0) {
 								cv = 0;
 							}

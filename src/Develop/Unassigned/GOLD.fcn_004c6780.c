@@ -3,7 +3,7 @@
 
 int __cdecl fcn_004e6360(void*);
 
-int __cdecl fcn_004c6780(void* a)
+int __cdecl cm_ChkOfficeCandidateGold(void* a)
 {
 	return fcn_004e6360((char*) a + 0x10) == 0;
 }

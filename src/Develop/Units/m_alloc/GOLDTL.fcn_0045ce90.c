@@ -27,7 +27,7 @@ void __cdecl d3_LoadTextureFromFile(int a1, int a2, void* a3, int a4, int a5, in
 void __cdecl d3_SyncClonedTextureHandles(Tex* a0);
 
 /* ADDRESS: GOLDTL 0x0045ce90 */
-void __cdecl fcn_0045ce90(Tex* texture)
+void __cdecl d3_LoadTextureSurfaceTl(Tex* texture)
 {
 	Tex* p;
 	int obj;
@@ -54,7 +54,7 @@ void __cdecl fcn_0045ce90(Tex* texture)
 			p = (Tex*) g_104049c;
 			for (i = 0; i < g_10404a0; i++, p++) {
 				if (p->refs > 0 && p->id == texture->id && p->x5d > 0) {
-					fcn_0045ce90(p);
+					d3_LoadTextureSurfaceTl(p);
 				}
 			}
 		}

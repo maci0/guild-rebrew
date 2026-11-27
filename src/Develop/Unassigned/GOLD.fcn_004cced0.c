@@ -3,7 +3,7 @@
 
 // fcn_004cced0 — set b header; r=fcn_004f0ed0(a+0x10); if(b&&!r) b[0]=1.
 
-int __cdecl fcn_004f0ed0(void*);
+int __cdecl gv_TransferSlotEntry(void*);
 
 void __cdecl cm_ChkGraveyardTransfer(char* a, char* b)
 {
@@ -13,7 +13,7 @@ void __cdecl cm_ChkGraveyardTransfer(char* a, char* b)
 		b[1] = 0;
 		*(int*) (b + 6) = 0;
 	}
-	r = fcn_004f0ed0(a + 0x10);
+	r = gv_TransferSlotEntry(a + 0x10);
 	if (b != 0 && r == 0) {
 		b[0] = 1;
 	}

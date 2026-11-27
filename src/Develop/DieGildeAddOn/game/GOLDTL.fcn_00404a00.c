@@ -15,7 +15,7 @@ void __cdecl d3_RemoveObjectAnimation(char*, char*);
 char* __cdecl d3_CreateMorphAnimation(char*, char*, char*, int, int, char*, char*, int);
 void __cdecl d3_ApplyAnimDelta(char*, char*, int, int, int);
 #ifdef REBREW_GOLD
-int __cdecl fcn_00411be0(char*);
+int __cdecl d3_GetSceneContextIndex(char*);
 #else
 int __cdecl d3_GetContextIndex(char*);
 #endif
@@ -57,7 +57,7 @@ void __cdecl ch_FinishAni(char* obj)
                 *(char**) (node + 0x1ec) + 0xf4, name, opt);
             if (*(char**) (obj + 0x7c) != 0) {
 #ifdef REBREW_GOLD
-                if (fcn_00411be0(*(char**) (obj + 0x88)) == 0) {
+                if (d3_GetSceneContextIndex(*(char**) (obj + 0x88)) == 0) {
 #else
                 if (d3_GetContextIndex(*(char**) (obj + 0x88)) == 0) {
 #endif

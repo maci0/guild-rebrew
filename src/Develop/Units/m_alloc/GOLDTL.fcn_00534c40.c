@@ -7,7 +7,7 @@ extern void *__cdecl m_alloc(unsigned int size, const char *tag);
 extern void __cdecl m_FreeTracked(void *p);
 extern int __cdecl d3_FindSceneObjectByName(int a0, int a1);
 extern void __cdecl d3_SetObjectVisible(int a0, int a1);
-extern int __cdecl fcn_00442910(int a0, int a1, int a2, int a3);
+extern int __cdecl d3_CreateSceneModelObject(int a0, int a1, int a2, int a3);
 extern int __cdecl d2_CreateRenderableForm(int a0, int a1, int a2);
 extern void __cdecl d2_CaptureFormPageTextures(int a0, char *a1, char *a2);
 extern void __cdecl d2_RenderFormToTextures(int a0);
@@ -46,7 +46,7 @@ int *__cdecl d2_OpenJournalBook(unsigned int a0, int a1, char a2, ...)
         d3_SetObjectVisible(v4, 0);
         v4 = *v3;
         v3[1] = v4;
-        *v3 = fcn_00442910(*(int *)(v4 + 0x1fc), v4 + 0x4c, v4 + 0x84, a1);
+        *v3 = d3_CreateSceneModelObject(*(int *)(v4 + 0x1fc), v4 + 0x4c, v4 + 0x84, a1);
     }
     else
         v3[1] = 0;

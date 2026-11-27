@@ -43,7 +43,7 @@ typedef struct {
 extern int g_67a370;
 extern Slot4cf450 g_9b9ec0[32];
 
-char* __cdecl fcn_00442910(int parent, float* pos, float* dir, char* name);
+char* __cdecl d3_CreateSceneModelObject(int parent, float* pos, float* dir, char* name);
 char __cdecl d3_GridPointToWorld(int map, int x, int y, float* out);
 int __cdecl d3_CreateObjectAnimation(char* obj, Flags4cf450 fl, int n, Ent4cf450* ents);
 
@@ -74,7 +74,7 @@ found:
 	p[0] = pos[0];
 	p[1] = pos[1] + 60.0;
 	p[2] = pos[2];
-	o = fcn_00442910(0, p, d, "ob_BOMBE");
+	o = d3_CreateSceneModelObject(0, p, d, "ob_BOMBE");
 	g_9b9ec0[i].obj = o;
 	o[0x215] |= 1;
 	d3_GridPointToWorld(map, x, y, w);

@@ -30,7 +30,7 @@ void __cdecl d2_InitWindowBounds(int a);
 void __cdecl d2_CenterDialogWindows(int a);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl gm_AmountToUnits(int a, unsigned char k);
-int __cdecl fcn_0050b750(int a, unsigned char k);
+int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
 void __cdecl d2_PopulateProdSettingBars(int dlg, int* list, int* bars, int* icons);
 void __cdecl d2_InitProdSettingControls(int id, int* out, int* value, int* slots,
 	unsigned char* type, int text, Ce800Config cfg, int* handle, int source);
@@ -261,7 +261,7 @@ void __cdecl d2_RunProdSettingsDialog(int building, unsigned short* actor)
 			if (!g_775348) {
 				v15 = d2_GetControlValue(v16);
 			}
-			v15 = fcn_0050b750(v15, g_773d75);
+			v15 = gm_ConvertUnitsToAmount(v15, g_773d75);
 			cm_BeginPacketFieldDelta(building, *(unsigned int*) ((char*) building + 1));
 			cm_AppendPacketFieldDelta(4, 1,
 				(int) ((char*) building + 0x39 - g_aed32c), &v15);

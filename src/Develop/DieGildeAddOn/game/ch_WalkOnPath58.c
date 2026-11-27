@@ -25,7 +25,7 @@ extern void __cdecl d3_RemoveObjectAnimation(int, char*);
 extern char* __cdecl fcn_00404dc0(char*, char*, int);
 extern void __cdecl vfs_ToSlashes(char*);
 extern char* __cdecl ch_AdjustHeightToGround(char*);
-extern void __cdecl fcn_00402aa0(char*);
+extern void __cdecl ch_EnsureCharacterMeshes(char*);
 extern void __cdecl d3snd_PlayObjectSound(char*, char*, int, float);
 extern char* __cdecl sb_PrepareVoice(int, char*);
 extern float __cdecl d3_ComputeYawToTarget(char*, float*);
@@ -120,7 +120,7 @@ void __cdecl ch_WalkOnPath58(char* obj)
 			}
 			d3_RemoveObjectAnim(*(char**) (inst + 0x34));
 			if (*(int*) (*(int*) (inst + 0x34) + 0x1cc) == 0) {
-				fcn_00402aa0(inst);
+				ch_EnsureCharacterMeshes(inst);
 			}
 			p = fcn_00404dc0(inst,
 			                 *(int*) (inst + 0x124) != 0 ? "bewegung/karren_ziehen"

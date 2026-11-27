@@ -26,7 +26,7 @@ double __cdecl log10(double x);
 int __cdecl gm_PickWirtshausGuest(int kind);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 int __cdecl gm_AmountToUnits(int a, unsigned char k);
-int __cdecl fcn_0050b750(int a, unsigned char k);
+int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
 float __cdecl gm_RandomFloat01(void);
 
 /* ADDRESS: GOLDTL 0x004927c0 */
@@ -53,7 +53,7 @@ int __cdecl gm_ResolveWirtshausOffer(unsigned char* e, Deal* o, int kind)
 		x = 10000.0;
 	}
 	x = x / (log10(x) + 1.0) * 0.1f;
-	o->price = fcn_0050b750((int) (x * (kind * 0.25f)), g_773d75);
+	o->price = gm_ConvertUnitsToAmount((int) (x * (kind * 0.25f)), g_773d75);
 	o->tax = (int) (o->price * 0.1f);
 	o->x28 = 0;
 	o->x2c = 0;

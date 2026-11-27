@@ -5,7 +5,7 @@ extern char* g_f8f080;
 extern GOLD_GUI_WINDOW g_f8f120[];
 
 /* ADDRESS: GOLD 0x00475a90 */
-void __cdecl fcn_00475a90(int id, int flag)
+void __cdecl d2_ApplyElementEnabled(int id, int flag)
 {
     GuiEnt* e;
     GOLD_GUI_WINDOW* w;
@@ -20,13 +20,13 @@ void __cdecl fcn_00475a90(int id, int flag)
         return;
     w = &g_f8f120[e->bild_offset];
     for (i = 0; i < w->count; i++)
-        fcn_00475a90(w->list[i], flag);
+        d2_ApplyElementEnabled(w->list[i], flag);
     if (*(int*) ((char*) w + 0x3b8) != -1)
-        fcn_00475a90(*(int*) ((char*) w + 0x3b8), flag);
+        d2_ApplyElementEnabled(*(int*) ((char*) w + 0x3b8), flag);
     if (*(int*) ((char*) w + 0x3bc) != -1)
-        fcn_00475a90(*(int*) ((char*) w + 0x3bc), flag);
+        d2_ApplyElementEnabled(*(int*) ((char*) w + 0x3bc), flag);
     if (*(int*) ((char*) w + 0x3c0) != -1)
-        fcn_00475a90(*(int*) ((char*) w + 0x3c0), flag);
+        d2_ApplyElementEnabled(*(int*) ((char*) w + 0x3c0), flag);
 
 
 

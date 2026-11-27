@@ -4,7 +4,7 @@ extern char* evt_CurrentScript;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl evt_LogScriptError(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040f560(char** a, char* r, char* g, char* b, char* al)
+int __cdecl evt_SetEmitterColor(char** a, char* r, char* g, char* b, char* al)
 {
 	char* e;
 

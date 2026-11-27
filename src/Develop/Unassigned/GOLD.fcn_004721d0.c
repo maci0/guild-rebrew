@@ -5,7 +5,7 @@ void* __cdecl d3_CreateSceneResource(const char* name, int flag);
 void __cdecl ReportClientMessage(char* text);
 
 /* ADDRESS: GOLD 0x004721d0 */
-void __cdecl fcn_004721d0(char* name, int index)
+void __cdecl d2_LoadBackgroundTexture(char* name, int index)
 {
 	char text[0x400];
 	char* win;

@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x0043b4e0 */
-int __cdecl fcn_0043b4e0(void)
+int __cdecl d3_HandleEventNone(void)
 {
     return 1;
 }

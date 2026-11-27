@@ -52,7 +52,7 @@ int __cdecl d2_SyncProduktionSlotGrid(int, int);
 int __cdecl d2_DrawProduktionSlotGrid(int, int, int, int, int);
 int __cdecl gm_IsWarehouse(int);
 int __cdecl gm_CanTradeWithObject(int, int);
-void __cdecl fcn_0046e700(int);
+void __cdecl d2_DestroyGuiElement(int);
 void __cdecl d2_RemoveElement(int);
 void __cdecl d2_CloseWindow(int);
 int __cdecl he_StartHandlungSearch(int, int, int, int, int, ...);
@@ -107,7 +107,7 @@ int __cdecl d2_ShowNewCartDialog(int);
 void __cdecl d2_CalcTradeCartCost(int, float, int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl gm_ConvertUnitsToAmount(int, int);
 int __cdecl cm_RequestClearLagerslot(int, int);
 int __cdecl d2_RunCityScrollMapDialog(int, int, int, int, int);
 int __cdecl gm_CheckEntityType(int);
@@ -588,7 +588,7 @@ l_sel:
 			}
 			if (e->f0c != -1) {
 				e->f00 = 0;
-				fcn_0046e700(e->f0c);
+				d2_DestroyGuiElement(e->f0c);
 				e->f0c = -1;
 				e->f04 = 0;
 			}
@@ -596,7 +596,7 @@ l_sel:
 			idx = (int) e->fD8;
 			do {
 				if (*(int*) idx != -1) {
-					fcn_0046e700(*(int*) idx);
+					d2_DestroyGuiElement(*(int*) idx);
 					d2_RemoveElement(*(int*) (idx + 0xc));
 					*(int*) idx = -1;
 					*(int*) (idx + 0xc) = -1;
@@ -604,8 +604,8 @@ l_sel:
 				idx += 4;
 			} while (--j != 0);
 			d2_RemoveElement(e->f14);
-			fcn_0046e700(e->f18);
-			fcn_0046e700(e->f1c);
+			d2_DestroyGuiElement(e->f18);
+			d2_DestroyGuiElement(e->f1c);
 			e->f14 = -1;
 			e->f18 = -1;
 			e->f1c = -1;
@@ -818,7 +818,7 @@ l_slot_handles:
 		}
 		if (j >= *(int*) &f.v15C) {
 			if (*(int*) ((char*) e + 0xd8 + f.v20 * 4) != -1) {
-				fcn_0046e700(*(int*) ((char*) e + 0xd8 + f.v20 * 4));
+				d2_DestroyGuiElement(*(int*) ((char*) e + 0xd8 + f.v20 * 4));
 				if (*(int*) ((char*) e + 0xe4 + f.v20 * 4) != -1) {
 					d2_RemoveElement(*(int*) ((char*) e + 0xe4 + f.v20 * 4));
 				}
@@ -1147,7 +1147,7 @@ l_5bc253:
 		}
 		idx = gm_eval_SlotVoll(f.v18, slot_value, j);
 		f.v28 = idx * i;
-		f.vA4 = (int) fcn_0050b750(1, (int) (g_773d75));
+		f.vA4 = (int) gm_ConvertUnitsToAmount(1, (int) (g_773d75));
 		*(float*) &f.v84 = (float) f.v28;
 		if ((int) (*(float*) &f.v84 * *(float*) &f.v64 - *(float*) &f.v84)
 		    < f.vA4) {

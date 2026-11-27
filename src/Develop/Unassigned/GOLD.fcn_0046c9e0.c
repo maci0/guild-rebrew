@@ -3,7 +3,7 @@ extern GuiEnt** g_006ed964;
 int __cdecl d2_FindFreeElementSlot(void);
 
 /* ADDRESS: GOLD 0x0046c9e0 */
-int __cdecl fcn_0046c9e0(void)
+int __cdecl d2_AllocGuiElement(void)
 {
 	int index;
 	int i;

@@ -7,7 +7,7 @@ extern int g_67a370;
 
 void __cdecl d3_SetObjectRotation(char*, char*);
 
-void __cdecl fcn_00439aa0(char* o)
+void __cdecl d3_RegisterSceneObjectTl(char* o)
 {
 	if (*(int*) (o + 0x218) == 3 && d3_ActiveCamera == 0) {
 		d3_SetActiveCamera(o);

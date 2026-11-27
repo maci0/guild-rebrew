@@ -114,7 +114,7 @@ int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_TurnBookPagesForward(char*);
 void __cdecl d2_TurnBookPagesBack(char*);
 int __cdecl d2_PromptSoeldnerAmountDialog(void);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl gm_ConvertUnitsToAmount(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
 void __cdecl cm_SendLogAction(int);
 void __cdecl cm_RequestMoveCredits(int, int, int, int);
@@ -279,7 +279,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 			if (gm_CheckEntityStock(
 			        (void*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
 						]),
-			        fcn_0050b750(n, g_773d75),
+			        gm_ConvertUnitsToAmount(n, g_773d75),
 			        g_773d75)) {
 				f.pIt = (int*) &f.rows[0].obj;
 				f.pg = f.cnt;
@@ -290,7 +290,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 						cm_RequestMoveCredits(
 						    *(int*) (p + 4), -1,
 						    g_773d75,
-						    fcn_0050b750(
+						    gm_ConvertUnitsToAmount(
 						        perRow,
 						        g_773d75));
 						cm_RequestCopyEntityData(
@@ -310,7 +310,7 @@ void __cdecl d2_RunSoeldnerbuchDialog(unsigned char* building, int buildingId)
 			    *(int*) ((int) &((ENTITY_RECORD*) 0x7f4ca0)[*(unsigned short*) 0x774970
 						] + 4),
 			    g_773d75,
-			    fcn_0050b750(n, g_773d75));
+			    gm_ConvertUnitsToAmount(n, g_773d75));
 		}
 	L7e3d:
 		n = f.cnt;

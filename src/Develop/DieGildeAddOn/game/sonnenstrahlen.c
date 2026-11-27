@@ -1,7 +1,7 @@
 #include "sonnenstrahlen.h"
 
 #ifdef REBREW_GOLD
-#define fcn_00445600 fcn_00449690
+#define fcn_00445600 d3_FindSceneObjectGold
 #define fcn_00442910 d3_SpawnModelObject
 #define fcn_00418860 fcn_004172e0
 #endif
@@ -11,7 +11,7 @@ int SonnenstrahlenAktiv = 0;
 int SonnenstrahlenStartZeit = 0xffffffff;
 int SonnenstrahlenPhase = 0;
 char* __cdecl d3_FindSceneObject(char*, int, char*, char*);
-char* __cdecl fcn_00442910(char*, float*, float*, char*);
+char* __cdecl d3_CreateSceneModelObject(char*, float*, float*, char*);
 void __cdecl StopSonnenstrahlen(char* objekt, int phase)
 {
     SonnenstrahlenAktiv = -1;
@@ -50,7 +50,7 @@ char* __cdecl CreateSonnenstrahlen(void)
 	position[1] = value;
 	value = *(float*) (d3_ActiveCamera + 0x54);
 	position[2] = value;
-	g_6b5cf8 = fcn_00442910(0, position, rotation, "sonnenstrahlen");
+	g_6b5cf8 = d3_CreateSceneModelObject(0, position, rotation, "sonnenstrahlen");
 #ifdef REBREW_GOLD
 	g_6b5cf8[0x212] |= 0x0c;
 	g_6b5cf8[0x211] &= ~2;

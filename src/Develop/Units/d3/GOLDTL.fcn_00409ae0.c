@@ -21,7 +21,7 @@ extern char g_6b5c28;
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 #include "Develop/Units/d3/d3_animation.h"
 void __cdecl d3_RemoveObjectAnim(void*);
-void __cdecl fcn_00402aa0(char*);
+void __cdecl ch_EnsureCharacterMeshes(char*);
 struct anim_409ae0* __cdecl ch_AttachAni(char*, const char*, int);
 void __cdecl m_FreeTracked(void*);
 #include "Develop/DieGildeAddOn/game/ch_queue.h"
@@ -48,7 +48,7 @@ int __cdecl ch_StartWalkAnimation(char* ev, char* step)
 	}
 	d3_RemoveObjectAnim(*(void**) (obj + 0x34));
 	if (*(int*) (*(char**) (obj + 0x34) + 0x1cc) == 0) {
-		fcn_00402aa0(obj);
+		ch_EnsureCharacterMeshes(obj);
 	}
 	if (*(int*) (obj + 0x124) != 0) {
 		*(struct anim_409ae0**) (obj + 0x70) = ch_AttachAni(obj, "bewegung/karren_ziehen", 1);

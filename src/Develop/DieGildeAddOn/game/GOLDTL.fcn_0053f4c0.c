@@ -40,7 +40,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 void __cdecl d2_RenderAndPresentFrame(void);
 #include "client_timer.h"
-void __cdecl fcn_0053f4b0(void);
+void __cdecl d2_LoadingScreenTimerCallback(void);
 
 void __cdecl d2_ShowLoadingScreen(void)
 {
@@ -63,5 +63,5 @@ void __cdecl d2_ShowLoadingScreen(void)
 	d2_SetForm(g_7e1d40, 1);
 	d2_AddWindowValueGauge(0, 0, 0x246, 0, 0x246, 0x83, 0x42, d2_CurrentWindowId);
 	d2_RenderAndPresentFrame();
-	tb_OpenFunction(fcn_0053f4b0, 7);
+	tb_OpenFunction(d2_LoadingScreenTimerCallback, 7);
 }

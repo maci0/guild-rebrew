@@ -69,7 +69,7 @@ void __cdecl d2_UpdateWorkerOverlaySlots(int, char*);
 void __cdecl d2_TurnBookPagesForward(char*);
 void __cdecl d2_TurnBookPagesBack(char*);
 int __cdecl d2_RunBonusAmountDialog(void);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl gm_ConvertUnitsToAmount(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
 void __cdecl cm_SendLogAction(int);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
@@ -269,7 +269,7 @@ void __cdecl d2_RunPersonalbuchDialog(char* building, int winCtx)
 		    && (ret = d2_RunBonusAmountDialog()) != 0) {
 			tv = ret / nSlots;
 			thirds = tv / 3;
-			tv3 = fcn_0050b750(ret, *(unsigned char*) 0x773d75);
+			tv3 = gm_ConvertUnitsToAmount(ret, *(unsigned char*) 0x773d75);
 			if (gm_CheckEntityStock((void*) (0x7f4ca0
 			                          + *(unsigned short*) 0x774970 * 0x21c),
 			                 tv3, *(unsigned char*) 0x773d75)) {
@@ -278,7 +278,7 @@ void __cdecl d2_RunPersonalbuchDialog(char* building, int winCtx)
 						continue;
 					}
 					cm_SendLogAction(0x6ac2bc);
-					tv3 = fcn_0050b750(tv, *(unsigned char*) 0x773d75);
+					tv3 = gm_ConvertUnitsToAmount(tv, *(unsigned char*) 0x773d75);
 					cm_RequestMoveCredits(*(int*) (rows[i].obj + 4), -1,
 					             *(unsigned char*) 0x773d75, tv3);
 					cm_RequestCopyEntityData(*(int*) (0x7f4ca4
@@ -291,7 +291,7 @@ void __cdecl d2_RunPersonalbuchDialog(char* building, int winCtx)
 			             *(int*) (0x7f4ca4
 			                      + *(unsigned short*) 0x774970 * 0x21c),
 			             *(unsigned char*) 0x773d75,
-			             fcn_0050b750(ret, *(unsigned char*) 0x773d75));
+			             gm_ConvertUnitsToAmount(ret, *(unsigned char*) 0x773d75));
 			}
 		}
 		p = gm_FindBuildingOwner((int) building);

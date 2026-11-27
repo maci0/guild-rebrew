@@ -8,7 +8,7 @@ extern int g_6a25a4;
 
 void __cdecl d2_SetFormVisibility(int h, int v);
 #ifdef REBREW_GOLD
-#define d2_DestroyElement fcn_0046e700
+#define d2_DestroyElement d2_DestroyGuiElement
 #endif
 void __cdecl d2_DestroyElement(int h);
 void __cdecl d2_SetSlotVisibility(int h, int v);

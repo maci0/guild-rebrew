@@ -19,7 +19,7 @@ int __cdecl gm_SetupEntityQuery(int);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl ch_StartMovement(int, int, int, int, int, char*);
 int __cdecl he_AssignActionSlot(int, int, int, int);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 int __cdecl gm_GetBuildingTechEffect(int, int, int);
 int __cdecl cm_RequestTransferCurrencyNoKill(int, int, unsigned char, int);
 int __cdecl gm_GetEntityTableEntry(int);
@@ -121,7 +121,7 @@ void __cdecl he_RunTaschendieb(int event)
 					v16 += 1;
 					v17 -= 1;
 				} while (v17);
-				v5 = fcn_0050b750(v15, g_773d75);
+				v5 = gm_ConvertUnitsToAmount(v15, g_773d75);
 				v6 = gm_GetBuildingTechEffect(v4, 1, 1);
 				v5 = (int) (((float) v6 * 0.01f + 1.0f) * v5);
 				cm_RequestTransferCurrencyNoKill(*(int*) (v18 + 4), -1,
@@ -161,7 +161,7 @@ void __cdecl he_RunTaschendieb(int event)
 			    + 1.0f);
 			v9 = (gm_RandomMod((unsigned short) ((v6 + 1) * v6))
 			    & 0xffff) + v6 * 2;
-			v5 = fcn_0050b750(v9 * 2, g_773d75);
+			v5 = gm_ConvertUnitsToAmount(v9 * 2, g_773d75);
 			if (*(char*) (event + 0xd8) != 0) {
 				v4 = 0;
 				v6 = 0x20;

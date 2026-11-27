@@ -6,7 +6,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 
 
 /* ADDRESS: GOLDTL 0x004fa2e0 */
-int __cdecl fcn_004fa2e0(void* entity, void* params)
+int __cdecl gm_HandleHighRolePrivilege(void* entity, void* params)
 {
 	char buf[0x100];
 

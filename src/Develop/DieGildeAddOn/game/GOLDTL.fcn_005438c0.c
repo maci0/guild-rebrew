@@ -141,7 +141,7 @@ void __cdecl amt_SyncAllOfficeSlots(void);
 int __cdecl cm_EnqueueStagedPacket(void*);
 void __cdecl gm_RunRoundUpdate(void);
 void __cdecl cm_RequestMoveCredits(int, int, int, int);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl gm_ConvertUnitsToAmount(int, int);
 void __cdecl ls_LoadNetworkGame(void*);
 void __cdecl ls_StartNetworkGame(void*);
 int __cdecl fcn_0064d41a(char*, const char*, ...);
@@ -382,7 +382,7 @@ void __cdecl main_RunGameLoop(int skipBuildingInit)
 			do {
 				if ((*(char*) (p + 6) != 0) &&
 				    ((*(char*) p == 6) || (*(char*) p == 7))) {
-					c = fcn_0050b750(n, g_773d75);
+					c = gm_ConvertUnitsToAmount(n, g_773d75);
 					cm_RequestMoveCredits(*(int*) (p + 2), -1, g_773d75, c);
 				}
 				p += 0x21c;

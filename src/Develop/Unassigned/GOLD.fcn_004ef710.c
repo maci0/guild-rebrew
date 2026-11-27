@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x004ef710 */
-int __cdecl fcn_004ef710(void* a0, void* a1)
+int __cdecl gv_IsSameField(void* a0, void* a1)
 {
 	unsigned short id;
 

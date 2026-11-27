@@ -20,7 +20,7 @@ int __cdecl d2_AddWindowValueGauge(int, int, int, int, int, int, int, int);
 int __cdecl d2_UpdateProgressBar(int, int, int);
 int __cdecl main_RunFrameLoop(void*, int);
 char* __cdecl d2_GetControlValue(int);
-int __cdecl fcn_0050b750(char*, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(char*, unsigned char);
 void __cdecl d2_DestroyForm(int);
 
 
@@ -81,7 +81,7 @@ void __cdecl cut_RunAuctionBidDialog(char* a, int* b)
 				g_774654 = 1;
 				if (x != 1 && x == 2) {
 					*(int*) (a + 0x98) = 1;
-					*(int*) (a + 0x94) = fcn_0050b750(d2_GetControlValue(w), g_773d75);
+					*(int*) (a + 0x94) = gm_ConvertUnitsToAmount(d2_GetControlValue(w), g_773d75);
 				}
 			}
 		}

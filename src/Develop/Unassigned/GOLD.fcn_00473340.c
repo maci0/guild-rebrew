@@ -6,7 +6,7 @@ extern GuiEnt* g_00f8f080;
 extern short g_00fb9070;
 extern short g_00fb9072;
 int __cdecl d2_CreateElementAt(short, short, int);
-void __cdecl fcn_004730d0(int, GuiWin*);
+void __cdecl d2_ReorderControlInWindow(int, GuiWin*);
 void __cdecl d2_SetElementScale(int, int);
 void __cdecl d2_GetWindowBorderSize(GuiWin*, int*, int*);
 
@@ -27,7 +27,7 @@ int __cdecl d2_AddWindowImage(int x, int y, int image, int window_id, int contex
     window->list[window->count] = d2_CreateElementAt((short)(window->x + x), (short)(window->y - (short) window->scroll + y), image);
     element = window->list[window->count];
     if (element != -1) {
-        fcn_004730d0(element, (void*) window);
+        d2_ReorderControlInWindow(element, (void*) window);
         g_00f8f080[element].parent = (void*) window;
         g_00f8f080[element].f22 = 0;
         g_00f8f080[element].f24 = g_00fb9070;

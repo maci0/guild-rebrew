@@ -11,7 +11,7 @@ void __cdecl ls_RebindSavedSceneRefs(void);
 int __cdecl ls_WriteSaveHeader(void* stream, int flags);
 int __cdecl gm_SaveSceneSnapshot(void* stream);
 int __cdecl ls_fio_SaveObjekteINST(void* stream);
-int __cdecl fcn_0051ecf0(void* stream);
+int __cdecl ls_WriteBuildingEntityState(void* stream);
 int __cdecl ls_SaveDynamicEntities(void* stream);
 int __cdecl ls_SaveEntities(void* stream);
 int __cdecl ls_SaveFiguresAndAnimQueue(void* stream);
@@ -63,7 +63,7 @@ int __cdecl ls_SaveGame(char* name, char* slot, int flags)
 		ls_RebindSavedSceneRefs();
 		return 0;
 	}
-	if (fcn_0051ecf0(stream) == 0) {
+	if (ls_WriteBuildingEntityState(stream) == 0) {
 		CloseVfsStream(stream);
 		ls_RebindSavedSceneRefs();
 		return 0;

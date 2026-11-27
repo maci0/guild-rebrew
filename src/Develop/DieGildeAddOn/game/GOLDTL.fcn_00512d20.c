@@ -47,7 +47,7 @@ extern unsigned char g_773d75;
 
 
 int __cdecl cm_SendSellObjekt(int, int, int, int, char, int);
-int __cdecl fcn_0050b750(int, char);
+int __cdecl gm_ConvertUnitsToAmount(int, char);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl gv_AssignGraveyardField(Player*);
 int __cdecl cm_RequestAssignWorker(Player*, int, int, int);
@@ -70,7 +70,7 @@ void __cdecl init_SetupBetriebWorkers(Player* p)
 	o = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[p->office];
 	if (o->category == 9) {
 		cm_SendSellObjekt(p->id, -1, 0x136, 1, (*(char*)&g_773d75), 0);
-		cm_RequestMoveCredits(((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_id, -1, (*(char*)&g_773d75), fcn_0050b750(0x1f4, (*(char*)&g_773d75)));
+		cm_RequestMoveCredits(((ENTITY_RECORD*)g_7f4ca0)[p->slot].entity_id, -1, (*(char*)&g_773d75), gm_ConvertUnitsToAmount(0x1f4, (*(char*)&g_773d75)));
 	} else if (o->category != 4 && o->category != 0x10 && o->category != 0x13) {
 		cm_SendSellObjekt(p->id, -1, 0x134, 1, (*(char*)&g_773d75), 0);
 	}

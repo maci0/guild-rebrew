@@ -22,7 +22,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_CreateGuiWindow(int, char*);
 int __cdecl d2_GetControlValue(int);
-void __cdecl fcn_00476b60(void);
+void __cdecl d2_ResetSelectionAndInput(void);
 void __cdecl d2_DestroyForm(int);
 int __cdecl main_RunFrameLoop(int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
@@ -100,7 +100,7 @@ unsigned int __cdecl d2_ShowChoosePlayerDialog(int a0)
 			}
 		}
 	}
-	fcn_00476b60();
+	d2_ResetSelectionAndInput();
 	id = main_RunFrameLoop((int) d2_ShowChoosePlayerDialog, a0);
 	while (id) {
 		if (g_14ce8e0 != 0) {

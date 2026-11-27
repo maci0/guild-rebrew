@@ -12,7 +12,7 @@ int __cdecl gm_RollFavorRatioCheck(int, int, int, int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 
 /* ADDRESS: GOLDTL 0x00566d00 */
-void __cdecl fcn_00566d00(int action)
+void __cdecl he_RunCaptiveReleaseOffer(int action)
 {
 	char buf[256];
 	unsigned short* a;

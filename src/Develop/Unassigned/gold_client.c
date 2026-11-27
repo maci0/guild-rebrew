@@ -21,7 +21,7 @@ int __cdecl fcn_00502020(int);
 int __cdecl fcn_004e50a0(int);
 
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_0044aa10(int, int);
+void __cdecl d3_WriteSceneFile(int, int);
 
 /* ADDRESS: GOLD 0x00519ad0 */
 void __cdecl ls_ResolveSavedSceneRefs(void)
@@ -72,7 +72,7 @@ int __cdecl ls_SaveSceneWithBuildingIds(int a)
 			    *(int*) (g_889f74 + i * 0xa9 + 1);
 		}
 	}
-	fcn_0044aa10(0, a);
+	d3_WriteSceneFile(0, a);
 	for (i = 0; i < 0x100; i++) {
 		e = g_889f74 + i * 0xa9;
 		if (*e != 0 && *(char**) (e + 0x61) != 0) {

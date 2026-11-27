@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x00465e60 */
-void __cdecl fcn_00465e60(char *p)
+void __cdecl d2_ResetDirtyRectOwner(char *p)
 {
 	int i;
 

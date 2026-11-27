@@ -63,7 +63,7 @@ int __cdecl bio_rd_array_quick(char*, int, int*);
 void* __cdecl m_alloc(int, char*);
 void __cdecl m_FreeTracked(void*);
 int __cdecl d3_LoadOrReuseTexture(char*, FLOOR_COLOR_BITS, unsigned int, unsigned int);
-int __cdecl fcn_0045ce90(int);
+int __cdecl d3_LoadTextureSurfaceTl(int);
 char* __cdecl d3_LoadFloorPatch(char*);
 
 /* ADDRESS: GOLDTL 0x00447e30 */
@@ -143,7 +143,7 @@ int __cdecl d3_int_io_LoadFloor(char* stream, unsigned int version)
 							mask = ((b1 & 0x0f) << 2) | (b2 & 1);
 							memset(&bits, 0, sizeof(bits)); bits.a = 0x7f; last = d3_LoadOrReuseTexture(recName, bits, mask, 0);
 							if (last != 0) {
-								fcn_0045ce90(last);
+								d3_LoadTextureSurfaceTl(last);
 							}
 						}
 						memset(&bits, 0, sizeof(bits));

@@ -7,10 +7,10 @@ void __cdecl he_RunElectionCampaign(void);
 void __cdecl he_AllocPredigt(void);
 void __cdecl he_RunPredigt(void);
 void __cdecl he_StartCourtTrial(void);
-void __cdecl fcn_0054b130(void);
+void __cdecl he_StartCourtAction(void);
 void __cdecl he_StartAction0x2e(void);
 void __cdecl he_HandleAction0x2e(void);
-void __cdecl fcn_0054b420(void);
+void __cdecl he_StartSkillDuelEvent(void);
 void __cdecl he_RunSkillDuelEvent(void);
 void __cdecl he_StartFreeActionStub(void);
 void __cdecl he_StartFest(void);
@@ -100,7 +100,7 @@ void __cdecl he_RunPoliticians(void);
 void __cdecl fcn_0055a020(void);
 void __cdecl he_InitOfficeAudit(void);
 void __cdecl he_RunOfficeAudit(void);
-void __cdecl fcn_0055a380(void);
+void __cdecl he_StartMeisterpruefungNotice(void);
 void __cdecl he_RunMeisterpruefungNoticePrompt(void);
 void __cdecl he_AllocAction0x7f(void);
 void __cdecl he_RunAction0x7f(void);
@@ -135,13 +135,13 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(44, (void*) he_StartCourtTrial, (void*) 0x0054ac70) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(45, (void*) fcn_0054b130, (void*) 0x54b140) != 0) {
+	if (he_RegisterHandler(45, (void*) he_StartCourtAction, (void*) 0x54b140) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(46, (void*) he_StartAction0x2e, (void*) he_HandleAction0x2e) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(47, (void*) fcn_0054b420, (void*) he_RunSkillDuelEvent) != 0) {
+	if (he_RegisterHandler(47, (void*) he_StartSkillDuelEvent, (void*) he_RunSkillDuelEvent) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(48, (void*) he_StartFreeActionStub, (void*) 0x54b810) != 0) {
@@ -302,7 +302,7 @@ int __cdecl he_RegisterEventHandlers(void)
 	if (he_RegisterHandler(125, (void*) he_InitOfficeAudit, (void*) he_RunOfficeAudit) != 0) {
 		return 1;
 	}
-	if (he_RegisterHandler(126, (void*) fcn_0055a380, (void*) he_RunMeisterpruefungNoticePrompt) != 0) {
+	if (he_RegisterHandler(126, (void*) he_StartMeisterpruefungNotice, (void*) he_RunMeisterpruefungNoticePrompt) != 0) {
 		return 1;
 	}
 	if (he_RegisterHandler(127, (void*) he_AllocAction0x7f, (void*) he_RunAction0x7f) != 0) {

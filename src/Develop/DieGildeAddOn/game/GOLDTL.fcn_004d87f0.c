@@ -8,7 +8,7 @@ void __cdecl io_FormatTextBuffer(char*, int, int);
 void __cdecl d2_ShowStatusBanner(char*);
 void __cdecl d3_DestroyObject(int);
 void __cdecl d3_TransformPoint(char*, float*, float*);
-char* __cdecl fcn_00442910(int, float*, float*, char*);
+char* __cdecl d3_CreateSceneModelObject(int, float*, float*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 char __cdecl SelectTextureSet(void*, void*, unsigned char, char);
 int __cdecl fcn_0064d41a(char*, char*, ...);
@@ -46,8 +46,8 @@ void __cdecl d3_UpdateConquerFlag(int* orderRecord)
 			rotation[1] = 0.0f;
 			rotation[2] = 0.0f;
 			d3_TransformPoint(info, (float*) (info + 0x4c), position);
-			obj = fcn_00442910(0, position, rotation, "ub_FLUCHTFLAGGE");
-			g_9b9e40[g_772f08] = fcn_00442910(0, position, rotation, g_6b5c60);
+			obj = d3_CreateSceneModelObject(0, position, rotation, "ub_FLUCHTFLAGGE");
+			g_9b9e40[g_772f08] = d3_CreateSceneModelObject(0, position, rotation, g_6b5c60);
 			d3_ApplyObjectAnimation(obj, "sonstiges/anim_FLUCHTFLAGGE.baf", 1);
 			mode = *(int**) (ent + 0x16c);
 			if (mode != 0 && *(int*) ((char*) mode + 0x54) != 0) {

@@ -27,7 +27,7 @@ void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00476b60(void);
+void __cdecl d2_ResetSelectionAndInput(void);
 int __cdecl d2_GetWindowListItem(int, int, int);
 int __cdecl d2_GetFormWindow(int k, int j);
 void __cdecl d2_AddWindowScrollButtons(int x, int y, int win, int target, int id);
@@ -72,7 +72,7 @@ void __cdecl d2_RunDiebesgildeInfoDialog(char* p)
 	d2_SetForm(d, 1);
 	io_AppendText(0x19fb);
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00476b60();
+	d2_ResetSelectionAndInput();
 	d2_SetForm(d, 3);
 	back = d2_GetWindowListItem(d, 3, io_AppendText(0x1ba6));
 	d2_AddWindowScrollButtons(-1, -1, d2_CurrentWindowId, d2_GetFormWindow(d, 2), 0x767);

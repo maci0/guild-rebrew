@@ -7,7 +7,7 @@ extern char g_6b5c60[];
 char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SelectSceneContext(int, int);
-char* __cdecl fcn_00442910(int, float*, float*, char*);
+char* __cdecl d3_CreateSceneModelObject(int, float*, float*, char*);
 
 
 
@@ -37,7 +37,7 @@ int __cdecl cm_ExSwapEntityModel(char* cmd, char* result)
 		rot[1] = *(float*) (*(char**) (*(char**) (o + 0x184) + 0x34) + 0x88);
 		rot[2] = *(float*) (*(char**) (*(char**) (o + 0x184) + 0x34) + 0x8c);
 		keep = *(int*) (*(char**) (*(char**) (o + 0x184) + 0x34) + 0x204);
-		n = fcn_00442910(0, pos, rot, cmd + 0x14);
+		n = d3_CreateSceneModelObject(0, pos, rot, cmd + 0x14);
 	}
 	if (n != 0) {
 		strcpy(n, *(char**) (*(char**) (o + 0x184) + 0x34));

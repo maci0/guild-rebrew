@@ -23,18 +23,18 @@ extern short g_00f8f084;
 extern short g_005fe73c;
 extern char s_5fe7ac[];
 
-int __cdecl fcn_0046c9e0(void);
-int __cdecl fcn_0046ea00(char* text, int font);
-void __cdecl fcn_004730d0(int id, GuiWin* parent);
+int __cdecl d2_AllocGuiElement(void);
+int __cdecl d2_CalcTextWidth(char* text, int font);
+void __cdecl d2_ReorderControlInWindow(int id, GuiWin* parent);
 
 #define d2_TEXT_WINDOWS g_00f8f120
 #define d2_TEXT_ENTRIES g_00f8f080
 #define d2_TEXT_ERROR s_5fe7ac
 #define d2_TEXT_DEFAULT_FONT g_005fe73c
 #define d2_TEXT_TAG "d2:ShowTxt"
-#define d2_TEXT_ALLOCATE_INDEX fcn_0046c9e0
-#define d2_TEXT_MEASURE fcn_0046ea00
-#define d2_TEXT_INSERT fcn_004730d0
+#define d2_TEXT_ALLOCATE_INDEX d2_AllocGuiElement
+#define d2_TEXT_MEASURE d2_CalcTextWidth
+#define d2_TEXT_INSERT d2_ReorderControlInWindow
 #else
 /* Field spellings follow the existing Gold view's roles, not TL offsets. */
 typedef struct D2_TEXT_WINDOW {

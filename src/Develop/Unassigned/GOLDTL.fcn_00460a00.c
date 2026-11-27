@@ -4,7 +4,7 @@
 
 #pragma intrinsic(memcpy, memset)
 
-void __cdecl fcn_00460a00(char* buffer, void* src, int size)
+void __cdecl z_inflate_set_dictionary(char* buffer, void* src, int size)
 {
 	char* dst;
 

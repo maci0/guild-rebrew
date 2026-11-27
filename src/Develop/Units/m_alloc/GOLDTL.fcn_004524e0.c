@@ -4,7 +4,7 @@ extern int g_67a370;
 extern volatile int g_6b7fac;
 extern char g_1040640[];
 int __cdecl d3_LoadOrReuseTexture(char* name, int flags, int a3, int a4);
-void __cdecl fcn_0045ce90(int h);
+void __cdecl d3_LoadTextureSurfaceTl(int h);
 void* __cdecl m_alloc(unsigned int size, const char* tag);
 void __cdecl d3_InitSceneObject(char* o);
 
@@ -20,7 +20,7 @@ char* __cdecl d3_CreateParticleSystem(unsigned int entryCount, char* assetName, 
 	if (a3 > 0.0 && entryCount > 0) {
 		assetHandle = d3_LoadOrReuseTexture(assetName, a2, 0, 0);
 		if (assetHandle != 0) {
-			fcn_0045ce90(assetHandle);
+			d3_LoadTextureSurfaceTl(assetHandle);
 			s = m_alloc(0x31c, (char*) 0x67bc8c);
 			*(int*) (s + 0xdc) = assetHandle;
 			i = (assetHandle - g_104049c) / 0x70;

@@ -6,7 +6,7 @@ void __cdecl io_FormatTextBuffer(void*, int, ...);
 void __cdecl d2_ShowPrivilegMessage(void*, int, char*);
 
 /* ADDRESS: GOLDTL 0x004f8d90 */
-int __cdecl fcn_004f8d90(char* entity, int* command)
+int __cdecl gm_HandleKerkermeisterSecondaryPrivilege(char* entity, int* command)
 {
 	char buf[0x400];
 	char sep;

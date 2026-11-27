@@ -33,7 +33,7 @@ int __cdecl gm_HasActiveMission(int);
 void __cdecl d2_ShowMissionForEntity(int);
 void __cdecl cm_SendChangePlayerIdentity(int, int);
 char *__cdecl gm_LookupEntityRecordById(int);
-float __cdecl fcn_00505e30(unsigned short);
+float __cdecl gm_GetEntityAge(unsigned short);
 void __cdecl gm_GetEntityDate(char *, char *);
 int __cdecl gm_CalcPersonBirthDate(char *, char *);
 int __cdecl gm_AccumulateTyped2(char *);
@@ -98,7 +98,7 @@ void __cdecl d2_ShowSpielerInfoDialog(unsigned short *person, int read_only)
 		ok = 1;
 	} else {
 		io_AppendText("$5<$R%s$0<$3>$L%i$A$0>", 0x1f54,
-		    (int)fcn_00505e30(*person));
+		    (int)gm_GetEntityAge(*person));
 	}
 	if (*((char *)person + 0x164) != 0) {
 		io_AppendText("$5<$R%s$0<$3>$L%s$A$0>", 0x1f55,

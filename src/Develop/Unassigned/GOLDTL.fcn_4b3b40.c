@@ -4,7 +4,7 @@
 
 #include <string.h>
 
-int __cdecl fcn_004b39f0(void)
+int __cdecl gm_ClearMissionTable(void)
 {
 	memset((void*) 0x10069a0, 0, 0x1200);
 	return 1;

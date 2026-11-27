@@ -29,13 +29,13 @@ void __cdecl d3_AttachSceneNode(MODEL_SCENE_OBJ* parent, MODEL_SCENE_OBJ* o);
 int __cdecl d3_FindCachedModel(int id);
 void __cdecl d3_LoadModel(int a, int b);
 void __cdecl d3_AttachCachedModelParts(MODEL_SCENE_OBJ* o, int z, int id);
-void __cdecl fcn_0045ce90(int* t);
+void __cdecl d3_LoadTextureSurfaceTl(int* t);
 void __cdecl d3_SetNodePosition(MODEL_SCENE_OBJ* o, int a);
 void __cdecl d3_SetObjectRotation(MODEL_SCENE_OBJ* o, int a);
-void __cdecl fcn_00439aa0(MODEL_SCENE_OBJ* o);
+void __cdecl d3_RegisterSceneObjectTl(MODEL_SCENE_OBJ* o);
 void __cdecl d3_DisposeObject(MODEL_SCENE_OBJ* o);
 
-MODEL_SCENE_OBJ* __cdecl fcn_00442910(MODEL_SCENE_OBJ* parent, int a, int b, int id)
+MODEL_SCENE_OBJ* __cdecl d3_CreateSceneModelObject(MODEL_SCENE_OBJ* parent, int a, int b, int id)
 {
 	MODEL_SCENE_OBJ* o;
 	MODEL_LOD_SET* ov;
@@ -62,7 +62,7 @@ MODEL_SCENE_OBJ* __cdecl fcn_00442910(MODEL_SCENE_OBJ* parent, int a, int b, int
 				t = ov->slots[i].tex;
 				for (; n > 0; n--) {
 					if (*t != 0) {
-						fcn_0045ce90(*t);
+						d3_LoadTextureSurfaceTl(*t);
 					}
 					t++;
 				}
@@ -72,7 +72,7 @@ MODEL_SCENE_OBJ* __cdecl fcn_00442910(MODEL_SCENE_OBJ* parent, int a, int b, int
 		d3_SetNodePosition(o, a);
 		d3_SetObjectRotation(o, b);
 		if (parent == 0) {
-			fcn_00439aa0(o);
+			d3_RegisterSceneObjectTl(o);
 		}
 		return o;
 	}

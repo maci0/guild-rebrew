@@ -39,7 +39,7 @@ int __cdecl d2_AddElementToWindow(int, int, char*, int);
 int __cdecl io_FormatTextBuffer(char*, int, ...);
 int __cdecl d2_EqualizeWindowButtonWidths(int, int, char*, int);
 void __cdecl d2_SetOverlayAnimation(int, int);
-void __cdecl fcn_00476b60(void);
+void __cdecl d2_ResetSelectionAndInput(void);
 char* __cdecl gm_SearchTable67(int);
 int __cdecl d2_ShowModalMessageBox(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
@@ -151,7 +151,7 @@ void __cdecl d2_RunRoomUpgradeDialog(unsigned char* productionBuilding)
 		cnt += 0x3c;
 	}
 	d2_SetOverlayAnimation(0, 0);
-	fcn_00476b60();
+	d2_ResetSelectionAndInput();
 	do {
 		r = gm_SearchTable67(owner);
 		if ((productionBuilding[0x5b] & 4) != 0 || r == 0) {

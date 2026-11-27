@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 
-void __cdecl fcn_0050b750(int amount, unsigned char k);
+void __cdecl gm_ConvertUnitsToAmount(int amount, unsigned char k);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char k, int amount);
 #include "client_types.h"
 typedef Card_1007ce0 Card;

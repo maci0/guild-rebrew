@@ -7,7 +7,7 @@ void __cdecl d3_DestroyEffect(void*);
 void __cdecl d3_DestroyFloor(void*);
 void __cdecl d3_DestroySky(void*);
 void __cdecl m_FreeTracked(void*);
-void __cdecl fcn_00448910(void);
+void __cdecl d3_InitSceneCameras(void);
 
 /* ADDRESS: GOLD 0x004473f0 */
 void __cdecl d3_ClearScene(void)
@@ -78,7 +78,7 @@ void __cdecl d3_ClearScene(void)
 	*(int*) 0x6338c0 = 0;
 	*(int*) 0x6338bc = 0;
 	*(int*) 0x6338b8 = 0;
-	fcn_00448910();
+	d3_InitSceneCameras();
 	offset = d3_CurrentContextIndex * 0x3e0;
 	*(int*) 0x63349c = 0;
 	*(int*) 0x5fb5c0 = 4;

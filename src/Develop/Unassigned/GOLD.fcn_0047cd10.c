@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0047cd10 */
-int __cdecl fcn_0047cd10(unsigned short a, unsigned short b, int rec, unsigned char flags)
+int __cdecl d2_AllocAnimSlot(unsigned short a, unsigned short b, int rec, unsigned char flags)
 {
 	int i;
 	char* slot;

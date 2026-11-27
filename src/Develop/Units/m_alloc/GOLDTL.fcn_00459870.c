@@ -1,6 +1,6 @@
 void* __cdecl m_alloc(unsigned int size, const char* source);
 void* __cdecl d3_LoadOrReuseTexture(int a0, unsigned int a1, int a2, int a3);
-void __cdecl fcn_0045ce90(void* a0);
+void __cdecl d3_LoadTextureSurfaceTl(void* a0);
 
 /* ADDRESS: GOLDTL 0x00459870 */
 unsigned int* __cdecl d3_CreateSkyLayer(char* a0, unsigned int a1, int a2, unsigned int a3, unsigned int a4, unsigned int a5, unsigned int a6, unsigned int a7)
@@ -27,7 +27,7 @@ unsigned int* __cdecl d3_CreateSkyLayer(char* a0, unsigned int a1, int a2, unsig
 			v3 = (int) d3_LoadOrReuseTexture(a2, a3, 0, 0);
 			node[7] = v3;
 			if (v3 != 0)
-				fcn_0045ce90((void*) v3);
+				d3_LoadTextureSurfaceTl((void*) v3);
 			if (a1 == 0) {
 				node[8] = 0;
 				tail = (int*) *(int*) (a0 + 0x24);

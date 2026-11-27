@@ -4,7 +4,7 @@
 extern pos14_7f4c00 gm_GameTime;
 
 /* ADDRESS: GOLDTL 0x00570550 */
-void __cdecl fcn_00570550(char* p)
+void __cdecl he_StartTradeCartRoutes(char* p)
 {
 	*(pos14_7f4c00*) (p + 0x52) = gm_GameTime;
 	*(int*) (p + 0x84) = -1;

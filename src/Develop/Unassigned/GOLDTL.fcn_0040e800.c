@@ -1,6 +1,6 @@
 
 
-void __cdecl fcn_00442910(int, int*, float*, int);
+void __cdecl d3_CreateSceneModelObject(int, int*, float*, int);
 
 void __cdecl CreateObject(int* x, int* y, int* z, int* nameRef)
 {
@@ -13,5 +13,5 @@ void __cdecl CreateObject(int* x, int* y, int* z, int* nameRef)
 	b[1] = *y;
 	a[2] = 0.0f;
 	b[2] = *z;
-	fcn_00442910(0, b, a, *nameRef);
+	d3_CreateSceneModelObject(0, b, a, *nameRef);
 }

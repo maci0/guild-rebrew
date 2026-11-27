@@ -14,7 +14,7 @@ void __cdecl d3_UpdateObjectLighting(char*);
 
 #ifdef REBREW_GOLD
 #define fcn_00443900 fcn_00447fd0
-#define d3_GetContextIndex fcn_00411be0
+#define d3_GetContextIndex d3_GetSceneContextIndex
 #define fcn_00402aa0 fcn_00402540
 #define fcn_0040cfb0 fcn_0040c090
 #endif
@@ -22,7 +22,7 @@ void __cdecl d3_UpdateObjectLighting(char*);
 char __cdecl d3_MoveObjectToScene(void*, void*, void*);
 void __cdecl d3_SetObjectPosition(void*, float*);
 int __cdecl d3_GetContextIndex(void*);
-void __cdecl fcn_00402aa0(char*);
+void __cdecl ch_EnsureCharacterMeshes(char*);
 void __cdecl ch_RunAnimationScript();
 char* __cdecl ch_CreateQueuedAction(char*, void (__cdecl*)(), unsigned char, int, ...);
 void __cdecl evt_LogScriptError(char*, int, const char*);
@@ -53,7 +53,7 @@ int __cdecl d3_RemoveObjectAnim(char*);
 
 
 extern char g_6b5c60[];
-D3_OBJECT* __cdecl fcn_00442910(D3_OBJECT*, float*, float*, char*);
+D3_OBJECT* __cdecl d3_CreateSceneModelObject(D3_OBJECT*, float*, float*, char*);
 void __cdecl d3_InvalidateSubTreeFlags(char*, int);
 void __cdecl ch_PreloadCharacterMotions(char*, int, ...);
 void __cdecl d3_PreloadLowPolyAnims(char*, int, ...);

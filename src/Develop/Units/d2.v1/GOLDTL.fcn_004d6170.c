@@ -52,7 +52,7 @@ int __cdecl gm_MapEntityStatRange(int);
 void __cdecl cm_RequestCopyEntityData(int, int, int, int);
 void __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_DrawSegmentedBar(int, int, int, int);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl gm_ConvertUnitsToAmount(int, int);
 void __cdecl cm_BeginPacketFieldDelta(char*, int);
 void __cdecl cm_AppendCommandSyncField(int, int, int, int*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -382,7 +382,7 @@ reduce:
 				if (cur[8] == 0) {
 					bonus = (int) (*(unsigned char*) (cur + 0x83) * (1.0f / 42.0f) + 1.0f);
 					d2_AddElementToWindow(col + 6, line + 6, 0x3b, d2_CurrentWindowId);
-					bonus = fcn_0050b750(bonus * 40, g_773d75);
+					bonus = gm_ConvertUnitsToAmount(bonus * 40, g_773d75);
 				}
 				if (side == g_772e9c && cur[8] != 0) {
 					cm_BeginPacketFieldDelta(cur, *(int*) (cur + 4));

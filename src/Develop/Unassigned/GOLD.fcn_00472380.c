@@ -8,7 +8,7 @@ extern int d2_CurrentWindowId;
 void* __cdecl m_alloc(unsigned int, const char*);
 int __cdecl gfx_CreateSurface(int*, int);
 void __cdecl d2_ClearSurface(int);
-int __cdecl fcn_0046c9e0(void);
+int __cdecl d2_AllocGuiElement(void);
 int __cdecl d2_AddElementToWindow(short, short, int, int);
 #define I32(p) (*(int*)(p))
 #define U16(p) (*(unsigned short*)(p))
@@ -86,7 +86,7 @@ int __cdecl d2_CreateGuiWindow(short x, short y, short width, short height, unsi
             return 0;
         }
     }
-    element = fcn_0046c9e0();
+    element = d2_AllocGuiElement();
     g_00f8f080[element].kind = 0x40;
     g_00f8f080[element].x = *(short*)(window + 4);
     g_00f8f080[element].y = *(short*)(window + 6);

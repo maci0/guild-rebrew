@@ -2,7 +2,7 @@ extern char g_7f4ca0[];
 extern unsigned char g_773d75;
 #include "Develop/DieGildeAddOn/game/entity_record.h"
 unsigned short* __cdecl gm_StartFilteredEntitySearch(int, ...);
-int __cdecl fcn_0050b750(int a, unsigned char k);
+int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
 void __cdecl cm_RequestCopyEntityData(int a1, int a2, int a3, int a4);
 void __cdecl io_FormatTextBuffer(char* buf, int text, ...);
 void __cdecl he_FreeAction(char* u);
@@ -29,7 +29,7 @@ void __cdecl he_RunWorkerBonus(char* obj)
 		}
 		e = (char*) gm_StartFilteredEntitySearch(1, 1, *(int*) (obj + 0x10));
 		if (e != 0) {
-			n = fcn_0050b750(1000, g_773d75);
+			n = gm_ConvertUnitsToAmount(1000, g_773d75);
 			step = (*(int*) (obj + 0xac) / n) * 0x14;
 			for (i = 0; i < 768; i++) {
 				if (*(unsigned short*) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i])) != 0xffff && *(char**) (((char*)&((ENTITY_RECORD*)g_7f4ca0)[i]) + 0x16c) == e) {

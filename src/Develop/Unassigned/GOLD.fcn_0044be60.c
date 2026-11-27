@@ -27,7 +27,7 @@ int __cdecl d3_GetScenePresetCount(unsigned int);
 char* __cdecl d3_int_io_LoadFloor(void*, int);
 void __cdecl d3e_ReadSceneEvents(void*);
 char* __cdecl d3_GetNextSceneNode(char*);
-char* __cdecl fcn_0043d180(char*);
+char* __cdecl d3_DuplicateObject(char*);
 void __cdecl d3_RegisterSceneObject(char*);
 void __cdecl d3sm_Build(char*, int);
 char* __cdecl d3sm_Create(int, int, int);
@@ -43,7 +43,7 @@ typedef struct {
 } VEC4;
 
 /* ADDRESS: GOLD 0x0044be60 */
-char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS progress)
+char __cdecl d3_LoadSceneStream(const char* filename, void* stream, SCENE_PROGRESS progress)
 {
 	char name[256];
 	VEC4 vec;
@@ -194,7 +194,7 @@ char __cdecl fcn_0044be60(const char* filename, void* stream, SCENE_PROGRESS pro
 		obj = g_fc52f0;
 		while (obj != g_fc2700) {
 			if (*(int*) (obj + 0x218) == 7) {
-				clone = fcn_0043d180(obj);
+				clone = d3_DuplicateObject(obj);
 				clone[0x211] |= 0x10;
 				strcat(clone, "boden");
 				d3_RegisterSceneObject(clone);

@@ -14,11 +14,11 @@ extern short g_005fe73c; /* 0x005fe73c */
 extern char s_005fe7ac[]; /* 0x005fe7ac */
 
 void __cdecl fcn_004222b0(const char* msg);
-int __cdecl fcn_0046c9e0(void);
-int __cdecl fcn_0046ea00(char* s, int font);
-void __cdecl fcn_004730d0(int slot, GuiWin* parent);
+int __cdecl d2_AllocGuiElement(void);
+int __cdecl d2_CalcTextWidth(char* s, int font);
+void __cdecl d2_ReorderControlInWindow(int slot, GuiWin* parent);
 
-int __cdecl fcn_00473970(int x, int y, char* text, int win)
+int __cdecl d2_AppendWindowText(int x, int y, char* text, int win)
 {
 	GOLD_GUI_WINDOW* w;
 	int id;
@@ -31,7 +31,7 @@ int __cdecl fcn_00473970(int x, int y, char* text, int win)
 		fcn_004222b0(s_005fe7ac);
 		return -1;
 	}
-	id = fcn_0046c9e0();
+	id = d2_AllocGuiElement();
 	strcpy(g_00f8f080[id].u.text, text);
 	if (w->font != 0) {
 		g_00f8f080[id].font = w->font;
@@ -41,7 +41,7 @@ int __cdecl fcn_00473970(int x, int y, char* text, int win)
 	g_00f8f080[id].kind = 0x46;
 	g_00f8f080[id].x = w->x + x;
 	g_00f8f080[id].y = w->y - (short) w->scroll + y;
-	g_00f8f080[id].w = fcn_0046ea00(text, g_00f8f080[id].font) + 0x60;
+	g_00f8f080[id].w = d2_CalcTextWidth(text, g_00f8f080[id].font) + 0x60;
 	g_00f8f080[id].f16 = g_00f8f084;
 	g_00f8f080[id].f1c = 2;
 	g_00f8f080[id].parent = (void*) w;
@@ -51,7 +51,7 @@ int __cdecl fcn_00473970(int x, int y, char* text, int win)
 	g_00f8f080[id].f1e = 0;
 	g_00f8f080[id].f20 = g_00fb9072;
 	g_00f8f080[id].f40 = g_00f8f080[w->id].f40;
-	fcn_004730d0(id, (void*) w);
+	d2_ReorderControlInWindow(id, (void*) w);
 	w->list[w->count] = id;
 	w->count++;
 	return id;

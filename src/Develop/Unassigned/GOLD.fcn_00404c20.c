@@ -2,7 +2,7 @@ void __cdecl d3_DeactivateObjectAnimation(char*, char*);
 void __cdecl d3_SetObjectAnimationActive(char*, char*, int);
 
 /* ADDRESS: GOLD 0x00404c20 */
-void __cdecl fcn_00404c20(char* obj, int paused)
+void __cdecl ch_SetObjectAnimationPaused(char* obj, int paused)
 {
     char* stream;
     char* frames;

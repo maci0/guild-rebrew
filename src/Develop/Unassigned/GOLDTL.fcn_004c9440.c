@@ -24,9 +24,9 @@ extern LightState g_100dc20;
 
 int __cdecl gm_CompareGameTime(GAME_TIMESTAMP*, GAME_TIMESTAMP*);
 void __cdecl he_RunDueActions(void);
-void __cdecl fcn_004fc180(void);
+void __cdecl gm_StepCityPopulation(void);
 void __cdecl gm_CollectPopulationStats(void);
-void __cdecl fcn_0047da70(void);
+void __cdecl ai_UpdateAllEntityDrives(void);
 void __cdecl ai_EvaluateMeister(char*);
 void __cdecl ai_StepEntityTurns(void);
 void __cdecl gm_TickStampedItems(void);
@@ -41,12 +41,12 @@ int __cdecl cm_ExAdvanceGameTick(char* x, char* out)
 		if (g_6a3438 != 0)
 			he_RunDueActions();
 		if (g_6a3434 != 0) {
-			fcn_004fc180();
+			gm_StepCityPopulation();
 			if ((*(GAME_TIMESTAMP*)&gm_GameTime).minute % 6 == 0)
 				gm_CollectPopulationStats();
 		}
 		if (g_6a3430 != 0)
-			fcn_0047da70();
+			ai_UpdateAllEntityDrives();
 		memset(&g_100dc20, 0, 0xb00);
 		if (g_6a3430 != 0) {
 			g_772620 = 0;

@@ -51,6 +51,6 @@ void __cdecl d3_ConfigureSceneRenderQuality(unsigned char a1, int a2, unsigned c
 	fcn_0043bbf0(a1);
 	if (g_6b7ff8 != a3) {
 		g_6b7ff8 = a3;
-		fcn_0045cfa0(progress);
+		d3_ReloadSceneTextureSurfaces(progress);
 	}
 }

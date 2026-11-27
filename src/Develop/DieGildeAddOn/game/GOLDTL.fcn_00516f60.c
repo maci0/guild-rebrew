@@ -72,7 +72,7 @@ void __cdecl d3_SetNodePosition(Camera*, char*);
 void __cdecl d3_SetCameraHeightFraction(float);
 void __cdecl d3_SetObjectRotation(Camera*, char*);
 int __cdecl d3_GetContextIndex(int);
-void __cdecl fcn_00402aa0(Obj*);
+void __cdecl ch_EnsureCharacterMeshes(Obj*);
 void __cdecl ch_SetVisible(Obj*, int);
 void __cdecl d3_UpdateEntityTextureVariant(Entity*);
 void __cdecl d3_TraverseSceneObjects(Scene*, int, int, void (__cdecl*)(void));
@@ -107,7 +107,7 @@ void __cdecl d3_ResetWorldSceneState(void)
 		if (((Entity*)g_7f4ca0)[i].obj != 0 && d3_GetContextIndex(((Entity*)g_7f4ca0)[i].obj->model) == 0 && ((Entity*)g_7f4ca0)[i].obj->owner == -1) {
 			if (((Entity*)g_7f4ca0)[i].obj->body->visible == 0
 				|| (((Entity*)g_7f4ca0)[i].obj->rider != 0 && ((Entity*)g_7f4ca0)[i].obj->rider->visible == 0)) {
-				fcn_00402aa0(((Entity*)g_7f4ca0)[i].obj);
+				ch_EnsureCharacterMeshes(((Entity*)g_7f4ca0)[i].obj);
 			}
 			ch_SetVisible(((Entity*)g_7f4ca0)[i].obj, 1);
 			d3_UpdateEntityTextureVariant(&((Entity*)g_7f4ca0)[i]);

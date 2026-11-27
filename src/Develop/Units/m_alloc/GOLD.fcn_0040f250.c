@@ -4,7 +4,7 @@ extern char* evt_CurrentScript;
 #include "Develop/Units/m_alloc/m_alloc_checks.h"
 void __cdecl fcn_004273d0(char* g, int h, const char* msg);
 
-int __cdecl fcn_0040f250(char** a, int* x, int* y, int* z)
+int __cdecl evt_SetEmitterDirection(char** a, int* x, int* y, int* z)
 {
 	char* e;
 	float fx;

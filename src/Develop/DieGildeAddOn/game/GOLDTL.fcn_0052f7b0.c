@@ -27,7 +27,7 @@ void __cdecl d2_ResetUiInputAndBounds(void);
 void __cdecl d2_RunTechTreeDialog(char*, int);
 void __cdecl d2_RunGebaeudeOptionenDialog(char*);
 void __cdecl d2_ShowGebaeudeOptions(char*);
-int __cdecl fcn_0052f7a0(void);
+int __cdecl d2_NoopTargetPickerCallback(void);
 void __cdecl d2_UpdateSelectionPanel(void);
 void __cdecl d2_DestroySelectionPanel(void);
 void __cdecl d2_OpenTransporterInfoPanel(unsigned short*);
@@ -115,7 +115,7 @@ void __cdecl d2_UpdateSelectionPanels(void)
                 query[5] = 4;
                 d2_DispatchTutorialInput(0xf, 0, 0, 0);
                 d2_OpenTargetPicker((char*)query, (int)g_6b5c60, (int)g_6b5c60,
-                    (void*)fcn_0052f7a0);
+                    (void*)d2_NoopTargetPickerCallback);
                 d2_DispatchTutorialInput(0xf, 0, 1, 0);
             }
         }

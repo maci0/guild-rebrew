@@ -4,7 +4,7 @@
 extern GuiEnt** g_006ed964;
 
 /* ADDRESS: GOLD 0x004730d0 */
-void __cdecl fcn_004730d0(int index, char* owner)
+void __cdecl d2_ReorderControlInWindow(int index, char* owner)
 {
 	char** table;
 	char* record;

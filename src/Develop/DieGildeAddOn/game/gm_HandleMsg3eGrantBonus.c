@@ -3,7 +3,7 @@ extern unsigned char g_773d75;
 
 int __cdecl fcn_0042e410(int);
 unsigned char *__cdecl gm_LookupEntityRecordById(int);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 int __cdecl gm_ApplyRandomEntityDefect(int *);
 int __cdecl gm_HasActiveSpecialObject(void *, int);
 void __cdecl io_FormatTextBuffer(void *, int, ...);
@@ -18,7 +18,7 @@ unsigned int __cdecl gm_HandleMsg3eGrantBonus(void *request)
     int h;
     unsigned int len;
 
-    h = fcn_0050b750((fcn_0042e410(5) & 0xffff) + 1, g_773d75);
+    h = gm_ConvertUnitsToAmount((fcn_0042e410(5) & 0xffff) + 1, g_773d75);
     entity = gm_LookupEntityRecordById(*(int *)request);
     if (entity == 0)
     {

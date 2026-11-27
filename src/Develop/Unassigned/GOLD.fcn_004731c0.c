@@ -2,7 +2,7 @@
 #include "Develop/Units/d2.v1/gold_window.h"
 extern GOLD_GUI_WINDOW g_00f8f120[];
 int __cdecl d2_CreateElementAt(short, short, int);
-void __cdecl fcn_004730d0(int, char*);
+void __cdecl d2_ReorderControlInWindow(int, char*);
 void __cdecl d2_GetWindowBorderSize(void*, int*, int*);
 void __cdecl ReportClientMessage(const char*);
 
@@ -25,7 +25,7 @@ int __cdecl d2_AddElementToWindow(short x, short y, int image, int window)
         y + owner->y - (short) owner->scroll, image);
     index = owner->list[owner->count];
     if (index != -1) {
-        fcn_004730d0(index, (char*) owner);
+        d2_ReorderControlInWindow(index, (char*) owner);
         g_00f8f080[index].parent = (void*) owner;
         g_00f8f080[index].f22 = 0;
         g_00f8f080[index].f24 = g_00fb9070;

@@ -20,7 +20,7 @@ char* __cdecl _strupr(char*);
 int __cdecl sprintf(char*, const char*, ...);
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
 void __cdecl d3_TransformPoint(char* src, char* pos, float* out);
-Obj* __cdecl fcn_00442910(int, float*, float*, char*);
+Obj* __cdecl d3_CreateSceneModelObject(int, float*, float*, char*);
 void __cdecl d3_ApplyObjectAnimation(Obj*, char*, int);
 
 Obj* __cdecl d3_SpawnCityMarkerObject(char* name)
@@ -48,7 +48,7 @@ Obj* __cdecl d3_SpawnCityMarkerObject(char* name)
 		return 0;
 	}
 	d3_TransformPoint(e, e + 0x4c, pos);
-	o = fcn_00442910(0, pos, g_662d70, "sp_STADTPUNKT_K");
+	o = d3_CreateSceneModelObject(0, pos, g_662d70, "sp_STADTPUNKT_K");
 	o->a0 = 1;
 	o->x220 = 4;
 	o->b1 = 0;

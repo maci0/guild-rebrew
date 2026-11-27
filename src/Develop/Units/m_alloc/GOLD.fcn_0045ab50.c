@@ -3,7 +3,7 @@
 
 void* __cdecl m_alloc(int, int);
 
-void __cdecl fcn_0045ab50(int a, int b)
+void __cdecl d3s_CreateCache(int a, int b)
 {
 	*(int*) 0x633db8 = a;
 	*(int*) 0x633dbc = b;

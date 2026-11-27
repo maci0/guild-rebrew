@@ -20,7 +20,7 @@ extern float g_665e64;
 #include "client_dialog_state.h"
 
 char* __cdecl d3_FindSceneObject(int, int, int, char*);
-char* __cdecl fcn_00442910(int, float*, char*, char*);
+char* __cdecl d3_CreateSceneModelObject(int, float*, char*, char*);
 void __cdecl d3_ApplyObjectAnimation(char*, char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 
@@ -58,7 +58,7 @@ void __cdecl d3_ShowMapTableTowerMarkers(void)
 		z = *(float*) (a + 0x54);
 		pos[0] += ((MAP_TABLE_MARKER*)g_868060)[i].a * g_66418c * dx;
 		pos[2] = ((MAP_TABLE_MARKER*)g_868060)[i].b * g_665e64 * dz + z;
-		o = fcn_00442910(0, pos, a + 0x84, g_6a40a0);
+		o = d3_CreateSceneModelObject(0, pos, a + 0x84, g_6a40a0);
 		o[0x215] |= 1;
 		o[0x216] = (o[0x216] & ~2) | 1;
 		objs[i] = o;

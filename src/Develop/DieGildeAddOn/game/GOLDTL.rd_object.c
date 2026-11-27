@@ -10,7 +10,7 @@ void __cdecl ReportClientMessage(const char* msg);
 void __cdecl d3_SetNodePosition(char* object, void* vector);
 void __cdecl d3_SetObjectRotation(char* object, void* vector);
 char* __cdecl d3_SpawnObject(int kind, char* name);
-void __cdecl fcn_00439aa0(char* object);
+void __cdecl d3_RegisterSceneObjectTl(char* object);
 void __cdecl d3_AppendObjectSibling(char* object, char* sibling);
 void __cdecl d3_AttachSceneNode(char* object, char* child);
 void __cdecl d3_AddObjectDrawData(char* object);
@@ -19,7 +19,7 @@ char __cdecl d3_SetObjectVisible(char* object, char on);
 int __cdecl d3_GetSceneVersionSlotCount(unsigned int version);
 void __cdecl d3_AttachCachedModelParts(char* object, void* part, char* name);
 int __cdecl d3_LoadModel(char* a, char* b);
-void __cdecl fcn_0045ce90(void* resource);
+void __cdecl d3_LoadTextureSurfaceTl(void* resource);
 void __cdecl m_FreeTracked(void* ptr);
 
 extern unsigned char g_6b85a4;
@@ -342,7 +342,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		d3_AttachSceneNode(object, rd_object(stream, object, version, resources));
 	}
 	if (*(char**) (object + 0x1fc) == 0 && placeholder == 0) {
-		fcn_00439aa0(object);
+		d3_RegisterSceneObjectTl(object);
 	}
 	vfs_ReadByte(stream, &sibling);
 	if (sibling != 0) {
@@ -352,7 +352,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 		m_FreeTracked(object);
 		object = 0;
 	} else if (placeholder != 0) {
-		fcn_00439aa0(object);
+		d3_RegisterSceneObjectTl(object);
 	}
 	if (version >= 0x3a6c00a7u) {
 		d3_ReadObjectEvents(stream, object);
@@ -372,7 +372,7 @@ char* __cdecl rd_object(void* stream, char* parent, unsigned int version, unsign
 						count = *(int*) (*(char**) (RD_DRAW(object) + off * 0x4a4 + 0x40c) + 0x1e4);
 						for (type = 0; type < count; type++) {
 							if (*(char**) (entries + type * 4) != 0) {
-								fcn_0045ce90(*(char**) (entries + type * 4));
+								d3_LoadTextureSurfaceTl(*(char**) (entries + type * 4));
 							}
 						}
 					}

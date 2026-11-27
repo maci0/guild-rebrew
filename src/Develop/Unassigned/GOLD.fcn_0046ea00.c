@@ -1,10 +1,10 @@
 #include <string.h>
 
 int __cdecl d2_GetResourceData(int font);
-int __cdecl fcn_0047cb60(int font_data, unsigned short character);
+int __cdecl d2_GetResourceBankEntry(int font_data, unsigned short character);
 
 /* ADDRESS: GOLD 0x0046ea00 */
-int __cdecl fcn_0046ea00(const char* text, int font)
+int __cdecl d2_CalcTextWidth(const char* text, int font)
 {
     int length;
     int font_data;
@@ -19,7 +19,7 @@ int __cdecl fcn_0046ea00(const char* text, int font)
     for (i = 0; i < length; i++) {
         character = (unsigned char)text[i];
         if (character != '~') {
-            glyph = (char*)fcn_0047cb60(font_data, character);
+            glyph = (char*)d2_GetResourceBankEntry(font_data, character);
             if (i != 0 && text[i - 1] != ' ') {
                 width -= *(unsigned short*)(glyph + 0x16);
             }

@@ -5,7 +5,7 @@ unsigned int __cdecl StripPathAndExt(char*);
 int __cdecl d3_FindAnimByName(unsigned int);
 void __cdecl d3_LoadAnimStream(char*, unsigned int, int);
 int __cdecl d3_AttachAnimationToContext(char*, unsigned int, GOLD_ATTACH_OPTIONS);
-char* __cdecl fcn_0044e2e0(char*, char*, int);
+char* __cdecl d3_LoadObjectAnimFromFile(char*, char*, int);
 
 /* ADDRESS: GOLD 0x00411960 */
 int __cdecl d3_AttachObjectAnim(char* object, char* name, unsigned int flags)
@@ -56,7 +56,7 @@ int __cdecl d3_AttachObjectAnim(char* object, char* name, unsigned int flags)
 	        options))
 		return 1;
 	sprintf(path, "%s%s.oam", *(char**) 0xfba940, name);
-	result = fcn_0044e2e0(path, object, 1);
+	result = d3_LoadObjectAnimFromFile(path, object, 1);
 	if (result != 0) {
 		if (flags & 2) result[0x2d] |= 0x10;
 		if (flags & 1) result[0x2d] &= 0xef;

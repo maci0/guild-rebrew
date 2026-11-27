@@ -5,7 +5,7 @@ int __cdecl d2_LockSurface(void*);
 int __cdecl d3_UnlockSurfaceHandle(void*);
 int __cdecl d2_SetClipRect(int, int, int, int);
 void __cdecl d2_DrawShapeFrame(int, int, void*, int, unsigned char);
-void __cdecl fcn_0047cda0(int, void*);
+void __cdecl d2_DrawAnimSlotFrame(int, void*);
 void __cdecl d2_SetCurrentFont(int);
 int __cdecl d2_GetResourceData(int);
 int __cdecl d2_DrawOrMeasureSpriteFrame(int, int, char*, char*, unsigned char, char, int);
@@ -46,7 +46,7 @@ void __cdecl d2_DrawSpriteGridSlot(char* obj, int x, int y)
         selected = *(int*) 0x5feba8;
         *(short*) (0xf8a52d + selected * 17) = (short) x;
         *(short*) (0xf8a52f + selected * 17) = (short) y;
-        fcn_0047cda0(selected, obj);
+        d2_DrawAnimSlotFrame(selected, obj);
     }
     old_font = *(int*) 0x5fe718;
     d2_SetCurrentFont(*(int*) 0x5fe73c + 1);

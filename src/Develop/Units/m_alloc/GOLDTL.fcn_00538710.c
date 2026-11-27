@@ -14,13 +14,13 @@ void __cdecl tr_AllocTraceBuffer(int);
 void __cdecl vfs_init(char*, int);
 void __cdecl tb_StartTimer(int, int);
 void __cdecl main_ShutdownEngine(void);
-void __cdecl fcn_00538700(void);
+void __cdecl main_NoopCrashCallback(void);
 
 int __cdecl main_InitRuntime(void)
 {
 	char path[0x104];
 
-	InitializeLogAndErrorHandler((void*) main_ShutdownEngine, (void*) fcn_00538700, (int) g_774940, 0x10);
+	InitializeLogAndErrorHandler((void*) main_ShutdownEngine, (void*) main_NoopCrashCallback, (int) g_774940, 0x10);
 	m_init(0xbb80);
 	tr_AllocTraceBuffer(0x80);
 	sprintf(path, "%sgamedata\\Screenshots", g_6a3448);

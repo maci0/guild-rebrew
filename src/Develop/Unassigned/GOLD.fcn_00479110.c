@@ -9,10 +9,10 @@ struct DDSURFACE_OBJ {
 	struct DDSURFACE_VTBL *vtbl;
 };
 
-int __cdecl fcn_00479110(char *, int *);
+int __cdecl d2_QuerySurfaceDesc(char *, int *);
 
 /* ADDRESS: GOLD 0x00479110 */
-int __cdecl fcn_00479110(char *parent, int *out)
+int __cdecl d2_QuerySurfaceDesc(char *parent, int *out)
 {
 	struct DDSURFACE_OBJ *obj;
 	int result;

@@ -17,7 +17,7 @@ void __cdecl d3_WriteEventTable(int, struct Event*);
 void __cdecl CloseVfsStream(int);
 
 /* ADDRESS: GOLD 0x0044aa10 */
-void __cdecl fcn_0044aa10(char* path, int supplied)
+void __cdecl d3_WriteSceneFile(char* path, int supplied)
 {
     int stream;
     int node;

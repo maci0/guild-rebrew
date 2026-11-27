@@ -103,7 +103,7 @@ void __cdecl d2_AppendShapeToBank(int o, int x);
 void __cdecl m_FreeTracked(void*);
 void __cdecl d2_ReleaseSurface(int h);
 char* __cdecl m_alloc(int size, char* tag);
-float __cdecl fcn_00505e30(int);
+float __cdecl gm_GetEntityAge(int);
 float __cdecl gm_GetEntityHealth(void*);
 float __cdecl gm_GetEntityMaxHealth(void*);
 #endif
@@ -712,7 +712,7 @@ error:
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x00500580 */
-char* __cdecl fcn_00500580(unsigned char flags, int a2, int a3, int a4, int a5,
+char* __cdecl sim_CreateCitizenClient(unsigned char flags, int a2, int a3, int a4, int a5,
 	char* queryEntity)
 {
 	int i;
@@ -802,7 +802,7 @@ void __cdecl sim_WalkDirectory(char* dir, int arg, void (__cdecl* visit)(char* p
 
 #if !defined(REBREW_SERVER) && !defined(REBREW_GOLD)
 /* ADDRESS: GOLDTL 0x00500660 */
-void __cdecl fcn_00500660(char* dir, int arg, void (__cdecl* visit)(char*))
+void __cdecl sim_WalkDirectoryClient(char* dir, int arg, void (__cdecl* visit)(char*))
 {
 	char path[0x100];
 	struct _finddata_t fd;
@@ -820,7 +820,7 @@ void __cdecl fcn_00500660(char* dir, int arg, void (__cdecl* visit)(char*))
 				strcpy(path, dir);
 				strcat(path, fd.name);
 				strcat(path, "\\");
-				fcn_00500660(path, arg, visit);
+				sim_WalkDirectoryClient(path, arg, visit);
 			} else {
 				strcpy(path, dir);
 				strcat(path, fd.name);
@@ -947,7 +947,7 @@ void __cdecl gm_CollectPopulationStats(void)
 		    && *(unsigned char*) (p + 8) > 0
 		    && *(unsigned char*) (p + 2) < 0xa) {
 			*(int*) &g_99f620[0] += 1;
-			idx = (int) MAX(MIN(fcn_00505e30(i) * 0.1f, 7.0f), 0.0f);
+			idx = (int) MAX(MIN(gm_GetEntityAge(i) * 0.1f, 7.0f), 0.0f);
 			g_99f624[idx] += 1;
 			if (gm_CheckEntityAgeLimit(i) != 0)
 				g_99f644 += 1.0f;

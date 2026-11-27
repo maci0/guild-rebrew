@@ -2,7 +2,7 @@
 // fcn_00422d60 — call [0x662470](0); set 2 fields; return 1.
 
 /* ADDRESS: GOLDTL 0x0041e620 */
-int __cdecl fcn_00422d60(void)
+int __cdecl main_InitComMovieState(void)
 {
 	((void* (__stdcall*)(int)) *(void**) 0x662470)(0);
 	*(int*) 0x14cc5bc = 0x29a;

@@ -2,7 +2,7 @@
 #include "Develop/Units/m_alloc/m_alloc.h"
 
 /* ADDRESS: GOLD 0x00417650 */
-int __cdecl fcn_00417650(int count)
+int __cdecl d3snd_InitSoundSources(int count)
 {
     int rc;
 

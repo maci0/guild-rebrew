@@ -34,7 +34,7 @@ extern float g_662d70[4];
 
 void __cdecl d3_TransformPoint(char* object, float* in, float* out);
 int __cdecl d3_GetObjectVerticalBounds(char* e, float* lo, float* hi);
-char* __cdecl fcn_00442910(int parent, float* pos, float* dir, char* name);
+char* __cdecl d3_CreateSceneModelObject(int parent, float* pos, float* dir, char* name);
 void __cdecl d3_ChangeObjectTransparency(char* a, char* b, COLOR546590 c);
 void __cdecl d3_SetObjectColorRgb(char* p, unsigned char r, unsigned char g, unsigned char b);
 int __cdecl d3_CreateObjectAnimation(char* obj, FLAGS546590 fl, int n, FRAME546590* frames);
@@ -54,7 +54,7 @@ char* __cdecl he_CreateAnimatedEntityMarker(char* effectState, char* name, char*
 	d3_TransformPoint(entity, (float*) (entity + 0x4c), pos);
 	d3_GetObjectVerticalBounds(entity, &lo, &hi);
 	pos[1] = hi;
-	obj = fcn_00442910(0, pos, g_662d70, name);
+	obj = d3_CreateSceneModelObject(0, pos, g_662d70, name);
 	*(char**) (effectState + 0xc) = obj;
 	*(char**) (effectState + 8) = entity;
 	if (obj != 0) {

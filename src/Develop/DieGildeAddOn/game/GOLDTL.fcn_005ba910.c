@@ -84,7 +84,7 @@ int __cdecl d2_ShowNewCartDialog(int);
 void __cdecl d2_CalcTradeCartCost(int, float, int);
 int __cdecl gm_eval_SlotVoll(int, int, int);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl gm_ConvertUnitsToAmount(int, int);
 int __cdecl cm_RequestClearLagerslot(int, int);
 int __cdecl d2_RunCityScrollMapDialog(int, int, int, int, int);
 int __cdecl gm_CheckEntityType(int);
@@ -1303,7 +1303,7 @@ l_5bc8d0:
 	}
 	idx = gm_eval_SlotVoll(f.v18, slot_value, j);
 	f.v28 = idx * i;
-	f.vA4 = (int) fcn_0050b750(1, (int) (g_773d75));
+	f.vA4 = (int) gm_ConvertUnitsToAmount(1, (int) (g_773d75));
 	*(float*) &f.v28 = (float) f.v28;
 	if ((int) (*(float*) &f.v28 * *(float*) &f.v64 - *(float*) &f.v28)
 	    < f.vA4) {

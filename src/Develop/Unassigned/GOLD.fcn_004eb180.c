@@ -1,7 +1,7 @@
 char* __cdecl he_StartHandlungSearch(int, ...);
 char* __cdecl he_fn_Handlung(void);
 /* ADDRESS: GOLD 0x004eb180 */
-int __cdecl fcn_004eb180(char* owner, int* id, float* fraction, int include)
+int __cdecl he_QueryActionProgress(char* owner, int* id, float* fraction, int include)
 {
     char* event;
     float value;

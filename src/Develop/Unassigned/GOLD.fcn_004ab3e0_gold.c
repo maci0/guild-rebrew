@@ -7,7 +7,7 @@ unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 int __cdecl gm_CountBuildingExtensions(char*);
 int __cdecl amt_GetRoleLevel(int);
 int __cdecl ai_SelectRankedCandidates(char*, int, char**, int, float, unsigned short*);
-int __cdecl fcn_004a61d0(char*, int, char*, float, float, int, unsigned short*);
+int __cdecl ai_GatherEligibleEntities(char*, int, char*, float, float, int, unsigned short*);
 typedef struct GOLD_ACTION_PROTO { unsigned char kind; unsigned char unknown01[0x24c]; } GOLD_ACTION_PROTO;
 
 /* ADDRESS: GOLD 0x4ab3e0 */
@@ -56,7 +56,7 @@ int __cdecl fcn_004ab3e0_gold(int action, char* actor, int busy, char* first, ch
     target = (char*) g_slot_table + target_id * 0x21c;
     total = amt_GetRoleLevel((unsigned char) target[0x166]) / 3 + 2;
     if (total + 2 > *(int*) (actor + 0x194)) return 0;
-    count = fcn_004a61d0(actor, 4, candidate, 25.0f, 75.0f, best_score, ids);
+    count = ai_GatherEligibleEntities(actor, 4, candidate, 25.0f, 75.0f, best_score, ids);
     if (!count) return 0;
     i = 0;
     chosen = 0;

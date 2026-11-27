@@ -12,7 +12,7 @@ void __cdecl d2_SetForm(int a, int b);
 int __cdecl io_AppendText(void* id, ...);
 int __cdecl d2_GetWindowListItem(int a, int b, int c);
 int __cdecl gm_AmountToUnits(int a, unsigned char b);
-int __cdecl fcn_0050b750(int a, unsigned char index);
+int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char index);
 void __cdecl d2_SetOverlayAnimation(int a, int b);
 int __cdecl main_RunFrameLoop(void* a, int b);
 int __cdecl d2_GetControlValue(int a);
@@ -54,10 +54,10 @@ void __cdecl d2_RunKreditFreigabeDialog(char* o)
     while (main_RunFrameLoop((void*)0x5a4bb0, 0x677c7) != 0) {
         if (g_14ce8e0 != 0 || g_100f1dc == 1)
             g_774654 = 1;
-        v = fcn_0050b750(d2_GetControlValue(it2), g_773d75);
+        v = gm_ConvertUnitsToAmount(d2_GetControlValue(it2), g_773d75);
         g_774698 = have - v;
         if (g_100f1dc == 2) {
-            r = fcn_0050b750(d2_GetControlValue(it2), g_773d75);
+            r = gm_ConvertUnitsToAmount(d2_GetControlValue(it2), g_773d75);
             if (have < r) {
                 d = r - have;
                 cm_RequestMoveCredits(*(int*)(o + 1),

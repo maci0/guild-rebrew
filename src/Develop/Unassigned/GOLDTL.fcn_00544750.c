@@ -8,7 +8,7 @@ extern char g_6a3658[];
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern int g_7747d4;
 
-void __cdecl fcn_00422d60(void);
+void __cdecl main_InitComMovieState(void);
 int __cdecl OpenMovieWindow(char*, int, int, int, int, int, int, int);
 void __cdecl PlayVideo(int);
 void __cdecl main_PumpWindowMessages(void);
@@ -18,7 +18,7 @@ void __cdecl main_PlayIntroMovies(void)
 	char path[0x104];
 
 	Sleep(400);
-	fcn_00422d60();
+	main_InitComMovieState();
 	sprintf(path, "%sjowood.mpg", g_6a3658);
 	g_7747d4 = OpenMovieWindow(path, 0, main_Instance, 10, 10, 0xdc, 0xdc, 0x8a);
 	Sleep(100);

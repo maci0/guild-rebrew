@@ -25,7 +25,7 @@ int __cdecl d2_ClampAmountToRange(int, int, int, int*);
 int __cdecl gm_AmountToUnits(int, unsigned char);
 void __cdecl d2_DrawLawCandidateStatus(int*);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 int __cdecl gm_CheckEntityStock(void*, int, unsigned char);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 /* The native caller consumes the command queue index returned in EAX. */
@@ -90,7 +90,7 @@ int __cdecl d2_RunPaymentTargetDialog(char* entity)
         if (g_100f1dc != -1) {
             if (d2_CurrentElementId == accept) {
                 amount = d2_GetControlValue(edit);
-                amount = fcn_0050b750(amount, g_773d75);
+                amount = gm_ConvertUnitsToAmount(amount, g_773d75);
                 if (gm_CheckEntityStock(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), amount, g_773d75)) {
                     stats = gm_GetEntityTableEntry(((char*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]));
                     if (stats != 0)

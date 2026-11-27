@@ -7,7 +7,7 @@ extern int g_7f4c06;
 
 int sprintf(char*, const char*, ...);
 void __cdecl d3_SelectSceneContext(int, int);
-void __cdecl fcn_00442e30(void);
+void __cdecl d3_ClearSceneState(void);
 void __cdecl gm_LoadCityMap(char*);
 void __cdecl ls_SaveGame(char*, char*, int);
 void __cdecl gm_KillAllSpieler(void);
@@ -22,7 +22,7 @@ void __cdecl main_LoadCitySelectionScene(char* name, int net)
 	char path[0x104];
 
 	d3_SelectSceneContext(0, 0);
-	fcn_00442e30();
+	d3_ClearSceneState();
 	gm_LoadCityMap(name);
 	if (net != 0) {
 		sprintf(path, "%s/%s.NET", "gamedata/cities", name);
@@ -38,7 +38,7 @@ void __cdecl main_LoadCitySelectionScene(char* name, int net)
 	gm_CleanupObjectEntities();
 	d3_ClearAllSceneContexts();
 	d3_SelectSceneContext(0, 0);
-	fcn_00442e30();
+	d3_ClearSceneState();
 	if (main_GetLanguage() == 0) {
 		d3_LoadScene("scenes/*ChooseCity.ed3", 0, 0);
 	} else {

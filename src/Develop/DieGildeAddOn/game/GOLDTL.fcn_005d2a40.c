@@ -1,7 +1,7 @@
 #include <string.h>
 
 char* __cdecl gm_LookupEntityRecordById(int);
-float __cdecl fcn_00505e30(int);
+float __cdecl gm_GetEntityAge(int);
 int __cdecl gm_WalkEntityChain(unsigned short);
 float __cdecl gm_CalcEntityFavor(unsigned int, unsigned int, unsigned int);
 int __cdecl gm_CheckPrivilege(int, char*, int);
@@ -11,7 +11,7 @@ int __cdecl gm_CheckPrivilege(int, char*, int);
 
 /* fcn_00505e30: float of short [0x7f4caa + (a&0xffff)*540]. */
 /* ADDRESS: GOLDTL 0x00508e80 */
-float __cdecl fcn_00505e30(int a)
+float __cdecl gm_GetEntityAge(int a)
 {
 #ifdef REBREW_GOLD
 	return (float) (unsigned short) *(unsigned short*) (0x770b8a + (a & 0xffff) * 540);
@@ -68,7 +68,7 @@ int __cdecl gm_CalcWerbungSteps(int sourceId, int targetId)
 		f8 = (fc - f8) / fc * 5.0f + 1.0f;
 	}
 	f10 = (100.0f - gm_CalcEntityFavor(*(unsigned short*) p, *(unsigned short*) q, 1)) * 0.05f + 1.0f;
-	f8 = (1.0f - MIN(30.0f, MAX(fcn_00505e30(*(unsigned short*) q), 15.0f)) * (1.0f / 15.0f)) * 4.0f
+	f8 = (1.0f - MIN(30.0f, MAX(gm_GetEntityAge(*(unsigned short*) q), 15.0f)) * (1.0f / 15.0f)) * 4.0f
 		+ 1.0f + f10 + f8;
 	for (i = 0; i < 5; i++) {
 		f8 = f8 + (float) (unsigned char) q[0x80 + i] * (1.0f / 252.0f);

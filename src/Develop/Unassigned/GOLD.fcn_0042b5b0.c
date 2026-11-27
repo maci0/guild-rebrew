@@ -4,7 +4,7 @@ extern int __cdecl ReportClientMessage(char* text);
 int __cdecl evt_FindCommand(char* name);
 
 /* ADDRESS: GOLD 0x0042b5b0 */
-int __cdecl fcn_0042b5b0(char* name, int handlerAddress, int handlerKind, int n, ...)
+int __cdecl evt_RegisterScriptCommand(char* name, int handlerAddress, int handlerKind, int n, ...)
 {
 	char* tab;
 	int* va;

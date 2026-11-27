@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "gold_gui.h"
 extern GuiEnt* g_00f8f080;
-int __cdecl fcn_004759e0(int, int*, int*);
+int __cdecl d2_QueryElementResourceSize(int, int*, int*);
 
 /* ADDRESS: GOLD 0x00475e70 */
 void __cdecl d2_SetElementScale(int id, int scale)
@@ -16,8 +16,8 @@ void __cdecl d2_SetElementScale(int id, int scale)
 		return;
 	}
 	idx = id;
-	if (!fcn_004759e0(idx, &w, &id)) {
-		fcn_004759e0(idx, &w, &id);
+	if (!d2_QueryElementResourceSize(idx, &w, &id)) {
+		d2_QueryElementResourceSize(idx, &w, &id);
 		return;
 	}
 	ch = id;

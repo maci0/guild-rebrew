@@ -19,6 +19,6 @@ void __cdecl d3_ReloadSceneResources(int mask, int b, SCENE_PROGRESS a)
 	d3_VisitSceneObjects(g_67a370, 0, mask, d3_ReloadObjectResourcesCallback, &s);
 	s.skip = 0;
 	d3_VisitSceneObjects(g_67a370, 0, mask, d3_ReloadObjectResourcesCallback, &s);
-	fcn_0045cfa0(a);
+	d3_ReloadSceneTextureSurfaces(a);
 	UpdateSceneLighting(1);
 }

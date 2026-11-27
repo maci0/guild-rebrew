@@ -26,10 +26,10 @@ void __cdecl cm_StepCommandQueue(void);
 void __cdecl sv_WaitForNetworkSync(int id);
 void __cdecl gm_UpdateMarketStockSlots(int i);
 void __cdecl cm_SendRandomMarktSlotDelta(int i);
-int __cdecl fcn_0050b750(int timeout, char who);
+int __cdecl gm_ConvertUnitsToAmount(int timeout, char who);
 int __cdecl d3_FindFreeSceneContext(void);
 int __cdecl d3_SelectSceneContext(int a0, int a1);
-int __cdecl fcn_00442e30(void);
+int __cdecl d3_ClearSceneState(void);
 int __cdecl d3_LoadScene(char *name, int a1, int a2);
 int __cdecl d2_SetFormVisibility(int a0, int a1);
 int __cdecl d2_ClearSurface(int a0);
@@ -88,7 +88,7 @@ int __cdecl ls_StartNetworkGame(char *path)
     d3_LoadScene("scenes/*network.ed3", 0, 0);
     d2_SetFormVisibility(*(int *) 0x7e1d40, 0);
     *(int *) 0x7725c8 = 1;
-    fcn_00442e30();
+    d3_ClearSceneState();
     d3_SelectSceneContext(engine, 0);
     d2_SetFormVisibility(*(int *) 0x7e1d40, 1);
     WritePrivateProfileStringA("Network", "Name", (char *) 0x7e23ea, file);
@@ -138,7 +138,7 @@ int __cdecl ls_StartNetworkGame(char *path)
             *(int *) 0x7e1f60 = (int) timeGetTime();
         gm_AllocRandomMissionJob(*(int *) (handle + 4), *(signed char *) &g_6a3440, 1);
     }
-    result = fcn_0050b750(*(int *) 0x7747fc == 0 ? 2000 : 500000,
+    result = gm_ConvertUnitsToAmount(*(int *) 0x7747fc == 0 ? 2000 : 500000,
                           *(unsigned char *) &g_773d75);
     cm_RequestMoveCredits(*(int *) (handle + 4), -1, *(unsigned char *) &g_773d75,
                  result);
@@ -174,7 +174,7 @@ int __cdecl ls_StartNetworkGame(char *path)
         d3_SelectSceneContext(d3_FindFreeSceneContext(), 0);
         d3_LoadScene("scenes/*network.ed3", 0, 0);
         d2_ShowMissionForEntity(*(int *) (handle + 4));
-        fcn_00442e30();
+        d3_ClearSceneState();
         d3_SelectSceneContext(engine, 0);
     }
     return 0;

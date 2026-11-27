@@ -4,7 +4,7 @@
 void __cdecl m_FreeTracked(void*);
 
 /* ADDRESS: GOLD 0x00476850 */
-void __cdecl fcn_00476850(void* node)
+void __cdecl d2_FreeOverlaySprite(void* node)
 {
     int i;
 

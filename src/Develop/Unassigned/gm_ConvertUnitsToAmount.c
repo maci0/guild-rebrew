@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x0050b750 */
-int __cdecl fcn_0050b750(int value, int index)
+int __cdecl gm_ConvertUnitsToAmount(int value, int index)
 {
 	unsigned short e;
 

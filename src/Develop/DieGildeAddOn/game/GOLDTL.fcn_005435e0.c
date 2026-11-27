@@ -52,7 +52,7 @@ extern signed char g_6a3440;
 #ifdef REBREW_GOLD
 void __cdecl gm_ClearMissionJobs(void);
 #else
-void __cdecl fcn_004b39f0(void);
+void __cdecl gm_ClearMissionTable(void);
 #endif
 void __cdecl cm_BeginCommandSync(void);
 int __cdecl cm_SendAllocClientSpieler(int, int, int, unsigned char, int, unsigned char, unsigned char, char*, char*);
@@ -78,7 +78,7 @@ void __cdecl gm_CreateSetupFamily(void)
 #ifdef REBREW_GOLD
 	gm_ClearMissionJobs();
 #else
-	fcn_004b39f0();
+	gm_ClearMissionTable();
 #endif
 	if ((*(Setup*)g_7e23e0).enabled == 0) {
 		return;

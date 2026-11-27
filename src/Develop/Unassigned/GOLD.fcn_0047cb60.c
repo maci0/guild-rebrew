@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0047cb60 */
-int __cdecl fcn_0047cb60(int obj, unsigned int idx)
+int __cdecl d2_GetResourceBankEntry(int obj, unsigned int idx)
 {
 	if (obj == 0) {
 		return 0;

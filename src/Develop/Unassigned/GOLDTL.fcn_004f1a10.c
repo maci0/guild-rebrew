@@ -4,7 +4,7 @@ int __cdecl gm_MatchSlotEntryId(int*, int*);
 
 int __cdecl FindSlotEntryFiltered(int*, int, int, void*, int);
 
-int __cdecl fcn_004f1a10(int a1, int* a2)
+int __cdecl gv_LookupWorkerSlot(int a1, int* a2)
 {
 	if (a2 == 0 || *a2 == -1) {
 		return 0;

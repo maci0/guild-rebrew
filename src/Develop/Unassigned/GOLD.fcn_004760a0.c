@@ -6,7 +6,7 @@ extern GOLD_GUI_WINDOW g_00f8f120[];
 extern int g_fa6158[];
 
 /* ADDRESS: GOLD 0x004760a0 */
-void __cdecl fcn_004760a0(int id, int value)
+void __cdecl d2_AssignElementFont(int id, int value)
 {
 	GuiEnt* s;
 

@@ -9,7 +9,7 @@
 short *__cdecl gm_GetEntityTableEntry(char *);
 int __cdecl gm_WalkEntityChain(unsigned short);
 int __cdecl gm_AmountToUnits(int, unsigned char);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl gm_ConvertUnitsToAmount(int, int);
 float __cdecl gm_RandomFloat01(void);
 int __cdecl gm_RandomMod(unsigned short);
 int __cdecl d2_LoadForm(int, int, char *);
@@ -82,7 +82,7 @@ int __cdecl d2_RunCardGameDialog(void)
                 strcpy(text, (char *)D(0x14b5c60)); io_AppendText(text);
                 if (g_100f1dc != -1 && D(0x6ad56c) == D(0x67d370)) {
                     choice = d2_GetControlValue(D(0x6ad580));
-                    D(0x77664c) = fcn_0050b750(choice, g_773d75);
+                    D(0x77664c) = gm_ConvertUnitsToAmount(choice, g_773d75);
                     flags = gm_StepCardGameRound();
                 }
             } else {
@@ -110,7 +110,7 @@ int __cdecl d2_RunCardGameDialog(void)
                 if (D(0x6ad56c) == D(0x67d370)) {
                     if (!D(0x776650)) {
                         choice = d2_GetControlValue(D(0x6ad580));
-                        D(0x77664c) = fcn_0050b750(choice, g_773d75);
+                        D(0x77664c) = gm_ConvertUnitsToAmount(choice, g_773d75);
                     }
                     flags = gm_StepCardGameRound();
                     d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
@@ -139,7 +139,7 @@ int __cdecl d2_RunCardGameDialog(void)
                 if (D(0x6ad56c) == D(0x67d370)) {
                     if (!D(0x776650)) {
                         choice = d2_GetControlValue(D(0x6ad580));
-                        D(0x77664c) = fcn_0050b750(choice, g_773d75);
+                        D(0x77664c) = gm_ConvertUnitsToAmount(choice, g_773d75);
                     }
                     flags = gm_StepCardGameRound();
                     d2_LayoutCardGameRow(0, 4, (void *)0x7765ac);
@@ -229,7 +229,7 @@ int __cdecl d2_RunCardGameDialog(void)
                 if (D(0x6ad56c) == D(0x67d370)) {
                     if (!D(0x776650)) {
                         choice = d2_GetControlValue(D(0x6ad580));
-                        D(0x77664c) = fcn_0050b750(choice, g_773d75);
+                        D(0x77664c) = gm_ConvertUnitsToAmount(choice, g_773d75);
                     }
                     flags = gm_StepCardGameRound();
                     d2_LayoutCardGameRow(0, 5, (void *)0x7765ac);

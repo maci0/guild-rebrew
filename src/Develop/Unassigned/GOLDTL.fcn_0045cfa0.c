@@ -17,9 +17,9 @@ extern char* g_104049c;
 extern unsigned int g_10404a0;
 extern int g_6b8af0;
 
-void __cdecl fcn_0045ce90(D3_TEX_RELOAD_REC* r);
+void __cdecl d3_LoadTextureSurfaceTl(D3_TEX_RELOAD_REC* r);
 
-void __cdecl fcn_0045cfa0(SCENE_PROGRESS cb)
+void __cdecl d3_ReloadSceneTextureSurfaces(SCENE_PROGRESS cb)
 {
 	D3_TEX_RELOAD_REC* r;
 	unsigned int i;
@@ -39,7 +39,7 @@ void __cdecl fcn_0045cfa0(SCENE_PROGRESS cb)
 	r = ((D3_TEX_RELOAD_REC*)g_104049c);
 	for (i = 0; i < g_10404a0; i++, r++) {
 		if (r->level > 0 && (r->flags & 2) == 0) {
-			fcn_0045ce90(r);
+			d3_LoadTextureSurfaceTl(r);
 			if (cb != 0) {
 				cb(1, done, total);
 			}

@@ -10,7 +10,7 @@ extern int SonnenstrahlenStartZeit;
 int __cdecl CompareVector3WithinTolerance(float*, float*, float);
 void __cdecl d3_SetNodePosition(char*, float*);
 void __cdecl d3_SetObjectRotation(char*, float*);
-char* __cdecl fcn_00449690(char*, int, char*, char*);
+char* __cdecl d3_FindSceneObjectGold(char*, int, char*, char*);
 float __cdecl d3_Smoothstep(float, float, float);
 void __cdecl d3_DestroySonnenstrahlen(char*);
 typedef struct SUNRAY_COLOR {
@@ -42,7 +42,7 @@ void __cdecl fcn_004172e0(char* object)
 		char* light;
 		float rotation[3];
 
-		light = fcn_00449690(0, 8, 0, "pLicht");
+		light = d3_FindSceneObjectGold(0, 8, 0, "pLicht");
 		if (light != 0) {
 			a = *(float*) (light + 0x88) - *(float*) (object + 0x88);
 			if (fabs(a) >= 0.009999999776482582) {

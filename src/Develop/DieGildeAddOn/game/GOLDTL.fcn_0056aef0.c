@@ -26,7 +26,7 @@ extern void __cdecl he_AssignActionSlot(char*, char*, unsigned int, char*);
 extern void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 extern int __cdecl gm_IsEntityAtBuilding(char*, char*);
 extern int __cdecl gm_GetScaledEntitySkill(char*, int);
-extern int __cdecl fcn_0050c4e0(unsigned char*);
+extern int __cdecl gm_GetBuildingProtLevel(unsigned char*);
 extern void __cdecl he_FreeAction(char*);
 extern unsigned short* __cdecl fcn_00502cd0(int, int, ...);
 extern int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
@@ -124,7 +124,7 @@ void __cdecl he_RunGebSpionage(char* action)
 				*(int*)(action + 0x70) = -1;
 				return;
 			}
-			v = fcn_0050c4e0((unsigned char*)h);
+			v = gm_GetBuildingProtLevel((unsigned char*)h);
 			x = (float)(v * 120.0);
 			x = x * (252.0f / (int)d) / k;
 			if (2880.0f < x) {
@@ -190,7 +190,7 @@ void __cdecl he_RunGebSpionage(char* action)
 			}
 		}
 		amount = (float)k * t * 0.25f;
-		k = (int)(amount / fcn_0050c4e0((unsigned char*)h2));
+		k = (int)(amount / gm_GetBuildingProtLevel((unsigned char*)h2));
 		k = k + (gm_RandomMod(4) & 0xffff) - 2;
 		if (k > 100) {
 			k = 100;

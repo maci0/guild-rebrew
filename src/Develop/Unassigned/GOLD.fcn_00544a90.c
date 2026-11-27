@@ -13,7 +13,7 @@ extern unsigned short g_774970;
 unsigned char* __cdecl gm_LookupEntityRecordById(int);
 int __cdecl cm_GetCommandStatus(int);
 int __cdecl gm_CanCourtEntity(int, int);
-int __cdecl fcn_005c6770(int, int);
+int __cdecl gm_ComputeWerbungSteps(int, int);
 void __cdecl gm_AddTime(pos14_7f4c00*, int, int, int);
 int __cdecl cm_SendSetHE(char, char*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
@@ -114,7 +114,7 @@ void __cdecl he_StepCourtshipAction(char* e)
 				goto Lsend;
 			}
 			if (v == 1) {
-				e[0xb9] = (char) fcn_005c6770(*(int*) (e + 0xac), *(int*) (e + 0xb0));
+				e[0xb9] = (char) gm_ComputeWerbungSteps(*(int*) (e + 0xac), *(int*) (e + 0xb0));
 				e[0xb8] = e[0xb8] + 1;
 			}
 			if (e[0xb8] >= e[0xb9]) {

@@ -8,7 +8,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl d2_GetWindowListItem(int, int, int);
 void __cdecl d2_CreateGuiWindow(int, int, int, int);
 int __cdecl gm_AmountToUnits(int, unsigned char);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl gm_ConvertUnitsToAmount(int, int);
 int __cdecl gm_CheckEntityStock(void*, int, int);
 void __cdecl cm_RequestMoveCredits(int, int, int, int);
 void __cdecl cm_BeginPacketFieldDelta(void*, int);
@@ -97,7 +97,7 @@ int __cdecl d2_ShowGiftDialog(int* arg2, unsigned short* arg3)
 		}
 		if (d2_CurrentElementId == confirm) {
 			hv = d2_GetControlValue(slider);
-			uv = fcn_0050b750(hv, *(unsigned char*) &g_773d75);
+			uv = gm_ConvertUnitsToAmount(hv, *(unsigned char*) &g_773d75);
 			if (gm_CheckEntityStock((void*) ((unsigned long)((char*)&((ENTITY_RECORD*)g_7f4ca0)[
 *(unsigned short*) &g_774970])), uv,
 				*(unsigned char*) &g_773d75) != 0) {

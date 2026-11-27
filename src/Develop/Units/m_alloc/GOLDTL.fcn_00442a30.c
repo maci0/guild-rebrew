@@ -40,7 +40,7 @@ typedef struct {
 
 void __cdecl d3_PackTextureFlags(Tex*, int*, int*);
 Tex* __cdecl d3_LoadOrReuseTexture(Cell*, int, int, int);
-void __cdecl fcn_0045ce90(Tex*);
+void __cdecl d3_LoadTextureSurfaceTl(Tex*);
 void __cdecl d3_ReleaseTexture(Tex*);
 
 
@@ -77,7 +77,7 @@ char __cdecl SelectTextureSet(Ent* e, Obj* o, unsigned char lod, char refresh)
 					r = d3_LoadOrReuseTexture(d, t->x58, v18, v14);
 					if (r != 0) {
 						if (refresh) {
-							fcn_0045ce90(r);
+							d3_LoadTextureSurfaceTl(r);
 						}
 						o->tex[i] = r;
 						o->tex[m->count + i] = r;

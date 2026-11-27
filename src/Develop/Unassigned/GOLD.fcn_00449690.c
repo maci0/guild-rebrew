@@ -7,7 +7,7 @@ int __cdecl d3_MatchSceneObjectCallback(char*, char**);
  * GOLDTL 0x445600 is the counterpart. */
 
 /* ADDRESS: GOLD 0x00449690 */
-char* __cdecl fcn_00449690(char* o, int flags, char* ptr, char* name)
+char* __cdecl d3_FindSceneObjectGold(char* o, int flags, char* ptr, char* name)
 {
 	char* st[3];
 	int saved;

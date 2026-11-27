@@ -24,7 +24,7 @@ extern char* gm_RichterEvangelisch;
 
 void __cdecl fcn_0064d3f8(void);
 unsigned short __cdecl gm_RandomMod(int);
-int __cdecl fcn_0050b750(int, char);
+int __cdecl gm_ConvertUnitsToAmount(int, char);
 
 void __cdecl cm_AppendPacketFieldValue(int, int, int, void*);
 void __cdecl cm_RequestChangeAttribute(void);
@@ -52,7 +52,7 @@ void __cdecl gm_InitCityOfficialsAndCitizens(void)
 	fcn_0064d3f8();
 	for (i = 0; i < 16; i++) {
 		if (((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_index != 0xffff && ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_type < 5) {
-			money = fcn_0050b750(gm_RandomMod(0x122) + 10, (*(char*)&g_773d75));
+			money = gm_ConvertUnitsToAmount(gm_RandomMod(0x122) + 10, (*(char*)&g_773d75));
 			cm_BeginPacketFieldDelta((char*) ((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[i]), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[i].entity_id);
 			cm_AppendPacketFieldValue(4, 1, 0x1ac, &money);
 			cm_RequestChangeAttribute();

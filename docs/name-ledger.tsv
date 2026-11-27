@@ -4918,3 +4918,129 @@ GOLDTL.0x004e9580	amt_GetRankLimits	0	RENAMED+CLEANED	src/Develop/Unassigned/GOL
 2026-11-27	GOLDTL.0x0059fa80	fcn_0059fa80	d2_RunGeliebteDetailDialog	inferred	high	-	Runs locations\wohnsitz\geliebte2 interaction dialog (GOLDTL.fcn_0059fe60.c).
 2026-11-27	GOLDTL.0x005a66b0	fcn_005a66b0	d2_ConfirmExchangeGoods	inferred	high	-	Confirms ware exchange in d2_RunGeldleiheWechselDialog; local type Row5a66->D2_GOODS_PROTO_ROW.
 2026-11-27	GOLDTL.0x005bdc30	fcn_005bdc30	d2_RunCityScrollMapDialog	inferred	high	-	Runs MsgCtx city scroll-map dialog (d2_BuildCityScrollMap/d2_UpdateCityScrollMap).
+2026-11-27	GOLD.0x00503f30	fcn_00503f30	gm_CheckStatInRange	inferred	high	GOLDTL.0x00506df0	Identical body to gm_IsInRange in GOLD.fcn_00503f30.c; distinct name avoids same-file duplicate symbol (proposed).
+2026-11-27	GOLDTL.0x004f9050	fcn_004f9050	gm_HandleBaumeisterPrivilege	inferred	high	GOLD.0x004f6c60	Shared privilege handler g_690478[0x22] for office 0xa Baumeister formatting 0x1dc4/0x1dc5 (--shared-definition, proposed).
+2026-11-27	GOLD.0x00417650	fcn_00417650	d3snd_InitSoundSources	inferred	high	GOLDTL.0x00418bc0	GOLD twin of GOLDTL d3snd_InitSources allocating tp_SoundSources ("d3snd_Init"); distinct name avoids duplicate symbol (proposed).
+2026-11-27	GOLD.0x00465e60	fcn_00465e60	d2_ResetDirtyRectOwner	inferred	high	GOLDTL.0x00465e60	GOLD twin of GOLDTL d2_ClearOwnerDirtyRects; distinct name avoids duplicate symbol (proposed).
+2026-11-27	GOLD.0x0046ea00	fcn_0046ea00	d2_CalcTextWidth	inferred	high	GOLDTL.0x0046b520	GOLD twin of GOLDTL d2_MeasureTextWidth; distinct name avoids duplicate symbol (proposed).
+2026-11-27	GOLD.0x004760a0	fcn_004760a0	d2_AssignElementFont	inferred	high	GOLDTL.0x00472900	GOLD twin of GOLDTL d2_SetElementFont; distinct name avoids duplicate symbol (proposed).
+2026-11-27	GOLD.0x004a61d0	fcn_004a61d0	ai_GatherEligibleEntities	inferred	high	GOLDTL.0x004a5c40	GOLD twin of GOLDTL ai_CollectEligibleEntities; GOLD.fcn_004ab3e0_gold.c caller and asm verified; distinct name avoids dup (proposed).
+2026-11-27	GOLDTL.0x004fee50	fcn_004fee50	gm_SetEntityAge	inferred	high	-	Sets +0x0a short age and +0x1c age-scaled float via cm_RequestChangeFloat/Delta; called by amt_InitOfficeHolders (proposed).
+2026-11-27	GOLDTL.0x0053f4b0	fcn_0053f4b0	d2_LoadingScreenTimerCallback	inferred	high	-	Timer callback registered/unregistered with tb_OpenFunction(7)/tb_CloseFunction in d2_ShowLoadingScreen (proposed).
+2026-11-27	GOLDTL.0x0054b420	fcn_0054b420	he_StartSkillDuelEvent	inferred	high	-	Start handler 47 paired with he_RunSkillDuelEvent in GOLDTL.fcn_0055b3e0.c:144 (proposed).
+2026-11-27	GOLDTL.0x0044dc90	fcn_0044dc90	d3_ReadMatVOffset	attested	high	-	Chunk table 0x67b708 tag 0x12 reader for +0xd8 V_OFFSET field, sibling of d3_ReadMatUOffset (proposed).
+2026-11-27	GOLDTL.0x004f8d90	fcn_004f8d90	gm_HandleKerkermeisterSecondaryPrivilege	inferred	high	-	g_690478[0x1f] priv handler for Kerkermeister (0x166==0x11) texts 0x1dbd/0x1dbe after gm_HandleKerkermeisterPrivilege (proposed).
+2026-11-27	GOLDTL.0x0052f7a0	fcn_0052f7a0	d2_NoopTargetPickerCallback	inferred	high	-	Return 0 callback passed to d2_RunOfficeListDialog and d2_OpenTargetPicker keeping picker dialog open (proposed).
+2026-11-27	GOLDTL.0x00566d00	fcn_00566d00	he_RunCaptiveReleaseOffer	inferred	high	-	Action 0x39 handler paired with he_StartCaptiveReleaseOffer in GOLDTL.fcn_00570960.c:112 (proposed).
+2026-11-27	GOLD.0x0040f560	fcn_0040f560	evt_SetEmitterColor	inferred	high	GOLDTL.0x00410470	GOLD twin of GOLDTL SetEmitterColor logging via evt_LogScriptError; evt_ prefix avoids duplicate symbol (proposed).
+2026-11-27	GOLDTL.0x00545420	fcn_00545420	he_RunDummyEvent	inferred	high	-	Empty run handler paired with he_AllocDummyEvent in he_RegisterHandler(1) at 00545430
+2026-11-27	GOLDTL.0x0044dcc0	fcn_0044dcc0	d3_ReadMatUvwRotate	inferred	high	-	Reads material +0xdc dword via fcn_004011d0 in 0x67b668; matches text parser d3_ParseMatUvwRotate
+2026-11-27	GOLDTL.0x0057b1f0	fcn_0057b1f0	he_RunMeisterpruefung	inferred	high	-	Run handler registered with he_StartMeisterpruefung in he_RegisterHandler(0x92) at 005780b0
+2026-11-27	GOLDTL.0x004cb6f0	fcn_004cb6f0	cm_ExAssignResidence	attested	high	-	Client twin of command.c cm_ExSetWohnsitz; disambiguated from unguarded SERVER cm_ExSetWohnsitz
+2026-11-27	GOLD.0x00423e70	fcn_00423e70	msx_SetAudioFadeDuration	inferred	high	GOLDTL.0x00420200	Writes fade duration 0x5f74c0 across 7 GOLD callers; disambiguated from GOLDTL msx_SetFadeDuration
+2026-11-27	GOLD.0x0043d180	fcn_0043d180	d3_DuplicateObject	attested	high	GOLDTL.0x0043a140	GOLD twin of d3_CloneObject (caller GOLD.fcn_0044be60.c); disambiguated from GOLDTL d3_CloneObject
+2026-11-27	GOLD.0x00468fa0	fcn_00468fa0	d2_QueueDirtyRect	inferred	high	GOLDTL.0x00465ff0	Clips and queues dirty rect in 0x6ed9a0[0x300]; disambiguated from GOLDTL d2_AddDirtyRect
+2026-11-27	GOLD.0x004721d0	fcn_004721d0	d2_LoadBackgroundTexture	attested	high	GOLDTL.0x0046e7a0	Attested d2_SetBackgroundTexture() error string 0x5fe90c; disambiguated from d2_SetBackgroundTexture.c
+2026-11-27	GOLD.0x00476850	fcn_00476850	d2_FreeOverlaySprite	inferred	high	GOLDTL.0x00473150	Frees sprite in g_1015ec0[32] and releases resource; disambiguated from GOLDTL d2_ReleaseOverlaySprite
+2026-11-27	GOLD.0x004ab6b0	fcn_004ab6b0	ai_ExecuteBlutrache	inferred	high	GOLDTL.0x004ab7d0	GOLD twin of ai_RunBlutrache (312B verified body); disambiguated from ai_RunBlutrache.c
+2026-11-27	GOLD.0x004ef710	fcn_004ef710	gv_IsSameField	inferred	high	-	Compares short at a0+0x50 == a1+8 && !=0x7fff; disambiguated from friedhof_logic.c gv_eval_SameField
+2026-11-27	GOLD.0x005020e0	fcn_005020e0	gm_IsBuildingTypeAllowed	inferred	high	GOLDTL.0x00504f30	Calls 0x5048e0 and gm_CheckStatLevel (7 GOLD callers); disambiguated from gm_CanBuildBuildingType
+2026-11-27	GOLD.0x005c6770	fcn_005c6770	gm_ComputeWerbungSteps	inferred	high	GOLDTL.0x005d2a40	GOLD twin of gm_CalcWerbungSteps (0x88 zero-init + gm_LookupEntityRecordById); 4 GOLD callers
+2026-11-27	GOLDTL.0x00460a00	fcn_00460a00	z_inflate_set_dictionary	attested	high	-	Zlib infblock set_dictionary in D3DX8 band (caller 00461b70); disambiguated from references/zlib/
+2026-11-27	GOLDTL.0x0055a380	fcn_0055a380	he_StartMeisterpruefungNotice	inferred	high	-	Action 126 start handler paired with he_RunMeisterpruefungNoticePrompt in GOLDTL.fcn_0055b3e0.c:305
+2026-11-27	GOLDTL.0x004b3b40	fcn_004b39f0	gm_ClearMissionTable	inferred	high	GOLD.0x004b39f0	Zeroes 0x1200-byte mission table 0x10069a0 (caller 005435e0); disambiguated from gm_ClearMissionJobs
+2026-11-27	GOLD.0x0040f800	fcn_0040f800	evt_SetEmitterTriggerOnce	attested	high	GOLDTL.0x00410710	GOLD twin of SetEmitterTriggerOnce (string at 0x40ff43); evt_ disambiguated like evt_SetEmitterFlags
+2026-11-27	GOLD.0x00505e30	fcn_00505e30	gm_GetEntityAge	attested	high	GOLDTL.0x00508e80	Twin of spiel.c:4983 gm_GetEntityAge; shared GOLDTL.0x00508e80 (--shared-definition, GUARDS spiel.c).	src/Develop/DieGildeAddOn/game/GOLDTL.fcn_005d2a40.c
+2026-11-27	GOLDTL.0x004b6650	fcn_004b6650	gm_HandleMsg00DebitWealth	inferred	high	-	Slot 0 of entity message dispatch g_6811b8 debiting 1-3% chain wealth and posting 0x603 news.	src/Develop/DieGildeAddOn/game/GOLDTL.fcn_004b6650.c
+2026-11-27	GOLD.0x00424510	fcn_00424510	nt_ReportWinsockError	inferred	high	GOLDTL.0x004208a0	Disambiguated GOLD twin of net.c:136 nt_LogWinsockError logging Winsock error codes.	src/Develop/Unassigned/GOLD.fcn_00424510.c
+2026-11-27	GOLD.0x00448910	fcn_00448910	d3_InitSceneCameras	inferred	medium	GOLDTL.0x00444040	Disambiguated GOLD twin of GOLDTL.0x00444040 d3_CreateSceneCameras (stub; native builds scene cameras).	src/Develop/Unassigned/GOLD.fcn_00448910.c
+2026-11-27	GOLD.0x0046a350	fcn_0046a350	d2_AttachWindowInputIcon	inferred	medium	GOLDTL.0x00467480	Disambiguated GOLD twin of GOLDTL.0x00467480 d2_AddWindowInputIcon (stub; d2_OpenInputIcon wrapper).	src/Develop/Unassigned/GOLD.fcn_0046a350.c
+2026-11-27	GOLD.0x00476b60	fcn_00476b60	d2_ResetSelectionAndInput	inferred	high	GOLDTL.0x00473660	Clears selection, io_ClearInputState and key byte; renames GOLD.0x00476b60 and GOLDTL.0x00473660 (--all-modules).	src/Develop/Unassigned/GOLD.fcn_00476b60.c
+2026-11-27	GOLD.0x004ef760	fcn_004ef760	gv_IsGraveSlotEmpty	inferred	high	GOLDTL.0x004f1840	Disambiguated GOLD twin of GOLDTL.0x004f1840 gv_IsGraveSlotFree checking slot +4 == -1.	src/Develop/Unassigned/GOLD.fcn_004ef760.c
+2026-11-27	GOLD.0x005da160	fcn_005da160	d2_CloseExpelWorkersWindow	inferred	high	-	Frees cached dialog window [0x62dda0] on exit paths of GOLD.0x005da180 (twin of d2_ShowExpelWorkersDialog).	src/Develop/Unassigned/GOLD.fcn_005da160.c
+2026-11-27	GOLDTL.0x00438a20	fcn_00438a20	d3_GetLastFrameFaceCount	inferred	high	-	Reads 0x6b8030 written by d3_RenderScene from g_10432a8 face counter (ID3DXBaseMesh vtbl+0x10).	src/Develop/Unassigned/fcn_00438a20.c
+2026-11-27	GOLDTL.0x0054b810	fcn_0054b810	he_RunFreeActionStub	inferred	high	-	Run callback for action 48 paired with he_StartFreeActionStub in he_RegisterHandler (0055b3e0:147).	src/Develop/Unassigned/fcn_0054b810.c
+2026-11-27	GOLD.0x0045ab50	fcn_0045ab50	d3s_CreateCache	inferred	high	GOLDTL.0x00456530	Disambiguated GOLD twin of GOLDTL.0x00456530 d3s_AllocCache (d3s:Cache).	src/Develop/Units/m_alloc/GOLD.fcn_0045ab50.c
+2026-11-27	GOLDTL.0x00500580	fcn_00500580	sim_CreateCitizenClient	attested	high	SERVER.0x10015500	6-arg client twin of sim.c sim_CreateCitizen (disambiguated from sim.c:680)
+2026-11-27	GOLDTL.0x00500660	fcn_00500660	sim_WalkDirectoryClient	attested	high	none	Client twin of sim.c sim_WalkDirectory (disambiguated from sim.c:754)
+2026-11-27	GOLDTL.0x004cbde0	fcn_004cbde0	cm_ClientExEmployWorker	attested	high	SERVER.0x1000f730	Client twin of command.c cm_ExEmployWorker (disambiguated from command.c:4817)
+2026-11-27	GOLD.0x00402720	fcn_00402720	ch_CountCharactersNearGold	inferred	high	GOLDTL.0x00402c00	GOLD twin of ch_CountCharactersNear counting characters within tolerance radius
+2026-11-27	GOLD.0x00426660	fcn_00426660	sb_LoadEntryGold	inferred	high	none	GOLD twin of GOLDTL sb_LoadEntry loading bank sample entry into sample bank
+2026-11-27	GOLD.0x00449690	fcn_00449690	d3_FindSceneObjectGold	inferred	high	none	GOLD twin of GOLDTL d3_FindSceneObject finding child scene node by name or ptr
+2026-11-27	GOLD.0x0046bdf0	fcn_0046bdf0	d2_CreateTextButtonGold	inferred	high	GOLDTL.0x00468cf0	GOLD twin of d2_CreateTextButton creating type-9 text button control
+2026-11-27	GOLD.0x00472cd0	fcn_00472cd0	d2_CloseWindowGold	inferred	high	GOLDTL.0x0046f280	GOLD twin of d2_CloseWindow releasing window control and clearing slot state
+2026-11-27	GOLD.0x00478860	fcn_00478860	d2_SetMouseTooltipGold	inferred	high	GOLDTL.0x00475220	GOLD twin of d2_SetMouseTooltip copying tooltip text into global buffer
+2026-11-27	GOLD.0x004c6780	fcn_004c6780	cm_ChkOfficeCandidateGold	attested	high	SERVER.0x1000d020	GOLD client twin of command.c cm_ChkOfficeCandidate validating applicant
+2026-11-27	GOLD.0x004ef7c0	fcn_004ef7c0	gv_FindSlotEntryFilteredGold	inferred	high	SERVER.0x10010710	GOLD twin of FindSlotEntryFiltered scanning slot list matching predicate
+2026-11-27	GOLDTL.0x004f5da0	fcn_004f39b0	gm_CountStraftatenForEntity	inferred	high	GOLD.0x004f39b0	Counts active Straftat crime slots owned by entity (--all-modules)
+2026-11-27	GOLDTL.0x004e1950	fcn_004e1950	cut_NoopTobyCutsceneStep	inferred	medium	none	Empty ret callback registered as AI/step f0 slot for cut_RunTobyCutscene
+2026-11-27	GOLDTL.0x00439aa0	fcn_00439aa0	d3_RegisterSceneObjectTl	inferred	high	GOLD.0x0043ca20	GOLDTL twin of d3_RegisterSceneObject linking object and binding active camera
+2026-11-27	GOLDTL.0x0045ce90	fcn_0045ce90	d3_LoadTextureSurfaceTl	inferred	high	GOLD.0x00460e40	GOLDTL twin of d3_LoadTextureSurface loading/reloading texture surface data
+2026-11-27	GOLD.0x004cd500	fcn_004ce080	d2_ResetTextLog	inferred	high	GOLDTL.0x004ce080	Shared GOLD/GOLDTL def zeroing g_9ba9f4/g_772e88 of g_9ba3a0 log ring; caller d2_RunNetLobbySetup.
+2026-11-27	GOLD.0x00404c20	fcn_00404c20	ch_SetObjectAnimationPaused	inferred	high	GOLDTL.0x004055a0	GOLD twin of ch_SetAnimationPaused; toggles +0x8c bit 4 in gm_PauseGameSimulation.
+2026-11-27	GOLD.0x00426950	fcn_00426950	sb_LoadSampleBankFromFile	attested	high	GOLDTL.0x00422dc0	GOLD twin of sb_LoadSampleBank; attested log string; caller main_OpenEngine.c.
+2026-11-27	GOLD.0x0044aa10	fcn_0044aa10	d3_WriteSceneFile	inferred	high	GOLDTL.0x00446f70	GOLD twin of d3_SaveScene; writes scene header/objects/floor; caller ls_SaveSceneWithBuildingIds.
+2026-11-27	GOLD.0x0046c9e0	fcn_0046c9e0	d2_AllocGuiElement	inferred	high	GOLDTL.0x00469890	GOLD twin of d2_AllocateElement; installs g_00f8f080 slot via d2_FindFreeElementSlot.
+2026-11-27	GOLD.0x00472df0	fcn_00472df0	d2_DestroyElementWindow	inferred	medium	GOLDTL.0x0046f390	case 0x40 sub-window destructor on bild_offset (GOLD.fcn_0046e700.c:32); != d2_FreeWindowSlot.
+2026-11-27	GOLD.0x00479110	fcn_00479110	d2_QuerySurfaceDesc	inferred	high	GOLDTL.0x004760c0	GOLD twin of d2_GetSurfaceDesc; calls COM vtbl+0x58 GetSurfaceDesc on parent+0x20.
+2026-11-27	GOLD.0x004f0ed0	fcn_004f0ed0	gv_TransferSlotEntry	inferred	high	SERVER.0x10011940	GOLD twin of gv_MoveSlotEntry; moves category 0x1d graveyard slot; caller cm_ChkGraveyardTransfer.
+2026-11-27	GOLD.0x0050dc30	fcn_0050dc30	init_LoadBuildingScene	inferred	medium	GOLDTL.0x005110d0	GOLD stub twin of init_LoadGebaeudeScene; called by init_AllocateGebaeudeSceneSlot.
+2026-11-27	GOLDTL.0x00490bb0	fcn_00490bb0	ai_EvaluateBuildingCostLaw	inferred	medium	-	Law callback g_68ff68[6] (.data:0x690060); gm_CalcBuildingCost uses gm_GetLawEntry(6) info[6].
+2026-11-27	GOLDTL.0x004bb540	fcn_004bb540	gm_HandleMsgGrantPercentWealth	inferred	medium	-	g_6811b8[0x3c] msg handler granting walk*rand(1..4)% wealth via cm_RequestTransferCurrencyNoKill
+2026-11-27	GOLDTL.0x00502a20	fcn_00502a20	gm_FindNextQueryItem	inferred	medium	-	0-xref item-list copy of gm_NextQueryItemMatch iterating lpObjektePROT 0x43-byte records
+2026-11-27	GOLD.0x0040aaf0	fcn_0040aaf0	ch_QueueObjectWalkAndFace	attested	high	-	GOLD twin of GOLDTL.0x0040b920 ch_QueueWalkToDummyRotate queueing actions 0x2d and 7
+2026-11-27	GOLD.0x0046cab0	fcn_0046cab0	d2_DecrementRefcount	attested	high	-	GOLD twin of d2_SubRefcount decrementing g_006ed918 refcount with invalid-refcount diagnostic
+2026-11-27	GOLD.0x004730d0	fcn_004730d0	d2_ReorderControlInWindow	inferred	high	-	relinks control index in g_006ed964 after owner in window z-order
+2026-11-27	GOLD.0x0047cb60	fcn_0047cb60	d2_GetResourceBankEntry	inferred	high	-	reads *(obj+0x45+idx*4)+obj resource bank entry (GOLDTL.0x0047cb60 already renamed)
+2026-11-27	GOLDTL.0x004fa2e0	fcn_004fa2e0	gm_HandleHighRolePrivilege	inferred	medium	-	g_690478[0x36] privilege handler checking (entity+0x1cc&0x200) high role via d2_ShowPrivilegMessage
+2026-11-27	GOLDTL.0x0050c4e0	fcn_0050c4e0	gm_GetBuildingProtLevel	inferred	high	-	returns lpGebaeudePROT[*arg].level building prototype level
+2026-11-27	GOLDTL.0x005cc620	fcn_005cc620	d2_LayoutGeliebteCandidateList	inferred	high	-	TabRec 0x6ac8f4 layout paired with d2_CollectAction6fCandidates rendering d2_DrawPersonCard list
+2026-11-27	GOLDTL.0x004bb080	fcn_004bb080	gm_HandleMsgReturnUnsupported	inferred	medium	-	g_6811b8[0x35] entity message dispatch handler returning 0x400 unsupported-action flag
+2026-11-27	GOLDTL.0x00442910	fcn_00442910	d3_CreateSceneModelObject	attested	high	-	GOLDTL twin of GOLD.0x00446e10 d3_SpawnModelObject creating MODEL_SCENE_OBJ
+2026-11-27	GOLD.0x00411be0	fcn_00411be0	d3_GetSceneContextIndex	inferred	high	GOLDTL.0x00413190	Converts g_10432c0 ptr to 0..0x3f context index (twin d3_GetContextIndex).
+2026-11-27	GOLD.0x0042b5b0	fcn_0042b5b0	evt_RegisterScriptCommand	inferred	high	GOLDTL.0x004111a0	Registers script command into 0x6332bc[256] (twin evt_ImportCommand).
+2026-11-27	GOLD.0x0044be60	fcn_0044be60	d3_LoadSceneStream	inferred	high	GOLDTL.0x00448360	Loads .scn scene header, presets, objects, and floor (twin d3_LoadScene).
+2026-11-27	GOLD.0x0046cb10	fcn_0046cb10	d2_CreateGuiElement	inferred	high	GOLDTL.0x00469c30	Allocates and initializes GuiEnt slot in g_00f8f080 (twin d2_CreateElement).
+2026-11-27	GOLD.0x00473970	fcn_00473970	d2_AppendWindowText	inferred	high	GOLDTL.0x0046fdf0	Adds kind 0x46 text label to GOLD_GUI_WINDOW (twin d2_AddWindowText).
+2026-11-27	GOLD.0x0047cd10	fcn_0047cd10	d2_AllocAnimSlot	inferred	high	GOLDTL.0x0047a200	Allocates 0x11-byte anim slot in 0xf8a520[16] (twin d2_AllocAnimationSlot).
+2026-11-27	GOLD.0x004d0a30	fcn_004da480	ch_CollectSceneContextCharacters	inferred	high	GOLDTL.0x00530a00	Scans 32 g_930600 slots into ch_ContextCharacters (twin ch_CollectContextCharacters).
+2026-11-27	GOLD.0x0052ef00	fcn_0052ef00	d3_ResetSelectionBox	inferred	high	GOLDTL.0x005345a0	Clears g_00760440 after d3snd_PlaySelectedObjectClickSound (twin d3_ClearSelectionBox).
+2026-11-27	GOLDTL.0x0042e3f0	fcn_0042e3f0	d3_TraverseSceneNoop	inferred	high	-	Calls d3_VisitSceneObjects via 0042e3d0/0042e3c0 for ch_ValidateSceneObjects (0042e400).
+2026-11-27	GOLDTL.0x005b1eb0	fcn_005a8a30	hp_GetProdSellPriceFactor	inferred	high	GOLD.0x005a8a30	Returns sell price ratio threshold from hp_FindProdSetting+0x38 (GOLDTL.ai_MeisterTrade.c:203).
+2026-11-27	GOLDTL.0x0043b4e0	fcn_0043b4e0	d3_HandleEventNone	inferred	high	-	Returns 1; handler pointer returned by d3_GetEventNoneHandler (0x0043b4f0).
+2026-11-27	GOLDTL.0x0050b750	fcn_0050b750	gm_ConvertUnitsToAmount	attested	high	GOLD.0x005085f0	Twin of spiel.c:5974 gm_UnitsToAmount using g_6995bc[entity_slot].
+2026-11-27	GOLDTL.0x00570550	fcn_00570550	he_StartTradeCartRoutes	inferred	high	-	Action 0xa6 start callback paired with 0x570870 calling he_ProcessTradeCartRoute.
+2026-11-27	GOLDTL.0x00442e30	fcn_00442e30	d3_ClearSceneState	inferred	high	GOLD.0x004473f0	Clears scene/floor/sky/light state (twin d3_ClearScene; distinct from 004392c0 d3_ResetScene).
+2026-11-27	GOLDTL.0x004f1a10	fcn_004f1a10	gv_LookupWorkerSlot	inferred	medium	-	Shared GOLD/GOLDTL twin of friedhof_logic.c gv_FindWorkerSlot; uncollided name.
+2026-11-27	GOLDTL.0x004c7310	fcn_004c7310	cm_ValidateOfficeCandidateCmd	inferred	medium	-	Client twin of SERVER cm_ChkOfficeCandidate (command.c:1429); uncollided name.
+2026-11-27	GOLDTL.0x004c89c0	fcn_004c89c0	cm_ExAllocObjektCmd	inferred	medium	-	Client twin of SERVER cm_ExAllocObjekt (command.c:3085); uncollided name.
+2026-11-27	GOLD.0x00411eb0	fcn_00411eb0	d3_CalcObjectBoundingSphere	inferred	medium	-	GOLD twin of GOLDTL.0x00413680 d3_ComputeObjectBoundingSphere.
+2026-11-27	GOLD.0x0042c9c0	fcn_0042c9c0	txt_LoadTextDefinitionList	inferred	medium	-	GOLD twin of GOLDTL.0x0042bd20 txt_LoadTextFileDefinition (Textfiledefinition loader).
+2026-11-27	GOLD.0x0044e2e0	fcn_0044e2e0	d3_LoadObjectAnimFromFile	inferred	medium	-	GOLD twin of GOLDTL d3_LoadObjectAnim (stubbed in src, native body loads .oam anim).
+2026-11-27	GOLD.0x0046e700	fcn_0046e700	d2_DestroyGuiElement	inferred	medium	-	GOLD twin of GOLDTL.0x0046b2b0 d2_DestroyElement.
+2026-11-27	GOLD.0x004759e0	fcn_004759e0	d2_QueryElementResourceSize	inferred	medium	-	GOLD twin of GOLDTL.0x00472050 d2_GetElementResourceSize.
+2026-11-27	GOLD.0x0047cda0	fcn_0047cda0	d2_DrawAnimSlotFrame	inferred	medium	-	GOLD twin of GOLDTL.0x0047cd70 d2_DrawAnimationSlot.
+2026-11-27	GOLD.0x004e52a0	fcn_004e52a0	cut_SetCutsceneRandSeed	inferred	medium	-	GOLD twin of GOLDTL.0x004e6c60 cut_SetRandSeed (cut_randseed handler).
+2026-11-27	GOLD.0x004fb620	fcn_004fb620	gm_ResolveHeadIconSlots	inferred	medium	-	GOLD twin of GOLDTL.0x004fdec0 gm_FindHeadIconIndex (HEAD/ICON bitmap slots).
+2026-11-27	GOLDTL.0x00402aa0	fcn_00402aa0	ch_EnsureCharacterMeshes	inferred	medium	-	TL ret stub whose GOLD twin 0x00402540 inflates character submeshes via d3_InflateObject.
+2026-11-27	GOLDTL.0x0042e640	fcn_0042e640	vfs_CompareFileKey	inferred	medium	-	Twin of vfs.c:250 vfs_CompareKey comparing key against filename pointer.
+2026-11-27	GOLDTL.0x0045cfa0	fcn_0045cfa0	d3_ReloadSceneTextureSurfaces	inferred	medium	-	GOLDTL twin of GOLD.0x00461080 d3_ReloadAllTextures.
+2026-11-27	GOLDTL.0x004fc180	fcn_004fc180	gm_StepCityPopulation	inferred	medium	-	Steps smoothed city population g_773d4c toward g_773d50 via cm_ExAdvanceGameTick.
+2026-11-27	GOLDTL.0x0043f9d0	fcn_0043f9d0	d3_ReloadFloorTextureSlots	inferred	medium	-	Invalidates floor chunks and reloads 8 D3_FLOOR_TEXTURES slots for d3_ReloadFloorTextures.
+2026-11-27	GOLD.0x005bcb10	fcn_005bcb10	d2_InitMeisterListeDialog	inferred	medium	-	GOLD twin of GOLDTL.0x005c89a0 d2_RunMeisterListeDialog; multi-file types out of scope.
+2026-11-27	GOLD.0x0040f250	fcn_0040f250	evt_SetEmitterDirection	inferred	medium	-	GOLD twin of GOLDTL.0x00410160 SetEmitterDirection in evt_RegisterSceneCommands.
+2026-11-27	GOLDTL.0x0051ecf0	fcn_0051ecf0	ls_WriteBuildingEntityState	inferred	medium	-	Client twin of SERVER ls_SaveBuildingEntityState (loadsave.c:496); uncollided name.
+2026-11-27	GOLD.0x0042e530	fcn_0042e530	txt_LoadTextPointerTable	inferred	high	GOLDTL.0x0042d880	GOLD twin of txt_loadTextFile ("txt_txt:txt_loadTextFile:PointerTable"); avoids GOLDTL symbol collision.
+2026-11-27	GOLD.0x00460a90	fcn_00460a90	d3_EncodeTextureFlags	inferred	high	GOLDTL.0x0045cab0	GOLD twin of d3_PackTextureFlags packing texture bitflags into 2 output bytes; avoids collision.
+2026-11-27	GOLD.0x0046e980	fcn_0046e980	d2_ResetDisplaySurface	inferred	high	GOLDTL.0x0046b4f0	GOLD twin of d2_ClearScreen; asm locks/clears/unlocks surface and clears backdrop; avoids collision.
+2026-11-27	GOLD.0x00475a90	fcn_00475a90	d2_ApplyElementEnabled	inferred	high	GOLDTL.0x00472640	GOLD twin of d2_SetElementEnabled toggling GuiEnt+0x38=(flag==0) recursively; avoids collision.
+2026-11-27	GOLD.0x0047da70	fcn_0047da70	ai_UpdateAllEntityDrives	inferred	high	GOLDTL.0x0047cf30	Iterates entity table calling ai_UpdateEntityDrives; --all-modules renames GOLD.0x0047da70 and GOLDTL.0x0047cf30.
+2026-11-27	GOLD.0x004eb180	fcn_004eb180	he_QueryActionProgress	inferred	high	GOLDTL.0x004ecf00	GOLD twin of he_GetActionProgress searching he_StartHandlungSearch for kinds 149/150/151/4; avoids collision.
+2026-11-27	GOLDTL.0x00538700	fcn_00538700	main_NoopCrashCallback	inferred	high	-	1-byte ret passed as g_crash_callback to InitializeLogAndErrorHandler from main_InitRuntime.
+2026-11-27	GOLDTL.0x0054b130	fcn_0054b130	he_StartCourtAction	inferred	medium	-	Action 45 start handler calling he_FreeAction, paired with he_FinishCourtAction (0x54b140).
+2026-11-27	GOLDTL.0x0041e620	fcn_00422d60	main_InitComMovieState	inferred	high	GOLD.0x00422d60	CoInitialize(0) movie helper called by main_PlayIntroMovies; --all-modules renames GOLD.0x00422d60 too.
+2026-11-27	GOLDTL.0x0044da60	fcn_0044da60	d3_ReadMatAlphaValue	inferred	high	-	Binary material chunk handler reading byte at recs[n]+0xc1 (twin of d3_ParseMatAlphaValue); Unk44da60->D3_BIN_MAT_ALPHA_VAL_CTX.
+2026-11-27	GOLDTL.0x004c59e0	fcn_004c59e0	cm_RequestAddCutsceneParticipant	inferred	high	-	Enqueues client packet 0x29 dispatching to cm_ExAddCutsceneParticipant, adjacent to cm_RequestRemoveCutsceneParticipant.
+2026-11-27	GOLDTL.0x005224f0	fcn_005224f0	d3_ClearSceneObjectActiveFlag	inferred	medium	-	d3_LoadSceneAndTerrain callback clearing cell-tree/active-mesh flag (bit 0 of obj[0x217]).
+2026-11-27	GOLD.0x0040f4f0	fcn_0040f4f0	d3_UpdateParticleTimeAndAlpha	inferred	high	GOLDTL.0x00410400	GOLD twin of SetEmitterTimeAndAlpha; avoids GOLDTL symbol collision.
+2026-11-27	GOLD.0x00472a50	fcn_00472a50	d2_TickFadeOverlays	inferred	high	GOLDTL.0x00473320	Re-proposed after n14 refusal; GOLD twin of d2_SweepFadeOverlays sweeping fade overlay timers.

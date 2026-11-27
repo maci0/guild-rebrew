@@ -22,7 +22,7 @@ void __cdecl he_NotifyFriedhofEvent08(char*, void*, void*, int, int, int);
 
 double __cdecl log10(double x);
 int __cdecl gm_AmountToUnits(int a, unsigned char k);
-int __cdecl fcn_0050b750(int a, unsigned char k);
+int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
 
 /* ADDRESS: GOLDTL 0x004f25a0 */
 int __cdecl gv_RentGravePlot(char* req)
@@ -98,5 +98,5 @@ int __cdecl gm_CalcScaledWealthValue(unsigned short* e)
 	x = pr;
 	x = MAXV(MINV(100000.0, x), 10000.0);
 	x = x / (log10(x) + 1.0) * 0.1f;
-	return fcn_0050b750((int) x, g_773d75);
+	return gm_ConvertUnitsToAmount((int) x, g_773d75);
 }

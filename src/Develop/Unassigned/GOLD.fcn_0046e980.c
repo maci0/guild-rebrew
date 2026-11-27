@@ -1,5 +1,5 @@
 /* ADDRESS: GOLD 0x0046e980 */
-int __cdecl fcn_0046e980(void)
+int __cdecl d2_ResetDisplaySurface(void)
 {
 	/* stub */
 	return 0;

@@ -31,7 +31,7 @@ void __cdecl d3_SetNodePosition(char* object, int* vector);
 void __cdecl d3_SetObjectRotation(char* object, int* vector);
 char* __cdecl d3_NextVisibleSceneNode(char* object);
 void __cdecl d3_DisposeObject(char* object);
-void __cdecl fcn_00439aa0(char* object);
+void __cdecl d3_RegisterSceneObjectTl(char* object);
 void __cdecl d3_SetActiveCamera(char* object);
 char* __cdecl d3_CloneObject(char* object);
 void __cdecl d3e_ReadSceneEvents(void* stream);
@@ -41,7 +41,7 @@ char* __cdecl d3_int_io_LoadFloor(void* stream, int version);
 void __cdecl d3sm_Rebuild(char* resource, int mode);
 char* __cdecl d3sm_CreateMap(int a1, int n, int a3);
 void __cdecl gv_Free3Fields(int* slot);
-void __cdecl fcn_0045cfa0(SCENE_PROGRESS progress);
+void __cdecl d3_ReloadSceneTextureSurfaces(SCENE_PROGRESS progress);
 int __cdecl _strcmpi(const char* a, const char* b);
 
 /* Reader scratch. The reference frame reserves sixteen bytes for it and never
@@ -207,7 +207,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 				clone = d3_CloneObject(obj);
 				clone[0x215] |= 4;
 				strcat(clone, "boden");
-				fcn_00439aa0(clone);
+				d3_RegisterSceneObjectTl(clone);
 				break;
 			}
 			obj = d3_NextVisibleSceneNode(obj);
@@ -231,7 +231,7 @@ char __cdecl d3_LoadScene(const char* filename, void* stream, SCENE_PROGRESS pro
 	if (g_6b8300 != 0) {
 		*(char**) (universe + 0xac) = g_6b8300;
 	}
-	fcn_0045cfa0(progress);
+	d3_ReloadSceneTextureSurfaces(progress);
 	g_6b86d4--;
 	if (filename != 0) {
 		strncpy(g_67a370, filename, 0x7f);

@@ -43,7 +43,7 @@ int __cdecl gm_GetScaledEntitySkill(char*, int);
 char* __cdecl gm_GetEntityTableEntry(char*);
 int __cdecl gm_EvalEntityInventoryValue(char*, int*);
 int __cdecl gm_GetBuildingTechEffect(char*, int, int);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 int __cdecl gm_RandomMod(int);
 double __cdecl gm_RandomFloat01(void);
 int __cdecl _ftol(void);
@@ -213,7 +213,7 @@ void __cdecl he_RunEinbruch(char* e)
 			}
 			px = (char*) (0x7f4ca0 + *(unsigned short*) (pb + 8) * 0x21c);
 			if (px != 0 && pc != 0) {
-				num = fcn_0050b750((gm_RandomMod(0xc8) & 0xffff) + 0x226, (char) g_773d75);
+				num = gm_ConvertUnitsToAmount((gm_RandomMod(0xc8) & 0xffff) + 0x226, (char) g_773d75);
 				io_FormatTextBuffer(b200, 0x19ea, pa, num, *(unsigned short*) px);
 				he_PostEntityMessage(*(int*) (pc + 4), *(int*) (pc + 4), b200, 1, 0x5f0,
 				        "_NACHRICHTEN_HS_76");

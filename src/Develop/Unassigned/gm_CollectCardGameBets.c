@@ -1,7 +1,7 @@
 #include "Develop/DieGildeAddOn/game/game_data.h"
 extern unsigned char g_773d75;
 
-void __cdecl fcn_0050b750(int amount, unsigned char k);
+void __cdecl gm_ConvertUnitsToAmount(int amount, unsigned char k);
 void __cdecl cm_RequestTransferCurrencyNoKill(int a, int b, unsigned char k, int amount);
 #include "client_types.h"
 typedef Card_1007ce0 Card;
@@ -17,7 +17,7 @@ void __cdecl gm_CollectCardGameBets(void)
 		if (*(int*) (g_1007cd4 + 0x2c + i * 0x34) < 0) {
 			*(int*) (g_1007cd4 + 0xa0) += *(int*) (g_1007cd4 + 0xac);
 			if (i == 0) {
-				fcn_0050b750(*(int*) (g_1007cd4 + 0xac), g_773d75);
+				gm_ConvertUnitsToAmount(*(int*) (g_1007cd4 + 0xac), g_773d75);
 				cm_RequestTransferCurrencyNoKill(-1, *(int*) (*(char**) (g_1007cd4 + 4) + 4), g_773d75, *(int*) (g_1007cd4 + 0xac));
 			}
 			*(int*) (g_1007cd4 + 0x20 + i * 0x34) += *(int*) (g_1007cd4 + 0xac);

@@ -8,7 +8,7 @@ extern char* g_14cbca4;
 extern unsigned char* g_14cbca8;
 extern unsigned short g_14cbcae;
 void __cdecl nt_ResetPacketStats(void);
-void __cdecl fcn_00424510(int);
+void __cdecl nt_ReportWinsockError(int);
 
 /* ADDRESS: GOLD 0x00424990 */
 int __cdecl nt_ConnectToHost(const char* host, unsigned short port)
@@ -67,7 +67,7 @@ int __cdecl nt_ConnectToHost(const char* host, unsigned short port)
     }
     address.sin_port = htons(port);
     if (connect(sock, (struct sockaddr*) &address, 16) != 0 && WSAGetLastError() != 10035) {
-        fcn_00424510(WSAGetLastError());
+        nt_ReportWinsockError(WSAGetLastError());
         goto fail;
     }
     timeout.tv_sec = 0;
@@ -91,7 +91,7 @@ int __cdecl nt_ConnectToHost(const char* host, unsigned short port)
         }
         i++;
     } while (i < 16);
-    fcn_00424510(WSAGetLastError());
+    nt_ReportWinsockError(WSAGetLastError());
 fail:
     shutdown(sock, 2);
     closesocket(sock);

@@ -61,7 +61,7 @@ int __cdecl gm_AccumulateTyped2(Player*);
 int __cdecl gm_AmountToUnits(int, char);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_0050b750(int, char);
+int __cdecl gm_ConvertUnitsToAmount(int, char);
 void __cdecl cm_SendLogAction(char*);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 int __cdecl cm_SendCopyEntityData(Packet*);
@@ -207,7 +207,7 @@ void __cdecl d2_RunGelageDialog(char* a)
 		do {
 			if (g_100f1dc == 2) {
 				if (btn2 != -1 && d2_CurrentElementId == btn2) {
-					v = fcn_0050b750(d2_GetControlValue(sl), g_773d75);
+					v = gm_ConvertUnitsToAmount(d2_GetControlValue(sl), g_773d75);
 					memset(&pkt, 0, sizeof(pkt));
 					pkt.type = 0x38;
 					pkt.x8 = ((Player*)g_7f4ca0)[g_774970].x4;

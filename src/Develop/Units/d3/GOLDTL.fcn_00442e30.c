@@ -55,7 +55,7 @@ void __cdecl d3_CreateSceneCameras(void);
 
 
 /* ADDRESS: GOLDTL 0x00442e30 */
-void __cdecl fcn_00442e30(void)
+void __cdecl d3_ClearSceneState(void)
 {
 	int i;
 	char* d;

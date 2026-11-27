@@ -18,7 +18,7 @@ extern struct s_fd7ba0 g_fd7ba0[];
 #include <string.h>
 
 int __cdecl d3_FindFreeSceneContext(void);
-void __cdecl fcn_0050dc30(int);
+void __cdecl init_LoadBuildingScene(int);
 
 int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* e)
 {
@@ -28,7 +28,7 @@ int __cdecl init_AllocateGebaeudeSceneSlot(unsigned char* e)
 	k = ((BUILDING_PROTOTYPE*)g_7e3f30)[*e].category;
 	if (((signed char*)g_76fa60)[k] == -1) {
 		if (e == g_6f230c || *e == 0x1e) {
-			fcn_0050dc30(*e);
+			init_LoadBuildingScene(*e);
 		} else {
 			r = d3_FindFreeSceneContext();
 			if (r == -1) {

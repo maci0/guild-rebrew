@@ -3,7 +3,7 @@
 
 extern unsigned char* lpGebaeudePROT;
 
-int __cdecl fcn_0050c4e0(unsigned char* e);
+int __cdecl gm_GetBuildingProtLevel(unsigned char* e);
 
 int __cdecl gm_HasLevelFor(unsigned char* e, unsigned char* x)
 {
@@ -13,7 +13,7 @@ int __cdecl gm_HasLevelFor(unsigned char* e, unsigned char* x)
 
 	t = &((BUILDING_PROTOTYPE *)lpGebaeudePROT)[e[0]];
 	lvl = 0;
-	n = fcn_0050c4e0(x);
+	n = gm_GetBuildingProtLevel(x);
 	if (t->level == 1) {
 		lvl = 1;
 	} else if (t->level == 2) {

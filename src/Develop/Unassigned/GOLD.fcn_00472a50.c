@@ -1,6 +1,6 @@
 #include "client_sprites.h"
 
-void __cdecl fcn_00472a50(void)
+void __cdecl d2_TickFadeOverlays(void)
 {
     char** p;
     char* n;
@@ -12,7 +12,7 @@ void __cdecl fcn_00472a50(void)
         if (n != 0) {
             f = *(int*) n;
             if (f & 8) {
-                fcn_00476850(n);
+                d2_FreeOverlaySprite(n);
                 *p = 0;
             } else {
                 *(int*) n = f | 4;

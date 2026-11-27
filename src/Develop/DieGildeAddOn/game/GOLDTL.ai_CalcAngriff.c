@@ -24,7 +24,7 @@ char* __cdecl he_StartHandlungSearch(int, int, int, int, int);
 char* __cdecl he_fn_Handlung(void);
 int __cdecl he_HasNoActiveAction0x62(char*);
 int __cdecl gm_PosToStatsGrid(int, int*, int*);
-int __cdecl fcn_0050c4e0(unsigned char*);
+int __cdecl gm_GetBuildingProtLevel(unsigned char*);
 int __cdecl gm_CalcOwnerAndStockValue(char*, int);
 void __cdecl cm_SendCopyEntityData(char*);
 
@@ -112,7 +112,7 @@ int __cdecl ai_CalcAngriff(char* attackerRec, int a2)
 			} else {
 				w = 0.0f;
 			}
-			w = (*(float*) 0x662924 - (float) fcn_0050c4e0((unsigned char*) p)) * w * *(double*) 0x662908;
+			w = (*(float*) 0x662924 - (float) gm_GetBuildingProtLevel((unsigned char*) p)) * w * *(double*) 0x662908;
 			r = gm_RandomMod(0x64) & 0xffff;
 			w = (float) r * w * 0.01;
 			if (cand == 0) {

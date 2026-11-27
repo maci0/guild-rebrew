@@ -14,7 +14,7 @@ typedef struct
 extern Timer14 g_9b4900[16];
 
 #ifdef REBREW_GOLD
-#define d2_DestroyElement fcn_0046e700
+#define d2_DestroyElement d2_DestroyGuiElement
 #endif
 void __cdecl d2_DestroyElement(int);
 

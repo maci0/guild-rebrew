@@ -23,10 +23,10 @@ int __cdecl amt_FindOfficeSlotByKey(unsigned char c, void *out);
 int __cdecl amt_GetRoleTemplate(int i, void *out);
 int __cdecl amt_FindOfficeSlotByType(int i, void *out);
 int __cdecl amt_AssignOfficeHolder(int a, void *p, int b);
-void __cdecl fcn_004fee50(void *p, int h);
+void __cdecl gm_SetEntityAge(void *p, int h);
 int __cdecl gm_MapEntityStatRange(int);
 int __cdecl gm_GetRangeStatId(int, int);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl gm_ConvertUnitsToAmount(int, int);
 void __cdecl amt_SpawnHistoricalOfficeHolders(void);
 extern unsigned char g_773d75;
 /* ADDRESS: GOLDTL 0x00511c60 */
@@ -177,7 +177,7 @@ int __cdecl amt_InitOfficeHolders(void)
 		v36 = (gm_RandomMod(2) & 0xffff) + v25[(v35[2] & 0xff) + 30];
 		v38 = v25[(v35[2] & 0xff) + 40];
 
-		v49 = fcn_0050b750(v38 - (int) ((float) v38 *
+		v49 = gm_ConvertUnitsToAmount(v38 - (int) ((float) v38 *
 						 gm_RandomFloat01() *
 						 -0.5f),
 				   *(unsigned char *) 0x773d75);
@@ -198,7 +198,7 @@ int __cdecl amt_InitOfficeHolders(void)
 			}
 		}
 		cm_RequestChangeAttribute();
-		fcn_004fee50(p, v25[i] & 0xffff);
+		gm_SetEntityAge(p, v25[i] & 0xffff);
 		k = amt_AssignOfficeHolder((unsigned char) shuffledIds[i], p, 0xff);
 		if (k != -1) {
 			while (cm_GetCommandStatus(k) == 0) {

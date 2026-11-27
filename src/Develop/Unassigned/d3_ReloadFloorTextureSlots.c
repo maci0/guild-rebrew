@@ -11,7 +11,7 @@ void __cdecl d3_InvalidateFloorChunks(char*);
 int __cdecl d3_LoadFloorTexture(D3_FLOOR_TEXTURES*, char* name, int slot);
 
 /* ADDRESS: GOLDTL 0x0043f9d0 */
-void __cdecl fcn_0043f9d0(D3_FLOOR_TEXTURES* o)
+void __cdecl d3_ReloadFloorTextureSlots(D3_FLOOR_TEXTURES* o)
 {
 	int i;
 

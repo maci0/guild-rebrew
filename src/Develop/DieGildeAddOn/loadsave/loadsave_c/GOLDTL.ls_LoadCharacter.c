@@ -29,7 +29,7 @@ extern void __cdecl ch_StartLoopingAnimation(void*, void*);
 extern void __cdecl d3_SetObjectRotation(void*, void*);
 extern void __cdecl ch_UpdateHeldObjectAttachment(void*);
 extern void __cdecl d3_BindEntitySceneObject(void*, void*, int);
-extern char* __cdecl fcn_00442910(int, void*, void*, char*);
+extern char* __cdecl d3_CreateSceneModelObject(int, void*, void*, char*);
 extern char* __cdecl gm_ResolveEntityOwnerBuilding(void*);
 extern char __cdecl SelectTextureSet(void*, void*, unsigned char, char);
 extern int __cdecl ch_AttachTransport(void*, void*);
@@ -169,13 +169,13 @@ unsigned int __cdecl ls_LoadCharacter(unsigned int stream)
 						type = *(unsigned char*) u;
 						*(unsigned int*) ((char*) u + 0x3b) = (unsigned int) rec;
 						if (*(unsigned short*) u == 0x134) {
-							found = (unsigned short*) fcn_00442910(0, rec + 0x38,
+							found = (unsigned short*) d3_CreateSceneModelObject(0, rec + 0x38,
 											      rec + 0x48, s_699784);
 						} else if (*(unsigned short*) u == 0x135) {
-							found = (unsigned short*) fcn_00442910(0, rec + 0x38,
+							found = (unsigned short*) d3_CreateSceneModelObject(0, rec + 0x38,
 											      rec + 0x48, s_699770);
 						} else if (*(unsigned short*) u == 0x136) {
-							found = (unsigned short*) fcn_00442910(0, rec + 0x38,
+							found = (unsigned short*) d3_CreateSceneModelObject(0, rec + 0x38,
 											      rec + 0x48, s_699760);
 						} else {
 							found = 0;

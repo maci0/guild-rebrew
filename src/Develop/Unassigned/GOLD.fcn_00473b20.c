@@ -6,7 +6,7 @@
 
 extern GuiEnt* g_00f8f080; /* 0x00f8f080 */
 
-int __cdecl fcn_0046ea00(const char* text, int font);
+int __cdecl d2_CalcTextWidth(const char* text, int font);
 
 void __cdecl d2_SetEditControlText(int slot, char* text)
 {
@@ -24,7 +24,7 @@ void __cdecl d2_SetEditControlText(int slot, char* text)
 		s->u.edit.len = n;
 		memmove(s->buf + n, s->buf, strlen(*(char**) (par + 0x2c)) - (s->buf - *(char**) (par + 0x2c)) + 1);
 		memcpy(s->buf, text, n);
-		s->w = fcn_0046ea00(text, s->font);
+		s->w = d2_CalcTextWidth(text, s->font);
 		strcpy(s->u.edit.copy, text);
 	}
 }

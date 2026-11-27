@@ -3,7 +3,7 @@
 
 int __cdecl d2_FreeWindowSlot(int);
 
-void __cdecl fcn_005da160(void)
+void __cdecl d2_CloseExpelWorkersWindow(void)
 {
 	d2_FreeWindowSlot(*(int*) 0x62dda0);
 	*(int*) 0x62dda0 = 0xffffffff;

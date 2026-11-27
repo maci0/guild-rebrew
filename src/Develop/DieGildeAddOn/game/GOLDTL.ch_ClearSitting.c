@@ -5,7 +5,7 @@
  * releases the seat object held at +0x74. The name is inferred; no string
  * names this function. */
 
-void __cdecl fcn_00402aa0(void*);
+void __cdecl ch_EnsureCharacterMeshes(void*);
 void __cdecl d3_RemoveObjectAnimation(char*, char*);
 
 void __cdecl ch_ClearSitting(unsigned char* ch)
@@ -18,7 +18,7 @@ void __cdecl ch_ClearSitting(unsigned char* ch)
 		p = *(unsigned char**) (ch + 0x74);
 		if (p != 0) {
 			if ((*(int**) (ch + 0x34))[0x73] == 0) {
-				fcn_00402aa0(ch);
+				ch_EnsureCharacterMeshes(ch);
 				p = *(unsigned char**) (ch + 0x74);
 			}
 			ent = *(int**) (ch + 0x34);

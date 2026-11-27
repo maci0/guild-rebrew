@@ -6,7 +6,7 @@ extern float g_6652d8[];
 
 int __cdecl gm_WalkEntityChain(unsigned short raw_idx);
 int __cdecl gm_AmountToUnits(int a, unsigned char k);
-int __cdecl fcn_0050b750(int a, unsigned char k);
+int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
 
 /* ADDRESS: GOLDTL 0x004f4440 */
 int __cdecl gm_CalcBribeOrPriceScore(int handle, int value, int mode, int flag, int* out)
@@ -34,7 +34,7 @@ int __cdecl gm_CalcBribeOrPriceScore(int handle, int value, int mode, int flag, 
 		bright = bright * 0.7f + 0.3f;
 		v = bright * (v * 0.75f);
 	}
-	r = fcn_0050b750((int) v, g_773d75);
+	r = gm_ConvertUnitsToAmount((int) v, g_773d75);
 	*out = (int) (r * g_6652d8[mode]);
 	return r;
 }

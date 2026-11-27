@@ -3,10 +3,10 @@
 #include <windows.h>
 #include "Develop/Units/m_alloc/m_alloc.h"
 
-int __cdecl fcn_0042e530(const char*);
+int __cdecl txt_LoadTextPointerTable(const char*);
 
 /* ADDRESS: GOLD 0x0042c9c0 */
-int __cdecl fcn_0042c9c0(const char* path)
+int __cdecl txt_LoadTextDefinitionList(const char* path)
 {
     FILE* stream;
     char line[200];
@@ -65,7 +65,7 @@ int __cdecl fcn_0042c9c0(const char* path)
     } while (!feof(stream));
     fclose(stream);
     for (i = 0; i < count; i++) {
-        if (!fcn_0042e530(files[i]))
+        if (!txt_LoadTextPointerTable(files[i]))
             return 0;
     }
     *(int*) 0xfe7c20 = 1;

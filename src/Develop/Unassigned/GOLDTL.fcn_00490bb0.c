@@ -2,7 +2,7 @@ int __cdecl gm_GetLawEntry(int idx, void* dst);
 
 
 /* ADDRESS: GOLDTL 0x00490bb0 */
-int __cdecl fcn_00490bb0(char* e, int unused, int* out)
+int __cdecl ai_EvaluateBuildingCostLaw(char* e, int unused, int* out)
 {
 	int info[9];
 	int n;

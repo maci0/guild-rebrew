@@ -1,13 +1,13 @@
 #include "gold_gui.h"
 extern GuiEnt* g_00f8f080;
 extern char* g_772500; extern int d2_ResourceOffset;
-int __cdecl fcn_0046c9e0(void);
+int __cdecl d2_AllocGuiElement(void);
 void __cdecl d2_ResolveResourceData(int, void**, int*);
 void __cdecl d2_AddRefcount(int);
-int __cdecl fcn_0047cd10(int, int, void*, int);
-char* __cdecl fcn_0047cb60(void*, unsigned short);
+int __cdecl d2_AllocAnimSlot(int, int, void*, int);
+char* __cdecl d2_GetResourceBankEntry(void*, unsigned short);
 /* ADDRESS: GOLD 0x0046cb10 */
-int __cdecl fcn_0046cb10(int x, int y, int type)
+int __cdecl d2_CreateGuiElement(int x, int y, int type)
 {
 	void* data;
 	GuiEnt* s;
@@ -19,7 +19,7 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 	data = 0;
 	if (*(int*) 0x6ed91c < type)
 		return -1;
-	id = fcn_0046c9e0();
+	id = d2_AllocGuiElement();
 	s = &g_00f8f080[id];
 	if (id >= 0x300)
 		return -1;
@@ -47,7 +47,7 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 		s->f16 = *(short*) (resource + 0x2e);
 		return id;
 	case 4:
-		handle = fcn_0047cd10(x, y, g_00f8f080[id].data, 0);
+		handle = d2_AllocAnimSlot(x, y, g_00f8f080[id].data, 0);
 		g_00f8f080[id].bild_offset = handle;
 		resource = g_00f8f080[id].data;
 		g_00f8f080[id].w = *(short*) (resource + 0x2c);
@@ -63,7 +63,7 @@ int __cdecl fcn_0046cb10(int x, int y, int type)
 	case 8:
 		s->bild_offset = d2_ResourceOffset;
 		resource = g_00f8f080[id].data;
-		shape = fcn_0047cb60(resource, (unsigned short) g_00f8f080[id].bild_offset);
+		shape = d2_GetResourceBankEntry(resource, (unsigned short) g_00f8f080[id].bild_offset);
 		s->w = *(short*) (shape + 6);
 		s->f16 = *(short*) (shape + 10);
 		*(int*) ((char*) s + 0x1cc) = -1;

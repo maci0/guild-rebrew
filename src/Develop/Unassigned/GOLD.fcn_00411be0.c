@@ -1,7 +1,7 @@
 extern char g_10432c0[];
 
 /* ADDRESS: GOLD 0x00411be0 */
-int __cdecl fcn_00411be0(char* p)
+int __cdecl d3_GetSceneContextIndex(char* p)
 {
 	int r;
 

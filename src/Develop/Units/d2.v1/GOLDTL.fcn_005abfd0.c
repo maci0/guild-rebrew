@@ -19,7 +19,7 @@ extern int g_14ce8e0;
 #include "client_dialog_state.h"
 extern char s_6ab060[];
 
-int __cdecl fcn_004f39b0(int);
+int __cdecl gm_CountStraftatenForEntity(int);
 int __cdecl d2_LoadForm(int, int, char*);
 void __cdecl d2_CenterDialogWindows(int);
 void __cdecl d2_SetForm(int, int);
@@ -56,7 +56,7 @@ void __cdecl d2_OpenBeichteDialog(unsigned char* e)
 	if (*(unsigned short*) (e + 0x27) == 0xffff) {
 		return;
 	}
-	amt = fcn_004f39b0(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
+	amt = gm_CountStraftatenForEntity(((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id);
 	dlg = d2_LoadForm(0, 0, s_6ab060);
 	d2_CenterDialogWindows(dlg);
 	d2_SetForm(dlg, 0);

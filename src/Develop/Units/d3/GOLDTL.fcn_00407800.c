@@ -3,7 +3,7 @@
 int __cdecl d3_GetContextIndex(int);
 void __cdecl d3_SelectSceneContext(int, int);
 void __cdecl d3_DestroyObject(int);
-int* __cdecl fcn_00442910(int, float*, float*, char*);
+int* __cdecl d3_CreateSceneModelObject(int, float*, float*, char*);
 void __cdecl d3_StartChildAnimByName(int*, char*);
 
 /* ADDRESS: GOLDTL 0x00407800 */
@@ -37,7 +37,7 @@ void __cdecl ch_SetBodyAttachment(char* e, int mode, char* name)
 			d3_DestroyObject(*slot);
 			*slot = 0;
 		}
-		*slot = (int) fcn_00442910(*(int*) (e + 0x34), position, rotation, name);
+		*slot = (int) d3_CreateSceneModelObject(*(int*) (e + 0x34), position, rotation, name);
 
 		if (*slot == 0) {
 			d3_SelectSceneContext(saved_mode, 1);

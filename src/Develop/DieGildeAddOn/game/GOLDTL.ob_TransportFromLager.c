@@ -23,7 +23,7 @@ int __cdecl gm_CheckInventoryCapacity(char*, int, int);
 int __cdecl gm_GetFreeStorageSlotCapacity(int, int, int);
 float __cdecl gm_GetSeasonPrice(int id, unsigned char a);
 int __cdecl gm_CheckEntityStock(void*, int, int);
-int __cdecl fcn_0050b750(int, int);
+int __cdecl gm_ConvertUnitsToAmount(int, int);
 int __cdecl d2_DispatchTutorialEvent(int, int, int, int);
 void __cdecl d2_DispatchTutorialInput(int, int, int, int);
 int __cdecl cm_SendSellObjekt(int, int, int, int, int, int);
@@ -91,7 +91,7 @@ int __cdecl ob_TransportFromLager(int a0, char* a1, char* a2, int a3, int a4,
 				scale = flt_1 / a5;
 				if (gm_CheckEntityStock(g_slot_table + g_774970 * 0x21c,
 				                 (int)(scale * prod), a6) && stockSlot[0xc] >= 0) {
-					n = fcn_0050b750(1, a6);
+					n = gm_ConvertUnitsToAmount(1, a6);
 					if (abs((int)(scale * countf * unitPrice - prod)) < n) {
 						a5 = 1.0f;
 					}
@@ -155,7 +155,7 @@ next:
 				scale = flt_1 / a5;
 				if (gm_CheckEntityStock(g_slot_table + g_774970 * 0x21c,
 				                 (int)(scale * prod), a6) && stockSlot[0xc] >= 0) {
-					n = fcn_0050b750(1, a6);
+					n = gm_ConvertUnitsToAmount(1, a6);
 					if (abs((int)(scale * countf * unitPrice - prod)) < n) {
 						a5 = 1.0f;
 					}

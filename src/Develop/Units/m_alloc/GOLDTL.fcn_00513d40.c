@@ -28,7 +28,7 @@ void* __cdecl fcn_0064fde9(void* p, int size);
 void __cdecl d3_VisitSceneObjects(int, int, int, int (__cdecl*)(), Query*);
 int __cdecl d3_CollectMatchingSceneObjects(char* name, int* list);
 char* __cdecl d3_SpawnObject(int kind, char* name);
-void __cdecl fcn_00439aa0(char* o);
+void __cdecl d3_RegisterSceneObjectTl(char* o);
 char __cdecl d3_ReparentObject(char* e, char* parent);
 void __cdecl d3_SetNodePosition(char* o, float* pos);
 void __cdecl d3_SetObjectRotation(char* o, float* rot);
@@ -87,7 +87,7 @@ void __cdecl d3_PlaceBuildingProxyBoxes(char* name)
 	for (j = 0; j < q.count; j++) {
 		oo = q.list[j];
 		e = d3_SpawnObject(2, name);
-		fcn_00439aa0(e);
+		d3_RegisterSceneObjectTl(e);
 		d3_ReparentObject(e, *(char**) (oo + 0x1fc));
 		d3_SetNodePosition(e, (float*) (oo + 0x4c));
 		d3_SetObjectRotation(e, (float*) (oo + 0x84));

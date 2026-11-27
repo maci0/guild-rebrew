@@ -6,7 +6,7 @@ extern int d2_CurrentElementId;
 extern int g_14ce8e0;
 
 
-int __cdecl fcn_004f39b0(int a);
+int __cdecl gm_CountStraftatenForEntity(int a);
 int __cdecl gm_SumStraftatSeverity(int a);
 void __cdecl gs_ClearTargetStraftaten(int a, int b);
 int __cdecl gm_WalkEntityChain(unsigned short);
@@ -56,7 +56,7 @@ void __cdecl d2_RunAblassDialog(char* churchBuilding)
 
 	item = -1;
 	cost = 0;
-	count = fcn_004f39b0(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4));
+	count = gm_CountStraftatenForEntity(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4));
 	kind = gm_SumStraftatSeverity(*(int*) ((char*)&((ENTITY_RECORD*)g_7f4ca0)[g_774970] + 4));
 	if (kind != 0) {
 		scale = (float) gm_WalkEntityChain(g_774970) * 0.005f;

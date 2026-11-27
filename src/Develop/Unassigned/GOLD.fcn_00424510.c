@@ -6,7 +6,7 @@ void __cdecl LogMessageInternal(char* module, unsigned int line, char* msg, int 
 
 /* Gold twin of nt_LogWinsockError (GOLDTL 0x4208a0, net.c). */
 /* ADDRESS: GOLD 0x00424510 */
-void __cdecl fcn_00424510(int err_code)
+void __cdecl nt_ReportWinsockError(int err_code)
 {
 	char buf[256];
 

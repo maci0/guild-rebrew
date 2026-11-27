@@ -3,7 +3,7 @@
 
 void __cdecl io_ClearInputState(void);
 
-void __cdecl fcn_00476b60(void)
+void __cdecl d2_ResetSelectionAndInput(void)
 {
 	*(int*) 0xf8a668 = 0xffffffff;
 	io_ClearInputState();

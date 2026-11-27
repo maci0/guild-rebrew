@@ -39,7 +39,7 @@ int __cdecl d2_AddElementToWindow(int, int, int, int);
 void __cdecl d2_AddToRadioGroup(int, int);
 void __cdecl d2_SelectRadioGroup(int, int);
 void __cdecl d2_SetBildArgument(int, int);
-void __cdecl fcn_00476b60(void);
+void __cdecl d2_ResetSelectionAndInput(void);
 void __cdecl d2_SelectControl(int);
 int __cdecl d2_SetSlotVisibility(int, int);
 char* __cdecl d2_GetControlValue(int);
@@ -141,7 +141,7 @@ int __cdecl d2_RunPlayerEditorDialog(int msg, int param)
 	d2_SelectRadioGroup(w8, (*(int*) &g_7e23e8) & 0xff);
 	w24 = d2_CreateRadioGroup(2, faith0, faith1);
 	d2_SelectRadioGroup(w24, g_7e23e9 & 0xff);
-	fcn_00476b60();
+	d2_ResetSelectionAndInput();
 	g_14cf950 = 0;
 	for (i = 0; i < 8; i++)
 		((D2_CONTROL_TL*)g_1015ea0)[ids[i]].disabled = 0;

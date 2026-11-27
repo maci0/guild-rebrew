@@ -17,7 +17,7 @@ void __cdecl d2_SetForm(int, int);
 int __cdecl io_AppendText();
 int __cdecl d2_BuildPersonStatusDesc(struct sel*);
 void __cdecl d2_DrawPersonTile(int, int, int, struct sel*);
-float __cdecl fcn_00505e30(unsigned short);
+float __cdecl gm_GetEntityAge(unsigned short);
 int __cdecl gm_GetOppositeStatIndex(int);
 #include "Develop/DieGildeAddOn/game/spiel.h"
 char* __cdecl gm_LookupEntityRecordById(int);
@@ -55,7 +55,7 @@ void __cdecl ShowPersonTooltip(char* w)
 	}
 	d2_SetForm(0, 2);
 	if (w[2] != 0x14) {
-		io_AppendText(0x2b, (int) fcn_00505e30(*(unsigned short*) w));
+		io_AppendText(0x2b, (int) gm_GetEntityAge(*(unsigned short*) w));
 	}
 	io_AppendText(0x2c, (w[9] != 0 ? 0x18f : 0x130) + *(unsigned char*) (w + 0x164),
 	    gm_GetOppositeStatIndex(*(unsigned char*) (w + 0x164)));

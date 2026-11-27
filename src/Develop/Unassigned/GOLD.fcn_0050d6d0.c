@@ -8,7 +8,7 @@ char __cdecl d3_LoadStadtScene(int name)
 	char buf[256];
 
 	sprintf(buf, (char *)0x622ed4, name);
-	if (fcn_0044be60(buf, 0, 0) == 0)
+	if (d3_LoadSceneStream(buf, 0, 0) == 0)
 		return 0;
 	d3_VisitSceneNodes(*(int *)0x5fb5b0, 0, 6, 0x50d730);
 	return 1;

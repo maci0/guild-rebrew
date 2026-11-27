@@ -3,7 +3,7 @@ extern char* g_006ed918;
 #include "Develop/Units/Error/error_message.h"
 
 /* ADDRESS: GOLD 0x0046cab0 */
-void __cdecl fcn_0046cab0(int i)
+void __cdecl d2_DecrementRefcount(int i)
 {
 	char* e;
 	int* p;

@@ -1,5 +1,5 @@
 /* ADDRESS: GOLDTL 0x004bb080 */
-int __cdecl fcn_004bb080(void)
+int __cdecl gm_HandleMsgReturnUnsupported(void)
 {
     return 0x400;
 }

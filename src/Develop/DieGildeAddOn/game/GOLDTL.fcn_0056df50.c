@@ -19,7 +19,7 @@ int __cdecl cm_GetCommandStatus(int);
 char* __cdecl cm_GetCommandResult(int);
 char* __cdecl gm_SearchTable67(int);
 void __cdecl cm_SendSetGebBesitzer(int, int, int);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
 void __cdecl he_MessageBoxQuickjump(int, int, char*, int, int, int, int, int, char*);
@@ -51,7 +51,7 @@ void __cdecl he_RunInitBetrieb(char* u)
 		} else {
 			cm_SendSetGebBesitzer(*(int*) (t + 1), *(int*) (p + 4), *(int*) (p + 4));
 		}
-		cm_RequestMoveCredits(*(int*) (p + 4), -1, g_773d75, fcn_0050b750(0xbb8, g_773d75));
+		cm_RequestMoveCredits(*(int*) (p + 4), -1, g_773d75, gm_ConvertUnitsToAmount(0xbb8, g_773d75));
 		if (*(int*) (u + 0xbc) == 0) {
 			goto kill;
 		}

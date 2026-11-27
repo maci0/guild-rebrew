@@ -36,7 +36,7 @@ int __cdecl gm_AmountToUnits(int a, unsigned char b);
 int __cdecl d2_GetWindowListItem(int, int, int);
 #include "Develop/Units/d2.v1/d2_gui.h"
 int __cdecl d2_GetControlValue(int slot);
-int __cdecl fcn_0050b750(int a, unsigned char k);
+int __cdecl gm_ConvertUnitsToAmount(int a, unsigned char k);
 int __cdecl gm_CheckEntityStock(ENTITY_RECORD*, int, unsigned char);
 void __cdecl cm_RequestMoveCredits(int, int, unsigned char, int);
 int __cdecl main_RunFrameLoop(void*, int);
@@ -100,7 +100,7 @@ void __cdecl d2_RunGildenkasseDialog(unsigned char* p)
 		if (ok != 0 && g_100f1dc != -1) {
 			if (d2_CurrentElementId == h1) {
 				v = d2_GetControlValue(d2_GetWindowListItem(d, 1, b));
-				v = fcn_0050b750(v, g_773d75);
+				v = gm_ConvertUnitsToAmount(v, g_773d75);
 				if (gm_CheckEntityStock(((ENTITY_RECORD*)&((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970]), v, g_773d75) != 0) {
 					cm_RequestMoveCredits(*(int*) (obj + 2), ((ENTITY_RECORD_VIEW*)g_7f4ca0)[g_774970].entity_id, g_773d75, v);
 					g_774654 = 1;

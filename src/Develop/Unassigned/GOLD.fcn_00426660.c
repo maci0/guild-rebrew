@@ -17,7 +17,7 @@ typedef struct {
 
 /* DATA TODO: 0x633190 (sample mem limit), 0x633194 (MemUsed), 0x1460920 (log buffer) */
 /* ADDRESS: GOLD 0x00426660 */
-int __cdecl fcn_00426660(char* a0, SB_LOAD_STATE* loadState)
+int __cdecl sb_LoadEntryGold(char* a0, SB_LOAD_STATE* loadState)
 {
 	FILE* f;
 	unsigned char hdr[12];

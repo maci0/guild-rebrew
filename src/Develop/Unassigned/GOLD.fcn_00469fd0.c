@@ -1,7 +1,7 @@
 #include <string.h>
 #include "gold_gui.h"
 extern GuiEnt* g_00f8f080;
-int __cdecl fcn_0046ea00(const char*, int);
+int __cdecl d2_CalcTextWidth(const char*, int);
 
 /* ADDRESS: GOLD 0x00469fd0 */
 void __cdecl d2_SetFieldEntryText(int index, int text_index)
@@ -29,6 +29,6 @@ void __cdecl d2_SetFieldEntryText(int index, int text_index)
     memmove(*(char**)(record + 0x154) + length, *(char**)(record + 0x154),
         strlen(*(char**)(window + 0x2c)) - (*(char**)(record + 0x154) - *(char**)(window + 0x2c)) + 1);
     memcpy(*(char**)(record + 0x154), ((char**)0x143a1c0)[text_index], *(int*)(record + 0x158));
-    *(int*)(record + 0x10) = fcn_0046ea00(((char**)0x143a1c0)[text_index], *(int*)(record + 0x138));
+    *(int*)(record + 0x10) = d2_CalcTextWidth(((char**)0x143a1c0)[text_index], *(int*)(record + 0x138));
     g_00f8f080[*(int*)(record + 0x134)].w = *(short*)(record + 0x10);
 }

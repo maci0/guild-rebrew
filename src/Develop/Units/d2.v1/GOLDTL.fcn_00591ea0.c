@@ -20,7 +20,7 @@ int __cdecl io_AppendText(int);
 int __cdecl d2_GetFormWindow(int, int);
 int __cdecl d2_CreateWindowScrollbar(int, int, int, int, int, int*, int*, int*);
 void __cdecl d2_CreateButtonRow(int, int, int*, int, int, int);
-void __cdecl fcn_00476b60(void);
+void __cdecl d2_ResetSelectionAndInput(void);
 void __cdecl d2_ClearRadioGroup(int);
 int __cdecl d2_ClearWindowChildren(int, int);
 int __cdecl d2_CreateRadioGroup(int, ...);
@@ -80,7 +80,7 @@ void __cdecl d2_RunGebHotkeysDialog(void)
 	d2_SetForm(win, 3);
 	d2_CreateButtonRow(*(int*) &d2_CurrentWindowId, 0, clicks, 2,
 		*(int*) 0x14ad4cc, *(int*) 0x14ad4c8);
-	fcn_00476b60();
+	d2_ResetSelectionAndInput();
 	redraw = 1;
 	y = -0x8c;
 	do {

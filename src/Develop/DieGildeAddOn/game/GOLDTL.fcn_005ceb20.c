@@ -68,7 +68,7 @@ char* __cdecl he_fn_Handlung(void);
 int __cdecl gm_CheckEntityType(unsigned char*);
 int __cdecl cm_SendCopyEntityData(Packet*);
 void __cdecl io_FormatTextBuffer(char*, int, ...);
-void __cdecl fcn_00476b60(void);
+void __cdecl d2_ResetSelectionAndInput(void);
 int __cdecl d2_ShowModalMessageBox(char*, int);
 int __cdecl main_RunFrameLoop(void*, int);
 void __cdecl d2_DestroyForm(int);
@@ -133,7 +133,7 @@ void __cdecl d2_ConfirmMeisterbrief(unsigned char* obj, int mode)
 					pkt.x58 = 0;
 					cm_SendCopyEntityData(&pkt);
 					io_FormatTextBuffer(buf, 0x1939, ((BUILDING_PROTOTYPE*)lpGebaeudePROT)[obj[0]].worker_kind[0] + 0x130);
-					fcn_00476b60();
+					d2_ResetSelectionAndInput();
 					d2_ShowModalMessageBox(buf, 0);
 				}
 				g_774654 = 1;

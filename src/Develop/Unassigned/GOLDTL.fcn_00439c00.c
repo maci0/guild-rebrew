@@ -10,7 +10,7 @@ typedef struct Node {
 // SIZE 0x218
 
 void __cdecl d3_AppendObjectSibling(Node* a, Node* b);
-void __cdecl fcn_00439aa0(Node* b);
+void __cdecl d3_RegisterSceneObjectTl(Node* b);
 
 /* ADDRESS: GOLDTL 0x00439c00 */
 void __cdecl d3_AttachSceneNode(Node* a, Node* b)
@@ -26,5 +26,5 @@ void __cdecl d3_AttachSceneNode(Node* a, Node* b)
 		b->parent = a;
 		return;
 	}
-	fcn_00439aa0(b);
+	d3_RegisterSceneObjectTl(b);
 }

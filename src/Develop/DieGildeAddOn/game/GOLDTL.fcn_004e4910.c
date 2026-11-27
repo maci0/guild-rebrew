@@ -15,7 +15,7 @@ void __cdecl cut_ExitPendingEvtScripts(void);
 void __cdecl cut_WaitForPendingScripts(void);
 void __cdecl gv_Free3Fields(int);
 void __cdecl d3_FreeObjectAnimation(void*);
-void __cdecl fcn_00442e30(void);
+void __cdecl d3_ClearSceneState(void);
 
 
 /* ADDRESS: GOLDTL 0x004e4910 */
@@ -55,7 +55,7 @@ void __cdecl cut_CleanupCutscene(void)
 	d3_FreeObjectAnimation(d3_ActiveCamera);
 	d3_ActiveCameraAnimation = 0;
 	d3_CameraAnimating = 0;
-	fcn_00442e30();
+	d3_ClearSceneState();
 	g_772f4c--;
 }
 unsigned char _dpad_6791d0[4316] = {

@@ -22,7 +22,7 @@ void __cdecl cm_FlushCommandQueue(void);
 void __cdecl cm_PollCommandQueue(void);
 void __cdecl ls_ID2Ptr(void);
 int __cdecl cm_RequestAllocSpieler(int, int, int, short, int, int, int, int);
-int __cdecl fcn_0050b750(int, unsigned char);
+int __cdecl gm_ConvertUnitsToAmount(int, unsigned char);
 void __cdecl cm_RequestMoveCredits(int, int, char, int);
 Figure* __cdecl cm_GetCommandResult(int);
 
@@ -70,9 +70,9 @@ void __cdecl cm_DistributeStartingWares(int count, int size, int* faces)
 			start = (step + start) % size;
 		}
 		ids[i] = cm_RequestAllocSpieler(5, -1, -1, 0x10, -1, face, 0, 2);
-		cm_RequestMoveCredits(-2, -1, (*(char*)&g_773d75), fcn_0050b750(price[g_7e1fa0[i]], (*(char*)&g_773d75)));
+		cm_RequestMoveCredits(-2, -1, (*(char*)&g_773d75), gm_ConvertUnitsToAmount(price[g_7e1fa0[i]], (*(char*)&g_773d75)));
 		if (g_7747f8 != 0) {
-			cm_RequestMoveCredits(-2, -1, (*(char*)&g_773d75), fcn_0050b750(gm_RandomMod(5000) + 5000, (*(char*)&g_773d75)));
+			cm_RequestMoveCredits(-2, -1, (*(char*)&g_773d75), gm_ConvertUnitsToAmount(gm_RandomMod(5000) + 5000, (*(char*)&g_773d75)));
 		}
 	}
 	cm_EndCommandSync();

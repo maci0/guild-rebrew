@@ -33,7 +33,7 @@ void __cdecl d2_ShowBuildingStatsDetail(int);
 int __cdecl d2_GetFormWindow(int, int);
 void __cdecl d2_ScrollWindow(int, int, int);
 int __cdecl d2_GetControlValue(int);
-int __cdecl fcn_0050b750(int, char);
+int __cdecl gm_ConvertUnitsToAmount(int, char);
 void __cdecl cm_BeginPacketFieldDelta(int, int);
 void __cdecl cm_AppendPacketFieldDelta(int, int, unsigned short, int*);
 void __cdecl cm_AppendPacketFieldValue(int, int, int, int*);
@@ -135,7 +135,7 @@ void __cdecl d2_OpenPlayerStats(void)
 				if (h != -1) {
 					cur = d2_GetControlValue(h);
 					if (*(int*) (i - 4) != cur) {
-						n = fcn_0050b750(d2_GetControlValue(*(int*) (i - 0x10)),
+						n = gm_ConvertUnitsToAmount(d2_GetControlValue(*(int*) (i - 0x10)),
 							g_773d75);
 						obj = *(int*) i;
 						cm_BeginPacketFieldDelta(obj, *(int*) (obj + 1));

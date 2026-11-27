@@ -1,6 +1,6 @@
 
 /* ADDRESS: GOLDTL 0x0054b420 */
-void __cdecl fcn_0054b420(char* entry)
+void __cdecl he_StartSkillDuelEvent(char* entry)
 {
 	entry += 0x52;
 	*(int*) entry = *(int*) 0x7f4c00;
